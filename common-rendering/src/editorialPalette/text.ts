@@ -41,6 +41,44 @@ const brandingDark = (_format: ArticleFormat): Colour => {
 	return neutral[86];
 };
 
+const bylineAnchor = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+	}
+};
+
+const bylineAnchorDark = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[500];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[500];
+		case ArticlePillar.Sport:
+			return sport[500];
+		case ArticlePillar.Culture:
+			return culture[500];
+		case ArticlePillar.Opinion:
+			return opinion[500];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[500];
+	}
+};
+
 const dropCap = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.Opinion:
@@ -685,6 +723,8 @@ const text = {
 	articleLink,
 	branding,
 	brandingDark,
+	bylineAnchor,
+	bylineAnchorDark,
 	bylineLeftColumn,
 	bylineInline,
 	bylineDark,

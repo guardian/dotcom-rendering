@@ -1,5 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette/text';
 import type { ArticleFormat } from '@guardian/libs';
 import { headline, neutral } from '@guardian/source-foundations';
 import { withDefault } from '@guardian/types';
@@ -19,16 +20,15 @@ export const defaultStyles = (kicker: string): SerializedStyles => css`
 `;
 
 export const defaultAnchorStyles = (
-	kicker: string,
-	inverted: string,
+	format: ArticleFormat,
 ): SerializedStyles => css`
 	${headline.xxxsmall({ fontWeight: 'bold' })}
 	font-style: normal;
-	color: ${kicker};
+	color: ${text.bylineAnchor(format)};
 	text-decoration: none;
 
 	${darkModeCss`
-        color: ${inverted};
+        color: ${text.bylineAnchorDark(format)};
     `}
 `;
 
