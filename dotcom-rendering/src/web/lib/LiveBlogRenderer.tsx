@@ -28,7 +28,7 @@ type Props = {
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
 	filterKeyEvents?: boolean;
-	isKeyEventsCarouselVariant: boolean;
+	isKeyEventsCarouselVariant?: boolean;
 };
 
 export const LiveBlogRenderer = ({

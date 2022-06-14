@@ -296,9 +296,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const cricketMatchUrl =
 		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
 
-	const isKeyEventsCarouselVariant =
-		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-		CAPIArticle.config.abTests.keyEventsCarouselVariant === 'variant';
+	const showKeyEventsCarousel =
+		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
 
 	return (
 		<>
@@ -589,7 +588,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandFirstGrid>
 				</ElementContainer>
-				{isKeyEventsCarouselVariant && CAPIArticle.keyEvents.length ? (
+				{showKeyEventsCarousel && CAPIArticle.keyEvents.length && (
 					<ElementContainer
 						showTopBorder={false}
 						backgroundColour={
@@ -609,8 +608,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</Island>
 						</Hide>
 					</ElementContainer>
-				) : (
-					<></>
 				)}
 				<ElementContainer
 					showTopBorder={false}
@@ -767,7 +764,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</div>
 								</Hide>
 								{/* Key events */}
-								{!isKeyEventsCarouselVariant ? (
+								{!showKeyEventsCarousel && (
 									<div
 										css={[
 											!footballMatchUrl && sticky,
@@ -783,7 +780,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											}
 										/>
 									</div>
-								) : null}
+								)}
 								{/* Match stats */}
 								{footballMatchUrl && (
 									<Island
@@ -819,7 +816,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										accordionTitle="Live feed"
 										context="liveFeed"
 									>
-										{!isKeyEventsCarouselVariant &&
+										{!showKeyEventsCarousel &&
 										CAPIArticle.keyEvents.length ? (
 											<Hide above="desktop">
 												<Island deferUntil="visible">
@@ -915,6 +912,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												}
 												abTests={
 													CAPIArticle.config.abTests
+												}
+												showKeyEventsCarousel={
+													showKeyEventsCarousel
 												}
 											/>
 											{pagination.totalPages > 1 && (

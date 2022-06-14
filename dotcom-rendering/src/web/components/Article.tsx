@@ -31,6 +31,9 @@ type Props = {
  * @param {ArticleFormat} props.format - The format model for the article
  * */
 export const Article = ({ CAPIArticle, NAV, format }: Props) => {
+	const showKeyEventsCarousel =
+		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
+
 	return (
 		<StrictMode>
 			<Global
@@ -52,9 +55,7 @@ export const Article = ({ CAPIArticle, NAV, format }: Props) => {
 				format.design === ArticleDesign.DeadBlog) && (
 				<SkipTo
 					id={
-						// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-						CAPIArticle.config.abTests.keyEventsCarouselVariant ===
-						'variant'
+						showKeyEventsCarousel
 							? 'key-events-carousel'
 							: 'keyevents'
 					}
