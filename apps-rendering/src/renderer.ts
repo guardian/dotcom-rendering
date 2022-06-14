@@ -328,7 +328,6 @@ const isBlog = (format: ArticleFormat): boolean =>
 	format.design === ArticleDesign.DeadBlog;
 
 const borderFromFormat = (format: ArticleFormat): string => {
-
 	const styles = `
 		border-bottom: 0.0625rem solid ${border.liveblogKicker(format)};
 		text-decoration: none;
