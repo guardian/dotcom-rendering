@@ -36,7 +36,7 @@ export const FixedMediumSlowVI = ({
 								linkTo={trail.url}
 								format={trail.format}
 								headlineText={trail.headline}
-								headlineSize="medium"
+								headlineSize={index === 0 ? 'large' : 'medium'}
 								byline={trail.byline}
 								showByline={trail.showByline}
 								showQuotes={
@@ -46,6 +46,9 @@ export const FixedMediumSlowVI = ({
 								}
 								webPublicationDate={trail.webPublicationDate}
 								kickerText={trail.kickerText}
+								trailText={
+									index === 0 ? trail.trailText : undefined
+								}
 								showPulsingDot={
 									trail.format.design ===
 									ArticleDesign.LiveBlog
@@ -53,9 +56,9 @@ export const FixedMediumSlowVI = ({
 								showSlash={true}
 								showClock={false}
 								imageUrl={trail.image}
-								imagePosition="top"
+								imagePosition={index === 0 ? 'right' : 'top'}
 								imagePositionOnMobile="left"
-								imageSize="medium"
+								imageSize={index === 0 ? 'large' : 'medium'}
 								mediaType={trail.mediaType}
 								mediaDuration={trail.mediaDuration}
 								starRating={trail.starRating}
