@@ -133,7 +133,7 @@
     "dotenv": "^16.0.1",
     "dynamic-import-polyfill": "^0.1.1",
     "eslint": "^8.15.0",
-    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.5.0",
