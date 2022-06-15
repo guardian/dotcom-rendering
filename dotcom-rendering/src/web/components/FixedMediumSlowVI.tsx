@@ -62,6 +62,7 @@ export const FixedMediumSlowVI = ({
 								branding={trail.branding}
 								dataLinkName={trail.dataLinkName}
 								discussionId={trail.discussionId}
+								snapData={trail.snapData}
 							/>
 						</LI>
 					);
