@@ -2,7 +2,6 @@ import { ArticleDesign } from '@guardian/libs';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FixedSmallSlowIV } from './FixedSmallSlowIV';
 
 type Props = {
 	trails: TrailType[];
@@ -73,11 +72,53 @@ export const FixedMediumSlowVI = ({
 					);
 				})}
 			</UL>
-			<FixedSmallSlowIV
-				trails={bottomTrails}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
+			<UL direction="row">
+				{bottomTrails.map((trail, index) => {
+					return (
+						<LI
+							key={trail.url}
+							padSides={true}
+							showDivider={index > 0}
+							padBottomOnMobile={true}
+						>
+							<Card
+								containerPalette={containerPalette}
+								showAge={showAge}
+								linkTo={trail.url}
+								format={trail.format}
+								headlineText={trail.headline}
+								headlineSize="small"
+								byline={trail.byline}
+								showByline={trail.showByline}
+								showQuotes={
+									trail.format.design ===
+										ArticleDesign.Comment ||
+									trail.format.design === ArticleDesign.Letter
+								}
+								webPublicationDate={trail.webPublicationDate}
+								kickerText={trail.kickerText}
+								showPulsingDot={
+									trail.format.design ===
+									ArticleDesign.LiveBlog
+								}
+								showSlash={true}
+								showClock={false}
+								imageUrl={trail.image}
+								imagePosition="top"
+								imagePositionOnMobile="left"
+								imageSize="medium"
+								mediaType={trail.mediaType}
+								mediaDuration={trail.mediaDuration}
+								starRating={trail.starRating}
+								branding={trail.branding}
+								dataLinkName={trail.dataLinkName}
+								snapData={trail.snapData}
+								discussionId={trail.discussionId}
+							/>
+						</LI>
+					);
+				})}
+			</UL>
 		</>
 	);
 };
