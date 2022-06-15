@@ -57,7 +57,9 @@ export const FixedMediumSlowVI = ({
 								showClock={false}
 								imageUrl={trail.image}
 								imagePosition={index === 0 ? 'right' : 'top'}
-								imagePositionOnMobile="left"
+								imagePositionOnMobile={
+									index === 0 ? 'top' : 'left'
+								}
 								imageSize={index === 0 ? 'large' : 'medium'}
 								mediaType={trail.mediaType}
 								mediaDuration={trail.mediaDuration}
