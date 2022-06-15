@@ -1,8 +1,12 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {
 	format: ArticleFormat;
+	containerPalette?: DCRContainerPalette;
+	renderLines?: boolean;
 	age?: JSX.Element;
 	mediaMeta?: JSX.Element;
 	commentCount?: JSX.Element;
@@ -21,16 +25,48 @@ const flexEnd = css`
 	justify-content: flex-end;
 `;
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types -- because react
 export const CardFooter = ({
 	format,
+	containerPalette,
+	renderLines,
 	age,
 	mediaMeta,
 	commentCount,
 	cardBranding,
 	supportingContent,
 }: Props) => {
+	const palette = decidePalette(format, containerPalette);
+
 	if (format.theme === ArticleSpecial.Labs && cardBranding) {
 		return <footer>{cardBranding}</footer>;
+	}
+
+	if (
+		format.design === ArticleDesign.Comment ||
+		format.design === ArticleDesign.Editorial ||
+		format.design === ArticleDesign.Letter
+	) {
+		return (
+			<footer>
+				{supportingContent}
+				<div css={spaceBetween}>
+					{age}
+					{renderLines && (
+						<StraightLines
+							cssOverrides={css`
+								/* Fill the space */
+								flex: 1;
+								align-self: flex-end;
+							`}
+							color={palette.border.lines}
+							count={4}
+						/>
+					)}
+					{commentCount}
+				</div>
+			</footer>
+		);
 	}
 
 	if (

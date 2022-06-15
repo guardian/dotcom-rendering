@@ -2,14 +2,13 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { Avatar } from '../Avatar';
 import { CardHeadline } from '../CardHeadline';
 import { Flex } from '../Flex';
 import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
+import { Snap } from '../Snap';
 import { StarRating } from '../StarRating/StarRating';
 import { SupportingContent } from '../SupportingContent';
 import { AvatarContainer } from './components/AvatarContainer';
@@ -23,7 +22,6 @@ import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
 import { TrailTextWrapper } from './components/TrailTextWrapper';
-import { Snap } from '../Snap';
 
 export type Props = {
 	linkTo: string;
@@ -108,6 +106,7 @@ const decideIfAgeShouldShow = ({
 	return false;
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types -- because inferrence is better
 export const Card = ({
 	linkTo,
 	format,
@@ -139,15 +138,89 @@ export const Card = ({
 	showAge = false,
 	discussionId,
 }: Props) => {
-	const palette = decidePalette(format, containerPalette);
-
 	const hasSublinks = supportingContent && supportingContent.length > 0;
-	const noOfSublinks = (supportingContent && supportingContent.length) || 0;
-
+	const noOfSublinks = supportingContent?.length ?? 0;
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||
 		format.design === ArticleDesign.Editorial ||
 		format.design === ArticleDesign.Letter;
+
+	const cardIsHorizontal =
+		imagePosition === 'left' || imagePosition === 'right';
+	const positionFooterOutsideContent =
+		isOpinion &&
+		cardIsHorizontal &&
+		(imageSize === 'small' || imageSize === 'medium');
+
+	const renderFooter = ({
+		renderAge,
+		renderLines,
+	}: {
+		renderAge?: boolean;
+		renderLines?: boolean;
+	}) => {
+		return (
+			<CardFooter
+				format={format}
+				containerPalette={containerPalette}
+				renderLines={renderLines}
+				age={
+					renderAge && webPublicationDate ? (
+						<CardAge
+							format={format}
+							containerPalette={containerPalette}
+							webPublicationDate={webPublicationDate}
+							showClock={showClock}
+						/>
+					) : undefined
+				}
+				mediaMeta={
+					(format.design === ArticleDesign.Gallery ||
+						format.design === ArticleDesign.Audio ||
+						format.design === ArticleDesign.Video) &&
+					mediaType ? (
+						<MediaMeta
+							containerPalette={containerPalette}
+							format={format}
+							mediaType={mediaType}
+							mediaDuration={mediaDuration}
+						/>
+					) : undefined
+				}
+				commentCount={
+					discussionId ? (
+						<Link
+							// This a tag is initially rendered empty. It gets populated later
+							// after a fetch call is made to get all the counts for each Card
+							// on the page with a discussion (see FetchCommentCounts.tsx)
+							data-name="comment-count-marker"
+							data-discussion-id={discussionId}
+							data-format={JSON.stringify(format)}
+							data-ignore="global-link-styling"
+							data-link-name="Comment count"
+							href={`${linkTo}#comments`}
+							subdued={true}
+							cssOverrides={css`
+								/* See: https://css-tricks.com/nested-links/ */
+								${getZIndex('card-nested-link')};
+								/* The following styles turn off those provided by Link */
+								color: inherit;
+								/* stylelint-disable-next-line property-disallowed-list */
+								font-family: inherit;
+								font-size: inherit;
+								line-height: inherit;
+							`}
+						/>
+					) : undefined
+				}
+				cardBranding={
+					branding ? (
+						<CardBranding branding={branding} format={format} />
+					) : undefined
+				}
+			/>
+		);
+	};
 
 	const renderAge = decideIfAgeShouldShow({
 		containerPalette,
@@ -252,66 +325,14 @@ export const Card = ({
 								</AvatarContainer>
 							</Hide>
 						)}
-						<CardFooter
-							format={format}
-							age={
-								renderAge && webPublicationDate ? (
-									<CardAge
-										format={format}
-										containerPalette={containerPalette}
-										webPublicationDate={webPublicationDate}
-										showClock={showClock}
-									/>
-								) : undefined
-							}
-							mediaMeta={
-								(format.design === ArticleDesign.Gallery ||
-									format.design === ArticleDesign.Audio ||
-									format.design === ArticleDesign.Video) &&
-								mediaType ? (
-									<MediaMeta
-										containerPalette={containerPalette}
-										format={format}
-										mediaType={mediaType}
-										mediaDuration={mediaDuration}
-									/>
-								) : undefined
-							}
-							commentCount={
-								discussionId ? (
-									<Link
-										// This a tag is initially rendered empty. It gets populated later
-										// after a fetch call is made to get all the counts for each Card
-										// on the page with a discussion (see FetchCommentCounts.tsx)
-										data-name="comment-count-marker"
-										data-discussion-id={discussionId}
-										data-format={JSON.stringify(format)}
-										data-ignore="global-link-styling"
-										data-link-name="Comment count"
-										href={`${linkTo}#comments`}
-										subdued={true}
-										cssOverrides={css`
-											/* See: https://css-tricks.com/nested-links/ */
-											${getZIndex('card-nested-link')};
-											/* The following styles turn off those provided by Link */
-											color: inherit;
-											/* stylelint-disable-next-line property-disallowed-list */
-											font-family: inherit;
-											font-size: inherit;
-											line-height: inherit;
-										`}
-									/>
-								) : undefined
-							}
-							cardBranding={
-								branding ? (
-									<CardBranding
-										branding={branding}
-										format={format}
-									/>
-								) : undefined
-							}
-						/>
+						{!positionFooterOutsideContent ? (
+							renderFooter({
+								renderAge,
+								renderLines: !cardIsHorizontal,
+							})
+						) : (
+							<></>
+						)}
 						{hasSublinks && noOfSublinks <= 2 ? (
 							<SupportingContent
 								supportingContent={supportingContent}
@@ -323,6 +344,11 @@ export const Card = ({
 					</div>
 				</ContentWrapper>
 			</CardLayout>
+			{positionFooterOutsideContent ? (
+				renderFooter({ renderAge, renderLines: true })
+			) : (
+				<></>
+			)}
 			{hasSublinks && noOfSublinks > 2 ? (
 				<SupportingContent
 					supportingContent={supportingContent}
@@ -334,9 +360,6 @@ export const Card = ({
 				/>
 			) : (
 				<></>
-			)}
-			{isOpinion && (
-				<StraightLines color={palette.border.lines} count={4} />
 			)}
 		</CardWrapper>
 	);
