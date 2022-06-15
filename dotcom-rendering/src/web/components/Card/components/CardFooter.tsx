@@ -20,6 +20,10 @@ const spaceBetween = css`
 	align-items: center;
 `;
 
+const marginBottom = css`
+	margin-bottom: 3px;
+`;
+
 const flexEnd = css`
 	display: flex;
 	justify-content: flex-end;
@@ -39,7 +43,7 @@ export const CardFooter = ({
 	const palette = decidePalette(format, containerPalette);
 
 	if (format.theme === ArticleSpecial.Labs && cardBranding) {
-		return <footer>{cardBranding}</footer>;
+		return <footer css={marginBottom}>{cardBranding}</footer>;
 	}
 
 	if (
@@ -48,7 +52,7 @@ export const CardFooter = ({
 		format.design === ArticleDesign.Letter
 	) {
 		return (
-			<footer>
+			<footer css={marginBottom}>
 				{supportingContent}
 				<div css={spaceBetween}>
 					{age}
@@ -75,7 +79,7 @@ export const CardFooter = ({
 		format.design === ArticleDesign.Video
 	) {
 		return (
-			<footer>
+			<footer css={marginBottom}>
 				{supportingContent}
 				<div css={spaceBetween}>
 					{mediaMeta}
@@ -88,7 +92,7 @@ export const CardFooter = ({
 
 	if (age) {
 		return (
-			<footer>
+			<footer css={marginBottom}>
 				{supportingContent}
 				<div css={spaceBetween}>
 					{age}
@@ -99,7 +103,7 @@ export const CardFooter = ({
 	}
 
 	return (
-		<footer>
+		<footer css={marginBottom}>
 			{supportingContent}
 			<div css={flexEnd}>
 				<>{commentCount}</>
