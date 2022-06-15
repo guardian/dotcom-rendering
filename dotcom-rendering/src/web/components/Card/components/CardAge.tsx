@@ -14,6 +14,7 @@ type Props = {
 const ageStyles = (format: ArticleFormat, palette: Palette) => {
 	return css`
 		${textSans.xxsmall({ lineHeight: 'tight' })};
+		margin-top: -4px;
 		color: ${palette.text.cardFooter};
 
 		/* Provide side padding for positioning and also to keep spacing
