@@ -17,6 +17,7 @@ import { Labs } from '../../../fixtures/generated/articles/Labs';
 import { Letter } from '../../../fixtures/generated/articles/Letter';
 import { Live } from '../../../fixtures/generated/articles/Live';
 import { MatchReport } from '../../../fixtures/generated/articles/MatchReport';
+import { NewsletterSignup } from '../../../fixtures/generated/articles/NewsletterSignup';
 import { NumberedList } from '../../../fixtures/generated/articles/NumberedList';
 import { PhotoEssay } from '../../../fixtures/generated/articles/PhotoEssay';
 import { PrintShop } from '../../../fixtures/generated/articles/PrintShop';
@@ -56,6 +57,7 @@ const Fixtures: { [key: string]: CAPIArticleType } = {
 	Labs,
 	SpecialReport,
 	NumberedList,
+	NewsletterSignup,
 };
 
 mockRESTCalls();

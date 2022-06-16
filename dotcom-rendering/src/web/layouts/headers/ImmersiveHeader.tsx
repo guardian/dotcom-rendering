@@ -95,11 +95,7 @@ const Box = ({
 	</div>
 );
 
-export const ImmersiveHeader = ({
-	CAPIArticle,
-	NAV,
-	format,
-}: Props): JSX.Element => {
+export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		config: { host },
 	} = CAPIArticle;

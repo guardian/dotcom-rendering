@@ -683,6 +683,17 @@ type DCRSupportingContent = {
 	format: ArticleFormat;
 };
 
+type FESnapType = {
+	embedHtml?: string;
+	embedCss?: string;
+	embedJs?: string;
+};
+
+type DCRSnapType = {
+	embedHtml?: string;
+	embedCss?: string;
+};
+
 type FEContainerType =
 	| 'dynamic/fast'
 	| 'dynamic/package'
@@ -846,7 +857,7 @@ type FEFrontCard = {
 		showLivePlayable: boolean;
 	};
 	format?: CAPIFormat;
-	enriched?: Record<string, unknown>;
+	enriched?: FESnapType;
 	supportingContent?: FESupportingContent[];
 	cardStyle?: {
 		type: string;
@@ -862,6 +873,7 @@ type DCRFrontCard = {
 	webPublicationDate?: string;
 	image?: string;
 	kickerText?: string;
+	snapData?: DCRSnapType;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
 	discussionId?: string;
@@ -1276,6 +1288,8 @@ interface BaseTrailType {
 	starRating?: number;
 	linkText?: string;
 	branding?: Branding;
+	isSnap?: boolean;
+	snapData?: DCRSnapType;
 }
 interface TrailType extends BaseTrailType {
 	palette?: never;

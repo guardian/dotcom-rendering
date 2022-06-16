@@ -14,6 +14,7 @@ export const ShadyPie = () => {
 	return (
 		<a
 			href={`https://support.theguardian.com/uk/subscribe/digital?${params.toString()}`}
+			tabIndex={-1}
 		>
 			<img
 				src="https://uploads.guim.co.uk/2020/10/02/Digisubs_MPU_c1_my_opt.png"

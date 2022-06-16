@@ -23,6 +23,7 @@ import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
 import { TrailTextWrapper } from './components/TrailTextWrapper';
+import { Snap } from '../Snap';
 
 export type Props = {
 	linkTo: string;
@@ -53,6 +54,7 @@ export type Props = {
 	// Labs
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
+	snapData?: DCRSnapType;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	discussionId?: string;
@@ -132,6 +134,7 @@ export const Card = ({
 	dataLinkName,
 	branding,
 	supportingContent,
+	snapData,
 	containerPalette,
 	showAge = false,
 	discussionId,
@@ -151,6 +154,10 @@ export const Card = ({
 		format,
 		showAge,
 	});
+
+	if (snapData?.embedHtml) {
+		return <Snap snapData={snapData} />;
+	}
 
 	return (
 		<CardWrapper format={format} containerPalette={containerPalette}>

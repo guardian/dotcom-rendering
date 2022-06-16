@@ -21,6 +21,7 @@ export const FixedSmallSlowIV = ({
 			{slicedTrails.map((trail, index) => {
 				return (
 					<LI
+						key={trail.url}
 						padSides={true}
 						showDivider={index > 0}
 						padBottomOnMobile={true}
@@ -54,6 +55,7 @@ export const FixedSmallSlowIV = ({
 							starRating={trail.starRating}
 							branding={trail.branding}
 							dataLinkName={trail.dataLinkName}
+							snapData={trail.snapData}
 							discussionId={trail.discussionId}
 						/>
 					</LI>

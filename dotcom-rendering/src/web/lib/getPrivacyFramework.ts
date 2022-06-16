@@ -1,8 +1,8 @@
 import { getLocaleCode } from './getCountryCode';
 
-let frameworks: undefined | Record<string, boolean>;
+let frameworks: Record<string, boolean>;
 
-export const getPrivacyFramework = async () => {
+export const getPrivacyFramework = async (): Promise<typeof frameworks> => {
 	if (typeof frameworks === 'undefined') {
 		const isInUS = (await getLocaleCode()) === 'US';
 

@@ -31,7 +31,7 @@ const logRenderTime = responseTime(
 	},
 );
 
-export const prodServer = () => {
+export const prodServer = (): void => {
 	logger.info('dotcom-rendering is GO.');
 
 	const app = express();

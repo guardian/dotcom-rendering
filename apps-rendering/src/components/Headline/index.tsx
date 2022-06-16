@@ -20,7 +20,12 @@ const Headline: React.FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 
 	if (format.display === ArticleDisplay.Immersive) {
-		return <ImmersiveHeadline item={item} />;
+		return (
+			<ImmersiveHeadline
+				headline={item.headline}
+				format={getFormat(item)}
+			/>
+		);
 	}
 
 	if (format.theme === ArticleSpecial.Labs) {
