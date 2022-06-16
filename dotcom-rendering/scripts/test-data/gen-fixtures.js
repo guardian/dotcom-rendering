@@ -44,10 +44,6 @@ const articles = [
 		url: 'https://www.theguardian.com/world/2013/jun/06/nsa-phone-records-verizon-court-order',
 	},
 	{
-		name: 'NewletterSignup',
-		url: 'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
-	},
-	{
 		name: 'Analysis',
 		url: 'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
 	},
@@ -114,6 +110,10 @@ const articles = [
 	{
 		name: 'NumberedList',
 		url: 'https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked',
+	},
+	{
+		name: 'NewsletterSignup',
+		url: 'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 	},
 ];
 

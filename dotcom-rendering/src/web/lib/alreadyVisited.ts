@@ -12,7 +12,7 @@ export const setAlreadyVisited = (count: number): void => {
 	localStorage.setItem(AlreadyVisitedKey, count.toString());
 };
 
-export const incrementAlreadyVisited = () => {
+export const incrementAlreadyVisited = (): void => {
 	const alreadyVisited = getAlreadyVisitedCount();
 	setAlreadyVisited(alreadyVisited + 1);
 };

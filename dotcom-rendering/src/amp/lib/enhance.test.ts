@@ -24,7 +24,7 @@ describe('Enhance interactive atoms for AMP', () => {
 		const got = enhance([data])[0] as InteractiveAtomBlockElement;
 
 		expect(got.html).toBe(
-			`<!-- MobileHeight: 1200 --><div id=\"v1\" class=\"gv-gb-golden-boot-wrapper\"></div>`,
+			`<!-- MobileHeight: 1200 --><div id="v1" class="gv-gb-golden-boot-wrapper"></div>`,
 		);
 	});
 

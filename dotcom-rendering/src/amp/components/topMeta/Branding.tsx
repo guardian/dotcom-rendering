@@ -73,7 +73,7 @@ export const BrandingRegionContainer: React.FC<{
 			.map((editionId) => {
 				const { branding } = commercialProperties[editionId];
 				return branding !== undefined ? (
-					<div css={regionClasses[editionId]}>
+					<div key={editionId} css={regionClasses[editionId]}>
 						{children(branding)}
 					</div>
 				) : null;

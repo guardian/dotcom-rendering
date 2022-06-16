@@ -43,7 +43,9 @@ interface Props {
 }
 
 const List: FC<Props> = ({ children, usePillarColour, format }) => (
-	<ul css={styles(usePillarColour, format)}>{children}</ul>
+	<ul css={styles(usePillarColour, format)} role="list">
+		{children}
+	</ul>
 );
 
 // ----- Exports ----- //

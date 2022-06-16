@@ -13,8 +13,8 @@ export const commercialEndOfQuarter2Test: ABTest = {
 	description:
 		'Check whether all changes made this quarter when combined lead to an increase in revenue per 1000 pageviews',
 	variants: [
-		{ id: 'control', test: () => {} },
-		{ id: 'variant', test: () => {} },
+		{ id: 'control', test: (): void => {} },
+		{ id: 'variant', test: (): void => {} },
 	],
 	canRun: () => true,
 };

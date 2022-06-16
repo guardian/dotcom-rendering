@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
+// eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
 import Accordion from '@guardian/common-rendering/src/components/accordion';
+// eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
 import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
 import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
@@ -296,6 +298,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const cricketMatchUrl =
 		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
 
+	const showKeyEventsCarousel =
+		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
+
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -585,8 +590,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandFirstGrid>
 				</ElementContainer>
-				{CAPIArticle.config.switches.keyEventsCarousel &&
-				CAPIArticle.keyEvents.length ? (
+				{showKeyEventsCarousel && CAPIArticle.keyEvents.length && (
 					<ElementContainer
 						showTopBorder={false}
 						backgroundColour={
@@ -606,8 +610,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</Island>
 						</Hide>
 					</ElementContainer>
-				) : (
-					<></>
 				)}
 				<ElementContainer
 					showTopBorder={false}
@@ -764,8 +766,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</div>
 								</Hide>
 								{/* Key events */}
-								{!CAPIArticle.config.switches
-									.keyEventsCarousel && (
+								{!showKeyEventsCarousel && (
 									<div
 										css={[
 											!footballMatchUrl && sticky,
@@ -817,8 +818,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										accordionTitle="Live feed"
 										context="liveFeed"
 									>
-										{!CAPIArticle.config.switches
-											.keyEventsCarousel &&
+										{!showKeyEventsCarousel &&
 										CAPIArticle.keyEvents.length ? (
 											<Hide above="desktop">
 												<Island deferUntil="visible">
@@ -914,6 +914,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												}
 												abTests={
 													CAPIArticle.config.abTests
+												}
+												showKeyEventsCarousel={
+													showKeyEventsCarousel
 												}
 											/>
 											{pagination.totalPages > 1 && (

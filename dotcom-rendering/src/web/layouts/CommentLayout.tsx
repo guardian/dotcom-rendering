@@ -257,11 +257,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-export const CommentLayout = ({
-	CAPIArticle,
-	NAV,
-	format,
-}: Props): JSX.Element => {
+export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPIArticle;

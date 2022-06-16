@@ -39,7 +39,7 @@ interface TagsProps {
 }
 
 const Tags: FC<TagsProps> = ({ tags, background }) => (
-	<ul css={tagsStyles(background)}>
+	<ul css={tagsStyles(background)} role="list">
 		{tags.map((tag, index) => {
 			return (
 				<li key={index}>

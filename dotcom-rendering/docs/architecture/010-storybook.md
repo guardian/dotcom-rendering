@@ -25,4 +25,4 @@ Storybook must be installed and set up. All existing components must be added an
 
 Proposed
 
-_People are generally in favour, but there doesn't seem like an obvious time to implement it. This should be revisted before we have too many elements._
+_People are generally in favour, but there doesn't seem like an obvious time to implement it. This should be revisited before we have too many elements._

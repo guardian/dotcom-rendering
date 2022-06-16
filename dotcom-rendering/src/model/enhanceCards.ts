@@ -75,45 +75,46 @@ export const enhanceCards = (
 	collections: FEFrontCard[],
 	containerPalette?: DCRContainerPalette,
 ): DCRFrontCard[] =>
-	collections
-		.filter(
-			(card: FEFrontCard): card is FEFrontCard & { format: CAPIFormat } =>
-				!!card.format,
-		)
-		.map((faciaCard, index) => {
-			const format = decideFormat(faciaCard.format);
-			const group = `${faciaCard.card.group}${
-				faciaCard.display.isBoosted ? '+' : ''
-			}`;
-			const dataLinkName = getDataLinkNameCard(format, group, index + 1);
-			return {
-				format,
-				dataLinkName,
-				url: faciaCard.header.url,
-				headline: faciaCard.header.headline,
-				trailText: faciaCard.card.trailText,
-				webPublicationDate: faciaCard.card.webPublicationDateOption
-					? new Date(
-							faciaCard.card.webPublicationDateOption,
-					  ).toISOString()
-					: undefined,
-				image: faciaCard.properties.maybeContent?.trail.trailPicture
-					?.allImages[0].url,
-				kickerText:
-					faciaCard.header.kicker?.item?.properties.kickerText,
-				supportingContent: faciaCard.supportingContent
-					? enhanceSupportingContent(
-							faciaCard.supportingContent,
-							format,
-							containerPalette,
-					  )
-					: undefined,
-				discussionId: faciaCard.discussion.discussionId,
-				// nb. there is a distinct 'byline' property on FEFrontCard, at
-				// card.properties.byline
-				byline:
-					faciaCard.properties.maybeContent?.trail.byline ??
-					undefined,
-				showByline: faciaCard.properties.showByline,
-			};
-		});
+	collections.map((faciaCard, index) => {
+		// Snap cards may not have a format, default to a standard format if thats the case.
+		const format = decideFormat(
+			faciaCard.format || {
+				design: 'ArticleDesign',
+				theme: 'NewsPillar',
+				display: 'StandardDisplay',
+			},
+		);
+		const group = `${faciaCard.card.group}${
+			faciaCard.display.isBoosted ? '+' : ''
+		}`;
+		const dataLinkName = getDataLinkNameCard(format, group, index + 1);
+		return {
+			format,
+			dataLinkName,
+			url: faciaCard.header.url,
+			headline: faciaCard.header.headline,
+			trailText: faciaCard.card.trailText,
+			webPublicationDate: faciaCard.card.webPublicationDateOption
+				? new Date(
+						faciaCard.card.webPublicationDateOption,
+				  ).toISOString()
+				: undefined,
+			image: faciaCard.properties.maybeContent?.trail.trailPicture
+				?.allImages[0].url,
+			kickerText: faciaCard.header.kicker?.item?.properties.kickerText,
+			supportingContent: faciaCard.supportingContent
+				? enhanceSupportingContent(
+						faciaCard.supportingContent,
+						format,
+						containerPalette,
+				  )
+				: undefined,
+			discussionId: faciaCard.discussion.discussionId,
+			// nb. there is a distinct 'byline' property on FEFrontCard, at
+			// card.properties.byline
+			byline:
+				faciaCard.properties.maybeContent?.trail.byline ?? undefined,
+			showByline: faciaCard.properties.showByline,
+			snapData: faciaCard.enriched,
+		};
+	});

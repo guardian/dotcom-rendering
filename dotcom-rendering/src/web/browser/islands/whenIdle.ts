@@ -3,7 +3,7 @@
  *
  * @param callback Fired when requestIdleCallback runs. If requestIdleCallback is not available after 300ms
  */
-export const whenIdle = (callback: () => void) => {
+export const whenIdle = (callback: () => void): void => {
 	if ('requestIdleCallback' in window) {
 		window.requestIdleCallback(callback, { timeout: 500 });
 	} else {

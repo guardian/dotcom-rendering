@@ -85,7 +85,7 @@ export const YoutubeBlockComponent = ({
 	duration,
 	origin,
 	stickyVideos,
-}: Props): JSX.Element => {
+}: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
 	);

@@ -17,7 +17,7 @@ that helps ensure good performance and, related, which is less monolithic.
 
 ## Decision
 
--   Load scripts in the head as defer'red, or as async at the bottom of the HTML
+-   Load scripts in the head as deferred, or as async at the bottom of the HTML
     body section
 -   All other script loading (other than for commercial third-party code) is
     prohibited

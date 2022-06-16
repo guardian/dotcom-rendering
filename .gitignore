@@ -47,3 +47,6 @@ webArchitecture.svg
 
 # lighthouse results from local build
 .lighthouseci/
+
+# ESLint reports
+.eslint/

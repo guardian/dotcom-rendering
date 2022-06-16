@@ -25,7 +25,8 @@ const ampData = (section: string, contentType: string): string => {
 	return `/${dfpAccountId}/${dfpAdUnitRoot}/amp`;
 };
 
-const relevantYieldURLPrefix = 'https://pbs.relevant-digital.com/openrtb2/amp';
+const relevantYieldURLPrefix =
+	'https://guardian-pbs.relevant-digital.com/openrtb2/amp';
 
 const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
 	const adTargetingMapped: AdTargetParam[] = [];
