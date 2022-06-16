@@ -3,7 +3,7 @@ import { CacheProvider, css } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { neutral, space, text, textSans } from '@guardian/source-foundations';
 import { Button, Link, TextInput } from '@guardian/source-react-components';
-import React from 'react';
+import React, { useState } from 'react';
 import { renderToString } from 'react-dom/server';
 import { Island } from './Island';
 import { SecureSignupIframe } from './SecureSignupIframe.importable';
@@ -187,6 +187,7 @@ const generateForm = (
 const generateJs = (
 	newsletterId: string,
 	googleRecaptchaSiteKey: string,
+	messageKey: string,
 ): string => {
 	return `
 		console.log('This is the Iframe for ${newsletterId}');
@@ -209,6 +210,7 @@ const generateJs = (
 
 		function sendResizeMessage(height) {
 			const payload = {
+				messageKey: '${messageKey}',
 				request: 'resize_iframe',
 				height: height,
 			}
@@ -224,7 +226,6 @@ const generateJs = (
 
 		function onRecaptchaScriptLoaded() {
 			const captchaContainer = document.querySelector('.grecaptcha_container');
-			console.log('captchaContainer',captchaContainer)
 			grecaptcha.render(captchaContainer, {
 				sitekey: '${googleRecaptchaSiteKey}',
 				callback: onCaptchaCompleted,
@@ -257,13 +258,20 @@ const generateJs = (
 const googleRecaptchaSiteKey = 'invalid_key';
 
 export const SecureSignup = ({ newsletterId }: Props) => {
+	const [messageKey, setMessageKey] = useState<string>('');
+	setMessageKey(Math.random().toString());
 	const { html, styles } = generateForm(newsletterId);
-	const js = generateJs(newsletterId, googleRecaptchaSiteKey);
+	const js = generateJs(newsletterId, googleRecaptchaSiteKey, messageKey);
 
 	return (
 		<>
 			<Island>
-				<SecureSignupIframe html={html} styles={styles} js={js} />
+				<SecureSignupIframe
+					html={html}
+					styles={styles}
+					js={js}
+					messageKey={messageKey}
+				/>
 			</Island>
 			<PrivacyTerms />
 			<RecaptchaTerms />
