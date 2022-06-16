@@ -156,24 +156,8 @@ const generateForm = (
 						Sign up
 					</Button>
 				</StackBelowDesktop>
-				<input
-					type="hidden"
-					name="ref"
-					value={`${
-						typeof window === 'undefined'
-							? ''
-							: window.location.origin + window.location.pathname
-					}`}
-				/>
-				<input
-					type="hidden"
-					name="refViewId"
-					value={
-						typeof window === 'undefined'
-							? ''
-							: window.guardian.ophan?.viewId
-					}
-				/>
+				<input type="hidden" name="ref" />
+				<input type="hidden" name="refViewId" />
 				<div className="grecaptcha_container" />
 			</form>
 		</CacheProvider>,

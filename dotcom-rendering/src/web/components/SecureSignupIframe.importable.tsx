@@ -43,13 +43,32 @@ export const SecureSignupIframe = ({ styles, html, js, messageKey }: Props) => {
 
 	useEffect(() => {
 		const { current: iframe } = iframeRef;
+		if (!iframe || !iframe.contentDocument) {
+			return;
+		}
+		const refField =
+			iframe.contentDocument.querySelector('input[name="ref"]');
+		const refViewIdField = iframe.contentDocument.querySelector(
+			'input[name="refViewId"]',
+		);
+		refField?.setAttribute(
+			'value',
+			window.location.origin + window.location.pathname,
+		);
+		refViewIdField?.setAttribute(
+			'value',
+			window.guardian.ophan?.pageViewId ?? '',
+		);
+	});
+
+	useEffect(() => {
+		const { current: iframe } = iframeRef;
 		if (!iframe || !iframe.contentDocument || !iframe.contentWindow) {
 			return;
 		}
-		const iframeDocument = iframe.contentDocument;
 		const iframeWindow = iframe.contentWindow as WindowWithCaptchaFunctions;
-		const button = iframeDocument.querySelector('button');
-		const form = iframeDocument.querySelector('form');
+		const button = iframe.contentDocument.querySelector('button');
+		const form = iframe.contentDocument.querySelector('form');
 
 		const handleMessageFromIframe = (message: MessageEvent) => {
 			const validatedMessage = validateMessage(message.data, messageKey);
