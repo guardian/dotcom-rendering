@@ -5,6 +5,8 @@ import { neutral, space, text, textSans } from '@guardian/source-foundations';
 import { Button, Link, TextInput } from '@guardian/source-react-components';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { Island } from './Island';
+import { SecureSignupIframe } from './SecureSignupIframe.importable';
 
 type Props = { newsletterId: string };
 
@@ -181,30 +183,21 @@ const generateForm = (
 	return { html, styles };
 };
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types -- because its implied
+const generateJs = (newsletterId: string): string => {
+	return `
+		console.log('This is the Iframe for ${newsletterId}');
+	`;
+};
+
 export const SecureSignup = ({ newsletterId }: Props) => {
 	const { html, styles } = generateForm(newsletterId);
+	const js = generateJs(newsletterId);
+
 	return (
 		<>
-			<iframe
-				srcDoc={`
-				<html>
-					<head>
-						<script>
-							// TODO: Add javascript here
-						</script>
-						${styles}
-					</head>
-					<body style="margin: 0;">${html}</body>
-				</html>`}
-				css={css`
-					width: 100%;
-					height: 130px;
-					@media (min-width: 626px) {
-						height: 80px;
-					}
-				`}
-			/>
+			<Island>
+				<SecureSignupIframe html={html} styles={styles} js={js} />
+			</Island>
 			<PrivacyTerms />
 			<RecaptchaTerms />
 		</>
