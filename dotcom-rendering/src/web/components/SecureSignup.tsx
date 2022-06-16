@@ -168,11 +168,7 @@ const generateForm = (
 	return { html, styles };
 };
 
-const generateJs = (
-	newsletterId: string,
-	googleRecaptchaSiteKey: string,
-	messageKey: string,
-): string => {
+const generateJs = (newsletterId: string, messageKey: string): string => {
 	return `
 		console.log('This is the Iframe for ${newsletterId}');
 
@@ -210,8 +206,9 @@ const generateJs = (
 
 		function onRecaptchaScriptLoaded() {
 			const captchaContainer = document.querySelector('.grecaptcha_container');
+			const siteKey = window.parent.guardian.config.page.googleRecaptchaSiteKey;
 			grecaptcha.render(captchaContainer, {
-				sitekey: '${googleRecaptchaSiteKey}',
+				sitekey: siteKey,
 				callback: onCaptchaCompleted,
 				'error-callback': onCaptchaError,
 				'expired-callback': onCaptchaExpired,
@@ -239,13 +236,11 @@ const generateJs = (
 	`;
 };
 
-const googleRecaptchaSiteKey = 'invalid_key';
-
 export const SecureSignup = ({ newsletterId }: Props) => {
 	const [messageKey, setMessageKey] = useState<string>('');
 	setMessageKey(Math.random().toString());
 	const { html, styles } = generateForm(newsletterId);
-	const js = generateJs(newsletterId, googleRecaptchaSiteKey, messageKey);
+	const js = generateJs(newsletterId, messageKey);
 
 	return (
 		<>
