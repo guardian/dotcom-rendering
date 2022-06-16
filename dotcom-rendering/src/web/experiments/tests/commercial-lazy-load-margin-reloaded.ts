@@ -15,10 +15,6 @@ export const commercialLazyLoadMarginReloaded: ABTest = {
 		'One of the variants shows a marked improvement in all of the metrics that we are considering',
 	variants: [
 		{
-			id: 'control',
-			test: (): void => {},
-		},
-		{
 			id: 'variant-1',
 			test: (): void => {},
 		},
