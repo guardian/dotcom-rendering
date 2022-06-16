@@ -174,6 +174,7 @@ const generateForm = (
 							: window.guardian.ophan?.viewId
 					}
 				/>
+				<div className="grecaptcha_container" />
 			</form>
 		</CacheProvider>,
 	);
@@ -183,15 +184,81 @@ const generateForm = (
 	return { html, styles };
 };
 
-const generateJs = (newsletterId: string): string => {
+const generateJs = (
+	newsletterId: string,
+	googleRecaptchaSiteKey: string,
+): string => {
 	return `
 		console.log('This is the Iframe for ${newsletterId}');
+
+		function loadOrOpenCaptcha() {
+			if (!window.grecaptcha) {
+				(function (d, script) {
+					script = d.createElement('script');
+					script.type = 'text/javascript';
+					script.async = true;
+					script.defer = true;
+					script.src =
+						'https://www.google.com/recaptcha/api.js?onload=onRecaptchaScriptLoaded&render=explicit';
+					d.getElementsByTagName('head')[0].appendChild(script);
+				})(document);
+			} else {
+				openCaptcha()
+			}
+		}
+
+		function sendResizeMessage(height) {
+			const payload = {
+				request: 'resize_iframe',
+				height: height,
+			}
+			window.postMessage(payload,'*');
+		};
+
+
+		function openCaptcha() {
+		    sendResizeMessage(500);
+    		// sendTrackingForCaptchaOpen();
+			grecaptcha.execute();
+		}
+
+		function onRecaptchaScriptLoaded() {
+			const captchaContainer = document.querySelector('.grecaptcha_container');
+			console.log('captchaContainer',captchaContainer)
+			grecaptcha.render(captchaContainer, {
+				sitekey: '${googleRecaptchaSiteKey}',
+				callback: onCaptchaCompleted,
+				'error-callback': onCaptchaError,
+				'expired-callback': onCaptchaExpired,
+				size: 'invisible',
+			});
+			openCaptcha();
+		}
+
+		function onCaptchaCompleted(token) {
+			sendResizeMessage();
+			// sendTrackingForFormSubmission();
+			document.querySelector('form').submit();
+		}
+
+		function onCaptchaError() {
+			// sendTrackingForCaptchaError();
+			console.warn('onCaptchaError')
+			sendResizeMessage();
+		}
+
+		function onCaptchaExpired() {
+			// sendTrackingForCaptchaExpire();
+			sendResizeMessage();
+		}
 	`;
 };
 
+const googleRecaptchaSiteKey = 'invalid_key';
+
 export const SecureSignup = ({ newsletterId }: Props) => {
 	const { html, styles } = generateForm(newsletterId);
-	const js = generateJs(newsletterId);
+	const js = generateJs(newsletterId, googleRecaptchaSiteKey);
 
 	return (
 		<>

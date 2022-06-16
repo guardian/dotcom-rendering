@@ -2,6 +2,29 @@ import { useEffect, useRef, useState } from 'react';
 
 type Props = { styles: string; html: string; js: string };
 
+type WindowWithCaptchaFunctions = Window & {
+	loadOrOpenCaptcha: { (): void };
+};
+
+interface IframeRequest {
+	request: string;
+	height?: number;
+}
+
+function validateMessage(data: unknown): IframeRequest | null {
+	if (!data || typeof data !== 'object') {
+		return null;
+	}
+
+	const message = data as IframeRequest;
+
+	if (typeof message.request === 'string') {
+		return message;
+	}
+
+	return null;
+}
+
 export const SecureSignupIframe = ({ styles, html, js }: Props) => {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 
@@ -11,19 +34,34 @@ export const SecureSignupIframe = ({ styles, html, js }: Props) => {
 
 	useEffect(() => {
 		const { current: iframe } = iframeRef;
-		if (!iframe || !iframe.contentDocument) {
+		if (!iframe || !iframe.contentDocument || !iframe.contentWindow) {
 			return;
 		}
 		const iframeDocument = iframe.contentDocument;
+		const iframeWindow = iframe.contentWindow as WindowWithCaptchaFunctions;
+		const button = iframeDocument.querySelector('button');
+		const form = iframeDocument.querySelector('form');
 
+		const handleMessageFromIframe = (message: MessageEvent) => {
+			const validatedMessage = validateMessage(message.data);
+			if (!validatedMessage) {
+				return;
+			}
+			if (validatedMessage.request === 'resize_iframe') {
+				setIFrameHeight(validatedMessage.height);
+			}
+		};
 		const handleClickInIFrame = (event: Event) => {
-			console.log(event);
+			console.log('click', event);
+		};
+		const handleSubmitInIFrame = (event: Event) => {
 			event.preventDefault();
-			setIFrameHeight(500);
+			iframeWindow.loadOrOpenCaptcha();
 		};
 
-		const button = iframeDocument.querySelector('button');
+		iframeWindow.addEventListener('message', handleMessageFromIframe);
 		button?.addEventListener('click', handleClickInIFrame);
+		form?.addEventListener('submit', handleSubmitInIFrame);
 	}, []);
 
 	const srcDoc = `
