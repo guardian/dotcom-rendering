@@ -1,18 +1,92 @@
 import { useEffect, useRef, useState } from 'react';
 
-type Props = {
-	styles: string;
-	html: string;
-	iframeScriptString: string;
-};
-
-type WindowWithCaptchaFunctions = Window & {
+export type CaptchaIframeWindow = Window & {
+	grecaptcha?: {
+		execute: { (): void };
+		render: {
+			(el: Element | null, config: Record<string, unknown>): void;
+		};
+	};
+	openCaptcha: { (): void };
+	onCaptchaError: { (): void };
+	onCaptchaExpired: { (): void };
 	loadOrOpenCaptcha: { (): void };
+	onCaptchaCompleted: { (): void };
+	sendResizeMessage: { (height?: number): void };
+	onRecaptchaScriptLoaded: { (): void };
 };
 
 interface IframeRequest {
 	request: string;
 	height?: number;
+}
+
+function iframeScript(iframeWindow: CaptchaIframeWindow) {
+	iframeWindow.openCaptcha = function openCaptcha() {
+		iframeWindow.sendResizeMessage(500);
+		// sendTrackingForCaptchaOpen();
+		iframeWindow.grecaptcha?.execute();
+	};
+
+	iframeWindow.loadOrOpenCaptcha = function loadOrOpenCaptcha() {
+		if (!iframeWindow.grecaptcha) {
+			(function (d: Document) {
+				const script = d.createElement('script');
+				script.type = 'text/javascript';
+				script.async = true;
+				script.defer = true;
+				script.src =
+					'https://www.google.com/recaptcha/api.js?onload=onRecaptchaScriptLoaded&render=explicit';
+				d.getElementsByTagName('head')[0].appendChild(script);
+			})(document);
+		} else {
+			iframeWindow.openCaptcha();
+		}
+	};
+
+	iframeWindow.sendResizeMessage = function sendResizeMessage(
+		height?: number,
+	) {
+		const payload = {
+			request: 'resize_iframe',
+			height: height,
+		};
+		iframeWindow.postMessage(payload, '*');
+	};
+
+	iframeWindow.onRecaptchaScriptLoaded = function onRecaptchaScriptLoaded() {
+		const captchaContainer = document.querySelector(
+			'.grecaptcha_container',
+		);
+		const siteKey = iframeWindow.parent.guardian.config.page
+			.googleRecaptchaSiteKey as string;
+
+		iframeWindow.grecaptcha?.render(captchaContainer, {
+			sitekey: siteKey,
+			callback: iframeWindow.onCaptchaCompleted,
+			'error-callback': iframeWindow.onCaptchaError,
+			'expired-callback': iframeWindow.onCaptchaExpired,
+			size: 'invisible',
+		});
+		iframeWindow.openCaptcha();
+	};
+
+	iframeWindow.onCaptchaCompleted = function onCaptchaCompleted() {
+		iframeWindow.sendResizeMessage();
+		// sendTrackingForFormSubmission();
+		document.querySelector('form')?.submit();
+	};
+
+	iframeWindow.onCaptchaError = function onCaptchaError() {
+		// sendTrackingForCaptchaError();
+		console.warn('onCaptchaError');
+		iframeWindow.sendResizeMessage();
+	};
+
+	iframeWindow.onCaptchaExpired = function onCaptchaExpired() {
+		// sendTrackingForCaptchaExpire();
+		iframeWindow.sendResizeMessage();
+	};
 }
 
 function validateMessage(data: unknown): IframeRequest | null {
@@ -27,11 +101,12 @@ function validateMessage(data: unknown): IframeRequest | null {
 	return message;
 }
 
-export const SecureSignupIframe = ({
-	styles,
-	html,
-	iframeScriptString,
-}: Props) => {
+type Props = {
+	styles: string;
+	html: string;
+};
+
+export const SecureSignupIframe = ({ styles, html }: Props) => {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 
 	const [iframeHeight, setIFrameHeight] = useState<number | undefined>(
@@ -63,7 +138,8 @@ export const SecureSignupIframe = ({
 		if (!iframe || !iframe.contentDocument || !iframe.contentWindow) {
 			return;
 		}
-		const iframeWindow = iframe.contentWindow as WindowWithCaptchaFunctions;
+
+		const iframeWindow = iframe.contentWindow as CaptchaIframeWindow;
 		const button = iframe.contentDocument.querySelector('button');
 		const form = iframe.contentDocument.querySelector('form');
 
@@ -96,8 +172,8 @@ export const SecureSignupIframe = ({
 		</head>
 		<body style="margin: 0;">${html}</body>
 		<script>
-		const iframeScript = ${iframeScriptString};
-		iframeScript();
+		const iframeScript = ${iframeScript.toString()};
+		iframeScript(window);
 		</script>
 	</html>`;
 

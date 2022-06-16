@@ -168,103 +168,13 @@ const generateForm = (
 	return { html, styles };
 };
 
-type IframeWindow = Window & {
-	grecaptcha?: {
-		execute: { (): void };
-		render: {
-			(el: Element | null, config: Record<string, unknown>): void;
-		};
-	};
-	openCaptcha: { (): void };
-	onCaptchaError: { (): void };
-	onCaptchaExpired: { (): void };
-	loadOrOpenCaptcha: { (): void };
-	onCaptchaCompleted: { (): void };
-	sendResizeMessage: { (height?: number): void };
-	onRecaptchaScriptLoaded: { (): void };
-};
-
-const iframeScript = () => {
-	const iframeWindow = window as unknown as IframeWindow;
-
-	iframeWindow.openCaptcha = function openCaptcha() {
-		iframeWindow.sendResizeMessage(500);
-		// sendTrackingForCaptchaOpen();
-		iframeWindow.grecaptcha?.execute();
-	};
-
-	iframeWindow.loadOrOpenCaptcha = function loadOrOpenCaptcha() {
-		if (!iframeWindow.grecaptcha) {
-			(function (d: Document) {
-				const script = d.createElement('script');
-				script.type = 'text/javascript';
-				script.async = true;
-				script.defer = true;
-				script.src =
-					'https://www.google.com/recaptcha/api.js?onload=onRecaptchaScriptLoaded&render=explicit';
-				d.getElementsByTagName('head')[0].appendChild(script);
-			})(document);
-		} else {
-			iframeWindow.openCaptcha();
-		}
-	};
-
-	iframeWindow.sendResizeMessage = function sendResizeMessage(
-		height?: number,
-	) {
-		const payload = {
-			request: 'resize_iframe',
-			height: height,
-		};
-		iframeWindow.postMessage(payload, '*');
-	};
-
-	iframeWindow.onRecaptchaScriptLoaded = function onRecaptchaScriptLoaded() {
-		const captchaContainer = document.querySelector(
-			'.grecaptcha_container',
-		);
-		const siteKey = window.parent.guardian.config.page
-			.googleRecaptchaSiteKey as string;
-
-		iframeWindow.grecaptcha?.render(captchaContainer, {
-			sitekey: siteKey,
-			callback: iframeWindow.onCaptchaCompleted,
-			'error-callback': iframeWindow.onCaptchaError,
-			'expired-callback': iframeWindow.onCaptchaExpired,
-			size: 'invisible',
-		});
-		iframeWindow.openCaptcha();
-	};
-
-	iframeWindow.onCaptchaCompleted = function onCaptchaCompleted() {
-		iframeWindow.sendResizeMessage();
-		// sendTrackingForFormSubmission();
-		document.querySelector('form')?.submit();
-	};
-
-	iframeWindow.onCaptchaError = function onCaptchaError() {
-		// sendTrackingForCaptchaError();
-		console.warn('onCaptchaError');
-		iframeWindow.sendResizeMessage();
-	};
-
-	iframeWindow.onCaptchaExpired = function onCaptchaExpired() {
-		// sendTrackingForCaptchaExpire();
-		iframeWindow.sendResizeMessage();
-	};
-};
-
 export const SecureSignup = ({ newsletterId }: Props) => {
 	const { html, styles } = generateForm(newsletterId);
 
 	return (
 		<>
 			<Island>
-				<SecureSignupIframe
-					html={html}
-					styles={styles}
-					iframeScriptString={iframeScript.toString()}
-				/>
+				<SecureSignupIframe html={html} styles={styles} />
 			</Island>
 			<PrivacyTerms />
 			<RecaptchaTerms />
