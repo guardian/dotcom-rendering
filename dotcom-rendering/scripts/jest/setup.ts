@@ -21,7 +21,6 @@ const windowGuardian = {
 		data: {},
 	},
 	config: windowGuardianConfig,
-	mustardCut: false,
 	polyfilled: false,
 	onPolyfilled: () => undefined,
 	queue: [],

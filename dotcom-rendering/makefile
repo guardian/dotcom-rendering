@@ -1,4 +1,4 @@
-.PHONY: install dev dev-legacy build clean-dist start stop monitor clear
+.PHONY: install dev build clean-dist start stop monitor clear
 
 # these means you can run the binaries in node_modules
 # like with npm scripts
@@ -38,7 +38,7 @@ build: clean-dist install
 build-ci: export NODE_ENV=production
 build-ci: clean-dist install
 	$(call log, "building production bundles")
-	@SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
+	@webpack --config ./scripts/webpack/webpack.config.js
 
 start-ci: export NODE_ENV=production
 start-ci: install gen-dotenv-ci
@@ -73,12 +73,7 @@ run-ci: stop build-ci start-ci
 dev: export NODE_ENV=development
 dev: clear clean-dist install gen-dotenv
 	$(call log, "starting DEV server")
-	@SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
-
-dev-legacy: export NODE_ENV=development
-dev-legacy: clear clean-dist install gen-dotenv
-	$(call log, "starting DEV server")
-	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
+	@webpack serve --config ./scripts/webpack/webpack.config.js
 
 # tests #####################################
 

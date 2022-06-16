@@ -46,11 +46,6 @@ module.exports = ({ sessionId }) => ({
 				? callback(undefined, `commonjs ${request}`)
 				: callback();
 		},
-		({ request }, callback) => {
-			return request?.endsWith('manifest.legacy.json')
-				? callback(undefined, `commonjs ${request}`)
-				: callback();
-		},
 	],
 	plugins: DEV
 		? [

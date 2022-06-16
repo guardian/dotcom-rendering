@@ -1,24 +1,15 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
 
-/**
- * @param {boolean} isLegacyJS
- * @returns {string}
- */
-const generateName = (isLegacyJS) => {
-	const legacyString = isLegacyJS ? '.legacy' : '';
-	const chunkhashString = DEV ? '' : '.[chunkhash]';
-	return `[name]${legacyString}${chunkhashString}.js`;
-};
+const outputFilename = DEV ? `[name].js` : `[name].[chunkhash].js`;
 
 /**
- * @param {{ isLegacyJS: boolean, sessionId: string }} options
+ * @param {{ sessionId: string }} options
  * @returns {import('webpack').Configuration}
  */
-module.exports = ({ isLegacyJS, sessionId }) => ({
+module.exports = ({ sessionId }) => ({
 	entry: {
 		sentryLoader: './src/web/browser/sentryLoader/init.ts',
 		bootCmp: './src/web/browser/bootCmp/init.ts',
@@ -34,8 +25,8 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 		initDiscussion: './src/web/browser/initDiscussion/init.ts',
 	},
 	output: {
-		filename: generateName(isLegacyJS),
-		chunkFilename: generateName(isLegacyJS),
+		filename: outputFilename,
+		chunkFilename: outputFilename,
 		publicPath: '',
 	},
 	// fix for known issue with webpack dynamic imports
@@ -44,12 +35,12 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 	},
 	plugins: [
 		new WebpackManifestPlugin({
-			fileName: isLegacyJS ? 'manifest.legacy.json' : 'manifest.json',
+			fileName: 'manifest.json',
 		}),
 		...(DEV
 			? [
 					new GuStatsReportPlugin({
-						buildName: isLegacyJS ? 'legacy-client' : 'client',
+						buildName: 'client',
 						project: 'dotcom-rendering',
 						team: 'dotcom',
 						sessionId,
@@ -69,25 +60,15 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 						options: {
 							presets: [
 								'@babel/preset-react',
-								isLegacyJS
-									? [
-											'@babel/preset-env',
-											{
-												targets: {
-													ie: '11',
-												},
-												modules: false,
-											},
-									  ]
-									: [
-											'@babel/preset-env',
-											{
-												bugfixes: true,
-												targets: {
-													esmodules: true,
-												},
-											},
-									  ],
+								[
+									'@babel/preset-env',
+									{
+										bugfixes: true,
+										targets: {
+											esmodules: true,
+										},
+									},
+								],
 							],
 							compact: true,
 						},

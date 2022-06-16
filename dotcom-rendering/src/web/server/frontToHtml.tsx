@@ -1,8 +1,9 @@
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
+import { isString } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
-import { getScriptArrayFromFile } from '../../lib/assets';
+import { getScriptFromFile } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { makeFrontWindowGuardian } from '../../model/window-guardian';
 import { FrontPage } from '../components/FrontPage';
@@ -13,30 +14,10 @@ interface Props {
 	NAV: NavType;
 }
 
-const generateScriptTags = (
-	scripts: Array<{ src: string; legacy?: boolean } | false>,
-) =>
-	scripts.reduce<string[]>((scriptTags, script) => {
-		if (script === false) return scriptTags;
-
-		let attrs: string;
-		switch (script.legacy) {
-			case true:
-				attrs = 'defer nomodule';
-				break;
-			case false:
-				attrs = 'type="module"';
-				break;
-			default:
-				attrs = 'defer';
-				break;
-		}
-
-		return [
-			...scriptTags,
-			`<script ${attrs} src="${script.src}"></script>`,
-		];
-	}, []);
+const generateScriptTags = (scripts: Array<string | false>) =>
+	scripts
+		.filter(isString)
+		.map((script) => `<script type="module" src="${script}"></script>`);
 
 export const frontToHtml = ({ front, NAV }: Props): string => {
 	const title = front.webTitle;
@@ -85,13 +66,13 @@ export const frontToHtml = ({ front, NAV }: Props): string => {
 	 * Scripts will be executed in the order they appear in this array
 	 */
 	const priorityScriptTags = generateScriptTags([
-		{ src: polyfillIO },
-		...getScriptArrayFromFile('bootCmp.js'),
-		...getScriptArrayFromFile('ophan.js'),
-		front.config && { src: front.config.commercialBundleUrl },
-		...getScriptArrayFromFile('sentryLoader.js'),
-		...getScriptArrayFromFile('dynamicImport.js'),
-		...getScriptArrayFromFile('islands.js'),
+		polyfillIO,
+		getScriptFromFile('bootCmp.js'),
+		getScriptFromFile('ophan.js'),
+		front.config.commercialBundleUrl,
+		getScriptFromFile('sentryLoader.js'),
+		getScriptFromFile('dynamicImport.js'),
+		getScriptFromFile('islands.js'),
 	]);
 
 	/**
@@ -102,19 +83,13 @@ export const frontToHtml = ({ front, NAV }: Props): string => {
 	 * unlikely.
 	 */
 	const lowPriorityScriptTags = generateScriptTags([
-		...getScriptArrayFromFile('atomIframe.js'),
-		...getScriptArrayFromFile('embedIframe.js'),
-		...getScriptArrayFromFile('newsletterEmbedIframe.js'),
-		...getScriptArrayFromFile('relativeTime.js'),
+		getScriptFromFile('atomIframe.js'),
+		getScriptFromFile('embedIframe.js'),
+		getScriptFromFile('newsletterEmbedIframe.js'),
+		getScriptFromFile('relativeTime.js'),
 	]);
 
-	const gaChunk = getScriptArrayFromFile('ga.js');
-	const modernScript = gaChunk.find((script) => script.legacy === false);
-	const legacyScript = gaChunk.find((script) => script.legacy === true);
-	const gaPath = {
-		modern: modernScript?.src as string,
-		legacy: legacyScript?.src as string,
-	};
+	const gaPath = getScriptFromFile('ga.js');
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data

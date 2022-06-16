@@ -29,7 +29,7 @@ export const articleTemplate = ({
 	html: string;
 	fontFiles?: string[];
 	windowGuardian: string;
-	gaPath: { modern: string; legacy: string };
+	gaPath: string;
 	ampLink?: string;
 	openGraphData: { [key: string]: string };
 	twitterData: { [key: string]: string };
@@ -196,13 +196,12 @@ https://workforus.theguardian.com/careers/product-engineering/
 
                 <script type="module">
                     window.guardian.mustardCut = true;
-                    window.guardian.gaPath = "${gaPath.modern}";
+                    window.guardian.gaPath = "${gaPath}";
                 </script>
 
                 <script nomodule>
                     // Browser fails mustard check
                     window.guardian.mustardCut = false;
-                    window.guardian.gaPath = "${gaPath.legacy}";
                 </script>
 
                 <script>

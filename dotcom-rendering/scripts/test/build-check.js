@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 // This file contains some checks that the building and bundling
-// is working correctly between modern and legacy scripts.
-// It checks the following:
+// is working correctly. It checks the following:
 // 1. That the manifest files are output
 // 2. That the manifest files contain at least the entry points under the expected property
 
@@ -26,11 +25,9 @@ const fileExists = async (glob) => {
 (async () => {
 	// Check that the manifest files exist
 	await fileExists('manifest.json');
-	await fileExists('manifest.legacy.json');
 
 	// Check that the manifest files return values for all the chunks
 	const manifest = await loadJsonFile('./dist/manifest.json');
-	const legacyManifest = await loadJsonFile('./dist/manifest.legacy.json');
 
 	[
 		'sentryLoader.js',
@@ -49,14 +46,6 @@ const fileExists = async (glob) => {
 			console.log(`Manifest returned value ${name}`);
 		} else {
 			errorAndThrow(`Manifest did not return a value for ${name}`);
-		}
-
-		if (legacyManifest[name]) {
-			console.log(`Legacy manifest returned value ${name}`);
-		} else {
-			errorAndThrow(
-				`Legacy Loadabl manifest did not return a value for ${name}`,
-			);
 		}
 	});
 })();

@@ -1,3 +1,6 @@
+> **Note**
+> This decision is superceded by [029: Only serve JavaScript ES Modules](./029-only-esmodules.md)
+
 # Script Loading 
 
 **Module / Nomodule and Preloading**

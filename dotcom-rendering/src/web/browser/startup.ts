@@ -30,7 +30,7 @@ export const startup = <A>(
 	const measureMe = () => {
 		measure(name, task.bind(null, helpers));
 	};
-	if (window.guardian.mustardCut || window.guardian.polyfilled) {
+	if (window.guardian.polyfilled) {
 		measureMe();
 	} else {
 		window.guardian.queue.push(measureMe);

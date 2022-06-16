@@ -1,15 +1,14 @@
 // @ts-check
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 const webpack = require('webpack');
-const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-const { v4: uuidv4 } = require('uuid');
+const { merge } = require('webpack-merge');
 const WebpackMessages = require('webpack-messages');
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
-const INCLUDE_LEGACY = process.env.SKIP_LEGACY !== 'true';
 const dist = path.resolve(__dirname, '..', '..', 'dist');
 
 const sessionId = uuidv4();
@@ -17,7 +16,7 @@ const sessionId = uuidv4();
 let builds = 0;
 
 /**
- * @param {{ platform: 'server' | 'browser' | 'browser.legacy'}} options
+ * @param {{ platform: 'server' | 'browser'}} options
  * @returns {import('webpack').Configuration}
  */
 const commonConfigs = ({ platform }) => ({
@@ -45,7 +44,7 @@ const commonConfigs = ({ platform }) => ({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			'process.env.HOSTNAME': JSON.stringify(process.env.HOSTNAME),
 		}),
-		// @ts-ignore -- somehow the type declaration isn’t playing nice
+		// @ts-expect-error -- somehow the type declaration isn’t playing nice
 		new FilterWarningsPlugin({
 			exclude: /export .* was not found in/,
 		}),
@@ -57,7 +56,7 @@ const commonConfigs = ({ platform }) => ({
 		...(DEV
 			? // DEV plugins
 			  [
-					// @ts-ignore -- somehow the type declaration isn’t playing nice
+					// @ts-expect-error -- somehow the type declaration isn’t playing nice
 					new WebpackMessages({
 						name: platform,
 						/** @type {(message: string) => void} */
@@ -106,27 +105,10 @@ module.exports = [
 		DEV ? require(`./webpack.config.dev-server`) : {},
 	),
 	// browser bundle configs
-	// TODO: ignore static files for legacy compilation
-	...(INCLUDE_LEGACY
-		? [
-				merge(
-					commonConfigs({
-						platform: 'browser.legacy',
-					}),
-					require(`./webpack.config.browser`)({
-						isLegacyJS: true,
-						sessionId,
-					}),
-				),
-		  ]
-		: []),
 	merge(
 		commonConfigs({
 			platform: 'browser',
 		}),
-		require(`./webpack.config.browser`)({
-			isLegacyJS: false,
-			sessionId,
-		}),
+		require(`./webpack.config.browser`)({ sessionId }),
 	),
 ];

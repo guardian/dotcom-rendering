@@ -3,15 +3,12 @@ interface AssetHash {
 }
 
 let manifest: AssetHash = {};
-let legacyManifest: AssetHash = {};
 
 try {
 	// path is relative to the server bundle
 
 	// eslint-disable-next-line global-require -- this may fail
 	manifest = require('./manifest.json');
-	// eslint-disable-next-line global-require -- this may fail
-	legacyManifest = require('./manifest.legacy.json');
 } catch (e) {
 	// do nothing
 }
@@ -34,33 +31,15 @@ const decideAssetOrigin = (stage: string | undefined): string => {
 };
 export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE);
 
-export const getScriptArrayFromFile = (
-	file: `${string}.js`,
-): { src: string; legacy?: boolean }[] => {
+export const getScriptFromFile = (file: `${string}.js`): string => {
 	if (!file.endsWith('.js'))
 		throw new Error('Invalid filename: extension must be .js');
 
 	const isDev = process.env.NODE_ENV === 'development';
 
 	const filename = isDev ? file : manifest[file];
-	const legacyFilename = isDev
-		? file.replace('.js', '.legacy.js')
-		: legacyManifest[file];
 
-	const scripts = [];
+	if (!filename) throw new Error(`Could not find filename: ${file}`);
 
-	if (filename) {
-		scripts.push({
-			src: `${ASSET_ORIGIN}assets/${filename}`,
-			legacy: false,
-		});
-	}
-	if (legacyFilename) {
-		scripts.push({
-			src: `${ASSET_ORIGIN}assets/${legacyFilename}`,
-			legacy: true,
-		});
-	}
-
-	return scripts;
+	return `${ASSET_ORIGIN}assets/${filename}`;
 };

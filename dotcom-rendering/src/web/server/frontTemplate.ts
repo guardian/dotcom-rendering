@@ -20,7 +20,7 @@ export const frontTemplate = ({
 	html: string;
 	windowGuardian: string;
 	fontFiles?: string[];
-	gaPath: { modern: string; legacy: string };
+	gaPath: string;
 	keywords: string;
 }): string => {
 	const favicon =
@@ -148,19 +148,18 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <meta name="robots" content="max-image-preview:large">
 
                 <script>
-					window.guardian = ${windowGuardian};
+                    window.guardian = ${windowGuardian};
                     window.guardian.queue = []; // Queue for functions to be fired by polyfill.io callback
                 </script>
 
                 <script type="module">
                     window.guardian.mustardCut = true;
-                    window.guardian.gaPath = "${gaPath.modern}";
+                    window.guardian.gaPath = "${gaPath}";
                 </script>
 
                 <script nomodule>
                     // Browser fails mustard check
                     window.guardian.mustardCut = false;
-                    window.guardian.gaPath = "${gaPath.legacy}";
                 </script>
 
                 <script>
