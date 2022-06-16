@@ -1,40 +1,37 @@
 import { useEffect, useRef, useState } from 'react';
 
-type Props = { styles: string; html: string; js: string; messageKey: string };
+type Props = {
+	styles: string;
+	html: string;
+	iframeScriptString: string;
+};
 
 type WindowWithCaptchaFunctions = Window & {
 	loadOrOpenCaptcha: { (): void };
 };
 
 interface IframeRequest {
-	messageKey: string;
 	request: string;
 	height?: number;
 }
 
-function validateMessage(
-	data: unknown,
-	messageKey: string,
-): IframeRequest | null {
+function validateMessage(data: unknown): IframeRequest | null {
 	if (!data || typeof data !== 'object') {
 		return null;
 	}
 
 	const message = data as IframeRequest;
-
 	if (typeof message.request !== 'string') {
-		return null;
-	}
-	if (
-		typeof message.messageKey !== 'string' ||
-		message.messageKey !== messageKey
-	) {
 		return null;
 	}
 	return message;
 }
 
-export const SecureSignupIframe = ({ styles, html, js, messageKey }: Props) => {
+export const SecureSignupIframe = ({
+	styles,
+	html,
+	iframeScriptString,
+}: Props) => {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 
 	const [iframeHeight, setIFrameHeight] = useState<number | undefined>(
@@ -71,7 +68,7 @@ export const SecureSignupIframe = ({ styles, html, js, messageKey }: Props) => {
 		const form = iframe.contentDocument.querySelector('form');
 
 		const handleMessageFromIframe = (message: MessageEvent) => {
-			const validatedMessage = validateMessage(message.data, messageKey);
+			const validatedMessage = validateMessage(message.data);
 			if (!validatedMessage) {
 				return;
 			}
@@ -90,7 +87,7 @@ export const SecureSignupIframe = ({ styles, html, js, messageKey }: Props) => {
 		iframeWindow.addEventListener('message', handleMessageFromIframe);
 		button?.addEventListener('click', handleClickInIFrame);
 		form?.addEventListener('submit', handleSubmitInIFrame);
-	}, [messageKey]);
+	}, []);
 
 	const srcDoc = `
 	<html>
@@ -99,7 +96,8 @@ export const SecureSignupIframe = ({ styles, html, js, messageKey }: Props) => {
 		</head>
 		<body style="margin: 0;">${html}</body>
 		<script>
-		${js}
+		const iframeScript = ${iframeScriptString};
+		iframeScript();
 		</script>
 	</html>`;
 
