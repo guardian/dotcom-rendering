@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useEffect, useRef, useState } from 'react';
 
-export type CaptchaIframeWindow = Window & {
+type CaptchaIframeWindow = Window & {
 	grecaptcha?: {
 		execute: { (): void };
 		render: {
@@ -59,8 +59,8 @@ function iframeScript(iframeWindow: CaptchaIframeWindow) {
 		const captchaContainer = document.querySelector(
 			'.grecaptcha_container',
 		);
-		const siteKey = iframeWindow.parent.guardian.config.page
-			.googleRecaptchaSiteKey as string;
+		const { page } = iframeWindow.parent.guardian.config;
+		const siteKey = page.googleRecaptchaSiteKey;
 
 		iframeWindow.grecaptcha?.render(captchaContainer, {
 			sitekey: siteKey,

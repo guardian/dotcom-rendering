@@ -17,6 +17,7 @@ export interface WindowGuardianConfig {
 		showRelatedContent: boolean;
 		ajaxUrl: string;
 		shouldHideReaderRevenue: boolean;
+		googleRecaptchaSiteKey?: string;
 	} & ConfigType;
 	libs: {
 		googletag: string;
