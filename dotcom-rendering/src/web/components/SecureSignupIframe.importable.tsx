@@ -117,37 +117,33 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 		if (!iframe) {
 			return;
 		}
-
-		const scrollHeight = iframe.contentDocument?.body.scrollHeight;
-		const values: number[] = [0, requestedHeight];
-		if (typeof scrollHeight === 'number') {
-			values.push(scrollHeight + 15);
-		}
-
-		setIFrameHeight(Math.max(...values));
+		const scrollHeight = iframe.contentDocument?.body.scrollHeight ?? 0;
+		setIFrameHeight(Math.max(0, requestedHeight, scrollHeight + 15));
 	};
 
-	const resizeIframeZero = (): void => {
+	const resetIframeHeight = (): void => {
 		resizeIframe();
 	};
 
+	// add resize event listener to iframe window
 	useEffect(() => {
 		const { current: iframe } = iframeRef;
 
 		if (iframe?.contentWindow) {
-			iframe.contentWindow.addEventListener('resize', resizeIframeZero);
+			iframe.contentWindow.addEventListener('resize', resetIframeHeight);
 		}
 
 		return () => {
 			if (iframe?.contentWindow) {
 				iframe.contentWindow.removeEventListener(
 					'resize',
-					resizeIframeZero,
+					resetIframeHeight,
 				);
 			}
 		};
 	});
 
+	// populate the hidden form fields in the iframe
 	useEffect(() => {
 		const { current: iframe } = iframeRef;
 		if (!iframe || !iframe.contentDocument) {
@@ -169,15 +165,9 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 		);
 	});
 
+	// add event listeners to the iframe components
 	useEffect(() => {
 		const { current: iframe } = iframeRef;
-		if (!iframe || !iframe.contentDocument || !iframe.contentWindow) {
-			return;
-		}
-
-		const iframeWindow = iframe.contentWindow as CaptchaIframeWindow;
-		const button = iframe.contentDocument.querySelector('button');
-		const form = iframe.contentDocument.querySelector('form');
 
 		const handleMessageFromIframe = (message: MessageEvent) => {
 			const validatedMessage = validateMessage(message.data);
@@ -190,17 +180,43 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 		};
 		const handleClickInIFrame = (event: Event) => {
 			console.log('click', event);
-
-			resizeIframe(Math.random() * 400);
 		};
 		const handleSubmitInIFrame = (event: Event) => {
 			event.preventDefault();
-			iframeWindow.loadOrOpenCaptcha();
+			if (iframe?.contentWindow) {
+				(
+					iframe.contentWindow as CaptchaIframeWindow
+				).loadOrOpenCaptcha();
+			}
 		};
 
-		iframeWindow.addEventListener('message', handleMessageFromIframe);
-		button?.addEventListener('click', handleClickInIFrame);
-		form?.addEventListener('submit', handleSubmitInIFrame);
+		if (iframe?.contentDocument && iframe.contentWindow) {
+			iframe.contentWindow.addEventListener(
+				'message',
+				handleMessageFromIframe,
+			);
+			iframe.contentDocument
+				.querySelector('button')
+				?.addEventListener('click', handleClickInIFrame);
+			iframe.contentDocument
+				.querySelector('form')
+				?.addEventListener('submit', handleSubmitInIFrame);
+		}
+
+		return () => {
+			if (iframe?.contentDocument && iframe.contentWindow) {
+				iframe.contentWindow.removeEventListener(
+					'message',
+					handleMessageFromIframe,
+				);
+				iframe.contentDocument
+					.querySelector('button')
+					?.removeEventListener('click', handleClickInIFrame);
+				iframe.contentDocument
+					.querySelector('form')
+					?.removeEventListener('submit', handleSubmitInIFrame);
+			}
+		};
 	}, []);
 
 	const srcDoc = `
