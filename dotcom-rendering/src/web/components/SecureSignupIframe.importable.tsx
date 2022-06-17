@@ -24,9 +24,9 @@ interface IframeRequest {
 
 function iframeScript(iframeWindow: CaptchaIframeWindow) {
 	iframeWindow.openCaptcha = function openCaptcha() {
-		iframeWindow.sendResizeMessage(500);
 		// sendTrackingForCaptchaOpen();
 		iframeWindow.grecaptcha?.execute();
+		iframeWindow.sendResizeMessage(500);
 	};
 
 	iframeWindow.loadOrOpenCaptcha = function loadOrOpenCaptcha() {
@@ -112,11 +112,48 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 
 	const [iframeHeight, setIFrameHeight] = useState<number>(0);
 
+	const resizeIframe = (requestedHeight = 0): void => {
+		const { current: iframe } = iframeRef;
+		if (!iframe) {
+			return;
+		}
+
+		const scrollHeight = iframe.contentDocument?.body.scrollHeight;
+		const values: number[] = [0, requestedHeight];
+		if (typeof scrollHeight === 'number') {
+			values.push(scrollHeight + 15);
+		}
+
+		setIFrameHeight(Math.max(...values));
+	};
+
+	const resizeIframeZero = (): void => {
+		resizeIframe();
+	};
+
+	useEffect(() => {
+		const { current: iframe } = iframeRef;
+
+		if (iframe?.contentWindow) {
+			iframe.contentWindow.addEventListener('resize', resizeIframeZero);
+		}
+
+		return () => {
+			if (iframe?.contentWindow) {
+				iframe.contentWindow.removeEventListener(
+					'resize',
+					resizeIframeZero,
+				);
+			}
+		};
+	});
+
 	useEffect(() => {
 		const { current: iframe } = iframeRef;
 		if (!iframe || !iframe.contentDocument) {
 			return;
 		}
+		resizeIframe();
 		const refField =
 			iframe.contentDocument.querySelector('input[name="ref"]');
 		const refViewIdField = iframe.contentDocument.querySelector(
@@ -148,11 +185,13 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 				return;
 			}
 			if (validatedMessage.request === 'resize_iframe') {
-				setIFrameHeight(validatedMessage.height ?? 0);
+				resizeIframe(validatedMessage.height);
 			}
 		};
 		const handleClickInIFrame = (event: Event) => {
 			console.log('click', event);
+
+			resizeIframe(Math.random() * 400);
 		};
 		const handleSubmitInIFrame = (event: Event) => {
 			event.preventDefault();
@@ -185,7 +224,6 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 					width: 100%;
 					min-height: 90px;
 					overflow: hidden;
-					transition: height 0.5s ease-in;
 				`}
 				style={{
 					height: iframeHeight,

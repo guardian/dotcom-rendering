@@ -85,6 +85,7 @@ const Description = ({ description }: { description: string }) => {
 			css={css`
 				${textSans.medium({ lineHeight: 'tight' })}
 				margin-top: ${space[1]}px;
+				margin-bottom: ${space[2]}px;
 			`}
 		>
 			{description}
@@ -106,7 +107,6 @@ const StackBelowDesktop = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types -- because its implied
 export const EmailSignup = ({
 	newsletterId,
 	name,

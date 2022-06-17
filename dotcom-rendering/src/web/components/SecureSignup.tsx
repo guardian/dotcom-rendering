@@ -97,9 +97,6 @@ const generateForm = (
 				id={`secure-signup-${newsletterId}`}
 				action="/email"
 				method="post"
-				css={css`
-					margin-top: ${space[2]}px;
-				`}
 			>
 				<Label text="Enter your email address" />
 
@@ -108,6 +105,7 @@ const generateForm = (
 						display: flex;
 						flex-direction: row;
 						align-items: flex-end;
+						flex-wrap: wrap;
 					`}
 				>
 					<div
