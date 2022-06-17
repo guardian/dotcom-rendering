@@ -49,8 +49,8 @@ const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
 // Variants for the Prebid server test
 // Assign each variant 4 groups e.g. 33.3% of content types each
 const variants = {
-	'relevant-yield': new Set<number>([]),
-	pubmatic: new Set<number>([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]),
+	'relevant-yield': new Set<number>([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]),
+	pubmatic: new Set<number>([]),
 };
 
 // Determine participation in a variant from group
