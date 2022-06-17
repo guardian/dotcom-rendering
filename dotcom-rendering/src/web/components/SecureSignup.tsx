@@ -2,26 +2,18 @@ import createCache from '@emotion/cache';
 import { CacheProvider, css } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { neutral, space, text, textSans } from '@guardian/source-foundations';
-import { Button, Link, TextInput } from '@guardian/source-react-components';
+import {
+	Button,
+	Label,
+	Link,
+	TextInput,
+} from '@guardian/source-react-components';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Island } from './Island';
 import { SecureSignupIframe } from './SecureSignupIframe.importable';
 
 type Props = { newsletterId: string };
-
-const InputWrapper = ({ children }: { children: React.ReactNode }) => {
-	return (
-		<div
-			css={css`
-				margin-right: ${space[3]}px;
-				flex-grow: 1;
-			`}
-		>
-			{children}
-		</div>
-	);
-};
 
 const PrivacyTerms = () => {
 	return (
@@ -92,20 +84,6 @@ const RecaptchaTerms = () => (
 	</div>
 );
 
-const StackBelowDesktop = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			display: flex;
-			flex-direction: column;
-			@media (min-width: 600px) {
-				flex-direction: row;
-			}
-		`}
-	>
-		{children}
-	</div>
-);
-
 const generateForm = (
 	newsletterId: string,
 ): { html: string; styles: string } => {
@@ -121,32 +99,41 @@ const generateForm = (
 				method="post"
 				css={css`
 					margin-top: ${space[2]}px;
-					max-width: 500px;
-					@media (min-width: 600px) {
-						max-width: 80%;
-					}
 				`}
 			>
-				<StackBelowDesktop>
-					<InputWrapper>
+				<Label text="Enter your email address" />
+
+				<div
+					css={css`
+						display: flex;
+						flex-direction: row;
+						align-items: flex-end;
+					`}
+				>
+					<div
+						css={css`
+							margin-right: ${space[3]}px;
+							flex-basis: 335px;
+							flex-shrink: 1;
+						`}
+					>
 						<TextInput
+							hideLabel={true}
 							name="email"
 							label="Enter your email address"
 							type="email"
 						/>
-					</InputWrapper>
+					</div>
 					<Button
 						cssOverrides={css`
+							justify-content: center;
 							background-color: ${neutral[0]};
 							:hover {
 								background-color: ${neutral[20]};
 							}
-							width: fit-content;
+							flex-basis: 118px;
+							flex-shrink: 0;
 							margin-top: ${space[2]}px;
-							@media (min-width: 600px) {
-								margin-top: 0;
-								align-self: flex-end;
-							}
 						`}
 						type="submit"
 						className="g-recaptcha"
@@ -155,7 +142,7 @@ const generateForm = (
 					>
 						Sign up
 					</Button>
-				</StackBelowDesktop>
+				</div>
 				<input type="hidden" name="ref" />
 				<input type="hidden" name="refViewId" />
 				<div className="grecaptcha_container" />

@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { useEffect, useRef, useState } from 'react';
 
 export type CaptchaIframeWindow = Window & {
@@ -109,9 +110,7 @@ type Props = {
 export const SecureSignupIframe = ({ styles, html }: Props) => {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 
-	const [iframeHeight, setIFrameHeight] = useState<number | undefined>(
-		undefined,
-	);
+	const [iframeHeight, setIFrameHeight] = useState<number | undefined>(0);
 
 	useEffect(() => {
 		const { current: iframe } = iframeRef;
@@ -182,7 +181,14 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 			<iframe
 				ref={iframeRef}
 				srcDoc={srcDoc}
-				style={{ height: iframeHeight }}
+				css={css`
+					width: 100%;
+					min-height: 90px;
+					overflow: hidden;
+				`}
+				style={{
+					height: iframeHeight,
+				}}
 			/>
 		</>
 	);
