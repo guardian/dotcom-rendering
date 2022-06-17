@@ -110,7 +110,7 @@ type Props = {
 export const SecureSignupIframe = ({ styles, html }: Props) => {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 
-	const [iframeHeight, setIFrameHeight] = useState<number | undefined>(0);
+	const [iframeHeight, setIFrameHeight] = useState<number>(0);
 
 	useEffect(() => {
 		const { current: iframe } = iframeRef;
@@ -148,7 +148,7 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 				return;
 			}
 			if (validatedMessage.request === 'resize_iframe') {
-				setIFrameHeight(validatedMessage.height);
+				setIFrameHeight(validatedMessage.height ?? 0);
 			}
 		};
 		const handleClickInIFrame = (event: Event) => {
@@ -185,6 +185,7 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 					width: 100%;
 					min-height: 90px;
 					overflow: hidden;
+					transition: height 0.5s ease-in;
 				`}
 				style={{
 					height: iframeHeight,
