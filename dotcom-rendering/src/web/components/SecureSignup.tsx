@@ -159,7 +159,7 @@ export const SecureSignup = ({ newsletterId }: Props) => {
 
 	return (
 		<>
-			<Island>
+			<Island clientOnly={true} deferUntil={'idle'}>
 				<SecureSignupIframe html={html} styles={styles} />
 			</Island>
 			<PrivacyTerms />

@@ -117,7 +117,13 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 		if (!iframe) {
 			return;
 		}
-		const scrollHeight = iframe.contentDocument?.body.scrollHeight ?? 0;
+		// verifiying the body is present before accessing the scrollHeight is necessary
+		// iframe.contentDocument?.body.scrollHeight can cause a TypeError
+		// the typing assumes body is always present on a Document but the use of
+		// srcDoc seems to allow the document to exist without the body.
+
+		const body = iframe.contentDocument?.body;
+		const scrollHeight = body ? body.scrollHeight : 0;
 		setIFrameHeight(Math.max(0, requestedHeight, scrollHeight + 15));
 	};
 
@@ -168,7 +174,6 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 	// add event listeners to the iframe components
 	useEffect(() => {
 		const { current: iframe } = iframeRef;
-
 		const handleMessageFromIframe = (message: MessageEvent) => {
 			const validatedMessage = validateMessage(message.data);
 			if (!validatedMessage) {
@@ -217,7 +222,7 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 					?.removeEventListener('submit', handleSubmitInIFrame);
 			}
 		};
-	}, []);
+	});
 
 	const srcDoc = `
 	<html>
