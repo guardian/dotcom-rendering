@@ -8,7 +8,6 @@ import {
 	Link,
 	TextInput,
 } from '@guardian/source-react-components';
-import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Island } from './Island';
 import { SecureSignupIframe } from './SecureSignupIframe.importable';
@@ -88,9 +87,11 @@ const generateForm = (
 	newsletterId: string,
 ): { html: string; styles: string } => {
 	const cache = createCache({ key: 'email-signup-iframe' });
-	// eslint-disable-next-line @typescript-eslint/unbound-method
+
+	// eslint-disable-next-line @typescript-eslint/unbound-method -- not a react method, 'this' binding not required?
 	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
 		createEmotionServer(cache);
+
 	const html = renderToString(
 		<CacheProvider value={cache}>
 			<form
