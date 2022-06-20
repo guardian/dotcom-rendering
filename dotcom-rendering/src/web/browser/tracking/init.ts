@@ -1,10 +1,12 @@
 import '../webpackPublicPath';
+import { scrollDepth } from '../../../web/experiments/tests/scroll-depth';
 import { startup } from '../startup';
+import { ab } from './ab';
 import { initScrollDepth } from './scrollDepth';
 
 /** Initialise tracking */
 const init = (): Promise<void> => {
-	initScrollDepth();
+	if (ab.isUserInVariant(scrollDepth.id, 'variant')) initScrollDepth();
 
 	return Promise.resolve();
 };

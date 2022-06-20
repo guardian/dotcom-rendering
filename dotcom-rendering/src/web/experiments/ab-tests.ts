@@ -6,6 +6,7 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from './tests/newsletter-merch-unit-test';
+import { scrollDepth } from './tests/scroll-depth';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 
@@ -19,4 +20,5 @@ export const tests: ABTest[] = [
 	newsletterMerchUnitLighthouseVariants,
 	commercialEndOfQuarter2Test,
 	commercialLazyLoadMarginReloaded,
+	scrollDepth,
 ];
