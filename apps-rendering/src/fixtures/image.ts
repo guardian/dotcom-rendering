@@ -2,7 +2,7 @@
 
 import { ArticleElementRole } from "@guardian/libs";
 import { some } from "@guardian/types";
-import type { Image } from "../image";
+import type { Image } from "image/image";
 
 // ----- Fixtures ----- //
 

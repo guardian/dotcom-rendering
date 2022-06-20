@@ -5,8 +5,8 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar, ArticleElementRole } from "@guardian/libs";
 import { none, some } from "@guardian/types";
 import type { FC } from "react";
-import { image } from "../fixtures/image";
-import BodyImage from "./bodyImage";
+import { image } from "fixtures/image";
+import BodyImage from ".";
 
 // ----- Setup ----- //
 
@@ -99,7 +99,7 @@ const ThumbnailNoCaption: FC = () => (
 
 export default {
   component: BodyImage,
-  title: "Common/Components/BodyImage",
+  title: "AR/BodyImage",
 };
 
 export { Default, NoCaption, Thumbnail, ThumbnailNoCaption };

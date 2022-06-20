@@ -10,12 +10,12 @@ import { ArticleElementRole } from "@guardian/libs";
 import type { Option } from "@guardian/types";
 import { none, some, withDefault } from "@guardian/types";
 import type { FC, ReactNode } from "react";
-import type { Image } from "../image";
-import { darkModeCss } from "../lib";
-import type { Lightbox } from "../lightbox";
-import type { Sizes } from "../sizes";
-import FigCaption from "./figCaption";
-import Img from "./img";
+import type { Image } from "image/image";
+import { darkModeCss } from "@guardian/common-rendering/src/lib";
+import type { Lightbox } from "image/lightbox";
+import type { Sizes } from "image/sizes";
+import FigCaption from "@guardian/common-rendering/src/components/figCaption";
+import Img from "components/ImgAlt";
 
 // ----- Setup ----- //
 

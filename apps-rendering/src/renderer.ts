@@ -11,7 +11,7 @@ import {
 	QandaAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
-import BodyImage from '@guardian/common-rendering/src/components/bodyImage';
+import BodyImage from 'components/BodyImage';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';

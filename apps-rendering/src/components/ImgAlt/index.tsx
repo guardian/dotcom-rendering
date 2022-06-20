@@ -8,12 +8,12 @@ import { ArticleDesign } from "@guardian/libs";
 import type { Option } from "@guardian/types";
 import { withDefault } from "@guardian/types";
 import type { FC } from "react";
-import type { Image } from "../image";
-import { darkModeCss } from "../lib";
-import type { Lightbox } from "../lightbox";
-import { getCaption, getClassName, getCredit } from "../lightbox";
-import { sizesAttribute, styles as sizeStyles } from "../sizes";
-import type { Sizes } from "../sizes";
+import type { Image } from "image/image";
+import { darkModeCss } from "@guardian/common-rendering/src/lib";
+import type { Lightbox } from "image/lightbox";
+import { getCaption, getClassName, getCredit } from "image/lightbox";
+import { sizesAttribute, styles as sizeStyles } from "image/sizes";
+import type { Sizes } from "image/sizes";
 
 // ----- Functions ----- //
 

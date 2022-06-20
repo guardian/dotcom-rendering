@@ -5,8 +5,8 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from "@guardian/libs";
 import { none } from "@guardian/types";
 import type { FC } from "react";
-import { image } from "../fixtures/image";
-import Img from "./img";
+import { image } from "fixtures/image";
+import Img from ".";
 
 // ----- Setup ----- //
 
@@ -53,7 +53,7 @@ const Placeholder: FC = () => (
 
 export default {
   component: Img,
-  title: "Common/Components/Img",
+  title: "AR/ImgAlt",
   parameters: {
     chromatic: { diffThreshold: 0.25 },
   },
