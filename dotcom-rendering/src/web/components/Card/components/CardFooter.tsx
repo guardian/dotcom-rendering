@@ -6,7 +6,7 @@ import { decidePalette } from '../../../lib/decidePalette';
 type Props = {
 	format: ArticleFormat;
 	containerPalette?: DCRContainerPalette;
-	renderLines?: boolean;
+	displayLines?: boolean;
 	age?: JSX.Element;
 	mediaMeta?: JSX.Element;
 	commentCount?: JSX.Element;
@@ -33,7 +33,7 @@ const flexEnd = css`
 export const CardFooter = ({
 	format,
 	containerPalette,
-	renderLines,
+	displayLines,
 	age,
 	mediaMeta,
 	commentCount,
@@ -56,7 +56,7 @@ export const CardFooter = ({
 				{supportingContent}
 				<div css={spaceBetween}>
 					{age}
-					{renderLines && (
+					{displayLines && (
 						<StraightLines
 							cssOverrides={css`
 								/* Fill the space */

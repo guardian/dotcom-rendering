@@ -111,12 +111,12 @@ const decideIfAgeShouldShow = ({
 const DecideFooter = ({
 	isOpinion,
 	hasSublinks,
-	renderAge,
+	displayAge,
 	renderFooter,
 }: {
 	isOpinion: boolean;
 	hasSublinks?: boolean;
-	renderAge: boolean;
+	displayAge: boolean;
 	renderFooter: Function;
 }) => {
 	if (isOpinion) {
@@ -124,8 +124,8 @@ const DecideFooter = ({
 			// Opinion cards with sublinks show their footers under the trailtext but
 			// without the lines, these sit by themselves at the bottom
 			return renderFooter({
-				renderAge,
-				renderLines: false,
+				displayAge,
+				displayLines: false,
 			});
 		} else {
 			// Opinion cards without sublinks render the whole footer including lines, outside, sitting along the very bottom of the card
@@ -134,8 +134,8 @@ const DecideFooter = ({
 	} else {
 		// Non opinion cards always show their footer underneath the headline/trail text
 		return renderFooter({
-			renderAge,
-			renderLines: false,
+			displayAge,
+			displayLines: false,
 		});
 	}
 };
@@ -143,12 +143,12 @@ const DecideFooter = ({
 const CommentFooter = ({
 	hasSublinks,
 	palette,
-	renderAge,
+	displayAge,
 	renderFooter,
 }: {
 	hasSublinks?: boolean;
 	palette: Palette;
-	renderAge: boolean;
+	displayAge: boolean;
 	renderFooter: Function;
 }) => {
 	return hasSublinks ? (
@@ -159,8 +159,8 @@ const CommentFooter = ({
 		// When an opinion card has no sublinks we show the entire footer, including lines
 		// outside, along the entire bottom of the card
 		renderFooter({
-			renderAge,
-			renderLines: true,
+			displayAge,
+			displayLines: true,
 		})
 	);
 };
@@ -207,19 +207,19 @@ export const Card = ({
 		format.design === ArticleDesign.Letter;
 
 	const renderFooter = ({
-		renderAge,
-		renderLines,
+		displayAge,
+		displayLines,
 	}: {
-		renderAge?: boolean;
-		renderLines?: boolean;
+		displayAge?: boolean;
+		displayLines?: boolean;
 	}) => {
 		return (
 			<CardFooter
 				format={format}
 				containerPalette={containerPalette}
-				renderLines={renderLines}
+				displayLines={displayLines}
 				age={
-					renderAge && webPublicationDate ? (
+					displayAge && webPublicationDate ? (
 						<CardAge
 							format={format}
 							containerPalette={containerPalette}
@@ -276,7 +276,7 @@ export const Card = ({
 		);
 	};
 
-	const renderAge = decideIfAgeShouldShow({
+	const displayAge = decideIfAgeShouldShow({
 		containerPalette,
 		format,
 		showAge,
@@ -382,7 +382,7 @@ export const Card = ({
 						<DecideFooter
 							isOpinion={isOpinion}
 							hasSublinks={hasSublinks}
-							renderAge={renderAge}
+							displayAge={displayAge}
 							renderFooter={renderFooter}
 						/>
 
@@ -411,7 +411,7 @@ export const Card = ({
 			)}
 			<CommentFooter
 				hasSublinks={hasSublinks}
-				renderAge={renderAge}
+				displayAge={displayAge}
 				palette={palette}
 				renderFooter={renderFooter}
 			/>
