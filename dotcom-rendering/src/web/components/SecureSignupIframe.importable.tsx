@@ -1,116 +1,35 @@
 import { css } from '@emotion/react';
 import { useEffect, useRef, useState } from 'react';
-
-type CaptchaIframeWindow = Window & {
-	grecaptcha?: {
-		execute: { (): void };
-		render: {
-			(el: Element | null, config: Record<string, unknown>): void;
-		};
-	};
-	openCaptcha: { (): void };
-	onCaptchaError: { (): void };
-	onCaptchaExpired: { (): void };
-	loadOrOpenCaptcha: { (): void };
-	onCaptchaCompleted: { (): void };
-	sendResizeMessage: { (height?: number): void };
-	onRecaptchaScriptLoaded: { (): void };
-};
-
-interface IframeRequest {
-	request: string;
-	height?: number;
-}
-
-function iframeScript(iframeWindow: CaptchaIframeWindow) {
-	iframeWindow.openCaptcha = function openCaptcha() {
-		// sendTrackingForCaptchaOpen();
-		iframeWindow.grecaptcha?.execute();
-		iframeWindow.sendResizeMessage(500);
-	};
-
-	iframeWindow.loadOrOpenCaptcha = function loadOrOpenCaptcha() {
-		if (!iframeWindow.grecaptcha) {
-			(function (d: Document) {
-				const script = d.createElement('script');
-				script.type = 'text/javascript';
-				script.async = true;
-				script.defer = true;
-				script.src =
-					'https://www.google.com/recaptcha/api.js?onload=onRecaptchaScriptLoaded&render=explicit';
-				d.getElementsByTagName('head')[0].appendChild(script);
-			})(document);
-		} else {
-			iframeWindow.openCaptcha();
-		}
-	};
-
-	iframeWindow.sendResizeMessage = function sendResizeMessage(
-		height?: number,
-	) {
-		const payload = {
-			request: 'resize_iframe',
-			height: height,
-		};
-		iframeWindow.postMessage(payload, '*');
-	};
-
-	iframeWindow.onRecaptchaScriptLoaded = function onRecaptchaScriptLoaded() {
-		const captchaContainer = document.querySelector(
-			'.grecaptcha_container',
-		);
-		const { page } = iframeWindow.parent.guardian.config;
-		const siteKey = page.googleRecaptchaSiteKey;
-
-		iframeWindow.grecaptcha?.render(captchaContainer, {
-			sitekey: siteKey,
-			callback: iframeWindow.onCaptchaCompleted,
-			'error-callback': iframeWindow.onCaptchaError,
-			'expired-callback': iframeWindow.onCaptchaExpired,
-			size: 'invisible',
-		});
-		iframeWindow.openCaptcha();
-	};
-
-	iframeWindow.onCaptchaCompleted = function onCaptchaCompleted() {
-		iframeWindow.sendResizeMessage();
-		// sendTrackingForFormSubmission();
-		document.querySelector('form')?.submit();
-	};
-
-	iframeWindow.onCaptchaError = function onCaptchaError() {
-		// sendTrackingForCaptchaError();
-		console.warn('onCaptchaError');
-		iframeWindow.sendResizeMessage();
-	};
-
-	iframeWindow.onCaptchaExpired = function onCaptchaExpired() {
-		// sendTrackingForCaptchaExpire();
-		iframeWindow.sendResizeMessage();
-	};
-}
-
-function validateMessage(data: unknown): IframeRequest | null {
-	if (!data || typeof data !== 'object') {
-		return null;
-	}
-
-	const message = data as IframeRequest;
-	if (typeof message.request !== 'string') {
-		return null;
-	}
-	return message;
-}
+import ReCAPTCHA from 'react-google-recaptcha';
 
 type Props = {
 	styles: string;
 	html: string;
+	newsletterId: string;
 };
 
-export const SecureSignupIframe = ({ styles, html }: Props) => {
+export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 
 	const [iframeHeight, setIFrameHeight] = useState<number>(0);
+	const [showCaptcha, setShowCaptcha] = useState<boolean>(false);
+	const [formDisabled, setFormDisabled] = useState<boolean>(false);
+	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>('');
+
+	const handleCaptchaComplete = (token: string | null) => {
+		if (!token) {
+			return;
+		}
+		const { current: iframe } = iframeRef;
+		const input: HTMLInputElement | null =
+			iframe?.contentDocument?.querySelector('input[type="email"]') ??
+			null;
+		const emailAddress: string = input?.value ?? '';
+
+		alert(
+			`TO DO: sign up ${emailAddress} to ${newsletterId}, and send frontend tracking`,
+		);
+	};
 
 	const resizeIframe = (requestedHeight = 0): void => {
 		const { current: iframe } = iframeRef;
@@ -131,6 +50,27 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 		resizeIframe();
 	};
 
+	const disableForm = (enable = false): void => {
+		const { current: iframe } = iframeRef;
+		const button = iframe?.contentDocument?.querySelector('button');
+		const form = iframe?.contentDocument?.querySelector('form');
+		const input = iframe?.contentDocument?.querySelector(
+			'input[type="email"]',
+		);
+
+		setFormDisabled(!enable);
+
+		if (enable) {
+			button?.removeAttribute('disabled');
+			input?.removeAttribute('disabled');
+			form?.removeAttribute('disabled');
+		} else {
+			button?.setAttribute('disabled', 'TRUE');
+			input?.setAttribute('disabled', 'TRUE');
+			form?.setAttribute('disabled', 'TRUE');
+		}
+	};
+
 	// add resize event listener to iframe window
 	useEffect(() => {
 		const { current: iframe } = iframeRef;
@@ -149,7 +89,7 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 		};
 	});
 
-	// populate the hidden form fields in the iframe
+	// initial resize, populate the hidden form fields in the iframe
 	useEffect(() => {
 		const { current: iframe } = iframeRef;
 		if (!iframe || !iframe.contentDocument) {
@@ -171,35 +111,27 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 		);
 	});
 
+	// read siteKey
+	useEffect(() => {
+		setCaptchaSiteKey(
+			window.guardian.config.page.googleRecaptchaSiteKey ?? '',
+		);
+	}, []);
+
 	// add event listeners to the iframe components
 	useEffect(() => {
 		const { current: iframe } = iframeRef;
-		const handleMessageFromIframe = (message: MessageEvent) => {
-			const validatedMessage = validateMessage(message.data);
-			if (!validatedMessage) {
-				return;
-			}
-			if (validatedMessage.request === 'resize_iframe') {
-				resizeIframe(validatedMessage.height);
-			}
-		};
+
 		const handleClickInIFrame = (event: Event) => {
 			console.log('click', event);
 		};
 		const handleSubmitInIFrame = (event: Event) => {
 			event.preventDefault();
-			if (iframe?.contentWindow) {
-				(
-					iframe.contentWindow as CaptchaIframeWindow
-				).loadOrOpenCaptcha();
-			}
+			disableForm(false);
+			setShowCaptcha(true);
 		};
 
 		if (iframe?.contentDocument && iframe.contentWindow) {
-			iframe.contentWindow.addEventListener(
-				'message',
-				handleMessageFromIframe,
-			);
 			iframe.contentDocument
 				.querySelector('button')
 				?.addEventListener('click', handleClickInIFrame);
@@ -210,10 +142,6 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 
 		return () => {
 			if (iframe?.contentDocument && iframe.contentWindow) {
-				iframe.contentWindow.removeEventListener(
-					'message',
-					handleMessageFromIframe,
-				);
 				iframe.contentDocument
 					.querySelector('button')
 					?.removeEventListener('click', handleClickInIFrame);
@@ -230,10 +158,6 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 			${styles}
 		</head>
 		<body style="margin: 0;">${html}</body>
-		<script>
-		const iframeScript = ${iframeScript.toString()};
-		iframeScript(window);
-		</script>
 	</html>`;
 
 	return (
@@ -248,8 +172,17 @@ export const SecureSignupIframe = ({ styles, html }: Props) => {
 				`}
 				style={{
 					height: iframeHeight,
+					filter: formDisabled ? 'brightness(.25)' : undefined, // to do - add disabled styling srcDoc css
 				}}
 			/>
+			{showCaptcha && (
+				<div>
+					<ReCAPTCHA
+						sitekey={captchaSiteKey}
+						onChange={handleCaptchaComplete}
+					/>
+				</div>
+			)}
 		</>
 	);
 };

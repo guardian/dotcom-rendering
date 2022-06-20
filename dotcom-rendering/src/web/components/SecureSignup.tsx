@@ -160,7 +160,11 @@ export const SecureSignup = ({ newsletterId }: Props) => {
 	return (
 		<>
 			<Island clientOnly={true} deferUntil={'idle'}>
-				<SecureSignupIframe html={html} styles={styles} />
+				<SecureSignupIframe
+					html={html}
+					styles={styles}
+					newsletterId={newsletterId}
+				/>
 			</Island>
 			<PrivacyTerms />
 			<RecaptchaTerms />
