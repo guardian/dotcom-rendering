@@ -1,8 +1,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import ImageDetails from '@guardian/common-rendering/src/components/imageDetails';
-import Img from '@guardian/common-rendering/src/components/img';
-import type { Sizes } from '@guardian/common-rendering/src/sizes';
+import Img from 'components/ImgAlt';
+import type { Sizes } from 'image/sizes';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import { from, remSpace } from '@guardian/source-foundations';

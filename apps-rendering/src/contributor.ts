@@ -4,7 +4,7 @@ import {
 	Dpr,
 	src,
 	srcsetWithWidths,
-} from '@guardian/common-rendering/src/srcsets';
+} from 'image/srcsets';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { ArticleElementRole } from '@guardian/libs';
