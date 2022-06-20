@@ -6,16 +6,20 @@ import Img from '@guardian/common-rendering/src/components/img';
 import {
 	background,
 	border,
+	fill,
+	text,
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 import {
 	from,
 	headline,
-	neutral,
-	opinion,
 	remSpace,
-	text,
 	textSans,
 } from '@guardian/source-foundations';
 import {
@@ -40,7 +44,7 @@ import type { Image } from 'image';
 import { maybeRender, pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
-import { getThemeStyles, themeFromString } from 'themeStyles';
+import { themeFromString } from 'themeStyles';
 
 interface Props {
 	relatedItem: RelatedItem;
@@ -126,14 +130,17 @@ const imgStyles = css`
 	border-radius: ${remSpace[2]};
 `;
 
-const timeStyles = (type: RelatedItemType): SerializedStyles => {
+const timeStyles = (
+	type: RelatedItemType,
+	format: ArticleFormat,
+): SerializedStyles => {
 	switch (type) {
 		case RelatedItemType.VIDEO:
 		case RelatedItemType.AUDIO:
 		case RelatedItemType.GALLERY: {
 			return css`
 				${textSans.small()};
-				color: ${text.ctaPrimary};
+				color: ${text.relatedCardTimeAgo(format)};
 				text-align: right;
 				display: inline-block;
 				vertical-align: top;
@@ -143,7 +150,7 @@ const timeStyles = (type: RelatedItemType): SerializedStyles => {
 		default:
 			return css`
 				${textSans.small()};
-				color: ${text.supporting};
+				color: ${text.relatedCardTimeAgo(format)};
 				text-align: right;
 				display: inline-block;
 				vertical-align: top;
@@ -160,11 +167,11 @@ const dateStyles = css`
 	float: right;
 `;
 
-const anchorStyles = css`
-	color: ${neutral[7]};
+const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
+	color: ${text.relatedCardLink(format)};
 	text-decoration: none;
 	${darkModeCss`
-        color: ${neutral[86]};
+		color: ${text.relatedCardLinkDark(format)};
     `}
 	display: flex;
 	flex-direction: column;
@@ -216,18 +223,19 @@ const imageWrapperStyles = css`
 	position: relative;
 `;
 
-const imageBackground = css`
-	background: ${neutral[86]};
+const imageBackground = (format: ArticleFormat): SerializedStyles => css`
+	background: ${background.relatedCardImage(format)};
 `;
 
 const relativeFirstPublished = (
 	date: Option<Date>,
 	type: RelatedItemType,
+	format: ArticleFormat,
 ): JSX.Element | null =>
 	pipe(
 		date,
 		map((date) => (
-			<time css={[timeStyles(type), dateStyles]}>
+			<time css={[timeStyles(type, format), dateStyles]}>
 				{makeRelativeDate(date)}
 			</time>
 		)),
@@ -245,7 +253,7 @@ const cardStyles = (
 			return css`
 				background: ${background.relatedCard(format)};
 				h3 {
-					color: ${text.ctaPrimary};
+					color: ${text.relatedCard(format)};
 				}
 				${darkModeCss`
 					background: ${background.relatedCardDark(format)};
@@ -262,7 +270,7 @@ const cardStyles = (
 				background: ${background.relatedCard(format)};
 				h3,
 				time {
-					color: ${text.ctaPrimary};
+					color: ${text.relatedCard(format)};
 				}
 				${darkModeCss`
                     background: ${background.relatedCardDark(format)};
@@ -281,6 +289,9 @@ const cardStyles = (
 			return css`
 				background-color: ${background.relatedCard(format)};
 				${headline.xxsmall()}
+				${darkModeCss`
+					background: ${background.relatedCardDark(format)};
+        		`}
 			`;
 		}
 
@@ -309,25 +320,30 @@ const parentIconStyles: SerializedStyles = css`
 `;
 
 const iconStyles = (format: ArticleFormat): SerializedStyles => {
-	const { inverted } = getThemeStyles(format.theme);
 	return css`
 		width: 1.5rem;
 		height: 1.5rem;
 		display: inline-block;
-		background-color: ${inverted};
+		background-color: ${background.relatedCardIcon(format)};
 		border-radius: 50%;
 		margin-top: -${remSpace[1]};
 	`;
 };
 
-const commentIconStyle: SerializedStyles = css`
+const commentIconStyle = (format: ArticleFormat): SerializedStyles => css`
 	width: 1.5rem;
 	height: 1.5rem;
 	display: inline-block;
-	fill: ${opinion[400]};
 	vertical-align: text-bottom;
 	margin-bottom: -3px;
 	margin-left: -3px;
+
+	svg {
+		fill: ${fill.icon(format)};
+		${darkModeCss`
+			fill: ${fill.iconDark(format)};
+		`}
+	}
 
 	${from.desktop} {
 		width: 1.688rem;
@@ -369,7 +385,7 @@ const quotationComment = (
 ): ReactElement | null => {
 	if (type === RelatedItemType.COMMENT) {
 		return (
-			<span css={commentIconStyle}>
+			<span css={commentIconStyle(format)}>
 				<SvgQuote />
 			</span>
 		);
@@ -383,14 +399,18 @@ const metadataStyles: SerializedStyles = css`
 	height: ${remSpace[6]};
 `;
 
-const bylineStyles: SerializedStyles = css`
-	color: ${opinion[400]};
+const bylineStyles = (format: ArticleFormat): SerializedStyles => css`
+	color: ${text.bylineAnchor(format)};
 	font-style: italic;
+	${darkModeCss`
+		color: ${text.bylineAnchorDark(format)};
+	`}
 `;
 
 const durationMedia = (
 	duration: Option<string>,
 	type: RelatedItemType,
+	format: ArticleFormat,
 ): ReactElement | null => {
 	return pipe(
 		duration,
@@ -398,7 +418,7 @@ const durationMedia = (
 			const seconds = formatSeconds(length);
 			if (seconds.kind === OptionKind.Some) {
 				return (
-					<time css={[timeStyles(type), durationStyles]}>
+					<time css={[timeStyles(type, format), durationStyles]}>
 						{seconds.value}
 					</time>
 				);
@@ -412,6 +432,7 @@ const durationMedia = (
 
 const cardByline = (
 	type: RelatedItemType,
+	format: ArticleFormat,
 	byline?: string,
 ): ReactElement | null => {
 	if (type !== RelatedItemType.COMMENT) {
@@ -421,7 +442,7 @@ const cardByline = (
 	return pipe(
 		fromNullable(byline),
 		map((byline) => {
-			return <div css={bylineStyles}>{byline}</div>;
+			return <div css={bylineStyles(format)}>{byline}</div>;
 		}),
 		withDefault<ReactElement | null>(null),
 	);
@@ -459,7 +480,7 @@ const cardImage = (
 			);
 		}),
 		withDefault<ReactElement | null>(
-			<div css={[imageWrapperStyles, imageBackground]}></div>,
+			<div css={[imageWrapperStyles, imageBackground(format)]}></div>,
 		),
 	);
 };
@@ -537,7 +558,10 @@ const formatFromRelatedItem = (
 		case RelatedItemType.COMMENT:
 			return {
 				design: ArticleDesign.Comment,
-				theme: themeFromString(pillar),
+				theme:
+					pillar === 'pillar/news'
+						? ArticlePillar.Opinion
+						: themeFromString(pillar),
 				display: ArticleDisplay.Standard,
 			};
 	}
@@ -558,6 +582,7 @@ const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
 			? relativeFirstPublished(
 					fromNullable(new Date(webPublicationDate)),
 					type,
+					format,
 			  )
 			: null;
 	const starRating =
@@ -574,7 +599,10 @@ const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
 			data-article-id={link}
 			css={[listStyles(type, format), cardStyles(type, format)]}
 		>
-			<a css={anchorStyles} href={`https://theguardian.com/${link}`}>
+			<a
+				css={anchorStyles(format)}
+				href={`https://theguardian.com/${link}`}
+			>
 				<section css={headingWrapperStyles(type, format)}>
 					<h3 css={headingStyles(type)}>
 						{quotationComment(type, format)}
@@ -585,7 +613,7 @@ const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
 							),
 						)}
 						{title}
-						{cardByline(type, byline)}
+						{cardByline(type, format, byline)}
 					</h3>
 					{starRating}
 				</section>
@@ -594,7 +622,11 @@ const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
 						<section css={parentIconStyles}>
 							{icon(type, format)}
 						</section>
-						{durationMedia(fromNullable(mediaDuration), type)}
+						{durationMedia(
+							fromNullable(mediaDuration),
+							type,
+							format,
+						)}
 						{date}
 					</div>
 					{img}
@@ -605,3 +637,4 @@ const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
 };
 
 export default Card;
+export { formatFromRelatedItem };

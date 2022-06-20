@@ -297,6 +297,25 @@ const avatar = (format: ArticleFormat): string => {
 			return news[500];
 	}
 };
+
+const relatedCardBylineImage = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[500];
+		case ArticlePillar.News:
+		default:
+			return opinion[400];
+	}
+};
+
 const keyEvents = (_format: ArticleFormat): Colour => neutral[100];
 
 const keyEventsWide = (format: ArticleFormat): Colour => {
@@ -390,6 +409,29 @@ const relatedCardDark = (format: ArticleFormat): Colour => {
 	return neutral[0];
 };
 
+const relatedCardIcon = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[500];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[500];
+		case ArticlePillar.Sport:
+			return sport[500];
+		case ArticlePillar.Culture:
+			return culture[500];
+		case ArticlePillar.Opinion:
+			return opinion[500];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[500];
+	}
+};
+
+const relatedCardImage = (_format: ArticleFormat): Colour => {
+	return neutral[86];
+};
+
 const supportBanner = (_format: ArticleFormat): Colour => {
 	return brandAlt[400];
 };
@@ -418,6 +460,9 @@ const background = {
 	keyEventsWideDark,
 	relatedCard,
 	relatedCardDark,
+	relatedCardIcon,
+	relatedCardImage,
+	relatedCardBylineImage,
 	richLink,
 	richLinkDark,
 	richLinkSvg,

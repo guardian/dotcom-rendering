@@ -645,6 +645,28 @@ const seriesTitle = (format: ArticleFormat): Colour => {
 	}
 };
 
+const relatedCard = (_format: ArticleFormat): Colour => {
+	return neutral[100];
+};
+
+const relatedCardLink = (_format: ArticleFormat): Colour => {
+	return neutral[7];
+};
+
+const relatedCardLinkDark = (_format: ArticleFormat): Colour => {
+	return neutral[86];
+};
+
+const relatedCardTimeAgo = (format: ArticleFormat): Colour => {
+	switch (format.design) {
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Gallery:
+			return neutral[100];
+	}
+	return neutral[46];
+};
+
 const richLink = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -739,6 +761,10 @@ const text = {
 	keyEventsLeftColumn,
 	kicker,
 	linkDark,
+	relatedCard,
+	relatedCardLink,
+	relatedCardLinkDark,
+	relatedCardTimeAgo,
 	richLink,
 	richLinkAnchor,
 	richLinkAnchorDark,
