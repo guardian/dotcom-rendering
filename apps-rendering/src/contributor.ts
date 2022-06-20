@@ -1,10 +1,5 @@
 // ----- Imports ----- //
 
-import {
-	Dpr,
-	src,
-	srcsetWithWidths,
-} from 'image/srcsets';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { ArticleElementRole } from '@guardian/libs';
@@ -12,6 +7,7 @@ import type { Option } from '@guardian/types';
 import { fromNullable, map, none } from '@guardian/types';
 import { articleContributors } from 'capi';
 import type { Image } from 'image';
+import { Dpr, src, srcsetWithWidths } from 'image/srcsets';
 import { pipe } from 'lib';
 
 // ------ Types ----- //

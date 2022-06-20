@@ -1,5 +1,3 @@
-/* eslint-disable import/no-default-export -- exclude stories for this rule */
-
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
