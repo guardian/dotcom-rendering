@@ -104,7 +104,6 @@ const listStyles = (
 
 				${darkModeCss`
 					border-top: 1px solid ${border.relatedCardDark(format)};
-
         		`}
 			`;
 		}
@@ -273,7 +272,7 @@ const cardStyles = (
 
 		case RelatedItemType.ADVERTISEMENT_FEATURE: {
 			return css`
-				background-color: ${background.relatedCardDark(format)};
+				background-color: ${background.relatedCard(format)};
 				${textSans.large()}
 			`;
 		}
