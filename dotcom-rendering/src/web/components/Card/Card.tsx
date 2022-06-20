@@ -108,6 +108,63 @@ const decideIfAgeShouldShow = ({
 	return false;
 };
 
+const DecideFooter = ({
+	isOpinion,
+	hasSublinks,
+	renderAge,
+	renderFooter,
+}: {
+	isOpinion: boolean;
+	hasSublinks?: boolean;
+	renderAge: boolean;
+	renderFooter: Function;
+}) => {
+	if (isOpinion) {
+		if (hasSublinks) {
+			// Opinion cards with sublinks show their footers under the trailtext but
+			// without the lines, these sit by themselves at the bottom
+			return renderFooter({
+				renderAge,
+				renderLines: false,
+			});
+		} else {
+			// Opinion cards without sublinks render the whole footer including lines, outside, sitting along the very bottom of the card
+			return null;
+		}
+	} else {
+		// Non opinion cards always show their footer underneath the headline/trail text
+		return renderFooter({
+			renderAge,
+			renderLines: false,
+		});
+	}
+};
+
+const CommentFooter = ({
+	hasSublinks,
+	palette,
+	renderAge,
+	renderFooter,
+}: {
+	hasSublinks?: boolean;
+	palette: Palette;
+	renderAge: boolean;
+	renderFooter: Function;
+}) => {
+	return hasSublinks ? (
+		// For opinion cards with sublinks there is already a footer rendered inside that
+		// shows the metadata. We only want to render the lines here
+		<StraightLines color={palette.border.lines} count={4} />
+	) : (
+		// When an opinion card has no sublinks we show the entire footer, including lines
+		// outside, along the entire bottom of the card
+		renderFooter({
+			renderAge,
+			renderLines: true,
+		})
+	);
+};
+
 export const Card = ({
 	linkTo,
 	format,
@@ -322,30 +379,12 @@ export const Card = ({
 								</AvatarContainer>
 							</Hide>
 						)}
-						{/* INSIDE FOOTER */}
-						{isOpinion ? (
-							<>
-								{hasSublinks ? (
-									// Opinion cards with sublinks show their footers under the trailtext but
-									// without the lines, these sit by themselves at the bottom
-									renderFooter({
-										renderAge,
-										renderLines: false,
-									})
-								) : (
-									<>
-										{/* Opinion cards without sublinks render the whole footer including
-											lines, outside, sitting along the very bottom of the card */}
-									</>
-								)}
-							</>
-						) : (
-							// Non opinion cards always show their footer underneath the headline/trail text
-							renderFooter({
-								renderAge,
-								renderLines: false,
-							})
-						)}
+						<DecideFooter
+							isOpinion={isOpinion}
+							hasSublinks={hasSublinks}
+							renderAge={renderAge}
+							renderFooter={renderFooter}
+						/>
 
 						{hasSublinks && noOfSublinks <= 2 ? (
 							<SupportingContent
@@ -370,25 +409,12 @@ export const Card = ({
 			) : (
 				<></>
 			)}
-			{/* OUTSIDE FOOTER */}
-			{isOpinion ? (
-				<>
-					{hasSublinks ? (
-						// For opinion cards with sublinks there is already a footer rendered inside that
-						// shows the metadata. We only want to render the lines here
-						<StraightLines color={palette.border.lines} count={4} />
-					) : (
-						// When an opinion card has no sublinks we show the entire footer, including lines
-						// outside, along the entire bottom of the card
-						renderFooter({
-							renderAge,
-							renderLines: true,
-						})
-					)}
-				</>
-			) : (
-				<>{/* Non opinion cards never render a footer here */}</>
-			)}
+			<CommentFooter
+				hasSublinks={hasSublinks}
+				renderAge={renderAge}
+				palette={palette}
+				renderFooter={renderFooter}
+			/>
 		</CardWrapper>
 	);
 };
