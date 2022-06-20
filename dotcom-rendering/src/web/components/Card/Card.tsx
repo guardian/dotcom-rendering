@@ -409,12 +409,14 @@ export const Card = ({
 			) : (
 				<></>
 			)}
-			<CommentFooter
-				hasSublinks={hasSublinks}
-				displayAge={displayAge}
-				palette={palette}
-				renderFooter={renderFooter}
-			/>
+			{isOpinion && (
+				<CommentFooter
+					hasSublinks={hasSublinks}
+					displayAge={displayAge}
+					palette={palette}
+					renderFooter={renderFooter}
+				/>
+			)}
 		</CardWrapper>
 	);
 };
