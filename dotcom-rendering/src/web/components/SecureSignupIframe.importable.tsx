@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
-import { InlineError, InlineSuccess } from '@guardian/source-react-components';
+import {
+	InlineError,
+	InlineSuccess,
+	SvgSpinner,
+} from '@guardian/source-react-components';
 import { useEffect, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
@@ -60,7 +64,8 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 	const recaptchaRef = useRef<ReCAPTCHA>(null);
 
 	const [iframeHeight, setIFrameHeight] = useState<number>(0);
-	const [formDisabled, setFormDisabled] = useState<boolean>(false);
+	const [isWaitingForResponse, setIsWaitingForResponse] =
+		useState<boolean>(false);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>('');
 	const [responseText, setResponseText] = useState<string | undefined>(
 		undefined,
@@ -69,7 +74,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 		undefined,
 	);
 
-	const handleForm = async (token: string): Promise<void> => {
+	const sumbitForm = async (token: string): Promise<void> => {
 		const { current: iframe } = iframeRef;
 		const input: HTMLInputElement | null =
 			iframe?.contentDocument?.querySelector('input[type="email"]') ??
@@ -81,15 +86,18 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 			buildFormData(emailAddress, newsletterId, token),
 		);
 		const text = await response.text();
+		setIsWaitingForResponse(false);
 		setResponseText(text);
 		setResponseOk(response.ok);
 	};
 
 	const handleCaptchaComplete = (token: string | null) => {
 		if (!token) {
-			return; // failed challenge? expired?
+			return;
 		}
-		handleForm(token).catch((error) => {
+
+		setIsWaitingForResponse(true);
+		sumbitForm(token).catch((error) => {
 			console.error(error);
 		});
 	};
@@ -120,9 +128,6 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 		const input = iframe?.contentDocument?.querySelector(
 			'input[type="email"]',
 		);
-
-		setFormDisabled(!enable);
-
 		if (enable) {
 			button?.removeAttribute('disabled');
 			input?.removeAttribute('disabled');
@@ -193,7 +198,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 		};
 	});
 
-	const hadResponse = typeof responseOk === 'boolean';
+	const hasResponse = typeof responseOk === 'boolean';
 
 	if (!captchaSiteKey) {
 		return null;
@@ -210,8 +215,8 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 				`}
 				style={{
 					height: iframeHeight,
-					display: hadResponse ? 'none' : 'block',
-					filter: formDisabled ? 'brightness(.25)' : undefined, // to do - add disabled styling srcDoc css
+					display:
+						hasResponse || isWaitingForResponse ? 'none' : 'block',
 				}}
 				srcDoc={`
 				<html>
@@ -222,7 +227,13 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 				</html>`}
 			/>
 
-			{hadResponse && (
+			{isWaitingForResponse && (
+				<div>
+					<SvgSpinner isAnnouncedByScreenReader={true} size="small" />
+				</div>
+			)}
+
+			{hasResponse && (
 				<div>
 					{responseOk ? (
 						<InlineSuccess>{responseText}</InlineSuccess>
@@ -239,7 +250,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 					}
 				`}
 			>
-				<ReCAPTCHA
+				<ReCAPTCHA // TO DO - EXPIRED AND ERROR callbacks
 					sitekey={captchaSiteKey}
 					ref={recaptchaRef}
 					onChange={handleCaptchaComplete}
