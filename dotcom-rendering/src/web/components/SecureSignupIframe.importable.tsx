@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { InlineError, InlineSuccess } from '@guardian/source-react-components';
 import { useEffect, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
@@ -30,7 +31,7 @@ const buildFormData = (
 	return formData;
 };
 
-const submitForm = async (
+const postFormData = async (
 	endpoint: string,
 	formData: FormData,
 ): Promise<Response> => {
@@ -56,29 +57,41 @@ const submitForm = async (
 
 export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
+	const recaptchaRef = useRef<ReCAPTCHA>(null);
 
 	const [iframeHeight, setIFrameHeight] = useState<number>(0);
-	const [showCaptcha, setShowCaptcha] = useState<boolean>(false);
 	const [formDisabled, setFormDisabled] = useState<boolean>(false);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>('');
+	const [responseText, setResponseText] = useState<string | undefined>(
+		undefined,
+	);
+	const [responseOk, setResponseOk] = useState<boolean | undefined>(
+		undefined,
+	);
 
-	const handleCaptchaComplete = async (token: string | null) => {
-		if (!token) {
-			return; // failed challenge? expired?
-		}
+	const handleForm = async (token: string): Promise<void> => {
 		const { current: iframe } = iframeRef;
 		const input: HTMLInputElement | null =
 			iframe?.contentDocument?.querySelector('input[type="email"]') ??
 			null;
 		const emailAddress: string = input?.value ?? '';
 
-		const endpoint = window.guardian.config.page.ajaxUrl + '/email';
-		const formData = buildFormData(emailAddress, newsletterId, token);
-		const response = await submitForm(endpoint, formData);
-
-		console.log(response);
+		const response = await postFormData(
+			window.guardian.config.page.ajaxUrl + '/email',
+			buildFormData(emailAddress, newsletterId, token),
+		);
 		const text = await response.text();
-		console.log(text);
+		setResponseText(text);
+		setResponseOk(response.ok);
+	};
+
+	const handleCaptchaComplete = (token: string | null) => {
+		if (!token) {
+			return; // failed challenge? expired?
+		}
+		handleForm(token).catch((error) => {
+			console.error(error);
+		});
 	};
 
 	const resizeIframe = (requestedHeight = 0): void => {
@@ -139,15 +152,6 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 		};
 	});
 
-	// initial resize
-	useEffect(() => {
-		const { current: iframe } = iframeRef;
-		if (!iframe || !iframe.contentDocument) {
-			return;
-		}
-		resizeIframe();
-	});
-
 	// read siteKey
 	useEffect(() => {
 		setCaptchaSiteKey(
@@ -165,7 +169,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 		const handleSubmitInIFrame = (event: Event) => {
 			event.preventDefault();
 			disableForm(false);
-			setShowCaptcha(true);
+			recaptchaRef.current?.execute();
 		};
 
 		if (iframe?.contentDocument && iframe.contentWindow) {
@@ -189,19 +193,16 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 		};
 	});
 
-	const srcDoc = `
-	<html>
-		<head>
-			${styles}
-		</head>
-		<body style="margin: 0;">${html}</body>
-	</html>`;
+	const hadResponse = typeof responseOk === 'boolean';
+
+	if (!captchaSiteKey) {
+		return null;
+	}
 
 	return (
 		<>
 			<iframe
 				ref={iframeRef}
-				srcDoc={srcDoc}
 				css={css`
 					width: 100%;
 					min-height: 90px;
@@ -209,17 +210,42 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 				`}
 				style={{
 					height: iframeHeight,
+					display: hadResponse ? 'none' : 'block',
 					filter: formDisabled ? 'brightness(.25)' : undefined, // to do - add disabled styling srcDoc css
 				}}
+				srcDoc={`
+				<html>
+					<head>
+						${styles}
+					</head>
+					<body style="margin: 0;">${html}</body>
+				</html>`}
 			/>
-			{showCaptcha && (
+
+			{hadResponse && (
 				<div>
-					<ReCAPTCHA
-						sitekey={captchaSiteKey}
-						onChange={handleCaptchaComplete}
-					/>
+					{responseOk ? (
+						<InlineSuccess>{responseText}</InlineSuccess>
+					) : (
+						<InlineError>{responseText}</InlineError>
+					)}
 				</div>
 			)}
+
+			<div
+				css={css`
+					.grecaptcha-badge {
+						visibility: hidden;
+					}
+				`}
+			>
+				<ReCAPTCHA
+					sitekey={captchaSiteKey}
+					ref={recaptchaRef}
+					onChange={handleCaptchaComplete}
+					size="invisible"
+				/>
+			</div>
 		</>
 	);
 };

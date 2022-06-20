@@ -135,9 +135,6 @@ const generateForm = (
 							margin-top: ${space[2]}px;
 						`}
 						type="submit"
-						className="g-recaptcha"
-						data-sitekey="your_site_key"
-						data-callback="onSubmit"
 					>
 						Sign up
 					</Button>
