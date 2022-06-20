@@ -10,6 +10,7 @@ import { CardHeadline } from '../CardHeadline';
 import { Flex } from '../Flex';
 import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
+import { Snap } from '../Snap';
 import { StarRating } from '../StarRating/StarRating';
 import { SupportingContent } from '../SupportingContent';
 import { AvatarContainer } from './components/AvatarContainer';
@@ -23,7 +24,6 @@ import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
 import { TrailTextWrapper } from './components/TrailTextWrapper';
-import { Snap } from '../Snap';
 
 export type Props = {
 	linkTo: string;
@@ -120,7 +120,7 @@ export const Card = ({
 	imageUrl,
 	imagePosition = 'top',
 	imagePositionOnMobile = 'left',
-	imageSize,
+	imageSize = 'small',
 	trailText,
 	avatar,
 	showClock,
