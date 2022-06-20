@@ -247,17 +247,17 @@ export const ImageComponent = ({
 	)?.url;
 
 	// Legacy images do not have a master so we fallback to the largest available
-	function descendingByWidth(a: Image, b: Image) {
+	const descendingByWidth = (a: Image, b: Image) => {
 		return parseInt(b.fields.width) - parseInt(a.fields.width);
-	}
+	};
 	const fallbackImage =
 		element.media.allImages.sort(descendingByWidth)[0].url;
 
-	function isSupported(imageUrl: string) {
+	const isSupported = (imageUrl: string) => {
 		const supportedImages = ['jpg', 'jpeg', 'png'];
 		const extension = imageUrl.split('.').pop();
 		return extension && supportedImages.includes(extension);
-	}
+	};
 	if (!isSupported(master || fallbackImage)) {
 		// We should only try to render images that are supported by Fastly
 		return null;

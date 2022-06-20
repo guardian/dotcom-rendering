@@ -35,7 +35,7 @@ type ImageWidthType = { breakpoint: number; width: number };
  * prior to use.
  *
  */
-function decideImageWidths({
+const decideImageWidths = ({
 	role,
 	isMainMedia,
 	format,
@@ -43,7 +43,7 @@ function decideImageWidths({
 	role: RoleType;
 	isMainMedia?: boolean;
 	format: ArticleFormat;
-}): ImageWidthType[] {
+}): ImageWidthType[] => {
 	if (isMainMedia) {
 		switch (role) {
 			case 'showcase':
@@ -159,7 +159,7 @@ function decideImageWidths({
 				];
 		}
 	}
-}
+};
 
 /**
  * Generates a url for calling the Fastly Image Optimiser
@@ -167,7 +167,7 @@ function decideImageWidths({
  * @see {@link https://developer.fastly.com/reference/io/}
  *
  */
-function generateSignedUrl({
+const generateSignedUrl = ({
 	master,
 	imageWidth,
 	quality,
@@ -175,12 +175,12 @@ function generateSignedUrl({
 	master: string;
 	imageWidth: number;
 	quality: 'low' | 'high';
-}): string {
-	function sign(salt: string, path: string): string {
+}): string => {
+	const sign = (salt: string, path: string): string => {
 		return createHash('md5')
 			.update(salt + path)
 			.digest('hex');
-	}
+	};
 
 	const salt = process.env.IMAGE_SALT;
 	if (!salt && process.env.NODE_ENV === 'production' && !process.env.CI) {
@@ -208,13 +208,13 @@ function generateSignedUrl({
 	const path = `${url.pathname}?${params.toString()}`;
 	const sig = sign(salt, path);
 	return `https://i.guim.co.uk/img/${service}${path}&s=${sig}`;
-}
+};
 
-function descendingByBreakpoint(a: ImageWidthType, b: ImageWidthType) {
+const descendingByBreakpoint = (a: ImageWidthType, b: ImageWidthType) => {
 	// We need to list the largest images first as browsers read top down and stop
 	// as soon as they hit a matching media query
 	return b.breakpoint - a.breakpoint;
-}
+};
 
 export const Picture = ({
 	role,
