@@ -162,7 +162,7 @@ export const Card = ({
 				containerPalette={containerPalette}
 				renderLines={renderLines}
 				age={
-					webPublicationDate ? (
+					renderAge && webPublicationDate ? (
 						<CardAge
 							format={format}
 							containerPalette={containerPalette}
