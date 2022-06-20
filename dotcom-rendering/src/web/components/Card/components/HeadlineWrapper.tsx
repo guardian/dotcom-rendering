@@ -7,7 +7,7 @@ type Props = {
 export const HeadlineWrapper = ({ children }: Props) => (
 	<div
 		css={css`
-			padding-bottom: 4px;
+			padding-bottom: 8px;
 			padding-left: 5px;
 			padding-right: 5px;
 			padding-top: 1px;
