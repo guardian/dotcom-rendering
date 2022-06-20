@@ -1,9 +1,9 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from "@emotion/react";
-import { css } from "@emotion/react";
-import type { Breakpoint } from "@guardian/source-foundations";
-import { breakpoints, from } from "@guardian/source-foundations";
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import type { Breakpoint } from '@guardian/source-foundations';
+import { breakpoints, from } from '@guardian/source-foundations';
 
 // ----- Types ----- //
 
@@ -27,9 +27,9 @@ const sizesAttribute = (sizes: Sizes): string => {
 	const queries = sizes.mediaQueries
 		.map(
 			(query) =>
-				`(min-width: ${breakpoints[query.breakpoint]}px) ${query.size}`
+				`(min-width: ${breakpoints[query.breakpoint]}px) ${query.size}`,
 		)
-		.join(", ");
+		.join(', ');
 
 	return `${queries}, ${sizes.default}`;
 };
@@ -42,7 +42,7 @@ const dimensions = (size: string, ratio: number): SerializedStyles => css`
 const styles = (
 	sizes: Sizes,
 	width: number,
-	height: number
+	height: number,
 ): SerializedStyles => {
 	const ratio = height / width;
 
@@ -54,7 +54,7 @@ const styles = (
 				${from[query.breakpoint]} {
 					${dimensions(query.size, ratio)}
 				}
-			`
+			`,
 		)}
 	`;
 };

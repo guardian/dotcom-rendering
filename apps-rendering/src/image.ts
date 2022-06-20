@@ -1,13 +1,13 @@
 // ----- Imports ----- //
 
 import type { Image as CardImage } from '@guardian/apps-rendering-api-models/image';
-import type { Image as ImageData } from 'image/image';
-import { Dpr, src, srcsets } from 'image/srcsets';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ArticleElementRole } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import { andThen, fromNullable, map, none, some } from '@guardian/types';
+import type { Image as ImageData } from 'image/image';
+import { Dpr, src, srcsets } from 'image/srcsets';
 import { pipe } from 'lib';
 import type { Context } from 'parserContext';
 import type { ReactNode } from 'react';
