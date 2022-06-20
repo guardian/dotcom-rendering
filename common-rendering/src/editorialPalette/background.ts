@@ -331,6 +331,65 @@ const headlineTag = (format: ArticleFormat): Colour => {
 	}
 };
 
+const relatedCard = (format: ArticleFormat): Colour => {
+
+	if (format.theme === ArticleSpecial.Labs) {
+		return neutral[93];
+	}
+
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[200];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[200];
+				case ArticlePillar.Sport:
+					return sport[200];
+				case ArticlePillar.Culture:
+					return culture[200];
+				case ArticlePillar.Opinion:
+					return opinion[200];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[200];
+			}
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Gallery:
+			return neutral[10];
+	}
+
+	return neutral[97];
+};
+
+const relatedCardDark = (format: ArticleFormat): Colour => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[100];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[100];
+				case ArticlePillar.Sport:
+					return sport[100];
+				case ArticlePillar.Culture:
+					return culture[100];
+				case ArticlePillar.Opinion:
+					return opinion[100];
+				case ArticleSpecial.Labs:
+					return labs[200];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[100];
+			}
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Gallery:
+			return neutral[10];
+	}
+
+	return neutral[0];
+};
+
 const supportBanner = (_format: ArticleFormat): Colour => {
 	return brandAlt[400];
 };
@@ -357,6 +416,8 @@ const background = {
 	keyEventsWide,
 	keyEventsDark,
 	keyEventsWideDark,
+	relatedCard,
+	relatedCardDark,
 	richLink,
 	richLinkDark,
 	richLinkSvg,

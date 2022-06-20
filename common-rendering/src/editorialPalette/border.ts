@@ -77,6 +77,14 @@ const liveBlockDark = (format: ArticleFormat): Colour => {
 	}
 };
 
+const relatedCard = (_format: ArticleFormat): Colour => {
+	return neutral[86];
+};
+
+const relatedCardDark = (_format: ArticleFormat): Colour => {
+	return neutral[20];
+};
+
 const standfirstLink = (format: ArticleFormat): Colour => {
 	if (format.design === ArticleDesign.LiveBlog) {
 		return neutral[100];
@@ -98,8 +106,6 @@ const standfirstLink = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
 	}
-
-	//return neutral[86];
 };
 
 const richLink = (format: ArticleFormat): Colour => {
@@ -186,6 +192,8 @@ const border = {
 	standfirstLink,
 	standfirstLinkDark,
 	pagination,
+	relatedCard,
+	relatedCardDark,
 	richLink,
 	richLinkDark,
 	richLinkPreload,

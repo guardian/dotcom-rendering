@@ -3,11 +3,13 @@ import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import Img from '@guardian/common-rendering/src/components/img';
-import { border } from '@guardian/common-rendering/src/editorialPalette';
+import {
+	background,
+	border,
+} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	background,
 	from,
 	headline,
 	neutral,
@@ -83,10 +85,6 @@ const listStyles = (
 				${listBaseStyles}
 				border-radius: ${remSpace[2]};
 				padding-top: 0.125rem;
-
-				${darkModeCss`
-					background: ${neutral[10]};
-				`}
 			`;
 		}
 
@@ -101,12 +99,12 @@ const listStyles = (
 		default: {
 			return css`
 				${listBaseStyles}
-				border-top: 1px solid ${neutral[86]};
+				border-top: 1px solid ${border.relatedCard(format)};
 				border-radius: 0 0 ${remSpace[2]} ${remSpace[2]};
 
 				${darkModeCss`
-					border-top: 1px solid ${neutral[20]};
-					background: ${neutral[0]};
+					border-top: 1px solid ${border.relatedCardDark(format)};
+
         		`}
 			`;
 		}
@@ -242,42 +240,17 @@ const cardStyles = (
 	format: ArticleFormat,
 ): SerializedStyles => {
 	switch (type) {
-		case RelatedItemType.FEATURE: {
-			const { kicker } = getThemeStyles(format.theme);
-
-			return css`
-				h2 {
-					${headline.xxxsmall({ fontWeight: 'bold' })}
-					color: ${kicker};
-				}
-			`;
-		}
-
-		case RelatedItemType.ANALYSIS: {
-			return css`
-				${headline.xxxsmall({
-					lineHeight: 'regular',
-					fontWeight: 'light',
-				})};
-				h3 {
-					box-shadow: inset 0 -0.025rem ${border.articleLink(format)};
-					display: inline;
-
-					${darkModeCss`
-                        box-shadow: inset 0 -0.025rem ${neutral[46]};
-                    `}
-				}
-			`;
-		}
-
 		case RelatedItemType.VIDEO:
 		case RelatedItemType.AUDIO:
 		case RelatedItemType.GALLERY: {
 			return css`
-				background: ${background.inverse};
+				background: ${background.relatedCard(format)};
 				h3 {
 					color: ${text.ctaPrimary};
 				}
+				${darkModeCss`
+					background: ${background.relatedCardDark(format)};
+				`}
 			`;
 		}
 
@@ -286,36 +259,39 @@ const cardStyles = (
 		}
 
 		case RelatedItemType.LIVE: {
-			const { liveblogBackground, liveblogDarkBackground } =
-				getThemeStyles(format.theme);
 			return css`
-				background: ${liveblogBackground};
+				background: ${background.relatedCard(format)};
 				h3,
 				time {
 					color: ${text.ctaPrimary};
 				}
 				${darkModeCss`
-                    background: ${liveblogDarkBackground};
+                    background: ${background.relatedCardDark(format)};
                 `}
 			`;
 		}
 
 		case RelatedItemType.ADVERTISEMENT_FEATURE: {
 			return css`
-				background-color: ${neutral[93]};
+				background-color: ${background.relatedCardDark(format)};
 				${textSans.large()}
 			`;
 		}
 
 		case RelatedItemType.COMMENT: {
 			return css`
-				background-color: ${neutral[97]};
+				background-color: ${background.relatedCard(format)};
 				${headline.xxsmall()}
 			`;
 		}
 
 		default: {
-			return css``;
+			return css`
+				background: ${background.relatedCard(format)};
+				${darkModeCss`
+					background: ${background.relatedCardDark(format)};
+        		`}
+			`;
 		}
 	}
 };
