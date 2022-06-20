@@ -19,7 +19,9 @@ describe('Interactivity', function () {
 		// eslint-disable-next-line mocha/no-exclusive-tests
 		it.only('should open the edition dropdown menu when clicked and hide when expected', function () {
 			cy.visit(`/Article?url=${articleUrl}`);
-			cy.percySnapshot('Article', { widths: [768, 1200] });
+			cy.percySnapshot('Article', {
+				widths: [320, 375, 480, 660, 740, 980, 1140, 1300],
+			});
 			cy.get('[data-cy=dropdown-options]').should('not.be.visible');
 			// Open it
 			cy.get('[data-cy=dropdown-button]').click();
