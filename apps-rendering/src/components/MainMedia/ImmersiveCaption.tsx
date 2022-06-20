@@ -21,7 +21,7 @@ import { immersiveCaptionId } from './MainMedia.defaults';
 // ----- Component ----- //
 
 const styles = css`
-	${textSans.xsmall()}
+	${textSans.xxsmall()}
 	color: ${neutral[46]};
 	${grid.column.centre}
 	padding-top: ${remSpace[9]};

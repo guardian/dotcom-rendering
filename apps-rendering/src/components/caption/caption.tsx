@@ -38,7 +38,7 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles | undefined =>
 		: undefined;
 
 const textStyles = css`
-	${textSans.xsmall()}
+	${textSans.xxsmall()}
 	color: ${neutral[46]};
 `;
 
