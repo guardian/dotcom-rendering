@@ -329,7 +329,7 @@ const isBlog = (format: ArticleFormat): boolean =>
 
 const borderFromFormat = (format: ArticleFormat): string => {
 	const styles = `
-		border-bottom: 0.0625rem solid ${border.liveblogKicker(format)};
+		border-bottom: 0.0625rem solid ${border.standfirstLink(format)};
 		text-decoration: none;
 	`;
 
