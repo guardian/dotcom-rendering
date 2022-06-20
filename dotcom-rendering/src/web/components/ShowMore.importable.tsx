@@ -22,6 +22,10 @@ function insertHtml(html: string, collectionId: string) {
 	const placeholder = document.querySelector<HTMLElement>(
 		`[data-show-more-placeholder="${collectionId}"]`,
 	);
+	/**
+	 * it is expected that `html` will be a server-rendered instance
+	 * of the ExtraCardsContainer component
+	*/
 	if (placeholder) {
 		placeholder.insertAdjacentHTML('afterend', html);
 	}
