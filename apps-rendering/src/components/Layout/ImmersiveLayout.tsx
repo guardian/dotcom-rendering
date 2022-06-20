@@ -1,8 +1,11 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import { from, remSpace } from '@guardian/source-foundations';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import Headline from 'components/Headline';
-import MainMedia, { immersiveCaptionId } from 'components/MainMedia';
+import MainMedia, { ImmersiveCaption } from 'components/MainMedia';
+import Metadata from 'components/Metadata';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import { grid } from 'grid/grid';
@@ -18,6 +21,20 @@ const headerStyles = css`
 
 const bodyStyles = css`
 	${grid.container}
+`;
+
+const linesStyles = css`
+	${grid.column.all}
+	margin-top: ${remSpace[1]};
+
+	${from.phablet} {
+		${grid.column.centre}
+	}
+
+	${from.leftCol} {
+		${grid.column.left}
+		margin-top: ${remSpace[5]};
+	}
 `;
 
 type Props = {
@@ -36,8 +53,12 @@ const ImmersiveLayout: FC<Props> = ({ item }) => (
 					<Series item={item} />
 					<Headline item={item} />
 					<Standfirst item={item} />
-					<p id={immersiveCaptionId}>Immersive caption</p>
-					<div>Metadata</div>
+					<ImmersiveCaption
+						mainMedia={item.mainMedia}
+						format={getFormat(item)}
+					/>
+					<StraightLines cssOverrides={linesStyles} />
+					<Metadata item={item} />
 				</header>
 				<div css={bodyStyles}>
 					Body
