@@ -142,9 +142,6 @@ const generateForm = (
 						Sign up
 					</Button>
 				</div>
-				<input type="hidden" name="ref" />
-				<input type="hidden" name="refViewId" />
-				<div className="grecaptcha_container" />
 			</form>
 		</CacheProvider>,
 	);

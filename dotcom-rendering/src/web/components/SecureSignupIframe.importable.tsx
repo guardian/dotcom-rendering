@@ -8,6 +8,52 @@ type Props = {
 	newsletterId: string;
 };
 
+const buildFormData = (
+	emailAddress: string,
+	newsletterId: string,
+	token: string,
+): FormData => {
+	const pageRef = window.location.origin + window.location.pathname;
+	const refViewId = window.guardian.ophan?.pageViewId ?? '';
+
+	const formData = new FormData();
+	formData.append('email', emailAddress);
+	formData.append('csrfToken', ''); //TO DO - do we need this? how do we get it?
+	formData.append('listName', newsletterId);
+	formData.append('ref', pageRef);
+	formData.append('refViewId', refViewId);
+	formData.append('dummy', ''); //  TO DO -  find out if field is required by form handler
+	if (window.guardian.config.switches.emailSignupRecaptcha) {
+		formData.append('g-recaptcha-response', token); //  TO DO -  find out if field is required/allowed by form handler
+	}
+
+	return formData;
+};
+
+const submitForm = async (
+	endpoint: string,
+	formData: FormData,
+): Promise<Response> => {
+	const requestBodyStrings: string[] = [];
+
+	formData.forEach((value, key) => {
+		requestBodyStrings.push(
+			`${encodeURIComponent(key)}=${encodeURIComponent(
+				value.toString(),
+			)}`,
+		);
+	});
+
+	return fetch(endpoint, {
+		method: 'POST',
+		body: requestBodyStrings.join('&'),
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	});
+};
+
 export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 
@@ -16,9 +62,9 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 	const [formDisabled, setFormDisabled] = useState<boolean>(false);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>('');
 
-	const handleCaptchaComplete = (token: string | null) => {
+	const handleCaptchaComplete = async (token: string | null) => {
 		if (!token) {
-			return;
+			return; // failed challenge? expired?
 		}
 		const { current: iframe } = iframeRef;
 		const input: HTMLInputElement | null =
@@ -26,9 +72,13 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 			null;
 		const emailAddress: string = input?.value ?? '';
 
-		alert(
-			`TO DO: sign up ${emailAddress} to ${newsletterId}, and send frontend tracking`,
-		);
+		const endpoint = window.guardian.config.page.ajaxUrl + '/email';
+		const formData = buildFormData(emailAddress, newsletterId, token);
+		const response = await submitForm(endpoint, formData);
+
+		console.log(response);
+		const text = await response.text();
+		console.log(text);
 	};
 
 	const resizeIframe = (requestedHeight = 0): void => {
@@ -89,26 +139,13 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 		};
 	});
 
-	// initial resize, populate the hidden form fields in the iframe
+	// initial resize
 	useEffect(() => {
 		const { current: iframe } = iframeRef;
 		if (!iframe || !iframe.contentDocument) {
 			return;
 		}
 		resizeIframe();
-		const refField =
-			iframe.contentDocument.querySelector('input[name="ref"]');
-		const refViewIdField = iframe.contentDocument.querySelector(
-			'input[name="refViewId"]',
-		);
-		refField?.setAttribute(
-			'value',
-			window.location.origin + window.location.pathname,
-		);
-		refViewIdField?.setAttribute(
-			'value',
-			window.guardian.ophan?.pageViewId ?? '',
-		);
 	});
 
 	// read siteKey
