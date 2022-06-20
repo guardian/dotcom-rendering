@@ -142,12 +142,82 @@ export const Card = ({
 	const palette = decidePalette(format, containerPalette);
 
 	const hasSublinks = supportingContent && supportingContent.length > 0;
-	const noOfSublinks = (supportingContent && supportingContent.length) || 0;
+	const noOfSublinks = supportingContent?.length ?? 0;
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||
 		format.design === ArticleDesign.Editorial ||
 		format.design === ArticleDesign.Letter;
+
+	const renderFooter = ({
+		renderAge,
+		renderLines,
+	}: {
+		renderAge?: boolean;
+		renderLines?: boolean;
+	}) => {
+		return (
+			<CardFooter
+				format={format}
+				containerPalette={containerPalette}
+				renderLines={renderLines}
+				age={
+					webPublicationDate ? (
+						<CardAge
+							format={format}
+							containerPalette={containerPalette}
+							webPublicationDate={webPublicationDate}
+							showClock={showClock}
+						/>
+					) : undefined
+				}
+				mediaMeta={
+					(format.design === ArticleDesign.Gallery ||
+						format.design === ArticleDesign.Audio ||
+						format.design === ArticleDesign.Video) &&
+					mediaType ? (
+						<MediaMeta
+							containerPalette={containerPalette}
+							format={format}
+							mediaType={mediaType}
+							mediaDuration={mediaDuration}
+						/>
+					) : undefined
+				}
+				commentCount={
+					discussionId ? (
+						<Link
+							// This a tag is initially rendered empty. It gets populated later
+							// after a fetch call is made to get all the counts for each Card
+							// on the page with a discussion (see FetchCommentCounts.tsx)
+							data-name="comment-count-marker"
+							data-discussion-id={discussionId}
+							data-format={JSON.stringify(format)}
+							data-ignore="global-link-styling"
+							data-link-name="Comment count"
+							href={`${linkTo}#comments`}
+							subdued={true}
+							cssOverrides={css`
+								/* See: https://css-tricks.com/nested-links/ */
+								${getZIndex('card-nested-link')};
+								/* The following styles turn off those provided by Link */
+								color: inherit;
+								/* stylelint-disable-next-line property-disallowed-list */
+								font-family: inherit;
+								font-size: inherit;
+								line-height: inherit;
+							`}
+						/>
+					) : undefined
+				}
+				cardBranding={
+					branding ? (
+						<CardBranding branding={branding} format={format} />
+					) : undefined
+				}
+			/>
+		);
+	};
 
 	const renderAge = decideIfAgeShouldShow({
 		containerPalette,
@@ -252,66 +322,31 @@ export const Card = ({
 								</AvatarContainer>
 							</Hide>
 						)}
-						<CardFooter
-							format={format}
-							age={
-								renderAge && webPublicationDate ? (
-									<CardAge
-										format={format}
-										containerPalette={containerPalette}
-										webPublicationDate={webPublicationDate}
-										showClock={showClock}
-									/>
-								) : undefined
-							}
-							mediaMeta={
-								(format.design === ArticleDesign.Gallery ||
-									format.design === ArticleDesign.Audio ||
-									format.design === ArticleDesign.Video) &&
-								mediaType ? (
-									<MediaMeta
-										containerPalette={containerPalette}
-										format={format}
-										mediaType={mediaType}
-										mediaDuration={mediaDuration}
-									/>
-								) : undefined
-							}
-							commentCount={
-								discussionId ? (
-									<Link
-										// This a tag is initially rendered empty. It gets populated later
-										// after a fetch call is made to get all the counts for each Card
-										// on the page with a discussion (see FetchCommentCounts.tsx)
-										data-name="comment-count-marker"
-										data-discussion-id={discussionId}
-										data-format={JSON.stringify(format)}
-										data-ignore="global-link-styling"
-										data-link-name="Comment count"
-										href={`${linkTo}#comments`}
-										subdued={true}
-										cssOverrides={css`
-											/* See: https://css-tricks.com/nested-links/ */
-											${getZIndex('card-nested-link')};
-											/* The following styles turn off those provided by Link */
-											color: inherit;
-											/* stylelint-disable-next-line property-disallowed-list */
-											font-family: inherit;
-											font-size: inherit;
-											line-height: inherit;
-										`}
-									/>
-								) : undefined
-							}
-							cardBranding={
-								branding ? (
-									<CardBranding
-										branding={branding}
-										format={format}
-									/>
-								) : undefined
-							}
-						/>
+						{/* INSIDE FOOTER */}
+						{isOpinion ? (
+							<>
+								{hasSublinks ? (
+									// Opinion cards with sublinks show their footers under the trailtext but
+									// without the lines, these sit by themselves at the bottom
+									renderFooter({
+										renderAge,
+										renderLines: false,
+									})
+								) : (
+									<>
+										{/* Opinion cards without sublinks render the whole footer including
+											lines, outside, sitting along the very bottom of the card */}
+									</>
+								)}
+							</>
+						) : (
+							// Non opinion cards always show their footer underneath the headline/trail text
+							renderFooter({
+								renderAge,
+								renderLines: false,
+							})
+						)}
+
 						{hasSublinks && noOfSublinks <= 2 ? (
 							<SupportingContent
 								supportingContent={supportingContent}
@@ -335,8 +370,24 @@ export const Card = ({
 			) : (
 				<></>
 			)}
-			{isOpinion && (
-				<StraightLines color={palette.border.lines} count={4} />
+			{/* OUTSIDE FOOTER */}
+			{isOpinion ? (
+				<>
+					{hasSublinks ? (
+						// For opinion cards with sublinks there is already a footer rendered inside that
+						// shows the metadata. We only want to render the lines here
+						<StraightLines color={palette.border.lines} count={4} />
+					) : (
+						// When an opinion card has no sublinks we show the entire footer, including lines
+						// outside, along the entire bottom of the card
+						renderFooter({
+							renderAge,
+							renderLines: true,
+						})
+					)}
+				</>
+			) : (
+				<>{/* Non opinion cards never render a footer here */}</>
 			)}
 		</CardWrapper>
 	);
