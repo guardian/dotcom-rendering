@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, space, textSans } from '@guardian/source-foundations';
+import { neutral, space, textSans, until } from '@guardian/source-foundations';
 import {
 	Button,
 	InlineError,
@@ -26,12 +26,18 @@ type Props = {
 
 const ErrorMessageWithAdvice = (props: { text?: string }) => (
 	<InlineError>
-		<span>
-			{props.text} Please try again or contact{' '}
-			<Link href="mailto:userhelp@theguardian.com" target="_blank">
-				userhelp@theguardian.com
-			</Link>
-		</span>
+		<div
+			css={css`
+				display: flex;
+			`}
+		>
+			<span>
+				{props.text} Please try again or contact{' '}
+				<Link href="mailto:userhelp@theguardian.com" target="_blank">
+					userhelp@theguardian.com
+				</Link>
+			</span>
+		</div>
 	</InlineError>
 );
 
@@ -293,6 +299,7 @@ export const SecureSignupIframe = ({
 		const button = iframe?.contentDocument?.querySelector('button');
 		button?.addEventListener('click', handleClickInIFrame);
 		form?.addEventListener('submit', handleSubmitInIFrame);
+		resetIframeHeight();
 	};
 
 	// read siteKey
@@ -344,6 +351,9 @@ export const SecureSignupIframe = ({
 						css={css`
 							display: flex;
 							align-items: flex-start;
+							${until.tablet} {
+								flex-wrap: wrap;
+							}
 							button {
 								margin-left: ${space[1]}px;
 								background-color: ${neutral[0]};
