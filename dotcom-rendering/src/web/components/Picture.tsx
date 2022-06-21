@@ -201,6 +201,8 @@ const generateSignedUrl = ({
 	const service = url.hostname.split('.')[0];
 	const params = new URLSearchParams({
 		width: imageWidth.toString(),
+		// Why 45 and 85?
+		// See: https://github.com/guardian/fastly-image-service/blob/21312b81955d57338b3efd7a0c21b3987f13e7ed/fastly-io_guim_co_uk/src/main/resources/varnish/main.vcl
 		quality: quality === 'high' ? '45' : '85',
 		fit: 'max',
 	});
