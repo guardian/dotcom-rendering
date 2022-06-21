@@ -11,7 +11,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
 	headline,
-	neutral,
 	remSpace,
 	textSans,
 } from '@guardian/source-foundations';
@@ -42,7 +41,7 @@ const listStyles = (format: ArticleFormat): SerializedStyles => {
 
 		${darkModeCss`
 			border-top: 1px solid ${border.relatedCardDark(format)};
-            background: ${neutral[0]};
+            background: ${background.relatedCardDark(format)};
         `}
 
 		${from.tablet} {
@@ -91,14 +90,14 @@ const bylineImage = (format: ArticleFormat): SerializedStyles => css`
 	}
 `;
 
-const anchorStyles = css`
-	color: ${neutral[7]};
+const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
+	color: ${text.relatedCardLink(format)};
 	text-decoration: none;
 	display: flex;
 	flex-direction: column;
 	height: 100%;
 	${darkModeCss`
-        color: ${neutral[86]};
+        color: ${text.relatedCardLinkDark(format)};
     `}
 `;
 
@@ -227,7 +226,10 @@ const BylineCard: FC<Props> = ({ relatedItem }) => {
 			data-article-id={link}
 			css={[listStyles(format), cardStyles]}
 		>
-			<a css={anchorStyles} href={`https://theguardian.com/${link}`}>
+			<a
+				css={anchorStyles(format)}
+				href={`https://theguardian.com/${link}`}
+			>
 				<section css={headingWrapperStyles}>
 					<h3 css={headingStyles}>
 						<span css={commentIconStyle(format)}>
