@@ -10,6 +10,11 @@ import {
 import type { ReactEventHandler } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
+import type { OphanAction } from '../browser/ophan/ophan';
+import {
+	getOphanRecordFunction,
+	submitComponentEvent,
+} from '../browser/ophan/ophan';
 
 type Props = {
 	styles: string;
@@ -65,6 +70,62 @@ const postFormData = async (
 	});
 };
 
+const sendTracking = (
+	newsletterId: string,
+	event:
+		| 'click-button'
+		| 'submit-form'
+		| 'form-submit-error'
+		| 'captcha-load-error'
+		| 'open-captcha'
+		| 'captcha-not-passed'
+		| 'captcha-passed'
+		| 'success-response-received'
+		| 'fail-response-received',
+): void => {
+	const ophanRecord = getOphanRecordFunction();
+
+	let action: OphanAction = 'CLICK';
+	const value = `${event} ${newsletterId}`;
+
+	switch (event) {
+		case 'submit-form':
+			action = 'SUBSCRIBE';
+			break;
+		case 'open-captcha':
+			action = 'EXPAND';
+			break;
+		case 'form-submit-error':
+		case 'captcha-load-error':
+			action = 'CLOSE';
+			break;
+		case 'captcha-not-passed':
+		case 'captcha-passed':
+			action = 'ANSWER';
+			break;
+		case 'success-response-received':
+		case 'fail-response-received':
+			action = 'RETURN';
+			break;
+		case 'click-button':
+		default:
+			action = 'CLICK';
+			break;
+	}
+
+	submitComponentEvent(
+		{
+			action,
+			value,
+			component: {
+				componentType: 'NEWSLETTER_SUBSCRIPTION',
+				id: `DCR SecureSignupIframe ${newsletterId}`,
+			},
+		},
+		ophanRecord,
+	);
+};
+
 export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 	const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -92,6 +153,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 			null;
 		const emailAddress: string = input?.value ?? '';
 
+		sendTracking(newsletterId, 'submit-form');
 		const response = await postFormData(
 			window.guardian.config.page.ajaxUrl + '/email',
 			buildFormData(emailAddress, newsletterId, token),
@@ -100,6 +162,13 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 		setIsWaitingForResponse(false);
 		setResponseText(text);
 		setResponseOk(response.ok);
+
+		sendTracking(
+			newsletterId,
+			response.ok
+				? 'success-response-received'
+				: 'fail-response-received',
+		);
 	};
 
 	const resetForm: ReactEventHandler<HTMLButtonElement> = () => {
@@ -110,6 +179,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 	};
 
 	const handleCaptchaLoadError: ReactEventHandler<HTMLDivElement> = () => {
+		sendTracking(newsletterId, 'captcha-load-error');
 		setErrorMessage(
 			`Sorry, the reCAPTCHA failed to load. ${failStateAdvice}`,
 		);
@@ -118,13 +188,16 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 
 	const handleCaptchaComplete = (token: string | null) => {
 		if (!token) {
+			sendTracking(newsletterId, 'captcha-not-passed');
 			return;
 		}
+		sendTracking(newsletterId, 'captcha-passed');
 
 		setIsWaitingForResponse(true);
 		submitForm(token).catch((error) => {
 			// eslint-disable-next-line no-console -- unexpected error
 			console.error(error);
+			sendTracking(newsletterId, 'form-submit-error');
 			setErrorMessage(
 				`Sorry, there was an error signing you up. ${failStateAdvice}`,
 			);
@@ -151,8 +224,8 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 		resizeIframe();
 	};
 
-	const handleClickInIFrame = (event: MouseEvent): void => {
-		console.log('click', event);
+	const handleClickInIFrame = (): void => {
+		sendTracking(newsletterId, 'click-button');
 	};
 	const handleSubmitInIFrame = (event: SubmitEvent): void => {
 		event.preventDefault();
@@ -160,6 +233,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 			return;
 		}
 		setErrorMessage(undefined);
+		sendTracking(newsletterId, 'open-captcha');
 		recaptchaRef.current?.execute();
 	};
 
