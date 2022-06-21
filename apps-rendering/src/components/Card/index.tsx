@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import Img from '@guardian/common-rendering/src/components/img';
-import { border } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
@@ -249,23 +248,6 @@ const cardStyles = (
 				h2 {
 					${headline.xxxsmall({ fontWeight: 'bold' })}
 					color: ${kicker};
-				}
-			`;
-		}
-
-		case RelatedItemType.ANALYSIS: {
-			return css`
-				${headline.xxxsmall({
-					lineHeight: 'regular',
-					fontWeight: 'light',
-				})};
-				h3 {
-					box-shadow: inset 0 -0.025rem ${border.articleLink(format)};
-					display: inline;
-
-					${darkModeCss`
-                        box-shadow: inset 0 -0.025rem ${neutral[46]};
-                    `}
 				}
 			`;
 		}
