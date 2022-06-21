@@ -228,6 +228,7 @@ export const Picture = ({
 }: Props) => {
 	const imageWidths = decideImageWidths({ role, format, isMainMedia });
 	const sources = imageWidths
+		.slice()
 		.sort(descendingByBreakpoint)
 		.map(({ width: imageWidth, breakpoint }) => {
 			return {

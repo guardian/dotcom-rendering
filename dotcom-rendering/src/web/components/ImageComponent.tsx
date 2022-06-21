@@ -250,8 +250,9 @@ export const ImageComponent = ({
 	const descendingByWidth = (a: Image, b: Image) => {
 		return parseInt(b.fields.width) - parseInt(a.fields.width);
 	};
-	const fallbackImage =
-		element.media.allImages.sort(descendingByWidth)[0].url;
+	const fallbackImage = element.media.allImages
+		.slice()
+		.sort(descendingByWidth)[0].url;
 
 	const isSupported = (imageUrl: string) => {
 		const supportedImages = ['jpg', 'jpeg', 'png'];
