@@ -12,10 +12,7 @@ import {
 	neutral,
 	until,
 } from '@guardian/source-foundations';
-import {
-	Lines,
-	StraightLines,
-} from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
@@ -25,6 +22,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
+import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
@@ -32,7 +30,6 @@ import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 import { GridItem } from '../components/GridItem';
-import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -52,11 +49,7 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
-import {
-	decideLineCount,
-	decideLineEffect,
-	getCurrentPillar,
-} from '../lib/layoutHelpers';
+import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const StandardGrid = ({
@@ -590,22 +583,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<GridItem area="lines">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
-									{format.theme === ArticleSpecial.Labs ? (
-										<GuardianLabsLines />
-									) : (
-										<Lines
-											cssOverrides={css`
-												display: block;
-											`}
-											count={decideLineCount(
-												format.design,
-											)}
-											effect={decideLineEffect(
-												format.design,
-												format.theme,
-											)}
-										/>
-									)}
+									<DecideLines format={format} />
 								</div>
 							</div>
 						</GridItem>
