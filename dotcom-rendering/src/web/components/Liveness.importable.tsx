@@ -16,6 +16,7 @@ type Props = {
 	webURL: string;
 	mostRecentBlockId: string;
 	hasPinnedPost: boolean;
+	topics?: Topic[];
 };
 
 const isServer = typeof window === 'undefined';
@@ -142,12 +143,13 @@ export const Liveness = ({
 	webURL,
 	mostRecentBlockId,
 	hasPinnedPost,
+	topics,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [topOfBlogVisible, setTopOfBlogVisible] = useState<boolean>();
 	const [numHiddenBlocks, setNumHiddenBlocks] = useState(0);
 	const [latestBlockId, setLatestBlockId] = useState(mostRecentBlockId);
-
+	console.log('topics', topics);
 	/**
 	 * This function runs (once) after every successful useApi call. This is useful because it
 	 * allows us to avoid the problems of imperative code being executed multiple times
