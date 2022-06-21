@@ -70,7 +70,7 @@ export const EditionDropdown: React.FC<{
 		<div css={editionDropdown}>
 			<div
 				css={css`
-					padding-top: 7px;
+					padding-top: 5px;
 				`}
 			>
 				<Dropdown

@@ -132,11 +132,10 @@ const buttonStyles = (overrideColor?: string) => css`
 	background: none;
 	border: none;
 	/* Design System: The buttons should be components that handle their own layout using primitives  */
-	line-height: 1.2;
 	color: ${overrideColor || brandText.primary};
 	transition: color 80ms ease-out;
-	padding: 0px 10px 6px 5px;
-	margin: 1px 0 0;
+	padding: 0px 10px 0px 5px;
+	margin: 0;
 	text-decoration: none;
 
 	:hover {
