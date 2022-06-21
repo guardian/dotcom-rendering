@@ -156,3 +156,5 @@ ${
 
 await updateIssue('data-component');
 await updateIssue('data-link-name');
+
+Deno.exit();
