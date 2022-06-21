@@ -74,8 +74,13 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 	const [responseOk, setResponseOk] = useState<boolean | undefined>(
 		undefined,
 	);
+	const [captchaError, setCaptchaError] = useState<string | undefined>(
+		undefined,
+	);
 
-	const sumbitForm = async (token: string): Promise<void> => {
+	const hasResponse = typeof responseOk === 'boolean';
+
+	const submitForm = async (token: string): Promise<void> => {
 		const { current: iframe } = iframeRef;
 		const input: HTMLInputElement | null =
 			iframe?.contentDocument?.querySelector('input[type="email"]') ??
@@ -92,14 +97,23 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 		setResponseOk(response.ok);
 	};
 
+	const handleCaptchaError: ReactEventHandler<HTMLDivElement> = (event) => {
+		console.warn('handleCaptchaError', event);
+		setCaptchaError(
+			'Sorry, the reCAPTCHA failed to load. Please try again or contact userhelp@theguardian.com.',
+		);
+		recaptchaRef.current?.reset();
+	};
+
 	const handleCaptchaComplete = (token: string | null) => {
 		if (!token) {
 			return;
 		}
 
 		setIsWaitingForResponse(true);
-		sumbitForm(token).catch((error) => {
+		submitForm(token).catch((error) => {
 			console.error(error);
+			setCaptchaError('submitForm ERROR');
 		});
 	};
 
@@ -120,24 +134,6 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 
 	const resetIframeHeight = (): void => {
 		resizeIframe();
-	};
-
-	const disableForm = (enable = false): void => {
-		const { current: iframe } = iframeRef;
-		const button = iframe?.contentDocument?.querySelector('button');
-		const form = iframe?.contentDocument?.querySelector('form');
-		const input = iframe?.contentDocument?.querySelector(
-			'input[type="email"]',
-		);
-		if (enable) {
-			button?.removeAttribute('disabled');
-			input?.removeAttribute('disabled');
-			form?.removeAttribute('disabled');
-		} else {
-			button?.setAttribute('disabled', 'TRUE');
-			input?.setAttribute('disabled', 'TRUE');
-			form?.setAttribute('disabled', 'TRUE');
-		}
 	};
 
 	// add resize event listener to iframe window
@@ -185,13 +181,6 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 		button?.addEventListener('click', handleClickInIFrame);
 		form?.addEventListener('submit', handleSubmitInIFrame);
 	};
-	});
-
-	const hasResponse = typeof responseOk === 'boolean';
-
-	if (!captchaSiteKey) {
-		return null;
-	}
 
 	return (
 		<>
@@ -223,6 +212,8 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 				</div>
 			)}
 
+			{captchaError && <InlineError>{captchaError}</InlineError>}
+
 			{hasResponse && (
 				<div>
 					{responseOk ? (
@@ -245,6 +236,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 						sitekey={captchaSiteKey}
 						ref={recaptchaRef}
 						onChange={handleCaptchaComplete}
+						onError={handleCaptchaError}
 						size="invisible"
 					/>
 				</div>
