@@ -257,7 +257,7 @@ export const ImageComponent = ({
 	const isSupported = (imageUrl: string) => {
 		const supportedImages = ['jpg', 'jpeg', 'png'];
 		const extension = imageUrl.split('.').pop();
-		return extension && supportedImages.includes(extension);
+		return extension && supportedImages.includes(extension.toLowerCase());
 	};
 	if (!isSupported(master || fallbackImage)) {
 		// We should only try to render images that are supported by Fastly
