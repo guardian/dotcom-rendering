@@ -92,6 +92,12 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 
 You can see a _web only_ architecture diagram by running `make arch-diagram`. It will give you an overview of the current server and browser web architecture.
 
+### UI Design System
+
+For a high-level overview of some of the key ideas behind the design of the Dotcom website, see [design.theguardian.com](https://design.theguardian.com/).
+
+This guide was made in 2018, but most of it still applies. It also provides an explanation of some journalism- or Guardian-specific terms which are used in the codebase, like 'kicker'.
+
 ### Concepts
 
 There are some concepts to learn, that will make working with Dotcom Rendering clearer:
