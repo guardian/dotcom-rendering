@@ -233,7 +233,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 		sendTracking(newsletterId, 'click-button');
 	};
 
-	const handleSubmitInIFrame = (event: SubmitEvent): void => {
+	const handleSubmitInIFrame = (event: Event): void => {
 		event.preventDefault();
 		if (isWaitingForResponse) {
 			return;
