@@ -242,24 +242,26 @@ export const ImageComponent = ({
 
 	const palette = decidePalette(format);
 
-	const master = element.media.allImages.find(
-		(image) => image.fields.isMaster,
-	)?.url;
-
-	// Legacy images do not have a master so we fallback to the largest available
-	const descendingByWidth = (a: Image, b: Image) => {
-		return parseInt(b.fields.width) - parseInt(a.fields.width);
+	const getMaster = (images: Image[]) => {
+		return images.find((image) => image.fields.isMaster)?.url;
 	};
-	const largestImage = element.media.allImages
-		.slice()
-		.sort(descendingByWidth)[0].url;
+	const getLargest = (images: Image[]) => {
+		const descendingByWidth = (a: Image, b: Image) => {
+			return parseInt(b.fields.width) - parseInt(a.fields.width);
+		};
+		return images.slice().sort(descendingByWidth)[0].url;
+	};
+	// Legacy images do not have a master so we fallback to the largest available
+	const image =
+		getMaster(element.media.allImages) ??
+		getLargest(element.media.allImages);
 
 	const isSupported = (imageUrl: string) => {
 		const supportedImages = ['jpg', 'jpeg', 'png'];
 		const extension = imageUrl.split('.').slice(-1)[0];
 		return extension && supportedImages.includes(extension.toLowerCase());
 	};
-	if (!isSupported(master || largestImage)) {
+	if (!isSupported(image)) {
 		// We should only try to render images that are supported by Fastly
 		return null;
 	}
@@ -294,7 +296,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={master || largestImage}
+					master={image}
 					alt={element.data.alt || ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -325,7 +327,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={master || largestImage}
+					master={image}
 					alt={element.data.alt || ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -357,7 +359,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={master || largestImage}
+					master={image}
 					alt={element.data.alt || ''}
 					width={imageWidth}
 					height={imageHeight}
