@@ -12,7 +12,7 @@ import { renderToString } from 'react-dom/server';
 import { Island } from './Island';
 import { SecureSignupIframe } from './SecureSignupIframe.importable';
 
-type Props = { newsletterId: string };
+type Props = { newsletterId: string; successText: string };
 
 const PrivacyTerms = () => {
 	return (
@@ -148,7 +148,7 @@ const generateForm = (
 	return { html, styles };
 };
 
-export const SecureSignup = ({ newsletterId }: Props) => {
+export const SecureSignup = ({ newsletterId, successText }: Props) => {
 	const { html, styles } = generateForm(newsletterId);
 
 	return (
@@ -158,6 +158,7 @@ export const SecureSignup = ({ newsletterId }: Props) => {
 					html={html}
 					styles={styles}
 					newsletterId={newsletterId}
+					successText={successText}
 				/>
 			</Island>
 			<PrivacyTerms />

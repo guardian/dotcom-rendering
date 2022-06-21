@@ -15,6 +15,7 @@ type Props = {
 	name: string;
 	description: string;
 	frequency: string;
+	successText: string;
 };
 
 const Container = ({ children }: { children: React.ReactNode }) => {
@@ -24,6 +25,7 @@ const Container = ({ children }: { children: React.ReactNode }) => {
 				border: black 3px dashed;
 				border-radius: 12px;
 				padding: 10px;
+				margin-bottom: ${space[3]}px;
 			`}
 		>
 			{children}
@@ -50,7 +52,7 @@ const Frequency = ({ frequency }: { frequency: string }) => {
 			css={css`
 				display: flex;
 				margin-top: ${space[2]}px;
-				${from.desktop} {
+				${from.tablet} {
 					margin-top: 0;
 				}
 			`}
@@ -93,12 +95,12 @@ const Description = ({ description }: { description: string }) => {
 	);
 };
 
-const StackBelowDesktop = ({ children }: { children: React.ReactNode }) => (
+const StackBelowTablet = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			display: flex;
 			flex-direction: column;
-			${from.desktop} {
+			${from.tablet} {
 				flex-direction: row;
 			}
 		`}
@@ -112,15 +114,19 @@ export const EmailSignup = ({
 	name,
 	description,
 	frequency,
+	successText,
 }: Props) => {
 	return (
 		<Container>
-			<StackBelowDesktop>
+			<StackBelowTablet>
 				<Title name={name} />
 				<Frequency frequency={frequency} />
-			</StackBelowDesktop>
+			</StackBelowTablet>
 			<Description description={description} />
-			<SecureSignup newsletterId={newsletterId} />
+			<SecureSignup
+				newsletterId={newsletterId}
+				successText={successText}
+			/>
 		</Container>
 	);
 };

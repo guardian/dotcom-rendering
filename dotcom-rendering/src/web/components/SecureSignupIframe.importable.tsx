@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
-import { neutral, space } from '@guardian/source-foundations';
+import { neutral, space, textSans } from '@guardian/source-foundations';
 import {
 	Button,
 	InlineError,
-	InlineSuccess,
 	Link,
+	SvgEnvelope,
 	SvgReload,
 	SvgSpinner,
 } from '@guardian/source-react-components';
@@ -17,6 +17,13 @@ import {
 	submitComponentEvent,
 } from '../browser/ophan/ophan';
 
+type Props = {
+	styles: string;
+	html: string;
+	newsletterId: string;
+	successText: string;
+};
+
 const ErrorMessageWithAdvice = (props: { text?: string }) => (
 	<InlineError>
 		<span>
@@ -28,11 +35,42 @@ const ErrorMessageWithAdvice = (props: { text?: string }) => (
 	</InlineError>
 );
 
-type Props = {
-	styles: string;
-	html: string;
-	newsletterId: string;
-};
+const SuccessMessage = (props: { text?: string }) => (
+	<div
+		css={css`
+			display: flex;
+			align-items: flex-start;
+
+			svg {
+				fill: ${neutral[7]};
+				background-color: ${neutral[86]};
+				border-radius: 50%;
+				height: 28px;
+				padding: 2px;
+				margin-right: ${space[1]}px;
+				flex-shrink: 0;
+			}
+
+			b {
+				${textSans.medium({ lineHeight: 'tight', fontWeight: 'bold' })};
+			}
+
+			span {
+				${textSans.small({ lineHeight: 'tight' })};
+			}
+		`}
+	>
+		<SvgEnvelope />
+		<div>
+			<p>
+				<b>Subscription Confirmed</b>
+			</p>
+			<p>
+				<span>{props.text}</span>
+			</p>
+		</div>
+	</div>
+);
 
 const buildFormData = (
 	emailAddress: string,
@@ -136,7 +174,12 @@ const sendTracking = (
 	);
 };
 
-export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
+export const SecureSignupIframe = ({
+	styles,
+	html,
+	newsletterId,
+	successText,
+}: Props) => {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 	const recaptchaRef = useRef<ReCAPTCHA>(null);
 
@@ -294,7 +337,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 			{hasResponse &&
 				(responseOk ? (
 					<div>
-						<InlineSuccess>{responseText}</InlineSuccess>
+						<SuccessMessage text={successText} />
 					</div>
 				) : (
 					<div
