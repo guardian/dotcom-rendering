@@ -250,7 +250,7 @@ export const ImageComponent = ({
 	const descendingByWidth = (a: Image, b: Image) => {
 		return parseInt(b.fields.width) - parseInt(a.fields.width);
 	};
-	const fallbackImage = element.media.allImages
+	const largestImage = element.media.allImages
 		.slice()
 		.sort(descendingByWidth)[0].url;
 
@@ -259,7 +259,7 @@ export const ImageComponent = ({
 		const extension = imageUrl.split('.').slice(-1)[0];
 		return extension && supportedImages.includes(extension.toLowerCase());
 	};
-	if (!isSupported(master || fallbackImage)) {
+	if (!isSupported(master || largestImage)) {
 		// We should only try to render images that are supported by Fastly
 		return null;
 	}
@@ -294,7 +294,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={master || fallbackImage}
+					master={master || largestImage}
 					alt={element.data.alt || ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -325,7 +325,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={master || fallbackImage}
+					master={master || largestImage}
 					alt={element.data.alt || ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -357,7 +357,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={master || fallbackImage}
+					master={master || largestImage}
 					alt={element.data.alt || ''}
 					width={imageWidth}
 					height={imageHeight}
