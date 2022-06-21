@@ -301,6 +301,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const showKeyEventsCarousel =
 		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
 
+	const isInFilteringBeta =
+		CAPIArticle.config.abTests.automaticFiltersVariant == 'variant';
+
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -813,6 +816,170 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									) : (
 										<></>
 									)}
+									{isInFilteringBeta ? (
+										<>
+											{!showKeyEventsCarousel &&
+											CAPIArticle.keyEvents.length ? (
+												<Hide above="desktop">
+													<Island deferUntil="visible">
+														<FilterKeyEventsToggle
+															filterKeyEvents={
+																CAPIArticle.filterKeyEvents
+															}
+															id="filter-toggle-mobile"
+														/>
+													</Island>
+												</Hide>
+											) : (
+												<></>
+											)}
+											<ArticleContainer format={format}>
+												{pagination.currentPage !==
+													1 && (
+													<Pagination
+														currentPage={
+															pagination.currentPage
+														}
+														totalPages={
+															pagination.totalPages
+														}
+														newest={
+															pagination.newest
+														}
+														oldest={
+															pagination.oldest
+														}
+														newer={pagination.newer}
+														older={pagination.older}
+														format={format}
+													/>
+												)}
+												<ArticleBody
+													format={format}
+													blocks={CAPIArticle.blocks}
+													pinnedPost={
+														CAPIArticle.pinnedPost
+													}
+													adTargeting={adTargeting}
+													host={host}
+													pageId={CAPIArticle.pageId}
+													webTitle={
+														CAPIArticle.webTitle
+													}
+													ajaxUrl={
+														CAPIArticle.config
+															.ajaxUrl
+													}
+													section={
+														CAPIArticle.config
+															.section
+													}
+													switches={
+														CAPIArticle.config
+															.switches
+													}
+													isSensitive={
+														CAPIArticle.config
+															.isSensitive
+													}
+													isAdFreeUser={
+														CAPIArticle.isAdFreeUser
+													}
+													shouldHideReaderRevenue={
+														CAPIArticle.shouldHideReaderRevenue
+													}
+													tags={CAPIArticle.tags}
+													isPaidContent={
+														!!CAPIArticle.config
+															.isPaidContent
+													}
+													contributionsServiceUrl={
+														contributionsServiceUrl
+													}
+													contentType={
+														CAPIArticle.contentType
+													}
+													sectionName={
+														CAPIArticle.sectionName ||
+														''
+													}
+													isPreview={
+														CAPIArticle.config
+															.isPreview
+													}
+													idUrl={
+														CAPIArticle.config
+															.idUrl || ''
+													}
+													isDev={
+														!!CAPIArticle.config
+															.isDev
+													}
+													onFirstPage={
+														pagination.currentPage ===
+														1
+													}
+													keyEvents={
+														CAPIArticle.keyEvents
+													}
+													filterKeyEvents={
+														CAPIArticle.filterKeyEvents
+													}
+													abTests={
+														CAPIArticle.config
+															.abTests
+													}
+													showKeyEventsCarousel={
+														showKeyEventsCarousel
+													}
+												/>
+												{pagination.totalPages > 1 && (
+													<Pagination
+														currentPage={
+															pagination.currentPage
+														}
+														totalPages={
+															pagination.totalPages
+														}
+														newest={
+															pagination.newest
+														}
+														oldest={
+															pagination.oldest
+														}
+														newer={pagination.newer}
+														older={pagination.older}
+														format={format}
+													/>
+												)}
+												<StraightLines
+													data-print-layout="hide"
+													count={4}
+													cssOverrides={css`
+														display: block;
+													`}
+												/>
+												<SubMeta
+													format={format}
+													subMetaKeywordLinks={
+														CAPIArticle.subMetaKeywordLinks
+													}
+													subMetaSectionLinks={
+														CAPIArticle.subMetaSectionLinks
+													}
+													pageId={CAPIArticle.pageId}
+													webUrl={CAPIArticle.webURL}
+													webTitle={
+														CAPIArticle.webTitle
+													}
+													showBottomSocialButtons={
+														CAPIArticle.showBottomSocialButtons
+													}
+													badge={CAPIArticle.badge}
+												/>
+											</ArticleContainer>
+										</>
+									) : (
 									<Accordion
 										supportsDarkMode={false}
 										accordionTitle="Live feed"
