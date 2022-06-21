@@ -97,8 +97,10 @@ You can see a _web only_ architecture diagram by running `make arch-diagram`. It
 ### UI Design System
 
 For a high-level overview of some of the key ideas behind the design of the Dotcom website, see [design.theguardian.com](https://design.theguardian.com/).
+This resource was made in 2018 and is not maintained so it should not be taken as authoritative on details, but most of it still applies and it gives a very quick and visual overview. It also provides an explanation of some journalism- or Guardian-specific terms that you might see in the codebase, like 'kicker' and 'standfirst'.
 
-This guide was made in 2018, but most of it still applies. It also provides an explanation of some journalism- or Guardian-specific terms which are used in the codebase, like 'kicker'.
+For more detailed and up-to-date information, you can look at the [Guardian Source](https://theguardian.design/2a1e5182b/p/300696-) site and [Source developer guide](https://guardian.github.io/source/?path=/story/source--page).
+
 
 ### Concepts
 
