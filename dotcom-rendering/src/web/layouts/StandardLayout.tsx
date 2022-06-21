@@ -583,7 +583,10 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<GridItem area="lines">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
-									<DecideLines format={format} />
+									<DecideLines
+										format={format}
+										useLabsLines={true}
+									/>
 								</div>
 							</div>
 						</GridItem>

@@ -9,14 +9,17 @@ import { GuardianLabsLines } from './GuardianLabsLines';
 type Props = {
 	format: ArticleFormat;
 	color?: string;
+	useLabsLines?: boolean;
 };
 
-export const DecideLines = ({ format, color }: Props) => {
+export const DecideLines = ({ format, color, useLabsLines }: Props) => {
 	const count = format.design === ArticleDesign.Comment ? 8 : 4;
 
+	if (useLabsLines && format.theme === ArticleSpecial.Labs) {
+		return <GuardianLabsLines />;
+	}
+
 	switch (format.theme) {
-		case ArticleSpecial.Labs:
-			return <GuardianLabsLines />;
 		case ArticlePillar.Sport:
 			return (
 				<DottedLines

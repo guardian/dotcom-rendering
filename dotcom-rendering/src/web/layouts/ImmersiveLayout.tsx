@@ -331,7 +331,10 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							) : (
 								<div css={maxWidth}>
 									<div css={stretchLines}>
-										<DecideLines format={format} />
+										<DecideLines
+											format={format}
+											useLabsLines={true}
+										/>
 									</div>
 								</div>
 							)}

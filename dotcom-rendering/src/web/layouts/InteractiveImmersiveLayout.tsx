@@ -400,7 +400,10 @@ export const InteractiveImmersiveLayout = ({
 							) : (
 								<div css={maxWidth}>
 									<div css={stretchLines}>
-										<DecideLines format={format} />
+										<DecideLines
+											format={format}
+											useLabsLines={true}
+										/>
 									</div>
 								</div>
 							)}
