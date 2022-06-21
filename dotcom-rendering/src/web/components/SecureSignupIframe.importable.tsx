@@ -4,6 +4,7 @@ import {
 	InlineSuccess,
 	SvgSpinner,
 } from '@guardian/source-react-components';
+import type { ReactEventHandler } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 
@@ -164,38 +165,26 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 		);
 	}, []);
 
-	// add event listeners to the iframe components
-	useEffect(() => {
+	const handleClickInIFrame = (event: MouseEvent): void => {
+		console.log('click', event);
+	};
+	const handleSubmitInIFrame = (event: SubmitEvent): void => {
+		event.preventDefault();
+		if (isWaitingForResponse) {
+			return;
+		}
+		setCaptchaError(undefined);
+		recaptchaRef.current?.execute();
+	};
+
+	const attachEventListenerToIframeElements = () => {
 		const { current: iframe } = iframeRef;
 
-		const handleClickInIFrame = (event: Event) => {
-			console.log('click', event);
-		};
-		const handleSubmitInIFrame = (event: Event) => {
-			event.preventDefault();
-			disableForm(false);
-			recaptchaRef.current?.execute();
-		};
-
-		if (iframe?.contentDocument && iframe.contentWindow) {
-			iframe.contentDocument
-				.querySelector('button')
-				?.addEventListener('click', handleClickInIFrame);
-			iframe.contentDocument
-				.querySelector('form')
-				?.addEventListener('submit', handleSubmitInIFrame);
-		}
-
-		return () => {
-			if (iframe?.contentDocument && iframe.contentWindow) {
-				iframe.contentDocument
-					.querySelector('button')
-					?.removeEventListener('click', handleClickInIFrame);
-				iframe.contentDocument
-					.querySelector('form')
-					?.removeEventListener('submit', handleSubmitInIFrame);
-			}
-		};
+		const form = iframe?.contentDocument?.querySelector('form');
+		const button = iframe?.contentDocument?.querySelector('button');
+		button?.addEventListener('click', handleClickInIFrame);
+		form?.addEventListener('submit', handleSubmitInIFrame);
+	};
 	});
 
 	const hasResponse = typeof responseOk === 'boolean';
@@ -225,6 +214,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 					</head>
 					<body style="margin: 0;">${html}</body>
 				</html>`}
+				onLoad={attachEventListenerToIframeElements}
 			/>
 
 			{isWaitingForResponse && (
@@ -243,20 +233,22 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 				</div>
 			)}
 
-			<div
-				css={css`
-					.grecaptcha-badge {
-						visibility: hidden;
-					}
-				`}
-			>
-				<ReCAPTCHA // TO DO - EXPIRED AND ERROR callbacks
-					sitekey={captchaSiteKey}
-					ref={recaptchaRef}
-					onChange={handleCaptchaComplete}
-					size="invisible"
-				/>
-			</div>
+			{captchaSiteKey && (
+				<div
+					css={css`
+						.grecaptcha-badge {
+							visibility: hidden;
+						}
+					`}
+				>
+					<ReCAPTCHA // TO DO - EXPIRED AND ERROR callbacks
+						sitekey={captchaSiteKey}
+						ref={recaptchaRef}
+						onChange={handleCaptchaComplete}
+						size="invisible"
+					/>
+				</div>
+			)}
 		</>
 	);
 };
