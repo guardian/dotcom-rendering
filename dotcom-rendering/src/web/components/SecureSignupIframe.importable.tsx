@@ -136,31 +136,6 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 		resizeIframe();
 	};
 
-	// add resize event listener to iframe window
-	useEffect(() => {
-		const { current: iframe } = iframeRef;
-
-		if (iframe?.contentWindow) {
-			iframe.contentWindow.addEventListener('resize', resetIframeHeight);
-		}
-
-		return () => {
-			if (iframe?.contentWindow) {
-				iframe.contentWindow.removeEventListener(
-					'resize',
-					resetIframeHeight,
-				);
-			}
-		};
-	});
-
-	// read siteKey
-	useEffect(() => {
-		setCaptchaSiteKey(
-			window.guardian.config.page.googleRecaptchaSiteKey ?? '',
-		);
-	}, []);
-
 	const handleClickInIFrame = (event: MouseEvent): void => {
 		console.log('click', event);
 	};
@@ -173,14 +148,21 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 		recaptchaRef.current?.execute();
 	};
 
-	const attachEventListenerToIframeElements = () => {
+	const attachListenersToIframe = () => {
 		const { current: iframe } = iframeRef;
-
+		iframe?.contentWindow?.addEventListener('resize', resetIframeHeight);
 		const form = iframe?.contentDocument?.querySelector('form');
 		const button = iframe?.contentDocument?.querySelector('button');
 		button?.addEventListener('click', handleClickInIFrame);
 		form?.addEventListener('submit', handleSubmitInIFrame);
 	};
+
+	// read siteKey
+	useEffect(() => {
+		setCaptchaSiteKey(
+			window.guardian.config.page.googleRecaptchaSiteKey ?? '',
+		);
+	}, []);
 
 	return (
 		<>
@@ -203,7 +185,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 					</head>
 					<body style="margin: 0;">${html}</body>
 				</html>`}
-				onLoad={attachEventListenerToIframeElements}
+				onLoad={attachListenersToIframe}
 			/>
 
 			{isWaitingForResponse && (
