@@ -33,6 +33,30 @@ const adLabelDark = (_format: ArticleFormat): Colour => {
 const adSlot = (_format: ArticleFormat): Colour => {
 	return neutral[20];
 };
+
+const articleBodyMedia = (_format: ArticleFormat): Colour => {
+	return neutral[86];
+};
+
+const articleBodyMediaLinkDark = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[500];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[500];
+		case ArticlePillar.Sport:
+			return sport[500];
+		case ArticlePillar.Culture:
+			return culture[500];
+		case ArticlePillar.Opinion:
+			return opinion[500];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[500];
+	}
+};
+
 const branding = (_format: ArticleFormat): Colour => {
 	return neutral[20];
 };
@@ -780,6 +804,8 @@ const text = {
 	adLabel,
 	adLabelDark,
 	adSlot,
+	articleBodyMedia,
+	articleBodyMediaLinkDark,
 	articleLink,
 	branding,
 	brandingDark,

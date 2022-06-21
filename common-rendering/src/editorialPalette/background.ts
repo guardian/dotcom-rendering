@@ -35,6 +35,10 @@ const adSlot = (format: ArticleFormat): Colour => {
 
 const adSlotDark = (_format: ArticleFormat) => neutral[20];
 
+const articleBodyMedia = (_format: ArticleFormat) => {
+	return neutral[10];
+};
+
 const headline = (format: ArticleFormat): Colour => {
 	if (format.display === ArticleDisplay.Immersive) {
 		return neutral[7];
@@ -445,6 +449,7 @@ const supportBannerDark = (_format: ArticleFormat): Colour => {
 const background = {
 	adSlot,
 	adSlotDark,
+	articleBodyMedia: articleBodyMedia,
 	articleContentDark,
 	avatar,
 	bullet,
