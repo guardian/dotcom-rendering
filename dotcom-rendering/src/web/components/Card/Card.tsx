@@ -119,25 +119,18 @@ const DecideFooter = ({
 	displayAge: boolean;
 	renderFooter: Function;
 }) => {
-	if (isOpinion) {
-		if (hasSublinks) {
-			// Opinion cards with sublinks show their footers under the trailtext but
-			// without the lines, these sit by themselves at the bottom
-			return renderFooter({
-				displayAge,
-				displayLines: false,
-			});
-		} else {
-			// Opinion cards without sublinks render the whole footer including lines, outside, sitting along the very bottom of the card
-			return null;
-		}
-	} else {
-		// Non opinion cards always show their footer underneath the headline/trail text
-		return renderFooter({
-			displayAge,
-			displayLines: false,
-		});
+	if (isOpinion && !hasSublinks) {
+		// Opinion cards without sublinks render the entire footer, including lines,
+		// outside, sitting along the very bottom of the card
+		return null;
 	}
+	// For all other cases (including opinion cards that *do* have sublinks) we
+	// render a version of the footer without lines here
+	return renderFooter({
+		displayAge,
+		displayLines: false,
+	});
+	// Note. Opinion cards always show the lines at the botom of the card (in CommentFooter)
 };
 
 const CommentFooter = ({
