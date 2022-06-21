@@ -4,6 +4,7 @@ import {
 	Button,
 	InlineError,
 	InlineSuccess,
+	Link,
 	SvgReload,
 	SvgSpinner,
 } from '@guardian/source-react-components';
@@ -16,13 +17,22 @@ import {
 	submitComponentEvent,
 } from '../browser/ophan/ophan';
 
+const ErrorMessageWithAdvice = (props: { text?: string }) => (
+	<InlineError>
+		<span>
+			{props.text} Please try again or contact{' '}
+			<Link href="mailto:userhelp@theguardian.com" target="_blank">
+				userhelp@theguardian.com
+			</Link>
+		</span>
+	</InlineError>
+);
+
 type Props = {
 	styles: string;
 	html: string;
 	newsletterId: string;
 };
-
-const failStateAdvice = 'Please try again or contact userhelp@theguardian.com.';
 
 const buildFormData = (
 	emailAddress: string,
@@ -180,9 +190,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 
 	const handleCaptchaLoadError: ReactEventHandler<HTMLDivElement> = () => {
 		sendTracking(newsletterId, 'captcha-load-error');
-		setErrorMessage(
-			`Sorry, the reCAPTCHA failed to load. ${failStateAdvice}`,
-		);
+		setErrorMessage(`Sorry, the reCAPTCHA failed to load.`);
 		recaptchaRef.current?.reset();
 	};
 
@@ -192,15 +200,12 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 			return;
 		}
 		sendTracking(newsletterId, 'captcha-passed');
-
 		setIsWaitingForResponse(true);
 		submitForm(token).catch((error) => {
 			// eslint-disable-next-line no-console -- unexpected error
 			console.error(error);
 			sendTracking(newsletterId, 'form-submit-error');
-			setErrorMessage(
-				`Sorry, there was an error signing you up. ${failStateAdvice}`,
-			);
+			setErrorMessage(`Sorry, there was an error signing you up.`);
 			setIsWaitingForResponse(false);
 		});
 	};
@@ -227,6 +232,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 	const handleClickInIFrame = (): void => {
 		sendTracking(newsletterId, 'click-button');
 	};
+
 	const handleSubmitInIFrame = (event: SubmitEvent): void => {
 		event.preventDefault();
 		if (isWaitingForResponse) {
@@ -283,7 +289,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 				</div>
 			)}
 
-			{errorMessage && <InlineError>{errorMessage}</InlineError>}
+			{errorMessage && <ErrorMessageWithAdvice text={errorMessage} />}
 
 			{hasResponse &&
 				(responseOk ? (
@@ -304,9 +310,9 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 							}
 						`}
 					>
-						<InlineError>
-							Sign up failed: {responseText}. {failStateAdvice}
-						</InlineError>
+						<ErrorMessageWithAdvice
+							text={`Sign up failed: ${responseText ?? ''}.`}
+						/>
 						<Button
 							size="small"
 							icon={<SvgReload />}
