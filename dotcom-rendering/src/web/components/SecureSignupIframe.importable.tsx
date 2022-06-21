@@ -79,7 +79,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 	const [responseOk, setResponseOk] = useState<boolean | undefined>(
 		undefined,
 	);
-	const [captchaError, setCaptchaError] = useState<string | undefined>(
+	const [errorMessage, setErrorMessage] = useState<string | undefined>(
 		undefined,
 	);
 
@@ -103,15 +103,14 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 	};
 
 	const resetForm: ReactEventHandler<HTMLButtonElement> = () => {
-		setCaptchaError(undefined);
+		setErrorMessage(undefined);
 		setResponseOk(undefined);
 		setResponseText(undefined);
 		recaptchaRef.current?.reset();
 	};
 
-	const handleCaptchaError: ReactEventHandler<HTMLDivElement> = (event) => {
-		console.warn('handleCaptchaError', event);
-		setCaptchaError(
+	const handleCaptchaLoadError: ReactEventHandler<HTMLDivElement> = () => {
+		setErrorMessage(
 			`Sorry, the reCAPTCHA failed to load. ${failStateAdvice}`,
 		);
 		recaptchaRef.current?.reset();
@@ -124,8 +123,12 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 
 		setIsWaitingForResponse(true);
 		submitForm(token).catch((error) => {
+			// eslint-disable-next-line no-console -- unexpected error
 			console.error(error);
-			setCaptchaError('submitForm ERROR');
+			setErrorMessage(
+				`Sorry, there was an error signing you up. ${failStateAdvice}`,
+			);
+			setIsWaitingForResponse(false);
 		});
 	};
 
@@ -156,7 +159,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 		if (isWaitingForResponse) {
 			return;
 		}
-		setCaptchaError(undefined);
+		setErrorMessage(undefined);
 		recaptchaRef.current?.execute();
 	};
 
@@ -206,7 +209,7 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 				</div>
 			)}
 
-			{captchaError && <InlineError>{captchaError}</InlineError>}
+			{errorMessage && <InlineError>{errorMessage}</InlineError>}
 
 			{hasResponse &&
 				(responseOk ? (
@@ -249,11 +252,11 @@ export const SecureSignupIframe = ({ styles, html, newsletterId }: Props) => {
 						}
 					`}
 				>
-					<ReCAPTCHA // TO DO - EXPIRED AND ERROR callbacks
+					<ReCAPTCHA // TO DO - EXPIRED callback
 						sitekey={captchaSiteKey}
 						ref={recaptchaRef}
 						onChange={handleCaptchaComplete}
-						onError={handleCaptchaError}
+						onError={handleCaptchaLoadError}
 						size="invisible"
 					/>
 				</div>
