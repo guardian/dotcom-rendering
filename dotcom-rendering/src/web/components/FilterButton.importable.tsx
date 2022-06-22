@@ -3,17 +3,16 @@ import { space, textSans } from '@guardian/source-foundations';
 import { Button, SvgCross } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 
-// TODO: remove once Anna's PR is merged
-type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
-
 interface LabelProps {
 	value: string;
 	count: number;
 }
 
-interface ButtonProps extends LabelProps {
+interface ButtonProps {
 	topicType: TopicType;
 	activeTopic: string;
+	value: string;
+	count: number;
 	format: ArticleFormat;
 }
 
@@ -73,18 +72,18 @@ export const FilterButton = ({
 	activeTopic,
 	format,
 }: ButtonProps) => {
-	const topic = `${topicType}:${value}`;
+	const buttonTopic = `${topicType}:${value}`;
 	const palette = decidePalette(format);
 
 	const handleClick = () => {
 		const urlParams = new URLSearchParams(window.location.search);
 		urlParams.delete('page'); // direct to the first page
-		urlParams.set('topics', topic);
+		urlParams.set('topics', buttonTopic);
 
 		window.location.search = urlParams.toString();
 	};
 
-	return activeTopic === topic ? (
+	return activeTopic === buttonTopic ? (
 		<Button
 			cssOverrides={[buttonStyles(palette), activeStyles(palette)]}
 			onClick={handleClick}
