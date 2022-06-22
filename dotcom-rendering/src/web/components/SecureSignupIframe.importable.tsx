@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
-import { neutral, space, textSans, until } from '@guardian/source-foundations';
+import { neutral, space, until } from '@guardian/source-foundations';
 import {
 	Button,
 	InlineError,
+	InlineSuccess,
 	Link,
-	SvgEnvelope,
 	SvgReload,
 	SvgSpinner,
 } from '@guardian/source-react-components';
@@ -50,40 +50,10 @@ const ErrorMessageWithAdvice = (props: { text?: string }) => (
 );
 
 const SuccessMessage = (props: { text?: string }) => (
-	<div
-		css={css`
-			display: flex;
-			align-items: flex-start;
-
-			svg {
-				fill: ${neutral[7]};
-				background-color: ${neutral[86]};
-				border-radius: 50%;
-				height: 28px;
-				padding: 2px;
-				margin-right: ${space[1]}px;
-				flex-shrink: 0;
-			}
-
-			b {
-				${textSans.medium({ lineHeight: 'tight', fontWeight: 'bold' })};
-			}
-
-			span {
-				${textSans.small({ lineHeight: 'tight' })};
-			}
-		`}
-	>
-		<SvgEnvelope />
-		<div>
-			<p>
-				<b>Subscription Confirmed</b>
-			</p>
-			<p>
-				<span>{props.text}</span>
-			</p>
-		</div>
-	</div>
+	<InlineSuccess>
+		<b>Subscription Confirmed.&nbsp;</b>
+		<span>{props.text}</span>
+	</InlineSuccess>
 );
 
 const buildFormData = (
