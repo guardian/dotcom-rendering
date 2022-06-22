@@ -38,6 +38,10 @@ const articleLink = (format: ArticleFormat): Colour => {
 
 const articleLinkDark = articleLink;
 
+const interactiveAtomLink = (_format: ArticleFormat): Colour => {
+	return neutral[86];
+};
+
 const liveBlock = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -187,6 +191,7 @@ const pagination = (format: ArticleFormat): Colour => {
 const border = {
 	articleLink,
 	articleLinkDark,
+	interactiveAtomLink,
 	liveBlock,
 	liveBlockDark,
 	standfirstLink,

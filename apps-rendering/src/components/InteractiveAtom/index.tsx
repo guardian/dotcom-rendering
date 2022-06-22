@@ -1,15 +1,14 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css, jsx as styledH } from '@emotion/react';
+import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral, remSpace } from '@guardian/source-foundations';
+import { remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { createElement as h } from 'react';
 import { pageFonts } from 'styles';
-import type { ThemeStyles } from 'themeStyles';
-import { getThemeStyles } from 'themeStyles';
 
 export interface InteractiveAtomProps {
 	html: string;
@@ -18,15 +17,13 @@ export interface InteractiveAtomProps {
 	format: ArticleFormat;
 }
 
-const InteractiveAtomStyles = (
-	themeStyles: ThemeStyles,
-): SerializedStyles => css`
+const InteractiveAtomStyles = (format: ArticleFormat): SerializedStyles => css`
 	margin: 0;
 
 	a {
-		color: ${themeStyles.kicker};
+		color: ${text.interactiveAtomLink(format)};
 		text-decoration: none;
-		border-bottom: 0.0625rem solid ${neutral[86]};
+		border-bottom: 0.0625rem solid ${border.interactiveAtomLink(format)};
 	}
 `;
 const atomCss = `
@@ -46,11 +43,12 @@ const atomScript = `
     setTimeout(resize, 1000);
 `;
 
-const InteractiveAtom: FC<InteractiveAtomProps> = (
-	props: InteractiveAtomProps,
-): ReactElement => {
-	const { html, styles, js, format } = props;
-	const pillarStyles = getThemeStyles(format.theme);
+const InteractiveAtom: FC<InteractiveAtomProps> = ({
+	html,
+	styles,
+	js,
+	format,
+}): ReactElement => {
 	const style = h('style', { dangerouslySetInnerHTML: { __html: styles } });
 	const script = pipe(
 		js,
@@ -60,7 +58,7 @@ const InteractiveAtom: FC<InteractiveAtomProps> = (
 		withDefault<ReactElement | null>(null),
 	);
 	const markup = styledH('figure', {
-		css: InteractiveAtomStyles(pillarStyles),
+		css: InteractiveAtomStyles(format),
 		dangerouslySetInnerHTML: { __html: html },
 	});
 
