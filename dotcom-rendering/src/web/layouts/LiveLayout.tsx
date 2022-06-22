@@ -31,7 +31,6 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
-import { FilterButton } from '../components/FilterButton.importable';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
 import { Footer } from '../components/Footer';
 import { GetCricketScoreboard } from '../components/GetCricketScoreboard.importable';
@@ -808,33 +807,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														CAPIArticle.filterKeyEvents
 													}
 													id="filter-toggle-desktop"
-												/>
-											</Island>
-											<Island>
-												<FilterButton
-													value="nhs"
-													topicType="ORG"
-													count={3}
-													activeTopic="ORG:nhs"
-													format={format}
-												/>
-											</Island>
-											<Island>
-												<FilterButton
-													value="fifa"
-													topicType="ORG"
-													count={3}
-													activeTopic="ORG:nhs"
-													format={format}
-												/>
-											</Island>
-											<Island>
-												<FilterButton
-													value="something"
-													topicType="ORG"
-													count={3}
-													activeTopic="ORG:nhs"
-													format={format}
 												/>
 											</Island>
 										</Hide>

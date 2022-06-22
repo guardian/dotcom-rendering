@@ -16,7 +16,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 const format = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
-	theme: ArticlePillar.Sport,
+	theme: ArticlePillar.News,
 };
 
 export default {
