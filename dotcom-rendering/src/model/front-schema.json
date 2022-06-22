@@ -2406,6 +2406,7 @@
             "enum": [
                 "Branded",
                 "Breaking",
+                "BreakingPalette",
                 "Canonical",
                 "Dynamo",
                 "DynamoLike",
