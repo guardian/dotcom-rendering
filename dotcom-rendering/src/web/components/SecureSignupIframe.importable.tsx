@@ -34,18 +34,12 @@ type Props = {
 
 const ErrorMessageWithAdvice = (props: { text?: string }) => (
 	<InlineError>
-		<div
-			css={css`
-				display: flex;
-			`}
-		>
-			<span>
-				{props.text} Please try again or contact{' '}
-				<Link href="mailto:userhelp@theguardian.com" target="_blank">
-					userhelp@theguardian.com
-				</Link>
-			</span>
-		</div>
+		<span>
+			{props.text} Please try again or contact{' '}
+			<Link href="mailto:userhelp@theguardian.com" target="_blank">
+				userhelp@theguardian.com
+			</Link>
+		</span>
 	</InlineError>
 );
 
@@ -171,9 +165,6 @@ export const SecureSignupIframe = ({
 	const [isWaitingForResponse, setIsWaitingForResponse] =
 		useState<boolean>(false);
 	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>('');
-	const [responseText, setResponseText] = useState<string | undefined>(
-		undefined,
-	);
 	const [responseOk, setResponseOk] = useState<boolean | undefined>(
 		undefined,
 	);
@@ -195,9 +186,12 @@ export const SecureSignupIframe = ({
 			window.guardian.config.page.ajaxUrl + '/email',
 			buildFormData(emailAddress, newsletterId, token),
 		);
-		const text = await response.text();
+
+		// The response body could be accessed with await response.text()
+		// here and added to state but the response is not informative
+		// enough to convey the actualreason for a failure to the user,
+		// so a generic failure message is used.
 		setIsWaitingForResponse(false);
-		setResponseText(text);
 		setResponseOk(response.ok);
 
 		sendTracking(
@@ -211,7 +205,6 @@ export const SecureSignupIframe = ({
 	const resetForm: ReactEventHandler<HTMLButtonElement> = () => {
 		setErrorMessage(undefined);
 		setResponseOk(undefined);
-		setResponseText(undefined);
 		recaptchaRef.current?.reset();
 	};
 
@@ -341,9 +334,7 @@ export const SecureSignupIframe = ({
 							}
 						`}
 					>
-						<ErrorMessageWithAdvice
-							text={`Sign up failed: ${responseText ?? ''}.`}
-						/>
+						<ErrorMessageWithAdvice text={`Sign up failed.`} />
 						<Button
 							size="small"
 							icon={<SvgReload />}
