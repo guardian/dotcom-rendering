@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticlePillar, ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { TopicFilterBank } from './TopicFilterBank';
 
 interface Topic {

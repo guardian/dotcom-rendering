@@ -55,6 +55,7 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { TopicFilterBank } from '../components/TopicFilterBank';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
@@ -300,6 +301,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const showKeyEventsCarousel =
 		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
+	console.log(CAPIArticle.topics);
 
 	return (
 		<>
@@ -782,6 +784,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											}
 										/>
 									</div>
+								)}
+								{CAPIArticle.topics && (
+									<TopicFilterBank
+										topics={CAPIArticle.topics}
+										format={format}
+									/>
 								)}
 								{/* Match stats */}
 								{footballMatchUrl && (
