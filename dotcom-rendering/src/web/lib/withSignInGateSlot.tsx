@@ -1,10 +1,12 @@
 // This placeholder div is used by the SignInGate component to insert the sign in gate into the appropriate location within body of an article,
 // if the SignInGateSelector determines a gate should be rendered.
 
+import React from 'react';
 import { Island } from '../components/Island';
 import { SignInGateSelector } from '../components/SignInGateSelector.importable';
 
 type Props = {
+	// eslint-disable-next-line @typescript-eslint/ban-types -- we want to coerce children
 	renderedElements: (JSX.Element | null | undefined)[];
 	format: ArticleFormat;
 	contentType: string;
@@ -34,7 +36,7 @@ export const withSignInGateSlot = ({
 }: Props): React.ReactNode => {
 	return renderedElements.map((element, i) => {
 		return (
-			<>
+			<React.Fragment key={element?.key ?? i}>
 				{element}
 				{/* Add the placeholder div after the second article element */}
 				{i === 1 && (
@@ -54,7 +56,7 @@ export const withSignInGateSlot = ({
 						</Island>
 					</div>
 				)}
-			</>
+			</React.Fragment>
 		);
 	});
 };

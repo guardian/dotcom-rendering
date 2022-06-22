@@ -1,4 +1,4 @@
-import { render, wait } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
@@ -40,7 +40,7 @@ describe('ReaderRevenueLinks', () => {
 			/>,
 		);
 
-		await wait(() => expect(getByText('Thank you')).toBeInTheDocument());
+		await waitFor(() => expect(getByText('Thank you')).toBeInTheDocument());
 	});
 
 	it('should render support message if shouldHideSupportMessaging() returns false', async () => {
@@ -57,7 +57,7 @@ describe('ReaderRevenueLinks', () => {
 			/>,
 		);
 
-		await wait(() =>
+		await waitFor(() =>
 			expect(getByText('Support the Guardian')).toBeInTheDocument(),
 		);
 	});

@@ -17,9 +17,8 @@ import {
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
 import React from 'react';
-
 import { buildAdTargeting } from '../../lib/ad-targeting';
-import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
@@ -515,10 +514,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								</div>
 							</GridItem>
 							<GridItem area="body" element="article">
-								<ArticleContainer
-									format={format}
-									abTests={CAPIArticle.config.abTests}
-								>
+								<ArticleContainer format={format}>
 									<ArticleBody
 										format={format}
 										blocks={CAPIArticle.blocks}
@@ -550,6 +546,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										isPreview={CAPIArticle.config.isPreview}
 										idUrl={CAPIArticle.config.idUrl || ''}
 										isDev={!!CAPIArticle.config.isDev}
+										abTests={CAPIArticle.config.abTests}
 									/>
 
 									{/* <StraightLines data-print-layout="hide" count={4} /> */}

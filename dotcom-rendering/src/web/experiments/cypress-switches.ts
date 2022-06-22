@@ -17,7 +17,7 @@ const cypressSwitches = {
 };
 
 // Function to retrieve the switches if running in Cypress
-export const getCypressSwitches = () => {
+export const getCypressSwitches = (): Record<string, boolean> => {
 	// If running within cypress, return the forced switches
 	if (window.Cypress) return cypressSwitches;
 	// Otherwise just return empty object

@@ -4,7 +4,7 @@ import { between, from, until } from '@guardian/source-foundations';
 
 type Props = {
 	children: React.ReactNode;
-	imageSize?: ImageSizeType;
+	imageSize: ImageSizeType;
 	imagePosition: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 };
@@ -47,7 +47,7 @@ const flexBasisStyles = ({
 
 export const ImageWrapper = ({
 	children,
-	imageSize = 'large',
+	imageSize,
 	imagePosition,
 	imagePositionOnMobile,
 }: Props) => {

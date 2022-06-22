@@ -5,7 +5,7 @@ export const getIdFromUrl = (
 	regexFormat: string,
 	tryInPath?: boolean,
 	tryQueryParam?: string,
-) => {
+): string => {
 	const logErr = (actual: string, message: string) => {
 		throw new Error(
 			`validate getIdFromURL error: The URL ${urlString} returned ${actual}. ${message}`,

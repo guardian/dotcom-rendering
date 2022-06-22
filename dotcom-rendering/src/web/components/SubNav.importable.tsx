@@ -27,13 +27,6 @@ const wrapperCollapsedStyles = css`
 const rootSubnavStyles = css`
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
-	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
-	li::before {
-		content: '\\200B'; /* Zero width space */
-		display: block;
-		height: 0;
-		width: 0;
-	}
 	padding: 0 5px;
 
 	${from.mobileLandscape} {
@@ -150,7 +143,7 @@ const listItemStyles = (palette: Palette) => css`
 `;
 
 const trimLeadingSlash = (url: string): string =>
-	url.substr(0, 1) === '/' ? url.slice(1) : url;
+	url.startsWith('/') ? url.slice(1) : url;
 
 export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 	const [showMore, setShowMore] = useState(false);
@@ -186,6 +179,7 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 			<ul
 				ref={ulRef}
 				css={[expandSubNav ? expandedStyles : collapsedStyles]}
+				role="list"
 			>
 				{subNavSections.parent && (
 					<li
@@ -202,7 +196,18 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 					</li>
 				)}
 				{subNavSections.links.map((link) => (
-					<li key={link.url}>
+					<li
+						key={link.url}
+						/**
+						 * We’ve getting many false positive on changes to Obituaries.
+						 * Let’s try ignoring it for now.
+						 *
+						 * @see https://www.chromatic.com/docs/ignoring-elements#ignore-dom-elements
+						 */
+						data-chromatic={
+							link.title === 'Obituaries' ? 'ignore' : undefined
+						}
+					>
 						<a
 							css={linkStyle(palette)}
 							data-src-focus-disabled={true}

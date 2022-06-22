@@ -21,12 +21,12 @@ export const TrailTextWrapper = ({
 				flex-direction: column;
 				color: ${palette.text.cardStandfirst};
 
-				${body.small()};
+				${body.small({ lineHeight: 'regular' })};
 				font-size: 14px;
 
 				padding-left: 5px;
 				padding-right: 5px;
-				padding-bottom: 6px;
+				padding-bottom: 8px;
 
 				${until.tablet} {
 					display: none;

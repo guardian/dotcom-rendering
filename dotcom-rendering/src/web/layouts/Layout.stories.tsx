@@ -7,15 +7,17 @@ import {
 import { storiesOf } from '@storybook/react';
 import { useEffect } from 'react';
 import { Analysis } from '../../../fixtures/generated/articles/Analysis';
-import { Article } from '../../../fixtures/generated/articles/Article';
+import { Audio } from '../../../fixtures/generated/articles/Audio';
 import { Comment } from '../../../fixtures/generated/articles/Comment';
 import { Editorial } from '../../../fixtures/generated/articles/Editorial';
 import { Feature } from '../../../fixtures/generated/articles/Feature';
+import { Gallery } from '../../../fixtures/generated/articles/Gallery';
 import { Interview } from '../../../fixtures/generated/articles/Interview';
 import { Labs } from '../../../fixtures/generated/articles/Labs';
 import { Letter } from '../../../fixtures/generated/articles/Letter';
 import { Live } from '../../../fixtures/generated/articles/Live';
 import { MatchReport } from '../../../fixtures/generated/articles/MatchReport';
+import { NewsletterSignup } from '../../../fixtures/generated/articles/NewsletterSignup';
 import { NumberedList } from '../../../fixtures/generated/articles/NumberedList';
 import { PhotoEssay } from '../../../fixtures/generated/articles/PhotoEssay';
 import { PrintShop } from '../../../fixtures/generated/articles/PrintShop';
@@ -23,6 +25,8 @@ import { Quiz } from '../../../fixtures/generated/articles/Quiz';
 import { Recipe } from '../../../fixtures/generated/articles/Recipe';
 import { Review } from '../../../fixtures/generated/articles/Review';
 import { SpecialReport } from '../../../fixtures/generated/articles/SpecialReport';
+import { Standard } from '../../../fixtures/generated/articles/Standard';
+import { Video } from '../../../fixtures/generated/articles/Video';
 import { extractNAV } from '../../model/extract-nav';
 import { embedIframe } from '../browser/embedIframe/embedIframe';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
@@ -32,7 +36,10 @@ import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { DecideLayout } from './DecideLayout';
 
 const Fixtures: { [key: string]: CAPIArticleType } = {
-	Article,
+	Standard,
+	Gallery,
+	Audio,
+	Video,
 	PhotoEssay,
 	Review,
 	PrintShop,
@@ -50,6 +57,7 @@ const Fixtures: { [key: string]: CAPIArticleType } = {
 	Labs,
 	SpecialReport,
 	NumberedList,
+	NewsletterSignup,
 };
 
 mockRESTCalls();
@@ -98,7 +106,7 @@ for (const [displayName] of Object.entries(ArticleDisplay)) {
 						});
 
 						const fixture =
-							Fixtures[designName] || Fixtures.Article;
+							Fixtures[designName] || Fixtures.Standard;
 
 						stories.add(pillarName, () => {
 							return (
@@ -131,7 +139,7 @@ for (const [displayName] of Object.entries(ArticleDisplay)) {
 						});
 
 						const fixture =
-							Fixtures[designName] || Fixtures.Article;
+							Fixtures[designName] || Fixtures.Standard;
 
 						stories.add(specialName, () => {
 							return (

@@ -7,13 +7,13 @@ describe('RegionalAd', () => {
 		'https://guardian.amp.permutive.com/rtc?type=doubleclick';
 
 	const ukRelevantYieldURL =
-		'https://pbs.relevant-digital.com/openrtb2/amp?tag_id=6214ca675cf18e70cbaeef37_6214c9a4b73a6613d4aeef2f&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING&tgt_pfx=rv&dummy_param=ATTR(data-amp-slot-index)';
+		'https://guardian-pbs.relevant-digital.com/openrtb2/amp?tag_id=6214ca675cf18e70cbaeef37_6214c9a4b73a6613d4aeef2f&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING&tgt_pfx=rv&dummy_param=ATTR(data-amp-slot-index)';
 	const usRelevantYieldURL =
-		'https://pbs.relevant-digital.com/openrtb2/amp?tag_id=6214cb381a577cd525aeef3f_6214caacb52b565527aeef39&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING&tgt_pfx=rv&dummy_param=ATTR(data-amp-slot-index)';
+		'https://guardian-pbs.relevant-digital.com/openrtb2/amp?tag_id=6214cb381a577cd525aeef3f_6214caacb52b565527aeef39&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING&tgt_pfx=rv&dummy_param=ATTR(data-amp-slot-index)';
 	const auRelevantYieldURL =
-		'https://pbs.relevant-digital.com/openrtb2/amp?tag_id=6214cbe6a24103508faeef45_6214cb50aac9c1160daeef40&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING&tgt_pfx=rv&dummy_param=ATTR(data-amp-slot-index)';
+		'https://guardian-pbs.relevant-digital.com/openrtb2/amp?tag_id=6214cbe6a24103508faeef45_6214cb50aac9c1160daeef40&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING&tgt_pfx=rv&dummy_param=ATTR(data-amp-slot-index)';
 	const intRelevantYieldURL =
-		'https://pbs.relevant-digital.com/openrtb2/amp?tag_id=6214ca56243f4ff4f5aeef36_6214c723c70856442e4d79f2&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING&tgt_pfx=rv&dummy_param=ATTR(data-amp-slot-index)';
+		'https://guardian-pbs.relevant-digital.com/openrtb2/amp?tag_id=6214ca56243f4ff4f5aeef36_6214c723c70856442e4d79f2&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING&tgt_pfx=rv&dummy_param=ATTR(data-amp-slot-index)';
 
 	const apsVendorObj = {
 		aps: { PUB_ID: '3722', PARAMS: { amp: '1' } },
@@ -398,7 +398,7 @@ describe('RegionalAd', () => {
 		expect(intRtcAttribute.vendors).toEqual(apsVendorObj);
 	});
 
-	it('with ab test running and in Pubmatic variant, rtc-config contains Permutive UR and Pubmatic vendor when `usePermutive` and `usePrebid` flags are set to true', () => {
+	it.skip('with ab test running and in Pubmatic variant, rtc-config contains Permutive UR and Pubmatic vendor when `usePermutive` and `usePrebid` flags are set to true', () => {
 		const { container } = render(
 			<ContentABTestProvider
 				pageId="money/2004/may/13/homeimprovements"

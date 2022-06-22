@@ -26,19 +26,20 @@ const styles = css`
 const captionStyles = css`
 	${textSans.xsmall()}
 	color: ${text.supporting};
+	padding-bottom: ${remSpace[1]};
 `;
 
 const EmailSignupEmbed: FC<Props> = ({ embed }) => (
 	<figure css={styles}>
+		{maybeRender(embed.caption, (caption) => (
+			<figcaption css={captionStyles}>{caption}</figcaption>
+		))}
 		<iframe
 			src={embed.src}
 			className="js-email-signup"
 			height="60"
 			title={withDefault('Email newsletter signup embed')(embed.alt)}
 		></iframe>
-		{maybeRender(embed.caption, (caption) => (
-			<figcaption css={captionStyles}>{caption}</figcaption>
-		))}
 	</figure>
 );
 

@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
+// eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
 import Accordion from '@guardian/common-rendering/src/components/accordion';
+// eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
 import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
 import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
@@ -18,20 +20,11 @@ import {
 	Lines,
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
-import { KeyEventsContainer } from '../components/KeyEventsContainer';
 import { buildAdTargeting } from '../../lib/ad-targeting';
-import { parse } from '../../lib/slot-machine-flags';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { Liveness } from '../components/Liveness.importable';
-import { GetMatchStats } from '../components/GetMatchStats.importable';
-import { GetCricketScoreboard } from '../components/GetCricketScoreboard.importable';
-import { OnwardsLower } from '../components/OnwardsLower.importable';
-import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
@@ -40,15 +33,23 @@ import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
 import { Footer } from '../components/Footer';
+import { GetCricketScoreboard } from '../components/GetCricketScoreboard.importable';
+import { GetMatchNav } from '../components/GetMatchNav.importable';
+import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 import { GridItem } from '../components/GridItem';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
+import { KeyEventsContainer } from '../components/KeyEventsContainer';
+import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
+import { OnwardsLower } from '../components/OnwardsLower.importable';
+import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
-import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -183,7 +184,7 @@ const LiveGrid = ({ children }: { children: React.ReactNode }) => (
 				}
 				/* until desktop define fixed body width */
 				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: minmax(0, 1fr); /* Main content */
 					grid-template-areas:
 						'media'
 						'info'
@@ -268,10 +269,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		adUnit: CAPIArticle.config.adUnit,
 	});
 
-	const showBodyEndSlot =
-		parse(CAPIArticle.slotMachineFlags || '').showBodyEnd ||
-		CAPIArticle.config.switches.slotBodyEnd;
-
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `CAPIArticle.config.shouldHideReaderRevenue` equals false.
@@ -300,6 +297,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const cricketMatchUrl =
 		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
+
+	const showKeyEventsCarousel =
+		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
 
 	return (
 		<>
@@ -590,7 +590,27 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandFirstGrid>
 				</ElementContainer>
-
+				{showKeyEventsCarousel && CAPIArticle.keyEvents.length && (
+					<ElementContainer
+						showTopBorder={false}
+						backgroundColour={
+							palette.background.keyEventFromDesktop
+						}
+						borderColour={palette.border.article}
+					>
+						<Hide until={'desktop'}>
+							<Island>
+								<KeyEventsCarousel
+									keyEvents={CAPIArticle.keyEvents}
+									filterKeyEvents={
+										CAPIArticle.filterKeyEvents
+									}
+									format={format}
+								/>
+							</Island>
+						</Hide>
+					</ElementContainer>
+				)}
 				<ElementContainer
 					showTopBorder={false}
 					borderColour={palette.border.article}
@@ -746,21 +766,23 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</div>
 								</Hide>
 								{/* Key events */}
-								<div
-									css={[
-										!footballMatchUrl && sticky,
-										keyEventsMargins,
-										sidePaddingDesktop,
-									]}
-								>
-									<KeyEventsContainer
-										format={format}
-										keyEvents={CAPIArticle.keyEvents}
-										filterKeyEvents={
-											CAPIArticle.filterKeyEvents
-										}
-									/>
-								</div>
+								{!showKeyEventsCarousel && (
+									<div
+										css={[
+											!footballMatchUrl && sticky,
+											keyEventsMargins,
+											sidePaddingDesktop,
+										]}
+									>
+										<KeyEventsContainer
+											format={format}
+											keyEvents={CAPIArticle.keyEvents}
+											filterKeyEvents={
+												CAPIArticle.filterKeyEvents
+											}
+										/>
+									</div>
+								)}
 								{/* Match stats */}
 								{footballMatchUrl && (
 									<Island
@@ -796,7 +818,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										accordionTitle="Live feed"
 										context="liveFeed"
 									>
-										{CAPIArticle.keyEvents.length ? (
+										{!showKeyEventsCarousel &&
+										CAPIArticle.keyEvents.length ? (
 											<Hide above="desktop">
 												<Island deferUntil="visible">
 													<FilterKeyEventsToggle
@@ -810,10 +833,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										) : (
 											<></>
 										)}
-										<ArticleContainer
-											format={format}
-											abTests={CAPIArticle.config.abTests}
-										>
+										<ArticleContainer format={format}>
 											{pagination.currentPage !== 1 && (
 												<Pagination
 													currentPage={
@@ -886,6 +906,18 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												onFirstPage={
 													pagination.currentPage === 1
 												}
+												keyEvents={
+													CAPIArticle.keyEvents
+												}
+												filterKeyEvents={
+													CAPIArticle.filterKeyEvents
+												}
+												abTests={
+													CAPIArticle.config.abTests
+												}
+												showKeyEventsCarousel={
+													showKeyEventsCarousel
+												}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination
@@ -901,52 +933,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													older={pagination.older}
 													format={format}
 												/>
-											)}
-											{showBodyEndSlot && (
-												<Island clientOnly={true}>
-													<SlotBodyEnd
-														contentType={
-															CAPIArticle.contentType
-														}
-														contributionsServiceUrl={
-															contributionsServiceUrl
-														}
-														idApiUrl={
-															CAPIArticle.config
-																.idApiUrl
-														}
-														isMinuteArticle={
-															CAPIArticle.pageType
-																.isMinuteArticle
-														}
-														isPaidContent={
-															CAPIArticle.pageType
-																.isPaidContent
-														}
-														keywordsId={
-															CAPIArticle.config
-																.keywordIds
-														}
-														pageId={
-															CAPIArticle.pageId
-														}
-														sectionId={
-															CAPIArticle.config
-																.section
-														}
-														sectionName={
-															CAPIArticle.sectionName
-														}
-														shouldHideReaderRevenue={
-															CAPIArticle.shouldHideReaderRevenue
-														}
-														stage={
-															CAPIArticle.config
-																.stage
-														}
-														tags={CAPIArticle.tags}
-													/>
-												</Island>
 											)}
 											<StraightLines
 												data-print-layout="hide"

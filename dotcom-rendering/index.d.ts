@@ -127,6 +127,7 @@ type Palette = {
 		shareCountUntilDesktop: Colour;
 		cricketScoreboardLink: Colour;
 		keyEvent: Colour;
+		keyEventTime: Colour;
 	};
 	background: {
 		article: Colour;
@@ -153,6 +154,8 @@ type Palette = {
 		ageWarning: Colour;
 		keyEventBullet: Colour;
 		summaryEventBullet: Colour;
+		keyEvent: Colour;
+		keyEventFromDesktop: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -186,6 +189,7 @@ type Palette = {
 		cricketScoreboardTop: Colour;
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;
+		keyEvent: Colour;
 	};
 	topBar: {
 		card: Colour;
@@ -263,13 +267,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-			adUnit: string;
-			customParams: CustomParams;
-			disableAds?: false;
-	  }
+		adUnit: string;
+		customParams: CustomParams;
+		disableAds?: false;
+	}
 	| {
-			disableAds: true;
-	  };
+		disableAds: true;
+	};
 
 interface SectionNielsenAPI {
 	name: string;
@@ -374,6 +378,17 @@ interface AuthorType {
 	email?: string;
 }
 
+interface MembershipPlaceholder {
+	campaignCode?: string;
+}
+
+interface Attributes {
+	pinned: boolean;
+	summary: boolean;
+	keyEvent: boolean;
+	membershipPlaceholder?: MembershipPlaceholder;
+}
+
 interface BlockContributor {
 	name: string;
 	imageUrl?: string;
@@ -383,6 +398,7 @@ interface BlockContributor {
 interface Block {
 	id: string;
 	elements: CAPIElement[];
+	attributes: Attributes;
 	blockCreatedOn?: number;
 	blockCreatedOnDisplay?: string;
 	blockLastUpdated?: number;
@@ -595,6 +611,7 @@ interface CAPIArticleType {
 
 	// Included on live and dead blogs. Used when polling
 	mostRecentBlockId?: string;
+	topics?: Topic[];
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
@@ -672,6 +689,17 @@ type DCRSupportingContent = {
 	url?: string;
 	kickerText?: string;
 	format: ArticleFormat;
+};
+
+type FESnapType = {
+	embedHtml?: string;
+	embedCss?: string;
+	embedJs?: string;
+};
+
+type DCRSnapType = {
+	embedHtml?: string;
+	embedCss?: string;
 };
 
 type FEContainerType =
@@ -837,7 +865,7 @@ type FEFrontCard = {
 		showLivePlayable: boolean;
 	};
 	format?: CAPIFormat;
-	enriched?: Record<string, unknown>;
+	enriched?: FESnapType;
 	supportingContent?: FESupportingContent[];
 	cardStyle?: {
 		type: string;
@@ -853,8 +881,12 @@ type DCRFrontCard = {
 	webPublicationDate?: string;
 	image?: string;
 	kickerText?: string;
+	snapData?: DCRSnapType;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
+	discussionId?: string;
+	byline?: string;
+	showByline?: boolean;
 };
 
 type FECollectionType = {
@@ -1130,6 +1162,15 @@ type MatchReportType = {
 	reportUrl: string;
 };
 
+interface Topic {
+	type: TopicType,
+	value: string,
+	count: number,
+}
+
+type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
+
+
 /**
  * Onwards
  */
@@ -1267,6 +1308,8 @@ interface BaseTrailType {
 	starRating?: number;
 	linkText?: string;
 	branding?: Branding;
+	isSnap?: boolean;
+	snapData?: DCRSnapType;
 }
 interface TrailType extends BaseTrailType {
 	palette?: never;
@@ -1275,6 +1318,7 @@ interface TrailType extends BaseTrailType {
 	trailText?: string;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
+	discussionId?: string;
 }
 
 interface CAPITrailType extends BaseTrailType {

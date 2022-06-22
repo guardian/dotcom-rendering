@@ -48,4 +48,5 @@ export const getDataLinkNameCard = (
 	format: ArticleFormat,
 	group: string | number,
 	index: number,
-) => [getLinkType(format), `group-${group}`, `card-@${index}`].join(' | ');
+): string =>
+	[getLinkType(format), `group-${group}`, `card-@${index}`].join(' | ');

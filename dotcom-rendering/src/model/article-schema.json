@@ -399,6 +399,12 @@
         },
         "mostRecentBlockId": {
             "type": "string"
+        },
+        "topics": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Topic"
+            }
         }
     },
     "required": [
@@ -3469,6 +3475,9 @@
                         ]
                     }
                 },
+                "attributes": {
+                    "$ref": "#/definitions/Attributes"
+                },
                 "blockCreatedOn": {
                     "type": "number"
                 },
@@ -3525,11 +3534,42 @@
                 }
             },
             "required": [
+                "attributes",
                 "elements",
                 "id",
                 "primaryDateLine",
                 "secondaryDateLine"
             ]
+        },
+        "Attributes": {
+            "type": "object",
+            "properties": {
+                "pinned": {
+                    "type": "boolean"
+                },
+                "summary": {
+                    "type": "boolean"
+                },
+                "keyEvent": {
+                    "type": "boolean"
+                },
+                "membershipPlaceholder": {
+                    "$ref": "#/definitions/MembershipPlaceholder"
+                }
+            },
+            "required": [
+                "keyEvent",
+                "pinned",
+                "summary"
+            ]
+        },
+        "MembershipPlaceholder": {
+            "type": "object",
+            "properties": {
+                "campaignCode": {
+                    "type": "string"
+                }
+            }
         },
         "BlockContributor": {
             "type": "object",
@@ -4215,6 +4255,36 @@
             "enum": [
                 "CricketMatchType",
                 "FootballMatchType"
+            ],
+            "type": "string"
+        },
+        "Topic": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/TopicType"
+                },
+                "value": {
+                    "type": "string"
+                },
+                "count": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "count",
+                "type",
+                "value"
+            ]
+        },
+        "TopicType": {
+            "enum": [
+                "GPE",
+                "LOC",
+                "ORG",
+                "PERSON",
+                "PRODUCT",
+                "WORK_OF_ART"
             ],
             "type": "string"
         }

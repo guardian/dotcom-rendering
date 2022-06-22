@@ -37,6 +37,7 @@ export const FourOrLess = ({ content, containerPalette }: Props) => {
 					>
 						<Card
 							containerPalette={containerPalette}
+							showAge={true}
 							linkTo={trail.url}
 							format={trail.format}
 							headlineText={trail.headline}
@@ -57,9 +58,9 @@ export const FourOrLess = ({ content, containerPalette }: Props) => {
 							imageUrl={trail.image}
 							mediaType={trail.mediaType}
 							mediaDuration={trail.mediaDuration}
-							commentCount={trail.commentCount}
 							starRating={trail.starRating}
 							branding={trail.branding}
+							discussionId={trail.discussionId}
 						/>
 					</LI>
 				))}

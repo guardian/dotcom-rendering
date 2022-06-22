@@ -30,22 +30,26 @@ deploy:
 
 # prod #########################################
 
+build: export NODE_ENV=production
 build: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production webpack --config ./scripts/webpack/webpack.config.js --progress
+	@webpack --config ./scripts/webpack/webpack.config.js --progress
 
+build-ci: export NODE_ENV=production
 build-ci: clean-dist install
 	$(call log, "building production bundles")
-	@NODE_ENV=production SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
+	@SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
 
-start-ci: install
+start-ci: export NODE_ENV=production
+start-ci: install gen-dotenv-ci
 	$(call log, "starting PROD server...")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
+	@DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
 
-start: install
+start: export NODE_ENV=production
+start: install gen-dotenv
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	@NODE_ENV=production pm2 start dist/frontend.server.js
+	pm2 start dist/frontend.server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 	@pm2 logs
@@ -66,23 +70,27 @@ run-ci: stop build-ci start-ci
 
 # dev #########################################
 
-dev: clear clean-dist install
+dev: export NODE_ENV=development
+dev: clear clean-dist install gen-dotenv
 	$(call log, "starting DEV server")
-	@NODE_ENV=development SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
+	@SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
 
-dev-legacy: clear clean-dist install
+dev-legacy: export NODE_ENV=development
+dev-legacy: clear clean-dist install gen-dotenv
 	$(call log, "starting DEV server")
 	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
 
 # tests #####################################
 
+cypress: export NODE_ENV=production
 cypress: clear clean-dist install build
 	$(call log, "starting frontend PROD server for Cypress")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/integration/**/*"'
+	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
 
+ampValidation: export NODE_ENV=production
 ampValidation: clean-dist install build
 	$(call log, "starting frontend PROD server for AMP Validation")
-	@NODE_ENV=production DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'node scripts/test/amp-validation.js'
+	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'node scripts/test/amp-validation.js'
 
 buildCheck:
 	$(call log, "checking build files")
@@ -176,6 +184,14 @@ gen-schema:
 gen-fixtures:
 	$(call log, "Generating new article fixture data")
 	@node scripts/test-data/gen-fixtures.js
+
+gen-dotenv:
+	$(call log, "Generating .env file")
+	@node scripts/dotenv/gen-dotenv.js
+gen-dotenv-ci:
+	$(call log, "Generating .env file")
+	@CI_ENV=true node scripts/dotenv/gen-dotenv.js
+
 
 perf-test:
 	@node scripts/perf/perf-test.js

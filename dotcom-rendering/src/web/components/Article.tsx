@@ -8,6 +8,7 @@ import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
 import { CommercialMetrics } from './CommercialMetrics.importable';
 import { CoreVitals } from './CoreVitals.importable';
+import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
 import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
@@ -30,6 +31,9 @@ type Props = {
  * @param {ArticleFormat} props.format - The format model for the article
  * */
 export const Article = ({ CAPIArticle, NAV, format }: Props) => {
+	const showKeyEventsCarousel =
+		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
+
 	return (
 		<StrictMode>
 			<Global
@@ -49,7 +53,14 @@ export const Article = ({ CAPIArticle, NAV, format }: Props) => {
 			<SkipTo id="navigation" label="Skip to navigation" />
 			{(format.design === ArticleDesign.LiveBlog ||
 				format.design === ArticleDesign.DeadBlog) && (
-				<SkipTo id="keyevents" label="Skip to key events" />
+				<SkipTo
+					id={
+						showKeyEventsCarousel
+							? 'key-events-carousel'
+							: 'keyevents'
+					}
+					label="Skip to key events"
+				/>
 			)}
 			<Island clientOnly={true} deferUntil="idle">
 				<AlreadyVisited />
@@ -74,6 +85,9 @@ export const Article = ({ CAPIArticle, NAV, format }: Props) => {
 						CAPIArticle.shouldHideReaderRevenue
 					}
 				/>
+			</Island>
+			<Island clientOnly={true} deferUntil="idle">
+				<FetchCommentCounts repeat={true} />
 			</Island>
 			<Island clientOnly={true}>
 				<SetABTests

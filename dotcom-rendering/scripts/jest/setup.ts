@@ -1,5 +1,5 @@
 // add some helpful assertions
-import 'jest-dom/extend-expect';
+import '@testing-library/jest-dom/extend-expect';
 
 import type { WindowGuardianConfig } from '../../src/model/window-guardian';
 

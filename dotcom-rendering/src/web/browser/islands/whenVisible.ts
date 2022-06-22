@@ -5,7 +5,10 @@
  * @param element : The html element that we want to observe;
  * @param callback : This is fired when the element is visible in the viewport
  */
-export const whenVisible = (element: HTMLElement, callback: () => void) => {
+export const whenVisible = (
+	element: HTMLElement,
+	callback: () => void,
+): void => {
 	if ('IntersectionObserver' in window) {
 		const io = new IntersectionObserver(([entry]) => {
 			if (!entry.isIntersecting) return;

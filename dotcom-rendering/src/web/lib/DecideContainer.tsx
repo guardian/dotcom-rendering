@@ -1,18 +1,22 @@
 import { DynamicFast } from '../components/DynamicFast';
 import { DynamicSlow } from '../components/DynamicSlow';
 import { FixedLargeSlowXIV } from '../components/FixedLargeSlowXIV';
+import { FixedMediumSlowVI } from '../components/FixedMediumSlowVI';
+import { FixedSmallSlowIII } from '../components/FixedSmallSlowIII';
 import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
 
 type Props = {
 	trails: DCRFrontCard[];
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
 };
 
 export const DecideContainer = ({
 	trails,
 	containerType,
 	containerPalette,
+	showAge,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -20,6 +24,7 @@ export const DecideContainer = ({
 				<DynamicFast
 					trails={trails}
 					containerPalette={containerPalette}
+					showAge={showAge}
 				/>
 			);
 		case 'dynamic/slow':
@@ -27,6 +32,7 @@ export const DecideContainer = ({
 				<DynamicSlow
 					trails={trails}
 					containerPalette={containerPalette}
+					showAge={showAge}
 				/>
 			);
 		case 'fixed/large/slow-XIV':
@@ -34,6 +40,7 @@ export const DecideContainer = ({
 				<FixedLargeSlowXIV
 					trails={trails}
 					containerPalette={containerPalette}
+					showAge={showAge}
 				/>
 			);
 		case 'fixed/small/slow-IV':
@@ -41,6 +48,23 @@ export const DecideContainer = ({
 				<FixedSmallSlowIV
 					trails={trails}
 					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			);
+		case 'fixed/small/slow-III':
+			return (
+				<FixedSmallSlowIII
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			);
+		case 'fixed/medium/slow-VI':
+			return (
+				<FixedMediumSlowVI
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
 				/>
 			);
 		default:

@@ -10,7 +10,7 @@
 6. Import the `SignInGateComponent` in `SignInGateSelector.tsx` by mapping the variant name to the `SignInGateComponent` in the `signInGateTestVariantToGateMapping` array in `signInGate.ts`.
 7. Add a value for the new test to `signInGateTestIdToComponentId` map (for tracking) in `signInGate.ts`.
 8. If there is a new gate design, add the component to Storybook by modifying `SignInGate.stories.tsx`
-9. Update Cypress tests in the `cypress/integration/e2e/sign-in-gate.spec.js`, and any unit tests e.g. `displayRule.test.ts`
+9. Update Cypress tests in `sign-in-gate.cy.js`, and any unit tests e.g. `displayRule.test.ts`
 
 ## Full Guide
 
@@ -332,7 +332,7 @@ To test in CODE you will need to:
 
 #### Cypress Integration Tests
 
-The Cypress tests for the sign in gate are found in `cypress/integration/e2e/sign-in-gate.spec.js`. We use cypress to test that the functionality of the gate works as expected in a browser. Each test that shows a gate **must** be tested individually, as well as any display rules to show that gate (unless the display rules are shared).
+The Cypress tests for the sign in gate are in `sign-in-gate.cy.js`. We use cypress to test that the functionality of the gate works as expected in a browser. Each test that shows a gate **must** be tested individually, as well as any display rules to show that gate (unless the display rules are shared).
 
 Some useful things to note when writing sign in gate tests:
 
@@ -384,7 +384,7 @@ In the gate designs themselves, it is useful to set a `data-cy` attributes on an
 ```
 
 ```js
-// cypress/integration/e2e/sign-in-gate.spec.js
+// sign-in-gate.cy.js
 ...
 it('should load the sign in gate', () => {
     visitArticleAndScrollToGateForLazyLoad();

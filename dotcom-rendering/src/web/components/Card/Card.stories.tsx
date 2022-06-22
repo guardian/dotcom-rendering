@@ -27,6 +27,7 @@ const basicCardProps: CardProps = {
 	imageUrl:
 		'https://i.guim.co.uk/img/media/6537e163c9164d25ec6102641f6a04fa5ba76560/0_0_5472_3648/master/5472.jpg?width=1140&quality=85&s=15053eb16d6829d670fb348d8d26aabd',
 	imagePosition: 'top',
+	showAge: true,
 };
 
 const aBasicLink = {
@@ -434,25 +435,6 @@ cardStories.add('when vertical and theme opinion', () => {
 	);
 });
 
-cardStories.add('when vertical, opinion and with comments', () => {
-	return (
-		<>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Comment,
-						theme: ArticlePillar.Opinion,
-					}}
-					imagePosition="top"
-					commentCount={99}
-				/>
-			</CardWrapper>
-		</>
-	);
-});
-
 cardStories.add('with sublinks when vertical and opinion', () => {
 	return (
 		<>
@@ -494,7 +476,6 @@ cardStories.add('when horizontal and opinion', () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					commentCount={99}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
@@ -506,7 +487,6 @@ cardStories.add('when horizontal and opinion', () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					commentCount={99}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
@@ -538,7 +518,6 @@ cardStories.add('when horizontal and opinion', () => {
 			<CardWrapper>
 				<Card
 					{...basicCardProps}
-					commentCount={99}
 					format={{
 						display: ArticleDisplay.Standard,
 						design: ArticleDesign.Comment,
@@ -546,43 +525,6 @@ cardStories.add('when horizontal and opinion', () => {
 					}}
 					imagePosition="right"
 					supportingContent={[
-						{
-							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
-							kickerText: 'Kicker',
-						},
-					]}
-				/>
-			</CardWrapper>
-		</>
-	);
-});
-
-cardStories.add('when news, with comments', () => {
-	return (
-		<>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					imagePosition="right"
-					imageSize="large"
-					commentCount={99}
-				/>
-			</CardWrapper>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					imagePosition="right"
-					imageSize="large"
-					commentCount={99}
-					supportingContent={[
-						{
-							...aBasicLink,
-							headline:
-								'A longer headline to see how wrapping works',
-							kickerText: 'Kicker',
-						},
 						{
 							...aBasicLink,
 							headline:
@@ -603,7 +545,6 @@ cardStories.add('when news, with more than two sublinks', () => {
 				{...basicCardProps}
 				imagePosition="right"
 				imageSize="large"
-				commentCount={99}
 				supportingContent={[
 					{
 						...aBasicLink,
@@ -626,16 +567,6 @@ cardStories.add('when news, with more than two sublinks', () => {
 	);
 });
 
-cardStories.add('when vertical, news and with comments', () => {
-	return (
-		<CardGroup>
-			<CardWrapper>
-				<Card {...basicCardProps} commentCount={894} />
-			</CardWrapper>
-		</CardGroup>
-	);
-});
-
 cardStories.add('when horizontal, opinion, with a small image', () => {
 	return (
 		<>
@@ -649,6 +580,191 @@ cardStories.add('when horizontal, opinion, with a small image', () => {
 					}}
 					imagePosition="left"
 					imageSize="small"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="small"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</>
+	);
+});
+
+cardStories.add('when horizontal, opinion, with a medium image', () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="medium"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="medium"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</>
+	);
+});
+
+cardStories.add('when horizontal, opinion, with a large image', () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="large"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="large"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</>
+	);
+});
+
+cardStories.add('when horizontal, opinion, with a jumbo image', () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="jumbo"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="jumbo"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+					]}
 				/>
 			</CardWrapper>
 		</>
@@ -667,7 +783,6 @@ cardStories.add('when opinion, with the image at the bottom', () => {
 						theme: ArticlePillar.Opinion,
 					}}
 					imagePosition="bottom"
-					commentCount={99}
 					supportingContent={[
 						{
 							...aBasicLink,

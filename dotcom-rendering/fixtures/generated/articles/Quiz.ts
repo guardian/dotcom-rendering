@@ -345,13 +345,12 @@ export const Quiz: CAPIArticleType = {
 						],
 					},
 					{
-						title: 'Coronavirus',
-						url: '/world/coronavirus-outbreak',
-						longTitle: 'Coronavirus',
-					},
-					{
 						title: 'Climate crisis',
 						url: '/environment/climate-crisis',
+					},
+					{
+						title: 'Newsletters',
+						url: '/email-newsletters',
 					},
 					{
 						title: 'Football',
@@ -388,6 +387,11 @@ export const Quiz: CAPIArticleType = {
 								longTitle: 'football/teams',
 							},
 						],
+					},
+					{
+						title: 'Coronavirus',
+						url: '/world/coronavirus-outbreak',
+						longTitle: 'Coronavirus',
 					},
 					{
 						title: 'Business',
@@ -1121,6 +1125,8 @@ export const Quiz: CAPIArticleType = {
 			id: 'profile/steven-pye',
 			type: 'Contributor',
 			title: 'Steven Pye',
+			bylineImageUrl:
+				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2013/3/1/1362132740458/Steven-Pye.jpg?width=300&quality=85&auto=format&fit=max&s=5157df1a9e8f0f416988733b4e400e8b',
 		},
 		{
 			id: 'tracking/commissioningdesk/uk-communities-and-social',
@@ -1574,7 +1580,7 @@ export const Quiz: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '6c303d19-cf2e-4f22-bdc7-177d357b1761',
+			elementId: 'c8c96f9d-0998-4f0c-a192-b8bd9bfb54d9',
 		},
 	],
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
@@ -2187,9 +2193,14 @@ export const Quiz: CAPIArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: '41e07c50-b0c7-427c-9662-4404f36f0389',
+					elementId: '32f549aa-26a4-4d31-afcf-ecc677010735',
 				},
 			],
+			attributes: {
+				pinned: false,
+				keyEvent: false,
+				summary: false,
+			},
 			blockCreatedOn: 1591866131000,
 			blockCreatedOnDisplay: '10.02 BST',
 			blockLastUpdated: 1591917260000,
@@ -2401,8 +2412,7 @@ export const Quiz: CAPIArticleType = {
 		shouldHideReaderRevenue: false,
 		sentryHost: 'app.getsentry.com/35463',
 		isPaidContent: false,
-		headline:
-			'Fires and floods: maps of Europe predict scale of climate catastrophe',
+		headline: 'Headline string',
 		idApiUrl: 'https://idapi.theguardian.com',
 		showRelatedContent: true,
 		adUnit: '/59666047/theguardian.com/environment/article/ng',

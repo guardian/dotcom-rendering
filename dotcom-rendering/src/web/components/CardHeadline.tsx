@@ -198,11 +198,16 @@ export const CardHeadline = ({
 						? labTextStyles(size)
 						: fontStyles(size),
 					format.design === ArticleDesign.Analysis &&
+						!containerPalette &&
 						underlinedStyles(
 							size,
 							palette.background.analysisUnderline,
 						),
 					showLine && lineStyles(palette),
+					containerPalette &&
+						css`
+							font-weight: bold;
+						`,
 				]}
 			>
 				<WithLink linkTo={linkTo}>

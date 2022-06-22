@@ -1,15 +1,17 @@
 import { css } from '@emotion/react';
 import { timeAgo } from '@guardian/libs';
-import { from, neutral, space, textSans } from '@guardian/source-foundations';
+import { from, space, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 
-export interface KeyEvent {
-	date: Date;
-	text: string;
-	url: string;
-	format: ArticleFormat;
+interface Props {
+	id: string;
+	blockFirstPublished: number;
+	title: string;
 	isSummary: boolean;
+	filterKeyEvents: boolean;
+	format: ArticleFormat;
+	cardPosition?: string;
 }
 
 const linkStyles = (palette: Palette) => css`
@@ -54,18 +56,20 @@ const summaryStyles = (palette: Palette) => css`
 	}
 `;
 
-const listItemStyles = css`
+const listItemStyles = (palette: Palette) => css`
 	position: relative;
-	padding-bottom: ${space[5]}px;
+	padding-bottom: ${space[4]}px;
 	padding-top: ${space[3]}px;
 	padding-right: ${space[3]}px;
-	background-color: ${neutral[97]};
+	background-color: ${palette.background.keyEvent};
 	list-style: none;
 	display: block;
 	width: 162px;
+	scroll-snap-align: start;
 
 	${from.desktop} {
-		background-color: ${neutral[93]};
+		padding-bottom: ${space[5]}px;
+		background-color: ${palette.background.keyEventFromDesktop};
 		width: 200px;
 		padding-right: ${space[5]}px;
 	}
@@ -74,7 +78,7 @@ const listItemStyles = css`
 		content: '';
 		display: block;
 		position: absolute;
-		border-top: 1px dotted ${neutral[46]};
+		border-top: 1px dotted ${palette.border.keyEvent};
 		left: 0;
 		right: 0;
 		top: 18px;
@@ -90,28 +94,31 @@ const textStyles = (palette: Palette) => css`
 	color: ${palette.text.keyEvent};
 `;
 
-const timeStyles = css`
+const timeStyles = (palette: Palette) => css`
 	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
-	color: ${neutral[7]};
+	color: ${palette.text.keyEventTime};
 	display: block;
 `;
 
 export const KeyEventCard = ({
-	text,
-	date,
-	url,
-	format,
+	id,
+	blockFirstPublished,
 	isSummary,
-}: KeyEvent) => {
+	title,
+	filterKeyEvents,
+	format,
+	cardPosition,
+}: Props) => {
 	const palette = decidePalette(format);
-
+	const url = `?filterKeyEvents=${filterKeyEvents}&page=with:block-${id}#block-${id}`;
+	const date = new Date(blockFirstPublished);
 	return (
-		<li css={listItemStyles}>
+		<li css={listItemStyles(palette)}>
 			<Link
 				priority="secondary"
 				css={[linkStyles(palette), isSummary && summaryStyles(palette)]}
 				href={url}
-				data-link-name="key event card"
+				data-link-name={`key event card | ${cardPosition}`}
 			>
 				<time
 					dateTime={date.toISOString()}
@@ -125,11 +132,11 @@ export const KeyEventCard = ({
 						day: 'numeric',
 						timeZoneName: 'long',
 					})}`}
-					css={timeStyles}
+					css={timeStyles(palette)}
 				>
 					{timeAgo(date.getTime())}
 				</time>
-				<span css={textStyles(palette)}>{text}</span>
+				<span css={textStyles(palette)}>{title}</span>
 			</Link>
 		</li>
 	);

@@ -14,6 +14,7 @@ export const ExactlyFive = ({ content, containerPalette }: Props) => (
 			<LI padSides={true} percentage="34%">
 				<Card
 					containerPalette={containerPalette}
+					showAge={true}
 					linkTo={content[0].url}
 					format={content[0].format}
 					headlineText={content[0].headline}
@@ -34,9 +35,9 @@ export const ExactlyFive = ({ content, containerPalette }: Props) => (
 					imageUrl={content[0].image}
 					mediaType={content[0].mediaType}
 					mediaDuration={content[0].mediaDuration}
-					commentCount={content[0].commentCount}
 					starRating={content[0].starRating}
 					branding={content[0].branding}
+					discussionId={content[0].discussionId}
 				/>
 			</LI>
 			<LI
@@ -47,6 +48,7 @@ export const ExactlyFive = ({ content, containerPalette }: Props) => (
 			>
 				<Card
 					containerPalette={containerPalette}
+					showAge={true}
 					linkTo={content[1].url}
 					format={content[1].format}
 					headlineText={content[1].headline}
@@ -67,9 +69,9 @@ export const ExactlyFive = ({ content, containerPalette }: Props) => (
 					imageUrl={content[1].image}
 					mediaType={content[1].mediaType}
 					mediaDuration={content[1].mediaDuration}
-					commentCount={content[1].commentCount}
 					starRating={content[1].starRating}
 					branding={content[1].branding}
+					discussionId={content[1].discussionId}
 				/>
 			</LI>
 			<LI
@@ -82,6 +84,7 @@ export const ExactlyFive = ({ content, containerPalette }: Props) => (
 					<LI padBottom={true} stretch={true}>
 						<Card
 							containerPalette={containerPalette}
+							showAge={true}
 							linkTo={content[2].url}
 							format={content[2].format}
 							headlineText={content[2].headline}
@@ -104,14 +107,15 @@ export const ExactlyFive = ({ content, containerPalette }: Props) => (
 							showClock={false}
 							mediaType={content[2].mediaType}
 							mediaDuration={content[2].mediaDuration}
-							commentCount={content[2].commentCount}
 							starRating={content[2].starRating}
 							branding={content[2].branding}
+							discussionId={content[2].discussionId}
 						/>
 					</LI>
 					<LI padBottom={true} stretch={true}>
 						<Card
 							containerPalette={containerPalette}
+							showAge={true}
 							linkTo={content[3].url}
 							format={content[3].format}
 							headlineText={content[3].headline}
@@ -134,14 +138,15 @@ export const ExactlyFive = ({ content, containerPalette }: Props) => (
 							showClock={false}
 							mediaType={content[3].mediaType}
 							mediaDuration={content[3].mediaDuration}
-							commentCount={content[3].commentCount}
 							starRating={content[3].starRating}
 							branding={content[3].branding}
+							discussionId={content[3].discussionId}
 						/>
 					</LI>
 					<LI padBottom={false} stretch={true}>
 						<Card
 							containerPalette={containerPalette}
+							showAge={true}
 							linkTo={content[4].url}
 							format={content[4].format}
 							headlineText={content[4].headline}
@@ -164,9 +169,9 @@ export const ExactlyFive = ({ content, containerPalette }: Props) => (
 							showClock={false}
 							mediaType={content[4].mediaType}
 							mediaDuration={content[4].mediaDuration}
-							commentCount={content[4].commentCount}
 							starRating={content[4].starRating}
 							branding={content[4].branding}
+							discussionId={content[4].discussionId}
 						/>
 					</LI>
 				</UL>

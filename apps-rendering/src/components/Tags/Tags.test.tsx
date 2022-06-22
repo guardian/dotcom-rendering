@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { matchers } from '@emotion/jest';
+import { TagType } from '@guardian/content-api-models/v1/tagType';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import renderer from 'react-test-renderer';
@@ -13,6 +14,7 @@ expect.extend(matchers);
 const mockTag = {
 	webTitle: 'Tag title',
 	webUrl: 'https://mapi.co.uk/tag',
+	type: TagType.KEYWORD,
 };
 
 const mockFormat: ArticleFormat = {

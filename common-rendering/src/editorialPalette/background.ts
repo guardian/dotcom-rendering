@@ -102,6 +102,52 @@ const headlineDark = (format: ArticleFormat): Colour => {
 	return neutral[10];
 };
 
+const richLink = (_format: ArticleFormat): Colour => {
+	return neutral[97];
+}
+
+const richLinkDark = (_format: ArticleFormat): Colour => {
+	return neutral[20];
+}
+
+const richLinkSvg = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+	}
+};
+
+const richLinkSvgDark = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[500];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[500];
+		case ArticlePillar.Sport:
+			return sport[500];
+		case ArticlePillar.Culture:
+			return culture[500];
+		case ArticlePillar.Opinion:
+			return opinion[500];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[500];
+	}
+};
+
 const standfirst = ({ design, theme }: ArticleFormat): Colour => {
 	if (design === ArticleDesign.DeadBlog) {
 		return neutral[93];
@@ -259,6 +305,54 @@ const supportBannerDark = (_format: ArticleFormat): Colour => {
 	return brandAlt[200];
 };
 
+const series = (format: ArticleFormat): Colour => {
+	if (format.display === ArticleDisplay.Immersive) {
+		switch (format.theme) {
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Culture:
+				return culture[400];
+			case ArticlePillar.Opinion:
+				return opinion[400];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[400];
+			case ArticleSpecial.Labs:
+				return labs[400];
+			case ArticleSpecial.SpecialReport:
+				return brandAlt[400];
+			case ArticlePillar.News:
+			default:
+				return news[400];
+		}
+	}
+
+	return neutral[100];
+}
+
+const seriesDark = (format: ArticleFormat): Colour => {
+	if (format.display === ArticleDisplay.Immersive) {
+		switch (format.theme) {
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Culture:
+				return culture[400];
+			case ArticlePillar.Opinion:
+				return opinion[400];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[400];
+			case ArticleSpecial.Labs:
+				return labs[400];
+			case ArticleSpecial.SpecialReport:
+				return brandAlt[400];
+			case ArticlePillar.News:
+			default:
+				return news[400];
+		}
+	}
+
+	return neutral[10];
+}
+
 // ----- API ----- //
 
 const background = {
@@ -276,6 +370,12 @@ const background = {
 	keyEventsWide,
 	keyEventsDark,
 	keyEventsWideDark,
+	richLink,
+	richLinkDark,
+	richLinkSvg,
+	richLinkSvgDark,
+	series,
+	seriesDark,
 	standfirst,
 	standfirstDark,
 	supportBanner,

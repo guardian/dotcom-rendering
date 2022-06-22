@@ -26,41 +26,73 @@ export const Elements = (
 	pillar: ArticlePillar,
 	isImmersive: boolean,
 	adTargeting?: AdTargeting,
+	// eslint-disable-next-line @typescript-eslint/ban-types -- the type signature is helpful
 ): JSX.Element[] => {
 	const cleanedElements = enhance(elements);
-	const output = cleanedElements.map((element, i) => {
+	const output = cleanedElements.map((element) => {
 		switch (element._type) {
 			case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
-				return <AudioAtomBlockComponent element={element} />;
+				return (
+					<AudioAtomBlockComponent
+						key={element.elementId}
+						element={element}
+					/>
+				);
 			case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
 				return (
 					<TextBlockComponent
-						key={i}
+						key={element.elementId}
 						html={element.html}
 						pillar={pillar}
 					/>
 				);
 			case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
-				return <InteractiveAtomBlockComponent url={element.url} />;
+				return (
+					<InteractiveAtomBlockComponent
+						key={element.elementId}
+						url={element.url}
+					/>
+				);
 			case 'model.dotcomrendering.pageElements.CommentBlockElement':
-				return <CommentBlockComponent key={i} element={element} />;
+				return (
+					<CommentBlockComponent
+						key={element.elementId}
+						element={element}
+					/>
+				);
 			case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
-				return <ContentAtomBlockComponent element={element} />;
+				return (
+					<ContentAtomBlockComponent
+						key={element.elementId}
+						element={element}
+					/>
+				);
 			case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
 				return (
 					<DisclaimerBlockComponent
-						key={i}
+						key={element.elementId}
 						html={element.html}
 						pillar={pillar}
 					/>
 				);
 			case 'model.dotcomrendering.pageElements.EmbedBlockElement':
-				return <EmbedBlockComponentAMP key={i} element={element} />;
+				return (
+					<EmbedBlockComponentAMP
+						key={element.elementId}
+						element={element}
+					/>
+				);
 			case 'model.dotcomrendering.pageElements.GenericAtomBlockElement':
-				return <InteractiveAtomBlockComponent url={element.url} />;
+				return (
+					<InteractiveAtomBlockComponent
+						key={element.elementId}
+						url={element.url}
+					/>
+				);
 			case 'model.dotcomrendering.pageElements.GuideAtomBlockElement':
 				return (
 					<Expandable
+						key={element.elementId}
 						id={element.id}
 						type={element.label}
 						title={element.title}
@@ -78,7 +110,7 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.GuVideoBlockElement':
 				return (
 					<GuVideoBlockComponent
-						key={i}
+						key={element.elementId}
 						element={element}
 						pillar={pillar}
 					/>
@@ -86,7 +118,7 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.ImageBlockElement':
 				return (
 					<ImageBlockComponent
-						key={i}
+						key={element.elementId}
 						element={element}
 						pillar={pillar}
 					/>
@@ -94,6 +126,7 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement':
 				return (
 					<InteractiveAtomBlockComponent
+						key={element.elementId}
 						url={element.url}
 						html={element.html}
 						placeholderUrl={element.placeholderUrl}
@@ -102,6 +135,7 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.InteractiveBlockElement': // Plain Interactive Embeds
 				return (
 					<InteractiveBlockComponentAMP
+						key={element.elementId}
 						url={element.url}
 						isMandatory={element.isMandatory}
 					/>
@@ -109,6 +143,7 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.ProfileAtomBlockElement':
 				return (
 					<Expandable
+						key={element.elementId}
 						id={element.id}
 						type={element.label}
 						title={element.title}
@@ -126,7 +161,7 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.PullquoteBlockElement':
 				return (
 					<PullquoteBlockComponent
-						key={i}
+						key={element.elementId}
 						html={element.html}
 						pillar={pillar}
 					/>
@@ -134,6 +169,7 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.QABlockElement':
 				return (
 					<Expandable
+						key={element.elementId}
 						id={element.id}
 						type="Q&A"
 						title={element.title}
@@ -151,17 +187,22 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
 				return (
 					<RichLinkBlockComponent
-						key={i}
+						key={element.elementId}
 						element={element}
 						pillar={pillar}
 					/>
 				);
 			case 'model.dotcomrendering.pageElements.SoundcloudBlockElement':
-				return <SoundcloudBlockComponent key={i} element={element} />;
+				return (
+					<SoundcloudBlockComponent
+						key={element.elementId}
+						element={element}
+					/>
+				);
 			case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
 				return (
 					<SubheadingBlockComponent
-						key={i}
+						key={element.elementId}
 						html={element.html}
 						pillar={pillar}
 						isImmersive={isImmersive}
@@ -170,7 +211,7 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.TextBlockElement':
 				return (
 					<TextBlockComponent
-						key={i}
+						key={element.elementId}
 						html={element.html}
 						pillar={pillar}
 					/>
@@ -178,6 +219,7 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.TimelineBlockElement':
 				return (
 					<TimelineBlockComponent
+						key={element.elementId}
 						id={element.id}
 						title={element.title}
 						description={element.description}
@@ -188,7 +230,7 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.TweetBlockElement':
 				return (
 					<TwitterBlockComponent
-						key={i}
+						key={element.elementId}
 						element={element}
 						pillar={pillar}
 					/>
@@ -196,7 +238,7 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.VideoVimeoBlockElement':
 				return (
 					<VideoVimeoBlockComponent
-						key={i}
+						key={element.elementId}
 						element={element}
 						pillar={pillar}
 					/>
@@ -204,7 +246,7 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
 				return (
 					<VideoYoutubeBlockComponent
-						key={i}
+						key={element.elementId}
 						element={element}
 						pillar={pillar}
 					/>
@@ -212,6 +254,7 @@ export const Elements = (
 			case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
 				return (
 					<YoutubeBlockComponentAMP
+						key={element.elementId}
 						element={element}
 						pillar={pillar}
 						adTargeting={adTargeting}
@@ -226,5 +269,8 @@ export const Elements = (
 		}
 	});
 
-	return output.filter((el) => el !== null) as JSX.Element[];
+	return output.filter(
+		// eslint-disable-next-line @typescript-eslint/ban-types -- it’s a type predicate
+		(el: JSX.Element | null): el is JSX.Element => el !== null,
+	);
 };

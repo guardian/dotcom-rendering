@@ -9,13 +9,14 @@ import {
 	text,
 	until,
 } from '@guardian/source-foundations';
-import libDebounce from 'lodash/debounce';
+import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getZIndex } from '../lib/getZIndex';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
+import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
 
@@ -94,7 +95,6 @@ const containerStyles = css`
 	display: flex;
 	flex-direction: column;
 	position: relative;
-
 	overflow: hidden; /* Needed for scrolling to work */
 `;
 
@@ -325,6 +325,7 @@ type CarouselCardProps = {
 	kickerText?: string;
 	imageUrl?: string;
 	dataLinkName?: string;
+	discussionId?: string;
 };
 
 export const CarouselCard: React.FC<CarouselCardProps> = ({
@@ -336,6 +337,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 	kickerText,
 	isFirst,
 	dataLinkName,
+	discussionId,
 }: CarouselCardProps) => (
 	<LI
 		stretch={true}
@@ -353,6 +355,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			kickerText={kickerText || ''}
 			imageUrl={imageUrl || ''}
 			showClock={true}
+			showAge={true}
 			imagePositionOnMobile="top"
 			minWidthInPixels={220}
 			showQuotes={
@@ -360,6 +363,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 				format.design === ArticleDesign.Letter
 			}
 			dataLinkName={dataLinkName}
+			discussionId={discussionId}
 		/>
 	</LI>
 );
@@ -525,6 +529,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 			css={wrapperStyle(trails.length)}
 			data-link-name={formatAttrString(heading)}
 		>
+			<FetchCommentCounts />
 			<LeftColumn
 				borderType="partial"
 				size={
@@ -616,10 +621,14 @@ export const Carousel: React.FC<OnwardsType> = ({
 							format: trailFormat,
 							image,
 							kickerText,
+							shortUrl,
 						} = trail;
 						// Don't try to render cards that have no publication date. This property is technically optional
 						// but we rarely if ever expect it not to exist
 						if (!webPublicationDate) return null;
+						const discussionId =
+							shortUrl && new URL(shortUrl).pathname;
+
 						return (
 							<CarouselCard
 								key={`${trail.url}${i}`}
@@ -631,6 +640,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 								imageUrl={image}
 								kickerText={kickerText}
 								dataLinkName={`carousel-small-card-position-${i}`}
+								discussionId={discussionId}
 							/>
 						);
 					})}

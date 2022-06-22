@@ -6,9 +6,10 @@ import { UL } from './Card/components/UL';
 type Props = {
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
 };
 
-export const DynamicFast = ({ trails, containerPalette }: Props) => {
+export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
 	const bigCards = trails.slice(2, 4);
@@ -20,6 +21,7 @@ export const DynamicFast = ({ trails, containerPalette }: Props) => {
 				<LI padSides={true} percentage="75%">
 					<Card
 						containerPalette={containerPalette}
+						showAge={showAge}
 						linkTo={primary.url}
 						format={primary.format}
 						headlineText={primary.headline}
@@ -44,11 +46,12 @@ export const DynamicFast = ({ trails, containerPalette }: Props) => {
 						imageSize="large"
 						mediaType={primary.mediaType}
 						mediaDuration={primary.mediaDuration}
-						commentCount={primary.commentCount}
 						starRating={primary.starRating}
 						branding={primary.branding}
 						supportingContent={primary.supportingContent}
 						dataLinkName={primary.dataLinkName}
+						snapData={primary.snapData}
+						discussionId={primary.discussionId}
 					/>
 				</LI>
 				<LI
@@ -59,6 +62,7 @@ export const DynamicFast = ({ trails, containerPalette }: Props) => {
 				>
 					<Card
 						containerPalette={containerPalette}
+						showAge={showAge}
 						linkTo={secondary.url}
 						format={secondary.format}
 						headlineText={secondary.headline}
@@ -79,11 +83,12 @@ export const DynamicFast = ({ trails, containerPalette }: Props) => {
 						imageUrl={secondary.image}
 						mediaType={secondary.mediaType}
 						mediaDuration={secondary.mediaDuration}
-						commentCount={secondary.commentCount}
 						starRating={secondary.starRating}
 						branding={secondary.branding}
 						supportingContent={secondary.supportingContent}
 						dataLinkName={secondary.dataLinkName}
+						snapData={secondary.snapData}
+						discussionId={secondary.discussionId}
 					/>
 				</LI>
 			</UL>
@@ -91,6 +96,7 @@ export const DynamicFast = ({ trails, containerPalette }: Props) => {
 				{bigCards.map((card, cardIndex) => {
 					return (
 						<LI
+							key={card.url}
 							percentage="25%"
 							padSides={true}
 							padBottom={false}
@@ -99,6 +105,7 @@ export const DynamicFast = ({ trails, containerPalette }: Props) => {
 						>
 							<Card
 								containerPalette={containerPalette}
+								showAge={showAge}
 								linkTo={card.url}
 								format={card.format}
 								headlineText={card.headline}
@@ -121,11 +128,12 @@ export const DynamicFast = ({ trails, containerPalette }: Props) => {
 								imageUrl={card.image}
 								mediaType={card.mediaType}
 								mediaDuration={card.mediaDuration}
-								commentCount={card.commentCount}
 								starRating={card.starRating}
 								branding={card.branding}
 								supportingContent={card.supportingContent}
 								dataLinkName={card.dataLinkName}
+								snapData={card.snapData}
+								discussionId={card.discussionId}
 							/>
 						</LI>
 					);
@@ -135,6 +143,7 @@ export const DynamicFast = ({ trails, containerPalette }: Props) => {
 						{smallCards.map((card, cardIndex) => {
 							return (
 								<LI
+									key={card.url}
 									percentage="50%"
 									showDivider={true}
 									padSides={true}
@@ -148,6 +157,7 @@ export const DynamicFast = ({ trails, containerPalette }: Props) => {
 								>
 									<Card
 										containerPalette={containerPalette}
+										showAge={showAge}
 										linkTo={card.url}
 										format={card.format}
 										headlineText={card.headline}
@@ -172,13 +182,14 @@ export const DynamicFast = ({ trails, containerPalette }: Props) => {
 										showClock={false}
 										mediaType={card.mediaType}
 										mediaDuration={card.mediaDuration}
-										commentCount={card.commentCount}
 										starRating={card.starRating}
 										branding={card.branding}
 										supportingContent={
 											card.supportingContent
 										}
 										dataLinkName={card.dataLinkName}
+										snapData={card.snapData}
+										discussionId={card.discussionId}
 									/>
 								</LI>
 							);

@@ -6,9 +6,14 @@ import { UL } from './Card/components/UL';
 type Props = {
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
 };
 
-export const FixedLargeSlowXIV = ({ trails, containerPalette }: Props) => {
+export const FixedLargeSlowXIV = ({
+	trails,
+	containerPalette,
+	showAge,
+}: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
 	const groups = [
@@ -23,6 +28,7 @@ export const FixedLargeSlowXIV = ({ trails, containerPalette }: Props) => {
 				<LI padSides={true} percentage="75%">
 					<Card
 						containerPalette={containerPalette}
+						showAge={showAge}
 						linkTo={primary.url}
 						format={primary.format}
 						headlineText={primary.headline}
@@ -47,9 +53,10 @@ export const FixedLargeSlowXIV = ({ trails, containerPalette }: Props) => {
 						imageSize="large"
 						mediaType={primary.mediaType}
 						mediaDuration={primary.mediaDuration}
-						commentCount={primary.commentCount}
 						starRating={primary.starRating}
 						branding={primary.branding}
+						snapData={primary.snapData}
+						discussionId={primary.discussionId}
 					/>
 				</LI>
 				<LI
@@ -60,6 +67,7 @@ export const FixedLargeSlowXIV = ({ trails, containerPalette }: Props) => {
 				>
 					<Card
 						containerPalette={containerPalette}
+						showAge={showAge}
 						linkTo={secondary.url}
 						format={secondary.format}
 						headlineText={secondary.headline}
@@ -80,9 +88,10 @@ export const FixedLargeSlowXIV = ({ trails, containerPalette }: Props) => {
 						imageUrl={secondary.image}
 						mediaType={secondary.mediaType}
 						mediaDuration={secondary.mediaDuration}
-						commentCount={secondary.commentCount}
 						starRating={secondary.starRating}
 						branding={secondary.branding}
+						snapData={secondary.snapData}
+						discussionId={secondary.discussionId}
 					/>
 				</LI>
 			</UL>
@@ -98,6 +107,7 @@ export const FixedLargeSlowXIV = ({ trails, containerPalette }: Props) => {
 								>
 									<Card
 										containerPalette={containerPalette}
+										showAge={showAge}
 										linkTo={card.url}
 										format={card.format}
 										headlineText={card.headline}
@@ -128,10 +138,11 @@ export const FixedLargeSlowXIV = ({ trails, containerPalette }: Props) => {
 										showClock={false}
 										mediaType={card.mediaType}
 										mediaDuration={card.mediaDuration}
-										commentCount={card.commentCount}
 										starRating={card.starRating}
 										branding={card.branding}
+										discussionId={card.discussionId}
 										dataLinkName={card.dataLinkName}
+										snapData={card.snapData}
 									/>
 								</LI>
 							);

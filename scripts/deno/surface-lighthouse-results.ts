@@ -1,25 +1,25 @@
-import { octokit } from "./github.ts";
-import type { EventPayloadMap } from "https://cdn.skypack.dev/@octokit/webhooks-types?dts";
-import "https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/v0.8.2/types/assert.d.ts";
+import { octokit } from './github.ts';
+import type { EventPayloadMap } from 'https://cdn.skypack.dev/@octokit/webhooks-types?dts';
+import 'https://raw.githubusercontent.com/GoogleChrome/lighthouse-ci/v0.8.2/types/assert.d.ts';
 
 /* -- Setup -- */
 
 /** Path for workflow event */
-const path = Deno.env.get("GITHUB_EVENT_PATH");
-if (!path) throw new Error("Missing GITHUB_EVENT_PATH");
+const path = Deno.env.get('GITHUB_EVENT_PATH');
+if (!path) throw new Error('Missing GITHUB_EVENT_PATH');
 
 /**
  * https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads
  */
-const payload: EventPayloadMap["push" | "pull_request"] = JSON.parse(
-	Deno.readTextFileSync(path)
+const payload: EventPayloadMap['push' | 'pull_request'] = JSON.parse(
+	Deno.readTextFileSync(path),
 );
 
 const isPullRequestEvent = (
-	payload: EventPayloadMap[keyof EventPayloadMap]
-): payload is EventPayloadMap["pull_request"] =>
+	payload: EventPayloadMap[keyof EventPayloadMap],
+): payload is EventPayloadMap['pull_request'] =>
 	//@ts-expect-error -- We’re actually checking the type
-	typeof payload?.pull_request?.number === "number";
+	typeof payload?.pull_request?.number === 'number';
 
 /**
  * One of two values depending on the workflow trigger event
@@ -40,18 +40,18 @@ const issue_number = isPullRequestEvent(payload)
 console.log(`Using issue #${issue_number}`);
 
 /** The Lighthouse results directory  */
-const dir = "dotcom-rendering/.lighthouseci";
+const dir = 'dotcom-rendering/.lighthouseci';
 
 const links: Record<string, string> = JSON.parse(
-	Deno.readTextFileSync(`${dir}/links.json`)
+	Deno.readTextFileSync(`${dir}/links.json`),
 );
 
 /** https://github.com/GoogleChrome/lighthouse-ci/blob/5963dcce0e88b8d3aedaba56a93ec4b93cf073a1/packages/utils/src/assertions.js#L15-L30 */
 interface AssertionResult {
 	url: string;
 	name:
-		| keyof Omit<LHCI.AssertCommand.AssertionOptions, "aggregationMethod">
-		| "auditRan";
+		| keyof Omit<LHCI.AssertCommand.AssertionOptions, 'aggregationMethod'>
+		| 'auditRan';
 	operator: string;
 	expected: number;
 	actual: number;
@@ -65,16 +65,16 @@ interface AssertionResult {
 	message?: string;
 }
 const results: AssertionResult[] = JSON.parse(
-	Deno.readTextFileSync(`${dir}/assertion-results.json`)
+	Deno.readTextFileSync(`${dir}/assertion-results.json`),
 );
 
 /* -- Definitions -- */
 
 /** The string to search for when looking for a comment */
-const REPORT_TITLE = "⚡️ Lighthouse report";
+const REPORT_TITLE = '⚡️ Lighthouse report';
 const GIHUB_PARAMS = {
-	owner: "guardian",
-	repo: "dotcom-rendering",
+	owner: 'guardian',
+	repo: 'dotcom-rendering',
 	issue_number,
 } as const;
 
@@ -86,45 +86,45 @@ const formatNumber = (expected: number, actual: number): string =>
 
 const getStatus = (
 	passed: boolean,
-	level: AssertionResult["level"]
-): "✅" | "⚠️" | "❌" => {
-	if (passed) return "✅";
+	level: AssertionResult['level'],
+): '✅' | '⚠️' | '❌' => {
+	if (passed) return '✅';
 
 	switch (level) {
-		case "off":
-		case "warn":
-			return "⚠️";
-		case "error":
+		case 'off':
+		case 'warn':
+			return '⚠️';
+		case 'error':
 		default:
-			return "❌";
+			return '❌';
 	}
 };
 
 const generateAuditTable = (
 	auditUrl: string,
-	results: AssertionResult[]
+	results: AssertionResult[],
 ): string => {
 	const reportUrl = links[auditUrl];
 
 	const resultsTemplateString = results.map(
 		({ auditTitle, auditProperty, passed, expected, actual, level }) =>
-			`| ${auditTitle ?? auditProperty ?? "Unknown Test"} | ${getStatus(
+			`| ${auditTitle ?? auditProperty ?? 'Unknown Test'} | ${getStatus(
 				passed,
-				level
-			)} | ${expected} | ${formatNumber(expected, actual)} |`
+				level,
+			)} | ${expected} | ${formatNumber(expected, actual)} |`,
 	);
 
-	const [endpoint, testUrlClean] = auditUrl.split("?url=");
+	const [endpoint, testUrlClean] = auditUrl.split('?url=');
 
 	const table = [
-		`### [Report for ${endpoint.split("/").slice(-1)}](${reportUrl})`,
+		`### [Report for ${endpoint.split('/').slice(-1)}](${reportUrl})`,
 		`> tested url \`${testUrlClean}\``,
-		"",
-		"| Category | Status | Expected | Actual |",
-		"| --- | --- | --- | --- |",
+		'',
+		'| Category | Status | Expected | Actual |',
+		'| --- | --- | --- | --- |',
 		...resultsTemplateString,
-		"",
-	].join("\n");
+		'',
+	].join('\n');
 
 	return table;
 };
@@ -139,14 +139,14 @@ const createLighthouseResultsMd = (): string => {
 		`Lighthouse tested ${auditUrls.length} URLs  `,
 		failedAuditCount > 0
 			? `⚠️ Budget exceeded for ${failedAuditCount} of ${auditCount} audits.`
-			: "All audits passed",
+			: 'All audits passed',
 		...auditUrls.map((url) =>
 			generateAuditTable(
 				url,
-				results.filter((result) => result.url === url)
-			)
+				results.filter((result) => result.url === url),
+			),
 		),
-	].join("\n\n");
+	].join('\n\n');
 };
 
 const getCommentID = async (): Promise<number | null> => {
@@ -155,7 +155,7 @@ const getCommentID = async (): Promise<number | null> => {
 	});
 
 	const comment = comments.find((comment) =>
-		comment.body?.includes(REPORT_TITLE)
+		comment.body?.includes(REPORT_TITLE),
 	);
 
 	return comment?.id ?? null;
@@ -178,13 +178,22 @@ try {
 
 	console.log(
 		`Successfully ${
-			comment_id ? "updated" : "created"
-		} Lighthouse report comment`
+			comment_id ? 'updated' : 'created'
+		} Lighthouse report comment`,
 	);
-	console.log("See:", data.html_url);
-} catch (error) {
-	if (error instanceof Error) throw error;
+	console.log('See:', data.html_url);
+	Deno.exit();
+} catch (error: unknown) {
+	if (!(error instanceof Error)) {
+		console.error('Unknown error:', String(error));
+		Deno.exit(1);
+	}
 
-	console.error("there was an error:", error.message);
-	Deno.exit(1);
+	// Dependabot integration does not have the permission to update comments
+	if (error.message === 'Resource not accessible by integration') {
+		console.warn('Failed to update the comment', error);
+		Deno.exit();
+	}
+
+	throw error;
 }

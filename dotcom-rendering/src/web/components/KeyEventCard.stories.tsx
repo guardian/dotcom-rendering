@@ -6,8 +6,8 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import { from, neutral } from '@guardian/source-foundations';
+import type { KeyEventCard as KeyEventCardType } from '../../../fixtures/manual/key-events';
 import { events } from '../../../fixtures/manual/key-events';
-import type { KeyEvent as KeyEventType } from './KeyEventCard';
 import { KeyEventCard } from './KeyEventCard';
 
 const getFormat = (theme: ArticleTheme) => {
@@ -41,10 +41,11 @@ const wrapperStyles = css`
 const SummaryCard = ({ theme }: { theme: ArticleTheme }) => (
 	<ul css={wrapperStyles}>
 		<KeyEventCard
-			text={events[0].text}
-			url={events[0].url}
-			date={events[0].date}
+			id={events[0].id}
+			blockFirstPublished={events[0].blockFirstPublished}
+			title={events[0].title}
 			format={getFormat(theme)}
+			filterKeyEvents={false}
 			isSummary={true}
 		/>
 	</ul>
@@ -58,13 +59,14 @@ const StandardCard = ({
 	count: number;
 }) => (
 	<ul css={wrapperStyles}>
-		{events.slice(0, count).map((event: KeyEventType) => (
+		{events.slice(0, count).map((event: KeyEventCardType) => (
 			<KeyEventCard
-				text={event.text}
-				url={event.url}
-				date={event.date}
-				format={getFormat(theme)}
+				id={event.id}
+				blockFirstPublished={event.blockFirstPublished}
+				title={event.title}
 				isSummary={event.isSummary}
+				filterKeyEvents={false}
+				format={getFormat(theme)}
 			/>
 		))}
 	</ul>
