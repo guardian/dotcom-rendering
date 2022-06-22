@@ -382,7 +382,6 @@ const textCardHeadline = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport) return WHITE;
 	if (format.display === ArticleDisplay.Immersive) return BLACK;
 	switch (format.design) {
-		case ArticleDesign.Feature:
 		case ArticleDesign.Interview:
 			return pillarPalette[format.theme].dark;
 		case ArticleDesign.Gallery:
