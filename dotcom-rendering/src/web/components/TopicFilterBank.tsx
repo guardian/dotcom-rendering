@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { headline, space, textSans } from '@guardian/source-foundations';
 import { Button, Hide } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
+import { FilterButton } from './FilterButton.importable';
 
 type Props = {
 	topics: Topic[];
@@ -55,14 +56,23 @@ export const TopicFilterBank = ({ topics, format }: Props) => {
 				<div css={mobileTopicStyles}>
 					{topics.slice(0, 5).map((topic) => {
 						return (
-							<Button
-								cssOverrides={css`
-									margin-bottom: ${space[3]}px;
-									margin-right: ${space[1]}px;
-								`}
-							>
-								{topic.value} ({topic.count})
-							</Button>
+							<FilterButton
+								text={topic.value}
+								count={topic.count}
+								format={format}
+								isActive={false}
+								onClick={() => {
+									console.log('filter clicked');
+								}}
+							/>
+							// <Button
+							// 	cssOverrides={css`
+							// 		margin-bottom: ${space[3]}px;
+							// 		margin-right: ${space[1]}px;
+							// 	`}
+							// >
+							// 	{topic.value} ({topic.count})
+							// </Button>
 						);
 					})}
 				</div>
@@ -71,13 +81,22 @@ export const TopicFilterBank = ({ topics, format }: Props) => {
 				<div css={desktopTopicStyles}>
 					{topics.slice(0, 5).map((topic) => {
 						return (
-							<Button
-								cssOverrides={css`
-									margin-bottom: ${space[3]}px;
-								`}
-							>
-								{topic.value} ({topic.count})
-							</Button>
+							<FilterButton
+								text={topic.value}
+								count={topic.count}
+								format={format}
+								isActive={false}
+								onClick={() => {
+									console.log('filter clicked');
+								}}
+							/>
+							// <Button
+							// 	cssOverrides={css`
+							// 		margin-bottom: ${space[3]}px;
+							// 	`}
+							// >
+							// 	{topic.value} ({topic.count})
+							// </Button>
 						);
 					})}
 				</div>
