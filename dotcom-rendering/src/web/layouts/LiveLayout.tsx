@@ -1126,6 +1126,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											/>
 										</ArticleContainer>
 									</Accordion>
+									)}
 								</div>
 							</GridItem>
 							<GridItem area="right-column">
