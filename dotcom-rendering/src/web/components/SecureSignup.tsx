@@ -94,11 +94,7 @@ const generateForm = (
 
 	const html = renderToString(
 		<CacheProvider value={cache}>
-			<form
-				id={`secure-signup-${newsletterId}`}
-				action="/email"
-				method="post"
-			>
+			<form id={`secure-signup-${newsletterId}`}>
 				<Label text="Enter your email address" />
 
 				<div
