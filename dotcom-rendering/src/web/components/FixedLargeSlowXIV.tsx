@@ -16,11 +16,8 @@ export const FixedLargeSlowXIV = ({
 }: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
-	const groups = [
-		trails.slice(2, 6),
-		trails.slice(7, 11),
-		trails.slice(12, 16),
-	];
+	const secondSlice = trails.slice(2, 6);
+	const thirdSlice = trails.slice(6, 14);
 
 	return (
 		<>
@@ -95,61 +92,97 @@ export const FixedLargeSlowXIV = ({
 					/>
 				</LI>
 			</UL>
-			{groups.map((group, groupIndex) => {
-				return (
-					<UL direction="row" padBottom={true}>
-						{group.map((card, cardIndex) => {
-							return (
-								<LI
-									padSides={true}
-									percentage="25%"
-									showDivider={cardIndex !== 0}
-								>
-									<Card
-										containerPalette={containerPalette}
-										showAge={showAge}
-										linkTo={card.url}
-										format={card.format}
-										headlineText={card.headline}
-										headlineSize="small"
-										imageUrl={
-											groupIndex === 0
-												? card.image
-												: undefined
-										}
-										imagePosition="top"
-										byline={card.byline}
-										showByline={card.showByline}
-										showQuotes={
-											card.format.design ===
-												ArticleDesign.Comment ||
-											card.format.design ===
-												ArticleDesign.Letter
-										}
-										webPublicationDate={
-											card.webPublicationDate
-										}
-										kickerText={card.kickerText}
-										showPulsingDot={
-											card.format.design ===
-											ArticleDesign.LiveBlog
-										}
-										showSlash={true}
-										showClock={false}
-										mediaType={card.mediaType}
-										mediaDuration={card.mediaDuration}
-										starRating={card.starRating}
-										branding={card.branding}
-										discussionId={card.discussionId}
-										dataLinkName={card.dataLinkName}
-										snapData={card.snapData}
-									/>
-								</LI>
-							);
-						})}
-					</UL>
-				);
-			})}
+			<UL direction="row" padBottom={true}>
+				{secondSlice.map((card, cardIndex) => {
+					return (
+						<LI
+							padSides={true}
+							percentage="25%"
+							showDivider={cardIndex !== 0}
+							key={card.url}
+						>
+							<Card
+								containerPalette={containerPalette}
+								showAge={showAge}
+								linkTo={card.url}
+								format={card.format}
+								headlineText={card.headline}
+								headlineSize="small"
+								imageUrl={card.image}
+								imagePosition="top"
+								byline={card.byline}
+								showByline={card.showByline}
+								showQuotes={
+									card.format.design ===
+										ArticleDesign.Comment ||
+									card.format.design === ArticleDesign.Letter
+								}
+								webPublicationDate={card.webPublicationDate}
+								kickerText={card.kickerText}
+								showPulsingDot={
+									card.format.design ===
+									ArticleDesign.LiveBlog
+								}
+								showSlash={true}
+								showClock={false}
+								mediaType={card.mediaType}
+								mediaDuration={card.mediaDuration}
+								starRating={card.starRating}
+								branding={card.branding}
+								discussionId={card.discussionId}
+								dataLinkName={card.dataLinkName}
+								snapData={card.snapData}
+							/>
+						</LI>
+					);
+				})}
+			</UL>
+			<UL direction="row" padBottom={true} wrapCards={true}>
+				{thirdSlice.map((card, cardIndex) => {
+					return (
+						<LI
+							padSides={true}
+							percentage="25%"
+							showDivider={cardIndex % 4 !== 0}
+							padBottom={cardIndex < 4}
+							key={card.url}
+						>
+							<Card
+								containerPalette={containerPalette}
+								showAge={showAge}
+								linkTo={card.url}
+								format={card.format}
+								headlineText={card.headline}
+								headlineSize="small"
+								imageUrl={undefined}
+								imagePosition="top"
+								byline={card.byline}
+								showByline={card.showByline}
+								showQuotes={
+									card.format.design ===
+										ArticleDesign.Comment ||
+									card.format.design === ArticleDesign.Letter
+								}
+								webPublicationDate={card.webPublicationDate}
+								kickerText={card.kickerText}
+								showPulsingDot={
+									card.format.design ===
+									ArticleDesign.LiveBlog
+								}
+								showSlash={true}
+								showClock={false}
+								mediaType={card.mediaType}
+								mediaDuration={card.mediaDuration}
+								starRating={card.starRating}
+								branding={card.branding}
+								discussionId={card.discussionId}
+								dataLinkName={card.dataLinkName}
+								snapData={card.snapData}
+							/>
+						</LI>
+					);
+				})}
+			</UL>
 		</>
 	);
 };
