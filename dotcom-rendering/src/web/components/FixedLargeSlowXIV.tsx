@@ -22,7 +22,7 @@ export const FixedLargeSlowXIV = ({
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
-				<LI padSides={true} percentage="75%">
+				<LI padSides={true} percentage="75%" padBottomOnMobile={true}>
 					<Card
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -56,12 +56,7 @@ export const FixedLargeSlowXIV = ({
 						discussionId={primary.discussionId}
 					/>
 				</LI>
-				<LI
-					padSides={true}
-					showDivider={true}
-					showTopMarginWhenStacked={true}
-					percentage="25%"
-				>
+				<LI padSides={true} showDivider={true} percentage="25%">
 					<Card
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -100,6 +95,7 @@ export const FixedLargeSlowXIV = ({
 							percentage="25%"
 							showDivider={cardIndex !== 0}
 							key={card.url}
+							padBottomOnMobile={cardIndex != 3}
 						>
 							<Card
 								containerPalette={containerPalette}
@@ -145,6 +141,7 @@ export const FixedLargeSlowXIV = ({
 							percentage="25%"
 							showDivider={cardIndex % 4 !== 0}
 							padBottom={cardIndex < 4}
+							padBottomOnMobile={cardIndex !== 11}
 							key={card.url}
 						>
 							<Card
