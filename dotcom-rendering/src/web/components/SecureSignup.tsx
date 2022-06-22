@@ -19,30 +19,26 @@ import { SecureSignupIframe } from './SecureSignupIframe.importable';
 
 type Props = { newsletterId: string; successText: string };
 
+const termsStyle = css`
+	${textSans.xxsmall()}
+	color: ${text.supporting};
+	a {
+		${textSans.xxsmall()}
+		text-decoration: none;
+		:hover {
+			text-decoration: underline;
+		}
+	}
+	strong {
+		color: ${neutral[0]};
+		font-weight: bold;
+	}
+`;
+
 const PrivacyTerms = () => {
 	return (
-		<div
-			css={css`
-				margin-top: ${space[2]}px;
-				${textSans.xxsmall()}
-				color: ${text.supporting};
-				a {
-					${textSans.xxsmall()}
-					text-decoration: none;
-					:hover {
-						text-decoration: underline;
-					}
-				}
-			`}
-		>
-			<span
-				css={css`
-					color: black;
-					font-weight: bold;
-				`}
-			>
-				Privacy Notice:{' '}
-			</span>
+		<span css={termsStyle}>
+			<strong>Privacy Notice: </strong>
 			Newsletters may contain info about charities, online ads, and
 			content funded by outside parties. For more information see our{' '}
 			<Link
@@ -51,41 +47,29 @@ const PrivacyTerms = () => {
 			>
 				privacy policy
 			</Link>
-		</div>
+			.&nbsp;
+		</span>
 	);
 };
 
 const RecaptchaTerms = () => (
-	<div
-		css={css`
-			margin-top: ${space[1]}px;
-			${textSans.xxsmall()}
-			color: ${text.supporting};
-			a {
-				${textSans.xxsmall()}
-				text-decoration: none;
-				:hover {
-					text-decoration: underline;
-				}
-			}
-		`}
-	>
-		This site is protected by reCAPTCHA and the Google{' '}
+	<span css={termsStyle}>
+		We operate Google reCaptcha to protect our website and the Google{' '}
 		<Link
 			href="https://policies.google.com/privacy"
 			rel="noopener noreferrer"
 		>
-			privacy policy
+			Privacy Policy
 		</Link>{' '}
 		and{' '}
 		<Link
 			href="https://policies.google.com/terms"
 			rel="noopener noreferrer"
 		>
-			terms of service
+			Terms of Service
 		</Link>{' '}
-		apply
-	</div>
+		apply.
+	</span>
 );
 
 const generateForm = (
@@ -166,8 +150,14 @@ export const SecureSignup = ({ newsletterId, successText }: Props) => {
 					successText={successText}
 				/>
 			</Island>
-			<PrivacyTerms />
-			<RecaptchaTerms />
+			<div
+				css={css`
+					margin-top: ${space[2]}px;
+				`}
+			>
+				<PrivacyTerms />
+				<RecaptchaTerms />
+			</div>
 		</>
 	);
 };
