@@ -714,19 +714,19 @@ const seriesTitle = (format: ArticleFormat): Colour => {
 	}
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return news[600];
+			return news[400];
 		case ArticlePillar.Lifestyle:
-			return lifestyle[500];
+			return lifestyle[400];
 		case ArticlePillar.Sport:
-			return sport[600];
+			return sport[400];
 		case ArticlePillar.Culture:
-			return culture[600];
+			return culture[400];
 		case ArticlePillar.Opinion:
-			return opinion[600];
+			return opinion[400];
 		case ArticleSpecial.Labs:
-			return labs[400];
+			return labs[300];
 		case ArticleSpecial.SpecialReport:
-			return specialReport[500];
+			return specialReport[400];
 	}
 };
 
