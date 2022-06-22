@@ -10,7 +10,6 @@ export const HeadlineWrapper = ({ children }: Props) => (
 			padding-bottom: 8px;
 			padding-left: 5px;
 			padding-right: 5px;
-			padding-top: 1px;
 			flex-grow: 1;
 		`}
 	>
