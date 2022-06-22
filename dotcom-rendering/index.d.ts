@@ -128,6 +128,9 @@ type Palette = {
 		cricketScoreboardLink: Colour;
 		keyEvent: Colour;
 		keyEventTime: Colour;
+		filterButton: Colour;
+		filterButtonHover: Colour;
+		filterButtonActive: Colour;
 	};
 	background: {
 		article: Colour;
@@ -156,6 +159,9 @@ type Palette = {
 		summaryEventBullet: Colour;
 		keyEvent: Colour;
 		keyEventFromDesktop: Colour;
+		filterButton: Colour;
+		filterButtonHover: Colour;
+		filterButtonActive: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -190,6 +196,7 @@ type Palette = {
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;
 		keyEvent: Colour;
+		filterButton: Colour;
 	};
 	topBar: {
 		card: Colour;
