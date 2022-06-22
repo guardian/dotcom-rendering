@@ -1,6 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background, text } from '@guardian/common-rendering/src/editorialPalette';
+import {
+	background,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import type { FC, ReactNode } from 'react';
@@ -13,7 +16,9 @@ const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.articleBodyMedia(format)};
 `;
 
-const ArticleBodyDarkStyles = (format: ArticleFormat): SerializedStyles => darkModeCss`
+const ArticleBodyDarkStyles = (
+	format: ArticleFormat,
+): SerializedStyles => darkModeCss`
     a {
         color: ${text.articleBodyMediaLinkDark(format)};
     }
