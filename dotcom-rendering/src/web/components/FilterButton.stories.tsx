@@ -41,11 +41,11 @@ export default {
 export const DefaultStory = () => (
 	<Container>
 		<FilterButton
-			activeTopic="ORG:nhs"
-			topicType="ORG"
-			value="Fifa"
-			count={1}
+			isActive={false}
+			text="nhs"
+			count={21}
 			format={format}
+			onClick={() => {}}
 		/>
 	</Container>
 );
@@ -55,13 +55,67 @@ DefaultStory.story = { name: 'Default' };
 export const ActiveStory = () => (
 	<Container>
 		<FilterButton
-			activeTopic="ORG:nhs"
-			topicType="ORG"
-			value="nhs"
+			isActive={true}
+			text="nhs"
 			count={21}
 			format={format}
+			onClick={() => {}}
 		/>
 	</Container>
 );
 
 ActiveStory.story = { name: 'Active' };
+
+export const TruncatedStory = () => (
+	<Container>
+		<FilterButton
+			isActive={false}
+			text="Something thats too long to fit"
+			count={21}
+			format={format}
+			onClick={() => {}}
+		/>
+	</Container>
+);
+
+TruncatedStory.story = { name: 'Truncated' };
+
+export const TruncatedActiveStory = () => (
+	<Container>
+		<FilterButton
+			isActive={true}
+			text="Something thats too long to fit"
+			count={21}
+			format={format}
+			onClick={() => {}}
+		/>
+	</Container>
+);
+
+TruncatedActiveStory.story = { name: 'TruncatedActive' };
+
+export const FilterKeyEventsStory = () => (
+	<Container>
+		<FilterButton
+			isActive={false}
+			text="Filter Key Events"
+			format={format}
+			onClick={() => {}}
+		/>
+	</Container>
+);
+
+FilterKeyEventsStory.story = { name: 'FilterKeyEvents' };
+
+export const FilterKeyEventsActiveStory = () => (
+	<Container>
+		<FilterButton
+			isActive={true}
+			text="Filter Key Events"
+			format={format}
+			onClick={() => {}}
+		/>
+	</Container>
+);
+
+FilterKeyEventsActiveStory.story = { name: 'FilterKeyEventsActive' };

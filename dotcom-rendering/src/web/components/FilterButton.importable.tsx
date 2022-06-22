@@ -4,16 +4,16 @@ import { Button, SvgCross } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 
 interface LabelProps {
-	value: string;
-	count: number;
+	text: string;
+	count?: number;
 }
 
 interface ButtonProps {
-	topicType: TopicType;
-	activeTopic: string;
-	value: string;
-	count: number;
+	text: string;
+	count?: number;
 	format: ArticleFormat;
+	isActive: boolean;
+	onClick: () => void;
 }
 
 const buttonStyles = (palette: Palette) => css`
@@ -58,43 +58,34 @@ const valueStyles = css`
 	max-width: 150px;
 `;
 
-const Label = ({ value, count }: LabelProps) => (
+const Label = ({ text, count }: LabelProps) => (
 	<>
-		<span css={valueStyles}>{value}</span>{' '}
-		<span css={countStyles}>({count})</span>
+		<span css={valueStyles}>{text}</span>{' '}
+		{count && <span css={countStyles}>({count})</span>}
 	</>
 );
 
 export const FilterButton = ({
-	value,
+	text,
 	count,
-	topicType,
-	activeTopic,
+	isActive,
 	format,
+	onClick,
 }: ButtonProps) => {
-	const buttonTopic = `${topicType}:${value}`;
 	const palette = decidePalette(format);
 
-	const handleClick = () => {
-		const urlParams = new URLSearchParams(window.location.search);
-		urlParams.delete('page'); // direct to the first page
-		urlParams.set('topics', buttonTopic);
-
-		window.location.search = urlParams.toString();
-	};
-
-	return activeTopic === buttonTopic ? (
+	return isActive ? (
 		<Button
 			cssOverrides={[buttonStyles(palette), activeStyles(palette)]}
-			onClick={handleClick}
+			onClick={onClick}
 			icon={<SvgCross />}
 			iconSide="right"
 		>
-			<Label value={value} count={count} />
+			<Label text={text} count={count} />
 		</Button>
 	) : (
-		<Button cssOverrides={buttonStyles(palette)} onClick={handleClick}>
-			<Label value={value} count={count} />
+		<Button cssOverrides={buttonStyles(palette)} onClick={onClick}>
+			<Label text={text} count={count} />
 		</Button>
 	);
 };
