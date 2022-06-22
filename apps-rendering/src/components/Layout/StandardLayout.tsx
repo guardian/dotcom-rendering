@@ -19,7 +19,6 @@ import Epic from 'components/Epic';
 import FootballScores from 'components/FootballScores';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
-import ImmersiveCaption from 'components/ImmersiveCaption';
 import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
@@ -131,7 +130,6 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 					<Headline item={item} />
 					<div css={articleWidthStyles}>
 						<Standfirst item={item} />
-						<ImmersiveCaption item={item} />
 					</div>
 					{decideLines(item, lineStyles)}
 					<section css={articleWidthStyles}>

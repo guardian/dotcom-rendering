@@ -198,6 +198,7 @@ export const CardHeadline = ({
 						? labTextStyles(size)
 						: fontStyles(size),
 					format.design === ArticleDesign.Analysis &&
+						!containerPalette &&
 						underlinedStyles(
 							size,
 							palette.background.analysisUnderline,

@@ -10,6 +10,7 @@ import { CardHeadline } from '../CardHeadline';
 import { Flex } from '../Flex';
 import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
+import { Snap } from '../Snap';
 import { StarRating } from '../StarRating/StarRating';
 import { SupportingContent } from '../SupportingContent';
 import { AvatarContainer } from './components/AvatarContainer';
@@ -23,7 +24,6 @@ import { ContentWrapper } from './components/ContentWrapper';
 import { HeadlineWrapper } from './components/HeadlineWrapper';
 import { ImageWrapper } from './components/ImageWrapper';
 import { TrailTextWrapper } from './components/TrailTextWrapper';
-import { Snap } from '../Snap';
 
 export type Props = {
 	linkTo: string;
@@ -108,6 +108,56 @@ const decideIfAgeShouldShow = ({
 	return false;
 };
 
+const DecideFooter = ({
+	isOpinion,
+	hasSublinks,
+	displayAge,
+	renderFooter,
+}: {
+	isOpinion: boolean;
+	hasSublinks?: boolean;
+	displayAge: boolean;
+	renderFooter: Function;
+}) => {
+	if (isOpinion && !hasSublinks) {
+		// Opinion cards without sublinks render the entire footer, including lines,
+		// outside, sitting along the very bottom of the card
+		return null;
+	}
+	// For all other cases (including opinion cards that *do* have sublinks) we
+	// render a version of the footer without lines here
+	return renderFooter({
+		displayAge,
+		displayLines: false,
+	});
+	// Note. Opinion cards always show the lines at the botom of the card (in CommentFooter)
+};
+
+const CommentFooter = ({
+	hasSublinks,
+	palette,
+	displayAge,
+	renderFooter,
+}: {
+	hasSublinks?: boolean;
+	palette: Palette;
+	displayAge: boolean;
+	renderFooter: Function;
+}) => {
+	return hasSublinks ? (
+		// For opinion cards with sublinks there is already a footer rendered inside that
+		// shows the metadata. We only want to render the lines here
+		<StraightLines color={palette.border.lines} count={4} />
+	) : (
+		// When an opinion card has no sublinks we show the entire footer, including lines
+		// outside, along the entire bottom of the card
+		renderFooter({
+			displayAge,
+			displayLines: true,
+		})
+	);
+};
+
 export const Card = ({
 	linkTo,
 	format,
@@ -120,7 +170,7 @@ export const Card = ({
 	imageUrl,
 	imagePosition = 'top',
 	imagePositionOnMobile = 'left',
-	imageSize,
+	imageSize = 'small',
 	trailText,
 	avatar,
 	showClock,
@@ -142,14 +192,84 @@ export const Card = ({
 	const palette = decidePalette(format, containerPalette);
 
 	const hasSublinks = supportingContent && supportingContent.length > 0;
-	const noOfSublinks = (supportingContent && supportingContent.length) || 0;
+	const noOfSublinks = supportingContent?.length ?? 0;
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||
 		format.design === ArticleDesign.Editorial ||
 		format.design === ArticleDesign.Letter;
 
-	const renderAge = decideIfAgeShouldShow({
+	const renderFooter = ({
+		displayAge,
+		displayLines,
+	}: {
+		displayAge?: boolean;
+		displayLines?: boolean;
+	}) => {
+		return (
+			<CardFooter
+				format={format}
+				containerPalette={containerPalette}
+				displayLines={displayLines}
+				age={
+					displayAge && webPublicationDate ? (
+						<CardAge
+							format={format}
+							containerPalette={containerPalette}
+							webPublicationDate={webPublicationDate}
+							showClock={showClock}
+						/>
+					) : undefined
+				}
+				mediaMeta={
+					(format.design === ArticleDesign.Gallery ||
+						format.design === ArticleDesign.Audio ||
+						format.design === ArticleDesign.Video) &&
+					mediaType ? (
+						<MediaMeta
+							containerPalette={containerPalette}
+							format={format}
+							mediaType={mediaType}
+							mediaDuration={mediaDuration}
+						/>
+					) : undefined
+				}
+				commentCount={
+					discussionId ? (
+						<Link
+							// This a tag is initially rendered empty. It gets populated later
+							// after a fetch call is made to get all the counts for each Card
+							// on the page with a discussion (see FetchCommentCounts.tsx)
+							data-name="comment-count-marker"
+							data-discussion-id={discussionId}
+							data-format={JSON.stringify(format)}
+							data-ignore="global-link-styling"
+							data-link-name="Comment count"
+							href={`${linkTo}#comments`}
+							subdued={true}
+							cssOverrides={css`
+								/* See: https://css-tricks.com/nested-links/ */
+								${getZIndex('card-nested-link')};
+								/* The following styles turn off those provided by Link */
+								color: inherit;
+								/* stylelint-disable-next-line property-disallowed-list */
+								font-family: inherit;
+								font-size: inherit;
+								line-height: inherit;
+							`}
+						/>
+					) : undefined
+				}
+				cardBranding={
+					branding ? (
+						<CardBranding branding={branding} format={format} />
+					) : undefined
+				}
+			/>
+		);
+	};
+
+	const displayAge = decideIfAgeShouldShow({
 		containerPalette,
 		format,
 		showAge,
@@ -252,66 +372,13 @@ export const Card = ({
 								</AvatarContainer>
 							</Hide>
 						)}
-						<CardFooter
-							format={format}
-							age={
-								renderAge && webPublicationDate ? (
-									<CardAge
-										format={format}
-										containerPalette={containerPalette}
-										webPublicationDate={webPublicationDate}
-										showClock={showClock}
-									/>
-								) : undefined
-							}
-							mediaMeta={
-								(format.design === ArticleDesign.Gallery ||
-									format.design === ArticleDesign.Audio ||
-									format.design === ArticleDesign.Video) &&
-								mediaType ? (
-									<MediaMeta
-										containerPalette={containerPalette}
-										format={format}
-										mediaType={mediaType}
-										mediaDuration={mediaDuration}
-									/>
-								) : undefined
-							}
-							commentCount={
-								discussionId ? (
-									<Link
-										// This a tag is initially rendered empty. It gets populated later
-										// after a fetch call is made to get all the counts for each Card
-										// on the page with a discussion (see FetchCommentCounts.tsx)
-										data-name="comment-count-marker"
-										data-discussion-id={discussionId}
-										data-format={JSON.stringify(format)}
-										data-ignore="global-link-styling"
-										data-link-name="Comment count"
-										href={`${linkTo}#comments`}
-										subdued={true}
-										cssOverrides={css`
-											/* See: https://css-tricks.com/nested-links/ */
-											${getZIndex('card-nested-link')};
-											/* The following styles turn off those provided by Link */
-											color: inherit;
-											/* stylelint-disable-next-line property-disallowed-list */
-											font-family: inherit;
-											font-size: inherit;
-											line-height: inherit;
-										`}
-									/>
-								) : undefined
-							}
-							cardBranding={
-								branding ? (
-									<CardBranding
-										branding={branding}
-										format={format}
-									/>
-								) : undefined
-							}
+						<DecideFooter
+							isOpinion={isOpinion}
+							hasSublinks={hasSublinks}
+							displayAge={displayAge}
+							renderFooter={renderFooter}
 						/>
+
 						{hasSublinks && noOfSublinks <= 2 ? (
 							<SupportingContent
 								supportingContent={supportingContent}
@@ -336,7 +403,12 @@ export const Card = ({
 				<></>
 			)}
 			{isOpinion && (
-				<StraightLines color={palette.border.lines} count={4} />
+				<CommentFooter
+					hasSublinks={hasSublinks}
+					displayAge={displayAge}
+					palette={palette}
+					renderFooter={renderFooter}
+				/>
 			)}
 		</CardWrapper>
 	);

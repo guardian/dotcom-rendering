@@ -267,13 +267,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-			adUnit: string;
-			customParams: CustomParams;
-			disableAds?: false;
-	  }
+		adUnit: string;
+		customParams: CustomParams;
+		disableAds?: false;
+	}
 	| {
-			disableAds: true;
-	  };
+		disableAds: true;
+	};
 
 interface SectionNielsenAPI {
 	name: string;
@@ -611,6 +611,7 @@ interface CAPIArticleType {
 
 	// Included on live and dead blogs. Used when polling
 	mostRecentBlockId?: string;
+	topics?: Topic[];
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
@@ -1157,6 +1158,15 @@ type MatchReportType = {
 	minByMinUrl: string;
 	reportUrl: string;
 };
+
+interface Topic {
+	type: TopicType,
+	value: string,
+	count: number,
+}
+
+type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
+
 
 /**
  * Onwards
