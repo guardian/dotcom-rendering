@@ -25,7 +25,7 @@ function insertHtml(html: string, collectionId: string) {
 	/**
 	 * it is expected that `html` will be a server-rendered instance
 	 * of the ExtraCardsContainer component
-	*/
+	 */
 	if (placeholder) {
 		placeholder.insertAdjacentHTML('afterend', html);
 	}
