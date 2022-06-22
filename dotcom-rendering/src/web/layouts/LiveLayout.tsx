@@ -768,7 +768,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</div>
 								</Hide>
 								{/* Key events */}
-								{!showKeyEventsCarousel && (
+								{false && (
 									<div
 										css={[
 											!footballMatchUrl && sticky,
@@ -785,11 +785,16 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										/>
 									</div>
 								)}
+
 								{CAPIArticle.topics && (
-									<TopicFilterBank
-										topics={CAPIArticle.topics}
-										format={format}
-									/>
+									<Hide until="desktop">
+										<div css={sidePaddingDesktop}>
+											<TopicFilterBank
+												topics={CAPIArticle.topics}
+												format={format}
+											/>
+										</div>
+									</Hide>
 								)}
 								{/* Match stats */}
 								{footballMatchUrl && (
@@ -926,6 +931,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												showKeyEventsCarousel={
 													showKeyEventsCarousel
 												}
+												topics={CAPIArticle.topics}
 											/>
 											{pagination.totalPages > 1 && (
 												<Pagination

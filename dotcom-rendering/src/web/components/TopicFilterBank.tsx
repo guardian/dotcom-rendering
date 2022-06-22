@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { headline, textSans } from '@guardian/source-foundations';
-import { Button } from '@guardian/source-react-components';
+import { headline, space, textSans } from '@guardian/source-foundations';
+import { Button, Hide } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
@@ -9,21 +9,28 @@ type Props = {
 };
 
 const containerStyles = css`
-	padding: 12px 0;
+	padding: ${space[3]}px 0;
 	width: 100%;
 `;
 const headlineStyles = css`
 	${headline.xxxsmall({ fontWeight: 'bold', lineHeight: 'tight' })}
-	padding-bottom: 12px;
+	padding-bottom: ${space[3]}px;
 `;
 
 const headlineAccentStyles = css`
-	${textSans.small({ fontWeight: 'bold', lineHeight: 'tight' })};
+	${textSans.small({ fontWeight: 'regular', lineHeight: 'tight' })};
 `;
 
-const topicStyles = css`
-	padding-right: 12px;
-	padding-bottom: 12px;
+const desktopTopicStyles = css`
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+`;
+
+const mobileTopicStyles = css`
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 `;
 export const TopicFilterBank = ({ topics, format }: Props) => {
 	const palette = decidePalette(format);
@@ -40,19 +47,41 @@ export const TopicFilterBank = ({ topics, format }: Props) => {
 					>
 						BETA
 					</span>
-					)
+					):
 				</span>
-				:
 			</div>
-			<div css={topicStyles}>
-				{topics.map((topic) => {
-					return (
-						<Button>
-							{topic.value} ({topic.count})
-						</Button>
-					);
-				})}
-			</div>
+
+			<Hide above="desktop">
+				<div css={mobileTopicStyles}>
+					{topics.slice(0, 5).map((topic) => {
+						return (
+							<Button
+								cssOverrides={css`
+									margin-bottom: ${space[3]}px;
+									margin-right: ${space[1]}px;
+								`}
+							>
+								{topic.value} ({topic.count})
+							</Button>
+						);
+					})}
+				</div>
+			</Hide>
+			<Hide below="desktop">
+				<div css={desktopTopicStyles}>
+					{topics.slice(0, 5).map((topic) => {
+						return (
+							<Button
+								cssOverrides={css`
+									margin-bottom: ${space[3]}px;
+								`}
+							>
+								{topic.value} ({topic.count})
+							</Button>
+						);
+					})}
+				</div>
+			</Hide>
 		</div>
 	);
 };
