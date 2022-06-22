@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticlePillar, ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { TopicFilterBank } from './TopicFilterBank';
 
 interface Topic {
@@ -21,6 +22,13 @@ const topics: Topic[] = [
 	{ type: 'GPE', value: 'United Kingdom', count: 4 },
 	{ type: 'PERSON', value: 'Anas Sarwar', count: 4 },
 ];
+
+const format = {
+	theme: ArticlePillar.News,
+	design: ArticleDesign.LiveBlog,
+	display: ArticleDisplay.Standard,
+};
+
 export default {
 	component: TopicFilterBank,
 	title: 'Components/TopicFilterBank',
@@ -40,7 +48,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 export const topicBank = () => {
 	return (
 		<Container>
-			<TopicFilterBank topics={topics} />
+			<TopicFilterBank topics={topics} format={format} />
 		</Container>
 	);
 };
