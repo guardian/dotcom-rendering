@@ -12,6 +12,11 @@ import { renderToString } from 'react-dom/server';
 import { Island } from './Island';
 import { SecureSignupIframe } from './SecureSignupIframe.importable';
 
+// The Google documentation specifies that if the 'recaptcha-badge' is hidden,
+// their T+C's must be displayed instead. <SecureSignupIframe> hides the
+// badge, so <RecaptchaTerms> must be displayed with it.
+// https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
+
 type Props = { newsletterId: string; successText: string };
 
 const PrivacyTerms = () => {
@@ -149,7 +154,11 @@ export const SecureSignup = ({ newsletterId, successText }: Props) => {
 
 	return (
 		<>
-			<Island clientOnly={true} deferUntil={'idle'}>
+			<Island
+				clientOnly={true}
+				deferUntil={'idle'}
+				placeholderHeight={90}
+			>
 				<SecureSignupIframe
 					html={html}
 					styles={styles}

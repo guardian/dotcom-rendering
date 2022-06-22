@@ -17,6 +17,14 @@ import {
 	submitComponentEvent,
 } from '../browser/ophan/ophan';
 
+// The Google documentation specifies that if the 'recaptcha-badge' is hidden,
+// their T+C's must be displayed instead. While this component hides the
+// badge, its parent must include the T+C along side it.
+// The T+C are not included in this componet directly to reduce layout shift
+// from the island hydrating (placeholder height for the text can't
+// be accurately predicated for every breakpoint).
+// https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
+
 type Props = {
 	styles: string;
 	html: string;
