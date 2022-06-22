@@ -133,6 +133,25 @@ const richLinkSvg = (format: ArticleFormat): Colour => {
 	}
 };
 
+const liveblogMetadata = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[200];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[200];
+		case ArticlePillar.Sport:
+			return sport[200];
+		case ArticlePillar.Culture:
+			return culture[200];
+		case ArticlePillar.Opinion:
+			return opinion[200];
+		case ArticleSpecial.Labs:
+			return labs[200];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[200];
+	}
+};
+
 const richLinkSvgDark = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -463,6 +482,7 @@ const background = {
 	keyEventsWide,
 	keyEventsDark,
 	keyEventsWideDark,
+	liveblogMetadata,
 	relatedCard,
 	relatedCardDark,
 	relatedCardIcon,
