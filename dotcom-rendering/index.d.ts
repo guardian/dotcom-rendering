@@ -267,13 +267,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-		adUnit: string;
-		customParams: CustomParams;
-		disableAds?: false;
-	}
+			adUnit: string;
+			customParams: CustomParams;
+			disableAds?: false;
+	  }
 	| {
-		disableAds: true;
-	};
+			disableAds: true;
+	  };
 
 interface SectionNielsenAPI {
 	name: string;
@@ -742,7 +742,7 @@ type FEContainerPalette =
 	| 'Breaking'
 	| 'Podcast'
 	| 'Branded'
-	| 'Breaking';
+	| 'BreakingPalette';
 
 type DCRContainerPalette =
 	| 'EventPalette'
@@ -1163,13 +1163,12 @@ type MatchReportType = {
 };
 
 interface Topic {
-	type: TopicType,
-	value: string,
-	count: number,
+	type: TopicType;
+	value: string;
+	count: number;
 }
 
 type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
-
 
 /**
  * Onwards
@@ -1274,7 +1273,7 @@ interface GADataType {
 	toneIds: string;
 	seriesId: string;
 	isHosted: string;
-	edition: EditionId;
+	edition: string;
 	beaconUrl: string;
 }
 

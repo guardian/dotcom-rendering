@@ -236,7 +236,7 @@ const FooterLinks = ({
 
 const year = new Date().getFullYear();
 
-const decideSignupLink = (edition: Edition): string => {
+const decideSignupLink = (edition: EditionId): string => {
 	switch (edition) {
 		case 'US':
 			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-us';
@@ -287,7 +287,7 @@ export const Footer = ({
 				</div>
 				<LinkButton
 					size="small"
-					href={decideSignupLink(edition)}
+					href={decideSignupLink(editionId)}
 					cssOverrides={emailSignupButton}
 					icon={<SvgArrowRightStraight />}
 					iconSide="right"
