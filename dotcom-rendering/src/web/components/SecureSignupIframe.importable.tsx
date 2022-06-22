@@ -92,7 +92,7 @@ const buildFormData = (
 	formData.append('listName', newsletterId);
 	formData.append('ref', pageRef);
 	formData.append('refViewId', refViewId);
-	formData.append('dummy', ''); //  TO DO -  find out if field is required by form handler
+	formData.append('name', '');
 	if (window.guardian.config.switches.emailSignupRecaptcha) {
 		formData.append('g-recaptcha-response', token); //  TO DO -  find out if field is required/allowed by form handler
 	}
