@@ -254,6 +254,16 @@ interface Props {
 	format: ArticleFormat;
 }
 
+const paddingBody = css`
+	padding: ${space[3]}px;
+	${from.mobileLandscape} {
+		padding: ${space[3]}px ${space[5]}px;
+	}
+	${from.desktop} {
+		padding: 0;
+	}
+`;
+
 export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
@@ -817,7 +827,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										<></>
 									)}
 									{isInFilteringBeta ? (
-										<>
+										<div css={paddingBody}>
 											{!showKeyEventsCarousel &&
 											CAPIArticle.keyEvents.length ? (
 												<Hide above="desktop">
@@ -978,7 +988,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													badge={CAPIArticle.badge}
 												/>
 											</ArticleContainer>
-										</>
+										</div>
 									) : (
 										<Accordion
 											supportsDarkMode={false}
