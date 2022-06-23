@@ -23,7 +23,11 @@ import { Colour } from '.';
 const commentCount = (format: ArticleFormat): Colour => {
 	if (format.design === ArticleDesign.LiveBlog) {
 			return neutral[86];
-		}
+	}
+
+	if (format.design === ArticleDesign.DeadBlog) {
+		return neutral[46];
+}
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[400];
@@ -65,7 +69,7 @@ const commentCountDark = (format: ArticleFormat): Colour => {
 };
 
 const commentCountWide = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.LiveBlog) {
+	if (format.design === ArticleDesign.LiveBlog || format.design === ArticleDesign.DeadBlog) {
 			return neutral[46];
 		}
 
