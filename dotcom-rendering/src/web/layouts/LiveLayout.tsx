@@ -786,6 +786,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								)}
 
 								{CAPIArticle.config.switches.automaticFilters &&
+									showKeyEventsCarousel &&
 									CAPIArticle.topics && (
 										<Hide until="desktop">
 											<div css={sidePaddingDesktop}>

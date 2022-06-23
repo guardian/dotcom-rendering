@@ -27,12 +27,11 @@ const topicStyles = css`
 	align-items: flex-start;
 	flex-direction: row;
 	flex-wrap: wrap;
-	column-gap: ${space[3]}px;
-
+	column-gap: ${space[2]}px;
+	row-gap: ${space[2]}px;
 	${from.desktop} {
 		flex-direction: column;
 		flex-wrap: nowrap;
-		row-gap: ${space[3]}px;
 		column-gap: 0;
 	}
 `;
