@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 // eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
 import Accordion from '@guardian/common-rendering/src/components/accordion';
 // eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
@@ -14,6 +14,7 @@ import {
 	neutral,
 	space,
 	until,
+	remSpace,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import {
@@ -253,6 +254,16 @@ interface Props {
 	NAV: NavType;
 	format: ArticleFormat;
 }
+
+const paddingBody: SerializedStyles = css`
+	padding: ${remSpace[3]};
+	${from.mobileLandscape} {
+		padding: ${remSpace[3]} ${remSpace[5]};
+	}
+	${from.desktop} {
+		padding: 0;
+	}
+`;
 
 export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
@@ -818,7 +829,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										<></>
 									)}
 									{isInFilteringBeta ? (
-										<>
+										<div css={paddingBody}>
 											{!showKeyEventsCarousel &&
 											CAPIArticle.keyEvents.length ? (
 												<Hide above="desktop">
@@ -979,7 +990,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													badge={CAPIArticle.badge}
 												/>
 											</ArticleContainer>
-										</>
+										</div>
 									) : (
 										<Accordion
 											supportsDarkMode={false}
