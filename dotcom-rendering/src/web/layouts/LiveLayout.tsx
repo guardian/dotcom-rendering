@@ -301,7 +301,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const showKeyEventsCarousel =
 		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
-	console.log(CAPIArticle.topics);
 
 	return (
 		<>
@@ -768,7 +767,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</div>
 								</Hide>
 								{/* Key events */}
-								{false && (
+								{!showKeyEventsCarousel && (
 									<div
 										css={[
 											!footballMatchUrl && sticky,
