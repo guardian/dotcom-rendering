@@ -1,4 +1,5 @@
-import { css, SerializedStyles } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 // eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
 import Accordion from '@guardian/common-rendering/src/components/accordion';
 // eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
@@ -12,9 +13,9 @@ import {
 	brandLine,
 	from,
 	neutral,
+	remSpace,
 	space,
 	until,
-	remSpace,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import {
@@ -313,8 +314,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
 
 	const isInFilteringBeta =
-		CAPIArticle.config.switches.automaticFilters &&
-		CAPIArticle.topics;
+		CAPIArticle.config.switches.automaticFilters && CAPIArticle.topics;
 
 	return (
 		<>
