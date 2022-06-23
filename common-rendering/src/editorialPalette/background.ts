@@ -35,7 +35,7 @@ const adSlot = (format: ArticleFormat): Colour => {
 
 const adSlotDark = (_format: ArticleFormat) => neutral[20];
 
-const articleBodyMedia = (_format: ArticleFormat) => {
+const mediaArticleBody = (_format: ArticleFormat) => {
 	return neutral[10];
 };
 
@@ -535,7 +535,6 @@ const seriesDark = (format: ArticleFormat): Colour => {
 const background = {
 	adSlot,
 	adSlotDark,
-	articleBodyMedia: articleBodyMedia,
 	articleContentDark,
 	avatar,
 	bullet,
@@ -551,6 +550,7 @@ const background = {
 	keyEventsDark,
 	keyEventsWideDark,
 	liveblogMetadata,
+	mediaArticleBody,
 	relatedCard,
 	relatedCardDark,
 	relatedCardIcon,

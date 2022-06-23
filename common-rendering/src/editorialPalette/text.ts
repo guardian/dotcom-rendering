@@ -34,11 +34,11 @@ const adSlot = (_format: ArticleFormat): Colour => {
 	return neutral[20];
 };
 
-const articleBodyMedia = (_format: ArticleFormat): Colour => {
+const mediaArticleBody = (_format: ArticleFormat): Colour => {
 	return neutral[86];
 };
 
-const articleBodyMediaLinkDark = (format: ArticleFormat): Colour => {
+const mediaArticleBodyLinkDark = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[500];
@@ -925,8 +925,6 @@ const text = {
 	adLabel,
 	adLabelDark,
 	adSlot,
-	articleBodyMedia,
-	articleBodyMediaLinkDark,
 	articleLink,
 	branding,
 	brandingDark,
@@ -953,6 +951,8 @@ const text = {
 	keyEventsLeftColumn,
 	kicker,
 	linkDark,
+	mediaArticleBody,
+	mediaArticleBodyLinkDark,
 	mediaArticleSeries,
 	pullquote,
 	pullquoteDark,

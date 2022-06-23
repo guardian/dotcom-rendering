@@ -12,15 +12,15 @@ import { darkModeCss } from 'styles';
 const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
 	position: relative;
 	clear: both;
-	background: ${background.articleBodyMedia(format)};
-	color: ${text.articleBodyMedia(format)};
+	background: ${background.mediaArticleBody(format)};
+	color: ${text.mediaArticleBody(format)};
 `;
 
 const ArticleBodyDarkStyles = (
 	format: ArticleFormat,
 ): SerializedStyles => darkModeCss`
     a {
-        color: ${text.articleBodyMediaLinkDark(format)};
+        color: ${text.mediaArticleBodyLinkDark(format)};
     }
     p:last-child {
         margin-bottom: 0;
