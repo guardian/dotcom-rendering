@@ -28,9 +28,9 @@ import {
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import {
 	getLastOneOffContributionDate,
+	getPurchaseInfo,
 	MODULES_VERSION,
 	shouldHideSupportMessaging,
-	getPurchaseInfo,
 } from '../lib/contributions';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
