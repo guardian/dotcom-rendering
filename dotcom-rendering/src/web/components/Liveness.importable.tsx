@@ -16,6 +16,7 @@ type Props = {
 	webURL: string;
 	mostRecentBlockId: string;
 	hasPinnedPost: boolean;
+	activeTopic?: string;
 };
 
 const isServer = typeof window === 'undefined';
@@ -106,6 +107,7 @@ function getKey(
 	ajaxUrl: string,
 	latestBlockId: string,
 	filterKeyEvents: boolean,
+	activeTopic?: string,
 ): string | undefined {
 	try {
 		// Construct the url to poll
@@ -117,6 +119,7 @@ function getKey(
 			'filterKeyEvents',
 			filterKeyEvents ? 'true' : 'false',
 		);
+		if (activeTopic) url.searchParams.set('activeTopic', activeTopic);
 		return url.href;
 	} catch {
 		window.guardian.modules.sentry.reportError(
@@ -142,6 +145,7 @@ export const Liveness = ({
 	webURL,
 	mostRecentBlockId,
 	hasPinnedPost,
+	activeTopic,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [topOfBlogVisible, setTopOfBlogVisible] = useState<boolean>();
@@ -203,11 +207,14 @@ export const Liveness = ({
 	window.mockLiveUpdate = onSuccess;
 
 	// useApi returns { data, loading, error } but we're not using them here
-	useApi(getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents), {
-		refreshInterval: 10_000,
-		refreshWhenHidden: true,
-		onSuccess,
-	});
+	useApi(
+		getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents, activeTopic),
+		{
+			refreshInterval: 10_000,
+			refreshWhenHidden: true,
+			onSuccess,
+		},
+	);
 
 	useEffect(() => {
 		document.title =

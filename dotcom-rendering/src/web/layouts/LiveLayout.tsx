@@ -674,6 +674,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.mostRecentBlockId || ''
 									}
 									hasPinnedPost={!!CAPIArticle.pinnedPost}
+									activeTopic={CAPIArticle.activeTopic}
 								/>
 							</Island>
 						</>
