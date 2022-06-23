@@ -39,6 +39,10 @@ const commentCount = (format: ArticleFormat): Colour => {
 	}
 };
 
+const commentCountWide = (_format: ArticleFormat): Colour => {
+	return neutral[46];
+}
+
 const icon = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.Opinion:
@@ -150,6 +154,7 @@ const richLinkSvgPreloadDark = (_format: ArticleFormat): Colour => {
 
 const fill = {
 	commentCount,
+	commentCountWide,
 	icon,
 	iconDark,
 	blockquoteIcon,

@@ -9,12 +9,7 @@ import {
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import {
-	from,
-	neutral,
-	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+import { from, remSpace, textSans } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
@@ -96,9 +91,9 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 	}
 };
 
-const liveblogBubbleStyles = css`
+const liveblogBubbleStyles = (format: ArticleFormat): SerializedStyles => css`
 	${from.desktop} {
-		fill: ${neutral[46]};
+		fill: ${fill.commentCountWide(format)};
 	}
 `;
 
@@ -106,14 +101,14 @@ const deadblogBubbleStyles = (format: ArticleFormat): SerializedStyles => css`
 	fill: ${fill.commentCount(format)};
 	margin-left: revert;
 	${from.desktop} {
-		fill: ${neutral[46]};
+		fill: ${fill.commentCountWide(format)};
 	}
 `;
 
 const getBubbleStyles = (format: ArticleFormat): SerializedStyles => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
-			return css(bubbleStyles(format), liveblogBubbleStyles);
+			return css(bubbleStyles(format), liveblogBubbleStyles(format));
 		case ArticleDesign.DeadBlog:
 			return css(bubbleStyles(format), deadblogBubbleStyles(format));
 		default:
