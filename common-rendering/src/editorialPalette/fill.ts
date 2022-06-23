@@ -21,8 +21,7 @@ import { Colour } from '.';
 // ----- Functions ----- //
 
 const commentCount = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.LiveBlog ||
-		format.design === ArticleDesign.DeadBlog) {
+	if (format.design === ArticleDesign.LiveBlog) {
 			return neutral[86];
 		}
 	switch (format.theme) {

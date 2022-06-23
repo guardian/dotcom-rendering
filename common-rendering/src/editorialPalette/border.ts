@@ -105,9 +105,6 @@ const relatedCardDark = (_format: ArticleFormat): Colour => {
 };
 
 const standfirstLink = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.LiveBlog) {
-		return neutral[100];
-	}
 
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -125,6 +122,16 @@ const standfirstLink = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
 	}
+};
+
+const standfirstBlogLink = (format: ArticleFormat): Colour => {
+	if (format.design === ArticleDesign.LiveBlog) {
+		return neutral[100];
+	}
+	if (format.theme === ArticleSpecial.SpecialReport) {
+		return specialReport[400];
+	}
+	return neutral[86];
 };
 
 const richLink = (format: ArticleFormat): Colour => {
@@ -213,8 +220,6 @@ const border = {
 	interactiveAtomLink,
 	liveBlock,
 	liveBlockDark,
-	standfirstLink,
-	standfirstLinkDark,
 	pagination,
 	relatedCard,
 	relatedCardDark,
@@ -225,6 +230,9 @@ const border = {
 	richLinkSvgDark,
 	richLinkSvgPreload,
 	richLinkSvgPreloadDark,
+	standfirstLink,
+	standfirstBlogLink,
+	standfirstLinkDark,
 };
 
 // ----- Exports ----- //
