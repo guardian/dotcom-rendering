@@ -31,11 +31,11 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	padding-top: ${remSpace[3]};
 	color: ${text.commentCount(format)};
 	${darkModeCss`
+		color: ${text.commentCountDark(format)};
 	    border-left: 1px solid ${border.commentCountDark(format)};
 		${from.desktop} {
         	border-left: 1px solid ${border.commentCountWideDark(format)};
 		}
-
     `}
 `;
 
@@ -44,6 +44,9 @@ const bubbleStyles = (format: ArticleFormat): SerializedStyles => css`
 	display: block;
 	margin-left: auto;
 	fill: ${fill.commentCount(format)};
+	${darkModeCss`
+		fill: ${fill.commentCountDark(format)};
+    `}
 `;
 
 const blogStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -60,6 +63,7 @@ const blogStyles = (format: ArticleFormat): SerializedStyles => css`
 	padding-top: ${remSpace[2]};
 	margin-bottom: ${remSpace[2]};
 	${darkModeCss`
+		color: ${text.commentCountDark(format)};
 		border-left: 1px solid ${border.commentCountDark(format)};
 
 		${from.desktop} {
@@ -94,6 +98,9 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 const liveblogBubbleStyles = (format: ArticleFormat): SerializedStyles => css`
 	${from.desktop} {
 		fill: ${fill.commentCountWide(format)};
+		${darkModeCss`
+			fill: ${fill.commentCountDark(format)};
+    	`}
 	}
 `;
 
@@ -102,6 +109,9 @@ const deadblogBubbleStyles = (format: ArticleFormat): SerializedStyles => css`
 	margin-left: revert;
 	${from.desktop} {
 		fill: ${fill.commentCountWide(format)};
+		${darkModeCss`
+			fill: ${fill.commentCountDark(format)};
+    	`}
 	}
 `;
 
