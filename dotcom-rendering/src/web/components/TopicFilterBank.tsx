@@ -23,7 +23,6 @@ const headlineAccentStyles = css`
 
 const topicStyles = css`
 	display: flex;
-	flex-direction: column;
 	align-items: flex-start;
 	flex-direction: row;
 	flex-wrap: wrap;
