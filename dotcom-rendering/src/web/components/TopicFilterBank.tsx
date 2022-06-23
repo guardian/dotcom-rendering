@@ -21,6 +21,10 @@ const headlineAccentStyles = css`
 	${textSans.small({ fontWeight: 'regular', lineHeight: 'tight' })};
 `;
 
+const betaTextStyles = (palette: Palette) => css`
+	color: ${palette.text.keyEvent};
+`;
+
 const topicStyles = css`
 	display: flex;
 	align-items: flex-start;
@@ -42,14 +46,7 @@ export const TopicFilterBank = ({ topics, format }: Props) => {
 			<div css={headlineStyles}>
 				Filters{' '}
 				<span css={headlineAccentStyles}>
-					(
-					<span
-						css={css`
-							color: ${palette.text.keyEvent};
-						`}
-					>
-						BETA
-					</span>
+					(<span css={betaTextStyles(palette)}>BETA</span>
 					):
 				</span>
 			</div>

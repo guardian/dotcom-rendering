@@ -2,14 +2,6 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { TopicFilterBank } from './TopicFilterBank';
 
-interface Topic {
-	type: TopicType;
-	value: string;
-	count: number;
-}
-
-type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
-
 const topics: Topic[] = [
 	{ type: 'GPE', value: 'London', count: 16 },
 	{ type: 'ORG', value: 'RMT', count: 10 },
