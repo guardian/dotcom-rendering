@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-import { headline, space, textSans } from '@guardian/source-foundations';
-import { Button, Hide } from '@guardian/source-react-components';
+import { from, headline, space, textSans } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { FilterButton } from './FilterButton.importable';
 
@@ -22,17 +21,22 @@ const headlineAccentStyles = css`
 	${textSans.small({ fontWeight: 'regular', lineHeight: 'tight' })};
 `;
 
-const desktopTopicStyles = css`
+const topicStyles = css`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-`;
-
-const mobileTopicStyles = css`
-	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	column-gap: ${space[3]}px;
+
+	${from.desktop} {
+		flex-direction: column;
+		flex-wrap: nowrap;
+		row-gap: ${space[3]}px;
+		column-gap: 0;
+	}
 `;
+
 export const TopicFilterBank = ({ topics, format }: Props) => {
 	const palette = decidePalette(format);
 	return (
@@ -52,55 +56,19 @@ export const TopicFilterBank = ({ topics, format }: Props) => {
 				</span>
 			</div>
 
-			<Hide above="desktop">
-				<div css={mobileTopicStyles}>
-					{topics.slice(0, 5).map((topic) => {
-						return (
-							<FilterButton
-								text={topic.value}
-								count={topic.count}
-								format={format}
-								isActive={false}
-								onClick={() => {
-									console.log('filter clicked');
-								}}
-							/>
-							// <Button
-							// 	cssOverrides={css`
-							// 		margin-bottom: ${space[3]}px;
-							// 		margin-right: ${space[1]}px;
-							// 	`}
-							// >
-							// 	{topic.value} ({topic.count})
-							// </Button>
-						);
-					})}
-				</div>
-			</Hide>
-			<Hide below="desktop">
-				<div css={desktopTopicStyles}>
-					{topics.slice(0, 5).map((topic) => {
-						return (
-							<FilterButton
-								text={topic.value}
-								count={topic.count}
-								format={format}
-								isActive={false}
-								onClick={() => {
-									console.log('filter clicked');
-								}}
-							/>
-							// <Button
-							// 	cssOverrides={css`
-							// 		margin-bottom: ${space[3]}px;
-							// 	`}
-							// >
-							// 	{topic.value} ({topic.count})
-							// </Button>
-						);
-					})}
-				</div>
-			</Hide>
+			<div css={topicStyles}>
+				{topics.slice(0, 5).map((topic) => {
+					return (
+						<FilterButton
+							text={topic.value}
+							count={topic.count}
+							format={format}
+							isActive={false}
+							onClick={() => {}}
+						/>
+					);
+				})}
+			</div>
 		</div>
 	);
 };
