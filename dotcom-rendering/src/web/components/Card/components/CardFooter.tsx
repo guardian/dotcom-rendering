@@ -8,7 +8,6 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	displayLines?: boolean;
 	age?: JSX.Element;
-	mediaMeta?: JSX.Element;
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
 	supportingContent?: JSX.Element;
@@ -35,7 +34,6 @@ export const CardFooter = ({
 	containerPalette,
 	displayLines,
 	age,
-	mediaMeta,
 	commentCount,
 	cardBranding,
 	supportingContent,
@@ -68,23 +66,6 @@ export const CardFooter = ({
 						/>
 					)}
 					{commentCount}
-				</div>
-			</footer>
-		);
-	}
-
-	if (
-		format.design === ArticleDesign.Gallery ||
-		format.design === ArticleDesign.Audio ||
-		format.design === ArticleDesign.Video
-	) {
-		return (
-			<footer css={margins}>
-				{supportingContent}
-				<div css={spaceBetween}>
-					{mediaMeta}
-					{/* Show age if we have it otherwise try for commentCount */}
-					{age || commentCount}
 				</div>
 			</footer>
 		);

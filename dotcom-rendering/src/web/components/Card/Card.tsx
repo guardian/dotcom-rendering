@@ -216,19 +216,6 @@ export const Card = ({
 						/>
 					) : undefined
 				}
-				mediaMeta={
-					(format.design === ArticleDesign.Gallery ||
-						format.design === ArticleDesign.Audio ||
-						format.design === ArticleDesign.Video) &&
-					mediaType ? (
-						<MediaMeta
-							containerPalette={containerPalette}
-							format={format}
-							mediaType={mediaType}
-							mediaDuration={mediaDuration}
-						/>
-					) : undefined
-				}
 				commentCount={
 					discussionId ? (
 						<Link
@@ -327,6 +314,17 @@ export const Card = ({
 							{starRating !== undefined ? (
 								<StarRatingComponent rating={starRating} />
 							) : null}
+							{(format.design === ArticleDesign.Gallery ||
+								format.design === ArticleDesign.Audio ||
+								format.design === ArticleDesign.Video) &&
+							mediaType ? (
+								<MediaMeta
+									containerPalette={containerPalette}
+									format={format}
+									mediaType={mediaType}
+									mediaDuration={mediaDuration}
+								/>
+							) : undefined}
 						</HeadlineWrapper>
 						{avatar && (
 							<Hide when="above" breakpoint="tablet">
