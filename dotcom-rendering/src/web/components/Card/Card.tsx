@@ -60,26 +60,22 @@ export type Props = {
 	discussionId?: string;
 };
 
-const starWrapper = css`
-	background-color: ${brandAltBackground.primary};
-	position: absolute;
-	bottom: 0;
-	margin-top: 2px;
-`;
-
 const StarRatingComponent = ({ rating }: { rating: number }) => (
-	<>
+	<div
+		css={css`
+			background-color: ${brandAltBackground.primary};
+			position: absolute;
+			bottom: 0;
+			margin-top: 2px;
+		`}
+	>
 		<Hide when="above" breakpoint="desktop">
-			<div css={starWrapper}>
-				<StarRating rating={rating} size="small" />
-			</div>
+			<StarRating rating={rating} size="small" />
 		</Hide>
 		<Hide when="below" breakpoint="desktop">
-			<div css={starWrapper}>
-				<StarRating rating={rating} size="medium" />
-			</div>
+			<StarRating rating={rating} size="medium" />
 		</Hide>
-	</>
+	</div>
 );
 
 /**
@@ -299,9 +295,6 @@ export const Card = ({
 						imagePositionOnMobile={imagePositionOnMobile}
 					>
 						<img src={imageUrl} alt="" role="presentation" />
-						{starRating !== undefined ? (
-							<StarRatingComponent rating={starRating} />
-						) : null}
 					</ImageWrapper>
 				)}
 				<ContentWrapper
@@ -333,6 +326,9 @@ export const Card = ({
 								showByline={showByline}
 							/>
 						</HeadlineWrapper>
+						{starRating !== undefined ? (
+							<StarRatingComponent rating={starRating} />
+						) : null}
 						{avatar && (
 							<Hide when="above" breakpoint="tablet">
 								<AvatarContainer>
