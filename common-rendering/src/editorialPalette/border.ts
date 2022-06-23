@@ -38,6 +38,21 @@ const articleLink = (format: ArticleFormat): Colour => {
 
 const articleLinkDark = articleLink;
 
+const commentCount = (_format: ArticleFormat): Colour => {
+	return 'rgba(255, 255, 255, 0.4)';
+};
+
+const commentCountDark = (_format: ArticleFormat): Colour => {
+	return neutral[20];
+};
+
+const commentCountWide = (_format: ArticleFormat): Colour => {
+	return neutral[86];
+};
+
+const commentCountWideDark = (_format: ArticleFormat): Colour => {
+	return neutral[20];
+};
 const interactiveAtomLink = (_format: ArticleFormat): Colour => {
 	return neutral[86];
 };
@@ -191,6 +206,10 @@ const pagination = (format: ArticleFormat): Colour => {
 const border = {
 	articleLink,
 	articleLinkDark,
+	commentCount,
+	commentCountDark,
+	commentCountWide,
+	commentCountWideDark,
 	interactiveAtomLink,
 	liveBlock,
 	liveBlockDark,
