@@ -405,6 +405,9 @@
             "items": {
                 "$ref": "#/definitions/Topic"
             }
+        },
+        "activeTopic": {
+            "type": "string"
         }
     },
     "required": [
