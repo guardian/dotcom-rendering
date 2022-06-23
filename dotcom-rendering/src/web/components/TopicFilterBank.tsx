@@ -60,7 +60,8 @@ export const TopicFilterBank = ({ topics, format }: Props) => {
 				{topics.slice(0, 5).map((topic) => {
 					return (
 						<FilterButton
-							text={topic.value}
+							value={topic.value}
+							type={topic.type}
 							count={topic.count}
 							format={format}
 							isActive={false}
