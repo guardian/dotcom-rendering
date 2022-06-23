@@ -141,7 +141,9 @@ export const FixedLargeSlowXIV = ({
 							percentage="25%"
 							showDivider={cardIndex !== 4 && cardIndex !== 8}
 							padBottom={cardIndex < 4}
-							padBottomOnMobile={cardIndex !== thirdSlice.length - 1}
+							padBottomOnMobile={
+								cardIndex !== thirdSlice.length - 1
+							}
 							key={card.url}
 						>
 							<Card
