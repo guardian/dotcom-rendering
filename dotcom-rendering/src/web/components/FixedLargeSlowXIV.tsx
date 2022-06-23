@@ -139,7 +139,11 @@ export const FixedLargeSlowXIV = ({
 						<LI
 							padSides={true}
 							percentage="25%"
-							showDivider={cardIndex !== 4 && cardIndex !== 8}
+							showDivider={
+								cardIndex !== 0 &&
+								cardIndex !== 4 &&
+								cardIndex !== 8
+							}
 							padBottom={cardIndex < 4}
 							padBottomOnMobile={
 								cardIndex !== thirdSlice.length - 1
