@@ -789,10 +789,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								{CAPIArticle.topics && (
 									<Hide until="desktop">
 										<div css={sidePaddingDesktop}>
-											<TopicFilterBank
-												topics={CAPIArticle.topics}
-												format={format}
-											/>
+											<Island>
+												<TopicFilterBank
+													topics={CAPIArticle.topics}
+													format={format}
+												/>
+											</Island>
 										</div>
 									</Hide>
 								)}
