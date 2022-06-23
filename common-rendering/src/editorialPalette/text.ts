@@ -273,22 +273,47 @@ const bylineLeftColumn = (format: ArticleFormat): Colour => {
 	}
 };
 
+const bylineLeftColumnDark = (format: ArticleFormat): Colour => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+			return neutral[93];
+		case ArticleDesign.DeadBlog:
+		default:
+			return neutral[86];
+	}
+};
 const bylineInline = (format: ArticleFormat): Colour => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return news[400];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[300];
-		case ArticlePillar.Sport:
-			return sport[300];
-		case ArticlePillar.Culture:
-			return culture[300];
-		case ArticlePillar.Opinion:
-			return opinion[200];
-		case ArticleSpecial.Labs:
-			return labs[300];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[300];
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+			return neutral[100];
+		case ArticleDesign.DeadBlog:
+		default:
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[400];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[300];
+				case ArticlePillar.Sport:
+					return sport[300];
+				case ArticlePillar.Culture:
+					return culture[300];
+				case ArticlePillar.Opinion:
+					return opinion[200];
+				case ArticleSpecial.Labs:
+					return labs[300];
+				case ArticleSpecial.SpecialReport:
+					return specialReport[300];
+			}
+	}
+};
+
+const bylineInlineDark = (format: ArticleFormat): Colour => {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+			return neutral[93];
+		case ArticleDesign.DeadBlog:
+		default:
+			return neutral[86];
 	}
 };
 
@@ -880,9 +905,11 @@ const text = {
 	brandingDark,
 	bylineAnchor,
 	bylineAnchorDark,
-	bylineLeftColumn,
-	bylineInline,
 	bylineDark,
+	bylineLeftColumn,
+	bylineLeftColumnDark,
+	bylineInline,
+	bylineInlineDark,
 	calloutFormAnchor,
 	calloutSpeechBubble,
 	dropCap,
