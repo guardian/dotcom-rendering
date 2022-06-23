@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { brandAltBackground } from '@guardian/source-foundations';
+import { brandAltBackground, space } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { decidePalette } from '../../lib/decidePalette';
@@ -64,9 +64,8 @@ const StarRatingComponent = ({ rating }: { rating: number }) => (
 	<div
 		css={css`
 			background-color: ${brandAltBackground.primary};
-			position: absolute;
-			bottom: 0;
-			margin-top: 2px;
+			margin-top: ${space[1]}px;
+			display: inline-block;
 		`}
 	>
 		<Hide when="above" breakpoint="desktop">
@@ -325,10 +324,10 @@ export const Card = ({
 								byline={byline}
 								showByline={showByline}
 							/>
+							{starRating !== undefined ? (
+								<StarRatingComponent rating={starRating} />
+							) : null}
 						</HeadlineWrapper>
-						{starRating !== undefined ? (
-							<StarRatingComponent rating={starRating} />
-						) : null}
 						{avatar && (
 							<Hide when="above" breakpoint="tablet">
 								<AvatarContainer>
