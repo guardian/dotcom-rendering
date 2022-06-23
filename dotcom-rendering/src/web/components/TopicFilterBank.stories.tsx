@@ -34,7 +34,7 @@ export default {
 	title: 'Components/TopicFilterBank',
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			max-width: 620px;
@@ -47,12 +47,11 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const topicBank = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<TopicFilterBank topics={topics} format={format} />
-		</Container>
+		</Wrapper>
 	);
 };
 topicBank.story = {
 	name: 'topicBank',
-	chromatic: { disable: true },
 };
