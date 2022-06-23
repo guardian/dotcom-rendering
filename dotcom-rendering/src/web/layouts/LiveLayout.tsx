@@ -302,6 +302,19 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const showKeyEventsCarousel =
 		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
 
+	/*
+	The topic bank on desktop will be positioned where we currently show the key events container.
+	This is dependent on a change made in PR #4896 [https://github.com/guardian/dotcom-rendering/pull/4896] where the key events container will be removed from the left column.
+	This change currently lives behind the key-events-carousel A/B test.
+	Until this change is moved from behind the a/b test, we need to add an additional condition
+	here to see if the user is within this test, meaning we can therefore position the filter bank in the empty space.
+	Once the key-event-carousel test is completed and this change is productionised, we can remove the final `showKeyEventsCarousel` condition.
+	*/
+	const showTopicFilterBank =
+		CAPIArticle.config.switches.automaticFilters &&
+		CAPIArticle.topics &&
+		showKeyEventsCarousel;
+
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -785,22 +798,18 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</div>
 								)}
 
-								{CAPIArticle.config.switches.automaticFilters &&
-									showKeyEventsCarousel &&
-									CAPIArticle.topics && (
-										<Hide until="desktop">
-											<div css={sidePaddingDesktop}>
-												<Island>
-													<TopicFilterBank
-														topics={
-															CAPIArticle.topics
-														}
-														format={format}
-													/>
-												</Island>
-											</div>
-										</Hide>
-									)}
+								{showTopicFilterBank && (
+									<Hide until="desktop">
+										<div css={sidePaddingDesktop}>
+											<Island>
+												<TopicFilterBank
+													topics={CAPIArticle.topics}
+													format={format}
+												/>
+											</Island>
+										</div>
+									</Hide>
+								)}
 								{/* Match stats */}
 								{footballMatchUrl && (
 									<Island
