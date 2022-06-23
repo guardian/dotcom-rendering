@@ -61,9 +61,10 @@ function fromUnsafe<A, E>(f: () => A, error: E): Result<E, A> {
  *     error => `Uh oh, an error: ${error}`,
  * )(flakyTaskResult)
  */
-const either = <E, A, C>(f: (e: E) => C, g: (a: A) => C) => (
-	result: Result<E, A>,
-): C => (result.kind === ResultKind.Ok ? g(result.value) : f(result.err));
+const either =
+	<E, A, C>(f: (e: E) => C, g: (a: A) => C) =>
+	(result: Result<E, A>): C =>
+		result.kind === ResultKind.Ok ? g(result.value) : f(result.err);
 
 /**
  * The companion to `map`.
@@ -71,10 +72,10 @@ const either = <E, A, C>(f: (e: E) => C, g: (a: A) => C) => (
  * @param f The function to apply if this is an `Err`
  * @param result The Result
  */
-const mapError = <E, F>(f: (e: E) => F) => <A>(
-	result: Result<E, A>,
-): Result<F, A> =>
-	result.kind === ResultKind.Err ? err(f(result.err)) : result;
+const mapError =
+	<E, F>(f: (e: E) => F) =>
+	<A>(result: Result<E, A>): Result<F, A> =>
+		result.kind === ResultKind.Err ? err(f(result.err)) : result;
 
 /**
  * Converts a `Result<E, A>` into an `Option<A>`. If the result is an
@@ -91,8 +92,10 @@ const toOption = <E, A>(result: Result<E, A>): Option<A> =>
  * @param f The function to apply if this is an `Ok`
  * @param result The Result
  */
-const map = <A, B>(f: (a: A) => B) => <E>(result: Result<E, A>): Result<E, B> =>
-	result.kind === ResultKind.Ok ? ok(f(result.value)) : result;
+const map =
+	<A, B>(f: (a: A) => B) =>
+	<E>(result: Result<E, A>): Result<E, B> =>
+		result.kind === ResultKind.Ok ? ok(f(result.value)) : result;
 
 /**
  * Similar to `Option.andThen`. Applies to a `Result` a function that
@@ -107,9 +110,10 @@ const map = <A, B>(f: (a: A) => B) => <E>(result: Result<E, A>): Result<E, B> =>
  * // Both succeed: Ok('email_address')
  * andThen(getEmail)(requestUser(id))
  */
-const andThen = <E, A, B>(f: (a: A) => Result<E, B>) => (
-	result: Result<E, A>,
-): Result<E, B> => (result.kind === ResultKind.Ok ? f(result.value) : result);
+const andThen =
+	<E, A, B>(f: (a: A) => Result<E, B>) =>
+	(result: Result<E, A>): Result<E, B> =>
+		result.kind === ResultKind.Ok ? f(result.value) : result;
 
 /**
  * The return type of the `partition` function

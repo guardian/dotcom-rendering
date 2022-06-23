@@ -49,8 +49,10 @@ const fromNullable = <A>(a: A | null | undefined): Option<A> =>
  * const bylineTwo = none;
  * withDefault('Jane Smith')(bylineTwo); // Returns 'Jane Smith'
  */
-const withDefault = <A>(a: A) => (optA: Option<A>): A =>
-	optA.kind === OptionKind.Some ? optA.value : a;
+const withDefault =
+	<A>(a: A) =>
+	(optA: Option<A>): A =>
+		optA.kind === OptionKind.Some ? optA.value : a;
 
 /**
  * Applies a function to a `Some`, does nothing to a `None`.
@@ -68,8 +70,10 @@ const withDefault = <A>(a: A) => (optA: Option<A>): A =>
  * // All together
  * compose(withDefault(''), map(name => `Photograph: ${name}`))(credit);
  */
-const map = <A, B>(f: (a: A) => B) => (optA: Option<A>): Option<B> =>
-	optA.kind === OptionKind.Some ? some(f(optA.value)) : none;
+const map =
+	<A, B>(f: (a: A) => B) =>
+	(optA: Option<A>): Option<B> =>
+		optA.kind === OptionKind.Some ? some(f(optA.value)) : none;
 
 /**
  * Takes two Options and applies a function if both are `Some`,
@@ -79,12 +83,13 @@ const map = <A, B>(f: (a: A) => B) => (optA: Option<A>): Option<B> =>
  * @param optB The second Option
  * @returns {Option<C>} A new `Option`
  */
-const map2 = <A, B, C>(f: (a: A, b: B) => C) => (optA: Option<A>) => (
-	optB: Option<B>,
-): Option<C> =>
-	optA.kind === OptionKind.Some && optB.kind === OptionKind.Some
-		? some(f(optA.value, optB.value))
-		: none;
+const map2 =
+	<A, B, C>(f: (a: A, b: B) => C) =>
+	(optA: Option<A>) =>
+	(optB: Option<B>): Option<C> =>
+		optA.kind === OptionKind.Some && optB.kind === OptionKind.Some
+			? some(f(optA.value, optB.value))
+			: none;
 
 /**
  * Like `map` but applies a function that *also* returns an `Option`.
@@ -100,9 +105,10 @@ const map2 = <A, B, C>(f: (a: A, b: B) => C) => (optA: Option<A>) => (
  * const userId = 1;
  * const username: Option<string> = compose(andThen(getUserName), getUser)(userId);
  */
-const andThen = <A, B>(f: (a: A) => Option<B>) => (
-	optA: Option<A>,
-): Option<B> => (optA.kind === OptionKind.Some ? f(optA.value) : none);
+const andThen =
+	<A, B>(f: (a: A) => Option<B>) =>
+	(optA: Option<A>): Option<B> =>
+		optA.kind === OptionKind.Some ? f(optA.value) : none;
 
 // ----- Exports ----- //
 
