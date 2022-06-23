@@ -67,7 +67,7 @@ const starWrapper = css`
 	margin-top: 2px;
 `;
 
-const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
+const StarRatingComponent = ({ rating }: { rating: number }) => (
 	<>
 		<Hide when="above" breakpoint="desktop">
 			<div css={starWrapper}>
