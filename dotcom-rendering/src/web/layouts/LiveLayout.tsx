@@ -785,18 +785,21 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</div>
 								)}
 
-								{CAPIArticle.topics && (
-									<Hide until="desktop">
-										<div css={sidePaddingDesktop}>
-											<Island>
-												<TopicFilterBank
-													topics={CAPIArticle.topics}
-													format={format}
-												/>
-											</Island>
-										</div>
-									</Hide>
-								)}
+								{CAPIArticle.config.switches.automaticFilters &&
+									CAPIArticle.topics && (
+										<Hide until="desktop">
+											<div css={sidePaddingDesktop}>
+												<Island>
+													<TopicFilterBank
+														topics={
+															CAPIArticle.topics
+														}
+														format={format}
+													/>
+												</Island>
+											</div>
+										</Hide>
+									)}
 								{/* Match stats */}
 								{footballMatchUrl && (
 									<Island
