@@ -13,7 +13,6 @@ import {
 	brandLine,
 	from,
 	neutral,
-	remSpace,
 	space,
 	until,
 } from '@guardian/source-foundations';
@@ -257,9 +256,9 @@ interface Props {
 }
 
 const paddingBody: SerializedStyles = css`
-	padding: ${remSpace[3]};
+	padding: ${space[3]}px;
 	${from.mobileLandscape} {
-		padding: ${remSpace[3]} ${remSpace[5]};
+		padding: ${space[3]}px ${space[5]}px;
 	}
 	${from.desktop} {
 		padding: 0;
