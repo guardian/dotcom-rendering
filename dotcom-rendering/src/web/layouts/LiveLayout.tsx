@@ -302,8 +302,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
 
 	const isInFilteringBeta =
-		CAPIArticle.config.switches.automaticFilters &&
-		CAPIArticle.topics;
+		CAPIArticle.config.switches.automaticFilters && CAPIArticle.topics;
 
 	return (
 		<>
