@@ -1,4 +1,3 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 // eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
 import Accordion from '@guardian/common-rendering/src/components/accordion';
@@ -255,7 +254,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const paddingBody: SerializedStyles = css`
+const paddingBody = css`
 	padding: ${space[3]}px;
 	${from.mobileLandscape} {
 		padding: ${space[3]}px ${space[5]}px;
