@@ -4,12 +4,13 @@ import { Button, SvgCross } from '@guardian/source-react-components';
 import { decidePalette } from '../lib/decidePalette';
 
 interface LabelProps {
-	text: string;
+	value: string;
 	count?: number;
 }
 
 interface ButtonProps {
-	text: string;
+	value: string;
+	type?: TopicType;
 	count?: number;
 	format: ArticleFormat;
 	isActive: boolean;
@@ -58,15 +59,16 @@ const valueStyles = css`
 	max-width: 150px;
 `;
 
-const Label = ({ text, count }: LabelProps) => (
+const Label = ({ value, count }: LabelProps) => (
 	<>
-		<span css={valueStyles}>{text}</span>{' '}
+		<span css={valueStyles}>{value}</span>{' '}
 		{count && <span css={countStyles}>({count})</span>}
 	</>
 );
 
 export const FilterButton = ({
-	text,
+	type,
+	value,
 	count,
 	isActive,
 	format,
@@ -74,18 +76,27 @@ export const FilterButton = ({
 }: ButtonProps) => {
 	const palette = decidePalette(format);
 
+	const dataLinkName = type ? `${type}:${value}` : value;
+
 	return isActive ? (
 		<Button
 			cssOverrides={[buttonStyles(palette), activeStyles(palette)]}
 			onClick={onClick}
 			icon={<SvgCross />}
 			iconSide="right"
+			aria-label={`Deactivate ${value} filter`}
+			data-link-name={`${dataLinkName} | filter off`}
 		>
-			<Label text={text} count={count} />
+			<Label value={value} count={count} />
 		</Button>
 	) : (
-		<Button cssOverrides={buttonStyles(palette)} onClick={onClick}>
-			<Label text={text} count={count} />
+		<Button
+			cssOverrides={buttonStyles(palette)}
+			onClick={onClick}
+			aria-label={`Activate ${value} filter`}
+			data-link-name={`${dataLinkName} | filter on`}
+		>
+			<Label value={value} count={count} />
 		</Button>
 	);
 };
