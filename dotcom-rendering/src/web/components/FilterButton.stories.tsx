@@ -42,7 +42,8 @@ export const DefaultStory = () => (
 	<Container>
 		<FilterButton
 			isActive={false}
-			text="nhs"
+			type="ORG"
+			value="nhs"
 			count={21}
 			format={format}
 			onClick={() => {}}
@@ -56,7 +57,8 @@ export const ActiveStory = () => (
 	<Container>
 		<FilterButton
 			isActive={true}
-			text="nhs"
+			type="ORG"
+			value="nhs"
 			count={21}
 			format={format}
 			onClick={() => {}}
@@ -70,7 +72,8 @@ export const TruncatedStory = () => (
 	<Container>
 		<FilterButton
 			isActive={false}
-			text="Something thats too long to fit"
+			type="ORG"
+			value="Something thats too long to fit"
 			count={21}
 			format={format}
 			onClick={() => {}}
@@ -84,7 +87,8 @@ export const TruncatedActiveStory = () => (
 	<Container>
 		<FilterButton
 			isActive={true}
-			text="Something thats too long to fit"
+			type="ORG"
+			value="Something thats too long to fit"
 			count={21}
 			format={format}
 			onClick={() => {}}
@@ -98,7 +102,7 @@ export const FilterKeyEventsStory = () => (
 	<Container>
 		<FilterButton
 			isActive={false}
-			text="Filter Key Events"
+			value="Filter Key Events"
 			format={format}
 			onClick={() => {}}
 		/>
@@ -111,7 +115,7 @@ export const FilterKeyEventsActiveStory = () => (
 	<Container>
 		<FilterButton
 			isActive={true}
-			text="Filter Key Events"
+			value="Filter Key Events"
 			format={format}
 			onClick={() => {}}
 		/>
