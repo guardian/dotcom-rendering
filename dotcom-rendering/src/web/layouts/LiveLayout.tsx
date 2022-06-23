@@ -311,9 +311,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	Once the key-event-carousel test is completed and this change is productionised, we can remove the final `showKeyEventsCarousel` condition.
 	*/
 	const showTopicFilterBank =
-		CAPIArticle.config.switches.automaticFilters &&
-		CAPIArticle.topics &&
-		showKeyEventsCarousel;
+		CAPIArticle.config.switches.automaticFilters && showKeyEventsCarousel;
 
 	return (
 		<>
@@ -798,7 +796,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</div>
 								)}
 
-								{showTopicFilterBank && (
+								{showTopicFilterBank && CAPIArticle.topics && (
 									<Hide until="desktop">
 										<div css={sidePaddingDesktop}>
 											<Island>
