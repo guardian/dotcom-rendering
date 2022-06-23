@@ -29,31 +29,31 @@ const editionDropdown = css`
 `;
 
 export const EditionDropdown: React.FC<{
-	edition: Edition;
+	editionId: EditionId;
 	dataLinkName: string;
-}> = ({ edition, dataLinkName }) => {
+}> = ({ editionId, dataLinkName }) => {
 	const links = [
 		{
 			url: '/preference/edition/uk',
-			isActive: edition === 'UK',
+			isActive: editionId === 'UK',
 			title: 'UK edition',
 			dataLinkName: 'nav2 : topbar : edition-picker: UK',
 		},
 		{
 			url: '/preference/edition/us',
-			isActive: edition === 'US',
+			isActive: editionId === 'US',
 			title: 'US edition',
 			dataLinkName: 'nav2 : topbar : edition-picker: US',
 		},
 		{
 			url: '/preference/edition/au',
-			isActive: edition === 'AU',
+			isActive: editionId === 'AU',
 			title: 'Australian edition',
 			dataLinkName: 'nav2 : topbar : edition-picker: AU',
 		},
 		{
 			url: '/preference/edition/int',
-			isActive: edition === 'INT',
+			isActive: editionId === 'INT',
 			title: 'International edition',
 			dataLinkName: 'nav2 : topbar : edition-picker: INT',
 		},
