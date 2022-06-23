@@ -1,7 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import Img from '@guardian/common-rendering/src/components/img';
-import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
@@ -12,6 +10,8 @@ import {
 import type { Option } from '@guardian/types';
 import { map, none, OptionKind, some, withDefault } from '@guardian/types';
 import type { Image } from 'bodyElement';
+import Img from 'components/ImgAlt';
+import type { Sizes } from 'image/sizes';
 import { maybeRender, pipe } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';

@@ -2,7 +2,6 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
-import Img from '@guardian/common-rendering/src/components/img';
 import {
 	background,
 	border,
@@ -37,6 +36,7 @@ import {
 	withDefault,
 } from '@guardian/types';
 import type { Option } from '@guardian/types';
+import Img from 'components/ImgAlt';
 import Kicker from 'components/Kicker';
 import { stars } from 'components/StarRating';
 import { formatSeconds, makeRelativeDate } from 'date';

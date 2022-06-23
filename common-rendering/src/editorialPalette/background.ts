@@ -474,25 +474,6 @@ const calloutSpeechBubble = (format: ArticleFormat): Colour => {
 	}
 };
 
-const series = (format: ArticleFormat): Colour => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return news[400];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[400];
-		case ArticlePillar.Sport:
-			return sport[400];
-		case ArticlePillar.Culture:
-			return culture[400];
-		case ArticlePillar.Opinion:
-			return opinion[400];
-		case ArticleSpecial.Labs:
-			return labs[300];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
-	}
-};
-
 const supportBanner = (_format: ArticleFormat): Colour => {
 	return brandAlt[400];
 };
@@ -500,6 +481,54 @@ const supportBanner = (_format: ArticleFormat): Colour => {
 const supportBannerDark = (_format: ArticleFormat): Colour => {
 	return brandAlt[200];
 };
+
+const series = (format: ArticleFormat): Colour => {
+	if (format.display === ArticleDisplay.Immersive) {
+		switch (format.theme) {
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Culture:
+				return culture[400];
+			case ArticlePillar.Opinion:
+				return opinion[400];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[400];
+			case ArticleSpecial.Labs:
+				return labs[400];
+			case ArticleSpecial.SpecialReport:
+				return brandAlt[400];
+			case ArticlePillar.News:
+			default:
+				return news[400];
+		}
+	}
+
+	return neutral[100];
+}
+
+const seriesDark = (format: ArticleFormat): Colour => {
+	if (format.display === ArticleDisplay.Immersive) {
+		switch (format.theme) {
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Culture:
+				return culture[400];
+			case ArticlePillar.Opinion:
+				return opinion[400];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[400];
+			case ArticleSpecial.Labs:
+				return labs[400];
+			case ArticleSpecial.SpecialReport:
+				return brandAlt[400];
+			case ArticlePillar.News:
+			default:
+				return news[400];
+		}
+	}
+
+	return neutral[10];
+}
 
 // ----- API ----- //
 
@@ -532,6 +561,7 @@ const background = {
 	richLinkSvg,
 	richLinkSvgDark,
 	series,
+	seriesDark,
 	standfirst,
 	standfirstDark,
 	supportBanner,

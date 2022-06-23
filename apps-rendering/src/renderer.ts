@@ -11,7 +11,6 @@ import {
 	QandaAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
-import BodyImage from '@guardian/common-rendering/src/components/bodyImage';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
 import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
@@ -51,6 +50,7 @@ import type {
 import Anchor from 'components/Anchor';
 import Quiz from 'components/atoms/quiz';
 import Blockquote from 'components/Blockquote';
+import BodyImage from 'components/BodyImage';
 import Bullet from 'components/Bullet';
 import CalloutForm from 'components/CalloutForm';
 import Caption from 'components/caption';

@@ -582,6 +582,191 @@ cardStories.add('when horizontal, opinion, with a small image', () => {
 					imageSize="small"
 				/>
 			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="small"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</>
+	);
+});
+
+cardStories.add('when horizontal, opinion, with a medium image', () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="medium"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="medium"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</>
+	);
+});
+
+cardStories.add('when horizontal, opinion, with a large image', () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="large"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="large"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</>
+	);
+});
+
+cardStories.add('when horizontal, opinion, with a jumbo image', () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="jumbo"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="jumbo"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
 		</>
 	);
 });

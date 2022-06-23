@@ -91,7 +91,7 @@ export const abTestPayload = (tests: {
 	return { abTestRegister: records };
 };
 
-export const sendOphanPlatformRecord = () => {
+export const sendOphanPlatformRecord = (): void => {
 	record({ experiences: 'dotcom-rendering' });
 
 	// Record server-side AB test variants (i.e. control or variant)
@@ -102,7 +102,7 @@ export const sendOphanPlatformRecord = () => {
 	}
 };
 
-export const recordPerformance = () => {
+export const recordPerformance = (): void => {
 	const { performance: performanceAPI } = window;
 	const supportsPerformanceProperties =
 		performanceAPI &&

@@ -1,6 +1,7 @@
 import type { ABTest } from '@guardian/ab-core';
 import { abTestTest } from './tests/ab-test-test';
 import { commercialEndOfQuarter2Test } from './tests/commercial-end-of-quarter-2-test';
+import { commercialLazyLoadMarginReloaded } from './tests/commercial-lazy-load-margin-reloaded';
 import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
@@ -17,4 +18,5 @@ export const tests: ABTest[] = [
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 	commercialEndOfQuarter2Test,
+	commercialLazyLoadMarginReloaded,
 ];

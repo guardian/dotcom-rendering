@@ -6,6 +6,7 @@ import { Island } from '../components/Island';
 import { SignInGateSelector } from '../components/SignInGateSelector.importable';
 
 type Props = {
+	// eslint-disable-next-line @typescript-eslint/ban-types -- we want to coerce children
 	renderedElements: (JSX.Element | null | undefined)[];
 	format: ArticleFormat;
 	contentType: string;

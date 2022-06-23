@@ -798,7 +798,7 @@ export const RenderArticleElement = ({
 	isSensitive,
 	switches,
 	abTests,
-}: Props): JSX.Element => {
+}: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
 	const [ok, el] = renderElement({
