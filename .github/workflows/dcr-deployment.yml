@@ -7,7 +7,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      uses: ./.github/actions/dcr-test.yml@main
+      - uses: ./.github/actions/dcr-test.yml
   deploy:
     needs: test
     runs-on: ubuntu-latest
