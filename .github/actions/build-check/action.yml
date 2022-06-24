@@ -12,6 +12,7 @@ runs:
 
     - name: Install
       run: yarn
+      shell: bash
 
     - name: Generate production build
       run: make build
