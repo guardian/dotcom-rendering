@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/build-check
+      - uses: ./.github/actions/build-check.yml
   deploy:
     needs: test
     runs-on: ubuntu-latest
