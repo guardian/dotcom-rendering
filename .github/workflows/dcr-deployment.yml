@@ -4,13 +4,18 @@ on:
     paths-ignore:
       - "apps-rendering/**"
 jobs:
+  checkout:
+    runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
   build:
+    needs: [checkout]
     name: Build
     uses: ./.github/workflows/dcr-build.yml
 
   lint:
     name: Lint
-    needs: build
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
       - name: Lint
