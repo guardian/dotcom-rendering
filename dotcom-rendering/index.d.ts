@@ -1078,7 +1078,7 @@ type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 
-type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
+type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge';
 
 type AvatarType = {
 	src: string;

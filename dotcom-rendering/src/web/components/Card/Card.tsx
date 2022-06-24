@@ -56,8 +56,10 @@ export type Props = {
 	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
 	containerPalette?: DCRContainerPalette;
+	containerType?: DCRContainerType;
 	showAge?: boolean;
 	discussionId?: string;
+	transparent?: boolean;
 };
 
 const starWrapper = css`
@@ -186,8 +188,10 @@ export const Card = ({
 	supportingContent,
 	snapData,
 	containerPalette,
+	containerType,
 	showAge = false,
 	discussionId,
+	transparent,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -280,7 +284,12 @@ export const Card = ({
 	}
 
 	return (
-		<CardWrapper format={format} containerPalette={containerPalette}>
+		<CardWrapper
+			format={format}
+			containerPalette={containerPalette}
+			containerType={containerType}
+			transparent={transparent}
+		>
 			<CardLink
 				linkTo={linkTo}
 				dataLinkName={dataLinkName}

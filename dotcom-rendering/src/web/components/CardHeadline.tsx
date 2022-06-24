@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { FontScaleArgs } from '@guardian/source-foundations';
 import { headline, space, textSans, until } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import React from 'react';
@@ -24,29 +25,42 @@ type Props = {
 	linkTo?: string; // If provided, the headline is wrapped in a link
 };
 
-const fontStyles = (size: SmallHeadlineSize) => {
+const fontStyles = (
+	size: SmallHeadlineSize,
+	containerPalette?: DCRContainerPalette,
+) => {
+	const options: FontScaleArgs = {};
+	if (containerPalette) options.fontWeight = 'bold';
+
 	switch (size) {
+		case 'huge':
+			return css`
+				${headline.small(options)};
+				${until.desktop} {
+					${headline.xsmall(options)};
+				}
+			`;
 		case 'large':
 			return css`
-				${headline.xsmall()};
+				${headline.xsmall(options)};
 				${until.desktop} {
-					${headline.xxsmall()};
+					${headline.xxsmall(options)};
 				}
 			`;
 		case 'medium':
 			return css`
-				${headline.xxsmall()};
+				${headline.xxsmall(options)};
 				${until.desktop} {
-					${headline.xxxsmall()};
+					${headline.xxxsmall(options)};
 				}
 			`;
 		case 'small':
 			return css`
-				${headline.xxxsmall()};
+				${headline.xxxsmall(options)};
 			`;
 		case 'tiny':
 			return css`
-				${headline.xxxsmall()};
+				${headline.xxxsmall(options)};
 				font-size: 14px;
 			`;
 	}
@@ -54,6 +68,7 @@ const fontStyles = (size: SmallHeadlineSize) => {
 
 const labTextStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
+		case 'huge':
 		case 'large':
 			return css`
 				${textSans.large()};
@@ -112,6 +127,7 @@ const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 	}
 
 	switch (size) {
+		case 'huge':
 		case 'large':
 			return underlinedCssWithMediaQuery(29, 29);
 		case 'medium':
@@ -196,7 +212,7 @@ export const CardHeadline = ({
 				css={[
 					format.theme === ArticleSpecial.Labs
 						? labTextStyles(size)
-						: fontStyles(size),
+						: fontStyles(size, containerPalette),
 					format.design === ArticleDesign.Analysis &&
 						!containerPalette &&
 						underlinedStyles(
@@ -204,10 +220,6 @@ export const CardHeadline = ({
 							palette.background.analysisUnderline,
 						),
 					showLine && lineStyles(palette),
-					containerPalette &&
-						css`
-							font-weight: bold;
-						`,
 				]}
 			>
 				<WithLink linkTo={linkTo}>
