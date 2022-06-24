@@ -1,0 +1,32 @@
+name: DCR build
+on:
+  workflow_call:
+jobs:
+  node:
+    steps:
+      - name: Install Node
+        uses: guardian/actions-setup-node@main
+
+      # Cache npm dependencies using https://github.com/bahmutov/npm-install
+      - uses: bahmutov/npm-install@v1
+
+      - name: Install
+        run: yarn
+        shell: bash
+
+      - name: Generate production build
+        run: make build
+        working-directory: dotcom-rendering
+        shell: bash
+
+      - name: Validate Build
+        run: make buildCheck
+        working-directory: dotcom-rendering
+        shell: bash
+
+  deno:
+    steps:
+      - name: Setup deno
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: v1.21.0

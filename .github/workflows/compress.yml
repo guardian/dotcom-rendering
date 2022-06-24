@@ -1,9 +1,8 @@
 name: DCR Compressed Size
 on:
-  # pull_request:
-  #   paths-ignore:
-  #     - "apps-rendering/**"
-  workflow_call:
+  pull_request:
+    paths-ignore:
+      - "apps-rendering/**"
 
 jobs:
   compressed_size:

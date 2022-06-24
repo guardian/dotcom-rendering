@@ -6,19 +6,18 @@ name: DCR Snyk
 on:
     schedule:
         - cron: '0 6 * * *'
-    # push:
-    #     paths-ignore:
-    #         - "apps-rendering/**"
-    #     # @dependabot push events have readon-only access and CodeQL needs write access
-    #     # see: https://github.com/guardian/dotcom-rendering/pull/3883
-    #     branches-ignore:
-    #         - "dependabot/**"
-    # pull_request:
-    #     # @dependabot pull_request actions have write access for CodeQL to run
-    #     branches:
-    #         - "dependabot/**"
-    # workflow_dispatch:
-    workflow_call:
+    push:
+        paths-ignore:
+            - "apps-rendering/**"
+        # @dependabot push events have readon-only access and CodeQL needs write access
+        # see: https://github.com/guardian/dotcom-rendering/pull/3883
+        branches-ignore:
+            - "dependabot/**"
+    pull_request:
+        # @dependabot pull_request actions have write access for CodeQL to run
+        branches:
+            - "dependabot/**"
+    workflow_dispatch:
 
 jobs:
     security:

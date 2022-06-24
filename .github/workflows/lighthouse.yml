@@ -1,14 +1,13 @@
 name: DCR Run Lighthouse CI
 on:
-  # push:
-  #   branches:
-  #     - main
-  #   paths-ignore:
-  #     - "apps-rendering/**"
-  # pull_request:
-  #   #  If/when we compare results to `main`, we should also run on 'reopened'
-  #   types: [opened, synchronize]
-  workflow_call:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "apps-rendering/**"
+  pull_request:
+    #  If/when we compare results to `main`, we should also run on 'reopened'
+    types: [opened, synchronize]
 
 jobs:
   lhci:
@@ -30,12 +29,6 @@ jobs:
         run: |
           npm install -g puppeteer-core@2.1.0 @lhci/cli@0.8.2
           lhci autorun
-
-      - name: Setup deno
-        uses: denolib/setup-deno@v2
-        with:
-          deno-version: v1.21.0
-
       - name: Surface Lighthouse Results
         run: deno run --no-check --allow-net=api.github.com --allow-env="GITHUB_TOKEN","GITHUB_EVENT_PATH" --allow-read scripts/deno/surface-lighthouse-results.ts
         env:
