@@ -1,8 +1,9 @@
 name: DCR AMP Validation
 on:
-    push:
-        paths-ignore:
-            - "apps-rendering/**"
+    # push:
+    #     paths-ignore:
+    #         - "apps-rendering/**"
+    workflow_call:
 
 jobs:
     amp_validation:

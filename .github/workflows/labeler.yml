@@ -1,6 +1,7 @@
 name: 'Pull Request Labeler'
 on:
-  - pull_request_target
+  # - pull_request_target
+  workflow_call:
 jobs:
   triage:
     runs-on: ubuntu-latest

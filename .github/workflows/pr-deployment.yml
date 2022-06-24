@@ -1,9 +1,10 @@
 name: DCR PR deployment
 on:
-    pull_request:
-        types: [labeled]
-        paths-ignore:
-            - "apps-rendering/**"
+    # pull_request:
+    #     types: [labeled]
+    #     paths-ignore:
+    #         - "apps-rendering/**"
+    workflow_call:
 
 jobs:
     pr_deployment:

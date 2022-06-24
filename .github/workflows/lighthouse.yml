@@ -1,13 +1,14 @@
 name: DCR Run Lighthouse CI
 on:
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - "apps-rendering/**"
-  pull_request:
-    #  If/when we compare results to `main`, we should also run on 'reopened'
-    types: [opened, synchronize]
+  # push:
+  #   branches:
+  #     - main
+  #   paths-ignore:
+  #     - "apps-rendering/**"
+  # pull_request:
+  #   #  If/when we compare results to `main`, we should also run on 'reopened'
+  #   types: [opened, synchronize]
+  workflow_call:
 
 jobs:
   lhci:

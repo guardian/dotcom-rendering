@@ -1,10 +1,11 @@
 name: AR PR Deployment
 
 on:
-    pull_request:
-        types: [labeled]
-        paths-ignore:
-            - "dotcom-rendering/**"
+    # pull_request:
+    #     types: [labeled]
+    #     paths-ignore:
+    #         - "dotcom-rendering/**"
+    workflow_call:
 
 jobs:
     pr_deployment:
@@ -30,7 +31,7 @@ jobs:
               working-directory: apps-rendering
               run: |
                   npm install -g ngrok
-                  npm run watch & 
+                  npm run watch &
                   timeout 1h ngrok http 8080 -log=stdout -host-header=rewrite | \
                     grep --line-buffered -o 'https://.*' | \
                     xargs -L1 -I{} -t \

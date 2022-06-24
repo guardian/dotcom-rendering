@@ -1,16 +1,17 @@
 name: AR Validate
 
 on:
-    push:
-        branches:
-            - main
-        paths-ignore:
-            - "dotcom-rendering/**"
-    pull_request:
-        branches:
-            - main
-        paths-ignore:
-            - "dotcom-rendering/**"
+    workflow_call:
+    # push:
+    #     branches:
+    #         - main
+    #     paths-ignore:
+    #         - "dotcom-rendering/**"
+    # pull_request:
+    #     branches:
+    #         - main
+    #     paths-ignore:
+    #         - "dotcom-rendering/**"
 
 jobs:
     validate:
