@@ -312,7 +312,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
 
 	const isInFilteringBeta =
-		CAPIArticle.config.switches.automaticFilters && CAPIArticle.topics;
+		CAPIArticle.config.switches.automaticFilters &&
+		CAPIArticle.availableTopics;
 
 	return (
 		<>
@@ -674,7 +675,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.mostRecentBlockId || ''
 									}
 									hasPinnedPost={!!CAPIArticle.pinnedPost}
-									activeTopic={CAPIArticle.activeTopic}
+									selectedTopics={CAPIArticle.selectedTopics}
 								/>
 							</Island>
 						</>

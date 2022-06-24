@@ -618,8 +618,8 @@ interface CAPIArticleType {
 
 	// Included on live and dead blogs. Used when polling
 	mostRecentBlockId?: string;
-	topics?: Topic[];
-	activeTopic?: string;
+	availableTopics?: Topic[];
+	selectedTopics?: string;
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';

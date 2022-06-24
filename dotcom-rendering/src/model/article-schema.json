@@ -400,13 +400,13 @@
         "mostRecentBlockId": {
             "type": "string"
         },
-        "topics": {
+        "availableTopics": {
             "type": "array",
             "items": {
                 "$ref": "#/definitions/Topic"
             }
         },
-        "activeTopic": {
+        "selectedTopics": {
             "type": "string"
         }
     },
