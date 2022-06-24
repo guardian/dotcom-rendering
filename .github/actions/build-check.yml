@@ -1,6 +1,4 @@
 name: DCR Build Check
-on:
-  workflow_call:
 jobs:
     build_check:
         name: DCR Build Check
