@@ -1,19 +1,20 @@
-import { JSDOM } from 'jsdom';
+import * as htmlparser2 from 'htmlparser2';
 
 export const extractExpeditedIslands = (html: string): string[] => {
-	const dom = new JSDOM(html);
+	const islands: string[] = [];
 
-	const expedited = dom.window.document.querySelectorAll(
-		'gu-island[expediteLoading="true"]',
-	);
+	const parser = new htmlparser2.Parser({
+		onopentag(name, attributes) {
+			// htmlparser2 appears to parse all attributes as lowercase, so we need to check for
+			// attributes.expediteloading not attributes.expediteLoading!
+			if (name === 'gu-island' && attributes.expediteloading === 'true') {
+				islands.push(`${attributes.name}-importable`);
+			}
+		},
+	});
 
-	const islands = Array.from(expedited)
-		.map((island) => {
-			const name = island.getAttribute('name');
-			if (name) return `${name}-importable`;
-			return undefined;
-		})
-		.filter((name: string | undefined): name is string => !!name);
+	parser.write(html);
+	parser.end();
 
 	// Deduplicate - there could be multiple of the same island used, but we only
 	// need to load the script once!
