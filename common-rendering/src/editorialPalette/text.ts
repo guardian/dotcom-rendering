@@ -343,8 +343,6 @@ const bylineInline = (format: ArticleFormat): Colour => {
 		case ArticleDesign.DeadBlog:
 		default:
 			switch (format.theme) {
-				case ArticlePillar.News:
-					return news[400];
 				case ArticlePillar.Lifestyle:
 					return lifestyle[300];
 				case ArticlePillar.Sport:
@@ -357,6 +355,9 @@ const bylineInline = (format: ArticleFormat): Colour => {
 					return labs[300];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[300];
+				case ArticlePillar.News:
+				default:
+					return news[400];
 			}
 	}
 };
