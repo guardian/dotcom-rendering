@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { TopicFilterBank } from './TopicFilterBank';
 
-const topics: Topic[] = [
+const availableTopics: Topic[] = [
 	{ type: 'GPE', value: 'London', count: 16 },
 	{ type: 'ORG', value: 'RMT', count: 10 },
 	{ type: 'PERSON', value: 'Boris Johnson', count: 10 },
@@ -40,7 +40,10 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 export const topicBank = () => {
 	return (
 		<Wrapper>
-			<TopicFilterBank topics={topics} format={format} />
+			<TopicFilterBank
+				availableTopics={availableTopics}
+				format={format}
+			/>
 		</Wrapper>
 	);
 };

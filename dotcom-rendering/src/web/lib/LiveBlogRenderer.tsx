@@ -30,7 +30,7 @@ type Props = {
 	keyEvents?: Block[];
 	filterKeyEvents?: boolean;
 	isKeyEventsCarouselVariant?: boolean;
-	topics?: Topic[];
+	availableTopics?: Topic[];
 };
 
 export const LiveBlogRenderer = ({
@@ -55,7 +55,7 @@ export const LiveBlogRenderer = ({
 	keyEvents,
 	filterKeyEvents = false,
 	isKeyEventsCarouselVariant = false,
-	topics,
+	availableTopics,
 }: Props) => {
 	return (
 		<>
@@ -102,9 +102,12 @@ export const LiveBlogRenderer = ({
 				<></>
 			)}
 
-			{switches.automaticFiltering && topics && (
+			{switches.automaticFiltering && availableTopics && (
 				<Hide above="desktop">
-					<TopicFilterBank topics={topics} format={format} />
+					<TopicFilterBank
+						availableTopics={availableTopics}
+						format={format}
+					/>
 				</Hide>
 			)}
 			<div id="top-of-blog" />

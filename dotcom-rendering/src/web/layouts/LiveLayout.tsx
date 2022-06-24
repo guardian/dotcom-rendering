@@ -811,18 +811,21 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</div>
 								)}
 
-								{showTopicFilterBank && CAPIArticle.topics && (
-									<Hide until="desktop">
-										<div css={sidePaddingDesktop}>
-											<Island>
-												<TopicFilterBank
-													topics={CAPIArticle.topics}
-													format={format}
-												/>
-											</Island>
-										</div>
-									</Hide>
-								)}
+								{showTopicFilterBank &&
+									CAPIArticle.availableTopics && (
+										<Hide until="desktop">
+											<div css={sidePaddingDesktop}>
+												<Island>
+													<TopicFilterBank
+														availableTopics={
+															CAPIArticle.availableTopics
+														}
+														format={format}
+													/>
+												</Island>
+											</div>
+										</Hide>
+									)}
 								{/* Match stats */}
 								{footballMatchUrl && (
 									<Island
@@ -1136,7 +1139,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													showKeyEventsCarousel={
 														showKeyEventsCarousel
 													}
-													topics={CAPIArticle.topics}
+													availableTopics={
+														CAPIArticle.availableTopics
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination

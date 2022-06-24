@@ -4,7 +4,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { FilterButton } from './FilterButton.importable';
 
 type Props = {
-	topics: Topic[];
+	availableTopics: Topic[];
 	format: ArticleFormat;
 };
 
@@ -39,7 +39,7 @@ const topicStyles = css`
 	}
 `;
 
-export const TopicFilterBank = ({ topics, format }: Props) => {
+export const TopicFilterBank = ({ availableTopics, format }: Props) => {
 	const palette = decidePalette(format);
 	return (
 		<div css={containerStyles}>
@@ -52,7 +52,7 @@ export const TopicFilterBank = ({ topics, format }: Props) => {
 			</div>
 
 			<div css={topicStyles}>
-				{topics.slice(0, 5).map((topic) => {
+				{availableTopics.slice(0, 5).map((topic) => {
 					return (
 						<FilterButton
 							value={topic.value}
