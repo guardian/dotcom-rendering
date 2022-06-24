@@ -10,8 +10,8 @@ jobs:
       - uses: actions/checkout@v3
   build:
     needs: [checkout]
-    runs-on: ubuntu-latest
     uses: ./.github/workflows/dcr-build.yml
+
 
   # lint:
   #   needs: build
