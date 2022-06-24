@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/workflows/dcr-build.yml
+      - uses: ./.github/workflows/dcr-build
 
   # lint:
   #   needs: build
