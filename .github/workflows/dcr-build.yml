@@ -12,17 +12,14 @@ jobs:
 
       - name: Install
         run: yarn
-        shell: bash
 
       - name: Generate production build
         run: make build
         working-directory: dotcom-rendering
-        shell: bash
 
       - name: Validate Build
         run: make buildCheck
         working-directory: dotcom-rendering
-        shell: bash
 
   deno:
     steps:
