@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
 import { css } from '@emotion/react';
-
+import { useEffect } from 'react';
 import { embedIframe } from '../browser/embedIframe/embedIframe';
-
 import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent.importable';
 
 export default {
@@ -31,7 +29,6 @@ export const DefaultStory = () => {
 				isTracking={true}
 				source=""
 				sourceDomain=""
-				// eslint-disable-next-line jsx-a11y/aria-role
 				role="inline"
 			/>
 		</div>

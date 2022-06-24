@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
-
-import { textSans, between } from '@guardian/source-foundations';
-
+import { between, textSans } from '@guardian/source-foundations';
 import CommentIcon from '../../static/icons/comment.svg';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -15,7 +13,8 @@ type Props = {
 const containerStyles = (palette: Palette) => css`
 	display: flex;
 	flex-direction: row;
-	${textSans.xxsmall()};
+	${textSans.xxsmall({ lineHeight: 'tight' })};
+	margin-top: -4px;
 	padding-left: 5px;
 	padding-right: 5px;
 	color: ${palette.text.cardFooter};
@@ -55,7 +54,7 @@ export const CardCommentCount = ({
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	return (
-		<div css={containerStyles(palette)} aria-label={`${short} Comments`}>
+		<div css={containerStyles(palette)}>
 			<div css={svgStyles(palette)}>
 				<CommentIcon />
 			</div>

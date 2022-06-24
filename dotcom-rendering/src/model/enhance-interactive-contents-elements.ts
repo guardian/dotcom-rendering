@@ -12,7 +12,7 @@ const isInteractiveContentsBlockElement = (element: CAPIElement): boolean =>
 	element._type ===
 		'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
 	!!element.scriptUrl &&
-	scriptUrls.indexOf(element.scriptUrl) !== -1;
+	scriptUrls.includes(element.scriptUrl);
 
 const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	const updatedElements: CAPIElement[] = [];

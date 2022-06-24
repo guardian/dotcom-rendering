@@ -5,6 +5,7 @@ import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground, brandAltLine } from '@guardian/source-foundations';
 import { SvgStar } from '@guardian/source-react-components';
 import type { Item } from 'item';
+import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
 
 // ----- Subcomponents ----- //
@@ -54,9 +55,11 @@ const containerStyles = css`
 `;
 
 const StarRating: FC<Props> = ({ item }) =>
-	item.design === ArticleDesign.Review ? (
-		<div css={containerStyles}>{stars(item.starRating)}</div>
-	) : null;
+	item.design === ArticleDesign.Review
+		? maybeRender(item.starRating, (starRating) => (
+				<div css={containerStyles}>{stars(starRating)}</div>
+		  ))
+		: null;
 
 // ----- Exports ----- //
 

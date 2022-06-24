@@ -1,12 +1,8 @@
-import { Article } from '../../fixtures/generated/articles/Article';
+import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
+import { blockMetaData } from '../../fixtures/manual/block-meta-data';
 import { enhanceEmbeds } from './enhance-embeds';
 
-const example = Article;
-const metaData = {
-	id: '123',
-	primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-	secondaryDateLine: 'Last modified on Wed 9 Dec 2020 13.40 GMT',
-};
+const example = ExampleArticle;
 
 describe('Enhance Embeds', () => {
 	it('creates an identical but new object when no changes are needed', () => {
@@ -17,7 +13,7 @@ describe('Enhance Embeds', () => {
 	it('sets the divider flag correctly', () => {
 		const input: Block[] = [
 			{
-				...metaData,
+				...blockMetaData,
 				elements: [
 					{
 						html: '<iframe id="the-fiver" name="the-fiver" src="https://www.theguardian.com/email/form/plaintone/the-fiver" scrolling="no" seamless="" class="iframed--overflow-hidden email-sub__iframe" height="52px" frameborder="0" data-component="email-embed--the-fiver"></iframe>',
@@ -37,7 +33,7 @@ describe('Enhance Embeds', () => {
 
 		const expectedOutput = [
 			{
-				...metaData,
+				...blockMetaData,
 				elements: [
 					{
 						html: '<iframe id="the-fiver" name="the-fiver" src="https://www.theguardian.com/email/form/plaintone/the-fiver" scrolling="no" seamless="" class="iframed--overflow-hidden email-sub__iframe" height="52px" frameborder="0" data-component="email-embed--the-fiver" title="Sign up to The Fiver"></iframe>',

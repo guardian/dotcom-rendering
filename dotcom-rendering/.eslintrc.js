@@ -1,3 +1,28 @@
+const transitionRules = require('./eslint-guardian');
+
+/** TODO: Review these */
+const rulesToReview = {
+	'consistent-return': 'warn', // 51 problems
+	'default-case': 'warn', // 50 problems
+	'react/no-danger': 'warn', // 48 problems
+	'react/no-array-index-key': 'warn', // 34 problems
+	'react/button-has-type': 'warn', // 23 problems
+	'@typescript-eslint/require-await': 'warn', // 22 problems
+	'react/jsx-curly-newline': 'warn', // 8 problems
+	'no-case-declarations': 'warn', // 7 problems
+};
+
+const rulesToRemove = {
+	'@typescript-eslint/no-unsafe-call': 'warn',
+	'@typescript-eslint/no-unsafe-assignment': 'warn',
+	'@typescript-eslint/no-unsafe-return': 'warn',
+	'@typescript-eslint/ban-ts-comment': 'warn',
+	'@typescript-eslint/restrict-template-expressions': 'warn',
+
+	'no-console': 'warn',
+	'no-shadow': 'warn',
+};
+
 module.exports = {
 	env: {
 		browser: true,
@@ -6,9 +31,7 @@ module.exports = {
 	},
 	extends: [
 		'eslint:recommended',
-		'plugin:@typescript-eslint/eslint-recommended',
-		'plugin:@typescript-eslint/recommended',
-		'plugin:@typescript-eslint/recommended-requiring-type-checking',
+		'@guardian/eslint-config-typescript',
 		'airbnb-typescript',
 		'prettier',
 		'plugin:@guardian/source-react-components/recommended',
@@ -22,75 +45,38 @@ module.exports = {
 	plugins: [
 		'@typescript-eslint',
 		'@typescript-eslint/tslint',
+		'react',
 		'react-hooks',
-		'dcr',
+		'import',
+		'jsx-a11y',
 	],
 	rules: {
-		'dcr/only-import-below': [
-			'warn',
-			{
-				allowedImports: [
-					'react',
-					'@emotion/react',
-					'jsdom',
-					'curlyquotes',
-					'react-dom',
-					'./src/lib',
-					'./src/amp/lib',
-					'./src/amp/types',
-					'./src/static/icons',
-					'./src/model',
-					'./src/web',
-					'@testing-library',
-					'@guardian/frontend/static/',
-				],
-			},
-		],
+		// React & Hooks
 		'react/jsx-indent': [2, 'tab'],
 		'react/jsx-indent-props': [2, 'tab'],
 		'react/prop-types': [0],
 		'react/jsx-boolean-value': [2, 'always'],
-		'import/prefer-default-export': 'off',
-		// TODO: remove
-		'@typescript-eslint/explicit-module-boundary-types': 'off',
-		'@typescript-eslint/no-unsafe-call': 'off',
-		'@typescript-eslint/no-unsafe-assignment': 'off',
-		'@typescript-eslint/no-unsafe-return': 'off',
-		'@typescript-eslint/ban-ts-comment': 'off',
-		'@typescript-eslint/restrict-template-expressions': 'off',
-		'no-console': 'off',
-		'no-shadow': 'off',
-
-		'@typescript-eslint/explicit-function-return-type': [0],
-		'@typescript-eslint/no-inferrable-types': [0],
-		// TODO, review these
-		'@typescript-eslint/no-explicit-any': [0],
-		'react/jsx-one-expression-per-line': [0],
-		'react/no-array-index-key': [0],
-		'@typescript-eslint/require-await': [0],
-		'array-callback-return': [0],
-		'consistent-return': [0],
-		'default-case': [0],
-		'global-require': [0],
-		'import/no-extraneous-dependencies': [0],
-		'no-case-declarations': [0],
-		'no-empty-pattern': [0],
-		'no-param-reassign': [0],
-		'no-restricted-syntax': [0],
-		'no-underscore-dangle': [0],
-		'no-useless-escape': [0],
-		'react/button-has-type': [0],
-		'react/jsx-no-target-blank': [0],
-		'react/sort-comp': [0],
-		'react/state-in-constructor': [0],
-		'react/no-danger': [0],
-		'react/jsx-curly-newline': [0],
+		'react-hooks/exhaustive-deps': 'error',
 		'react-hooks/rules-of-hooks': 'error',
-		'react-hooks/exhaustive-deps': 'warn',
-		'arrow-body-style': [0],
-		'react/require-default-props': [0],
-		'react/jsx-uses-react': 'off',
-		'react/react-in-jsx-scope': 'off',
+
+		// Fixed as part of @guardian-eslint move May 2022
+		'array-callback-return': 'error',
+		'global-require': 'error',
+		'no-empty-pattern': 'error',
+		'no-param-reassign': 'error',
+		'react/jsx-no-target-blank': 'error',
+		'react/jsx-one-expression-per-line': 'off',
+		'no-useless-escape': 'error',
+		'no-underscore-dangle': ['warn', { allow: ['_type'] }],
+		'import/no-extraneous-dependencies': [
+			'error',
+			// https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md#options
+			{ packageDir: ['..', '.'] },
+		],
+
+		...rulesToReview,
+		...rulesToRemove,
+		...transitionRules,
 	},
 	settings: {
 		'import/resolver': {
@@ -104,6 +90,33 @@ module.exports = {
 				'@typescript-eslint/no-var-requires': 'off',
 				'@typescript-eslint/no-unsafe-member-access': 'off',
 				'@typescript-eslint/no-misused-promises': 'off',
+			},
+		},
+		{
+			files: ['**/**.ts'],
+			rules: {
+				'@typescript-eslint/explicit-module-boundary-types': 'error',
+			},
+		},
+		{
+			files: ['**/**.tsx'],
+			rules: {
+				'@typescript-eslint/ban-types': [
+					'warn',
+					{
+						types: {
+							'JSX.Element': 'Prefer type inference',
+							'EmotionJSX.Element': 'Prefer type inference',
+						},
+						extendDefaults: true,
+					},
+				],
+			},
+		},
+		{
+			files: ['**/**.stories.tsx'],
+			rules: {
+				'import/no-default-export': 'off',
 			},
 		},
 	],

@@ -1,16 +1,15 @@
 import { css } from '@emotion/react';
-
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	neutral,
-	space,
 	from,
 	headline,
+	neutral,
+	space,
 	textSans,
 } from '@guardian/source-foundations';
-import { ArticleDisplay, ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import sanitise from 'sanitize-html';
-import { decidePalette } from '../lib/decidePalette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	format: ArticleFormat;
@@ -208,7 +207,6 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 					? interactiveLegacyClasses.standFirst
 					: ''
 			}
-			// eslint-disable-next-line react/no-danger
 			dangerouslySetInnerHTML={{
 				__html: sanitise(standfirst, {
 					allowedTags: false, // Leave tags from CAPI alone

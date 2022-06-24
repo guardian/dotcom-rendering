@@ -1,54 +1,50 @@
 import { css } from '@emotion/react';
-
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
-	neutral,
 	brandBackground,
 	brandBorder,
 	from,
-	until,
+	neutral,
 	space,
+	until,
 } from '@guardian/source-foundations';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
-
 import {
 	Lines,
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
-import { ArticleBody } from '../components/ArticleBody';
-import { RightColumn } from '../components/RightColumn';
-import { ArticleContainer } from '../components/ArticleContainer';
-import { ArticleMeta } from '../components/ArticleMeta';
-import { SubMeta } from '../components/SubMeta';
-import { ArticleTitle } from '../components/ArticleTitle';
-import { ArticleHeadline } from '../components/ArticleHeadline';
-import { Standfirst } from '../components/Standfirst';
-import { Footer } from '../components/Footer';
-import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
-import { SubNav } from '../components/SubNav.importable';
-import { ElementContainer } from '../components/ElementContainer';
-import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
-import { Border } from '../components/Border';
-import { GridItem } from '../components/GridItem';
-import { Caption } from '../components/Caption';
-import { HeadlineByline } from '../components/HeadlineByline';
-import { DiscussionLayout } from '../components/DiscussionLayout';
-import { Hide } from '../components/Hide';
-import { GuardianLabsLines } from '../components/GuardianLabsLines';
-
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
-
-import { BannerWrapper } from './lib/stickiness';
-import { decideLineCount, decideLineEffect } from '../lib/layoutHelpers';
-import { ImmersiveHeader } from './headers/ImmersiveHeader';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { ArticleBody } from '../components/ArticleBody';
+import { ArticleContainer } from '../components/ArticleContainer';
+import { ArticleHeadline } from '../components/ArticleHeadline';
+import { ArticleMeta } from '../components/ArticleMeta';
+import { ArticleTitle } from '../components/ArticleTitle';
+import { Border } from '../components/Border';
+import { Caption } from '../components/Caption';
+import { DiscussionLayout } from '../components/DiscussionLayout';
+import { ElementContainer } from '../components/ElementContainer';
+import { Footer } from '../components/Footer';
+import { GridItem } from '../components/GridItem';
+import { GuardianLabsLines } from '../components/GuardianLabsLines';
+import { HeadlineByline } from '../components/HeadlineByline';
+import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { RightColumn } from '../components/RightColumn';
+import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
+import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { SubMeta } from '../components/SubMeta';
+import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
+import { decideLineCount, decideLineEffect } from '../lib/layoutHelpers';
+import { ImmersiveHeader } from './headers/ImmersiveHeader';
+import { BannerWrapper } from './lib/stickiness';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -193,11 +189,7 @@ const decideCaption = (mainMedia: ImageBlockElement): string => {
 	return caption.join(' ');
 };
 
-export const ImmersiveLayout = ({
-	CAPIArticle,
-	NAV,
-	format,
-}: Props): JSX.Element => {
+export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPIArticle;
@@ -393,10 +385,7 @@ export const ImmersiveLayout = ({
 							</div>
 						</GridItem>
 						<GridItem area="body">
-							<ArticleContainer
-								format={format}
-								abTests={CAPIArticle.config.abTests}
-							>
+							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
 									blocks={CAPIArticle.blocks}
@@ -424,6 +413,7 @@ export const ImmersiveLayout = ({
 									isPreview={CAPIArticle.config.isPreview}
 									idUrl={CAPIArticle.config.idUrl || ''}
 									isDev={!!CAPIArticle.config.isDev}
+									abTests={CAPIArticle.config.abTests}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
@@ -562,7 +552,7 @@ export const ImmersiveLayout = ({
 						tags={CAPIArticle.tags}
 						format={format}
 						pillar={format.theme}
-						edition={CAPIArticle.editionId}
+						editionId={CAPIArticle.editionId}
 						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
 				</Island>
@@ -650,7 +640,7 @@ export const ImmersiveLayout = ({
 					pillar={format.theme}
 					pillars={NAV.pillars}
 					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					edition={CAPIArticle.editionId}
+					editionId={CAPIArticle.editionId}
 					contributionsServiceUrl={
 						CAPIArticle.contributionsServiceUrl
 					}
@@ -674,7 +664,12 @@ export const ImmersiveLayout = ({
 						shouldHideReaderRevenue={
 							CAPIArticle.shouldHideReaderRevenue
 						}
-						switches={CAPIArticle.config.switches}
+						remoteBannerSwitch={
+							CAPIArticle.config.switches.remoteBanner
+						}
+						puzzleBannerSwitch={
+							CAPIArticle.config.switches.puzzlesBanner
+						}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>

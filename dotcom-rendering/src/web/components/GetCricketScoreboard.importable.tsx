@@ -2,7 +2,6 @@ import { ArticleDesign } from '@guardian/libs';
 import type { SWRConfiguration } from 'swr';
 import { useApi } from '../lib/useApi';
 import { CricketScoreboard } from './CricketScoreboard';
-
 import { Placeholder } from './Placeholder';
 
 type Props = {
@@ -29,14 +28,11 @@ export const GetCricketScoreboard = ({ matchUrl, format }: Props) => {
 	if (loading) return <Loading />;
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
-		window.guardian?.modules?.sentry?.reportError?.(
-			error,
-			'cricket-scoreboard',
-		);
+		window.guardian.modules.sentry.reportError(error, 'cricket-scoreboard');
 
 		return null;
 	}
-	if (data && data?.match?.matchId) {
+	if (data && data.match.matchId) {
 		return (
 			<CricketScoreboard
 				match={data.match}

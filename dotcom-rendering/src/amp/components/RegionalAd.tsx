@@ -1,7 +1,8 @@
 import { ClassNames } from '@emotion/react';
 import { getRTCParameters } from '../lib/real-time-config';
 import { adRegions, regionClasses } from '../lib/region-classes';
-import { BaseAdProps, Ad } from './Ad';
+import type { BaseAdProps } from './Ad';
+import { Ad } from './Ad';
 
 /**
  * Ad slot component whose config differs based on region.
@@ -11,7 +12,7 @@ import { BaseAdProps, Ad } from './Ad';
  * @returns an Ad component per region
  */
 export const RegionalAd = ({
-	edition,
+	editionId,
 	section,
 	contentType,
 	commercialProperties,
@@ -31,7 +32,7 @@ export const RegionalAd = ({
 					>
 						<Ad
 							isSticky={false}
-							edition={edition}
+							editionId={editionId}
 							section={section}
 							contentType={contentType}
 							commercialProperties={commercialProperties}

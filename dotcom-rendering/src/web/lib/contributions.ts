@@ -1,6 +1,7 @@
 import { onConsentChange } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
-import { getIdApiUserData, IdApiUserData } from './getIdapiUserData';
+import type { IdApiUserData } from './getIdapiUserData';
+import { getIdApiUserData } from './getIdapiUserData';
 
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
@@ -126,7 +127,7 @@ const dateDiffDays = (from: number, to: number): number => {
 
 const AskPauseDays = 90;
 
-export const isRecentOneOffContributor = () => {
+export const isRecentOneOffContributor = (): boolean => {
 	const lastContributionDate = getLastOneOffContributionTimestamp();
 	if (lastContributionDate) {
 		const now = Date.now();
@@ -136,9 +137,7 @@ export const isRecentOneOffContributor = () => {
 	return false;
 };
 
-export const shouldHideSupportMessaging = (
-	isSignedIn: boolean = false,
-): boolean =>
+export const shouldHideSupportMessaging = (isSignedIn = false): boolean =>
 	!shouldShowSupportMessaging() ||
 	isRecurringContributor(isSignedIn) ||
 	isRecentOneOffContributor();
@@ -244,4 +243,4 @@ export const lazyFetchEmailWithTimeout =
 
 export const getContributionsServiceUrl = (
 	CAPIArticle: CAPIArticleType,
-): string => process?.env?.SDC_URL ?? CAPIArticle.contributionsServiceUrl;
+): string => process.env.SDC_URL ?? CAPIArticle.contributionsServiceUrl;

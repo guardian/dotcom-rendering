@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from 'react';
 import libDebounce from 'lodash.debounce';
+import { useEffect, useRef, useState } from 'react';
 
 /**
  * Custom hook around the `IntersectionObserver`.

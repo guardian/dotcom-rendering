@@ -1,13 +1,8 @@
-import { Article } from '../../fixtures/generated/articles/Article';
+import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
+import { blockMetaData } from '../../fixtures/manual/block-meta-data';
 import { enhanceDividers } from './enhance-dividers';
 
-const example = Article;
-
-const blockMetaData = {
-	id: '123',
-	primaryDateLine: 'Wed 9 Dec 2020 06.30 GMT',
-	secondaryDateLine: 'Last modified on Wed 9 Dec 2020 13.40 GMT',
-};
+const example = ExampleArticle;
 
 describe('Dividers and Drop Caps', () => {
 	it('creates an identical but new object when no changes are needed', () => {

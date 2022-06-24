@@ -1,12 +1,10 @@
 import { css } from '@emotion/react';
-
 import {
-	breakpoints,
 	brandAltBackground,
 	brandBackground,
 	brandBorder,
+	breakpoints,
 } from '@guardian/source-foundations';
-
 import { ContainerLayout } from './ContainerLayout';
 
 export default {
@@ -108,6 +106,47 @@ export const BackgroundStory = () => {
 	);
 };
 BackgroundStory.story = { name: 'with a blue background' };
+
+export const InnerBackgroundStory = () => {
+	return (
+		<ContainerLayout
+			title="Inner Background"
+			description="About this content"
+			fontColour={brandBackground.ctaPrimary}
+			showTopBorder={true}
+			sideBorders={true}
+			centralBorder="full"
+			innerBackgroundColour={brandBackground.primary}
+			borderColour={brandBorder.primary}
+		>
+			<Grey />
+		</ContainerLayout>
+	);
+};
+InnerBackgroundStory.story = {
+	name: 'with a blue inner background',
+};
+
+export const DifferentBackgrounds = () => {
+	return (
+		<ContainerLayout
+			title="Tip us off"
+			showTopBorder={true}
+			sideBorders={true}
+			centralBorder="full"
+			backgroundColour="#FFF280"
+			borderColour={brandBorder.primary}
+			innerBackgroundColour="#FFE501"
+		>
+			<h1>
+				👀 Share stories with the Guardian securely and confidentially
+			</h1>
+		</ContainerLayout>
+	);
+};
+DifferentBackgrounds.story = {
+	name: 'with inner background different to main background',
+};
 
 export const StretchRightStory = () => {
 	return (

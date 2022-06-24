@@ -21,7 +21,9 @@ const getLinkType = ({ theme, design }: ArticleFormat): RichLinkCardType => {
 					return 'editorial';
 				case ArticleDesign.Comment:
 					return 'comment';
-				case ArticleDesign.Media:
+				case ArticleDesign.Gallery:
+				case ArticleDesign.Audio:
+				case ArticleDesign.Video:
 					return 'media';
 				case ArticleDesign.Review:
 					return 'review';
@@ -46,4 +48,5 @@ export const getDataLinkNameCard = (
 	format: ArticleFormat,
 	group: string | number,
 	index: number,
-) => [getLinkType(format), `group-${group}`, `card-@${index}`].join(' | ');
+): string =>
+	[getLinkType(format), `group-${group}`, `card-@${index}`].join(' | ');

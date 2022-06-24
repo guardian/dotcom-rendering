@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
-
-import { ArticleDesign, ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
-import { renderArticleElement } from './renderElement';
-import { withSignInGateSlot } from './withSignInGateSlot';
-import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import {
-	labelStyles as adLabelStyles,
 	adCollapseStyles,
+	labelStyles as adLabelStyles,
 } from '../components/AdSlot';
+import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
+import { RenderArticleElement } from './renderElement';
+import { withSignInGateSlot } from './withSignInGateSlot';
 
 // This is required for spacefinder to work!
 const commercialPosition = css`
@@ -64,6 +64,7 @@ export const ArticleRenderer: React.FC<{
 	isDev: boolean;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
+	abTests?: ServerSideTests;
 }> = ({
 	format,
 	elements,
@@ -82,22 +83,28 @@ export const ArticleRenderer: React.FC<{
 	isAdFreeUser,
 	isSensitive,
 	isDev,
+	abTests,
 }) => {
 	const renderedElements = elements.map((element, index) => {
-		return renderArticleElement({
-			format,
-			element,
-			adTargeting,
-			ajaxUrl,
-			host,
-			index,
-			isMainMedia: false,
-			pageId,
-			webTitle,
-			isAdFreeUser,
-			isSensitive,
-			switches,
-		});
+		return (
+			<RenderArticleElement
+				// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
+				key={index}
+				format={format}
+				element={element}
+				adTargeting={adTargeting}
+				ajaxUrl={ajaxUrl}
+				host={host}
+				index={index}
+				isMainMedia={false}
+				pageId={pageId}
+				webTitle={webTitle}
+				isAdFreeUser={isAdFreeUser}
+				isSensitive={isSensitive}
+				switches={switches}
+				abTests={abTests}
+			/>
+		);
 	});
 
 	// const cleanedElements = elements.map(element =>

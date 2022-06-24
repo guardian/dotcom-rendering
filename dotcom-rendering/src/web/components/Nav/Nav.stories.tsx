@@ -1,10 +1,8 @@
-import { brandBackground, brandBorder } from '@guardian/source-foundations';
-
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { brandBackground, brandBorder } from '@guardian/source-foundations';
 import { ElementContainer } from '../ElementContainer';
-
-import { nav } from './Nav.mock';
 import { Nav } from './Nav';
+import { nav } from './Nav.mock';
 
 export default {
 	component: Nav,
@@ -28,7 +26,7 @@ export const StandardStory = () => {
 				}}
 				nav={nav}
 				subscribeUrl=""
-				edition="UK"
+				editionId="UK"
 			/>
 		</ElementContainer>
 	);
@@ -52,7 +50,7 @@ export const OpinionStory = () => {
 				}}
 				nav={nav}
 				subscribeUrl=""
-				edition="UK"
+				editionId="UK"
 			/>
 		</ElementContainer>
 	);
@@ -76,7 +74,7 @@ export const ImmersiveStory = () => {
 				}}
 				nav={nav}
 				subscribeUrl=""
-				edition="UK"
+				editionId="UK"
 			/>
 		</ElementContainer>
 	);

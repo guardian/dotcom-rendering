@@ -1,24 +1,21 @@
 import { css } from '@emotion/react';
-
-import {
-	from,
-	until,
-	space,
-	border,
-	headline,
-	textSans,
-	between,
-} from '@guardian/source-foundations';
-
 import { ArticleDesign } from '@guardian/libs';
+import {
+	between,
+	border,
+	from,
+	headline,
+	space,
+	textSans,
+	until,
+} from '@guardian/source-foundations';
+import { decidePalette } from '../lib/decidePalette';
+import { Distribution } from './Distribution';
+import { Doughnut } from './Doughnut';
+import { GoalAttempts } from './GoalAttempts';
 import { GridItem } from './GridItem';
 import { Hide } from './Hide';
-
-import { Doughnut } from './Doughnut';
-import { Distribution } from './Distribution';
-import { GoalAttempts } from './GoalAttempts';
 import { Lineup } from './Lineup';
-import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	home: TeamType;

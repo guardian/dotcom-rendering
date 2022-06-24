@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
-
 import { brand } from '@guardian/source-foundations';
-import { Hide } from './Hide';
-import { Logo } from './Logo';
-import { Links } from './Links.importable';
-import { Island } from './Island';
 import { EditionDropdown } from './EditionDropdown.importable';
+import { Hide } from './Hide';
+import { Island } from './Island';
+import { Links } from './Links.importable';
+import { Logo } from './Logo';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 const headerStyles = css`
@@ -17,7 +16,7 @@ const headerStyles = css`
 `;
 
 type Props = {
-	edition: Edition;
+	editionId: EditionId;
 	idUrl?: string;
 	mmaUrl?: string;
 	supporterCTA: string;
@@ -28,7 +27,7 @@ type Props = {
 };
 
 export const Header = ({
-	edition,
+	editionId,
 	idUrl,
 	mmaUrl,
 	supporterCTA,
@@ -41,7 +40,7 @@ export const Header = ({
 		<Hide when="below" breakpoint="desktop">
 			<Island deferUntil="idle">
 				<EditionDropdown
-					edition={edition}
+					editionId={editionId}
 					dataLinkName="nav2 : topbar : edition-picker: toggle"
 				/>
 			</Island>
@@ -50,7 +49,7 @@ export const Header = ({
 		<Island deferUntil="idle" clientOnly={true}>
 			<ReaderRevenueLinks
 				urls={urls}
-				edition={edition}
+				editionId={editionId}
 				dataLinkNamePrefix="nav2 : "
 				inHeader={true}
 				remoteHeader={remoteHeader}

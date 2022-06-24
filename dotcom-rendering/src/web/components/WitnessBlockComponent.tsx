@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
-
-import { neutral, space, headline, body } from '@guardian/source-foundations';
+import { body, headline, neutral, space } from '@guardian/source-foundations';
 
 // Wrapper Styles
 const wrapperStyles = css`
@@ -74,7 +73,7 @@ const WitnessWrapper = ({
 	dateCreated,
 	palette,
 	children,
-}: WrapperProps): JSX.Element => {
+}: WrapperProps) => {
 	return (
 		<div css={wrapperStyles}>
 			<div css={mainContentWrapperStyles}>{children}</div>
@@ -142,7 +141,7 @@ export const WitnessImageBlockComponent = ({
 	dateCreated,
 	alt,
 	palette,
-}: ImageProps): JSX.Element => {
+}: ImageProps) => {
 	// witness images seem to always use `mediumoriginalaspectdouble`, but in case that isn't found we use the 1st
 	// asset in the list
 	const bestImgSource =
@@ -198,7 +197,7 @@ export const WitnessTextBlockComponent = ({
 	dateCreated,
 	description,
 	palette,
-}: TextProps): JSX.Element => (
+}: TextProps) => (
 	<WitnessWrapper
 		authorName={authorName}
 		dateCreated={dateCreated}
@@ -238,7 +237,7 @@ export const WitnessVideoBlockComponent = ({
 	youtubeHtml,
 	dateCreated,
 	palette,
-}: VideoProps): JSX.Element => (
+}: VideoProps) => (
 	<WitnessWrapper
 		authorName={authorName}
 		dateCreated={dateCreated}

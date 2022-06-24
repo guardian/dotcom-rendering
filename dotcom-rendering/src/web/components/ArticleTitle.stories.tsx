@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
-
 import {
-	ArticleDisplay,
 	ArticleDesign,
+	ArticleDisplay,
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
@@ -10,7 +9,6 @@ import {
 	getAllThemes,
 	getThemeNameAsString,
 } from '../../../../common-rendering/src/fixtures/article';
-
 import { ArticleTitle } from './ArticleTitle';
 
 const Container = ({ children }: { children: React.ReactNode }) => (
@@ -66,7 +64,6 @@ export const defaultStory = () => {
 	return (
 		<Container>
 			<ArticleTitle
-				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...brexitCAPI}
 				format={{
 					display: ArticleDisplay.Standard,
@@ -83,7 +80,6 @@ export const beyondTheBlade = () => {
 	return (
 		<Container>
 			<ArticleTitle
-				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...beyondTheBladeCAPI}
 				format={{
 					display: ArticleDisplay.Standard,
@@ -105,7 +101,6 @@ export const immersiveComment = () => {
 			`}
 		>
 			<ArticleTitle
-				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...brexitCAPI}
 				format={{
 					display: ArticleDisplay.Immersive,
@@ -127,7 +122,6 @@ export const immersiveCommentTag = () => {
 			`}
 		>
 			<ArticleTitle
-				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Immersive,
@@ -151,7 +145,6 @@ export const ImmersiveSeriesTag = () => {
 	return (
 		<Container>
 			<ArticleTitle
-				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Immersive,
@@ -175,7 +168,6 @@ export const ArticleBlogTag = () => {
 	return (
 		<Container>
 			<ArticleTitle
-				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Standard,
@@ -205,7 +197,6 @@ export const LiveblogTitle = () => {
 				`}
 			>
 				<ArticleTitle
-					// eslint-disable-next-line react/jsx-props-no-spreading
 					{...CAPIArticle}
 					format={{
 						display: ArticleDisplay.Standard,
@@ -228,7 +219,6 @@ export const LiveblogTitle = () => {
 				`}
 			>
 				<ArticleTitle
-					// eslint-disable-next-line react/jsx-props-no-spreading
 					{...CAPIArticle}
 					format={{
 						display: ArticleDisplay.Standard,
@@ -254,7 +244,6 @@ export const ArticleOpinionTag = () => {
 	return (
 		<Container>
 			<ArticleTitle
-				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Standard,
@@ -278,7 +267,6 @@ export const ArticleSeriesTag = () => {
 	return (
 		<Container>
 			<ArticleTitle
-				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Standard,
@@ -302,7 +290,6 @@ export const SpecialReportTitle = () => {
 	return (
 		<Container>
 			<ArticleTitle
-				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Standard,
@@ -326,7 +313,6 @@ export const ArticleNoTags = () => {
 	return (
 		<Container>
 			<ArticleTitle
-				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Standard,
@@ -343,7 +329,6 @@ export const LabsStory = () => {
 	return (
 		<Container>
 			<ArticleTitle
-				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Standard,
@@ -367,7 +352,6 @@ export const LongStory = () => {
 	return (
 		<Container>
 			<ArticleTitle
-				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Standard,
@@ -391,7 +375,6 @@ export const LongWord = () => {
 	return (
 		<Container>
 			<ArticleTitle
-				// eslint-disable-next-line react/jsx-props-no-spreading
 				{...CAPIArticle}
 				format={{
 					display: ArticleDisplay.Standard,
@@ -421,7 +404,6 @@ export const ArticleDeadBlogTitle = () => {
 				<div>
 					<p>{getThemeNameAsString(format)}</p>
 					<ArticleTitle
-						// eslint-disable-next-line react/jsx-props-no-spreading
 						{...CAPIArticle}
 						format={format}
 						tags={[

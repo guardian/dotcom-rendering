@@ -1,15 +1,13 @@
 import { css } from '@emotion/react';
-
-import { border, from, Breakpoint } from '@guardian/source-foundations';
-
+import type { Breakpoint } from '@guardian/source-foundations';
+import { border, from } from '@guardian/source-foundations';
+import { joinUrl } from '../../lib/joinUrl';
+import { abTestTest } from '../experiments/tests/ab-test-test';
+import { decideTrail } from '../lib/decideTrail';
 import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
-import { joinUrl } from '../../lib/joinUrl';
-import { decideTrail } from '../lib/decideTrail';
-
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 import { MostViewedFooterSecondTierItem } from './MostViewedFooterSecondTierItem';
-import { abTestTest } from '../experiments/tests/ab-test-test';
 
 interface Props {
 	sectionName?: string;
@@ -39,9 +37,7 @@ function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
 	const sectionsWithoutPopular = ['info', 'global'];
 	const hasSection =
 		sectionName && !sectionsWithoutPopular.includes(sectionName);
-	const endpoint: string = `/most-read${
-		hasSection ? `/${sectionName}` : ''
-	}.json`;
+	const endpoint = `/most-read${hasSection ? `/${sectionName}` : ''}.json`;
 	return joinUrl([ajaxUrl, `${endpoint}?dcr=true`]);
 }
 

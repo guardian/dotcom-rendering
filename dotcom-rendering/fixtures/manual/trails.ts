@@ -1,4 +1,4 @@
-import { ArticleDisplay, ArticlePillar, ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 export const trails: TrailType[] = [
 	{
@@ -58,7 +58,7 @@ export const trails: TrailType[] = [
 		webPublicationDate: '2019-12-02T09:45:30.000Z',
 		format: {
 			theme: ArticlePillar.News,
-			design: ArticleDesign.Media,
+			design: ArticleDesign.Video,
 			display: ArticleDisplay.Standard,
 		},
 		mediaType: 'Video',

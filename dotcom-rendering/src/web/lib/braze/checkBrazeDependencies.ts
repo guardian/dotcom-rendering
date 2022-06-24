@@ -73,7 +73,6 @@ const checkBrazeDependencies = async (
 	// version and polyfill.io doesn't have a polyfill yet).
 	for (const { name, value } of dependencies) {
 		try {
-			// eslint-disable-next-line no-await-in-loop
 			const result = await value;
 
 			if (result) {

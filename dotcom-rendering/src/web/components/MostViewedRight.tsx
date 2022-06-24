@@ -1,11 +1,8 @@
 import { css } from '@emotion/react';
-
 import { headline } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-
-import { useApi } from '../lib/useApi';
 import { decideTrail } from '../lib/decideTrail';
-
+import { useApi } from '../lib/useApi';
 import { MostViewedRightItem } from './MostViewedRightItem';
 
 const wrapperStyles = css`
@@ -36,7 +33,7 @@ export const MostViewedRight = ({
 	isAdFreeUser,
 	adBlockerDetected,
 }: Props) => {
-	const endpointUrl: string =
+	const endpointUrl =
 		'https://api.nextgen.guardianapps.co.uk/most-read-geo.json?dcr=true';
 	const { data, error } = useApi<CAPITrailTabType>(endpointUrl);
 

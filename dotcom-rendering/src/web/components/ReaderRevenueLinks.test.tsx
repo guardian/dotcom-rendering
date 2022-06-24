@@ -1,4 +1,4 @@
-import { render, wait } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
@@ -24,7 +24,7 @@ describe('ReaderRevenueLinks', () => {
 		subscribe: 'https://www.theguardian.com/subscribe',
 		support: 'https://www.theguardian.com/support',
 	};
-	const edition: Edition = 'UK';
+	const edition: EditionId = 'UK';
 
 	it('should render thank you message if shouldHideSupportMessaging() returns true', async () => {
 		shouldHideSupportMessaging.mockReturnValue(true);
@@ -32,7 +32,7 @@ describe('ReaderRevenueLinks', () => {
 		const { getByText } = render(
 			<ReaderRevenueLinks
 				urls={urls}
-				edition="US"
+				editionId="US"
 				dataLinkNamePrefix="nav2 : "
 				inHeader={true}
 				remoteHeader={false}
@@ -40,7 +40,7 @@ describe('ReaderRevenueLinks', () => {
 			/>,
 		);
 
-		await wait(() => expect(getByText('Thank you')).toBeInTheDocument());
+		await waitFor(() => expect(getByText('Thank you')).toBeInTheDocument());
 	});
 
 	it('should render support message if shouldHideSupportMessaging() returns false', async () => {
@@ -49,7 +49,7 @@ describe('ReaderRevenueLinks', () => {
 		const { getByText } = render(
 			<ReaderRevenueLinks
 				urls={urls}
-				edition={edition}
+				editionId={edition}
 				dataLinkNamePrefix="nav2 : "
 				inHeader={true}
 				remoteHeader={false}
@@ -57,7 +57,7 @@ describe('ReaderRevenueLinks', () => {
 			/>,
 		);
 
-		await wait(() =>
+		await waitFor(() =>
 			expect(getByText('Support the Guardian')).toBeInTheDocument(),
 		);
 	});

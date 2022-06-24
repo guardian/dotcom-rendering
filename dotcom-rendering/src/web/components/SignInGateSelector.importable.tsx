@@ -1,21 +1,19 @@
-import { useState, useEffect } from 'react';
 import { ArticleDesign, getCookie } from '@guardian/libs';
+import { useEffect, useState } from 'react';
 import { constructQuery } from '../../lib/querystring';
-
+import { useOnce } from '../lib/useOnce';
+import { useSignInGateSelector } from '../lib/useSignInGateSelector';
+import type { ComponentEventParams } from './SignInGate/componentEventTracking';
+import {
+	submitViewEventTracking,
+	withComponentId,
+} from './SignInGate/componentEventTracking';
 import {
 	incrementUserDismissedGateCount,
 	setUserDismissedGate,
 } from './SignInGate/dismissGate';
-import { useSignInGateSelector } from '../lib/useSignInGateSelector';
-
-import { useOnce } from '../lib/useOnce';
-import {
-	ComponentEventParams,
-	submitViewEventTracking,
-	withComponentId,
-} from './SignInGate/componentEventTracking';
 import { signInGateTestIdToComponentId } from './SignInGate/signInGate';
-import {
+import type {
 	CurrentSignInGateABTest,
 	SignInGateComponent,
 } from './SignInGate/types';
@@ -186,7 +184,7 @@ export const SignInGateSelector = ({
 		if (gateVariant && currentTest) {
 			// eslint-disable-next-line @typescript-eslint/no-floating-promises
 			gateVariant
-				?.canShow({
+				.canShow({
 					isSignedIn: !!isSignedIn,
 					currentTest,
 					contentType,

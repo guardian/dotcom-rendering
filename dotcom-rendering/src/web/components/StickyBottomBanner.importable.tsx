@@ -1,35 +1,37 @@
-import { useEffect, useState } from 'react';
-import { cmp } from '@guardian/consent-management-platform';
-import { getCookie } from '@guardian/libs';
 import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
 } from '@guardian/braze-components/logic';
+import { cmp } from '@guardian/consent-management-platform';
+import { getCookie } from '@guardian/libs';
+import { useEffect, useState } from 'react';
 import type { ArticleCounts } from '../../lib/article-count';
 import { getArticleCounts } from '../../lib/article-count';
-import {
-	canShowRRBanner,
-	canShowPuzzlesBanner,
-	ReaderRevenueBanner,
-	PuzzlesBanner,
-	BannerProps,
-	CanShowFunctionType,
-} from './StickyBottomBanner/ReaderRevenueBanner';
 import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
-import { useOnce } from '../lib/useOnce';
-import {
-	pickMessage,
-	SlotConfig,
-	MaybeFC,
-	CandidateConfig,
-} from '../lib/messagePicker';
 import { getLocaleCode } from '../lib/getCountryCode';
+import type {
+	CandidateConfig,
+	MaybeFC,
+	SlotConfig,
+} from '../lib/messagePicker';
+import { pickMessage } from '../lib/messagePicker';
+import { useBraze } from '../lib/useBraze';
+import { useOnce } from '../lib/useOnce';
 import { useSignInGateWillShow } from '../lib/useSignInGateWillShow';
 import {
 	BrazeBanner,
 	canShowBrazeBanner,
 } from './StickyBottomBanner/BrazeBanner';
-import { useBraze } from '../lib/useBraze';
+import {
+	canShowPuzzlesBanner,
+	canShowRRBanner,
+	PuzzlesBanner,
+	ReaderRevenueBanner,
+} from './StickyBottomBanner/ReaderRevenueBanner';
+import type {
+	BannerProps,
+	CanShowFunctionType,
+} from './StickyBottomBanner/ReaderRevenueBanner';
 
 type Props = {
 	contentType: string;
@@ -52,14 +54,14 @@ type RRBannerConfig = {
 	id: string;
 	BannerComponent: React.FC<BannerProps>;
 	canShowFn: CanShowFunctionType<BannerProps>;
-	isEnabled: (switches: CAPIArticleType['config']['switches']) => boolean;
+	isEnabled: boolean;
 };
 
 const getBannerLastClosedAt = (key: string): string | undefined => {
 	const item = localStorage.getItem(`gu.prefs.${key}`) as undefined | string;
 
 	if (item) {
-		const parsedItem = JSON.parse(item) as { [key: string]: any };
+		const parsedItem = JSON.parse(item) as Record<string, any>;
 		return parsedItem.value;
 	}
 	return item;
@@ -106,7 +108,6 @@ const buildRRBannerConfigWith = ({
 		tags,
 		contributionsServiceUrl,
 		idApiUrl,
-		switches,
 	}: {
 		isSignedIn: boolean;
 		asyncCountryCode: Promise<string>;
@@ -122,14 +123,13 @@ const buildRRBannerConfigWith = ({
 		tags: TagType[];
 		contributionsServiceUrl: string;
 		idApiUrl: string;
-		switches: Switches;
 	}): CandidateConfig<BannerProps> => {
 		return {
 			candidate: {
 				id,
 				canShow: () =>
 					canShowFn({
-						remoteBannerConfig: isEnabled(switches),
+						remoteBannerConfig: isEnabled,
 						isSignedIn,
 						asyncCountryCode,
 						contentType,
@@ -169,19 +169,21 @@ const buildRRBannerConfigWith = ({
 	};
 };
 
-const buildPuzzlesBannerConfig = buildRRBannerConfigWith({
-	id: 'puzzles-banner',
-	BannerComponent: PuzzlesBanner,
-	canShowFn: canShowPuzzlesBanner,
-	isEnabled: (switches) => switches.puzzlesBanner,
-});
+const buildPuzzlesBannerConfig = (isEnabled: boolean) =>
+	buildRRBannerConfigWith({
+		id: 'puzzles-banner',
+		BannerComponent: PuzzlesBanner,
+		canShowFn: canShowPuzzlesBanner,
+		isEnabled,
+	});
 
-const buildReaderRevenueBannerConfig = buildRRBannerConfigWith({
-	id: 'reader-revenue-banner',
-	BannerComponent: ReaderRevenueBanner,
-	canShowFn: canShowRRBanner,
-	isEnabled: (switches) => switches.remoteBanner,
-});
+const buildReaderRevenueBannerConfig = (isEnabled: boolean) =>
+	buildRRBannerConfigWith({
+		id: 'reader-revenue-banner',
+		BannerComponent: ReaderRevenueBanner,
+		canShowFn: canShowRRBanner,
+		isEnabled,
+	});
 
 const buildBrazeBanner = (
 	brazeMessages: BrazeMessagesInterface,
@@ -207,11 +209,13 @@ export const StickyBottomBanner = ({
 	isSensitive,
 	contributionsServiceUrl,
 	idApiUrl,
-	switches,
 	pageId,
 	keywordsId,
+	remoteBannerSwitch,
+	puzzleBannerSwitch,
 }: Props & {
-	switches: Switches;
+	remoteBannerSwitch: boolean;
+	puzzleBannerSwitch: boolean;
 	isSensitive: boolean;
 }) => {
 	const { brazeMessages } = useBraze(idApiUrl);
@@ -236,7 +240,7 @@ export const StickyBottomBanner = ({
 
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();
-		const puzzlesBanner = buildPuzzlesBannerConfig({
+		const puzzlesBanner = buildPuzzlesBannerConfig(puzzleBannerSwitch)({
 			isSignedIn,
 			asyncCountryCode: asyncCountryCode as Promise<string>,
 			isPreview,
@@ -252,9 +256,10 @@ export const StickyBottomBanner = ({
 			tags,
 			contributionsServiceUrl,
 			idApiUrl,
-			switches,
 		});
-		const readerRevenue = buildReaderRevenueBannerConfig({
+		const readerRevenue = buildReaderRevenueBannerConfig(
+			remoteBannerSwitch,
+		)({
 			isSignedIn,
 			asyncCountryCode: asyncCountryCode as Promise<string>,
 			isPreview,
@@ -271,7 +276,6 @@ export const StickyBottomBanner = ({
 			tags,
 			contributionsServiceUrl,
 			idApiUrl,
-			switches,
 		});
 		const brazeArticleContext: BrazeArticleContext = {
 			section: sectionName,

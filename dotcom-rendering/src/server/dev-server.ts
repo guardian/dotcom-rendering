@@ -1,4 +1,4 @@
-import type { Request, Response, NextFunction } from 'express';
+import type { NextFunction, Request, Response } from 'express';
 import { render as renderAMPArticle } from '../amp/server';
 import {
 	renderArticle,
@@ -9,10 +9,10 @@ import {
 	renderKeyEvents,
 } from '../web/server';
 
-// see https://www.npmjs.com/package/webpack-hot-server-Middleware
+// see https://www.npmjs.com/package/webpack-hot-server-middleware
 // for more info
 export const devServer = () => {
-	return async (req: Request, res: Response, next: NextFunction) => {
+	return (req: Request, res: Response, next: NextFunction): void => {
 		switch (req.path) {
 			case '/Article':
 				return renderArticle(req, res);

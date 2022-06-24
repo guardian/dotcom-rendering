@@ -1,5 +1,5 @@
-import { css, SerializedStyles } from '@emotion/react';
-
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { between, from } from '@guardian/source-foundations';
 
 const sizingStyles = css`
@@ -46,13 +46,13 @@ const flexBasisStyles = ({
 
 type Props = {
 	children: React.ReactNode;
-	imageSize?: ImageSizeType;
+	imageSize: ImageSizeType;
 	imagePosition: ImagePositionType;
 };
 
 export const ContentWrapper = ({
 	children,
-	imageSize = 'small',
+	imageSize,
 	imagePosition,
 }: Props) => {
 	const isHorizontal = imagePosition === 'left' || imagePosition === 'right';

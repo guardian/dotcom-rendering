@@ -1,5 +1,5 @@
+import type { DailyArticleHistory } from './dailyArticleCount';
 import {
-	DailyArticleHistory,
 	DailyArticleCountKey,
 	getDailyArticleCount,
 	incrementDailyArticleCount,

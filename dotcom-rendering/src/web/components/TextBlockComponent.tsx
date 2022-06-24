@@ -1,26 +1,19 @@
 import { ClassNames } from '@emotion/react';
-
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
-	neutral,
 	body,
-	textSans,
 	from,
+	neutral,
+	textSans,
 	until,
 } from '@guardian/source-foundations';
-import {
-	ArticleDisplay,
-	ArticleDesign,
-	ArticleFormat,
-	ArticleSpecial,
-} from '@guardian/libs';
 import type { IOptions } from 'sanitize-html';
 import sanitise from 'sanitize-html';
-
 import { unwrapHtml } from '../../model/unwrapHtml';
-import { RewrappedComponent } from './RewrappedComponent';
-
-import { DropCap } from './DropCap';
 import { decidePalette } from '../lib/decidePalette';
+import { DropCap } from './DropCap';
+import { RewrappedComponent } from './RewrappedComponent';
 
 type Props = {
 	html: string;
@@ -112,7 +105,7 @@ const sanitiserOptions: IOptions = {
 	allowedAttributes: false, // Leave attributes from CAPI alone
 	transformTags: {
 		a: (tagName, attribs) => {
-			const mailto = attribs.href?.startsWith('mailto:')
+			const mailto = attribs.href.startsWith('mailto:')
 				? ` | ${attribs.href}`
 				: '';
 
@@ -134,7 +127,7 @@ export const TextBlockComponent = ({
 	format,
 	forceDropCap,
 	isFirstParagraph,
-}: Props): JSX.Element | null => (
+}: Props) => (
 	<ClassNames>
 		{({ css }) => {
 			const paraStyles = css`

@@ -1,40 +1,36 @@
 import { css, Global } from '@emotion/react';
-
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
+	border,
 	brandBackground,
 	brandBorder,
-	labs,
-	border,
 	brandLine,
-	neutral,
 	from,
+	labs,
+	neutral,
 	until,
 } from '@guardian/source-foundations';
-import { ArticleDisplay, ArticleFormat, ArticleSpecial } from '@guardian/libs';
-
-import { Footer } from '../components/Footer';
-import { SubNav } from '../components/SubNav.importable';
-import { ElementContainer } from '../components/ElementContainer';
-import { Nav } from '../components/Nav/Nav';
 import {
-	MobileStickyContainer,
-	labelStyles as adLabelStyles,
 	adCollapseStyles,
+	labelStyles as adLabelStyles,
+	MobileStickyContainer,
 } from '../components/AdSlot';
-import { LabsHeader } from '../components/LabsHeader.importable';
-
-import { getZIndex } from '../lib/getZIndex';
-
-import { Stuck, BannerWrapper } from './lib/stickiness';
-import { getCurrentPillar } from '../lib/layoutHelpers';
-
-import { renderElement } from '../lib/renderElement';
+import { ElementContainer } from '../components/ElementContainer';
+import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
-import { decidePalette } from '../lib/decidePalette';
 import { Island } from '../components/Island';
+import { LabsHeader } from '../components/LabsHeader.importable';
+import { Nav } from '../components/Nav/Nav';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { SubNav } from '../components/SubNav.importable';
+import { decidePalette } from '../lib/decidePalette';
+import { getZIndex } from '../lib/getZIndex';
+import { getCurrentPillar } from '../lib/layoutHelpers';
+import { renderElement } from '../lib/renderElement';
+import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
+import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
 	CAPIArticle: CAPIArticleType;
@@ -130,7 +126,7 @@ const Renderer: React.FC<{
 	return <div css={adStyles}>{output}</div>;
 };
 
-const NavHeader = ({ CAPIArticle, NAV, format }: Props): JSX.Element => {
+const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 	// Typically immersives use the slim nav, but this switch is used to force
 	// the full nav - typically during special events such as Project 200, or
 	// the Euros. The motivation is to better onboard new visitors; interactives
@@ -163,7 +159,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props): JSX.Element => {
 						subscribeUrl={
 							CAPIArticle.nav.readerRevenueLinks.header.subscribe
 						}
-						edition={CAPIArticle.editionId}
+						editionId={CAPIArticle.editionId}
 					/>
 				</ElementContainer>
 			</div>
@@ -206,7 +202,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props): JSX.Element => {
 						element="header"
 					>
 						<Header
-							edition={CAPIArticle.editionId}
+							editionId={CAPIArticle.editionId}
 							idUrl={CAPIArticle.config.idUrl}
 							mmaUrl={CAPIArticle.config.mmaUrl}
 							supporterCTA={
@@ -246,7 +242,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props): JSX.Element => {
 					subscribeUrl={
 						CAPIArticle.nav.readerRevenueLinks.header.subscribe
 					}
-					edition={CAPIArticle.editionId}
+					editionId={CAPIArticle.editionId}
 				/>
 			</ElementContainer>
 
@@ -273,7 +269,7 @@ export const FullPageInteractiveLayout = ({
 	CAPIArticle,
 	NAV,
 	format,
-}: Props): JSX.Element => {
+}: Props) => {
 	const {
 		config: { host },
 	} = CAPIArticle;
@@ -368,7 +364,7 @@ export const FullPageInteractiveLayout = ({
 					pillar={format.theme}
 					pillars={NAV.pillars}
 					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					edition={CAPIArticle.editionId}
+					editionId={CAPIArticle.editionId}
 					contributionsServiceUrl={
 						CAPIArticle.contributionsServiceUrl
 					}
@@ -394,7 +390,12 @@ export const FullPageInteractiveLayout = ({
 						shouldHideReaderRevenue={
 							CAPIArticle.shouldHideReaderRevenue
 						}
-						switches={CAPIArticle.config.switches}
+						remoteBannerSwitch={
+							CAPIArticle.config.switches.remoteBanner
+						}
+						puzzleBannerSwitch={
+							CAPIArticle.config.switches.puzzlesBanner
+						}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>

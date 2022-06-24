@@ -1,4 +1,4 @@
-import { CheckboxGroup, Checkbox } from '@guardian/source-react-components';
+import { Checkbox, CheckboxGroup } from '@guardian/source-react-components';
 import { FieldLabel } from './FieldLabel';
 
 type Props = {

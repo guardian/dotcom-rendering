@@ -1,18 +1,14 @@
-import { CacheProvider } from '@emotion/react';
-import { renderToString } from 'react-dom/server';
-import createEmotionServer from '@emotion/server/create-instance';
 import createCache from '@emotion/cache';
-
+import { CacheProvider } from '@emotion/react';
+import createEmotionServer from '@emotion/server/create-instance';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
-import { decideTheme } from '../lib/decideTheme';
-import { decideFormat } from '../lib/decideFormat';
-
-import { Article } from '../components/Article';
-
-import { escapeData } from '../../lib/escapeData';
+import { renderToString } from 'react-dom/server';
 import { ASSET_ORIGIN, getScriptArrayFromFile } from '../../lib/assets';
-
+import { escapeData } from '../../lib/escapeData';
 import { makeWindowGuardian } from '../../model/window-guardian';
+import { Article } from '../components/Article';
+import { decideFormat } from '../lib/decideFormat';
+import { decideTheme } from '../lib/decideTheme';
 import { articleTemplate } from './articleTemplate';
 import { extractExpeditedIslands } from './extractIslands';
 
@@ -159,8 +155,8 @@ export const articleToHtml = ({ data }: Props): string => {
 	]);
 
 	const gaChunk = getScriptArrayFromFile('ga.js');
-	const modernScript = gaChunk.find((script) => script?.legacy === false);
-	const legacyScript = gaChunk.find((script) => script?.legacy === true);
+	const modernScript = gaChunk.find((script) => script.legacy === false);
+	const legacyScript = gaChunk.find((script) => script.legacy === true);
 	const gaPath = {
 		modern: modernScript?.src as string,
 		legacy: legacyScript?.src as string,

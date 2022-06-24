@@ -1,8 +1,11 @@
-import { Island } from '../components/Island';
-import { LiveBlock } from '../components/LiveBlock';
-import { PinnedPost } from '../components/PinnedPost';
-import { LiveBlogEpic } from '../components/LiveBlogEpic.importable';
+import { Hide } from '@guardian/source-react-components';
 import { EnhancePinnedPost } from '../components/EnhancePinnedPost.importable';
+import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
+import { Island } from '../components/Island';
+import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
+import { LiveBlock } from '../components/LiveBlock';
+import { LiveBlogEpic } from '../components/LiveBlogEpic.importable';
+import { PinnedPost } from '../components/PinnedPost';
 
 type Props = {
 	format: ArticleFormat;
@@ -23,6 +26,9 @@ type Props = {
 	isPaidContent: boolean;
 	contributionsServiceUrl: string;
 	onFirstPage?: boolean;
+	keyEvents?: Block[];
+	filterKeyEvents?: boolean;
+	isKeyEventsCarouselVariant?: boolean;
 };
 
 export const LiveBlogRenderer = ({
@@ -44,6 +50,9 @@ export const LiveBlogRenderer = ({
 	isPaidContent,
 	contributionsServiceUrl,
 	onFirstPage,
+	keyEvents,
+	filterKeyEvents = false,
+	isKeyEventsCarouselVariant = false,
 }: Props) => {
 	return (
 		<>
@@ -70,10 +79,30 @@ export const LiveBlogRenderer = ({
 					</PinnedPost>
 				</>
 			)}
+			{isKeyEventsCarouselVariant && keyEvents?.length ? (
+				<Hide above="desktop">
+					<Island deferUntil="visible">
+						<KeyEventsCarousel
+							keyEvents={keyEvents}
+							filterKeyEvents={filterKeyEvents}
+							format={format}
+						/>
+					</Island>
+					<Island deferUntil="visible">
+						<FilterKeyEventsToggle
+							filterKeyEvents={filterKeyEvents}
+							id="filter-toggle-mobile"
+						/>
+					</Island>
+				</Hide>
+			) : (
+				<></>
+			)}
 			<div id="top-of-blog" />
 			{blocks.map((block) => {
 				return (
 					<LiveBlock
+						key={block.id}
 						format={format}
 						block={block}
 						pageId={pageId}

@@ -1,7 +1,7 @@
 import { incrementDailyArticleCount } from '../../lib/dailyArticleCount';
 import {
-	isNPageOrHigherPageView,
 	isIOS9,
+	isNPageOrHigherPageView,
 	isValidContentType,
 	isValidSection,
 	isValidTag,

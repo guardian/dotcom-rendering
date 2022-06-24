@@ -266,7 +266,11 @@ const renderArticleHeader = (item: Item): ReactElement<HeaderProps> => {
 		return <AnalysisHeader item={item} />;
 	} else if (item.design === ArticleDesign.Correction) {
 		return <CorrectionsHeader item={item} />;
-	} else if (item.design === ArticleDesign.Media) {
+	} else if (
+		item.design === ArticleDesign.Gallery ||
+		item.design === ArticleDesign.Audio ||
+		item.design === ArticleDesign.Video
+	) {
 		return isPicture(item.tags) ? (
 			<PictureHeader item={item} />
 		) : (

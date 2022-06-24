@@ -1,10 +1,9 @@
-// @ts-ignore -- we’re actually using preact
-import { jsx as _jsx } from 'react/jsx-runtime';
 import { ClassNames } from '@emotion/react';
-
-import type { HTMLTag } from 'src/model/unwrapHtml';
+// @ts-expect-error -- we’re actually using preact
+import { jsx as _jsx } from 'react/jsx-runtime';
 import { unescapeData } from '../../lib/escapeData';
-import { recordLog } from '../lib/logging';
+import type { HTMLTag } from '../../model/unwrapHtml';
+import { logger } from '../../server/lib/logging';
 
 /**
  * React requires a wrapping element for `dangerouslySetInnerHTML` so we
@@ -30,15 +29,12 @@ export const RewrappedComponent = ({
 		{({ css }) => {
 			if (!isUnwrapped) {
 				const isDev = process.env.NODE_ENV !== 'production';
-				recordLog({
-					label: 'dotcom.dcr.isUnwrapped',
+				logger.warn(
+					'RewrappedComponent called with isUnwrapped === false',
 					isDev,
-					properties: {
-						isUnwrapped: 'false',
-						html,
-						tagName,
-					},
-				});
+					html,
+					tagName,
+				);
 			}
 
 			const element: HTMLTag = isUnwrapped ? tagName : 'span';

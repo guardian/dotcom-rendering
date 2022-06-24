@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
-import { MaintainAspectRatio } from './MaintainAspectRatio';
 import { ClickToView } from './ClickToView';
+import { MaintainAspectRatio } from './MaintainAspectRatio';
 
 const titleStyle = css`
 	p {

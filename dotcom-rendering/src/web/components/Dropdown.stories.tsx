@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
-
 import { brandBackground } from '@guardian/source-foundations';
-
 import { Dropdown } from './Dropdown';
 
 const Header = ({ children }: { children: React.ReactNode }) => (

@@ -1,7 +1,7 @@
+import type { PutMetricDataInput } from '@aws-sdk/client-cloudwatch';
 import {
 	CloudWatchClient,
 	PutMetricDataCommand,
-	PutMetricDataInput,
 } from '@aws-sdk/client-cloudwatch';
 
 interface Metric {
@@ -39,7 +39,7 @@ const sendMetric = (m: any[]) => {
 
 // handles sending matrics to AWS
 
-const collectAndSendAWSMetrics = (...metrics: Metric[]) => {
+const collectAndSendAWSMetrics = (...metrics: Metric[]): void => {
 	setInterval(() => {
 		metrics.forEach((m) => m.send());
 	}, METRICS_TIME_RESOLUTION);
@@ -47,7 +47,11 @@ const collectAndSendAWSMetrics = (...metrics: Metric[]) => {
 
 // to record things like latency
 
-const TimingMetric = (app: string, stage: string, metricName: string) => {
+const TimingMetric = (
+	app: string,
+	stage: string,
+	metricName: string,
+): { recordDuration: (n: number) => void; send: () => void } => {
 	const values: number[] = [];
 
 	return {
@@ -81,7 +85,11 @@ const TimingMetric = (app: string, stage: string, metricName: string) => {
 
 // to record memory or file sizes
 
-const BytesMetric = (app: string, stage: string, metricName: string) => {
+const BytesMetric = (
+	app: string,
+	stage: string,
+	metricName: string,
+): { record: (n: number) => void; send: () => void } => {
 	const values: number[] = [];
 
 	return {

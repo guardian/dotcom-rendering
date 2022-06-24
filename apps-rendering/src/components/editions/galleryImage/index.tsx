@@ -1,7 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import Img from '@guardian/common-rendering/src/components/img';
-import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
@@ -12,6 +10,8 @@ import {
 import type { Option } from '@guardian/types';
 import { map, none, OptionKind, some, withDefault } from '@guardian/types';
 import type { Image } from 'bodyElement';
+import Img from 'components/ImgAlt';
+import type { Sizes } from 'image/sizes';
 import { maybeRender, pipe } from 'lib';
 import type { FC } from 'react';
 import { getThemeStyles } from 'themeStyles';
@@ -29,7 +29,7 @@ type CaptionProps = {
 };
 
 type CaptionDetails = {
-	location: Option<string>;
+	location: Option<string[]>;
 	description: Option<string[]>;
 };
 
@@ -52,17 +52,20 @@ const styles = css`
 
 const getCaptionDetails = (oDoc: Option<DocumentFragment>): CaptionDetails => {
 	const details: CaptionDetails = {
-		location: none,
+		location: some([]),
 		description: some([]),
 	};
 
-	const pushToDescription = (
+	const pushToDetails = (
+		section: 'location' | 'description',
 		details: CaptionDetails,
 		node: Node,
 	): CaptionDetails => {
+		const detailsSection = details[section];
+
 		node.textContent &&
-			details.description.kind === OptionKind.Some &&
-			details.description.value.push(node.textContent);
+			detailsSection.kind === OptionKind.Some &&
+			detailsSection.value.push(node.textContent);
 
 		return details;
 	};
@@ -70,15 +73,13 @@ const getCaptionDetails = (oDoc: Option<DocumentFragment>): CaptionDetails => {
 	const parseCaptionNode = (doc: DocumentFragment): CaptionDetails =>
 		Array.from(doc.childNodes).reduce((details, node) => {
 			if (node.nodeName === 'STRONG') {
-				details.location = node.textContent
-					? some(node.textContent)
-					: none;
+				details = pushToDetails('location', details, node);
 			} else if (
 				node.nodeName === '#text' ||
 				node.nodeName === 'A' ||
 				node.nodeName === 'EM'
 			) {
-				details = pushToDescription(details, node);
+				details = pushToDetails('description', details, node);
 			}
 			return details;
 		}, details);
@@ -107,7 +108,7 @@ const Triangle: FC<{ color: string }> = ({ color }) => (
 	</svg>
 );
 
-const CaptionLocation: FC<{ location: string; triangleColor: string }> = ({
+const CaptionLocation: FC<{ location: string[]; triangleColor: string }> = ({
 	location,
 	triangleColor,
 }) => {
@@ -127,7 +128,7 @@ const CaptionLocation: FC<{ location: string; triangleColor: string }> = ({
 	return (
 		<h2 css={styles}>
 			<Triangle color={triangleColor} />
-			{location}
+			{location.filter((s) => /[a-zA-Z]/.test(s)).join(', ')}
 		</h2>
 	);
 };

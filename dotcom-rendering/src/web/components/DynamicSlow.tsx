@@ -1,12 +1,12 @@
 import { ArticleDesign } from '@guardian/libs';
-
 import { Card } from './Card/Card';
-import { UL } from './Card/components/UL';
 import { LI } from './Card/components/LI';
+import { UL } from './Card/components/UL';
 
 type Props = {
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
 };
 
 /**
@@ -14,7 +14,7 @@ type Props = {
  *
  * @see {@link https://www.figma.com/file/sx2vMFHbL7SsUo0LcpsKNe/%E2%AC%A3--Front-container?node-id=123%3A137122 Figma designs}
  */
-export const DynamicSlow = ({ trails, containerPalette }: Props) => {
+export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
 	const bigCards = trails.slice(2, 4);
@@ -26,6 +26,7 @@ export const DynamicSlow = ({ trails, containerPalette }: Props) => {
 				<LI padSides={true} percentage="75%">
 					<Card
 						containerPalette={containerPalette}
+						showAge={showAge}
 						linkTo={primary.url}
 						format={primary.format}
 						headlineText={primary.headline}
@@ -50,11 +51,12 @@ export const DynamicSlow = ({ trails, containerPalette }: Props) => {
 						imageSize="large"
 						mediaType={primary.mediaType}
 						mediaDuration={primary.mediaDuration}
-						commentCount={primary.commentCount}
 						starRating={primary.starRating}
 						branding={primary.branding}
 						supportingContent={primary.supportingContent}
 						dataLinkName={primary.dataLinkName}
+						snapData={primary.snapData}
+						discussionId={primary.discussionId}
 					/>
 				</LI>
 				<LI
@@ -65,6 +67,7 @@ export const DynamicSlow = ({ trails, containerPalette }: Props) => {
 				>
 					<Card
 						containerPalette={containerPalette}
+						showAge={showAge}
 						linkTo={secondary.url}
 						format={secondary.format}
 						headlineText={secondary.headline}
@@ -85,11 +88,12 @@ export const DynamicSlow = ({ trails, containerPalette }: Props) => {
 						imageUrl={secondary.image}
 						mediaType={secondary.mediaType}
 						mediaDuration={secondary.mediaDuration}
-						commentCount={secondary.commentCount}
 						starRating={secondary.starRating}
 						branding={secondary.branding}
 						supportingContent={secondary.supportingContent}
 						dataLinkName={secondary.dataLinkName}
+						snapData={secondary.snapData}
+						discussionId={secondary.discussionId}
 					/>
 				</LI>
 			</UL>
@@ -99,6 +103,7 @@ export const DynamicSlow = ({ trails, containerPalette }: Props) => {
 						{bigCards.map((card, cardIndex) => {
 							return (
 								<LI
+									key={card.url}
 									percentage="50%"
 									showDivider={cardIndex !== 0}
 									padSides={true}
@@ -109,9 +114,14 @@ export const DynamicSlow = ({ trails, containerPalette }: Props) => {
 								>
 									<Card
 										containerPalette={containerPalette}
+										showAge={showAge}
 										linkTo={card.url}
 										format={card.format}
-										trailText={card.trailText}
+										trailText={
+											card.supportingContent
+												? undefined
+												: card.trailText
+										}
 										headlineText={card.headline}
 										headlineSize="medium"
 										byline={card.byline}
@@ -135,7 +145,6 @@ export const DynamicSlow = ({ trails, containerPalette }: Props) => {
 										imageUrl={card.image}
 										mediaType={card.mediaType}
 										mediaDuration={card.mediaDuration}
-										commentCount={card.commentCount}
 										starRating={card.starRating}
 										branding={card.branding}
 										supportingContent={
@@ -143,6 +152,8 @@ export const DynamicSlow = ({ trails, containerPalette }: Props) => {
 										}
 										imagePositionOnMobile="none"
 										dataLinkName={card.dataLinkName}
+										snapData={card.snapData}
+										discussionId={card.discussionId}
 									/>
 								</LI>
 							);
@@ -154,6 +165,7 @@ export const DynamicSlow = ({ trails, containerPalette }: Props) => {
 						{smallCards.map((card, cardIndex) => {
 							return (
 								<LI
+									key={card.url}
 									padSides={true}
 									showTopMarginWhenStacked={false}
 									padBottom={
@@ -164,6 +176,7 @@ export const DynamicSlow = ({ trails, containerPalette }: Props) => {
 								>
 									<Card
 										containerPalette={containerPalette}
+										showAge={showAge}
 										linkTo={card.url}
 										format={card.format}
 										headlineText={card.headline}
@@ -191,10 +204,11 @@ export const DynamicSlow = ({ trails, containerPalette }: Props) => {
 										showClock={false}
 										mediaType={card.mediaType}
 										mediaDuration={card.mediaDuration}
-										commentCount={card.commentCount}
 										starRating={card.starRating}
 										branding={card.branding}
 										dataLinkName={card.dataLinkName}
+										snapData={card.snapData}
+										discussionId={card.discussionId}
 									/>
 								</LI>
 							);

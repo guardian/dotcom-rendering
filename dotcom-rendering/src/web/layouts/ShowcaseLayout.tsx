@@ -1,60 +1,57 @@
 import { css } from '@emotion/react';
-
-import {
-	neutral,
-	brandBackground,
-	brandLine,
-	brandBorder,
-	labs,
-	border,
-	from,
-	until,
-} from '@guardian/source-foundations';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-
+import {
+	border,
+	brandBackground,
+	brandBorder,
+	brandLine,
+	from,
+	labs,
+	neutral,
+	until,
+} from '@guardian/source-foundations';
 import {
 	Lines,
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
-import { ArticleBody } from '../components/ArticleBody';
-import { RightColumn } from '../components/RightColumn';
-import { ArticleTitle } from '../components/ArticleTitle';
-import { ArticleContainer } from '../components/ArticleContainer';
-import { ArticleMeta } from '../components/ArticleMeta';
-import { SubMeta } from '../components/SubMeta';
-import { MainMedia } from '../components/MainMedia';
-import { ArticleHeadline } from '../components/ArticleHeadline';
-import { Standfirst } from '../components/Standfirst';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
-import { SubNav } from '../components/SubNav.importable';
-import { ElementContainer } from '../components/ElementContainer';
-import { Nav } from '../components/Nav/Nav';
-import { HeaderAdSlot } from '../components/HeaderAdSlot';
-import { MobileStickyContainer, AdSlot } from '../components/AdSlot';
-import { Border } from '../components/Border';
-import { GridItem } from '../components/GridItem';
-import { DiscussionLayout } from '../components/DiscussionLayout';
-import { LabsHeader } from '../components/LabsHeader.importable';
-
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
+import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { ArticleBody } from '../components/ArticleBody';
+import { ArticleContainer } from '../components/ArticleContainer';
+import { ArticleHeadline } from '../components/ArticleHeadline';
+import { ArticleMeta } from '../components/ArticleMeta';
+import { ArticleTitle } from '../components/ArticleTitle';
+import { Border } from '../components/Border';
+import { DiscussionLayout } from '../components/DiscussionLayout';
+import { ElementContainer } from '../components/ElementContainer';
+import { Footer } from '../components/Footer';
+import { GridItem } from '../components/GridItem';
+import { Header } from '../components/Header';
+import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { Island } from '../components/Island';
+import { LabsHeader } from '../components/LabsHeader.importable';
+import { MainMedia } from '../components/MainMedia';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
+import { Nav } from '../components/Nav/Nav';
+import { OnwardsLower } from '../components/OnwardsLower.importable';
+import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { RightColumn } from '../components/RightColumn';
+import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
+import { Standfirst } from '../components/Standfirst';
+import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
+import { SubMeta } from '../components/SubMeta';
+import { SubNav } from '../components/SubNav.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
+import { decidePalette } from '../lib/decidePalette';
 import {
 	decideLineCount,
 	decideLineEffect,
 	getCurrentPillar,
 } from '../lib/layoutHelpers';
-import { Stuck, SendToBack, BannerWrapper } from './lib/stickiness';
-import { Island } from '../components/Island';
-import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
-import { OnwardsLower } from '../components/OnwardsLower.importable';
-import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
-import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
-import { getContributionsServiceUrl } from '../lib/contributions';
-import { decidePalette } from '../lib/decidePalette';
+import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -212,11 +209,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-export const ShowcaseLayout = ({
-	CAPIArticle,
-	NAV,
-	format,
-}: Props): JSX.Element => {
+export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPIArticle;
@@ -281,7 +274,7 @@ export const ShowcaseLayout = ({
 								element="header"
 							>
 								<Header
-									edition={CAPIArticle.editionId}
+									editionId={CAPIArticle.editionId}
 									idUrl={CAPIArticle.config.idUrl}
 									mmaUrl={CAPIArticle.config.mmaUrl}
 									supporterCTA={
@@ -321,7 +314,7 @@ export const ShowcaseLayout = ({
 										CAPIArticle.nav.readerRevenueLinks
 											.header.subscribe
 									}
-									edition={CAPIArticle.editionId}
+									editionId={CAPIArticle.editionId}
 								/>
 							</ElementContainer>
 
@@ -394,7 +387,7 @@ export const ShowcaseLayout = ({
 										CAPIArticle.nav.readerRevenueLinks
 											.header.subscribe
 									}
-									edition={CAPIArticle.editionId}
+									editionId={CAPIArticle.editionId}
 								/>
 							</ElementContainer>
 						</Stuck>
@@ -526,10 +519,7 @@ export const ShowcaseLayout = ({
 							</div>
 						</GridItem>
 						<GridItem area="body">
-							<ArticleContainer
-								format={format}
-								abTests={CAPIArticle.config.abTests}
-							>
+							<ArticleContainer format={format}>
 								<ArticleBody
 									format={format}
 									blocks={CAPIArticle.blocks}
@@ -557,6 +547,7 @@ export const ShowcaseLayout = ({
 									isPreview={CAPIArticle.config.isPreview}
 									idUrl={CAPIArticle.config.idUrl || ''}
 									isDev={!!CAPIArticle.config.isDev}
+									abTests={CAPIArticle.config.abTests}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
@@ -703,7 +694,7 @@ export const ShowcaseLayout = ({
 						tags={CAPIArticle.tags}
 						format={format}
 						pillar={format.theme}
-						edition={CAPIArticle.editionId}
+						editionId={CAPIArticle.editionId}
 						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
 				</Island>
@@ -791,7 +782,7 @@ export const ShowcaseLayout = ({
 					pillar={format.theme}
 					pillars={NAV.pillars}
 					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					edition={CAPIArticle.editionId}
+					editionId={CAPIArticle.editionId}
 					contributionsServiceUrl={
 						CAPIArticle.contributionsServiceUrl
 					}
@@ -815,7 +806,12 @@ export const ShowcaseLayout = ({
 						shouldHideReaderRevenue={
 							CAPIArticle.shouldHideReaderRevenue
 						}
-						switches={CAPIArticle.config.switches}
+						remoteBannerSwitch={
+							CAPIArticle.config.switches.remoteBanner
+						}
+						puzzleBannerSwitch={
+							CAPIArticle.config.switches.puzzlesBanner
+						}
 						tags={CAPIArticle.tags}
 					/>
 				</Island>

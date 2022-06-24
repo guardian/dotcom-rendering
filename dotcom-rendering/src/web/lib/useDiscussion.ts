@@ -50,7 +50,9 @@ type CommentType = {
 	};
 };
 
-export const useDiscussion = (url: string) => {
+export const useDiscussion = (
+	url: string,
+): { commentCount?: number; isClosedForComments?: boolean } => {
 	const { data } = useApi<DiscussionResponse>(url, {
 		// The default for dedupingInterval is 2 seconds but we want to wait longer here because the cache time
 		// for a discussion is at least 15 seconds
@@ -58,7 +60,7 @@ export const useDiscussion = (url: string) => {
 	});
 
 	return {
-		commentCount: data?.discussion?.commentCount,
-		isClosedForComments: data?.discussion?.isClosedForComments,
+		commentCount: data?.discussion.commentCount,
+		isClosedForComments: data?.discussion.isClosedForComments,
 	};
 };

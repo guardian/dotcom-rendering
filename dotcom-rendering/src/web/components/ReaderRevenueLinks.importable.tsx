@@ -1,49 +1,43 @@
-import { useEffect, useState } from 'react';
-
 import { css } from '@emotion/react';
-
+import type { OphanABTestMeta, OphanComponentEvent } from '@guardian/libs';
+import { getCookie } from '@guardian/libs';
 import {
-	space,
-	brandText,
 	brandAlt,
-	neutral,
-	textSans,
-	headline,
+	brandText,
 	from,
+	headline,
+	neutral,
+	space,
+	textSans,
 	until,
 } from '@guardian/source-foundations';
-import {
-	OphanComponentEvent,
-	OphanABTestMeta,
-	getCookie,
-} from '@guardian/libs';
 import { getHeader } from '@guardian/support-dotcom-components';
-import {
+import type {
+	HeaderPayload,
 	ModuleData,
 	ModuleDataResponse,
-	HeaderPayload,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { getLocaleCode } from '../lib/getCountryCode';
+import { useEffect, useState } from 'react';
 import ArrowRightIcon from '../../static/icons/arrow-right.svg';
-
+import type { OphanRecordFunction } from '../browser/ophan/ophan';
+import {
+	getOphanRecordFunction,
+	sendOphanComponentEvent,
+	submitComponentEvent,
+} from '../browser/ophan/ophan';
+import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import {
 	getLastOneOffContributionDate,
 	MODULES_VERSION,
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
+import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useIsInView } from '../lib/useIsInView';
-import { addTrackingCodesToUrl } from '../lib/acquisitions';
-import {
-	getOphanRecordFunction,
-	OphanRecordFunction,
-	sendOphanComponentEvent,
-	submitComponentEvent,
-} from '../browser/ophan/ophan';
 import { useOnce } from '../lib/useOnce';
 
 type Props = {
-	edition: Edition;
+	editionId: EditionId;
 	dataLinkNamePrefix: string;
 	inHeader: boolean;
 	remoteHeader: boolean;
@@ -160,13 +154,13 @@ const subMessageStyles = css`
 `;
 
 const ReaderRevenueLinksRemote: React.FC<{
-	edition: Edition;
+	editionId: EditionId;
 	countryCode: string;
 	pageViewId: string;
 	contributionsServiceUrl: string;
 	ophanRecord: OphanRecordFunction;
 }> = ({
-	edition,
+	editionId,
 	countryCode,
 	pageViewId,
 	contributionsServiceUrl,
@@ -188,7 +182,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 			},
 			targeting: {
 				showSupportMessaging: !shouldHideSupportMessaging(),
-				edition,
+				edition: editionId,
 				countryCode,
 				modulesVersion: MODULES_VERSION,
 				mvtId: Number(
@@ -214,28 +208,26 @@ const ReaderRevenueLinksRemote: React.FC<{
 			})
 			.catch((error) => {
 				const msg = `Error importing RR header links: ${error}`;
-				// eslint-disable-next-line no-console
+
 				console.log(msg);
 				window.guardian.modules.sentry.reportError(
 					new Error(msg),
 					'rr-header-links',
 				);
 			});
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [countryCode]);
 
 	if (SupportHeader && supportHeaderResponse) {
 		return (
 			<div css={headerStyles}>
-				{/* eslint-disable react/jsx-props-no-spreading */}
+				{}
 				<SupportHeader
-					// @ts-ignore
+					// @ts-expect-error
 					submitComponentEvent={(
 						componentEvent: OphanComponentEvent,
 					) => submitComponentEvent(componentEvent, ophanRecord)}
 					{...supportHeaderResponse.props}
 				/>
-				{/* eslint-enable react/jsx-props-no-spreading */}
 			</div>
 		);
 	}
@@ -244,7 +236,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 };
 
 const ReaderRevenueLinksNative: React.FC<{
-	edition: Edition;
+	editionId: EditionId;
 	dataLinkNamePrefix: string;
 	inHeader: boolean;
 	urls: {
@@ -255,7 +247,7 @@ const ReaderRevenueLinksNative: React.FC<{
 	ophanRecord: OphanRecordFunction;
 	pageViewId: string;
 }> = ({
-	edition,
+	editionId,
 	dataLinkNamePrefix,
 	inHeader,
 	urls,
@@ -342,9 +334,10 @@ const ReaderRevenueLinksNative: React.FC<{
 			Subscribe <ArrowRightIcon />
 		</a>
 	);
-	const PrimaryButton = edition === 'UK' ? SubscribeButton : ContributeButton;
+	const PrimaryButton =
+		editionId === 'UK' ? SubscribeButton : ContributeButton;
 	const SecondaryButton =
-		edition === 'UK' ? ContributeButton : SubscribeButton;
+		editionId === 'UK' ? ContributeButton : SubscribeButton;
 
 	return (
 		<div ref={setNode} css={inHeader && headerStyles}>
@@ -367,7 +360,7 @@ const ReaderRevenueLinksNative: React.FC<{
 };
 
 export const ReaderRevenueLinks = ({
-	edition,
+	editionId,
 	dataLinkNamePrefix,
 	inHeader,
 	remoteHeader,
@@ -375,7 +368,7 @@ export const ReaderRevenueLinks = ({
 	contributionsServiceUrl,
 }: Props) => {
 	const [countryCode, setCountryCode] = useState<string>();
-	const pageViewId = window.guardian?.config?.ophan?.pageViewId;
+	const pageViewId = window.guardian.config.ophan.pageViewId;
 	const ophanRecord = getOphanRecordFunction();
 
 	useEffect(() => {
@@ -395,7 +388,7 @@ export const ReaderRevenueLinks = ({
 		if (inHeader && remoteHeader) {
 			return (
 				<ReaderRevenueLinksRemote
-					edition={edition}
+					editionId={editionId}
 					countryCode={countryCode}
 					pageViewId={pageViewId}
 					contributionsServiceUrl={contributionsServiceUrl}
@@ -405,7 +398,7 @@ export const ReaderRevenueLinks = ({
 		}
 		return (
 			<ReaderRevenueLinksNative
-				edition={edition}
+				editionId={editionId}
 				dataLinkNamePrefix={dataLinkNamePrefix}
 				inHeader={inHeader}
 				urls={urls}

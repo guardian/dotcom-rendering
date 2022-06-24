@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { log } from '@guardian/libs';
-import { hydrate, render, h } from 'preact';
+import type { Attributes } from 'preact';
+import { h, hydrate, render } from 'preact';
 import { initPerf } from '../initPerf';
 
 /**
@@ -14,7 +15,11 @@ import { initPerf } from '../initPerf';
  * @param data The deserialised props we want to use for hydration
  * @param element The location on the DOM where the component to hydrate exists
  */
-export const doHydration = (name: string, data: any, element: HTMLElement) => {
+export const doHydration = (
+	name: string,
+	data: Attributes | null,
+	element: HTMLElement,
+): void => {
 	// If this function has already been run for an element then don't try to
 	// run it a second time
 	const alreadyHydrated = element.dataset.guReady;

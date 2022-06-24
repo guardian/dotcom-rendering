@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
-
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { until } from '@guardian/source-foundations';
-import { ArticleDisplay, ArticleDesign } from '@guardian/libs';
-
-import { renderArticleElement } from '../lib/renderElement';
 import { getZIndex } from '../lib/getZIndex';
+import { RenderArticleElement } from '../lib/renderElement';
 
 const mainMedia = css`
 	height: 100%;
@@ -97,24 +95,26 @@ export const MainMedia: React.FC<{
 }) => {
 	return (
 		<div css={[mainMedia, chooseWrapper(format)]}>
-			{elements.map((element, index) =>
-				renderArticleElement({
-					format,
-					element,
-					adTargeting,
-					ajaxUrl,
-					host,
-					index,
-					isMainMedia: true,
-					starRating,
-					hideCaption,
-					pageId,
-					webTitle,
-					isAdFreeUser,
-					isSensitive,
-					switches,
-				}),
-			)}
+			{elements.map((element, index) => (
+				<RenderArticleElement
+					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
+					key={index}
+					format={format}
+					element={element}
+					adTargeting={adTargeting}
+					ajaxUrl={ajaxUrl}
+					host={host}
+					index={index}
+					isMainMedia={true}
+					pageId={pageId}
+					webTitle={webTitle}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					switches={switches}
+					hideCaption={hideCaption}
+					starRating={starRating}
+				/>
+			))}
 		</div>
 	);
 };

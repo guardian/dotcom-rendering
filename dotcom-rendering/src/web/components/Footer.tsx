@@ -1,29 +1,28 @@
 import { css } from '@emotion/react';
-
+import { ArticleDisplay } from '@guardian/libs';
 import {
+	between,
 	brand,
-	brandText,
 	brandAlt,
 	brandBackground,
-	textSans,
+	brandText,
 	from,
+	neutral,
+	space,
+	textSans,
 	until,
 } from '@guardian/source-foundations';
-
-import { ArticleDisplay } from '@guardian/libs';
+import {
+	LinkButton,
+	SvgArrowRightStraight,
+} from '@guardian/source-react-components';
 import { clearFix } from '../../lib/mixins';
-import { Pillars, pillarWidth, firstPillarWidth } from './Pillars';
 import { BackToTop } from './BackToTop';
 import { Island } from './Island';
+import { Pillars } from './Pillars';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 // CSS vars
-const emailSignupSideMargins = 10;
-const footerItemContainerPadding = 20;
-const emailSignupWidth =
-	pillarWidth +
-	firstPillarWidth -
-	(emailSignupSideMargins * 2 + footerItemContainerPadding);
 const footerBorders = `1px solid ${brand[600]}`;
 
 // CSS
@@ -52,26 +51,29 @@ const pillarWrap = css`
 `;
 
 const emailSignup = css`
-	padding-top: 12px;
-	min-height: 150px;
-	overflow: hidden;
-	border: 0;
+	padding-top: ${space[2]}px;
+	margin-right: 10px;
+	margin-bottom: ${space[3]}px;
 
-	${from.desktop} {
-		margin: 0 ${emailSignupSideMargins}px;
-		display: flex;
-		flex-direction: row;
+	${between.desktop.and.leftCol} {
 		float: left;
-		width: ${emailSignupWidth}px;
+		width: 247px;
 	}
-
+	${between.leftCol.and.wide} {
+		width: 325px;
+	}
 	${from.wide} {
-		margin-right: ${pillarWidth * 2 +
-		firstPillarWidth -
-		(emailSignupWidth +
-			emailSignupSideMargins +
-			footerItemContainerPadding)}px;
+		width: 498px;
 	}
+`;
+
+const emailSignupButton = css`
+	color: ${brandBackground.primary};
+	background-color: ${brandText.primary};
+	:hover {
+		background-color: ${neutral[86]};
+	}
+	margin-top: ${space[3]}px;
 `;
 
 const footerLink = css`
@@ -165,12 +167,12 @@ const footerItemContainers = css`
 	}
 
 	width: 100%;
-	padding: 0 ${footerItemContainerPadding / 2}px;
+	padding: 0 10px;
 	position: relative;
 	border: ${footerBorders};
 
 	${from.mobileLandscape} {
-		padding: 0 ${footerItemContainerPadding}px;
+		padding: 0 20px;
 	}
 `;
 
@@ -185,12 +187,12 @@ const bttPosition = css`
 const FooterLinks = ({
 	pageFooter,
 	urls,
-	edition,
+	editionId,
 	contributionsServiceUrl,
 }: {
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
-	edition: Edition;
+	editionId: EditionId;
 	contributionsServiceUrl: string;
 }) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
@@ -214,7 +216,7 @@ const FooterLinks = ({
 			<Island deferUntil="visible" clientOnly={true}>
 				<ReaderRevenueLinks
 					urls={urls}
-					edition={edition}
+					editionId={editionId}
 					dataLinkNamePrefix="footer : "
 					inHeader={false}
 					remoteHeader={false}
@@ -234,19 +236,32 @@ const FooterLinks = ({
 
 const year = new Date().getFullYear();
 
+const decideSignupLink = (edition: EditionId): string => {
+	switch (edition) {
+		case 'US':
+			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-us';
+		case 'AU':
+			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-au';
+		case 'UK':
+		case 'INT': // There's no international version so we default to UK
+		default:
+			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-uk';
+	}
+};
+
 export const Footer = ({
 	pillars,
 	pillar,
 	pageFooter,
 	urls,
-	edition,
+	editionId,
 	contributionsServiceUrl,
 }: {
 	pillars: PillarType[];
 	pillar: ArticleTheme;
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
-	edition: Edition;
+	editionId: EditionId;
 	contributionsServiceUrl: string;
 }) => (
 	<div
@@ -265,20 +280,26 @@ export const Footer = ({
 			/>
 		</div>
 		<div css={footerItemContainers}>
-			<iframe
-				title="Guardian Email Sign-up Form"
-				src="https://www.theguardian.com/email/form/footer/today-uk"
-				id="footer__email-form"
-				css={emailSignup}
-				data-form-success-desc="We will send you our picks of the most important headlines tomorrow morning."
-				data-node-uid="2"
-				height="100"
-			/>
+			<div css={emailSignup}>
+				<div>
+					All the day's headlines and highlights from the Guardian,
+					direct to you every morning
+				</div>
+				<LinkButton
+					size="small"
+					href={decideSignupLink(editionId)}
+					cssOverrides={emailSignupButton}
+					icon={<SvgArrowRightStraight />}
+					iconSide="right"
+				>
+					Sign up for our email
+				</LinkButton>
+			</div>
 
 			<FooterLinks
 				pageFooter={pageFooter}
 				urls={urls}
-				edition={edition}
+				editionId={editionId}
 				contributionsServiceUrl={contributionsServiceUrl}
 			/>
 			<div css={bttPosition}>

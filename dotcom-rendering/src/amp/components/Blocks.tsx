@@ -1,12 +1,10 @@
-import React from 'react';
 import { css } from '@emotion/react';
-
-import { text, neutral, textSans } from '@guardian/source-foundations';
-
-import { Elements } from './Elements';
+import { neutral, text, textSans } from '@guardian/source-foundations';
+import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import { blockLink } from '../lib/block-link';
 import { findBlockAdSlots } from '../lib/find-adslots';
+import { Elements } from './Elements';
 import { RegionalAd } from './RegionalAd';
 
 const adStyle = css`
@@ -64,7 +62,7 @@ const clearBoth = css`
 export const Blocks: React.FunctionComponent<{
 	blocks: Block[];
 	pillar: ArticleTheme;
-	edition: Edition;
+	editionId: EditionId;
 	section?: string;
 	contentType: string;
 	switches: Switches;
@@ -75,7 +73,7 @@ export const Blocks: React.FunctionComponent<{
 }> = ({
 	blocks,
 	pillar,
-	edition,
+	editionId,
 	section,
 	contentType,
 	switches,
@@ -121,7 +119,7 @@ export const Blocks: React.FunctionComponent<{
 	const slotIndexes = findBlockAdSlots(liveBlogBlocks);
 	const adInfo = {
 		section,
-		edition,
+		editionId,
 		contentType,
 		commercialProperties,
 		switches: {
@@ -149,7 +147,7 @@ export const Blocks: React.FunctionComponent<{
 								css={adStyle}
 							>
 								<RegionalAd
-									edition={edition}
+									editionId={editionId}
 									section={section || ''}
 									contentType={contentType}
 									config={adConfig}

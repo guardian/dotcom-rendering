@@ -1,5 +1,4 @@
 import get from 'lodash.get';
-
 import { findPillar } from './find-pillar';
 
 type ObjectType = { [key: string]: any };
@@ -81,8 +80,7 @@ const buildRRLinkModel = (data: any): ReaderRevenuePositions => ({
 	ampFooter: buildRRLinkCategories(data, 'ampFooter'),
 });
 
-// TODO refactor now that we know data must be CAPINavType.
-export const extractNAV = (data: any): NavType => {
+export const extractNAV = (data: CAPINavType): NavType => {
 	let pillars = getArray<any>(data, 'pillars');
 
 	pillars = pillars.map((link) => getLink(link, { isPillar: true }));

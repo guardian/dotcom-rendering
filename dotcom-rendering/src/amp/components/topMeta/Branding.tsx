@@ -1,10 +1,9 @@
-import React from 'react';
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
+import React from 'react';
+import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
+import { isEditionId } from '../../lib/edition';
 import { regionClasses } from '../../lib/region-classes';
-
-import { pillarPalette_DO_NOT_USE, neutralBorder } from '../../../lib/pillars';
-import { isEdition } from '../../lib/edition';
 
 const LinkStyle = (pillar: ArticleTheme) => css`
 	a {
@@ -70,11 +69,11 @@ export const BrandingRegionContainer: React.FC<{
 }> = ({ children, commercialProperties }) => (
 	<>
 		{Object.keys(commercialProperties)
-			.filter(isEdition)
+			.filter(isEditionId)
 			.map((editionId) => {
 				const { branding } = commercialProperties[editionId];
 				return branding !== undefined ? (
-					<div css={regionClasses[editionId]}>
+					<div key={editionId} css={regionClasses[editionId]}>
 						{children(branding)}
 					</div>
 				) : null;

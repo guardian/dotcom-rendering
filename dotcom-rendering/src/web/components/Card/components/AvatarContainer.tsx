@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-
 import { from, until } from '@guardian/source-foundations';
 
 type Props = {

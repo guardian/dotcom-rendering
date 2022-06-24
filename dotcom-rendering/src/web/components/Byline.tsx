@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
-
-import { headline, textSans, until } from '@guardian/source-foundations';
 import { ArticleSpecial } from '@guardian/libs';
+import { headline, textSans, until } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {

@@ -1,6 +1,6 @@
 import type { ArticleFormat } from '@guardian/libs';
 import AdSlot from 'adSlot';
-import Paragraph from 'components/paragraph';
+import Paragraph from 'components/Paragraph';
 import type { ReactNode } from 'react';
 import { createElement as h, isValidElement } from 'react';
 

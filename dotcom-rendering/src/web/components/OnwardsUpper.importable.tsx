@@ -1,11 +1,9 @@
 import { css } from '@emotion/react';
-
 import { ArticlePillar } from '@guardian/libs';
 import { joinUrl } from '../../lib/joinUrl';
-import { ElementContainer } from './ElementContainer';
-
-import { OnwardsData } from './OnwardsData';
 import { Carousel } from './Carousel';
+import { ElementContainer } from './ElementContainer';
+import { OnwardsData } from './OnwardsData';
 import { OnwardsLayout } from './OnwardsLayout';
 
 type PillarForContainer =
@@ -112,13 +110,13 @@ const containerUrls = {
 	},
 };
 
-const getContainer = (pillar: PillarForContainer, edition: Edition) => {
-	return containerUrls[pillar][edition];
+const getContainer = (pillar: PillarForContainer, editionId: EditionId) => {
+	return containerUrls[pillar][editionId];
 };
 
 const getContainerDataUrl = (
 	pillar: ArticleTheme,
-	edition: Edition,
+	editionId: EditionId,
 	ajaxUrl: string,
 ) => {
 	switch (pillar) {
@@ -126,37 +124,37 @@ const getContainerDataUrl = (
 			return joinUrl([
 				ajaxUrl,
 				'container/data',
-				`${getContainer('sport', edition)}.json`,
+				`${getContainer('sport', editionId)}.json`,
 			]);
 		case ArticlePillar.News:
 			return joinUrl([
 				ajaxUrl,
 				'container/data',
-				`${getContainer('headlines', edition)}.json`,
+				`${getContainer('headlines', editionId)}.json`,
 			]);
 		case ArticlePillar.Culture:
 			return joinUrl([
 				ajaxUrl,
 				'container/data',
-				`${getContainer('culture', edition)}.json`,
+				`${getContainer('culture', editionId)}.json`,
 			]);
 		case ArticlePillar.Lifestyle:
 			return joinUrl([
 				ajaxUrl,
 				'container/data',
-				`${getContainer('lifestyle', edition)}.json`,
+				`${getContainer('lifestyle', editionId)}.json`,
 			]);
 		case ArticlePillar.Opinion:
 			return joinUrl([
 				ajaxUrl,
 				'container/data',
-				`${getContainer('opinion', edition)}.json`,
+				`${getContainer('opinion', editionId)}.json`,
 			]);
 		default:
 			return joinUrl([
 				ajaxUrl,
 				'container/data',
-				`${getContainer('headlines', edition)}.json`,
+				`${getContainer('headlines', editionId)}.json`,
 			]);
 	}
 };
@@ -173,7 +171,7 @@ type Props = {
 	contentType: string;
 	tags: TagType[];
 	format: ArticleFormat;
-	edition: Edition;
+	editionId: EditionId;
 	pillar: ArticleTheme;
 	shortUrlId: string;
 };
@@ -191,7 +189,7 @@ export const OnwardsUpper = ({
 	tags,
 	format,
 	pillar,
-	edition,
+	editionId,
 	shortUrlId,
 }: Props) => {
 	// Related content can be a collection of articles based on
@@ -269,7 +267,7 @@ export const OnwardsUpper = ({
 	}
 
 	const curatedDataUrl = showRelatedContent
-		? getContainerDataUrl(pillar, edition, ajaxUrl)
+		? getContainerDataUrl(pillar, editionId, ajaxUrl)
 		: null;
 
 	return (

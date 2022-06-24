@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
-
 import { brandBackground } from '@guardian/source-foundations';
-
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
 export default {
@@ -36,7 +34,7 @@ export const Header = () => {
 	return (
 		<Container>
 			<ReaderRevenueLinks
-				edition="UK"
+				editionId="UK"
 				urls={revenueUrls}
 				dataLinkNamePrefix=""
 				inHeader={true}
@@ -58,7 +56,7 @@ export const HeaderMobile = () => {
 	return (
 		<Container>
 			<ReaderRevenueLinks
-				edition="UK"
+				editionId="UK"
 				urls={revenueUrls}
 				dataLinkNamePrefix=""
 				inHeader={true}
@@ -80,7 +78,7 @@ export const Footer = () => {
 	return (
 		<Container>
 			<ReaderRevenueLinks
-				edition="UK"
+				editionId="UK"
 				urls={revenueUrls}
 				dataLinkNamePrefix=""
 				inHeader={false}
@@ -102,7 +100,7 @@ export const FooterMobile = () => {
 	return (
 		<Container>
 			<ReaderRevenueLinks
-				edition="UK"
+				editionId="UK"
 				urls={revenueUrls}
 				dataLinkNamePrefix=""
 				inHeader={false}

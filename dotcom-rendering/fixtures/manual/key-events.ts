@@ -1,56 +1,74 @@
-import { ArticleDisplay, ArticlePillar, ArticleDesign } from '@guardian/libs';
-import { KeyEvent } from 'src/web/components/KeyEventCard';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
-const getDate = (milliSeconds = 1, seconds = 1, minutes = 1, hours = 1) =>
-	new Date(Date.now() - milliSeconds * seconds * minutes * hours);
-
+export interface KeyEventCard {
+	id: string;
+	blockFirstPublished: number;
+	title: string;
+	isSummary: boolean;
+	filterKeyEvents: boolean;
+	format: ArticleFormat;
+}
 const format = {
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
 	theme: ArticlePillar.News,
 };
 
-export const events: KeyEvent[] = [
+export const events: KeyEventCard[] = [
 	{
-		date: getDate(),
-		text: 'Biden heads to Europe to announce new sanctions on Russian Duma',
-		url: 'https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy',
+		id: '1234',
+		blockFirstPublished: 1613762399000,
+		title: 'Biden heads to Europe to announce new sanctions on Russian Duma',
 		format,
+		isSummary: false,
+		filterKeyEvents: false,
 	},
 	{
-		date: getDate(1000, 30),
-		text: `Pope 'embarrassed' by West's increased military spending`,
-		url: 'https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy',
+		id: '1234',
+		blockFirstPublished: 1613762399000,
+		title: `Pope 'embarrassed' by West's increased military spending`,
 		format,
+		isSummary: false,
+		filterKeyEvents: false,
 	},
 	{
-		date: getDate(1000, 60, 30),
-		text: 'Kremlin: sending peacekeepers to Ukraine would be ‘reckless and extremely dangerous’',
-		url: 'https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy',
+		id: '1234',
+		blockFirstPublished: 1613762399000,
+		title: 'Kremlin: sending peacekeepers to Ukraine would be ‘reckless and extremely dangerous’',
 		format,
+		isSummary: false,
+		filterKeyEvents: false,
 	},
 	{
-		date: getDate(1000, 60, 30, 3),
-		text: 'Pentagon condemns Kremlin refusal to rule out use of nuclear weapons',
-		url: 'https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy',
+		id: '1234',
+		blockFirstPublished: 1613762399000,
+		title: 'Summary: Pentagon condemns Kremlin refusal to rule out use of nuclear weapons',
 		format,
+		isSummary: true,
+		filterKeyEvents: false,
 	},
 	{
-		date: getDate(1000, 60, 60, 10),
-		text: 'Biden heads to Europe to announce new sanctions on Russian Duma',
-		url: 'https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy',
+		id: '1234',
+		blockFirstPublished: 1613762399000,
+		title: 'Biden heads to Europe to announce new sanctions on Russian Duma',
 		format,
+		isSummary: false,
+		filterKeyEvents: false,
 	},
 	{
-		date: getDate(1000, 60, 60, 24),
-		text: `Mariupol under 'constant bombing', Russia seizes humanitarian convoy, Zelenskiy says`,
-		url: 'https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy',
+		id: '1234',
+		blockFirstPublished: 1613762399000,
+		title: `Mariupol under 'constant bombing', Russia seizes humanitarian convoy, Zelenskiy says`,
 		format,
+		isSummary: false,
+		filterKeyEvents: false,
 	},
 	{
-		date: getDate(1000, 60, 60, 48),
-		text: 'Summary and welcome',
-		url: 'https://www.theguardian.com/environment/2021/sep/01/opec-member-urges-oil-producers-to-focus-more-on-renewable-energy',
+		id: '1234',
+		blockFirstPublished: 1613762399000,
+		title: 'Summary and welcome',
 		format,
+		isSummary: true,
+		filterKeyEvents: false,
 	},
 ];

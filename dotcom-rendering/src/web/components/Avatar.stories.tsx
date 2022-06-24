@@ -5,7 +5,6 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-
 import { Avatar } from './Avatar';
 
 export default {

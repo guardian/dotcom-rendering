@@ -1,10 +1,10 @@
-import { whenVisible } from './whenVisible';
-import { whenIdle } from './whenIdle';
 import { doHydration } from './doHydration';
 import { getName } from './getName';
 import { getProps } from './getProps';
+import { whenIdle } from './whenIdle';
+import { whenVisible } from './whenVisible';
 
-export const initHydration = (elements: NodeListOf<Element>) => {
+export const initHydration = (elements: NodeListOf<Element>): void => {
 	/**
 	 * Partial Hydration / React Islands
 	 *

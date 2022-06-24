@@ -26,7 +26,7 @@ collectAndSendAWSMetrics(
 	freePhysicalMemory,
 );
 
-export const recordBaselineCloudWatchMetrics = () => {
+export const recordBaselineCloudWatchMetrics = (): void => {
 	maxHeapMemory.record(process.memoryUsage().heapTotal);
 	usedHeapMemory.record(process.memoryUsage().heapUsed);
 	totalPhysicalMemory.record(os.totalmem());

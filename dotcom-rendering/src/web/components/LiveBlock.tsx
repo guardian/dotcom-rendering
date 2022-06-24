@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
-
+// eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
-import { renderArticleElement } from '../lib/renderElement';
-
-import { ShareIcons } from './ShareIcons';
+import { RenderArticleElement } from '../lib/renderElement';
 import { LastUpdated } from './LastUpdated';
+import { ShareIcons } from './ShareIcons';
 
 type Props = {
 	format: ArticleFormat;
@@ -65,22 +64,24 @@ export const LiveBlock = ({
 			host={host}
 			pageId={pageId}
 		>
-			{block.elements.map((element, index) =>
-				renderArticleElement({
-					format,
-					element,
-					isMainMedia: false,
-					host,
-					adTargeting,
-					ajaxUrl,
-					index,
-					pageId,
-					webTitle,
-					isAdFreeUser,
-					isSensitive,
-					switches,
-				}),
-			)}
+			{block.elements.map((element, index) => (
+				<RenderArticleElement
+					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
+					key={index}
+					format={format}
+					element={element}
+					adTargeting={adTargeting}
+					ajaxUrl={ajaxUrl}
+					host={host}
+					index={index}
+					isMainMedia={false}
+					pageId={pageId}
+					webTitle={webTitle}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					switches={switches}
+				/>
+			))}
 			<footer
 				css={css`
 					display: flex;

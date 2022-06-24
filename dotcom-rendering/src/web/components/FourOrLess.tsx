@@ -1,10 +1,7 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import { ArticleDesign } from '@guardian/libs';
-
 import { Card } from './Card/Card';
-import { UL } from './Card/components/UL';
 import { LI } from './Card/components/LI';
+import { UL } from './Card/components/UL';
 
 type Props = {
 	content: TrailType[];
@@ -40,6 +37,7 @@ export const FourOrLess = ({ content, containerPalette }: Props) => {
 					>
 						<Card
 							containerPalette={containerPalette}
+							showAge={true}
 							linkTo={trail.url}
 							format={trail.format}
 							headlineText={trail.headline}
@@ -60,9 +58,9 @@ export const FourOrLess = ({ content, containerPalette }: Props) => {
 							imageUrl={trail.image}
 							mediaType={trail.mediaType}
 							mediaDuration={trail.mediaDuration}
-							commentCount={trail.commentCount}
 							starRating={trail.starRating}
 							branding={trail.branding}
+							discussionId={trail.discussionId}
 						/>
 					</LI>
 				))}

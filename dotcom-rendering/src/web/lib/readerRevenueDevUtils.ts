@@ -1,10 +1,6 @@
-import {
-	CountryCode,
-	setCookie,
-	getCookie,
-	removeCookie,
-} from '@guardian/libs';
-import { getLocaleCode, overrideCountryCode } from './getCountryCode';
+import type { CountryCode } from '@guardian/libs';
+import { getCookie, removeCookie, setCookie } from '@guardian/libs';
+import { setAlreadyVisited } from './alreadyVisited';
 import {
 	HIDE_SUPPORT_MESSAGING_COOKIE,
 	RECURRING_CONTRIBUTOR_COOKIE,
@@ -12,7 +8,7 @@ import {
 	SUPPORT_RECURRING_CONTRIBUTOR_ANNUAL_COOKIE,
 	SUPPORT_RECURRING_CONTRIBUTOR_MONTHLY_COOKIE,
 } from './contributions';
-import { setAlreadyVisited } from './alreadyVisited';
+import { getLocaleCode, overrideCountryCode } from './getCountryCode';
 
 const readerRevenueCookies = [
 	HIDE_SUPPORT_MESSAGING_COOKIE,
@@ -76,11 +72,9 @@ const clearCommonReaderRevenueStateAndReload = (
 	shouldHideReaderRevenue: boolean,
 ): void => {
 	if (shouldHideReaderRevenue) {
-		/* eslint-disable no-alert */
 		alert(
 			'This page has "Prevent membership/contribution appeals" ticked in Composer. Please try a different page',
 		);
-		/* eslint-enable no-alert */
 		return;
 	}
 
@@ -95,7 +89,7 @@ const clearCommonReaderRevenueStateAndReload = (
 };
 
 const showMeTheEpic = (
-	asExistingSupporter: boolean = false,
+	asExistingSupporter = false,
 	shouldHideReaderRevenue: boolean,
 ): void => {
 	clearCommonReaderRevenueStateAndReload(
@@ -105,7 +99,7 @@ const showMeTheEpic = (
 };
 
 const showMeTheBanner = (
-	asExistingSupporter: boolean = false,
+	asExistingSupporter = false,
 	shouldHideReaderRevenue: boolean,
 ): void => {
 	clearBannerLastClosedAt();
@@ -117,7 +111,7 @@ const showMeTheBanner = (
 };
 
 const showNextVariant = (
-	asExistingSupporter: boolean = false,
+	asExistingSupporter = false,
 	shouldHideReaderRevenue: boolean,
 ): void => {
 	incrementMvtCookie();
@@ -128,7 +122,7 @@ const showNextVariant = (
 };
 
 const showPreviousVariant = (
-	asExistingSupporter: boolean = false,
+	asExistingSupporter = false,
 	shouldHideReaderRevenue: boolean,
 ): void => {
 	decrementMvtCookie();
@@ -139,12 +133,11 @@ const showPreviousVariant = (
 };
 
 const changeGeolocation = (
-	asExistingSupporter: boolean = false,
+	asExistingSupporter = false,
 	shouldHideReaderRevenue: boolean,
 ): void => {
 	getLocaleCode()
 		.then((current) => {
-			/* eslint-disable no-alert */
 			const geo = window.prompt(
 				`Enter two-letter geolocation code (e.g. GB, US, AU). Current is ${current}.`,
 			);
@@ -159,7 +152,6 @@ const changeGeolocation = (
 					shouldHideReaderRevenue,
 				);
 			}
-			/* eslint-enable no-alert */
 		})
 		.catch((e) => console.error(`changeGeolocation - error: ${e}`));
 };

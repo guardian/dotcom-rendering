@@ -3,7 +3,7 @@ import { transformDots } from './transformDots';
 const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {
 	// Loop over elements and check if a dot is in the TextBlockElement
 	const enhanced: CAPIElement[] = [];
-	elements.map((element, i) => {
+	elements.forEach((element, i) => {
 		if (
 			element._type ===
 				'model.dotcomrendering.pageElements.TextBlockElement' &&

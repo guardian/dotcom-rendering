@@ -1,8 +1,8 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { initHydration } from '../browser/islands/initHydration';
-import { useApi } from '../lib/useApi';
 import { updateTimeElement } from '../browser/relativeTime/updateTimeElements';
+import { useApi } from '../lib/useApi';
 import { Toast } from './Toast';
 
 type Props = {
@@ -11,11 +11,12 @@ type Props = {
 	ajaxUrl: string;
 	filterKeyEvents: boolean;
 	format: ArticleFormat;
-	switches: Switches;
+	enhanceTweetsSwitch: boolean;
 	onFirstPage: boolean;
 	webURL: string;
 	mostRecentBlockId: string;
 	hasPinnedPost: boolean;
+	activeTopic?: string;
 };
 
 const isServer = typeof window === 'undefined';
@@ -41,7 +42,7 @@ const toastRoot: Element | null = !isServer
  * @param {string} html The block html to be inserted
  * @returns void
  */
-function insert(html: string, switches: Switches) {
+function insert(html: string, enhanceTweetsSwitch: boolean) {
 	// Create
 	// ------
 	const template = document.createElement('template');
@@ -65,7 +66,7 @@ function insert(html: string, switches: Switches) {
 
 	// Enhance
 	// -----------
-	if (switches.enhanceTweets) {
+	if (enhanceTweetsSwitch) {
 		const pendingBlocks =
 			blogBody.querySelectorAll<HTMLElement>('.pending.block');
 		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/scripting-loading-and-initialization
@@ -106,6 +107,7 @@ function getKey(
 	ajaxUrl: string,
 	latestBlockId: string,
 	filterKeyEvents: boolean,
+	activeTopic?: string,
 ): string | undefined {
 	try {
 		// Construct the url to poll
@@ -117,6 +119,7 @@ function getKey(
 			'filterKeyEvents',
 			filterKeyEvents ? 'true' : 'false',
 		);
+		if (activeTopic) url.searchParams.set('activeTopic', activeTopic);
 		return url.href;
 	} catch {
 		window.guardian.modules.sentry.reportError(
@@ -137,11 +140,12 @@ export const Liveness = ({
 	ajaxUrl,
 	filterKeyEvents,
 	format,
-	switches,
+	enhanceTweetsSwitch,
 	onFirstPage,
 	webURL,
 	mostRecentBlockId,
 	hasPinnedPost,
+	activeTopic,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [topOfBlogVisible, setTopOfBlogVisible] = useState<boolean>();
@@ -159,7 +163,7 @@ export const Liveness = ({
 				// Insert the new blocks in the dom (but hidden)
 				if (onFirstPage) {
 					try {
-						insert(data.html, switches);
+						insert(data.html, enhanceTweetsSwitch);
 					} catch (e) {
 						console.log('>> failed >>', e);
 					}
@@ -189,7 +193,7 @@ export const Liveness = ({
 				}
 			}
 		},
-		[onFirstPage, topOfBlogVisible, numHiddenBlocks, switches],
+		[onFirstPage, topOfBlogVisible, numHiddenBlocks, enhanceTweetsSwitch],
 	);
 
 	/**
@@ -203,11 +207,14 @@ export const Liveness = ({
 	window.mockLiveUpdate = onSuccess;
 
 	// useApi returns { data, loading, error } but we're not using them here
-	useApi(getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents), {
-		refreshInterval: 10_000,
-		refreshWhenHidden: true,
-		onSuccess,
-	});
+	useApi(
+		getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents, activeTopic),
+		{
+			refreshInterval: 10_000,
+			refreshWhenHidden: true,
+			onSuccess,
+		},
+	);
 
 	useEffect(() => {
 		document.title =

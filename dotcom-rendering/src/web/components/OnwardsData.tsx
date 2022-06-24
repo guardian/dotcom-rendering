@@ -1,10 +1,9 @@
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
-import { useApi } from '../lib/useApi';
-
 import { decideTrail } from '../lib/decideTrail';
-import { Placeholder } from './Placeholder';
 import { revealStyles } from '../lib/revealStyles';
+import { useApi } from '../lib/useApi';
+import { Placeholder } from './Placeholder';
 
 type Props = {
 	url: string;
@@ -45,10 +44,10 @@ export const OnwardsData = ({
 
 	useEffect(() => {
 		if (data) {
-			const pendingElements = document?.querySelectorAll<HTMLElement>(
+			const pendingElements = document.querySelectorAll<HTMLElement>(
 				'.onwards > .pending',
 			);
-			pendingElements?.forEach((element) => {
+			pendingElements.forEach((element) => {
 				element.classList.add('reveal');
 				element.classList.remove('pending');
 			});
@@ -57,7 +56,7 @@ export const OnwardsData = ({
 
 	if (error) {
 		// Send the error to Sentry and then prevent the element from rendering
-		window?.guardian?.modules?.sentry?.reportError(error, 'onwards-lower');
+		window.guardian.modules.sentry.reportError(error, 'onwards-lower');
 		return null;
 	}
 

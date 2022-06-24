@@ -1,13 +1,13 @@
 import { css } from '@emotion/react';
-
-import { space, from } from '@guardian/source-foundations';
-import { ArticleFormat, ArticleDesign } from '@guardian/libs';
-import { ElementContainer } from './ElementContainer';
-import { LeftColumn } from './LeftColumn';
-import { ContainerTitle } from './ContainerTitle';
-import { Hide } from './Hide';
-import { Flex } from './Flex';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
+import { from, space } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { ContainerTitle } from './ContainerTitle';
+import { ElementContainer } from './ElementContainer';
+import { Flex } from './Flex';
+import { Hide } from './Hide';
+import { LeftColumn } from './LeftColumn';
 
 type Props = {
 	title?: string;
@@ -31,6 +31,9 @@ type Props = {
 	ophanComponentName?: string;
 	ophanComponentLink?: string;
 	containerPalette?: DCRContainerPalette;
+	innerBackgroundColour?: string;
+	showDateHeader?: boolean;
+	editionId?: EditionId;
 };
 
 const containerStyles = css`
@@ -120,6 +123,9 @@ export const ContainerLayout = ({
 	ophanComponentLink,
 	ophanComponentName,
 	containerPalette,
+	innerBackgroundColour,
+	showDateHeader,
+	editionId,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -136,6 +142,7 @@ export const ContainerLayout = ({
 			element="section"
 			ophanComponentLink={ophanComponentLink}
 			ophanComponentName={ophanComponentName}
+			innerBackgroundColour={innerBackgroundColour}
 		>
 			<Flex>
 				<LeftColumn
@@ -149,6 +156,9 @@ export const ContainerLayout = ({
 							fontColour={fontColour || overrides?.text.container}
 							description={description}
 							url={url}
+							containerPalette={containerPalette}
+							showDateHeader={showDateHeader}
+							editionId={editionId}
 						/>
 						{leftContent}
 					</>
@@ -165,6 +175,8 @@ export const ContainerLayout = ({
 							fontColour={fontColour || overrides?.text.container}
 							description={description}
 							url={url}
+							showDateHeader={showDateHeader}
+							editionId={editionId}
 						/>
 					</Hide>
 					{children}

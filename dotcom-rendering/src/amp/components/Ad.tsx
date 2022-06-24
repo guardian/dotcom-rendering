@@ -1,5 +1,6 @@
 import { adJson, stringify } from '../lib/ad-json';
-import { realTimeConfig, RTCParameters } from '../lib/real-time-config';
+import type { RTCParameters } from '../lib/real-time-config';
+import { realTimeConfig } from '../lib/real-time-config';
 import { useContentABTestGroup } from './ContentABTest';
 
 // Largest size first
@@ -24,7 +25,8 @@ const ampData = (section: string, contentType: string): string => {
 	return `/${dfpAccountId}/${dfpAdUnitRoot}/amp`;
 };
 
-const relevantYieldURLPrefix = 'https://pbs.relevant-digital.com/openrtb2/amp';
+const relevantYieldURLPrefix =
+	'https://guardian-pbs.relevant-digital.com/openrtb2/amp';
 
 const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
 	const adTargetingMapped: AdTargetParam[] = [];
@@ -47,8 +49,8 @@ const mapAdTargeting = (adTargeting: AdTargeting): AdTargetParam[] => {
 // Variants for the Prebid server test
 // Assign each variant 4 groups e.g. 33.3% of content types each
 const variants = {
-	'relevant-yield': new Set([0, 1, 4, 5, 6, 7]),
-	pubmatic: new Set([2, 3, 8, 9, 10, 11]),
+	'relevant-yield': new Set<number>([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]),
+	pubmatic: new Set<number>([]),
 };
 
 // Determine participation in a variant from group
@@ -124,7 +126,7 @@ interface CommercialConfig {
 }
 
 export interface BaseAdProps {
-	edition: Edition;
+	editionId: EditionId;
 	section: string;
 	contentType: string;
 	commercialProperties: CommercialProperties;
@@ -139,7 +141,7 @@ interface AdProps extends BaseAdProps {
 
 export const Ad = ({
 	isSticky = false,
-	edition,
+	editionId,
 	section,
 	contentType,
 	commercialProperties,
@@ -178,7 +180,7 @@ export const Ad = ({
 			type="doubleclick"
 			json={stringify(
 				adJson([
-					...commercialProperties[edition].adTargeting,
+					...commercialProperties[editionId].adTargeting,
 					...mapAdTargeting(adTargeting),
 				]),
 			)}

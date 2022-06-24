@@ -1,12 +1,9 @@
-import { useState, useEffect } from 'react';
 import { css } from '@emotion/react';
-
-import { textSans, neutral } from '@guardian/source-foundations';
+import { neutral, textSans } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
-
-import PlusIcon from '../../static/icons/plus.svg';
+import { useEffect, useState } from 'react';
 import MinusIcon from '../../static/icons/minus.svg';
-
+import PlusIcon from '../../static/icons/plus.svg';
 import { decidePalette } from '../lib/decidePalette';
 import { Form } from './Callout/Form';
 
@@ -120,7 +117,7 @@ const buttonWrapperStyles = css`
 	pointer-events: all;
 `;
 
-// Normally forms are in Modals, but here they are embeded into the page
+// Normally forms are in Modals, but here they are embedded into the page
 // we therefore need to only focus on expandFormButtonRef if the form has been closed
 // after it was opened
 let hasFormBeenOpened = true;
@@ -263,7 +260,7 @@ export const CalloutBlockComponent = ({
 		}
 	}, [isExpanded, expandFormButtonRef]);
 
-	// Normally forms are in Modals, but here they are embeded into the page
+	// Normally forms are in Modals, but here they are embedded into the page
 	// we therefore need to only focus on expandFormButtonRef if the form has been closed
 	// after it was opened
 	useEffect(() => {

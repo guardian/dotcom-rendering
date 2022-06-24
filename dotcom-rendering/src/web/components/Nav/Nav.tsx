@@ -1,19 +1,15 @@
 import { css, ThemeProvider } from '@emotion/react';
-
-import { visuallyHidden, space, until } from '@guardian/source-foundations';
+import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import { space, until, visuallyHidden } from '@guardian/source-foundations';
 import {
-	LinkButton,
 	buttonThemeReaderRevenue,
+	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
-import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { Pillars } from '../Pillars';
-import { GuardianRoundel } from '../GuardianRoundel';
-
-import { Hide } from '../Hide';
-
 import { clearFix } from '../../../lib/mixins';
-
+import { GuardianRoundel } from '../GuardianRoundel';
+import { Hide } from '../Hide';
+import { Pillars } from '../Pillars';
 import { navInputCheckboxId, showMoreButtonId, veggieBurgerId } from './config';
 import { ExpandedMenu } from './ExpandedMenu/ExpandedMenu';
 
@@ -21,7 +17,7 @@ type Props = {
 	format: ArticleFormat;
 	nav: NavType;
 	subscribeUrl: string;
-	edition: Edition;
+	editionId: EditionId;
 };
 
 const clearFixStyle = css`
@@ -66,7 +62,7 @@ const PositionButton = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
+export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
 	const displayRoundel =
 		format.display === ArticleDisplay.Immersive ||
 		format.theme === ArticleSpecial.Labs;
@@ -180,7 +176,7 @@ export const Nav = ({ format, nav, subscribeUrl, edition }: Props) => {
 									iconSide="right"
 									icon={<SvgArrowRightStraight />}
 									data-link-name="nav2 : support-cta"
-									data-edition={edition}
+									data-edition={editionId}
 									href={subscribeUrl}
 								>
 									Subscribe

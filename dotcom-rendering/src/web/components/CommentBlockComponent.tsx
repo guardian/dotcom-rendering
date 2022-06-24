@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import {
-	textSans,
 	neutral,
 	space,
 	text as textColor,
+	textSans,
 } from '@guardian/source-foundations';
 import { unescapeData } from '../../lib/escapeData';
 

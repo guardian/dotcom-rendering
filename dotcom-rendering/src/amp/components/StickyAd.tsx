@@ -1,6 +1,7 @@
 import { text, textSans } from '@guardian/source-foundations';
 import { getRTCParameters } from '../lib/real-time-config';
-import { BaseAdProps, Ad } from './Ad';
+import type { BaseAdProps } from './Ad';
+import { Ad } from './Ad';
 
 // This CSS should be imported and added to global styles in amp/server/document.tsx to add the Advertisement label to the sticky
 export const stickyAdLabelCss = `
@@ -17,7 +18,7 @@ amp-sticky-ad:before {
 }`;
 
 export const StickyAd = ({
-	edition,
+	editionId,
 	section,
 	contentType,
 	config,
@@ -28,7 +29,7 @@ export const StickyAd = ({
 		<amp-sticky-ad layout="nodisplay">
 			<Ad
 				isSticky={true}
-				edition={edition}
+				editionId={editionId}
 				section={section}
 				contentType={contentType}
 				commercialProperties={commercialProperties}

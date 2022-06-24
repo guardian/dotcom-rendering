@@ -5,7 +5,6 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import { ElementContainer } from './ElementContainer';
-
 import { LinkHeadline } from './LinkHeadline';
 
 export default {

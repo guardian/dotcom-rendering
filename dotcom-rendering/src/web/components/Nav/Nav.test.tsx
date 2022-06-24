@@ -1,5 +1,5 @@
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { render, within } from '@testing-library/react';
-import { ArticleDisplay, ArticlePillar, ArticleDesign } from '@guardian/libs';
 import { Nav } from './Nav';
 import { nav } from './Nav.mock';
 
@@ -14,7 +14,7 @@ describe('Nav', () => {
 					design: ArticleDesign.Standard,
 				}}
 				subscribeUrl=""
-				edition="UK"
+				editionId="UK"
 			/>,
 		);
 		const list = within(getByTestId('pillar-list'));
@@ -35,7 +35,7 @@ describe('Nav', () => {
 				}}
 				nav={nav}
 				subscribeUrl=""
-				edition="UK"
+				editionId="UK"
 			/>,
 		);
 

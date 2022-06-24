@@ -1,7 +1,6 @@
 import { ClassNames, css as emoCss } from '@emotion/react';
-
 import { border, from } from '@guardian/source-foundations';
-// @ts-ignore
+// @ts-expect-error
 import { jsx as _jsx } from 'react/jsx-runtime';
 import { center } from '../lib/center';
 
@@ -34,6 +33,7 @@ type Props = {
 	showTopBorder?: boolean;
 	padded?: boolean;
 	backgroundColour?: string;
+	innerBackgroundColour?: string;
 	borderColour?: string;
 	children?: React.ReactNode;
 	shouldCenter?: boolean;
@@ -58,6 +58,7 @@ export const ElementContainer = ({
 	padded = true,
 	borderColour = border.secondary,
 	backgroundColour,
+	innerBackgroundColour,
 	shouldCenter = true,
 	children,
 	element = 'div',
@@ -74,6 +75,8 @@ export const ElementContainer = ({
 						shouldCenter && center,
 						showSideBorders && sideBorders(borderColour),
 						showTopBorder && topBorder(borderColour),
+						innerBackgroundColour &&
+							setBackgroundColour(innerBackgroundColour),
 						padded && padding,
 					]}
 				>

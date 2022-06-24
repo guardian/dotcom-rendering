@@ -15,6 +15,7 @@ const wrapperStyles = css`
 	display: flex;
 	margin-left: 5px;
 	margin-right: 5px;
+	margin-bottom: 5px;
 `;
 
 const directionStyles = (alignment: Alignment) => {
@@ -63,7 +64,7 @@ export const SupportingContent = ({ supportingContent, alignment }: Props) => {
 			{supportingContent.map((subLink: DCRSupportingContent, index) => {
 				// The model has this property as optional but it is very likely
 				// to exist
-				if (!subLink.headline) return <></>;
+				if (!subLink.headline) return null;
 				// The kicker defaults to 'Live' when the article is a liveblog
 				const kickerText =
 					subLink.format.design === ArticleDesign.LiveBlog
@@ -72,6 +73,7 @@ export const SupportingContent = ({ supportingContent, alignment }: Props) => {
 				const shouldPadLeft = index > 0 && alignment === 'horizontal';
 				return (
 					<li
+						key={subLink.url}
 						css={[
 							liStyles,
 							shouldPadLeft && leftMargin,

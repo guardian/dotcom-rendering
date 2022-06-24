@@ -372,7 +372,7 @@ const feature: Feature = {
 
 const review: Review = {
 	design: ArticleDesign.Review,
-	starRating: 4,
+	starRating: some(4),
 	...fields,
 	theme: ArticlePillar.Culture,
 };
@@ -407,13 +407,13 @@ const interview: Interview = {
 };
 
 const media: Item = {
-	design: ArticleDesign.Media,
+	design: ArticleDesign.Gallery,
 	...fields,
 	body: galleryBody,
 };
 
 const cartoon: Item = {
-	design: ArticleDesign.Media,
+	design: ArticleDesign.Gallery,
 	...fields,
 	body: [],
 };

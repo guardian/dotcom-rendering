@@ -1,17 +1,13 @@
-/* eslint-disable jsx-a11y/aria-role */
-
 import { css } from '@emotion/react';
-
-import { ArticleDisplay, ArticleDesign, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { Flex } from './Flex';
-import { RightColumn } from './RightColumn';
 import { ArticleContainer } from './ArticleContainer';
 import { ElementContainer } from './ElementContainer';
-import { LeftColumn } from './LeftColumn';
-import { TextBlockComponent } from './TextBlockComponent';
-
 import { Figure } from './Figure';
+import { Flex } from './Flex';
+import { LeftColumn } from './LeftColumn';
+import { RightColumn } from './RightColumn';
+import { TextBlockComponent } from './TextBlockComponent';
 
 const textHtml =
 	'<p>US and British intelligence agencies have successfully cracked much of the online encryption relied upon by hundreds of millions of people to protect the privacy of their personal data, online transactions and emails, according to top-secret documents revealed by former contractor Edward Snowden.</p>';

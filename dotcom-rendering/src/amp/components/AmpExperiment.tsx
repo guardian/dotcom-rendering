@@ -1,5 +1,5 @@
 import React from 'react';
-import { AmpExperiments } from '../server/ampExperimentCache';
+import type { AmpExperiments } from '../server/ampExperimentCache';
 
 export const AmpExperimentComponent: React.FC<{
 	experimentsData?: AmpExperiments;
