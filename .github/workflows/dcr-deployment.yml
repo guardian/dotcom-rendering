@@ -5,9 +5,11 @@ on:
       - "apps-rendering/**"
 jobs:
   build:
+    name: Build
     uses: ./.github/workflows/dcr-build.yml
 
   lint:
+    name: Lint
     needs: build
     runs-on: ubuntu-latest
     steps:
