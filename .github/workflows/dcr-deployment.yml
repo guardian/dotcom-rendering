@@ -7,20 +7,19 @@ jobs:
   build:
     uses: ./.github/workflows/dcr-build.yml
 
-
-  # lint:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Lint
-  #       run: make lint
-  #       working-directory: dotcom-rendering
-  #     - name: Stylelint
-  #       run: make stylelint
-  #       working-directory: dotcom-rendering
-  #     - name: Prettier check
-  #       run: yarn prettier:check
-  #       working-directory: dotcom-rendering
+  lint:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lint
+        run: make lint
+        working-directory: dotcom-rendering
+      - name: Stylelint
+        run: make stylelint
+        working-directory: dotcom-rendering
+      - name: Prettier check
+        run: yarn prettier:check
+        working-directory: dotcom-rendering
 
   # test:
   #   needs: build
