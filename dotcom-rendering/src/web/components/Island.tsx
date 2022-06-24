@@ -9,7 +9,7 @@ interface HydrateProps {
 	clientOnly?: false;
 	placeholderHeight?: never;
 	children: JSX.Element;
-	expediteLoading?: false;
+	expediteLoading?: boolean;
 }
 
 interface ClientOnlyProps {
@@ -17,7 +17,7 @@ interface ClientOnlyProps {
 	clientOnly: true;
 	placeholderHeight?: number;
 	children: JSX.Element;
-	expediteLoading?: false;
+	expediteLoading?: boolean;
 }
 
 /**
