@@ -151,7 +151,7 @@ export const Body: React.FC<{
 								css={adStyle}
 							>
 								<RegionalAd
-									edition={data.editionId}
+									editionId={data.editionId}
 									section={data.sectionName || ''}
 									contentType={adInfo.contentType}
 									config={adConfig}
@@ -194,7 +194,7 @@ export const Body: React.FC<{
 			{epic}
 
 			<StickyAd
-				edition={data.editionId}
+				editionId={data.editionId}
 				section={data.sectionName || ''}
 				contentType={adInfo.contentType}
 				config={adConfig}

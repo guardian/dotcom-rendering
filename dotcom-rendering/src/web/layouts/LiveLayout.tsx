@@ -255,6 +255,16 @@ interface Props {
 	format: ArticleFormat;
 }
 
+const paddingBody = css`
+	padding: ${space[3]}px;
+	${from.mobileLandscape} {
+		padding: ${space[3]}px ${space[5]}px;
+	}
+	${from.desktop} {
+		padding: 0;
+	}
+`;
+
 export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
@@ -303,7 +313,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
 
 	const isInFilteringBeta =
-		CAPIArticle.config.switches.automaticFilters && CAPIArticle.topics;
+		CAPIArticle.config.switches.automaticFilters &&
+		CAPIArticle.availableTopics;
 
 	/*
 	The topic bank on desktop will be positioned where we currently show the key events container.
@@ -343,7 +354,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						element="header"
 					>
 						<Header
-							edition={CAPIArticle.editionId}
+							editionId={CAPIArticle.editionId}
 							idUrl={CAPIArticle.config.idUrl}
 							mmaUrl={CAPIArticle.config.mmaUrl}
 							supporterCTA={
@@ -379,7 +390,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								CAPIArticle.nav.readerRevenueLinks.header
 									.subscribe
 							}
-							edition={CAPIArticle.editionId}
+							editionId={CAPIArticle.editionId}
 						/>
 					</ElementContainer>
 
@@ -676,6 +687,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.mostRecentBlockId || ''
 									}
 									hasPinnedPost={!!CAPIArticle.pinnedPost}
+									selectedTopics={CAPIArticle.selectedTopics}
 								/>
 							</Island>
 						</>
@@ -842,7 +854,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										<></>
 									)}
 									{isInFilteringBeta ? (
-										<>
+										<div css={paddingBody}>
 											{!showKeyEventsCarousel &&
 											CAPIArticle.keyEvents.length ? (
 												<Hide above="desktop">
@@ -1003,7 +1015,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													badge={CAPIArticle.badge}
 												/>
 											</ArticleContainer>
-										</>
+										</div>
 									) : (
 										<Accordion
 											supportsDarkMode={false}
@@ -1250,7 +1262,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							tags={CAPIArticle.tags}
 							format={format}
 							pillar={format.theme}
-							edition={CAPIArticle.editionId}
+							editionId={CAPIArticle.editionId}
 							shortUrlId={CAPIArticle.config.shortUrlId}
 						/>
 					</Island>
@@ -1359,7 +1371,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					pillar={format.theme}
 					pillars={NAV.pillars}
 					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					edition={CAPIArticle.editionId}
+					editionId={CAPIArticle.editionId}
 					contributionsServiceUrl={
 						CAPIArticle.contributionsServiceUrl
 					}

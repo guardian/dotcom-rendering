@@ -202,7 +202,7 @@
             "type": "string"
         },
         "editionId": {
-            "$ref": "#/definitions/Edition"
+            "$ref": "#/definitions/EditionId"
         },
         "pageId": {
             "type": "string"
@@ -400,11 +400,14 @@
         "mostRecentBlockId": {
             "type": "string"
         },
-        "topics": {
+        "availableTopics": {
             "type": "array",
             "items": {
                 "$ref": "#/definitions/Topic"
             }
+        },
+        "selectedTopics": {
+            "type": "string"
         }
     },
     "required": [
@@ -3629,7 +3632,7 @@
                 }
             }
         },
-        "Edition": {
+        "EditionId": {
             "enum": [
                 "AU",
                 "INT",

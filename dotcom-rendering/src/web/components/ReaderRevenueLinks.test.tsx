@@ -24,7 +24,7 @@ describe('ReaderRevenueLinks', () => {
 		subscribe: 'https://www.theguardian.com/subscribe',
 		support: 'https://www.theguardian.com/support',
 	};
-	const edition: Edition = 'UK';
+	const edition: EditionId = 'UK';
 
 	it('should render thank you message if shouldHideSupportMessaging() returns true', async () => {
 		shouldHideSupportMessaging.mockReturnValue(true);
@@ -32,7 +32,7 @@ describe('ReaderRevenueLinks', () => {
 		const { getByText } = render(
 			<ReaderRevenueLinks
 				urls={urls}
-				edition="US"
+				editionId="US"
 				dataLinkNamePrefix="nav2 : "
 				inHeader={true}
 				remoteHeader={false}
@@ -49,7 +49,7 @@ describe('ReaderRevenueLinks', () => {
 		const { getByText } = render(
 			<ReaderRevenueLinks
 				urls={urls}
-				edition={edition}
+				editionId={edition}
 				dataLinkNamePrefix="nav2 : "
 				inHeader={true}
 				remoteHeader={false}

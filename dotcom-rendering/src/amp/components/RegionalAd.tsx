@@ -12,7 +12,7 @@ import { Ad } from './Ad';
  * @returns an Ad component per region
  */
 export const RegionalAd = ({
-	edition,
+	editionId,
 	section,
 	contentType,
 	commercialProperties,
@@ -32,7 +32,7 @@ export const RegionalAd = ({
 					>
 						<Ad
 							isSticky={false}
-							edition={edition}
+							editionId={editionId}
 							section={section}
 							contentType={contentType}
 							commercialProperties={commercialProperties}
