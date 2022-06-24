@@ -6,7 +6,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    uses: ./.github/actions/dcr-test.yml
+    uses: ./.github/actions/dcr-test.yml@main
   deploy:
     needs: test
     runs-on: ubuntu-latest
