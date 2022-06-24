@@ -6,6 +6,7 @@ jobs:
   node:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Install Node
         uses: guardian/actions-setup-node@main
 
