@@ -333,6 +333,12 @@ interface QABlockElement {
 	role?: RoleType;
 }
 
+interface RecipeSchemaAtomBlockElement {
+	_type: 'model.dotcomrendering.pageElements.RecipeSchemaAtomBlockElement';
+	id: string;
+	json: string;
+}
+
 interface RichLinkBlockElement {
 	_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement';
 	elementId: string;
@@ -590,6 +596,7 @@ type CAPIElement =
 	| PullquoteBlockElement
 	| QABlockElement
 	| QuizAtomBlockElement
+	| RecipeSchemaAtomBlockElement
 	| RichLinkBlockElement
 	| SoundcloudBlockElement
 	| SpotifyBlockElement

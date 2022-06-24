@@ -37,6 +37,7 @@ import { PersonalityQuizAtomWrapper } from '../components/PersonalityQuizAtomWra
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';
 import { PullQuoteBlockComponent } from '../components/PullQuoteBlockComponent';
 import { QandaAtomWrapper } from '../components/QandaAtomWrapper.importable';
+import { RecipeSchemaAtomWrapper } from '../components/RecipeAtomWrapper.importable';
 import { RichLinkComponent } from '../components/RichLinkComponent.importable';
 import { SoundcloudBlockComponent } from '../components/SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from '../components/SpotifyBlockComponent.importable';
@@ -505,6 +506,14 @@ export const renderElement = ({
 						pillar={format.theme}
 					/>
 				</Island>,
+			];
+		case 'model.dotcomrendering.pageElements.RecipeSchemaAtomBlockElement':
+			return [
+				true,
+				<RecipeSchemaAtomWrapper
+					id={element.id}
+					json={element.json}
+				></RecipeSchemaAtomWrapper>,
 			];
 		case 'model.dotcomrendering.pageElements.QuizAtomBlockElement':
 			return [
