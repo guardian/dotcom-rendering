@@ -114,7 +114,6 @@ export const LiveBlogRenderer = ({
 						format={format}
 						keyEvents={keyEvents}
 						filterKeyEvents={filterKeyEvents}
-						keyEventsId={'key-events-filter-mobile'}
 					/>
 				</Hide>
 			)}

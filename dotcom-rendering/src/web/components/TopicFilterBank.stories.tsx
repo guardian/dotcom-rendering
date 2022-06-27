@@ -58,7 +58,6 @@ export const topicBank = () => {
 					},
 				]}
 				filterKeyEvents={false}
-				keyEventsId={'key-events-filter-mobile'}
 			/>
 		</Wrapper>
 	);

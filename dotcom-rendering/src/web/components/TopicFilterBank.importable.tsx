@@ -9,7 +9,6 @@ type Props = {
 	format: ArticleFormat;
 	filterKeyEvents: boolean;
 	keyEvents?: Block[];
-	keyEventsId: 'key-events-filter-mobile' | 'key-events-filter-desktop';
 };
 
 const containerStyles = css`
@@ -48,7 +47,6 @@ export const TopicFilterBank = ({
 	selectedTopics,
 	format,
 	keyEvents,
-	keyEventsId,
 	filterKeyEvents = false,
 }: Props) => {
 	const handleClick = () => {
@@ -56,7 +54,6 @@ export const TopicFilterBank = ({
 		urlParams.delete('page'); // direct to the first page
 		urlParams.set('filterKeyEvents', `${!filterKeyEvents.toString()}`);
 		urlParams.delete('topics');
-		window.location.hash = keyEventsId;
 		window.location.search = urlParams.toString();
 	};
 

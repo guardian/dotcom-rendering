@@ -806,9 +806,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														filterKeyEvents={
 															CAPIArticle.filterKeyEvents
 														}
-														keyEventsId={
-															'key-events-filter-desktop'
-														}
 													/>
 												</Island>
 											</div>
