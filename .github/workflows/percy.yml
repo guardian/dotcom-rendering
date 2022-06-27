@@ -1,0 +1,29 @@
+name: Percy 🕶
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  percy:
+    name: Percy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+      - uses: actions/checkout@v3
+
+      - name: Install Node
+      - uses: guardian/actions-setup-node@main
+
+      - name: Generate production build
+        run: make build
+        working-directory: dotcom-rendering
+
+      - name: Run app
+        run: make start-ci
+        working-directory: dotcom-rendering
+
+      - name: Run Percy
+        run: yarn cypress:run:percy
+        working-directory: dotcom-rendering
+
