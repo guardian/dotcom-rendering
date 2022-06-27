@@ -1,9 +1,10 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { from, until } from '@guardian/source-foundations';
 import { verticalDivider } from '../../../lib/verticalDivider';
 
 const liStyles = css`
-	/* This position relative is needed to contain the veritcal divider */
+	/* This position relative is needed to contain the vertical divider */
 	position: relative;
 
 	display: flex;
@@ -72,6 +73,7 @@ type Props = {
 	padBottomOnMobile?: boolean; // Should be true if spacing below is desired on mobile devices
 	showTopMarginWhenStacked?: boolean;
 	snapAlignStart?: boolean; // True when snapping card when scrolling e.g. in carousel
+	customStyles?: SerializedStyles;
 };
 
 export const LI = ({
@@ -85,6 +87,7 @@ export const LI = ({
 	padBottomOnMobile,
 	showTopMarginWhenStacked,
 	snapAlignStart = false,
+	customStyles = undefined,
 }: Props) => {
 	// Decide sizing
 	const sizeStyles = decideSize(percentage, stretch);
@@ -100,6 +103,7 @@ export const LI = ({
 				padBottomOnMobile && mobilePaddingBottomStyles,
 				showTopMarginWhenStacked && marginTopStyles,
 				snapAlignStart && snapAlignStartStyles,
+				customStyles && customStyles,
 			]}
 		>
 			{children}
