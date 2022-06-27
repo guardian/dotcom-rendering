@@ -1,4 +1,9 @@
 name: Percy
+on:
+  push:
+    paths-ignore:
+      - "apps-rendering/**"
+jobs:
   build:
     runs-on: ubuntu-latest
       - uses: actions/checkout@v3
