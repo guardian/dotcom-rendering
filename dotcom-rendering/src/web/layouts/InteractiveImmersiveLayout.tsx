@@ -407,7 +407,6 @@ export const InteractiveImmersiveLayout = ({
 										) : (
 											<DecideLines format={format} />
 										)}
-										ss
 									</div>
 								</div>
 							)}
