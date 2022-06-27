@@ -34,6 +34,7 @@ type Props = {
 	filterKeyEvents?: boolean;
 	abTests?: ServerSideTests;
 	showKeyEventsCarousel?: boolean;
+	availableTopics?: Topic[];
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -118,6 +119,7 @@ export const ArticleBody = ({
 	filterKeyEvents,
 	abTests,
 	showKeyEventsCarousel,
+	availableTopics,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
@@ -166,6 +168,7 @@ export const ArticleBody = ({
 						keyEvents={keyEvents}
 						filterKeyEvents={filterKeyEvents}
 						isKeyEventsCarouselVariant={showKeyEventsCarousel}
+						availableTopics={availableTopics}
 					/>
 				</div>
 			</>

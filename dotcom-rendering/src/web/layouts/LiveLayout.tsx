@@ -55,6 +55,7 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { TopicFilterBank } from '../components/TopicFilterBank';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
@@ -314,6 +315,17 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const isInFilteringBeta =
 		CAPIArticle.config.switches.automaticFilters &&
 		CAPIArticle.availableTopics;
+
+	/*
+	The topic bank on desktop will be positioned where we currently show the key events container.
+	This is dependent on a change made in PR #4896 [https://github.com/guardian/dotcom-rendering/pull/4896] where the key events container will be removed from the left column.
+	This change currently lives behind the key-events-carousel A/B test.
+	Until this change is moved from behind the a/b test, we need to add an additional condition
+	here to see if the user is within this test, meaning we can therefore position the filter bank in the empty space.
+	Once the key-event-carousel test is completed and this change is productionised, we can remove the final `showKeyEventsCarousel` condition.
+	*/
+	const showTopicFilterBank =
+		CAPIArticle.config.switches.automaticFilters && showKeyEventsCarousel;
 
 	return (
 		<>
@@ -798,6 +810,22 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										/>
 									</div>
 								)}
+
+								{showTopicFilterBank &&
+									CAPIArticle.availableTopics && (
+										<Hide until="desktop">
+											<div css={sidePaddingDesktop}>
+												<Island>
+													<TopicFilterBank
+														availableTopics={
+															CAPIArticle.availableTopics
+														}
+														format={format}
+													/>
+												</Island>
+											</div>
+										</Hide>
+									)}
 								{/* Match stats */}
 								{footballMatchUrl && (
 									<Island
@@ -1110,6 +1138,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													}
 													showKeyEventsCarousel={
 														showKeyEventsCarousel
+													}
+													availableTopics={
+														CAPIArticle.availableTopics
 													}
 												/>
 												{pagination.totalPages > 1 && (
