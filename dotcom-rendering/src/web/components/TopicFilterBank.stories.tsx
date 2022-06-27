@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { TopicFilterBank } from './TopicFilterBank';
+import { TopicFilterBank } from './TopicFilterBank.importable';
 
 const availableTopics: Topic[] = [
 	{ type: 'GPE', value: 'London', count: 16 },

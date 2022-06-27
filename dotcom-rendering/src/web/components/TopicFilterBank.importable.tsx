@@ -46,6 +46,7 @@ export const TopicFilterBank = ({
 	format,
 }: Props) => {
 	const palette = decidePalette(format);
+
 	return (
 		<div css={containerStyles}>
 			<div css={headlineStyles}>
@@ -63,6 +64,22 @@ export const TopicFilterBank = ({
 						? selectedTopics.includes(buttonParams)
 						: false;
 
+					const handleTopicClick = () => {
+						const urlParams = new URLSearchParams(
+							window.location.search,
+						);
+
+						if (!isActive) {
+							urlParams.set('topics', buttonParams);
+						} else {
+							urlParams.delete('topics');
+						}
+
+						urlParams.delete('filterKeyEvents');
+
+						window.location.search = urlParams.toString();
+					};
+
 					return (
 						<FilterButton
 							value={topic.value}
@@ -70,7 +87,7 @@ export const TopicFilterBank = ({
 							count={topic.count}
 							format={format}
 							isActive={isActive}
-							onClick={() => {}}
+							onClick={handleTopicClick}
 						/>
 					);
 				})}

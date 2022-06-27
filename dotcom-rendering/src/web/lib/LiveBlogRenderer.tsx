@@ -6,7 +6,7 @@ import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
 import { LiveBlock } from '../components/LiveBlock';
 import { LiveBlogEpic } from '../components/LiveBlogEpic.importable';
 import { PinnedPost } from '../components/PinnedPost';
-import { TopicFilterBank } from '../components/TopicFilterBank';
+import { TopicFilterBank } from '../components/TopicFilterBank.importable';
 
 type Props = {
 	format: ArticleFormat;
