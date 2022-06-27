@@ -7,15 +7,15 @@ jobs:
   percy:
     name: Percy
     runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
-        - uses: actions/setup-node@v2
-        - name: Install cypress
-          uses: cypress-io/github-action@v4
-          with:
-            runTests: false
-            working-directory: dotcom-rendering
-            wait-on: "http://localhost:9000"
-            wait-on-timeout: 30
-        - name: Percy Test
-          run: npx @percy/cli exec -- cypress run
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+      - name: Install cypress
+        uses: cypress-io/github-action@v4
+        with:
+          runTests: false
+          working-directory: dotcom-rendering
+          wait-on: "http://localhost:9000"
+          wait-on-timeout: 30
+      - name: Percy Test
+        run: npx @percy/cli exec -- cypress run
