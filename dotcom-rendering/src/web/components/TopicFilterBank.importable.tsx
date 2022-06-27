@@ -5,6 +5,7 @@ import { FilterButton } from './FilterButton.importable';
 
 type Props = {
 	availableTopics: Topic[];
+	selectedTopics?: string;
 	format: ArticleFormat;
 	filterKeyEvents: boolean;
 	keyEvents?: Block[];
@@ -44,6 +45,7 @@ const topicStyles = css`
 
 export const TopicFilterBank = ({
 	availableTopics,
+	selectedTopics,
 	format,
 	keyEvents,
 	keyEventsId,
@@ -80,13 +82,18 @@ export const TopicFilterBank = ({
 				)}
 
 				{availableTopics.slice(0, 5).map((topic) => {
+					const buttonParams = `${topic.type}:${topic.value}`;
+					const isActive = selectedTopics
+						? selectedTopics.includes(buttonParams)
+						: false;
+
 					return (
 						<FilterButton
 							value={topic.value}
 							type={topic.type}
 							count={topic.count}
 							format={format}
-							isActive={false}
+							isActive={isActive}
 							onClick={() => {}}
 						/>
 					);
