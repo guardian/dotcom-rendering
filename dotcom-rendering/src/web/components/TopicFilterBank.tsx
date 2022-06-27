@@ -59,7 +59,9 @@ export const TopicFilterBank = ({
 			<div css={topicStyles}>
 				{availableTopics.slice(0, 5).map((topic: Topic) => {
 					const buttonParams = `${topic.type}:${topic.value}`;
-					const isActive = selectedTopics?.includes(buttonParams);
+					const isActive = selectedTopics
+						? selectedTopics.includes(buttonParams)
+						: false;
 
 					return (
 						<FilterButton

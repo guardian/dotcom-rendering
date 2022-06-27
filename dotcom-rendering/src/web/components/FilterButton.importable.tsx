@@ -13,7 +13,7 @@ interface ButtonProps {
 	type?: TopicType;
 	count?: number;
 	format: ArticleFormat;
-	isActive?: boolean;
+	isActive: boolean;
 	onClick: () => void;
 }
 
