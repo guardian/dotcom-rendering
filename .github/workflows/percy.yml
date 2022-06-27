@@ -10,20 +10,33 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Install Node
-      - uses: guardian/actions-setup-node@main
+        uses: guardian/actions-setup-node@main
 
       - name: Generate production build
         run: make build
         working-directory: dotcom-rendering
 
-      - name: Run app
-        run: make start-ci
-        working-directory: dotcom-rendering
+          #      - name: RunApp
+          # run: make start-ci &
+          #working-directory: dotcom-rendering
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          start: make start-ci
+          working-directory: dotcom-rendering
+          wait-on: "http://localhost:9000"
+          wait-on-timeout: 30
+            #browser: chrome
+            #spec: cypress/e2e/parallel-${{ matrix.group }}/*.js
+          runTests: false
 
       - name: Run Percy
+        uses: cypress-io/github-action@v4
         run: yarn cypress:run:percy
+        needs: Cypress run
         working-directory: dotcom-rendering
 
