@@ -36,8 +36,8 @@ const ErrorMessageWithAdvice = (props: { text?: string }) => (
 	<InlineError>
 		<span>
 			{props.text} Please try again or contact{' '}
-			<Link href="mailto:userhelp@theguardian.com" target="_blank">
-				userhelp@theguardian.com
+			<Link href="mailto:customer.help@theguardian.com" target="_blank">
+				customer.help@theguardian.com
 			</Link>
 		</span>
 	</InlineError>
