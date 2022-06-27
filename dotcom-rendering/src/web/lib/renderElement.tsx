@@ -78,7 +78,6 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
-	abTests?: ServerSideTests;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -132,19 +131,12 @@ export const renderElement = ({
 	isAdFreeUser,
 	switches,
 	isSensitive,
-	abTests,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
 
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
-
-	const isInteractivesIdleLoadingVariant =
-		abTests?.interactivesIdleLoadingVariant === 'variant';
-
-	const shouldIdleLoadInteractives =
-		!isAdFreeUser && isInteractivesIdleLoadingVariant;
 
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -390,9 +382,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
 			return [
 				true,
-				<Island
-					deferUntil={shouldIdleLoadInteractives ? 'idle' : 'visible'}
-				>
+				<Island deferUntil="idle">
 					<InteractiveBlockComponent
 						url={element.url}
 						scriptUrl={element.scriptUrl}
@@ -797,7 +787,6 @@ export const RenderArticleElement = ({
 	isAdFreeUser,
 	isSensitive,
 	switches,
-	abTests,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -816,7 +805,6 @@ export const RenderArticleElement = ({
 		isAdFreeUser,
 		isSensitive,
 		switches,
-		abTests,
 	});
 
 	if (!ok) {

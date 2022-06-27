@@ -32,7 +32,6 @@ type Props = {
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
 	filterKeyEvents?: boolean;
-	abTests?: ServerSideTests;
 	showKeyEventsCarousel?: boolean;
 	availableTopics?: Topic[];
 };
@@ -117,7 +116,6 @@ export const ArticleBody = ({
 	onFirstPage,
 	keyEvents,
 	filterKeyEvents,
-	abTests,
 	showKeyEventsCarousel,
 	availableTopics,
 }: Props) => {
@@ -205,7 +203,6 @@ export const ArticleBody = ({
 				isDev={isDev}
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
-				abTests={abTests}
 			/>
 		</div>
 	);

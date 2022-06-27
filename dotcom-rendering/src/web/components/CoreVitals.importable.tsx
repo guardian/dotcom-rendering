@@ -34,8 +34,6 @@ export const CoreVitals = () => {
 
 	const serverSideTestsToForceMetrics: Array<keyof ServerSideTests> = [
 		/* linter, please keep this array multi-line */
-		'interactivesIdleLoadingVariant',
-		'interactivesIdleLoadingControl',
 	];
 
 	const userInServerSideTestToForceMetrics =
