@@ -16,10 +16,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
-import {
-	Lines,
-	StraightLines,
-} from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
@@ -29,6 +26,7 @@ import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { ContainerLayout } from '../components/ContainerLayout';
+import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
@@ -59,11 +57,7 @@ import { TopicFilterBank } from '../components/TopicFilterBank.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
-import {
-	decideLineCount,
-	decideLineEffect,
-	getCurrentPillar,
-} from '../lib/layoutHelpers';
+import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
@@ -561,15 +555,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<GridItem area="lines">
 							<Hide from="desktop">
 								<div css={sidePaddingDesktop}>
-									<Lines
-										cssOverrides={css`
-											display: block;
-										`}
-										count={decideLineCount(format.design)}
-										effect={decideLineEffect(
-											format.design,
-											format.theme,
-										)}
+									<DecideLines
+										format={format}
 										color={
 											format.design ===
 											ArticleDesign.LiveBlog
@@ -744,18 +731,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								{/* Lines */}
 								<Hide until="desktop">
 									<div css={[maxWidth, sidePaddingDesktop]}>
-										<Lines
-											cssOverrides={css`
-												display: block;
-											`}
-											count={decideLineCount(
-												format.design,
-											)}
-											effect={decideLineEffect(
-												format.design,
-												format.theme,
-											)}
-										/>
+										<DecideLines format={format} />
 									</div>
 								</Hide>
 								{/* Meta */}
@@ -819,6 +795,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													<TopicFilterBank
 														availableTopics={
 															CAPIArticle.availableTopics
+														}
+														selectedTopics={
+															CAPIArticle.selectedTopics
 														}
 														format={format}
 														keyEvents={

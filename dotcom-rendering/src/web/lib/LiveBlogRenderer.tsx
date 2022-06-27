@@ -31,6 +31,7 @@ type Props = {
 	filterKeyEvents?: boolean;
 	isKeyEventsCarouselVariant?: boolean;
 	availableTopics?: Topic[];
+	selectedTopics?: string;
 };
 
 export const LiveBlogRenderer = ({
@@ -56,6 +57,7 @@ export const LiveBlogRenderer = ({
 	filterKeyEvents = false,
 	isKeyEventsCarouselVariant = false,
 	availableTopics,
+	selectedTopics,
 }: Props) => {
 	return (
 		<>
@@ -108,6 +110,7 @@ export const LiveBlogRenderer = ({
 				<Hide above="desktop">
 					<TopicFilterBank
 						availableTopics={availableTopics}
+						selectedTopics={selectedTopics}
 						format={format}
 						keyEvents={keyEvents}
 						filterKeyEvents={filterKeyEvents}
