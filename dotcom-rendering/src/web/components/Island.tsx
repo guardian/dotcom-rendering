@@ -60,6 +60,7 @@ const decideChildren = (
  * @param {JSX.Element} props.children - The component being inserted. Must be a single JSX Element
  * @param {boolean} props.expediteLoading - Should this component script be included in the document head -
  * 		Use sparingly for critical islands only, don't set without discussing with the dotcom team.
+ * 		Should not be used with the 'deferUntil' prop
  */
 export const Island = ({
 	deferUntil,
