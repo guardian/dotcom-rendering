@@ -54,7 +54,8 @@ export const TopicFilterBank = ({
 	const handleClick = () => {
 		const urlParams = new URLSearchParams(window.location.search);
 		urlParams.delete('page'); // direct to the first page
-		urlParams.set('filterKeyEvents', `${filterKeyEvents.toString()}`);
+		urlParams.set('filterKeyEvents', `${!filterKeyEvents.toString()}`);
+		urlParams.delete('topics');
 		window.location.hash = keyEventsId;
 		window.location.search = urlParams.toString();
 	};
