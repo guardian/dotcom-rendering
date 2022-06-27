@@ -53,7 +53,7 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import { TopicFilterBank } from '../components/TopicFilterBank';
+import { TopicFilterBank } from '../components/TopicFilterBank.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
@@ -800,6 +800,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 															CAPIArticle.selectedTopics
 														}
 														format={format}
+														keyEvents={
+															CAPIArticle.keyEvents
+														}
+														filterKeyEvents={
+															CAPIArticle.filterKeyEvents
+														}
 													/>
 												</Island>
 											</div>
@@ -821,7 +827,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
-									{CAPIArticle.keyEvents.length ? (
+									{CAPIArticle.keyEvents.length &&
+									!showTopicFilterBank ? (
 										<Hide below="desktop">
 											<Island deferUntil="visible">
 												<FilterKeyEventsToggle
