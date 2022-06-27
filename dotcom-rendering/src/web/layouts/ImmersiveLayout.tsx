@@ -25,6 +25,7 @@ import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
+import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeadlineByline } from '../components/HeadlineByline';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
@@ -331,10 +332,12 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							) : (
 								<div css={maxWidth}>
 									<div css={stretchLines}>
-										<DecideLines
-											format={format}
-											useLabsLines={true}
-										/>
+										{format.theme ===
+										ArticleSpecial.Labs ? (
+											<GuardianLabsLines />
+										) : (
+											<DecideLines format={format} />
+										)}
 									</div>
 								</div>
 							)}

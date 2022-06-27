@@ -30,6 +30,7 @@ import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
 import { GetMatchTabs } from '../components/GetMatchTabs.importable';
 import { GridItem } from '../components/GridItem';
+import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
@@ -583,10 +584,11 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<GridItem area="lines">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
-									<DecideLines
-										format={format}
-										useLabsLines={true}
-									/>
+									{format.theme === ArticleSpecial.Labs ? (
+										<GuardianLabsLines />
+									) : (
+										<DecideLines format={format} />
+									)}
 								</div>
 							</div>
 						</GridItem>
