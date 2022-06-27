@@ -5,6 +5,7 @@ import {
 	initCoreWebVitals,
 } from '@guardian/libs';
 import { commercialEndOfQuarter2Test } from '../experiments/tests/commercial-end-of-quarter-2-test';
+import { commercialLazyLoadMarginReloaded } from '../experiments/tests/commercial-lazy-load-margin-reloaded';
 import { useAB } from '../lib/useAB';
 
 export const CoreVitals = () => {
@@ -23,6 +24,7 @@ export const CoreVitals = () => {
 	const clientSideTestsToForceMetrics: ABTest[] = [
 		/* keep array multi-line */
 		commercialEndOfQuarter2Test,
+		commercialLazyLoadMarginReloaded,
 	];
 
 	const userInClientSideTestToForceMetrics =

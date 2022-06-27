@@ -177,7 +177,7 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 									CAPIArticle.nav.readerRevenueLinks.header
 										.subscribe
 								}
-								edition={CAPIArticle.editionId}
+								editionId={CAPIArticle.editionId}
 							/>
 						</ElementContainer>
 					</div>

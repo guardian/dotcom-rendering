@@ -268,7 +268,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								element="header"
 							>
 								<Header
-									edition={CAPIArticle.editionId}
+									editionId={CAPIArticle.editionId}
 									idUrl={CAPIArticle.config.idUrl}
 									mmaUrl={CAPIArticle.config.mmaUrl}
 									supporterCTA={
@@ -308,7 +308,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.nav.readerRevenueLinks
 											.header.subscribe
 									}
-									edition={CAPIArticle.editionId}
+									editionId={CAPIArticle.editionId}
 								/>
 							</ElementContainer>
 
@@ -381,7 +381,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.nav.readerRevenueLinks
 											.header.subscribe
 									}
-									edition={CAPIArticle.editionId}
+									editionId={CAPIArticle.editionId}
 								/>
 							</ElementContainer>
 						</Stuck>
@@ -679,7 +679,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						tags={CAPIArticle.tags}
 						format={format}
 						pillar={format.theme}
-						edition={CAPIArticle.editionId}
+						editionId={CAPIArticle.editionId}
 						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
 				</Island>
@@ -767,7 +767,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					pillar={format.theme}
 					pillars={NAV.pillars}
 					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					edition={CAPIArticle.editionId}
+					editionId={CAPIArticle.editionId}
 					contributionsServiceUrl={
 						CAPIArticle.contributionsServiceUrl
 					}

@@ -382,7 +382,6 @@ const textCardHeadline = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport) return WHITE;
 	if (format.display === ArticleDisplay.Immersive) return BLACK;
 	switch (format.design) {
-		case ArticleDesign.Feature:
 		case ArticleDesign.Interview:
 			return pillarPalette[format.theme].dark;
 		case ArticleDesign.Gallery:
@@ -734,6 +733,48 @@ const backgroundSpeechBubble = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const backgroundFilterButtonHover = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[200];
+		case ArticlePillar.Culture:
+			return culture[200];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[200];
+		case ArticlePillar.Sport:
+			return sport[200];
+		case ArticlePillar.Opinion:
+			return opinion[200];
+		case ArticleSpecial.Labs:
+			return labs[200];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[200];
+		default:
+			return news[200];
+	}
+};
+
+const backgroundFilterButtonActive = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+		default:
+			return news[300];
+	}
+};
+
 const fillCommentCount = (format: ArticleFormat): string => {
 	if (
 		format.design === ArticleDesign.LiveBlog ||
@@ -1070,6 +1111,8 @@ const borderCricketScoreboardDivider = (): string => {
 
 const borderKeyEvent = (): string => neutral[46];
 
+const borderFilterButton = (): string => neutral[60];
+
 const fillRichLink: (format: ArticleFormat) => string = (format) => {
 	if (format) {
 		switch (format.theme) {
@@ -1150,6 +1193,14 @@ const textOverlayed = (): string => {
 };
 
 const textKeyEventTime = (): string => neutral[7];
+
+const textFilterButton = (): string => neutral[7];
+
+const textFilterButtonHover = (): string => neutral[100];
+
+const textFilterButtonActive = (): string => neutral[100];
+
+const backgroundFilterButton = (): string => neutral[100];
 
 const backgroundHeadlineTag = (format: ArticleFormat): string =>
 	pillarPalette[format.theme].dark;
@@ -1307,6 +1358,9 @@ export const decidePalette = (
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			keyEvent: textKeyEvent(format),
 			keyEventTime: textKeyEventTime(),
+			filterButton: textFilterButton(),
+			filterButtonHover: textFilterButtonHover(),
+			filterButtonActive: textFilterButtonActive(),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -1335,6 +1389,9 @@ export const decidePalette = (
 			summaryEventBullet: backgroundSummaryEventBullet(format),
 			keyEvent: backgroundKeyEvent(),
 			keyEventFromDesktop: backgroundKeyEventFromDesktop(),
+			filterButton: backgroundFilterButton(),
+			filterButtonHover: backgroundFilterButtonHover(format),
+			filterButtonActive: backgroundFilterButtonActive(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
@@ -1369,6 +1426,7 @@ export const decidePalette = (
 			activeMatchTab: activeMatchTab(),
 			cardSupporting: borderCardSupporting(format),
 			keyEvent: borderKeyEvent(),
+			filterButton: borderFilterButton(),
 		},
 		topBar: {
 			card: overrides?.topBar.card || topBarCard(format),

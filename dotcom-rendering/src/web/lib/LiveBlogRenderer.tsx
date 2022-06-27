@@ -6,6 +6,7 @@ import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
 import { LiveBlock } from '../components/LiveBlock';
 import { LiveBlogEpic } from '../components/LiveBlogEpic.importable';
 import { PinnedPost } from '../components/PinnedPost';
+import { TopicFilterBank } from '../components/TopicFilterBank';
 
 type Props = {
 	format: ArticleFormat;
@@ -29,6 +30,7 @@ type Props = {
 	keyEvents?: Block[];
 	filterKeyEvents?: boolean;
 	isKeyEventsCarouselVariant?: boolean;
+	availableTopics?: Topic[];
 };
 
 export const LiveBlogRenderer = ({
@@ -53,6 +55,7 @@ export const LiveBlogRenderer = ({
 	keyEvents,
 	filterKeyEvents = false,
 	isKeyEventsCarouselVariant = false,
+	availableTopics,
 }: Props) => {
 	return (
 		<>
@@ -97,6 +100,15 @@ export const LiveBlogRenderer = ({
 				</Hide>
 			) : (
 				<></>
+			)}
+
+			{switches.automaticFilters && availableTopics && (
+				<Hide above="desktop">
+					<TopicFilterBank
+						availableTopics={availableTopics}
+						format={format}
+					/>
+				</Hide>
 			)}
 			<div id="top-of-blog" />
 			{blocks.map((block) => {

@@ -54,7 +54,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						element="header"
 					>
 						<Header
-							edition={front.editionId}
+							editionId={front.editionId}
 							idUrl={front.config.idUrl}
 							mmaUrl={front.config.mmaUrl}
 							supporterCTA={
@@ -80,7 +80,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							subscribeUrl={
 								front.nav.readerRevenueLinks.header.subscribe
 							}
-							edition={front.editionId}
+							editionId={front.editionId}
 						/>
 					</ElementContainer>
 					{NAV.subNavSections && (
@@ -144,6 +144,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							} | ${ophanName}`}
 							ophanComponentName={`${ophanName}`}
 							containerPalette={collection.containerPalette}
+							showDateHeader={collection.config.showDateHeader}
+							editionId={front.editionId}
 						>
 							<DecideContainer
 								trails={trails}
@@ -195,7 +197,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					pillar={format.theme}
 					pillars={NAV.pillars}
 					urls={front.nav.readerRevenueLinks.header}
-					edition={front.editionId}
+					editionId={front.editionId}
 					contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 				/>
 			</ElementContainer>

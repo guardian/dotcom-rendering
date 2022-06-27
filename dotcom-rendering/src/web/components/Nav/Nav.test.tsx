@@ -14,7 +14,7 @@ describe('Nav', () => {
 					design: ArticleDesign.Standard,
 				}}
 				subscribeUrl=""
-				edition="UK"
+				editionId="UK"
 			/>,
 		);
 		const list = within(getByTestId('pillar-list'));
@@ -35,7 +35,7 @@ describe('Nav', () => {
 				}}
 				nav={nav}
 				subscribeUrl=""
-				edition="UK"
+				editionId="UK"
 			/>,
 		);
 
