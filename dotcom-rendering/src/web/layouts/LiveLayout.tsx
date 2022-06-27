@@ -796,6 +796,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														availableTopics={
 															CAPIArticle.availableTopics
 														}
+														selectedTopics={
+															CAPIArticle.selectedTopics
+														}
 														format={format}
 													/>
 												</Island>
