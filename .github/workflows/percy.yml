@@ -35,7 +35,6 @@ jobs:
           runTests: false
 
       - name: Run Percy
-        uses: cypress-io/github-action@v4
         run: yarn cypress:run:percy
         needs: Cypress run
         working-directory: dotcom-rendering
