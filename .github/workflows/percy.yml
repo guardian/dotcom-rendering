@@ -35,6 +35,7 @@ jobs:
           runTests: false
 
       - name: Run Percy
+        container: cypress/base:16.13.0
         run: yarn cypress:run:percy
         needs: Cypress run
         working-directory: dotcom-rendering
