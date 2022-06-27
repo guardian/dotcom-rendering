@@ -111,6 +111,9 @@
                         "$ref": "#/definitions/QABlockElement"
                     },
                     {
+                        "$ref": "#/definitions/RecipeSchemaAtomBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/RichLinkBlockElement"
                     },
                     {
@@ -2335,6 +2338,28 @@
                 "title"
             ]
         },
+        "RecipeSchemaAtomBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.RecipeSchemaAtomBlockElement"
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "json": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "id",
+                "json"
+            ]
+        },
         "RichLinkBlockElement": {
             "type": "object",
             "properties": {
@@ -3426,6 +3451,9 @@
                             },
                             {
                                 "$ref": "#/definitions/QABlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/RecipeSchemaAtomBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/RichLinkBlockElement"
