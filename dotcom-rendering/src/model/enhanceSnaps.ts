@@ -1,6 +1,6 @@
 /**
  *
- * This function takes a FESnapType and turns it into a DCRSnapType mutating
+ * This function takes a FESnapType and turns it into a DCRSnapType. It mutates
  * certain properties such as embedCss to work with Emotion.
  *
  * @returns the DCR snap with its properties mutated
