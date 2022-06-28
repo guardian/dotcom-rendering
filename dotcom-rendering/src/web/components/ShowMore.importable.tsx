@@ -23,8 +23,8 @@ function insertHtml(html: string, collectionId: string) {
 		`[data-show-more-placeholder="${collectionId}"]`,
 	);
 	/**
-	 * it is expected that `html` will be a server-rendered instance
-	 * of the ExtraCardsContainer component
+	 * it is expected that the value of `html` will be a server-rendered
+	 * instance of the ExtraCardsContainer component
 	 */
 	if (placeholder) {
 		placeholder.insertAdjacentHTML('afterend', html);
