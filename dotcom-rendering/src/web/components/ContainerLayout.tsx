@@ -34,7 +34,6 @@ type Props = {
 	innerBackgroundColour?: string;
 	showDateHeader?: boolean;
 	editionId?: EditionId;
-	showLeftColumn?: boolean;
 };
 
 const containerStyles = css`
