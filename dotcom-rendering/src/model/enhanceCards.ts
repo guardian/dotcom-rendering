@@ -1,6 +1,7 @@
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { decideFormat } from '../web/lib/decideFormat';
 import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
+import { enhanceSnaps } from './enhanceSnaps';
 
 /**
  *
@@ -115,6 +116,6 @@ export const enhanceCards = (
 			byline:
 				faciaCard.properties.maybeContent?.trail.byline ?? undefined,
 			showByline: faciaCard.properties.showByline,
-			snapData: faciaCard.enriched,
+			snapData: enhanceSnaps(faciaCard.enriched),
 		};
 	});
