@@ -9,7 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
+      - name: Install Node
+        uses: guardian/actions-setup-node@main
       - name: Install cypress
         uses: cypress-io/github-action@v4
         with:
