@@ -42,6 +42,30 @@ const topicStyles = css`
 	}
 `;
 
+const handleTopicClick = (isActive: boolean, buttonParams: string) => {
+	const urlParams = new URLSearchParams(window.location.search);
+
+	if (!isActive) {
+		urlParams.set('topics', buttonParams);
+	} else {
+		urlParams.delete('topics');
+	}
+	urlParams.delete('page'); // direct to the first page
+	urlParams.delete('filterKeyEvents');
+
+	window.location.search = urlParams.toString();
+};
+
+const handleKeyEventClick = (filterKeyEvents: boolean) => {
+	const urlParams = new URLSearchParams(window.location.search);
+
+	urlParams.set('filterKeyEvents', filterKeyEvents ? 'false' : 'true');
+	urlParams.delete('page'); // direct to the first page
+	urlParams.delete('topics');
+
+	window.location.search = urlParams.toString();
+};
+
 export const TopicFilterBank = ({
 	availableTopics,
 	selectedTopics,
@@ -49,22 +73,13 @@ export const TopicFilterBank = ({
 	keyEvents,
 	filterKeyEvents = false,
 }: Props) => {
-	const handleClick = () => {
-		const urlParams = new URLSearchParams(window.location.search);
-		urlParams.delete('page'); // direct to the first page
-		urlParams.set('filterKeyEvents', `${!filterKeyEvents.toString()}`);
-		urlParams.delete('topics');
-		window.location.search = urlParams.toString();
-	};
-
 	const palette = decidePalette(format);
 	return (
 		<div css={containerStyles}>
 			<div css={headlineStyles}>
 				Filters{' '}
 				<span css={headlineAccentStyles}>
-					(<span css={betaTextStyles(palette)}>BETA</span>
-					):
+					(<span css={betaTextStyles(palette)}>BETA</span>):
 				</span>
 			</div>
 
@@ -75,7 +90,7 @@ export const TopicFilterBank = ({
 						count={keyEvents.length}
 						format={format}
 						isActive={filterKeyEvents}
-						onClick={handleClick}
+						onClick={() => handleKeyEventClick(filterKeyEvents)}
 					/>
 				)}
 
@@ -92,7 +107,9 @@ export const TopicFilterBank = ({
 							count={topic.count}
 							format={format}
 							isActive={isActive}
-							onClick={() => {}}
+							onClick={() =>
+								handleTopicClick(isActive, buttonParams)
+							}
 						/>
 					);
 				})}

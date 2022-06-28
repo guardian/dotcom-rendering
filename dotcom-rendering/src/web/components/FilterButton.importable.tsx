@@ -14,7 +14,7 @@ interface ButtonProps {
 	count?: number;
 	format: ArticleFormat;
 	isActive: boolean;
-	onClick: () => void;
+	onClick: (...args: unknown[]) => void;
 }
 
 const buttonStyles = (palette: Palette) => css`
