@@ -40,7 +40,7 @@ build-ci: clean-dist install
 	$(call log, "building production bundles")
 	@SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
 
-start-ci: export NODE_ENV=production
+# start-ci: export NODE_ENV=production
 start-ci: install gen-dotenv-ci
 	$(call log, "starting PROD server...")
 	@DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
