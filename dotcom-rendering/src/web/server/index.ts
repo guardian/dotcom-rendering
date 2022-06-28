@@ -200,11 +200,11 @@ export const renderCards = (
 			containerPalette,
 		});
 
-		res.status(200).send(html);
+		res.status(200).send({ html });
 	} catch (e) {
 		// todo: need to replicate error-handling behaviour of existing component
 		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send({ html: `<pre>${message}</pre>` });
 	}
 };
 
