@@ -24,7 +24,6 @@ const styles = css`
 	${textSans.xxsmall()}
 	color: ${neutral[46]};
 	${grid.column.centre}
-	padding-top: ${remSpace[9]};
 
 	${from.leftCol} {
 		${grid.column.left}
