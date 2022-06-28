@@ -14,6 +14,7 @@ jobs:
         uses: cypress-io/github-action@v4
         with:
           runTests: false
+          start: make start-ci
           working-directory: dotcom-rendering
           wait-on: "http://localhost:9000"
           wait-on-timeout: 30
