@@ -1,7 +1,7 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { from, until } from '@guardian/source-foundations';
 import { verticalDivider } from '../../../lib/verticalDivider';
+import { verticalDividerWithBottomOffset } from '../../../lib/verticalDividerWithBottomOffset';
 
 const liStyles = css`
 	/* This position relative is needed to contain the vertical divider */
@@ -10,16 +10,19 @@ const liStyles = css`
 	display: flex;
 `;
 
-const sidePaddingStyles = (padSidesOnMobile: boolean) => css`
+const sidePaddingStyles = (
+	padSidesOnMobile: boolean,
+	paddingSize: string,
+) => css`
 	/* Set spacing on the li element */
 	${padSidesOnMobile && until.tablet} {
-		padding-left: 10px;
-		padding-right: 10px;
+		padding-left: ${paddingSize};
+		padding-right: ${paddingSize};
 	}
 
 	${from.tablet} {
-		padding-left: 10px;
-		padding-right: 10px;
+		padding-left: ${paddingSize};
+		padding-right: ${paddingSize};
 	}
 `;
 
@@ -28,13 +31,13 @@ const snapAlignStartStyles = css`
 	scroll-snap-align: start;
 `;
 
-const paddingBottomStyles = css`
-	padding-bottom: 10px;
+const paddingBottomStyles = (paddingSize: string) => css`
+	padding-bottom: ${paddingSize};
 `;
 
-const mobilePaddingBottomStyles = css`
+const mobilePaddingBottomStyles = (paddingSize: string) => css`
 	${until.tablet} {
-		padding-bottom: 10px;
+		padding-bottom: ${paddingSize};
 	}
 `;
 
@@ -62,6 +65,15 @@ const decideSize = (percentage?: CardPercentageType, stretch?: boolean) => {
 	return sizeStyle;
 };
 
+function decideDivider(
+	offsetBottomPaddingOnDivider: boolean,
+	paddingSize: string,
+) {
+	return offsetBottomPaddingOnDivider
+		? verticalDividerWithBottomOffset(paddingSize)
+		: verticalDivider;
+}
+
 type Props = {
 	children: React.ReactNode;
 	percentage?: CardPercentageType; // Used to give a particular LI more or less weight / space
@@ -73,6 +85,9 @@ type Props = {
 	padBottomOnMobile?: boolean; // Should be true if spacing below is desired on mobile devices
 	showTopMarginWhenStacked?: boolean;
 	snapAlignStart?: boolean; // True when snapping card when scrolling e.g. in carousel
+	// Prevent the divider from spanning the LI's bottom padding. To be used when you know that the
+	// LI will have bottom padding, but won't have another card in the same container directly below it.
+	offsetBottomPaddingOnDivider?: boolean;
 };
 
 export const LI = ({
@@ -86,19 +101,22 @@ export const LI = ({
 	padBottomOnMobile,
 	showTopMarginWhenStacked,
 	snapAlignStart = false,
+	offsetBottomPaddingOnDivider = false,
 }: Props) => {
 	// Decide sizing
 	const sizeStyles = decideSize(percentage, stretch);
+	const paddingSize = '10px';
 
 	return (
 		<li
 			css={[
 				liStyles,
 				sizeStyles,
-				showDivider && verticalDivider,
-				padSides && sidePaddingStyles(padSidesOnMobile),
-				padBottom && paddingBottomStyles,
-				padBottomOnMobile && mobilePaddingBottomStyles,
+				showDivider &&
+					decideDivider(offsetBottomPaddingOnDivider, paddingSize),
+				padSides && sidePaddingStyles(padSidesOnMobile, paddingSize),
+				padBottom && paddingBottomStyles(paddingSize),
+				padBottomOnMobile && mobilePaddingBottomStyles(paddingSize),
 				showTopMarginWhenStacked && marginTopStyles,
 				snapAlignStart && snapAlignStartStyles,
 			]}
