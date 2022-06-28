@@ -17,6 +17,23 @@ function isFirstInRow(cardIndex: number) {
 	return cardIndex % 4 === 0;
 }
 
+function hasNoCardBelowIt(cardIndex: number, trailsLength: number) {
+	/**
+		When there are 4 columns of cards being wrapped row-wise, the last
+		4 cards will not have a card directly below them, e.g.
+
+		When the last row is full:		│	And also when it's not:
+			┌──┐┌──┐┌──┐┌──┐			│		┌──┐┌──┐┌──┐┌──┐
+			│  ││  ││  ││  │			│		│  ││  ││-4││-3│
+			└──┘└──┘└──┘└──┘			│		└──┘└──┘└──┘└──┘
+			┌──┐┌──┐┌──┐┌──┐			│		┌──┐┌──┐
+			│-4││-3││-2││-1│			│		│-2││-1│
+			└──┘└──┘└──┘└──┘			│		└──┘└──┘
+										│
+	*/
+	return cardIndex >= trailsLength - 4;
+}
+
 export const ExtraCardsContainer = ({
 	trails,
 	containerPalette,
@@ -33,6 +50,10 @@ export const ExtraCardsContainer = ({
 						padBottom={true}
 						showDivider={!isFirstInRow(index)}
 						key={trail.url}
+						offsetBottomPaddingOnDivider={hasNoCardBelowIt(
+							index,
+							trails.length,
+						)}
 					>
 						<Card
 							containerPalette={containerPalette}
