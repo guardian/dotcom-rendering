@@ -9,13 +9,15 @@ import {
 	SvgSpinner,
 } from '@guardian/source-react-components';
 import type { ReactEventHandler } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import type { OphanAction } from '../browser/ophan/ophan';
 import {
 	getOphanRecordFunction,
 	submitComponentEvent,
 } from '../browser/ophan/ophan';
+
+const isServer = typeof window === 'undefined';
 
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. While this component hides the
@@ -164,7 +166,6 @@ export const SecureSignupIframe = ({
 	const [iframeHeight, setIFrameHeight] = useState<number>(0);
 	const [isWaitingForResponse, setIsWaitingForResponse] =
 		useState<boolean>(false);
-	const [captchaSiteKey, setCaptchaSiteKey] = useState<string>('');
 	const [responseOk, setResponseOk] = useState<boolean | undefined>(
 		undefined,
 	);
@@ -273,12 +274,11 @@ export const SecureSignupIframe = ({
 		resetIframeHeight();
 	};
 
-	// read siteKey
-	useEffect(() => {
-		setCaptchaSiteKey(
-			window.guardian.config.page.googleRecaptchaSiteKey ?? '',
-		);
-	}, []);
+	const captchaSiteKey = isServer
+		? undefined
+		: (window.guardian.config.page.googleRecaptchaSiteKey as
+				| string
+				| undefined);
 
 	return (
 		<>
