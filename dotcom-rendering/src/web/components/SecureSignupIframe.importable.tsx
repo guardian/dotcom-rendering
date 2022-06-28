@@ -60,13 +60,13 @@ const buildFormData = (
 
 	const formData = new FormData();
 	formData.append('email', emailAddress);
-	formData.append('csrfToken', ''); //TO DO - do we need this? how do we get it?
+	formData.append('csrfToken', ''); // TO DO - PR on form handlers in frontend/identity to see how/if this is needed
 	formData.append('listName', newsletterId);
 	formData.append('ref', pageRef);
 	formData.append('refViewId', refViewId);
 	formData.append('name', '');
 	if (window.guardian.config.switches.emailSignupRecaptcha) {
-		formData.append('g-recaptcha-response', token); //  TO DO -  find out if field is required/allowed by form handler
+		formData.append('g-recaptcha-response', token); // TO DO - PR on form handlers - is the token verified?
 	}
 
 	return formData;
@@ -354,12 +354,17 @@ export const SecureSignupIframe = ({
 						}
 					`}
 				>
-					<ReCAPTCHA // TO DO - EXPIRED callback
+					<ReCAPTCHA
 						sitekey={captchaSiteKey}
 						ref={recaptchaRef}
 						onChange={handleCaptchaComplete}
 						onError={handleCaptchaLoadError}
 						size="invisible"
+						// Note - the component supports an onExpired callback
+						// (for when the user completed a challenge, but did
+						// not submit the form before the token expired.
+						// We don't need that here as completing the captcha
+						// (onChange callback) triggers the submission
 					/>
 				</div>
 			)}
