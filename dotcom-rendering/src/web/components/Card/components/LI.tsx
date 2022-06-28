@@ -73,7 +73,6 @@ type Props = {
 	padBottomOnMobile?: boolean; // Should be true if spacing below is desired on mobile devices
 	showTopMarginWhenStacked?: boolean;
 	snapAlignStart?: boolean; // True when snapping card when scrolling e.g. in carousel
-	customStyles?: SerializedStyles;
 };
 
 export const LI = ({
@@ -87,7 +86,6 @@ export const LI = ({
 	padBottomOnMobile,
 	showTopMarginWhenStacked,
 	snapAlignStart = false,
-	customStyles = undefined,
 }: Props) => {
 	// Decide sizing
 	const sizeStyles = decideSize(percentage, stretch);
@@ -103,7 +101,6 @@ export const LI = ({
 				padBottomOnMobile && mobilePaddingBottomStyles,
 				showTopMarginWhenStacked && marginTopStyles,
 				snapAlignStart && snapAlignStartStyles,
-				customStyles && customStyles,
 			]}
 		>
 			{children}

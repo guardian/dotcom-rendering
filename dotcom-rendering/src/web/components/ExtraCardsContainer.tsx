@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
@@ -18,23 +17,6 @@ function isFirstInRow(cardIndex: number) {
 	return cardIndex % 4 === 0;
 }
 
-const dividerOffsetStyle = css`
-	/**
-	 * - This 'nth-last-of-type' selector will select the last 4 <li> elements
-	 *   in the list.
-	 * - The reason for doing this is that we need to make sure that
-	 *   the vertical divider lines between cards don't reach past the bottom
-	 *   of the card itself unless there is another card directly below it.
-	 *   (Because we're padding the bottom of the cards, the vertical line will
-	 *   stretch to the bottom of this padding by default.)
-	 * - In a container of 4 columns, the last 4 elements will never have a
-	 *   card directly below them, even if the bottom row is not full.
-	*/
-	ul &:nth-last-of-type(-n + 4) {
-		--card-divider-offset-bottom: 10px;
-	}
-`;
-
 export const ExtraCardsContainer = ({
 	trails,
 	containerPalette,
@@ -50,7 +32,7 @@ export const ExtraCardsContainer = ({
 						percentage={percentage}
 						padBottom={true}
 						showDivider={!isFirstInRow(index)}
-						customStyles={dividerOffsetStyle}
+						key={trail.url}
 					>
 						<Card
 							containerPalette={containerPalette}

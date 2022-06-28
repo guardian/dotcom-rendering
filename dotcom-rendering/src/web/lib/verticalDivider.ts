@@ -12,7 +12,6 @@ export const verticalDivider = css`
 			left: 0;
 			width: 1px;
 			height: 100%;
-			height: calc(100% - var(--card-divider-offset-bottom));
 			border-left: 1px solid ${border.secondary};
 		}
 	}
