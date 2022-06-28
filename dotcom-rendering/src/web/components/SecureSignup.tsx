@@ -72,6 +72,22 @@ const RecaptchaTerms = () => (
 	</span>
 );
 
+/**
+ * This function renders the content to be used within the iframe,
+ * and converts it to strings of HTML and CSS that can be passed
+ * as props to a component within an Island. The steps are:
+ *
+ * 1. Creates an EmotionServer to handle Emotion operations at
+ * run time.
+ * 2. Server-side renders the content producing a string
+ *  of 'raw' html with inline styling.
+ * 3. Uses the EmotionServer to extract the inline styling from
+ * the 'raw' html, (replacing it with class attribute) and generate a
+ * stringified stylesheet to duplicate the inline styles.
+ * 4. Returns the processed html and stylesheet as strings
+ *
+ * see https://github.com/guardian/dotcom-rendering/pull/5238
+ */
 const generateForm = (
 	newsletterId: string,
 ): { html: string; styles: string } => {
