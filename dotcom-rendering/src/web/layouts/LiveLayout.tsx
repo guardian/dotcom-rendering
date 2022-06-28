@@ -958,6 +958,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													showKeyEventsCarousel={
 														showKeyEventsCarousel
 													}
+													availableTopics={
+														CAPIArticle.availableTopics
+													}
+													selectedTopics={
+														CAPIArticle.selectedTopics
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1127,6 +1133,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													}
 													availableTopics={
 														CAPIArticle.availableTopics
+													}
+													selectedTopics={
+														CAPIArticle.selectedTopics
 													}
 												/>
 												{pagination.totalPages > 1 && (
