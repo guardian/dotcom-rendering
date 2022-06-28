@@ -7,6 +7,8 @@ type Props = {
 	availableTopics: Topic[];
 	selectedTopics?: string;
 	format: ArticleFormat;
+	filterKeyEvents: boolean;
+	keyEvents?: Block[];
 };
 
 const containerStyles = css`
@@ -48,8 +50,18 @@ const handleTopicClick = (isActive: boolean, buttonParams: string) => {
 	} else {
 		urlParams.delete('topics');
 	}
-
+	urlParams.delete('page'); // direct to the first page
 	urlParams.delete('filterKeyEvents');
+
+	window.location.search = urlParams.toString();
+};
+
+const handleKeyEventClick = (filterKeyEvents: boolean) => {
+	const urlParams = new URLSearchParams(window.location.search);
+
+	urlParams.set('filterKeyEvents', filterKeyEvents ? 'false' : 'true');
+	urlParams.delete('page'); // direct to the first page
+	urlParams.delete('topics');
 
 	window.location.search = urlParams.toString();
 };
@@ -58,21 +70,31 @@ export const TopicFilterBank = ({
 	availableTopics,
 	selectedTopics,
 	format,
+	keyEvents,
+	filterKeyEvents = false,
 }: Props) => {
 	const palette = decidePalette(format);
-
 	return (
 		<div css={containerStyles}>
 			<div css={headlineStyles}>
 				Filters{' '}
 				<span css={headlineAccentStyles}>
-					(<span css={betaTextStyles(palette)}>BETA</span>
-					):
+					(<span css={betaTextStyles(palette)}>BETA</span>):
 				</span>
 			</div>
 
 			<div css={topicStyles}>
-				{availableTopics.slice(0, 5).map((topic: Topic) => {
+				{keyEvents?.length && (
+					<FilterButton
+						value={'Key Events'}
+						count={keyEvents.length}
+						format={format}
+						isActive={filterKeyEvents}
+						onClick={() => handleKeyEventClick(filterKeyEvents)}
+					/>
+				)}
+
+				{availableTopics.slice(0, 5).map((topic) => {
 					const buttonParams = `${topic.type}:${topic.value}`;
 					const isActive = selectedTopics
 						? selectedTopics.includes(buttonParams)

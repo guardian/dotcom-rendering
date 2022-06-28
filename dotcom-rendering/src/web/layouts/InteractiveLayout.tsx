@@ -12,10 +12,7 @@ import {
 	neutral,
 	until,
 } from '@guardian/source-foundations';
-import {
-	Lines,
-	StraightLines,
-} from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import React from 'react';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
@@ -25,6 +22,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
+import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
@@ -44,11 +42,7 @@ import { StickyBottomBanner } from '../components/StickyBottomBanner.importable'
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { decidePalette } from '../lib/decidePalette';
-import {
-	decideLineCount,
-	decideLineEffect,
-	getCurrentPillar,
-} from '../lib/layoutHelpers';
+import { getCurrentPillar } from '../lib/layoutHelpers';
 import {
 	interactiveGlobalStyles,
 	interactiveLegacyClasses,
@@ -466,18 +460,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							<GridItem area="lines">
 								<div css={maxWidth}>
 									<div css={stretchLines}>
-										<Lines
-											cssOverrides={css`
-												display: block;
-											`}
-											count={decideLineCount(
-												format.design,
-											)}
-											effect={decideLineEffect(
-												format.design,
-												format.theme,
-											)}
-										/>
+										<DecideLines format={format} />
 									</div>
 								</div>
 							</GridItem>

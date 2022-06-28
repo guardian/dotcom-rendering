@@ -93,12 +93,14 @@ export const LiveBlogRenderer = ({
 							format={format}
 						/>
 					</Island>
-					<Island deferUntil="visible">
-						<FilterKeyEventsToggle
-							filterKeyEvents={filterKeyEvents}
-							id="filter-toggle-mobile"
-						/>
-					</Island>
+					{!switches.automaticFilters && (
+						<Island deferUntil="visible">
+							<FilterKeyEventsToggle
+								filterKeyEvents={filterKeyEvents}
+								id="filter-toggle-mobile"
+							/>
+						</Island>
+					)}
 				</Hide>
 			) : (
 				<></>
@@ -110,6 +112,8 @@ export const LiveBlogRenderer = ({
 						availableTopics={availableTopics}
 						selectedTopics={selectedTopics}
 						format={format}
+						keyEvents={keyEvents}
+						filterKeyEvents={filterKeyEvents}
 					/>
 				</Hide>
 			)}

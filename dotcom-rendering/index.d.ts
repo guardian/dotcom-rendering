@@ -1087,7 +1087,7 @@ type AvatarType = {
 
 type MediaType = 'Video' | 'Audio' | 'Gallery';
 
-type LineEffectType = 'squiggly' | 'dotted' | 'straight';
+type LineEffectType = 'labs' | 'dotted' | 'straight';
 
 type LeftColSize = 'compact' | 'wide';
 
@@ -1467,6 +1467,7 @@ declare namespace JSX {
 			name: string;
 			deferUntil?: 'idle' | 'visible';
 			clientOnly?: boolean;
+			expediteLoading?: boolean;
 			props: any;
 			children: React.ReactNode;
 		};

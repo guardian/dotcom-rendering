@@ -16,10 +16,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
-import {
-	Lines,
-	StraightLines,
-} from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
@@ -29,6 +26,7 @@ import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { ContainerLayout } from '../components/ContainerLayout';
+import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
@@ -59,11 +57,7 @@ import { TopicFilterBank } from '../components/TopicFilterBank.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
-import {
-	decideLineCount,
-	decideLineEffect,
-	getCurrentPillar,
-} from '../lib/layoutHelpers';
+import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
@@ -309,12 +303,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const cricketMatchUrl =
 		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
 
-	const showKeyEventsCarousel = true;
-	// CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
+	const showKeyEventsCarousel =
+		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
 
-	const isInFilteringBeta = true;
-	// CAPIArticle.config.switches.automaticFilters &&
-	// CAPIArticle.availableTopics;
+	const isInFilteringBeta =
+		CAPIArticle.config.switches.automaticFilters &&
+		CAPIArticle.availableTopics;
 
 	/*
 	The topic bank on desktop will be positioned where we currently show the key events container.
@@ -324,8 +318,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	here to see if the user is within this test, meaning we can therefore position the filter bank in the empty space.
 	Once the key-event-carousel test is completed and this change is productionised, we can remove the final `showKeyEventsCarousel` condition.
 	*/
-	const showTopicFilterBank = true;
-	// CAPIArticle.config.switches.automaticFilters && showKeyEventsCarousel;
+	const showTopicFilterBank =
+		CAPIArticle.config.switches.automaticFilters && showKeyEventsCarousel;
 
 	return (
 		<>
@@ -561,15 +555,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<GridItem area="lines">
 							<Hide from="desktop">
 								<div css={sidePaddingDesktop}>
-									<Lines
-										cssOverrides={css`
-											display: block;
-										`}
-										count={decideLineCount(format.design)}
-										effect={decideLineEffect(
-											format.design,
-											format.theme,
-										)}
+									<DecideLines
+										format={format}
 										color={
 											format.design ===
 											ArticleDesign.LiveBlog
@@ -744,18 +731,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								{/* Lines */}
 								<Hide until="desktop">
 									<div css={[maxWidth, sidePaddingDesktop]}>
-										<Lines
-											cssOverrides={css`
-												display: block;
-											`}
-											count={decideLineCount(
-												format.design,
-											)}
-											effect={decideLineEffect(
-												format.design,
-												format.theme,
-											)}
-										/>
+										<DecideLines format={format} />
 									</div>
 								</Hide>
 								{/* Meta */}
@@ -824,6 +800,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 															CAPIArticle.selectedTopics
 														}
 														format={format}
+														keyEvents={
+															CAPIArticle.keyEvents
+														}
+														filterKeyEvents={
+															CAPIArticle.filterKeyEvents
+														}
 													/>
 												</Island>
 											</div>
@@ -845,7 +827,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
-									{CAPIArticle.keyEvents.length ? (
+									{CAPIArticle.keyEvents.length &&
+									!showTopicFilterBank ? (
 										<Hide below="desktop">
 											<Island deferUntil="visible">
 												<FilterKeyEventsToggle

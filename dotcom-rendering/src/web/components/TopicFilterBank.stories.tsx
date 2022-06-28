@@ -26,6 +26,13 @@ export default {
 	title: 'Components/TopicFilterBank',
 };
 
+const baseProperties = {
+	id: '123',
+	elements: [],
+	attributes: { keyEvent: false, pinned: false, summary: false },
+	primaryDateLine: '',
+	secondaryDateLine: '',
+};
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -43,6 +50,14 @@ export const topicBank = () => {
 			<TopicFilterBank
 				availableTopics={availableTopics}
 				format={format}
+				keyEvents={[
+					{
+						...baseProperties,
+						blockFirstPublished: 1638279933000,
+						title: 'title',
+					},
+				]}
+				filterKeyEvents={false}
 			/>
 		</Wrapper>
 	);
