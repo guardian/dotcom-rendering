@@ -6,6 +6,7 @@ import {
 	from,
 	neutral,
 	news,
+	palette,
 	text,
 	textSans,
 	until,
@@ -13,12 +14,14 @@ import {
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
+import { linkNotificationCount } from '../lib/linkNotificationCount';
 
 export interface DropdownLinkType {
 	url: string;
 	title: string;
 	isActive?: boolean;
 	dataLinkName: string;
+	notifications?: string[];
 }
 
 interface Props {
@@ -138,6 +141,7 @@ const buttonStyles = (overrideColor?: string) => css`
 	padding: 0px 10px 6px 5px;
 	margin: 1px 0 0;
 	text-decoration: none;
+	position: relative;
 
 	:hover {
 		color: ${brandAlt[400]};
@@ -170,6 +174,58 @@ const buttonExpanded = css`
 		transform: translateY(1px) rotate(-135deg);
 	}
 `;
+
+const badgeDiameter = 20;
+const notificationColor = palette.error[400];
+
+const notificationBadgeStyles = css`
+	background-color: ${notificationColor};
+	color: ${palette.neutral[100]};
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-width: ${badgeDiameter}px;
+	height: ${badgeDiameter}px;
+	border-radius: ${badgeDiameter / 2}px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0 5px;
+	margin-left: -10px;
+	margin-top: -3px;
+`;
+
+const notificationStyles = css`
+	${textSans.xxsmall()};
+	color: ${notificationColor};
+`;
+
+const redDotDiameter = 16;
+const redDotStyles = css`
+	background-color: ${notificationColor};
+	width: ${redDotDiameter}px;
+	height: ${redDotDiameter}px;
+	border-radius: ${redDotDiameter / 2}px;
+	position: absolute;
+	left: 5px;
+	top: 12px;
+`;
+
+const notificationCountStyles = css`
+	${textSans.xsmall()};
+	line-height: ${badgeDiameter}px;
+`;
+
+const NotificationBadge = ({ count }: { count: number }) => {
+	return (
+		<div css={notificationBadgeStyles}>
+			<span css={notificationCountStyles}>{count + 0}</span>
+		</div>
+	);
+};
+
+const RedDot = () => <div css={redDotStyles} />;
 
 export const Dropdown = ({
 	id,
@@ -219,6 +275,8 @@ export const Dropdown = ({
 	// needs to be unique to allow multiple dropdowns on same page
 	const dropdownID = `dropbox-id-${id}`;
 	const checkboxID = `checkbox-id-${id}`;
+
+	const notificationCount = linkNotificationCount(links);
 
 	return (
 		<>
@@ -281,8 +339,12 @@ export const Dropdown = ({
 						aria-expanded={isExpanded ? 'true' : 'false'}
 						data-link-name={dataLinkName}
 						data-cy="dropdown-button"
+						type="button"
 					>
 						{label}
+						{notificationCount > 0 && (
+							<NotificationBadge count={notificationCount} />
+						)}
 					</button>
 					<div css={isExpanded ? displayBlock : displayNone}>
 						{children ? (
@@ -290,7 +352,12 @@ export const Dropdown = ({
 						) : (
 							<ul css={ulStyles} data-cy="dropdown-options">
 								{links.map((l, index) => (
-									<li key={l.title}>
+									<li
+										css={css`
+											position: relative;
+										`}
+										key={l.title}
+									>
 										<a
 											href={l.url}
 											css={[
@@ -301,7 +368,21 @@ export const Dropdown = ({
 											data-link-name={l.dataLinkName}
 										>
 											{l.title}
+											{l.notifications?.map(
+												(notification) => (
+													<div
+														css={notificationStyles}
+													>
+														{notification}
+													</div>
+												),
+											)}
 										</a>
+
+										{l.notifications?.length &&
+											l.notifications.length > 0 && (
+												<RedDot />
+											)}
 									</li>
 								))}
 							</ul>
