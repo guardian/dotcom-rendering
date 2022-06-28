@@ -11,6 +11,9 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install Node
         uses: guardian/actions-setup-node@main
+      - name: Generate production build
+        run: make build
+        working-directory: dotcom-rendering
       - name: Install cypress
         uses: cypress-io/github-action@v4
         with:
