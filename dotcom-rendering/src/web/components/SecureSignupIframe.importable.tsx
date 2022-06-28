@@ -34,10 +34,10 @@ type Props = {
 	successText: string;
 };
 
-const ErrorMessageWithAdvice = (props: { text?: string }) => (
+const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
 	<InlineError>
 		<span>
-			{props.text} Please try again or contact{' '}
+			{text} Please try again or contact{' '}
 			<Link href="mailto:customer.help@theguardian.com" target="_blank">
 				customer.help@theguardian.com
 			</Link>
@@ -45,10 +45,12 @@ const ErrorMessageWithAdvice = (props: { text?: string }) => (
 	</InlineError>
 );
 
-const SuccessMessage = (props: { text?: string }) => (
+const SuccessMessage = ({ text }: { text?: string }) => (
 	<InlineSuccess>
-		<b>Subscription Confirmed.&nbsp;</b>
-		<span>{props.text}</span>
+		<span>
+			<b>Subscription Confirmed.&nbsp;</b>
+			<span>{text}</span>
+		</span>
 	</InlineSuccess>
 );
 
