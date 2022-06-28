@@ -186,6 +186,11 @@ export const renderKeyEvents = (
 	}
 };
 
+/**
+ * Sends markup to Frontend, which forwards it to the client.
+ * Frontend expects that it will receive the markup string as a value of the
+ * key 'html' in a json object, i.e. { "html": "<some markup>" }
+ */
 export const renderCards = (
 	{ body }: { body: CardsRequest },
 	res: express.Response,
