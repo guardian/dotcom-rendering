@@ -6,6 +6,7 @@ import {
 } from '@guardian/libs';
 import { commercialEndOfQuarter2Test } from '../experiments/tests/commercial-end-of-quarter-2-test';
 import { commercialLazyLoadMarginReloaded } from '../experiments/tests/commercial-lazy-load-margin-reloaded';
+import { multiStickyRightAds } from '../experiments/tests/multi-sticky-right-ads';
 import { useAB } from '../lib/useAB';
 
 export const CoreVitals = () => {
@@ -25,6 +26,7 @@ export const CoreVitals = () => {
 		/* keep array multi-line */
 		commercialEndOfQuarter2Test,
 		commercialLazyLoadMarginReloaded,
+		multiStickyRightAds,
 	];
 
 	const userInClientSideTestToForceMetrics =
