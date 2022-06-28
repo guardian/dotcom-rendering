@@ -3,11 +3,11 @@ import {
 	brandAltBackground,
 	from,
 	headline,
+	neutral,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
 import { SvgEnvelope } from '@guardian/source-react-components';
-import React from 'react';
 import { SecureSignup } from './SecureSignup';
 
 type Props = {
@@ -18,33 +18,31 @@ type Props = {
 	successText: string;
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => {
-	return (
-		<div
-			css={css`
-				border: black 3px dashed;
-				border-radius: 12px;
-				padding: 10px;
-				margin-bottom: ${space[3]}px;
-			`}
-		>
-			{children}
-		</div>
-	);
-};
+const containerStyles = css`
+	border: ${neutral[0]} 3px dashed;
+	border-radius: 12px;
+	padding: 10px;
+	margin-bottom: ${space[3]}px;
+`;
 
-const Title = ({ name }: { name: string }) => {
-	return (
-		<div
-			css={css`
-				${headline.xsmall({ fontWeight: 'bold' })}
-				flex-grow: 1;
-			`}
-		>
-			Sign up to {name} today
-		</div>
-	);
-};
+const stackBelowTabletStyles = css`
+	display: flex;
+	flex-direction: column;
+	${from.tablet} {
+		flex-direction: row;
+	}
+`;
+
+const titleStyles = css`
+	${headline.xsmall({ fontWeight: 'bold' })}
+	flex-grow: 1;
+`;
+
+const descriptionStyles = css`
+	${textSans.medium({ lineHeight: 'tight' })}
+	margin-top: ${space[1]}px;
+	margin-bottom: ${space[2]}px;
+`;
 
 const Frequency = ({ frequency }: { frequency: string }) => {
 	return (
@@ -81,34 +79,6 @@ const Frequency = ({ frequency }: { frequency: string }) => {
 	);
 };
 
-const Description = ({ description }: { description: string }) => {
-	return (
-		<div
-			css={css`
-				${textSans.medium({ lineHeight: 'tight' })}
-				margin-top: ${space[1]}px;
-				margin-bottom: ${space[2]}px;
-			`}
-		>
-			{description}
-		</div>
-	);
-};
-
-const StackBelowTablet = ({ children }: { children: React.ReactNode }) => (
-	<div
-		css={css`
-			display: flex;
-			flex-direction: column;
-			${from.tablet} {
-				flex-direction: row;
-			}
-		`}
-	>
-		{children}
-	</div>
-);
-
 export const EmailSignup = ({
 	newsletterId,
 	name,
@@ -117,16 +87,16 @@ export const EmailSignup = ({
 	successText,
 }: Props) => {
 	return (
-		<Container>
-			<StackBelowTablet>
-				<Title name={name} />
+		<aside css={containerStyles}>
+			<div css={stackBelowTabletStyles}>
+				<p css={titleStyles}>Sign up to {name} today</p>
 				<Frequency frequency={frequency} />
-			</StackBelowTablet>
-			<Description description={description} />
+			</div>
+			<p css={descriptionStyles}>{description}</p>
 			<SecureSignup
 				newsletterId={newsletterId}
 				successText={successText}
 			/>
-		</Container>
+		</aside>
 	);
 };
