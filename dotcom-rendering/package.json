@@ -67,6 +67,7 @@
     "@guardian/libs": "^5.0.0",
     "@guardian/shimport": "^1.0.2",
     "@guardian/support-dotcom-components": "^1.0.2",
+    "@percy/cli": "^1.4.0",
     "@sentry/browser": "^5.30.0",
     "@sentry/integrations": "^5.30.0",
     "@testing-library/dom": "^8.13.0",

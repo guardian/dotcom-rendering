@@ -23,4 +23,5 @@ jobs:
           wait-on: "http://localhost:9000"
           wait-on-timeout: 30
       - name: Percy Test
-        run: npx @percy/cli exec -- cypress run
+        working-directory: dotcom-rendering
+        run: yarn percy  exec -- cypress run
