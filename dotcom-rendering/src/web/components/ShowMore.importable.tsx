@@ -19,25 +19,30 @@ function decideButtonText({
 }
 
 function insertHtml(html: string, collectionId: string) {
-	const placeholder = document.querySelector<HTMLElement>(
-		`[data-show-more-placeholder="${collectionId}"]`,
-	);
-	/**
-	 * it is expected that the value of `html` will be a server-rendered
-	 * instance of the ExtraCardsContainer component
-	 */
-	if (placeholder) {
-		placeholder.insertAdjacentHTML('afterend', html);
+	try {
+		const placeholder = document.querySelector<HTMLElement>(
+			`[data-show-more-placeholder="${collectionId}"]`,
+		);
+		/**
+		 * it is expected that the value of `html` will be a server-rendered
+		 * instance of the ExtraCardsContainer component
+		 */
+		// @ts-expect-error -- We want to catch this error if the element is missing
+		placeholder.innerHTML = html;
+	} catch (e) {
+		// TODO: pass to Sentry
 	}
 }
 
 function removeHtml(collectionId: string) {
-	const placeholder = document.querySelector<HTMLElement>(
-		`[data-show-more-placeholder="${collectionId}"]`,
-	);
-	if (placeholder) {
-		const nextSibling = placeholder.nextElementSibling;
-		if (nextSibling?.tagName === 'UL') nextSibling.remove();
+	try {
+		const placeholder = document.querySelector<HTMLElement>(
+			`[data-show-more-placeholder="${collectionId}"]`,
+		);
+		// @ts-expect-error -- We want to catch this error if the element is missing
+		placeholder.innerHTML = '';
+	} catch (e) {
+		// TODO: pass to sentry
 	}
 }
 
@@ -50,20 +55,19 @@ export const ShowMore = ({
 	collectionId: string;
 	displayName: string;
 }) => {
-	const url = `http://localhost:9000/${pageId}/show-more/${collectionId}.json?dcr=true`;
 	const [showMore, setShow] = useState(false);
-	const { data, loading } = useApi<{ html: string }>(
-		showMore ? url : undefined,
-	);
+	// We only pass an actual URL to SWR when 'showMore' is true.
+	// Toggling 'showMore' will trigger a re-render
+	//   see: https://swr.vercel.app/docs/conditional-fetching#conditional
+	const url = showMore
+		? `http://localhost:9000/${pageId}/show-more/${collectionId}.json?dcr=true`
+		: undefined;
+	const { data, loading } = useApi<{ html: string }>(url);
 
-	try {
-		if (data?.html) {
-			insertHtml(data.html, collectionId);
-		} else if (!showMore) {
-			removeHtml(collectionId);
-		}
-	} catch (e) {
-		// Do nothing
+	if (!showMore) {
+		removeHtml(collectionId);
+	} else if (data?.html) {
+		insertHtml(data.html, collectionId);
 	}
 
 	return (
@@ -79,6 +83,7 @@ export const ShowMore = ({
 					margin-left: 10px;
 				}
 			`}
+			disabled={loading}
 		>
 			{decideButtonText({ showMore, loading, displayName })}
 		</Button>
