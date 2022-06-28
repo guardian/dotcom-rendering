@@ -40,6 +40,20 @@ const topicStyles = css`
 	}
 `;
 
+const handleTopicClick = (isActive: boolean, buttonParams: string) => {
+	const urlParams = new URLSearchParams(window.location.search);
+
+	if (!isActive) {
+		urlParams.set('topics', buttonParams);
+	} else {
+		urlParams.delete('topics');
+	}
+
+	urlParams.delete('filterKeyEvents');
+
+	window.location.search = urlParams.toString();
+};
+
 export const TopicFilterBank = ({
 	availableTopics,
 	selectedTopics,
@@ -64,22 +78,6 @@ export const TopicFilterBank = ({
 						? selectedTopics.includes(buttonParams)
 						: false;
 
-					const handleTopicClick = () => {
-						const urlParams = new URLSearchParams(
-							window.location.search,
-						);
-
-						if (!isActive) {
-							urlParams.set('topics', buttonParams);
-						} else {
-							urlParams.delete('topics');
-						}
-
-						urlParams.delete('filterKeyEvents');
-
-						window.location.search = urlParams.toString();
-					};
-
 					return (
 						<FilterButton
 							value={topic.value}
@@ -87,7 +85,9 @@ export const TopicFilterBank = ({
 							count={topic.count}
 							format={format}
 							isActive={isActive}
-							onClick={handleTopicClick}
+							onClick={() =>
+								handleTopicClick(isActive, buttonParams)
+							}
 						/>
 					);
 				})}

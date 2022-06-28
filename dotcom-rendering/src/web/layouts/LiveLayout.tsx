@@ -309,12 +309,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const cricketMatchUrl =
 		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
 
-	const showKeyEventsCarousel =
-		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
+	const showKeyEventsCarousel = true;
+	// CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
 
-	const isInFilteringBeta =
-		CAPIArticle.config.switches.automaticFilters &&
-		CAPIArticle.availableTopics;
+	const isInFilteringBeta = true;
+	// CAPIArticle.config.switches.automaticFilters &&
+	// CAPIArticle.availableTopics;
 
 	/*
 	The topic bank on desktop will be positioned where we currently show the key events container.
@@ -324,8 +324,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	here to see if the user is within this test, meaning we can therefore position the filter bank in the empty space.
 	Once the key-event-carousel test is completed and this change is productionised, we can remove the final `showKeyEventsCarousel` condition.
 	*/
-	const showTopicFilterBank =
-		CAPIArticle.config.switches.automaticFilters && showKeyEventsCarousel;
+	const showTopicFilterBank = true;
+	// CAPIArticle.config.switches.automaticFilters && showKeyEventsCarousel;
 
 	return (
 		<>
