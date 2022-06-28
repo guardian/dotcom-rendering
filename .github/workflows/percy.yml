@@ -25,3 +25,5 @@ jobs:
       - name: Percy Test
         working-directory: dotcom-rendering
         run: yarn percy  exec -- cypress run
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
