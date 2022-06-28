@@ -1,13 +1,12 @@
 import { css } from '@emotion/react';
 import {
-	brandAltBackground,
 	from,
 	headline,
 	neutral,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
-import { SvgEnvelope } from '@guardian/source-react-components';
+import { NewsletterFrequency } from './NewsletterFrequency';
 import { SecureSignup } from './SecureSignup';
 
 type Props = {
@@ -44,41 +43,6 @@ const descriptionStyles = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-const Frequency = ({ frequency }: { frequency: string }) => {
-	return (
-		<div
-			css={css`
-				display: flex;
-				margin-top: ${space[2]}px;
-				${from.tablet} {
-					margin-top: 0;
-				}
-			`}
-		>
-			<div
-				css={css`
-					svg {
-						background: ${brandAltBackground.primary};
-						border-radius: 50%;
-						height: 28px;
-						padding: 2px;
-						margin-right: ${space[1]}px;
-					}
-				`}
-			>
-				<SvgEnvelope />
-			</div>
-			<div
-				css={css`
-					${textSans.medium({ fontWeight: 'bold' })}
-				`}
-			>
-				{frequency}
-			</div>
-		</div>
-	);
-};
-
 export const EmailSignup = ({
 	newsletterId,
 	name,
@@ -90,7 +54,7 @@ export const EmailSignup = ({
 		<aside css={containerStyles}>
 			<div css={stackBelowTabletStyles}>
 				<p css={titleStyles}>Sign up to {name} today</p>
-				<Frequency frequency={frequency} />
+				<NewsletterFrequency frequency={frequency} />
 			</div>
 			<p css={descriptionStyles}>{description}</p>
 			<SecureSignup
