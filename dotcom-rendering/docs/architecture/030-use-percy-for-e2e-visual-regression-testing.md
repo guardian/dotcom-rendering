@@ -1,4 +1,4 @@
-# Use Percy/Cypress for e2e-style visual regression testing
+# Use Percy/Cypress for integration-style visual regression testing
 
 ## Status: Proposed
 
