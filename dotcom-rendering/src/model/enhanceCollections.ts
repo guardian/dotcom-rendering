@@ -17,6 +17,9 @@ export const enhanceCollections = (
 			curated: enhanceCards(collection.curated, containerPalette),
 			backfill: enhanceCards(collection.backfill, containerPalette),
 			treats: enhanceCards(collection.treats, containerPalette),
+			config: {
+				showDateHeader: collection.config.showDateHeader,
+			},
 		};
 	});
 };

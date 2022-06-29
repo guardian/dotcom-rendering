@@ -202,7 +202,7 @@
             "type": "string"
         },
         "editionId": {
-            "$ref": "#/definitions/Edition"
+            "$ref": "#/definitions/EditionId"
         },
         "pageId": {
             "type": "string"
@@ -398,6 +398,15 @@
             "type": "boolean"
         },
         "mostRecentBlockId": {
+            "type": "string"
+        },
+        "availableTopics": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Topic"
+            }
+        },
+        "selectedTopics": {
             "type": "string"
         }
     },
@@ -3623,7 +3632,7 @@
                 }
             }
         },
-        "Edition": {
+        "EditionId": {
             "enum": [
                 "AU",
                 "INT",
@@ -4249,6 +4258,36 @@
             "enum": [
                 "CricketMatchType",
                 "FootballMatchType"
+            ],
+            "type": "string"
+        },
+        "Topic": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "$ref": "#/definitions/TopicType"
+                },
+                "value": {
+                    "type": "string"
+                },
+                "count": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "count",
+                "type",
+                "value"
+            ]
+        },
+        "TopicType": {
+            "enum": [
+                "GPE",
+                "LOC",
+                "ORG",
+                "PERSON",
+                "PRODUCT",
+                "WORK_OF_ART"
             ],
             "type": "string"
         }

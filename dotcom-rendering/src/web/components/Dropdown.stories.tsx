@@ -98,3 +98,32 @@ export const DropdownNoActive = () => (
 	</Header>
 );
 DropdownNoActive.story = { name: 'Dropdown with nothing active' };
+
+const linksWithNotifications = [
+	{
+		url: '/account-overview',
+		title: 'Account Overview',
+		dataLinkName: 'account-overview',
+	},
+	{
+		url: '/billing',
+		title: 'Billing',
+		dataLinkName: 'billing',
+		notifications: ['Billing attempt failed'],
+	},
+];
+
+export const DropdownWithNotifications = () => (
+	<Header>
+		<Nav>
+			<Dropdown
+				id="d3"
+				label="My Account"
+				links={linksWithNotifications}
+				dataLinkName="linkname3"
+			/>
+		</Nav>
+	</Header>
+);
+
+DropdownWithNotifications.story = { name: 'Dropdown with notifications' };

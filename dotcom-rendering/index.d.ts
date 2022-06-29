@@ -128,6 +128,9 @@ type Palette = {
 		cricketScoreboardLink: Colour;
 		keyEvent: Colour;
 		keyEventTime: Colour;
+		filterButton: Colour;
+		filterButtonHover: Colour;
+		filterButtonActive: Colour;
 	};
 	background: {
 		article: Colour;
@@ -156,6 +159,9 @@ type Palette = {
 		summaryEventBullet: Colour;
 		keyEvent: Colour;
 		keyEventFromDesktop: Colour;
+		filterButton: Colour;
+		filterButtonHover: Colour;
+		filterButtonActive: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -190,6 +196,7 @@ type Palette = {
 		cricketScoreboardDivider: Colour;
 		cardSupporting: Colour;
 		keyEvent: Colour;
+		filterButton: Colour;
 	};
 	topBar: {
 		card: Colour;
@@ -217,6 +224,7 @@ type ContainerOverrides = {
 		dynamoMeta: Colour;
 		container: Colour;
 		containerToggle: Colour;
+		containerDate: Colour;
 	};
 	border: {
 		container: Colour;
@@ -231,7 +239,13 @@ type ContainerOverrides = {
 	};
 };
 
-type Edition = 'UK' | 'US' | 'INT' | 'AU';
+type EditionId = 'UK' | 'US' | 'INT' | 'AU';
+
+type Edition = {
+	id: EditionId;
+	displayName: string;
+	locale: string;
+};
 
 type SharePlatform =
 	| 'facebook'
@@ -278,7 +292,7 @@ interface EditionCommercialProperties {
 	branding?: Branding;
 }
 
-type CommercialProperties = { [E in Edition]: EditionCommercialProperties };
+type CommercialProperties = { [E in EditionId]: EditionCommercialProperties };
 
 type BrandingLogo = {
 	src: string;
@@ -540,7 +554,7 @@ interface CAPIArticleType {
 	webPublicationDateDisplay: string;
 	webPublicationSecondaryDateDisplay: string;
 	editionLongForm: string;
-	editionId: Edition;
+	editionId: EditionId;
 	pageId: string;
 	version: number; // TODO: check who uses?
 	tags: TagType[];
@@ -604,6 +618,8 @@ interface CAPIArticleType {
 
 	// Included on live and dead blogs. Used when polling
 	mostRecentBlockId?: string;
+	availableTopics?: Topic[];
+	selectedTopics?: string;
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
@@ -612,7 +628,7 @@ type StageType = 'DEV' | 'CODE' | 'PROD';
 interface FEFrontType {
 	pressedPage: FEPressedPageType;
 	nav: CAPINavType;
-	editionId: Edition;
+	editionId: EditionId;
 	editionLongForm: string;
 	guardianBaseURL: string;
 	pageId: string;
@@ -626,7 +642,7 @@ interface FEFrontType {
 type DCRFrontType = {
 	pressedPage: DCRPressedPageType;
 	nav: CAPINavType;
-	editionId: Edition;
+	editionId: EditionId;
 	webTitle: string;
 	config: FEFrontConfigType;
 	pageFooter: FooterType;
@@ -803,7 +819,7 @@ type FEFrontCard = {
 		webTitle: string;
 		linkText?: string;
 		webUrl?: string;
-		editionBrandings: { edition: { id: Edition } }[];
+		editionBrandings: { edition: { id: EditionId } }[];
 	};
 	header: {
 		isVideo: boolean;
@@ -926,6 +942,9 @@ type DCRCollectionType = {
 	backfill: DCRFrontCard[];
 	treats: DCRFrontCard[];
 	href?: string;
+	config: {
+		showDateHeader: boolean;
+	};
 };
 
 type FEFrontConfigType = {
@@ -1068,7 +1087,7 @@ type AvatarType = {
 
 type MediaType = 'Video' | 'Audio' | 'Gallery';
 
-type LineEffectType = 'squiggly' | 'dotted' | 'straight';
+type LineEffectType = 'labs' | 'dotted' | 'straight';
 
 type LeftColSize = 'compact' | 'wide';
 
@@ -1150,6 +1169,14 @@ type MatchReportType = {
 	minByMinUrl: string;
 	reportUrl: string;
 };
+
+interface Topic {
+	type: TopicType;
+	value: string;
+	count: number;
+}
+
+type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
 
 /**
  * Onwards
@@ -1254,7 +1281,7 @@ interface GADataType {
 	toneIds: string;
 	seriesId: string;
 	isHosted: string;
-	edition: Edition;
+	edition: string;
 	beaconUrl: string;
 }
 
@@ -1440,6 +1467,7 @@ declare namespace JSX {
 			name: string;
 			deferUntil?: 'idle' | 'visible';
 			clientOnly?: boolean;
+			expediteLoading?: boolean;
 			props: any;
 			children: React.ReactNode;
 		};

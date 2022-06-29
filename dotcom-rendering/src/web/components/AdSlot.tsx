@@ -1,5 +1,8 @@
 import { css } from '@emotion/react';
-import { adSizes, sizeMappings } from '@guardian/commercial-core';
+import {
+	adSizes,
+	slotSizeMappings as sizeMappings,
+} from '@guardian/commercial-core';
 import { ArticleDisplay } from '@guardian/libs';
 import {
 	border,

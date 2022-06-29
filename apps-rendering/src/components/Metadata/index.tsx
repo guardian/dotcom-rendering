@@ -28,6 +28,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
+import ImmersiveMetadata from './ImmersiveMetadata';
 
 // ----- Component ----- //
 
@@ -275,8 +276,19 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 const Metadata: FC<Props> = (props: Props) => {
 	const { display, design } = props.item;
 
+	if (display === ArticleDisplay.Immersive) {
+		return (
+			<ImmersiveMetadata
+				format={getFormat(props.item)}
+				publishDate={props.item.publishDate}
+				commentCount={props.item.commentCount}
+				contributors={props.item.contributors}
+				commentable={props.item.commentable}
+			/>
+		);
+	}
+
 	if (
-		display === ArticleDisplay.Immersive ||
 		design === ArticleDesign.Comment ||
 		design === ArticleDesign.Letter ||
 		design === ArticleDesign.Editorial

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, space, textSans } from '@guardian/source-foundations';
+import { from, headline, space } from '@guardian/source-foundations';
 import {
 	Button,
 	buttonThemeBrandAlt,
@@ -54,7 +54,7 @@ const marginBottomStyles = css`
 	}
 `;
 const titleStyles = css`
-	${textSans.small({ fontWeight: 'bold', lineHeight: 'regular' })};
+	${headline.xxxsmall({ fontWeight: 'bold', lineHeight: 'regular' })};
 `;
 
 const containerStyles = css`

@@ -187,12 +187,12 @@ const bttPosition = css`
 const FooterLinks = ({
 	pageFooter,
 	urls,
-	edition,
+	editionId,
 	contributionsServiceUrl,
 }: {
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
-	edition: Edition;
+	editionId: EditionId;
 	contributionsServiceUrl: string;
 }) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
@@ -216,7 +216,7 @@ const FooterLinks = ({
 			<Island deferUntil="visible" clientOnly={true}>
 				<ReaderRevenueLinks
 					urls={urls}
-					edition={edition}
+					editionId={editionId}
 					dataLinkNamePrefix="footer : "
 					inHeader={false}
 					remoteHeader={false}
@@ -236,7 +236,7 @@ const FooterLinks = ({
 
 const year = new Date().getFullYear();
 
-const decideSignupLink = (edition: Edition): string => {
+const decideSignupLink = (edition: EditionId): string => {
 	switch (edition) {
 		case 'US':
 			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-us';
@@ -254,14 +254,14 @@ export const Footer = ({
 	pillar,
 	pageFooter,
 	urls,
-	edition,
+	editionId,
 	contributionsServiceUrl,
 }: {
 	pillars: PillarType[];
 	pillar: ArticleTheme;
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
-	edition: Edition;
+	editionId: EditionId;
 	contributionsServiceUrl: string;
 }) => (
 	<div
@@ -287,7 +287,7 @@ export const Footer = ({
 				</div>
 				<LinkButton
 					size="small"
-					href={decideSignupLink(edition)}
+					href={decideSignupLink(editionId)}
 					cssOverrides={emailSignupButton}
 					icon={<SvgArrowRightStraight />}
 					iconSide="right"
@@ -299,7 +299,7 @@ export const Footer = ({
 			<FooterLinks
 				pageFooter={pageFooter}
 				urls={urls}
-				edition={edition}
+				editionId={editionId}
 				contributionsServiceUrl={contributionsServiceUrl}
 			/>
 			<div css={bttPosition}>

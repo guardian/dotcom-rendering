@@ -33,7 +33,7 @@ export interface ArticleModel {
 	hasRelated: boolean;
 	hasStoryPackage: boolean;
 	isCommentable: boolean;
-	editionId: Edition;
+	editionId: EditionId;
 	contentType: string;
 	commercialProperties: CommercialProperties;
 	isImmersive: boolean;

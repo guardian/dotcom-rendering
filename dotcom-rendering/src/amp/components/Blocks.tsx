@@ -62,7 +62,7 @@ const clearBoth = css`
 export const Blocks: React.FunctionComponent<{
 	blocks: Block[];
 	pillar: ArticleTheme;
-	edition: Edition;
+	editionId: EditionId;
 	section?: string;
 	contentType: string;
 	switches: Switches;
@@ -73,7 +73,7 @@ export const Blocks: React.FunctionComponent<{
 }> = ({
 	blocks,
 	pillar,
-	edition,
+	editionId,
 	section,
 	contentType,
 	switches,
@@ -119,7 +119,7 @@ export const Blocks: React.FunctionComponent<{
 	const slotIndexes = findBlockAdSlots(liveBlogBlocks);
 	const adInfo = {
 		section,
-		edition,
+		editionId,
 		contentType,
 		commercialProperties,
 		switches: {
@@ -147,7 +147,7 @@ export const Blocks: React.FunctionComponent<{
 								css={adStyle}
 							>
 								<RegionalAd
-									edition={edition}
+									editionId={editionId}
 									section={section || ''}
 									contentType={contentType}
 									config={adConfig}

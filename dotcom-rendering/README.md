@@ -6,21 +6,23 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
--   [Quick start](#quick-start)
-    -   [Install Node.js](#install-nodejs)
-    -   [Running instructions](#running-instructions)
-    -   [Detailed Setup](#detailed-setup)
-    -   [Technologies](#technologies)
-    -   [Architecture Diagram](#architecture-diagram)
-    -   [Concepts](#concepts)
-    -   [Feedback](#feedback)
--   [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
--   [Code Quality](#code-quality)
-    -   [Snyk Code Scanning](#snyk-code-scanning)
--   [IDE setup](#ide-setup)
-    -   [Extensions](#extensions)
-    -   [Auto fix on save](#auto-fix-on-save)
--   [Thanks](#thanks)
+- [Quick start](#quick-start)
+  - [Install Node.js](#install-nodejs)
+  - [Running instructions](#running-instructions)
+  - [Environment Variables](#environment-variables)
+  - [Detailed Setup](#detailed-setup)
+  - [Technologies](#technologies)
+  - [Architecture Diagram](#architecture-diagram)
+  - [UI Design System](#ui-design-system)
+  - [Concepts](#concepts)
+  - [Feedback](#feedback)
+- [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
+- [Code Quality](#code-quality)
+  - [Snyk Code Scanning](#snyk-code-scanning)
+- [IDE setup](#ide-setup)
+  - [Extensions](#extensions)
+  - [Auto fix on save](#auto-fix-on-save)
+- [Thanks](#thanks)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -91,6 +93,13 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 ### Architecture Diagram
 
 You can see a _web only_ architecture diagram by running `make arch-diagram`. It will give you an overview of the current server and browser web architecture.
+
+### UI Design System
+
+[Source](https://theguardian.design) is the Guardian's design system. For detailed and up-to-date information on how to use it, see the [Source developer guide](https://guardian.github.io/source).
+
+For a high-level overview of some of the key ideas behind the design of the Dotcom website, see [design.theguardian.com](https://design.theguardian.com/).
+This resource was made in 2018 and is not maintained so it <strong>should not be taken as authoritative</strong> on details, but most of it still applies and it gives a very quick and visual overview. It also provides an explanation of some journalism- or Guardian-specific terms that you might see in the codebase, like 'kicker' and 'standfirst'.
 
 ### Concepts
 

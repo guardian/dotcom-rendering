@@ -159,7 +159,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 						subscribeUrl={
 							CAPIArticle.nav.readerRevenueLinks.header.subscribe
 						}
-						edition={CAPIArticle.editionId}
+						editionId={CAPIArticle.editionId}
 					/>
 				</ElementContainer>
 			</div>
@@ -202,7 +202,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 						element="header"
 					>
 						<Header
-							edition={CAPIArticle.editionId}
+							editionId={CAPIArticle.editionId}
 							idUrl={CAPIArticle.config.idUrl}
 							mmaUrl={CAPIArticle.config.mmaUrl}
 							supporterCTA={
@@ -242,7 +242,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 					subscribeUrl={
 						CAPIArticle.nav.readerRevenueLinks.header.subscribe
 					}
-					edition={CAPIArticle.editionId}
+					editionId={CAPIArticle.editionId}
 				/>
 			</ElementContainer>
 
@@ -364,7 +364,7 @@ export const FullPageInteractiveLayout = ({
 					pillar={format.theme}
 					pillars={NAV.pillars}
 					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					edition={CAPIArticle.editionId}
+					editionId={CAPIArticle.editionId}
 					contributionsServiceUrl={
 						CAPIArticle.contributionsServiceUrl
 					}

@@ -6,7 +6,7 @@ export interface WindowGuardianConfig {
 	page: {
 		dcrCouldRender: boolean;
 		contentType: string;
-		edition: Edition;
+		edition: EditionId;
 		revisionNumber: string;
 		dcrSentryDsn: string;
 		sentryHost: string;
@@ -38,7 +38,7 @@ interface WindowGuardianFrontConfig {
 	page: {
 		dcrCouldRender: boolean;
 		contentType: string;
-		edition: Edition;
+		edition: EditionId;
 		revisionNumber: string;
 		dcrSentryDsn: string;
 		sentryHost: string;

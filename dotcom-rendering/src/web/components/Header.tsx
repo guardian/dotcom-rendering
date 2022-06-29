@@ -16,7 +16,7 @@ const headerStyles = css`
 `;
 
 type Props = {
-	edition: Edition;
+	editionId: EditionId;
 	idUrl?: string;
 	mmaUrl?: string;
 	supporterCTA: string;
@@ -27,7 +27,7 @@ type Props = {
 };
 
 export const Header = ({
-	edition,
+	editionId,
 	idUrl,
 	mmaUrl,
 	supporterCTA,
@@ -40,7 +40,7 @@ export const Header = ({
 		<Hide when="below" breakpoint="desktop">
 			<Island deferUntil="idle">
 				<EditionDropdown
-					edition={edition}
+					editionId={editionId}
 					dataLinkName="nav2 : topbar : edition-picker: toggle"
 				/>
 			</Island>
@@ -49,7 +49,7 @@ export const Header = ({
 		<Island deferUntil="idle" clientOnly={true}>
 			<ReaderRevenueLinks
 				urls={urls}
-				edition={edition}
+				editionId={editionId}
 				dataLinkNamePrefix="nav2 : "
 				inHeader={true}
 				remoteHeader={remoteHeader}

@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
-import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, remSpace } from '@guardian/source-foundations';
 import { none } from '@guardian/types';
 import type { Image } from 'image';
+import type { Sizes } from 'image/sizes';
 import type { FC } from 'react';
 import DefaultMainMediaImage from './MainMediaImage.defaults';
 
