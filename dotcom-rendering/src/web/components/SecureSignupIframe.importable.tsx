@@ -278,9 +278,7 @@ export const SecureSignupIframe = ({
 
 	const captchaSiteKey = isServer
 		? undefined
-		: (window.guardian.config.page.googleRecaptchaSiteKey as
-				| string
-				| undefined);
+		: window.guardian.config.page.googleRecaptchaSiteKey;
 
 	return (
 		<>
