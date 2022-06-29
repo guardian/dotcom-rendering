@@ -16,6 +16,7 @@ interface Props {
 	keyEvents: Block[];
 	filterKeyEvents: boolean;
 	format: ArticleFormat;
+	id: 'key-events-carousel-desktop' | 'key-events-carousel-mobile';
 }
 type ValidBlock = Block & {
 	title: string;
@@ -96,6 +97,7 @@ export const KeyEventsCarousel = ({
 	keyEvents,
 	filterKeyEvents,
 	format,
+	id,
 }: Props) => {
 	const carousel = useRef<HTMLDivElement | null>(null);
 	const palette = decidePalette(format);
@@ -112,6 +114,7 @@ export const KeyEventsCarousel = ({
 	const shortCarousel = carouselLength <= 4;
 	return (
 		<>
+			<div id={id} />
 			<Hide from="desktop">
 				<div css={titleStyles}>Key events:</div>
 			</Hide>

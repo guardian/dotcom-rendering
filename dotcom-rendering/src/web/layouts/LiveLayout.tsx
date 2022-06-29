@@ -619,6 +619,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.filterKeyEvents
 									}
 									format={format}
+									id={'key-events-carousel-desktop'}
 								/>
 							</Island>
 						</Hide>
