@@ -119,7 +119,7 @@ const buildPayload = async ({
 			showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
-			// eslint-disable-next-line -- i continue do do as i wish
+			// eslint-disable-next-line -- waiting for guardian/support-dotcom-components#723 to be merged
 			// @ts-ignore
 			signInBannerLastClosedAt,
 			mvtId: Number(
@@ -136,7 +136,7 @@ const buildPayload = async ({
 			browserId: (await hasCmpConsentForBrowserId())
 				? browserId || undefined
 				: undefined,
-			// eslint-disable-next-line -- because i do what i like
+			// eslint-disable-next-line -- waiting for guardian/support-dotcom-components#723 to be merged
 			// @ts-ignore
 			purchaseInfo: getPurchaseInfo(),
 			isSignedIn,
