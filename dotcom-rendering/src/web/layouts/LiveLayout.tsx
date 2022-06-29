@@ -807,6 +807,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														filterKeyEvents={
 															CAPIArticle.filterKeyEvents
 														}
+														urlHash={
+															'key-events-carousel-desktop'
+														}
 													/>
 												</Island>
 											</div>
