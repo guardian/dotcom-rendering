@@ -105,6 +105,9 @@ export const LI = ({
 }: Props) => {
 	// Decide sizing
 	const sizeStyles = decideSize(percentage, stretch);
+	// paddingSize is set here because the offset value used for the
+	// verticalDividerWithBottomOffset needs to match the value used for
+	// paddingBottom
 	const paddingSize = '10px';
 
 	return (
