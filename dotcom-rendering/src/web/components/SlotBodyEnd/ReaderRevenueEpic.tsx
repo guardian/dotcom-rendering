@@ -163,7 +163,7 @@ export const ReaderRevenueEpic = ({
 		modulePerf.start();
 
 		import(
-			/* webpackChunkName: "guardian-contributions-epic" */ '@guardian/message-rendering/src/modules/epics/ContributionsEpic'
+			`../../../../../message-rendering/src/modules/epics/${module.name}`
 		)
 			.then((epicModule: { ContributionsEpic: React.FC<EpicProps> }) => {
 				console.log('AAAAAAAAAA');
