@@ -3,7 +3,7 @@ import { ExtraCardsContainer } from './ExtraCardsContainer';
 
 export default {
 	component: ExtraCardsContainer,
-	title: 'ExtraCards',
+	title: 'Components/ExtraCardsContainer',
 };
 
 export const Five = () => <ExtraCardsContainer trails={trails.slice(0, 5)} />;
