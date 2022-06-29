@@ -33,6 +33,8 @@ const decideAssetOrigin = (
 			return 'https://assets-code.guim.co.uk/';
 		default: {
 			if (isDev) {
+				// Use absolute asset paths in development mode
+				// This is so paths are correct when treated as relative to Frontend
 				return 'http://localhost:3030/';
 			} else {
 				return '/';
