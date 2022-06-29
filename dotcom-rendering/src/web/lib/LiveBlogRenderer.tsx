@@ -59,6 +59,10 @@ export const LiveBlogRenderer = ({
 	availableTopics,
 	selectedTopics,
 }: Props) => {
+	console.log('isKeyEventsCarouselVariant::: ', isKeyEventsCarouselVariant);
+	console.log('switches.automaticFilters::: ', switches.automaticFilters);
+	console.log('availableTopics::: ', availableTopics);
+
 	return (
 		<>
 			{pinnedPost && onFirstPage && (
