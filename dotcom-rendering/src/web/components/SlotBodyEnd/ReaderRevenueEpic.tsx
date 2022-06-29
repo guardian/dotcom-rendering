@@ -163,6 +163,7 @@ export const ReaderRevenueEpic = ({
 		modulePerf.start();
 
 		import(
+			/* webpackChunkName: "epics/[request]" */
 			`../../../../../message-rendering/src/modules/epics/${module.name}`
 		)
 			.then((epicModule: { ContributionsEpic: React.FC<EpicProps> }) => {
