@@ -2,10 +2,12 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
+import type { NewsletterResponse } from 'NewsletterResponse';
 import {
 	adCollapseStyles,
 	labelStyles as adLabelStyles,
 } from '../components/AdSlot';
+import { EmailSignup } from '../components/EmailSignup';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { RenderArticleElement } from './renderElement';
 import { withSignInGateSlot } from './withSignInGateSlot';
@@ -64,6 +66,7 @@ export const ArticleRenderer: React.FC<{
 	isDev: boolean;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
+	newsletterToEmbed?: NewsletterResponse;
 }> = ({
 	format,
 	elements,
@@ -82,6 +85,7 @@ export const ArticleRenderer: React.FC<{
 	isAdFreeUser,
 	isSensitive,
 	isDev,
+	newsletterToEmbed,
 }) => {
 	const renderedElements = elements.map((element, index) => {
 		return (
@@ -103,6 +107,21 @@ export const ArticleRenderer: React.FC<{
 			/>
 		);
 	});
+
+	// TO DO - get and implement business/design logic for where to place the EmailSignup
+	if (newsletterToEmbed) {
+		renderedElements.splice(
+			3,
+			0,
+			<EmailSignup
+				name={newsletterToEmbed.name}
+				newsletterId={newsletterToEmbed.identityName}
+				description={newsletterToEmbed.description}
+				frequency={newsletterToEmbed.frequency}
+				successText={newsletterToEmbed.emailEmbed.successDescription}
+			/>,
+		);
+	}
 
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,

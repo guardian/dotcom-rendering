@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, body, headline, space } from '@guardian/source-foundations';
+import type { NewsletterResponse } from 'NewsletterResponse';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { decidePalette } from '../lib/decidePalette';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
@@ -35,6 +36,7 @@ type Props = {
 	showKeyEventsCarousel?: boolean;
 	availableTopics?: Topic[];
 	selectedTopics?: string;
+	newsletterToEmbed?: NewsletterResponse;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -120,6 +122,7 @@ export const ArticleBody = ({
 	showKeyEventsCarousel,
 	availableTopics,
 	selectedTopics,
+	newsletterToEmbed,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
@@ -206,6 +209,7 @@ export const ArticleBody = ({
 				isDev={isDev}
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
+				newsletterToEmbed={newsletterToEmbed}
 			/>
 		</div>
 	);

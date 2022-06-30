@@ -1,3 +1,6 @@
+// TO DO - should this be defined in @guardian/libs' ?
+import type { NewsletterResponse } from './NewsletterResponse';
+
 // ------------------------  //
 // CAPIArticleType and its subtypes //
 // ------------------------- //
@@ -620,6 +623,8 @@ interface CAPIArticleType {
 	mostRecentBlockId?: string;
 	availableTopics?: Topic[];
 	selectedTopics?: string;
+
+	newsletterToEmbed?: NewsletterResponse;
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
