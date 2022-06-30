@@ -35,7 +35,7 @@ type Props = {
 	abTests?: ServerSideTests;
 	showKeyEventsCarousel?: boolean;
 	availableTopics?: Topic[];
-	selectedTopics?: string;
+	selectedTopics?: Topic[];
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`

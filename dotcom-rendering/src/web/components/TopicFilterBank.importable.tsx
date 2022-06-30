@@ -5,7 +5,7 @@ import { FilterButton } from './FilterButton.importable';
 
 type Props = {
 	availableTopics: Topic[];
-	selectedTopics?: string;
+	selectedTopics?: Topic[];
 	format: ArticleFormat;
 	filterKeyEvents: boolean;
 	keyEvents?: Block[];
@@ -66,6 +66,11 @@ const handleKeyEventClick = (filterKeyEvents: boolean) => {
 	window.location.search = urlParams.toString();
 };
 
+const availableTopicIsSelected =
+	(selectedTopic: Topic) => (availableTopic: Topic) =>
+		availableTopic.type === selectedTopic.type &&
+		availableTopic.value === selectedTopic.value;
+
 export const TopicFilterBank = ({
 	availableTopics,
 	selectedTopics,
@@ -74,6 +79,22 @@ export const TopicFilterBank = ({
 	filterKeyEvents = false,
 }: Props) => {
 	const palette = decidePalette(format);
+
+	const selectedTopic = selectedTopics?.[0];
+
+	if (selectedTopic) {
+		const selectedIndex = availableTopics.findIndex(
+			availableTopicIsSelected(selectedTopic),
+		);
+
+		if (selectedIndex > 4) {
+			// this removes the topic at it's original index
+			const topicToMove = availableTopics.splice(selectedIndex, 1)[0];
+			// this adds the removed topic in index 4
+			availableTopics.splice(4, 0, topicToMove);
+		}
+	}
+
 	return (
 		<div css={containerStyles}>
 			<div css={headlineStyles}>
@@ -96,9 +117,9 @@ export const TopicFilterBank = ({
 
 				{availableTopics.slice(0, 5).map((topic) => {
 					const buttonParams = `${topic.type}:${topic.value}`;
-					const isActive = selectedTopics
-						? selectedTopics.includes(buttonParams)
-						: false;
+					const isActive =
+						selectedTopic !== undefined &&
+						availableTopicIsSelected(selectedTopic)(topic);
 
 					return (
 						<FilterButton

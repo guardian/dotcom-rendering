@@ -31,7 +31,7 @@ type Props = {
 	filterKeyEvents?: boolean;
 	isKeyEventsCarouselVariant?: boolean;
 	availableTopics?: Topic[];
-	selectedTopics?: string;
+	selectedTopics?: Topic[];
 };
 
 export const LiveBlogRenderer = ({
