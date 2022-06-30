@@ -580,6 +580,9 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										isPreview={CAPIArticle.config.isPreview}
 										idUrl={CAPIArticle.config.idUrl || ''}
 										isDev={!!CAPIArticle.config.isDev}
+										newsletterToEmbed={
+											CAPIArticle.newsletterToEmbed
+										}
 									/>
 									{showBodyEndSlot && (
 										<Island clientOnly={true}>
