@@ -897,6 +897,24 @@ type DCRFrontCard = {
 	showByline?: boolean;
 };
 
+type FECollectionConfigType = {
+		displayName: string;
+		metadata?: { type: FEContainerPalette }[];
+		collectionType: FEContainerType;
+		href?: string;
+		groups?: string[];
+		uneditable: boolean;
+		showTags: boolean;
+		showSections: boolean;
+		hideKickers: boolean;
+		showDateHeader: boolean;
+		showLatestUpdate: boolean;
+		excludeFromRss: boolean;
+		showTimestamps: boolean;
+		hideShowMore: boolean;
+		platform: string;
+}
+
 type FECollectionType = {
 	id: string;
 	displayName: string;
@@ -913,23 +931,7 @@ type FECollectionType = {
 	hideKickers: boolean;
 	showDateHeader: boolean;
 	showLatestUpdate: boolean;
-	config: {
-		displayName: string;
-		metadata?: { type: FEContainerPalette }[];
-		collectionType: FEContainerType;
-		href?: string;
-		groups?: string[];
-		uneditable: boolean;
-		showTags: boolean;
-		showSections: boolean;
-		hideKickers: boolean;
-		showDateHeader: boolean;
-		showLatestUpdate: boolean;
-		excludeFromRss: boolean;
-		showTimestamps: boolean;
-		hideShowMore: boolean;
-		platform: string;
-	};
+	config: FECollectionConfigType;
 	hasMore: boolean;
 };
 
@@ -1076,7 +1078,7 @@ interface KeyEventsRequest {
 interface CardsRequest {
 	cards: FEFrontCard[];
 	startIndex: number;
-	containerPalettes?: FEContainerPalette[];
+	config: FECollectionConfigType;
 }
 
 interface BadgeType {
