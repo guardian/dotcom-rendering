@@ -18,7 +18,7 @@ function decideButtonText({
 	return `More ${displayName}`;
 }
 
-function insertHtml(html: string, collectionId: string) {
+function insertHtml(html: string, collectionId: string, ajaxUrl: string) {
 	try {
 		const placeholder = document.querySelector<HTMLElement>(
 			`[data-show-more-placeholder="${collectionId}"]`,
@@ -30,11 +30,16 @@ function insertHtml(html: string, collectionId: string) {
 		// @ts-expect-error -- We want to catch this error if the element is missing
 		placeholder.innerHTML = html;
 	} catch (e) {
-		// TODO: pass to Sentry
+		window.guardian.modules.sentry.reportError(
+			new Error(
+				`An error was thrown trying to insert extra cards for collectionId: ${collectionId} and ajaxUrl: ${ajaxUrl}`,
+			),
+			'showMore-insertExtraCards',
+		);
 	}
 }
 
-function removeHtml(collectionId: string) {
+function removeHtml(collectionId: string, ajaxUrl: string) {
 	try {
 		const placeholder = document.querySelector<HTMLElement>(
 			`[data-show-more-placeholder="${collectionId}"]`,
@@ -42,7 +47,12 @@ function removeHtml(collectionId: string) {
 		// @ts-expect-error -- We want to catch this error if the element is missing
 		placeholder.innerHTML = '';
 	} catch (e) {
-		// TODO: pass to sentry
+		window.guardian.modules.sentry.reportError(
+			new Error(
+				`An error was thrown trying to remove extra cards for collectionId: ${collectionId} and ajaxUrl: ${ajaxUrl}`,
+			),
+			'showMore-removeExtraCards',
+		);
 	}
 }
 
@@ -50,10 +60,12 @@ export const ShowMore = ({
 	pageId,
 	collectionId,
 	displayName,
+	ajaxUrl,
 }: {
 	pageId: string;
 	collectionId: string;
 	displayName: string;
+	ajaxUrl: string;
 }) => {
 	const [showMore, setShow] = useState(false);
 	// We only pass an actual URL to SWR when 'showMore' is true.
@@ -65,9 +77,9 @@ export const ShowMore = ({
 	const { data, loading } = useApi<{ html: string }>(url);
 
 	if (!showMore) {
-		removeHtml(collectionId);
+		removeHtml(collectionId, ajaxUrl);
 	} else if (data?.html) {
-		insertHtml(data.html, collectionId);
+		insertHtml(data.html, collectionId, ajaxUrl);
 	}
 
 	return (
