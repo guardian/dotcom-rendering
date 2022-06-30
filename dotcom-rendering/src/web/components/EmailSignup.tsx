@@ -6,15 +6,12 @@ import {
 	space,
 	textSans,
 } from '@guardian/source-foundations';
+import type { NewsletterResponse } from 'NewsletterResponse';
 import { NewsletterFrequency } from './NewsletterFrequency';
 import { SecureSignup } from './SecureSignup';
 
 type Props = {
-	newsletterId: string;
-	name: string;
-	description: string;
-	frequency: string;
-	successText: string;
+	newsletter: NewsletterResponse;
 };
 
 const containerStyles = css`
@@ -43,13 +40,10 @@ const descriptionStyles = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-export const EmailSignup = ({
-	newsletterId,
-	name,
-	description,
-	frequency,
-	successText,
-}: Props) => {
+export const EmailSignup = ({ newsletter }: Props) => {
+	const { identityName, name, description, frequency } = newsletter;
+	const { successDescription } = newsletter.emailEmbed;
+
 	return (
 		<aside css={containerStyles}>
 			<div css={stackBelowTabletStyles}>
@@ -58,8 +52,8 @@ export const EmailSignup = ({
 			</div>
 			<p css={descriptionStyles}>{description}</p>
 			<SecureSignup
-				newsletterId={newsletterId}
-				successText={successText}
+				newsletterId={identityName}
+				successDescription={successDescription}
 			/>
 		</aside>
 	);

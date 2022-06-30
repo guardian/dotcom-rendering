@@ -113,13 +113,7 @@ export const ArticleRenderer: React.FC<{
 		renderedElements.splice(
 			3,
 			0,
-			<EmailSignup
-				name={newsletterToEmbed.name}
-				newsletterId={newsletterToEmbed.identityName}
-				description={newsletterToEmbed.description}
-				frequency={newsletterToEmbed.frequency}
-				successText={newsletterToEmbed.emailEmbed.successDescription}
-			/>,
+			<EmailSignup newsletter={newsletterToEmbed} />,
 		);
 	}
 
