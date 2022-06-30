@@ -91,6 +91,7 @@ export const LiveBlogRenderer = ({
 							keyEvents={keyEvents}
 							filterKeyEvents={filterKeyEvents}
 							format={format}
+							id={'key-events-carousel-mobile'}
 						/>
 					</Island>
 					{!switches.automaticFilters && (
@@ -108,13 +109,16 @@ export const LiveBlogRenderer = ({
 
 			{switches.automaticFilters && availableTopics && (
 				<Hide above="desktop">
-					<TopicFilterBank
-						availableTopics={availableTopics}
-						selectedTopics={selectedTopics}
-						format={format}
-						keyEvents={keyEvents}
-						filterKeyEvents={filterKeyEvents}
-					/>
+					<Island>
+						<TopicFilterBank
+							availableTopics={availableTopics}
+							selectedTopics={selectedTopics}
+							format={format}
+							keyEvents={keyEvents}
+							filterKeyEvents={filterKeyEvents}
+							id={'key-events-carousel-mobile'}
+						/>
+					</Island>
 				</Hide>
 			)}
 			<div id="top-of-blog" />

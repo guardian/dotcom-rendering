@@ -58,6 +58,7 @@ export const topicBank = () => {
 					},
 				]}
 				filterKeyEvents={false}
+				id="key-events-carousel-desktop"
 			/>
 		</Wrapper>
 	);
