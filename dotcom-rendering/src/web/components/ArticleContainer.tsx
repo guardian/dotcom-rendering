@@ -89,7 +89,6 @@ const adStyles = css`
 
 			${from.tablet} {
 				width: 100%;
-				padding-bottom: ${space[6]}px;
 
 				& > div:not(.ad-slot__label) {
 					width: 300px;
