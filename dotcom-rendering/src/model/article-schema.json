@@ -408,6 +408,110 @@
         },
         "selectedTopics": {
             "type": "string"
+        },
+        "newsletterToEmbed": {
+            "type": "object",
+            "properties": {
+                "identityName": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "brazeNewsletterName": {
+                    "type": "string"
+                },
+                "brazeSubscribeAttributeName": {
+                    "type": "string"
+                },
+                "brazeSubscribeEventNamePrefix": {
+                    "type": "string"
+                },
+                "theme": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "frequency": {
+                    "type": "string"
+                },
+                "listIdV1": {
+                    "type": "number"
+                },
+                "listId": {
+                    "type": "number"
+                },
+                "exampleUrl": {
+                    "type": "string"
+                },
+                "emailEmbed": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "title": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "successHeadline": {
+                            "type": "string"
+                        },
+                        "successDescription": {
+                            "type": "string"
+                        },
+                        "hexCode": {
+                            "type": "string"
+                        },
+                        "imageUrl": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "description",
+                        "hexCode",
+                        "name",
+                        "successDescription",
+                        "successHeadline",
+                        "title"
+                    ]
+                },
+                "signupPage": {
+                    "type": "string"
+                },
+                "restricted": {
+                    "type": "boolean"
+                },
+                "paused": {
+                    "type": "boolean"
+                },
+                "emailConfirmation": {
+                    "type": "boolean"
+                },
+                "group": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "brazeNewsletterName",
+                "brazeSubscribeAttributeName",
+                "brazeSubscribeEventNamePrefix",
+                "description",
+                "emailConfirmation",
+                "emailEmbed",
+                "frequency",
+                "group",
+                "identityName",
+                "listId",
+                "listIdV1",
+                "name",
+                "paused",
+                "restricted",
+                "theme"
+            ]
         }
     },
     "required": [
@@ -2094,25 +2198,7 @@
                 "html": {
                     "type": "string"
                 },
-                "format": {
-                    "type": "object",
-                    "properties": {
-                        "design": {
-                            "$ref": "#/definitions/CAPIDesign"
-                        },
-                        "theme": {
-                            "$ref": "#/definitions/CAPITheme"
-                        },
-                        "display": {
-                            "$ref": "#/definitions/CAPIDisplay"
-                        }
-                    },
-                    "required": [
-                        "design",
-                        "display",
-                        "theme"
-                    ]
-                }
+                "format": {}
             },
             "required": [
                 "_type",
@@ -2121,54 +2207,6 @@
                 "html",
                 "position"
             ]
-        },
-        "CAPIDesign": {
-            "enum": [
-                "AnalysisDesign",
-                "ArticleDesign",
-                "AudioDesign",
-                "CommentDesign",
-                "DeadBlogDesign",
-                "EditorialDesign",
-                "FeatureDesign",
-                "FullPageInteractiveDesign",
-                "GalleryDesign",
-                "InteractiveDesign",
-                "InterviewDesign",
-                "LetterDesign",
-                "LiveBlogDesign",
-                "MatchReportDesign",
-                "NewsletterSignupDesign",
-                "ObituaryDesign",
-                "PhotoEssayDesign",
-                "PrintShopDesign",
-                "QuizDesign",
-                "RecipeDesign",
-                "ReviewDesign",
-                "VideoDesign"
-            ],
-            "type": "string"
-        },
-        "CAPITheme": {
-            "enum": [
-                "CulturePillar",
-                "Labs",
-                "LifestylePillar",
-                "NewsPillar",
-                "OpinionPillar",
-                "SpecialReportTheme",
-                "SportPillar"
-            ],
-            "type": "string"
-        },
-        "CAPIDisplay": {
-            "enum": [
-                "ImmersiveDisplay",
-                "NumberedListDisplay",
-                "ShowcaseDisplay",
-                "StandardDisplay"
-            ],
-            "type": "string"
         },
         "InteractiveContentsBlockElement": {
             "type": "object",
@@ -3671,6 +3709,54 @@
                 "title",
                 "type"
             ]
+        },
+        "CAPIDesign": {
+            "enum": [
+                "AnalysisDesign",
+                "ArticleDesign",
+                "AudioDesign",
+                "CommentDesign",
+                "DeadBlogDesign",
+                "EditorialDesign",
+                "FeatureDesign",
+                "FullPageInteractiveDesign",
+                "GalleryDesign",
+                "InteractiveDesign",
+                "InterviewDesign",
+                "LetterDesign",
+                "LiveBlogDesign",
+                "MatchReportDesign",
+                "NewsletterSignupDesign",
+                "ObituaryDesign",
+                "PhotoEssayDesign",
+                "PrintShopDesign",
+                "QuizDesign",
+                "RecipeDesign",
+                "ReviewDesign",
+                "VideoDesign"
+            ],
+            "type": "string"
+        },
+        "CAPITheme": {
+            "enum": [
+                "CulturePillar",
+                "Labs",
+                "LifestylePillar",
+                "NewsPillar",
+                "OpinionPillar",
+                "SpecialReportTheme",
+                "SportPillar"
+            ],
+            "type": "string"
+        },
+        "CAPIDisplay": {
+            "enum": [
+                "ImmersiveDisplay",
+                "NumberedListDisplay",
+                "ShowcaseDisplay",
+                "StandardDisplay"
+            ],
+            "type": "string"
         },
         "LegacyPillar": {
             "enum": [
