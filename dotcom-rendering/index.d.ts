@@ -1,5 +1,5 @@
 // TO DO - should this be defined in @guardian/libs' ?
-import type { NewsletterResponse } from './NewsletterResponse';
+import type { NewsletterResponse } from './src/model/NewsletterResponse';
 
 // ------------------------  //
 // CAPIArticleType and its subtypes //

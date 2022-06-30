@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, body, headline, space } from '@guardian/source-foundations';
-import type { NewsletterResponse } from 'NewsletterResponse';
+import type { NewsletterResponse } from 'src/model/NewsletterResponse';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { decidePalette } from '../lib/decidePalette';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
