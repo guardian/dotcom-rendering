@@ -114,7 +114,7 @@ export const KeyEventsCarousel = ({
 	const shortCarousel = carouselLength <= 4;
 	return (
 		<>
-			<div id={id} />
+			<span id={id} />
 			<Hide from="desktop">
 				<div css={titleStyles}>Key events:</div>
 			</Hide>
