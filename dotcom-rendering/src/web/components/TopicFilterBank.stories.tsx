@@ -58,7 +58,7 @@ export const topicBank = () => {
 					},
 				]}
 				filterKeyEvents={false}
-				urlHash="key-events-carousel-desktop"
+				id="key-events-carousel-desktop"
 			/>
 		</Wrapper>
 	);

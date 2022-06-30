@@ -9,7 +9,7 @@ type Props = {
 	format: ArticleFormat;
 	filterKeyEvents: boolean;
 	keyEvents?: Block[];
-	urlHash: 'key-events-carousel-desktop' | 'key-events-carousel-mobile';
+	id: 'key-events-carousel-desktop' | 'key-events-carousel-mobile';
 };
 
 const containerStyles = css`
@@ -46,7 +46,7 @@ const topicStyles = css`
 const handleTopicClick = (
 	isActive: boolean,
 	buttonParams: string,
-	urlHash: string,
+	id: string,
 ) => {
 	const urlParams = new URLSearchParams(window.location.search);
 
@@ -58,18 +58,18 @@ const handleTopicClick = (
 	urlParams.delete('page'); // direct to the first page
 	urlParams.delete('filterKeyEvents');
 
-	window.location.hash = urlHash;
+	window.location.hash = id;
 	window.location.search = urlParams.toString();
 };
 
-const handleKeyEventClick = (filterKeyEvents: boolean, urlHash: string) => {
+const handleKeyEventClick = (filterKeyEvents: boolean, id: string) => {
 	const urlParams = new URLSearchParams(window.location.search);
 
 	urlParams.set('filterKeyEvents', filterKeyEvents ? 'false' : 'true');
 	urlParams.delete('page'); // direct to the first page
 	urlParams.delete('topics');
 
-	window.location.hash = urlHash;
+	window.location.hash = id;
 	window.location.search = urlParams.toString();
 };
 
@@ -79,7 +79,7 @@ export const TopicFilterBank = ({
 	format,
 	keyEvents,
 	filterKeyEvents = false,
-	urlHash,
+	id,
 }: Props) => {
 	const palette = decidePalette(format);
 	return (
@@ -99,7 +99,7 @@ export const TopicFilterBank = ({
 						format={format}
 						isActive={filterKeyEvents}
 						onClick={() => {
-							handleKeyEventClick(filterKeyEvents, urlHash);
+							handleKeyEventClick(filterKeyEvents, id);
 						}}
 					/>
 				)}
@@ -118,11 +118,7 @@ export const TopicFilterBank = ({
 							format={format}
 							isActive={isActive}
 							onClick={() =>
-								handleTopicClick(
-									isActive,
-									buttonParams,
-									urlHash,
-								)
+								handleTopicClick(isActive, buttonParams, id)
 							}
 						/>
 					);

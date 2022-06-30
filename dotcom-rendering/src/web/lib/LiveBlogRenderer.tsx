@@ -116,7 +116,7 @@ export const LiveBlogRenderer = ({
 							format={format}
 							keyEvents={keyEvents}
 							filterKeyEvents={filterKeyEvents}
-							urlHash={'key-events-carousel-mobile'}
+							id={'key-events-carousel-mobile'}
 						/>
 					</Island>
 				</Hide>
