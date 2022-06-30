@@ -181,7 +181,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										pageId={front.pressedPage.id}
 										collectionId={collection.id}
 										displayName={collection.displayName}
-										ajaxUrl={front.config.ajaxUrl}
 									/>
 								</Island>
 							)}
