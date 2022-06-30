@@ -197,9 +197,11 @@ export const renderCards = (
 	res: express.Response,
 ): void => {
 	try {
-		const { cards, startIndex, containerPalettes } = body;
+		const { cards, startIndex, config } = body;
 
-		const dcrContainerPalette = decideContainerPalette(containerPalettes);
+		const dcrContainerPalette = decideContainerPalette(
+			config.metadata?.map((meta) => meta.type),
+		);
 		const dcrTrails = enhanceCards(cards, dcrContainerPalette, startIndex);
 
 		const html = cardsToHtml({
