@@ -81,6 +81,7 @@ export const TopicFilterBank = ({
 	const palette = decidePalette(format);
 
 	const selectedTopic = selectedTopics?.[0];
+	const topFiveTopics = availableTopics.slice(0, 5);
 
 	if (selectedTopic) {
 		const selectedIndex = availableTopics.findIndex(
@@ -88,10 +89,7 @@ export const TopicFilterBank = ({
 		);
 
 		if (selectedIndex > 4) {
-			// this removes the topic at it's original index
-			const topicToMove = availableTopics.splice(selectedIndex, 1)[0];
-			// this adds the removed topic in index 4
-			availableTopics.splice(4, 0, topicToMove);
+			topFiveTopics.splice(4, 1, availableTopics[selectedIndex]);
 		}
 	}
 
@@ -115,7 +113,7 @@ export const TopicFilterBank = ({
 					/>
 				)}
 
-				{availableTopics.slice(0, 5).map((topic) => {
+				{topFiveTopics.map((topic) => {
 					const buttonParams = `${topic.type}:${topic.value}`;
 					const isActive =
 						selectedTopic !== undefined &&
