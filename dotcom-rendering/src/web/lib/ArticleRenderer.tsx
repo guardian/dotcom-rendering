@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
-import type { NewsletterResponse } from 'src/model/NewsletterResponse';
 import {
 	adCollapseStyles,
 	labelStyles as adLabelStyles,

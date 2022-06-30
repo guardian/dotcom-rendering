@@ -1,6 +1,3 @@
-// TO DO - should this be defined in @guardian/libs' ?
-import type { NewsletterResponse } from './src/model/NewsletterResponse';
-
 // ------------------------  //
 // CAPIArticleType and its subtypes //
 // ------------------------- //
@@ -534,6 +531,37 @@ interface CAPINavType {
 	};
 	readerRevenueLinks: ReaderRevenuePositions;
 }
+
+// TO DO - should this be defined in @guardian/libs' ?
+// Corresponding Scala class definition is at:
+// frontend/common/app/services/newsletters/model/NewsletterResponse.scala
+type NewsletterResponse = {
+	identityName: string;
+	name: string;
+	brazeNewsletterName: string;
+	brazeSubscribeAttributeName: string;
+	brazeSubscribeEventNamePrefix: string;
+	theme: string;
+	description: string;
+	frequency: string;
+	listIdV1: number;
+	listId: number;
+	exampleUrl?: string;
+	emailEmbed: {
+		name: string;
+		title: string;
+		description: string;
+		successHeadline: string;
+		successDescription: string;
+		hexCode: string;
+		imageUrl?: string;
+	};
+	signupPage?: string;
+	restricted: boolean;
+	paused: boolean;
+	emailConfirmation: boolean;
+	group: string;
+};
 
 // WARNING: run `gen-schema` task if changing this to update the associated JSON
 // schema definition.

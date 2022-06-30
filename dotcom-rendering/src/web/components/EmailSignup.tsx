@@ -6,7 +6,6 @@ import {
 	space,
 	textSans,
 } from '@guardian/source-foundations';
-import type { NewsletterResponse } from 'src/model/NewsletterResponse';
 import { NewsletterFrequency } from './NewsletterFrequency';
 import { SecureSignup } from './SecureSignup';
 
