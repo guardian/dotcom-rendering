@@ -40,6 +40,6 @@ export const useApi = <T,>(
 	return {
 		data,
 		error,
-		loading: url && !error && !data,
+		loading: !!url && !error && !data,
 	};
 };
