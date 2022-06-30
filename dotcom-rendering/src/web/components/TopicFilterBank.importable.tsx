@@ -113,8 +113,7 @@ export const TopicFilterBank = ({
 				{topFiveTopics.map((topic) => {
 					const buttonParams = `${topic.type}:${topic.value}`;
 					const isActive =
-						selectedTopic !== undefined &&
-						isEqual(selectedTopic)(topic);
+						!!selectedTopic && isEqual(selectedTopic)(topic);
 
 					return (
 						<FilterButton
