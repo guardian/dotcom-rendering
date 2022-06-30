@@ -66,10 +66,9 @@ const handleKeyEventClick = (filterKeyEvents: boolean) => {
 	window.location.search = urlParams.toString();
 };
 
-const availableTopicIsSelected =
-	(selectedTopic: Topic) => (availableTopic: Topic) =>
-		availableTopic.type === selectedTopic.type &&
-		availableTopic.value === selectedTopic.value;
+const isEqual = (selectedTopic: Topic) => (availableTopic: Topic) =>
+	availableTopic.type === selectedTopic.type &&
+	availableTopic.value === selectedTopic.value;
 
 export const TopicFilterBank = ({
 	availableTopics,
@@ -84,9 +83,7 @@ export const TopicFilterBank = ({
 	const topFiveTopics = availableTopics.slice(0, 5);
 
 	if (selectedTopic) {
-		const selectedIndex = availableTopics.findIndex(
-			availableTopicIsSelected(selectedTopic),
-		);
+		const selectedIndex = availableTopics.findIndex(isEqual(selectedTopic));
 
 		if (selectedIndex > 4) {
 			topFiveTopics.splice(4, 1, availableTopics[selectedIndex]);
@@ -117,7 +114,7 @@ export const TopicFilterBank = ({
 					const buttonParams = `${topic.type}:${topic.value}`;
 					const isActive =
 						selectedTopic !== undefined &&
-						availableTopicIsSelected(selectedTopic)(topic);
+						isEqual(selectedTopic)(topic);
 
 					return (
 						<FilterButton
