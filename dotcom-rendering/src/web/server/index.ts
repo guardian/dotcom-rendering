@@ -1,4 +1,5 @@
 import type express from 'express';
+import { decideContainerPalette } from '../../model/decideContainerPalette';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCards } from '../../model/enhanceCards';
@@ -196,13 +197,14 @@ export const renderCards = (
 	res: express.Response,
 ): void => {
 	try {
-		const { cards, startIndex, containerPalette } = body;
+		const { cards, startIndex, containerPalettes } = body;
 
-		const dcrTrails = enhanceCards(cards, containerPalette, startIndex);
+		const dcrContainerPalette = decideContainerPalette(containerPalettes);
+		const dcrTrails = enhanceCards(cards, dcrContainerPalette, startIndex);
 
 		const html = cardsToHtml({
 			cards: dcrTrails,
-			containerPalette,
+			containerPalette: dcrContainerPalette,
 		});
 
 		res.status(200).send({ html });

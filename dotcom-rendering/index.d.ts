@@ -1076,7 +1076,7 @@ interface KeyEventsRequest {
 interface CardsRequest {
 	cards: FEFrontCard[];
 	startIndex: number;
-	containerPalette?: DCRContainerPalette;
+	containerPalettes?: FEContainerPalette[];
 }
 
 interface BadgeType {
