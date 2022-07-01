@@ -22,7 +22,7 @@ try {
  * @param {'PROD' | 'CODE' | undefined} stage the environment code is executing in
  * @returns {string}
  */
-const decideAssetOrigin = (
+export const decideAssetOrigin = (
 	stage: string | undefined,
 	isDev: boolean,
 ): string => {
