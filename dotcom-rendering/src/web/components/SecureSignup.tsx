@@ -23,7 +23,7 @@ const termsStyle = css`
 	${textSans.xxsmall()}
 	color: ${text.supporting};
 	a {
-		${textSans.xxsmall()}
+		${textSans.xxsmall({ fontWeight: 'bold' })}
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;
@@ -54,7 +54,7 @@ const PrivacyTerms = () => {
 
 const RecaptchaTerms = () => (
 	<span css={termsStyle}>
-		We operate Google reCaptcha to protect our website and the Google{' '}
+		We use Google reCaptcha to protect our website and the Google{' '}
 		<Link
 			href="https://policies.google.com/privacy"
 			rel="noopener noreferrer"

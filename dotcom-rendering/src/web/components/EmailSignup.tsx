@@ -4,6 +4,7 @@ import {
 	headline,
 	neutral,
 	space,
+	sport,
 	textSans,
 } from '@guardian/source-foundations';
 import { NewsletterFrequency } from './NewsletterFrequency';
@@ -28,9 +29,12 @@ const stackBelowTabletStyles = css`
 	}
 `;
 
-const titleStyles = css`
+const titleStyles = (newsletter: NewsletterResponse) => css`
 	${headline.xsmall({ fontWeight: 'bold' })}
 	flex-grow: 1;
+	span {
+		color: ${newsletter.theme === 'news' ? sport[500] : 'inherit'};
+	}
 `;
 
 const descriptionStyles = css`
@@ -46,7 +50,9 @@ export const EmailSignup = ({ newsletter }: Props) => {
 	return (
 		<aside css={containerStyles}>
 			<div css={stackBelowTabletStyles}>
-				<p css={titleStyles}>Sign up to {name} today</p>
+				<p css={titleStyles(newsletter)}>
+					Sign up to <span>{name}</span> today
+				</p>
 				<NewsletterFrequency frequency={frequency} />
 			</div>
 			<p css={descriptionStyles}>{description}</p>
