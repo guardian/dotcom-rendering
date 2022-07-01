@@ -7,6 +7,7 @@ import { ASSET_ORIGIN, getScriptArrayFromFile } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import { Article } from '../components/Article';
+import { recipeSchema } from '../experiments/tests/recipe-structured-data';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { articleTemplate } from './articleTemplate';
@@ -207,6 +208,13 @@ export const articleToHtml = ({ data }: Props): string => {
 		}(document, "script", "twitter-wjs"));
 	`;
 
+	const url = CAPIArticle.webURL;
+
+	const recipeMarkup =
+		url in recipeSchema
+			? `<script type="application/ld+json">${recipeSchema[url]}</script>`
+			: undefined;
+
 	return articleTemplate({
 		linkedData,
 		priorityScriptTags,
@@ -226,5 +234,6 @@ export const articleToHtml = ({ data }: Props): string => {
 			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
 				? initTwitter
 				: undefined,
+		recipeMarkup,
 	});
 };
