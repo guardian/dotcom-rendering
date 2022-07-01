@@ -62,7 +62,9 @@ export const ShowMore = ({
 	const url = showMore
 		? `http://localhost:9000/${pageId}/show-more/${collectionId}.json?dcr=true`
 		: undefined;
-	const { data, loading } = useApi<{ html: string }>(url);
+	const { data, loading } = useApi<{ html: string }>(url, {
+		errorRetryCount: 1,
+	});
 
 	if (!showMore) {
 		removeHtml(collectionId);
