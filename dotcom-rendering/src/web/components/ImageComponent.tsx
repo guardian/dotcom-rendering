@@ -291,6 +291,9 @@ export const ImageComponent = ({
 					img {
 						object-fit: cover;
 					}
+					picture {
+						height: 100%;
+					}
 				`}
 			>
 				<Picture

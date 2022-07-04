@@ -218,6 +218,16 @@ const descendingByBreakpoint = (a: ImageWidthType, b: ImageWidthType) => {
 	return b.breakpoint - a.breakpoint;
 };
 
+/**
+ * Used on `picture` and `img` to prevent having a line-height,
+ * as these elements are which are `inline` by default.
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#styling_with_css
+ */
+const block = css`
+	display: block;
+`;
+
 export const Picture = ({
 	role,
 	format,
@@ -250,7 +260,7 @@ export const Picture = ({
 		});
 
 	return (
-		<picture>
+		<picture css={block}>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
 			{format.display === ArticleDisplay.Immersive && isMainMedia && (
 				<>
@@ -316,11 +326,7 @@ export const Picture = ({
 				loading={
 					isLazy && !Picture.disableLazyLoading ? 'lazy' : undefined
 				}
-				// https://stackoverflow.com/questions/10844205/html-5-strange-img-always-adds-3px-margin-at-bottom
-				// explains why we added the css `vertical-align: middle;` to the img tag
-				css={css`
-					vertical-align: middle;
-				`}
+				css={block}
 			/>
 		</picture>
 	);
