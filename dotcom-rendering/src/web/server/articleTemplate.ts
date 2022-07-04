@@ -3,6 +3,9 @@ import he from 'he';
 import { ASSET_ORIGIN } from '../../lib/assets';
 import { getFontsCss } from '../../lib/fonts-css';
 
+/** This is served in browser that do not support ES Modules */
+const ophanNomoduleScript = `<script src="https://j.ophan.co.uk/" defer nomodule></script>`;
+
 export const articleTemplate = ({
 	title = 'The Guardian',
 	description,
@@ -281,6 +284,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 					).replace(/%20/g, '+')}" />
                 </noscript>
                 ${priorityScriptTags.join('\n')}
+				${ophanNomoduleScript}
                 <style class="webfont">${getFontsCss()}</style>
                 <style>${resets.resetCSS}</style>
 				${css}
