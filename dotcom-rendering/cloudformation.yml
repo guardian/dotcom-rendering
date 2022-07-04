@@ -181,6 +181,12 @@ Resources:
               - ssm:GetParameter
             Resource:
               - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/frontend/*
+          - Effect: Allow
+            Action:
+              - ssm:GetParametersByPath
+              - ssm:GetParameter
+            Resource:
+              - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/dotcom/*
 
   InstanceProfile:
     Type: AWS::IAM::InstanceProfile
