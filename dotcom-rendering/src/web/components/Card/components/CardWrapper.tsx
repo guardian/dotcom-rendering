@@ -31,7 +31,7 @@ const cardStyles = (
 		:before {
 			background-color: ${cardPalette.topBar.card};
 			content: '';
-			height: ${containerType === 'dynamic/package' ? '4px' : '2px'};
+			height: ${containerType === 'dynamic/package' ? '4px' : '1px'};
 			z-index: 2;
 		}
 
