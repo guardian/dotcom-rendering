@@ -84,6 +84,7 @@ export const topicBankSelectedIsNotInTop5 = () => {
 					},
 				]}
 				filterKeyEvents={false}
+				id="key-events-carousel-desktop"
 			/>
 		</Wrapper>
 	);
