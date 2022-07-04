@@ -73,6 +73,7 @@ export const topicBankSelectedIsNotInTop5 = () => {
 	return (
 		<Wrapper>
 			<TopicFilterBank
+				id="key-events-carousel-desktop"
 				availableTopics={availableTopics}
 				selectedTopics={selectedTopics}
 				format={format}
