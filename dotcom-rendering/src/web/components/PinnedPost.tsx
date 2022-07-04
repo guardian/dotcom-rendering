@@ -20,9 +20,14 @@ import { decidePalette } from '../lib/decidePalette';
 const pinnedPostContainer = (palette: Palette) => css`
 	border: 3px solid ${palette.border.pinnedPost};
 	padding-bottom: ${space[1]}px;
-	margin-bottom: ${space[9]}px;
 	position: relative;
 	background: ${neutral[100]};
+	${from.mobile} {
+		margin-bottom: ${space[6] + space[5] / 2}px;
+	}
+	${from.desktop} {
+		margin-bottom: ${space[9]}px;
+	}
 	#pinned-post-checkbox:checked ~ #collapsible-body {
 		max-height: fit-content;
 		margin-bottom: ${space[1]}px;
