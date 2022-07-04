@@ -18,10 +18,7 @@ testing in cases where Storybook is not so well-suited.
 ### Pros
 
 The following benefits or use cases have been raised by members of the
-Dotcom team. (Commercial have also 
-[expressed interest](https://github.com/guardian/dotcom-rendering/pull/5256)
-in using Percy with Cypress, so we should find out more about their 
-use-cases, too.)
+department.
 
 - Cypress uses a headless browser to query our own server, which 
   avoids the difficulties of setting more complex configurations in
