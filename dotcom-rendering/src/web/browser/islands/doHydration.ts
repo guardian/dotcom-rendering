@@ -49,12 +49,10 @@ export const doHydration = (
 		})
 		.then(({ clientOnly, timeTaken }) => {
 			// Log performance info
-			const entry = window.performance
-				.getEntriesByType('resource')
-				.find((p) => p.name.includes(`${name}-importable.`));
-			const { requestStart = 0, responseEnd = 0 } =
-				entry instanceof PerformanceResourceTiming ? entry : {};
-			const download = Math.ceil(responseEnd - requestStart);
+			const { duration: download = -1 } =
+				window.performance
+					.getEntriesByType('resource')
+					.find((p) => p.name.includes(`/${name}-importable.`)) ?? {};
 
 			const action = clientOnly ? 'Rendering' : 'Hydrating';
 
