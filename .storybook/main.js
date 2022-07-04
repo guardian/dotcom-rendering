@@ -1,6 +1,10 @@
 const path = require("path");
 const webpack = require("webpack");
 
+// Generate dynamic Card and Layout stories
+require("../dotcom-rendering/scripts/gen-stories/gen-stories");
+
+
 /** @type {import("@storybook/react/types").StorybookConfig} */
 module.exports = {
 	core: {
@@ -9,6 +13,7 @@ module.exports = {
 	stories: [
 		"../apps-rendering/src/**/*.stories.@(js|mdx|ts|tsx)",
 		"../dotcom-rendering/src/**/*.stories.@(tsx)",
+		"../dotcom-rendering/stories/**/*.stories.@(tsx)",
 		"../common-rendering/src/**/*.stories.@(tsx)",
 	],
 	addons: [
