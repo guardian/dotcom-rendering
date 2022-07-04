@@ -173,13 +173,22 @@ clear: # private
 
 check-schema:
 	$(call log, "Checking schemas")
-	@node scripts/json-schema/check-schema
+	@node scripts/json-schema/check-schema.js
 
 gen-schema:
 	$(call log, "Generating new schemas")
 	@node scripts/json-schema/gen-schema.js
 	@git add src/model/article-schema.json
 	@git add src/model/front-schema.json
+
+check-stories:
+	$(call log, "Checking Storybook stories")
+	@node scripts/gen-stories/check-stories.js
+
+gen-stories:
+	$(call log, "Generating new Storybook stories")
+	@node scripts/gen-stories/gen-stories.js
+	@git add stories/generated
 
 gen-fixtures:
 	$(call log, "Generating new article fixture data")
