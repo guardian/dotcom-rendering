@@ -270,6 +270,8 @@ Resources:
               mkdir /var/log/dotcom-rendering
               chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
 
+              export PATH="/usr/local/node:$PATH"
+
               make start
 
               /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${AWS::Region} ${ELKStream} /var/log/dotcom-rendering/dotcom-rendering.log
