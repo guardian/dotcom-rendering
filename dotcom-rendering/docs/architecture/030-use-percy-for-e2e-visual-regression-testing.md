@@ -55,7 +55,7 @@ use-cases, too.)
   seem to have [solid backing](https://www.browserstack.com/blog/browserstack-has-acquired-percy/),
   at the time of writing.
 - Cost?
-
+- Time to execute. This is an unknown quantity at this stage but if the execution time for Percy is too long it could delay deployments
 ### Other considerations
 
 - Cypress lists [a number of other packages](https://docs.cypress.io/guides/tooling/visual-testing#Tooling)
