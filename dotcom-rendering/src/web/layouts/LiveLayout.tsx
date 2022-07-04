@@ -303,8 +303,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const cricketMatchUrl =
 		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
 
-	const showKeyEventsCarousel =
-		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
+	const showKeyEventsCarousel = CAPIArticle.config.switches.keyEventsCarousel;
 
 	const isInFilteringBeta =
 		CAPIArticle.config.switches.automaticFilters &&

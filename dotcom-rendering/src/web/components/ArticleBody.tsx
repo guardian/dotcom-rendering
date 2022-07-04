@@ -167,7 +167,7 @@ export const ArticleBody = ({
 						onFirstPage={onFirstPage}
 						keyEvents={keyEvents}
 						filterKeyEvents={filterKeyEvents}
-						isKeyEventsCarouselVariant={showKeyEventsCarousel}
+						isKeyEventsCarousel={showKeyEventsCarousel}
 						availableTopics={availableTopics}
 						selectedTopics={selectedTopics}
 					/>
