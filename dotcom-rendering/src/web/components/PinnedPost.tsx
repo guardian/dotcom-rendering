@@ -23,7 +23,7 @@ const pinnedPostContainer = (palette: Palette) => css`
 	position: relative;
 	background: ${neutral[100]};
 	${from.mobile} {
-		margin-bottom: ${space[6] + space[5] / 2}px;
+		margin-bottom: 34px;
 	}
 	${from.desktop} {
 		margin-bottom: ${space[9]}px;
