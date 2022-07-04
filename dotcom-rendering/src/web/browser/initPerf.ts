@@ -13,20 +13,31 @@ export const initPerf = (
 	const startKey = `${prefix}.${name}-start`;
 	const endKey = `${prefix}.${name}-end`;
 
-	if (!('mark' in perf)) {
-		return { start: () => 0, end: () => 0, clear: () => {} };
+	if (!('getEntriesByName' in perf)) {
+		// Handle browsers with partial implementations
+		return { start: () => -1, end: () => -1, clear: () => {} };
 	}
 
 	/** @returns time elapsed since [time origin](https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp#the_time_origin) in milliseconds */
 	const start = () => {
-		const { startTime } = perf.mark(startKey);
+		const { startTime = -1 } =
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Issue in Firefox https://caniuse.com/mdn-api_performance_measure_returns_undefined
+			perf.mark(startKey) ??
+			perf.getEntriesByName(startKey, 'mark')[0] ??
+			{};
+
 		return Math.ceil(startTime);
 	};
 
 	/** @returns length of task in milliseconds */
 	const end = (): number => {
 		perf.mark(endKey);
-		const { duration } = perf.measure(name, startKey, endKey);
+		const { duration = -1 } =
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Issue in Firefox https://caniuse.com/mdn-api_performance_measure_returns_undefined
+			perf.measure(name, startKey, endKey) ??
+			perf.getEntriesByName(name, 'measure')[0] ??
+			{};
+
 		return Math.ceil(duration);
 	};
 
