@@ -618,8 +618,8 @@ interface CAPIArticleType {
 
 	// Included on live and dead blogs. Used when polling
 	mostRecentBlockId?: string;
-	topics?: Topic[];
-	activeTopic?: string;
+	availableTopics?: Topic[];
+	selectedTopics?: Topic[];
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
@@ -1087,7 +1087,7 @@ type AvatarType = {
 
 type MediaType = 'Video' | 'Audio' | 'Gallery';
 
-type LineEffectType = 'squiggly' | 'dotted' | 'straight';
+type LineEffectType = 'labs' | 'dotted' | 'straight';
 
 type LeftColSize = 'compact' | 'wide';
 
@@ -1173,7 +1173,7 @@ type MatchReportType = {
 interface Topic {
 	type: TopicType;
 	value: string;
-	count: number;
+	count?: number;
 }
 
 type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
@@ -1467,6 +1467,7 @@ declare namespace JSX {
 			name: string;
 			deferUntil?: 'idle' | 'visible';
 			clientOnly?: boolean;
+			expediteLoading?: boolean;
 			props: any;
 			children: React.ReactNode;
 		};

@@ -9,10 +9,7 @@ import {
 	space,
 	until,
 } from '@guardian/source-foundations';
-import {
-	Lines,
-	StraightLines,
-} from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
@@ -23,6 +20,7 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
+import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
@@ -42,7 +40,6 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
-import { decideLineCount, decideLineEffect } from '../lib/layoutHelpers';
 import { ImmersiveHeader } from './headers/ImmersiveHeader';
 import { BannerWrapper } from './lib/stickiness';
 
@@ -339,18 +336,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										ArticleSpecial.Labs ? (
 											<GuardianLabsLines />
 										) : (
-											<Lines
-												cssOverrides={css`
-													display: block;
-												`}
-												effect={decideLineEffect(
-													ArticleDesign.Standard,
-													format.theme,
-												)}
-												count={decideLineCount(
-													ArticleDesign.Standard,
-												)}
-											/>
+											<DecideLines format={format} />
 										)}
 									</div>
 								</div>
@@ -413,7 +399,6 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									isPreview={CAPIArticle.config.isPreview}
 									idUrl={CAPIArticle.config.idUrl || ''}
 									isDev={!!CAPIArticle.config.isDev}
-									abTests={CAPIArticle.config.abTests}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>

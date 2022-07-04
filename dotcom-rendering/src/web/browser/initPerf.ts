@@ -1,42 +1,33 @@
-import { log } from '@guardian/libs';
+const prefix = 'dotcom.performance';
 
+/**
+ * Helper to measure the duration of any task.
+ *
+ * Values are rounded up to the nearest millisecond,
+ * in order to not under-report any duration.
+ */
 export const initPerf = (
 	name: string,
-): { start: () => void; end: () => number; clear: () => void } => {
-	type TimeTakenInMilliseconds = number;
-
+): { start: () => number; end: () => number; clear: () => void } => {
 	const perf = window.performance;
-	const startKey = `${name}-start`;
-	const endKey = `${name}-end`;
+	const startKey = `${prefix}.${name}-start`;
+	const endKey = `${prefix}.${name}-end`;
 
-	if (!perf || !perf.getEntriesByName) {
-		// Return noops if window.performance or the required functions don't exist
-		return {
-			start: () => {},
-			end: () => 0,
-			clear: () => {},
-		};
+	if (!('mark' in perf)) {
+		return { start: () => 0, end: () => 0, clear: () => {} };
 	}
 
+	/** @returns time elapsed since [time origin](https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp#the_time_origin) in milliseconds */
 	const start = () => {
-		perf.mark(startKey);
+		const { startTime } = perf.mark(startKey);
+		return Math.ceil(startTime);
 	};
 
-	const end = (): TimeTakenInMilliseconds => {
+	/** @returns length of task in milliseconds */
+	const end = (): number => {
 		perf.mark(endKey);
-		perf.measure(name, startKey, endKey);
-
-		log('dotcom', JSON.stringify(perf.getEntriesByName(name)));
-
-		const measureEntries = perf.getEntriesByName(name, 'measure');
-		const timeTakenFloat =
-			(measureEntries &&
-				measureEntries[0] &&
-				measureEntries[0].duration) ||
-			0;
-		const timeTakenInt = Math.round(timeTakenFloat);
-
-		return timeTakenInt;
+		const { duration } = perf.measure(name, startKey, endKey);
+		return Math.ceil(duration);
 	};
 
 	const clear = () => {

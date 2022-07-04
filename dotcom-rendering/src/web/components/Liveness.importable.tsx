@@ -16,7 +16,7 @@ type Props = {
 	webURL: string;
 	mostRecentBlockId: string;
 	hasPinnedPost: boolean;
-	activeTopic?: string;
+	selectedTopics?: Topic[];
 };
 
 const isServer = typeof window === 'undefined';
@@ -107,7 +107,7 @@ function getKey(
 	ajaxUrl: string,
 	latestBlockId: string,
 	filterKeyEvents: boolean,
-	activeTopic?: string,
+	selectedTopics?: Topic[],
 ): string | undefined {
 	try {
 		// Construct the url to poll
@@ -119,7 +119,11 @@ function getKey(
 			'filterKeyEvents',
 			filterKeyEvents ? 'true' : 'false',
 		);
-		if (activeTopic) url.searchParams.set('activeTopic', activeTopic);
+		if (selectedTopics && selectedTopics.length > 0)
+			url.searchParams.set(
+				'topics',
+				`${selectedTopics[0].type}:${selectedTopics[0].value}`,
+			);
 		return url.href;
 	} catch {
 		window.guardian.modules.sentry.reportError(
@@ -145,7 +149,7 @@ export const Liveness = ({
 	webURL,
 	mostRecentBlockId,
 	hasPinnedPost,
-	activeTopic,
+	selectedTopics,
 }: Props) => {
 	const [showToast, setShowToast] = useState(false);
 	const [topOfBlogVisible, setTopOfBlogVisible] = useState<boolean>();
@@ -208,7 +212,7 @@ export const Liveness = ({
 
 	// useApi returns { data, loading, error } but we're not using them here
 	useApi(
-		getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents, activeTopic),
+		getKey(pageId, ajaxUrl, latestBlockId, filterKeyEvents, selectedTopics),
 		{
 			refreshInterval: 10_000,
 			refreshWhenHidden: true,

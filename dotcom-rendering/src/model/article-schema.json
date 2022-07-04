@@ -400,14 +400,17 @@
         "mostRecentBlockId": {
             "type": "string"
         },
-        "topics": {
+        "availableTopics": {
             "type": "array",
             "items": {
                 "$ref": "#/definitions/Topic"
             }
         },
-        "activeTopic": {
-            "type": "string"
+        "selectedTopics": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Topic"
+            }
         }
     },
     "required": [
@@ -4275,7 +4278,6 @@
                 }
             },
             "required": [
-                "count",
                 "type",
                 "value"
             ]

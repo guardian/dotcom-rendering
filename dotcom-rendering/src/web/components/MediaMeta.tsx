@@ -41,8 +41,7 @@ const durationStyles = (palette: Palette) => css`
 const wrapperStyles = css`
 	display: flex;
 	align-items: center;
-
-	padding: 0 5px 5px 5px;
+	margin-top: 4px;
 `;
 
 export function secondsToDuration(secs?: number): string {

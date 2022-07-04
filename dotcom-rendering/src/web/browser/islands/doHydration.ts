@@ -37,15 +37,31 @@ export const doHydration = (
 
 			if (clientOnly) {
 				element.querySelector('[data-name="placeholder"]')?.remove();
-				log('dotcom', `Rendering island ${name}`);
 				render(h(module[name], data), element);
 			} else {
-				log('dotcom', `Hydrating island ${name}`);
 				hydrate(h(module[name], data), element);
 			}
 
 			element.setAttribute('data-gu-ready', 'true');
-			end();
+			const timeTaken = end();
+
+			return { clientOnly, timeTaken };
+		})
+		.then(({ clientOnly, timeTaken }) => {
+			// Log performance info
+			const entry = window.performance
+				.getEntriesByType('resource')
+				.find((p) => p.name.includes(`${name}-importable.`));
+			const { requestStart = 0, responseEnd = 0 } =
+				entry instanceof PerformanceResourceTiming ? entry : {};
+			const download = Math.ceil(responseEnd - requestStart);
+
+			const action = clientOnly ? 'Rendering' : 'Hydrating';
+
+			log(
+				'dotcom',
+				`🏝 ${action} island <${name} /> took ${timeTaken}ms (downloaded in ${download}ms)`,
+			);
 		})
 		.catch((error) => {
 			if (name && error.message.includes(name)) {

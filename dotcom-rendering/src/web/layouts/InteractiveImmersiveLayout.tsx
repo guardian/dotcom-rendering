@@ -8,7 +8,6 @@ import {
 	neutral,
 	until,
 } from '@guardian/source-foundations';
-import { Lines } from '@guardian/source-react-components-development-kitchen';
 import React from 'react';
 import {
 	adCollapseStyles,
@@ -21,6 +20,7 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
+import { DecideLines } from '../components/DecideLines';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -31,7 +31,6 @@ import { Island } from '../components/Island';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
-import { decideLineCount, decideLineEffect } from '../lib/layoutHelpers';
 import { renderElement } from '../lib/renderElement';
 import { ImmersiveHeader } from './headers/ImmersiveHeader';
 import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
@@ -406,18 +405,7 @@ export const InteractiveImmersiveLayout = ({
 										ArticleSpecial.Labs ? (
 											<GuardianLabsLines />
 										) : (
-											<Lines
-												cssOverrides={css`
-													display: block;
-												`}
-												effect={decideLineEffect(
-													ArticleDesign.Standard,
-													format.theme,
-												)}
-												count={decideLineCount(
-													ArticleDesign.Standard,
-												)}
-											/>
+											<DecideLines format={format} />
 										)}
 									</div>
 								</div>

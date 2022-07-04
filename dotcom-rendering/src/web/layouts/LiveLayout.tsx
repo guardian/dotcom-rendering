@@ -16,10 +16,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
-import {
-	Lines,
-	StraightLines,
-} from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
@@ -29,6 +26,7 @@ import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { ContainerLayout } from '../components/ContainerLayout';
+import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
@@ -55,14 +53,11 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { TopicFilterBank } from '../components/TopicFilterBank.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
-import {
-	decideLineCount,
-	decideLineEffect,
-	getCurrentPillar,
-} from '../lib/layoutHelpers';
+import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
@@ -312,7 +307,19 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
 
 	const isInFilteringBeta =
-		CAPIArticle.config.switches.automaticFilters && CAPIArticle.topics;
+		CAPIArticle.config.switches.automaticFilters &&
+		CAPIArticle.availableTopics;
+
+	/*
+	The topic bank on desktop will be positioned where we currently show the key events container.
+	This is dependent on a change made in PR #4896 [https://github.com/guardian/dotcom-rendering/pull/4896] where the key events container will be removed from the left column.
+	This change currently lives behind the key-events-carousel A/B test.
+	Until this change is moved from behind the a/b test, we need to add an additional condition
+	here to see if the user is within this test, meaning we can therefore position the filter bank in the empty space.
+	Once the key-event-carousel test is completed and this change is productionised, we can remove the final `showKeyEventsCarousel` condition.
+	*/
+	const showTopicFilterBank =
+		CAPIArticle.config.switches.automaticFilters && showKeyEventsCarousel;
 
 	return (
 		<>
@@ -548,15 +555,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<GridItem area="lines">
 							<Hide from="desktop">
 								<div css={sidePaddingDesktop}>
-									<Lines
-										cssOverrides={css`
-											display: block;
-										`}
-										count={decideLineCount(format.design)}
-										effect={decideLineEffect(
-											format.design,
-											format.theme,
-										)}
+									<DecideLines
+										format={format}
 										color={
 											format.design ===
 											ArticleDesign.LiveBlog
@@ -619,6 +619,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.filterKeyEvents
 									}
 									format={format}
+									id={'key-events-carousel-desktop'}
 								/>
 							</Island>
 						</Hide>
@@ -674,7 +675,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.mostRecentBlockId || ''
 									}
 									hasPinnedPost={!!CAPIArticle.pinnedPost}
-									activeTopic={CAPIArticle.activeTopic}
+									selectedTopics={CAPIArticle.selectedTopics}
 								/>
 							</Island>
 						</>
@@ -731,18 +732,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								{/* Lines */}
 								<Hide until="desktop">
 									<div css={[maxWidth, sidePaddingDesktop]}>
-										<Lines
-											cssOverrides={css`
-												display: block;
-											`}
-											count={decideLineCount(
-												format.design,
-											)}
-											effect={decideLineEffect(
-												format.design,
-												format.theme,
-											)}
-										/>
+										<DecideLines format={format} />
 									</div>
 								</Hide>
 								{/* Meta */}
@@ -797,6 +787,34 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										/>
 									</div>
 								)}
+
+								{showTopicFilterBank &&
+									CAPIArticle.availableTopics && (
+										<Hide until="desktop">
+											<div css={sidePaddingDesktop}>
+												<Island>
+													<TopicFilterBank
+														availableTopics={
+															CAPIArticle.availableTopics
+														}
+														selectedTopics={
+															CAPIArticle.selectedTopics
+														}
+														format={format}
+														keyEvents={
+															CAPIArticle.keyEvents
+														}
+														filterKeyEvents={
+															CAPIArticle.filterKeyEvents
+														}
+														id={
+															'key-events-carousel-desktop'
+														}
+													/>
+												</Island>
+											</div>
+										</Hide>
+									)}
 								{/* Match stats */}
 								{footballMatchUrl && (
 									<Island
@@ -813,7 +831,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
-									{CAPIArticle.keyEvents.length ? (
+									{CAPIArticle.keyEvents.length &&
+									!showTopicFilterBank ? (
 										<Hide below="desktop">
 											<Island deferUntil="visible">
 												<FilterKeyEventsToggle
@@ -936,12 +955,14 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													filterKeyEvents={
 														CAPIArticle.filterKeyEvents
 													}
-													abTests={
-														CAPIArticle.config
-															.abTests
-													}
 													showKeyEventsCarousel={
 														showKeyEventsCarousel
+													}
+													availableTopics={
+														CAPIArticle.availableTopics
+													}
+													selectedTopics={
+														CAPIArticle.selectedTopics
 													}
 												/>
 												{pagination.totalPages > 1 && (
@@ -1103,12 +1124,14 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													filterKeyEvents={
 														CAPIArticle.filterKeyEvents
 													}
-													abTests={
-														CAPIArticle.config
-															.abTests
-													}
 													showKeyEventsCarousel={
 														showKeyEventsCarousel
+													}
+													availableTopics={
+														CAPIArticle.availableTopics
+													}
+													selectedTopics={
+														CAPIArticle.selectedTopics
 													}
 												/>
 												{pagination.totalPages > 1 && (

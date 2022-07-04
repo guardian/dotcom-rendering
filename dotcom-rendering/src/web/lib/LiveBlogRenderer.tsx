@@ -6,6 +6,7 @@ import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
 import { LiveBlock } from '../components/LiveBlock';
 import { LiveBlogEpic } from '../components/LiveBlogEpic.importable';
 import { PinnedPost } from '../components/PinnedPost';
+import { TopicFilterBank } from '../components/TopicFilterBank.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -29,6 +30,8 @@ type Props = {
 	keyEvents?: Block[];
 	filterKeyEvents?: boolean;
 	isKeyEventsCarouselVariant?: boolean;
+	availableTopics?: Topic[];
+	selectedTopics?: Topic[];
 };
 
 export const LiveBlogRenderer = ({
@@ -53,6 +56,8 @@ export const LiveBlogRenderer = ({
 	keyEvents,
 	filterKeyEvents = false,
 	isKeyEventsCarouselVariant = false,
+	availableTopics,
+	selectedTopics,
 }: Props) => {
 	return (
 		<>
@@ -86,17 +91,35 @@ export const LiveBlogRenderer = ({
 							keyEvents={keyEvents}
 							filterKeyEvents={filterKeyEvents}
 							format={format}
+							id={'key-events-carousel-mobile'}
 						/>
 					</Island>
-					<Island deferUntil="visible">
-						<FilterKeyEventsToggle
-							filterKeyEvents={filterKeyEvents}
-							id="filter-toggle-mobile"
-						/>
-					</Island>
+					{!switches.automaticFilters && (
+						<Island deferUntil="visible">
+							<FilterKeyEventsToggle
+								filterKeyEvents={filterKeyEvents}
+								id="filter-toggle-mobile"
+							/>
+						</Island>
+					)}
 				</Hide>
 			) : (
 				<></>
+			)}
+
+			{switches.automaticFilters && availableTopics && (
+				<Hide above="desktop">
+					<Island>
+						<TopicFilterBank
+							availableTopics={availableTopics}
+							selectedTopics={selectedTopics}
+							format={format}
+							keyEvents={keyEvents}
+							filterKeyEvents={filterKeyEvents}
+							id={'key-events-carousel-mobile'}
+						/>
+					</Island>
+				</Hide>
 			)}
 			<div id="top-of-blog" />
 			{blocks.map((block) => {
