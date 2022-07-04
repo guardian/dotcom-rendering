@@ -131,8 +131,7 @@ const adStyles = css`
 			width: 100%;
 		}
 	}
-	.ad-slot--inline:not(.ad-slot--inline1),
-	.ad-slot-liveblog--inline:not(.ad-slot--inline1) {
+	.ad-slot--inline:not(.ad-slot--inline1) {
 		width: 300px;
 		margin: 12px auto;
 		min-width: 300px;
