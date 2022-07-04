@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { brandAltBackground } from '@guardian/source-foundations';
+import { brandAltBackground, space } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { decidePalette } from '../../lib/decidePalette';
@@ -60,26 +60,21 @@ export type Props = {
 	discussionId?: string;
 };
 
-const starWrapper = css`
-	background-color: ${brandAltBackground.primary};
-	position: absolute;
-	bottom: 0;
-	margin-top: 2px;
-`;
-
-const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
-	<>
+const StarRatingComponent = ({ rating }: { rating: number }) => (
+	<div
+		css={css`
+			background-color: ${brandAltBackground.primary};
+			margin-top: ${space[1]}px;
+			display: inline-block;
+		`}
+	>
 		<Hide when="above" breakpoint="desktop">
-			<div css={starWrapper}>
-				<StarRating rating={rating} size="small" />
-			</div>
+			<StarRating rating={rating} size="small" />
 		</Hide>
 		<Hide when="below" breakpoint="desktop">
-			<div css={starWrapper}>
-				<StarRating rating={rating} size="medium" />
-			</div>
+			<StarRating rating={rating} size="medium" />
 		</Hide>
-	</>
+	</div>
 );
 
 /**
@@ -221,19 +216,6 @@ export const Card = ({
 						/>
 					) : undefined
 				}
-				mediaMeta={
-					(format.design === ArticleDesign.Gallery ||
-						format.design === ArticleDesign.Audio ||
-						format.design === ArticleDesign.Video) &&
-					mediaType ? (
-						<MediaMeta
-							containerPalette={containerPalette}
-							format={format}
-							mediaType={mediaType}
-							mediaDuration={mediaDuration}
-						/>
-					) : undefined
-				}
 				commentCount={
 					discussionId ? (
 						<Link
@@ -299,9 +281,6 @@ export const Card = ({
 						imagePositionOnMobile={imagePositionOnMobile}
 					>
 						<img src={imageUrl} alt="" role="presentation" />
-						{starRating !== undefined ? (
-							<StarRatingComponent rating={starRating} />
-						) : null}
 					</ImageWrapper>
 				)}
 				<ContentWrapper
@@ -332,6 +311,20 @@ export const Card = ({
 								byline={byline}
 								showByline={showByline}
 							/>
+							{starRating !== undefined ? (
+								<StarRatingComponent rating={starRating} />
+							) : null}
+							{(format.design === ArticleDesign.Gallery ||
+								format.design === ArticleDesign.Audio ||
+								format.design === ArticleDesign.Video) &&
+							mediaType ? (
+								<MediaMeta
+									containerPalette={containerPalette}
+									format={format}
+									mediaType={mediaType}
+									mediaDuration={mediaDuration}
+								/>
+							) : undefined}
 						</HeadlineWrapper>
 						{avatar && (
 							<Hide when="above" breakpoint="tablet">
