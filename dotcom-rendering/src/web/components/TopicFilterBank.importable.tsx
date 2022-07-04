@@ -5,7 +5,7 @@ import { FilterButton } from './FilterButton.importable';
 
 type Props = {
 	availableTopics: Topic[];
-	selectedTopics?: string;
+	selectedTopics?: Topic[];
 	format: ArticleFormat;
 	filterKeyEvents: boolean;
 	keyEvents?: Block[];
@@ -73,6 +73,10 @@ const handleKeyEventClick = (filterKeyEvents: boolean, id: string) => {
 	window.location.search = urlParams.toString();
 };
 
+const isEqual = (selectedTopic: Topic, availableTopic: Topic) =>
+	availableTopic.type === selectedTopic.type &&
+	availableTopic.value === selectedTopic.value;
+
 export const TopicFilterBank = ({
 	availableTopics,
 	selectedTopics,
@@ -82,6 +86,20 @@ export const TopicFilterBank = ({
 	id,
 }: Props) => {
 	const palette = decidePalette(format);
+
+	const selectedTopic = selectedTopics?.[0];
+	const topFiveTopics = availableTopics.slice(0, 5);
+
+	if (selectedTopic) {
+		const selectedIndex = availableTopics.findIndex((availableTopic) =>
+			isEqual(selectedTopic, availableTopic),
+		);
+
+		if (selectedIndex > 4) {
+			topFiveTopics.splice(4, 1, availableTopics[selectedIndex]);
+		}
+	}
+
 	return (
 		<div css={containerStyles}>
 			<div css={headlineStyles}>
@@ -104,11 +122,10 @@ export const TopicFilterBank = ({
 					/>
 				)}
 
-				{availableTopics.slice(0, 5).map((topic) => {
+				{topFiveTopics.map((topic) => {
 					const buttonParams = `${topic.type}:${topic.value}`;
-					const isActive = selectedTopics
-						? selectedTopics.includes(buttonParams)
-						: false;
+					const isActive =
+						!!selectedTopic && isEqual(selectedTopic, topic);
 
 					return (
 						<FilterButton

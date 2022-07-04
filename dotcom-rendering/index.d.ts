@@ -619,7 +619,7 @@ interface CAPIArticleType {
 	// Included on live and dead blogs. Used when polling
 	mostRecentBlockId?: string;
 	availableTopics?: Topic[];
-	selectedTopics?: string;
+	selectedTopics?: Topic[];
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
@@ -1173,7 +1173,7 @@ type MatchReportType = {
 interface Topic {
 	type: TopicType;
 	value: string;
-	count: number;
+	count?: number;
 }
 
 type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';

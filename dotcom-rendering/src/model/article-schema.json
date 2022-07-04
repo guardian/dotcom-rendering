@@ -407,7 +407,10 @@
             }
         },
         "selectedTopics": {
-            "type": "string"
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Topic"
+            }
         }
     },
     "required": [
@@ -4275,7 +4278,6 @@
                 }
             },
             "required": [
-                "count",
                 "type",
                 "value"
             ]
