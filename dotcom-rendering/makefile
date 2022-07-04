@@ -46,13 +46,12 @@ start-ci: install gen-dotenv-ci
 	@DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
 
 start: export NODE_ENV=production
-start: install gen-dotenv
+start: gen-dotenv
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	pm2 start dist/frontend.server.js
+	pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
-	@pm2 logs
 
 stop:
 	@pm2 kill

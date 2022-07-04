@@ -264,7 +264,7 @@ Resources:
               mkdir /var/log/dotcom-rendering
               chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
 
-              /usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
+              make start
 
               /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${AWS::Region} ${ELKStream} /var/log/dotcom-rendering/dotcom-rendering.log
 
