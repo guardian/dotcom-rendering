@@ -60,10 +60,10 @@ const emailSignup = css`
 		width: 247px;
 	}
 	${between.leftCol.and.wide} {
-		width: 325px;
+		width: 300px;
 	}
 	${from.wide} {
-		width: 498px;
+		width: 460px;
 	}
 `;
 
@@ -166,6 +166,7 @@ const footerItemContainers = css`
 		display: flex;
 	}
 
+	clear: both;
 	width: 100%;
 	padding: 0 10px;
 	position: relative;
