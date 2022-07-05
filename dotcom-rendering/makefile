@@ -52,10 +52,11 @@ start: install gen-dotenv
 	pm2 start dist/frontend.server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
+	@pm2 logs
 
 # Used in cloudformation.yml which specifically:
-# - Launches pm2 from /usr rather than /node_modules
-# - Does not run 'install' task as its not needed & takes time
+# - Launches pm2 from /usr/local/node rather than /node_modules
+# - Does not run 'install' task as its not needed & adds time to startup
 start-prod: export NODE_ENV=production
 start-prod: gen-dotenv
 	$(call log, "starting PROD server...")
