@@ -63,11 +63,7 @@ const enhanceSupportingContent = (
 			format: presentationFormat,
 			headline: subLink.header?.headline || '',
 			url: subLink.properties.href || subLink.header?.url,
-			kickerText:
-				subLink.header?.kicker?.item?.properties.kickerText ||
-				(linkFormat && linkFormat.design === ArticleDesign.LiveBlog
-					? 'Live'
-					: undefined),
+			kickerText: subLink.header?.kicker?.item?.properties.kickerText,
 		};
 	});
 };
