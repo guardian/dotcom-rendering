@@ -49,7 +49,7 @@ start: export NODE_ENV=production
 start: gen-dotenv
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
+	/usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 
