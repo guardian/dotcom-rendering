@@ -16,7 +16,6 @@ interface Props {
 
 const linkStyles = (palette: Palette) => css`
 	text-decoration: none;
-	line-height: 1.35;
 
 	&::before {
 		content: '';
@@ -136,7 +135,7 @@ export const KeyEventCard = ({
 				>
 					{timeAgo(date.getTime())}
 				</time>
-				<span css={textStyles(palette)}>{title}</span>
+				<div css={textStyles(palette)}>{title}</div>
 			</Link>
 		</li>
 	);
