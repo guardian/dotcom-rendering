@@ -6,7 +6,7 @@ export const commercialLazyLoadMarginReloaded: ABTest = {
 	description:
 		'Once again test various margins at which ads are lazily-loaded in order to find the optimal one, this time using values between 0% and 70% of the viewport height',
 	start: '2022-06-20',
-	expiry: '2022-07-04',
+	expiry: '2022-07-11',
 	audience: 20 / 100,
 	audienceOffset: 10 / 100,
 	audienceCriteria: 'All pageviews',
