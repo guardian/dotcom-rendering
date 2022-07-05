@@ -2,9 +2,7 @@ import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
 import { ASSET_ORIGIN } from '../../lib/assets';
 import { getFontsCss } from '../../lib/fonts-css';
-
-/** This is served in browser that do not support ES Modules */
-const ophanNomoduleScript = `<script src="https://j.ophan.co.uk/" defer nomodule></script>`;
+import { ophanNomoduleScript } from './ophanNomoduleScript';
 
 export const articleTemplate = ({
 	title = 'The Guardian',
