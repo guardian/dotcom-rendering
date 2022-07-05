@@ -60,10 +60,10 @@ const emailSignup = css`
 		width: 247px;
 	}
 	${between.leftCol.and.wide} {
-		width: 300px;
+		width: 325px;
 	}
 	${from.wide} {
-		width: 460px;
+		width: 498px;
 	}
 `;
 
