@@ -234,19 +234,22 @@ function getDisplay(content: Content): ArticleDisplay {
 /**
  * Some pieces are supported and contain a branding logo. The branding
  * information is separate from the CAPI model, and is passed to AR by MAPI.
- * 
+ *
  * Sometimes we don't want to show the branding information, even if it's
  * present. This is controlled by the `isInappropriateForSponsorship` field
  * from CAPI, set via a Composer checkbox.
- * 
+ *
  * This function derives the branding information based on these conditions.
  * @param renderingRequest The request from MAPI
  * @returns An optional object containing branding information
  */
-const getBranding = ({ content, branding }: RenderingRequest): Option<Branding> =>
+const getBranding = ({
+	content,
+	branding,
+}: RenderingRequest): Option<Branding> =>
 	content.fields?.isInappropriateForSponsorship === true
 		? none
-		: fromNullable(branding)
+		: fromNullable(branding);
 
 const itemFields = (
 	context: Context,
