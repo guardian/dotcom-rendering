@@ -236,6 +236,8 @@ const FooterLinks = ({
 
 const year = new Date().getFullYear();
 
+// Hard coding the values here is not ideal - ideally, they would sourced from the
+// newsletters API by frontend and included in the request.
 const decideSignupLink = (edition: EditionId): string => {
 	switch (edition) {
 		case 'US':
@@ -246,6 +248,19 @@ const decideSignupLink = (edition: EditionId): string => {
 		case 'INT': // There's no international version so we default to UK
 		default:
 			return 'https://www.theguardian.com/global/ng-interactive/2022/apr/13/first-edition-sign-up-guardian';
+	}
+};
+
+const decideSignupNewsletterName = (edition: EditionId): string => {
+	switch (edition) {
+		case 'US':
+			return 'us-morning-newsletter';
+		case 'AU':
+			return 'morning-mail';
+		case 'UK':
+		case 'INT': // There's no international version so we default to UK
+		default:
+			return 'morning-briefing';
 	}
 };
 
@@ -288,6 +303,9 @@ export const Footer = ({
 				<LinkButton
 					size="small"
 					href={decideSignupLink(editionId)}
+					data-link-name={`footer : ${decideSignupNewsletterName(
+						editionId,
+					)}`}
 					cssOverrides={emailSignupButton}
 					icon={<SvgArrowRightStraight />}
 					iconSide="right"
