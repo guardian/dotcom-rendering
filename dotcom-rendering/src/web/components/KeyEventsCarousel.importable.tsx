@@ -56,6 +56,7 @@ const marginBottomStyles = css`
 `;
 const titleStyles = css`
 	${headline.xxxsmall({ fontWeight: 'bold', lineHeight: 'regular' })};
+	padding-top: ${space[3]}px;
 `;
 
 const containerStyles = css`
