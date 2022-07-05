@@ -1,8 +1,8 @@
 // This is for an experiment testing SEO performance on recipes before
-// and after structured data is added. Please don't delete - it will be
-// removed once the the experiment is finished, we swear!
+// and after structured data is added. If this file is still here on 01/08/22
+// follow up with Ophan on why it hasn't been removed. Delete if no good answer.
 
-export type RecipeSchemaObject = {
+type RecipeSchemaObject = {
 	[url: string]: string;
 };
 

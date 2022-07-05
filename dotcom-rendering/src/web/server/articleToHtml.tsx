@@ -7,11 +7,11 @@ import { ASSET_ORIGIN, getScriptArrayFromFile } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import { Article } from '../components/Article';
-import { recipeSchema } from '../experiments/tests/recipe-structured-data';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { articleTemplate } from './articleTemplate';
 import { extractExpeditedIslands } from './extractIslands';
+import { recipeSchema } from './temporaryRecipeStructuredData';
 
 interface Props {
 	data: DCRServerDocumentData;
@@ -210,10 +210,7 @@ export const articleToHtml = ({ data }: Props): string => {
 
 	const url = CAPIArticle.webURL;
 
-	const recipeMarkup =
-		url in recipeSchema
-			? `<script type="application/ld+json">${recipeSchema[url]}</script>`
-			: undefined;
+	const recipeMarkup = url in recipeSchema ? recipeSchema[url] : undefined;
 
 	return articleTemplate({
 		linkedData,
