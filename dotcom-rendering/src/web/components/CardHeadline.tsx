@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import type { FontScaleArgs } from '@guardian/source-foundations';
+import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
 import { headline, space, textSans, until } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import React from 'react';
@@ -25,12 +25,15 @@ type Props = {
 	linkTo?: string; // If provided, the headline is wrapped in a link
 };
 
-const fontStyles = (
-	size: SmallHeadlineSize,
-	containerPalette?: DCRContainerPalette,
-) => {
+const fontStyles = ({
+	size,
+	fontWeight,
+}: {
+	size: SmallHeadlineSize;
+	fontWeight?: FontWeight;
+}) => {
 	const options: FontScaleArgs = {};
-	if (containerPalette) options.fontWeight = 'bold';
+	if (fontWeight) options.fontWeight = fontWeight;
 
 	switch (size) {
 		case 'huge':
@@ -212,7 +215,12 @@ export const CardHeadline = ({
 				css={[
 					format.theme === ArticleSpecial.Labs
 						? labTextStyles(size)
-						: fontStyles(size, containerPalette),
+						: fontStyles({
+								size,
+								fontWeight: containerPalette
+									? 'bold'
+									: 'regular',
+						  }),
 					format.design === ArticleDesign.Analysis &&
 						!containerPalette &&
 						underlinedStyles(
