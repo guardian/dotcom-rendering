@@ -52,7 +52,7 @@ department.
   is not currently as detailed as one might hope (although it does
   seem to have [solid backing](https://www.browserstack.com/blog/browserstack-has-acquired-percy/),
   at the time of writing.
-- Cost?
+- Cost impact is unknown
 - Time to execute. This is an unknown quantity at this stage but if the execution time for Percy is too long it could delay deployments
 ### Other considerations
 
