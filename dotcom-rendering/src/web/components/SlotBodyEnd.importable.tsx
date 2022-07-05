@@ -83,12 +83,18 @@ const buildBrazeEpicConfig = (
 	brazeMessages: BrazeMessagesInterface,
 	countryCode: string,
 	idApiUrl: string,
+	contentType: string,
 	brazeArticleContext: BrazeArticleContext,
 ): CandidateConfig<any> => {
 	return {
 		candidate: {
 			id: 'braze-epic',
-			canShow: () => canShowBrazeEpic(brazeMessages, brazeArticleContext),
+			canShow: () =>
+				canShowBrazeEpic(
+					brazeMessages,
+					brazeArticleContext,
+					contentType,
+				),
 			show: (meta: any) => () =>
 				(
 					<MaybeBrazeEpic
@@ -171,6 +177,7 @@ export const SlotBodyEnd = ({
 			brazeMessages as BrazeMessagesInterface,
 			countryCode as string,
 			idApiUrl,
+			contentType,
 			brazeArticleContext,
 		);
 		const epicConfig: SlotConfig = {
