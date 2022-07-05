@@ -239,13 +239,13 @@ const year = new Date().getFullYear();
 const decideSignupLink = (edition: EditionId): string => {
 	switch (edition) {
 		case 'US':
-			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-us';
+			return 'https://www.theguardian.com/info/2018/sep/17/guardian-us-morning-briefing-sign-up-to-stay-informed';
 		case 'AU':
-			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-au';
+			return 'https://www.theguardian.com/world/guardian-australia-morning-mail/2014/jun/24/-sp-guardian-australias-morning-mail-subscribe-by-email';
 		case 'UK':
 		case 'INT': // There's no international version so we default to UK
 		default:
-			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-uk';
+			return 'https://www.theguardian.com/global/ng-interactive/2022/apr/13/first-edition-sign-up-guardian';
 	}
 };
 
@@ -282,8 +282,8 @@ export const Footer = ({
 		<div css={footerItemContainers}>
 			<div css={emailSignup}>
 				<div>
-					All the day's headlines and highlights from the Guardian,
-					direct to you every morning
+					Original reporting and incisive analysis, direct from the
+					Guardian every morning
 				</div>
 				<LinkButton
 					size="small"
