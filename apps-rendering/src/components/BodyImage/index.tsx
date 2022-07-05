@@ -1,27 +1,26 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from "@emotion/react";
-import { css } from "@emotion/react";
-import { remSpace } from "@guardian/source-foundations";
-import type { Breakpoint } from "@guardian/source-foundations";
-import { from } from "@guardian/source-foundations";
-import type { ArticleFormat } from "@guardian/libs";
-import { ArticleElementRole } from "@guardian/libs";
-import type { Option } from "@guardian/types";
-import { none, some, withDefault } from "@guardian/types";
-import type { FC, ReactNode } from "react";
-import type { Image } from "../image";
-import { darkModeCss } from "../lib";
-import type { Lightbox } from "../lightbox";
-import type { Sizes } from "../sizes";
-import FigCaption from "./figCaption";
-import Img from "./img";
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import FigCaption from '@guardian/common-rendering/src/components/figCaption';
+import { darkModeCss } from '@guardian/common-rendering/src/lib';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleElementRole } from '@guardian/libs';
+import type { Breakpoint } from '@guardian/source-foundations';
+import { from, remSpace } from '@guardian/source-foundations';
+import type { Option } from '@guardian/types';
+import { none, some, withDefault } from '@guardian/types';
+import Img from 'components/ImgAlt';
+import type { Image } from 'image/image';
+import type { Lightbox } from 'image/lightbox';
+import type { Sizes } from 'image/sizes';
+import type { FC, ReactNode } from 'react';
 
 // ----- Setup ----- //
 
-const width = "100%";
-const phabletWidth = "620px";
-const thumbnailWidth = "8.75rem";
+const width = '100%';
+const phabletWidth = '620px';
+const thumbnailWidth = '8.75rem';
 
 // ----- Functions ----- //
 
@@ -34,7 +33,7 @@ const getSizes = (role: ArticleElementRole): Sizes => {
 			};
 		default:
 			return {
-				mediaQueries: [{ breakpoint: "phablet", size: phabletWidth }],
+				mediaQueries: [{ breakpoint: 'phablet', size: phabletWidth }],
 				default: width,
 			};
 	}
@@ -61,7 +60,7 @@ const styles = css`
 `;
 
 const thumbnailStyles = (
-	leftColumnBreakpoint: Breakpoint
+	leftColumnBreakpoint: Breakpoint,
 ): SerializedStyles => css`
 	float: left;
 	width: ${thumbnailWidth};
@@ -75,7 +74,7 @@ const thumbnailStyles = (
 
 const imgStyles = (
 	role: ArticleElementRole,
-	supportsDarkMode: boolean
+	supportsDarkMode: boolean,
 ): Option<SerializedStyles> => {
 	switch (role) {
 		case ArticleElementRole.Thumbnail:
@@ -93,12 +92,12 @@ const imgStyles = (
 
 const getStyles = (
 	role: ArticleElementRole,
-	leftColumnBreakpoint: Option<Breakpoint>
+	leftColumnBreakpoint: Option<Breakpoint>,
 ): SerializedStyles => {
 	switch (role) {
 		case ArticleElementRole.Thumbnail:
 			return thumbnailStyles(
-				withDefault<Breakpoint>("leftCol")(leftColumnBreakpoint)
+				withDefault<Breakpoint>('leftCol')(leftColumnBreakpoint),
 			);
 		default:
 			return styles;

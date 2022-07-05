@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { log } from '@guardian/libs';
+import type { Attributes } from 'preact';
 import { h, hydrate, render } from 'preact';
 import { initPerf } from '../initPerf';
 
@@ -14,7 +15,11 @@ import { initPerf } from '../initPerf';
  * @param data The deserialised props we want to use for hydration
  * @param element The location on the DOM where the component to hydrate exists
  */
-export const doHydration = (name: string, data: any, element: HTMLElement) => {
+export const doHydration = (
+	name: string,
+	data: Attributes | null,
+	element: HTMLElement,
+): void => {
 	// If this function has already been run for an element then don't try to
 	// run it a second time
 	const alreadyHydrated = element.dataset.guReady;
@@ -32,15 +37,29 @@ export const doHydration = (name: string, data: any, element: HTMLElement) => {
 
 			if (clientOnly) {
 				element.querySelector('[data-name="placeholder"]')?.remove();
-				log('dotcom', `Rendering island ${name}`);
 				render(h(module[name], data), element);
 			} else {
-				log('dotcom', `Hydrating island ${name}`);
 				hydrate(h(module[name], data), element);
 			}
 
 			element.setAttribute('data-gu-ready', 'true');
-			end();
+			const timeTaken = end();
+
+			return { clientOnly, timeTaken };
+		})
+		.then(({ clientOnly, timeTaken }) => {
+			// Log performance info
+			const { duration: download = -1 } =
+				window.performance
+					.getEntriesByType('resource')
+					.find((p) => p.name.includes(`/${name}-importable.`)) ?? {};
+
+			const action = clientOnly ? 'Rendering' : 'Hydrating';
+
+			log(
+				'dotcom',
+				`🏝 ${action} island <${name} /> took ${timeTaken}ms (downloaded in ${download}ms)`,
+			);
 		})
 		.catch((error) => {
 			if (name && error.message.includes(name)) {

@@ -15,7 +15,7 @@ type AuthenticationEventParams = {
 export const createAuthenticationEventParams = (
 	componentId: AuthenticationComponentId,
 	pageViewId?: string,
-) => {
+): string => {
 	const params: AuthenticationEventParams = {
 		componentType: 'identityauthentication',
 		componentId,

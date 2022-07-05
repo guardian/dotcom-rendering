@@ -95,11 +95,7 @@ const Box = ({
 	</div>
 );
 
-export const ImmersiveHeader = ({
-	CAPIArticle,
-	NAV,
-	format,
-}: Props): JSX.Element => {
+export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		config: { host },
 	} = CAPIArticle;
@@ -181,7 +177,7 @@ export const ImmersiveHeader = ({
 									CAPIArticle.nav.readerRevenueLinks.header
 										.subscribe
 								}
-								edition={CAPIArticle.editionId}
+								editionId={CAPIArticle.editionId}
 							/>
 						</ElementContainer>
 					</div>

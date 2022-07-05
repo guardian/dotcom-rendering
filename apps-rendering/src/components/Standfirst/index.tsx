@@ -24,7 +24,12 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 		return format.theme === ArticleSpecial.Labs ? (
 			<ImmersiveLabsStandfirst item={item} />
 		) : (
-			<ImmersiveStandfirst item={item} />
+			<ImmersiveStandfirst
+				standfirst={item.standfirst}
+				format={getFormat(item)}
+				byline={item.byline}
+				bylineHtml={item.bylineHtml}
+			/>
 		);
 	}
 	if (format.theme === ArticleSpecial.Labs) {

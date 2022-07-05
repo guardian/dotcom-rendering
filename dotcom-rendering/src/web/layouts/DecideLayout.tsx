@@ -14,11 +14,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-export const DecideLayout = ({
-	CAPIArticle,
-	NAV,
-	format,
-}: Props): JSX.Element => {
+export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	// TODO we can probably better express this as data
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {

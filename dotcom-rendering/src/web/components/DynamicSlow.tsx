@@ -55,6 +55,7 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 						branding={primary.branding}
 						supportingContent={primary.supportingContent}
 						dataLinkName={primary.dataLinkName}
+						snapData={primary.snapData}
 						discussionId={primary.discussionId}
 					/>
 				</LI>
@@ -91,6 +92,7 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 						branding={secondary.branding}
 						supportingContent={secondary.supportingContent}
 						dataLinkName={secondary.dataLinkName}
+						snapData={secondary.snapData}
 						discussionId={secondary.discussionId}
 					/>
 				</LI>
@@ -150,6 +152,7 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 										}
 										imagePositionOnMobile="none"
 										dataLinkName={card.dataLinkName}
+										snapData={card.snapData}
 										discussionId={card.discussionId}
 									/>
 								</LI>
@@ -204,6 +207,7 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 										starRating={card.starRating}
 										branding={card.branding}
 										dataLinkName={card.dataLinkName}
+										snapData={card.snapData}
 										discussionId={card.discussionId}
 									/>
 								</LI>

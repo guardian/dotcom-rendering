@@ -9,10 +9,7 @@ import {
 	space,
 	until,
 } from '@guardian/source-foundations';
-import {
-	Lines,
-	StraightLines,
-} from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
@@ -23,6 +20,7 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
+import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
@@ -42,7 +40,6 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
-import { decideLineCount, decideLineEffect } from '../lib/layoutHelpers';
 import { ImmersiveHeader } from './headers/ImmersiveHeader';
 import { BannerWrapper } from './lib/stickiness';
 
@@ -189,11 +186,7 @@ const decideCaption = (mainMedia: ImageBlockElement): string => {
 	return caption.join(' ');
 };
 
-export const ImmersiveLayout = ({
-	CAPIArticle,
-	NAV,
-	format,
-}: Props): JSX.Element => {
+export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPIArticle;
@@ -343,18 +336,7 @@ export const ImmersiveLayout = ({
 										ArticleSpecial.Labs ? (
 											<GuardianLabsLines />
 										) : (
-											<Lines
-												cssOverrides={css`
-													display: block;
-												`}
-												effect={decideLineEffect(
-													ArticleDesign.Standard,
-													format.theme,
-												)}
-												count={decideLineCount(
-													ArticleDesign.Standard,
-												)}
-											/>
+											<DecideLines format={format} />
 										)}
 									</div>
 								</div>
@@ -417,7 +399,6 @@ export const ImmersiveLayout = ({
 									isPreview={CAPIArticle.config.isPreview}
 									idUrl={CAPIArticle.config.idUrl || ''}
 									isDev={!!CAPIArticle.config.isDev}
-									abTests={CAPIArticle.config.abTests}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
@@ -556,7 +537,7 @@ export const ImmersiveLayout = ({
 						tags={CAPIArticle.tags}
 						format={format}
 						pillar={format.theme}
-						edition={CAPIArticle.editionId}
+						editionId={CAPIArticle.editionId}
 						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
 				</Island>
@@ -644,7 +625,7 @@ export const ImmersiveLayout = ({
 					pillar={format.theme}
 					pillars={NAV.pillars}
 					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					edition={CAPIArticle.editionId}
+					editionId={CAPIArticle.editionId}
 					contributionsServiceUrl={
 						CAPIArticle.contributionsServiceUrl
 					}

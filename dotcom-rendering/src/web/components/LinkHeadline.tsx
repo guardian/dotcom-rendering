@@ -20,6 +20,10 @@ type Props = {
 
 const fontStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
+		case 'huge':
+			return css`
+				${headline.small()};
+			`;
 		case 'large':
 			return css`
 				${headline.xsmall()};

@@ -5,8 +5,7 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { breakpoints, from } from '@guardian/source-foundations';
-import { storiesOf } from '@storybook/react';
+import { from } from '@guardian/source-foundations';
 import React from 'react';
 import type { Props as CardProps } from './Card';
 import { Card } from './Card';
@@ -75,7 +74,7 @@ const CardGroup = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
-const CardsWithDifferentThemes = ({
+export const CardsWithDifferentThemes = ({
 	display,
 	design,
 	title,
@@ -158,33 +157,14 @@ const CardsWithDifferentThemes = ({
 	);
 };
 
-for (const [displayName, displayValue] of Object.entries(ArticleDisplay)) {
-	if (Number.isNaN(Number(displayName))) {
-		const stories = storiesOf(
-			`Components/Card/Format variations/${displayName}`,
-			module,
-		);
-		for (const [designName, designValue] of Object.entries(ArticleDesign)) {
-			if (Number.isNaN(Number(designName))) {
-				stories.add(designName, () => {
-					return CardsWithDifferentThemes({
-						display: displayValue as ArticleDisplay,
-						design: designValue as ArticleDesign,
-						title: designName,
-					});
-				});
-			}
-		}
-	}
-}
+export default {
+	title: 'Components/Card',
+	component: CardGroup,
+	// Export used by dotcom-rendering/stories/Card.stories.tsx
+	excludeStories: ['CardsWithDifferentThemes'],
+};
 
-const cardStories = storiesOf(`Components/Card`, module).addParameters({
-	chromatic: {
-		viewports: [breakpoints.mobile, breakpoints.wide],
-	},
-});
-
-cardStories.add('with different headline sizes', () => {
+export const WithDifferentHeadlineSizes = () => {
 	return (
 		<CardGroup>
 			<CardWrapper>
@@ -217,9 +197,9 @@ cardStories.add('with different headline sizes', () => {
 			</CardWrapper>
 		</CardGroup>
 	);
-});
+};
 
-cardStories.add('with byline', () => {
+export const WithByline = () => {
 	return (
 		<CardGroup>
 			<CardWrapper>
@@ -231,9 +211,9 @@ cardStories.add('with byline', () => {
 			</CardWrapper>
 		</CardGroup>
 	);
-});
+};
 
-cardStories.add('with media type', () => {
+export const WithMediaType = () => {
 	return (
 		<CardGroup>
 			<CardWrapper>
@@ -276,9 +256,9 @@ cardStories.add('with media type', () => {
 			</CardWrapper>
 		</CardGroup>
 	);
-});
+};
 
-cardStories.add('with different image positions', () => {
+export const WithDifferentImagePositions = () => {
 	return (
 		<>
 			<CardWrapper>
@@ -306,9 +286,9 @@ cardStories.add('with different image positions', () => {
 			</CardWrapper>
 		</>
 	);
-});
+};
 
-cardStories.add('with different image sizes', () => {
+export const WithDifferentImageSizes = () => {
 	return (
 		<>
 			<CardWrapper>
@@ -345,9 +325,9 @@ cardStories.add('with different image sizes', () => {
 			</CardWrapper>
 		</>
 	);
-});
+};
 
-cardStories.add('with pulsing dot', () => {
+export const WithPulsingDot = () => {
 	return (
 		<CardWrapper>
 			<Card
@@ -357,17 +337,17 @@ cardStories.add('with pulsing dot', () => {
 			/>
 		</CardWrapper>
 	);
-});
+};
 
-cardStories.add('with no slash', () => {
+export const WithNoSlash = () => {
 	return (
 		<CardWrapper>
 			<Card {...basicCardProps} showSlash={false} kickerText="No slash" />
 		</CardWrapper>
 	);
-});
+};
 
-cardStories.add('with an avatar when vertical', () => {
+export const WithAnAvatarWhenVertical = () => {
 	return (
 		<>
 			<CardWrapper>
@@ -393,9 +373,9 @@ cardStories.add('with an avatar when vertical', () => {
 			</CardWrapper>
 		</>
 	);
-});
+};
 
-cardStories.add('with an avatar when horizontal', () => {
+export const WithAnAvatarWhenHorizontal = () => {
 	return (
 		<>
 			<CardWrapper>
@@ -415,9 +395,9 @@ cardStories.add('with an avatar when horizontal', () => {
 			</CardWrapper>
 		</>
 	);
-});
+};
 
-cardStories.add('when vertical and theme opinion', () => {
+export const WhenVerticalAndThemeOpinion = () => {
 	return (
 		<>
 			<CardWrapper>
@@ -433,9 +413,9 @@ cardStories.add('when vertical and theme opinion', () => {
 			</CardWrapper>
 		</>
 	);
-});
+};
 
-cardStories.add('with sublinks when vertical and opinion', () => {
+export const WithSublinksWhenVerticalAndOpinion = () => {
 	return (
 		<>
 			<CardWrapper>
@@ -468,9 +448,9 @@ cardStories.add('with sublinks when vertical and opinion', () => {
 			</CardWrapper>
 		</>
 	);
-});
+};
 
-cardStories.add('when horizontal and opinion', () => {
+export const WhenHorizontalAndOpinion = () => {
 	return (
 		<>
 			<CardWrapper>
@@ -536,9 +516,9 @@ cardStories.add('when horizontal and opinion', () => {
 			</CardWrapper>
 		</>
 	);
-});
+};
 
-cardStories.add('when news, with more than two sublinks', () => {
+export const WhenNewsWithMoreThanTwoSublinks = () => {
 	return (
 		<CardWrapper>
 			<Card
@@ -565,9 +545,9 @@ cardStories.add('when news, with more than two sublinks', () => {
 			/>
 		</CardWrapper>
 	);
-});
+};
 
-cardStories.add('when horizontal, opinion, with a small image', () => {
+export const WhenHorizontalOpinionWithSmallImage = () => {
 	return (
 		<>
 			<CardWrapper>
@@ -582,11 +562,196 @@ cardStories.add('when horizontal, opinion, with a small image', () => {
 					imageSize="small"
 				/>
 			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="small"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
 		</>
 	);
-});
+};
 
-cardStories.add('when opinion, with the image at the bottom', () => {
+export const WhenHorizontalOpinionWithMediumImage = () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="medium"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="medium"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</>
+	);
+};
+
+export const WhenHorizontalOpinionWithLargeImage = () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="large"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="large"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</>
+	);
+};
+
+export const WhenHorizontalOpinionWithJumboImage = () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="jumbo"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Comment,
+						theme: ArticlePillar.Opinion,
+					}}
+					imagePosition="left"
+					imageSize="jumbo"
+					supportingContent={[
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+						{
+							...aBasicLink,
+							headline:
+								'A longer headline to see how wrapping works',
+							kickerText: 'Kicker',
+						},
+					]}
+				/>
+			</CardWrapper>
+		</>
+	);
+};
+
+export const WhenOpinionWithImageAtBottom = () => {
 	return (
 		<>
 			<CardWrapper>
@@ -622,4 +787,4 @@ cardStories.add('when opinion, with the image at the bottom', () => {
 			</CardWrapper>
 		</>
 	);
-});
+};

@@ -50,6 +50,7 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 						branding={primary.branding}
 						supportingContent={primary.supportingContent}
 						dataLinkName={primary.dataLinkName}
+						snapData={primary.snapData}
 						discussionId={primary.discussionId}
 					/>
 				</LI>
@@ -86,6 +87,7 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 						branding={secondary.branding}
 						supportingContent={secondary.supportingContent}
 						dataLinkName={secondary.dataLinkName}
+						snapData={secondary.snapData}
 						discussionId={secondary.discussionId}
 					/>
 				</LI>
@@ -130,6 +132,7 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 								branding={card.branding}
 								supportingContent={card.supportingContent}
 								dataLinkName={card.dataLinkName}
+								snapData={card.snapData}
 								discussionId={card.discussionId}
 							/>
 						</LI>
@@ -185,6 +188,7 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 											card.supportingContent
 										}
 										dataLinkName={card.dataLinkName}
+										snapData={card.snapData}
 										discussionId={card.discussionId}
 									/>
 								</LI>

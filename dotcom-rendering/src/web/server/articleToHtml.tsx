@@ -10,6 +10,7 @@ import { Article } from '../components/Article';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { articleTemplate } from './articleTemplate';
+import { extractExpeditedIslands } from './extractIslands';
 
 interface Props {
 	data: DCRServerDocumentData;
@@ -71,6 +72,9 @@ export const articleToHtml = ({ data }: Props): string => {
 	const chunks = extractCriticalToChunks(html);
 	const extractedCss = constructStyleTagsFromChunks(chunks);
 
+	// Expedited islands scripts are added to the document head as 'high priority'
+	const expeditedIslands = extractExpeditedIslands(html);
+
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
 	const CAPIElements: CAPIElement[] = CAPIArticle.blocks
@@ -130,6 +134,9 @@ export const articleToHtml = ({ data }: Props): string => {
 			src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 		},
 		...getScriptArrayFromFile('islands.js'),
+		...expeditedIslands.flatMap((name) =>
+			getScriptArrayFromFile(`${name}.js`),
+		),
 	]);
 
 	/**

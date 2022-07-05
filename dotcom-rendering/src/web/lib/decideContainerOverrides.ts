@@ -44,6 +44,7 @@ const textCardKicker = (containerPalette: DCRContainerPalette): string => {
 };
 
 const textCardByline = textCardKicker;
+const textContainerDate = textCardKicker;
 
 const textCardCommentCount = (
 	containerPalette: DCRContainerPalette,
@@ -288,6 +289,7 @@ export const decideContainerOverrides = (
 			dynamoMeta: textDynamoMeta(containerPalette),
 			container: textContainer(containerPalette),
 			containerToggle: textContainerToggle(containerPalette),
+			containerDate: textContainerDate(containerPalette),
 		},
 		border: {
 			container: borderContainer(containerPalette),

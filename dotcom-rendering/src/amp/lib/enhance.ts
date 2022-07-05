@@ -4,7 +4,7 @@ import { sanitiseHTML } from '../../model/sanitise';
 
 // We don't represent lists in InCopy, so things will just come across with bullet characters.
 // These may also be used for emphasis, so bullet characters don't mean list.
-export const bigBullets = (s: string) =>
+export const bigBullets = (s: string): string =>
 	s.replace(/•/g, '<span class="bullet">&bull;</span>');
 
 export const minimise = compose(bigBullets, (s: string) =>
@@ -15,7 +15,7 @@ export const minimise = compose(bigBullets, (s: string) =>
 	}),
 );
 
-export const clean = (html: string) =>
+export const clean = (html: string): string =>
 	minimise(
 		sanitiseHTML(html, {
 			ADD_TAGS: ['#comment'],
