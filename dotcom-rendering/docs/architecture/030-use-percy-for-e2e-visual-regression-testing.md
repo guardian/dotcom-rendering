@@ -41,7 +41,7 @@ department.
   user interaction, without needing to write separate stories for each
   state.
 - Because Percy is part of Browserstack, it should enable us to make use of cross-browser testing
-- Commercial have also 
+- The commercial-dev team have also 
 [expressed interest](https://github.com/guardian/dotcom-rendering/pull/5256). They want to snapshot the page to verify ad placement but need the page loaded by a real browser to be sure they are capturing a realistic experience
 ### Cons
 
