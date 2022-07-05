@@ -272,7 +272,7 @@ Resources:
 
               export PATH="/usr/local/node:$PATH"
 
-              make start
+              make start-prod
 
               /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${AWS::Region} ${ELKStream} /var/log/dotcom-rendering/dotcom-rendering.log
 

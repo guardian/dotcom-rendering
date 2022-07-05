@@ -46,7 +46,18 @@ start-ci: install gen-dotenv-ci
 	@DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
 
 start: export NODE_ENV=production
-start: gen-dotenv
+start: install gen-dotenv
+	$(call log, "starting PROD server...")
+	@echo '' # just a spacer
+	pm2 start dist/frontend.server.js
+	@echo '' # just a spacer
+	$(call log, "PROD server is running")
+
+# Used in cloudformation.yml which specifically:
+# - Launches pm2 from /usr rather than /node_modules
+# - Does not run 'install' task as its not needed & takes time
+start-prod: export NODE_ENV=production
+start-prod: gen-dotenv
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
 	/usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
