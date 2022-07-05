@@ -8,10 +8,16 @@ type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
 	containerPalette?: DCRContainerPalette;
+	containerType?: DCRContainerType;
+	transparent?: boolean;
 };
 
-const cardStyles = (format: ArticleFormat, palette?: Palette) => {
-	const cardPalette = palette || decidePalette(format);
+const cardStyles = (
+	format: ArticleFormat,
+	palette?: Palette,
+	containerType?: DCRContainerType,
+) => {
+	const cardPalette = palette ?? decidePalette(format);
 	const baseCardStyles = css`
 		display: flex;
 		flex-direction: column;
@@ -25,7 +31,7 @@ const cardStyles = (format: ArticleFormat, palette?: Palette) => {
 		:before {
 			background-color: ${cardPalette.topBar.card};
 			content: '';
-			height: 1px;
+			height: ${containerType === 'dynamic/package' ? '4px' : '1px'};
 			z-index: 2;
 		}
 
@@ -88,7 +94,25 @@ const cardStyles = (format: ArticleFormat, palette?: Palette) => {
 	}
 };
 
-export const CardWrapper = ({ children, format, containerPalette }: Props) => {
+export const CardWrapper = ({
+	children,
+	format,
+	containerPalette,
+	containerType,
+	transparent,
+}: Props) => {
 	const palette = decidePalette(format, containerPalette);
-	return <div css={cardStyles(format, palette)}>{children}</div>;
+	return (
+		<div
+			css={[
+				cardStyles(format, palette, containerType),
+				transparent &&
+					css`
+						background: transparent;
+					`,
+			]}
+		>
+			{children}
+		</div>
+	);
 };
