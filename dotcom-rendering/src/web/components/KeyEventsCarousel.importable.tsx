@@ -113,6 +113,7 @@ export const KeyEventsCarousel = ({
 	const filteredKeyEvents = keyEvents.filter(isValidKeyEvent);
 	const carouselLength = filteredKeyEvents.length;
 	const shortCarousel = carouselLength <= 4;
+	const longCarousel = carouselLength > 6;
 	return (
 		<>
 			<span id={id} />
@@ -127,12 +128,7 @@ export const KeyEventsCarousel = ({
 					shortCarousel && leftMarginStyles,
 				]}
 			>
-				<ul
-					css={[
-						containerStyles,
-						!shortCarousel && marginBottomStyles,
-					]}
-				>
+				<ul css={[containerStyles, longCarousel && marginBottomStyles]}>
 					{filteredKeyEvents.map((keyEvent, index) => {
 						return (
 							<KeyEventCard
@@ -150,7 +146,7 @@ export const KeyEventsCarousel = ({
 					})}
 				</ul>
 				<Hide until="desktop">
-					{keyEvents.length > 6 && (
+					{longCarousel && (
 						<>
 							<Button
 								hideLabel={true}
