@@ -242,30 +242,6 @@ export const ImageComponent = ({
 
 	const palette = decidePalette(format);
 
-	const getMaster = (images: Image[]) => {
-		return images.find((image) => image.fields.isMaster)?.url;
-	};
-	const getLargest = (images: Image[]) => {
-		const descendingByWidth = (a: Image, b: Image) => {
-			return parseInt(b.fields.width) - parseInt(a.fields.width);
-		};
-		return images.slice().sort(descendingByWidth)[0].url;
-	};
-	// Legacy images do not have a master so we fallback to the largest available
-	const image =
-		getMaster(element.media.allImages) ??
-		getLargest(element.media.allImages);
-
-	const isSupported = (imageUrl: string) => {
-		const supportedImages = ['jpg', 'jpeg', 'png'];
-		const extension = imageUrl.split('.').slice(-1)[0];
-		return extension && supportedImages.includes(extension.toLowerCase());
-	};
-	if (!isSupported(image)) {
-		// We should only try to render images that are supported by Fastly
-		return null;
-	}
-
 	if (
 		isMainMedia &&
 		format.display === ArticleDisplay.Immersive &&
@@ -291,15 +267,12 @@ export const ImageComponent = ({
 					img {
 						object-fit: cover;
 					}
-					picture {
-						height: 100%;
-					}
 				`}
 			>
 				<Picture
 					role={role}
 					format={format}
-					master={image}
+					imageSources={element.imageSources}
 					alt={element.data.alt || ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -330,7 +303,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={image}
+					imageSources={element.imageSources}
 					alt={element.data.alt || ''}
 					width={imageWidth}
 					height={imageHeight}
@@ -362,7 +335,7 @@ export const ImageComponent = ({
 				<Picture
 					role={role}
 					format={format}
-					master={image}
+					imageSources={element.imageSources}
 					alt={element.data.alt || ''}
 					width={imageWidth}
 					height={imageHeight}
