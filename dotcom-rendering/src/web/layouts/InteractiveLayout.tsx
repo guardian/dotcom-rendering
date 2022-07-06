@@ -537,7 +537,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				>
 					<div
 						css={css`
-							width: 620px;
+							max-width: 620px;
 						`}
 					>
 						<Island clientOnly={true}>
