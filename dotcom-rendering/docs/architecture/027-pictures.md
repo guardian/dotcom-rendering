@@ -97,6 +97,8 @@ This solves our DPR problem because, the `media` attribute uses CSS pixels, and 
 
 ## What does DCR do?
 
+**Partially deprecated. See decision 029**
+
 DCR Maintains some parity with Frontend's implementation of images, the key difference's being:
 
 1. DCR Relies on Frontend to generate it's image sources
@@ -137,6 +139,8 @@ Immersive main media gets special treatment for images ~ due to 2 unique qualiti
 Each of these specific cases are not handled optimally by the original solution. However, immersive main media images often have more content value as they're sometimes the only thing on screen when an article loads, so getting them right is important.
 
 #### Desktop
+
+**Deprecated. See decision 029**
 
 For regular images, we'll loop through each breakpoint and pick an appropriate source based on the desired width at that breakpoint. This works well on non-responsive (e.g fixed width images) because we know exactly what size image we want at each breakpoint. A side-effect of this is that we always use image sources which exist within the confines of our breakpoints, which can cause a problem for higher screen resolutions.
 
