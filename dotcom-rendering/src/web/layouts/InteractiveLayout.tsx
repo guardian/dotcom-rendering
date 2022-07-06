@@ -562,9 +562,12 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								tags={CAPIArticle.tags}
 							/>
 						</Island>
-						<StraightLines count={4} data-print-layout="hide" />
 					</div>
 				</ContainerLayout>
+
+				<ElementContainer showTopBorder={false} padded={false}>
+					<StraightLines count={4} data-print-layout="hide" />
+				</ElementContainer>
 
 				<ElementContainer showTopBorder={false}>
 					<SubMeta
