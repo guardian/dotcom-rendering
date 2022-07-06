@@ -52,7 +52,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		treats: [],
 		href: 'https/theguardian.com',
 	}
-	const filteredCollections = front.pressedPage.collections.filter(coll => coll.displayName !== 'Ukraine invasion');
+	const filteredCollections = front.pressedPage.collections.filter(coll => coll.collectionType !== 'dynamic/package');
 	const collections = [
 		...filteredCollections.slice(0,2),
 		dynamicCollection,
