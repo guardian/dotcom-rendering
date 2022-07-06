@@ -60,7 +60,7 @@ export const ShowMore = ({
 	// Toggling 'showMore' will trigger a re-render
 	//   see: https://swr.vercel.app/docs/conditional-fetching#conditional
 	const url = showMore
-		? `http://localhost:9000/${pageId}/show-more/${collectionId}.json?dcr=true`
+		? `https://code.api.nextgen.guardianapps.co.uk/${pageId}/show-more/${collectionId}.json?dcr=true`
 		: undefined;
 	const { data, loading } = useApi<{ html: string }>(url, {
 		errorRetryCount: 1,
