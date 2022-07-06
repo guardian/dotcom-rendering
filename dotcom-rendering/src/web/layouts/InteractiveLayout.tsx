@@ -572,7 +572,13 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					padded={false}
 					backgroundColour={palette.background.article}
 				>
-					<StraightLines count={4} data-print-layout="hide" />
+					<StraightLines
+						count={4}
+						data-print-layout="hide"
+						cssOverrides={css`
+							display: block;
+						`}
+					/>
 				</ElementContainer>
 
 				<ElementContainer showTopBorder={false}>
