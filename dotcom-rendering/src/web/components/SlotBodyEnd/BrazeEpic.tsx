@@ -34,16 +34,16 @@ export const canShowBrazeEpic = async (
 	brazeArticleContext: BrazeArticleContext,
 	contentType: string,
 ): Promise<CanShowResult<Meta>> => {
+	if (contentType.toLowerCase() === 'interactive') {
+		return { show: false };
+	}
+
 	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
 	if (forcedBrazeMeta) {
 		return {
 			show: true,
 			meta: forcedBrazeMeta,
 		};
-	}
-
-	if (contentType.toLowerCase() === 'interactive') {
-		return { show: false };
 	}
 
 	try {
