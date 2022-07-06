@@ -62,45 +62,23 @@ const adStyles = css`
 			width: auto;
 		}
 	}
-	.ad-slot-container {
-		max-width: 300px;
-	}
 	.ad-slot--fluid {
 		width: 100%;
 	}
-	.ad-slot--liveblog-inline {
+	.ad-slot-container--liveblog {
+		background-color: ${neutral[93]};
 		margin: 0 auto ${space[3]}px;
+		width: 100%;
+		text-align: center;
+
+		.ad-slot {
+			margin-left: auto;
+			margin-right: auto;
+		}
 
 		.ad-slot__label {
 			color: ${neutral[46]};
 			border-top-color: ${neutral[86]};
-		}
-
-		&.ad-slot--outstream {
-			${from.tablet} {
-				width: 620px;
-			}
-		}
-
-		&:not(.ad-slot--outstream) {
-			width: 300px;
-			background-color: ${neutral[93]};
-			text-align: center;
-
-			${from.tablet} {
-				width: 100%;
-
-				& > div:not(.ad-slot__label) {
-					width: 300px;
-					margin-left: auto;
-					margin-right: auto;
-				}
-			}
-		}
-
-		&.ad-slot--fluid {
-			background-color: green;
-			width: 100%;
 		}
 	}
 	/** ad-slot-offset-right is only added to inline2+ slots */
@@ -116,7 +94,7 @@ const adStyles = css`
 		}
 	}
 	/* Unlike other inlines do not float right inline1 */
-	.ad-slot--inline1 {
+	.ad-slot-container .ad-slot--inline1 {
 		margin: 12px auto;
 		text-align: center;
 		${until.tablet} {
