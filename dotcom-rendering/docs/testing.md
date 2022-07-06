@@ -74,6 +74,9 @@ The down side to these types of tests is that they are slower and have a depende
 By using mocked data and endpoints, we increase the speed that tests execute at and have complete certainty in what to expect from our mocked endpoints. The risk though is that an api might have changed or break and we won't be aware of this.
 
 ### How to run locally
+
+Running Cypress locally requires having a DCR server running. To run the CI server locally, you can run `make run-ci`. This command runs `make stop`, followed by `make build-ci` and `make start-ci`. You can run these separate commands yourself instead if you want more control over when the site gets re-built.
+
 To run Cypress in interactive mode (visually):
 
 ```
