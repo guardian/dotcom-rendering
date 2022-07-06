@@ -1,42 +1,44 @@
-import { log } from '@guardian/libs';
+const prefix = 'dotcom.performance';
 
+/**
+ * Helper to measure the duration of any task.
+ *
+ * Values are rounded up to the nearest millisecond,
+ * in order to not under-report any duration.
+ */
 export const initPerf = (
 	name: string,
-): { start: () => void; end: () => number; clear: () => void } => {
-	type TimeTakenInMilliseconds = number;
-
+): { start: () => number; end: () => number; clear: () => void } => {
 	const perf = window.performance;
-	const startKey = `${name}-start`;
-	const endKey = `${name}-end`;
+	const startKey = `${prefix}.${name}-start`;
+	const endKey = `${prefix}.${name}-end`;
 
-	if (!perf || !perf.getEntriesByName) {
-		// Return noops if window.performance or the required functions don't exist
-		return {
-			start: () => {},
-			end: () => 0,
-			clear: () => {},
-		};
+	if (!('getEntriesByName' in perf)) {
+		// Handle browsers with partial implementations
+		return { start: () => -1, end: () => -1, clear: () => {} };
 	}
 
+	/** @returns time elapsed since [time origin](https://developer.mozilla.org/en-US/docs/Web/API/DOMHighResTimeStamp#the_time_origin) in milliseconds */
 	const start = () => {
-		perf.mark(startKey);
+		const { startTime = -1 } =
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Issue in Firefox https://caniuse.com/mdn-api_performance_measure_returns_undefined
+			perf.mark(startKey) ??
+			perf.getEntriesByName(startKey, 'mark')[0] ??
+			{};
+
+		return Math.ceil(startTime);
 	};
 
-	const end = (): TimeTakenInMilliseconds => {
+	/** @returns length of task in milliseconds */
+	const end = (): number => {
 		perf.mark(endKey);
-		perf.measure(name, startKey, endKey);
+		const { duration = -1 } =
+			// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- Issue in Firefox https://caniuse.com/mdn-api_performance_measure_returns_undefined
+			perf.measure(name, startKey, endKey) ??
+			perf.getEntriesByName(name, 'measure')[0] ??
+			{};
 
-		log('dotcom', JSON.stringify(perf.getEntriesByName(name)));
-
-		const measureEntries = perf.getEntriesByName(name, 'measure');
-		const timeTakenFloat =
-			(measureEntries &&
-				measureEntries[0] &&
-				measureEntries[0].duration) ||
-			0;
-		const timeTakenInt = Math.round(timeTakenFloat);
-
-		return timeTakenInt;
+		return Math.ceil(duration);
 	};
 
 	const clear = () => {

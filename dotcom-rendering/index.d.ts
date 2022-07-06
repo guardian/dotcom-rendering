@@ -640,6 +640,7 @@ interface CAPIArticleType {
 	matchUrl?: string;
 	matchType?: MatchType;
 	isSpecialReport: boolean;
+	newsletterToEmbed?: NewsletterResponse;
 
 	// Interactives made on Frontend rather than DCR require special handling.
 	// The logic is date-driven. See:
@@ -650,9 +651,7 @@ interface CAPIArticleType {
 	// Included on live and dead blogs. Used when polling
 	mostRecentBlockId?: string;
 	availableTopics?: Topic[];
-	selectedTopics?: string;
-
-	newsletterToEmbed?: NewsletterResponse;
+	selectedTopics?: Topic[];
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
@@ -1111,7 +1110,7 @@ type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 
-type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large';
+type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge';
 
 type AvatarType = {
 	src: string;
@@ -1206,7 +1205,7 @@ type MatchReportType = {
 interface Topic {
 	type: TopicType;
 	value: string;
-	count: number;
+	count?: number;
 }
 
 type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';

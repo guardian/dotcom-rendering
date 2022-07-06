@@ -31,8 +31,7 @@ type Props = {
  * @param {ArticleFormat} props.format - The format model for the article
  * */
 export const Article = ({ CAPIArticle, NAV, format }: Props) => {
-	const showKeyEventsCarousel =
-		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
+	const showKeyEventsCarousel = CAPIArticle.config.switches.keyEventsCarousel;
 
 	return (
 		<StrictMode>

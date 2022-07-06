@@ -15,6 +15,8 @@ const availableTopics: Topic[] = [
 	{ type: 'PERSON', value: 'Anas Sarwar', count: 4 },
 ];
 
+const selectedTopics: Topic[] = [{ type: 'GPE', value: 'United Kingdom' }];
+
 const format = {
 	theme: ArticlePillar.News,
 	design: ArticleDesign.LiveBlog,
@@ -58,10 +60,35 @@ export const topicBank = () => {
 					},
 				]}
 				filterKeyEvents={false}
+				id="key-events-carousel-desktop"
 			/>
 		</Wrapper>
 	);
 };
 topicBank.story = {
 	name: 'topicBank',
+};
+
+export const topicBankSelectedIsNotInTop5 = () => {
+	return (
+		<Wrapper>
+			<TopicFilterBank
+				id="key-events-carousel-desktop"
+				availableTopics={availableTopics}
+				selectedTopics={selectedTopics}
+				format={format}
+				keyEvents={[
+					{
+						...baseProperties,
+						blockFirstPublished: 1638279933000,
+						title: 'title',
+					},
+				]}
+				filterKeyEvents={false}
+			/>
+		</Wrapper>
+	);
+};
+topicBankSelectedIsNotInTop5.story = {
+	name: 'topicBankSelectedIsNotInTop5',
 };

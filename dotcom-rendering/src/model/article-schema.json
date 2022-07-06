@@ -407,7 +407,10 @@
             }
         },
         "selectedTopics": {
-            "type": "string"
+			"type": "array",
+            "items": {
+                "$ref": "#/definitions/Topic"
+            }
         },
         "newsletterToEmbed": {
             "type": "object",
@@ -4361,7 +4364,6 @@
                 }
             },
             "required": [
-                "count",
                 "type",
                 "value"
             ]

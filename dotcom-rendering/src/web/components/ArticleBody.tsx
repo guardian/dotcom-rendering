@@ -34,8 +34,8 @@ type Props = {
 	filterKeyEvents?: boolean;
 	showKeyEventsCarousel?: boolean;
 	availableTopics?: Topic[];
-	selectedTopics?: string;
 	newsletterToEmbed?: NewsletterResponse;
+	selectedTopics?: Topic[];
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -169,7 +169,7 @@ export const ArticleBody = ({
 						onFirstPage={onFirstPage}
 						keyEvents={keyEvents}
 						filterKeyEvents={filterKeyEvents}
-						isKeyEventsCarouselVariant={showKeyEventsCarousel}
+						isKeyEventsCarousel={showKeyEventsCarousel}
 						availableTopics={availableTopics}
 						selectedTopics={selectedTopics}
 					/>

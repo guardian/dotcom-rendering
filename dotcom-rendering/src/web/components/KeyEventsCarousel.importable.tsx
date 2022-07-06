@@ -16,6 +16,7 @@ interface Props {
 	keyEvents: Block[];
 	filterKeyEvents: boolean;
 	format: ArticleFormat;
+	id: 'key-events-carousel-desktop' | 'key-events-carousel-mobile';
 }
 type ValidBlock = Block & {
 	title: string;
@@ -55,6 +56,7 @@ const marginBottomStyles = css`
 `;
 const titleStyles = css`
 	${headline.xxxsmall({ fontWeight: 'bold', lineHeight: 'regular' })};
+	padding-top: ${space[3]}px;
 `;
 
 const containerStyles = css`
@@ -96,6 +98,7 @@ export const KeyEventsCarousel = ({
 	keyEvents,
 	filterKeyEvents,
 	format,
+	id,
 }: Props) => {
 	const carousel = useRef<HTMLDivElement | null>(null);
 	const palette = decidePalette(format);
@@ -110,8 +113,10 @@ export const KeyEventsCarousel = ({
 	const filteredKeyEvents = keyEvents.filter(isValidKeyEvent);
 	const carouselLength = filteredKeyEvents.length;
 	const shortCarousel = carouselLength <= 4;
+	const longCarousel = carouselLength > 6;
 	return (
 		<>
+			<span id={id} />
 			<Hide from="desktop">
 				<div css={titleStyles}>Key events:</div>
 			</Hide>
@@ -123,12 +128,7 @@ export const KeyEventsCarousel = ({
 					shortCarousel && leftMarginStyles,
 				]}
 			>
-				<ul
-					css={[
-						containerStyles,
-						!shortCarousel && marginBottomStyles,
-					]}
-				>
+				<ul css={[containerStyles, longCarousel && marginBottomStyles]}>
 					{filteredKeyEvents.map((keyEvent, index) => {
 						return (
 							<KeyEventCard
@@ -146,7 +146,7 @@ export const KeyEventsCarousel = ({
 					})}
 				</ul>
 				<Hide until="desktop">
-					{keyEvents.length > 6 && (
+					{longCarousel && (
 						<>
 							<Button
 								hideLabel={true}

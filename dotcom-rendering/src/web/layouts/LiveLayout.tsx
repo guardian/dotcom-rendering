@@ -303,8 +303,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const cricketMatchUrl =
 		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
 
-	const showKeyEventsCarousel =
-		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
+	const showKeyEventsCarousel = CAPIArticle.config.switches.keyEventsCarousel;
 
 	const isInFilteringBeta =
 		CAPIArticle.config.switches.automaticFilters &&
@@ -619,6 +618,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.filterKeyEvents
 									}
 									format={format}
+									id={'key-events-carousel-desktop'}
 								/>
 							</Island>
 						</Hide>
@@ -805,6 +805,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														}
 														filterKeyEvents={
 															CAPIArticle.filterKeyEvents
+														}
+														id={
+															'key-events-carousel-desktop'
 														}
 													/>
 												</Island>

@@ -54,6 +54,17 @@ start: install gen-dotenv
 	$(call log, "PROD server is running")
 	@pm2 logs
 
+# Used in cloudformation.yml which specifically:
+# - Launches pm2 from /usr/local/node rather than /node_modules
+# - Does not run 'install' task as its not needed & adds time to startup
+start-prod: export NODE_ENV=production
+start-prod: gen-dotenv
+	$(call log, "starting PROD server...")
+	@echo '' # just a spacer
+	/usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
+	@echo '' # just a spacer
+	$(call log, "PROD server is running")
+
 stop:
 	@pm2 kill
 
@@ -173,13 +184,22 @@ clear: # private
 
 check-schema:
 	$(call log, "Checking schemas")
-	@node scripts/json-schema/check-schema
+	@node scripts/json-schema/check-schema.js
 
 gen-schema:
 	$(call log, "Generating new schemas")
 	@node scripts/json-schema/gen-schema.js
 	@git add src/model/article-schema.json
 	@git add src/model/front-schema.json
+
+check-stories:
+	$(call log, "Checking Storybook stories")
+	@node scripts/gen-stories/check-stories.js
+
+gen-stories:
+	$(call log, "Generating new Storybook stories")
+	@node scripts/gen-stories/gen-stories.js
+	@git add stories/generated
 
 gen-fixtures:
 	$(call log, "Generating new article fixture data")

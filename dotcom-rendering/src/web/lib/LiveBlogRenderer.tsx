@@ -29,9 +29,9 @@ type Props = {
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
 	filterKeyEvents?: boolean;
-	isKeyEventsCarouselVariant?: boolean;
+	isKeyEventsCarousel?: boolean;
 	availableTopics?: Topic[];
-	selectedTopics?: string;
+	selectedTopics?: Topic[];
 };
 
 export const LiveBlogRenderer = ({
@@ -55,7 +55,7 @@ export const LiveBlogRenderer = ({
 	onFirstPage,
 	keyEvents,
 	filterKeyEvents = false,
-	isKeyEventsCarouselVariant = false,
+	isKeyEventsCarousel = false,
 	availableTopics,
 	selectedTopics,
 }: Props) => {
@@ -84,13 +84,14 @@ export const LiveBlogRenderer = ({
 					</PinnedPost>
 				</>
 			)}
-			{isKeyEventsCarouselVariant && keyEvents?.length ? (
+			{isKeyEventsCarousel && keyEvents?.length ? (
 				<Hide above="desktop">
 					<Island deferUntil="visible">
 						<KeyEventsCarousel
 							keyEvents={keyEvents}
 							filterKeyEvents={filterKeyEvents}
 							format={format}
+							id={'key-events-carousel-mobile'}
 						/>
 					</Island>
 					{!switches.automaticFilters && (
@@ -108,13 +109,16 @@ export const LiveBlogRenderer = ({
 
 			{switches.automaticFilters && availableTopics && (
 				<Hide above="desktop">
-					<TopicFilterBank
-						availableTopics={availableTopics}
-						selectedTopics={selectedTopics}
-						format={format}
-						keyEvents={keyEvents}
-						filterKeyEvents={filterKeyEvents}
-					/>
+					<Island>
+						<TopicFilterBank
+							availableTopics={availableTopics}
+							selectedTopics={selectedTopics}
+							format={format}
+							keyEvents={keyEvents}
+							filterKeyEvents={filterKeyEvents}
+							id={'key-events-carousel-mobile'}
+						/>
+					</Island>
 				</Hide>
 			)}
 			<div id="top-of-blog" />
