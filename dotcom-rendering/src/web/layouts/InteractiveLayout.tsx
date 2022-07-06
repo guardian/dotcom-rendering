@@ -22,6 +22,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
+import { ContainerLayout } from '../components/ContainerLayout';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
@@ -36,11 +37,13 @@ import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import {
@@ -48,8 +51,6 @@ import {
 	interactiveLegacyClasses,
 } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
-import { getContributionsServiceUrl } from '../lib/contributions';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -174,19 +175,6 @@ const stretchLines = css`
 	${until.mobileLandscape} {
 		margin-left: -10px;
 		margin-right: -10px;
-	}
-`;
-
-const stretchMetaLines = css`
-	margin: 0 -10px;
-	${from.mobileLandscape} {
-		margin: 0 -20px;
-	}
-	${from.tablet} {
-		margin-right: -40px;
-	}
-	${from.leftCol} {
-		margin-right: -20px;
 	}
 `;
 
@@ -534,73 +522,81 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										idUrl={CAPIArticle.config.idUrl || ''}
 										isDev={!!CAPIArticle.config.isDev}
 									/>
-
-									<Island clientOnly={true}>
-										<SlotBodyEnd
-											contentType={
-												CAPIArticle.contentType
-											}
-											contributionsServiceUrl={
-												contributionsServiceUrl
-											}
-											idApiUrl={
-												CAPIArticle.config.idApiUrl
-											}
-											isMinuteArticle={
-												CAPIArticle.pageType
-													.isMinuteArticle
-											}
-											isPaidContent={
-												CAPIArticle.pageType
-													.isPaidContent
-											}
-											keywordsId={
-												CAPIArticle.config.keywordIds
-											}
-											pageId={CAPIArticle.pageId}
-											sectionId={
-												CAPIArticle.config.section
-											}
-											sectionName={
-												CAPIArticle.sectionName
-											}
-											shouldHideReaderRevenue={
-												CAPIArticle.shouldHideReaderRevenue
-											}
-											stage={CAPIArticle.config.stage}
-											tags={CAPIArticle.tags}
-										/>
-									</Island>
-									{/* <StraightLines data-print-layout="hide" count={4} /> */}
-									<div css={stretchMetaLines}>
-										<StraightLines
-											count={4}
-											data-print-layout="hide"
-											cssOverrides={css`
-												display: block;
-											`}
-										/>
-									</div>
-									<SubMeta
-										format={format}
-										subMetaKeywordLinks={
-											CAPIArticle.subMetaKeywordLinks
-										}
-										subMetaSectionLinks={
-											CAPIArticle.subMetaSectionLinks
-										}
-										pageId={CAPIArticle.pageId}
-										webUrl={CAPIArticle.webURL}
-										webTitle={CAPIArticle.webTitle}
-										showBottomSocialButtons={
-											CAPIArticle.showBottomSocialButtons
-										}
-										badge={CAPIArticle.badge}
-									/>
 								</ArticleContainer>
 							</GridItem>
 						</InteractiveGrid>
 					</div>
+				</ElementContainer>
+
+				<ContainerLayout
+					sideBorders={true}
+					stretchRight={false}
+					centralBorder="full"
+					backgroundColour={palette.background.article}
+					borderColour={palette.border.article}
+				>
+					<div
+						css={css`
+							width: 620px;
+						`}
+					>
+						<Island clientOnly={true}>
+							<SlotBodyEnd
+								contentType={CAPIArticle.contentType}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								idApiUrl={CAPIArticle.config.idApiUrl}
+								isMinuteArticle={
+									CAPIArticle.pageType.isMinuteArticle
+								}
+								isPaidContent={
+									CAPIArticle.pageType.isPaidContent
+								}
+								keywordsId={CAPIArticle.config.keywordIds}
+								pageId={CAPIArticle.pageId}
+								sectionId={CAPIArticle.config.section}
+								sectionName={CAPIArticle.sectionName}
+								shouldHideReaderRevenue={
+									CAPIArticle.shouldHideReaderRevenue
+								}
+								stage={CAPIArticle.config.stage}
+								tags={CAPIArticle.tags}
+							/>
+						</Island>
+					</div>
+				</ContainerLayout>
+
+				<ElementContainer
+					showTopBorder={false}
+					padded={false}
+					backgroundColour={palette.background.article}
+				>
+					<StraightLines
+						count={4}
+						data-print-layout="hide"
+						cssOverrides={css`
+							display: block;
+						`}
+					/>
+				</ElementContainer>
+
+				<ElementContainer
+					showTopBorder={false}
+					backgroundColour={palette.background.article}
+				>
+					<SubMeta
+						format={format}
+						subMetaKeywordLinks={CAPIArticle.subMetaKeywordLinks}
+						subMetaSectionLinks={CAPIArticle.subMetaSectionLinks}
+						pageId={CAPIArticle.pageId}
+						webUrl={CAPIArticle.webURL}
+						webTitle={CAPIArticle.webTitle}
+						showBottomSocialButtons={
+							CAPIArticle.showBottomSocialButtons
+						}
+						badge={CAPIArticle.badge}
+					/>
 				</ElementContainer>
 
 				<ElementContainer

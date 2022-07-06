@@ -24,30 +24,6 @@ import type {
 	CanShowData as RRCanShowData,
 	EpicConfig as RREpicConfig,
 } from './SlotBodyEnd/ReaderRevenueEpic';
-import { css } from '@emotion/react';
-import { from } from '@guardian/source-foundations';
-
-const wrapperStyle = (contentType: string) => css`
-	${contentType.toLowerCase() === 'interactive'
-		? `
-		position: relative;
-		${from.tablet} {
-			max-width: 620px;
-		}
-		${from.desktop} {
-			margin-left: 0px;
-			margin-right: 310px;
-		}
-		${from.leftCol} {
-			margin-left: 150px;
-			padding-left: 10px;
-		}
-		${from.wide} {
-			margin-left: 229px;
-		}
-	`
-		: ''}
-`;
 
 type Props = {
 	contentType: string;
@@ -193,11 +169,7 @@ export const SlotBodyEnd = ({
 	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount]);
 
 	if (SelectedEpic) {
-		return (
-			<div css={wrapperStyle(contentType)}>
-				<SelectedEpic />
-			</div>
-		);
+		return <SelectedEpic />;
 	}
 
 	return null;
