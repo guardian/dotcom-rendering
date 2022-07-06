@@ -531,7 +531,6 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				<ContainerLayout
 					sideBorders={true}
 					stretchRight={false}
-					centralBorder="full"
 					backgroundColour={palette.background.article}
 					borderColour={palette.border.article}
 					padContent={false}
