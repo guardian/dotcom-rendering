@@ -534,6 +534,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					centralBorder="full"
 					backgroundColour={palette.background.article}
 					borderColour={palette.border.article}
+					padContent={false}
 				>
 					<div
 						css={css`
