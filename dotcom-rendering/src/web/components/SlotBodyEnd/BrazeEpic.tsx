@@ -32,7 +32,12 @@ type EpicConfig = {
 export const canShowBrazeEpic = async (
 	brazeMessages: BrazeMessagesInterface,
 	brazeArticleContext: BrazeArticleContext,
+	contentType: string,
 ): Promise<CanShowResult<Meta>> => {
+	if (contentType.toLowerCase() === 'interactive') {
+		return { show: false };
+	}
+
 	const forcedBrazeMeta = getBrazeMetaFromUrlFragment();
 	if (forcedBrazeMeta) {
 		return {
