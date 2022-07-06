@@ -17,21 +17,32 @@ type Props = {
 const containerStyles = css`
 	border: ${neutral[0]} 3px dashed;
 	border-radius: 12px;
-	padding: 10px;
 	margin-bottom: ${space[3]}px;
+	padding: ${space[2]}px ${space[2]}px;
+
+	${from.tablet} {
+		padding: ${space[2]}px ${space[4]}px;
+	}
 `;
 
 const stackBelowTabletStyles = css`
 	display: flex;
 	flex-direction: column;
+	margin-bottom: ${space[2]}px;
 	${from.tablet} {
 		flex-direction: row;
+		margin-bottom: ${space[1]}px;
 	}
 `;
 
 const titleStyles = (newsletter: NewsletterResponse) => css`
 	${headline.xsmall({ fontWeight: 'bold' })}
 	flex-grow: 1;
+	margin-bottom: ${space[2]}px;
+	${from.tablet} {
+		margin-bottom: 0;
+	}
+
 	span {
 		color: ${newsletter.theme === 'news' ? sport[500] : 'inherit'};
 	}
@@ -39,7 +50,6 @@ const titleStyles = (newsletter: NewsletterResponse) => css`
 
 const descriptionStyles = css`
 	${textSans.medium({ lineHeight: 'tight' })}
-	margin-top: ${space[1]}px;
 	margin-bottom: ${space[2]}px;
 `;
 
