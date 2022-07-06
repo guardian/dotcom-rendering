@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	brandAltBackground,
+	from,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
@@ -11,6 +12,10 @@ export const NewsletterFrequency = ({ frequency }: { frequency: string }) => {
 		<div
 			css={css`
 				display: flex;
+				margin-top: ${space[2]}px;
+				${from.tablet} {
+					margin-top: 0;
+				}
 			`}
 		>
 			<div

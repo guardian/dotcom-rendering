@@ -25,6 +25,7 @@ const termsStyle = css`
 	a {
 		color: ${neutral[0]};
 		${textSans.xxsmall({ fontWeight: 'bold' })}
+		text-decoration: none;
 		:hover {
 			color: ${neutral[0]};
 			text-decoration: underline;
@@ -112,7 +113,6 @@ const generateForm = (
 						flex-direction: row;
 						align-items: flex-end;
 						flex-wrap: wrap;
-						margin-bottom: ${space[2]}px;
 					`}
 				>
 					<div
@@ -138,6 +138,7 @@ const generateForm = (
 							}
 							flex-basis: 118px;
 							flex-shrink: 0;
+							margin-top: ${space[2]}px;
 						`}
 						type="submit"
 					>
@@ -170,7 +171,11 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 					successDescription={successDescription}
 				/>
 			</Island>
-			<div>
+			<div
+				css={css`
+					margin-top: ${space[2]}px;
+				`}
+			>
 				<PrivacyTerms />
 				<RecaptchaTerms />
 			</div>
