@@ -581,7 +581,10 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					/>
 				</ElementContainer>
 
-				<ElementContainer showTopBorder={false}>
+				<ElementContainer
+					showTopBorder={false}
+					backgroundColour={palette.background.article}
+				>
 					<SubMeta
 						format={format}
 						subMetaKeywordLinks={CAPIArticle.subMetaKeywordLinks}
