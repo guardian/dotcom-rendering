@@ -532,6 +532,8 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					sideBorders={true}
 					stretchRight={false}
 					centralBorder="full"
+					backgroundColour={palette.background.article}
+					borderColour={palette.border.article}
 				>
 					<div
 						css={css`
@@ -565,7 +567,11 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</div>
 				</ContainerLayout>
 
-				<ElementContainer showTopBorder={false} padded={false}>
+				<ElementContainer
+					showTopBorder={false}
+					padded={false}
+					backgroundColour={palette.background.article}
+				>
 					<StraightLines count={4} data-print-layout="hide" />
 				</ElementContainer>
 
