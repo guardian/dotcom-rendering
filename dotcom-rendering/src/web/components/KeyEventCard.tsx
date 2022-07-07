@@ -80,7 +80,7 @@ const listItemStyles = (palette: Palette) => css`
 		border-top: 1px dotted ${palette.border.keyEvent};
 		left: 0;
 		right: 0;
-		top: 18px;
+		top: 19px;
 	}
 
 	&:last-child::before {
