@@ -23,7 +23,7 @@ const toggleWrapperStyles = css`
 interface Props {
 	filterKeyEvents: boolean;
 	id: 'filter-toggle-mobile' | 'filter-toggle-desktop';
-	tooltip: boolean;
+	// tooltip: boolean;
 }
 
 export const FilterKeyEventsToggle = ({ filterKeyEvents, id }: Props) => {
@@ -46,6 +46,7 @@ export const FilterKeyEventsToggle = ({ filterKeyEvents, id }: Props) => {
 			<div css={toggleWrapperStyles}>
 				<ToggleSwitch
 					label="Show key events only"
+					tooltip={true}
 					checked={checked}
 					onClick={() => handleClick()}
 					cssOverrides={cssOverrides}
