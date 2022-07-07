@@ -286,6 +286,11 @@ interface MultiImageBlockElement {
 	role?: RoleType;
 }
 
+interface NewsletterSignupBlockElement {
+	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement';
+	newsletter: NewsletterData;
+}
+
 interface NumberedTitleBlockElement {
 	_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement';
 	elementId: string;
@@ -586,6 +591,7 @@ type CAPIElement =
 	| MediaAtomBlockElement
 	| MultiImageBlockElement
 	| NumberedTitleBlockElement
+	| NewsletterSignupBlockElement
 	| ProfileAtomBlockElement
 	| PullquoteBlockElement
 	| QABlockElement

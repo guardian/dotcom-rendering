@@ -17,6 +17,7 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
+import { EmailSignup } from '../components/EmailSignup';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
@@ -449,6 +450,8 @@ export const renderElement = ({
 					caption={element.caption}
 				/>,
 			];
+		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
+			return [true, <EmailSignup newsletter={element.newsletter} />];
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return [
 				true,
