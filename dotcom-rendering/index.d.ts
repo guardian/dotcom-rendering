@@ -533,33 +533,14 @@ interface CAPINavType {
 }
 
 // TO DO - should this be defined in @guardian/libs' ?
-// Corresponding Scala class definition is at:
-// frontend/common/app/services/newsletters/model/NewsletterResponse.scala
-type NewsletterResponse = {
+type NewsletterData = {
+	listId: number;
 	identityName: string;
 	name: string;
-	brazeNewsletterName: string;
-	brazeSubscribeAttributeName: string;
-	brazeSubscribeEventNamePrefix: string;
-	theme: string;
 	description: string;
 	frequency: string;
-	listIdV1: number;
-	listId: number;
-	exampleUrl?: string;
-	emailEmbed: {
-		name: string;
-		title: string;
-		description: string;
-		successHeadline: string;
-		successDescription: string;
-		hexCode: string;
-		imageUrl?: string;
-	};
-	signupPage?: string;
-	restricted: boolean;
-	paused: boolean;
-	emailConfirmation: boolean;
+	successDescription: string;
+	theme: string;
 	group: string;
 };
 
@@ -640,7 +621,7 @@ interface CAPIArticleType {
 	matchUrl?: string;
 	matchType?: MatchType;
 	isSpecialReport: boolean;
-	newsletterToEmbed?: NewsletterResponse;
+	newsletterToEmbed?: NewsletterData;
 
 	// Interactives made on Frontend rather than DCR require special handling.
 	// The logic is date-driven. See:

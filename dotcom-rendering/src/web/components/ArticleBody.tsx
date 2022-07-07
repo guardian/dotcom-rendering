@@ -34,7 +34,7 @@ type Props = {
 	filterKeyEvents?: boolean;
 	showKeyEventsCarousel?: boolean;
 	availableTopics?: Topic[];
-	newsletterToEmbed?: NewsletterResponse;
+	newsletterToEmbed?: NewsletterData;
 	selectedTopics?: Topic[];
 };
 

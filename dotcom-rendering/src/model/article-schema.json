@@ -394,22 +394,13 @@
         "newsletterToEmbed": {
             "type": "object",
             "properties": {
+                "listId": {
+                    "type": "number"
+                },
                 "identityName": {
                     "type": "string"
                 },
                 "name": {
-                    "type": "string"
-                },
-                "brazeNewsletterName": {
-                    "type": "string"
-                },
-                "brazeSubscribeAttributeName": {
-                    "type": "string"
-                },
-                "brazeSubscribeEventNamePrefix": {
-                    "type": "string"
-                },
-                "theme": {
                     "type": "string"
                 },
                 "description": {
@@ -418,80 +409,24 @@
                 "frequency": {
                     "type": "string"
                 },
-                "listIdV1": {
-                    "type": "number"
-                },
-                "listId": {
-                    "type": "number"
-                },
-                "exampleUrl": {
+                "successDescription": {
                     "type": "string"
                 },
-                "emailEmbed": {
-                    "type": "object",
-                    "properties": {
-                        "name": {
-                            "type": "string"
-                        },
-                        "title": {
-                            "type": "string"
-                        },
-                        "description": {
-                            "type": "string"
-                        },
-                        "successHeadline": {
-                            "type": "string"
-                        },
-                        "successDescription": {
-                            "type": "string"
-                        },
-                        "hexCode": {
-                            "type": "string"
-                        },
-                        "imageUrl": {
-                            "type": "string"
-                        }
-                    },
-                    "required": [
-                        "description",
-                        "hexCode",
-                        "name",
-                        "successDescription",
-                        "successHeadline",
-                        "title"
-                    ]
-                },
-                "signupPage": {
+                "theme": {
                     "type": "string"
-                },
-                "restricted": {
-                    "type": "boolean"
-                },
-                "paused": {
-                    "type": "boolean"
-                },
-                "emailConfirmation": {
-                    "type": "boolean"
                 },
                 "group": {
                     "type": "string"
                 }
             },
             "required": [
-                "brazeNewsletterName",
-                "brazeSubscribeAttributeName",
-                "brazeSubscribeEventNamePrefix",
                 "description",
-                "emailConfirmation",
-                "emailEmbed",
                 "frequency",
                 "group",
                 "identityName",
                 "listId",
-                "listIdV1",
                 "name",
-                "paused",
-                "restricted",
+                "successDescription",
                 "theme"
             ]
         },

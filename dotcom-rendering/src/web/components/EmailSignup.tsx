@@ -11,7 +11,7 @@ import { NewsletterFrequency } from './NewsletterFrequency';
 import { SecureSignup } from './SecureSignup';
 
 type Props = {
-	newsletter: NewsletterResponse;
+	newsletter: NewsletterData;
 };
 
 const containerStyles = css`
@@ -29,11 +29,11 @@ const stackBelowTabletStyles = css`
 	}
 `;
 
-const titleStyles = (newsletter: NewsletterResponse) => css`
+const titleStyles = (theme: string) => css`
 	${headline.xsmall({ fontWeight: 'bold' })}
 	flex-grow: 1;
 	span {
-		color: ${newsletter.theme === 'news' ? sport[500] : 'inherit'};
+		color: ${theme === 'news' ? sport[500] : 'inherit'};
 	}
 `;
 
@@ -44,13 +44,19 @@ const descriptionStyles = css`
 `;
 
 export const EmailSignup = ({ newsletter }: Props) => {
-	const { identityName, name, description, frequency } = newsletter;
-	const { successDescription } = newsletter.emailEmbed;
+	const {
+		identityName,
+		name,
+		description,
+		frequency,
+		successDescription,
+		theme,
+	} = newsletter;
 
 	return (
 		<aside css={containerStyles}>
 			<div css={stackBelowTabletStyles}>
-				<p css={titleStyles(newsletter)}>
+				<p css={titleStyles(theme)}>
 					Sign up to <span>{name}</span> today
 				</p>
 				<NewsletterFrequency frequency={frequency} />
