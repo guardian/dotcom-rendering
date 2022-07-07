@@ -2,6 +2,7 @@ import type express from 'express';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
+import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { extract as extractGA } from '../../model/extract-ga';
 import { extractNAV } from '../../model/extract-nav';
@@ -22,6 +23,9 @@ const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
 		blocks: enhanceBlocks(data.blocks, data.format),
 		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
 		standfirst: enhanceStandfirst(data.standfirst),
+		commercialProperties: enhanceCommercialProperties(
+			data.commercialProperties,
+		),
 	};
 	return CAPIArticle;
 };
