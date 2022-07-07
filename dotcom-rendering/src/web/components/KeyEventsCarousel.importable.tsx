@@ -29,10 +29,6 @@ const carouselStyles = (palette: Palette) => css`
 	scroll-behavior: smooth;
 	overflow-x: auto;
 	overflow-y: hidden;
-	scrollbar-width: none;
-	&::-webkit-scrollbar {
-		display: none;
-	}
 	margin-right: -10px;
 	${from.tablet} {
 		margin-right: -20px;
@@ -41,6 +37,10 @@ const carouselStyles = (palette: Palette) => css`
 	${from.desktop} {
 		margin-right: 0px;
 		background-color: ${palette.background.keyEventFromDesktop};
+		scrollbar-width: none;
+		&::-webkit-scrollbar {
+			display: none;
+		}
 	}
 `;
 const leftMarginStyles = css`
