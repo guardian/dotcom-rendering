@@ -387,24 +387,30 @@ export const ReaderRevenueLinks = ({
 	if (countryCode) {
 		if (inHeader && remoteHeader) {
 			return (
-				<ReaderRevenueLinksRemote
-					editionId={editionId}
-					countryCode={countryCode}
-					pageViewId={pageViewId}
-					contributionsServiceUrl={contributionsServiceUrl}
-					ophanRecord={ophanRecord}
-				/>
+				<>
+					<span>Hi Turbosnap!</span>
+					<ReaderRevenueLinksRemote
+						editionId={editionId}
+						countryCode={countryCode}
+						pageViewId={pageViewId}
+						contributionsServiceUrl={contributionsServiceUrl}
+						ophanRecord={ophanRecord}
+					/>
+				</>
 			);
 		}
 		return (
-			<ReaderRevenueLinksNative
-				editionId={editionId}
-				dataLinkNamePrefix={dataLinkNamePrefix}
-				inHeader={inHeader}
-				urls={urls}
-				ophanRecord={ophanRecord}
-				pageViewId={pageViewId}
-			/>
+			<>
+				<span>Hi Turbosnap!</span>
+				<ReaderRevenueLinksNative
+					editionId={editionId}
+					dataLinkNamePrefix={dataLinkNamePrefix}
+					inHeader={inHeader}
+					urls={urls}
+					ophanRecord={ophanRecord}
+					pageViewId={pageViewId}
+				/>
+			</>
 		);
 	}
 
