@@ -28,7 +28,7 @@
     "cypress:run": "cypress run",
     "cypress:open:e2e": "cypress open --e2e --browser=chrome",
     "cypress:run:e2e": "cypress run --spec 'cypress/e2e/**/*'",
-    "cypress:run:percy": "percy exec -- cypress run --spec 'cypress/e2e/**/*-snapshot*'",
+    "cypress:run:percy": "percy exec -- cypress run --spec 'cypress/e2e/**/snapshot-*'",
     "makeBuild": "NODE_ENV=production CI_ENV=github webpack --config ./scripts/webpack/webpack.config.js"
   },
   "bundlesize": [
