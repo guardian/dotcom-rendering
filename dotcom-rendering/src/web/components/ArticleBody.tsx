@@ -34,7 +34,6 @@ type Props = {
 	filterKeyEvents?: boolean;
 	showKeyEventsCarousel?: boolean;
 	availableTopics?: Topic[];
-	newsletterToEmbed?: NewsletterData;
 	selectedTopics?: Topic[];
 };
 
@@ -121,7 +120,6 @@ export const ArticleBody = ({
 	showKeyEventsCarousel,
 	availableTopics,
 	selectedTopics,
-	newsletterToEmbed,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
@@ -208,7 +206,6 @@ export const ArticleBody = ({
 				isDev={isDev}
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
-				newsletterToEmbed={newsletterToEmbed}
 			/>
 		</div>
 	);

@@ -963,9 +963,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													selectedTopics={
 														CAPIArticle.selectedTopics
 													}
-													newsletterToEmbed={
-														CAPIArticle.newsletterToEmbed
-													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1134,9 +1131,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													}
 													selectedTopics={
 														CAPIArticle.selectedTopics
-													}
-													newsletterToEmbed={
-														CAPIArticle.newsletterToEmbed
 													}
 												/>
 												{pagination.totalPages > 1 && (

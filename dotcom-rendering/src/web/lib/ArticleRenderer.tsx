@@ -64,8 +64,6 @@ export const ArticleRenderer: React.FC<{
 	isDev: boolean;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	newsletterToEmbed?: NewsletterData;
-	//TO DO - get business/design logic for where to place the EmailSignup in the renderedElements
 }> = ({
 	format,
 	elements,

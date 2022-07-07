@@ -532,7 +532,6 @@ interface CAPINavType {
 	readerRevenueLinks: ReaderRevenuePositions;
 }
 
-// TO DO - should this be defined in @guardian/libs' ?
 type NewsletterData = {
 	listId: number;
 	identityName: string;
@@ -621,7 +620,6 @@ interface CAPIArticleType {
 	matchUrl?: string;
 	matchType?: MatchType;
 	isSpecialReport: boolean;
-	newsletterToEmbed?: NewsletterData;
 
 	// Interactives made on Frontend rather than DCR require special handling.
 	// The logic is date-driven. See:
