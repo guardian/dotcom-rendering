@@ -68,7 +68,6 @@ const adStyles = css`
 	.ad-slot-container--liveblog {
 		background-color: ${neutral[93]};
 		margin: 0 auto ${space[3]}px;
-		width: 100%;
 		text-align: center;
 
 		.ad-slot {
@@ -79,6 +78,14 @@ const adStyles = css`
 		.ad-slot__label {
 			color: ${neutral[46]};
 			border-top-color: ${neutral[86]};
+		}
+
+		${from.mobile} {
+			width: 300px;
+		}
+
+		${from.tablet} {
+			width: 100%;
 		}
 	}
 	/** ad-slot-offset-right is only added to inline2+ slots */
