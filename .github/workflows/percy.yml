@@ -24,6 +24,6 @@ jobs:
           wait-on-timeout: 30
       - name: Percy Test
         working-directory: dotcom-rendering
-        run: yarn percy  exec -- cypress run --spec 'cypress/e2e/**/article.interact*'
+        run: yarn cypress:run:percy
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
