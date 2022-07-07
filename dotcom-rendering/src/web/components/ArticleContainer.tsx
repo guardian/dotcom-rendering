@@ -41,8 +41,8 @@ const articleWrapper = css`
 	flex-grow: 1;
 
 	/* Due to MainMedia using position: relative, this seems to effect the rendering order
-    To mitigate we use z-index
-    TODO: find a cleaner solution */
+		To mitigate we use z-index
+		TODO: find a cleaner solution */
 	z-index: 1;
 `;
 
@@ -88,57 +88,63 @@ const adStyles = css`
 			width: 100%;
 		}
 	}
-	/** ad-slot-offset-right is only added to inline2+ slots */
-	.ad-slot--offset-right {
-		${from.desktop} {
-			float: right;
-			width: auto;
-			margin-right: -318px;
-		}
 
-		${from.wide} {
-			margin-right: -398px;
-		}
-	}
 	/* Unlike other inlines do not float right inline1 */
-	.ad-slot-container .ad-slot--inline1 {
-		margin: 12px auto;
-		text-align: center;
-		${until.tablet} {
-			/* Prevent merger with any nearby float left elements e.g. rich-links */
-			clear: left;
-			width: 300px;
-		}
+	.ad-slot-container--article {
+		margin-top: 12px;
+		margin-bottom: 12px;
+
 		${from.tablet} {
 			background-color: ${neutral[97]};
 		}
-		&.ad-slot--fluid {
-			width: 100%;
+
+		.ad-slot {
+			margin-left: auto;
+			margin-right: auto;
 		}
-	}
-	.ad-slot--inline:not(.ad-slot--inline1) {
-		width: 300px;
-		margin: 12px auto;
-		min-width: 300px;
-		min-height: 274px;
-		text-align: center;
-		${from.tablet} {
-			margin-right: -100px;
-			width: auto;
-			float: right;
-			margin-top: 4px;
-			margin-left: 20px;
+
+		.ad-slot--inline1, .ad-slot--top-above-nav {
+			text-align: center;
+
+			${from.mobile} {
+				/* Prevent merger with any nearby float left elements e.g. rich-links */
+				clear: left;
+				width: 300px;
+			}
+			${from.tablet} {
+				background-color: ${neutral[97]};
+				width: auto;
+			}
+			&.ad-slot--fluid {
+				width: 100%;
+			}
 		}
-		${from.desktop} {
-			width: auto;
-			float: right;
-			margin: 0;
-			margin-top: 4px;
-			margin-left: 20px;
+
+		// AKA inline2+
+		.ad-slot--inline:not(.ad-slot--inline1) {
+			${from.mobile} {
+				/* Prevent merger with any nearby float left elements e.g. rich-links */
+				clear: left;
+			}
+
+			&.ad-slot--fluid {
+				width: 100%;
+			}
 		}
-		&.ad-slot--fluid {
-			width: 100%;
+
+
+		&.ad-slot--offset-right {
+			${from.desktop} {
+				float: right;
+				width: 300px;
+				margin-right: -318px;
+			}
+	
+			${from.wide} {
+				margin-right: -398px;
+			}
 		}
+
 	}
 `;
 
