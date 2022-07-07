@@ -102,34 +102,38 @@ export const sendOphanPlatformRecord = (): void => {
 	}
 };
 
+/**
+ * Record performance navigation timing information to Ophan
+ *
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigationTiming
+ */
 export const recordPerformance = (): void => {
-	const { performance: performanceAPI } = window;
-	const supportsPerformanceProperties =
-		performanceAPI &&
-		'navigation' in performanceAPI &&
-		'timing' in performanceAPI;
+	try {
+		const { performance } = window;
+		const [timing] = performance.getEntriesByType('navigation') ?? [{}];
 
-	if (!supportsPerformanceProperties) {
-		return;
+		if (!(timing instanceof PerformanceNavigationTiming))
+			throw new TypeError('Not a PerformanceNavigationTiming');
+
+		const timings = {
+			dns: timing.domainLookupEnd - timing.domainLookupStart,
+			connection: timing.connectEnd - timing.connectStart,
+			firstByte: timing.responseStart - timing.connectEnd,
+			lastByte: timing.responseEnd - timing.responseStart,
+			domContentLoadedEvent:
+				timing.domContentLoadedEventStart - timing.responseEnd,
+			loadEvent:
+				timing.loadEventStart - timing.domContentLoadedEventStart,
+			navType: timing.type,
+			redirectCount: timing.redirectCount,
+		};
+
+		record({
+			performance: timings,
+		});
+	} catch (e) {
+		log('dotcom', 'Could not record performance', e);
 	}
-
-	const { timing } = performanceAPI;
-
-	const performance = {
-		dns: timing.domainLookupEnd - timing.domainLookupStart,
-		connection: timing.connectEnd - timing.connectStart,
-		firstByte: timing.responseStart - timing.connectEnd,
-		lastByte: timing.responseEnd - timing.responseStart,
-		domContentLoadedEvent:
-			timing.domContentLoadedEventStart - timing.responseEnd,
-		loadEvent: timing.loadEventStart - timing.domContentLoadedEventStart,
-		navType: performanceAPI.navigation.type,
-		redirectCount: performanceAPI.navigation.redirectCount,
-	};
-
-	record({
-		performance,
-	});
 };
 
 export {
