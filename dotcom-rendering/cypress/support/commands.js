@@ -25,3 +25,21 @@ import 'cypress-wait-until';
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('hydrate', () => {
+	return cy
+		.get('gu-island')
+		.each((el) => {
+			cy.wrap(el)
+				.log(`Scrolling to ${el.attr('name')}`)
+				.scrollIntoView({ duration: 100, timeout: 10000 })
+				.should('have.attr', 'data-gu-ready', 'true', {
+					timeout: 30000,
+				});
+		})
+		.then(() => {
+			cy.scrollTo('top');
+			// eslint-disable-next-line cypress/no-unnecessary-waiting
+			cy.wait(5000);
+		});
+});
