@@ -1,5 +1,7 @@
 import { disableCMP } from '../../lib/disableCMP.js';
 import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
+import { breakpoints } from '@guardian/source-foundations';
+import '@percy/cypress';
 
 describe('E2E Page rendering', function () {
 	beforeEach(function () {
@@ -13,5 +15,9 @@ describe('E2E Page rendering', function () {
 		);
 
 		cy.hydrate();
+
+		cy.percySnapshot('Standard Layout', {
+			widths: Object.values(breakpoints),
+		});
 	});
 });
