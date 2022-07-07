@@ -112,7 +112,7 @@ export const TopicFilterBank = ({
 			<div css={topicStyles}>
 				{keyEvents?.length && (
 					<FilterButton
-						value={'Key Events'}
+						value={'Key events'}
 						count={keyEvents.length}
 						format={format}
 						isActive={filterKeyEvents}
