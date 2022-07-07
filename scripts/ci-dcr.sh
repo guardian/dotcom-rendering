@@ -19,6 +19,9 @@ echo "files: $files"
 filteredFiles="$(echo "$files" | { grep -v 'apps-rendering' || :; })"
 echo "filteredFiles: $filteredFiles"
 
+# Github actions sets this by default but we also want this variable set in TeamCity
+export CI=true
+
 # run the ci steps if either of the followings is true
 # - filteredFiles is empty (all changes were in apps-rendering)
 # - we are in the main branch
