@@ -99,7 +99,6 @@ export const LiveBlogRenderer = ({
 							<FilterKeyEventsToggle
 								filterKeyEvents={filterKeyEvents}
 								id="filter-toggle-mobile"
-								tooltip={true}
 							/>
 						</Island>
 					)}

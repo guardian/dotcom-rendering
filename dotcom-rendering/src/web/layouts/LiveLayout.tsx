@@ -839,7 +839,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														CAPIArticle.filterKeyEvents
 													}
 													id="filter-toggle-desktop"
-													tooltip={true}
 												/>
 											</Island>
 										</Hide>
@@ -857,7 +856,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 																CAPIArticle.filterKeyEvents
 															}
 															id="filter-toggle-mobile"
-															tooltip={true}
 														/>
 													</Island>
 												</Hide>
@@ -1027,7 +1025,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 																CAPIArticle.filterKeyEvents
 															}
 															id="filter-toggle-mobile"
-															tooltip={true}
 														/>
 													</Island>
 												</Hide>
