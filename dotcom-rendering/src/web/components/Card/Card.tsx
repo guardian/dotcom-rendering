@@ -59,7 +59,7 @@ export type Props = {
 	containerType?: DCRContainerType;
 	showAge?: boolean;
 	discussionId?: string;
-	transparent?: boolean;
+	isDynamo?: boolean;
 };
 
 const StarRatingComponent = ({ rating }: { rating: number }) => (
@@ -186,7 +186,7 @@ export const Card = ({
 	containerType,
 	showAge = false,
 	discussionId,
-	transparent,
+	isDynamo,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -270,7 +270,7 @@ export const Card = ({
 			format={format}
 			containerPalette={containerPalette}
 			containerType={containerType}
-			transparent={transparent}
+			isDynamo={isDynamo}
 		>
 			<CardLink
 				linkTo={linkTo}

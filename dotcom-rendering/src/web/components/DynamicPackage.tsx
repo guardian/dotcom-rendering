@@ -54,7 +54,7 @@ export const DynamicPackage = ({
 						dataLinkName={primary.dataLinkName}
 						snapData={primary.snapData}
 						discussionId={primary.discussionId}
-						transparent={true}
+						isDynamo={true}
 					/>
 				</LI>
 				<LI

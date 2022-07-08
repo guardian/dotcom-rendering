@@ -9,7 +9,7 @@ type Props = {
 	format: ArticleFormat;
 	containerPalette?: DCRContainerPalette;
 	containerType?: DCRContainerType;
-	transparent?: boolean;
+	isDynamo?: boolean;
 };
 
 const cardStyles = (
@@ -99,14 +99,14 @@ export const CardWrapper = ({
 	format,
 	containerPalette,
 	containerType,
-	transparent,
+	isDynamo,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	return (
 		<div
 			css={[
 				cardStyles(format, palette, containerType),
-				transparent &&
+				isDynamo &&
 					css`
 						background: transparent;
 					`,
