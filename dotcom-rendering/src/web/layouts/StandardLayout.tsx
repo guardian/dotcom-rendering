@@ -215,7 +215,7 @@ const StandardGrid = ({
 				${until.tablet} {
 					grid-column-gap: 0px;
 
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: 100%; /* Main content */
 					${isMatchReport
 						? css`
 								grid-template-areas:
