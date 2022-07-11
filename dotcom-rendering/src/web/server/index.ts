@@ -1,6 +1,6 @@
 import type express from 'express';
-import { decideContainerPalette } from '../../model/decideContainerPalette';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
+import { decideContainerPalette } from '../../model/decideContainerPalette';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCards } from '../../model/enhanceCards';
 import { enhanceCollections } from '../../model/enhanceCollections';
