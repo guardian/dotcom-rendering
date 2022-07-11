@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
@@ -37,10 +36,6 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 		filename: generateName(isLegacyJS),
 		chunkFilename: generateName(isLegacyJS),
 		publicPath: '',
-	},
-	// fix for known issue with webpack dynamic imports
-	optimization: {
-		splitChunks: { cacheGroups: { default: false } },
 	},
 	plugins: [
 		new WebpackManifestPlugin({
