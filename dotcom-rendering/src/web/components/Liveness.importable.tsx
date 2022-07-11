@@ -190,25 +190,14 @@ export const Liveness = ({
 					// Increment the count of new posts
 					setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
 				}
+			}
 
-				// Update the block id we use for polling
-				if (data.mostRecentBlockId) {
-					setLatestBlockId(data.mostRecentBlockId);
-				}
-			} else if (
-				data.mostRecentBlockId &&
-				data.mostRecentBlockId !== latestBlockId
-			) {
+			// Update the block id we use for polling
+			if (data.mostRecentBlockId) {
 				setLatestBlockId(data.mostRecentBlockId);
 			}
 		},
-		[
-			onFirstPage,
-			topOfBlogVisible,
-			numHiddenBlocks,
-			enhanceTweetsSwitch,
-			latestBlockId,
-		],
+		[onFirstPage, topOfBlogVisible, numHiddenBlocks, enhanceTweetsSwitch],
 	);
 
 	/**
