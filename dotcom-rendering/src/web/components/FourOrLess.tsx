@@ -6,13 +6,12 @@ import { UL } from './Card/components/UL';
 type Props = {
 	content: TrailType[];
 	containerPalette?: DCRContainerPalette;
-	showImages?: boolean;
 };
 
 const decidePercentage = (length: number) => {
 	switch (length) {
 		case 1:
-			return '50%';
+			return '100%';
 		case 2:
 			return '50%';
 		case 3:
@@ -23,11 +22,7 @@ const decidePercentage = (length: number) => {
 	}
 };
 
-export const FourOrLess = ({
-	content,
-	containerPalette,
-	showImages = true,
-}: Props) => {
+export const FourOrLess = ({ content, containerPalette }: Props) => {
 	const percentage = decidePercentage(content.length);
 
 	return (
@@ -60,7 +55,7 @@ export const FourOrLess = ({
 							}
 							showSlash={true}
 							showClock={false}
-							imageUrl={showImages ? trail.image : undefined}
+							imageUrl={trail.image}
 							mediaType={trail.mediaType}
 							mediaDuration={trail.mediaDuration}
 							starRating={trail.starRating}
