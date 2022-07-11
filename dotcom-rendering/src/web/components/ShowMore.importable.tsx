@@ -86,6 +86,7 @@ export const ShowMore = ({
 				}
 			`}
 			disabled={loading}
+			data-cy={`show-more-button-${collectionId}`}
 		>
 			{decideButtonText({ showMore, loading, displayName })}
 		</Button>
