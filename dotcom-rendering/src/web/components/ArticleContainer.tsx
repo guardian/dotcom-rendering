@@ -111,7 +111,7 @@ const adStyles = css`
 			margin-right: auto;
 		}
 
-		.ad-slot--inline1,
+		.ad-slot--inline,
 		.ad-slot--top-above-nav {
 			${from.mobile} {
 				width: 300px;
@@ -119,22 +119,6 @@ const adStyles = css`
 			${from.tablet} {
 				width: auto;
 			}
-			&.ad-slot--fluid {
-				width: 100%;
-			}
-		}
-
-		// AKA inline2+
-		.ad-slot--inline:not(.ad-slot--inline1) {
-			${from.mobile} {
-				/* Prevent merger with any nearby float left elements e.g. rich-links */
-				width: 300px;
-			}
-
-			${from.tablet} {
-				width: auto;
-			}
-
 			&.ad-slot--fluid {
 				width: 100%;
 			}
