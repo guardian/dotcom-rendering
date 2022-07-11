@@ -59,7 +59,8 @@ export type Props = {
 	containerType?: DCRContainerType;
 	showAge?: boolean;
 	discussionId?: string;
-	isDynamo?: boolean;
+	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
+	isDynamo?: true;
 };
 
 const StarRatingComponent = ({ rating }: { rating: number }) => (

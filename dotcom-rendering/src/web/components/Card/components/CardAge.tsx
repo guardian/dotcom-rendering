@@ -9,13 +9,13 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	webPublicationDate: string;
 	showClock?: boolean;
-	isDynamo?: boolean;
+	isDynamo?: true;
 };
 
 const ageStyles = (
 	format: ArticleFormat,
 	palette: Palette,
-	isDynamo?: boolean,
+	isDynamo?: true,
 ) => {
 	return css`
 		${textSans.xxsmall({ lineHeight: 'tight' })};

@@ -9,14 +9,15 @@ type Props = {
 	format: ArticleFormat;
 	containerPalette?: DCRContainerPalette;
 	containerType?: DCRContainerType;
-	isDynamo?: boolean;
+	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
+	isDynamo?: true;
 };
 
 const cardStyles = (
 	format: ArticleFormat,
 	palette?: Palette,
 	containerType?: DCRContainerType,
-	isDynamo?: boolean,
+	isDynamo?: true,
 ) => {
 	const cardPalette = palette ?? decidePalette(format);
 	const baseCardStyles = css`

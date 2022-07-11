@@ -8,7 +8,7 @@ type Props = {
 	format: ArticleFormat;
 	short: string;
 	long: string;
-	isDynamo?: boolean;
+	isDynamo?: true;
 };
 
 const containerStyles = (palette: Palette, isDynamo?: boolean) => css`

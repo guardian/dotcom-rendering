@@ -23,7 +23,7 @@ type Props = {
 	showByline?: boolean;
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 	linkTo?: string; // If provided, the headline is wrapped in a link
-	isDynamo?: boolean;
+	isDynamo?: true;
 };
 
 const fontStyles = ({

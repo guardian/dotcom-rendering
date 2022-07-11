@@ -11,7 +11,7 @@ type Props = {
 type MarkerType = {
 	discussionId: string;
 	format: ArticleFormat;
-	isDynamo?: boolean;
+	isDynamo?: true;
 	containerPalette?: string;
 };
 
@@ -25,7 +25,7 @@ type EnhancedCountType = {
 	long: string;
 	short: string;
 	format: ArticleFormat;
-	isDynamo?: boolean;
+	isDynamo?: true;
 	containerPalette?: DCRContainerPalette;
 };
 
@@ -53,7 +53,7 @@ function extractMarkers() {
 						markers.push({
 							discussionId,
 							format: JSON.parse(format),
-							isDynamo: !!isDynamo,
+							isDynamo: isDynamo ? true : undefined,
 							containerPalette,
 						});
 					}
