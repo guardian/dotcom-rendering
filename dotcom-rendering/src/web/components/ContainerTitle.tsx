@@ -3,10 +3,10 @@ import {
 	between,
 	from,
 	headline,
+	news,
 	space,
 	text,
 	until,
-	news,
 } from '@guardian/source-foundations';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { getEditionFromId } from '../lib/edition';
@@ -92,7 +92,7 @@ export const ContainerTitle = ({
 		containerPalette && decideContainerOverrides(containerPalette);
 
 	const now = new Date();
-	const locale = editionId && getEditionFromId(editionId)?.locale;
+	const locale = editionId && getEditionFromId(editionId).locale;
 
 	return (
 		<>

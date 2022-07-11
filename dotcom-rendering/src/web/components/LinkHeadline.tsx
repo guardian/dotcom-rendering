@@ -82,7 +82,7 @@ export const LinkHeadline = ({
 			{kickerText && (
 				<Kicker
 					text={kickerText}
-					palette={palette}
+					color={palette.text.linkKicker}
 					showPulsingDot={showPulsingDot}
 					showSlash={showSlash}
 				/>

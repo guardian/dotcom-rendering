@@ -30,28 +30,30 @@ export type Props = {
 	format: ArticleFormat;
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
-	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
+	/** Even with design !== Comment, a piece can be opinion */
+	showQuotes?: boolean;
 	byline?: string;
 	showByline?: boolean;
 	webPublicationDate?: string;
 	imageUrl?: string;
 	imagePosition?: ImagePositionType;
 	imagePositionOnMobile?: ImagePositionType;
-	imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
+	/** Size is ignored when position = 'top' because in that case the image flows based on width */
+	imageSize?: ImageSizeType;
 	trailText?: string;
 	avatar?: AvatarType;
 	showClock?: boolean;
 	mediaType?: MediaType;
 	mediaDuration?: number;
-	// Kicker
 	kickerText?: string;
 	showPulsingDot?: boolean;
+	/** Sometimes kickers and headlines are separated by a slash */
 	showSlash?: boolean;
 	starRating?: number;
 	minWidthInPixels?: number;
 	/** Used for Ophan tracking */
 	dataLinkName?: string;
-	// Labs
+	/** Only used on Labs cards */
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
@@ -59,7 +61,8 @@ export type Props = {
 	containerType?: DCRContainerType;
 	showAge?: boolean;
 	discussionId?: string;
-	transparent?: boolean;
+	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
+	isDynamo?: true;
 };
 
 const StarRatingComponent = ({ rating }: { rating: number }) => (
@@ -186,7 +189,7 @@ export const Card = ({
 	containerType,
 	showAge = false,
 	discussionId,
-	transparent,
+	isDynamo,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -217,6 +220,7 @@ export const Card = ({
 							containerPalette={containerPalette}
 							webPublicationDate={webPublicationDate}
 							showClock={showClock}
+							isDynamo={isDynamo}
 						/>
 					) : undefined
 				}
@@ -229,6 +233,8 @@ export const Card = ({
 							data-name="comment-count-marker"
 							data-discussion-id={discussionId}
 							data-format={JSON.stringify(format)}
+							data-is-dynamo={isDynamo ? 'true' : undefined}
+							data-container-palette={containerPalette}
 							data-ignore="global-link-styling"
 							data-link-name="Comment count"
 							href={`${linkTo}#comments`}
@@ -270,7 +276,7 @@ export const Card = ({
 			format={format}
 			containerPalette={containerPalette}
 			containerType={containerType}
-			transparent={transparent}
+			isDynamo={isDynamo}
 		>
 			<CardLink
 				linkTo={linkTo}
@@ -319,6 +325,7 @@ export const Card = ({
 								}
 								byline={byline}
 								showByline={showByline}
+								isDynamo={isDynamo}
 							/>
 							{starRating !== undefined ? (
 								<StarRatingComponent rating={starRating} />
