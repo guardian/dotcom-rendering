@@ -19,7 +19,7 @@ test('rejects invalid AMP doc (to test validator)', async () => {
 		}),
 	);
 	expect(result.errors.length > 0).toBe(true);
-}, 10000);
+}, 10000); // AMP html validator can take longer than Jest's default async timeout of 5000ms
 
 // TODO failing because fixture still models blocks as nested array of elements
 // rather than a list of Block(s) - that are objects with 'id' and 'elements'
