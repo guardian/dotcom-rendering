@@ -30,28 +30,30 @@ export type Props = {
 	format: ArticleFormat;
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
-	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
+	/** Even with design !== Comment, a piece can be opinion */
+	showQuotes?: boolean;
 	byline?: string;
 	showByline?: boolean;
 	webPublicationDate?: string;
 	imageUrl?: string;
 	imagePosition?: ImagePositionType;
 	imagePositionOnMobile?: ImagePositionType;
-	imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
+	/** Size is ignored when position = 'top' because in that case the image flows based on width */
+	imageSize?: ImageSizeType;
 	trailText?: string;
 	avatar?: AvatarType;
 	showClock?: boolean;
 	mediaType?: MediaType;
 	mediaDuration?: number;
-	// Kicker
 	kickerText?: string;
 	showPulsingDot?: boolean;
+	/** Sometimes kickers and headlines are separated by a slash */
 	showSlash?: boolean;
 	starRating?: number;
 	minWidthInPixels?: number;
 	/** Used for Ophan tracking */
 	dataLinkName?: string;
-	// Labs
+	/** Only used on Labs cards */
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
