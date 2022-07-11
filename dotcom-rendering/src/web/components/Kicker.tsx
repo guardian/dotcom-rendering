@@ -4,11 +4,9 @@ import { PulsingDot } from './PulsingDot.importable';
 // Defines a prefix to be used with a headline (e.g. 'Live /')
 type Props = {
 	text: string;
-	palette: Palette;
+	color: string;
 	showPulsingDot?: boolean;
 	showSlash?: boolean;
-	inCard?: boolean; // True when headline is showing inside a card (used to handle coloured backgrounds)
-	isDynamo?: boolean;
 };
 
 const kickerStyles = (colour: string) => css`
@@ -25,32 +23,15 @@ const slashStyles = css`
 	}
 `;
 
-const decideColour = ({
-	palette,
-	inCard,
-	isDynamo,
-}: {
-	palette: Palette;
-	inCard?: boolean;
-	isDynamo?: boolean;
-}) => {
-	if (isDynamo) return palette.text.dynamoKicker;
-	if (inCard) return palette.text.cardKicker;
-	return palette.text.linkKicker;
-};
-
 export const Kicker = ({
 	text,
-	palette,
+	color,
 	showPulsingDot,
 	showSlash = true,
-	inCard,
-	isDynamo,
 }: Props) => {
-	const kickerColour = decideColour({ palette, inCard, isDynamo });
 	return (
-		<span css={kickerStyles(kickerColour)}>
-			{showPulsingDot && <PulsingDot colour={kickerColour} />}
+		<span css={kickerStyles(color)}>
+			{showPulsingDot && <PulsingDot colour={color} />}
 			<span css={showSlash && slashStyles}>{text}</span>
 		</span>
 	);

@@ -211,6 +211,9 @@ export const CardHeadline = ({
 	isDynamo,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
+	const kickerColour = isDynamo
+		? palette.text.dynamoKicker
+		: palette.text.cardKicker;
 	return (
 		<>
 			<h4
@@ -236,16 +239,12 @@ export const CardHeadline = ({
 					{kickerText && (
 						<Kicker
 							text={kickerText}
-							palette={palette}
+							color={kickerColour}
 							showPulsingDot={showPulsingDot}
 							showSlash={showSlash}
-							inCard={true}
-							isDynamo={isDynamo}
 						/>
 					)}
-					{showQuotes && (
-						<QuoteIcon colour={palette.text.cardKicker} />
-					)}
+					{showQuotes && <QuoteIcon colour={kickerColour} />}
 
 					<span
 						css={css`
