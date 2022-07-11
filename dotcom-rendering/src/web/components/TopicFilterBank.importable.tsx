@@ -96,9 +96,8 @@ export const TopicFilterBank = ({
 	return (
 		<div css={containerStyles}>
 			<div css={headlineStyles}>
-				Filters <span css={headlineAccentStyles}>BETA</span>
+				Filters <span css={headlineAccentStyles}>(BETA)</span>
 			</div>
-
 			<div css={topicStyles}>
 				{keyEvents?.length && (
 					<FilterButton
