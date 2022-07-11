@@ -195,9 +195,20 @@ export const Liveness = ({
 				if (data.mostRecentBlockId) {
 					setLatestBlockId(data.mostRecentBlockId);
 				}
+			} else if (
+				data.mostRecentBlockId &&
+				data.mostRecentBlockId !== latestBlockId
+			) {
+				setLatestBlockId(data.mostRecentBlockId);
 			}
 		},
-		[onFirstPage, topOfBlogVisible, numHiddenBlocks, enhanceTweetsSwitch],
+		[
+			onFirstPage,
+			topOfBlogVisible,
+			numHiddenBlocks,
+			enhanceTweetsSwitch,
+			latestBlockId,
+		],
 	);
 
 	/**
