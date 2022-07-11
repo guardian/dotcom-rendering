@@ -68,6 +68,7 @@ const adStyles = css`
 	.ad-slot-container--liveblog {
 		background-color: ${neutral[93]};
 		margin: 0 auto ${space[3]}px;
+		// this is centering the ad iframe as they are display: inline; elements by default
 		text-align: center;
 
 		.ad-slot {
@@ -93,6 +94,10 @@ const adStyles = css`
 	.ad-slot-container--article {
 		margin-top: 12px;
 		margin-bottom: 12px;
+		// this is centering the ad iframe as they are display: inline; elements by default
+		text-align: center;
+		/* Prevent merger with any nearby float left elements e.g. rich-links */
+		clear: left;
 
 		${from.tablet} {
 			background-color: ${neutral[97]};
@@ -103,16 +108,12 @@ const adStyles = css`
 			margin-right: auto;
 		}
 
-		.ad-slot--inline1, .ad-slot--top-above-nav {
-			text-align: center;
-
+		.ad-slot--inline1,
+		.ad-slot--top-above-nav {
 			${from.mobile} {
-				/* Prevent merger with any nearby float left elements e.g. rich-links */
-				clear: left;
 				width: 300px;
 			}
 			${from.tablet} {
-				background-color: ${neutral[97]};
 				width: auto;
 			}
 			&.ad-slot--fluid {
@@ -124,7 +125,11 @@ const adStyles = css`
 		.ad-slot--inline:not(.ad-slot--inline1) {
 			${from.mobile} {
 				/* Prevent merger with any nearby float left elements e.g. rich-links */
-				clear: left;
+				width: 300px;
+			}
+
+			${from.tablet} {
+				width: auto;
 			}
 
 			&.ad-slot--fluid {
@@ -132,19 +137,17 @@ const adStyles = css`
 			}
 		}
 
-
 		&.ad-slot--offset-right {
 			${from.desktop} {
 				float: right;
 				width: 300px;
 				margin-right: -318px;
 			}
-	
+
 			${from.wide} {
 				margin-right: -398px;
 			}
 		}
-
 	}
 `;
 
