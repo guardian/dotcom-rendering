@@ -19,6 +19,7 @@ export const cardsToHtml = ({
 		<ExtraCardsContainer
 			trails={cards}
 			containerPalette={containerPalette}
+			isShowMoreContainer={true}
 		/>,
 	);
 

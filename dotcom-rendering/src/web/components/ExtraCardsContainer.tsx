@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
@@ -7,6 +8,7 @@ type Props = {
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showImages?: boolean;
+	isShowMoreContainer?: boolean;
 };
 
 function isFirstInRow(cardIndex: number) {
@@ -34,14 +36,20 @@ function hasNoCardBelowIt(cardIndex: number, trailsLength: number) {
 	return cardIndex >= trailsLength - 4;
 }
 
+const topPaddingStyle = css`
+	padding-top: 10px;
+`;
+
 export const ExtraCardsContainer = ({
 	trails,
 	containerPalette,
 	showImages = false,
+	isShowMoreContainer = false,
 }: Props) => {
 	const percentage = '25%';
 	return (
 		<>
+			{isShowMoreContainer && <div css={topPaddingStyle} />}
 			<UL direction="row" padBottom={true} wrapCards={true}>
 				{trails.map((trail, index) => (
 					<LI
