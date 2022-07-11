@@ -96,8 +96,11 @@ const adStyles = css`
 		margin-bottom: 12px;
 		// this is centering the ad iframe as they are display: inline; elements by default
 		text-align: center;
+
 		/* Prevent merger with any nearby float left elements e.g. rich-links */
-		clear: left;
+		${until.desktop} {
+			clear: left;
+		}
 
 		${from.tablet} {
 			background-color: ${neutral[97]};
