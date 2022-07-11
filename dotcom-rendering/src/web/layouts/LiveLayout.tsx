@@ -320,6 +320,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const showTopicFilterBank =
 		CAPIArticle.config.switches.automaticFilters && showKeyEventsCarousel;
 
+	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
+
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -831,7 +833,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
 									{CAPIArticle.keyEvents.length &&
-									!showTopicFilterBank ? (
+									showToggle ? (
 										<Hide below="desktop">
 											<Island deferUntil="visible">
 												<FilterKeyEventsToggle
