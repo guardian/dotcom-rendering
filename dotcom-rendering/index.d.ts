@@ -100,6 +100,9 @@ type Palette = {
 		cardHeadline: Colour;
 		cardByline: Colour;
 		cardKicker: Colour;
+		dynamoHeadline: Colour;
+		dynamoKicker: Colour;
+		dynamoMeta: Colour;
 		linkKicker: Colour;
 		cardStandfirst: Colour;
 		cardFooter: Colour;
