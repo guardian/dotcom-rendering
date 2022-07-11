@@ -23,6 +23,7 @@ type Props = {
 	showByline?: boolean;
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 	linkTo?: string; // If provided, the headline is wrapped in a link
+	isDynamo?: boolean;
 };
 
 const fontStyles = ({
@@ -207,6 +208,7 @@ export const CardHeadline = ({
 	showByline,
 	showLine,
 	linkTo,
+	isDynamo,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	return (
@@ -238,6 +240,7 @@ export const CardHeadline = ({
 							showPulsingDot={showPulsingDot}
 							showSlash={showSlash}
 							inCard={true}
+							isDynamo={isDynamo}
 						/>
 					)}
 					{showQuotes && (
@@ -246,7 +249,9 @@ export const CardHeadline = ({
 
 					<span
 						css={css`
-							color: ${palette.text.cardHeadline};
+							color: ${isDynamo
+								? palette.text.dynamoHeadline
+								: palette.text.cardHeadline};
 						`}
 						className="show-underline"
 					>

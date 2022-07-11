@@ -1327,12 +1327,17 @@ export const decidePalette = (
 			articleLinkHover: textArticleLinkHover(format),
 			cardHeadline:
 				overrides?.text.cardHeadline ?? textCardHeadline(format),
+			dynamoHeadline:
+				overrides?.text.dynamoHeadline ?? textCardHeadline(format),
 			cardByline: overrides?.text.cardByline ?? textCardByline(format),
 			cardKicker: overrides?.text.cardKicker ?? textCardKicker(format),
+			dynamoKicker:
+				overrides?.text.dynamoKicker ?? textCardKicker(format),
 			linkKicker: textLinkKicker(format),
 			cardStandfirst:
 				overrides?.text.cardStandfirst ?? textCardStandfirst(format),
 			cardFooter: overrides?.text.cardFooter ?? textCardFooter(format),
+			dynamoMeta: overrides?.text.dynamoMeta ?? textCardFooter(format),
 			headlineByline: textHeadlineByline(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),

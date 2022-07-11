@@ -16,6 +16,7 @@ const cardStyles = (
 	format: ArticleFormat,
 	palette?: Palette,
 	containerType?: DCRContainerType,
+	isDynamo?: boolean,
 ) => {
 	const cardPalette = palette ?? decidePalette(format);
 	const baseCardStyles = css`
@@ -29,10 +30,13 @@ const cardStyles = (
 
 		/* Styling for top bar */
 		:before {
-			background-color: ${cardPalette.topBar.card};
+			background-color: ${isDynamo
+				? cardPalette.text.dynamoKicker
+				: cardPalette.topBar.card};
 			content: '';
 			height: ${containerType === 'dynamic/package' ? '4px' : '1px'};
 			z-index: 2;
+			width: ${isDynamo ? '25%' : '100%'};
 		}
 
 		:hover .image-overlay {
@@ -105,7 +109,7 @@ export const CardWrapper = ({
 	return (
 		<div
 			css={[
-				cardStyles(format, palette, containerType),
+				cardStyles(format, palette, containerType, isDynamo),
 				isDynamo &&
 					css`
 						background: transparent;

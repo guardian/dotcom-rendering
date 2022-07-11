@@ -8,6 +8,7 @@ type Props = {
 	showPulsingDot?: boolean;
 	showSlash?: boolean;
 	inCard?: boolean; // True when headline is showing inside a card (used to handle coloured backgrounds)
+	isDynamo?: boolean;
 };
 
 const kickerStyles = (colour: string) => css`
@@ -24,16 +25,29 @@ const slashStyles = css`
 	}
 `;
 
+const decideColour = ({
+	palette,
+	inCard,
+	isDynamo,
+}: {
+	palette: Palette;
+	inCard?: boolean;
+	isDynamo?: boolean;
+}) => {
+	if (isDynamo) return palette.text.dynamoKicker;
+	if (inCard) return palette.text.cardKicker;
+	return palette.text.linkKicker;
+};
+
 export const Kicker = ({
 	text,
 	palette,
 	showPulsingDot,
 	showSlash = true,
 	inCard,
+	isDynamo,
 }: Props) => {
-	const kickerColour = inCard
-		? palette.text.cardKicker
-		: palette.text.linkKicker;
+	const kickerColour = decideColour({ palette, inCard, isDynamo });
 	return (
 		<span css={kickerStyles(kickerColour)}>
 			{showPulsingDot && <PulsingDot colour={kickerColour} />}

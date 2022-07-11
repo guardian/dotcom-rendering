@@ -217,6 +217,7 @@ export const Card = ({
 							containerPalette={containerPalette}
 							webPublicationDate={webPublicationDate}
 							showClock={showClock}
+							isDynamo={isDynamo}
 						/>
 					) : undefined
 				}
@@ -229,6 +230,8 @@ export const Card = ({
 							data-name="comment-count-marker"
 							data-discussion-id={discussionId}
 							data-format={JSON.stringify(format)}
+							data-is-dynamo={isDynamo ? 'true' : undefined}
+							data-container-palette={containerPalette}
 							data-ignore="global-link-styling"
 							data-link-name="Comment count"
 							href={`${linkTo}#comments`}
@@ -319,6 +322,7 @@ export const Card = ({
 								}
 								byline={byline}
 								showByline={showByline}
+								isDynamo={isDynamo}
 							/>
 							{starRating !== undefined ? (
 								<StarRatingComponent rating={starRating} />
