@@ -51,14 +51,18 @@ describe('Show More button', function () {
 				cy.get(`[href="${firstCardUrl}"]`)
 					.invoke('data', 'link-name')
 					.then((dataLinkName) => {
-						cy.expect(dataLinkName).to.include(`card-@${firstCardCardIndex}`);
+						cy.expect(dataLinkName).to.include(
+							`card-@${firstCardCardIndex}`,
+						);
 					});
 			});
 			cy.get('@cardList').within(() => {
 				cy.get(`[href="${lastCardUrl}"]`)
 					.invoke('data', 'link-name')
 					.then((dataLinkName) => {
-						cy.expect(dataLinkName).to.include(`card-@${lastCardCardIndex}`);
+						cy.expect(dataLinkName).to.include(
+							`card-@${lastCardCardIndex}`,
+						);
 					});
 			});
 
@@ -69,7 +73,9 @@ describe('Show More button', function () {
 			cy.get(`[data-cy=${dataAttrValue}]`).click();
 			cy.get(`[data-show-more-placeholder=${collectionId}]`, {
 				timeout: 2000,
-			}).children('ul').should('have.length', 0);
+			})
+				.children('ul')
+				.should('have.length', 0);
 		});
 	});
 });
