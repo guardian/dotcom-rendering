@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { from, headline, space, textSans } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
 import { FilterButton } from './FilterButton.importable';
 
 type Props = {
@@ -81,8 +80,6 @@ export const TopicFilterBank = ({
 	filterKeyEvents = false,
 	id,
 }: Props) => {
-	const palette = decidePalette(format);
-
 	const selectedTopic = selectedTopics?.[0];
 	const topFiveTopics = availableTopics.slice(0, 5);
 
