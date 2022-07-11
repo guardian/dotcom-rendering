@@ -36,6 +36,11 @@ function hasNoCardBelowIt(cardIndex: number, trailsLength: number) {
 	return cardIndex >= trailsLength - 4;
 }
 
+function getDataLinkName(originalName: string, isShowMoreContainer: boolean) {
+	const prefix = isShowMoreContainer ? 'showmore | ' : '';
+	return `${prefix}${originalName}`;
+}
+
 const topPaddingStyle = css`
 	padding-top: 10px;
 `;
@@ -89,6 +94,10 @@ export const ExtraCardsContainer = ({
 							starRating={trail.starRating}
 							branding={trail.branding}
 							discussionId={trail.discussionId}
+							dataLinkName={getDataLinkName(
+								trail.dataLinkName,
+								isShowMoreContainer,
+							)}
 						/>
 					</LI>
 				))}
