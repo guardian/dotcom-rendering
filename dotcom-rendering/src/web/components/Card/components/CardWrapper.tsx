@@ -52,7 +52,9 @@ const cardStyles = (
 		/* a tag specific styles */
 		color: inherit;
 		text-decoration: none;
-		background-color: ${cardPalette.background.card};
+		background-color: ${isDynamo
+			? 'transparent'
+			: cardPalette.background.card};
 	`;
 
 	if (format.theme === ArticleSpecial.SpecialReport) {
@@ -107,15 +109,7 @@ export const CardWrapper = ({
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	return (
-		<div
-			css={[
-				cardStyles(format, palette, containerType, isDynamo),
-				isDynamo &&
-					css`
-						background: transparent;
-					`,
-			]}
-		>
+		<div css={cardStyles(format, palette, containerType, isDynamo)}>
 			{children}
 		</div>
 	);
