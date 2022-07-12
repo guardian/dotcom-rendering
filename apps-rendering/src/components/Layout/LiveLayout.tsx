@@ -23,12 +23,13 @@ import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Tags from 'components/Tags';
-import { getFormat } from 'item';
+import { getFormat, Item } from 'item';
 import type { DeadBlog, LiveBlog } from 'item';
 import { toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, onwardStyles } from 'styles';
+import { OptionKind } from '@guardian/types';
 
 // ----- Component ----- //
 
@@ -111,6 +112,10 @@ const keyEvents = (blocks: LiveBlock[]): KeyEvent[] =>
 		[],
 	);
 
+const showPinnedPost = (item: LiveBlog | DeadBlog) =>
+	item.pagedBlocks.currentPage.pageNumber === 1 &&
+	item.pinnedBlock.kind === OptionKind.Some;
+
 interface Props {
 	item: LiveBlog | DeadBlog;
 }
@@ -181,6 +186,8 @@ const LiveLayout: FC<Props> = ({ item }) => {
 						`}
 						id="liveblock-container"
 					>
+						{/* This is a placeholder for the pinned post */}
+						{showPinnedPost(item) && <></>}
 						{item.pagedBlocks.currentPage.pageNumber > 1 &&
 							pagination}
 						<LiveBlocks
