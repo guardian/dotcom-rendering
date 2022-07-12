@@ -22,7 +22,7 @@ const mediaStyles = css`
 `;
 
 const defaultStyles = css`
-	${textSans.xxsmall()}
+	${textSans.xsmall()}
 `;
 
 const Credit: FC<Props> = ({ format, credit }) =>
