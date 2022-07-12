@@ -11,7 +11,8 @@ import { NewsletterFrequency } from './NewsletterFrequency';
 import { SecureSignup } from './SecureSignup';
 
 type Props = {
-	newsletter: NewsletterData;
+	newsletter: Newsletter;
+	elementId: string;
 };
 
 const containerStyles = css`
@@ -43,7 +44,7 @@ const descriptionStyles = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-export const EmailSignup = ({ newsletter }: Props) => {
+export const EmailSignup = ({ newsletter, elementId }: Props) => {
 	const {
 		identityName,
 		name,

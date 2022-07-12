@@ -532,17 +532,6 @@ interface CAPINavType {
 	readerRevenueLinks: ReaderRevenuePositions;
 }
 
-type NewsletterData = {
-	listId: number;
-	identityName: string;
-	name: string;
-	description: string;
-	frequency: string;
-	successDescription: string;
-	theme: string;
-	group: string;
-};
-
 // WARNING: run `gen-schema` task if changing this to update the associated JSON
 // schema definition.
 interface CAPIArticleType {

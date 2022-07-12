@@ -286,8 +286,9 @@ interface MultiImageBlockElement {
 	role?: RoleType;
 }
 
-interface NewsletterSignupBlockElement extends NewsletterData {
+interface NewsletterSignupBlockElement {
 	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement';
+	newsletter: Newsletter;
 	elementId: string;
 }
 
@@ -775,4 +776,15 @@ type ResultBucketsType = {
 	id: string;
 	title: string;
 	description: string;
+};
+
+type Newsletter = {
+	listId: number;
+	identityName: string;
+	name: string;
+	description: string;
+	frequency: string;
+	successDescription: string;
+	theme: string;
+	group: string;
 };
