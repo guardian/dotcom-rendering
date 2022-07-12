@@ -95,7 +95,7 @@ const linkStyles = css`
 	background: ${brandAlt[400]};
 	border-radius: 16px;
 	box-sizing: border-box;
-	color: ${neutral[7]};
+	color: ${neutral[6]};
 	float: left;
 	${textSans.small()};
 	font-weight: 700;
