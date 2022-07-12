@@ -5,35 +5,38 @@ import { css } from '@emotion/react';
 import { remSpace } from '@guardian/source-foundations';
 import { brandAltText, neutral, text } from '@guardian/source-foundations';
 import { textSans } from '@guardian/source-foundations';
+import { SvgCamera } from '@guardian/source-react-components';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import type { FC, ReactNode } from 'react';
-import { fill } from '../editorialPalette';
 import { darkModeCss } from '../lib';
 
 // ----- Sub-Components ----- //
 
-interface TriangleProps {
+interface CameraProps {
 	format: ArticleFormat;
 	supportsDarkMode: boolean;
 }
 
-const triangleStyles = (
-	format: ArticleFormat,
-	supportsDarkMode: boolean,
-): SerializedStyles => css`
-	fill: ${fill.icon(format)};
-	height: 0.8em;
+const cameraStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+	display: inline-block;
+	height: 1.2rem;
+	vertical-align: middle;
 	padding-right: ${remSpace[1]};
 
+	svg {
+		height: 100%;
+		fill: ${text.supporting};
+	}
+
 	${darkModeCss(supportsDarkMode)`
-        fill: ${fill.iconDark(format)};
+        fill: ${brandAltText.supporting};
     `}
 `;
 
-const Triangle: FC<TriangleProps> = ({ format, supportsDarkMode }) => {
+const Camera: FC<CameraProps> = ({ format, supportsDarkMode }) => {
 	switch (format.design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -41,13 +44,9 @@ const Triangle: FC<TriangleProps> = ({ format, supportsDarkMode }) => {
 			return null;
 		default:
 			return (
-				<svg
-					css={triangleStyles(format, supportsDarkMode)}
-					viewBox="0 0 10 9"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<polygon points="0,9 5,0 10,9" />
-				</svg>
+				<span css={cameraStyles(supportsDarkMode)}>
+					<SvgCamera />
+				</span>
 			);
 	}
 };
@@ -97,7 +96,7 @@ const FigCaption: FC<Props> = ({ format, supportsDarkMode, children }) => {
 		case OptionKind.Some:
 			return (
 				<figcaption css={getStyles(format, supportsDarkMode)}>
-					<Triangle
+					<Camera
 						format={format}
 						supportsDarkMode={supportsDarkMode}
 					/>
