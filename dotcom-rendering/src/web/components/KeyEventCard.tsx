@@ -11,11 +11,11 @@ interface Props {
 	isSummary: boolean;
 	filterKeyEvents: boolean;
 	format: ArticleFormat;
+	cardPosition?: string;
 }
 
 const linkStyles = (palette: Palette) => css`
 	text-decoration: none;
-	line-height: 1.35;
 
 	&::before {
 		content: '';
@@ -57,7 +57,7 @@ const summaryStyles = (palette: Palette) => css`
 
 const listItemStyles = (palette: Palette) => css`
 	position: relative;
-	padding-bottom: ${space[5]}px;
+	padding-bottom: ${space[3]}px;
 	padding-top: ${space[3]}px;
 	padding-right: ${space[3]}px;
 	background-color: ${palette.background.keyEvent};
@@ -67,6 +67,7 @@ const listItemStyles = (palette: Palette) => css`
 	scroll-snap-align: start;
 
 	${from.desktop} {
+		padding-bottom: ${space[5]}px;
 		background-color: ${palette.background.keyEventFromDesktop};
 		width: 200px;
 		padding-right: ${space[5]}px;
@@ -79,7 +80,7 @@ const listItemStyles = (palette: Palette) => css`
 		border-top: 1px dotted ${palette.border.keyEvent};
 		left: 0;
 		right: 0;
-		top: 18px;
+		top: 19px;
 	}
 
 	&:last-child::before {
@@ -105,6 +106,7 @@ export const KeyEventCard = ({
 	title,
 	filterKeyEvents,
 	format,
+	cardPosition,
 }: Props) => {
 	const palette = decidePalette(format);
 	const url = `?filterKeyEvents=${filterKeyEvents}&page=with:block-${id}#block-${id}`;
@@ -115,7 +117,7 @@ export const KeyEventCard = ({
 				priority="secondary"
 				css={[linkStyles(palette), isSummary && summaryStyles(palette)]}
 				href={url}
-				data-link-name="key event card"
+				data-link-name={`key event card | ${cardPosition}`}
 			>
 				<time
 					dateTime={date.toISOString()}
@@ -133,7 +135,7 @@ export const KeyEventCard = ({
 				>
 					{timeAgo(date.getTime())}
 				</time>
-				<span css={textStyles(palette)}>{title}</span>
+				<div css={textStyles(palette)}>{title}</div>
 			</Link>
 		</li>
 	);

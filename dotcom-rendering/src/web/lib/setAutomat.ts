@@ -4,7 +4,7 @@ import React from 'react';
 
 let hasAutomatBeenSet = false;
 
-export const setAutomat = () => {
+export const setAutomat = (): void => {
 	if (!hasAutomatBeenSet) {
 		window.guardian.automat = {
 			emotionReact,

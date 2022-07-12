@@ -22,25 +22,36 @@ try {
  * @param {'PROD' | 'CODE' | undefined} stage the environment code is executing in
  * @returns {string}
  */
-const decideAssetOrigin = (stage: string | undefined): string => {
+export const decideAssetOrigin = (
+	stage: string | undefined,
+	isDev: boolean,
+): string => {
 	switch (stage?.toUpperCase()) {
 		case 'PROD':
 			return 'https://assets.guim.co.uk/';
 		case 'CODE':
 			return 'https://assets-code.guim.co.uk/';
-		default:
-			return '/';
+		default: {
+			if (isDev) {
+				// Use absolute asset paths in development mode
+				// This is so paths are correct when treated as relative to Frontend
+				return 'http://localhost:3030/';
+			} else {
+				return '/';
+			}
+		}
 	}
 };
-export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE);
+
+const isDev = process.env.NODE_ENV === 'development';
+
+export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE, isDev);
 
 export const getScriptArrayFromFile = (
 	file: `${string}.js`,
 ): { src: string; legacy?: boolean }[] => {
 	if (!file.endsWith('.js'))
 		throw new Error('Invalid filename: extension must be .js');
-
-	const isDev = process.env.NODE_ENV === 'development';
 
 	const filename = isDev ? file : manifest[file];
 	const legacyFilename = isDev

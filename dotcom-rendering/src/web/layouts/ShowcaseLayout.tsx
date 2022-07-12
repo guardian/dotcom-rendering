@@ -11,10 +11,7 @@ import {
 	neutral,
 	until,
 } from '@guardian/source-foundations';
-import {
-	Lines,
-	StraightLines,
-} from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
@@ -24,6 +21,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
+import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
@@ -46,11 +44,7 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
-import {
-	decideLineCount,
-	decideLineEffect,
-	getCurrentPillar,
-} from '../lib/layoutHelpers';
+import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
@@ -209,11 +203,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-export const ShowcaseLayout = ({
-	CAPIArticle,
-	NAV,
-	format,
-}: Props): JSX.Element => {
+export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPIArticle;
@@ -278,7 +268,7 @@ export const ShowcaseLayout = ({
 								element="header"
 							>
 								<Header
-									edition={CAPIArticle.editionId}
+									editionId={CAPIArticle.editionId}
 									idUrl={CAPIArticle.config.idUrl}
 									mmaUrl={CAPIArticle.config.mmaUrl}
 									supporterCTA={
@@ -318,7 +308,7 @@ export const ShowcaseLayout = ({
 										CAPIArticle.nav.readerRevenueLinks
 											.header.subscribe
 									}
-									edition={CAPIArticle.editionId}
+									editionId={CAPIArticle.editionId}
 								/>
 							</ElementContainer>
 
@@ -391,7 +381,7 @@ export const ShowcaseLayout = ({
 										CAPIArticle.nav.readerRevenueLinks
 											.header.subscribe
 									}
-									edition={CAPIArticle.editionId}
+									editionId={CAPIArticle.editionId}
 								/>
 							</ElementContainer>
 						</Stuck>
@@ -481,16 +471,7 @@ export const ShowcaseLayout = ({
 						<GridItem area="lines">
 							<div css={maxWidth}>
 								<div css={stretchLines}>
-									<Lines
-										cssOverrides={css`
-											display: block;
-										`}
-										count={decideLineCount(format.design)}
-										effect={decideLineEffect(
-											format.design,
-											format.theme,
-										)}
-									/>
+									<DecideLines format={format} />
 								</div>
 							</div>
 						</GridItem>
@@ -551,7 +532,6 @@ export const ShowcaseLayout = ({
 									isPreview={CAPIArticle.config.isPreview}
 									idUrl={CAPIArticle.config.idUrl || ''}
 									isDev={!!CAPIArticle.config.isDev}
-									abTests={CAPIArticle.config.abTests}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
@@ -698,7 +678,7 @@ export const ShowcaseLayout = ({
 						tags={CAPIArticle.tags}
 						format={format}
 						pillar={format.theme}
-						edition={CAPIArticle.editionId}
+						editionId={CAPIArticle.editionId}
 						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
 				</Island>
@@ -786,7 +766,7 @@ export const ShowcaseLayout = ({
 					pillar={format.theme}
 					pillars={NAV.pillars}
 					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					edition={CAPIArticle.editionId}
+					editionId={CAPIArticle.editionId}
 					contributionsServiceUrl={
 						CAPIArticle.contributionsServiceUrl
 					}

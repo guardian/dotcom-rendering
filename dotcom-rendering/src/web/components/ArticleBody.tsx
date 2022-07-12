@@ -30,7 +30,11 @@ type Props = {
 	isSensitive: boolean;
 	isDev: boolean;
 	onFirstPage?: boolean;
-	abTests?: ServerSideTests;
+	keyEvents?: Block[];
+	filterKeyEvents?: boolean;
+	showKeyEventsCarousel?: boolean;
+	availableTopics?: Topic[];
+	selectedTopics?: Topic[];
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -111,7 +115,11 @@ export const ArticleBody = ({
 	isSensitive,
 	isDev,
 	onFirstPage,
-	abTests,
+	keyEvents,
+	filterKeyEvents,
+	showKeyEventsCarousel,
+	availableTopics,
+	selectedTopics,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
@@ -157,6 +165,11 @@ export const ArticleBody = ({
 						isPaidContent={isPaidContent}
 						contributionsServiceUrl={contributionsServiceUrl}
 						onFirstPage={onFirstPage}
+						keyEvents={keyEvents}
+						filterKeyEvents={filterKeyEvents}
+						isKeyEventsCarousel={showKeyEventsCarousel}
+						availableTopics={availableTopics}
+						selectedTopics={selectedTopics}
 					/>
 				</div>
 			</>
@@ -193,7 +206,6 @@ export const ArticleBody = ({
 				isDev={isDev}
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
-				abTests={abTests}
 			/>
 		</div>
 	);

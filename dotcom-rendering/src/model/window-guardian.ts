@@ -6,7 +6,7 @@ export interface WindowGuardianConfig {
 	page: {
 		dcrCouldRender: boolean;
 		contentType: string;
-		edition: Edition;
+		edition: EditionId;
 		revisionNumber: string;
 		dcrSentryDsn: string;
 		sentryHost: string;
@@ -17,6 +17,7 @@ export interface WindowGuardianConfig {
 		showRelatedContent: boolean;
 		ajaxUrl: string;
 		shouldHideReaderRevenue: boolean;
+		googleRecaptchaSiteKey?: string;
 	} & ConfigType;
 	libs: {
 		googletag: string;
@@ -37,7 +38,7 @@ interface WindowGuardianFrontConfig {
 	page: {
 		dcrCouldRender: boolean;
 		contentType: string;
-		edition: Edition;
+		edition: EditionId;
 		revisionNumber: string;
 		dcrSentryDsn: string;
 		sentryHost: string;

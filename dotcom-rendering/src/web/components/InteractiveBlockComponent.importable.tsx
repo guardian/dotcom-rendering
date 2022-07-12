@@ -252,6 +252,7 @@ export const InteractiveBlockComponent = ({
 			iframe.style.width = '100%';
 			iframe.style.border = 'none';
 			iframe.height = decideHeight(role).toString();
+			iframe.title = caption ?? alt ?? 'Interactive Content';
 			if (url.startsWith('http:')) {
 				iframe.src = url.replace('http:', 'https:');
 			} else {

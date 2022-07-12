@@ -12,10 +12,7 @@ import {
 	neutral,
 	until,
 } from '@guardian/source-foundations';
-import {
-	Lines,
-	StraightLines,
-} from '@guardian/source-react-components-development-kitchen';
+import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import React from 'react';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
@@ -25,6 +22,8 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
+import { ContainerLayout } from '../components/ContainerLayout';
+import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
@@ -38,17 +37,15 @@ import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
-import {
-	decideLineCount,
-	decideLineEffect,
-	getCurrentPillar,
-} from '../lib/layoutHelpers';
+import { getCurrentPillar } from '../lib/layoutHelpers';
 import {
 	interactiveGlobalStyles,
 	interactiveLegacyClasses,
@@ -181,19 +178,6 @@ const stretchLines = css`
 	}
 `;
 
-const stretchMetaLines = css`
-	margin: 0 -10px;
-	${from.mobileLandscape} {
-		margin: 0 -20px;
-	}
-	${from.tablet} {
-		margin-right: -40px;
-	}
-	${from.leftCol} {
-		margin-right: -20px;
-	}
-`;
-
 const starWrapper = css`
 	margin-bottom: 18px;
 	margin-top: 6px;
@@ -247,6 +231,8 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const palette = decidePalette(format);
 
+	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
+
 	return (
 		<>
 			{CAPIArticle.isLegacyInteractive && (
@@ -281,7 +267,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							element="header"
 						>
 							<Header
-								edition={CAPIArticle.editionId}
+								editionId={CAPIArticle.editionId}
 								idUrl={CAPIArticle.config.idUrl}
 								mmaUrl={CAPIArticle.config.mmaUrl}
 								supporterCTA={
@@ -296,7 +282,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									CAPIArticle.config.switches.remoteHeader
 								}
 								contributionsServiceUrl={
-									CAPIArticle.contributionsServiceUrl
+									contributionsServiceUrl
 								}
 							/>
 						</ElementContainer>
@@ -320,7 +306,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						subscribeUrl={
 							CAPIArticle.nav.readerRevenueLinks.header.subscribe
 						}
-						edition={CAPIArticle.editionId}
+						editionId={CAPIArticle.editionId}
 					/>
 				</ElementContainer>
 
@@ -466,18 +452,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							<GridItem area="lines">
 								<div css={maxWidth}>
 									<div css={stretchLines}>
-										<Lines
-											cssOverrides={css`
-												display: block;
-											`}
-											count={decideLineCount(
-												format.design,
-											)}
-											effect={decideLineEffect(
-												format.design,
-												format.theme,
-											)}
-										/>
+										<DecideLines format={format} />
 									</div>
 								</div>
 							</GridItem>
@@ -537,7 +512,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											!!CAPIArticle.config.isPaidContent
 										}
 										contributionsServiceUrl={
-											CAPIArticle.contributionsServiceUrl
+											contributionsServiceUrl
 										}
 										contentType={CAPIArticle.contentType}
 										sectionName={
@@ -546,39 +521,82 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										isPreview={CAPIArticle.config.isPreview}
 										idUrl={CAPIArticle.config.idUrl || ''}
 										isDev={!!CAPIArticle.config.isDev}
-										abTests={CAPIArticle.config.abTests}
-									/>
-
-									{/* <StraightLines data-print-layout="hide" count={4} /> */}
-									<div css={stretchMetaLines}>
-										<StraightLines
-											count={4}
-											data-print-layout="hide"
-											cssOverrides={css`
-												display: block;
-											`}
-										/>
-									</div>
-									<SubMeta
-										format={format}
-										subMetaKeywordLinks={
-											CAPIArticle.subMetaKeywordLinks
-										}
-										subMetaSectionLinks={
-											CAPIArticle.subMetaSectionLinks
-										}
-										pageId={CAPIArticle.pageId}
-										webUrl={CAPIArticle.webURL}
-										webTitle={CAPIArticle.webTitle}
-										showBottomSocialButtons={
-											CAPIArticle.showBottomSocialButtons
-										}
-										badge={CAPIArticle.badge}
 									/>
 								</ArticleContainer>
 							</GridItem>
 						</InteractiveGrid>
 					</div>
+				</ElementContainer>
+
+				<ContainerLayout
+					sideBorders={true}
+					stretchRight={false}
+					backgroundColour={palette.background.article}
+					borderColour={palette.border.article}
+					padContent={false}
+				>
+					<div
+						css={css`
+							max-width: 620px;
+						`}
+					>
+						<Island clientOnly={true}>
+							<SlotBodyEnd
+								contentType={CAPIArticle.contentType}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								idApiUrl={CAPIArticle.config.idApiUrl}
+								isMinuteArticle={
+									CAPIArticle.pageType.isMinuteArticle
+								}
+								isPaidContent={
+									CAPIArticle.pageType.isPaidContent
+								}
+								keywordsId={CAPIArticle.config.keywordIds}
+								pageId={CAPIArticle.pageId}
+								sectionId={CAPIArticle.config.section}
+								sectionName={CAPIArticle.sectionName}
+								shouldHideReaderRevenue={
+									CAPIArticle.shouldHideReaderRevenue
+								}
+								stage={CAPIArticle.config.stage}
+								tags={CAPIArticle.tags}
+							/>
+						</Island>
+					</div>
+				</ContainerLayout>
+
+				<ElementContainer
+					showTopBorder={false}
+					padded={false}
+					backgroundColour={palette.background.article}
+				>
+					<StraightLines
+						count={4}
+						data-print-layout="hide"
+						cssOverrides={css`
+							display: block;
+						`}
+					/>
+				</ElementContainer>
+
+				<ElementContainer
+					showTopBorder={false}
+					backgroundColour={palette.background.article}
+				>
+					<SubMeta
+						format={format}
+						subMetaKeywordLinks={CAPIArticle.subMetaKeywordLinks}
+						subMetaSectionLinks={CAPIArticle.subMetaSectionLinks}
+						pageId={CAPIArticle.pageId}
+						webUrl={CAPIArticle.webURL}
+						webTitle={CAPIArticle.webTitle}
+						showBottomSocialButtons={
+							CAPIArticle.showBottomSocialButtons
+						}
+						badge={CAPIArticle.badge}
+					/>
 				</ElementContainer>
 
 				<ElementContainer
@@ -618,7 +636,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						tags={CAPIArticle.tags}
 						format={format}
 						pillar={format.theme}
-						edition={CAPIArticle.editionId}
+						editionId={CAPIArticle.editionId}
 						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
 				</Island>
@@ -716,7 +734,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					pillar={format.theme}
 					pillars={NAV.pillars}
 					urls={CAPIArticle.nav.readerRevenueLinks.header}
-					edition={CAPIArticle.editionId}
+					editionId={CAPIArticle.editionId}
 					contributionsServiceUrl={
 						CAPIArticle.contributionsServiceUrl
 					}
@@ -727,9 +745,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
 						contentType={CAPIArticle.contentType}
-						contributionsServiceUrl={
-							CAPIArticle.contributionsServiceUrl
-						}
+						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPIArticle.config.idApiUrl}
 						isMinuteArticle={CAPIArticle.pageType.isMinuteArticle}
 						isPaidContent={CAPIArticle.pageType.isPaidContent}

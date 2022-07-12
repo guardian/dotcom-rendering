@@ -117,7 +117,7 @@ const buttonWrapperStyles = css`
 	pointer-events: all;
 `;
 
-// Normally forms are in Modals, but here they are embeded into the page
+// Normally forms are in Modals, but here they are embedded into the page
 // we therefore need to only focus on expandFormButtonRef if the form has been closed
 // after it was opened
 let hasFormBeenOpened = true;
@@ -260,7 +260,7 @@ export const CalloutBlockComponent = ({
 		}
 	}, [isExpanded, expandFormButtonRef]);
 
-	// Normally forms are in Modals, but here they are embeded into the page
+	// Normally forms are in Modals, but here they are embedded into the page
 	// we therefore need to only focus on expandFormButtonRef if the form has been closed
 	// after it was opened
 	useEffect(() => {

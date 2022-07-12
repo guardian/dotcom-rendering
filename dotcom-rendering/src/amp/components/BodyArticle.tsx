@@ -143,7 +143,7 @@ export const Body: React.FC<{
 			{elementsWithoutAds.map((item, i) => {
 				if (slotIndexes.includes(i)) {
 					return (
-						<>
+						<React.Fragment key={item.key}>
 							{item}
 							<div
 								id={`ad-${i + 1}`}
@@ -151,7 +151,7 @@ export const Body: React.FC<{
 								css={adStyle}
 							>
 								<RegionalAd
-									edition={data.editionId}
+									editionId={data.editionId}
 									section={data.sectionName || ''}
 									contentType={adInfo.contentType}
 									config={adConfig}
@@ -161,7 +161,7 @@ export const Body: React.FC<{
 									adTargeting={adTargeting}
 								/>
 							</div>
-						</>
+						</React.Fragment>
 					);
 				}
 				return item;
@@ -194,7 +194,7 @@ export const Body: React.FC<{
 			{epic}
 
 			<StickyAd
-				edition={data.editionId}
+				editionId={data.editionId}
 				section={data.sectionName || ''}
 				contentType={adInfo.contentType}
 				config={adConfig}

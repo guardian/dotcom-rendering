@@ -2,31 +2,25 @@ const transitionRules = require('./eslint-guardian');
 
 /** TODO: Review these */
 const rulesToReview = {
-	'import/no-extraneous-dependencies': 'warn', // 683 problems
 	'consistent-return': 'warn', // 51 problems
 	'default-case': 'warn', // 50 problems
 	'react/no-danger': 'warn', // 48 problems
-	'no-underscore-dangle': 'warn', // 45 problems
 	'react/no-array-index-key': 'warn', // 34 problems
 	'react/button-has-type': 'warn', // 23 problems
 	'@typescript-eslint/require-await': 'warn', // 22 problems
 	'react/jsx-curly-newline': 'warn', // 8 problems
 	'no-case-declarations': 'warn', // 7 problems
-	'no-useless-escape': 'warn', // 6 problems
 };
 
 const rulesToRemove = {
-	'@typescript-eslint/explicit-module-boundary-types': 'off',
-	'@typescript-eslint/no-unsafe-call': 'off',
-	'@typescript-eslint/no-unsafe-assignment': 'off',
-	'@typescript-eslint/no-unsafe-return': 'off',
-	'@typescript-eslint/ban-ts-comment': 'off',
-	'@typescript-eslint/restrict-template-expressions': 'off',
-	'no-console': 'off',
-	'no-shadow': 'off',
+	'@typescript-eslint/no-unsafe-call': 'warn',
+	'@typescript-eslint/no-unsafe-assignment': 'warn',
+	'@typescript-eslint/no-unsafe-return': 'warn',
+	'@typescript-eslint/ban-ts-comment': 'warn',
+	'@typescript-eslint/restrict-template-expressions': 'warn',
 
-	'@typescript-eslint/explicit-function-return-type': 'off',
-	'@typescript-eslint/no-inferrable-types': 'off',
+	'no-console': 'warn',
+	'no-shadow': 'warn',
 };
 
 module.exports = {
@@ -53,12 +47,10 @@ module.exports = {
 		'@typescript-eslint/tslint',
 		'react',
 		'react-hooks',
-		'dcr',
 		'import',
 		'jsx-a11y',
 	],
 	rules: {
-    
 		// React & Hooks
 		'react/jsx-indent': [2, 'tab'],
 		'react/jsx-indent-props': [2, 'tab'],
@@ -74,6 +66,13 @@ module.exports = {
 		'no-param-reassign': 'error',
 		'react/jsx-no-target-blank': 'error',
 		'react/jsx-one-expression-per-line': 'off',
+		'no-useless-escape': 'error',
+		'no-underscore-dangle': ['warn', { allow: ['_type'] }],
+		'import/no-extraneous-dependencies': [
+			'error',
+			// https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md#options
+			{ packageDir: ['..', '.'] },
+		],
 
 		...rulesToReview,
 		...rulesToRemove,
@@ -91,6 +90,27 @@ module.exports = {
 				'@typescript-eslint/no-var-requires': 'off',
 				'@typescript-eslint/no-unsafe-member-access': 'off',
 				'@typescript-eslint/no-misused-promises': 'off',
+			},
+		},
+		{
+			files: ['**/**.ts'],
+			rules: {
+				'@typescript-eslint/explicit-module-boundary-types': 'error',
+			},
+		},
+		{
+			files: ['**/**.tsx'],
+			rules: {
+				'@typescript-eslint/ban-types': [
+					'warn',
+					{
+						types: {
+							'JSX.Element': 'Prefer type inference',
+							'EmotionJSX.Element': 'Prefer type inference',
+						},
+						extendDefaults: true,
+					},
+				],
 			},
 		},
 		{

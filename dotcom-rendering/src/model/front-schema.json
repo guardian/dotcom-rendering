@@ -285,7 +285,7 @@
                                                                 "type": "object",
                                                                 "properties": {
                                                                     "id": {
-                                                                        "$ref": "#/definitions/Edition"
+                                                                        "$ref": "#/definitions/EditionId"
                                                                     }
                                                                 },
                                                                 "required": [
@@ -522,7 +522,18 @@
                                             ]
                                         },
                                         "enriched": {
-                                            "$ref": "#/definitions/Record<string,unknown>"
+                                            "type": "object",
+                                            "properties": {
+                                                "embedHtml": {
+                                                    "type": "string"
+                                                },
+                                                "embedCss": {
+                                                    "type": "string"
+                                                },
+                                                "embedJs": {
+                                                    "type": "string"
+                                                }
+                                            }
                                         },
                                         "supportingContent": {
                                             "type": "array",
@@ -855,7 +866,7 @@
                                                                 "type": "object",
                                                                 "properties": {
                                                                     "id": {
-                                                                        "$ref": "#/definitions/Edition"
+                                                                        "$ref": "#/definitions/EditionId"
                                                                     }
                                                                 },
                                                                 "required": [
@@ -1092,7 +1103,18 @@
                                             ]
                                         },
                                         "enriched": {
-                                            "$ref": "#/definitions/Record<string,unknown>"
+                                            "type": "object",
+                                            "properties": {
+                                                "embedHtml": {
+                                                    "type": "string"
+                                                },
+                                                "embedCss": {
+                                                    "type": "string"
+                                                },
+                                                "embedJs": {
+                                                    "type": "string"
+                                                }
+                                            }
                                         },
                                         "supportingContent": {
                                             "type": "array",
@@ -1425,7 +1447,7 @@
                                                                 "type": "object",
                                                                 "properties": {
                                                                     "id": {
-                                                                        "$ref": "#/definitions/Edition"
+                                                                        "$ref": "#/definitions/EditionId"
                                                                     }
                                                                 },
                                                                 "required": [
@@ -1662,7 +1684,18 @@
                                             ]
                                         },
                                         "enriched": {
-                                            "$ref": "#/definitions/Record<string,unknown>"
+                                            "type": "object",
+                                            "properties": {
+                                                "embedHtml": {
+                                                    "type": "string"
+                                                },
+                                                "embedCss": {
+                                                    "type": "string"
+                                                },
+                                                "embedJs": {
+                                                    "type": "string"
+                                                }
+                                            }
                                         },
                                         "supportingContent": {
                                             "type": "array",
@@ -1911,7 +1944,7 @@
             "$ref": "#/definitions/CAPINavType"
         },
         "editionId": {
-            "$ref": "#/definitions/Edition"
+            "$ref": "#/definitions/EditionId"
         },
         "editionLongForm": {
             "type": "string"
@@ -2333,7 +2366,7 @@
             ],
             "type": "string"
         },
-        "Edition": {
+        "EditionId": {
             "enum": [
                 "AU",
                 "INT",

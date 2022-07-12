@@ -121,7 +121,7 @@ export const Body: React.FC<{
 						pillar={pillar}
 						blocks={data.blocks}
 						// stuff for ads
-						edition={data.editionId}
+						editionId={data.editionId}
 						section={data.sectionName}
 						contentType={data.contentType}
 						switches={config.switches}

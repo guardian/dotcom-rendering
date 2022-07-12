@@ -20,6 +20,10 @@ type Props = {
 
 const fontStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
+		case 'huge':
+			return css`
+				${headline.small()};
+			`;
 		case 'large':
 			return css`
 				${headline.xsmall()};
@@ -78,7 +82,7 @@ export const LinkHeadline = ({
 			{kickerText && (
 				<Kicker
 					text={kickerText}
-					palette={palette}
+					color={palette.text.linkKicker}
 					showPulsingDot={showPulsingDot}
 					showSlash={showSlash}
 				/>

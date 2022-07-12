@@ -31,6 +31,8 @@ type Props = {
  * @param {ArticleFormat} props.format - The format model for the article
  * */
 export const Article = ({ CAPIArticle, NAV, format }: Props) => {
+	const showKeyEventsCarousel = CAPIArticle.config.switches.keyEventsCarousel;
+
 	return (
 		<StrictMode>
 			<Global
@@ -50,7 +52,14 @@ export const Article = ({ CAPIArticle, NAV, format }: Props) => {
 			<SkipTo id="navigation" label="Skip to navigation" />
 			{(format.design === ArticleDesign.LiveBlog ||
 				format.design === ArticleDesign.DeadBlog) && (
-				<SkipTo id="keyevents" label="Skip to key events" />
+				<SkipTo
+					id={
+						showKeyEventsCarousel
+							? 'key-events-carousel'
+							: 'keyevents'
+					}
+					label="Skip to key events"
+				/>
 			)}
 			<Island clientOnly={true} deferUntil="idle">
 				<AlreadyVisited />

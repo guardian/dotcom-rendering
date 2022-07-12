@@ -14,10 +14,12 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import type { Item } from 'item';
+import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
 import { getThemeStyles } from 'themeStyles';
+import ImmersiveSeries from './ImmersiveSeries';
 
 // ----- Component ----- //
 
@@ -149,6 +151,12 @@ const Series: FC<Props> = ({ item }: Props) => {
 	// See issue here: https://github.com/guardian/dotcom-rendering/issues/4760
 	if (item.design === ArticleDesign.Interview) {
 		return null;
+	}
+
+	if (item.display === ArticleDisplay.Immersive) {
+		return (
+			<ImmersiveSeries series={item.series} format={getFormat(item)} />
+		);
 	}
 
 	return maybeRender(item.series, (series) => (

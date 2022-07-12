@@ -2,8 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import Img from '@guardian/common-rendering/src/components/img';
-import type { Sizes } from '@guardian/common-rendering/src/sizes';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { brandAltBackground, from } from '@guardian/source-foundations';
@@ -12,7 +10,9 @@ import HeaderImageCaption, {
 	captionId,
 } from 'components/editions/headerImageCaption';
 import StarRating from 'components/editions/starRating';
+import Img from 'components/ImgAlt';
 import type { Image } from 'image';
+import type { Sizes } from 'image/sizes';
 import type { Item } from 'item';
 import { isPicture as checkIfPicture, getFormat } from 'item';
 import { maybeRender } from 'lib';

@@ -190,6 +190,7 @@ const capiEndpoint = (articleId: string, key: string): string => {
 		'internalShortId',
 		'liveBloggingNow',
 		'lastModified',
+		'isInappropriateForSponsorship',
 	];
 
 	const params = new URLSearchParams({

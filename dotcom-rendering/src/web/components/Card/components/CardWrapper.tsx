@@ -1,17 +1,23 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { neutral } from '@guardian/source-foundations';
+import { from, neutral } from '@guardian/source-foundations';
 import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
 	containerPalette?: DCRContainerPalette;
+	containerType?: DCRContainerType;
+	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
+	isDynamo?: true;
 };
 
-const cardStyles = (format: ArticleFormat, palette?: Palette) => {
-	const cardPalette = palette || decidePalette(format);
+const cardStyles = (
+	format: ArticleFormat,
+	palette: Palette,
+	isDynamo?: true,
+) => {
 	const baseCardStyles = css`
 		display: flex;
 		flex-direction: column;
@@ -20,14 +26,6 @@ const cardStyles = (format: ArticleFormat, palette?: Palette) => {
 		/* We absolutely position the faux link
 		so this is required here */
 		position: relative;
-
-		/* Styling for top bar */
-		:before {
-			background-color: ${cardPalette.topBar.card};
-			content: '';
-			height: 1px;
-			z-index: 2;
-		}
 
 		:hover .image-overlay {
 			position: absolute;
@@ -42,7 +40,7 @@ const cardStyles = (format: ArticleFormat, palette?: Palette) => {
 		/* a tag specific styles */
 		color: inherit;
 		text-decoration: none;
-		background-color: ${cardPalette.background.card};
+		background-color: ${isDynamo ? 'transparent' : palette.background.card};
 	`;
 
 	if (format.theme === ArticleSpecial.SpecialReport) {
@@ -88,7 +86,59 @@ const cardStyles = (format: ArticleFormat, palette?: Palette) => {
 	}
 };
 
-export const CardWrapper = ({ children, format, containerPalette }: Props) => {
+const topBarStyles = ({
+	isDynamo,
+	palette,
+	containerType,
+}: {
+	isDynamo?: true;
+	palette: Palette;
+	containerType?: DCRContainerType;
+}) => {
+	/* Styling for top bar */
+	const baseStyles = css`
+		background-color: ${isDynamo
+			? palette.text.dynamoKicker
+			: palette.topBar.card};
+		content: '';
+		height: ${containerType === 'dynamic/package' ? '4px' : '1px'};
+		z-index: 2;
+		width: 100%;
+	`;
+
+	if (isDynamo) {
+		return css`
+			:before {
+				${baseStyles}
+				${from.phablet} {
+					width: 25%;
+				}
+			}
+		`;
+	}
+	return css`
+		:before {
+			${baseStyles}
+		}
+	`;
+};
+
+export const CardWrapper = ({
+	children,
+	format,
+	containerPalette,
+	containerType,
+	isDynamo,
+}: Props) => {
 	const palette = decidePalette(format, containerPalette);
-	return <div css={cardStyles(format, palette)}>{children}</div>;
+	return (
+		<div
+			css={[
+				cardStyles(format, palette, isDynamo),
+				topBarStyles({ isDynamo, palette, containerType }),
+			]}
+		>
+			{children}
+		</div>
+	);
 };

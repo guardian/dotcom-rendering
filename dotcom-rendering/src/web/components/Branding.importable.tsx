@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, textSans, until } from '@guardian/source-foundations';
+import { neutral, textSans } from '@guardian/source-foundations';
 import { trackSponsorLogoLinkClick } from '../browser/ga/ga';
 
 const brandingStyle = css`
@@ -12,14 +12,11 @@ const brandingLabelStyle = css`
 `;
 
 const brandingLogoStyle = css`
-	${until.phablet} {
-		max-width: 140px;
-	}
-	max-width: 280px;
-	width: 100%;
 	padding: 10px 0;
+
+	display: block;
 	img {
-		max-width: 100%;
+		display: block;
 	}
 `;
 
@@ -33,11 +30,14 @@ const brandingAboutLink = (palette: Palette) => css`
 	}
 `;
 
-export const Branding: React.FC<{
+type Props = {
 	branding: Branding;
 	palette: Palette;
-}> = ({ branding, palette }) => {
-	if (!branding) return null;
+};
+
+export const Branding = ({ branding, palette }: Props) => {
+	const sponsorId = branding.sponsorName.toLowerCase();
+
 	return (
 		<div css={brandingStyle}>
 			<div css={brandingLabelStyle}>{branding.logo.label}</div>
@@ -47,14 +47,15 @@ export const Branding: React.FC<{
 					data-sponsor={branding.sponsorName.toLowerCase()}
 					rel="nofollow"
 					aria-label={`Visit the ${branding.sponsorName} website`}
-					onClick={() =>
-						trackSponsorLogoLinkClick(
-							branding.sponsorName.toLowerCase(),
-						)
-					}
+					onClick={() => trackSponsorLogoLinkClick(sponsorId)}
 					data-cy="branding-logo"
 				>
-					<img src={branding.logo.src} alt={branding.sponsorName} />
+					<img
+						width={branding.logo.dimensions.width}
+						height={branding.logo.dimensions.height}
+						src={branding.logo.src}
+						alt={branding.sponsorName}
+					/>
 				</a>
 			</div>
 

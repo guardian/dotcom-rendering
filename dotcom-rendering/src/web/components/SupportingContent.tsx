@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
 import { from, until } from '@guardian/source-foundations';
 import { CardHeadline } from './CardHeadline';
 
@@ -64,15 +63,11 @@ export const SupportingContent = ({ supportingContent, alignment }: Props) => {
 			{supportingContent.map((subLink: DCRSupportingContent, index) => {
 				// The model has this property as optional but it is very likely
 				// to exist
-				if (!subLink.headline) return <></>;
-				// The kicker defaults to 'Live' when the article is a liveblog
-				const kickerText =
-					subLink.format.design === ArticleDesign.LiveBlog
-						? 'Live'
-						: subLink.kickerText;
+				if (!subLink.headline) return null;
 				const shouldPadLeft = index > 0 && alignment === 'horizontal';
 				return (
 					<li
+						key={subLink.url}
 						css={[
 							liStyles,
 							shouldPadLeft && leftMargin,
@@ -82,7 +77,7 @@ export const SupportingContent = ({ supportingContent, alignment }: Props) => {
 					>
 						<CardHeadline
 							headlineText={subLink.headline}
-							kickerText={kickerText}
+							kickerText={subLink.kickerText}
 							format={subLink.format}
 							size="tiny"
 							showSlash={false}

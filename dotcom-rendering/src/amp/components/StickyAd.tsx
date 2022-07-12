@@ -18,7 +18,7 @@ amp-sticky-ad:before {
 }`;
 
 export const StickyAd = ({
-	edition,
+	editionId,
 	section,
 	contentType,
 	config,
@@ -29,7 +29,7 @@ export const StickyAd = ({
 		<amp-sticky-ad layout="nodisplay">
 			<Ad
 				isSticky={true}
-				edition={edition}
+				editionId={editionId}
 				section={section}
 				contentType={contentType}
 				commercialProperties={commercialProperties}

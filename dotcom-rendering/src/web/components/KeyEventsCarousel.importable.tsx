@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, space } from '@guardian/source-foundations';
+import { from, headline, space } from '@guardian/source-foundations';
 import {
 	Button,
 	buttonThemeBrandAlt,
@@ -16,6 +16,7 @@ interface Props {
 	keyEvents: Block[];
 	filterKeyEvents: boolean;
 	format: ArticleFormat;
+	id: 'key-events-carousel-desktop' | 'key-events-carousel-mobile';
 }
 type ValidBlock = Block & {
 	title: string;
@@ -24,20 +25,38 @@ type ValidBlock = Block & {
 
 const carouselStyles = (palette: Palette) => css`
 	background-color: ${palette.background.keyEvent};
-	${from.desktop} {
-		background-color: ${palette.background.keyEventFromDesktop};
-	}
-
 	scroll-snap-type: x mandatory;
 	scroll-behavior: smooth;
 	overflow-x: auto;
 	overflow-y: hidden;
-	display: flex;
-	flex-direction: column;
-	scrollbar-width: none;
-	&::-webkit-scrollbar {
-		display: none;
+	margin-right: -10px;
+	${from.tablet} {
+		margin-right: -20px;
 	}
+
+	${from.desktop} {
+		margin-right: 0px;
+		background-color: ${palette.background.keyEventFromDesktop};
+		scrollbar-width: none;
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+`;
+const leftMarginStyles = css`
+	${from.desktop} {
+		margin-left: 240px;
+	}
+`;
+
+const marginBottomStyles = css`
+	${from.desktop} {
+		margin-bottom: ${space[12]}px;
+	}
+`;
+const titleStyles = css`
+	${headline.xxxsmall({ fontWeight: 'bold', lineHeight: 'regular' })};
+	padding-top: ${space[3]}px;
 `;
 
 const containerStyles = css`
@@ -46,7 +65,6 @@ const containerStyles = css`
 	flex-direction: row;
 	align-items: stretch;
 	width: fit-content;
-	margin-bottom: ${space[12]}px;
 	position: relative;
 `;
 
@@ -80,6 +98,7 @@ export const KeyEventsCarousel = ({
 	keyEvents,
 	filterKeyEvents,
 	format,
+	id,
 }: Props) => {
 	const carousel = useRef<HTMLDivElement | null>(null);
 	const palette = decidePalette(format);
@@ -92,48 +111,65 @@ export const KeyEventsCarousel = ({
 		if (carousel.current) carousel.current.scrollLeft += cardWidth;
 	};
 	const filteredKeyEvents = keyEvents.filter(isValidKeyEvent);
+	const carouselLength = filteredKeyEvents.length;
+	const shortCarousel = carouselLength <= 4;
+	const longCarousel = carouselLength > 6;
 	return (
-		<div
-			ref={carousel}
-			id="key-events-carousel"
-			css={carouselStyles(palette)}
-		>
-			<ul css={containerStyles}>
-				{filteredKeyEvents.map((keyEvent) => {
-					return (
-						<KeyEventCard
-							format={format}
-							filterKeyEvents={filterKeyEvents}
-							id={keyEvent.id}
-							blockFirstPublished={keyEvent.blockFirstPublished}
-							isSummary={keyEvent.attributes.summary}
-							title={keyEvent.title}
-						/>
-					);
-				})}
-			</ul>
-			<Hide until="desktop">
-				{keyEvents.length > 6 && (
-					<>
-						<Button
-							hideLabel={true}
-							cssOverrides={[buttonStyles, leftButton]}
-							iconSide="left"
-							icon={<SvgChevronLeftSingle />}
-							onClick={goPrevious}
-							aria-label="Move key events carousel backwards"
-						/>
-						<Button
-							hideLabel={true}
-							cssOverrides={[buttonStyles, rightButton]}
-							iconSide="left"
-							icon={<SvgChevronRightSingle />}
-							onClick={goNext}
-							aria-label="Move key events carousel forwards"
-						/>
-					</>
-				)}
+		<>
+			<span id={id} />
+			<Hide from="desktop">
+				<div css={titleStyles}>Key events:</div>
 			</Hide>
-		</div>
+			<div
+				ref={carousel}
+				id="key-events-carousel"
+				css={[
+					carouselStyles(palette),
+					shortCarousel && leftMarginStyles,
+				]}
+			>
+				<ul css={[containerStyles, longCarousel && marginBottomStyles]}>
+					{filteredKeyEvents.map((keyEvent, index) => {
+						return (
+							<KeyEventCard
+								format={format}
+								filterKeyEvents={filterKeyEvents}
+								id={keyEvent.id}
+								blockFirstPublished={
+									keyEvent.blockFirstPublished
+								}
+								isSummary={keyEvent.attributes.summary}
+								title={keyEvent.title}
+								cardPosition={`${index} of ${carouselLength}`}
+							/>
+						);
+					})}
+				</ul>
+				<Hide until="desktop">
+					{longCarousel && (
+						<>
+							<Button
+								hideLabel={true}
+								cssOverrides={[buttonStyles, leftButton]}
+								iconSide="left"
+								icon={<SvgChevronLeftSingle />}
+								onClick={goPrevious}
+								aria-label="Move key events carousel backwards"
+								data-link-name="key event carousel left chevron"
+							/>
+							<Button
+								hideLabel={true}
+								cssOverrides={[buttonStyles, rightButton]}
+								iconSide="left"
+								icon={<SvgChevronRightSingle />}
+								onClick={goNext}
+								aria-label="Move key events carousel forwards"
+								data-link-name="key event carousel right chevron"
+							/>
+						</>
+					)}
+				</Hide>
+			</div>
+		</>
 	);
 };

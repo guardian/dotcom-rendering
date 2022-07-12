@@ -1,74 +1,62 @@
+// ----- Imports ----- //
+
 import { css } from '@emotion/react';
-import { ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
-	between,
 	from,
 	headline,
+	neutral,
 	remSpace,
-	textSans,
 } from '@guardian/source-foundations';
-import type { Item } from 'item';
-import { getFormat } from 'item';
-import { wideContentWidth } from 'styles';
-import { DefaultHeadline, defaultStyles } from './Headline.defaults';
+import { grid } from 'grid/grid';
 
-const immersiveStyles = css`
-	${headline.small({ fontWeight: 'bold' })}
-	font-weight: 700;
-	padding: ${remSpace[1]} ${remSpace[3]} ${remSpace[6]} ${remSpace[3]};
-	margin: calc(80vh - 5rem) 0 0;
-	position: relative;
-	display: inline-block;
-	min-height: 112px;
-	box-sizing: border-box;
+// ----- Component ----- //
 
-	${between.phablet.and.wide} {
-		width: ${wideContentWidth}px;
+const styles = css`
+	${headline.medium({ fontWeight: 'bold' })}
+	background-color: ${neutral[7]};
+	color: ${neutral[100]};
+	padding: 0 ${remSpace[5]} ${remSpace[9]} 0;
+	${grid.between('centre-column-start', 'centre-column-end')}
+	grid-row: 3 / 5;
+
+	${from.tablet} {
+		${grid.span('centre-column-start', 12)}
 	}
 
 	${from.desktop} {
 		${headline.xlarge({ fontWeight: 'bold' })}
-		margin-top: calc(80vh - 7rem);
-	}
-
-	${from.wide} {
-		width: 100%;
-		margin-left: calc(
-			((100% - ${wideContentWidth}px) / 2) - ${remSpace[3]}
-		);
-		padding-left: ${remSpace[3]};
-
-		span {
-			display: block;
-			width: ${wideContentWidth}px;
-		}
+		${grid.span('centre-column-start', 8)}
 	}
 `;
 
-const immersiveLabs = css`
-	${textSans.xxxlarge({ lineHeight: 'regular', fontWeight: 'bold' })}
-	${from.desktop} {
-		${textSans.xxxlarge({ lineHeight: 'regular', fontWeight: 'bold' })}
+const backgroundStyles = css`
+	background-color: ${neutral[7]};
+	${grid.between('viewport-start', 'centre-column-end')}
+	grid-row: 3 / 5;
+
+	${from.mobileLandscape} {
+		${grid.between('viewport-start', 'viewport-end')}
+	}
+
+	${from.tablet} {
+		${grid.between('centre-column-start', 'viewport-end')}
+		margin-left: calc(${grid.columnGap} * -1/2);
 	}
 `;
 
 interface Props {
-	item: Item;
+	headline: string;
+	format: ArticleFormat;
 }
 
-const ImmersiveHeadline: React.FC<Props> = ({ item }) => {
-	const format = getFormat(item);
+const ImmersiveHeadline: React.FC<Props> = ({ headline }) => (
+	<>
+		<div css={backgroundStyles} />
+		<h1 css={styles}>{headline}</h1>
+	</>
+);
 
-	return (
-		<DefaultHeadline
-			item={item}
-			styles={css(
-				defaultStyles(item),
-				immersiveStyles,
-				format.theme === ArticleSpecial.Labs ? immersiveLabs : null,
-			)}
-		/>
-	);
-};
+// ----- Exports ----- //
 
 export default ImmersiveHeadline;

@@ -89,7 +89,7 @@ const clearCommonReaderRevenueStateAndReload = (
 };
 
 const showMeTheEpic = (
-	asExistingSupporter: boolean = false,
+	asExistingSupporter = false,
 	shouldHideReaderRevenue: boolean,
 ): void => {
 	clearCommonReaderRevenueStateAndReload(
@@ -99,7 +99,7 @@ const showMeTheEpic = (
 };
 
 const showMeTheBanner = (
-	asExistingSupporter: boolean = false,
+	asExistingSupporter = false,
 	shouldHideReaderRevenue: boolean,
 ): void => {
 	clearBannerLastClosedAt();
@@ -111,7 +111,7 @@ const showMeTheBanner = (
 };
 
 const showNextVariant = (
-	asExistingSupporter: boolean = false,
+	asExistingSupporter = false,
 	shouldHideReaderRevenue: boolean,
 ): void => {
 	incrementMvtCookie();
@@ -122,7 +122,7 @@ const showNextVariant = (
 };
 
 const showPreviousVariant = (
-	asExistingSupporter: boolean = false,
+	asExistingSupporter = false,
 	shouldHideReaderRevenue: boolean,
 ): void => {
 	decrementMvtCookie();
@@ -133,7 +133,7 @@ const showPreviousVariant = (
 };
 
 const changeGeolocation = (
-	asExistingSupporter: boolean = false,
+	asExistingSupporter = false,
 	shouldHideReaderRevenue: boolean,
 ): void => {
 	getLocaleCode()

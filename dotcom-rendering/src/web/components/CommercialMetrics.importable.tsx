@@ -5,8 +5,7 @@ import {
 } from '@guardian/commercial-core';
 import { getCookie } from '@guardian/libs';
 import { tests } from '../experiments/ab-tests';
-import { commercialEndOfQuarter2Test } from '../experiments/tests/commercial-end-of-quarter-2-test';
-import { prebidPriceGranularity } from '../experiments/tests/prebid-price-granularity';
+import { multiStickyRightAds } from '../experiments/tests/multi-sticky-right-ads';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useOnce } from '../lib/useOnce';
@@ -29,8 +28,7 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 		// For these tests switch off sampling and collect metrics for 100% of views
 		const clientSideTestsToForceMetrics: ABTest[] = [
 			/* keep array multi-line */
-			prebidPriceGranularity,
-			commercialEndOfQuarter2Test,
+			multiStickyRightAds,
 		];
 
 		const userInClientSideTestToForceMetrics = ABTestAPI?.allRunnableTests(
@@ -41,8 +39,6 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 
 		const serverSideTestsToForceMetrics: Array<keyof ServerSideTests> = [
 			/* keep array multi-line */
-			'interactivesIdleLoadingVariant',
-			'interactivesIdleLoadingControl',
 		];
 
 		const userInServerSideTestToForceMetrics =

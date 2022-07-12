@@ -78,7 +78,6 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
-	abTests?: ServerSideTests;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -132,19 +131,12 @@ export const renderElement = ({
 	isAdFreeUser,
 	switches,
 	isSensitive,
-	abTests,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
 
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
-
-	const isInteractivesIdleLoadingVariant =
-		abTests?.interactivesIdleLoadingVariant === 'variant';
-
-	const shouldIdleLoadInteractives =
-		!isAdFreeUser && isInteractivesIdleLoadingVariant;
 
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -390,9 +382,9 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
 			return [
 				true,
-				<Island
-					deferUntil={shouldIdleLoadInteractives ? 'idle' : 'visible'}
-				>
+				// Deferring interactives until CPU idle achieves the lowest Cumulative Layout Shift (CLS)
+				// For more information on the experiment we ran see: https://github.com/guardian/dotcom-rendering/pull/4942
+				<Island deferUntil="idle">
 					<InteractiveBlockComponent
 						url={element.url}
 						scriptUrl={element.scriptUrl}
@@ -779,10 +771,10 @@ const bareElements = new Set([
 	'model.dotcomrendering.pageElements.InteractiveBlockElement',
 ]);
 
-// renderArticleElement is a wrapper for renderElement that wraps elements in a
+// RenderArticleElement is a wrapper for renderElement that wraps elements in a
 // Figure and adds metadata and (role-) styling appropriate for most article
 // types.
-export const renderArticleElement = ({
+export const RenderArticleElement = ({
 	format,
 	element,
 	adTargeting,
@@ -797,8 +789,7 @@ export const renderArticleElement = ({
 	isAdFreeUser,
 	isSensitive,
 	switches,
-	abTests,
-}: Props): JSX.Element => {
+}: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
 	const [ok, el] = renderElement({
@@ -816,7 +807,6 @@ export const renderArticleElement = ({
 		isAdFreeUser,
 		isSensitive,
 		switches,
-		abTests,
 	});
 
 	if (!ok) {

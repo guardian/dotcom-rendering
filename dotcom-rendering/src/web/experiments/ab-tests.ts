@@ -1,11 +1,11 @@
 import type { ABTest } from '@guardian/ab-core';
 import { abTestTest } from './tests/ab-test-test';
 import { commercialEndOfQuarter2Test } from './tests/commercial-end-of-quarter-2-test';
+import { multiStickyRightAds } from './tests/multi-sticky-right-ads';
 import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from './tests/newsletter-merch-unit-test';
-import { prebidPriceGranularity } from './tests/prebid-price-granularity';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 
@@ -17,6 +17,6 @@ export const tests: ABTest[] = [
 	signInGateMainControl,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
-	prebidPriceGranularity,
 	commercialEndOfQuarter2Test,
+	multiStickyRightAds,
 ];
