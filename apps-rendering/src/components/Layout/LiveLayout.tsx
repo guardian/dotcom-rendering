@@ -23,7 +23,7 @@ import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Tags from 'components/Tags';
-import { getFormat, Item } from 'item';
+import { getFormat } from 'item';
 import type { DeadBlog, LiveBlog } from 'item';
 import { toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';

@@ -287,6 +287,7 @@ const blocks: LiveBlock[] = [
 				}),
 			},
 		],
+		isPinned: false,
 	},
 	{
 		id: '2',
@@ -296,6 +297,7 @@ const blocks: LiveBlock[] = [
 		lastModified: new Date('2021-11-02T13:03:13Z'),
 		body: [],
 		contributors: [],
+		isPinned: false,
 	},
 	{
 		id: '3',
@@ -305,6 +307,7 @@ const blocks: LiveBlock[] = [
 		lastModified: new Date('2021-11-02T12:13:13Z'),
 		body: [],
 		contributors: [],
+		isPinned: false,
 	},
 	{
 		id: '4',
@@ -314,6 +317,7 @@ const blocks: LiveBlock[] = [
 		lastModified: new Date('2021-11-02T11:13:13Z'),
 		body: [],
 		contributors: [],
+		isPinned: false,
 	},
 	{
 		id: '5',
@@ -323,6 +327,7 @@ const blocks: LiveBlock[] = [
 		lastModified: new Date('2021-11-02T11:13:13Z'),
 		body: [],
 		contributors: [],
+		isPinned: false,
 	},
 ];
 
@@ -347,6 +352,7 @@ const live: LiveBlog = {
 	blocks: blocks,
 	pagedBlocks,
 	totalBodyBlocks: 5,
+	pinnedBlock: none,
 };
 
 const deadBlog: DeadBlog = {
@@ -355,6 +361,7 @@ const deadBlog: DeadBlog = {
 	blocks: blocks,
 	pagedBlocks,
 	totalBodyBlocks: 5,
+	pinnedBlock: none,
 };
 
 export { live, deadBlog };
