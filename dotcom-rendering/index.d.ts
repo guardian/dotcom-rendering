@@ -938,6 +938,7 @@ type DCRCollectionType = {
 	displayName: string;
 	collectionType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
+	grouped: DCRGroupedCards;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
 	treats: DCRFrontCard[];
@@ -945,6 +946,13 @@ type DCRCollectionType = {
 	config: {
 		showDateHeader: boolean;
 	};
+};
+
+type DCRGroupedCards = {
+	huge: DCRFrontCard[];
+	veryBig: DCRFrontCard[];
+	big: DCRFrontCard[];
+	standard: DCRFrontCard[];
 };
 
 type FEFrontConfigType = {

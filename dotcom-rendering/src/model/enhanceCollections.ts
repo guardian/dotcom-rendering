@@ -1,5 +1,6 @@
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
+import { groupCards } from './groupCards';
 
 export const enhanceCollections = (
 	collections: FECollectionType[],
@@ -14,6 +15,11 @@ export const enhanceCollections = (
 			displayName,
 			collectionType,
 			containerPalette,
+			grouped: groupCards(
+				collection.curated,
+				collection.backfill,
+				containerPalette,
+			),
 			curated: enhanceCards(collection.curated, containerPalette),
 			backfill: enhanceCards(collection.backfill, containerPalette),
 			treats: enhanceCards(collection.treats, containerPalette),

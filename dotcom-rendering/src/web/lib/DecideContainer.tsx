@@ -8,6 +8,7 @@ import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
 
 type Props = {
 	trails: DCRFrontCard[];
+	groupedTrails: DCRGroupedCards;
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
@@ -15,6 +16,7 @@ type Props = {
 
 export const DecideContainer = ({
 	trails,
+	groupedTrails,
 	containerType,
 	containerPalette,
 	showAge,
@@ -24,6 +26,7 @@ export const DecideContainer = ({
 			return (
 				<DynamicFast
 					trails={trails}
+					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
 				/>
