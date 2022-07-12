@@ -147,6 +147,18 @@ const hideIconBelowLeftCol = css`
 	}
 `;
 
+const videoCaptionOverlayStyles = css`
+	${until.mobileLandscape} {
+		margin-left: 0px;
+	}
+	${between.mobileLandscape.and.phablet} {
+		margin-left: 0px;
+	}
+	top: 0px;
+	bottom: auto;
+	line-height: 32px;
+`;
+
 const pictureRatio = (13 / 18) * 100;
 const videoRatio = (23 / 36) * 100;
 
@@ -255,6 +267,10 @@ export const Caption = ({
 				isMainMedia && isBlog && tabletCaptionPadding,
 				padCaption && captionPadding,
 				mediaType === 'Video' && videoPadding,
+				mediaType === 'Video' &&
+					isMainMedia &&
+					isBlog &&
+					videoCaptionOverlayStyles,
 			]}
 		>
 			{mediaType === 'Video' ? (
