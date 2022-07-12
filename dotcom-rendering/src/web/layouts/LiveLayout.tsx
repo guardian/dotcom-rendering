@@ -90,6 +90,7 @@ const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
 						'title'
+						'mainmedia'
 						'headline';
 				}
 				${until.tablet} {
@@ -322,6 +323,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
 
+	const inMediaTest =
+		CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant;
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -491,6 +494,34 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									badge={CAPIArticle.badge}
 								/>
 							</GridItem>
+							{inMediaTest && (
+								<GridItem area="mainmedia">
+									<Hide from="desktop">
+										<MainMedia
+											format={format}
+											elements={
+												CAPIArticle.mainMediaElements
+											}
+											adTargeting={adTargeting}
+											host={host}
+											pageId={CAPIArticle.pageId}
+											webTitle={CAPIArticle.webTitle}
+											ajaxUrl={CAPIArticle.config.ajaxUrl}
+											switches={
+												CAPIArticle.config.switches
+											}
+											isSensitive={
+												CAPIArticle.config.isSensitive
+											}
+											isAdFreeUser={
+												CAPIArticle.isAdFreeUser
+											}
+											hideCaption={true}
+										/>
+									</Hide>
+								</GridItem>
+							)}
+
 							<GridItem area="headline">
 								<div css={maxWidth}>
 									{!footballMatchUrl && (
@@ -713,20 +744,54 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											/>
 										</Island>
 									)}
-									<MainMedia
-										format={format}
-										elements={CAPIArticle.mainMediaElements}
-										adTargeting={adTargeting}
-										host={host}
-										pageId={CAPIArticle.pageId}
-										webTitle={CAPIArticle.webTitle}
-										ajaxUrl={CAPIArticle.config.ajaxUrl}
-										switches={CAPIArticle.config.switches}
-										isSensitive={
-											CAPIArticle.config.isSensitive
-										}
-										isAdFreeUser={CAPIArticle.isAdFreeUser}
-									/>
+									{inMediaTest ? (
+										<Hide until="desktop">
+											<MainMedia
+												format={format}
+												elements={
+													CAPIArticle.mainMediaElements
+												}
+												adTargeting={adTargeting}
+												host={host}
+												pageId={CAPIArticle.pageId}
+												webTitle={CAPIArticle.webTitle}
+												ajaxUrl={
+													CAPIArticle.config.ajaxUrl
+												}
+												switches={
+													CAPIArticle.config.switches
+												}
+												isSensitive={
+													CAPIArticle.config
+														.isSensitive
+												}
+												isAdFreeUser={
+													CAPIArticle.isAdFreeUser
+												}
+											/>
+										</Hide>
+									) : (
+										<MainMedia
+											format={format}
+											elements={
+												CAPIArticle.mainMediaElements
+											}
+											adTargeting={adTargeting}
+											host={host}
+											pageId={CAPIArticle.pageId}
+											webTitle={CAPIArticle.webTitle}
+											ajaxUrl={CAPIArticle.config.ajaxUrl}
+											switches={
+												CAPIArticle.config.switches
+											}
+											isSensitive={
+												CAPIArticle.config.isSensitive
+											}
+											isAdFreeUser={
+												CAPIArticle.isAdFreeUser
+											}
+										/>
+									)}
 								</div>
 							</GridItem>
 							<GridItem area="info" element="aside">
