@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
@@ -37,6 +38,14 @@ const fontStyles = ({
 	if (fontWeight) options.fontWeight = fontWeight;
 
 	switch (size) {
+		case 'ginormous':
+			return css`
+				${headline.large(options)};
+				font-size: 50px;
+				${until.desktop} {
+					${headline.large(options)};
+				}
+			`;
 		case 'huge':
 			return css`
 				${headline.small(options)};
@@ -72,6 +81,7 @@ const fontStyles = ({
 
 const labTextStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
+		case 'ginormous':
 		case 'huge':
 		case 'large':
 			return css`
@@ -131,7 +141,10 @@ const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 	}
 
 	switch (size) {
+		case 'ginormous':
+			return underlinedCssWithMediaQuery(50, 50);
 		case 'huge':
+			return underlinedCssWithMediaQuery(34, 34);
 		case 'large':
 			return underlinedCssWithMediaQuery(29, 29);
 		case 'medium':
