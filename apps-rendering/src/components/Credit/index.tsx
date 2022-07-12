@@ -22,7 +22,9 @@ const mediaStyles = css`
 `;
 
 const defaultStyles = css`
-	${textSans.xxsmall()}
+	${textSans.xsmall({
+		lineHeight: 'regular',
+	})}
 `;
 
 const Credit: FC<Props> = ({ format, credit }) =>
