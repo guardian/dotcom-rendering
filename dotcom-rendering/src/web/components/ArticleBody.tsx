@@ -32,7 +32,6 @@ type Props = {
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
 	filterKeyEvents?: boolean;
-	showKeyEventsCarousel?: boolean;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
 };
@@ -117,7 +116,6 @@ export const ArticleBody = ({
 	onFirstPage,
 	keyEvents,
 	filterKeyEvents,
-	showKeyEventsCarousel,
 	availableTopics,
 	selectedTopics,
 }: Props) => {
@@ -167,7 +165,6 @@ export const ArticleBody = ({
 						onFirstPage={onFirstPage}
 						keyEvents={keyEvents}
 						filterKeyEvents={filterKeyEvents}
-						isKeyEventsCarousel={showKeyEventsCarousel}
 						availableTopics={availableTopics}
 						selectedTopics={selectedTopics}
 					/>
