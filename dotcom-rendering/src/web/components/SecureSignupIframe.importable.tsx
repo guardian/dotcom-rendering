@@ -11,6 +11,7 @@ import {
 import type { ReactEventHandler } from 'react';
 import { useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { formatTimestampToUTC } from '../../lib/utcDateFormat';
 import type { OphanAction } from '../browser/ophan/ophan';
 import {
 	getOphanRecordFunction,
@@ -102,7 +103,7 @@ const postFormData = async (
 
 const sendTracking = (
 	newsletterId: string,
-	event:
+	eventDescription:
 		| 'click-button'
 		| 'submit-form'
 		| 'form-submit-error'
@@ -116,9 +117,8 @@ const sendTracking = (
 	const ophanRecord = getOphanRecordFunction();
 
 	let action: OphanAction = 'CLICK';
-	const value = `${event} ${newsletterId}`;
 
-	switch (event) {
+	switch (eventDescription) {
 		case 'submit-form':
 			action = 'SUBSCRIBE';
 			break;
@@ -142,6 +142,12 @@ const sendTracking = (
 			action = 'CLICK';
 			break;
 	}
+
+	const value = JSON.stringify({
+		eventDescription,
+		newsletterId,
+		timestamp: formatTimestampToUTC(),
+	});
 
 	submitComponentEvent(
 		{
