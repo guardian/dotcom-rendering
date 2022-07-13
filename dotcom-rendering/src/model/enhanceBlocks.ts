@@ -4,6 +4,7 @@ import { enhanceDots } from './enhance-dots';
 import { enhanceEmbeds } from './enhance-embeds';
 import { enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
+import { enhanceNewsletterSignup } from './enhance-newsletter-signup';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceTweets } from './enhance-tweets';
 
@@ -12,9 +13,24 @@ class BlockEnhancer {
 
 	format: CAPIFormat;
 
-	constructor(blocks: Block[], format: CAPIFormat) {
+	newsletterToEmbed?: Newsletter;
+
+	constructor(
+		blocks: Block[],
+		format: CAPIFormat,
+		newsletterToEmbed?: Newsletter,
+	) {
 		this.blocks = blocks;
 		this.format = format;
+		this.newsletterToEmbed = newsletterToEmbed;
+	}
+
+	enhanceNewsletterEmbed() {
+		this.blocks = enhanceNewsletterSignup(
+			this.blocks,
+			this.newsletterToEmbed,
+		);
+		return this;
 	}
 
 	enhanceDividers() {
@@ -61,8 +77,13 @@ class BlockEnhancer {
 // IMPORTANT: the ordering of the enhancer is IMPORTANT to keep in mind
 // example: enhanceInteractiveContentElements needs to be before enhanceNumberedLists
 // as they both effect SubheadingBlockElement
-export const enhanceBlocks = (blocks: Block[], format: CAPIFormat): Block[] => {
-	return new BlockEnhancer(blocks, format)
+export const enhanceBlocks = (
+	blocks: Block[],
+	format: CAPIFormat,
+	newsletterToEmbed?: Newsletter,
+): Block[] => {
+	return new BlockEnhancer(blocks, format, newsletterToEmbed)
+		.enhanceNewsletterEmbed()
 		.enhanceDividers()
 		.enhanceInteractiveContentsElements()
 		.enhanceBlockquotes()

@@ -15,11 +15,30 @@ function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
 }
 
+const FAKE_NEWSLETTER = {
+	listId: 123,
+	identityName: 'string',
+	name: 'string',
+	description: 'string',
+	frequency: 'string',
+	successDescription: 'string',
+	theme: 'string',
+	group: 'string',
+	elementId: 'string',
+};
+
+const useFake = true;
+
 const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
 	const data = validateAsCAPIType(body);
+
 	const CAPIArticle: CAPIArticleType = {
 		...data,
-		blocks: enhanceBlocks(data.blocks, data.format),
+		blocks: enhanceBlocks(
+			data.blocks,
+			data.format,
+			useFake ? FAKE_NEWSLETTER : data.newsletterToEmbed,
+		),
 		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
 		standfirst: enhanceStandfirst(data.standfirst),
 	};

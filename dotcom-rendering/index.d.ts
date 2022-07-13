@@ -620,6 +620,7 @@ interface CAPIArticleType {
 	mostRecentBlockId?: string;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
+	newsletterToEmbed?: Newsletter;
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
