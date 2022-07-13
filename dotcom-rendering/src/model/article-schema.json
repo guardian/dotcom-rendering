@@ -415,6 +415,9 @@
                 "$ref": "#/definitions/Topic"
             }
         },
+        "byline": {
+            "type": "string"
+        },
         "newsletterToEmbed": {
             "type": "object",
             "properties": {
@@ -441,10 +444,14 @@
                 },
                 "group": {
                     "type": "string"
+                },
+                "elementId": {
+                    "type": "string"
                 }
             },
             "required": [
                 "description",
+                "elementId",
                 "frequency",
                 "group",
                 "identityName",
@@ -2156,10 +2163,14 @@
                         },
                         "group": {
                             "type": "string"
+                        },
+                        "elementId": {
+                            "type": "string"
                         }
                     },
                     "required": [
                         "description",
+                        "elementId",
                         "frequency",
                         "group",
                         "identityName",

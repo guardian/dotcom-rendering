@@ -94,14 +94,15 @@ export const LiveBlogRenderer = ({
 							id={'key-events-carousel-mobile'}
 						/>
 					</Island>
-					{!switches.automaticFilters && (
-						<Island deferUntil="visible">
-							<FilterKeyEventsToggle
-								filterKeyEvents={filterKeyEvents}
-								id="filter-toggle-mobile"
-							/>
-						</Island>
-					)}
+					{!switches.automaticFilters ||
+						(!availableTopics && (
+							<Island deferUntil="visible">
+								<FilterKeyEventsToggle
+									filterKeyEvents={filterKeyEvents}
+									id="filter-toggle-mobile"
+								/>
+							</Island>
+						))}
 				</Hide>
 			) : (
 				<></>

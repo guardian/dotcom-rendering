@@ -389,6 +389,11 @@ export const Feature: CAPIArticleType = {
 						url: '/football',
 						children: [
 							{
+								title: "Women's Euro 2022",
+								url: '/football/women-s-euro-2022',
+								longTitle: 'football/women-s-euro-2022',
+							},
+							{
 								title: 'Live scores',
 								url: '/football/live',
 								longTitle: 'football/live',
@@ -589,6 +594,11 @@ export const Feature: CAPIArticleType = {
 						title: 'Football',
 						url: '/football',
 						children: [
+							{
+								title: "Women's Euro 2022",
+								url: '/football/women-s-euro-2022',
+								longTitle: 'football/women-s-euro-2022',
+							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -1356,6 +1366,7 @@ export const Feature: CAPIArticleType = {
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	headline: "'I've been a scoundrel all my life': quotes of the Oscars 2020",
+	byline: 'Lanre Bakare',
 	isLegacyInteractive: false,
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
@@ -1394,7 +1405,7 @@ export const Feature: CAPIArticleType = {
 			duration: 207,
 			altText:
 				"Press Room - 92nd Academy Awards<br>epa08208148 Joaquin Phoenix poses in the press room with the Oscar for Best Actor for his performance in 'Joker' during the 92nd annual Academy Awards ceremony at the Dolby Theatre in Hollywood, California, USA, 09 February 2020. The Oscars are presented for outstanding individual or collective efforts in filmmaking in 24 categories.  EPA/DAVID SWANSON",
-			elementId: 'a47e1781-0208-4ed6-aa07-09831d58ebf6',
+			elementId: 'dda78a8e-3846-4d76-8b4f-52e6e0758adc',
 		},
 	],
 	webPublicationDate: '2020-02-10T06:59:35.000Z',
@@ -1405,22 +1416,22 @@ export const Feature: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Chris Rock on Jeff Bezos and Marriage Story</h2>',
-					elementId: '386e4cd8-af57-45ac-84df-c9d4d69bcddd',
+					elementId: '3310235e-87e7-47a0-9151-2c36f2c089f5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“Bezos is so rich, he got divorced and he is still the richest man in the world. He saw <a href="https://www.theguardian.com/film/2019/nov/15/marriage-story-review-noah-baumbach-adam-driver-scarlett-johansson">Marriage Story</a> and thought it was a comedy.”</p>',
-					elementId: '091ddc46-cc9f-4249-8263-7288f38cc3e9',
+					elementId: 'eba19aa9-e97f-4200-a910-aaa19d6719a1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong><a href="https://www.theguardian.com/film/2020/feb/10/joaquin-phoenixs-oscars-speech-in-full">Joaquin Phoenix</a> …</strong></h2>',
-					elementId: '2ebbd87c-a2f8-4c14-8af1-ab25c0ca38f0',
+					elementId: '977fb35a-452d-450a-b247-8218a7fa901b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>… on veganism</strong><strong> and social justice<br></strong>“I think at times we feel or are made to feel that we champion different causes. But for me I see commonality. I think whether we’re talking about gender inequality or racism or queer rights or indigenous rights, or animal rights – we’re talking about the fight against injustice.”</p>',
-					elementId: '47c124e8-c203-4322-a4cd-118e89a01176',
+					elementId: 'd68fa781-1427-4bfa-a032-5aa194711a62',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
@@ -1428,22 +1439,22 @@ export const Feature: CAPIArticleType = {
 					text: "Joaquin Phoenix's Oscars speech in full: 'We feel entitled to artificially inseminate a cow and steal her baby'",
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: '68256c79-4aaf-4af2-b4dd-2706ec0d57d0',
+					elementId: '58ed80f4-1b5f-44c9-9f92-cdeb65c39971',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“We’re talking about the fight against the belief that one nation, one people, one race, one gender, one species has the right to dominate, use and control another with impunity.”</p>',
-					elementId: '19594445-bf49-4471-95f7-9e111e846bfe',
+					elementId: 'b4186429-37c7-47cd-afc8-b93e0505f8c0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>… on dairy products<br></strong>“I think we’ve become very disconnected from the natural world, many of us are guilty of an egocentric worldview and we believe that we’re the centre of the universe. We go into the natural world and we plunder it for its resources, we feel entitled to artificially inseminate a cow and steal her baby even though her cries of anguish are unmistakeable. Then we take her milk intended for her calf and we put it in our coffee and our cereal.”</p>',
-					elementId: '69d07400-e79c-4488-9ead-75829702522d',
+					elementId: '50c85a3d-f272-49d6-bffd-fc2ed4ab3ef3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>… on forgiveness<br></strong>“I have been a scoundrel all my life, I’ve been selfish. I’ve been cruel at times, hard to work with and I’m grateful that so many of you in this room have given me a second chance. I think that’s when we’re at our best: when we support each other. Not when we cancel each other out for our past mistakes, but when we help each other to grow. When we educate each other. When we guide each other to redemption.”</p>',
-					elementId: 'e4e567e3-eaeb-44c7-b1f6-0a9a7e0282a0',
+					elementId: '96d5fc00-1f3a-44c4-b868-d635d4bbae8c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
@@ -1451,17 +1462,17 @@ export const Feature: CAPIArticleType = {
 					text: "Parasite's best picture triumph could begin a new era for the Oscars",
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: '42c2cfe5-6446-4159-8602-b012ffd7ac70',
+					elementId: '2c96854f-2c8e-46e4-b755-27f433c6ac19',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Laura Dern on meeting your heroes</strong></h2>',
-					elementId: '84474a5c-66f8-4de0-a50c-f63c5634d63e',
+					elementId: 'a4d49830-f78d-4578-81c1-6e811af4468f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“Noah [Baumbach] wrote a movie about love and breaching divisions in the name and the honour of family and home and hopefully for our planet. Some say never meet your heroes. I say if you’re really blessed you get them as your parents. I share this with my acting legends Diane Ladd and Bruce Dern. You got game, I love you. Thank you all for this gift. This is the best birthday present ever.”</p>',
-					elementId: '9de00fae-6eac-4515-af6b-c2ebce4dfa9a',
+					elementId: 'ddb0557c-2b8a-4925-b106-83db23f6b84a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -1712,58 +1723,90 @@ export const Feature: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=85&auto=format&fit=max&s=b26dfc0f511b564d88c75b56cc8589cf',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=1900&quality=85&auto=format&fit=max&s=5f3f7ae7098f7e2523183aa6488d24eb',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5c3d099cbee95293d67969d91b13bce4',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=1aba8489557835661ce2ce742e44dca8',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=85&auto=format&fit=max&s=1a57ce81ff5a2b7762576409a357d1cc',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=1300&quality=85&auto=format&fit=max&s=3fdabec17e7d84a61326bea0504ce3c6',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c4cd6d72a45f5020b8131c71770997c2',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=51dc0712b4e774f97b25a49665a4bff2',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=85&auto=format&fit=max&s=10683aca0f26a4006031ccf157e1af37',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=1140&quality=85&auto=format&fit=max&s=09ebd95480010377d98bc6c0d4d3e6bd',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5240a5400977ea76e4d3ca17c8e2d46',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=76b4f8b849d335e5752e85dafb5773aa',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=980&quality=85&auto=format&fit=max&s=236ac905a844719e736d121fe5cc5c27',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=01817ea41bafc9ec8f557c78ec55efe2',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=740&quality=85&auto=format&fit=max&s=ea5c6d894e5edce6a27f14246abd4f73',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=8bdda166ca451470b227b60021375619',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=660&quality=85&auto=format&fit=max&s=e36b1cc6639a40f0c6e06ca31ea193d3',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=a4cca52a653a99ac49a34d05c0bdebb9',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=480&quality=85&auto=format&fit=max&s=b7c83e6401f102793cee3907b3038bca',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/42033f689a8cc045f09bdefd43a321834985ac00/0_32_3500_2100/master/3500.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=f19f1ad9d0bf8bb6d57fc5275ea1658b',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: 'a8690e81-ea7c-461d-8b92-a8f41f7e57ff',
+					elementId: '4abca7df-f530-4b51-931e-f04bb88bbe83',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Taika Waititi on far-right extremism and indigenous kids</strong></h2>',
-					elementId: '7c6d124c-7477-465e-a867-b7d22010183a',
+					elementId: '6b443abb-4221-4b77-88f9-e59df4f1ffe7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Backstage: “If you were a Nazi, you would go to jail. Now you’re a Nazi, feel free to have a rally down in the square with your mates.”</p>',
-					elementId: '51b1a8d6-30e9-4cd9-99ad-383987d475dd',
+					elementId: '34783c3a-6a88-446e-b8ff-3f3f4c04bf9f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>On stage he said: “I want to dedicate this to all the indigenous kids in the world who want to do art, we are the original storytellers and we can make it here as well.”</p>',
-					elementId: 'e419aba5-e7b3-40e3-b0c4-b629af619401',
+					elementId: '2c58cc18-7619-4043-a18a-43877e3c2706',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Brad Pitt on Trump’s impeachment, John Bolton and the Republican party</strong></h2>',
-					elementId: 'f7efda7f-3419-4f9d-9692-09d3e60a9bde',
+					elementId: '45535b55-e297-4548-bb99-908d8932a702',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“Thank you to the Academy for this honour of honours. They told me I only have 45 seconds up here which is 45 more than the Senate gave John Bolton.”</p>',
-					elementId: 'ac694fdc-9f90-4c2f-a206-114a2ebe3e8d',
+					elementId: '4fe146c0-d8a1-4a47-9c78-d2eae355df67',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
@@ -1771,32 +1814,32 @@ export const Feature: CAPIArticleType = {
 					text: "Parasite's best picture triumph could begin a new era for the Oscars",
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: '7daa3ad3-6fa1-4fa5-81e3-614f5d0fbbf9',
+					elementId: '8467a3c4-15cb-4d25-933c-11c8741793a8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Bong Joon-Ho on booze and Scorsese and Tarantino</h2>',
-					elementId: 'bb76abaf-b366-4b20-872e-af648cfdadab',
+					elementId: 'ad914137-9c04-400c-9fa5-1043476dc302',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“The [international feature film] category has a new name and I’m so happy to be its first recipient under its new name. I applaud and support the new direction that this change symbolises. I’m ready to drink tonight.</p>',
-					elementId: '9bf1edbe-74de-4123-b86b-3639bf87bffc',
+					elementId: 'b0bf2470-834a-4c13-ace7-5f6827f92c1f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“When I was young and starting in cinema there was a saying that I carved deep into my heart, which is, ‘The most personal is the most creative.’ That quote was from our great Martin Scorsese. When I was in school I studied Scorsese’s films. Just to be nominated was a huge honour, I never felt I would win. When people in the US were not familiar with my films Quentin [Tarantino] would always put my films on his list – Quentin, I love you.”</p>',
-					elementId: '48cea0d6-9920-47bc-a6dd-4e81f138ed90',
+					elementId: 'b85503a7-0e6a-4ef3-b80c-b4b86f471cd8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Hildur Guðnadóttir on female composers</strong></h2>',
-					elementId: 'd79d927b-5465-42a0-9d34-efef2a9babf7',
+					elementId: 'cc0c3176-2e20-49ea-9307-931cebb9042b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“To the girls to the women, to the mothers to the daughters who hear the music bubbling within please speak up – we need to hear your voices.”</p>',
-					elementId: 'ba56010c-ba50-4eb4-bbbf-fd422cdc86ac',
+					elementId: '188125ee-3214-481a-910a-e9312a75f6a8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2048,68 +2091,100 @@ export const Feature: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=85&auto=format&fit=max&s=38e97e2828faddfad4d885fe1fcbc94a',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=1900&quality=85&auto=format&fit=max&s=1faf8b519cb8d60595d69117c3045b97',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=ed7bd62724a6a9699e709fafa1777a38',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=cb0fc113d541fe0b718c6aec866b226b',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=85&auto=format&fit=max&s=01b25b94b163dd76aa64f6fba01db0b7',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=1300&quality=85&auto=format&fit=max&s=e832944c292d5e6a5be663058578453c',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=d3757e21fe864bf86f0c1aef0649f679',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=c10cada861fc8b0807db73c0e0199222',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=85&auto=format&fit=max&s=182304245c10968758e5d30db7acf9ce',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=1140&quality=85&auto=format&fit=max&s=03617bcdff7278d7d84e0a492d5e30ae',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=263b0e90130c35383269c6125e5d5a6f',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=c6646e6e14d6654877ee1e11e968fa56',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=980&quality=85&auto=format&fit=max&s=4726d74ff4bf99016efdf4fe45a5f09a',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=50f94a41d7e9385d4908dd2af38ece01',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=740&quality=85&auto=format&fit=max&s=2240f4ebeeb5e3ddae6574de231b59d0',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=03baf6201a00999fabc86068c43c850c',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=660&quality=85&auto=format&fit=max&s=42b9c1275c75a0c249192ef5d279f469',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=d17f1186add285763c9996e70f7b0c0e',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=480&quality=85&auto=format&fit=max&s=d956c87c35d8fb9261a371bc4a785eb5',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/5afa31831ef64b1c8304abb1ada94d5f26d04661/0_0_4416_2650/master/4416.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=59eb0dec39cfb01ad4a88faf9eb235e9',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: '55fabaf8-798c-482e-bc67-c07592f079ae',
+					elementId: '2d8a859c-94cc-4a18-b813-f1e8086e71cc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Sigourney Weaver, Gal Gadot and Brie Larson’s Fight Club</h2>',
-					elementId: 'a817bed7-122d-45eb-9810-d8bd869ad46a',
+					elementId: '8d2b77ec-3708-4001-87cb-0105b4370dfb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“We decided that after the show we’re going to start a fight club. Men are invited but no shirts allowed. The winner will get a lifetime’s supply of deodorant, sushi, and tequila. The loser gets a lifetime of questions about what it’s like as a woman in Hollywood.</p>',
-					elementId: '11f401ef-fbb0-4b5b-bce6-e0895c6fc0ce',
+					elementId: '573707e8-2c73-43fb-84e8-58c6190af9d5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Ford v Ferrari</strong><strong> sound editor Donald Sylvester</strong><strong> on sharing</strong></h2>',
-					elementId: '16ce402b-fa20-477d-b963-602f9f653509',
+					elementId: '59820cc4-cd7c-49b8-82b1-67ae60629871',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“If I could I would break this off [statuette] and give James [Mangold] the head so he could put it in a jar.”</p>',
-					elementId: 'ad52d606-b551-4664-879d-61da050655da',
+					elementId: '6715adb2-0a94-455f-b378-e6261c069ff5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Hair Love’s directors on … hair</strong></h2>',
-					elementId: '340cec3b-bb10-4cea-a1c1-b957e271687f',
+					elementId: 'f360e9bf-a18d-4964-8d9e-5727fc8bd21a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Matthew A Cherry and Karen Rupert Toliver said their film Hair Love, which won for best animated short, was made because they “wanted to normalise black hair” and make cartoons more diverse. The directors invited black teenager <a href="https://www.theguardian.com/us-news/2020/jan/23/deandre-arnold-texas-school-district-student-dreadlocks">Deandre Arnold</a>, who was told he wouldn’t be able to take part in his graduation if he didn’t cut his dreadlocks, as their guest.</p>',
-					elementId: '1aeef046-c015-4d46-a8e5-4a8aa911924c',
+					elementId: '9093b4cd-16b1-4bf6-bce5-20f601d68480',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“We have a firm belief that representation matters deeply, especially in cartoons because in cartoons that’s how we first see our movies and think about how we shape the world,” said Karen Rupert Toliver.</p>',
-					elementId: 'dd5a8ab2-33be-40b9-a6c2-c3da79d90352',
+					elementId: '7ea962f4-d4ae-41d6-ac53-eff1b714a864',
 				},
 			],
 			attributes: {

@@ -100,6 +100,9 @@ type Palette = {
 		cardHeadline: Colour;
 		cardByline: Colour;
 		cardKicker: Colour;
+		dynamoHeadline: Colour;
+		dynamoKicker: Colour;
+		dynamoMeta: Colour;
 		linkKicker: Colour;
 		cardStandfirst: Colour;
 		cardFooter: Colour;
@@ -620,6 +623,7 @@ interface CAPIArticleType {
 	mostRecentBlockId?: string;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
+	byline?: string;
 	newsletterToEmbed?: Newsletter;
 }
 
@@ -1079,7 +1083,13 @@ type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 
-type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge';
+type SmallHeadlineSize =
+	| 'tiny'
+	| 'small'
+	| 'medium'
+	| 'large'
+	| 'huge'
+	| 'ginormous';
 
 type AvatarType = {
 	src: string;

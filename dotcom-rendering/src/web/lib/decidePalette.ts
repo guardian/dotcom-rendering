@@ -1326,13 +1326,18 @@ export const decidePalette = (
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
 			cardHeadline:
-				overrides?.text.cardHeadline || textCardHeadline(format),
-			cardByline: overrides?.text.cardByline || textCardByline(format),
-			cardKicker: overrides?.text.cardKicker || textCardKicker(format),
+				overrides?.text.cardHeadline ?? textCardHeadline(format),
+			dynamoHeadline:
+				overrides?.text.dynamoHeadline ?? textCardHeadline(format),
+			cardByline: overrides?.text.cardByline ?? textCardByline(format),
+			cardKicker: overrides?.text.cardKicker ?? textCardKicker(format),
+			dynamoKicker:
+				overrides?.text.dynamoKicker ?? textCardKicker(format),
 			linkKicker: textLinkKicker(format),
 			cardStandfirst:
-				overrides?.text.cardStandfirst || textCardStandfirst(format),
-			cardFooter: overrides?.text.cardFooter || textCardFooter(format),
+				overrides?.text.cardStandfirst ?? textCardStandfirst(format),
+			cardFooter: overrides?.text.cardFooter ?? textCardFooter(format),
+			dynamoMeta: overrides?.text.dynamoMeta ?? textCardFooter(format),
 			headlineByline: textHeadlineByline(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
@@ -1367,7 +1372,7 @@ export const decidePalette = (
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
-			card: overrides?.background.card || backgroundCard(format),
+			card: overrides?.background.card ?? backgroundCard(format),
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),
 			bullet: backgroundBullet(format),
@@ -1429,7 +1434,7 @@ export const decidePalette = (
 			filterButton: borderFilterButton(),
 		},
 		topBar: {
-			card: overrides?.topBar.card || topBarCard(format),
+			card: overrides?.topBar.card ?? topBarCard(format),
 		},
 		hover: {
 			headlineByline: hoverHeadlineByline(format),
