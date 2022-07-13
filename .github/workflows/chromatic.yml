@@ -1,9 +1,8 @@
 name: Chromatic 👓
 on:
   push:
-    branches:
-      - main
-  pull_request:
+    paths-ignore:
+      - "dotcom-rendering/docs/**"
 jobs:
   chromatic:
     name: Chromatic
@@ -28,3 +27,4 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
+          onlyChanged: true
