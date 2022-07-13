@@ -7,9 +7,7 @@ import Tags from './';
 
 // ----- Stories ----- //
 
-const Default = (format: ArticleFormat): JSX.Element => (
-	<Tags item={article} />
-);
+const Default = (format: ArticleFormat): JSX.Element => <Tags item={article} />;
 
 // ----- Exports ----- //
 

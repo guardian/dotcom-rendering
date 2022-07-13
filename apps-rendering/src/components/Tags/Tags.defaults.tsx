@@ -7,7 +7,8 @@ import { TagType } from '@guardian/content-api-models/v1/tagType';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { neutral, remSpace, textSans } from '@guardian/source-foundations';
-import { getFormat, Item } from 'item';
+import type { Item } from 'item';
+import { getFormat } from 'item';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -69,7 +70,7 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 
 interface Props {
 	item: Item;
-    css: SerializedStyles;
+	css: SerializedStyles;
 	className?: string;
 }
 
@@ -93,7 +94,4 @@ const DefaultTags: FC<Props> = ({ item, className }) => (
 
 // ----- Exports ----- //
 
-export {
-    DefaultTags,
-    defaultStyles,
-}
+export { DefaultTags, defaultStyles };

@@ -1,7 +1,8 @@
 // ----- Imports ----- //
 
 import { ArticleDisplay } from '@guardian/libs';
-import { getFormat, Item } from 'item';
+import type { Item } from 'item';
+import { getFormat } from 'item';
 import type { FC } from 'react';
 import ImmersiveTags from './ImmersiveTags';
 import { defaultStyles, DefaultTags } from './Tags.defaults';
@@ -10,7 +11,7 @@ import { defaultStyles, DefaultTags } from './Tags.defaults';
 
 type Props = {
 	item: Item;
-}
+};
 
 const Tags: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
@@ -19,8 +20,8 @@ const Tags: FC<Props> = ({ item }) => {
 		return <ImmersiveTags item={item} />;
 	}
 
-	return <DefaultTags item={item} css={defaultStyles(getFormat(item))} />
-}
+	return <DefaultTags item={item} css={defaultStyles(getFormat(item))} />;
+};
 
 // ----- Exports ----- //
 
