@@ -895,6 +895,7 @@ type DCRFrontCard = {
 	discussionId?: string;
 	byline?: string;
 	showByline?: boolean;
+	isBoosted?: boolean;
 };
 
 type FECollectionType = {
@@ -1099,7 +1100,14 @@ type LineEffectType = 'labs' | 'dotted' | 'straight';
 
 type LeftColSize = 'compact' | 'wide';
 
-type CardPercentageType = '25%' | '34%' | '50%' | '66%' | '75%' | '100%';
+type CardPercentageType =
+	| '25%'
+	| '33.333%'
+	| '34%'
+	| '50%'
+	| '66%'
+	| '75%'
+	| '100%';
 
 type HeadlineLink = {
 	to: string; // the href for the anchor tag
@@ -1334,6 +1342,7 @@ interface TrailType extends BaseTrailType {
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
 	discussionId?: string;
+	isBoosted?: boolean;
 }
 
 interface CAPITrailType extends BaseTrailType {
