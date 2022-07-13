@@ -15,6 +15,7 @@ import {
 	pxToRem,
 	remSpace,
 } from '@guardian/source-foundations';
+import { OptionKind } from '@guardian/types';
 import Footer from 'components/Footer';
 import GridItem from 'components/GridItem';
 import LiveBlocks from 'components/LiveBlocks';
@@ -29,7 +30,6 @@ import { toNullable } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, onwardStyles } from 'styles';
-import { OptionKind } from '@guardian/types';
 
 // ----- Component ----- //
 
@@ -112,7 +112,7 @@ const keyEvents = (blocks: LiveBlock[]): KeyEvent[] =>
 		[],
 	);
 
-const showPinnedPost = (item: LiveBlog | DeadBlog) =>
+const showPinnedPost = (item: LiveBlog | DeadBlog): boolean =>
 	item.pagedBlocks.currentPage.pageNumber === 1 &&
 	item.pinnedBlock.kind === OptionKind.Some;
 

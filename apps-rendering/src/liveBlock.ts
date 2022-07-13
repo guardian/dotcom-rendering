@@ -21,7 +21,7 @@ type LiveBlock = {
 	lastModified: Date;
 	body: Body;
 	contributors: Contributor[];
-	isPinned: Boolean;
+	isPinned: boolean;
 };
 
 // ----- Functions ----- //
