@@ -414,6 +414,9 @@
             "items": {
                 "$ref": "#/definitions/Topic"
             }
+        },
+        "byline": {
+            "type": "string"
         }
     },
     "required": [
