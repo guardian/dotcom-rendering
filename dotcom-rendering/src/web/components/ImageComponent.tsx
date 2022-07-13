@@ -337,36 +337,17 @@ export const ImageComponent = ({
 					// the image which, when clicked, toggles the caption as an overlay
 					<Hide when="above" breakpoint="tablet">
 						<Row>
-							<div
-								css={css`
-									#the-checkbox {
-										/* Never show the input */
-										display: none;
-									}
-									#the-caption {
-										/* Hide caption by default */
-										display: none;
-									}
-									#the-checkbox:checked + #the-caption {
-										/* Show the caption if the input is checked */
-										display: block;
-									}
-								`}
-							>
-								{/* CaptionToggle contains the input with id #the-checkbox */}
-								<CaptionToggle />
-								<div id="the-caption">
-									<Caption
-										captionText={element.data.caption || ''}
-										format={format}
-										credit={element.data.credit}
-										displayCredit={element.displayCredit}
-										shouldLimitWidth={shouldLimitWidth}
-										isOverlayed={true}
-										isMainMedia={isMainMedia}
-									/>
-								</div>
-							</div>
+							<CaptionToggle>
+								<Caption
+									captionText={element.data.caption || ''}
+									format={format}
+									credit={element.data.credit}
+									displayCredit={element.displayCredit}
+									shouldLimitWidth={shouldLimitWidth}
+									isOverlayed={true}
+									isMainMedia={isMainMedia}
+								/>
+							</CaptionToggle>
 						</Row>
 					</Hide>
 				)}

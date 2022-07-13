@@ -256,29 +256,9 @@ export const YoutubeBlockComponent = ({
 			)}
 
 			{showOverlayCaption && (
-				// Below tablet, main media images show an info toggle at the bottom right of
-				// the image which, when clicked, toggles the caption as an overlay
 				<Hide from="desktop">
-					<div
-						className="overlay-caption"
-						css={css`
-							#the-checkbox {
-								/* Never show the input */
-								display: none;
-							}
-							#the-caption {
-								/* Hide caption by default */
-								display: none;
-							}
-							#the-checkbox:checked + #the-caption {
-								/* Show the caption if the input is checked */
-								display: block;
-							}
-						`}
-					>
-						{/* CaptionToggle contains the input with id #the-checkbox */}
-						<CaptionToggle />
-						<div id="the-caption">
+					<div className="overlay-caption">
+						<CaptionToggle>
 							<Caption
 								mediaType="Video"
 								captionText={mediaTitle || ''}
@@ -288,7 +268,7 @@ export const YoutubeBlockComponent = ({
 								isOverlayed={true}
 								isMainMedia={isMainMedia}
 							/>
-						</div>
+						</CaptionToggle>
 					</div>
 				</Hide>
 			)}

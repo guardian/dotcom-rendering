@@ -23,7 +23,7 @@ const toggleStyles = css`
 		fill: white;
 	}
 `;
-export const CaptionToggle = () => (
+const Toggle = () => (
 	<>
 		<label htmlFor="the-checkbox" css={toggleStyles}>
 			<svg width="6" height="14" fill="white" viewBox="0 0 6 14">
@@ -33,4 +33,27 @@ export const CaptionToggle = () => (
 		{/* Hidden input used to toggle the caption using css */}
 		<input type="checkbox" id="the-checkbox" />
 	</>
+);
+
+const captionToggleStyles = css`
+	#the-checkbox {
+		/* Never show the input */
+		display: none;
+	}
+	#the-caption {
+		/* Hide caption by default */
+		display: none;
+	}
+	#the-checkbox:checked + #the-caption {
+		/* Show the caption if the input is checked */
+		display: block;
+	}
+`;
+
+export const CaptionToggle = ({ children }: { children: React.ReactNode }) => (
+	<div css={captionToggleStyles}>
+		{/* Toggle contains the input with id #the-checkbox */}
+		<Toggle />
+		<div id="the-caption">{children}</div>
+	</div>
 );

@@ -323,8 +323,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
 
-	const isRepositionVariant =
-		CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant;
+	const isRepositionVariant = true;
+	// CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant;
 	return (
 		<>
 			<div data-print-layout="hide">
