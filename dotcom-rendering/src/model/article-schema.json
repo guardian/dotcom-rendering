@@ -2129,10 +2129,14 @@
                         "successDescription",
                         "theme"
                     ]
+                },
+                "elementId": {
+                    "type": "string"
                 }
             },
             "required": [
                 "_type",
+                "elementId",
                 "newsletter"
             ]
         },
