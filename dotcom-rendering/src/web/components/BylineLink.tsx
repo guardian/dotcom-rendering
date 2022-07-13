@@ -1,7 +1,4 @@
-import {
-	getBylineComponentsFromTokens,
-	getContributorTags,
-} from '../../lib/byline';
+import { getBylineComponentsFromTokens, isContributor } from '../../lib/byline';
 
 type Props = {
 	byline: string;
@@ -50,7 +47,7 @@ const applyCleverOrderingForMatching = (titles: string[]): string[] => {
 // 'Jane Doe and John Smith` to ['Jane Doe', ' and ', 'John Smith']
 // It does this so we can have separate links to both contributors
 export const bylineAsTokens = (byline: string, tags: TagType[]): string[] => {
-	const titles = getContributorTags(tags).map((c) => c.title);
+	const titles = tags.filter(isContributor).map((c) => c.title);
 	// The contributor tag title should exist inside the byline for this regex to work
 
 	const regex = new RegExp(
