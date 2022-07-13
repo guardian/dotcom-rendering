@@ -1,6 +1,8 @@
 name: Chromatic 👓
 on:
   push:
+    paths-ignore:
+      - "dotcom-rendering/docs/**"
 jobs:
   chromatic:
     name: Chromatic
