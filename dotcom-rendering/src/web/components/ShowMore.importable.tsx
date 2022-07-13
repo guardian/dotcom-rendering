@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { from, space } from '@guardian/source-foundations';
+import {
+	error as errorColor,
+	fontWeights,
+	from,
+	space,
+} from '@guardian/source-foundations';
 import { Button, SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { useApi } from '../lib/useApi';
@@ -46,6 +51,12 @@ function removeHtml(collectionId: string) {
 	}
 }
 
+const errorMessageMarkup = `
+	<div style="color: ${errorColor[400]}; font-weight: ${fontWeights.bold}; padding: 10px;">
+		Sorry, failed to load more stories. Please try again.
+	</div>
+`;
+
 export const ShowMore = ({
 	pageId,
 	collectionId,
@@ -62,14 +73,23 @@ export const ShowMore = ({
 	const url = showMore
 		? `https://code.api.nextgen.guardianapps.co.uk/${pageId}/show-more/${collectionId}.json?dcr=true`
 		: undefined;
-	const { data, loading } = useApi<{ html: string }>(url, {
+	const { data, error, loading } = useApi<{ html: string }>(url, {
 		errorRetryCount: 1,
 	});
 
 	if (!showMore) {
 		removeHtml(collectionId);
-	} else if (data?.html) {
-		insertHtml(data.html, collectionId);
+	} else {
+		if (error) {
+			// Inserting hard-coded markup here allows us to have a simple state
+			// space in this component, but it does limit styling. If styling is
+			// revisited, this may be a good reason to add extra state to handle
+			// the error message.
+			insertHtml(errorMessageMarkup, collectionId);
+		}
+		if (data) {
+			insertHtml(data.html, collectionId);
+		}
 	}
 
 	return (
