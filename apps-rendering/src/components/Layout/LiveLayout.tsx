@@ -15,7 +15,6 @@ import {
 	pxToRem,
 	remSpace,
 } from '@guardian/source-foundations';
-import { OptionKind } from '@guardian/types';
 import Footer from 'components/Footer';
 import GridItem from 'components/GridItem';
 import LiveBlocks from 'components/LiveBlocks';
@@ -112,10 +111,6 @@ const keyEvents = (blocks: LiveBlock[]): KeyEvent[] =>
 		[],
 	);
 
-const showPinnedPost = (item: LiveBlog | DeadBlog): boolean =>
-	item.pagedBlocks.currentPage.pageNumber === 1 &&
-	item.pinnedBlock.kind === OptionKind.Some;
-
 interface Props {
 	item: LiveBlog | DeadBlog;
 }
@@ -186,13 +181,13 @@ const LiveLayout: FC<Props> = ({ item }) => {
 						`}
 						id="liveblock-container"
 					>
-						{/* This is a placeholder for the pinned post */}
-						{showPinnedPost(item) && <></>}
 						{item.pagedBlocks.currentPage.pageNumber > 1 &&
 							pagination}
 						<LiveBlocks
 							blocks={item.pagedBlocks.currentPage.blocks}
 							format={item}
+							pinnedPost={item.pinnedBlock}
+							pageNumber={item.pagedBlocks.currentPage.pageNumber}
 						/>
 						{pagination}
 					</div>
