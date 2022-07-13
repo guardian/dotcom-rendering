@@ -87,7 +87,7 @@ const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas: 'title	headline';
 				}
 				${until.desktop} {
-					grid-template-columns: 1fr; /* Main content */
+					grid-template-columns: minmax(0, 1fr); /* Main content */
 					grid-template-areas:
 						'title'
 						'mainmedia'
@@ -517,6 +517,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.isAdFreeUser
 											}
 											hideCaption={true}
+											showOverlayCaption={true}
 										/>
 									</Hide>
 								</GridItem>

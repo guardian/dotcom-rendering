@@ -79,6 +79,7 @@ export const MainMedia: React.FC<{
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
+	showOverlayCaption?: boolean;
 }> = ({
 	elements,
 	format,
@@ -92,6 +93,7 @@ export const MainMedia: React.FC<{
 	isAdFreeUser,
 	isSensitive,
 	switches,
+	showOverlayCaption,
 }) => {
 	return (
 		<div css={[mainMedia, chooseWrapper(format)]}>
@@ -113,6 +115,7 @@ export const MainMedia: React.FC<{
 					switches={switches}
 					hideCaption={hideCaption}
 					starRating={starRating}
+					showOverlayCaption={showOverlayCaption}
 				/>
 			))}
 		</div>

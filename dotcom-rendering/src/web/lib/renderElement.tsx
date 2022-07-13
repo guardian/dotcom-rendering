@@ -78,6 +78,7 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
+	showOverlayCaption?: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -131,6 +132,7 @@ export const renderElement = ({
 	isAdFreeUser,
 	switches,
 	isSensitive,
+	showOverlayCaption,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
 
@@ -742,6 +744,7 @@ export const renderElement = ({
 						altText={element.altText}
 						origin={host}
 						stickyVideos={isBlog && switches.stickyVideos}
+						showOverlayCaption={showOverlayCaption ?? false}
 					/>
 				</Island>,
 			];
@@ -789,6 +792,7 @@ export const RenderArticleElement = ({
 	isAdFreeUser,
 	isSensitive,
 	switches,
+	showOverlayCaption,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -807,6 +811,7 @@ export const RenderArticleElement = ({
 		isAdFreeUser,
 		isSensitive,
 		switches,
+		showOverlayCaption,
 	});
 
 	if (!ok) {

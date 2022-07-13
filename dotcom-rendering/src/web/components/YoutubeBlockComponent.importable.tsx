@@ -31,6 +31,7 @@ type Props = {
 	duration?: number; // in seconds
 	origin?: string;
 	stickyVideos: boolean;
+	showOverlayCaption?: boolean;
 };
 
 const expiredOverlayStyles = (overrideImage: string) => css`
@@ -86,6 +87,7 @@ export const YoutubeBlockComponent = ({
 	duration,
 	origin,
 	stickyVideos,
+	showOverlayCaption,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -233,7 +235,7 @@ export const YoutubeBlockComponent = ({
 				/>
 			)}
 
-			{isMainMedia && (
+			{showOverlayCaption && (
 				// Below tablet, main media images show an info toggle at the bottom right of
 				// the image which, when clicked, toggles the caption as an overlay
 				<Hide from="desktop">
