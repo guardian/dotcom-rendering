@@ -8,10 +8,17 @@ type Props = {
 
 /**
  * A wrapper around the normal Card component providing sensible defaults for Cards on front containers.
- * @param {string} [headlineSize="medium"] - Defaults to "medium"
- * @param {string} [imagePosition="top"] - Defaults to "top"
- * @param {string} [imagePositionOnMobile="left"] - Defaults to "left"
- * @param {string} [imageSize="medium"] - Defaults to "medium"
+ *
+ * Any prop used by the original Card can be used in FrontCard to override the defaults.
+ *
+ * Note: Below parameters are not an exhaustive list of params used by FrontCard, rather they are a list of
+ * commonly overridden params to make it easier for a developer to know if they actually need to override these values.
+ *
+ * @param {SmallHeadlineSize} [headlineSize="medium"] - Defaults to "medium"
+ * @param {ImagePositionType} [imagePosition="top"] - Defaults to "top"
+ * @param {ImagePositionType} [imagePositionOnMobile="left"] - Defaults to "left"
+ * @param {ImageSizeType} [imageSize="medium"] - Defaults to "medium"
+ * @param {DCRSupportingContent[]} [imageSize=undefined] - Defaults to undefined, set to trail.supportingContent if you want this card to show sublinks.
  */
 export const FrontCard = (props: Props) => {
 	const { trail } = props;
