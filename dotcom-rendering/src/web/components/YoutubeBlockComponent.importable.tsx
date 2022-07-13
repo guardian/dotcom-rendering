@@ -93,6 +93,26 @@ export const YoutubeBlockComponent = ({
 		undefined,
 	);
 
+	useEffect(
+		function hideOverlayCaptionOnPlay() {
+			if (showOverlayCaption) {
+				const hideOverlayCaption = () => {
+					const caption: HTMLElement | null =
+						document.querySelector('.overlay-caption');
+					if (caption) caption.style.display = 'none';
+				};
+				document.addEventListener('video:play', hideOverlayCaption);
+
+				return () =>
+					document.removeEventListener(
+						'video:play',
+						hideOverlayCaption,
+					);
+			}
+		},
+		[showOverlayCaption],
+	);
+
 	useEffect(() => {
 		const defineConsentState = async () => {
 			const { onConsentChange } = await import(
@@ -240,6 +260,7 @@ export const YoutubeBlockComponent = ({
 				// the image which, when clicked, toggles the caption as an overlay
 				<Hide from="desktop">
 					<div
+						className="overlay-caption"
 						css={css`
 							#the-checkbox {
 								/* Never show the input */
