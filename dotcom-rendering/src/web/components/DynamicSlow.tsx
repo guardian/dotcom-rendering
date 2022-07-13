@@ -4,9 +4,11 @@ import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
 
 type Props = {
+	collectionId: string;
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	hasMore: boolean;
 };
 
 /**
@@ -14,7 +16,13 @@ type Props = {
  *
  * @see {@link https://www.figma.com/file/sx2vMFHbL7SsUo0LcpsKNe/%E2%AC%A3--Front-container?node-id=123%3A137122 Figma designs}
  */
-export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
+export const DynamicSlow = ({
+	collectionId,
+	trails,
+	containerPalette,
+	showAge,
+	hasMore,
+}: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
 	const bigCards = trails.slice(2, 4);
@@ -116,6 +124,7 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 					</UL>
 				</LI>
 			</UL>
+			{hasMore && <span data-show-more-placeholder={collectionId} />}
 		</>
 	);
 };
