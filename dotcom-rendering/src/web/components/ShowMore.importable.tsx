@@ -42,16 +42,15 @@ function removeHtml(collectionId: string) {
 }
 
 export const ShowMore = ({
+	pageId,
 	collectionId,
 	displayName,
-	editionId,
 }: {
+	pageId: string;
 	collectionId: string;
 	displayName: string;
-	editionId: Edition;
-	trailIds: string[];
 }) => {
-	const url = `http://localhost:9000/${editionId}/show-more/${collectionId}.json?dcr=true`;
+	const url = `http://localhost:9000/${pageId}/show-more/${collectionId}.json?dcr=true`;
 	const [showMore, setShow] = useState(false);
 	const { data, loading } = useApi<{ html: string }>(
 		showMore ? url : undefined,

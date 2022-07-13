@@ -178,8 +178,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							{collection.hasMore && (
 								<Island deferUntil={'visible'}>
 									<ShowMore
+										pageId={front.pressedPage.id}
 										collectionId={collection.id}
-										editionId={front.editionId}
 										displayName={collection.displayName}
 									/>
 								</Island>
