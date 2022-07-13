@@ -9,9 +9,9 @@ type Props = {
 /**
  * A wrapper around the normal Card component providing sensible defaults for Cards on front containers.
  * @param {string} [headlineSize=medium]
- * @property {string} [imagePosition=top]
- * @property {string} [imagePositionOnMobile=left]
- * @property {string} [imageSize=medium]
+ * @param {string} [imagePosition=top]
+ * @param {string} [imagePositionOnMobile=left]
+ * @param {string} [imageSize=medium]
  */
 export const FrontCard = (props: Props) => {
 	const { trail } = props;

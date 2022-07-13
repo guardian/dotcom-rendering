@@ -57,6 +57,8 @@ export const FixedMediumSlowVI = ({
 								trail={trail}
 								containerPalette={containerPalette}
 								showAge={showAge}
+								//Overrides
+								headlineSize="small"
 							/>
 						</LI>
 					);

@@ -25,6 +25,7 @@ export const DynamicPackage = ({
 						containerPalette={containerPalette}
 						showAge={showAge}
 						//Overrides
+						containerType="dynamic/package"
 						headlineSize="huge"
 						imagePosition="bottom"
 						imagePositionOnMobile="bottom"
