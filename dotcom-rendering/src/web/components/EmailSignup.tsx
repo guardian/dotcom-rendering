@@ -44,7 +44,7 @@ const descriptionStyles = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-export const EmailSignup = ({ newsletter, elementId }: Props) => {
+export const EmailSignup = ({ newsletter }: Props) => {
 	const {
 		identityName,
 		name,
