@@ -259,6 +259,17 @@ const fields = {
 	webUrl: '',
 };
 
+const pinnedBlock: LiveBlock = {
+	id: '5',
+	isKeyEvent: false,
+	title: 'Block Five',
+	firstPublished: new Date('2021-11-02T10:20:20Z'),
+	lastModified: new Date('2021-11-02T11:13:13Z'),
+	body: [],
+	contributors: [],
+	isPinned: true,
+};
+
 const blocks: LiveBlock[] = [
 	{
 		id: '1',
@@ -319,16 +330,7 @@ const blocks: LiveBlock[] = [
 		contributors: [],
 		isPinned: false,
 	},
-	{
-		id: '5',
-		isKeyEvent: false,
-		title: 'Block Five',
-		firstPublished: new Date('2021-11-02T10:20:20Z'),
-		lastModified: new Date('2021-11-02T11:13:13Z'),
-		body: [],
-		contributors: [],
-		isPinned: false,
-	},
+	pinnedBlock,
 ];
 
 const pagedBlocks: LiveBlogPagedBlocks = {
@@ -352,7 +354,7 @@ const live: LiveBlog = {
 	blocks: blocks,
 	pagedBlocks,
 	totalBodyBlocks: 5,
-	pinnedBlock: none,
+	pinnedBlock: some(pinnedBlock),
 };
 
 const deadBlog: DeadBlog = {
