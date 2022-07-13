@@ -898,6 +898,7 @@ type DCRFrontCard = {
 	discussionId?: string;
 	byline?: string;
 	showByline?: boolean;
+	isBoosted?: boolean;
 };
 
 type FECollectionType = {
@@ -1335,6 +1336,7 @@ interface TrailType extends BaseTrailType {
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
 	discussionId?: string;
+	isBoosted?: boolean;
 }
 
 interface CAPITrailType extends BaseTrailType {
