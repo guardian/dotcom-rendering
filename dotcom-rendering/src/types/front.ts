@@ -281,6 +281,7 @@ export type DCRCollectionType = {
 	config: {
 		showDateHeader: boolean;
 	};
+	hasMore: boolean;
 };
 
 type FEFrontConfigType = {
