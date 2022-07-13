@@ -59,7 +59,7 @@ export const LiveBlogRenderer = ({
 	availableTopics,
 	selectedTopics,
 }: Props) => {
-	const filtered = selectedTopics?.length || filterKeyEvents;
+	const filtered = !!selectedTopics || filterKeyEvents;
 
 	return (
 		<>
