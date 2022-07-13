@@ -18,7 +18,7 @@ type Props = {
  * @param {ImagePositionType} [imagePosition="top"] - Defaults to "top"
  * @param {ImagePositionType} [imagePositionOnMobile="left"] - Defaults to "left"
  * @param {ImageSizeType} [imageSize="medium"] - Defaults to "medium"
- * @param {DCRSupportingContent[]} [imageSize=undefined] - Defaults to undefined, set to trail.supportingContent if you want this card to show sublinks.
+ * @param {DCRSupportingContent[]} [supportingContent=undefined] - Defaults to undefined, set to trail.supportingContent if you want this card to show sublinks.
  */
 export const FrontCard = (props: Props) => {
 	const { trail } = props;
