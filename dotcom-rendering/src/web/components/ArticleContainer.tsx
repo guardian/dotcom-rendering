@@ -11,7 +11,7 @@ type Props = {
 const articleWidth = (format: ArticleFormat) => {
 	switch (format.design) {
 		case ArticleDesign.Interactive: {
-			// These articles use a special template which manages it's own width
+			/* These articles use a special template which manages it's own width */
 			return null;
 		}
 		case ArticleDesign.LiveBlog:
@@ -65,75 +65,54 @@ const adStyles = css`
 	.ad-slot--fluid {
 		width: 100%;
 	}
-	.ad-slot-container--liveblog {
-		background-color: ${neutral[93]};
-		margin: 0 auto ${space[3]}px;
-		// this is centering the ad iframe as they are display: inline; elements by default
+
+	.ad-slot-container {
+		margin: ${space[3]}px auto;
+		/* this is centring the ad iframe as they are display: inline; elements by default */
 		text-align: center;
-
-		.ad-slot {
-			margin-left: auto;
-			margin-right: auto;
-		}
-
-		.ad-slot__label {
-			color: ${neutral[46]};
-			border-top-color: ${neutral[86]};
-		}
 
 		${from.mobile} {
 			width: 300px;
 		}
 
 		${from.tablet} {
-			width: 100%;
+			width: auto;
+			background-color: ${neutral[97]};
 		}
-	}
-
-	/* Unlike other inlines do not float right inline1 */
-	.ad-slot-container--article {
-		margin-top: 12px;
-		margin-bottom: 12px;
-		// this is centering the ad iframe as they are display: inline; elements by default
-		text-align: center;
 
 		/* Prevent merger with any nearby float left elements e.g. rich-links */
 		${until.desktop} {
 			clear: left;
 		}
 
-		${from.tablet} {
-			background-color: ${neutral[97]};
-		}
-
 		.ad-slot {
 			margin-left: auto;
 			margin-right: auto;
-		}
 
-		.ad-slot--inline,
-		.ad-slot--top-above-nav {
-			${from.mobile} {
-				width: 300px;
-			}
-			${from.tablet} {
-				width: auto;
-			}
 			&.ad-slot--fluid {
 				width: 100%;
 			}
 		}
 
-		&.ad-slot--offset-right {
-			${from.desktop} {
-				float: right;
-				width: 300px;
-				margin-right: -318px;
+		/* liveblogs ads have different background colours due the darker page background */
+		.ad-slot--liveblog-inline {
+			background-color: ${neutral[93]};
+			.ad-slot__label {
+				color: ${neutral[46]};
+				border-top-color: ${neutral[86]};
 			}
+		}
+	}
 
-			${from.wide} {
-				margin-right: -398px;
-			}
+	.ad-slot-container--offset-right {
+		${from.desktop} {
+			float: right;
+			width: 300px;
+			margin-right: -318px;
+		}
+
+		${from.wide} {
+			margin-right: -398px;
 		}
 	}
 `;
