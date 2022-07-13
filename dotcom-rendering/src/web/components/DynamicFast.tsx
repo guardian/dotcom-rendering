@@ -27,6 +27,7 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 						imagePosition="right"
 						imagePositionOnMobile="top"
 						imageSize="large"
+						supportingContent={primary.supportingContent}
 					/>
 				</LI>
 				<LI
@@ -39,6 +40,8 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 						trail={secondary}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						// Overrides
+						supportingContent={secondary.supportingContent}
 					/>
 				</LI>
 			</UL>
@@ -57,6 +60,8 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
+								// Overrides
+								supportingContent={card.supportingContent}
 							/>
 						</LI>
 					);
@@ -85,6 +90,9 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 										//Overrides
 										headlineSize="small"
 										imageUrl={undefined}
+										supportingContent={
+											card.supportingContent
+										}
 									/>
 								</LI>
 							);

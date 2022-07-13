@@ -29,6 +29,7 @@ export const DynamicPackage = ({
 						imagePosition="bottom"
 						imagePositionOnMobile="bottom"
 						imageSize="large"
+						supportingContent={primary.supportingContent}
 						isDynamo={true}
 					/>
 				</LI>
@@ -63,6 +64,9 @@ export const DynamicPackage = ({
 											remaining.length === 2
 												? card.image
 												: undefined
+										}
+										supportingContent={
+											card.supportingContent
 										}
 									/>
 								</LI>
