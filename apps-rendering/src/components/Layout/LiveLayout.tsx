@@ -186,7 +186,7 @@ const LiveLayout: FC<Props> = ({ item }) => {
 						<LiveBlocks
 							blocks={item.pagedBlocks.currentPage.blocks}
 							format={item}
-							pinnedPost={item.pinnedBlock}
+							pinnedPost={item.pinnedPost}
 							pageNumber={item.pagedBlocks.currentPage.pageNumber}
 						/>
 						{pagination}

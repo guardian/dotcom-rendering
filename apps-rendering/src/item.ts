@@ -82,7 +82,7 @@ interface LiveBlog extends Fields {
 	blocks: LiveBlock[];
 	totalBodyBlocks: number;
 	pagedBlocks: LiveBlogPagedBlocks;
-	pinnedBlock: Option<LiveBlock>;
+	pinnedPost: Option<LiveBlock>;
 }
 
 interface DeadBlog extends Fields {
@@ -90,7 +90,7 @@ interface DeadBlog extends Fields {
 	blocks: LiveBlock[];
 	totalBodyBlocks: number;
 	pagedBlocks: LiveBlogPagedBlocks;
-	pinnedBlock: Option<LiveBlock>;
+	pinnedPost: Option<LiveBlock>;
 }
 
 interface Review extends Fields {
@@ -389,7 +389,7 @@ const fromCapiLiveBlog =
 			blocks: parsedBlocks,
 			pagedBlocks,
 			totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
-			pinnedBlock: fromNullable(parsedBlocks.find((b) => b.isPinned)),
+			pinnedPost: fromNullable(parsedBlocks.find((b) => b.isPinned)),
 			...itemFields(context, request),
 		};
 	};

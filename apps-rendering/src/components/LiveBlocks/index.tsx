@@ -9,7 +9,7 @@ import { map, partition, withDefault } from '@guardian/types';
 import { LastUpdated } from 'components/LastUpdated';
 import type { Contributor } from 'contributor';
 import { formatUTCTimeDateTz } from 'date';
-import { pipe } from 'lib';
+import { compose, pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import { OptionKind } from 'option';
 import type { FC } from 'react';
@@ -42,8 +42,10 @@ const LiveBlocks: FC<LiveBlocksProps> = ({
 	pinnedPost,
 	pageNumber,
 }) => {
-	const pinnedPostId =
-		pinnedPost.kind === OptionKind.Some ? pinnedPost.value.id : '';
+	const pinnedPostId = compose(
+		withDefault(''),
+		map((pinnedPost: LiveBlock) => pinnedPost.id),
+	)(pinnedPost);
 
 	const showPinnedPost =
 		pageNumber === 1 && pinnedPost.kind === OptionKind.Some;
