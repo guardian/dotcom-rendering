@@ -1,9 +1,7 @@
 // ----- Imports ----- //
 
 import { matchers } from '@emotion/jest';
-import { TagType } from '@guardian/content-api-models/v1/tagType';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { article } from 'fixtures/item';
 import renderer from 'react-test-renderer';
 import Tags from './';
 
@@ -11,42 +9,30 @@ import Tags from './';
 
 expect.extend(matchers);
 
-const mockTag = {
-	webTitle: 'Tag title',
-	webUrl: 'https://mapi.co.uk/tag',
-	type: TagType.KEYWORD,
-};
-
-const mockFormat: ArticleFormat = {
-	theme: ArticlePillar.News,
-	design: ArticleDesign.Comment,
-	display: ArticleDisplay.Standard,
-};
-
 // ----- Tests ----- //
 
 describe('Tags component renders as expected', () => {
 	it('Renders link to tag', () => {
 		const tags = renderer.create(
-			<Tags tags={[mockTag]} format={mockFormat} />,
+			<Tags item={article} />,
 		);
 		const link = tags.root.findByType('a');
-		expect(link.props.href).toBe('https://mapi.co.uk/tag');
+		expect(link.props.href).toBe(article.tags[0].webUrl);
 	});
 
 	it('Renders tag title', () => {
 		const tags = renderer.create(
-			<Tags tags={[mockTag]} format={mockFormat} />,
+			<Tags item={article} />,
 		);
-		expect(tags.root.findByType('a').children.includes('Tag title')).toBe(
+		expect(tags.root.findByType('a').children.includes(article.tags[0].webTitle)).toBe(
 			true,
 		);
 	});
 
 	it('Renders correct number of tags', () => {
 		const tags = renderer.create(
-			<Tags tags={[mockTag, mockTag]} format={mockFormat} />,
+			<Tags item={article} />,
 		);
-		expect(tags.root.findAllByType('li').length).toBe(2);
+		expect(tags.root.findAllByType('li').length).toBe(7);
 	});
 });

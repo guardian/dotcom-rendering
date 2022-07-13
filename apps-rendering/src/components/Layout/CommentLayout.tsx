@@ -112,7 +112,7 @@ const CommentLayout: FC<Props> = ({ item, children }) => (
 				{children}
 			</ArticleBody>
 			<section css={articleWidthStyles}>
-				<Tags tags={item.tags} format={item} />
+				<Tags item={item} />
 			</section>
 		</article>
 		<section css={onwardStyles}>
