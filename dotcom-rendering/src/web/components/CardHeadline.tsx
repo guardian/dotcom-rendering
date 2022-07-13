@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
@@ -23,6 +24,7 @@ type Props = {
 	showByline?: boolean;
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 	linkTo?: string; // If provided, the headline is wrapped in a link
+	isDynamo?: true;
 };
 
 const fontStyles = ({
@@ -36,6 +38,14 @@ const fontStyles = ({
 	if (fontWeight) options.fontWeight = fontWeight;
 
 	switch (size) {
+		case 'ginormous':
+			return css`
+				${headline.large(options)};
+				font-size: 50px;
+				${until.desktop} {
+					${headline.large(options)};
+				}
+			`;
 		case 'huge':
 			return css`
 				${headline.small(options)};
@@ -71,6 +81,7 @@ const fontStyles = ({
 
 const labTextStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
+		case 'ginormous':
 		case 'huge':
 		case 'large':
 			return css`
@@ -130,7 +141,10 @@ const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 	}
 
 	switch (size) {
+		case 'ginormous':
+			return underlinedCssWithMediaQuery(50, 50);
 		case 'huge':
+			return underlinedCssWithMediaQuery(34, 34);
 		case 'large':
 			return underlinedCssWithMediaQuery(29, 29);
 		case 'medium':
@@ -207,8 +221,12 @@ export const CardHeadline = ({
 	showByline,
 	showLine,
 	linkTo,
+	isDynamo,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
+	const kickerColour = isDynamo
+		? palette.text.dynamoKicker
+		: palette.text.cardKicker;
 	return (
 		<>
 			<h4
@@ -234,19 +252,18 @@ export const CardHeadline = ({
 					{kickerText && (
 						<Kicker
 							text={kickerText}
-							palette={palette}
+							color={kickerColour}
 							showPulsingDot={showPulsingDot}
 							showSlash={showSlash}
-							inCard={true}
 						/>
 					)}
-					{showQuotes && (
-						<QuoteIcon colour={palette.text.cardKicker} />
-					)}
+					{showQuotes && <QuoteIcon colour={kickerColour} />}
 
 					<span
 						css={css`
-							color: ${palette.text.cardHeadline};
+							color: ${isDynamo
+								? palette.text.dynamoHeadline
+								: palette.text.cardHeadline};
 						`}
 						className="show-underline"
 					>

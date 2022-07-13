@@ -9,13 +9,20 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	webPublicationDate: string;
 	showClock?: boolean;
+	isDynamo?: true;
 };
 
-const ageStyles = (format: ArticleFormat, palette: Palette) => {
+const ageStyles = (
+	format: ArticleFormat,
+	palette: Palette,
+	isDynamo?: true,
+) => {
 	return css`
 		${textSans.xxsmall({ lineHeight: 'tight' })};
 		margin-top: -4px;
-		color: ${palette.text.cardFooter};
+		color: ${isDynamo
+			? palette.text.dynamoHeadline
+			: palette.text.cardFooter};
 
 		/* Provide side padding for positioning and also to keep spacing
     between any sibings (like Lines) */
@@ -51,6 +58,7 @@ export const CardAge = ({
 	containerPalette,
 	webPublicationDate,
 	showClock,
+	isDynamo,
 }: Props) => {
 	const displayString = timeAgo(new Date(webPublicationDate).getTime());
 	const palette = decidePalette(format, containerPalette);
@@ -60,7 +68,7 @@ export const CardAge = ({
 	}
 
 	return (
-		<span css={ageStyles(format, palette)}>
+		<span css={ageStyles(format, palette, isDynamo)}>
 			<span>
 				{showClock && <ClockIcon />}
 				<time dateTime={webPublicationDate} data-relativeformat="med">

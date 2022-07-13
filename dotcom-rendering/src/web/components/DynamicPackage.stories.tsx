@@ -30,7 +30,11 @@ export const Default = () => (
 		padContent={false}
 		centralBorder="partial"
 	>
-		<DynamicPackage trails={trails} showAge={true} />
+		<DynamicPackage
+			trails={trails}
+			showAge={true}
+			containerPalette="LongRunningPalette"
+		/>
 	</ContainerLayout>
 );
 Default.story = {

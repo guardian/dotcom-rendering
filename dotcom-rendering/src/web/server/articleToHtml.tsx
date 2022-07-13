@@ -11,6 +11,7 @@ import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { articleTemplate } from './articleTemplate';
 import { extractExpeditedIslands } from './extractIslands';
+import { recipeSchema } from './temporaryRecipeStructuredData';
 
 interface Props {
 	data: DCRServerDocumentData;
@@ -207,6 +208,10 @@ export const articleToHtml = ({ data }: Props): string => {
 		}(document, "script", "twitter-wjs"));
 	`;
 
+	const url = CAPIArticle.webURL;
+
+	const recipeMarkup = url in recipeSchema ? recipeSchema[url] : undefined;
+
 	return articleTemplate({
 		linkedData,
 		priorityScriptTags,
@@ -226,5 +231,6 @@ export const articleToHtml = ({ data }: Props): string => {
 			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
 				? initTwitter
 				: undefined,
+		recipeMarkup,
 	});
 };

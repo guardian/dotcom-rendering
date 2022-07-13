@@ -175,6 +175,7 @@ export const ContainerLayout = ({
 							fontColour={fontColour || overrides?.text.container}
 							description={description}
 							url={url}
+							containerPalette={containerPalette}
 							showDateHeader={showDateHeader}
 							editionId={editionId}
 						/>
