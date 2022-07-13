@@ -3,7 +3,7 @@ on:
     push:
         paths-ignore:
             - "apps-rendering/**"
-
+            - "dotcom-rendering/docs/**"
 jobs:
     build_check:
         name: DCR Bundle Analyser
