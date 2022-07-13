@@ -492,6 +492,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.guardianBaseURL
 									}
 									badge={CAPIArticle.badge}
+									isRepositionVariant={isRepositionVariant}
 								/>
 							</GridItem>
 							{isRepositionVariant && (

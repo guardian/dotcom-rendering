@@ -12,6 +12,7 @@ type Props = {
 	guardianBaseURL: string;
 	badge?: BadgeType;
 	isMatch?: boolean;
+	isRepositionVariant?: boolean;
 };
 
 const sectionStyles = css`
@@ -56,6 +57,12 @@ const immersiveMargins = css`
 	}
 `;
 
+const verticalPadding = css`
+	${until.desktop} {
+		padding: 8px 0;
+	}
+`;
+
 export const ArticleTitle = ({
 	format,
 	tags,
@@ -64,8 +71,15 @@ export const ArticleTitle = ({
 	guardianBaseURL,
 	badge,
 	isMatch,
+	isRepositionVariant,
 }: Props) => (
-	<div css={[sectionStyles, badge && badgeContainer]}>
+	<div
+		css={[
+			sectionStyles,
+			badge && badgeContainer,
+			isRepositionVariant && verticalPadding,
+		]}
+	>
 		{badge && format.display !== ArticleDisplay.Immersive && (
 			<div css={titleBadgeWrapper}>
 				<Badge imageUrl={badge.imageUrl} seriesTag={badge.seriesTag} />
