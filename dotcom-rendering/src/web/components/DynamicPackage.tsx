@@ -14,8 +14,8 @@ export const DynamicPackage = ({
 	containerPalette,
 	showAge,
 }: Props) => {
-	const primary = trails[0];
-	const remaining = trails.slice(1, 4);
+	const primary = [...trails].slice(0)[0];
+	const remaining = [...trails].slice(1, trails.length);
 
 	return (
 		<>
