@@ -109,6 +109,7 @@ const adStyles = css`
 			float: right;
 			width: 300px;
 			margin-right: -318px;
+			background-color: transparent;
 		}
 
 		${from.wide} {
