@@ -323,7 +323,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
 
-	const inMediaTest =
+	const isRepositionVariant =
 		CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant;
 	return (
 		<>
@@ -494,7 +494,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									badge={CAPIArticle.badge}
 								/>
 							</GridItem>
-							{inMediaTest && (
+							{isRepositionVariant && (
 								<GridItem area="mainmedia">
 									<Hide from="desktop">
 										<MainMedia
@@ -518,6 +518,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											}
 											hideCaption={true}
 											showOverlayCaption={true}
+											isRepositionVariant={true}
 										/>
 									</Hide>
 								</GridItem>
@@ -745,7 +746,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											/>
 										</Island>
 									)}
-									{inMediaTest ? (
+									{isRepositionVariant ? (
 										<Hide until="desktop">
 											<MainMedia
 												format={format}
