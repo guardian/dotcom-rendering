@@ -95,20 +95,17 @@ export const YoutubeBlockComponent = ({
 
 	useEffect(
 		function hideOverlayCaptionOnPlay() {
-			if (showOverlayCaption) {
-				const hideOverlayCaption = () => {
+			const hideOverlayCaption = () => {
+				if (showOverlayCaption) {
 					const caption: HTMLElement | null =
 						document.querySelector('.overlay-caption');
 					if (caption) caption.style.display = 'none';
-				};
-				document.addEventListener('video:play', hideOverlayCaption);
+				}
+			};
+			document.addEventListener('video:play', hideOverlayCaption);
 
-				return () =>
-					document.removeEventListener(
-						'video:play',
-						hideOverlayCaption,
-					);
-			}
+			return () =>
+				document.removeEventListener('video:play', hideOverlayCaption);
 		},
 		[showOverlayCaption],
 	);
