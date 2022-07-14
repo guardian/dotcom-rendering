@@ -295,7 +295,7 @@ export const WithPosterAndOverlayImage = () => {
 	);
 };
 
-export const WithOverlayCaption = () => {
+export const WithCaptionToggle = () => {
 	return (
 		<Container>
 			<p>
@@ -334,4 +334,4 @@ export const WithOverlayCaption = () => {
 		</Container>
 	);
 };
-WithOverlayCaption.story = { name: 'with overlay caption for liveblogs' };
+WithCaptionToggle.story = { name: 'with caption toggle' };
