@@ -87,6 +87,8 @@ const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas: 'title	headline';
 				}
 				${until.desktop} {
+					background-color: green;
+					padding: 0 30px;
 					grid-template-columns: 1fr; /* Main content */
 					grid-template-areas:
 						'title'
@@ -323,9 +325,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
 
-	const showMediaAboveHeadline =
-		CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant ===
-		'variant';
+	const showMediaAboveHeadline = true;
+	// CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant ===
+	// 'variant';
 	return (
 		<>
 			<div data-print-layout="hide">
