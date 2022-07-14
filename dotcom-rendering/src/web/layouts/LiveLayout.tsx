@@ -324,7 +324,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
 
 	const showMediaAboveHeadline =
-		CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant;
+		CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant ===
+		'variant';
+
 	return (
 		<>
 			<div data-print-layout="hide">
