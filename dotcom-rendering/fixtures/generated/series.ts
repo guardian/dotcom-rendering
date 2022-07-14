@@ -19,6 +19,81 @@ export const series = {
 	url: 'https://www.theguardian.com/tv-and-radio/series/tv-review',
 	trails: [
 		{
+			url: 'https://www.theguardian.com/tv-and-radio/2022/jul/14/resident-evil-review-netflix-zombie-game-adaptation',
+			linkText:
+				'Resident Evil review – you will binge-watch like never before',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			image: 'https://i.guim.co.uk/img/media/78fa9998a8e59429f964622bd53d353f303dfc5e/640_0_3200_1920/master/3200.jpg?width=300&quality=85&auto=format&fit=max&s=dde9da85dc3f4f830e6944792c055306',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/78fa9998a8e59429f964622bd53d353f303dfc5e/640_0_3200_1920/master/3200.jpg?width=300&quality=85&auto=format&fit=max&s=dde9da85dc3f4f830e6944792c055306',
+				'460': 'https://i.guim.co.uk/img/media/78fa9998a8e59429f964622bd53d353f303dfc5e/640_0_3200_1920/master/3200.jpg?width=460&quality=85&auto=format&fit=max&s=e529d5e1a687dc6f3793019d91798b3e',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2022-07-14T11:23:48.000Z',
+			headline:
+				'Resident Evil review – you will binge-watch like never before',
+			shortUrl: 'https://www.theguardian.com/p/yzgmj',
+			starRating: 4,
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2022/jul/13/sneakerhead-review-big-zuu-character-has-zero-personality-traits',
+			linkText:
+				'Sneakerhead review – Big Zuu’s character has zero personality traits',
+			showByline: false,
+			byline: 'Rachel Aroesti',
+			image: 'https://i.guim.co.uk/img/media/494a94cd21ccf145ea9966976d63fe0af999ee14/0_42_5714_3428/master/5714.jpg?width=300&quality=85&auto=format&fit=max&s=59345b0095c906e7db5d7e1f2b62bdeb',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/494a94cd21ccf145ea9966976d63fe0af999ee14/0_42_5714_3428/master/5714.jpg?width=300&quality=85&auto=format&fit=max&s=59345b0095c906e7db5d7e1f2b62bdeb',
+				'460': 'https://i.guim.co.uk/img/media/494a94cd21ccf145ea9966976d63fe0af999ee14/0_42_5714_3428/master/5714.jpg?width=460&quality=85&auto=format&fit=max&s=a563d05c87d17af11a715baf57a7bc3f',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2022-07-13T21:40:00.000Z',
+			headline:
+				'Sneakerhead review – Big Zuu’s character has zero personality traits',
+			shortUrl: 'https://www.theguardian.com/p/yzgjm',
+			starRating: 2,
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2022/jul/13/the-real-mo-farah-review-a-beautiful-heartbreaking-story-that-exposes-cruel-tory-policy',
+			linkText:
+				'The Real Mo Farah review – a beautiful, heartbreaking story that exposes cruel Tory policy',
+			showByline: false,
+			byline: 'Stuart Jeffries',
+			image: 'https://i.guim.co.uk/img/media/101f6b9de91f80c9afe6495d3492205a11f87433/388_106_1508_905/master/1508.jpg?width=300&quality=85&auto=format&fit=max&s=76a53b23a1e1fa3e40044a09d65413ab',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/101f6b9de91f80c9afe6495d3492205a11f87433/388_106_1508_905/master/1508.jpg?width=300&quality=85&auto=format&fit=max&s=76a53b23a1e1fa3e40044a09d65413ab',
+				'460': 'https://i.guim.co.uk/img/media/101f6b9de91f80c9afe6495d3492205a11f87433/388_106_1508_905/master/1508.jpg?width=460&quality=85&auto=format&fit=max&s=5929e9fe150d12e71727c77567b5deba',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2022-07-13T21:00:00.000Z',
+			headline:
+				'The Real Mo Farah review – a beautiful, heartbreaking story that exposes cruel Tory policy',
+			shortUrl: 'https://www.theguardian.com/p/yzmc6',
+			starRating: 5,
+		},
+		{
 			url: 'https://www.theguardian.com/tv-and-radio/2022/jul/12/better-call-saul-season-six-part-two-review-the-camerawork-is-as-intricate-as-a-vermeer-painting',
 			linkText:
 				'Better Call Saul season six, part two review – the camerawork is as intricate as a Vermeer painting',
@@ -191,81 +266,6 @@ export const series = {
 			headline:
 				'Black Bird review – Ray Liotta is heartbreaking in this posthumous prison drama',
 			shortUrl: 'https://www.theguardian.com/p/ynzdg',
-			starRating: 4,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/jul/07/the-baby-review-post-roe-this-comedy-horror-is-truly-terrifying',
-			linkText:
-				'The Baby review – post-Roe, this comedy-horror is truly terrifying',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			image: 'https://i.guim.co.uk/img/media/4bc90843df347bbe6d6ec8aa0d9f98797dc25909/0_0_7952_4771/master/7952.jpg?width=300&quality=85&auto=format&fit=max&s=bafa16723f176318d86a72af3eea5944',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/4bc90843df347bbe6d6ec8aa0d9f98797dc25909/0_0_7952_4771/master/7952.jpg?width=300&quality=85&auto=format&fit=max&s=bafa16723f176318d86a72af3eea5944',
-				'460': 'https://i.guim.co.uk/img/media/4bc90843df347bbe6d6ec8aa0d9f98797dc25909/0_0_7952_4771/master/7952.jpg?width=460&quality=85&auto=format&fit=max&s=0afead1062ec1d55c7b09f064f7778e7',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-07-07T20:40:17.000Z',
-			headline:
-				'The Baby review – post-Roe, this comedy-horror is truly terrifying',
-			shortUrl: 'https://www.theguardian.com/p/ynk4j',
-			starRating: 4,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/jul/06/girl-in-the-picture-review-the-scale-of-the-true-crime-monstrosity-will-leave-you-reeling',
-			linkText:
-				'Girl in the Picture review – the scale of the true-crime monstrosity will leave you reeling',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			image: 'https://i.guim.co.uk/img/media/0f3b65eba43a5e072d287d2bef7cc568cf81dd48/143_0_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=766d179508d594ee70ab2644683f7ebf',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/0f3b65eba43a5e072d287d2bef7cc568cf81dd48/143_0_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=766d179508d594ee70ab2644683f7ebf',
-				'460': 'https://i.guim.co.uk/img/media/0f3b65eba43a5e072d287d2bef7cc568cf81dd48/143_0_3600_2160/master/3600.jpg?width=460&quality=85&auto=format&fit=max&s=666bb48a67314c20fbb37d974a8f3479',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-07-06T09:31:16.000Z',
-			headline:
-				'Girl in the Picture review – the scale of the true-crime monstrosity will leave you reeling',
-			shortUrl: 'https://www.theguardian.com/p/ynfba',
-			starRating: 4,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/jul/05/ghislaine-maxwell-the-making-of-a-monster-review-well-never-fully-know-what-made-her-do-it',
-			linkText:
-				'Ghislaine Maxwell: The Making of a Monster review – we’ll never fully know what made her do it',
-			showByline: false,
-			byline: 'Jack Seale',
-			image: 'https://i.guim.co.uk/img/media/c246ede21394aa8dff5613fa625f73acc1fe11c6/0_21_2795_1677/master/2795.jpg?width=300&quality=85&auto=format&fit=max&s=4544b67fcca0609fdcb08204e0df6764',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/c246ede21394aa8dff5613fa625f73acc1fe11c6/0_21_2795_1677/master/2795.jpg?width=300&quality=85&auto=format&fit=max&s=4544b67fcca0609fdcb08204e0df6764',
-				'460': 'https://i.guim.co.uk/img/media/c246ede21394aa8dff5613fa625f73acc1fe11c6/0_21_2795_1677/master/2795.jpg?width=460&quality=85&auto=format&fit=max&s=e8ac8565f71b824f9e2da9440a977522',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-07-05T22:05:11.000Z',
-			headline:
-				'Ghislaine Maxwell: The Making of a Monster review – we’ll never fully know what made her do it',
-			shortUrl: 'https://www.theguardian.com/p/ynegj',
 			starRating: 4,
 		},
 	],

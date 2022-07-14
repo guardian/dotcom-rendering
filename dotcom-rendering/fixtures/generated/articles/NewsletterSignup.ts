@@ -1234,7 +1234,7 @@ export const NewsletterSignup: CAPIArticleType = {
 			bylineImageUrl:
 				'https://i.guim.co.uk/img/uploads/2022/07/04/Suzanne_Wrack.jpg?width=300&quality=85&auto=format&fit=max&s=e1a59c32b7ad482fbbcdc298d65f6bbb',
 			bylineLargeImageUrl:
-				'https://i.guim.co.uk/img/uploads/2022/07/04/Suzanne_Wrack.png?width=300&quality=85&auto=format&fit=max&s=9cbc8a53759781bdb2f0fedd531c31dd',
+				'https://i.guim.co.uk/img/uploads/2022/07/13/Suzanne_Wrack_2.png?width=300&quality=85&auto=format&fit=max&s=625333c0a7cedd82e41f5d7f40ed494b',
 		},
 		{
 			id: 'tracking/commissioningdesk/uk-sport',
@@ -1681,7 +1681,7 @@ export const NewsletterSignup: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '2c942eaf-bee4-4809-a2ed-587f8fae06cb',
+			elementId: '72323c80-4602-4f43-b15b-e0f8dbf1bc04',
 		},
 	],
 	webPublicationDate: '2022-03-22T16:57:35.000Z',
@@ -1692,7 +1692,7 @@ export const NewsletterSignup: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Join us as we delve deeper into the wonderful world of women’s football through our new weekly newsletter. It will be informative, entertaining and global. It will be critical – when needed – and passionate. Written mainly by <a href="https://www.theguardian.com/profile/julia-belas-trindade">Júlia Belas Trindade</a> and <a href="https://www.theguardian.com/profile/sophie-downey">Sophie Downey</a>, the first was published on Wednesday 30 March, 2022. There will also be guest appearances from stars such as Anita Asante, Ada Hegerberg and many more. </p>',
-					elementId: '0057d927-ea9b-40d5-8405-94741bbfd57d',
+					elementId: 'eb6ec7ed-54fb-4d58-a437-bec161726a38',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -1703,22 +1703,22 @@ export const NewsletterSignup: CAPIArticleType = {
 					isThirdPartyTracking: false,
 					source: 'The Guardian',
 					sourceDomain: 'theguardian.com',
-					elementId: 'c0221cc4-d151-459e-9dab-5058255e11ac',
+					elementId: 'ca5cb56a-485c-47bf-8dea-3d9270ce59cf',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p>Try our other sports emails: as well as the occasionally funny football email <a href="https://www.theguardian.com/info/2016/jan/05/the-fiver-email-sign-up">The Fiver </a>from Monday to Friday, there are weekly catch-ups for cricket in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-spin">The Spin</a> and rugby union in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-breakdown">The Breakdown</a>, and our seven-day roundup of the best of our sports journalism in <a href="https://www.theguardian.com/sport/2017/may/15/the-recap-sign-up-for-the-best-of-the-guardians-sport-coverage">The Recap</a>.</p></li> \n <li><p>Living in Australia? Try the <a href="https://www.theguardian.com/info/2015/jun/05/guardian-australia-sport-newsletter-subscribe-by-email">Guardian Australia’s daily sports newsletter</a></p></li> \n</ul>',
-					elementId: '56be2695-0e1d-4227-85ee-7ba65b7041af',
+					elementId: 'f839e121-2410-4422-abbb-abe8ca090ba5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>***</p>',
-					elementId: '7fe43ca2-e15a-4ab5-a2d7-a1bc65efc99b',
+					elementId: 'fed33662-3db2-4d40-a788-5467b0999929',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong><a href="https://www.theguardian.com/email-newsletters">Explore all our newsletters:</a></strong><a href="https://www.theguardian.com/email-newsletters"> whether you love film, football, fashion or food, we’ve got something for you</a></p>',
-					elementId: '399251c1-1c81-4c39-9782-d1169c88aef9',
+					elementId: '75f72b0d-ff2c-433e-81ac-8bb9215009a7',
 				},
 			],
 			attributes: {
