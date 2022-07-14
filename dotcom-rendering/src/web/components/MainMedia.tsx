@@ -122,6 +122,7 @@ export const MainMedia: React.FC<{
 					switches={switches}
 					hideCaption={hideCaption}
 					starRating={starRating}
+					showMediaAboveHeadline={showMediaAboveHeadline}
 				/>
 			))}
 		</div>

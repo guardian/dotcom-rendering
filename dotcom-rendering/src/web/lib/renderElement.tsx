@@ -78,6 +78,7 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
+	showMediaAboveHeadline?: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -131,6 +132,7 @@ export const renderElement = ({
 	isAdFreeUser,
 	switches,
 	isSensitive,
+	showMediaAboveHeadline,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
 
@@ -339,6 +341,7 @@ export const renderElement = ({
 					starRating={starRating || element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
+					showMediaAboveHeadline={showMediaAboveHeadline}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -789,6 +792,7 @@ export const RenderArticleElement = ({
 	isAdFreeUser,
 	isSensitive,
 	switches,
+	showMediaAboveHeadline,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -807,6 +811,7 @@ export const RenderArticleElement = ({
 		isAdFreeUser,
 		isSensitive,
 		switches,
+		showMediaAboveHeadline,
 	});
 
 	if (!ok) {
