@@ -1,8 +1,3 @@
-import type {
-	DCRContainerPalette,
-	DCRContainerType,
-	DCRFrontCard,
-} from '../../types/front';
 import { DynamicFast } from '../components/DynamicFast';
 import { DynamicPackage } from '../components/DynamicPackage';
 import { DynamicSlow } from '../components/DynamicSlow';

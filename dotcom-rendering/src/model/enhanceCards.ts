@@ -1,11 +1,4 @@
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import type {
-	DCRContainerPalette,
-	DCRFrontCard,
-	DCRSupportingContent,
-	FEFrontCard,
-	FESupportingContent,
-} from '../types/front';
 import { decideFormat } from '../web/lib/decideFormat';
 import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
 import { enhanceSnaps } from './enhanceSnaps';
@@ -80,7 +73,7 @@ export const enhanceCards = (
 	containerPalette?: DCRContainerPalette,
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
-		// Snap cards may not have a format, default to a standard format if that's the case.
+		// Snap cards may not have a format, default to a standard format if thats the case.
 		const format = decideFormat(
 			faciaCard.format || {
 				design: 'ArticleDesign',

@@ -3,12 +3,6 @@ import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground, space } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import type {
-	DCRContainerPalette,
-	DCRContainerType,
-	DCRSnapType,
-	DCRSupportingContent,
-} from '../../../types/front';
 import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { Avatar } from '../Avatar';
@@ -247,7 +241,7 @@ export const Card = ({
 							subdued={true}
 							cssOverrides={css`
 								/* See: https://css-tricks.com/nested-links/ */
-								${getZIndex('card-nested-link')}
+								${getZIndex('card-nested-link')};
 								/* The following styles turn off those provided by Link */
 								color: inherit;
 								/* stylelint-disable-next-line property-disallowed-list */

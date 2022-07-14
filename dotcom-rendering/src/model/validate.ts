@@ -1,9 +1,7 @@
-import { isObject, isString } from '@guardian/libs';
 import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
-import type { FEFrontType } from '../../src/types/front';
-import articleSchema from './article-schema.json';
+import schema from './article-schema.json';
 import frontSchema from './front-schema.json';
 
 const options: Options = {
@@ -16,29 +14,41 @@ const options: Options = {
 const ajv = new Ajv(options);
 addFormats(ajv);
 
-const validateArticle = ajv.compile<CAPIArticleType>(articleSchema);
-const validateFront = ajv.compile<FEFrontType>(frontSchema);
+const validate = ajv.compile(schema);
+const validateFront = ajv.compile(frontSchema);
 
-export const validateAsCAPIType = (data: unknown): CAPIArticleType => {
-	if (validateArticle(data)) return data;
+export const validateAsCAPIType = (data: {
+	[key: string]: any;
+}): CAPIArticleType => {
+	const isValid = validate(data);
 
-	const url =
-		isObject(data) && isString(data.webURL) ? data.webURL : 'unknown url';
+	if (!isValid) {
+		// @ts-expect-error
+		const url = data.webURL || 'unknown url';
 
-	throw new TypeError(
-		`Unable to validate request body for url ${url}.\n
-            ${JSON.stringify(validateArticle.errors, null, 2)}`,
-	);
+		throw new TypeError(
+			`Unable to validate request body for url ${url}.\n
+            ${JSON.stringify(validate.errors, null, 2)}`,
+		);
+	}
+
+	return data as CAPIArticleType;
 };
 
-export const validateAsFrontType = (data: unknown): FEFrontType => {
-	if (validateFront(data)) return data;
+export const validateAsFrontType = (
+	data: Record<string, unknown>,
+): FEFrontType => {
+	const isValid = validateFront(data);
 
-	const url =
-		isObject(data) && isString(data.webURL) ? data.webURL : 'unknown url';
+	if (!isValid) {
+		// @ts-expect-error
+		const url = data.webURL || 'unknown url';
 
-	throw new TypeError(
-		`Unable to validate request body for url ${url}.\n
+		throw new TypeError(
+			`Unable to validate request body for url ${url}.\n
             ${JSON.stringify(validateFront.errors, null, 2)}`,
-	);
+		);
+	}
+
+	return data as unknown as FEFrontType;
 };
