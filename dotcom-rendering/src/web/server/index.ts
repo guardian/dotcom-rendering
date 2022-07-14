@@ -16,7 +16,7 @@ function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
 }
 
-const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
+const enhanceCAPIType = (body: unknown): CAPIArticleType => {
 	const data = validateAsCAPIType(body);
 	const CAPIArticle: CAPIArticleType = {
 		...data,
@@ -30,7 +30,7 @@ const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
 	return CAPIArticle;
 };
 
-const enhanceFront = (body: Record<string, unknown>): DCRFrontType => {
+const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
 	return {
 		...data,
