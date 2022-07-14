@@ -18,12 +18,12 @@ const validate = ajv.compile(schema);
 const validateFront = ajv.compile(frontSchema);
 
 export const validateAsCAPIType = (data: {
-	[key: string]: any;
+	[key: string]: unknown;
 }): CAPIArticleType => {
 	const isValid = validate(data);
 
 	if (!isValid) {
-		// @ts-expect-error
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- it works!
 		const url = data.webURL || 'unknown url';
 
 		throw new TypeError(
@@ -32,16 +32,16 @@ export const validateAsCAPIType = (data: {
 		);
 	}
 
-	return data as CAPIArticleType;
+	return data as unknown as CAPIArticleType;
 };
 
-export const validateAsFrontType = (
-	data: Record<string, unknown>,
-): FEFrontType => {
+export const validateAsFrontType = (data: {
+	[key: string]: unknown;
+}): FEFrontType => {
 	const isValid = validateFront(data);
 
 	if (!isValid) {
-		// @ts-expect-error
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- it works!
 		const url = data.webURL || 'unknown url';
 
 		throw new TypeError(
