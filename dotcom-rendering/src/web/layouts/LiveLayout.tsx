@@ -323,8 +323,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
 
-	const inMediaTest =
-		CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant;
+	const showMediaAboveHeadline =
+		CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant ===
+		'variant';
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -494,7 +495,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									badge={CAPIArticle.badge}
 								/>
 							</GridItem>
-							{inMediaTest && (
+							{showMediaAboveHeadline && (
 								<GridItem area="mainmedia">
 									<Hide from="desktop">
 										<MainMedia
@@ -744,7 +745,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											/>
 										</Island>
 									)}
-									{inMediaTest ? (
+									{showMediaAboveHeadline ? (
 										<Hide until="desktop">
 											<MainMedia
 												format={format}
