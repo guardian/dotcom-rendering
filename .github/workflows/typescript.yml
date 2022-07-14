@@ -16,9 +16,6 @@ jobs:
             # Cache npm dependencies using https://github.com/bahmutov/npm-install
             - uses: bahmutov/npm-install@v1
 
-            - name: Install
-              run: yarn
-
             - name: Check typescript
               run: yarn tsc
               working-directory: dotcom-rendering
