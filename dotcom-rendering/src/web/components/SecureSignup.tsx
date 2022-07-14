@@ -23,9 +23,11 @@ const termsStyle = css`
 	${textSans.xxsmall()}
 	color: ${text.supporting};
 	a {
-		${textSans.xxsmall({ fontWeight: 'bold' })}
-		text-decoration: none;
+		${textSans.xxsmall({ fontWeight: 'bold' })};
+		color: ${neutral[0]};
+		text-decoration: underline;
 		:hover {
+			color: ${neutral[0]};
 			text-decoration: underline;
 		}
 	}
@@ -42,6 +44,7 @@ const PrivacyTerms = () => {
 			Newsletters may contain info about charities, online ads, and
 			content funded by outside parties. For more information see our{' '}
 			<Link
+				data-ignore="global-link-styling"
 				href="https://www.theguardian.com/help/privacy-policy"
 				rel="noopener noreferrer"
 			>
@@ -56,6 +59,7 @@ const RecaptchaTerms = () => (
 	<span css={termsStyle}>
 		We use Google reCaptcha to protect our website and the Google{' '}
 		<Link
+			data-ignore="global-link-styling"
 			href="https://policies.google.com/privacy"
 			rel="noopener noreferrer"
 		>
@@ -63,6 +67,7 @@ const RecaptchaTerms = () => (
 		</Link>{' '}
 		and{' '}
 		<Link
+			data-ignore="global-link-styling"
 			href="https://policies.google.com/terms"
 			rel="noopener noreferrer"
 		>
