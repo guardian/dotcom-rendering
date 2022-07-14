@@ -349,6 +349,11 @@ export const PrintShop: CAPIArticleType = {
 						url: '/football',
 						children: [
 							{
+								title: "Women's Euro 2022",
+								url: '/football/women-s-euro-2022',
+								longTitle: 'football/women-s-euro-2022',
+							},
+							{
 								title: 'Live scores',
 								url: '/football/live',
 								longTitle: 'football/live',
@@ -549,6 +554,11 @@ export const PrintShop: CAPIArticleType = {
 						title: 'Football',
 						url: '/football',
 						children: [
+							{
+								title: "Women's Euro 2022",
+								url: '/football/women-s-euro-2022',
+								longTitle: 'football/women-s-euro-2022',
+							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -1288,6 +1298,7 @@ export const PrintShop: CAPIArticleType = {
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	headline: 'Buy a classic sport photograph: the immortal Bobby Moore',
+	byline: 'Guardian sport',
 	isLegacyInteractive: false,
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [],
@@ -1609,47 +1620,47 @@ export const PrintShop: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '6bac66c2-4c03-442d-8711-93e3741b3ff9',
+					elementId: 'a5520da7-4f4c-4d00-b6bf-cda3771d234d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>This photograph captures Bobby Moore in 1973, standing statuesque in the twilight of his international career, just a few months after winning his 100th cap for England. It was shot prior to a 1-0 friendly win over Scotland which would prove to be Moore’s final victory in an England shirt at Wembley. It possesses a kind of majesty reminiscent of the bronze statue of him at the new Wembley, beneath which an inscription reads: <em>‘Immaculate footballer. Imperial <a href="https://en.wikipedia.org/wiki/Defender_(association_football)">defender</a>. Immortal hero of <a href="https://en.wikipedia.org/wiki/1966_FIFA_World_Cup_Final">1966</a>. First <a href="https://en.wikipedia.org/wiki/List_of_England_international_footballers">Englishman</a> to raise the <a href="https://en.wikipedia.org/wiki/FIFA_World_Cup_Trophy">World Cup</a> aloft. Favourite son of London’s <a href="https://en.wikipedia.org/wiki/East_End_of_London">East End</a>. Finest legend of <a href="https://en.wikipedia.org/wiki/West_Ham_United_F.C.">West Ham United</a>. National Treasure. Master of <a href="https://en.wikipedia.org/wiki/Wembley_Stadium_(1923)">Wembley</a>. Lord of the game. <a href="https://en.wikipedia.org/wiki/List_of_England_national_football_team_captains">Captain</a> extraordinary. Gentleman of all time.’</em></p>',
-					elementId: 'a2a0d7e7-f225-472f-9908-b20c23cd7b50',
+					elementId: '8ff6a03d-bff9-4212-932d-544d2d3d4f7d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Photograph: Gerry Cranham / Offside</em></p>',
-					elementId: '00e27328-d0c5-4f97-9322-dc181723c873',
+					elementId: '350e5d7b-f774-4bf3-ab4b-56926b52558b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Words: Jonny Weeks</em></p>',
-					elementId: '63a272b4-d70b-4e7d-9a2d-a3c9d1455a92',
+					elementId: '541357d3-a4f2-4ff6-919e-7b74d3289d61',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy your exclusive print <a href="https://guardianprintshop.com/collections/the-big-sport-picture">here</a></strong></p>',
-					elementId: '97c856f7-6a52-44bb-a073-8cdf0a661793',
+					elementId: '3c26baed-a75c-4ee1-b958-daa770a2eccc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Price</strong> <br>£55 including free delivery (30x40cm print size).</p>',
-					elementId: '84b6edac-6e34-43a9-b771-dd9b2dfd2388',
+					elementId: '38a28f75-5c93-4421-8c19-40fd5c6d4505',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Prints<br></strong>Photographs are presented on museum-grade, fine-art paper stocks, with archival standards guaranteeing quality for 100-plus years. All editions are printed and quality checked by experts at theprintspace, the UK’s leading photo and fine-art print provider.</p>',
-					elementId: '8f71c1c5-5ea4-4da4-91de-09b4651ea3e7',
+					elementId: 'bd476ace-cf82-42c9-bdd8-1dd314925e42',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Delivery<br></strong>Artworks are dispatched via Royal Mail and delivered within three to five working days. Theprintspace takes great care in packaging your artwork, with a no-quibble satisfaction guarantee should you be unhappy in any way. Global shipping is available.</p>',
-					elementId: '6e850638-0a71-4e8f-907c-c2b25158d467',
+					elementId: 'a300a987-c312-4d23-a17f-eb81c74ec9fd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Contact</strong><br>Email: <a href="mailto:guardianprintsales@theprintspace.co.uk">guardianprintsales@theprintspace.co.uk</a></p>',
-					elementId: '963d1947-a89e-43da-ba85-b8036f44b739',
+					elementId: 'fbcd4418-156c-45ab-8d10-ab34c78fb77e',
 				},
 			],
 			attributes: {
