@@ -134,6 +134,7 @@ type Palette = {
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
+		betaLabel: Colour;
 	};
 	background: {
 		article: Colour;
@@ -277,13 +278,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-			adUnit: string;
-			customParams: CustomParams;
-			disableAds?: false;
-	  }
+		adUnit: string;
+		customParams: CustomParams;
+		disableAds?: false;
+	}
 	| {
-			disableAds: true;
-	  };
+		disableAds: true;
+	};
 
 interface SectionNielsenAPI {
 	name: string;
@@ -623,6 +624,7 @@ interface CAPIArticleType {
 	mostRecentBlockId?: string;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
+	byline?: string;
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';

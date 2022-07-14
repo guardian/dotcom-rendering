@@ -401,6 +401,11 @@ export const Recipe: CAPIArticleType = {
 						url: '/football',
 						children: [
 							{
+								title: "Women's Euro 2022",
+								url: '/football/women-s-euro-2022',
+								longTitle: 'football/women-s-euro-2022',
+							},
+							{
 								title: 'Live scores',
 								url: '/football/live',
 								longTitle: 'football/live',
@@ -601,6 +606,11 @@ export const Recipe: CAPIArticleType = {
 						title: 'Football',
 						url: '/football',
 						children: [
+							{
+								title: "Women's Euro 2022",
+								url: '/football/women-s-euro-2022',
+								longTitle: 'football/women-s-euro-2022',
+							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -1432,6 +1442,7 @@ export const Recipe: CAPIArticleType = {
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	headline: 'Meera Sodha’s vegan recipe for spring onion pancakes',
+	byline: 'Meera Sodha',
 	isLegacyInteractive: false,
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
@@ -1681,7 +1692,7 @@ export const Recipe: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '5617023e-1cbd-4941-b7fd-a3d42c9585d4',
+			elementId: '743ba2ce-47ed-4a33-a170-91dcbe90be88',
 		},
 	],
 	webPublicationDate: '2021-02-06T10:30:38.000Z',
@@ -1692,62 +1703,62 @@ export const Recipe: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p> The world of pancakes is so vast, it is hard to think that on <a href="https://en.wikipedia.org/wiki/Shrove_Tuesday">Pancake Day</a>, there could be only one type proffered across the world. Of course, traditionally, pancakes were a way to use up eggs and animal fats before the Lent fast, but with those ingredients off the table in vegan cooking, a new array of pancakes can take centre stage. Today’s offering is for <em>cong you bing</em>, a flaky, coiled, spring onion pancake ubiquitous across China. It’s as enjoyable to make as it is to eat and, happily, there’s no whiff of abstinence about it.</p>',
-					elementId: '5b4b1981-785d-44a4-b1df-cebb09c3181a',
+					elementId: '1e9bb61c-4ab7-492f-a43a-f1b18f93b16d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Spring onion pancakes with sesame sauce</h2>',
-					elementId: '4f937d1f-9c26-42f8-9cd6-687b7b88bdc5',
+					elementId: 'd0f60cd4-b70a-4661-ac43-ef2cfea001c9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Prep <strong>5 min<br></strong>Rest <strong>30 min<br></strong>Cook<strong> 1 hr<br></strong>Makes <strong>4, to serve 2 for lunch</strong></p>',
-					elementId: 'eb804241-085f-4405-91c1-e065d58e7142',
+					elementId: 'd4dfb425-23c8-4ef4-b24f-057681b5b98f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Making these involves a particular set of processes that includes binding, rolling, folding, squashing and frying. I would have had trouble learning them by myself during the pandemic were it not for the help of a library of online cooks, and in particular Wei Guo of the wonderful <a href="https://redhousespice.com/">Red House Spice blog</a>.</p>',
-					elementId: '73748c42-a4c7-4c21-8c1c-154001ea7810',
+					elementId: '9b24a3df-1807-41fd-8172-a062bdb3429f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For the pancakes<br><strong>275g plain flour</strong>, plus 2 tbsp extra<br><strong>Fine sea salt<br>Coconut oil</strong><br><strong>½ tsp Chinese five spice</strong> powder – I like <a href="https://bart.co.uk/products/chinese-five-spice-powder">Bart Ingredients</a> <br><strong>6 spring onions</strong>, trimmed and finely sliced</p>',
-					elementId: '65776223-78cf-4bbb-bb7d-ac602aa72eed',
+					elementId: '55ec0ae0-b408-4735-9a6b-9573ec70109b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For the sesame sauce<br><strong>30g tahini<br>75g sweet white miso</strong> – I like <a href="https://www.clearspring.co.uk/products/organic-japanese-sweet-white-miso-paste-pasteurised">Clearspring</a><br><strong>1 tbsp toasted sesame oil<br>2 tbsp white-wine vinegar<br>½ tsp chilli oil sediment plus 1 tbsp oil </strong>– I like <a href="https://uk.lkk.com/products/chiu-chow-chilli-oil">Lee Kum Kee</a></p>',
-					elementId: '4e95588a-2202-4735-ab66-15a0d1298949',
+					elementId: '233b4ca4-d173-4199-907d-61795c6782e8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Fill and boil half a kettle of water. In a large heatproof bowl, use a fork to mix the flour, a big pinch of salt and 165ml freshly boiled water until it comes together into a rough dough and is cool enough to handle. Knead for five minutes, then cover with a clean tea towel and set aside to rest for 30 minutes.</p>',
-					elementId: '1c0a755b-bb66-45e4-9129-a15bb60e839c',
+					elementId: 'b589f40d-fe3c-42aa-85f2-e238bc035328',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>While the dough is resting, prepare the filling. Melt two tablespoons of coconut oil in a nonstick pan, then pour into a small heatproof bowl. Put the pan to one side, but don’t wash it up – you’ll use it again later, to cook the pancakes. Add the five spice, the two extra tablespoons of flour and a quarter-teaspoon of salt to the melted oil, stir to combine and set aside.</p>',
-					elementId: '0f82900d-8d78-4d57-8d84-3c3b783623fc',
+					elementId: '74064050-5d75-42ec-984c-57631d1c5ceb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Mix all the sauce ingredients in a small bowl, add two tablespoons of cold water to loosen it a little, and set aside.</p>',
-					elementId: 'e1db2bef-8567-41f8-bd72-594aadfa1f8e',
+					elementId: '6f62bc18-d3a0-441a-aead-080c571a204a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Once the dough has rested, rub a little coconut oil on a worktop and on a rolling pin, then roll the dough into a roughly 20cm x 30cm rectangle. Spread the five spice mix evenly over the top (take care not to tear the dough) and sprinkle the sliced spring onions on top of that. Starting at one short end of the dough rectangle, roll up the whole thing into a tight cigar. Move the dough sausage so it’s horizontally in line with the edge of the worktop, then cut into four even slices. Put the slices cut side down on the worktop and, using the greased rolling pin, gently press each slice into a round pancake shape measuring about 13cm across.</p>',
-					elementId: '1d87ef4b-5ed0-4145-9b6a-783d9b058481',
+					elementId: '111f07fe-6486-4063-ab80-0f8bae9a391a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>When you are ready to cook the pancakes, melt two tablespoons of coconut oil in the nonstick pan, gently lift in one pancake and cook for three to four minutes on each side, until golden brown all over. Remove from the pan and keep somewhere warm while you repeat with the remaining oil and pancakes (keep a close eye on the heat under the pan – you may need to reduce it to make sure the pan doesn’t get too hot).</p>',
-					elementId: '834638d8-1205-4ce7-9500-86a1ebc685bc',
+					elementId: 'dca621ba-8a36-4115-a121-54e0c7c17290',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Serve the pancakes hot with the sauce for dipping or drizzling over the top.</p>',
-					elementId: '9ab8e933-e65e-4860-97d3-dc1ab4ecf83c',
+					elementId: 'd53bba8c-feac-4136-abd1-caa58385b769',
 				},
 			],
 			attributes: {
