@@ -259,6 +259,17 @@ const fields = {
 	webUrl: '',
 };
 
+const pinnedBlock: LiveBlock = {
+	id: '5',
+	isKeyEvent: false,
+	title: 'Block Five',
+	firstPublished: new Date('2021-11-02T10:20:20Z'),
+	lastModified: new Date('2021-11-02T11:13:13Z'),
+	body: [],
+	contributors: [],
+	isPinned: true,
+};
+
 const blocks: LiveBlock[] = [
 	{
 		id: '1',
@@ -287,6 +298,7 @@ const blocks: LiveBlock[] = [
 				}),
 			},
 		],
+		isPinned: false,
 	},
 	{
 		id: '2',
@@ -296,6 +308,7 @@ const blocks: LiveBlock[] = [
 		lastModified: new Date('2021-11-02T13:03:13Z'),
 		body: [],
 		contributors: [],
+		isPinned: false,
 	},
 	{
 		id: '3',
@@ -305,6 +318,7 @@ const blocks: LiveBlock[] = [
 		lastModified: new Date('2021-11-02T12:13:13Z'),
 		body: [],
 		contributors: [],
+		isPinned: false,
 	},
 	{
 		id: '4',
@@ -314,16 +328,9 @@ const blocks: LiveBlock[] = [
 		lastModified: new Date('2021-11-02T11:13:13Z'),
 		body: [],
 		contributors: [],
+		isPinned: false,
 	},
-	{
-		id: '5',
-		isKeyEvent: false,
-		title: 'Block Five',
-		firstPublished: new Date('2021-11-02T10:20:20Z'),
-		lastModified: new Date('2021-11-02T11:13:13Z'),
-		body: [],
-		contributors: [],
-	},
+	pinnedBlock,
 ];
 
 const pagedBlocks: LiveBlogPagedBlocks = {
