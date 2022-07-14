@@ -7,6 +7,7 @@ import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { extract as extractGA } from '../../model/extract-ga';
 import { extractNAV } from '../../model/extract-nav';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
+import type { DCRFrontType, FEFrontType } from '../../types/front';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';

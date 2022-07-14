@@ -5,6 +5,7 @@ import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
 import { headline, space, textSans, until } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import React from 'react';
+import type { DCRContainerPalette } from '../../types/front';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { Byline } from './Byline';
