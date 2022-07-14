@@ -12,7 +12,7 @@ type Props = {
 	guardianBaseURL: string;
 	badge?: BadgeType;
 	isMatch?: boolean;
-	isRepositionVariant?: boolean;
+	showMediaAboveHeadline?: boolean;
 };
 
 const sectionStyles = css`
@@ -71,13 +71,13 @@ export const ArticleTitle = ({
 	guardianBaseURL,
 	badge,
 	isMatch,
-	isRepositionVariant,
+	showMediaAboveHeadline,
 }: Props) => (
 	<div
 		css={[
 			sectionStyles,
 			badge && badgeContainer,
-			isRepositionVariant && verticalPadding,
+			showMediaAboveHeadline && verticalPadding,
 		]}
 	>
 		{badge && format.display !== ArticleDisplay.Immersive && (

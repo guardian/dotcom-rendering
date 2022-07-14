@@ -323,8 +323,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
 
-	const isRepositionVariant = true;
-	// CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant;
+	const showMediaAboveHeadline =
+		CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant;
 	return (
 		<>
 			<div data-print-layout="hide">
@@ -492,10 +492,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.guardianBaseURL
 									}
 									badge={CAPIArticle.badge}
-									isRepositionVariant={isRepositionVariant}
+									showMediaAboveHeadline={
+										showMediaAboveHeadline
+									}
 								/>
 							</GridItem>
-							{isRepositionVariant && (
+							{showMediaAboveHeadline && (
 								<GridItem area="mainmedia">
 									<Hide from="desktop">
 										<MainMedia
@@ -519,7 +521,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											}
 											hideCaption={true}
 											showOverlayCaption={true}
-											isRepositionVariant={true}
+											showMediaAboveHeadline={true}
 										/>
 									</Hide>
 								</GridItem>
@@ -747,7 +749,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											/>
 										</Island>
 									)}
-									{isRepositionVariant ? (
+									{showMediaAboveHeadline ? (
 										<Hide until="desktop">
 											<MainMedia
 												format={format}

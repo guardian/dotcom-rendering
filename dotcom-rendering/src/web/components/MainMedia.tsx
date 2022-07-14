@@ -48,7 +48,10 @@ const immersiveWrapper = css`
     overflow: hidden;
 `;
 
-const chooseWrapper = (format: ArticleFormat, isRepositionVariant: boolean) => {
+const chooseWrapper = (
+	format: ArticleFormat,
+	showMediaAboveHeadline: boolean,
+) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 			return immersiveWrapper;
@@ -56,7 +59,7 @@ const chooseWrapper = (format: ArticleFormat, isRepositionVariant: boolean) => {
 			switch (format.design) {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
-					if (isRepositionVariant) {
+					if (showMediaAboveHeadline) {
 						return noGutters;
 					} else {
 						return '';
@@ -84,7 +87,7 @@ export const MainMedia: React.FC<{
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
 	showOverlayCaption?: boolean;
-	isRepositionVariant?: boolean;
+	showMediaAboveHeadline?: boolean;
 }> = ({
 	elements,
 	format,
@@ -99,10 +102,10 @@ export const MainMedia: React.FC<{
 	isSensitive,
 	switches,
 	showOverlayCaption,
-	isRepositionVariant = false,
+	showMediaAboveHeadline = false,
 }) => {
 	return (
-		<div css={[mainMedia, chooseWrapper(format, isRepositionVariant)]}>
+		<div css={[mainMedia, chooseWrapper(format, showMediaAboveHeadline)]}>
 			{elements.map((element, index) => (
 				<RenderArticleElement
 					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning

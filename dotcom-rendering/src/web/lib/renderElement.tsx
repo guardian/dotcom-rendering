@@ -132,7 +132,7 @@ export const renderElement = ({
 	isAdFreeUser,
 	switches,
 	isSensitive,
-	showOverlayCaption,
+	showOverlayCaption = false,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
 
@@ -744,7 +744,7 @@ export const renderElement = ({
 						altText={element.altText}
 						origin={host}
 						stickyVideos={isBlog && switches.stickyVideos}
-						showOverlayCaption={showOverlayCaption ?? false}
+						showOverlayCaption={showOverlayCaption}
 					/>
 				</Island>,
 			];
