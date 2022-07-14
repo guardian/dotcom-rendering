@@ -193,6 +193,7 @@ export const renderFront = (
 	res: express.Response,
 ): void => {
 	try {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- We validate the data in this func
 		const front = enhanceFront(body);
 		const html = frontToHtml({
 			front,
@@ -203,4 +204,12 @@ export const renderFront = (
 		const message = e instanceof Error ? e.stack : 'Unknown Error';
 		res.status(500).send(`<pre>${message}</pre>`);
 	}
+};
+
+export const renderFrontJson = (
+	{ body }: express.Request,
+	res: express.Response,
+): void => {
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- We validate the data in this func
+	res.json(enhanceFront(body));
 };
