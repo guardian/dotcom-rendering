@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from } from '@guardian/source-foundations';
+import { from, remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import CommentCount from 'components/CommentCount';
 import Dateline from 'components/Dateline';
@@ -16,6 +16,7 @@ import type { FC } from 'react';
 const styles = css`
 	display: flex;
 	${grid.column.centre}
+	padding-bottom: ${remSpace[5]};
 
 	${from.leftCol} {
 		${grid.column.left}

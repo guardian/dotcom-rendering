@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { TopicFilterBank } from './TopicFilterBank';
+import { TopicFilterBank } from './TopicFilterBank.importable';
 
 const availableTopics: Topic[] = [
 	{ type: 'GPE', value: 'London', count: 16 },
@@ -15,6 +15,8 @@ const availableTopics: Topic[] = [
 	{ type: 'PERSON', value: 'Anas Sarwar', count: 4 },
 ];
 
+const selectedTopics: Topic[] = [{ type: 'GPE', value: 'United Kingdom' }];
+
 const format = {
 	theme: ArticlePillar.News,
 	design: ArticleDesign.LiveBlog,
@@ -26,6 +28,13 @@ export default {
 	title: 'Components/TopicFilterBank',
 };
 
+const baseProperties = {
+	id: '123',
+	elements: [],
+	attributes: { keyEvent: false, pinned: false, summary: false },
+	primaryDateLine: '',
+	secondaryDateLine: '',
+};
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -43,10 +52,43 @@ export const topicBank = () => {
 			<TopicFilterBank
 				availableTopics={availableTopics}
 				format={format}
+				keyEvents={[
+					{
+						...baseProperties,
+						blockFirstPublished: 1638279933000,
+						title: 'title',
+					},
+				]}
+				filterKeyEvents={false}
+				id="key-events-carousel-desktop"
 			/>
 		</Wrapper>
 	);
 };
 topicBank.story = {
 	name: 'topicBank',
+};
+
+export const topicBankSelectedIsNotInTop5 = () => {
+	return (
+		<Wrapper>
+			<TopicFilterBank
+				id="key-events-carousel-desktop"
+				availableTopics={availableTopics}
+				selectedTopics={selectedTopics}
+				format={format}
+				keyEvents={[
+					{
+						...baseProperties,
+						blockFirstPublished: 1638279933000,
+						title: 'title',
+					},
+				]}
+				filterKeyEvents={false}
+			/>
+		</Wrapper>
+	);
+};
+topicBankSelectedIsNotInTop5.story = {
+	name: 'topicBankSelectedIsNotInTop5',
 };

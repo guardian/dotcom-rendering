@@ -19,6 +19,7 @@ export const articleTemplate = ({
 	twitterData,
 	keywords,
 	initTwitter,
+	recipeMarkup,
 }: {
 	title?: string;
 	description: string;
@@ -35,6 +36,7 @@ export const articleTemplate = ({
 	twitterData: { [key: string]: string };
 	keywords: string;
 	initTwitter?: string;
+	recipeMarkup?: string;
 }): string => {
 	const favicon =
 		process.env.NODE_ENV === 'production'
@@ -275,7 +277,6 @@ https://workforus.theguardian.com/careers/product-engineering/
 					${initTwitter}
 				</script>
 
-
                 <noscript>
                     <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${encodeURIComponent(
 						keywords,
@@ -291,6 +292,11 @@ https://workforus.theguardian.com/careers/product-engineering/
 			<body>
                 ${html}
                 ${[...lowPriorityScriptTags].join('\n')}
+				${
+					recipeMarkup !== undefined
+						? `<script type="application/ld+json">${recipeMarkup}</script>`
+						: ''
+				}
             </body>
         </html>`;
 };

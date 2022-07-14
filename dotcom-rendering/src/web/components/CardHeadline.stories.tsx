@@ -14,6 +14,8 @@ export default {
 };
 
 const smallHeadlineSizes: SmallHeadlineSize[] = [
+	'ginormous',
+	'huge',
 	'large',
 	'medium',
 	'small',
@@ -230,19 +232,27 @@ export const Opinion = () => (
 Opinion.story = { name: 'Opinion (Quotes)' };
 
 export const OpinionKicker = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
-		<CardHeadline
-			headlineText="This is how an opinion card headline with a kicker and quotes looks"
-			format={{
-				display: ArticleDisplay.Standard,
-				design: ArticleDesign.Standard,
-				theme: ArticlePillar.Opinion,
-			}}
-			showQuotes={true}
-			kickerText="George Monbiot"
-			showSlash={true}
-		/>
-	</ElementContainer>
+	<>
+		{smallHeadlineSizes.map((size) => (
+			<div key={size}>
+				<ElementContainer showTopBorder={false} showSideBorders={false}>
+					<CardHeadline
+						headlineText={`This is how a ${size} opinion card headline with a kicker and quotes looks`}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.Opinion,
+						}}
+						showQuotes={true}
+						kickerText="George Monbiot"
+						showSlash={true}
+						size={size}
+					/>
+				</ElementContainer>
+				<br />
+			</div>
+		))}
+	</>
 );
 OpinionKicker.story = { name: 'With an opinion kicker' };
 

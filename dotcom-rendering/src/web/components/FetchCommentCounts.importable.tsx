@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { renderToString } from 'react-dom/server';
+import type { DCRContainerPalette } from '../../types/front';
 import { formatCount } from '../lib/formatCount';
 import { useApi } from '../lib/useApi';
 import { CardCommentCount } from './CardCommentCount';
@@ -11,6 +12,8 @@ type Props = {
 type MarkerType = {
 	discussionId: string;
 	format: ArticleFormat;
+	isDynamo?: true;
+	containerPalette?: string;
 };
 
 type RawCountType = {
@@ -23,6 +26,8 @@ type EnhancedCountType = {
 	long: string;
 	short: string;
 	format: ArticleFormat;
+	isDynamo?: true;
+	containerPalette?: DCRContainerPalette;
 };
 
 type RenderedCountType = {
@@ -42,9 +47,20 @@ function extractMarkers() {
 		.querySelectorAll('[data-name="comment-count-marker"]')
 		.forEach((element: Element) => {
 			if (element instanceof HTMLElement) {
-				const { discussionId, format } = element.dataset;
-				if (discussionId && format)
-					markers.push({ discussionId, format: JSON.parse(format) });
+				try {
+					const { discussionId, format, isDynamo, containerPalette } =
+						element.dataset;
+					if (discussionId && format) {
+						markers.push({
+							discussionId,
+							format: JSON.parse(format),
+							isDynamo: isDynamo ? true : undefined,
+							containerPalette,
+						});
+					}
+				} catch (e) {
+					// Do nothing
+				}
 			}
 		});
 	return markers;
@@ -76,15 +92,20 @@ function enhanceCounts(
 ): EnhancedCountType[] {
 	return counts.map(({ count, id }) => {
 		const { long, short } = formatCount(count);
+		const thisMarker = markers.find((marker) => marker.discussionId === id);
 		// We don't get format in the api response so look it up in the array
 		// of DOM markers
-		const format = markers.find((marker) => marker.discussionId === id)
-			?.format as ArticleFormat; // We cast because we're sure we will find it
+		const format = thisMarker?.format as ArticleFormat;
+		const isDynamo = thisMarker?.isDynamo;
+		const containerPalette =
+			thisMarker?.containerPalette as DCRContainerPalette;
 		return {
 			id,
 			long,
 			short,
 			format,
+			isDynamo,
+			containerPalette,
 		};
 	});
 }
@@ -101,6 +122,8 @@ function renderCounts(counts: EnhancedCountType[]): RenderedCountType[] {
 				format={count.format}
 				short={count.short}
 				long={count.long}
+				isDynamo={count.isDynamo}
+				containerPalette={count.containerPalette}
 			/>,
 		);
 		return {

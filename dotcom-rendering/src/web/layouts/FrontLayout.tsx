@@ -6,6 +6,7 @@ import {
 	brandLine,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import type { DCRFrontType } from '../../types/front';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
@@ -13,6 +14,7 @@ import { Header } from '../components/Header';
 import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
+import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
@@ -126,6 +128,24 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					if (trails.length === 0) return null;
 
 					const ophanName = ophanComponentId(collection.displayName);
+					const ophanComponentLink = `container-${
+						index + 1
+					} | ${ophanName}`;
+
+					if (collection.collectionType === 'fixed/thrasher') {
+						return (
+							<ElementContainer
+								padded={false}
+								showTopBorder={false}
+								showSideBorders={false}
+								ophanComponentLink={ophanComponentLink}
+								ophanComponentName={ophanName}
+								element="section"
+							>
+								<Snap snapData={trails[0].snapData} />
+							</ElementContainer>
+						);
+					}
 
 					return (
 						<ContainerLayout
@@ -139,10 +159,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							centralBorder="partial"
 							url={collection.href}
 							// same as above re 'palette styles' for index increment
-							ophanComponentLink={`container-${
-								index + 1
-							} | ${ophanName}`}
-							ophanComponentName={`${ophanName}`}
+							ophanComponentLink={ophanComponentLink}
+							ophanComponentName={ophanName}
 							containerPalette={collection.containerPalette}
 							showDateHeader={collection.config.showDateHeader}
 							editionId={front.editionId}

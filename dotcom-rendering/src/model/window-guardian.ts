@@ -1,3 +1,5 @@
+import type { DCRFrontType } from '../types/front';
+
 export interface WindowGuardianConfig {
 	isDotcomRendering: boolean;
 	isDev: boolean;
@@ -17,6 +19,7 @@ export interface WindowGuardianConfig {
 		showRelatedContent: boolean;
 		ajaxUrl: string;
 		shouldHideReaderRevenue: boolean;
+		googleRecaptchaSiteKey?: string;
 	} & ConfigType;
 	libs: {
 		googletag: string;

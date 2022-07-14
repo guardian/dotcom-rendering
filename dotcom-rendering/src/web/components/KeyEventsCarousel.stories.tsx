@@ -42,6 +42,7 @@ const SingleKeyEventCarousel = () => {
 				keyEvents={SingleKeyEvent}
 				filterKeyEvents={false}
 				format={format}
+				id="key-events-carousel-desktop"
 			/>
 		</Wrapper>
 	);
@@ -53,6 +54,7 @@ const ShortKeyEventCarousel = () => {
 				keyEvents={ShortKeyEvents}
 				filterKeyEvents={false}
 				format={format}
+				id="key-events-carousel-desktop"
 			/>
 		</Wrapper>
 	);
@@ -65,6 +67,7 @@ const LongKeyEventCarousel = () => {
 				keyEvents={LongKeyEvents}
 				filterKeyEvents={false}
 				format={format}
+				id="key-events-carousel-desktop"
 			/>
 		</Wrapper>
 	);

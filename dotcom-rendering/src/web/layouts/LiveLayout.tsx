@@ -53,7 +53,7 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import { TopicFilterBank } from '../components/TopicFilterBank';
+import { TopicFilterBank } from '../components/TopicFilterBank.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
@@ -303,8 +303,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const cricketMatchUrl =
 		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
 
-	const showKeyEventsCarousel =
-		CAPIArticle.config.abTests.keyEventsCarouselVariant == 'variant';
+	const showKeyEventsCarousel = CAPIArticle.config.switches.keyEventsCarousel;
 
 	const isInFilteringBeta =
 		CAPIArticle.config.switches.automaticFilters &&
@@ -320,6 +319,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	*/
 	const showTopicFilterBank =
 		CAPIArticle.config.switches.automaticFilters && showKeyEventsCarousel;
+
+	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
 
 	return (
 		<>
@@ -619,6 +620,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.filterKeyEvents
 									}
 									format={format}
+									id={'key-events-carousel-desktop'}
 								/>
 							</Island>
 						</Hide>
@@ -800,6 +802,15 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 															CAPIArticle.selectedTopics
 														}
 														format={format}
+														keyEvents={
+															CAPIArticle.keyEvents
+														}
+														filterKeyEvents={
+															CAPIArticle.filterKeyEvents
+														}
+														id={
+															'key-events-carousel-desktop'
+														}
 													/>
 												</Island>
 											</div>
@@ -821,7 +832,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
-									{CAPIArticle.keyEvents.length ? (
+									{CAPIArticle.keyEvents.length &&
+									showToggle ? (
 										<Hide below="desktop">
 											<Island deferUntil="visible">
 												<FilterKeyEventsToggle
@@ -944,12 +956,14 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													filterKeyEvents={
 														CAPIArticle.filterKeyEvents
 													}
-													abTests={
-														CAPIArticle.config
-															.abTests
-													}
 													showKeyEventsCarousel={
 														showKeyEventsCarousel
+													}
+													availableTopics={
+														CAPIArticle.availableTopics
+													}
+													selectedTopics={
+														CAPIArticle.selectedTopics
 													}
 												/>
 												{pagination.totalPages > 1 && (
@@ -1111,15 +1125,14 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													filterKeyEvents={
 														CAPIArticle.filterKeyEvents
 													}
-													abTests={
-														CAPIArticle.config
-															.abTests
-													}
 													showKeyEventsCarousel={
 														showKeyEventsCarousel
 													}
 													availableTopics={
 														CAPIArticle.availableTopics
+													}
+													selectedTopics={
+														CAPIArticle.selectedTopics
 													}
 												/>
 												{pagination.totalPages > 1 && (

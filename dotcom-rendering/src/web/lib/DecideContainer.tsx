@@ -1,4 +1,10 @@
+import type {
+	DCRContainerPalette,
+	DCRContainerType,
+	DCRFrontCard,
+} from '../../types/front';
 import { DynamicFast } from '../components/DynamicFast';
+import { DynamicPackage } from '../components/DynamicPackage';
 import { DynamicSlow } from '../components/DynamicSlow';
 import { FixedLargeSlowXIV } from '../components/FixedLargeSlowXIV';
 import { FixedMediumSlowVI } from '../components/FixedMediumSlowVI';
@@ -30,6 +36,14 @@ export const DecideContainer = ({
 		case 'dynamic/slow':
 			return (
 				<DynamicSlow
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			);
+		case 'dynamic/package':
+			return (
+				<DynamicPackage
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}

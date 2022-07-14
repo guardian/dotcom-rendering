@@ -3,6 +3,7 @@ on:
   push:
     paths-ignore:
       - "apps-rendering/**"
+      - "dotcom-rendering/docs/**"
 jobs:
   cypress:
     name: DCR Cypress

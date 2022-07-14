@@ -5,6 +5,7 @@ import {
 	SvgCamera,
 	SvgVideo,
 } from '@guardian/source-react-components';
+import type { DCRContainerPalette } from '../../types/front';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
@@ -41,8 +42,7 @@ const durationStyles = (palette: Palette) => css`
 const wrapperStyles = css`
 	display: flex;
 	align-items: center;
-
-	padding: 0 5px 5px 5px;
+	margin-top: 4px;
 `;
 
 export function secondsToDuration(secs?: number): string {

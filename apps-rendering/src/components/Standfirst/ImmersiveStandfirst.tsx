@@ -48,7 +48,7 @@ const renderContent = (
 const styles = css`
 	${grid.span('centre-column-start', 3)}
 	${headline.xsmall({ fontWeight: 'light' })}
-	padding-top: ${remSpace[4]};
+	padding: ${remSpace[4]} 0 ${remSpace[9]};
 
 	${from.tablet} {
 		${grid.span('centre-column-start', 8)}
@@ -56,6 +56,10 @@ const styles = css`
 
 	${from.desktop} {
 		${grid.span('centre-column-start', 6)}
+	}
+
+	${from.leftCol} {
+		grid-row: 5;
 	}
 `;
 

@@ -23,6 +23,7 @@ import {
 
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../../lib/pillars';
+import type { DCRContainerPalette } from '../../types/front';
 import { decideContainerOverrides } from './decideContainerOverrides';
 import { transparentColour } from './transparentColour';
 
@@ -1170,6 +1171,8 @@ const textDropCap = (format: ArticleFormat): string => {
 	}
 };
 
+const textBetaLabel = (): string => neutral[46];
+
 const textBlockquote = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -1326,13 +1329,18 @@ export const decidePalette = (
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
 			cardHeadline:
-				overrides?.text.cardHeadline || textCardHeadline(format),
-			cardByline: overrides?.text.cardByline || textCardByline(format),
-			cardKicker: overrides?.text.cardKicker || textCardKicker(format),
+				overrides?.text.cardHeadline ?? textCardHeadline(format),
+			dynamoHeadline:
+				overrides?.text.dynamoHeadline ?? textCardHeadline(format),
+			cardByline: overrides?.text.cardByline ?? textCardByline(format),
+			cardKicker: overrides?.text.cardKicker ?? textCardKicker(format),
+			dynamoKicker:
+				overrides?.text.dynamoKicker ?? textCardKicker(format),
 			linkKicker: textLinkKicker(format),
 			cardStandfirst:
-				overrides?.text.cardStandfirst || textCardStandfirst(format),
-			cardFooter: overrides?.text.cardFooter || textCardFooter(format),
+				overrides?.text.cardStandfirst ?? textCardStandfirst(format),
+			cardFooter: overrides?.text.cardFooter ?? textCardFooter(format),
+			dynamoMeta: overrides?.text.dynamoMeta ?? textCardFooter(format),
 			headlineByline: textHeadlineByline(format),
 			standfirst: textStandfirst(format),
 			standfirstLink: textStandfirstLink(format),
@@ -1361,13 +1369,14 @@ export const decidePalette = (
 			filterButton: textFilterButton(),
 			filterButtonHover: textFilterButtonHover(),
 			filterButtonActive: textFilterButtonActive(),
+			betaLabel: textBetaLabel(),
 		},
 		background: {
 			article: backgroundArticle(format),
 			seriesTitle: backgroundSeriesTitle(format),
 			sectionTitle: backgroundSectionTitle(format),
 			avatar: backgroundAvatar(format),
-			card: overrides?.background.card || backgroundCard(format),
+			card: overrides?.background.card ?? backgroundCard(format),
 			headline: backgroundHeadline(format),
 			headlineByline: backgroundHeadlineByline(format),
 			bullet: backgroundBullet(format),
@@ -1429,7 +1438,7 @@ export const decidePalette = (
 			filterButton: borderFilterButton(),
 		},
 		topBar: {
-			card: overrides?.topBar.card || topBarCard(format),
+			card: overrides?.topBar.card ?? topBarCard(format),
 		},
 		hover: {
 			headlineByline: hoverHeadlineByline(format),

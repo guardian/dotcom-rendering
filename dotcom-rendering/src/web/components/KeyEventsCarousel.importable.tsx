@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, space, textSans } from '@guardian/source-foundations';
+import { from, headline, space } from '@guardian/source-foundations';
 import {
 	Button,
 	buttonThemeBrandAlt,
@@ -16,6 +16,7 @@ interface Props {
 	keyEvents: Block[];
 	filterKeyEvents: boolean;
 	format: ArticleFormat;
+	id: 'key-events-carousel-desktop' | 'key-events-carousel-mobile';
 }
 type ValidBlock = Block & {
 	title: string;
@@ -28,10 +29,6 @@ const carouselStyles = (palette: Palette) => css`
 	scroll-behavior: smooth;
 	overflow-x: auto;
 	overflow-y: hidden;
-	scrollbar-width: none;
-	&::-webkit-scrollbar {
-		display: none;
-	}
 	margin-right: -10px;
 	${from.tablet} {
 		margin-right: -20px;
@@ -40,6 +37,10 @@ const carouselStyles = (palette: Palette) => css`
 	${from.desktop} {
 		margin-right: 0px;
 		background-color: ${palette.background.keyEventFromDesktop};
+		scrollbar-width: none;
+		&::-webkit-scrollbar {
+			display: none;
+		}
 	}
 `;
 const leftMarginStyles = css`
@@ -54,7 +55,8 @@ const marginBottomStyles = css`
 	}
 `;
 const titleStyles = css`
-	${textSans.small({ fontWeight: 'bold', lineHeight: 'regular' })};
+	${headline.xxxsmall({ fontWeight: 'bold', lineHeight: 'regular' })};
+	padding-top: ${space[3]}px;
 `;
 
 const containerStyles = css`
@@ -96,6 +98,7 @@ export const KeyEventsCarousel = ({
 	keyEvents,
 	filterKeyEvents,
 	format,
+	id,
 }: Props) => {
 	const carousel = useRef<HTMLDivElement | null>(null);
 	const palette = decidePalette(format);
@@ -110,8 +113,10 @@ export const KeyEventsCarousel = ({
 	const filteredKeyEvents = keyEvents.filter(isValidKeyEvent);
 	const carouselLength = filteredKeyEvents.length;
 	const shortCarousel = carouselLength <= 4;
+	const longCarousel = carouselLength > 6;
 	return (
 		<>
+			<span id={id} />
 			<Hide from="desktop">
 				<div css={titleStyles}>Key events:</div>
 			</Hide>
@@ -123,12 +128,7 @@ export const KeyEventsCarousel = ({
 					shortCarousel && leftMarginStyles,
 				]}
 			>
-				<ul
-					css={[
-						containerStyles,
-						!shortCarousel && marginBottomStyles,
-					]}
-				>
+				<ul css={[containerStyles, longCarousel && marginBottomStyles]}>
 					{filteredKeyEvents.map((keyEvent, index) => {
 						return (
 							<KeyEventCard
@@ -146,7 +146,7 @@ export const KeyEventsCarousel = ({
 					})}
 				</ul>
 				<Hide until="desktop">
-					{keyEvents.length > 6 && (
+					{longCarousel && (
 						<>
 							<Button
 								hideLabel={true}

@@ -1,6 +1,14 @@
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type {
+	DCRContainerPalette,
+	DCRFrontCard,
+	DCRSupportingContent,
+	FEFrontCard,
+	FESupportingContent,
+} from '../types/front';
 import { decideFormat } from '../web/lib/decideFormat';
 import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
+import { enhanceSnaps } from './enhanceSnaps';
 
 /**
  *
@@ -62,11 +70,7 @@ const enhanceSupportingContent = (
 			format: presentationFormat,
 			headline: subLink.header?.headline || '',
 			url: subLink.properties.href || subLink.header?.url,
-			kickerText:
-				subLink.header?.kicker?.item?.properties.kickerText ||
-				(linkFormat && linkFormat.design === ArticleDesign.LiveBlog
-					? 'Live'
-					: undefined),
+			kickerText: subLink.header?.kicker?.item?.properties.kickerText,
 		};
 	});
 };
@@ -76,7 +80,7 @@ export const enhanceCards = (
 	containerPalette?: DCRContainerPalette,
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
-		// Snap cards may not have a format, default to a standard format if thats the case.
+		// Snap cards may not have a format, default to a standard format if that's the case.
 		const format = decideFormat(
 			faciaCard.format || {
 				design: 'ArticleDesign',
@@ -115,6 +119,6 @@ export const enhanceCards = (
 			byline:
 				faciaCard.properties.maybeContent?.trail.byline ?? undefined,
 			showByline: faciaCard.properties.showByline,
-			snapData: faciaCard.enriched,
+			snapData: enhanceSnaps(faciaCard.enriched),
 		};
 	});
