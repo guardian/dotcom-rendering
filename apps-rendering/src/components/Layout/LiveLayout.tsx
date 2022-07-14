@@ -186,6 +186,7 @@ const LiveLayout: FC<Props> = ({ item }) => {
 						<LiveBlocks
 							blocks={item.pagedBlocks.currentPage.blocks}
 							format={item}
+							pageNumber={item.pagedBlocks.currentPage.pageNumber}
 						/>
 						{pagination}
 					</div>
