@@ -1,5 +1,4 @@
 import { ArticleDesign } from '@guardian/libs';
-import type { DCRContainerPalette } from '../../types/front';
 import { Card } from './Card/Card';
 
 type Props = {

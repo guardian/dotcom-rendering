@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { body, until } from '@guardian/source-foundations';
-import type { DCRContainerPalette } from '../../../../types/front';
 import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {

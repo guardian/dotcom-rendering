@@ -6,7 +6,6 @@ import {
 	brandLine,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import type { DCRFrontType } from '../../types/front';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';

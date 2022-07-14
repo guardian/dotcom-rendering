@@ -1,4 +1,3 @@
-import type { DCRCollectionType, FECollectionType } from '../types/front';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
 

@@ -1,5 +1,3 @@
-import type { DCRFrontType } from '../types/front';
-
 export interface WindowGuardianConfig {
 	isDotcomRendering: boolean;
 	isDev: boolean;
