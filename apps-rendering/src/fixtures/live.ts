@@ -354,7 +354,6 @@ const live: LiveBlog = {
 	blocks: blocks,
 	pagedBlocks,
 	totalBodyBlocks: 5,
-	pinnedPost: some(pinnedBlock),
 };
 
 const deadBlog: DeadBlog = {
@@ -363,7 +362,6 @@ const deadBlog: DeadBlog = {
 	blocks: blocks,
 	pagedBlocks,
 	totalBodyBlocks: 5,
-	pinnedPost: none,
 };
 
 export { live, deadBlog };
