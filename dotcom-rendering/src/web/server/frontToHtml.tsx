@@ -77,6 +77,10 @@ export const frontToHtml = ({ front, NAV }: Props): string => {
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
+	//
+	// See :https://github.com/guardian/dotcom-rendering/pull/5394
+	const offerHttp3 = front.config.switches.offerHttp3;
+
 	/**
 	 * The highest priority scripts.
 	 * These scripts have a considerable impact on site performance.
@@ -84,14 +88,15 @@ export const frontToHtml = ({ front, NAV }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
+
 	const priorityScriptTags = generateScriptTags([
 		{ src: polyfillIO },
-		...getScriptArrayFromFile('bootCmp.js'),
-		...getScriptArrayFromFile('ophan.js'),
+		...getScriptArrayFromFile('bootCmp.js', offerHttp3),
+		...getScriptArrayFromFile('ophan.js', offerHttp3),
 		front.config && { src: front.config.commercialBundleUrl },
-		...getScriptArrayFromFile('sentryLoader.js'),
-		...getScriptArrayFromFile('dynamicImport.js'),
-		...getScriptArrayFromFile('islands.js'),
+		...getScriptArrayFromFile('sentryLoader.js', offerHttp3),
+		...getScriptArrayFromFile('dynamicImport.js', offerHttp3),
+		...getScriptArrayFromFile('islands.js', offerHttp3),
 	]);
 
 	/**
@@ -102,13 +107,13 @@ export const frontToHtml = ({ front, NAV }: Props): string => {
 	 * unlikely.
 	 */
 	const lowPriorityScriptTags = generateScriptTags([
-		...getScriptArrayFromFile('atomIframe.js'),
-		...getScriptArrayFromFile('embedIframe.js'),
-		...getScriptArrayFromFile('newsletterEmbedIframe.js'),
-		...getScriptArrayFromFile('relativeTime.js'),
+		...getScriptArrayFromFile('atomIframe.js', offerHttp3),
+		...getScriptArrayFromFile('embedIframe.js', offerHttp3),
+		...getScriptArrayFromFile('newsletterEmbedIframe.js', offerHttp3),
+		...getScriptArrayFromFile('relativeTime.js', offerHttp3),
 	]);
 
-	const gaChunk = getScriptArrayFromFile('ga.js');
+	const gaChunk = getScriptArrayFromFile('ga.js', offerHttp3);
 	const modernScript = gaChunk.find((script) => script.legacy === false);
 	const legacyScript = gaChunk.find((script) => script.legacy === true);
 	const gaPath = {

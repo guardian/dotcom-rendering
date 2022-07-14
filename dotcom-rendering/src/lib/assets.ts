@@ -49,6 +49,7 @@ export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE, isDev);
 
 export const getScriptArrayFromFile = (
 	file: `${string}.js`,
+	offerHttp3: boolean,
 ): { src: string; legacy?: boolean }[] => {
 	if (!file.endsWith('.js'))
 		throw new Error('Invalid filename: extension must be .js');
@@ -59,16 +60,17 @@ export const getScriptArrayFromFile = (
 		: legacyManifest[file];
 
 	const scripts = [];
+	const http3Suffix = offerHttp3 ? '?http3' : '';
 
 	if (filename) {
 		scripts.push({
-			src: `${ASSET_ORIGIN}assets/${filename}`,
+			src: `${ASSET_ORIGIN}assets/${filename}${http3Suffix}`,
 			legacy: false,
 		});
 	}
 	if (legacyFilename) {
 		scripts.push({
-			src: `${ASSET_ORIGIN}assets/${legacyFilename}`,
+			src: `${ASSET_ORIGIN}assets/${legacyFilename}${http3Suffix}`,
 			legacy: true,
 		});
 	}

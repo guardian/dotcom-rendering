@@ -117,6 +117,10 @@ export const articleToHtml = ({ data }: Props): string => {
 			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
+	// Evaluating the performance of HTTP3 over HTTP2
+	// See: https://github.com/guardian/dotcom-rendering/pull/5394
+	const offerHttp3 = CAPIArticle.config.switches.offerHttp3;
+
 	/**
 	 * The highest priority scripts.
 	 * These scripts have a considerable impact on site performance.
@@ -126,17 +130,19 @@ export const articleToHtml = ({ data }: Props): string => {
 	 */
 	const priorityScriptTags = generateScriptTags([
 		{ src: polyfillIO },
-		...getScriptArrayFromFile('bootCmp.js'),
-		...getScriptArrayFromFile('ophan.js'),
+		...getScriptArrayFromFile('bootCmp.js', offerHttp3),
+		...getScriptArrayFromFile('ophan.js', offerHttp3),
 		CAPIArticle.config && { src: CAPIArticle.config.commercialBundleUrl },
-		...getScriptArrayFromFile('sentryLoader.js'),
-		...getScriptArrayFromFile('dynamicImport.js'),
+		...getScriptArrayFromFile('sentryLoader.js', offerHttp3),
+		...getScriptArrayFromFile('dynamicImport.js', offerHttp3),
 		pageHasNonBootInteractiveElements && {
-			src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
+			src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js${
+				offerHttp3 ? '?http3' : ''
+			}`,
 		},
-		...getScriptArrayFromFile('islands.js'),
+		...getScriptArrayFromFile('islands.js', offerHttp3),
 		...expeditedIslands.flatMap((name) =>
-			getScriptArrayFromFile(`${name}.js`),
+			getScriptArrayFromFile(`${name}.js`, offerHttp3),
 		),
 	]);
 
@@ -148,14 +154,14 @@ export const articleToHtml = ({ data }: Props): string => {
 	 * unlikely.
 	 */
 	const lowPriorityScriptTags = generateScriptTags([
-		...getScriptArrayFromFile('atomIframe.js'),
-		...getScriptArrayFromFile('embedIframe.js'),
-		...getScriptArrayFromFile('newsletterEmbedIframe.js'),
-		...getScriptArrayFromFile('relativeTime.js'),
-		...getScriptArrayFromFile('initDiscussion.js'),
+		...getScriptArrayFromFile('atomIframe.js', offerHttp3),
+		...getScriptArrayFromFile('embedIframe.js', offerHttp3),
+		...getScriptArrayFromFile('newsletterEmbedIframe.js', offerHttp3),
+		...getScriptArrayFromFile('relativeTime.js', offerHttp3),
+		...getScriptArrayFromFile('initDiscussion.js', offerHttp3),
 	]);
 
-	const gaChunk = getScriptArrayFromFile('ga.js');
+	const gaChunk = getScriptArrayFromFile('ga.js', offerHttp3);
 	const modernScript = gaChunk.find((script) => script.legacy === false);
 	const legacyScript = gaChunk.find((script) => script.legacy === true);
 	const gaPath = {
