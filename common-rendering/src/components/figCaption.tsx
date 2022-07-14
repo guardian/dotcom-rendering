@@ -22,13 +22,22 @@ interface CameraProps {
 
 const cameraStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	display: inline-block;
-	height: 1.2rem;
-	vertical-align: middle;
-	padding-right: ${remSpace[1]};
+	width: 1.2rem;
+	margin-right: ${remSpace[1]};
+	fill: ${text.supporting};
+	position: relative;
+
+	::before {
+		content: ' ';
+		display: block;
+		padding-top: 0.85rem;
+	}
 
 	svg {
-		height: 100%;
-		fill: ${text.supporting};
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
 	}
 
 	${darkModeCss(supportsDarkMode)`
