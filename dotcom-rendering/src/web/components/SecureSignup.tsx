@@ -157,7 +157,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 			<Island
 				clientOnly={true}
 				deferUntil={'idle'}
-				placeholderHeight={90}
+				placeholderHeight={75}
 			>
 				<SecureSignupIframe
 					html={html}
