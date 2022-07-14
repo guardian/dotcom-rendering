@@ -1,72 +1,13 @@
 import { css } from '@emotion/react';
-import { neutral, space, text, textSans } from '@guardian/source-foundations';
-import {
-	Button,
-	Label,
-	Link,
-	TextInput,
-} from '@guardian/source-react-components';
+import { neutral, space } from '@guardian/source-foundations';
+import { Button, Label, TextInput } from '@guardian/source-react-components';
+import { NewsletterPrivacyMessage } from '../src/web/components/NewsletterPrivacyMessage';
 
 type Props = { newsletterId: string; successDescription: string };
 
-const termsStyle = css`
-	${textSans.xxsmall()}
-	color: ${text.supporting};
-	a {
-		${textSans.xxsmall({ fontWeight: 'bold' })}
-		text-decoration: none;
-		:hover {
-			text-decoration: underline;
-		}
-	}
-	strong {
-		color: ${neutral[0]};
-		font-weight: bold;
-	}
-`;
-
-const PrivacyTerms = () => {
-	return (
-		<span css={termsStyle}>
-			<strong>Privacy Notice: </strong>
-			Newsletters may contain info about charities, online ads, and
-			content funded by outside parties. For more information see our{' '}
-			<Link
-				href="https://www.theguardian.com/help/privacy-policy"
-				rel="noopener noreferrer"
-			>
-				privacy policy
-			</Link>
-			.&nbsp;
-		</span>
-	);
-};
-
-const RecaptchaTerms = () => (
-	<span css={termsStyle}>
-		We use Google reCaptcha to protect our website and the Google{' '}
-		<Link
-			href="https://policies.google.com/privacy"
-			rel="noopener noreferrer"
-		>
-			Privacy Policy
-		</Link>{' '}
-		and{' '}
-		<Link
-			href="https://policies.google.com/terms"
-			rel="noopener noreferrer"
-		>
-			Terms of Service
-		</Link>{' '}
-		apply.
-	</span>
-);
-
 export const SecureSignup = ({ newsletterId }: Props) => {
 	return (
-		<div
-			title="This is a mock for the SecureSignup component which is not compatible with storybook. Changes to the real component will not be automatically reflected in this mock."
-		>
+		<div title="This is a mock for the SecureSignup component which is not compatible with storybook. Changes to the real component will not be automatically reflected in this mock.">
 			<form id={`secure-signup-${newsletterId}`}>
 				<Label text="Enter your email address" />
 
@@ -115,8 +56,7 @@ export const SecureSignup = ({ newsletterId }: Props) => {
 					margin-top: ${space[2]}px;
 				`}
 			>
-				<PrivacyTerms />
-				<RecaptchaTerms />
+				<NewsletterPrivacyMessage />
 			</div>
 		</div>
 	);
