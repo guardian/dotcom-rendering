@@ -1,7 +1,8 @@
+import { isObject, isString } from '@guardian/libs';
 import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
-import schema from './article-schema.json';
+import articleSchema from './article-schema.json';
 import frontSchema from './front-schema.json';
 
 const options: Options = {
@@ -14,41 +15,29 @@ const options: Options = {
 const ajv = new Ajv(options);
 addFormats(ajv);
 
-const validate = ajv.compile(schema);
-const validateFront = ajv.compile(frontSchema);
+const validateArticle = ajv.compile<CAPIArticleType>(articleSchema);
+const validateFront = ajv.compile<FEFrontType>(frontSchema);
 
-export const validateAsCAPIType = (data: {
-	[key: string]: unknown;
-}): CAPIArticleType => {
-	const isValid = validate(data);
+export const validateAsCAPIType = (data: unknown): CAPIArticleType => {
+	if (validateArticle(data)) return data;
 
-	if (!isValid) {
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- it works!
-		const url = data.webURL || 'unknown url';
+	const url =
+		isObject(data) && isString(data.webURL) ? data.webURL : 'unknown url';
 
-		throw new TypeError(
-			`Unable to validate request body for url ${url}.\n
-            ${JSON.stringify(validate.errors, null, 2)}`,
-		);
-	}
-
-	return data as unknown as CAPIArticleType;
+	throw new TypeError(
+		`Unable to validate request body for url ${url}.\n
+            ${JSON.stringify(validateArticle.errors, null, 2)}`,
+	);
 };
 
-export const validateAsFrontType = (data: {
-	[key: string]: unknown;
-}): FEFrontType => {
-	const isValid = validateFront(data);
+export const validateAsFrontType = (data: unknown): FEFrontType => {
+	if (validateFront(data)) return data;
 
-	if (!isValid) {
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- it works!
-		const url = data.webURL || 'unknown url';
+	const url =
+		isObject(data) && isString(data.webURL) ? data.webURL : 'unknown url';
 
-		throw new TypeError(
-			`Unable to validate request body for url ${url}.\n
+	throw new TypeError(
+		`Unable to validate request body for url ${url}.\n
             ${JSON.stringify(validateFront.errors, null, 2)}`,
-		);
-	}
-
-	return data as unknown as FEFrontType;
+	);
 };
