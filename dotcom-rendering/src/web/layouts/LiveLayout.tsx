@@ -517,7 +517,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											isAdFreeUser={
 												CAPIArticle.isAdFreeUser
 											}
-											hideCaption={true}
+											showMediaAboveHeadline={true}
 										/>
 									</Hide>
 								</GridItem>
