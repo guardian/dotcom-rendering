@@ -625,7 +625,7 @@ interface CAPIArticleType {
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
 	byline?: string;
-	newsletterToEmbed?: Newsletter;
+	promotedNewsletter?: Newsletter;
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';

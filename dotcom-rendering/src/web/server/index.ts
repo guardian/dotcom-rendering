@@ -38,7 +38,7 @@ const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
 		blocks: enhanceBlocks(
 			data.blocks,
 			data.format,
-			useFake ? FAKE_NEWSLETTER : data.newsletterToEmbed,
+			useFake ? FAKE_NEWSLETTER : data.promotedNewsletter,
 		),
 		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
 		standfirst: enhanceStandfirst(data.standfirst),

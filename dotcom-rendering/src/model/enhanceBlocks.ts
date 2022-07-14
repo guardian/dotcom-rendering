@@ -13,22 +13,22 @@ class BlockEnhancer {
 
 	format: CAPIFormat;
 
-	newsletterToEmbed?: Newsletter;
+	promotedNewsletter?: Newsletter;
 
 	constructor(
 		blocks: Block[],
 		format: CAPIFormat,
-		newsletterToEmbed?: Newsletter,
+		promotedNewsletter?: Newsletter,
 	) {
 		this.blocks = blocks;
 		this.format = format;
-		this.newsletterToEmbed = newsletterToEmbed;
+		this.promotedNewsletter = promotedNewsletter;
 	}
 
 	enhanceNewsletterEmbed() {
 		this.blocks = enhanceNewsletterSignup(
 			this.blocks,
-			this.newsletterToEmbed,
+			this.promotedNewsletter,
 		);
 		return this;
 	}
@@ -80,9 +80,9 @@ class BlockEnhancer {
 export const enhanceBlocks = (
 	blocks: Block[],
 	format: CAPIFormat,
-	newsletterToEmbed?: Newsletter,
+	promotedNewsletter?: Newsletter,
 ): Block[] => {
-	return new BlockEnhancer(blocks, format, newsletterToEmbed)
+	return new BlockEnhancer(blocks, format, promotedNewsletter)
 		.enhanceNewsletterEmbed()
 		.enhanceDividers()
 		.enhanceInteractiveContentsElements()

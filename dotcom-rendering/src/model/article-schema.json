@@ -418,7 +418,7 @@
         "byline": {
             "type": "string"
         },
-        "newsletterToEmbed": {
+        "promotedNewsletter": {
             "type": "object",
             "properties": {
                 "listId": {
