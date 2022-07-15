@@ -38,11 +38,31 @@ const findIndexToInsertAt = (elements: CAPIElement[]): number => {
 	return possiblePositions[0]?.index || targetIndex;
 };
 
+const isBlog = (format: CAPIFormat): boolean =>
+	format.design === 'DeadBlogDesign' || format.design === 'LiveBlogDesign';
+
+const isInteractive = (format: CAPIFormat): boolean =>
+	format.design === 'FullPageInteractiveDesign' ||
+	format.design === 'InteractiveDesign';
+
+const shouldNotPlaceInline = (format: CAPIFormat): boolean =>
+	format.design === 'QuizDesign' || // the quiz is rendered as a single element.
+	format.design === 'NewsletterSignupDesign'; // a dedicated sign-up page would use the newsletter data differently
+
 export const enhanceNewsletterSignup = (
 	blocks: Block[],
+	format: CAPIFormat,
 	newsletter?: Newsletter,
 ): Block[] => {
 	if (!newsletter) {
+		return blocks;
+	}
+
+	if (
+		isBlog(format) ||
+		isInteractive(format) ||
+		shouldNotPlaceInline(format)
+	) {
 		return blocks;
 	}
 

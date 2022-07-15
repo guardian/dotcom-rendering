@@ -28,6 +28,7 @@ class BlockEnhancer {
 	enhanceNewsletterSignup() {
 		this.blocks = enhanceNewsletterSignup(
 			this.blocks,
+			this.format,
 			this.promotedNewsletter,
 		);
 		return this;
