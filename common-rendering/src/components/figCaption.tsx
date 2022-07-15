@@ -3,7 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { remSpace } from '@guardian/source-foundations';
-import { brandAltText, neutral, text } from '@guardian/source-foundations';
+import { neutral } from '@guardian/source-foundations';
 import { textSans } from '@guardian/source-foundations';
 import { SvgCamera } from '@guardian/source-react-components';
 import type { ArticleFormat } from '@guardian/libs';
@@ -12,6 +12,7 @@ import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from '../lib';
+import { fill } from '@guardian/common-rendering/src/editorialPalette';
 
 // ----- Sub-Components ----- //
 
@@ -24,7 +25,7 @@ const cameraStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	display: inline-block;
 	width: 1.2rem;
 	margin-right: ${remSpace[1]};
-	fill: ${text.supporting};
+	fill: ${fill.cameraCaptionIcon()};
 	position: relative;
 
 	::before {
@@ -41,7 +42,7 @@ const cameraStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	}
 
 	${darkModeCss(supportsDarkMode)`
-        fill: ${brandAltText.supporting};
+        fill: ${fill.cameraCaptionIconDark()};
     `}
 `;
 
@@ -71,10 +72,10 @@ type Props = {
 const styles = (supportsDarkMode: boolean) => css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
 	padding-top: ${remSpace[1]};
-	color: ${text.supporting};
+	color: ${neutral[46]};
 
 	${darkModeCss(supportsDarkMode)`
-    color: ${brandAltText.supporting};
+    color: ${neutral[60]};
   `}
 `;
 
