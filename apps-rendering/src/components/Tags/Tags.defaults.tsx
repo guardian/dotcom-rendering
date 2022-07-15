@@ -2,7 +2,10 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background, text } from '@guardian/common-rendering/src/editorialPalette';
+import {
+	background,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
 import type { ArticleFormat } from '@guardian/libs';
 import { neutral, remSpace, textSans } from '@guardian/source-foundations';
