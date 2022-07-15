@@ -1408,12 +1408,6 @@ type AdSlotType =
 // 3rd party type declarations //
 // ------------------------------
 
-declare module 'compose-function' {
-	const compose: any;
-	// eslint-disable-next-line import/no-default-export -- TODO: use type definition @types/compose-function
-	export default compose;
-}
-
 declare module 'chromatic/isChromatic';
 
 declare module 'dynamic-import-polyfill' {
