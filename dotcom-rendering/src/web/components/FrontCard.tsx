@@ -4,7 +4,26 @@ import { Card } from './Card/Card';
 
 type Props = {
 	trail: TrailType;
-} & Partial<CardProps>;
+	headlineSize?: SmallHeadlineSize;
+	showQuotes?: boolean;
+	showByline?: boolean;
+	imageUrl?: string;
+	imagePosition?: ImagePositionType;
+	imagePositionOnMobile?: ImagePositionType;
+	imageSize?: ImageSizeType;
+	trailText?: string;
+	avatar?: AvatarType;
+	kickerText?: string;
+	showPulsingDot?: boolean;
+	showSlash?: boolean;
+	supportingContent?: DCRSupportingContent[];
+	snapData?: DCRSnapType;
+	containerPalette?: DCRContainerPalette;
+	containerType?: DCRContainerType;
+	showAge?: boolean;
+	discussionId?: string;
+	isDynamo?: true;
+};
 
 /**
  * A wrapper around the normal Card component providing sensible defaults for Cards on front containers.
