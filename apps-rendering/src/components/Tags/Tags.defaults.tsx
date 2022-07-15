@@ -2,10 +2,9 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
+import { background, text } from '@guardian/common-rendering/src/editorialPalette';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
 import { neutral, remSpace, textSans } from '@guardian/source-foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -13,19 +12,6 @@ import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
-
-const backgroundColour = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Comment:
-			return neutral[86];
-		case ArticleDesign.LiveBlog:
-			return neutral[93];
-		default:
-			return neutral[97];
-	}
-};
 
 const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 	margin-top: 0;
@@ -55,16 +41,16 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 	border-radius: 30px;
 	text-overflow: ellipsis;
 	max-width: 18.75rem;
-	color: ${neutral[7]};
-	background-color: ${backgroundColour(format)};
+	color: ${text.tag(format)};
+	background-color: ${background.tag(format)};
 	display: inline-block;
 	white-space: nowrap;
 	overflow: hidden;
 	line-height: 1;
 
 	${darkModeCss`
-		color: ${neutral[86]};
-		background-color: ${neutral[20]};
+		color: ${text.tagDark(format)};
+		background-color: ${background.tagDark(format)};
 	`};
 `;
 

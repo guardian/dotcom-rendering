@@ -532,6 +532,21 @@ const seriesDark = (format: ArticleFormat): Colour => {
 	return neutral[10];
 }
 
+const tag = (format: ArticleFormat): Colour => {
+	switch (format.design) {
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
+			return neutral[86];
+		case ArticleDesign.LiveBlog:
+			return neutral[93];
+		default:
+			return neutral[97];
+	}
+}
+
+const tagDark = (_format: ArticleFormat): Colour => neutral[20];
+
 // ----- API ----- //
 
 const background = {
@@ -568,6 +583,8 @@ const background = {
 	standfirstDark,
 	supportBanner,
 	supportBannerDark,
+	tag,
+	tagDark,
 };
 
 // ----- Exports ----- //

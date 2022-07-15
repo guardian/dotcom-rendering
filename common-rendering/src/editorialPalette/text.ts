@@ -951,6 +951,10 @@ const figCaption = (): Colour => neutral[46];
 
 const figCaptionDark = (): Colour => neutral[60];
 
+const tag = (_format: ArticleFormat): Colour => neutral[7];
+
+const tagDark = (_format: ArticleFormat): Colour => neutral[86];
+
 // ----- API ----- //
 
 const text = {
@@ -1005,6 +1009,8 @@ const text = {
 	standfirstLinkDark,
 	seriesTitle,
 	seriesTitleDark,
+	tag,
+	tagDark,
 	pagination,
 };
 
