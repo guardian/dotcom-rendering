@@ -24,7 +24,6 @@ export const DynamicPackage = ({
 						trail={primary}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						//Overrides
 						containerType="dynamic/package"
 						headlineSize="huge"
 						imagePosition="bottom"
@@ -56,7 +55,6 @@ export const DynamicPackage = ({
 										trail={card}
 										containerPalette={containerPalette}
 										showAge={showAge}
-										//Overrides
 										containerType="dynamic/package"
 										imageUrl={
 											// Always show the image on the first card and only

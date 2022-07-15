@@ -29,7 +29,6 @@ export const FixedSmallSlowIV = ({
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							// Overrides
 							imageSize="medium"
 						/>
 					</LI>

@@ -30,7 +30,6 @@ export const FixedSmallSlowIII = ({
 							trail={trail}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							//Overrides
 							headlineSize={index === 0 ? 'large' : 'medium'}
 							imagePositionOnMobile={index === 0 ? 'top' : 'left'}
 							trailText={

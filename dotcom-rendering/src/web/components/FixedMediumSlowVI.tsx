@@ -32,7 +32,6 @@ export const FixedMediumSlowVI = ({
 								trail={trail}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								//Overrides
 								headlineSize={index === 0 ? 'large' : 'medium'}
 								imagePosition={index === 0 ? 'right' : 'top'}
 								imagePositionOnMobile={
@@ -57,7 +56,6 @@ export const FixedMediumSlowVI = ({
 								trail={trail}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								//Overrides
 								headlineSize="small"
 							/>
 						</LI>

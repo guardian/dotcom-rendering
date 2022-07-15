@@ -26,7 +26,6 @@ export const FixedLargeSlowXIV = ({
 						trail={primary}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						//Overrides
 						headlineSize="large"
 						imagePosition="right"
 						imagePositionOnMobile="top"
@@ -55,7 +54,6 @@ export const FixedLargeSlowXIV = ({
 								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								//Overrides
 								headlineSize="small"
 							/>
 						</LI>
@@ -83,7 +81,6 @@ export const FixedLargeSlowXIV = ({
 								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								//Overrides
 								headlineSize="small"
 								imageUrl={undefined}
 							/>

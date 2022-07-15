@@ -27,7 +27,6 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 						trail={primary}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						//Overrides
 						headlineSize="large"
 						imagePosition="right"
 						imagePositionOnMobile="top"
@@ -45,7 +44,6 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 						trail={secondary}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						// Overrides
 						supportingContent={secondary.supportingContent}
 					/>
 				</LI>
@@ -98,7 +96,6 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 										trail={card}
 										containerPalette={containerPalette}
 										showAge={showAge}
-										//Overrides
 										headlineSize="small"
 										imagePosition="left"
 										supportingContent={

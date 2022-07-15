@@ -21,7 +21,7 @@ type Props = {
  * @param {DCRSupportingContent[]} [supportingContent=undefined] - Defaults to undefined, set to trail.supportingContent if you want this card to show sublinks.
  */
 export const FrontCard = (props: Props) => {
-	const { trail } = props;
+	const { trail, ...cardProps } = props;
 	const defaultProps: CardProps = {
 		linkTo: trail.url,
 		format: trail.format,
@@ -46,5 +46,5 @@ export const FrontCard = (props: Props) => {
 		discussionId: trail.discussionId,
 	};
 
-	return Card({ ...defaultProps, ...props });
+	return Card({ ...defaultProps, ...cardProps });
 };
