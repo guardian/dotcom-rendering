@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { brandAltBackground } from '@guardian/source-foundations';
+import { brandAltBackground, space } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { decidePalette } from '../../lib/decidePalette';
@@ -30,56 +30,56 @@ export type Props = {
 	format: ArticleFormat;
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
-	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
+	/** Even with design !== Comment, a piece can be opinion */
+	showQuotes?: boolean;
 	byline?: string;
 	showByline?: boolean;
 	webPublicationDate?: string;
 	imageUrl?: string;
 	imagePosition?: ImagePositionType;
 	imagePositionOnMobile?: ImagePositionType;
-	imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
+	/** Size is ignored when position = 'top' because in that case the image flows based on width */
+	imageSize?: ImageSizeType;
 	trailText?: string;
 	avatar?: AvatarType;
 	showClock?: boolean;
 	mediaType?: MediaType;
 	mediaDuration?: number;
-	// Kicker
 	kickerText?: string;
 	showPulsingDot?: boolean;
+	/** Sometimes kickers and headlines are separated by a slash */
 	showSlash?: boolean;
 	starRating?: number;
 	minWidthInPixels?: number;
 	/** Used for Ophan tracking */
 	dataLinkName?: string;
-	// Labs
+	/** Only used on Labs cards */
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
 	containerPalette?: DCRContainerPalette;
+	containerType?: DCRContainerType;
 	showAge?: boolean;
 	discussionId?: string;
+	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
+	isDynamo?: true;
 };
 
-const starWrapper = css`
-	background-color: ${brandAltBackground.primary};
-	position: absolute;
-	bottom: 0;
-	margin-top: 2px;
-`;
-
-const StarRatingComponent: React.FC<{ rating: number }> = ({ rating }) => (
-	<>
+const StarRatingComponent = ({ rating }: { rating: number }) => (
+	<div
+		css={css`
+			background-color: ${brandAltBackground.primary};
+			margin-top: ${space[1]}px;
+			display: inline-block;
+		`}
+	>
 		<Hide when="above" breakpoint="desktop">
-			<div css={starWrapper}>
-				<StarRating rating={rating} size="small" />
-			</div>
+			<StarRating rating={rating} size="small" />
 		</Hide>
 		<Hide when="below" breakpoint="desktop">
-			<div css={starWrapper}>
-				<StarRating rating={rating} size="medium" />
-			</div>
+			<StarRating rating={rating} size="medium" />
 		</Hide>
-	</>
+	</div>
 );
 
 /**
@@ -186,8 +186,10 @@ export const Card = ({
 	supportingContent,
 	snapData,
 	containerPalette,
+	containerType,
 	showAge = false,
 	discussionId,
+	isDynamo,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -218,19 +220,7 @@ export const Card = ({
 							containerPalette={containerPalette}
 							webPublicationDate={webPublicationDate}
 							showClock={showClock}
-						/>
-					) : undefined
-				}
-				mediaMeta={
-					(format.design === ArticleDesign.Gallery ||
-						format.design === ArticleDesign.Audio ||
-						format.design === ArticleDesign.Video) &&
-					mediaType ? (
-						<MediaMeta
-							containerPalette={containerPalette}
-							format={format}
-							mediaType={mediaType}
-							mediaDuration={mediaDuration}
+							isDynamo={isDynamo}
 						/>
 					) : undefined
 				}
@@ -243,6 +233,8 @@ export const Card = ({
 							data-name="comment-count-marker"
 							data-discussion-id={discussionId}
 							data-format={JSON.stringify(format)}
+							data-is-dynamo={isDynamo ? 'true' : undefined}
+							data-container-palette={containerPalette}
 							data-ignore="global-link-styling"
 							data-link-name="Comment count"
 							href={`${linkTo}#comments`}
@@ -280,7 +272,12 @@ export const Card = ({
 	}
 
 	return (
-		<CardWrapper format={format} containerPalette={containerPalette}>
+		<CardWrapper
+			format={format}
+			containerPalette={containerPalette}
+			containerType={containerType}
+			isDynamo={isDynamo}
+		>
 			<CardLink
 				linkTo={linkTo}
 				dataLinkName={dataLinkName}
@@ -299,9 +296,6 @@ export const Card = ({
 						imagePositionOnMobile={imagePositionOnMobile}
 					>
 						<img src={imageUrl} alt="" role="presentation" />
-						{starRating !== undefined ? (
-							<StarRatingComponent rating={starRating} />
-						) : null}
 					</ImageWrapper>
 				)}
 				<ContentWrapper
@@ -331,7 +325,22 @@ export const Card = ({
 								}
 								byline={byline}
 								showByline={showByline}
+								isDynamo={isDynamo}
 							/>
+							{starRating !== undefined ? (
+								<StarRatingComponent rating={starRating} />
+							) : null}
+							{(format.design === ArticleDesign.Gallery ||
+								format.design === ArticleDesign.Audio ||
+								format.design === ArticleDesign.Video) &&
+							mediaType ? (
+								<MediaMeta
+									containerPalette={containerPalette}
+									format={format}
+									mediaType={mediaType}
+									mediaDuration={mediaDuration}
+								/>
+							) : undefined}
 						</HeadlineWrapper>
 						{avatar && (
 							<Hide when="above" breakpoint="tablet">

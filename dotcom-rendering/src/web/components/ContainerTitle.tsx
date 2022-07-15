@@ -3,10 +3,23 @@ import {
 	between,
 	from,
 	headline,
+	news,
 	space,
 	text,
 	until,
 } from '@guardian/source-foundations';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { getEditionFromId } from '../lib/edition';
+
+type Props = {
+	title?: string;
+	fontColour?: string;
+	description?: string;
+	url?: string;
+	containerPalette?: DCRContainerPalette;
+	showDateHeader?: boolean;
+	editionId?: EditionId;
+};
 
 const linkStyles = css`
 	text-decoration: none;
@@ -53,18 +66,34 @@ const descriptionStyles = (fontColour?: string) => css`
 	}
 `;
 
+const dateTextStyles = (color: Colour) => css`
+	${headline.xxxsmall({ fontWeight: 'bold' })};
+	color: ${color};
+`;
+
+/**
+ * ContainerTitle
+ *
+ * For the date header to be shown, a valid editionId must be passed, as the
+ * date is based off of the edition timezone.
+ */
 export const ContainerTitle = ({
 	title,
 	fontColour,
 	description,
 	url,
-}: {
-	title?: string;
-	fontColour?: string;
-	description?: string;
-	url?: string;
-}) => {
+	containerPalette,
+	showDateHeader,
+	editionId,
+}: Props) => {
 	if (!title) return null;
+
+	const overrides =
+		containerPalette && decideContainerOverrides(containerPalette);
+
+	const now = new Date();
+	const locale = editionId && getEditionFromId(editionId).locale;
+
 	return (
 		<>
 			{url ? (
@@ -79,6 +108,33 @@ export const ContainerTitle = ({
 					css={descriptionStyles(fontColour)}
 					dangerouslySetInnerHTML={{ __html: description }}
 				/>
+			)}
+			{showDateHeader && editionId && (
+				<div>
+					<span
+						css={dateTextStyles(
+							overrides?.text.containerDate || news[400],
+						)}
+					>
+						{now.toLocaleDateString(locale, { weekday: 'long' })}
+					</span>
+					<span
+						css={[
+							css`
+								display: block;
+							`,
+							dateTextStyles(
+								overrides?.text.containerDate || news[400],
+							),
+						]}
+					>
+						{now.toLocaleDateString(locale, {
+							day: 'numeric',
+							month: 'long',
+							year: 'numeric',
+						})}
+					</span>
+				</div>
 			)}
 		</>
 	);

@@ -13,6 +13,7 @@ import { Header } from '../components/Header';
 import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
+import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
@@ -54,7 +55,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						element="header"
 					>
 						<Header
-							edition={front.editionId}
+							editionId={front.editionId}
 							idUrl={front.config.idUrl}
 							mmaUrl={front.config.mmaUrl}
 							supporterCTA={
@@ -80,7 +81,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							subscribeUrl={
 								front.nav.readerRevenueLinks.header.subscribe
 							}
-							edition={front.editionId}
+							editionId={front.editionId}
 						/>
 					</ElementContainer>
 					{NAV.subNavSections && (
@@ -126,6 +127,24 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					if (trails.length === 0) return null;
 
 					const ophanName = ophanComponentId(collection.displayName);
+					const ophanComponentLink = `container-${
+						index + 1
+					} | ${ophanName}`;
+
+					if (collection.collectionType === 'fixed/thrasher') {
+						return (
+							<ElementContainer
+								padded={false}
+								showTopBorder={false}
+								showSideBorders={false}
+								ophanComponentLink={ophanComponentLink}
+								ophanComponentName={ophanName}
+								element="section"
+							>
+								<Snap snapData={trails[0].snapData} />
+							</ElementContainer>
+						);
+					}
 
 					return (
 						<ContainerLayout
@@ -139,11 +158,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							centralBorder="partial"
 							url={collection.href}
 							// same as above re 'palette styles' for index increment
-							ophanComponentLink={`container-${
-								index + 1
-							} | ${ophanName}`}
-							ophanComponentName={`${ophanName}`}
+							ophanComponentLink={ophanComponentLink}
+							ophanComponentName={ophanName}
 							containerPalette={collection.containerPalette}
+							showDateHeader={collection.config.showDateHeader}
+							editionId={front.editionId}
 						>
 							<DecideContainer
 								trails={trails}
@@ -195,7 +214,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					pillar={format.theme}
 					pillars={NAV.pillars}
 					urls={front.nav.readerRevenueLinks.header}
-					edition={front.editionId}
+					editionId={front.editionId}
 					contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 				/>
 			</ElementContainer>

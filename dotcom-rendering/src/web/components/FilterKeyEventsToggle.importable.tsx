@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, neutral, remSpace } from '@guardian/source-foundations';
+import { from, neutral, remSpace, until } from '@guardian/source-foundations';
 import { ToggleSwitch } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
 
@@ -14,7 +14,9 @@ const cssOverrides = css`
 
 const toggleWrapperStyles = css`
 	display: flex;
-
+	${until.desktop} {
+		padding-top: ${remSpace[3]};
+	}
 	${from.desktop} {
 		border-top: 1px solid ${neutral[86]};
 	}
@@ -45,9 +47,14 @@ export const FilterKeyEventsToggle = ({ filterKeyEvents, id }: Props) => {
 			<div css={toggleWrapperStyles}>
 				<ToggleSwitch
 					label="Show key events only"
+					tooltip={true}
 					checked={checked}
 					onClick={() => handleClick()}
 					cssOverrides={cssOverrides}
+					data-component="filter-key-events"
+					data-link-name={`filter-key-events-${
+						filterKeyEvents ? 'off' : 'on'
+					}`}
 				/>
 			</div>
 		</>

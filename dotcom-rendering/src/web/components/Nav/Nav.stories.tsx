@@ -26,7 +26,7 @@ export const StandardStory = () => {
 				}}
 				nav={nav}
 				subscribeUrl=""
-				edition="UK"
+				editionId="UK"
 			/>
 		</ElementContainer>
 	);
@@ -50,7 +50,7 @@ export const OpinionStory = () => {
 				}}
 				nav={nav}
 				subscribeUrl=""
-				edition="UK"
+				editionId="UK"
 			/>
 		</ElementContainer>
 	);
@@ -74,7 +74,7 @@ export const ImmersiveStory = () => {
 				}}
 				nav={nav}
 				subscribeUrl=""
-				edition="UK"
+				editionId="UK"
 			/>
 		</ElementContainer>
 	);

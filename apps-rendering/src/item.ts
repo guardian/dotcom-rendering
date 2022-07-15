@@ -16,7 +16,7 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { fromNullable, map } from '@guardian/types';
+import { fromNullable, map, none } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
@@ -231,11 +231,31 @@ function getDisplay(content: Content): ArticleDisplay {
 	return ArticleDisplay.Standard;
 }
 
+/**
+ * Some pieces are supported and contain a branding logo. The branding
+ * information is separate from the CAPI model, and is passed to AR by MAPI.
+ *
+ * Sometimes we don't want to show the branding information, even if it's
+ * present. This is controlled by the `isInappropriateForSponsorship` field
+ * from CAPI, set via a Composer checkbox.
+ *
+ * This function derives the branding information based on these conditions.
+ * @param renderingRequest The request from MAPI
+ * @returns An optional object containing branding information
+ */
+const getBranding = ({
+	content,
+	branding,
+}: RenderingRequest): Option<Branding> =>
+	content.fields?.isInappropriateForSponsorship === true
+		? none
+		: fromNullable(branding);
+
 const itemFields = (
 	context: Context,
 	request: RenderingRequest,
 ): ItemFields => {
-	const { content, branding, commentCount, relatedContent } = request;
+	const { content, commentCount, relatedContent } = request;
 	return {
 		theme: themeFromString(content.pillarId),
 		display: getDisplay(content),
@@ -259,7 +279,7 @@ const itemFields = (
 		tags: content.tags,
 		shouldHideReaderRevenue:
 			content.fields?.shouldHideReaderRevenue ?? false,
-		branding: fromNullable(branding),
+		branding: getBranding(request),
 		internalShortId: fromNullable(content.fields?.internalShortId),
 		commentCount: fromNullable(commentCount),
 		relatedContent: pipe(

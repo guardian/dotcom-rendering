@@ -21,6 +21,7 @@ type LiveBlock = {
 	lastModified: Date;
 	body: Body;
 	contributors: Contributor[];
+	isPinned: boolean;
 };
 
 // ----- Functions ----- //
@@ -66,6 +67,7 @@ const parse =
 				contributorTags(block.contributors, tags),
 				context,
 			),
+			isPinned: block.attributes.pinned ?? false,
 		});
 	};
 

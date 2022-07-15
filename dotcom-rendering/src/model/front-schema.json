@@ -285,7 +285,7 @@
                                                                 "type": "object",
                                                                 "properties": {
                                                                     "id": {
-                                                                        "$ref": "#/definitions/Edition"
+                                                                        "$ref": "#/definitions/EditionId"
                                                                     }
                                                                 },
                                                                 "required": [
@@ -866,7 +866,7 @@
                                                                 "type": "object",
                                                                 "properties": {
                                                                     "id": {
-                                                                        "$ref": "#/definitions/Edition"
+                                                                        "$ref": "#/definitions/EditionId"
                                                                     }
                                                                 },
                                                                 "required": [
@@ -1447,7 +1447,7 @@
                                                                 "type": "object",
                                                                 "properties": {
                                                                     "id": {
-                                                                        "$ref": "#/definitions/Edition"
+                                                                        "$ref": "#/definitions/EditionId"
                                                                     }
                                                                 },
                                                                 "required": [
@@ -1944,7 +1944,7 @@
             "$ref": "#/definitions/CAPINavType"
         },
         "editionId": {
-            "$ref": "#/definitions/Edition"
+            "$ref": "#/definitions/EditionId"
         },
         "editionLongForm": {
             "type": "string"
@@ -2366,7 +2366,7 @@
             ],
             "type": "string"
         },
-        "Edition": {
+        "EditionId": {
             "enum": [
                 "AU",
                 "INT",

@@ -166,6 +166,7 @@ const footerItemContainers = css`
 		display: flex;
 	}
 
+	clear: both;
 	width: 100%;
 	padding: 0 10px;
 	position: relative;
@@ -187,12 +188,12 @@ const bttPosition = css`
 const FooterLinks = ({
 	pageFooter,
 	urls,
-	edition,
+	editionId,
 	contributionsServiceUrl,
 }: {
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
-	edition: Edition;
+	editionId: EditionId;
 	contributionsServiceUrl: string;
 }) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
@@ -216,7 +217,7 @@ const FooterLinks = ({
 			<Island deferUntil="visible" clientOnly={true}>
 				<ReaderRevenueLinks
 					urls={urls}
-					edition={edition}
+					editionId={editionId}
 					dataLinkNamePrefix="footer : "
 					inHeader={false}
 					remoteHeader={false}
@@ -236,16 +237,31 @@ const FooterLinks = ({
 
 const year = new Date().getFullYear();
 
-const decideSignupLink = (edition: Edition): string => {
+// Hard coding the values here is not ideal - ideally, they would sourced from the
+// newsletters API by frontend and included in the request.
+const decideSignupLink = (edition: EditionId): string => {
 	switch (edition) {
 		case 'US':
-			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-us';
+			return 'https://www.theguardian.com/info/2018/sep/17/guardian-us-morning-briefing-sign-up-to-stay-informed';
 		case 'AU':
-			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-au';
+			return 'https://www.theguardian.com/world/guardian-australia-morning-mail/2014/jun/24/-sp-guardian-australias-morning-mail-subscribe-by-email';
 		case 'UK':
 		case 'INT': // There's no international version so we default to UK
 		default:
-			return 'https://www.theguardian.com/info/2015/dec/08/daily-email-uk';
+			return 'https://www.theguardian.com/global/ng-interactive/2022/apr/13/first-edition-sign-up-guardian';
+	}
+};
+
+const decideSignupNewsletterName = (edition: EditionId): string => {
+	switch (edition) {
+		case 'US':
+			return 'us-morning-newsletter';
+		case 'AU':
+			return 'morning-mail';
+		case 'UK':
+		case 'INT': // There's no international version so we default to UK
+		default:
+			return 'morning-briefing';
 	}
 };
 
@@ -254,14 +270,14 @@ export const Footer = ({
 	pillar,
 	pageFooter,
 	urls,
-	edition,
+	editionId,
 	contributionsServiceUrl,
 }: {
 	pillars: PillarType[];
 	pillar: ArticleTheme;
 	pageFooter: FooterType;
 	urls: ReaderRevenueCategories;
-	edition: Edition;
+	editionId: EditionId;
 	contributionsServiceUrl: string;
 }) => (
 	<div
@@ -282,12 +298,15 @@ export const Footer = ({
 		<div css={footerItemContainers}>
 			<div css={emailSignup}>
 				<div>
-					All the day's headlines and highlights from the Guardian,
-					direct to you every morning
+					Original reporting and incisive analysis, direct from the
+					Guardian every morning
 				</div>
 				<LinkButton
 					size="small"
-					href={decideSignupLink(edition)}
+					href={decideSignupLink(editionId)}
+					data-link-name={`footer : ${decideSignupNewsletterName(
+						editionId,
+					)}`}
 					cssOverrides={emailSignupButton}
 					icon={<SvgArrowRightStraight />}
 					iconSide="right"
@@ -299,7 +318,7 @@ export const Footer = ({
 			<FooterLinks
 				pageFooter={pageFooter}
 				urls={urls}
-				edition={edition}
+				editionId={editionId}
 				contributionsServiceUrl={contributionsServiceUrl}
 			/>
 			<div css={bttPosition}>

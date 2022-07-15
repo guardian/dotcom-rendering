@@ -17,6 +17,7 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
+import { EmailSignup } from '../components/EmailSignup';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
@@ -78,7 +79,6 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
-	abTests?: ServerSideTests;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -132,19 +132,12 @@ export const renderElement = ({
 	isAdFreeUser,
 	switches,
 	isSensitive,
-	abTests,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
 
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
-
-	const isInteractivesIdleLoadingVariant =
-		abTests?.interactivesIdleLoadingVariant === 'variant';
-
-	const shouldIdleLoadInteractives =
-		!isAdFreeUser && isInteractivesIdleLoadingVariant;
 
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -390,9 +383,9 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.InteractiveBlockElement':
 			return [
 				true,
-				<Island
-					deferUntil={shouldIdleLoadInteractives ? 'idle' : 'visible'}
-				>
+				// Deferring interactives until CPU idle achieves the lowest Cumulative Layout Shift (CLS)
+				// For more information on the experiment we ran see: https://github.com/guardian/dotcom-rendering/pull/4942
+				<Island deferUntil="idle">
 					<InteractiveBlockComponent
 						url={element.url}
 						scriptUrl={element.scriptUrl}
@@ -455,6 +448,14 @@ export const renderElement = ({
 					key={index}
 					images={element.images}
 					caption={element.caption}
+				/>,
+			];
+		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
+			return [
+				true,
+				<EmailSignup
+					newsletter={element.newsletter}
+					elementId={element.elementId}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
@@ -797,7 +798,6 @@ export const RenderArticleElement = ({
 	isAdFreeUser,
 	isSensitive,
 	switches,
-	abTests,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -816,7 +816,6 @@ export const RenderArticleElement = ({
 		isAdFreeUser,
 		isSensitive,
 		switches,
-		abTests,
 	});
 
 	if (!ok) {

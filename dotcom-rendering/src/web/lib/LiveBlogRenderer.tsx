@@ -6,6 +6,7 @@ import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
 import { LiveBlock } from '../components/LiveBlock';
 import { LiveBlogEpic } from '../components/LiveBlogEpic.importable';
 import { PinnedPost } from '../components/PinnedPost';
+import { TopicFilterBank } from '../components/TopicFilterBank.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -28,7 +29,9 @@ type Props = {
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
 	filterKeyEvents?: boolean;
-	isKeyEventsCarouselVariant?: boolean;
+	isKeyEventsCarousel?: boolean;
+	availableTopics?: Topic[];
+	selectedTopics?: Topic[];
 };
 
 export const LiveBlogRenderer = ({
@@ -52,7 +55,9 @@ export const LiveBlogRenderer = ({
 	onFirstPage,
 	keyEvents,
 	filterKeyEvents = false,
-	isKeyEventsCarouselVariant = false,
+	isKeyEventsCarousel = false,
+	availableTopics,
+	selectedTopics,
 }: Props) => {
 	return (
 		<>
@@ -79,24 +84,43 @@ export const LiveBlogRenderer = ({
 					</PinnedPost>
 				</>
 			)}
-			{isKeyEventsCarouselVariant && keyEvents?.length ? (
+			{isKeyEventsCarousel && keyEvents?.length ? (
 				<Hide above="desktop">
 					<Island deferUntil="visible">
 						<KeyEventsCarousel
 							keyEvents={keyEvents}
 							filterKeyEvents={filterKeyEvents}
 							format={format}
+							id={'key-events-carousel-mobile'}
 						/>
 					</Island>
-					<Island deferUntil="visible">
-						<FilterKeyEventsToggle
-							filterKeyEvents={filterKeyEvents}
-							id="filter-toggle-mobile"
-						/>
-					</Island>
+					{!switches.automaticFilters ||
+						(!availableTopics && (
+							<Island deferUntil="visible">
+								<FilterKeyEventsToggle
+									filterKeyEvents={filterKeyEvents}
+									id="filter-toggle-mobile"
+								/>
+							</Island>
+						))}
 				</Hide>
 			) : (
 				<></>
+			)}
+
+			{switches.automaticFilters && availableTopics && (
+				<Hide above="desktop">
+					<Island>
+						<TopicFilterBank
+							availableTopics={availableTopics}
+							selectedTopics={selectedTopics}
+							format={format}
+							keyEvents={keyEvents}
+							filterKeyEvents={filterKeyEvents}
+							id={'key-events-carousel-mobile'}
+						/>
+					</Island>
+				</Hide>
 			)}
 			<div id="top-of-blog" />
 			{blocks.map((block) => {

@@ -1,5 +1,7 @@
+/* eslint-disable default-case */
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
 import { headline, space, textSans, until } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import React from 'react';
@@ -22,31 +24,56 @@ type Props = {
 	showByline?: boolean;
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 	linkTo?: string; // If provided, the headline is wrapped in a link
+	isDynamo?: true;
 };
 
-const fontStyles = (size: SmallHeadlineSize) => {
+const fontStyles = ({
+	size,
+	fontWeight,
+}: {
+	size: SmallHeadlineSize;
+	fontWeight?: FontWeight;
+}) => {
+	const options: FontScaleArgs = {};
+	if (fontWeight) options.fontWeight = fontWeight;
+
 	switch (size) {
+		case 'ginormous':
+			return css`
+				${headline.large(options)};
+				font-size: 50px;
+				${until.desktop} {
+					${headline.large(options)};
+				}
+			`;
+		case 'huge':
+			return css`
+				${headline.small(options)};
+				${until.desktop} {
+					${headline.xsmall(options)};
+				}
+			`;
 		case 'large':
 			return css`
-				${headline.xsmall()};
+				${headline.xsmall(options)};
 				${until.desktop} {
-					${headline.xxsmall()};
+					${headline.xxsmall(options)};
 				}
 			`;
 		case 'medium':
 			return css`
-				${headline.xxsmall()};
+				${headline.xxsmall(options)};
 				${until.desktop} {
-					${headline.xxxsmall()};
+					${headline.xxxsmall(options)};
 				}
 			`;
 		case 'small':
 			return css`
-				${headline.xxxsmall()};
+				${headline.xxxsmall(options)};
 			`;
 		case 'tiny':
 			return css`
-				${headline.xxxsmall()};
+				${headline.xxxsmall(options)};
 				font-size: 14px;
 			`;
 	}
@@ -54,6 +81,8 @@ const fontStyles = (size: SmallHeadlineSize) => {
 
 const labTextStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
+		case 'ginormous':
+		case 'huge':
 		case 'large':
 			return css`
 				${textSans.large()};
@@ -112,6 +141,10 @@ const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 	}
 
 	switch (size) {
+		case 'ginormous':
+			return underlinedCssWithMediaQuery(50, 50);
+		case 'huge':
+			return underlinedCssWithMediaQuery(34, 34);
 		case 'large':
 			return underlinedCssWithMediaQuery(29, 29);
 		case 'medium':
@@ -188,15 +221,24 @@ export const CardHeadline = ({
 	showByline,
 	showLine,
 	linkTo,
+	isDynamo,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
+	const kickerColour = isDynamo
+		? palette.text.dynamoKicker
+		: palette.text.cardKicker;
 	return (
 		<>
 			<h4
 				css={[
 					format.theme === ArticleSpecial.Labs
 						? labTextStyles(size)
-						: fontStyles(size),
+						: fontStyles({
+								size,
+								fontWeight: containerPalette
+									? 'bold'
+									: 'regular',
+						  }),
 					format.design === ArticleDesign.Analysis &&
 						!containerPalette &&
 						underlinedStyles(
@@ -204,29 +246,24 @@ export const CardHeadline = ({
 							palette.background.analysisUnderline,
 						),
 					showLine && lineStyles(palette),
-					containerPalette &&
-						css`
-							font-weight: bold;
-						`,
 				]}
 			>
 				<WithLink linkTo={linkTo}>
 					{kickerText && (
 						<Kicker
 							text={kickerText}
-							palette={palette}
+							color={kickerColour}
 							showPulsingDot={showPulsingDot}
 							showSlash={showSlash}
-							inCard={true}
 						/>
 					)}
-					{showQuotes && (
-						<QuoteIcon colour={palette.text.cardKicker} />
-					)}
+					{showQuotes && <QuoteIcon colour={kickerColour} />}
 
 					<span
 						css={css`
-							color: ${palette.text.cardHeadline};
+							color: ${isDynamo
+								? palette.text.dynamoHeadline
+								: palette.text.cardHeadline};
 						`}
 						className="show-underline"
 					>

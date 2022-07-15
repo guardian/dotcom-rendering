@@ -37,7 +37,7 @@ import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 
 type Props = {
-	edition: Edition;
+	editionId: EditionId;
 	dataLinkNamePrefix: string;
 	inHeader: boolean;
 	remoteHeader: boolean;
@@ -154,13 +154,13 @@ const subMessageStyles = css`
 `;
 
 const ReaderRevenueLinksRemote: React.FC<{
-	edition: Edition;
+	editionId: EditionId;
 	countryCode: string;
 	pageViewId: string;
 	contributionsServiceUrl: string;
 	ophanRecord: OphanRecordFunction;
 }> = ({
-	edition,
+	editionId,
 	countryCode,
 	pageViewId,
 	contributionsServiceUrl,
@@ -182,7 +182,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 			},
 			targeting: {
 				showSupportMessaging: !shouldHideSupportMessaging(),
-				edition,
+				edition: editionId,
 				countryCode,
 				modulesVersion: MODULES_VERSION,
 				mvtId: Number(
@@ -236,7 +236,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 };
 
 const ReaderRevenueLinksNative: React.FC<{
-	edition: Edition;
+	editionId: EditionId;
 	dataLinkNamePrefix: string;
 	inHeader: boolean;
 	urls: {
@@ -247,7 +247,7 @@ const ReaderRevenueLinksNative: React.FC<{
 	ophanRecord: OphanRecordFunction;
 	pageViewId: string;
 }> = ({
-	edition,
+	editionId,
 	dataLinkNamePrefix,
 	inHeader,
 	urls,
@@ -334,9 +334,10 @@ const ReaderRevenueLinksNative: React.FC<{
 			Subscribe <ArrowRightIcon />
 		</a>
 	);
-	const PrimaryButton = edition === 'UK' ? SubscribeButton : ContributeButton;
+	const PrimaryButton =
+		editionId === 'UK' ? SubscribeButton : ContributeButton;
 	const SecondaryButton =
-		edition === 'UK' ? ContributeButton : SubscribeButton;
+		editionId === 'UK' ? ContributeButton : SubscribeButton;
 
 	return (
 		<div ref={setNode} css={inHeader && headerStyles}>
@@ -359,7 +360,7 @@ const ReaderRevenueLinksNative: React.FC<{
 };
 
 export const ReaderRevenueLinks = ({
-	edition,
+	editionId,
 	dataLinkNamePrefix,
 	inHeader,
 	remoteHeader,
@@ -387,7 +388,7 @@ export const ReaderRevenueLinks = ({
 		if (inHeader && remoteHeader) {
 			return (
 				<ReaderRevenueLinksRemote
-					edition={edition}
+					editionId={editionId}
 					countryCode={countryCode}
 					pageViewId={pageViewId}
 					contributionsServiceUrl={contributionsServiceUrl}
@@ -397,7 +398,7 @@ export const ReaderRevenueLinks = ({
 		}
 		return (
 			<ReaderRevenueLinksNative
-				edition={edition}
+				editionId={editionId}
 				dataLinkNamePrefix={dataLinkNamePrefix}
 				inHeader={inHeader}
 				urls={urls}

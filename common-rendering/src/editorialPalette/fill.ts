@@ -20,6 +20,9 @@ import { Colour } from '.';
 
 // ----- Functions ----- //
 
+const cameraCaptionIcon = (): Colour => neutral[46];
+const cameraCaptionIconDark = (): Colour => neutral[60];
+
 const commentCount = (format: ArticleFormat): Colour => {
 	if (format.design === ArticleDesign.LiveBlog) {
 			return neutral[86];
@@ -183,25 +186,27 @@ const richLink = (_format: ArticleFormat): Colour => {
 
 const richLinkDark = (_format: ArticleFormat): Colour => {
 	return neutral[7];
-}
+};
 
 /**
  *  This is applied server-side. When the page loads, client-side JS applies a class name that overrides this style.
  */
- const richLinkSvgPreload = (_format: ArticleFormat): Colour => {
+const richLinkSvgPreload = (_format: ArticleFormat): Colour => {
 	return neutral[7];
-}
+};
 
 /**
  *  This is applied server-side. When the page loads, client-side JS applies a class name that overrides this style.
  */
 const richLinkSvgPreloadDark = (_format: ArticleFormat): Colour => {
 	return neutral[86];
-}
+};
 
 // ----- API ----- //
 
 const fill = {
+	cameraCaptionIcon,
+	cameraCaptionIconDark,
 	commentCount,
 	commentCountDark,
 	commentCountWide,

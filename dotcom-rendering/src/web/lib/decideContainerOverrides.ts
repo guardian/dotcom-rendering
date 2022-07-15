@@ -45,6 +45,27 @@ const textCardKicker = (containerPalette: DCRContainerPalette): string => {
 
 const textCardByline = textCardKicker;
 
+const textContainerDate = (containerPalette: DCRContainerPalette): string => {
+	switch (containerPalette) {
+		case 'LongRunningPalette':
+			return '#c70000';
+		case 'LongRunningAltPalette':
+			return '#8b0000';
+		case 'SombrePalette':
+			return '#c1d8fc';
+		case 'SombreAltPalette':
+			return '#ff5943';
+		case 'InvestigationPalette':
+			return '#ffe500';
+		case 'BreakingPalette':
+			return '#8b0000';
+		case 'EventPalette':
+			return '#c70000';
+		case 'EventAltPalette':
+			return '#c70000';
+	}
+};
+
 const textCardCommentCount = (
 	containerPalette: DCRContainerPalette,
 ): string => {
@@ -288,6 +309,7 @@ export const decideContainerOverrides = (
 			dynamoMeta: textDynamoMeta(containerPalette),
 			container: textContainer(containerPalette),
 			containerToggle: textContainerToggle(containerPalette),
+			containerDate: textContainerDate(containerPalette),
 		},
 		border: {
 			container: borderContainer(containerPalette),

@@ -2,6 +2,7 @@ import type express from 'express';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
+import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { extract as extractGA } from '../../model/extract-ga';
 import { extractNAV } from '../../model/extract-nav';
@@ -22,6 +23,9 @@ const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
 		blocks: enhanceBlocks(data.blocks, data.format),
 		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
 		standfirst: enhanceStandfirst(data.standfirst),
+		commercialProperties: enhanceCommercialProperties(
+			data.commercialProperties,
+		),
 	};
 	return CAPIArticle;
 };
@@ -189,6 +193,7 @@ export const renderFront = (
 	res: express.Response,
 ): void => {
 	try {
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- We validate the data in this func
 		const front = enhanceFront(body);
 		const html = frontToHtml({
 			front,
@@ -199,4 +204,12 @@ export const renderFront = (
 		const message = e instanceof Error ? e.stack : 'Unknown Error';
 		res.status(500).send(`<pre>${message}</pre>`);
 	}
+};
+
+export const renderFrontJson = (
+	{ body }: express.Request,
+	res: express.Response,
+): void => {
+	// eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- We validate the data in this func
+	res.json(enhanceFront(body));
 };

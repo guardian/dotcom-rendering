@@ -357,6 +357,11 @@ export const Quiz: CAPIArticleType = {
 						url: '/football',
 						children: [
 							{
+								title: "Women's Euro 2022",
+								url: '/football/women-s-euro-2022',
+								longTitle: 'football/women-s-euro-2022',
+							},
+							{
 								title: 'Live scores',
 								url: '/football/live',
 								longTitle: 'football/live',
@@ -557,6 +562,11 @@ export const Quiz: CAPIArticleType = {
 						title: 'Football',
 						url: '/football',
 						children: [
+							{
+								title: "Women's Euro 2022",
+								url: '/football/women-s-euro-2022',
+								longTitle: 'football/women-s-euro-2022',
+							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -934,6 +944,11 @@ export const Quiz: CAPIArticleType = {
 				url: '/football',
 				children: [
 					{
+						title: "Women's Euro 2022",
+						url: '/football/women-s-euro-2022',
+						longTitle: 'football/women-s-euro-2022',
+					},
+					{
 						title: 'Live scores',
 						url: '/football/live',
 						longTitle: 'football/live',
@@ -966,6 +981,11 @@ export const Quiz: CAPIArticleType = {
 				],
 			},
 			links: [
+				{
+					title: "Women's Euro 2022",
+					url: '/football/women-s-euro-2022',
+					longTitle: 'football/women-s-euro-2022',
+				},
 				{
 					title: 'Live scores',
 					url: '/football/live',
@@ -1321,6 +1341,7 @@ export const Quiz: CAPIArticleType = {
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	headline: 'Sports quiz: football in the 1980s',
+	byline: 'Steven Pye',
 	isLegacyInteractive: false,
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
@@ -1580,7 +1601,7 @@ export const Quiz: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: 'c8c96f9d-0998-4f0c-a192-b8bd9bfb54d9',
+			elementId: '77435dd4-bb5e-4f20-b17d-39e8ed78cb49',
 		},
 	],
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
@@ -2193,7 +2214,7 @@ export const Quiz: CAPIArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: '32f549aa-26a4-4d31-afcf-ecc677010735',
+					elementId: 'f4680555-49e7-4b2d-b713-e19507409a5c',
 				},
 			],
 			attributes: {

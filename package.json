@@ -9,7 +9,7 @@
 		"common-rendering"
 	],
 	"scripts": {
-		"postinstall": "npm install --prefix ./apps-rendering",
+		"postinstall": "if [ \"$CI\" = true ]; then npm ci --prefix ./apps-rendering ; else npm install --prefix ./apps-rendering ; fi",
 		"storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook --static-dir ./dotcom-rendering/src/static -p 6006",
 		"build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ./dotcom-rendering/src/static",
 		"build:dcr": "cd ./dotcom-rendering && yarn makeBuild",
@@ -32,7 +32,7 @@
 		"@guardian/prettier": "^1.0.0",
 		"@guardian/source-foundations": "^4.0.3",
 		"@guardian/source-react-components": "^4.4.0",
-		"@guardian/source-react-components-development-kitchen": "0.0.35",
+		"@guardian/source-react-components-development-kitchen": "1.0.1",
 		"@storybook/addon-essentials": "^6.3.7",
 		"@storybook/addon-knobs": "^6.3.1",
 		"@storybook/builder-webpack5": "^6.3.11",

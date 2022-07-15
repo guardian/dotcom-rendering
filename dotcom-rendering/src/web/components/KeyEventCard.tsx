@@ -16,7 +16,6 @@ interface Props {
 
 const linkStyles = (palette: Palette) => css`
 	text-decoration: none;
-	line-height: 1.35;
 
 	&::before {
 		content: '';
@@ -58,7 +57,7 @@ const summaryStyles = (palette: Palette) => css`
 
 const listItemStyles = (palette: Palette) => css`
 	position: relative;
-	padding-bottom: ${space[4]}px;
+	padding-bottom: ${space[3]}px;
 	padding-top: ${space[3]}px;
 	padding-right: ${space[3]}px;
 	background-color: ${palette.background.keyEvent};
@@ -81,7 +80,7 @@ const listItemStyles = (palette: Palette) => css`
 		border-top: 1px dotted ${palette.border.keyEvent};
 		left: 0;
 		right: 0;
-		top: 18px;
+		top: 19px;
 	}
 
 	&:last-child::before {
@@ -136,7 +135,7 @@ export const KeyEventCard = ({
 				>
 					{timeAgo(date.getTime())}
 				</time>
-				<span css={textStyles(palette)}>{title}</span>
+				<div css={textStyles(palette)}>{title}</div>
 			</Link>
 		</li>
 	);
