@@ -947,9 +947,9 @@ const pullquoteDark = (format: ArticleFormat): Colour => {
 	}
 };
 
-const figCaption = (): Colour => neutral[46];
+const figCaption = (_format: ArticleFormat): Colour => neutral[46];
 
-const figCaptionDark = (): Colour => neutral[60];
+const figCaptionDark = (_format: ArticleFormat): Colour => neutral[60];
 
 const tag = (_format: ArticleFormat): Colour => neutral[7];
 
