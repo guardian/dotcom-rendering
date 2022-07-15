@@ -939,7 +939,7 @@ type DCRCollectionType = {
 	displayName: string;
 	collectionType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
-	grouped: DCRGroupedCards;
+	grouped: DCRGroupedTrails;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
 	treats: DCRFrontCard[];
@@ -949,11 +949,11 @@ type DCRCollectionType = {
 	};
 };
 
-type DCRGroupedCards = {
-	huge: DCRFrontCard[];
-	veryBig: DCRFrontCard[];
-	big: DCRFrontCard[];
-	standard: DCRFrontCard[];
+type DCRGroupedTrails = {
+	huge: TrailType[];
+	veryBig: TrailType[];
+	big: TrailType[];
+	standard: TrailType[];
 };
 
 type FEFrontConfigType = {

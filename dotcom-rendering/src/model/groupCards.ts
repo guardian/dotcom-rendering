@@ -23,7 +23,7 @@ export const groupCards = (
 	curated: FEFrontCard[],
 	backfill: FEFrontCard[],
 	containerPalette?: DCRContainerPalette,
-): DCRGroupedCards => {
+): DCRGroupedTrails => {
 	return {
 		huge: enhanceCards(
 			curated.filter((card) => card.card.group === '3'),

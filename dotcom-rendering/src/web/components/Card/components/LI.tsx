@@ -48,18 +48,19 @@ const marginTopStyles = css`
 `;
 
 const decideSize = (percentage?: CardPercentageType, stretch?: boolean) => {
-	const stretched = css`
-		flex-grow: 1;
-	`;
-
 	let sizeStyle;
 	if (percentage) {
 		sizeStyle = css`
 			flex-basis: ${percentage};
-			${stretch && stretched}
+			${stretch &&
+			css`
+				flex-grow: 1;
+			`}
 		`;
 	} else if (stretch) {
-		sizeStyle = stretched;
+		sizeStyle = css`
+			flex-grow: 1;
+		`;
 	} else {
 		sizeStyle = css`
 			flex: 1;

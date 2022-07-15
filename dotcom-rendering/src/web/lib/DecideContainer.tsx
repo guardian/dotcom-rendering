@@ -8,7 +8,7 @@ import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
 
 type Props = {
 	trails: DCRFrontCard[];
-	groupedTrails: DCRGroupedCards;
+	groupedTrails: DCRGroupedTrails;
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
