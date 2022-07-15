@@ -107,7 +107,7 @@ const adStyles = css`
 	.ad-slot-container--offset-right {
 		${from.desktop} {
 			float: right;
-			width: 300px;
+			max-width: 300px;
 			margin-right: -318px;
 			background-color: transparent;
 		}
