@@ -1,24 +1,26 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
-import { background, neutral, remSpace } from '@guardian/source-foundations';
+import {
+	background,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
+import { remSpace } from '@guardian/source-foundations';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
-import type { ThemeStyles } from 'themeStyles';
-import { getThemeStyles } from 'themeStyles';
 
 const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
 	position: relative;
 	clear: both;
-	background: ${background.inverse};
-	color: ${neutral[86]};
+	background: ${background.mediaArticleBody(format)};
+	color: ${text.mediaArticleBody(format)};
 `;
 
-const ArticleBodyDarkStyles = ({
-	inverted,
-}: ThemeStyles): SerializedStyles => darkModeCss`
+const ArticleBodyDarkStyles = (
+	format: ArticleFormat,
+): SerializedStyles => darkModeCss`
     a {
-        color: ${inverted};
+        color: ${text.mediaArticleBodyLinkDark(format)};
     }
     p:last-child {
         margin-bottom: 0;
@@ -27,14 +29,12 @@ const ArticleBodyDarkStyles = ({
 `;
 
 interface ArticleBodyProps {
-	theme: ArticleTheme;
 	className: SerializedStyles[];
 	children: ReactNode[];
 	format: ArticleFormat;
 }
 
 const ArticleBodyMedia: FC<ArticleBodyProps> = ({
-	theme,
 	className,
 	children,
 	format,
@@ -42,7 +42,7 @@ const ArticleBodyMedia: FC<ArticleBodyProps> = ({
 	<div
 		css={[
 			ArticleBodyStyles(format),
-			ArticleBodyDarkStyles(getThemeStyles(theme)),
+			ArticleBodyDarkStyles(format),
 			...className,
 		]}
 	>

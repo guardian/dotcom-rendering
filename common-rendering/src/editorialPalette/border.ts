@@ -38,6 +38,25 @@ const articleLink = (format: ArticleFormat): Colour => {
 
 const articleLinkDark = articleLink;
 
+const commentCount = (_format: ArticleFormat): Colour => {
+	return 'rgba(255, 255, 255, 0.4)';
+};
+
+const commentCountDark = (_format: ArticleFormat): Colour => {
+	return neutral[20];
+};
+
+const commentCountWide = (_format: ArticleFormat): Colour => {
+	return neutral[86];
+};
+
+const commentCountWideDark = (_format: ArticleFormat): Colour => {
+	return neutral[20];
+};
+const interactiveAtomLink = (_format: ArticleFormat): Colour => {
+	return neutral[86];
+};
+
 const liveBlock = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -56,6 +75,7 @@ const liveBlock = (format: ArticleFormat): Colour => {
 			return specialReport[300];
 	}
 };
+
 
 const liveBlockDark = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
@@ -76,7 +96,35 @@ const liveBlockDark = (format: ArticleFormat): Colour => {
 	}
 };
 
+const relatedCard = (_format: ArticleFormat): Colour => {
+	return neutral[86];
+};
+
+const relatedCardDark = (_format: ArticleFormat): Colour => {
+	return neutral[20];
+};
+
 const standfirstLink = (format: ArticleFormat): Colour => {
+
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[600];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[500];
+		case ArticlePillar.Sport:
+			return sport[600];
+		case ArticlePillar.Culture:
+			return culture[600];
+		case ArticlePillar.Opinion:
+			return opinion[600];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+	}
+};
+
+const standfirstBlogLink = (format: ArticleFormat): Colour => {
 	if (format.design === ArticleDesign.LiveBlog) {
 		return neutral[100];
 	}
@@ -165,11 +213,16 @@ const pagination = (format: ArticleFormat): Colour => {
 const border = {
 	articleLink,
 	articleLinkDark,
+	commentCount,
+	commentCountDark,
+	commentCountWide,
+	commentCountWideDark,
+	interactiveAtomLink,
 	liveBlock,
 	liveBlockDark,
-	standfirstLink,
-	standfirstLinkDark,
 	pagination,
+	relatedCard,
+	relatedCardDark,
 	richLink,
 	richLinkDark,
 	richLinkPreload,
@@ -177,6 +230,9 @@ const border = {
 	richLinkSvgDark,
 	richLinkSvgPreload,
 	richLinkSvgPreloadDark,
+	standfirstLink,
+	standfirstBlogLink,
+	standfirstLinkDark,
 };
 
 // ----- Exports ----- //

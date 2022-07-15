@@ -1,25 +1,27 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
+import {
+	background,
+	border,
+	fill,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
 	from,
 	headline,
-	neutral,
-	opinion,
 	remSpace,
-	text,
 	textSans,
 } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
 import type { Option } from '@guardian/types';
 import { fromNullable, map, withDefault } from '@guardian/types';
+import { formatFromRelatedItem } from 'components/Card';
 import { makeRelativeDate } from 'date';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
-import { themeFromString } from 'themeStyles';
 
 interface Props {
 	relatedItem: RelatedItem;
@@ -30,7 +32,7 @@ const listStyles = (format: ArticleFormat): SerializedStyles => {
 		margin-right: ${remSpace[2]};
 		flex: 0 0 42vw;
 		justify-content: space-between;
-		border-top: 1px solid ${neutral[86]};
+		border-top: 1px solid ${border.relatedCard(format)};
 		max-width: 10rem;
 
 		&.fade {
@@ -38,8 +40,8 @@ const listStyles = (format: ArticleFormat): SerializedStyles => {
 		}
 
 		${darkModeCss`
-			border-top: 1px solid ${neutral[20]};
-            background: ${neutral[0]};
+			border-top: 1px solid ${border.relatedCardDark(format)};
+            background: ${background.relatedCardDark(format)};
         `}
 
 		${from.tablet} {
@@ -56,7 +58,7 @@ const listStyles = (format: ArticleFormat): SerializedStyles => {
 	`;
 };
 
-const bylineImage = css`
+const bylineImage = (format: ArticleFormat): SerializedStyles => css`
 	border-radius: 50%;
 	right: 0.625rem;
 	top: 0.375rem;
@@ -64,7 +66,7 @@ const bylineImage = css`
 	height: 4.75rem;
 	width: 4.75rem;
 	contain: paint;
-	background-color: ${opinion[400]};
+	background-color: ${background.relatedCardBylineImage(format)};
 	float: right;
 	position: relative;
 
@@ -88,14 +90,14 @@ const bylineImage = css`
 	}
 `;
 
-const anchorStyles = css`
-	color: ${neutral[7]};
+const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
+	color: ${text.relatedCardLink(format)};
 	text-decoration: none;
 	display: flex;
 	flex-direction: column;
 	height: 100%;
 	${darkModeCss`
-        color: ${neutral[86]};
+        color: ${text.relatedCardLinkDark(format)};
     `}
 `;
 
@@ -117,15 +119,19 @@ const cardStyles: SerializedStyles = css`
 	${headline.xxsmall()}
 `;
 
-const commentIconStyle = (): SerializedStyles => {
+const commentIconStyle = (format: ArticleFormat): SerializedStyles => {
 	return css`
 		width: 1.5rem;
 		height: 1.5rem;
 		display: inline-block;
-		fill: ${opinion[400]};
+		fill: ${fill.icon(format)};
 		vertical-align: text-bottom;
 		margin-bottom: -3px;
 		margin-left: -3px;
+
+		${darkModeCss`
+			fill: ${fill.iconDark(format)};
+		`}
 
 		${from.desktop} {
 			width: 1.688rem;
@@ -134,28 +140,37 @@ const commentIconStyle = (): SerializedStyles => {
 	`;
 };
 
-const bylineStyles: SerializedStyles = css`
-	color: ${opinion[400]};
+const bylineStyles = (format: ArticleFormat): SerializedStyles => css`
+	color: ${text.bylineAnchor(format)};
 	font-style: italic;
+	${darkModeCss`
+		color: ${text.bylineAnchorDark(format)};
+	`}
 `;
 
-const byline = (relatedItem: RelatedItem): ReactElement | null => {
+const byline = (
+	relatedItem: RelatedItem,
+	format: ArticleFormat,
+): ReactElement | null => {
 	return pipe(
 		fromNullable(relatedItem.byline),
 		map((byline) => {
-			return <div css={bylineStyles}>{byline}</div>;
+			return <div css={bylineStyles(format)}>{byline}</div>;
 		}),
 		withDefault<ReactElement | null>(null),
 	);
 };
 
-const cardImage = (relatedItem: RelatedItem): ReactElement | null => {
+const cardImage = (
+	relatedItem: RelatedItem,
+	format: ArticleFormat,
+): ReactElement | null => {
 	if (!relatedItem.bylineImage) {
 		return null;
 	}
 
 	return (
-		<div css={bylineImage}>
+		<div css={bylineImage(format)}>
 			<img
 				alt={relatedItem.byline ?? 'Byline image'}
 				src={relatedItem.bylineImage}
@@ -164,11 +179,10 @@ const cardImage = (relatedItem: RelatedItem): ReactElement | null => {
 	);
 };
 
-const dateStyles = css`
+const dateStyles = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.small()};
-	color: ${text.supporting};
+	color: ${text.relatedCardTimeAgo(format)};
 	text-align: right;
-	display: inline-block;
 	vertical-align: top;
 	float: right;
 	margin-right: ${remSpace[3]};
@@ -176,10 +190,15 @@ const dateStyles = css`
 	font-weight: 700;
 `;
 
-const relativeFirstPublished = (date: Option<Date>): ReactElement | null =>
+const relativeFirstPublished = (
+	date: Option<Date>,
+	format: ArticleFormat,
+): ReactElement | null =>
 	pipe(
 		date,
-		map((date) => <time css={dateStyles}>{makeRelativeDate(date)}</time>),
+		map((date) => (
+			<time css={dateStyles(format)}>{makeRelativeDate(date)}</time>
+		)),
 		withDefault<ReactElement | null>(null),
 	);
 
@@ -192,17 +211,13 @@ const footerStyles = css`
 `;
 
 const BylineCard: FC<Props> = ({ relatedItem }) => {
-	const { title, link, pillar, webPublicationDate } = relatedItem;
-	const format = {
-		theme: themeFromString(pillar.id),
-		design: ArticleDesign.Standard,
-		display: ArticleDisplay.Standard,
-	};
-
-	const img = cardImage(relatedItem);
+	const { title, link, pillar, webPublicationDate, type } = relatedItem;
+	const format = formatFromRelatedItem(type, pillar.id);
+	const img = cardImage(relatedItem, format);
 	const date = webPublicationDate
 		? relativeFirstPublished(
 				fromNullable(new Date(webPublicationDate.iso8601)),
+				format,
 		  )
 		: null;
 	return (
@@ -211,20 +226,23 @@ const BylineCard: FC<Props> = ({ relatedItem }) => {
 			data-article-id={link}
 			css={[listStyles(format), cardStyles]}
 		>
-			<a css={anchorStyles} href={`https://theguardian.com/${link}`}>
+			<a
+				css={anchorStyles(format)}
+				href={`https://theguardian.com/${link}`}
+			>
 				<section css={headingWrapperStyles}>
 					<h3 css={headingStyles}>
-						<span css={commentIconStyle}>
+						<span css={commentIconStyle(format)}>
 							<SvgQuote />
 						</span>
 						{title}
-						{byline(relatedItem)}
+						{byline(relatedItem, format)}
 					</h3>
 				</section>
 				<section>
 					{img}
 					<footer css={footerStyles}>
-						<div css={dateStyles}></div>
+						<div css={dateStyles(format)}></div>
 						{date}
 					</footer>
 				</section>
