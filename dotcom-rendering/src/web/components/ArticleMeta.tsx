@@ -9,6 +9,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { getSoleContributor } from '../../lib/byline';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 import { Avatar } from './Avatar';
@@ -197,16 +198,6 @@ const metaContainer = (format: ArticleFormat) => {
 	}
 };
 
-const getBylineImageUrl = (tags: TagType[]) => {
-	const contributorTag = tags.find((tag) => tag.type === 'Contributor');
-	return contributorTag?.bylineLargeImageUrl;
-};
-
-const getAuthorName = (tags: TagType[]) => {
-	const contributorTag = tags.find((tag) => tag.type === 'Contributor');
-	return contributorTag?.title;
-};
-
 const shouldShowAvatar = (format: ArticleFormat) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
@@ -316,19 +307,12 @@ export const ArticleMeta = ({
 	ajaxUrl,
 	showShareCount,
 }: Props) => {
-	const bylineImageUrl = getBylineImageUrl(tags);
-	const authorName = getAuthorName(tags);
+	const soleContributor = getSoleContributor(tags, byline);
+	const authorName = soleContributor?.title ?? 'Author Image';
 
-	/** Only show avatar if the byline is a non-empty string */
-	const showAvatarFromAuthor = () => !!byline;
-
-	const onlyOneContributor: boolean =
-		tags.filter((tag) => tag.type === 'Contributor').length === 1;
-
-	const showAvatar =
-		onlyOneContributor &&
-		showAvatarFromAuthor() &&
-		shouldShowAvatar(format);
+	const avatarUrl = shouldShowAvatar(format)
+		? soleContributor?.bylineLargeImageUrl
+		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
 	const palette = decidePalette(format);
@@ -364,11 +348,11 @@ export const ArticleMeta = ({
 				)}
 				<RowBelowLeftCol>
 					<>
-						{showAvatar && bylineImageUrl && (
+						{avatarUrl && (
 							<AvatarContainer>
 								<Avatar
-									imageSrc={bylineImageUrl}
-									imageAlt={authorName || 'Author image'}
+									imageSrc={avatarUrl}
+									imageAlt={authorName}
 									format={format}
 								/>
 							</AvatarContainer>

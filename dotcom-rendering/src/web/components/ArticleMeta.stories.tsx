@@ -163,6 +163,34 @@ export const FeatureStory = () => {
 };
 FeatureStory.story = { name: 'Feature' };
 
+export const FeatureWithMismatchedContributor = () => {
+	return (
+		<Container>
+			<ArticleMeta
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticlePillar.Culture,
+				}}
+				pageId=""
+				webTitle=""
+				byline="Gabriel Smith"
+				tags={tagsWithLargeBylineImage}
+				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
+				ajaxUrl=""
+				showShareCount={true}
+			/>
+		</Container>
+	);
+};
+FeatureWithMismatchedContributor.story = {
+	name: 'Feature with a byline mismatching the contributor tag',
+};
+
 export const FeatureStoryWithSmallBylineImage = () => {
 	return (
 		<Container>
