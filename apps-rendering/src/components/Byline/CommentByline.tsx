@@ -13,7 +13,7 @@ const commentStyles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.medium({ fontWeight: 'light', fontStyle: 'italic' })}
 
 	${between.mobile.and.phablet} {
-		width: 65%;
+		width: 68%;
 	}
 `;
 
