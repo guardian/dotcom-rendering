@@ -1,1 +1,3 @@
-*	@guardian/dotcom-platform @guardian/apps-rendering
+*			@guardian/dotcom-platform @guardian/apps-rendering
+/apps-rendering/	@guardian/apps-rendering
+/dotcom-rendering/	@guardian/dotcom-platform
