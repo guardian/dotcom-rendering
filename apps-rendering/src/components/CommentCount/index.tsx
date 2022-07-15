@@ -2,22 +2,19 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { fill } from '@guardian/common-rendering/src/editorialPalette';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
 import {
 	border,
-	from,
-	neutral,
-	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+	fill,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
+import { from, remSpace, textSans } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
-import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
@@ -26,42 +23,53 @@ interface Props extends ArticleFormat {
 	commentable: boolean;
 }
 
-const styles = (
-	colour: string,
-	borderColor: string,
-	darkBorderColour: string,
-): SerializedStyles => css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.medium({ fontWeight: 'bold' })}
 	border: none;
 	background: none;
-	border-left: 1px solid ${borderColor};
+	border-left: 1px solid ${border.commentCount(format)};
 	padding-top: ${remSpace[3]};
-	color: ${colour};
+	color: ${text.commentCount(format)};
 	${darkModeCss`
-        border-left: 1px solid ${darkBorderColour};
+		color: ${text.commentCountDark(format)};
+	    border-left: 1px solid ${border.commentCountDark(format)};
+		${from.desktop} {
+        	border-left: 1px solid ${border.commentCountWideDark(format)};
+		}
     `}
 `;
 
-const bubbleStyles = (colour: string): SerializedStyles => css`
+const bubbleStyles = (format: ArticleFormat): SerializedStyles => css`
 	width: 1rem;
 	display: block;
 	margin-left: auto;
-	fill: ${colour};
+	fill: ${fill.commentCount(format)};
+	${darkModeCss`
+		fill: ${fill.commentCountDark(format)};
+    `}
 `;
 
-const blogStyles = (color: string): SerializedStyles => css`
-	${styles(color, 'rgba(255, 255, 255, 0.4)', 'rgba(255, 255, 255, 0.4)')}
+const blogStyles = (format: ArticleFormat): SerializedStyles => css`
+	${textSans.medium({ fontWeight: 'bold' })}
+	border: none;
+	background: none;
+	color: ${text.commentCount(format)};
+	border-left: 1px solid ${border.commentCount(format)};
 
 	${from.desktop} {
-		color: ${neutral[46]};
-		border-left: 1px solid ${neutral[86]};
-
-		${darkModeCss`
-			border-left-color: ${neutral[20]}
-		`}
+		color: ${text.commentCountWide(format)};
+		border-left: 1px solid ${border.commentCountWide(format)};
 	}
 	padding-top: ${remSpace[2]};
 	margin-bottom: ${remSpace[2]};
+	${darkModeCss`
+		color: ${text.commentCountDark(format)};
+		border-left: 1px solid ${border.commentCountDark(format)};
+
+		${from.desktop} {
+			border-left-color: ${border.commentCountWideDark(format)};
+		}
+	`}
 `;
 
 const deadblogStyles = css`
@@ -77,47 +85,44 @@ const deadblogStyles = css`
 `;
 
 const getStyles = (format: ArticleFormat): SerializedStyles => {
-	const colours = getThemeStyles(format.theme);
-	const commentCount = fill.commentCount(format);
-
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
-			return blogStyles(neutral[93]);
+			return css(blogStyles(format));
 		case ArticleDesign.DeadBlog:
-			return css(blogStyles(commentCount), deadblogStyles);
+			return css(blogStyles(format), deadblogStyles);
 		default:
-			return styles(colours.kicker, border.secondary, neutral[20]);
+			return styles(format);
 	}
 };
 
-const liveblogBubbleStyles = css`
+const liveblogBubbleStyles = (format: ArticleFormat): SerializedStyles => css`
 	${from.desktop} {
-		fill: ${neutral[46]};
+		fill: ${fill.commentCountWide(format)};
+		${darkModeCss`
+			fill: ${fill.commentCountDark(format)};
+    	`}
 	}
 `;
 
-const deadblogBubbleStyles = (color: string): SerializedStyles => css`
-	fill: ${color};
+const deadblogBubbleStyles = (format: ArticleFormat): SerializedStyles => css`
+	fill: ${fill.commentCount(format)};
 	margin-left: revert;
 	${from.desktop} {
-		fill: ${neutral[46]};
+		fill: ${fill.commentCountWide(format)};
+		${darkModeCss`
+			fill: ${fill.commentCountDark(format)};
+    	`}
 	}
 `;
 
 const getBubbleStyles = (format: ArticleFormat): SerializedStyles => {
-	const colours = getThemeStyles(format.theme);
-	const commentCount = fill.commentCount(format);
-
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
-			return css(bubbleStyles(neutral[93]), liveblogBubbleStyles);
+			return css(bubbleStyles(format), liveblogBubbleStyles(format));
 		case ArticleDesign.DeadBlog:
-			return css(
-				bubbleStyles(neutral[93]),
-				deadblogBubbleStyles(commentCount),
-			);
+			return css(bubbleStyles(format), deadblogBubbleStyles(format));
 		default:
-			return bubbleStyles(colours.kicker);
+			return bubbleStyles(format);
 	}
 };
 
