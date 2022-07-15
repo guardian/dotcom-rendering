@@ -30,9 +30,7 @@ const InterviewHeadline: React.FC<Props> = ({ item }) => {
 	return (
 		<div
 			css={css`
-				padding-left: 0;
-				padding-right: ${remSpace[12]};
-				position: relative;
+				padding: ${remSpace[4]} ${remSpace[12]} 0 0;
 				${from.wide} {
 					margin: 0 auto;
 				}
