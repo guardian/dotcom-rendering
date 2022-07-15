@@ -12,7 +12,7 @@ import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from '../lib';
-import { fill } from '@guardian/common-rendering/src/editorialPalette';
+import { fill, text } from '@guardian/common-rendering/src/editorialPalette';
 
 // ----- Sub-Components ----- //
 
@@ -72,11 +72,11 @@ type Props = {
 const styles = (supportsDarkMode: boolean) => css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
 	padding-top: ${remSpace[1]};
-	color: ${neutral[46]};
+	color: ${text.figCaption()};
 
 	${darkModeCss(supportsDarkMode)`
-    color: ${neutral[60]};
-  `}
+    	color: ${text.figCaptionDark()};
+  	`}
 `;
 
 const mediaStyles = (supportsDarkMode: boolean) => css`

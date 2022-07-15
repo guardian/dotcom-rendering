@@ -632,15 +632,15 @@ const richLink = (format: ArticleFormat): Colour => {
 
 const richLinkDark = (_format: ArticleFormat): Colour => {
 	return neutral[86];
-}
+};
 
 const richLinkAnchor = (_format: ArticleFormat): Colour => {
 	return neutral[7];
-}
+};
 
 const richLinkAnchorDark = (_format: ArticleFormat): Colour => {
 	return neutral[60];
-}
+};
 
 const seriesTitleDark = (format: ArticleFormat): Colour => {
 	if (format.display === ArticleDisplay.Immersive) {
@@ -684,6 +684,10 @@ const pagination = (format: ArticleFormat): Colour => {
 	}
 };
 
+const figCaption = (): Colour => neutral[46];
+
+const figCaptionDark = (): Colour => neutral[60];
+
 // ----- API ----- //
 
 const text = {
@@ -698,6 +702,8 @@ const text = {
 	bylineDark,
 	dropCap,
 	dropCapDark,
+	figCaption,
+	figCaptionDark,
 	follow,
 	followDark,
 	headline,
