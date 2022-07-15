@@ -33,7 +33,7 @@ const darkStyles = (format: ArticleFormat): SerializedStyles => darkModeCss`
 
 export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.xxxsmall({ fontWeight: 'bold' })}
-	padding: 0;
+	padding: ${remSpace[3]} 0 0;
 	margin-bottom: ${remSpace[3]};
 	color: ${text.standfirst(format)};
 
@@ -41,7 +41,6 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 
 	p,
 	ul {
-		padding: ${remSpace[3]} 0 0;
 		margin: 0;
 	}
 
