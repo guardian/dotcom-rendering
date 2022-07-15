@@ -69,13 +69,13 @@ type Props = {
 	children: Option<ReactNode>;
 };
 
-const styles = (supportsDarkMode: boolean) => css`
+const styles = (format: ArticleFormat, supportsDarkMode: boolean) => css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
 	padding-top: ${remSpace[1]};
-	color: ${text.figCaption()};
+	color: ${text.figCaption(format)};
 
 	${darkModeCss(supportsDarkMode)`
-    	color: ${text.figCaptionDark()};
+    	color: ${text.figCaptionDark(format)};
   	`}
 `;
 
@@ -95,9 +95,9 @@ const getStyles = (
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
-			return css(styles(supportsDarkMode), mediaStyles(supportsDarkMode));
+			return css(styles(format, supportsDarkMode), mediaStyles(supportsDarkMode));
 		default:
-			return styles(supportsDarkMode);
+			return styles(format, supportsDarkMode);
 	}
 };
 
