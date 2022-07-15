@@ -24,6 +24,7 @@ type Props = {
 	starRating?: number;
 	title?: string;
 	isAvatar?: boolean;
+	showMediaAboveHeadline?: boolean;
 };
 
 const starsWrapper = css`
@@ -179,6 +180,7 @@ export const ImageComponent = ({
 	starRating,
 	title,
 	isAvatar,
+	showMediaAboveHeadline,
 }: Props) => {
 	const shouldLimitWidth =
 		!isMainMedia &&
@@ -335,7 +337,12 @@ export const ImageComponent = ({
 				{isMainMedia && (
 					// Below tablet, main media images show an info toggle at the bottom right of
 					// the image which, when clicked, toggles the caption as an overlay
-					<Hide when="above" breakpoint="tablet">
+					<Hide
+						when="above"
+						breakpoint={
+							showMediaAboveHeadline ? 'desktop' : 'tablet'
+						}
+					>
 						<Row>
 							<CaptionToggle>
 								<Caption
@@ -357,7 +364,10 @@ export const ImageComponent = ({
 				)}
 			</div>
 			{isMainMedia ? (
-				<Hide when="below" breakpoint="tablet">
+				<Hide
+					when="below"
+					breakpoint={showMediaAboveHeadline ? 'desktop' : 'tablet'}
+				>
 					<Caption
 						captionText={element.data.caption || ''}
 						format={format}

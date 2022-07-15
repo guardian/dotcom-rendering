@@ -50,7 +50,7 @@ const immersiveWrapper = css`
 
 const chooseWrapper = (
 	format: ArticleFormat,
-	showMediaAboveHeadline: boolean,
+	showMediaAboveHeadline?: boolean,
 ) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
@@ -102,7 +102,7 @@ export const MainMedia: React.FC<{
 	isSensitive,
 	switches,
 	showOverlayCaption,
-	showMediaAboveHeadline = false,
+	showMediaAboveHeadline,
 }) => {
 	return (
 		<div css={[mainMedia, chooseWrapper(format, showMediaAboveHeadline)]}>
@@ -125,6 +125,7 @@ export const MainMedia: React.FC<{
 					hideCaption={hideCaption}
 					starRating={starRating}
 					showOverlayCaption={showOverlayCaption}
+					showMediaAboveHeadline={showMediaAboveHeadline}
 				/>
 			))}
 		</div>

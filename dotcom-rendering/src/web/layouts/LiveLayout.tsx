@@ -87,6 +87,8 @@ const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-areas: 'title	headline';
 				}
 				${until.desktop} {
+					background-color: green;
+					padding: 0 30px;
 					grid-template-columns: minmax(0, 1fr); /* Main content */
 					grid-template-areas:
 						'title'
