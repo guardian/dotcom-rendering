@@ -25,7 +25,6 @@ export const DecideContainer = ({
 		case 'dynamic/fast':
 			return (
 				<DynamicFast
-					trails={trails}
 					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}

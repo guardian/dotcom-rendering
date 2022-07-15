@@ -6,7 +6,6 @@ import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 
 type Props = {
-	trails: TrailType[];
 	groupedTrails: DCRGroupedTrails;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
@@ -203,11 +202,12 @@ const ThirdBoostedPlusBig = ({
 };
 
 /**
- * Dynamic fast is a dynamic container often used for headlines on network fronts,
+ * Dynamic/fast is a dynamic container often used for headlines on network fronts,
  * for this reason it has a lot of configuration & customisation.
  *
- * It supports 4 categories of cards, 'huge', 'very big', 'big', and standard.
- * These categories are normalised and 'fall through' depending on the layout configuration,
+ * It supports 4 categories of cards, 'huge', 'very big', 'big', and 'standard'.
+ * As the tools do not limit the configurations of these categories, we must normalise them
+ * and have cards 'fall through' depending on the layout configuration,
  * for example if you had 3 very bigs, the 3rd would 'fall through' to being the first big.
  *
  * 'Default' Container layout is
@@ -279,23 +279,28 @@ export const DynamicFast = ({
 
 	let maxStandards = 12;
 	let columns = 3;
-	let standardsColumnWidth: CardPercentageType = '25%';
+	let standardsCardWidth: CardPercentageType = '25%';
+	let standardsContainerWidth: CardPercentageType = '75%';
 
 	if (firstBigBoosted) {
 		maxStandards = 8;
-		standardsColumnWidth = '50%';
+		standardsCardWidth = '50%';
+		standardsContainerWidth = '50%';
 		columns = 2;
 	} else if (bigs.length === 1) {
 		maxStandards = 9;
-		standardsColumnWidth = '33.333%';
+		standardsCardWidth = '33.333%';
+		standardsContainerWidth = '75%';
 		columns = 3;
 	} else if (bigs.length === 2) {
 		maxStandards = 6;
-		standardsColumnWidth = '50%';
+		standardsCardWidth = '50%';
+		standardsContainerWidth = '50%';
 		columns = 2;
 	} else if (bigs.length === 3) {
 		maxStandards = 3;
-		standardsColumnWidth = '100%';
+		standardsCardWidth = '100%';
+		standardsContainerWidth = '25%';
 		columns = 1;
 	} else if (bigs.length === 4) {
 		maxStandards = 0;
@@ -411,7 +416,7 @@ export const DynamicFast = ({
 								key={card.url}
 								padSides={true}
 								percentage={
-									primaries.length === 1 ? '50%' : '100%'
+									primaries.length === 1 ? '100%' : '50%'
 								}
 								showDivider={index > 0}
 								showTopMarginWhenStacked={index > 0}
@@ -558,9 +563,7 @@ export const DynamicFast = ({
 					);
 				})}
 				<LI
-					percentage={
-						firstBigBoosted ? '50%' : `${100 - bigs.length * 25}%`
-					}
+					percentage={standardsContainerWidth}
 					showTopMarginWhenStacked={true}
 				>
 					<UL direction="row" wrapCards={true}>
@@ -579,7 +582,7 @@ export const DynamicFast = ({
 								return (
 									<LI
 										key={card.url}
-										percentage={standardsColumnWidth}
+										percentage={standardsCardWidth}
 										stretch={true}
 										showDivider={true}
 										padSides={true}
