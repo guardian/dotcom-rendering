@@ -1,7 +1,7 @@
 import { Live as exampleLiveBlog } from '../../fixtures/generated/articles/Live';
 import { Quiz as exampleQuiz } from '../../fixtures/generated/articles/Quiz';
 import { Standard as exampleStandard } from '../../fixtures/generated/articles/Standard';
-import { enhanceNewsletterSignup } from './enhance-newsletter-signup';
+import { insertNewsletterSignup } from './insert-newsletter-signup';
 
 const sampleNewsletter: Newsletter = {
 	listId: 123,
@@ -32,7 +32,7 @@ describe('Enhance Newsletter Signups', () => {
 		);
 
 		const elementTypesAfterEnhance = toElementTypeLists(
-			enhanceNewsletterSignup(
+			insertNewsletterSignup(
 				exampleStandard.blocks,
 				exampleStandard.format,
 				undefined,
@@ -44,7 +44,7 @@ describe('Enhance Newsletter Signups', () => {
 
 	it('inserts a NewsletterSignupBlockElement to a standard article if there is a newsletter', () => {
 		expect(
-			enhanceNewsletterSignup(
+			insertNewsletterSignup(
 				exampleStandard.blocks,
 				exampleStandard.format,
 				sampleNewsletter,
@@ -60,7 +60,7 @@ describe('Enhance Newsletter Signups', () => {
 
 	it('will not insert a NewsletterSignupBlockElement into a blog', () => {
 		expect(
-			enhanceNewsletterSignup(
+			insertNewsletterSignup(
 				exampleLiveBlog.blocks,
 				exampleLiveBlog.format,
 				sampleNewsletter,
@@ -76,7 +76,7 @@ describe('Enhance Newsletter Signups', () => {
 
 	it('will not insert a NewsletterSignupBlockElement into a quiz', () => {
 		expect(
-			enhanceNewsletterSignup(
+			insertNewsletterSignup(
 				exampleQuiz.blocks,
 				exampleQuiz.format,
 				sampleNewsletter,

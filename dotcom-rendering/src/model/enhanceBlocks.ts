@@ -4,9 +4,9 @@ import { enhanceDots } from './enhance-dots';
 import { enhanceEmbeds } from './enhance-embeds';
 import { enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
-import { enhanceNewsletterSignup } from './enhance-newsletter-signup';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceTweets } from './enhance-tweets';
+import { insertNewsletterSignup } from './insert-newsletter-signup';
 
 class BlockEnhancer {
 	blocks: Block[];
@@ -25,8 +25,8 @@ class BlockEnhancer {
 		this.promotedNewsletter = promotedNewsletter;
 	}
 
-	enhanceNewsletterSignup() {
-		this.blocks = enhanceNewsletterSignup(
+	insertNewsletterSignup() {
+		this.blocks = insertNewsletterSignup(
 			this.blocks,
 			this.format,
 			this.promotedNewsletter,
@@ -84,7 +84,7 @@ export const enhanceBlocks = (
 	promotedNewsletter?: Newsletter,
 ): Block[] => {
 	return new BlockEnhancer(blocks, format, promotedNewsletter)
-		.enhanceNewsletterSignup()
+		.insertNewsletterSignup()
 		.enhanceDividers()
 		.enhanceInteractiveContentsElements()
 		.enhanceBlockquotes()
