@@ -778,6 +778,10 @@ type ResultBucketsType = {
 	description: string;
 };
 
+// -------------------------------------
+// Newsletter
+// -------------------------------------
+
 type Newsletter = {
 	listId: number;
 	identityName: string;
