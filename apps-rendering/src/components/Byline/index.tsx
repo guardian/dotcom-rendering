@@ -4,7 +4,6 @@ import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import type { FC } from 'react';
-import { getThemeStyles } from 'themeStyles';
 import {
 	defaultAnchorStyles,
 	DefaultByline,
@@ -22,8 +21,6 @@ interface Props extends ArticleFormat {
 }
 
 const Byline: FC<Props> = ({ bylineHtml, ...format }) => {
-	const { kicker, inverted } = getThemeStyles(format.theme);
-
 	if (format.theme === ArticleSpecial.Labs) {
 		return <LabsByline bylineHtml={bylineHtml} format={format} />;
 	}
@@ -44,7 +41,7 @@ const Byline: FC<Props> = ({ bylineHtml, ...format }) => {
 				<DefaultByline
 					bylineHtml={bylineHtml}
 					styles={defaultStyles(text.bylineLeftColumn(format))}
-					anchorStyles={defaultAnchorStyles(kicker, inverted)}
+					anchorStyles={defaultAnchorStyles(format)}
 					format={format}
 				/>
 			);

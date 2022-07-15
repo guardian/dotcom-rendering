@@ -3,37 +3,50 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { remSpace } from '@guardian/source-foundations';
-import { brandAltText, neutral, text } from '@guardian/source-foundations';
+import { neutral } from '@guardian/source-foundations';
 import { textSans } from '@guardian/source-foundations';
+import { SvgCamera } from '@guardian/source-react-components';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import type { FC, ReactNode } from 'react';
-import { fill } from '../editorialPalette';
 import { darkModeCss } from '../lib';
+import { fill, text } from '@guardian/common-rendering/src/editorialPalette';
 
 // ----- Sub-Components ----- //
 
-interface TriangleProps {
+interface CameraProps {
 	format: ArticleFormat;
 	supportsDarkMode: boolean;
 }
 
-const triangleStyles = (
-	format: ArticleFormat,
-	supportsDarkMode: boolean,
-): SerializedStyles => css`
-	fill: ${fill.icon(format)};
-	height: 0.8em;
-	padding-right: ${remSpace[1]};
+const cameraStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+	display: inline-block;
+	width: 1.2rem;
+	margin-right: ${remSpace[1]};
+	fill: ${fill.cameraCaptionIcon()};
+	position: relative;
+
+	::before {
+		content: ' ';
+		display: block;
+		padding-top: 0.85rem;
+	}
+
+	svg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+	}
 
 	${darkModeCss(supportsDarkMode)`
-        fill: ${fill.iconDark(format)};
+        fill: ${fill.cameraCaptionIconDark()};
     `}
 `;
 
-const Triangle: FC<TriangleProps> = ({ format, supportsDarkMode }) => {
+const Camera: FC<CameraProps> = ({ format, supportsDarkMode }) => {
 	switch (format.design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -41,13 +54,9 @@ const Triangle: FC<TriangleProps> = ({ format, supportsDarkMode }) => {
 			return null;
 		default:
 			return (
-				<svg
-					css={triangleStyles(format, supportsDarkMode)}
-					viewBox="0 0 10 9"
-					xmlns="http://www.w3.org/2000/svg"
-				>
-					<polygon points="0,9 5,0 10,9" />
-				</svg>
+				<span css={cameraStyles(supportsDarkMode)}>
+					<SvgCamera />
+				</span>
 			);
 	}
 };
@@ -60,14 +69,14 @@ type Props = {
 	children: Option<ReactNode>;
 };
 
-const styles = (supportsDarkMode: boolean) => css`
+const styles = (format: ArticleFormat, supportsDarkMode: boolean) => css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
 	padding-top: ${remSpace[1]};
-	color: ${text.supporting};
+	color: ${text.figCaption(format)};
 
 	${darkModeCss(supportsDarkMode)`
-    color: ${brandAltText.supporting};
-  `}
+    	color: ${text.figCaptionDark(format)};
+  	`}
 `;
 
 const mediaStyles = (supportsDarkMode: boolean) => css`
@@ -86,9 +95,9 @@ const getStyles = (
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
-			return css(styles(supportsDarkMode), mediaStyles(supportsDarkMode));
+			return css(styles(format, supportsDarkMode), mediaStyles(supportsDarkMode));
 		default:
-			return styles(supportsDarkMode);
+			return styles(format, supportsDarkMode);
 	}
 };
 
@@ -97,7 +106,7 @@ const FigCaption: FC<Props> = ({ format, supportsDarkMode, children }) => {
 		case OptionKind.Some:
 			return (
 				<figcaption css={getStyles(format, supportsDarkMode)}>
-					<Triangle
+					<Camera
 						format={format}
 						supportsDarkMode={supportsDarkMode}
 					/>
