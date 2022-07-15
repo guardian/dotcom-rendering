@@ -255,7 +255,7 @@ export const YoutubeBlockComponent = ({
 			{showOverlayCaption && (
 				<Hide from="desktop">
 					<div className="overlay-caption">
-						<CaptionToggle>
+						<CaptionToggle mediaType="Video">
 							<Caption
 								mediaType="Video"
 								captionText={mediaTitle || ''}
