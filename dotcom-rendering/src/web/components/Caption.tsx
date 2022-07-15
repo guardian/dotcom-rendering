@@ -148,10 +148,7 @@ const hideIconBelowLeftCol = css`
 `;
 
 const videoCaptionOverlayStyles = css`
-	${until.mobileLandscape} {
-		margin-left: 0px;
-	}
-	${between.mobileLandscape.and.phablet} {
+	${until.phablet} {
 		margin-left: 0px;
 	}
 	top: 0px;

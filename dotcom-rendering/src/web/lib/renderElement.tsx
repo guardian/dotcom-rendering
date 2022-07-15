@@ -133,7 +133,7 @@ export const renderElement = ({
 	isAdFreeUser,
 	switches,
 	isSensitive,
-	showOverlayCaption = false,
+	showOverlayCaption,
 	showMediaAboveHeadline,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);

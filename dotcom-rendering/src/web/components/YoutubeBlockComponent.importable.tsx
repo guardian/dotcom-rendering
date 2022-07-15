@@ -241,7 +241,7 @@ export const YoutubeBlockComponent = ({
 				shouldStick={stickyVideos}
 				isMainMedia={isMainMedia}
 			/>
-			{!hideCaption && (
+			{!(hideCaption ?? showOverlayCaption) && (
 				<Caption
 					captionText={mediaTitle || ''}
 					format={format}
