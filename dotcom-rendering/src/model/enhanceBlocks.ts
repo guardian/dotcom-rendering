@@ -25,7 +25,7 @@ class BlockEnhancer {
 		this.promotedNewsletter = promotedNewsletter;
 	}
 
-	enhanceNewsletterEmbed() {
+	enhanceNewsletterSignup() {
 		this.blocks = enhanceNewsletterSignup(
 			this.blocks,
 			this.promotedNewsletter,
@@ -83,7 +83,7 @@ export const enhanceBlocks = (
 	promotedNewsletter?: Newsletter,
 ): Block[] => {
 	return new BlockEnhancer(blocks, format, promotedNewsletter)
-		.enhanceNewsletterEmbed()
+		.enhanceNewsletterSignup()
 		.enhanceDividers()
 		.enhanceInteractiveContentsElements()
 		.enhanceBlockquotes()

@@ -47,4 +47,4 @@ export const Default = () => (
 		/>
 	</ContainerLayout>
 );
-Default.story = { name: 'EmailSignup', type: 'foo' };
+Default.story = { name: 'EmailSignup' };
