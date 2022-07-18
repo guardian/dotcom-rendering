@@ -7,6 +7,7 @@ export default {
 };
 
 const groupedTrails = {
+	snap: [],
 	huge: [],
 	veryBig: [{ isBoosted: true, ...trails[0] }, trails[1]],
 	big: [trails[2], trails[3]],
