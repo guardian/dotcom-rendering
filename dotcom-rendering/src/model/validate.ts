@@ -2,6 +2,7 @@ import { isObject, isString } from '@guardian/libs';
 import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
+import type { FEFrontType } from '../../src/types/front';
 import articleSchema from './article-schema.json';
 import frontSchema from './front-schema.json';
 
