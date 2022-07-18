@@ -84,7 +84,6 @@ export const enhanceBlocks = (
 	promotedNewsletter?: Newsletter,
 ): Block[] => {
 	return new BlockEnhancer(blocks, format, promotedNewsletter)
-		.insertNewsletterSignup()
 		.enhanceDividers()
 		.enhanceInteractiveContentsElements()
 		.enhanceBlockquotes()
@@ -92,5 +91,6 @@ export const enhanceBlocks = (
 		.enhanceImages()
 		.enhanceNumberedLists()
 		.enhanceEmbeds()
-		.enhanceTweets().blocks;
+		.enhanceTweets()
+		.insertNewsletterSignup().blocks;
 };
