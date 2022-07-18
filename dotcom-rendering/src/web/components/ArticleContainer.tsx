@@ -96,6 +96,7 @@ const adStyles = css`
 
 		/* liveblogs ads have different background colours due the darker page background */
 		.ad-slot--liveblog-inline {
+			min-height: 274px;
 			background-color: ${neutral[93]};
 			.ad-slot__label {
 				color: ${neutral[46]};
