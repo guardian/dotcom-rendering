@@ -29,6 +29,7 @@ export const DynamicPackage = ({
 							imagePositionOnMobile="bottom"
 							imageSize="large"
 							isDynamo={true}
+							supportingContent={primary.supportingContent}
 						/>
 					</LI>
 				</UL>
@@ -50,6 +51,7 @@ export const DynamicPackage = ({
 									containerPalette={containerPalette}
 									showAge={showAge}
 									headlineSize="medium"
+									supportingContent={card.supportingContent}
 								/>
 							</LI>
 						);
