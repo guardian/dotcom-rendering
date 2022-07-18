@@ -67,14 +67,11 @@ const shouldInsertInTheMiddle = (format: CAPIFormat): boolean =>
 		'ReviewDesign',
 		'AnalysisDesign',
 		'CommentDesign',
-		'LetterDesign',
 		'FeatureDesign',
 		'RecipeDesign',
 		'MatchReportDesign',
 		'InterviewDesign',
 		'EditorialDesign',
-		'PhotoEssayDesign',
-		'PrintShopDesign',
 		'ObituaryDesign',
 	].includes(format.design);
 
