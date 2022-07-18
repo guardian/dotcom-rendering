@@ -16,6 +16,7 @@ export const enhanceCollections = (
 			collectionType,
 			containerPalette,
 			grouped: groupCards(
+				collectionType,
 				collection.curated,
 				collection.backfill,
 				containerPalette,

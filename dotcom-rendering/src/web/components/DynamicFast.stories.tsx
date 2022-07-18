@@ -32,6 +32,7 @@ export const DF2VeryBigs2Bigs5Standards = () => (
 	>
 		<DynamicFast
 			groupedTrails={{
+				snap: [],
 				huge: [],
 				veryBig: [trails[0], trails[1]],
 				big: [trails[2], trails[3]],
@@ -62,6 +63,7 @@ export const DF1Huge1VeryBig2Big3Standard = () => (
 	>
 		<DynamicFast
 			groupedTrails={{
+				snap: [],
 				huge: [trails[0]],
 				veryBig: [trails[1]],
 				big: [trails[2], trails[3]],
@@ -86,6 +88,7 @@ export const DF1VeryBig0Big8Standard = () => (
 	>
 		<DynamicFast
 			groupedTrails={{
+				snap: [],
 				huge: [],
 				veryBig: [trails[0]],
 				big: [],
@@ -119,6 +122,7 @@ export const DF2VeryBigs1Big8StandardsFirstBoosted = () => (
 	>
 		<DynamicFast
 			groupedTrails={{
+				snap: [],
 				huge: [],
 				veryBig: [{ isBoosted: true, ...trails[0] }, trails[1]],
 				big: [trails[2]],
@@ -152,6 +156,7 @@ export const DF3VeryBigs3Big0StandardsSecondBoosted = () => (
 	>
 		<DynamicFast
 			groupedTrails={{
+				snap: [],
 				huge: [],
 				veryBig: [
 					trails[0],
@@ -180,6 +185,7 @@ export const DF2VeryBigs3Big6StandardsThirdBoosted = () => (
 	>
 		<DynamicFast
 			groupedTrails={{
+				snap: [],
 				huge: [],
 				veryBig: [trails[0], trails[1]],
 				big: [{ isBoosted: true, ...trails[2] }, trails[3], trails[4]],
@@ -211,6 +217,7 @@ export const DF2VeryBigs1Big8StandardsFirstThirdBoosted = () => (
 	>
 		<DynamicFast
 			groupedTrails={{
+				snap: [],
 				huge: [],
 				veryBig: [{ isBoosted: true, ...trails[0] }, trails[1]],
 				big: [{ isBoosted: true, ...trails[2] }],
@@ -244,6 +251,7 @@ export const DF2VeryBigs2Big3StandardsSecondThirdBoosted = () => (
 	>
 		<DynamicFast
 			groupedTrails={{
+				snap: [],
 				huge: [],
 				veryBig: [trails[0], { isBoosted: true, ...trails[1] }],
 				big: [{ isBoosted: true, ...trails[2] }, trails[3]],

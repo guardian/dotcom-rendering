@@ -955,6 +955,7 @@ type DCRCollectionType = {
 };
 
 type DCRGroupedTrails = {
+	snap: TrailType[];
 	huge: TrailType[];
 	veryBig: TrailType[];
 	big: TrailType[];
