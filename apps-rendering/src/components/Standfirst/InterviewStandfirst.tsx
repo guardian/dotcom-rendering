@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
+import { remSpace } from '@guardian/source-foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
 import type { FC } from 'react';
-import { remSpace } from '@guardian/source-foundations';
+import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
 
 const styles = css`
 	padding: ${remSpace[4]} 0 0;
