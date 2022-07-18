@@ -23,6 +23,7 @@ export const DynamicPackage = ({
 						<FrontCard
 							trail={primary}
 							containerPalette={containerPalette}
+							containerType="dynamic/package"
 							showAge={showAge}
 							headlineSize="ginormous"
 							imagePosition="bottom"
@@ -49,6 +50,7 @@ export const DynamicPackage = ({
 								<FrontCard
 									trail={card}
 									containerPalette={containerPalette}
+									containerType="dynamic/package"
 									showAge={showAge}
 									supportingContent={card.supportingContent}
 								/>
@@ -66,6 +68,7 @@ export const DynamicPackage = ({
 					<FrontCard
 						trail={primary}
 						containerPalette={containerPalette}
+						containerType="dynamic/package"
 						showAge={showAge}
 						headlineSize="huge"
 						imagePosition="bottom"
@@ -96,6 +99,7 @@ export const DynamicPackage = ({
 									<FrontCard
 										trail={card}
 										containerPalette={containerPalette}
+										containerType="dynamic/package"
 										showAge={showAge}
 										imageUrl={
 											// Always show the image on the first card and only
