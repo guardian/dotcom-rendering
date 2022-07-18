@@ -42,7 +42,6 @@ const ThirdBoostedPlusBig = ({
 		flex-basis: 50%;
 		flex-grow: 1;
 		${until.tablet} {
-			// At tablet, these columns expand and stack
 			flex-basis: 100%;
 		}
 	`;
