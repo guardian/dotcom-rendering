@@ -2,6 +2,7 @@ import type {
 	DCRContainerPalette,
 	DCRContainerType,
 	DCRFrontCard,
+	DCRGroupedTrails,
 } from '../../types/front';
 import { DynamicFast } from '../components/DynamicFast';
 import { DynamicPackage } from '../components/DynamicPackage';
