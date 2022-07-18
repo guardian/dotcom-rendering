@@ -119,7 +119,7 @@ export const articleToHtml = ({ data }: Props): string => {
 
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
-	const offerHttp3 = CAPIArticle.config.switches.offerHttp3;
+	const { offerHttp3 } = CAPIArticle.config.switches;
 
 	/**
 	 * The highest priority scripts.
