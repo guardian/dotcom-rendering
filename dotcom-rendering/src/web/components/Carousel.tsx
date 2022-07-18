@@ -326,6 +326,8 @@ type CarouselCardProps = {
 	imageUrl?: string;
 	dataLinkName?: string;
 	discussionId?: string;
+	/** Only used on Labs cards */
+	branding?: Branding;
 };
 
 export const CarouselCard: React.FC<CarouselCardProps> = ({
@@ -338,6 +340,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 	isFirst,
 	dataLinkName,
 	discussionId,
+	branding,
 }: CarouselCardProps) => (
 	<LI
 		percentage="25%"
@@ -363,6 +366,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			}
 			dataLinkName={dataLinkName}
 			discussionId={discussionId}
+			branding={branding}
 		/>
 	</LI>
 );
@@ -621,6 +625,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							image,
 							kickerText,
 							shortUrl,
+							branding,
 						} = trail;
 						// Don't try to render cards that have no publication date. This property is technically optional
 						// but we rarely if ever expect it not to exist
@@ -640,6 +645,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 								kickerText={kickerText}
 								dataLinkName={`carousel-small-card-position-${i}`}
 								discussionId={discussionId}
+								branding={branding}
 							/>
 						);
 					})}
