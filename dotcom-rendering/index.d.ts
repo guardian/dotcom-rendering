@@ -281,13 +281,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-		adUnit: string;
-		customParams: CustomParams;
-		disableAds?: false;
-	}
+			adUnit: string;
+			customParams: CustomParams;
+			disableAds?: false;
+	  }
 	| {
-		disableAds: true;
-	};
+			disableAds: true;
+	  };
 
 interface SectionNielsenAPI {
 	name: string;
@@ -789,6 +789,16 @@ type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
 /**
  * Onwards
  */
+type CAPIOnwardsType = {
+	heading: string;
+	trails: CAPITrailType[];
+	description?: string;
+	url?: string;
+	ophanComponentName: OphanComponentName;
+	format: CAPIFormat;
+	isCuratedContent?: boolean;
+};
+
 type OnwardsType = {
 	heading: string;
 	trails: TrailType[];
