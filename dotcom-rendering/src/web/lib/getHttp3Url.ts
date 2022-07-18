@@ -2,6 +2,6 @@
 // See: https://github.com/guardian/dotcom-rendering/pull/5394
 export const getHttp3Url = (url: string): string => {
 	const urlObject = new URL(url);
-	urlObject.searchParams.append('http', 'true');
+	urlObject.searchParams.append('http3', 'true');
 	return urlObject.toString();
 };
