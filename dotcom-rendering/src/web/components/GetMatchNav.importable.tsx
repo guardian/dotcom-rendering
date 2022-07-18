@@ -64,6 +64,7 @@ export const GetMatchNav = ({
 						webPublicationDateDeprecated={
 							webPublicationDateDeprecated
 						}
+						isMatch={true}
 					/>
 				</div>
 			);
