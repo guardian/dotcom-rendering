@@ -6,12 +6,14 @@ import {
 	brandBackground,
 	brandBorder,
 	brandLine,
+	from,
 	neutral,
 	space,
 	textSans,
 	until,
 } from '@guardian/source-foundations';
 import {
+	Button,
 	Column,
 	Columns,
 	SvgEnvelope,
@@ -34,6 +36,7 @@ import { Nav } from '../components/Nav/Nav';
 import { NewsletterBadge } from '../components/NewslettersBadge';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { ShareIcons } from '../components/ShareIcons';
+import { Standfirst } from '../components/Standfirst';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
@@ -82,7 +85,7 @@ const mainColGuardianLogoContainerStyle = css`
 
 // the negative bottom values at the two column layout are to
 // align the baseline of the text in the newsletters badge svg
-// with the guardaina logo in the leftCol, rather than aligning
+// with the Guardian logo in the leftCol, rather than aligning
 // the bottom of the SVG frame (design requirement)
 const mainColNewsLettersBadgeContainerStyle = css`
 	svg {
@@ -112,9 +115,17 @@ const leftColWrapperStyle = css`
 	}
 `;
 
+const previewButtonWrapperStyle = css`
+	padding: ${space[2]}px 0;
+	${from.desktop} {
+		display: none;
+	}
+`;
+
 const mainGraphicWrapperStyle = css`
 	border-radius: ${space[2]}px;
 	overflow: hidden;
+	margin: ${space[4]}px 0;
 
 	& > figcaption {
 		display: flex;
@@ -199,6 +210,13 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const palette = decidePalette(format);
 
+	/** Logic to show preview button or image wrapper
+		TODO:
+		- Include logic here for whether preview exists for the newsletter
+		(has preview URL available?)
+	*/
+	const showNewsletterPreview = true;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -216,6 +234,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					</ElementContainer>
 				</Stuck>
+
 				<ElementContainer
 					showTopBorder={false}
 					showSideBorders={false}
@@ -236,6 +255,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						contributionsServiceUrl={contributionsServiceUrl}
 					/>
 				</ElementContainer>
+
 				<ElementContainer
 					showSideBorders={true}
 					borderColour={brandLine.primary}
@@ -316,6 +336,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</span>
 					</div>
 				</ContainerLayout>
+
 				<ContainerLayout
 					centralBorder="full"
 					sideBorders={true}
@@ -323,22 +344,46 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					leftContent={<NewsletterDetail text="UK Focused" />}
 				>
 					<Columns collapseUntil="desktop">
-						<Column width={[1, 1, 5 / 8, 4 / 8, 4 / 8]}>
+						<Column width={[1, 1, 5 / 8, 1 / 2, 1 / 2]}>
 							<NewsletterDetail
 								text="UK Focused"
 								showUntil="leftCol"
 							/>
-							<div>
-								<ArticleHeadline
-									format={format}
-									headlineString={CAPIArticle.headline}
-									tags={CAPIArticle.tags}
-									byline={CAPIArticle.author.byline}
-									webPublicationDateDeprecated={
-										CAPIArticle.webPublicationDateDeprecated
-									}
-								/>
-							</div>
+
+							<ArticleHeadline
+								format={format}
+								headlineString={CAPIArticle.headline}
+								tags={CAPIArticle.tags}
+								byline={CAPIArticle.author.byline}
+								webPublicationDateDeprecated={
+									CAPIArticle.webPublicationDateDeprecated
+								}
+							/>
+
+							<Standfirst
+								format={format}
+								standfirst={CAPIArticle.standfirst}
+							/>
+
+							{/* TODO:
+								- This data will come from the Newsletters API
+								- Only render this part if preview link exists
+								- Add onClick handler or link?
+								- Accessibility?
+							*/}
+							{showNewsletterPreview && (
+								<div css={previewButtonWrapperStyle}>
+									<Button
+										icon={<SvgEye />}
+										iconSide="left"
+										priority="tertiary"
+										size="xsmall"
+									>
+										Preview this newsletter
+									</Button>
+								</div>
+							)}
+
 							<ArticleBody
 								format={format}
 								blocks={CAPIArticle.blocks}
@@ -367,6 +412,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								idUrl={CAPIArticle.config.idUrl || ''}
 								isDev={!!CAPIArticle.config.isDev}
 							/>
+
 							<div
 								css={css`
 									display: flex;
@@ -399,15 +445,25 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								</div>
 							</div>
 						</Column>
-						<Column width={[1, 1, 3 / 8, 4 / 8, 4 / 8]}>
+
+						<Column width={[1, 1, 3 / 8, 1 / 2, 1 / 2]}>
 							<div css={mainGraphicWrapperStyle}>
-								<figcaption>
-									<SvgEye size="small" />
-									<span>
-										Click here to see the latest version of
-										this newsletter
-									</span>
-								</figcaption>
+								{/* TODO:
+										- This data will come from the Newsletters API
+										- Only render this part if preview link exists
+										- Add onClick handler or link?
+										- Accessibility?
+								 */}
+								{showNewsletterPreview && (
+									<figcaption>
+										<SvgEye size="small" />
+										<span role="link">
+											Click here to see the latest version
+											of this newsletter
+										</span>
+									</figcaption>
+								)}
+
 								<MainMedia
 									format={format}
 									elements={CAPIArticle.mainMediaElements}
