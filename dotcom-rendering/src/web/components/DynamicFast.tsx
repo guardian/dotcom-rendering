@@ -12,6 +12,98 @@ type Props = {
 };
 
 /**
+ * 'Primaries' renders the first row of dynamic/fast
+ * This row will consist of either 1 huge, 1 very big, or 2 very bigs.
+ *
+ * When there is 1 huge or 1 very big, these will be treated the same, and take
+ * up 100% of the horizontal space
+ *
+ * When there are 2 very bigs in the primaries row, they each take 50% of the horizontal space.
+ * Either of the 2 very bigs can 'boosted', in which case the boosted card will receive
+ * 75% of the horizontal space.
+ */
+const Primaries = ({
+	primaries,
+	showAge,
+	containerPalette,
+}: {
+	primaries: TrailType[];
+	showAge?: boolean;
+	containerPalette?: DCRContainerPalette;
+}) => {
+	// Gets the index of any primary card which is boosted, returns -1 if none are.
+	const boostedIndex = primaries.findIndex((card) => !!card.isBoosted);
+
+	return (
+		<UL direction="row" padBottom={true}>
+			{primaries.map((card, index) => {
+				// Boosted Layout
+				if (primaries.length > 1 && boostedIndex !== -1) {
+					return (
+						<LI
+							key={card.url}
+							padSides={true}
+							percentage={
+								// Boosted primaries take up 25% of the horizontal space
+								index === boostedIndex ? '75%' : '25%'
+							}
+							showDivider={index > 0}
+							showTopMarginWhenStacked={index > 0}
+						>
+							<FrontCard
+								trail={card}
+								containerPalette={containerPalette}
+								showAge={showAge}
+								headlineSize={
+									index === boostedIndex ? 'large' : 'medium'
+								}
+								trailText={
+									index === boostedIndex
+										? card.trailText
+										: undefined
+								}
+								imageUrl={card.image}
+								imagePosition={
+									index === boostedIndex ? 'right' : 'top'
+								}
+								imagePositionOnMobile={
+									index === boostedIndex ? 'top' : 'left'
+								}
+								imageSize={
+									index === boostedIndex ? 'large' : 'small'
+								}
+							/>
+						</LI>
+					);
+				}
+
+				// Unboosted primaries split 50/50 when there are two
+				// or take up a 'huge' 100% role when theres just one
+				return (
+					<LI
+						key={card.url}
+						padSides={true}
+						percentage={primaries.length === 1 ? '100%' : '50%'}
+						showDivider={index > 0}
+						showTopMarginWhenStacked={index > 0}
+					>
+						<FrontCard
+							trail={card}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							headlineSize="large"
+							imageUrl={card.image}
+							imagePosition={'top'}
+							imagePositionOnMobile={'top'}
+						/>
+					</LI>
+				);
+			})}
+		</UL>
+	);
+};
+
+/**
  * When the first 'big' is boosted & there is atleast 1 more big we switch up the layout a little -
  *
  * The 'standards' section (what this component renders), consists of 2 columns, rather than a wrapped row,
@@ -195,9 +287,6 @@ export const DynamicFast = ({
 		primaries = groupedTrails.veryBig.splice(0, 2);
 	}
 
-	// Get the index of the primary card which is boosted, returns -1 if neither are.
-	const primaryBoostedIndex = primaries.findIndex((card) => !!card.isBoosted);
-
 	// Put together all the bigs - only those not chosen as 'primaries' will be left over
 	const bigs = groupedTrails.huge
 		.concat(groupedTrails.veryBig, groupedTrails.big)
@@ -206,7 +295,7 @@ export const DynamicFast = ({
 	const firstBigBoosted = !!bigs[0]?.isBoosted;
 
 	let maxStandards = 12;
-	let columns = 3;
+	let standardsColumns = 3;
 	let standardsCardWidth: CardPercentageType = '25%';
 	let standardsContainerWidth: CardPercentageType = '75%';
 
@@ -214,30 +303,30 @@ export const DynamicFast = ({
 		maxStandards = 8;
 		standardsCardWidth = '50%';
 		standardsContainerWidth = '50%';
-		columns = 2;
+		standardsColumns = 2;
 	} else if (bigs.length === 0) {
 		maxStandards = 12;
 		standardsCardWidth = '25%';
 		standardsContainerWidth = '100%';
-		columns = 4;
+		standardsColumns = 4;
 	} else if (bigs.length === 1) {
 		maxStandards = 9;
 		standardsCardWidth = '33.333%';
 		standardsContainerWidth = '75%';
-		columns = 3;
+		standardsColumns = 3;
 	} else if (bigs.length === 2) {
 		maxStandards = 6;
 		standardsCardWidth = '50%';
 		standardsContainerWidth = '50%';
-		columns = 2;
+		standardsColumns = 2;
 	} else if (bigs.length === 3) {
 		maxStandards = 3;
 		standardsCardWidth = '100%';
 		standardsContainerWidth = '25%';
-		columns = 1;
+		standardsColumns = 1;
 	} else if (bigs.length === 4) {
 		maxStandards = 0;
-		columns = 0;
+		standardsColumns = 0;
 	}
 
 	let standards: TrailType[] = [];
@@ -259,90 +348,18 @@ export const DynamicFast = ({
 	return (
 		<>
 			{primaries.length > 0 && (
-				<UL direction="row" padBottom={true}>
-					{primaries.map((card, index) => {
-						// Boosted Layout
-						if (
-							primaries.length > 1 &&
-							primaryBoostedIndex !== -1
-						) {
-							return (
-								<LI
-									key={card.url}
-									padSides={true}
-									percentage={
-										index === primaryBoostedIndex
-											? '75%'
-											: '25%'
-									}
-									showDivider={index > 0}
-									showTopMarginWhenStacked={index > 0}
-								>
-									<FrontCard
-										trail={card}
-										containerPalette={containerPalette}
-										showAge={showAge}
-										headlineSize={
-											index === primaryBoostedIndex
-												? 'large'
-												: 'medium'
-										}
-										trailText={
-											index === primaryBoostedIndex
-												? card.trailText
-												: undefined
-										}
-										imageUrl={card.image}
-										imagePosition={
-											index === primaryBoostedIndex
-												? 'right'
-												: 'top'
-										}
-										imagePositionOnMobile={
-											index === primaryBoostedIndex
-												? 'top'
-												: 'left'
-										}
-										imageSize={
-											index === primaryBoostedIndex
-												? 'large'
-												: 'small'
-										}
-									/>
-								</LI>
-							);
-						}
-
-						// Unboosted Layout
-						return (
-							<LI
-								key={card.url}
-								padSides={true}
-								percentage={
-									primaries.length === 1 ? '100%' : '50%'
-								}
-								showDivider={index > 0}
-								showTopMarginWhenStacked={index > 0}
-							>
-								<FrontCard
-									trail={card}
-									containerPalette={containerPalette}
-									showAge={showAge}
-									headlineSize="large"
-									imageUrl={card.image}
-									imagePosition={'top'}
-									imagePositionOnMobile={'top'}
-								/>
-							</LI>
-						);
-					})}
-				</UL>
+				<Primaries
+					primaries={primaries}
+					showAge={showAge}
+					containerPalette={containerPalette}
+				/>
 			)}
 			<UL direction="row" padBottom={true}>
 				{/* Leftover huges, very bigs & all bigs */}
 				{bigs.map((card, cardIndex) => {
 					if (firstBigBoosted) {
 						// We only render the first card here if it's boosted
+						// Any other bigs will be rendered in 'ThirdBoostedPlusBig' component
 						if (cardIndex > 0) return undefined;
 
 						return (
@@ -420,7 +437,8 @@ export const DynamicFast = ({
 													// Get leftover (modulo), if none fall back to columns as the whole bottom row
 													// won't want to be padded
 													(standards.length %
-														columns || columns)
+														standardsColumns ||
+														standardsColumns)
 											}
 											padBottomOnMobile={
 												cardIndex < standards.length - 1
