@@ -31,7 +31,7 @@ type Props = {
 	styles: string;
 	html: string;
 	newsletterId: string;
-	successText: string;
+	successDescription: string;
 };
 
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
@@ -160,7 +160,7 @@ export const SecureSignupIframe = ({
 	styles,
 	html,
 	newsletterId,
-	successText,
+	successDescription,
 }: Props) => {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 	const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -315,7 +315,7 @@ export const SecureSignupIframe = ({
 			{hasResponse &&
 				(responseOk ? (
 					<div>
-						<SuccessMessage text={successText} />
+						<SuccessMessage text={successDescription} />
 					</div>
 				) : (
 					<div

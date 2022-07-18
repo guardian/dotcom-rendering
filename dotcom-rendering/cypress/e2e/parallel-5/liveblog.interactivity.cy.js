@@ -202,10 +202,16 @@ describe('Liveblogs', function () {
 			cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e').should(
 				'not.be.visible',
 			);
-			cy.get('#maincontent').scrollIntoView();
-			cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e').should(
-				'be.visible',
-			);
+
+			// Previously we were using #maincontent as top of blog.
+			// After repositioning the key events, the test scrolling
+			// was not enough and the tweetBlock was not added to
+			// the page. Using data-gu-name="media" for now to get
+			// around this scroll depth issue
+			cy.get('div[data-gu-name="media"]').scrollIntoView();
+			cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e', {
+				timeout: 10000,
+			}).should('be.visible');
 		});
 	});
 

@@ -21,12 +21,9 @@ const headlineStyles = css`
 	padding-bottom: ${space[3]}px;
 `;
 
-const headlineAccentStyles = css`
-	${textSans.small({ fontWeight: 'regular', lineHeight: 'tight' })};
-`;
-
-const betaTextStyles = (palette: Palette) => css`
-	color: ${palette.text.keyEvent};
+const headlineAccentStyles = (palette: Palette) => css`
+	color: ${palette.text.betaLabel};
+	${textSans.xxsmall({ fontWeight: 'regular', lineHeight: 'tight' })};
 `;
 
 const topicStyles = css`
@@ -86,7 +83,6 @@ export const TopicFilterBank = ({
 	id,
 }: Props) => {
 	const palette = decidePalette(format);
-
 	const selectedTopic = selectedTopics?.[0];
 	const topFiveTopics = availableTopics.slice(0, 5);
 
@@ -103,16 +99,12 @@ export const TopicFilterBank = ({
 	return (
 		<div css={containerStyles}>
 			<div css={headlineStyles}>
-				Filters{' '}
-				<span css={headlineAccentStyles}>
-					(<span css={betaTextStyles(palette)}>BETA</span>):
-				</span>
+				Filters <span css={headlineAccentStyles(palette)}>BETA</span>
 			</div>
-
 			<div css={topicStyles}>
 				{keyEvents?.length && (
 					<FilterButton
-						value={'Key Events'}
+						value={'Key events'}
 						count={keyEvents.length}
 						format={format}
 						isActive={filterKeyEvents}

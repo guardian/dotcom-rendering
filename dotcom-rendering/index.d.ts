@@ -100,6 +100,9 @@ type Palette = {
 		cardHeadline: Colour;
 		cardByline: Colour;
 		cardKicker: Colour;
+		dynamoHeadline: Colour;
+		dynamoKicker: Colour;
+		dynamoMeta: Colour;
 		linkKicker: Colour;
 		cardStandfirst: Colour;
 		cardFooter: Colour;
@@ -131,6 +134,7 @@ type Palette = {
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
+		betaLabel: Colour;
 	};
 	background: {
 		article: Colour;
@@ -274,13 +278,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-			adUnit: string;
-			customParams: CustomParams;
-			disableAds?: false;
-	  }
+		adUnit: string;
+		customParams: CustomParams;
+		disableAds?: false;
+	}
 	| {
-			disableAds: true;
-	  };
+		disableAds: true;
+	};
 
 interface SectionNielsenAPI {
 	name: string;
@@ -620,6 +624,7 @@ interface CAPIArticleType {
 	mostRecentBlockId?: string;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
+	byline?: string;
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
@@ -1087,7 +1092,13 @@ type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 
-type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge';
+type SmallHeadlineSize =
+	| 'tiny'
+	| 'small'
+	| 'medium'
+	| 'large'
+	| 'huge'
+	| 'ginormous';
 
 type AvatarType = {
 	src: string;

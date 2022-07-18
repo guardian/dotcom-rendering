@@ -19,6 +19,9 @@ echo "files: $files"
 filteredFiles="$(echo "$files" | { grep -v 'apps-rendering' || :; })"
 echo "filteredFiles: $filteredFiles"
 
+# Github actions sets this by default but we also want this variable set in TeamCity
+export CI=true
+
 # run the ci steps if either of the followings is true
 # - filteredFiles is empty (all changes were in apps-rendering)
 # - we are in the main branch
@@ -42,7 +45,10 @@ else
 		#Code Validation
 		make validate-ci
 
-		#Cypress Tests
+		# Generate .env file
+		make gen-dotenv-ci
+
+		# Cypress Tests
 		# see https://docs.cypress.io/guides/guides/continuous-integration.html#Advanced-setup
 		# apt-get install xvfb libgtk-3-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2
 		make cypress

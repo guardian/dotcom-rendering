@@ -3,6 +3,7 @@ on:
   pull_request:
     paths-ignore:
       - "apps-rendering/**"
+      - "dotcom-rendering/docs/**"
 
 jobs:
   compressed_size:

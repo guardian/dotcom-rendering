@@ -17,13 +17,13 @@ import { SecureSignupIframe } from './SecureSignupIframe.importable';
 // badge, so <RecaptchaTerms> must be displayed with it.
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 
-type Props = { newsletterId: string; successText: string };
+type Props = { newsletterId: string; successDescription: string };
 
 const termsStyle = css`
 	${textSans.xxsmall()}
 	color: ${text.supporting};
 	a {
-		${textSans.xxsmall()}
+		${textSans.xxsmall({ fontWeight: 'bold' })}
 		text-decoration: none;
 		:hover {
 			text-decoration: underline;
@@ -54,7 +54,7 @@ const PrivacyTerms = () => {
 
 const RecaptchaTerms = () => (
 	<span css={termsStyle}>
-		We operate Google reCaptcha to protect our website and the Google{' '}
+		We use Google reCaptcha to protect our website and the Google{' '}
 		<Link
 			href="https://policies.google.com/privacy"
 			rel="noopener noreferrer"
@@ -149,7 +149,7 @@ const generateForm = (
 	return { html, styles };
 };
 
-export const SecureSignup = ({ newsletterId, successText }: Props) => {
+export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 	const { html, styles } = generateForm(newsletterId);
 
 	return (
@@ -163,7 +163,7 @@ export const SecureSignup = ({ newsletterId, successText }: Props) => {
 					html={html}
 					styles={styles}
 					newsletterId={newsletterId}
-					successText={successText}
+					successDescription={successDescription}
 				/>
 			</Island>
 			<div

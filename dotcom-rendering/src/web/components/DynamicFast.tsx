@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
 import { until } from '@guardian/source-foundations';
-import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
+import { FrontCard } from './FrontCard';
 
 type Props = {
 	groupedTrails: DCRGroupedTrails;
@@ -69,37 +68,14 @@ const ThirdBoostedPlusBig = ({
 					padBottom={standardsCol1.length > 0}
 					padBottomOnMobile={standardsCol1.length > 0}
 				>
-					<Card
+					<FrontCard
+						trail={big}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						linkTo={big.url}
-						format={big.format}
-						headlineText={big.headline}
 						headlineSize="medium"
-						byline={big.byline}
-						showByline={big.showByline}
-						showQuotes={
-							big.format.design === ArticleDesign.Comment ||
-							big.format.design === ArticleDesign.Letter
-						}
-						webPublicationDate={big.webPublicationDate}
-						kickerText={big.kickerText}
-						showPulsingDot={
-							big.format.design === ArticleDesign.LiveBlog
-						}
-						showSlash={true}
-						showClock={false}
 						imageUrl={big.image}
 						imagePosition="top"
 						imagePositionOnMobile="left"
-						mediaType={big.mediaType}
-						mediaDuration={big.mediaDuration}
-						starRating={big.starRating}
-						branding={big.branding}
-						supportingContent={big.supportingContent}
-						dataLinkName={big.dataLinkName}
-						snapData={big.snapData}
-						discussionId={big.discussionId}
 					/>
 				</LI>
 				{standardsCol1.map((card, cardIndex) => {
@@ -115,36 +91,12 @@ const ThirdBoostedPlusBig = ({
 								cardIndex < standardsCol1.length - 1
 							}
 						>
-							<Card
+							<FrontCard
+								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								linkTo={card.url}
-								format={card.format}
-								headlineText={card.headline}
+								imageUrl={undefined}
 								headlineSize="small"
-								byline={card.byline}
-								showByline={card.showByline}
-								showQuotes={
-									card.format.design ===
-										ArticleDesign.Comment ||
-									card.format.design === ArticleDesign.Letter
-								}
-								webPublicationDate={card.webPublicationDate}
-								kickerText={card.kickerText}
-								showPulsingDot={
-									card.format.design ===
-									ArticleDesign.LiveBlog
-								}
-								showSlash={true}
-								showClock={false}
-								mediaType={card.mediaType}
-								mediaDuration={card.mediaDuration}
-								starRating={card.starRating}
-								branding={card.branding}
-								supportingContent={card.supportingContent}
-								dataLinkName={card.dataLinkName}
-								snapData={card.snapData}
-								discussionId={card.discussionId}
 							/>
 						</LI>
 					);
@@ -162,36 +114,12 @@ const ThirdBoostedPlusBig = ({
 								cardIndex < standardsCol2.length - 1
 							}
 						>
-							<Card
+							<FrontCard
+								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								linkTo={card.url}
-								format={card.format}
-								headlineText={card.headline}
+								imageUrl={undefined}
 								headlineSize="small"
-								byline={card.byline}
-								showByline={card.showByline}
-								showQuotes={
-									card.format.design ===
-										ArticleDesign.Comment ||
-									card.format.design === ArticleDesign.Letter
-								}
-								webPublicationDate={card.webPublicationDate}
-								kickerText={card.kickerText}
-								showPulsingDot={
-									card.format.design ===
-									ArticleDesign.LiveBlog
-								}
-								showSlash={true}
-								showClock={false}
-								mediaType={card.mediaType}
-								mediaDuration={card.mediaDuration}
-								starRating={card.starRating}
-								branding={card.branding}
-								supportingContent={card.supportingContent}
-								dataLinkName={card.dataLinkName}
-								snapData={card.snapData}
-								discussionId={card.discussionId}
 							/>
 						</LI>
 					);
@@ -345,12 +273,10 @@ export const DynamicFast = ({
 									showDivider={index > 0}
 									showTopMarginWhenStacked={index > 0}
 								>
-									<Card
+									<FrontCard
+										trail={card}
 										containerPalette={containerPalette}
 										showAge={showAge}
-										linkTo={card.url}
-										format={card.format}
-										headlineText={card.headline}
 										headlineSize={
 											index === primaryBoostedIndex
 												? 'large'
@@ -361,24 +287,6 @@ export const DynamicFast = ({
 												? card.trailText
 												: undefined
 										}
-										byline={card.byline}
-										showByline={card.showByline}
-										showQuotes={
-											card.format.design ===
-												ArticleDesign.Comment ||
-											card.format.design ===
-												ArticleDesign.Letter
-										}
-										webPublicationDate={
-											card.webPublicationDate
-										}
-										kickerText={card.kickerText}
-										showPulsingDot={
-											card.format.design ===
-											ArticleDesign.LiveBlog
-										}
-										showSlash={true}
-										showClock={false}
 										imageUrl={card.image}
 										imagePosition={
 											index === primaryBoostedIndex
@@ -395,16 +303,6 @@ export const DynamicFast = ({
 												? 'large'
 												: 'small'
 										}
-										mediaType={card.mediaType}
-										mediaDuration={card.mediaDuration}
-										starRating={card.starRating}
-										branding={card.branding}
-										supportingContent={
-											card.supportingContent
-										}
-										dataLinkName={card.dataLinkName}
-										snapData={card.snapData}
-										discussionId={card.discussionId}
 									/>
 								</LI>
 							);
@@ -421,41 +319,14 @@ export const DynamicFast = ({
 								showDivider={index > 0}
 								showTopMarginWhenStacked={index > 0}
 							>
-								<Card
+								<FrontCard
+									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									linkTo={card.url}
-									format={card.format}
-									headlineText={card.headline}
-									trailText={card.trailText}
 									headlineSize="large"
-									byline={card.byline}
-									showByline={card.showByline}
-									showQuotes={
-										card.format.design ===
-											ArticleDesign.Comment ||
-										card.format.design ===
-											ArticleDesign.Letter
-									}
-									webPublicationDate={card.webPublicationDate}
-									kickerText={card.kickerText}
-									showPulsingDot={
-										card.format.design ===
-										ArticleDesign.LiveBlog
-									}
-									showSlash={true}
-									showClock={false}
 									imageUrl={card.image}
 									imagePosition={'top'}
 									imagePositionOnMobile={'top'}
-									mediaType={card.mediaType}
-									mediaDuration={card.mediaDuration}
-									starRating={card.starRating}
-									branding={card.branding}
-									supportingContent={card.supportingContent}
-									dataLinkName={card.dataLinkName}
-									snapData={card.snapData}
-									discussionId={card.discussionId}
 								/>
 							</LI>
 						);
@@ -478,41 +349,14 @@ export const DynamicFast = ({
 								showTopMarginWhenStacked={cardIndex > 0}
 								showDivider={cardIndex > 0}
 							>
-								<Card
+								<FrontCard
+									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									linkTo={card.url}
-									format={card.format}
-									headlineText={card.headline}
-									trailText={card.trailText}
 									headlineSize="large"
-									byline={card.byline}
-									showByline={card.showByline}
-									showQuotes={
-										card.format.design ===
-											ArticleDesign.Comment ||
-										card.format.design ===
-											ArticleDesign.Letter
-									}
-									webPublicationDate={card.webPublicationDate}
-									kickerText={card.kickerText}
-									showPulsingDot={
-										card.format.design ===
-										ArticleDesign.LiveBlog
-									}
-									showSlash={true}
-									showClock={false}
 									imageUrl={card.image}
 									imagePosition="top"
 									imagePositionOnMobile="top"
-									mediaType={card.mediaType}
-									mediaDuration={card.mediaDuration}
-									starRating={card.starRating}
-									branding={card.branding}
-									supportingContent={card.supportingContent}
-									dataLinkName={card.dataLinkName}
-									snapData={card.snapData}
-									discussionId={card.discussionId}
 								/>
 							</LI>
 						);
@@ -527,37 +371,12 @@ export const DynamicFast = ({
 							showTopMarginWhenStacked={cardIndex > 0}
 							showDivider={cardIndex > 0}
 						>
-							<Card
+							<FrontCard
+								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								linkTo={card.url}
-								format={card.format}
-								headlineText={card.headline}
 								headlineSize="medium"
-								byline={card.byline}
-								showByline={card.showByline}
-								showQuotes={
-									card.format.design ===
-										ArticleDesign.Comment ||
-									card.format.design === ArticleDesign.Letter
-								}
-								webPublicationDate={card.webPublicationDate}
-								kickerText={card.kickerText}
-								showPulsingDot={
-									card.format.design ===
-									ArticleDesign.LiveBlog
-								}
-								showSlash={true}
-								showClock={false}
 								imageUrl={card.image}
-								mediaType={card.mediaType}
-								mediaDuration={card.mediaDuration}
-								starRating={card.starRating}
-								branding={card.branding}
-								supportingContent={card.supportingContent}
-								dataLinkName={card.dataLinkName}
-								snapData={card.snapData}
-								discussionId={card.discussionId}
 							/>
 						</LI>
 					);
@@ -601,41 +420,11 @@ export const DynamicFast = ({
 											cardIndex < standards.length - 1
 										}
 									>
-										<Card
+										<FrontCard
+											trail={card}
 											containerPalette={containerPalette}
-											showAge={showAge}
-											linkTo={card.url}
-											format={card.format}
-											headlineText={card.headline}
+											imageUrl={undefined}
 											headlineSize="small"
-											byline={card.byline}
-											showByline={card.showByline}
-											showQuotes={
-												card.format.design ===
-													ArticleDesign.Comment ||
-												card.format.design ===
-													ArticleDesign.Letter
-											}
-											webPublicationDate={
-												card.webPublicationDate
-											}
-											kickerText={card.kickerText}
-											showPulsingDot={
-												card.format.design ===
-												ArticleDesign.LiveBlog
-											}
-											showSlash={true}
-											showClock={false}
-											mediaType={card.mediaType}
-											mediaDuration={card.mediaDuration}
-											starRating={card.starRating}
-											branding={card.branding}
-											supportingContent={
-												card.supportingContent
-											}
-											dataLinkName={card.dataLinkName}
-											snapData={card.snapData}
-											discussionId={card.discussionId}
 										/>
 									</LI>
 								);
