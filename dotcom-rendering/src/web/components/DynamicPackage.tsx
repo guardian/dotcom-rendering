@@ -50,7 +50,6 @@ export const DynamicPackage = ({
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									headlineSize="medium"
 									supportingContent={card.supportingContent}
 								/>
 							</LI>
