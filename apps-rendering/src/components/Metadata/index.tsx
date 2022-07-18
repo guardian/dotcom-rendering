@@ -29,6 +29,7 @@ import { useState } from 'react';
 import { darkModeCss } from 'styles';
 import { getThemeStyles } from 'themeStyles';
 import ImmersiveMetadata from './ImmersiveMetadata';
+import GalleryMetadata from './GalleryMetadata';
 
 // ----- Component ----- //
 
@@ -288,7 +289,17 @@ const Metadata: FC<Props> = (props: Props) => {
 		);
 	}
 
-	if (
+	if (design === ArticleDesign.Gallery) {
+		return (
+			<GalleryMetadata
+				format={getFormat(props.item)}
+				publishDate={props.item.publishDate}
+				commentCount={props.item.commentCount}
+				contributors={props.item.contributors}
+				commentable={props.item.commentable}
+			/>
+		);
+	} else if (
 		design === ArticleDesign.Comment ||
 		design === ArticleDesign.Letter ||
 		design === ArticleDesign.Editorial

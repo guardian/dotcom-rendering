@@ -6,6 +6,7 @@ import { getFormat } from 'item';
 import DeadBlogStandfirst from './DeadBlogStandfirst';
 import ImmersiveLabsStandfirst from './ImmersiveLabsStandfirst';
 import ImmersiveStandfirst from './ImmersiveStandfirst';
+import GalleryStandfirst from './GalleryStandfirst';
 import LabsStandfirst from './LabsStandfirst';
 import LiveBlogStandfirst from './LiveBlogStandfirst';
 import MediaStandfirst from './MediaStandfirst';
@@ -26,7 +27,7 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 		) : (
 			<ImmersiveStandfirst
 				standfirst={item.standfirst}
-				format={getFormat(item)}
+				format={format}
 				byline={item.byline}
 				bylineHtml={item.bylineHtml}
 			/>
@@ -41,6 +42,14 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.DeadBlog:
 			return <DeadBlogStandfirst item={item} />;
 		case ArticleDesign.Gallery:
+			return (
+				<GalleryStandfirst
+					standfirst={item.standfirst}
+					format={format}
+					byline={item.byline}
+					bylineHtml={item.bylineHtml}
+				/>
+			);
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			return <MediaStandfirst item={item} />;

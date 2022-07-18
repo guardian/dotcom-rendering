@@ -2,15 +2,16 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import FigCaption from '@guardian/common-rendering/src/components/figCaption';
+import FigCaption from 'components/FigCaption';
 import { darkModeCss } from '@guardian/common-rendering/src/lib';
-import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { ArticleElementRole } from '@guardian/libs';
-import type { Breakpoint } from '@guardian/source-foundations';
+import { Breakpoint } from '@guardian/source-foundations';
 import { from, remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { none, some, withDefault } from '@guardian/types';
 import Img from 'components/ImgAlt';
+import { grid } from 'grid/grid';
 import type { Image } from 'image/image';
 import type { Lightbox } from 'image/lightbox';
 import type { Sizes } from 'image/sizes';
@@ -75,6 +76,7 @@ const thumbnailStyles = (
 const imgStyles = (
 	role: ArticleElementRole,
 	supportsDarkMode: boolean,
+	format: ArticleFormat,
 ): Option<SerializedStyles> => {
 	switch (role) {
 		case ArticleElementRole.Thumbnail:
@@ -93,7 +95,14 @@ const imgStyles = (
 const getStyles = (
 	role: ArticleElementRole,
 	leftColumnBreakpoint: Option<Breakpoint>,
+	format: ArticleFormat,
 ): SerializedStyles => {
+	if (format.design === ArticleDesign.Gallery) {
+		return css`
+			${grid.container}
+		`;
+	}
+
 	switch (role) {
 		case ArticleElementRole.Thumbnail:
 			return thumbnailStyles(
@@ -112,14 +121,15 @@ const BodyImage: FC<Props> = ({
 	caption,
 	leftColumnBreakpoint,
 }) => (
-	<figure css={getStyles(image.role, leftColumnBreakpoint)}>
+	<figure css={getStyles(image.role, leftColumnBreakpoint, format)}>
 		<Img
 			image={image}
 			sizes={getSizes(image.role)}
-			className={imgStyles(image.role, supportsDarkMode)}
+			className={imgStyles(image.role, supportsDarkMode, format)}
 			format={format}
 			supportsDarkMode={supportsDarkMode}
 			lightbox={lightbox}
+			isWrapperClassName={format.design === ArticleDesign.Gallery}
 		/>
 		<FigCaption format={format} supportsDarkMode={supportsDarkMode}>
 			{caption}

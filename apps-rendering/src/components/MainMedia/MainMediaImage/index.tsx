@@ -9,6 +9,7 @@ import BlogMainMediaImage from './BlogMainMediaImage';
 import CommentMainMediaImage from './CommentMainMediaImage';
 import ImmersiveMainMediaImage from './ImmersiveMainMediaImage';
 import InterviewMainMediaImage from './InterviewMainMediaImage';
+import GalleryMainMediaImage from './GalleryMainMediaImage';
 import DefaultMainMediaImage, {
 	defaultImgCss,
 	defaultSizes,
@@ -23,12 +24,16 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const MainMediaImage: FC<Props> = ({ className, image, format }: Props) => {
+const MainMediaImage: FC<Props> = ({ image, format }: Props) => {
 	if (format.display === ArticleDisplay.Immersive) {
 		return <ImmersiveMainMediaImage image={image} format={format} />;
 	}
 
 	switch (format.design) {
+		case ArticleDesign.LiveBlog:
+			return <ImmersiveMainMediaImage image={image} format={format} />;
+		case ArticleDesign.Gallery:
+			return <GalleryMainMediaImage image={image} format={format} />;
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return <BlogMainMediaImage image={image} format={format} />;

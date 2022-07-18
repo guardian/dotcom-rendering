@@ -14,6 +14,7 @@ import LabsLayout from 'components/Layout/LabsLayout';
 import LiveLayout from 'components/Layout/LiveLayout';
 import MediaLayout from 'components/Layout/MediaLayout';
 import StandardLayout from 'components/Layout/StandardLayout';
+import GalleryLayout from 'components/Layout/GalleryLayout';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
@@ -80,8 +81,11 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		return <CommentLayout item={item}>{render(item, body)}</CommentLayout>;
 	}
 
+	if (item.design === ArticleDesign.Gallery) {
+		return <GalleryLayout item={item}>{render(item, body)}</GalleryLayout>;
+	}
+
 	if (
-		item.design === ArticleDesign.Gallery ||
 		item.design === ArticleDesign.Audio ||
 		item.design === ArticleDesign.Video
 	) {

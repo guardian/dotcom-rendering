@@ -11,6 +11,7 @@ import InterviewHeadline from './InterviewHeadline';
 import LabsHeadline from './LabsHeadline';
 import MediaHeadline from './MediaHeadline';
 import ReviewHeadline from './ReviewHeadline';
+import GalleryHeadline from './GalleryHeadline';
 
 interface Props {
 	item: Item;
@@ -20,12 +21,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 
 	if (format.display === ArticleDisplay.Immersive) {
-		return (
-			<ImmersiveHeadline
-				headline={item.headline}
-				format={getFormat(item)}
-			/>
-		);
+		return <ImmersiveHeadline headline={item.headline} format={format} />;
 	}
 
 	if (format.theme === ArticleSpecial.Labs) {
@@ -39,7 +35,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return <CommentHeadline item={item} />;
-		case ArticleDesign.Gallery:
+
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			return <MediaHeadline item={item} />;
@@ -50,6 +46,8 @@ const Headline: React.FC<Props> = ({ item }) => {
 			return <InterviewHeadline item={item} />;
 		case ArticleDesign.Review:
 			return <ReviewHeadline item={item} />;
+		case ArticleDesign.Gallery:
+			return <GalleryHeadline headline={item.headline} format={format} />;
 		default:
 			return (
 				<DefaultHeadline

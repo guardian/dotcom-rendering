@@ -8,6 +8,7 @@ import { maybeRender } from 'lib';
 import { MainMedia, MainMediaKind } from 'mainMedia';
 import type { FC } from 'react';
 import ImmersiveCaption from './ImmersiveCaption';
+import GalleryCaption from './GalleryCaption';
 
 // ----- Component ----- //
 
@@ -28,6 +29,6 @@ const MainMedia: FC<Props> = ({ format, mainMedia }) =>
 
 // ----- Exports ----- //
 
-export { ImmersiveCaption };
+export { ImmersiveCaption, GalleryCaption };
 
 export default MainMedia;
