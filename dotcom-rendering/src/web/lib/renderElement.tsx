@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import {
 	ExplainerAtom,
 	InteractiveAtom,
@@ -453,10 +454,22 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
 			return [
 				true,
-				<EmailSignup
-					newsletter={element.newsletter}
-					elementId={element.elementId}
-				/>,
+				<Figure
+					key={element.elementId}
+					isMainMedia={false}
+					id={element.elementId}
+					role={'inline'}
+					type={element._type}
+					format={format}
+					css={css`
+						clear: both;
+					`}
+				>
+					<EmailSignup
+						newsletter={element.newsletter}
+						elementId={element.elementId}
+					/>
+				</Figure>,
 			];
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return [
@@ -778,6 +791,7 @@ const bareElements = new Set([
 	'model.dotcomrendering.pageElements.TextBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 	'model.dotcomrendering.pageElements.InteractiveBlockElement',
+	'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
 ]);
 
 // RenderArticleElement is a wrapper for renderElement that wraps elements in a
