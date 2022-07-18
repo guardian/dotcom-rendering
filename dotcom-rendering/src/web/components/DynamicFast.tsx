@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { until } from '@guardian/source-foundations';
+import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';

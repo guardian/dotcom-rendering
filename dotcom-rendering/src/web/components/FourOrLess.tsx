@@ -1,4 +1,5 @@
 import { ArticleDesign } from '@guardian/libs';
+import type { DCRContainerPalette } from '../../types/front';
 import { Card } from './Card/Card';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';

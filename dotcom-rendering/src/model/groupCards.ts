@@ -1,3 +1,9 @@
+import type {
+	DCRContainerPalette,
+	DCRContainerType,
+	DCRGroupedTrails,
+	FEFrontCard,
+} from '../types/front';
 import { enhanceCards } from './enhanceCards';
 
 /**
