@@ -1,5 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { fill, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { headline, remSpace } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
@@ -8,21 +9,17 @@ import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
-import { getThemeStyles } from 'themeStyles';
 
 const styles = (format: ArticleFormat): SerializedStyles => {
-	const { kicker, inverted } = getThemeStyles(format.theme);
 	return css`
-		color: ${kicker};
+		color: ${text.pullquote(format)};
 		margin: 0;
 		${headline.xsmall({ fontWeight: 'light' })};
-		${darkModeCss`color: ${inverted};`}
+		${darkModeCss`color: ${text.pullquoteDark(format)};`}
 	`;
 };
 
 const quoteStyles = (format: ArticleFormat): SerializedStyles => {
-	const { kicker, inverted } = getThemeStyles(format.theme);
-
 	return css`
 		margin: ${remSpace[4]} 0 ${remSpace[3]} 0;
 
@@ -31,8 +28,8 @@ const quoteStyles = (format: ArticleFormat): SerializedStyles => {
 			height: 2.3rem;
 			margin-left: -0.3rem;
 			line-height: 1.2;
-			fill: ${kicker};
-			${darkModeCss`fill: ${inverted};`}
+			fill: ${fill.icon(format)};
+			${darkModeCss`fill: ${fill.iconDark(format)};`}
 		}
 	`;
 };

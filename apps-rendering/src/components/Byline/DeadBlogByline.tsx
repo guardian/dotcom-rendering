@@ -1,13 +1,12 @@
 import { css } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline, neutral } from '@guardian/source-foundations';
+import { headline } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { DefaultByline } from './Byline.defaults';
 import { blogColor } from './LiveBlogByline';
 
 const blogStyles = css`
-	${headline.xxxsmall({ lineHeight: 'regular', fontStyle: 'italic' })}
+	${headline.xxxsmall({ lineHeight: 'tight', fontStyle: 'italic' })}
 `;
 
 const blogAnchorStyles = css`
@@ -25,22 +24,8 @@ const DeadblogByline: React.FC<Props> = ({ format, bylineHtml }) => (
 	<DefaultByline
 		format={format}
 		bylineHtml={bylineHtml}
-		styles={css(
-			blogStyles,
-			blogColor(
-				text.bylineInline(format),
-				text.bylineLeftColumn(format),
-				neutral[86],
-			),
-		)}
-		anchorStyles={css(
-			blogAnchorStyles,
-			blogColor(
-				text.bylineInline(format),
-				text.bylineLeftColumn(format),
-				text.bylineDark(format),
-			),
-		)}
+		styles={css(blogStyles, blogColor(format))}
+		anchorStyles={css(blogAnchorStyles, blogColor(format))}
 	/>
 );
 

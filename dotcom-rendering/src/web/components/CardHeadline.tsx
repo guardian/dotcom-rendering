@@ -1,9 +1,18 @@
+/* eslint-disable default-case */
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
-import { headline, space, textSans, until } from '@guardian/source-foundations';
+import {
+	between,
+	from,
+	headline,
+	space,
+	textSans,
+	until,
+} from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import React from 'react';
+import type { DCRContainerPalette } from '../../types/front';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { Byline } from './Byline';
@@ -37,6 +46,19 @@ const fontStyles = ({
 	if (fontWeight) options.fontWeight = fontWeight;
 
 	switch (size) {
+		case 'ginormous':
+			return css`
+				${until.mobileLandscape} {
+					${headline.medium(options)};
+				}
+				${between.mobileLandscape.and.desktop} {
+					${headline.large(options)};
+				}
+				${from.desktop} {
+					${headline.large(options)};
+					font-size: 50px;
+				}
+			`;
 		case 'huge':
 			return css`
 				${headline.small(options)};
@@ -72,6 +94,7 @@ const fontStyles = ({
 
 const labTextStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
+		case 'ginormous':
 		case 'huge':
 		case 'large':
 			return css`
@@ -131,7 +154,10 @@ const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
 	}
 
 	switch (size) {
+		case 'ginormous':
+			return underlinedCssWithMediaQuery(50, 50);
 		case 'huge':
+			return underlinedCssWithMediaQuery(34, 34);
 		case 'large':
 			return underlinedCssWithMediaQuery(29, 29);
 		case 'medium':

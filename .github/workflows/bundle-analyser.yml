@@ -3,7 +3,7 @@ on:
     push:
         paths-ignore:
             - "apps-rendering/**"
-
+            - "dotcom-rendering/docs/**"
 jobs:
     build_check:
         name: DCR Bundle Analyser
@@ -17,9 +17,6 @@ jobs:
 
             # Cache npm dependencies using https://github.com/bahmutov/npm-install
             - uses: bahmutov/npm-install@v1
-
-            - name: Install
-              run: yarn
 
             - name: Generate production build
               run: make build

@@ -23,6 +23,7 @@ import {
 
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../../lib/pillars';
+import type { DCRContainerPalette } from '../../types/front';
 import { decideContainerOverrides } from './decideContainerOverrides';
 import { transparentColour } from './transparentColour';
 
@@ -1170,6 +1171,8 @@ const textDropCap = (format: ArticleFormat): string => {
 	}
 };
 
+const textBetaLabel = (): string => neutral[46];
+
 const textBlockquote = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -1366,6 +1369,7 @@ export const decidePalette = (
 			filterButton: textFilterButton(),
 			filterButtonHover: textFilterButtonHover(),
 			filterButtonActive: textFilterButtonActive(),
+			betaLabel: textBetaLabel(),
 		},
 		background: {
 			article: backgroundArticle(format),

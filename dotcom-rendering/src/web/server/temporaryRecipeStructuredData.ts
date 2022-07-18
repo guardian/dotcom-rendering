@@ -68,7 +68,7 @@ export const recipeSchema: RecipeSchemaObject = {
 	'https://www.theguardian.com/food/2021/nov/24/how-to-make-shortbread-recipe-felicity-cloake-masterclass': `{
 		"@context": "https://schema.org/",
 		"@type": "Recipe",
-		"name": "How to make shortbreak",
+		"name": "How to make shortbread",
 		"image": [
 		  "https://i.guim.co.uk/img/media/e105cc86929c1d1b12318f6a1dabc87222c9e39e/442_1389_4718_4765/master/4718.jpg?width=1300&quality=45&fit=max&dpr=2&s=060c453f91405de2df57fb87ba8f4ade"
 		],

@@ -1,6 +1,8 @@
 name: Chromatic 👓
 on:
   push:
+    paths-ignore:
+      - "dotcom-rendering/docs/**"
 jobs:
   chromatic:
     name: Chromatic
@@ -14,11 +16,6 @@ jobs:
       # Cache npm dependencies using https://github.com/bahmutov/npm-install
       # Root yarn installs all workspaces (root, common, dotcom)
       - uses: bahmutov/npm-install@v1
-
-      # Install packages for apps-rendering project
-      - uses: bahmutov/npm-install@v1
-        with:
-          working-directory: apps-rendering
 
       - uses: chromaui/action@v1
         with:

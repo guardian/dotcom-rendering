@@ -1,7 +1,7 @@
-import { ArticleDesign } from '@guardian/libs';
-import { Card } from './Card/Card';
+import type { DCRContainerPalette } from '../../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
+import { FrontCard } from './FrontCard';
 
 type Props = {
 	trails: TrailType[];
@@ -24,39 +24,15 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 		<>
 			<UL direction="row" padBottom={true}>
 				<LI padSides={true} percentage="75%">
-					<Card
+					<FrontCard
+						trail={primary}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						linkTo={primary.url}
-						format={primary.format}
-						headlineText={primary.headline}
-						trailText={primary.trailText}
 						headlineSize="large"
-						byline={primary.byline}
-						showByline={primary.showByline}
-						showQuotes={
-							primary.format.design === ArticleDesign.Comment ||
-							primary.format.design === ArticleDesign.Letter
-						}
-						webPublicationDate={primary.webPublicationDate}
-						kickerText={primary.kickerText}
-						showPulsingDot={
-							primary.format.design === ArticleDesign.LiveBlog
-						}
-						showSlash={true}
-						showClock={false}
-						imageUrl={primary.image}
 						imagePosition="right"
 						imagePositionOnMobile="top"
 						imageSize="large"
-						mediaType={primary.mediaType}
-						mediaDuration={primary.mediaDuration}
-						starRating={primary.starRating}
-						branding={primary.branding}
 						supportingContent={primary.supportingContent}
-						dataLinkName={primary.dataLinkName}
-						snapData={primary.snapData}
-						discussionId={primary.discussionId}
 					/>
 				</LI>
 				<LI
@@ -65,35 +41,11 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 					showTopMarginWhenStacked={true}
 					percentage="25%"
 				>
-					<Card
+					<FrontCard
+						trail={secondary}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						linkTo={secondary.url}
-						format={secondary.format}
-						headlineText={secondary.headline}
-						headlineSize="medium"
-						byline={secondary.byline}
-						showByline={secondary.showByline}
-						showQuotes={
-							secondary.format.design === ArticleDesign.Comment ||
-							secondary.format.design === ArticleDesign.Letter
-						}
-						webPublicationDate={secondary.webPublicationDate}
-						kickerText={secondary.kickerText}
-						showPulsingDot={
-							secondary.format.design === ArticleDesign.LiveBlog
-						}
-						showSlash={true}
-						showClock={false}
-						imageUrl={secondary.image}
-						mediaType={secondary.mediaType}
-						mediaDuration={secondary.mediaDuration}
-						starRating={secondary.starRating}
-						branding={secondary.branding}
 						supportingContent={secondary.supportingContent}
-						dataLinkName={secondary.dataLinkName}
-						snapData={secondary.snapData}
-						discussionId={secondary.discussionId}
 					/>
 				</LI>
 			</UL>
@@ -112,48 +64,15 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 										cardIndex < bigCards.length
 									}
 								>
-									<Card
+									<FrontCard
+										trail={card}
 										containerPalette={containerPalette}
 										showAge={showAge}
-										linkTo={card.url}
-										format={card.format}
-										trailText={
-											card.supportingContent
-												? undefined
-												: card.trailText
-										}
-										headlineText={card.headline}
-										headlineSize="medium"
-										byline={card.byline}
-										showByline={card.showByline}
-										showQuotes={
-											card.format.design ===
-												ArticleDesign.Comment ||
-											card.format.design ===
-												ArticleDesign.Letter
-										}
-										webPublicationDate={
-											card.webPublicationDate
-										}
-										kickerText={card.kickerText}
-										showPulsingDot={
-											card.format.design ===
-											ArticleDesign.LiveBlog
-										}
-										showSlash={true}
-										showClock={false}
-										imageUrl={card.image}
-										mediaType={card.mediaType}
-										mediaDuration={card.mediaDuration}
-										starRating={card.starRating}
-										branding={card.branding}
+										// Overrides
 										supportingContent={
 											card.supportingContent
 										}
 										imagePositionOnMobile="none"
-										dataLinkName={card.dataLinkName}
-										snapData={card.snapData}
-										discussionId={card.discussionId}
 									/>
 								</LI>
 							);
@@ -174,41 +93,15 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 									}
 									padBottomOnMobile={false}
 								>
-									<Card
+									<FrontCard
+										trail={card}
 										containerPalette={containerPalette}
 										showAge={showAge}
-										linkTo={card.url}
-										format={card.format}
-										headlineText={card.headline}
-										imageUrl={card.image}
-										imagePosition="left"
-										imageSize="small"
 										headlineSize="small"
-										byline={card.byline}
-										showByline={card.showByline}
-										showQuotes={
-											card.format.design ===
-												ArticleDesign.Comment ||
-											card.format.design ===
-												ArticleDesign.Letter
+										imagePosition="left"
+										supportingContent={
+											card.supportingContent
 										}
-										webPublicationDate={
-											card.webPublicationDate
-										}
-										kickerText={card.kickerText}
-										showPulsingDot={
-											card.format.design ===
-											ArticleDesign.LiveBlog
-										}
-										showSlash={true}
-										showClock={false}
-										mediaType={card.mediaType}
-										mediaDuration={card.mediaDuration}
-										starRating={card.starRating}
-										branding={card.branding}
-										dataLinkName={card.dataLinkName}
-										snapData={card.snapData}
-										discussionId={card.discussionId}
 									/>
 								</LI>
 							);

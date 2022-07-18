@@ -2,6 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette/background';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
@@ -10,7 +11,6 @@ import { isSingleContributor } from 'contributor';
 import type { Contributor } from 'contributor';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
-import { getThemeStyles } from 'themeStyles';
 
 // ----- Setup ----- //
 
@@ -22,20 +22,15 @@ interface Props extends ArticleFormat {
 	contributors: Contributor[];
 }
 
-const styles = (background: string): SerializedStyles => css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	width: ${dimensions};
 	height: ${dimensions};
 	clip-path: circle(50%);
 	object-fit: cover;
-	background: ${background};
+	background: ${background.avatar(format)};
 	margin-right: ${remSpace[3]};
 	margin-top: ${remSpace[1]};
 `;
-
-const getStyles = ({ theme }: ArticleFormat): SerializedStyles => {
-	const colours = getThemeStyles(theme);
-	return styles(colours.inverted);
-};
 
 const Avatar: FC<Props> = ({ contributors, ...format }: Props) => {
 	const [contributor] = contributors;
@@ -50,7 +45,7 @@ const Avatar: FC<Props> = ({ contributors, ...format }: Props) => {
 			<Img
 				image={image}
 				sizes={dimensions}
-				className={getStyles(format)}
+				className={styles(format)}
 				format={format}
 			/>
 		)),
