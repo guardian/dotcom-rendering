@@ -19,8 +19,8 @@ const logoImageStyle = css`
 `;
 
 const brandingWrapperStyle = css`
-	padding-right: ${space[3]}px;
-	padding-bottom: ${space[3]}px;
+	padding-right: ${space[2]}px;
+	padding-bottom: ${space[2]}px;
 	text-align: right;
 	flex: auto;
 	/* See: https://css-tricks.com/nested-links/ */
