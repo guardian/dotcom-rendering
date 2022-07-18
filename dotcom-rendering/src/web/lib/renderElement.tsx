@@ -452,6 +452,11 @@ export const renderElement = ({
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
+			// uses clear:both to prevent PullQuotes floating around the
+			// figure.
+			// The placement logic also seeks to keep them at least
+			// from two elements distance from a pull quote, but an ideal
+			// place won't always be found.
 			return [
 				true,
 				<Figure
