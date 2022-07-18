@@ -7,7 +7,6 @@ import {
 	brandBorder,
 	brandLine,
 	from,
-	neutral,
 	space,
 	textSans,
 	until,
@@ -72,17 +71,6 @@ const mainColWrapperStyle = css`
 	}
 `;
 
-const mainColGuardianLogoContainerStyle = css`
-	svg {
-		display: none;
-
-		${until.leftCol} {
-			width: 65%;
-			display: block;
-		}
-	}
-`;
-
 // the negative bottom values at the two column layout are to
 // align the baseline of the text in the newsletters badge svg
 // with the Guardian logo in the leftCol, rather than aligning
@@ -109,10 +97,6 @@ const leftColWrapperStyle = css`
 	justify-content: flex-end;
 	margin-top: ${space[2]}px;
 	margin-bottom: ${space[9]}px;
-
-	svg {
-		max-width: 100%;
-	}
 `;
 
 const previewButtonWrapperStyle = css`
@@ -126,30 +110,63 @@ const mainGraphicWrapperStyle = css`
 	border-radius: ${space[2]}px;
 	overflow: hidden;
 	margin: ${space[4]}px 0;
+`;
 
-	& > figcaption {
-		display: flex;
+const figcaptionStyle = css`
+	display: flex;
 
-		${until.desktop} {
-			display: none;
-		}
+	${until.desktop} {
+		display: none;
+	}
 
-		background-color: ${brandAlt[400]};
-		align-items: center;
-		padding: ${space[1]}px;
-		${textSans.medium({ fontWeight: 'bold', lineHeight: 'tight' })}
+	background-color: ${brandAlt[400]};
+	align-items: center;
+	padding: ${space[1]}px;
+	${textSans.medium({ fontWeight: 'bold', lineHeight: 'tight' })}
 
-		svg {
-			margin-right: ${space[1]}px;
-			flex-shrink: 0;
-		}
+	svg {
+		margin-right: ${space[1]}px;
+		flex-shrink: 0;
 	}
 `;
 
-interface NewsletterDetailProps {
+type GuardianLogoSvgProps = {
+	palette: Palette;
+	showUntil?: Breakpoint;
+};
+const GuardianLogoSvg = ({ palette, showUntil }: GuardianLogoSvgProps) => {
+	const guardianLogoContainerStyle = showUntil
+		? css`
+				svg {
+					display: none;
+
+					${until[showUntil]} {
+						width: 65%;
+						display: block;
+					}
+				}
+		  `
+		: css`
+				svg {
+					max-width: 100%;
+				}
+		  `;
+
+	return (
+		<span css={guardianLogoContainerStyle}>
+			<SvgGuardianLogo
+				textColor={palette.fill.guardianLogo}
+				width={200}
+			/>
+		</span>
+	);
+};
+
+type NewsletterDetailProps = {
 	text: string;
 	showUntil?: Breakpoint;
-}
+};
+
 const NewsletterDetail = ({ text, showUntil }: NewsletterDetailProps) => {
 	const displayRule = showUntil
 		? `
@@ -186,11 +203,11 @@ const NewsletterDetail = ({ text, showUntil }: NewsletterDetailProps) => {
 	);
 };
 
-interface Props {
+type Props = {
 	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
-}
+};
 
 export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
@@ -216,6 +233,9 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		(has preview URL available?)
 	*/
 	const showNewsletterPreview = true;
+
+	/** TODO: this data needs to come from the newsletters API */
+	const newsletterCategory = 'UK Focused';
 
 	return (
 		<>
@@ -317,20 +337,15 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					innerBackgroundColour={brandBackground.primary}
 					leftContent={
 						<div css={leftColWrapperStyle}>
-							<SvgGuardianLogo
-								textColor={neutral[100]}
-								width={200}
-							/>
+							<GuardianLogoSvg palette={palette} />
 						</div>
 					}
 				>
 					<div css={mainColWrapperStyle}>
-						<span css={mainColGuardianLogoContainerStyle}>
-							<SvgGuardianLogo
-								textColor={neutral[100]}
-								width={200}
-							/>
-						</span>
+						<GuardianLogoSvg
+							palette={palette}
+							showUntil="leftCol"
+						/>
 						<span css={mainColNewsLettersBadgeContainerStyle}>
 							<NewsletterBadge />
 						</span>
@@ -341,12 +356,12 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					centralBorder="full"
 					sideBorders={true}
 					stretchRight={true}
-					leftContent={<NewsletterDetail text="UK Focused" />}
+					leftContent={<NewsletterDetail text={newsletterCategory} />}
 				>
 					<Columns collapseUntil="desktop">
 						<Column width={[1, 1, 5 / 8, 1 / 2, 1 / 2]}>
 							<NewsletterDetail
-								text="UK Focused"
+								text={newsletterCategory}
 								showUntil="leftCol"
 							/>
 
@@ -455,7 +470,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										- Accessibility?
 								 */}
 								{showNewsletterPreview && (
-									<figcaption>
+									<figcaption css={figcaptionStyle}>
 										<SvgEye size="small" />
 										<span role="link">
 											Click here to see the latest version
