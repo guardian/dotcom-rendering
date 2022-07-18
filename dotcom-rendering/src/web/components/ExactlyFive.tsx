@@ -11,7 +11,7 @@ type Props = {
 export const ExactlyFive = ({ content, containerPalette }: Props) => (
 	<>
 		<UL direction="row" padBottom={true}>
-			<LI padSides={true} percentage="34%">
+			<LI padSides={true} percentage="33.333%">
 				<Card
 					containerPalette={containerPalette}
 					showAge={true}
@@ -44,7 +44,7 @@ export const ExactlyFive = ({ content, containerPalette }: Props) => (
 				padSides={true}
 				showDivider={true}
 				showTopMarginWhenStacked={true}
-				percentage="34%"
+				percentage="33.333%"
 			>
 				<Card
 					containerPalette={containerPalette}
@@ -78,7 +78,7 @@ export const ExactlyFive = ({ content, containerPalette }: Props) => (
 				padSides={true}
 				showDivider={true}
 				showTopMarginWhenStacked={true}
-				percentage="34%"
+				percentage="33.333%"
 			>
 				<UL direction="column">
 					<LI padBottom={true} stretch={true}>

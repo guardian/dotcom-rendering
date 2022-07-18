@@ -278,13 +278,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-		adUnit: string;
-		customParams: CustomParams;
-		disableAds?: false;
-	}
+			adUnit: string;
+			customParams: CustomParams;
+			disableAds?: false;
+	  }
 	| {
-		disableAds: true;
-	};
+			disableAds: true;
+	  };
 
 interface SectionNielsenAPI {
 	name: string;
@@ -1111,14 +1111,7 @@ type LineEffectType = 'labs' | 'dotted' | 'straight';
 
 type LeftColSize = 'compact' | 'wide';
 
-type CardPercentageType =
-	| '25%'
-	| '33.333%'
-	| '34%'
-	| '50%'
-	| '66%'
-	| '75%'
-	| '100%';
+type CardPercentageType = '25%' | '33.333%' | '50%' | '66%' | '75%' | '100%';
 
 type HeadlineLink = {
 	to: string; // the href for the anchor tag
