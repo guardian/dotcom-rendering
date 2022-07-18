@@ -75,18 +75,23 @@ const adStyles = css`
 
 		${from.tablet} {
 			background-color: ${neutral[97]};
-
-			.ad-slot {
-				/* from tablet the ad slot will stretch to the full width of the container and the iframe will be centred by the text-align: center; on the container */
-				flex: 1;
-				/* Ensures slots do not take on 100% of the container height, allowing them to be sticky in containers */
-				align-self: flex-start;
-			}
 		}
 
 		/* Prevent merger with any nearby float left elements e.g. rich-links */
 		${until.desktop} {
 			clear: left;
+		}
+
+		.ad-slot {
+			${from.tablet} {
+				/* from tablet the ad slot will stretch to the full width of the container and the iframe will be centred by the text-align: center; on the container */
+				flex: 1;
+				/* Ensures slots do not take on 100% of the container height, allowing them to be sticky in containers */
+				align-self: flex-start;
+			}
+
+			/* this fixes inter-scrollers stealing mouse events */
+			overflow: hidden;
 		}
 
 		/* liveblogs ads have different background colours due the darker page background */
