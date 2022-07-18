@@ -2182,6 +2182,9 @@
                 },
                 "elementId": {
                     "type": "string"
+                },
+                "nearToPullQuote": {
+                    "type": "boolean"
                 }
             },
             "required": [

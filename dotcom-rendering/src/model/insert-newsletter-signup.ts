@@ -5,28 +5,28 @@ interface PlaceInArticle {
 	afterPullQuote: boolean;
 }
 
+const isAfterPullQuote = (index: number, elements: CAPIElement[]): boolean => {
+	return (
+		elements[index - 1]?._type ===
+			'model.dotcomrendering.pageElements.PullquoteBlockElement' ||
+		elements[index - 2]?._type ===
+			'model.dotcomrendering.pageElements.PullquoteBlockElement'
+	);
+};
+
+const isAfterText = (index: number, elements: CAPIElement[]): boolean =>
+	elements[index - 1]?._type ===
+	'model.dotcomrendering.pageElements.TextBlockElement';
+
 const getPlaces = (
 	targetIndex: number,
 	elements: CAPIElement[],
 ): PlaceInArticle[] => {
-	const isAfterText: { (index: number): boolean } = (index) =>
-		elements[index - 1]?._type ===
-		'model.dotcomrendering.pageElements.TextBlockElement';
-
-	const isAfterPullQuote: { (index: number): boolean } = (index) => {
-		return (
-			elements[index - 1]?._type ===
-				'model.dotcomrendering.pageElements.PullquoteBlockElement' ||
-			elements[index - 2]?._type ===
-				'model.dotcomrendering.pageElements.PullquoteBlockElement'
-		);
-	};
-
 	return elements.map((element, index) => ({
 		index,
 		distance: Math.abs(index - targetIndex),
-		afterText: isAfterText(index),
-		afterPullQuote: isAfterPullQuote(index),
+		afterText: isAfterText(index, elements),
+		afterPullQuote: isAfterPullQuote(index, elements),
 	}));
 };
 
@@ -67,10 +67,14 @@ const insert = (
 	targetIndex: number,
 	maxDistance = 0,
 ): CAPIElement[] => {
-	elements.splice(findInsertIndex(elements, targetIndex, maxDistance), 0, {
+	const index = findInsertIndex(elements, targetIndex, maxDistance);
+	const nearToPullQuote = isAfterPullQuote(index, elements);
+
+	elements.splice(index, 0, {
 		_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
 		newsletter: newsletter,
 		elementId: newsletter.elementId,
+		nearToPullQuote,
 	});
 
 	return elements;

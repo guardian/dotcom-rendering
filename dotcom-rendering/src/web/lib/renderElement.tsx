@@ -7,6 +7,7 @@ import {
 } from '@guardian/atoms-rendering';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
+import { from } from '@guardian/source-foundations';
 import { getSharingUrls } from '../../lib/sharing-urls';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
@@ -452,11 +453,14 @@ export const renderElement = ({
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
-			// uses clear:both to prevent PullQuotes floating around the
-			// figure.
-			// The placement logic also seeks to keep them at least
-			// from two elements distance from a pull quote, but an ideal
-			// place won't always be found.
+			// uses clear:both to prevent PullQuotes  and RichLinks floating
+			// into the EmailSignup.
+			// From leftCol, RichLinks float all the way to the left column,
+			// clear:none is the default so avoid leaving a blank space between
+			// a rich link and NewsletterSignupBlockElement.
+			// From leftCol, PullQuotes float left  half way outside the main
+			// column for the inline element to wrap around, so when near a
+			// PullQuote, must be clear:both from leftcol too
 			return [
 				true,
 				<Figure
@@ -468,6 +472,9 @@ export const renderElement = ({
 					format={format}
 					css={css`
 						clear: both;
+						${from.leftCol} {
+							clear: ${element.nearToPullQuote ? 'both' : 'none'};
+						}
 					`}
 				>
 					<EmailSignup
