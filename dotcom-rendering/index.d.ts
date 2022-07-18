@@ -83,6 +83,7 @@ type Colour = string;
 type Palette = {
 	text: {
 		headline: Colour;
+		headlineWhenMatch: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		seriesTitleWhenMatch: Colour;
