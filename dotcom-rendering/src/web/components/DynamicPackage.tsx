@@ -14,8 +14,7 @@ export const DynamicPackage = ({
 	containerPalette,
 	showAge,
 }: Props) => {
-	const primary = [...trails].slice(0)[0];
-	const remaining = [...trails].slice(1, trails.length);
+	const [primary, ...remaining] = trails;
 
 	if (primary.isBoosted) {
 		return (
