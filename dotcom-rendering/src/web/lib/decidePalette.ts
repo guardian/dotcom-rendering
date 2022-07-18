@@ -998,7 +998,7 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 };
 
 const backgroundMatchNav = (): string => {
-	return '#FFE500';
+	return brandAlt[400];
 };
 
 const backgroundUnderline = (format: ArticleFormat): string =>
