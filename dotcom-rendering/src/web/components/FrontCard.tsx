@@ -14,11 +14,11 @@ type Props = {
  * Note: Below parameters are not an exhaustive list of params used by FrontCard, rather they are a list of
  * commonly overridden params to make it easier for a developer to know if they actually need to override these values.
  *
- * @param {SmallHeadlineSize} [headlineSize="medium"] - Defaults to "medium"
- * @param {ImagePositionType} [imagePosition="top"] - Defaults to "top"
- * @param {ImagePositionType} [imagePositionOnMobile="left"] - Defaults to "left"
- * @param {ImageSizeType} [imageSize="medium"] - Defaults to "medium"
- * @param {DCRSupportingContent[]} [supportingContent=undefined] - Defaults to undefined, set to trail.supportingContent if you want this card to show sublinks.
+ * @param [headlineSize] - Defaults to "medium"
+ * @param [imagePosition] - Defaults to "top"
+ * @param [imagePositionOnMobile] - Defaults to "left"
+ * @param [imageSize] - Defaults to "medium"
+ * @param [supportingContent] - Defaults to undefined, set to trail.supportingContent if you want this card to show sublinks.
  */
 export const FrontCard = (props: Props) => {
 	const { trail, ...cardProps } = props;
