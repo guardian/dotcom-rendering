@@ -40,6 +40,9 @@ const findInsertIndex = (
 	return possiblePlaces[0]?.index || targetIndex;
 };
 
+// NOTE: blog pages have different structure with multiple blocks of elements
+// any future function to place sign-up blocks in blog pages would need to
+// take this into acccount.
 const insert = (
 	newsletter: Newsletter,
 	elements: CAPIElement[],
@@ -55,43 +58,54 @@ const insert = (
 	return elements;
 };
 
-// blog pages have different structure with multiple blocks of elements
-// there is no instruction on how / if / where sign-up block should be
-// placed in blogs as yet, so they are excluded for now
-const isBlog = (format: CAPIFormat): boolean =>
-	format.design === 'DeadBlogDesign' || format.design === 'LiveBlogDesign';
-
-const shouldNotPlaceInline = (format: CAPIFormat): boolean =>
-	format.design === 'FullPageInteractiveDesign' || // interactive pages are all custom content, so should not be inserting extra elements.
-	format.design === 'InteractiveDesign' ||
-	format.design === 'QuizDesign' || // the quiz is rendered as a single element.
-	format.design === 'NewsletterSignupDesign'; // a dedicated sign-up page would use the newsletter data differently
+const shouldInsertInTheMiddle = (format: CAPIFormat): boolean =>
+	[
+		'ArticleDesign',
+		'GalleryDesign',
+		'AudioDesign',
+		'VideoDesign',
+		'ReviewDesign',
+		'AnalysisDesign',
+		'CommentDesign',
+		'LetterDesign',
+		'FeatureDesign',
+		'RecipeDesign',
+		'MatchReportDesign',
+		'InterviewDesign',
+		'EditorialDesign',
+		'PhotoEssayDesign',
+		'PrintShopDesign',
+		'ObituaryDesign',
+	].includes(format.design);
 
 export const insertNewsletterSignup = (
 	blocks: Block[],
 	format: CAPIFormat,
 	newsletter?: Newsletter,
 ): Block[] => {
-	if (!newsletter || isBlog(format) || shouldNotPlaceInline(format)) {
+	if (!newsletter) {
 		return blocks;
 	}
+	if (shouldInsertInTheMiddle(format)) {
+		return blocks.map((block: Block, index: number) => {
+			return {
+				...block,
+				elements:
+					// aside from blogs (excluded above) all article formats only contain 1 block, so
+					// the index conditional should not be necessary - but should another format with
+					// mutiple blocks be introduced, the NewsletterSignupBlockElement should only be
+					// included once
+					index === 0
+						? insert(
+								newsletter,
+								block.elements,
+								Math.floor(block.elements.length / 2), // current instruction is to place the SignUp block in the middle of the article - this might change
+								4, // allow the SignUp block to be a few spaces higher of lower to find a spot after a paragraph rather than a subheading or picture etc
+						  )
+						: block.elements,
+			};
+		});
+	}
 
-	return blocks.map((block: Block, index: number) => {
-		return {
-			...block,
-			elements:
-				// aside from blogs (excluded above) all article formats only contain 1 block, so
-				// the index conditional should not be necessary - but should another format with
-				// mutiple blocks be introduced, the NewsletterSignupBlockElement should only be
-				// included once
-				index === 0
-					? insert(
-							newsletter,
-							block.elements,
-							Math.floor(block.elements.length / 2), // current instruction is to place the SignUp block in the middle of the article - this might change
-							4, // allow the SignUp block to be a few spaces higher of lower to find a spot after a paragraph rather than a subheading or picture etc
-					  )
-					: block.elements,
-		};
-	});
+	return blocks;
 };
