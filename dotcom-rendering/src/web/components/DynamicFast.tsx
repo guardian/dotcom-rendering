@@ -215,6 +215,11 @@ export const DynamicFast = ({
 		standardsCardWidth = '50%';
 		standardsContainerWidth = '50%';
 		columns = 2;
+	} else if (bigs.length === 0) {
+		maxStandards = 12;
+		standardsCardWidth = '25%';
+		standardsContainerWidth = '100%';
+		columns = 4;
 	} else if (bigs.length === 1) {
 		maxStandards = 9;
 		standardsCardWidth = '33.333%';
@@ -381,57 +386,61 @@ export const DynamicFast = ({
 						</LI>
 					);
 				})}
-				<LI
-					percentage={standardsContainerWidth}
-					showTopMarginWhenStacked={true}
-				>
-					<UL direction="row" wrapCards={true}>
-						{/* If the first big is boosted & we have a second big,
+				{maxStandards > 0 && (
+					<LI
+						percentage={standardsContainerWidth}
+						showTopMarginWhenStacked={true}
+					>
+						<UL direction="row" wrapCards={true}>
+							{/* If the first big is boosted & we have a second big,
 							it should be at the start of the standards but have an image  */}
-						{firstBigBoosted && bigs[1] ? (
-							<ThirdBoostedPlusBig
-								standards={standards}
-								big={bigs[1]}
-								containerPalette={containerPalette}
-								showAge={showAge}
-							/>
-						) : (
-							// Regular standards layout
-							standards.map((card, cardIndex) => {
-								return (
-									<LI
-										key={card.url}
-										percentage={standardsCardWidth}
-										stretch={true}
-										showDivider={true}
-										padSides={true}
-										padBottom={
-											// Never give bottom margin to the last card
-											// cardIndex !== standards.length - 1 &&
-											// Any cards not on the bottom row!
-											cardIndex <
-											standards.length -
-												// Get leftover (modulo), if none fall back to columns as the whole bottom row
-												// won't want to be padded
-												(standards.length % columns ||
-													columns)
-										}
-										padBottomOnMobile={
-											cardIndex < standards.length - 1
-										}
-									>
-										<FrontCard
-											trail={card}
-											containerPalette={containerPalette}
-											imageUrl={undefined}
-											headlineSize="small"
-										/>
-									</LI>
-								);
-							})
-						)}
-					</UL>
-				</LI>
+							{firstBigBoosted && bigs[1] ? (
+								<ThirdBoostedPlusBig
+									standards={standards}
+									big={bigs[1]}
+									containerPalette={containerPalette}
+									showAge={showAge}
+								/>
+							) : (
+								// Regular standards layout
+								standards.map((card, cardIndex) => {
+									return (
+										<LI
+											key={card.url}
+											percentage={standardsCardWidth}
+											stretch={true}
+											showDivider={true}
+											padSides={true}
+											padBottom={
+												// Never give bottom margin to the last card
+												// cardIndex !== standards.length - 1 &&
+												// Any cards not on the bottom row!
+												cardIndex <
+												standards.length -
+													// Get leftover (modulo), if none fall back to columns as the whole bottom row
+													// won't want to be padded
+													(standards.length %
+														columns || columns)
+											}
+											padBottomOnMobile={
+												cardIndex < standards.length - 1
+											}
+										>
+											<FrontCard
+												trail={card}
+												containerPalette={
+													containerPalette
+												}
+												imageUrl={undefined}
+												headlineSize="small"
+											/>
+										</LI>
+									);
+								})
+							)}
+						</UL>
+					</LI>
+				)}
 			</UL>
 		</>
 	);
