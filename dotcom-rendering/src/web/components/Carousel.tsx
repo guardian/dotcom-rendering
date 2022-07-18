@@ -340,7 +340,6 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 	discussionId,
 }: CarouselCardProps) => (
 	<LI
-		stretch={true}
 		percentage="25%"
 		showDivider={!isFirst}
 		padSides={true}
