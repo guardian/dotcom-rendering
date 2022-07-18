@@ -2791,7 +2791,7 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^23.2.0":
+"@guardian/atoms-rendering@^23.2.1":
   version "23.2.1"
   resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-23.2.1.tgz#6f18d76425d753e5dbac7309a52d539fcb782966"
   integrity sha512-zLAHEwn1qMufV7hSl3tI6/E0lH8uxgkW7KkUJRQOrdqvjSSrkk1i21hGhPyg6f6ajW4vaAGyh+ZiU8I0lmFk7A==
