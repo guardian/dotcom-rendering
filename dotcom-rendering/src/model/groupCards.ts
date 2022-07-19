@@ -17,7 +17,7 @@ import { enhanceCards } from './enhanceCards';
  *  - Standard
  *
  * This can be consumed by the rendering layer to tell us how we should size each card, which
- * can very by container type.
+ * can vary by container type.
  *
  * Backfilled cards are always considered 'standard'.
  *
