@@ -225,6 +225,61 @@ const ThirdBoostedPlusBig = ({
 };
 
 /**
+ * Returns display information for rendering the 'standard' cards in the container
+ * containerWidth: % width for the container which holds all the standards
+ * columns: no. of columns of standard cards there will be
+ * cardWidth: % width within the container each card should take up
+ */
+const getStandardsDisplayConfig = (
+	firstBigBoosted: boolean,
+	noOfBigs: number,
+): {
+	containerWidth?: CardPercentageType;
+	columns: number;
+	cardWidth?: CardPercentageType;
+} => {
+	if (firstBigBoosted) {
+		// When the first big is boosted, it takes up 50% of the row,
+		// Other bigs will be added to the standards array as part of
+		// 'ThirdBoostedPlusBig' layout
+		return {
+			containerWidth: '50%',
+			columns: 2,
+			cardWidth: '50%',
+		};
+	} else if (noOfBigs === 0) {
+		return {
+			containerWidth: '100%',
+			columns: 4,
+			cardWidth: '25%',
+		};
+	} else if (noOfBigs === 1) {
+		return {
+			containerWidth: '75%',
+			columns: 3,
+			cardWidth: '33.333%',
+		};
+	} else if (noOfBigs === 2) {
+		return {
+			containerWidth: '50%',
+			columns: 2,
+			cardWidth: '50%',
+		};
+	} else if (noOfBigs === 3) {
+		return {
+			containerWidth: '25%',
+			columns: 1,
+			cardWidth: '100%',
+		};
+	} else {
+		// noOfBigs is 4 or more, so we won't render any standards
+		return {
+			columns: 0,
+		};
+	}
+};
+
+/**
  * Dynamic/fast is a dynamic container often used for headlines on network fronts,
  * for this reason it has a lot of configuration & customisation.
  *
@@ -297,40 +352,11 @@ export const DynamicFast = ({
 
 	const firstBigBoosted = !!bigs[0]?.isBoosted;
 
-	let maxStandards = 12;
-	let standardsColumns = 3;
-	let standardsCardWidth: CardPercentageType = '25%';
-	let standardsContainerWidth: CardPercentageType = '75%';
-
-	if (firstBigBoosted) {
-		maxStandards = 8;
-		standardsCardWidth = '50%';
-		standardsContainerWidth = '50%';
-		standardsColumns = 2;
-	} else if (bigs.length === 0) {
-		maxStandards = 12;
-		standardsCardWidth = '25%';
-		standardsContainerWidth = '100%';
-		standardsColumns = 4;
-	} else if (bigs.length === 1) {
-		maxStandards = 9;
-		standardsCardWidth = '33.333%';
-		standardsContainerWidth = '75%';
-		standardsColumns = 3;
-	} else if (bigs.length === 2) {
-		maxStandards = 6;
-		standardsCardWidth = '50%';
-		standardsContainerWidth = '50%';
-		standardsColumns = 2;
-	} else if (bigs.length === 3) {
-		maxStandards = 3;
-		standardsCardWidth = '100%';
-		standardsContainerWidth = '25%';
-		standardsColumns = 1;
-	} else if (bigs.length === 4) {
-		maxStandards = 0;
-		standardsColumns = 0;
-	}
+	// Gets display information
+	const standardsConfig = getStandardsDisplayConfig(
+		firstBigBoosted,
+		bigs.length,
+	);
 
 	let standards: TrailType[] = [];
 	if (firstBigBoosted && bigs.length > 1) {
@@ -342,10 +368,14 @@ export const DynamicFast = ({
 			...bigs.splice(2, bigs.length - 1),
 			...groupedTrails.standard,
 		];
-	} else if (maxStandards > 0) {
+	} else if (standardsConfig.columns > 0) {
 		// We don't need to select any 'left over' bigs here as if there are
 		// 4 bigs there is no room for standards.
-		standards = groupedTrails.standard.splice(0, maxStandards);
+		standards = groupedTrails.standard.splice(
+			0,
+			// We allow 3 standards per columns
+			standardsConfig.columns * 3,
+		);
 	}
 
 	return (
@@ -408,9 +438,9 @@ export const DynamicFast = ({
 						</LI>
 					);
 				})}
-				{maxStandards > 0 && (
+				{standardsConfig.columns > 0 && (
 					<LI
-						percentage={standardsContainerWidth}
+						percentage={standardsConfig.containerWidth}
 						showTopMarginWhenStacked={true}
 					>
 						<UL direction="row" wrapCards={true}>
@@ -429,7 +459,9 @@ export const DynamicFast = ({
 									return (
 										<LI
 											key={card.url}
-											percentage={standardsCardWidth}
+											percentage={
+												standardsConfig.cardWidth
+											}
 											stretch={true}
 											showDivider={true}
 											padSides={true}
@@ -442,8 +474,8 @@ export const DynamicFast = ({
 													// Get leftover (modulo), if none fall back to columns as the whole bottom row
 													// won't want to be padded
 													(standards.length %
-														standardsColumns ||
-														standardsColumns)
+														standardsConfig.columns ||
+														standardsConfig.columns)
 											}
 											padBottomOnMobile={
 												cardIndex < standards.length - 1
