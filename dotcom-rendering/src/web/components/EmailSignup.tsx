@@ -23,9 +23,6 @@ const containerStyles = css`
 
 	${from.tablet} {
 		padding: ${space[2]}px ${space[3]}px;
-		& > div {
-			margin-bottom: -4px;
-		}
 	}
 `;
 
@@ -69,9 +66,7 @@ export const EmailSignup = ({ newsletter }: Props) => {
 				<p css={titleStyles(theme)}>
 					Sign up to <span>{name}</span> today
 				</p>
-				<div>
-					<NewsletterFrequency frequency={frequency} />
-				</div>
+				<NewsletterFrequency frequency={frequency} />
 			</div>
 			<p css={descriptionStyles}>{description}</p>
 			<SecureSignup
