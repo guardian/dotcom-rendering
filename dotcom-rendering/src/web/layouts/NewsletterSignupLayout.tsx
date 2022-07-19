@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import type { Breakpoint } from '@guardian/source-foundations';
 import {
 	brandAlt,
 	brandBackground,
@@ -12,10 +11,10 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import {
-	Button,
 	Column,
 	Columns,
-	SvgEnvelope,
+	Hide,
+	LinkButton,
 	SvgEye,
 	SvgGuardianLogo,
 } from '@guardian/source-react-components';
@@ -32,7 +31,8 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Nav } from '../components/Nav/Nav';
-import { NewsletterBadge } from '../components/NewslettersBadge';
+import { NewsletterBadge } from '../components/NewsletterBadge';
+import { NewsletterCategory } from '../components/NewsletterCategory';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { ShareIcons } from '../components/ShareIcons';
 import { Standfirst } from '../components/Standfirst';
@@ -112,13 +112,8 @@ const mainGraphicWrapperStyle = css`
 	margin: ${space[4]}px 0;
 `;
 
-const figcaptionStyle = css`
+const previewCaptionStyle = css`
 	display: flex;
-
-	${until.desktop} {
-		display: none;
-	}
-
 	background-color: ${brandAlt[400]};
 	align-items: center;
 	padding: ${space[1]}px;
@@ -130,86 +125,29 @@ const figcaptionStyle = css`
 	}
 `;
 
-type GuardianLogoSvgProps = {
-	palette: Palette;
-	showUntil?: Breakpoint;
-};
-const GuardianLogoSvg = ({ palette, showUntil }: GuardianLogoSvgProps) => {
-	const guardianLogoContainerStyle = showUntil
-		? css`
-				svg {
-					display: none;
-
-					${until[showUntil]} {
-						width: 65%;
-						display: block;
-					}
-				}
-		  `
-		: css`
-				svg {
-					max-width: 100%;
-				}
-		  `;
-
-	return (
-		<span css={guardianLogoContainerStyle}>
-			<SvgGuardianLogo
-				textColor={palette.fill.guardianLogo}
-				width={200}
-			/>
-		</span>
-	);
-};
-
-type NewsletterDetailProps = {
-	text: string;
-	showUntil?: Breakpoint;
-};
-
-const NewsletterDetail = ({ text, showUntil }: NewsletterDetailProps) => {
-	const displayRule = showUntil
-		? `
-	display: none;
-	${until[showUntil]} {
+const guardianLogoContainerStyle = css`
+	svg {
+		max-width: 100%;
 		display: flex;
+
+		${until.leftCol} {
+			width: 65%;
+			display: block;
+		}
 	}
-	`
-		: `display: flex;`;
+`;
 
-	const containerStyle = css`
-		${displayRule}
-		align-items: center;
-		padding-top: ${space[3]}px;
-		padding-bottom: ${space[2]}px;
-
-		svg {
-			background-color: ${brandAlt[400]};
-			border-radius: 50%;
-			padding: 2px;
-			margin-right: ${space[2]}px;
-		}
-
-		span {
-			${textSans.medium({ fontWeight: 'bold' })};
-		}
-	`;
-
-	return (
-		<div css={containerStyle}>
-			<SvgEnvelope size="small" />
-			<span>{text}</span>
-		</div>
-	);
-};
-
-type Props = {
+type NewsletterSignupLayoutProps = {
 	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 };
 
-export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
+export const NewsletterSignupLayout = ({
+	CAPIArticle,
+	NAV,
+	format,
+}: NewsletterSignupLayoutProps) => {
 	const {
 		config: { host },
 	} = CAPIArticle;
@@ -227,11 +165,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const palette = decidePalette(format);
 
-	/** Logic to show preview button or image wrapper
-		TODO:
-		- Include logic here for whether preview exists for the newsletter
-		(has preview URL available?)
-	*/
+	/**	TODO: include logic here for whether preview exists for the newsletter */
 	const showNewsletterPreview = true;
 
 	/** TODO: this data needs to come from the newsletters API */
@@ -337,15 +271,27 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					innerBackgroundColour={brandBackground.primary}
 					leftContent={
 						<div css={leftColWrapperStyle}>
-							<GuardianLogoSvg palette={palette} />
+							<Hide until="leftCol">
+								<span css={guardianLogoContainerStyle}>
+									<SvgGuardianLogo
+										textColor={palette.fill.guardianLogo}
+										width={200}
+									/>
+								</span>
+							</Hide>
 						</div>
 					}
 				>
 					<div css={mainColWrapperStyle}>
-						<GuardianLogoSvg
-							palette={palette}
-							showUntil="leftCol"
-						/>
+						<Hide from="leftCol">
+							<span css={guardianLogoContainerStyle}>
+								<SvgGuardianLogo
+									textColor={palette.fill.guardianLogo}
+									width={200}
+								/>
+							</span>
+						</Hide>
+
 						<span css={mainColNewsLettersBadgeContainerStyle}>
 							<NewsletterBadge />
 						</span>
@@ -356,15 +302,15 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					centralBorder="full"
 					sideBorders={true}
 					stretchRight={true}
-					leftContent={<NewsletterDetail text={newsletterCategory} />}
+					leftContent={
+						<NewsletterCategory text={newsletterCategory} />
+					}
 				>
 					<Columns collapseUntil="desktop">
 						<Column width={[1, 1, 5 / 8, 1 / 2, 1 / 2]}>
-							<NewsletterDetail
-								text={newsletterCategory}
-								showUntil="leftCol"
-							/>
-
+							<Hide from="leftCol">
+								<NewsletterCategory text={newsletterCategory} />
+							</Hide>
 							<ArticleHeadline
 								format={format}
 								headlineString={CAPIArticle.headline}
@@ -388,14 +334,14 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							*/}
 							{showNewsletterPreview && (
 								<div css={previewButtonWrapperStyle}>
-									<Button
+									<LinkButton
 										icon={<SvgEye />}
 										iconSide="left"
 										priority="tertiary"
 										size="xsmall"
 									>
 										Preview this newsletter
-									</Button>
+									</LinkButton>
 								</div>
 							)}
 
@@ -470,13 +416,15 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										- Accessibility?
 								 */}
 								{showNewsletterPreview && (
-									<figcaption css={figcaptionStyle}>
-										<SvgEye size="small" />
-										<span role="link">
-											Click here to see the latest version
-											of this newsletter
-										</span>
-									</figcaption>
+									<Hide until="desktop">
+										<figcaption css={previewCaptionStyle}>
+											<SvgEye size="small" />
+											<span role="link">
+												Click here to see the latest
+												version of this newsletter
+											</span>
+										</figcaption>
+									</Hide>
 								)}
 
 								<MainMedia
