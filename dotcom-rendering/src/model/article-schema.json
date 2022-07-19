@@ -1827,7 +1827,7 @@
                 "immersive",
                 "inline",
                 "inlineBox",
-                "inlineBoxNearPullQuote",
+                "inlineBoxClearAtAllBreakpoints",
                 "richLink",
                 "showcase",
                 "supporting",

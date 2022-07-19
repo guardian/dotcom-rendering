@@ -31,7 +31,7 @@ const roleCss = {
 		}
 	`,
 
-	inlineBoxNearPullQuote: css`
+	inlineBoxClearAtAllBreakpoints: css`
 		margin-top: ${space[3]}px;
 		margin-bottom: ${space[3]}px;
 		clear: both;
@@ -184,8 +184,8 @@ export const defaultRoleStyles = (
 			return roleCss.halfWidth;
 		case 'inlineBox':
 			return roleCss.inlineBox;
-		case 'inlineBoxNearPullQuote':
-			return roleCss.inlineBoxNearPullQuote;
+		case 'inlineBoxClearAtAllBreakpoints':
+			return roleCss.inlineBoxClearAtAllBreakpoints;
 		default:
 			return roleCss.inline;
 	}

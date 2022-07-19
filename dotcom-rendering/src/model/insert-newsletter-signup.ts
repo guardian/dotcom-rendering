@@ -58,6 +58,31 @@ export const findInsertIndex = (
 	return possiblePlaces[0]?.index || targetIndex;
 };
 
+const decideRole = (index: number, elements: CAPIElement[]): Weighting => {
+	const floatingElementRoleTypes = ['supporting', 'thumbnail'];
+
+	const lastFloatingElementBeforePlace = elements
+		.slice(0, index)
+		.reverse()
+		.find(
+			(element) =>
+				'role' in element &&
+				typeof element.role == 'string' &&
+				floatingElementRoleTypes.includes(element.role),
+		);
+
+	// Ideally wouldn't need to test for "'role' in element" again
+	const lastFloatingElementRole =
+		lastFloatingElementBeforePlace &&
+		'role' in lastFloatingElementBeforePlace
+			? lastFloatingElementBeforePlace.role
+			: undefined;
+
+	return lastFloatingElementRole === 'supporting'
+		? 'inlineBoxClearAtAllBreakpoints'
+		: 'inlineBox';
+};
+
 // NOTE: blog pages have different structure with multiple blocks of elements
 // any future function to place sign-up blocks in blog pages would need to
 // take this into acccount.
@@ -68,13 +93,12 @@ const insert = (
 	maxDistance = 0,
 ): CAPIElement[] => {
 	const index = findInsertIndex(elements, targetIndex, maxDistance);
-	const nearToPullQuote = isAfterPullQuote(index, elements);
 
 	elements.splice(index, 0, {
 		_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
 		newsletter: newsletter,
 		elementId: newsletter.elementId,
-		role: nearToPullQuote ? 'inlineBoxNearPullQuote' : 'inlineBox',
+		role: decideRole(index, elements),
 	});
 
 	return elements;
