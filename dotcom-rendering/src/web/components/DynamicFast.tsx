@@ -92,9 +92,6 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 										//Overrides
 										headlineSize="small"
 										imageUrl={undefined}
-										supportingContent={
-											card.supportingContent
-										}
 									/>
 								</LI>
 							);
