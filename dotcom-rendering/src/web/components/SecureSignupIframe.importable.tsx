@@ -249,7 +249,7 @@ export const SecureSignupIframe = ({
 
 		const body = iframe.contentDocument?.body;
 		const scrollHeight = body ? body.scrollHeight : 0;
-		setIFrameHeight(Math.max(0, requestedHeight, scrollHeight));
+		setIFrameHeight(Math.max(0, requestedHeight, scrollHeight + 15));
 	};
 
 	const resetIframeHeight = (): void => {
@@ -290,7 +290,7 @@ export const SecureSignupIframe = ({
 				ref={iframeRef}
 				css={css`
 					width: 100%;
-					min-height: 75px;
+					min-height: 90px;
 					overflow: hidden;
 				`}
 				style={{
@@ -303,7 +303,7 @@ export const SecureSignupIframe = ({
 					<head>
 						${styles}
 					</head>
-					<body style="margin: 0; overflow:hidden;">${html}</body>
+					<body style="margin: 0;">${html}</body>
 				</html>`}
 				onLoad={attachListenersToIframe}
 			/>
