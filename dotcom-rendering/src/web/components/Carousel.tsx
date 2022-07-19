@@ -426,7 +426,7 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 	</div>
 );
 
-export const Carousel: React.FC<Props> = ({
+export const Carousel = ({
 	heading,
 	trails,
 	ophanComponentName,
