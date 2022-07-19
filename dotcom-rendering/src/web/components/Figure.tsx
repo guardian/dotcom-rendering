@@ -2,15 +2,11 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from, space, until } from '@guardian/source-foundations';
 
-// Figures can use either the roles defined in CAPI (`RoleType`)
-// or the internal roles included in `Weighting`
-type FigureRoleType = Weighting | RoleType;
-
 type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
 	isMainMedia: boolean;
-	role?: FigureRoleType;
+	role?: RoleType | 'richLink';
 	id?: string;
 	className?: string;
 	type?: CAPIElement['_type'];
@@ -136,7 +132,7 @@ const roleCss = {
 
 // Used for vast majority of layouts.
 export const defaultRoleStyles = (
-	role: FigureRoleType,
+	role: RoleType | 'richLink',
 	format: ArticleFormat,
 ) => {
 	switch (role) {

@@ -619,7 +619,6 @@ type CAPIElement =
 // Misc
 // -------------------------------------
 
-// These values are agreed with editorial and should not be editted withouth discussion.
 type Weighting =
 	| 'inline'
 	| 'thumbnail'
@@ -627,7 +626,7 @@ type Weighting =
 	| 'showcase'
 	| 'halfwidth'
 	| 'immersive'
-	| 'richLink'; // Note, 'richLink', is used internally but do not exist upstream.
+	| 'richLink'; // Note, 'richLink' is used internally but does not exist upstream.
 
 // aka weighting. RoleType affects how an image is placed. It is called weighting
 // in Composer but role in CAPI. We respect CAPI so we maintain this nomenclature
