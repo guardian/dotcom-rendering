@@ -2,11 +2,15 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from, space, until } from '@guardian/source-foundations';
 
+// Figures can use either the roles defined in CAPI (`RoleType`)
+// or the internal roles included in `Weighting`
+type FigureRoleType = Weighting | RoleType;
+
 type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
 	isMainMedia: boolean;
-	role?: RoleType | 'richLink';
+	role?: FigureRoleType;
 	id?: string;
 	className?: string;
 	type?: CAPIElement['_type'];
@@ -16,6 +20,21 @@ const roleCss = {
 	inline: css`
 		margin-top: ${space[3]}px;
 		margin-bottom: ${space[3]}px;
+	`,
+
+	inlineBox: css`
+		margin-top: ${space[3]}px;
+		margin-bottom: ${space[3]}px;
+		clear: both;
+		${from.leftCol} {
+			clear: none;
+		}
+	`,
+
+	inlineBoxNearPullQuote: css`
+		margin-top: ${space[3]}px;
+		margin-bottom: ${space[3]}px;
+		clear: both;
 	`,
 
 	supporting: css`
@@ -132,7 +151,7 @@ const roleCss = {
 
 // Used for vast majority of layouts.
 export const defaultRoleStyles = (
-	role: RoleType | 'richLink',
+	role: FigureRoleType,
 	format: ArticleFormat,
 ) => {
 	switch (role) {
@@ -163,6 +182,10 @@ export const defaultRoleStyles = (
 			return roleCss.richLink;
 		case 'halfWidth':
 			return roleCss.halfWidth;
+		case 'inlineBox':
+			return roleCss.inlineBox;
+		case 'inlineBoxNearPullQuote':
+			return roleCss.inlineBoxNearPullQuote;
 		default:
 			return roleCss.inline;
 	}

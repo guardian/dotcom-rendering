@@ -290,7 +290,7 @@ interface NewsletterSignupBlockElement {
 	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement';
 	newsletter: Newsletter;
 	elementId: string;
-	nearToPullQuote?: boolean;
+	role?: Weighting;
 }
 
 interface NumberedTitleBlockElement {
@@ -626,7 +626,9 @@ type Weighting =
 	| 'showcase'
 	| 'halfwidth'
 	| 'immersive'
-	| 'richLink'; // Note, 'richLink' is used internally but does not exist upstream.
+	| 'richLink' // Note, 'richLink', 'inlineBox' and 'inlineBoxNearPullQuote' are used internally but do not exist upstream.
+	| 'inlineBox'
+	| 'inlineBoxNearPullQuote';
 
 // aka weighting. RoleType affects how an image is placed. It is called weighting
 // in Composer but role in CAPI. We respect CAPI so we maintain this nomenclature

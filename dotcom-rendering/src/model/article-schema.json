@@ -1826,6 +1826,8 @@
                 "halfwidth",
                 "immersive",
                 "inline",
+                "inlineBox",
+                "inlineBoxNearPullQuote",
                 "richLink",
                 "showcase",
                 "supporting",
@@ -2183,8 +2185,8 @@
                 "elementId": {
                     "type": "string"
                 },
-                "nearToPullQuote": {
-                    "type": "boolean"
+                "role": {
+                    "$ref": "#/definitions/Weighting"
                 }
             },
             "required": [
