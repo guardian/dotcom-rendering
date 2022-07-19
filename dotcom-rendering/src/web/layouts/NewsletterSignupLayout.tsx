@@ -160,6 +160,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						urls={CAPIArticle.nav.readerRevenueLinks.header}
 						remoteHeader={CAPIArticle.config.switches.remoteHeader}
 						contributionsServiceUrl={contributionsServiceUrl}
+						idApiUrl={CAPIArticle.config.idApiUrl}
 					/>
 				</ElementContainer>
 				<ElementContainer

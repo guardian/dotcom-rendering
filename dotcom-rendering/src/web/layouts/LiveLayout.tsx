@@ -45,7 +45,6 @@ import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
-import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Standfirst } from '../components/Standfirst';
@@ -278,12 +277,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `CAPIArticle.config.shouldHideReaderRevenue` equals false.
 
-	const seriesTag = CAPIArticle.tags.find(
-		(tag) => tag.type === 'Series' || tag.type === 'Blog',
-	);
-
-	const showOnwardsLower = seriesTag && CAPIArticle.hasStoryPackage;
-
 	// Set a default pagination if it is missing from CAPI
 	const pagination: Pagination = CAPIArticle.pagination ?? {
 		currentPage: 1,
@@ -364,6 +357,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								CAPIArticle.config.switches.remoteHeader
 							}
 							contributionsServiceUrl={contributionsServiceUrl}
+							idApiUrl={CAPIArticle.config.idApiUrl}
 						/>
 					</ElementContainer>
 
@@ -1263,24 +1257,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							shortUrlId={CAPIArticle.config.shortUrlId}
 						/>
 					</Island>
-
-					{showOnwardsLower && (
-						<ElementContainer
-							sectionId="onwards-lower"
-							element="section"
-						>
-							<Island clientOnly={true} deferUntil="visible">
-								<OnwardsLower
-									ajaxUrl={CAPIArticle.config.ajaxUrl}
-									hasStoryPackage={
-										CAPIArticle.hasStoryPackage
-									}
-									tags={CAPIArticle.tags}
-									format={format}
-								/>
-							</Island>
-						</ElementContainer>
-					)}
 
 					{!isPaidContent && CAPIArticle.isCommentable && (
 						<ElementContainer

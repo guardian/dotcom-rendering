@@ -35,7 +35,6 @@ import { LabsHeader } from '../components/LabsHeader.importable';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
-import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
@@ -218,12 +217,6 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		adUnit: CAPIArticle.config.adUnit,
 	});
 
-	const seriesTag = CAPIArticle.tags.find(
-		(tag) => tag.type === 'Series' || tag.type === 'Blog',
-	);
-
-	const showOnwardsLower = seriesTag && CAPIArticle.hasStoryPackage;
-
 	const showComments = CAPIArticle.isCommentable;
 
 	const { branding } =
@@ -284,6 +277,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								contributionsServiceUrl={
 									contributionsServiceUrl
 								}
+								idApiUrl={CAPIArticle.config.idApiUrl}
 							/>
 						</ElementContainer>
 					</div>
@@ -640,22 +634,6 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
 				</Island>
-
-				{showOnwardsLower && (
-					<ElementContainer
-						sectionId="onwards-lower"
-						element="section"
-					>
-						<Island clientOnly={true} deferUntil="visible">
-							<OnwardsLower
-								ajaxUrl={CAPIArticle.config.ajaxUrl}
-								hasStoryPackage={CAPIArticle.hasStoryPackage}
-								tags={CAPIArticle.tags}
-								format={format}
-							/>
-						</Island>
-					</ElementContainer>
-				)}
 
 				{!isPaidContent && showComments && (
 					<ElementContainer

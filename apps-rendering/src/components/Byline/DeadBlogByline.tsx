@@ -6,7 +6,7 @@ import { DefaultByline } from './Byline.defaults';
 import { blogColor } from './LiveBlogByline';
 
 const blogStyles = css`
-	${headline.xxxsmall({ lineHeight: 'regular', fontStyle: 'italic' })}
+	${headline.xxxsmall({ lineHeight: 'tight', fontStyle: 'italic' })}
 `;
 
 const blogAnchorStyles = css`
