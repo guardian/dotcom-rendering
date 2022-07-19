@@ -799,16 +799,6 @@ type CAPIOnwardsType = {
 	isCuratedContent?: boolean;
 };
 
-type OnwardsType = {
-	heading: string;
-	trails: TrailType[];
-	description?: string;
-	url?: string;
-	ophanComponentName: OphanComponentName;
-	format: ArticleFormat;
-	isCuratedContent?: boolean;
-};
-
 type OphanComponentName =
 	| 'series'
 	| 'more-on-this-story'
