@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 // ----- Imports ----- //
 
 import { matchers } from '@emotion/jest';
