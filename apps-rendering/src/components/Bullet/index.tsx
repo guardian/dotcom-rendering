@@ -2,10 +2,10 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
-import { getThemeStyles } from 'themeStyles';
 
 // ----- Component ----- //
 
@@ -14,27 +14,23 @@ interface Props {
 	text: string;
 }
 
-const styles = (format: ArticleFormat): SerializedStyles => {
-	const { kicker, inverted } = getThemeStyles(format.theme);
+const styles = (format: ArticleFormat): SerializedStyles => css`
+	color: transparent;
+	display: inline-block;
 
-	return css`
-		color: transparent;
+	&::before {
+		content: '';
+		background-color: ${background.bullet(format)};
+		width: 1rem;
+		height: 1rem;
+		border-radius: 0.5rem;
 		display: inline-block;
-
-		&::before {
-			content: '';
-			background-color: ${kicker};
-			width: 1rem;
-			height: 1rem;
-			border-radius: 0.5rem;
-			display: inline-block;
-			vertical-align: middle;
-			${darkModeCss`
-                background-color: ${inverted};
+		vertical-align: middle;
+		${darkModeCss`
+                background-color: ${background.bulletDark(format, true)};
             `}
-		}
-	`;
-};
+	}
+`;
 
 const Bullet: FC<Props> = ({ format, text }) => (
 	<>

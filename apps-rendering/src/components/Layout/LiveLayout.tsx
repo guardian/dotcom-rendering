@@ -186,13 +186,14 @@ const LiveLayout: FC<Props> = ({ item }) => {
 						<LiveBlocks
 							blocks={item.pagedBlocks.currentPage.blocks}
 							format={item}
+							pageNumber={item.pagedBlocks.currentPage.pageNumber}
 						/>
 						{pagination}
 					</div>
 				</GridItem>
 			</main>
 			<section css={articleWidthStyles}>
-				<Tags tags={item.tags} format={item} />
+				<Tags item={item} />
 			</section>
 			<section css={onwardStyles}>
 				<RelatedContent content={item.relatedContent} />

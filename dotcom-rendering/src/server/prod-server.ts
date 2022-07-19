@@ -12,6 +12,7 @@ import {
 	renderPerfTest as renderArticlePerfTest,
 	renderBlocks,
 	renderFront,
+	renderFrontJson,
 	renderInteractive,
 	renderKeyEvents,
 } from '../web/server';
@@ -57,6 +58,7 @@ export const prodServer = (): void => {
 	app.post('/Blocks', logRenderTime, renderBlocks);
 	app.post('/KeyEvents', logRenderTime, renderKeyEvents);
 	app.post('/Front', logRenderTime, renderFront);
+	app.post('/FrontJSON', logRenderTime, renderFrontJson);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
@@ -96,6 +98,21 @@ export const prodServer = (): void => {
 			// Eg. http://localhost:9000/Front?url=https://www.theguardian.com/uk/sport
 			try {
 				return renderFront(req, res);
+			} catch (error) {
+				console.error(error);
+			}
+		},
+	);
+
+	app.get(
+		'/FrontJSON',
+		logRenderTime,
+		// TODO: ensure getContentFromURLMiddleware supports fronts
+		getContentFromURLMiddleware,
+		async (req: Request, res: Response) => {
+			// Eg. http://localhost:9000/FrontJSON?url=https://www.theguardian.com/uk/sport
+			try {
+				return renderFrontJson(req, res);
 			} catch (error) {
 				console.error(error);
 			}

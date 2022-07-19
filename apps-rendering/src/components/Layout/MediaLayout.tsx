@@ -37,46 +37,45 @@ interface Props {
 	children: ReactNode[];
 }
 
-const MediaLayout: FC<Props> = ({ item, children }) => (
-	<main css={[Styles]}>
-		<article css={BorderStyles}>
-			<header>
-				<MainMedia
-					format={getFormat(item)}
-					mainMedia={item.mainMedia}
-				/>
-				<div css={articleWidthStyles}>
-					<Series series={item.series} theme={item.theme} />
-				</div>
-				<Headline item={item} />
-				<div css={articleWidthStyles}>
-					<Standfirst item={item} />
-				</div>
-				<section>
-					<Byline
-						publicationDate={item.publishDate}
-						className={articleWidthStyles}
-						item={item}
+const MediaLayout: FC<Props> = ({ item, children }) => {
+	const format = getFormat(item);
+	return (
+		<main css={[Styles]}>
+			<article css={BorderStyles}>
+				<header>
+					<MainMedia
+						format={getFormat(item)}
+						mainMedia={item.mainMedia}
 					/>
+					<div css={articleWidthStyles}>
+						<Series series={item.series} format={format} />
+					</div>
+					<Headline item={item} />
+					<div css={articleWidthStyles}>
+						<Standfirst item={item} />
+					</div>
+					<section>
+						<Byline
+							publicationDate={item.publishDate}
+							className={articleWidthStyles}
+							item={item}
+						/>
+					</section>
+				</header>
+				<Body className={[articleWidthStyles]} format={item}>
+					{children}
+				</Body>
+				<section css={articleWidthStyles}>
+					<Tags tags={item.tags} />
 				</section>
-			</header>
-			<Body
-				theme={item.theme}
-				className={[articleWidthStyles]}
-				format={item}
-			>
-				{children}
-			</Body>
-			<section css={articleWidthStyles}>
-				<Tags tags={item.tags} />
+			</article>
+			<section css={onwardStyles}>
+				<RelatedContent content={item.relatedContent} />
 			</section>
-		</article>
-		<section css={onwardStyles}>
-			<RelatedContent content={item.relatedContent} />
-		</section>
-		<Footer isCcpa={false} format={item} />
-	</main>
-);
+			<Footer isCcpa={false} format={item} />
+		</main>
+	);
+};
 
 // ----- Exports ----- //
 

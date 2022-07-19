@@ -5,6 +5,7 @@ import {
 	renderArticleJson,
 	renderBlocks,
 	renderFront,
+	renderFrontJson,
 	renderInteractive,
 	renderKeyEvents,
 } from '../web/server';
@@ -30,6 +31,8 @@ export const devServer = () => {
 				return renderKeyEvents(req, res);
 			case '/Front':
 				return renderFront(req, res);
+			case '/FrontJSON':
+				return renderFrontJson(req, res);
 			default:
 				next();
 		}

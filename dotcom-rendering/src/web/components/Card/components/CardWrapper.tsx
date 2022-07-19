@@ -2,6 +2,10 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { from, neutral } from '@guardian/source-foundations';
+import type {
+	DCRContainerPalette,
+	DCRContainerType,
+} from '../../../../types/front';
 import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {

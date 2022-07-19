@@ -1,6 +1,5 @@
 import type { ABTest } from '@guardian/ab-core';
 import { abTestTest } from './tests/ab-test-test';
-import { commercialEndOfQuarter2Test } from './tests/commercial-end-of-quarter-2-test';
 import { multiStickyRightAds } from './tests/multi-sticky-right-ads';
 import {
 	newsletterMerchUnitLighthouseControl,
@@ -17,6 +16,5 @@ export const tests: ABTest[] = [
 	signInGateMainControl,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
-	commercialEndOfQuarter2Test,
 	multiStickyRightAds,
 ];

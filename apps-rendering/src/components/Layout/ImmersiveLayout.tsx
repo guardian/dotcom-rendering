@@ -8,6 +8,7 @@ import MainMedia, { ImmersiveCaption } from 'components/MainMedia';
 import Metadata from 'components/Metadata';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
+import Tags from 'components/Tags';
 import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
 import type { Item } from 'item';
@@ -50,14 +51,6 @@ const linesStyles = css`
 	}
 `;
 
-const tagsStyles = css`
-	${grid.column.centre}
-
-	${from.leftCol} {
-		grid-row: 4;
-	}
-`;
-
 type Props = {
 	item: Item;
 };
@@ -85,7 +78,7 @@ const ImmersiveLayout: FC<Props> = ({ item, children }) => (
 					<StraightLines cssOverrides={linesStyles} />
 					<Metadata item={item} />
 					<div css={bodyStyles}>{children}</div>
-					<section css={tagsStyles}>Tags</section>
+					<Tags item={item} />
 				</div>
 			</article>
 		</main>

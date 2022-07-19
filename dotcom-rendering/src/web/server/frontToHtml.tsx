@@ -5,6 +5,7 @@ import { renderToString } from 'react-dom/server';
 import { getScriptArrayFromFile } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { makeFrontWindowGuardian } from '../../model/window-guardian';
+import type { DCRFrontType } from '../../types/front';
 import { FrontPage } from '../components/FrontPage';
 import { frontTemplate } from './frontTemplate';
 
