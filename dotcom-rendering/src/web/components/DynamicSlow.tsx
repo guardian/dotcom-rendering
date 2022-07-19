@@ -33,6 +33,7 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 						imagePositionOnMobile="top"
 						imageSize="large"
 						supportingContent={primary.supportingContent}
+						trailText={primary.trailText}
 					/>
 				</LI>
 				<LI
@@ -73,6 +74,7 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 											card.supportingContent
 										}
 										imagePositionOnMobile="none"
+										trailText={card.trailText}
 									/>
 								</LI>
 							);

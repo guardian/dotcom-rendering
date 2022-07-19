@@ -29,6 +29,7 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 						imagePositionOnMobile="top"
 						imageSize="large"
 						supportingContent={primary.supportingContent}
+						trailText={primary.trailText}
 					/>
 				</LI>
 				<LI
