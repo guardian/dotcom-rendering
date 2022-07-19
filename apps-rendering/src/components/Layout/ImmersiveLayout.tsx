@@ -6,6 +6,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import Headline from 'components/Headline';
 import MainMedia, { ImmersiveCaption } from 'components/MainMedia';
 import Metadata from 'components/Metadata';
+import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
@@ -82,7 +83,7 @@ const ImmersiveLayout: FC<Props> = ({ item, children }) => (
 				</div>
 			</article>
 		</main>
-		<aside>Related content</aside>
+		<RelatedContent item={item} />
 		<aside>Comments</aside>
 		<footer>Footer</footer>
 	</>
