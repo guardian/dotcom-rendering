@@ -1007,20 +1007,16 @@ type AdSlotType =
 // 3rd party type declarations //
 // ------------------------------
 
-declare module 'compose-function' {
-	const compose: any;
-	// eslint-disable-next-line import/no-default-export -- TODO: use type definition @types/compose-function
-	export default compose;
-}
-declare module 'minify-css-string' {
-	const minifyCSSString: any;
-	// eslint-disable-next-line import/no-default-export -- it’s that 6yo module works
-	export default minifyCSSString;
-}
 declare module 'chromatic/isChromatic';
 
 declare module 'dynamic-import-polyfill' {
-	export const initialize: any;
+	export const initialize: ({
+		modulePath,
+		importFunctionName,
+	}: {
+		modulePath?: string;
+		importFunctionName?: string;
+	}) => void;
 }
 
 // ------------------------------------- //

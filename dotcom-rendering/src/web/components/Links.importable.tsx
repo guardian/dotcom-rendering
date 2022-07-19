@@ -7,11 +7,18 @@ import {
 	from,
 	textSans,
 } from '@guardian/source-foundations';
+import { useEffect, useState } from 'react';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
 import ProfileIcon from '../../static/icons/profile.svg';
 import SearchIcon from '../../static/icons/search.svg';
 import { getZIndex } from '../lib/getZIndex';
+import {
+	addNotificationsToDropdownLinks,
+	mapBrazeCardsToNotifications,
+} from '../lib/notification';
+import type { Notification } from '../lib/notification';
 import { useApi } from '../lib/useApi';
+import { useBraze } from '../lib/useBraze';
 import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
 
@@ -20,6 +27,7 @@ type Props = {
 	discussionApiUrl: string;
 	idUrl?: string;
 	mmaUrl?: string;
+	idApiUrl: string;
 };
 
 const linkStyles = css`
@@ -147,15 +155,76 @@ const SignIn = ({ idUrl }: { idUrl: string }) => (
 	</a>
 );
 
-const MyAccount = ({
-	mmaUrl,
-	idUrl,
-	discussionApiUrl,
-}: {
+export const buildIdentityLinks = (
+	mmaUrl: string,
+	idUrl: string,
+	userId: string,
+): DropdownLinkType[] => {
+	/**
+	 * Note: the IDs in here are used by Braze to target notifications so should
+	 * be unique. Please check with Marketing Tools/TX before changing!
+	 */
+	const links = [
+		{
+			id: 'account_overview',
+			url: `${mmaUrl}/`,
+			title: 'Account overview',
+			dataLinkName: 'nav2 : topbar : account overview',
+		},
+		{
+			id: 'edit_profile',
+			url: `${mmaUrl}/public-settings`,
+			title: 'Profile',
+			dataLinkName: 'nav2 : topbar : edit profile',
+		},
+		{
+			id: 'email_prefs',
+			url: `${mmaUrl}/email-prefs`,
+			title: 'Emails & marketing',
+			dataLinkName: 'nav2 : topbar : email prefs',
+		},
+		{
+			id: 'settings',
+			url: `${mmaUrl}/account-settings`,
+			title: 'Settings',
+			dataLinkName: 'nav2 : topbar : settings',
+		},
+		{
+			id: 'help',
+			url: `${mmaUrl}/help`,
+			title: 'Help',
+			dataLinkName: 'nav2 : topbar : help',
+		},
+		{
+			id: 'comment_activity',
+			url: `${idUrl}/user/id/${userId}`,
+			title: 'Comments & replies',
+			dataLinkName: 'nav2 : topbar : comment activity',
+		},
+		{
+			id: 'sign_out',
+			url: `${idUrl}/signout`,
+			title: 'Sign out',
+			dataLinkName: 'nav2 : topbar : sign out',
+		},
+	];
+
+	return links;
+};
+
+interface MyAccountWithNotificationsProps {
 	mmaUrl: string;
 	idUrl: string;
 	discussionApiUrl: string;
-}) => {
+	notifications: Notification[];
+}
+
+const MyAccountWithNotifications = ({
+	mmaUrl,
+	idUrl,
+	discussionApiUrl,
+	notifications,
+}: MyAccountWithNotificationsProps) => {
 	const { data, error } = useApi<{ userProfile: UserProfile }>(
 		joinUrl(discussionApiUrl, 'profile/me?strict_sanctions_check=false'),
 		{},
@@ -168,54 +237,50 @@ const MyAccount = ({
 	// SWR will retry in the background if the request failed
 	if (error || !data?.userProfile.userId) return <SignIn idUrl={idUrl} />;
 
-	const identityLinks: DropdownLinkType[] = [
-		{
-			url: `${mmaUrl}/`,
-			title: 'Account overview',
-			dataLinkName: 'nav2 : topbar : account overview',
-		},
-		{
-			url: `${mmaUrl}/public-settings`,
-			title: 'Profile',
-			dataLinkName: 'nav2 : topbar : edit profile',
-		},
-		{
-			url: `${mmaUrl}/email-prefs`,
-			title: 'Emails & marketing',
-			dataLinkName: 'nav2 : topbar : email prefs',
-		},
-		{
-			url: `${mmaUrl}/account-settings`,
-			title: 'Settings',
-			dataLinkName: 'nav2 : topbar : settings',
-		},
-		{
-			url: `${mmaUrl}/help`,
-			title: 'Help',
-			dataLinkName: 'nav2 : topbar : help',
-		},
-		{
-			url: `${idUrl}/user/id/${data.userProfile.userId}`,
-			title: 'Comments & replies',
-			dataLinkName: 'nav2 : topbar : comment activity',
-		},
-		{
-			url: `${idUrl}/signout`,
-			title: 'Sign out',
-			dataLinkName: 'nav2 : topbar : sign out',
-		},
-	];
+	const identityLinks = buildIdentityLinks(
+		mmaUrl,
+		idUrl,
+		data.userProfile.userId,
+	);
+
+	const identityLinksWithNotifications = addNotificationsToDropdownLinks(
+		identityLinks,
+		notifications,
+	);
 
 	return (
 		<div css={linkStyles}>
 			<ProfileIcon />
 			<Dropdown
 				label="My account"
-				links={identityLinks}
+				links={identityLinksWithNotifications}
 				id="my-account"
 				dataLinkName="nav2 : topbar: my account"
 			/>
 		</div>
+	);
+};
+
+interface MyAccountProps {
+	mmaUrl: string;
+	idUrl: string;
+	discussionApiUrl: string;
+	idApiUrl: string;
+}
+
+const MyAccount = ({ idApiUrl, ...props }: MyAccountProps) => {
+	const { brazeCards } = useBraze(idApiUrl);
+	const [notifications, setNotifications] = useState<Notification[]>([]);
+
+	useEffect(() => {
+		if (brazeCards) {
+			const cards = brazeCards.getCardsForProfileBadge();
+			setNotifications(mapBrazeCardsToNotifications(cards));
+		}
+	}, [brazeCards]);
+
+	return (
+		<MyAccountWithNotifications {...props} notifications={notifications} />
 	);
 };
 
@@ -224,6 +289,7 @@ export const Links = ({
 	discussionApiUrl: discussionApiUrlFromConfig,
 	idUrl: idUrlServerFromConfig,
 	mmaUrl: mmaUrlServerFromConfig,
+	idApiUrl,
 }: Props) => {
 	// Fall back on prod URLs just in case these aren't set for any reason
 	const discussionApiUrl =
@@ -284,6 +350,7 @@ export const Links = ({
 						mmaUrl={mmaUrl}
 						idUrl={idUrl}
 						discussionApiUrl={discussionApiUrl}
+						idApiUrl={idApiUrl}
 					/>
 				) : (
 					<SignIn idUrl={idUrl} />

@@ -24,6 +24,7 @@ type Props = {
 	urls: ReaderRevenueCategories;
 	remoteHeader: boolean;
 	contributionsServiceUrl: string;
+	idApiUrl: string;
 };
 
 export const Header = ({
@@ -35,6 +36,7 @@ export const Header = ({
 	urls,
 	remoteHeader,
 	contributionsServiceUrl,
+	idApiUrl,
 }: Props) => (
 	<div css={headerStyles}>
 		<Hide when="below" breakpoint="desktop">
@@ -63,6 +65,7 @@ export const Header = ({
 					idUrl={idUrl}
 					mmaUrl={mmaUrl}
 					discussionApiUrl={discussionApiUrl}
+					idApiUrl={idApiUrl}
 				/>
 			</Island>
 		</div>

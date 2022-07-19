@@ -10,10 +10,13 @@ type Props = {
  * on every page
  */
 export const BrazeMessaging = ({ idApiUrl }: Props) => {
-	const { brazeMessages } = useBraze(idApiUrl);
+	const { brazeMessages, brazeCards } = useBraze(idApiUrl);
 
 	if (brazeMessages) {
 		log('tx', 'Braze Messages Interface loaded', brazeMessages);
+	}
+	if (brazeCards) {
+		log('tx', 'Braze Cards Interface loaded', brazeCards);
 	}
 
 	// we don’t render anything
