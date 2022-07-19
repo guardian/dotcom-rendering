@@ -30,7 +30,6 @@ export const Default = () => (
 		centralBorder="partial"
 	>
 		<EmailSignup
-			elementId="ElementID"
 			newsletter={{
 				listId: 123,
 				identityName: 'patriarchy',

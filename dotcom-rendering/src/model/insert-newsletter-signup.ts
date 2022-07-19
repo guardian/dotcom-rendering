@@ -74,7 +74,7 @@ const insert = (
 		_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
 		newsletter: newsletter,
 		elementId: newsletter.elementId,
-		nearToPullQuote,
+		role: nearToPullQuote ? 'inlineBoxNearPullQuote' : 'inlineBox',
 	});
 
 	return elements;

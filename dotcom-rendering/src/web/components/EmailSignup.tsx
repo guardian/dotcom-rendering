@@ -12,7 +12,6 @@ import { SecureSignup } from './SecureSignup';
 
 type Props = {
 	newsletter: Newsletter;
-	elementId: string;
 };
 
 const containerStyles = css`

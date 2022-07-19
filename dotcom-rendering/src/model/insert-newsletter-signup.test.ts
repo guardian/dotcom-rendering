@@ -23,7 +23,7 @@ const sampleNewsletterSignupBlockElement: CAPIElement = {
 	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
 	elementId: 'ElementID',
 	newsletter: sampleNewsletter,
-	nearToPullQuote: false,
+	role: 'inlineBox',
 };
 
 const toElementTypeLists = (blocks: Block[]): string[][] =>
