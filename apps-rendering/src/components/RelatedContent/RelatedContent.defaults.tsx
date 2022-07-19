@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
-import { css, SerializedStyles } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import {
 	from,
@@ -22,7 +23,7 @@ import { darkModeCss } from 'styles';
 
 interface Props {
 	content: Option<ResizedRelatedContent>;
-    css: SerializedStyles;
+	css: SerializedStyles;
 	className?: string;
 }
 
@@ -145,8 +146,6 @@ const DefaultRelatedContent: FC<Props> = ({ content, className }) => {
 
 // ----- Exports ----- //
 
-export {
-	defaultStyles,
-}
+export { defaultStyles };
 
 export default DefaultRelatedContent;
