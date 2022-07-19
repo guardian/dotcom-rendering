@@ -290,7 +290,7 @@ interface NewsletterSignupBlockElement {
 	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement';
 	newsletter: Newsletter;
 	elementId: string;
-	role?: Weighting;
+	clearFromLeftCol?: boolean;
 }
 
 interface NumberedTitleBlockElement {
@@ -619,6 +619,7 @@ type CAPIElement =
 // Misc
 // -------------------------------------
 
+// These values are agreed with editorial and should not be editted withouth discussion.
 type Weighting =
 	| 'inline'
 	| 'thumbnail'
@@ -626,9 +627,7 @@ type Weighting =
 	| 'showcase'
 	| 'halfwidth'
 	| 'immersive'
-	| 'richLink' // Note, 'richLink', 'inlineBox' and 'inlineBoxClearAtAllBreakpoints' are used internally but do not exist upstream.
-	| 'inlineBox'
-	| 'inlineBoxClearAtAllBreakpoints';
+	| 'richLink'; // Note, 'richLink', is used internally but do not exist upstream.
 
 // aka weighting. RoleType affects how an image is placed. It is called weighting
 // in Composer but role in CAPI. We respect CAPI so we maintain this nomenclature

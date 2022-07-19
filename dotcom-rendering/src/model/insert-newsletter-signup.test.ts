@@ -23,12 +23,12 @@ const SIGNUP_BLOCK_ELEMENT: CAPIElement = {
 	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
 	elementId: 'ElementID',
 	newsletter: NEWSLETTER,
-	role: 'inlineBox',
+	clearFromLeftCol: false,
 };
 
 const SIGNUP_BLOCK_ELEMENT_CLEAR: CAPIElement = {
 	...SIGNUP_BLOCK_ELEMENT,
-	role: 'inlineBoxClearAtAllBreakpoints',
+	clearFromLeftCol: true,
 };
 
 const toElementTypeLists = (blocks: Block[]): string[][] =>

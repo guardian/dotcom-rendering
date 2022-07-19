@@ -22,21 +22,6 @@ const roleCss = {
 		margin-bottom: ${space[3]}px;
 	`,
 
-	inlineBox: css`
-		margin-top: ${space[3]}px;
-		margin-bottom: ${space[3]}px;
-		clear: both;
-		${from.leftCol} {
-			clear: none;
-		}
-	`,
-
-	inlineBoxClearAtAllBreakpoints: css`
-		margin-top: ${space[3]}px;
-		margin-bottom: ${space[3]}px;
-		clear: both;
-	`,
-
 	supporting: css`
 		clear: left;
 		margin-top: ${space[3]}px;
@@ -182,10 +167,6 @@ export const defaultRoleStyles = (
 			return roleCss.richLink;
 		case 'halfWidth':
 			return roleCss.halfWidth;
-		case 'inlineBox':
-			return roleCss.inlineBox;
-		case 'inlineBoxClearAtAllBreakpoints':
-			return roleCss.inlineBoxClearAtAllBreakpoints;
 		default:
 			return roleCss.inline;
 	}

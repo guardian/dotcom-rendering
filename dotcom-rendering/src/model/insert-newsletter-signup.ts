@@ -63,15 +63,17 @@ export const findInsertIndex = (
 };
 
 /**
- * Determines what role an inlineBox element should have based on whether
- * the last floating element before it (if any) was 'supporting' or
- * 'thumbnail'.
+ * Determines whether the element should have clear:both
+ * for all breakpoints
  *
- * @param index where in the array the inlineBox element will be inserted
+ * @param index where in the array the element will be inserted
  * @param elements the array of elements
- * @returns the role the inlineBox element should have
+ * @returns whether the element should have clear:both for all breakpoints
  */
-const decideRole = (index: number, elements: CAPIElement[]): Weighting => {
+const decideIfClearFromLeftCol = (
+	index: number,
+	elements: CAPIElement[],
+): boolean => {
 	const floatingElementRoleTypes = ['supporting', 'thumbnail', 'richLink'];
 
 	const lastFloatingElementBeforePlace = elements
@@ -91,9 +93,7 @@ const decideRole = (index: number, elements: CAPIElement[]): Weighting => {
 			? lastFloatingElementBeforePlace.role
 			: undefined;
 
-	return lastFloatingElementRole === 'supporting'
-		? 'inlineBoxClearAtAllBreakpoints'
-		: 'inlineBox';
+	return lastFloatingElementRole === 'supporting';
 };
 
 // NOTE: blog pages have different structure with multiple blocks of elements
@@ -111,7 +111,7 @@ const insert = (
 		_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
 		newsletter: newsletter,
 		elementId: newsletter.elementId,
-		role: decideRole(index, elements),
+		clearFromLeftCol: decideIfClearFromLeftCol(index, elements),
 	});
 
 	return elements;

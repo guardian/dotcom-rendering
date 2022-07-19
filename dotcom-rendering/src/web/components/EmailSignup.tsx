@@ -12,13 +12,19 @@ import { SecureSignup } from './SecureSignup';
 
 type Props = {
 	newsletter: Newsletter;
+	clearFromLeftCol?: boolean;
 };
 
-const containerStyles = css`
+const containerStyles = (clearFromLeftCol?: boolean) => css`
 	border: ${neutral[0]} 3px dashed;
 	border-radius: 12px;
 	padding: 10px;
 	margin-bottom: ${space[3]}px;
+	clear: both;
+
+	${from.leftCol} {
+		clear: ${clearFromLeftCol ? 'clear' : 'none'};
+	}
 `;
 
 const stackBelowTabletStyles = css`
@@ -43,7 +49,7 @@ const descriptionStyles = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-export const EmailSignup = ({ newsletter }: Props) => {
+export const EmailSignup = ({ newsletter, clearFromLeftCol }: Props) => {
 	const {
 		identityName,
 		name,
@@ -54,7 +60,7 @@ export const EmailSignup = ({ newsletter }: Props) => {
 	} = newsletter;
 
 	return (
-		<aside css={containerStyles}>
+		<aside css={containerStyles(clearFromLeftCol)}>
 			<div css={stackBelowTabletStyles}>
 				<p css={titleStyles(theme)}>
 					Sign up to <span>{name}</span> today

@@ -1826,8 +1826,6 @@
                 "halfwidth",
                 "immersive",
                 "inline",
-                "inlineBox",
-                "inlineBoxClearAtAllBreakpoints",
                 "richLink",
                 "showcase",
                 "supporting",
@@ -2185,8 +2183,8 @@
                 "elementId": {
                     "type": "string"
                 },
-                "role": {
-                    "$ref": "#/definitions/Weighting"
+                "clearFromLeftCol": {
+                    "type": "boolean"
                 }
             },
             "required": [

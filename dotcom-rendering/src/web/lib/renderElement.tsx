@@ -451,7 +451,13 @@ export const renderElement = ({
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
-			return [true, <EmailSignup newsletter={element.newsletter} />];
+			return [
+				true,
+				<EmailSignup
+					newsletter={element.newsletter}
+					clearFromLeftCol={element.clearFromLeftCol}
+				/>,
+			];
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return [
 				true,
