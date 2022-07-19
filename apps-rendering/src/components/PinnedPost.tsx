@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { border } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleFormat, timeAgo } from '@guardian/libs';
 import {
     focusHalo,
@@ -16,11 +17,9 @@ import {
 	SvgPlus,
 } from '@guardian/source-react-components';
 import { LiveBlock } from 'liveBlock';
-import { decidePalette } from '../lib/decidePalette';
 
-
-const pinnedPostContainer = (palette: Palette) => css`
-    border: 3px solid ${palette.border.pinnedPost};
+const pinnedPostContainer = (format: ArticleFormat) => css`
+    border: 3px solid ${border.borderPinnedPost(format)};
     padding-bottom: ${space[1]}px;
 	position: relative;
 	background: ${neutral[100]};
@@ -49,8 +48,8 @@ const pinnedPostContainer = (palette: Palette) => css`
 
 `;
 
-const rowStyles = (palette: Palette) => css`
-	background: ${palette.border.pinnedPost};
+const rowStyles = (format: ArticleFormat) => css`
+	background: ${border.borderPinnedPost(format)};
 	height: 32px;
 	display: flex;
 	align-items: center;
@@ -84,7 +83,7 @@ const overlayStyles = css`
 	display: block;
 `;
 
-const fakeButtonStyles = (palette: Palette) => css`
+const fakeButtonStyles = (format: ArticleFormat) => css`
 	display: inline-flex;
 	justify-content: space-between;
 	align-items: center;
@@ -100,7 +99,7 @@ const fakeButtonStyles = (palette: Palette) => css`
 	&:focus {
 		${focusHalo};
 	}
-	background: ${palette.border.pinnedPost};
+	background: ${border.borderPinnedPost(format)};
 	margin-left: 10px;
 	position: absolute;
 	bottom: -24px;
@@ -141,11 +140,10 @@ type Props = {
 };
 
 export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
-	const palette = decidePalette(format);
 	return (
 		<div
 			id="pinned-post"
-			css={pinnedPostContainer(palette)}
+			css={pinnedPostContainer(format)}
 			data-gu-marker="pinned-post"
 			data-component="pinned-post"
 		>
@@ -160,7 +158,7 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 				tabIndex={-1}
 				key="PinnedPostCheckbox"
 			/>
-			<div css={rowStyles(palette)}>
+			<div css={rowStyles(format)}>
 				<SvgPinned />
 				{pinnedPost.firstPublished && (
 					<time data-relativeformat="med" css={timeAgoStyles}>
@@ -173,7 +171,7 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 			</div>
 			<div id="pinned-post-overlay" css={overlayStyles} />
 			<label
-				css={fakeButtonStyles(palette)}
+				css={fakeButtonStyles(format)}
 				htmlFor="pinned-post-checkbox"
 				id="pinned-post-button"
 			>

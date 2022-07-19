@@ -160,6 +160,25 @@ const pagination = (format: ArticleFormat): Colour => {
 	return neutral[86];
 };
 
+const borderPinnedPost = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[300];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+	}
+};
+
 // ----- API ----- //
 
 const border = {
@@ -177,6 +196,7 @@ const border = {
 	richLinkSvgDark,
 	richLinkSvgPreload,
 	richLinkSvgPreloadDark,
+	borderPinnedPost,
 };
 
 // ----- Exports ----- //
