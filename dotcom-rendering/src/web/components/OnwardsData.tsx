@@ -3,13 +3,13 @@ import { useEffect } from 'react';
 import { decideTrail } from '../lib/decideTrail';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
+import { Carousel } from './Carousel';
 import { Placeholder } from './Placeholder';
 
 type Props = {
 	url: string;
 	limit: number; // Limit the number of items shown (the api often returns more)
 	ophanComponentName: OphanComponentName;
-	Container: React.FC<OnwardsType>;
 	format: ArticleFormat;
 	isCuratedContent?: boolean;
 };
@@ -29,7 +29,6 @@ export const OnwardsData = ({
 	url,
 	limit,
 	ophanComponentName,
-	Container,
 	format,
 	isCuratedContent,
 }: Props) => {
@@ -75,7 +74,7 @@ export const OnwardsData = ({
 		return (
 			<div css={[minHeight, revealStyles]} className="onwards">
 				<div className="pending">
-					<Container
+					<Carousel
 						heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
 						trails={buildTrails(data.trails, limit)}
 						description={data.description}
