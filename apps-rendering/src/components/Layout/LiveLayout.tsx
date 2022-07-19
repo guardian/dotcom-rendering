@@ -196,7 +196,7 @@ const LiveLayout: FC<Props> = ({ item }) => {
 				<Tags item={item} />
 			</section>
 			<section css={onwardStyles}>
-				<RelatedContent content={item.relatedContent} />
+				<RelatedContent item={item} />
 			</section>
 			<section css={articleWidthStyles}>
 				<Footer format={item} isCcpa={false} />
