@@ -2,15 +2,19 @@ interface PlaceInArticle {
 	index: number;
 	distance: number;
 	afterText: boolean;
-	afterPullQuote: boolean;
+	afterSupporting: boolean;
 }
 
-const isAfterPullQuote = (index: number, elements: CAPIElement[]): boolean => {
+const isCloseAfterSupportingElement = (
+	index: number,
+	elements: CAPIElement[],
+): boolean => {
+	const elementIsSupporting = (element?: CAPIElement): boolean =>
+		!!(element && 'role' in element && element.role === 'supporting');
+
 	return (
-		elements[index - 1]?._type ===
-			'model.dotcomrendering.pageElements.PullquoteBlockElement' ||
-		elements[index - 2]?._type ===
-			'model.dotcomrendering.pageElements.PullquoteBlockElement'
+		elementIsSupporting(elements[index - 1]) ||
+		elementIsSupporting(elements[index - 2])
 	);
 };
 
@@ -26,18 +30,18 @@ const getPlaces = (
 		index,
 		distance: Math.abs(index - targetIndex),
 		afterText: isAfterText(index, elements),
-		afterPullQuote: isAfterPullQuote(index, elements),
+		afterSupporting: isCloseAfterSupportingElement(index, elements),
 	}));
 };
 
 const placeIsSuitable = (place: PlaceInArticle): boolean =>
-	place.afterText && !place.afterPullQuote;
+	place.afterText && !place.afterSupporting;
 
 /**
  * Finds a place within the existing element of the block to insert a
  * NewsletterSignupBlockElement, within a given distance from a given
  * target index, prefering a place after TextBlockElement and not within
- * two places after a pullQuote.
+ * two places after a supporting element (eg pullquote).
  *
  * @param elements the elements in the article block
  * @param targetIndex the target place to put the NewsletterSignupBlockElement
@@ -58,6 +62,15 @@ export const findInsertIndex = (
 	return possiblePlaces[0]?.index || targetIndex;
 };
 
+/**
+ * Determines what role an inlineBox element should have based on whether
+ * the last floating element before it (if any) was 'supporting' or
+ * 'thumbnail'.
+ *
+ * @param index where in the array the inlineBox element will be inserted
+ * @param elements the array of elements
+ * @returns the role the inlineBox element should have
+ */
 const decideRole = (index: number, elements: CAPIElement[]): Weighting => {
 	const floatingElementRoleTypes = ['supporting', 'thumbnail'];
 
