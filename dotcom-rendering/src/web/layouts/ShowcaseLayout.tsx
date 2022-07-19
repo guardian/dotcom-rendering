@@ -282,6 +282,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									contributionsServiceUrl={
 										contributionsServiceUrl
 									}
+									idApiUrl={CAPIArticle.config.idApiUrl}
 								/>
 							</ElementContainer>
 							<ElementContainer

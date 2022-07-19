@@ -66,6 +66,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							urls={front.nav.readerRevenueLinks.header}
 							remoteHeader={front.config.switches.remoteHeader}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
+							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
 						/>
 					</ElementContainer>
 					<ElementContainer

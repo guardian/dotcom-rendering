@@ -219,6 +219,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 							contributionsServiceUrl={
 								CAPIArticle.contributionsServiceUrl
 							}
+							idApiUrl={CAPIArticle.config.idApiUrl}
 						/>
 					</ElementContainer>
 				</div>
