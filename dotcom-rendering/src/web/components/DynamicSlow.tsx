@@ -75,7 +75,8 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 										}
 										imagePositionOnMobile="none"
 										trailText={
-											card.supportingContent
+											card.supportingContent &&
+											card.supportingContent.length > 0
 												? undefined
 												: card.trailText
 										}
