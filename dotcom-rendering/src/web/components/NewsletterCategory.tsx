@@ -6,29 +6,27 @@ type NewsletterCategoryProps = {
 	text: string;
 };
 
-export const NewsletterCategory = ({ text }: NewsletterCategoryProps) => {
-	const containerStyle = css`
-		display: flex;
-		align-items: center;
-		padding-top: ${space[3]}px;
-		padding-bottom: ${space[2]}px;
+const containerStyle = css`
+	display: flex;
+	align-items: center;
+	padding-top: ${space[3]}px;
+	padding-bottom: ${space[2]}px;
 
-		svg {
-			background-color: ${brandAlt[400]};
-			border-radius: 50%;
-			padding: 2px;
-			margin-right: ${space[2]}px;
-		}
-	`;
+	svg {
+		background-color: ${brandAlt[400]};
+		border-radius: 50%;
+		padding: 2px;
+		margin-right: ${space[2]}px;
+	}
+`;
 
-	const spanStyle = css`
-		${textSans.medium({ fontWeight: 'bold' })};
-	`;
+const spanStyle = css`
+	${textSans.medium({ fontWeight: 'bold' })};
+`;
 
-	return (
-		<div css={containerStyle}>
-			<SvgEnvelope size="small" />
-			<span css={spanStyle}>{text}</span>
-		</div>
-	);
-};
+export const NewsletterCategory = ({ text }: NewsletterCategoryProps) => (
+	<div css={containerStyle}>
+		<SvgEnvelope size="small" />
+		<span css={spanStyle}>{text}</span>
+	</div>
+);

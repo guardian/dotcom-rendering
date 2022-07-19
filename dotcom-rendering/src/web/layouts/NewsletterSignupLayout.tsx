@@ -50,6 +50,12 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
 // to use this layout, edit ./dotcom-rendering/src/web/layouts/DecideLayout.tsx
 // to return is on articles with  ArticleDisplay.Standard && ArticleDesign.NewsletterSignup
 
+type NewsletterSignupLayoutProps = {
+	CAPIArticle: CAPIArticleType;
+	NAV: NavType;
+	format: ArticleFormat;
+};
+
 const mainColWrapperStyle = css`
 	display: flex;
 	height: 100%;
@@ -136,12 +142,6 @@ const guardianLogoContainerStyle = css`
 		}
 	}
 `;
-
-type NewsletterSignupLayoutProps = {
-	CAPIArticle: CAPIArticleType;
-	NAV: NavType;
-	format: ArticleFormat;
-};
 
 export const NewsletterSignupLayout = ({
 	CAPIArticle,
