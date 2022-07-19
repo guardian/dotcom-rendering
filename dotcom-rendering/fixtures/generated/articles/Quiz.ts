@@ -1601,7 +1601,7 @@ export const Quiz: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '754dd695-a51e-425a-88f2-bcb30fd6af82',
+			elementId: 'abc0d29e-343d-4c99-ac1b-44d269ea80ef',
 		},
 	],
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
@@ -2214,7 +2214,7 @@ export const Quiz: CAPIArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: '0aa56937-10f0-4209-895e-d231faee32c9',
+					elementId: 'c046265d-003c-4700-81c4-22f11c138eeb',
 				},
 			],
 			attributes: {
