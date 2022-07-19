@@ -70,13 +70,10 @@ const adStyles = css`
 		margin: ${space[3]}px auto;
 		/* this is centring the ad iframe as they are display: inline; elements by default */
 		text-align: center;
-
-		${from.mobile} {
-			width: 300px;
-		}
+		display: flex;
+		justify-content: center;
 
 		${from.tablet} {
-			width: auto;
 			background-color: ${neutral[97]};
 		}
 
@@ -86,11 +83,14 @@ const adStyles = css`
 		}
 
 		.ad-slot {
-			margin-left: auto;
-			margin-right: auto;
+			/* this fixes inter-scrollers stealing mouse events */
+			overflow: hidden;
 
-			&.ad-slot--fluid {
-				width: 100%;
+			${from.tablet} {
+				/* from tablet the ad slot will stretch to the full width of the container and the iframe will be centred by the text-align: center; on the container */
+				flex: 1;
+				/* Ensures slots do not take on 100% of the container height, allowing them to be sticky in containers */
+				align-self: flex-start;
 			}
 		}
 

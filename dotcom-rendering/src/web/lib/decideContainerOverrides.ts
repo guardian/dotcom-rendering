@@ -1,3 +1,5 @@
+import type { DCRContainerPalette } from '../../types/front';
+
 const textCardHeadline = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':

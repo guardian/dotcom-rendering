@@ -6,6 +6,7 @@ import {
 	brandLine,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import type { DCRFrontType } from '../../types/front';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
@@ -65,6 +66,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							urls={front.nav.readerRevenueLinks.header}
 							remoteHeader={front.config.switches.remoteHeader}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
+							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
 						/>
 					</ElementContainer>
 					<ElementContainer

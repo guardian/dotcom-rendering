@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { DCRContainerPalette } from '../../types/front';
 import { decidePalette } from '../lib/decidePalette';
 
 const contributorImage = css`

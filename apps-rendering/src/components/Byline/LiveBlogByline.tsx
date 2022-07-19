@@ -22,7 +22,7 @@ export const blogColor = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const blogStyles = css`
-	${headline.xxxsmall({ lineHeight: 'regular', fontStyle: 'italic' })}
+	${headline.xxxsmall({ lineHeight: 'tight', fontStyle: 'italic' })}
 `;
 
 const blogAnchorStyles = css`

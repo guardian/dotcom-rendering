@@ -34,7 +34,6 @@ import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 import { Nav } from '../components/Nav/Nav';
-import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
@@ -226,11 +225,6 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `CAPIArticle.config.shouldHideReaderRevenue` equals false.
 
-	const seriesTag = CAPIArticle.tags.find(
-		(tag) => tag.type === 'Series' || tag.type === 'Blog',
-	);
-	const showOnwardsLower = seriesTag && CAPIArticle.hasStoryPackage;
-
 	const showComments = CAPIArticle.isCommentable;
 
 	const { branding } =
@@ -288,6 +282,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									contributionsServiceUrl={
 										contributionsServiceUrl
 									}
+									idApiUrl={CAPIArticle.config.idApiUrl}
 								/>
 							</ElementContainer>
 							<ElementContainer
@@ -682,22 +677,6 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
 				</Island>
-
-				{showOnwardsLower && (
-					<ElementContainer
-						sectionId="onwards-lower"
-						element="section"
-					>
-						<Island clientOnly={true} deferUntil="visible">
-							<OnwardsLower
-								ajaxUrl={CAPIArticle.config.ajaxUrl}
-								hasStoryPackage={CAPIArticle.hasStoryPackage}
-								tags={CAPIArticle.tags}
-								format={format}
-							/>
-						</Island>
-					</ElementContainer>
-				)}
 
 				{!isPaidContent && showComments && (
 					<ElementContainer sectionId="comments" element="section">

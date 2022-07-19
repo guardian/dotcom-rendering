@@ -5,12 +5,14 @@ describe('linksNotificationCount', () => {
 	it('returns the sum of notifications across all links', () => {
 		const links: DropdownLinkType[] = [
 			{
+				id: 'one',
 				url: 'https://example.com/1',
 				title: 'One',
 				dataLinkName: 'One',
 				notifications: ['Notification here!'],
 			},
 			{
+				id: 'two',
 				url: 'https://example.com/2',
 				title: 'Two',
 				dataLinkName: 'Two',
@@ -29,11 +31,13 @@ describe('linksNotificationCount', () => {
 	it('returns 0 when there are no notifications', () => {
 		const links = [
 			{
+				id: 'one',
 				url: 'https://example.com/1',
 				title: 'One',
 				dataLinkName: 'One',
 			},
 			{
+				id: 'two',
 				url: 'https://example.com/2',
 				title: 'Two',
 				dataLinkName: 'Two',

@@ -16,8 +16,6 @@ const headlineTagStyles = (format: ArticleFormat): SerializedStyles => css`
 	${from.wide} {
 		padding: 0 ${remSpace[2]};
 	}
-	position: absolute;
-	transform: translateY(-100%);
 `;
 
 type Props = {

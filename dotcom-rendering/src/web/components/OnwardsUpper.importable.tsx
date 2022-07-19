@@ -4,7 +4,6 @@ import { joinUrl } from '../../lib/joinUrl';
 import { Carousel } from './Carousel';
 import { ElementContainer } from './ElementContainer';
 import { OnwardsData } from './OnwardsData';
-import { OnwardsLayout } from './OnwardsLayout';
 
 type PillarForContainer =
 	| 'headlines'
@@ -278,7 +277,7 @@ export const OnwardsUpper = ({
 						url={url}
 						limit={8}
 						ophanComponentName={ophanComponentName}
-						Container={isPaidContent ? OnwardsLayout : Carousel}
+						Container={Carousel}
 						format={format}
 					/>
 				</ElementContainer>
