@@ -166,7 +166,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							showDateHeader={collection.config.showDateHeader}
 							editionId={front.editionId}
 						>
-							<p>{collection.collectionType}</p>
 							<DecideContainer
 								trails={trails}
 								containerType={collection.collectionType}
