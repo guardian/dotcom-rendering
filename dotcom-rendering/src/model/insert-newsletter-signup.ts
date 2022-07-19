@@ -72,7 +72,7 @@ export const findInsertIndex = (
  * @returns the role the inlineBox element should have
  */
 const decideRole = (index: number, elements: CAPIElement[]): Weighting => {
-	const floatingElementRoleTypes = ['supporting', 'thumbnail'];
+	const floatingElementRoleTypes = ['supporting', 'thumbnail', 'richLink'];
 
 	const lastFloatingElementBeforePlace = elements
 		.slice(0, index)
