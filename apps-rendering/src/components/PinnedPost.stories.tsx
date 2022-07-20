@@ -1,7 +1,18 @@
 import { css } from "@emotion/react";
+import LiveBlockContainer from "@guardian/common-rendering/src/components/liveBlockContainer";
+import { ArticleDesign, ArticleDisplay, ArticleFormat, ArticlePillar } from "@guardian/libs";
 import { breakpoints, from } from "@guardian/source-foundations";
+import { ok } from "@guardian/types";
+import { formatUTCTimeDateTz } from "date";
+import { LiveBlockComp } from "components/LiveBlocks";
 import { FC } from "react";
+import { renderAll } from "renderer";
+import { LastUpdated } from "./LastUpdated";
+import { Article } from "./Layout/Layout.stories";
 import { PinnedPost } from "./PinnedPost";
+import { LiveBlock } from "liveBlock";
+import type { Text } from "bodyElement";
+import { ElementKind } from "bodyElementKind";
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -19,24 +30,37 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	);
 };
 
-// export default {
-// 	component: PinnedPost,
-// 	title: 'Components/PinnedPost',
-// 	parameters: {
-// 		backgrounds: {
-// 			default: 'grey',
-// 			values: [{ name: 'grey', value: 'lightgrey' }],
-// 		},
-// 		chromatic: {
-// 			viewports: [breakpoints.mobile, breakpoints.wide],
-// 		},
-// 	},
-// };
+const standard = {
+	design: ArticleDesign.Standard,
+	display: ArticleDisplay.Standard,
+	theme: ArticlePillar.News,
+};
+
+const bodyElement: Text = {kind: ElementKind.Text, doc: "<div>Some Text</div>"}
+
+const pinnedBlock: LiveBlock = {
+	id: '5',
+	isKeyEvent: false,
+	title: 'Block Five',
+	firstPublished: new Date('2021-11-02T10:20:20Z'),
+	lastModified: new Date('2021-11-02T11:13:13Z'),
+	body: [ok()],
+	contributors: [],
+	isPinned: true,
+};
 
 const Default: FC = () => (
     <Wrapper>
-        {/* <PinnedPost>
-
-        </PinnedPost> */}
+        <PinnedPost pinnedPost={pinnedBlock} format={standard}>
+            <LiveBlockComp block={pinnedBlock} format={standard} isPinnedPost={true} isOriginalPinnedPost={false}>
+            </LiveBlockComp>
+        </PinnedPost>
     </Wrapper>
 );
+
+export default {
+	component: PinnedPost,
+	title: 'AR/PinnedPost',
+};
+
+export {Default};
