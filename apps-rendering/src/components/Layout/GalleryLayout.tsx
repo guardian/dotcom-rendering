@@ -44,7 +44,6 @@ const GalleryLayout: FC<Props> = ({ item, children }) => (
 					format={getFormat(item)}
 				/>
 			</header>
-
 			{children}
 		</article>
 	</main>

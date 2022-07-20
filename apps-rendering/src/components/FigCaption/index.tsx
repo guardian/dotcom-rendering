@@ -12,8 +12,6 @@ import { OptionKind } from '@guardian/types';
 import type { FC, ReactNode } from 'react';
 import { fill } from '@guardian/common-rendering/src/editorialPalette';
 import { darkModeCss } from '@guardian/common-rendering/src/lib';
-import { grid } from 'grid/grid';
-import { fontFace } from 'styles';
 
 // ----- Sub-Components ----- //
 
@@ -92,12 +90,6 @@ const getStyles = (
 				styles(supportsDarkMode),
 				mediaStyles(supportsDarkMode),
 				css`
-					${grid.column.left}
-					border-left: 1px solid ${neutral[20]};
-					grid-row: 1;
-					margin-left: calc(20px * -1 / 2);
-					padding: ${remSpace[3]};
-
 					h2,
 					span,
 					a,
