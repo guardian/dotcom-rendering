@@ -67,7 +67,7 @@
     "@types/webpack-node-externals": "^2.5.2",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
-    "aws-cdk": "1.147.0",
+    "aws-cdk": "2.33.0",
     "aws-sdk": "^2.1095.0",
     "babel-loader": "^8.2.2",
     "buffer": "^6.0.3",
