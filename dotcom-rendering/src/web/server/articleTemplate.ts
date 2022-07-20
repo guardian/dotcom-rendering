@@ -286,6 +286,10 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <style class="webfont">${getFontsCss()}</style>
                 <style>${resets.resetCSS}</style>
 				${css}
+				<link
+					rel="stylesheet"
+					href="${ASSET_ORIGIN}static/frontend/css/light.css"
+				/>
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
 			</head>
 

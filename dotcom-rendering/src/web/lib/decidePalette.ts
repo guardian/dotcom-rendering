@@ -27,8 +27,8 @@ import type { DCRContainerPalette } from '../../types/front';
 import { decideContainerOverrides } from './decideContainerOverrides';
 import { transparentColour } from './transparentColour';
 
-const WHITE = neutral[100];
-const BLACK = neutral[7];
+const WHITE = 'var(--white)';
+const BLACK = 'var(--black)';
 
 const blogsGrayBackgroundPalette = (format: ArticleFormat): string => {
 	switch (format.theme) {
