@@ -25,7 +25,7 @@ class BlockEnhancer {
 		this.promotedNewsletter = promotedNewsletter;
 	}
 
-	insertNewsletterSignup() {
+	enhanceNewsletterSignup() {
 		this.blocks = insertNewsletterSignup(
 			this.blocks,
 			this.format,
@@ -92,5 +92,5 @@ export const enhanceBlocks = (
 		.enhanceNumberedLists()
 		.enhanceEmbeds()
 		.enhanceTweets()
-		.insertNewsletterSignup().blocks;
+		.enhanceNewsletterSignup().blocks;
 };
