@@ -1,9 +1,9 @@
-import { disableCMP } from '../lib/disableCMP.js';
-import { setLocalBaseUrl } from '../lib/setLocalBaseUrl.js';
+import { disableCMP } from '../../lib/disableCMP.js';
+import { setLocalBaseUrl } from '../../lib/setLocalBaseUrl.js';
 import { breakpoints } from '@guardian/source-foundations';
 import '@percy/cypress';
 
-describe('Snapshot standard layout', function () {
+describe('Visual regression', function () {
 	beforeEach(function () {
 		disableCMP();
 		setLocalBaseUrl();
