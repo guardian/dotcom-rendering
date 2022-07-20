@@ -1,6 +1,8 @@
 import { defineConfig } from 'cypress';
 import plugins from './cypress/plugins';
 
+// https://docs.cypress.io/guides/references/configuration
+
 module.exports = defineConfig({
   viewportWidth: 1500,
   viewportHeight: 860,
@@ -25,5 +27,6 @@ module.exports = defineConfig({
       return plugins(on, config)
     },
     baseUrl: 'http://localhost:9000/',
+	specPattern: 'cypress/e2e/parallel-*/**/*',
   },
 })
