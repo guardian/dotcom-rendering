@@ -1,5 +1,13 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+currentBranch="$(git rev-parse --abbrev-ref HEAD)"
+
+if [[ $currentBranch == "main" ]]
+then
+	echo "⚠️ You should not push to the \`main\` branch"
+	exit 1
+fi
+
 yarn workspace @guardian/dotcom-rendering prettier:check
 yarn workspace @guardian/dotcom-rendering tsc

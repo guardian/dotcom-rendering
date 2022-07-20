@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { matchers } from '@emotion/jest';
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
 import { none, some } from '@guardian/types';

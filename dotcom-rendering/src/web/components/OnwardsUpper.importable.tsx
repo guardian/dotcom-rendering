@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
 import { ArticlePillar } from '@guardian/libs';
 import { joinUrl } from '../../lib/joinUrl';
-import { Carousel } from './Carousel';
 import { ElementContainer } from './ElementContainer';
 import { OnwardsData } from './OnwardsData';
-import { OnwardsLayout } from './OnwardsLayout';
 
 type PillarForContainer =
 	| 'headlines'
@@ -278,7 +276,6 @@ export const OnwardsUpper = ({
 						url={url}
 						limit={8}
 						ophanComponentName={ophanComponentName}
-						Container={isPaidContent ? OnwardsLayout : Carousel}
 						format={format}
 					/>
 				</ElementContainer>
@@ -289,7 +286,6 @@ export const OnwardsUpper = ({
 						url={curatedDataUrl}
 						limit={20}
 						ophanComponentName="curated-content"
-						Container={Carousel}
 						isCuratedContent={true}
 						format={format}
 					/>

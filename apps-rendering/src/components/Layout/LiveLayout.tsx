@@ -193,10 +193,10 @@ const LiveLayout: FC<Props> = ({ item }) => {
 				</GridItem>
 			</main>
 			<section css={articleWidthStyles}>
-				<Tags tags={item.tags} format={item} />
+				<Tags item={item} />
 			</section>
 			<section css={onwardStyles}>
-				<RelatedContent content={item.relatedContent} />
+				<RelatedContent item={item} />
 			</section>
 			<section css={articleWidthStyles}>
 				<Footer format={item} isCcpa={false} />

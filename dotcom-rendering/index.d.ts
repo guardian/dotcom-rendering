@@ -86,6 +86,7 @@ type Colour = string;
 type Palette = {
 	text: {
 		headline: Colour;
+		headlineWhenMatch: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		seriesTitleWhenMatch: Colour;
@@ -281,13 +282,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-		adUnit: string;
-		customParams: CustomParams;
-		disableAds?: false;
-	}
+			adUnit: string;
+			customParams: CustomParams;
+			disableAds?: false;
+	  }
 	| {
-		disableAds: true;
-	};
+			disableAds: true;
+	  };
 
 interface SectionNielsenAPI {
 	name: string;
@@ -789,13 +790,13 @@ type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
 /**
  * Onwards
  */
-type OnwardsType = {
+type CAPIOnwardsType = {
 	heading: string;
-	trails: TrailType[];
+	trails: CAPITrailType[];
 	description?: string;
 	url?: string;
 	ophanComponentName: OphanComponentName;
-	format: ArticleFormat;
+	format: CAPIFormat;
 	isCuratedContent?: boolean;
 };
 
@@ -934,6 +935,7 @@ interface TrailType extends BaseTrailType {
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
 	discussionId?: string;
+	isBoosted?: boolean;
 }
 
 interface CAPITrailType extends BaseTrailType {
@@ -1005,20 +1007,16 @@ type AdSlotType =
 // 3rd party type declarations //
 // ------------------------------
 
-declare module 'compose-function' {
-	const compose: any;
-	// eslint-disable-next-line import/no-default-export -- TODO: use type definition @types/compose-function
-	export default compose;
-}
-declare module 'minify-css-string' {
-	const minifyCSSString: any;
-	// eslint-disable-next-line import/no-default-export -- it’s that 6yo module works
-	export default minifyCSSString;
-}
 declare module 'chromatic/isChromatic';
 
 declare module 'dynamic-import-polyfill' {
-	export const initialize: any;
+	export const initialize: ({
+		modulePath,
+		importFunctionName,
+	}: {
+		modulePath?: string;
+		importFunctionName?: string;
+	}) => void;
 }
 
 // ------------------------------------- //

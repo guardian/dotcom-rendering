@@ -96,6 +96,9 @@
                         "$ref": "#/definitions/MultiImageBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/NewsletterSignupBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/NumberedTitleBlockElement"
                     },
                     {
@@ -2082,6 +2085,64 @@
                 "images"
             ]
         },
+        "NewsletterSignupBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.NewsletterSignupBlockElement"
+                    ]
+                },
+                "newsletter": {
+                    "type": "object",
+                    "properties": {
+                        "listId": {
+                            "type": "number"
+                        },
+                        "identityName": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "frequency": {
+                            "type": "string"
+                        },
+                        "successDescription": {
+                            "type": "string"
+                        },
+                        "theme": {
+                            "type": "string"
+                        },
+                        "group": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "description",
+                        "frequency",
+                        "group",
+                        "identityName",
+                        "listId",
+                        "name",
+                        "successDescription",
+                        "theme"
+                    ]
+                },
+                "elementId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "elementId",
+                "newsletter"
+            ]
+        },
         "NumberedTitleBlockElement": {
             "type": "object",
             "properties": {
@@ -3417,6 +3478,9 @@
                             },
                             {
                                 "$ref": "#/definitions/MultiImageBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/NewsletterSignupBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/NumberedTitleBlockElement"

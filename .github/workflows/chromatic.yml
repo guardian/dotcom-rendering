@@ -17,11 +17,6 @@ jobs:
       # Root yarn installs all workspaces (root, common, dotcom)
       - uses: bahmutov/npm-install@v1
 
-      # Install packages for apps-rendering project
-      - uses: bahmutov/npm-install@v1
-        with:
-          working-directory: apps-rendering
-
       - uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}

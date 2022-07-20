@@ -120,5 +120,6 @@ export const enhanceCards = (
 				faciaCard.properties.maybeContent?.trail.byline ?? undefined,
 			showByline: faciaCard.properties.showByline,
 			snapData: enhanceSnaps(faciaCard.enriched),
+			isBoosted: faciaCard.display.isBoosted,
 		};
 	});

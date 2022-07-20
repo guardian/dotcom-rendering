@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';

@@ -27,7 +27,6 @@ import { getFormat } from 'item';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { darkModeCss } from 'styles';
-import { getThemeStyles } from 'themeStyles';
 import ImmersiveMetadata from './ImmersiveMetadata';
 import GalleryMetadata from './GalleryMetadata';
 
@@ -158,7 +157,6 @@ const isLive = (design: ArticleDesign): boolean =>
 // after the liveblog header is completed and ackground colours
 // are added
 const tempraryBackgroundStyle = (format: ArticleFormat): SerializedStyles => {
-	const themeStyles = getThemeStyles(format.theme);
 	switch (format.design) {
 		case ArticleDesign.DeadBlog:
 			return css`
@@ -173,7 +171,7 @@ const tempraryBackgroundStyle = (format: ArticleFormat): SerializedStyles => {
 			`;
 		default:
 			return css`
-				background-color: ${themeStyles.liveblogBackground};
+				background-color: ${background.liveblogMetadata(format)};
 
 				${from.desktop} {
 					background-color: ${neutral[97]};

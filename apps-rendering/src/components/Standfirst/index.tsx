@@ -6,6 +6,7 @@ import { getFormat } from 'item';
 import DeadBlogStandfirst from './DeadBlogStandfirst';
 import ImmersiveLabsStandfirst from './ImmersiveLabsStandfirst';
 import ImmersiveStandfirst from './ImmersiveStandfirst';
+import InterviewStandfirst from './InterviewStandfirst';
 import GalleryStandfirst from './GalleryStandfirst';
 import LabsStandfirst from './LabsStandfirst';
 import LiveBlogStandfirst from './LiveBlogStandfirst';
@@ -59,6 +60,8 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return <ReviewStandfirst item={item} />;
+		case ArticleDesign.Interview:
+			return <InterviewStandfirst item={item} />;
 		default:
 			return (
 				<DefaultStandfirst
