@@ -31,6 +31,7 @@ export const FixedLargeSlowXIV = ({
 						imagePosition="right"
 						imagePositionOnMobile="top"
 						imageSize="large"
+						trailText={primary.trailText}
 					/>
 				</LI>
 				<LI padSides={true} showDivider={true} percentage="25%">
