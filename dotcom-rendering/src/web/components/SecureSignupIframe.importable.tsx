@@ -11,7 +11,6 @@ import {
 import type { ReactEventHandler } from 'react';
 import { useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { formatTimestampToUTC } from '../../lib/utcDateFormat';
 import type { OphanAction } from '../browser/ophan/ophan';
 import {
 	getOphanRecordFunction,
@@ -143,10 +142,14 @@ const sendTracking = (
 			break;
 	}
 
+	// The data team use a custom date format for timestamps,
+	// (yyy-MM-dd hh:mm:ss.ssssss UTC)
+	// and will cast the integer value  to this
+	// format at their end
 	const value = JSON.stringify({
 		eventDescription,
 		newsletterId,
-		timestamp: formatTimestampToUTC(),
+		timestamp: new Date().getDate(),
 	});
 
 	submitComponentEvent(
