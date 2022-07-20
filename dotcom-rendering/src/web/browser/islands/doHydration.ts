@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { log } from '@guardian/libs';
 import type { Attributes } from 'preact';
 import { h, hydrate, render } from 'preact';
@@ -37,8 +36,10 @@ export const doHydration = (
 
 			if (clientOnly) {
 				element.querySelector('[data-name="placeholder"]')?.remove();
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-argument -- eslint does not know the type of our modules
 				render(h(module[name], data), element);
 			} else {
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-argument -- eslint does not know the type of our modules
 				hydrate(h(module[name], data), element);
 			}
 
@@ -62,11 +63,27 @@ export const doHydration = (
 			);
 		})
 		.catch((error) => {
-			if (name && error.message.includes(name)) {
+			if (error instanceof Error) {
+				if (
+					window.guardian.config.isDev &&
+					name &&
+					error.message.includes(name)
+				) {
+					// eslint-disable-next-line no-console -- We want to log this
+					console.error(
+						`Error importing '${name}'. (🚨 Components must live in the root of /components and follow the [MyComponent].importable.tsx naming convention 🚨)`,
+					);
+				}
+				window.guardian.modules.sentry.reportError(
+					error,
+					'islands-do-hydration',
+				);
+			} else {
+				// eslint-disable-next-line no-console -- We want to log this
 				console.error(
-					`🚨 Error importing ${name}. Components must live in the root of /components and follow the [MyComponent].importable.tsx naming convention 🚨`,
+					'[islands-do-hydration] Unknown error type:',
+					error,
 				);
 			}
-			throw error;
 		});
 };
