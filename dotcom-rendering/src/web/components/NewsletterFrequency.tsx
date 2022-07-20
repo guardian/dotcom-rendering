@@ -20,10 +20,11 @@ export const NewsletterFrequency = ({ frequency }: { frequency: string }) => {
 		>
 			<div
 				css={css`
+					height: 28px;
 					svg {
 						background: ${brandAltBackground.primary};
 						border-radius: 50%;
-						height: 28px;
+						height: 100%;
 						padding: 2px;
 						margin-right: ${space[1]}px;
 					}

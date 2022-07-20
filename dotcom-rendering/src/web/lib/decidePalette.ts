@@ -123,6 +123,16 @@ const textSeriesTitleWhenMatch = (format: ArticleFormat): string => {
 	}
 };
 
+const textHeadlineWhenMatch = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.MatchReport:
+		case ArticleDesign.LiveBlog:
+			return BLACK;
+		default:
+			return textSeriesTitle(format);
+	}
+};
+
 const textSectionTitle = textSeriesTitle;
 
 const textByline = (format: ArticleFormat): string => {
@@ -1314,6 +1324,7 @@ export const decidePalette = (
 	return {
 		text: {
 			headline: textHeadline(format),
+			headlineWhenMatch: textHeadlineWhenMatch(format),
 			seriesTitle: textSeriesTitle(format),
 			seriesTitleWhenMatch: textSeriesTitleWhenMatch(format),
 			sectionTitle: textSectionTitle(format),
