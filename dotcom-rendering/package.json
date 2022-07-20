@@ -203,7 +203,8 @@
     "webpack-merge": "^5.7.3",
     "webpack-messages": "^2.0.4",
     "webpack-node-externals": "^3.0.0",
-    "webpack-sources": "^3.2.3"
+    "webpack-sources": "^3.2.3",
+    "yarn": "^1.22.19"
   },
   "resolutions": {
     "@types/serve-static": "^1.13.9"

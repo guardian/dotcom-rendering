@@ -118,7 +118,7 @@ export const KeyEventsCarousel = ({
 		<>
 			<span id={id} />
 			<Hide from="desktop">
-				<div css={titleStyles}>Key events:</div>
+				<div css={titleStyles}>Key events</div>
 			</Hide>
 			<div
 				ref={carousel}
