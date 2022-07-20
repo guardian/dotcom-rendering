@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, space, until } from '@guardian/source-foundations';
-import { carrotAdStyles, labelStyles } from './AdSlot';
+import { carrotAdStyles, labelHeight, labelStyles } from './AdSlot';
 
 type Props = {
 	format: ArticleFormat;
@@ -96,7 +96,7 @@ const adStyles = css`
 
 		/* liveblogs ads have different background colours due the darker page background */
 		.ad-slot--liveblog-inline {
-			min-height: 274px;
+			min-height: ${250 + labelHeight}px;
 			background-color: ${neutral[93]};
 			.ad-slot__label {
 				color: ${neutral[46]};
