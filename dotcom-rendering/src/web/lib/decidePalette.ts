@@ -813,7 +813,11 @@ const fillShareIcon = (format: ArticleFormat): string => {
 				return specialReport[300];
 		}
 	}
-	if (format.design === ArticleDesign.NewsletterSignup) return BLACK;
+	if (
+		format.design === ArticleDesign.NewsletterSignup &&
+		format.display === ArticleDisplay.Standard
+	)
+		return BLACK;
 
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
