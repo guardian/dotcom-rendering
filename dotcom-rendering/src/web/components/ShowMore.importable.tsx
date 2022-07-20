@@ -35,11 +35,12 @@ function insertHtml(html: string, collectionId: string) {
 		// @ts-expect-error -- We want to catch this error if the element is missing
 		placeholder.innerHTML = html;
 	} catch (e) {
-		window.guardian.modules.sentry.reportError(
-			// @ts-expect-error -- We're happy to pass this to Sentry
-			e,
-			'show-more-insert',
-		);
+		// todo: `window` is throwing a referenceError; find a fix
+		// window.guardian.modules.sentry.reportError(
+		// 	// @ts-expect-error -- We're happy to pass this to Sentry
+		// 	e,
+		// 	'show-more-insert',
+		// );
 	}
 }
 
@@ -51,11 +52,12 @@ function removeHtml(collectionId: string) {
 		// @ts-expect-error -- We want to catch this error if the element is missing
 		placeholder.innerHTML = '';
 	} catch (e) {
-		window.guardian.modules.sentry.reportError(
-			// @ts-expect-error -- We're happy to pass this to Sentry
-			e,
-			'show-more-remove',
-		);
+		// todo: `window` is throwing a referenceError; find a fix
+		// window.guardian.modules.sentry.reportError(
+		// 	// @ts-expect-error -- We're happy to pass this to Sentry
+		// 	e,
+		// 	'show-more-remove',
+		// );
 	}
 }
 
