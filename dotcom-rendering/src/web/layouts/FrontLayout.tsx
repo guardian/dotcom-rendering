@@ -163,8 +163,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							ophanComponentLink={ophanComponentLink}
 							ophanComponentName={ophanName}
 							containerPalette={collection.containerPalette}
-							toggleable={true}
-							sectionId={collection.id}
 							showDateHeader={collection.config.showDateHeader}
 							editionId={front.editionId}
 						>
