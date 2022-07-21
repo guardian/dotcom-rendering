@@ -79,10 +79,7 @@ export const ArticleStory = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -124,10 +121,7 @@ export const BrandingStory = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -154,10 +148,7 @@ export const FeatureStory = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -183,9 +174,7 @@ export const FeatureStoryWithSmallBylineImage = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Nicola Slawson',
-				}}
+				byline="Nicola Slawson"
 				tags={tagsWithSmallBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -213,10 +202,7 @@ export const SpecialReportStory = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -242,10 +228,7 @@ export const CommentStory = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -271,10 +254,7 @@ export const InterviewStory = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -300,10 +280,7 @@ export const ImmersiveStory = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -329,10 +306,7 @@ export const TwoContributorsStory = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithByTwoContributors}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -360,10 +334,7 @@ export const DeadBlogStory = () => {
 						format={format}
 						pageId=""
 						webTitle=""
-						author={{
-							byline: 'Lanre Bakare',
-							twitterHandle: 'lanre_bakare',
-						}}
+						byline="Lanre Bakare"
 						tags={tagsWithByTwoContributors}
 						primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 						secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -391,10 +362,7 @@ export const Dateline = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline=""

@@ -388,12 +388,6 @@ interface SubNavType {
 	links: LinkType[];
 }
 
-interface AuthorType {
-	byline?: string;
-	twitterHandle?: string;
-	email?: string;
-}
-
 interface MembershipPlaceholder {
 	campaignCode?: string;
 }
@@ -553,7 +547,9 @@ interface CAPIArticleType {
 	blocks: Block[];
 	pinnedPost?: Block;
 	pagination?: Pagination;
-	author: AuthorType;
+	byline?: string;
+	/** @deprecated - will be removed in the next model version */
+	author?: unknown;
 
 	/**
 	 * @TJS-format date-time
@@ -629,7 +625,6 @@ interface CAPIArticleType {
 	mostRecentBlockId?: string;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
-	byline?: string;
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';

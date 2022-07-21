@@ -316,7 +316,7 @@ export const NewsletterSignupLayout = ({
 								format={format}
 								headlineString={CAPIArticle.headline}
 								tags={CAPIArticle.tags}
-								byline={CAPIArticle.author.byline}
+								byline={CAPIArticle.byline}
 								webPublicationDateDeprecated={
 									CAPIArticle.webPublicationDateDeprecated
 								}

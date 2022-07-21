@@ -289,7 +289,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.headline
 											}
 											tags={CAPIArticle.tags}
-											byline={CAPIArticle.author.byline}
+											byline={CAPIArticle.byline}
 											webPublicationDateDeprecated={
 												CAPIArticle.webPublicationDateDeprecated
 											}
@@ -309,15 +309,13 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							/>
 						</GridItem>
 						<GridItem area="byline">
-							<HeadlineByline
-								format={format}
-								tags={CAPIArticle.tags}
-								byline={
-									CAPIArticle.author.byline
-										? CAPIArticle.author.byline
-										: ''
-								}
-							/>
+							{CAPIArticle.byline && (
+								<HeadlineByline
+									format={format}
+									tags={CAPIArticle.tags}
+									byline={CAPIArticle.byline}
+								/>
+							)}
 						</GridItem>
 						<GridItem area="lines">
 							{format.design === ArticleDesign.PhotoEssay &&
@@ -343,7 +341,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									format={format}
 									pageId={CAPIArticle.pageId}
 									webTitle={CAPIArticle.webTitle}
-									author={CAPIArticle.author}
+									byline={CAPIArticle.byline}
 									tags={CAPIArticle.tags}
 									primaryDateline={
 										CAPIArticle.webPublicationDateDisplay

@@ -25,7 +25,7 @@ type Props = {
 	format: ArticleFormat;
 	pageId: string;
 	webTitle: string;
-	author: AuthorType;
+	byline?: string;
 	tags: TagType[];
 	primaryDateline: string;
 	secondaryDateline: string;
@@ -224,6 +224,8 @@ const shouldShowAvatar = (format: ArticleFormat) => {
 					return false;
 			}
 		}
+		default:
+			return false;
 	}
 };
 
@@ -243,6 +245,8 @@ const shouldShowContributor = (format: ArticleFormat) => {
 					return true;
 			}
 		}
+		default:
+			return false;
 	}
 };
 
@@ -302,7 +306,7 @@ export const ArticleMeta = ({
 	format,
 	pageId,
 	webTitle,
-	author,
+	byline,
 	tags,
 	primaryDateline,
 	secondaryDateline,
@@ -315,16 +319,8 @@ export const ArticleMeta = ({
 	const bylineImageUrl = getBylineImageUrl(tags);
 	const authorName = getAuthorName(tags);
 
-	const showAvatarFromAuthor = () => {
-		if (
-			author.byline === undefined ||
-			!author.byline ||
-			author.byline === ''
-		) {
-			return false;
-		}
-		return true;
-	};
+	/** Only show avatar if the byline is a non-empty string */
+	const showAvatarFromAuthor = () => !!byline;
 
 	const onlyOneContributor: boolean =
 		tags.filter((tag) => tag.type === 'Contributor').length === 1;
@@ -379,9 +375,9 @@ export const ArticleMeta = ({
 						)}
 
 						<div>
-							{shouldShowContributor(format) && (
+							{shouldShowContributor(format) && byline && (
 								<Contributor
-									author={author}
+									byline={byline}
 									tags={tags}
 									format={format}
 								/>
