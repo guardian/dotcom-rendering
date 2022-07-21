@@ -30,12 +30,7 @@ export const Default = () => (
 		padContent={false}
 		centralBorder="partial"
 	>
-		<FixedSmallSlowIII
-			collectionId="abc"
-			trails={trails}
-			showAge={true}
-			hasMore={false}
-		/>
+		<FixedSmallSlowIII trails={trails} showAge={true} />
 	</ContainerLayout>
 );
 Default.story = { name: 'FixedSmallSlowIII' };

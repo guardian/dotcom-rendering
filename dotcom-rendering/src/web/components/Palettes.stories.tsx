@@ -18,11 +18,9 @@ export const EventPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			collectionId="abc"
 			trails={trails}
 			containerPalette="EventPalette"
 			showAge={true}
-			hasMore={false}
 		/>
 	</ContainerLayout>
 );
@@ -39,11 +37,9 @@ export const EventAltPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			collectionId="abc"
 			trails={trails}
 			containerPalette="EventAltPalette"
 			showAge={true}
-			hasMore={false}
 		/>
 	</ContainerLayout>
 );
@@ -60,11 +56,9 @@ export const SombrePalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			collectionId="abc"
 			trails={trails}
 			containerPalette="SombrePalette"
 			showAge={true}
-			hasMore={false}
 		/>
 	</ContainerLayout>
 );
@@ -81,11 +75,9 @@ export const SombreAltPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			collectionId="abc"
 			trails={trails}
 			containerPalette="SombreAltPalette"
 			showAge={true}
-			hasMore={false}
 		/>
 	</ContainerLayout>
 );
@@ -102,11 +94,9 @@ export const BreakingPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			collectionId="abc"
 			trails={trails}
 			containerPalette="BreakingPalette"
 			showAge={true}
-			hasMore={false}
 		/>
 	</ContainerLayout>
 );
@@ -123,11 +113,9 @@ export const LongRunningPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			collectionId="abc"
 			trails={trails}
 			containerPalette="LongRunningPalette"
 			showAge={true}
-			hasMore={false}
 		/>
 	</ContainerLayout>
 );
@@ -144,11 +132,9 @@ export const LongRunningAltPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			collectionId="abc"
 			trails={trails}
 			containerPalette="LongRunningAltPalette"
 			showAge={true}
-			hasMore={false}
 		/>
 	</ContainerLayout>
 );
@@ -165,11 +151,9 @@ export const InvestigationPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			collectionId="abc"
 			trails={trails}
 			containerPalette="InvestigationPalette"
 			showAge={true}
-			hasMore={false}
 		/>
 	</ContainerLayout>
 );

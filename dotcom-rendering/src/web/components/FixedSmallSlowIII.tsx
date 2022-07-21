@@ -4,19 +4,17 @@ import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
 
 type Props = {
-	collectionId: string;
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	hasMore: boolean;
+	showMoreId?: string;
 };
 
 export const FixedSmallSlowIII = ({
-	collectionId,
 	trails,
 	containerPalette,
 	showAge,
-	hasMore,
+	showMoreId,
 }: Props) => {
 	const smallTrails = trails.slice(0, 3);
 
@@ -48,7 +46,7 @@ export const FixedSmallSlowIII = ({
 					);
 				})}
 			</UL>
-			{hasMore && <span data-show-more-placeholder={collectionId} />}
+			{showMoreId && <span data-show-more-placeholder={showMoreId} />}
 		</>
 	);
 };

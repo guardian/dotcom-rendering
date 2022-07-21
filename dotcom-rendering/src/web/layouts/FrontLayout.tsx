@@ -14,8 +14,8 @@ import { Header } from '../components/Header';
 import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
-import { Snap } from '../components/Snap';
 import { ShowMore } from '../components/ShowMore.importable';
+import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
@@ -168,18 +168,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							editionId={front.editionId}
 						>
 							<DecideContainer
-								collectionId={collection.id}
 								trails={trails}
 								containerType={collection.collectionType}
 								containerPalette={collection.containerPalette}
 								showAge={collection.displayName === 'Headlines'}
-								hasMore={collection.hasMore}
+								showMoreId={collection.showMoreId}
 							/>
-							{collection.hasMore && (
+							{collection.showMoreId && (
 								<Island deferUntil={'visible'}>
 									<ShowMore
 										pageId={front.pressedPage.id}
-										collectionId={collection.id}
+										showMoreId={collection.showMoreId}
 										displayName={collection.displayName}
 									/>
 								</Island>

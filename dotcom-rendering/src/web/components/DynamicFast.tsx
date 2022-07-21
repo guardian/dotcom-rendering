@@ -4,19 +4,17 @@ import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
 
 type Props = {
-	collectionId: string;
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	hasMore: boolean;
+	showMoreId?: string;
 };
 
 export const DynamicFast = ({
-	collectionId,
 	trails,
 	containerPalette,
 	showAge,
-	hasMore,
+	showMoreId,
 }: Props) => {
 	const primary = trails[0];
 	const secondary = trails[1];
@@ -107,7 +105,7 @@ export const DynamicFast = ({
 					</UL>
 				</LI>
 			</UL>
-			{hasMore && <span data-show-more-placeholder={collectionId} />}
+			{showMoreId && <span data-show-more-placeholder={showMoreId} />}
 		</>
 	);
 };
