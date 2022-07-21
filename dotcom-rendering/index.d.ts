@@ -183,6 +183,7 @@ type Palette = {
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;
 		twitterHandleBelowDesktop: Colour;
+		guardianLogo: Colour;
 	};
 	border: {
 		syndicationButton: Colour;
