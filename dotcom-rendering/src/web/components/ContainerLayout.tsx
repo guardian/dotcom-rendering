@@ -1,14 +1,16 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { from, space } from '@guardian/source-foundations';
+import { from, space, until } from '@guardian/source-foundations';
 import type { DCRContainerPalette } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
+import { hiddenStyles } from '../lib/hiddenStyles';
 import { ContainerTitle } from './ContainerTitle';
 import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
+import { ShowHideButton } from './ShowHideButton';
 
 type Props = {
 	title?: string;
@@ -32,6 +34,7 @@ type Props = {
 	ophanComponentName?: string;
 	ophanComponentLink?: string;
 	containerPalette?: DCRContainerPalette;
+	toggleable?: boolean;
 	innerBackgroundColour?: string;
 	showDateHeader?: boolean;
 	editionId?: EditionId;
@@ -42,6 +45,15 @@ const containerStyles = css`
 	flex-grow: 1;
 	flex-direction: column;
 	width: 100%;
+`;
+
+const headlineContainerStyles = css`
+	display: flex;
+	justify-content: flex-end;
+
+	${until.leftCol} {
+		justify-content: space-between;
+	}
 `;
 
 const margins = css`
@@ -124,12 +136,14 @@ export const ContainerLayout = ({
 	ophanComponentLink,
 	ophanComponentName,
 	containerPalette,
+	toggleable = false,
 	innerBackgroundColour,
 	showDateHeader,
 	editionId,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
+
 	return (
 		<ElementContainer
 			sectionId={sectionId}
@@ -170,18 +184,32 @@ export const ContainerLayout = ({
 					stretchRight={stretchRight}
 					format={format}
 				>
-					<Hide when="above" breakpoint="leftCol">
-						<ContainerTitle
-							title={title}
-							fontColour={fontColour || overrides?.text.container}
-							description={description}
-							url={url}
-							containerPalette={containerPalette}
-							showDateHeader={showDateHeader}
-							editionId={editionId}
-						/>
-					</Hide>
-					{children}
+					<div css={headlineContainerStyles}>
+						<Hide when="above" breakpoint="leftCol">
+							<ContainerTitle
+								title={title}
+								fontColour={
+									fontColour || overrides?.text.container
+								}
+								description={description}
+								url={url}
+								containerPalette={containerPalette}
+								showDateHeader={showDateHeader}
+								editionId={editionId}
+							/>
+						</Hide>
+						{toggleable && sectionId !== undefined && (
+							<ShowHideButton
+								sectionId={sectionId}
+								overrideContainerToggleColour={
+									overrides?.text.containerToggle
+								}
+							/>
+						)}
+					</div>
+					<div css={hiddenStyles} id={`container-${sectionId}`}>
+						{children}
+					</div>
 				</Container>
 			</Flex>
 		</ElementContainer>
