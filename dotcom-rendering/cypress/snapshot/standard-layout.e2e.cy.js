@@ -17,6 +17,7 @@ describe('Visual regression', function () {
 		cy.hydrate();
 
 		cy.percySnapshot('Standard Layout', {
+			// TODO decide on the subset of breakpoints we wish to snapshot
 			widths: Object.values(breakpoints),
 		});
 	});

@@ -39,6 +39,8 @@ Cypress.Commands.add('hydrate', () => {
 		})
 		.then(() => {
 			cy.scrollTo('top');
+			// Additional wait to ensure layout shift has completed post hydration
+			// Is there a deterministic way to do this?
 			// eslint-disable-next-line cypress/no-unnecessary-waiting
 			cy.wait(5000);
 		});
