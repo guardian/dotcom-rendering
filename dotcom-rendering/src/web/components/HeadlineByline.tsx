@@ -8,6 +8,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import { getSoleContributor } from '../../lib/byline';
 import { decidePalette } from '../lib/decidePalette';
 import { BylineLink } from './BylineLink';
 
@@ -109,15 +110,14 @@ type Props = {
 	tags: TagType[];
 };
 
-const hasSingleContributor = (tags: TagType[]) =>
-	tags.filter((tag) => tag.type === 'Contributor').length === 1;
-
 export const HeadlineByline = ({ format, byline, tags }: Props) => {
 	if (byline === '') {
 		return null;
 	}
 
 	const palette = decidePalette(format);
+
+	const hasSingleContributor = !!getSoleContributor(tags, byline);
 
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
@@ -149,8 +149,7 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 						<div
 							css={[
 								opinionWrapperStyles,
-								hasSingleContributor(tags) &&
-									authorBylineWithImage,
+								hasSingleContributor && authorBylineWithImage,
 							]}
 						>
 							<div css={opinionStyles(palette, format)}>
