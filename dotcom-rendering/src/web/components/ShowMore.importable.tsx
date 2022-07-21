@@ -66,10 +66,11 @@ export const ShowMore = ({
 	showMoreId: string;
 	displayName: string;
 }) => {
-	const [showMore, setShow] = useState(false);
-	// We only pass an actual URL to SWR when 'showMore' is true.
-	// Toggling 'showMore' will trigger a re-render
-	//   see: https://swr.vercel.app/docs/conditional-fetching#conditional
+	const [showMore, setShowMore] = useState(false);
+	/** We only pass an actual URL to SWR when 'showMore' is true.
+	 * Toggling 'showMore' will trigger a re-render
+	 *   @see https://swr.vercel.app/docs/conditional-fetching#conditional
+	 */
 	const url = showMore
 		? `https://code.api.nextgen.guardianapps.co.uk/${pageId}/show-more/${showMoreId}.json?dcr=true`
 		: undefined;
@@ -98,7 +99,7 @@ export const ShowMore = ({
 			size="xsmall"
 			icon={showMore && !loading ? <SvgMinus /> : <SvgPlus />}
 			iconSide="left"
-			onClick={() => setShow(!showMore)}
+			onClick={() => setShowMore(!showMore)}
 			cssOverrides={css`
 				margin-top: ${space[3]}px;
 				${from.tablet} {
