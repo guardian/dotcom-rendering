@@ -100,7 +100,7 @@ const adStyles = css`
 			/* outstreamMobile is the ad with the smallest height that we serve for mobile
 			   liveblog-inline slots. For desktop, this is an mpu */
 			min-height: ${adSizes.outstreamMobile.height + labelHeight}px;
-			${from.tablet} {
+			${from.desktop} {
 				min-height: ${adSizes.mpu.height + labelHeight}px;
 			}
 
