@@ -17,6 +17,7 @@ import {
 	SvgPlus,
 } from '@guardian/source-react-components';
 import { LiveBlock } from 'liveBlock';
+import { FC } from 'react';
 
 const pinnedPostContainer = (format: ArticleFormat) => css`
     border: 3px solid ${border.borderPinnedPost(format)};
@@ -139,7 +140,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
+const PinnedPost: FC<Props> = ({ pinnedPost, children, format }: Props) => {
 	return (
 		<div
 			id="pinned-post"
@@ -187,5 +188,7 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 		</div>
 	);
 };
+
+export default PinnedPost;
 
 

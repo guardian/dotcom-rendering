@@ -1,18 +1,14 @@
 import { css } from "@emotion/react";
-import LiveBlockContainer from "@guardian/common-rendering/src/components/liveBlockContainer";
-import { ArticleDesign, ArticleDisplay, ArticleFormat, ArticlePillar } from "@guardian/libs";
-import { breakpoints, from } from "@guardian/source-foundations";
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from "@guardian/libs";
+import { from } from "@guardian/source-foundations";
 import { ok } from "@guardian/types";
-import { formatUTCTimeDateTz } from "date";
 import { LiveBlockComp } from "components/LiveBlocks";
 import { FC } from "react";
-import { renderAll } from "renderer";
-import { LastUpdated } from "./LastUpdated";
-import { Article } from "./Layout/Layout.stories";
-import { PinnedPost } from "./PinnedPost";
+import PinnedPost from "./";
 import { LiveBlock } from "liveBlock";
-import type { Text } from "bodyElement";
+import type { BodyElement } from "bodyElement";
 import { ElementKind } from "bodyElementKind";
+import { JSDOM } from "jsdom";
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -36,7 +32,12 @@ const standard = {
 	theme: ArticlePillar.News,
 };
 
-const bodyElement: Text = {kind: ElementKind.Text, doc: "<div>Some Text</div>"}
+const textElement = (nodes: string[]): BodyElement => ({
+	kind: ElementKind.Text,
+	doc: JSDOM.fragment(nodes.join('')),
+});
+
+const bodyElement = textElement(["<div>Some Text</div>"])
 
 const pinnedBlock: LiveBlock = {
 	id: '5',
@@ -44,7 +45,7 @@ const pinnedBlock: LiveBlock = {
 	title: 'Block Five',
 	firstPublished: new Date('2021-11-02T10:20:20Z'),
 	lastModified: new Date('2021-11-02T11:13:13Z'),
-	body: [ok()],
+	body: [ok(bodyElement)],
 	contributors: [],
 	isPinned: true,
 };
@@ -52,7 +53,7 @@ const pinnedBlock: LiveBlock = {
 const Default: FC = () => (
     <Wrapper>
         <PinnedPost pinnedPost={pinnedBlock} format={standard}>
-            <LiveBlockComp block={pinnedBlock} format={standard} isPinnedPost={true} isOriginalPinnedPost={false}>
+			<LiveBlockComp block={pinnedBlock} format={standard} isPinnedPost={true} isOriginalPinnedPost={false}>
             </LiveBlockComp>
         </PinnedPost>
     </Wrapper>
@@ -63,4 +64,4 @@ export default {
 	title: 'AR/PinnedPost',
 };
 
-export {Default};
+export { Default };

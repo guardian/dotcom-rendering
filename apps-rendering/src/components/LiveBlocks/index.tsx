@@ -6,12 +6,11 @@ import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBl
 import type { ArticleFormat } from '@guardian/libs';
 import { fromNullable, map, partition, withDefault } from '@guardian/types';
 import { LastUpdated } from 'components/LastUpdated';
-import { PinnedPost } from 'components/PinnedPost';
+import PinnedPost from 'components/PinnedPost';
 import type { Contributor } from 'contributor';
 import { formatUTCTimeDateTz } from 'date';
 import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
-import type { Option } from 'option';
 import { OptionKind } from 'option';
 import type { FC } from 'react';
 import { renderAll } from 'renderer';
