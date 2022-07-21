@@ -97,6 +97,7 @@ const adStyles = css`
 
 		/* liveblogs ads have different background colours due the darker page background */
 		.ad-slot--liveblog-inline {
+			/* outstreamMobile is the smallest ad height we serve for liveblog-inline slots */
 			min-height: ${adSizes.outstreamMobile.height + labelHeight}px;
 			background-color: ${neutral[93]};
 			.ad-slot__label {
