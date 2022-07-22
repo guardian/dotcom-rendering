@@ -396,7 +396,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				</SendToBack>
 			</div>
 
-			<main data-layout="CommentLayout.tsx">
+			<main data-layout="CommentLayout">
 				<ElementContainer
 					showTopBorder={false}
 					backgroundColour={palette.background.article}

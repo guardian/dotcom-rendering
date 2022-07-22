@@ -267,7 +267,7 @@ export const NewsletterSignupLayout = ({
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main>
+			<main data-layout="NewsletterSignupLayout">
 				<ContainerLayout
 					innerBackgroundColour={brandBackground.primary}
 					leftContent={

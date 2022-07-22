@@ -397,7 +397,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				</>
 			)}
 
-			<main data-layout="ShowcaseLayout.tsx">
+			<main data-layout="ShowcaseLayout">
 				<ElementContainer
 					showTopBorder={false}
 					backgroundColour={palette.background.article}

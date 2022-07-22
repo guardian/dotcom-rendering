@@ -355,7 +355,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			{CAPIArticle.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
 			)}
-			<main>
+			<main data-layout="InteractiveLayout">
 				<ElementContainer
 					data-print-layout="hide"
 					showTopBorder={false}

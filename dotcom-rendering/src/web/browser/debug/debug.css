@@ -1,3 +1,14 @@
+/* Layout: Annotate */
+main[data-layout]::before {
+	content: 'layout: ' attr(data-layout);
+	font-family: monospace;
+	background-color: purple;
+	color: white;
+
+	padding: 5px;
+	position: relative;
+}
+
 /* Islands: Outline child elements & label */
 gu-island::before {
 	content: 'island: ' attr(name);

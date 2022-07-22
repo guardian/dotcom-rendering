@@ -458,7 +458,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main>
+			<main data-layout="StandardLayout">
 				<ElementContainer
 					data-print-layout="hide"
 					showTopBorder={false}
@@ -531,7 +531,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									format={format}
 									headlineString={CAPIArticle.headline}
 									tags={CAPIArticle.tags}
-									byline={CAPIArticle.byline}
+									byline={CAPIArticle.author.byline}
 									webPublicationDateDeprecated={
 										CAPIArticle.webPublicationDateDeprecated
 									}
@@ -593,7 +593,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									format={format}
 									pageId={CAPIArticle.pageId}
 									webTitle={CAPIArticle.webTitle}
-									byline={CAPIArticle.byline}
+									author={CAPIArticle.author}
 									tags={CAPIArticle.tags}
 									primaryDateline={
 										CAPIArticle.webPublicationDateDisplay
