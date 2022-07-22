@@ -47,8 +47,6 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 				<GalleryStandfirst
 					standfirst={item.standfirst}
 					format={format}
-					byline={item.byline}
-					bylineHtml={item.bylineHtml}
 				/>
 			);
 		case ArticleDesign.Audio:

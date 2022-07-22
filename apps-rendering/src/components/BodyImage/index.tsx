@@ -1,12 +1,20 @@
 // ----- Imports ----- //
 import { ArticleDesign } from '@guardian/libs';
+import type { Breakpoint } from '@guardian/source-foundations';
+import type { Option } from '@guardian/types';
+import { none } from '@guardian/types';
 import type { FC } from 'react';
 import type { BodyImageProps } from './BodyImage.defaults';
-import DefaultBodyImage from './BodyImage.defaults';
+import DefaultBodyImage, {
+	getDefaultImgStyles,
+	getDefaultStyles,
+} from './BodyImage.defaults';
 import GalleryBodyImage from './GalleryBodyImage';
 // ----- Component ----- //
 
-const BodyImage: FC<BodyImageProps> = ({
+type Props = BodyImageProps & { leftColumnBreakpoint: Option<Breakpoint> };
+
+const BodyImage: FC<Props> = ({
 	image,
 	format,
 	supportsDarkMode,
@@ -23,7 +31,15 @@ const BodyImage: FC<BodyImageProps> = ({
 					supportsDarkMode={supportsDarkMode}
 					lightbox={lightbox}
 					caption={caption}
-					leftColumnBreakpoint={leftColumnBreakpoint}
+					wrapperStyles={getDefaultStyles(
+						image.role,
+						leftColumnBreakpoint,
+					)}
+					imgStyles={getDefaultImgStyles(
+						image.role,
+						supportsDarkMode,
+					)}
+					captionStyles={none}
 				/>
 			);
 
@@ -35,7 +51,15 @@ const BodyImage: FC<BodyImageProps> = ({
 					supportsDarkMode={supportsDarkMode}
 					lightbox={lightbox}
 					caption={caption}
-					leftColumnBreakpoint={leftColumnBreakpoint}
+					wrapperStyles={getDefaultStyles(
+						image.role,
+						leftColumnBreakpoint,
+					)}
+					imgStyles={getDefaultImgStyles(
+						image.role,
+						supportsDarkMode,
+					)}
+					captionStyles={none}
 				/>
 			);
 	}

@@ -8,7 +8,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { from, remSpace } from '@guardian/source-foundations';
 import type { Breakpoint } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
-import { none, some, withDefault } from '@guardian/types';
+import { none, OptionKind, some, withDefault } from '@guardian/types';
 import Img from 'components/ImgAlt';
 import type { Image } from 'image/image';
 import type { Lightbox } from 'image/lightbox';
@@ -94,7 +94,9 @@ export type BodyImageProps = {
 	supportsDarkMode: boolean;
 	lightbox: Option<Lightbox>;
 	caption: Option<ReactNode>;
-	leftColumnBreakpoint: Option<Breakpoint>;
+	wrapperStyles: SerializedStyles;
+	imgStyles: Option<SerializedStyles>;
+	captionStyles: Option<SerializedStyles>;
 };
 
 const DefaultBodyImage: FC<BodyImageProps> = ({
@@ -103,18 +105,26 @@ const DefaultBodyImage: FC<BodyImageProps> = ({
 	supportsDarkMode,
 	lightbox,
 	caption,
-	leftColumnBreakpoint,
+	wrapperStyles,
+	imgStyles,
+	captionStyles,
 }) => (
-	<figure css={getDefaultStyles(image.role, leftColumnBreakpoint)}>
+	<figure css={wrapperStyles}>
 		<Img
 			image={image}
 			sizes={getDefaultSizes(image.role)}
-			className={getDefaultImgStyles(image.role, supportsDarkMode)}
+			className={imgStyles}
 			format={format}
 			supportsDarkMode={supportsDarkMode}
 			lightbox={lightbox}
 		/>
-		<FigCaption format={format} supportsDarkMode={supportsDarkMode}>
+		<FigCaption
+			css={withDefault<SerializedStyles | undefined>(undefined)(
+				captionStyles,
+			)}
+			format={format}
+			supportsDarkMode={supportsDarkMode}
+		>
 			{caption}
 		</FigCaption>
 	</figure>

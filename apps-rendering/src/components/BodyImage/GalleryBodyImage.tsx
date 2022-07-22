@@ -114,19 +114,15 @@ const GalleryBodyImage: FC<BodyImageProps> = ({
 	supportsDarkMode,
 	lightbox,
 	caption,
-	leftColumnBreakpoint,
+	wrapperStyles,
+	imgStyles,
 }) => (
-	<figure
-		css={css(
-			getDefaultStyles(image.role, leftColumnBreakpoint),
-			figureStyles,
-		)}
-	>
+	<figure css={css(wrapperStyles, figureStyles)}>
 		<div css={imageWrapperStyles}>
 			<Img
 				image={image}
 				sizes={getDefaultSizes(image.role)}
-				className={getDefaultImgStyles(image.role, supportsDarkMode)}
+				className={imgStyles}
 				format={format}
 				supportsDarkMode={supportsDarkMode}
 				lightbox={lightbox}
