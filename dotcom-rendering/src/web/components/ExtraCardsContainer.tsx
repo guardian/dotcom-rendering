@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import type { DCRContainerPalette } from '../../types/front';
 import { Card } from './Card/Card';
@@ -8,6 +9,7 @@ type Props = {
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showImages?: boolean;
+	isShowMoreContainer?: boolean;
 };
 
 function isFirstInRow(cardIndex: number) {
@@ -35,14 +37,25 @@ function hasNoCardBelowIt(cardIndex: number, trailsLength: number) {
 	return cardIndex >= trailsLength - 4;
 }
 
+function getDataLinkName(originalName: string, isShowMoreContainer: boolean) {
+	const prefix = isShowMoreContainer ? 'showmore | ' : '';
+	return `${prefix}${originalName}`;
+}
+
+const topPaddingStyle = css`
+	padding-top: 10px;
+`;
+
 export const ExtraCardsContainer = ({
 	trails,
 	containerPalette,
 	showImages = false,
+	isShowMoreContainer = false,
 }: Props) => {
 	const percentage = '25%';
 	return (
 		<>
+			{isShowMoreContainer && <div css={topPaddingStyle} />}
 			<UL direction="row" padBottom={true} wrapCards={true}>
 				{trails.map((trail, index) => (
 					<LI
@@ -82,6 +95,10 @@ export const ExtraCardsContainer = ({
 							starRating={trail.starRating}
 							branding={trail.branding}
 							discussionId={trail.discussionId}
+							dataLinkName={getDataLinkName(
+								trail.dataLinkName,
+								isShowMoreContainer,
+							)}
 						/>
 					</LI>
 				))}
