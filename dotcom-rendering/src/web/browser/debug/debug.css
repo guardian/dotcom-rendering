@@ -9,7 +9,7 @@ main[data-layout]::before {
 	position: relative;
 }
 
-/* Islands: Outline child elements & label */
+/* Islands: Outline child elements & label (top) */
 gu-island::before {
 	content: 'island: ' attr(name);
 	font-family: monospace;
@@ -26,8 +26,8 @@ gu-island > * {
 	outline: 4px blue solid;
 }
 
-/* Elements - outline & label */
-figure[data-spacefinder-type]::before {
+/* Elements - outline & label (bottom) */
+figure[data-spacefinder-type]::after {
 	content: 'element: ' attr(data-spacefinder-type);
 	font-family: monospace;
 	background-color: red;
@@ -35,6 +35,7 @@ figure[data-spacefinder-type]::before {
 
 	padding: 5px;
 	position: relative;
+	top: -1px;
 }
 
 figure[data-spacefinder-type] {
