@@ -1,32 +1,31 @@
+/* Islands: Outline child elements & label */
 gu-island::before {
-	content: attr(name);
+	content: 'island: ' attr(name);
 	font-family: monospace;
-	background-color: white;
+	background-color: blue;
+	color: white;
+
+	padding: 5px;
+	position: relative;
+	top: -5px;
+	margin-top: 5px;
 }
 
-gu-island {
+gu-island > * {
 	outline: 4px blue solid;
 }
 
-figure::before {
-	content: attr(data-spacefinder-type);
+/* Elements - outline & label */
+figure[data-spacefinder-type]::before {
+	content: 'element: ' attr(data-spacefinder-type);
 	font-family: monospace;
-	background-color: white;
+	background-color: red;
+	color: white;
+
+	padding: 5px;
+	position: relative;
 }
 
 figure[data-spacefinder-type] {
 	outline: 4px red solid;
-}
-
-.debug-key {
-	font-family: monospace;
-	margin-bottom: 10px;
-}
-
-.debug-key-island {
-	color: blue;
-}
-
-.debug-key-element {
-	color: red;
 }
