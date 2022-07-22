@@ -1,5 +1,5 @@
 import { renderToString } from 'react-dom/server';
-import { Carousel } from '../components/Carousel';
+import { Carousel } from '../components/Carousel.importable';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTrail } from '../lib/decideTrail';
 

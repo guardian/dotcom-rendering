@@ -20,7 +20,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
-import { Carousel } from '../components/Carousel';
+import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';

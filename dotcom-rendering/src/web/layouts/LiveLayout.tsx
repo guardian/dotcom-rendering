@@ -25,7 +25,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Carousel } from '../components/Carousel';
+import { Carousel } from '../components/Carousel.importable';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';

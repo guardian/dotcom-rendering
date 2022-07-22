@@ -23,7 +23,7 @@ import { buildAdTargeting } from '../../lib/ad-targeting';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { Carousel } from '../components/Carousel';
+import { Carousel } from '../components/Carousel.importable';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
