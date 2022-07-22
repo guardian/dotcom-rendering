@@ -19,106 +19,6 @@ export const series = {
 	url: 'https://www.theguardian.com/tv-and-radio/series/tv-review',
 	trails: [
 		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/jul/18/super-surgeons-review-the-cancer-doctors-who-really-should-have-god-complexes',
-			linkText:
-				'Super Surgeons review – the cancer doctors who really should have God complexes ',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			image: 'https://i.guim.co.uk/img/media/7c22c1d78896b50b05b866d197f4196ea7329a28/60_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=bd5fa2a20465653ad806c0fdd241c1eb',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/7c22c1d78896b50b05b866d197f4196ea7329a28/60_0_1800_1080/master/1800.jpg?width=300&quality=85&auto=format&fit=max&s=bd5fa2a20465653ad806c0fdd241c1eb',
-				'460': 'https://i.guim.co.uk/img/media/7c22c1d78896b50b05b866d197f4196ea7329a28/60_0_1800_1080/master/1800.jpg?width=460&quality=85&auto=format&fit=max&s=8f74efb7b40a52d3f383e61504dcede5',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-07-18T22:05:22.000Z',
-			headline:
-				'Super Surgeons review – the cancer doctors who really should have God complexes ',
-			shortUrl: 'https://www.theguardian.com/p/yzh97',
-			starRating: 4,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/jul/17/better-things-series-five-review-a-life-affirming-final-outing-that-will-leave-a-gaping-hole-in-tv-comedy',
-			linkText:
-				'Better Things series five review – a life-affirming final outing that will leave a gaping hole in TV comedy',
-			showByline: false,
-			byline: 'Rachel Aroesti',
-			image: 'https://i.guim.co.uk/img/media/6d0e911ed4bc545ad9793bec8e06ec5419e0a89c/0_81_4284_2570/master/4284.jpg?width=300&quality=85&auto=format&fit=max&s=7f6d5c0d8a80b5d425acc41a428b3d55',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/6d0e911ed4bc545ad9793bec8e06ec5419e0a89c/0_81_4284_2570/master/4284.jpg?width=300&quality=85&auto=format&fit=max&s=7f6d5c0d8a80b5d425acc41a428b3d55',
-				'460': 'https://i.guim.co.uk/img/media/6d0e911ed4bc545ad9793bec8e06ec5419e0a89c/0_81_4284_2570/master/4284.jpg?width=460&quality=85&auto=format&fit=max&s=ef0a7c705bed622810f4eb0239827edf',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-07-17T22:15:48.000Z',
-			headline:
-				'Better Things series five review – a life-affirming final outing that will leave a gaping hole in TV comedy',
-			shortUrl: 'https://www.theguardian.com/p/yp5z4',
-			starRating: 5,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/jul/17/the-control-room-review-the-thriller-thats-almost-too-good-for-summer',
-			linkText:
-				'The Control Room review – the thriller that’s almost too good for summer',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			image: 'https://i.guim.co.uk/img/media/df344e57c5b368d0f756b4c1278df2adef8ec09a/0_2_4285_2572/master/4285.jpg?width=300&quality=85&auto=format&fit=max&s=9ccc3db4da155ddbd2dc3b0a89650abd',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/df344e57c5b368d0f756b4c1278df2adef8ec09a/0_2_4285_2572/master/4285.jpg?width=300&quality=85&auto=format&fit=max&s=9ccc3db4da155ddbd2dc3b0a89650abd',
-				'460': 'https://i.guim.co.uk/img/media/df344e57c5b368d0f756b4c1278df2adef8ec09a/0_2_4285_2572/master/4285.jpg?width=460&quality=85&auto=format&fit=max&s=708aad05fe5ec969eb09ef4641c2b325',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-07-17T21:00:47.000Z',
-			headline:
-				'The Control Room review – the thriller that’s almost too good for summer',
-			shortUrl: 'https://www.theguardian.com/p/yp445',
-			starRating: 4,
-		},
-		{
-			url: 'https://www.theguardian.com/tv-and-radio/2022/jul/15/epstein-victorias-secret-angels-and-demons-review',
-			linkText:
-				'Victoria’s Secret: Angels and Demons review – the lingerie chain’s links to Jeffrey Epstein must be explained',
-			showByline: false,
-			byline: 'Lucy Mangan',
-			image: 'https://i.guim.co.uk/img/media/8ff40dc21ac5f8493077e786d84a674e218e058b/118_82_1141_685/master/1141.jpg?width=300&quality=85&auto=format&fit=max&s=eaf9b7abfc097be5962ca440ec9e5d48',
-			carouselImages: {
-				'300': 'https://i.guim.co.uk/img/media/8ff40dc21ac5f8493077e786d84a674e218e058b/118_82_1141_685/master/1141.jpg?width=300&quality=85&auto=format&fit=max&s=eaf9b7abfc097be5962ca440ec9e5d48',
-				'460': 'https://i.guim.co.uk/img/media/8ff40dc21ac5f8493077e786d84a674e218e058b/118_82_1141_685/master/1141.jpg?width=460&quality=85&auto=format&fit=max&s=b96227c5e6b4991839e1aca74b019bfb',
-			},
-			isLiveBlog: false,
-			pillar: 'culture',
-			designType: 'Review',
-			format: {
-				design: 'ReviewDesign',
-				theme: 'CulturePillar',
-				display: 'StandardDisplay',
-			},
-			webPublicationDate: '2022-07-15T14:45:41.000Z',
-			headline:
-				'Victoria’s Secret: Angels and Demons review – the lingerie chain’s links to Jeffrey Epstein must be explained',
-			shortUrl: 'https://www.theguardian.com/p/yzmmz',
-			starRating: 3,
-		},
-		{
 			url: 'https://www.theguardian.com/tv-and-radio/2022/jul/14/resident-evil-review-netflix-zombie-game-adaptation',
 			linkText:
 				'Resident Evil review – you will binge-watch like never before',
@@ -267,6 +167,106 @@ export const series = {
 				'The Invisible Pilot review – true-crime documentary leaves a thousand questions unanswered',
 			shortUrl: 'https://www.theguardian.com/p/yzgmc',
 			starRating: 2,
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2022/jul/10/the-girl-from-plainville-review-elle-fanning',
+			linkText:
+				'The Girl from Plainville review – Elle Fanning doesn’t put a foot wrong in this questionable true-crime drama',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			image: 'https://i.guim.co.uk/img/media/ccdf5ee6b3d5d59660b1712b40b6dd1d3dc332e1/0_240_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=9ad097417f65b63cde77f785eace5a35',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/ccdf5ee6b3d5d59660b1712b40b6dd1d3dc332e1/0_240_6000_3600/master/6000.jpg?width=300&quality=85&auto=format&fit=max&s=9ad097417f65b63cde77f785eace5a35',
+				'460': 'https://i.guim.co.uk/img/media/ccdf5ee6b3d5d59660b1712b40b6dd1d3dc332e1/0_240_6000_3600/master/6000.jpg?width=460&quality=85&auto=format&fit=max&s=32e2a58a83a677a8e0d5c8415782dffe',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2022-07-10T08:00:29.000Z',
+			headline:
+				'The Girl from Plainville review – Elle Fanning doesn’t put a foot wrong in this questionable true-crime drama',
+			shortUrl: 'https://www.theguardian.com/p/ynp73',
+			starRating: 3,
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2022/jul/08/how-to-build-a-sex-room-review',
+			linkText:
+				'How to Build a Sex Room review – Changing Rooms for kinky people',
+			showByline: false,
+			byline: 'Rebecca Nicholson',
+			image: 'https://i.guim.co.uk/img/media/c9370a18c51173ec321f861dd868d346610c1bb1/325_167_2918_1751/master/2918.jpg?width=300&quality=85&auto=format&fit=max&s=a47c97e43fc5929aa0eebd9c1264c542',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/c9370a18c51173ec321f861dd868d346610c1bb1/325_167_2918_1751/master/2918.jpg?width=300&quality=85&auto=format&fit=max&s=a47c97e43fc5929aa0eebd9c1264c542',
+				'460': 'https://i.guim.co.uk/img/media/c9370a18c51173ec321f861dd868d346610c1bb1/325_167_2918_1751/master/2918.jpg?width=460&quality=85&auto=format&fit=max&s=2efa4b33db43bcb80706a3cdf81f6dda',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2022-07-08T16:00:41.000Z',
+			headline:
+				'How to Build a Sex Room review – Changing Rooms for kinky people',
+			shortUrl: 'https://www.theguardian.com/p/ymj6m',
+			starRating: 3,
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2022/jul/08/boo-bitch-review-supernatural-netflix-teen-sitcom-goes-off-the-rails',
+			linkText:
+				'Boo, Bitch review – supernatural Netflix teen sitcom goes off the rails',
+			showByline: false,
+			byline: 'Adrian Horton',
+			image: 'https://i.guim.co.uk/img/media/a77ceef4598244e3375cba88ed95ad945310dc3f/0_156_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=47c345bbd5b5bbccb09696503491769d',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/a77ceef4598244e3375cba88ed95ad945310dc3f/0_156_3600_2160/master/3600.jpg?width=300&quality=85&auto=format&fit=max&s=47c345bbd5b5bbccb09696503491769d',
+				'460': 'https://i.guim.co.uk/img/media/a77ceef4598244e3375cba88ed95ad945310dc3f/0_156_3600_2160/master/3600.jpg?width=460&quality=85&auto=format&fit=max&s=fadc1881ac3462b0d56d76602a00f946',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2022-07-08T15:00:49.000Z',
+			headline:
+				'Boo, Bitch review – supernatural Netflix teen sitcom goes off the rails',
+			shortUrl: 'https://www.theguardian.com/p/ynk9j',
+			starRating: 2,
+		},
+		{
+			url: 'https://www.theguardian.com/tv-and-radio/2022/jul/08/black-bird-review-taron-egerton-ray-liotta-dennis-lehane-apple-tv',
+			linkText:
+				'Black Bird review – Ray Liotta is heartbreaking in this posthumous prison drama',
+			showByline: false,
+			byline: 'Lucy Mangan',
+			image: 'https://i.guim.co.uk/img/media/bbdbb8392f22b6bbd2a944a34e4e5de4197c2068/261_0_3177_1907/master/3177.jpg?width=300&quality=85&auto=format&fit=max&s=0e8dcaef01056523d426be1bee6f1c5d',
+			carouselImages: {
+				'300': 'https://i.guim.co.uk/img/media/bbdbb8392f22b6bbd2a944a34e4e5de4197c2068/261_0_3177_1907/master/3177.jpg?width=300&quality=85&auto=format&fit=max&s=0e8dcaef01056523d426be1bee6f1c5d',
+				'460': 'https://i.guim.co.uk/img/media/bbdbb8392f22b6bbd2a944a34e4e5de4197c2068/261_0_3177_1907/master/3177.jpg?width=460&quality=85&auto=format&fit=max&s=1be70a6d37e63dc8e2459242a96ce6a7',
+			},
+			isLiveBlog: false,
+			pillar: 'culture',
+			designType: 'Review',
+			format: {
+				design: 'ReviewDesign',
+				theme: 'CulturePillar',
+				display: 'StandardDisplay',
+			},
+			webPublicationDate: '2022-07-08T05:00:28.000Z',
+			headline:
+				'Black Bird review – Ray Liotta is heartbreaking in this posthumous prison drama',
+			shortUrl: 'https://www.theguardian.com/p/ynzdg',
+			starRating: 4,
 		},
 	],
 };
