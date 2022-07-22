@@ -20,8 +20,8 @@ import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
-import ImmersiveSeries from './ImmersiveSeries';
 import GallerySeries from './GallerySeries';
+import ImmersiveSeries from './ImmersiveSeries';
 
 // ----- Component ----- //
 

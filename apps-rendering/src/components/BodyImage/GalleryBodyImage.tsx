@@ -1,17 +1,15 @@
-import { FC } from 'react';
-import Img from 'components/ImgAlt';
-import FigCaption from 'components/FigCaption';
 import { css } from '@emotion/react';
-
-import {
-	BodyImageProps,
-	getDefaultStyles,
-	getDefaultSizes,
-	getDefaultImgStyles,
-} from './BodyImage.defaults';
+import FigCaption from '@guardian/common-rendering/src/components/figCaption';
+import { from, neutral } from '@guardian/source-foundations';
+import Img from 'components/ImgAlt';
 import { grid } from 'grid/grid';
-import { from, neutral, remSpace } from '@guardian/source-foundations';
-import LeftCentreBorder from 'grid/LeftCentreBorder';
+import type { FC } from 'react';
+import {
+	getDefaultImgStyles,
+	getDefaultSizes,
+	getDefaultStyles,
+} from './BodyImage.defaults';
+import type { BodyImageProps } from './BodyImage.defaults';
 
 const figureStyles = css`
 	${grid.container}
@@ -70,10 +68,24 @@ const imageWrapperStyles = css`
 	}
 `;
 
-const captionWrapperStyles = css`
+const captionStyles = css`
 	${grid.column.centre}
 	grid-row: 2;
 	padding-bottom: 1.75rem;
+
+	h2,
+	span,
+	a,
+	& {
+		color: ${neutral[100]};
+	}
+	> span {
+		font-size: 0.8125rem;
+		line-height: 1.125rem;
+	}
+	> h2 {
+		font-size: 1.0625rem;
+	}
 
 	${from.leftCol} {
 		padding-bottom: 0;
@@ -120,11 +132,14 @@ const GalleryBodyImage: FC<BodyImageProps> = ({
 				lightbox={lightbox}
 			/>
 		</div>
-		<div css={captionWrapperStyles}>
-			<FigCaption format={format} supportsDarkMode={supportsDarkMode}>
-				{caption}
-			</FigCaption>
-		</div>
+
+		<FigCaption
+			css={captionStyles}
+			format={format}
+			supportsDarkMode={supportsDarkMode}
+		>
+			{caption}
+		</FigCaption>
 	</figure>
 );
 

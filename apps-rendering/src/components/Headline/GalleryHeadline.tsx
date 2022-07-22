@@ -17,7 +17,7 @@ const styles = css`
 	background-color: ${neutral[7]};
 	color: ${neutral[100]};
 	padding: 0 ${remSpace[5]} ${remSpace[9]} 0;
-	${grid.between('centre-column-start', 'centre-column-end')}
+	${grid.column.centre}
 	grid-row: 3 / 5;
 
 	${from.tablet} {
@@ -36,19 +36,13 @@ const backgroundStyles = css`
 	grid-row: 3 / 5;
 
 	${from.mobileLandscape} {
-		${grid.between('viewport-start', 'viewport-end')}
+		${grid.column.all}
 	}
 
 	${from.tablet} {
 		${grid.between('centre-column-start', 'viewport-end')}
 		margin-left: calc(${grid.columnGap} * -1/2);
 	}
-`;
-
-const standfirstBackgroundStyles = css`
-	${backgroundStyles};
-	grid-row: 5 / 7;
-	border-left: 1px solid ${neutral[20]};
 `;
 
 interface Props {
@@ -60,7 +54,6 @@ const GalleryHeadline: React.FC<Props> = ({ headline }) => (
 	<>
 		<div css={backgroundStyles} />
 		<h1 css={styles}>{headline}</h1>
-		<div css={standfirstBackgroundStyles} />
 	</>
 );
 

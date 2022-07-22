@@ -5,13 +5,13 @@ import { getFormat } from 'item';
 import BlogHeadline from './BlogHeadline';
 import CommentHeadline from './CommentHeadline';
 import FeatureHeadline from './FeatureHeadline';
+import GalleryHeadline from './GalleryHeadline';
 import { DefaultHeadline, defaultStyles } from './Headline.defaults';
 import ImmersiveHeadline from './ImmersiveHeadline';
 import InterviewHeadline from './InterviewHeadline';
 import LabsHeadline from './LabsHeadline';
 import MediaHeadline from './MediaHeadline';
 import ReviewHeadline from './ReviewHeadline';
-import GalleryHeadline from './GalleryHeadline';
 
 interface Props {
 	item: Item;

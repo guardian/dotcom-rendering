@@ -27,8 +27,8 @@ import { getFormat } from 'item';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { darkModeCss } from 'styles';
-import ImmersiveMetadata from './ImmersiveMetadata';
 import GalleryMetadata from './GalleryMetadata';
+import ImmersiveMetadata from './ImmersiveMetadata';
 
 // ----- Component ----- //
 

@@ -7,9 +7,9 @@ import type { Image } from 'image';
 import type { FC } from 'react';
 import BlogMainMediaImage from './BlogMainMediaImage';
 import CommentMainMediaImage from './CommentMainMediaImage';
+import GalleryMainMediaImage from './GalleryMainMediaImage';
 import ImmersiveMainMediaImage from './ImmersiveMainMediaImage';
 import InterviewMainMediaImage from './InterviewMainMediaImage';
-import GalleryMainMediaImage from './GalleryMainMediaImage';
 import DefaultMainMediaImage, {
 	defaultImgCss,
 	defaultSizes,
@@ -30,8 +30,6 @@ const MainMediaImage: FC<Props> = ({ image, format }: Props) => {
 	}
 
 	switch (format.design) {
-		case ArticleDesign.LiveBlog:
-			return <ImmersiveMainMediaImage image={image} format={format} />;
 		case ArticleDesign.Gallery:
 			return <GalleryMainMediaImage image={image} format={format} />;
 		case ArticleDesign.LiveBlog:

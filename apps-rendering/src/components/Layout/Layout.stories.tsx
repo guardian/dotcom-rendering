@@ -1,12 +1,12 @@
 // ----- Imports ----- //
-import { ArticleDesign, ArticleFormat } from '@guardian/libs';
-import { ArticleDisplay } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { partition, some, withDefault } from '@guardian/types';
 import Comment from 'components/Layout/CommentLayout';
-import Standard from 'components/Layout/StandardLayout';
 import Gallery from 'components/Layout/GalleryLayout';
+import Standard from 'components/Layout/StandardLayout';
 import {
 	analysis,
 	article,

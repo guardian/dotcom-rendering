@@ -1,12 +1,12 @@
 // ----- Imports ----- //
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import FigCaption from 'components/FigCaption';
+import FigCaption from '@guardian/common-rendering/src/components/figCaption';
 import { darkModeCss } from '@guardian/common-rendering/src/lib';
-import { ArticleFormat } from '@guardian/libs';
 import { ArticleElementRole } from '@guardian/libs';
-import { Breakpoint } from '@guardian/source-foundations';
+import type { ArticleFormat } from '@guardian/libs';
 import { from, remSpace } from '@guardian/source-foundations';
+import type { Breakpoint } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { none, some, withDefault } from '@guardian/types';
 import Img from 'components/ImgAlt';

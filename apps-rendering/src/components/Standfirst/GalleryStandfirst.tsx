@@ -2,7 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, body, neutral, remSpace } from '@guardian/source-foundations';
+import { body, from, neutral, remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';

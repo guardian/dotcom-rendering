@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 import { ArticleDesign } from '@guardian/libs';
 import type { FC } from 'react';
-
-import DefaultBodyImage, { BodyImageProps } from './BodyImage.defaults';
+import type { BodyImageProps } from './BodyImage.defaults';
+import DefaultBodyImage from './BodyImage.defaults';
 import GalleryBodyImage from './GalleryBodyImage';
 // ----- Component ----- //
 

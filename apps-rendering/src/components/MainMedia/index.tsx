@@ -7,8 +7,8 @@ import MainMediaVideo from 'components/MainMedia/MainMediaVideo';
 import { maybeRender } from 'lib';
 import { MainMedia, MainMediaKind } from 'mainMedia';
 import type { FC } from 'react';
-import ImmersiveCaption from './ImmersiveCaption';
 import GalleryCaption from './GalleryCaption';
+import ImmersiveCaption from './ImmersiveCaption';
 
 // ----- Component ----- //
 
