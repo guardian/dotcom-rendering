@@ -2,7 +2,8 @@
 // CAPIArticleType and its subtypes //
 // ------------------------- //
 
-import type { FECollectionConfigType, FEFrontCard } from './src/types/front';
+type FEFrontCard = import('./src/types/front').FEFrontCard;
+type FECollectionConfigType = import('./src/types/front').FECollectionConfigType;
 
 type DCRSnapType = import('./src/types/front').DCRSnapType;
 type DCRSupportingContent = import('./src/types/front').DCRSupportingContent;
