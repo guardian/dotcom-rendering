@@ -673,7 +673,7 @@ interface KeyEventsRequest {
 /**
  * ShowMoreRequest is the expected body format for POST requests made to /Cards
  */
- interface CardsRequest {
+ interface ShowMoreRequest {
 	cards: FEFrontCard[];
 	startIndex: number;
 	config: FECollectionConfigType;
