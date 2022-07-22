@@ -5,11 +5,12 @@ const DEV = process.env.NODE_ENV === 'development';
 
 /**
  * @param {boolean} isLegacyJS
+ * @param {boolean?} withChunkhash
  * @returns {string}
  */
-const generateName = (isLegacyJS) => {
+const generateName = (isLegacyJS, withChunkhash = true) => {
 	const legacyString = isLegacyJS ? '.legacy' : '';
-	const chunkhashString = DEV ? '' : '.[chunkhash]';
+	const chunkhashString = withChunkhash && !DEV ? '.[chunkhash]' : '';
 	return `[name]${legacyString}${chunkhashString}.js`;
 };
 
@@ -31,9 +32,15 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 			'./src/web/browser/newsletterEmbedIframe/init.ts',
 		relativeTime: './src/web/browser/relativeTime/init.ts',
 		initDiscussion: './src/web/browser/initDiscussion/init.ts',
+		debug: './src/web/browser/debug/init.ts',
 	},
 	output: {
-		filename: generateName(isLegacyJS),
+		filename: (data) => {
+			// We don't want to hash the debug script so it can be used in bookmarklets
+			if (data.chunk.name === 'debug')
+				return generateName(isLegacyJS, false);
+			return generateName(isLegacyJS);
+		},
 		chunkFilename: generateName(isLegacyJS),
 		publicPath: '',
 	},
