@@ -595,6 +595,10 @@ interface CAPIArticleType {
 	hasRelated: boolean;
 	publication: string; // TODO: check who uses?
 	hasStoryPackage: boolean;
+	storyPackage?: {
+		trails: CAPITrailType[];
+		heading: string;
+	};
 	beaconURL: string;
 	isCommentable: boolean;
 	commercialProperties: CommercialProperties;
