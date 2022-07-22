@@ -119,8 +119,6 @@ const buildPayload = async ({
 			showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
-			// eslint-disable-next-line -- waiting for guardian/support-dotcom-components#723 to be merged
-			// @ts-ignore
 			signInBannerLastClosedAt,
 			mvtId: Number(
 				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
@@ -136,8 +134,6 @@ const buildPayload = async ({
 			browserId: (await hasCmpConsentForBrowserId())
 				? browserId || undefined
 				: undefined,
-			// eslint-disable-next-line -- waiting for guardian/support-dotcom-components#723 to be merged
-			// @ts-ignore
 			purchaseInfo: getPurchaseInfo(),
 			isSignedIn,
 		},
