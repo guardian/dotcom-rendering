@@ -198,7 +198,7 @@ export const ContainerLayout = ({
 								editionId={editionId}
 							/>
 						</Hide>
-						{toggleable && sectionId !== undefined && (
+						{toggleable && sectionId && (
 							<ShowHideButton
 								sectionId={sectionId}
 								overrideContainerToggleColour={
@@ -207,9 +207,13 @@ export const ContainerLayout = ({
 							/>
 						)}
 					</div>
-					<div css={hiddenStyles} id={`container-${sectionId}`}>
-						{children}
-					</div>
+					{toggleable && sectionId ? (
+						<div css={hiddenStyles} id={`container-${sectionId}`}>
+							{children}
+						</div>
+					) : (
+						children
+					)}
 				</Container>
 			</Flex>
 		</ElementContainer>
