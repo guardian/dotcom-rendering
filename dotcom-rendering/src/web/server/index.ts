@@ -245,3 +245,10 @@ export const renderFrontJson = (
 ): void => {
 	res.json(enhanceFront(body));
 };
+/**
+ * Skeleton rendering function for the `ShowMore/` endpoint.
+ * Function will be filled out in the next commits.
+ */
+export const renderShowMore = (): void => {
+	return;
+};

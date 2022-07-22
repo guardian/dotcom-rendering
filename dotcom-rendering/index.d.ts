@@ -676,7 +676,6 @@ interface KeyEventsRequest {
  */
  interface ShowMoreRequest {
 	cards: FEFrontCard[];
-	startIndex: number;
 	config: FECollectionConfigType;
 }
 

@@ -16,6 +16,7 @@ import {
 	renderInteractive,
 	renderKeyEvents,
 	renderOnwards,
+	renderShowMore,
 } from '../web/server';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
@@ -61,6 +62,7 @@ export const prodServer = (): void => {
 	app.post('/Onwards', logRenderTime, renderOnwards);
 	app.post('/Front', logRenderTime, renderFront);
 	app.post('/FrontJSON', logRenderTime, renderFrontJson);
+	app.post('/ShowMore', logRenderTime, renderShowMore);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
