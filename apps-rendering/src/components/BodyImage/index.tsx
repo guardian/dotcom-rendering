@@ -31,15 +31,6 @@ const BodyImage: FC<Props> = ({
 					supportsDarkMode={supportsDarkMode}
 					lightbox={lightbox}
 					caption={caption}
-					wrapperStyles={getDefaultStyles(
-						image.role,
-						leftColumnBreakpoint,
-					)}
-					imgStyles={getDefaultImgStyles(
-						image.role,
-						supportsDarkMode,
-					)}
-					captionStyles={none}
 				/>
 			);
 

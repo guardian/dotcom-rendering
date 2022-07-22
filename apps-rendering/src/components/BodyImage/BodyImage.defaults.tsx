@@ -8,7 +8,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { from, remSpace } from '@guardian/source-foundations';
 import type { Breakpoint } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
-import { none, OptionKind, some, withDefault } from '@guardian/types';
+import { none, some, withDefault } from '@guardian/types';
 import Img from 'components/ImgAlt';
 import type { Image } from 'image/image';
 import type { Lightbox } from 'image/lightbox';

@@ -108,21 +108,15 @@ const captionStyles = css`
 	}
 `;
 
-const GalleryBodyImage: FC<BodyImageProps> = ({
-	image,
-	format,
-	supportsDarkMode,
-	lightbox,
-	caption,
-	wrapperStyles,
-	imgStyles,
-}) => (
-	<figure css={css(wrapperStyles, figureStyles)}>
+const GalleryBodyImage: FC<
+	Omit<BodyImageProps, 'wrapperStyles' | 'imgStyles' | 'captionStyles'>
+> = ({ image, format, supportsDarkMode, lightbox, caption }) => (
+	<figure css={css(figureStyles)}>
 		<div css={imageWrapperStyles}>
 			<Img
 				image={image}
 				sizes={getDefaultSizes(image.role)}
-				className={imgStyles}
+				className={getDefaultImgStyles(image.role, supportsDarkMode)}
 				format={format}
 				supportsDarkMode={supportsDarkMode}
 				lightbox={lightbox}
