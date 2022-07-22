@@ -1,0 +1,32 @@
+gu-island::before {
+	content: attr(name);
+	font-family: monospace;
+	background-color: white;
+}
+
+gu-island {
+	outline: 4px blue solid;
+}
+
+figure::before {
+	content: attr(data-spacefinder-type);
+	font-family: monospace;
+	background-color: white;
+}
+
+figure[data-spacefinder-type] {
+	outline: 4px red solid;
+}
+
+.debug-key {
+	font-family: monospace;
+	margin-bottom: 10px;
+}
+
+.debug-key-island {
+	color: blue;
+}
+
+.debug-key-element {
+	color: red;
+}
