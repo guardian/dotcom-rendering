@@ -1,6 +1,8 @@
 import { defineConfig } from 'cypress';
 import plugins from './cypress/plugins';
 
+// https://docs.cypress.io/guides/references/configuration
+
 module.exports = defineConfig({
   viewportWidth: 1500,
   viewportHeight: 860,

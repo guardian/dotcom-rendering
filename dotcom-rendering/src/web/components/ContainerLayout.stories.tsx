@@ -196,6 +196,19 @@ export const SidesStory = () => {
 };
 SidesStory.story = { name: 'with a full border divider' };
 
+export const ToggleableStory = () => {
+	return (
+		<ContainerLayout
+			title="Toggleable Container"
+			toggleable={true}
+			sectionId="sectionId"
+		>
+			<Grey />
+		</ContainerLayout>
+	);
+};
+ToggleableStory.story = { name: 'toggleable container' };
+
 export const MarginsStory = () => {
 	return (
 		<>

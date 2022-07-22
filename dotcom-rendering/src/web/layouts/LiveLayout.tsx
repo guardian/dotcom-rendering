@@ -494,7 +494,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.headline
 											}
 											tags={CAPIArticle.tags}
-											byline={CAPIArticle.author.byline}
+											byline={CAPIArticle.byline}
 											webPublicationDateDeprecated={
 												CAPIArticle.webPublicationDateDeprecated
 											}
@@ -570,7 +570,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										format={format}
 										pageId={CAPIArticle.pageId}
 										webTitle={CAPIArticle.webTitle}
-										author={CAPIArticle.author}
+										byline={CAPIArticle.byline}
 										tags={CAPIArticle.tags}
 										primaryDateline={
 											CAPIArticle.webPublicationDateDisplay
@@ -738,7 +738,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											format={format}
 											pageId={CAPIArticle.pageId}
 											webTitle={CAPIArticle.webTitle}
-											author={CAPIArticle.author}
+											byline={CAPIArticle.byline}
 											tags={CAPIArticle.tags}
 											primaryDateline={
 												CAPIArticle.webPublicationDateDisplay
