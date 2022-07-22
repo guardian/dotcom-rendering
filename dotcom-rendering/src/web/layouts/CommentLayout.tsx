@@ -700,15 +700,17 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 				{CAPIArticle.storyPackage && (
 					<ElementContainer>
-						<Carousel
-							heading={CAPIArticle.storyPackage.heading}
-							trails={CAPIArticle.storyPackage.trails.map(
-								decideTrail,
-							)}
-							ophanComponentName="more-on-this-story"
-							format={format}
-							isCuratedContent={false}
-						/>
+						<Island deferUntil="visible">
+							<Carousel
+								heading={CAPIArticle.storyPackage.heading}
+								trails={CAPIArticle.storyPackage.trails.map(
+									decideTrail,
+								)}
+								ophanComponentName="more-on-this-story"
+								format={format}
+								isCuratedContent={false}
+							/>
+						</Island>
 					</ElementContainer>
 				)}
 
