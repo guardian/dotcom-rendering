@@ -38,7 +38,6 @@ export const devServer = () => {
 			case '/FrontJSON':
 				return renderFrontJson(req, res);
 			case '/ShowMore':
-				// @ts-expect-error - only a skeleton render fn is implemented in this commit
 				return renderShowMore(req, res);
 			default:
 				next();

@@ -1,4 +1,6 @@
 import type express from 'express';
+import { decideContainerPalette } from 'src/model/decideContainerPalette';
+import { enhanceCards } from 'src/model/enhanceCards';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
@@ -13,6 +15,7 @@ import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
 import { onwardsToHtml } from './onwardsToHtml';
+import { showMoreToHtml } from './showMoreToHtml';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
@@ -245,10 +248,32 @@ export const renderFrontJson = (
 ): void => {
 	res.json(enhanceFront(body));
 };
+
 /**
- * Skeleton rendering function for the `ShowMore/` endpoint.
- * Function will be filled out in the next commits.
+ * Handler for the `ShowMore/` endpoint. Receives a set of
+ * cards and a collection config, renders it, and send the resulting
+ * html back to Frontend in the format: `{ html: <the html string> }`
  */
-export const renderShowMore = (): void => {
-	return;
+export const renderShowMore = (
+	{ body }: { body: ShowMoreRequest },
+	res: express.Response,
+): void => {
+	try {
+		const { cards, config } = body;
+
+		const dcrContainerPalette = decideContainerPalette(
+			config.metadata?.map((meta) => meta.type),
+		);
+		const dcrTrails = enhanceCards(cards, dcrContainerPalette);
+
+		const html = showMoreToHtml({
+			cards: dcrTrails,
+			containerPalette: dcrContainerPalette,
+		});
+
+		res.status(200).send({ html });
+	} catch (e) {
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send({ html: `<pre>${message}</pre>` });
+	}
 };
