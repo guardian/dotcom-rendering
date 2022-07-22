@@ -2,6 +2,8 @@
 // CAPIArticleType and its subtypes //
 // ------------------------- //
 
+import type { FECollectionConfigType, FEFrontCard } from './src/types/front';
+
 type DCRSnapType = import('./src/types/front').DCRSnapType;
 type DCRSupportingContent = import('./src/types/front').DCRSupportingContent;
 
@@ -667,6 +669,16 @@ interface KeyEventsRequest {
 	format: CAPIFormat;
 	filterKeyEvents: boolean;
 }
+
+/**
+ * ShowMoreRequest is the expected body format for POST requests made to /Cards
+ */
+ interface CardsRequest {
+	cards: FEFrontCard[];
+	startIndex: number;
+	config: FECollectionConfigType;
+}
+
 
 interface BadgeType {
 	seriesTag: string;

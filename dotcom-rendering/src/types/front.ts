@@ -233,7 +233,7 @@ export type DCRSnapType = {
 	embedCss?: string;
 };
 
-type FECollectionConfigType = {
+export type FECollectionConfigType = {
 	displayName: string;
 	metadata?: { type: FEContainerPalette }[];
 	collectionType: FEContainerType;
