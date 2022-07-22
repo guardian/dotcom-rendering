@@ -154,7 +154,7 @@ const isLive = (design: ArticleDesign): boolean =>
 	design === ArticleDesign.LiveBlog;
 
 // This styling function is only temprarily used and will be removed
-// after the liveblog header is completed and ackground colours
+// after the liveblog header is completed and background colours
 // are added
 const tempraryBackgroundStyle = (format: ArticleFormat): SerializedStyles => {
 	switch (format.design) {

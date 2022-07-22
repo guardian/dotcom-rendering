@@ -823,6 +823,11 @@ const fillShareIcon = (format: ArticleFormat): string => {
 				return specialReport[300];
 		}
 	}
+	if (
+		format.design === ArticleDesign.NewsletterSignup &&
+		format.display === ArticleDisplay.Standard
+	)
+		return BLACK;
 
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -861,6 +866,13 @@ const fillTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
 
 	return neutral[46];
 };
+
+const fillGuardianLogo = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.NewsletterSignup) return WHITE;
+
+	return WHITE;
+};
+
 const borderSyndicationButton = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	return border.secondary;
@@ -1425,6 +1437,7 @@ export const decidePalette = (
 			quoteIcon: fillQuoteIcon(format),
 			blockquoteIcon: fillBlockquoteIcon(format),
 			twitterHandleBelowDesktop: fillTwitterHandleBelowDesktop(format),
+			guardianLogo: fillGuardianLogo(format),
 		},
 		border: {
 			syndicationButton: borderSyndicationButton(format),

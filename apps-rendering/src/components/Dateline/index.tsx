@@ -41,8 +41,9 @@ const getStyles = (
 	colour: string,
 	desktopColour: string,
 ): SerializedStyles => css`
-	${textSans.xxsmall()}
 	color: ${colour};
+	display: block;
+	${textSans.xxsmall({ lineHeight: 'tight' })}
 
 	${from.desktop} {
 		color: ${desktopColour};

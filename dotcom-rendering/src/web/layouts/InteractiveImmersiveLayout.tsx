@@ -364,7 +364,7 @@ export const InteractiveImmersiveLayout = ({
 												CAPIArticle.headline
 											}
 											tags={CAPIArticle.tags}
-											byline={CAPIArticle.author.byline}
+											byline={CAPIArticle.byline}
 											webPublicationDateDeprecated={
 												CAPIArticle.webPublicationDateDeprecated
 											}
@@ -384,15 +384,13 @@ export const InteractiveImmersiveLayout = ({
 							/>
 						</GridItem>
 						<GridItem area="byline">
-							<HeadlineByline
-								format={format}
-								tags={CAPIArticle.tags}
-								byline={
-									CAPIArticle.author.byline
-										? CAPIArticle.author.byline
-										: ''
-								}
-							/>
+							{CAPIArticle.byline && (
+								<HeadlineByline
+									format={format}
+									tags={CAPIArticle.tags}
+									byline={CAPIArticle.byline}
+								/>
+							)}
 						</GridItem>
 						<GridItem area="lines">
 							{format.design === ArticleDesign.PhotoEssay &&
@@ -418,7 +416,7 @@ export const InteractiveImmersiveLayout = ({
 									format={format}
 									pageId={CAPIArticle.pageId}
 									webTitle={CAPIArticle.webTitle}
-									author={CAPIArticle.author}
+									byline={CAPIArticle.byline}
 									tags={CAPIArticle.tags}
 									primaryDateline={
 										CAPIArticle.webPublicationDateDisplay

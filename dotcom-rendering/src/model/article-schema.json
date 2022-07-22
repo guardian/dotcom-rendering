@@ -185,9 +185,10 @@
         "pagination": {
             "$ref": "#/definitions/Pagination"
         },
-        "author": {
-            "$ref": "#/definitions/AuthorType"
+        "byline": {
+            "type": "string"
         },
+        "author": {},
         "webPublicationDateDeprecated": {
             "format": "date-time",
             "type": "string"
@@ -414,13 +415,9 @@
             "items": {
                 "$ref": "#/definitions/Topic"
             }
-        },
-        "byline": {
-            "type": "string"
         }
     },
     "required": [
-        "author",
         "beaconURL",
         "blocks",
         "commercialProperties",
@@ -3687,20 +3684,6 @@
                 "currentPage",
                 "totalPages"
             ]
-        },
-        "AuthorType": {
-            "type": "object",
-            "properties": {
-                "byline": {
-                    "type": "string"
-                },
-                "twitterHandle": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                }
-            }
         },
         "EditionId": {
             "enum": [
