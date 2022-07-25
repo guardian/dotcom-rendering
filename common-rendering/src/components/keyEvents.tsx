@@ -163,6 +163,7 @@ const textStyles = (
 	color: ${text.keyEventsInline(format)};
 	display: block;
 	text-decoration: none;
+	transform: translateY(-2px);
 
 	&:hover {
 		color: ${text.keyEventsInline(format)};
