@@ -494,7 +494,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.headline
 											}
 											tags={CAPIArticle.tags}
-											byline={CAPIArticle.author.byline}
+											byline={CAPIArticle.byline}
 											webPublicationDateDeprecated={
 												CAPIArticle.webPublicationDateDeprecated
 											}
@@ -570,7 +570,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										format={format}
 										pageId={CAPIArticle.pageId}
 										webTitle={CAPIArticle.webTitle}
-										author={CAPIArticle.author}
+										byline={CAPIArticle.byline}
 										tags={CAPIArticle.tags}
 										primaryDateline={
 											CAPIArticle.webPublicationDateDisplay
@@ -598,7 +598,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandFirstGrid>
 				</ElementContainer>
-				{showKeyEventsCarousel && CAPIArticle.keyEvents.length && (
+				{showKeyEventsCarousel && CAPIArticle.keyEvents.length > 0 ? (
 					<ElementContainer
 						showTopBorder={false}
 						backgroundColour={
@@ -619,7 +619,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</Island>
 						</Hide>
 					</ElementContainer>
-				)}
+				) : null}
 				<ElementContainer
 					showTopBorder={false}
 					borderColour={palette.border.article}
@@ -738,7 +738,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											format={format}
 											pageId={CAPIArticle.pageId}
 											webTitle={CAPIArticle.webTitle}
-											author={CAPIArticle.author}
+											byline={CAPIArticle.byline}
 											tags={CAPIArticle.tags}
 											primaryDateline={
 												CAPIArticle.webPublicationDateDisplay

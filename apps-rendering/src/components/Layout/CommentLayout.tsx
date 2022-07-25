@@ -116,7 +116,7 @@ const CommentLayout: FC<Props> = ({ item, children }) => (
 			</section>
 		</article>
 		<section css={onwardStyles}>
-			<RelatedContent content={item.relatedContent} />
+			<RelatedContent item={item} />
 		</section>
 		<Footer isCcpa={false} format={item} />
 	</main>

@@ -7,6 +7,7 @@ import { escapeData } from '../../lib/escapeData';
 import { makeFrontWindowGuardian } from '../../model/window-guardian';
 import type { DCRFrontType } from '../../types/front';
 import { FrontPage } from '../components/FrontPage';
+import { getHttp3Url } from '../lib/getHttp3Url';
 import { frontTemplate } from './frontTemplate';
 
 interface Props {
@@ -57,6 +58,10 @@ export const frontToHtml = ({ front, NAV }: Props): string => {
 	const chunks = extractCriticalToChunks(html);
 	const extractedCss = constructStyleTagsFromChunks(chunks);
 
+	// Evaluating the performance of HTTP3 over HTTP2
+	// See: https://github.com/guardian/dotcom-rendering/pull/5394
+	const { offerHttp3 } = front.config.switches;
+
 	/**
 	 * Preload the following woff2 font files
 	 * TODO: Identify critical fonts to preload
@@ -73,7 +78,7 @@ export const frontToHtml = ({ front, NAV }: Props): string => {
 		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
 		// 'http://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
 		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
-	];
+	].map((font) => (offerHttp3 ? getHttp3Url(font) : font));
 
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
@@ -85,15 +90,20 @@ export const frontToHtml = ({ front, NAV }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const priorityScriptTags = generateScriptTags([
-		{ src: polyfillIO },
-		...getScriptArrayFromFile('bootCmp.js'),
-		...getScriptArrayFromFile('ophan.js'),
-		front.config && { src: front.config.commercialBundleUrl },
-		...getScriptArrayFromFile('sentryLoader.js'),
-		...getScriptArrayFromFile('dynamicImport.js'),
-		...getScriptArrayFromFile('islands.js'),
-	]);
+
+	const priorityScriptTags = generateScriptTags(
+		[
+			{ src: polyfillIO },
+			...getScriptArrayFromFile('bootCmp.js'),
+			...getScriptArrayFromFile('ophan.js'),
+			front.config && { src: front.config.commercialBundleUrl },
+			...getScriptArrayFromFile('sentryLoader.js'),
+			...getScriptArrayFromFile('dynamicImport.js'),
+			...getScriptArrayFromFile('islands.js'),
+		].map((script) =>
+			offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
+		),
+	);
 
 	/**
 	 * Low priority scripts. These scripts will be requested
@@ -102,14 +112,20 @@ export const frontToHtml = ({ front, NAV }: Props): string => {
 	 * *before* the high priority scripts, although this is very
 	 * unlikely.
 	 */
-	const lowPriorityScriptTags = generateScriptTags([
-		...getScriptArrayFromFile('atomIframe.js'),
-		...getScriptArrayFromFile('embedIframe.js'),
-		...getScriptArrayFromFile('newsletterEmbedIframe.js'),
-		...getScriptArrayFromFile('relativeTime.js'),
-	]);
+	const lowPriorityScriptTags = generateScriptTags(
+		[
+			...getScriptArrayFromFile('atomIframe.js'),
+			...getScriptArrayFromFile('embedIframe.js'),
+			...getScriptArrayFromFile('newsletterEmbedIframe.js'),
+			...getScriptArrayFromFile('relativeTime.js'),
+		].map((script) =>
+			offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
+		),
+	);
 
-	const gaChunk = getScriptArrayFromFile('ga.js');
+	const gaChunk = getScriptArrayFromFile('ga.js').map((script) =>
+		offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
+	);
 	const modernScript = gaChunk.find((script) => script.legacy === false);
 	const legacyScript = gaChunk.find((script) => script.legacy === true);
 	const gaPath = {

@@ -87,7 +87,6 @@ const decideIconColorOnHover = (format: ArticleFormat, context: Context) => {
 			}
 		`;
 	}
-
 	return css`
 		:hover {
 			background-color: ${palette.fill.shareIcon};

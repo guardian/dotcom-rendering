@@ -8,6 +8,7 @@ import { CoreVitals } from './CoreVitals.importable';
 import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
+import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SkipTo } from './SkipTo';
 
 type Props = {
@@ -52,6 +53,9 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<FetchCommentCounts repeat={true} />
+			</Island>
+			<Island clientOnly={true} expediteLoading={true}>
+				<ShowHideContainers />
 			</Island>
 			<FrontLayout front={front} NAV={NAV} />
 		</StrictMode>
