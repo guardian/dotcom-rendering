@@ -112,9 +112,7 @@ export const TopicFilterBank = ({
 							handleKeyEventClick(filterKeyEvents, id);
 						}}
 					/>
-				) : (
-					<></>
-				)}
+				) : null}
 
 				{topFiveTopics.map((topic) => {
 					const buttonParams = `${topic.type}:${topic.value}`;
