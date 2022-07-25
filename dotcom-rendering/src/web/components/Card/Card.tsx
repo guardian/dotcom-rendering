@@ -279,8 +279,11 @@ export const Card = ({
 
 	// Decide what type of image to show, main media, avatar or none
 	let imageType: 'mainmedia' | 'avatar' | undefined;
-	if (imageUrl && avatarUrl) imageType = 'avatar';
-	else if (imageUrl) imageType = 'mainmedia';
+	if (imageUrl && avatarUrl) {
+		imageType = 'avatar';
+	} else if (imageUrl) {
+		imageType = 'mainmedia';
+	}
 
 	return (
 		<CardWrapper
