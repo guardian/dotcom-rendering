@@ -18,6 +18,13 @@ updates:
       labels:
         - "AR Dependency"
       rebase-strategy: "disabled"
+      ignore:
+        # aws-cdk is a peer dependency of @guardian/cdk
+        # The version of the aws-cdk dependencies should match exactly the version specified by @guardian/cdk
+        - dependency-name: 'aws-cdk'
+        - dependency-name: '@aws-cdk/core'
+        - dependency-name: '@aws-cdk/assert'
+        - dependency-name: '@aws-cdk/cloudformation-include'
     - package-ecosystem: "npm"
       directory: "/dotcom-rendering"
       schedule:

@@ -86,6 +86,7 @@ type Colour = string;
 type Palette = {
 	text: {
 		headline: Colour;
+		headlineWhenMatch: Colour;
 		seriesTitle: Colour;
 		sectionTitle: Colour;
 		seriesTitleWhenMatch: Colour;
@@ -182,6 +183,7 @@ type Palette = {
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;
 		twitterHandleBelowDesktop: Colour;
+		guardianLogo: Colour;
 	};
 	border: {
 		syndicationButton: Colour;
@@ -281,13 +283,13 @@ type CustomParams = {
 
 type AdTargeting =
 	| {
-		adUnit: string;
-		customParams: CustomParams;
-		disableAds?: false;
-	}
+			adUnit: string;
+			customParams: CustomParams;
+			disableAds?: false;
+	  }
 	| {
-		disableAds: true;
-	};
+			disableAds: true;
+	  };
 
 interface SectionNielsenAPI {
 	name: string;
@@ -384,12 +386,6 @@ interface SubNavBrowserType {
 interface SubNavType {
 	parent?: LinkType;
 	links: LinkType[];
-}
-
-interface AuthorType {
-	byline?: string;
-	twitterHandle?: string;
-	email?: string;
 }
 
 interface MembershipPlaceholder {
@@ -551,7 +547,9 @@ interface CAPIArticleType {
 	blocks: Block[];
 	pinnedPost?: Block;
 	pagination?: Pagination;
-	author: AuthorType;
+	byline?: string;
+	/** @deprecated - will be removed in the next model version */
+	author?: unknown;
 
 	/**
 	 * @TJS-format date-time
@@ -627,7 +625,6 @@ interface CAPIArticleType {
 	mostRecentBlockId?: string;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
-	byline?: string;
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
@@ -789,13 +786,13 @@ type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
 /**
  * Onwards
  */
-type OnwardsType = {
+type CAPIOnwardsType = {
 	heading: string;
-	trails: TrailType[];
+	trails: CAPITrailType[];
 	description?: string;
 	url?: string;
 	ophanComponentName: OphanComponentName;
-	format: ArticleFormat;
+	format: CAPIFormat;
 	isCuratedContent?: boolean;
 };
 

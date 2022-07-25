@@ -24,6 +24,7 @@ type Props = {
 	webPublicationDateDeprecated: string;
 	hasStarRating?: boolean;
 	hasAvatar?: boolean;
+	isMatch?: boolean;
 };
 
 const curly = (x: any) => x;
@@ -363,6 +364,7 @@ export const ArticleHeadline = ({
 	webPublicationDateDeprecated,
 	hasStarRating,
 	hasAvatar,
+	isMatch,
 }: Props) => {
 	const palette = decidePalette(format);
 
@@ -725,7 +727,9 @@ export const ArticleHeadline = ({
 									css={[
 										standardFont,
 										css`
-											color: ${palette.text.headline};
+											color: ${isMatch
+												? palette.text.headlineWhenMatch
+												: palette.text.headline};
 											padding-bottom: ${space[9]}px;
 										`,
 									]}

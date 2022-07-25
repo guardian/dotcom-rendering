@@ -45,9 +45,9 @@ const generateScriptTags = (
 const decideTitle = (CAPIArticle: CAPIArticleType): string => {
 	if (
 		decideTheme(CAPIArticle.format) === ArticlePillar.Opinion &&
-		CAPIArticle.author.byline
+		CAPIArticle.byline
 	) {
-		return `${CAPIArticle.headline} | ${CAPIArticle.author.byline} | The Guardian`;
+		return `${CAPIArticle.headline} | ${CAPIArticle.byline} | The Guardian`;
 	}
 	return `${CAPIArticle.headline} | ${CAPIArticle.sectionLabel} | The Guardian`;
 };

@@ -29,6 +29,7 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 						imagePositionOnMobile="top"
 						imageSize="large"
 						supportingContent={primary.supportingContent}
+						trailText={primary.trailText}
 					/>
 				</LI>
 				<LI
@@ -91,9 +92,6 @@ export const DynamicFast = ({ trails, containerPalette, showAge }: Props) => {
 										//Overrides
 										headlineSize="small"
 										imageUrl={undefined}
-										supportingContent={
-											card.supportingContent
-										}
 									/>
 								</LI>
 							);

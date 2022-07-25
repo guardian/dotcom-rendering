@@ -3,6 +3,7 @@ import { headline, neutral } from '@guardian/source-foundations';
 import { string as curly } from 'curlyquotes';
 import React from 'react';
 import { getAgeWarning } from '../../../lib/age-warning';
+import { getSoleContributor } from '../../../lib/byline';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 import { getSharingUrls } from '../../../lib/sharing-urls';
 import type { ArticleModel } from '../../types/ArticleModel';
@@ -114,7 +115,7 @@ export const TopMetaLiveblog: React.FC<{
 
 		<div css={bylineStyle(pillar)}>
 			<Byline
-				byline={articleData.author.byline}
+				byline={articleData.byline}
 				tags={articleData.tags}
 				guardianBaseURL={articleData.guardianBaseURL}
 			/>
@@ -131,7 +132,10 @@ export const TopMetaLiveblog: React.FC<{
 				articleData.webPublicationDateDeprecated,
 			)}
 			webPublicationDate={articleData.webPublicationDateDisplay}
-			twitterHandle={articleData.author.twitterHandle}
+			twitterHandle={
+				getSoleContributor(articleData.tags, articleData.byline)
+					?.twitterHandle
+			}
 		/>
 	</header>
 );
