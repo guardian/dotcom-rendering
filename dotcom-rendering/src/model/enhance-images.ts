@@ -1,6 +1,12 @@
 import { JSDOM } from 'jsdom';
 
-const ishalfWidthImage = (element: CAPIElement): boolean => {
+interface HalfWidthImageBlockElement extends ImageBlockElement {
+	role: 'halfWidth';
+}
+
+const isHalfWidthImage = (
+	element?: CAPIElement,
+): element is HalfWidthImageBlockElement => {
 	if (!element) return false;
 	return (
 		element._type ===
@@ -9,7 +15,9 @@ const ishalfWidthImage = (element: CAPIElement): boolean => {
 	);
 };
 
-const isMultiImage = (element: CAPIElement): boolean => {
+const isMultiImage = (
+	element?: CAPIElement,
+): element is MultiImageBlockElement => {
 	if (!element) return false;
 	return (
 		element._type ===
@@ -17,14 +25,14 @@ const isMultiImage = (element: CAPIElement): boolean => {
 	);
 };
 
-const isImage = (element: CAPIElement): boolean => {
+const isImage = (element?: CAPIElement): element is ImageBlockElement => {
 	if (!element) return false;
 	return (
 		element._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
 	);
 };
 
-const isTitle = (element: CAPIElement): boolean => {
+const isTitle = (element?: CAPIElement): element is SubheadingBlockElement => {
 	if (!element) return false;
 	// Checks if this element is a 'title' based on the convention: <h2>Title text</h2>
 	if (
@@ -36,21 +44,21 @@ const isTitle = (element: CAPIElement): boolean => {
 	return frag.firstElementChild?.nodeName === 'H2';
 };
 
-const extractTitle = (element: CAPIElement): string => {
+const extractTitle = (element: SubheadingBlockElement): string => {
 	// We cast here because we're know this element is a subheading but TS isn't sure
-	const subHeading = element as SubheadingBlockElement;
+	const subHeading = element;
 	// Extract 'title' based on the convention: <h2>Title text</h2>
 	const frag = JSDOM.fragment(subHeading.html);
-	if (!frag || !frag.firstElementChild) return '';
+	if (!frag.firstElementChild) return '';
 	const isH2tag = frag.firstElementChild.nodeName === 'H2';
 	if (isH2tag) {
 		// element is an essay title
-		return (frag.textContent && frag.textContent.trim()) || '';
+		return frag.textContent?.trim() ?? '';
 	}
 	return '';
 };
 
-const isCaption = (element: CAPIElement): boolean => {
+const isCaption = (element?: CAPIElement): element is TextBlockElement => {
 	if (!element) return false;
 	// Checks if this element is a 'caption' based on the convention: <ul><li><Caption text</li></ul>
 	if (
@@ -59,18 +67,18 @@ const isCaption = (element: CAPIElement): boolean => {
 		return false;
 	}
 	const frag = JSDOM.fragment(element.html);
-	if (!frag || !frag.firstElementChild) return false;
+	if (!frag.firstElementChild) return false;
 	const hasULwrapper = frag.firstElementChild.nodeName === 'UL';
 	const containsLItags = frag.firstElementChild.outerHTML.includes('<li>');
 	return hasULwrapper && containsLItags;
 };
 
-const extractCaption = (element: CAPIElement): string => {
+const extractCaption = (element: TextBlockElement): string => {
 	// Extract 'caption' based on the convention: <ul><li><Caption text</li></ul>
 	// We cast here because we're know this element is a text element but TS isn't sure
-	const textElement = element as TextBlockElement;
+	const textElement = element;
 	const frag = JSDOM.fragment(textElement.html);
-	if (!frag || !frag.firstElementChild) return '';
+	if (!frag.firstElementChild) return '';
 	const hasULwrapper = frag.firstElementChild.nodeName === 'UL';
 	const containsLItags = frag.firstElementChild.outerHTML.includes('<li>');
 	if (hasULwrapper && containsLItags) {
@@ -80,13 +88,9 @@ const extractCaption = (element: CAPIElement): string => {
 };
 
 const constructMultiImageElement = (
-	thisElement: CAPIElement,
-	nextElement: CAPIElement,
+	first: ImageBlockElement,
+	second: ImageBlockElement,
 ): MultiImageBlockElement => {
-	// We cast here because we're certain each element is an image (because of the guards we set earlier) but
-	// TS isn't inferring that and needs a little help
-	const first = thisElement as ImageBlockElement;
-	const second = nextElement as ImageBlockElement;
 	return {
 		_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
 		elementId: first.elementId,
@@ -113,7 +117,7 @@ const addMultiImageElements = (elements: CAPIElement[]): CAPIElement[] => {
 	const withMultiImageElements: CAPIElement[] = [];
 	elements.forEach((thisElement, i) => {
 		const nextElement = elements[i + 1];
-		if (ishalfWidthImage(thisElement) && ishalfWidthImage(nextElement)) {
+		if (isHalfWidthImage(thisElement) && isHalfWidthImage(nextElement)) {
 			// Pair found. Add a multi element and remove the next entry
 			withMultiImageElements.push(
 				constructMultiImageElement(thisElement, nextElement),
@@ -138,7 +142,7 @@ const addTitles = (elements: CAPIElement[]): CAPIElement[] => {
 			withTitles.push({
 				...thisElement,
 				title: extractTitle(nextElement),
-			} as ImageBlockElement);
+			});
 			// Remove the element
 			elements.splice(i + 1, 1);
 		} else if (
@@ -150,7 +154,7 @@ const addTitles = (elements: CAPIElement[]): CAPIElement[] => {
 			withTitles.push({
 				...thisElement,
 				title: extractTitle(subsequentElement),
-			} as ImageBlockElement);
+			});
 			// Remove the element
 			elements.splice(i + 2, 1);
 		} else {
@@ -167,14 +171,14 @@ const addCaptionsToImages = (elements: CAPIElement[]): CAPIElement[] => {
 		const nextElement = elements[i + 1];
 		const subsequentElement = elements[i + 2];
 		if (isImage(thisElement) && isCaption(nextElement)) {
-			const thisImage = thisElement as ImageBlockElement;
+			const thisImage = thisElement;
 			withSpecialCaptions.push({
 				...thisImage,
 				data: {
 					...thisImage.data,
 					caption: extractCaption(nextElement),
 				},
-			} as ImageBlockElement);
+			});
 			// Remove the next element
 			elements.splice(i + 1, 1);
 		} else if (
@@ -182,14 +186,14 @@ const addCaptionsToImages = (elements: CAPIElement[]): CAPIElement[] => {
 			isTitle(nextElement) &&
 			isCaption(subsequentElement)
 		) {
-			const thisImage = thisElement as ImageBlockElement;
+			const thisImage = thisElement;
 			withSpecialCaptions.push({
 				...thisImage,
 				data: {
 					...thisImage.data,
 					caption: extractCaption(subsequentElement),
 				},
-			} as ImageBlockElement);
+			});
 			// Remove the subsequent element
 			elements.splice(i + 2, 1);
 		} else {
@@ -209,7 +213,7 @@ const addCaptionsToMultis = (elements: CAPIElement[]): CAPIElement[] => {
 			withSpecialCaptions.push({
 				...thisElement,
 				caption: extractCaption(nextElement),
-			} as MultiImageBlockElement);
+			});
 			// Remove the next element
 			elements.splice(i + 1, 1);
 		} else if (
@@ -220,7 +224,7 @@ const addCaptionsToMultis = (elements: CAPIElement[]): CAPIElement[] => {
 			withSpecialCaptions.push({
 				...thisElement,
 				caption: extractCaption(subsequentElement),
-			} as MultiImageBlockElement);
+			});
 			// Remove the subsequent element
 			elements.splice(i + 2, 1);
 		} else {
@@ -246,7 +250,7 @@ const stripCaptions = (elements: CAPIElement[]): CAPIElement[] => {
 					...thisElement.data,
 					caption: '',
 				},
-			} as ImageBlockElement);
+			});
 		} else {
 			// Pass through
 			withoutCaptions.push(thisElement);
@@ -270,7 +274,7 @@ const removeCredit = (elements: CAPIElement[]): CAPIElement[] => {
 					...thisElement.data,
 					credit: '',
 				},
-			} as ImageBlockElement);
+			});
 		} else {
 			// Pass through
 			withoutCredit.push(thisElement);
@@ -286,31 +290,51 @@ class Enhancer {
 		this.elements = elements;
 	}
 
+	/**
+	 * Photo essays by convention have all image captions removed and rely completely on
+	 * special captions set using the `ul`/`li` trick
+	 */
 	stripCaptions() {
 		this.elements = stripCaptions(this.elements);
 		return this;
 	}
 
+	/**
+	 * Replace pairs of halfWidth images with MultiImageBlockElements
+	 */
 	addMultiImageElements() {
 		this.elements = addMultiImageElements(this.elements);
 		return this;
 	}
 
+	/**
+	 * Photo essay have a convention of adding titles to images if the subsequent block is a h2
+	 */
 	addTitles() {
 		this.elements = addTitles(this.elements);
 		return this;
 	}
 
+	/**
+	 * If any MultiImageBlockElement is followed by a ul/l caption, delete the special caption
+	 * element and use the value for the multi image `caption` prop
+	 */
 	addCaptionsToMultis() {
 		this.elements = addCaptionsToMultis(this.elements);
 		return this;
 	}
 
+	/**
+	 * In photo essays, we also use ul captions for normal images as well
+	 */
 	addCaptionsToImages() {
 		this.elements = addCaptionsToImages(this.elements);
 		return this;
 	}
 
+	/**
+	 * By convention, photo essays don't include credit for images in the caption
+	 */
 	removeCredit() {
 		this.elements = removeCredit(this.elements);
 		return this;
@@ -322,23 +346,13 @@ const enhance = (
 	isPhotoEssay: boolean,
 ): CAPIElement[] => {
 	if (isPhotoEssay) {
-		return (
-			new Enhancer(elements)
-				// Photo essays by convention have all image captions removed and rely completely on
-				// special captions set using the ul/li trick
-				.stripCaptions()
-				// By convention, photo essays don't include credit for images in the caption
-				.removeCredit()
-				// Replace pairs of halfWidth images with MultiImageBlockElements
-				.addMultiImageElements()
-				// Photo essay have a convention of adding titles to images if the subsequent block is a h2
-				.addTitles()
-				// If any MultiImageBlockElement is followed by a ul/l caption, delete the special caption
-				// element and use the value for the multi image `caption` prop
-				.addCaptionsToMultis()
-				// In photo essays, we also use ul captions for normal images as well
-				.addCaptionsToImages().elements
-		);
+		return new Enhancer(elements)
+			.stripCaptions()
+			.removeCredit()
+			.addMultiImageElements()
+			.addTitles()
+			.addCaptionsToMultis()
+			.addCaptionsToImages().elements;
 	}
 
 	return (
