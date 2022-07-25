@@ -220,7 +220,7 @@ export const YoutubeBlockComponent = ({
 			/>
 			{!hideCaption && (
 				<Caption
-					captionText={mediaTitle || ''}
+					captionText={mediaTitle}
 					format={format}
 					displayCredit={false}
 					shouldLimitWidth={shouldLimitWidth}

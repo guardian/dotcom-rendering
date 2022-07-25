@@ -396,7 +396,7 @@ export const ImageComponent = ({
 								<CaptionToggle />{' '}
 								<div id="the-caption">
 									<Caption
-										captionText={element.data.caption || ''}
+										captionText={element.data.caption}
 										format={format}
 										credit={element.data.credit}
 										displayCredit={element.displayCredit}
@@ -419,7 +419,7 @@ export const ImageComponent = ({
 			{isMainMedia ? (
 				<Hide when="below" breakpoint="tablet">
 					<Caption
-						captionText={element.data.caption || ''}
+						captionText={element.data.caption}
 						format={format}
 						credit={element.data.credit}
 						displayCredit={element.displayCredit}
@@ -429,7 +429,7 @@ export const ImageComponent = ({
 				</Hide>
 			) : (
 				<Caption
-					captionText={element.data.caption || ''}
+					captionText={element.data.caption}
 					format={format}
 					credit={element.data.credit}
 					displayCredit={element.displayCredit}

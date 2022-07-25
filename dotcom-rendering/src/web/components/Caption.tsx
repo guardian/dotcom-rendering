@@ -234,11 +234,10 @@ export const Caption = ({
 	mediaType = 'Gallery',
 	isMainMedia = false,
 }: Props) => {
-	// Sometimes captions come thorough as a single blank space, so we trim here to ignore those
+	/** Sometimes captions come through as a single blank space, so we trim it */
 	const noCaption = !captionText?.trim();
-	const noCredit = !credit;
-	const hideCredit = !displayCredit;
-	if (noCaption && (noCredit || hideCredit)) return null;
+	const noCredit = !!credit || !!displayCredit;
+	if (noCaption && noCredit) return null;
 
 	const palette = decidePalette(format);
 	const isBlog =
@@ -250,8 +249,9 @@ export const Caption = ({
 			css={[
 				captionStyle(palette),
 				shouldLimitWidth && limitedWidth,
-				!isOverlayed && bottomMarginStyles,
-				isOverlayed && overlayedStyles(palette, format),
+				isOverlayed
+					? overlayedStyles(palette, format)
+					: bottomMarginStyles,
 				isMainMedia && isBlog && tabletCaptionPadding,
 				padCaption && captionPadding,
 				mediaType === 'Video' && videoPadding,
@@ -266,7 +266,7 @@ export const Caption = ({
 				<span
 					css={captionLink(palette)}
 					dangerouslySetInnerHTML={{
-						__html: captionText || '',
+						__html: captionText,
 					}}
 					key="caption"
 				/>
@@ -306,7 +306,7 @@ export const Caption = ({
 						<span
 							css={captionLink(palette)}
 							dangerouslySetInnerHTML={{
-								__html: captionText || '',
+								__html: captionText,
 							}}
 							key="caption"
 						/>
