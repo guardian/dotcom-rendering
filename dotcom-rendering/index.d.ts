@@ -947,6 +947,7 @@ interface CAPITrailType extends BaseTrailType {
 	designType: string;
 	pillar: LegacyPillar;
 	carouselImages?: { [key: string]: string };
+	isLiveBlog?: boolean;
 }
 
 interface TrailTabType {

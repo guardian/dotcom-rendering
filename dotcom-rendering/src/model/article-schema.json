@@ -3989,6 +3989,9 @@
                         "type": "string"
                     }
                 },
+                "isLiveBlog": {
+                    "type": "boolean"
+                },
                 "url": {
                     "type": "string"
                 },
