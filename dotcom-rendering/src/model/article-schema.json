@@ -3983,6 +3983,12 @@
                 "pillar": {
                     "$ref": "#/definitions/LegacyPillar"
                 },
+                "carouselImages": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
                 "url": {
                     "type": "string"
                 },
