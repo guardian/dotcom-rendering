@@ -13,11 +13,13 @@ const generateName = (isLegacyJS) => {
 	return `[name]${legacyString}${chunkhashString}.js`;
 };
 
+/** @typedef {NonNullable<import('webpack').Configuration["optimization"]>["splitChunks"]} SplitChunks */
+
 /**
- * @param {{ isLegacyJS: boolean, sessionId: string }} options
+ * @param {{ isLegacyJS: boolean, sessionId: string, splitChunks?: SplitChunks }} options
  * @returns {import('webpack').Configuration}
  */
-module.exports = ({ isLegacyJS, sessionId }) => ({
+module.exports = ({ isLegacyJS, sessionId, splitChunks }) => ({
 	entry: {
 		sentryLoader: './src/web/browser/sentryLoader/init.ts',
 		bootCmp: './src/web/browser/bootCmp/init.ts',
@@ -36,6 +38,9 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 		filename: generateName(isLegacyJS),
 		chunkFilename: generateName(isLegacyJS),
 		publicPath: '',
+	},
+	optimization: {
+		splitChunks,
 	},
 	plugins: [
 		new WebpackManifestPlugin({
