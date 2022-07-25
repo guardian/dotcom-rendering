@@ -1,10 +1,12 @@
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { getSoleContributor } from '../lib/byline';
 import type {
 	DCRContainerPalette,
 	DCRFrontCard,
 	DCRSupportingContent,
 	FEFrontCard,
 	FESupportingContent,
+	FETagType,
 } from '../types/front';
 import { decideFormat } from '../web/lib/decideFormat';
 import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
@@ -75,6 +77,38 @@ const enhanceSupportingContent = (
 	});
 };
 
+const decideAvatarUrl = (
+	tags?: TagType[],
+	byline?: string,
+): string | undefined => {
+	if (!tags || tags.length === 0) return;
+	const soleContributor = getSoleContributor(tags, byline);
+	// eslint-disable-next-line consistent-return -- because I want to return undefined and you can't stop me
+	return soleContributor?.bylineLargeImageUrl ?? undefined;
+};
+
+const enhanceTags = (tags: { properties: FETagType }[]): TagType[] => {
+	return tags.map((tag) => {
+		const {
+			id,
+			tagType,
+			webTitle,
+			twitterHandle,
+			bylineImageUrl,
+			contributorLargeImagePath,
+		} = tag.properties;
+
+		return {
+			id,
+			type: tagType,
+			title: webTitle,
+			twitterHandle,
+			bylineImageUrl,
+			bylineLargeImageUrl: contributorLargeImagePath,
+		};
+	});
+};
+
 export const enhanceCards = (
 	collections: FEFrontCard[],
 	containerPalette?: DCRContainerPalette,
@@ -92,6 +126,11 @@ export const enhanceCards = (
 			faciaCard.display.isBoosted ? '+' : ''
 		}`;
 		const dataLinkName = getDataLinkNameCard(format, group, index + 1);
+
+		const tags = faciaCard.properties.maybeContent?.tags.tags
+			? enhanceTags(faciaCard.properties.maybeContent.tags.tags)
+			: [];
+
 		return {
 			format,
 			dataLinkName,
@@ -121,5 +160,13 @@ export const enhanceCards = (
 			showByline: faciaCard.properties.showByline,
 			snapData: enhanceSnaps(faciaCard.enriched),
 			isBoosted: faciaCard.display.isBoosted,
+			avatarUrl:
+				faciaCard.properties.maybeContent?.tags.tags &&
+				faciaCard.properties.image?.type === 'Cutout'
+					? decideAvatarUrl(
+							tags,
+							faciaCard.properties.maybeContent.trail.byline,
+					  )
+					: undefined,
 		};
 	});
