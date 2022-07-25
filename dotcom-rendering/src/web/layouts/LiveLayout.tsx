@@ -598,7 +598,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandFirstGrid>
 				</ElementContainer>
-				{showKeyEventsCarousel && CAPIArticle.keyEvents.length && (
+				{showKeyEventsCarousel && CAPIArticle.keyEvents.length > 0 ? (
 					<ElementContainer
 						showTopBorder={false}
 						backgroundColour={
@@ -619,6 +619,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</Island>
 						</Hide>
 					</ElementContainer>
+				) : (
+					<></>
 				)}
 				<ElementContainer
 					showTopBorder={false}
