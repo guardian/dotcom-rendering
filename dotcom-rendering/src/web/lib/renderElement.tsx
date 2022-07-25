@@ -188,7 +188,7 @@ export const renderElement = ({
 					credit={element.credit}
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={element.shouldLimitWidth}
-					isOverlayed={element.isOverlayed}
+					isOverlaid={element.isOverlaid}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
