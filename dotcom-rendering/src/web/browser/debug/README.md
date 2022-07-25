@@ -1,5 +1,7 @@
 # Debug bookmarklet
 
+> Your chance to to see the website through DCRs eyes!
+
 The DCR debug bookmarklet is a script designed to be executed from a bookmarklet which will annotate a DCR page with debug information.
 
 Add the follow script string as the 'url' to your bookmark:
