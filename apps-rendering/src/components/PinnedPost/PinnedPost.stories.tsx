@@ -5,7 +5,7 @@ import {
 	ArticleFormat,
 	ArticlePillar,
 } from '@guardian/libs';
-import { LiveBlockComp } from 'components/LiveBlocks';
+import { LiveBlock } from 'components/LiveBlocks';
 import type { FC } from 'react';
 import PinnedPost from './';
 import { pinnedBlock } from 'fixtures/item';
@@ -47,12 +47,12 @@ const Default: FC<{ pillar: ArticlePillar }> = ({
 }) => (
 	<Wrapper>
 		<PinnedPost pinnedPost={pinnedBlock} format={getFormat(pillar)}>
-			<LiveBlockComp
+			<LiveBlock
 				block={pinnedBlock}
 				format={getFormat(pillar)}
 				isPinnedPost={true}
 				isOriginalPinnedPost={false}
-			></LiveBlockComp>
+			></LiveBlock>
 		</PinnedPost>
 	</Wrapper>
 );

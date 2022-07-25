@@ -10,7 +10,7 @@ import PinnedPost from 'components/PinnedPost';
 import type { Contributor } from 'contributor';
 import { formatUTCTimeDateTz } from 'date';
 import { pipe } from 'lib';
-import type { LiveBlock } from 'liveBlock';
+import type { LiveBlock as LiveBlockType } from 'liveBlock';
 import { OptionKind } from 'option';
 import type { FC } from 'react';
 import { renderAll } from 'renderer';
@@ -30,19 +30,19 @@ const contributorToBlockContributor = (
 
 // ----- Component ----- //
 interface LiveBlocksProps {
-	blocks: LiveBlock[];
+	blocks: LiveBlockType[];
 	format: ArticleFormat;
 	pageNumber: number;
 }
 
-interface LiveBlockCompProps {
-	block: LiveBlock;
+interface LiveBlockProps {
+	block: LiveBlockType;
 	format: ArticleFormat;
 	isPinnedPost: boolean;
 	isOriginalPinnedPost: boolean;
 }
 
-const LiveBlockComp: FC<LiveBlockCompProps> = ({
+const LiveBlock: FC<LiveBlockProps> = ({
 	block,
 	format,
 	isPinnedPost,
@@ -93,16 +93,16 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format, pageNumber }) => {
 			{/* below is placeholder for pinned post component */}
 			{showPinnedPost && (
 				<PinnedPost pinnedPost={pinnedPost.value} format={format}>
-					<LiveBlockComp
+					<LiveBlock
 						block={pinnedPost.value}
 						format={format}
 						isPinnedPost={true}
 						isOriginalPinnedPost={false}
-					></LiveBlockComp>
+					></LiveBlock>
 				</PinnedPost>
 			)}
 			{blocks.map((block) => (
-				<LiveBlockComp
+				<LiveBlock
 					key={block.id}
 					block={block}
 					format={format}
@@ -114,7 +114,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format, pageNumber }) => {
 						map((pinned) => block.id === pinned.id),
 						withDefault<boolean>(false),
 					)}
-				></LiveBlockComp>
+				></LiveBlock>
 			))}
 		</>
 	);
@@ -122,6 +122,6 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format, pageNumber }) => {
 
 // ----- Exports ----- //
 
-export { LiveBlockComp };
+export { LiveBlock };
 
 export default LiveBlocks;
