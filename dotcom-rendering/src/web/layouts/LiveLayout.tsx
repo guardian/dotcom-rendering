@@ -619,9 +619,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</Island>
 						</Hide>
 					</ElementContainer>
-				) : (
-					<></>
-				)}
+				) : null}
 				<ElementContainer
 					showTopBorder={false}
 					borderColour={palette.border.article}
