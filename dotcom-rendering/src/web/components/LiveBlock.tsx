@@ -98,8 +98,8 @@ export const LiveBlock = ({
 					context="LiveBlock"
 				/>
 				{showLastUpdated &&
-					block.blockLastUpdated &&
-					block.blockLastUpdatedDisplay && (
+					!!block.blockLastUpdated &&
+					!!block.blockLastUpdatedDisplay && (
 						<LastUpdated
 							lastUpdated={block.blockLastUpdated}
 							lastUpdatedDisplay={block.blockLastUpdatedDisplay}

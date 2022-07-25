@@ -535,16 +535,15 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 						<GridItem area="lastupdated">
 							<Hide until="desktop">
-								{CAPIArticle.blocks.length &&
-									CAPIArticle.blocks[0].blockLastUpdated && (
-										<ArticleLastUpdated
-											format={format}
-											lastUpdated={
-												CAPIArticle.blocks[0]
-													.blockLastUpdated
-											}
-										/>
-									)}
+								{!!CAPIArticle.blocks[0]?.blockLastUpdated && (
+									<ArticleLastUpdated
+										format={format}
+										lastUpdated={
+											CAPIArticle.blocks[0]
+												.blockLastUpdated
+										}
+									/>
+								)}
 							</Hide>
 						</GridItem>
 						<GridItem area="lines">
@@ -685,7 +684,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<LiveGrid>
 							<GridItem area="media">
 								<div css={maxWidth}>
-									{footballMatchUrl && (
+									{!!footballMatchUrl && (
 										<Island
 											clientOnly={true}
 											placeholderHeight={40}
@@ -696,7 +695,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											/>
 										</Island>
 									)}
-									{cricketMatchUrl && (
+									{!!cricketMatchUrl && (
 										<Island
 											clientOnly={true}
 											placeholderHeight={172}
@@ -811,7 +810,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										</Hide>
 									)}
 								{/* Match stats */}
-								{footballMatchUrl && (
+								{!!footballMatchUrl && (
 									<Island
 										deferUntil="visible"
 										clientOnly={true}

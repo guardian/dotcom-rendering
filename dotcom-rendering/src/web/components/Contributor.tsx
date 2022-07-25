@@ -135,7 +135,7 @@ export const Contributor = ({ byline, tags, format }: Props) => {
 					<BylineLink byline={byline} tags={tags} />
 				</div>
 			)}
-			{twitterHandle && (
+			{!!twitterHandle && (
 				<div css={[twitterHandleStyles, twitterHandleColour(palette)]}>
 					<TwitterIcon />
 					<a

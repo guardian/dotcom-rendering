@@ -49,7 +49,7 @@ export const TimelineBlockComponent: React.FC<{
 			{events.map((e) => (
 				<li css={eventStyle} key={e.title}>
 					<time css={[eventIconStyle, highlight]}>{e.date}</time>
-					{e.toDate && (
+					{!!e.toDate && (
 						<>
 							{' '}
 							- <time css={highlight}>{e.toDate}</time>

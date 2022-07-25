@@ -80,7 +80,7 @@ export const ElementContainer = ({
 						padded && padding,
 					]}
 				>
-					{children && children}
+					{children}
 				</div>
 			);
 			const style = css`

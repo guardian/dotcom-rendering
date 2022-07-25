@@ -89,7 +89,7 @@ export const InteractiveAtomBlockComponent: React.FunctionComponent<{
 						resizable=""
 						data-cy="atom-embed-url"
 					>
-						{placeholderUrl && (
+						{!!placeholderUrl && (
 							<amp-img
 								placeholder={true}
 								layout="fill"

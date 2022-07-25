@@ -245,7 +245,7 @@ export const RichLink = ({
 			<div css={neutralBackground}>
 				<a css={richLinkLink} href={url}>
 					<div css={richLinkTopBorder(palette)} />
-					{showImage && (
+					{!!showImage && (
 						<div>
 							<img
 								css={imageStyles}
@@ -282,7 +282,7 @@ export const RichLink = ({
 									{mainContributor}
 								</div>
 							)}
-							{starRating && starRating > 0 && (
+							{!!starRating && (
 								<div css={starWrapper}>
 									<StarRating
 										rating={starRating}
@@ -290,13 +290,13 @@ export const RichLink = ({
 									/>
 								</div>
 							)}
-							{isPaidContent && sponsorName && (
+							{!!(isPaidContent && sponsorName) && (
 								<div css={paidForBranding}>
 									Paid for by {sponsorName}
 								</div>
 							)}
 						</div>
-						{isOpinion && contributorImage && (
+						{!!(isOpinion && contributorImage) && (
 							<div css={contributorImageWrapper}>
 								<Avatar
 									imageSrc={contributorImage}

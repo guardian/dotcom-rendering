@@ -19,7 +19,7 @@ export const FieldLabel = ({ formField }: { formField: CampaignField }) => (
 	<label css={fieldLabelStyles} htmlFor={formField.name}>
 		{formField.label}
 		{!formField.required && <span css={optionalTextStyles}>Optional</span>}
-		{formField.description && (
+		{!!formField.description && (
 			<div>
 				<span css={fieldDescription}>
 					{`(${formField.description})`}
