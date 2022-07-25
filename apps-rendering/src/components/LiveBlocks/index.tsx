@@ -42,42 +42,44 @@ interface LiveBlockCompProps {
 	isOriginalPinnedPost: boolean;
 }
 
-const LiveBlockComp: FC<LiveBlockCompProps> = ({block, format, isPinnedPost, isOriginalPinnedPost}) => {
+const LiveBlockComp: FC<LiveBlockCompProps> = ({
+	block,
+	format,
+	isPinnedPost,
+	isOriginalPinnedPost,
+}) => {
 	return (
 		<LiveBlockContainer
-					key={block.id}
-					id={block.id}
-					format={format}
-					blockTitle={block.title}
-					blockFirstPublished={Number(block.firstPublished)}
-					blockId={block.id}
-					isPinnedPost
-					isOriginalPinnedPost
-					supportsDarkMode={true}
-					contributors={block.contributors.map(
-						contributorToBlockContributor,
-					)}
-				>
-					{renderAll(format, partition(block.body).oks)}
+			id={block.id}
+			format={format}
+			blockTitle={block.title}
+			blockFirstPublished={Number(block.firstPublished)}
+			blockId={block.id}
+			isPinnedPost={isPinnedPost}
+			isOriginalPinnedPost={isOriginalPinnedPost}
+			supportsDarkMode={true}
+			contributors={block.contributors.map(contributorToBlockContributor)}
+		>
+			{renderAll(format, partition(block.body).oks)}
 
-					<footer
-						css={css`
-							display: flex;
-							justify-content: end;
-						`}
-					>
-						{block.lastModified > block.firstPublished && (
-							<LastUpdated
-								lastUpdated={block.lastModified}
-								lastUpdatedDisplay={formatUTCTimeDateTz(
-									block.lastModified,
-								)}
-							/>
+			<footer
+				css={css`
+					display: flex;
+					justify-content: end;
+				`}
+			>
+				{block.lastModified > block.firstPublished && (
+					<LastUpdated
+						lastUpdated={block.lastModified}
+						lastUpdatedDisplay={formatUTCTimeDateTz(
+							block.lastModified,
 						)}
-					</footer>
-				</LiveBlockContainer>
-	)
-}
+					/>
+				)}
+			</footer>
+		</LiveBlockContainer>
+	);
+};
 
 const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format, pageNumber }) => {
 	const pinnedPost = fromNullable(blocks.find((b) => b.isPinned));
@@ -89,15 +91,21 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format, pageNumber }) => {
 		<>
 			{/* Accordion? */}
 			{/* below is placeholder for pinned post component */}
-			{showPinnedPost && 
+			{showPinnedPost && (
 				<PinnedPost pinnedPost={pinnedPost.value} format={format}>
-					<LiveBlockComp block={pinnedPost.value} format={format} 
-					isPinnedPost={true}
-					isOriginalPinnedPost={false}>
-					</LiveBlockComp>
-				</PinnedPost>}
+					<LiveBlockComp
+						block={pinnedPost.value}
+						format={format}
+						isPinnedPost={true}
+						isOriginalPinnedPost={false}
+					></LiveBlockComp>
+				</PinnedPost>
+			)}
 			{blocks.map((block) => (
-				<LiveBlockComp block={block} format={format} 
+				<LiveBlockComp
+					key={block.id}
+					block={block}
+					format={format}
 					// This is false because it's only true when it's
 					// used for the actual pinned post on top of the page
 					isPinnedPost={false}
@@ -105,8 +113,8 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format, pageNumber }) => {
 						pinnedPost,
 						map((pinned) => block.id === pinned.id),
 						withDefault<boolean>(false),
-					)}>
-					</LiveBlockComp>
+					)}
+				></LiveBlockComp>
 			))}
 		</>
 	);
@@ -114,6 +122,6 @@ const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format, pageNumber }) => {
 
 // ----- Exports ----- //
 
-export {LiveBlockComp};
+export { LiveBlockComp };
 
 export default LiveBlocks;

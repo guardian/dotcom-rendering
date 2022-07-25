@@ -1,55 +1,56 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { border } from '@guardian/common-rendering/src/editorialPalette';
-import { ArticleFormat, timeAgo } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { timeAgo } from '@guardian/libs';
 import {
-    focusHalo,
-    from,
-    height,
-    neutral,
-    space,
-    textSans,
-    transitions,
-    visuallyHidden,
+	focusHalo,
+	from,
+	height,
+	neutral,
+	space,
+	textSans,
+	transitions,
+	visuallyHidden,
 } from '@guardian/source-foundations';
 import {
 	SvgMinus,
 	SvgPinned,
 	SvgPlus,
 } from '@guardian/source-react-components';
-import { LiveBlock } from 'liveBlock';
-import { FC } from 'react';
+import type { LiveBlock } from 'liveBlock';
+import type { FC } from 'react';
 
-const pinnedPostContainer = (format: ArticleFormat) => css`
-    border: 3px solid ${border.borderPinnedPost(format)};
-    padding-bottom: ${space[1]}px;
+const pinnedPostContainer = (format: ArticleFormat): SerializedStyles => css`
+	border: 3px solid ${border.borderPinnedPost(format)};
+	padding-bottom: ${space[1]}px;
 	position: relative;
 	background: ${neutral[100]};
-    margin-bottom: 34px;
+	margin-bottom: 34px;
 
-    #pinned-post-checkbox:checked ~ #collapsible-body {
+	#pinned-post-checkbox:checked ~ #collapsible-body {
 		max-height: fit-content;
 		margin-bottom: ${space[1]}px;
 	}
-    #pinned-post-checkbox:checked ~ #pinned-post-overlay,
+	#pinned-post-checkbox:checked ~ #pinned-post-overlay,
 	#pinned-post-checkbox ~ label #svgminus,
 	#pinned-post-checkbox:checked ~ label #svgplus {
 		display: none;
-    }
+	}
 
-    #pinned-post-checkbox ~ label #svgplus,
-    #pinned-post-checkbox:checked ~ label #svgminus {
-        display: block;
-    }
-    #pinned-post-checkbox ~ label::after {
-        content: 'Show more';
-    }
-    #pinned-post-checkbox:checked ~ label::after {
-        content: 'Show less';
-    }
-
+	#pinned-post-checkbox ~ label #svgplus,
+	#pinned-post-checkbox:checked ~ label #svgminus {
+		display: block;
+	}
+	#pinned-post-checkbox ~ label::after {
+		content: 'Show more';
+	}
+	#pinned-post-checkbox:checked ~ label::after {
+		content: 'Show less';
+	}
 `;
 
-const rowStyles = (format: ArticleFormat) => css`
+const rowStyles = (format: ArticleFormat): SerializedStyles => css`
 	background: ${border.borderPinnedPost(format)};
 	height: 32px;
 	display: flex;
@@ -84,7 +85,7 @@ const overlayStyles = css`
 	display: block;
 `;
 
-const fakeButtonStyles = (format: ArticleFormat) => css`
+const fakeButtonStyles = (format: ArticleFormat): SerializedStyles => css`
 	display: inline-flex;
 	justify-content: space-between;
 	align-items: center;
@@ -190,5 +191,3 @@ const PinnedPost: FC<Props> = ({ pinnedPost, children, format }: Props) => {
 };
 
 export default PinnedPost;
-
-
