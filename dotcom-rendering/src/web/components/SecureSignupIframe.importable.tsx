@@ -100,48 +100,57 @@ const postFormData = async (
 	});
 };
 
+type EventDescription =
+	| 'click-button'
+	| 'form-submission'
+	| 'submission-confirmed'
+	| 'submission-failed'
+	| 'open-captcha'
+	| 'captcha-load-error'
+	| 'form-submit-error'
+	| 'captcha-not-passed'
+	| 'captcha-passed';
+
 const sendTracking = (
 	newsletterId: string,
-	event:
-		| 'click-button'
-		| 'submit-form'
-		| 'form-submit-error'
-		| 'captcha-load-error'
-		| 'open-captcha'
-		| 'captcha-not-passed'
-		| 'captcha-passed'
-		| 'success-response-received'
-		| 'fail-response-received',
+	eventDescription: EventDescription,
 ): void => {
 	const ophanRecord = getOphanRecordFunction();
 
 	let action: OphanAction = 'CLICK';
-	const value = `${event} ${newsletterId}`;
 
-	switch (event) {
-		case 'submit-form':
-			action = 'SUBSCRIBE';
-			break;
-		case 'open-captcha':
-			action = 'EXPAND';
-			break;
-		case 'form-submit-error':
-		case 'captcha-load-error':
-			action = 'CLOSE';
-			break;
+	switch (eventDescription) {
+		case 'form-submission':
 		case 'captcha-not-passed':
 		case 'captcha-passed':
 			action = 'ANSWER';
 			break;
-		case 'success-response-received':
-		case 'fail-response-received':
-			action = 'RETURN';
+		case 'submission-confirmed':
+			action = 'SUBSCRIBE';
+			break;
+		case 'captcha-load-error':
+		case 'form-submit-error':
+		case 'submission-failed':
+			action = 'CLOSE';
+			break;
+		case 'open-captcha':
+			action = 'EXPAND';
 			break;
 		case 'click-button':
 		default:
 			action = 'CLICK';
 			break;
 	}
+
+	// The data team use a custom date format for timestamps,
+	// (yyy-MM-dd hh:mm:ss.ssssss UTC)
+	// and will cast the integer value  to this
+	// format at their end
+	const value = JSON.stringify({
+		eventDescription,
+		newsletterId,
+		timestamp: new Date().getDate(),
+	});
 
 	submitComponentEvent(
 		{
@@ -184,7 +193,7 @@ export const SecureSignupIframe = ({
 			null;
 		const emailAddress: string = input?.value ?? '';
 
-		sendTracking(newsletterId, 'submit-form');
+		sendTracking(newsletterId, 'form-submission');
 		const response = await postFormData(
 			window.guardian.config.page.ajaxUrl + '/email',
 			buildFormData(emailAddress, newsletterId, token),
@@ -199,9 +208,7 @@ export const SecureSignupIframe = ({
 
 		sendTracking(
 			newsletterId,
-			response.ok
-				? 'success-response-received'
-				: 'fail-response-received',
+			response.ok ? 'submission-confirmed' : 'submission-failed',
 		);
 	};
 

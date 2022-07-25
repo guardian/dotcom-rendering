@@ -9,6 +9,7 @@ import { makeWindowGuardian } from '../../model/window-guardian';
 import { Article } from '../components/Article';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
+import { getHttp3Url } from '../lib/getHttp3Url';
 import { articleTemplate } from './articleTemplate';
 import { extractExpeditedIslands } from './extractIslands';
 import { recipeSchema } from './temporaryRecipeStructuredData';
@@ -82,6 +83,10 @@ export const articleToHtml = ({ data }: Props): string => {
 		.map((block) => block.elements)
 		.flat();
 
+	// Evaluating the performance of HTTP3 over HTTP2
+	// See: https://github.com/guardian/dotcom-rendering/pull/5394
+	const { offerHttp3 } = CAPIArticle.config.switches;
+
 	/**
 	 * Preload the following woff2 font files
 	 * TODO: Identify critical fonts to preload
@@ -98,7 +103,7 @@ export const articleToHtml = ({ data }: Props): string => {
 		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
 		// 'http://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
 		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
-	];
+	].map((font) => (offerHttp3 ? getHttp3Url(font) : font));
 
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
@@ -124,21 +129,29 @@ export const articleToHtml = ({ data }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-	const priorityScriptTags = generateScriptTags([
-		{ src: polyfillIO },
-		...getScriptArrayFromFile('bootCmp.js'),
-		...getScriptArrayFromFile('ophan.js'),
-		CAPIArticle.config && { src: CAPIArticle.config.commercialBundleUrl },
-		...getScriptArrayFromFile('sentryLoader.js'),
-		...getScriptArrayFromFile('dynamicImport.js'),
-		pageHasNonBootInteractiveElements && {
-			src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
-		},
-		...getScriptArrayFromFile('islands.js'),
-		...expeditedIslands.flatMap((name) =>
-			getScriptArrayFromFile(`${name}.js`),
+	const priorityScriptTags = generateScriptTags(
+		[
+			{ src: polyfillIO },
+			...getScriptArrayFromFile('bootCmp.js'),
+			...getScriptArrayFromFile('ophan.js'),
+			CAPIArticle.config && {
+				src: CAPIArticle.config.commercialBundleUrl,
+			},
+			...getScriptArrayFromFile('sentryLoader.js'),
+			...getScriptArrayFromFile('dynamicImport.js'),
+			pageHasNonBootInteractiveElements && {
+				src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
+			},
+			...getScriptArrayFromFile('islands.js'),
+			...expeditedIslands.flatMap((name) =>
+				getScriptArrayFromFile(`${name}.js`),
+			),
+		].map((script) =>
+			offerHttp3 && script
+				? { ...script, src: getHttp3Url(script.src) }
+				: script,
 		),
-	]);
+	);
 
 	/**
 	 * Low priority scripts. These scripts will be requested
@@ -147,13 +160,17 @@ export const articleToHtml = ({ data }: Props): string => {
 	 * *before* the high priority scripts, although this is very
 	 * unlikely.
 	 */
-	const lowPriorityScriptTags = generateScriptTags([
-		...getScriptArrayFromFile('atomIframe.js'),
-		...getScriptArrayFromFile('embedIframe.js'),
-		...getScriptArrayFromFile('newsletterEmbedIframe.js'),
-		...getScriptArrayFromFile('relativeTime.js'),
-		...getScriptArrayFromFile('initDiscussion.js'),
-	]);
+	const lowPriorityScriptTags = generateScriptTags(
+		[
+			...getScriptArrayFromFile('atomIframe.js'),
+			...getScriptArrayFromFile('embedIframe.js'),
+			...getScriptArrayFromFile('newsletterEmbedIframe.js'),
+			...getScriptArrayFromFile('relativeTime.js'),
+			...getScriptArrayFromFile('initDiscussion.js'),
+		].map((script) =>
+			offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
+		),
+	);
 
 	const gaChunk = getScriptArrayFromFile('ga.js');
 	const modernScript = gaChunk.find((script) => script.legacy === false);
