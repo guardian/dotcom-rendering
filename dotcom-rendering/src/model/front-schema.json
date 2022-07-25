@@ -622,7 +622,70 @@
                                                             "$ref": "#/definitions/Record<string,unknown>"
                                                         },
                                                         "tags": {
-                                                            "$ref": "#/definitions/Record<string,unknown>"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "tags": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "properties": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "id": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "url": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "tagType": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "sectionId": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "sectionName": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "webTitle": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "webUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "twitterHandle": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bio": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bylineImageUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "contributorLargeImagePath": {
+                                                                                        "type": "string"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "id",
+                                                                                    "sectionId",
+                                                                                    "sectionName",
+                                                                                    "tagType",
+                                                                                    "url",
+                                                                                    "webTitle",
+                                                                                    "webUrl"
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "properties"
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "tags"
+                                                            ]
                                                         }
                                                     },
                                                     "required": [
@@ -644,6 +707,29 @@
                                                 },
                                                 "byline": {
                                                     "type": "string"
+                                                },
+                                                "image": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "type": {
+                                                            "type": "string"
+                                                        },
+                                                        "item": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "imgSource": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "imgSource"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "item",
+                                                        "type"
+                                                    ]
                                                 },
                                                 "webTitle": {
                                                     "type": "string"
@@ -1203,7 +1289,70 @@
                                                             "$ref": "#/definitions/Record<string,unknown>"
                                                         },
                                                         "tags": {
-                                                            "$ref": "#/definitions/Record<string,unknown>"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "tags": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "properties": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "id": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "url": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "tagType": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "sectionId": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "sectionName": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "webTitle": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "webUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "twitterHandle": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bio": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bylineImageUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "contributorLargeImagePath": {
+                                                                                        "type": "string"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "id",
+                                                                                    "sectionId",
+                                                                                    "sectionName",
+                                                                                    "tagType",
+                                                                                    "url",
+                                                                                    "webTitle",
+                                                                                    "webUrl"
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "properties"
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "tags"
+                                                            ]
                                                         }
                                                     },
                                                     "required": [
@@ -1225,6 +1374,29 @@
                                                 },
                                                 "byline": {
                                                     "type": "string"
+                                                },
+                                                "image": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "type": {
+                                                            "type": "string"
+                                                        },
+                                                        "item": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "imgSource": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "imgSource"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "item",
+                                                        "type"
+                                                    ]
                                                 },
                                                 "webTitle": {
                                                     "type": "string"
@@ -1784,7 +1956,70 @@
                                                             "$ref": "#/definitions/Record<string,unknown>"
                                                         },
                                                         "tags": {
-                                                            "$ref": "#/definitions/Record<string,unknown>"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "tags": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "properties": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "id": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "url": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "tagType": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "sectionId": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "sectionName": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "webTitle": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "webUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "twitterHandle": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bio": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bylineImageUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "contributorLargeImagePath": {
+                                                                                        "type": "string"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "id",
+                                                                                    "sectionId",
+                                                                                    "sectionName",
+                                                                                    "tagType",
+                                                                                    "url",
+                                                                                    "webTitle",
+                                                                                    "webUrl"
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "properties"
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "tags"
+                                                            ]
                                                         }
                                                     },
                                                     "required": [
@@ -1806,6 +2041,29 @@
                                                 },
                                                 "byline": {
                                                     "type": "string"
+                                                },
+                                                "image": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "type": {
+                                                            "type": "string"
+                                                        },
+                                                        "item": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "imgSource": {
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "imgSource"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "item",
+                                                        "type"
+                                                    ]
                                                 },
                                                 "webTitle": {
                                                     "type": "string"
