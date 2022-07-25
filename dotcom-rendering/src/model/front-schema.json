@@ -720,10 +720,7 @@
                                                                 "imgSource": {
                                                                     "type": "string"
                                                                 }
-                                                            },
-                                                            "required": [
-                                                                "imgSource"
-                                                            ]
+                                                            }
                                                         }
                                                     },
                                                     "required": [
@@ -1387,10 +1384,7 @@
                                                                 "imgSource": {
                                                                     "type": "string"
                                                                 }
-                                                            },
-                                                            "required": [
-                                                                "imgSource"
-                                                            ]
+                                                            }
                                                         }
                                                     },
                                                     "required": [
@@ -2054,10 +2048,7 @@
                                                                 "imgSource": {
                                                                     "type": "string"
                                                                 }
-                                                            },
-                                                            "required": [
-                                                                "imgSource"
-                                                            ]
+                                                            }
                                                         }
                                                     },
                                                     "required": [
