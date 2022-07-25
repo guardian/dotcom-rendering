@@ -94,12 +94,10 @@ const shouldDisplayOverlay = ({
 	isOverlayClicked: boolean;
 	isMainMedia?: boolean;
 }) => {
-	if (isMainMedia || !isTracking) {
-		return false;
-	}
-	if (isOverlayClicked) {
-		return false;
-	}
+	if (isMainMedia) return false;
+	if (!isTracking) return false;
+	if (isOverlayClicked) return false;
+
 	return true;
 };
 
