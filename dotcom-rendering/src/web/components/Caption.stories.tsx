@@ -24,7 +24,7 @@ export default {
     credit?: string;
     displayCredit?: boolean;
     shouldLimitWidth?: boolean;
-    isOverlayed?: boolean; // Not tested here as this option only works in the context of the ImageComponent
+    isOverlaid?: boolean; // Not tested here as this option only works in the context of the ImageComponent
  */
 
 export const Article = () => (
@@ -144,7 +144,7 @@ export const Padded = () => (
 );
 Padded.story = { name: 'when padded' };
 
-export const Overlayed = () => (
+export const Overlaid = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<div
 			css={css`
@@ -164,8 +164,8 @@ export const Overlayed = () => (
 				src="https://i.guim.co.uk/img/media/eaecb92d15c7e9691274226d0935038bfcc9de53/0_0_6720_4480/master/6720.jpg?width=880&quality=45&auto=format&fit=max&dpr=2&s=452e8da9ad0b2ba274ae8987b3799fd4"
 			/>
 			<Caption
-				isOverlayed={true}
-				captionText="This is how a caption looks when it's overlayed"
+				isOverlaid={true}
+				captionText="This is how a caption looks when it's overlaid"
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -176,9 +176,9 @@ export const Overlayed = () => (
 		</div>
 	</ElementContainer>
 );
-Overlayed.story = { name: 'when overlayed' };
+Overlaid.story = { name: 'when overlaid' };
 
-export const OverlayedWithStars = () => (
+export const OverlaidWithStars = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
 		<div
 			css={css`
@@ -198,8 +198,8 @@ export const OverlayedWithStars = () => (
 				src="https://i.guim.co.uk/img/media/eaecb92d15c7e9691274226d0935038bfcc9de53/0_0_6720_4480/master/6720.jpg?width=880&quality=45&auto=format&fit=max&dpr=2&s=452e8da9ad0b2ba274ae8987b3799fd4"
 			/>
 			<Caption
-				isOverlayed={true}
-				captionText="This is how a caption looks when it's overlayed with stars"
+				isOverlaid={true}
+				captionText="This is how a caption looks when it's overlaid with stars"
 				format={{
 					display: ArticleDisplay.Showcase,
 					design: ArticleDesign.Review,
@@ -219,7 +219,7 @@ export const OverlayedWithStars = () => (
 		</div>
 	</ElementContainer>
 );
-OverlayedWithStars.story = { name: 'when overlayed on stars' };
+OverlaidWithStars.story = { name: 'when overlaid on stars' };
 
 export const VideoCaption = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>

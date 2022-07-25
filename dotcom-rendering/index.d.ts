@@ -129,7 +129,7 @@ type Palette = {
 		blockquote: Colour;
 		numberedTitle: Colour;
 		numberedPosition: Colour;
-		overlayedCaption: Colour;
+		overlaidCaption: Colour;
 		shareCount: Colour;
 		shareCountUntilDesktop: Colour;
 		cricketScoreboardLink: Colour;
