@@ -33,11 +33,11 @@ import type {
 	Standard,
 } from 'item';
 import { pipe } from 'lib';
+import type { LiveBlock } from 'liveBlock';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
 import { galleryBody } from './galleryBody';
 import { relatedContent } from './relatedContent';
-import { LiveBlock } from 'liveBlock';
 
 // ----- Fixture ----- //
 

@@ -1,16 +1,12 @@
 // ----- Imports ----- //
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleFormat,
-	ArticlePillar,
-} from '@guardian/libs';
+import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { from } from '@guardian/source-foundations';
 import { LiveBlock } from 'components/LiveBlocks';
+import { pinnedBlock } from 'fixtures/item';
 import type { FC } from 'react';
 import PinnedPost from './';
-import { pinnedBlock } from 'fixtures/item';
-import { css } from '@emotion/react';
-import { from } from '@guardian/source-foundations';
 
 // ----- Functions ----- //
 
