@@ -114,7 +114,7 @@ module.exports = [
 						platform: 'browser.legacy',
 					}),
 					require(`./webpack.config.browser`)({
-						isLegacyJS: true,
+						extension: 'legacy',
 						sessionId,
 					}),
 				),
@@ -125,7 +125,7 @@ module.exports = [
 			platform: 'browser',
 		}),
 		require(`./webpack.config.browser`)({
-			isLegacyJS: false,
+			extension: '',
 			sessionId,
 		}),
 	),
@@ -134,7 +134,7 @@ module.exports = [
 			platform: 'browser.opt.async',
 		}),
 		require(`./webpack.config.browser`)({
-			isLegacyJS: false,
+			extension: 'opt.async',
 			sessionId,
 			splitChunks: { chunks: 'async' },
 		}),
@@ -144,7 +144,7 @@ module.exports = [
 			platform: 'browser.opt.all',
 		}),
 		require(`./webpack.config.browser`)({
-			isLegacyJS: false,
+			extension: 'opt.all',
 			sessionId,
 			splitChunks: { chunks: 'all' },
 		}),
@@ -154,7 +154,7 @@ module.exports = [
 			platform: 'browser.opt.initial',
 		}),
 		require(`./webpack.config.browser`)({
-			isLegacyJS: false,
+			extension: 'opt.initial',
 			sessionId,
 			splitChunks: { chunks: 'initial' },
 		}),

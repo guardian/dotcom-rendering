@@ -4,11 +4,11 @@ const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 const DEV = process.env.NODE_ENV === 'development';
 
 /**
- * @param {boolean} isLegacyJS
+ * @param {string} extension
  * @returns {string}
  */
-const generateName = (isLegacyJS) => {
-	const legacyString = isLegacyJS ? '.legacy' : '';
+const generateName = (extension) => {
+	const legacyString = extension !== '' ? `.${extension}` : '';
 	const chunkhashString = DEV ? '' : '.[chunkhash]';
 	return `[name]${legacyString}${chunkhashString}.js`;
 };
@@ -16,10 +16,10 @@ const generateName = (isLegacyJS) => {
 /** @typedef {NonNullable<import('webpack').Configuration["optimization"]>["splitChunks"]} SplitChunks */
 
 /**
- * @param {{ isLegacyJS: boolean, sessionId: string, splitChunks?: SplitChunks }} options
+ * @param {{ extension: string, sessionId: string, splitChunks?: SplitChunks }} options
  * @returns {import('webpack').Configuration}
  */
-module.exports = ({ isLegacyJS, sessionId, splitChunks }) => ({
+module.exports = ({ extension, sessionId, splitChunks }) => ({
 	entry: {
 		sentryLoader: './src/web/browser/sentryLoader/init.ts',
 		bootCmp: './src/web/browser/bootCmp/init.ts',
@@ -35,8 +35,8 @@ module.exports = ({ isLegacyJS, sessionId, splitChunks }) => ({
 		initDiscussion: './src/web/browser/initDiscussion/init.ts',
 	},
 	output: {
-		filename: generateName(isLegacyJS),
-		chunkFilename: generateName(isLegacyJS),
+		filename: generateName(extension),
+		chunkFilename: generateName(extension),
 		publicPath: '',
 	},
 	optimization: {
@@ -44,12 +44,16 @@ module.exports = ({ isLegacyJS, sessionId, splitChunks }) => ({
 	},
 	plugins: [
 		new WebpackManifestPlugin({
-			fileName: isLegacyJS ? 'manifest.legacy.json' : 'manifest.json',
+			fileName:
+				extension !== ''
+					? `manifest.${extension}.json`
+					: 'manifest.json',
 		}),
 		...(DEV
 			? [
 					new GuStatsReportPlugin({
-						buildName: isLegacyJS ? 'legacy-client' : 'client',
+						buildName:
+							extension !== '' ? `client-${extension}` : 'client',
 						project: 'dotcom-rendering',
 						team: 'dotcom',
 						sessionId,
@@ -69,7 +73,7 @@ module.exports = ({ isLegacyJS, sessionId, splitChunks }) => ({
 						options: {
 							presets: [
 								'@babel/preset-react',
-								isLegacyJS
+								extension === 'legacy'
 									? [
 											'@babel/preset-env',
 											{
