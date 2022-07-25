@@ -7,7 +7,7 @@ export interface ArticleModel {
 	keyEvents: Block[]; // liveblog-specific
 	pagination?: Pagination;
 	blocks: Block[];
-	author: AuthorType;
+	byline?: string;
 	webPublicationDateDeprecated: string;
 	webPublicationDateDisplay: string;
 	pageId: string;

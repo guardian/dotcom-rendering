@@ -12,6 +12,7 @@ import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
+import { onwardsToHtml } from './onwardsToHtml';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
@@ -189,12 +190,43 @@ export const renderKeyEvents = (
 	}
 };
 
+export const renderOnwards = (
+	{ body }: { body: CAPIOnwardsType },
+	res: express.Response,
+): void => {
+	try {
+		const {
+			heading,
+			description,
+			url,
+			ophanComponentName,
+			trails,
+			format,
+			isCuratedContent,
+		} = body;
+
+		const html = onwardsToHtml({
+			heading,
+			description,
+			url,
+			ophanComponentName,
+			trails,
+			format,
+			isCuratedContent,
+		});
+
+		res.status(200).send(html);
+	} catch (e) {
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send(`<pre>${message}</pre>`);
+	}
+};
+
 export const renderFront = (
 	{ body }: express.Request,
 	res: express.Response,
 ): void => {
 	try {
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- We validate the data in this func
 		const front = enhanceFront(body);
 		const html = frontToHtml({
 			front,
@@ -211,6 +243,5 @@ export const renderFrontJson = (
 	{ body }: express.Request,
 	res: express.Response,
 ): void => {
-	// eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- We validate the data in this func
 	res.json(enhanceFront(body));
 };

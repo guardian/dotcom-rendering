@@ -34,22 +34,26 @@ const Nav = ({ children }: { children: React.ReactNode }) => (
 
 const links = [
 	{
+		id: 'uk',
 		url: '/preference/edition/uk',
 		title: 'UK edition',
 		isActive: true,
 		dataLinkName: 'linkname-UK',
 	},
 	{
+		id: 'us',
 		url: '/preference/edition/us',
 		title: 'US edition',
 		dataLinkName: 'linkname-US',
 	},
 	{
+		id: 'au',
 		url: '/preference/edition/au',
 		title: 'Australian edition',
 		dataLinkName: 'linkname-AU',
 	},
 	{
+		id: 'int',
 		url: '/preference/edition/int',
 		title: 'International edition',
 		dataLinkName: 'linkname-INT',
@@ -101,11 +105,13 @@ DropdownNoActive.story = { name: 'Dropdown with nothing active' };
 
 const linksWithNotifications = [
 	{
+		id: 'account-overview',
 		url: '/account-overview',
 		title: 'Account Overview',
 		dataLinkName: 'account-overview',
 	},
 	{
+		id: 'billing',
 		url: '/billing',
 		title: 'Billing',
 		dataLinkName: 'billing',

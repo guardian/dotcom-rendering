@@ -18,15 +18,22 @@ type Props = {
 const containerStyles = css`
 	border: ${neutral[0]} 3px dashed;
 	border-radius: 12px;
-	padding: 10px;
 	margin-bottom: ${space[3]}px;
+	padding: ${space[2]}px;
+
+	${from.tablet} {
+		padding: ${space[2]}px ${space[3]}px;
+	}
 `;
 
 const stackBelowTabletStyles = css`
 	display: flex;
 	flex-direction: column;
+	margin-bottom: ${space[2]}px;
+
 	${from.tablet} {
 		flex-direction: row;
+		margin-bottom: ${space[1]}px;
 	}
 `;
 
@@ -40,7 +47,6 @@ const titleStyles = (theme: string) => css`
 
 const descriptionStyles = css`
 	${textSans.medium({ lineHeight: 'tight' })}
-	margin-top: ${space[1]}px;
 	margin-bottom: ${space[2]}px;
 `;
 

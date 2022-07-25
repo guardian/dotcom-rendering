@@ -16,7 +16,7 @@ describe('ArticleMeta', () => {
 				format={format}
 				pageId="1234"
 				webTitle="A title"
-				author={{ byline: 'Observer writers' }}
+				byline="Observer writers"
 				tags={[
 					{
 						id: 'lifeandstyle/series/observer-design',
@@ -56,7 +56,7 @@ describe('ArticleMeta', () => {
 				format={format}
 				pageId="1234"
 				webTitle="A title"
-				author={{ byline: 'Observer writers' }}
+				byline="Observer writers"
 				tags={[
 					{
 						id: 'lifeandstyle/series/observer-design',

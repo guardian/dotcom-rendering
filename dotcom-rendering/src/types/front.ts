@@ -233,6 +233,24 @@ export type DCRSnapType = {
 	embedCss?: string;
 };
 
+type FECollectionConfigType = {
+	displayName: string;
+	metadata?: { type: FEContainerPalette }[];
+	collectionType: FEContainerType;
+	href?: string;
+	groups?: string[];
+	uneditable: boolean;
+	showTags: boolean;
+	showSections: boolean;
+	hideKickers: boolean;
+	showDateHeader: boolean;
+	showLatestUpdate: boolean;
+	excludeFromRss: boolean;
+	showTimestamps: boolean;
+	hideShowMore: boolean;
+	platform: string;
+};
+
 export type FECollectionType = {
 	id: string;
 	displayName: string;
@@ -249,23 +267,7 @@ export type FECollectionType = {
 	hideKickers: boolean;
 	showDateHeader: boolean;
 	showLatestUpdate: boolean;
-	config: {
-		displayName: string;
-		metadata?: { type: FEContainerPalette }[];
-		collectionType: FEContainerType;
-		href?: string;
-		groups?: string[];
-		uneditable: boolean;
-		showTags: boolean;
-		showSections: boolean;
-		hideKickers: boolean;
-		showDateHeader: boolean;
-		showLatestUpdate: boolean;
-		excludeFromRss: boolean;
-		showTimestamps: boolean;
-		hideShowMore: boolean;
-		platform: string;
-	};
+	config: FECollectionConfigType;
 	hasMore: boolean;
 };
 

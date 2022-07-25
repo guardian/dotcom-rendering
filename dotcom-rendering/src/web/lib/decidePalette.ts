@@ -123,6 +123,16 @@ const textSeriesTitleWhenMatch = (format: ArticleFormat): string => {
 	}
 };
 
+const textHeadlineWhenMatch = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.MatchReport:
+		case ArticleDesign.LiveBlog:
+			return BLACK;
+		default:
+			return textSeriesTitle(format);
+	}
+};
+
 const textSectionTitle = textSeriesTitle;
 
 const textByline = (format: ArticleFormat): string => {
@@ -813,6 +823,11 @@ const fillShareIcon = (format: ArticleFormat): string => {
 				return specialReport[300];
 		}
 	}
+	if (
+		format.design === ArticleDesign.NewsletterSignup &&
+		format.display === ArticleDisplay.Standard
+	)
+		return BLACK;
 
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -851,6 +866,13 @@ const fillTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
 
 	return neutral[46];
 };
+
+const fillGuardianLogo = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.NewsletterSignup) return WHITE;
+
+	return WHITE;
+};
+
 const borderSyndicationButton = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	return border.secondary;
@@ -998,7 +1020,7 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 };
 
 const backgroundMatchNav = (): string => {
-	return '#FFE500';
+	return brandAlt[400];
 };
 
 const backgroundUnderline = (format: ArticleFormat): string =>
@@ -1314,6 +1336,7 @@ export const decidePalette = (
 	return {
 		text: {
 			headline: textHeadline(format),
+			headlineWhenMatch: textHeadlineWhenMatch(format),
 			seriesTitle: textSeriesTitle(format),
 			seriesTitleWhenMatch: textSeriesTitleWhenMatch(format),
 			sectionTitle: textSectionTitle(format),
@@ -1414,6 +1437,7 @@ export const decidePalette = (
 			quoteIcon: fillQuoteIcon(format),
 			blockquoteIcon: fillBlockquoteIcon(format),
 			twitterHandleBelowDesktop: fillTwitterHandleBelowDesktop(format),
+			guardianLogo: fillGuardianLogo(format),
 		},
 		border: {
 			syndicationButton: borderSyndicationButton(format),

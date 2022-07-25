@@ -20,6 +20,16 @@ import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
 
+type Props = {
+	heading: string;
+	trails: TrailType[];
+	description?: string;
+	url?: string;
+	ophanComponentName: OphanComponentName;
+	format: ArticleFormat;
+	isCuratedContent?: boolean;
+};
+
 // Carousel icons - need replicating from source for centring
 
 const SvgChevronLeftSingle = () => {
@@ -415,13 +425,13 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 	</div>
 );
 
-export const Carousel: React.FC<OnwardsType> = ({
+export const Carousel = ({
 	heading,
 	trails,
 	ophanComponentName,
 	format,
 	isCuratedContent,
-}: OnwardsType) => {
+}: Props) => {
 	const palette = decidePalette(format);
 	const carouselRef = useRef<HTMLUListElement>(null);
 
