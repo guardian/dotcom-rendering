@@ -1,11 +1,13 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
+	brand,
 	brandAlt,
 	brandBackground,
 	brandBorder,
 	brandLine,
 	from,
+	headline,
 	space,
 	textSans,
 	until,
@@ -15,6 +17,7 @@ import {
 	Columns,
 	Hide,
 	LinkButton,
+	SvgArrowRightStraight,
 	SvgEye,
 	SvgGuardianLogo,
 } from '@guardian/source-react-components';
@@ -143,6 +146,28 @@ const guardianLogoContainerStyle = css`
 	}
 `;
 
+const altPromotedNewsletterStyle = css`
+	margin-top: ${space[2]}px;
+	margin-bottom: ${space[2]}px;
+`;
+
+const altPromotedNewsletterTitleStyle = css`
+	${headline.small({ fontWeight: 'bold' })}
+	color: ${brandAlt[400]};
+`;
+
+const shareSpanStyle = css`
+	${textSans.medium({
+		fontWeight: 'bold',
+	})};
+	margin-right: ${space[4]}px;
+`;
+
+const shareDivStyle = css`
+	display: flex;
+	align-items: center;
+`;
+
 export const NewsletterSignupLayout = ({
 	CAPIArticle,
 	NAV,
@@ -170,6 +195,104 @@ export const NewsletterSignupLayout = ({
 
 	/** TODO: this data needs to come from the newsletters API */
 	const newsletterCategory = 'UK Focused';
+
+	/** TODO: undecided where this data will come from yet.. Island? */
+	const altPromotedNewsletter: Partial<Newsletter> = {
+		name: 'Pushing Buttons',
+		description:
+			'Start the day one step ahead. Our email breaks down the key stories of the day and why they matter.',
+		frequency: 'Weekly',
+	};
+
+	const YouMightAlsoEnjoy = () => (
+		<ContainerLayout
+			innerBackgroundColour={brandBackground.primary}
+			leftContent={
+				<h2 css={altPromotedNewsletterStyle}>
+					<span css={altPromotedNewsletterTitleStyle}>
+						You might also enjoy
+					</span>
+				</h2>
+			}
+			verticalMargins={false}
+		>
+			<div
+				css={css`
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					background-color: ${brand[500]};
+					color: #f6f6f6;
+					border: 1px dashed;
+					border-radius: 4px;
+					margin: 8px 0;
+					padding: 4px;
+				`}
+			>
+				<img
+					css={css`
+						flex-basis: 20%;
+						min-width: 0;
+					`}
+					src="https://i.guim.co.uk/img/uploads/2022/01/11/pushing_buttons_thrasher_hi.png?width=700&quality=50&s=f4be90f0ca470076df70cf895aeecda1"
+				></img>
+
+				<div
+					css={css`
+						display: flex;
+						flex-direction: column;
+						flex-basis: 50%;
+						margin-left: 8px;
+					`}
+				>
+					<h2
+						css={css`
+							${headline.small({ fontWeight: 'bold' })}
+							margin-bottom: 4px;
+						`}
+					>
+						{altPromotedNewsletter.name}
+					</h2>
+					<p
+						css={css`
+							${headline.xxsmall()}
+							margin-bottom: 4px;
+						`}
+					>
+						{altPromotedNewsletter.description}
+					</p>
+				</div>
+
+				<div
+					css={css`
+						display: flex;
+						align-self: flex-end;
+						padding: 8px;
+						flex-basis: 30%;
+					`}
+				>
+					<LinkButton
+						icon={<SvgArrowRightStraight />}
+						iconSide="right"
+						priority="secondary"
+						size="small"
+					>
+						Sign up
+					</LinkButton>
+				</div>
+
+				<div
+					css={css`
+						display: flex;
+						align-self: flex-start;
+						/* padding: 8px; */
+					`}
+				>
+					<NewsletterCategory text="Daily" />
+				</div>
+			</div>
+		</ContainerLayout>
+	);
 
 	return (
 		<>
@@ -232,7 +355,7 @@ export const NewsletterSignupLayout = ({
 					/>
 				</ElementContainer>
 
-				{NAV.subNavSections && (
+				{!!NAV.subNavSections && (
 					<>
 						<ElementContainer
 							backgroundColour={palette.background.article}
@@ -263,7 +386,7 @@ export const NewsletterSignupLayout = ({
 				)}
 			</div>
 
-			{CAPIArticle.config.switches.surveys && (
+			{!!CAPIArticle.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
@@ -375,36 +498,22 @@ export const NewsletterSignupLayout = ({
 								isDev={!!CAPIArticle.config.isDev}
 							/>
 
-							<div
-								css={css`
-									display: flex;
-									align-items: center;
-								`}
-							>
-								<span
-									css={css`
-										${textSans.medium({
-											fontWeight: 'bold',
-										})};
-										margin-right: ${space[4]}px;
-									`}
-								>
+							<div css={shareDivStyle}>
+								<span css={shareSpanStyle}>
 									Tell your friends
 								</span>
-								<div>
-									<ShareIcons
-										pageId={CAPIArticle.pageId}
-										webTitle={CAPIArticle.webTitle}
-										format={format}
-										displayIcons={[
-											'facebook',
-											'twitter',
-											'email',
-										]}
-										size="medium"
-										context="ArticleMeta"
-									/>
-								</div>
+								<ShareIcons
+									pageId={CAPIArticle.pageId}
+									webTitle={CAPIArticle.webTitle}
+									format={format}
+									displayIcons={[
+										'facebook',
+										'twitter',
+										'email',
+									]}
+									size="medium"
+									context="ArticleMeta"
+								/>
 							</div>
 						</Column>
 
@@ -445,6 +554,8 @@ export const NewsletterSignupLayout = ({
 						</Column>
 					</Columns>
 				</ContainerLayout>
+
+				<YouMightAlsoEnjoy />
 
 				<Island
 					clientOnly={true}
