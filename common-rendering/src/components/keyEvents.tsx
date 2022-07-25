@@ -190,7 +190,7 @@ const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
 	color: ${neutral[7]};
 	display: block;
-	transform: translateY(-2.5px);
+	transform: translateY(-4px);
 
 	${darkModeCss(supportsDarkMode)`
 		color: ${neutral[60]};
