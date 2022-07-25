@@ -42,15 +42,15 @@ const isLongEnough = (html: string): boolean => {
 	// link tag html.
 	// https://stackoverflow.com/questions/822452/strip-html-from-text-javascript is
 	// a good discussion on how this can be done. Of the two approaches, regex and
-	// DOM, both have unikely failure scenarios but the impact for failure with DOM
+	// DOM, both have unlikely failure scenarios but the impact for failure with DOM
 	// manipulation carries a potential security risk so we're using a regex.
 	return html.replace(/(<([^>]+)>)/gi, '').length >= 199;
 };
 
 const decideDropCapLetter = (html: string): string => {
-	const first = html.substr(0, 1);
+	const first = html.slice(0, 1);
 	if (isOpenQuote(first)) {
-		const second = html.substr(1, 1);
+		const second = html.slice(1, 1);
 
 		if (!isLetter(second)) {
 			return '';
@@ -225,7 +225,7 @@ export const TextBlockComponent = ({
 
 			const firstLetter = decideDropCapLetter(unwrappedHtml);
 			const remainingLetters = firstLetter
-				? unwrappedHtml.substr(firstLetter.length)
+				? unwrappedHtml.slice(firstLetter.length)
 				: unwrappedHtml;
 
 			if (
