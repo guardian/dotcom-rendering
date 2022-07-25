@@ -25,6 +25,10 @@ const deadblogStyles = (format: ArticleFormat): SerializedStyles => {
 
 		ul {
 			margin-bottom: 0;
+
+			> li::before {
+				background-color: ${neutral[60]};
+			}
 		}
 
 		a {
