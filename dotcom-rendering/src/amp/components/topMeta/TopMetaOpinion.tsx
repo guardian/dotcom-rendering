@@ -64,44 +64,28 @@ const bottomPadding = css`
 const BylineMeta: React.FunctionComponent<{
 	articleData: ArticleModel;
 	pillar: ArticleTheme;
-}> = ({ articleData, pillar }) => {
-	const contributorTag = articleData.tags.find(
-		(t) => t.type === 'Contributor',
-	);
-	const contributorCount = articleData.tags.filter(
-		(t) => t.type === 'Contributor',
-	).length;
-	const bylineImageUrl = contributorTag
-		? contributorTag.bylineLargeImageUrl
-		: null;
-
-	const shouldShowBylineImage =
-		contributorTag && bylineImageUrl && contributorCount === 1;
+}> = ({ articleData: { byline, tags, guardianBaseURL }, pillar }) => {
+	const soleContributor = getSoleContributor(tags, byline);
 
 	return (
 		<div css={bylineWrapper}>
-			<div
-				css={[
-					bylineStyle(pillar),
-					!shouldShowBylineImage && bottomPadding,
-				]}
-			>
+			<div css={[bylineStyle(pillar), !soleContributor && bottomPadding]}>
 				<Byline
-					byline={articleData.byline}
-					tags={articleData.tags}
-					guardianBaseURL={articleData.guardianBaseURL}
+					byline={byline}
+					tags={tags}
+					guardianBaseURL={guardianBaseURL}
 				/>
 			</div>
 
-			{!!shouldShowBylineImage && (
+			{soleContributor?.bylineLargeImageUrl ? (
 				<amp-img
 					class={bylineImageStyle}
-					src={bylineImageUrl}
-					alt={`Contributor image for: ${contributorTag.title}`}
+					src={soleContributor.bylineLargeImageUrl}
+					alt={`Contributor image for: ${soleContributor.title}`}
 					width="180"
 					height="150"
 				/>
-			)}
+			) : null}
 		</div>
 	);
 };
