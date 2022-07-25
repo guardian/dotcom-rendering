@@ -1,11 +1,10 @@
 // ----- Imports ----- //
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { partition, some, withDefault } from '@guardian/types';
 import Comment from 'components/Layout/CommentLayout';
-import Gallery from 'components/Layout/GalleryLayout';
 import Standard from 'components/Layout/StandardLayout';
 import {
 	analysis,
@@ -206,18 +205,6 @@ export const DeadBlog = (): ReactElement => (
 	<Live item={{ ...deadBlog, display: ArticleDisplay.Standard }} />
 );
 DeadBlog.story = { name: 'DeadBlog ' };
-
-export const GalleryItem = (): React.ReactNode => {
-	return (
-		<Gallery item={{ ...article, design: ArticleDesign.Gallery }}>
-			{renderAll(
-				formatFromItem(article, some(ArticleDisplay.Standard)),
-				partition(article.body).oks,
-			)}
-		</Gallery>
-	);
-};
-GalleryItem.story = { name: 'Gallery' };
 
 export default {
 	title: 'AR/Layouts/Standard',
