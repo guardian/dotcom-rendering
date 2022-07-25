@@ -5,6 +5,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { headline, neutral, remSpace } from '@guardian/source-foundations';
 import type { Item } from 'item';
 import { getFormat } from 'item';
+import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
 
@@ -58,7 +59,7 @@ interface Props {
 	item: Item;
 }
 
-const DeadBlogStandfirst: React.FC<Props> = ({ item }) => {
+const DeadBlogStandfirst: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 
 	return (
