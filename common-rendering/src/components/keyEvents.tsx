@@ -187,7 +187,7 @@ const textStyles = (
 `;
 
 const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
-	${textSans.xxsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
+	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
 	color: ${neutral[7]};
 	display: block;
 	transform: translateY(-2.5px);
