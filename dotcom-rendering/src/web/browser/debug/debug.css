@@ -26,6 +26,18 @@ gu-island > * {
 	outline: 4px blue solid;
 }
 
+/* Fronts Containers - label (top) */
+section[data-container-name]::before {
+	content: 'container: ' attr(data-container-name);
+	font-family: monospace;
+	background-color: green;
+	color: white;
+
+	padding: 5px;
+	position: relative;
+	top: 5px;
+}
+
 /* Elements - outline & label (bottom) */
 figure[data-spacefinder-type]::after {
 	content: 'element: ' attr(data-spacefinder-type);

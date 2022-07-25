@@ -33,6 +33,7 @@ type Props = {
 	format?: ArticleFormat;
 	ophanComponentName?: string;
 	ophanComponentLink?: string;
+	containerName?: string;
 	containerPalette?: DCRContainerPalette;
 	toggleable?: boolean;
 	innerBackgroundColour?: string;
@@ -140,6 +141,7 @@ export const ContainerLayout = ({
 	innerBackgroundColour,
 	showDateHeader,
 	editionId,
+	containerName,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -157,6 +159,7 @@ export const ContainerLayout = ({
 			element="section"
 			ophanComponentLink={ophanComponentLink}
 			ophanComponentName={ophanComponentName}
+			containerName={containerName}
 			innerBackgroundColour={innerBackgroundColour}
 		>
 			<Flex>

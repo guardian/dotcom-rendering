@@ -162,6 +162,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							// same as above re 'palette styles' for index increment
 							ophanComponentLink={ophanComponentLink}
 							ophanComponentName={ophanName}
+							containerName={collection.collectionType}
 							containerPalette={collection.containerPalette}
 							toggleable={true}
 							sectionId={collection.id}
