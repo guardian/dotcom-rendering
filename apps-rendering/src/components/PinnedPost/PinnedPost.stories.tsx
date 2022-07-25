@@ -1,14 +1,26 @@
-import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { from } from '@guardian/source-foundations';
-import { ok } from '@guardian/types';
-import type { BodyElement } from 'bodyElement';
-import { ElementKind } from 'bodyElementKind';
+// ----- Imports ----- //
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticleFormat,
+	ArticlePillar,
+} from '@guardian/libs';
 import { LiveBlockComp } from 'components/LiveBlocks';
-import { JSDOM } from 'jsdom';
-import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
 import PinnedPost from './';
+import { pinnedBlock } from 'fixtures/item';
+import { css } from '@emotion/react';
+import { from } from '@guardian/source-foundations';
+
+// ----- Functions ----- //
+
+const getFormat = (pillar: ArticlePillar): ArticleFormat => {
+	return {
+		design: ArticleDesign.LiveBlog,
+		display: ArticleDisplay.Standard,
+		theme: pillar,
+	};
+};
 
 const Wrapper: FC<{ children: React.ReactNode }> = ({
 	children,
@@ -28,36 +40,16 @@ const Wrapper: FC<{ children: React.ReactNode }> = ({
 	</div>
 );
 
-const standard = {
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-	theme: ArticlePillar.News,
-};
+// ----- Stories ----- //
 
-const textElement = (nodes: string[]): BodyElement => ({
-	kind: ElementKind.Text,
-	doc: JSDOM.fragment(nodes.join('')),
-});
-
-const bodyElement = textElement(['<div>Some Text</div>']);
-
-const pinnedBlock: LiveBlock = {
-	id: '5',
-	isKeyEvent: false,
-	title: 'Block Five',
-	firstPublished: new Date('2021-11-02T10:20:20Z'),
-	lastModified: new Date('2021-11-02T11:13:13Z'),
-	body: [ok(bodyElement)],
-	contributors: [],
-	isPinned: true,
-};
-
-const Default: FC = () => (
+const Default: FC<{ pillar: ArticlePillar }> = ({
+	pillar = ArticlePillar.News,
+}) => (
 	<Wrapper>
-		<PinnedPost pinnedPost={pinnedBlock} format={standard}>
+		<PinnedPost pinnedPost={pinnedBlock} format={getFormat(pillar)}>
 			<LiveBlockComp
 				block={pinnedBlock}
-				format={standard}
+				format={getFormat(pillar)}
 				isPinnedPost={true}
 				isOriginalPinnedPost={false}
 			></LiveBlockComp>
@@ -65,9 +57,18 @@ const Default: FC = () => (
 	</Wrapper>
 );
 
+const Sport: FC = () => <Default pillar={ArticlePillar.Sport}></Default>;
+const Culture: FC = () => <Default pillar={ArticlePillar.Culture}></Default>;
+const Opinion: FC = () => <Default pillar={ArticlePillar.Opinion}></Default>;
+const Lifestyle: FC = () => (
+	<Default pillar={ArticlePillar.Lifestyle}></Default>
+);
+
+// ----- Exports ----- //
+
 export default {
 	component: PinnedPost,
 	title: 'AR/PinnedPost',
 };
 
-export { Default };
+export { Default, Sport, Culture, Opinion, Lifestyle };

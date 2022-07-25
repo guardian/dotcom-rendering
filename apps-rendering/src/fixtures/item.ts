@@ -37,6 +37,7 @@ import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
 import { galleryBody } from './galleryBody';
 import { relatedContent } from './relatedContent';
+import { LiveBlock } from 'liveBlock';
 
 // ----- Fixture ----- //
 
@@ -231,6 +232,25 @@ const body: Body = [
 		},
 	},
 ];
+
+const pinnedBlock: LiveBlock = {
+	id: '5',
+	isKeyEvent: false,
+	title: 'Block Five',
+	firstPublished: new Date('2021-11-02T10:20:20Z'),
+	lastModified: new Date('2021-11-02T11:13:13Z'),
+	body: [
+		{
+			kind: ResultKind.Ok,
+			value: {
+				kind: ElementKind.Text,
+				doc,
+			},
+		},
+	],
+	contributors: [],
+	isPinned: true,
+};
 
 const matchScores: MatchScores = {
 	league: 'Premier League',
@@ -474,4 +494,5 @@ export {
 	photoEssay,
 	recipe,
 	quiz,
+	pinnedBlock,
 };
