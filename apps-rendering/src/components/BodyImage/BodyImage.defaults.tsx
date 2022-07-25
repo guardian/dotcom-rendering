@@ -94,12 +94,15 @@ export type BodyImageProps = {
 	supportsDarkMode: boolean;
 	lightbox: Option<Lightbox>;
 	caption: Option<ReactNode>;
-	wrapperStyles: SerializedStyles;
-	imgStyles: Option<SerializedStyles>;
-	captionStyles: Option<SerializedStyles>;
 };
 
-const DefaultBodyImage: FC<BodyImageProps> = ({
+const DefaultBodyImage: FC<
+	BodyImageProps & {
+		wrapperStyles: SerializedStyles;
+		imgStyles: Option<SerializedStyles>;
+		captionStyles: Option<SerializedStyles>;
+	}
+> = ({
 	image,
 	format,
 	supportsDarkMode,

@@ -4,11 +4,7 @@ import { from, neutral } from '@guardian/source-foundations';
 import Img from 'components/ImgAlt';
 import { grid } from 'grid/grid';
 import type { FC } from 'react';
-import {
-	getDefaultImgStyles,
-	getDefaultSizes,
-	getDefaultStyles,
-} from './BodyImage.defaults';
+import { getDefaultImgStyles, getDefaultSizes } from './BodyImage.defaults';
 import type { BodyImageProps } from './BodyImage.defaults';
 
 const figureStyles = css`
@@ -108,9 +104,13 @@ const captionStyles = css`
 	}
 `;
 
-const GalleryBodyImage: FC<
-	Omit<BodyImageProps, 'wrapperStyles' | 'imgStyles' | 'captionStyles'>
-> = ({ image, format, supportsDarkMode, lightbox, caption }) => (
+const GalleryBodyImage: FC<BodyImageProps> = ({
+	image,
+	format,
+	supportsDarkMode,
+	lightbox,
+	caption,
+}) => (
 	<figure css={css(figureStyles)}>
 		<div css={imageWrapperStyles}>
 			<Img
