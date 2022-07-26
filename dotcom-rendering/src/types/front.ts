@@ -99,7 +99,7 @@ export type FETagType = {
 	webTitle: string;
 	webUrl: string;
 	twitterHandle?: string;
-	// bio is html
+	/* bio is html */
 	bio?: string;
 	bylineImageUrl?: string;
 	contributorLargeImagePath?: string;
