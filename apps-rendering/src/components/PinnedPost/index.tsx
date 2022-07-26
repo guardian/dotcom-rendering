@@ -163,7 +163,7 @@ const PinnedPost: FC<Props> = ({ pinnedPost, children, format }: Props) => {
 			<div css={rowStyles(format)}>
 				<SvgPinned />
 				<time data-relativeformat="med" css={timeAgoStyles}>
-					From {timeAgo(Number(pinnedPost.firstPublished))}
+					From {timeAgo(pinnedPost.firstPublished.getTime())}
 				</time>
 			</div>
 			<div id="collapsible-body" css={collapsibleBody}>
