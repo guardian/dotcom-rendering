@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
 import { from, neutral, textSans } from '@guardian/source-foundations';
+import { headline } from '@guardian/source-foundations/dist/types/typography/api';
 import Img from 'components/ImgAlt';
 import { grid } from 'grid/grid';
 import type { FC } from 'react';
 import { getDefaultImgStyles, getDefaultSizes } from './BodyImage.defaults';
 import type { BodyImageProps } from './BodyImage.defaults';
-import { headline } from '@guardian/source-foundations/dist/types/typography/api';
 
 const figureStyles = css`
 	${grid.container}
