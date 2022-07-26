@@ -348,7 +348,7 @@ export const ArticleMeta = ({
 				)}
 				<RowBelowLeftCol>
 					<>
-						{avatarUrl && (
+						{!!avatarUrl && (
 							<AvatarContainer>
 								<Avatar
 									imageSrc={avatarUrl}
@@ -359,7 +359,7 @@ export const ArticleMeta = ({
 						)}
 
 						<div>
-							{shouldShowContributor(format) && byline && (
+							{shouldShowContributor(format) && !!byline && (
 								<Contributor
 									byline={byline}
 									tags={tags}

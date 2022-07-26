@@ -371,7 +371,7 @@ export const Card = ({
 					</Flex>
 					{/* This div is needed to push this content to the bottom of the card */}
 					<div>
-						{trailText && (
+						{!!trailText && (
 							<TrailTextWrapper
 								containerPalette={containerPalette}
 								format={format}

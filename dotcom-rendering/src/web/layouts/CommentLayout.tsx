@@ -441,7 +441,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									/>
 									{/* BOTTOM */}
 									<div>
-										{avatarUrl && (
+										{!!avatarUrl && (
 											<div css={avatarPositionStyles}>
 												<ContributorAvatar
 													imageSrc={avatarUrl}

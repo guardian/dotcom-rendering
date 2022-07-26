@@ -266,11 +266,11 @@ export const OnwardsUpper = ({
 
 	const curatedDataUrl = showRelatedContent
 		? getContainerDataUrl(pillar, editionId, ajaxUrl)
-		: null;
+		: undefined;
 
 	return (
 		<div css={onwardsWrapper}>
-			{url && (
+			{!!url && (
 				<ElementContainer>
 					<OnwardsData
 						url={url}
@@ -280,7 +280,7 @@ export const OnwardsUpper = ({
 					/>
 				</ElementContainer>
 			)}
-			{!isPaidContent && curatedDataUrl && (
+			{!!(!isPaidContent && curatedDataUrl) && (
 				<ElementContainer showTopBorder={true}>
 					<OnwardsData
 						url={curatedDataUrl}
