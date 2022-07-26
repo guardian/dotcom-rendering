@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
-import { from, neutral } from '@guardian/source-foundations';
+import { from, neutral, textSans } from '@guardian/source-foundations';
 import Img from 'components/ImgAlt';
 import { grid } from 'grid/grid';
 import type { FC } from 'react';
 import { getDefaultImgStyles, getDefaultSizes } from './BodyImage.defaults';
 import type { BodyImageProps } from './BodyImage.defaults';
+import { headline } from '@guardian/source-foundations/dist/types/typography/api';
 
 const figureStyles = css`
 	${grid.container}
@@ -76,11 +77,10 @@ const captionStyles = css`
 		color: ${neutral[100]};
 	}
 	> span {
-		font-size: 0.8125rem;
-		line-height: 1.125rem;
+		${textSans.xsmall({ lineHeight: 'regular' })}
 	}
 	> h2 {
-		font-size: 1.0625rem;
+		${headline.xxxsmall()}
 	}
 
 	${from.leftCol} {
@@ -95,9 +95,6 @@ const captionStyles = css`
 			top: 0;
 			bottom: 0;
 			border-left: 1px solid ${neutral[20]};
-		}
-
-		&::before {
 			left: 0;
 			transform: translateX(-10px);
 		}
