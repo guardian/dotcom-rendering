@@ -146,7 +146,7 @@ export const insertPromotedNewsletter = (
 	promotedNewsletter?: Newsletter,
 ): Block[] => {
 	if (!promotedNewsletter) {
-		return [...blocks];
+		return blocks;
 	}
 
 	switch (getPositionOption(format)) {
@@ -169,6 +169,7 @@ export const insertPromotedNewsletter = (
 							: block.elements,
 				};
 			});
+		case 'NONE':
 		default:
 			return blocks;
 	}
