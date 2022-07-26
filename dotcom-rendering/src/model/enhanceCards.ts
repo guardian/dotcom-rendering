@@ -78,10 +78,9 @@ const enhanceSupportingContent = (
 };
 
 const decideAvatarUrl = (
-	tags?: TagType[],
+	tags: TagType[] = [],
 	byline?: string,
 ): string | undefined => {
-	if (!tags || tags.length === 0) return undefined;
 	const soleContributor = getSoleContributor(tags, byline);
 	return soleContributor?.bylineLargeImageUrl ?? undefined;
 };
