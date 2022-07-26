@@ -81,9 +81,8 @@ const decideAvatarUrl = (
 	tags?: TagType[],
 	byline?: string,
 ): string | undefined => {
-	if (!tags || tags.length === 0) return;
+	if (!tags || tags.length === 0) return undefined;
 	const soleContributor = getSoleContributor(tags, byline);
-	// eslint-disable-next-line consistent-return -- because I want to return undefined and you can't stop me
 	return soleContributor?.bylineLargeImageUrl ?? undefined;
 };
 
