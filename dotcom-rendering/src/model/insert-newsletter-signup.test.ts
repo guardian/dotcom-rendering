@@ -3,7 +3,7 @@ import { Quiz as exampleQuiz } from '../../fixtures/generated/articles/Quiz';
 import { Standard as exampleStandard } from '../../fixtures/generated/articles/Standard';
 import {
 	findInsertIndex,
-	insertNewsletterSignup,
+	insertPromotedNewsletter,
 } from './insert-newsletter-signup';
 
 const NEWSLETTER: Newsletter = {
@@ -41,7 +41,7 @@ describe('Insert Newsletter Signups', () => {
 		);
 
 		const elementTypesAfterEnhance = toElementTypeLists(
-			insertNewsletterSignup(
+			insertPromotedNewsletter(
 				exampleStandard.blocks,
 				exampleStandard.format,
 				undefined,
@@ -56,7 +56,7 @@ describe('Insert Newsletter Signups', () => {
 			SIGNUP_BLOCK_ELEMENT,
 			SIGNUP_BLOCK_ELEMENT_CLEAR,
 		]).toContainEqual(
-			insertNewsletterSignup(
+			insertPromotedNewsletter(
 				exampleStandard.blocks,
 				exampleStandard.format,
 				NEWSLETTER,
@@ -72,7 +72,7 @@ describe('Insert Newsletter Signups', () => {
 
 	it('will not insert a NewsletterSignupBlockElement into a blog', () => {
 		expect(
-			insertNewsletterSignup(
+			insertPromotedNewsletter(
 				exampleLiveBlog.blocks,
 				exampleLiveBlog.format,
 				NEWSLETTER,
@@ -88,7 +88,7 @@ describe('Insert Newsletter Signups', () => {
 
 	it('will not insert a NewsletterSignupBlockElement into a quiz', () => {
 		expect(
-			insertNewsletterSignup(
+			insertPromotedNewsletter(
 				exampleQuiz.blocks,
 				exampleQuiz.format,
 				NEWSLETTER,

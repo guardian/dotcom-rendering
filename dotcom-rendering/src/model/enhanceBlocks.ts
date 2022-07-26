@@ -6,7 +6,7 @@ import { enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceTweets } from './enhance-tweets';
-import { insertNewsletterSignup } from './insert-newsletter-signup';
+import { insertPromotedNewsletter } from './insert-newsletter-signup';
 
 class BlockEnhancer {
 	blocks: Block[];
@@ -26,7 +26,7 @@ class BlockEnhancer {
 	}
 
 	enhanceNewsletterSignup() {
-		this.blocks = insertNewsletterSignup(
+		this.blocks = insertPromotedNewsletter(
 			this.blocks,
 			this.format,
 			this.promotedNewsletter,

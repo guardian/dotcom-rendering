@@ -100,7 +100,7 @@ const decideIfClearFromLeftCol = (
 // any future function to place sign-up blocks in blog pages would need to
 // take this into acccount.
 const insert = (
-	newsletter: Newsletter,
+	promotedNewsletter: Newsletter,
 	elements: CAPIElement[],
 	targetIndex: number,
 	maxDistance = 0,
@@ -109,8 +109,8 @@ const insert = (
 
 	elements.splice(index, 0, {
 		_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
-		newsletter: newsletter,
-		elementId: newsletter.elementId,
+		newsletter: promotedNewsletter,
+		elementId: promotedNewsletter.elementId,
 		clearFromLeftCol: decideIfClearFromLeftCol(index, elements),
 	});
 
@@ -134,12 +134,12 @@ const shouldInsertInTheMiddle = (format: CAPIFormat): boolean =>
 		'ObituaryDesign',
 	].includes(format.design);
 
-export const insertNewsletterSignup = (
+export const insertPromotedNewsletter = (
 	blocks: Block[],
 	format: CAPIFormat,
-	newsletter?: Newsletter,
+	promotedNewsletter?: Newsletter,
 ): Block[] => {
-	if (!newsletter) {
+	if (!promotedNewsletter) {
 		return [...blocks];
 	}
 	if (shouldInsertInTheMiddle(format)) {
@@ -153,7 +153,7 @@ export const insertNewsletterSignup = (
 					// included once
 					index === 0
 						? insert(
-								newsletter,
+								promotedNewsletter,
 								block.elements,
 								Math.floor(block.elements.length / 2), // current instruction is to place the SignUp block in the middle of the article - this might change
 								4, // allow the SignUp block to be a few spaces higher of lower to find a suitable place
