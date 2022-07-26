@@ -143,7 +143,7 @@ const listItemStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 		border-left: 1px solid ${neutral[60]};
 	`}
 	&:last-child {
-		border-left: none;
+		border-left-color: transparent;
 	}
 `;
 
