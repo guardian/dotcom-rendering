@@ -383,7 +383,7 @@ export const Card = ({
 								/>
 							</TrailTextWrapper>
 						)}
-						{imageType === 'avatar' && avatarUrl && (
+						{imageType === 'avatar' && !!avatarUrl && (
 							<Hide when="below" breakpoint="tablet">
 								<AvatarContainer>
 									<Avatar
