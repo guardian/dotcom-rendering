@@ -356,7 +356,7 @@ export const Card = ({
 								/>
 							) : undefined}
 						</HeadlineWrapper>
-						{imageType === 'avatar' && avatarUrl && (
+						{imageType === 'avatar' && !!avatarUrl && (
 							<Hide when="above" breakpoint="tablet">
 								<AvatarContainer>
 									<Avatar
