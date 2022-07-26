@@ -37,21 +37,21 @@ export const groupCards = (
 				// Snap is not supported on these container types
 				snap: [],
 				huge: enhanceCards(
-					curated.filter((card) => card.card.group === '3'),
+					curated.filter(({ card }) => card.group === '3'),
 					containerPalette,
 				),
 				veryBig: enhanceCards(
-					curated.filter((card) => card.card.group === '2'),
+					curated.filter(({ card }) => card.group === '2'),
 					containerPalette,
 				),
 				big: enhanceCards(
-					curated.filter((card) => card.card.group === '1'),
+					curated.filter(({ card }) => card.group === '1'),
 					containerPalette,
 				),
 				standard: enhanceCards(
 					// Backfilled cards will always be treated as 'standard' cards
 					curated
-						.filter((card) => card.card.group === '0')
+						.filter(({ card }) => card.group === '0')
 						.concat(backfill),
 					containerPalette,
 				),
@@ -63,13 +63,13 @@ export const groupCards = (
 				big: [],
 				// Only 'snap' and 'standard' are supported by dynamic/package
 				snap: enhanceCards(
-					curated.filter((card) => card.card.group === '1'),
+					curated.filter(({ card }) => card.group === '1'),
 					containerPalette,
 				),
 				standard: enhanceCards(
 					// Backfilled cards will always be treated as 'standard' cards
 					curated
-						.filter((card) => card.card.group === '0')
+						.filter(({ card }) => card.group === '0')
 						.concat(backfill),
 					containerPalette,
 				),
