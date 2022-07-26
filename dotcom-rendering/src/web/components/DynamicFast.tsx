@@ -110,7 +110,7 @@ const Primaries = ({
 };
 
 /**
- * When the first 'big' is boosted & there is atleast 1 more big we switch up the layout a little -
+ * When the first 'big' is boosted & there is at least 1 more big, we switch up the layout a little -
  *
  * The 'standards' section (what this component renders), consists of 2 columns, rather than a wrapped row,
  * where the first big (all other 'bigs' fallback to standards) sits in the first slot of the left hand column,
