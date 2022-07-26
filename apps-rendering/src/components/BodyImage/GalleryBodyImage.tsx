@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
 import {
 	from,
+	headline,
 	neutral,
 	textSans,
-	headline,
 } from '@guardian/source-foundations';
 import Img from 'components/ImgAlt';
 import { grid } from 'grid/grid';
