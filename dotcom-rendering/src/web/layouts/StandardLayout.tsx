@@ -487,42 +487,40 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 						<GridItem area="matchNav" element="aside">
 							<div css={maxWidth}>
-								{format.design === ArticleDesign.MatchReport &&
-									footballMatchUrl && (
-										<Island
-											deferUntil="visible"
-											clientOnly={true}
-											placeholderHeight={230}
-										>
-											<GetMatchNav
-												matchUrl={footballMatchUrl}
-												format={format}
-												headlineString={
-													CAPIArticle.headline
-												}
-												tags={CAPIArticle.tags}
-												webPublicationDateDeprecated={
-													CAPIArticle.webPublicationDateDeprecated
-												}
-											/>
-										</Island>
-									)}
+								{isMatchReport && (
+									<Island
+										deferUntil="visible"
+										clientOnly={true}
+										placeholderHeight={230}
+									>
+										<GetMatchNav
+											matchUrl={footballMatchUrl}
+											format={format}
+											headlineString={
+												CAPIArticle.headline
+											}
+											tags={CAPIArticle.tags}
+											webPublicationDateDeprecated={
+												CAPIArticle.webPublicationDateDeprecated
+											}
+										/>
+									</Island>
+								)}
 							</div>
 						</GridItem>
 						<GridItem area="matchtabs" element="aside">
 							<div css={maxWidth}>
-								{format.design === ArticleDesign.MatchReport &&
-									footballMatchUrl && (
-										<Island
-											clientOnly={true}
-											placeholderHeight={40}
-										>
-											<GetMatchTabs
-												matchUrl={footballMatchUrl}
-												format={format}
-											/>
-										</Island>
-									)}
+								{isMatchReport && (
+									<Island
+										clientOnly={true}
+										placeholderHeight={40}
+									>
+										<GetMatchTabs
+											matchUrl={footballMatchUrl}
+											format={format}
+										/>
+									</Island>
+								)}
 							</div>
 						</GridItem>
 						<GridItem area="headline">

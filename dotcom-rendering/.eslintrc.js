@@ -49,6 +49,7 @@ module.exports = {
 		'react-hooks',
 		'import',
 		'jsx-a11y',
+		'jsx-expressions',
 	],
 	rules: {
 		// React & Hooks
@@ -73,6 +74,9 @@ module.exports = {
 			// https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md#options
 			{ packageDir: ['..', '.'] },
 		],
+
+		/** @see https://github.com/hpersson/eslint-plugin-jsx-expressions/blob/master/docs/rules/strict-logical-expressions.md */
+		'jsx-expressions/strict-logical-expressions': 'error',
 
 		...rulesToReview,
 		...rulesToRemove,

@@ -317,7 +317,7 @@ export const SecureSignupIframe = ({
 				</div>
 			)}
 
-			{errorMessage && <ErrorMessageWithAdvice text={errorMessage} />}
+			{!!errorMessage && <ErrorMessageWithAdvice text={errorMessage} />}
 
 			{hasResponse &&
 				(responseOk ? (
@@ -353,7 +353,7 @@ export const SecureSignupIframe = ({
 					</div>
 				))}
 
-			{captchaSiteKey && (
+			{!!captchaSiteKey && (
 				<div
 					css={css`
 						.grecaptcha-badge {

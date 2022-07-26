@@ -198,7 +198,7 @@ export const ContainerLayout = ({
 								editionId={editionId}
 							/>
 						</Hide>
-						{toggleable && sectionId && (
+						{toggleable && !!sectionId && (
 							<ShowHideButton
 								sectionId={sectionId}
 								overrideContainerToggleColour={

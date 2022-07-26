@@ -295,7 +295,7 @@ export const Card = ({
 				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
 			>
-				{imageUrl && (
+				{!!imageUrl && (
 					<ImageWrapper
 						imageSize={imageSize}
 						imagePosition={imagePosition}
@@ -363,7 +363,7 @@ export const Card = ({
 					</Flex>
 					{/* This div is needed to push this content to the bottom of the card */}
 					<div>
-						{trailText && (
+						{!!trailText && (
 							<TrailTextWrapper
 								containerPalette={containerPalette}
 								format={format}
