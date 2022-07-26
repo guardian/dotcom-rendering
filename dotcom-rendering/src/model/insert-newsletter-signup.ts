@@ -109,14 +109,16 @@ const insert = (
 ): CAPIElement[] => {
 	const index = findInsertIndex(elements, targetIndex, maxDistance);
 
-	elements.splice(index, 0, {
-		_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
-		newsletter: promotedNewsletter,
-		elementId: promotedNewsletter.elementId,
-		clearFromLeftCol: decideIfClearFromLeftCol(index, elements),
-	});
-
-	return elements;
+	return [
+		...elements.slice(0, index),
+		{
+			_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
+			newsletter: promotedNewsletter,
+			elementId: promotedNewsletter.elementId,
+			clearFromLeftCol: decideIfClearFromLeftCol(index, elements),
+		},
+		...elements.slice(index),
+	];
 };
 
 const getPositionOption = (format: CAPIFormat): PositionOption => {
