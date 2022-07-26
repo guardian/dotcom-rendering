@@ -5,7 +5,7 @@ import {
 	space,
 	textSans,
 } from '@guardian/source-foundations';
-import { SvgEnvelope } from '@guardian/source-react-components';
+import { SvgNewsletter } from './SvgNewsletter';
 
 export const NewsletterFrequency = ({ frequency }: { frequency: string }) => {
 	return (
@@ -30,7 +30,7 @@ export const NewsletterFrequency = ({ frequency }: { frequency: string }) => {
 					}
 				`}
 			>
-				<SvgEnvelope />
+				<SvgNewsletter />
 			</div>
 			<div
 				css={css`
