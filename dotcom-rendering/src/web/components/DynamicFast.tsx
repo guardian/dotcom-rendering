@@ -39,6 +39,8 @@ const Primaries = ({
 			{primaries.map((card, index) => {
 				// Boosted Layout
 				if (primaries.length > 1 && boostedIndex !== -1) {
+					const boostedImagePosition = index === 0 ? 'right' : 'left';
+
 					return (
 						<LI
 							key={card.url}
@@ -65,7 +67,9 @@ const Primaries = ({
 								}
 								imageUrl={card.image}
 								imagePosition={
-									index === boostedIndex ? 'right' : 'top'
+									index === boostedIndex
+										? boostedImagePosition
+										: 'top'
 								}
 								imagePositionOnMobile={
 									index === boostedIndex ? 'top' : 'left'

@@ -21,9 +21,6 @@ import { enhanceCards } from './enhanceCards';
  *
  * Backfilled cards are always considered 'standard'.
  *
- * @param curated
- * @param backfill
- * @param containerPalette
  * @returns Card arrays grouped into 'snap', 'huge', 'veryBig', 'big' and 'standard'
  */
 export const groupCards = (
