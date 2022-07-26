@@ -5,6 +5,8 @@ interface PlaceInArticle {
 	afterSupporting: boolean;
 }
 
+type PositionOption = 'MIDDLE' | 'NONE';
+
 const isCloseAfterSupportingElement = (
 	index: number,
 	elements: CAPIElement[],
@@ -117,22 +119,26 @@ const insert = (
 	return elements;
 };
 
-const shouldInsertInTheMiddle = (format: CAPIFormat): boolean =>
-	[
-		'ArticleDesign',
-		'GalleryDesign',
-		'AudioDesign',
-		'VideoDesign',
-		'ReviewDesign',
-		'AnalysisDesign',
-		'CommentDesign',
-		'FeatureDesign',
-		'RecipeDesign',
-		'MatchReportDesign',
-		'InterviewDesign',
-		'EditorialDesign',
-		'ObituaryDesign',
-	].includes(format.design);
+const getPositionOption = (format: CAPIFormat): PositionOption => {
+	switch (format.design) {
+		case 'ArticleDesign':
+		case 'GalleryDesign':
+		case 'AudioDesign':
+		case 'VideoDesign':
+		case 'ReviewDesign':
+		case 'AnalysisDesign':
+		case 'CommentDesign':
+		case 'FeatureDesign':
+		case 'RecipeDesign':
+		case 'MatchReportDesign':
+		case 'InterviewDesign':
+		case 'EditorialDesign':
+		case 'ObituaryDesign':
+			return 'MIDDLE';
+		default:
+			return 'NONE';
+	}
+};
 
 export const insertPromotedNewsletter = (
 	blocks: Block[],
@@ -142,26 +148,28 @@ export const insertPromotedNewsletter = (
 	if (!promotedNewsletter) {
 		return [...blocks];
 	}
-	if (shouldInsertInTheMiddle(format)) {
-		return blocks.map((block: Block, index: number) => {
-			return {
-				...block,
-				elements:
-					// aside from blogs (excluded above) all article formats only contain 1 block, so
-					// the index conditional should not be necessary - but should another format with
-					// mutiple blocks be introduced, the NewsletterSignupBlockElement should only be
-					// included once
-					index === 0
-						? insert(
-								promotedNewsletter,
-								block.elements,
-								Math.floor(block.elements.length / 2), // current instruction is to place the SignUp block in the middle of the article - this might change
-								4, // allow the SignUp block to be a few spaces higher of lower to find a suitable place
-						  )
-						: block.elements,
-			};
-		});
-	}
 
-	return [...blocks];
+	switch (getPositionOption(format)) {
+		case 'MIDDLE':
+			return blocks.map((block: Block, index: number) => {
+				return {
+					...block,
+					elements:
+						// aside from blogs (excluded above) all article formats only contain 1 block, so
+						// the index conditional should not be necessary - but should another format with
+						// mutiple blocks be introduced, the NewsletterSignupBlockElement should only be
+						// included once
+						index === 0
+							? insert(
+									promotedNewsletter,
+									block.elements,
+									Math.floor(block.elements.length / 2), // current instruction is to place the SignUp block in the middle of the article - this might change
+									4, // allow the SignUp block to be a few spaces higher of lower to find a suitable place
+							  )
+							: block.elements,
+				};
+			});
+		default:
+			return blocks;
+	}
 };
