@@ -80,6 +80,7 @@ export const LiveBlock = ({
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
 					switches={switches}
+					isPinnedPost={isPinnedPost}
 				/>
 			))}
 			<footer
