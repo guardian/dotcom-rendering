@@ -31,7 +31,7 @@ const Primaries = ({
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
-	// Gets the index of any primary card which is boosted, returns -1 if none are.
+	// Gets the index of the first primary card which is boosted, returns -1 if none are.
 	const boostedIndex = primaries.findIndex((card) => !!card.isBoosted);
 
 	return (
