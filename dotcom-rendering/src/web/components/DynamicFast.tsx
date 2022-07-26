@@ -27,7 +27,7 @@ const Primaries = ({
 	showAge,
 	containerPalette,
 }: {
-	primaries: [TrailType] | [TrailType, TrailType];
+	primaries: [] | [TrailType] | [TrailType, TrailType];
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
