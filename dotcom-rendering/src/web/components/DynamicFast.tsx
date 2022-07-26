@@ -46,7 +46,7 @@ const Primaries = ({
 							key={card.url}
 							padSides={true}
 							percentage={
-								// Boosted primaries take up 25% of the horizontal space
+								// Boosted primaries take up 75% of the horizontal space
 								index === boostedIndex ? '75%' : '25%'
 							}
 							showDivider={index > 0}
