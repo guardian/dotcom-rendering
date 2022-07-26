@@ -27,7 +27,7 @@ const Primaries = ({
 	showAge,
 	containerPalette,
 }: {
-	primaries: TrailType[];
+	primaries: [TrailType] | [TrailType, TrailType];
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -336,17 +336,20 @@ export const DynamicFast = ({
 }: Props) => {
 	// 'primaries' should hold up to 2 cards, selecting that which are given
 	// the 'largest' group.
-	let primaries: TrailType[] = [];
+	let primaries: [] | [TrailType] | [TrailType, TrailType] = [];
 	if (groupedTrails.huge.length > 0) {
 		// Where a huge is set, we only take 1 primary, leaving any
 		// 'veryBigs' to be displayed as 'bigs'
-		primaries = groupedTrails.huge.splice(0, 1);
+		primaries = groupedTrails.huge.splice(0, 1) as [TrailType];
 	} else if (groupedTrails.veryBig.length === 1) {
 		// This would display the same as 1 'huge'.
-		primaries = groupedTrails.veryBig.splice(0, 1);
+		primaries = groupedTrails.veryBig.splice(0, 1) as [TrailType];
 	} else if (groupedTrails.veryBig.length > 1) {
 		// We take a maximum of 2, remaining very bigs will be treated as 'big'
-		primaries = groupedTrails.veryBig.splice(0, 2);
+		primaries = groupedTrails.veryBig.splice(0, 2) as [
+			TrailType,
+			TrailType,
+		];
 	}
 
 	// Put together all the bigs - only those not chosen as 'primaries' will be left over
