@@ -194,7 +194,7 @@ const clientConfigProduction = {
 	mode: 'production',
 	devtool: false,
 	plugins: [
-		new WebpackManifestPlugin(),
+		new WebpackManifestPlugin({}),
 		new HtmlWebpackPlugin({
 			meta: {
 				'Content-Security-Policy': {
