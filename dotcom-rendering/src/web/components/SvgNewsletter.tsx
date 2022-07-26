@@ -2,6 +2,11 @@ import { css } from '@emotion/react';
 import { iconSize, visuallyHidden } from '@guardian/source-foundations';
 import type { IconSize } from '@guardian/source-react-components';
 
+// This component is adapted from a one being release on a new version of source:
+// https://github.com/guardian/source/pull/1485
+// It should be deleted and replace with the import from @guardian/source-react-components
+// when this project is updated to use @guardian/eslint-plugin-source-react-components 6.0.0
+
 interface Props {
 	size?: IconSize;
 	isAnnouncedByScreenReader?: boolean;
