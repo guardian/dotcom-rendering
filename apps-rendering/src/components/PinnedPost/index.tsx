@@ -64,8 +64,8 @@ const rowStyles = (format: ArticleFormat): SerializedStyles => css`
 	align-items: center;
 	svg {
 		fill: ${neutral[100]};
-		height: 32px;
-		margin-bottom: ${space[1]}px;
+		height: 2rem;
+		margin-bottom: ${remSpace[1]};
 	}
 `;
 
