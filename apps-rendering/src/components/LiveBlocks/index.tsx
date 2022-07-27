@@ -11,6 +11,7 @@ import type { Contributor } from 'contributor';
 import { formatUTCTimeDateTz } from 'date';
 import { pipe } from 'lib';
 import type { LiveBlock as LiveBlockType } from 'liveBlock';
+import type { Option } from 'option';
 import { OptionKind } from 'option';
 import type { FC } from 'react';
 import { renderAll } from 'renderer';
@@ -33,6 +34,7 @@ interface LiveBlocksProps {
 	blocks: LiveBlockType[];
 	format: ArticleFormat;
 	pageNumber: number;
+	pinnedPost: Option<LiveBlockType>;
 }
 
 interface LiveBlockProps {
@@ -81,9 +83,12 @@ const LiveBlock: FC<LiveBlockProps> = ({
 	);
 };
 
-const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format, pageNumber }) => {
-	const pinnedPost = fromNullable(blocks.find((b) => b.isPinned));
-
+const LiveBlocks: FC<LiveBlocksProps> = ({
+	blocks,
+	format,
+	pageNumber,
+	pinnedPost,
+}) => {
 	const showPinnedPost =
 		pageNumber === 1 && pinnedPost.kind === OptionKind.Some;
 
