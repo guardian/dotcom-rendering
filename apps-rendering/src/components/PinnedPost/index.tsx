@@ -85,7 +85,7 @@ const overlayStyles = css`
 		${neutral[100]} 40%,
 		rgba(255, 255, 255, 0)
 	);
-	height: 80px;
+	height: 5rem;
 	position: absolute;
 	bottom: 0;
 	width: 100%;
