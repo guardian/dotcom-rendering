@@ -25,7 +25,7 @@ import { darkModeCss } from 'styles';
 const pinnedPostContainerStyles = (
 	format: ArticleFormat,
 ): SerializedStyles => css`
-	border: 3px solid ${border.borderPinnedPost(format)};
+	border: 0.1875rem solid ${border.borderPinnedPost(format)};
 	padding-bottom: ${remSpace[1]};
 	position: relative;
 	background: ${neutral[100]};
