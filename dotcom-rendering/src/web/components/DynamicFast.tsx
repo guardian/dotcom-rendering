@@ -118,14 +118,14 @@ const Primaries = ({
  * The right hand column will take (up to) the remaining 5 standards. Any more standards will not be rendered.
  *
  */
-const ThirdBoostedPlusBig = ({
-	standards,
+const FirstBigBoostedPlusBig = ({
 	big,
+	standards,
 	showAge,
 	containerPalette,
 }: {
-	standards: TrailType[];
 	big: TrailType;
+	standards: TrailType[];
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
@@ -328,62 +328,85 @@ const getStandardsDisplayConfig = (
  *
  * There are also variations where a 'huge' is provided, or only 1 very big, where the top
  * rows become just 1 'huge' card, instead of the 2 primaries shown in the layouts above.
+ *
+ * Note: Array.splice is used a lot in this component - this modifies the array in place, allowing us
+ * 	to 'take' a number of cards from an array, see more:
+ * 	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
  */
 export const DynamicFast = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
 }: Props) => {
-	// 'primaries' should hold up to 2 cards, selecting that which are given
-	// the 'largest' group.
+	/**
+	 * Primaries - The first row
+	 *
+	 * Can hold 0, 1, or 2 cards in the combinations
+	 *  - 1 huge
+	 *  - 1 very big
+	 *  - 2 very bigs
+	 *
+	 * If excess cards in these categoriesare provided from fronts tool,
+	 * these will be left to 'fall through' into the 'bigs' categories.
+	 */
 	let primaries: [] | [TrailType] | [TrailType, TrailType] = [];
 	if (groupedTrails.huge.length > 0) {
-		// Where a huge is set, we only take 1 primary, leaving any
-		// 'veryBigs' to be displayed as 'bigs'
 		primaries = groupedTrails.huge.splice(0, 1) as [TrailType];
 	} else if (groupedTrails.veryBig.length === 1) {
-		// This would display the same as 1 'huge'.
 		primaries = groupedTrails.veryBig.splice(0, 1) as [TrailType];
 	} else if (groupedTrails.veryBig.length > 1) {
-		// We take a maximum of 2, remaining very bigs will be treated as 'big'
 		primaries = groupedTrails.veryBig.splice(0, 2) as [
 			TrailType,
 			TrailType,
 		];
 	}
 
-	// Put together all the bigs - only those not chosen as 'primaries' will be left over
-	const bigs = groupedTrails.huge
-		.concat(groupedTrails.veryBig, groupedTrails.big)
-		.slice(0, 4);
+	/**
+	 * Bigs - Starting from the left of the second row
+	 *
+	 * Put together from (in order)
+	 *  - Any left over huges
+	 *  - Any left over very bigs
+	 *  - All bigs
+	 *
+	 * Limited to 4 as each big (unboosted) takes up 25% of the row
+	 */
+	const bigs = [
+		...groupedTrails.huge,
+		...groupedTrails.veryBig,
+		...groupedTrails.big,
+	].slice(0, 4);
 
 	const firstBigBoosted = !!bigs[0]?.isBoosted;
 
-	// Gets display information
-	const standardsConfig = getStandardsDisplayConfig(
+	/**
+	 * firstBigBoostedPlusBig is a layout used when the first big has been boosted,
+	 * and additional bigs have been added in fronts tool.
+	 *
+	 * When this happens, we switch to the FirstBigBoostedPlusBig component for rendering
+	 * the standards section of the second row.
+	 */
+	const firstBigBoostedPlusBig = firstBigBoosted && !!bigs[1];
+
+	const standardsDisplayConfig = getStandardsDisplayConfig(
 		firstBigBoosted,
 		bigs.length,
 	);
 
-	let standards: TrailType[] = [];
-	if (firstBigBoosted && bigs.length > 1) {
-		// If the first big is boosted & there is an additional big card, we change
-		// we change to a 2 column layout. Any bigs but the first 2 should fall-through
-		// to being standards.
-		standards = [
-			// Take all but the first 2 bigs
-			...bigs.splice(2, bigs.length - 1),
-			...groupedTrails.standard,
-		];
-	} else if (standardsConfig.columns > 0) {
-		// We don't need to select any 'left over' bigs here as if there are
-		// 4 bigs there is no room for standards.
-		standards = groupedTrails.standard.splice(
-			0,
-			// We allow 3 standards per columns
-			standardsConfig.columns * 3,
-		);
-	}
+	/**
+	 * Standards - Left over space from bigs in the second row
+	 *
+	 * Standards will use all the columns left over from the bigs, this
+	 * is decided in standardsDisplayConfig.columns
+	 *
+	 * Each column available gives room for up to 3 standards.
+	 *
+	 * When firstBigBoostedPlusBig we constuct a different list of standards,
+	 * so we don't select any standards here.
+	 */
+	const standards: TrailType[] = firstBigBoostedPlusBig
+		? []
+		: groupedTrails.standard.splice(0, standardsDisplayConfig.columns * 3);
 
 	return (
 		<>
@@ -445,18 +468,21 @@ export const DynamicFast = ({
 						</LI>
 					);
 				})}
-				{standardsConfig.columns > 0 && (
+				{standardsDisplayConfig.columns > 0 && (
 					<LI
-						percentage={standardsConfig.containerWidth}
+						percentage={standardsDisplayConfig.containerWidth}
 						showTopMarginWhenStacked={true}
 					>
 						<UL direction="row" wrapCards={true}>
 							{/* If the first big is boosted & we have a second big,
 							it should be at the start of the standards but have an image  */}
-							{firstBigBoosted && bigs[1] ? (
-								<ThirdBoostedPlusBig
-									standards={standards}
+							{firstBigBoostedPlusBig ? (
+								<FirstBigBoostedPlusBig
 									big={bigs[1]}
+									standards={[
+										...bigs.splice(2, bigs.length - 1),
+										...groupedTrails.standard,
+									]}
 									containerPalette={containerPalette}
 									showAge={showAge}
 								/>
@@ -467,7 +493,7 @@ export const DynamicFast = ({
 										<LI
 											key={card.url}
 											percentage={
-												standardsConfig.cardWidth
+												standardsDisplayConfig.cardWidth
 											}
 											stretch={true}
 											showDivider={true}
@@ -481,8 +507,8 @@ export const DynamicFast = ({
 													// Get leftover (modulo), if none fall back to columns as the whole bottom row
 													// won't want to be padded
 													(standards.length %
-														standardsConfig.columns ||
-														standardsConfig.columns)
+														standardsDisplayConfig.columns ||
+														standardsDisplayConfig.columns)
 											}
 											padBottomOnMobile={
 												cardIndex < standards.length - 1
