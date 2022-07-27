@@ -3,7 +3,6 @@ const transitionRules = require('./eslint-guardian');
 /** TODO: Review these */
 const rulesToReview = {
 	'consistent-return': 'warn', // 51 problems
-	'default-case': 'warn', // 50 problems
 	'react/no-danger': 'warn', // 48 problems
 	'react/no-array-index-key': 'warn', // 34 problems
 	'react/button-has-type': 'warn', // 23 problems
@@ -77,6 +76,9 @@ module.exports = {
 
 		/** @see https://github.com/hpersson/eslint-plugin-jsx-expressions/blob/master/docs/rules/strict-logical-expressions.md */
 		'jsx-expressions/strict-logical-expressions': 'error',
+
+		// We use 'noFallthroughCasesInSwitch' in tsconfig.json as this respects types
+		'no-fallthrough': 'off',
 
 		...rulesToReview,
 		...rulesToRemove,
