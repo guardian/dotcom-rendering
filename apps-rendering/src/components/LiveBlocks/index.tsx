@@ -96,14 +96,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({
 		<>
 			{/* Accordion? */}
 			{showPinnedPost && (
-				<PinnedPost pinnedPost={pinnedPost.value} format={format}>
-					<LiveBlock
-						block={pinnedPost.value}
-						format={format}
-						isPinnedPost={true}
-						isOriginalPinnedPost={false}
-					/>
-				</PinnedPost>
+				<PinnedPost pinnedPost={pinnedPost.value} format={format} />
 			)}
 			{blocks.map((block) => (
 				<LiveBlock

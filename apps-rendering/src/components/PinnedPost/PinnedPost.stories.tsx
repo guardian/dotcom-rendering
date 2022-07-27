@@ -3,7 +3,6 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
-import { LiveBlock } from 'components/LiveBlocks';
 import { pinnedBlock } from 'fixtures/item';
 import type { FC } from 'react';
 import PinnedPost from './';
@@ -42,14 +41,7 @@ const Default: FC<{ pillar: ArticlePillar }> = ({
 	pillar = ArticlePillar.News,
 }) => (
 	<Wrapper>
-		<PinnedPost pinnedPost={pinnedBlock} format={getFormat(pillar)}>
-			<LiveBlock
-				block={pinnedBlock}
-				format={getFormat(pillar)}
-				isPinnedPost={true}
-				isOriginalPinnedPost={false}
-			></LiveBlock>
-		</PinnedPost>
+		<PinnedPost pinnedPost={pinnedBlock} format={getFormat(pillar)} />
 	</Wrapper>
 );
 

@@ -1,8 +1,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
-	border,
 	background,
+	border,
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { timeAgo } from '@guardian/libs';
@@ -21,7 +21,8 @@ import {
 	SvgPinned,
 	SvgPlus,
 } from '@guardian/source-react-components';
-import type { LiveBlock } from 'liveBlock';
+import { LiveBlock } from 'components/LiveBlocks';
+import type { LiveBlock as LiveBlockType } from 'liveBlock';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -152,12 +153,11 @@ const buttonIcon = css`
 `;
 
 type Props = {
-	pinnedPost: LiveBlock;
-	children: React.ReactNode;
+	pinnedPost: LiveBlockType;
 	format: ArticleFormat;
 };
 
-const PinnedPost: FC<Props> = ({ pinnedPost, children, format }: Props) => {
+const PinnedPost: FC<Props> = ({ pinnedPost, format }: Props) => {
 	return (
 		<div
 			id="pinned-post"
@@ -182,7 +182,12 @@ const PinnedPost: FC<Props> = ({ pinnedPost, children, format }: Props) => {
 				</time>
 			</div>
 			<div id="collapsible-body" css={collapsibleBody}>
-				{children}
+				<LiveBlock
+					block={pinnedPost}
+					format={format}
+					isPinnedPost={true}
+					isOriginalPinnedPost={false}
+				/>
 			</div>
 			<div id="pinned-post-overlay" css={overlayStyles} />
 			<label
