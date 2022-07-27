@@ -41,7 +41,6 @@ export const Default = () => (
 					'You have signed up, but the newsletter is fake',
 				theme: 'opinion',
 				group: 'Opinion',
-				elementId: 'ElementID',
 			}}
 		/>
 	</ContainerLayout>

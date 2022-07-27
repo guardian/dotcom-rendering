@@ -42,7 +42,7 @@ type Props = {
 //     |  tttttttt
 //  sssssssss
 //  sssssssss-------+
-//  sssssssssSIGN   |
+//  sssssssss  SIGN |
 //     |  | -UP     |
 //     |  +---------+
 //     |  ttttttttttt
@@ -68,11 +68,10 @@ type Props = {
 // CORRECT (leftCol layout with clear:none):
 //     |  ttttttttttt
 //     |  tttttttt
-//  rrr|
 //  rrr|  +---------+
 //  rrr|  | SIGN-UP |
 //  rrr|  +---------+
-//     |  ttttttttttt
+//  rrr|  ttttttttttt
 //     |  ttttttttttt
 
 const containerStyles = (
