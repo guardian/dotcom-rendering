@@ -20,7 +20,6 @@ import {
 	sport,
 	text,
 } from '@guardian/source-foundations';
-
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../../lib/pillars';
 import type { DCRContainerPalette } from '../../types/front';
@@ -722,7 +721,6 @@ const backgroundStandfirst = (format: ArticleFormat): string => {
 				case ArticleSpecial.SpecialReport:
 					return specialReport[300];
 			}
-			break;
 		case ArticleDesign.DeadBlog:
 			switch (format.theme) {
 				case ArticleSpecial.SpecialReport:
