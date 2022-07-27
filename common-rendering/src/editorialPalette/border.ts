@@ -76,7 +76,6 @@ const liveBlock = (format: ArticleFormat): Colour => {
 	}
 };
 
-
 const liveBlockDark = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -105,7 +104,6 @@ const relatedCardDark = (_format: ArticleFormat): Colour => {
 };
 
 const standfirstLink = (format: ArticleFormat): Colour => {
-
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[600];
@@ -155,7 +153,6 @@ const richLink = (format: ArticleFormat): Colour => {
 
 const richLinkSvg = richLink;
 
-
 const richLinkSvgDark = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -178,7 +175,7 @@ const richLinkSvgDark = (format: ArticleFormat): Colour => {
 /**
  *  This is applied server-side. When the page loads, client-side JS applies a class name that overrides this style.
  */
- const richLinkPreload = (_format: ArticleFormat): Colour => {
+const richLinkPreload = (_format: ArticleFormat): Colour => {
 	return neutral[60];
 };
 
@@ -187,18 +184,18 @@ const richLinkSvgDark = (format: ArticleFormat): Colour => {
  */
 const richLinkSvgPreload = (_format: ArticleFormat): Colour => {
 	return neutral[7];
-}
+};
 
 /**
  *  This is applied server-side. When the page loads, client-side JS applies a class name that overrides this style.
  */
- const richLinkSvgPreloadDark = (_format: ArticleFormat): Colour => {
+const richLinkSvgPreloadDark = (_format: ArticleFormat): Colour => {
 	return neutral[60];
 };
 
 const richLinkDark = (format: ArticleFormat): Colour => {
 	return neutral[60];
-}
+};
 
 const standfirstLinkDark = (format: ArticleFormat): Colour => {
 	return neutral[46];
@@ -208,7 +205,7 @@ const pagination = (format: ArticleFormat): Colour => {
 	return neutral[86];
 };
 
-const borderPinnedPost = (format: ArticleFormat): string => {
+const pinnedPost = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[300];
@@ -252,7 +249,7 @@ const border = {
 	standfirstLink,
 	standfirstBlogLink,
 	standfirstLinkDark,
-	borderPinnedPost,
+	pinnedPost,
 };
 
 // ----- Exports ----- //

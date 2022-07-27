@@ -1,14 +1,17 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { border } from '@guardian/common-rendering/src/editorialPalette';
+import {
+	border,
+	background,
+} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { timeAgo } from '@guardian/libs';
 import {
 	focusHalo,
 	from,
-	height,
 	neutral,
-	space,
+	remHeight,
+	remSpace,
 	textSans,
 	transitions,
 	visuallyHidden,
@@ -25,7 +28,7 @@ import { darkModeCss } from 'styles';
 const pinnedPostContainerStyles = (
 	format: ArticleFormat,
 ): SerializedStyles => css`
-	border: 0.1875rem solid ${border.borderPinnedPost(format)};
+	border: 0.1875rem solid ${border.pinnedPost(format)};
 	padding-bottom: ${remSpace[1]};
 	position: relative;
 	background: ${neutral[100]};
@@ -58,7 +61,7 @@ const pinnedPostContainerStyles = (
 `;
 
 const rowStyles = (format: ArticleFormat): SerializedStyles => css`
-	background: ${border.borderPinnedPost(format)};
+	background: ${background.pinnedPost(format)};
 	height: 2rem;
 	display: flex;
 	align-items: center;
@@ -117,16 +120,15 @@ const fakeButtonStyles = (format: ArticleFormat): SerializedStyles => css`
 	&:focus {
 		${focusHalo};
 	}
-	background: ${border.borderPinnedPost(format)};
+	background: ${background.pinnedPost(format)};
 	margin-left: 0.625rem;
 	position: absolute;
 	bottom: -1.5rem;
 	${textSans.medium({ fontWeight: 'bold' })};
 	height: ${remHeight.ctaMedium}rem;
-	min-height: ${remheight.ctaMedium}rem;
-	padding: 0 ${remSpace[5]};
+	min-height: ${remHeight.ctaMedium}rem;
+	padding: 0 ${remSpace[5]} 0.125rem;
 	border-radius: ${remHeight.ctaMedium}rem;
-	padding-bottom: 0.125rem;
 	color: white;
 	${from.tablet} {
 		margin-left: 3.75rem;
@@ -140,10 +142,8 @@ const collapsibleBody = css`
 
 const buttonIcon = css`
 	svg {
-		flex: 0 0 auto;
 		display: block;
 		fill: white;
-		position: relative;
 		width: 1.5rem;
 		height: auto;
 		margin-left: -${remSpace[1]};
@@ -162,7 +162,6 @@ const PinnedPost: FC<Props> = ({ pinnedPost, children, format }: Props) => {
 		<div
 			id="pinned-post"
 			css={pinnedPostContainerStyles(format)}
-			data-gu-marker="pinned-post"
 			data-component="pinned-post"
 		>
 			<input

@@ -55,7 +55,7 @@ const LiveBlock: FC<LiveBlockProps> = ({
 			id={block.id}
 			format={format}
 			blockTitle={block.title}
-			blockFirstPublished={Number(block.firstPublished)}
+			blockFirstPublished={block.firstPublished.getTime()}
 			blockId={block.id}
 			isPinnedPost={isPinnedPost}
 			isOriginalPinnedPost={isOriginalPinnedPost}
@@ -102,7 +102,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({
 						format={format}
 						isPinnedPost={true}
 						isOriginalPinnedPost={false}
-					></LiveBlock>
+					/>
 				</PinnedPost>
 			)}
 			{blocks.map((block) => (
@@ -118,7 +118,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({
 						map((pinned) => block.id === pinned.id),
 						withDefault<boolean>(false),
 					)}
-				></LiveBlock>
+				/>
 			))}
 		</>
 	);
