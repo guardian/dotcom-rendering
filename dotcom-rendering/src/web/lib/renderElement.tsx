@@ -455,7 +455,9 @@ export const renderElement = ({
 				true,
 				<EmailSignup
 					newsletter={element.newsletter}
-					clearFromLeftCol={element.clearFromLeftCol}
+					previousFloatingElementType={
+						element.previousFloatingElementType
+					}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':

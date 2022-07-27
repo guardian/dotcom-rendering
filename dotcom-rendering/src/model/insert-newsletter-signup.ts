@@ -7,6 +7,12 @@ interface PlaceInArticle {
 
 type PositionOption = 'MIDDLE' | 'NONE';
 
+const floatingElementRoleTypes: FloatingElementRole[] = [
+	'supporting',
+	'thumbnail',
+	'richLink',
+];
+
 const isCloseAfterSupportingElement = (
 	index: number,
 	elements: CAPIElement[],
@@ -65,19 +71,17 @@ export const findInsertIndex = (
 };
 
 /**
- * Determines whether the element should have clear:both
- * for all breakpoints
+ * Find the role of the last floating element before the index,
+ * (if any), not matter how far before the floating element is.
  *
  * @param index where in the array the element will be inserted
  * @param elements the array of elements
- * @returns whether the element should have clear:both for all breakpoints
+ * @returns the role of the floating element before the index
  */
-const decideIfClearFromLeftCol = (
+const findLastFloatingElementTypeBeforePlace = (
 	index: number,
 	elements: CAPIElement[],
-): boolean => {
-	const floatingElementRoleTypes = ['supporting', 'thumbnail', 'richLink'];
-
+): FloatingElementRole | undefined => {
 	const lastFloatingElementBeforePlace = elements
 		.slice(0, index)
 		.reverse()
@@ -85,17 +89,16 @@ const decideIfClearFromLeftCol = (
 			(element) =>
 				'role' in element &&
 				typeof element.role == 'string' &&
-				floatingElementRoleTypes.includes(element.role),
+				floatingElementRoleTypes.includes(
+					element.role as FloatingElementRole,
+				),
 		);
 
 	// Ideally wouldn't need to test for "'role' in element" again
-	const lastFloatingElementRole =
-		lastFloatingElementBeforePlace &&
+	return lastFloatingElementBeforePlace &&
 		'role' in lastFloatingElementBeforePlace
-			? lastFloatingElementBeforePlace.role
-			: undefined;
-
-	return lastFloatingElementRole === 'supporting';
+		? (lastFloatingElementBeforePlace.role as FloatingElementRole)
+		: undefined;
 };
 
 // NOTE: blog pages have different structure with multiple blocks of elements
@@ -109,13 +112,18 @@ const insert = (
 ): CAPIElement[] => {
 	const index = findInsertIndex(elements, targetIndex, maxDistance);
 
+	const previousFloatingElementType = findLastFloatingElementTypeBeforePlace(
+		index,
+		elements,
+	);
+
 	return [
 		...elements.slice(0, index),
 		{
 			_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
 			newsletter: promotedNewsletter,
 			elementId: promotedNewsletter.elementId,
-			clearFromLeftCol: decideIfClearFromLeftCol(index, elements),
+			previousFloatingElementType,
 		},
 		...elements.slice(index),
 	];

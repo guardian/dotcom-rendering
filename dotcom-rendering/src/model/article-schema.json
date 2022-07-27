@@ -2180,8 +2180,8 @@
                 "elementId": {
                     "type": "string"
                 },
-                "clearFromLeftCol": {
-                    "type": "boolean"
+                "previousFloatingElementType": {
+                    "$ref": "#/definitions/FloatingElementRole"
                 }
             },
             "required": [
@@ -2189,6 +2189,14 @@
                 "elementId",
                 "newsletter"
             ]
+        },
+        "FloatingElementRole": {
+            "enum": [
+                "richLink",
+                "supporting",
+                "thumbnail"
+            ],
+            "type": "string"
         },
         "NumberedTitleBlockElement": {
             "type": "object",

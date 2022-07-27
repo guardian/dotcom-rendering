@@ -19,18 +19,6 @@ const NEWSLETTER: Newsletter = {
 	elementId: 'ElementID',
 };
 
-const SIGNUP_BLOCK_ELEMENT: CAPIElement = {
-	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
-	elementId: 'ElementID',
-	newsletter: NEWSLETTER,
-	clearFromLeftCol: false,
-};
-
-const SIGNUP_BLOCK_ELEMENT_CLEAR: CAPIElement = {
-	...SIGNUP_BLOCK_ELEMENT,
-	clearFromLeftCol: true,
-};
-
 const toElementTypeLists = (blocks: Block[]): string[][] =>
 	blocks.map((block) => block.elements.map((element) => element._type));
 
@@ -52,22 +40,22 @@ describe('Insert Newsletter Signups', () => {
 	});
 
 	it('inserts a NewsletterSignupBlockElement to a standard article if there is a newsletter', () => {
-		expect([
-			SIGNUP_BLOCK_ELEMENT,
-			SIGNUP_BLOCK_ELEMENT_CLEAR,
-		]).toContainEqual(
-			insertPromotedNewsletter(
-				exampleStandard.blocks,
-				exampleStandard.format,
-				NEWSLETTER,
-			)
-				.flatMap((block) => block.elements)
-				.find(
-					(element) =>
-						element._type ===
-						'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
-				),
-		);
+		const insertedBlock = insertPromotedNewsletter(
+			exampleStandard.blocks,
+			exampleStandard.format,
+			NEWSLETTER,
+		)
+			.flatMap((block) => block.elements)
+			.find(
+				(element) =>
+					element._type ===
+					'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
+			);
+
+		expect(insertedBlock).toBeTruthy();
+		expect(
+			(insertedBlock as NewsletterSignupBlockElement).newsletter,
+		).toEqual(NEWSLETTER);
 	});
 
 	it('will not insert a NewsletterSignupBlockElement into a blog', () => {

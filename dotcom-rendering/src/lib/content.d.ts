@@ -6,6 +6,9 @@ interface ThirdPartyEmbeddedContent {
 	source?: string;
 	sourceDomain?: string;
 }
+
+type FloatingElementRole = 'supporting' | 'thumbnail' | 'richLink';
+
 interface AudioAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
 	elementId: string;
@@ -290,7 +293,7 @@ interface NewsletterSignupBlockElement {
 	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement';
 	newsletter: Newsletter;
 	elementId: string;
-	clearFromLeftCol?: boolean;
+	previousFloatingElementType?: FloatingElementRole;
 }
 
 interface NumberedTitleBlockElement {
