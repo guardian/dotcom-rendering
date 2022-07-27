@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { decideTrail } from '../lib/decideTrail';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
-import { Carousel } from './Carousel';
+import { Carousel } from './Carousel.importable';
 import { Placeholder } from './Placeholder';
 
 type Props = {
