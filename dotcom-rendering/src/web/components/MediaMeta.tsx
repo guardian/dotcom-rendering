@@ -110,7 +110,7 @@ export const MediaMeta = ({
 		<div css={wrapperStyles}>
 			<MediaIcon mediaType={mediaType} palette={palette} />
 			&nbsp;
-			{mediaDuration && (
+			{!!mediaDuration && (
 				<MediaDuration
 					mediaDuration={mediaDuration}
 					palette={palette}

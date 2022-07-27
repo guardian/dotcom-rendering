@@ -20,6 +20,7 @@ import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss, wideContentWidth } from 'styles';
+import GallerySeries from './GallerySeries';
 import ImmersiveSeries from './ImmersiveSeries';
 
 // ----- Component ----- //
@@ -149,6 +150,10 @@ const Series: FC<Props> = ({ item }: Props) => {
 		return (
 			<ImmersiveSeries series={item.series} format={getFormat(item)} />
 		);
+	}
+
+	if (item.design === ArticleDesign.Gallery) {
+		return <GallerySeries series={item.series} format={getFormat(item)} />;
 	}
 
 	return maybeRender(item.series, (series) => (

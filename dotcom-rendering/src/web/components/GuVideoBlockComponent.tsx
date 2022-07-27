@@ -29,7 +29,7 @@ export const GuVideoBlockComponent = ({
 		<div css={embedContainer}>
 			<div dangerouslySetInnerHTML={{ __html: unescapeData(html) }} />
 
-			{caption && (
+			{!!caption && (
 				<Caption
 					captionText={caption}
 					format={format}

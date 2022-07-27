@@ -324,7 +324,7 @@ export const InteractiveBlockComponent = ({
 					</>
 				)}
 			</figure>
-			{caption && (
+			{!!caption && (
 				<Caption
 					captionText={caption}
 					format={format}

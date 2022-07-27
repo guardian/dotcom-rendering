@@ -49,7 +49,7 @@ export const YoutubeEmbedBlockComponent = ({
 					allowFullScreen={true}
 				/>
 			</MaintainAspectRatio>
-			{caption && (
+			{!!caption && (
 				<Caption
 					captionText={caption}
 					format={format}

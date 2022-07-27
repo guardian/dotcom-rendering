@@ -20,6 +20,7 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
+import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
@@ -39,6 +40,7 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
+import { decideTrail } from '../lib/decideTrail';
 import { ImmersiveHeader } from './headers/ImmersiveHeader';
 import { BannerWrapper } from './lib/stickiness';
 
@@ -309,7 +311,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							/>
 						</GridItem>
 						<GridItem area="byline">
-							{CAPIArticle.byline && (
+							{!!CAPIArticle.byline && (
 								<HeadlineByline
 									format={format}
 									tags={CAPIArticle.tags}
@@ -506,6 +508,22 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						display={format.display}
 					/>
 				</ElementContainer>
+
+				{CAPIArticle.storyPackage && (
+					<ElementContainer>
+						<Island deferUntil="visible">
+							<Carousel
+								heading={CAPIArticle.storyPackage.heading}
+								trails={CAPIArticle.storyPackage.trails.map(
+									decideTrail,
+								)}
+								ophanComponentName="more-on-this-story"
+								format={format}
+								isCuratedContent={false}
+							/>
+						</Island>
+					</ElementContainer>
+				)}
 
 				<Island
 					clientOnly={true}

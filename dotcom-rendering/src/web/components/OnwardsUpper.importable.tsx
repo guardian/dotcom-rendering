@@ -206,9 +206,7 @@ export const OnwardsUpper = ({
 		// Then don't show related content
 		// This is the first priority for deciding whether to include related content
 	} else if (hasStoryPackage) {
-		// Always fetch the story package if it exists
-		url = joinUrl([ajaxUrl, 'story-package', `${pageId}.json?dcr=true`]);
-		ophanComponentName = 'more-on-this-story';
+		// We server render story packages so do nothing
 	} else if (isAdFreeUser && isPaidContent) {
 		// Don't show any related content (other than story packages) for
 		// adfree users when the content is paid for
@@ -266,11 +264,11 @@ export const OnwardsUpper = ({
 
 	const curatedDataUrl = showRelatedContent
 		? getContainerDataUrl(pillar, editionId, ajaxUrl)
-		: null;
+		: undefined;
 
 	return (
 		<div css={onwardsWrapper}>
-			{url && (
+			{!!url && (
 				<ElementContainer>
 					<OnwardsData
 						url={url}
@@ -280,7 +278,7 @@ export const OnwardsUpper = ({
 					/>
 				</ElementContainer>
 			)}
-			{!isPaidContent && curatedDataUrl && (
+			{!!(!isPaidContent && curatedDataUrl) && (
 				<ElementContainer showTopBorder={true}>
 					<OnwardsData
 						url={curatedDataUrl}
