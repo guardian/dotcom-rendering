@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import type { BlockContributor } from '@guardian/common-rendering/src/components/liveBlockContainer';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 import type { ArticleFormat } from '@guardian/libs';
-import { fromNullable, map, partition, withDefault } from '@guardian/types';
+import { map, partition, withDefault } from '@guardian/types';
 import { LastUpdated } from 'components/LastUpdated';
 import PinnedPost from 'components/PinnedPost';
 import type { Contributor } from 'contributor';
