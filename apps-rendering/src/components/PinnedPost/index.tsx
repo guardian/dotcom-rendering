@@ -33,7 +33,7 @@ const pinnedPostContainerStyles = (
 
 	#pinned-post-checkbox:checked ~ #collapsible-body {
 		max-height: fit-content;
-		margin-bottom: ${space[1]}px;
+		margin-bottom: ${remSpace[1]};
 	}
 	#pinned-post-checkbox:checked ~ #pinned-post-overlay,
 	#pinned-post-checkbox ~ label #svgminus,
