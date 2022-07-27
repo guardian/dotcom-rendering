@@ -144,10 +144,10 @@ const buttonIcon = css`
 		display: block;
 		fill: white;
 		position: relative;
-		width: 24px;
+		width: 1.5rem;
 		height: auto;
-		margin-left: -${space[1]}px;
-		margin-right: ${space[1]}px;
+		margin-left: -${remSpace[1]};
+		margin-right: ${remSpace[1]};
 	}
 `;
 
