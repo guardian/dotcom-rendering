@@ -49,7 +49,7 @@ const useCountryCode = () => {
 				setCountryCode(cc);
 			})
 			.catch((e) => {
-				const msg = `Error fetching country code: ${e}`;
+				const msg = `Error fetching country code: ${String(e)}`;
 				window.guardian.modules.sentry.reportError(
 					new Error(msg),
 					'liveblog-epic',
@@ -74,7 +74,7 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 				setEpic(() => epicModule[name]); // useState requires functions to be wrapped
 			})
 			.catch((err) => {
-				const msg = `Error importing LiveBlog epic: ${err}`;
+				const msg = `Error importing LiveBlog epic: ${String(err)}`;
 				window.guardian.modules.sentry.reportError(
 					new Error(msg),
 					'liveblog-epic',

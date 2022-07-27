@@ -294,7 +294,9 @@ export const StickyBottomBanner = ({
 				setSelectedBanner(PickedBanner),
 			)
 			.catch((e) =>
-				console.error(`StickyBottomBanner pickMessage - error: ${e}`),
+				console.error(
+					`StickyBottomBanner pickMessage - error: ${String(e)}`,
+				),
 			);
 	}, [isSignedIn, asyncCountryCode, brazeMessages, asyncArticleCounts]);
 
