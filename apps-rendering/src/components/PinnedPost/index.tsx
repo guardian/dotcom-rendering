@@ -20,6 +20,7 @@ import {
 } from '@guardian/source-react-components';
 import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 const pinnedPostContainer = (format: ArticleFormat): SerializedStyles => css`
 	border: 3px solid ${border.borderPinnedPost(format)};
@@ -48,6 +49,10 @@ const pinnedPostContainer = (format: ArticleFormat): SerializedStyles => css`
 	#pinned-post-checkbox:checked ~ label::after {
 		content: 'Show less';
 	}
+
+	${darkModeCss`
+		background: ${neutral[10]};
+	`}
 `;
 
 const rowStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -83,6 +88,15 @@ const overlayStyles = css`
 	bottom: 0;
 	width: 100%;
 	display: block;
+
+	${darkModeCss`
+		background-image: linear-gradient(
+			0deg,
+			${neutral[10]},
+			${neutral[10]} 40%,
+			rgba(255, 255, 255, 0)
+		);
+	`}
 `;
 
 const fakeButtonStyles = (format: ArticleFormat): SerializedStyles => css`
