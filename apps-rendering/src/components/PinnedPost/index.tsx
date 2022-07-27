@@ -22,7 +22,9 @@ import type { LiveBlock } from 'liveBlock';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
-const pinnedPostContainer = (format: ArticleFormat): SerializedStyles => css`
+const pinnedPostContainerStyles = (
+	format: ArticleFormat,
+): SerializedStyles => css`
 	border: 3px solid ${border.borderPinnedPost(format)};
 	padding-bottom: ${space[1]}px;
 	position: relative;
@@ -159,7 +161,7 @@ const PinnedPost: FC<Props> = ({ pinnedPost, children, format }: Props) => {
 	return (
 		<div
 			id="pinned-post"
-			css={pinnedPostContainer(format)}
+			css={pinnedPostContainerStyles(format)}
 			data-gu-marker="pinned-post"
 			data-component="pinned-post"
 		>

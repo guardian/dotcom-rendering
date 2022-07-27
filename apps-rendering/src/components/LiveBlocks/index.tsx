@@ -95,7 +95,6 @@ const LiveBlocks: FC<LiveBlocksProps> = ({
 	return (
 		<>
 			{/* Accordion? */}
-			{/* below is placeholder for pinned post component */}
 			{showPinnedPost && (
 				<PinnedPost pinnedPost={pinnedPost.value} format={format}>
 					<LiveBlock
