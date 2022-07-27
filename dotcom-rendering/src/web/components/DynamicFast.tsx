@@ -37,7 +37,13 @@ const Primaries = ({
 	return (
 		<UL direction="row" padBottom={true}>
 			{primaries.map((card, index) => {
-				// Boosted Layout
+				/**
+				 * Primaries boosted -
+				 * Switches to a 75% - 25% / 25% - 75% layout
+				 *
+				 * Only supported when there are 2 cards in the primaries.
+				 * If both are boosted only the first card will be chosen to appear 'boosted'.
+				 */
 				if (primaries.length > 1 && boostedIndex !== -1) {
 					const boostedImagePosition = index === 0 ? 'right' : 'left';
 
@@ -82,8 +88,12 @@ const Primaries = ({
 					);
 				}
 
-				// Unboosted primaries split 50/50 when there are two
-				// or take up a 'huge' 100% role when theres just one
+				/**
+				 * Unboosted primaries / single primary layout -
+				 *
+				 * If there is 1 primary, it is given 100% of the row.
+				 * If there are 2 primaries, they are split 50/50%.
+				 */
 				return (
 					<LI
 						key={card.url}
