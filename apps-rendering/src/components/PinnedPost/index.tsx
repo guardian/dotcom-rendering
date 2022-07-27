@@ -59,7 +59,7 @@ const pinnedPostContainerStyles = (
 
 const rowStyles = (format: ArticleFormat): SerializedStyles => css`
 	background: ${border.borderPinnedPost(format)};
-	height: 32px;
+	height: 2rem;
 	display: flex;
 	align-items: center;
 	svg {
