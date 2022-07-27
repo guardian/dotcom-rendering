@@ -122,7 +122,6 @@ const insert = (
 		{
 			_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
 			newsletter: promotedNewsletter,
-			elementId: promotedNewsletter.elementId,
 			previousFloatingElementType,
 		},
 		...elements.slice(index),

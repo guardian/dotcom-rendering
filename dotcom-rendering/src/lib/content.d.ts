@@ -292,7 +292,7 @@ interface MultiImageBlockElement {
 interface NewsletterSignupBlockElement {
 	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement';
 	newsletter: Newsletter;
-	elementId: string;
+	elementId?: string;
 	previousFloatingElementType?: FloatingElementRole;
 }
 
@@ -795,5 +795,4 @@ type Newsletter = {
 	successDescription: string;
 	theme: string;
 	group: string;
-	elementId: string;
 };

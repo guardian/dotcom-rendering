@@ -16,7 +16,6 @@ const NEWSLETTER: Newsletter = {
 	successDescription: 'You have signed up, but the newsletter is fake',
 	theme: 'opinion',
 	group: 'Opinion',
-	elementId: 'ElementID',
 };
 
 const toElementTypeLists = (blocks: Block[]): string[][] =>

@@ -442,14 +442,10 @@
                 },
                 "group": {
                     "type": "string"
-                },
-                "elementId": {
-                    "type": "string"
                 }
             },
             "required": [
                 "description",
-                "elementId",
                 "frequency",
                 "group",
                 "identityName",
@@ -2160,14 +2156,10 @@
                         },
                         "group": {
                             "type": "string"
-                        },
-                        "elementId": {
-                            "type": "string"
                         }
                     },
                     "required": [
                         "description",
-                        "elementId",
                         "frequency",
                         "group",
                         "identityName",
@@ -2186,7 +2178,6 @@
             },
             "required": [
                 "_type",
-                "elementId",
                 "newsletter"
             ]
         },
