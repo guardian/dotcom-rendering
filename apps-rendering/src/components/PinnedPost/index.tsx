@@ -118,18 +118,18 @@ const fakeButtonStyles = (format: ArticleFormat): SerializedStyles => css`
 		${focusHalo};
 	}
 	background: ${border.borderPinnedPost(format)};
-	margin-left: 10px;
+	margin-left: 0.625rem;
 	position: absolute;
-	bottom: -24px;
+	bottom: -1.5rem;
 	${textSans.medium({ fontWeight: 'bold' })};
-	height: ${height.ctaMedium}px;
-	min-height: ${height.ctaMedium}px;
-	padding: 0 ${space[5]}px;
-	border-radius: ${height.ctaMedium}px;
-	padding-bottom: 2px;
+	height: ${remHeight.ctaMedium}rem;
+	min-height: ${remheight.ctaMedium}rem;
+	padding: 0 ${remSpace[5]};
+	border-radius: ${remHeight.ctaMedium}rem;
+	padding-bottom: 0.125rem;
 	color: white;
 	${from.tablet} {
-		margin-left: 60px;
+		margin-left: 3.75rem;
 	}
 `;
 
