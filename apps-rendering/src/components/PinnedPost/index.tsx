@@ -73,9 +73,9 @@ const timeAgoStyles = css`
 	${textSans.small({ fontWeight: 'bold' })};
 	color: ${neutral[100]};
 	${from.tablet} {
-		margin-left: 28px;
+		margin-left: 1.75rem;
 	}
-	margin-bottom: ${space[1]}px;
+	margin-bottom: ${remSpace[1]};
 `;
 
 const overlayStyles = css`
