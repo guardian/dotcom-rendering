@@ -26,10 +26,10 @@ const pinnedPostContainerStyles = (
 	format: ArticleFormat,
 ): SerializedStyles => css`
 	border: 3px solid ${border.borderPinnedPost(format)};
-	padding-bottom: ${space[1]}px;
+	padding-bottom: ${remSpace[1]};
 	position: relative;
 	background: ${neutral[100]};
-	margin-bottom: 34px;
+	margin-bottom: 2.125rem;
 
 	#pinned-post-checkbox:checked ~ #collapsible-body {
 		max-height: fit-content;
