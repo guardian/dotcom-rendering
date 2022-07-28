@@ -1,7 +1,9 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { neutral, textSans, until } from '@guardian/source-foundations';
+
 import { trackSponsorLogoLinkClick } from '../browser/ga/ga';
+import { Hide } from './Hide';
 
 const brandingStyle = css`
 	padding-bottom: 10px;
@@ -104,19 +106,6 @@ const brandingAboutLink = (palette: Palette, format: ArticleFormat) => {
 	}
 };
 
-const hiddenUntilDesktop = css`
-	${until.desktop} {
-		display: none;
-	}
-`;
-
-const hiddenFromDesktop = css`
-	display: none;
-	${until.desktop} {
-		display: block;
-	}
-`;
-
 type Props = {
 	branding: Branding;
 	palette: Palette;
@@ -140,23 +129,25 @@ export const Branding = ({ branding, palette, format }: Props) => {
 					onClick={() => trackSponsorLogoLinkClick(sponsorId)}
 					data-cy="branding-logo"
 				>
-					<img
-						css={hiddenFromDesktop}
-						width={branding.logo.dimensions.width}
-						height={branding.logo.dimensions.height}
-						src={
-							branding.logoForDarkBackground?.src ??
-							branding.logo.src
-						}
-						alt={branding.sponsorName}
-					/>
-					<img
-						css={hiddenUntilDesktop}
-						width={branding.logo.dimensions.width}
-						height={branding.logo.dimensions.height}
-						src={branding.logo.src}
-						alt={branding.sponsorName}
-					/>
+					<Hide when="above" breakpoint="desktop" el="span">
+						<img
+							width={branding.logo.dimensions.width}
+							height={branding.logo.dimensions.height}
+							src={
+								branding.logoForDarkBackground?.src ??
+								branding.logo.src
+							}
+							alt={branding.sponsorName}
+						/>
+					</Hide>
+					<Hide when="below" breakpoint="desktop" el="span">
+						<img
+							width={branding.logo.dimensions.width}
+							height={branding.logo.dimensions.height}
+							src={branding.logo.src}
+							alt={branding.sponsorName}
+						/>
+					</Hide>
 				</a>
 			</div>
 
