@@ -50,7 +50,7 @@ const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 
 interface Props {
 	isCcpa: boolean;
-    className?: string;
+	className?: string;
 	css?: SerializedStyles;
 }
 
