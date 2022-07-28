@@ -115,9 +115,6 @@ const fakeButtonStyles = (format: ArticleFormat): SerializedStyles => css`
 	transition: ${transitions.medium};
 	text-decoration: none;
 	white-space: nowrap;
-	:disabled {
-		cursor: not-allowed;
-	}
 	&:focus {
 		${focusHalo};
 	}
@@ -177,7 +174,7 @@ const PinnedPost: FC<Props> = ({ pinnedPost, format }: Props) => {
 			/>
 			<div css={rowStyles(format)}>
 				<SvgPinned />
-				<time data-relativeformat="med" css={timeAgoStyles}>
+				<time css={timeAgoStyles}>
 					From {timeAgo(pinnedPost.firstPublished.getTime())}
 				</time>
 			</div>
