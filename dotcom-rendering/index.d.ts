@@ -689,11 +689,6 @@ type SmallHeadlineSize =
 	| 'huge'
 	| 'ginormous';
 
-type AvatarType = {
-	src: string;
-	alt: string;
-};
-
 type MediaType = 'Video' | 'Audio' | 'Gallery';
 
 type LineEffectType = 'labs' | 'dotted' | 'straight';
