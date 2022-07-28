@@ -14,7 +14,7 @@ import { storage } from '@guardian/libs';
 // cookie or by selecting the edition in the UI. Unfortunately, the first solution did
 // not work and the second one is not possible at this point of the migration.
 const paidContentPage =
-	'https://www.theguardian.com/you-could-be-here/2022/may/13/kos-crete-corfu-and-mykonos-a-guide-to-greeces-favourite-islands';
+	'https://www.theguardian.com/the-time-of-your-life-in-croatia/2022/jul/22/from-ancient-ruins-to-contemporary-art-croatias-cultural-highlights';
 
 describe('Paid content tests', function () {
 	beforeEach(function () {
@@ -59,7 +59,9 @@ describe('Paid content tests', function () {
 			let requestURL = interception.request.url;
 			expect(requestURL).to.include('ec=click');
 			expect(requestURL).to.include('ea=sponsor%20logo');
-			expect(requestURL).to.include('el=british%20airways%20holidays');
+			expect(requestURL).to.include(
+				'el=croatia%20national%20tourism%20board',
+			);
 		});
 	});
 
@@ -100,7 +102,9 @@ describe('Paid content tests', function () {
 			let requestURL = interception.request.url;
 			expect(requestURL).to.include('ec=click');
 			expect(requestURL).to.include('ea=sponsor%20logo');
-			expect(requestURL).to.include('el=british%20airways%20holidays');
+			expect(requestURL).to.include(
+				'el=croatia%20national%20tourism%20board',
+			);
 		});
 	});
 });
