@@ -93,7 +93,7 @@ const BylineMeta: React.FunctionComponent<{
 				/>
 			</div>
 
-			{shouldShowBylineImage && (
+			{!!shouldShowBylineImage && (
 				<amp-img
 					class={bylineImageStyle}
 					src={bylineImageUrl}

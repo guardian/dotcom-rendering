@@ -91,8 +91,10 @@ const mainImage = (element: ImageBlockElement) => {
 				layout="responsive"
 				srcset={scrsetStringFromImagesSources(element.imageSources)}
 			/>
-			{(element.data.caption ||
-				(element.data.credit && element.displayCredit)) && (
+			{!!(
+				element.data.caption ||
+				(element.data.credit && element.displayCredit)
+			) && (
 				<>
 					<input
 						aria-checked={false}

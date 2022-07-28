@@ -61,7 +61,7 @@ export const SpotifyBlockComponent = ({
 					width={width}
 					allowFullScreen={true}
 				/>
-				{caption && (
+				{!!caption && (
 					<Caption
 						captionText={caption}
 						format={format}

@@ -91,7 +91,7 @@ export const Blocks: React.FunctionComponent<{
 				key={block.id}
 				css={blockStyle(pillar)}
 			>
-				{block.blockFirstPublishedDisplay && (
+				{!!block.blockFirstPublishedDisplay && (
 					<a
 						css={firstPublishedStyle}
 						href={blockLink(url, block.id)}
@@ -99,11 +99,11 @@ export const Blocks: React.FunctionComponent<{
 						{block.blockFirstPublishedDisplay}
 					</a>
 				)}
-				{block.title && <h2>{block.title}</h2>}
+				{!!block.title && <h2>{block.title}</h2>}
 				{Elements(block.elements, pillar, false)}
 				{/* Some elements float (e.g. rich links) */}
 				<div css={clearBoth} />{' '}
-				{block.blockLastUpdatedDisplay && (
+				{!!block.blockLastUpdatedDisplay && (
 					<div css={lastUpdatedStyle}>
 						Updated at {block.blockLastUpdatedDisplay}
 					</div>

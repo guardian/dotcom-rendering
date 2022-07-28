@@ -81,7 +81,7 @@ export const LinkHeadline = ({
 
 	return (
 		<h4 css={fontStyles(size)}>
-			{kickerText && (
+			{!!kickerText && (
 				<Kicker
 					text={kickerText}
 					color={palette.text.linkKicker}
@@ -109,7 +109,7 @@ export const LinkHeadline = ({
 					>
 						{headlineText}
 					</a>
-					{byline && (
+					{!!byline && (
 						<Byline text={byline} format={format} size={size} />
 					)}
 				</>
@@ -117,7 +117,7 @@ export const LinkHeadline = ({
 				// We don't have a link so simply use a span here
 				<>
 					<span>{headlineText}</span>
-					{byline && (
+					{!!byline && (
 						<Byline text={byline} size={size} format={format} />
 					)}
 				</>

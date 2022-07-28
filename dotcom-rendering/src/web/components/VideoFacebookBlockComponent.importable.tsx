@@ -65,7 +65,7 @@ export const VideoFacebookBlockComponent = ({
 						allowFullScreen={true}
 					/>
 				</MaintainAspectRatio>
-				{caption && (
+				{!!caption && (
 					<Caption
 						captionText={caption}
 						format={format}

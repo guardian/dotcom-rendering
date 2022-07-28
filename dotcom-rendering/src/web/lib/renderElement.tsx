@@ -79,6 +79,7 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
+	isPinnedPost?: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -132,6 +133,7 @@ export const renderElement = ({
 	isAdFreeUser,
 	switches,
 	isSensitive,
+	isPinnedPost,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
 
@@ -269,6 +271,7 @@ export const renderElement = ({
 							isMainMedia={isMainMedia}
 							source={element.source}
 							sourceDomain={element.sourceDomain}
+							isPinnedPost={isPinnedPost}
 						/>
 					</Island>,
 				];
@@ -798,6 +801,7 @@ export const RenderArticleElement = ({
 	isAdFreeUser,
 	isSensitive,
 	switches,
+	isPinnedPost,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -816,6 +820,7 @@ export const RenderArticleElement = ({
 		isAdFreeUser,
 		isSensitive,
 		switches,
+		isPinnedPost,
 	});
 
 	if (!ok) {

@@ -184,7 +184,7 @@ export const Expandable: React.FC<{
 		</div>
 
 		<div css={innerStyle} hidden={true} id={id}>
-			{img && (
+			{!!img && (
 				<amp-img
 					class={imageStyle}
 					src={img}
@@ -195,7 +195,7 @@ export const Expandable: React.FC<{
 				/>
 			)}
 			{children}
-			{credit && (
+			{!!credit && (
 				<span css={creditStyle}>
 					<span css={iconStyle}>
 						<InfoIcon />

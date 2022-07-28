@@ -79,7 +79,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 		>
 			<a css={linkTagStyles} href={trail.url} ref={hoverRef}>
 				<div css={lineWrapperStyles}>
-					{trail.image && (
+					{!!trail.image && (
 						<div css={imageWrapperStyles}>
 							<Avatar
 								imageSrc={trail.image}
@@ -115,7 +115,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 							/>
 						)}
 						<div css={marginTopStyles}>
-							{trail.ageWarning && (
+							{!!trail.ageWarning && (
 								<AgeWarning
 									age={trail.ageWarning}
 									size="small"
