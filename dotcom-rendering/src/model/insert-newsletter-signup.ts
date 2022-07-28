@@ -1,8 +1,7 @@
 interface PlaceInArticle {
 	index: number;
-	distance: number;
+	distanceFromTarget: number;
 	afterText: boolean;
-	afterSupporting: boolean;
 	distanceAfterFloating: number;
 }
 
@@ -14,6 +13,10 @@ const floatingElementRoleTypes: FloatingElementRole[] = [
 	'richLink',
 ];
 
+// this value is an approximation - the aim is to avoid a blank space between
+// the element before the SignUp and the end of the floating element.
+// However, the actual heights of the elements when rendered is not taken into
+// account.
 const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 4;
 const MAXIMUM_DISTANCE_FROM_MIDDLE = 4;
 
@@ -38,7 +41,7 @@ const getDistanceAfterFloating = (
 		);
 
 	if (!lastFloatingElementBeforePlace) {
-		return Infinity;
+		return elements.length * 10; // it would be more logical to use Infinity, but having an outsized finite value simplifies the sort function
 	}
 
 	return index - elements.indexOf(lastFloatingElementBeforePlace);
@@ -50,22 +53,36 @@ const getPlaces = (
 ): PlaceInArticle[] => {
 	return elements.map((element, index) => ({
 		index,
-		distance: Math.abs(index - targetIndex),
+		distanceFromTarget: Math.abs(index - targetIndex),
 		afterText: isAfterText(index, elements),
-		afterSupporting: isCloseAfterSupportingElement(index, elements),
 		distanceAfterFloating: getDistanceAfterFloating(index, elements),
 	}));
 };
 
-const placeIsSuitable = (place: PlaceInArticle): boolean =>
+const placeIsSuitable = (place: PlaceInArticle, maxDistance: number): boolean =>
 	place.afterText &&
-	place.distanceAfterFloating >= MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT;
+	place.distanceAfterFloating >= MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT &&
+	place.distanceFromTarget <= maxDistance;
 
 /**
- * Finds a place within the existing element of the block to insert a
- * NewsletterSignupBlockElement, within a given distance from a given
- * target index, prefering a place after TextBlockElement and not within
- * two places after a supporting element (eg pullquote).
+ * Sort the places, putting those furtherest from a previous floating elment
+ * first, then by distance from the target
+ */
+const sortPlaces = (placeA: PlaceInArticle, placeB: PlaceInArticle): number => {
+	const floatingComparison =
+		placeB.distanceAfterFloating - placeA.distanceAfterFloating;
+
+	if (floatingComparison !== 0) {
+		return floatingComparison;
+	}
+
+	return placeA.distanceFromTarget - placeB.distanceFromTarget;
+};
+
+/**
+ * Finds a suitable place within the existing element of the block to insert a
+ * NewsletterSignupBlockElement, defaulting to the end of the article if no
+ * suitable place is found in range of the target.
  *
  * @param elements the elements in the article block
  * @param targetIndex the target place to put the NewsletterSignupBlockElement
@@ -77,13 +94,12 @@ export const findInsertIndex = (
 	targetIndex: number,
 	maxDistance = 0,
 ): number => {
-	const possiblePlaces = getPlaces(targetIndex, elements)
-		.filter(placeIsSuitable)
-		.filter((place) => place.distance <= maxDistance)
-		.sort((a, b) => a.distance - b.distance); // sort, closest place first
+	const suitablePlaces = getPlaces(targetIndex, elements)
+		.filter((place) => placeIsSuitable(place, maxDistance))
+		.sort(sortPlaces); // sort, best place first
 
-	// Return index of the closest place - if there are none, return the targetIndex
-	return possiblePlaces[0]?.index || targetIndex;
+	// Return index of the best place - if there are none, return the end of the article
+	return suitablePlaces[0]?.index || elements.length;
 };
 
 /**
