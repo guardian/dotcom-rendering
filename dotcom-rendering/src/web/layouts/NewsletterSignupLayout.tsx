@@ -1,13 +1,11 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
-	brand,
 	brandAlt,
 	brandBackground,
 	brandBorder,
 	brandLine,
 	from,
-	headline,
 	space,
 	textSans,
 	until,
@@ -17,7 +15,6 @@ import {
 	Columns,
 	Hide,
 	LinkButton,
-	SvgArrowRightStraight,
 	SvgEye,
 	SvgGuardianLogo,
 } from '@guardian/source-react-components';
@@ -34,8 +31,10 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Nav } from '../components/Nav/Nav';
-import { NewsletterBadge } from '../components/NewsletterBadge';
-import { NewsletterCategory } from '../components/NewsletterCategory';
+import { NewsletterBadge } from '../components/Newsletters/NewsletterBadge';
+import { NewsletterCategory } from '../components/Newsletters/NewsletterCategory';
+import { SecondaryPromotedNewsletter } from '../components/Newsletters/SecondaryPromotedNewsletter';
+import { SecureSignup } from '../components/Newsletters/SecureSignup';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { ShareIcons } from '../components/ShareIcons';
 import { Standfirst } from '../components/Standfirst';
@@ -146,16 +145,6 @@ const guardianLogoContainerStyle = css`
 	}
 `;
 
-const altPromotedNewsletterStyle = css`
-	margin-top: ${space[2]}px;
-	margin-bottom: ${space[2]}px;
-`;
-
-const altPromotedNewsletterTitleStyle = css`
-	${headline.small({ fontWeight: 'bold' })}
-	color: ${brandAlt[400]};
-`;
-
 const shareSpanStyle = css`
 	${textSans.medium({
 		fontWeight: 'bold',
@@ -167,6 +156,14 @@ const shareDivStyle = css`
 	display: flex;
 	align-items: center;
 `;
+
+/** TODO: undecided where this data will come from yet.. Island? */
+const altPromotedNewsletter = {
+	name: 'Pushing Buttons',
+	description:
+		'Start the day one step ahead. Our email breaks down the key stories of the day and why they matter.',
+	frequency: 'Weekly',
+};
 
 export const NewsletterSignupLayout = ({
 	CAPIArticle,
@@ -191,108 +188,10 @@ export const NewsletterSignupLayout = ({
 	const palette = decidePalette(format);
 
 	/**	TODO: include logic here for whether preview exists for the newsletter */
-	const showNewsletterPreview = true;
+	const showNewsletterPreview = true; // has exampleUrl
 
 	/** TODO: this data needs to come from the newsletters API */
 	const newsletterCategory = 'UK Focused';
-
-	/** TODO: undecided where this data will come from yet.. Island? */
-	const altPromotedNewsletter: Partial<Newsletter> = {
-		name: 'Pushing Buttons',
-		description:
-			'Start the day one step ahead. Our email breaks down the key stories of the day and why they matter.',
-		frequency: 'Weekly',
-	};
-
-	const YouMightAlsoEnjoy = () => (
-		<ContainerLayout
-			innerBackgroundColour={brandBackground.primary}
-			leftContent={
-				<h2 css={altPromotedNewsletterStyle}>
-					<span css={altPromotedNewsletterTitleStyle}>
-						You might also enjoy
-					</span>
-				</h2>
-			}
-			verticalMargins={false}
-		>
-			<div
-				css={css`
-					display: flex;
-					align-items: center;
-					justify-content: space-between;
-					background-color: ${brand[500]};
-					color: #f6f6f6;
-					border: 1px dashed;
-					border-radius: 4px;
-					margin: 8px 0;
-					padding: 4px;
-				`}
-			>
-				<img
-					css={css`
-						flex-basis: 20%;
-						min-width: 0;
-					`}
-					src="https://i.guim.co.uk/img/uploads/2022/01/11/pushing_buttons_thrasher_hi.png?width=700&quality=50&s=f4be90f0ca470076df70cf895aeecda1"
-				></img>
-
-				<div
-					css={css`
-						display: flex;
-						flex-direction: column;
-						flex-basis: 50%;
-						margin-left: 8px;
-					`}
-				>
-					<h2
-						css={css`
-							${headline.small({ fontWeight: 'bold' })}
-							margin-bottom: 4px;
-						`}
-					>
-						{altPromotedNewsletter.name}
-					</h2>
-					<p
-						css={css`
-							${headline.xxsmall()}
-							margin-bottom: 4px;
-						`}
-					>
-						{altPromotedNewsletter.description}
-					</p>
-				</div>
-
-				<div
-					css={css`
-						display: flex;
-						align-self: flex-end;
-						padding: 8px;
-						flex-basis: 30%;
-					`}
-				>
-					<LinkButton
-						icon={<SvgArrowRightStraight />}
-						iconSide="right"
-						priority="secondary"
-						size="small"
-					>
-						Sign up
-					</LinkButton>
-				</div>
-
-				<div
-					css={css`
-						display: flex;
-						align-self: flex-start;
-						/* padding: 8px; */
-					`}
-				>
-					<NewsletterCategory text="Daily" />
-				</div>
-			</div>
-		</ContainerLayout>
-	);
 
 	return (
 		<>
@@ -449,6 +348,10 @@ export const NewsletterSignupLayout = ({
 								format={format}
 								standfirst={CAPIArticle.standfirst}
 							/>
+							<SecureSignup
+								newsletterId="1234"
+								successDescription="nice"
+							/>
 
 							{/* TODO:
 								- This data will come from the Newsletters API
@@ -555,7 +458,7 @@ export const NewsletterSignupLayout = ({
 					</Columns>
 				</ContainerLayout>
 
-				<YouMightAlsoEnjoy />
+				<SecondaryPromotedNewsletter {...altPromotedNewsletter} />
 
 				<Island
 					clientOnly={true}

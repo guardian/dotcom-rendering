@@ -4,7 +4,7 @@ import createEmotionServer from '@emotion/server/create-instance';
 import { neutral, space } from '@guardian/source-foundations';
 import { Button, Label, TextInput } from '@guardian/source-react-components';
 import { renderToString } from 'react-dom/server';
-import { Island } from './Island';
+import { Island } from '../Island';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { SecureSignupIframe } from './SecureSignupIframe.importable';
 

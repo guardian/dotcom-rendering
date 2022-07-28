@@ -17,7 +17,6 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
-import { EmailSignup } from '../components/EmailSignup';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
@@ -33,6 +32,7 @@ import { KnowledgeQuizAtomWrapper } from '../components/KnowledgeQuizAtomWrapper
 import { MainMediaEmbedBlockComponent } from '../components/MainMediaEmbedBlockComponent';
 import { MapEmbedBlockComponent } from '../components/MapEmbedBlockComponent.importable';
 import { MultiImageBlockComponent } from '../components/MultiImageBlockComponent';
+import { EmailSignup } from '../components/Newsletters/EmailSignup';
 import { NumberedTitleBlockComponent } from '../components/NumberedTitleBlockComponent';
 import { PersonalityQuizAtomWrapper } from '../components/PersonalityQuizAtomWrapper.importable';
 import { ProfileAtomWrapper } from '../components/ProfileAtomWrapper.importable';

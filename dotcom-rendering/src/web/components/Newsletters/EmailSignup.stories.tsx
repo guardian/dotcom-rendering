@@ -1,5 +1,5 @@
 import { breakpoints } from '@guardian/source-foundations';
-import { ContainerLayout } from './ContainerLayout';
+import { ContainerLayout } from '../ContainerLayout';
 import { EmailSignup } from './EmailSignup';
 
 export default {

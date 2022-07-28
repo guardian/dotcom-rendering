@@ -11,11 +11,11 @@ import {
 import type { ReactEventHandler } from 'react';
 import { useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import type { OphanAction } from '../browser/ophan/ophan';
+import type { OphanAction } from '../../browser/ophan/ophan';
 import {
 	getOphanRecordFunction,
 	submitComponentEvent,
-} from '../browser/ophan/ophan';
+} from '../../browser/ophan/ophan';
 
 const isServer = typeof window === 'undefined';
 
