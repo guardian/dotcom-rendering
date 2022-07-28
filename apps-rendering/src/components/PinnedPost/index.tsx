@@ -21,7 +21,7 @@ import {
 	SvgPinned,
 	SvgPlus,
 } from '@guardian/source-react-components';
-import { LiveBlock } from 'components/LiveBlocks';
+import LiveBlock from 'components/LiveBlock';
 import type { LiveBlock as LiveBlockType } from 'liveBlock';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
