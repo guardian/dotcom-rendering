@@ -3,6 +3,7 @@ interface PlaceInArticle {
 	distance: number;
 	afterText: boolean;
 	afterSupporting: boolean;
+	distanceAfterFloating: number;
 }
 
 type PositionOption = 'MIDDLE' | 'NONE';
@@ -30,6 +31,29 @@ const isAfterText = (index: number, elements: CAPIElement[]): boolean =>
 	elements[index - 1]?._type ===
 	'model.dotcomrendering.pageElements.TextBlockElement';
 
+const getDistanceAfterFloating = (
+	index: number,
+	elements: CAPIElement[],
+): number => {
+	const lastFloatingElementBeforePlace = elements
+		.slice(0, index)
+		.reverse()
+		.find(
+			(element) =>
+				'role' in element &&
+				typeof element.role == 'string' &&
+				floatingElementRoleTypes.includes(
+					element.role as FloatingElementRole,
+				),
+		);
+
+	if (!lastFloatingElementBeforePlace) {
+		return Infinity;
+	}
+
+	return index - elements.indexOf(lastFloatingElementBeforePlace);
+};
+
 const getPlaces = (
 	targetIndex: number,
 	elements: CAPIElement[],
@@ -39,6 +63,7 @@ const getPlaces = (
 		distance: Math.abs(index - targetIndex),
 		afterText: isAfterText(index, elements),
 		afterSupporting: isCloseAfterSupportingElement(index, elements),
+		distanceAfterFloating: getDistanceAfterFloating(index, elements),
 	}));
 };
 
