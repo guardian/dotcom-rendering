@@ -1,10 +1,11 @@
+import { logger } from '../server/lib/logging';
+
 interface PlaceInArticle {
 	index: number;
 	distanceFromTarget: number;
 	afterText: boolean;
 	distanceAfterFloating: number;
 }
-
 type PositionOption = 'MIDDLE' | 'NONE';
 
 const floatingElementRoleTypes: FloatingElementRole[] = [
@@ -116,11 +117,18 @@ const sortPlaces = (placeA: PlaceInArticle, placeB: PlaceInArticle): number => {
 const findInsertIndex = (
 	elements: CAPIElement[],
 	targetIndex: number,
+	blockId: string,
 ): number => {
 	const suitablePlacesInOrderOfPrefence = getPlaces(targetIndex, elements)
 		.filter(placeIsSuitable)
 		.sort(sortPlaces);
 
+	if (suitablePlacesInOrderOfPrefence.length === 0) {
+		logger.warn(
+			`Unable to find suitable place for NewsletterSignupBlockElement. Placing at the end of the article`,
+			blockId,
+		);
+	}
 	// Return index of the best place - if there are none, return the end of the article
 	return suitablePlacesInOrderOfPrefence[0]?.index || elements.length;
 };
@@ -131,8 +139,13 @@ const findInsertIndex = (
 const insertAtMiddle = (
 	promotedNewsletter: Newsletter,
 	elements: CAPIElement[],
+	blockId: string,
 ): CAPIElement[] => {
-	const index = findInsertIndex(elements, Math.floor(elements.length / 2));
+	const index = findInsertIndex(
+		elements,
+		Math.floor(elements.length / 2),
+		blockId,
+	);
 
 	return [
 		...elements.slice(0, index),
@@ -187,7 +200,11 @@ export const insertPromotedNewsletter = (
 						// mutiple blocks be introduced, the NewsletterSignupBlockElement should only be
 						// included once
 						index === 0
-							? insertAtMiddle(promotedNewsletter, block.elements)
+							? insertAtMiddle(
+									promotedNewsletter,
+									block.elements,
+									block.id,
+							  )
 							: block.elements,
 				};
 			});
