@@ -2171,23 +2171,12 @@
                 },
                 "elementId": {
                     "type": "string"
-                },
-                "previousFloatingElementType": {
-                    "$ref": "#/definitions/FloatingElementRole"
                 }
             },
             "required": [
                 "_type",
                 "newsletter"
             ]
-        },
-        "FloatingElementRole": {
-            "enum": [
-                "richLink",
-                "supporting",
-                "thumbnail"
-            ],
-            "type": "string"
         },
         "NumberedTitleBlockElement": {
             "type": "object",

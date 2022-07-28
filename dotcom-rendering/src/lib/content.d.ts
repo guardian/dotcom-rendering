@@ -293,7 +293,6 @@ interface NewsletterSignupBlockElement {
 	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement';
 	newsletter: Newsletter;
 	elementId?: string;
-	previousFloatingElementType?: FloatingElementRole;
 }
 
 interface NumberedTitleBlockElement {
