@@ -47,7 +47,7 @@ const Primaries = ({
 			{primaries.map((card, index) => {
 				/**
 				 * Primaries boosted -
-				 * Switches to a 75% - 25% / 25% - 75% layout
+				 * Switches to either a 75% - 25% or 25% - 75% layout, depending on which card gets boosted.
 				 *
 				 * Only supported when there are 2 cards in the primaries.
 				 * If both are boosted only the first card will be chosen to appear 'boosted'.
