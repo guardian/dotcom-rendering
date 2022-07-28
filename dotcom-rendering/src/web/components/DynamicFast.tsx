@@ -27,7 +27,7 @@ type Props = {
  * up 100% of the horizontal space
  *
  * When there are 2 very bigs in the primaries row, they each take 50% of the horizontal space.
- * Either of the 2 very bigs can 'boosted', in which case the boosted card will receive
+ * Either of the 2 very bigs can be 'boosted', in which case the boosted card will receive
  * 75% of the horizontal space.
  */
 const Primaries = ({
