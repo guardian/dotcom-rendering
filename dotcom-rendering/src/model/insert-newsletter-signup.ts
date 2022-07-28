@@ -13,11 +13,35 @@ const floatingElementRoleTypes: FloatingElementRole[] = [
 	'richLink',
 ];
 
-// this value is an approximation - the aim is to avoid a blank space between
-// the element before the SignUp and the end of the floating element.
-// However, the actual heights of the elements when rendered is not taken into
-// account.
 const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 4;
+// This value is an approximation - the aim is to avoid a blank space between
+// the element before the SignUp and the end of the floating element.
+// The SignUp block css uses 'clear:both' so a floating element won't interfer
+// with its layout.
+// However, the actual heights of the elements when rendered is not taken into
+// account. 4 paragraphs should be enough, but if the floating element was
+// taller than all 4 paragraphs combined, there would be a gap, as illustrated below.
+// This is why sortPlaces prioritises  distanceAfterFloating over distanceFromTarget.
+
+//    | TextTextTextTextTextText
+//    | TextTextTextText
+//    |
+//  +-----+ TextTextTextTextText
+//  |float|
+//  |float| TextTextTextTextText
+//  |float| TextTextTextText
+//  |float|
+//  |float| TextTextTextTextText
+//  |float|
+//  |float| TextTextTextText
+//  |float|
+//  |float|
+//  |float|
+//  +-----+
+//    |   +---------------------+
+//    |   |      SignUp         |
+//    |   +---------------------+
+
 const MAXIMUM_DISTANCE_FROM_MIDDLE = 4;
 
 const isAfterText = (index: number, elements: CAPIElement[]): boolean =>
@@ -41,7 +65,10 @@ const getDistanceAfterFloating = (
 		);
 
 	if (!lastFloatingElementBeforePlace) {
-		return elements.length * 10; // it would be more logical to use Infinity, but having an outsized finite value simplifies the sort function
+		// it would be more logical to return Infinity here,
+		// but having an outsized finite value simplifies the sort function
+		// (Infinity - Infinity == NaN)
+		return elements.length * 10;
 	}
 
 	return index - elements.indexOf(lastFloatingElementBeforePlace);
@@ -71,11 +98,9 @@ const placeIsSuitable = (place: PlaceInArticle, maxDistance: number): boolean =>
 const sortPlaces = (placeA: PlaceInArticle, placeB: PlaceInArticle): number => {
 	const floatingComparison =
 		placeB.distanceAfterFloating - placeA.distanceAfterFloating;
-
 	if (floatingComparison !== 0) {
 		return floatingComparison;
 	}
-
 	return placeA.distanceFromTarget - placeB.distanceFromTarget;
 };
 
@@ -94,12 +119,12 @@ export const findInsertIndex = (
 	targetIndex: number,
 	maxDistance = 0,
 ): number => {
-	const suitablePlaces = getPlaces(targetIndex, elements)
+	const suitablePlacesInOrderOfPrefence = getPlaces(targetIndex, elements)
 		.filter((place) => placeIsSuitable(place, maxDistance))
-		.sort(sortPlaces); // sort, best place first
+		.sort(sortPlaces);
 
 	// Return index of the best place - if there are none, return the end of the article
-	return suitablePlaces[0]?.index || elements.length;
+	return suitablePlacesInOrderOfPrefence[0]?.index || elements.length;
 };
 
 // NOTE: blog pages have different structure with multiple blocks of elements
@@ -123,6 +148,8 @@ const insert = (
 	];
 };
 
+// current instruction is to aim to place the SignUp block in the middle of standard articles,
+// This might change, other placements be set for different formats
 const getPositionOption = (format: CAPIFormat): PositionOption => {
 	switch (format.design) {
 		case 'ArticleDesign':
@@ -167,8 +194,8 @@ export const insertPromotedNewsletter = (
 							? insert(
 									promotedNewsletter,
 									block.elements,
-									Math.floor(block.elements.length / 2), // current instruction is to place the SignUp block in the middle of the article - this might change
-									MAXIMUM_DISTANCE_FROM_MIDDLE, // allow the SignUp block to be a few spaces higher of lower to find a suitable place
+									Math.floor(block.elements.length / 2),
+									MAXIMUM_DISTANCE_FROM_MIDDLE,
 							  )
 							: block.elements,
 				};
