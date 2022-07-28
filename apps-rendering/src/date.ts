@@ -125,7 +125,7 @@ const month = (date: Date): string => months[date.getUTCMonth()];
 
 const fullMonth = (date: Date): string => fullMonths[date.getUTCMonth()];
 
-const padZero = (n: number): string => (n < 10 ? `0${n}` : n.toString());
+const padZero = (n: number): string => String(n).padStart(2, '0');
 
 const time = (date: Date, separator: string): string =>
 	`${padZero(date.getUTCHours())}${separator}${padZero(
