@@ -2,7 +2,6 @@ const transitionRules = require('./eslint-guardian');
 
 /** TODO: Review these */
 const rulesToReview = {
-	'consistent-return': 'warn', // 51 problems
 	'react/no-danger': 'warn', // 48 problems
 	'react/no-array-index-key': 'warn', // 34 problems
 	'react/button-has-type': 'warn', // 23 problems
