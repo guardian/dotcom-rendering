@@ -5,6 +5,14 @@ import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
 
+/**
+ * Not sure where to start? This PR documents a lot of the key features
+ * https://github.com/guardian/dotcom-rendering/pull/5427
+ *
+ * Also check out DynamicFast.stories.tsx & check it out on storybook,
+ * it's a great way to learn about the business logic!
+ */
+
 type Props = {
 	groupedTrails: DCRGroupedTrails;
 	containerPalette?: DCRContainerPalette;
