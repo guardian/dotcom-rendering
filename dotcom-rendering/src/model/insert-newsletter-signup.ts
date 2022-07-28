@@ -14,18 +14,8 @@ const floatingElementRoleTypes: FloatingElementRole[] = [
 	'richLink',
 ];
 
-const isCloseAfterSupportingElement = (
-	index: number,
-	elements: CAPIElement[],
-): boolean => {
-	const elementIsSupporting = (element?: CAPIElement): boolean =>
-		!!(element && 'role' in element && element.role === 'supporting');
-
-	return (
-		elementIsSupporting(elements[index - 1]) ||
-		elementIsSupporting(elements[index - 2])
-	);
-};
+const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 4;
+const MAXIMUM_DISTANCE_FROM_MIDDLE = 4;
 
 const isAfterText = (index: number, elements: CAPIElement[]): boolean =>
 	elements[index - 1]?._type ===
@@ -68,7 +58,8 @@ const getPlaces = (
 };
 
 const placeIsSuitable = (place: PlaceInArticle): boolean =>
-	place.afterText && !place.afterSupporting;
+	place.afterText &&
+	place.distanceAfterFloating >= MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT;
 
 /**
  * Finds a place within the existing element of the block to insert a
@@ -198,7 +189,7 @@ export const insertPromotedNewsletter = (
 									promotedNewsletter,
 									block.elements,
 									Math.floor(block.elements.length / 2), // current instruction is to place the SignUp block in the middle of the article - this might change
-									4, // allow the SignUp block to be a few spaces higher of lower to find a suitable place
+									MAXIMUM_DISTANCE_FROM_MIDDLE, // allow the SignUp block to be a few spaces higher of lower to find a suitable place
 							  )
 							: block.elements,
 				};
