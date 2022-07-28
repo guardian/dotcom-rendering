@@ -4,7 +4,7 @@ import { EmailSignup } from './EmailSignup';
 
 export default {
 	component: EmailSignup,
-	title: 'Components/EmailSignup',
+	title: 'Components/Newsletters/EmailSignup',
 	parameters: {
 		// Set the viewports in Chromatic at a component level.
 		chromatic: {

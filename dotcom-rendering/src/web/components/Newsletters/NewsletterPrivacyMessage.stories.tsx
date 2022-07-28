@@ -2,7 +2,7 @@ import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
 export default {
 	component: NewsletterPrivacyMessage,
-	title: 'Components/NewsletterPrivacyMessage',
+	title: 'Components/Newsletters/NewsletterPrivacyMessage',
 };
 
 export const Default = () => {

@@ -2,7 +2,7 @@ import { SecondaryPromotedNewsletter } from './SecondaryPromotedNewsletter';
 
 export default {
 	component: SecondaryPromotedNewsletter,
-	title: 'Components/SecondaryPromotedNewsletter',
+	title: 'Components/Newsletters/SecondaryPromotedNewsletter',
 };
 
 const altPromotedNewsletter = {

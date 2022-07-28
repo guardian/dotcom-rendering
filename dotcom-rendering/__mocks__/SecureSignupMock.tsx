@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { neutral, space } from '@guardian/source-foundations';
 import { Button, Label, TextInput } from '@guardian/source-react-components';
-import { NewsletterPrivacyMessage } from '../src/web/components/NewsletterPrivacyMessage';
+import { NewsletterPrivacyMessage } from '../src/web/components/Newsletters/NewsletterPrivacyMessage';
 
 type Props = { newsletterId: string; successDescription: string };
 
