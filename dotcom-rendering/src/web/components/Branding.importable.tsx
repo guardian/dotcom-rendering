@@ -7,8 +7,10 @@ const brandingStyle = css`
 	padding-bottom: 10px;
 `;
 
-// for liveblog smaller breakpoints article meta is located in the same
-// container as standfirst and needs the same styling as standfirst
+/**
+ * for liveblog smaller breakpoints article meta is located in the same
+ * container as standfirst and needs the same styling as standfirst
+ **/
 function brandingLabelStyle(palette: Palette, format: ArticleFormat) {
 	const invariantStyles = css`
 		${textSans.xxsmall()}
@@ -56,8 +58,10 @@ const brandingLogoStyle = css`
 	display: block;
 `;
 
-// for liveblog smaller breakpoints article meta is located in the same
-// container as standfirst and needs the same styling as standfirst
+/**
+ * for liveblog smaller breakpoints article meta is located in the same
+ * container as standfirst and needs the same styling as standfirst
+ **/
 const brandingAboutLink = (palette: Palette, format: ArticleFormat) => {
 	const invariantStyles = css`
 		${textSans.xxsmall()}
