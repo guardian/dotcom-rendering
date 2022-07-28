@@ -86,10 +86,10 @@ const getPlaces = (
 	}));
 };
 
-const placeIsSuitable = (place: PlaceInArticle, maxDistance: number): boolean =>
+const placeIsSuitable = (place: PlaceInArticle): boolean =>
 	place.afterText &&
 	place.distanceAfterFloating >= MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT &&
-	place.distanceFromTarget <= maxDistance;
+	place.distanceFromTarget <= MAXIMUM_DISTANCE_FROM_MIDDLE;
 
 /**
  * Sort the places, putting those furtherest from a previous floating elment
@@ -111,16 +111,14 @@ const sortPlaces = (placeA: PlaceInArticle, placeB: PlaceInArticle): number => {
  *
  * @param elements the elements in the article block
  * @param targetIndex the target place to put the NewsletterSignupBlockElement
- * @param maxDistance how far to move from the targetIndex to find a place after a paragraph
  * @returns the index insert the NewsletterSignupBlockElement component at
  */
 const findInsertIndex = (
 	elements: CAPIElement[],
 	targetIndex: number,
-	maxDistance = 0,
 ): number => {
 	const suitablePlacesInOrderOfPrefence = getPlaces(targetIndex, elements)
-		.filter((place) => placeIsSuitable(place, maxDistance))
+		.filter(placeIsSuitable)
 		.sort(sortPlaces);
 
 	// Return index of the best place - if there are none, return the end of the article
@@ -130,13 +128,11 @@ const findInsertIndex = (
 // NOTE: blog pages have different structure with multiple blocks of elements
 // any future function to place sign-up blocks in blog pages would need to
 // take this into acccount.
-const insert = (
+const insertAtMiddle = (
 	promotedNewsletter: Newsletter,
 	elements: CAPIElement[],
-	targetIndex: number,
-	maxDistance = 0,
 ): CAPIElement[] => {
-	const index = findInsertIndex(elements, targetIndex, maxDistance);
+	const index = findInsertIndex(elements, Math.floor(elements.length / 2));
 
 	return [
 		...elements.slice(0, index),
@@ -191,12 +187,7 @@ export const insertPromotedNewsletter = (
 						// mutiple blocks be introduced, the NewsletterSignupBlockElement should only be
 						// included once
 						index === 0
-							? insert(
-									promotedNewsletter,
-									block.elements,
-									Math.floor(block.elements.length / 2),
-									MAXIMUM_DISTANCE_FROM_MIDDLE,
-							  )
+							? insertAtMiddle(promotedNewsletter, block.elements)
 							: block.elements,
 				};
 			});
