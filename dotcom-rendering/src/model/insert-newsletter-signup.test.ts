@@ -1,10 +1,7 @@
 import { Live as exampleLiveBlog } from '../../fixtures/generated/articles/Live';
 import { Quiz as exampleQuiz } from '../../fixtures/generated/articles/Quiz';
 import { Standard as exampleStandard } from '../../fixtures/generated/articles/Standard';
-import {
-	findInsertIndex,
-	insertPromotedNewsletter,
-} from './insert-newsletter-signup';
+import { insertPromotedNewsletter } from './insert-newsletter-signup';
 
 const NEWSLETTER: Newsletter = {
 	listId: 123,
@@ -87,50 +84,5 @@ describe('Insert Newsletter Signups', () => {
 						'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
 				),
 		).toBeFalsy();
-	});
-});
-
-const SubheadingBlockElement = {
-	_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-} as CAPIElement;
-const SupportingRoleBlockElement = {
-	_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement',
-	role: 'supporting',
-} as CAPIElement;
-const TextBlockElement = {
-	_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-} as CAPIElement;
-
-const TEST_ELEMENTS = [
-	TextBlockElement,
-	SubheadingBlockElement,
-	TextBlockElement,
-	SubheadingBlockElement,
-	TextBlockElement,
-	TextBlockElement,
-	TextBlockElement,
-];
-
-const TEST_ELEMENTS_WITH_SUPPORTING = [
-	SupportingRoleBlockElement,
-	SubheadingBlockElement,
-	SupportingRoleBlockElement,
-	TextBlockElement,
-	TextBlockElement,
-	TextBlockElement,
-];
-
-describe('Find index to insert Newsletter Signup', () => {
-	it('will move the shortst distance from the target to be in a good spot', () => {
-		expect(findInsertIndex(TEST_ELEMENTS, 2, 100)).toBe(1);
-	});
-	it('will place at the target index when max distance is 0', () => {
-		expect(findInsertIndex(TEST_ELEMENTS_WITH_SUPPORTING, 1, 0)).toBe(1);
-	});
-	it('will move to find a place at least two spaces after any element where role=supporting, if there is one within the max distance', () => {
-		expect(findInsertIndex(TEST_ELEMENTS_WITH_SUPPORTING, 2, 3)).toBe(5);
-	});
-	it('will move not move futher than the max distance to find a better place than the target', () => {
-		expect(findInsertIndex(TEST_ELEMENTS_WITH_SUPPORTING, 2, 1)).toBe(2);
 	});
 });

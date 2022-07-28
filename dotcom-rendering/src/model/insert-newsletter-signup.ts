@@ -114,7 +114,7 @@ const sortPlaces = (placeA: PlaceInArticle, placeB: PlaceInArticle): number => {
  * @param maxDistance how far to move from the targetIndex to find a place after a paragraph
  * @returns the index insert the NewsletterSignupBlockElement component at
  */
-export const findInsertIndex = (
+const findInsertIndex = (
 	elements: CAPIElement[],
 	targetIndex: number,
 	maxDistance = 0,
