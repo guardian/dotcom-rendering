@@ -1,3 +1,8 @@
+import type {
+	DCRContainerPalette,
+	DCRContainerType,
+	DCRFrontCard,
+} from '../../types/front';
 import { DynamicFast } from '../components/DynamicFast';
 import { DynamicPackage } from '../components/DynamicPackage';
 import { DynamicSlow } from '../components/DynamicSlow';
@@ -5,6 +10,7 @@ import { FixedLargeSlowXIV } from '../components/FixedLargeSlowXIV';
 import { FixedMediumSlowVI } from '../components/FixedMediumSlowVI';
 import { FixedSmallSlowIII } from '../components/FixedSmallSlowIII';
 import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
+import { FixedSmallSlowVThird } from '../components/FixedSmallSlowVThird';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -63,6 +69,14 @@ export const DecideContainer = ({
 		case 'fixed/small/slow-III':
 			return (
 				<FixedSmallSlowIII
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			);
+		case 'fixed/small/slow-V-third':
+			return (
+				<FixedSmallSlowVThird
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}

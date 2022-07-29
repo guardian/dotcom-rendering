@@ -11,6 +11,7 @@ const generateBlocks = (numberOfBlocks: number): LiveBlock[] => {
 		lastModified: new Date('2021-11-02T13:13:13Z'),
 		body: [],
 		contributors: [],
+		isPinned: false,
 	};
 
 	const liveBlocks = [];

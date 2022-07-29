@@ -80,6 +80,7 @@ export const LiveBlock = ({
 					isAdFreeUser={isAdFreeUser}
 					isSensitive={isSensitive}
 					switches={switches}
+					isPinnedPost={isPinnedPost}
 				/>
 			))}
 			<footer
@@ -98,8 +99,8 @@ export const LiveBlock = ({
 					context="LiveBlock"
 				/>
 				{showLastUpdated &&
-					block.blockLastUpdated &&
-					block.blockLastUpdatedDisplay && (
+					!!block.blockLastUpdated &&
+					!!block.blockLastUpdatedDisplay && (
 						<LastUpdated
 							lastUpdated={block.blockLastUpdated}
 							lastUpdatedDisplay={block.blockLastUpdatedDisplay}

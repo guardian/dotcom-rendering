@@ -1,79 +1,59 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/react';
-import type { BlockContributor } from '@guardian/common-rendering/src/components/liveBlockContainer';
-import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 import type { ArticleFormat } from '@guardian/libs';
-import { map, partition, withDefault } from '@guardian/types';
-import { LastUpdated } from 'components/LastUpdated';
-import type { Contributor } from 'contributor';
-import { formatUTCTimeDateTz } from 'date';
+import { map, withDefault } from '@guardian/types';
+import LiveBlock from 'components/LiveBlock';
+import PinnedPost from 'components/PinnedPost';
 import { pipe } from 'lib';
-import type { LiveBlock } from 'liveBlock';
+import type { LiveBlock as LiveBlockType } from 'liveBlock';
+import type { Option } from 'option';
+import { OptionKind } from 'option';
 import type { FC } from 'react';
-import { renderAll } from 'renderer';
-
-// ----- Functions ----- //
-
-const contributorToBlockContributor = (
-	contributor: Contributor,
-): BlockContributor => ({
-	name: contributor.name,
-	imageUrl: pipe(
-		contributor.image,
-		map((i) => i.src),
-		withDefault<string | undefined>(undefined),
-	),
-});
 
 // ----- Component ----- //
 interface LiveBlocksProps {
-	blocks: LiveBlock[];
+	blocks: LiveBlockType[];
 	format: ArticleFormat;
+	pageNumber: number;
+	pinnedPost: Option<LiveBlockType>;
 }
 
-const LiveBlocks: FC<LiveBlocksProps> = ({ blocks, format }) => {
+const LiveBlocks: FC<LiveBlocksProps> = ({
+	blocks,
+	format,
+	pageNumber,
+	pinnedPost,
+}) => {
+	const showPinnedPost =
+		pageNumber === 1 && pinnedPost.kind === OptionKind.Some;
+
 	return (
 		<>
 			{/* Accordion? */}
+			{showPinnedPost && (
+				<PinnedPost pinnedPost={pinnedPost.value} format={format} />
+			)}
 			{blocks.map((block) => (
-				<LiveBlockContainer
+				<LiveBlock
 					key={block.id}
-					id={block.id}
+					block={block}
 					format={format}
-					blockTitle={block.title}
-					blockFirstPublished={Number(block.firstPublished)}
-					blockId={block.id}
-					// TODO pass this value in when available
+					// This is false because it's only true when it's
+					// used for the actual pinned post on top of the page
 					isPinnedPost={false}
-					supportsDarkMode={true}
-					contributors={block.contributors.map(
-						contributorToBlockContributor,
+					isOriginalPinnedPost={pipe(
+						pinnedPost,
+						map((pinned) => block.id === pinned.id),
+						withDefault<boolean>(false),
 					)}
-				>
-					{renderAll(format, partition(block.body).oks)}
-
-					<footer
-						css={css`
-							display: flex;
-							justify-content: end;
-						`}
-					>
-						{block.lastModified > block.firstPublished && (
-							<LastUpdated
-								lastUpdated={block.lastModified}
-								lastUpdatedDisplay={formatUTCTimeDateTz(
-									block.lastModified,
-								)}
-							/>
-						)}
-					</footer>
-				</LiveBlockContainer>
+				/>
 			))}
 		</>
 	);
 };
 
 // ----- Exports ----- //
+
+export { LiveBlock };
 
 export default LiveBlocks;

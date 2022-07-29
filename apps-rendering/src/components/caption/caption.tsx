@@ -38,7 +38,9 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles | undefined =>
 		: undefined;
 
 const textStyles = css`
-	${textSans.xxsmall()}
+	${textSans.xsmall({
+		lineHeight: 'regular',
+	})}
 	color: ${neutral[46]};
 `;
 

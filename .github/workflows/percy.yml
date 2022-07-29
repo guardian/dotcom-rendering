@@ -1,0 +1,29 @@
+name: Percy
+on:
+  push:
+    paths-ignore:
+      - "apps-rendering/**"
+jobs:
+  percy:
+    name: Percy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node
+        uses: guardian/actions-setup-node@main
+      - name: Generate production build
+        run: make build
+        working-directory: dotcom-rendering
+      - name: Install cypress
+        uses: cypress-io/github-action@v4
+        with:
+          runTests: false
+          start: make start-ci
+          working-directory: dotcom-rendering
+          wait-on: "http://localhost:9000"
+          wait-on-timeout: 30
+      - name: Percy Test
+        working-directory: dotcom-rendering
+        run: yarn cypress:run:percy
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}

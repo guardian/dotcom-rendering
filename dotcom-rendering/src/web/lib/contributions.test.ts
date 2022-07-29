@@ -142,3 +142,37 @@ describe('lazyFetchEmailWithTimeout', () => {
 		expect(getIdApiUserData).toHaveBeenCalledWith('https://idapi-url.com');
 	});
 });
+
+describe('getPurchaseInfo', () => {
+	let getPurchaseInfo: () => any;
+
+	beforeEach(() => {
+		clearAllCookies();
+		// Reset modules to avoid memoized cookies affecting tests
+		jest.resetModules();
+		({ getPurchaseInfo } = jest.requireActual('./contributions'));
+	});
+
+	it('returns decoded cookie data', () => {
+		setCookie({
+			name: 'GU_CO_COMPLETE',
+			value: '%7B%22userType%22%3A%22guest%22%2C%22product%22%3A%22DigitalPack%22%7D',
+		});
+		expect(getPurchaseInfo()).toEqual({
+			userType: 'guest',
+			product: 'DigitalPack',
+		});
+	});
+
+	it('returns undefined if cookie unset', () => {
+		expect(getPurchaseInfo()).toBeUndefined();
+	});
+
+	it('returns undefined if cookie data invalid', () => {
+		setCookie({
+			name: 'GU_CO_COMPLETE',
+			value: 'utter-nonsense',
+		});
+		expect(getPurchaseInfo()).toBeUndefined();
+	});
+});

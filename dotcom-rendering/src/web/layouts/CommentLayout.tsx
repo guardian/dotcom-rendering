@@ -11,6 +11,7 @@ import {
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
+import { getSoleContributor } from '../../lib/byline';
 import { parse } from '../../lib/slot-machine-flags';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
@@ -19,6 +20,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
+import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
@@ -32,7 +34,6 @@ import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 import { Nav } from '../components/Nav/Nav';
-import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
@@ -42,6 +43,7 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
+import { decideTrail } from '../lib/decideTrail';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
@@ -280,22 +282,12 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `CAPIArticle.config.shouldHideReaderRevenue` equals false.
 
-	const seriesTag = CAPIArticle.tags.find(
-		(tag) => tag.type === 'Series' || tag.type === 'Blog',
-	);
-	const showOnwardsLower = seriesTag && CAPIArticle.hasStoryPackage;
-
 	const showComments = CAPIArticle.isCommentable;
 
-	const contributorTag = CAPIArticle.tags.find(
-		(tag) => tag.type === 'Contributor',
-	);
-	const avatarUrl = contributorTag && contributorTag.bylineLargeImageUrl;
-	const onlyOneContributor: boolean =
-		CAPIArticle.tags.filter((tag) => tag.type === 'Contributor').length ===
-		1;
-
-	const showAvatar = avatarUrl && onlyOneContributor;
+	const avatarUrl = getSoleContributor(
+		CAPIArticle.tags,
+		CAPIArticle.byline,
+	)?.bylineLargeImageUrl;
 
 	const { branding } =
 		CAPIArticle.commercialProperties[CAPIArticle.editionId];
@@ -348,6 +340,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								contributionsServiceUrl={
 									contributionsServiceUrl
 								}
+								idApiUrl={CAPIArticle.config.idApiUrl}
 							/>
 						</ElementContainer>
 					)}
@@ -430,7 +423,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<div
 									css={[
 										avatarHeadlineWrapper,
-										showAvatar && minHeightWithAvatar,
+										avatarUrl && minHeightWithAvatar,
 									]}
 								>
 									{/* TOP - we position content in groups here using flex */}
@@ -438,7 +431,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										format={format}
 										headlineString={CAPIArticle.headline}
 										tags={CAPIArticle.tags}
-										byline={CAPIArticle.author.byline}
+										byline={CAPIArticle.byline}
 										webPublicationDateDeprecated={
 											CAPIArticle.webPublicationDateDeprecated
 										}
@@ -446,17 +439,16 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											!!CAPIArticle.starRating ||
 											CAPIArticle.starRating === 0
 										}
-										hasAvatar={!!showAvatar}
+										hasAvatar={!!avatarUrl}
 									/>
 									{/* BOTTOM */}
 									<div>
-										{showAvatar && avatarUrl && (
+										{!!avatarUrl && (
 											<div css={avatarPositionStyles}>
 												<ContributorAvatar
 													imageSrc={avatarUrl}
 													imageAlt={
-														CAPIArticle.author
-															.byline || ''
+														CAPIArticle.byline ?? ''
 													}
 												/>
 											</div>
@@ -525,7 +517,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									format={format}
 									pageId={CAPIArticle.pageId}
 									webTitle={CAPIArticle.webTitle}
-									author={CAPIArticle.author}
+									byline={CAPIArticle.byline}
 									tags={CAPIArticle.tags}
 									primaryDateline={
 										CAPIArticle.webPublicationDateDisplay
@@ -706,6 +698,22 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					/>
 				</ElementContainer>
 
+				{CAPIArticle.storyPackage && (
+					<ElementContainer>
+						<Island deferUntil="visible">
+							<Carousel
+								heading={CAPIArticle.storyPackage.heading}
+								trails={CAPIArticle.storyPackage.trails.map(
+									decideTrail,
+								)}
+								ophanComponentName="more-on-this-story"
+								format={format}
+								isCuratedContent={false}
+							/>
+						</Island>
+					</ElementContainer>
+				)}
+
 				<Island
 					clientOnly={true}
 					deferUntil="visible"
@@ -732,22 +740,6 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
 				</Island>
-
-				{showOnwardsLower && (
-					<ElementContainer
-						sectionId="onwards-lower"
-						element="section"
-					>
-						<Island clientOnly={true} deferUntil="visible">
-							<OnwardsLower
-								ajaxUrl={CAPIArticle.config.ajaxUrl}
-								hasStoryPackage={CAPIArticle.hasStoryPackage}
-								tags={CAPIArticle.tags}
-								format={format}
-							/>
-						</Island>
-					</ElementContainer>
-				)}
 
 				{!isPaidContent && showComments && (
 					<ElementContainer sectionId="comments" element="aside">

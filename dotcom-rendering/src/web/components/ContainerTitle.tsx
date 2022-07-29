@@ -8,6 +8,7 @@ import {
 	text,
 	until,
 } from '@guardian/source-foundations';
+import type { DCRContainerPalette } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { getEditionFromId } from '../lib/edition';
 
@@ -103,7 +104,7 @@ export const ContainerTitle = ({
 			) : (
 				<h2 css={headerStyles(fontColour)}>{title}</h2>
 			)}
-			{description && (
+			{!!description && (
 				<p
 					css={descriptionStyles(fontColour)}
 					dangerouslySetInnerHTML={{ __html: description }}

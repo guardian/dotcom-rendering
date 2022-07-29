@@ -1,7 +1,12 @@
-import type { BrazeMessagesInterface } from '@guardian/braze-components/logic';
+import type {
+	BrazeCardsInterface,
+	BrazeMessagesInterface,
+} from '@guardian/braze-components/logic';
 import {
+	BrazeCards,
 	BrazeMessages,
 	LocalMessageCache,
+	NullBrazeCards,
 	NullBrazeMessages,
 } from '@guardian/braze-components/logic';
 import { getCookie, log, storage } from '@guardian/libs';
@@ -41,11 +46,19 @@ const maybeWipeUserData = async (
 	}
 };
 
-export const buildBrazeMessages = async (
+export const buildBrazeMessaging = async (
 	idApiUrl: string,
-): Promise<BrazeMessagesInterface> => {
+): Promise<{
+	brazeMessages: BrazeMessagesInterface;
+	brazeCards: BrazeCardsInterface;
+}> => {
 	if (!storage.local.isAvailable()) {
-		return new NullBrazeMessages();
+		// we require local storage for using any message channel so that we know
+		// when to clear up user data from the device on logout
+		return {
+			brazeMessages: new NullBrazeMessages(),
+			brazeCards: new NullBrazeCards(),
+		};
 	}
 
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
@@ -69,7 +82,10 @@ export const buildBrazeMessages = async (
 			data.consent as boolean | undefined,
 		);
 
-		return new NullBrazeMessages();
+		return {
+			brazeMessages: new NullBrazeMessages(),
+			brazeCards: new NullBrazeCards(),
+		};
 	}
 
 	try {
@@ -89,18 +105,24 @@ export const buildBrazeMessages = async (
 		const errorHandler = (error: Error, desc: string) => {
 			window.guardian.modules.sentry.reportError(error, desc);
 		};
-		const brazeMessages = new BrazeMessages(
-			appboy,
-			LocalMessageCache,
-			errorHandler,
-		);
 
 		setHasCurrentBrazeUser();
 		appboy.changeUser(dependenciesResult.data.brazeUuid as string);
 		appboy.openSession();
 
-		return brazeMessages;
+		const brazeCards = window.guardian.config.switches.brazeContentCards
+			? new BrazeCards(appboy, errorHandler)
+			: new NullBrazeCards();
+		const brazeMessages = new BrazeMessages(
+			appboy,
+			LocalMessageCache,
+			errorHandler,
+		);
+		return { brazeMessages, brazeCards };
 	} catch {
-		return new NullBrazeMessages();
+		return {
+			brazeMessages: new NullBrazeMessages(),
+			brazeCards: new NullBrazeCards(),
+		};
 	}
 };

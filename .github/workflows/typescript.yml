@@ -3,6 +3,7 @@ on:
     push:
         paths-ignore:
             - "apps-rendering/**"
+            - "dotcom-rendering/docs/**"
 
 jobs:
     typescript:
@@ -14,9 +15,6 @@ jobs:
 
             # Cache npm dependencies using https://github.com/bahmutov/npm-install
             - uses: bahmutov/npm-install@v1
-
-            - name: Install
-              run: yarn
 
             - name: Check typescript
               run: yarn tsc

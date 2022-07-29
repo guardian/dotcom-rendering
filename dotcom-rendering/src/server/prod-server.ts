@@ -12,8 +12,10 @@ import {
 	renderPerfTest as renderArticlePerfTest,
 	renderBlocks,
 	renderFront,
+	renderFrontJson,
 	renderInteractive,
 	renderKeyEvents,
+	renderOnwards,
 } from '../web/server';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
@@ -56,7 +58,9 @@ export const prodServer = (): void => {
 	app.post('/AMPInteractive', logRenderTime, renderAMPArticle);
 	app.post('/Blocks', logRenderTime, renderBlocks);
 	app.post('/KeyEvents', logRenderTime, renderKeyEvents);
+	app.post('/Onwards', logRenderTime, renderOnwards);
 	app.post('/Front', logRenderTime, renderFront);
+	app.post('/FrontJSON', logRenderTime, renderFrontJson);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
@@ -96,6 +100,21 @@ export const prodServer = (): void => {
 			// Eg. http://localhost:9000/Front?url=https://www.theguardian.com/uk/sport
 			try {
 				return renderFront(req, res);
+			} catch (error) {
+				console.error(error);
+			}
+		},
+	);
+
+	app.get(
+		'/FrontJSON',
+		logRenderTime,
+		// TODO: ensure getContentFromURLMiddleware supports fronts
+		getContentFromURLMiddleware,
+		async (req: Request, res: Response) => {
+			// Eg. http://localhost:9000/FrontJSON?url=https://www.theguardian.com/uk/sport
+			try {
+				return renderFrontJson(req, res);
 			} catch (error) {
 				console.error(error);
 			}

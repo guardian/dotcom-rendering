@@ -2,32 +2,27 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, headline, neutral } from '@guardian/source-foundations';
+import { from, headline } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { darkModeCss } from 'styles';
-import { getThemeStyles } from 'themeStyles';
 import { DefaultByline } from './Byline.defaults';
 
-export const blogColor = (
-	color: string,
-	link: string,
-	inverted: string,
-): SerializedStyles => css`
-	color: ${color};
+export const blogColor = (format: ArticleFormat): SerializedStyles => css`
+	color: ${text.bylineInline(format)};
 	${from.desktop} {
-		color: ${link};
+		color: ${text.bylineLeftColumn(format)};
 	}
 
 	${darkModeCss`
-		color: ${neutral[93]};
+		color: ${text.bylineInlineDark(format)};
 		${from.desktop} {
-			color: ${inverted};
+			${text.bylineLeftColumnDark(format)};
 		}
 	`}
 `;
 
 const blogStyles = css`
-	${headline.xxxsmall({ lineHeight: 'regular', fontStyle: 'italic' })}
+	${headline.xxxsmall({ lineHeight: 'tight', fontStyle: 'italic' })}
 `;
 
 const blogAnchorStyles = css`
@@ -42,27 +37,18 @@ interface Props {
 }
 
 const LiveblogByline: React.FC<Props> = ({ format, bylineHtml }) => {
-	const { inverted, link } = getThemeStyles(format.theme);
-
 	return (
 		<DefaultByline
 			format={format}
 			bylineHtml={bylineHtml}
 			styles={css(
 				blogStyles,
-				blogColor(
-					neutral[100],
-					text.bylineLeftColumn(format),
-					text.bylineDark(format),
-				),
+				blogColor(format),
 				darkModeCss`
-					color: ${neutral[86]};
+					color: ${text.bylineInlineDark(format)};
  				`,
 			)}
-			anchorStyles={css(
-				blogAnchorStyles,
-				blogColor(neutral[100], link, inverted),
-			)}
+			anchorStyles={css(blogAnchorStyles, blogColor(format))}
 		/>
 	);
 };

@@ -209,9 +209,9 @@ describe('Liveblogs', function () {
 			// the page. Using data-gu-name="media" for now to get
 			// around this scroll depth issue
 			cy.get('div[data-gu-name="media"]').scrollIntoView();
-			cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e').should(
-				'be.visible',
-			);
+			cy.get('#46d194c9-ea50-4cd5-af8b-a51e8b15c65e', {
+				timeout: 10000,
+			}).should('be.visible');
 		});
 	});
 

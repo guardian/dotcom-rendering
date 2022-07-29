@@ -292,7 +292,11 @@ https://workforus.theguardian.com/careers/product-engineering/
 			<body>
                 ${html}
                 ${[...lowPriorityScriptTags].join('\n')}
-				<script type="application/ld+json">${recipeMarkup}</script>
+				${
+					recipeMarkup !== undefined
+						? `<script type="application/ld+json">${recipeMarkup}</script>`
+						: ''
+				}
             </body>
         </html>`;
 };

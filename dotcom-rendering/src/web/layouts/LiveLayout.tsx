@@ -25,6 +25,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
+import { Carousel } from '../components/Carousel.importable';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -45,7 +46,6 @@ import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
-import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Standfirst } from '../components/Standfirst';
@@ -56,6 +56,7 @@ import { SubNav } from '../components/SubNav.importable';
 import { TopicFilterBank } from '../components/TopicFilterBank.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
+import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
@@ -279,12 +280,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `CAPIArticle.config.shouldHideReaderRevenue` equals false.
 
-	const seriesTag = CAPIArticle.tags.find(
-		(tag) => tag.type === 'Series' || tag.type === 'Blog',
-	);
-
-	const showOnwardsLower = seriesTag && CAPIArticle.hasStoryPackage;
-
 	// Set a default pagination if it is missing from CAPI
 	const pagination: Pagination = CAPIArticle.pagination ?? {
 		currentPage: 1,
@@ -369,6 +364,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								CAPIArticle.config.switches.remoteHeader
 							}
 							contributionsServiceUrl={contributionsServiceUrl}
+							idApiUrl={CAPIArticle.config.idApiUrl}
 						/>
 					</ElementContainer>
 
@@ -537,7 +533,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.headline
 											}
 											tags={CAPIArticle.tags}
-											byline={CAPIArticle.author.byline}
+											byline={CAPIArticle.byline}
 											webPublicationDateDeprecated={
 												CAPIArticle.webPublicationDateDeprecated
 											}
@@ -578,16 +574,15 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 						<GridItem area="lastupdated">
 							<Hide until="desktop">
-								{CAPIArticle.blocks.length &&
-									CAPIArticle.blocks[0].blockLastUpdated && (
-										<ArticleLastUpdated
-											format={format}
-											lastUpdated={
-												CAPIArticle.blocks[0]
-													.blockLastUpdated
-											}
-										/>
-									)}
+								{!!CAPIArticle.blocks[0]?.blockLastUpdated && (
+									<ArticleLastUpdated
+										format={format}
+										lastUpdated={
+											CAPIArticle.blocks[0]
+												.blockLastUpdated
+										}
+									/>
+								)}
 							</Hide>
 						</GridItem>
 						<GridItem area="lines">
@@ -613,7 +608,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										format={format}
 										pageId={CAPIArticle.pageId}
 										webTitle={CAPIArticle.webTitle}
-										author={CAPIArticle.author}
+										byline={CAPIArticle.byline}
 										tags={CAPIArticle.tags}
 										primaryDateline={
 											CAPIArticle.webPublicationDateDisplay
@@ -641,7 +636,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandFirstGrid>
 				</ElementContainer>
-				{showKeyEventsCarousel && CAPIArticle.keyEvents.length && (
+				{showKeyEventsCarousel && CAPIArticle.keyEvents.length > 0 ? (
 					<ElementContainer
 						showTopBorder={false}
 						backgroundColour={
@@ -662,7 +657,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</Island>
 						</Hide>
 					</ElementContainer>
-				)}
+				) : null}
 				<ElementContainer
 					showTopBorder={false}
 					borderColour={palette.border.article}
@@ -728,7 +723,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<LiveGrid>
 							<GridItem area="media">
 								<div css={maxWidth}>
-									{footballMatchUrl && (
+									{!!footballMatchUrl && (
 										<Island
 											clientOnly={true}
 											placeholderHeight={40}
@@ -739,7 +734,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											/>
 										</Island>
 									)}
-									{cricketMatchUrl && (
+									{!!cricketMatchUrl && (
 										<Island
 											clientOnly={true}
 											placeholderHeight={172}
@@ -815,7 +810,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											format={format}
 											pageId={CAPIArticle.pageId}
 											webTitle={CAPIArticle.webTitle}
-											author={CAPIArticle.author}
+											byline={CAPIArticle.byline}
 											tags={CAPIArticle.tags}
 											primaryDateline={
 												CAPIArticle.webPublicationDateDisplay
@@ -888,7 +883,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										</Hide>
 									)}
 								{/* Match stats */}
-								{footballMatchUrl && (
+								{!!footballMatchUrl && (
 									<Island
 										deferUntil="visible"
 										clientOnly={true}
@@ -1308,6 +1303,22 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					</ElementContainer>
 
+					{CAPIArticle.storyPackage && (
+						<ElementContainer>
+							<Island deferUntil="visible">
+								<Carousel
+									heading={CAPIArticle.storyPackage.heading}
+									trails={CAPIArticle.storyPackage.trails.map(
+										decideTrail,
+									)}
+									ophanComponentName="more-on-this-story"
+									format={format}
+									isCuratedContent={false}
+								/>
+							</Island>
+						</ElementContainer>
+					)}
+
 					<Island
 						clientOnly={true}
 						deferUntil="visible"
@@ -1334,24 +1345,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							shortUrlId={CAPIArticle.config.shortUrlId}
 						/>
 					</Island>
-
-					{showOnwardsLower && (
-						<ElementContainer
-							sectionId="onwards-lower"
-							element="section"
-						>
-							<Island clientOnly={true} deferUntil="visible">
-								<OnwardsLower
-									ajaxUrl={CAPIArticle.config.ajaxUrl}
-									hasStoryPackage={
-										CAPIArticle.hasStoryPackage
-									}
-									tags={CAPIArticle.tags}
-									format={format}
-								/>
-							</Island>
-						</ElementContainer>
-					)}
 
 					{!isPaidContent && CAPIArticle.isCommentable && (
 						<ElementContainer

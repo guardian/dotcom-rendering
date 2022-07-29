@@ -17,6 +17,7 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
+import { EmailSignup } from '../components/EmailSignup';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
@@ -80,6 +81,7 @@ type Props = {
 	switches: { [key: string]: boolean };
 	showOverlayCaption?: boolean;
 	showMediaAboveHeadline?: boolean;
+	isPinnedPost?: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -135,6 +137,7 @@ export const renderElement = ({
 	isSensitive,
 	showOverlayCaption,
 	showMediaAboveHeadline,
+	isPinnedPost,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
 
@@ -272,6 +275,7 @@ export const renderElement = ({
 							isMainMedia={isMainMedia}
 							source={element.source}
 							sourceDomain={element.sourceDomain}
+							isPinnedPost={isPinnedPost}
 						/>
 					</Island>,
 				];
@@ -452,6 +456,14 @@ export const renderElement = ({
 					key={index}
 					images={element.images}
 					caption={element.caption}
+				/>,
+			];
+		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
+			return [
+				true,
+				<EmailSignup
+					newsletter={element.newsletter}
+					elementId={element.elementId}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
@@ -797,6 +809,7 @@ export const RenderArticleElement = ({
 	switches,
 	showOverlayCaption,
 	showMediaAboveHeadline,
+	isPinnedPost,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -817,6 +830,7 @@ export const RenderArticleElement = ({
 		switches,
 		showOverlayCaption,
 		showMediaAboveHeadline,
+		isPinnedPost,
 	});
 
 	if (!ok) {

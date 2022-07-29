@@ -31,10 +31,6 @@ jobs:
                   key: node-${{ hashFiles('**/package-lock.json') }}
                   restore-keys: node-
 
-            - name: install
-              run: npm ci
-              working-directory: apps-rendering
-
             - name: lint
               run: npm run lint
               working-directory: apps-rendering

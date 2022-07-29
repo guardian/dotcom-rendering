@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
 import { ArticlePillar } from '@guardian/libs';
 import { joinUrl } from '../../lib/joinUrl';
-import { Carousel } from './Carousel';
 import { ElementContainer } from './ElementContainer';
 import { OnwardsData } from './OnwardsData';
-import { OnwardsLayout } from './OnwardsLayout';
 
 type PillarForContainer =
 	| 'headlines'
@@ -208,9 +206,7 @@ export const OnwardsUpper = ({
 		// Then don't show related content
 		// This is the first priority for deciding whether to include related content
 	} else if (hasStoryPackage) {
-		// Always fetch the story package if it exists
-		url = joinUrl([ajaxUrl, 'story-package', `${pageId}.json?dcr=true`]);
-		ophanComponentName = 'more-on-this-story';
+		// We server render story packages so do nothing
 	} else if (isAdFreeUser && isPaidContent) {
 		// Don't show any related content (other than story packages) for
 		// adfree users when the content is paid for
@@ -268,28 +264,26 @@ export const OnwardsUpper = ({
 
 	const curatedDataUrl = showRelatedContent
 		? getContainerDataUrl(pillar, editionId, ajaxUrl)
-		: null;
+		: undefined;
 
 	return (
 		<div css={onwardsWrapper}>
-			{url && (
+			{!!url && (
 				<ElementContainer>
 					<OnwardsData
 						url={url}
 						limit={8}
 						ophanComponentName={ophanComponentName}
-						Container={isPaidContent ? OnwardsLayout : Carousel}
 						format={format}
 					/>
 				</ElementContainer>
 			)}
-			{!isPaidContent && curatedDataUrl && (
+			{!!(!isPaidContent && curatedDataUrl) && (
 				<ElementContainer showTopBorder={true}>
 					<OnwardsData
 						url={curatedDataUrl}
 						limit={20}
 						ophanComponentName="curated-content"
-						Container={Carousel}
 						isCuratedContent={true}
 						format={format}
 					/>

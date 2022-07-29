@@ -35,18 +35,43 @@ type CaptionDetails = {
 
 const sizes: Sizes = {
 	mediaQueries: [],
-	default: width,
+	default: 'auto',
 };
 
 const styles = css`
-	margin: 0 0 ${remSpace[6]};
+	margin: 0;
 	width: ${width};
 	position: relative;
+	padding: 1.5rem 0 1.5rem 0;
+
+	${from.tablet} {
+		display: flex;
+		flex-wrap: nowrap;
+		padding: 0 1rem 0 0;
+	}
+
 	p {
 		${from.tablet} {
 			margin: 0;
 			padding: 0;
 		}
+	}
+`;
+
+const imgStyles = css`
+	${from.tablet} {
+		flex: 0 0 538px;
+		padding: 1rem;
+		padding-left: 0;
+		border-right: 1px solid ${neutral[100]};
+	}
+
+	${from.desktop} {
+		flex: 0 0 557px;
+	}
+
+	> picture > img {
+		max-width: 100%;
 	}
 `;
 
@@ -154,13 +179,14 @@ const CaptionDescription: FC<{ description: string[] }> = ({ description }) => {
 
 const GalleryImageCaption: FC<CaptionProps> = ({ details, format }) => {
 	const { kicker } = getThemeStyles(format.theme);
-	const tabletWidth = '170px';
+
 	const styles = css`
 		${from.tablet} {
-			position: absolute;
-			top: -${remSpace[1]};
-			width: ${tabletWidth};
-			right: calc(-${tabletWidth} - 2rem);
+			flex: 0 1 170px;
+			padding: 1rem;
+			padding-right: 0;
+
+			padding-right: 0;
 		}
 	`;
 	return (
@@ -178,18 +204,20 @@ const GalleryImageCaption: FC<CaptionProps> = ({ details, format }) => {
 const GalleryImage: FC<Props> = ({ image, format }) => {
 	return (
 		<figure css={styles} className="editions-gallery-figure">
-			<Img
-				image={image}
-				sizes={sizes}
-				className={none}
-				format={format}
-				supportsDarkMode={false}
-				lightbox={some({
-					className: 'js-launch-slideshow',
-					caption: none,
-					credit: none,
-				})}
-			/>
+			<div css={imgStyles}>
+				<Img
+					image={image}
+					sizes={sizes}
+					className={none}
+					format={format}
+					supportsDarkMode={false}
+					lightbox={some({
+						className: 'js-launch-slideshow',
+						caption: none,
+						credit: none,
+					})}
+				/>
+			</div>
 			<GalleryImageCaption
 				details={getCaptionDetails(image.caption)}
 				format={format}

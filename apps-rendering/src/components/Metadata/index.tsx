@@ -27,7 +27,7 @@ import { getFormat } from 'item';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { darkModeCss } from 'styles';
-import { getThemeStyles } from 'themeStyles';
+import GalleryMetadata from './GalleryMetadata';
 import ImmersiveMetadata from './ImmersiveMetadata';
 
 // ----- Component ----- //
@@ -154,10 +154,9 @@ const isLive = (design: ArticleDesign): boolean =>
 	design === ArticleDesign.LiveBlog;
 
 // This styling function is only temprarily used and will be removed
-// after the liveblog header is completed and ackground colours
+// after the liveblog header is completed and background colours
 // are added
 const tempraryBackgroundStyle = (format: ArticleFormat): SerializedStyles => {
-	const themeStyles = getThemeStyles(format.theme);
 	switch (format.design) {
 		case ArticleDesign.DeadBlog:
 			return css`
@@ -172,7 +171,7 @@ const tempraryBackgroundStyle = (format: ArticleFormat): SerializedStyles => {
 			`;
 		default:
 			return css`
-				background-color: ${themeStyles.liveblogBackground};
+				background-color: ${background.liveblogMetadata(format)};
 
 				${from.desktop} {
 					background-color: ${neutral[97]};
@@ -288,7 +287,17 @@ const Metadata: FC<Props> = (props: Props) => {
 		);
 	}
 
-	if (
+	if (design === ArticleDesign.Gallery) {
+		return (
+			<GalleryMetadata
+				format={getFormat(props.item)}
+				publishDate={props.item.publishDate}
+				commentCount={props.item.commentCount}
+				contributors={props.item.contributors}
+				commentable={props.item.commentable}
+			/>
+		);
+	} else if (
 		design === ArticleDesign.Comment ||
 		design === ArticleDesign.Letter ||
 		design === ArticleDesign.Editorial

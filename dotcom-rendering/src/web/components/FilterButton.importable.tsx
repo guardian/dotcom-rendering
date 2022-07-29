@@ -62,7 +62,7 @@ const valueStyles = css`
 const Label = ({ value, count }: LabelProps) => (
 	<>
 		<span css={valueStyles}>{value}</span>{' '}
-		{count && <span css={countStyles}>({count})</span>}
+		{!!count && <span css={countStyles}>({count})</span>}
 	</>
 );
 

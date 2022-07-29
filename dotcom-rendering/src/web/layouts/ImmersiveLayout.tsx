@@ -20,6 +20,7 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
+import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
@@ -30,7 +31,6 @@ import { HeadlineByline } from '../components/HeadlineByline';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
@@ -40,6 +40,7 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
+import { decideTrail } from '../lib/decideTrail';
 import { ImmersiveHeader } from './headers/ImmersiveHeader';
 import { BannerWrapper } from './lib/stickiness';
 
@@ -209,11 +210,6 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `CAPIArticle.config.shouldHideReaderRevenue` equals false.
 
-	const seriesTag = CAPIArticle.tags.find(
-		(tag) => tag.type === 'Series' || tag.type === 'Blog',
-	);
-	const showOnwardsLower = seriesTag && CAPIArticle.hasStoryPackage;
-
 	const showComments = CAPIArticle.isCommentable;
 
 	const mainMedia = CAPIArticle.mainMediaElements[0] as ImageBlockElement;
@@ -295,7 +291,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.headline
 											}
 											tags={CAPIArticle.tags}
-											byline={CAPIArticle.author.byline}
+											byline={CAPIArticle.byline}
 											webPublicationDateDeprecated={
 												CAPIArticle.webPublicationDateDeprecated
 											}
@@ -315,15 +311,13 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							/>
 						</GridItem>
 						<GridItem area="byline">
-							<HeadlineByline
-								format={format}
-								tags={CAPIArticle.tags}
-								byline={
-									CAPIArticle.author.byline
-										? CAPIArticle.author.byline
-										: ''
-								}
-							/>
+							{!!CAPIArticle.byline && (
+								<HeadlineByline
+									format={format}
+									tags={CAPIArticle.tags}
+									byline={CAPIArticle.byline}
+								/>
+							)}
 						</GridItem>
 						<GridItem area="lines">
 							{format.design === ArticleDesign.PhotoEssay &&
@@ -349,7 +343,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									format={format}
 									pageId={CAPIArticle.pageId}
 									webTitle={CAPIArticle.webTitle}
-									author={CAPIArticle.author}
+									byline={CAPIArticle.byline}
 									tags={CAPIArticle.tags}
 									primaryDateline={
 										CAPIArticle.webPublicationDateDisplay
@@ -515,6 +509,22 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					/>
 				</ElementContainer>
 
+				{CAPIArticle.storyPackage && (
+					<ElementContainer>
+						<Island deferUntil="visible">
+							<Carousel
+								heading={CAPIArticle.storyPackage.heading}
+								trails={CAPIArticle.storyPackage.trails.map(
+									decideTrail,
+								)}
+								ophanComponentName="more-on-this-story"
+								format={format}
+								isCuratedContent={false}
+							/>
+						</Island>
+					</ElementContainer>
+				)}
+
 				<Island
 					clientOnly={true}
 					deferUntil="visible"
@@ -541,22 +551,6 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
 				</Island>
-
-				{showOnwardsLower && (
-					<ElementContainer
-						sectionId="onwards-lower"
-						element="section"
-					>
-						<Island clientOnly={true} deferUntil="visible">
-							<OnwardsLower
-								ajaxUrl={CAPIArticle.config.ajaxUrl}
-								hasStoryPackage={CAPIArticle.hasStoryPackage}
-								tags={CAPIArticle.tags}
-								format={format}
-							/>
-						</Island>
-					</ElementContainer>
-				)}
 
 				{!isPaidContent && showComments && (
 					<ElementContainer sectionId="comments" element="aside">

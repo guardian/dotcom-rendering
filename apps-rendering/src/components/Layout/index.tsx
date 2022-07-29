@@ -9,6 +9,7 @@ import { getAdPlaceholderInserter } from 'ads';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import CommentLayout from 'components/Layout/CommentLayout';
+import GalleryLayout from 'components/Layout/GalleryLayout';
 import InteractiveLayout from 'components/Layout/InteractiveLayout';
 import LabsLayout from 'components/Layout/LabsLayout';
 import LiveLayout from 'components/Layout/LiveLayout';
@@ -80,8 +81,11 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		return <CommentLayout item={item}>{render(item, body)}</CommentLayout>;
 	}
 
+	if (item.design === ArticleDesign.Gallery) {
+		return <GalleryLayout item={item}>{render(item, body)}</GalleryLayout>;
+	}
+
 	if (
-		item.design === ArticleDesign.Gallery ||
 		item.design === ArticleDesign.Audio ||
 		item.design === ArticleDesign.Video
 	) {

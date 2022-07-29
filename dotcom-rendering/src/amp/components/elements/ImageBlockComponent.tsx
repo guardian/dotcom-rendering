@@ -61,7 +61,7 @@ export const ImageBlockComponent: React.FC<{
 				width={image.width.toString()}
 				layout="responsive"
 			/>
-			{(element.data.caption ||
+			{(!!element.data.caption ||
 				(element.data.credit && element.displayCredit)) && (
 				<figcaption css={captionStyle}>
 					<span css={iconStyle}>

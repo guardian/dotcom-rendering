@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { renderToString } from 'react-dom/server';
+import type { DCRContainerPalette } from '../../types/front';
 import { formatCount } from '../lib/formatCount';
 import { useApi } from '../lib/useApi';
 import { CardCommentCount } from './CardCommentCount';

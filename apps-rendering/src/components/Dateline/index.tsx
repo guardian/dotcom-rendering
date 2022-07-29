@@ -23,7 +23,7 @@ const darkStyles = darkMode`
     color: ${neutral[60]};
 `;
 
-const styles = css`
+const defaultStyles = css`
 	${textSans.xsmall()}
 	color: ${text.supporting};
 
@@ -37,12 +37,16 @@ const commentDatelineStyles = css`
 	${darkStyles}
 `;
 
-const blogDatelineStyles = (color: string): SerializedStyles => css`
-	${textSans.xxsmall()}
-	color: ${color};
+const getStyles = (
+	colour: string,
+	desktopColour: string,
+): SerializedStyles => css`
+	color: ${colour};
+	display: block;
+	${textSans.xxsmall({ lineHeight: 'tight' })}
 
 	${from.desktop} {
-		color: ${neutral[20]};
+		color: ${desktopColour};
 	}
 
 	${darkMode`
@@ -55,16 +59,18 @@ const blogDatelineStyles = (color: string): SerializedStyles => css`
 
 const getDatelineStyles = (format: ArticleFormat): SerializedStyles => {
 	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return getStyles(neutral[100], neutral[100]);
 		case ArticleDesign.LiveBlog:
-			return blogDatelineStyles(neutral[100]);
+			return getStyles(neutral[100], neutral[20]);
 		case ArticleDesign.DeadBlog:
-			return blogDatelineStyles(neutral[20]);
+			return getStyles(neutral[20], neutral[20]);
 		default:
 			switch (format.theme) {
 				case ArticlePillar.Opinion:
 					return commentDatelineStyles;
 				default:
-					return styles;
+					return defaultStyles;
 			}
 	}
 };

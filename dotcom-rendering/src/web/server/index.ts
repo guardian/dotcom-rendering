@@ -7,16 +7,18 @@ import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { extract as extractGA } from '../../model/extract-ga';
 import { extractNAV } from '../../model/extract-nav';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
+import type { DCRFrontType, FEFrontType } from '../../types/front';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
+import { onwardsToHtml } from './onwardsToHtml';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
 }
 
-const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
+const enhanceCAPIType = (body: unknown): CAPIArticleType => {
 	const data = validateAsCAPIType(body);
 	const CAPIArticle: CAPIArticleType = {
 		...data,
@@ -30,7 +32,7 @@ const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
 	return CAPIArticle;
 };
 
-const enhanceFront = (body: Record<string, unknown>): DCRFrontType => {
+const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
 	return {
 		...data,
@@ -188,6 +190,38 @@ export const renderKeyEvents = (
 	}
 };
 
+export const renderOnwards = (
+	{ body }: { body: CAPIOnwardsType },
+	res: express.Response,
+): void => {
+	try {
+		const {
+			heading,
+			description,
+			url,
+			ophanComponentName,
+			trails,
+			format,
+			isCuratedContent,
+		} = body;
+
+		const html = onwardsToHtml({
+			heading,
+			description,
+			url,
+			ophanComponentName,
+			trails,
+			format,
+			isCuratedContent,
+		});
+
+		res.status(200).send(html);
+	} catch (e) {
+		const message = e instanceof Error ? e.stack : 'Unknown Error';
+		res.status(500).send(`<pre>${message}</pre>`);
+	}
+};
+
 export const renderFront = (
 	{ body }: express.Request,
 	res: express.Response,
@@ -203,4 +237,11 @@ export const renderFront = (
 		const message = e instanceof Error ? e.stack : 'Unknown Error';
 		res.status(500).send(`<pre>${message}</pre>`);
 	}
+};
+
+export const renderFrontJson = (
+	{ body }: express.Request,
+	res: express.Response,
+): void => {
+	res.json(enhanceFront(body));
 };

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from, headline, space, textSans } from '@guardian/source-foundations';
+import { decidePalette } from '../lib/decidePalette';
 import { FilterButton } from './FilterButton.importable';
 
 type Props = {
@@ -20,8 +21,9 @@ const headlineStyles = css`
 	padding-bottom: ${space[3]}px;
 `;
 
-const headlineAccentStyles = css`
-	${textSans.small({ fontWeight: 'regular', lineHeight: 'tight' })};
+const headlineAccentStyles = (palette: Palette) => css`
+	color: ${palette.text.betaLabel};
+	${textSans.xxsmall({ fontWeight: 'regular', lineHeight: 'tight' })};
 `;
 
 const topicStyles = css`
@@ -80,6 +82,7 @@ export const TopicFilterBank = ({
 	filterKeyEvents = false,
 	id,
 }: Props) => {
+	const palette = decidePalette(format);
 	const selectedTopic = selectedTopics?.[0];
 	const topFiveTopics = availableTopics.slice(0, 5);
 
@@ -96,10 +99,10 @@ export const TopicFilterBank = ({
 	return (
 		<div css={containerStyles}>
 			<div css={headlineStyles}>
-				Filters <span css={headlineAccentStyles}>(BETA)</span>:
+				Filters <span css={headlineAccentStyles(palette)}>BETA</span>
 			</div>
 			<div css={topicStyles}>
-				{keyEvents?.length && (
+				{keyEvents?.length ? (
 					<FilterButton
 						value={'Key events'}
 						count={keyEvents.length}
@@ -109,7 +112,7 @@ export const TopicFilterBank = ({
 							handleKeyEventClick(filterKeyEvents, id);
 						}}
 					/>
-				)}
+				) : null}
 
 				{topFiveTopics.map((topic) => {
 					const buttonParams = `${topic.type}:${topic.value}`;

@@ -22,6 +22,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
+import { Carousel } from '../components/Carousel.importable';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -35,7 +36,6 @@ import { LabsHeader } from '../components/LabsHeader.importable';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
-import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
@@ -45,6 +45,7 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
+import { decideTrail } from '../lib/decideTrail';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import {
 	interactiveGlobalStyles,
@@ -218,12 +219,6 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		adUnit: CAPIArticle.config.adUnit,
 	});
 
-	const seriesTag = CAPIArticle.tags.find(
-		(tag) => tag.type === 'Series' || tag.type === 'Blog',
-	);
-
-	const showOnwardsLower = seriesTag && CAPIArticle.hasStoryPackage;
-
 	const showComments = CAPIArticle.isCommentable;
 
 	const { branding } =
@@ -284,6 +279,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								contributionsServiceUrl={
 									contributionsServiceUrl
 								}
+								idApiUrl={CAPIArticle.config.idApiUrl}
 							/>
 						</ElementContainer>
 					</div>
@@ -403,7 +399,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										format={format}
 										headlineString={CAPIArticle.headline}
 										tags={CAPIArticle.tags}
-										byline={CAPIArticle.author.byline}
+										byline={CAPIArticle.byline}
 										webPublicationDateDeprecated={
 											CAPIArticle.webPublicationDateDeprecated
 										}
@@ -463,7 +459,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										format={format}
 										pageId={CAPIArticle.pageId}
 										webTitle={CAPIArticle.webTitle}
-										author={CAPIArticle.author}
+										byline={CAPIArticle.byline}
 										tags={CAPIArticle.tags}
 										primaryDateline={
 											CAPIArticle.webPublicationDateDisplay
@@ -614,6 +610,22 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					/>
 				</ElementContainer>
 
+				{CAPIArticle.storyPackage && (
+					<ElementContainer>
+						<Island deferUntil="visible">
+							<Carousel
+								heading={CAPIArticle.storyPackage.heading}
+								trails={CAPIArticle.storyPackage.trails.map(
+									decideTrail,
+								)}
+								ophanComponentName="more-on-this-story"
+								format={format}
+								isCuratedContent={false}
+							/>
+						</Island>
+					</ElementContainer>
+				)}
+
 				<Island
 					clientOnly={true}
 					deferUntil="visible"
@@ -640,22 +652,6 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
 				</Island>
-
-				{showOnwardsLower && (
-					<ElementContainer
-						sectionId="onwards-lower"
-						element="section"
-					>
-						<Island clientOnly={true} deferUntil="visible">
-							<OnwardsLower
-								ajaxUrl={CAPIArticle.config.ajaxUrl}
-								hasStoryPackage={CAPIArticle.hasStoryPackage}
-								tags={CAPIArticle.tags}
-								format={format}
-							/>
-						</Island>
-					</ElementContainer>
-				)}
 
 				{!isPaidContent && showComments && (
 					<ElementContainer

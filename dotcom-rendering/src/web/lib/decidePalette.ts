@@ -20,9 +20,9 @@ import {
 	sport,
 	text,
 } from '@guardian/source-foundations';
-
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../../lib/pillars';
+import type { DCRContainerPalette } from '../../types/front';
 import { decideContainerOverrides } from './decideContainerOverrides';
 import { transparentColour } from './transparentColour';
 
@@ -113,6 +113,16 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 };
 
 const textSeriesTitleWhenMatch = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.MatchReport:
+		case ArticleDesign.LiveBlog:
+			return BLACK;
+		default:
+			return textSeriesTitle(format);
+	}
+};
+
+const textHeadlineWhenMatch = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.MatchReport:
 		case ArticleDesign.LiveBlog:
@@ -711,7 +721,6 @@ const backgroundStandfirst = (format: ArticleFormat): string => {
 				case ArticleSpecial.SpecialReport:
 					return specialReport[300];
 			}
-			break;
 		case ArticleDesign.DeadBlog:
 			switch (format.theme) {
 				case ArticleSpecial.SpecialReport:
@@ -812,6 +821,11 @@ const fillShareIcon = (format: ArticleFormat): string => {
 				return specialReport[300];
 		}
 	}
+	if (
+		format.design === ArticleDesign.NewsletterSignup &&
+		format.display === ArticleDisplay.Standard
+	)
+		return BLACK;
 
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
@@ -850,6 +864,13 @@ const fillTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
 
 	return neutral[46];
 };
+
+const fillGuardianLogo = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.NewsletterSignup) return WHITE;
+
+	return WHITE;
+};
+
 const borderSyndicationButton = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	return border.secondary;
@@ -997,7 +1018,7 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 };
 
 const backgroundMatchNav = (): string => {
-	return '#FFE500';
+	return brandAlt[400];
 };
 
 const backgroundUnderline = (format: ArticleFormat): string =>
@@ -1170,6 +1191,8 @@ const textDropCap = (format: ArticleFormat): string => {
 	}
 };
 
+const textBetaLabel = (): string => neutral[46];
+
 const textBlockquote = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -1311,6 +1334,7 @@ export const decidePalette = (
 	return {
 		text: {
 			headline: textHeadline(format),
+			headlineWhenMatch: textHeadlineWhenMatch(format),
 			seriesTitle: textSeriesTitle(format),
 			seriesTitleWhenMatch: textSeriesTitleWhenMatch(format),
 			sectionTitle: textSectionTitle(format),
@@ -1366,6 +1390,7 @@ export const decidePalette = (
 			filterButton: textFilterButton(),
 			filterButtonHover: textFilterButtonHover(),
 			filterButtonActive: textFilterButtonActive(),
+			betaLabel: textBetaLabel(),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -1410,6 +1435,7 @@ export const decidePalette = (
 			quoteIcon: fillQuoteIcon(format),
 			blockquoteIcon: fillBlockquoteIcon(format),
 			twitterHandleBelowDesktop: fillTwitterHandleBelowDesktop(format),
+			guardianLogo: fillGuardianLogo(format),
 		},
 		border: {
 			syndicationButton: borderSyndicationButton(format),

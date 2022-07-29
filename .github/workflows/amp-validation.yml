@@ -3,6 +3,7 @@ on:
     push:
         paths-ignore:
             - "apps-rendering/**"
+            - "dotcom-rendering/docs/**"
 
 jobs:
     amp_validation:
@@ -17,9 +18,6 @@ jobs:
 
             # Cache npm dependencies using https://github.com/bahmutov/npm-install
             - uses: bahmutov/npm-install@v1
-
-            - name: Install
-              run: yarn
 
             - name: Validate AMP
               run: make ampValidation

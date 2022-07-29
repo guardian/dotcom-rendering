@@ -259,7 +259,7 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 										format={format}
 										headlineString={CAPIArticle.headline}
 										tags={CAPIArticle.tags}
-										byline={CAPIArticle.author.byline}
+										byline={CAPIArticle.byline}
 										webPublicationDateDeprecated={
 											CAPIArticle.webPublicationDateDeprecated
 										}

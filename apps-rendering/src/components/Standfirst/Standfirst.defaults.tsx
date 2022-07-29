@@ -51,7 +51,7 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 
 	a {
 		text-decoration: none;
-		border-bottom: 0.0625rem solid ${border.standfirstLink(format)};
+		border-bottom: 0.0625rem solid ${border.standfirstBlogLink(format)};
 	}
 
 	${isNotBlog(format) && darkStyles(format)}

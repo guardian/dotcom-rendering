@@ -2,9 +2,17 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
-import { headline, space, textSans, until } from '@guardian/source-foundations';
+import {
+	between,
+	from,
+	headline,
+	space,
+	textSans,
+	until,
+} from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import React from 'react';
+import type { DCRContainerPalette } from '../../types/front';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { Byline } from './Byline';
@@ -40,10 +48,15 @@ const fontStyles = ({
 	switch (size) {
 		case 'ginormous':
 			return css`
-				${headline.large(options)};
-				font-size: 50px;
-				${until.desktop} {
+				${until.mobileLandscape} {
+					${headline.medium(options)};
+				}
+				${between.mobileLandscape.and.desktop} {
 					${headline.large(options)};
+				}
+				${from.desktop} {
+					${headline.large(options)};
+					font-size: 50px;
 				}
 			`;
 		case 'huge':
@@ -249,7 +262,7 @@ export const CardHeadline = ({
 				]}
 			>
 				<WithLink linkTo={linkTo}>
-					{kickerText && (
+					{!!kickerText && (
 						<Kicker
 							text={kickerText}
 							color={kickerColour}
@@ -271,7 +284,7 @@ export const CardHeadline = ({
 					</span>
 				</WithLink>
 			</h4>
-			{byline && showByline && (
+			{!!byline && showByline && (
 				<Byline
 					text={byline}
 					format={format}

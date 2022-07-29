@@ -326,7 +326,7 @@ export const CalloutBlockComponent = ({
 						</div>
 						<div css={headingTextStyles(palette)}>
 							<h4 css={headingTextHeaderStyles}>{title}</h4>
-							{description && (
+							{!!description && (
 								<div
 									css={descriptionStyles}
 									dangerouslySetInnerHTML={{

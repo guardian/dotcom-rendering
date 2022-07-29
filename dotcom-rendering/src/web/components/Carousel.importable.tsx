@@ -20,6 +20,16 @@ import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
 
+type Props = {
+	heading: string;
+	trails: TrailType[];
+	description?: string;
+	url?: string;
+	ophanComponentName: OphanComponentName;
+	format: ArticleFormat;
+	isCuratedContent?: boolean;
+};
+
 // Carousel icons - need replicating from source for centring
 
 const SvgChevronLeftSingle = () => {
@@ -326,6 +336,8 @@ type CarouselCardProps = {
 	imageUrl?: string;
 	dataLinkName?: string;
 	discussionId?: string;
+	/** Only used on Labs cards */
+	branding?: Branding;
 };
 
 export const CarouselCard: React.FC<CarouselCardProps> = ({
@@ -338,6 +350,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 	isFirst,
 	dataLinkName,
 	discussionId,
+	branding,
 }: CarouselCardProps) => (
 	<LI
 		stretch={true}
@@ -364,6 +377,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 			}
 			dataLinkName={dataLinkName}
 			discussionId={discussionId}
+			branding={branding}
 		/>
 	</LI>
 );
@@ -412,13 +426,13 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 	</div>
 );
 
-export const Carousel: React.FC<OnwardsType> = ({
+export const Carousel = ({
 	heading,
 	trails,
 	ophanComponentName,
 	format,
 	isCuratedContent,
-}: OnwardsType) => {
+}: Props) => {
 	const palette = decidePalette(format);
 	const carouselRef = useRef<HTMLUListElement>(null);
 
@@ -622,6 +636,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 							image,
 							kickerText,
 							shortUrl,
+							branding,
 						} = trail;
 						// Don't try to render cards that have no publication date. This property is technically optional
 						// but we rarely if ever expect it not to exist
@@ -641,6 +656,7 @@ export const Carousel: React.FC<OnwardsType> = ({
 								kickerText={kickerText}
 								dataLinkName={`carousel-small-card-position-${i}`}
 								discussionId={discussionId}
+								branding={branding}
 							/>
 						);
 					})}

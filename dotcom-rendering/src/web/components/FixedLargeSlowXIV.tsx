@@ -1,7 +1,7 @@
-import { ArticleDesign } from '@guardian/libs';
-import { Card } from './Card/Card';
+import type { DCRContainerPalette } from '../../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
+import { FrontCard } from './FrontCard';
 
 type Props = {
 	trails: TrailType[];
@@ -23,67 +23,22 @@ export const FixedLargeSlowXIV = ({
 		<>
 			<UL direction="row" padBottom={true}>
 				<LI padSides={true} percentage="75%" padBottomOnMobile={true}>
-					<Card
+					<FrontCard
+						trail={primary}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						linkTo={primary.url}
-						format={primary.format}
-						headlineText={primary.headline}
-						trailText={primary.trailText}
 						headlineSize="large"
-						byline={primary.byline}
-						showByline={primary.showByline}
-						showQuotes={
-							primary.format.design === ArticleDesign.Comment ||
-							primary.format.design === ArticleDesign.Letter
-						}
-						webPublicationDate={primary.webPublicationDate}
-						kickerText={primary.kickerText}
-						showPulsingDot={
-							primary.format.design === ArticleDesign.LiveBlog
-						}
-						showSlash={true}
-						showClock={false}
-						imageUrl={primary.image}
 						imagePosition="right"
 						imagePositionOnMobile="top"
 						imageSize="large"
-						mediaType={primary.mediaType}
-						mediaDuration={primary.mediaDuration}
-						starRating={primary.starRating}
-						branding={primary.branding}
-						snapData={primary.snapData}
-						discussionId={primary.discussionId}
+						trailText={primary.trailText}
 					/>
 				</LI>
 				<LI padSides={true} showDivider={true} percentage="25%">
-					<Card
+					<FrontCard
+						trail={secondary}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						linkTo={secondary.url}
-						format={secondary.format}
-						headlineText={secondary.headline}
-						headlineSize="medium"
-						byline={secondary.byline}
-						showByline={secondary.showByline}
-						showQuotes={
-							secondary.format.design === ArticleDesign.Comment ||
-							secondary.format.design === ArticleDesign.Letter
-						}
-						webPublicationDate={secondary.webPublicationDate}
-						kickerText={secondary.kickerText}
-						showPulsingDot={
-							secondary.format.design === ArticleDesign.LiveBlog
-						}
-						showSlash={true}
-						showClock={false}
-						imageUrl={secondary.image}
-						mediaType={secondary.mediaType}
-						mediaDuration={secondary.mediaDuration}
-						starRating={secondary.starRating}
-						branding={secondary.branding}
-						snapData={secondary.snapData}
-						discussionId={secondary.discussionId}
 					/>
 				</LI>
 			</UL>
@@ -97,37 +52,11 @@ export const FixedLargeSlowXIV = ({
 							key={card.url}
 							padBottomOnMobile={cardIndex != 3}
 						>
-							<Card
+							<FrontCard
+								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								linkTo={card.url}
-								format={card.format}
-								headlineText={card.headline}
 								headlineSize="small"
-								imageUrl={card.image}
-								imagePosition="top"
-								byline={card.byline}
-								showByline={card.showByline}
-								showQuotes={
-									card.format.design ===
-										ArticleDesign.Comment ||
-									card.format.design === ArticleDesign.Letter
-								}
-								webPublicationDate={card.webPublicationDate}
-								kickerText={card.kickerText}
-								showPulsingDot={
-									card.format.design ===
-									ArticleDesign.LiveBlog
-								}
-								showSlash={true}
-								showClock={false}
-								mediaType={card.mediaType}
-								mediaDuration={card.mediaDuration}
-								starRating={card.starRating}
-								branding={card.branding}
-								discussionId={card.discussionId}
-								dataLinkName={card.dataLinkName}
-								snapData={card.snapData}
 							/>
 						</LI>
 					);
@@ -150,37 +79,12 @@ export const FixedLargeSlowXIV = ({
 							}
 							key={card.url}
 						>
-							<Card
+							<FrontCard
+								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								linkTo={card.url}
-								format={card.format}
-								headlineText={card.headline}
 								headlineSize="small"
 								imageUrl={undefined}
-								imagePosition="top"
-								byline={card.byline}
-								showByline={card.showByline}
-								showQuotes={
-									card.format.design ===
-										ArticleDesign.Comment ||
-									card.format.design === ArticleDesign.Letter
-								}
-								webPublicationDate={card.webPublicationDate}
-								kickerText={card.kickerText}
-								showPulsingDot={
-									card.format.design ===
-									ArticleDesign.LiveBlog
-								}
-								showSlash={true}
-								showClock={false}
-								mediaType={card.mediaType}
-								mediaDuration={card.mediaDuration}
-								starRating={card.starRating}
-								branding={card.branding}
-								discussionId={card.discussionId}
-								dataLinkName={card.dataLinkName}
-								snapData={card.snapData}
 							/>
 						</LI>
 					);

@@ -271,7 +271,7 @@ export const ImageComponent = ({
 					isLazy={!isMainMedia}
 					isMainMedia={isMainMedia}
 				/>
-				{title && (
+				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 			</div>
@@ -302,8 +302,10 @@ export const ImageComponent = ({
 					isLazy={!isMainMedia}
 					isMainMedia={isMainMedia}
 				/>
-				{starRating && <PositionStarRating rating={starRating} />}
-				{title && (
+				{typeof starRating === 'number' && (
+					<PositionStarRating rating={starRating} />
+				)}
+				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 			</div>
@@ -358,8 +360,10 @@ export const ImageComponent = ({
 						</Row>
 					</Hide>
 				)}
-				{starRating && <PositionStarRating rating={starRating} />}
-				{title && (
+				{typeof starRating === 'number' && (
+					<PositionStarRating rating={starRating} />
+				)}
+				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 			</div>
