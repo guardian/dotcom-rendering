@@ -1,10 +1,11 @@
 // ----- Imports ----- //
 
-import { ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
 import ImmersiveTags from './ImmersiveTags';
+import GalleryTags from './GalleryTags';
 import { defaultStyles, DefaultTags } from './Tags.defaults';
 
 // ----- Component ----- //
@@ -20,7 +21,14 @@ const Tags: FC<Props> = ({ item }) => {
 		return <ImmersiveTags item={item} />;
 	}
 
-	return <DefaultTags item={item} css={defaultStyles(getFormat(item))} />;
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return <GalleryTags item={item} />;
+		default:
+			return (
+				<DefaultTags item={item} css={defaultStyles(getFormat(item))} />
+			);
+	}
 };
 
 // ----- Exports ----- //
