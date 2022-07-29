@@ -8,13 +8,15 @@ const hrefLookup = {
 	googleTermsOfService: 'https://policies.google.com/terms',
 };
 
-type ExternalLinkProps = {
-	href: string;
-	children: React.ReactNode;
+type Props = {
+	/** Bool for toggling between two variations for privacy wording
+	 * Default is true as legacy represents the existing one */
+	legacy?: boolean;
 };
 
+type ExternalLinkProps = { href: string; children: React.ReactNode };
 /** Link component fixed with data-ignore and rel attributes for consistency in this file only */
-const ExternalLink = ({ href, children }: ExternalLinkProps) => (
+const ExternalLink: React.FC<ExternalLinkProps> = ({ href, children }) => (
 	<Link
 		data-ignore="global-link-styling"
 		href={href}
@@ -49,7 +51,7 @@ const legacyTermsStyle = css`
 	}
 `;
 
-export const NewsletterPrivacyMessage = ({ legacy = true }) =>
+export const NewsletterPrivacyMessage: React.FC<Props> = ({ legacy = true }) =>
 	legacy ? (
 		<span css={legacyTermsStyle}>
 			<strong>Privacy Notice: </strong>

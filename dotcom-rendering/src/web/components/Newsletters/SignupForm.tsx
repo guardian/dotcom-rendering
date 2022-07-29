@@ -2,6 +2,8 @@ import { css } from '@emotion/react';
 import { neutral, space } from '@guardian/source-foundations';
 import { Button, Label, TextInput } from '@guardian/source-react-components';
 
+type Props = { newsletterId: string };
+
 const flexParentStyles = css`
 	display: flex;
 	flex-direction: row;
@@ -26,14 +28,12 @@ const buttonCssOverrides = css`
 	margin-top: ${space[2]}px;
 `;
 
-type SignupFormProps = { newsletterId: string };
-
 /**
  * This component sets the styles for the form component of SecureSignup
  * It should NOT be used as a standalone component and is only represented as a
  * separate component here for storybook mocking ability & better readability
  */
-export const SignupForm: React.FC<SignupFormProps> = ({ newsletterId }) => (
+export const SignupForm: React.FC<Props> = ({ newsletterId }) => (
 	<form id={`secure-signup-${newsletterId}`}>
 		<Label text="Enter your email address" />
 

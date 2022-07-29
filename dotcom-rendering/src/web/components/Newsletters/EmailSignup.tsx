@@ -22,9 +22,15 @@ const containerStyles = css`
 	border-radius: 12px;
 	margin-bottom: ${space[3]}px;
 	padding: ${space[2]}px;
+	div:last-child {
+		margin-top: ${space[2]}px;
+	}
 
 	${from.tablet} {
 		padding: ${space[2]}px ${space[3]}px;
+		div:last-child {
+			margin-top: 0;
+		}
 	}
 `;
 
@@ -52,7 +58,10 @@ const descriptionStyles = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-export const EmailSignup = ({ newsletter, hidePrivacyMessage }: Props) => {
+export const EmailSignup: React.FC<Props> = ({
+	newsletter,
+	hidePrivacyMessage,
+}) => {
 	const {
 		identityName,
 		name,

@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
 import {
 	brandAltBackground,
-	from,
 	space,
 	textSans,
-	until,
 } from '@guardian/source-foundations';
 import { SvgEnvelope } from '@guardian/source-react-components';
 
@@ -15,13 +13,6 @@ type Props = {
 const containerStyle = css`
 	display: flex;
 	align-items: center;
-	margin-top: ${space[2]}px;
-	${until.desktop} {
-		margin-bottom: ${space[2]}px;
-	}
-	/* ${from.tablet} {
-		margin-top: 0;
-	} */
 
 	svg {
 		background-color: ${brandAltBackground.primary};
@@ -35,7 +26,7 @@ const spanStyle = css`
 	${textSans.medium({ fontWeight: 'bold' })};
 `;
 
-export const NewsletterDetail = ({ text }: Props) => (
+export const NewsletterDetail: React.FC<Props> = ({ text }) => (
 	<div css={containerStyle}>
 		{/** TODO: Replace with SvgNewsletter when available */}
 		<SvgEnvelope size="small" />

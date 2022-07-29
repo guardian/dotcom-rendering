@@ -61,11 +61,11 @@ const generateForm = (
 	return { html, styles };
 };
 
-export const SecureSignup = ({
+export const SecureSignup: React.FC<Props> = ({
 	newsletterId,
 	successDescription,
 	hidePrivacyMessage = false,
-}: Props) => {
+}) => {
 	const { html, styles } = generateForm(newsletterId);
 
 	return (
