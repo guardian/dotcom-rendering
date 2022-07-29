@@ -58,6 +58,10 @@ const brandingLogoStyle = css`
 	padding: 10px 0;
 
 	display: block;
+
+	& img {
+		display: block;
+	}
 `;
 
 /**
