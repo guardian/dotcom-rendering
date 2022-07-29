@@ -13,13 +13,17 @@ import {
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
 import { ContainerLayout } from '../ContainerLayout';
-import { NewsletterCategory } from './NewsletterCategory';
+import { NewsletterDetail } from './NewsletterDetail';
 
-type NewsletterPromotedBlockProps = Pick<
-	Newsletter,
-	'name' | 'description' | 'frequency'
-> & {
-	signupPage?: string;
+// TODO: Change this when we decide how to get this data through
+const MAIN_MEDIA =
+	'https://i.guim.co.uk/img/uploads/2022/01/11/pushing_buttons_thrasher_hi.png?width=700&quality=50&s=f4be90f0ca470076df70cf895aeecda1';
+
+type Props = {
+	newsletter: Newsletter & {
+		mainMedia?: string; // just optional for now - see MAIN_MEDIA
+		signupPage: string;
+	};
 };
 
 const headingStyle = css`
@@ -70,12 +74,9 @@ const newsletterFrequency = css`
 	/* padding: 8px; */
 `;
 
-export const SecondaryPromotedNewsletter = ({
-	name,
-	description,
-	frequency,
-	signupPage,
-}: NewsletterPromotedBlockProps) => (
+export const SecondaryPromotedNewsletter: React.FC<Props> = ({
+	newsletter,
+}) => (
 	<ContainerLayout
 		innerBackgroundColour={brandBackground.primary}
 		leftContent={
@@ -91,7 +92,7 @@ export const SecondaryPromotedNewsletter = ({
 			{/* <Columns> */}
 			{/* <Column> */}
 			<div css={newsletterImage}>
-				<img src="https://i.guim.co.uk/img/uploads/2022/01/11/pushing_buttons_thrasher_hi.png?width=700&quality=50&s=f4be90f0ca470076df70cf895aeecda1"></img>
+				<img src={MAIN_MEDIA} />
 			</div>
 			{/* </Column> */}
 
@@ -103,7 +104,7 @@ export const SecondaryPromotedNewsletter = ({
 						margin-bottom: 4px;
 					`}
 				>
-					{name}
+					{newsletter.name}
 				</h2>
 				<p
 					css={css`
@@ -111,7 +112,7 @@ export const SecondaryPromotedNewsletter = ({
 						margin-bottom: 4px;
 					`}
 				>
-					{description}
+					{newsletter.description}
 				</p>
 			</div>
 			{/* </Column> */}
@@ -122,14 +123,14 @@ export const SecondaryPromotedNewsletter = ({
 					iconSide="right"
 					priority="secondary"
 					size="small"
-					href={signupPage}
+					href={newsletter.signupPage}
 				>
 					Sign up
 				</LinkButton>
 			</div>
 
 			<div css={newsletterFrequency}>
-				<NewsletterCategory text={frequency} />
+				<NewsletterDetail text={newsletter.frequency} />
 			</div>
 		</div>
 		{/* </Columns> */}

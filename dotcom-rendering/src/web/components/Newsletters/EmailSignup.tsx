@@ -7,12 +7,14 @@ import {
 	sport,
 	textSans,
 } from '@guardian/source-foundations';
-import { NewsletterFrequency } from './NewsletterFrequency';
+import { NewsletterDetail } from './NewsletterDetail';
 import { SecureSignup } from './SecureSignup';
 
 type Props = {
 	newsletter: Newsletter;
 	elementId: string;
+	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
+	hidePrivacyMessage?: boolean;
 };
 
 const containerStyles = css`
@@ -50,7 +52,7 @@ const descriptionStyles = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-export const EmailSignup = ({ newsletter }: Props) => {
+export const EmailSignup = ({ newsletter, hidePrivacyMessage }: Props) => {
 	const {
 		identityName,
 		name,
@@ -66,12 +68,13 @@ export const EmailSignup = ({ newsletter }: Props) => {
 				<p css={titleStyles(theme)}>
 					Sign up to <span>{name}</span> today
 				</p>
-				<NewsletterFrequency frequency={frequency} />
+				<NewsletterDetail text={frequency} />
 			</div>
 			<p css={descriptionStyles}>{description}</p>
 			<SecureSignup
 				newsletterId={identityName}
 				successDescription={successDescription}
+				hidePrivacyMessage={hidePrivacyMessage}
 			/>
 		</aside>
 	);

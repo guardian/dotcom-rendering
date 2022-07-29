@@ -21,7 +21,7 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
-import { ArticleBody } from '../components/ArticleBody';
+// import { ArticleBody } from '../components/ArticleBody';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
 import { ContainerLayout } from '../components/ContainerLayout';
@@ -33,7 +33,9 @@ import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Nav } from '../components/Nav/Nav';
 import { NewsletterBadge } from '../components/Newsletters/NewsletterBadge';
-import { NewsletterCategory } from '../components/Newsletters/NewsletterCategory';
+import { NewsletterDetail } from '../components/Newsletters/NewsletterDetail';
+import { NewsletterFrequency } from '../components/Newsletters/NewsletterFrequency';
+import { NewsletterPrivacyMessage } from '../components/Newsletters/NewsletterPrivacyMessage';
 import { SecondaryPromotedNewsletter } from '../components/Newsletters/SecondaryPromotedNewsletter';
 import { SecureSignup } from '../components/Newsletters/SecureSignup';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
@@ -147,6 +149,10 @@ const guardianLogoContainerStyle = css`
 	}
 `;
 
+const topMarginStyle = css`
+	margin-top: ${space[2]}px;
+`;
+
 const shareSpanStyle = css`
 	${textSans.medium({
 		fontWeight: 'bold',
@@ -157,6 +163,7 @@ const shareSpanStyle = css`
 const shareDivStyle = css`
 	display: flex;
 	align-items: center;
+	margin-top: ${space[3]}px;
 `;
 
 /** TODO: undecided where this data will come from yet.. Island? */
@@ -165,6 +172,14 @@ const altPromotedNewsletter = {
 	description:
 		'Start the day one step ahead. Our email breaks down the key stories of the day and why they matter.',
 	frequency: 'Weekly',
+	mainMedia:
+		'https://i.guim.co.uk/img/uploads/2022/01/11/pushing_buttons_thrasher_hi.png?width=700&quality=50&s=f4be90f0ca470076df70cf895aeecda1',
+	signupPage: 'https://www.google.com',
+	listId: 1234,
+	identityName: 'Pushing buttons',
+	successDescription: 'nice 1',
+	theme: 'culture',
+	group: 'culture',
 };
 
 export const NewsletterSignupLayout = ({
@@ -327,14 +342,12 @@ export const NewsletterSignupLayout = ({
 					centralBorder="full"
 					sideBorders={true}
 					stretchRight={true}
-					leftContent={
-						<NewsletterCategory text={newsletterCategory} />
-					}
+					leftContent={<NewsletterDetail text={newsletterCategory} />}
 				>
 					<Columns collapseUntil="desktop">
 						<Column width={[1, 1, 5 / 8, 1 / 2, 1 / 2]}>
 							<Hide from="leftCol">
-								<NewsletterCategory text={newsletterCategory} />
+								<NewsletterDetail text={newsletterCategory} />
 							</Hide>
 							<ArticleHeadline
 								format={format}
@@ -349,10 +362,6 @@ export const NewsletterSignupLayout = ({
 							<Standfirst
 								format={format}
 								standfirst={CAPIArticle.standfirst}
-							/>
-							<SecureSignup
-								newsletterId="1234"
-								successDescription="nice"
 							/>
 
 							{/* TODO:
@@ -374,34 +383,13 @@ export const NewsletterSignupLayout = ({
 								</div>
 							)}
 
-							<ArticleBody
-								format={format}
-								blocks={CAPIArticle.blocks}
-								adTargeting={adTargeting}
-								host={host}
-								pageId={CAPIArticle.pageId}
-								webTitle={CAPIArticle.webTitle}
-								ajaxUrl={CAPIArticle.config.ajaxUrl}
-								switches={CAPIArticle.config.switches}
-								isSensitive={CAPIArticle.config.isSensitive}
-								isAdFreeUser={CAPIArticle.isAdFreeUser}
-								section={CAPIArticle.config.section}
-								shouldHideReaderRevenue={
-									CAPIArticle.shouldHideReaderRevenue
-								}
-								tags={CAPIArticle.tags}
-								isPaidContent={
-									!!CAPIArticle.config.isPaidContent
-								}
-								contributionsServiceUrl={
-									contributionsServiceUrl
-								}
-								contentType={CAPIArticle.contentType}
-								sectionName={CAPIArticle.sectionName || ''}
-								isPreview={CAPIArticle.config.isPreview}
-								idUrl={CAPIArticle.config.idUrl || ''}
-								isDev={!!CAPIArticle.config.isDev}
+							<SecureSignup
+								newsletterId="1234"
+								successDescription="nice"
+								hidePrivacyMessage={true}
 							/>
+
+							<NewsletterFrequency frequency="Weekly" />
 
 							<div css={shareDivStyle}>
 								<span css={shareSpanStyle}>
@@ -458,9 +446,15 @@ export const NewsletterSignupLayout = ({
 							</div>
 						</Column>
 					</Columns>
+
+					<div css={topMarginStyle}>
+						<NewsletterPrivacyMessage legacy={false} />
+					</div>
 				</ContainerLayout>
 
-				<SecondaryPromotedNewsletter {...altPromotedNewsletter} />
+				<SecondaryPromotedNewsletter
+					newsletter={altPromotedNewsletter}
+				/>
 
 				{CAPIArticle.storyPackage && (
 					<ElementContainer>

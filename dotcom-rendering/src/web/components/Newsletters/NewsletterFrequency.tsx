@@ -1,11 +1,6 @@
 import { css } from '@emotion/react';
-import {
-	brandAltBackground,
-	from,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
-import { SvgEnvelope } from '@guardian/source-react-components';
+import { space, textSans } from '@guardian/source-foundations';
+import { SvgClock } from '@guardian/source-react-components';
 
 type Props = {
 	frequency: string;
@@ -13,33 +8,28 @@ type Props = {
 
 const mainStyles = css`
 	display: flex;
-	margin-top: ${space[2]}px;
-	${from.tablet} {
-		margin-top: 0;
-	}
+	margin-top: ${space[1]}px;
 `;
-const iconStyles = css`
-	height: 28px;
-	svg {
-		background: ${brandAltBackground.primary};
-		border-radius: 50%;
-		height: 100%;
-		padding: 2px;
-		margin-right: ${space[1]}px;
+
+const spanStyles = css`
+	margin-left: ${space[1]}px;
+	${textSans.xsmall()}
+	strong {
+		${textSans.xsmall({ fontWeight: 'bold' })}
 	}
 `;
 
-const frequencyStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })}
-`;
+export const NewsletterFrequency: React.FC<Props> = ({ frequency }) => {
+	// SIGNPOST: This may need to be updated depending on possible values of `frequency`
+	const freq = frequency.toLowerCase();
 
-export const NewsletterFrequency = ({ frequency }: Props) => {
 	return (
 		<div css={mainStyles}>
-			<div css={iconStyles}>
-				<SvgEnvelope />
-			</div>
-			<div css={frequencyStyles}>{frequency}</div>
+			<SvgClock size="xsmall" />
+
+			<span css={spanStyles}>
+				You'll receive this newsletter <strong>{freq}</strong>
+			</span>
 		</div>
 	);
 };
