@@ -2,14 +2,14 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
 import type { FC } from 'react';
-import DefaultFooter, { defaultStyles } from './Footer.defaults';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
 import { darkModeCss } from 'styles';
+import DefaultFooter, { defaultStyles } from './Footer.defaults';
 
 // ----- Component ----- //
 

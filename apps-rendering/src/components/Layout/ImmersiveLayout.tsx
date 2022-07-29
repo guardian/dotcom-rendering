@@ -1,8 +1,12 @@
 // ----- Imports ----- //
 
-import { css, SerializedStyles } from '@emotion/react';
-import { background, fill } from '@guardian/common-rendering/src/editorialPalette';
-import { ArticleFormat } from '@guardian/libs';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import {
+	background,
+	fill,
+} from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
 import { between, from, remSpace } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import Footer from 'components/Footer';
@@ -80,10 +84,7 @@ const ImmersiveLayout: FC<Props> = ({ item, children }) => {
 			<main>
 				<article>
 					<header css={headerStyles(format)}>
-						<MainMedia
-							mainMedia={item.mainMedia}
-							format={format}
-						/>
+						<MainMedia mainMedia={item.mainMedia} format={format} />
 						<Series item={item} />
 						<Headline item={item} />
 						<Standfirst item={item} />

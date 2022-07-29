@@ -1,13 +1,13 @@
 // ----- Imports ----- //
 
-import { css, SerializedStyles } from '@emotion/react';
-import { background, text } from '@guardian/common-rendering/src/editorialPalette';
-import type { ArticleFormat } from '@guardian/libs';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import {
-	from,
-	headline,
-	remSpace,
-} from '@guardian/source-foundations';
+	background,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
+import { from, headline, remSpace } from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
 import { darkModeCss } from 'styles';
 

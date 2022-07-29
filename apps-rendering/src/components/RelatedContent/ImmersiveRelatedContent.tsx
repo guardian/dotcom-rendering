@@ -1,8 +1,9 @@
 // ----- Imports ----- //
 
-import { css, SerializedStyles } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
-import { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, until } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { grid } from 'grid/grid';
