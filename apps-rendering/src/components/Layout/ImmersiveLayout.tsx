@@ -3,6 +3,7 @@
 import { css } from '@emotion/react';
 import { between, from, remSpace } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import MainMedia, { ImmersiveCaption } from 'components/MainMedia';
 import Metadata from 'components/Metadata';
@@ -84,8 +85,7 @@ const ImmersiveLayout: FC<Props> = ({ item, children }) => (
 			</article>
 		</main>
 		<RelatedContent item={item} />
-		<aside>Comments</aside>
-		<footer>Footer</footer>
+		<Footer isCcpa={false} format={getFormat(item)} />
 	</>
 );
 
