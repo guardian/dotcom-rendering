@@ -4,8 +4,8 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { from, neutral } from '@guardian/source-foundations';
 import type { FC } from 'react';
-import { grid } from './grid';
 import { darkModeCss } from 'styles';
+import { grid } from './grid';
 
 // ----- Component ----- //
 
