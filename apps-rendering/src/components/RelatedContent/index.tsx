@@ -19,7 +19,12 @@ const RelatedContent: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 
 	if (format.display === ArticleDisplay.Immersive) {
-		return <ImmersiveRelatedContent content={item.relatedContent} />;
+		return (
+			<ImmersiveRelatedContent
+				content={item.relatedContent}
+				format={format}
+			/>
+		);
 	}
 
 	return (

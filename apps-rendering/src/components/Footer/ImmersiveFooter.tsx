@@ -3,17 +3,23 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, neutral } from '@guardian/source-foundations';
+import { from } from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
 import type { FC } from 'react';
 import DefaultFooter, { defaultStyles } from './Footer.defaults';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
-const styles: SerializedStyles = css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.container}
-	background-color: ${neutral[97]};
+	background-color: ${background.footer(format)};
+
+	${darkModeCss`
+		background-color: ${background.footerDark(format)};
+	`}
 `;
 
 const footerStyles: SerializedStyles = css`
@@ -33,7 +39,7 @@ interface Props {
 }
 
 const ImmersiveFooter: FC<Props> = ({ format, isCcpa }) => (
-	<div css={styles}>
+	<div css={styles(format)}>
 		<LeftCentreBorder rows={[1, 2]} />
 		<DefaultFooter
 			css={css(defaultStyles(format), footerStyles)}

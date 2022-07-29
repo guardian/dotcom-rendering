@@ -1,21 +1,28 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
+import { ArticleFormat } from '@guardian/libs';
 import { from, neutral, until } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
 import type { ResizedRelatedContent } from 'item';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 import DefaultRelatedContent, {
 	defaultStyles,
 } from './RelatedContent.defaults';
 
 // ----- Component ----- //
 
-const styles = css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.container}
-	background-color: ${neutral[97]};
+	background-color: ${background.onwardContent(format)};
+
+	${darkModeCss`
+		background-color: ${background.onwardContentDark(format)};
+	`}
 `;
 
 const hrStyles = css`
@@ -44,10 +51,11 @@ const relatedContentStyles = css`
 
 type Props = {
 	content: Option<ResizedRelatedContent>;
+	format: ArticleFormat;
 };
 
-const ImmersiveRelatedContent: FC<Props> = ({ content }) => (
-	<aside css={styles}>
+const ImmersiveRelatedContent: FC<Props> = ({ content, format }) => (
+	<aside css={styles(format)}>
 		<hr css={hrStyles} />
 		<DefaultRelatedContent
 			content={content}
