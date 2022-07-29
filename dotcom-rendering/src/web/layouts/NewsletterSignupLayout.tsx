@@ -21,7 +21,6 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
-// import { ArticleBody } from '../components/ArticleBody';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
 import { ContainerLayout } from '../components/ContainerLayout';
@@ -36,7 +35,6 @@ import { NewsletterBadge } from '../components/Newsletters/NewsletterBadge';
 import { NewsletterDetail } from '../components/Newsletters/NewsletterDetail';
 import { NewsletterFrequency } from '../components/Newsletters/NewsletterFrequency';
 import { NewsletterPrivacyMessage } from '../components/Newsletters/NewsletterPrivacyMessage';
-import { SecondaryPromotedNewsletter } from '../components/Newsletters/SecondaryPromotedNewsletter';
 import { SecureSignup } from '../components/Newsletters/SecureSignup';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { ShareIcons } from '../components/ShareIcons';
@@ -165,22 +163,6 @@ const shareDivStyle = css`
 	align-items: center;
 	margin-top: ${space[3]}px;
 `;
-
-/** TODO: undecided where this data will come from yet.. Island? */
-const altPromotedNewsletter = {
-	name: 'Pushing Buttons',
-	description:
-		'Start the day one step ahead. Our email breaks down the key stories of the day and why they matter.',
-	frequency: 'Weekly',
-	mainMedia:
-		'https://i.guim.co.uk/img/uploads/2022/01/11/pushing_buttons_thrasher_hi.png?width=700&quality=50&s=f4be90f0ca470076df70cf895aeecda1',
-	signupPage: 'https://www.google.com',
-	listId: 1234,
-	identityName: 'Pushing buttons',
-	successDescription: 'nice 1',
-	theme: 'culture',
-	group: 'culture',
-};
 
 export const NewsletterSignupLayout = ({
 	CAPIArticle,
@@ -451,10 +433,6 @@ export const NewsletterSignupLayout = ({
 						<NewsletterPrivacyMessage legacy={false} />
 					</div>
 				</ContainerLayout>
-
-				<SecondaryPromotedNewsletter
-					newsletter={altPromotedNewsletter}
-				/>
 
 				{CAPIArticle.storyPackage && (
 					<ElementContainer>
