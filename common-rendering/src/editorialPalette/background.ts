@@ -108,11 +108,11 @@ const headlineDark = (format: ArticleFormat): Colour => {
 
 const richLink = (_format: ArticleFormat): Colour => {
 	return neutral[97];
-}
+};
 
 const richLinkDark = (_format: ArticleFormat): Colour => {
 	return neutral[20];
-}
+};
 
 const richLinkSvg = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
@@ -374,7 +374,6 @@ const headlineTag = (format: ArticleFormat): Colour => {
 };
 
 const relatedCard = (format: ArticleFormat): Colour => {
-
 	if (format.theme === ArticleSpecial.Labs) {
 		return neutral[93];
 	}
@@ -506,7 +505,7 @@ const series = (format: ArticleFormat): Colour => {
 	}
 
 	return neutral[100];
-}
+};
 
 const seriesDark = (format: ArticleFormat): Colour => {
 	if (format.display === ArticleDisplay.Immersive) {
@@ -530,7 +529,7 @@ const seriesDark = (format: ArticleFormat): Colour => {
 	}
 
 	return neutral[10];
-}
+};
 
 const tag = (format: ArticleFormat): Colour => {
 	switch (format.design) {
@@ -543,9 +542,28 @@ const tag = (format: ArticleFormat): Colour => {
 		default:
 			return neutral[97];
 	}
-}
+};
 
 const tagDark = (_format: ArticleFormat): Colour => neutral[20];
+
+const pinnedPost = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[300];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+	}
+};
 
 // ----- API ----- //
 
@@ -585,6 +603,7 @@ const background = {
 	supportBannerDark,
 	tag,
 	tagDark,
+	pinnedPost,
 };
 
 // ----- Exports ----- //
