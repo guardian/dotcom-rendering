@@ -38,6 +38,7 @@ import { NewsletterBadge } from '../components/Newsletters/NewsletterBadge';
 import { NewsletterDetail } from '../components/Newsletters/NewsletterDetail';
 import { NewsletterFrequency } from '../components/Newsletters/NewsletterFrequency';
 import { NewsletterPrivacyMessage } from '../components/Newsletters/NewsletterPrivacyMessage';
+import { SecondaryPromotedNewsletter } from '../components/Newsletters/SecondaryPromotedNewsletter';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { SecureSignup } from '../components/SecureSignup';
 import { ShareIcons } from '../components/ShareIcons';
@@ -178,6 +179,21 @@ const getMainMediaCaptions = (
 			? el.data.caption
 			: undefined,
 	);
+
+const altPromotedNewsletter = {
+	name: 'Pushing Buttons',
+	description:
+		'Start the day one step ahead. Our email breaks down the key stories of the day and why they matter.',
+	frequency: 'Weekly',
+	mainMedia:
+		'https://i.guim.co.uk/img/uploads/2022/01/11/pushing_buttons_thrasher_hi.png?width=700&quality=50&s=f4be90f0ca470076df70cf895aeecda1',
+	signupPage: 'https://www.google.com',
+	listId: 1234,
+	identityName: 'Pushing buttons',
+	successDescription: 'nice 1',
+	theme: 'culture',
+	group: 'culture',
+};
 
 export const NewsletterSignupLayout: React.FC<Props> = ({
 	CAPIArticle,
@@ -451,6 +467,10 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 						<NewsletterPrivacyMessage legacy={false} />
 					</div>
 				</ContainerLayout>
+
+				<SecondaryPromotedNewsletter
+					newsletter={altPromotedNewsletter}
+				/>
 
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
