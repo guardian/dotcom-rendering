@@ -327,11 +327,7 @@ export const ArticleMeta = ({
 			<div css={meta(format)}>
 				{branding && (
 					<Island deferUntil="visible">
-						<Branding
-							branding={branding}
-							palette={palette}
-							format={format}
-						/>
+						<Branding branding={branding} palette={palette} />
 					</Island>
 				)}
 				{format.theme === ArticleSpecial.Labs ? (
