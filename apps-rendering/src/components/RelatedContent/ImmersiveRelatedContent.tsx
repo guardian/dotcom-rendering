@@ -15,6 +15,7 @@ import DefaultRelatedContent, {
 
 const styles = css`
 	${grid.container}
+	background-color: ${neutral[97]};
 `;
 
 const hrStyles = css`
