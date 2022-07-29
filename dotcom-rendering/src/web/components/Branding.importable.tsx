@@ -110,6 +110,51 @@ const brandingAboutLink = (palette: Palette, format: ArticleFormat) => {
 	}
 };
 
+function decideLogo(branding: Branding, format: ArticleFormat) {
+	switch (format.design) {
+		case ArticleDesign.LiveBlog: {
+			/**
+			 * For LiveBlogs, the background colour of the 'meta' section is light
+			 * on desktop but dark on mobile. If the logo has a version designed for
+			 * dark backgrounds, it should be shown on breakpoints below desktop.
+			 */
+			return (
+				<>
+					<Hide when="above" breakpoint="desktop" el="span">
+						<img
+							width={branding.logo.dimensions.width}
+							height={branding.logo.dimensions.height}
+							src={
+								branding.logoForDarkBackground?.src ??
+								branding.logo.src
+							}
+							alt={branding.sponsorName}
+						/>
+					</Hide>
+					<Hide when="below" breakpoint="desktop" el="span">
+						<img
+							width={branding.logo.dimensions.width}
+							height={branding.logo.dimensions.height}
+							src={branding.logo.src}
+							alt={branding.sponsorName}
+						/>
+					</Hide>
+				</>
+			);
+		}
+		default: {
+			return (
+				<img
+					width={branding.logo.dimensions.width}
+					height={branding.logo.dimensions.height}
+					src={branding.logo.src}
+					alt={branding.sponsorName}
+				/>
+			);
+		}
+	}
+}
+
 type Props = {
 	branding: Branding;
 	palette: Palette;
@@ -133,25 +178,7 @@ export const Branding = ({ branding, palette, format }: Props) => {
 					onClick={() => trackSponsorLogoLinkClick(sponsorId)}
 					data-cy="branding-logo"
 				>
-					<Hide when="above" breakpoint="desktop" el="span">
-						<img
-							width={branding.logo.dimensions.width}
-							height={branding.logo.dimensions.height}
-							src={
-								branding.logoForDarkBackground?.src ??
-								branding.logo.src
-							}
-							alt={branding.sponsorName}
-						/>
-					</Hide>
-					<Hide when="below" breakpoint="desktop" el="span">
-						<img
-							width={branding.logo.dimensions.width}
-							height={branding.logo.dimensions.height}
-							src={branding.logo.src}
-							alt={branding.sponsorName}
-						/>
-					</Hide>
+					{decideLogo(branding, format)}
 				</a>
 			</div>
 
