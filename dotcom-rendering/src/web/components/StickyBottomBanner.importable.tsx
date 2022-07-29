@@ -147,6 +147,9 @@ const buildRRBannerConfigWith = ({
 						subscriptionBannerLastClosedAt: getBannerLastClosedAt(
 							'subscriptionBannerLastClosedAt',
 						),
+						signInBannerLastClosedAt: getBannerLastClosedAt(
+							'signInBannerLastClosedAt',
+						),
 						section,
 						isPreview,
 						idApiUrl,
