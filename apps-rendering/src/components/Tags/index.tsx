@@ -4,8 +4,8 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
-import ImmersiveTags from './ImmersiveTags';
 import GalleryTags from './GalleryTags';
+import ImmersiveTags from './ImmersiveTags';
 import { defaultStyles, DefaultTags } from './Tags.defaults';
 
 // ----- Component ----- //

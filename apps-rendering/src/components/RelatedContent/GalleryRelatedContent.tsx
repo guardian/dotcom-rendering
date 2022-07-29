@@ -2,7 +2,8 @@
 
 import { css } from '@emotion/react';
 import { from, neutral, remSpace, until } from '@guardian/source-foundations';
-import { map, none, Option, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { map, none, withDefault } from '@guardian/types';
 import BylineCard from 'components/BylineCard';
 import Card from 'components/Card';
 import { grid } from 'grid/grid';
@@ -10,9 +11,9 @@ import type { ResizedRelatedContent } from 'item';
 import { pipe } from 'lib';
 import type { FC } from 'react';
 import {
+	COMMENT,
 	defaultHeadingStyles,
 	defaultListStyles,
-	COMMENT,
 } from './RelatedContent.defaults';
 
 // ----- Component ----- //

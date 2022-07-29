@@ -4,8 +4,8 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
-import ImmersiveRelatedContent from './ImmersiveRelatedContent';
 import GalleryRelatedContent from './GalleryRelatedContent';
+import ImmersiveRelatedContent from './ImmersiveRelatedContent';
 import DefaultRelatedContent, {
 	defaultStyles,
 } from './RelatedContent.defaults';
