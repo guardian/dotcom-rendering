@@ -39,13 +39,13 @@ const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 	}
 
 	${darkModeCss`
-        color: ${neutral[60]};
+		color: ${neutral[60]};
 		background-color: ${background.articleContentDark(format)};
 
-        a {
-            color: ${neutral[60]};
-        }
-    `}
+		a {
+			color: ${neutral[60]};
+		}
+	`}
 `;
 
 interface Props {
