@@ -14,6 +14,7 @@ import type { ArticleCounts } from '../../../lib/article-count';
 import { trackNonClickInteraction } from '../../browser/ga/ga';
 import { submitComponentEvent } from '../../browser/ophan/ophan';
 import {
+	getPurchaseInfo,
 	hasCmpConsentForBrowserId,
 	hasOptedOutOfArticleCount,
 	lazyFetchEmailWithTimeout,
@@ -42,6 +43,7 @@ type BaseProps = {
 	alreadyVisitedCount: number;
 	engagementBannerLastClosedAt?: string;
 	subscriptionBannerLastClosedAt?: string;
+	signInBannerLastClosedAt?: string;
 };
 
 type BuildPayloadProps = BaseProps & {
@@ -89,6 +91,7 @@ const buildPayload = async ({
 	alreadyVisitedCount,
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
+	signInBannerLastClosedAt,
 	countryCode,
 	optedOutOfArticleCount,
 	asyncArticleCounts,
@@ -116,6 +119,7 @@ const buildPayload = async ({
 			showSupportMessaging: !shouldHideSupportMessaging(isSignedIn),
 			engagementBannerLastClosedAt,
 			subscriptionBannerLastClosedAt,
+			signInBannerLastClosedAt,
 			mvtId: Number(
 				getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 			),
@@ -130,6 +134,8 @@ const buildPayload = async ({
 			browserId: (await hasCmpConsentForBrowserId())
 				? browserId || undefined
 				: undefined,
+			purchaseInfo: getPurchaseInfo(),
+			isSignedIn,
 		},
 	};
 };
@@ -149,6 +155,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	alreadyVisitedCount,
 	engagementBannerLastClosedAt,
 	subscriptionBannerLastClosedAt,
+	signInBannerLastClosedAt,
 	isPreview,
 	idApiUrl,
 	signInGateWillShow,
@@ -166,7 +173,12 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		return { show: false };
 	}
 
+	const purchaseInfo = getPurchaseInfo();
+	const showSignInPrompt =
+		purchaseInfo && !isSignedIn && !signInBannerLastClosedAt;
+
 	if (
+		!showSignInPrompt &&
 		engagementBannerLastClosedAt &&
 		subscriptionBannerLastClosedAt &&
 		withinLocalNoBannerCachePeriod()
@@ -190,6 +202,7 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 		alreadyVisitedCount,
 		engagementBannerLastClosedAt,
 		subscriptionBannerLastClosedAt,
+		signInBannerLastClosedAt,
 		optedOutOfArticleCount,
 		asyncArticleCounts,
 	});
