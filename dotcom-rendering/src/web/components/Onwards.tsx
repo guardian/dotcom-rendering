@@ -1,8 +1,8 @@
 import { decideTrail } from '../lib/decideTrail';
 import { Carousel } from './Carousel.importable';
 import { ElementContainer } from './ElementContainer';
+import { FetchOnwardsData } from './FetchOnwardsData.importable';
 import { Island } from './Island';
-import { OnwardsData } from './OnwardsData.importable';
 
 export const Onwards = ({
 	onwards,
@@ -36,7 +36,7 @@ export const Onwards = ({
 							deferUntil="visible"
 							placeholderHeight={600}
 						>
-							<OnwardsData
+							<FetchOnwardsData
 								url={url}
 								limit={8}
 								onwardsType={onwardsType}
