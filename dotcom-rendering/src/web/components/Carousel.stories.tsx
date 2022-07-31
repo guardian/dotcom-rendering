@@ -185,7 +185,7 @@ export const Headlines = () => (
 			<Carousel
 				heading="More on this story"
 				trails={trails}
-				onwardsType="curated-content"
+				onwardsType="more-on-this-story"
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
@@ -216,7 +216,7 @@ export const SingleItemCarousel = () => (
 			<Carousel
 				heading="More on this story"
 				trails={trails.slice(1, 2)}
-				onwardsType="curated-content"
+				onwardsType="more-on-this-story"
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
@@ -235,7 +235,7 @@ export const Immersive = () => (
 			<Carousel
 				heading="More on this story"
 				trails={immersiveTrails}
-				onwardsType="curated-content"
+				onwardsType="more-on-this-story"
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
