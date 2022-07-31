@@ -792,7 +792,6 @@ type CAPIOnwardsType = {
 	url?: string;
 	onwardsType: OnwardsType;
 	format: CAPIFormat;
-	isCuratedContent?: boolean;
 };
 
 type OnwardsType =
