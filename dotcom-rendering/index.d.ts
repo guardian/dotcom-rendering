@@ -599,6 +599,7 @@ interface CAPIArticleType {
 		trails: CAPITrailType[];
 		heading: string;
 	};
+	onwards?: CAPIOnwardsType[];
 	beaconURL: string;
 	isCommentable: boolean;
 	commercialProperties: CommercialProperties;

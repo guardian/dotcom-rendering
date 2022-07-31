@@ -25,7 +25,6 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
-import { Carousel } from '../components/Carousel.importable';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -46,7 +45,7 @@ import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
-import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { Onwards } from '../components/Onwards';
 import { RightColumn } from '../components/RightColumn';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
@@ -56,7 +55,6 @@ import { SubNav } from '../components/SubNav.importable';
 import { TopicFilterBank } from '../components/TopicFilterBank.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
-import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
@@ -1232,47 +1230,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					</ElementContainer>
 
-					{CAPIArticle.storyPackage && (
-						<ElementContainer>
-							<Island deferUntil="visible">
-								<Carousel
-									heading={CAPIArticle.storyPackage.heading}
-									trails={CAPIArticle.storyPackage.trails.map(
-										decideTrail,
-									)}
-									onwardsType="more-on-this-story"
-									format={format}
-								/>
-							</Island>
-						</ElementContainer>
-					)}
-
-					<Island
-						clientOnly={true}
-						deferUntil="visible"
-						placeholderHeight={600}
-					>
-						<OnwardsUpper
-							ajaxUrl={CAPIArticle.config.ajaxUrl}
-							hasRelated={CAPIArticle.hasRelated}
-							hasStoryPackage={CAPIArticle.hasStoryPackage}
-							isAdFreeUser={CAPIArticle.isAdFreeUser}
-							pageId={CAPIArticle.pageId}
-							isPaidContent={
-								CAPIArticle.config.isPaidContent || false
-							}
-							showRelatedContent={
-								CAPIArticle.config.showRelatedContent
-							}
-							keywordIds={CAPIArticle.config.keywordIds}
-							contentType={CAPIArticle.contentType}
-							tags={CAPIArticle.tags}
+					{CAPIArticle.onwards && (
+						<Onwards
+							onwards={CAPIArticle.onwards}
 							format={format}
-							pillar={format.theme}
-							editionId={CAPIArticle.editionId}
-							shortUrlId={CAPIArticle.config.shortUrlId}
 						/>
-					</Island>
+					)}
 
 					{!isPaidContent && CAPIArticle.isCommentable && (
 						<ElementContainer

@@ -23,7 +23,6 @@ import { buildAdTargeting } from '../../lib/ad-targeting';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleHeadline } from '../components/ArticleHeadline';
-import { Carousel } from '../components/Carousel.importable';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
@@ -34,13 +33,12 @@ import { MainMedia } from '../components/MainMedia';
 import { Nav } from '../components/Nav/Nav';
 import { NewsletterBadge } from '../components/NewsletterBadge';
 import { NewsletterCategory } from '../components/NewsletterCategory';
-import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { Onwards } from '../components/Onwards';
 import { ShareIcons } from '../components/ShareIcons';
 import { Standfirst } from '../components/Standfirst';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
-import { decideTrail } from '../lib/decideTrail';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -448,47 +446,9 @@ export const NewsletterSignupLayout = ({
 					</Columns>
 				</ContainerLayout>
 
-				{CAPIArticle.storyPackage && (
-					<ElementContainer>
-						<Island deferUntil="visible">
-							<Carousel
-								heading={CAPIArticle.storyPackage.heading}
-								trails={CAPIArticle.storyPackage.trails.map(
-									decideTrail,
-								)}
-								onwardsType="more-on-this-story"
-								format={format}
-							/>
-						</Island>
-					</ElementContainer>
+				{CAPIArticle.onwards && (
+					<Onwards onwards={CAPIArticle.onwards} format={format} />
 				)}
-
-				<Island
-					clientOnly={true}
-					deferUntil="idle"
-					placeholderHeight={304}
-				>
-					<OnwardsUpper
-						ajaxUrl={CAPIArticle.config.ajaxUrl}
-						hasRelated={CAPIArticle.hasRelated}
-						hasStoryPackage={CAPIArticle.hasStoryPackage}
-						isAdFreeUser={CAPIArticle.isAdFreeUser}
-						pageId={CAPIArticle.pageId}
-						isPaidContent={
-							CAPIArticle.config.isPaidContent || false
-						}
-						showRelatedContent={
-							CAPIArticle.config.showRelatedContent
-						}
-						keywordIds={CAPIArticle.config.keywordIds}
-						contentType={CAPIArticle.contentType}
-						tags={CAPIArticle.tags}
-						format={format}
-						pillar={format.theme}
-						editionId={CAPIArticle.editionId}
-						shortUrlId={CAPIArticle.config.shortUrlId}
-					/>
-				</Island>
 			</main>
 
 			<ElementContainer

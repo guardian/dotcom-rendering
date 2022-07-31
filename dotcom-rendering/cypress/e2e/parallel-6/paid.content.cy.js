@@ -73,16 +73,6 @@ describe('Paid content tests', function () {
 			'https://www.google-analytics.com/collect?v=1**',
 		).as('gaRequest');
 
-		cy.get('gu-island[name=OnwardsUpper]').scrollIntoView({
-			duration: 300,
-		});
-
-		cy.get('gu-island[name=OnwardsUpper]', { timeout: 30000 }).should(
-			'have.attr',
-			'data-gu-ready',
-			'true',
-		);
-
 		cy.get('[data-cy=card-branding-logo]').should('be.visible');
 		cy.get('[data-cy=card-branding-logo]').first().click();
 

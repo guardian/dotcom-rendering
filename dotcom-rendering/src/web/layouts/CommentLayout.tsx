@@ -20,7 +20,6 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
-import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
@@ -34,7 +33,7 @@ import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 import { Nav } from '../components/Nav/Nav';
-import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { Onwards } from '../components/Onwards';
 import { RightColumn } from '../components/RightColumn';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
@@ -43,7 +42,6 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
-import { decideTrail } from '../lib/decideTrail';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
@@ -684,7 +682,6 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandardGrid>
 				</ElementContainer>
-
 				<ElementContainer
 					padded={false}
 					showTopBorder={false}
@@ -698,47 +695,9 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					/>
 				</ElementContainer>
 
-				{CAPIArticle.storyPackage && (
-					<ElementContainer>
-						<Island deferUntil="visible">
-							<Carousel
-								heading={CAPIArticle.storyPackage.heading}
-								trails={CAPIArticle.storyPackage.trails.map(
-									decideTrail,
-								)}
-								onwardsType="more-on-this-story"
-								format={format}
-							/>
-						</Island>
-					</ElementContainer>
+				{CAPIArticle.onwards && (
+					<Onwards onwards={CAPIArticle.onwards} format={format} />
 				)}
-
-				<Island
-					clientOnly={true}
-					deferUntil="visible"
-					placeholderHeight={600}
-				>
-					<OnwardsUpper
-						ajaxUrl={CAPIArticle.config.ajaxUrl}
-						hasRelated={CAPIArticle.hasRelated}
-						hasStoryPackage={CAPIArticle.hasStoryPackage}
-						isAdFreeUser={CAPIArticle.isAdFreeUser}
-						pageId={CAPIArticle.pageId}
-						isPaidContent={
-							CAPIArticle.config.isPaidContent || false
-						}
-						showRelatedContent={
-							CAPIArticle.config.showRelatedContent
-						}
-						keywordIds={CAPIArticle.config.keywordIds}
-						contentType={CAPIArticle.contentType}
-						tags={CAPIArticle.tags}
-						format={format}
-						pillar={format.theme}
-						editionId={CAPIArticle.editionId}
-						shortUrlId={CAPIArticle.config.shortUrlId}
-					/>
-				</Island>
 
 				{!isPaidContent && showComments && (
 					<ElementContainer sectionId="comments" element="aside">
@@ -761,7 +720,6 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					</ElementContainer>
 				)}
-
 				{!isPaidContent && (
 					<ElementContainer data-print-layout="hide" element="aside">
 						<MostViewedFooterLayout
@@ -771,7 +729,6 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					</ElementContainer>
 				)}
-
 				<ElementContainer
 					padded={false}
 					showTopBorder={false}
