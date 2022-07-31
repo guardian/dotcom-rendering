@@ -20,18 +20,16 @@ export const onwardsToHtml = ({
 	heading,
 	// description,
 	// url,
-	ophanComponentName,
+	onwardsType,
 	trails,
 	format: CAPIFormat,
-	isCuratedContent,
 }: CAPIOnwardsType): string => {
 	const format = decideFormat(CAPIFormat);
 
 	const html = renderToString(
 		<Carousel
 			heading={heading}
-			ophanComponentName={ophanComponentName}
-			isCuratedContent={isCuratedContent}
+			onwardsType={onwardsType}
 			trails={buildTrails(trails, 8)}
 			format={format}
 		/>,

@@ -200,7 +200,7 @@ export const OnwardsUpper = ({
 	);
 
 	let url;
-	let ophanComponentName: OphanComponentName = 'default-onwards';
+	let ophanComponentName: OnwardsType = 'default-onwards';
 
 	if (!showRelatedContent) {
 		// Then don't show related content
@@ -273,7 +273,7 @@ export const OnwardsUpper = ({
 					<OnwardsData
 						url={url}
 						limit={8}
-						ophanComponentName={ophanComponentName}
+						onwardsType={ophanComponentName}
 						format={format}
 					/>
 				</ElementContainer>
@@ -283,8 +283,7 @@ export const OnwardsUpper = ({
 					<OnwardsData
 						url={curatedDataUrl}
 						limit={20}
-						ophanComponentName="curated-content"
-						isCuratedContent={true}
+						onwardsType="curated-content"
 						format={format}
 					/>
 				</ElementContainer>
