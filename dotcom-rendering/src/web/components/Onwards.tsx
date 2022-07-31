@@ -13,6 +13,21 @@ export const Onwards = ({
 }) => (
 	<>
 		{onwards.map(({ heading, trails, onwardsType, url }) => {
+			if (trails.length > 0) {
+				return (
+					<ElementContainer key={onwardsType}>
+						<Island deferUntil="visible">
+							<Carousel
+								heading={heading}
+								trails={trails.map(decideTrail)}
+								onwardsType={onwardsType}
+								format={format}
+							/>
+						</Island>
+					</ElementContainer>
+				);
+			}
+
 			if (url) {
 				return (
 					<ElementContainer key={onwardsType}>
@@ -32,18 +47,7 @@ export const Onwards = ({
 				);
 			}
 
-			return (
-				<ElementContainer key={onwardsType}>
-					<Island deferUntil="visible">
-						<Carousel
-							heading={heading}
-							trails={trails.map(decideTrail)}
-							onwardsType={onwardsType}
-							format={format}
-						/>
-					</Island>
-				</ElementContainer>
-			);
+			return null;
 		})}
 	</>
 );
