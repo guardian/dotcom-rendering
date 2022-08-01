@@ -66,17 +66,6 @@ const getDistanceAfterFloating = (
 	return index - elements.indexOf(lastFloatingElementBeforePlace);
 };
 
-const getPlaces = (elements: CAPIElement[]): PlaceInArticle[] => {
-	// Aim for the middle
-	const targetIndex = Math.floor(elements.length / 2);
-	return elements.map((element, index) => ({
-		index,
-		distanceFromTarget: Math.abs(index - targetIndex),
-		isAfterText: checkIfAfterText(index, elements),
-		distanceAfterFloating: getDistanceAfterFloating(index, elements),
-	}));
-};
-
 const placeIsSuitable = (place: PlaceInArticle): boolean =>
 	place.isAfterText &&
 	place.distanceAfterFloating >= MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT &&
@@ -103,7 +92,16 @@ const sortPlaces = (placeA: PlaceInArticle, placeB: PlaceInArticle): number => {
  * @returns the index or null if no suitable place found
  */
 const findInsertPosition = (elements: CAPIElement[]): number | null => {
-	const suitablePlacesInOrderOfPrefence = getPlaces(elements)
+	// Aim for the middle
+	const targetIndex = Math.floor(elements.length / 2);
+	const places = elements.map((_, index) => ({
+		index,
+		distanceFromTarget: Math.abs(index - targetIndex),
+		isAfterText: checkIfAfterText(index, elements),
+		distanceAfterFloating: getDistanceAfterFloating(index, elements),
+	}));
+
+	const suitablePlacesInOrderOfPrefence = places
 		.filter(placeIsSuitable)
 		.sort(sortPlaces);
 
