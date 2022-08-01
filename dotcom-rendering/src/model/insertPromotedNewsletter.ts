@@ -97,46 +97,39 @@ const sortPlaces = (placeA: PlaceInArticle, placeB: PlaceInArticle): number => {
 };
 
 /**
- * Finds a suitable place within the existing element of the block to insert a
- * NewsletterSignupBlockElement, defaulting to the end of the article if no
- * suitable place is found in range of the target.
+ * Finds an index for where the NewsletterSignupBlockElement component can
+ * be inserted
  *
  * @param elements the elements in the article block
  * @param targetIndex the target place to put the NewsletterSignupBlockElement
- * @returns the index insert the NewsletterSignupBlockElement component at
+ * @returns the index or null if no suitable place found
  */
 const findInsertIndex = (
 	elements: CAPIElement[],
 	targetIndex: number,
-	blockId: string,
-): number => {
+): number | null => {
 	const suitablePlacesInOrderOfPrefence = getPlaces(targetIndex, elements)
 		.filter(placeIsSuitable)
 		.sort(sortPlaces);
 
-	if (suitablePlacesInOrderOfPrefence.length === 0) {
-		logger.warn(
-			`Unable to find suitable place for NewsletterSignupBlockElement. Placing at the end of the article`,
-			blockId,
-		);
-	}
-	// Return index of the best place - if there are none, return the end of the article
-	return suitablePlacesInOrderOfPrefence[0]?.index || elements.length;
+	// Return index of the best place - if there are none, return null
+	return suitablePlacesInOrderOfPrefence[0]?.index || null;
 };
 
-// NOTE: blog pages have different structure with multiple blocks of elements
-// any future function to place sign-up blocks in blog pages would need to
-// take this into acccount.
 const insertAtMiddle = (
 	promotedNewsletter: Newsletter,
 	elements: CAPIElement[],
 	blockId: string,
 ): CAPIElement[] => {
-	const index = findInsertIndex(
-		elements,
-		Math.floor(elements.length / 2),
-		blockId,
-	);
+	const index = findInsertIndex(elements, Math.floor(elements.length / 2));
+
+	if (index === null) {
+		logger.warn(
+			`Unable to find suitable place for NewsletterSignupBlockElement`,
+			blockId,
+		);
+		return elements;
+	}
 
 	return [
 		...elements.slice(0, index),
