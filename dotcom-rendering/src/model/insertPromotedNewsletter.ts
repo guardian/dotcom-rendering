@@ -109,7 +109,7 @@ const findInsertPosition = (elements: CAPIElement[]): number | null => {
 	return suitablePlacesInOrderOfPrefence[0]?.position || null;
 };
 
-const insertAtMiddle = (
+const tryToInsert = (
 	promotedNewsletter: Newsletter,
 	elements: CAPIElement[],
 	blockId: string,
@@ -160,7 +160,7 @@ export const insertPromotedNewsletter = (
 			return blocks.map((block: Block) => {
 				return {
 					...block,
-					elements: insertAtMiddle(
+					elements: tryToInsert(
 						promotedNewsletter,
 						block.elements,
 						block.id,
