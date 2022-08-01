@@ -148,9 +148,15 @@ const insertAtMiddle = (
 	];
 };
 
-// current instruction is to aim to place the SignUp block in the middle of standard articles,
-// This might change, other placements be set for different formats
-const getPositionOption = (format: CAPIFormat): 'MIDDLE' | 'NONE' => {
+export const insertPromotedNewsletter = (
+	blocks: Block[],
+	format: CAPIFormat,
+	promotedNewsletter?: Newsletter,
+): Block[] => {
+	if (!promotedNewsletter) {
+		return blocks;
+	}
+
 	switch (format.design) {
 		case 'ArticleDesign':
 		case 'GalleryDesign':
@@ -165,23 +171,6 @@ const getPositionOption = (format: CAPIFormat): 'MIDDLE' | 'NONE' => {
 		case 'InterviewDesign':
 		case 'EditorialDesign':
 		case 'ObituaryDesign':
-			return 'MIDDLE';
-		default:
-			return 'NONE';
-	}
-};
-
-export const insertPromotedNewsletter = (
-	blocks: Block[],
-	format: CAPIFormat,
-	promotedNewsletter?: Newsletter,
-): Block[] => {
-	if (!promotedNewsletter) {
-		return blocks;
-	}
-
-	switch (getPositionOption(format)) {
-		case 'MIDDLE':
 			return blocks.map((block: Block, index: number) => {
 				return {
 					...block,
@@ -199,7 +188,6 @@ export const insertPromotedNewsletter = (
 							: block.elements,
 				};
 			});
-		case 'NONE':
 		default:
 			return blocks;
 	}
