@@ -43,6 +43,12 @@ const linkStyles = (palette: Palette) => css`
 			border-bottom: 1px solid ${palette.hover.keyEventLink};
 		}
 	}
+
+	&:hover > div {
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		text-decoration-color: ${palette.text.keyEvent};
+	}
 `;
 
 const summaryStyles = (palette: Palette) => css`
@@ -91,12 +97,6 @@ const listItemStyles = (palette: Palette) => css`
 const textStyles = (palette: Palette) => css`
 	${textSans.small({ fontWeight: 'regular', lineHeight: 'regular' })};
 	color: ${palette.text.keyEvent};
-
-	&:hover {
-		text-decoration: underline;
-		text-underline-offset: 3px;
-		text-decoration-color: ${palette.text.keyEvent};
-	}
 `;
 
 const timeStyles = (palette: Palette) => css`
