@@ -8,12 +8,6 @@ interface PlaceInArticle {
 }
 type PositionOption = 'MIDDLE' | 'NONE';
 
-const floatingElementRoleTypes: FloatingElementRole[] = [
-	'supporting',
-	'thumbnail',
-	'richLink',
-];
-
 const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 4;
 // This value is an approximation - the aim is to avoid a blank space between
 // the element before the SignUp and the end of the floating element.
@@ -60,9 +54,7 @@ const getDistanceAfterFloating = (
 			(element) =>
 				'role' in element &&
 				typeof element.role == 'string' &&
-				floatingElementRoleTypes.includes(
-					element.role as FloatingElementRole,
-				),
+				['supporting', 'thumbnail', 'richLink'].includes(element.role),
 		);
 
 	if (!lastFloatingElementBeforePlace) {

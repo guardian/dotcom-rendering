@@ -7,8 +7,6 @@ interface ThirdPartyEmbeddedContent {
 	sourceDomain?: string;
 }
 
-type FloatingElementRole = 'supporting' | 'thumbnail' | 'richLink';
-
 interface AudioAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
 	elementId: string;
