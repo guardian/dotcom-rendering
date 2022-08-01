@@ -200,7 +200,7 @@ export const OnwardsUpper = ({
 	);
 
 	let url;
-	let ophanComponentName: OnwardsType = 'default-onwards';
+	let onwardsType: OnwardsType = 'default-onwards';
 
 	if (!showRelatedContent) {
 		// Then don't show related content
@@ -223,7 +223,7 @@ export const OnwardsUpper = ({
 			'series',
 			`${seriesTag.id}.json?dcr&shortUrl=${shortUrlId}`,
 		]);
-		ophanComponentName = 'series';
+		onwardsType = 'series';
 	} else if (!hasRelated) {
 		// There is no related content to show
 	} else if (tagToFilterBy) {
@@ -253,13 +253,13 @@ export const OnwardsUpper = ({
 		}
 
 		url = joinUrl([ajaxUrl, popularInTagUrl]);
-		ophanComponentName = 'related-content';
+		onwardsType = 'related-content';
 	} else {
 		// Default to generic related endpoint
 		const relatedUrl = `/related/${pageId}.json?dcr=true`;
 
 		url = joinUrl([ajaxUrl, relatedUrl]);
-		ophanComponentName = 'related-stories';
+		onwardsType = 'related-stories';
 	}
 
 	const curatedDataUrl = showRelatedContent
@@ -273,7 +273,7 @@ export const OnwardsUpper = ({
 					<OnwardsData
 						url={url}
 						limit={8}
-						onwardsType={ophanComponentName}
+						onwardsType={onwardsType}
 						format={format}
 					/>
 				</ElementContainer>
