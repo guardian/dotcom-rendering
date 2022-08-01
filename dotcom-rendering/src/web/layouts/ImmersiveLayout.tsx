@@ -175,15 +175,14 @@ interface Props {
 
 const decideCaption = (mainMedia: ImageBlockElement): string => {
 	const caption = [];
-	if (mainMedia && mainMedia.data && mainMedia.data.caption)
+	if (mainMedia?.data?.caption) {
 		caption.push(mainMedia.data.caption);
-	if (
-		mainMedia &&
-		mainMedia.displayCredit &&
-		mainMedia.data &&
-		mainMedia.data.credit
-	)
+	}
+
+	if (mainMedia?.displayCredit && mainMedia?.data?.credit) {
 		caption.push(mainMedia.data.credit);
+	}
+
 	return caption.join(' ');
 };
 
@@ -205,6 +204,9 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const showBodyEndSlot =
 		parse(CAPIArticle.slotMachineFlags || '').showBodyEnd ||
 		CAPIArticle.config.switches.slotBodyEnd;
+
+	const shouldReserveMerchSpace =
+		CAPIArticle.config.switches.merchandisingMinHeight;
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -506,6 +508,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					<AdSlot
 						position="merchandising-high"
 						display={format.display}
+						shouldReserveMerchSpace={shouldReserveMerchSpace}
 					/>
 				</ElementContainer>
 
@@ -591,7 +594,11 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					backgroundColour={neutral[93]}
 					element="aside"
 				>
-					<AdSlot position="merchandising" display={format.display} />
+					<AdSlot
+						position="merchandising"
+						display={format.display}
+						shouldReserveMerchSpace={shouldReserveMerchSpace}
+					/>
 				</ElementContainer>
 			</main>
 

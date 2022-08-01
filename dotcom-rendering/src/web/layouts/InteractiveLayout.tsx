@@ -228,6 +228,9 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
+	const shouldReserveMerchSpace =
+		CAPIArticle.config.switches.merchandisingMinHeight;
+
 	return (
 		<>
 			{CAPIArticle.isLegacyInteractive && (
@@ -607,6 +610,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						data-print-layout="hide"
 						position="merchandising-high"
 						display={format.display}
+						shouldReserveMerchSpace={shouldReserveMerchSpace}
 					/>
 				</ElementContainer>
 
@@ -697,7 +701,11 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					backgroundColour={neutral[93]}
 					element="aside"
 				>
-					<AdSlot position="merchandising" display={format.display} />
+					<AdSlot
+						position="merchandising"
+						display={format.display}
+						shouldReserveMerchSpace={shouldReserveMerchSpace}
+					/>
 				</ElementContainer>
 			</main>
 

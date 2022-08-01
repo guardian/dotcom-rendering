@@ -278,6 +278,9 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		parse(CAPIArticle.slotMachineFlags || '').showBodyEnd ||
 		CAPIArticle.config.switches.slotBodyEnd;
 
+	const shouldReserveMerchSpace =
+		CAPIArticle.config.switches.merchandisingMinHeight;
+
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `CAPIArticle.config.shouldHideReaderRevenue` equals false.
@@ -695,6 +698,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					<AdSlot
 						position="merchandising-high"
 						display={format.display}
+						shouldReserveMerchSpace={shouldReserveMerchSpace}
 					/>
 				</ElementContainer>
 
@@ -780,7 +784,11 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					backgroundColour={neutral[93]}
 					element="aside"
 				>
-					<AdSlot position="merchandising" display={format.display} />
+					<AdSlot
+						position="merchandising"
+						display={format.display}
+						shouldReserveMerchSpace={shouldReserveMerchSpace}
+					/>
 				</ElementContainer>
 			</main>
 

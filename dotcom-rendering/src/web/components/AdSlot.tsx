@@ -18,6 +18,7 @@ type Props = {
 	position: AdSlotType;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
+	shouldReserveMerchSpace?: boolean;
 };
 
 export const labelHeight = 24;
@@ -76,6 +77,9 @@ export const adCollapseStyles = css`
 
 const merchandisingAdStyles = css`
 	position: relative;
+`;
+
+const merchandisingReservedSpace = css`
 	min-height: 250px;
 `;
 
@@ -209,6 +213,7 @@ export const AdSlot: React.FC<Props> = ({
 	display,
 	shouldHideReaderRevenue = false,
 	isPaidContent = false,
+	shouldReserveMerchSpace = false,
 }) => {
 	switch (position) {
 		case 'right':
@@ -346,6 +351,7 @@ export const AdSlot: React.FC<Props> = ({
 					].join(' ')}
 					css={[
 						merchandisingAdStyles,
+						shouldReserveMerchSpace && merchandisingReservedSpace,
 						adStyles,
 						fluidFullWidthAdStyles,
 					]}
@@ -366,6 +372,7 @@ export const AdSlot: React.FC<Props> = ({
 					].join(' ')}
 					css={[
 						merchandisingAdStyles,
+						shouldReserveMerchSpace && merchandisingReservedSpace,
 						adStyles,
 						fluidFullWidthAdStyles,
 					]}
