@@ -1211,7 +1211,7 @@ const textNumberedPosition = (): string => {
 	return text.supporting;
 };
 
-const textOverlayed = (): string => {
+const textOverlaid = (): string => {
 	return WHITE;
 };
 
@@ -1381,7 +1381,7 @@ export const decidePalette = (
 			blockquote: textBlockquote(format),
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
-			overlayedCaption: textOverlayed(),
+			overlaidCaption: textOverlaid(),
 			shareCount: textShareCount(),
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
 			cricketScoreboardLink: textCricketScoreboardLink(),

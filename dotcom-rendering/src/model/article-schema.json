@@ -611,7 +611,7 @@
                 "shouldLimitWidth": {
                     "type": "boolean"
                 },
-                "isOverlayed": {
+                "isOverlaid": {
                     "type": "boolean"
                 }
             },

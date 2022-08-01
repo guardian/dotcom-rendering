@@ -401,7 +401,7 @@ export const ImageComponent = ({
 										credit={element.data.credit}
 										displayCredit={element.displayCredit}
 										shouldLimitWidth={shouldLimitWidth}
-										isOverlayed={true}
+										isOverlaid={true}
 										isMainMedia={isMainMedia}
 									/>
 								</div>
