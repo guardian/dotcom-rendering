@@ -74,6 +74,11 @@ export const adCollapseStyles = css`
 	}
 `;
 
+const merchandisingAdStyles = css`
+	position: relative;
+	min-height: 250px;
+`;
+
 /**
  * For implementation in Frontend, see mark: dca5c7dd-dda4-4922-9317-a55a3789fe4c
  * These styles come mostly from RichLink in DCR.
@@ -340,9 +345,7 @@ export const AdSlot: React.FC<Props> = ({
 						'ad-slot--merchandising-high',
 					].join(' ')}
 					css={[
-						css`
-							position: relative;
-						`,
+						merchandisingAdStyles,
 						adStyles,
 						fluidFullWidthAdStyles,
 					]}
@@ -362,9 +365,7 @@ export const AdSlot: React.FC<Props> = ({
 						'ad-slot--merchandising',
 					].join(' ')}
 					css={[
-						css`
-							position: relative;
-						`,
+						merchandisingAdStyles,
 						adStyles,
 						fluidFullWidthAdStyles,
 					]}
