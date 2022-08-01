@@ -109,6 +109,14 @@ const findInsertPosition = (elements: CAPIElement[]): number | null => {
 	return suitablePlacesInOrderOfPrefence[0]?.position || null;
 };
 
+/**
+ * Attempts to find a place to insert the newsletter embed
+ *
+ * @param promotedNewsletter the embed to insert
+ * @param elements all elements for an article
+ * @param blockId we only use this for logging
+ * @returns The updated array of elements
+ */
 const tryToInsert = (
 	promotedNewsletter: Newsletter,
 	elements: CAPIElement[],
