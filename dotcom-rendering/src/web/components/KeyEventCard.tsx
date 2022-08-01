@@ -91,6 +91,11 @@ const listItemStyles = (palette: Palette) => css`
 const textStyles = (palette: Palette) => css`
 	${textSans.small({ fontWeight: 'regular', lineHeight: 'regular' })};
 	color: ${palette.text.keyEvent};
+
+	&:hover {
+		text-decoration: underline;
+		text-decoration-color: ${palette.text.keyEvent};
+	}
 `;
 
 const timeStyles = (palette: Palette) => css`
