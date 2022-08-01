@@ -6,7 +6,6 @@ interface PlaceInArticle {
 	afterText: boolean;
 	distanceAfterFloating: number;
 }
-type PositionOption = 'MIDDLE' | 'NONE';
 
 const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 4;
 // This value is an approximation - the aim is to avoid a blank space between
@@ -151,7 +150,7 @@ const insertAtMiddle = (
 
 // current instruction is to aim to place the SignUp block in the middle of standard articles,
 // This might change, other placements be set for different formats
-const getPositionOption = (format: CAPIFormat): PositionOption => {
+const getPositionOption = (format: CAPIFormat): 'MIDDLE' | 'NONE' => {
 	switch (format.design) {
 		case 'ArticleDesign':
 		case 'GalleryDesign':
