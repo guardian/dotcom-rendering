@@ -97,10 +97,10 @@ export const LeftColumn = ({
 				verticalMargins &&
 					css`
 						/*
-			   Keep spacing at the bottom of the container consistent at 36px, regardless of
-			   breakpoint, based on chat with Harry Fisher
-			*/
-						margin-bottom: ${space[9]}px;
+							Keep spacing at the bottom of the container consistent at 36px, regardless of
+							breakpoint, based on chat with Harry Fisher
+						*/
+						padding-bottom: ${space[9]}px;
 					`,
 			]}
 		>
