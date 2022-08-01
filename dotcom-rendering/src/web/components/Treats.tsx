@@ -10,6 +10,7 @@ export const Treats = ({
 	treats: TreatType[];
 	borderColour?: string;
 }) => {
+	if (treats.length === 0) return null;
 	return (
 		<ul
 			css={css`
