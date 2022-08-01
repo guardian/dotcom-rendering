@@ -6,7 +6,7 @@ import { enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceTweets } from './enhance-tweets';
-import { insertPromotedNewsletter } from './insert-newsletter-signup';
+import { insertPromotedNewsletter } from './insertPromotedNewsletter';
 
 class BlockEnhancer {
 	blocks: Block[];
