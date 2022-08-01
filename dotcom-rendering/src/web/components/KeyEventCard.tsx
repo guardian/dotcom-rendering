@@ -94,6 +94,7 @@ const textStyles = (palette: Palette) => css`
 
 	&:hover {
 		text-decoration: underline;
+		text-underline-offset: 3px;
 		text-decoration-color: ${palette.text.keyEvent};
 	}
 `;
