@@ -1,11 +1,11 @@
 import { logger } from '../server/lib/logging';
 
-interface PlaceInArticle {
+type PlaceInArticle = {
 	index: number;
 	distanceFromTarget: number;
-	afterText: boolean;
+	isAfterText: boolean;
 	distanceAfterFloating: number;
-}
+};
 
 const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 4;
 // This value is an approximation - the aim is to avoid a blank space between
@@ -38,7 +38,7 @@ const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 4;
 
 const MAXIMUM_DISTANCE_FROM_MIDDLE = 4;
 
-const isAfterText = (index: number, elements: CAPIElement[]): boolean =>
+const checkIfAfterText = (index: number, elements: CAPIElement[]): boolean =>
 	elements[index - 1]?._type ===
 	'model.dotcomrendering.pageElements.TextBlockElement';
 
@@ -66,20 +66,19 @@ const getDistanceAfterFloating = (
 	return index - elements.indexOf(lastFloatingElementBeforePlace);
 };
 
-const getPlaces = (
-	targetIndex: number,
-	elements: CAPIElement[],
-): PlaceInArticle[] => {
+const getPlaces = (elements: CAPIElement[]): PlaceInArticle[] => {
+	// Aim for the middle
+	const targetIndex = Math.floor(elements.length / 2);
 	return elements.map((element, index) => ({
 		index,
 		distanceFromTarget: Math.abs(index - targetIndex),
-		afterText: isAfterText(index, elements),
+		isAfterText: checkIfAfterText(index, elements),
 		distanceAfterFloating: getDistanceAfterFloating(index, elements),
 	}));
 };
 
 const placeIsSuitable = (place: PlaceInArticle): boolean =>
-	place.afterText &&
+	place.isAfterText &&
 	place.distanceAfterFloating >= MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT &&
 	place.distanceFromTarget <= MAXIMUM_DISTANCE_FROM_MIDDLE;
 
@@ -101,14 +100,10 @@ const sortPlaces = (placeA: PlaceInArticle, placeB: PlaceInArticle): number => {
  * be inserted
  *
  * @param elements the elements in the article block
- * @param targetIndex the target place to put the NewsletterSignupBlockElement
  * @returns the index or null if no suitable place found
  */
-const findInsertIndex = (
-	elements: CAPIElement[],
-	targetIndex: number,
-): number | null => {
-	const suitablePlacesInOrderOfPrefence = getPlaces(targetIndex, elements)
+const findInsertPosition = (elements: CAPIElement[]): number | null => {
+	const suitablePlacesInOrderOfPrefence = getPlaces(elements)
 		.filter(placeIsSuitable)
 		.sort(sortPlaces);
 
@@ -121,9 +116,9 @@ const insertAtMiddle = (
 	elements: CAPIElement[],
 	blockId: string,
 ): CAPIElement[] => {
-	const index = findInsertIndex(elements, Math.floor(elements.length / 2));
+	const position = findInsertPosition(elements);
 
-	if (index === null) {
+	if (position === null) {
 		logger.warn(
 			`Unable to find suitable place for NewsletterSignupBlockElement`,
 			blockId,
@@ -132,12 +127,12 @@ const insertAtMiddle = (
 	}
 
 	return [
-		...elements.slice(0, index),
+		...elements.slice(0, position),
 		{
 			_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
 			newsletter: promotedNewsletter,
 		},
-		...elements.slice(index),
+		...elements.slice(position),
 	];
 };
 
