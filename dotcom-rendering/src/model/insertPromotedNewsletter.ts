@@ -1,7 +1,7 @@
 import { logger } from '../server/lib/logging';
 
 type PlaceInArticle = {
-	index: number;
+	position: number;
 	distanceFromTarget: number;
 	isAfterText: boolean;
 	distanceAfterFloating: number;
@@ -93,10 +93,10 @@ const sortPlaces = (placeA: PlaceInArticle, placeB: PlaceInArticle): number => {
  */
 const findInsertPosition = (elements: CAPIElement[]): number | null => {
 	// Aim for the middle
-	const targetIndex = Math.floor(elements.length / 2);
+	const targetPosition = Math.floor(elements.length / 2);
 	const places = elements.map((_, index) => ({
-		index,
-		distanceFromTarget: Math.abs(index - targetIndex),
+		position: index,
+		distanceFromTarget: Math.abs(index - targetPosition),
 		isAfterText: checkIfAfterText(index, elements),
 		distanceAfterFloating: getDistanceAfterFloating(index, elements),
 	}));
@@ -105,8 +105,8 @@ const findInsertPosition = (elements: CAPIElement[]): number | null => {
 		.filter(placeIsSuitable)
 		.sort(sortPlaces);
 
-	// Return index of the best place - if there are none, return null
-	return suitablePlacesInOrderOfPrefence[0]?.index || null;
+	// Return the position to insert the embed or null if none was found
+	return suitablePlacesInOrderOfPrefence[0]?.position || null;
 };
 
 const insertAtMiddle = (
@@ -114,9 +114,9 @@ const insertAtMiddle = (
 	elements: CAPIElement[],
 	blockId: string,
 ): CAPIElement[] => {
-	const position = findInsertPosition(elements);
+	const insertPosition = findInsertPosition(elements);
 
-	if (position === null) {
+	if (insertPosition === null) {
 		logger.warn(
 			`Unable to find suitable place for NewsletterSignupBlockElement`,
 			blockId,
@@ -125,12 +125,12 @@ const insertAtMiddle = (
 	}
 
 	return [
-		...elements.slice(0, position),
+		...elements.slice(0, insertPosition),
 		{
 			_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement',
 			newsletter: promotedNewsletter,
 		},
-		...elements.slice(position),
+		...elements.slice(insertPosition),
 	];
 };
 
