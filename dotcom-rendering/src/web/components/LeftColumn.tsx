@@ -105,13 +105,13 @@ export const LeftColumn = ({
 			]}
 		>
 			<div
-				css={
-					(borderType === 'partial' &&
+				css={[
+					borderType === 'partial' &&
 						partialRightBorder(borderColour),
 					css`
 						height: 100%;
-					`)
-				}
+					`,
+				]}
 			>
 				{children}
 			</div>
