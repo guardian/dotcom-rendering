@@ -380,10 +380,9 @@ export const Dropdown = ({
 											)}
 										</a>
 
-										{l.notifications?.length &&
-											l.notifications.length > 0 && (
-												<RedDot />
-											)}
+										{!!l.notifications?.length && (
+											<RedDot />
+										)}
 									</li>
 								))}
 							</ul>

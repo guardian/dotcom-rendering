@@ -1234,7 +1234,7 @@ export const Quiz: CAPIArticleType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2021/07/27/STL_&_GMG_Modern_Slavery_Act_Statement_2021.pdf',
+					url: 'https://uploads.guim.co.uk/2022/07/20/STL_Modern_Slavery_Statement_2022.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1601,7 +1601,7 @@ export const Quiz: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '77435dd4-bb5e-4f20-b17d-39e8ed78cb49',
+			elementId: 'b6d8c688-1039-447a-b454-f20646c9ada7',
 		},
 	],
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
@@ -2214,7 +2214,7 @@ export const Quiz: CAPIArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: 'f4680555-49e7-4b2d-b713-e19507409a5c',
+					elementId: 'd394395e-01f0-4172-b312-765705738195',
 				},
 			],
 			attributes: {

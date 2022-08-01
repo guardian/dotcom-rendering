@@ -225,7 +225,7 @@ export const MatchNav = ({ homeTeam, awayTeam, comments }: Props) => (
 					scorers={awayTeam.scorers}
 				/>
 			</Row>
-			{comments && <Comments comments={comments} />}
+			{!!comments && <Comments comments={comments} />}
 		</StretchBackground>
 	</div>
 );

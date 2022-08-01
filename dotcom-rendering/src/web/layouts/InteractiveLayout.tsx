@@ -22,6 +22,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
+import { Carousel } from '../components/Carousel.importable';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -44,6 +45,7 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
+import { decideTrail } from '../lib/decideTrail';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import {
 	interactiveGlobalStyles,
@@ -607,6 +609,22 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						display={format.display}
 					/>
 				</ElementContainer>
+
+				{CAPIArticle.storyPackage && (
+					<ElementContainer>
+						<Island deferUntil="visible">
+							<Carousel
+								heading={CAPIArticle.storyPackage.heading}
+								trails={CAPIArticle.storyPackage.trails.map(
+									decideTrail,
+								)}
+								ophanComponentName="more-on-this-story"
+								format={format}
+								isCuratedContent={false}
+							/>
+						</Island>
+					</ElementContainer>
+				)}
 
 				<Island
 					clientOnly={true}

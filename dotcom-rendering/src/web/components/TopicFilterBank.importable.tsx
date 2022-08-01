@@ -102,7 +102,7 @@ export const TopicFilterBank = ({
 				Filters <span css={headlineAccentStyles(palette)}>BETA</span>
 			</div>
 			<div css={topicStyles}>
-				{keyEvents?.length && (
+				{keyEvents?.length ? (
 					<FilterButton
 						value={'Key events'}
 						count={keyEvents.length}
@@ -112,7 +112,7 @@ export const TopicFilterBank = ({
 							handleKeyEventClick(filterKeyEvents, id);
 						}}
 					/>
-				)}
+				) : null}
 
 				{topFiveTopics.map((topic) => {
 					const buttonParams = `${topic.type}:${topic.value}`;

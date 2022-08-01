@@ -85,7 +85,7 @@ export const TwitterBlockComponent: React.FC<{
 			data-tweetid={element.id}
 			data-dnt="true"
 		>
-			{fallbackHTML && (
+			{!!fallbackHTML && (
 				<div placeholder="" css={TextStyle(pillar)}>
 					<blockquote
 						dangerouslySetInnerHTML={{ __html: fallbackHTML }}

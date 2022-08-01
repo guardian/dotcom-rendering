@@ -262,7 +262,7 @@ export const CardHeadline = ({
 				]}
 			>
 				<WithLink linkTo={linkTo}>
-					{kickerText && (
+					{!!kickerText && (
 						<Kicker
 							text={kickerText}
 							color={kickerColour}
@@ -284,7 +284,7 @@ export const CardHeadline = ({
 					</span>
 				</WithLink>
 			</h4>
-			{byline && showByline && (
+			{!!byline && showByline && (
 				<Byline
 					text={byline}
 					format={format}

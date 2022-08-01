@@ -262,7 +262,7 @@ export const Caption = ({
 			) : (
 				<CameraIcon palette={palette} format={format} />
 			)}
-			{captionText && (
+			{!!captionText && (
 				<span
 					css={captionLink(palette)}
 					dangerouslySetInnerHTML={{
@@ -271,7 +271,7 @@ export const Caption = ({
 					key="caption"
 				/>
 			)}
-			{credit && displayCredit && ` ${credit}`}
+			{!!credit && displayCredit && ` ${credit}`}
 		</figcaption>
 	);
 
@@ -302,7 +302,7 @@ export const Caption = ({
 						shouldLimitWidth && bigLeftMargin,
 					]}
 				>
-					{captionText && (
+					{!!captionText && (
 						<span
 							css={captionLink(palette)}
 							dangerouslySetInnerHTML={{
@@ -311,7 +311,7 @@ export const Caption = ({
 							key="caption"
 						/>
 					)}
-					{credit && displayCredit && ` ${credit}`}
+					{!!credit && displayCredit && ` ${credit}`}
 				</figcaption>
 			);
 		default:

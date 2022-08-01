@@ -22,6 +22,7 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
+import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
@@ -49,6 +50,7 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
+import { decideTrail } from '../lib/decideTrail';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -487,42 +489,40 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 						<GridItem area="matchNav" element="aside">
 							<div css={maxWidth}>
-								{format.design === ArticleDesign.MatchReport &&
-									footballMatchUrl && (
-										<Island
-											deferUntil="visible"
-											clientOnly={true}
-											placeholderHeight={230}
-										>
-											<GetMatchNav
-												matchUrl={footballMatchUrl}
-												format={format}
-												headlineString={
-													CAPIArticle.headline
-												}
-												tags={CAPIArticle.tags}
-												webPublicationDateDeprecated={
-													CAPIArticle.webPublicationDateDeprecated
-												}
-											/>
-										</Island>
-									)}
+								{isMatchReport && (
+									<Island
+										deferUntil="visible"
+										clientOnly={true}
+										placeholderHeight={230}
+									>
+										<GetMatchNav
+											matchUrl={footballMatchUrl}
+											format={format}
+											headlineString={
+												CAPIArticle.headline
+											}
+											tags={CAPIArticle.tags}
+											webPublicationDateDeprecated={
+												CAPIArticle.webPublicationDateDeprecated
+											}
+										/>
+									</Island>
+								)}
 							</div>
 						</GridItem>
 						<GridItem area="matchtabs" element="aside">
 							<div css={maxWidth}>
-								{format.design === ArticleDesign.MatchReport &&
-									footballMatchUrl && (
-										<Island
-											clientOnly={true}
-											placeholderHeight={40}
-										>
-											<GetMatchTabs
-												matchUrl={footballMatchUrl}
-												format={format}
-											/>
-										</Island>
-									)}
+								{isMatchReport && (
+									<Island
+										clientOnly={true}
+										placeholderHeight={40}
+									>
+										<GetMatchTabs
+											matchUrl={footballMatchUrl}
+											format={format}
+										/>
+									</Island>
+								)}
 							</div>
 						</GridItem>
 						<GridItem area="headline">
@@ -784,6 +784,22 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						display={format.display}
 					/>
 				</ElementContainer>
+
+				{CAPIArticle.storyPackage && (
+					<ElementContainer>
+						<Island deferUntil="visible">
+							<Carousel
+								heading={CAPIArticle.storyPackage.heading}
+								trails={CAPIArticle.storyPackage.trails.map(
+									decideTrail,
+								)}
+								ophanComponentName="more-on-this-story"
+								format={format}
+								isCuratedContent={false}
+							/>
+						</Island>
+					</ElementContainer>
+				)}
 
 				<Island
 					clientOnly={true}

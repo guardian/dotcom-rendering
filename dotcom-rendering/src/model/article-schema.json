@@ -321,6 +321,24 @@
         "hasStoryPackage": {
             "type": "boolean"
         },
+        "storyPackage": {
+            "type": "object",
+            "properties": {
+                "trails": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPITrailType"
+                    }
+                },
+                "heading": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "heading",
+                "trails"
+            ]
+        },
         "beaconURL": {
             "type": "string"
         },
@@ -3975,70 +3993,121 @@
                 "switches"
             ]
         },
-        "CommercialProperties": {
+        "CAPITrailType": {
             "type": "object",
             "properties": {
-                "AU": {
-                    "$ref": "#/definitions/EditionCommercialProperties"
+                "format": {
+                    "type": "object",
+                    "properties": {
+                        "design": {
+                            "$ref": "#/definitions/CAPIDesign"
+                        },
+                        "theme": {
+                            "$ref": "#/definitions/CAPITheme"
+                        },
+                        "display": {
+                            "$ref": "#/definitions/CAPIDisplay"
+                        }
+                    },
+                    "required": [
+                        "design",
+                        "display",
+                        "theme"
+                    ]
                 },
-                "US": {
-                    "$ref": "#/definitions/EditionCommercialProperties"
+                "designType": {
+                    "type": "string"
                 },
-                "UK": {
-                    "$ref": "#/definitions/EditionCommercialProperties"
+                "pillar": {
+                    "$ref": "#/definitions/LegacyPillar"
                 },
-                "INT": {
-                    "$ref": "#/definitions/EditionCommercialProperties"
-                }
-            },
-            "required": [
-                "AU",
-                "INT",
-                "UK",
-                "US"
-            ]
-        },
-        "EditionCommercialProperties": {
-            "type": "object",
-            "properties": {
-                "adTargeting": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/AdTargetParam"
+                "carouselImages": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
                     }
+                },
+                "isLiveBlog": {
+                    "type": "boolean"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "headline": {
+                    "type": "string"
+                },
+                "webPublicationDate": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "avatarUrl": {
+                    "type": "string"
+                },
+                "mediaType": {
+                    "$ref": "#/definitions/MediaType"
+                },
+                "mediaDuration": {
+                    "type": "number"
+                },
+                "ageWarning": {
+                    "type": "string"
+                },
+                "byline": {
+                    "type": "string"
+                },
+                "showByline": {
+                    "type": "boolean"
+                },
+                "kickerText": {
+                    "type": "string"
+                },
+                "shortUrl": {
+                    "type": "string"
+                },
+                "commentCount": {
+                    "type": "number"
+                },
+                "starRating": {
+                    "type": "number"
+                },
+                "linkText": {
+                    "type": "string"
                 },
                 "branding": {
                     "$ref": "#/definitions/Branding"
-                }
-            },
-            "required": [
-                "adTargeting"
-            ]
-        },
-        "AdTargetParam": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
                 },
-                "value": {
-                    "anyOf": [
-                        {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
+                "isSnap": {
+                    "type": "boolean"
+                },
+                "snapData": {
+                    "type": "object",
+                    "properties": {
+                        "embedHtml": {
+                            "type": "string"
                         },
-                        {
+                        "embedCss": {
                             "type": "string"
                         }
-                    ]
+                    }
                 }
             },
             "required": [
-                "name",
-                "value"
+                "designType",
+                "format",
+                "headline",
+                "pillar",
+                "url"
             ]
+        },
+        "MediaType": {
+            "enum": [
+                "Audio",
+                "Gallery",
+                "Video"
+            ],
+            "type": "string"
         },
         "Branding": {
             "type": "object",
@@ -4135,6 +4204,71 @@
                 "aboutThisLink",
                 "logo",
                 "sponsorName"
+            ]
+        },
+        "CommercialProperties": {
+            "type": "object",
+            "properties": {
+                "AU": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "US": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "UK": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "INT": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                }
+            },
+            "required": [
+                "AU",
+                "INT",
+                "UK",
+                "US"
+            ]
+        },
+        "EditionCommercialProperties": {
+            "type": "object",
+            "properties": {
+                "adTargeting": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AdTargetParam"
+                    }
+                },
+                "branding": {
+                    "$ref": "#/definitions/Branding"
+                }
+            },
+            "required": [
+                "adTargeting"
+            ]
+        },
+        "AdTargetParam": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "anyOf": [
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "name",
+                "value"
             ]
         },
         "BadgeType": {

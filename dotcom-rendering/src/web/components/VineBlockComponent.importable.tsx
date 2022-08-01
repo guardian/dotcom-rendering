@@ -32,7 +32,7 @@ export const VineBlockComponent = ({
 			source={source}
 			sourceDomain={sourceDomain}
 		>
-			{element.url && element.width && element.height && (
+			{!!(element.url && element.width && element.height) && (
 				<div>
 					<div css={titleStyle}>
 						<p>{element.title}</p>
