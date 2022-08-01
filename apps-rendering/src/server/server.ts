@@ -395,8 +395,13 @@ app.get('/healthcheck', (_req, res) => res.send('Ok'));
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 app.get('/fontSize.css', (_, res) => res.status(404).end());
 
-app.get('/rendered-items/*', express.raw(), serveArticleGet);
-app.get('/*', express.raw(), serveArticleGet);
+app.get(
+	'/:edition(uk|us|au|international)/rendered-items/*',
+	express.raw(),
+	serveArticleGet,
+);
+app.get('/:edition(uk|us|au|international)/*', express.raw(), serveArticleGet);
+app.get('/*', (req, res) => res.redirect(`/uk${req.originalUrl}`));
 
 app.post('/article', express.raw(), serveArticlePost);
 
