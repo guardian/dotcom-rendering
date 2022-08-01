@@ -166,6 +166,7 @@ export type FEFrontCard = {
 		linkText?: string;
 		webUrl?: string;
 		editionBrandings: { edition: { id: EditionId } }[];
+		href?: string;
 	};
 	header: {
 		isVideo: boolean;
@@ -300,7 +301,7 @@ export type DCRCollectionType = {
 	containerPalette?: DCRContainerPalette;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
-	treats: DCRFrontCard[];
+	treats: TreatType[];
 	href?: string;
 	config: {
 		showDateHeader: boolean;
@@ -425,4 +426,9 @@ export type DCRSupportingContent = {
 	url?: string;
 	kickerText?: string;
 	format: ArticleFormat;
+};
+
+export type TreatType = {
+	text: string;
+	linkTo: string;
 };
