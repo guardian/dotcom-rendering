@@ -177,16 +177,20 @@ export const ContainerLayout = ({
 							justify-content: space-between;
 						`}
 					>
-						<ContainerTitle
-							title={title}
-							fontColour={fontColour || overrides?.text.container}
-							description={description}
-							url={url}
-							containerPalette={containerPalette}
-							showDateHeader={showDateHeader}
-							editionId={editionId}
-						/>
-						{leftContent}
+						<div>
+							<ContainerTitle
+								title={title}
+								fontColour={
+									fontColour || overrides?.text.container
+								}
+								description={description}
+								url={url}
+								containerPalette={containerPalette}
+								showDateHeader={showDateHeader}
+								editionId={editionId}
+							/>
+							{leftContent}
+						</div>
 						{treats && (
 							<Treats
 								treats={treats}
