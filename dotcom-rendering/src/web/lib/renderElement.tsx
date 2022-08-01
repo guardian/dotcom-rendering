@@ -451,7 +451,17 @@ export const renderElement = ({
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
-			return [true, <EmailSignup newsletter={element.newsletter} />];
+			return [
+				true,
+				<EmailSignup
+					identityName={element.newsletter.identityName}
+					description={element.newsletter.description}
+					name={element.newsletter.name}
+					frequency={element.newsletter.frequency}
+					successDescription={element.newsletter.successDescription}
+					theme={element.newsletter.theme}
+				/>,
+			];
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
 			return [
 				true,
