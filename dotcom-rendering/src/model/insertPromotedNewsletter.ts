@@ -171,21 +171,14 @@ export const insertPromotedNewsletter = (
 		case 'InterviewDesign':
 		case 'EditorialDesign':
 		case 'ObituaryDesign':
-			return blocks.map((block: Block, index: number) => {
+			return blocks.map((block: Block) => {
 				return {
 					...block,
-					elements:
-						// aside from blogs (excluded above) all article formats only contain 1 block, so
-						// the index conditional should not be necessary - but should another format with
-						// mutiple blocks be introduced, the NewsletterSignupBlockElement should only be
-						// included once
-						index === 0
-							? insertAtMiddle(
-									promotedNewsletter,
-									block.elements,
-									block.id,
-							  )
-							: block.elements,
+					elements: insertAtMiddle(
+						promotedNewsletter,
+						block.elements,
+						block.id,
+					),
 				};
 			});
 		default:
