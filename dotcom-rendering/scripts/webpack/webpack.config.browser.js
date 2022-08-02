@@ -37,8 +37,7 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 	output: {
 		filename: (data) => {
 			// We don't want to hash the debug script so it can be used in bookmarklets
-			if (data.chunk.name === 'debug')
-				return generateName(isLegacyJS, false);
+			if (data.chunk.name === 'debug') return `[name].js`;
 			return generateName(isLegacyJS);
 		},
 		chunkFilename: generateName(isLegacyJS),
