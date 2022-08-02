@@ -3,10 +3,10 @@ import { CacheProvider, css } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { space } from '@guardian/source-foundations';
 import { renderToString } from 'react-dom/server';
-import { Island } from '../Island';
-import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
+import { Island } from './Island';
+import { NewsletterPrivacyMessage } from './Newsletters/NewsletterPrivacyMessage';
+import { SignupForm } from './Newsletters/SignupForm';
 import { SecureSignupIframe } from './SecureSignupIframe.importable';
-import { SignupForm } from './SignupForm';
 
 export type Props = {
 	newsletterId: string;

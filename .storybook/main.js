@@ -81,7 +81,7 @@ const dcrWebpack = (config) => {
 	config.resolve.alias[
 		path.resolve(
 			__dirname,
-			'../dotcom-rendering/src/web/components/Newsletters/SecureSignup.tsx',
+			'../dotcom-rendering/src/web/components/SecureSignup.tsx',
 		)
 	] = path.resolve(
 		__dirname,
