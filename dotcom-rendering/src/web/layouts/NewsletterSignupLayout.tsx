@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
@@ -14,6 +15,7 @@ import {
 	Column,
 	Columns,
 	Hide,
+	Link,
 	LinkButton,
 	SvgEye,
 	SvgGuardianLogo,
@@ -35,14 +37,15 @@ import { NewsletterBadge } from '../components/Newsletters/NewsletterBadge';
 import { NewsletterDetail } from '../components/Newsletters/NewsletterDetail';
 import { NewsletterFrequency } from '../components/Newsletters/NewsletterFrequency';
 import { NewsletterPrivacyMessage } from '../components/Newsletters/NewsletterPrivacyMessage';
-import { SecureSignup } from '../components/Newsletters/SecureSignup';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { SecureSignup } from '../components/SecureSignup';
 import { ShareIcons } from '../components/ShareIcons';
 import { Standfirst } from '../components/Standfirst';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
+import { isValidUrl } from '../lib/isValidUrl';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -127,11 +130,20 @@ const previewCaptionStyle = css`
 	background-color: ${brandAlt[400]};
 	align-items: center;
 	padding: ${space[1]}px;
+	text-decoration: none;
 	${textSans.medium({ fontWeight: 'bold', lineHeight: 'tight' })}
 
 	svg {
 		margin-right: ${space[1]}px;
 		flex-shrink: 0;
+	}
+`;
+
+const previewLinkStyle = (palette: Palette): SerializedStyles => css`
+	text-decoration: none;
+	color: ${palette.text.articleLink};
+	:hover {
+		color: ${palette.text.articleLinkHover};
 	}
 `;
 
@@ -164,6 +176,15 @@ const shareDivStyle = css`
 	margin-top: ${space[3]}px;
 `;
 
+const getMainMediaCaptions = (
+	CAPIArticle: CAPIArticleType,
+): (string | undefined)[] =>
+	CAPIArticle.mainMediaElements.map((el) =>
+		el._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
+			? el.data.caption
+			: undefined,
+	);
+
 export const NewsletterSignupLayout = ({
 	CAPIArticle,
 	NAV,
@@ -186,8 +207,12 @@ export const NewsletterSignupLayout = ({
 
 	const palette = decidePalette(format);
 
-	/**	TODO: include logic here for whether preview exists for the newsletter */
-	const showNewsletterPreview = true; // has exampleUrl
+	/**	Newsletter preview will be linked if the caption of the main media is a URL */
+	const captions = getMainMediaCaptions(CAPIArticle).filter(Boolean);
+	const newsletterPreviewUrl = captions.find(
+		(caption) => caption && isValidUrl(caption),
+	);
+	const showNewsletterPreview = Boolean(newsletterPreviewUrl);
 
 	/** TODO: this data needs to come from the newsletters API */
 	const newsletterCategory = 'UK Focused';
@@ -346,17 +371,13 @@ export const NewsletterSignupLayout = ({
 								standfirst={CAPIArticle.standfirst}
 							/>
 
-							{/* TODO:
-								- This data will come from the Newsletters API
-								- Only render this part if preview link exists
-								- Add onClick handler or link?
-								- Accessibility?
-							*/}
 							{showNewsletterPreview && (
 								<div css={previewButtonWrapperStyle}>
 									<LinkButton
 										icon={<SvgEye />}
 										iconSide="left"
+										href={newsletterPreviewUrl}
+										target="_blank"
 										priority="tertiary"
 										size="xsmall"
 									>
@@ -394,20 +415,21 @@ export const NewsletterSignupLayout = ({
 
 						<Column width={[1, 1, 3 / 8, 1 / 2, 1 / 2]}>
 							<div css={mainGraphicWrapperStyle}>
-								{/* TODO:
-										- This data will come from the Newsletters API
-										- Only render this part if preview link exists
-										- Add onClick handler or link?
-										- Accessibility?
-								 */}
 								{showNewsletterPreview && (
 									<Hide until="desktop">
 										<figcaption css={previewCaptionStyle}>
 											<SvgEye size="small" />
-											<span role="link">
+
+											<Link
+												cssOverrides={previewLinkStyle(
+													palette,
+												)}
+												href={newsletterPreviewUrl}
+												target="_blank"
+											>
 												Click here to see the latest
 												version of this newsletter
-											</span>
+											</Link>
 										</figcaption>
 									</Hide>
 								)}
