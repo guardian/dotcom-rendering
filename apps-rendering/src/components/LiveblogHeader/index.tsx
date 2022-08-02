@@ -1,5 +1,8 @@
 // ----- Imports ----- //
 
+import { css, SerializedStyles } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
+import { ArticleFormat } from '@guardian/libs';
 import {
 	Column,
 	Columns,
@@ -10,15 +13,21 @@ import Headline from 'components/Headline';
 import LiveDateline from 'components/LiveDateline';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
-import {
-	headlineBackgroundColour,
-	standfirstBackgroundColour,
-} from 'editorialStyles';
+import { standfirstBackgroundColour } from 'editorialStyles';
 import type { DeadBlog, LiveBlog } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
+
+const containerStyles = (format: ArticleFormat): SerializedStyles => css`
+	background-color: ${background.headline(format)};
+
+	${darkModeCss`
+		background-color: ${background.headlineDark(format)};
+	`}
+`;
 
 interface Props {
 	item: LiveBlog | DeadBlog;
@@ -29,7 +38,7 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 
 	return (
 		<header>
-			<Container element="div" css={headlineBackgroundColour(format)}>
+			<Container element="div" css={containerStyles(format)}>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
 						<Series item={item} />
