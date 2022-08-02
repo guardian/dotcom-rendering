@@ -790,12 +790,12 @@ type CAPIOnwardsType = {
 	trails: CAPITrailType[];
 	description?: string;
 	url?: string;
-	ophanComponentName: OphanComponentName;
+	onwardsType: OnwardsType;
 	format: CAPIFormat;
 	isCuratedContent?: boolean;
 };
 
-type OphanComponentName =
+type OnwardsType =
 	| 'series'
 	| 'more-on-this-story'
 	| 'related-stories'

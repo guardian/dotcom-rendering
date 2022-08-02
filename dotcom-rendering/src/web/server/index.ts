@@ -193,24 +193,15 @@ export const renderOnwards = (
 	res: express.Response,
 ): void => {
 	try {
-		const {
-			heading,
-			description,
-			url,
-			ophanComponentName,
-			trails,
-			format,
-			isCuratedContent,
-		} = body;
+		const { heading, description, url, onwardsType, trails, format } = body;
 
 		const html = onwardsToHtml({
 			heading,
 			description,
 			url,
-			ophanComponentName,
+			onwardsType,
 			trails,
 			format,
-			isCuratedContent,
 		});
 
 		res.status(200).send(html);
