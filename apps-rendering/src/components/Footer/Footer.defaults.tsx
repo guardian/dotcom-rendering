@@ -26,6 +26,7 @@ const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 	padding-right: ${remSpace[3]};
 	padding-top: ${remSpace[4]};
 	padding-bottom: ${remSpace[4]};
+	background-color: ${background.footer(format)};
 
 	${from.wide} {
 		margin: 0 auto;
@@ -40,7 +41,7 @@ const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 
 	${darkModeCss`
 		color: ${neutral[60]};
-		background-color: ${background.articleContentDark(format)};
+		background-color: ${background.footerDark(format)};
 
 		a {
 			color: ${neutral[60]};

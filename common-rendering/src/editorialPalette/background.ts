@@ -83,27 +83,33 @@ const headlineByline = (_format: ArticleFormat): Colour => brandAlt[400];
 const headlineBylineDark = (_format: ArticleFormat): Colour => brandAlt[200];
 
 const headlineDark = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.DeadBlog) {
+	if (format.display === ArticleDisplay.Immersive) {
 		return neutral[7];
-	} else if (format.design === ArticleDesign.LiveBlog) {
-		switch (format.theme) {
-			case ArticlePillar.Culture:
-				return culture[200];
-			case ArticlePillar.Sport:
-				return sport[200];
-			case ArticlePillar.Lifestyle:
-				return lifestyle[200];
-			case ArticlePillar.Opinion:
-				return opinion[200];
-			case ArticlePillar.News:
-				return news[200];
-			default:
-				return news[200];
-		}
-	} else if (format.design === ArticleDesign.Interview) {
-		return neutral[20];
 	}
-	return neutral[10];
+
+	switch (format.design) {
+		case ArticleDesign.DeadBlog:
+			return neutral[7];
+		case ArticleDesign.LiveBlog: {
+			switch (format.theme) {
+				case ArticlePillar.Culture:
+					return culture[200];
+				case ArticlePillar.Sport:
+					return sport[200];
+				case ArticlePillar.Lifestyle:
+					return lifestyle[200];
+				case ArticlePillar.Opinion:
+					return opinion[200];
+				case ArticlePillar.News:
+				default:
+					return news[200];
+			}
+		}
+		case ArticleDesign.Interview:
+			return neutral[20];
+		default:
+			return neutral[10];
+	}
 };
 
 const richLink = (_format: ArticleFormat): Colour => {
@@ -565,6 +571,14 @@ const pinnedPost = (format: ArticleFormat): string => {
 	}
 };
 
+const onwardContent = (_format: ArticleFormat): Colour => neutral[97];
+
+const onwardContentDark = (_format: ArticleFormat): Colour => neutral[0];
+
+const footer = (_format: ArticleFormat): Colour => neutral[97];
+
+const footerDark = (_format: ArticleFormat): Colour => neutral[0];
+
 // ----- API ----- //
 
 const background = {
@@ -575,6 +589,8 @@ const background = {
 	bullet,
 	bulletDark,
 	calloutSpeechBubble,
+	footer,
+	footerDark,
 	headline,
 	headlineByline,
 	headlineBylineDark,
@@ -586,6 +602,8 @@ const background = {
 	keyEventsWideDark,
 	liveblogMetadata,
 	mediaArticleBody,
+	onwardContent,
+	onwardContentDark,
 	relatedCard,
 	relatedCardDark,
 	relatedCardIcon,

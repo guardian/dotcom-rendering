@@ -80,6 +80,11 @@ const styles = (
 		${body.medium()}
 		overflow-wrap: break-word;
 		margin: 0 0 ${remSpace[3]};
+		color: ${text.paragraph(format)};
+
+		${darkModeCss`
+			color: ${text.paragraphDark(format)};
+		`}
 		${dropCap}
 		${labs}
 	`;

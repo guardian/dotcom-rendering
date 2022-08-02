@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { from, neutral } from '@guardian/source-foundations';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 import { grid } from './grid';
 
 // ----- Component ----- //
@@ -16,6 +17,10 @@ const styles = (rows: [number, number]): SerializedStyles => css`
 		outline: 0.5px solid ${neutral[86]};
 		width: 0;
 	}
+
+	${darkModeCss`
+		outline-color: ${neutral[20]};
+	`}
 `;
 
 interface Props {

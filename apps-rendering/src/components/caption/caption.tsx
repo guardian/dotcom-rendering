@@ -2,6 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import {
@@ -14,6 +15,7 @@ import { withDefault } from '@guardian/types';
 import Anchor from 'components/Anchor';
 import type { FC, ReactNode } from 'react';
 import { getHref, renderTextElement } from 'renderer';
+import { darkModeCss } from 'styles';
 
 // ----- Caption Elements ----- //
 
@@ -37,11 +39,15 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles | undefined =>
 		  `
 		: undefined;
 
-const textStyles = css`
+const textStyles = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.xsmall({
 		lineHeight: 'regular',
 	})}
-	color: ${neutral[46]};
+	color: ${text.figCaption(format)};
+
+	${darkModeCss`
+		color: ${text.figCaptionDark(format)};
+	`}
 `;
 
 const captionElement =
@@ -85,7 +91,7 @@ const captionElement =
 				);
 			case '#text':
 				return (
-					<span css={textStyles} key={key}>
+					<span css={textStyles(format)} key={key}>
 						{text}
 					</span>
 				);
