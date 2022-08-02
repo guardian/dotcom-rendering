@@ -14,7 +14,6 @@ import {
 } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
 import { OptionKind } from '@guardian/types';
-import { editionsHeadlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { index } from 'lib';
@@ -27,6 +26,7 @@ import {
 	tabletContentWidth,
 	wideContentWidth,
 } from '../styles';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 
 const wide = wideContentWidth + 12;
 const tablet = tabletContentWidth + 12;
@@ -143,7 +143,7 @@ const getFontStyles = (
 `;
 
 const getSharedStyles = (format: ArticleFormat): SerializedStyles => css`
-	${editionsHeadlineTextColour(format)}
+	color: ${text.headline(format)};
 	box-sizing: border-box;
 	border-top: 1px solid ${border.secondary};
 	padding-bottom: ${remSpace[4]};
