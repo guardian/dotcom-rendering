@@ -3,7 +3,7 @@ import { Standard as ExampleArticle } from '../../../fixtures/generated/articles
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 import { findBySubsection } from '../../model/article-sections';
 import { extractNAV } from '../../model/extract-nav';
-import { validateAsCAPIType as validateV2 } from '../../model/validate';
+import { validateAsCAPIType } from '../../model/validate';
 import type { AnalyticsModel } from '../components/Analytics';
 import { generatePermutivePayload } from '../lib/permutive';
 import { extractScripts } from '../lib/scripts';
@@ -13,14 +13,10 @@ import { document } from './document';
 
 export const render = ({ body }: express.Request, res: express.Response) => {
 	try {
-		// TODO remove when migrated to v2
-		const CAPIArticle = validateV2(body);
+		const CAPIArticle = validateAsCAPIType(body);
 		const { linkedData } = CAPIArticle;
 		const { config } = CAPIArticle;
-		const blockElements = CAPIArticle.blocks.map((block) => block.elements);
-
-		// This is simply to flatten the elements
-		const elements = ([] as CAPIElement[]).concat(...blockElements);
+		const elements = CAPIArticle.blocks.flatMap((block) => block.elements);
 
 		const scripts = [
 			...extractScripts(elements, CAPIArticle.mainMediaElements),
