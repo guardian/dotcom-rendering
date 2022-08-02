@@ -36,7 +36,7 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 	margin-bottom: ${remSpace[3]};
 	color: ${text.standfirst(format)};
 
-	background-colour: ${background.standfirst(format)};
+	background-color: ${background.standfirst(format)};
 
 	p,
 	ul {
