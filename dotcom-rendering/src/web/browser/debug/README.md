@@ -26,5 +26,5 @@ javascript: (() => {
 
 ## After publishing
 
-Assets on assets.guim.co.uk are cached by fastly - to allow users to receive the latest update of this bookmarklet,
+Assets on assets.guim.co.uk are cached by fastly. To allow users to receive the latest version of this bookmarklet after an update,
 you should log into the fastly dashboard and clear the cache!
