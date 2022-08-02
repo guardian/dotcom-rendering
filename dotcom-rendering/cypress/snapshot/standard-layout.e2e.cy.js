@@ -18,7 +18,8 @@ describe('Visual regression', function () {
 
 		cy.percySnapshot('Standard Layout', {
 			// TODO decide on the subset of breakpoints we wish to snapshot
-			widths: Object.values(breakpoints),
+			// widths: Object.values(breakpoints),
+			widths: [breakpoints.wide],
 		});
 	});
 });
