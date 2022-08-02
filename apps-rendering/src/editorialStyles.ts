@@ -33,12 +33,6 @@ const backgroundColour = (light: Colour, dark: Colour): SerializedStyles =>
 const editionsHeadlineTextColour = (format: ArticleFormat): SerializedStyles =>
 	textColour(text.headline(format));
 
-const standfirstBackgroundColour = (format: ArticleFormat): SerializedStyles =>
-	backgroundColour(
-		background.standfirst(format),
-		background.standfirstDark(format),
-	);
-
 // ----- Exports ----- //
 
-export { standfirstBackgroundColour, editionsHeadlineTextColour };
+export { editionsHeadlineTextColour };

@@ -13,7 +13,6 @@ import Headline from 'components/Headline';
 import LiveDateline from 'components/LiveDateline';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
-import { standfirstBackgroundColour } from 'editorialStyles';
 import type { DeadBlog, LiveBlog } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
@@ -26,6 +25,16 @@ const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 
 	${darkModeCss`
 		background-color: ${background.headlineDark(format)};
+	`}
+`;
+
+const standfirstContainerStyles = (
+	format: ArticleFormat,
+): SerializedStyles => css`
+	background-color: ${background.standfirst(format)};
+
+	${darkModeCss`
+		background-color: ${background.standfirstDark(format)};
 	`}
 `;
 
@@ -48,7 +57,7 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 					</Column>
 				</Columns>
 			</Container>
-			<Container element="div" css={standfirstBackgroundColour(format)}>
+			<Container element="div" css={standfirstContainerStyles(format)}>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
 						<Hide below="desktop">
