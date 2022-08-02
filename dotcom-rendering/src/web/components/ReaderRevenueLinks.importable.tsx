@@ -211,7 +211,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 					});
 			})
 			.catch((error) => {
-				const msg = `Error importing RR header links: ${error}`;
+				const msg = `Error importing RR header links: ${String(error)}`;
 
 				console.log(msg);
 				window.guardian.modules.sentry.reportError(
@@ -382,7 +382,7 @@ export const ReaderRevenueLinks = ({
 					setCountryCode(cc || '');
 				})
 				.catch((e) =>
-					console.error(`countryCodePromise - error: ${e}`),
+					console.error(`countryCodePromise - error: ${String(e)}`),
 				);
 		};
 		callFetch();

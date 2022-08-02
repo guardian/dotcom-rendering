@@ -240,7 +240,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 							cs_ucfr: '0',
 							comscorekw: keywords,
 						},
-					)}" />
+					).toString()}" />
                 </noscript>
                 ${priorityScriptTags.join('\n')}
                 <style class="webfont">${getFontsCss()}</style>

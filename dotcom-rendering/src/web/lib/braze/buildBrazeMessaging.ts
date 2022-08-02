@@ -73,7 +73,9 @@ export const buildBrazeMessaging = async (
 
 		log(
 			'tx',
-			`Not attempting to show Braze messages. Dependency ${failure.field} failed with ${failure.data}.`,
+			`Not attempting to show Braze messages. Dependency ${
+				failure.field
+			} failed with ${String(failure.data)}.`,
 		);
 
 		await maybeWipeUserData(

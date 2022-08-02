@@ -33,10 +33,12 @@ const refreshExperimentsData = () => {
 	setTimeout(() => {
 		fetchExperimentsData()
 			.then(refreshExperimentsData)
-			.catch((e) => console.error(`fetchExperimentsData - error: ${e}`));
+			.catch((e) =>
+				console.error(`fetchExperimentsData - error: ${String(e)}`),
+			);
 	}, oneMinute * 2);
 };
 
 fetchExperimentsData()
 	.then(refreshExperimentsData)
-	.catch((e) => console.error(`fetchExperimentsData - error: ${e}`));
+	.catch((e) => console.error(`fetchExperimentsData - error: ${String(e)}`));

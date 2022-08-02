@@ -327,7 +327,7 @@ const RemoteBanner = ({
 				setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
 			})
 			.catch((error) => {
-				const msg = `Error importing RR banner: ${error}`;
+				const msg = `Error importing RR banner: ${String(error)}`;
 
 				console.log(msg);
 				window.guardian.modules.sentry.reportError(
