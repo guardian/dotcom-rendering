@@ -1,21 +1,29 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import {
+	background,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from, headline, remSpace } from '@guardian/source-foundations';
 import StarRating from 'components/StarRating';
-import { headlineBackgroundColour, headlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
-import { articleWidthStyles } from 'styles';
+import { articleWidthStyles, darkModeCss } from 'styles';
 
 export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 	const baseStyles = css`
 		${headline.small()}
-		${headlineTextColour(format)}
+		color: ${text.headline(format)};
 		margin: 0;
+
 		${from.tablet} {
 			${headline.medium()}
 		}
+
+		${darkModeCss`
+			color: ${text.headlineDark(format)};
+		`}
 	`;
 
 	switch (format.design) {
