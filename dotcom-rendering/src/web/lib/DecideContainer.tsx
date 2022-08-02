@@ -2,6 +2,7 @@ import type {
 	DCRContainerPalette,
 	DCRContainerType,
 	DCRFrontCard,
+	DCRGroupedTrails,
 } from '../../types/front';
 import { DynamicFast } from '../components/DynamicFast';
 import { DynamicPackage } from '../components/DynamicPackage';
@@ -14,6 +15,7 @@ import { FixedSmallSlowVThird } from '../components/FixedSmallSlowVThird';
 
 type Props = {
 	trails: DCRFrontCard[];
+	groupedTrails: DCRGroupedTrails;
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
@@ -21,6 +23,7 @@ type Props = {
 
 export const DecideContainer = ({
 	trails,
+	groupedTrails,
 	containerType,
 	containerPalette,
 	showAge,
@@ -29,7 +32,7 @@ export const DecideContainer = ({
 		case 'dynamic/fast':
 			return (
 				<DynamicFast
-					trails={trails}
+					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
 				/>

@@ -299,6 +299,7 @@ export type DCRCollectionType = {
 	displayName: string;
 	collectionType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
+	grouped: DCRGroupedTrails;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
 	treats: TreatType[];
@@ -306,6 +307,14 @@ export type DCRCollectionType = {
 	config: {
 		showDateHeader: boolean;
 	};
+};
+
+export type DCRGroupedTrails = {
+	snap: TrailType[];
+	huge: TrailType[];
+	veryBig: TrailType[];
+	big: TrailType[];
+	standard: TrailType[];
 };
 
 type FEFrontConfigType = {
