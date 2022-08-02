@@ -352,7 +352,6 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 	branding,
 }: CarouselCardProps) => (
 	<LI
-		stretch={true}
 		percentage="25%"
 		showDivider={!isFirst}
 		padSides={true}

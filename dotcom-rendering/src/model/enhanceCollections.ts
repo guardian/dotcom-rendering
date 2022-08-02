@@ -2,6 +2,7 @@ import type { DCRCollectionType, FECollectionType } from '../types/front';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
+import { groupCards } from './groupCards';
 
 export const enhanceCollections = (
 	collections: FECollectionType[],
@@ -16,6 +17,12 @@ export const enhanceCollections = (
 			displayName,
 			collectionType,
 			containerPalette,
+			grouped: groupCards(
+				collectionType,
+				collection.curated,
+				collection.backfill,
+				containerPalette,
+			),
 			curated: enhanceCards(collection.curated, containerPalette),
 			backfill: enhanceCards(collection.backfill, containerPalette),
 			treats: enhanceTreats(collection.treats),
