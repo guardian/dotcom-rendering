@@ -141,6 +141,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								showSideBorders={false}
 								ophanComponentLink={ophanComponentLink}
 								ophanComponentName={ophanName}
+								containerName={collection.collectionType}
 								element="section"
 							>
 								<Snap snapData={trails[0].snapData} />
