@@ -8,6 +8,7 @@ import {
 	headline,
 	until,
 } from '@guardian/source-foundations';
+import type { PillarType } from '../../model/extract-nav';
 import { decidePalette } from '../lib/decidePalette';
 import { navInputCheckboxId } from './Nav/config';
 

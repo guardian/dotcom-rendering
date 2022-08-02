@@ -17,6 +17,7 @@ import {
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
 import { clearFix } from '../../lib/mixins';
+import type { PillarType } from '../../model/extract-nav';
 import { BackToTop } from './BackToTop';
 import { Island } from './Island';
 import { Pillars } from './Pillars';

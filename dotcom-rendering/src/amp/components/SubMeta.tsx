@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { body, neutral, text, textSans } from '@guardian/source-foundations';
 import React from 'react';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../lib/pillars';
+import type { BaseLinkType } from '../../model/extract-nav';
 import CommentIcon from '../../static/icons/comment.svg';
 import { ShareIcons } from './ShareIcons';
 
@@ -109,8 +110,8 @@ const shareIcons = css`
 
 export const SubMeta: React.FC<{
 	pillar: ArticleTheme;
-	sections: SimpleLinkType[];
-	keywords: SimpleLinkType[];
+	sections: BaseLinkType[];
+	keywords: BaseLinkType[];
 	sharingURLs: {
 		[K in SharePlatform]?: {
 			url: string;
