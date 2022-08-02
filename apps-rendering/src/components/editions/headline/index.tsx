@@ -2,6 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { FontWeight, LineHeight } from '@guardian/source-foundations';
@@ -26,7 +27,6 @@ import {
 	tabletContentWidth,
 	wideContentWidth,
 } from '../styles';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 
 const wide = wideContentWidth + 12;
 const tablet = tabletContentWidth + 12;
