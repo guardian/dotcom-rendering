@@ -42,6 +42,10 @@ const linkStyles = (palette: Palette) => css`
 		span {
 			border-bottom: 1px solid ${palette.hover.keyEventLink};
 		}
+		div {
+			text-decoration: underline ${palette.text.keyEvent};
+			text-underline-offset: 3px;
+		}
 	}
 `;
 
