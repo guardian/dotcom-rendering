@@ -47,7 +47,7 @@ export type Props = {
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
 	imageSize?: ImageSizeType;
 	trailText?: string;
-	avatar?: AvatarType;
+	avatarUrl?: string;
 	showClock?: boolean;
 	mediaType?: MediaType;
 	mediaDuration?: number;
@@ -178,7 +178,7 @@ export const Card = ({
 	imagePositionOnMobile = 'left',
 	imageSize = 'small',
 	trailText,
-	avatar,
+	avatarUrl,
 	showClock,
 	mediaType,
 	mediaDuration,
@@ -277,6 +277,14 @@ export const Card = ({
 		return <Snap snapData={snapData} />;
 	}
 
+	// Decide what type of image to show, main media, avatar or none
+	let imageType: 'mainmedia' | 'avatar' | undefined;
+	if (imageUrl && avatarUrl) {
+		imageType = 'avatar';
+	} else if (imageUrl) {
+		imageType = 'mainmedia';
+	}
+
 	return (
 		<CardWrapper
 			format={format}
@@ -295,7 +303,7 @@ export const Card = ({
 				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
 			>
-				{!!imageUrl && (
+				{imageType === 'mainmedia' && (
 					<ImageWrapper
 						imageSize={imageSize}
 						imagePosition={imagePosition}
@@ -348,12 +356,12 @@ export const Card = ({
 								/>
 							) : undefined}
 						</HeadlineWrapper>
-						{avatar && (
+						{imageType === 'avatar' && !!avatarUrl && (
 							<Hide when="above" breakpoint="tablet">
 								<AvatarContainer>
 									<Avatar
-										imageSrc={avatar.src}
-										imageAlt={avatar.alt}
+										imageSrc={avatarUrl}
+										imageAlt={byline ?? ''}
 										containerPalette={containerPalette}
 										format={format}
 									/>
@@ -375,12 +383,12 @@ export const Card = ({
 								/>
 							</TrailTextWrapper>
 						)}
-						{avatar && (
+						{imageType === 'avatar' && !!avatarUrl && (
 							<Hide when="below" breakpoint="tablet">
 								<AvatarContainer>
 									<Avatar
-										imageSrc={avatar.src}
-										imageAlt={avatar.alt}
+										imageSrc={avatarUrl}
+										imageAlt={byline ?? ''}
 										containerPalette={containerPalette}
 										format={format}
 									/>

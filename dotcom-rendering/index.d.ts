@@ -129,7 +129,7 @@ type Palette = {
 		blockquote: Colour;
 		numberedTitle: Colour;
 		numberedPosition: Colour;
-		overlayedCaption: Colour;
+		overlaidCaption: Colour;
 		shareCount: Colour;
 		shareCountUntilDesktop: Colour;
 		cricketScoreboardLink: Colour;
@@ -689,11 +689,6 @@ type SmallHeadlineSize =
 	| 'huge'
 	| 'ginormous';
 
-type AvatarType = {
-	src: string;
-	alt: string;
-};
-
 type MediaType = 'Video' | 'Audio' | 'Gallery';
 
 type LineEffectType = 'labs' | 'dotted' | 'straight';
@@ -795,12 +790,12 @@ type CAPIOnwardsType = {
 	trails: CAPITrailType[];
 	description?: string;
 	url?: string;
-	ophanComponentName: OphanComponentName;
+	onwardsType: OnwardsType;
 	format: CAPIFormat;
 	isCuratedContent?: boolean;
 };
 
-type OphanComponentName =
+type OnwardsType =
 	| 'series'
 	| 'more-on-this-story'
 	| 'related-stories'

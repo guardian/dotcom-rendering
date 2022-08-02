@@ -4,17 +4,8 @@ import { cmpIframe } from '../../lib/cmpIframe';
 import { privacySettingsIframe } from '../../lib/privacySettingsIframe';
 import { storage } from '@guardian/libs';
 
-// It is important to use this article for this test because its commercialProperties
-// coming from the CAPI object are the same for all editions. This way we are making sure
-// the Branding island the test expects will be in the DOM. If an article with different
-// commercialProperties across editions were to be used, the test would have different
-// outcome when running locally (UK edition) and when running in CI. For example,
-// it could be US edition if the CI server runs in US. The best way to deal with
-// this would be to control the edition in the test whether by setting the GU_EDITION
-// cookie or by selecting the edition in the UI. Unfortunately, the first solution did
-// not work and the second one is not possible at this point of the migration.
 const paidContentPage =
-	'https://www.theguardian.com/you-could-be-here/2022/may/13/kos-crete-corfu-and-mykonos-a-guide-to-greeces-favourite-islands';
+	'https://www.theguardian.com/a-vision-for-better-food/2022/jul/22/a-kitchen-in-a-quarry-why-charlie-bighams-food-campus-was-named-a-riba-building-of-the-year';
 
 describe('Paid content tests', function () {
 	beforeEach(function () {
@@ -59,7 +50,7 @@ describe('Paid content tests', function () {
 			let requestURL = interception.request.url;
 			expect(requestURL).to.include('ec=click');
 			expect(requestURL).to.include('ea=sponsor%20logo');
-			expect(requestURL).to.include('el=british%20airways%20holidays');
+			expect(requestURL).to.include('el=charlie%20bigham%27s');
 		});
 	});
 
@@ -100,7 +91,7 @@ describe('Paid content tests', function () {
 			let requestURL = interception.request.url;
 			expect(requestURL).to.include('ec=click');
 			expect(requestURL).to.include('ea=sponsor%20logo');
-			expect(requestURL).to.include('el=british%20airways%20holidays');
+			expect(requestURL).to.include('el=charlie%20bigham%27s');
 		});
 	});
 });

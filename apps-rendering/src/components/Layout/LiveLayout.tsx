@@ -15,6 +15,7 @@ import {
 	pxToRem,
 	remSpace,
 } from '@guardian/source-foundations';
+import { fromNullable } from '@guardian/types';
 import Footer from 'components/Footer';
 import GridItem from 'components/GridItem';
 import LiveBlocks from 'components/LiveBlocks';
@@ -116,6 +117,7 @@ interface Props {
 }
 
 const LiveLayout: FC<Props> = ({ item }) => {
+	const pinnedPost = fromNullable(item.blocks.find((b) => b.isPinned));
 	const pagination = (
 		<Pagination
 			format={item}
@@ -187,6 +189,7 @@ const LiveLayout: FC<Props> = ({ item }) => {
 							blocks={item.pagedBlocks.currentPage.blocks}
 							format={item}
 							pageNumber={item.pagedBlocks.currentPage.pageNumber}
+							pinnedPost={pinnedPost}
 						/>
 						{pagination}
 					</div>

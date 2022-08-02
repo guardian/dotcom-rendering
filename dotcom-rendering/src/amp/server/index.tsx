@@ -75,10 +75,10 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 			res.status(400).send(`<pre>${e.message}</pre>`);
 		} else if (e instanceof NotRenderableInDCR) {
 			res.status(415).send(`<pre>${e.message}</pre>`);
-		} else {
-			// @ts-expect-error
-
+		} else if (e instanceof Error) {
 			res.status(500).send(`<pre>${e.message}</pre>`);
+		} else {
+			res.status(500).send(`<pre>Unknown error</pre>`);
 		}
 	}
 };

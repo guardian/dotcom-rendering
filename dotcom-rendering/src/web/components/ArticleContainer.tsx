@@ -84,15 +84,17 @@ const adStyles = css`
 		}
 
 		.ad-slot {
-			/* this fixes inter-scrollers stealing mouse events */
-			overflow: hidden;
-
 			${from.tablet} {
 				/* from tablet the ad slot will stretch to the full width of the container and the iframe will be centred by the text-align: center; on the container */
 				flex: 1;
 				/* Ensures slots do not take on 100% of the container height, allowing them to be sticky in containers */
 				align-self: flex-start;
 			}
+		}
+
+		.ad-slot--interscroller {
+			/* this fixes inter-scrollers stealing mouse events */
+			overflow: hidden;
 		}
 
 		/* liveblogs ads have different background colours due the darker page background */

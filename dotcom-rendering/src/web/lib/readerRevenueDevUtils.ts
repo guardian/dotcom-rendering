@@ -139,7 +139,9 @@ const changeGeolocation = (
 	getLocaleCode()
 		.then((current) => {
 			const geo = window.prompt(
-				`Enter two-letter geolocation code (e.g. GB, US, AU). Current is ${current}.`,
+				`Enter two-letter geolocation code (e.g. GB, US, AU). Current is ${
+					current ?? 'null'
+				}.`,
 			);
 			if (geo === 'UK') {
 				alert(
@@ -153,7 +155,9 @@ const changeGeolocation = (
 				);
 			}
 		})
-		.catch((e) => console.error(`changeGeolocation - error: ${e}`));
+		.catch((e) => {
+			console.error(`changeGeolocation - error: ${String(e)}`);
+		});
 };
 
 type ReaderRevenueDevUtil = (

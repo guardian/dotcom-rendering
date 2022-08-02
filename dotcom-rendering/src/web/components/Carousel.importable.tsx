@@ -25,9 +25,8 @@ type Props = {
 	trails: TrailType[];
 	description?: string;
 	url?: string;
-	ophanComponentName: OphanComponentName;
+	onwardsType: OnwardsType;
 	format: ArticleFormat;
-	isCuratedContent?: boolean;
 };
 
 // Carousel icons - need replicating from source for centring
@@ -425,13 +424,7 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 	</div>
 );
 
-export const Carousel = ({
-	heading,
-	trails,
-	ophanComponentName,
-	format,
-	isCuratedContent,
-}: Props) => {
+export const Carousel = ({ heading, trails, onwardsType, format }: Props) => {
 	const palette = decidePalette(format);
 	const carouselRef = useRef<HTMLUListElement>(null);
 
@@ -439,6 +432,8 @@ export const Carousel = ({
 	const [maxIndex, setMaxIndex] = useState(0);
 
 	const arrowName = 'carousel-small-arrow';
+
+	const isCuratedContent = onwardsType === 'curated-content';
 
 	const notPresentation = (el: HTMLElement): boolean =>
 		el.getAttribute('role') !== 'presentation';
@@ -584,7 +579,7 @@ export const Carousel = ({
 			</div>
 			<div
 				css={[containerStyles, containerMargins]}
-				data-component={ophanComponentName}
+				data-component={onwardsType}
 				data-link={formatAttrString(heading)}
 			>
 				<Hide when="above" breakpoint="leftCol">

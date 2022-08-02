@@ -96,7 +96,7 @@ export const ContainerTitle = ({
 	const locale = editionId && getEditionFromId(editionId).locale;
 
 	return (
-		<>
+		<div>
 			{url ? (
 				<a css={linkStyles} href={url}>
 					<h2 css={headerStyles(fontColour)}>{title}</h2>
@@ -137,6 +137,6 @@ export const ContainerTitle = ({
 					</span>
 				</div>
 			)}
-		</>
+		</div>
 	);
 };

@@ -661,9 +661,8 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								trails={CAPIArticle.storyPackage.trails.map(
 									decideTrail,
 								)}
-								ophanComponentName="more-on-this-story"
+								onwardsType="more-on-this-story"
 								format={format}
-								isCuratedContent={false}
 							/>
 						</Island>
 					</ElementContainer>

@@ -147,6 +147,9 @@ const buildRRBannerConfigWith = ({
 						subscriptionBannerLastClosedAt: getBannerLastClosedAt(
 							'subscriptionBannerLastClosedAt',
 						),
+						signInBannerLastClosedAt: getBannerLastClosedAt(
+							'signInBannerLastClosedAt',
+						),
 						section,
 						isPreview,
 						idApiUrl,
@@ -294,7 +297,9 @@ export const StickyBottomBanner = ({
 				setSelectedBanner(PickedBanner),
 			)
 			.catch((e) =>
-				console.error(`StickyBottomBanner pickMessage - error: ${e}`),
+				console.error(
+					`StickyBottomBanner pickMessage - error: ${String(e)}`,
+				),
 			);
 	}, [isSignedIn, asyncCountryCode, brazeMessages, asyncArticleCounts]);
 
