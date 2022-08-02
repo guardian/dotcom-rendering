@@ -61,7 +61,7 @@ export const VimeoBlockComponent = ({
 					allowFullScreen={true}
 				/>
 			</div>
-			{caption && (
+			{!!caption && (
 				<Caption
 					captionText={caption}
 					format={format}

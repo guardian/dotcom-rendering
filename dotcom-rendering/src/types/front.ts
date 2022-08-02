@@ -90,6 +90,21 @@ export type DCRContainerPalette =
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
 
+export type FETagType = {
+	id: string;
+	url: string;
+	tagType: string;
+	sectionId: string;
+	sectionName: string;
+	webTitle: string;
+	webUrl: string;
+	twitterHandle?: string;
+	/* bio is html */
+	bio?: string;
+	bylineImageUrl?: string;
+	contributorLargeImagePath?: string;
+};
+
 export type FEFrontCard = {
 	properties: {
 		isBreaking: boolean;
@@ -135,16 +150,23 @@ export type FEFrontCard = {
 				standfirst?: string;
 			};
 			elements: Record<string, unknown>;
-			tags: Record<string, unknown>;
+			tags: { tags: { properties: FETagType }[] };
 		};
 		maybeContentId?: string;
 		isLiveBlog: boolean;
 		isCrossword: boolean;
 		byline?: string;
+		image?: {
+			type: string;
+			item: {
+				imgSource?: string;
+			};
+		};
 		webTitle: string;
 		linkText?: string;
 		webUrl?: string;
 		editionBrandings: { edition: { id: EditionId } }[];
+		href?: string;
 	};
 	header: {
 		isVideo: boolean;
@@ -220,6 +242,7 @@ export type DCRFrontCard = {
 	discussionId?: string;
 	byline?: string;
 	showByline?: boolean;
+	avatarUrl?: string;
 };
 
 export type FESnapType = {
@@ -231,6 +254,24 @@ export type FESnapType = {
 export type DCRSnapType = {
 	embedHtml?: string;
 	embedCss?: string;
+};
+
+type FECollectionConfigType = {
+	displayName: string;
+	metadata?: { type: FEContainerPalette }[];
+	collectionType: FEContainerType;
+	href?: string;
+	groups?: string[];
+	uneditable: boolean;
+	showTags: boolean;
+	showSections: boolean;
+	hideKickers: boolean;
+	showDateHeader: boolean;
+	showLatestUpdate: boolean;
+	excludeFromRss: boolean;
+	showTimestamps: boolean;
+	hideShowMore: boolean;
+	platform: string;
 };
 
 export type FECollectionType = {
@@ -249,23 +290,7 @@ export type FECollectionType = {
 	hideKickers: boolean;
 	showDateHeader: boolean;
 	showLatestUpdate: boolean;
-	config: {
-		displayName: string;
-		metadata?: { type: FEContainerPalette }[];
-		collectionType: FEContainerType;
-		href?: string;
-		groups?: string[];
-		uneditable: boolean;
-		showTags: boolean;
-		showSections: boolean;
-		hideKickers: boolean;
-		showDateHeader: boolean;
-		showLatestUpdate: boolean;
-		excludeFromRss: boolean;
-		showTimestamps: boolean;
-		hideShowMore: boolean;
-		platform: string;
-	};
+	config: FECollectionConfigType;
 	hasMore: boolean;
 };
 
@@ -276,7 +301,7 @@ export type DCRCollectionType = {
 	containerPalette?: DCRContainerPalette;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
-	treats: DCRFrontCard[];
+	treats: TreatType[];
 	href?: string;
 	config: {
 		showDateHeader: boolean;
@@ -401,4 +426,9 @@ export type DCRSupportingContent = {
 	url?: string;
 	kickerText?: string;
 	format: ArticleFormat;
+};
+
+export type TreatType = {
+	text: string;
+	linkTo: string;
 };

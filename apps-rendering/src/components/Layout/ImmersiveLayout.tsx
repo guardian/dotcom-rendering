@@ -1,8 +1,15 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import {
+	background,
+	fill,
+} from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
 import { between, from, remSpace } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import MainMedia, { ImmersiveCaption } from 'components/MainMedia';
 import Metadata from 'components/Metadata';
@@ -15,15 +22,24 @@ import LeftCentreBorder from 'grid/LeftCentreBorder';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
-const headerStyles = css`
+const headerStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.container}
+
+	${darkModeCss`
+		background-color: ${background.articleContentDark(format)}
+	`}
 `;
 
-const mainContentStyles = css`
+const mainContentStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.container}
+
+	${darkModeCss`
+		background-color: ${background.articleContentDark(format)}
+	`}
 `;
 
 const bodyStyles = css`
@@ -38,7 +54,7 @@ const bodyStyles = css`
 	}
 `;
 
-const linesStyles = css`
+const linesStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.column.all}
 	margin-top: ${remSpace[1]};
 
@@ -50,44 +66,48 @@ const linesStyles = css`
 		${grid.column.left}
 		margin-top: 0;
 	}
+
+	${darkModeCss`
+		stroke: ${fill.linesDark(format)};
+	`}
 `;
 
 type Props = {
 	item: Item;
 };
 
-const ImmersiveLayout: FC<Props> = ({ item, children }) => (
-	<>
-		<main>
-			<article>
-				<header css={headerStyles}>
-					<MainMedia
-						mainMedia={item.mainMedia}
-						format={getFormat(item)}
-					/>
-					<Series item={item} />
-					<Headline item={item} />
-					<Standfirst item={item} />
-					<ImmersiveCaption
-						mainMedia={item.mainMedia}
-						format={getFormat(item)}
-					/>
-					<LeftCentreBorder rows={[5, 5]} />
-				</header>
-				<div css={mainContentStyles}>
-					<LeftCentreBorder rows={[1, 5]} />
-					<StraightLines cssOverrides={linesStyles} />
-					<Metadata item={item} />
-					<div css={bodyStyles}>{children}</div>
-					<Tags item={item} />
-				</div>
-			</article>
-		</main>
-		<RelatedContent item={item} />
-		<aside>Comments</aside>
-		<footer>Footer</footer>
-	</>
-);
+const ImmersiveLayout: FC<Props> = ({ item, children }) => {
+	const format = getFormat(item);
+
+	return (
+		<>
+			<main>
+				<article>
+					<header css={headerStyles(format)}>
+						<MainMedia mainMedia={item.mainMedia} format={format} />
+						<Series item={item} />
+						<Headline item={item} />
+						<Standfirst item={item} />
+						<ImmersiveCaption
+							mainMedia={item.mainMedia}
+							format={format}
+						/>
+						<LeftCentreBorder rows={[5, 5]} />
+					</header>
+					<div css={mainContentStyles(format)}>
+						<LeftCentreBorder rows={[1, 5]} />
+						<StraightLines cssOverrides={linesStyles(format)} />
+						<Metadata item={item} />
+						<div css={bodyStyles}>{children}</div>
+						<Tags item={item} />
+					</div>
+				</article>
+			</main>
+			<RelatedContent item={item} />
+			<Footer isCcpa={false} format={format} />
+		</>
+	);
+};
 
 // ----- Exports ----- //
 

@@ -19,7 +19,7 @@ type Props = {
 	credit?: string;
 	displayCredit?: boolean;
 	shouldLimitWidth?: boolean;
-	isOverlayed?: boolean;
+	isOverlaid?: boolean;
 	isLeftCol?: boolean;
 	mediaType?: MediaType;
 	isMainMedia?: boolean;
@@ -42,7 +42,7 @@ const bottomMarginStyles = css`
 	margin-bottom: 6px;
 `;
 
-const overlayedBottomPadding = (format: ArticleFormat) => {
+const overlaidBottomPadding = (format: ArticleFormat) => {
 	if (
 		format.display === ArticleDisplay.Showcase &&
 		format.design === ArticleDesign.Review
@@ -56,7 +56,7 @@ const overlayedBottomPadding = (format: ArticleFormat) => {
 	`;
 };
 
-const overlayedStyles = (palette: Palette, format: ArticleFormat) => css`
+const overlaidStyles = (palette: Palette, format: ArticleFormat) => css`
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -64,21 +64,21 @@ const overlayedStyles = (palette: Palette, format: ArticleFormat) => css`
 	background: rgba(18, 18, 18, 0.8);
 
 	span {
-		color: ${palette.text.overlayedCaption};
+		color: ${palette.text.overlaidCaption};
 		font-size: 0.75rem;
 		line-height: 1rem;
 	}
 
 	svg {
-		fill: ${palette.text.overlayedCaption};
+		fill: ${palette.text.overlaidCaption};
 	}
-	color: ${palette.text.overlayedCaption};
+	color: ${palette.text.overlaidCaption};
 	font-size: 0.75rem;
 	line-height: 1rem;
 	padding-top: 0.375rem;
 	padding-right: 2.5rem;
 	padding-left: 0.75rem;
-	${overlayedBottomPadding(format)};
+	${overlaidBottomPadding(format)};
 
 	flex-grow: 1;
 	min-height: 2.25rem;
@@ -229,7 +229,7 @@ export const Caption = ({
 	credit,
 	displayCredit = true,
 	shouldLimitWidth = false,
-	isOverlayed,
+	isOverlaid,
 	isLeftCol,
 	mediaType = 'Gallery',
 	isMainMedia = false,
@@ -250,8 +250,9 @@ export const Caption = ({
 			css={[
 				captionStyle(palette),
 				shouldLimitWidth && limitedWidth,
-				!isOverlayed && bottomMarginStyles,
-				isOverlayed && overlayedStyles(palette, format),
+				isOverlaid
+					? overlaidStyles(palette, format)
+					: bottomMarginStyles,
 				isMainMedia && isBlog && tabletCaptionPadding,
 				padCaption && captionPadding,
 				mediaType === 'Video' && videoPadding,
@@ -262,7 +263,7 @@ export const Caption = ({
 			) : (
 				<CameraIcon palette={palette} format={format} />
 			)}
-			{captionText && (
+			{!!captionText && (
 				<span
 					css={captionLink(palette)}
 					dangerouslySetInnerHTML={{
@@ -271,7 +272,7 @@ export const Caption = ({
 					key="caption"
 				/>
 			)}
-			{credit && displayCredit && ` ${credit}`}
+			{!!credit && displayCredit && ` ${credit}`}
 		</figcaption>
 	);
 
@@ -302,7 +303,7 @@ export const Caption = ({
 						shouldLimitWidth && bigLeftMargin,
 					]}
 				>
-					{captionText && (
+					{!!captionText && (
 						<span
 							css={captionLink(palette)}
 							dangerouslySetInnerHTML={{
@@ -311,7 +312,7 @@ export const Caption = ({
 							key="caption"
 						/>
 					)}
-					{credit && displayCredit && ` ${credit}`}
+					{!!credit && displayCredit && ` ${credit}`}
 				</figcaption>
 			);
 		default:

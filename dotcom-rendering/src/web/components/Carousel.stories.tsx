@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { Carousel } from './Carousel';
+import { Carousel } from './Carousel.importable';
 import { ElementContainer } from './ElementContainer';
 
 export default {
@@ -185,7 +185,7 @@ export const Headlines = () => (
 			<Carousel
 				heading="More on this story"
 				trails={trails}
-				ophanComponentName="curated-content"
+				onwardsType="more-on-this-story"
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
@@ -197,13 +197,12 @@ export const Headlines = () => (
 			<Carousel
 				heading="Sport"
 				trails={trails}
-				ophanComponentName="curated-content"
+				onwardsType="curated-content"
 				format={{
 					theme: ArticlePillar.Sport,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
-				isCuratedContent={true}
 			/>
 		</ElementContainer>
 	</>
@@ -217,7 +216,7 @@ export const SingleItemCarousel = () => (
 			<Carousel
 				heading="More on this story"
 				trails={trails.slice(1, 2)}
-				ophanComponentName="curated-content"
+				onwardsType="more-on-this-story"
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
@@ -236,7 +235,7 @@ export const Immersive = () => (
 			<Carousel
 				heading="More on this story"
 				trails={immersiveTrails}
-				ophanComponentName="curated-content"
+				onwardsType="more-on-this-story"
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
@@ -248,13 +247,12 @@ export const Immersive = () => (
 			<Carousel
 				heading="Sport"
 				trails={immersiveTrails}
-				ophanComponentName="curated-content"
+				onwardsType="curated-content"
 				format={{
 					theme: ArticlePillar.Sport,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Immersive,
 				}}
-				isCuratedContent={true}
 			/>
 		</ElementContainer>
 	</>

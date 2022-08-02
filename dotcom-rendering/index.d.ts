@@ -129,7 +129,7 @@ type Palette = {
 		blockquote: Colour;
 		numberedTitle: Colour;
 		numberedPosition: Colour;
-		overlayedCaption: Colour;
+		overlaidCaption: Colour;
 		shareCount: Colour;
 		shareCountUntilDesktop: Colour;
 		cricketScoreboardLink: Colour;
@@ -595,6 +595,10 @@ interface CAPIArticleType {
 	hasRelated: boolean;
 	publication: string; // TODO: check who uses?
 	hasStoryPackage: boolean;
+	storyPackage?: {
+		trails: CAPITrailType[];
+		heading: string;
+	};
 	beaconURL: string;
 	isCommentable: boolean;
 	commercialProperties: CommercialProperties;
@@ -684,11 +688,6 @@ type SmallHeadlineSize =
 	| 'large'
 	| 'huge'
 	| 'ginormous';
-
-type AvatarType = {
-	src: string;
-	alt: string;
-};
 
 type MediaType = 'Video' | 'Audio' | 'Gallery';
 
@@ -791,12 +790,12 @@ type CAPIOnwardsType = {
 	trails: CAPITrailType[];
 	description?: string;
 	url?: string;
-	ophanComponentName: OphanComponentName;
+	onwardsType: OnwardsType;
 	format: CAPIFormat;
 	isCuratedContent?: boolean;
 };
 
-type OphanComponentName =
+type OnwardsType =
 	| 'series'
 	| 'more-on-this-story'
 	| 'related-stories'
@@ -942,6 +941,8 @@ interface CAPITrailType extends BaseTrailType {
 	// but it shouldn't be important.
 	designType: string;
 	pillar: LegacyPillar;
+	carouselImages?: { [key: string]: string };
+	isLiveBlog?: boolean;
 }
 
 interface TrailTabType {

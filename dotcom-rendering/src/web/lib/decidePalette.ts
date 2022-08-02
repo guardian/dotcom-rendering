@@ -20,7 +20,6 @@ import {
 	sport,
 	text,
 } from '@guardian/source-foundations';
-
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../../lib/pillars';
 import type { DCRContainerPalette } from '../../types/front';
@@ -722,7 +721,6 @@ const backgroundStandfirst = (format: ArticleFormat): string => {
 				case ArticleSpecial.SpecialReport:
 					return specialReport[300];
 			}
-			break;
 		case ArticleDesign.DeadBlog:
 			switch (format.theme) {
 				case ArticleSpecial.SpecialReport:
@@ -1044,26 +1042,23 @@ const hoverHeadlineByline = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
 
-const textRichLink: (format: ArticleFormat) => string = (format) => {
-	if (format) {
-		switch (format.theme) {
-			case ArticlePillar.News:
-				return news[400];
-			case ArticlePillar.Culture:
-				return culture[350];
-			case ArticlePillar.Lifestyle:
-				return lifestyle[300];
-			case ArticlePillar.Sport:
-				return sport[400];
-			case ArticlePillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return BLACK;
-			case ArticleSpecial.SpecialReport:
-				return specialReport[400];
-		}
+const textRichLink = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Culture:
+			return culture[350];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return BLACK;
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
 	}
-	return pillarPalette[ArticlePillar.News][400];
 };
 
 const hoverStandfirstLink = (format: ArticleFormat): string => {
@@ -1117,11 +1112,8 @@ const borderLines = (format: ArticleFormat): string => {
 	return border.secondary;
 };
 
-const backgroundRichLink: (format: ArticleFormat) => string = (format) => {
-	if (format) {
-		return pillarPalette[format.theme].main;
-	}
-	return pillarPalette[ArticlePillar.News][400];
+const backgroundRichLink = (format: ArticleFormat): string => {
+	return pillarPalette[format.theme].main;
 };
 
 const borderCricketScoreboardTop = (): string => {
@@ -1136,33 +1128,27 @@ const borderKeyEvent = (): string => neutral[46];
 
 const borderFilterButton = (): string => neutral[60];
 
-const fillRichLink: (format: ArticleFormat) => string = (format) => {
-	if (format) {
-		switch (format.theme) {
-			case ArticlePillar.News:
-				return news[400];
-			case ArticlePillar.Culture:
-				return culture[350];
-			case ArticlePillar.Lifestyle:
-				return lifestyle[300];
-			case ArticlePillar.Sport:
-				return sport[400];
-			case ArticlePillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return labs[400];
-			case ArticleSpecial.SpecialReport:
-				return specialReport[400];
-		}
+const fillRichLink = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Culture:
+			return culture[350];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
 	}
-	return pillarPalette[ArticlePillar.News][400];
 };
 
-const fillQuoteIcon: (format: ArticleFormat) => string = (format) => {
-	if (format) {
-		return pillarPalette[format.theme].main;
-	}
-	return pillarPalette[ArticlePillar.News][400];
+const fillQuoteIcon = (format: ArticleFormat): string => {
+	return pillarPalette[format.theme].main;
 };
 
 const textPullQuoteAttribution = (format: ArticleFormat): string =>
@@ -1213,7 +1199,7 @@ const textNumberedPosition = (): string => {
 	return text.supporting;
 };
 
-const textOverlayed = (): string => {
+const textOverlaid = (): string => {
 	return WHITE;
 };
 
@@ -1383,7 +1369,7 @@ export const decidePalette = (
 			blockquote: textBlockquote(format),
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
-			overlayedCaption: textOverlayed(),
+			overlaidCaption: textOverlaid(),
 			shareCount: textShareCount(),
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
 			cricketScoreboardLink: textCricketScoreboardLink(),

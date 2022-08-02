@@ -17,9 +17,9 @@ const getString = (
 	}
 
 	throw new Error(
-		`expected string at '${selector}', got '${found}', in '${JSON.stringify(
-			obj,
-		)}'`,
+		`expected string at '${selector}', got '${String(
+			found,
+		)}', in '${JSON.stringify(obj)}'`,
 	);
 };
 
@@ -38,9 +38,9 @@ const getArray = <T>(
 	}
 
 	throw new Error(
-		`expected array at '${selector}', got '${found}', in '${JSON.stringify(
-			obj,
-		)}'`,
+		`expected array at '${selector}', got '${String(
+			found,
+		)}', in '${JSON.stringify(obj)}'`,
 	);
 };
 

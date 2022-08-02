@@ -32,17 +32,20 @@ type Props = {
 	stickyVideos: boolean;
 };
 
-const expiredOverlayStyles = (overrideImage: string) => css`
-	height: 0px;
-	position: relative;
-	background-image: url(${overrideImage});
-	background-size: cover;
-	background-position: 49% 49%;
-	background-repeat: no-repeat;
-	padding-bottom: 56%;
-	color: ${neutral[100]};
-	background-color: ${neutral[20]};
-`;
+const expiredOverlayStyles = (overrideImage?: string) =>
+	overrideImage
+		? css`
+				height: 0px;
+				position: relative;
+				background-image: url(${overrideImage});
+				background-size: cover;
+				background-position: 49% 49%;
+				background-repeat: no-repeat;
+				padding-bottom: 56%;
+				color: ${neutral[100]};
+				background-color: ${neutral[20]};
+		  `
+		: undefined;
 
 const expiredTextWrapperStyles = css`
 	display: flex;
@@ -102,7 +105,7 @@ export const YoutubeBlockComponent = ({
 
 		defineConsentState().catch((error) => {
 			window.guardian.modules.sentry.reportError(
-				new Error(`Error: ${error}`),
+				error instanceof Error ? error : new Error(`Error: unknown`),
 				'youtube-consent',
 			);
 		});
@@ -120,7 +123,7 @@ export const YoutubeBlockComponent = ({
 					margin-bottom: 16px;
 				`}
 			>
-				<div css={overrideImage && expiredOverlayStyles(overrideImage)}>
+				<div css={expiredOverlayStyles(overrideImage)}>
 					<div css={expiredTextWrapperStyles}>
 						<div css={expiredSVGWrapperStyles}>
 							<SvgAlertRound />

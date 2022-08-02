@@ -143,7 +143,7 @@ const listItemStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 		border-left: 1px solid ${neutral[60]};
 	`}
 	&:last-child {
-		border-left: none;
+		border-left-color: transparent;
 	}
 `;
 
@@ -163,6 +163,7 @@ const textStyles = (
 	color: ${text.keyEventsInline(format)};
 	display: block;
 	text-decoration: none;
+	transform: translateY(-2px);
 
 	&:hover {
 		color: ${text.keyEventsInline(format)};
@@ -187,10 +188,10 @@ const textStyles = (
 `;
 
 const timeStyles = (supportsDarkMode: boolean): SerializedStyles => css`
-	${textSans.xxsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
+	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
 	color: ${neutral[7]};
 	display: block;
-	transform: translateY(-2.5px);
+	transform: translateY(-4px);
 
 	${darkModeCss(supportsDarkMode)`
 		color: ${neutral[60]};

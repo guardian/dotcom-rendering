@@ -168,6 +168,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							sectionId={collection.id}
 							showDateHeader={collection.config.showDateHeader}
 							editionId={front.editionId}
+							treats={collection.treats}
 						>
 							<DecideContainer
 								trails={trails}

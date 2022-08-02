@@ -121,7 +121,11 @@ const TabHeading = ({ heading }: { heading: string }) => {
 	}
 };
 
-export const MostViewedFooterGrid = ({ data, sectionName, palette }: Props) => {
+export const MostViewedFooterGrid = ({
+	data,
+	sectionName = '',
+	palette,
+}: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 	return (
 		<div>

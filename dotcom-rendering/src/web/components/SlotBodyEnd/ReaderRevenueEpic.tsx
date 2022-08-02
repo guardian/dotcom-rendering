@@ -169,7 +169,10 @@ export const ReaderRevenueEpic = ({
 				setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
 			})
 			.catch((error) => {
-				const msg = `Error importing RR epic: ${error}`;
+				const msg =
+					error instanceof Error
+						? `Error importing RR epic: ${error.message}`
+						: 'Unknown error';
 
 				console.log(msg);
 				window.guardian.modules.sentry.reportError(

@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { adSizes } from '@guardian/commercial-core';
 import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, space, until } from '@guardian/source-foundations';
 import { carrotAdStyles, labelHeight, labelStyles } from './AdSlot';
@@ -83,9 +84,6 @@ const adStyles = css`
 		}
 
 		.ad-slot {
-			/* this fixes inter-scrollers stealing mouse events */
-			overflow: hidden;
-
 			${from.tablet} {
 				/* from tablet the ad slot will stretch to the full width of the container and the iframe will be centred by the text-align: center; on the container */
 				flex: 1;
@@ -94,9 +92,20 @@ const adStyles = css`
 			}
 		}
 
+		.ad-slot--interscroller {
+			/* this fixes inter-scrollers stealing mouse events */
+			overflow: hidden;
+		}
+
 		/* liveblogs ads have different background colours due the darker page background */
 		.ad-slot--liveblog-inline {
-			min-height: ${250 + labelHeight}px;
+			/* outstreamMobile is the ad with the smallest height that we serve for mobile
+			   liveblog-inline slots. For desktop, this is an mpu */
+			min-height: ${adSizes.outstreamMobile.height + labelHeight}px;
+			${from.desktop} {
+				min-height: ${adSizes.mpu.height + labelHeight}px;
+			}
+
 			background-color: ${neutral[93]};
 			.ad-slot__label {
 				color: ${neutral[46]};

@@ -28,6 +28,7 @@ import {
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
 import {
 	getLastOneOffContributionDate,
+	getPurchaseInfo,
 	MODULES_VERSION,
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
@@ -173,6 +174,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 	useOnce((): void => {
 		setAutomat();
 
+		const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 		const requestData: HeaderPayload = {
 			tracking: {
 				ophanPageId: pageViewId,
@@ -189,6 +191,8 @@ const ReaderRevenueLinksRemote: React.FC<{
 					getCookie({ name: 'GU_mvt_id', shouldMemoize: true }),
 				),
 				lastOneOffContributionDate: getLastOneOffContributionDate(),
+				purchaseInfo: getPurchaseInfo(),
+				isSignedIn,
 			},
 		};
 		getHeader(contributionsServiceUrl, requestData)
@@ -207,7 +211,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 					});
 			})
 			.catch((error) => {
-				const msg = `Error importing RR header links: ${error}`;
+				const msg = `Error importing RR header links: ${String(error)}`;
 
 				console.log(msg);
 				window.guardian.modules.sentry.reportError(
@@ -378,7 +382,7 @@ export const ReaderRevenueLinks = ({
 					setCountryCode(cc || '');
 				})
 				.catch((e) =>
-					console.error(`countryCodePromise - error: ${e}`),
+					console.error(`countryCodePromise - error: ${String(e)}`),
 				);
 		};
 		callFetch();

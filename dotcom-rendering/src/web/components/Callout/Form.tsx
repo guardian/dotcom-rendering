@@ -160,7 +160,7 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
 					onChange={(e) => setTwitterHandle(e.target.value)}
 				/>
 			</div>
-			{error && <div css={errorMessagesStyles}>{error}</div>}
+			{!!error && <div css={errorMessagesStyles}>{error}</div>}
 			<div css={footerPaddingStyles}>
 				<Button priority="secondary" size="xsmall" type="submit">
 					Share with the Guardian

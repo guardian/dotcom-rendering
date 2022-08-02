@@ -67,6 +67,8 @@ type Props = {
 	format: ArticleFormat;
 	supportsDarkMode: boolean;
 	children: Option<ReactNode>;
+	className?: string;
+	css?: SerializedStyles;
 };
 
 const styles = (format: ArticleFormat, supportsDarkMode: boolean) => css`
@@ -95,17 +97,28 @@ const getStyles = (
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
-			return css(styles(format, supportsDarkMode), mediaStyles(supportsDarkMode));
+			return css(
+				styles(format, supportsDarkMode),
+				mediaStyles(supportsDarkMode),
+			);
 		default:
 			return styles(format, supportsDarkMode);
 	}
 };
 
-const FigCaption: FC<Props> = ({ format, supportsDarkMode, children }) => {
+const FigCaption: FC<Props> = ({
+	format,
+	supportsDarkMode,
+	children,
+	className,
+}) => {
 	switch (children.kind) {
 		case OptionKind.Some:
 			return (
-				<figcaption css={getStyles(format, supportsDarkMode)}>
+				<figcaption
+					className={className}
+					css={getStyles(format, supportsDarkMode)}
+				>
 					<Camera
 						format={format}
 						supportsDarkMode={supportsDarkMode}
