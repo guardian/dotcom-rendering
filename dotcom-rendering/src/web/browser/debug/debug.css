@@ -1,4 +1,5 @@
 :root {
+	/* z-index given to all labels */
 	--debug-z-index: 100;
 }
 
@@ -89,4 +90,38 @@ figure[data-spacefinder-type] {
 /* Handle the case where an island is directly inside an element */
 figure[data-spacefinder-type] > gu-island > * {
 	outline-style: dashed;
+}
+
+/* Patches - overriding CSS as we please comes with consequences ... */
+
+/* Links relies on position: relative being set higher up, so we need to ignore this element */
+gu-island[name='Links'] {
+	display: contents;
+}
+/* Because we can't rely on position:relative for links, we need to move the labelling to the child */
+gu-island[name='Links']::before {
+	content: '';
+}
+gu-island[name='Links'] > *::before {
+	content: 'island: Links';
+	font-family: monospace;
+	font-size: 13px;
+	background-color: blue;
+	color: white;
+
+	padding: 5px;
+	position: absolute;
+	z-index: var(--debug-z-index);
+	top: 0;
+	right: 0;
+}
+
+/* For some reason ReaderRevenueLinks outline is always below its surrounding elements, use outline offset to counter-act this */
+gu-island[name='ReaderRevenueLinks'] > * {
+	outline-offset: -4px;
+}
+
+/* Onwards upper leaves an empty div when no content is available */
+gu-island[name='OnwardsUpper'] > *:empty {
+	min-height: 23px;
 }
