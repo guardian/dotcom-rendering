@@ -1,6 +1,7 @@
 import type { DCRCollectionType, FECollectionType } from '../types/front';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
+import { enhanceTreats } from './enhanceTreats';
 
 export const enhanceCollections = (
 	collections: FECollectionType[],
@@ -17,7 +18,7 @@ export const enhanceCollections = (
 			containerPalette,
 			curated: enhanceCards(collection.curated, containerPalette),
 			backfill: enhanceCards(collection.backfill, containerPalette),
-			treats: enhanceCards(collection.treats, containerPalette),
+			treats: enhanceTreats(collection.treats),
 			config: {
 				showDateHeader: collection.config.showDateHeader,
 			},
