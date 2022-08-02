@@ -305,7 +305,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		CAPIArticle.availableTopics;
 
 	const shouldReserveMerchSpace =
-		CAPIArticle.config.switches.merchandisingMinHeight;
+		!!CAPIArticle.config.abTests.merchandisingMinHeightVariant;
 
 	/*
 	The topic bank on desktop will be positioned where we currently show the key events container.

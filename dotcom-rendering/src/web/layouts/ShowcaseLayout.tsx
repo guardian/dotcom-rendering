@@ -237,7 +237,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
 	const shouldReserveMerchSpace =
-		CAPIArticle.config.switches.merchandisingMinHeight;
+		!!CAPIArticle.config.abTests.merchandisingMinHeightVariant;
 
 	return (
 		<>

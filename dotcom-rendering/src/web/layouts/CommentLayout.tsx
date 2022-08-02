@@ -279,7 +279,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		CAPIArticle.config.switches.slotBodyEnd;
 
 	const shouldReserveMerchSpace =
-		CAPIArticle.config.switches.merchandisingMinHeight;
+		!!CAPIArticle.config.abTests.merchandisingMinHeightVariant;
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
