@@ -13,7 +13,7 @@ describe('isValidUrl', () => {
 		it.each(invalidInputs)(
 			'returns undefined for invalid input of `%s`',
 			(input) => {
-				expect(isValidUrl(input)).toBeUndefined();
+				expect(isValidUrl(input)).toBeFalsy();
 			},
 		);
 	});
@@ -28,7 +28,7 @@ describe('isValidUrl', () => {
 		it.each(validInputs)(
 			'returns input for valid input of `%s`',
 			(input) => {
-				expect(isValidUrl(input)).toEqual(input);
+				expect(isValidUrl(input)).toBeTruthy();
 			},
 		);
 	});
