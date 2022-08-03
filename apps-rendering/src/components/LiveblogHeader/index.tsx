@@ -1,5 +1,9 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	Column,
 	Columns,
@@ -10,15 +14,30 @@ import Headline from 'components/Headline';
 import LiveDateline from 'components/LiveDateline';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
-import {
-	headlineBackgroundColour,
-	standfirstBackgroundColour,
-} from 'editorialStyles';
 import type { DeadBlog, LiveBlog } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
+
+const containerStyles = (format: ArticleFormat): SerializedStyles => css`
+	background-color: ${background.headline(format)};
+
+	${darkModeCss`
+		background-color: ${background.headlineDark(format)};
+	`}
+`;
+
+const standfirstContainerStyles = (
+	format: ArticleFormat,
+): SerializedStyles => css`
+	background-color: ${background.standfirst(format)};
+
+	${darkModeCss`
+		background-color: ${background.standfirstDark(format)};
+	`}
+`;
 
 interface Props {
 	item: LiveBlog | DeadBlog;
@@ -29,7 +48,7 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 
 	return (
 		<header>
-			<Container element="div" css={headlineBackgroundColour(format)}>
+			<Container element="div" css={containerStyles(format)}>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
 						<Series item={item} />
@@ -39,7 +58,7 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 					</Column>
 				</Columns>
 			</Container>
-			<Container element="div" css={standfirstBackgroundColour(format)}>
+			<Container element="div" css={standfirstContainerStyles(format)}>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
 						<Hide below="desktop">

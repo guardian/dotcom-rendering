@@ -130,7 +130,7 @@ const expanded = css`
 
 const asComponent = (
 	element: CAPIElement,
-	pillar: ArticlePillar,
+	pillar: ArticleTheme,
 	adTargeting?: any,
 ) => {
 	switch (element._type) {

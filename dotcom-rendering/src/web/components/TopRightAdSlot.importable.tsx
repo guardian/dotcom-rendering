@@ -1,6 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { slotSizeMappings as sizeMappings } from '@guardian/commercial-core';
 import { getCookie } from '@guardian/libs';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { ShadyPie } from './ShadyPie';
@@ -74,10 +73,6 @@ export const TopRightAdSlot = ({
 				]}
 				data-link-name="ad slot right"
 				data-name="right"
-				// mark: 01303e88-ef1f-462d-9b6e-242419435cec
-				data-mobile={(sizeMappings.right.mobile || [])
-					.map((size) => size.toString())
-					.join('|')}
 				aria-hidden="true"
 			/>
 		</div>

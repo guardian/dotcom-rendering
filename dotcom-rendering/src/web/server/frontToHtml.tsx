@@ -96,7 +96,11 @@ export const frontToHtml = ({ front, NAV }: Props): string => {
 			{ src: polyfillIO },
 			...getScriptArrayFromFile('bootCmp.js'),
 			...getScriptArrayFromFile('ophan.js'),
-			front.config && { src: front.config.commercialBundleUrl },
+			front.config && {
+				src:
+					process.env.COMMERCIAL_BUNDLE_URL ??
+					front.config.commercialBundleUrl,
+			},
 			...getScriptArrayFromFile('sentryLoader.js'),
 			...getScriptArrayFromFile('dynamicImport.js'),
 			...getScriptArrayFromFile('islands.js'),

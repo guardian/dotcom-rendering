@@ -166,6 +166,7 @@ export type FEFrontCard = {
 		linkText?: string;
 		webUrl?: string;
 		editionBrandings: { edition: { id: EditionId } }[];
+		href?: string;
 	};
 	header: {
 		isVideo: boolean;
@@ -298,13 +299,22 @@ export type DCRCollectionType = {
 	displayName: string;
 	collectionType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
+	grouped: DCRGroupedTrails;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
-	treats: DCRFrontCard[];
+	treats: TreatType[];
 	href?: string;
 	config: {
 		showDateHeader: boolean;
 	};
+};
+
+export type DCRGroupedTrails = {
+	snap: TrailType[];
+	huge: TrailType[];
+	veryBig: TrailType[];
+	big: TrailType[];
+	standard: TrailType[];
 };
 
 type FEFrontConfigType = {
@@ -425,4 +435,9 @@ export type DCRSupportingContent = {
 	url?: string;
 	kickerText?: string;
 	format: ArticleFormat;
+};
+
+export type TreatType = {
+	text: string;
+	linkTo: string;
 };

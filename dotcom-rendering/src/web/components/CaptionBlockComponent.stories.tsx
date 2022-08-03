@@ -21,7 +21,7 @@ export default {
         credit?: string;
         displayCredit?: boolean;
         shouldLimitWidth?: boolean;
-        isOverlayed?: boolean;
+        isOverlaid?: boolean;
     };
  */
 
@@ -79,7 +79,7 @@ export const PhotoEssay = () => {
 				credit="Credit text"
 				displayCredit={false}
 				shouldLimitWidth={false}
-				isOverlayed={false}
+				isOverlaid={false}
 			/>
 		</Container>
 	);
@@ -102,7 +102,7 @@ export const PhotoEssayHTML = () => {
 				credit="Credit text"
 				displayCredit={false}
 				shouldLimitWidth={false}
-				isOverlayed={false}
+				isOverlaid={false}
 			/>
 		</Container>
 	);
@@ -125,7 +125,7 @@ export const Padded = () => {
 				credit="Credit text"
 				displayCredit={false}
 				shouldLimitWidth={false}
-				isOverlayed={false}
+				isOverlaid={false}
 			/>
 		</Container>
 	);
@@ -148,7 +148,7 @@ export const WidthLimited = () => {
 				credit="Credit text"
 				displayCredit={false}
 				shouldLimitWidth={true}
-				isOverlayed={false}
+				isOverlaid={false}
 			/>
 		</Container>
 	);
@@ -171,7 +171,7 @@ export const Credited = () => {
 				credit="Credit text"
 				displayCredit={true}
 				shouldLimitWidth={false}
-				isOverlayed={false}
+				isOverlaid={false}
 			/>
 		</Container>
 	);
@@ -180,7 +180,7 @@ Credited.story = {
 	name: 'with credit',
 };
 
-export const Overlayed = () => {
+export const Overlaid = () => {
 	return (
 		<Container>
 			<CaptionBlockComponent
@@ -194,11 +194,11 @@ export const Overlayed = () => {
 				credit="Credit text"
 				displayCredit={false}
 				shouldLimitWidth={false}
-				isOverlayed={true}
+				isOverlaid={true}
 			/>
 		</Container>
 	);
 };
-Overlayed.story = {
-	name: 'when overlayed',
+Overlaid.story = {
+	name: 'when overlaid',
 };

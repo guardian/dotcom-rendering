@@ -8,6 +8,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
+import type { BaseLinkType } from '../../model/extract-nav';
 import { decidePalette } from '../lib/decidePalette';
 import { Badge } from './Badge';
 import { ShareIcons } from './ShareIcons';
@@ -121,8 +122,8 @@ const hideSlash = css`
 
 type Props = {
 	format: ArticleFormat;
-	subMetaSectionLinks: SimpleLinkType[];
-	subMetaKeywordLinks: SimpleLinkType[];
+	subMetaSectionLinks: BaseLinkType[];
+	subMetaKeywordLinks: BaseLinkType[];
 	pageId: string;
 	webUrl: string;
 	webTitle: string;

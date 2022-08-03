@@ -202,6 +202,12 @@ const richLinkSvgPreloadDark = (_format: ArticleFormat): Colour => {
 	return neutral[86];
 };
 
+const lines = (_format: ArticleFormat): Colour =>
+	neutral[86];
+
+const linesDark = (_format: ArticleFormat): Colour =>
+	neutral[20];
+
 // ----- API ----- //
 
 const fill = {
@@ -214,6 +220,8 @@ const fill = {
 	iconDark,
 	blockquoteIcon,
 	blockquoteIconDark,
+	lines,
+	linesDark,
 	richLink,
 	richLinkDark,
 	richLinkSvgPreload,

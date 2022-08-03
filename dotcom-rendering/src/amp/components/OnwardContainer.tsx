@@ -118,9 +118,8 @@ export const OnwardContainer = ({
 		<MoustacheTemplate>
 			<MoustacheSection name="showContent">
 				<div
-					css={`
-						${inner} js-has-click-event
-					`}
+					className="js-has-click-event"
+					css={inner}
 					data-vars-component={componentName}
 				>
 					<div css={header}>

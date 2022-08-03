@@ -118,7 +118,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				</>
 			</div>
 
-			<main>
+			<main data-layout="FrontLayout">
 				{front.pressedPage.collections.map((collection, index) => {
 					// TODO: We also need to support treats containers
 					// Backfills should be added to the end of any curated content
@@ -141,6 +141,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								showSideBorders={false}
 								ophanComponentLink={ophanComponentLink}
 								ophanComponentName={ophanName}
+								containerName={collection.collectionType}
 								element="section"
 							>
 								<Snap snapData={trails[0].snapData} />
@@ -162,14 +163,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							// same as above re 'palette styles' for index increment
 							ophanComponentLink={ophanComponentLink}
 							ophanComponentName={ophanName}
+							containerName={collection.collectionType}
 							containerPalette={collection.containerPalette}
 							toggleable={true}
 							sectionId={collection.id}
 							showDateHeader={collection.config.showDateHeader}
 							editionId={front.editionId}
+							treats={collection.treats}
 						>
 							<DecideContainer
 								trails={trails}
+								groupedTrails={collection.grouped}
 								containerType={collection.collectionType}
 								containerPalette={collection.containerPalette}
 								showAge={collection.displayName === 'Headlines'}
