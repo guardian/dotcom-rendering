@@ -7,7 +7,7 @@ import { enhanceInteractiveContentsElements } from './enhance-interactive-conten
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceTweets } from './enhance-tweets';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
-import { removeOldSignUpEmbeds } from './remove-old-signup-embeds';
+import { removeOldSignUpEmbeds } from './removeOldSignupEmbeds';
 
 class BlockEnhancer {
 	blocks: Block[];
