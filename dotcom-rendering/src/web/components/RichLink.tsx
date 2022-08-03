@@ -86,7 +86,6 @@ const richLinkHeader = css`
 
 const richLinkTitle = css`
 	${headline.xxxsmall()};
-	font-size: 14px;
 	padding-top: 1px;
 	padding-bottom: 1px;
 	font-weight: 400;
