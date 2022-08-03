@@ -1,5 +1,5 @@
 import { renderToString } from 'react-dom/server';
-import { Carousel } from '../components/Carousel';
+import { Carousel } from '../components/Carousel.importable';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTrail } from '../lib/decideTrail';
 
@@ -20,18 +20,16 @@ export const onwardsToHtml = ({
 	heading,
 	// description,
 	// url,
-	ophanComponentName,
+	onwardsType,
 	trails,
 	format: CAPIFormat,
-	isCuratedContent,
 }: CAPIOnwardsType): string => {
 	const format = decideFormat(CAPIFormat);
 
 	const html = renderToString(
 		<Carousel
 			heading={heading}
-			ophanComponentName={ophanComponentName}
-			isCuratedContent={isCuratedContent}
+			onwardsType={onwardsType}
 			trails={buildTrails(trails, 8)}
 			format={format}
 		/>,

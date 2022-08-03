@@ -21,6 +21,7 @@ const cardStyles = (
 	format: ArticleFormat,
 	palette: Palette,
 	isDynamo?: true,
+	containerPalette?: DCRContainerPalette,
 ) => {
 	const baseCardStyles = css`
 		display: flex;
@@ -46,6 +47,39 @@ const cardStyles = (
 		text-decoration: none;
 		background-color: ${isDynamo ? 'transparent' : palette.background.card};
 	`;
+
+	const decidePaletteBrightness = (thePalette: DCRContainerPalette) => {
+		switch (thePalette) {
+			case 'EventPalette':
+				return `96%`;
+			case 'BreakingPalette':
+				return `85%`;
+			case 'EventAltPalette':
+				return `95%`;
+			case 'InvestigationPalette':
+				return `90%`;
+			case 'LongRunningPalette':
+				return `84%`;
+			case 'LongRunningAltPalette':
+				return `95%`;
+			case 'SombrePalette':
+				return `90%`;
+			case 'SombreAltPalette':
+				return `85%`;
+			default:
+				return `90%`;
+		}
+	};
+	if (containerPalette) {
+		return css`
+			${baseCardStyles};
+			:hover {
+				filter: brightness(
+					${decidePaletteBrightness(containerPalette)}
+				);
+			}
+		`;
+	}
 
 	if (format.theme === ArticleSpecial.SpecialReport) {
 		return css`
@@ -138,7 +172,7 @@ export const CardWrapper = ({
 	return (
 		<div
 			css={[
-				cardStyles(format, palette, isDynamo),
+				cardStyles(format, palette, isDynamo, containerPalette),
 				topBarStyles({ isDynamo, palette, containerType }),
 			]}
 		>

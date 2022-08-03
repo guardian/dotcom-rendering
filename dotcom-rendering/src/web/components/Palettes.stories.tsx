@@ -6,6 +6,21 @@ export default {
 	title: 'Layouts/Palettes',
 };
 
+const groupedTrails = {
+	snap: [],
+	huge: [],
+	veryBig: [{ isBoosted: true, ...trails[0] }, trails[1]],
+	big: [trails[2], trails[3]],
+	standard: [
+		trails[4],
+		trails[5],
+		trails[6],
+		trails[7],
+		trails[8],
+		trails[9],
+	],
+};
+
 export const EventPalette = () => (
 	<ContainerLayout
 		title="EventPalette"
@@ -18,7 +33,7 @@ export const EventPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			trails={trails}
+			groupedTrails={groupedTrails}
 			containerPalette="EventPalette"
 			showAge={true}
 		/>
@@ -37,7 +52,7 @@ export const EventAltPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			trails={trails}
+			groupedTrails={groupedTrails}
 			containerPalette="EventAltPalette"
 			showAge={true}
 		/>
@@ -56,7 +71,7 @@ export const SombrePalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			trails={trails}
+			groupedTrails={groupedTrails}
 			containerPalette="SombrePalette"
 			showAge={true}
 		/>
@@ -75,7 +90,7 @@ export const SombreAltPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			trails={trails}
+			groupedTrails={groupedTrails}
 			containerPalette="SombreAltPalette"
 			showAge={true}
 		/>
@@ -94,7 +109,7 @@ export const BreakingPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			trails={trails}
+			groupedTrails={groupedTrails}
 			containerPalette="BreakingPalette"
 			showAge={true}
 		/>
@@ -113,7 +128,7 @@ export const LongRunningPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			trails={trails}
+			groupedTrails={groupedTrails}
 			containerPalette="LongRunningPalette"
 			showAge={true}
 		/>
@@ -132,7 +147,7 @@ export const LongRunningAltPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			trails={trails}
+			groupedTrails={groupedTrails}
 			containerPalette="LongRunningAltPalette"
 			showAge={true}
 		/>
@@ -151,7 +166,7 @@ export const InvestigationPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			trails={trails}
+			groupedTrails={groupedTrails}
 			containerPalette="InvestigationPalette"
 			showAge={true}
 		/>

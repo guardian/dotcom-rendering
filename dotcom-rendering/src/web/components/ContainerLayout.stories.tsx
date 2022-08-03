@@ -318,3 +318,26 @@ MultipleStory.story = {
 		},
 	},
 };
+
+export const TreatsStory = () => {
+	return (
+		<ContainerLayout
+			title="Treats"
+			treats={[
+				{
+					text: 'The treat text',
+					linkTo: '',
+				},
+				{
+					text: 'Another piece of text',
+					linkTo: '',
+				},
+			]}
+		>
+			<Grey />
+		</ContainerLayout>
+	);
+};
+TreatsStory.story = {
+	name: 'with treats',
+};

@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from, space, until } from '@guardian/source-foundations';
-import type { DCRContainerPalette } from '../../types/front';
+import type { DCRContainerPalette, TreatType } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { hiddenStyles } from '../lib/hiddenStyles';
 import { ContainerTitle } from './ContainerTitle';
@@ -11,6 +11,7 @@ import { Flex } from './Flex';
 import { Hide } from './Hide';
 import { LeftColumn } from './LeftColumn';
 import { ShowHideButton } from './ShowHideButton';
+import { Treats } from './Treats';
 
 type Props = {
 	title?: string;
@@ -38,6 +39,7 @@ type Props = {
 	innerBackgroundColour?: string;
 	showDateHeader?: boolean;
 	editionId?: EditionId;
+	treats?: TreatType[];
 };
 
 const containerStyles = css`
@@ -59,9 +61,9 @@ const headlineContainerStyles = css`
 const margins = css`
 	margin-top: ${space[2]}px;
 	/*
-   Keep spacing at the bottom of the container consistent at 36px, regardless of
-   breakpoint, based on chat with Harry Fisher
-*/
+		Keep spacing at the bottom of the container consistent at 36px, regardless of
+		breakpoint, based on chat with Harry Fisher
+	*/
 	margin-bottom: ${space[9]}px;
 `;
 
@@ -140,6 +142,7 @@ export const ContainerLayout = ({
 	innerBackgroundColour,
 	showDateHeader,
 	editionId,
+	treats,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -164,19 +167,39 @@ export const ContainerLayout = ({
 					borderType={centralBorder}
 					borderColour={borderColour || overrides?.border.container}
 					size={leftColSize}
+					verticalMargins={verticalMargins}
 				>
-					<>
-						<ContainerTitle
-							title={title}
-							fontColour={fontColour || overrides?.text.container}
-							description={description}
-							url={url}
-							containerPalette={containerPalette}
-							showDateHeader={showDateHeader}
-							editionId={editionId}
-						/>
-						{leftContent}
-					</>
+					<div
+						css={css`
+							display: flex;
+							height: 100%;
+							flex-direction: column;
+							justify-content: space-between;
+						`}
+					>
+						<div>
+							<ContainerTitle
+								title={title}
+								fontColour={
+									fontColour || overrides?.text.container
+								}
+								description={description}
+								url={url}
+								containerPalette={containerPalette}
+								showDateHeader={showDateHeader}
+								editionId={editionId}
+							/>
+							{leftContent}
+						</div>
+						{treats && (
+							<Treats
+								treats={treats}
+								borderColour={
+									borderColour ?? overrides?.border.container
+								}
+							/>
+						)}
+					</div>
 				</LeftColumn>
 				<Container
 					padded={padContent}
@@ -198,7 +221,7 @@ export const ContainerLayout = ({
 								editionId={editionId}
 							/>
 						</Hide>
-						{toggleable && sectionId && (
+						{toggleable && !!sectionId && (
 							<ShowHideButton
 								sectionId={sectionId}
 								overrideContainerToggleColour={

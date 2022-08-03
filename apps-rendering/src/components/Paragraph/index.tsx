@@ -20,6 +20,7 @@ interface Props {
 	children?: ReactNode;
 	format: ArticleFormat;
 	showDropCap: boolean;
+	isEditions: boolean;
 }
 
 const dropCapWeight = (format: ArticleFormat): SerializedStyles => {
@@ -40,6 +41,7 @@ const dropCapWeight = (format: ArticleFormat): SerializedStyles => {
 const styles = (
 	format: ArticleFormat,
 	showDropCap: boolean,
+	isEditions: boolean,
 ): SerializedStyles => {
 	const labs =
 		format.theme === ArticleSpecial.Labs ? textSans.medium() : null;
@@ -80,14 +82,24 @@ const styles = (
 		${body.medium()}
 		overflow-wrap: break-word;
 		margin: 0 0 ${remSpace[3]};
+		color: ${text.paragraph(format)};
+
+		${isEditions
+			? null
+			: darkModeCss`
+			color: ${text.paragraphDark(format)};
+		`}
 		${dropCap}
 		${labs}
 	`;
 };
 
-const Paragraph: FC<Props> = ({ children, format, showDropCap }: Props) => (
-	<p css={styles(format, showDropCap)}>{children}</p>
-);
+const Paragraph: FC<Props> = ({
+	children,
+	format,
+	showDropCap,
+	isEditions,
+}: Props) => <p css={styles(format, showDropCap, isEditions)}>{children}</p>;
 
 // ----- Exports ----- //
 

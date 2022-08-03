@@ -23,7 +23,7 @@ import { Expandable } from './Expandable';
 
 export const Elements = (
 	elements: CAPIElement[],
-	pillar: ArticlePillar,
+	pillar: ArticleTheme,
 	isImmersive: boolean,
 	adTargeting?: AdTargeting,
 	// eslint-disable-next-line @typescript-eslint/ban-types -- the type signature is helpful

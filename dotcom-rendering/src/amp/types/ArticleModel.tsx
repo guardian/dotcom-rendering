@@ -24,8 +24,8 @@ export interface ArticleModel {
 	sectionUrl?: string;
 	sectionName?: string;
 	tags: TagType[];
-	subMetaSectionLinks: SimpleLinkType[];
-	subMetaKeywordLinks: SimpleLinkType[];
+	subMetaSectionLinks: CAPILinkType[];
+	subMetaKeywordLinks: CAPILinkType[];
 	webURL: string;
 	shouldHideAds: boolean;
 	shouldHideReaderRevenue: boolean;

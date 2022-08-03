@@ -22,7 +22,9 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
+import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
+import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
@@ -49,6 +51,7 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
+import { decideTrail } from '../lib/decideTrail';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -334,6 +337,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
+	const shouldReserveMerchSpace =
+		!!CAPIArticle.config.abTests.merchandisingMinHeightVariant;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -487,42 +493,40 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 						<GridItem area="matchNav" element="aside">
 							<div css={maxWidth}>
-								{format.design === ArticleDesign.MatchReport &&
-									footballMatchUrl && (
-										<Island
-											deferUntil="visible"
-											clientOnly={true}
-											placeholderHeight={230}
-										>
-											<GetMatchNav
-												matchUrl={footballMatchUrl}
-												format={format}
-												headlineString={
-													CAPIArticle.headline
-												}
-												tags={CAPIArticle.tags}
-												webPublicationDateDeprecated={
-													CAPIArticle.webPublicationDateDeprecated
-												}
-											/>
-										</Island>
-									)}
+								{isMatchReport && (
+									<Island
+										deferUntil="visible"
+										clientOnly={true}
+										placeholderHeight={230}
+									>
+										<GetMatchNav
+											matchUrl={footballMatchUrl}
+											format={format}
+											headlineString={
+												CAPIArticle.headline
+											}
+											tags={CAPIArticle.tags}
+											webPublicationDateDeprecated={
+												CAPIArticle.webPublicationDateDeprecated
+											}
+										/>
+									</Island>
+								)}
 							</div>
 						</GridItem>
 						<GridItem area="matchtabs" element="aside">
 							<div css={maxWidth}>
-								{format.design === ArticleDesign.MatchReport &&
-									footballMatchUrl && (
-										<Island
-											clientOnly={true}
-											placeholderHeight={40}
-										>
-											<GetMatchTabs
-												matchUrl={footballMatchUrl}
-												format={format}
-											/>
-										</Island>
-									)}
+								{isMatchReport && (
+									<Island
+										clientOnly={true}
+										placeholderHeight={40}
+									>
+										<GetMatchTabs
+											matchUrl={footballMatchUrl}
+											format={format}
+										/>
+									</Island>
+								)}
 							</div>
 						</GridItem>
 						<GridItem area="headline">
@@ -782,35 +786,62 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						data-print-layout="hide"
 						position="merchandising-high"
 						display={format.display}
+						shouldReserveMerchSpace={shouldReserveMerchSpace}
 					/>
 				</ElementContainer>
 
-				<Island
-					clientOnly={true}
-					deferUntil="visible"
-					placeholderHeight={600}
-				>
-					<OnwardsUpper
-						ajaxUrl={CAPIArticle.config.ajaxUrl}
-						hasRelated={CAPIArticle.hasRelated}
-						hasStoryPackage={CAPIArticle.hasStoryPackage}
-						isAdFreeUser={CAPIArticle.isAdFreeUser}
-						pageId={CAPIArticle.pageId}
-						isPaidContent={
-							CAPIArticle.config.isPaidContent || false
-						}
-						showRelatedContent={
-							CAPIArticle.config.showRelatedContent
-						}
-						keywordIds={CAPIArticle.config.keywordIds}
-						contentType={CAPIArticle.contentType}
-						tags={CAPIArticle.tags}
+				{CAPIArticle.onwards ? (
+					<DecideOnwards
+						onwards={CAPIArticle.onwards}
 						format={format}
-						pillar={format.theme}
-						editionId={CAPIArticle.editionId}
-						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
-				</Island>
+				) : (
+					<>
+						{CAPIArticle.storyPackage && (
+							<ElementContainer>
+								<Island deferUntil="visible">
+									<Carousel
+										heading={
+											CAPIArticle.storyPackage.heading
+										}
+										trails={CAPIArticle.storyPackage.trails.map(
+											decideTrail,
+										)}
+										onwardsType="more-on-this-story"
+										format={format}
+									/>
+								</Island>
+							</ElementContainer>
+						)}
+
+						<Island
+							clientOnly={true}
+							deferUntil="visible"
+							placeholderHeight={600}
+						>
+							<OnwardsUpper
+								ajaxUrl={CAPIArticle.config.ajaxUrl}
+								hasRelated={CAPIArticle.hasRelated}
+								hasStoryPackage={CAPIArticle.hasStoryPackage}
+								isAdFreeUser={CAPIArticle.isAdFreeUser}
+								pageId={CAPIArticle.pageId}
+								isPaidContent={
+									CAPIArticle.config.isPaidContent || false
+								}
+								showRelatedContent={
+									CAPIArticle.config.showRelatedContent
+								}
+								keywordIds={CAPIArticle.config.keywordIds}
+								contentType={CAPIArticle.contentType}
+								tags={CAPIArticle.tags}
+								format={format}
+								pillar={format.theme}
+								editionId={CAPIArticle.editionId}
+								shortUrlId={CAPIArticle.config.shortUrlId}
+							/>
+						</Island>
+					</>
+				)}
 
 				{!isPaidContent && showComments && (
 					<ElementContainer
@@ -856,7 +887,11 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					backgroundColour={neutral[93]}
 					element="aside"
 				>
-					<AdSlot position="merchandising" display={format.display} />
+					<AdSlot
+						position="merchandising"
+						display={format.display}
+						shouldReserveMerchSpace={shouldReserveMerchSpace}
+					/>
 				</ElementContainer>
 			</main>
 

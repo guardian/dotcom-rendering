@@ -19,7 +19,9 @@ export const DefaultStory = (): ReactElement => {
 				setBrazeMessage(() => module.BrazeBannerComponent);
 			})
 			.catch((e) =>
-				console.error(`braze-components dynamic import - error: ${e}`),
+				console.error(
+					`braze-components dynamic import - error: ${String(e)}`,
+				),
 			);
 	}, []);
 

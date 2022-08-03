@@ -384,7 +384,7 @@ export const InteractiveImmersiveLayout = ({
 							/>
 						</GridItem>
 						<GridItem area="byline">
-							{CAPIArticle.byline && (
+							{!!CAPIArticle.byline && (
 								<HeadlineByline
 									format={format}
 									tags={CAPIArticle.tags}

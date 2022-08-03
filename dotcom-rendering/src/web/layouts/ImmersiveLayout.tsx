@@ -20,7 +20,9 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
+import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
+import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
@@ -39,6 +41,7 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
+import { decideTrail } from '../lib/decideTrail';
 import { ImmersiveHeader } from './headers/ImmersiveHeader';
 import { BannerWrapper } from './lib/stickiness';
 
@@ -173,15 +176,14 @@ interface Props {
 
 const decideCaption = (mainMedia: ImageBlockElement): string => {
 	const caption = [];
-	if (mainMedia && mainMedia.data && mainMedia.data.caption)
+	if (mainMedia?.data?.caption) {
 		caption.push(mainMedia.data.caption);
-	if (
-		mainMedia &&
-		mainMedia.displayCredit &&
-		mainMedia.data &&
-		mainMedia.data.credit
-	)
+	}
+
+	if (mainMedia?.displayCredit && mainMedia?.data?.credit) {
 		caption.push(mainMedia.data.credit);
+	}
+
 	return caption.join(' ');
 };
 
@@ -203,6 +205,9 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const showBodyEndSlot =
 		parse(CAPIArticle.slotMachineFlags || '').showBodyEnd ||
 		CAPIArticle.config.switches.slotBodyEnd;
+
+	const shouldReserveMerchSpace =
+		!!CAPIArticle.config.abTests.merchandisingMinHeightVariant;
 
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
@@ -309,7 +314,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							/>
 						</GridItem>
 						<GridItem area="byline">
-							{CAPIArticle.byline && (
+							{!!CAPIArticle.byline && (
 								<HeadlineByline
 									format={format}
 									tags={CAPIArticle.tags}
@@ -504,35 +509,62 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					<AdSlot
 						position="merchandising-high"
 						display={format.display}
+						shouldReserveMerchSpace={shouldReserveMerchSpace}
 					/>
 				</ElementContainer>
 
-				<Island
-					clientOnly={true}
-					deferUntil="visible"
-					placeholderHeight={600}
-				>
-					<OnwardsUpper
-						ajaxUrl={CAPIArticle.config.ajaxUrl}
-						hasRelated={CAPIArticle.hasRelated}
-						hasStoryPackage={CAPIArticle.hasStoryPackage}
-						isAdFreeUser={CAPIArticle.isAdFreeUser}
-						pageId={CAPIArticle.pageId}
-						isPaidContent={
-							CAPIArticle.config.isPaidContent || false
-						}
-						showRelatedContent={
-							CAPIArticle.config.showRelatedContent
-						}
-						keywordIds={CAPIArticle.config.keywordIds}
-						contentType={CAPIArticle.contentType}
-						tags={CAPIArticle.tags}
+				{CAPIArticle.onwards ? (
+					<DecideOnwards
+						onwards={CAPIArticle.onwards}
 						format={format}
-						pillar={format.theme}
-						editionId={CAPIArticle.editionId}
-						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
-				</Island>
+				) : (
+					<>
+						{CAPIArticle.storyPackage && (
+							<ElementContainer>
+								<Island deferUntil="visible">
+									<Carousel
+										heading={
+											CAPIArticle.storyPackage.heading
+										}
+										trails={CAPIArticle.storyPackage.trails.map(
+											decideTrail,
+										)}
+										onwardsType="more-on-this-story"
+										format={format}
+									/>
+								</Island>
+							</ElementContainer>
+						)}
+
+						<Island
+							clientOnly={true}
+							deferUntil="visible"
+							placeholderHeight={600}
+						>
+							<OnwardsUpper
+								ajaxUrl={CAPIArticle.config.ajaxUrl}
+								hasRelated={CAPIArticle.hasRelated}
+								hasStoryPackage={CAPIArticle.hasStoryPackage}
+								isAdFreeUser={CAPIArticle.isAdFreeUser}
+								pageId={CAPIArticle.pageId}
+								isPaidContent={
+									CAPIArticle.config.isPaidContent || false
+								}
+								showRelatedContent={
+									CAPIArticle.config.showRelatedContent
+								}
+								keywordIds={CAPIArticle.config.keywordIds}
+								contentType={CAPIArticle.contentType}
+								tags={CAPIArticle.tags}
+								format={format}
+								pillar={format.theme}
+								editionId={CAPIArticle.editionId}
+								shortUrlId={CAPIArticle.config.shortUrlId}
+							/>
+						</Island>
+					</>
+				)}
 
 				{!isPaidContent && showComments && (
 					<ElementContainer sectionId="comments" element="aside">
@@ -573,7 +605,11 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					backgroundColour={neutral[93]}
 					element="aside"
 				>
-					<AdSlot position="merchandising" display={format.display} />
+					<AdSlot
+						position="merchandising"
+						display={format.display}
+						shouldReserveMerchSpace={shouldReserveMerchSpace}
+					/>
 				</ElementContainer>
 			</main>
 

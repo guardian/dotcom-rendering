@@ -432,7 +432,7 @@ export const ArticleHeadline = ({
 									{curly(headlineString)}
 								</h1>
 							</WithAgeWarning>
-							{byline && (
+							{!!byline && (
 								<HeadlineByline
 									format={format}
 									byline={byline}
@@ -575,7 +575,7 @@ export const ArticleHeadline = ({
 									{curly(headlineString)}
 								</h1>
 							</WithAgeWarning>
-							{byline && (
+							{!!byline && (
 								<HeadlineByline
 									format={format}
 									byline={byline}
@@ -697,7 +697,7 @@ export const ArticleHeadline = ({
 									</span>
 								</h1>
 							</WithAgeWarning>
-							{byline && (
+							{!!byline && (
 								<HeadlineByline
 									format={format}
 									byline={byline}

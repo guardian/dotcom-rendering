@@ -18,7 +18,7 @@ export const articleTemplate = ({
 	openGraphData,
 	twitterData,
 	keywords,
-	initTwitter,
+	initTwitter = '',
 	recipeMarkup,
 }: {
 	title?: string;
@@ -273,9 +273,9 @@ https://workforus.theguardian.com/careers/product-engineering/
 					window.curl = window.curlConfig;
 				</script>
 
-				<script>
-					${initTwitter}
-				</script>
+
+				${initTwitter}
+
 
                 <noscript>
                     <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${encodeURIComponent(

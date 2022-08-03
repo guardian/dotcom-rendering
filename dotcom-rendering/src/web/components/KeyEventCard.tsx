@@ -42,6 +42,10 @@ const linkStyles = (palette: Palette) => css`
 		span {
 			border-bottom: 1px solid ${palette.hover.keyEventLink};
 		}
+		div {
+			text-decoration: underline ${palette.text.keyEvent};
+			text-underline-offset: 3px;
+		}
 	}
 `;
 
@@ -106,10 +110,12 @@ export const KeyEventCard = ({
 	title,
 	filterKeyEvents,
 	format,
-	cardPosition,
+	cardPosition = 'unknown position',
 }: Props) => {
 	const palette = decidePalette(format);
-	const url = `?filterKeyEvents=${filterKeyEvents}&page=with:block-${id}#block-${id}`;
+	const url = `?filterKeyEvents=${String(
+		filterKeyEvents,
+	)}&page=with:block-${id}#block-${id}`;
 	const date = new Date(blockFirstPublished);
 	return (
 		<li css={listItemStyles(palette)}>
