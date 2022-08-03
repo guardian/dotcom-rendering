@@ -84,7 +84,9 @@ const styles = (
 		margin: 0 0 ${remSpace[3]};
 		color: ${text.paragraph(format)};
 
-		${isEditions ? null : darkModeCss`
+		${isEditions
+			? null
+			: darkModeCss`
 			color: ${text.paragraphDark(format)};
 		`}
 		${dropCap}
@@ -92,9 +94,12 @@ const styles = (
 	`;
 };
 
-const Paragraph: FC<Props> = ({ children, format, showDropCap, isEditions }: Props) => (
-	<p css={styles(format, showDropCap, isEditions)}>{children}</p>
-);
+const Paragraph: FC<Props> = ({
+	children,
+	format,
+	showDropCap,
+	isEditions,
+}: Props) => <p css={styles(format, showDropCap, isEditions)}>{children}</p>;
 
 // ----- Exports ----- //
 
