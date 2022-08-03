@@ -8,6 +8,7 @@ import {
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
+import type { PillarType } from '../../../../model/extract-nav';
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS

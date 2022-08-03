@@ -1,91 +1,97 @@
-import get from 'lodash.get';
+import { ArticlePillar } from '@guardian/libs';
 import { findPillar } from './find-pillar';
 
-type ObjectType = { [key: string]: any };
+interface BaseLinkType {
+	url: string;
+	title: string;
+}
 
-const getString = (
-	obj: ObjectType,
-	selector: string,
-	fallbackValue?: string,
-): string => {
-	const found = get(obj, selector);
-	if (typeof found === 'string') {
-		return found;
-	}
-	if (fallbackValue !== undefined) {
-		return fallbackValue;
-	}
+interface LinkType extends BaseLinkType {
+	longTitle: string;
+	children?: LinkType[];
+	mobileOnly?: boolean;
+	pillar?: ArticleTheme;
+	more?: boolean;
+}
 
-	throw new Error(
-		`expected string at '${selector}', got '${String(
-			found,
-		)}', in '${JSON.stringify(obj)}'`,
-	);
-};
+interface PillarType extends LinkType {
+	pillar: ArticleTheme;
+}
 
-const getArray = <T>(
-	obj: ObjectType,
-	selector: string,
-	fallbackValue?: T[],
-): T[] => {
-	const found = get(obj, selector);
+interface MoreType extends LinkType {
+	more: true;
+}
 
-	if (Array.isArray(found)) {
-		return found;
-	}
-	if (fallbackValue !== undefined) {
-		return fallbackValue;
-	}
+interface SubNavType {
+	parent?: LinkType;
+	links: LinkType[];
+}
 
-	throw new Error(
-		`expected array at '${selector}', got '${String(
-			found,
-		)}', in '${JSON.stringify(obj)}'`,
-	);
-};
+interface BaseNavType {
+	otherLinks: MoreType;
+	brandExtensions: LinkType[];
+	currentNavLink: string;
+	subNavSections?: SubNavType;
+	readerRevenueLinks: ReaderRevenuePositions;
+}
 
-const getLink = (
-	data: ObjectType,
-	{ isPillar }: { isPillar: boolean },
-): LinkType => {
-	const title = getString(data, 'title');
+interface SimpleNavType {
+	pillars: PillarType[];
+	otherLinks: MoreType;
+	brandExtensions: LinkType[];
+	readerRevenueLinks: ReaderRevenuePositions;
+}
+
+interface NavType extends BaseNavType {
+	pillars: PillarType[];
+}
+
+const getLink = (data: CAPILinkType): LinkType => {
+	const { title, longTitle = title, url } = data;
 	return {
 		title,
-		longTitle: getString(data, 'longTitle', '') || title,
-		url: getString(data, 'url'),
-		pillar: isPillar ? findPillar(getString(data, 'title')) : undefined,
-		children: getArray<ObjectType>(data, 'children', []).map(
-			(l) => getLink(l, { isPillar: false }), // children are never pillars
-		),
+		longTitle,
+		url,
+		pillar: undefined,
+		children: data.children?.map(getLink) ?? [],
 		mobileOnly: false,
 	};
 };
 
-const rrLinkConfig = 'readerRevenueLinks';
-const buildRRLinkCategories = (
-	data: ObjectType,
-	position: ReaderRevenuePosition,
-): ReaderRevenueCategories => ({
-	subscribe: getString(data, `${rrLinkConfig}.${position}.subscribe`, ''),
-	support: getString(data, `${rrLinkConfig}.${position}.support`, ''),
-	contribute: getString(data, `${rrLinkConfig}.${position}.contribute`, ''),
-	supporter: getString(data, `${rrLinkConfig}.${position}.supporter`, ''),
+const getPillar = (data: CAPILinkType): PillarType => ({
+	...getLink(data),
+	pillar: findPillar(data.title) ?? ArticlePillar.News,
 });
 
-const buildRRLinkModel = (data: any): ReaderRevenuePositions => ({
-	header: buildRRLinkCategories(data, 'header'),
-	footer: buildRRLinkCategories(data, 'footer'),
-	sideMenu: buildRRLinkCategories(data, 'sideMenu'),
-	ampHeader: buildRRLinkCategories(data, 'ampHeader'),
-	ampFooter: buildRRLinkCategories(data, 'ampFooter'),
+const buildRRLinkCategories = (
+	readerRevenueLinks: ReaderRevenuePositions,
+	position: ReaderRevenuePosition,
+): ReaderRevenueCategories => {
+	const { subscribe, support, contribute, supporter } =
+		readerRevenueLinks[position];
+	return {
+		subscribe,
+		support,
+		contribute,
+		supporter,
+	};
+};
+
+const buildRRLinkModel = ({
+	readerRevenueLinks,
+}: CAPINavType): ReaderRevenuePositions => ({
+	header: buildRRLinkCategories(readerRevenueLinks, 'header'),
+	footer: buildRRLinkCategories(readerRevenueLinks, 'footer'),
+	sideMenu: buildRRLinkCategories(readerRevenueLinks, 'sideMenu'),
+	ampHeader: buildRRLinkCategories(readerRevenueLinks, 'ampHeader'),
+	ampFooter: buildRRLinkCategories(readerRevenueLinks, 'ampFooter'),
 });
 
 export const extractNAV = (data: CAPINavType): NavType => {
-	let pillars = getArray<any>(data, 'pillars');
+	const pillars = data.pillars.map(getPillar);
 
-	pillars = pillars.map((link) => getLink(link, { isPillar: true }));
-
-	const subnav = get(data, 'subNavSections') as undefined | { parent?: any };
+	const { subNavSections: subnav, currentNavLinkTitle: currentNavLink = '' } =
+		data;
 
 	return {
 		pillars,
@@ -94,24 +100,25 @@ export const extractNAV = (data: CAPINavType): NavType => {
 			title: 'More',
 			longTitle: 'More',
 			more: true,
-			children: getArray<ObjectType>(data, 'otherLinks', []).map((l) =>
-				getLink(l, { isPillar: false }),
-			),
+			children: data.otherLinks.map(getLink),
 		},
-		brandExtensions: getArray<ObjectType>(data, 'brandExtensions', []).map(
-			(l) => getLink(l, { isPillar: false }),
-		),
-		currentNavLink: getString(data, 'currentNavLinkTitle', ''),
+		brandExtensions: data.brandExtensions.map(getLink),
+		currentNavLink,
 		subNavSections: subnav
 			? {
-					parent: subnav.parent
-						? getLink(subnav.parent, { isPillar: false })
-						: undefined,
-					links: getArray<ObjectType>(subnav, 'links').map((l) =>
-						getLink(l, { isPillar: false }),
-					),
+					parent: subnav.parent ? getLink(subnav.parent) : undefined,
+					links: subnav.links.map(getLink),
 			  }
 			: undefined,
 		readerRevenueLinks: buildRRLinkModel(data),
 	};
+};
+
+export type {
+	SimpleNavType,
+	NavType,
+	PillarType,
+	BaseLinkType,
+	SubNavType,
+	LinkType,
 };

@@ -4,6 +4,7 @@
 
 type DCRSnapType = import('./src/types/front').DCRSnapType;
 type DCRSupportingContent = import('./src/types/front').DCRSupportingContent;
+type NavType = import('./src/model/extract-nav').NavType;
 
 // Pillars are used for styling
 // RealPillars have pillar palette colours
@@ -73,7 +74,6 @@ type ArticleDisplay = import('@guardian/libs').ArticleDisplay;
 type ArticleDesign = import('@guardian/libs').ArticleDesign;
 type ArticleTheme = import('@guardian/libs').ArticleTheme;
 type ArticleFormat = import('@guardian/libs').ArticleFormat;
-type ArticlePillar = ArticleTheme;
 
 // This is an object that allows you Type defaults of the designTypes.
 // The return type looks like: { Feature: any, Live: any, ...}
@@ -265,10 +265,6 @@ type SharePlatform =
 	| 'messenger';
 
 // shared type declarations
-interface SimpleLinkType {
-	url: string;
-	title: string;
-}
 
 interface AdTargetParam {
 	name: string;
@@ -318,22 +314,6 @@ interface Branding {
 	logoForDarkBackground?: BrandingLogo;
 }
 
-interface LinkType extends SimpleLinkType {
-	longTitle: string;
-	children?: LinkType[];
-	mobileOnly?: boolean;
-	pillar?: ArticlePillar;
-	more?: boolean;
-}
-
-interface PillarType extends LinkType {
-	pillar: ArticlePillar;
-}
-
-interface MoreType extends LinkType {
-	more: true;
-}
-
 interface ReaderRevenueCategories {
 	contribute: string;
 	subscribe: string;
@@ -351,42 +331,7 @@ interface ReaderRevenuePositions {
 	ampFooter: ReaderRevenueCategories;
 }
 
-type ReaderRevenuePosition =
-	| 'header'
-	| 'footer'
-	| 'sideMenu'
-	| 'ampHeader'
-	| 'ampFooter';
-
-interface BaseNavType {
-	otherLinks: MoreType;
-	brandExtensions: LinkType[];
-	currentNavLink: string;
-	subNavSections?: SubNavType;
-	readerRevenueLinks: ReaderRevenuePositions;
-}
-
-// TODO rename
-interface SimpleNavType {
-	pillars: PillarType[];
-	otherLinks: MoreType;
-	brandExtensions: LinkType[];
-	readerRevenueLinks: ReaderRevenuePositions;
-}
-
-interface NavType extends BaseNavType {
-	pillars: PillarType[];
-}
-
-interface SubNavBrowserType {
-	currentNavLink: string;
-	subNavSections?: SubNavType;
-}
-
-interface SubNavType {
-	parent?: LinkType;
-	links: LinkType[];
-}
+type ReaderRevenuePosition = keyof ReaderRevenuePositions;
 
 interface MembershipPlaceholder {
 	campaignCode?: string;
@@ -576,8 +521,8 @@ interface CAPIArticleType {
 	sectionLabel: string;
 	sectionUrl: string;
 	sectionName?: string;
-	subMetaSectionLinks: SimpleLinkType[];
-	subMetaKeywordLinks: SimpleLinkType[];
+	subMetaSectionLinks: CAPILinkType[];
+	subMetaKeywordLinks: CAPILinkType[];
 	shouldHideAds: boolean;
 	isAdFreeUser: boolean;
 	openGraphData: { [key: string]: string };

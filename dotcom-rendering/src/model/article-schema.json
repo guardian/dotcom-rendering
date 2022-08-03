@@ -260,13 +260,13 @@
         "subMetaSectionLinks": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/SimpleLinkType"
+                "$ref": "#/definitions/CAPILinkType"
             }
         },
         "subMetaKeywordLinks": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/SimpleLinkType"
+                "$ref": "#/definitions/CAPILinkType"
             }
         },
         "shouldHideAds": {
@@ -3809,7 +3809,7 @@
             ],
             "type": "string"
         },
-        "SimpleLinkType": {
+        "CAPILinkType": {
             "type": "object",
             "properties": {
                 "url": {
@@ -3817,6 +3817,30 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "longTitle": {
+                    "type": "string"
+                },
+                "iconName": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPILinkType"
+                    }
+                },
+                "pillar": {
+                    "$ref": "#/definitions/LegacyPillar"
+                },
+                "more": {
+                    "type": "boolean"
+                },
+                "classList": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             },
             "required": [
@@ -4376,45 +4400,6 @@
                 "otherLinks",
                 "pillars",
                 "readerRevenueLinks"
-            ]
-        },
-        "CAPILinkType": {
-            "type": "object",
-            "properties": {
-                "url": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                },
-                "longTitle": {
-                    "type": "string"
-                },
-                "iconName": {
-                    "type": "string"
-                },
-                "children": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CAPILinkType"
-                    }
-                },
-                "pillar": {
-                    "$ref": "#/definitions/LegacyPillar"
-                },
-                "more": {
-                    "type": "boolean"
-                },
-                "classList": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "required": [
-                "title",
-                "url"
             ]
         },
         "ReaderRevenuePositions": {
