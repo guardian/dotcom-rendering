@@ -74,9 +74,9 @@ const indices = [
 // Implementation code - you don't need to change this to get a new index
 export type ZIndex = typeof indices[number];
 
-const decideIndex = (name: ZIndex): number | null => {
+const decideIndex = (name: ZIndex): number => {
 	const index = indices.indexOf(name);
-	if (index === -1) return null; // indexOf returns -1 if there is no match
+	if (index === -1) return -1; // indexOf returns -1 if there is no match
 	return indices.length - index; // reverse the indices: last item gets 1
 };
 

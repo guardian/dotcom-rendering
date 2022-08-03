@@ -39,7 +39,7 @@ interface CaptionBlockElement {
 	credit?: string;
 	displayCredit?: boolean;
 	shouldLimitWidth?: boolean;
-	isOverlayed?: boolean;
+	isOverlaid?: boolean;
 }
 
 interface CalloutBlockElement {

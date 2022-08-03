@@ -28,6 +28,7 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.importable';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { DecideLines } from '../components/DecideLines';
+import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
@@ -303,6 +304,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const isInFilteringBeta =
 		CAPIArticle.config.switches.automaticFilters &&
 		CAPIArticle.availableTopics;
+
+	const shouldReserveMerchSpace =
+		!!CAPIArticle.config.abTests.merchandisingMinHeightVariant;
 
 	/*
 	The topic bank on desktop will be positioned where we currently show the key events container.
@@ -1229,51 +1233,65 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							data-print-layout="hide"
 							position="merchandising-high"
 							display={format.display}
+							shouldReserveMerchSpace={shouldReserveMerchSpace}
 						/>
 					</ElementContainer>
 
-					{CAPIArticle.storyPackage && (
-						<ElementContainer>
-							<Island deferUntil="visible">
-								<Carousel
-									heading={CAPIArticle.storyPackage.heading}
-									trails={CAPIArticle.storyPackage.trails.map(
-										decideTrail,
-									)}
-									ophanComponentName="more-on-this-story"
+					{CAPIArticle.onwards ? (
+						<DecideOnwards
+							onwards={CAPIArticle.onwards}
+							format={format}
+						/>
+					) : (
+						<>
+							{CAPIArticle.storyPackage && (
+								<ElementContainer>
+									<Island deferUntil="visible">
+										<Carousel
+											heading={
+												CAPIArticle.storyPackage.heading
+											}
+											trails={CAPIArticle.storyPackage.trails.map(
+												decideTrail,
+											)}
+											onwardsType="more-on-this-story"
+											format={format}
+										/>
+									</Island>
+								</ElementContainer>
+							)}
+
+							<Island
+								clientOnly={true}
+								deferUntil="visible"
+								placeholderHeight={600}
+							>
+								<OnwardsUpper
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
+									hasRelated={CAPIArticle.hasRelated}
+									hasStoryPackage={
+										CAPIArticle.hasStoryPackage
+									}
+									isAdFreeUser={CAPIArticle.isAdFreeUser}
+									pageId={CAPIArticle.pageId}
+									isPaidContent={
+										CAPIArticle.config.isPaidContent ||
+										false
+									}
+									showRelatedContent={
+										CAPIArticle.config.showRelatedContent
+									}
+									keywordIds={CAPIArticle.config.keywordIds}
+									contentType={CAPIArticle.contentType}
+									tags={CAPIArticle.tags}
 									format={format}
-									isCuratedContent={false}
+									pillar={format.theme}
+									editionId={CAPIArticle.editionId}
+									shortUrlId={CAPIArticle.config.shortUrlId}
 								/>
 							</Island>
-						</ElementContainer>
+						</>
 					)}
-
-					<Island
-						clientOnly={true}
-						deferUntil="visible"
-						placeholderHeight={600}
-					>
-						<OnwardsUpper
-							ajaxUrl={CAPIArticle.config.ajaxUrl}
-							hasRelated={CAPIArticle.hasRelated}
-							hasStoryPackage={CAPIArticle.hasStoryPackage}
-							isAdFreeUser={CAPIArticle.isAdFreeUser}
-							pageId={CAPIArticle.pageId}
-							isPaidContent={
-								CAPIArticle.config.isPaidContent || false
-							}
-							showRelatedContent={
-								CAPIArticle.config.showRelatedContent
-							}
-							keywordIds={CAPIArticle.config.keywordIds}
-							contentType={CAPIArticle.contentType}
-							tags={CAPIArticle.tags}
-							format={format}
-							pillar={format.theme}
-							editionId={CAPIArticle.editionId}
-							shortUrlId={CAPIArticle.config.shortUrlId}
-						/>
-					</Island>
 
 					{!isPaidContent && CAPIArticle.isCommentable && (
 						<ElementContainer
@@ -1327,6 +1345,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<AdSlot
 							position="merchandising"
 							display={format.display}
+							shouldReserveMerchSpace={shouldReserveMerchSpace}
 						/>
 					</ElementContainer>
 				</div>

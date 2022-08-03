@@ -37,16 +37,6 @@ interface FilterOptions {
 	threads: ThreadsType;
 }
 
-const objAsParams = (obj: { [key: string]: any }): string => {
-	const params = Object.keys(obj)
-		.map((key) => {
-			return `${key}=${obj[key]}`;
-		})
-		.join('&');
-
-	return `?${params}`;
-};
-
 const initFiltersFromLocalStorage = (): FilterOptions => {
 	let threads: { [key: string]: ThreadsType } | undefined;
 	let pageSize: { [key: string]: PageSizeType } | undefined;
@@ -89,9 +79,10 @@ const buildParams = (filters: FilterOptions) => {
 			filters.orderBy === 'recommendations'
 				? 'mostRecommended'
 				: filters.orderBy,
-		pageSize: filters.pageSize,
-		displayThreaded:
+		pageSize: String(filters.pageSize),
+		displayThreaded: String(
 			filters.threads === 'collapsed' || filters.threads === 'expanded',
+		),
 	};
 };
 
@@ -101,9 +92,9 @@ export const getCommentContext = async (
 ): Promise<CommentContextType> => {
 	const url = joinUrl([ajaxUrl, 'comment', commentId.toString(), 'context']);
 	const filters = initFiltersFromLocalStorage();
-	const params = buildParams(filters);
+	const params = new URLSearchParams(buildParams(filters));
 
-	return fetch(url + objAsParams(params))
+	return fetch(url + '?' + params.toString())
 		.then((response) => {
 			if (!response.ok) {
 				throw Error(

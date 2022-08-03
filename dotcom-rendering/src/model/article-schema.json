@@ -260,13 +260,13 @@
         "subMetaSectionLinks": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/SimpleLinkType"
+                "$ref": "#/definitions/CAPILinkType"
             }
         },
         "subMetaKeywordLinks": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/SimpleLinkType"
+                "$ref": "#/definitions/CAPILinkType"
             }
         },
         "shouldHideAds": {
@@ -338,6 +338,61 @@
                 "heading",
                 "trails"
             ]
+        },
+        "onwards": {
+            "type": "array",
+            "items": {
+                "description": "Onwards",
+                "type": "object",
+                "properties": {
+                    "heading": {
+                        "type": "string"
+                    },
+                    "trails": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/CAPITrailType"
+                        }
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "onwardsType": {
+                        "$ref": "#/definitions/OnwardsType"
+                    },
+                    "format": {
+                        "type": "object",
+                        "properties": {
+                            "design": {
+                                "$ref": "#/definitions/CAPIDesign"
+                            },
+                            "theme": {
+                                "$ref": "#/definitions/CAPITheme"
+                            },
+                            "display": {
+                                "$ref": "#/definitions/CAPIDisplay"
+                            }
+                        },
+                        "required": [
+                            "design",
+                            "display",
+                            "theme"
+                        ]
+                    },
+                    "isCuratedContent": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "format",
+                    "heading",
+                    "onwardsType",
+                    "trails"
+                ]
+            }
         },
         "beaconURL": {
             "type": "string"
@@ -650,7 +705,7 @@
                 "shouldLimitWidth": {
                     "type": "boolean"
                 },
-                "isOverlayed": {
+                "isOverlaid": {
                     "type": "boolean"
                 }
             },
@@ -3792,7 +3847,7 @@
             ],
             "type": "string"
         },
-        "SimpleLinkType": {
+        "CAPILinkType": {
             "type": "object",
             "properties": {
                 "url": {
@@ -3800,6 +3855,30 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "longTitle": {
+                    "type": "string"
+                },
+                "iconName": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPILinkType"
+                    }
+                },
+                "pillar": {
+                    "$ref": "#/definitions/LegacyPillar"
+                },
+                "more": {
+                    "type": "boolean"
+                },
+                "classList": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             },
             "required": [
@@ -4206,6 +4285,19 @@
                 "sponsorName"
             ]
         },
+        "OnwardsType": {
+            "enum": [
+                "curated-content",
+                "default-onwards",
+                "more-galleries",
+                "more-media-in-section",
+                "more-on-this-story",
+                "related-content",
+                "related-stories",
+                "series"
+            ],
+            "type": "string"
+        },
         "CommercialProperties": {
             "type": "object",
             "properties": {
@@ -4346,45 +4438,6 @@
                 "otherLinks",
                 "pillars",
                 "readerRevenueLinks"
-            ]
-        },
-        "CAPILinkType": {
-            "type": "object",
-            "properties": {
-                "url": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                },
-                "longTitle": {
-                    "type": "string"
-                },
-                "iconName": {
-                    "type": "string"
-                },
-                "children": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CAPILinkType"
-                    }
-                },
-                "pillar": {
-                    "$ref": "#/definitions/LegacyPillar"
-                },
-                "more": {
-                    "type": "boolean"
-                },
-                "classList": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "required": [
-                "title",
-                "url"
             ]
         },
         "ReaderRevenuePositions": {

@@ -108,7 +108,9 @@ export const Discussion = ({
 					setCommentOrderBy(context.orderBy);
 					setIsExpanded(true);
 				})
-				.catch((e) => console.error(`getCommentContext - error: ${e}`));
+				.catch((e) =>
+					console.error(`getCommentContext - error: ${String(e)}`),
+				);
 		}
 	}, [discussionApiUrl, hashCommentId]);
 

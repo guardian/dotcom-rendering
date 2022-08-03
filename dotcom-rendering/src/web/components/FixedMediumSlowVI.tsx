@@ -39,7 +39,9 @@ export const FixedMediumSlowVI = ({
 									index === 0 ? 'top' : 'left'
 								}
 								imageSize={index === 0 ? 'large' : 'medium'}
-								trailText={trail.trailText}
+								trailText={
+									index === 0 ? trail.trailText : undefined
+								}
 							/>
 						</LI>
 					);

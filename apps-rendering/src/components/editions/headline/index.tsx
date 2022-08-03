@@ -2,6 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { FontWeight, LineHeight } from '@guardian/source-foundations';
@@ -14,7 +15,6 @@ import {
 } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
 import { OptionKind } from '@guardian/types';
-import { editionsHeadlineTextColour } from 'editorialStyles';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { index } from 'lib';
@@ -143,7 +143,7 @@ const getFontStyles = (
 `;
 
 const getSharedStyles = (format: ArticleFormat): SerializedStyles => css`
-	${editionsHeadlineTextColour(format)}
+	color: ${text.headline(format)};
 	box-sizing: border-box;
 	border-top: 1px solid ${border.secondary};
 	padding-bottom: ${remSpace[4]};

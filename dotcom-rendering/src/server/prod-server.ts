@@ -145,16 +145,20 @@ export const prodServer = (): void => {
                 </html>
             `);
 		} catch (e) {
-			const error = e as Error;
-			res.status(500).send(`<pre>${error.stack}</pre>`);
+			const message =
+				e instanceof Error
+					? e.stack ?? 'Unknown stack'
+					: 'Unknown error';
+			res.status(500).send(`<pre>${message}</pre>`);
 		}
 	});
 
 	// express requires all 4 args here:
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	app.use((e: any, req: any, res: Response, next: any) => {
-		const error = e as Error;
-		res.status(500).send(`<pre>${error.stack}</pre>`);
+		const message =
+			e instanceof Error ? e.stack ?? 'Unknown stack' : 'Unknown error';
+		res.status(500).send(`<pre>${message}</pre>`);
 	});
 
 	if (process.env.DISABLE_LOGGING_AND_METRICS !== 'true') {

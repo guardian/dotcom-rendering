@@ -27,7 +27,7 @@ export const Analytics: React.FC<{
 		fbPixelaccount,
 		comscoreID,
 		title,
-		section,
+		section = '',
 		contentType,
 		id,
 		neilsenAPIID,

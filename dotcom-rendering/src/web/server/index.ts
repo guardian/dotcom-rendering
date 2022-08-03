@@ -37,6 +37,9 @@ const enhanceCAPIType = (body: unknown): CAPIArticleType => {
 	return CAPIArticle;
 };
 
+const getStack = (e: unknown): string =>
+	e instanceof Error ? e.stack ?? 'No error stack' : 'Unknown error';
+
 const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
 	return {
@@ -67,8 +70,7 @@ export const renderArticle = (
 
 		res.status(200).send(resp);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -91,8 +93,7 @@ export const renderArticleJson = (
 
 		res.status(200).send(resp);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -123,8 +124,7 @@ export const renderInteractive = (
 
 		res.status(200).send(resp);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -170,8 +170,7 @@ export const renderBlocks = (
 
 		res.status(200).send(html);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -190,8 +189,7 @@ export const renderKeyEvents = (
 
 		res.status(200).send(html);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -200,30 +198,20 @@ export const renderOnwards = (
 	res: express.Response,
 ): void => {
 	try {
-		const {
-			heading,
-			description,
-			url,
-			ophanComponentName,
-			trails,
-			format,
-			isCuratedContent,
-		} = body;
+		const { heading, description, url, onwardsType, trails, format } = body;
 
 		const html = onwardsToHtml({
 			heading,
 			description,
 			url,
-			ophanComponentName,
+			onwardsType,
 			trails,
 			format,
-			isCuratedContent,
 		});
 
 		res.status(200).send(html);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -239,8 +227,7 @@ export const renderFront = (
 		});
 		res.status(200).send(html);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 

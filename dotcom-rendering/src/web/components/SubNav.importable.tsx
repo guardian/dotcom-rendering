@@ -7,6 +7,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
+import type { SubNavType } from '../../model/extract-nav';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {

@@ -77,7 +77,7 @@ const timeoutify = <T>(
 					}
 				})
 				.catch((e) =>
-					console.error(`timeoutify candidate - error: ${e}`),
+					console.error(`timeoutify candidate - error: ${String(e)}`),
 				);
 		});
 
@@ -153,5 +153,7 @@ export const pickMessage = ({
 					resolve(() => candidate.show(meta));
 				}
 			})
-			.catch((e) => console.error(`pickMessage winner - error: ${e}`));
+			.catch((e) =>
+				console.error(`pickMessage winner - error: ${String(e)}`),
+			);
 	});
