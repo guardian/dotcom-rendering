@@ -49,6 +49,7 @@ type Props = {
 	className?: string;
 	ophanComponentName?: string;
 	ophanComponentLink?: string;
+	containerName?: string;
 };
 
 export const ElementContainer = ({
@@ -65,6 +66,7 @@ export const ElementContainer = ({
 	className,
 	ophanComponentName,
 	ophanComponentLink,
+	containerName,
 }: Props) => (
 	<ClassNames>
 		{({ css }) => {
@@ -91,6 +93,7 @@ export const ElementContainer = ({
 			return _jsx(`${element}`, {
 				'data-link-name': ophanComponentLink,
 				'data-component': ophanComponentName,
+				'data-container-name': containerName,
 				className: className ? `${style} ${className}` : style,
 				children: child,
 			});

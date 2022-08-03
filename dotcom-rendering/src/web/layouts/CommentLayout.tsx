@@ -402,7 +402,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				</SendToBack>
 			</div>
 
-			<main>
+			<main data-layout="CommentLayout">
 				<ElementContainer
 					showTopBorder={false}
 					backgroundColour={palette.background.article}

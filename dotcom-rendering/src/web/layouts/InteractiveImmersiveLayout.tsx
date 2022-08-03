@@ -299,7 +299,7 @@ export const InteractiveImmersiveLayout = ({
 				NAV={NAV}
 				format={format}
 			/>
-			<main>
+			<main data-layout="InteractiveImmersiveLayout">
 				<ElementContainer
 					showTopBorder={false}
 					showSideBorders={false}
