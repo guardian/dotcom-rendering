@@ -339,6 +339,61 @@
                 "trails"
             ]
         },
+        "onwards": {
+            "type": "array",
+            "items": {
+                "description": "Onwards",
+                "type": "object",
+                "properties": {
+                    "heading": {
+                        "type": "string"
+                    },
+                    "trails": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/CAPITrailType"
+                        }
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "onwardsType": {
+                        "$ref": "#/definitions/OnwardsType"
+                    },
+                    "format": {
+                        "type": "object",
+                        "properties": {
+                            "design": {
+                                "$ref": "#/definitions/CAPIDesign"
+                            },
+                            "theme": {
+                                "$ref": "#/definitions/CAPITheme"
+                            },
+                            "display": {
+                                "$ref": "#/definitions/CAPIDisplay"
+                            }
+                        },
+                        "required": [
+                            "design",
+                            "display",
+                            "theme"
+                        ]
+                    },
+                    "isCuratedContent": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "format",
+                    "heading",
+                    "onwardsType",
+                    "trails"
+                ]
+            }
+        },
         "beaconURL": {
             "type": "string"
         },
@@ -4167,6 +4222,19 @@
                 "logo",
                 "sponsorName"
             ]
+        },
+        "OnwardsType": {
+            "enum": [
+                "curated-content",
+                "default-onwards",
+                "more-galleries",
+                "more-media-in-section",
+                "more-on-this-story",
+                "related-content",
+                "related-stories",
+                "series"
+            ],
+            "type": "string"
         },
         "CommercialProperties": {
             "type": "object",

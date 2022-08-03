@@ -24,7 +24,12 @@ const minHeight = css`
 	min-height: 300px;
 `;
 
-export const OnwardsData = ({ url, limit, onwardsType, format }: Props) => {
+export const FetchOnwardsData = ({
+	url,
+	limit,
+	onwardsType,
+	format,
+}: Props) => {
 	const { data, loading, error } = useApi<OnwardsResponse>(url);
 
 	const buildTrails = (
