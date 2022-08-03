@@ -458,6 +458,7 @@ export const DynamicFast = ({
 									showAge={showAge}
 									supportingContent={card.supportingContent}
 									headlineSize="large"
+									trailText={card.trailText}
 									imageUrl={card.image}
 									imagePosition="top"
 									imagePositionOnMobile="top"
