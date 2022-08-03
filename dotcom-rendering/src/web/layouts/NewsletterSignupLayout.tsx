@@ -58,7 +58,7 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
 // to use this layout, edit ./dotcom-rendering/src/web/layouts/DecideLayout.tsx
 // to return is on articles with  ArticleDisplay.Standard && ArticleDesign.NewsletterSignup
 
-type NewsletterSignupLayoutProps = {
+type Props = {
 	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
@@ -131,7 +131,8 @@ const previewCaptionStyle = css`
 	align-items: center;
 	background-color: ${brandAlt[400]};
 	padding: ${space[1]}px ${space[3]}px;
-	${textSans.medium({ fontWeight: 'bold' })}
+	${textSans.medium({ fontWeight: 'bold' })};
+
 	:hover {
 		text-decoration: initial;
 	}
@@ -159,9 +160,7 @@ const topMarginStyle = (marginTop: number = space[2]): SerializedStyles => css`
 `;
 
 const shareSpanStyle = css`
-	${textSans.medium({
-		fontWeight: 'bold',
-	})};
+	${textSans.medium({ fontWeight: 'bold' })};
 	margin-right: ${space[4]}px;
 `;
 
@@ -180,11 +179,11 @@ const getMainMediaCaptions = (
 			: undefined,
 	);
 
-export const NewsletterSignupLayout = ({
+export const NewsletterSignupLayout: React.FC<Props> = ({
 	CAPIArticle,
 	NAV,
 	format,
-}: NewsletterSignupLayoutProps) => {
+}) => {
 	const {
 		config: { host },
 	} = CAPIArticle;
