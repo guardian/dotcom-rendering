@@ -5,12 +5,11 @@ const DEV = process.env.NODE_ENV === 'development';
 
 /**
  * @param {boolean} isLegacyJS
- * @param {boolean?} withChunkhash
  * @returns {string}
  */
-const generateName = (isLegacyJS, withChunkhash = true) => {
+const generateName = (isLegacyJS) => {
 	const legacyString = isLegacyJS ? '.legacy' : '';
-	const chunkhashString = withChunkhash && !DEV ? '.[chunkhash]' : '';
+	const chunkhashString = DEV ? '' : '.[chunkhash]';
 	return `[name]${legacyString}${chunkhashString}.js`;
 };
 
