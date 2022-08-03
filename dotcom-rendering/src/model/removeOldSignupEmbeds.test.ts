@@ -73,6 +73,8 @@ describe('Remove Old Signups', () => {
 			elementTypesBeforeEnhancement[0].length - 1,
 		);
 
-		expect(elementTypesAfterEnhance[0].includes('EmbedBlockElement')).toBeFalsy();
+		expect(
+			elementTypesAfterEnhance[0].includes('EmbedBlockElement'),
+		).toBeFalsy();
 	});
 });
