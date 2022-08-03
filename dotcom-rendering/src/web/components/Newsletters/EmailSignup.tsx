@@ -6,6 +6,7 @@ import {
 	space,
 	sport,
 	textSans,
+	until,
 } from '@guardian/source-foundations';
 import { SecureSignup } from '../SecureSignup';
 import { NewsletterDetail } from './NewsletterDetail';
@@ -22,15 +23,14 @@ const containerStyles = css`
 	border-radius: 12px;
 	margin-bottom: ${space[3]}px;
 	padding: ${space[2]}px;
-	div:last-child {
-		margin-top: ${space[2]}px;
+	${until.tablet} {
+		div:last-child {
+			margin-top: ${space[2]}px;
+		}
 	}
 
 	${from.tablet} {
 		padding: ${space[2]}px ${space[3]}px;
-		div:last-child {
-			margin-top: 0;
-		}
 	}
 `;
 
@@ -38,6 +38,12 @@ const stackBelowTabletStyles = css`
 	display: flex;
 	flex-direction: column;
 	margin-bottom: ${space[2]}px;
+
+	${until.tablet} {
+		span:last-child {
+			margin-top: ${space[1]}px;
+		}
+	}
 
 	${from.tablet} {
 		flex-direction: row;
