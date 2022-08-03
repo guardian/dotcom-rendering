@@ -135,7 +135,9 @@ export const articleToHtml = ({ data }: Props): string => {
 			...getScriptArrayFromFile('bootCmp.js'),
 			...getScriptArrayFromFile('ophan.js'),
 			CAPIArticle.config && {
-				src: CAPIArticle.config.commercialBundleUrl,
+				src:
+					process.env.COMMERCIAL_BUNDLE_URL ??
+					CAPIArticle.config.commercialBundleUrl,
 			},
 			...getScriptArrayFromFile('sentryLoader.js'),
 			...getScriptArrayFromFile('dynamicImport.js'),
