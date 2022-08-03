@@ -7,6 +7,7 @@ import { enhanceInteractiveContentsElements } from './enhance-interactive-conten
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 import { enhanceTweets } from './enhance-tweets';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
+import { removeOldSignUpEmbeds } from './remove-old-signup-embeds';
 
 class BlockEnhancer {
 	blocks: Block[];
@@ -31,6 +32,9 @@ class BlockEnhancer {
 			this.format,
 			this.promotedNewsletter,
 		);
+
+		this.blocks = removeOldSignUpEmbeds(this.blocks);
+
 		return this;
 	}
 
