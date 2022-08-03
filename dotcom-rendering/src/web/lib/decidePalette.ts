@@ -473,21 +473,10 @@ const textCardFooter = (format: ArticleFormat): string => {
 			}
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
-				case ArticlePillar.News:
-					return news[600];
-				case ArticlePillar.Sport:
-					return sport[600];
-				case ArticlePillar.Opinion:
-					return WHITE;
-				case ArticlePillar.Culture:
-					return culture[600];
-				case ArticlePillar.Lifestyle:
-					return lifestyle[500];
-				case ArticleSpecial.SpecialReport:
-					return brandAlt[400];
 				case ArticleSpecial.Labs:
-				default:
 					return BLACK;
+				default:
+					return neutral[100];
 			}
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
