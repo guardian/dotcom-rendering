@@ -24,7 +24,7 @@ const labs = {
 };
 
 const Default: FC = () => (
-	<Paragraph format={standard} showDropCap={false}>
+	<Paragraph format={standard} showDropCap={false} isEditions={false}>
 		Ever since Mexico City was founded on an island in the lake of Texcoco
 		its inhabitants have dreamed of water: containing it, draining it and
 		now retaining it.
@@ -32,7 +32,7 @@ const Default: FC = () => (
 );
 
 const Labs: FC = () => (
-	<Paragraph format={labs} showDropCap={false}>
+	<Paragraph format={labs} showDropCap={false} isEditions={false}>
 		Ever since Mexico City was founded on an island in the lake of Texcoco
 		its inhabitants have dreamed of water: containing it, draining it and
 		now retaining it.
