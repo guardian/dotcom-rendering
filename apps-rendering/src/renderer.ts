@@ -265,7 +265,7 @@ const textElement =
 		switch (node.nodeName) {
 			case 'P': {
 				const showDropCap = shouldShowDropCap(text, format, isEditions);
-				return h(Paragraph, { key, format, showDropCap }, children);
+				return h(Paragraph, { key, format, showDropCap, isEditions }, children);
 			}
 			case '#text':
 				return transform(text, format);
