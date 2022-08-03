@@ -12,8 +12,8 @@ import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Island } from '../components/Island';
-import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
+import { MostPopularContainerLayout } from '../components/MostPopularContainerLayout';
 import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { DecideContainer } from '../lib/DecideContainer';
@@ -148,6 +148,29 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
+					if (
+						!isPaidContent &&
+						collection.collectionType === 'news/most-popular'
+					) {
+						return (
+							<ElementContainer
+								data-print-layout="hide"
+								element="aside"
+							>
+								<MostPopularContainerLayout
+									data={[
+										{
+											heading: collection.displayName,
+											trails: trails.slice(0, 10),
+										},
+									]}
+									format={format}
+									sectionName="" // {front.sectionName}
+								/>
+							</ElementContainer>
+						);
+					}
+
 					return (
 						<ContainerLayout
 							key={index}
@@ -179,16 +202,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						</ContainerLayout>
 					);
 				})}
-
-				{!isPaidContent && (
-					<ElementContainer data-print-layout="hide" element="aside">
-						<MostViewedFooterLayout
-							format={format}
-							sectionName="" // {front.sectionName}
-							ajaxUrl={front.config.ajaxUrl}
-						/>
-					</ElementContainer>
-				)}
 			</main>
 
 			{NAV.subNavSections && (
