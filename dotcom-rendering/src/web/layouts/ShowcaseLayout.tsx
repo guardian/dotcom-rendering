@@ -237,6 +237,9 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
+	const shouldReserveMerchSpace =
+		!!CAPIArticle.config.abTests.merchandisingMinHeightVariant;
+
 	return (
 		<>
 			{format.theme !== ArticleSpecial.Labs ? (
@@ -651,6 +654,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					<AdSlot
 						position="merchandising-high"
 						display={format.display}
+						shouldReserveMerchSpace={shouldReserveMerchSpace}
 					/>
 				</ElementContainer>
 
@@ -746,7 +750,11 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					backgroundColour={neutral[93]}
 					element="aside"
 				>
-					<AdSlot position="merchandising" display={format.display} />
+					<AdSlot
+						position="merchandising"
+						display={format.display}
+						shouldReserveMerchSpace={shouldReserveMerchSpace}
+					/>
 				</ElementContainer>
 			</main>
 

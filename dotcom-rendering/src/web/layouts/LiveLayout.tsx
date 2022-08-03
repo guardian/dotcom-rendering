@@ -305,6 +305,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		CAPIArticle.config.switches.automaticFilters &&
 		CAPIArticle.availableTopics;
 
+	const shouldReserveMerchSpace =
+		!!CAPIArticle.config.abTests.merchandisingMinHeightVariant;
+
 	/*
 	The topic bank on desktop will be positioned where we currently show the key events container.
 	This is dependent on a change made in PR #4896 [https://github.com/guardian/dotcom-rendering/pull/4896] where the key events container will be removed from the left column.
@@ -1230,6 +1233,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							data-print-layout="hide"
 							position="merchandising-high"
 							display={format.display}
+							shouldReserveMerchSpace={shouldReserveMerchSpace}
 						/>
 					</ElementContainer>
 
@@ -1341,6 +1345,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<AdSlot
 							position="merchandising"
 							display={format.display}
+							shouldReserveMerchSpace={shouldReserveMerchSpace}
 						/>
 					</ElementContainer>
 				</div>
