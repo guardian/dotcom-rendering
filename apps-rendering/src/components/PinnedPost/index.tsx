@@ -134,7 +134,7 @@ const fakeButtonStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const collapsibleBody = css`
-	max-height: 40vh;
+	max-height: 22.4rem;
 	overflow: hidden;
 `;
 
