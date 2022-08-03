@@ -127,23 +127,17 @@ const mainGraphicWrapperStyle = css`
 
 const previewCaptionStyle = css`
 	display: flex;
-	background-color: ${brandAlt[400]};
 	align-items: center;
-	padding: ${space[1]}px;
-	text-decoration: none;
-	${textSans.medium({ fontWeight: 'bold', lineHeight: 'tight' })}
+	background-color: ${brandAlt[400]};
+	padding: ${space[1]}px ${space[3]}px;
+	${textSans.medium({ fontWeight: 'bold' })}
+	:hover {
+		text-decoration: initial;
+	}
 
 	svg {
 		margin-right: ${space[1]}px;
 		flex-shrink: 0;
-	}
-`;
-
-const previewLinkStyle = (palette: Palette): SerializedStyles => css`
-	text-decoration: none;
-	color: ${palette.text.articleLink};
-	:hover {
-		color: ${palette.text.articleLinkHover};
 	}
 `;
 
@@ -159,8 +153,8 @@ const guardianLogoContainerStyle = css`
 	}
 `;
 
-const topMarginStyle = css`
-	margin-top: ${space[2]}px;
+const topMarginStyle = (marginTop: number = space[2]): SerializedStyles => css`
+	margin-top: ${marginTop}px;
 `;
 
 const shareSpanStyle = css`
@@ -215,7 +209,7 @@ export const NewsletterSignupLayout = ({
 	const showNewsletterPreview = Boolean(newsletterPreviewUrl);
 
 	/** TODO: this data needs to come from the newsletters API */
-	const newsletterCategory = 'UK Focused';
+	const newsletterRegionFocus = 'UK Focused';
 
 	return (
 		<>
@@ -349,12 +343,18 @@ export const NewsletterSignupLayout = ({
 					centralBorder="full"
 					sideBorders={true}
 					stretchRight={true}
-					leftContent={<NewsletterDetail text={newsletterCategory} />}
+					leftContent={
+						<div css={topMarginStyle(space[4])}>
+							<NewsletterDetail text={newsletterRegionFocus} />
+						</div>
+					}
 				>
 					<Columns collapseUntil="desktop">
 						<Column width={[1, 1, 5 / 8, 1 / 2, 1 / 2]}>
 							<Hide from="leftCol">
-								<NewsletterDetail text={newsletterCategory} />
+								<NewsletterDetail
+									text={newsletterRegionFocus}
+								/>
 							</Hide>
 							<ArticleHeadline
 								format={format}
@@ -417,20 +417,18 @@ export const NewsletterSignupLayout = ({
 							<div css={mainGraphicWrapperStyle}>
 								{showNewsletterPreview && (
 									<Hide until="desktop">
-										<figcaption css={previewCaptionStyle}>
-											<SvgEye size="small" />
-
-											<Link
-												cssOverrides={previewLinkStyle(
-													palette,
-												)}
-												href={newsletterPreviewUrl}
-												target="_blank"
-											>
-												Click here to see the latest
-												version of this newsletter
-											</Link>
-										</figcaption>
+										<Link
+											cssOverrides={previewCaptionStyle}
+											// css={previewCaptionStyle}
+											href={newsletterPreviewUrl}
+											target="_blank"
+											icon={<SvgEye size="medium" />}
+											priority="secondary"
+											subdued={true}
+										>
+											Click here to see the latest version
+											of this newsletter
+										</Link>
 									</Hide>
 								)}
 
@@ -451,7 +449,7 @@ export const NewsletterSignupLayout = ({
 						</Column>
 					</Columns>
 
-					<div css={topMarginStyle}>
+					<div css={topMarginStyle()}>
 						<NewsletterPrivacyMessage legacy={false} />
 					</div>
 				</ContainerLayout>

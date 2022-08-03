@@ -13,6 +13,8 @@ type Props = {
 const containerStyle = css`
 	display: flex;
 	align-items: center;
+	padding-bottom: ${space[2]}px;
+	${textSans.medium({ fontWeight: 'bold' })};
 
 	svg {
 		background-color: ${brandAltBackground.primary};
@@ -22,14 +24,10 @@ const containerStyle = css`
 	}
 `;
 
-const spanStyle = css`
-	${textSans.medium({ fontWeight: 'bold' })};
-`;
-
 export const NewsletterDetail: React.FC<Props> = ({ text }) => (
-	<div css={containerStyle}>
+	<span css={containerStyle}>
 		{/** TODO: Replace with SvgNewsletter when available */}
 		<SvgEnvelope size="small" />
-		<span css={spanStyle}>{text}</span>
-	</div>
+		{text}
+	</span>
 );
