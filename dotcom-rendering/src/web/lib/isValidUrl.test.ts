@@ -7,11 +7,11 @@ describe('isValidUrl', () => {
 			'guardian.co',
 			'anemailaddress@company.com',
 			'com/hello?athing=1&anotherthing=%20',
-			'https://guardian.co.uk space',
+			'https://guardian.co.uk withASpace',
 		];
 
 		it.each(invalidInputs)(
-			'returns undefined for invalid input of `%s`',
+			'returns false for invalid input of `%s`',
 			(input) => {
 				expect(isValidUrl(input)).toBeFalsy();
 			},
@@ -26,7 +26,7 @@ describe('isValidUrl', () => {
 		];
 
 		it.each(validInputs)(
-			'returns input for valid input of `%s`',
+			'returns true for valid input of `%s`',
 			(input) => {
 				expect(isValidUrl(input)).toBeTruthy();
 			},

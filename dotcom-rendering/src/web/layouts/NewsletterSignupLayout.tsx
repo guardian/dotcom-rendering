@@ -202,10 +202,9 @@ export const NewsletterSignupLayout = ({
 	const palette = decidePalette(format);
 
 	/**	Newsletter preview will be linked if the caption of the main media is a URL */
-	const captions = getMainMediaCaptions(CAPIArticle).filter(Boolean);
-	const newsletterPreviewUrl = captions.find(
-		(caption) => caption && isValidUrl(caption),
-	);
+	const newsletterPreviewUrl = getMainMediaCaptions(CAPIArticle)
+		.filter(Boolean)
+		.find((caption) => caption && isValidUrl(caption));
 	const showNewsletterPreview = Boolean(newsletterPreviewUrl);
 
 	/** TODO: this data needs to come from the newsletters API */
@@ -419,7 +418,6 @@ export const NewsletterSignupLayout = ({
 									<Hide until="desktop">
 										<Link
 											cssOverrides={previewCaptionStyle}
-											// css={previewCaptionStyle}
 											href={newsletterPreviewUrl}
 											target="_blank"
 											icon={<SvgEye size="medium" />}

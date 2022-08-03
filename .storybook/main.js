@@ -79,14 +79,8 @@ const dcrWebpack = (config) => {
 
 	// SecureSignup uses @emotion/cache and @emotion/server - can't be used in storybook
 	config.resolve.alias[
-		path.resolve(
-			__dirname,
-			'../dotcom-rendering/src/web/components/SecureSignup.tsx',
-		)
-	] = path.resolve(
-		__dirname,
-		'../dotcom-rendering/__mocks__/SecureSignupMock.tsx',
-	);
+		path.resolve(__dirname, '../dotcom-rendering/src/web/components/SecureSignup.tsx')
+	] = path.resolve(__dirname, '../dotcom-rendering/__mocks__/SecureSignupMock.tsx');
 
 	// Support typescript in Storybook
 	// https://storybook.js.org/docs/configurations/typescript-config/
