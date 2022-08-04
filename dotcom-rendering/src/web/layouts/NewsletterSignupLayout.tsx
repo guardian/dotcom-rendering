@@ -1,4 +1,3 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
@@ -15,7 +14,6 @@ import {
 	Column,
 	Columns,
 	Hide,
-	Link,
 	LinkButton,
 	SvgEye,
 	SvgGuardianLogo,
@@ -23,6 +21,7 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
+import { ArticleBody } from '../components/ArticleBody';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
 import { ContainerLayout } from '../components/ContainerLayout';
@@ -36,17 +35,13 @@ import { MainMedia } from '../components/MainMedia';
 import { Nav } from '../components/Nav/Nav';
 import { NewsletterBadge } from '../components/Newsletters/NewsletterBadge';
 import { NewsletterDetail } from '../components/Newsletters/NewsletterDetail';
-import { NewsletterFrequency } from '../components/Newsletters/NewsletterFrequency';
-import { NewsletterPrivacyMessage } from '../components/Newsletters/NewsletterPrivacyMessage';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
-import { SecureSignup } from '../components/SecureSignup';
 import { ShareIcons } from '../components/ShareIcons';
 import { Standfirst } from '../components/Standfirst';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
-import { isValidUrl } from '../lib/isValidUrl';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -58,7 +53,7 @@ import { BannerWrapper, Stuck } from './lib/stickiness';
 // to use this layout, edit ./dotcom-rendering/src/web/layouts/DecideLayout.tsx
 // to return is on articles with  ArticleDisplay.Standard && ArticleDesign.NewsletterSignup
 
-type Props = {
+type NewsletterSignupLayoutProps = {
 	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
@@ -128,14 +123,10 @@ const mainGraphicWrapperStyle = css`
 
 const previewCaptionStyle = css`
 	display: flex;
-	align-items: center;
 	background-color: ${brandAlt[400]};
-	padding: ${space[1]}px ${space[3]}px;
-	${textSans.medium({ fontWeight: 'bold' })};
-
-	:hover {
-		text-decoration: initial;
-	}
+	align-items: center;
+	padding: ${space[1]}px;
+	${textSans.medium({ fontWeight: 'bold', lineHeight: 'tight' })}
 
 	svg {
 		margin-right: ${space[1]}px;
@@ -155,35 +146,11 @@ const guardianLogoContainerStyle = css`
 	}
 `;
 
-const topMarginStyle = (marginTop: number = space[2]): SerializedStyles => css`
-	margin-top: ${marginTop}px;
-`;
-
-const shareSpanStyle = css`
-	${textSans.medium({ fontWeight: 'bold' })};
-	margin-right: ${space[4]}px;
-`;
-
-const shareDivStyle = css`
-	display: flex;
-	align-items: center;
-	margin-top: ${space[3]}px;
-`;
-
-const getMainMediaCaptions = (
-	CAPIArticle: CAPIArticleType,
-): (string | undefined)[] =>
-	CAPIArticle.mainMediaElements.map((el) =>
-		el._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
-			? el.data.caption
-			: undefined,
-	);
-
-export const NewsletterSignupLayout: React.FC<Props> = ({
+export const NewsletterSignupLayout = ({
 	CAPIArticle,
 	NAV,
 	format,
-}) => {
+}: NewsletterSignupLayoutProps) => {
 	const {
 		config: { host },
 	} = CAPIArticle;
@@ -201,14 +168,11 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 
 	const palette = decidePalette(format);
 
-	/**	Newsletter preview will be linked if the caption of the main media is a URL */
-	const newsletterPreviewUrl = getMainMediaCaptions(CAPIArticle)
-		.filter(Boolean)
-		.find((caption) => caption && isValidUrl(caption));
-	const showNewsletterPreview = Boolean(newsletterPreviewUrl);
+	/**	TODO: include logic here for whether preview exists for the newsletter */
+	const showNewsletterPreview = true;
 
 	/** TODO: this data needs to come from the newsletters API */
-	const newsletterRegionFocus = 'UK Focused';
+	const newsletterCategory = 'UK Focused';
 
 	return (
 		<>
@@ -271,7 +235,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 					/>
 				</ElementContainer>
 
-				{!!NAV.subNavSections && (
+				{NAV.subNavSections && (
 					<>
 						<ElementContainer
 							backgroundColour={palette.background.article}
@@ -302,7 +266,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 				)}
 			</div>
 
-			{!!CAPIArticle.config.switches.surveys && (
+			{CAPIArticle.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
@@ -342,18 +306,12 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 					centralBorder="full"
 					sideBorders={true}
 					stretchRight={true}
-					leftContent={
-						<div css={topMarginStyle(space[4])}>
-							<NewsletterDetail text={newsletterRegionFocus} />
-						</div>
-					}
+					leftContent={<NewsletterDetail text={newsletterCategory} />}
 				>
 					<Columns collapseUntil="desktop">
 						<Column width={[1, 1, 5 / 8, 1 / 2, 1 / 2]}>
 							<Hide from="leftCol">
-								<NewsletterDetail
-									text={newsletterRegionFocus}
-								/>
+								<NewsletterDetail text={newsletterCategory} />
 							</Hide>
 							<ArticleHeadline
 								format={format}
@@ -370,13 +328,17 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 								standfirst={CAPIArticle.standfirst}
 							/>
 
+							{/* TODO:
+								- This data will come from the Newsletters API
+								- Only render this part if preview link exists
+								- Add onClick handler or link?
+								- Accessibility?
+							*/}
 							{showNewsletterPreview && (
 								<div css={previewButtonWrapperStyle}>
 									<LinkButton
 										icon={<SvgEye />}
 										iconSide="left"
-										href={newsletterPreviewUrl}
-										target="_blank"
 										priority="tertiary"
 										size="xsmall"
 									>
@@ -385,48 +347,85 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 								</div>
 							)}
 
-							<SecureSignup
-								newsletterId="1234"
-								successDescription="nice"
-								hidePrivacyMessage={true}
+							<ArticleBody
+								format={format}
+								blocks={CAPIArticle.blocks}
+								adTargeting={adTargeting}
+								host={host}
+								pageId={CAPIArticle.pageId}
+								webTitle={CAPIArticle.webTitle}
+								ajaxUrl={CAPIArticle.config.ajaxUrl}
+								switches={CAPIArticle.config.switches}
+								isSensitive={CAPIArticle.config.isSensitive}
+								isAdFreeUser={CAPIArticle.isAdFreeUser}
+								section={CAPIArticle.config.section}
+								shouldHideReaderRevenue={
+									CAPIArticle.shouldHideReaderRevenue
+								}
+								tags={CAPIArticle.tags}
+								isPaidContent={
+									!!CAPIArticle.config.isPaidContent
+								}
+								contributionsServiceUrl={
+									contributionsServiceUrl
+								}
+								contentType={CAPIArticle.contentType}
+								sectionName={CAPIArticle.sectionName || ''}
+								isPreview={CAPIArticle.config.isPreview}
+								idUrl={CAPIArticle.config.idUrl || ''}
+								isDev={!!CAPIArticle.config.isDev}
 							/>
 
-							<NewsletterFrequency frequency="Weekly" />
-
-							<div css={shareDivStyle}>
-								<span css={shareSpanStyle}>
+							<div
+								css={css`
+									display: flex;
+									align-items: center;
+								`}
+							>
+								<span
+									css={css`
+										${textSans.medium({
+											fontWeight: 'bold',
+										})};
+										margin-right: ${space[4]}px;
+									`}
+								>
 									Tell your friends
 								</span>
-								<ShareIcons
-									pageId={CAPIArticle.pageId}
-									webTitle={CAPIArticle.webTitle}
-									format={format}
-									displayIcons={[
-										'facebook',
-										'twitter',
-										'email',
-									]}
-									size="medium"
-									context="ArticleMeta"
-								/>
+								<div>
+									<ShareIcons
+										pageId={CAPIArticle.pageId}
+										webTitle={CAPIArticle.webTitle}
+										format={format}
+										displayIcons={[
+											'facebook',
+											'twitter',
+											'email',
+										]}
+										size="medium"
+										context="ArticleMeta"
+									/>
+								</div>
 							</div>
 						</Column>
 
 						<Column width={[1, 1, 3 / 8, 1 / 2, 1 / 2]}>
 							<div css={mainGraphicWrapperStyle}>
+								{/* TODO:
+										- This data will come from the Newsletters API
+										- Only render this part if preview link exists
+										- Add onClick handler or link?
+										- Accessibility?
+								 */}
 								{showNewsletterPreview && (
 									<Hide until="desktop">
-										<Link
-											cssOverrides={previewCaptionStyle}
-											href={newsletterPreviewUrl}
-											target="_blank"
-											icon={<SvgEye size="medium" />}
-											priority="secondary"
-											subdued={true}
-										>
-											Click here to see the latest version
-											of this newsletter
-										</Link>
+										<figcaption css={previewCaptionStyle}>
+											<SvgEye size="small" />
+											<span role="link">
+												Click here to see the latest
+												version of this newsletter
+											</span>
+										</figcaption>
 									</Hide>
 								)}
 
@@ -446,10 +445,6 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 							</div>
 						</Column>
 					</Columns>
-
-					<div css={topMarginStyle()}>
-						<NewsletterPrivacyMessage legacy={false} />
-					</div>
 				</ContainerLayout>
 
 				{CAPIArticle.onwards ? (
