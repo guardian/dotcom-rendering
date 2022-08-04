@@ -7,7 +7,6 @@ import {
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from, headline, remSpace } from '@guardian/source-foundations';
-import StarRating from 'components/StarRating';
 import type { Item } from 'item';
 import { articleWidthStyles, darkModeCss } from 'styles';
 
@@ -53,6 +52,5 @@ interface DefaultProps {
 export const DefaultHeadline: React.FC<DefaultProps> = ({ item, styles }) => (
 	<h1 css={styles}>
 		<span>{item.headline}</span>
-		<StarRating item={item} />
 	</h1>
 );
