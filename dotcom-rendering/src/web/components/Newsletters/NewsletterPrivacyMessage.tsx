@@ -50,6 +50,7 @@ const legacyTermsStyle = css`
 		${textSans.xxsmall({ fontWeight: 'bold' })};
 	}
 `;
+//
 
 export const NewsletterPrivacyMessage: React.FC<Props> = ({ legacy = true }) =>
 	legacy ? (
