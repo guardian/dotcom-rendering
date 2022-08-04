@@ -107,6 +107,8 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
+	const manifestPath = './manifest.json';
+
 	/**
 	 * The highest priority scripts.
 	 * These scripts have a considerable impact on site performance.
@@ -117,21 +119,21 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	const priorityScriptTags = generateScriptTags(
 		[
 			{ src: polyfillIO },
-			...getScriptArrayFromFile('bootCmp.js'),
-			...getScriptArrayFromFile('ophan.js'),
+			...getScriptArrayFromFile('bootCmp.js', manifestPath),
+			...getScriptArrayFromFile('ophan.js', manifestPath),
 			CAPIArticle.config && {
 				src:
 					process.env.COMMERCIAL_BUNDLE_URL ??
 					CAPIArticle.config.commercialBundleUrl,
 			},
-			...getScriptArrayFromFile('sentryLoader.js'),
-			...getScriptArrayFromFile('dynamicImport.js'),
+			...getScriptArrayFromFile('sentryLoader.js', manifestPath),
+			...getScriptArrayFromFile('dynamicImport.js', manifestPath),
 			pageHasNonBootInteractiveElements && {
 				src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 			},
-			...getScriptArrayFromFile('islands.js'),
+			...getScriptArrayFromFile('islands.js', manifestPath),
 			...expeditedIslands.flatMap((name) =>
-				getScriptArrayFromFile(`${name}.js`),
+				getScriptArrayFromFile(`${name}.js`, manifestPath),
 			),
 		].map((script) =>
 			offerHttp3 && script
@@ -149,17 +151,17 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	 */
 	const lowPriorityScriptTags = generateScriptTags(
 		[
-			...getScriptArrayFromFile('atomIframe.js'),
-			...getScriptArrayFromFile('embedIframe.js'),
-			...getScriptArrayFromFile('newsletterEmbedIframe.js'),
-			...getScriptArrayFromFile('relativeTime.js'),
-			...getScriptArrayFromFile('initDiscussion.js'),
+			...getScriptArrayFromFile('atomIframe.js', manifestPath),
+			...getScriptArrayFromFile('embedIframe.js', manifestPath),
+			...getScriptArrayFromFile('newsletterEmbedIframe.js', manifestPath),
+			...getScriptArrayFromFile('relativeTime.js', manifestPath),
+			...getScriptArrayFromFile('initDiscussion.js', manifestPath),
 		].map((script) =>
 			offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
 		),
 	);
 
-	const gaChunk = getScriptArrayFromFile('ga.js');
+	const gaChunk = getScriptArrayFromFile('ga.js', manifestPath);
 	const modernScript = gaChunk.find((script) => script.legacy === false);
 	const legacyScript = gaChunk.find((script) => script.legacy === true);
 	const gaPath = {
