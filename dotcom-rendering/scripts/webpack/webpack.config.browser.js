@@ -4,20 +4,20 @@ const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 const DEV = process.env.NODE_ENV === 'development';
 
 /**
- * @param {boolean} isLegacyJS
+ * @param {'modern' | 'legacy' | 'variant'} bundle
  * @returns {string}
  */
-const generateName = (isLegacyJS) => {
-	const legacyString = isLegacyJS ? '.legacy' : '';
+const generateName = (bundle) => {
+	const bundleString = bundle === 'modern' ? '' : `.${bundle}`;
 	const chunkhashString = DEV ? '' : '.[chunkhash]';
-	return `[name]${legacyString}${chunkhashString}.js`;
+	return `[name]${bundleString}${chunkhashString}.js`;
 };
 
 /**
- * @param {{ isLegacyJS: boolean, sessionId: string }} options
+ * @param {{ bundle: 'modern' | 'legacy' | 'variant', sessionId: string }} options
  * @returns {import('webpack').Configuration}
  */
-module.exports = ({ isLegacyJS, sessionId }) => ({
+module.exports = ({ bundle, sessionId }) => ({
 	entry: {
 		sentryLoader: './src/web/browser/sentryLoader/init.ts',
 		bootCmp: './src/web/browser/bootCmp/init.ts',
@@ -37,19 +37,23 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 		filename: (data) => {
 			// We don't want to hash the debug script so it can be used in bookmarklets
 			if (data.chunk.name === 'debug') return `[name].js`;
-			return generateName(isLegacyJS);
+			return generateName(bundle);
 		},
-		chunkFilename: generateName(isLegacyJS),
+		chunkFilename: generateName(bundle),
 		publicPath: '',
 	},
 	plugins: [
 		new WebpackManifestPlugin({
-			fileName: isLegacyJS ? 'manifest.legacy.json' : 'manifest.json',
+			fileName:
+				bundle === 'modern'
+					? 'manifest.json'
+					: `manifest.${bundle}.json`,
 		}),
 		...(DEV
 			? [
 					new GuStatsReportPlugin({
-						buildName: isLegacyJS ? 'legacy-client' : 'client',
+						buildName:
+							bundle === 'modern' ? 'client' : `${bundle}-client`,
 						project: 'dotcom-rendering',
 						team: 'dotcom',
 						sessionId,
@@ -69,7 +73,7 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 						options: {
 							presets: [
 								'@babel/preset-react',
-								isLegacyJS
+								bundle === 'legacy'
 									? [
 											'@babel/preset-env',
 											{
