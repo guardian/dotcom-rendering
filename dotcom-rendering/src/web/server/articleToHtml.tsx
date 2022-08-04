@@ -122,7 +122,10 @@ export const articleToHtml = ({ data }: Props): string => {
 			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
-	const manifestPath = './manifest.json';
+	const manifestPath =
+		CAPIArticle.config.abTests.jsBundleVariant === 'variant'
+			? './manifest.variant.json'
+			: './manifest.json';
 
 	/**
 	 * The highest priority scripts.
