@@ -1,19 +1,8 @@
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
+
 interface AssetHash {
 	[key: string]: string;
-}
-
-let manifest: AssetHash = {};
-let legacyManifest: AssetHash = {};
-
-try {
-	// path is relative to the server bundle
-
-	// eslint-disable-next-line global-require -- this may fail
-	manifest = require('./manifest.json');
-	// eslint-disable-next-line global-require -- this may fail
-	legacyManifest = require('./manifest.legacy.json');
-} catch (e) {
-	// do nothing
 }
 
 /**
@@ -47,11 +36,34 @@ const isDev = process.env.NODE_ENV === 'development';
 
 export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE, isDev);
 
+const getManifest = (path: string): AssetHash => {
+	try {
+		const assetHash: unknown = JSON.parse(
+			readFileSync(resolve(__dirname, path), { encoding: 'utf-8' }),
+		);
+		if (typeof assetHash != 'object' || assetHash === null)
+			throw new Error('Not a valid AssetHash type');
+
+		/** @TODO validate the object */
+		return assetHash as AssetHash;
+	} catch (e) {
+		console.error('Could not load manifest in: ', path);
+		console.error('Some filename lookups will fail');
+		return {};
+	}
+};
+
 export const getScriptArrayFromFile = (
 	file: `${string}.js`,
+	manifestPath: `./manifest${string}.json`,
 ): { src: string; legacy?: boolean }[] => {
 	if (!file.endsWith('.js'))
 		throw new Error('Invalid filename: extension must be .js');
+
+	const [manifest, legacyManifest] = [
+		manifestPath,
+		'./manifest.legacy.json',
+	].map(getManifest);
 
 	const filename = isDev ? file : manifest[file];
 	const legacyFilename = isDev
