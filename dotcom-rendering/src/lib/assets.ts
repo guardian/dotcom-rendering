@@ -53,10 +53,12 @@ const getManifest = (path: string): AssetHash => {
 	}
 };
 
+type Script = { src: string; legacy: boolean };
+
 export const getScriptArrayFromFile = (
 	file: `${string}.js`,
 	manifestPath: `./manifest${string}.json`,
-): { src: string; legacy?: boolean }[] => {
+): Script[] => {
 	if (!file.endsWith('.js'))
 		throw new Error('Invalid filename: extension must be .js');
 
@@ -70,7 +72,7 @@ export const getScriptArrayFromFile = (
 		? file.replace('.js', '.legacy.js')
 		: legacyManifest[file];
 
-	const scripts = [];
+	const scripts: Script[] = [];
 
 	if (filename) {
 		scripts.push({

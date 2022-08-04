@@ -163,8 +163,8 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	);
 
 	const gaChunk = getScriptArrayFromFile('ga.js', manifestPath);
-	const modernScript = gaChunk.find((script) => script.legacy === false);
-	const legacyScript = gaChunk.find((script) => script.legacy === true);
+	const modernScript = gaChunk.find((script) => !script.legacy);
+	const legacyScript = gaChunk.find((script) => script.legacy);
 	const gaPath = {
 		modern: modernScript?.src as string,
 		legacy: legacyScript?.src as string,
