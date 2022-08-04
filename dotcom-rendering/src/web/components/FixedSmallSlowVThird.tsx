@@ -30,6 +30,7 @@ export const FixedSmallSlowVThird = ({
 					>
 						<FrontCard
 							trail={trail}
+							starRating={trail.starRating}
 							containerPalette={containerPalette}
 							showAge={showAge}
 							supportingContent={trail.supportingContent}
