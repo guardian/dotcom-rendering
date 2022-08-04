@@ -86,7 +86,7 @@ export const TopicFilterBank = ({
 	const selectedTopic = selectedTopics?.[0];
 	const topFiveTopics = availableTopics
 		.slice(0, 5)
-		.filter((topic) => topic.count && topic.count > 2);
+		.filter((topic) => !!topic.count && topic.count > 2);
 
 	if (selectedTopic) {
 		const selectedIndex = availableTopics.findIndex((availableTopic) =>
