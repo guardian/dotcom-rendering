@@ -14,6 +14,52 @@ const generateName = (bundle) => {
 };
 
 /**
+ * @param {'modern' | 'legacy' | 'variant'} bundle
+ * @returns {string}
+ */
+const getPresets = (bundle) => {
+	switch (bundle) {
+		case 'modern':
+			return [
+				'@babel/preset-react',
+				[
+					'@babel/preset-env',
+					{
+						bugfixes: true,
+						targets: {
+							esmodules: true,
+						},
+					},
+				],
+			];
+		case 'variant':
+			return [
+				'@babel/preset-react',
+				[
+					'@babel/preset-env',
+					{
+						targets: 'extends @guardian/browserslist-config',
+					},
+				],
+			];
+
+		case 'legacy':
+			return [
+				'@babel/preset-react',
+				[
+					'@babel/preset-env',
+					{
+						targets: {
+							ie: '11',
+						},
+						modules: false,
+					},
+				],
+			];
+	}
+};
+
+/**
  * @param {{ bundle: 'modern' | 'legacy' | 'variant', sessionId: string }} options
  * @returns {import('webpack').Configuration}
  */
@@ -71,28 +117,7 @@ module.exports = ({ bundle, sessionId }) => ({
 					{
 						loader: 'babel-loader',
 						options: {
-							presets: [
-								'@babel/preset-react',
-								bundle === 'legacy'
-									? [
-											'@babel/preset-env',
-											{
-												targets: {
-													ie: '11',
-												},
-												modules: false,
-											},
-									  ]
-									: [
-											'@babel/preset-env',
-											{
-												bugfixes: true,
-												targets: {
-													esmodules: true,
-												},
-											},
-									  ],
-							],
+							presets: getPresets(bundle),
 							compact: true,
 						},
 					},
