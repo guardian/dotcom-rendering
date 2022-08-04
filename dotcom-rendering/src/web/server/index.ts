@@ -20,9 +20,14 @@ function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 
 const enhanceCAPIType = (body: unknown): CAPIArticleType => {
 	const data = validateAsCAPIType(body);
+
 	const CAPIArticle: CAPIArticleType = {
 		...data,
-		blocks: enhanceBlocks(data.blocks, data.format),
+		blocks: enhanceBlocks(
+			data.blocks,
+			data.format,
+			data.promotedNewsletter,
+		),
 		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
 		standfirst: enhanceStandfirst(data.standfirst),
 		commercialProperties: enhanceCommercialProperties(

@@ -575,6 +575,8 @@ interface CAPIArticleType {
 	mostRecentBlockId?: string;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
+
+	promotedNewsletter?: Newsletter;
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';

@@ -6,31 +6,36 @@ import {
 	space,
 	sport,
 	textSans,
+	until,
 } from '@guardian/source-foundations';
 import { SecureSignup } from '../SecureSignup';
 import { NewsletterDetail } from './NewsletterDetail';
 
 type Props = {
-	newsletter: Newsletter;
-	elementId: string;
+	identityName: string;
+	name: string;
+	description: string;
+	frequency: string;
+	successDescription: string;
+	theme: string;
 	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
 	hidePrivacyMessage?: boolean;
 };
 
 const containerStyles = css`
+	clear: both;
 	border: ${neutral[0]} 3px dashed;
 	border-radius: 12px;
 	margin-bottom: ${space[3]}px;
 	padding: ${space[2]}px;
-	div:last-child {
-		margin-top: ${space[2]}px;
+	${until.tablet} {
+		div:last-child {
+			margin-top: ${space[2]}px;
+		}
 	}
 
 	${from.tablet} {
 		padding: ${space[2]}px ${space[3]}px;
-		div:last-child {
-			margin-top: 0;
-		}
 	}
 `;
 
@@ -38,6 +43,12 @@ const stackBelowTabletStyles = css`
 	display: flex;
 	flex-direction: column;
 	margin-bottom: ${space[2]}px;
+
+	${until.tablet} {
+		span:last-child {
+			margin-top: ${space[1]}px;
+		}
+	}
 
 	${from.tablet} {
 		flex-direction: row;
@@ -59,18 +70,14 @@ const descriptionStyles = css`
 `;
 
 export const EmailSignup: React.FC<Props> = ({
-	newsletter,
+	identityName,
+	name,
+	description,
+	frequency,
+	successDescription,
+	theme,
 	hidePrivacyMessage,
 }) => {
-	const {
-		identityName,
-		name,
-		description,
-		frequency,
-		successDescription,
-		theme,
-	} = newsletter;
-
 	return (
 		<aside css={containerStyles}>
 			<div css={stackBelowTabletStyles}>
