@@ -125,24 +125,24 @@ const month = (date: Date): string => months[date.getUTCMonth()];
 
 const fullMonth = (date: Date): string => fullMonths[date.getUTCMonth()];
 
-const padZero = (n: number): string => String(n).padStart(2, '0');
+const padStart = (n: number): string => String(n).padStart(2, '0');
 
 const time = (date: Date, separator: string): string =>
-	`${padZero(date.getUTCHours())}${separator}${padZero(
+	`${padStart(date.getUTCHours())}${separator}${padStart(
 		date.getUTCMinutes(),
 	)}`;
 
 const time12hr = (date: Date, separator: string): string => {
 	const utcHours = date.getUTCHours();
-	return `${padZero(
+	return `${padStart(
 		utcHours > 12 ? utcHours - 12 : utcHours,
-	)}${separator}${padZero(date.getUTCMinutes())}${
+	)}${separator}${padStart(date.getUTCMinutes())}${
 		utcHours > 12 ? 'pm' : 'am'
 	}`;
 };
 
 const localTime = (date: Date): string =>
-	`${padZero(date.getHours())}.${padZero(date.getMinutes())}`;
+	`${padStart(date.getHours())}.${padStart(date.getMinutes())}`;
 
 const localTime12Hr = (date: Date): string =>
 	date
@@ -244,5 +244,5 @@ export {
 	formatLocalTimeDateTz,
 	formatUTCTimeDateTz,
 	dateToString,
-	padZero,
+	padStart,
 };
