@@ -24,6 +24,7 @@ import { parseImage } from 'image';
 import { compose, pipe } from 'lib';
 import type { Context } from 'parserContext';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
+import { Newsletter } from 'item';
 
 // ----- Types ----- //
 
@@ -110,6 +111,11 @@ interface AudioAtom {
 	title: string;
 }
 
+interface NewsletterSignUp {
+	kind: ElementKind.NewsletterSignUp;
+	newsletter: Newsletter;
+}
+
 type BodyElement =
 	| Text
 	| Image
@@ -157,7 +163,8 @@ type BodyElement =
 	| ChartAtom
 	| AudioAtom
 	| KnowledgeQuizAtom
-	| PersonalityQuizAtom;
+	| PersonalityQuizAtom
+	| NewsletterSignUp;
 
 type Elements = BlockElement[] | undefined;
 
