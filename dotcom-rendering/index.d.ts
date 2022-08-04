@@ -767,8 +767,8 @@ interface CommercialConfigType {
 }
 
 type ServerSideTests = {
-	[k: `${string}Variant`]: 'variant';
-	[k: `${string}Control`]: 'control';
+	[k: `${string}Variant`]: 'variant' | undefined;
+	[k: `${string}Control`]: 'control' | undefined;
 };
 
 /**

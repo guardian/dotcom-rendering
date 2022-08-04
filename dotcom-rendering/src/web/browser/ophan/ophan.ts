@@ -77,16 +77,15 @@ export const sendOphanComponentEvent = (
 	submitComponentEvent(componentEvent, ophanRecord);
 };
 
-export const abTestPayload = (tests: {
-	[key: string]: string;
-}): OphanABPayload => {
+export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {
 	const records: { [key: string]: OphanABEvent } = {};
-	Object.keys(tests).forEach((testName) => {
+
+	for (const [testName, variantName = 'undefined'] of Object.entries(tests)) {
 		records[`ab${testName}`] = {
-			variantName: tests[testName],
+			variantName,
 			complete: false,
 		};
-	});
+	}
 
 	return { abTestRegister: records };
 };
