@@ -81,6 +81,7 @@ import {
 	themeToPillar,
 	themeToPillarString,
 } from 'themeStyles';
+import NewsletterSignupForm from 'components/NewsletterSignupForm';
 
 // ----- Renderer ----- //
 
@@ -703,6 +704,9 @@ const render =
 			case ElementKind.KnowledgeQuizAtom:
 			case ElementKind.PersonalityQuizAtom:
 				return h(Quiz, { format, element });
+
+			case ElementKind.NewsletterSignUp:
+				return h(NewsletterSignupForm, { format, element });
 		}
 	};
 

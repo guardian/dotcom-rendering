@@ -409,4 +409,5 @@ export {
 	TimelineAtom,
 	AudioAtom,
 	parseElements,
+	NewsletterSignUp,
 };
