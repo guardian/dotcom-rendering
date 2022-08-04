@@ -16,7 +16,7 @@ import { atomCss, atomScript } from 'components/InteractiveAtom';
 import Layout from 'components/Layout';
 import Meta from 'components/Meta';
 import Scripts from 'components/Scripts';
-import { fromCapi } from 'item';
+import { fromCapi, Newsletter } from 'item';
 import type { Item } from 'item';
 import { JSDOM } from 'jsdom';
 import type { ReactElement } from 'react';
@@ -160,27 +160,15 @@ const buildHtml = (
 `;
 };
 
-const NEWSLETTER_TAG_PREFIX = 'campaign/email/';
-
-function addNewsletterFromTag(item: Item): Item {
-	const newsletterTag = item.tags?.find((tag) =>
-		tag.id.startsWith(NEWSLETTER_TAG_PREFIX),
-	);
-	const newsletterId = newsletterTag?.id.split('/').reverse()[0];
-	if (newsletterId) {
-		item.promotedNewsletter = { id: newsletterId };
-	}
-	return item;
-}
-
+// TO DO - update @guardian/apps-render-api-models, remove the hack on the RenderingRequest type
 function render(
 	imageSalt: string,
-	request: RenderingRequest,
+	request: RenderingRequest & {promotedNewsletter?: Newsletter},
 	getAssetLocation: (assetName: string) => string,
 	page: Option<string>,
 ): Page {
 	const item = fromCapi({ docParser, salt: imageSalt })(request, page);
-	addNewsletterFromTag(item);
+	item.promotedNewsletter = request.promotedNewsletter
 
 	const clientScript = map(getAssetLocation)(scriptName(item));
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);

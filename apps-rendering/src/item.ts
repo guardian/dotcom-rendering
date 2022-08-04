@@ -49,6 +49,8 @@ import { themeFromString } from 'themeStyles';
 
 export interface Newsletter {
 	id: string;
+	displayName: string;
+	frequency: string;
 }
 
 interface Fields extends ArticleFormat {

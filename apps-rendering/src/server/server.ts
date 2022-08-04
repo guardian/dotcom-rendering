@@ -27,7 +27,7 @@ import type {
 	Request,
 } from 'express';
 import express from 'express';
-import { fromCapi } from 'item';
+import { fromCapi, Newsletter } from 'item';
 import { JSDOM } from 'jsdom';
 import { pipe, resultToNullable, toArray } from 'lib';
 import { logger } from 'logger';
@@ -47,6 +47,7 @@ import { getConfigValue } from 'server/ssmConfig';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
 import { getFootballContent } from './footballContent';
+import { getNewsletterData } from './newsletterData';
 
 // ----- Setup ----- //
 
@@ -85,6 +86,21 @@ function getPrefetchHeader(resources: string[]): string {
 		(linkHeader, resource) => linkHeader + `<${resource}>; rel=prefetch,`,
 		'',
 	);
+}
+
+const NEWSLETTER_TAG_PREFIX = 'campaign/email/';
+
+async function getNewsletterFromTag(
+	content: Content,
+): Promise<Newsletter | undefined> {
+	const newsletterTag = content.tags?.find((tag) =>
+		tag.id.startsWith(NEWSLETTER_TAG_PREFIX),
+	);
+	const newsletterId = newsletterTag?.id.split('/').reverse()[0];
+	if (newsletterId) {
+		return await getNewsletterData(newsletterId);
+	}
+	return undefined;
 }
 
 const capiRequest =
@@ -298,9 +314,12 @@ async function serveEditionsArticlePost(
 		// Edition backend from the capi
 		const content = await capiContentDecoder(req.body);
 		const footballContent = await getFootballContent(content);
-		const renderingRequest: RenderingRequest = {
+		const newsletter = await getNewsletterFromTag(content);
+		// TO DO - update @guardian/apps-render-api-models, remove the hack on the RenderingRequest type
+		const renderingRequest: RenderingRequest & {promotedNewsletter?: Newsletter} = {
 			content,
 			footballContent: resultToNullable(footballContent),
+			promotedNewsletter: newsletter,
 		};
 		const themeOverride = themeFromUnknown(req.query.theme);
 
@@ -327,8 +346,10 @@ async function serveArticleGet(
 			},
 			async ([content, relatedContent]: [Content, RelatedContent]) => {
 				const footballContent = await getFootballContent(content);
+				const newsletter = await getNewsletterFromTag(content);
 
-				const mockedRenderingRequest: RenderingRequest = {
+				// TO DO - update @guardian/apps-render-api-models, remove the hack on the RenderingRequest type
+				const mockedRenderingRequest: RenderingRequest & {promotedNewsletter?: Newsletter} = {
 					content,
 					targetingParams: {
 						co: 'Jane Smith',
@@ -337,6 +358,7 @@ async function serveArticleGet(
 					commentCount: 30,
 					relatedContent,
 					footballContent: resultToNullable(footballContent),
+					promotedNewsletter: newsletter,
 				};
 
 				const richLinkDetails = req.query.richlink === '';

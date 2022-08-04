@@ -25,8 +25,9 @@ const NewsletterSignupForm: FC<Props> = ({ format, element }) => {
 	return (
 		<div css={styles(format)}>
 			<p>
-				SIGN UP FOR {element.newsletter.id}{' '}
+				SIGN UP FOR {element.newsletter.displayName}{' '}
 			</p>
+			<p>It is {element.newsletter.frequency}</p>
 		</div>
 	);
 };

@@ -16,7 +16,7 @@ import { atomCss, atomScript } from 'components/InteractiveAtom';
 import Meta from 'components/Meta';
 import Scripts from 'components/Scripts';
 import type { Response } from 'express';
-import type { Item } from 'item';
+import type { Item, Newsletter } from 'item';
 import { fromCapi } from 'item';
 import { JSDOM } from 'jsdom';
 import { compose } from 'lib';
@@ -154,9 +154,10 @@ const buildHtml = (
     </html>
 `;
 
+// TO DO - update @guardian/apps-render-api-models, remove the hack on the RenderingRequest type
 function render(
 	imageSalt: string,
-	request: RenderingRequest,
+	request: RenderingRequest & {promotedNewsletter?: Newsletter},
 	res: Response,
 	getAssetLocation: (assetName: string) => string,
 	themeOverride: Option<ArticleTheme>,
@@ -165,6 +166,7 @@ function render(
 	const isPreview = res.req.query.isPreview === 'true';
 	const environment = getEditionsEnv(isPreview, path);
 	const item = fromCapi({ docParser, salt: imageSalt })(request, none);
+	item.promotedNewsletter = request.promotedNewsletter
 
 	const newItem = {
 		...item,
