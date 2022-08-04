@@ -160,6 +160,19 @@ const buildHtml = (
 `;
 };
 
+const NEWSLETTER_TAG_PREFIX = 'campaign/email/';
+
+function addNewsletterFromTag(item: Item): Item {
+	const newsletterTag = item.tags?.find((tag) =>
+		tag.id.startsWith(NEWSLETTER_TAG_PREFIX),
+	);
+	const newsletterId = newsletterTag?.id.split('/').reverse()[0];
+	if (newsletterId) {
+		item.promotedNewsletter = { id: newsletterId };
+	}
+	return item;
+}
+
 function render(
 	imageSalt: string,
 	request: RenderingRequest,
@@ -167,6 +180,8 @@ function render(
 	page: Option<string>,
 ): Page {
 	const item = fromCapi({ docParser, salt: imageSalt })(request, page);
+	addNewsletterFromTag(item);
+
 	const clientScript = map(getAssetLocation)(scriptName(item));
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
 	const body = renderBody(item, request);

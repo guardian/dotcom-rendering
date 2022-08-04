@@ -47,6 +47,10 @@ import { themeFromString } from 'themeStyles';
 
 // ----- Item Type ----- //
 
+export interface Newsletter {
+	id: string;
+}
+
 interface Fields extends ArticleFormat {
 	headline: string;
 	standfirst: Option<DocumentFragment>;
@@ -65,6 +69,7 @@ interface Fields extends ArticleFormat {
 	relatedContent: Option<ResizedRelatedContent>;
 	logo: Option<Logo>;
 	webUrl: string;
+	promotedNewsletter?: Newsletter;
 }
 
 interface MatchReport extends Fields {
