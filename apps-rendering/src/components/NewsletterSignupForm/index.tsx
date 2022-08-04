@@ -22,12 +22,14 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 };
 
 const NewsletterSignupForm: FC<Props> = ({ format, element }) => {
+	const {displayName, frequency, description} = element.newsletter
 	return (
 		<div css={styles(format)}>
 			<p>
-				SIGN UP FOR {element.newsletter.displayName}{' '}
+				SIGN UP FOR {displayName}{' '}
 			</p>
-			<p>It is {element.newsletter.frequency}</p>
+			<p>{description}</p>
+			<p>It is {frequency}</p>
 		</div>
 	);
 };
