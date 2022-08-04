@@ -488,6 +488,45 @@
             "items": {
                 "$ref": "#/definitions/Topic"
             }
+        },
+        "promotedNewsletter": {
+            "type": "object",
+            "properties": {
+                "listId": {
+                    "type": "number"
+                },
+                "identityName": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "frequency": {
+                    "type": "string"
+                },
+                "successDescription": {
+                    "type": "string"
+                },
+                "theme": {
+                    "type": "string"
+                },
+                "group": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description",
+                "frequency",
+                "group",
+                "identityName",
+                "listId",
+                "name",
+                "successDescription",
+                "theme"
+            ]
         }
     },
     "required": [
@@ -2209,7 +2248,6 @@
             },
             "required": [
                 "_type",
-                "elementId",
                 "newsletter"
             ]
         },
