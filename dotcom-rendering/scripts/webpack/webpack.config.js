@@ -129,4 +129,13 @@ module.exports = [
 			sessionId,
 		}),
 	),
+	merge(
+		commonConfigs({
+			platform: 'browser.variant',
+		}),
+		require(`./webpack.config.browser`)({
+			bundle: 'variant',
+			sessionId,
+		}),
+	),
 ];
