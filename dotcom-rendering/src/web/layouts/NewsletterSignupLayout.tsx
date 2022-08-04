@@ -202,9 +202,10 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 	const palette = decidePalette(format);
 
 	/**	Newsletter preview will be linked if the caption of the main media is a URL */
-	const newsletterPreviewUrl = getMainMediaCaptions(CAPIArticle)
+	const captions = getMainMediaCaptions(CAPIArticle);
+	const newsletterPreviewUrl = captions
 		.filter(Boolean)
-		.find((caption) => caption && isValidUrl(caption));
+		.find((caption) => !!caption && isValidUrl(caption));
 	const showNewsletterPreview = Boolean(newsletterPreviewUrl);
 
 	/** TODO: this data needs to come from the newsletters API */
