@@ -1,4 +1,4 @@
-import { boolean, withKnobs } from '@storybook/addon-knobs';
+import { withKnobs } from '@storybook/addon-knobs';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
 export default {
@@ -7,10 +7,8 @@ export default {
 	decorators: [withKnobs],
 };
 
-const legacy = (): boolean => boolean('legacy', true);
-
 export const Default = () => {
-	return <NewsletterPrivacyMessage legacy={legacy()} />;
+	return <NewsletterPrivacyMessage />;
 };
 
 Default.story = { name: 'Default' };

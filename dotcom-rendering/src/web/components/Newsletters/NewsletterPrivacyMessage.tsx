@@ -8,12 +8,6 @@ const hrefLookup = {
 	googleTermsOfService: 'https://policies.google.com/terms',
 };
 
-type Props = {
-	/** Bool for toggling between two variations for privacy wording
-	 * Default is true as legacy represents the existing one */
-	legacy?: boolean;
-};
-
 type ExternalLinkProps = { href: string; children: React.ReactNode };
 /** Link component fixed with data-ignore and rel attributes for consistency in this file only */
 const ExternalLink: React.FC<ExternalLinkProps> = ({ href, children }) => (
@@ -42,52 +36,27 @@ const termsStyle = css`
 		color: ${neutral[0]};
 		font-weight: bold;
 	}
-`;
-
-const legacyTermsStyle = css`
-	${termsStyle}
 	a {
 		${textSans.xxsmall({ fontWeight: 'bold' })};
 	}
 `;
 
-export const NewsletterPrivacyMessage: React.FC<Props> = ({ legacy = true }) =>
-	legacy ? (
-		<span css={legacyTermsStyle}>
-			<strong>Privacy Notice: </strong>
-			Newsletters may contain info about charities, online ads, and
-			content funded by outside parties. For more information see our{' '}
-			<ExternalLink href={hrefLookup.guardianPrivacyPolicy}>
-				privacy policy
-			</ExternalLink>
-			. We use Google reCaptcha to protect our website and the Google{' '}
-			<ExternalLink href={hrefLookup.googlePrivacyPolicy}>
-				Privacy Policy
-			</ExternalLink>{' '}
-			and{' '}
-			<ExternalLink href={hrefLookup.googleTermsOfService}>
-				Terms of Service
-			</ExternalLink>{' '}
-			apply.
-		</span>
-	) : (
-		<span css={termsStyle}>
-			<strong>Privacy Notice: </strong>
-			We thought you should know this newsletter may also contain
-			information about Guardian products, services and chosen charities
-			or online advertisements. Newsletters may also contain content
-			funded by outside parties.{' '}
-			<ExternalLink href={hrefLookup.guardianPrivacyPolicy}>
-				See privacy policy here
-			</ExternalLink>
-			. This site is protected by reCAPTCHA and the Google{' '}
-			<ExternalLink href={hrefLookup.googlePrivacyPolicy}>
-				Privacy Policy
-			</ExternalLink>{' '}
-			and{' '}
-			<ExternalLink href={hrefLookup.googleTermsOfService}>
-				Terms of Service
-			</ExternalLink>{' '}
-			apply.
-		</span>
-	);
+export const NewsletterPrivacyMessage: React.FC = () => (
+	<span css={termsStyle}>
+		<strong>Privacy Notice: </strong>
+		Newsletters may contain info about charities, online ads, and content
+		funded by outside parties. For more information see our{' '}
+		<ExternalLink href={hrefLookup.guardianPrivacyPolicy}>
+			privacy policy
+		</ExternalLink>
+		. We use Google reCaptcha to protect our website and the Google{' '}
+		<ExternalLink href={hrefLookup.googlePrivacyPolicy}>
+			Privacy Policy
+		</ExternalLink>{' '}
+		and{' '}
+		<ExternalLink href={hrefLookup.googleTermsOfService}>
+			Terms of Service
+		</ExternalLink>{' '}
+		apply.
+	</span>
+);
