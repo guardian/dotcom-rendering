@@ -1,4 +1,5 @@
 import type { DCRContainerPalette } from '../../types/front';
+import type { ContainerOverrides } from '../../types/palette';
 
 const textCardHeadline = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
@@ -291,8 +292,8 @@ const topBarCard = textCardKicker;
  * for it and its cards
  *
  * @see {@link https://github.com/guardian/interactive-atom-container-colours/blob/master/shared/css/_variables.scss Frontend code}
- * @param {DCRContainerPalette} containerPalette
- * @returns {ContainerOverrides} an object with the overrides set as properties
+ * @param containerPalette
+ * @returns an object with the overrides set as properties
  */
 export const decideContainerOverrides = (
 	containerPalette: DCRContainerPalette,
