@@ -269,8 +269,8 @@ const template: (_: FontDisplay) => string = ({
     }
 `;
 
-const getStyleString: () => string = () => {
-	return fontList.reduce(
+const getStyleString = (requiredFontList: FontDisplay[] = fontList): string => {
+	return requiredFontList.reduce(
 		(styleString, font) => `${styleString}${template(font)}`,
 		'',
 	);
@@ -281,17 +281,9 @@ const minifyCssString = (css: string) =>
 
 export const getFontsCss = (): string => minifyCssString(getStyleString());
 
-export const getFontsCssForSomeFonts = (
-	requiredFonts: FontFamily[],
-): string => {
-	const requiredFontList: FontDisplay[] = fontList.filter((font) =>
-		requiredFonts.includes(font.family),
+export const getPartialFontsCss = (requiredFonts: FontFamily[]): string =>
+	minifyCssString(
+		getStyleString(
+			fontList.filter((font) => requiredFonts.includes(font.family)),
+		),
 	);
-
-	const style = requiredFontList.reduce(
-		(styleString, font) => `${styleString}${template(font)}`,
-		'',
-	);
-
-	return minifyCssString(style);
-};
