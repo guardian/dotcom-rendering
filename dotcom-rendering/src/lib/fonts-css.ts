@@ -280,3 +280,18 @@ const minifyCssString = (css: string) =>
 	css.replace(/\n/g, '').replace(/\s\s+/g, ' ');
 
 export const getFontsCss = (): string => minifyCssString(getStyleString());
+
+export const getFontsCssForSomeFonts = (
+	requiredFonts: FontFamily[],
+): string => {
+	const requiredFontList: FontDisplay[] = fontList.filter((font) =>
+		requiredFonts.includes(font.family),
+	);
+
+	const style = requiredFontList.reduce(
+		(styleString, font) => `${styleString}${template(font)}`,
+		'',
+	);
+
+	return minifyCssString(style);
+};
