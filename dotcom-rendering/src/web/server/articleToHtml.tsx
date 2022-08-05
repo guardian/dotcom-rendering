@@ -5,6 +5,7 @@ import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import { ASSET_ORIGIN, getScriptArrayFromFile } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
+import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import { Article } from '../components/Article';
 import { decideFormat } from '../lib/decideFormat';
@@ -15,7 +16,7 @@ import { extractExpeditedIslands } from './extractIslands';
 import { recipeSchema } from './temporaryRecipeStructuredData';
 
 interface Props {
-	data: DCRServerDocumentData;
+	article: CAPIArticleType;
 }
 
 const generateScriptTags = (
@@ -53,11 +54,12 @@ const decideTitle = (CAPIArticle: CAPIArticleType): string => {
 	return `${CAPIArticle.headline} | ${CAPIArticle.sectionLabel} | The Guardian`;
 };
 
-export const articleToHtml = ({ data }: Props): string => {
-	const { CAPIArticle, NAV, linkedData } = data;
+export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
+	const NAV = extractNAV(CAPIArticle.nav);
 	const title = decideTitle(CAPIArticle);
 	const key = 'dcr';
 	const cache = createCache({ key });
+	const linkedData = CAPIArticle.linkedData;
 
 	// eslint-disable-next-line @typescript-eslint/unbound-method
 	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
@@ -186,7 +188,9 @@ export const articleToHtml = ({ data }: Props): string => {
 	 * We escape windowGuardian here to prevent errors when the data
 	 * is placed in a script tag on the page
 	 */
-	const windowGuardian = escapeData(JSON.stringify(makeWindowGuardian(data)));
+	const windowGuardian = escapeData(
+		JSON.stringify(makeWindowGuardian(CAPIArticle)),
+	);
 
 	const hasAmpInteractiveTag = CAPIArticle.tags.some(
 		(tag) => tag.id === 'tracking/platformfunctional/ampinteractive',
@@ -196,7 +200,7 @@ export const articleToHtml = ({ data }: Props): string => {
 	const ampLink =
 		CAPIArticle.format.design !== 'InteractiveDesign' ||
 		hasAmpInteractiveTag
-			? `https://amp.theguardian.com/${data.CAPIArticle.pageId}`
+			? `https://amp.theguardian.com/${CAPIArticle.pageId}`
 			: undefined;
 
 	const { openGraphData } = CAPIArticle;

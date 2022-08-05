@@ -841,12 +841,6 @@ interface GADataType {
 // General DataTypes //
 // ----------------- //
 
-interface DCRServerDocumentData {
-	CAPIArticle: CAPIArticleType;
-	NAV: NavType;
-	linkedData: { [key: string]: any };
-}
-
 interface BaseTrailType {
 	url: string;
 	headline: string;
