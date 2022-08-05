@@ -6,7 +6,7 @@ import { Optional } from 'optional';
 /**
  * The return type of the {@linkcode Result.partition} method.
  */
-type Partitioned<E, A> = { errs: E[], oks: A[] };
+type Partitioned<E, A> = { errs: E[]; oks: A[] };
 
 /**
  * Represents either a value or an error; it's either an `Ok` or an `Err`.
@@ -75,9 +75,9 @@ abstract class Result<E, A> {
 	 * @returns {boolean} A type predicate
 	 * @example
 	 * const name: Result<string, string> = Result.ok('CP Scott');
-	 * 
+	 *
 	 * console.log(name.value); // Type Error: 'value' does not exist
-	 * 
+	 *
 	 * if (name.isOk()) {
 	 *   console.log(name.value); // Works!
 	 * }
@@ -91,9 +91,9 @@ abstract class Result<E, A> {
 	 * @returns {boolean} A type predicate
 	 * @example
 	 * const name: Result<string, string> = Result.err('Missing name!');
-	 * 
+	 *
 	 * console.log(name.error); // Type Error: 'value' does not exist
-	 * 
+	 *
 	 * if (name.isErr()) {
 	 *   console.log(name.error); // Works!
 	 * }
@@ -148,22 +148,22 @@ abstract class Result<E, A> {
 	 * one for the list of `Err`s and one for the list of `Ok`s
 	 * @example
 	 * const results: Result<string, number>[] = ...;
-	 * 
+	 *
 	 * const partitioned = Result.partition(results);
 	 * console.log(`Successes: ${partitioned.oks}`);
 	 * console.log(`Errors: ${partitioned.errs}`);
 	 */
-	static partition<E, A>(results: Result<E, A>[]): Partitioned<E, A> {
+	static partition<E, A>(results: Array<Result<E, A>>): Partitioned<E, A> {
 		return results.reduce(
 			({ errs, oks }: Partitioned<E, A>, result) =>
 				result.either(
 					(err) => ({ errs: [...errs, err], oks }),
 					(ok) => ({ errs, oks: [...oks, ok] }),
 				),
-				{ errs: [], oks: [] },
-		)
+			{ errs: [], oks: [] },
+		);
 	}
-	
+
 	// ----- Methods
 
 	/**
@@ -181,7 +181,7 @@ abstract class Result<E, A> {
 	 * creditTwo.map(name => `Photograph: ${name}`);
 	 */
 	map<B>(f: (a: A) => B): Result<E, B> {
-		return this.flatMap(a => Result.ok(f(a)));
+		return this.flatMap((a) => Result.ok(f(a)));
 	}
 }
 

@@ -3,7 +3,7 @@
 /**
  * Represents a value that may or may not exist; it's either a Some or a None.
  */
- abstract class Optional<A> {
+abstract class Optional<A> {
 	// ----- Abstract Methods
 
 	/**
@@ -45,9 +45,9 @@
 	 * @returns {boolean} A type predicate
 	 * @example
 	 * const name: Optional<string> = Optional.some('CP Scott');
-	 * 
+	 *
 	 * console.log(name.value); // Type Error: 'value' does not exist
-	 * 
+	 *
 	 * if (name.isSome()) {
 	 *   console.log(name.value); // Works!
 	 * }
@@ -59,7 +59,7 @@
 	 * @returns {boolean} A type predicate
 	 * @example
 	 * const name: Optional<string> = Optional.none();
-	 * 
+	 *
 	 * if (name.isNone()) {
 	 *   console.log('Missing name!');
 	 * }
@@ -108,7 +108,7 @@
 	 * @example
 	 * const firstName = Optional.some('CP');
 	 * const lastName = Optional.some('Scott');
-	 * 
+	 *
 	 * const fullName: Optional<string> = Optional.map2(
 	 * 	firstName,
 	 * 	lastName,
@@ -120,7 +120,7 @@
 		optB: Optional<B>,
 		f: (a: A, b: B) => C,
 	): Optional<C> {
-		return optA.flatMap(a => optB.map(b => f(a, b)));
+		return optA.flatMap((a) => optB.map((b) => f(a, b)));
 	}
 
 	// ----- Methods
@@ -141,7 +141,7 @@
 	 * credit.map(name => `Photograph: ${name}`).withDefault('');
 	 */
 	map<B>(f: (a: A) => B): Optional<B> {
-		return this.flatMap(a => Optional.some(f(a)));
+		return this.flatMap((a) => Optional.some(f(a)));
 	}
 }
 
