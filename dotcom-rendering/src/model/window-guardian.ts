@@ -104,7 +104,7 @@ const makeWindowGuardianConfig = (
 export const makeWindowGuardian = (
 	CAPIArticle: CAPIArticleType,
 ): {
-	// The 'config' attribute is derived from DCRServerDocumentData and contains
+	// The 'config' attribute is derived from CAPIArticle and contains
 	// all the data that, for legacy reasons, for instance compatibility
 	// with the frontend commercial stack, or other scripts, we want to find
 	// at window.guardian.config
@@ -175,7 +175,7 @@ const makeFrontWindowGuardianConfig = ({
 export const makeFrontWindowGuardian = (
 	front: DCRFrontType,
 ): {
-	// The 'config' attribute is derived from DCRServerDocumentData and contains
+	// The 'config' attribute is derived from CAPIArticle and contains
 	// all the data that, for legacy reasons, for instance compatibility
 	// with the frontend commercial stack, or other scripts, we want to find
 	// at window.guardian.config
