@@ -4,7 +4,7 @@ const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 const DEV = process.env.NODE_ENV === 'development';
 
 /**
- * @param {'modern' | 'legacy' | 'variant'} bundle
+ * @param {'legacy' | 'modern' | 'variant'} bundle
  * @returns {string}
  */
 const generateName = (bundle) => {
@@ -14,11 +14,39 @@ const generateName = (bundle) => {
 };
 
 /**
- * @param {'modern' | 'variant' 'legacy' | } bundle
+ * @param {'legacy' | 'modern' | 'variant'} bundle
  * @returns {string}
  */
 const getLoaders = (bundle) => {
 	switch (bundle) {
+		case 'legacy':
+			return [
+				{
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							'@babel/preset-react',
+							[
+								'@babel/preset-env',
+								{
+									targets: {
+										ie: '11',
+									},
+									modules: false,
+								},
+							],
+						],
+						compact: true,
+					},
+				},
+				{
+					loader: 'ts-loader',
+					options: {
+						configFile: 'tsconfig.build.json',
+						transpileOnly: true,
+					},
+				},
+			];
 		case 'modern':
 			return [
 				{
@@ -73,39 +101,11 @@ const getLoaders = (bundle) => {
 					},
 				},
 			];
-		case 'legacy':
-			return [
-				{
-					loader: 'babel-loader',
-					options: {
-						presets: [
-							'@babel/preset-react',
-							[
-								'@babel/preset-env',
-								{
-									targets: {
-										ie: '11',
-									},
-									modules: false,
-								},
-							],
-						],
-						compact: true,
-					},
-				},
-				{
-					loader: 'ts-loader',
-					options: {
-						configFile: 'tsconfig.build.json',
-						transpileOnly: true,
-					},
-				},
-			];
 	}
 };
 
 /**
- * @param {{ bundle: 'modern' | 'legacy' | 'variant', sessionId: string }} options
+ * @param {{ bundle: 'legacy' | 'modern'  | 'variant', sessionId: string }} options
  * @returns {import('webpack').Configuration}
  */
 module.exports = ({ bundle, sessionId }) => ({
