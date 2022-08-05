@@ -4,7 +4,6 @@ import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
-import { extract as extractGA } from '../../model/extract-ga';
 import { extractNAV } from '../../model/extract-nav';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
@@ -60,10 +59,7 @@ export const renderArticle = (
 		const resp = articleToHtml({
 			data: {
 				CAPIArticle,
-				site: 'frontend',
-				page: 'Article',
 				NAV: extractNAV(CAPIArticle.nav),
-				GA: extractGA(CAPIArticle),
 				linkedData: CAPIArticle.linkedData,
 			},
 		});
@@ -83,10 +79,7 @@ export const renderArticleJson = (
 		const resp = {
 			data: {
 				CAPIArticle,
-				site: 'frontend',
-				page: 'Article',
 				NAV: extractNAV(CAPIArticle.nav),
-				GA: extractGA(CAPIArticle),
 				linkedData: CAPIArticle.linkedData,
 			},
 		};
@@ -114,10 +107,7 @@ export const renderInteractive = (
 		const resp = articleToHtml({
 			data: {
 				CAPIArticle,
-				site: 'frontend',
-				page: 'Interactive',
 				NAV: extractNAV(CAPIArticle.nav),
-				GA: extractGA(CAPIArticle),
 				linkedData: CAPIArticle.linkedData,
 			},
 		});

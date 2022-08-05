@@ -1,3 +1,4 @@
+import { extract as extractGA } from '../model/extract-ga';
 import type { DCRFrontType } from '../types/front';
 
 export interface WindowGuardianConfig {
@@ -129,7 +130,7 @@ export const makeWindowGuardian = (
 				reportError: () => null,
 			},
 		},
-		GAData: dcrDocumentData.GA,
+		GAData: extractGA(dcrDocumentData.CAPIArticle),
 	};
 };
 
