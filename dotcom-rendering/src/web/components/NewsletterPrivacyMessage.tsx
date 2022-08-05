@@ -6,7 +6,7 @@ const termsStyle = css`
 	${textSans.xxsmall()}
 	color: ${text.supporting};
 	a {
-		${textSans.xxsmall({ fontWeight: 'bold' })};
+		${textSans.xxsmall()};
 		color: ${neutral[0]};
 		text-decoration: underline;
 		:hover {
