@@ -306,7 +306,7 @@ export const SecureSignupIframe = ({
 				srcDoc={`
 				<html>
 					<head>
-						${fonts}
+						<style class="webfont">${fonts}</style>
 						${styles}
 					</head>
 					<body style="margin: 0; overflow:hidden;">${html}</body>

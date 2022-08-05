@@ -106,10 +106,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 				<SecureSignupIframe
 					html={html}
 					styles={styles}
-					fonts={`<style class="webfont">${getFontsCssForSomeFonts([
-						'Guardian Text Sans Web',
-						'GuardianTextSans',
-					])}</style>`}
+					fonts={getFontsCssForSomeFonts(['GuardianTextSans'])}
 					newsletterId={newsletterId}
 					successDescription={successDescription}
 				/>
