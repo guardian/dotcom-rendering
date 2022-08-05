@@ -11,11 +11,16 @@ import { NewsletterFrequency } from './NewsletterFrequency';
 import { SecureSignup } from './SecureSignup';
 
 type Props = {
-	newsletter: Newsletter;
-	elementId: string;
+	identityName: string;
+	name: string;
+	description: string;
+	frequency: string;
+	successDescription: string;
+	theme: string;
 };
 
 const containerStyles = css`
+	clear: both;
 	border: ${neutral[0]} 3px dashed;
 	border-radius: 12px;
 	margin-bottom: ${space[3]}px;
@@ -50,16 +55,14 @@ const descriptionStyles = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-export const EmailSignup = ({ newsletter }: Props) => {
-	const {
-		identityName,
-		name,
-		description,
-		frequency,
-		successDescription,
-		theme,
-	} = newsletter;
-
+export const EmailSignup = ({
+	identityName,
+	name,
+	description,
+	frequency,
+	successDescription,
+	theme,
+}: Props) => {
 	return (
 		<aside css={containerStyles}>
 			<div css={stackBelowTabletStyles}>
