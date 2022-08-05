@@ -196,18 +196,23 @@ class Ok<E, A> extends Result<E, A> {
 	flatMap<B>(f: (a: A) => Result<E, B>): Result<E, B> {
 		return f(this.value);
 	}
+
 	either<C>(_f: (e: E) => C, g: (a: A) => C): C {
 		return g(this.value);
 	}
+
 	mapError<F>(_g: (e: E) => F): Result<F, A> {
 		return Result.ok(this.value);
 	}
+
 	toOptional(): Optional<A> {
 		return Optional.some(this.value);
 	}
+
 	isOk(): this is Ok<E, A> {
 		return true;
 	}
+
 	isErr(): this is Err<E, A> {
 		return false;
 	}
@@ -229,18 +234,23 @@ class Err<E, A> extends Result<E, A> {
 	flatMap<B>(_f: (a: A) => Result<E, B>): Result<E, B> {
 		return Result.err(this.error);
 	}
+
 	either<C>(f: (e: E) => C, _g: (a: A) => C): C {
 		return f(this.error);
 	}
+
 	mapError<F>(g: (e: E) => F): Result<F, A> {
 		return Result.err(g(this.error));
 	}
+
 	toOptional(): Optional<A> {
 		return Optional.none();
 	}
+
 	isOk(): this is Ok<E, A> {
 		return false;
 	}
+
 	isErr(): this is Err<E, A> {
 		return true;
 	}

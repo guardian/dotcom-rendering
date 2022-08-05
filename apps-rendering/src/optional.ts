@@ -53,6 +53,7 @@ abstract class Optional<A> {
 	 * }
 	 */
 	abstract isSome(): this is Some<A>;
+
 	/**
 	 * Checks if an {@linkcode Optional} is a `None`. Can be used in type guards
 	 * to narrow the type. See also {@linkcode isSome}.
@@ -156,12 +157,15 @@ class Some<A> extends Optional<A> {
 	flatMap<B>(f: (a: A) => Optional<B>): Optional<B> {
 		return f(this.value);
 	}
+
 	withDefault(_a: A): A {
 		return this.value;
 	}
+
 	isSome(): this is Some<A> {
 		return true;
 	}
+
 	isNone(): this is None<A> {
 		return false;
 	}
@@ -176,12 +180,15 @@ class None<A> extends Optional<A> {
 	flatMap<B>(_f: (a: A) => Optional<B>): Optional<B> {
 		return Optional.none();
 	}
+
 	withDefault(a: A): A {
 		return a;
 	}
+
 	isSome(): this is Some<A> {
 		return false;
 	}
+
 	isNone(): this is None<A> {
 		return true;
 	}
