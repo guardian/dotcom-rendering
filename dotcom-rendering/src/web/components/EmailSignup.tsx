@@ -43,7 +43,7 @@ const stackBelowTabletStyles = css`
 `;
 
 const titleStyles = (theme: string) => css`
-	${headline.xsmall({ fontWeight: 'bold' })}
+	${headline.xxsmall({ fontWeight: 'bold' })}
 	flex-grow: 1;
 	span {
 		color: ${theme === 'news' ? sport[500] : 'inherit'};
@@ -51,7 +51,7 @@ const titleStyles = (theme: string) => css`
 `;
 
 const descriptionStyles = css`
-	${textSans.medium({ lineHeight: 'tight' })}
+	${textSans.xsmall({ lineHeight: 'tight' })}
 	margin-bottom: ${space[2]}px;
 `;
 
