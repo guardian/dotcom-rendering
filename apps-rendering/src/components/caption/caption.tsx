@@ -11,8 +11,10 @@ import {
 	remSpace,
 	textSans,
 } from '@guardian/source-foundations';
+import type { Option } from '@guardian/types';
 import { withDefault } from '@guardian/types';
 import Anchor from 'components/Anchor';
+import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { getHref, renderTextElement } from 'renderer';
 import { darkModeCss } from 'styles';
@@ -103,13 +105,14 @@ const captionElement =
 // ----- Component ----- //
 
 type Props = {
-	caption: DocumentFragment;
+	caption: Option<DocumentFragment>;
 	format: ArticleFormat;
 };
 
-const Caption: FC<Props> = ({ caption, format }) => (
-	<>{Array.from(caption.childNodes).map(captionElement(format))}</>
-);
+const Caption: FC<Props> = ({ caption, format }) =>
+	maybeRender(caption, cap => (
+		<>{Array.from(cap.childNodes).map(captionElement(format))}</>
+	));
 
 // ----- Exports ----- //
 
