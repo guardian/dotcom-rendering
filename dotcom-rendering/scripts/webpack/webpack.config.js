@@ -17,7 +17,7 @@ const sessionId = uuidv4();
 let builds = 0;
 
 /**
- * @param {{ platform: 'server' | 'browser.modern' | 'browser.legacy' | 'browser.variant'}} options
+ * @param {{ platform: 'server' | 'browser.legacy' | 'browser.modern' | 'browser.variant'}} options
  * @returns {import('webpack').Configuration}
  */
 const commonConfigs = ({ platform }) => ({
