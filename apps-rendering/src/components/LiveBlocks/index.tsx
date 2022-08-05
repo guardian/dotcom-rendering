@@ -6,8 +6,8 @@ import LiveBlock from 'components/LiveBlock';
 import PinnedPost from 'components/PinnedPost';
 import { pipe } from 'lib';
 import type { LiveBlock as LiveBlockType } from 'liveBlock';
-import type { Option } from 'option';
-import { OptionKind } from 'option';
+import type { Option } from '@guardian/types';
+import { OptionKind } from '@guardian/types';
 import type { FC } from 'react';
 
 // ----- Component ----- //
