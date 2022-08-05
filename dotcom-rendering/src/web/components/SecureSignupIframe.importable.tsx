@@ -30,6 +30,7 @@ const isServer = typeof window === 'undefined';
 type Props = {
 	styles: string;
 	html: string;
+	fonts: string;
 	newsletterId: string;
 	successDescription: string;
 };
@@ -168,6 +169,7 @@ const sendTracking = (
 export const SecureSignupIframe = ({
 	styles,
 	html,
+	fonts,
 	newsletterId,
 	successDescription,
 }: Props) => {
@@ -304,6 +306,7 @@ export const SecureSignupIframe = ({
 				srcDoc={`
 				<html>
 					<head>
+						${fonts}
 						${styles}
 					</head>
 					<body style="margin: 0; overflow:hidden;">${html}</body>
