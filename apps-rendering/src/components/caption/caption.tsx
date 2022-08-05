@@ -110,7 +110,7 @@ type Props = {
 };
 
 const Caption: FC<Props> = ({ caption, format }) =>
-	maybeRender(caption, cap => (
+	maybeRender(caption, (cap) => (
 		<>{Array.from(cap.childNodes).map(captionElement(format))}</>
 	));
 
