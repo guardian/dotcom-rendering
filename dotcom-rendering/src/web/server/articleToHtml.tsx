@@ -3,7 +3,7 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
-import { ASSET_ORIGIN, getScriptArrayFromFile } from '../../lib/assets';
+import { ASSET_ORIGIN, getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
@@ -112,6 +112,8 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 			? './manifest.variant.json'
 			: './manifest.json';
 
+	const getScripts = getScriptsFromManifest(manifestPath);
+
 	/**
 	 * The highest priority scripts.
 	 * These scripts have a considerable impact on site performance.
@@ -122,22 +124,20 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	const priorityScriptTags = generateScriptTags(
 		[
 			{ src: polyfillIO },
-			...getScriptArrayFromFile('bootCmp.js', manifestPath),
-			...getScriptArrayFromFile('ophan.js', manifestPath),
+			...getScripts('bootCmp.js'),
+			...getScripts('ophan.js'),
 			CAPIArticle.config && {
 				src:
 					process.env.COMMERCIAL_BUNDLE_URL ??
 					CAPIArticle.config.commercialBundleUrl,
 			},
-			...getScriptArrayFromFile('sentryLoader.js', manifestPath),
-			...getScriptArrayFromFile('dynamicImport.js', manifestPath),
+			...getScripts('sentryLoader.js'),
+			...getScripts('dynamicImport.js'),
 			pageHasNonBootInteractiveElements && {
 				src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 			},
-			...getScriptArrayFromFile('islands.js', manifestPath),
-			...expeditedIslands.flatMap((name) =>
-				getScriptArrayFromFile(`${name}.js`, manifestPath),
-			),
+			...getScripts('islands.js'),
+			...expeditedIslands.flatMap((name) => getScripts(`${name}.js`)),
 		].map((script) =>
 			offerHttp3 && script
 				? { ...script, src: getHttp3Url(script.src) }
@@ -154,17 +154,17 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	 */
 	const lowPriorityScriptTags = generateScriptTags(
 		[
-			...getScriptArrayFromFile('atomIframe.js', manifestPath),
-			...getScriptArrayFromFile('embedIframe.js', manifestPath),
-			...getScriptArrayFromFile('newsletterEmbedIframe.js', manifestPath),
-			...getScriptArrayFromFile('relativeTime.js', manifestPath),
-			...getScriptArrayFromFile('initDiscussion.js', manifestPath),
+			...getScripts('atomIframe.js'),
+			...getScripts('embedIframe.js'),
+			...getScripts('newsletterEmbedIframe.js'),
+			...getScripts('relativeTime.js'),
+			...getScripts('initDiscussion.js'),
 		].map((script) =>
 			offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
 		),
 	);
 
-	const gaChunk = getScriptArrayFromFile('ga.js', manifestPath);
+	const gaChunk = getScripts('ga.js');
 	const modernScript = gaChunk.find((script) => !script.legacy);
 	const legacyScript = gaChunk.find((script) => script.legacy);
 	const gaPath = {

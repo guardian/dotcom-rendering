@@ -55,9 +55,9 @@ const getManifest = (path: string): AssetHash => {
 
 type Script = { src: string; legacy: boolean };
 
-export const getScriptArrayFromFile = (
-	file: `${string}.js`,
+const getScripts = (
 	manifestPath: `./manifest${string}.json`,
+	file: `${string}.js`,
 ): Script[] => {
 	if (!file.endsWith('.js'))
 		throw new Error('Invalid filename: extension must be .js');
@@ -89,3 +89,8 @@ export const getScriptArrayFromFile = (
 
 	return scripts;
 };
+
+export const getScriptsFromManifest =
+	(manifestPath: `./manifest${string}.json`) =>
+	(file: `${string}.js`): ReturnType<typeof getScripts> =>
+		getScripts(manifestPath, file);
