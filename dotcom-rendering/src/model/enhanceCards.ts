@@ -47,6 +47,17 @@ const decidePresentationFormat = ({
 		containerFormat.design === ArticleDesign.Analysis
 	)
 		return containerFormat;
+
+	// These types of link format designs mean the headline could render
+	// poorly (e.g.: white) so we use the container format
+	if (
+		linkFormat.design === ArticleDesign.LiveBlog ||
+		linkFormat.design === ArticleDesign.Gallery ||
+		linkFormat.design === ArticleDesign.Audio ||
+		linkFormat.design === ArticleDesign.Video
+	)
+		return containerFormat;
+
 	// Otherwise, we can allow the sublink to express its own styling
 	return linkFormat;
 };
