@@ -2,7 +2,7 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { renderToString } from 'react-dom/server';
-import { getScriptArrayFromFile } from '../../lib/assets';
+import { getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { makeFrontWindowGuardian } from '../../model/window-guardian';
 import type { DCRFrontType } from '../../types/front';
@@ -88,6 +88,8 @@ export const frontToHtml = ({ front, NAV }: Props): string => {
 			? './manifest.variant.json'
 			: './manifest.json';
 
+	const getScripts = getScriptsFromManifest(manifestPath);
+
 	/**
 	 * The highest priority scripts.
 	 * These scripts have a considerable impact on site performance.
@@ -98,16 +100,16 @@ export const frontToHtml = ({ front, NAV }: Props): string => {
 	const priorityScriptTags = generateScriptTags(
 		[
 			{ src: polyfillIO },
-			...getScriptArrayFromFile('bootCmp.js', manifestPath),
-			...getScriptArrayFromFile('ophan.js', manifestPath),
+			...getScripts('bootCmp.js'),
+			...getScripts('ophan.js'),
 			front.config && {
 				src:
 					process.env.COMMERCIAL_BUNDLE_URL ??
 					front.config.commercialBundleUrl,
 			},
-			...getScriptArrayFromFile('sentryLoader.js', manifestPath),
-			...getScriptArrayFromFile('dynamicImport.js', manifestPath),
-			...getScriptArrayFromFile('islands.js', manifestPath),
+			...getScripts('sentryLoader.js'),
+			...getScripts('dynamicImport.js'),
+			...getScripts('islands.js'),
 		].map((script) =>
 			offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
 		),
@@ -122,18 +124,17 @@ export const frontToHtml = ({ front, NAV }: Props): string => {
 	 */
 	const lowPriorityScriptTags = generateScriptTags(
 		[
-			...getScriptArrayFromFile('atomIframe.js', manifestPath),
-			...getScriptArrayFromFile('embedIframe.js', manifestPath),
-			...getScriptArrayFromFile('newsletterEmbedIframe.js', manifestPath),
-			...getScriptArrayFromFile('relativeTime.js', manifestPath),
+			...getScripts('atomIframe.js'),
+			...getScripts('embedIframe.js'),
+			...getScripts('newsletterEmbedIframe.js'),
+			...getScripts('relativeTime.js'),
 		].map((script) =>
 			offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
 		),
 	);
 
-	const gaChunk = getScriptArrayFromFile('ga.js', manifestPath).map(
-		(script) =>
-			offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
+	const gaChunk = getScripts('ga.js').map((script) =>
+		offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
 	);
 	const modernScript = gaChunk.find((script) => !script.legacy);
 	const legacyScript = gaChunk.find((script) => script.legacy);
