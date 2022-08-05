@@ -14,7 +14,7 @@ import { Island } from './Island';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
 type Props = {
-	display: ArticleDisplay;
+	display?: ArticleDisplay;
 	position: AdSlotType;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
