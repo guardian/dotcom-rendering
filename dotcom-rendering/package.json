@@ -187,6 +187,7 @@
     "swr": "^1.3.0",
     "to-string-loader": "^1.2.0",
     "ts-jest": "^24.3.0",
+    "ts-to-zod": "^1.12.0",
     "tslint": "^6.1.3",
     "tslint-config-airbnb": "^5.11.2",
     "tslint-config-prettier": "^1.18.0",
@@ -208,7 +209,8 @@
     "webpack-merge": "^5.7.3",
     "webpack-messages": "^2.0.4",
     "webpack-node-externals": "^3.0.0",
-    "webpack-sources": "^3.2.3"
+    "webpack-sources": "^3.2.3",
+    "zod": "^3.17.10"
   },
   "resolutions": {
     "@types/serve-static": "^1.13.9"
