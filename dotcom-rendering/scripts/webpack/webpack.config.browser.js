@@ -14,47 +14,92 @@ const generateName = (bundle) => {
 };
 
 /**
- * @param {'modern' | 'legacy' | 'variant'} bundle
+ * @param {'modern' | 'variant' 'legacy' | } bundle
  * @returns {string}
  */
-const getPresets = (bundle) => {
+const getLoaders = (bundle) => {
 	switch (bundle) {
 		case 'modern':
 			return [
-				'@babel/preset-react',
-				[
-					'@babel/preset-env',
-					{
-						bugfixes: true,
-						targets: {
-							esmodules: true,
-						},
+				{
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							'@babel/preset-react',
+							[
+								'@babel/preset-env',
+								{
+									bugfixes: true,
+									targets: {
+										esmodules: true,
+									},
+								},
+							],
+						],
+						compact: true,
 					},
-				],
+				},
+				{
+					loader: 'ts-loader',
+					options: {
+						configFile: 'tsconfig.build.json',
+						transpileOnly: true,
+					},
+				},
 			];
 		case 'variant':
 			return [
-				'@babel/preset-react',
-				[
-					'@babel/preset-env',
-					{
-						targets: 'extends @guardian/browserslist-config',
+				{
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							'@babel/preset-react',
+							[
+								'@babel/preset-env',
+								{
+									targets:
+										'extends @guardian/browserslist-config',
+								},
+							],
+						],
+						compact: true,
 					},
-				],
+				},
+				{
+					loader: 'ts-loader',
+					options: {
+						configFile: 'tsconfig.build.json',
+						transpileOnly: true,
+					},
+				},
 			];
-
 		case 'legacy':
 			return [
-				'@babel/preset-react',
-				[
-					'@babel/preset-env',
-					{
-						targets: {
-							ie: '11',
-						},
-						modules: false,
+				{
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							'@babel/preset-react',
+							[
+								'@babel/preset-env',
+								{
+									targets: {
+										ie: '11',
+									},
+									modules: false,
+								},
+							],
+						],
+						compact: true,
 					},
-				],
+				},
+				{
+					loader: 'ts-loader',
+					options: {
+						configFile: 'tsconfig.build.json',
+						transpileOnly: true,
+					},
+				},
 			];
 	}
 };
@@ -112,23 +157,7 @@ module.exports = ({ bundle, sessionId }) => ({
 			{
 				test: /\.[jt]sx?|mjs$/,
 				exclude: module.exports.babelExclude,
-
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							presets: getPresets(bundle),
-							compact: true,
-						},
-					},
-					{
-						loader: 'ts-loader',
-						options: {
-							configFile: 'tsconfig.build.json',
-							transpileOnly: true,
-						},
-					},
-				],
+				use: getLoaders(bundle),
 			},
 			{
 				test: /\.css$/,
