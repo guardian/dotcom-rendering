@@ -548,7 +548,7 @@ interface CAPIArticleType {
 	commercialProperties: CommercialProperties;
 	starRating?: number;
 	trailText: string;
-	badge?: BadgeType;
+	badge?: import('./src/types/badge').BadgeType;
 
 	nav: CAPINavType; // TODO move this out as most code uses a different internal NAV model.
 
@@ -616,11 +616,6 @@ interface KeyEventsRequest {
 	keyEvents: Block[];
 	format: CAPIFormat;
 	filterKeyEvents: boolean;
-}
-
-interface BadgeType {
-	seriesTag: string;
-	imageUrl: string;
 }
 
 type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';

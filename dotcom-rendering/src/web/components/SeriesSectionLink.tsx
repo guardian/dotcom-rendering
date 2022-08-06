@@ -7,6 +7,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import type { BadgeType } from '../../types/badge';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 import { Badge } from './Badge';
