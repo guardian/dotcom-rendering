@@ -18,6 +18,7 @@ import {
 } from '@guardian/source-react-components';
 import { clearFix } from '../../lib/mixins';
 import type { PillarType } from '../../model/extract-nav';
+import type { FooterType } from '../../types/footer';
 import { BackToTop } from './BackToTop';
 import { Island } from './Island';
 import { Pillars } from './Pillars';
@@ -198,7 +199,7 @@ const FooterLinks = ({
 	contributionsServiceUrl: string;
 }) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
-		const linkList = linkGroup.map((l: FooterLink, index: number) => (
+		const linkList = linkGroup.map((l, index) => (
 			<li key={`${l.url}${index}`}>
 				<a
 					css={[footerLink, l.extraClasses]}

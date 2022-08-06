@@ -378,16 +378,6 @@ interface Pagination {
 	older?: string;
 }
 
-interface FooterLink {
-	text: string;
-	url: string;
-	dataLinkName: string;
-	extraClasses?: string;
-}
-interface FooterType {
-	footerLinks: FooterLink[][];
-}
-
 type ContentType =
 	| 'article'
 	| 'network'
@@ -550,7 +540,7 @@ interface CAPIArticleType {
 
 	nav: CAPINavType; // TODO move this out as most code uses a different internal NAV model.
 
-	pageFooter: FooterType;
+	pageFooter: import('./src/types/footer').FooterType;
 
 	contributionsServiceUrl: string;
 	slotMachineFlags?: string;
