@@ -1,3 +1,6 @@
+import type { ServerSideTests } from './config';
+import type { EditionId } from './edition';
+
 export interface FEFrontType {
 	pressedPage: FEPressedPageType;
 	nav: CAPINavType;

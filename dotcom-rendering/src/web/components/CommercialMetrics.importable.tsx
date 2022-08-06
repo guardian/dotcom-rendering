@@ -4,6 +4,7 @@ import {
 	bypassCommercialMetricsSampling as switchOffSampling,
 } from '@guardian/commercial-core';
 import { getCookie } from '@guardian/libs';
+import type { ServerSideTests } from '../../types/config';
 import { tests } from '../experiments/ab-tests';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';

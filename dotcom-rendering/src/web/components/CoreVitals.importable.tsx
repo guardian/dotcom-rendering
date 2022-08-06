@@ -4,6 +4,7 @@ import {
 	getCookie,
 	initCoreWebVitals,
 } from '@guardian/libs';
+import type { ServerSideTests } from '../../types/config';
 import { useAB } from '../lib/useAB';
 
 export const CoreVitals = () => {

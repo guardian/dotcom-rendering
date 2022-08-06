@@ -1,4 +1,5 @@
 import { extract as extractGA } from '../model/extract-ga';
+import type { ConfigType, ServerSideTests } from '../types/config';
 import type { DCRFrontType } from '../types/front';
 
 export interface WindowGuardianConfig {

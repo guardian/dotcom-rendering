@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { neutral } from '@guardian/source-foundations';
 import React from 'react';
 import type { NavType } from '../../model/extract-nav';
+import type { ConfigType } from '../../types/config';
 import { AdConsent } from '../components/AdConsent';
 import { AmpExperimentComponent } from '../components/AmpExperiment';
 import type { AnalyticsModel } from '../components/Analytics';
