@@ -2,8 +2,6 @@
 // CAPIArticleType and its subtypes //
 // ------------------------- //
 
-type DCRSnapType = import('./src/types/front').DCRSnapType;
-type DCRSupportingContent = import('./src/types/front').DCRSupportingContent;
 type NavType = import('./src/model/extract-nav').NavType;
 
 // Pillars are used for styling
@@ -865,12 +863,12 @@ interface BaseTrailType {
 	linkText?: string;
 	branding?: Branding;
 	isSnap?: boolean;
-	snapData?: DCRSnapType;
+	snapData?: import('./src/types/front').DCRSnapType;
 }
 interface TrailType extends BaseTrailType {
 	palette?: never;
 	format: ArticleFormat;
-	supportingContent?: DCRSupportingContent[];
+	supportingContent?: import('./src/types/front').DCRSupportingContent[];
 	trailText?: string;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
