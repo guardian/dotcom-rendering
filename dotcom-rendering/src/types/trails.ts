@@ -1,3 +1,4 @@
+import type { Branding } from './branding';
 import type { DCRSnapType, DCRSupportingContent } from './front';
 
 type MediaType = 'Video' | 'Audio' | 'Gallery';

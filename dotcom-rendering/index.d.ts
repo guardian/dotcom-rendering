@@ -282,27 +282,12 @@ interface SectionNielsenAPI {
 
 interface EditionCommercialProperties {
 	adTargeting: AdTargetParam[];
-	branding?: Branding;
+	branding?: import('src/types/branding').Branding;
 }
 
 type CommercialProperties = {
 	[E in import('src/types/edition').EditionId]: EditionCommercialProperties;
 };
-
-type BrandingLogo = {
-	src: string;
-	link: string;
-	label: string;
-	dimensions: { width: number; height: number };
-};
-
-interface Branding {
-	brandingType?: { name: string };
-	sponsorName: string;
-	logo: BrandingLogo;
-	aboutThisLink: string;
-	logoForDarkBackground?: BrandingLogo;
-}
 
 interface ReaderRevenueCategories {
 	contribute: string;
@@ -770,7 +755,7 @@ interface BaseTrailType {
 	commentCount?: number;
 	starRating?: number;
 	linkText?: string;
-	branding?: Branding;
+	branding?: import('src/types/branding').Branding;
 	isSnap?: boolean;
 	snapData?: import('./src/types/front').DCRSnapType;
 }

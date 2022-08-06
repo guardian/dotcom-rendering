@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { space, textSans, visuallyHidden } from '@guardian/source-foundations';
+import type { Branding } from '../../../../types/branding';
 import { trackSponsorLogoLinkClick } from '../../../browser/ga/ga';
 import { decideLogo } from '../../../lib/decideLogo';
 import { decidePalette } from '../../../lib/decidePalette';
@@ -24,7 +25,7 @@ const brandingWrapperStyle = css`
 	text-align: right;
 	flex: auto;
 	/* See: https://css-tricks.com/nested-links/ */
-	${getZIndex('card-nested-link')};
+	${getZIndex('card-nested-link')}
 	position: relative;
 `;
 

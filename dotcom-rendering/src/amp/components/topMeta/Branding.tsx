@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
 import React from 'react';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
+import type { Branding as BrandingType } from '../../../types/branding';
 import { isEditionId } from '../../../types/edition';
 import { regionClasses } from '../../lib/region-classes';
 
@@ -36,7 +37,7 @@ const brandingLogoStyle = css`
 `;
 
 export const Branding: React.FC<{
-	branding: Branding;
+	branding: BrandingType;
 	pillar: ArticleTheme;
 }> = ({ branding, pillar }) => {
 	const { logo, sponsorName } = branding;
@@ -64,7 +65,7 @@ export const Branding: React.FC<{
 };
 
 export const BrandingRegionContainer: React.FC<{
-	children: (branding: Branding) => React.ReactNode;
+	children: (branding: BrandingType) => React.ReactNode;
 	commercialProperties: CommercialProperties;
 }> = ({ children, commercialProperties }) => (
 	<>

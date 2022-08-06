@@ -3,6 +3,7 @@ import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground, space } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import type { Branding } from '../../../types/branding';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
