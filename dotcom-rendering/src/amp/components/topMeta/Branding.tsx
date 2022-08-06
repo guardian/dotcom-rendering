@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
 import React from 'react';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
-import { isEditionId } from '../../lib/edition';
+import { isEditionId } from '../../../types/edition';
 import { regionClasses } from '../../lib/region-classes';
 
 const LinkStyle = (pillar: ArticleTheme) => css`

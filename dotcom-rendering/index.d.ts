@@ -244,14 +244,6 @@ type ContainerOverrides = {
 	};
 };
 
-type EditionId = 'UK' | 'US' | 'INT' | 'AU';
-
-type Edition = {
-	id: EditionId;
-	displayName: string;
-	locale: string;
-};
-
 type SharePlatform =
 	| 'facebook'
 	| 'twitter'
@@ -293,7 +285,9 @@ interface EditionCommercialProperties {
 	branding?: Branding;
 }
 
-type CommercialProperties = { [E in EditionId]: EditionCommercialProperties };
+type CommercialProperties = {
+	[E in import('src/types/edition').EditionId]: EditionCommercialProperties;
+};
 
 type BrandingLogo = {
 	src: string;
@@ -490,7 +484,7 @@ interface CAPIArticleType {
 	webPublicationDateDisplay: string;
 	webPublicationSecondaryDateDisplay: string;
 	editionLongForm: string;
-	editionId: EditionId;
+	editionId: import('src/types/edition').EditionId;
 	pageId: string;
 	version: number; // TODO: check who uses?
 	tags: TagType[];

@@ -1,3 +1,4 @@
+import type { EditionId } from '../../types/edition';
 import { adJson, stringify } from '../lib/ad-json';
 import type { RTCParameters } from '../lib/real-time-config';
 import { realTimeConfig } from '../lib/real-time-config';

@@ -1,3 +1,5 @@
+import type { Edition, EditionId } from '../../types/edition';
+
 const UkEdition: Edition = {
 	id: 'UK',
 	displayName: 'UK Edition',
