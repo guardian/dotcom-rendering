@@ -1,6 +1,7 @@
 import type { ServerSideTests } from './config';
 import type { EditionId } from './edition';
 import type { FooterType } from './footer';
+import type { TrailType } from './trails';
 
 export interface FEFrontType {
 	pressedPage: FEPressedPageType;

@@ -521,7 +521,7 @@ interface CAPIArticleType {
 	publication: string; // TODO: check who uses?
 	hasStoryPackage: boolean;
 	storyPackage?: {
-		trails: CAPITrailType[];
+		trails: import('src/types/trails').CAPITrailType[];
 		heading: string;
 	};
 	onwards?: CAPIOnwardsType[];
@@ -716,7 +716,7 @@ type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
  */
 type CAPIOnwardsType = {
 	heading: string;
-	trails: CAPITrailType[];
+	trails: import('src/types/trails').CAPITrailType[];
 	description?: string;
 	url?: string;
 	onwardsType: OnwardsType;
@@ -773,44 +773,6 @@ interface BaseTrailType {
 	branding?: Branding;
 	isSnap?: boolean;
 	snapData?: import('./src/types/front').DCRSnapType;
-}
-interface TrailType extends BaseTrailType {
-	palette?: never;
-	format: ArticleFormat;
-	supportingContent?: import('./src/types/front').DCRSupportingContent[];
-	trailText?: string;
-	/** @see JSX.IntrinsicAttributes["data-link-name"] */
-	dataLinkName: string;
-	discussionId?: string;
-	isBoosted?: boolean;
-}
-
-interface CAPITrailType extends BaseTrailType {
-	format: CAPIFormat;
-	// Include pillar and designType until we remove them upstream
-	// We type designType as `string` for now so that the field is present,
-	// but we don't care what's in it. Pillar we have a type for so we use it
-	// but it shouldn't be important.
-	designType: string;
-	pillar: LegacyPillar;
-	carouselImages?: { [key: string]: string };
-	isLiveBlog?: boolean;
-}
-
-interface TrailTabType {
-	heading: string;
-	trails: TrailType[];
-}
-
-interface CAPITrailTabType {
-	heading: string;
-	trails: CAPITrailType[];
-}
-
-interface MostViewedFooterPayloadType {
-	tabs: CAPITrailTabType[];
-	mostCommented: CAPITrailType;
-	mostShared: CAPITrailType;
 }
 
 // ------------

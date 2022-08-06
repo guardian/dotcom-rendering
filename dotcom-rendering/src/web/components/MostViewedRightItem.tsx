@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { border, headline, neutral, text } from '@guardian/source-foundations';
+import type { TrailType } from '../../types/trails';
 import { useHover } from '../lib/useHover';
 import { AgeWarning } from './AgeWarning';
 import { Avatar } from './Avatar';

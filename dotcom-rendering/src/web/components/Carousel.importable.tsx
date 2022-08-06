@@ -11,6 +11,7 @@ import {
 } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
+import type { TrailType } from '../../types/trails';
 import { decidePalette } from '../lib/decidePalette';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getZIndex } from '../lib/getZIndex';

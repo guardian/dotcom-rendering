@@ -1,4 +1,5 @@
 import { renderToString } from 'react-dom/server';
+import type { CAPITrailType, TrailType } from '../../types/trails';
 import { Carousel } from '../components/Carousel.importable';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTrail } from '../lib/decideTrail';
