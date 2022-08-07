@@ -150,6 +150,8 @@ const Card75_Card25 = ({
 				containerPalette={containerPalette}
 				showAge={showAge}
 				trailText={cards[0].trailText}
+				imagePosition="right"
+				imageSize="large"
 				imagePositionOnMobile="top"
 			/>
 		</LI>
