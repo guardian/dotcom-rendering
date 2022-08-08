@@ -11,6 +11,7 @@ import {
 	brandAlt,
 	neutral,
 	text,
+	from,
 } from '@guardian/source-foundations';
 import {
 	Button,
@@ -29,18 +30,32 @@ interface Props {
 	element: NewsletterSignUp;
 }
 
-const containerStyles = (format: ArticleFormat): SerializedStyles => {
-	return css`
-		border: 3px dashed black;
-		padding: 8px;
-		border-radius: 4px;
-	`;
-};
+const containerStyles = (format: ArticleFormat): SerializedStyles => css`
+	clear: both;
+	border: ${neutral[0]} 3px dashed;
+	border-radius: ${space[3]}px;
+	margin-bottom: ${space[3]}px;
+	padding: ${space[2]}px;
+
+	${from.tablet} {
+		padding: ${space[2]}px ${space[3]}px;
+	}
+`;
+
+const stackBelowTabletStyles = css`
+	display: flex;
+	flex-direction: column;
+	margin-bottom: ${space[2]}px;
+
+	${from.tablet} {
+		flex-direction: row;
+		margin-bottom: ${space[1]}px;
+	}
+`;
 
 const titleStyles = (theme: string) => css`
 	${headline.xxsmall({ fontWeight: 'bold' })}
 	flex-grow: 1;
-	margin-bottom: ${space[2]}px;
 	span {
 		color: ${theme === 'news' ? sport[500] : 'inherit'};
 	}
@@ -54,7 +69,6 @@ const descriptionStyles = css`
 const iconHolderStyles = css`
 	display: flex;
 	align-items: center;
-	margin-bottom: ${space[2]}px;
 	svg {
 		background-color: ${brandAlt[400]};
 		border-radius: 50%;
@@ -90,17 +104,36 @@ const termsStyle = css`
 	}
 `;
 
+// When in a row with the title, the Icon in the NewsletterFrequency
+// component should not affect the spaceing between the title text and
+// the description text, which should be 4px (space [1]).
+// When stacked below the title, there should be 8px (space[2]) between
+// the title and the Icon and then 8px between the Icon and the description
+const noHeightFromTabletStyles = css`
+	margin-top: ${space[2]}px;
+
+	${from.tablet} {
+		margin-top: 0;
+		max-height: 0;
+		overflow: visible;
+	}
+`;
+
 const NewsletterSignupForm: FC<Props> = ({ format, element }) => {
 	const { displayName, frequency, description, theme } = element.newsletter;
 	return (
 		<aside css={containerStyles(format)}>
-			<p css={titleStyles(theme)}>
-				Sign up to <span>{displayName}</span>
-			</p>
+			<div css={stackBelowTabletStyles}>
+				<p css={titleStyles(theme)}>
+					Sign up to <span>{displayName}</span>
+				</p>
 
-			<div css={iconHolderStyles}>
-				<SvgEnvelope size="small" />
-				<b>{frequency}</b>
+				<div css={noHeightFromTabletStyles}>
+					<div css={iconHolderStyles}>
+						<SvgEnvelope size="small" />
+						<b>{frequency}</b>
+					</div>
+				</div>
 			</div>
 
 			<p css={descriptionStyles}>{description}</p>
@@ -109,7 +142,7 @@ const NewsletterSignupForm: FC<Props> = ({ format, element }) => {
 				text="Enter your email address"
 				cssOverrides={css`
 					div {
-						${textSans.xxsmall({ fontWeight: 'bold' })};
+						${textSans.xsmall({ fontWeight: 'bold' })};
 					}
 				`}
 			/>
@@ -124,6 +157,7 @@ const NewsletterSignupForm: FC<Props> = ({ format, element }) => {
 						margin-right: ${space[3]}px;
 						margin-top: 0;
 						margin-bottom: ${space[2]}px;
+						flex-basis: 335px;
 					`}
 				/>
 				<Button
@@ -132,6 +166,8 @@ const NewsletterSignupForm: FC<Props> = ({ format, element }) => {
 					cssOverrides={css`
 						background-color: ${neutral[0]};
 						margin-bottom: ${space[2]}px;
+						flex-basis: 118px;
+						justify-content: center;
 					`}
 				>
 					Sign up
