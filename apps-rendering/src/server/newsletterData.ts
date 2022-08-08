@@ -13,13 +13,19 @@ interface NewsletterResponse {
 	cancelled: boolean;
 	frequency: string;
 	description: string;
+	group: string;
+	theme: string;
 }
 
-const newsletterResponseToNewsletter = (data: NewsletterResponse): Newsletter => ({
+const newsletterResponseToNewsletter = (
+	data: NewsletterResponse,
+): Newsletter => ({
 	id: data.identityName,
 	frequency: data.frequency,
 	displayName: data.name,
 	description: data.description,
+	group: data.group,
+	theme: data.theme,
 });
 
 const loadData = async (): Promise<NewsletterResponse[]> => {

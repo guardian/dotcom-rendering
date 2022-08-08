@@ -52,6 +52,8 @@ export interface Newsletter {
 	displayName: string;
 	frequency: string;
 	description: string;
+	group: string;
+	theme: string;
 }
 
 interface Fields extends ArticleFormat {
