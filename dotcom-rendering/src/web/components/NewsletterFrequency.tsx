@@ -19,7 +19,7 @@ const spanStyles = css`
 	}
 `;
 
-export const NewsletterFrequency: React.FC<Props> = ({ frequency }) => {
+export const NewsletterFrequency = ({ frequency }: Props) => {
 	// SIGNPOST: This may need to be updated depending on possible values of `frequency`
 	const freq = frequency.toLowerCase();
 

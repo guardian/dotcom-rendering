@@ -2,7 +2,7 @@ import { NewsletterDetail } from './NewsletterDetail';
 
 export default {
 	component: NewsletterDetail,
-	title: 'Components/Newsletters/NewsletterDetail',
+	title: 'Components/NewsletterDetail',
 };
 
 export const Default = () => {

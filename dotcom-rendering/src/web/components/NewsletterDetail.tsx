@@ -24,7 +24,7 @@ const containerStyle = css`
 	}
 `;
 
-export const NewsletterDetail: React.FC<Props> = ({ text }) => (
+export const NewsletterDetail = ({ text }: Props) => (
 	<span css={containerStyle}>
 		{/** TODO: Replace with SvgNewsletter when available */}
 		<SvgEnvelope size="small" />

@@ -1,6 +1,6 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
-import { ContainerLayout } from '../ContainerLayout';
+import { ContainerLayout } from './ContainerLayout';
 import { EmailSignup } from './EmailSignup';
 
 export default {

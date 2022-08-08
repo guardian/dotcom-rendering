@@ -10,7 +10,7 @@ const hrefLookup = {
 
 type ExternalLinkProps = { href: string; children: React.ReactNode };
 /** Link component fixed with data-ignore and rel attributes for consistency in this file only */
-const ExternalLink: React.FC<ExternalLinkProps> = ({ href, children }) => (
+const ExternalLink = ({ href, children }: ExternalLinkProps) => (
 	<Link
 		data-ignore="global-link-styling"
 		href={href}
@@ -41,7 +41,7 @@ const termsStyle = css`
 	}
 `;
 
-export const NewsletterPrivacyMessage: React.FC = () => (
+export const NewsletterPrivacyMessage = () => (
 	<span css={termsStyle}>
 		<strong>Privacy Notice: </strong>
 		Newsletters may contain info about charities, online ads, and content

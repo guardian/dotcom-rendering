@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source-foundations';
-import { NewsletterPrivacyMessage } from '../src/web/components/Newsletters/NewsletterPrivacyMessage';
-import { SignupForm } from '../src/web/components/Newsletters/SignupForm';
+import { NewsletterPrivacyMessage } from '../src/web/components/NewsletterPrivacyMessage';
+import { NewsletterSignupForm } from '../src/web/components/NewsletterSignupForm';
 
 type Props = {
 	newsletterId: string;
@@ -9,13 +9,13 @@ type Props = {
 	hidePrivacyMessage?: boolean;
 };
 
-export const SecureSignup: React.FC<Props> = ({
+export const SecureSignup = ({
 	newsletterId,
 	hidePrivacyMessage = false,
-}) => {
+}: Props) => {
 	return (
 		<div title="This is a mock for the SecureSignup component which is not compatible with storybook. Changes to the real component may not be automatically reflected in this mock.">
-			<SignupForm newsletterId={newsletterId} />
+			<NewsletterSignupForm newsletterId={newsletterId} />
 			{!hidePrivacyMessage && (
 				<div
 					css={css`

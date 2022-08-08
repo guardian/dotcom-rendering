@@ -8,8 +8,8 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { SecureSignup } from '../SecureSignup';
 import { NewsletterDetail } from './NewsletterDetail';
+import { SecureSignup } from './SecureSignup';
 
 type Props = {
 	identityName: string;
