@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { from, until } from '@guardian/source-foundations';
+import { from, space, until } from '@guardian/source-foundations';
 
 type Props = {
 	children: React.ReactNode;
@@ -9,9 +9,9 @@ const containerStyles = css`
 	display: flex;
 	flex-direction: row-reverse;
 
-	margin-right: 10px;
+	margin-right: ${space[1]}px;
 	${until.tablet} {
-		margin-top: 5px;
+		margin-top: ${space[1]}px;
 	}
 	${from.tablet} {
 		margin-top: 50px;
