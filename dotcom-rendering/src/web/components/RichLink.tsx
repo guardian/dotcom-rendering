@@ -84,8 +84,9 @@ const richLinkHeader = css`
 	color: ${neutral[0]};
 `;
 
-const blogRichLinkTitle = css`
+const richLinkTitleStyle = (parent: boolean) => css`
 	${headline.xxxsmall()};
+	font-size: ${!parent ? '14px' : undefined};
 	padding-top: 1px;
 	padding-bottom: 1px;
 	font-weight: 400;
@@ -93,11 +94,6 @@ const blogRichLinkTitle = css`
 		${headline.xxsmall()};
 		padding-bottom: 5px;
 	}
-`;
-
-const richLinkTitle = css`
-	${blogRichLinkTitle};
-	font-size: 14px;
 `;
 
 const labsRichLinkTitle = css`
@@ -237,13 +233,12 @@ export const RichLink = ({
 	const isOpinion = cardStyle === 'comment';
 	const mainContributor = getMainContributor(tags);
 	const isLabs = linkFormat.theme === ArticleSpecial.Labs;
+
 	const richLinkTitlePicker = () => {
 		if (isLabs) {
 			return labsRichLinkTitle;
-		} else if (parentIsBlog) {
-			return blogRichLinkTitle;
 		} else {
-			return richLinkTitle;
+			return richLinkTitleStyle(parentIsBlog);
 		}
 	};
 
