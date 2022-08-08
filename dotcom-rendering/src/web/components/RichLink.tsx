@@ -86,7 +86,7 @@ const richLinkHeader = css`
 
 const richLinkTitleStyle = (parent: boolean) => css`
 	${headline.xxxsmall()};
-	font-size: ${!parent ? '14px' : undefined};
+	${parentIsBlog && 'font-size: 14px'};
 	padding-top: 1px;
 	padding-bottom: 1px;
 	font-weight: 400;
