@@ -26,8 +26,8 @@ const sizingStyles = css`
 	}
 	/* Below 740 */
 	${until.tablet} {
-		height: 84px;
-		width: 84px;
+		height: 73px;
+		width: 73px;
 	}
 	/* Otherwise */
 	height: 132px;
