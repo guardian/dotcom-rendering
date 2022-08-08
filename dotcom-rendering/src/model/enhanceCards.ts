@@ -146,6 +146,7 @@ export const enhanceCards = (
 			url: faciaCard.header.url,
 			headline: faciaCard.header.headline,
 			trailText: faciaCard.card.trailText,
+			starRating: faciaCard.card.starRating,
 			webPublicationDate: faciaCard.card.webPublicationDateOption
 				? new Date(
 						faciaCard.card.webPublicationDateOption,
