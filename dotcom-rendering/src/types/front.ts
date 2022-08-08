@@ -10,6 +10,8 @@ export interface FEFrontType {
 	config: FEFrontConfigType;
 	commercialProperties: Record<string, unknown>;
 	pageFooter: FooterType;
+	isAdFreeUser: boolean;
+	shouldHideAds: boolean;
 }
 
 export interface DCRFrontType {
@@ -19,6 +21,8 @@ export interface DCRFrontType {
 	webTitle: string;
 	config: FEFrontConfigType;
 	pageFooter: FooterType;
+	isAdFreeUser: boolean;
+	shouldHideAds: boolean;
 }
 
 interface FEPressedPageType {

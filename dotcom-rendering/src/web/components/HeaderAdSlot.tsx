@@ -31,11 +31,15 @@ const headerAdWrapperHidden = css`
 	display: none;
 `;
 
-export const HeaderAdSlot: React.FC<{
+export const HeaderAdSlot = ({
+	isAdFreeUser,
+	shouldHideAds,
+	display,
+}: {
 	isAdFreeUser: boolean;
 	shouldHideAds: boolean;
 	display: ArticleDisplay;
-}> = ({ isAdFreeUser, shouldHideAds, display }) => (
+}) => (
 	<div css={headerWrapper}>
 		<Global
 			styles={css`
