@@ -11,7 +11,7 @@ export const SecureSignup = ({ newsletterId }: Props) => {
 			<form id={`secure-signup-${newsletterId}`}>
 				<Label
 					text="Enter your email address"
-					css={css`
+					cssOverrides={css`
 						div {
 							${textSans.xsmall({ fontWeight: 'bold' })}
 						}
@@ -32,11 +32,6 @@ export const SecureSignup = ({ newsletterId }: Props) => {
 							margin-bottom: ${space[2]}px;
 							flex-basis: 335px;
 							flex-shrink: 1;
-
-							input {
-								height: 36px;
-								margin-top: 0;
-							}
 						`}
 					>
 						<TextInput
@@ -44,6 +39,10 @@ export const SecureSignup = ({ newsletterId }: Props) => {
 							name="email"
 							label="Enter your email address"
 							type="email"
+							cssOverrides={css`
+								height: 36px;
+								margin-top: 0;
+							`}
 						/>
 					</div>
 					<Button
