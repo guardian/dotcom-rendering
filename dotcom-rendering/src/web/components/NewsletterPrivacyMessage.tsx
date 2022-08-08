@@ -21,7 +21,7 @@ const ExternalLink = ({ href, children }: ExternalLinkProps) => (
 );
 
 const termsStyle = css`
-	${textSans.xxsmall()}
+	${textSans.xxsmall({ lineHeight: 'tight' })}
 	color: ${text.supporting};
 	a {
 		${textSans.xxsmall()};
