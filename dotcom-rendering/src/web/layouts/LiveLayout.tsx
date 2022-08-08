@@ -422,7 +422,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				</SendToBack>
 			</div>
 
-			<main>
+			<main data-layout="LiveLayout">
 				{footballMatchUrl ? (
 					<ContainerLayout
 						showTopBorder={false}

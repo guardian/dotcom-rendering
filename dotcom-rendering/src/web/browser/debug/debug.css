@@ -1,0 +1,127 @@
+:root {
+	/* z-index given to all labels */
+	--debug-z-index: 100;
+}
+
+/* Layout: Annotate */
+main[data-layout] {
+	position: relative;
+}
+main[data-layout]::before {
+	content: 'page layout: ' attr(data-layout);
+	font-family: monospace;
+	background-color: hotpink;
+	color: white;
+
+	padding: 5px;
+	position: absolute;
+	z-index: var(--debug-z-index);
+}
+
+/* Islands: Outline child elements & label (top, right) */
+gu-island {
+	position: relative;
+}
+
+gu-island::before {
+	content: 'island: ' attr(name);
+	font-family: monospace;
+	font-size: 13px;
+	background-color: blue;
+	color: white;
+
+	padding: 5px;
+	position: absolute;
+	z-index: var(--debug-z-index);
+	top: 0;
+	right: 0;
+}
+
+/* Islands can be empty, we will force their height & label them as such */
+gu-island:empty {
+	display: block;
+	min-height: 23px;
+}
+gu-island:empty::before {
+	content: 'island: ' attr(name) ' (empty)';
+}
+
+gu-island > * {
+	outline: 4px blue solid;
+}
+
+/* Fronts Containers - label (top, right) */
+section[data-container-name] {
+	position: relative;
+}
+section[data-container-name]::before {
+	content: 'container: ' attr(data-container-name);
+	font-family: monospace;
+	background-color: green;
+	color: white;
+
+	padding: 5px;
+	position: absolute;
+	z-index: var(--debug-z-index);
+	top: 0;
+	right: 0;
+}
+
+/* Elements - outline & label (bottom, left) */
+figure[data-spacefinder-type] {
+	position: relative;
+}
+figure[data-spacefinder-type]::after {
+	content: 'element: ' attr(data-spacefinder-type);
+	font-family: monospace;
+	background-color: red;
+	color: white;
+
+	padding: 5px;
+	position: absolute;
+	z-index: var(--debug-z-index);
+	bottom: 0px;
+}
+
+figure[data-spacefinder-type] {
+	outline: 4px red solid;
+}
+
+/* Handle the case where an island is directly inside an element */
+figure[data-spacefinder-type] > gu-island > * {
+	outline-style: dashed;
+}
+
+/* Patches - overriding CSS as we please comes with consequences ... */
+
+/* Links relies on position: relative being set higher up, so we need to ignore this element */
+gu-island[name='Links'] {
+	display: contents;
+}
+/* Because we can't rely on position:relative for links, we need to move the labelling to the child */
+gu-island[name='Links']::before {
+	content: '';
+}
+gu-island[name='Links'] > *::before {
+	content: 'island: Links';
+	font-family: monospace;
+	font-size: 13px;
+	background-color: blue;
+	color: white;
+
+	padding: 5px;
+	position: absolute;
+	z-index: var(--debug-z-index);
+	top: 0;
+	right: 0;
+}
+
+/* For some reason ReaderRevenueLinks outline is always below its surrounding elements, use outline offset to counter-act this */
+gu-island[name='ReaderRevenueLinks'] > * {
+	outline-offset: -4px;
+}
+
+/* Onwards upper leaves an empty div when no content is available */
+gu-island[name='OnwardsUpper'] > *:empty {
+	min-height: 23px;
+}

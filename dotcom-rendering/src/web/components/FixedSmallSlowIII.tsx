@@ -29,6 +29,7 @@ export const FixedSmallSlowIII = ({
 					>
 						<FrontCard
 							trail={trail}
+							starRating={trail.starRating}
 							containerPalette={containerPalette}
 							showAge={showAge}
 							headlineSize={index === 0 ? 'large' : 'medium'}

@@ -403,7 +403,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				</>
 			)}
 
-			<main>
+			<main data-layout="ShowcaseLayout">
 				<ElementContainer
 					showTopBorder={false}
 					backgroundColour={palette.background.article}

@@ -233,6 +233,7 @@ export type DCRFrontCard = {
 	url: string;
 	headline: string;
 	trailText?: string;
+	starRating?: number;
 	webPublicationDate?: string;
 	image?: string;
 	kickerText?: string;

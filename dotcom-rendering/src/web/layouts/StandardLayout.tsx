@@ -464,7 +464,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main>
+			<main data-layout="StandardLayout">
 				<ElementContainer
 					data-print-layout="hide"
 					showTopBorder={false}

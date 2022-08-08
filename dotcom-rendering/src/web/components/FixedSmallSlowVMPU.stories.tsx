@@ -1,16 +1,17 @@
 import { breakpoints } from '@guardian/source-foundations';
+import { trails } from '../../../fixtures/manual/trails';
 import { ContainerLayout } from './ContainerLayout';
-import { EmailSignup } from './EmailSignup';
+import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
 
 export default {
-	component: EmailSignup,
-	title: 'Components/EmailSignup',
+	component: FixedSmallSlowVMPU,
+	title: 'Components/FixedSmallSlowVMPU',
 	parameters: {
-		// Set the viewports in Chromatic at a component level.
 		chromatic: {
 			viewports: [
 				breakpoints.mobile,
 				breakpoints.mobileMedium,
+				breakpoints.mobileLandscape,
 				breakpoints.phablet,
 				breakpoints.tablet,
 				breakpoints.desktop,
@@ -23,20 +24,13 @@ export default {
 
 export const Default = () => (
 	<ContainerLayout
-		title="EmailSignup"
+		title="FixedSmallSlowVMPU"
 		showTopBorder={true}
 		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
-		<EmailSignup
-			identityName="patriarchy"
-			description="Reviewing the most important stories on feminism and sexism and those fighting for equality"
-			name="The Week in Patriarchy"
-			frequency="Weekly"
-			successDescription="You have signed up, but the newsletter is fake"
-			theme="opinion"
-		/>
+		<FixedSmallSlowVMPU trails={trails} showAge={true} />
 	</ContainerLayout>
 );
-Default.story = { name: 'EmailSignup' };
+Default.story = { name: 'FixedSmallSlowVMPU' };

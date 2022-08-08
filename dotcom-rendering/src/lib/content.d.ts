@@ -6,6 +6,7 @@ interface ThirdPartyEmbeddedContent {
 	source?: string;
 	sourceDomain?: string;
 }
+
 interface AudioAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
 	elementId: string;
@@ -289,7 +290,7 @@ interface MultiImageBlockElement {
 interface NewsletterSignupBlockElement {
 	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement';
 	newsletter: Newsletter;
-	elementId: string;
+	elementId?: string;
 }
 
 interface NumberedTitleBlockElement {
@@ -777,6 +778,10 @@ type ResultBucketsType = {
 	title: string;
 	description: string;
 };
+
+// -------------------------------------
+// Newsletter
+// -------------------------------------
 
 type Newsletter = {
 	listId: number;

@@ -575,6 +575,8 @@ interface CAPIArticleType {
 	mostRecentBlockId?: string;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
+
+	promotedNewsletter?: Newsletter;
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
@@ -838,15 +840,6 @@ interface GADataType {
 // ----------------- //
 // General DataTypes //
 // ----------------- //
-
-interface DCRServerDocumentData {
-	page: string;
-	site: string;
-	CAPIArticle: CAPIArticleType;
-	NAV: NavType;
-	GA: GADataType;
-	linkedData: { [key: string]: any };
-}
 
 interface BaseTrailType {
 	url: string;

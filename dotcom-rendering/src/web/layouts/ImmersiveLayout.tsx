@@ -229,7 +229,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				NAV={NAV}
 				format={format}
 			/>
-			<main>
+			<main data-layout="ImmersiveLayout">
 				<ElementContainer
 					showTopBorder={false}
 					showSideBorders={false}

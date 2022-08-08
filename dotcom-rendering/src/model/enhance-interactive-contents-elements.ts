@@ -59,7 +59,7 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 					size: 'full',
 					spaceAbove: 'tight',
 				});
-				if ('elementId' in element)
+				if ('elementId' in element && element.elementId)
 					updatedElements.push({
 						_type: 'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 						elementId: element.elementId,
