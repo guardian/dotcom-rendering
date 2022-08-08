@@ -4,8 +4,8 @@ import createEmotionServer from '@emotion/server/create-instance';
 import { space } from '@guardian/source-foundations';
 import { renderToString } from 'react-dom/server';
 import { Island } from './Island';
-import { NewsletterPrivacyMessage } from './Newsletters/NewsletterPrivacyMessage';
-import { SignupForm } from './Newsletters/SignupForm';
+import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
+import { NewsletterSignupForm } from './NewsletterSignupForm';
 import { SecureSignupIframe } from './SecureSignupIframe.importable';
 
 export type Props = {
@@ -52,7 +52,7 @@ const generateForm = (
 
 	const html = renderToString(
 		<CacheProvider value={cache}>
-			<SignupForm newsletterId={newsletterId} />
+			<NewsletterSignupForm newsletterId={newsletterId} />
 		</CacheProvider>,
 	);
 	const chunks = extractCriticalToChunks(html);
@@ -61,11 +61,11 @@ const generateForm = (
 	return { html, styles };
 };
 
-export const SecureSignup: React.FC<Props> = ({
+export const SecureSignup = ({
 	newsletterId,
 	successDescription,
 	hidePrivacyMessage = false,
-}) => {
+}: Props) => {
 	const { html, styles } = generateForm(newsletterId);
 
 	return (

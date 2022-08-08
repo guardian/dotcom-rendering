@@ -33,7 +33,7 @@ const buttonCssOverrides = css`
  * It should NOT be used as a standalone component and is only represented as a
  * separate component here for storybook mocking ability & better readability
  */
-export const SignupForm: React.FC<Props> = ({ newsletterId }) => (
+export const NewsletterSignupForm = ({ newsletterId }: Props) => (
 	<form id={`secure-signup-${newsletterId}`}>
 		<Label text="Enter your email address" />
 

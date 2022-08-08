@@ -1,11 +1,11 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
-import { ContainerLayout } from '../ContainerLayout';
+import { ContainerLayout } from './ContainerLayout';
 import { EmailSignup } from './EmailSignup';
 
 export default {
 	component: EmailSignup,
-	title: 'Components/Newsletters/EmailSignup',
+	title: 'Components/EmailSignup',
 	parameters: {
 		// Set the viewports in Chromatic at a component level.
 		chromatic: {

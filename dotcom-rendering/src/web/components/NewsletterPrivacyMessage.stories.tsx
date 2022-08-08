@@ -3,7 +3,7 @@ import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 
 export default {
 	component: NewsletterPrivacyMessage,
-	title: 'Components/Newsletters/NewsletterPrivacyMessage',
+	title: 'Components/NewsletterPrivacyMessage',
 	decorators: [withKnobs],
 };
 

@@ -2,7 +2,7 @@ import { NewsletterFrequency } from './NewsletterFrequency';
 
 export default {
 	component: NewsletterFrequency,
-	title: 'Components/Newsletters/NewsletterFrequency',
+	title: 'Components/NewsletterFrequency',
 };
 
 export const Default = () => {

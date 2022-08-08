@@ -11,7 +11,7 @@ const textStyle = css`
 	fill: ${brandAlt[400]};
 `;
 
-export const NewsletterBadge: React.FC = () => (
+export const NewsletterBadge = () => (
 	<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 40.5 113 22">
 		<text x="3" y="58" css={textStyle}>
 			Newsletters

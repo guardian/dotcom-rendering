@@ -2,7 +2,7 @@ import { NewsletterBadge } from './NewsletterBadge';
 
 export default {
 	component: NewsletterBadge,
-	title: 'Components/Newsletters/NewsletterBadge',
+	title: 'Components/NewsletterBadge',
 };
 
 export const Default = () => {
