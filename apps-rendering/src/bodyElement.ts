@@ -110,6 +110,18 @@ interface AudioAtom {
 	title: string;
 }
 
+interface NewsletterSignUp {
+	kind: ElementKind.NewsletterSignUp;
+	newsletter: {
+		id: string;
+		displayName: string;
+		frequency: string;
+		description: string;
+		group: string;
+		theme: string;
+	};
+}
+
 type BodyElement =
 	| Text
 	| Image
@@ -157,7 +169,8 @@ type BodyElement =
 	| ChartAtom
 	| AudioAtom
 	| KnowledgeQuizAtom
-	| PersonalityQuizAtom;
+	| PersonalityQuizAtom
+	| NewsletterSignUp;
 
 type Elements = BlockElement[] | undefined;
 
@@ -402,4 +415,5 @@ export {
 	TimelineAtom,
 	AudioAtom,
 	parseElements,
+	NewsletterSignUp,
 };
