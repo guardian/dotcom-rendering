@@ -69,7 +69,7 @@ const descriptionStyles = css`
 	margin-bottom: ${space[2]}px;
 `;
 
-export const EmailSignup: React.FC<Props> = ({
+export const EmailSignup = ({
 	identityName,
 	name,
 	description,
@@ -77,7 +77,7 @@ export const EmailSignup: React.FC<Props> = ({
 	successDescription,
 	theme,
 	hidePrivacyMessage,
-}) => {
+}: Props) => {
 	return (
 		<aside css={containerStyles}>
 			<div css={stackBelowTabletStyles}>
