@@ -84,9 +84,8 @@ const richLinkHeader = css`
 	color: ${neutral[0]};
 `;
 
-const richLinkTitle = css`
+const blogRichLinkTitle = css`
 	${headline.xxxsmall()};
-	font-size: 14px;
 	padding-top: 1px;
 	padding-bottom: 1px;
 	font-weight: 400;
@@ -94,6 +93,11 @@ const richLinkTitle = css`
 		${headline.xxsmall()};
 		padding-bottom: 5px;
 	}
+`;
+
+const richLinkTitle = css`
+	${blogRichLinkTitle};
+	font-size: 14px;
 `;
 
 const labsRichLinkTitle = css`
@@ -233,6 +237,15 @@ export const RichLink = ({
 	const isOpinion = cardStyle === 'comment';
 	const mainContributor = getMainContributor(tags);
 	const isLabs = linkFormat.theme === ArticleSpecial.Labs;
+	const richLinkTitlePicker = () => {
+		if (isLabs) {
+			return labsRichLinkTitle;
+		} else if (parentIsBlog) {
+			return blogRichLinkTitle;
+		} else {
+			return richLinkTitle;
+		}
+	};
 
 	return (
 		<div
@@ -258,9 +271,7 @@ export const RichLink = ({
 					)}
 					<div css={richLinkElements}>
 						<div css={richLinkHeader}>
-							<div
-								css={isLabs ? labsRichLinkTitle : richLinkTitle}
-							>
+							<div css={richLinkTitlePicker()}>
 								{isOpinion && (
 									<>
 										<Hide when="above" breakpoint="wide">
