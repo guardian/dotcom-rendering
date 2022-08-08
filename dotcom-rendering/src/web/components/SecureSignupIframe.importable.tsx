@@ -30,7 +30,6 @@ const isServer = typeof window === 'undefined';
 type Props = {
 	styles: string;
 	html: string;
-	fonts: string;
 	newsletterId: string;
 	successDescription: string;
 };
@@ -169,7 +168,6 @@ const sendTracking = (
 export const SecureSignupIframe = ({
 	styles,
 	html,
-	fonts,
 	newsletterId,
 	successDescription,
 }: Props) => {
@@ -179,6 +177,7 @@ export const SecureSignupIframe = ({
 	const [iframeHeight, setIFrameHeight] = useState<number>(0);
 	const [isWaitingForResponse, setIsWaitingForResponse] =
 		useState<boolean>(false);
+	const [hasFontsInIframe, setHasFontsInIframe] = useState<boolean>(false);
 	const [responseOk, setResponseOk] = useState<boolean | undefined>(
 		undefined,
 	);
@@ -275,7 +274,7 @@ export const SecureSignupIframe = ({
 		recaptchaRef.current?.execute();
 	};
 
-	const attachListenersToIframe = () => {
+	const attachListenersToIframeAndCloneFonts = () => {
 		const { current: iframe } = iframeRef;
 		iframe?.contentWindow?.addEventListener('resize', resetIframeHeight);
 		const form = iframe?.contentDocument?.querySelector('form');
@@ -283,6 +282,16 @@ export const SecureSignupIframe = ({
 		button?.addEventListener('click', handleClickInIFrame);
 		form?.addEventListener('submit', handleSubmitInIFrame);
 		resetIframeHeight();
+
+		const fontNode = document
+			.querySelector('style.webfont')
+			?.cloneNode(true);
+
+		if (fontNode) {
+			iframe?.contentDocument?.head.appendChild(fontNode);
+		}
+
+		setHasFontsInIframe(true);
 	};
 
 	const captchaSiteKey = isServer
@@ -302,16 +311,16 @@ export const SecureSignupIframe = ({
 					height: iframeHeight,
 					display:
 						hasResponse || isWaitingForResponse ? 'none' : 'block',
+					visibility: hasFontsInIframe ? 'visible' : 'hidden',
 				}}
 				srcDoc={`
 				<html>
 					<head>
-						<style class="webfont">${fonts}</style>
 						${styles}
 					</head>
 					<body style="margin: 0; overflow:hidden;">${html}</body>
 				</html>`}
-				onLoad={attachListenersToIframe}
+				onLoad={attachListenersToIframeAndCloneFonts}
 			/>
 
 			{isWaitingForResponse && (
