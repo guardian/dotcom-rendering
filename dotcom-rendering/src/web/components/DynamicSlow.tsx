@@ -26,6 +26,7 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 				<LI padSides={true} percentage="75%">
 					<FrontCard
 						trail={primary}
+						starRating={primary.starRating}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						headlineSize="large"
@@ -44,6 +45,7 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 				>
 					<FrontCard
 						trail={secondary}
+						starRating={secondary.starRating}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						supportingContent={secondary.supportingContent}
@@ -67,6 +69,7 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 								>
 									<FrontCard
 										trail={card}
+										starRating={card.starRating}
 										containerPalette={containerPalette}
 										showAge={showAge}
 										// Overrides
@@ -102,6 +105,7 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 								>
 									<FrontCard
 										trail={card}
+										starRating={card.starRating}
 										containerPalette={containerPalette}
 										showAge={showAge}
 										headlineSize="small"

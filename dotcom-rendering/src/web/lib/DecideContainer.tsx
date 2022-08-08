@@ -11,6 +11,7 @@ import { FixedLargeSlowXIV } from '../components/FixedLargeSlowXIV';
 import { FixedMediumSlowVI } from '../components/FixedMediumSlowVI';
 import { FixedSmallSlowIII } from '../components/FixedSmallSlowIII';
 import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
+import { FixedSmallSlowVMPU } from '../components/FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from '../components/FixedSmallSlowVThird';
 
 type Props = {
@@ -64,6 +65,14 @@ export const DecideContainer = ({
 		case 'fixed/small/slow-IV':
 			return (
 				<FixedSmallSlowIV
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			);
+		case 'fixed/small/slow-V-mpu':
+			return (
+				<FixedSmallSlowVMPU
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}

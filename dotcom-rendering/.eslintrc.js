@@ -34,7 +34,6 @@ const rulesToOverrideGuardianConfig = {
 
 /** @TODO Review these */
 const rulesToReview = {
-	'react/no-danger': 'warn', // 48 problems
 	'react/no-array-index-key': 'warn', // 34 problems
 	'react/button-has-type': 'warn', // 23 problems
 	'@typescript-eslint/require-await': 'warn', // 22 problems
@@ -93,14 +92,15 @@ module.exports = {
 	],
 	rules: {
 		// React, Hooks & JSX
-		'react/jsx-indent': [2, 'tab'],
-		'react/jsx-indent-props': [2, 'tab'],
-		'react/prop-types': [0],
-		'react/jsx-boolean-value': [2, 'always'],
 		'react-hooks/exhaustive-deps': 'error',
 		'react-hooks/rules-of-hooks': 'error',
+		'react/jsx-boolean-value': [2, 'always'],
+		'react/jsx-indent-props': [2, 'tab'],
+		'react/jsx-indent': [2, 'tab'],
 		'react/jsx-no-target-blank': 'error',
 		'react/jsx-one-expression-per-line': 'off',
+		'react/no-danger': 'off', // We use `dangerouslySetInnerHTML` in several components
+		'react/prop-types': [0],
 		'jsx-expressions/strict-logical-expressions': 'error',
 
 		'array-callback-return': 'error',

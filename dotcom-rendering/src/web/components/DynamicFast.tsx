@@ -68,6 +68,7 @@ const Primaries = ({
 						>
 							<FrontCard
 								trail={card}
+								starRating={card.starRating}
 								containerPalette={containerPalette}
 								showAge={showAge}
 								supportingContent={card.supportingContent}
@@ -112,6 +113,7 @@ const Primaries = ({
 					>
 						<FrontCard
 							trail={card}
+							starRating={card.starRating}
 							containerPalette={containerPalette}
 							showAge={showAge}
 							supportingContent={card.supportingContent}
@@ -186,6 +188,7 @@ const FirstBigBoostedPlusBig = ({
 				>
 					<FrontCard
 						trail={big}
+						starRating={big.starRating}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						supportingContent={big.supportingContent}
@@ -210,6 +213,7 @@ const FirstBigBoostedPlusBig = ({
 						>
 							<FrontCard
 								trail={card}
+								starRating={card.starRating}
 								containerPalette={containerPalette}
 								showAge={showAge}
 								imageUrl={undefined}
@@ -233,6 +237,7 @@ const FirstBigBoostedPlusBig = ({
 						>
 							<FrontCard
 								trail={card}
+								starRating={card.starRating}
 								containerPalette={containerPalette}
 								showAge={showAge}
 								imageUrl={undefined}
@@ -454,10 +459,12 @@ export const DynamicFast = ({
 							>
 								<FrontCard
 									trail={card}
+									starRating={card.starRating}
 									containerPalette={containerPalette}
 									showAge={showAge}
 									supportingContent={card.supportingContent}
 									headlineSize="large"
+									trailText={card.trailText}
 									imageUrl={card.image}
 									imagePosition="top"
 									imagePositionOnMobile="top"
@@ -477,6 +484,7 @@ export const DynamicFast = ({
 						>
 							<FrontCard
 								trail={card}
+								starRating={card.starRating}
 								containerPalette={containerPalette}
 								showAge={showAge}
 								supportingContent={card.supportingContent}
@@ -534,6 +542,7 @@ export const DynamicFast = ({
 										>
 											<FrontCard
 												trail={card}
+												starRating={card.starRating}
 												containerPalette={
 													containerPalette
 												}
