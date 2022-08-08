@@ -84,9 +84,9 @@ const richLinkHeader = css`
 	color: ${neutral[0]};
 `;
 
-const richLinkTitleStyle = (parent: boolean) => css`
+const richLinkTitle = (parentIsBlog: boolean) => css`
 	${headline.xxxsmall()};
-	${parentIsBlog && 'font-size: 14px'};
+	${!parentIsBlog && 'font-size: 14px'};
 	padding-top: 1px;
 	padding-bottom: 1px;
 	font-weight: 400;
@@ -234,13 +234,9 @@ export const RichLink = ({
 	const mainContributor = getMainContributor(tags);
 	const isLabs = linkFormat.theme === ArticleSpecial.Labs;
 
-	const richLinkTitlePicker = () => {
-		if (isLabs) {
-			return labsRichLinkTitle;
-		} else {
-			return richLinkTitleStyle(parentIsBlog);
-		}
-	};
+	const richLinkTitlePicker = isLabs
+		? labsRichLinkTitle
+		: richLinkTitle(parentIsBlog);
 
 	return (
 		<div
@@ -266,7 +262,7 @@ export const RichLink = ({
 					)}
 					<div css={richLinkElements}>
 						<div css={richLinkHeader}>
-							<div css={richLinkTitlePicker()}>
+							<div css={richLinkTitlePicker}>
 								{isOpinion && (
 									<>
 										<Hide when="above" breakpoint="wide">
