@@ -51,7 +51,7 @@ const titleStyles = (theme: string) => css`
 `;
 
 // When in a row with the title, the Icon in the NewsletterFrequency
-// component should not affect the spaceing between the title text and
+// component should not affect the spacing between the title text and
 // the description text, which should be 4px (space [1]).
 // When stacked below the title, there should be 8px (space[2]) between
 // the title and the Icon and then 8px between the Icon and the description
