@@ -36,9 +36,6 @@ const termsStyle = css`
 		color: ${neutral[0]};
 		font-weight: bold;
 	}
-	a {
-		${textSans.xxsmall({ fontWeight: 'bold' })};
-	}
 `;
 
 export const NewsletterPrivacyMessage = () => (

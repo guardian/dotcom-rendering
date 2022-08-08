@@ -28,11 +28,6 @@ const containerStyles = css`
 	border-radius: 12px;
 	margin-bottom: ${space[3]}px;
 	padding: ${space[2]}px;
-	${until.tablet} {
-		div:last-child {
-			margin-top: ${space[2]}px;
-		}
-	}
 
 	${from.tablet} {
 		padding: ${space[2]}px ${space[3]}px;
@@ -43,12 +38,6 @@ const stackBelowTabletStyles = css`
 	display: flex;
 	flex-direction: column;
 	margin-bottom: ${space[2]}px;
-
-	${until.tablet} {
-		span:last-child {
-			margin-top: ${space[1]}px;
-		}
-	}
 
 	${from.tablet} {
 		flex-direction: row;
