@@ -1,7 +1,6 @@
 import createCache from '@emotion/cache';
-import { CacheProvider, css } from '@emotion/react';
+import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
-import { space } from '@guardian/source-foundations';
 import { renderToString } from 'react-dom/server';
 import { Island } from './Island';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
@@ -59,7 +58,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 			<Island
 				clientOnly={true}
 				deferUntil={'idle'}
-				placeholderHeight={75}
+				placeholderHeight={65}
 			>
 				<SecureSignupIframe
 					html={html}
@@ -68,13 +67,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 					successDescription={successDescription}
 				/>
 			</Island>
-			<div
-				css={css`
-					margin-top: ${space[2]}px;
-				`}
-			>
-				<NewsletterPrivacyMessage />
-			</div>
+			<NewsletterPrivacyMessage />
 		</>
 	);
 };

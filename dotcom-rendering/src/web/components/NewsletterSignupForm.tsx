@@ -1,20 +1,32 @@
 import { css } from '@emotion/react';
-import { neutral, space } from '@guardian/source-foundations';
+import { neutral, space, textSans } from '@guardian/source-foundations';
 import { Button, Label, TextInput } from '@guardian/source-react-components';
 
 type Props = { newsletterId: string };
 
+const labelStyles = css`
+	div {
+		${textSans.xsmall({ fontWeight: 'bold' })}
+	}
+`;
+
 const flexParentStyles = css`
 	display: flex;
 	flex-direction: row;
-	align-items: flex-end;
+	align-items: flex-start;
 	flex-wrap: wrap;
 `;
 
 const inputContainerStyles = css`
 	margin-right: ${space[3]}px;
+	margin-bottom: ${space[2]}px;
 	flex-basis: 335px;
 	flex-shrink: 1;
+`;
+
+const textInputStyles = css`
+	height: 36px;
+	margin-top: 0;
 `;
 
 const buttonCssOverrides = css`
@@ -25,7 +37,7 @@ const buttonCssOverrides = css`
 	}
 	flex-basis: 118px;
 	flex-shrink: 0;
-	margin-top: ${space[2]}px;
+	margin-bottom: ${space[2]}px;
 `;
 
 /**
@@ -35,7 +47,7 @@ const buttonCssOverrides = css`
  */
 export const NewsletterSignupForm = ({ newsletterId }: Props) => (
 	<form id={`secure-signup-${newsletterId}`}>
-		<Label text="Enter your email address" />
+		<Label text="Enter your email address" cssOverrides={labelStyles} />
 
 		<div css={flexParentStyles}>
 			<div css={inputContainerStyles}>
@@ -44,9 +56,14 @@ export const NewsletterSignupForm = ({ newsletterId }: Props) => (
 					name="email"
 					label="Enter your email address"
 					type="email"
+					cssOverrides={textInputStyles}
 				/>
 			</div>
-			<Button cssOverrides={buttonCssOverrides} type="submit">
+			<Button
+				size="small"
+				type="submit"
+				cssOverrides={buttonCssOverrides}
+			>
 				Sign up
 			</Button>
 		</div>
