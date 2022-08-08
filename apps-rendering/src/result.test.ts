@@ -1,16 +1,12 @@
 // ----- Imports ----- //
 
-import { withDefault } from './option';
-import { andThen, either, err, map, mapError, ok, toOption } from './result';
-import type { Result } from './result';
+import { identity } from 'lib';
+import { Result } from 'result';
 
 // ----- Setup ----- //
 
-const identity = <A>(a: A): A => a;
-const pipe2 = <A, B, C>(a: A, f: (_a: A) => B, g: (_b: B) => C): C => g(f(a));
-
-const mockOk: Result<string, number> = ok(4);
-const mockErr: Result<string, number> = err('message');
+const mockOk: Result<string, number> = Result.ok(4);
+const mockErr: Result<string, number> = Result.err('message');
 
 const onOk = (a: number): number => a + 2;
 const onError = (e: string): string => `Output: ${e}`;
@@ -19,80 +15,68 @@ const onError = (e: string): string => `Output: ${e}`;
 
 describe('either', () => {
 	it('runs the correct function when Result is Ok', () => {
-		expect(
-			either<string, number, number | string>(onError, onOk)(mockOk),
-		).toBe(6);
+		expect(mockOk.either<string | number>(onError, onOk)).toBe(6);
 	});
 
 	it('runs the correct function when Result is Err', () => {
 		expect(
-			either<string, number, number | string>(onError, onOk)(mockErr),
+			mockErr.either<string | number>(onError, onOk),
 		).toBe('Output: message');
 	});
 });
 
 describe('map', () => {
 	it('runs the function when Result is Ok', () => {
-		expect(pipe2(mockOk, map(onOk), either(identity, identity))).toBe(6);
+		expect(mockOk.map(onOk).either<string | number>(identity, identity)).toBe(6);
 	});
 
 	it('passes the error through when Result is Err', () => {
 		expect(
-			pipe2(
-				mockErr,
-				map((a: number) => `Output: ${a}`),
-				either(identity, identity),
-			),
+			mockErr
+			.map((a: number) => `Output: ${a}`)
+			.either(identity, identity),
 		).toBe('message');
 	});
 });
 
-describe('andThen', () => {
+describe('flatMap', () => {
 	it('runs the function and unwraps the result when both Results are Ok', () => {
-		const f = (a: number): Result<string, number> => ok(a + 2);
+		const f = (a: number): Result<string, number> => Result.ok(a + 2);
 
 		expect(
-			pipe2(
-				mockOk,
-				andThen(f),
-				either<string, number, string | number>(identity, identity),
-			),
+			mockOk
+			.flatMap(f)
+			.either<string | number>(identity, identity),
 		).toBe(6);
 	});
 
 	it('passes through the Err when the first Result is Err', () => {
-		const f = (a: number): Result<string, number> => ok(a + 2);
+		const f = (a: number): Result<string, number> => Result.ok(a + 2);
 
 		expect(
-			pipe2(
-				mockErr,
-				andThen(f),
-				either<string, number, string | number>(identity, identity),
-			),
+			mockErr
+			.flatMap(f)
+			.either<string | number>(identity, identity),
 		).toBe('message');
 	});
 
 	it('passes through the Err when the second Result is Err', () => {
-		const f = (): Result<string, number> => err('message');
+		const f = (): Result<string, number> => Result.err('message');
 
 		expect(
-			pipe2(
-				mockOk,
-				andThen(f),
-				either<string, number, string | number>(identity, identity),
-			),
+			mockOk
+			.flatMap(f)
+			.either<string | number>(identity, identity),
 		).toBe('message');
 	});
 
 	it('passes through the first Err when the first Result is Err', () => {
-		const f = (): Result<string, number> => err('secondMessage');
+		const f = (): Result<string, number> => Result.err('secondMessage');
 
 		expect(
-			pipe2(
-				mockErr,
-				andThen(f),
-				either<string, number, string | number>(identity, identity),
-			),
+			mockErr
+			.flatMap(f)
+			.either<string | number>(identity, identity),
 		).toBe('message');
 	});
 });
@@ -100,27 +84,25 @@ describe('andThen', () => {
 describe('mapError', () => {
 	it('passes through the result when Result is Ok', () => {
 		expect(
-			pipe2(
-				mockOk,
-				mapError(onError),
-				either<string, number, string | number>(identity, identity),
-			),
+			mockOk
+			.mapError(onError)
+			.either<string | number>(identity, identity),
 		).toBe(4);
 	});
 
 	it('runs the function when Result is Err', () => {
 		expect(
-			pipe2(mockErr, mapError(onError), either(identity, identity)),
+			mockErr.mapError(onError).either<string | number>(identity, identity),
 		).toBe('Output: message');
 	});
 });
 
-describe('toOption', () => {
+describe('toOptional', () => {
 	it('produces Some when Result is Ok', () => {
-		expect(pipe2(mockOk, toOption, withDefault(6))).toBe(4);
+		expect(mockOk.toOptional().withDefault(6)).toBe(4);
 	});
 
 	it('produces None when Result is Err', () => {
-		expect(pipe2(mockErr, toOption, withDefault(6))).toBe(6);
+		expect(mockErr.toOptional().withDefault(6)).toBe(6);
 	});
 });
