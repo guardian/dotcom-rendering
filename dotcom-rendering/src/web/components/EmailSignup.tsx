@@ -6,7 +6,6 @@ import {
 	space,
 	sport,
 	textSans,
-	until,
 } from '@guardian/source-foundations';
 import { NewsletterDetail } from './NewsletterDetail';
 import { SecureSignup } from './SecureSignup';
