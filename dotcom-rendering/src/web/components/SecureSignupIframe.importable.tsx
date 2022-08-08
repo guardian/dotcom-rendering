@@ -293,7 +293,7 @@ export const SecureSignupIframe = ({
 				ref={iframeRef}
 				css={css`
 					width: 100%;
-					min-height: 75px;
+					min-height: 65px;
 					overflow: hidden;
 				`}
 				style={{
