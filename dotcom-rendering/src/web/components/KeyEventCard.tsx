@@ -71,7 +71,7 @@ const listItemStyles = (palette: Palette) => css`
 	scroll-snap-align: start;
 
 	${from.desktop} {
-		padding-bottom: ${space[5]}px;
+		padding-bottom: 13px;
 		background-color: ${palette.background.keyEventFromDesktop};
 		width: 200px;
 		padding-right: ${space[5]}px;
