@@ -11,6 +11,7 @@ import { ContainerLayout } from '../components/ContainerLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
@@ -18,6 +19,7 @@ import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
+import { Stuck } from './lib/stickiness';
 
 interface Props {
 	front: DCRFrontType;
@@ -48,6 +50,21 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
 				<>
+					<Stuck>
+						<ElementContainer
+							showTopBorder={false}
+							showSideBorders={false}
+							padded={false}
+							shouldCenter={false}
+						>
+							<HeaderAdSlot
+								isAdFreeUser={front.isAdFreeUser}
+								shouldHideAds={false}
+								display={format.display}
+							/>
+						</ElementContainer>
+					</Stuck>
+
 					<ElementContainer
 						showTopBorder={false}
 						showSideBorders={false}
