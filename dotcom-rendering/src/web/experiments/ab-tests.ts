@@ -1,5 +1,6 @@
 import type { ABTest } from '@guardian/ab-core';
 import { abTestTest } from './tests/ab-test-test';
+import { deeplyReadArticleFooterTest } from './tests/deeply-read-article-footer';
 import { multiStickyRightAds } from './tests/multi-sticky-right-ads';
 import {
 	newsletterMerchUnitLighthouseControl,
@@ -17,4 +18,5 @@ export const tests: ABTest[] = [
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 	multiStickyRightAds,
+	deeplyReadArticleFooterTest,
 ];
