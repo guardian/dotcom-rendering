@@ -173,6 +173,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						>
 							<DecideContainer
 								trails={trails}
+								index={index}
 								groupedTrails={collection.grouped}
 								containerType={collection.collectionType}
 								containerPalette={collection.containerPalette}

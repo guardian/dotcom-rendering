@@ -30,7 +30,7 @@ export const Default = () => (
 		padContent={false}
 		centralBorder="partial"
 	>
-		<FixedSmallSlowVMPU trails={trails} showAge={true} />
+		<FixedSmallSlowVMPU trails={trails} showAge={true} index={1} />
 	</ContainerLayout>
 );
 Default.story = { name: 'FixedSmallSlowVMPU' };

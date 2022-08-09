@@ -10,6 +10,7 @@ type Props = {
 	groupedTrails: DCRGroupedTrails;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	index: number;
 };
 
 /* .___________.___________.___________.
@@ -21,10 +22,12 @@ const Card33_ColumnOfThree33_Ad33 = ({
 	cards,
 	containerPalette,
 	showAge,
+	index,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	index: number;
 }) => (
 	<UL direction="row">
 		<LI percentage="33.333%" padSides={true}>
@@ -71,8 +74,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 		</LI>
 		<LI percentage="33.333%">
 			<Hide until="tablet">
-				{/* TODO: Replace mostpop with a more appropriate value */}
-				<AdSlot position="mostpop" />
+				<AdSlot position="inline" index={index} />
 			</Hide>
 		</LI>
 	</UL>
@@ -87,10 +89,12 @@ const ColumnOfThree50_Ad50 = ({
 	cards,
 	containerPalette,
 	showAge,
+	index,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	index: number;
 }) => (
 	<UL direction="row">
 		<LI percentage="50%">
@@ -126,8 +130,7 @@ const ColumnOfThree50_Ad50 = ({
 		</LI>
 		<LI percentage="50%">
 			<Hide until="tablet">
-				{/* TODO: Replace mostpop with a more appropriate value */}
-				<AdSlot position="mostpop" />
+				<AdSlot position="inline" index={index} />
 			</Hide>
 		</LI>
 	</UL>
@@ -304,6 +307,7 @@ export const DynamicSlowMPU = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
+	index,
 }: Props) => {
 	let layout: 'noBigs' | 'twoBigs' | 'twoBigsBoosted' | 'threeBigs';
 	let bigCards: TrailType[] = [];
@@ -356,6 +360,7 @@ export const DynamicSlowMPU = ({
 					cards={standardCards}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					index={index}
 				/>
 			);
 		}
@@ -371,6 +376,7 @@ export const DynamicSlowMPU = ({
 						cards={standardCards}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						index={index}
 					/>
 				</>
 			);
@@ -387,6 +393,7 @@ export const DynamicSlowMPU = ({
 						cards={standardCards}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						index={index}
 					/>
 				</>
 			);
@@ -403,6 +410,7 @@ export const DynamicSlowMPU = ({
 						cards={standardCards}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						index={index}
 					/>
 				</>
 			);
