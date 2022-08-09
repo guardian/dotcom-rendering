@@ -10,18 +10,15 @@ import {
 	textSans,
 	brandAlt,
 	neutral,
-	text,
 	from,
 } from '@guardian/source-foundations';
 import {
-	Button,
-	Label,
-	Link,
 	SvgEnvelope,
-	TextInput,
 } from '@guardian/source-react-components';
 import { NewsletterSignUp } from 'bodyElement';
 import type { FC } from 'react';
+import EmailSignupForm from './EmailSignupForm';
+import PrivacyWording from './PrivacyWording';
 
 // ----- Component ----- //
 
@@ -80,30 +77,6 @@ const iconHolderStyles = css`
 	}
 `;
 
-const formStyle = css`
-	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
-`;
-
-const termsStyle = css`
-	${textSans.xxsmall({ lineHeight: 'tight' })}
-	color: ${text.supporting};
-	a {
-		${textSans.xxsmall({ fontWeight: 'bold' })};
-		color: ${neutral[0]};
-		text-decoration: underline;
-		:hover {
-			color: ${neutral[0]};
-			text-decoration: underline;
-		}
-	}
-	strong {
-		color: ${neutral[0]};
-		font-weight: bold;
-	}
-`;
-
 // When in a row with the title, the Icon in the NewsletterFrequency
 // component should not affect the spaceing between the title text and
 // the description text, which should be 4px (space [1]).
@@ -138,71 +111,8 @@ const NewsletterSignup: FC<Props> = ({ format, element }) => {
 
 			<p css={descriptionStyles}>{description}</p>
 
-			<Label
-				text="Enter your email address"
-				cssOverrides={css`
-					div {
-						${textSans.xsmall({ fontWeight: 'bold' })};
-					}
-				`}
-			/>
-			<div css={formStyle}>
-				<TextInput
-					type={'email'}
-					width={30}
-					hideLabel
-					label={'Enter your email address'}
-					cssOverrides={css`
-						height: 36px;
-						margin-right: ${space[3]}px;
-						margin-top: 0;
-						margin-bottom: ${space[2]}px;
-						flex-basis: 335px;
-					`}
-				/>
-				<Button
-					size="small"
-					title="Sign up"
-					cssOverrides={css`
-						background-color: ${neutral[0]};
-						margin-bottom: ${space[2]}px;
-						flex-basis: 118px;
-						justify-content: center;
-					`}
-				>
-					Sign up
-				</Button>
-			</div>
-
-			<p css={termsStyle}>
-				<strong>Privacy Notice: </strong>
-				Newsletters may contain info about charities, online ads, and
-				content funded by outside parties. For more information see our{' '}
-				<Link
-					data-ignore="global-link-styling"
-					href="https://www.theguardian.com/help/privacy-policy"
-					rel="noopener noreferrer"
-				>
-					Privacy Policy
-				</Link>
-				. We use Google reCaptcha to protect our website and the Google{' '}
-				<Link
-					data-ignore="global-link-styling"
-					href="https://policies.google.com/privacy"
-					rel="noopener noreferrer"
-				>
-					Privacy Policy
-				</Link>{' '}
-				and{' '}
-				<Link
-					data-ignore="global-link-styling"
-					href="https://policies.google.com/terms"
-					rel="noopener noreferrer"
-				>
-					Terms of Service
-				</Link>{' '}
-				apply.
-			</p>
+			<EmailSignupForm newsletter={element.newsletter} />
+			<PrivacyWording notUsingCaptcha={false}/>
 		</aside>
 	);
 };
