@@ -3,7 +3,7 @@
 import { css } from '@emotion/react';
 import { iconSize, visuallyHidden } from '@guardian/source-foundations';
 import type { IconSize } from '@guardian/source-react-components';
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 
 // This component is adapted from a one being release on a new version of source:
 // https://github.com/guardian/source/pull/1485
