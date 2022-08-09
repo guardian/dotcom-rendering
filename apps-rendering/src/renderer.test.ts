@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
 import {
 	renderAll,
 	renderEditionsAll,
@@ -19,8 +15,6 @@ import { BodyElement, ElementKind } from 'bodyElement';
 import { none, some } from '@guardian/types';
 import { ArticleDesign, ArticleDisplay, ArticleFormat } from '@guardian/libs';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { act } from 'react-dom/test-utils';
-import { unmountComponentAtNode, render as renderDom } from 'react-dom';
 import { EmbedKind } from 'embed';
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
 import { ArticleElementRole } from '@guardian/libs';
@@ -410,21 +404,18 @@ describe('Renders different types of elements', () => {
 		const nodes = render(guideElement());
 		const guide = nodes.flat()[0];
 		expect(getHtml(guide)).toContain('<main>Guide content</main>');
-		testHandlers(guide);
 	});
 
 	test('ElementKind.QandaAtom', () => {
 		const nodes = render(qandaElement());
 		const qanda = nodes.flat()[0];
 		expect(getHtml(qanda)).toContain('<main>QandA content</main>');
-		testHandlers(qanda);
 	});
 
 	test('ElementKind.ProfileAtom', () => {
 		const nodes = render(profileElement());
 		const profile = nodes.flat()[0];
 		expect(getHtml(profile)).toContain('<main>Profile content</main>');
-		testHandlers(profile);
 	});
 
 	test('ElementKind.TimelineAtom', () => {
@@ -433,7 +424,6 @@ describe('Renders different types of elements', () => {
 		expect(getHtml(timeline)).toContain(
 			'<p>Swedish prosecutors announce they are <a href="https://www.theguardian.com/media/2019/may/13/sweden-reopens-case-against-julian-assange">reopening an investigation into a rape allegation</a> against Julian Assange.</p><p><br></p>',
 		);
-		testHandlers(timeline);
 	});
 
 	test('ElementKind.ChartAtom', () => {
@@ -462,40 +452,6 @@ describe('Renders different types of elements', () => {
 			'<div kind="17" title="title" id="" trackUrl="trackUrl" kicker="kicker" pillar="0"',
 		);
 	});
-
-	function testHandlers(node: ReactNode): void {
-		if (isValidElement(node)) {
-			const container = document.createElement('div');
-			document.body.appendChild(container);
-			act(() => {
-				renderDom(node, container);
-			});
-
-			const likeButton = container.querySelector('[data-testid="like"]');
-			const dislikeButton = container.querySelector(
-				'[data-testid="dislike"]',
-			);
-			const feedback = container.querySelector(
-				'[data-testid="feedback"]',
-			);
-			expect(feedback?.getAttribute('hidden')).toBe('');
-
-			act(() => {
-				dislikeButton!.dispatchEvent(
-					new MouseEvent('click', { bubbles: true }),
-				);
-			});
-			act(() => {
-				likeButton!.dispatchEvent(
-					new MouseEvent('click', { bubbles: true }),
-				);
-			});
-
-			expect(feedback?.getAttribute('hidden')).toBeNull();
-			unmountComponentAtNode(container);
-			container.remove();
-		}
-	}
 });
 
 describe('Renders different types of Editions elements', () => {
