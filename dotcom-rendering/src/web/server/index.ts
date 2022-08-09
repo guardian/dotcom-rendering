@@ -4,8 +4,6 @@ import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
-import { extract as extractGA } from '../../model/extract-ga';
-import { extractNAV } from '../../model/extract-nav';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import { articleToHtml } from './articleToHtml';
@@ -56,16 +54,9 @@ export const renderArticle = (
 	res: express.Response,
 ): void => {
 	try {
-		const CAPIArticle = enhanceCAPIType(body);
+		const article = enhanceCAPIType(body);
 		const resp = articleToHtml({
-			data: {
-				CAPIArticle,
-				site: 'frontend',
-				page: 'Article',
-				NAV: extractNAV(CAPIArticle.nav),
-				GA: extractGA(CAPIArticle),
-				linkedData: CAPIArticle.linkedData,
-			},
+			article,
 		});
 
 		res.status(200).send(resp);
@@ -83,11 +74,6 @@ export const renderArticleJson = (
 		const resp = {
 			data: {
 				CAPIArticle,
-				site: 'frontend',
-				page: 'Article',
-				NAV: extractNAV(CAPIArticle.nav),
-				GA: extractGA(CAPIArticle),
-				linkedData: CAPIArticle.linkedData,
 			},
 		};
 
@@ -110,16 +96,9 @@ export const renderInteractive = (
 	res: express.Response,
 ): void => {
 	try {
-		const CAPIArticle = enhanceCAPIType(body);
+		const article = enhanceCAPIType(body);
 		const resp = articleToHtml({
-			data: {
-				CAPIArticle,
-				site: 'frontend',
-				page: 'Interactive',
-				NAV: extractNAV(CAPIArticle.nav),
-				GA: extractGA(CAPIArticle),
-				linkedData: CAPIArticle.linkedData,
-			},
+			article,
 		});
 
 		res.status(200).send(resp);
@@ -223,7 +202,6 @@ export const renderFront = (
 		const front = enhanceFront(body);
 		const html = frontToHtml({
 			front,
-			NAV: extractNAV(front.nav),
 		});
 		res.status(200).send(html);
 	} catch (e) {

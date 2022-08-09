@@ -3,10 +3,10 @@ import { neutral, text, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 
 const termsStyle = css`
-	${textSans.xxsmall()}
+	${textSans.xxsmall({ lineHeight: 'tight' })}
 	color: ${text.supporting};
 	a {
-		${textSans.xxsmall({ fontWeight: 'bold' })};
+		${textSans.xxsmall()};
 		color: ${neutral[0]};
 		text-decoration: underline;
 		:hover {
