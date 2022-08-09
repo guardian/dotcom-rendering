@@ -133,6 +133,8 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 	// often reach readers who are less familiar with the Guardian.
 	const isSlimNav = !CAPIArticle.config.switches.interactiveFullHeaderSwitch;
 
+	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
+
 	if (isSlimNav) {
 		return (
 			<div
@@ -174,23 +176,21 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 				position: relative;
 			`}
 		>
-			<Stuck>
-				<div data-print-layout="hide">
-					<ElementContainer
-						showTopBorder={false}
-						showSideBorders={false}
-						padded={false}
-						shouldCenter={false}
-						element="aside"
-					>
-						<HeaderAdSlot
-							isAdFreeUser={CAPIArticle.isAdFreeUser}
-							shouldHideAds={CAPIArticle.shouldHideAds}
-							display={format.display}
-						/>
-					</ElementContainer>
-				</div>
-			</Stuck>
+			{renderAds && (
+				<Stuck>
+					<div data-print-layout="hide">
+						<ElementContainer
+							showTopBorder={false}
+							showSideBorders={false}
+							padded={false}
+							shouldCenter={false}
+							element="aside"
+						>
+							<HeaderAdSlot display={format.display} />
+						</ElementContainer>
+					</div>
+				</Stuck>
+			)}
 
 			{format.theme !== ArticleSpecial.Labs && (
 				<div data-print-layout="hide">

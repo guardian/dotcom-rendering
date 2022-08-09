@@ -46,24 +46,24 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	// const contributionsServiceUrl = getContributionsServiceUrl(front);
 
+	const renderAds = !front.isAdFreeUser;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
 				<>
-					<Stuck>
-						<ElementContainer
-							showTopBorder={false}
-							showSideBorders={false}
-							padded={false}
-							shouldCenter={false}
-						>
-							<HeaderAdSlot
-								isAdFreeUser={front.isAdFreeUser}
-								shouldHideAds={false}
-								display={format.display}
-							/>
-						</ElementContainer>
-					</Stuck>
+					{renderAds && (
+						<Stuck>
+							<ElementContainer
+								showTopBorder={false}
+								showSideBorders={false}
+								padded={false}
+								shouldCenter={false}
+							>
+								<HeaderAdSlot display={format.display} />
+							</ElementContainer>
+						</Stuck>
+					)}
 
 					<ElementContainer
 						showTopBorder={false}

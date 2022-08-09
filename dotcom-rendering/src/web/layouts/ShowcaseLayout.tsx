@@ -240,25 +240,25 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const shouldReserveMerchSpace =
 		!!CAPIArticle.config.abTests.merchandisingMinHeightVariant;
 
+	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
+
 	return (
 		<>
 			{format.theme !== ArticleSpecial.Labs ? (
 				<>
 					<div>
-						<Stuck>
-							<ElementContainer
-								showTopBorder={false}
-								showSideBorders={false}
-								padded={false}
-								shouldCenter={false}
-							>
-								<HeaderAdSlot
-									isAdFreeUser={CAPIArticle.isAdFreeUser}
-									shouldHideAds={CAPIArticle.shouldHideAds}
-									display={format.display}
-								/>
-							</ElementContainer>
-						</Stuck>
+						{renderAds && (
+							<Stuck>
+								<ElementContainer
+									showTopBorder={false}
+									showSideBorders={false}
+									padded={false}
+									shouldCenter={false}
+								>
+									<HeaderAdSlot display={format.display} />
+								</ElementContainer>
+							</Stuck>
+						)}
 						<SendToBack>
 							<ElementContainer
 								showTopBorder={false}
@@ -350,19 +350,17 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				// Else, this is a labs article so just show Nav and the Labs header
 				<>
 					<div>
-						<Stuck zIndex="stickyAdWrapper">
-							<ElementContainer
-								showTopBorder={false}
-								showSideBorders={false}
-								padded={false}
-							>
-								<HeaderAdSlot
-									isAdFreeUser={CAPIArticle.isAdFreeUser}
-									shouldHideAds={CAPIArticle.shouldHideAds}
-									display={format.display}
-								/>
-							</ElementContainer>
-						</Stuck>
+						{renderAds && (
+							<Stuck zIndex="stickyAdWrapper">
+								<ElementContainer
+									showTopBorder={false}
+									showSideBorders={false}
+									padded={false}
+								>
+									<HeaderAdSlot display={format.display} />
+								</ElementContainer>
+							</Stuck>
+						)}
 						<Stuck zIndex="stickyAdWrapperNav">
 							<ElementContainer
 								showSideBorders={true}
@@ -643,20 +641,21 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</ShowcaseGrid>
 				</ElementContainer>
-
-				<ElementContainer
-					padded={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot
-						position="merchandising-high"
-						display={format.display}
-						shouldReserveMerchSpace={shouldReserveMerchSpace}
-					/>
-				</ElementContainer>
+				{renderAds && (
+					<ElementContainer
+						padded={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising-high"
+							display={format.display}
+							shouldReserveMerchSpace={shouldReserveMerchSpace}
+						/>
+					</ElementContainer>
+				)}
 
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
@@ -742,20 +741,21 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					</ElementContainer>
 				)}
-
-				<ElementContainer
-					padded={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot
-						position="merchandising"
-						display={format.display}
-						shouldReserveMerchSpace={shouldReserveMerchSpace}
-					/>
-				</ElementContainer>
+				{renderAds && (
+					<ElementContainer
+						padded={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising"
+							display={format.display}
+							shouldReserveMerchSpace={shouldReserveMerchSpace}
+						/>
+					</ElementContainer>
+				)}
 			</main>
 
 			{NAV.subNavSections && (

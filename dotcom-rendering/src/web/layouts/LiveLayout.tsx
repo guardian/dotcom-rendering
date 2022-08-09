@@ -321,24 +321,24 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
 
+	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
+
 	return (
 		<>
 			<div data-print-layout="hide">
-				<Stuck>
-					<ElementContainer
-						showTopBorder={false}
-						showSideBorders={false}
-						padded={false}
-						shouldCenter={false}
-						element="aside"
-					>
-						<HeaderAdSlot
-							isAdFreeUser={CAPIArticle.isAdFreeUser}
-							shouldHideAds={CAPIArticle.shouldHideAds}
-							display={format.display}
-						/>
-					</ElementContainer>
-				</Stuck>
+				{renderAds && (
+					<Stuck>
+						<ElementContainer
+							showTopBorder={false}
+							showSideBorders={false}
+							padded={false}
+							shouldCenter={false}
+							element="aside"
+						>
+							<HeaderAdSlot display={format.display} />
+						</ElementContainer>
+					</Stuck>
+				)}
 				<SendToBack>
 					<ElementContainer
 						showTopBorder={false}
@@ -1220,22 +1220,25 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</GridItem>
 						</LiveGrid>
 					</ElementContainer>
-
-					<ElementContainer
-						data-print-layout="hide"
-						padded={false}
-						showTopBorder={false}
-						showSideBorders={false}
-						backgroundColour={neutral[93]}
-						element="aside"
-					>
-						<AdSlot
+					{renderAds && (
+						<ElementContainer
 							data-print-layout="hide"
-							position="merchandising-high"
-							display={format.display}
-							shouldReserveMerchSpace={shouldReserveMerchSpace}
-						/>
-					</ElementContainer>
+							padded={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={neutral[93]}
+							element="aside"
+						>
+							<AdSlot
+								data-print-layout="hide"
+								position="merchandising-high"
+								display={format.display}
+								shouldReserveMerchSpace={
+									shouldReserveMerchSpace
+								}
+							/>
+						</ElementContainer>
+					)}
 
 					{CAPIArticle.onwards ? (
 						<DecideOnwards
@@ -1333,21 +1336,24 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							/>
 						</ElementContainer>
 					)}
-
-					<ElementContainer
-						data-print-layout="hide"
-						padded={false}
-						showTopBorder={false}
-						showSideBorders={false}
-						backgroundColour={neutral[93]}
-						element="aside"
-					>
-						<AdSlot
-							position="merchandising"
-							display={format.display}
-							shouldReserveMerchSpace={shouldReserveMerchSpace}
-						/>
-					</ElementContainer>
+					{renderAds && (
+						<ElementContainer
+							data-print-layout="hide"
+							padded={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={neutral[93]}
+							element="aside"
+						>
+							<AdSlot
+								position="merchandising"
+								display={format.display}
+								shouldReserveMerchSpace={
+									shouldReserveMerchSpace
+								}
+							/>
+						</ElementContainer>
+					)}
 				</div>
 			</main>
 

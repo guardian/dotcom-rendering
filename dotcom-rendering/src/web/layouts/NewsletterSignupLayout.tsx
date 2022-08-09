@@ -174,23 +174,23 @@ export const NewsletterSignupLayout = ({
 	/** TODO: this data needs to come from the newsletters API */
 	const newsletterCategory = 'UK Focused';
 
+	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
-				<Stuck>
-					<ElementContainer
-						showTopBorder={false}
-						showSideBorders={false}
-						padded={false}
-						shouldCenter={false}
-					>
-						<HeaderAdSlot
-							isAdFreeUser={CAPIArticle.isAdFreeUser}
-							shouldHideAds={CAPIArticle.shouldHideAds}
-							display={format.display}
-						/>
-					</ElementContainer>
-				</Stuck>
+				{renderAds && (
+					<Stuck>
+						<ElementContainer
+							showTopBorder={false}
+							showSideBorders={false}
+							padded={false}
+							shouldCenter={false}
+						>
+							<HeaderAdSlot display={format.display} />
+						</ElementContainer>
+					</Stuck>
+				)}
 
 				<ElementContainer
 					showTopBorder={false}
@@ -266,7 +266,7 @@ export const NewsletterSignupLayout = ({
 				)}
 			</div>
 
-			{CAPIArticle.config.switches.surveys && (
+			{renderAds && CAPIArticle.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 

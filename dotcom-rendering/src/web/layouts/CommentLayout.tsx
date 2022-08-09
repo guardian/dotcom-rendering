@@ -300,23 +300,23 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
+	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
+
 	return (
 		<>
 			<div id="bannerandheader">
-				<Stuck>
-					<ElementContainer
-						showTopBorder={false}
-						showSideBorders={false}
-						padded={false}
-						shouldCenter={false}
-					>
-						<HeaderAdSlot
-							isAdFreeUser={CAPIArticle.isAdFreeUser}
-							shouldHideAds={CAPIArticle.shouldHideAds}
-							display={format.display}
-						/>
-					</ElementContainer>
-				</Stuck>
+				{renderAds && (
+					<Stuck>
+						<ElementContainer
+							showTopBorder={false}
+							showSideBorders={false}
+							padded={false}
+							shouldCenter={false}
+						>
+							<HeaderAdSlot display={format.display} />
+						</ElementContainer>
+					</Stuck>
+				)}
 				<SendToBack>
 					{format.theme !== ArticleSpecial.Labs && (
 						<ElementContainer
@@ -689,19 +689,21 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</StandardGrid>
 				</ElementContainer>
 
-				<ElementContainer
-					padded={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot
-						position="merchandising-high"
-						display={format.display}
-						shouldReserveMerchSpace={shouldReserveMerchSpace}
-					/>
-				</ElementContainer>
+				{renderAds && (
+					<ElementContainer
+						padded={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising-high"
+							display={format.display}
+							shouldReserveMerchSpace={shouldReserveMerchSpace}
+						/>
+					</ElementContainer>
+				)}
 
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
@@ -787,20 +789,21 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					</ElementContainer>
 				)}
-
-				<ElementContainer
-					padded={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot
-						position="merchandising"
-						display={format.display}
-						shouldReserveMerchSpace={shouldReserveMerchSpace}
-					/>
-				</ElementContainer>
+				{renderAds && (
+					<ElementContainer
+						padded={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising"
+							display={format.display}
+							shouldReserveMerchSpace={shouldReserveMerchSpace}
+						/>
+					</ElementContainer>
+				)}
 			</main>
 
 			{NAV.subNavSections && (

@@ -232,6 +232,8 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const shouldReserveMerchSpace =
 		!!CAPIArticle.config.abTests.merchandisingMinHeightVariant;
 
+	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
+
 	return (
 		<>
 			{CAPIArticle.isLegacyInteractive && (
@@ -239,22 +241,20 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			)}
 
 			<div>
-				<Stuck>
-					<div data-print-layout="hide">
-						<ElementContainer
-							showTopBorder={false}
-							showSideBorders={false}
-							padded={false}
-							shouldCenter={false}
-						>
-							<HeaderAdSlot
-								isAdFreeUser={CAPIArticle.isAdFreeUser}
-								shouldHideAds={CAPIArticle.shouldHideAds}
-								display={format.display}
-							/>
-						</ElementContainer>
-					</div>
-				</Stuck>
+				{renderAds && (
+					<Stuck>
+						<div data-print-layout="hide">
+							<ElementContainer
+								showTopBorder={false}
+								showSideBorders={false}
+								padded={false}
+								shouldCenter={false}
+							>
+								<HeaderAdSlot display={format.display} />
+							</ElementContainer>
+						</div>
+					</Stuck>
+				)}
 
 				{format.theme !== ArticleSpecial.Labs && (
 					<div data-print-layout="hide">
@@ -358,7 +358,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				</Stuck>
 			)}
 
-			{CAPIArticle.config.switches.surveys && (
+			{renderAds && CAPIArticle.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 			<main data-layout="InteractiveLayout">
@@ -598,22 +598,23 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						badge={CAPIArticle.badge}
 					/>
 				</ElementContainer>
-
-				<ElementContainer
-					data-print-layout="hide"
-					padded={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot
+				{renderAds && (
+					<ElementContainer
 						data-print-layout="hide"
-						position="merchandising-high"
-						display={format.display}
-						shouldReserveMerchSpace={shouldReserveMerchSpace}
-					/>
-				</ElementContainer>
+						padded={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							data-print-layout="hide"
+							position="merchandising-high"
+							display={format.display}
+							shouldReserveMerchSpace={shouldReserveMerchSpace}
+						/>
+					</ElementContainer>
+				)}
 
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
@@ -703,21 +704,22 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					</ElementContainer>
 				)}
-
-				<ElementContainer
-					data-print-layout="hide"
-					padded={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot
-						position="merchandising"
-						display={format.display}
-						shouldReserveMerchSpace={shouldReserveMerchSpace}
-					/>
-				</ElementContainer>
+				{renderAds && (
+					<ElementContainer
+						data-print-layout="hide"
+						padded={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising"
+							display={format.display}
+							shouldReserveMerchSpace={shouldReserveMerchSpace}
+						/>
+					</ElementContainer>
+				)}
 			</main>
 
 			{NAV.subNavSections && (
