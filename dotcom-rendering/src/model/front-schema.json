@@ -363,6 +363,12 @@
         },
         "pageFooter": {
             "$ref": "#/definitions/FooterType"
+        },
+        "isAdFreeUser": {
+            "type": "boolean"
+        },
+        "shouldHideAds": {
+            "type": "boolean"
         }
     },
     "required": [
@@ -371,10 +377,12 @@
         "editionId",
         "editionLongForm",
         "guardianBaseURL",
+        "isAdFreeUser",
         "nav",
         "pageFooter",
         "pageId",
         "pressedPage",
+        "shouldHideAds",
         "webTitle",
         "webURL"
     ],
