@@ -27,14 +27,18 @@ const Card33_ColumnOfThree33_Ad33 = ({
 	showAge?: boolean;
 }) => (
 	<UL direction="row">
-		<LI percentage="33.333%" padSides={true} padBottom={true}>
+		<LI percentage="33.333%" padSides={true}>
 			<FrontCard
 				trail={cards[0]}
 				containerPalette={containerPalette}
 				showAge={showAge}
 			/>
 		</LI>
-		<LI percentage="33.333%">
+		<LI
+			percentage="33.333%"
+			showDivider={true}
+			showTopMarginWhenStacked={true}
+		>
 			<UL direction="column">
 				<LI padSides={true} padBottom={true}>
 					<FrontCard
