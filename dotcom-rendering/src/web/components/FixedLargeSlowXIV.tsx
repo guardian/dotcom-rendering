@@ -25,6 +25,7 @@ export const FixedLargeSlowXIV = ({
 				<LI padSides={true} percentage="75%" padBottomOnMobile={true}>
 					<FrontCard
 						trail={primary}
+						starRating={primary.starRating}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						headlineSize="large"
@@ -37,6 +38,7 @@ export const FixedLargeSlowXIV = ({
 				<LI padSides={true} showDivider={true} percentage="25%">
 					<FrontCard
 						trail={secondary}
+						starRating={secondary.starRating}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
@@ -54,6 +56,7 @@ export const FixedLargeSlowXIV = ({
 						>
 							<FrontCard
 								trail={card}
+								starRating={card.starRating}
 								containerPalette={containerPalette}
 								showAge={showAge}
 								headlineSize="small"
@@ -81,6 +84,7 @@ export const FixedLargeSlowXIV = ({
 						>
 							<FrontCard
 								trail={card}
+								starRating={card.starRating}
 								containerPalette={containerPalette}
 								showAge={showAge}
 								headlineSize="small"

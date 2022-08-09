@@ -129,6 +129,7 @@ export const trails: TrailType[] = [
 			'Glacial rivers absorb carbon faster than rainforests, scientists find',
 		showByline: false,
 		byline: 'Leyland Cecco',
+		starRating: 4,
 		image: 'https://i.guim.co.uk/img/media/5e8ea90ae9f503aa1c98fd35dbf13235b1207fea/0_490_3264_1958/master/3264.jpg?width=900&quality=85&s=80890967a26cab02bd524331818e6e23',
 		webPublicationDate: '2019-12-02T09:45:30.000Z',
 		format: {

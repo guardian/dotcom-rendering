@@ -11,6 +11,7 @@ import { SecureSignupIframe } from './SecureSignupIframe.importable';
 export type Props = {
 	newsletterId: string;
 	successDescription: string;
+	/** Override this with caution: you _must_ ensure this wording exists nearby if not included in this component */
 	hidePrivacyMessage?: boolean;
 };
 
@@ -73,7 +74,7 @@ export const SecureSignup = ({
 			<Island
 				clientOnly={true}
 				deferUntil={'idle'}
-				placeholderHeight={75}
+				placeholderHeight={65}
 			>
 				<SecureSignupIframe
 					html={html}

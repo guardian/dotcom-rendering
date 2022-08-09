@@ -2,11 +2,10 @@ import { css } from '@emotion/react';
 import { neutral, text, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 
-const hrefLookup = {
-	guardianPrivacyPolicy: 'https://www.theguardian.com/help/privacy-policy',
-	googlePrivacyPolicy: 'https://policies.google.com/privacy',
-	googleTermsOfService: 'https://policies.google.com/terms',
-};
+const GUARDIAN_PRIVACY_POLICY =
+	'https://www.theguardian.com/help/privacy-policy';
+const GOOGLE_PRIVACY_POLICY = 'https://policies.google.com/privacy';
+const GOOGLE_TERMS_OF_SERVICE = 'https://policies.google.com/terms';
 
 type Props = {
 	/** Bool for toggling between two variations for privacy wording
@@ -14,9 +13,13 @@ type Props = {
 	legacy?: boolean;
 };
 
-type ExternalLinkProps = { href: string; children: React.ReactNode };
+type PolicyUrl =
+	| typeof GUARDIAN_PRIVACY_POLICY
+	| typeof GOOGLE_PRIVACY_POLICY
+	| typeof GOOGLE_TERMS_OF_SERVICE;
+type LegalLinkProps = { href: PolicyUrl; children: string };
 /** Link component fixed with data-ignore and rel attributes for consistency in this file only */
-const ExternalLink = ({ href, children }: ExternalLinkProps) => (
+const LegalLink = ({ href, children }: LegalLinkProps) => (
 	<Link
 		data-ignore="global-link-styling"
 		href={href}
@@ -27,7 +30,7 @@ const ExternalLink = ({ href, children }: ExternalLinkProps) => (
 );
 
 const termsStyle = css`
-	${textSans.xxsmall()}
+	${textSans.xxsmall({ lineHeight: 'tight' })}
 	color: ${text.supporting};
 	a {
 		${textSans.xxsmall()};
@@ -44,50 +47,46 @@ const termsStyle = css`
 	}
 `;
 
-const legacyTermsStyle = css`
-	${termsStyle}
-	a {
-		${textSans.xxsmall({ fontWeight: 'bold' })};
-	}
-`;
+export const NewsletterPrivacyMessage = ({ legacy = true }: Props) => (
+	<span css={termsStyle}>
+		<strong>Privacy Notice: </strong>
 
-export const NewsletterPrivacyMessage = ({ legacy = true }: Props) =>
-	legacy ? (
-		<span css={legacyTermsStyle}>
-			<strong>Privacy Notice: </strong>
-			Newsletters may contain info about charities, online ads, and
-			content funded by outside parties. For more information see our{' '}
-			<ExternalLink href={hrefLookup.guardianPrivacyPolicy}>
-				privacy policy
-			</ExternalLink>
-			. We use Google reCaptcha to protect our website and the Google{' '}
-			<ExternalLink href={hrefLookup.googlePrivacyPolicy}>
-				Privacy Policy
-			</ExternalLink>{' '}
-			and{' '}
-			<ExternalLink href={hrefLookup.googleTermsOfService}>
-				Terms of Service
-			</ExternalLink>{' '}
-			apply.
-		</span>
-	) : (
-		<span css={termsStyle}>
-			<strong>Privacy Notice: </strong>
-			We thought you should know this newsletter may also contain
-			information about Guardian products, services and chosen charities
-			or online advertisements. Newsletters may also contain content
-			funded by outside parties.{' '}
-			<ExternalLink href={hrefLookup.guardianPrivacyPolicy}>
-				See privacy policy here
-			</ExternalLink>
-			. This site is protected by reCAPTCHA and the Google{' '}
-			<ExternalLink href={hrefLookup.googlePrivacyPolicy}>
-				Privacy Policy
-			</ExternalLink>{' '}
-			and{' '}
-			<ExternalLink href={hrefLookup.googleTermsOfService}>
-				Terms of Service
-			</ExternalLink>{' '}
-			apply.
-		</span>
-	);
+		{legacy ? (
+			<>
+				Newsletters may contain info about charities, online ads, and
+				content funded by outside parties. For more information see our{' '}
+				<LegalLink href={GUARDIAN_PRIVACY_POLICY}>
+					privacy policy
+				</LegalLink>
+				. We use Google reCaptcha to protect our website and the Google{' '}
+				<LegalLink href={GOOGLE_PRIVACY_POLICY}>
+					Privacy Policy
+				</LegalLink>{' '}
+				and{' '}
+				<LegalLink href={GOOGLE_TERMS_OF_SERVICE}>
+					Terms of Service
+				</LegalLink>{' '}
+				apply.
+			</>
+		) : (
+			<>
+				We thought you should know this newsletter may also contain
+				information about Guardian products, services and chosen
+				charities or online advertisements. Newsletters may also contain
+				content funded by outside parties.{' '}
+				<LegalLink href={GUARDIAN_PRIVACY_POLICY}>
+					See privacy policy here
+				</LegalLink>
+				. This site is protected by reCAPTCHA and the Google{' '}
+				<LegalLink href={GOOGLE_PRIVACY_POLICY}>
+					Privacy Policy
+				</LegalLink>{' '}
+				and{' '}
+				<LegalLink href={GOOGLE_TERMS_OF_SERVICE}>
+					Terms of Service
+				</LegalLink>{' '}
+				apply.
+			</>
+		)}
+	</span>
+);

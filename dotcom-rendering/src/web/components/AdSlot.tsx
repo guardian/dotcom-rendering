@@ -14,7 +14,7 @@ import { Island } from './Island';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
 type Props = {
-	display: ArticleDisplay;
+	display?: ArticleDisplay;
 	position: AdSlotType;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
@@ -197,7 +197,7 @@ const mobileStickyAdStyles = css`
 
 const adStyles = [labelStyles, fluidAdStyles];
 
-const AdSlotLabelToggled: React.FC = () => (
+const AdSlotLabelToggled = () => (
 	<div
 		className={['ad-slot__label', 'ad-slot__label--toggle', 'hidden'].join(
 			' ',
@@ -208,13 +208,13 @@ const AdSlotLabelToggled: React.FC = () => (
 	</div>
 );
 
-export const AdSlot: React.FC<Props> = ({
+export const AdSlot = ({
 	position,
 	display,
 	shouldHideReaderRevenue = false,
 	isPaidContent = false,
 	shouldReserveMerchSpace = false,
-}) => {
+}: Props) => {
 	switch (position) {
 		case 'right':
 			switch (display) {
@@ -406,7 +406,7 @@ export const AdSlot: React.FC<Props> = ({
 	}
 };
 
-export const MobileStickyContainer: React.FC = () => {
+export const MobileStickyContainer = () => {
 	return (
 		<div className="mobilesticky-container" css={mobileStickyAdStyles} />
 	);

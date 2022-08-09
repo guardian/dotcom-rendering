@@ -1,3 +1,4 @@
+import { extract as extractGA } from '../model/extract-ga';
 import type { DCRFrontType } from '../types/front';
 
 export interface WindowGuardianConfig {
@@ -64,9 +65,9 @@ interface WindowGuardianFrontConfig {
 }
 
 const makeWindowGuardianConfig = (
-	dcrDocumentData: DCRServerDocumentData,
+	CAPIArticle: CAPIArticleType,
 ): WindowGuardianConfig => {
-	const { config } = dcrDocumentData.CAPIArticle;
+	const { config } = CAPIArticle;
 	return {
 		// This indicates to the client side code that we are running a dotcom-rendering rendered page.
 		isDotcomRendering: true,
@@ -75,8 +76,8 @@ const makeWindowGuardianConfig = (
 		frontendAssetsFullURL: config.frontendAssetsFullURL,
 		page: Object.assign(config, {
 			dcrCouldRender: true,
-			contentType: dcrDocumentData.CAPIArticle.contentType,
-			edition: dcrDocumentData.CAPIArticle.editionId,
+			contentType: CAPIArticle.contentType,
+			edition: CAPIArticle.editionId,
 			revisionNumber: config.revisionNumber,
 			dcrSentryDsn:
 				'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
@@ -101,9 +102,9 @@ const makeWindowGuardianConfig = (
 };
 
 export const makeWindowGuardian = (
-	dcrDocumentData: DCRServerDocumentData,
+	CAPIArticle: CAPIArticleType,
 ): {
-	// The 'config' attribute is derived from DCRServerDocumentData and contains
+	// The 'config' attribute is derived from CAPIArticle and contains
 	// all the data that, for legacy reasons, for instance compatibility
 	// with the frontend commercial stack, or other scripts, we want to find
 	// at window.guardian.config
@@ -118,7 +119,7 @@ export const makeWindowGuardian = (
 	GAData: GADataType;
 } => {
 	return {
-		config: makeWindowGuardianConfig(dcrDocumentData),
+		config: makeWindowGuardianConfig(CAPIArticle),
 		polyfilled: false,
 		adBlockers: {
 			active: undefined,
@@ -129,7 +130,7 @@ export const makeWindowGuardian = (
 				reportError: () => null,
 			},
 		},
-		GAData: dcrDocumentData.GA,
+		GAData: extractGA(CAPIArticle),
 	};
 };
 
@@ -174,7 +175,7 @@ const makeFrontWindowGuardianConfig = ({
 export const makeFrontWindowGuardian = (
 	front: DCRFrontType,
 ): {
-	// The 'config' attribute is derived from DCRServerDocumentData and contains
+	// The 'config' attribute is derived from CAPIArticle and contains
 	// all the data that, for legacy reasons, for instance compatibility
 	// with the frontend commercial stack, or other scripts, we want to find
 	// at window.guardian.config

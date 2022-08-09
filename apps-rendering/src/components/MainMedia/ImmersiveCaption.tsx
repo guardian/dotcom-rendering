@@ -56,9 +56,7 @@ const ImmersiveCaption: FC<Props> = ({ mainMedia, format }) =>
 
 		return (
 			<p id={immersiveCaptionId} css={styles(format)}>
-				{maybeRender(caption, (cap) => (
-					<Caption caption={cap} format={format} />
-				))}{' '}
+				<Caption caption={caption} format={format} />{' '}
 				{maybeRender(credit, (cred) => (
 					<>{cred}</>
 				))}
