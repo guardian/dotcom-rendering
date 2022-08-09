@@ -4,12 +4,12 @@ import { ElementKind } from 'bodyElementKind';
 
 import type { FC } from 'react';
 import { selectDesign, selectPillar } from 'storybookHelpers';
-import NewsletterSignupForm from './';
+import NewsletterSignup from '.';
 
 // ----- Stories ----- //
 
 const Default: FC = () => (
-	<NewsletterSignupForm
+	<NewsletterSignup
 		element={{
 			kind: ElementKind.NewsletterSignUp,
 			newsletter: {
@@ -31,7 +31,7 @@ const Default: FC = () => (
 );
 
 const NewsTheme: FC = () => (
-	<NewsletterSignupForm
+	<NewsletterSignup
 		element={{
 			kind: ElementKind.NewsletterSignUp,
 			newsletter: {
@@ -55,8 +55,8 @@ const NewsTheme: FC = () => (
 // ----- Exports ----- //
 
 export default {
-	component: NewsletterSignupForm,
-	title: 'AR/NewsletterSignupForm',
+	component: NewsletterSignup,
+	title: 'AR/NewsletterSignup',
 };
 
 export { Default, NewsTheme };

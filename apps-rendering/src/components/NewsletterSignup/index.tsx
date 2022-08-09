@@ -119,7 +119,7 @@ const noHeightFromTabletStyles = css`
 	}
 `;
 
-const NewsletterSignupForm: FC<Props> = ({ format, element }) => {
+const NewsletterSignup: FC<Props> = ({ format, element }) => {
 	const { displayName, frequency, description, theme } = element.newsletter;
 	return (
 		<aside css={containerStyles(format)}>
@@ -209,4 +209,4 @@ const NewsletterSignupForm: FC<Props> = ({ format, element }) => {
 
 // ----- Exports ----- //
 
-export default NewsletterSignupForm;
+export default NewsletterSignup;
