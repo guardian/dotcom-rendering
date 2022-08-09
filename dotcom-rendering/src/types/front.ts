@@ -11,7 +11,6 @@ export interface FEFrontType {
 	commercialProperties: Record<string, unknown>;
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
-	shouldHideAds: boolean;
 }
 
 export interface DCRFrontType {
@@ -22,7 +21,6 @@ export interface DCRFrontType {
 	config: FEFrontConfigType;
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
-	shouldHideAds: boolean;
 }
 
 interface FEPressedPageType {

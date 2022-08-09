@@ -366,9 +366,6 @@
         },
         "isAdFreeUser": {
             "type": "boolean"
-        },
-        "shouldHideAds": {
-            "type": "boolean"
         }
     },
     "required": [
@@ -382,7 +379,6 @@
         "pageFooter",
         "pageId",
         "pressedPage",
-        "shouldHideAds",
         "webTitle",
         "webURL"
     ],

@@ -59,7 +59,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						>
 							<HeaderAdSlot
 								isAdFreeUser={front.isAdFreeUser}
-								shouldHideAds={front.shouldHideAds}
+								shouldHideAds={false}
 								display={format.display}
 							/>
 						</ElementContainer>
