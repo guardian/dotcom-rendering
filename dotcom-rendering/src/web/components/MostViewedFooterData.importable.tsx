@@ -6,7 +6,8 @@ import { abTestTest } from '../experiments/tests/ab-test-test';
 import { decideTrail } from '../lib/decideTrail';
 import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
-import { MostViewedFooterGrid } from './MostViewedFooterGrid';
+// import { MostViewedFooterGrid } from './MostViewedFooterGrid';
+import { MostViewedFooterGridExpandable } from './MostViewedFooterGridExpandable';
 import { MostViewedFooterSecondTierItem } from './MostViewedFooterSecondTierItem';
 
 interface Props {
@@ -88,7 +89,7 @@ export const MostViewedFooterData = ({
 				data-cy-ab-user-in-variant={abTestCypressDataAttr}
 				data-cy-ab-runnable-test={variantFromRunnable}
 			>
-				<MostViewedFooterGrid
+				<MostViewedFooterGridExpandable
 					data={transformTabs(tabs)}
 					sectionName={sectionName}
 					palette={palette}
