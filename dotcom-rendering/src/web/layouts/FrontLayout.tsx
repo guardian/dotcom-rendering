@@ -151,7 +151,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					return (
 						<ContainerLayout
-							key={index}
+							key={collection.id}
 							title={collection.displayName}
 							// TODO: This logic should be updated, as this relies
 							// on the first container being 'palette styles do not delete'
@@ -173,6 +173,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						>
 							<DecideContainer
 								trails={trails}
+								index={index}
 								groupedTrails={collection.grouped}
 								containerType={collection.collectionType}
 								containerPalette={collection.containerPalette}

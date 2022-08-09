@@ -42,6 +42,7 @@ export const NoBigs = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			index={1}
 		/>
 	</ContainerLayout>
 );
@@ -64,6 +65,7 @@ export const OneBig = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			index={1}
 		/>
 	</ContainerLayout>
 );
@@ -86,6 +88,7 @@ export const TwoBigs = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			index={1}
 		/>
 	</ContainerLayout>
 );
@@ -114,6 +117,7 @@ export const FirstBigBoosted = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			index={1}
 		/>
 	</ContainerLayout>
 );
@@ -136,6 +140,7 @@ export const ThreeBigs = () => (
 				standard: standards,
 			}}
 			showAge={true}
+			index={1}
 		/>
 	</ContainerLayout>
 );
@@ -158,6 +163,7 @@ export const AllBigs = () => (
 				standard: [],
 			}}
 			showAge={true}
+			index={1}
 		/>
 	</ContainerLayout>
 );
