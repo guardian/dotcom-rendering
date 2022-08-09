@@ -301,82 +301,107 @@ export const DynamicSlowMPU = ({
 	containerPalette,
 	showAge,
 }: Props) => {
-	let bigCards = groupedTrails.big;
-	let standardCards = groupedTrails.standard;
-
-	if (bigCards.length === 0) {
-		// If there are no big cards at all we get just one, special, slice:
-		return (
-			<Card33_ColumnOfThree33_Ad33
-				cards={standardCards}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-		);
+	let layout: 'noBigs' | 'twoBigs' | 'twoBigsBoosted' | 'threeBigs';
+	let bigCards: TrailType[] = [];
+	let standardCards: TrailType[] = [];
+	switch (groupedTrails.big.length) {
+		case 0: {
+			standardCards = groupedTrails.standard;
+			layout = 'noBigs';
+			break;
+		}
+		case 1: {
+			// If there is only one big item a standard item is promoted such that
+			// there is always at least two
+			const promoted = groupedTrails.standard.slice(0, 1);
+			bigCards = [...groupedTrails.big, ...promoted];
+			standardCards = groupedTrails.standard.slice(1);
+			layout = 'twoBigs';
+			break;
+		}
+		case 2: {
+			bigCards = groupedTrails.big;
+			standardCards = groupedTrails.standard;
+			if (groupedTrails.big[0].isBoosted) {
+				layout = 'twoBigsBoosted';
+			} else {
+				layout = 'twoBigs';
+			}
+			break;
+		}
+		case 3: {
+			bigCards = groupedTrails.big;
+			standardCards = groupedTrails.standard;
+			layout = 'threeBigs';
+			break;
+		}
+		default: {
+			// If there are more than three big cards, these extra bigs are demoted to
+			// standard.
+			const demoted = groupedTrails.big.slice(3);
+			standardCards = [...demoted, ...groupedTrails.standard];
+			bigCards = groupedTrails.big.slice(0, 3);
+			layout = 'threeBigs';
+		}
 	}
 
-	if (bigCards.length === 1) {
-		// If there is only one big item a standard item is promoted such that
-		// there is always at least two
-		const promoted = standardCards.slice(0, 1);
-		bigCards = [...bigCards, ...promoted];
-		standardCards = standardCards.slice(1);
-	}
-
-	if (bigCards.length > 3) {
-		// If there are more than three big cards, these extra bigs are demoted to
-		// standard.
-		const demoted = bigCards.slice(2);
-		standardCards = [...demoted, ...standardCards];
-	}
-
-	if (bigCards.length === 2 && bigCards[0].isBoosted) {
-		return (
-			<>
-				<Card75_Card25
-					cards={bigCards}
-					containerPalette={containerPalette}
-					showAge={showAge}
-				/>
-				<ColumnOfThree50_Ad50
+	switch (layout) {
+		case 'noBigs': {
+			return (
+				<Card33_ColumnOfThree33_Ad33
 					cards={standardCards}
 					containerPalette={containerPalette}
 					showAge={showAge}
 				/>
-			</>
-		);
+			);
+		}
+		case 'twoBigs': {
+			return (
+				<>
+					<Card50_Card50
+						cards={bigCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+					<ColumnOfThree50_Ad50
+						cards={standardCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</>
+			);
+		}
+		case 'twoBigsBoosted': {
+			return (
+				<>
+					<Card75_Card25
+						cards={bigCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+					<ColumnOfThree50_Ad50
+						cards={standardCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</>
+			);
+		}
+		case 'threeBigs': {
+			return (
+				<>
+					<Card50_Card25_Card25
+						cards={bigCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+					<ColumnOfThree50_Ad50
+						cards={standardCards}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</>
+			);
+		}
 	}
-
-	if (bigCards.length === 2) {
-		return (
-			<>
-				<Card50_Card50
-					cards={bigCards}
-					containerPalette={containerPalette}
-					showAge={showAge}
-				/>
-				<ColumnOfThree50_Ad50
-					cards={standardCards}
-					containerPalette={containerPalette}
-					showAge={showAge}
-				/>
-			</>
-		);
-	}
-
-	// Else bigCards.length === 3
-	return (
-		<>
-			<Card50_Card25_Card25
-				cards={bigCards}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-			<ColumnOfThree50_Ad50
-				cards={standardCards}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-		</>
-	);
 };
