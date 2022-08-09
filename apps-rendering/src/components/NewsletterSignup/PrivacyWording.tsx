@@ -8,7 +8,7 @@ import type { FC } from 'react';
 // ----- Component ----- //
 
 interface Props {
-	notUsingCaptcha?: boolean;
+	notUsingCaptcha: boolean;
 }
 
 const termsStyle = css`
