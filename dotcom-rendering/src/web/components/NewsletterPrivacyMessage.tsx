@@ -30,7 +30,7 @@ export const NewsletterPrivacyMessage = () => (
 			href="https://www.theguardian.com/help/privacy-policy"
 			rel="noopener noreferrer"
 		>
-			privacy policy
+			Privacy Policy
 		</Link>
 		. We use Google reCaptcha to protect our website and the Google{' '}
 		<Link
