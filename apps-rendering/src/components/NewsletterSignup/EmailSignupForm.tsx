@@ -18,6 +18,11 @@ const formStyle = css`
 	flex-wrap: wrap;
 `;
 
+/**
+ * NOTE: this component is non functional and is for demonstration only.
+ * The UI for the NewsletterSignup might not use an HTML form for apps
+ * when implemented
+ */
 const EmailSignupForm: FC<Props> = ({ newsletter }) => {
 	const { id } = newsletter;
 	return (

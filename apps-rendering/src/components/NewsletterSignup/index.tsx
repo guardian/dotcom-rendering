@@ -12,13 +12,11 @@ import {
 	neutral,
 	from,
 } from '@guardian/source-foundations';
-import {
-	SvgEnvelope,
-} from '@guardian/source-react-components';
 import { NewsletterSignUp } from 'bodyElement';
 import type { FC } from 'react';
 import EmailSignupForm from './EmailSignupForm';
 import PrivacyWording from './PrivacyWording';
+import SvgNewsletter from './SvgNewsletter';
 
 // ----- Component ----- //
 
@@ -92,6 +90,9 @@ const noHeightFromTabletStyles = css`
 	}
 `;
 
+/**
+ * NOTE: this component is non functional and is for demonstration only.
+ */
 const NewsletterSignup: FC<Props> = ({ format, element }) => {
 	const { displayName, frequency, description, theme } = element.newsletter;
 	return (
@@ -103,7 +104,7 @@ const NewsletterSignup: FC<Props> = ({ format, element }) => {
 
 				<div css={noHeightFromTabletStyles}>
 					<div css={iconHolderStyles}>
-						<SvgEnvelope size="small" />
+						<SvgNewsletter size="small" />
 						<b>{frequency}</b>
 					</div>
 				</div>
