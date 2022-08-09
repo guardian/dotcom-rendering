@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { brandAlt, space, textSans } from '@guardian/source-foundations';
-import { SvgEnvelope } from '@guardian/source-react-components';
+import { SvgNewsletter } from './SvgNewsletter';
+// TO DO replace SvgNewsletter import when this project is updated to use @guardian/eslint-plugin-source-react-components 6.0.0
 
 type NewsletterCategoryProps = {
 	text: string;
@@ -26,7 +27,7 @@ const spanStyle = css`
 
 export const NewsletterCategory = ({ text }: NewsletterCategoryProps) => (
 	<div css={containerStyle}>
-		<SvgEnvelope size="small" />
+		<SvgNewsletter size="small" />
 		<span css={spanStyle}>{text}</span>
 	</div>
 );

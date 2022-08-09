@@ -60,9 +60,7 @@ const GalleryCaption: FC<Props> = ({ mainMedia, format }) =>
 
 		return (
 			<p css={styles}>
-				{maybeRender(caption, (cap) => (
-					<Caption caption={cap} format={format} />
-				))}{' '}
+				<Caption caption={caption} format={format} />{' '}
 				{maybeRender(credit, (cred) => (
 					<>{cred}</>
 				))}

@@ -1,11 +1,10 @@
 import createCache from '@emotion/cache';
-import { CacheProvider, css } from '@emotion/react';
+import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
-import { neutral, space } from '@guardian/source-foundations';
-import { Button, Label, TextInput } from '@guardian/source-react-components';
 import { renderToString } from 'react-dom/server';
 import { Island } from './Island';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
+import { NewsletterSignupForm } from './NewsletterSignupForm';
 import { SecureSignupIframe } from './SecureSignupIframe.importable';
 
 type Props = { newsletterId: string; successDescription: string };
@@ -42,48 +41,7 @@ const generateForm = (
 
 	const html = renderToString(
 		<CacheProvider value={cache}>
-			<form id={`secure-signup-${newsletterId}`}>
-				<Label text="Enter your email address" />
-
-				<div
-					css={css`
-						display: flex;
-						flex-direction: row;
-						align-items: flex-end;
-						flex-wrap: wrap;
-					`}
-				>
-					<div
-						css={css`
-							margin-right: ${space[3]}px;
-							flex-basis: 335px;
-							flex-shrink: 1;
-						`}
-					>
-						<TextInput
-							hideLabel={true}
-							name="email"
-							label="Enter your email address"
-							type="email"
-						/>
-					</div>
-					<Button
-						cssOverrides={css`
-							justify-content: center;
-							background-color: ${neutral[0]};
-							:hover {
-								background-color: ${neutral[20]};
-							}
-							flex-basis: 118px;
-							flex-shrink: 0;
-							margin-top: ${space[2]}px;
-						`}
-						type="submit"
-					>
-						Sign up
-					</Button>
-				</div>
-			</form>
+			<NewsletterSignupForm newsletterId={newsletterId} />
 		</CacheProvider>,
 	);
 	const chunks = extractCriticalToChunks(html);
@@ -100,7 +58,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 			<Island
 				clientOnly={true}
 				deferUntil={'idle'}
-				placeholderHeight={75}
+				placeholderHeight={65}
 			>
 				<SecureSignupIframe
 					html={html}
@@ -109,13 +67,7 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 					successDescription={successDescription}
 				/>
 			</Island>
-			<div
-				css={css`
-					margin-top: ${space[2]}px;
-				`}
-			>
-				<NewsletterPrivacyMessage />
-			</div>
+			<NewsletterPrivacyMessage />
 		</>
 	);
 };

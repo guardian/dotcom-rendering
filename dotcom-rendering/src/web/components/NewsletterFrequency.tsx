@@ -1,21 +1,18 @@
 import { css } from '@emotion/react';
 import {
 	brandAltBackground,
-	from,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
-import { SvgEnvelope } from '@guardian/source-react-components';
+import { SvgNewsletter } from './SvgNewsletter';
+// TO DO replace SvgNewsletter import when this project is updated to use @guardian/eslint-plugin-source-react-components 6.0.0
 
 export const NewsletterFrequency = ({ frequency }: { frequency: string }) => {
 	return (
 		<div
 			css={css`
 				display: flex;
-				margin-top: ${space[2]}px;
-				${from.tablet} {
-					margin-top: 0;
-				}
+				align-items: center;
 			`}
 		>
 			<div
@@ -30,11 +27,14 @@ export const NewsletterFrequency = ({ frequency }: { frequency: string }) => {
 					}
 				`}
 			>
-				<SvgEnvelope />
+				<SvgNewsletter />
 			</div>
 			<div
 				css={css`
-					${textSans.medium({ fontWeight: 'bold' })}
+					${textSans.xsmall({
+						fontWeight: 'bold',
+						lineHeight: 'tight',
+					})}
 				`}
 			>
 				{frequency}

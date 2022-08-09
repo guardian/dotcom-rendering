@@ -424,10 +424,10 @@ const imageRenderer = (
 ): ReactNode => {
 	const { caption, credit, nativeCaption } = element;
 	return h(BodyImage, {
-		caption: map<DocumentFragment, ReactNode>((cap) => [
-			h(Caption, { format, caption: cap }),
+		caption: some([
+			h(Caption, { format, caption }),
 			h(Credit, { credit, format, key }),
-		])(caption),
+		]),
 		format: format,
 		key,
 		supportsDarkMode: true,
@@ -588,9 +588,7 @@ const mediaAtomRenderer = (
 	const figcaption = h(FigCaption, {
 		format: format,
 		supportsDarkMode: true,
-		children: map((cap: DocumentFragment) =>
-			h(Caption, { caption: cap, format }),
-		)(caption),
+		children: some(h(Caption, { caption, format })),
 	});
 	return styledH('figure', figureAttributes, [
 		isEditions
