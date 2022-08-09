@@ -4,9 +4,11 @@ import {
 	brandBackground,
 	brandBorder,
 	brandLine,
+	neutral,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { DCRFrontType } from '../../types/front';
+import { AdSlot } from '../components/AdSlot';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
@@ -210,6 +212,23 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					</ElementContainer>
 				)}
 			</main>
+
+			<ElementContainer
+				data-print-layout="hide"
+				padded={false}
+				showTopBorder={false}
+				showSideBorders={false}
+				backgroundColour={neutral[93]}
+				element="aside"
+			>
+				<AdSlot
+					position="merchandising"
+					display={format.display}
+					shouldReserveMerchSpace={
+						!!front.config.abTests.merchandisingMinHeightVariant
+					}
+				/>
+			</ElementContainer>
 
 			{NAV.subNavSections && (
 				<ElementContainer
