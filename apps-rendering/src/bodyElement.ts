@@ -112,14 +112,12 @@ interface AudioAtom {
 
 interface NewsletterSignUp {
 	kind: ElementKind.NewsletterSignUp;
-	newsletter: {
-		id: string;
-		displayName: string;
-		frequency: string;
-		description: string;
-		group: string;
-		theme: string;
-	};
+	id: string;
+	displayName: string;
+	frequency: string;
+	description: string;
+	group: string;
+	theme: string;
 }
 
 type BodyElement =

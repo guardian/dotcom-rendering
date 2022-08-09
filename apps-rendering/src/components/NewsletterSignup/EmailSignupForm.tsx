@@ -3,13 +3,12 @@
 import { css } from '@emotion/react';
 import { neutral, space, textSans } from '@guardian/source-foundations';
 import { Button, Label, TextInput } from '@guardian/source-react-components';
-import type { NewsletterSignUp } from 'bodyElement';
 import type { FC } from 'react';
 
 // ----- Component ----- //
 
 interface Props {
-	newsletter: NewsletterSignUp['newsletter'];
+	newsletterId: string;
 }
 
 const formStyle = css`
@@ -23,11 +22,10 @@ const formStyle = css`
  * The UI for the NewsletterSignup might not use an HTML form for apps
  * when implemented
  */
-const EmailSignupForm: FC<Props> = ({ newsletter }) => {
-	const { id } = newsletter;
+const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 
 	const handleSubmit = (): void => {
-		console.log({ id });
+		console.log({ newsletterId });
 	};
 
 	return (
