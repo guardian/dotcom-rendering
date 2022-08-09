@@ -82,7 +82,7 @@ export const EmailSignup = ({
 		<aside css={containerStyles}>
 			<div css={stackBelowTabletStyles}>
 				<p css={titleStyles(theme)}>
-					Sign up to <span>{name}</span> today
+					Sign up to <span>{name}</span>
 				</p>
 				<div css={noHeightFromTabletStyles}>
 					<NewsletterFrequency frequency={frequency} />
