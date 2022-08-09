@@ -177,7 +177,6 @@ export const SecureSignupIframe = ({
 	const [iframeHeight, setIFrameHeight] = useState<number>(0);
 	const [isWaitingForResponse, setIsWaitingForResponse] =
 		useState<boolean>(false);
-	const [hasFontsInIframe, setHasFontsInIframe] = useState<boolean>(false);
 	const [responseOk, setResponseOk] = useState<boolean | undefined>(
 		undefined,
 	);
@@ -274,7 +273,7 @@ export const SecureSignupIframe = ({
 		recaptchaRef.current?.execute();
 	};
 
-	const attachListenersToIframeAndCloneFonts = () => {
+	const attachListenersToIframe = () => {
 		const { current: iframe } = iframeRef;
 		iframe?.contentWindow?.addEventListener('resize', resetIframeHeight);
 		const form = iframe?.contentDocument?.querySelector('form');
@@ -282,16 +281,58 @@ export const SecureSignupIframe = ({
 		button?.addEventListener('click', handleClickInIFrame);
 		form?.addEventListener('submit', handleSubmitInIFrame);
 		resetIframeHeight();
+	};
 
-		const fontNode = document
-			.querySelector('style.webfont')
-			?.cloneNode(true);
+	const addFontToIframe = (requiredFontNames: string[]) => {
+		const { current: iframe } = iframeRef;
 
-		if (fontNode) {
-			iframe?.contentDocument?.head.appendChild(fontNode);
+		// fallback: clone the whole fonts node into the iframe.
+		// used if the browser does not support FontFaceSet.add
+		const fallbackMethod = () => {
+			const fontNode = document
+				.querySelector('style.webfont')
+				?.cloneNode(true);
+
+			if (fontNode) {
+				iframe?.contentDocument?.head.appendChild(fontNode);
+			}
+		};
+
+		const iframeFontFaceSet = iframe?.contentDocument?.fonts;
+		if (!iframeFontFaceSet) {
+			return fallbackMethod();
 		}
 
-		setHasFontsInIframe(true);
+		// The ts.dom interface for FontFaceSet does not contain the .add method,
+		// browser support is not universal.
+		const iframeFontSetWithAddMethod = iframeFontFaceSet as FontFaceSet & {
+			add: { (font: FontFace): void };
+		};
+
+		// use the fallback method if add is not supported.
+		if (typeof iframeFontSetWithAddMethod.add === 'undefined') {
+			return fallbackMethod();
+		}
+
+		// get all the fontFaces on the parent matching the list of font names
+		const requiredFonts: FontFace[] = [];
+		document.fonts.forEach((fontFace) => {
+			if (requiredFontNames.includes(fontFace.family)) {
+				requiredFonts.push(fontFace);
+			}
+		});
+
+		// add the fonts to the iframe
+		requiredFonts.forEach((font) => {
+			if (requiredFontNames.includes(font.family)) {
+				iframeFontSetWithAddMethod.add(font);
+			}
+		});
+	};
+
+	const onIFrameLoad = (): void => {
+		attachListenersToIframe();
+		addFontToIframe(['GuardianTextSans']);
 	};
 
 	const captchaSiteKey = isServer
@@ -311,7 +352,6 @@ export const SecureSignupIframe = ({
 					height: iframeHeight,
 					display:
 						hasResponse || isWaitingForResponse ? 'none' : 'block',
-					visibility: hasFontsInIframe ? 'visible' : 'hidden',
 				}}
 				srcDoc={`
 				<html>
@@ -320,7 +360,7 @@ export const SecureSignupIframe = ({
 					</head>
 					<body style="margin: 0; overflow:hidden;">${html}</body>
 				</html>`}
-				onLoad={attachListenersToIframeAndCloneFonts}
+				onLoad={onIFrameLoad}
 			/>
 
 			{isWaitingForResponse && (
