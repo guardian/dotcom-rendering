@@ -1,10 +1,8 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import { textSans, neutral, text } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import { NewsletterSignUp } from 'bodyElement';
 import type { FC } from 'react';
 
 // ----- Component ----- //

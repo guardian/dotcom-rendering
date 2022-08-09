@@ -25,6 +25,11 @@ const formStyle = css`
  */
 const EmailSignupForm: FC<Props> = ({ newsletter }) => {
 	const { id } = newsletter;
+
+	const handleSubmit = () => {
+		console.log({ id });
+	};
+
 	return (
 		<>
 			<Label
@@ -50,6 +55,7 @@ const EmailSignupForm: FC<Props> = ({ newsletter }) => {
 					`}
 				/>
 				<Button
+					onClick={handleSubmit}
 					size="small"
 					title="Sign up"
 					cssOverrides={css`
