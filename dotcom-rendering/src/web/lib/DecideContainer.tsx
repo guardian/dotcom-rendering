@@ -10,6 +10,7 @@ import { DynamicSlow } from '../components/DynamicSlow';
 import { DynamicSlowMPU } from '../components/DynamicSlowMPU';
 import { FixedLargeSlowXIV } from '../components/FixedLargeSlowXIV';
 import { FixedMediumSlowVI } from '../components/FixedMediumSlowVI';
+import { FixedSmallSlowI } from '../components/FixedSmallSlowI';
 import { FixedSmallSlowIII } from '../components/FixedSmallSlowIII';
 import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
 import { FixedSmallSlowVMPU } from '../components/FixedSmallSlowVMPU';
@@ -94,6 +95,14 @@ export const DecideContainer = ({
 		case 'fixed/small/slow-III':
 			return (
 				<FixedSmallSlowIII
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			);
+		case 'fixed/small/slow-I':
+			return (
+				<FixedSmallSlowI
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
