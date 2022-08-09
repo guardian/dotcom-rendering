@@ -38,7 +38,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 			<UL direction="column">
 				<LI padSides={true} padBottom={true}>
 					<FrontCard
-						trail={cards[0]}
+						trail={cards[1]}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						imageUrl={undefined}
@@ -47,7 +47,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 				</LI>
 				<LI padSides={true} padBottom={true}>
 					<FrontCard
-						trail={cards[1]}
+						trail={cards[2]}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						imageUrl={undefined}
@@ -56,7 +56,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 				</LI>
 				<LI padSides={true}>
 					<FrontCard
-						trail={cards[2]}
+						trail={cards[3]}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						imageUrl={undefined}
