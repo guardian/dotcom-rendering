@@ -3,6 +3,7 @@
 import { css } from '@emotion/react';
 import { iconSize, visuallyHidden } from '@guardian/source-foundations';
 import type { IconSize } from '@guardian/source-react-components';
+import type { FC, ReactNode } from 'react';
 
 // This component is adapted from a one being release on a new version of source:
 // https://github.com/guardian/source/pull/1485
@@ -16,7 +17,11 @@ interface Props {
 	isAnnouncedByScreenReader?: boolean;
 }
 
-const Svg = ({ size }: { size?: IconSize }) => (
+interface SvgProps {
+	size?: IconSize;
+}
+
+const Svg: FC<SvgProps> = ({ size }) => (
 	<svg
 		width={size ? iconSize[size] : undefined}
 		height={undefined}
@@ -33,10 +38,10 @@ const Svg = ({ size }: { size?: IconSize }) => (
 	</svg>
 );
 
-const SvgNewsletter = ({
+const SvgNewsletter: FC<Props> = ({
 	size,
 	isAnnouncedByScreenReader = false,
-}: Props) => (
+}) => (
 	<>
 		<Svg size={size} />
 		{isAnnouncedByScreenReader && (
@@ -53,4 +58,4 @@ const SvgNewsletter = ({
 
 // ----- Exports ----- //
 
-export default SvgNewsletter
+export default SvgNewsletter;

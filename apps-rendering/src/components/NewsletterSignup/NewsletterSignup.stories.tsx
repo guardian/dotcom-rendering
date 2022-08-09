@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { ElementKind } from 'bodyElementKind';
-
 import type { FC } from 'react';
 import { selectDesign, selectPillar } from 'storybookHelpers';
 import NewsletterSignup from '.';
@@ -19,7 +18,7 @@ const Default: FC = () => (
 				displayName: 'The Week in Patriarchy',
 				frequency: 'Weekly',
 				theme: 'opinion',
-				group: 'opinion'
+				group: 'opinion',
 			},
 		}}
 		format={{
@@ -41,7 +40,7 @@ const NewsTheme: FC = () => (
 				displayName: 'First Edition',
 				frequency: 'Every weekday',
 				theme: 'news',
-				group: 'News'
+				group: 'News',
 			},
 		}}
 		format={{

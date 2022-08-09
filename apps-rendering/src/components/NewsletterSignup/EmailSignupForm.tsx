@@ -1,9 +1,9 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { space, neutral, textSans } from '@guardian/source-foundations';
+import { neutral, space, textSans } from '@guardian/source-foundations';
 import { Button, Label, TextInput } from '@guardian/source-react-components';
-import { NewsletterSignUp } from 'bodyElement';
+import type { NewsletterSignUp } from 'bodyElement';
 import type { FC } from 'react';
 
 // ----- Component ----- //
@@ -26,7 +26,7 @@ const formStyle = css`
 const EmailSignupForm: FC<Props> = ({ newsletter }) => {
 	const { id } = newsletter;
 
-	const handleSubmit = () => {
+	const handleSubmit = (): void => {
 		console.log({ id });
 	};
 

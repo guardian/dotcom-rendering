@@ -1,18 +1,18 @@
 // ----- Imports ----- //
 
-import { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
+	brandAlt,
+	from,
 	headline,
+	neutral,
 	space,
 	sport,
 	textSans,
-	brandAlt,
-	neutral,
-	from,
 } from '@guardian/source-foundations';
-import { NewsletterSignUp } from 'bodyElement';
+import type { NewsletterSignUp } from 'bodyElement';
 import type { FC } from 'react';
 import EmailSignupForm from './EmailSignupForm';
 import PrivacyWording from './PrivacyWording';
@@ -48,7 +48,7 @@ const stackBelowTabletStyles = css`
 	}
 `;
 
-const titleStyles = (theme: string) => css`
+const titleStyles = (theme: string): SerializedStyles => css`
 	${headline.xxsmall({ fontWeight: 'bold' })}
 	flex-grow: 1;
 	span {
@@ -113,7 +113,7 @@ const NewsletterSignup: FC<Props> = ({ format, element }) => {
 			<p css={descriptionStyles}>{description}</p>
 
 			<EmailSignupForm newsletter={element.newsletter} />
-			<PrivacyWording notUsingCaptcha={false}/>
+			<PrivacyWording notUsingCaptcha={false} />
 		</aside>
 	);
 };
