@@ -1,33 +1,42 @@
 import { css } from '@emotion/react';
-import { brandAlt, space, textSans } from '@guardian/source-foundations';
+import {
+	brandAltBackground,
+	space,
+	textSans,
+} from '@guardian/source-foundations';
 import { SvgNewsletter } from './SvgNewsletter';
 // TO DO replace SvgNewsletter import when this project is updated to use @guardian/eslint-plugin-source-react-components 6.0.0
 
-type NewsletterCategoryProps = {
+type Props = {
 	text: string;
 };
 
 const containerStyle = css`
 	display: flex;
 	align-items: center;
-	padding-top: ${space[3]}px;
-	padding-bottom: ${space[2]}px;
+`;
+
+const svgStyle = css`
+	height: 28px;
 
 	svg {
-		background-color: ${brandAlt[400]};
+		background: ${brandAltBackground.primary};
 		border-radius: 50%;
+		height: 100%;
 		padding: 2px;
-		margin-right: ${space[2]}px;
+		margin-right: ${space[1]}px;
 	}
 `;
 
 const spanStyle = css`
-	${textSans.medium({ fontWeight: 'bold' })};
+	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'tight' })};
 `;
 
-export const NewsletterCategory = ({ text }: NewsletterCategoryProps) => (
+export const NewsletterDetail = ({ text }: Props) => (
 	<div css={containerStyle}>
-		<SvgNewsletter size="small" />
+		<div css={svgStyle}>
+			<SvgNewsletter />
+		</div>
 		<span css={spanStyle}>{text}</span>
 	</div>
 );

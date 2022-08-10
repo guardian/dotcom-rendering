@@ -1,44 +1,35 @@
 import { css } from '@emotion/react';
-import {
-	brandAltBackground,
-	space,
-	textSans,
-} from '@guardian/source-foundations';
-import { SvgNewsletter } from './SvgNewsletter';
-// TO DO replace SvgNewsletter import when this project is updated to use @guardian/eslint-plugin-source-react-components 6.0.0
+import { space, textSans } from '@guardian/source-foundations';
+import { SvgClock } from '@guardian/source-react-components';
 
-export const NewsletterFrequency = ({ frequency }: { frequency: string }) => {
+type Props = {
+	frequency: string;
+};
+
+const mainStyles = css`
+	display: flex;
+	margin-top: ${space[1]}px;
+`;
+
+const spanStyles = css`
+	margin-left: ${space[1]}px;
+	${textSans.xsmall()}
+	strong {
+		${textSans.xsmall({ fontWeight: 'bold' })}
+	}
+`;
+
+export const NewsletterFrequency = ({ frequency }: Props) => {
+	// SIGNPOST: This may need to be updated depending on possible values of `frequency`
+	const freq = frequency.toLowerCase();
+
 	return (
-		<div
-			css={css`
-				display: flex;
-				align-items: center;
-			`}
-		>
-			<div
-				css={css`
-					height: 28px;
-					svg {
-						background: ${brandAltBackground.primary};
-						border-radius: 50%;
-						height: 100%;
-						padding: 2px;
-						margin-right: ${space[1]}px;
-					}
-				`}
-			>
-				<SvgNewsletter />
-			</div>
-			<div
-				css={css`
-					${textSans.xsmall({
-						fontWeight: 'bold',
-						lineHeight: 'tight',
-					})}
-				`}
-			>
-				{frequency}
-			</div>
+		<div css={mainStyles}>
+			<SvgClock size="xsmall" />
+
+			<span css={spanStyles}>
+				You'll receive this newsletter <strong>{freq}</strong>
+			</span>
 		</div>
 	);
 };

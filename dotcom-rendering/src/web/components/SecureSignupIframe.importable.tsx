@@ -149,7 +149,7 @@ const sendTracking = (
 	const value = JSON.stringify({
 		eventDescription,
 		newsletterId,
-		timestamp: new Date().getDate(),
+		timestamp: Date.now(),
 	});
 
 	submitComponentEvent(

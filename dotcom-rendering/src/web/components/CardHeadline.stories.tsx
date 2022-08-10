@@ -4,7 +4,7 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { specialReport } from '@guardian/source-foundations';
+import { breakpoints, specialReport } from '@guardian/source-foundations';
 import { CardHeadline } from './CardHeadline';
 import { ElementContainer } from './ElementContainer';
 
@@ -152,6 +152,36 @@ export const Size = () => (
 	</>
 );
 Size.story = { name: 'Size' };
+
+export const MobileSize = () => (
+	<>
+		{smallHeadlineSizes.map((size) => (
+			<div key={size}>
+				<ElementContainer showTopBorder={false} showSideBorders={false}>
+					<CardHeadline
+						headlineText={`This is how a mobile ${size} card headline looks`}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
+						size="medium"
+						sizeOnMobile={size}
+					/>
+				</ElementContainer>
+				<br />
+			</div>
+		))}
+	</>
+);
+MobileSize.story = {
+	name: 'MobileSize',
+	parameters: {
+		chromatic: {
+			viewports: [breakpoints.mobile],
+		},
+	},
+};
 
 export const liveStory = () => (
 	<ElementContainer showTopBorder={false} showSideBorders={false}>
