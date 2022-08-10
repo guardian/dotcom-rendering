@@ -7,7 +7,7 @@ import {
 	sport,
 	textSans,
 } from '@guardian/source-foundations';
-import { NewsletterFrequency } from './NewsletterFrequency';
+import { NewsletterDetail } from './NewsletterDetail';
 import { SecureSignup } from './SecureSignup';
 
 type Props = {
@@ -17,6 +17,8 @@ type Props = {
 	frequency: string;
 	successDescription: string;
 	theme: string;
+	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
+	hidePrivacyMessage?: boolean;
 };
 
 const containerStyles = css`
@@ -50,7 +52,7 @@ const titleStyles = (theme: string) => css`
 	}
 `;
 
-// When in a row with the title, the Icon in the NewsletterFrequency
+// When in a row with the title, the Icon in the NewsletterDetail
 // component should not affect the spacing between the title text and
 // the description text, which should be 4px (space [1]).
 // When stacked below the title, there should be 8px (space[2]) between
@@ -77,6 +79,7 @@ export const EmailSignup = ({
 	frequency,
 	successDescription,
 	theme,
+	hidePrivacyMessage,
 }: Props) => {
 	return (
 		<aside css={containerStyles}>
@@ -85,13 +88,14 @@ export const EmailSignup = ({
 					Sign up to <span>{name}</span>
 				</p>
 				<div css={noHeightFromTabletStyles}>
-					<NewsletterFrequency frequency={frequency} />
+					<NewsletterDetail text={frequency} />
 				</div>
 			</div>
 			<p css={descriptionStyles}>{description}</p>
 			<SecureSignup
 				newsletterId={identityName}
 				successDescription={successDescription}
+				hidePrivacyMessage={hidePrivacyMessage}
 			/>
 		</aside>
 	);

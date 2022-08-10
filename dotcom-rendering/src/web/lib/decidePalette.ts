@@ -223,6 +223,7 @@ const textCaption = (format: ArticleFormat): string => {
 const textCaptionLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
+	if (format.design === ArticleDesign.NewsletterSignup) return BLACK;
 	return pillarPalette[format.theme].main;
 };
 

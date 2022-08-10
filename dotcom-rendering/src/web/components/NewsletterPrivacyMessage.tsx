@@ -2,6 +2,24 @@ import { css } from '@emotion/react';
 import { neutral, text, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 
+const hrefLookup = {
+	guardianPrivacyPolicy: 'https://www.theguardian.com/help/privacy-policy',
+	googlePrivacyPolicy: 'https://policies.google.com/privacy',
+	googleTermsOfService: 'https://policies.google.com/terms',
+};
+
+type ExternalLinkProps = { href: string; children: React.ReactNode };
+/** Link component fixed with data-ignore and rel attributes for consistency in this file only */
+const ExternalLink = ({ href, children }: ExternalLinkProps) => (
+	<Link
+		data-ignore="global-link-styling"
+		href={href}
+		rel="noopener noreferrer"
+	>
+		{children}
+	</Link>
+);
+
 const termsStyle = css`
 	${textSans.xxsmall({ lineHeight: 'tight' })}
 	color: ${text.supporting};
@@ -25,29 +43,17 @@ export const NewsletterPrivacyMessage = () => (
 		<strong>Privacy Notice: </strong>
 		Newsletters may contain info about charities, online ads, and content
 		funded by outside parties. For more information see our{' '}
-		<Link
-			data-ignore="global-link-styling"
-			href="https://www.theguardian.com/help/privacy-policy"
-			rel="noopener noreferrer"
-		>
+		<ExternalLink href={hrefLookup.guardianPrivacyPolicy}>
 			Privacy Policy
-		</Link>
+		</ExternalLink>
 		. We use Google reCaptcha to protect our website and the Google{' '}
-		<Link
-			data-ignore="global-link-styling"
-			href="https://policies.google.com/privacy"
-			rel="noopener noreferrer"
-		>
+		<ExternalLink href={hrefLookup.googlePrivacyPolicy}>
 			Privacy Policy
-		</Link>{' '}
+		</ExternalLink>{' '}
 		and{' '}
-		<Link
-			data-ignore="global-link-styling"
-			href="https://policies.google.com/terms"
-			rel="noopener noreferrer"
-		>
+		<ExternalLink href={hrefLookup.googleTermsOfService}>
 			Terms of Service
-		</Link>{' '}
+		</ExternalLink>{' '}
 		apply.
 	</span>
 );

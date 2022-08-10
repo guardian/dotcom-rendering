@@ -34,7 +34,7 @@ import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
 import { Nav } from '../components/Nav/Nav';
 import { NewsletterBadge } from '../components/NewsletterBadge';
-import { NewsletterCategory } from '../components/NewsletterCategory';
+import { NewsletterDetail } from '../components/NewsletterDetail';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { ShareIcons } from '../components/ShareIcons';
 import { Standfirst } from '../components/Standfirst';
@@ -306,14 +306,12 @@ export const NewsletterSignupLayout = ({
 					centralBorder="full"
 					sideBorders={true}
 					stretchRight={true}
-					leftContent={
-						<NewsletterCategory text={newsletterCategory} />
-					}
+					leftContent={<NewsletterDetail text={newsletterCategory} />}
 				>
 					<Columns collapseUntil="desktop">
 						<Column width={[1, 1, 5 / 8, 1 / 2, 1 / 2]}>
 							<Hide from="leftCol">
-								<NewsletterCategory text={newsletterCategory} />
+								<NewsletterDetail text={newsletterCategory} />
 							</Hide>
 							<ArticleHeadline
 								format={format}
