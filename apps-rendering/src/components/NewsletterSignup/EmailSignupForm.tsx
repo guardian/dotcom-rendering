@@ -1,7 +1,12 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { neutral, pxToRem, remSpace, textSans } from '@guardian/source-foundations';
+import {
+	neutral,
+	pxToRem,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
 import { Button, Label, TextInput } from '@guardian/source-react-components';
 import type { FC } from 'react';
 

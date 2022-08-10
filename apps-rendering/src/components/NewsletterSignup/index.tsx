@@ -8,7 +8,7 @@ import {
 	from,
 	headline,
 	neutral,
-	space,
+	remSpace,
 	sport,
 	textSans,
 } from '@guardian/source-foundations';
