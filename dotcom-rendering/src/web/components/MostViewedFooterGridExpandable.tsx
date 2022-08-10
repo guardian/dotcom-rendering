@@ -1,14 +1,7 @@
 import { css } from '@emotion/react';
-import {
-	border,
-	from,
-	// headline,
-	// neutral,
-	until,
-	visuallyHidden,
-} from '@guardian/source-foundations';
-// import { useState } from 'react';
-import { MostViewedFooterItem } from './MostViewedFooterItem';
+import { border, from, until } from '@guardian/source-foundations';
+import { useState } from 'react';
+import { MostViewedExpandableCol } from './MostViewedFooterExpandableCol';
 
 const thinGreySolid = `1px solid ${border.secondary}`;
 
@@ -49,47 +42,18 @@ const selectedListTabStyles = (palette: Palette) => css`
 	transition: box-shadow 0.3s ease-in-out;
 `;
 
-// const unselectedStyles = css`
-// 	&:hover {
-// 		box-shadow: inset 0px 4px 0px 0px ${neutral[86]};
-// 		transition: box-shadow 0.3s ease-in-out;
-// 	}
-// `;
-
-// const tabButton = css`
-// 	${headline.xxxsmall()};
-// 	color: ${neutral[7]};
-// 	margin: 0;
-// 	border: 0;
-// 	background: transparent;
-// 	padding-right: 6px;
-// 	padding-top: 6px;
-// 	text-align: left;
-// 	text-decoration: none;
-// 	font-weight: 600;
-// 	min-height: 36px;
-// 	display: block;
-// 	width: 100%;
-
-// 	&:hover {
-// 		cursor: pointer;
-// 	}
-// `;
-
 const gridContainer = css`
 	display: grid;
 	grid-auto-flow: column;
 
 	/* One column view */
-	grid-template-columns: 1fr;
+	grid-template-columns: fr;
 	grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
 
 	/* Two column view */
 	${from.tablet} {
-		grid-template-columns: 1fr;
-		grid-template-rows: repeat(2, 1fr);
-		width: 50%;
-		float: left;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: auto;
 	}
 
 	/* We set left border on the grid container, and then right border on
@@ -97,16 +61,8 @@ const gridContainer = css`
 	border-left: 1px solid ${border.secondary};
 `;
 
-const gridList = css`
-	display: grid;
-	grid-auto-flow: column;
-	grid-template-columns: 1fr;
-	grid-template-rows: repeat(5, 1fr);
-`;
-
 type Props = {
 	data: TrailTabType[];
-	sectionName?: string;
 	palette: Palette;
 };
 
@@ -130,12 +86,9 @@ const TabHeading = ({ heading }: { heading: string }) => {
 	}
 };
 
-export const MostViewedFooterGridExpandable = ({
-	data,
-	sectionName = '',
-	palette,
-}: Props) => {
-	// const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
+export const MostViewedFooterGridExpandable = ({ data, palette }: Props) => {
+	const [bothExpanded, setBothExpanded] = useState<boolean>(false);
+
 	return (
 		<div>
 			{Array.isArray(data) && data.length > 1 && (
@@ -168,57 +121,25 @@ export const MostViewedFooterGridExpandable = ({
 			)}
 			<div css={gridContainer}>
 				{data.map((tab: TrailTabType, i: number) => (
-					<div css={[gridList]}>
-						<ol
-							css={[gridList]}
-							id={`tabs-popular-${i}`}
-							data-cy={`tab-body-${i}`}
-							key={`tabs-popular-${i}`}
-							role="tabpanel"
-							aria-labelledby={`tabs-popular-${i}-tab`}
-							data-link-name={tab.heading}
-							data-testid={tab.heading}
-							data-link-context={`most-read/${sectionName}`}
-						>
-							{(tab.trails || [])
-								.slice(0, 5)
-								.map((trail: TrailType, ii: number) => {
-									return (
-										<MostViewedFooterItem
-											key={trail.url}
-											trail={trail}
-											position={ii + 1}
-										/>
-									);
-								})}
-						</ol>
-						{/* Hidden: */}
-						<ol
-							css={[gridList, visuallyHidden]}
-							id={`tabs-popular-${i + 5}`}
-							data-cy={`tab-body-${i + 5}`}
-							key={`tabs-popular-${i + 5}`}
-							role="tabpanel"
-							aria-labelledby={`tabs-popular-${i + 5}-tab`}
-							data-link-name={tab.heading}
-							data-testid={tab.heading}
-							data-link-context={`most-read/${sectionName}`}
-						>
-							{(tab.trails || [])
-								.slice(5, 10)
-								.map((trail: TrailType, ii: number) => {
-									return (
-										<MostViewedFooterItem
-											key={trail.url}
-											trail={trail}
-											position={ii + 6}
-										/>
-									);
-								})}
-						</ol>
-					</div>
+					<MostViewedExpandableCol
+						key={`tabs-popular-${i}`}
+						tab={tab}
+						expanded={bothExpanded}
+					/>
 				))}
 			</div>
+			<button
+				css={css`
+					display: block;
+					${until.tablet} {
+						display: none;
+					}
+				`}
+				type="button"
+				onClick={() => setBothExpanded(!bothExpanded)}
+			>
+				expand both
+			</button>
 		</div>
 	);
 };

@@ -89,9 +89,9 @@ export const MostViewedFooterData = ({
 				data-cy-ab-user-in-variant={abTestCypressDataAttr}
 				data-cy-ab-runnable-test={variantFromRunnable}
 			>
+				{/* Test switching to go here - either choosing MostViewedFooterGrid or variant (MostViewedFooterGridExpandable) */}
 				<MostViewedFooterGridExpandable
 					data={transformTabs(tabs)}
-					sectionName={sectionName}
 					palette={palette}
 				/>
 				<div css={[stackBelow('tablet'), secondTierStyles]}>
