@@ -169,8 +169,7 @@ function render(
 	page: Option<string>,
 ): Page {
 	const item = fromCapi({ docParser, salt: imageSalt })(request, page);
-	item.promotedNewsletter = request.promotedNewsletter
-	insertNewsletterIntoItem(item)
+	insertNewsletterIntoItem(item, request.promotedNewsletter)
 
 	const clientScript = map(getAssetLocation)(scriptName(item));
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);

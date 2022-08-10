@@ -167,8 +167,8 @@ function render(
 	const isPreview = res.req.query.isPreview === 'true';
 	const environment = getEditionsEnv(isPreview, path);
 	const item = fromCapi({ docParser, salt: imageSalt })(request, none);
-	item.promotedNewsletter = request.promotedNewsletter
-	insertNewsletterIntoItem(item)
+
+	insertNewsletterIntoItem(item, request.promotedNewsletter)
 
 	const newItem = {
 		...item,

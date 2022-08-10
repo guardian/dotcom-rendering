@@ -74,7 +74,6 @@ interface Fields extends ArticleFormat {
 	relatedContent: Option<ResizedRelatedContent>;
 	logo: Option<Logo>;
 	webUrl: string;
-	promotedNewsletter?: Newsletter;
 }
 
 interface MatchReport extends Fields {

@@ -75,8 +75,10 @@ const insertNewsletterIntoStandard = (
 	return body;
 };
 
-export const insertNewsletterIntoItem = (item: Item): Item => {
-	const { promotedNewsletter } = item;
+export const insertNewsletterIntoItem = (
+	item: Item,
+	promotedNewsletter?: Newsletter,
+): Item => {
 	if (!promotedNewsletter) {
 		return item;
 	}
@@ -95,10 +97,12 @@ export const insertNewsletterIntoItem = (item: Item): Item => {
 		case ArticleDesign.Interview:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Obituary:
-			item.body = insertNewsletterIntoStandard(item.body, promotedNewsletter);
+			item.body = insertNewsletterIntoStandard(
+				item.body,
+				promotedNewsletter,
+			);
 			break;
 	}
 
 	return item;
 };
-
