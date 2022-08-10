@@ -1,5 +1,9 @@
-import { Newsletter } from 'item';
+import { Newsletter, Item } from 'item';
 import fetch from 'node-fetch';
+import { Result, ResultKind } from '@guardian/types';
+import { BodyElement } from 'bodyElement';
+import { ElementKind } from 'bodyElementKind';
+import { ArticleDesign } from '@guardian/libs';
 
 const interval = 1000 * 60 * 1;
 const newsletterApiUrl = 'https://newsletters.guardianapis.com/newsletters';
@@ -54,3 +58,47 @@ export const getNewsletterData = async (
 	const dataForId = data.find((_) => _.identityName === id);
 	return dataForId ? newsletterResponseToNewsletter(dataForId) : undefined;
 };
+
+const insertNewsletterIntoStandard = (
+	body: Array<Result<string, BodyElement>>,
+	newsletter: Newsletter,
+): Array<Result<string, BodyElement>> => {
+	const element: BodyElement = {
+		kind: ElementKind.NewsletterSignUp,
+		...newsletter,
+	};
+
+	body.unshift({
+		kind: ResultKind.Ok,
+		value: element,
+	});
+	return body;
+};
+
+export const insertNewsletterIntoItem = (item: Item): Item => {
+	const { promotedNewsletter } = item;
+	if (!promotedNewsletter) {
+		return item;
+	}
+
+	switch (item.design) {
+		case ArticleDesign.Standard:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Video:
+		case ArticleDesign.Review:
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Feature:
+		case ArticleDesign.Recipe:
+		case ArticleDesign.MatchReport:
+		case ArticleDesign.Interview:
+		case ArticleDesign.Editorial:
+		case ArticleDesign.Obituary:
+			item.body = insertNewsletterIntoStandard(item.body, promotedNewsletter);
+			break;
+	}
+
+	return item;
+};
+

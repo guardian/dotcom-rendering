@@ -23,6 +23,7 @@ import type { ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
 import { pageFonts } from 'styles';
+import { insertNewsletterIntoItem } from './newsletterData';
 
 // ----- Types ----- //
 
@@ -169,6 +170,7 @@ function render(
 ): Page {
 	const item = fromCapi({ docParser, salt: imageSalt })(request, page);
 	item.promotedNewsletter = request.promotedNewsletter
+	insertNewsletterIntoItem(item)
 
 	const clientScript = map(getAssetLocation)(scriptName(item));
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);

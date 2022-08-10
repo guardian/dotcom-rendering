@@ -30,6 +30,7 @@ import {
 	editionsPageFonts as prodFonts,
 } from 'styles';
 import { Stage } from './appIdentity';
+import { insertNewsletterIntoItem } from './newsletterData';
 
 // ----- Types ----- //
 
@@ -167,6 +168,7 @@ function render(
 	const environment = getEditionsEnv(isPreview, path);
 	const item = fromCapi({ docParser, salt: imageSalt })(request, none);
 	item.promotedNewsletter = request.promotedNewsletter
+	insertNewsletterIntoItem(item)
 
 	const newItem = {
 		...item,

@@ -15,7 +15,7 @@ import LabsLayout from 'components/Layout/LabsLayout';
 import LiveLayout from 'components/Layout/LiveLayout';
 import MediaLayout from 'components/Layout/MediaLayout';
 import StandardLayout from 'components/Layout/StandardLayout';
-import type { Item, Newsletter } from 'item';
+import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
 import ImmersiveLayout from './ImmersiveLayout';
@@ -29,17 +29,6 @@ const renderWithAds =
 			renderAll(format, elements),
 			format,
 		);
-
-const insertNewsletterSignUp = (
-	body: BodyElement[],
-	newsletter: Newsletter,
-): BodyElement[] => {
-	body.unshift({ // TO DO - placement logic?
-		kind: ElementKind.NewsletterSignUp,
-		...newsletter,
-	});
-	return body;
-};
 
 // ----- Component ----- //
 
@@ -67,10 +56,6 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 	}
 
 	const body = partition(item.body).oks;
-
-	if (item.promotedNewsletter) {
-		insertNewsletterSignUp(body, item.promotedNewsletter);
-	}
 
 	const render = renderWithAds(shouldHideAds);
 
