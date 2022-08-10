@@ -245,6 +245,34 @@ const Card33_Card33_Ad33 = ({
 );
 
 /**
+ * If the count of cards is odd there is just a single card on
+ * the bottom row with nothing under it which does not need
+ * padding
+ */
+function shouldPadWhenOdd(i: number, noOfCards: number) {
+	return i !== noOfCards - 1;
+}
+
+/**
+ * If the count of cards is even the last two sit on the bottom
+ * row with nothing underneath so we don't want to pad them
+ */
+function shouldPadWhenEven(i: number, noOfCards: number) {
+	return i !== noOfCards - 1 && i !== noOfCards - 2;
+}
+
+/**
+ *
+ * When there is an odd number of cards the last card spans
+ * both columns so we don't want to push the divider for the
+ * previous two cards above it down. If we did it would
+ * touch
+ */
+function shouldOffsetWhenOdd(i: number, noOfCards: number) {
+	return i !== noOfCards - 2 && i !== noOfCards - 3;
+}
+
+/**
  * FixedMediumSlowXIIMPU
  *
  */
@@ -333,41 +361,6 @@ export const FixedMediumSlowXIIMPU = ({
 			const topThree = trails.slice(0, 3);
 			const remainingCards = trails.slice(3, 9);
 			const lengthIsEven = remainingCards.length % 2 === 0;
-
-			/**
-			 * If the count of cards is odd there is just a single card on
-			 * the bottom row with nothing under it which does not need
-			 * padding
-			 */
-			function shouldPadWhenOdd(i: number) {
-				return i !== remainingCards.length - 1;
-			}
-
-			/**
-			 * If the count of cards is even the last two sit on the bottom
-			 * row with nothing underneath so we don't want to pad them
-			 */
-			function shouldPadWhenEven(i: number) {
-				return (
-					i !== remainingCards.length - 1 &&
-					i !== remainingCards.length - 2
-				);
-			}
-
-			/**
-			 *
-			 * When there is an odd number of cards the last card spans
-			 * both columns so we don't want to push the divider for the
-			 * previous two cards above it down. If we did it would
-			 * touch
-			 */
-			function shouldOffsetWhenOdd(i: number) {
-				return (
-					i !== remainingCards.length - 2 &&
-					i !== remainingCards.length - 3
-				);
-			}
-
 			return (
 				<>
 					<Card33_Card33_Card33
@@ -398,14 +391,21 @@ export const FixedMediumSlowXIIMPU = ({
 										padSides={true}
 										padBottom={
 											lengthIsEven
-												? shouldPadWhenEven(trailIndex)
-												: shouldPadWhenOdd(trailIndex)
+												? shouldPadWhenEven(
+														trailIndex,
+														remainingCards.length,
+												  )
+												: shouldPadWhenOdd(
+														trailIndex,
+														remainingCards.length,
+												  )
 										}
 										offsetBottomPaddingOnDivider={
 											lengthIsEven
 												? false
 												: shouldOffsetWhenOdd(
 														trailIndex,
+														remainingCards.length,
 												  )
 										}
 										showDivider={trailIndex % 2 !== 0}
