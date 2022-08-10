@@ -71,6 +71,9 @@ const getNewsletterData = async (
 	return dataForId ? newsletterResponseToNewsletter(dataForId) : undefined;
 };
 
+// TO DO - update @guardian/apps-render-api-models,
+// have the MAPI response provide the promotedNewsletter
+// remove the hacks on the RenderingRequest type
 export const providePromotedNewsletter = async (
 	renderingRequest: RenderingRequest,
 	content: Content,

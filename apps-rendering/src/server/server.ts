@@ -337,7 +337,6 @@ async function serveArticleGet(
 			async ([content, relatedContent]: [Content, RelatedContent]) => {
 				const footballContent = await getFootballContent(content);
 
-				// TO DO - update @guardian/apps-render-api-models, remove the hack on the RenderingRequest type
 				const mockedRenderingRequest: RenderingRequest = {
 					content,
 					targetingParams: {
