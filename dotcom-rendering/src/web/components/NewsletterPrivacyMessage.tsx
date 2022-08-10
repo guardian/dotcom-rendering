@@ -44,7 +44,7 @@ export const NewsletterPrivacyMessage = () => (
 		Newsletters may contain info about charities, online ads, and content
 		funded by outside parties. For more information see our{' '}
 		<ExternalLink href={hrefLookup.guardianPrivacyPolicy}>
-			privacy policy
+			Privacy Policy
 		</ExternalLink>
 		. We use Google reCaptcha to protect our website and the Google{' '}
 		<ExternalLink href={hrefLookup.googlePrivacyPolicy}>
