@@ -2,6 +2,7 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
@@ -34,6 +35,7 @@ import ImmersiveMetadata from './ImmersiveMetadata';
 
 interface Props {
 	item: Item;
+	edition: Edition;
 }
 
 const styles = css`
@@ -226,7 +228,7 @@ const ShortMetadata: FC<Props> = ({ item }: Props) => (
 	</div>
 );
 
-const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
+const MetadataWithAlertSwitch: FC<Props> = ({ item, edition }: Props) => {
 	const { design } = item;
 	const [checked, setChecked] = useState<boolean>(false);
 	return (
@@ -245,7 +247,11 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 				<div css={liveBylineStyles}>
 					<Byline {...item} />
 				</div>
-				<Dateline date={item.publishDate} format={item} />
+				<Dateline
+					date={item.publishDate}
+					format={item}
+					edition={edition}
+				/>
 				<Follow
 					format={getFormat(item)}
 					contributors={item.contributors}

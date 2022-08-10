@@ -143,7 +143,7 @@ const LiveLayout: FC<Props> = ({ item, edition }) => {
 			<main css={mainStyles(item)}>
 				<GridItem area="metadata">
 					<div css={metadataWrapperStyles(item)}>
-						<Metadata item={item} />
+						<Metadata item={item} edition={edition} />
 					</div>
 				</GridItem>
 
