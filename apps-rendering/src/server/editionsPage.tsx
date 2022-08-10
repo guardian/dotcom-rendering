@@ -30,7 +30,7 @@ import {
 	editionsPageFonts as prodFonts,
 } from 'styles';
 import { Stage } from './appIdentity';
-import { insertNewsletterIntoItem } from './newsletterData';
+import { insertNewsletterIntoItem } from './insertNewsletter';
 
 // ----- Types ----- //
 

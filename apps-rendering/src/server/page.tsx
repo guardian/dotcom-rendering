@@ -23,7 +23,7 @@ import type { ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
 import { pageFonts } from 'styles';
-import { insertNewsletterIntoItem } from './newsletterData';
+import { insertNewsletterIntoItem } from './insertNewsletter';
 
 // ----- Types ----- //
 
