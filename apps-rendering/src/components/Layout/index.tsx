@@ -36,7 +36,7 @@ const insertNewsletterSignUp = (
 ): BodyElement[] => {
 	body.unshift({ // TO DO - placement logic?
 		kind: ElementKind.NewsletterSignUp,
-		newsletter,
+		...newsletter,
 	});
 	return body;
 };

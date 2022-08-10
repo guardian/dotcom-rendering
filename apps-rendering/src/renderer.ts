@@ -81,7 +81,7 @@ import {
 	themeToPillar,
 	themeToPillarString,
 } from 'themeStyles';
-import NewsletterSignupForm from 'components/NewsletterSignupForm';
+import NewsletterSignup from 'components/NewsletterSignup';
 
 // ----- Renderer ----- //
 
@@ -704,7 +704,7 @@ const render =
 				return h(Quiz, { format, element });
 
 			case ElementKind.NewsletterSignUp:
-				return h(NewsletterSignupForm, { format, element });
+				return h(NewsletterSignup, { format, element });
 		}
 	};
 
