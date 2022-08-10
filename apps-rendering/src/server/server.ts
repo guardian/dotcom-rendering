@@ -2,6 +2,7 @@
 
 import 'source-map-support/register'; // activating the source map support
 import path from 'path';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
@@ -311,6 +312,21 @@ async function serveEditionsArticlePost(
 	}
 }
 
+function getEdition(maybeEdition: string): Edition {
+	switch (maybeEdition) {
+		case 'uk':
+			return Edition.UK;
+		case 'us':
+			return Edition.US;
+		case 'au':
+			return Edition.AU;
+		case 'international':
+			return Edition.INTERNATIONAL;
+		default:
+			return Edition.UK;
+	}
+}
+
 async function serveArticleGet(
 	req: Request,
 	res: ExpressResponse,
@@ -319,6 +335,7 @@ async function serveArticleGet(
 		const articleId = req.params[0] || defaultId;
 		const isEditions = req.query.editions === '';
 		const capiContent = await askCapiFor(articleId);
+		const edition = getEdition(req.params.edition);
 
 		await either(
 			(errorStatus: number) => {
@@ -337,6 +354,7 @@ async function serveArticleGet(
 					commentCount: 30,
 					relatedContent,
 					footballContent: resultToNullable(footballContent),
+					edition,
 				};
 
 				const richLinkDetails = req.query.richlink === '';
@@ -401,7 +419,6 @@ app.get(
 	serveArticleGet,
 );
 app.get('/:edition(uk|us|au|international)/*', express.raw(), serveArticleGet);
-app.get('/*', (req, res) => res.redirect(`/uk${req.originalUrl}`));
 
 app.post('/article', express.raw(), serveArticlePost);
 
