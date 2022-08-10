@@ -10,29 +10,7 @@ const fauxLinkStyles = css`
 	right: 0;
 	bottom: 0;
 	left: 0;
-`;
-
-const baseLinkStyles = css`
-	display: flex;
-	/* a tag specific styles */
-	color: inherit;
-	text-decoration: none;
 	background-color: transparent;
-
-	/* The whole card is one link so we card level styles here */
-	width: 100%;
-
-	/* Sometimes a headline contains it's own link so we use the
-       approach described below to deal with nested links
-       See: https://css-tricks.com/nested-links/ */
-	:before {
-		content: '';
-		position: absolute;
-		left: 0;
-		top: 0;
-		right: 0;
-		bottom: 0;
-	}
 
 	:focus {
 		${focusHalo};
@@ -47,10 +25,6 @@ type Props = {
 
 export const CardLink = ({ linkTo, dataLinkName = 'article' }: Props) => {
 	return (
-		<a
-			href={linkTo}
-			css={[fauxLinkStyles, baseLinkStyles]}
-			data-link-name={dataLinkName}
-		/>
+		<a href={linkTo} css={fauxLinkStyles} data-link-name={dataLinkName} />
 	);
 };
