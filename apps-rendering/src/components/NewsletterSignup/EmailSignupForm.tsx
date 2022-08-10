@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { neutral, space, textSans } from '@guardian/source-foundations';
+import { neutral, pxToRem, remSpace, textSans } from '@guardian/source-foundations';
 import { Button, Label, TextInput } from '@guardian/source-react-components';
 import type { FC } from 'react';
 
@@ -45,11 +45,11 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 					hideLabel
 					label={'Enter your email address'}
 					cssOverrides={css`
-						height: 36px;
-						margin-right: ${space[3]}px;
+						height: 2.25rem;
+						margin-right: ${remSpace[3]};
 						margin-top: 0;
-						margin-bottom: ${space[2]}px;
-						flex-basis: 335px;
+						margin-bottom: ${remSpace[2]};
+						flex-basis: ${pxToRem(335)}rem;
 					`}
 				/>
 				<Button
