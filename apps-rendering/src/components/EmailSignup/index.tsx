@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { remSpace, text, textSans } from '@guardian/source-foundations';
+import { neutral, remSpace, textSans } from '@guardian/source-foundations';
 import { withDefault } from '@guardian/types';
 import type { EmailSignup } from 'embed';
 import { maybeRender } from 'lib';
@@ -25,7 +25,7 @@ const styles = css`
 
 const captionStyles = css`
 	${textSans.xsmall()}
-	color: ${text.supporting};
+	color: ${neutral[46]};
 	padding-bottom: ${remSpace[1]};
 `;
 

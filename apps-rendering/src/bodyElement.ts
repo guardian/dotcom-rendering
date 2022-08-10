@@ -111,9 +111,8 @@ interface AudioAtom {
 	title: string;
 }
 
-interface NewsletterSignUp {
+interface NewsletterSignUp  extends Newsletter {
 	kind: ElementKind.NewsletterSignUp;
-	newsletter: Newsletter;
 }
 
 type BodyElement =
