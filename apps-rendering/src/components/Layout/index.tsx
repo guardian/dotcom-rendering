@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
@@ -35,6 +36,7 @@ const renderWithAds =
 interface Props {
 	item: Item;
 	shouldHideAds: boolean;
+	edition: Edition;
 }
 
 const notImplemented = (
