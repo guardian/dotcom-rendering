@@ -4,9 +4,12 @@ import { Result, ResultKind } from '@guardian/types';
 import { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
 import { ArticleDesign } from '@guardian/libs';
+import { Content } from '@guardian/content-api-models/v1/content';
+import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 
 const interval = 1000 * 60 * 1;
 const newsletterApiUrl = 'https://newsletters.guardianapis.com/newsletters';
+const NEWSLETTER_TAG_PREFIX = 'campaign/email/';
 let updateTime = 0;
 let storedData: NewsletterResponse[] = [];
 
@@ -20,6 +23,19 @@ interface NewsletterResponse {
 	group: string;
 	theme: string;
 }
+
+const getNewsletterFromTag = async (
+	content: Content,
+): Promise<Newsletter | undefined> => {
+	const newsletterTag = content.tags?.find((tag) =>
+		tag.id.startsWith(NEWSLETTER_TAG_PREFIX),
+	);
+	const newsletterId = newsletterTag?.id.split('/').reverse()[0];
+	if (newsletterId) {
+		return await getNewsletterData(newsletterId);
+	}
+	return undefined;
+};
 
 const newsletterResponseToNewsletter = (
 	data: NewsletterResponse,
@@ -51,7 +67,7 @@ const loadData = async (): Promise<NewsletterResponse[]> => {
 	}
 };
 
-export const getNewsletterData = async (
+const getNewsletterData = async (
 	id: string,
 ): Promise<Newsletter | undefined> => {
 	const data = await loadData();
@@ -105,4 +121,12 @@ export const insertNewsletterIntoItem = (
 	}
 
 	return item;
+};
+
+export const providePromotedNewsletter = async (
+	renderingRequest: RenderingRequest,
+	content: Content,
+): Promise<RenderingRequest & { promotedNewsletter?: Newsletter }> => {
+	const newsletter = await getNewsletterFromTag(content);
+	return { ...renderingRequest, promotedNewsletter: newsletter };
 };
