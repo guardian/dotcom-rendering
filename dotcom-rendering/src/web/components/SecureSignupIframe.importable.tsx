@@ -34,6 +34,11 @@ type Props = {
 	successDescription: string;
 };
 
+// The ts.dom interface for FontFaceSet does not contain the .add method
+type FontFaceSetWithAdd = FontFaceSet & {
+	add?: { (font: FontFace): void };
+};
+
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
 	<InlineError>
 		<span>
@@ -286,32 +291,12 @@ export const SecureSignupIframe = ({
 	const addFontToIframe = (requiredFontNames: string[]) => {
 		const { current: iframe } = iframeRef;
 
-		// fallback: clone the whole fonts node into the iframe.
-		// used if the browser does not support FontFaceSet.add
-		const fallbackMethod = () => {
-			const fontNode = document
-				.querySelector('style.webfont')
-				?.cloneNode(true);
-
-			if (fontNode) {
-				iframe?.contentDocument?.head.appendChild(fontNode);
-			}
-		};
-
-		const iframeFontFaceSet = iframe?.contentDocument?.fonts;
-		if (!iframeFontFaceSet) {
-			return fallbackMethod();
-		}
-
-		// The ts.dom interface for FontFaceSet does not contain the .add method,
-		// browser support is not universal.
-		const iframeFontSetWithAddMethod = iframeFontFaceSet as FontFaceSet & {
-			add: { (font: FontFace): void };
-		};
-
-		// use the fallback method if add is not supported.
-		if (typeof iframeFontSetWithAddMethod.add === 'undefined') {
-			return fallbackMethod();
+		// FontFace.add is not supported (IE), allow fallback to system fonts
+		const iframeFontFaceSet = iframe?.contentDocument?.fonts as
+			| undefined
+			| FontFaceSetWithAdd;
+		if (!iframeFontFaceSet || !iframeFontFaceSet.add) {
+			return;
 		}
 
 		// get all the fontFaces on the parent matching the list of font names
@@ -324,8 +309,10 @@ export const SecureSignupIframe = ({
 
 		// add the fonts to the iframe
 		requiredFonts.forEach((font) => {
-			if (requiredFontNames.includes(font.family)) {
-				iframeFontSetWithAddMethod.add(font);
+			// it shouldn't be necessary to test for the add method again
+			// but still ts considers it possibily undefined
+			if (iframeFontFaceSet.add) {
+				iframeFontFaceSet.add(font);
 			}
 		});
 	};
