@@ -58,8 +58,8 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 					title="Sign up"
 					cssOverrides={css`
 						background-color: ${neutral[0]};
-						margin-bottom: ${space[2]}px;
-						flex-basis: 118px;
+						margin-bottom: ${remSpace[2]};
+						flex-basis: ${pxToRem(118)}rem;
 						justify-content: center;
 					`}
 				>

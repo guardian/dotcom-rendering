@@ -27,24 +27,24 @@ interface Props {
 
 const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 	clear: both;
-	border: ${neutral[0]} 3px dashed;
-	border-radius: ${space[3]}px;
-	margin-bottom: ${space[3]}px;
-	padding: ${space[2]}px;
+	border: ${neutral[0]} 0.1875rem dashed;
+	border-radius: ${remSpace[3]};
+	margin-bottom: ${remSpace[3]};
+	padding: ${remSpace[2]};
 
 	${from.tablet} {
-		padding: ${space[2]}px ${space[3]}px;
+		padding: ${remSpace[2]} ${remSpace[3]};
 	}
 `;
 
 const stackBelowTabletStyles = css`
 	display: flex;
 	flex-direction: column;
-	margin-bottom: ${space[2]}px;
+	margin-bottom: ${remSpace[2]};
 
 	${from.tablet} {
 		flex-direction: row;
-		margin-bottom: ${space[1]}px;
+		margin-bottom: ${remSpace[1]};
 	}
 `;
 
@@ -58,7 +58,7 @@ const titleStyles = (theme: string): SerializedStyles => css`
 
 const descriptionStyles = css`
 	${textSans.xsmall({ lineHeight: 'tight' })}
-	margin-bottom: ${space[2]}px;
+	margin-bottom: ${remSpace[2]};
 `;
 
 const iconHolderStyles = css`
@@ -67,7 +67,7 @@ const iconHolderStyles = css`
 	svg {
 		background-color: ${brandAlt[400]};
 		border-radius: 50%;
-		margin-right: ${space[2]}px;
+		margin-right: ${remSpace[2]};
 	}
 
 	b {
@@ -81,7 +81,7 @@ const iconHolderStyles = css`
 // When stacked below the title, there should be 8px (space[2]) between
 // the title and the Icon and then 8px between the Icon and the description
 const noHeightFromTabletStyles = css`
-	margin-top: ${space[2]}px;
+	margin-top: ${remSpace[2]};
 
 	${from.tablet} {
 		margin-top: 0;
