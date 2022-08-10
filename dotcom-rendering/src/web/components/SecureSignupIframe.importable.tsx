@@ -288,7 +288,7 @@ export const SecureSignupIframe = ({
 		resetIframeHeight();
 	};
 
-	const addFontToIframe = (requiredFontNames: string[]) => {
+	const addFontsToIframe = (requiredFontNames: string[]) => {
 		const { current: iframe } = iframeRef;
 
 		// FontFace.add is not supported (IE), allow fallback to system fonts
@@ -319,7 +319,7 @@ export const SecureSignupIframe = ({
 
 	const onIFrameLoad = (): void => {
 		attachListenersToIframe();
-		addFontToIframe(['GuardianTextSans']);
+		addFontsToIframe(['GuardianTextSans']);
 	};
 
 	const captchaSiteKey = isServer
