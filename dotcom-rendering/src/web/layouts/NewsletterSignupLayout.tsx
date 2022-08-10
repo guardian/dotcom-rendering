@@ -449,7 +449,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 					</Columns>
 
 					<div css={topMarginStyle()}>
-						<NewsletterPrivacyMessage legacy={false} />
+						<NewsletterPrivacyMessage />
 					</div>
 				</ContainerLayout>
 
