@@ -17,6 +17,13 @@ enum RelatedItemType {
     COMMENT
 }
 
+enum Edition {
+	UK,
+	US,
+	AU,
+	INTERNATIONAL
+}
+
 struct Image {
     1: required string url
     2: required i32 height
@@ -121,4 +128,5 @@ struct RenderingRequest {
     6: optional list<Campaign> campaigns
     7: optional RelatedContent relatedContent
     8: optional FootballContent footballContent
+    9: optional Edition edition
 }

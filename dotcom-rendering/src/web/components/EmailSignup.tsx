@@ -52,7 +52,7 @@ const titleStyles = (theme: string) => css`
 	}
 `;
 
-// When in a row with the title, the Icon in the NewsletterFrequency
+// When in a row with the title, the Icon in the NewsletterDetail
 // component should not affect the spacing between the title text and
 // the description text, which should be 4px (space [1]).
 // When stacked below the title, there should be 8px (space[2]) between
@@ -85,7 +85,7 @@ export const EmailSignup = ({
 		<aside css={containerStyles}>
 			<div css={stackBelowTabletStyles}>
 				<p css={titleStyles(theme)}>
-					Sign up to <span>{name}</span> today
+					Sign up to <span>{name}</span>
 				</p>
 				<div css={noHeightFromTabletStyles}>
 					<NewsletterDetail text={frequency} />

@@ -1,11 +1,11 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
 import { ContainerLayout } from './ContainerLayout';
-import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
+import { FixedSmallSlowI } from './FixedSmallSlowI';
 
 export default {
-	component: FixedSmallSlowVMPU,
-	title: 'Components/FixedSmallSlowVMPU',
+	component: FixedSmallSlowI,
+	title: 'Components/FixedSmallSlowI',
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -24,13 +24,13 @@ export default {
 
 export const Default = () => (
 	<ContainerLayout
-		title="FixedSmallSlowVMPU"
+		title="FixedSmallSlowI"
 		showTopBorder={true}
 		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
-		<FixedSmallSlowVMPU trails={trails} showAge={true} index={1} />
+		<FixedSmallSlowI trails={trails} showAge={true} />
 	</ContainerLayout>
 );
-Default.story = { name: 'FixedSmallSlowVMPU' };
+Default.story = { name: 'FixedSmallSlowI' };

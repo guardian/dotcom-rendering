@@ -56,7 +56,7 @@ export const NewsletterPrivacyMessage = ({ legacy = true }: Props) => (
 				Newsletters may contain info about charities, online ads, and
 				content funded by outside parties. For more information see our{' '}
 				<LegalLink href={GUARDIAN_PRIVACY_POLICY}>
-					privacy policy
+					Privacy Policy
 				</LegalLink>
 				. We use Google reCaptcha to protect our website and the Google{' '}
 				<LegalLink href={GOOGLE_PRIVACY_POLICY}>
@@ -75,7 +75,7 @@ export const NewsletterPrivacyMessage = ({ legacy = true }: Props) => (
 				charities or online advertisements. Newsletters may also contain
 				content funded by outside parties.{' '}
 				<LegalLink href={GUARDIAN_PRIVACY_POLICY}>
-					See privacy policy here
+					See Privacy Policy here
 				</LegalLink>
 				. This site is protected by reCAPTCHA and the Google{' '}
 				<LegalLink href={GOOGLE_PRIVACY_POLICY}>

@@ -59,9 +59,12 @@ export const LiveBlogRenderer = ({
 	availableTopics,
 	selectedTopics,
 }: Props) => {
+	const filtered =
+		(selectedTopics && selectedTopics.length > 0) || filterKeyEvents;
+
 	return (
 		<>
-			{pinnedPost && onFirstPage && (
+			{pinnedPost && onFirstPage && !filtered && (
 				<>
 					<Island clientOnly={true} deferUntil="idle">
 						<EnhancePinnedPost />

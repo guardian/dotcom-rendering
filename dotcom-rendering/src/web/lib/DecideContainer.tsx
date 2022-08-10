@@ -7,8 +7,10 @@ import type {
 import { DynamicFast } from '../components/DynamicFast';
 import { DynamicPackage } from '../components/DynamicPackage';
 import { DynamicSlow } from '../components/DynamicSlow';
+import { DynamicSlowMPU } from '../components/DynamicSlowMPU';
 import { FixedLargeSlowXIV } from '../components/FixedLargeSlowXIV';
 import { FixedMediumSlowVI } from '../components/FixedMediumSlowVI';
+import { FixedSmallSlowI } from '../components/FixedSmallSlowI';
 import { FixedSmallSlowIII } from '../components/FixedSmallSlowIII';
 import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
 import { FixedSmallSlowVMPU } from '../components/FixedSmallSlowVMPU';
@@ -16,6 +18,7 @@ import { FixedSmallSlowVThird } from '../components/FixedSmallSlowVThird';
 
 type Props = {
 	trails: DCRFrontCard[];
+	index: number;
 	groupedTrails: DCRGroupedTrails;
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
@@ -24,6 +27,7 @@ type Props = {
 
 export const DecideContainer = ({
 	trails,
+	index,
 	groupedTrails,
 	containerType,
 	containerPalette,
@@ -44,6 +48,15 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+				/>
+			);
+		case 'dynamic/slow-mpu':
+			return (
+				<DynamicSlowMPU
+					groupedTrails={groupedTrails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					index={index}
 				/>
 			);
 		case 'dynamic/package':
@@ -76,11 +89,20 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					index={index}
 				/>
 			);
 		case 'fixed/small/slow-III':
 			return (
 				<FixedSmallSlowIII
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			);
+		case 'fixed/small/slow-I':
+			return (
+				<FixedSmallSlowI
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}

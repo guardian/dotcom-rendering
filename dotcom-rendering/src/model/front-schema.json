@@ -363,6 +363,9 @@
         },
         "pageFooter": {
             "$ref": "#/definitions/FooterType"
+        },
+        "isAdFreeUser": {
+            "type": "boolean"
         }
     },
     "required": [
@@ -371,6 +374,7 @@
         "editionId",
         "editionLongForm",
         "guardianBaseURL",
+        "isAdFreeUser",
         "nav",
         "pageFooter",
         "pageId",
