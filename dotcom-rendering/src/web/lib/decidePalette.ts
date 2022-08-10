@@ -432,7 +432,7 @@ const textCardKicker = (format: ArticleFormat): string => {
 		(format.design === ArticleDesign.Comment ||
 			format.design === ArticleDesign.Letter)
 	)
-		return opinion[550];
+		return brandAlt[400];
 	if (format.theme === ArticleSpecial.SpecialReport) return brandAlt[400];
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -468,7 +468,7 @@ const textCardFooter = (format: ArticleFormat): string => {
 		case ArticleDesign.Letter:
 			switch (format.theme) {
 				case ArticleSpecial.SpecialReport:
-					return opinion[550];
+					return neutral[86];
 				default:
 					return neutral[46];
 			}
@@ -1090,6 +1090,12 @@ const borderArticle: (format: ArticleFormat) => string = (format) => {
 
 const borderLines = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return border.primary;
+	if (
+		format.theme === ArticleSpecial.SpecialReport &&
+		(format.design === ArticleDesign.Comment ||
+			format.design === ArticleDesign.Letter)
+	)
+		return neutral[46];
 	return border.secondary;
 };
 
