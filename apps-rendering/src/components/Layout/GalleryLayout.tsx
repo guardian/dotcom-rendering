@@ -1,7 +1,9 @@
 // ----- Imports ----- //
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { from, neutral } from '@guardian/source-foundations';
-import { map, withDefault } from '@guardian/types';
+import { border } from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
+import { neutral } from '@guardian/source-foundations';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import MainMedia, { GalleryCaption } from 'components/MainMedia';
@@ -13,16 +15,14 @@ import Tags from 'components/Tags';
 import { grid } from 'grid/grid';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import { pipe } from 'lib';
 import type { FC } from 'react';
-import { themeToPillarString } from 'themeStyles';
 
 // ----- Component ----- //
 
-const headerStyles = css`
+const headerStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.container}
 	background-color: ${neutral[7]};
-	border-bottom: 1px solid ${neutral[20]};
+	border-bottom: 1px solid ${border.galleryImage(format)};
 `;
 
 const wrapperStyles = css`
@@ -38,48 +38,36 @@ type Props = {
 };
 
 const GalleryLayout: FC<Props> = ({ item, children }) => {
-	const commentContainer = item.commentable
-		? pipe(
-				item.internalShortId,
-				map((id) => (
-					<section
-						css={onwardStyles}
-						id="comments"
-						data-closed={false}
-						data-pillar={themeToPillarString(item.theme)}
-						data-short-id={id}
-					></section>
-				)),
-				withDefault(<></>),
-		  )
-		: null;
+	const format = getFormat(item);
 
 	return (
-		<main>
-			<article css={wrapperStyles}>
-				<header css={headerStyles}>
-					<MainMedia
-						mainMedia={item.mainMedia}
-						format={getFormat(item)}
-					/>
-					<Series item={item} />
-					<Headline item={item} />
-					<Standfirst item={item} />
-					<Metadata item={item} />
-					<GalleryCaption
-						mainMedia={item.mainMedia}
-						format={getFormat(item)}
-					/>
-				</header>
-				{children}
-				<Tags item={item} />
-			</article>
+		<>
+			<main>
+				<article css={wrapperStyles}>
+					<header css={headerStyles(format)}>
+						<MainMedia
+							mainMedia={item.mainMedia}
+							format={getFormat(item)}
+						/>
+						<Series item={item} />
+						<Headline item={item} />
+						<Standfirst item={item} />
+						<Metadata item={item} />
+						<GalleryCaption
+							mainMedia={item.mainMedia}
+							format={getFormat(item)}
+						/>
+					</header>
+					{children}
+					<Tags item={item} />
+				</article>
+			</main>
 			<section css={onwardStyles}>
 				<RelatedContent item={item} />
 			</section>
-			{commentContainer}
+
 			<Footer isCcpa={false} format={item} />
-		</main>
+		</>
 	);
 };
 

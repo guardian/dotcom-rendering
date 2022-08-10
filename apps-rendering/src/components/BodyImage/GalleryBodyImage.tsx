@@ -1,5 +1,8 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
+import { border } from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
 	headline,
@@ -30,7 +33,7 @@ const figureStyles = css`
 	}
 `;
 
-const imageWrapperStyles = css`
+const imageWrapperStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.column.centre}
 	grid-row: 1;
 
@@ -45,17 +48,15 @@ const imageWrapperStyles = css`
 			position: absolute;
 			top: 0;
 			bottom: 0;
-			border-left: 1px solid ${neutral[20]};
+			border-left: 1px solid ${border.galleryImage(format)};
 		}
 
 		&::before {
-			left: 0;
-			transform: translateX(-10px);
+			left: -10px;
 		}
 
 		&::after {
-			right: 0;
-			transform: translateX(10px);
+			right: -10px;
 		}
 	}
 
@@ -69,7 +70,7 @@ const imageWrapperStyles = css`
 	}
 `;
 
-const captionStyles = css`
+const captionStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.column.centre}
 	grid-row: 2;
 	padding-bottom: 1.75rem;
@@ -98,9 +99,8 @@ const captionStyles = css`
 			position: absolute;
 			top: 0;
 			bottom: 0;
-			border-left: 1px solid ${neutral[20]};
-			left: 0;
-			transform: translateX(-10px);
+			border-left: 1px solid ${border.galleryImage(format)};
+			left: -10px;
 		}
 	}
 `;
@@ -113,7 +113,7 @@ const GalleryBodyImage: FC<BodyImageProps> = ({
 	caption,
 }) => (
 	<figure css={css(figureStyles)}>
-		<div css={imageWrapperStyles}>
+		<div css={imageWrapperStyles(format)}>
 			<Img
 				image={image}
 				sizes={getDefaultSizes(image.role)}
@@ -125,7 +125,7 @@ const GalleryBodyImage: FC<BodyImageProps> = ({
 		</div>
 
 		<FigCaption
-			css={captionStyles}
+			css={captionStyles(format)}
 			format={format}
 			supportsDarkMode={supportsDarkMode}
 		>
