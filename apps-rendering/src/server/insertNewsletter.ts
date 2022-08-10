@@ -1,24 +1,50 @@
 import { Newsletter, Item } from 'item';
-import { Result, ResultKind } from '@guardian/types';
+import { Option, Result, ResultKind } from '@guardian/types';
 import { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
 import { ArticleDesign } from '@guardian/libs';
+import { logger } from 'logger';
 
+	// PROBLEM
+	// in AR, sets of paragraphs are combined into one Text BodyElement
+	// may need to call this function BEFORE the content.blocks.elements
+	// are combined into an Item :(
 
-const insertNewsletterIntoStandard = (
+const findInsertPosition = (
+	body: Result<string, BodyElement>[],
+): number | null => {
+
+	return 1;
+};
+
+const tryToinsertNewsletterIntoStandard = (
 	body: Array<Result<string, BodyElement>>,
 	newsletter: Newsletter,
+	internalShortId: Option<string>,
 ): Array<Result<string, BodyElement>> => {
-	const element: BodyElement = {
-		kind: ElementKind.NewsletterSignUp,
-		...newsletter,
+	const insertPosition = findInsertPosition(body);
+
+	if (insertPosition === null) {
+		logger.warn(
+			`Unable to find suitable place for NewsletterSignupBlockElement`,
+			internalShortId,
+		);
+		return body;
+	}
+
+	const resultToInsert: Result<string, BodyElement> = {
+		kind: ResultKind.Ok,
+		value: {
+			kind: ElementKind.NewsletterSignUp,
+			...newsletter,
+		},
 	};
 
-	body.unshift({
-		kind: ResultKind.Ok,
-		value: element,
-	});
-	return body;
+	return [
+		...body.slice(0, insertPosition),
+		resultToInsert,
+		...body.slice(insertPosition),
+	];
 };
 
 export const insertNewsletterIntoItem = (
@@ -43,14 +69,13 @@ export const insertNewsletterIntoItem = (
 		case ArticleDesign.Interview:
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Obituary:
-			item.body = insertNewsletterIntoStandard(
+			item.body = tryToinsertNewsletterIntoStandard(
 				item.body,
 				promotedNewsletter,
+				item.internalShortId,
 			);
 			break;
 	}
 
 	return item;
 };
-
-
