@@ -23,7 +23,6 @@ const formStyle = css`
  * when implemented
  */
 const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
-
 	const handleSubmit = (): void => {
 		console.log({ newsletterId });
 	};
