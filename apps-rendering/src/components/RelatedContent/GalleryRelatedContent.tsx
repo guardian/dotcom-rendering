@@ -3,13 +3,13 @@
 import { css } from '@emotion/react';
 import { from, neutral, remSpace, until } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
-import { map, none, withDefault } from '@guardian/types';
+import { none } from '@guardian/types';
 import BylineCard from 'components/BylineCard';
 import Card from 'components/Card';
 import { grid } from 'grid/grid';
 import type { ResizedRelatedContent } from 'item';
-import { pipe } from 'lib';
-import type { FC, ReactElement } from 'react';
+import { maybeRender } from 'lib';
+import type { FC } from 'react';
 import {
 	COMMENT,
 	defaultHeadingStyles,
@@ -68,45 +68,36 @@ type Props = {
 };
 
 const GalleryRelatedContent: FC<Props> = ({ content }) =>
-	pipe(
-		content,
-		map(({ title, relatedItems, resizedImages }) => {
-			if (relatedItems.length === 0) {
-				return null;
-			}
+	maybeRender(content, ({ title, relatedItems, resizedImages }) => {
+		if (relatedItems.length === 0) {
+			return null;
+		}
 
-			return (
-				<aside css={styles}>
-					<h2 css={css(defaultHeadingStyles, headingStyles)}>
-						{title}
-					</h2>
+		return (
+			<aside css={styles}>
+				<h2 css={css(defaultHeadingStyles, headingStyles)}>{title}</h2>
 
-					<ul
-						css={css(defaultListStyles, relatedContentStyles)}
-						role="list"
-					>
-						{relatedItems.map((relatedItem, key) => {
-							return relatedItem.type === COMMENT &&
-								relatedItem.bylineImage ? (
-								<BylineCard
-									key={key}
-									relatedItem={relatedItem}
-								/>
-							) : (
-								<Card
-									key={key}
-									relatedItem={relatedItem}
-									image={resizedImages[key]}
-									kickerText={none}
-								/>
-							);
-						})}
-					</ul>
-				</aside>
-			);
-		}),
-		withDefault<ReactElement | null>(null),
-	);
+				<ul
+					css={css(defaultListStyles, relatedContentStyles)}
+					role="list"
+				>
+					{relatedItems.map((relatedItem, key) => {
+						return relatedItem.type === COMMENT &&
+							relatedItem.bylineImage ? (
+							<BylineCard key={key} relatedItem={relatedItem} />
+						) : (
+							<Card
+								key={key}
+								relatedItem={relatedItem}
+								image={resizedImages[key]}
+								kickerText={none}
+							/>
+						);
+					})}
+				</ul>
+			</aside>
+		);
+	});
 
 // ----- Exports ----- //
 
