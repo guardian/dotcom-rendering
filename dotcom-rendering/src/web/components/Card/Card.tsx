@@ -301,15 +301,23 @@ export const Card = ({
 				containerPalette={containerPalette}
 			/>
 			<CardLayout
-				imagePosition={imagePosition}
-				imagePositionOnMobile={imagePositionOnMobile}
+				imagePosition={imageUrl !== undefined ? imagePosition : 'top'}
+				imagePositionOnMobile={
+					imageUrl !== undefined ? imagePositionOnMobile : 'top'
+				}
 				minWidthInPixels={minWidthInPixels}
 			>
 				{imageType === 'mainmedia' && (
 					<ImageWrapper
 						imageSize={imageSize}
-						imagePosition={imagePosition}
-						imagePositionOnMobile={imagePositionOnMobile}
+						imagePosition={
+							imageUrl !== undefined ? imagePosition : 'top'
+						}
+						imagePositionOnMobile={
+							imageUrl !== undefined
+								? imagePositionOnMobile
+								: 'top'
+						}
 					>
 						<img src={imageUrl} alt="" role="presentation" />
 					</ImageWrapper>
@@ -420,7 +428,9 @@ export const Card = ({
 				<SupportingContent
 					supportingContent={supportingContent}
 					alignment={
-						imagePosition === 'top' || imagePosition === 'bottom'
+						imagePosition === 'top' ||
+						imagePosition === 'bottom' ||
+						imageUrl === undefined
 							? 'vertical'
 							: 'horizontal'
 					}

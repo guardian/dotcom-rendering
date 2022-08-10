@@ -152,8 +152,10 @@ export const enhanceCards = (
 						faciaCard.card.webPublicationDateOption,
 				  ).toISOString()
 				: undefined,
-			image: faciaCard.properties.maybeContent?.trail.trailPicture
-				?.allImages[0].url,
+			image: faciaCard.display.imageHide
+				? undefined
+				: faciaCard.properties.maybeContent?.trail.trailPicture
+						?.allImages[0].url,
 			kickerText: faciaCard.header.kicker?.item?.properties.kickerText,
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(
