@@ -56,7 +56,6 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 	}
 
 	const body = partition(item.body).oks;
-
 	const render = renderWithAds(shouldHideAds);
 
 	if (item.theme === ArticleSpecial.Labs) {
