@@ -49,17 +49,17 @@ const renderContent = (
 // ----- Component ----- //
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
-	${grid.span('centre-column-start', 3)}
+	${grid.column.centre}
 	${headline.xsmall({ fontWeight: 'light' })}
-	padding: ${remSpace[4]} 0 ${remSpace[9]};
+	padding: ${remSpace[2]} ${remSpace[5]} ${remSpace[9]} 0;
 	color: ${text.standfirst(format)};
 
-	${from.tablet} {
-		${grid.span('centre-column-start', 8)}
+	${from.mobileLandscape} {
+		padding-top: ${remSpace[4]};
 	}
 
-	${from.desktop} {
-		${grid.span('centre-column-start', 6)}
+	${from.tablet} {
+		padding-top: ${remSpace[1]};
 	}
 
 	${from.leftCol} {
