@@ -112,6 +112,9 @@ const firstColumnLinks = css`
 	${from.desktop} {
 		padding-left: 0;
 	}
+	${until.tablet} {
+		background: ${brand[300]};
+	}
 `;
 
 const pillarColumnLinks = css`
