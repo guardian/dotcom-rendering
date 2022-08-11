@@ -47,7 +47,7 @@ const PrivacyWording: FC<Props> = ({ useCaptcha }) => {
 			</span>{' '}
 			{useCaptcha && (
 				<span>
-					We use Google reCaptcha to protect our website and the
+					We use Google reCAPTCHA to protect our website and the
 					Google{' '}
 					<Link
 						data-ignore="global-link-styling"
