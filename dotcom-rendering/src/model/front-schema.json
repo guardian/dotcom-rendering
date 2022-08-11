@@ -420,11 +420,15 @@
                         },
                         "commercial": {
                             "$ref": "#/definitions/Record<string,unknown>"
+                        },
+                        "isPaidContent": {
+                            "type": "boolean"
                         }
                     },
                     "required": [
                         "commercial",
-                        "isImageDisplayed"
+                        "isImageDisplayed",
+                        "isPaidContent"
                     ]
                 },
                 "collections": {
@@ -2571,12 +2575,16 @@
                             "uneditable"
                         ]
                     }
+                },
+                "isNetworkFront": {
+                    "type": "boolean"
                 }
             },
             "required": [
                 "collections",
                 "frontProperties",
                 "id",
+                "isNetworkFront",
                 "seoData"
             ]
         },
