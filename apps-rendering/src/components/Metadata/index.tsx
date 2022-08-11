@@ -35,7 +35,7 @@ import ImmersiveMetadata from './ImmersiveMetadata';
 
 interface Props {
 	item: Item;
-	edition: Edition;
+	edition?: Edition;
 }
 
 const styles = css`
