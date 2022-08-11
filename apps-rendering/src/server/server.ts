@@ -312,16 +312,15 @@ async function serveEditionsArticlePost(
 	}
 }
 
-function getEdition(maybeEdition: string): Edition {
-	switch (maybeEdition) {
-		case 'uk':
-			return Edition.UK;
+function editionFromString(editionString: string): Edition {
+	switch (editionString) {
 		case 'us':
 			return Edition.US;
 		case 'au':
 			return Edition.AU;
 		case 'international':
 			return Edition.INTERNATIONAL;
+		case 'uk':
 		default:
 			return Edition.UK;
 	}
@@ -335,7 +334,7 @@ async function serveArticleGet(
 		const articleId = req.params[0] || defaultId;
 		const isEditions = req.query.editions === '';
 		const capiContent = await askCapiFor(articleId);
-		const edition = getEdition(req.params.edition);
+		const edition = editionFromString(req.params.edition);
 
 		await either(
 			(errorStatus: number) => {
