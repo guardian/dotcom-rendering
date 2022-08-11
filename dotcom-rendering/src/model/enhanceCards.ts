@@ -162,7 +162,9 @@ export const enhanceCards = (
 						containerPalette,
 				  )
 				: undefined,
-			discussionId: faciaCard.discussion.discussionId,
+			discussionId: faciaCard.discussion.isCommentable
+				? faciaCard.discussion.discussionId
+				: undefined,
 			// nb. there is a distinct 'byline' property on FEFrontCard, at
 			// card.properties.byline
 			byline:

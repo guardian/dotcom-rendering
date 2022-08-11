@@ -36,6 +36,7 @@ export type Props = {
 	format: ArticleFormat;
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
+	headlineSizeOnMobile?: SmallHeadlineSize;
 	/** Even with design !== Comment, a piece can be opinion */
 	showQuotes?: boolean;
 	byline?: string;
@@ -169,6 +170,7 @@ export const Card = ({
 	format,
 	headlineText,
 	headlineSize,
+	headlineSizeOnMobile,
 	showQuotes,
 	byline,
 	showByline,
@@ -292,12 +294,7 @@ export const Card = ({
 			containerType={containerType}
 			isDynamo={isDynamo}
 		>
-			<CardLink
-				linkTo={linkTo}
-				dataLinkName={dataLinkName}
-				format={format}
-				containerPalette={containerPalette}
-			/>
+			<CardLink linkTo={linkTo} dataLinkName={dataLinkName} />
 			<CardLayout
 				imagePosition={imagePosition}
 				imagePositionOnMobile={imagePositionOnMobile}
@@ -323,6 +320,7 @@ export const Card = ({
 								format={format}
 								containerPalette={containerPalette}
 								size={headlineSize}
+								sizeOnMobile={headlineSizeOnMobile}
 								showQuotes={showQuotes}
 								kickerText={
 									format.design === ArticleDesign.LiveBlog

@@ -223,6 +223,7 @@ const textCaption = (format: ArticleFormat): string => {
 const textCaptionLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
+	if (format.design === ArticleDesign.NewsletterSignup) return BLACK;
 	return pillarPalette[format.theme].main;
 };
 
@@ -436,19 +437,10 @@ const textCardKicker = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
-				case ArticlePillar.News:
-					return news[600];
-				case ArticlePillar.Sport:
-					return sport[600];
-				case ArticlePillar.Opinion:
-					return WHITE;
-				case ArticlePillar.Culture:
-					return culture[600];
-				case ArticlePillar.Lifestyle:
-					return lifestyle[500];
 				case ArticleSpecial.Labs:
-				default:
 					return BLACK;
+				default:
+					return neutral[100];
 			}
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -482,39 +474,15 @@ const textCardFooter = (format: ArticleFormat): string => {
 			}
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
-				case ArticlePillar.News:
-					return news[600];
-				case ArticlePillar.Sport:
-					return sport[600];
-				case ArticlePillar.Opinion:
-					return WHITE;
-				case ArticlePillar.Culture:
-					return culture[600];
-				case ArticlePillar.Lifestyle:
-					return lifestyle[500];
-				case ArticleSpecial.SpecialReport:
-					return brandAlt[400];
 				case ArticleSpecial.Labs:
-				default:
 					return BLACK;
+				default:
+					return neutral[100];
 			}
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
-			switch (format.theme) {
-				case ArticleSpecial.SpecialReport:
-					return brandAlt[400];
-				case ArticlePillar.News:
-					return news[600];
-				case ArticlePillar.Sport:
-					return sport[600];
-				case ArticlePillar.Opinion:
-					return opinion[550];
-				case ArticlePillar.Lifestyle:
-				case ArticlePillar.Culture:
-				default:
-					return pillarPalette[format.theme][500];
-			}
+			return neutral[86];
 		default:
 			switch (format.theme) {
 				case ArticleSpecial.SpecialReport:

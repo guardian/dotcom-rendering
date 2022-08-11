@@ -152,6 +152,14 @@ module.exports = {
 						types: {
 							'JSX.Element': 'Prefer type inference',
 							'EmotionJSX.Element': 'Prefer type inference',
+							'React.StatelessComponent':
+								'Please use const MyThing = ({foo, bar}: Props) instead',
+							'React.FunctionalComponent':
+								'Please use const MyThing = ({foo, bar}: Props) instead',
+							'React.SC':
+								'Please use const MyThing = ({foo, bar}: Props) instead',
+							'React.FC':
+								'Please use const MyThing = ({foo, bar}: Props) instead',
 						},
 						extendDefaults: true,
 					},
