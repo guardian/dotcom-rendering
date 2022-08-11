@@ -44,10 +44,10 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 			/>
 			<form css={formStyle} action={undefined}>
 				<TextInput
-					type={'email'}
+					type="email"
 					width={30}
 					hideLabel
-					label={'Enter your email address'}
+					label="Enter your email address"
 					cssOverrides={css`
 						height: 2.25rem;
 						margin-right: ${remSpace[3]};

@@ -2,6 +2,7 @@ import { Newsletter } from 'item';
 import fetch from 'node-fetch';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
+import { stringToPillar } from 'themeStyles';
 
 const interval = 1000 * 60 * 1;
 const newsletterApiUrl = 'https://newsletters.guardianapis.com/newsletters';
@@ -41,7 +42,7 @@ const newsletterResponseToNewsletter = (
 	displayName: data.name,
 	description: data.description,
 	group: data.group,
-	theme: data.theme,
+	theme: stringToPillar(data.theme),
 });
 
 const loadData = async (): Promise<NewsletterResponse[]> => {
