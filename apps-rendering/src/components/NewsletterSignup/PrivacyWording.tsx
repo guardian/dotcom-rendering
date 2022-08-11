@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { neutral, text, textSans } from '@guardian/source-foundations';
+import { neutral, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import type { FC } from 'react';
 
@@ -13,7 +13,7 @@ interface Props {
 
 const termsStyle = css`
 	${textSans.xxsmall({ lineHeight: 'tight' })}
-	color: ${text.supporting};
+	color: ${neutral[46]};
 	a {
 		${textSans.xxsmall({ fontWeight: 'bold' })};
 		color: ${neutral[0]};
@@ -47,7 +47,7 @@ const PrivacyWording: FC<Props> = ({ useCaptcha }) => {
 			</span>{' '}
 			{useCaptcha && (
 				<span>
-					We use Google reCaptcha to protect our website and the
+					We use Google reCAPTCHA to protect our website and the
 					Google{' '}
 					<Link
 						data-ignore="global-link-styling"
