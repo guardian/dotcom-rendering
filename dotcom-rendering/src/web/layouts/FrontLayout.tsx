@@ -221,13 +221,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				backgroundColour={neutral[93]}
 				element="aside"
 			>
-				<AdSlot
-					position="merchandising"
-					display={format.display}
-					shouldReserveMerchSpace={
-						!!front.config.abTests.merchandisingMinHeightVariant
-					}
-				/>
+				<AdSlot position="merchandising" display={format.display} />
 			</ElementContainer>
 
 			{NAV.subNavSections && (
