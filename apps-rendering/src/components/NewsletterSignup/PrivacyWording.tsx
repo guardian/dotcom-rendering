@@ -8,7 +8,7 @@ import type { FC } from 'react';
 // ----- Component ----- //
 
 interface Props {
-	notUsingCaptcha: boolean;
+	useCaptcha: boolean;
 }
 
 const termsStyle = css`
@@ -29,7 +29,7 @@ const termsStyle = css`
 	}
 `;
 
-const PrivacyWording: FC<Props> = ({ notUsingCaptcha }) => {
+const PrivacyWording: FC<Props> = ({ useCaptcha }) => {
 	return (
 		<p css={termsStyle}>
 			<strong>Privacy Notice: </strong>
@@ -45,7 +45,7 @@ const PrivacyWording: FC<Props> = ({ notUsingCaptcha }) => {
 				</Link>
 				.
 			</span>{' '}
-			{!notUsingCaptcha && (
+			{useCaptcha && (
 				<span>
 					We use Google reCaptcha to protect our website and the
 					Google{' '}
