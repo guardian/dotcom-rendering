@@ -1,5 +1,6 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
+import type { ReactNode } from 'react';
 import { ContainerLayout } from './ContainerLayout';
 import { EmailSignup } from './EmailSignup';
 
@@ -25,7 +26,7 @@ export default {
 
 const hidePrivacyMessage = (): boolean => boolean('hidePrivacyMessage', false);
 
-export const Default = () => (
+const Frame = ({ children }: { children: ReactNode }) => (
 	<ContainerLayout
 		title="EmailSignup"
 		showTopBorder={true}
@@ -33,6 +34,12 @@ export const Default = () => (
 		padContent={false}
 		centralBorder="partial"
 	>
+		{children}
+	</ContainerLayout>
+);
+
+export const Default = () => (
+	<Frame>
 		<EmailSignup
 			identityName="patriarchy"
 			description="Reviewing the most important stories on feminism and sexism and those fighting for equality"
@@ -42,6 +49,22 @@ export const Default = () => (
 			theme="opinion"
 			hidePrivacyMessage={hidePrivacyMessage()}
 		/>
-	</ContainerLayout>
+	</Frame>
 );
-Default.story = { name: 'EmailSignup' };
+
+export const NewsTheme = () => (
+	<Frame>
+		<EmailSignup
+			identityName="morning-briefing"
+			description="Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning"
+			name="First Edition"
+			frequency="Every weekday"
+			successDescription="You have signed up, but the newsletter is fake"
+			theme="news"
+			hidePrivacyMessage={hidePrivacyMessage()}
+		/>
+	</Frame>
+);
+
+Default.story = { name: 'default' };
+NewsTheme.story = { name: 'news theme' };
