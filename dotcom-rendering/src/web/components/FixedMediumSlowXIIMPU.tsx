@@ -369,10 +369,7 @@ export const FixedMediumSlowXIIMPU = ({
 						showAge={showAge}
 					/>
 					<UL direction="row">
-						<LI
-							percentage="66.666%"
-							showTopMarginWhenStacked={true}
-						>
+						<LI percentage="66.666%">
 							{/*
 							 *	This pattern of using wrapCards on the UL + percentage=50 and stretch=true
 							 * on the LI creates a dynanic list of cards over two columns. Crucially,
