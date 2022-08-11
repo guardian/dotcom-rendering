@@ -114,7 +114,7 @@ const NewsletterSignup: FC<Props> = ({ format, element }) => {
 			<p css={descriptionStyles}>{description}</p>
 
 			<EmailSignupForm newsletterId={id} />
-			<PrivacyWording notUsingCaptcha={false} />
+			<PrivacyWording useCaptcha={true} />
 		</aside>
 	);
 };

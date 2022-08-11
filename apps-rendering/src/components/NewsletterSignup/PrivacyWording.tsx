@@ -1,19 +1,19 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { neutral, text, textSans } from '@guardian/source-foundations';
+import { neutral, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import type { FC } from 'react';
 
 // ----- Component ----- //
 
 interface Props {
-	notUsingCaptcha: boolean;
+	useCaptcha: boolean;
 }
 
 const termsStyle = css`
 	${textSans.xxsmall({ lineHeight: 'tight' })}
-	color: ${text.supporting};
+	color: ${neutral[46]};
 	a {
 		${textSans.xxsmall({ fontWeight: 'bold' })};
 		color: ${neutral[0]};
@@ -29,7 +29,7 @@ const termsStyle = css`
 	}
 `;
 
-const PrivacyWording: FC<Props> = ({ notUsingCaptcha }) => {
+const PrivacyWording: FC<Props> = ({ useCaptcha }) => {
 	return (
 		<p css={termsStyle}>
 			<strong>Privacy Notice: </strong>
@@ -45,9 +45,9 @@ const PrivacyWording: FC<Props> = ({ notUsingCaptcha }) => {
 				</Link>
 				.
 			</span>{' '}
-			{!notUsingCaptcha && (
+			{useCaptcha && (
 				<span>
-					We use Google reCaptcha to protect our website and the
+					We use Google reCAPTCHA to protect our website and the
 					Google{' '}
 					<Link
 						data-ignore="global-link-styling"
