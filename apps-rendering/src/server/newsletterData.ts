@@ -1,7 +1,7 @@
-import { Newsletter } from 'item';
+import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
+import type { Content } from '@guardian/content-api-models/v1/content';
+import type { ArticleTheme } from '@guardian/libs';
 import fetch from 'node-fetch';
-import { Content } from '@guardian/content-api-models/v1/content';
-import { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { stringToPillar } from 'themeStyles';
 
 const interval = 1000 * 60 * 1;
@@ -21,10 +21,19 @@ interface NewsletterResponse {
 	theme: string;
 }
 
+export interface Newsletter {
+	id: string;
+	displayName: string;
+	frequency: string;
+	description: string;
+	group: string;
+	theme: ArticleTheme;
+}
+
 const getNewsletterFromTag = async (
 	content: Content,
 ): Promise<Newsletter | undefined> => {
-	const newsletterTag = content.tags?.find((tag) =>
+	const newsletterTag = content.tags.find((tag) =>
 		tag.id.startsWith(NEWSLETTER_TAG_PREFIX),
 	);
 	const newsletterId = newsletterTag?.id.split('/').reverse()[0];

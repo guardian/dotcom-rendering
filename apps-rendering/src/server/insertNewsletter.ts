@@ -1,10 +1,12 @@
-import { Newsletter, Item } from 'item';
-import { Option, Result, ResultKind } from '@guardian/types';
-import { BodyElement, Text } from 'bodyElement';
-import { ElementKind } from 'bodyElementKind';
 import { ArticleDesign } from '@guardian/libs';
-import { logger } from 'logger';
+import type { Option, Result } from '@guardian/types';
+import { ResultKind } from '@guardian/types';
+import type { BodyElement, Text } from 'bodyElement';
+import { ElementKind } from 'bodyElementKind';
+import type { Item } from 'item';
 import { JSDOM } from 'jsdom';
+import { logger } from 'logger';
+import type { Newsletter } from './newsletterData';
 
 // The DCR-enhanced capi response breaks out the TextElements
 // into individual paragraphs, UL's, h2's etc, but in AR, they have the original
@@ -76,9 +78,7 @@ const findWhereToInsert = (
 } | null => {
 	const bodyDescription = getBodyDescription(body);
 	const totalParagraphs = bodyDescription.reduce(
-		(previous: number, current) => {
-			return previous + (current?.paragraphs || 0);
-		},
+		(previous: number, current) => previous + current.paragraphs,
 		0,
 	);
 	const targetPlace = Math.floor(totalParagraphs * fraction);

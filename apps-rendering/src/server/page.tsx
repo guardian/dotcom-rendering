@@ -16,7 +16,7 @@ import { atomCss, atomScript } from 'components/InteractiveAtom';
 import Layout from 'components/Layout';
 import Meta from 'components/Meta';
 import Scripts from 'components/Scripts';
-import { fromCapi, Newsletter } from 'item';
+import { fromCapi } from 'item';
 import type { Item } from 'item';
 import { JSDOM } from 'jsdom';
 import type { ReactElement } from 'react';
@@ -24,6 +24,7 @@ import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
 import { pageFonts } from 'styles';
 import { insertNewsletterIntoItem } from './insertNewsletter';
+import type { Newsletter } from './newsletterData';
 
 // ----- Types ----- //
 
@@ -164,12 +165,12 @@ const buildHtml = (
 // TO DO - update @guardian/apps-render-api-models, remove the hack on the RenderingRequest type
 function render(
 	imageSalt: string,
-	request: RenderingRequest & {promotedNewsletter?: Newsletter},
+	request: RenderingRequest & { promotedNewsletter?: Newsletter },
 	getAssetLocation: (assetName: string) => string,
 	page: Option<string>,
 ): Page {
 	const item = fromCapi({ docParser, salt: imageSalt })(request, page);
-	insertNewsletterIntoItem(item, request.promotedNewsletter)
+	insertNewsletterIntoItem(item, request.promotedNewsletter);
 
 	const clientScript = map(getAssetLocation)(scriptName(item));
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);

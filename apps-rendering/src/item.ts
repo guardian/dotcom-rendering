@@ -9,7 +9,7 @@ import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Element } from '@guardian/content-api-models/v1/element';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -46,15 +46,6 @@ import type { Context } from 'parserContext';
 import { themeFromString } from 'themeStyles';
 
 // ----- Item Type ----- //
-
-export interface Newsletter {
-	id: string;
-	displayName: string;
-	frequency: string;
-	description: string;
-	group: string;
-	theme: ArticleTheme;
-}
 
 interface Fields extends ArticleFormat {
 	headline: string;

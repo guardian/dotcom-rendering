@@ -68,6 +68,7 @@ import InteractiveAtom, {
 import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LiveEventLink from 'components/LiveEventLink';
+import NewsletterSignup from 'components/NewsletterSignup';
 import OrderedList from 'components/OrderedList';
 import Paragraph from 'components/Paragraph';
 import Pullquote from 'components/Pullquote';
@@ -81,7 +82,6 @@ import {
 	themeToPillar,
 	themeToPillarString,
 } from 'themeStyles';
-import NewsletterSignup from 'components/NewsletterSignup';
 
 // ----- Renderer ----- //
 
