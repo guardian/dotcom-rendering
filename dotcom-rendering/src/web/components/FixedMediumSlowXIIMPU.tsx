@@ -122,7 +122,7 @@ const Card33_Card33_Card33 = ({
 				containerPalette={containerPalette}
 				showAge={showAge}
 				trailText={trails[1].trailText}
-				imagePositionOnMobile="top"
+				imagePositionOnMobile="left"
 			/>
 		</LI>
 		<LI
@@ -136,7 +136,7 @@ const Card33_Card33_Card33 = ({
 				containerPalette={containerPalette}
 				showAge={showAge}
 				trailText={trails[2].trailText}
-				imagePositionOnMobile="top"
+				imagePositionOnMobile="left"
 			/>
 		</LI>
 	</UL>
