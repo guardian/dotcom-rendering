@@ -20,7 +20,6 @@ type InlineProps = {
 	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
-	shouldReserveMerchSpace?: boolean;
 };
 
 type NonInlineProps = {
@@ -29,7 +28,6 @@ type NonInlineProps = {
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
-	shouldReserveMerchSpace?: boolean;
 };
 
 /**
@@ -95,9 +93,6 @@ export const adCollapseStyles = css`
 
 const merchandisingAdStyles = css`
 	position: relative;
-`;
-
-const merchandisingReservedSpace = css`
 	min-height: 250px;
 `;
 
@@ -231,7 +226,6 @@ export const AdSlot = ({
 	display,
 	shouldHideReaderRevenue = false,
 	isPaidContent = false,
-	shouldReserveMerchSpace = false,
 	index,
 }: Props) => {
 	switch (position) {
@@ -370,7 +364,6 @@ export const AdSlot = ({
 					].join(' ')}
 					css={[
 						merchandisingAdStyles,
-						shouldReserveMerchSpace && merchandisingReservedSpace,
 						adStyles,
 						fluidFullWidthAdStyles,
 					]}
@@ -391,7 +384,6 @@ export const AdSlot = ({
 					].join(' ')}
 					css={[
 						merchandisingAdStyles,
-						shouldReserveMerchSpace && merchandisingReservedSpace,
 						adStyles,
 						fluidFullWidthAdStyles,
 					]}

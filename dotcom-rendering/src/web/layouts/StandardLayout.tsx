@@ -337,9 +337,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
-	const shouldReserveMerchSpace =
-		!!CAPIArticle.config.abTests.merchandisingMinHeightVariant;
-
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
 	return (
@@ -773,6 +770,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandardGrid>
 				</ElementContainer>
+
 				{renderAds && (
 					<ElementContainer
 						data-print-layout="hide"
@@ -786,7 +784,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							data-print-layout="hide"
 							position="merchandising-high"
 							display={format.display}
-							shouldReserveMerchSpace={shouldReserveMerchSpace}
 						/>
 					</ElementContainer>
 				)}
@@ -879,6 +876,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					</ElementContainer>
 				)}
+
 				{renderAds && (
 					<ElementContainer
 						data-print-layout="hide"
@@ -891,7 +889,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<AdSlot
 							position="merchandising"
 							display={format.display}
-							shouldReserveMerchSpace={shouldReserveMerchSpace}
 						/>
 					</ElementContainer>
 				)}

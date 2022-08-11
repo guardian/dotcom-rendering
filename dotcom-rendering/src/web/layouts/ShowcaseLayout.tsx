@@ -237,9 +237,6 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
-	const shouldReserveMerchSpace =
-		!!CAPIArticle.config.abTests.merchandisingMinHeightVariant;
-
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
 	return (
@@ -641,6 +638,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</ShowcaseGrid>
 				</ElementContainer>
+
 				{renderAds && (
 					<ElementContainer
 						padded={false}
@@ -652,7 +650,6 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<AdSlot
 							position="merchandising-high"
 							display={format.display}
-							shouldReserveMerchSpace={shouldReserveMerchSpace}
 						/>
 					</ElementContainer>
 				)}
@@ -741,6 +738,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					</ElementContainer>
 				)}
+
 				{renderAds && (
 					<ElementContainer
 						padded={false}
@@ -752,7 +750,6 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<AdSlot
 							position="merchandising"
 							display={format.display}
-							shouldReserveMerchSpace={shouldReserveMerchSpace}
 						/>
 					</ElementContainer>
 				)}
