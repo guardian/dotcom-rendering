@@ -411,6 +411,11 @@ export const FixedMediumSlowXIIMPU = ({
 										showDivider={trailIndex % 2 !== 0}
 										percentage="50%"
 										stretch={true}
+										showTopMarginWhenStacked={
+											lengthIsEven &&
+											remainingCards.length ===
+												trailIndex + 1
+										}
 									>
 										<FrontCard
 											trail={trail}
