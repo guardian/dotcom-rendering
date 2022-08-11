@@ -18,7 +18,7 @@ import { darkModeCss as darkMode } from 'styles';
 interface Props {
 	date: Option<Date>;
 	format: ArticleFormat;
-	edition: Edition;
+	edition?: Edition;
 }
 
 const darkStyles = darkMode`
