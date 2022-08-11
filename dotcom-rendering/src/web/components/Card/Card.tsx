@@ -294,12 +294,7 @@ export const Card = ({
 			containerType={containerType}
 			isDynamo={isDynamo}
 		>
-			<CardLink
-				linkTo={linkTo}
-				dataLinkName={dataLinkName}
-				format={format}
-				containerPalette={containerPalette}
-			/>
+			<CardLink linkTo={linkTo} dataLinkName={dataLinkName} />
 			<CardLayout
 				imagePosition={imagePosition}
 				imagePositionOnMobile={imagePositionOnMobile}
