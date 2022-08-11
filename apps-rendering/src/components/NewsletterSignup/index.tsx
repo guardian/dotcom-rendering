@@ -2,7 +2,8 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import { ArticlePillar } from '@guardian/libs';
+import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
 	brandAlt,
 	from,
@@ -48,11 +49,11 @@ const stackBelowTabletStyles = css`
 	}
 `;
 
-const titleStyles = (theme: string): SerializedStyles => css`
+const titleStyles = (theme: ArticleTheme): SerializedStyles => css`
 	${headline.xxsmall({ fontWeight: 'bold' })}
 	flex-grow: 1;
 	span {
-		color: ${theme === 'news' ? sport[500] : 'inherit'};
+		color: ${theme === ArticlePillar.News ? sport[500] : 'inherit'};
 	}
 `;
 

@@ -5,6 +5,7 @@ import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
+import type { ArticleTheme } from '@guardian/libs';
 import type { Option, Result } from '@guardian/types';
 import {
 	err,
@@ -117,7 +118,7 @@ interface NewsletterSignUp {
 	frequency: string;
 	description: string;
 	group: string;
-	theme: string;
+	theme: ArticleTheme;
 }
 
 type BodyElement =

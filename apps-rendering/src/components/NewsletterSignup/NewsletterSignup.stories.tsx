@@ -16,7 +16,7 @@ const Default: FC = () => (
 				'Reviewing the most important stories on feminism and sexism and those fighting for equality',
 			displayName: 'The Week in Patriarchy',
 			frequency: 'Weekly',
-			theme: 'opinion',
+			theme: ArticlePillar.Opinion,
 			group: 'opinion',
 		}}
 		format={{
@@ -36,7 +36,7 @@ const NewsTheme: FC = () => (
 				'Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning',
 			displayName: 'First Edition',
 			frequency: 'Every weekday',
-			theme: 'news',
+			theme: ArticlePillar.News,
 			group: 'News',
 		}}
 		format={{
