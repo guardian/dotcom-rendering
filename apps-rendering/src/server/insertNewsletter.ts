@@ -1,32 +1,121 @@
 import { Newsletter, Item } from 'item';
 import { Option, Result, ResultKind } from '@guardian/types';
-import { BodyElement, NewsletterSignUp, Text } from 'bodyElement';
+import { BodyElement, Text } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
 import { ArticleDesign } from '@guardian/libs';
 import { logger } from 'logger';
 import { JSDOM } from 'jsdom';
 
 // The DCR-enhanced capi response breaks out the TextElements
-// into individual paragraphs, but in AR, they have the original
+// into individual paragraphs, UL's, h2's etc, but in AR, they have the original
 // CAPI structure where each continual block of html text is a
 // single TextElement.
+
+type TextElementDescription = {
+	isError: false;
+	kind: ElementKind.Text;
+	paragraphs: number;
+	text: Text;
+};
+type OtherElementDescription = {
+	isError: false;
+	paragraphs: 0;
+	kind: Exclude<ElementKind, ElementKind.Text>;
+};
+type ErrorDescription = {
+	isError: true;
+	paragraphs: 0;
+};
+
+type BodyElementDescription =
+	| TextElementDescription
+	| OtherElementDescription
+	| ErrorDescription;
 
 const wrapInResult = (element: BodyElement): Result<string, BodyElement> => ({
 	kind: ResultKind.Ok,
 	value: element,
 });
 
-const isTextResult = (_: Result<string, BodyElement>): boolean =>
-	_.kind === ResultKind.Ok && _.value.kind === ElementKind.Text;
+const getBodyDescription = (
+	body: Array<Result<string, BodyElement>>,
+): BodyElementDescription[] => {
+	return body.map((_) => {
+		if (_.kind === ResultKind.Err) {
+			return {
+				isError: true,
+				paragraphs: 0,
+			};
+		}
+
+		if (_.value.kind === ElementKind.Text) {
+			const paragraphs = _.value.doc.childElementCount;
+			return {
+				isError: false,
+				kind: _.value.kind,
+				paragraphs,
+				text: _.value,
+			};
+		}
+
+		return {
+			isError: false,
+			kind: _.value.kind,
+			paragraphs: 0,
+		};
+	});
+};
+
+const findWhereToInsert = (
+	body: Array<Result<string, BodyElement>>,
+	fraction = 1 / 2,
+): {
+	bodyResultIndex: number;
+	bodyResultParagraphIndex: number;
+	text: Text;
+} | null => {
+	const bodyDescription = getBodyDescription(body);
+	const totalParagraphs = bodyDescription.reduce(
+		(previous: number, current) => {
+			return previous + (current?.paragraphs || 0);
+		},
+		0,
+	);
+	const targetPlace = Math.floor(totalParagraphs * fraction);
+
+	let paragraphsFromPreviousElements = 0;
+	for (let i = 0; i < bodyDescription.length; i++) {
+		const current = bodyDescription[i];
+
+		if (current.isError || current.kind !== ElementKind.Text) {
+			continue;
+		}
+
+		if (paragraphsFromPreviousElements + current.paragraphs < targetPlace) {
+			paragraphsFromPreviousElements += current.paragraphs;
+			continue;
+		}
+
+		return {
+			bodyResultIndex: i,
+			bodyResultParagraphIndex:
+				targetPlace - paragraphsFromPreviousElements,
+			text: current.text,
+		};
+	}
+
+	return null;
+};
 
 const splitTextElementAndInsertBetweenParts = (
 	textElement: Text,
 	elementToInsert: BodyElement,
-	fraction = 1 / 2,
+	splitPoint = 1,
 ): [Text, BodyElement, Text] => {
 	// uses a clone of the original doc to avoid mutations
-	const childNodeArray = Array.from(textElement.doc.cloneNode(true).childNodes);
-	const splitPoint = childNodeArray.length * fraction;
+	const childNodeArray = Array.from(
+		textElement.doc.cloneNode(true).childNodes,
+	);
 
 	const newDocs: [DocumentFragment, DocumentFragment] = [
 		JSDOM.fragment(''),
@@ -59,12 +148,9 @@ const tryToinsertNewsletterIntoStandard = (
 	newsletter: Newsletter,
 	internalShortId: Option<string>,
 ): Array<Result<string, BodyElement>> => {
-	const textElementResults = body.filter(isTextResult) as {
-		kind: ResultKind.Ok;
-		value: Text;
-	}[];
+	const insertPlace = findWhereToInsert(body);
 
-	if (textElementResults.length === 0) {
+	if (!insertPlace) {
 		logger.warn(
 			`Unable to find suitable place for NewsletterSignupBlockElement`,
 			internalShortId,
@@ -72,22 +158,21 @@ const tryToinsertNewsletterIntoStandard = (
 		return body;
 	}
 
-	const indexOfFirstTextResult = body.findIndex(isTextResult);
+	const { bodyResultIndex, bodyResultParagraphIndex, text } = insertPlace;
 
-	const newsletterElement: NewsletterSignUp = {
-		kind: ElementKind.NewsletterSignUp,
-		...newsletter,
-	};
 	const textWithNewsletter = splitTextElementAndInsertBetweenParts(
-		textElementResults[0].value,
-		newsletterElement,
-		6 / 10,
+		text,
+		{
+			kind: ElementKind.NewsletterSignUp,
+			...newsletter,
+		},
+		bodyResultParagraphIndex || 1, // don't place at zero (before first paragraph)
 	);
 
 	return [
-		...body.slice(0, indexOfFirstTextResult),
+		...body.slice(0, bodyResultIndex),
 		...textWithNewsletter.map(wrapInResult),
-		...body.slice(indexOfFirstTextResult),
+		...body.slice(bodyResultIndex),
 	];
 };
 
