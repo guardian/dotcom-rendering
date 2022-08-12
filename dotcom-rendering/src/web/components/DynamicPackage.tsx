@@ -9,7 +9,7 @@ type Props = {
 	showAge?: boolean;
 };
 
-const SnapRow = ({
+const Snap100 = ({
 	snap,
 	containerPalette,
 	showAge,
@@ -57,7 +57,7 @@ export const DynamicPackage = ({
 		return (
 			<>
 				{!!snap && (
-					<SnapRow
+					<Snap100
 						snap={snap}
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -111,7 +111,7 @@ export const DynamicPackage = ({
 	return (
 		<>
 			{!!snap && (
-				<SnapRow
+				<Snap100
 					snap={snap}
 					containerPalette={containerPalette}
 					showAge={showAge}
