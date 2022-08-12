@@ -1,10 +1,15 @@
 export const buildTitleText = (displayName: string) => {
-	const startsWithThe = displayName.toLowerCase().startsWith('the');
+	const opening = displayName.toLowerCase().startsWith('the')
+		? 'Sign up to '
+		: 'Sign up to the ';
+
+	const closing = ' newsletter';
 
 	return (
 		<>
-			Sign up to {!startsWithThe && 'the'} <span>{displayName}</span>{' '}
-			newsletter
+			{opening}
+			<span>{displayName}</span>
+			{closing}
 		</>
 	);
 };

@@ -45,7 +45,7 @@ describe('buildTitleText', () => {
 		);
 
 		expect(html).toBe(
-			`Sign up to  <span>${NAME_STARTING_WITH_THE}</span> newsletter`,
+			`Sign up to <span>${NAME_STARTING_WITH_THE}</span> newsletter`,
 		);
 	});
 
