@@ -176,11 +176,13 @@ interface Props {
 
 const decideCaption = (mainMedia: ImageBlockElement): string => {
 	const caption = [];
-	if (mainMedia.data.caption) {
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because it is necessary!
+	if (mainMedia?.data?.caption) {
 		caption.push(mainMedia.data.caption);
 	}
 
-	if (mainMedia.displayCredit && mainMedia.data.credit) {
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because it is necessary!
+	if (mainMedia?.displayCredit && mainMedia?.data?.credit) {
 		caption.push(mainMedia.data.credit);
 	}
 
