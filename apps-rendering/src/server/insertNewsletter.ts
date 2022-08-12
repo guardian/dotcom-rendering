@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import type { ArticleTheme } from '@guardian/libs';
-import type { Option, Result } from '@guardian/types';
+import { Option, OptionKind, Result } from '@guardian/types';
 import { ResultKind } from '@guardian/types';
 import type { BodyElement, Text } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
@@ -121,6 +121,15 @@ const findWhereToInsert = (
 	return null;
 };
 
+/**
+ * Splits a Text BodyElement into to parts after a give number of
+ * nodes in the html and puts another BodyElement between them.
+ *
+ * @param textElement a Text BodyElement from the original Item Body
+ * @param elementToInsert A Body element to place inside the text
+ * @param splitPoint the index of the node in the textElement to split before
+ * @returns a Tupple of three BodyElements
+ */
 const splitTextElementAndInsertBetweenParts = (
 	textElement: Text,
 	elementToInsert: BodyElement,
@@ -157,6 +166,17 @@ const splitTextElementAndInsertBetweenParts = (
 	];
 };
 
+/**
+ * Tries to insert a NewsletterSignUp BodyElement into the middle of an article.
+ *
+ * @param body the array of BodyElement Results for the item
+ * @param newsletter The newsletter to create a NewsletterSignUp BodyElement for
+ * @param internalShortId The Optional id for the Item
+ * @returns a new array of BodyElement Results with the NewsletterSignUp BodyElement
+ * inserted in the middle of the article, or the unmodifed body if the placement logic
+ * does not identify a suitable place
+ * @sideEffect logs a warning if the placement logic does not identify a suitable place
+ */
 const tryToinsertNewsletterIntoStandard = (
 	body: Array<Result<string, BodyElement>>,
 	newsletter: Newsletter,
@@ -167,13 +187,12 @@ const tryToinsertNewsletterIntoStandard = (
 	if (!insertPlace) {
 		logger.warn(
 			`Unable to find suitable place for NewsletterSignupBlockElement`,
-			internalShortId,
+			internalShortId.kind === OptionKind.Some ? internalShortId.value : '[undefined internalShortId]'
 		);
 		return body;
 	}
 
 	const { bodyResultIndex, bodyResultParagraphIndex, text } = insertPlace;
-
 	const textWithNewsletter = splitTextElementAndInsertBetweenParts(
 		text,
 		{
