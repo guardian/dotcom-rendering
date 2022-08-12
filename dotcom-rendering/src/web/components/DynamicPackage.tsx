@@ -118,7 +118,6 @@ export const DynamicPackage = ({
 				<LI padSides={true} percentage="75%">
 					<FrontCard
 						trail={primary}
-						starRating={primary.starRating}
 						containerPalette={containerPalette}
 						containerType="dynamic/package"
 						showAge={showAge}
@@ -150,7 +149,6 @@ export const DynamicPackage = ({
 								>
 									<FrontCard
 										trail={card}
-										starRating={card.starRating}
 										containerPalette={containerPalette}
 										containerType="dynamic/package"
 										showAge={showAge}
