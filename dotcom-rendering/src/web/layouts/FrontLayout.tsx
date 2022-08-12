@@ -147,6 +147,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					// There are some containers that have zero trails. We don't want to render these
 					if (trails.length === 0) return null;
 
+					// This is a legacy container used to add palette styling on Frontend. DCR ignores it
+					if (
+						collection.displayName ===
+						'Palette styles new do not delete'
+					) {
+						return null;
+					}
+
 					const ophanName = ophanComponentId(collection.displayName);
 					const ophanComponentLink = `container-${
 						index + 1
@@ -156,8 +164,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						return (
 							<ElementContainer
 								padSides={false}
+								padBottom={true}
 								showTopBorder={false}
-								showSideBorders={false}
+								showSideBorders={true}
 								ophanComponentLink={ophanComponentLink}
 								ophanComponentName={ophanName}
 								containerName={collection.collectionType}

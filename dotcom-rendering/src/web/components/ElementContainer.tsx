@@ -1,5 +1,5 @@
 import { ClassNames, css as emoCss } from '@emotion/react';
-import { border, from } from '@guardian/source-foundations';
+import { border, from, space } from '@guardian/source-foundations';
 // @ts-expect-error
 import { jsx as _jsx } from 'react/jsx-runtime';
 import { center } from '../lib/center';
@@ -12,6 +12,10 @@ const sidePadding = emoCss`
 		padding-left: 20px;
 		padding-right: 20px;
 	}
+`;
+
+const bottomPadding = emoCss`
+	padding-bottom: ${space[9]}px;
 `;
 
 const sideBorders = (colour: string) => emoCss`
@@ -34,6 +38,7 @@ type Props = {
 	showSideBorders?: boolean;
 	showTopBorder?: boolean;
 	padSides?: boolean;
+	padBottom?: boolean;
 	backgroundColour?: string;
 	innerBackgroundColour?: string;
 	borderColour?: string;
@@ -59,6 +64,7 @@ export const ElementContainer = ({
 	showSideBorders = true,
 	showTopBorder = true,
 	padSides = true,
+	padBottom = false,
 	borderColour = border.secondary,
 	backgroundColour,
 	innerBackgroundColour,
@@ -82,6 +88,7 @@ export const ElementContainer = ({
 						innerBackgroundColour &&
 							setBackgroundColour(innerBackgroundColour),
 						padSides && sidePadding,
+						padBottom && bottomPadding,
 					]}
 				>
 					{children}
