@@ -23,7 +23,6 @@ const Snap100 = ({
 			<LI padSides={true} padBottom={true}>
 				<FrontCard
 					trail={snap}
-					starRating={snap.starRating}
 					containerPalette={containerPalette}
 					containerType="dynamic/package"
 					showAge={showAge}
@@ -67,7 +66,6 @@ export const DynamicPackage = ({
 					<LI padSides={true}>
 						<FrontCard
 							trail={primary}
-							starRating={primary.starRating}
 							containerPalette={containerPalette}
 							containerType="dynamic/package"
 							showAge={showAge}
@@ -95,7 +93,6 @@ export const DynamicPackage = ({
 							>
 								<FrontCard
 									trail={card}
-									starRating={card.starRating}
 									containerPalette={containerPalette}
 									containerType="dynamic/package"
 									showAge={showAge}
