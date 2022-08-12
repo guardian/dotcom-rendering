@@ -132,7 +132,7 @@ const hideStyles = (columnInputId: string) => css`
 	}
 `;
 
-const columnStyle = css`
+const columnStyle = (columnInputIdMinusOne: string) => css`
 	${textSans.medium()};
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
@@ -147,15 +147,17 @@ const columnStyle = css`
 	padding-bottom: 10px;
 	position: relative;
 
-	:after {
-		background-color: ${brand[600]};
-		top: 0;
-		content: '';
-		display: block;
-		height: 1px;
-		left: 50px;
-		position: absolute;
-		right: 0;
+	${`#${columnInputIdMinusOne}`}:checked ~ & {
+		:after {
+			background-color: ${brand[600]};
+			top: 0;
+			content: '';
+			display: block;
+			height: 1px;
+			left: 50px;
+			position: absolute;
+			right: 0;
+		}
 	}
 
 	/* Remove the border from the top item on mobile */
@@ -195,11 +197,15 @@ export const Column = ({
 	index: number;
 }) => {
 	// As the elements are dynamic we need to specify the IDs here
-	const columnInputId = `${column.title}-checkbox-input`;
-	const collapseColumnInputId = `${column.title}-button`;
+	const columnInputId = `${index}-checkbox-input`;
+	const columnInputIdMinusOne = `${index - 1}-checkbox-input`;
+	const collapseColumnInputId = `${index}-button`;
 
 	return (
-		<li css={[columnStyle, pillarDivider]} role="none">
+		<li
+			css={[columnStyle(columnInputIdMinusOne), pillarDivider]}
+			role="none"
+		>
 			{/*
                 IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
 
