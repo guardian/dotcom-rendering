@@ -4,7 +4,6 @@ import {
 	getCookie,
 	initCoreWebVitals,
 } from '@guardian/libs';
-import { multiStickyRightAds } from '../experiments/tests/multi-sticky-right-ads';
 import { useAB } from '../lib/useAB';
 
 export const CoreVitals = () => {
@@ -22,7 +21,6 @@ export const CoreVitals = () => {
 	// For these tests switch off sampling and collect metrics for 100% of views
 	const clientSideTestsToForceMetrics: ABTest[] = [
 		/* keep array multi-line */
-		multiStickyRightAds,
 	];
 
 	const userInClientSideTestToForceMetrics =
