@@ -19,7 +19,7 @@ const Snap100 = ({
 	showAge?: boolean;
 }) => {
 	return (
-		<UL direction="row">
+		<UL>
 			<LI padSides={true} padBottom={true}>
 				<FrontCard
 					trail={snap}
@@ -62,7 +62,7 @@ export const DynamicPackage = ({
 						showAge={showAge}
 					/>
 				)}
-				<UL direction="row">
+				<UL>
 					<LI padSides={true}>
 						<FrontCard
 							trail={primary}
