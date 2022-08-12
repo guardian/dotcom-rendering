@@ -4,11 +4,13 @@ import { border, from } from '@guardian/source-foundations';
 import { jsx as _jsx } from 'react/jsx-runtime';
 import { center } from '../lib/center';
 
-const padding = emoCss`
-	padding: 0 10px;
+const sidePadding = emoCss`
+	padding-left: 10px;
+	padding-right: 10px;
 
 	${from.mobileLandscape} {
-		padding: 0 20px;
+		padding-left: 20px;
+		padding-right: 20px;
 	}
 `;
 
@@ -31,7 +33,7 @@ type Props = {
 	sectionId?: string;
 	showSideBorders?: boolean;
 	showTopBorder?: boolean;
-	padded?: boolean;
+	padSides?: boolean;
 	backgroundColour?: string;
 	innerBackgroundColour?: string;
 	borderColour?: string;
@@ -56,7 +58,7 @@ export const ElementContainer = ({
 	sectionId,
 	showSideBorders = true,
 	showTopBorder = true,
-	padded = true,
+	padSides = true,
 	borderColour = border.secondary,
 	backgroundColour,
 	innerBackgroundColour,
@@ -79,7 +81,7 @@ export const ElementContainer = ({
 						showTopBorder && topBorder(borderColour),
 						innerBackgroundColour &&
 							setBackgroundColour(innerBackgroundColour),
-						padded && padding,
+						padSides && sidePadding,
 					]}
 				>
 					{children}
