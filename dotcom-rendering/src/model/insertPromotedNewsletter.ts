@@ -10,7 +10,7 @@ type PlaceInArticle = {
 const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 4;
 // This value is an approximation - the aim is to avoid a blank space between
 // the element before the SignUp and the end of the floating element.
-// The SignUp block css uses 'clear:both' so a floating element won't interfer
+// The SignUp block css uses 'clear:left' so a left floating element won't interfer
 // with its layout.
 // However, the actual heights of the elements when rendered is not taken into
 // account. 4 paragraphs should be enough, but if the floating element was
@@ -32,9 +32,25 @@ const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 4;
 //  |float|
 //  |float|
 //  +-----+
-//    |   +---------------------+
-//    |   |      SignUp         |
-//    |   +---------------------+
+//    |  +----------------------+
+//    |  |      SignUp          |
+//    |  +----------------------+
+
+// Note this logic does need to account for adslots in the righthand
+// column, because having clear:left (not clear:both) allows the adslot
+// to float around the SignUp block.
+// The elements in the right hand colomn don't 'hang over' into the
+// main coloum as left coloumn element can.
+//    | TextTextTextTextTextText  | +------+
+//    | TextTextTextText          | |adslot|
+//    |                           | |adslot|
+//    | TextTextTextTextTextText  | |adslot|
+//    | TextTextTextText          | |      |
+//    |  +----------------------+ | |      |
+//    |  |      SignUp          | | |      |
+//    |  +----------------------+ | |      |
+//    | TextTextTextTextTextText  | +------+
+//    | TextTextTextText          |
 
 const MAXIMUM_DISTANCE_FROM_MIDDLE = 4;
 
