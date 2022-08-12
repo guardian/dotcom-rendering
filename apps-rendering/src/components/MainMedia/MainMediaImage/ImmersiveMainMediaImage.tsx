@@ -26,7 +26,7 @@ const styles = css`
 	margin: 0;
 	${grid.between('viewport-start', 'viewport-end')}
 	grid-row: 1 / 4;
-	height: 70vh;
+	height: 63vh;
 
 	${from.desktop} {
 		height: 100vh;
@@ -40,7 +40,7 @@ const getSizes = (image: Image): Sizes => ({
 			size: `${100 * (image.width / image.height)}vh`,
 		},
 	],
-	default: `${70 * (image.width / image.height)}vh`,
+	default: `${63 * (image.width / image.height)}vh`,
 });
 
 interface Props {
