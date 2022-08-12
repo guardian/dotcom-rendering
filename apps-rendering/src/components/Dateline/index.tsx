@@ -2,13 +2,14 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Edition } from '@guardian/apps-rendering-api-models/edition';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, text, textSans } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
-import { formatDate, fullyFormatDate } from 'date';
+import { formatDate } from 'date';
+import { fullyFormatDate } from 'editionDate';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss as darkMode } from 'styles';
@@ -88,7 +89,7 @@ const Dateline: FC<Props> = ({ date, format, edition }) =>
 			>
 				{format.design === ArticleDesign.LiveBlog ||
 				format.design === ArticleDesign.DeadBlog
-					? fullyFormatDate(d)
+					? fullyFormatDate(d, edition ?? Edition.UK)
 					: formatDate(d)}
 			</time>
 		)),
