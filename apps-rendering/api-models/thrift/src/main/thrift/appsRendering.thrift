@@ -119,6 +119,19 @@ struct FootballContent {
     8: optional string venue
 }
 
+
+struct Newsletter {
+    1: required string identityName
+    2: required string name
+    3: required string theme
+    4: required string description
+    5: required string frequency
+    6: required i32 listId
+    7: required string group
+	8: required string successDescription
+
+}
+
 struct RenderingRequest {
     1: required v1.Content content
     2: optional i32 commentCount
@@ -129,4 +142,5 @@ struct RenderingRequest {
     7: optional RelatedContent relatedContent
     8: optional FootballContent footballContent
     9: optional Edition edition
+	10: optional Newsletter promotedNewsletter
 }
