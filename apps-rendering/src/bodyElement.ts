@@ -5,7 +5,6 @@ import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
-import type { ArticleTheme } from '@guardian/libs';
 import type { Option, Result } from '@guardian/types';
 import {
 	err,
@@ -23,6 +22,7 @@ import type { Embed } from 'embed';
 import type { Image as ImageData } from 'image';
 import { parseImage } from 'image';
 import { compose, pipe } from 'lib';
+import type { Newsletter } from 'newsletter';
 import type { Context } from 'parserContext';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
 
@@ -111,14 +111,8 @@ interface AudioAtom {
 	title: string;
 }
 
-interface NewsletterSignUp {
+interface NewsletterSignUp extends Newsletter {
 	kind: ElementKind.NewsletterSignUp;
-	id: string;
-	displayName: string;
-	frequency: string;
-	description: string;
-	group: string;
-	theme: ArticleTheme;
 }
 
 type BodyElement =

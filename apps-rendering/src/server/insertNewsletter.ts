@@ -1,5 +1,4 @@
-import { ArticleDesign, ArticlePillar } from '@guardian/libs';
-import type { ArticleTheme } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { Option, OptionKind, Result } from '@guardian/types';
 import { ResultKind } from '@guardian/types';
 import type { BodyElement, Text } from 'bodyElement';
@@ -7,25 +6,7 @@ import { ElementKind } from 'bodyElementKind';
 import type { Item } from 'item';
 import { JSDOM } from 'jsdom';
 import { logger } from 'logger';
-
-export interface Newsletter {
-	id: string;
-	displayName: string;
-	frequency: string;
-	description: string;
-	group: string;
-	theme: ArticleTheme;
-}
-
-export const TEST_NEWSLETTER = {
-	id: 'patriarchy',
-	description:
-		'Reviewing the most important stories on feminism and sexism and those fighting for equality',
-	displayName: 'The Week in Patriarchy',
-	frequency: 'Weekly',
-	theme: ArticlePillar.Opinion,
-	group: 'opinion',
-};
+import { Newsletter } from 'newsletter';
 
 type TextElementDescription = {
 	isError: false;
