@@ -1,12 +1,12 @@
 import { ArticleDesign } from '@guardian/libs';
-import { Option, OptionKind, Result } from '@guardian/types';
-import { ResultKind } from '@guardian/types';
+import { OptionKind, ResultKind } from '@guardian/types';
+import type { Option, Result } from '@guardian/types';
 import type { BodyElement, Text } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
 import type { Item } from 'item';
 import { JSDOM } from 'jsdom';
 import { logger } from 'logger';
-import { Newsletter } from 'newsletter';
+import type { Newsletter } from 'newsletter';
 
 type TextElementDescription = {
 	isError: false;
@@ -168,7 +168,9 @@ const tryToinsertNewsletterIntoStandard = (
 	if (!insertPlace) {
 		logger.warn(
 			`Unable to find suitable place for NewsletterSignupBlockElement`,
-			internalShortId.kind === OptionKind.Some ? internalShortId.value : '[undefined internalShortId]'
+			internalShortId.kind === OptionKind.Some
+				? internalShortId.value
+				: '[undefined internalShortId]',
 		);
 		return body;
 	}
