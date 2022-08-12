@@ -44,7 +44,7 @@ export const DynamicPackage = ({
 	showAge,
 }: Props) => {
 	// Take the first 'snap' - all others are treated as standards
-	const snaps = groupedTrails.snap.slice(0, 1);
+	const snap = [...groupedTrails.snap].shift();
 	const [primary, ...remaining] = [
 		...groupedTrails.snap.slice(1),
 		...groupedTrails.standard,
@@ -55,9 +55,9 @@ export const DynamicPackage = ({
 	if (primary.isBoosted) {
 		return (
 			<>
-				{snaps.length > 0 && (
+				{!!snap && (
 					<Snap100
-						snap={snaps[0]}
+						snap={snap}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
@@ -107,9 +107,9 @@ export const DynamicPackage = ({
 	}
 	return (
 		<>
-			{snaps.length > 0 && (
+			{!!snap && (
 				<Snap100
-					snap={snaps[0]}
+					snap={snap}
 					containerPalette={containerPalette}
 					showAge={showAge}
 				/>
