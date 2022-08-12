@@ -8,7 +8,7 @@ import { Edition } from '@guardian/apps-rendering-api-models/edition';
  * Creates a formatter object that can be used to format Dates into a given
  * `timeZone` using British English style. Creates datetimes of the form:
  * Fri, 12 Aug 2022, 11:59
- * 
+ *
  * @param timeZone A timezone string of the form: Europe/London
  */
 const dateTimeFormatter = (timeZone: string): Intl.DateTimeFormat =>
@@ -27,7 +27,7 @@ const dateTimeFormatter = (timeZone: string): Intl.DateTimeFormat =>
  * Creates a formatter object that can be used to format Dates into a given
  * `timeZone` using a style defined by `locale`. Creates times of the form:
  * 11:59 BST
- * 
+ *
  * @param timeZone A timezone string of the form: Europe/London
  * @param locale A locale string of the form: en-GB
  */
@@ -57,46 +57,54 @@ const formatters = {
 		[Edition.AU]: timeFormatter('Australia/Sydney', 'en-AU'),
 		[Edition.INTERNATIONAL]: timeFormatter('Europe/London', 'en-GB'),
 	},
-}
+};
 
 // ----- Functions ----- //
 
 /**
  * Formats a Date into a timestamp string, using Guardian style and in the
  * timezone of a given `Edition`
- * 
+ *
  * @param edition A Guardian `Edition`
  * @returns A timestamp string of the form: 11.59 BST
  */
-const timestampFormat = (edition: Edition) => (date: Date): string =>
-	formatters.time[edition]
-		.format(date)
-		.replace(':', '.');
+const timestampFormat =
+	(edition: Edition) =>
+	(date: Date): string =>
+		formatters.time[edition].format(date).replace(':', '.');
 
 /**
  * Creates a datetime string of the form: Fri 12 Aug 2022 11.59
  */
-const dateTimeWithoutTimezone = (edition: Edition) => (date: Date): string =>
-	formatters.dateTime[edition]
-		.format(date)
-		.replace(/,/g, '')
-		.replace(':', '.');
+const dateTimeWithoutTimezone =
+	(edition: Edition) =>
+	(date: Date): string =>
+		formatters.dateTime[edition]
+			.format(date)
+			.replace(/,/g, '')
+			.replace(':', '.');
 
 /**
  * Creates a timezone abbreviation of the form: BST, EST, AEST etc.
  */
-const timeZoneAbbr = (edition: Edition) => (date: Date): string =>
-	timestampFormat(edition)(date).split(' ').pop() ?? '';
+const timeZoneAbbr =
+	(edition: Edition) =>
+	(date: Date): string =>
+		timestampFormat(edition)(date).split(' ').pop() ?? '';
 
 /**
  * Formats a Date into a datetime string, using Guardian style and in the
  * timezone of a given `Edition`
- * 
+ *
  * @param edition A Guardian `Edition`
  * @returns A datetime string of the form: Fri 12 Aug 2022 11.59 BST
  */
-const datetimeFormat = (edition: Edition) => (date: Date): string =>
-	`${dateTimeWithoutTimezone(edition)(date)} ${timeZoneAbbr(edition)(date)}`;
+const datetimeFormat =
+	(edition: Edition) =>
+	(date: Date): string =>
+		`${dateTimeWithoutTimezone(edition)(date)} ${timeZoneAbbr(edition)(
+			date,
+		)}`;
 
 // ----- Exports ----- //
 
