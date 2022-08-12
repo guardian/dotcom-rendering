@@ -62,7 +62,7 @@ export const DecideContainer = ({
 		case 'dynamic/package':
 			return (
 				<DynamicPackage
-					trails={trails}
+					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
 				/>

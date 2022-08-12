@@ -1,24 +1,68 @@
-import type { DCRContainerPalette } from '../../types/front';
+import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
 
 type Props = {
-	trails: TrailType[];
+	groupedTrails: DCRGroupedTrails;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 };
 
+const SnapRow = ({
+	snap,
+	containerPalette,
+	showAge,
+}: {
+	snap: TrailType;
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+}) => {
+	return (
+		<UL direction="row">
+			<LI padSides={true} padBottom={true}>
+				<FrontCard
+					trail={snap}
+					starRating={snap.starRating}
+					containerPalette={containerPalette}
+					containerType="dynamic/package"
+					showAge={showAge}
+					headlineSize="large"
+					headlineSizeOnMobile="medium"
+					imagePosition="right"
+					imagePositionOnMobile="left"
+					imageSize="medium"
+					trailText={snap.trailText}
+				/>
+			</LI>
+		</UL>
+	);
+};
+
 export const DynamicPackage = ({
-	trails,
+	groupedTrails,
 	containerPalette,
 	showAge,
 }: Props) => {
-	const [primary, ...remaining] = trails;
+	// Take the first 'snap' - all others are treated as standards
+	const snap = groupedTrails.snap.shift();
+	const [primary, ...remaining] = [
+		...groupedTrails.snap,
+		...groupedTrails.standard,
+	];
 
+	// TODO: Different layouts are required when there are 4+ 'remaining' cards
+	// dynamic/package will display up to 8 'remaining' cards before moving to 'show more'
 	if (primary.isBoosted) {
 		return (
 			<>
+				{!!snap && (
+					<SnapRow
+						snap={snap}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				)}
 				<UL direction="row">
 					<LI padSides={true}>
 						<FrontCard
@@ -66,6 +110,13 @@ export const DynamicPackage = ({
 	}
 	return (
 		<>
+			{!!snap && (
+				<SnapRow
+					snap={snap}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			)}
 			<UL direction="row">
 				<LI padSides={true} percentage="75%">
 					<FrontCard
