@@ -41,7 +41,7 @@ export const defaultStory = () => {
 					<ElementContainer
 						showSideBorders={false}
 						showTopBorder={false}
-						padded={false}
+						padSides={false}
 					>
 						<MostViewedRight
 							isAdFreeUser={false}
@@ -80,7 +80,7 @@ export const limitItemsStory = () => {
 					<ElementContainer
 						showSideBorders={false}
 						showTopBorder={false}
-						padded={false}
+						padSides={false}
 					>
 						<MostViewedRight
 							limitItems={3}

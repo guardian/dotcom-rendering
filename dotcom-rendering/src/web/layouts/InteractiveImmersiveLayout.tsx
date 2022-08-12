@@ -443,7 +443,7 @@ export const InteractiveImmersiveLayout = ({
 					showTopBorder={false}
 					showSideBorders={false}
 					shouldCenter={false}
-					padded={false}
+					padSides={false}
 					backgroundColour={palette.background.article}
 					element="main"
 				>
@@ -469,7 +469,7 @@ export const InteractiveImmersiveLayout = ({
 
 			{NAV.subNavSections && (
 				<ElementContainer
-					padded={false}
+					padSides={false}
 					backgroundColour={neutral[100]}
 					element="aside"
 				>
@@ -484,7 +484,7 @@ export const InteractiveImmersiveLayout = ({
 			)}
 
 			<ElementContainer
-				padded={false}
+				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}

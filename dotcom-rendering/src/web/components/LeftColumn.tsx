@@ -1,11 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	between,
-	border,
-	from,
-	space,
-	until,
-} from '@guardian/source-foundations';
+import { between, border, from, until } from '@guardian/source-foundations';
 
 const leftWidth = (size: LeftColSize) => {
 	switch (size) {
@@ -78,7 +72,6 @@ type Props = {
 	borderType?: 'full' | 'partial'; // if no borderType provided -> no border
 	borderColour?: string;
 	size?: LeftColSize;
-	verticalMargins?: boolean;
 };
 
 export const LeftColumn = ({
@@ -86,7 +79,6 @@ export const LeftColumn = ({
 	borderType,
 	borderColour = border.secondary,
 	size = 'compact',
-	verticalMargins = true,
 }: Props) => {
 	return (
 		<section
@@ -94,14 +86,6 @@ export const LeftColumn = ({
 				positionRelative,
 				leftWidth(size),
 				borderType === 'full' && fullRightBorder(borderColour),
-				verticalMargins &&
-					css`
-						/*
-							Keep spacing at the bottom of the container consistent at 36px, regardless of
-							breakpoint, based on chat with Harry Fisher
-						*/
-						padding-bottom: ${space[9]}px;
-					`,
 			]}
 		>
 			<div

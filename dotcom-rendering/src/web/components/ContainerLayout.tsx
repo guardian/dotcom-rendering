@@ -23,6 +23,7 @@ type Props = {
 	centralBorder?: 'partial' | 'full';
 	showTopBorder?: boolean;
 	padSides?: boolean;
+	padBottom?: boolean;
 	padContent?: boolean;
 	verticalMargins?: boolean;
 	backgroundColour?: string;
@@ -61,11 +62,6 @@ const headlineContainerStyles = css`
 
 const margins = css`
 	margin-top: ${space[2]}px;
-	/*
-		Keep spacing at the bottom of the container consistent at 36px, regardless of
-		breakpoint, based on chat with Harry Fisher
-	*/
-	margin-bottom: ${space[9]}px;
 `;
 
 const rightMargin = css`
@@ -127,6 +123,7 @@ export const ContainerLayout = ({
 	centralBorder,
 	showTopBorder = false,
 	padSides = true,
+	padBottom = true,
 	padContent = true,
 	verticalMargins = true,
 	borderColour,
@@ -154,7 +151,8 @@ export const ContainerLayout = ({
 			sectionId={sectionId}
 			showSideBorders={sideBorders}
 			showTopBorder={showTopBorder}
-			padded={padSides}
+			padSides={padSides}
+			padBottom={padBottom}
 			borderColour={borderColour || overrides?.border.container}
 			backgroundColour={
 				backgroundColour || overrides?.background.container
@@ -170,7 +168,6 @@ export const ContainerLayout = ({
 					borderType={centralBorder}
 					borderColour={borderColour || overrides?.border.container}
 					size={leftColSize}
-					verticalMargins={verticalMargins}
 				>
 					<div
 						css={css`

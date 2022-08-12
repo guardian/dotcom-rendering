@@ -15,7 +15,7 @@ export const StandardStory = () => {
 			showSideBorders={true}
 			borderColour={brandBorder.primary}
 			showTopBorder={false}
-			padded={false}
+			padSides={false}
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
@@ -39,7 +39,7 @@ export const OpinionStory = () => {
 			showSideBorders={true}
 			borderColour={brandBorder.primary}
 			showTopBorder={false}
-			padded={false}
+			padSides={false}
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav
@@ -63,7 +63,7 @@ export const ImmersiveStory = () => {
 			showSideBorders={false}
 			borderColour={brandBorder.primary}
 			showTopBorder={false}
-			padded={false}
+			padSides={false}
 			backgroundColour={brandBackground.primary}
 		>
 			<Nav

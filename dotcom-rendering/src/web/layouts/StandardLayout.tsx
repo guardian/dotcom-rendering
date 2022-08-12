@@ -345,7 +345,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
-							padded={false}
+							padSides={false}
 							shouldCenter={false}
 						>
 							<HeaderAdSlot
@@ -359,7 +359,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
-							padded={false}
+							padSides={false}
 							backgroundColour={brandBackground.primary}
 							element="header"
 						>
@@ -389,7 +389,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						showSideBorders={true}
 						borderColour={brandLine.primary}
 						showTopBorder={false}
-						padded={false}
+						padSides={false}
 						backgroundColour={brandBackground.primary}
 						element="nav"
 					>
@@ -410,7 +410,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									backgroundColour={
 										palette.background.article
 									}
-									padded={false}
+									padSides={false}
 									element="aside"
 								>
 									<Island deferUntil="idle">
@@ -425,7 +425,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									backgroundColour={
 										palette.background.article
 									}
-									padded={false}
+									padSides={false}
 									showTopBorder={false}
 								>
 									<StraightLines
@@ -773,7 +773,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 				<ElementContainer
 					data-print-layout="hide"
-					padded={false}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
@@ -877,7 +877,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 				<ElementContainer
 					data-print-layout="hide"
-					padded={false}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
@@ -890,7 +890,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			{NAV.subNavSections && (
 				<ElementContainer
 					data-print-layout="hide"
-					padded={false}
+					padSides={false}
 					element="aside"
 				>
 					<Island deferUntil="visible">
@@ -905,7 +905,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 			<ElementContainer
 				data-print-layout="hide"
-				padded={false}
+				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}

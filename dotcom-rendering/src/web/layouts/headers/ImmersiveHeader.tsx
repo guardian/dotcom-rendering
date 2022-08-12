@@ -163,7 +163,7 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 						<ElementContainer
 							showSideBorders={false}
 							showTopBorder={false}
-							padded={false}
+							padSides={false}
 							backgroundColour={brandBackground.primary}
 							element="nav"
 						>

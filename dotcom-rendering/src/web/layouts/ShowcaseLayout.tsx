@@ -246,7 +246,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							<ElementContainer
 								showTopBorder={false}
 								showSideBorders={false}
-								padded={false}
+								padSides={false}
 								shouldCenter={false}
 							>
 								<HeaderAdSlot
@@ -260,7 +260,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							<ElementContainer
 								showTopBorder={false}
 								showSideBorders={false}
-								padded={false}
+								padSides={false}
 								backgroundColour={brandBackground.primary}
 								element="header"
 							>
@@ -292,7 +292,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								showSideBorders={true}
 								borderColour={brandLine.primary}
 								showTopBorder={false}
-								padded={false}
+								padSides={false}
 								backgroundColour={brandBackground.primary}
 								element="nav"
 							>
@@ -315,7 +315,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									backgroundColour={
 										palette.background.article
 									}
-									padded={false}
+									padSides={false}
 									element="aside"
 								>
 									<Island deferUntil="idle">
@@ -330,7 +330,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 							<ElementContainer
 								backgroundColour={palette.background.article}
-								padded={false}
+								padSides={false}
 								showTopBorder={false}
 							>
 								<StraightLines
@@ -351,7 +351,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							<ElementContainer
 								showTopBorder={false}
 								showSideBorders={false}
-								padded={false}
+								padSides={false}
 							>
 								<HeaderAdSlot
 									isAdFreeUser={CAPIArticle.isAdFreeUser}
@@ -365,7 +365,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								showSideBorders={true}
 								borderColour={brandLine.primary}
 								showTopBorder={false}
-								padded={false}
+								padSides={false}
 								backgroundColour={brandBackground.primary}
 								element="nav"
 							>
@@ -642,7 +642,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				</ElementContainer>
 
 				<ElementContainer
-					padded={false}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
@@ -740,7 +740,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				)}
 
 				<ElementContainer
-					padded={false}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
@@ -751,7 +751,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			</main>
 
 			{NAV.subNavSections && (
-				<ElementContainer padded={false} element="aside">
+				<ElementContainer padSides={false} element="aside">
 					<Island deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
@@ -763,7 +763,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			)}
 
 			<ElementContainer
-				padded={false}
+				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
