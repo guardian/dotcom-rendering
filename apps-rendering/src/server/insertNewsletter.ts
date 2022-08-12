@@ -188,7 +188,7 @@ const tryToinsertNewsletterIntoStandard = (
 	return [
 		...body.slice(0, bodyResultIndex),
 		...textWithNewsletter.map(wrapInResult),
-		...body.slice(bodyResultIndex),
+		...body.slice(bodyResultIndex + 1), // +1 so the original Text that was split is left out
 	];
 };
 
