@@ -643,7 +643,13 @@ type LineEffectType = 'labs' | 'dotted' | 'straight';
 
 type LeftColSize = 'compact' | 'wide';
 
-type CardPercentageType = '25%' | '33.333%' | '50%' | '66%' | '75%' | '100%';
+type CardPercentageType =
+	| '25%'
+	| '33.333%'
+	| '50%'
+	| '66.666%'
+	| '75%'
+	| '100%';
 
 type HeadlineLink = {
 	to: string; // the href for the anchor tag
