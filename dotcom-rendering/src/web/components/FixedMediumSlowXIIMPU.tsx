@@ -269,7 +269,7 @@ function shouldPadWhenEven(i: number, noOfCards: number) {
  * touch
  */
 function shouldOffsetWhenOdd(i: number, noOfCards: number) {
-	return i !== noOfCards - 2 && i !== noOfCards - 3;
+	return i === noOfCards - 2 || i === noOfCards - 3;
 }
 
 /**
