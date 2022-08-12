@@ -206,9 +206,6 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		parse(CAPIArticle.slotMachineFlags || '').showBodyEnd ||
 		CAPIArticle.config.switches.slotBodyEnd;
 
-	const shouldReserveMerchSpace =
-		!!CAPIArticle.config.abTests.merchandisingMinHeightVariant;
-
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `CAPIArticle.config.shouldHideReaderRevenue` equals false.
@@ -509,7 +506,6 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					<AdSlot
 						position="merchandising-high"
 						display={format.display}
-						shouldReserveMerchSpace={shouldReserveMerchSpace}
 					/>
 				</ElementContainer>
 
@@ -605,11 +601,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					backgroundColour={neutral[93]}
 					element="aside"
 				>
-					<AdSlot
-						position="merchandising"
-						display={format.display}
-						shouldReserveMerchSpace={shouldReserveMerchSpace}
-					/>
+					<AdSlot position="merchandising" display={format.display} />
 				</ElementContainer>
 			</main>
 
