@@ -25,7 +25,7 @@ import { buildAdTargeting } from '../../lib/ad-targeting';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
-import { ContainerLayout } from '../components/ContainerLayout';
+import { Section } from '../components/Section';
 import { DecideOnwards } from '../components/DecideOnwards';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
@@ -214,7 +214,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
 				<Stuck>
-					<ContainerLayout
+					<Section
 						fullWidth={true}
 						showTopBorder={false}
 						showSideBorders={false}
@@ -226,10 +226,10 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 							shouldHideAds={CAPIArticle.shouldHideAds}
 							display={format.display}
 						/>
-					</ContainerLayout>
+					</Section>
 				</Stuck>
 
-				<ContainerLayout
+				<Section
 					fullWidth={true}
 					showTopBorder={false}
 					showSideBorders={false}
@@ -250,9 +250,9 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPIArticle.config.idApiUrl}
 					/>
-				</ContainerLayout>
+				</Section>
 
-				<ContainerLayout
+				<Section
 					fullWidth={true}
 					borderColour={brandLine.primary}
 					showTopBorder={false}
@@ -271,11 +271,11 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 						}
 						editionId={CAPIArticle.editionId}
 					/>
-				</ContainerLayout>
+				</Section>
 
 				{!!NAV.subNavSections && (
 					<>
-						<ContainerLayout
+						<Section
 							fullWidth={true}
 							backgroundColour={palette.background.article}
 							padSides={false}
@@ -289,8 +289,8 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 									format={format}
 								/>
 							</Island>
-						</ContainerLayout>
-						<ContainerLayout
+						</Section>
+						<Section
 							fullWidth={true}
 							backgroundColour={palette.background.article}
 							padSides={false}
@@ -302,7 +302,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 									display: block;
 								`}
 							/>
-						</ContainerLayout>
+						</Section>
 					</>
 				)}
 			</div>
@@ -312,7 +312,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 			)}
 
 			<main data-layout="NewsletterSignupLayout">
-				<ContainerLayout
+				<Section
 					showTopBorder={false}
 					showSideBorders={false}
 					innerBackgroundColour={brandBackground.primary}
@@ -343,9 +343,9 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 							<NewsletterBadge />
 						</span>
 					</div>
-				</ContainerLayout>
+				</Section>
 
-				<ContainerLayout
+				<Section
 					centralBorder="full"
 					showTopBorder={false}
 					stretchRight={true}
@@ -457,7 +457,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 					<div css={topMarginStyle()}>
 						<NewsletterPrivacyMessage />
 					</div>
-				</ContainerLayout>
+				</Section>
 
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
@@ -467,10 +467,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 				) : (
 					<>
 						{CAPIArticle.storyPackage && (
-							<ContainerLayout
-								fullWidth={true}
-								showTopBorder={false}
-							>
+							<Section fullWidth={true} showTopBorder={false}>
 								<Island deferUntil="visible">
 									<Carousel
 										heading={
@@ -483,7 +480,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 										format={format}
 									/>
 								</Island>
-							</ContainerLayout>
+							</Section>
 						)}
 
 						<Island
@@ -516,7 +513,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 				)}
 			</main>
 
-			<ContainerLayout
+			<Section
 				fullWidth={true}
 				data-print-layout="hide"
 				padSides={false}
@@ -536,7 +533,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 						CAPIArticle.contributionsServiceUrl
 					}
 				/>
-			</ContainerLayout>
+			</Section>
 
 			<BannerWrapper data-print-layout="hide" />
 			<MobileStickyContainer data-print-layout="hide" />

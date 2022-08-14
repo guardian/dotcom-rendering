@@ -4,9 +4,9 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { ContainerLayout } from './ContainerLayout';
 import { Figure } from './Figure';
 import { RichLink } from './RichLink';
+import { Section } from './Section';
 
 const someContributor =
 	'https://i.guim.co.uk/img/uploads/2017/10/09/Oliver-Wainwright,-L.png?width=300&quality=85&auto=format&fit=max&s=e1aa270c46b716e34c4783ced3376cc9';
@@ -26,7 +26,7 @@ export default {
 
 export const Article = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -61,13 +61,13 @@ export const Article = () => {
 					sponsorName=""
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };
 
 export const Network = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -102,7 +102,7 @@ export const Network = () => {
 					sponsorName=""
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Network.story = {
@@ -114,7 +114,7 @@ Network.story = {
 
 export const SectionStory = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -149,7 +149,7 @@ export const SectionStory = () => {
 					sponsorName=""
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };
 SectionStory.story = {
@@ -158,7 +158,7 @@ SectionStory.story = {
 
 export const Inline = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -193,7 +193,7 @@ export const Inline = () => {
 					sponsorName=""
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Inline.story = {
@@ -202,7 +202,7 @@ Inline.story = {
 
 export const ImageContent = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -237,7 +237,7 @@ export const ImageContent = () => {
 					sponsorName=""
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };
 ImageContent.story = {
@@ -249,7 +249,7 @@ ImageContent.story = {
 
 export const Interactive = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -284,7 +284,7 @@ export const Interactive = () => {
 					sponsorName=""
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Interactive.story = {
@@ -295,7 +295,7 @@ Interactive.story = {
 
 export const Gallery = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -331,7 +331,7 @@ export const Gallery = () => {
 					contributorImage={someContributor}
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Gallery.story = {
@@ -342,7 +342,7 @@ Gallery.story = {
 
 export const Video = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -378,7 +378,7 @@ export const Video = () => {
 					contributorImage={someContributor}
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Video.story = {
@@ -390,7 +390,7 @@ Video.story = {
 
 export const Audio = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -425,13 +425,13 @@ export const Audio = () => {
 					sponsorName=""
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };
 
 export const LiveBlog = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -466,7 +466,7 @@ export const LiveBlog = () => {
 					sponsorName=""
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };
 LiveBlog.story = {
@@ -478,7 +478,7 @@ LiveBlog.story = {
 
 export const Tag = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -513,13 +513,13 @@ export const Tag = () => {
 					sponsorName=""
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };
 
 export const Index = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -561,13 +561,13 @@ export const Index = () => {
 					starRating={3}
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };
 
 export const Crossword = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -602,13 +602,13 @@ export const Crossword = () => {
 					sponsorName=""
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };
 
 export const Survey = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -643,13 +643,13 @@ export const Survey = () => {
 					sponsorName=""
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };
 
 export const Signup = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -685,13 +685,13 @@ export const Signup = () => {
 					contributorImage={someContributor}
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };
 
 export const Userid = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -726,13 +726,13 @@ export const Userid = () => {
 					sponsorName=""
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };
 
 export const PaidFor = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -773,6 +773,6 @@ export const PaidFor = () => {
 					sponsorName="Sponsor name"
 				/>
 			</Figure>
-		</ContainerLayout>
+		</Section>
 	);
 };

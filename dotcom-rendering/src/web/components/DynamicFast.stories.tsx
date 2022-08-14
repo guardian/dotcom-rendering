@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
-import { ContainerLayout } from './ContainerLayout';
 import { DynamicFast } from './DynamicFast';
+import { Section } from './Section';
 
 export default {
 	component: DynamicFast,
@@ -23,11 +23,7 @@ export default {
 };
 
 export const DF2VeryBigs2Bigs5Standards = () => (
-	<ContainerLayout
-		title="DynamicFast"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicFast" padContent={false} centralBorder="partial">
 		<DynamicFast
 			groupedTrails={{
 				snap: [],
@@ -44,7 +40,7 @@ export const DF2VeryBigs2Bigs5Standards = () => (
 			}}
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 DF2VeryBigs2Bigs5Standards.story = {
@@ -52,11 +48,7 @@ DF2VeryBigs2Bigs5Standards.story = {
 };
 
 export const DF1Huge1VeryBig2Big3Standard = () => (
-	<ContainerLayout
-		title="DynamicFast"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicFast" padContent={false} centralBorder="partial">
 		<DynamicFast
 			groupedTrails={{
 				snap: [],
@@ -67,7 +59,7 @@ export const DF1Huge1VeryBig2Big3Standard = () => (
 			}}
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 DF1Huge1VeryBig2Big3Standard.story = {
@@ -75,11 +67,7 @@ DF1Huge1VeryBig2Big3Standard.story = {
 };
 
 export const DF1VeryBig0Big8Standard = () => (
-	<ContainerLayout
-		title="DynamicFast"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicFast" padContent={false} centralBorder="partial">
 		<DynamicFast
 			groupedTrails={{
 				snap: [],
@@ -99,7 +87,7 @@ export const DF1VeryBig0Big8Standard = () => (
 			}}
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 DF1VeryBig0Big8Standard.story = {
@@ -107,11 +95,7 @@ DF1VeryBig0Big8Standard.story = {
 };
 
 export const DF2VeryBigs1Big8StandardsFirstBoosted = () => (
-	<ContainerLayout
-		title="DynamicFast"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicFast" padContent={false} centralBorder="partial">
 		<DynamicFast
 			groupedTrails={{
 				snap: [],
@@ -131,7 +115,7 @@ export const DF2VeryBigs1Big8StandardsFirstBoosted = () => (
 			}}
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 DF2VeryBigs1Big8StandardsFirstBoosted.story = {
@@ -139,11 +123,7 @@ DF2VeryBigs1Big8StandardsFirstBoosted.story = {
 };
 
 export const DF3VeryBigs3Big0StandardsSecondBoosted = () => (
-	<ContainerLayout
-		title="DynamicFast"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicFast" padContent={false} centralBorder="partial">
 		<DynamicFast
 			groupedTrails={{
 				snap: [],
@@ -158,7 +138,7 @@ export const DF3VeryBigs3Big0StandardsSecondBoosted = () => (
 			}}
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 DF3VeryBigs3Big0StandardsSecondBoosted.story = {
@@ -166,11 +146,7 @@ DF3VeryBigs3Big0StandardsSecondBoosted.story = {
 };
 
 export const DF2VeryBigs3Big6StandardsThirdBoosted = () => (
-	<ContainerLayout
-		title="DynamicFast"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicFast" padContent={false} centralBorder="partial">
 		<DynamicFast
 			groupedTrails={{
 				snap: [],
@@ -188,7 +164,7 @@ export const DF2VeryBigs3Big6StandardsThirdBoosted = () => (
 			}}
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 DF2VeryBigs3Big6StandardsThirdBoosted.story = {
@@ -196,11 +172,7 @@ DF2VeryBigs3Big6StandardsThirdBoosted.story = {
 };
 
 export const DF2VeryBigs1Big8StandardsFirstThirdBoosted = () => (
-	<ContainerLayout
-		title="DynamicFast"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicFast" padContent={false} centralBorder="partial">
 		<DynamicFast
 			groupedTrails={{
 				snap: [],
@@ -220,7 +192,7 @@ export const DF2VeryBigs1Big8StandardsFirstThirdBoosted = () => (
 			}}
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 DF2VeryBigs1Big8StandardsFirstThirdBoosted.story = {
@@ -228,11 +200,7 @@ DF2VeryBigs1Big8StandardsFirstThirdBoosted.story = {
 };
 
 export const DF2VeryBigs2Big3StandardsSecondThirdBoosted = () => (
-	<ContainerLayout
-		title="DynamicFast"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicFast" padContent={false} centralBorder="partial">
 		<DynamicFast
 			groupedTrails={{
 				snap: [],
@@ -243,7 +211,7 @@ export const DF2VeryBigs2Big3StandardsSecondThirdBoosted = () => (
 			}}
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 DF2VeryBigs2Big3StandardsSecondThirdBoosted.story = {

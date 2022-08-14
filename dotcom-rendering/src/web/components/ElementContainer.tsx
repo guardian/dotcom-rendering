@@ -53,7 +53,7 @@ type Props = {
 };
 
 /**
- * @deprecated please use ContainerLayout fullWidth={true}  instead
+ * @deprecated please use Section fullWidth={true}  instead
  */
 export const ElementContainer = ({
 	sectionId,

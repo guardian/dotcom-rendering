@@ -2,11 +2,11 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { ArticleContainer } from './ArticleContainer';
-import { ContainerLayout } from './ContainerLayout';
 import { Figure } from './Figure';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
+import { Section } from './Section';
 import { TextBlockComponent } from './TextBlockComponent';
 
 const textHtml =
@@ -55,7 +55,7 @@ export default {
 
 export const InlineStory = () => {
 	return (
-		<ContainerLayout fullWidth={true} showTopBorder={false}>
+		<Section fullWidth={true} showTopBorder={false}>
 			<Flex>
 				<LeftColumn>
 					<></>
@@ -84,14 +84,14 @@ export const InlineStory = () => {
 					<></>
 				</RightColumn>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 InlineStory.story = { name: 'Inline' };
 
 export const SupportingStory = () => {
 	return (
-		<ContainerLayout fullWidth={true} showTopBorder={false}>
+		<Section fullWidth={true} showTopBorder={false}>
 			<Flex>
 				<LeftColumn>
 					<></>
@@ -126,18 +126,14 @@ export const SupportingStory = () => {
 					<></>
 				</RightColumn>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 SupportingStory.story = { name: 'Supporting' };
 
 export const ImmersiveStory = () => {
 	return (
-		<ContainerLayout
-			fullWidth={true}
-			showTopBorder={false}
-			showSideBorders={false}
-		>
+		<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 			<Flex>
 				<LeftColumn>
 					<></>
@@ -167,14 +163,14 @@ export const ImmersiveStory = () => {
 					<></>
 				</RightColumn>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 ImmersiveStory.story = { name: 'Immersive' };
 
 export const ThumbnailStory = () => {
 	return (
-		<ContainerLayout fullWidth={true} showTopBorder={false}>
+		<Section fullWidth={true} showTopBorder={false}>
 			<Flex>
 				<LeftColumn>
 					<></>
@@ -205,14 +201,14 @@ export const ThumbnailStory = () => {
 					<></>
 				</RightColumn>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 ThumbnailStory.story = { name: 'Thumbnail' };
 
 export const ShowcaseStory = () => {
 	return (
-		<ContainerLayout fullWidth={true} showTopBorder={false}>
+		<Section fullWidth={true} showTopBorder={false}>
 			<Flex>
 				<LeftColumn>
 					<></>
@@ -242,14 +238,14 @@ export const ShowcaseStory = () => {
 					<></>
 				</RightColumn>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 ShowcaseStory.story = { name: 'Showcase' };
 
 export const HalfWidthStory = () => {
 	return (
-		<ContainerLayout fullWidth={true} showTopBorder={false}>
+		<Section fullWidth={true} showTopBorder={false}>
 			<Flex>
 				<LeftColumn>
 					<></>
@@ -279,7 +275,7 @@ export const HalfWidthStory = () => {
 					<></>
 				</RightColumn>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 HalfWidthStory.story = { name: 'HalfWidth' };

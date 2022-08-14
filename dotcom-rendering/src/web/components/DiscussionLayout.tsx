@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import { ArticleDisplay } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import { AdSlot } from './AdSlot';
-import { ContainerLayout } from './ContainerLayout';
 import { DiscussionContainer } from './DiscussionContainer.importable';
 import { DiscussionMeta } from './DiscussionMeta.importable';
 import { Flex } from './Flex';
 import { Island } from './Island';
 import { RightColumn } from './RightColumn';
+import { Section } from './Section';
 
 type Props = {
 	format: ArticleFormat;
@@ -33,7 +33,7 @@ export const DiscussionLayout = ({
 	const hideAd = isAdFreeUser || shouldHideAds;
 	return (
 		<>
-			<ContainerLayout
+			<Section
 				padSides={false}
 				padContent={false}
 				showTopBorder={false}
@@ -102,7 +102,7 @@ export const DiscussionLayout = ({
 						)}
 					</>
 				</Flex>
-			</ContainerLayout>
+			</Section>
 		</>
 	);
 };

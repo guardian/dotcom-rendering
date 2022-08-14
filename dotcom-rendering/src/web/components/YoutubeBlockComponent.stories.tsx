@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { ContainerLayout } from './ContainerLayout';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
+import { Section } from './Section';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
 export default {
@@ -12,7 +12,7 @@ export default {
 };
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
-	<ContainerLayout fullWidth={true} showTopBorder={false}>
+	<Section fullWidth={true} showTopBorder={false}>
 		<Flex>
 			<LeftColumn borderType="full">
 				<></>
@@ -29,7 +29,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 				<></>
 			</RightColumn>
 		</Flex>
-	</ContainerLayout>
+	</Section>
 );
 
 export const Default = () => {

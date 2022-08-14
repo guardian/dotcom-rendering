@@ -9,10 +9,10 @@ import { news } from '@guardian/source-foundations';
 import { ArticleContainer } from './ArticleContainer';
 import { ArticleHeadline } from './ArticleHeadline';
 import { mainMediaElements } from './ArticleHeadline.mocks';
-import { ContainerLayout } from './ContainerLayout';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { MainMedia } from './MainMedia';
+import { Section } from './Section';
 import { Standfirst } from './Standfirst';
 
 export default {
@@ -27,7 +27,7 @@ export const ArticleStory = () => {
 		theme: ArticlePillar.News,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -41,7 +41,7 @@ export const ArticleStory = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 ArticleStory.story = { name: 'Article' };
@@ -53,7 +53,7 @@ export const Feature = () => {
 		theme: ArticlePillar.Lifestyle,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -67,7 +67,7 @@ export const Feature = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Feature.story = { name: 'Feature' };
@@ -79,7 +79,7 @@ export const ShowcaseInterview = () => {
 		theme: ArticlePillar.Culture,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -111,7 +111,7 @@ export const ShowcaseInterview = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 ShowcaseInterview.story = { name: 'Interview (with showcase)' };
@@ -123,7 +123,7 @@ export const ShowcaseInterviewNobyline = () => {
 		theme: ArticlePillar.Culture,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -155,7 +155,7 @@ export const ShowcaseInterviewNobyline = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 ShowcaseInterviewNobyline.story = {
@@ -169,7 +169,7 @@ export const Interview = () => {
 		theme: ArticlePillar.Culture,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -199,7 +199,7 @@ export const Interview = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Interview.story = { name: 'Interview (without showcase)' };
@@ -211,7 +211,7 @@ export const InterviewSpecialReport = () => {
 		theme: ArticleSpecial.SpecialReport,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -241,7 +241,7 @@ export const InterviewSpecialReport = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 InterviewSpecialReport.story = {
@@ -255,7 +255,7 @@ export const InterviewNoByline = () => {
 		theme: ArticlePillar.Culture,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -285,7 +285,7 @@ export const InterviewNoByline = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 InterviewNoByline.story = {
@@ -299,7 +299,7 @@ export const Comment = () => {
 		theme: ArticlePillar.Opinion,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -313,7 +313,7 @@ export const Comment = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Comment.story = { name: 'Comment' };
@@ -336,7 +336,7 @@ export const Analysis = () => {
 		<>
 			{themes.map(([themeName, theme]) => (
 				<>
-					<ContainerLayout fullWidth={true}>
+					<Section fullWidth={true}>
 						<Flex>
 							<LeftColumn borderType="full">
 								<></>
@@ -350,7 +350,7 @@ export const Analysis = () => {
 								/>
 							</ArticleContainer>
 						</Flex>
-					</ContainerLayout>
+					</Section>
 					<br />
 				</>
 			))}
@@ -366,7 +366,7 @@ export const Gallery = () => {
 		theme: ArticlePillar.News,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -380,7 +380,7 @@ export const Gallery = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Gallery.story = { name: 'Gallery' };
@@ -392,7 +392,7 @@ export const Review = () => {
 		theme: ArticlePillar.News,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -406,7 +406,7 @@ export const Review = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Review.story = { name: 'Review' };
@@ -418,7 +418,7 @@ export const PhotoEssay = () => {
 		theme: ArticlePillar.News,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -432,7 +432,7 @@ export const PhotoEssay = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 PhotoEssay.story = { name: 'PhotoEssay' };
@@ -444,7 +444,7 @@ export const Quiz = () => {
 		theme: ArticlePillar.News,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -458,7 +458,7 @@ export const Quiz = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Quiz.story = { name: 'Quiz' };
@@ -470,7 +470,7 @@ export const Recipe = () => {
 		theme: ArticlePillar.News,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -484,7 +484,7 @@ export const Recipe = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Recipe.story = { name: 'Recipe' };
@@ -496,7 +496,7 @@ export const Immersive = () => {
 		theme: ArticlePillar.News,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -510,7 +510,7 @@ export const Immersive = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Immersive.story = { name: 'Immersive' };
@@ -522,7 +522,7 @@ export const ImmersiveNoMainMedia = () => {
 		theme: ArticlePillar.News,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -536,7 +536,7 @@ export const ImmersiveNoMainMedia = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 ImmersiveNoMainMedia.story = { name: 'Printshop (with no main media)' };
@@ -548,7 +548,7 @@ export const ImmersiveComment = () => {
 		theme: ArticlePillar.News,
 	};
 	return (
-		<ContainerLayout
+		<Section
 			fullWidth={true}
 			showSideBorders={false}
 			showTopBorder={false}
@@ -567,7 +567,7 @@ export const ImmersiveComment = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 ImmersiveComment.story = { name: 'Immersive opinion piece' };
@@ -579,7 +579,7 @@ export const Editorial = () => {
 		theme: ArticlePillar.News,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -593,7 +593,7 @@ export const Editorial = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Editorial.story = { name: 'Editorial' };
@@ -605,7 +605,7 @@ export const MatchReport = () => {
 		theme: ArticlePillar.News,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -619,7 +619,7 @@ export const MatchReport = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 MatchReport.story = { name: 'MatchReport' };
@@ -631,7 +631,7 @@ export const SpecialReport = () => {
 		theme: ArticleSpecial.SpecialReport,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -645,7 +645,7 @@ export const SpecialReport = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 SpecialReport.story = { name: 'SpecialReport' };
@@ -657,7 +657,7 @@ export const LiveBlog = () => {
 		theme: ArticlePillar.News,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -671,7 +671,7 @@ export const LiveBlog = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 LiveBlog.story = {
@@ -696,7 +696,7 @@ export const DeadBlog = () => {
 		theme: ArticlePillar.News,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -710,7 +710,7 @@ export const DeadBlog = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 DeadBlog.story = { name: 'DeadBlog' };
@@ -722,7 +722,7 @@ export const ReviewWithoutStars = () => {
 		theme: ArticlePillar.Culture,
 	};
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -741,7 +741,7 @@ export const ReviewWithoutStars = () => {
 					/>
 				</ArticleContainer>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 ReviewWithoutStars.story = { name: 'Review without stars' };
@@ -767,7 +767,7 @@ export const AgeWarning = () => {
 		<>
 			{designs.map(([themeName, design]) => (
 				<>
-					<ContainerLayout fullWidth={true}>
+					<Section fullWidth={true}>
 						<Flex>
 							<LeftColumn>
 								<></>
@@ -787,7 +787,7 @@ export const AgeWarning = () => {
 								/>
 							</ArticleContainer>
 						</Flex>
-					</ContainerLayout>
+					</Section>
 					<br />
 				</>
 			))}

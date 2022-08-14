@@ -9,7 +9,7 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
-import { ContainerLayout } from '../components/ContainerLayout';
+import { Section } from '../components/Section';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -52,7 +52,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			<div data-print-layout="hide" id="bannerandheader">
 				<>
 					<Stuck>
-						<ContainerLayout
+						<Section
 							fullWidth={true}
 							showTopBorder={false}
 							showSideBorders={false}
@@ -64,10 +64,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								shouldHideAds={false}
 								display={format.display}
 							/>
-						</ContainerLayout>
+						</Section>
 					</Stuck>
 
-					<ContainerLayout
+					<Section
 						fullWidth={true}
 						showTopBorder={false}
 						showSideBorders={false}
@@ -88,8 +88,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
 						/>
-					</ContainerLayout>
-					<ContainerLayout
+					</Section>
+					<Section
 						fullWidth={true}
 						borderColour={brandLine.primary}
 						showTopBorder={false}
@@ -105,10 +105,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							}
 							editionId={front.editionId}
 						/>
-					</ContainerLayout>
+					</Section>
 					{NAV.subNavSections && (
 						<>
-							<ContainerLayout
+							<Section
 								fullWidth={true}
 								showTopBorder={false}
 								backgroundColour={palette.background.article}
@@ -122,8 +122,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										format={format}
 									/>
 								</Island>
-							</ContainerLayout>
-							<ContainerLayout
+							</Section>
+							<Section
 								fullWidth={true}
 								backgroundColour={palette.background.article}
 								padSides={false}
@@ -135,7 +135,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									`}
 									count={4}
 								/>
-							</ContainerLayout>
+							</Section>
 						</>
 					)}
 				</>
@@ -158,7 +158,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
-							<ContainerLayout
+							<Section
 								fullWidth={true}
 								padSides={false}
 								showTopBorder={false}
@@ -169,12 +169,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								element="section"
 							>
 								<Snap snapData={trails[0].snapData} />
-							</ContainerLayout>
+							</Section>
 						);
 					}
 
 					return (
-						<ContainerLayout
+						<Section
 							key={collection.id}
 							title={collection.displayName}
 							// TODO: This logic should be updated, as this relies
@@ -202,12 +202,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								containerPalette={collection.containerPalette}
 								showAge={collection.displayName === 'Headlines'}
 							/>
-						</ContainerLayout>
+						</Section>
 					);
 				})}
 
 				{!isPaidContent && (
-					<ContainerLayout
+					<Section
 						fullWidth={true}
 						data-print-layout="hide"
 						element="aside"
@@ -217,11 +217,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							sectionName="" // {front.sectionName}
 							ajaxUrl={front.config.ajaxUrl}
 						/>
-					</ContainerLayout>
+					</Section>
 				)}
 			</main>
 
-			<ContainerLayout
+			<Section
 				fullWidth={true}
 				data-print-layout="hide"
 				padSides={false}
@@ -231,10 +231,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				element="aside"
 			>
 				<AdSlot position="merchandising" display={format.display} />
-			</ContainerLayout>
+			</Section>
 
 			{NAV.subNavSections && (
-				<ContainerLayout
+				<Section
 					fullWidth={true}
 					showTopBorder={false}
 					data-print-layout="hide"
@@ -248,10 +248,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							format={format}
 						/>
 					</Island>
-				</ContainerLayout>
+				</Section>
 			)}
 
-			<ContainerLayout
+			<Section
 				fullWidth={true}
 				data-print-layout="hide"
 				padSides={false}
@@ -269,7 +269,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					editionId={front.editionId}
 					contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 				/>
-			</ContainerLayout>
+			</Section>
 		</>
 	);
 };

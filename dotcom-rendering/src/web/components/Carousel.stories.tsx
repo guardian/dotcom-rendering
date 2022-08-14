@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { Carousel } from './Carousel.importable';
-import { ContainerLayout } from './ContainerLayout';
+import { Section } from './Section';
 
 export default {
 	component: Carousel,
@@ -181,7 +181,7 @@ const immersiveTrails = convertToImmersive(trails);
 
 export const Headlines = () => (
 	<>
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Carousel
 				heading="More on this story"
 				trails={trails}
@@ -192,8 +192,8 @@ export const Headlines = () => (
 					display: ArticleDisplay.Standard,
 				}}
 			/>
-		</ContainerLayout>
-		<ContainerLayout fullWidth={true}>
+		</Section>
+		<Section fullWidth={true}>
 			<Carousel
 				heading="Sport"
 				trails={trails}
@@ -204,7 +204,7 @@ export const Headlines = () => (
 					display: ArticleDisplay.Standard,
 				}}
 			/>
-		</ContainerLayout>
+		</Section>
 	</>
 );
 
@@ -212,7 +212,7 @@ Headlines.story = 'Headlines carousel';
 
 export const SingleItemCarousel = () => (
 	<>
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Carousel
 				heading="More on this story"
 				trails={trails.slice(1, 2)}
@@ -223,7 +223,7 @@ export const SingleItemCarousel = () => (
 					display: ArticleDisplay.Standard,
 				}}
 			/>
-		</ContainerLayout>
+		</Section>
 	</>
 );
 
@@ -231,7 +231,7 @@ Headlines.story = 'Carousel with single item';
 
 export const Immersive = () => (
 	<>
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Carousel
 				heading="More on this story"
 				trails={immersiveTrails}
@@ -242,8 +242,8 @@ export const Immersive = () => (
 					display: ArticleDisplay.Immersive,
 				}}
 			/>
-		</ContainerLayout>
-		<ContainerLayout fullWidth={true}>
+		</Section>
+		<Section fullWidth={true}>
 			<Carousel
 				heading="Sport"
 				trails={immersiveTrails}
@@ -254,7 +254,7 @@ export const Immersive = () => (
 					display: ArticleDisplay.Immersive,
 				}}
 			/>
-		</ContainerLayout>
+		</Section>
 	</>
 );
 

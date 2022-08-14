@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
-import { ContainerLayout } from './ContainerLayout';
 import { EmailSignup } from './EmailSignup';
+import { Section } from './Section';
 
 export default {
 	component: EmailSignup,
@@ -26,11 +26,7 @@ export default {
 const hidePrivacyMessage = (): boolean => boolean('hidePrivacyMessage', false);
 
 export const Default = () => (
-	<ContainerLayout
-		title="EmailSignup"
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="EmailSignup" padContent={false} centralBorder="partial">
 		<EmailSignup
 			identityName="patriarchy"
 			description="Reviewing the most important stories on feminism and sexism and those fighting for equality"
@@ -40,6 +36,6 @@ export const Default = () => (
 			theme="opinion"
 			hidePrivacyMessage={hidePrivacyMessage()}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 Default.story = { name: 'EmailSignup' };

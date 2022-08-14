@@ -21,7 +21,6 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
-import { ContainerLayout } from '../components/ContainerLayout';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -37,6 +36,7 @@ import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.imp
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
+import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -301,7 +301,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		<>
 			<div id="bannerandheader">
 				<Stuck>
-					<ContainerLayout
+					<Section
 						fullWidth={true}
 						showTopBorder={false}
 						showSideBorders={false}
@@ -313,11 +313,11 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							shouldHideAds={CAPIArticle.shouldHideAds}
 							display={format.display}
 						/>
-					</ContainerLayout>
+					</Section>
 				</Stuck>
 				<SendToBack>
 					{format.theme !== ArticleSpecial.Labs && (
-						<ContainerLayout
+						<Section
 							fullWidth={true}
 							showTopBorder={false}
 							showSideBorders={false}
@@ -345,10 +345,10 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
 							/>
-						</ContainerLayout>
+						</Section>
 					)}
 
-					<ContainerLayout
+					<Section
 						fullWidth={true}
 						borderColour={brandLine.primary}
 						showTopBorder={false}
@@ -368,10 +368,10 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							}
 							editionId={CAPIArticle.editionId}
 						/>
-					</ContainerLayout>
+					</Section>
 
 					{NAV.subNavSections && (
-						<ContainerLayout
+						<Section
 							fullWidth={true}
 							backgroundColour={palette.background.article}
 							padSides={false}
@@ -384,10 +384,10 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									format={format}
 								/>
 							</Island>
-						</ContainerLayout>
+						</Section>
 					)}
 
-					<ContainerLayout
+					<Section
 						fullWidth={true}
 						backgroundColour={palette.background.article}
 						padSides={false}
@@ -399,12 +399,12 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								display: block;
 							`}
 						/>
-					</ContainerLayout>
+					</Section>
 				</SendToBack>
 			</div>
 
 			<main data-layout="CommentLayout">
-				<ContainerLayout
+				<Section
 					fullWidth={true}
 					showTopBorder={false}
 					backgroundColour={palette.background.article}
@@ -689,9 +689,9 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</div>
 						</GridItem>
 					</StandardGrid>
-				</ContainerLayout>
+				</Section>
 
-				<ContainerLayout
+				<Section
 					fullWidth={true}
 					padSides={false}
 					showTopBorder={false}
@@ -703,7 +703,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						position="merchandising-high"
 						display={format.display}
 					/>
-				</ContainerLayout>
+				</Section>
 
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
@@ -713,7 +713,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				) : (
 					<>
 						{CAPIArticle.storyPackage && (
-							<ContainerLayout fullWidth={true}>
+							<Section fullWidth={true}>
 								<Island deferUntil="visible">
 									<Carousel
 										heading={
@@ -726,7 +726,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										format={format}
 									/>
 								</Island>
-							</ContainerLayout>
+							</Section>
 						)}
 
 						<Island
@@ -759,7 +759,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				)}
 
 				{!isPaidContent && showComments && (
-					<ContainerLayout
+					<Section
 						fullWidth={true}
 						sectionId="comments"
 						element="aside"
@@ -781,11 +781,11 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
 							shouldHideAds={CAPIArticle.shouldHideAds}
 						/>
-					</ContainerLayout>
+					</Section>
 				)}
 
 				{!isPaidContent && (
-					<ContainerLayout
+					<Section
 						fullWidth={true}
 						data-print-layout="hide"
 						element="aside"
@@ -795,10 +795,10 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							sectionName={CAPIArticle.sectionName}
 							ajaxUrl={CAPIArticle.config.ajaxUrl}
 						/>
-					</ContainerLayout>
+					</Section>
 				)}
 
-				<ContainerLayout
+				<Section
 					fullWidth={true}
 					padSides={false}
 					showTopBorder={false}
@@ -807,15 +807,11 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					element="aside"
 				>
 					<AdSlot position="merchandising" display={format.display} />
-				</ContainerLayout>
+				</Section>
 			</main>
 
 			{NAV.subNavSections && (
-				<ContainerLayout
-					fullWidth={true}
-					padSides={false}
-					element="aside"
-				>
+				<Section fullWidth={true} padSides={false} element="aside">
 					<Island deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
@@ -823,10 +819,10 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							format={format}
 						/>
 					</Island>
-				</ContainerLayout>
+				</Section>
 			)}
 
-			<ContainerLayout
+			<Section
 				fullWidth={true}
 				padSides={false}
 				backgroundColour={brandBackground.primary}
@@ -844,7 +840,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						CAPIArticle.contributionsServiceUrl
 					}
 				/>
-			</ContainerLayout>
+			</Section>
 
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>

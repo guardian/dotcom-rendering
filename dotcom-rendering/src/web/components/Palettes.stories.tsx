@@ -1,6 +1,6 @@
 import { trails } from '../../../fixtures/manual/trails';
-import { ContainerLayout } from './ContainerLayout';
 import { DynamicFast } from './DynamicFast';
+import { Section } from './Section';
 
 export default {
 	title: 'Layouts/Palettes',
@@ -22,7 +22,7 @@ const groupedTrails = {
 };
 
 export const EventPalette = () => (
-	<ContainerLayout
+	<Section
 		title="EventPalette"
 		padContent={false}
 		centralBorder="partial"
@@ -35,11 +35,11 @@ export const EventPalette = () => (
 			containerPalette="EventPalette"
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 export const EventAltPalette = () => (
-	<ContainerLayout
+	<Section
 		title="EventAltPalette"
 		padContent={false}
 		centralBorder="partial"
@@ -52,11 +52,11 @@ export const EventAltPalette = () => (
 			containerPalette="EventAltPalette"
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 export const SombrePalette = () => (
-	<ContainerLayout
+	<Section
 		title="SombrePalette"
 		padContent={false}
 		centralBorder="partial"
@@ -69,11 +69,11 @@ export const SombrePalette = () => (
 			containerPalette="SombrePalette"
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 export const SombreAltPalette = () => (
-	<ContainerLayout
+	<Section
 		title="SombreAltPalette"
 		padContent={false}
 		centralBorder="partial"
@@ -86,11 +86,11 @@ export const SombreAltPalette = () => (
 			containerPalette="SombreAltPalette"
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 export const BreakingPalette = () => (
-	<ContainerLayout
+	<Section
 		title="BreakingPalette"
 		padContent={false}
 		centralBorder="partial"
@@ -103,11 +103,11 @@ export const BreakingPalette = () => (
 			containerPalette="BreakingPalette"
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 export const LongRunningPalette = () => (
-	<ContainerLayout
+	<Section
 		title="LongRunningPalette"
 		padContent={false}
 		centralBorder="partial"
@@ -120,11 +120,11 @@ export const LongRunningPalette = () => (
 			containerPalette="LongRunningPalette"
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 export const LongRunningAltPalette = () => (
-	<ContainerLayout
+	<Section
 		title="LongRunningAltPalette"
 		padContent={false}
 		centralBorder="partial"
@@ -137,11 +137,11 @@ export const LongRunningAltPalette = () => (
 			containerPalette="LongRunningAltPalette"
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 export const InvestigationPalette = () => (
-	<ContainerLayout
+	<Section
 		title="InvestigationPalette"
 		padContent={false}
 		centralBorder="partial"
@@ -154,5 +154,5 @@ export const InvestigationPalette = () => (
 			containerPalette="InvestigationPalette"
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );

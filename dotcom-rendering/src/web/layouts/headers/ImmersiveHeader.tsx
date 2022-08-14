@@ -11,7 +11,7 @@ import { buildAdTargeting } from '../../../lib/ad-targeting';
 import { ArticleHeadline } from '../../components/ArticleHeadline';
 import { ArticleTitle } from '../../components/ArticleTitle';
 import { Caption } from '../../components/Caption';
-import { ContainerLayout } from '../../components/ContainerLayout';
+import { Section } from '../../components/Section';
 import { Island } from '../../components/Island';
 import { LabsHeader } from '../../components/LabsHeader.importable';
 import { MainMedia } from '../../components/MainMedia';
@@ -159,7 +159,7 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 							order: 0;
 						`}
 					>
-						<ContainerLayout
+						<Section
 							fullWidth={true}
 							showSideBorders={false}
 							showTopBorder={false}
@@ -179,12 +179,12 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 								}
 								editionId={CAPIArticle.editionId}
 							/>
-						</ContainerLayout>
+						</Section>
 					</div>
 
 					{format.theme === ArticleSpecial.Labs && (
 						<Stuck>
-							<ContainerLayout
+							<Section
 								fullWidth={true}
 								showTopBorder={false}
 								backgroundColour={labs[400]}
@@ -194,7 +194,7 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 								<Island deferUntil="idle">
 									<LabsHeader />
 								</Island>
-							</ContainerLayout>
+							</Section>
 						</Stuck>
 					)}
 
@@ -232,7 +232,7 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 								${getZIndex('articleHeadline')};
 							`}
 						>
-							<ContainerLayout
+							<Section
 								verticalMargins={false}
 								padContent={false}
 								showTopBorder={false}
@@ -250,9 +250,9 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 									}
 									badge={CAPIArticle.badge}
 								/>
-							</ContainerLayout>
+							</Section>
 							<Box palette={palette}>
-								<ContainerLayout
+								<Section
 									verticalMargins={false}
 									padContent={false}
 									padSides={false}
@@ -272,7 +272,7 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 											CAPIArticle.starRating === 0
 										}
 									/>
-								</ContainerLayout>
+								</Section>
 							</Box>
 						</div>
 					</>

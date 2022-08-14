@@ -20,7 +20,7 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
-import { ContainerLayout } from '../components/ContainerLayout';
+import { Section } from '../components/Section';
 import { DecideLines } from '../components/DecideLines';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
@@ -300,7 +300,7 @@ export const InteractiveImmersiveLayout = ({
 				format={format}
 			/>
 			<main data-layout="InteractiveImmersiveLayout">
-				<ContainerLayout
+				<Section
 					fullWidth={true}
 					showTopBorder={false}
 					showSideBorders={false}
@@ -308,7 +308,7 @@ export const InteractiveImmersiveLayout = ({
 					element="article"
 				>
 					<InteractiveImmersiveGrid>
-						{/* Above leftCol, the Caption is controled by ContainerLayout ^^ */}
+						{/* Above leftCol, the Caption is controled by Section ^^ */}
 						<GridItem area="caption">
 							<Hide when="above" breakpoint="leftCol">
 								<Caption
@@ -439,8 +439,8 @@ export const InteractiveImmersiveLayout = ({
 							</div>
 						</GridItem>
 					</InteractiveImmersiveGrid>
-				</ContainerLayout>
-				<ContainerLayout
+				</Section>
+				<Section
 					fullWidth={true}
 					showTopBorder={false}
 					showSideBorders={false}
@@ -466,11 +466,11 @@ export const InteractiveImmersiveLayout = ({
 							isSensitive={CAPIArticle.config.isSensitive}
 						/>
 					</article>
-				</ContainerLayout>
+				</Section>
 			</main>
 
 			{NAV.subNavSections && (
-				<ContainerLayout
+				<Section
 					fullWidth={true}
 					padSides={false}
 					backgroundColour={neutral[100]}
@@ -483,10 +483,10 @@ export const InteractiveImmersiveLayout = ({
 							format={format}
 						/>
 					</Island>
-				</ContainerLayout>
+				</Section>
 			)}
 
-			<ContainerLayout
+			<Section
 				fullWidth={true}
 				padSides={false}
 				backgroundColour={brandBackground.primary}
@@ -505,7 +505,7 @@ export const InteractiveImmersiveLayout = ({
 						CAPIArticle.contributionsServiceUrl
 					}
 				/>
-			</ContainerLayout>
+			</Section>
 
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>

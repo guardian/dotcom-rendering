@@ -1,12 +1,12 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
 import { ArticleContainer } from './ArticleContainer';
-import { ContainerLayout } from './ContainerLayout';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { mockTab1 } from './MostViewed.mocks';
 import { MostViewedRight } from './MostViewedRight';
 import { RightColumn } from './RightColumn';
+import { Section } from './Section';
 
 export default {
 	component: MostViewedRight,
@@ -23,7 +23,7 @@ export const defaultStory = () => {
 	});
 
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="partial">
 					<></>
@@ -38,7 +38,7 @@ export const defaultStory = () => {
 					<></>
 				</ArticleContainer>
 				<RightColumn>
-					<ContainerLayout
+					<Section
 						fullWidth={true}
 						showSideBorders={false}
 						showTopBorder={false}
@@ -48,10 +48,10 @@ export const defaultStory = () => {
 							isAdFreeUser={false}
 							adBlockerDetected={false}
 						/>
-					</ContainerLayout>
+					</Section>
 				</RightColumn>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 defaultStory.story = { name: 'default' };
@@ -63,7 +63,7 @@ export const limitItemsStory = () => {
 	});
 
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn>
 					<></>
@@ -78,7 +78,7 @@ export const limitItemsStory = () => {
 					<></>
 				</ArticleContainer>
 				<RightColumn>
-					<ContainerLayout
+					<Section
 						fullWidth={true}
 						showSideBorders={false}
 						showTopBorder={false}
@@ -89,10 +89,10 @@ export const limitItemsStory = () => {
 							isAdFreeUser={false}
 							adBlockerDetected={false}
 						/>
-					</ContainerLayout>
+					</Section>
 				</RightColumn>
 			</Flex>
-		</ContainerLayout>
+		</Section>
 	);
 };
 limitItemsStory.story = { name: 'with a limit of 3 items' };
@@ -104,9 +104,9 @@ export const outsideContextStory = () => {
 	});
 
 	return (
-		<ContainerLayout fullWidth={true}>
+		<Section fullWidth={true}>
 			<MostViewedRight isAdFreeUser={false} adBlockerDetected={false} />
-		</ContainerLayout>
+		</Section>
 	);
 };
 outsideContextStory.story = {

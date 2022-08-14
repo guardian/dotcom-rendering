@@ -1,6 +1,6 @@
 import { border, labs } from '@guardian/source-foundations';
-import { ContainerLayout } from './ContainerLayout';
 import { LabsHeader } from './LabsHeader.importable';
+import { Section } from './Section';
 
 export default {
 	component: LabsHeader,
@@ -9,14 +9,14 @@ export default {
 
 export const Default = () => {
 	return (
-		<ContainerLayout
+		<Section
 			fullWidth={true}
 			showTopBorder={false}
 			backgroundColour={labs[400]}
 			borderColour={border.primary}
 		>
 			<LabsHeader />
-		</ContainerLayout>
+		</Section>
 	);
 };
 Default.story = { name: 'Default' };

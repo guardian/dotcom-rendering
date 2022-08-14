@@ -134,7 +134,7 @@ const Content = ({
 	</div>
 );
 
-export const ContainerLayout = ({
+export const Section = ({
 	title,
 	fontColour,
 	description,

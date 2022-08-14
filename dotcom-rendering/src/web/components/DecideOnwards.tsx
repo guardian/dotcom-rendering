@@ -1,8 +1,8 @@
 import { decideTrail } from '../lib/decideTrail';
 import { Carousel } from './Carousel.importable';
-import { ContainerLayout } from './ContainerLayout';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
 import { Island } from './Island';
+import { Section } from './Section';
 
 export const DecideOnwards = ({
 	onwards,
@@ -15,7 +15,7 @@ export const DecideOnwards = ({
 		{onwards.map(({ heading, trails, onwardsType, url }) => {
 			if (trails.length > 0) {
 				return (
-					<ContainerLayout
+					<Section
 						fullWidth={true}
 						key={onwardsType}
 						showTopBorder={false}
@@ -28,13 +28,13 @@ export const DecideOnwards = ({
 								format={format}
 							/>
 						</Island>
-					</ContainerLayout>
+					</Section>
 				);
 			}
 
 			if (url) {
 				return (
-					<ContainerLayout
+					<Section
 						fullWidth={true}
 						key={onwardsType}
 						showTopBorder={false}
@@ -51,7 +51,7 @@ export const DecideOnwards = ({
 								format={format}
 							/>
 						</Island>
-					</ContainerLayout>
+					</Section>
 				);
 			}
 

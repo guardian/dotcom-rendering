@@ -16,7 +16,7 @@ import {
 	labelStyles as adLabelStyles,
 	MobileStickyContainer,
 } from '../components/AdSlot';
-import { ContainerLayout } from '../components/ContainerLayout';
+import { Section } from '../components/Section';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -141,7 +141,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 					order: 0;
 				`}
 			>
-				<ContainerLayout
+				<Section
 					fullWidth={true}
 					borderColour={brandLine.primary}
 					showTopBorder={false}
@@ -161,7 +161,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 						}
 						editionId={CAPIArticle.editionId}
 					/>
-				</ContainerLayout>
+				</Section>
 			</div>
 		);
 	}
@@ -176,7 +176,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 		>
 			<Stuck>
 				<div data-print-layout="hide">
-					<ContainerLayout
+					<Section
 						fullWidth={true}
 						showTopBorder={false}
 						showSideBorders={false}
@@ -189,13 +189,13 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 							shouldHideAds={CAPIArticle.shouldHideAds}
 							display={format.display}
 						/>
-					</ContainerLayout>
+					</Section>
 				</div>
 			</Stuck>
 
 			{format.theme !== ArticleSpecial.Labs && (
 				<div data-print-layout="hide">
-					<ContainerLayout
+					<Section
 						fullWidth={true}
 						showTopBorder={false}
 						showSideBorders={false}
@@ -223,11 +223,11 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 							}
 							idApiUrl={CAPIArticle.config.idApiUrl}
 						/>
-					</ContainerLayout>
+					</Section>
 				</div>
 			)}
 
-			<ContainerLayout
+			<Section
 				fullWidth={true}
 				borderColour={brandLine.primary}
 				showTopBorder={false}
@@ -247,10 +247,10 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 					}
 					editionId={CAPIArticle.editionId}
 				/>
-			</ContainerLayout>
+			</Section>
 
 			{NAV.subNavSections && format.theme !== ArticleSpecial.Labs && (
-				<ContainerLayout
+				<Section
 					fullWidth={true}
 					backgroundColour={neutral[100]}
 					padSides={false}
@@ -263,7 +263,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 							format={format}
 						/>
 					</Island>
-				</ContainerLayout>
+				</Section>
 			)}
 		</section>
 	);
@@ -298,7 +298,7 @@ export const FullPageInteractiveLayout = ({
 
 				{format.theme === ArticleSpecial.Labs && (
 					<Stuck>
-						<ContainerLayout
+						<Section
 							fullWidth={true}
 							showTopBorder={false}
 							padSides={true}
@@ -309,12 +309,12 @@ export const FullPageInteractiveLayout = ({
 							<Island deferUntil="idle">
 								<LabsHeader />
 							</Island>
-						</ContainerLayout>
+						</Section>
 					</Stuck>
 				)}
 			</header>
 
-			<ContainerLayout
+			<Section
 				fullWidth={true}
 				showTopBorder={false}
 				showSideBorders={false}
@@ -340,10 +340,10 @@ export const FullPageInteractiveLayout = ({
 						isSensitive={CAPIArticle.config.isSensitive}
 					/>
 				</article>
-			</ContainerLayout>
+			</Section>
 
 			{NAV.subNavSections && (
-				<ContainerLayout
+				<Section
 					fullWidth={true}
 					padSides={false}
 					backgroundColour={neutral[100]}
@@ -356,10 +356,10 @@ export const FullPageInteractiveLayout = ({
 							format={format}
 						/>
 					</Island>
-				</ContainerLayout>
+				</Section>
 			)}
 
-			<ContainerLayout
+			<Section
 				fullWidth={true}
 				padSides={false}
 				backgroundColour={brandBackground.primary}
@@ -377,7 +377,7 @@ export const FullPageInteractiveLayout = ({
 						CAPIArticle.contributionsServiceUrl
 					}
 				/>
-			</ContainerLayout>
+			</Section>
 
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>

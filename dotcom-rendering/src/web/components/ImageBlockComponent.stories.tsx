@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { ContainerLayout } from './ContainerLayout';
 import { Figure } from './Figure';
 import { Flex } from './Flex';
 import { ImageBlockComponent } from './ImageBlockComponent';
 import { image } from './ImageBlockComponent.mocks';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
+import { Section } from './Section';
 
 export default {
 	component: ImageBlockComponent,
@@ -17,7 +17,7 @@ export default {
 };
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
-	<ContainerLayout fullWidth={true} showTopBorder={false}>
+	<Section fullWidth={true} showTopBorder={false}>
 		<Flex>
 			<LeftColumn>
 				<></>
@@ -35,7 +35,7 @@ const Wrapper = ({ children }: { children: React.ReactNode }) => (
 				<></>
 			</RightColumn>
 		</Flex>
-	</ContainerLayout>
+	</Section>
 );
 
 /**

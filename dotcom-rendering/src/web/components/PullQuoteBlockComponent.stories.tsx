@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import { decidePalette } from '../lib/decidePalette';
-import { ContainerLayout } from './ContainerLayout';
+import { Section } from './Section';
 import { PullQuoteBlockComponent } from './PullQuoteBlockComponent';
 
 export default {
@@ -16,7 +16,7 @@ export default {
 // Inline
 export const SportInline = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -32,7 +32,7 @@ export const SportInline = () => {
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 SportInline.story = {
@@ -41,7 +41,7 @@ SportInline.story = {
 
 export const LabsInline = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -57,7 +57,7 @@ export const LabsInline = () => {
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 LabsInline.story = {
@@ -66,7 +66,7 @@ LabsInline.story = {
 
 export const LifestyleInline = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -82,7 +82,7 @@ export const LifestyleInline = () => {
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 LifestyleInline.story = {
@@ -91,7 +91,7 @@ LifestyleInline.story = {
 
 export const CultureInline = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -107,7 +107,7 @@ export const CultureInline = () => {
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 CultureInline.story = {
@@ -116,7 +116,7 @@ CultureInline.story = {
 
 export const NewsInline = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -132,7 +132,7 @@ export const NewsInline = () => {
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 NewsInline.story = {
@@ -141,7 +141,7 @@ NewsInline.story = {
 
 export const OpinionInline = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -157,7 +157,7 @@ export const OpinionInline = () => {
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 OpinionInline.story = {
@@ -166,7 +166,7 @@ OpinionInline.story = {
 
 export const SpecialReportInline = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -182,7 +182,7 @@ export const SpecialReportInline = () => {
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 SpecialReportInline.story = {
@@ -192,7 +192,7 @@ SpecialReportInline.story = {
 // Supporting
 export const SportSupporting = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -208,7 +208,7 @@ export const SportSupporting = () => {
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 SportSupporting.story = {
@@ -217,7 +217,7 @@ SportSupporting.story = {
 
 export const LabsSupporting = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -233,7 +233,7 @@ export const LabsSupporting = () => {
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 LabsSupporting.story = {
@@ -242,7 +242,7 @@ LabsSupporting.story = {
 
 export const LifestyleSupporting = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -258,7 +258,7 @@ export const LifestyleSupporting = () => {
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 LifestyleSupporting.story = {
@@ -267,7 +267,7 @@ LifestyleSupporting.story = {
 
 export const CultureSupporting = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -283,7 +283,7 @@ export const CultureSupporting = () => {
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 CultureSupporting.story = {
@@ -292,7 +292,7 @@ CultureSupporting.story = {
 
 export const NewsSupporting = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -308,7 +308,7 @@ export const NewsSupporting = () => {
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 NewsSupporting.story = {
@@ -317,7 +317,7 @@ NewsSupporting.story = {
 
 export const OpinionSupporting = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -333,7 +333,7 @@ export const OpinionSupporting = () => {
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 OpinionSupporting.story = {
@@ -342,7 +342,7 @@ OpinionSupporting.story = {
 
 export const SpecialReportSupporting = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -358,7 +358,7 @@ export const SpecialReportSupporting = () => {
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 SpecialReportSupporting.story = {
@@ -368,7 +368,7 @@ SpecialReportSupporting.story = {
 // PhotoEssay
 export const PhotoEssayInline = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -384,7 +384,7 @@ export const PhotoEssayInline = () => {
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 PhotoEssayInline.story = {
@@ -393,7 +393,7 @@ PhotoEssayInline.story = {
 
 export const PhotoEssaySupporting = () => {
 	return (
-		<ContainerLayout
+		<Section
 			showTopBorder={false}
 			centralBorder="full"
 			showSideBorders={false}
@@ -409,7 +409,7 @@ export const PhotoEssaySupporting = () => {
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 PhotoEssaySupporting.story = {
