@@ -39,7 +39,7 @@ const NavWrapper = ({ children }: { children: React.ReactNode }) => (
 	</nav>
 );
 
-const Section = ({
+const FlexSection = ({
 	hide = false,
 	children,
 }: {
@@ -113,7 +113,7 @@ const Pagination = ({
 }: Props) => {
 	return (
 		<NavWrapper>
-			<Section hide={currentPage === 1}>
+			<FlexSection hide={currentPage === 1}>
 				<Hide above="phablet">
 					<LinkButton
 						size="small"
@@ -150,15 +150,15 @@ const Pagination = ({
 				>
 					Previous
 				</LinkButton>
-			</Section>
-			<Section>
+			</FlexSection>
+			<FlexSection>
 				<Position>
 					<Bold>{currentPage}</Bold>
 					<Of />
 					<Bold>{totalPages}</Bold>
 				</Position>
-			</Section>
-			<Section hide={currentPage === totalPages}>
+			</FlexSection>
+			<FlexSection hide={currentPage === totalPages}>
 				<LinkButton
 					size="small"
 					priority="tertiary"
@@ -195,7 +195,7 @@ const Pagination = ({
 						Oldest
 					</LinkButton>
 				</Hide>
-			</Section>
+			</FlexSection>
 		</NavWrapper>
 	);
 };
