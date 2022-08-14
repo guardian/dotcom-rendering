@@ -25,7 +25,7 @@ export default {
     };
  */
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<ContainerLayout fullWidth={true} showTopBorder={false}>
 		<Flex>
 			<LeftColumn borderType="full">
@@ -49,7 +49,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const StandardArticle = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption text"
 				format={{
@@ -58,7 +58,7 @@ export const StandardArticle = () => {
 					theme: ArticlePillar.News,
 				}}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 StandardArticle.story = {
@@ -67,7 +67,7 @@ StandardArticle.story = {
 
 export const PhotoEssay = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption text"
 				format={{
@@ -81,7 +81,7 @@ export const PhotoEssay = () => {
 				shouldLimitWidth={false}
 				isOverlaid={false}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 PhotoEssay.story = {
@@ -90,7 +90,7 @@ PhotoEssay.story = {
 
 export const PhotoEssayHTML = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<CaptionBlockComponent
 				captionText="<ul><li>Line 1 text</li><li>Line 2 text</li><li>Line 3 text</li></ul>"
 				format={{
@@ -104,7 +104,7 @@ export const PhotoEssayHTML = () => {
 				shouldLimitWidth={false}
 				isOverlaid={false}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 PhotoEssayHTML.story = {
@@ -113,7 +113,7 @@ PhotoEssayHTML.story = {
 
 export const Padded = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption text"
 				format={{
@@ -127,7 +127,7 @@ export const Padded = () => {
 				shouldLimitWidth={false}
 				isOverlaid={false}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Padded.story = {
@@ -136,7 +136,7 @@ Padded.story = {
 
 export const WidthLimited = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
 				format={{
@@ -150,7 +150,7 @@ export const WidthLimited = () => {
 				shouldLimitWidth={true}
 				isOverlaid={false}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 WidthLimited.story = {
@@ -159,7 +159,7 @@ WidthLimited.story = {
 
 export const Credited = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
 				format={{
@@ -173,7 +173,7 @@ export const Credited = () => {
 				shouldLimitWidth={false}
 				isOverlaid={false}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Credited.story = {
@@ -182,7 +182,7 @@ Credited.story = {
 
 export const Overlaid = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
 				format={{
@@ -196,7 +196,7 @@ export const Overlaid = () => {
 				shouldLimitWidth={false}
 				isOverlaid={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Overlaid.story = {

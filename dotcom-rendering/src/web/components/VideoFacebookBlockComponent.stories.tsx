@@ -7,7 +7,7 @@ export default {
 	title: 'Components/VideoFacebookComponent',
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			max-width: 620px;
@@ -20,7 +20,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const largeAspectRatio = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p>abc</p>
 			<VideoFacebookBlockComponent
 				embedUrl="https://www.facebook.com/video/embed?video_id=10155703704626323\"
@@ -38,7 +38,7 @@ export const largeAspectRatio = () => {
 				isMainMedia={false}
 			/>
 			<p>abc</p>
-		</Container>
+		</Wrapper>
 	);
 };
 largeAspectRatio.story = {
@@ -48,7 +48,7 @@ largeAspectRatio.story = {
 
 export const verticalAspectRatio = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p>abc</p>
 			<VideoFacebookBlockComponent
 				embedUrl="https://www.facebook.com/video/embed?video_id=10155591097456323\"
@@ -66,7 +66,7 @@ export const verticalAspectRatio = () => {
 				isMainMedia={false}
 			/>
 			<p>abc</p>
-		</Container>
+		</Wrapper>
 	);
 };
 verticalAspectRatio.story = { name: 'with vertical aspect ratio' };

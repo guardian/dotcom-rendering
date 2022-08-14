@@ -12,7 +12,7 @@ export default {
 	},
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			max-width: 620px;
@@ -25,7 +25,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const standardAspectRatio = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p>abc</p>
 			<YoutubeEmbedBlockComponent
 				embedUrl="https://www.youtube-nocookie.com/embed/79fzeNUqQbQ?wmode=opaque&feature=oembed"
@@ -42,7 +42,7 @@ export const standardAspectRatio = () => {
 				isMainMedia={false}
 			/>
 			<p>abc</p>
-		</Container>
+		</Wrapper>
 	);
 };
 standardAspectRatio.story = { name: 'with standard aspect ratio' };

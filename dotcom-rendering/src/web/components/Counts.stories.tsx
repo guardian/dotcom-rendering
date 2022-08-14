@@ -15,7 +15,7 @@ export default {
 	title: 'Components/Counts',
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			margin: 40px;
@@ -63,7 +63,7 @@ export const Both = () => {
 		);
 
 	return (
-		<Container>
+		<Wrapper>
 			<Counts format={format}>
 				<div className="meta-number">
 					<ShareCount
@@ -80,7 +80,7 @@ export const Both = () => {
 					/>
 				</div>
 			</Counts>
-		</Container>
+		</Wrapper>
 	);
 };
 Both.story = { name: 'with both results' };
@@ -117,7 +117,7 @@ export const Themes = () => {
 		);
 
 	return (
-		<Container>
+		<Wrapper>
 			<Counts format={{ ...format, theme: ArticlePillar.News }}>
 				<div className="meta-number">
 					<ShareCount
@@ -236,7 +236,7 @@ export const Themes = () => {
 					/>
 				</div>
 			</Counts>
-		</Container>
+		</Wrapper>
 	);
 };
 Themes.story = { name: 'with different themes' };
@@ -273,7 +273,7 @@ export const CommentOnly = () => {
 		);
 
 	return (
-		<Container>
+		<Wrapper>
 			<Counts format={format}>
 				<div className="meta-number">
 					<ShareCount
@@ -290,7 +290,7 @@ export const CommentOnly = () => {
 					/>
 				</div>
 			</Counts>
-		</Container>
+		</Wrapper>
 	);
 };
 CommentOnly.story = { name: 'with zero shares' };
@@ -327,7 +327,7 @@ export const ZeroComments = () => {
 		);
 
 	return (
-		<Container>
+		<Wrapper>
 			<Counts format={format}>
 				<div className="meta-number">
 					<ShareCount
@@ -344,7 +344,7 @@ export const ZeroComments = () => {
 					/>
 				</div>
 			</Counts>
-		</Container>
+		</Wrapper>
 	);
 };
 ZeroComments.story = { name: 'with zero comments' };
@@ -381,7 +381,7 @@ export const BigNumbers = () => {
 		);
 
 	return (
-		<Container>
+		<Wrapper>
 			<Counts format={format}>
 				<div className="meta-number">
 					<ShareCount
@@ -398,7 +398,7 @@ export const BigNumbers = () => {
 					/>
 				</div>
 			</Counts>
-		</Container>
+		</Wrapper>
 	);
 };
 BigNumbers.story = { name: 'with long numbers' };
@@ -421,7 +421,7 @@ export const CommentsOff = () => {
 		);
 
 	return (
-		<Container>
+		<Wrapper>
 			<Counts format={format}>
 				<div className="meta-number">
 					<ShareCount
@@ -433,7 +433,7 @@ export const CommentsOff = () => {
 				{/* When commenting is off the CommentCount component won't render at all */}
 				<div className="meta-number" />
 			</Counts>
-		</Container>
+		</Wrapper>
 	);
 };
 CommentsOff.story = { name: 'with commentting off' };

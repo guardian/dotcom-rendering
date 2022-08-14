@@ -16,7 +16,7 @@ export default {
 	},
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<ContainerLayout fullWidth={true} showTopBorder={false}>
 		<Flex>
 			<LeftColumn>
@@ -50,7 +50,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const StandardArticle = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -69,7 +69,7 @@ export const StandardArticle = () => {
 					}}
 				/>
 			</Figure>
-		</Container>
+		</Wrapper>
 	);
 };
 StandardArticle.story = {
@@ -78,7 +78,7 @@ StandardArticle.story = {
 
 export const Immersive = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -97,7 +97,7 @@ export const Immersive = () => {
 					}}
 				/>
 			</Figure>
-		</Container>
+		</Wrapper>
 	);
 };
 Immersive.story = {
@@ -106,7 +106,7 @@ Immersive.story = {
 
 export const Showcase = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -125,7 +125,7 @@ export const Showcase = () => {
 					}}
 				/>
 			</Figure>
-		</Container>
+		</Wrapper>
 	);
 };
 Showcase.story = {
@@ -134,7 +134,7 @@ Showcase.story = {
 
 export const Thumbnail = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -153,7 +153,7 @@ export const Thumbnail = () => {
 					}}
 				/>
 			</Figure>
-		</Container>
+		</Wrapper>
 	);
 };
 Thumbnail.story = {
@@ -162,7 +162,7 @@ Thumbnail.story = {
 
 export const Supporting = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -181,7 +181,7 @@ export const Supporting = () => {
 					}}
 				/>
 			</Figure>
-		</Container>
+		</Wrapper>
 	);
 };
 Supporting.story = {
@@ -190,7 +190,7 @@ Supporting.story = {
 
 export const HideCaption = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -210,7 +210,7 @@ export const HideCaption = () => {
 					hideCaption={true}
 				/>
 			</Figure>
-		</Container>
+		</Wrapper>
 	);
 };
 HideCaption.story = {
@@ -219,7 +219,7 @@ HideCaption.story = {
 
 export const InlineTitle = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -240,7 +240,7 @@ export const InlineTitle = () => {
 					hideCaption={true}
 				/>
 			</Figure>
-		</Container>
+		</Wrapper>
 	);
 };
 InlineTitle.story = {
@@ -253,7 +253,7 @@ InlineTitle.story = {
 
 export const InlineTitleMobile = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -274,7 +274,7 @@ export const InlineTitleMobile = () => {
 					hideCaption={true}
 				/>
 			</Figure>
-		</Container>
+		</Wrapper>
 	);
 };
 InlineTitleMobile.story = {
@@ -287,7 +287,7 @@ InlineTitleMobile.story = {
 
 export const ImmersiveTitle = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -308,7 +308,7 @@ export const ImmersiveTitle = () => {
 					hideCaption={true}
 				/>
 			</Figure>
-		</Container>
+		</Wrapper>
 	);
 };
 ImmersiveTitle.story = {
@@ -317,7 +317,7 @@ ImmersiveTitle.story = {
 
 export const ShowcaseTitle = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -338,7 +338,7 @@ export const ShowcaseTitle = () => {
 					hideCaption={true}
 				/>
 			</Figure>
-		</Container>
+		</Wrapper>
 	);
 };
 ShowcaseTitle.story = {
@@ -351,7 +351,7 @@ ShowcaseTitle.story = {
 
 export const HalfWidth = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -406,7 +406,7 @@ export const HalfWidth = () => {
 				nulla pariatur. Excepteur sint occaecat cupidatat non proident,
 				sunt in culpa qui officia deserunt mollit anim id est laborum.
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 HalfWidth.story = {
@@ -419,7 +419,7 @@ HalfWidth.story = {
 
 export const HalfWidthMobile = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -474,7 +474,7 @@ export const HalfWidthMobile = () => {
 				nulla pariatur. Excepteur sint occaecat cupidatat non proident,
 				sunt in culpa qui officia deserunt mollit anim id est laborum.
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 HalfWidthMobile.story = {
@@ -487,7 +487,7 @@ HalfWidthMobile.story = {
 
 export const HalfWidthWide = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -542,7 +542,7 @@ export const HalfWidthWide = () => {
 				nulla pariatur. Excepteur sint occaecat cupidatat non proident,
 				sunt in culpa qui officia deserunt mollit anim id est laborum.
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 HalfWidthWide.story = {

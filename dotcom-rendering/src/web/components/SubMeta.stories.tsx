@@ -16,7 +16,7 @@ export default {
 	title: 'Components/SubMeta',
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			width: 620px;
@@ -63,7 +63,7 @@ const subMetaSectionLinks = [
 
 export const News = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SubMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -77,14 +77,14 @@ export const News = () => {
 				webTitle=""
 				showBottomSocialButtons={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 News.story = { name: 'News' };
 
 export const Sport = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SubMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -98,14 +98,14 @@ export const Sport = () => {
 				webTitle=""
 				showBottomSocialButtons={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Sport.story = { name: 'Sport' };
 
 export const Culture = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SubMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -119,14 +119,14 @@ export const Culture = () => {
 				webTitle=""
 				showBottomSocialButtons={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Culture.story = { name: 'Culture' };
 
 export const Lifestyle = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SubMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -140,14 +140,14 @@ export const Lifestyle = () => {
 				webTitle=""
 				showBottomSocialButtons={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Lifestyle.story = { name: 'Lifestyle' };
 
 export const Opinion = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SubMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -161,14 +161,14 @@ export const Opinion = () => {
 				webTitle=""
 				showBottomSocialButtons={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Opinion.story = { name: 'Opinion' };
 
 export const Labs = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SubMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -182,14 +182,14 @@ export const Labs = () => {
 				webTitle=""
 				showBottomSocialButtons={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Labs.story = { name: 'Labs' };
 
 export const SpecialReport = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SubMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -203,7 +203,7 @@ export const SpecialReport = () => {
 				webTitle=""
 				showBottomSocialButtons={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 SpecialReport.story = { name: 'SpecialReport' };
@@ -215,7 +215,7 @@ export const DeadBlogStory = () => {
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
 			}).map((format) => (
-				<Container>
+				<Wrapper>
 					<p>{getThemeNameAsString(format)}</p>
 					<SubMeta
 						format={format}
@@ -226,7 +226,7 @@ export const DeadBlogStory = () => {
 						webTitle=""
 						showBottomSocialButtons={true}
 					/>
-				</Container>
+				</Wrapper>
 			))}
 		</>
 	);
