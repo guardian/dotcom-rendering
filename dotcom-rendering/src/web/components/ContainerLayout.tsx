@@ -109,7 +109,7 @@ const padding = (format?: ArticleFormat) => {
 	}
 };
 
-const Container = ({
+const Content = ({
 	children,
 	padded,
 	verticalMargins,
@@ -249,7 +249,7 @@ export const ContainerLayout = ({
 						)}
 					</div>
 				</LeftColumn>
-				<Container
+				<Content
 					padded={padContent}
 					verticalMargins={verticalMargins}
 					stretchRight={stretchRight}
@@ -285,7 +285,7 @@ export const ContainerLayout = ({
 					) : (
 						children
 					)}
-				</Container>
+				</Content>
 			</Flex>
 		</ElementContainer>
 	);
