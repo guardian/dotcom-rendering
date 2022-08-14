@@ -23,7 +23,7 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const NavWrapper = ({ children }: { children: React.ReactNode }) => (
 	<nav
 		// Used to scroll the page to this point when using permalinks
 		id="liveblog-navigation"
@@ -112,7 +112,7 @@ const Pagination = ({
 	format,
 }: Props) => {
 	return (
-		<Container>
+		<NavWrapper>
 			<Section hide={currentPage === 1}>
 				<Hide above="phablet">
 					<LinkButton
@@ -196,7 +196,7 @@ const Pagination = ({
 					</LinkButton>
 				</Hide>
 			</Section>
-		</Container>
+		</NavWrapper>
 	);
 };
 
