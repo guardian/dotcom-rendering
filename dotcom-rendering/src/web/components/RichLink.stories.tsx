@@ -26,7 +26,11 @@ export default {
 
 export const Article = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -63,7 +67,11 @@ export const Article = () => {
 
 export const Network = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -106,7 +114,11 @@ Network.story = {
 
 export const SectionStory = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -146,7 +158,11 @@ SectionStory.story = {
 
 export const Inline = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -186,7 +202,11 @@ Inline.story = {
 
 export const ImageContent = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -229,7 +249,11 @@ ImageContent.story = {
 
 export const Interactive = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -271,7 +295,11 @@ Interactive.story = {
 
 export const Gallery = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -314,7 +342,11 @@ Gallery.story = {
 
 export const Video = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -358,7 +390,11 @@ Video.story = {
 
 export const Audio = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -395,7 +431,11 @@ export const Audio = () => {
 
 export const LiveBlog = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -438,7 +478,11 @@ LiveBlog.story = {
 
 export const Tag = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -475,7 +519,11 @@ export const Tag = () => {
 
 export const Index = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -519,7 +567,11 @@ export const Index = () => {
 
 export const Crossword = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -556,7 +608,11 @@ export const Crossword = () => {
 
 export const Survey = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -593,7 +649,11 @@ export const Survey = () => {
 
 export const Signup = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -631,7 +691,11 @@ export const Signup = () => {
 
 export const Userid = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,
@@ -668,7 +732,11 @@ export const Userid = () => {
 
 export const PaidFor = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<Figure
 				format={{
 					display: ArticleDisplay.Standard,

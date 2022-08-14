@@ -25,8 +25,6 @@ export default {
 export const Default = () => (
 	<ContainerLayout
 		title="FixedSmallSlowIV"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>

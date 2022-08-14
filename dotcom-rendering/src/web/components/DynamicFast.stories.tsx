@@ -25,8 +25,6 @@ export default {
 export const DF2VeryBigs2Bigs5Standards = () => (
 	<ContainerLayout
 		title="DynamicFast"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -56,8 +54,6 @@ DF2VeryBigs2Bigs5Standards.story = {
 export const DF1Huge1VeryBig2Big3Standard = () => (
 	<ContainerLayout
 		title="DynamicFast"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -81,8 +77,6 @@ DF1Huge1VeryBig2Big3Standard.story = {
 export const DF1VeryBig0Big8Standard = () => (
 	<ContainerLayout
 		title="DynamicFast"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -115,8 +109,6 @@ DF1VeryBig0Big8Standard.story = {
 export const DF2VeryBigs1Big8StandardsFirstBoosted = () => (
 	<ContainerLayout
 		title="DynamicFast"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -149,8 +141,6 @@ DF2VeryBigs1Big8StandardsFirstBoosted.story = {
 export const DF3VeryBigs3Big0StandardsSecondBoosted = () => (
 	<ContainerLayout
 		title="DynamicFast"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -178,8 +168,6 @@ DF3VeryBigs3Big0StandardsSecondBoosted.story = {
 export const DF2VeryBigs3Big6StandardsThirdBoosted = () => (
 	<ContainerLayout
 		title="DynamicFast"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -210,8 +198,6 @@ DF2VeryBigs3Big6StandardsThirdBoosted.story = {
 export const DF2VeryBigs1Big8StandardsFirstThirdBoosted = () => (
 	<ContainerLayout
 		title="DynamicFast"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -244,8 +230,6 @@ DF2VeryBigs1Big8StandardsFirstThirdBoosted.story = {
 export const DF2VeryBigs2Big3StandardsSecondThirdBoosted = () => (
 	<ContainerLayout
 		title="DynamicFast"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>

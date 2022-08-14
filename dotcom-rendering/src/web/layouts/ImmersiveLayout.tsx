@@ -21,10 +21,10 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.importable';
+import { ContainerLayout } from '../components/ContainerLayout';
 import { DecideLines } from '../components/DecideLines';
 import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
@@ -176,10 +176,12 @@ interface Props {
 
 const decideCaption = (mainMedia: ImageBlockElement): string => {
 	const caption = [];
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because it is necessary
 	if (mainMedia?.data?.caption) {
 		caption.push(mainMedia.data.caption);
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because it is necessary
 	if (mainMedia?.displayCredit && mainMedia?.data?.credit) {
 		caption.push(mainMedia.data.credit);
 	}
@@ -227,7 +229,8 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				format={format}
 			/>
 			<main data-layout="ImmersiveLayout">
-				<ElementContainer
+				<ContainerLayout
+					fullWidth={true}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={decidePalette(format).background.article}
@@ -494,10 +497,11 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</div>
 						</GridItem>
 					</ImmersiveGrid>
-				</ElementContainer>
+				</ContainerLayout>
 
-				<ElementContainer
-					padded={false}
+				<ContainerLayout
+					fullWidth={true}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
@@ -507,7 +511,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						position="merchandising-high"
 						display={format.display}
 					/>
-				</ElementContainer>
+				</ContainerLayout>
 
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
@@ -517,7 +521,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				) : (
 					<>
 						{CAPIArticle.storyPackage && (
-							<ElementContainer>
+							<ContainerLayout fullWidth={true}>
 								<Island deferUntil="visible">
 									<Carousel
 										heading={
@@ -530,7 +534,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										format={format}
 									/>
 								</Island>
-							</ElementContainer>
+							</ContainerLayout>
 						)}
 
 						<Island
@@ -563,7 +567,11 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				)}
 
 				{!isPaidContent && showComments && (
-					<ElementContainer sectionId="comments" element="aside">
+					<ContainerLayout
+						fullWidth={true}
+						sectionId="comments"
+						element="aside"
+					>
 						<DiscussionLayout
 							discussionApiUrl={
 								CAPIArticle.config.discussionApiUrl
@@ -581,32 +589,41 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
 							shouldHideAds={CAPIArticle.shouldHideAds}
 						/>
-					</ElementContainer>
+					</ContainerLayout>
 				)}
 
 				{!isPaidContent && (
-					<ElementContainer data-print-layout="hide" element="aside">
+					<ContainerLayout
+						fullWidth={true}
+						data-print-layout="hide"
+						element="aside"
+					>
 						<MostViewedFooterLayout
 							format={format}
 							sectionName={CAPIArticle.sectionName}
 							ajaxUrl={CAPIArticle.config.ajaxUrl}
 						/>
-					</ElementContainer>
+					</ContainerLayout>
 				)}
 
-				<ElementContainer
-					padded={false}
+				<ContainerLayout
+					fullWidth={true}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
 					element="aside"
 				>
 					<AdSlot position="merchandising" display={format.display} />
-				</ElementContainer>
+				</ContainerLayout>
 			</main>
 
 			{NAV.subNavSections && (
-				<ElementContainer padded={false} element="aside">
+				<ContainerLayout
+					fullWidth={true}
+					padSides={false}
+					element="aside"
+				>
 					<Island deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
@@ -614,11 +631,12 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							format={format}
 						/>
 					</Island>
-				</ElementContainer>
+				</ContainerLayout>
 			)}
 
-			<ElementContainer
-				padded={false}
+			<ContainerLayout
+				fullWidth={true}
+				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
@@ -634,7 +652,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						CAPIArticle.contributionsServiceUrl
 					}
 				/>
-			</ElementContainer>
+			</ContainerLayout>
 
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>

@@ -5,7 +5,7 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import { news } from '@guardian/source-foundations';
-import { ElementContainer } from './ElementContainer';
+import { ContainerLayout } from './ContainerLayout';
 import { Standfirst } from './Standfirst';
 
 export default {
@@ -15,7 +15,7 @@ export default {
 
 export const Article = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -24,14 +24,14 @@ export const Article = () => {
 				}}
 				standfirst="This is how Article standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 Article.story = { name: 'Article' };
 
 export const Comment = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -40,14 +40,14 @@ export const Comment = () => {
 				}}
 				standfirst="This is how Comment standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 Comment.story = { name: 'Comment' };
 
 export const Letter = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -56,14 +56,14 @@ export const Letter = () => {
 				}}
 				standfirst="This is how Letter standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 Letter.story = { name: 'Letter' };
 
 export const Feature = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -72,14 +72,14 @@ export const Feature = () => {
 				}}
 				standfirst="This is how Feature standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 Feature.story = { name: 'Feature' };
 
 export const Immersive = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Immersive,
@@ -88,14 +88,14 @@ export const Immersive = () => {
 				}}
 				standfirst="This is how Immersive standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 Immersive.story = { name: 'Immersive' };
 
 export const Review = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -104,14 +104,14 @@ export const Review = () => {
 				}}
 				standfirst="This is how Review standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 Review.story = { name: 'Review' };
 
 export const LiveBlog = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -120,7 +120,7 @@ export const LiveBlog = () => {
 				}}
 				standfirst="<p>This is how a Liveblog with bullets looks. Aut explicabo officia delectus omnis repellendus voluptas</p> <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 LiveBlog.story = {
@@ -140,7 +140,7 @@ LiveBlog.story = {
 
 export const DeadBlog = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -149,14 +149,14 @@ export const DeadBlog = () => {
 				}}
 				standfirst="<p>This is how a Deadblog with bullets looks. Aut explicabo officia delectus omnis repellendus voluptas</p> <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 DeadBlog.story = { name: 'DeadBlog' };
 
 export const Interview = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -165,14 +165,14 @@ export const Interview = () => {
 				}}
 				standfirst="This is how Interview standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 Interview.story = { name: 'Interview' };
 
 export const Analysis = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -181,14 +181,14 @@ export const Analysis = () => {
 				}}
 				standfirst="This is how Analysis standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 Analysis.story = { name: 'Analysis' };
 
 export const Gallery = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -197,14 +197,14 @@ export const Gallery = () => {
 				}}
 				standfirst="This is how Gallery standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 Gallery.story = { name: 'Gallery' };
 
 export const Audio = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -213,14 +213,14 @@ export const Audio = () => {
 				}}
 				standfirst="This is how Audio standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 Audio.story = { name: 'Audio' };
 
 export const Video = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -229,14 +229,14 @@ export const Video = () => {
 				}}
 				standfirst="This is how Video standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 Video.story = { name: 'Video' };
 
 export const Recipe = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -245,14 +245,14 @@ export const Recipe = () => {
 				}}
 				standfirst="This is how Recipe standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 Recipe.story = { name: 'Recipe' };
 
 export const MatchReport = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -261,14 +261,14 @@ export const MatchReport = () => {
 				}}
 				standfirst="This is how MatchReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 MatchReport.story = { name: 'MatchReport' };
 
 export const Quiz = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -277,14 +277,14 @@ export const Quiz = () => {
 				}}
 				standfirst="This is how Quiz standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 Quiz.story = { name: 'Quiz' };
 
 export const SpecialReport = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -293,14 +293,14 @@ export const SpecialReport = () => {
 				}}
 				standfirst="This is how SpecialReport standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 SpecialReport.story = { name: 'SpecialReport' };
 
 export const Editorial = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -309,14 +309,14 @@ export const Editorial = () => {
 				}}
 				standfirst="This is how Editorial standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 Editorial.story = { name: 'Editorial' };
 
 export const PhotoEssay = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -325,14 +325,14 @@ export const PhotoEssay = () => {
 				}}
 				standfirst="This is how PhotoEssay standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 PhotoEssay.story = { name: 'PhotoEssay' };
 
 export const LabsWithLink = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Standfirst
 				format={{
 					display: ArticleDisplay.Standard,
@@ -341,7 +341,7 @@ export const LabsWithLink = () => {
 				}}
 				standfirst='<p>Whether your holiday priorities are sampling gastronomic delights, visiting cultural landmarks, adventuring in the great outdoors or just having an easy time with the kids, this quiz will help you plan your itinerary for Brittany, Normandy and the Atlantic Loire Valley</p> <ul> <li>National restrictions may apply, please consult <a href="https://www.gov.uk/guidance/travel-advice-novel-coronavirus" rel="nofollow">government advice</a> before planning travel</li> </ul>'
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 LabsWithLink.story = { name: 'LabsWithLink' };

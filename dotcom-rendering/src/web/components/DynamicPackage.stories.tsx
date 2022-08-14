@@ -34,8 +34,6 @@ export default {
 export const Three = () => (
 	<ContainerLayout
 		title="DynamicPackage"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -56,8 +54,6 @@ Three.story = {
 export const Four = () => (
 	<ContainerLayout
 		title="DynamicPackage"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -78,8 +74,6 @@ Four.story = {
 export const Five = () => (
 	<ContainerLayout
 		title="DynamicPackage"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -104,8 +98,6 @@ export const Boosted3 = () => {
 	return (
 		<ContainerLayout
 			title="DynamicPackage"
-			showTopBorder={true}
-			sideBorders={true}
 			padContent={false}
 			centralBorder="partial"
 		>
@@ -132,8 +124,6 @@ export const Boosted4 = () => {
 	return (
 		<ContainerLayout
 			title="DynamicPackage"
-			showTopBorder={true}
-			sideBorders={true}
 			padContent={false}
 			centralBorder="partial"
 		>
@@ -160,8 +150,6 @@ export const Boosted5 = () => {
 	return (
 		<ContainerLayout
 			title="DynamicPackage"
-			showTopBorder={true}
-			sideBorders={true}
 			padContent={false}
 			centralBorder="partial"
 		>
@@ -184,8 +172,6 @@ Boosted5.story = {
 export const OneSnapThreeStandard = () => (
 	<ContainerLayout
 		title="DynamicPackage"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -206,8 +192,6 @@ OneSnapThreeStandard.story = {
 export const ThreeSnapTwoStandard = () => (
 	<ContainerLayout
 		title="DynamicPackage"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -228,8 +212,6 @@ OneSnapThreeStandard.story = {
 export const ThreeSnapTwoStandard2ndBoosted = () => (
 	<ContainerLayout
 		title="DynamicPackage"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>

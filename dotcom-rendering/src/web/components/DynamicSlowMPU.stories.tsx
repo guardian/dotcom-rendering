@@ -28,8 +28,6 @@ const standards = trails.slice(3);
 export const NoBigs = () => (
 	<ContainerLayout
 		title="DynamicSlowMPU"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -51,8 +49,6 @@ NoBigs.story = { name: 'with no big cards, only standard' };
 export const OneBig = () => (
 	<ContainerLayout
 		title="DynamicSlowMPU"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -74,8 +70,6 @@ OneBig.story = { name: 'with just one big' };
 export const TwoBigs = () => (
 	<ContainerLayout
 		title="DynamicSlowMPU"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -97,8 +91,6 @@ TwoBigs.story = { name: 'with two bigs' };
 export const FirstBigBoosted = () => (
 	<ContainerLayout
 		title="DynamicSlowMPU"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -126,8 +118,6 @@ FirstBigBoosted.story = { name: 'with the first of two bigs boosted' };
 export const ThreeBigs = () => (
 	<ContainerLayout
 		title="DynamicSlowMPU"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -149,8 +139,6 @@ ThreeBigs.story = { name: 'with three bigs' };
 export const AllBigs = () => (
 	<ContainerLayout
 		title="DynamicSlowMPU"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>

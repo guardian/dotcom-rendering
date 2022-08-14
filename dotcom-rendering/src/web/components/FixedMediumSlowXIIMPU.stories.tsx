@@ -25,8 +25,6 @@ export default {
 export const OneTrail = () => (
 	<ContainerLayout
 		title="FixedMediumSlowXIIMPU"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -42,8 +40,6 @@ OneTrail.story = { name: 'with one trail' };
 export const TwoTrails = () => (
 	<ContainerLayout
 		title="FixedMediumSlowXIIMPU"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -59,8 +55,6 @@ TwoTrails.story = { name: 'with two trails' };
 export const ThreeTrails = () => (
 	<ContainerLayout
 		title="FixedMediumSlowXIIMPU"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -76,8 +70,6 @@ ThreeTrails.story = { name: 'with three trails' };
 export const FourTrails = () => (
 	<ContainerLayout
 		title="FixedMediumSlowXIIMPU"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -93,8 +85,6 @@ FourTrails.story = { name: 'with four trails' };
 export const FiveTrails = () => (
 	<ContainerLayout
 		title="FixedMediumSlowXIIMPU"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -110,8 +100,6 @@ FiveTrails.story = { name: 'with five trails' };
 export const SixTrails = () => (
 	<ContainerLayout
 		title="FixedMediumSlowXIIMPU"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -127,8 +115,6 @@ SixTrails.story = { name: 'with six trails' };
 export const SevenTrails = () => (
 	<ContainerLayout
 		title="FixedMediumSlowXIIMPU"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -144,8 +130,6 @@ SevenTrails.story = { name: 'with seven trails' };
 export const EightTrails = () => (
 	<ContainerLayout
 		title="FixedMediumSlowXIIMPU"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -161,8 +145,6 @@ EightTrails.story = { name: 'with eight trails' };
 export const NineTrails = () => (
 	<ContainerLayout
 		title="FixedMediumSlowXIIMPU"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>

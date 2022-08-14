@@ -36,6 +36,8 @@ export const DiscussionLayout = ({
 			<ContainerLayout
 				padSides={false}
 				padContent={false}
+				showTopBorder={false}
+				showSideBorders={false}
 				// If we're not hiding an advert stretch to the right
 				stretchRight={!hideAd}
 				leftContent={

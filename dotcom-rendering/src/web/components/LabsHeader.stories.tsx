@@ -1,5 +1,5 @@
 import { border, labs } from '@guardian/source-foundations';
-import { ElementContainer } from './ElementContainer';
+import { ContainerLayout } from './ContainerLayout';
 import { LabsHeader } from './LabsHeader.importable';
 
 export default {
@@ -9,14 +9,14 @@ export default {
 
 export const Default = () => {
 	return (
-		<ElementContainer
-			showSideBorders={true}
+		<ContainerLayout
+			fullWidth={true}
 			showTopBorder={false}
 			backgroundColour={labs[400]}
 			borderColour={border.primary}
 		>
 			<LabsHeader />
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 Default.story = { name: 'Default' };

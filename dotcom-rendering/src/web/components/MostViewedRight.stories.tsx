@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
 import { ArticleContainer } from './ArticleContainer';
-import { ElementContainer } from './ElementContainer';
+import { ContainerLayout } from './ContainerLayout';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { mockTab1 } from './MostViewed.mocks';
@@ -23,7 +23,7 @@ export const defaultStory = () => {
 	});
 
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="partial">
 					<></>
@@ -38,19 +38,20 @@ export const defaultStory = () => {
 					<></>
 				</ArticleContainer>
 				<RightColumn>
-					<ElementContainer
+					<ContainerLayout
+						fullWidth={true}
 						showSideBorders={false}
 						showTopBorder={false}
-						padded={false}
+						padSides={false}
 					>
 						<MostViewedRight
 							isAdFreeUser={false}
 							adBlockerDetected={false}
 						/>
-					</ElementContainer>
+					</ContainerLayout>
 				</RightColumn>
 			</Flex>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 defaultStory.story = { name: 'default' };
@@ -62,7 +63,7 @@ export const limitItemsStory = () => {
 	});
 
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Flex>
 				<LeftColumn>
 					<></>
@@ -77,20 +78,21 @@ export const limitItemsStory = () => {
 					<></>
 				</ArticleContainer>
 				<RightColumn>
-					<ElementContainer
+					<ContainerLayout
+						fullWidth={true}
 						showSideBorders={false}
 						showTopBorder={false}
-						padded={false}
+						padSides={false}
 					>
 						<MostViewedRight
 							limitItems={3}
 							isAdFreeUser={false}
 							adBlockerDetected={false}
 						/>
-					</ElementContainer>
+					</ContainerLayout>
 				</RightColumn>
 			</Flex>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 limitItemsStory.story = { name: 'with a limit of 3 items' };
@@ -102,9 +104,9 @@ export const outsideContextStory = () => {
 	});
 
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<MostViewedRight isAdFreeUser={false} adBlockerDetected={false} />
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 outsideContextStory.story = {

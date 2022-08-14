@@ -36,13 +36,23 @@ const Grey = ({ heightInPixels = 400 }: { heightInPixels?: number }) => (
 );
 
 export const PageTitleStory = () => {
-	return <ContainerLayout title="No Children" />;
+	return (
+		<ContainerLayout
+			title="No Children"
+			showTopBorder={false}
+			showSideBorders={false}
+		/>
+	);
 };
 PageTitleStory.story = { name: 'with no children' };
 
 export const ContainerStory = () => {
 	return (
-		<ContainerLayout title="Default Container">
+		<ContainerLayout
+			title="Default Container"
+			showTopBorder={false}
+			showSideBorders={false}
+		>
 			<Grey />
 		</ContainerLayout>
 	);
@@ -51,7 +61,7 @@ ContainerStory.story = { name: 'default container' };
 
 export const NoTitleStory = () => {
 	return (
-		<ContainerLayout>
+		<ContainerLayout showTopBorder={false} showSideBorders={false}>
 			<Grey />
 		</ContainerLayout>
 	);
@@ -60,12 +70,7 @@ NoTitleStory.story = { name: 'with no title' };
 
 export const BordersStory = () => {
 	return (
-		<ContainerLayout
-			title="Borders"
-			showTopBorder={true}
-			sideBorders={true}
-			centralBorder="full"
-		>
+		<ContainerLayout title="Borders" centralBorder="full">
 			<Grey />
 		</ContainerLayout>
 	);
@@ -76,8 +81,6 @@ export const LeftContentStory = () => {
 	return (
 		<ContainerLayout
 			title="Borders"
-			showTopBorder={true}
-			sideBorders={true}
 			centralBorder="full"
 			leftContent={<Grey heightInPixels={200} />}
 		>
@@ -95,8 +98,6 @@ export const BackgroundStory = () => {
 			title="Background Colour"
 			description="About this content"
 			fontColour={brandBackground.ctaPrimary}
-			showTopBorder={true}
-			sideBorders={true}
 			centralBorder="full"
 			backgroundColour={brandBackground.primary}
 			borderColour={brandBorder.primary}
@@ -113,8 +114,6 @@ export const InnerBackgroundStory = () => {
 			title="Inner Background"
 			description="About this content"
 			fontColour={brandBackground.ctaPrimary}
-			showTopBorder={true}
-			sideBorders={true}
 			centralBorder="full"
 			innerBackgroundColour={brandBackground.primary}
 			borderColour={brandBorder.primary}
@@ -131,8 +130,6 @@ export const DifferentBackgrounds = () => {
 	return (
 		<ContainerLayout
 			title="Tip us off"
-			showTopBorder={true}
-			sideBorders={true}
 			centralBorder="full"
 			backgroundColour="#FFF280"
 			borderColour={brandBorder.primary}
@@ -153,8 +150,6 @@ export const StretchRightStory = () => {
 		<ContainerLayout
 			title="Stretched Right"
 			description="About this content"
-			showTopBorder={true}
-			sideBorders={true}
 			centralBorder="full"
 			stretchRight={true}
 		>
@@ -171,7 +166,6 @@ export const PartialStory = () => {
 		<ContainerLayout
 			title="Borders"
 			showTopBorder={false}
-			sideBorders={true}
 			centralBorder="partial"
 		>
 			<Grey />
@@ -185,7 +179,6 @@ export const SidesStory = () => {
 		<ContainerLayout
 			title="NoSides"
 			showTopBorder={false}
-			sideBorders={true}
 			centralBorder="full"
 			padSides={false}
 			padContent={false}
@@ -202,6 +195,8 @@ export const ToggleableStory = () => {
 			title="Toggleable Container"
 			toggleable={true}
 			sectionId="sectionId"
+			showTopBorder={false}
+			showSideBorders={false}
 		>
 			<Grey />
 		</ContainerLayout>
@@ -214,8 +209,6 @@ export const MarginsStory = () => {
 		<>
 			<ContainerLayout
 				title="No Vertical Margins"
-				sideBorders={true}
-				showTopBorder={true}
 				centralBorder="full"
 				verticalMargins={false}
 			>
@@ -223,8 +216,6 @@ export const MarginsStory = () => {
 			</ContainerLayout>
 			<ContainerLayout
 				title="No Vertical Margins"
-				sideBorders={true}
-				showTopBorder={true}
 				centralBorder="full"
 				verticalMargins={false}
 			>
@@ -232,8 +223,6 @@ export const MarginsStory = () => {
 			</ContainerLayout>
 			<ContainerLayout
 				title="No Vertical Margins"
-				sideBorders={true}
-				showTopBorder={true}
 				centralBorder="full"
 				verticalMargins={false}
 			>
@@ -247,37 +236,21 @@ MarginsStory.story = { name: 'with no vertical margins' };
 export const MultipleStory = () => {
 	return (
 		<>
-			<ContainerLayout
-				title="Page Title"
-				showTopBorder={false}
-				sideBorders={true}
-			/>
-			<ContainerLayout
-				title="Headlines"
-				showTopBorder={true}
-				sideBorders={true}
-				centralBorder="partial"
-			>
+			<ContainerLayout title="Page Title" showTopBorder={false} />
+			<ContainerLayout title="Headlines" centralBorder="partial">
 				<Grey />
 			</ContainerLayout>
-			<ContainerLayout
-				title="Useful links"
-				showTopBorder={true}
-				sideBorders={true}
-				centralBorder="partial"
-			/>
+			<ContainerLayout title="Useful links" centralBorder="partial" />
 			<ContainerLayout
 				title="Around the World - I'm a link"
 				url="https://www.theguardian.com/world"
-				showTopBorder={true}
-				sideBorders={true}
 				centralBorder="partial"
 			>
 				<Grey />
 			</ContainerLayout>
 			<ContainerLayout
 				showTopBorder={false}
-				sideBorders={false}
+				showSideBorders={false}
 				backgroundColour={brandAltBackground.primary}
 			>
 				<h2>Insert call to action here</h2>
@@ -287,14 +260,13 @@ export const MultipleStory = () => {
 				fontColour="white"
 				showTopBorder={false}
 				backgroundColour="black"
+				showSideBorders={false}
 			>
 				<Grey />
 			</ContainerLayout>
 			<ContainerLayout
 				title="Coronavirus"
 				description="A collection of stories about Coronavirus"
-				showTopBorder={true}
-				sideBorders={true}
 				centralBorder="partial"
 			>
 				<Grey />
@@ -333,6 +305,8 @@ export const TreatsStory = () => {
 					linkTo: '',
 				},
 			]}
+			showTopBorder={false}
+			showSideBorders={false}
 		>
 			<Grey />
 		</ContainerLayout>

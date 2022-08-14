@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticlePillar } from '@guardian/libs';
 import { joinUrl } from '../../lib/joinUrl';
-import { ElementContainer } from './ElementContainer';
+import { ContainerLayout } from './ContainerLayout';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
 
 type PillarForContainer =
@@ -269,24 +269,24 @@ export const OnwardsUpper = ({
 	return (
 		<div css={onwardsWrapper}>
 			{!!url && (
-				<ElementContainer>
+				<ContainerLayout fullWidth={true}>
 					<FetchOnwardsData
 						url={url}
 						limit={8}
 						onwardsType={onwardsType}
 						format={format}
 					/>
-				</ElementContainer>
+				</ContainerLayout>
 			)}
 			{!!(!isPaidContent && curatedDataUrl) && (
-				<ElementContainer showTopBorder={true}>
+				<ContainerLayout fullWidth={true}>
 					<FetchOnwardsData
 						url={curatedDataUrl}
 						limit={20}
 						onwardsType="curated-content"
 						format={format}
 					/>
-				</ElementContainer>
+				</ContainerLayout>
 			)}
 		</div>
 	);

@@ -20,8 +20,8 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
+import { ContainerLayout } from '../components/ContainerLayout';
 import { DecideLines } from '../components/DecideLines';
-import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
@@ -300,7 +300,8 @@ export const InteractiveImmersiveLayout = ({
 				format={format}
 			/>
 			<main data-layout="InteractiveImmersiveLayout">
-				<ElementContainer
+				<ContainerLayout
+					fullWidth={true}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={palette.background.article}
@@ -438,12 +439,13 @@ export const InteractiveImmersiveLayout = ({
 							</div>
 						</GridItem>
 					</InteractiveImmersiveGrid>
-				</ElementContainer>
-				<ElementContainer
+				</ContainerLayout>
+				<ContainerLayout
+					fullWidth={true}
 					showTopBorder={false}
 					showSideBorders={false}
 					shouldCenter={false}
-					padded={false}
+					padSides={false}
 					backgroundColour={palette.background.article}
 					element="main"
 				>
@@ -464,12 +466,13 @@ export const InteractiveImmersiveLayout = ({
 							isSensitive={CAPIArticle.config.isSensitive}
 						/>
 					</article>
-				</ElementContainer>
+				</ContainerLayout>
 			</main>
 
 			{NAV.subNavSections && (
-				<ElementContainer
-					padded={false}
+				<ContainerLayout
+					fullWidth={true}
+					padSides={false}
 					backgroundColour={neutral[100]}
 					element="aside"
 				>
@@ -480,14 +483,16 @@ export const InteractiveImmersiveLayout = ({
 							format={format}
 						/>
 					</Island>
-				</ElementContainer>
+				</ContainerLayout>
 			)}
 
-			<ElementContainer
-				padded={false}
+			<ContainerLayout
+				fullWidth={true}
+				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
+				showTopBorder={false}
 				element="footer"
 			>
 				<Footer
@@ -500,7 +505,7 @@ export const InteractiveImmersiveLayout = ({
 						CAPIArticle.contributionsServiceUrl
 					}
 				/>
-			</ElementContainer>
+			</ContainerLayout>
 
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>

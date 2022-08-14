@@ -16,7 +16,11 @@ export default {
 // Inline
 export const SportInline = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<PullQuoteBlockComponent
 				design={ArticleDesign.Standard}
 				palette={decidePalette({
@@ -37,7 +41,11 @@ SportInline.story = {
 
 export const LabsInline = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<PullQuoteBlockComponent
 				design={ArticleDesign.Standard}
 				palette={decidePalette({
@@ -58,7 +66,11 @@ LabsInline.story = {
 
 export const LifestyleInline = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<PullQuoteBlockComponent
 				design={ArticleDesign.Standard}
 				palette={decidePalette({
@@ -79,7 +91,11 @@ LifestyleInline.story = {
 
 export const CultureInline = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<PullQuoteBlockComponent
 				design={ArticleDesign.Standard}
 				palette={decidePalette({
@@ -100,7 +116,11 @@ CultureInline.story = {
 
 export const NewsInline = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<PullQuoteBlockComponent
 				design={ArticleDesign.Standard}
 				palette={decidePalette({
@@ -121,7 +141,11 @@ NewsInline.story = {
 
 export const OpinionInline = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<PullQuoteBlockComponent
 				design={ArticleDesign.Comment}
 				palette={decidePalette({
@@ -142,7 +166,11 @@ OpinionInline.story = {
 
 export const SpecialReportInline = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<PullQuoteBlockComponent
 				design={ArticleDesign.Standard}
 				palette={decidePalette({
@@ -164,7 +192,11 @@ SpecialReportInline.story = {
 // Supporting
 export const SportSupporting = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<PullQuoteBlockComponent
 				design={ArticleDesign.Standard}
 				palette={decidePalette({
@@ -185,7 +217,11 @@ SportSupporting.story = {
 
 export const LabsSupporting = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<PullQuoteBlockComponent
 				design={ArticleDesign.Standard}
 				palette={decidePalette({
@@ -206,7 +242,11 @@ LabsSupporting.story = {
 
 export const LifestyleSupporting = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<PullQuoteBlockComponent
 				design={ArticleDesign.Standard}
 				palette={decidePalette({
@@ -227,7 +267,11 @@ LifestyleSupporting.story = {
 
 export const CultureSupporting = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<PullQuoteBlockComponent
 				design={ArticleDesign.Standard}
 				palette={decidePalette({
@@ -248,7 +292,11 @@ CultureSupporting.story = {
 
 export const NewsSupporting = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<PullQuoteBlockComponent
 				design={ArticleDesign.Standard}
 				palette={decidePalette({
@@ -269,7 +317,11 @@ NewsSupporting.story = {
 
 export const OpinionSupporting = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<PullQuoteBlockComponent
 				design={ArticleDesign.Comment}
 				palette={decidePalette({
@@ -290,7 +342,11 @@ OpinionSupporting.story = {
 
 export const SpecialReportSupporting = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<PullQuoteBlockComponent
 				design={ArticleDesign.Standard}
 				palette={decidePalette({
@@ -312,7 +368,11 @@ SpecialReportSupporting.story = {
 // PhotoEssay
 export const PhotoEssayInline = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<PullQuoteBlockComponent
 				design={ArticleDesign.PhotoEssay}
 				palette={decidePalette({
@@ -333,7 +393,11 @@ PhotoEssayInline.story = {
 
 export const PhotoEssaySupporting = () => {
 	return (
-		<ContainerLayout centralBorder="full">
+		<ContainerLayout
+			showTopBorder={false}
+			centralBorder="full"
+			showSideBorders={false}
+		>
 			<PullQuoteBlockComponent
 				design={ArticleDesign.PhotoEssay}
 				palette={decidePalette({

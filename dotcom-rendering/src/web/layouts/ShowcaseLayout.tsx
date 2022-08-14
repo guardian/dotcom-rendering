@@ -22,10 +22,10 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
+import { ContainerLayout } from '../components/ContainerLayout';
 import { DecideLines } from '../components/DecideLines';
 import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { Header } from '../components/Header';
@@ -243,10 +243,11 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				<>
 					<div>
 						<Stuck>
-							<ElementContainer
+							<ContainerLayout
+								fullWidth={true}
 								showTopBorder={false}
 								showSideBorders={false}
-								padded={false}
+								padSides={false}
 								shouldCenter={false}
 							>
 								<HeaderAdSlot
@@ -254,13 +255,14 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									shouldHideAds={CAPIArticle.shouldHideAds}
 									display={format.display}
 								/>
-							</ElementContainer>
+							</ContainerLayout>
 						</Stuck>
 						<SendToBack>
-							<ElementContainer
+							<ContainerLayout
+								fullWidth={true}
 								showTopBorder={false}
 								showSideBorders={false}
-								padded={false}
+								padSides={false}
 								backgroundColour={brandBackground.primary}
 								element="header"
 							>
@@ -287,12 +289,12 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									}
 									idApiUrl={CAPIArticle.config.idApiUrl}
 								/>
-							</ElementContainer>
-							<ElementContainer
-								showSideBorders={true}
+							</ContainerLayout>
+							<ContainerLayout
+								fullWidth={true}
 								borderColour={brandLine.primary}
 								showTopBorder={false}
-								padded={false}
+								padSides={false}
 								backgroundColour={brandBackground.primary}
 								element="nav"
 							>
@@ -308,14 +310,15 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									}
 									editionId={CAPIArticle.editionId}
 								/>
-							</ElementContainer>
+							</ContainerLayout>
 
 							{NAV.subNavSections && (
-								<ElementContainer
+								<ContainerLayout
+									fullWidth={true}
 									backgroundColour={
 										palette.background.article
 									}
-									padded={false}
+									padSides={false}
 									element="aside"
 								>
 									<Island deferUntil="idle">
@@ -325,12 +328,13 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											format={format}
 										/>
 									</Island>
-								</ElementContainer>
+								</ContainerLayout>
 							)}
 
-							<ElementContainer
+							<ContainerLayout
+								fullWidth={true}
 								backgroundColour={palette.background.article}
-								padded={false}
+								padSides={false}
 								showTopBorder={false}
 							>
 								<StraightLines
@@ -339,7 +343,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										display: block;
 									`}
 								/>
-							</ElementContainer>
+							</ContainerLayout>
 						</SendToBack>
 					</div>
 				</>
@@ -348,24 +352,25 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				<>
 					<div>
 						<Stuck zIndex="stickyAdWrapper">
-							<ElementContainer
+							<ContainerLayout
+								fullWidth={true}
 								showTopBorder={false}
 								showSideBorders={false}
-								padded={false}
+								padSides={false}
 							>
 								<HeaderAdSlot
 									isAdFreeUser={CAPIArticle.isAdFreeUser}
 									shouldHideAds={CAPIArticle.shouldHideAds}
 									display={format.display}
 								/>
-							</ElementContainer>
+							</ContainerLayout>
 						</Stuck>
 						<Stuck zIndex="stickyAdWrapperNav">
-							<ElementContainer
-								showSideBorders={true}
+							<ContainerLayout
+								fullWidth={true}
 								borderColour={brandLine.primary}
 								showTopBorder={false}
-								padded={false}
+								padSides={false}
 								backgroundColour={brandBackground.primary}
 								element="nav"
 							>
@@ -381,12 +386,12 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									}
 									editionId={CAPIArticle.editionId}
 								/>
-							</ElementContainer>
+							</ContainerLayout>
 						</Stuck>
 					</div>
 					<Stuck zIndex="stickyAdWrapperLabsHeader">
-						<ElementContainer
-							showSideBorders={true}
+						<ContainerLayout
+							fullWidth={true}
 							showTopBorder={false}
 							backgroundColour={labs[400]}
 							borderColour={border.primary}
@@ -395,13 +400,14 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							<Island deferUntil="idle">
 								<LabsHeader />
 							</Island>
-						</ElementContainer>
+						</ContainerLayout>
 					</Stuck>
 				</>
 			)}
 
 			<main data-layout="ShowcaseLayout">
-				<ElementContainer
+				<ContainerLayout
+					fullWidth={true}
 					showTopBorder={false}
 					backgroundColour={palette.background.article}
 					element="article"
@@ -639,10 +645,11 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</div>
 						</GridItem>
 					</ShowcaseGrid>
-				</ElementContainer>
+				</ContainerLayout>
 
-				<ElementContainer
-					padded={false}
+				<ContainerLayout
+					fullWidth={true}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
@@ -652,7 +659,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						position="merchandising-high"
 						display={format.display}
 					/>
-				</ElementContainer>
+				</ContainerLayout>
 
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
@@ -662,7 +669,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				) : (
 					<>
 						{CAPIArticle.storyPackage && (
-							<ElementContainer>
+							<ContainerLayout fullWidth={true}>
 								<Island deferUntil="visible">
 									<Carousel
 										heading={
@@ -675,7 +682,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										format={format}
 									/>
 								</Island>
-							</ElementContainer>
+							</ContainerLayout>
 						)}
 
 						<Island
@@ -708,7 +715,11 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				)}
 
 				{!isPaidContent && showComments && (
-					<ElementContainer sectionId="comments" element="section">
+					<ContainerLayout
+						fullWidth={true}
+						sectionId="comments"
+						element="section"
+					>
 						<DiscussionLayout
 							discussionApiUrl={
 								CAPIArticle.config.discussionApiUrl
@@ -726,32 +737,41 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
 							shouldHideAds={CAPIArticle.shouldHideAds}
 						/>
-					</ElementContainer>
+					</ContainerLayout>
 				)}
 
 				{!isPaidContent && (
-					<ElementContainer data-print-layout="hide" element="aside">
+					<ContainerLayout
+						fullWidth={true}
+						data-print-layout="hide"
+						element="aside"
+					>
 						<MostViewedFooterLayout
 							format={format}
 							sectionName={CAPIArticle.sectionName}
 							ajaxUrl={CAPIArticle.config.ajaxUrl}
 						/>
-					</ElementContainer>
+					</ContainerLayout>
 				)}
 
-				<ElementContainer
-					padded={false}
+				<ContainerLayout
+					fullWidth={true}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
 					element="aside"
 				>
 					<AdSlot position="merchandising" display={format.display} />
-				</ElementContainer>
+				</ContainerLayout>
 			</main>
 
 			{NAV.subNavSections && (
-				<ElementContainer padded={false} element="aside">
+				<ContainerLayout
+					fullWidth={true}
+					padSides={false}
+					element="aside"
+				>
 					<Island deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
@@ -759,11 +779,12 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							format={format}
 						/>
 					</Island>
-				</ElementContainer>
+				</ContainerLayout>
 			)}
 
-			<ElementContainer
-				padded={false}
+			<ContainerLayout
+				fullWidth={true}
+				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
@@ -779,7 +800,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						CAPIArticle.contributionsServiceUrl
 					}
 				/>
-			</ElementContainer>
+			</ContainerLayout>
 
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>

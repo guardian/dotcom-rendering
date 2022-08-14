@@ -12,7 +12,6 @@ import { ArticleHeadline } from '../../components/ArticleHeadline';
 import { ArticleTitle } from '../../components/ArticleTitle';
 import { Caption } from '../../components/Caption';
 import { ContainerLayout } from '../../components/ContainerLayout';
-import { ElementContainer } from '../../components/ElementContainer';
 import { Island } from '../../components/Island';
 import { LabsHeader } from '../../components/LabsHeader.importable';
 import { MainMedia } from '../../components/MainMedia';
@@ -160,10 +159,11 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 							order: 0;
 						`}
 					>
-						<ElementContainer
+						<ContainerLayout
+							fullWidth={true}
 							showSideBorders={false}
 							showTopBorder={false}
-							padded={false}
+							padSides={false}
 							backgroundColour={brandBackground.primary}
 							element="nav"
 						>
@@ -179,13 +179,13 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 								}
 								editionId={CAPIArticle.editionId}
 							/>
-						</ElementContainer>
+						</ContainerLayout>
 					</div>
 
 					{format.theme === ArticleSpecial.Labs && (
 						<Stuck>
-							<ElementContainer
-								showSideBorders={true}
+							<ContainerLayout
+								fullWidth={true}
 								showTopBorder={false}
 								backgroundColour={labs[400]}
 								borderColour={border.primary}
@@ -194,7 +194,7 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 								<Island deferUntil="idle">
 									<LabsHeader />
 								</Island>
-							</ElementContainer>
+							</ContainerLayout>
 						</Stuck>
 					)}
 
@@ -235,7 +235,9 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 							<ContainerLayout
 								verticalMargins={false}
 								padContent={false}
+								showTopBorder={false}
 								padSides={false}
+								showSideBorders={false}
 								leftContent={<LeftColCaption />}
 							>
 								<ArticleTitle
@@ -254,6 +256,8 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 									verticalMargins={false}
 									padContent={false}
 									padSides={false}
+									showTopBorder={false}
+									showSideBorders={false}
 								>
 									<ArticleHeadline
 										format={format}

@@ -6,7 +6,7 @@ import {
 } from '@guardian/libs';
 import { breakpoints, specialReport } from '@guardian/source-foundations';
 import { CardHeadline } from './CardHeadline';
-import { ElementContainer } from './ElementContainer';
+import { ContainerLayout } from './ContainerLayout';
 
 export default {
 	component: CardHeadline,
@@ -23,7 +23,11 @@ const smallHeadlineSizes: SmallHeadlineSize[] = [
 ];
 
 export const Article = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<ContainerLayout
+		fullWidth={true}
+		showTopBorder={false}
+		showSideBorders={false}
+	>
 		<CardHeadline
 			headlineText="This is how an Article card headline looks"
 			format={{
@@ -32,7 +36,7 @@ export const Article = () => (
 				theme: ArticlePillar.News,
 			}}
 		/>
-	</ElementContainer>
+	</ContainerLayout>
 );
 Article.story = { name: 'Article' };
 
@@ -40,7 +44,11 @@ export const Analysis = () => (
 	<>
 		{smallHeadlineSizes.map((size) => (
 			<div key={size}>
-				<ElementContainer showTopBorder={false} showSideBorders={false}>
+				<ContainerLayout
+					fullWidth={true}
+					showTopBorder={false}
+					showSideBorders={false}
+				>
 					<CardHeadline
 						headlineText={`This is how a ${size} Analysis card headline looks`}
 						format={{
@@ -50,12 +58,16 @@ export const Analysis = () => (
 						}}
 						size={size}
 					/>
-				</ElementContainer>
+				</ContainerLayout>
 				<br />
 			</div>
 		))}
 		<br />
-		<ElementContainer showTopBorder={false} showSideBorders={false}>
+		<ContainerLayout
+			fullWidth={true}
+			showTopBorder={false}
+			showSideBorders={false}
+		>
 			<CardHeadline
 				headlineText="This is how an Sport Analysis card headline looks"
 				format={{
@@ -64,9 +76,13 @@ export const Analysis = () => (
 					theme: ArticlePillar.Sport,
 				}}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 		<br />
-		<ElementContainer showTopBorder={false} showSideBorders={false}>
+		<ContainerLayout
+			fullWidth={true}
+			showTopBorder={false}
+			showSideBorders={false}
+		>
 			<CardHeadline
 				headlineText="This is how an Culture Analysis card headline looks"
 				format={{
@@ -75,9 +91,13 @@ export const Analysis = () => (
 					theme: ArticlePillar.Culture,
 				}}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 		<br />
-		<ElementContainer showTopBorder={false} showSideBorders={false}>
+		<ContainerLayout
+			fullWidth={true}
+			showTopBorder={false}
+			showSideBorders={false}
+		>
 			<CardHeadline
 				headlineText="This is how an Opinion Analysis card headline looks"
 				format={{
@@ -86,9 +106,13 @@ export const Analysis = () => (
 					theme: ArticlePillar.Opinion,
 				}}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 		<br />
-		<ElementContainer showTopBorder={false} showSideBorders={false}>
+		<ContainerLayout
+			fullWidth={true}
+			showTopBorder={false}
+			showSideBorders={false}
+		>
 			<CardHeadline
 				headlineText="This is how an Lifestyle Analysis card headline looks"
 				format={{
@@ -97,9 +121,10 @@ export const Analysis = () => (
 					theme: ArticlePillar.Lifestyle,
 				}}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 		<br />
-		<ElementContainer
+		<ContainerLayout
+			fullWidth={true}
 			showTopBorder={false}
 			showSideBorders={false}
 			backgroundColour={specialReport[300]}
@@ -112,13 +137,17 @@ export const Analysis = () => (
 					theme: ArticleSpecial.SpecialReport,
 				}}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	</>
 );
 Analysis.story = { name: 'Analysis (Underline)' };
 
 export const Feature = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<ContainerLayout
+		fullWidth={true}
+		showTopBorder={false}
+		showSideBorders={false}
+	>
 		<CardHeadline
 			headlineText="This is how a Feature card headline looks"
 			format={{
@@ -127,7 +156,7 @@ export const Feature = () => (
 				theme: ArticlePillar.News,
 			}}
 		/>
-	</ElementContainer>
+	</ContainerLayout>
 );
 Feature.story = { name: 'Feature' };
 
@@ -135,7 +164,11 @@ export const Size = () => (
 	<>
 		{smallHeadlineSizes.map((size) => (
 			<div key={size}>
-				<ElementContainer showTopBorder={false} showSideBorders={false}>
+				<ContainerLayout
+					fullWidth={true}
+					showTopBorder={false}
+					showSideBorders={false}
+				>
 					<CardHeadline
 						headlineText={`This is how a ${size} card headline looks`}
 						format={{
@@ -145,7 +178,7 @@ export const Size = () => (
 						}}
 						size={size}
 					/>
-				</ElementContainer>
+				</ContainerLayout>
 				<br />
 			</div>
 		))}
@@ -157,7 +190,11 @@ export const MobileSize = () => (
 	<>
 		{smallHeadlineSizes.map((size) => (
 			<div key={size}>
-				<ElementContainer showTopBorder={false} showSideBorders={false}>
+				<ContainerLayout
+					fullWidth={true}
+					showTopBorder={false}
+					showSideBorders={false}
+				>
 					<CardHeadline
 						headlineText={`This is how a mobile ${size} card headline looks`}
 						format={{
@@ -168,7 +205,7 @@ export const MobileSize = () => (
 						size="medium"
 						sizeOnMobile={size}
 					/>
-				</ElementContainer>
+				</ContainerLayout>
 				<br />
 			</div>
 		))}
@@ -184,7 +221,11 @@ MobileSize.story = {
 };
 
 export const liveStory = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<ContainerLayout
+		fullWidth={true}
+		showTopBorder={false}
+		showSideBorders={false}
+	>
 		<CardHeadline
 			headlineText="This is how a card headline with a live kicker looks"
 			format={{
@@ -194,12 +235,16 @@ export const liveStory = () => (
 			}}
 			kickerText="Live"
 		/>
-	</ElementContainer>
+	</ContainerLayout>
 );
 liveStory.story = { name: 'With Live kicker' };
 
 export const noSlash = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<ContainerLayout
+		fullWidth={true}
+		showTopBorder={false}
+		showSideBorders={false}
+	>
 		<CardHeadline
 			headlineText="This is how a card headline with no kicker slash looks"
 			format={{
@@ -210,12 +255,16 @@ export const noSlash = () => (
 			kickerText="Live"
 			showSlash={false}
 		/>
-	</ElementContainer>
+	</ContainerLayout>
 );
 noSlash.story = { name: 'With Live kicker but no slash' };
 
 export const pulsingDot = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<ContainerLayout
+		fullWidth={true}
+		showTopBorder={false}
+		showSideBorders={false}
+	>
 		<CardHeadline
 			headlineText="This is how a card headline with a pulsing dot looks"
 			format={{
@@ -226,12 +275,16 @@ export const pulsingDot = () => (
 			kickerText="Live"
 			showPulsingDot={true}
 		/>
-	</ElementContainer>
+	</ContainerLayout>
 );
 pulsingDot.story = { name: 'With pulsing dot' };
 
 export const cultureVariant = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<ContainerLayout
+		fullWidth={true}
+		showTopBorder={false}
+		showSideBorders={false}
+	>
 		<CardHeadline
 			headlineText="This is how a Feature card headline with the culture pillar looks"
 			format={{
@@ -241,12 +294,16 @@ export const cultureVariant = () => (
 			}}
 			kickerText="Art and stuff"
 		/>
-	</ElementContainer>
+	</ContainerLayout>
 );
 cultureVariant.story = { name: 'With a culture kicker' };
 
 export const Opinion = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<ContainerLayout
+		fullWidth={true}
+		showTopBorder={false}
+		showSideBorders={false}
+	>
 		<CardHeadline
 			headlineText="This is how small card headline for opinion articles look"
 			format={{
@@ -257,7 +314,7 @@ export const Opinion = () => (
 			showQuotes={true}
 			size="small"
 		/>
-	</ElementContainer>
+	</ContainerLayout>
 );
 Opinion.story = { name: 'Opinion (Quotes)' };
 
@@ -265,7 +322,11 @@ export const OpinionKicker = () => (
 	<>
 		{smallHeadlineSizes.map((size) => (
 			<div key={size}>
-				<ElementContainer showTopBorder={false} showSideBorders={false}>
+				<ContainerLayout
+					fullWidth={true}
+					showTopBorder={false}
+					showSideBorders={false}
+				>
 					<CardHeadline
 						headlineText={`This is how a ${size} opinion card headline with a kicker and quotes looks`}
 						format={{
@@ -278,7 +339,7 @@ export const OpinionKicker = () => (
 						showSlash={true}
 						size={size}
 					/>
-				</ElementContainer>
+				</ContainerLayout>
 				<br />
 			</div>
 		))}
@@ -287,7 +348,8 @@ export const OpinionKicker = () => (
 OpinionKicker.story = { name: 'With an opinion kicker' };
 
 export const SpecialReport = () => (
-	<ElementContainer
+	<ContainerLayout
+		fullWidth={true}
 		showTopBorder={false}
 		showSideBorders={false}
 		backgroundColour="grey"
@@ -303,12 +365,16 @@ export const SpecialReport = () => (
 			kickerText="Special Report"
 			showSlash={true}
 		/>
-	</ElementContainer>
+	</ContainerLayout>
 );
 SpecialReport.story = { name: 'With theme SpecialReport' };
 
 export const Busy = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<ContainerLayout
+		fullWidth={true}
+		showTopBorder={false}
+		showSideBorders={false}
+	>
 		<CardHeadline
 			headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 			format={{
@@ -320,13 +386,13 @@ export const Busy = () => (
 			kickerText="Aerial Yoga"
 			showSlash={true}
 		/>
-	</ElementContainer>
+	</ContainerLayout>
 );
 Busy.story = { name: 'Lifestyle opinion' };
 
 export const Byline = () => (
 	<>
-		<ElementContainer showTopBorder={true} showSideBorders={false}>
+		<ContainerLayout fullWidth={true} showSideBorders={false}>
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 				format={{
@@ -337,9 +403,9 @@ export const Byline = () => (
 				byline="Labs byline"
 				showByline={true}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 		<br />
-		<ElementContainer showTopBorder={true} showSideBorders={false}>
+		<ContainerLayout fullWidth={true} showSideBorders={false}>
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 				format={{
@@ -350,9 +416,9 @@ export const Byline = () => (
 				byline="News byline"
 				showByline={true}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 		<br />
-		<ElementContainer showTopBorder={true} showSideBorders={false}>
+		<ContainerLayout fullWidth={true} showSideBorders={false}>
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 				format={{
@@ -363,9 +429,9 @@ export const Byline = () => (
 				byline="Sport byline"
 				showByline={true}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 		<br />
-		<ElementContainer showTopBorder={true} showSideBorders={false}>
+		<ContainerLayout fullWidth={true} showSideBorders={false}>
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 				format={{
@@ -376,9 +442,9 @@ export const Byline = () => (
 				byline="Culture byline"
 				showByline={true}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 		<br />
-		<ElementContainer showTopBorder={true} showSideBorders={false}>
+		<ContainerLayout fullWidth={true} showSideBorders={false}>
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 				format={{
@@ -389,9 +455,9 @@ export const Byline = () => (
 				byline="Lifestyle byline"
 				showByline={true}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 		<br />
-		<ElementContainer showTopBorder={true} showSideBorders={false}>
+		<ContainerLayout fullWidth={true} showSideBorders={false}>
 			<CardHeadline
 				headlineText="I look life a buffoon. I feel incredible. And then I vomit"
 				format={{
@@ -402,10 +468,10 @@ export const Byline = () => (
 				byline="Opinion byline"
 				showByline={true}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 		<br />
-		<ElementContainer
-			showTopBorder={true}
+		<ContainerLayout
+			fullWidth={true}
 			showSideBorders={false}
 			backgroundColour={specialReport[300]}
 		>
@@ -419,7 +485,7 @@ export const Byline = () => (
 				byline="SpecialReport byline"
 				showByline={true}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	</>
 );
 Byline.story = { name: 'With byline' };

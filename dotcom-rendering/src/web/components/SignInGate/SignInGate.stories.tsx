@@ -1,4 +1,4 @@
-import { ElementContainer } from '../ElementContainer';
+import { ContainerLayout } from '../ContainerLayout';
 import { SignInGateSelector } from '../SignInGateSelector.importable';
 import { SignInGateFakeSocial } from './gateDesigns/SignInGateFakeSocial';
 import { SignInGateMain } from './gateDesigns/SignInGateMain';
@@ -13,21 +13,21 @@ export default {
 
 export const mainStandalone = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<SignInGateMain
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/"
 				dismissGate={() => {}}
 				ophanComponentId="test"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 mainStandalone.story = { name: 'main_standalone' };
 
 export const mainStandaloneComment = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<SignInGateMain
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/"
@@ -35,14 +35,14 @@ export const mainStandaloneComment = () => {
 				ophanComponentId="test"
 				isComment={true}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 mainStandaloneComment.story = { name: 'main_standalone_comment' };
 
 export const mainStandaloneMandatory = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<SignInGateMain
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/"
@@ -50,14 +50,14 @@ export const mainStandaloneMandatory = () => {
 				ophanComponentId="test"
 				isMandatory={true}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 mainStandaloneMandatory.story = { name: 'main_standalone_mandatory' };
 
 export const mainStandaloneMandatoryComment = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<SignInGateMain
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/"
@@ -66,7 +66,7 @@ export const mainStandaloneMandatoryComment = () => {
 				isMandatory={true}
 				isComment={true}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 mainStandaloneMandatoryComment.story = {
@@ -75,21 +75,21 @@ mainStandaloneMandatoryComment.story = {
 
 export const fakeSocialStandalone = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<SignInGateFakeSocial
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/"
 				dismissGate={() => {}}
 				ophanComponentId="test"
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 fakeSocialStandalone.story = { name: 'fake_social_standalone' };
 
 export const fakeSocialStandaloneVertical = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<SignInGateFakeSocial
 				guUrl="https://theguardian.com"
 				signInUrl="https://profile.theguardian.com/"
@@ -101,7 +101,7 @@ export const fakeSocialStandaloneVertical = () => {
 					variant: 'fake-social-variant-vertical',
 				}}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 fakeSocialStandaloneVertical.story = {

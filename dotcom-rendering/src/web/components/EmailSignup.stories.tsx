@@ -28,8 +28,6 @@ const hidePrivacyMessage = (): boolean => boolean('hidePrivacyMessage', false);
 export const Default = () => (
 	<ContainerLayout
 		title="EmailSignup"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>

@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { Carousel } from './Carousel.importable';
-import { ElementContainer } from './ElementContainer';
+import { ContainerLayout } from './ContainerLayout';
 
 export default {
 	component: Carousel,
@@ -181,7 +181,7 @@ const immersiveTrails = convertToImmersive(trails);
 
 export const Headlines = () => (
 	<>
-		<ElementContainer showTopBorder={true}>
+		<ContainerLayout fullWidth={true}>
 			<Carousel
 				heading="More on this story"
 				trails={trails}
@@ -192,8 +192,8 @@ export const Headlines = () => (
 					display: ArticleDisplay.Standard,
 				}}
 			/>
-		</ElementContainer>
-		<ElementContainer showTopBorder={true}>
+		</ContainerLayout>
+		<ContainerLayout fullWidth={true}>
 			<Carousel
 				heading="Sport"
 				trails={trails}
@@ -204,7 +204,7 @@ export const Headlines = () => (
 					display: ArticleDisplay.Standard,
 				}}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	</>
 );
 
@@ -212,7 +212,7 @@ Headlines.story = 'Headlines carousel';
 
 export const SingleItemCarousel = () => (
 	<>
-		<ElementContainer showTopBorder={true}>
+		<ContainerLayout fullWidth={true}>
 			<Carousel
 				heading="More on this story"
 				trails={trails.slice(1, 2)}
@@ -223,7 +223,7 @@ export const SingleItemCarousel = () => (
 					display: ArticleDisplay.Standard,
 				}}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	</>
 );
 
@@ -231,7 +231,7 @@ Headlines.story = 'Carousel with single item';
 
 export const Immersive = () => (
 	<>
-		<ElementContainer showTopBorder={true}>
+		<ContainerLayout fullWidth={true}>
 			<Carousel
 				heading="More on this story"
 				trails={immersiveTrails}
@@ -242,8 +242,8 @@ export const Immersive = () => (
 					display: ArticleDisplay.Immersive,
 				}}
 			/>
-		</ElementContainer>
-		<ElementContainer showTopBorder={true}>
+		</ContainerLayout>
+		<ContainerLayout fullWidth={true}>
 			<Carousel
 				heading="Sport"
 				trails={immersiveTrails}
@@ -254,7 +254,7 @@ export const Immersive = () => (
 					display: ArticleDisplay.Immersive,
 				}}
 			/>
-		</ElementContainer>
+		</ContainerLayout>
 	</>
 );
 

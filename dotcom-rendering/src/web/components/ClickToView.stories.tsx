@@ -36,7 +36,7 @@ const RoleStory = ({
 }) => {
 	return (
 		<ContainerLayout
-			sideBorders={true}
+			showTopBorder={false}
 			title="Click To View"
 			centralBorder="full"
 		>
@@ -466,7 +466,7 @@ const vineEmbedEmbed: VineBlockElement = {
 export const EmbedBlockComponentStory = () => {
 	return (
 		<ContainerLayout
-			sideBorders={true}
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -672,7 +672,7 @@ EmbedBlockComponentStory.story = {
 export const UnsafeEmbedBlockComponentStory = () => {
 	return (
 		<ContainerLayout
-			sideBorders={true}
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -830,7 +830,7 @@ UnsafeEmbedBlockComponentStory.story = {
 export const VimeoBlockComponentStory = () => {
 	return (
 		<ContainerLayout
-			sideBorders={true}
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -893,7 +893,7 @@ VimeoBlockComponentStory.story = {
 export const DocumentBlockComponentStory = () => {
 	return (
 		<ContainerLayout
-			sideBorders={true}
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -950,7 +950,7 @@ DocumentBlockComponentStory.story = {
 export const SoundCloudBlockComponentStory = () => {
 	return (
 		<ContainerLayout
-			sideBorders={true}
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -1029,7 +1029,7 @@ SoundCloudBlockComponentStory.story = {
 export const SpotifyBlockComponentStory = () => {
 	return (
 		<ContainerLayout
-			sideBorders={true}
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -1095,7 +1095,7 @@ SpotifyBlockComponentStory.story = {
 export const TweetBlockComponentStory = () => {
 	return (
 		<ContainerLayout
-			sideBorders={true}
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -1144,7 +1144,7 @@ TweetBlockComponentStory.story = {
 export const InstagramBlockComponentStory = () => {
 	return (
 		<ContainerLayout
-			sideBorders={true}
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -1191,7 +1191,7 @@ InstagramBlockComponentStory.story = {
 export const MapBlockComponentStory = () => {
 	return (
 		<ContainerLayout
-			sideBorders={true}
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -1254,9 +1254,9 @@ MapBlockComponentStory.story = {
 export const VineBlockComponentStory = () => {
 	return (
 		<ContainerLayout
-			sideBorders={true}
 			title="Embedded Content"
 			centralBorder="full"
+			showTopBorder={false}
 		>
 			<div
 				css={css`

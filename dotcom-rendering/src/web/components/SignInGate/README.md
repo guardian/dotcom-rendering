@@ -252,14 +252,14 @@ In the `SignInGate.stories.tsx` file, simply import the gate design component, a
 ```tsx
 export const mainPatientia = () => {
     return (
-        <ElementContainer>
+        <ContainerLayout fullWidth={true}>
             <SignInGatePatientia
                 guUrl="https://theguardian.com"
                 signInUrl="https://profile.theguardian.com/"
                 dismissGate={() => {}}
                 component="test"
             />
-        </ElementContainer>
+        </ContainerLayout>
     );
 };
 mainPatientia.story = { name: 'patientia_standalone' };

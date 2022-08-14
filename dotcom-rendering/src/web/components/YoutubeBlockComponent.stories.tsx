@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { ElementContainer } from './ElementContainer';
+import { ContainerLayout } from './ContainerLayout';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
@@ -12,7 +12,7 @@ export default {
 };
 
 const Container = ({ children }: { children: React.ReactNode }) => (
-	<ElementContainer showTopBorder={false}>
+	<ContainerLayout fullWidth={true} showTopBorder={false}>
 		<Flex>
 			<LeftColumn borderType="full">
 				<></>
@@ -29,7 +29,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 				<></>
 			</RightColumn>
 		</Flex>
-	</ElementContainer>
+	</ContainerLayout>
 );
 
 export const Default = () => {

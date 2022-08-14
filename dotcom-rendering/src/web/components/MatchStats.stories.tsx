@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { matchReport } from '../../../fixtures/generated/match-report';
 import { ArticleContainer } from './ArticleContainer';
-import { ElementContainer } from './ElementContainer';
+import { ContainerLayout } from './ContainerLayout';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { MatchStats } from './MatchStats';
@@ -29,7 +29,7 @@ Default.story = { name: 'default' };
 
 export const InContext = () => {
 	return (
-		<ElementContainer>
+		<ContainerLayout fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -55,7 +55,7 @@ export const InContext = () => {
 					<></>
 				</RightColumn>
 			</Flex>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 InContext.story = { name: 'when placed in article context' };

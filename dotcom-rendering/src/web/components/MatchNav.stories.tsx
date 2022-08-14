@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { ArticleContainer } from './ArticleContainer';
-import { ElementContainer } from './ElementContainer';
+import { ContainerLayout } from './ContainerLayout';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { MatchNav } from './MatchNav';
@@ -76,7 +76,7 @@ NoComments.story = { name: 'with no comments' };
 
 export const InContext = () => {
 	return (
-		<ElementContainer padded={false}>
+		<ContainerLayout fullWidth={true} padSides={false}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -98,7 +98,7 @@ export const InContext = () => {
 					<></>
 				</RightColumn>
 			</Flex>
-		</ElementContainer>
+		</ContainerLayout>
 	);
 };
 InContext.story = { name: 'when placed in article context' };

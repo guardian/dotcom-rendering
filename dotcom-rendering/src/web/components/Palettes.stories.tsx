@@ -24,8 +24,6 @@ const groupedTrails = {
 export const EventPalette = () => (
 	<ContainerLayout
 		title="EventPalette"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="EventPalette"
@@ -43,8 +41,6 @@ export const EventPalette = () => (
 export const EventAltPalette = () => (
 	<ContainerLayout
 		title="EventAltPalette"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="EventAltPalette"
@@ -62,8 +58,6 @@ export const EventAltPalette = () => (
 export const SombrePalette = () => (
 	<ContainerLayout
 		title="SombrePalette"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="SombrePalette"
@@ -81,8 +75,6 @@ export const SombrePalette = () => (
 export const SombreAltPalette = () => (
 	<ContainerLayout
 		title="SombreAltPalette"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="SombreAltPalette"
@@ -100,8 +92,6 @@ export const SombreAltPalette = () => (
 export const BreakingPalette = () => (
 	<ContainerLayout
 		title="BreakingPalette"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="BreakingPalette"
@@ -119,8 +109,6 @@ export const BreakingPalette = () => (
 export const LongRunningPalette = () => (
 	<ContainerLayout
 		title="LongRunningPalette"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="LongRunningPalette"
@@ -138,8 +126,6 @@ export const LongRunningPalette = () => (
 export const LongRunningAltPalette = () => (
 	<ContainerLayout
 		title="LongRunningAltPalette"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="LongRunningAltPalette"
@@ -157,8 +143,6 @@ export const LongRunningAltPalette = () => (
 export const InvestigationPalette = () => (
 	<ContainerLayout
 		title="InvestigationPalette"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="InvestigationPalette"

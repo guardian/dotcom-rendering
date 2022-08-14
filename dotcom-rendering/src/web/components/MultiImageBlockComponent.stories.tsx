@@ -15,7 +15,7 @@ export default {
 
 export const SingleImage = () => {
 	return (
-		<ContainerLayout>
+		<ContainerLayout showTopBorder={false} showSideBorders={false}>
 			<MultiImageBlockComponent
 				format={{
 					display: ArticleDisplay.Standard,
@@ -33,7 +33,7 @@ SingleImage.story = {
 
 export const SingleImageWithCaption = () => {
 	return (
-		<ContainerLayout>
+		<ContainerLayout showTopBorder={false} showSideBorders={false}>
 			<MultiImageBlockComponent
 				format={{
 					display: ArticleDisplay.Standard,
@@ -52,7 +52,7 @@ SingleImageWithCaption.story = {
 
 export const SideBySide = () => {
 	return (
-		<ContainerLayout>
+		<ContainerLayout showTopBorder={false} showSideBorders={false}>
 			<MultiImageBlockComponent
 				format={{
 					display: ArticleDisplay.Standard,
@@ -70,7 +70,7 @@ SideBySide.story = {
 
 export const SideBySideWithCaption = () => {
 	return (
-		<ContainerLayout>
+		<ContainerLayout showTopBorder={false} showSideBorders={false}>
 			<MultiImageBlockComponent
 				format={{
 					display: ArticleDisplay.Standard,
@@ -89,7 +89,7 @@ SideBySideWithCaption.story = {
 
 export const OneAboveTwo = () => {
 	return (
-		<ContainerLayout>
+		<ContainerLayout showTopBorder={false} showSideBorders={false}>
 			<MultiImageBlockComponent
 				format={{
 					display: ArticleDisplay.Standard,
@@ -107,7 +107,7 @@ OneAboveTwo.story = {
 
 export const OneAboveTwoWithCaption = () => {
 	return (
-		<ContainerLayout>
+		<ContainerLayout showTopBorder={false} showSideBorders={false}>
 			<MultiImageBlockComponent
 				format={{
 					display: ArticleDisplay.Standard,
@@ -126,7 +126,7 @@ OneAboveTwoWithCaption.story = {
 
 export const GridOfFour = () => {
 	return (
-		<ContainerLayout>
+		<ContainerLayout showTopBorder={false} showSideBorders={false}>
 			<MultiImageBlockComponent
 				format={{
 					display: ArticleDisplay.Standard,
@@ -144,7 +144,7 @@ GridOfFour.story = {
 
 export const GridOfFourWithCaption = () => {
 	return (
-		<ContainerLayout>
+		<ContainerLayout showTopBorder={false} showSideBorders={false}>
 			<MultiImageBlockComponent
 				format={{
 					display: ArticleDisplay.Standard,

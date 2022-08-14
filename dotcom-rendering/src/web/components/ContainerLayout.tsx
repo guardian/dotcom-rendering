@@ -19,11 +19,21 @@ type Props = {
 	description?: string;
 	url?: string;
 	sectionId?: string;
-	sideBorders?: boolean;
+	showSideBorders?: boolean;
 	centralBorder?: 'partial' | 'full';
 	showTopBorder?: boolean;
 	padSides?: boolean;
 	padContent?: boolean;
+	element?:
+		| 'div'
+		| 'article'
+		| 'aside'
+		| 'nav'
+		| 'main'
+		| 'header'
+		| 'section'
+		| 'footer';
+	shouldCenter?: boolean;
 	verticalMargins?: boolean;
 	backgroundColour?: string;
 	borderColour?: string;
@@ -41,6 +51,13 @@ type Props = {
 	showDateHeader?: boolean;
 	editionId?: EditionId;
 	treats?: TreatType[];
+	fullWidth?: boolean;
+	/**
+	 * @deprecated Do not use
+	 *
+	 * Legacy className prop only used for supporting old interactives
+	 */
+	className?: string;
 };
 
 const containerStyles = css`
@@ -123,9 +140,9 @@ export const ContainerLayout = ({
 	description,
 	url,
 	sectionId,
-	sideBorders = false,
+	showSideBorders = true,
 	centralBorder,
-	showTopBorder = false,
+	showTopBorder = true,
 	padSides = true,
 	padContent = true,
 	verticalMargins = true,
@@ -145,14 +162,42 @@ export const ContainerLayout = ({
 	editionId,
 	containerName,
 	treats,
+	fullWidth,
+	element = 'section',
+	shouldCenter,
+	className,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
 
+	if (fullWidth) {
+		return (
+			<ElementContainer
+				sectionId={sectionId}
+				showSideBorders={showSideBorders}
+				showTopBorder={showTopBorder}
+				padded={padSides}
+				borderColour={borderColour || overrides?.border.container}
+				backgroundColour={
+					backgroundColour || overrides?.background.container
+				}
+				ophanComponentLink={ophanComponentLink}
+				ophanComponentName={ophanComponentName}
+				containerName={containerName}
+				innerBackgroundColour={innerBackgroundColour}
+				className={className}
+				element={element}
+				shouldCenter={shouldCenter}
+			>
+				{children}
+			</ElementContainer>
+		);
+	}
+
 	return (
 		<ElementContainer
 			sectionId={sectionId}
-			showSideBorders={sideBorders}
+			showSideBorders={showSideBorders}
 			showTopBorder={showTopBorder}
 			padded={padSides}
 			borderColour={borderColour || overrides?.border.container}

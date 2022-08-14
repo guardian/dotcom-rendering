@@ -15,7 +15,7 @@ tar -xzf gor_0.16.0_x64.tar.gz gor
 sudo gor --input-raw :80 --output-http http://apiv2.code.co.uk
     `;
 	return (
-		<ContainerLayout>
+		<ContainerLayout showTopBorder={false} showSideBorders={false}>
 			<CodeBlockComponent code={code} language="text" />
 		</ContainerLayout>
 	);
