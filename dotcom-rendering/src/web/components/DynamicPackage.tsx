@@ -44,12 +44,12 @@ const Card100 = ({
 	cards,
 	containerPalette,
 	showAge,
-	ginormousHeadline,
+	isBoosted,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	ginormousHeadline?: boolean;
+	isBoosted?: boolean;
 }) => {
 	return (
 		<UL>
@@ -59,7 +59,7 @@ const Card100 = ({
 					containerPalette={containerPalette}
 					containerType="dynamic/package"
 					showAge={showAge}
-					headlineSize={ginormousHeadline ? 'ginormous' : 'huge'}
+					headlineSize={isBoosted ? 'ginormous' : 'huge'}
 					imagePosition="bottom"
 					imagePositionOnMobile="bottom"
 					imageSize="large"
@@ -483,7 +483,7 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						ginormousHeadline={true}
+						isBoosted={true}
 					/>
 					<Card25_Card25_Card25_Card25
 						cards={thirdSlice}
@@ -519,7 +519,7 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						ginormousHeadline={firstSlice[0].isBoosted}
+						isBoosted={firstSlice[0].isBoosted}
 					/>
 					<Card25_Card25_Card25_Card25
 						cards={thirdSlice}
@@ -540,7 +540,7 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						ginormousHeadline={firstSlice[0].isBoosted}
+						isBoosted={firstSlice[0].isBoosted}
 					/>
 					<Card25_Card25_Card25_ColumnOfTwo25
 						cards={thirdSlice}
@@ -561,7 +561,7 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						ginormousHeadline={firstSlice[0].isBoosted}
+						isBoosted={firstSlice[0].isBoosted}
 					/>
 					<Card25_Card25_ColumnOfTwo25_ColumnOfTwo25
 						cards={thirdSlice}
@@ -582,7 +582,7 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						ginormousHeadline={firstSlice[0].isBoosted}
+						isBoosted={firstSlice[0].isBoosted}
 					/>
 					<Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25
 						cards={thirdSlice}
@@ -603,7 +603,7 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						ginormousHeadline={firstSlice[0].isBoosted}
+						isBoosted={firstSlice[0].isBoosted}
 					/>
 					<Card25_Card25_Card25_Card25
 						cards={thirdSlice}
