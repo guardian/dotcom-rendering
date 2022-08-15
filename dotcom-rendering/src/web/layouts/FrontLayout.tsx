@@ -139,7 +139,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 			<main data-layout="FrontLayout">
 				{front.pressedPage.collections.map((collection, index) => {
-					// TODO: We also need to support treats containers
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
 						collection.backfill,
