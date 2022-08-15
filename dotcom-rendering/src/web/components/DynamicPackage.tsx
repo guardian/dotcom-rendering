@@ -423,42 +423,50 @@ export const DynamicPackage = ({
 	let firstSlice: TrailType[] = [];
 	let secondSlice: TrailType[] = [];
 	let thirdSlice: TrailType[] = [];
+	let fourthSlice: TrailType[] = [];
 	switch (cards.length) {
 		case 9: {
 			layout = 'nineStandards';
-			firstSlice = cards.slice(0, 1);
-			secondSlice = cards.slice(1, 5);
-			thirdSlice = cards.slice(5);
+			firstSlice = snaps;
+			secondSlice = cards.slice(0, 1);
+			thirdSlice = cards.slice(1, 5);
+			fourthSlice = cards.slice(5);
 			break;
 		}
 		case 8:
 			layout = 'eightStandards';
-			firstSlice = cards.slice(0, 1);
-			secondSlice = cards.slice(1);
+			firstSlice = snaps;
+			secondSlice = cards.slice(0, 1);
+			thirdSlice = cards.slice(1);
 			break;
 		case 7:
 			layout = 'sevenStandards';
-			firstSlice = cards.slice(0, 1);
-			secondSlice = cards.slice(1);
+			firstSlice = snaps;
+			secondSlice = cards.slice(0, 1);
+			thirdSlice = cards.slice(1);
 			break;
 		case 6:
 			layout = 'sixStandards';
-			firstSlice = cards.slice(0, 1);
-			secondSlice = cards.slice(1);
+			firstSlice = snaps;
+			secondSlice = cards.slice(0, 1);
+			thirdSlice = cards.slice(1);
 			break;
 		case 5:
 			layout = 'fiveStandards';
-			firstSlice = cards.slice(0, 1);
-			secondSlice = cards.slice(1);
+			firstSlice = snaps;
+			secondSlice = cards.slice(0, 1);
+			thirdSlice = cards.slice(1);
 			break;
 		default:
 			if (cards[0].isBoosted) {
 				layout = 'primaryBoosted';
-				firstSlice = cards.slice(0, 1);
-				secondSlice = cards.slice(1);
+				firstSlice = snaps;
+				secondSlice = cards.slice(0, 1);
+				thirdSlice = cards.slice(1);
 			} else {
 				layout = 'fourOrLessStandards';
-				firstSlice = cards;
+				firstSlice = snaps;
+				secondSlice = cards;
 			}
 	}
 
@@ -467,18 +475,18 @@ export const DynamicPackage = ({
 			return (
 				<>
 					<Snap100
-						snaps={snaps}
+						snaps={firstSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
 					<Card100
-						cards={firstSlice}
+						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						ginormousHeadline={true}
 					/>
 					<Card25_Card25_Card25_Card25
-						cards={secondSlice}
+						cards={thirdSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
@@ -488,12 +496,12 @@ export const DynamicPackage = ({
 			return (
 				<>
 					<Snap100
-						snaps={snaps}
+						snaps={firstSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
 					<Card75_ColumnOfX25
-						cards={firstSlice}
+						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
@@ -503,18 +511,18 @@ export const DynamicPackage = ({
 			return (
 				<>
 					<Snap100
-						snaps={snaps}
+						snaps={firstSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
 					<Card100
-						cards={firstSlice}
+						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						ginormousHeadline={firstSlice[0].isBoosted}
 					/>
 					<Card25_Card25_Card25_Card25
-						cards={secondSlice}
+						cards={thirdSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
@@ -524,18 +532,18 @@ export const DynamicPackage = ({
 			return (
 				<>
 					<Snap100
-						snaps={snaps}
+						snaps={firstSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
 					<Card100
-						cards={firstSlice}
+						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						ginormousHeadline={firstSlice[0].isBoosted}
 					/>
 					<Card25_Card25_Card25_ColumnOfTwo25
-						cards={secondSlice}
+						cards={thirdSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
@@ -545,18 +553,18 @@ export const DynamicPackage = ({
 			return (
 				<>
 					<Snap100
-						snaps={snaps}
+						snaps={firstSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
 					<Card100
-						cards={firstSlice}
+						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						ginormousHeadline={firstSlice[0].isBoosted}
 					/>
 					<Card25_Card25_ColumnOfTwo25_ColumnOfTwo25
-						cards={secondSlice}
+						cards={thirdSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
@@ -566,18 +574,18 @@ export const DynamicPackage = ({
 			return (
 				<>
 					<Snap100
-						snaps={snaps}
+						snaps={firstSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
 					<Card100
-						cards={firstSlice}
+						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						ginormousHeadline={firstSlice[0].isBoosted}
 					/>
 					<Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25
-						cards={secondSlice}
+						cards={thirdSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
@@ -587,24 +595,24 @@ export const DynamicPackage = ({
 			return (
 				<>
 					<Snap100
-						snaps={snaps}
+						snaps={firstSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
 					<Card100
-						cards={firstSlice}
+						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						ginormousHeadline={firstSlice[0].isBoosted}
 					/>
 					<Card25_Card25_Card25_Card25
-						cards={secondSlice}
+						cards={thirdSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						padBottom={true}
 					/>
 					<Card25_Card25_Card25_Card25
-						cards={thirdSlice}
+						cards={fourthSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
 						showImage={false}
