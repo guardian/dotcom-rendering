@@ -14,16 +14,27 @@ import { ShowHideButton } from './ShowHideButton';
 import { Treats } from './Treats';
 
 type Props = {
+	/** This text will be used as the h2 shown in the left column for the section */
 	title?: string;
+	/** Allows the colour of the title to be changed */
 	fontColour?: string;
+	/** This text shows below the title */
 	description?: string;
+	/** The title can be made into a link using this property */
 	url?: string;
+	/** The html `id` property of the element */
 	sectionId?: string;
+	/** Defaults to `true`. If we should render the left and right borders */
 	showSideBorders?: boolean;
 	centralBorder?: 'partial' | 'full';
+	/** Defaults to `true`. If we should render the top border */
 	showTopBorder?: boolean;
+	/** Defaults to `true`. If we should add padding around the outter left and right edges */
 	padSides?: boolean;
+	/** Defaults to `true`. If we should add padding around the left and right sides of
+	 * `children` */
 	padContent?: boolean;
+	/** The html tag used by Section defaults to `section` but can be overidden here */
 	element?:
 		| 'div'
 		| 'article'
@@ -33,24 +44,52 @@ type Props = {
 		| 'header'
 		| 'section'
 		| 'footer';
+	/** Sets a max width and margin auto to center children */
 	shouldCenter?: boolean;
+	/** Defaults to `true`. Adds margins to the top and bottom */
 	verticalMargins?: boolean;
+	/** Applies a background colour to the entire width */
 	backgroundColour?: string;
+	/** The colour of borders can be overriden */
 	borderColour?: string;
+	/** A React component can be passed to be inserted inside the left column */
 	leftContent?: React.ReactNode;
 	children?: React.ReactNode;
+	/** Defaults to `false`. If true, `children` is rendered all the way right */
 	stretchRight?: boolean;
+	/** Some page types have a different left column width */
 	leftColSize?: LeftColSize;
 	format?: ArticleFormat;
+	/** The string used to set the `data-component` Ophan attribute */
 	ophanComponentName?: string;
+	/** The string used to set the `data-link-name` Ophan attribute */
 	ophanComponentLink?: string;
+	/**
+	 * 🛠️ DEBUG ONLY 🛠️
+	 * Used to highlight the name of a container when DCR debug mode is enabled
+	 *
+	 * @see https://github.com/guardian/dotcom-rendering/blob/main/dotcom-rendering/src/web/browser/debug/README.md
+	 */
 	containerName?: string;
+	/** Fronts containers can have their styling overidden using a `containerPalette` */
 	containerPalette?: DCRContainerPalette;
+	/** Defautls to `false`. If true a Hide button is show top right allowing this section
+	 * to be collapsed
+	 */
 	toggleable?: boolean;
+	/** Applies a background colour only to the content inside the left and right borders */
 	innerBackgroundColour?: string;
+	/** Defaults to `false`. If true and `editionId` is also passed, then a date string is
+	 * shown under the title. Typically only used on Headlines containers on fronts
+	 */
 	showDateHeader?: boolean;
+	/** Used in parnership with `showDateHeader` to localise the date string */
 	editionId?: EditionId;
+	/** A list of related links that appear in the bottom of the left column on fronts */
 	treats?: TreatType[];
+	/** Defaults to `false`. If true, a simplified version of the section is rendered
+	 * without a left column
+	 */
 	fullWidth?: boolean;
 	/**
 	 * @deprecated Do not use
@@ -134,6 +173,18 @@ const Content = ({
 	</div>
 );
 
+/**
+ *
+ * A Section component represents a horizontal slice of a page. It defaults to
+ * a html section tag but this can be overridden using the `element` prop
+ *
+ *
+ * It provides borders, spacing, colours, a title and also some front specific
+ * features like showing a hide button. By default `children` is placed in the center
+ * with a leftCol and spacing on the right - this represents a classic Guardian
+ * page - but if `fullWidth={true}` is passed then both the leftCol and right spacing
+ * are omitted
+ */
 export const Section = ({
 	title,
 	fontColour,
