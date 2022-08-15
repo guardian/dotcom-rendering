@@ -237,7 +237,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					element="article"
 				>
 					<ImmersiveGrid>
-						{/* Above leftCol, the Caption is controled by Section ^^ */}
+						{/* Above leftCol, the Caption is controlled by Section ^^ */}
 						<GridItem area="caption">
 							<Hide when="above" breakpoint="leftCol">
 								<Caption
