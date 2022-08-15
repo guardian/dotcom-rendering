@@ -10,6 +10,7 @@ import { DynamicSlow } from '../components/DynamicSlow';
 import { DynamicSlowMPU } from '../components/DynamicSlowMPU';
 import { FixedLargeSlowXIV } from '../components/FixedLargeSlowXIV';
 import { FixedMediumSlowVI } from '../components/FixedMediumSlowVI';
+import { FixedMediumSlowXIIMPU } from '../components/FixedMediumSlowXIIMPU';
 import { FixedSmallSlowI } from '../components/FixedSmallSlowI';
 import { FixedSmallSlowIII } from '../components/FixedSmallSlowIII';
 import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
@@ -62,7 +63,7 @@ export const DecideContainer = ({
 		case 'dynamic/package':
 			return (
 				<DynamicPackage
-					trails={trails}
+					groupedTrails={groupedTrails}
 					containerPalette={containerPalette}
 					showAge={showAge}
 				/>
@@ -122,6 +123,15 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+				/>
+			);
+		case 'fixed/medium/slow-XII-mpu':
+			return (
+				<FixedMediumSlowXIIMPU
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					index={index}
 				/>
 			);
 		default:

@@ -23,7 +23,7 @@ type Props = {
 };
 
 const containerStyles = css`
-	clear: both;
+	clear: left;
 	border: ${neutral[0]} 3px dashed;
 	border-radius: 12px;
 	margin-bottom: ${space[3]}px;

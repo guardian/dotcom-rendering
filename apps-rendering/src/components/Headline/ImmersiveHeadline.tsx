@@ -17,17 +17,26 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.medium({ fontWeight: 'bold' })}
 	background-color: ${background.headline(format)};
 	color: ${text.headline(format)};
-	padding: 0 ${remSpace[5]} ${remSpace[9]} 0;
+	padding: ${remSpace[1]} ${remSpace[5]} ${remSpace[9]} 0;
 	${grid.between('centre-column-start', 'centre-column-end')}
 	grid-row: 3 / 5;
+
+	${from.mobileLandscape} {
+		padding-top: ${remSpace[3]};
+	}
 
 	${from.tablet} {
 		${grid.span('centre-column-start', 12)}
 	}
 
+	${from.tablet} {
+		padding-top: ${remSpace[1]};
+	}
+
 	${from.desktop} {
 		${headline.xlarge({ fontWeight: 'bold' })}
 		${grid.span('centre-column-start', 8)}
+		padding-top: 0;
 	}
 
 	${darkModeCss`
