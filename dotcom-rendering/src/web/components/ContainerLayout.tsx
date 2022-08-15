@@ -41,6 +41,7 @@ type Props = {
 	showDateHeader?: boolean;
 	editionId?: EditionId;
 	treats?: TreatType[];
+	legacyClassName?: string;
 };
 
 const containerStyles = css`
@@ -145,6 +146,7 @@ export const ContainerLayout = ({
 	editionId,
 	containerName,
 	treats,
+	legacyClassName,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -164,6 +166,7 @@ export const ContainerLayout = ({
 			ophanComponentName={ophanComponentName}
 			containerName={containerName}
 			innerBackgroundColour={innerBackgroundColour}
+			className={legacyClassName}
 		>
 			<Flex>
 				<LeftColumn

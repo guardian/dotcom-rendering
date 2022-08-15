@@ -151,9 +151,26 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						index + 1
 					} | ${ophanName}`;
 
+					/**
+					 * We have code that runs on the platforms which is expecting certain classnames
+					 * to exist. An example of such code can be seen here:
+					 *
+					 * https://github.com/guardian/thrashers/blame/master/embeds/culture-nugget/_source/main.js#L4
+					 */
+					let legacyClassName;
+					switch (collection.collectionType) {
+						case 'fixed/thrasher':
+							legacyClassName = 'fc-container--thrasher';
+							break;
+						case 'fixed/video':
+							legacyClassName = 'fc-container--video';
+							break;
+					}
+
 					if (collection.collectionType === 'fixed/thrasher') {
 						switch (collection.displayName) {
 							case 'Palette styles new do not delete':
+								// We no longer use this legacy thrasher. We have containerPalette instead
 								return null;
 							case 'culture-treat':
 								/**
@@ -188,6 +205,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											collection.collectionType
 										}
 										element="section"
+										className={legacyClassName}
 									>
 										<Snap snapData={trails[0].snapData} />
 									</ElementContainer>
@@ -216,6 +234,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							showDateHeader={collection.config.showDateHeader}
 							editionId={front.editionId}
 							treats={collection.treats}
+							legacyClassName={legacyClassName}
 						>
 							<DecideContainer
 								trails={trails}
