@@ -126,44 +126,54 @@ const pillarColumnLinks = css`
 const hideStyles = (columnInputId: string) => css`
 	${until.desktop} {
 		/* stylelint-disable-next-line selector-type-no-unknown */
+
+		${`#${columnInputId}`}:checked ~ & {
+			display: none;
+		}
+	}
+`;
+
+const notHideStyles = (columnInputId: string) => css`
+	${until.desktop} {
+		/* stylelint-disable-next-line selector-type-no-unknown */
 		${`#${columnInputId}`}:not(:checked) ~ & {
 			display: none;
 		}
 	}
 `;
 
-const columnStyle = (columnInputIdMinusOne: string) => css`
+const lineStyle = css`
+	background-color: ${brand[600]};
+	/* top: 0; */
+	content: '';
+	display: block;
+	height: 1px;
+	left: 50px;
+	position: absolute;
+	right: 0;
+`;
+
+const columnStyle = css`
 	${textSans.medium()};
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
 	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
+
 	&::before {
 		content: '\\200B'; /* Zero width space */
 		display: block;
 		height: 0;
 		width: 0;
 	}
+
 	margin: 0;
 	padding-bottom: 10px;
 	position: relative;
 
-	${`#${columnInputIdMinusOne}`}:checked ~ & {
-		:after {
-			background-color: ${brand[600]};
-			top: 0;
-			content: '';
-			display: block;
-			height: 1px;
-			left: 50px;
-			position: absolute;
-			right: 0;
-		}
-	}
-
 	/* Remove the border from the top item on mobile */
-	:first-of-type:after {
+	/* :first-of-type:after {
 		content: none;
-	}
+	} */
 
 	${from.desktop} {
 		width: 134px;
@@ -197,15 +207,11 @@ export const Column = ({
 	index: number;
 }) => {
 	// As the elements are dynamic we need to specify the IDs here
-	const columnInputId = `${index}-checkbox-input`;
-	const columnInputIdMinusOne = `${index - 1}-checkbox-input`;
-	const collapseColumnInputId = `${index}-button`;
+	const columnInputId = `${column.title}-checkbox-input`;
+	const collapseColumnInputId = `${column.title}-button`;
 
 	return (
-		<li
-			css={[columnStyle(columnInputIdMinusOne), pillarDivider]}
-			role="none"
-		>
+		<li css={[columnStyle, pillarDivider]} role="none">
 			{/*
                 IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
 
@@ -261,7 +267,7 @@ export const Column = ({
 					columnLinks,
 					index === 0 && firstColumnLinks,
 					!!column.pillar && pillarColumnLinks,
-					columnInputId && hideStyles(columnInputId),
+					notHideStyles(columnInputId),
 				]}
 				role="menu"
 				id={`${column.title.toLowerCase()}Links`}
@@ -290,6 +296,7 @@ export const Column = ({
 					</li>
 				))}
 			</ul>
+			<div css={[hideStyles(columnInputId), lineStyle]}></div>
 		</li>
 	);
 };
