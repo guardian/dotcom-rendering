@@ -126,7 +126,6 @@ const pillarColumnLinks = css`
 const hideStyles = (columnInputId: string) => css`
 	${until.desktop} {
 		/* stylelint-disable-next-line selector-type-no-unknown */
-
 		${`#${columnInputId}`}:checked ~ & {
 			display: none;
 		}
