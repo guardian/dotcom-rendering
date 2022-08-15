@@ -519,7 +519,7 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						isBoosted={firstSlice[0].isBoosted}
+						isBoosted={secondSlice[0].isBoosted}
 					/>
 					<Card25_Card25_Card25_Card25
 						cards={thirdSlice}
