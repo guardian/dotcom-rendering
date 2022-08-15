@@ -12,7 +12,7 @@ const html = `<html> <head></head> <body style="padding: 0px; margin: 0px; overf
 export const DefaultStory = () => {
 	useEffect(() => {
 		embedIframe().catch((e) =>
-			console.error(`HydratedLayout embedIframe - error: ${e}`),
+			console.error(`HydratedLayout embedIframe - error: ${String(e)}`),
 		);
 	}, []);
 

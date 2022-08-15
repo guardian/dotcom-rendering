@@ -47,6 +47,17 @@ const decidePresentationFormat = ({
 		containerFormat.design === ArticleDesign.Analysis
 	)
 		return containerFormat;
+
+	// These types of link format designs mean the headline could render
+	// poorly (e.g.: white) so we use the container format
+	if (
+		linkFormat.design === ArticleDesign.LiveBlog ||
+		linkFormat.design === ArticleDesign.Gallery ||
+		linkFormat.design === ArticleDesign.Audio ||
+		linkFormat.design === ArticleDesign.Video
+	)
+		return containerFormat;
+
 	// Otherwise, we can allow the sublink to express its own styling
 	return linkFormat;
 };
@@ -135,13 +146,16 @@ export const enhanceCards = (
 			url: faciaCard.header.url,
 			headline: faciaCard.header.headline,
 			trailText: faciaCard.card.trailText,
+			starRating: faciaCard.card.starRating,
 			webPublicationDate: faciaCard.card.webPublicationDateOption
 				? new Date(
 						faciaCard.card.webPublicationDateOption,
 				  ).toISOString()
 				: undefined,
-			image: faciaCard.properties.maybeContent?.trail.trailPicture
-				?.allImages[0].url,
+			image: faciaCard.display.imageHide
+				? undefined
+				: faciaCard.properties.maybeContent?.trail.trailPicture
+						?.allImages[0].url,
 			kickerText: faciaCard.header.kicker?.item?.properties.kickerText,
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(
@@ -150,7 +164,9 @@ export const enhanceCards = (
 						containerPalette,
 				  )
 				: undefined,
-			discussionId: faciaCard.discussion.discussionId,
+			discussionId: faciaCard.discussion.isCommentable
+				? faciaCard.discussion.discussionId
+				: undefined,
 			// nb. there is a distinct 'byline' property on FEFrontCard, at
 			// card.properties.byline
 			byline:

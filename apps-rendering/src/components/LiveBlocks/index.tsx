@@ -1,13 +1,12 @@
 // ----- Imports ----- //
 
 import type { ArticleFormat } from '@guardian/libs';
-import { map, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { map, OptionKind, withDefault } from '@guardian/types';
 import LiveBlock from 'components/LiveBlock';
 import PinnedPost from 'components/PinnedPost';
 import { pipe } from 'lib';
 import type { LiveBlock as LiveBlockType } from 'liveBlock';
-import type { Option } from 'option';
-import { OptionKind } from 'option';
 import type { FC } from 'react';
 
 // ----- Component ----- //

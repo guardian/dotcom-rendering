@@ -4,8 +4,6 @@ import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
-import { extract as extractGA } from '../../model/extract-ga';
-import { extractNAV } from '../../model/extract-nav';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import { articleToHtml } from './articleToHtml';
@@ -20,9 +18,14 @@ function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 
 const enhanceCAPIType = (body: unknown): CAPIArticleType => {
 	const data = validateAsCAPIType(body);
+
 	const CAPIArticle: CAPIArticleType = {
 		...data,
-		blocks: enhanceBlocks(data.blocks, data.format),
+		blocks: enhanceBlocks(
+			data.blocks,
+			data.format,
+			data.promotedNewsletter,
+		),
 		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
 		standfirst: enhanceStandfirst(data.standfirst),
 		commercialProperties: enhanceCommercialProperties(
@@ -31,6 +34,9 @@ const enhanceCAPIType = (body: unknown): CAPIArticleType => {
 	};
 	return CAPIArticle;
 };
+
+const getStack = (e: unknown): string =>
+	e instanceof Error ? e.stack ?? 'No error stack' : 'Unknown error';
 
 const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
@@ -48,22 +54,14 @@ export const renderArticle = (
 	res: express.Response,
 ): void => {
 	try {
-		const CAPIArticle = enhanceCAPIType(body);
+		const article = enhanceCAPIType(body);
 		const resp = articleToHtml({
-			data: {
-				CAPIArticle,
-				site: 'frontend',
-				page: 'Article',
-				NAV: extractNAV(CAPIArticle.nav),
-				GA: extractGA(CAPIArticle),
-				linkedData: CAPIArticle.linkedData,
-			},
+			article,
 		});
 
 		res.status(200).send(resp);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -76,18 +74,12 @@ export const renderArticleJson = (
 		const resp = {
 			data: {
 				CAPIArticle,
-				site: 'frontend',
-				page: 'Article',
-				NAV: extractNAV(CAPIArticle.nav),
-				GA: extractGA(CAPIArticle),
-				linkedData: CAPIArticle.linkedData,
 			},
 		};
 
 		res.status(200).send(resp);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -104,22 +96,14 @@ export const renderInteractive = (
 	res: express.Response,
 ): void => {
 	try {
-		const CAPIArticle = enhanceCAPIType(body);
+		const article = enhanceCAPIType(body);
 		const resp = articleToHtml({
-			data: {
-				CAPIArticle,
-				site: 'frontend',
-				page: 'Interactive',
-				NAV: extractNAV(CAPIArticle.nav),
-				GA: extractGA(CAPIArticle),
-				linkedData: CAPIArticle.linkedData,
-			},
+			article,
 		});
 
 		res.status(200).send(resp);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -165,8 +149,7 @@ export const renderBlocks = (
 
 		res.status(200).send(html);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -185,8 +168,7 @@ export const renderKeyEvents = (
 
 		res.status(200).send(html);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -195,30 +177,20 @@ export const renderOnwards = (
 	res: express.Response,
 ): void => {
 	try {
-		const {
-			heading,
-			description,
-			url,
-			ophanComponentName,
-			trails,
-			format,
-			isCuratedContent,
-		} = body;
+		const { heading, description, url, onwardsType, trails, format } = body;
 
 		const html = onwardsToHtml({
 			heading,
 			description,
 			url,
-			ophanComponentName,
+			onwardsType,
 			trails,
 			format,
-			isCuratedContent,
 		});
 
 		res.status(200).send(html);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -230,12 +202,10 @@ export const renderFront = (
 		const front = enhanceFront(body);
 		const html = frontToHtml({
 			front,
-			NAV: extractNAV(front.nav),
 		});
 		res.status(200).send(html);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 

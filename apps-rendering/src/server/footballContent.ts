@@ -13,7 +13,7 @@ import {
 	some,
 } from '@guardian/types';
 import type { Option, Result } from '@guardian/types';
-import { padZero } from 'date';
+import { padStart } from 'date';
 import { fold, pipe } from 'lib';
 import fetch from 'node-fetch';
 import type { Response } from 'node-fetch';
@@ -39,8 +39,8 @@ const getFootballSelector = (date: Date, [teamA, teamB]: Teams): string => {
 
 	const d = date;
 	const year = d.getUTCFullYear();
-	const month = padZero(d.getUTCMonth() + 1);
-	const day = padZero(d.getUTCDate());
+	const month = padStart(d.getUTCMonth() + 1);
+	const day = padStart(d.getUTCDate());
 
 	return `${year}-${month}-${day}_${teams[0]}_${teams[1]}`;
 };

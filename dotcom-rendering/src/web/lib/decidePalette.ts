@@ -223,6 +223,7 @@ const textCaption = (format: ArticleFormat): string => {
 const textCaptionLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
+	if (format.design === ArticleDesign.NewsletterSignup) return BLACK;
 	return pillarPalette[format.theme].main;
 };
 
@@ -431,24 +432,15 @@ const textCardKicker = (format: ArticleFormat): string => {
 		(format.design === ArticleDesign.Comment ||
 			format.design === ArticleDesign.Letter)
 	)
-		return opinion[550];
+		return brandAlt[400];
 	if (format.theme === ArticleSpecial.SpecialReport) return brandAlt[400];
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
-				case ArticlePillar.News:
-					return news[600];
-				case ArticlePillar.Sport:
-					return sport[600];
-				case ArticlePillar.Opinion:
-					return WHITE;
-				case ArticlePillar.Culture:
-					return culture[600];
-				case ArticlePillar.Lifestyle:
-					return lifestyle[500];
 				case ArticleSpecial.Labs:
-				default:
 					return BLACK;
+				default:
+					return neutral[100];
 			}
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -476,45 +468,21 @@ const textCardFooter = (format: ArticleFormat): string => {
 		case ArticleDesign.Letter:
 			switch (format.theme) {
 				case ArticleSpecial.SpecialReport:
-					return opinion[550];
+					return neutral[86];
 				default:
 					return neutral[46];
 			}
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
-				case ArticlePillar.News:
-					return news[600];
-				case ArticlePillar.Sport:
-					return sport[600];
-				case ArticlePillar.Opinion:
-					return WHITE;
-				case ArticlePillar.Culture:
-					return culture[600];
-				case ArticlePillar.Lifestyle:
-					return lifestyle[500];
-				case ArticleSpecial.SpecialReport:
-					return brandAlt[400];
 				case ArticleSpecial.Labs:
-				default:
 					return BLACK;
+				default:
+					return neutral[100];
 			}
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
-			switch (format.theme) {
-				case ArticleSpecial.SpecialReport:
-					return brandAlt[400];
-				case ArticlePillar.News:
-					return news[600];
-				case ArticlePillar.Sport:
-					return sport[600];
-				case ArticlePillar.Opinion:
-					return opinion[550];
-				case ArticlePillar.Lifestyle:
-				case ArticlePillar.Culture:
-				default:
-					return pillarPalette[format.theme][500];
-			}
+			return neutral[86];
 		default:
 			switch (format.theme) {
 				case ArticleSpecial.SpecialReport:
@@ -1042,26 +1010,23 @@ const hoverHeadlineByline = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
 
-const textRichLink: (format: ArticleFormat) => string = (format) => {
-	if (format) {
-		switch (format.theme) {
-			case ArticlePillar.News:
-				return news[400];
-			case ArticlePillar.Culture:
-				return culture[350];
-			case ArticlePillar.Lifestyle:
-				return lifestyle[300];
-			case ArticlePillar.Sport:
-				return sport[400];
-			case ArticlePillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return BLACK;
-			case ArticleSpecial.SpecialReport:
-				return specialReport[400];
-		}
+const textRichLink = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Culture:
+			return culture[350];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return BLACK;
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
 	}
-	return pillarPalette[ArticlePillar.News][400];
 };
 
 const hoverStandfirstLink = (format: ArticleFormat): string => {
@@ -1112,14 +1077,17 @@ const borderArticle: (format: ArticleFormat) => string = (format) => {
 
 const borderLines = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return border.primary;
+	if (
+		format.theme === ArticleSpecial.SpecialReport &&
+		(format.design === ArticleDesign.Comment ||
+			format.design === ArticleDesign.Letter)
+	)
+		return neutral[46];
 	return border.secondary;
 };
 
-const backgroundRichLink: (format: ArticleFormat) => string = (format) => {
-	if (format) {
-		return pillarPalette[format.theme].main;
-	}
-	return pillarPalette[ArticlePillar.News][400];
+const backgroundRichLink = (format: ArticleFormat): string => {
+	return pillarPalette[format.theme].main;
 };
 
 const borderCricketScoreboardTop = (): string => {
@@ -1134,33 +1102,27 @@ const borderKeyEvent = (): string => neutral[46];
 
 const borderFilterButton = (): string => neutral[60];
 
-const fillRichLink: (format: ArticleFormat) => string = (format) => {
-	if (format) {
-		switch (format.theme) {
-			case ArticlePillar.News:
-				return news[400];
-			case ArticlePillar.Culture:
-				return culture[350];
-			case ArticlePillar.Lifestyle:
-				return lifestyle[300];
-			case ArticlePillar.Sport:
-				return sport[400];
-			case ArticlePillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return labs[400];
-			case ArticleSpecial.SpecialReport:
-				return specialReport[400];
-		}
+const fillRichLink = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Culture:
+			return culture[350];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
 	}
-	return pillarPalette[ArticlePillar.News][400];
 };
 
-const fillQuoteIcon: (format: ArticleFormat) => string = (format) => {
-	if (format) {
-		return pillarPalette[format.theme].main;
-	}
-	return pillarPalette[ArticlePillar.News][400];
+const fillQuoteIcon = (format: ArticleFormat): string => {
+	return pillarPalette[format.theme].main;
 };
 
 const textPullQuoteAttribution = (format: ArticleFormat): string =>
@@ -1211,7 +1173,7 @@ const textNumberedPosition = (): string => {
 	return text.supporting;
 };
 
-const textOverlayed = (): string => {
+const textOverlaid = (): string => {
 	return WHITE;
 };
 
@@ -1381,7 +1343,7 @@ export const decidePalette = (
 			blockquote: textBlockquote(format),
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
-			overlayedCaption: textOverlayed(),
+			overlaidCaption: textOverlaid(),
 			shareCount: textShareCount(),
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
 			cricketScoreboardLink: textCricketScoreboardLink(),

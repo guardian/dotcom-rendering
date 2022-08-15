@@ -188,7 +188,7 @@ export const renderElement = ({
 					credit={element.credit}
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={element.shouldLimitWidth}
-					isOverlayed={element.isOverlayed}
+					isOverlaid={element.isOverlaid}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
@@ -457,8 +457,12 @@ export const renderElement = ({
 			return [
 				true,
 				<EmailSignup
-					newsletter={element.newsletter}
-					elementId={element.elementId}
+					identityName={element.newsletter.identityName}
+					description={element.newsletter.description}
+					name={element.newsletter.name}
+					frequency={element.newsletter.frequency}
+					successDescription={element.newsletter.successDescription}
+					theme={element.newsletter.theme}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':

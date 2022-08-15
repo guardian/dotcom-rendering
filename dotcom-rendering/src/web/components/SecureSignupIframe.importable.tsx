@@ -34,6 +34,11 @@ type Props = {
 	successDescription: string;
 };
 
+// The ts.dom interface for FontFaceSet does not contain the .add method
+type FontFaceSetWithAdd = FontFaceSet & {
+	add?: { (font: FontFace): void };
+};
+
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
 	<InlineError>
 		<span>
@@ -149,7 +154,7 @@ const sendTracking = (
 	const value = JSON.stringify({
 		eventDescription,
 		newsletterId,
-		timestamp: new Date().getDate(),
+		timestamp: Date.now(),
 	});
 
 	submitComponentEvent(
@@ -283,6 +288,40 @@ export const SecureSignupIframe = ({
 		resetIframeHeight();
 	};
 
+	const addFontsToIframe = (requiredFontNames: string[]) => {
+		const { current: iframe } = iframeRef;
+
+		// FontFace.add is not supported (IE), allow fallback to system fonts
+		const iframeFontFaceSet = iframe?.contentDocument?.fonts as
+			| undefined
+			| FontFaceSetWithAdd;
+		if (!iframeFontFaceSet || !iframeFontFaceSet.add) {
+			return;
+		}
+
+		// get all the fontFaces on the parent matching the list of font names
+		const requiredFonts: FontFace[] = [];
+		document.fonts.forEach((fontFace) => {
+			if (requiredFontNames.includes(fontFace.family)) {
+				requiredFonts.push(fontFace);
+			}
+		});
+
+		// add the fonts to the iframe
+		requiredFonts.forEach((font) => {
+			// it shouldn't be necessary to test for the add method again
+			// but still ts considers it possibily undefined
+			if (iframeFontFaceSet.add) {
+				iframeFontFaceSet.add(font);
+			}
+		});
+	};
+
+	const onIFrameLoad = (): void => {
+		attachListenersToIframe();
+		addFontsToIframe(['GuardianTextSans']);
+	};
+
 	const captchaSiteKey = isServer
 		? undefined
 		: window.guardian.config.page.googleRecaptchaSiteKey;
@@ -293,7 +332,7 @@ export const SecureSignupIframe = ({
 				ref={iframeRef}
 				css={css`
 					width: 100%;
-					min-height: 75px;
+					min-height: 65px;
 					overflow: hidden;
 				`}
 				style={{
@@ -308,7 +347,7 @@ export const SecureSignupIframe = ({
 					</head>
 					<body style="margin: 0; overflow:hidden;">${html}</body>
 				</html>`}
-				onLoad={attachListenersToIframe}
+				onLoad={onIFrameLoad}
 			/>
 
 			{isWaitingForResponse && (

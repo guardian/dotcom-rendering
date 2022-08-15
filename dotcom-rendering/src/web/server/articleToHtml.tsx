@@ -5,6 +5,7 @@ import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import { ASSET_ORIGIN, getScriptArrayFromFile } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
+import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import { Article } from '../components/Article';
 import { decideFormat } from '../lib/decideFormat';
@@ -15,7 +16,7 @@ import { extractExpeditedIslands } from './extractIslands';
 import { recipeSchema } from './temporaryRecipeStructuredData';
 
 interface Props {
-	data: DCRServerDocumentData;
+	article: CAPIArticleType;
 }
 
 const generateScriptTags = (
@@ -53,11 +54,12 @@ const decideTitle = (CAPIArticle: CAPIArticleType): string => {
 	return `${CAPIArticle.headline} | ${CAPIArticle.sectionLabel} | The Guardian`;
 };
 
-export const articleToHtml = ({ data }: Props): string => {
-	const { CAPIArticle, NAV, linkedData } = data;
+export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
+	const NAV = extractNAV(CAPIArticle.nav);
 	const title = decideTitle(CAPIArticle);
 	const key = 'dcr';
 	const cache = createCache({ key });
+	const linkedData = CAPIArticle.linkedData;
 
 	// eslint-disable-next-line @typescript-eslint/unbound-method
 	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
@@ -135,7 +137,9 @@ export const articleToHtml = ({ data }: Props): string => {
 			...getScriptArrayFromFile('bootCmp.js'),
 			...getScriptArrayFromFile('ophan.js'),
 			CAPIArticle.config && {
-				src: CAPIArticle.config.commercialBundleUrl,
+				src:
+					process.env.COMMERCIAL_BUNDLE_URL ??
+					CAPIArticle.config.commercialBundleUrl,
 			},
 			...getScriptArrayFromFile('sentryLoader.js'),
 			...getScriptArrayFromFile('dynamicImport.js'),
@@ -184,7 +188,9 @@ export const articleToHtml = ({ data }: Props): string => {
 	 * We escape windowGuardian here to prevent errors when the data
 	 * is placed in a script tag on the page
 	 */
-	const windowGuardian = escapeData(JSON.stringify(makeWindowGuardian(data)));
+	const windowGuardian = escapeData(
+		JSON.stringify(makeWindowGuardian(CAPIArticle)),
+	);
 
 	const hasAmpInteractiveTag = CAPIArticle.tags.some(
 		(tag) => tag.id === 'tracking/platformfunctional/ampinteractive',
@@ -194,7 +200,7 @@ export const articleToHtml = ({ data }: Props): string => {
 	const ampLink =
 		CAPIArticle.format.design !== 'InteractiveDesign' ||
 		hasAmpInteractiveTag
-			? `https://amp.theguardian.com/${data.CAPIArticle.pageId}`
+			? `https://amp.theguardian.com/${CAPIArticle.pageId}`
 			: undefined;
 
 	const { openGraphData } = CAPIArticle;
@@ -206,24 +212,25 @@ export const articleToHtml = ({ data }: Props): string => {
 			: CAPIArticle.config.keywords;
 
 	const initTwitter = `
-		// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/set-up-twitter-for-websites
-		window.twttr = (function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0],
-			t = window.twttr || {};
-			if (d.getElementById(id)) return t;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "https://platform.twitter.com/widgets.js";
-			fjs.parentNode.insertBefore(js, fjs);
+<script>
+// https://developer.twitter.com/en/docs/twitter-for-websites/javascript-api/guides/set-up-twitter-for-websites
+window.twttr = (function(d, s, id) {
+	var js, fjs = d.getElementsByTagName(s)[0],
+	t = window.twttr || {};
+	if (d.getElementById(id)) return t;
+	js = d.createElement(s);
+	js.id = id;
+	js.src = "https://platform.twitter.com/widgets.js";
+	fjs.parentNode.insertBefore(js, fjs);
 
-			t._e = [];
-			t.ready = function(f) {
-			t._e.push(f);
-			};
+	t._e = [];
+	t.ready = function(f) {
+	t._e.push(f);
+	};
 
-			return t;
-		}(document, "script", "twitter-wjs"));
-	`;
+	return t;
+}(document, "script", "twitter-wjs"));
+</script>`;
 
 	const url = CAPIArticle.webURL;
 

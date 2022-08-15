@@ -4,6 +4,7 @@ import createEmotionServer from '@emotion/server/create-instance';
 import { renderToString } from 'react-dom/server';
 import { getScriptArrayFromFile } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
+import { extractNAV } from '../../model/extract-nav';
 import { makeFrontWindowGuardian } from '../../model/window-guardian';
 import type { DCRFrontType } from '../../types/front';
 import { FrontPage } from '../components/FrontPage';
@@ -12,7 +13,6 @@ import { frontTemplate } from './frontTemplate';
 
 interface Props {
 	front: DCRFrontType;
-	NAV: NavType;
 }
 
 const generateScriptTags = (
@@ -40,8 +40,9 @@ const generateScriptTags = (
 		];
 	}, []);
 
-export const frontToHtml = ({ front, NAV }: Props): string => {
+export const frontToHtml = ({ front }: Props): string => {
 	const title = front.webTitle;
+	const NAV = extractNAV(front.nav);
 	const key = 'dcr';
 	const cache = createCache({ key });
 
@@ -96,7 +97,11 @@ export const frontToHtml = ({ front, NAV }: Props): string => {
 			{ src: polyfillIO },
 			...getScriptArrayFromFile('bootCmp.js'),
 			...getScriptArrayFromFile('ophan.js'),
-			front.config && { src: front.config.commercialBundleUrl },
+			front.config && {
+				src:
+					process.env.COMMERCIAL_BUNDLE_URL ??
+					front.config.commercialBundleUrl,
+			},
 			...getScriptArrayFromFile('sentryLoader.js'),
 			...getScriptArrayFromFile('dynamicImport.js'),
 			...getScriptArrayFromFile('islands.js'),

@@ -28,6 +28,7 @@ export const FixedSmallSlowIV = ({
 					>
 						<FrontCard
 							trail={trail}
+							starRating={trail.starRating}
 							containerPalette={containerPalette}
 							showAge={showAge}
 							imageSize="medium"

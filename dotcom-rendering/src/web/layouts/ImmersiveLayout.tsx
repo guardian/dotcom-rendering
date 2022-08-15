@@ -22,6 +22,7 @@ import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
 import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
+import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
@@ -175,15 +176,14 @@ interface Props {
 
 const decideCaption = (mainMedia: ImageBlockElement): string => {
 	const caption = [];
-	if (mainMedia && mainMedia.data && mainMedia.data.caption)
+	if (mainMedia?.data?.caption) {
 		caption.push(mainMedia.data.caption);
-	if (
-		mainMedia &&
-		mainMedia.displayCredit &&
-		mainMedia.data &&
-		mainMedia.data.credit
-	)
+	}
+
+	if (mainMedia?.displayCredit && mainMedia?.data?.credit) {
 		caption.push(mainMedia.data.credit);
+	}
+
 	return caption.join(' ');
 };
 
@@ -226,7 +226,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				NAV={NAV}
 				format={format}
 			/>
-			<main>
+			<main data-layout="ImmersiveLayout">
 				<ElementContainer
 					showTopBorder={false}
 					showSideBorders={false}
@@ -509,48 +509,58 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					/>
 				</ElementContainer>
 
-				{CAPIArticle.storyPackage && (
-					<ElementContainer>
-						<Island deferUntil="visible">
-							<Carousel
-								heading={CAPIArticle.storyPackage.heading}
-								trails={CAPIArticle.storyPackage.trails.map(
-									decideTrail,
-								)}
-								ophanComponentName="more-on-this-story"
+				{CAPIArticle.onwards ? (
+					<DecideOnwards
+						onwards={CAPIArticle.onwards}
+						format={format}
+					/>
+				) : (
+					<>
+						{CAPIArticle.storyPackage && (
+							<ElementContainer>
+								<Island deferUntil="visible">
+									<Carousel
+										heading={
+											CAPIArticle.storyPackage.heading
+										}
+										trails={CAPIArticle.storyPackage.trails.map(
+											decideTrail,
+										)}
+										onwardsType="more-on-this-story"
+										format={format}
+									/>
+								</Island>
+							</ElementContainer>
+						)}
+
+						<Island
+							clientOnly={true}
+							deferUntil="visible"
+							placeholderHeight={600}
+						>
+							<OnwardsUpper
+								ajaxUrl={CAPIArticle.config.ajaxUrl}
+								hasRelated={CAPIArticle.hasRelated}
+								hasStoryPackage={CAPIArticle.hasStoryPackage}
+								isAdFreeUser={CAPIArticle.isAdFreeUser}
+								pageId={CAPIArticle.pageId}
+								isPaidContent={
+									CAPIArticle.config.isPaidContent || false
+								}
+								showRelatedContent={
+									CAPIArticle.config.showRelatedContent
+								}
+								keywordIds={CAPIArticle.config.keywordIds}
+								contentType={CAPIArticle.contentType}
+								tags={CAPIArticle.tags}
 								format={format}
-								isCuratedContent={false}
+								pillar={format.theme}
+								editionId={CAPIArticle.editionId}
+								shortUrlId={CAPIArticle.config.shortUrlId}
 							/>
 						</Island>
-					</ElementContainer>
+					</>
 				)}
-
-				<Island
-					clientOnly={true}
-					deferUntil="visible"
-					placeholderHeight={600}
-				>
-					<OnwardsUpper
-						ajaxUrl={CAPIArticle.config.ajaxUrl}
-						hasRelated={CAPIArticle.hasRelated}
-						hasStoryPackage={CAPIArticle.hasStoryPackage}
-						isAdFreeUser={CAPIArticle.isAdFreeUser}
-						pageId={CAPIArticle.pageId}
-						isPaidContent={
-							CAPIArticle.config.isPaidContent || false
-						}
-						showRelatedContent={
-							CAPIArticle.config.showRelatedContent
-						}
-						keywordIds={CAPIArticle.config.keywordIds}
-						contentType={CAPIArticle.contentType}
-						tags={CAPIArticle.tags}
-						format={format}
-						pillar={format.theme}
-						editionId={CAPIArticle.editionId}
-						shortUrlId={CAPIArticle.config.shortUrlId}
-					/>
-				</Island>
 
 				{!isPaidContent && showComments && (
 					<ElementContainer sectionId="comments" element="aside">

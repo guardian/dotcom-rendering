@@ -10,6 +10,7 @@ export interface FEFrontType {
 	config: FEFrontConfigType;
 	commercialProperties: Record<string, unknown>;
 	pageFooter: FooterType;
+	isAdFreeUser: boolean;
 }
 
 export interface DCRFrontType {
@@ -19,6 +20,7 @@ export interface DCRFrontType {
 	webTitle: string;
 	config: FEFrontConfigType;
 	pageFooter: FooterType;
+	isAdFreeUser: boolean;
 }
 
 interface FEPressedPageType {
@@ -166,6 +168,7 @@ export type FEFrontCard = {
 		linkText?: string;
 		webUrl?: string;
 		editionBrandings: { edition: { id: EditionId } }[];
+		href?: string;
 	};
 	header: {
 		isVideo: boolean;
@@ -232,6 +235,7 @@ export type DCRFrontCard = {
 	url: string;
 	headline: string;
 	trailText?: string;
+	starRating?: number;
 	webPublicationDate?: string;
 	image?: string;
 	kickerText?: string;
@@ -298,13 +302,22 @@ export type DCRCollectionType = {
 	displayName: string;
 	collectionType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
+	grouped: DCRGroupedTrails;
 	curated: DCRFrontCard[];
 	backfill: DCRFrontCard[];
-	treats: DCRFrontCard[];
+	treats: TreatType[];
 	href?: string;
 	config: {
 		showDateHeader: boolean;
 	};
+};
+
+export type DCRGroupedTrails = {
+	snap: TrailType[];
+	huge: TrailType[];
+	veryBig: TrailType[];
+	big: TrailType[];
+	standard: TrailType[];
 };
 
 type FEFrontConfigType = {
@@ -425,4 +438,9 @@ export type DCRSupportingContent = {
 	url?: string;
 	kickerText?: string;
 	format: ArticleFormat;
+};
+
+export type TreatType = {
+	text: string;
+	linkTo: string;
 };

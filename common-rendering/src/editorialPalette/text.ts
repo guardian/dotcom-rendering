@@ -965,6 +965,10 @@ const tag = (format: ArticleFormat): Colour => {
 
 const tagDark = (_format: ArticleFormat): Colour => neutral[86];
 
+const paragraph = (_format: ArticleFormat): Colour => neutral[7];
+
+const paragraphDark = (_format: ArticleFormat): Colour => neutral[86];
+
 // ----- API ----- //
 
 const text = {
@@ -1022,6 +1026,8 @@ const text = {
 	tag,
 	tagDark,
 	pagination,
+	paragraph,
+	paragraphDark,
 };
 
 // ----- Exports ----- //

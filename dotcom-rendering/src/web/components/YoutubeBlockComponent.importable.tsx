@@ -105,7 +105,7 @@ export const YoutubeBlockComponent = ({
 
 		defineConsentState().catch((error) => {
 			window.guardian.modules.sentry.reportError(
-				new Error(`Error: ${error}`),
+				error instanceof Error ? error : new Error(`Error: unknown`),
 				'youtube-consent',
 			);
 		});

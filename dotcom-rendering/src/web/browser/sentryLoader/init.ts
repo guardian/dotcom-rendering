@@ -72,7 +72,7 @@ const init = async (): Promise<void> => {
 			event && injectSentry(event.reason);
 		window.guardian.modules.sentry.reportError = (error) => {
 			injectSentry(error).catch((e) =>
-				console.error(`injectSentry - error: ${e}`),
+				console.error(`injectSentry - error: ${String(e)}`),
 			);
 		};
 	} catch {

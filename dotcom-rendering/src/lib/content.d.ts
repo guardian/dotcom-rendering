@@ -6,6 +6,7 @@ interface ThirdPartyEmbeddedContent {
 	source?: string;
 	sourceDomain?: string;
 }
+
 interface AudioAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
 	elementId: string;
@@ -38,7 +39,7 @@ interface CaptionBlockElement {
 	credit?: string;
 	displayCredit?: boolean;
 	shouldLimitWidth?: boolean;
-	isOverlayed?: boolean;
+	isOverlaid?: boolean;
 }
 
 interface CalloutBlockElement {
@@ -289,7 +290,7 @@ interface MultiImageBlockElement {
 interface NewsletterSignupBlockElement {
 	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement';
 	newsletter: Newsletter;
-	elementId: string;
+	elementId?: string;
 }
 
 interface NumberedTitleBlockElement {
@@ -492,7 +493,6 @@ interface YoutubeBlockElement {
 
 interface WitnessTypeDataBase {
 	authorUsername: string;
-	authorGuardianProfileUrl: string;
 	originalUrl: string;
 	source: string;
 	title: string;
@@ -777,6 +777,10 @@ type ResultBucketsType = {
 	title: string;
 	description: string;
 };
+
+// -------------------------------------
+// Newsletter
+// -------------------------------------
 
 type Newsletter = {
 	listId: number;

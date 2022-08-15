@@ -18,17 +18,19 @@ const pinnedPostContent: HTMLElement | null = !isServer
 	: null;
 
 /**
- * hide show more button and overlay on pinned post
+ * toggle show more button and overlay on pinned post
  */
-function hideShowMore() {
+function toggleShowMore(show: boolean) {
 	const pinnedPostButton = document.querySelector<HTMLElement>(
 		'#pinned-post-button',
 	);
 	const pinnedPostOverlay = document.querySelector<HTMLElement>(
 		'#pinned-post-overlay',
 	);
-	if (pinnedPostButton) pinnedPostButton.style.display = 'none';
-	if (pinnedPostOverlay) pinnedPostOverlay.style.display = 'none';
+	if (pinnedPostButton)
+		pinnedPostButton.style.display = show ? 'inline-flex' : 'none';
+	if (pinnedPostOverlay)
+		pinnedPostOverlay.style.display = show ? 'block' : 'none';
 }
 
 /**
@@ -79,10 +81,13 @@ export const EnhancePinnedPost = () => {
 	const pinnedPostTiming = useRef<ReturnType<typeof initPerf>>();
 
 	const checkContentHeight = () => {
-		const contentFitsContainer =
-			pinnedPostContent &&
-			pinnedPostContent.scrollHeight <= pinnedPostContent.clientHeight;
-		if (contentFitsContainer) hideShowMore();
+		if (pinnedPostContent) {
+			const contentFitsContainer =
+				pinnedPostContent.scrollHeight <=
+				pinnedPostContent.clientHeight;
+			if (contentFitsContainer) toggleShowMore(false);
+			else toggleShowMore(true);
+		}
 	};
 
 	/**
@@ -94,7 +99,10 @@ export const EnhancePinnedPost = () => {
 		checkContentHeight();
 
 		const observer = new MutationObserver(checkContentHeight);
-		const config = { childList: true };
+		const config = {
+			childList: true,
+			subtree: true,
+		};
 
 		observer.observe(pinnedPost, config);
 

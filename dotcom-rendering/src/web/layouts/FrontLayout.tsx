@@ -4,13 +4,16 @@ import {
 	brandBackground,
 	brandBorder,
 	brandLine,
+	neutral,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { DCRFrontType } from '../../types/front';
+import { AdSlot } from '../components/AdSlot';
 import { ContainerLayout } from '../components/ContainerLayout';
 import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
@@ -18,6 +21,7 @@ import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
+import { Stuck } from './lib/stickiness';
 
 interface Props {
 	front: DCRFrontType;
@@ -48,6 +52,21 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
 				<>
+					<Stuck>
+						<ElementContainer
+							showTopBorder={false}
+							showSideBorders={false}
+							padded={false}
+							shouldCenter={false}
+						>
+							<HeaderAdSlot
+								isAdFreeUser={front.isAdFreeUser}
+								shouldHideAds={false}
+								display={format.display}
+							/>
+						</ElementContainer>
+					</Stuck>
+
 					<ElementContainer
 						showTopBorder={false}
 						showSideBorders={false}
@@ -118,7 +137,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				</>
 			</div>
 
-			<main>
+			<main data-layout="FrontLayout">
 				{front.pressedPage.collections.map((collection, index) => {
 					// TODO: We also need to support treats containers
 					// Backfills should be added to the end of any curated content
@@ -141,6 +160,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								showSideBorders={false}
 								ophanComponentLink={ophanComponentLink}
 								ophanComponentName={ophanName}
+								containerName={collection.collectionType}
 								element="section"
 							>
 								<Snap snapData={trails[0].snapData} />
@@ -150,7 +170,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					return (
 						<ContainerLayout
-							key={index}
+							key={collection.id}
 							title={collection.displayName}
 							// TODO: This logic should be updated, as this relies
 							// on the first container being 'palette styles do not delete'
@@ -162,14 +182,18 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							// same as above re 'palette styles' for index increment
 							ophanComponentLink={ophanComponentLink}
 							ophanComponentName={ophanName}
+							containerName={collection.collectionType}
 							containerPalette={collection.containerPalette}
 							toggleable={true}
 							sectionId={collection.id}
 							showDateHeader={collection.config.showDateHeader}
 							editionId={front.editionId}
+							treats={collection.treats}
 						>
 							<DecideContainer
 								trails={trails}
+								index={index}
+								groupedTrails={collection.grouped}
 								containerType={collection.collectionType}
 								containerPalette={collection.containerPalette}
 								showAge={collection.displayName === 'Headlines'}
@@ -188,6 +212,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					</ElementContainer>
 				)}
 			</main>
+
+			<ElementContainer
+				data-print-layout="hide"
+				padded={false}
+				showTopBorder={false}
+				showSideBorders={false}
+				backgroundColour={neutral[93]}
+				element="aside"
+			>
+				<AdSlot position="merchandising" display={format.display} />
+			</ElementContainer>
 
 			{NAV.subNavSections && (
 				<ElementContainer

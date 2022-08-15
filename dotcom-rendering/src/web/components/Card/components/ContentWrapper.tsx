@@ -31,15 +31,21 @@ const flexBasisStyles = ({
 			`;
 		case 'medium':
 			return css`
-				flex-basis: 50%;
+				${from.tablet} {
+					flex-basis: 50%;
+				}
 			`;
 		case 'large':
 			return css`
-				flex-basis: 34%;
+				${from.tablet} {
+					flex-basis: 34%;
+				}
 			`;
 		case 'jumbo':
 			return css`
-				flex-basis: 25%;
+				${from.tablet} {
+					flex-basis: 25%;
+				}
 			`;
 	}
 };

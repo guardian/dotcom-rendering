@@ -1,13 +1,10 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	from,
-	neutral,
-	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+import { from, remSpace, textSans } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import Caption from 'components/caption';
@@ -16,13 +13,14 @@ import { maybeRender } from 'lib';
 import type { MainMedia } from 'mainMedia';
 import { MainMediaKind } from 'mainMedia';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 import { immersiveCaptionId } from './MainMedia.defaults';
 
 // ----- Component ----- //
 
-const styles = css`
-	${textSans.xxsmall()}
-	color: ${neutral[46]};
+const styles = (format: ArticleFormat): SerializedStyles => css`
+	${textSans.xsmall()}
+	color: ${text.figCaption(format)};
 	${grid.column.centre}
 
 	${from.leftCol} {
@@ -30,6 +28,10 @@ const styles = css`
 		grid-row: 4;
 		padding-top: ${remSpace[1]};
 	}
+
+	${darkModeCss`
+		color: ${text.figCaptionDark(format)};
+	`}
 `;
 
 type Props = {
@@ -53,10 +55,8 @@ const ImmersiveCaption: FC<Props> = ({ mainMedia, format }) =>
 		}
 
 		return (
-			<p id={immersiveCaptionId} css={styles}>
-				{maybeRender(caption, (cap) => (
-					<Caption caption={cap} format={format} />
-				))}{' '}
+			<p id={immersiveCaptionId} css={styles(format)}>
+				<Caption caption={caption} format={format} />{' '}
 				{maybeRender(credit, (cred) => (
 					<>{cred}</>
 				))}

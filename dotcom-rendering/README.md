@@ -6,23 +6,25 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Quick start](#quick-start)
-  - [Install Node.js](#install-nodejs)
-  - [Running instructions](#running-instructions)
-  - [Environment Variables](#environment-variables)
-  - [Detailed Setup](#detailed-setup)
-  - [Technologies](#technologies)
-  - [Architecture Diagram](#architecture-diagram)
-  - [UI Design System](#ui-design-system)
-  - [Concepts](#concepts)
-  - [Feedback](#feedback)
-- [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
-- [Code Quality](#code-quality)
-  - [Snyk Code Scanning](#snyk-code-scanning)
-- [IDE setup](#ide-setup)
-  - [Extensions](#extensions)
-  - [Auto fix on save](#auto-fix-on-save)
-- [Thanks](#thanks)
+- [Dotcom Rendering](#dotcom-rendering)
+	- [Quick start](#quick-start)
+		- [Install Node.js](#install-nodejs)
+		- [Running instructions](#running-instructions)
+		- [Environment Variables](#environment-variables)
+		- [Detailed Setup](#detailed-setup)
+		- [Technologies](#technologies)
+		- [Architecture Diagram](#architecture-diagram)
+		- [UI Design System](#ui-design-system)
+		- [Concepts](#concepts)
+		- [Visual Debugging](#visual-debugging)
+		- [Feedback](#feedback)
+	- [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
+	- [Code Quality](#code-quality)
+		- [Snyk Code Scanning](#snyk-code-scanning)
+	- [IDE setup](#ide-setup)
+		- [Extensions](#extensions)
+		- [Auto fix on save](#auto-fix-on-save)
+	- [Thanks](#thanks)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -77,18 +79,18 @@ If you're new to JavaScript projects, if you're trying to integrate with other a
 
 ### Technologies
 
-| Technology                                                                                                                                  | Description                                                                                                                                                                                                                                                                                                                             |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <img alt="Preact" src="./docs/images/logo-preact.jpg" width="350" />                                                                        | DCR is rendered on the server with Preact and uses Preact as the Client-side framework. We use preact-compat to ensure compatability with React modules.                                                                                                                                                                                |
-| <img alt="Emotion CSS-in-JS" src="./docs/images/logo-emotion.png" width="350" />                                                            | Emotion is css-in-js library, DCR uses the `css` tagged template literal style to allow CSS copy-pasting.                                                                                                                                                                                                                               |
-| <img alt="Typescript" src="./docs/images/logo-typescript.png" width="350" />                                                                | DCR is written in Typescript. You can see the [block element types](./src/lib/content.d.ts) as an example of our Typescript types.                                                                                                                                                                                                      |
-| <img alt="Express" src="./docs/images/logo-express.png" width="350" />                                                                      | We use Express as a very thin server to communicate with the Frontend endpoint.                                                                                                                                                                                                                                                         |
-| <img alt="Storybook" src="./docs/images/logo-storybook.jpg" width="350" />                                                                  | We use [storybook to generate component variations and 'layouts'](https://5dfcbf3012392c0020e7140b-borimwnbdl.chromatic.com/?path=/story/*) that are then visual regression tested in Chromatic. You'll notice `.stories.` files in the repo for components that define the variations of components as defined by the component props. |
-| <img alt="Chromatic" src="./docs/images/logo-chromatic.jpg" width="350" />                                                                  | Chromatic is a visual regression testing tool that reviews our Storybook components at PR time.                                                                                                                                                                                                                                         |
-| <img alt="Cypress" src="./docs/images/logo-cypress.png" width="350" />                                                                      | Cypress is an integration testing tool that runs tests in the browser. You will find the Cypress tests in the [cypress folder](./cypress).                                                                                                                                                                                              |
-| <img alt="Chromatic" src="./docs/images/logo-jest.jpg" width="350" />                                                                       | Jest is a unit testing tool. You will find Jest tests in the repo with `.test.` filenames.                                                                                                                                                                                                                                              |
-| <img alt="AB Testing" src="./docs/images/logo-ab-testing.png" width="350" />                                                                | The [A/B Testing library](https://github.com/guardian/ab-testing) is an internal NPM Module. There are a [some docs here](./docs/development/ab-testing-in-dcr.md).                                                                                                                                                                     |
-| <img alt="Deno" title="Deno logo, MIT License: https://deno.land/artwork" src="./docs/images/logo-deno.svg" width="350" /> | [Deno](https://deno.land/) is a JavaScript runtime that we've started incorporating into some of our Github Actions workflows. You will only need to install it if you are planning to run the workflow scripts locally. Some installation and troubleshooting instructions can be found in the [Deno scripts folder](../scripts/deno/README.md).           |
+| Technology                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                       |
+| -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <img alt="Preact" src="./docs/images/logo-preact.jpg" width="350" />                                                       | DCR is rendered on the server with Preact and uses Preact as the Client-side framework. We use preact-compat to ensure compatability with React modules.                                                                                                                                                                                          |
+| <img alt="Emotion CSS-in-JS" src="./docs/images/logo-emotion.png" width="350" />                                           | Emotion is css-in-js library, DCR uses the `css` tagged template literal style to allow CSS copy-pasting.                                                                                                                                                                                                                                         |
+| <img alt="Typescript" src="./docs/images/logo-typescript.png" width="350" />                                               | DCR is written in Typescript. You can see the [block element types](./src/lib/content.d.ts) as an example of our Typescript types.                                                                                                                                                                                                                |
+| <img alt="Express" src="./docs/images/logo-express.png" width="350" />                                                     | We use Express as a very thin server to communicate with the Frontend endpoint.                                                                                                                                                                                                                                                                   |
+| <img alt="Storybook" src="./docs/images/logo-storybook.jpg" width="350" />                                                 | We use [storybook to generate component variations and 'layouts'](https://5dfcbf3012392c0020e7140b-borimwnbdl.chromatic.com/?path=/story/*) that are then visual regression tested in Chromatic. You'll notice `.stories.` files in the repo for components that define the variations of components as defined by the component props.           |
+| <img alt="Chromatic" src="./docs/images/logo-chromatic.jpg" width="350" />                                                 | Chromatic is a visual regression testing tool that reviews our Storybook components at PR time.                                                                                                                                                                                                                                                   |
+| <img alt="Cypress" src="./docs/images/logo-cypress.png" width="350" />                                                     | Cypress is an integration testing tool that runs tests in the browser. You will find the Cypress tests in the [cypress folder](./cypress).                                                                                                                                                                                                        |
+| <img alt="Chromatic" src="./docs/images/logo-jest.jpg" width="350" />                                                      | Jest is a unit testing tool. You will find Jest tests in the repo with `.test.` filenames.                                                                                                                                                                                                                                                        |
+| <img alt="AB Testing" src="./docs/images/logo-ab-testing.png" width="350" />                                               | The [A/B Testing library](https://github.com/guardian/ab-testing) is an internal NPM Module. There are a [some docs here](./docs/development/ab-testing-in-dcr.md).                                                                                                                                                                               |
+| <img alt="Deno" title="Deno logo, MIT License: https://deno.land/artwork" src="./docs/images/logo-deno.svg" width="350" /> | [Deno](https://deno.land/) is a JavaScript runtime that we've started incorporating into some of our Github Actions workflows. You will only need to install it if you are planning to run the workflow scripts locally. Some installation and troubleshooting instructions can be found in the [Deno scripts folder](../scripts/deno/README.md). |
 
 ### Architecture Diagram
 
@@ -111,6 +113,10 @@ There are some concepts to learn, that will make working with Dotcom Rendering c
 -   Dynamic imports
 -   [EnhanceCAPI](docs/patterns/enhance-capi.md)
 -   Data generated in Frontend
+
+### Visual Debugging
+
+DCR provides a visual debuging tool through a bookmarklet which you can find out more about in the [debug tool docs](./src/web/browser/debug/README.md).
 
 ### Feedback
 
