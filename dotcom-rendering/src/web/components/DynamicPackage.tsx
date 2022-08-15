@@ -371,7 +371,7 @@ const Card75_ColumnOfX25 = ({
 								showTopMarginWhenStacked={false}
 								padBottom={
 									// No bottom margin on the last card
-									cardIndex < cards.length - 1
+									cardIndex < remaining.length - 1
 								}
 								padBottomOnMobile={false}
 							>
@@ -383,7 +383,8 @@ const Card75_ColumnOfX25 = ({
 									imageUrl={
 										// Always show the image on the first card and only
 										// on the second if there are two items in two
-										cardIndex === 0 || cards.length === 2
+										cardIndex === 0 ||
+										remaining.length === 2
 											? card.image
 											: undefined
 									}
