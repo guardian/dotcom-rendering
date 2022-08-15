@@ -74,7 +74,7 @@ type Props = {
 	containerName?: string;
 	/** Fronts containers can have their styling overidden using a `containerPalette` */
 	containerPalette?: DCRContainerPalette;
-	/** Defautls to `false`. If true a Hide button is show top right allowing this section
+	/** Defaults to `false`. If true a Hide button is show top right allowing this section
 	 * to be collapsed
 	 */
 	toggleable?: boolean;
