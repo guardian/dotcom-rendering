@@ -76,22 +76,23 @@ const Card25_Card25_Card25_Card25 = ({
 	containerPalette,
 	showAge,
 	showImage = true,
+	padBottom,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	showImage?: boolean;
+	padBottom?: boolean;
 }) => {
 	return (
-		<UL direction="row">
-			{cards.map((card) => {
+		<UL direction="row" padBottom={padBottom}>
+			{cards.map((card, cardIndex) => {
 				return (
 					<LI
 						key={card.url}
 						padSides={true}
-						showTopMarginWhenStacked={false}
 						padBottom={false}
-						padBottomOnMobile={true}
+						padBottomOnMobile={cardIndex < cards.length - 1}
 						showDivider={true}
 					>
 						<FrontCard
@@ -119,18 +120,18 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 	showAge?: boolean;
 }) => {
 	const bigs = cards.slice(0, 3);
-	const column = cards.slice(3);
+	const remaining = cards.slice(3);
 
 	return (
 		<UL direction="row">
-			{bigs.map((card) => {
+			{bigs.map((card, cardIndex) => {
 				return (
 					<LI
 						key={card.url}
 						padSides={true}
 						showTopMarginWhenStacked={false}
 						padBottom={false}
-						padBottomOnMobile={true}
+						padBottomOnMobile={cardIndex < bigs.length - 1}
 						showDivider={true}
 						percentage="25%"
 					>
@@ -149,18 +150,21 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 				showTopMarginWhenStacked={true}
 				percentage="25%"
 			>
-				<UL direction="column">
-					{column.map((card, cardIndex) => {
+				<UL direction="row" wrapCards={true}>
+					{remaining.map((card, cardIndex) => {
 						return (
 							<LI
+								percentage="100%"
 								key={card.url}
 								padSides={true}
 								showTopMarginWhenStacked={false}
 								padBottom={
 									// No bottom margin on the last card
-									cardIndex < cards.length - 1
+									cardIndex < 3
 								}
-								padBottomOnMobile={false}
+								padBottomOnMobile={
+									cardIndex < remaining.length - 1
+								}
 							>
 								<FrontCard
 									trail={card}
@@ -189,18 +193,18 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 	showAge?: boolean;
 }) => {
 	const bigs = cards.slice(0, 2);
-	const columns = [cards.slice(2, 4), cards.slice(4, 6)];
+	const remaining = cards.slice(2, 6);
 
 	return (
 		<UL direction="row">
-			{bigs.map((card) => {
+			{bigs.map((card, cardIndex) => {
 				return (
 					<LI
 						key={card.url}
 						padSides={true}
 						showTopMarginWhenStacked={false}
 						padBottom={false}
-						padBottomOnMobile={true}
+						padBottomOnMobile={cardIndex < bigs.length - 1}
 						percentage="25%"
 						showDivider={true}
 					>
@@ -214,43 +218,40 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 					</LI>
 				);
 			})}
-			{columns.map((columnCards) => {
-				return (
-					<LI
-						showDivider={true}
-						showTopMarginWhenStacked={true}
-						percentage="25%"
-					>
-						<UL direction="column">
-							{columnCards.map((card, cardIndex) => {
-								return (
-									<LI
-										key={card.url}
-										padSides={true}
-										showTopMarginWhenStacked={false}
-										padBottom={
-											// No bottom margin on the last card
-											cardIndex < cards.length - 1
-										}
-										padBottomOnMobile={false}
-									>
-										<FrontCard
-											trail={card}
-											containerPalette={containerPalette}
-											containerType="dynamic/package"
-											showAge={showAge}
-											supportingContent={
-												card.supportingContent
-											}
-											imageUrl={undefined}
-										/>
-									</LI>
-								);
-							})}
-						</UL>
-					</LI>
-				);
-			})}
+			<LI
+				showDivider={true}
+				showTopMarginWhenStacked={true}
+				percentage="50%"
+			>
+				<UL direction="row" wrapCards={true}>
+					{remaining.map((card, cardIndex) => {
+						return (
+							<LI
+								percentage="50%"
+								key={card.url}
+								padSides={true}
+								showTopMarginWhenStacked={false}
+								padBottom={
+									// No bottom margin on the last card
+									cardIndex < 3
+								}
+								padBottomOnMobile={
+									cardIndex < remaining.length - 1
+								}
+							>
+								<FrontCard
+									trail={card}
+									containerPalette={containerPalette}
+									containerType="dynamic/package"
+									showAge={showAge}
+									supportingContent={card.supportingContent}
+									imageUrl={undefined}
+								/>
+							</LI>
+						);
+					})}
+				</UL>
+			</LI>
 		</UL>
 	);
 };
@@ -265,18 +266,18 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 	showAge?: boolean;
 }) => {
 	const bigs = cards.slice(0, 1);
-	const columns = [cards.slice(1, 3), cards.slice(3, 5), cards.slice(5, 7)];
+	const remaining = cards.slice(1, 7);
 
 	return (
 		<UL direction="row">
-			{bigs.map((card) => {
+			{bigs.map((card, cardIndex) => {
 				return (
 					<LI
 						key={card.url}
 						padSides={true}
 						showTopMarginWhenStacked={false}
 						padBottom={false}
-						padBottomOnMobile={true}
+						padBottomOnMobile={cardIndex < bigs.length - 1}
 						percentage="25%"
 						showDivider={true}
 					>
@@ -290,43 +291,41 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 					</LI>
 				);
 			})}
-			{columns.map((columnCards) => {
-				return (
-					<LI
-						showDivider={true}
-						showTopMarginWhenStacked={true}
-						percentage="25%"
-					>
-						<UL direction="column">
-							{columnCards.map((card, cardIndex) => {
-								return (
-									<LI
-										key={card.url}
-										padSides={true}
-										showTopMarginWhenStacked={false}
-										padBottom={
-											// No bottom margin on the last card
-											cardIndex < cards.length - 1
-										}
-										padBottomOnMobile={false}
-									>
-										<FrontCard
-											trail={card}
-											containerPalette={containerPalette}
-											containerType="dynamic/package"
-											showAge={showAge}
-											supportingContent={
-												card.supportingContent
-											}
-											imageUrl={undefined}
-										/>
-									</LI>
-								);
-							})}
-						</UL>
-					</LI>
-				);
-			})}
+			<LI
+				showDivider={true}
+				showTopMarginWhenStacked={true}
+				percentage="75%"
+			>
+				<UL direction="row" wrapCards={true}>
+					{remaining.map((card, cardIndex) => {
+						return (
+							<LI
+								percentage="33.333%"
+								key={card.url}
+								padSides={true}
+								showTopMarginWhenStacked={false}
+								padBottom={
+									// No bottom margin on the last card
+									cardIndex < 3
+								}
+								showDivider={true}
+								padBottomOnMobile={
+									cardIndex < remaining.length - 1
+								}
+							>
+								<FrontCard
+									trail={card}
+									containerPalette={containerPalette}
+									containerType="dynamic/package"
+									showAge={showAge}
+									supportingContent={card.supportingContent}
+									imageUrl={undefined}
+								/>
+							</LI>
+						);
+					})}
+				</UL>
+			</LI>
 		</UL>
 	);
 };
@@ -602,6 +601,7 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
+						padBottom={true}
 					/>
 					<Card25_Card25_Card25_Card25
 						cards={thirdSlice}
