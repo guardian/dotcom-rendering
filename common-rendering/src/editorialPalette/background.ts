@@ -539,6 +539,8 @@ const seriesDark = (format: ArticleFormat): Colour => {
 
 const tag = (format: ArticleFormat): Colour => {
 	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return neutral[10];
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
