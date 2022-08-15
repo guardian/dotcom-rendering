@@ -40,7 +40,7 @@ const stackBelowTabletStyles = css`
 
 	${from.tablet} {
 		flex-direction: row;
-		margin-bottom: ${space[1]}px;
+		margin-bottom: 6px;
 	}
 `;
 
