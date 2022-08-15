@@ -330,7 +330,7 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 	);
 };
 
-const Card75_ColumnOfX25 = ({
+const Card75_ColumnOfCards25 = ({
 	cards,
 	containerPalette,
 	showAge,
@@ -500,7 +500,7 @@ export const DynamicPackage = ({
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
-					<Card75_ColumnOfX25
+					<Card75_ColumnOfCards25
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
