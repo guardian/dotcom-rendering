@@ -67,9 +67,11 @@ const noHeightFromTabletStyles = css`
 	}
 `;
 
+// max-width is the wdith of the text field, the button and the margin between them
 const descriptionStyles = css`
 	${textSans.xsmall({ lineHeight: 'tight' })}
 	margin-bottom: ${space[2]}px;
+	max-width: ${335 + space[3] + 118}px;
 `;
 
 export const EmailSignup = ({
