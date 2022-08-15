@@ -185,6 +185,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 	format,
 }) => {
 	const {
+		promotedNewsletter,
 		config: { host },
 	} = CAPIArticle;
 
@@ -208,8 +209,9 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 		.find((caption) => !!caption && isValidUrl(caption));
 	const showNewsletterPreview = Boolean(newsletterPreviewUrl);
 
-	/** TODO: this data needs to come from the newsletters API */
-	const newsletterRegionFocus = 'UK Focused';
+	/** TODO: decide on the fallback value if not defined in newsletters API */
+	const newsletterRegionFocus =
+		promotedNewsletter?.regionalFocus ?? 'UK Focused';
 
 	return (
 		<>
@@ -386,13 +388,23 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 								</div>
 							)}
 
-							<SecureSignup
-								newsletterId="1234"
-								successDescription="nice"
-								hidePrivacyMessage={true}
-							/>
+							{promotedNewsletter && (
+								<>
+									<SecureSignup
+										newsletterId={
+											promotedNewsletter.identityName
+										}
+										successDescription={
+											promotedNewsletter.successDescription
+										}
+										hidePrivacyMessage={true}
+									/>
 
-							<NewsletterFrequency frequency="Weekly" />
+									<NewsletterFrequency
+										frequency={promotedNewsletter.frequency}
+									/>
+								</>
+							)}
 
 							<div css={shareDivStyle}>
 								<span css={shareSpanStyle}>
