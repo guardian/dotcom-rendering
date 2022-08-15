@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { Lineup } from './Lineup';
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			width: 340px;
@@ -133,9 +133,9 @@ export default {
 
 export const Default = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Lineup players={players} />
-		</Container>
+		</Wrapper>
 	);
 };
 Default.story = { name: 'default' };

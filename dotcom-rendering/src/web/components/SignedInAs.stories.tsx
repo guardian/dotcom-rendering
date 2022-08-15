@@ -18,7 +18,7 @@ const aUser = {
 	},
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			width: 220px;
@@ -36,7 +36,7 @@ export default {
 
 export const SignedIn = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
 					theme: ArticlePillar.News,
@@ -47,14 +47,14 @@ export const SignedIn = () => {
 				commentCount={3}
 				user={aUser}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 SignedIn.story = { name: 'when signed in' };
 
 export const Image = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
 					theme: ArticlePillar.Culture,
@@ -68,14 +68,14 @@ export const Image = () => {
 					secureAvatarUrl: 'https://avatar.guim.co.uk/user/101885881',
 				}}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Image.story = { name: 'when signed in with an avatar set' };
 
 export const Banned = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
 					theme: ArticlePillar.Culture,
@@ -92,14 +92,14 @@ export const Banned = () => {
 					},
 				}}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Banned.story = { name: 'when user is banned' };
 
 export const NoDisplayName = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
 					theme: ArticlePillar.News,
@@ -113,14 +113,14 @@ export const NoDisplayName = () => {
 					displayName: '',
 				}}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 NoDisplayName.story = { name: 'before a display name has been set' };
 
 export const NotSignedIn = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
 					theme: ArticlePillar.Lifestyle,
@@ -130,7 +130,7 @@ export const NotSignedIn = () => {
 				enableDiscussionSwitch={true}
 				commentCount={32}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 NotSignedIn.story = {
@@ -139,7 +139,7 @@ NotSignedIn.story = {
 
 export const DiscussionClosed = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
 					theme: ArticlePillar.Opinion,
@@ -151,7 +151,7 @@ export const DiscussionClosed = () => {
 				isClosedForComments={true}
 				user={aUser}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 DiscussionClosed.story = {
@@ -160,7 +160,7 @@ DiscussionClosed.story = {
 
 export const DiscussionClosedSignedOut = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
 					theme: ArticlePillar.Sport,
@@ -171,7 +171,7 @@ export const DiscussionClosedSignedOut = () => {
 				commentCount={32}
 				isClosedForComments={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 DiscussionClosedSignedOut.story = {
@@ -180,7 +180,7 @@ DiscussionClosedSignedOut.story = {
 
 export const DiscussionDisabled = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
 					theme: ArticlePillar.Opinion,
@@ -192,7 +192,7 @@ export const DiscussionDisabled = () => {
 				isClosedForComments={false}
 				user={aUser}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 DiscussionDisabled.story = {
@@ -201,7 +201,7 @@ DiscussionDisabled.story = {
 
 export const DiscussionDisabledSignedOut = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SignedInAs
 				palette={decidePalette({
 					theme: ArticlePillar.Opinion,
@@ -212,7 +212,7 @@ export const DiscussionDisabledSignedOut = () => {
 				commentCount={32}
 				isClosedForComments={false}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 DiscussionDisabledSignedOut.story = {

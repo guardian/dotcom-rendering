@@ -8,7 +8,7 @@ export default {
 	title: 'Components/DropCap',
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			width: 620px;
@@ -21,7 +21,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const Article = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p
 				css={css`
 					${body.medium()};
@@ -44,14 +44,14 @@ export const Article = () => {
 				sint occaecat cupidatat non proident, sunt in culpa qui officia
 				deserunt mollit anim id est laborum.
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 Article.story = { name: 'Article | news' };
 
 export const OpinionArticle = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p
 				css={css`
 					${body.medium()};
@@ -74,14 +74,14 @@ export const OpinionArticle = () => {
 				nulla pariatur. Excepteur sint occaecat cupidatat non proident,
 				sunt in culpa qui officia deserunt mollit anim id est laborum.
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 OpinionArticle.story = { name: 'Article | opinion' };
 
 export const Feature = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p
 				css={css`
 					${body.medium()};
@@ -104,14 +104,14 @@ export const Feature = () => {
 				Excepteur sint occaecat cupidatat non proident, sunt in culpa
 				qui officia deserunt mollit anim id est laborum.
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 Feature.story = { name: 'Feature | culture' };
 
 export const PhotoEssay = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p
 				css={css`
 					${body.medium()};
@@ -134,14 +134,14 @@ export const PhotoEssay = () => {
 				Excepteur sint occaecat cupidatat non proident, sunt in culpa
 				qui officia deserunt mollit anim id est laborum.
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 PhotoEssay.story = { name: 'PhotoEssay | sport' };
 
 export const Interview = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p
 				css={css`
 					${body.medium()};
@@ -164,14 +164,14 @@ export const Interview = () => {
 				Excepteur sint occaecat cupidatat non proident, sunt in culpa
 				qui officia deserunt mollit anim id est laborum.
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 Interview.story = { name: 'Interview | lifestyle' };
 
 export const Comment = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p
 				css={css`
 					${body.medium()};
@@ -194,14 +194,14 @@ export const Comment = () => {
 				Excepteur sint occaecat cupidatat non proident, sunt in culpa
 				qui officia deserunt mollit anim id est laborum.
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 Comment.story = { name: 'Comment | opinion' };
 
 export const CommentSport = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p
 				css={css`
 					${body.medium()};
@@ -224,14 +224,14 @@ export const CommentSport = () => {
 				Excepteur sint occaecat cupidatat non proident, sunt in culpa
 				qui officia deserunt mollit anim id est laborum.
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 CommentSport.story = { name: 'Comment | sport' };
 
 export const CommentCulture = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p
 				css={css`
 					${body.medium()};
@@ -254,7 +254,7 @@ export const CommentCulture = () => {
 				Excepteur sint occaecat cupidatat non proident, sunt in culpa
 				qui officia deserunt mollit anim id est laborum.
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 CommentCulture.story = { name: 'Comment | culture' };

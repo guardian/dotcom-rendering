@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { brandBackground, brandBorder } from '@guardian/source-foundations';
-import { ElementContainer } from '../ElementContainer';
+import { Section } from '../Section';
 import { Nav } from './Nav';
 import { nav } from './Nav.mock';
 
@@ -11,8 +11,8 @@ export default {
 
 export const StandardStory = () => {
 	return (
-		<ElementContainer
-			showSideBorders={true}
+		<Section
+			fullWidth={true}
 			borderColour={brandBorder.primary}
 			showTopBorder={false}
 			padSides={false}
@@ -28,15 +28,15 @@ export const StandardStory = () => {
 				subscribeUrl=""
 				editionId="UK"
 			/>
-		</ElementContainer>
+		</Section>
 	);
 };
 StandardStory.story = { name: 'News Highlighted' };
 
 export const OpinionStory = () => {
 	return (
-		<ElementContainer
-			showSideBorders={true}
+		<Section
+			fullWidth={true}
 			borderColour={brandBorder.primary}
 			showTopBorder={false}
 			padSides={false}
@@ -52,14 +52,15 @@ export const OpinionStory = () => {
 				subscribeUrl=""
 				editionId="UK"
 			/>
-		</ElementContainer>
+		</Section>
 	);
 };
 OpinionStory.story = { name: 'Opinion Highlighted' };
 
 export const ImmersiveStory = () => {
 	return (
-		<ElementContainer
+		<Section
+			fullWidth={true}
 			showSideBorders={false}
 			borderColour={brandBorder.primary}
 			showTopBorder={false}
@@ -76,7 +77,7 @@ export const ImmersiveStory = () => {
 				subscribeUrl=""
 				editionId="UK"
 			/>
-		</ElementContainer>
+		</Section>
 	);
 };
 ImmersiveStory.story = { name: 'Immersive' };

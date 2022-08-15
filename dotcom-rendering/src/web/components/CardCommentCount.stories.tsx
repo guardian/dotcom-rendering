@@ -7,7 +7,7 @@ export default {
 	title: 'Components/CardCommentCount',
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			margin: 40px;
@@ -19,7 +19,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const CommentCountStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<CardCommentCount
 				format={{
 					design: ArticleDesign.Standard,
@@ -29,14 +29,14 @@ export const CommentCountStory = () => {
 				short="11k"
 				long="10,899"
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 CommentCountStory.story = { name: 'default' };
 
 export const GalleryStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<CardCommentCount
 				format={{
 					design: ArticleDesign.Gallery,
@@ -46,7 +46,7 @@ export const GalleryStory = () => {
 				short="11k"
 				long="10,899"
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 GalleryStory.story = { name: 'Gallery' };

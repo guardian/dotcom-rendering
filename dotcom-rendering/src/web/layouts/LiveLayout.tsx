@@ -26,11 +26,10 @@ import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.importable';
-import { ContainerLayout } from '../components/ContainerLayout';
+import { Section } from '../components/Section';
 import { DecideLines } from '../components/DecideLines';
 import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { ElementContainer } from '../components/ElementContainer';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
 import { Footer } from '../components/Footer';
 import { GetCricketScoreboard } from '../components/GetCricketScoreboard.importable';
@@ -322,7 +321,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		<>
 			<div data-print-layout="hide">
 				<Stuck>
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						showTopBorder={false}
 						showSideBorders={false}
 						padSides={false}
@@ -334,10 +334,11 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							shouldHideAds={CAPIArticle.shouldHideAds}
 							display={format.display}
 						/>
-					</ElementContainer>
+					</Section>
 				</Stuck>
 				<SendToBack>
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						showTopBorder={false}
 						showSideBorders={false}
 						padSides={false}
@@ -362,10 +363,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							contributionsServiceUrl={contributionsServiceUrl}
 							idApiUrl={CAPIArticle.config.idApiUrl}
 						/>
-					</ElementContainer>
+					</Section>
 
-					<ElementContainer
-						showSideBorders={true}
+					<Section
+						fullWidth={true}
 						borderColour={brandLine.primary}
 						showTopBorder={false}
 						padSides={false}
@@ -384,10 +385,11 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							}
 							editionId={CAPIArticle.editionId}
 						/>
-					</ElementContainer>
+					</Section>
 
 					{NAV.subNavSections && (
-						<ElementContainer
+						<Section
+							fullWidth={true}
 							backgroundColour={palette.background.article}
 							padSides={false}
 							borderColour={palette.border.article}
@@ -400,10 +402,11 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									format={format}
 								/>
 							</Island>
-						</ElementContainer>
+						</Section>
 					)}
 
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						backgroundColour={palette.background.article}
 						padSides={false}
 						showTopBorder={false}
@@ -415,13 +418,13 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								display: block;
 							`}
 						/>
-					</ElementContainer>
+					</Section>
 				</SendToBack>
 			</div>
 
 			<main data-layout="LiveLayout">
 				{footballMatchUrl ? (
-					<ContainerLayout
+					<Section
 						showTopBorder={false}
 						backgroundColour={palette.background.matchNav}
 						borderColour={palette.border.headline}
@@ -437,7 +440,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							/>
 						}
 						leftColSize="wide"
-						sideBorders={true}
 						padContent={false}
 						verticalMargins={false}
 					>
@@ -468,9 +470,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								}
 							/>
 						</Island>
-					</ContainerLayout>
+					</Section>
 				) : (
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						showTopBorder={false}
 						backgroundColour={palette.background.header}
 						borderColour={palette.border.headline}
@@ -521,10 +524,11 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								)}
 							</GridItem>
 						</HeadlineGrid>
-					</ElementContainer>
+					</Section>
 				)}
 
-				<ElementContainer
+				<Section
+					fullWidth={true}
 					showTopBorder={false}
 					backgroundColour={palette.background.standfirst}
 					borderColour={palette.border.standfirst}
@@ -599,9 +603,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</Hide>
 						</GridItem>
 					</StandFirstGrid>
-				</ElementContainer>
+				</Section>
 				{showKeyEventsCarousel && CAPIArticle.keyEvents.length > 0 ? (
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						showTopBorder={false}
 						backgroundColour={
 							palette.background.keyEventFromDesktop
@@ -620,9 +625,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								/>
 							</Island>
 						</Hide>
-					</ElementContainer>
+					</Section>
 				) : null}
-				<ElementContainer
+				<Section
+					fullWidth={true}
 					showTopBorder={false}
 					borderColour={palette.border.article}
 					backgroundColour={palette.background.article}
@@ -634,7 +640,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							`}
 						/>
 					</Hide>
-				</ElementContainer>
+				</Section>
 
 				{/* This div is used to contain the Toast */}
 				<div>
@@ -678,7 +684,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</>
 					)}
 
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						showTopBorder={false}
 						backgroundColour={palette.background.article}
 						borderColour={palette.border.article}
@@ -1216,9 +1223,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								</div>
 							</GridItem>
 						</LiveGrid>
-					</ElementContainer>
+					</Section>
 
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						data-print-layout="hide"
 						padSides={false}
 						showTopBorder={false}
@@ -1231,7 +1239,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							position="merchandising-high"
 							display={format.display}
 						/>
-					</ElementContainer>
+					</Section>
 
 					{CAPIArticle.onwards ? (
 						<DecideOnwards
@@ -1241,7 +1249,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					) : (
 						<>
 							{CAPIArticle.storyPackage && (
-								<ElementContainer>
+								<Section fullWidth={true}>
 									<Island deferUntil="visible">
 										<Carousel
 											heading={
@@ -1254,7 +1262,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											format={format}
 										/>
 									</Island>
-								</ElementContainer>
+								</Section>
 							)}
 
 							<Island
@@ -1290,7 +1298,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					)}
 
 					{!isPaidContent && CAPIArticle.isCommentable && (
-						<ElementContainer
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
 							sectionId="comments"
 							data-print-layout="hide"
 							element="section"
@@ -1314,11 +1324,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								isAdFreeUser={CAPIArticle.isAdFreeUser}
 								shouldHideAds={CAPIArticle.shouldHideAds}
 							/>
-						</ElementContainer>
+						</Section>
 					)}
 
 					{!isPaidContent && (
-						<ElementContainer
+						<Section
+							fullWidth={true}
 							data-print-layout="hide"
 							element="aside"
 						>
@@ -1327,10 +1338,11 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								sectionName={CAPIArticle.sectionName}
 								ajaxUrl={CAPIArticle.config.ajaxUrl}
 							/>
-						</ElementContainer>
+						</Section>
 					)}
 
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						data-print-layout="hide"
 						padSides={false}
 						showTopBorder={false}
@@ -1342,12 +1354,13 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							position="merchandising"
 							display={format.display}
 						/>
-					</ElementContainer>
+					</Section>
 				</div>
 			</main>
 
 			{NAV.subNavSections && (
-				<ElementContainer
+				<Section
+					fullWidth={true}
 					data-print-layout="hide"
 					padSides={false}
 					element="aside"
@@ -1359,10 +1372,11 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							format={format}
 						/>
 					</Island>
-				</ElementContainer>
+				</Section>
 			)}
 
-			<ElementContainer
+			<Section
+				fullWidth={true}
 				data-print-layout="hide"
 				padSides={false}
 				backgroundColour={brandBackground.primary}
@@ -1380,7 +1394,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						CAPIArticle.contributionsServiceUrl
 					}
 				/>
-			</ElementContainer>
+			</Section>
 
 			<BannerWrapper data-print-layout="hide">
 				<Island deferUntil="idle" clientOnly={true}>

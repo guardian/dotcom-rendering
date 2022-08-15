@@ -6,7 +6,7 @@ export default {
 	title: 'Components/Distribution',
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			width: 300px;
@@ -20,7 +20,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const Basic = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Distribution
 				left={{
 					value: 29,
@@ -31,14 +31,14 @@ export const Basic = () => {
 					color: '#e3f45a',
 				}}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Basic.story = { name: 'with values adding up to 100' };
 
 export const Unbalanced = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Distribution
 				left={{
 					value: 9,
@@ -49,14 +49,14 @@ export const Unbalanced = () => {
 					color: '#543cde',
 				}}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Unbalanced.story = { name: "with numbers that don't work as percentages" };
 
 export const Zero = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Distribution
 				left={{
 					value: 9,
@@ -67,14 +67,14 @@ export const Zero = () => {
 					color: '#543cde',
 				}}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Zero.story = { name: 'with one side set to zero' };
 
 export const ZeroZero = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Distribution
 				left={{
 					value: 0,
@@ -85,14 +85,14 @@ export const ZeroZero = () => {
 					color: '#543cde',
 				}}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 ZeroZero.story = { name: 'with both sides set to zero' };
 
 export const FiftyFifty = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Distribution
 				left={{
 					value: 50,
@@ -103,7 +103,7 @@ export const FiftyFifty = () => {
 					color: '#543cde',
 				}}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 FiftyFifty.story = { name: 'with both sides set to fifty' };
