@@ -29,10 +29,6 @@ const wrapperStyles = css`
 	background-color: ${neutral[7]};
 `;
 
-export const onwardStyles = css`
-	background: ${neutral[97]};
-`;
-
 type Props = {
 	item: Item;
 };
@@ -62,10 +58,7 @@ const GalleryLayout: FC<Props> = ({ item, children }) => {
 					<Tags item={item} />
 				</article>
 			</main>
-			<section css={onwardStyles}>
-				<RelatedContent item={item} />
-			</section>
-
+			<RelatedContent item={item} />
 			<Footer isCcpa={false} format={item} />
 		</>
 	);

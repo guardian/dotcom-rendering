@@ -36,9 +36,12 @@ const relatedContentStyles = css`
 		padding-right: 0;
 	}
 
+	${from.desktop} {
+		${grid.between('centre-column-start', 'right-column-end')}
+	}
+
 	${from.leftCol} {
 		grid-row: 1;
-		${grid.between('centre-column-start', 'right-column-end')}
 	}
 `;
 

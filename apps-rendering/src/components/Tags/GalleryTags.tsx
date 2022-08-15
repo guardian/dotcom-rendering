@@ -17,7 +17,7 @@ const containerStyles = css`
 	${grid.container}
 `;
 
-const leftColStyles = css`
+const leftColStyles = (format: ArticleFormat): SerializedStyles => css`
 	position: relative;
 
 	${from.leftCol} {
@@ -29,13 +29,13 @@ const leftColStyles = css`
 			position: absolute;
 			top: 0;
 			bottom: 0;
-			border-left: 1px solid ${neutral[20]};
+			border-left: 1px solid ${border.galleryImage(format)};
 			left: -10px;
 		}
 	}
 `;
 
-const rightColStyles = css`
+const rightColStyles = (format: ArticleFormat): SerializedStyles => css`
 	position: relative;
 
 	${from.leftCol} {
@@ -47,7 +47,7 @@ const rightColStyles = css`
 			position: absolute;
 			top: 0;
 			bottom: 0;
-			border-left: 1px solid ${neutral[20]};
+			border-left: 1px solid ${border.galleryImage(format)};
 			right: -10px;
 		}
 	}
@@ -75,15 +75,19 @@ type Props = {
 	item: Item;
 };
 
-const GalleryTags: FC<Props> = ({ item }) => (
-	<section css={containerStyles}>
-		<div css={leftColStyles} />
-		<div css={styles(getFormat(item))}>
-			<DefaultTags item={item} css={defaultStyles(getFormat(item))} />
-		</div>
-		<div css={rightColStyles} />
-	</section>
-);
+const GalleryTags: FC<Props> = ({ item }) => {
+	const format = getFormat(item);
+
+	return (
+		<section css={containerStyles}>
+			<div css={leftColStyles(format)} />
+			<div css={styles(format)}>
+				<DefaultTags item={item} css={defaultStyles(format)} />
+			</div>
+			<div css={rightColStyles(format)} />
+		</section>
+	);
+};
 
 // ----- Exports ----- //
 
