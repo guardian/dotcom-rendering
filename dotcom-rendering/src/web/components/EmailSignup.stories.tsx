@@ -61,5 +61,18 @@ export const NewsTheme = () => (
 	/>
 );
 
+export const IrregularFrequency = () => (
+	<EmailSignup
+		identityName="documentaries"
+		description="Be the first to see our latest thought-provoking films, bringing you bold and original storytelling from around the world"
+		name="Guardian Documentaries"
+		frequency="Whenever a new film is available"
+		successDescription="You have signed up, but the newsletter is fake"
+		theme="features"
+		hidePrivacyMessage={hidePrivacyMessage()}
+	/>
+);
+
 Default.story = { name: 'default' };
 NewsTheme.story = { name: 'news theme' };
+IrregularFrequency.story = { name: 'irregular frequency' };
