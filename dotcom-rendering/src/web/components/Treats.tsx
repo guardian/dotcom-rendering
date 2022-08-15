@@ -55,7 +55,7 @@ export const Treats = ({
 								a later date after we've migrated, but for now a little bit
 								of evil is a good thing.
 							*/
-							padding-top: ${space[1]}px !important;
+							padding-top: ${space[1]}px !important; /* stylelint-disable-line declaration-no-important */
 							padding-left: ${space[2]}px;
 						`}
 					>
