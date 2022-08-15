@@ -160,7 +160,7 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 								showTopMarginWhenStacked={false}
 								padBottom={
 									// No bottom margin on the last card
-									cardIndex < 3
+									cardIndex < 1
 								}
 								padBottomOnMobile={
 									cardIndex < remaining.length - 1
@@ -233,7 +233,7 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 								showTopMarginWhenStacked={false}
 								padBottom={
 									// No bottom margin on the last card
-									cardIndex < 3
+									cardIndex < 2
 								}
 								padBottomOnMobile={
 									cardIndex < remaining.length - 1
