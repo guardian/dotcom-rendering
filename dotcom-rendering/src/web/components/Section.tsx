@@ -31,8 +31,9 @@ type Props = {
 	showTopBorder?: boolean;
 	/** Defaults to `true`. If we should add padding around the outter left and right edges */
 	padSides?: boolean;
-	/** Defaults to `true`. If we should add padding around the left and right sides of
-	 * `children` */
+	/** Defaults to `true`. If we should add padding around the outter left and right edges */
+	padBottom?: boolean;
+	/** Defaults to `false`. If we should add padding to the bottom of `children` */
 	padContent?: boolean;
 	/** The html tag used by Section defaults to `section` but can be overidden here */
 	element?:
@@ -195,6 +196,7 @@ export const Section = ({
 	centralBorder,
 	showTopBorder = true,
 	padSides = true,
+	padBottom = false,
 	padContent = true,
 	verticalMargins = true,
 	borderColour,
@@ -227,7 +229,8 @@ export const Section = ({
 				sectionId={sectionId}
 				showSideBorders={showSideBorders}
 				showTopBorder={showTopBorder}
-				padded={padSides}
+				padSides={padSides}
+				padBottom={padBottom}
 				borderColour={borderColour || overrides?.border.container}
 				backgroundColour={
 					backgroundColour || overrides?.background.container
