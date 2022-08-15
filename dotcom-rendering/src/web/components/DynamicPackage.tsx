@@ -405,12 +405,12 @@ export const DynamicPackage = ({
 }: Props) => {
 	let layout:
 		| 'primaryBoosted'
-		| '4orLessStandards'
-		| '5Standards'
-		| '6Standards'
-		| '7Standards'
-		| '8Standards'
-		| '9Standards';
+		| 'fourOrLessStandards'
+		| 'fiveStandards'
+		| 'sixStandards'
+		| 'sevenStandards'
+		| 'eightStandards'
+		| 'nineStandards';
 
 	const snaps = [...groupedTrails.snap].slice(0, 1);
 
@@ -425,29 +425,29 @@ export const DynamicPackage = ({
 	let thirdSlice: TrailType[] = [];
 	switch (cards.length) {
 		case 9: {
+			layout = 'nineStandards';
 			firstSlice = cards.slice(0, 1);
 			secondSlice = cards.slice(1, 5);
 			thirdSlice = cards.slice(5);
-			layout = '9Standards';
 			break;
 		}
 		case 8:
-			layout = '8Standards';
+			layout = 'eightStandards';
 			firstSlice = cards.slice(0, 1);
 			secondSlice = cards.slice(1);
 			break;
 		case 7:
-			layout = '7Standards';
+			layout = 'sevenStandards';
 			firstSlice = cards.slice(0, 1);
 			secondSlice = cards.slice(1);
 			break;
 		case 6:
-			layout = '6Standards';
+			layout = 'sixStandards';
 			firstSlice = cards.slice(0, 1);
 			secondSlice = cards.slice(1);
 			break;
 		case 5:
-			layout = '5Standards';
+			layout = 'fiveStandards';
 			firstSlice = cards.slice(0, 1);
 			secondSlice = cards.slice(1);
 			break;
@@ -457,8 +457,8 @@ export const DynamicPackage = ({
 				firstSlice = cards.slice(0, 1);
 				secondSlice = cards.slice(1);
 			} else {
+				layout = 'fourOrLessStandards';
 				firstSlice = cards;
-				layout = '4orLessStandards';
 			}
 	}
 
@@ -484,7 +484,7 @@ export const DynamicPackage = ({
 					/>
 				</>
 			);
-		case '4orLessStandards':
+		case 'fourOrLessStandards':
 			return (
 				<>
 					<Snap100
@@ -499,7 +499,7 @@ export const DynamicPackage = ({
 					/>
 				</>
 			);
-		case '5Standards':
+		case 'fiveStandards':
 			return (
 				<>
 					<Snap100
@@ -520,7 +520,7 @@ export const DynamicPackage = ({
 					/>
 				</>
 			);
-		case '6Standards':
+		case 'sixStandards':
 			return (
 				<>
 					<Snap100
@@ -541,7 +541,7 @@ export const DynamicPackage = ({
 					/>
 				</>
 			);
-		case '7Standards':
+		case 'sevenStandards':
 			return (
 				<>
 					<Snap100
@@ -562,7 +562,7 @@ export const DynamicPackage = ({
 					/>
 				</>
 			);
-		case '8Standards':
+		case 'eightStandards':
 			return (
 				<>
 					<Snap100
@@ -583,7 +583,7 @@ export const DynamicPackage = ({
 					/>
 				</>
 			);
-		case '9Standards':
+		case 'nineStandards':
 			return (
 				<>
 					<Snap100
