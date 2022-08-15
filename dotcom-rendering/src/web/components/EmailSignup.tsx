@@ -7,10 +7,7 @@ import {
 	sport,
 	textSans,
 } from '@guardian/source-foundations';
-import {
-	buildDetailText,
-	buildTitleText,
-} from '../lib/buildNewsletterSignUpText';
+import { buildDetailText } from '../lib/buildNewsletterSignUpText';
 import { NewsletterDetail } from './NewsletterDetail';
 import { SecureSignup } from './SecureSignup';
 
@@ -88,7 +85,9 @@ export const EmailSignup = ({
 	return (
 		<aside css={containerStyles}>
 			<div css={stackBelowTabletStyles}>
-				<p css={titleStyles(theme)}>{buildTitleText(name)}</p>
+				<p css={titleStyles(theme)}>
+					Sign up to <span>{name}</span>
+				</p>
 				<div css={noHeightFromTabletStyles}>
 					<NewsletterDetail text={buildDetailText(frequency)} />
 				</div>
