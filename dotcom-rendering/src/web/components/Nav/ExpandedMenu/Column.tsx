@@ -123,7 +123,7 @@ const pillarColumnLinks = css`
 	}
 `;
 
-const hideStyles = (columnInputId: string) => css`
+const hideWhenChecked = (columnInputId: string) => css`
 	${until.desktop} {
 		/* stylelint-disable-next-line selector-type-no-unknown */
 		${`#${columnInputId}`}:checked ~ & {
@@ -132,7 +132,7 @@ const hideStyles = (columnInputId: string) => css`
 	}
 `;
 
-const notHideStyles = (columnInputId: string) => css`
+const hideWhenNotChecked = (columnInputId: string) => css`
 	${until.desktop} {
 		/* stylelint-disable-next-line selector-type-no-unknown */
 		${`#${columnInputId}`}:not(:checked) ~ & {
@@ -143,7 +143,6 @@ const notHideStyles = (columnInputId: string) => css`
 
 const lineStyle = css`
 	background-color: ${brand[600]};
-	/* top: 0; */
 	content: '';
 	display: block;
 	height: 1px;
@@ -168,11 +167,6 @@ const columnStyle = css`
 	margin: 0;
 	padding-bottom: 10px;
 	position: relative;
-
-	/* Remove the border from the top item on mobile */
-	/* :first-of-type:after {
-		content: none;
-	} */
 
 	${from.desktop} {
 		width: 134px;
@@ -266,7 +260,7 @@ export const Column = ({
 					columnLinks,
 					index === 0 && firstColumnLinks,
 					!!column.pillar && pillarColumnLinks,
-					notHideStyles(columnInputId),
+					hideWhenNotChecked(columnInputId),
 				]}
 				role="menu"
 				id={`${column.title.toLowerCase()}Links`}
@@ -295,7 +289,7 @@ export const Column = ({
 					</li>
 				))}
 			</ul>
-			<div css={[hideStyles(columnInputId), lineStyle]}></div>
+			<div css={[hideWhenChecked(columnInputId), lineStyle]}></div>
 		</li>
 	);
 };
