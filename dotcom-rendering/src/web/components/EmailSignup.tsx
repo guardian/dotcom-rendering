@@ -48,7 +48,7 @@ const titleStyles = (theme: string) => css`
 	${headline.xxsmall({ fontWeight: 'bold' })}
 	flex-grow: 1;
 	span {
-		color: ${theme === 'news' ? sport[500] : 'inherit'};
+		color: ${theme === 'news' ? sport[400] : 'inherit'};
 	}
 `;
 
