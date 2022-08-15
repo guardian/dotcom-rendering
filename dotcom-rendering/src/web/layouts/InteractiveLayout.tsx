@@ -241,7 +241,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
-							padded={false}
+							padSides={false}
 							shouldCenter={false}
 						>
 							<HeaderAdSlot
@@ -258,7 +258,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<ElementContainer
 							showTopBorder={false}
 							showSideBorders={false}
-							padded={false}
+							padSides={false}
 							backgroundColour={brandBackground.primary}
 							element="header"
 						>
@@ -290,7 +290,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					showSideBorders={true}
 					borderColour={brandLine.primary}
 					showTopBorder={false}
-					padded={false}
+					padSides={false}
 					backgroundColour={brandBackground.primary}
 					element="nav"
 				>
@@ -310,7 +310,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				{NAV.subNavSections && format.theme !== ArticleSpecial.Labs && (
 					<ElementContainer
 						backgroundColour={palette.background.article}
-						padded={false}
+						padSides={false}
 						element="aside"
 					>
 						<Island deferUntil="idle">
@@ -326,7 +326,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				{format.theme !== ArticleSpecial.Labs && (
 					<ElementContainer
 						backgroundColour={palette.background.article}
-						padded={false}
+						padSides={false}
 						showTopBorder={false}
 					>
 						<StraightLines
@@ -566,7 +566,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 				<ElementContainer
 					showTopBorder={false}
-					padded={false}
+					padSides={false}
 					backgroundColour={palette.background.article}
 				>
 					<StraightLines
@@ -598,7 +598,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 				<ElementContainer
 					data-print-layout="hide"
-					padded={false}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
@@ -702,7 +702,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 				<ElementContainer
 					data-print-layout="hide"
-					padded={false}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
@@ -715,7 +715,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			{NAV.subNavSections && (
 				<ElementContainer
 					data-print-layout="hide"
-					padded={false}
+					padSides={false}
 					element="aside"
 				>
 					<Island deferUntil="visible">
@@ -730,7 +730,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 			<ElementContainer
 				data-print-layout="hide"
-				padded={false}
+				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}

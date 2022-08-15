@@ -218,7 +218,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 					<ElementContainer
 						showTopBorder={false}
 						showSideBorders={false}
-						padded={false}
+						padSides={false}
 						shouldCenter={false}
 					>
 						<HeaderAdSlot
@@ -232,7 +232,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 				<ElementContainer
 					showTopBorder={false}
 					showSideBorders={false}
-					padded={false}
+					padSides={false}
 					backgroundColour={brandBackground.primary}
 					element="header"
 				>
@@ -255,7 +255,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 					showSideBorders={true}
 					borderColour={brandLine.primary}
 					showTopBorder={false}
-					padded={false}
+					padSides={false}
 					backgroundColour={brandBackground.primary}
 					element="nav"
 				>
@@ -276,7 +276,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 					<>
 						<ElementContainer
 							backgroundColour={palette.background.article}
-							padded={false}
+							padSides={false}
 							element="aside"
 						>
 							<Island deferUntil="idle">
@@ -289,7 +289,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 						</ElementContainer>
 						<ElementContainer
 							backgroundColour={palette.background.article}
-							padded={false}
+							padSides={false}
 							showTopBorder={false}
 						>
 							<StraightLines
@@ -509,7 +509,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 
 			<ElementContainer
 				data-print-layout="hide"
-				padded={false}
+				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
