@@ -9,13 +9,13 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
-import { Section } from '../components/Section';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
+import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { DecideContainer } from '../lib/DecideContainer';
@@ -151,6 +151,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					// There are some containers that have zero trails. We don't want to render these
 					if (trails.length === 0) return null;
 
+					// This is a legacy container used to add palette styling on Frontend. DCR ignores it
+					if (
+						collection.displayName ===
+						'Palette styles new do not delete'
+					) {
+						return null;
+					}
+
 					const ophanName = ophanComponentId(collection.displayName);
 					const ophanComponentLink = `container-${
 						index + 1
@@ -161,8 +169,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							<Section
 								fullWidth={true}
 								padSides={false}
+								padBottom={true}
 								showTopBorder={false}
-								showSideBorders={false}
+								showSideBorders={true}
 								ophanComponentLink={ophanComponentLink}
 								ophanComponentName={ophanName}
 								containerName={collection.collectionType}

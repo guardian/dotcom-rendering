@@ -250,7 +250,7 @@ export const Section = ({
 			sectionId={sectionId}
 			showSideBorders={showSideBorders}
 			showTopBorder={showTopBorder}
-			padded={padSides}
+			padSides={padSides}
 			borderColour={borderColour || overrides?.border.container}
 			backgroundColour={
 				backgroundColour || overrides?.background.container

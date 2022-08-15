@@ -1,15 +1,21 @@
 import { ClassNames, css as emoCss } from '@emotion/react';
-import { border, from } from '@guardian/source-foundations';
+import { border, from, space } from '@guardian/source-foundations';
 // @ts-expect-error
 import { jsx as _jsx } from 'react/jsx-runtime';
 import { center } from '../lib/center';
 
-const padding = emoCss`
-	padding: 0 10px;
+const sidePadding = emoCss`
+	padding-left: 10px;
+	padding-right: 10px;
 
 	${from.mobileLandscape} {
-		padding: 0 20px;
+		padding-left: 20px;
+		padding-right: 20px;
 	}
+`;
+
+const bottomPadding = emoCss`
+	padding-bottom: ${space[9]}px;
 `;
 
 const sideBorderStyles = (colour: string) => emoCss`
@@ -31,7 +37,8 @@ type Props = {
 	sectionId?: string;
 	showSideBorders?: boolean;
 	showTopBorder?: boolean;
-	padded?: boolean;
+	padSides?: boolean;
+	padBottom?: boolean;
 	backgroundColour?: string;
 	innerBackgroundColour?: string;
 	borderColour?: string;
@@ -59,7 +66,8 @@ export const ElementContainer = ({
 	sectionId,
 	showSideBorders = true,
 	showTopBorder = true,
-	padded = true,
+	padSides = true,
+	padBottom = false,
 	borderColour = border.secondary,
 	backgroundColour,
 	innerBackgroundColour,
@@ -82,7 +90,8 @@ export const ElementContainer = ({
 						showTopBorder && topBorderStyles(borderColour),
 						innerBackgroundColour &&
 							setBackgroundColour(innerBackgroundColour),
-						padded && padding,
+						padSides && sidePadding,
+						padBottom && bottomPadding,
 					]}
 				>
 					{children}
