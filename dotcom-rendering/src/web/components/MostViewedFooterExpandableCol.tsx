@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { from } from '@guardian/source-foundations';
+import {
+	from,
+	until,
+	border,
+	neutral,
+	textSans,
+} from '@guardian/source-foundations';
 import { useState } from 'react';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
@@ -14,13 +20,44 @@ const gridList = (expandedState: boolean) => {
 		height: 100%;
 	`;
 };
+const thinGreySolid = `1px solid ${border.secondary}`;
+
+const columnHeading = (index: number) => {
+	return css`
+		padding: 16px;
+		border-left: ${index === 0 ? thinGreySolid : 'none'};
+		border-right: ${thinGreySolid};
+		border-bottom: ${thinGreySolid};
+
+		${until.leftCol} {
+			border-top: ${thinGreySolid};
+			border-bottom: 0;
+		}
+	`;
+};
 
 type Props = {
 	tab: TrailTabType;
 	expanded?: boolean;
+	index: number;
 };
 
-export const MostViewedExpandableCol = ({ tab, expanded = false }: Props) => {
+const ColumnHeading = ({ heading }: { heading: string }) => {
+	switch (heading.toLowerCase()) {
+		case 'most popular':
+			return <span>Most popular</span>;
+		case `across the&nbsp;guardian`:
+			return <span>Across The Guardian</span>;
+		default:
+			return <span>Deeply Read</span>;
+	}
+};
+
+export const MostViewedExpandableCol = ({
+	tab,
+	expanded = false,
+	index,
+}: Props) => {
 	const [colExpanded, setColExpanded] = useState<boolean>(false);
 	const expandedState = colExpanded || expanded;
 	const trails = expandedState
@@ -28,7 +65,14 @@ export const MostViewedExpandableCol = ({ tab, expanded = false }: Props) => {
 		: tab.trails.slice(0, 5);
 
 	return (
-		<div>
+		<div
+			css={css`
+				position: relative;
+			`}
+		>
+			<div css={[columnHeading(index)]}>
+				<ColumnHeading heading={tab.heading} />
+			</div>
 			<ol
 				css={[gridList(expandedState)]}
 				id={`tabs-popular-${tab.heading}`}
@@ -52,6 +96,15 @@ export const MostViewedExpandableCol = ({ tab, expanded = false }: Props) => {
 			</ol>
 			<button
 				css={css`
+					height: 32px;
+					background-color: ${neutral[7]};
+					border-radius: 1600px;
+					color: ${neutral[100]};
+					border: none;
+					${textSans.small()};
+					font-weight: 700;
+					padding: 0 15px 0 7px;
+					position: absolute;
 					display: block;
 					${from.tablet} {
 						display: none;
@@ -62,7 +115,7 @@ export const MostViewedExpandableCol = ({ tab, expanded = false }: Props) => {
 					setColExpanded(!colExpanded);
 				}}
 			>
-				see more, per column
+				{!colExpanded ? 'Show More' : 'Show Less'}
 			</button>
 		</div>
 	);

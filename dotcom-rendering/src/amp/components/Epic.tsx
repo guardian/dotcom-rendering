@@ -119,7 +119,7 @@ const highlightedTextStyle = css`
 	line-height: 1.5;
 	display: inline;
 `;
-const genericButtonStyle = css`
+export const genericButtonStyle = css`
 	outline: none;
 	display: inline-flex;
 	justify-content: space-between;
