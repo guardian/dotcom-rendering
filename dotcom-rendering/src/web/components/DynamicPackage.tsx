@@ -540,7 +540,7 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						isBoosted={firstSlice[0].isBoosted}
+						isBoosted={secondSlice[0].isBoosted}
 					/>
 					<Card25_Card25_Card25_ColumnOfTwo25
 						cards={thirdSlice}
@@ -561,7 +561,7 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						isBoosted={firstSlice[0].isBoosted}
+						isBoosted={secondSlice[0].isBoosted}
 					/>
 					<Card25_Card25_ColumnOfTwo25_ColumnOfTwo25
 						cards={thirdSlice}
@@ -582,7 +582,7 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						isBoosted={firstSlice[0].isBoosted}
+						isBoosted={secondSlice[0].isBoosted}
 					/>
 					<Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25
 						cards={thirdSlice}
@@ -603,7 +603,7 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						isBoosted={firstSlice[0].isBoosted}
+						isBoosted={secondSlice[0].isBoosted}
 					/>
 					<Card25_Card25_Card25_Card25
 						cards={thirdSlice}
