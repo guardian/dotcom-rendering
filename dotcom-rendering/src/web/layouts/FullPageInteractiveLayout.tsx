@@ -145,7 +145,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 					showSideBorders={true}
 					borderColour={brandLine.primary}
 					showTopBorder={false}
-					padded={false}
+					padSides={false}
 					backgroundColour={brandBackground.primary}
 					element="nav"
 				>
@@ -179,7 +179,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 					<ElementContainer
 						showTopBorder={false}
 						showSideBorders={false}
-						padded={false}
+						padSides={false}
 						shouldCenter={false}
 						element="aside"
 					>
@@ -197,7 +197,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 					<ElementContainer
 						showTopBorder={false}
 						showSideBorders={false}
-						padded={false}
+						padSides={false}
 						backgroundColour={brandBackground.primary}
 						element="header"
 					>
@@ -229,7 +229,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 				showSideBorders={true}
 				borderColour={brandLine.primary}
 				showTopBorder={false}
-				padded={false}
+				padSides={false}
 				backgroundColour={brandBackground.primary}
 				element="nav"
 			>
@@ -250,7 +250,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 			{NAV.subNavSections && format.theme !== ArticleSpecial.Labs && (
 				<ElementContainer
 					backgroundColour={neutral[100]}
-					padded={false}
+					padSides={false}
 					element="aside"
 				>
 					<Island deferUntil="idle">
@@ -314,7 +314,7 @@ export const FullPageInteractiveLayout = ({
 				showTopBorder={false}
 				showSideBorders={false}
 				shouldCenter={false}
-				padded={false}
+				padSides={false}
 				backgroundColour={palette.background.article}
 				element="main"
 			>
@@ -339,7 +339,7 @@ export const FullPageInteractiveLayout = ({
 
 			{NAV.subNavSections && (
 				<ElementContainer
-					padded={false}
+					padSides={false}
 					backgroundColour={neutral[100]}
 					element="aside"
 				>
@@ -354,7 +354,7 @@ export const FullPageInteractiveLayout = ({
 			)}
 
 			<ElementContainer
-				padded={false}
+				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}

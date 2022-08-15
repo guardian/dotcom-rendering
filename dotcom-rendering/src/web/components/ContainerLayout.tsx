@@ -154,7 +154,7 @@ export const ContainerLayout = ({
 			sectionId={sectionId}
 			showSideBorders={sideBorders}
 			showTopBorder={showTopBorder}
-			padded={padSides}
+			padSides={padSides}
 			borderColour={borderColour || overrides?.border.container}
 			backgroundColour={
 				backgroundColour || overrides?.background.container

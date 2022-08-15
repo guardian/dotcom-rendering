@@ -76,7 +76,7 @@ NoComments.story = { name: 'with no comments' };
 
 export const InContext = () => {
 	return (
-		<ElementContainer padded={false}>
+		<ElementContainer padSides={false}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>

@@ -176,10 +176,12 @@ interface Props {
 
 const decideCaption = (mainMedia: ImageBlockElement): string => {
 	const caption = [];
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because sometimes mainMedia isn't an image
 	if (mainMedia?.data?.caption) {
 		caption.push(mainMedia.data.caption);
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because sometimes mainMedia isn't an image
 	if (mainMedia?.displayCredit && mainMedia?.data?.credit) {
 		caption.push(mainMedia.data.credit);
 	}
@@ -497,7 +499,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				</ElementContainer>
 
 				<ElementContainer
-					padded={false}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
@@ -595,7 +597,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				)}
 
 				<ElementContainer
-					padded={false}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
@@ -606,7 +608,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			</main>
 
 			{NAV.subNavSections && (
-				<ElementContainer padded={false} element="aside">
+				<ElementContainer padSides={false} element="aside">
 					<Island deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
@@ -618,7 +620,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			)}
 
 			<ElementContainer
-				padded={false}
+				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}

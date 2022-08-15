@@ -1,9 +1,10 @@
 // ----- Imports ----- //
 
-import { ArticleDisplay } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
+import GalleryRelatedContent from './GalleryRelatedContent';
 import ImmersiveRelatedContent from './ImmersiveRelatedContent';
 import DefaultRelatedContent, {
 	defaultStyles,
@@ -27,12 +28,17 @@ const RelatedContent: FC<Props> = ({ item }) => {
 		);
 	}
 
-	return (
-		<DefaultRelatedContent
-			content={item.relatedContent}
-			css={defaultStyles}
-		/>
-	);
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return <GalleryRelatedContent content={item.relatedContent} />;
+		default:
+			return (
+				<DefaultRelatedContent
+					content={item.relatedContent}
+					css={defaultStyles}
+				/>
+			);
+	}
 };
 
 // ----- Exports ----- //

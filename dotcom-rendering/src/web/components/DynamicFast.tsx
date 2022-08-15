@@ -440,7 +440,7 @@ export const DynamicFast = ({
 					containerPalette={containerPalette}
 				/>
 			)}
-			<UL direction="row" padBottom={true}>
+			<UL direction="row">
 				{/* Leftover huges, very bigs & all bigs */}
 				{bigs.map((card, cardIndex) => {
 					if (firstBigBoosted) {

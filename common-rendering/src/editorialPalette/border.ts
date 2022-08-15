@@ -224,6 +224,10 @@ const pinnedPost = (format: ArticleFormat): string => {
 	}
 };
 
+const galleryImage = (_format: ArticleFormat): string => {
+	return neutral[20];
+};
+
 // ----- API ----- //
 
 const border = {
@@ -250,6 +254,7 @@ const border = {
 	standfirstBlogLink,
 	standfirstLinkDark,
 	pinnedPost,
+	galleryImage,
 };
 
 // ----- Exports ----- //

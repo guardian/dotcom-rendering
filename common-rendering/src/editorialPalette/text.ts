@@ -154,7 +154,10 @@ const commentCount = (format: ArticleFormat): Colour => {
 };
 
 const commentCountDark = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.LiveBlog || format.design === ArticleDesign.DeadBlog) {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	) {
 		return neutral[60];
 	}
 
@@ -951,7 +954,14 @@ const figCaption = (_format: ArticleFormat): Colour => neutral[46];
 
 const figCaptionDark = (_format: ArticleFormat): Colour => neutral[60];
 
-const tag = (_format: ArticleFormat): Colour => neutral[7];
+const tag = (format: ArticleFormat): Colour => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return neutral[97];
+		default:
+			return neutral[7];
+	}
+};
 
 const tagDark = (_format: ArticleFormat): Colour => neutral[86];
 

@@ -325,7 +325,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					<ElementContainer
 						showTopBorder={false}
 						showSideBorders={false}
-						padded={false}
+						padSides={false}
 						shouldCenter={false}
 						element="aside"
 					>
@@ -340,7 +340,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					<ElementContainer
 						showTopBorder={false}
 						showSideBorders={false}
-						padded={false}
+						padSides={false}
 						backgroundColour={brandBackground.primary}
 						element="header"
 					>
@@ -368,7 +368,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						showSideBorders={true}
 						borderColour={brandLine.primary}
 						showTopBorder={false}
-						padded={false}
+						padSides={false}
 						backgroundColour={brandBackground.primary}
 						element="nav"
 					>
@@ -389,7 +389,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					{NAV.subNavSections && (
 						<ElementContainer
 							backgroundColour={palette.background.article}
-							padded={false}
+							padSides={false}
 							borderColour={palette.border.article}
 							element="aside"
 						>
@@ -405,7 +405,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 					<ElementContainer
 						backgroundColour={palette.background.article}
-						padded={false}
+						padSides={false}
 						showTopBorder={false}
 						borderColour={palette.border.article}
 					>
@@ -682,7 +682,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						showTopBorder={false}
 						backgroundColour={palette.background.article}
 						borderColour={palette.border.article}
-						padded={false}
+						padSides={false}
 					>
 						<LiveGrid>
 							<GridItem area="media">
@@ -1220,7 +1220,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 					<ElementContainer
 						data-print-layout="hide"
-						padded={false}
+						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
 						backgroundColour={neutral[93]}
@@ -1332,7 +1332,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 					<ElementContainer
 						data-print-layout="hide"
-						padded={false}
+						padSides={false}
 						showTopBorder={false}
 						showSideBorders={false}
 						backgroundColour={neutral[93]}
@@ -1349,7 +1349,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			{NAV.subNavSections && (
 				<ElementContainer
 					data-print-layout="hide"
-					padded={false}
+					padSides={false}
 					element="aside"
 				>
 					<Island deferUntil="visible">
@@ -1364,7 +1364,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 			<ElementContainer
 				data-print-layout="hide"
-				padded={false}
+				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
