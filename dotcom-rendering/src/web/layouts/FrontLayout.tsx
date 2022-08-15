@@ -152,19 +152,47 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					} | ${ophanName}`;
 
 					if (collection.collectionType === 'fixed/thrasher') {
-						return (
-							<ElementContainer
-								padded={false}
-								showTopBorder={false}
-								showSideBorders={false}
-								ophanComponentLink={ophanComponentLink}
-								ophanComponentName={ophanName}
-								containerName={collection.collectionType}
-								element="section"
-							>
-								<Snap snapData={trails[0].snapData} />
-							</ElementContainer>
-						);
+						switch (collection.displayName) {
+							case 'Palette styles new do not delete':
+								return null;
+							case 'culture-treat':
+								/**
+								 * The legacy culture-treat works by cloning itself and inserting
+								 * that clone in the section above. But on DCR this approach is
+								 * leading to the original content also showing. We still need to
+								 * 'render' the component in DCR so that the javascript gets executed
+								 * but we don't want to render two version so to get around this
+								 * we wrap the original Snap component in a section and hide
+								 * it.
+								 */
+								return (
+									// This *needs* to be a section because the culture-treat
+									// code is epxecting that
+									<section
+										css={css`
+											display: none;
+										`}
+									>
+										<Snap snapData={trails[0].snapData} />
+									</section>
+								);
+							default:
+								return (
+									<ElementContainer
+										padded={false}
+										showTopBorder={false}
+										showSideBorders={false}
+										ophanComponentLink={ophanComponentLink}
+										ophanComponentName={ophanName}
+										containerName={
+											collection.collectionType
+										}
+										element="section"
+									>
+										<Snap snapData={trails[0].snapData} />
+									</ElementContainer>
+								);
+						}
 					}
 
 					return (
