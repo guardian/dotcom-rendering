@@ -44,13 +44,12 @@ const Card100 = ({
 	cards,
 	containerPalette,
 	showAge,
-	isBoosted,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-	isBoosted?: boolean;
 }) => {
+	if (!cards[0]) return null;
 	return (
 		<UL>
 			<LI padSides={true} padBottom={true}>
@@ -59,7 +58,7 @@ const Card100 = ({
 					containerPalette={containerPalette}
 					containerType="dynamic/package"
 					showAge={showAge}
-					headlineSize={isBoosted ? 'ginormous' : 'huge'}
+					headlineSize={cards[0].isBoosted ? 'ginormous' : 'huge'}
 					imagePosition="bottom"
 					imagePositionOnMobile="bottom"
 					imageSize="large"
@@ -483,7 +482,6 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						isBoosted={true}
 					/>
 					<Card25_Card25_Card25_Card25
 						cards={thirdSlice}
@@ -519,7 +517,6 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						isBoosted={secondSlice[0].isBoosted}
 					/>
 					<Card25_Card25_Card25_Card25
 						cards={thirdSlice}
@@ -540,7 +537,6 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						isBoosted={secondSlice[0].isBoosted}
 					/>
 					<Card25_Card25_Card25_ColumnOfTwo25
 						cards={thirdSlice}
@@ -561,7 +557,6 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						isBoosted={secondSlice[0].isBoosted}
 					/>
 					<Card25_Card25_ColumnOfTwo25_ColumnOfTwo25
 						cards={thirdSlice}
@@ -582,7 +577,6 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						isBoosted={secondSlice[0].isBoosted}
 					/>
 					<Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25
 						cards={thirdSlice}
@@ -603,7 +597,6 @@ export const DynamicPackage = ({
 						cards={secondSlice}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						isBoosted={secondSlice[0].isBoosted}
 					/>
 					<Card25_Card25_Card25_Card25
 						cards={thirdSlice}
