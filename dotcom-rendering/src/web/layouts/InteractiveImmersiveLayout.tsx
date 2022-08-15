@@ -308,7 +308,7 @@ export const InteractiveImmersiveLayout = ({
 					element="article"
 				>
 					<InteractiveImmersiveGrid>
-						{/* Above leftCol, the Caption is controled by Section ^^ */}
+						{/* Above leftCol, the Caption is controlled by Section ^^ */}
 						<GridItem area="caption">
 							<Hide when="above" breakpoint="leftCol">
 								<Caption
