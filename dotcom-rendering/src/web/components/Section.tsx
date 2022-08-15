@@ -13,6 +13,11 @@ import { LeftColumn } from './LeftColumn';
 import { ShowHideButton } from './ShowHideButton';
 import { Treats } from './Treats';
 
+/**
+ * ----- First time here? -----
+ * If you're unsure how to use this component, check out `Section.stories.tsx` and
+ * try running it in storybook to get an idea of how this component is used!
+ */
 type Props = {
 	/** This text will be used as the h2 shown in the left column for the section */
 	title?: string;
