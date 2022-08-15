@@ -97,6 +97,94 @@ Five.story = {
 	name: 'With five standard cards',
 };
 
+export const Six = () => (
+	<ContainerLayout
+		title="DynamicPackage"
+		showTopBorder={true}
+		sideBorders={true}
+		padContent={false}
+		centralBorder="partial"
+	>
+		<DynamicPackage
+			groupedTrails={{
+				...defaultGroupedTrails,
+				snap: [],
+				standard: [...trails].slice(0, 6),
+			}}
+			containerPalette="LongRunningPalette"
+		/>
+	</ContainerLayout>
+);
+Six.story = {
+	name: 'With six standard cards',
+};
+
+export const Seven = () => (
+	<ContainerLayout
+		title="DynamicPackage"
+		showTopBorder={true}
+		sideBorders={true}
+		padContent={false}
+		centralBorder="partial"
+	>
+		<DynamicPackage
+			groupedTrails={{
+				...defaultGroupedTrails,
+				snap: [],
+				standard: [...trails].slice(0, 7),
+			}}
+			containerPalette="LongRunningPalette"
+		/>
+	</ContainerLayout>
+);
+Seven.story = {
+	name: 'With seven standard cards',
+};
+
+export const Eight = () => (
+	<ContainerLayout
+		title="DynamicPackage"
+		showTopBorder={true}
+		sideBorders={true}
+		padContent={false}
+		centralBorder="partial"
+	>
+		<DynamicPackage
+			groupedTrails={{
+				...defaultGroupedTrails,
+				snap: [],
+				standard: [...trails].slice(0, 8),
+			}}
+			containerPalette="LongRunningPalette"
+		/>
+	</ContainerLayout>
+);
+Eight.story = {
+	name: 'With eight standard cards',
+};
+
+export const Nine = () => (
+	<ContainerLayout
+		title="DynamicPackage"
+		showTopBorder={true}
+		sideBorders={true}
+		padContent={false}
+		centralBorder="partial"
+	>
+		<DynamicPackage
+			groupedTrails={{
+				...defaultGroupedTrails,
+				snap: [],
+				standard: [...trails].slice(0, 9),
+			}}
+			containerPalette="LongRunningPalette"
+		/>
+	</ContainerLayout>
+);
+Nine.story = {
+	name: 'With nine standard cards',
+};
+
 export const Boosted3 = () => {
 	const primary = [...trails].slice(0)[0];
 	const remaining = [...trails].slice(1, 3);
@@ -181,6 +269,62 @@ Boosted5.story = {
 	name: 'With five standard cards - boosted',
 };
 
+export const Boosted8 = () => {
+	const primary = [...trails].slice(0)[0];
+	const remaining = [...trails].slice(1, 8);
+
+	return (
+		<ContainerLayout
+			title="DynamicPackage"
+			showTopBorder={true}
+			sideBorders={true}
+			padContent={false}
+			centralBorder="partial"
+		>
+			<DynamicPackage
+				groupedTrails={{
+					...defaultGroupedTrails,
+					snap: [],
+					standard: [{ ...primary, isBoosted: true }, ...remaining],
+				}}
+				showAge={true}
+				containerPalette="LongRunningPalette"
+			/>
+		</ContainerLayout>
+	);
+};
+Boosted8.story = {
+	name: 'With eight standard cards - boosted',
+};
+
+export const Boosted9 = () => {
+	const primary = [...trails].slice(0)[0];
+	const remaining = [...trails].slice(1, 9);
+
+	return (
+		<ContainerLayout
+			title="DynamicPackage"
+			showTopBorder={true}
+			sideBorders={true}
+			padContent={false}
+			centralBorder="partial"
+		>
+			<DynamicPackage
+				groupedTrails={{
+					...defaultGroupedTrails,
+					snap: [],
+					standard: [{ ...primary, isBoosted: true }, ...remaining],
+				}}
+				showAge={true}
+				containerPalette="LongRunningPalette"
+			/>
+		</ContainerLayout>
+	);
+};
+Boosted9.story = {
+	name: 'With nine standard cards - boosted',
+};
+
 export const OneSnapThreeStandard = () => (
 	<ContainerLayout
 		title="DynamicPackage"
@@ -221,7 +365,7 @@ export const ThreeSnapTwoStandard = () => (
 		/>
 	</ContainerLayout>
 );
-OneSnapThreeStandard.story = {
+ThreeSnapTwoStandard.story = {
 	name: 'With three snaps - two standard cards',
 };
 
@@ -243,6 +387,6 @@ export const ThreeSnapTwoStandard2ndBoosted = () => (
 		/>
 	</ContainerLayout>
 );
-OneSnapThreeStandard.story = {
+ThreeSnapTwoStandard2ndBoosted.story = {
 	name: 'With three snaps (2nd boosted) - two standard cards',
 };
