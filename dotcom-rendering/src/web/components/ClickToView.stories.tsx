@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { textSans } from '@guardian/source-foundations';
 import { ClickToView } from './ClickToView';
-import { ContainerLayout } from './ContainerLayout';
 import { DocumentBlockComponent } from './DocumentBlockComponent.importable';
 import { EmbedBlockComponent } from './EmbedBlockComponent.importable';
 import { Figure } from './Figure';
 import { InstagramBlockComponent } from './InstagramBlockComponent.importable';
 import { MapEmbedBlockComponent } from './MapEmbedBlockComponent.importable';
+import { Section } from './Section';
 import { SoundcloudBlockComponent } from './SoundcloudBlockComponent';
 import { SpotifyBlockComponent } from './SpotifyBlockComponent.importable';
 import { TweetBlockComponent } from './TweetBlockComponent.importable';
@@ -35,8 +35,8 @@ const RoleStory = ({
 	role: RoleType;
 }) => {
 	return (
-		<ContainerLayout
-			sideBorders={true}
+		<Section
+			showTopBorder={false}
 			title="Click To View"
 			centralBorder="full"
 		>
@@ -106,7 +106,7 @@ const RoleStory = ({
 					post-ironic mixtape
 				</p>
 			</div>
-		</ContainerLayout>
+		</Section>
 	);
 };
 
@@ -465,8 +465,8 @@ const vineEmbedEmbed: VineBlockElement = {
 
 export const EmbedBlockComponentStory = () => {
 	return (
-		<ContainerLayout
-			sideBorders={true}
+		<Section
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -662,7 +662,7 @@ export const EmbedBlockComponentStory = () => {
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>,
 			</div>
-		</ContainerLayout>
+		</Section>
 	);
 };
 EmbedBlockComponentStory.story = {
@@ -671,8 +671,8 @@ EmbedBlockComponentStory.story = {
 
 export const UnsafeEmbedBlockComponentStory = () => {
 	return (
-		<ContainerLayout
-			sideBorders={true}
+		<Section
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -820,7 +820,7 @@ export const UnsafeEmbedBlockComponentStory = () => {
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>,
 			</div>
-		</ContainerLayout>
+		</Section>
 	);
 };
 UnsafeEmbedBlockComponentStory.story = {
@@ -829,8 +829,8 @@ UnsafeEmbedBlockComponentStory.story = {
 
 export const VimeoBlockComponentStory = () => {
 	return (
-		<ContainerLayout
-			sideBorders={true}
+		<Section
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -883,7 +883,7 @@ export const VimeoBlockComponentStory = () => {
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>,
 			</div>
-		</ContainerLayout>
+		</Section>
 	);
 };
 VimeoBlockComponentStory.story = {
@@ -892,8 +892,8 @@ VimeoBlockComponentStory.story = {
 
 export const DocumentBlockComponentStory = () => {
 	return (
-		<ContainerLayout
-			sideBorders={true}
+		<Section
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -940,7 +940,7 @@ export const DocumentBlockComponentStory = () => {
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>
 			</div>
-		</ContainerLayout>
+		</Section>
 	);
 };
 DocumentBlockComponentStory.story = {
@@ -949,8 +949,8 @@ DocumentBlockComponentStory.story = {
 
 export const SoundCloudBlockComponentStory = () => {
 	return (
-		<ContainerLayout
-			sideBorders={true}
+		<Section
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -1019,7 +1019,7 @@ export const SoundCloudBlockComponentStory = () => {
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>,
 			</div>
-		</ContainerLayout>
+		</Section>
 	);
 };
 SoundCloudBlockComponentStory.story = {
@@ -1028,8 +1028,8 @@ SoundCloudBlockComponentStory.story = {
 
 export const SpotifyBlockComponentStory = () => {
 	return (
-		<ContainerLayout
-			sideBorders={true}
+		<Section
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -1084,7 +1084,7 @@ export const SpotifyBlockComponentStory = () => {
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>,
 			</div>
-		</ContainerLayout>
+		</Section>
 	);
 };
 
@@ -1094,8 +1094,8 @@ SpotifyBlockComponentStory.story = {
 
 export const TweetBlockComponentStory = () => {
 	return (
-		<ContainerLayout
-			sideBorders={true}
+		<Section
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -1135,7 +1135,7 @@ export const TweetBlockComponentStory = () => {
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>,
 			</div>
-		</ContainerLayout>
+		</Section>
 	);
 };
 TweetBlockComponentStory.story = {
@@ -1143,8 +1143,8 @@ TweetBlockComponentStory.story = {
 };
 export const InstagramBlockComponentStory = () => {
 	return (
-		<ContainerLayout
-			sideBorders={true}
+		<Section
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -1182,7 +1182,7 @@ export const InstagramBlockComponentStory = () => {
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>,
 			</div>
-		</ContainerLayout>
+		</Section>
 	);
 };
 InstagramBlockComponentStory.story = {
@@ -1190,8 +1190,8 @@ InstagramBlockComponentStory.story = {
 };
 export const MapBlockComponentStory = () => {
 	return (
-		<ContainerLayout
-			sideBorders={true}
+		<Section
+			showTopBorder={false}
 			title="Embedded Content"
 			centralBorder="full"
 		>
@@ -1245,7 +1245,7 @@ export const MapBlockComponentStory = () => {
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>
 			</div>
-		</ContainerLayout>
+		</Section>
 	);
 };
 MapBlockComponentStory.story = {
@@ -1253,10 +1253,10 @@ MapBlockComponentStory.story = {
 };
 export const VineBlockComponentStory = () => {
 	return (
-		<ContainerLayout
-			sideBorders={true}
+		<Section
 			title="Embedded Content"
 			centralBorder="full"
+			showTopBorder={false}
 		>
 			<div
 				css={css`
@@ -1297,7 +1297,7 @@ export const VineBlockComponentStory = () => {
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>
 			</div>
-		</ContainerLayout>
+		</Section>
 	);
 };
 VineBlockComponentStory.story = {

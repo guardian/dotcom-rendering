@@ -19,6 +19,7 @@ type Props = {
  * @param [imagePositionOnMobile] - Defaults to "left"
  * @param [imageSize] - Defaults to "medium"
  * @param [supportingContent] - Defaults to undefined, set to trail.supportingContent if you want this card to show sublinks.
+ * @param [trailText] - Defailts to undefined, set to trail.trailTrext if you want this card to show trail text.
  */
 export const FrontCard = (props: Props) => {
 	const { trail, ...cardProps } = props;

@@ -6,7 +6,7 @@ export default {
 	title: 'Components/DocumentBlockComponent',
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			max-width: 620px;
@@ -19,7 +19,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const documentEmbed = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p>Scribd Document</p>
 			<DocumentBlockComponent
 				embedUrl="https://www.scribd.com/embeds/431975393/content"
@@ -39,7 +39,7 @@ export const documentEmbed = () => {
 				isTracking={false}
 				isMainMedia={false}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 documentEmbed.story = { name: 'document embed' };
