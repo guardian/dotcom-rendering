@@ -73,6 +73,8 @@ const headline = (format: ArticleFormat): Colour => {
 		return neutral[10];
 	} else if (format.design === ArticleDesign.Interview) {
 		return neutral[0];
+	} else if (format.design === ArticleDesign.Analysis) {
+		return news[800];
 	}
 
 	return neutral[100];
@@ -180,6 +182,10 @@ const richLinkSvgDark = (format: ArticleFormat): Colour => {
 const standfirst = ({ design, theme }: ArticleFormat): Colour => {
 	if (design === ArticleDesign.DeadBlog) {
 		return neutral[93];
+	}
+
+	if (design === ArticleDesign.Analysis) {
+		return news[800];
 	}
 
 	if (design === ArticleDesign.LiveBlog) {
@@ -583,6 +589,15 @@ const footerDark = (_format: ArticleFormat): Colour => neutral[0];
 
 const signUpFormDark =  (_format: ArticleFormat): Colour => neutral[10];
 
+const articleContent = (format: ArticleFormat): string => {
+	switch (format.design) {
+		case ArticleDesign.Analysis:
+			return news[800];
+		default:
+			return neutral[100];
+	}
+};
+
 // ----- API ----- //
 
 const background = {
@@ -627,6 +642,7 @@ const background = {
 	tagDark,
 	pinnedPost,
 	signUpFormDark,
+	articleContent,
 };
 
 // ----- Exports ----- //
