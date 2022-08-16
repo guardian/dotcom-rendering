@@ -3,16 +3,15 @@ import { boolean, withKnobs } from '@storybook/addon-knobs';
 import { EmailSignup } from './EmailSignup';
 import { Section } from './Section';
 
-const withContainerLayoutWrapper = (Story: typeof NewsTheme) => (
-	<ContainerLayout
+const withSectionWrapper = (Story: typeof NewsTheme) => (
+	<Section
 		title="EmailSignup"
 		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
 		<Story />
-	</ContainerLayout>
+	</Section>
 );
 
 export default {
@@ -32,7 +31,7 @@ export default {
 			],
 		},
 	},
-	decorators: [withContainerLayoutWrapper, withKnobs],
+	decorators: [withSectionWrapper, withKnobs],
 };
 
 const hidePrivacyMessage = (): boolean => boolean('hidePrivacyMessage', false);
