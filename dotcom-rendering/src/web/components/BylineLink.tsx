@@ -1,8 +1,10 @@
+import { ArticleDesign } from '@guardian/libs';
 import { getBylineComponentsFromTokens, isContributor } from '../../lib/byline';
 
 type Props = {
 	byline: string;
 	tags: TagType[];
+	format: ArticleFormat;
 };
 
 const applyCleverOrderingForMatching = (titles: string[]): string[] => {
@@ -59,10 +61,13 @@ export const bylineAsTokens = (byline: string, tags: TagType[]): string[] => {
 	return byline.split(regex);
 };
 
-const ContributorLink: React.FC<{
+const ContributorLink = ({
+	contributor,
+	contributorTagId,
+}: {
 	contributor: string;
 	contributorTagId: string;
-}> = ({ contributor, contributorTagId }) => (
+}) => (
 	<a
 		rel="author"
 		data-link-name="auto tag link"
@@ -72,14 +77,23 @@ const ContributorLink: React.FC<{
 	</a>
 );
 
-export const BylineLink = ({ byline, tags }: Props) => {
+function removeComma(bylinePart: string) {
+	return bylinePart.startsWith(',')
+		? bylinePart.slice(1).trimStart()
+		: bylinePart;
+}
+
+export const BylineLink = ({ byline, tags, format }: Props) => {
 	const tokens = bylineAsTokens(byline, tags);
 
 	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
-
 	const renderedTokens = bylineComponents.map((bylineComponent) => {
 		if (typeof bylineComponent === 'string') {
-			return bylineComponent;
+			const displayString =
+				format.design === ArticleDesign.Analysis
+					? removeComma(bylineComponent)
+					: bylineComponent;
+			return displayString ? <span>{displayString}</span> : null;
 		}
 		return (
 			<ContributorLink
