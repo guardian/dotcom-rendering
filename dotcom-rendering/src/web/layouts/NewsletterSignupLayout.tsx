@@ -178,11 +178,7 @@ const getMainMediaCaptions = (
 			: undefined,
 	);
 
-export const NewsletterSignupLayout: React.FC<Props> = ({
-	CAPIArticle,
-	NAV,
-	format,
-}) => {
+export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		promotedNewsletter,
 		config: { host },
@@ -208,7 +204,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 		.find((caption) => !!caption && isValidUrl(caption));
 	const showNewsletterPreview = Boolean(newsletterPreviewUrl);
 
-	/** TODO: decide on the fallback value if not defined in newsletters API */
+	// TODO: decide on the fallback value if not defined in newsletters API
 	const newsletterRegionFocus =
 		promotedNewsletter?.regionalFocus ?? 'UK Focused';
 
@@ -507,7 +503,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 								isAdFreeUser={CAPIArticle.isAdFreeUser}
 								pageId={CAPIArticle.pageId}
 								isPaidContent={
-									CAPIArticle.config.isPaidContent || false
+									CAPIArticle.config.isPaidContent ?? false
 								}
 								showRelatedContent={
 									CAPIArticle.config.showRelatedContent
