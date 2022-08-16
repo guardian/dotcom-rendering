@@ -233,15 +233,7 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 	return (
 		<>
 			{format.design === ArticleDesign.Analysis && (
-				<p
-					css={css`
-						${headline.xxxsmall({
-							fontWeight: 'bold',
-						})};
-					`}
-				>
-					Analysis
-				</p>
+				<p css={titleStyles(format, palette)}>Analysis</p>
 			)}
 			<div
 				css={[
