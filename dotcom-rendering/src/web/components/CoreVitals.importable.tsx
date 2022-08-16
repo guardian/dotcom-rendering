@@ -4,7 +4,7 @@ import {
 	getCookie,
 	initCoreWebVitals,
 } from '@guardian/libs';
-import type { ServerSideTests } from '../../types/config';
+import type { ServerSideTestNames } from '../../types/config';
 import { useAB } from '../lib/useAB';
 
 export const CoreVitals = () => {
@@ -29,7 +29,7 @@ export const CoreVitals = () => {
 			ABTestAPI?.runnableTest(test),
 		);
 
-	const serverSideTestsToForceMetrics: Array<keyof ServerSideTests> = [
+	const serverSideTestsToForceMetrics: Array<ServerSideTestNames> = [
 		/* linter, please keep this array multi-line */
 	];
 

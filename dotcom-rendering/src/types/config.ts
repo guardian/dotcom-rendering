@@ -15,9 +15,10 @@ export interface CommercialConfigType {
 
 /** This type is not support by JSON-schema, it evaluates as `object` */
 export type ServerSideTests = {
-	[k: `${string}Variant`]: 'variant';
-	[k: `${string}Control`]: 'control';
+	[k: string]: 'variant' | 'control';
 };
+
+export type ServerSideTestNames = `${string}Control` | `${string}Variant`;
 
 /**
  * the config model will contain useful app/site
