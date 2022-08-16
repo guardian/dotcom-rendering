@@ -335,7 +335,7 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 			case ArticlePillar.Opinion:
 				return opinion[200];
 			case ArticlePillar.News:
-				return news[400];
+				return news[300];
 			default:
 				return pillarPalette[format.theme].dark;
 		}
@@ -776,7 +776,7 @@ const fillShareIcon = (format: ArticleFormat): string => {
 			case ArticlePillar.Culture:
 				return culture[350];
 			case ArticlePillar.News:
-				return news[400];
+				return news[300];
 			case ArticlePillar.Lifestyle:
 				return lifestyle[400];
 			case ArticlePillar.Sport:
@@ -852,7 +852,7 @@ const borderLiveBlock = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.DeadBlog) {
 		switch (format.theme) {
 			case ArticlePillar.News:
-				return news[400];
+				return news[300];
 			case ArticlePillar.Culture:
 				return culture[350];
 			case ArticlePillar.Lifestyle:
@@ -1013,7 +1013,7 @@ const hoverHeadlineByline = (format: ArticleFormat): string => {
 const textRichLink = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return news[400];
+			return news[300];
 		case ArticlePillar.Culture:
 			return culture[350];
 		case ArticlePillar.Lifestyle:
@@ -1044,7 +1044,7 @@ const borderRichLink: (format: ArticleFormat) => string = (format) => {
 	if (format) {
 		switch (format.theme) {
 			case ArticlePillar.News:
-				return news[400];
+				return news[300];
 			case ArticlePillar.Culture:
 				return culture[350];
 			case ArticlePillar.Lifestyle:
@@ -1105,7 +1105,7 @@ const borderFilterButton = (): string => neutral[60];
 const fillRichLink = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return news[400];
+			return news[300];
 		case ArticlePillar.Culture:
 			return culture[350];
 		case ArticlePillar.Lifestyle:
@@ -1231,7 +1231,7 @@ const backgroundKeyEventFromDesktop = (): string => neutral[93];
 const backgroundSummaryEventBullet = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return news[400];
+			return news[300];
 		case ArticlePillar.Sport:
 			return sport[400];
 		case ArticlePillar.Lifestyle:
@@ -1250,7 +1250,7 @@ const backgroundSummaryEventBullet = (format: ArticleFormat): string => {
 const hoverKeyEventLink = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return news[400];
+			return news[300];
 		case ArticlePillar.Sport:
 			return sport[400];
 		case ArticlePillar.Lifestyle:

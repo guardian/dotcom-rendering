@@ -65,7 +65,7 @@ export const pillarPalette_DO_NOT_USE: Record<
 > = {
 	[ArticlePillar.News]: {
 		dark: news[300],
-		main: news[400],
+		main: news[300],
 		bright: news[500],
 		pastel: news[600],
 		faded: news[800],
