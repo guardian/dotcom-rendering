@@ -151,18 +151,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					// There are some containers that have zero trails. We don't want to render these
 					if (trails.length === 0) return null;
 
-					// This is a legacy container used to add palette styling on Frontend. DCR ignores it
-					if (
-						collection.displayName ===
-						'Palette styles new do not delete'
-					) {
-						return null;
-					}
-
 					const ophanName = ophanComponentId(collection.displayName);
-					const ophanComponentLink = `container-${
-						index + 1
-					} | ${ophanName}`;
+					const ophanComponentLink = `container-${index} | ${ophanName}`;
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
@@ -186,13 +176,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<Section
 							key={collection.id}
 							title={collection.displayName}
-							// TODO: This logic should be updated, as this relies
-							// on the first container being 'palette styles do not delete'
-							showTopBorder={index > 1}
+							showTopBorder={index > 0}
 							padContent={false}
 							centralBorder="partial"
 							url={collection.href}
-							// same as above re 'palette styles' for index increment
 							ophanComponentLink={ophanComponentLink}
 							ophanComponentName={ophanName}
 							containerName={collection.collectionType}

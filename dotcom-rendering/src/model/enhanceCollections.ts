@@ -4,10 +4,19 @@ import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
 import { groupCards } from './groupCards';
 
+const supportedContainers = (collection: FECollectionType) => {
+	switch (collection.displayName) {
+		case 'Palette styles new do not delete':
+			return false;
+		default:
+			return true;
+	}
+};
+
 export const enhanceCollections = (
 	collections: FECollectionType[],
 ): DCRCollectionType[] => {
-	return collections.map((collection) => {
+	return collections.filter(supportedContainers).map((collection) => {
 		const { id, displayName, collectionType } = collection;
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
