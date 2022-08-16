@@ -132,7 +132,7 @@ export const Contributor = ({ byline, tags, format }: Props) => {
 						bylineColorStyles(palette, format),
 					]}
 				>
-					<BylineLink byline={byline} tags={tags} />
+					<BylineLink byline={byline} tags={tags} format={format} />
 				</div>
 			)}
 			{!!twitterHandle && (
