@@ -19,7 +19,14 @@ const AnalysisStandfirst: React.FC<Props> = ({ item }) => (
 		</p>
 		<DefaultStandfirst
 			item={item}
-			css={css(defaultStyles(getFormat(item)))}
+			css={css(
+				defaultStyles(getFormat(item)),
+				css`
+					p:first-child {
+						padding-top: 0;
+					}
+				`,
+			)}
 		/>
 	</>
 );
