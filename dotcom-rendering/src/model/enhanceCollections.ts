@@ -7,6 +7,8 @@ import { groupCards } from './groupCards';
 const supportedContainers = (collection: FECollectionType) => {
 	switch (collection.displayName) {
 		case 'Palette styles new do not delete':
+		case 'culture-treat':
+		case 'newsletter treat':
 			return false;
 		default:
 			return true;
@@ -15,6 +17,7 @@ const supportedContainers = (collection: FECollectionType) => {
 
 export const enhanceCollections = (
 	collections: FECollectionType[],
+	editionId: EditionId,
 ): DCRCollectionType[] => {
 	return collections.filter(supportedContainers).map((collection) => {
 		const { id, displayName, collectionType } = collection;
@@ -34,7 +37,7 @@ export const enhanceCollections = (
 			),
 			curated: enhanceCards(collection.curated, containerPalette),
 			backfill: enhanceCards(collection.backfill, containerPalette),
-			treats: enhanceTreats(collection.treats),
+			treats: enhanceTreats(collection.treats, editionId, displayName),
 			config: {
 				showDateHeader: collection.config.showDateHeader,
 			},

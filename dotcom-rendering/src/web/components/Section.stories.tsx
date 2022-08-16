@@ -295,10 +295,12 @@ export const TreatsStory = () => {
 				{
 					text: 'The treat text',
 					linkTo: '',
+					editionId: 'UK',
 				},
 				{
 					text: 'Another piece of text',
 					linkTo: '',
+					editionId: 'UK',
 				},
 			]}
 			showTopBorder={false}

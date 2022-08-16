@@ -25,10 +25,12 @@ export const Default = () => {
 					{
 						text: 'treat 1',
 						linkTo: '',
+						editionId: 'UK',
 					},
 					{
 						text: 'treat 2',
 						linkTo: '',
+						editionId: 'UK',
 					},
 				]}
 			/>

@@ -443,4 +443,9 @@ export type DCRSupportingContent = {
 export type TreatType = {
 	text: string;
 	linkTo: string;
+	editionId: EditionId;
+	imageUrl?: string;
+	altText?: string;
+	/** The container display name where this treat should show */
+	displayName?: string;
 };
