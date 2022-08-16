@@ -33,7 +33,7 @@ lazy val scalaApiModels = project.in(file("api-models") / "scala")
 	Compile / scroogeThriftDependencies ++= scroogeDependencies,
 
     libraryDependencies ++= Seq(
-      "org.apache.thrift" % "libthrift" % "0.12.0",
+      "org.apache.thrift" % "libthrift" % "0.16.0",
       "com.twitter" %% "scrooge-core" % "20.4.1",
       "com.gu" %% "content-api-models-scala" % contentApiModelsVersion
     ) ++ libraryDeps,
