@@ -96,12 +96,6 @@ const lightFont = css`
 `;
 
 const underlinedStyles = (colour: string) => css`
-	background-image: repeating-linear-gradient(
-		to bottom,
-		transparent,
-		transparent 47px,
-		${colour}
-	);
 	line-height: 48px;
 	background-size: 1rem 48px;
 	${until.tablet} {
