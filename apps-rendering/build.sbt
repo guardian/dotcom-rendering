@@ -1,9 +1,9 @@
 import ReleaseTransformations._
 
-val contentEntityVersion = "2.0.6"
-val contentAtomVersion = "3.2.2"
-val storyPackageVersion = "2.0.4"
-val contentApiModelsVersion = "17.1.1"
+val contentEntityVersion = "2.2.1"
+val contentAtomVersion = "3.4.0"
+val storyPackageVersion = "2.2.0"
+val contentApiModelsVersion = "17.3.0"
 
 val scroogeDependencies = Seq(
   "content-api-models",
@@ -33,8 +33,8 @@ lazy val scalaApiModels = project.in(file("api-models") / "scala")
 	Compile / scroogeThriftDependencies ++= scroogeDependencies,
 
     libraryDependencies ++= Seq(
-      "org.apache.thrift" % "libthrift" % "0.12.0",
-      "com.twitter" %% "scrooge-core" % "20.4.1",
+      "org.apache.thrift" % "libthrift" % "0.15.0",
+      "com.twitter" %% "scrooge-core" % "22.1.0",
       "com.gu" %% "content-api-models-scala" % contentApiModelsVersion
     ) ++ libraryDeps,
 
