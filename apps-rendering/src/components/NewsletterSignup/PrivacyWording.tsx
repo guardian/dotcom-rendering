@@ -4,6 +4,7 @@ import { css } from '@emotion/react';
 import { neutral, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
@@ -27,6 +28,20 @@ const termsStyle = css`
 		color: ${neutral[0]};
 		font-weight: bold;
 	}
+
+	${darkModeCss`
+		color: ${neutral[60]};
+
+		a {
+			color: ${neutral[86]};
+			:hover {
+				color: ${neutral[86]};
+			}
+		}
+		strong {
+			color: ${neutral[86]};
+		}
+	`}
 `;
 
 const PrivacyWording: FC<Props> = ({ useCaptcha }) => {

@@ -18,6 +18,7 @@ import type { FC } from 'react';
 import EmailSignupForm from './EmailSignupForm';
 import PrivacyWording from './PrivacyWording';
 import SvgNewsletter from './SvgNewsletter';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
@@ -36,6 +37,12 @@ const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 	${from.tablet} {
 		padding: ${remSpace[2]} ${remSpace[3]};
 	}
+
+	${darkModeCss`
+		background-color: ${neutral[10]};
+		border-color: ${neutral[86]};
+		color: ${neutral[86]};
+	`}
 `;
 
 const stackBelowTabletStyles = css`
