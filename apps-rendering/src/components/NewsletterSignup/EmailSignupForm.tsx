@@ -9,6 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { Button, Label, TextInput } from '@guardian/source-react-components';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
@@ -32,6 +33,7 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 		console.log({ newsletterId });
 	};
 
+	// TO DO - check what the hover color should be on the button (if any)
 	return (
 		<>
 			<Label
@@ -39,6 +41,10 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 				cssOverrides={css`
 					div {
 						${textSans.xsmall({ fontWeight: 'bold' })};
+
+						${darkModeCss`
+							color: ${neutral[86]};
+						`}
 					}
 				`}
 			/>
@@ -54,6 +60,12 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 						margin-top: 0;
 						margin-bottom: ${remSpace[2]};
 						flex-basis: ${pxToRem(335)}rem;
+
+						${darkModeCss`
+							background-color: transparent;
+							border-color: ${neutral[60]};
+							color: ${neutral[86]};
+						`}
 					`}
 				/>
 				<Button
@@ -65,6 +77,14 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 						margin-bottom: ${remSpace[2]};
 						flex-basis: ${pxToRem(118)}rem;
 						justify-content: center;
+
+						${darkModeCss`
+							background-color: ${neutral[86]};
+							color: ${neutral[7]};
+							&:hover {
+								background-color: ${neutral[93]};
+							}
+						`}
 					`}
 				>
 					Sign up
