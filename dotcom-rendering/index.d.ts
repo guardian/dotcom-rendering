@@ -509,7 +509,7 @@ interface CAPIArticleType {
 		trails: import('src/types/trails').CAPITrailType[];
 		heading: string;
 	};
-	onwards?: CAPIOnwardsType[];
+	onwards?: import('./src/types/onwards').CAPIOnwardsType[];
 	beaconURL: string;
 	isCommentable: boolean;
 	commercialProperties: CommercialProperties;
@@ -695,29 +695,6 @@ interface Topic {
 }
 
 type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
-
-/**
- * Onwards
- */
-type CAPIOnwardsType = {
-	heading: string;
-	trails: import('src/types/trails').CAPITrailType[];
-	description?: string;
-	url?: string;
-	onwardsType: OnwardsType;
-	format: CAPIFormat;
-	isCuratedContent?: boolean;
-};
-
-type OnwardsType =
-	| 'series'
-	| 'more-on-this-story'
-	| 'related-stories'
-	| 'related-content'
-	| 'more-media-in-section'
-	| 'more-galleries'
-	| 'curated-content'
-	| 'default-onwards'; // We should never see this in the analytics data!
 
 interface GADataType {
 	pillar: LegacyPillar;

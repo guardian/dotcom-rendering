@@ -12,6 +12,7 @@ import {
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
 import type { Branding } from '../../types/branding';
+import type { OnwardsType } from '../../types/onwards';
 import type { TrailType } from '../../types/trails';
 import { decidePalette } from '../lib/decidePalette';
 import { formatAttrString } from '../lib/formatAttrString';
