@@ -2,13 +2,9 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticlePillar } from '@guardian/libs';
-import {
-	background,
-	breakpoints,
-	from,
-	neutral,
-} from '@guardian/source-foundations';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
+import { ArticleDesign, ArticleFormat, ArticlePillar } from '@guardian/libs';
+import { breakpoints, from } from '@guardian/source-foundations';
 import {
 	DottedLines,
 	StraightLines,
@@ -44,19 +40,15 @@ import {
 import { themeToPillarString } from 'themeStyles';
 
 // ----- Styles ----- //
+const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
+	background-color: ${background.articleContent(format)};
 
-const Styles = css`
-	background: ${neutral[97]};
-`;
-
-const DarkStyles = darkModeCss`
-    background: ${background.inverse};
+	${darkModeCss`
+        background-color: ${background.articleContentDark(format)}
+    `}
 `;
 
 const BorderStyles = css`
-	background: ${neutral[100]};
-	${darkModeCss`background: ${background.inverse};`}
-
 	${from.wide} {
 		width: ${breakpoints.wide}px;
 		margin: 0 auto;
@@ -82,6 +74,7 @@ interface Props {
 }
 
 const StandardLayout: FC<Props> = ({ item, children }) => {
+	const format = getFormat(item);
 	// client side code won't render an Epic if there's an element with this id
 	const epicContainer = item.shouldHideReaderRevenue ? null : (
 		<div css={articleWidthStyles}>
@@ -108,7 +101,7 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 	const matchScores = 'football' in item ? item.football : none;
 
 	return (
-		<main css={[Styles, DarkStyles]}>
+		<main css={backgroundStyles(format)}>
 			<article className="js-article" css={BorderStyles}>
 				{maybeRender(matchScores, (scores) => (
 					<div id="js-football-scores">
