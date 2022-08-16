@@ -29,7 +29,6 @@ type Props = {
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
 	filterKeyEvents?: boolean;
-	isKeyEventsCarousel?: boolean;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
 };
@@ -55,7 +54,6 @@ export const LiveBlogRenderer = ({
 	onFirstPage,
 	keyEvents,
 	filterKeyEvents = false,
-	isKeyEventsCarousel = false,
 	availableTopics,
 	selectedTopics,
 }: Props) => {
@@ -87,7 +85,7 @@ export const LiveBlogRenderer = ({
 					</PinnedPost>
 				</>
 			)}
-			{isKeyEventsCarousel && keyEvents?.length ? (
+			{switches.keyEventsCarousel && keyEvents?.length ? (
 				<Hide above="desktop">
 					<Island deferUntil="visible">
 						<KeyEventsCarousel

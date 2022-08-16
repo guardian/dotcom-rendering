@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
-import { ContainerLayout } from './ContainerLayout';
 import { EmailSignup } from './EmailSignup';
+import { Section } from './Section';
 
 const withContainerLayoutWrapper = (Story: typeof NewsTheme) => (
 	<ContainerLayout

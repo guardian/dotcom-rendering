@@ -24,7 +24,6 @@ import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
 import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { Header } from '../components/Header';
@@ -37,6 +36,7 @@ import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.imp
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
+import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -301,10 +301,11 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		<>
 			<div id="bannerandheader">
 				<Stuck>
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						showTopBorder={false}
 						showSideBorders={false}
-						padded={false}
+						padSides={false}
 						shouldCenter={false}
 					>
 						<HeaderAdSlot
@@ -312,14 +313,15 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							shouldHideAds={CAPIArticle.shouldHideAds}
 							display={format.display}
 						/>
-					</ElementContainer>
+					</Section>
 				</Stuck>
 				<SendToBack>
 					{format.theme !== ArticleSpecial.Labs && (
-						<ElementContainer
+						<Section
+							fullWidth={true}
 							showTopBorder={false}
 							showSideBorders={false}
-							padded={false}
+							padSides={false}
 							backgroundColour={brandBackground.primary}
 							element="header"
 						>
@@ -343,14 +345,14 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
 							/>
-						</ElementContainer>
+						</Section>
 					)}
 
-					<ElementContainer
-						showSideBorders={true}
+					<Section
+						fullWidth={true}
 						borderColour={brandLine.primary}
 						showTopBorder={false}
-						padded={false}
+						padSides={false}
 						backgroundColour={brandBackground.primary}
 						element="nav"
 					>
@@ -366,12 +368,13 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							}
 							editionId={CAPIArticle.editionId}
 						/>
-					</ElementContainer>
+					</Section>
 
 					{NAV.subNavSections && (
-						<ElementContainer
+						<Section
+							fullWidth={true}
 							backgroundColour={palette.background.article}
-							padded={false}
+							padSides={false}
 							element="aside"
 						>
 							<Island deferUntil="idle">
@@ -381,12 +384,13 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									format={format}
 								/>
 							</Island>
-						</ElementContainer>
+						</Section>
 					)}
 
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						backgroundColour={palette.background.article}
-						padded={false}
+						padSides={false}
 						showTopBorder={false}
 					>
 						<StraightLines
@@ -395,12 +399,13 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								display: block;
 							`}
 						/>
-					</ElementContainer>
+					</Section>
 				</SendToBack>
 			</div>
 
 			<main data-layout="CommentLayout">
-				<ElementContainer
+				<Section
+					fullWidth={true}
 					showTopBorder={false}
 					backgroundColour={palette.background.article}
 					element="article"
@@ -684,10 +689,11 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</div>
 						</GridItem>
 					</StandardGrid>
-				</ElementContainer>
+				</Section>
 
-				<ElementContainer
-					padded={false}
+				<Section
+					fullWidth={true}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
@@ -697,7 +703,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						position="merchandising-high"
 						display={format.display}
 					/>
-				</ElementContainer>
+				</Section>
 
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
@@ -707,7 +713,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				) : (
 					<>
 						{CAPIArticle.storyPackage && (
-							<ElementContainer>
+							<Section fullWidth={true}>
 								<Island deferUntil="visible">
 									<Carousel
 										heading={
@@ -720,7 +726,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										format={format}
 									/>
 								</Island>
-							</ElementContainer>
+							</Section>
 						)}
 
 						<Island
@@ -753,7 +759,11 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				)}
 
 				{!isPaidContent && showComments && (
-					<ElementContainer sectionId="comments" element="aside">
+					<Section
+						fullWidth={true}
+						sectionId="comments"
+						element="aside"
+					>
 						<DiscussionLayout
 							discussionApiUrl={
 								CAPIArticle.config.discussionApiUrl
@@ -771,32 +781,37 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
 							shouldHideAds={CAPIArticle.shouldHideAds}
 						/>
-					</ElementContainer>
+					</Section>
 				)}
 
 				{!isPaidContent && (
-					<ElementContainer data-print-layout="hide" element="aside">
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						element="aside"
+					>
 						<MostViewedFooterLayout
 							format={format}
 							sectionName={CAPIArticle.sectionName}
 							ajaxUrl={CAPIArticle.config.ajaxUrl}
 						/>
-					</ElementContainer>
+					</Section>
 				)}
 
-				<ElementContainer
-					padded={false}
+				<Section
+					fullWidth={true}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
 					element="aside"
 				>
 					<AdSlot position="merchandising" display={format.display} />
-				</ElementContainer>
+				</Section>
 			</main>
 
 			{NAV.subNavSections && (
-				<ElementContainer padded={false} element="aside">
+				<Section fullWidth={true} padSides={false} element="aside">
 					<Island deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
@@ -804,11 +819,12 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							format={format}
 						/>
 					</Island>
-				</ElementContainer>
+				</Section>
 			)}
 
-			<ElementContainer
-				padded={false}
+			<Section
+				fullWidth={true}
+				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
@@ -824,7 +840,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						CAPIArticle.contributionsServiceUrl
 					}
 				/>
-			</ElementContainer>
+			</Section>
 
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>

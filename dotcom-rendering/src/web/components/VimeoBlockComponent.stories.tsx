@@ -7,7 +7,7 @@ export default {
 	title: 'Components/VimeoComponent',
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			max-width: 620px;
@@ -20,7 +20,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const smallAspectRatio = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p>abc</p>
 			<VimeoBlockComponent
 				embedUrl="https://player.vimeo.com/video/327310297?app_id=122963"
@@ -37,14 +37,14 @@ export const smallAspectRatio = () => {
 				isMainMedia={false}
 			/>
 			<p>abc</p>
-		</Container>
+		</Wrapper>
 	);
 };
 smallAspectRatio.story = { name: 'with small aspect ratio' };
 
 export const largeAspectRatio = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p>abc</p>
 			<VimeoBlockComponent
 				embedUrl="https://player.vimeo.com/video/327310297?app_id=122963"
@@ -61,7 +61,7 @@ export const largeAspectRatio = () => {
 				isMainMedia={false}
 			/>
 			<p>abc</p>
-		</Container>
+		</Wrapper>
 	);
 };
 largeAspectRatio.story = {
@@ -71,7 +71,7 @@ largeAspectRatio.story = {
 
 export const verticalAspectRatio = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p>abc</p>
 			<VimeoBlockComponent
 				embedUrl="https://player.vimeo.com/video/265111898?app_id=122963"
@@ -88,7 +88,7 @@ export const verticalAspectRatio = () => {
 				isMainMedia={false}
 			/>
 			<p>abc</p>
-		</Container>
+		</Wrapper>
 	);
 };
 verticalAspectRatio.story = { name: 'with vertical aspect ratio' };

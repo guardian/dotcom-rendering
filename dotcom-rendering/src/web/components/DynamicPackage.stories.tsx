@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
 import type { DCRGroupedTrails } from 'src/types/front';
 import { trails } from '../../../fixtures/manual/trails';
-import { ContainerLayout } from './ContainerLayout';
+import { Section } from './Section';
 import { DynamicPackage } from './DynamicPackage';
 
 const defaultGroupedTrails: DCRGroupedTrails = {
@@ -32,13 +32,7 @@ export default {
 };
 
 export const Three = () => (
-	<ContainerLayout
-		title="DynamicPackage"
-		showTopBorder={true}
-		sideBorders={true}
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicPackage" padContent={false} centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -47,20 +41,14 @@ export const Three = () => (
 			}}
 			containerPalette="LongRunningPalette"
 		/>
-	</ContainerLayout>
+	</Section>
 );
 Three.story = {
 	name: 'With three standard cards',
 };
 
 export const Four = () => (
-	<ContainerLayout
-		title="DynamicPackage"
-		showTopBorder={true}
-		sideBorders={true}
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicPackage" padContent={false} centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -69,20 +57,14 @@ export const Four = () => (
 			}}
 			containerPalette="LongRunningPalette"
 		/>
-	</ContainerLayout>
+	</Section>
 );
 Four.story = {
 	name: 'With four standard cards',
 };
 
 export const Five = () => (
-	<ContainerLayout
-		title="DynamicPackage"
-		showTopBorder={true}
-		sideBorders={true}
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicPackage" padContent={false} centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -91,7 +73,7 @@ export const Five = () => (
 			}}
 			containerPalette="LongRunningPalette"
 		/>
-	</ContainerLayout>
+	</Section>
 );
 Five.story = {
 	name: 'With five standard cards',
@@ -102,10 +84,8 @@ export const Boosted3 = () => {
 	const remaining = [...trails].slice(1, 3);
 
 	return (
-		<ContainerLayout
+		<Section
 			title="DynamicPackage"
-			showTopBorder={true}
-			sideBorders={true}
 			padContent={false}
 			centralBorder="partial"
 		>
@@ -118,7 +98,7 @@ export const Boosted3 = () => {
 				showAge={true}
 				containerPalette="LongRunningPalette"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Boosted3.story = {
@@ -130,10 +110,8 @@ export const Boosted4 = () => {
 	const remaining = [...trails].slice(1, 4);
 
 	return (
-		<ContainerLayout
+		<Section
 			title="DynamicPackage"
-			showTopBorder={true}
-			sideBorders={true}
 			padContent={false}
 			centralBorder="partial"
 		>
@@ -146,7 +124,7 @@ export const Boosted4 = () => {
 				showAge={true}
 				containerPalette="LongRunningPalette"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Boosted4.story = {
@@ -158,10 +136,8 @@ export const Boosted5 = () => {
 	const remaining = [...trails].slice(1, 5);
 
 	return (
-		<ContainerLayout
+		<Section
 			title="DynamicPackage"
-			showTopBorder={true}
-			sideBorders={true}
 			padContent={false}
 			centralBorder="partial"
 		>
@@ -174,7 +150,7 @@ export const Boosted5 = () => {
 				showAge={true}
 				containerPalette="LongRunningPalette"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Boosted5.story = {
@@ -182,13 +158,7 @@ Boosted5.story = {
 };
 
 export const OneSnapThreeStandard = () => (
-	<ContainerLayout
-		title="DynamicPackage"
-		showTopBorder={true}
-		sideBorders={true}
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicPackage" padContent={false} centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -197,20 +167,14 @@ export const OneSnapThreeStandard = () => (
 			}}
 			containerPalette="LongRunningPalette"
 		/>
-	</ContainerLayout>
+	</Section>
 );
 OneSnapThreeStandard.story = {
 	name: 'With one snap - three standard cards',
 };
 
 export const ThreeSnapTwoStandard = () => (
-	<ContainerLayout
-		title="DynamicPackage"
-		showTopBorder={true}
-		sideBorders={true}
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicPackage" padContent={false} centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -219,20 +183,14 @@ export const ThreeSnapTwoStandard = () => (
 			}}
 			containerPalette="LongRunningPalette"
 		/>
-	</ContainerLayout>
+	</Section>
 );
 OneSnapThreeStandard.story = {
 	name: 'With three snaps - two standard cards',
 };
 
 export const ThreeSnapTwoStandard2ndBoosted = () => (
-	<ContainerLayout
-		title="DynamicPackage"
-		showTopBorder={true}
-		sideBorders={true}
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicPackage" padContent={false} centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -241,7 +199,7 @@ export const ThreeSnapTwoStandard2ndBoosted = () => (
 			}}
 			containerPalette="LongRunningPalette"
 		/>
-	</ContainerLayout>
+	</Section>
 );
 OneSnapThreeStandard.story = {
 	name: 'With three snaps (2nd boosted) - two standard cards',

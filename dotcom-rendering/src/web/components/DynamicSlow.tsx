@@ -52,7 +52,7 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 					/>
 				</LI>
 			</UL>
-			<UL direction="row-reverse" padBottom={true}>
+			<UL direction="row-reverse">
 				<LI percentage="50%" showTopMarginWhenStacked={true}>
 					<UL direction="row" wrapCards={true} showDivider={true}>
 						{bigCards.map((card, cardIndex) => {

@@ -6,7 +6,7 @@ export default {
 	title: 'Components/Treats',
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			width: 620px;
@@ -19,7 +19,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const Default = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Treats
 				treats={[
 					{
@@ -32,7 +32,7 @@ export const Default = () => {
 					},
 				]}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Default.story = { name: 'Default' };
