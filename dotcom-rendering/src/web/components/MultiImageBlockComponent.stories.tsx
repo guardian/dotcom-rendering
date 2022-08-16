@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { ContainerLayout } from './ContainerLayout';
 import { MultiImageBlockComponent } from './MultiImageBlockComponent';
 import { fourImages } from './MultiImageBlockComponent.mocks';
+import { Section } from './Section';
 
 const oneImage = fourImages.slice(0, 1);
 const twoImages = fourImages.slice(0, 2);
@@ -15,7 +15,7 @@ export default {
 
 export const SingleImage = () => {
 	return (
-		<ContainerLayout>
+		<Section showTopBorder={false} showSideBorders={false}>
 			<MultiImageBlockComponent
 				format={{
 					display: ArticleDisplay.Standard,
@@ -24,7 +24,7 @@ export const SingleImage = () => {
 				}}
 				images={oneImage}
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 SingleImage.story = {
@@ -33,7 +33,7 @@ SingleImage.story = {
 
 export const SingleImageWithCaption = () => {
 	return (
-		<ContainerLayout>
+		<Section showTopBorder={false} showSideBorders={false}>
 			<MultiImageBlockComponent
 				format={{
 					display: ArticleDisplay.Standard,
@@ -43,7 +43,7 @@ export const SingleImageWithCaption = () => {
 				images={oneImage}
 				caption="This is the caption for a single image"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 SingleImageWithCaption.story = {
@@ -52,7 +52,7 @@ SingleImageWithCaption.story = {
 
 export const SideBySide = () => {
 	return (
-		<ContainerLayout>
+		<Section showTopBorder={false} showSideBorders={false}>
 			<MultiImageBlockComponent
 				format={{
 					display: ArticleDisplay.Standard,
@@ -61,7 +61,7 @@ export const SideBySide = () => {
 				}}
 				images={twoImages}
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 SideBySide.story = {
@@ -70,7 +70,7 @@ SideBySide.story = {
 
 export const SideBySideWithCaption = () => {
 	return (
-		<ContainerLayout>
+		<Section showTopBorder={false} showSideBorders={false}>
 			<MultiImageBlockComponent
 				format={{
 					display: ArticleDisplay.Standard,
@@ -80,7 +80,7 @@ export const SideBySideWithCaption = () => {
 				images={twoImages}
 				caption="This is the caption for side by side"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 SideBySideWithCaption.story = {
@@ -89,7 +89,7 @@ SideBySideWithCaption.story = {
 
 export const OneAboveTwo = () => {
 	return (
-		<ContainerLayout>
+		<Section showTopBorder={false} showSideBorders={false}>
 			<MultiImageBlockComponent
 				format={{
 					display: ArticleDisplay.Standard,
@@ -98,7 +98,7 @@ export const OneAboveTwo = () => {
 				}}
 				images={threeImages}
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 OneAboveTwo.story = {
@@ -107,7 +107,7 @@ OneAboveTwo.story = {
 
 export const OneAboveTwoWithCaption = () => {
 	return (
-		<ContainerLayout>
+		<Section showTopBorder={false} showSideBorders={false}>
 			<MultiImageBlockComponent
 				format={{
 					display: ArticleDisplay.Standard,
@@ -117,7 +117,7 @@ export const OneAboveTwoWithCaption = () => {
 				images={threeImages}
 				caption="This is the caption for one above two"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 OneAboveTwoWithCaption.story = {
@@ -126,7 +126,7 @@ OneAboveTwoWithCaption.story = {
 
 export const GridOfFour = () => {
 	return (
-		<ContainerLayout>
+		<Section showTopBorder={false} showSideBorders={false}>
 			<MultiImageBlockComponent
 				format={{
 					display: ArticleDisplay.Standard,
@@ -135,7 +135,7 @@ export const GridOfFour = () => {
 				}}
 				images={fourImages}
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 GridOfFour.story = {
@@ -144,7 +144,7 @@ GridOfFour.story = {
 
 export const GridOfFourWithCaption = () => {
 	return (
-		<ContainerLayout>
+		<Section showTopBorder={false} showSideBorders={false}>
 			<MultiImageBlockComponent
 				format={{
 					display: ArticleDisplay.Standard,
@@ -154,7 +154,7 @@ export const GridOfFourWithCaption = () => {
 				images={fourImages}
 				caption="This is the caption for grid of four"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 GridOfFourWithCaption.story = {

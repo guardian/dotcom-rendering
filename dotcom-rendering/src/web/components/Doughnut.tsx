@@ -3,12 +3,12 @@ import { headline, text, textSans } from '@guardian/source-foundations';
 import { isLight } from '../lib/isLight';
 
 type Props = {
-	sections: Section[];
+	sections: SectionType[];
 	percentCutout?: number;
 	size?: number;
 };
 
-type Section = {
+type SectionType = {
 	label: string;
 	value: number;
 	color: string;
@@ -34,7 +34,7 @@ const labelStyles = (background: string) => css`
 	text-anchor: middle;
 `;
 
-const withoutZeroSections = (sections: Section[]) =>
+const withoutZeroSections = (sections: SectionType[]) =>
 	sections.filter((section) => section.value !== 0);
 
 export const Doughnut = ({

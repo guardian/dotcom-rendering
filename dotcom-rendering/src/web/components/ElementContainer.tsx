@@ -18,14 +18,14 @@ const bottomPadding = emoCss`
 	padding-bottom: ${space[9]}px;
 `;
 
-const sideBorders = (colour: string) => emoCss`
+const sideBorderStyles = (colour: string) => emoCss`
 	${from.tablet} {
 		border-left: 1px solid ${colour};
 		border-right: 1px solid ${colour};
 	}
 `;
 
-const topBorder = (colour: string) => emoCss`
+const topBorderStyles = (colour: string) => emoCss`
 	border-top: 1px solid ${colour};
 `;
 
@@ -59,6 +59,9 @@ type Props = {
 	containerName?: string;
 };
 
+/**
+ * @deprecated please use Section fullWidth={true}  instead
+ */
 export const ElementContainer = ({
 	sectionId,
 	showSideBorders = true,
@@ -83,8 +86,8 @@ export const ElementContainer = ({
 					id={sectionId}
 					css={[
 						shouldCenter && center,
-						showSideBorders && sideBorders(borderColour),
-						showTopBorder && topBorder(borderColour),
+						showSideBorders && sideBorderStyles(borderColour),
+						showTopBorder && topBorderStyles(borderColour),
 						innerBackgroundColour &&
 							setBackgroundColour(innerBackgroundColour),
 						padSides && sidePadding,

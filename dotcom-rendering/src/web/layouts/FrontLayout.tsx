@@ -9,14 +9,13 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
-import { ContainerLayout } from '../components/ContainerLayout';
-import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
+import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { DecideContainer } from '../lib/DecideContainer';
@@ -53,7 +52,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 			<div data-print-layout="hide" id="bannerandheader">
 				<>
 					<Stuck>
-						<ElementContainer
+						<Section
+							fullWidth={true}
 							showTopBorder={false}
 							showSideBorders={false}
 							padSides={false}
@@ -64,10 +64,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								shouldHideAds={false}
 								display={format.display}
 							/>
-						</ElementContainer>
+						</Section>
 					</Stuck>
 
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						showTopBorder={false}
 						showSideBorders={false}
 						padSides={false}
@@ -87,9 +88,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
 						/>
-					</ElementContainer>
-					<ElementContainer
-						showSideBorders={true}
+					</Section>
+					<Section
+						fullWidth={true}
 						borderColour={brandLine.primary}
 						showTopBorder={false}
 						padSides={false}
@@ -104,10 +105,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							}
 							editionId={front.editionId}
 						/>
-					</ElementContainer>
+					</Section>
 					{NAV.subNavSections && (
 						<>
-							<ElementContainer
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
 								backgroundColour={palette.background.article}
 								padSides={false}
 								element="aside"
@@ -119,8 +122,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										format={format}
 									/>
 								</Island>
-							</ElementContainer>
-							<ElementContainer
+							</Section>
+							<Section
+								fullWidth={true}
 								backgroundColour={palette.background.article}
 								padSides={false}
 								showTopBorder={false}
@@ -131,7 +135,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									`}
 									count={4}
 								/>
-							</ElementContainer>
+							</Section>
 						</>
 					)}
 				</>
@@ -162,7 +166,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
-							<ElementContainer
+							<Section
+								fullWidth={true}
 								padSides={false}
 								padBottom={true}
 								showTopBorder={false}
@@ -173,18 +178,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								element="section"
 							>
 								<Snap snapData={trails[0].snapData} />
-							</ElementContainer>
+							</Section>
 						);
 					}
 
 					return (
-						<ContainerLayout
+						<Section
 							key={collection.id}
 							title={collection.displayName}
 							// TODO: This logic should be updated, as this relies
 							// on the first container being 'palette styles do not delete'
 							showTopBorder={index > 1}
-							sideBorders={true}
 							padContent={false}
 							centralBorder="partial"
 							url={collection.href}
@@ -207,22 +211,27 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								containerPalette={collection.containerPalette}
 								showAge={collection.displayName === 'Headlines'}
 							/>
-						</ContainerLayout>
+						</Section>
 					);
 				})}
 
 				{!isPaidContent && (
-					<ElementContainer data-print-layout="hide" element="aside">
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						element="aside"
+					>
 						<MostViewedFooterLayout
 							format={format}
 							sectionName="" // {front.sectionName}
 							ajaxUrl={front.config.ajaxUrl}
 						/>
-					</ElementContainer>
+					</Section>
 				)}
 			</main>
 
-			<ElementContainer
+			<Section
+				fullWidth={true}
 				data-print-layout="hide"
 				padSides={false}
 				showTopBorder={false}
@@ -231,10 +240,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				element="aside"
 			>
 				<AdSlot position="merchandising" display={format.display} />
-			</ElementContainer>
+			</Section>
 
 			{NAV.subNavSections && (
-				<ElementContainer
+				<Section
+					fullWidth={true}
+					showTopBorder={false}
 					data-print-layout="hide"
 					padSides={false}
 					element="aside"
@@ -246,15 +257,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							format={format}
 						/>
 					</Island>
-				</ElementContainer>
+				</Section>
 			)}
 
-			<ElementContainer
+			<Section
+				fullWidth={true}
 				data-print-layout="hide"
 				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
+				showTopBorder={false}
 				element="footer"
 			>
 				<Footer
@@ -265,7 +278,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					editionId={front.editionId}
 					contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 				/>
-			</ElementContainer>
+			</Section>
 		</>
 	);
 };

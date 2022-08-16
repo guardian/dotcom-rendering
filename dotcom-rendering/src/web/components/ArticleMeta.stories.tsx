@@ -11,7 +11,7 @@ import {
 } from '../../../../common-rendering/src/fixtures/article';
 import { ArticleMeta } from './ArticleMeta';
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			width: 220px;
@@ -70,7 +70,7 @@ export default {
 
 export const ArticleStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -89,13 +89,13 @@ export const ArticleStory = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 
 export const BrandingStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				branding={{
 					sponsorName: 'Humanity United',
@@ -131,7 +131,7 @@ export const BrandingStory = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 
@@ -139,7 +139,7 @@ ArticleStory.story = { name: 'Article' };
 
 export const FeatureStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -158,14 +158,14 @@ export const FeatureStory = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 FeatureStory.story = { name: 'Feature' };
 
 export const FeatureWithMismatchedContributor = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -184,7 +184,7 @@ export const FeatureWithMismatchedContributor = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 FeatureWithMismatchedContributor.story = {
@@ -193,7 +193,7 @@ FeatureWithMismatchedContributor.story = {
 
 export const FeatureStoryWithSmallBylineImage = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -212,7 +212,7 @@ export const FeatureStoryWithSmallBylineImage = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 FeatureStoryWithSmallBylineImage.story = {
@@ -221,7 +221,7 @@ FeatureStoryWithSmallBylineImage.story = {
 
 export const SpecialReportStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -240,14 +240,14 @@ export const SpecialReportStory = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 SpecialReportStory.story = { name: 'SpecialReport' };
 
 export const CommentStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -266,14 +266,14 @@ export const CommentStory = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 CommentStory.story = { name: 'Comment' };
 
 export const InterviewStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -292,14 +292,14 @@ export const InterviewStory = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 InterviewStory.story = { name: 'Interview' };
 
 export const ImmersiveStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Immersive,
@@ -318,14 +318,14 @@ export const ImmersiveStory = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 ImmersiveStory.story = { name: 'Immersive' };
 
 export const TwoContributorsStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -344,7 +344,7 @@ export const TwoContributorsStory = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 TwoContributorsStory.story = { name: 'Feature, with two contributors' };
@@ -356,7 +356,7 @@ export const DeadBlogStory = () => {
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
 			}).map((format) => (
-				<Container>
+				<Wrapper>
 					<p>{getThemeNameAsString(format)}</p>
 					<ArticleMeta
 						format={format}
@@ -372,7 +372,7 @@ export const DeadBlogStory = () => {
 						ajaxUrl=""
 						showShareCount={true}
 					/>
-				</Container>
+				</Wrapper>
 			))}
 		</>
 	);
@@ -381,7 +381,7 @@ DeadBlogStory.story = { name: 'Deadblog - All pillars' };
 
 export const Dateline = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -400,7 +400,7 @@ export const Dateline = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Dateline.story = { name: 'With no secondary dateline' };

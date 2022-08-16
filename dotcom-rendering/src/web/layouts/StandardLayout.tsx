@@ -26,7 +26,6 @@ import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { GetMatchNav } from '../components/GetMatchNav.importable';
 import { GetMatchStats } from '../components/GetMatchStats.importable';
@@ -43,6 +42,7 @@ import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.imp
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
+import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
@@ -342,7 +342,8 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			<div data-print-layout="hide" id="bannerandheader">
 				<>
 					<Stuck>
-						<ElementContainer
+						<Section
+							fullWidth={true}
 							showTopBorder={false}
 							showSideBorders={false}
 							padSides={false}
@@ -353,10 +354,11 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								shouldHideAds={CAPIArticle.shouldHideAds}
 								display={format.display}
 							/>
-						</ElementContainer>
+						</Section>
 					</Stuck>
 					{format.theme !== ArticleSpecial.Labs && (
-						<ElementContainer
+						<Section
+							fullWidth={true}
 							showTopBorder={false}
 							showSideBorders={false}
 							padSides={false}
@@ -383,10 +385,10 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
 							/>
-						</ElementContainer>
+						</Section>
 					)}
-					<ElementContainer
-						showSideBorders={true}
+					<Section
+						fullWidth={true}
 						borderColour={brandLine.primary}
 						showTopBorder={false}
 						padSides={false}
@@ -402,11 +404,12 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							}
 							editionId={CAPIArticle.editionId}
 						/>
-					</ElementContainer>
+					</Section>
 					{NAV.subNavSections &&
 						format.theme !== ArticleSpecial.Labs && (
 							<>
-								<ElementContainer
+								<Section
+									fullWidth={true}
 									backgroundColour={
 										palette.background.article
 									}
@@ -420,8 +423,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											format={format}
 										/>
 									</Island>
-								</ElementContainer>
-								<ElementContainer
+								</Section>
+								<Section
+									fullWidth={true}
 									backgroundColour={
 										palette.background.article
 									}
@@ -434,7 +438,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											display: block;
 										`}
 									/>
-								</ElementContainer>
+								</Section>
 							</>
 						)}
 				</>
@@ -442,8 +446,8 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 			{format.theme === ArticleSpecial.Labs && (
 				<Stuck>
-					<ElementContainer
-						showSideBorders={true}
+					<Section
+						fullWidth={true}
 						showTopBorder={false}
 						backgroundColour={labs[400]}
 						borderColour={border.primary}
@@ -453,7 +457,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<Island deferUntil="idle">
 							<LabsHeader />
 						</Island>
-					</ElementContainer>
+					</Section>
 				</Stuck>
 			)}
 
@@ -462,7 +466,8 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			)}
 
 			<main data-layout="StandardLayout">
-				<ElementContainer
+				<Section
+					fullWidth={true}
 					data-print-layout="hide"
 					showTopBorder={false}
 					backgroundColour={palette.background.article}
@@ -769,9 +774,10 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</div>
 						</GridItem>
 					</StandardGrid>
-				</ElementContainer>
+				</Section>
 
-				<ElementContainer
+				<Section
+					fullWidth={true}
 					data-print-layout="hide"
 					padSides={false}
 					showTopBorder={false}
@@ -784,7 +790,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						position="merchandising-high"
 						display={format.display}
 					/>
-				</ElementContainer>
+				</Section>
 
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
@@ -794,7 +800,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				) : (
 					<>
 						{CAPIArticle.storyPackage && (
-							<ElementContainer>
+							<Section fullWidth={true}>
 								<Island deferUntil="visible">
 									<Carousel
 										heading={
@@ -807,7 +813,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										format={format}
 									/>
 								</Island>
-							</ElementContainer>
+							</Section>
 						)}
 
 						<Island
@@ -840,7 +846,8 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				)}
 
 				{!isPaidContent && showComments && (
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						sectionId="comments"
 						data-print-layout="hide"
 						element="section"
@@ -862,20 +869,25 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
 							shouldHideAds={CAPIArticle.shouldHideAds}
 						/>
-					</ElementContainer>
+					</Section>
 				)}
 
 				{!isPaidContent && (
-					<ElementContainer data-print-layout="hide" element="aside">
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						element="aside"
+					>
 						<MostViewedFooterLayout
 							format={format}
 							sectionName={CAPIArticle.sectionName}
 							ajaxUrl={CAPIArticle.config.ajaxUrl}
 						/>
-					</ElementContainer>
+					</Section>
 				)}
 
-				<ElementContainer
+				<Section
+					fullWidth={true}
 					data-print-layout="hide"
 					padSides={false}
 					showTopBorder={false}
@@ -884,11 +896,12 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					element="aside"
 				>
 					<AdSlot position="merchandising" display={format.display} />
-				</ElementContainer>
+				</Section>
 			</main>
 
 			{NAV.subNavSections && (
-				<ElementContainer
+				<Section
+					fullWidth={true}
 					data-print-layout="hide"
 					padSides={false}
 					element="aside"
@@ -900,10 +913,11 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							format={format}
 						/>
 					</Island>
-				</ElementContainer>
+				</Section>
 			)}
 
-			<ElementContainer
+			<Section
+				fullWidth={true}
 				data-print-layout="hide"
 				padSides={false}
 				backgroundColour={brandBackground.primary}
@@ -921,7 +935,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						CAPIArticle.contributionsServiceUrl
 					}
 				/>
-			</ElementContainer>
+			</Section>
 
 			<BannerWrapper data-print-layout="hide">
 				<Island deferUntil="idle" clientOnly={true}>

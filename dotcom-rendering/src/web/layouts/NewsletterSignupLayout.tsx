@@ -25,9 +25,7 @@ import { buildAdTargeting } from '../../lib/ad-targeting';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
-import { ContainerLayout } from '../components/ContainerLayout';
 import { DecideOnwards } from '../components/DecideOnwards';
-import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -39,6 +37,7 @@ import { NewsletterDetail } from '../components/NewsletterDetail';
 import { NewsletterFrequency } from '../components/NewsletterFrequency';
 import { NewsletterPrivacyMessage } from '../components/NewsletterPrivacyMessage';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { Section } from '../components/Section';
 import { SecureSignup } from '../components/SecureSignup';
 import { ShareIcons } from '../components/ShareIcons';
 import { Standfirst } from '../components/Standfirst';
@@ -217,7 +216,8 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
 				<Stuck>
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						showTopBorder={false}
 						showSideBorders={false}
 						padSides={false}
@@ -228,10 +228,11 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 							shouldHideAds={CAPIArticle.shouldHideAds}
 							display={format.display}
 						/>
-					</ElementContainer>
+					</Section>
 				</Stuck>
 
-				<ElementContainer
+				<Section
+					fullWidth={true}
 					showTopBorder={false}
 					showSideBorders={false}
 					padSides={false}
@@ -251,10 +252,10 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPIArticle.config.idApiUrl}
 					/>
-				</ElementContainer>
+				</Section>
 
-				<ElementContainer
-					showSideBorders={true}
+				<Section
+					fullWidth={true}
 					borderColour={brandLine.primary}
 					showTopBorder={false}
 					padSides={false}
@@ -272,13 +273,15 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 						}
 						editionId={CAPIArticle.editionId}
 					/>
-				</ElementContainer>
+				</Section>
 
 				{!!NAV.subNavSections && (
 					<>
-						<ElementContainer
+						<Section
+							fullWidth={true}
 							backgroundColour={palette.background.article}
 							padSides={false}
+							showTopBorder={false}
 							element="aside"
 						>
 							<Island deferUntil="idle">
@@ -288,8 +291,9 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 									format={format}
 								/>
 							</Island>
-						</ElementContainer>
-						<ElementContainer
+						</Section>
+						<Section
+							fullWidth={true}
 							backgroundColour={palette.background.article}
 							padSides={false}
 							showTopBorder={false}
@@ -300,7 +304,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 									display: block;
 								`}
 							/>
-						</ElementContainer>
+						</Section>
 					</>
 				)}
 			</div>
@@ -310,7 +314,9 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 			)}
 
 			<main data-layout="NewsletterSignupLayout">
-				<ContainerLayout
+				<Section
+					showTopBorder={false}
+					showSideBorders={false}
 					innerBackgroundColour={brandBackground.primary}
 					leftContent={
 						<div css={leftColWrapperStyle}>
@@ -339,11 +345,11 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 							<NewsletterBadge />
 						</span>
 					</div>
-				</ContainerLayout>
+				</Section>
 
-				<ContainerLayout
+				<Section
 					centralBorder="full"
-					sideBorders={true}
+					showTopBorder={false}
 					stretchRight={true}
 					leftContent={
 						<div css={topMarginStyle(space[4])}>
@@ -463,7 +469,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 					<div css={topMarginStyle()}>
 						<NewsletterPrivacyMessage />
 					</div>
-				</ContainerLayout>
+				</Section>
 
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
@@ -473,7 +479,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 				) : (
 					<>
 						{CAPIArticle.storyPackage && (
-							<ElementContainer>
+							<Section fullWidth={true} showTopBorder={false}>
 								<Island deferUntil="visible">
 									<Carousel
 										heading={
@@ -486,7 +492,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 										format={format}
 									/>
 								</Island>
-							</ElementContainer>
+							</Section>
 						)}
 
 						<Island
@@ -519,9 +525,11 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 				)}
 			</main>
 
-			<ElementContainer
+			<Section
+				fullWidth={true}
 				data-print-layout="hide"
 				padSides={false}
+				showTopBorder={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
@@ -537,7 +545,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 						CAPIArticle.contributionsServiceUrl
 					}
 				/>
-			</ElementContainer>
+			</Section>
 
 			<BannerWrapper data-print-layout="hide" />
 			<MobileStickyContainer data-print-layout="hide" />
