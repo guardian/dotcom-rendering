@@ -193,19 +193,21 @@ const hoverStyles = (palette: Palette) => {
 	`;
 };
 
-const titleStyles = css`
-	${headline.xxxsmall({
-		fontWeight: 'bold',
-	})};
-`;
-
 export const Standfirst = ({ format, standfirst }: Props) => {
 	const palette = decidePalette(format);
 
 	return (
 		<>
 			{format.design === ArticleDesign.Analysis && (
-				<p css={titleStyles}>Analysis</p>
+				<p
+					css={css`
+						${headline.xxxsmall({
+							fontWeight: 'bold',
+						})};
+					`}
+				>
+					Analysis
+				</p>
 			)}
 			<div
 				css={[
