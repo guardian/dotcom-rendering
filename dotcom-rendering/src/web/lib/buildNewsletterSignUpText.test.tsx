@@ -2,7 +2,9 @@ import { buildDetailText } from './buildNewsletterSignUpText';
 
 describe('buildDetailText', () => {
 	it('will return the fallback text if the input is not recognised', () => {
-		const output = buildDetailText('This is an arbitrary piece of text');
+		const output = buildDetailText(
+			'When we have something to report which is usually like every other week or something',
+		);
 		expect(output).toBe('Free newsletter');
 	});
 
@@ -16,5 +18,10 @@ describe('buildDetailText', () => {
 		expect(outputFortnightly).toBe('Free fortnightly newsletter');
 		expect(outputWeekly).toBe('Free weekly newsletter');
 		expect(outputMonthly).toBe('Free monthly newsletter');
+	});
+
+	it('will handle special cased values', () => {
+		expect(buildDetailText('every weekday')).toBe('Free daily newsletter');
+		expect(buildDetailText('Every Weekday ')).toBe('Free daily newsletter');
 	});
 });
