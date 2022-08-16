@@ -194,36 +194,47 @@ const hoverStyles = (palette: Palette) => {
 	`;
 };
 
+const titleStyles = css`
+	${headline.xxxsmall({
+		fontWeight: 'bold',
+	})};
+`;
+
 export const Standfirst = ({ format, standfirst }: Props) => {
 	const palette = decidePalette(format);
 
 	return (
-		<div
-			css={[
-				nestedStyles(format, palette),
-				standfirstStyles(format, palette),
-				hoverStyles(palette),
-			]}
-			className={
-				format.design === ArticleDesign.Interactive
-					? interactiveLegacyClasses.standFirst
-					: ''
-			}
-			dangerouslySetInnerHTML={{
-				__html: sanitise(standfirst, {
-					allowedTags: false, // Leave tags from CAPI alone
-					allowedAttributes: false, // Leave attributes from CAPI alone
-					transformTags: {
-						a: (tagName, attribs) => ({
-							tagName, // Just return anchors as is
-							attribs: {
-								...attribs, // Merge into the existing attributes
-								'data-link-name': 'in standfirst link', // Add the data-link-name for Ophan to anchors
-							},
-						}),
-					},
-				}),
-			}}
-		/>
+		<>
+			{format.design === ArticleDesign.Analysis && (
+				<p css={titleStyles}>Analysis</p>
+			)}
+			<div
+				css={[
+					nestedStyles(format, palette),
+					standfirstStyles(format, palette),
+					hoverStyles(palette),
+				]}
+				className={
+					format.design === ArticleDesign.Interactive
+						? interactiveLegacyClasses.standFirst
+						: ''
+				}
+				dangerouslySetInnerHTML={{
+					__html: sanitise(standfirst, {
+						allowedTags: false, // Leave tags from CAPI alone
+						allowedAttributes: false, // Leave attributes from CAPI alone
+						transformTags: {
+							a: (tagName, attribs) => ({
+								tagName, // Just return anchors as is
+								attribs: {
+									...attribs, // Merge into the existing attributes
+									'data-link-name': 'in standfirst link', // Add the data-link-name for Ophan to anchors
+								},
+							}),
+						},
+					}),
+				}}
+			/>
+		</>
 	);
 };
