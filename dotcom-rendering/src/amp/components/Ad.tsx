@@ -1,3 +1,4 @@
+import type { CommercialProperties } from '../../types/commercial';
 import type { EditionId } from '../../types/edition';
 import { adJson, stringify } from '../lib/ad-json';
 import type { RTCParameters } from '../lib/real-time-config';

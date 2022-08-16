@@ -280,15 +280,6 @@ interface SectionNielsenAPI {
 	apiID: string;
 }
 
-interface EditionCommercialProperties {
-	adTargeting: AdTargetParam[];
-	branding?: import('src/types/branding').Branding;
-}
-
-type CommercialProperties = {
-	[E in import('src/types/edition').EditionId]: EditionCommercialProperties;
-};
-
 interface ReaderRevenueCategories {
 	contribute: string;
 	subscribe: string;
@@ -512,7 +503,7 @@ interface CAPIArticleType {
 	onwards?: import('./src/types/onwards').CAPIOnwardsType[];
 	beaconURL: string;
 	isCommentable: boolean;
-	commercialProperties: CommercialProperties;
+	commercialProperties: import('./src/types/commercial').CommercialProperties;
 	starRating?: number;
 	trailText: string;
 	badge?: import('./src/types/badge').BadgeType;
