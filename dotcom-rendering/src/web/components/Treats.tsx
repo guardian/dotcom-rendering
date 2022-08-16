@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import {
 	border,
 	headline,
+	neutral,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
@@ -77,11 +78,11 @@ const ImageTreat = ({
 				<span
 					css={css`
 						${headline.xxxsmall({ fontWeight: 'bold' })};
-						background-color: #121212;
+						background-color: ${neutral[0]};
 						padding: 0 5px 4px;
 						box-decoration-break: clone;
 						position: relative;
-						color: #fff;
+						color: ${neutral[100]};
 					`}
 				>
 					{text}
