@@ -52,6 +52,8 @@ const chooseWrapper = (
 	format: ArticleFormat,
 	showMediaAboveHeadline?: boolean,
 ) => {
+	if (showMediaAboveHeadline) return noGutters;
+
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 			return immersiveWrapper;
@@ -59,11 +61,7 @@ const chooseWrapper = (
 			switch (format.design) {
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
-					if (showMediaAboveHeadline) {
-						return noGutters;
-					} else {
-						return '';
-					}
+					return '';
 				default:
 					return noGutters;
 			}
