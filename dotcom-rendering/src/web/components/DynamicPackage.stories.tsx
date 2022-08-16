@@ -31,6 +31,50 @@ export default {
 	},
 };
 
+export const One = () => (
+	<ContainerLayout
+		title="DynamicPackage"
+		showTopBorder={true}
+		sideBorders={true}
+		padContent={false}
+		centralBorder="partial"
+	>
+		<DynamicPackage
+			groupedTrails={{
+				...defaultGroupedTrails,
+				snap: [],
+				standard: [...trails].slice(0, 1),
+			}}
+			containerPalette="LongRunningPalette"
+		/>
+	</ContainerLayout>
+);
+One.story = {
+	name: 'With one standard card',
+};
+
+export const Two = () => (
+	<ContainerLayout
+		title="DynamicPackage"
+		showTopBorder={true}
+		sideBorders={true}
+		padContent={false}
+		centralBorder="partial"
+	>
+		<DynamicPackage
+			groupedTrails={{
+				...defaultGroupedTrails,
+				snap: [],
+				standard: [...trails].slice(0, 2),
+			}}
+			containerPalette="LongRunningPalette"
+		/>
+	</ContainerLayout>
+);
+Two.story = {
+	name: 'With two standard cards',
+};
+
 export const Three = () => (
 	<ContainerLayout
 		title="DynamicPackage"
@@ -183,6 +227,61 @@ export const Nine = () => (
 );
 Nine.story = {
 	name: 'With nine standard cards',
+};
+
+export const Boosted1 = () => {
+	const primary = [...trails].slice(0)[0];
+
+	return (
+		<ContainerLayout
+			title="DynamicPackage"
+			showTopBorder={true}
+			sideBorders={true}
+			padContent={false}
+			centralBorder="partial"
+		>
+			<DynamicPackage
+				groupedTrails={{
+					...defaultGroupedTrails,
+					snap: [],
+					standard: [{ ...primary, isBoosted: true }],
+				}}
+				showAge={true}
+				containerPalette="LongRunningPalette"
+			/>
+		</ContainerLayout>
+	);
+};
+Boosted1.story = {
+	name: 'With one standard card - boosted',
+};
+
+export const Boosted2 = () => {
+	const primary = [...trails].slice(0)[0];
+	const remaining = [...trails].slice(1, 2);
+
+	return (
+		<ContainerLayout
+			title="DynamicPackage"
+			showTopBorder={true}
+			sideBorders={true}
+			padContent={false}
+			centralBorder="partial"
+		>
+			<DynamicPackage
+				groupedTrails={{
+					...defaultGroupedTrails,
+					snap: [],
+					standard: [{ ...primary, isBoosted: true }, ...remaining],
+				}}
+				showAge={true}
+				containerPalette="LongRunningPalette"
+			/>
+		</ContainerLayout>
+	);
+};
+Boosted2.story = {
+	name: 'With two standard cards - boosted',
 };
 
 export const Boosted3 = () => {

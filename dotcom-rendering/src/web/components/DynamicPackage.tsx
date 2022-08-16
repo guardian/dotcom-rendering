@@ -70,6 +70,45 @@ const Card100 = ({
 	);
 };
 
+const Card75_Card25 = ({
+	cards,
+	containerPalette,
+	showAge,
+}: {
+	cards: TrailType[];
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+}) => {
+	if (cards.length < 2) return null;
+
+	return (
+		<UL direction="row">
+			<LI padSides={true} padBottomOnMobile={true} percentage="75%">
+				<FrontCard
+					trail={cards[0]}
+					containerPalette={containerPalette}
+					containerType="dynamic/package"
+					showAge={showAge}
+					headlineSize="large"
+					headlineSizeOnMobile="huge"
+					imagePosition="right"
+					imagePositionOnMobile="bottom"
+					imageSize="medium"
+					trailText={cards[0].trailText}
+				/>
+			</LI>
+			<LI padSides={true} padBottomOnMobile={false} percentage="25%">
+				<FrontCard
+					trail={cards[1]}
+					containerPalette={containerPalette}
+					containerType="dynamic/package"
+					showAge={showAge}
+				/>
+			</LI>
+		</UL>
+	);
+};
+
 const Card25_Card25_Card25_Card25 = ({
 	cards,
 	containerPalette,
@@ -403,8 +442,10 @@ export const DynamicPackage = ({
 	showAge,
 }: Props) => {
 	let layout:
-		| 'primaryBoosted'
-		| 'fourOrLessStandards'
+		| 'oneStandard'
+		| 'twoStandards'
+		| 'threeOrFourStandardsBoosted'
+		| 'threeOrFourStandards'
 		| 'fiveStandards'
 		| 'sixStandards'
 		| 'sevenStandards'
@@ -456,21 +497,64 @@ export const DynamicPackage = ({
 			secondSlice = cards.slice(0, 1);
 			thirdSlice = cards.slice(1);
 			break;
+		case 2:
+			layout = 'twoStandards';
+			firstSlice = snaps;
+			secondSlice = cards.slice(0, 2);
+			break;
+		case 1:
+			layout = 'oneStandard';
+			firstSlice = snaps;
+			secondSlice = cards.slice(0, 1);
+			break;
 		default:
 			if (cards[0].isBoosted) {
-				layout = 'primaryBoosted';
+				layout = 'threeOrFourStandardsBoosted';
 				firstSlice = snaps;
 				secondSlice = cards.slice(0, 1);
 				thirdSlice = cards.slice(1);
 			} else {
-				layout = 'fourOrLessStandards';
+				layout = 'threeOrFourStandards';
 				firstSlice = snaps;
 				secondSlice = cards;
 			}
 	}
 
 	switch (layout) {
-		case 'primaryBoosted':
+		case 'oneStandard':
+			return (
+				<>
+					<Snap100
+						snaps={firstSlice}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+					<Card100
+						cards={secondSlice}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</>
+			);
+		case 'twoStandards':
+			return (
+				<>
+					<Snap100
+						snaps={firstSlice}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+					{/* Card75_Card25 does not support the first card being boosted - on Frontend the 75% card would
+						receive a ginourmous headline size - however this broke the layout visually, so we decided not
+						to support boosting for the twoStandards layout */}
+					<Card75_Card25
+						cards={secondSlice}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</>
+			);
+		case 'threeOrFourStandardsBoosted':
 			return (
 				<>
 					<Snap100
@@ -490,7 +574,7 @@ export const DynamicPackage = ({
 					/>
 				</>
 			);
-		case 'fourOrLessStandards':
+		case 'threeOrFourStandards':
 			return (
 				<>
 					<Snap100
