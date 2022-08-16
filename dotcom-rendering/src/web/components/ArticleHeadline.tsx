@@ -492,7 +492,6 @@ export const ArticleHeadline = ({
 			switch (format.design) {
 				case ArticleDesign.Review:
 				case ArticleDesign.Recipe:
-
 				case ArticleDesign.Feature:
 					return (
 						<div
