@@ -41,7 +41,6 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
-import { KeyEventsContainer } from '../components/KeyEventsContainer';
 import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
@@ -199,21 +198,6 @@ const maxWidth = css`
 	}
 `;
 
-const sticky = css`
-	${from.desktop} {
-		position: sticky;
-		top: 10px;
-	}
-`;
-
-const keyEventsMargins = css`
-	margin-bottom: ${space[3]}px;
-	${from.desktop} {
-		margin-top: ${space[1]}px;
-		margin-bottom: 0;
-	}
-`;
-
 const sidePaddingDesktop = css`
 	${from.desktop} {
 		padding-left: ${space[5]}px;
@@ -304,16 +288,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		CAPIArticle.config.switches.automaticFilters &&
 		CAPIArticle.availableTopics;
 
-	/*
-	The topic bank on desktop will be positioned where we currently show the key events container.
-	This is dependent on a change made in PR #4896 [https://github.com/guardian/dotcom-rendering/pull/4896] where the key events container will be removed from the left column.
-	This change currently lives behind the key-events-carousel A/B test.
-	Until this change is moved from behind the a/b test, we need to add an additional condition
-	here to see if the user is within this test, meaning we can therefore position the filter bank in the empty space.
-	Once the key-event-carousel test is completed and this change is productionised, we can remove the final `showKeyEventsCarousel` condition.
-	*/
-	const showTopicFilterBank =
-		CAPIArticle.config.switches.automaticFilters && showKeyEventsCarousel;
+	const showTopicFilterBank = CAPIArticle.config.switches.automaticFilters;
 
 	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
 
@@ -773,24 +748,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										/>
 									</div>
 								</Hide>
-								{/* Key events */}
-								{!showKeyEventsCarousel && (
-									<div
-										css={[
-											!footballMatchUrl && sticky,
-											keyEventsMargins,
-											sidePaddingDesktop,
-										]}
-									>
-										<KeyEventsContainer
-											format={format}
-											keyEvents={CAPIArticle.keyEvents}
-											filterKeyEvents={
-												CAPIArticle.filterKeyEvents
-											}
-										/>
-									</div>
-								)}
 
 								{showTopicFilterBank &&
 									CAPIArticle.availableTopics && (
@@ -852,21 +809,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									)}
 									{isInFilteringBeta ? (
 										<div css={paddingBody}>
-											{!showKeyEventsCarousel &&
-											CAPIArticle.keyEvents.length ? (
-												<Hide above="desktop">
-													<Island deferUntil="visible">
-														<FilterKeyEventsToggle
-															filterKeyEvents={
-																CAPIArticle.filterKeyEvents
-															}
-															id="filter-toggle-mobile"
-														/>
-													</Island>
-												</Hide>
-											) : (
-												<></>
-											)}
 											<ArticleContainer format={format}>
 												{pagination.currentPage !==
 													1 && (
@@ -958,9 +900,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													}
 													filterKeyEvents={
 														CAPIArticle.filterKeyEvents
-													}
-													showKeyEventsCarousel={
-														showKeyEventsCarousel
 													}
 													availableTopics={
 														CAPIArticle.availableTopics
@@ -1021,21 +960,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											accordionTitle="Live feed"
 											context="liveFeed"
 										>
-											{!showKeyEventsCarousel &&
-											CAPIArticle.keyEvents.length ? (
-												<Hide above="desktop">
-													<Island deferUntil="visible">
-														<FilterKeyEventsToggle
-															filterKeyEvents={
-																CAPIArticle.filterKeyEvents
-															}
-															id="filter-toggle-mobile"
-														/>
-													</Island>
-												</Hide>
-											) : (
-												<></>
-											)}
 											<ArticleContainer format={format}>
 												{pagination.currentPage !==
 													1 && (
@@ -1127,9 +1051,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													}
 													filterKeyEvents={
 														CAPIArticle.filterKeyEvents
-													}
-													showKeyEventsCarousel={
-														showKeyEventsCarousel
 													}
 													availableTopics={
 														CAPIArticle.availableTopics
