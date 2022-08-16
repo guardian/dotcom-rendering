@@ -41,7 +41,6 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
-import { KeyEventsContainer } from '../components/KeyEventsContainer';
 import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
@@ -773,24 +772,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										/>
 									</div>
 								</Hide>
-								{/* Key events */}
-								{!showKeyEventsCarousel && (
-									<div
-										css={[
-											!footballMatchUrl && sticky,
-											keyEventsMargins,
-											sidePaddingDesktop,
-										]}
-									>
-										<KeyEventsContainer
-											format={format}
-											keyEvents={CAPIArticle.keyEvents}
-											filterKeyEvents={
-												CAPIArticle.filterKeyEvents
-											}
-										/>
-									</div>
-								)}
 
 								{showTopicFilterBank &&
 									CAPIArticle.availableTopics && (
