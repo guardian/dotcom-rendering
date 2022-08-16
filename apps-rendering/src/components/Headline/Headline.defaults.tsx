@@ -12,13 +12,9 @@ import { articleWidthStyles, darkModeCss } from 'styles';
 
 export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 	const baseStyles = css`
-		${headline.small()}
+		${standardFont}
 		color: ${text.headline(format)};
 		margin: 0;
-
-		${from.tablet} {
-			${headline.medium()}
-		}
 
 		${darkModeCss`
 			color: ${text.headlineDark(format)};
@@ -30,6 +26,18 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 			return css`
 				${baseStyles}
 				padding-bottom: ${remSpace[1]};
+			`;
+		case ArticleDesign.Analysis:
+			return css`
+				${baseStyles}
+				${articleWidthStyles}
+				${boldFont}
+				background-color: ${background.headline(format)};
+				padding-bottom: ${remSpace[6]};
+
+				${darkModeCss`
+					background-color: ${background.headlineDark(format)};
+				`}
 			`;
 		default:
 			return css`
@@ -48,6 +56,20 @@ interface DefaultProps {
 	item: Item;
 	styles: SerializedStyles;
 }
+
+export const standardFont = css`
+	${headline.small()};
+	${from.tablet} {
+		${headline.medium()};
+	}
+`;
+
+export const boldFont = css`
+	${headline.small({ fontWeight: 'bold' })};
+	${from.tablet} {
+		${headline.medium({ fontWeight: 'bold' })};
+	}
+`;
 
 export const DefaultHeadline: React.FC<DefaultProps> = ({ item, styles }) => (
 	<h1 css={styles}>
