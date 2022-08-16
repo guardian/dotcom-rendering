@@ -12,9 +12,13 @@ import { articleWidthStyles, darkModeCss } from 'styles';
 
 export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 	const baseStyles = css`
-		${standardFont}
+		${headline.small()}
 		color: ${text.headline(format)};
 		margin: 0;
+
+		${from.tablet} {
+			${headline.medium()}
+		}
 
 		${darkModeCss`
 			color: ${text.headlineDark(format)};
@@ -57,14 +61,7 @@ interface DefaultProps {
 	styles: SerializedStyles;
 }
 
-export const standardFont = css`
-	${headline.small()};
-	${from.tablet} {
-		${headline.medium()};
-	}
-`;
-
-export const boldFont = css`
+const boldFont = css`
 	${headline.small({ fontWeight: 'bold' })};
 	${from.tablet} {
 		${headline.medium({ fontWeight: 'bold' })};
