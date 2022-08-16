@@ -4,8 +4,10 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import DeadBlogStandfirst from './DeadBlogStandfirst';
+import GalleryStandfirst from './GalleryStandfirst';
 import ImmersiveLabsStandfirst from './ImmersiveLabsStandfirst';
 import ImmersiveStandfirst from './ImmersiveStandfirst';
+import InterviewStandfirst from './InterviewStandfirst';
 import LabsStandfirst from './LabsStandfirst';
 import LiveBlogStandfirst from './LiveBlogStandfirst';
 import MediaStandfirst from './MediaStandfirst';
@@ -26,7 +28,7 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 		) : (
 			<ImmersiveStandfirst
 				standfirst={item.standfirst}
-				format={getFormat(item)}
+				format={format}
 				byline={item.byline}
 				bylineHtml={item.bylineHtml}
 			/>
@@ -41,6 +43,12 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.DeadBlog:
 			return <DeadBlogStandfirst item={item} />;
 		case ArticleDesign.Gallery:
+			return (
+				<GalleryStandfirst
+					standfirst={item.standfirst}
+					format={format}
+				/>
+			);
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			return <MediaStandfirst item={item} />;
@@ -50,6 +58,8 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return <ReviewStandfirst item={item} />;
+		case ArticleDesign.Interview:
+			return <InterviewStandfirst item={item} />;
 		default:
 			return (
 				<DefaultStandfirst

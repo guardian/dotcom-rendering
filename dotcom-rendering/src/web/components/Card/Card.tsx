@@ -3,6 +3,12 @@ import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground, space } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import type {
+	DCRContainerPalette,
+	DCRContainerType,
+	DCRSnapType,
+	DCRSupportingContent,
+} from '../../../types/front';
 import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { Avatar } from '../Avatar';
@@ -30,6 +36,7 @@ export type Props = {
 	format: ArticleFormat;
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
+	headlineSizeOnMobile?: SmallHeadlineSize;
 	/** Even with design !== Comment, a piece can be opinion */
 	showQuotes?: boolean;
 	byline?: string;
@@ -41,7 +48,7 @@ export type Props = {
 	/** Size is ignored when position = 'top' because in that case the image flows based on width */
 	imageSize?: ImageSizeType;
 	trailText?: string;
-	avatar?: AvatarType;
+	avatarUrl?: string;
 	showClock?: boolean;
 	mediaType?: MediaType;
 	mediaDuration?: number;
@@ -163,6 +170,7 @@ export const Card = ({
 	format,
 	headlineText,
 	headlineSize,
+	headlineSizeOnMobile,
 	showQuotes,
 	byline,
 	showByline,
@@ -172,7 +180,7 @@ export const Card = ({
 	imagePositionOnMobile = 'left',
 	imageSize = 'small',
 	trailText,
-	avatar,
+	avatarUrl,
 	showClock,
 	mediaType,
 	mediaDuration,
@@ -241,7 +249,7 @@ export const Card = ({
 							subdued={true}
 							cssOverrides={css`
 								/* See: https://css-tricks.com/nested-links/ */
-								${getZIndex('card-nested-link')};
+								${getZIndex('card-nested-link')}
 								/* The following styles turn off those provided by Link */
 								color: inherit;
 								/* stylelint-disable-next-line property-disallowed-list */
@@ -271,6 +279,14 @@ export const Card = ({
 		return <Snap snapData={snapData} />;
 	}
 
+	// Decide what type of image to show, main media, avatar or none
+	let imageType: 'mainmedia' | 'avatar' | undefined;
+	if (imageUrl && avatarUrl) {
+		imageType = 'avatar';
+	} else if (imageUrl) {
+		imageType = 'mainmedia';
+	}
+
 	return (
 		<CardWrapper
 			format={format}
@@ -278,22 +294,25 @@ export const Card = ({
 			containerType={containerType}
 			isDynamo={isDynamo}
 		>
-			<CardLink
-				linkTo={linkTo}
-				dataLinkName={dataLinkName}
-				format={format}
-				containerPalette={containerPalette}
-			/>
+			<CardLink linkTo={linkTo} dataLinkName={dataLinkName} />
 			<CardLayout
-				imagePosition={imagePosition}
-				imagePositionOnMobile={imagePositionOnMobile}
+				imagePosition={imageUrl !== undefined ? imagePosition : 'top'}
+				imagePositionOnMobile={
+					imageUrl !== undefined ? imagePositionOnMobile : 'top'
+				}
 				minWidthInPixels={minWidthInPixels}
 			>
-				{imageUrl && (
+				{imageType === 'mainmedia' && (
 					<ImageWrapper
 						imageSize={imageSize}
-						imagePosition={imagePosition}
-						imagePositionOnMobile={imagePositionOnMobile}
+						imagePosition={
+							imageUrl !== undefined ? imagePosition : 'top'
+						}
+						imagePositionOnMobile={
+							imageUrl !== undefined
+								? imagePositionOnMobile
+								: 'top'
+						}
 					>
 						<img src={imageUrl} alt="" role="presentation" />
 					</ImageWrapper>
@@ -309,6 +328,7 @@ export const Card = ({
 								format={format}
 								containerPalette={containerPalette}
 								size={headlineSize}
+								sizeOnMobile={headlineSizeOnMobile}
 								showQuotes={showQuotes}
 								kickerText={
 									format.design === ArticleDesign.LiveBlog
@@ -342,12 +362,12 @@ export const Card = ({
 								/>
 							) : undefined}
 						</HeadlineWrapper>
-						{avatar && (
+						{imageType === 'avatar' && !!avatarUrl && (
 							<Hide when="above" breakpoint="tablet">
 								<AvatarContainer>
 									<Avatar
-										imageSrc={avatar.src}
-										imageAlt={avatar.alt}
+										imageSrc={avatarUrl}
+										imageAlt={byline ?? ''}
 										containerPalette={containerPalette}
 										format={format}
 									/>
@@ -357,7 +377,7 @@ export const Card = ({
 					</Flex>
 					{/* This div is needed to push this content to the bottom of the card */}
 					<div>
-						{trailText && (
+						{!!trailText && (
 							<TrailTextWrapper
 								containerPalette={containerPalette}
 								format={format}
@@ -369,12 +389,12 @@ export const Card = ({
 								/>
 							</TrailTextWrapper>
 						)}
-						{avatar && (
+						{imageType === 'avatar' && !!avatarUrl && (
 							<Hide when="below" breakpoint="tablet">
 								<AvatarContainer>
 									<Avatar
-										imageSrc={avatar.src}
-										imageAlt={avatar.alt}
+										imageSrc={avatarUrl}
+										imageAlt={byline ?? ''}
 										containerPalette={containerPalette}
 										format={format}
 									/>
@@ -403,7 +423,9 @@ export const Card = ({
 				<SupportingContent
 					supportingContent={supportingContent}
 					alignment={
-						imagePosition === 'top' || imagePosition === 'bottom'
+						imagePosition === 'top' ||
+						imagePosition === 'bottom' ||
+						imageUrl === undefined
 							? 'vertical'
 							: 'horizontal'
 					}

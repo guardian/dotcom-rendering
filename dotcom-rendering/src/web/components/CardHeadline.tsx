@@ -2,9 +2,17 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
-import { headline, space, textSans, until } from '@guardian/source-foundations';
+import {
+	between,
+	from,
+	headline,
+	space,
+	textSans,
+	until,
+} from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import React from 'react';
+import type { DCRContainerPalette } from '../../types/front';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { Byline } from './Byline';
@@ -20,6 +28,7 @@ type Props = {
 	showSlash?: boolean;
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
 	size?: SmallHeadlineSize;
+	sizeOnMobile?: SmallHeadlineSize;
 	byline?: string;
 	showByline?: boolean;
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
@@ -40,32 +49,22 @@ const fontStyles = ({
 	switch (size) {
 		case 'ginormous':
 			return css`
-				${headline.large(options)};
-				font-size: 50px;
-				${until.desktop} {
+				${from.desktop} {
 					${headline.large(options)};
+					font-size: 50px;
 				}
 			`;
 		case 'huge':
 			return css`
 				${headline.small(options)};
-				${until.desktop} {
-					${headline.xsmall(options)};
-				}
 			`;
 		case 'large':
 			return css`
 				${headline.xsmall(options)};
-				${until.desktop} {
-					${headline.xxsmall(options)};
-				}
 			`;
 		case 'medium':
 			return css`
 				${headline.xxsmall(options)};
-				${until.desktop} {
-					${headline.xxxsmall(options)};
-				}
 			`;
 		case 'small':
 			return css`
@@ -76,6 +75,49 @@ const fontStyles = ({
 				${headline.xxxsmall(options)};
 				font-size: 14px;
 			`;
+	}
+};
+
+const fontStylesOnMobile = ({
+	size,
+	fontWeight,
+}: {
+	size: SmallHeadlineSize;
+	fontWeight?: FontWeight;
+}) => {
+	const options: FontScaleArgs = {};
+	if (fontWeight) options.fontWeight = fontWeight;
+
+	switch (size) {
+		case 'ginormous':
+			return css`
+				${until.mobileLandscape} {
+					${headline.medium(options)};
+				}
+				${between.mobileLandscape.and.desktop} {
+					${headline.large(options)};
+				}
+			`;
+		case 'huge':
+			return css`
+				${until.desktop} {
+					${headline.xsmall(options)};
+				}
+			`;
+		case 'large':
+			return css`
+				${until.desktop} {
+					${headline.xxsmall(options)};
+				}
+			`;
+		case 'medium':
+			return css`
+				${until.desktop} {
+					${headline.xxxsmall(options)};
+				}
+			`;
+		default:
+			return undefined;
 	}
 };
 
@@ -217,6 +259,7 @@ export const CardHeadline = ({
 	showPulsingDot,
 	showSlash,
 	size = 'medium',
+	sizeOnMobile,
 	byline,
 	showByline,
 	showLine,
@@ -239,6 +282,11 @@ export const CardHeadline = ({
 									? 'bold'
 									: 'regular',
 						  }),
+					format.theme !== ArticleSpecial.Labs &&
+						fontStylesOnMobile({
+							size: sizeOnMobile || size,
+							fontWeight: containerPalette ? 'bold' : 'regular',
+						}),
 					format.design === ArticleDesign.Analysis &&
 						!containerPalette &&
 						underlinedStyles(
@@ -249,7 +297,7 @@ export const CardHeadline = ({
 				]}
 			>
 				<WithLink linkTo={linkTo}>
-					{kickerText && (
+					{!!kickerText && (
 						<Kicker
 							text={kickerText}
 							color={kickerColour}
@@ -271,7 +319,7 @@ export const CardHeadline = ({
 					</span>
 				</WithLink>
 			</h4>
-			{byline && showByline && (
+			{!!byline && showByline && (
 				<Byline
 					text={byline}
 					format={format}

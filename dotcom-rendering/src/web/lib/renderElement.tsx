@@ -17,6 +17,7 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
+import { EmailSignup } from '../components/EmailSignup';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
@@ -78,6 +79,7 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
+	isPinnedPost?: boolean;
 	showOverlayCaption?: boolean;
 	showMediaAboveHeadline?: boolean;
 };
@@ -133,6 +135,7 @@ export const renderElement = ({
 	isAdFreeUser,
 	switches,
 	isSensitive,
+	isPinnedPost,
 	showOverlayCaption,
 	showMediaAboveHeadline,
 }: Props): [boolean, JSX.Element] => {
@@ -189,7 +192,7 @@ export const renderElement = ({
 					credit={element.credit}
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={element.shouldLimitWidth}
-					isOverlayed={element.isOverlayed}
+					isOverlaid={element.isOverlaid}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
@@ -272,6 +275,7 @@ export const renderElement = ({
 							isMainMedia={isMainMedia}
 							source={element.source}
 							sourceDomain={element.sourceDomain}
+							isPinnedPost={isPinnedPost}
 						/>
 					</Island>,
 				];
@@ -452,6 +456,18 @@ export const renderElement = ({
 					key={index}
 					images={element.images}
 					caption={element.caption}
+				/>,
+			];
+		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
+			return [
+				true,
+				<EmailSignup
+					identityName={element.newsletter.identityName}
+					description={element.newsletter.description}
+					name={element.newsletter.name}
+					frequency={element.newsletter.frequency}
+					successDescription={element.newsletter.successDescription}
+					theme={element.newsletter.theme}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
@@ -795,6 +811,7 @@ export const RenderArticleElement = ({
 	isAdFreeUser,
 	isSensitive,
 	switches,
+	isPinnedPost,
 	showOverlayCaption,
 	showMediaAboveHeadline,
 }: Props) => {
@@ -817,6 +834,7 @@ export const RenderArticleElement = ({
 		switches,
 		showOverlayCaption,
 		showMediaAboveHeadline,
+		isPinnedPost,
 	});
 
 	if (!ok) {

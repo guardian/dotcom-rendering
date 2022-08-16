@@ -7,6 +7,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import { getSoleContributor } from '../../lib/byline';
 import TwitterIcon from '../../static/icons/twitter.svg';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
@@ -102,19 +103,16 @@ const bylineStyles = (format: ArticleFormat) => css`
 	}
 `;
 
-export const Contributor: React.FC<{
-	author: AuthorType;
+type Props = {
+	byline: string;
 	tags: TagType[];
 	format: ArticleFormat;
-}> = ({ author, tags, format }) => {
-	if (!author.byline) {
-		return null;
-	}
+};
 
+export const Contributor = ({ byline, tags, format }: Props) => {
 	const palette = decidePalette(format);
 
-	const onlyOneContributor: boolean =
-		tags.filter((tag) => tag.type === 'Contributor').length === 1;
+	const { twitterHandle } = getSoleContributor(tags, byline) ?? {};
 
 	return (
 		<address
@@ -134,17 +132,17 @@ export const Contributor: React.FC<{
 						bylineColorStyles(palette, format),
 					]}
 				>
-					<BylineLink byline={author.byline} tags={tags} />
+					<BylineLink byline={byline} tags={tags} />
 				</div>
 			)}
-			{onlyOneContributor && author.twitterHandle && (
+			{!!twitterHandle && (
 				<div css={[twitterHandleStyles, twitterHandleColour(palette)]}>
 					<TwitterIcon />
 					<a
-						href={`https://www.twitter.com/${author.twitterHandle}`}
-						aria-label={`@${author.twitterHandle} on Twitter`}
+						href={`https://www.twitter.com/${twitterHandle}`}
+						aria-label={`@${twitterHandle} on Twitter`}
 					>
-						@{author.twitterHandle}
+						@{twitterHandle}
 					</a>
 				</div>
 			)}

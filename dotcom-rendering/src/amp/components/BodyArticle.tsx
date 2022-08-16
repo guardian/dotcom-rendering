@@ -59,7 +59,7 @@ const decideBackground = (design: Design, pillar: ArticleTheme): string => {
 	}
 };
 
-const body = (pillar: ArticlePillar, design: Design) => {
+const body = (pillar: ArticleTheme, design: Design) => {
 	return css`
 		background-color: ${decideBackground(design, pillar)};
 		${bulletStyle(pillar)}

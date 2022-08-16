@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
 import { ArticlePillar } from '@guardian/libs';
 import { joinUrl } from '../../lib/joinUrl';
-import { Carousel } from './Carousel';
-import { ElementContainer } from './ElementContainer';
-import { OnwardsData } from './OnwardsData';
-import { OnwardsLayout } from './OnwardsLayout';
+import { FetchOnwardsData } from './FetchOnwardsData.importable';
+import { Section } from './Section';
 
 type PillarForContainer =
 	| 'headlines'
@@ -202,15 +200,13 @@ export const OnwardsUpper = ({
 	);
 
 	let url;
-	let ophanComponentName: OphanComponentName = 'default-onwards';
+	let onwardsType: OnwardsType = 'default-onwards';
 
 	if (!showRelatedContent) {
 		// Then don't show related content
 		// This is the first priority for deciding whether to include related content
 	} else if (hasStoryPackage) {
-		// Always fetch the story package if it exists
-		url = joinUrl([ajaxUrl, 'story-package', `${pageId}.json?dcr=true`]);
-		ophanComponentName = 'more-on-this-story';
+		// We server render story packages so do nothing
 	} else if (isAdFreeUser && isPaidContent) {
 		// Don't show any related content (other than story packages) for
 		// adfree users when the content is paid for
@@ -227,7 +223,7 @@ export const OnwardsUpper = ({
 			'series',
 			`${seriesTag.id}.json?dcr&shortUrl=${shortUrlId}`,
 		]);
-		ophanComponentName = 'series';
+		onwardsType = 'series';
 	} else if (!hasRelated) {
 		// There is no related content to show
 	} else if (tagToFilterBy) {
@@ -257,43 +253,40 @@ export const OnwardsUpper = ({
 		}
 
 		url = joinUrl([ajaxUrl, popularInTagUrl]);
-		ophanComponentName = 'related-content';
+		onwardsType = 'related-content';
 	} else {
 		// Default to generic related endpoint
 		const relatedUrl = `/related/${pageId}.json?dcr=true`;
 
 		url = joinUrl([ajaxUrl, relatedUrl]);
-		ophanComponentName = 'related-stories';
+		onwardsType = 'related-stories';
 	}
 
 	const curatedDataUrl = showRelatedContent
 		? getContainerDataUrl(pillar, editionId, ajaxUrl)
-		: null;
+		: undefined;
 
 	return (
 		<div css={onwardsWrapper}>
-			{url && (
-				<ElementContainer>
-					<OnwardsData
+			{!!url && (
+				<Section fullWidth={true}>
+					<FetchOnwardsData
 						url={url}
 						limit={8}
-						ophanComponentName={ophanComponentName}
-						Container={isPaidContent ? OnwardsLayout : Carousel}
+						onwardsType={onwardsType}
 						format={format}
 					/>
-				</ElementContainer>
+				</Section>
 			)}
-			{!isPaidContent && curatedDataUrl && (
-				<ElementContainer showTopBorder={true}>
-					<OnwardsData
+			{!!(!isPaidContent && curatedDataUrl) && (
+				<Section fullWidth={true}>
+					<FetchOnwardsData
 						url={curatedDataUrl}
 						limit={20}
-						ophanComponentName="curated-content"
-						Container={Carousel}
-						isCuratedContent={true}
+						onwardsType="curated-content"
 						format={format}
 					/>
-				</ElementContainer>
+				</Section>
 			)}
 		</div>
 	);

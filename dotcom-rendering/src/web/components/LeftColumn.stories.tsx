@@ -1,10 +1,10 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { ArticleContainer } from './ArticleContainer';
-import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { Placeholder } from './Placeholder';
 import { RightColumn } from './RightColumn';
+import { Section } from './Section';
 
 export default {
 	component: LeftColumn,
@@ -13,7 +13,7 @@ export default {
 
 export const PartialRightBorder = () => {
 	return (
-		<ElementContainer>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="partial">
 					<>
@@ -38,14 +38,14 @@ export const PartialRightBorder = () => {
 					<>Right column content</>
 				</RightColumn>
 			</Flex>
-		</ElementContainer>
+		</Section>
 	);
 };
 PartialRightBorder.story = { name: 'Partial right border' };
 
 export const RightBorder = () => {
 	return (
-		<ElementContainer>
+		<Section fullWidth={true}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<>The border to my right should stretch the whole height</>
@@ -67,7 +67,7 @@ export const RightBorder = () => {
 					<>Right column content</>
 				</RightColumn>
 			</Flex>
-		</ElementContainer>
+		</Section>
 	);
 };
 RightBorder.story = { name: 'Full right border' };

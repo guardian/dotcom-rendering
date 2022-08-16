@@ -12,7 +12,7 @@ import {
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
+import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Breakpoint } from '@guardian/source-foundations';
@@ -77,7 +77,6 @@ import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { backgroundColor, darkModeCss } from 'styles';
 import {
-	getThemeStyles,
 	themeFromString,
 	themeToPillar,
 	themeToPillarString,
@@ -266,7 +265,11 @@ const textElement =
 		switch (node.nodeName) {
 			case 'P': {
 				const showDropCap = shouldShowDropCap(text, format, isEditions);
-				return h(Paragraph, { key, format, showDropCap }, children);
+				return h(
+					Paragraph,
+					{ key, format, showDropCap, isEditions },
+					children,
+				);
 			}
 			case '#text':
 				return transform(text, format);
@@ -329,10 +332,8 @@ const isBlog = (format: ArticleFormat): boolean =>
 	format.design === ArticleDesign.DeadBlog;
 
 const borderFromFormat = (format: ArticleFormat): string => {
-	const { liveblogKicker } = getThemeStyles(format.theme);
-
 	const styles = `
-		border-bottom: 0.0625rem solid ${liveblogKicker};
+		border-bottom: 0.0625rem solid ${border.standfirstLink(format)};
 		text-decoration: none;
 	`;
 
@@ -423,10 +424,10 @@ const imageRenderer = (
 ): ReactNode => {
 	const { caption, credit, nativeCaption } = element;
 	return h(BodyImage, {
-		caption: map<DocumentFragment, ReactNode>((cap) => [
-			h(Caption, { format, caption: cap }),
+		caption: some([
+			h(Caption, { format, caption }),
 			h(Credit, { credit, format, key }),
-		])(caption),
+		]),
 		format: format,
 		key,
 		supportsDarkMode: true,
@@ -587,9 +588,7 @@ const mediaAtomRenderer = (
 	const figcaption = h(FigCaption, {
 		format: format,
 		supportsDarkMode: true,
-		children: map((cap: DocumentFragment) =>
-			h(Caption, { caption: cap, format }),
-		)(caption),
+		children: some(h(Caption, { caption, format })),
 	});
 	return styledH('figure', figureAttributes, [
 		isEditions

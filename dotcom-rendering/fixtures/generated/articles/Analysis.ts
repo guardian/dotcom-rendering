@@ -365,6 +365,11 @@ export const Analysis: CAPIArticleType = {
 						url: '/football',
 						children: [
 							{
+								title: "Women's Euro 2022",
+								url: '/football/women-s-euro-2022',
+								longTitle: 'football/women-s-euro-2022',
+							},
+							{
 								title: 'Live scores',
 								url: '/football/live',
 								longTitle: 'football/live',
@@ -565,6 +570,11 @@ export const Analysis: CAPIArticleType = {
 						title: 'Football',
 						url: '/football',
 						children: [
+							{
+								title: "Women's Euro 2022",
+								url: '/football/women-s-euro-2022',
+								longTitle: 'football/women-s-euro-2022',
+							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -1274,7 +1284,7 @@ export const Analysis: CAPIArticleType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2021/07/27/STL_&_GMG_Modern_Slavery_Act_Statement_2021.pdf',
+					url: 'https://uploads.guim.co.uk/2022/07/20/STL_Modern_Slavery_Statement_2022.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1381,7 +1391,237 @@ export const Analysis: CAPIArticleType = {
 	},
 	hasStoryPackage: true,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
+	storyPackage: {
+		heading: 'More on this story',
+		trails: [
+			{
+				url: 'https://www.theguardian.com/world/2020/jun/27/micheal-martin-irish-taoiseach-coalition-fianna-fail-fine-gael',
+				linkText:
+					'Micheál Martin becomes Irish taoiseach in historic coalition',
+				showByline: false,
+				byline: 'Molly Blackall and agencies',
+				image: 'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=300&quality=85&auto=format&fit=max&s=de7acc6ba1d17ac4f62486c0bd389f45',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=300&quality=85&auto=format&fit=max&s=de7acc6ba1d17ac4f62486c0bd389f45',
+					'460': 'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=460&quality=85&auto=format&fit=max&s=47e501f3f89c12283597a9b2a893cd98',
+				},
+				ageWarning: '2 years',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2020-06-27T14:53:17.000Z',
+				headline:
+					'Micheál Martin becomes Irish taoiseach in historic coalition',
+				shortUrl: 'https://www.theguardian.com/p/e79et',
+			},
+			{
+				url: 'https://www.theguardian.com/world/2020/jun/26/irish-government-to-be-formed-after-greens-vote-yes-to-coalition',
+				linkText:
+					'Ireland to form new government after Green party votes for coalition',
+				showByline: false,
+				byline: 'PA Media',
+				image: 'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=9dd8d486eaaa0475d873738f00a3992e',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=9dd8d486eaaa0475d873738f00a3992e',
+					'460': 'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=60336706f5f85058c7b9676adf263572',
+				},
+				ageWarning: '2 years',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2020-06-26T21:03:02.000Z',
+				headline:
+					'Ireland to form new government after Green party votes for coalition',
+				shortUrl: 'https://www.theguardian.com/p/e7572',
+			},
+			{
+				url: 'https://www.theguardian.com/world/2020/jun/15/fine-gael-fianna-fail-and-greens-agree-deal-to-form-irish-coalition',
+				linkText:
+					'Fine Gael, Fianna Fáil and Greens agree deal to form Irish coalition',
+				showByline: false,
+				byline: 'Rory Carroll Ireland correspondent',
+				image: 'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5486bc1d1e8ffd2be9676e6c1b4b31db',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5486bc1d1e8ffd2be9676e6c1b4b31db',
+					'460': 'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=8fd8c760b6624d89ccd26f9eb512fb08',
+				},
+				ageWarning: '2 years',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2020-06-15T11:59:47.000Z',
+				headline:
+					'Fine Gael, Fianna Fáil and Greens agree deal to form Irish coalition',
+				shortUrl: 'https://www.theguardian.com/p/e49gh',
+			},
+			{
+				url: 'https://www.theguardian.com/world/2020/may/26/irish-taoiseach-leo-varadkar-denies-picnic-with-friends-was-covid-19-rule-breach',
+				linkText:
+					'Irish taoiseach Leo Varadkar denies picnic with friends was Covid-19 rule breach',
+				showByline: false,
+				byline: 'Rory Carroll Ireland correspondent',
+				image: 'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=300&quality=85&auto=format&fit=max&s=129882ff7e6d9bdea3456d4877c4a96f',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=300&quality=85&auto=format&fit=max&s=129882ff7e6d9bdea3456d4877c4a96f',
+					'460': 'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=460&quality=85&auto=format&fit=max&s=60b5912cc4074d8502b9cae4becce57c',
+				},
+				ageWarning: '2 years',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2020-05-26T05:00:11.000Z',
+				headline:
+					'Irish taoiseach Leo Varadkar denies picnic with friends was Covid-19 rule breach',
+				shortUrl: 'https://www.theguardian.com/p/evan3',
+			},
+			{
+				url: 'https://www.theguardian.com/world/2020/apr/14/ireland-fine-gael-fianna-fail-close-forming-coalition-government',
+				linkText:
+					'Ireland’s Fine Gael and Fianna Fáil close to forming coalition government',
+				showByline: false,
+				byline: 'Rory Carroll Ireland correspondent',
+				image: 'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5454ff771e5bba8ffd226eaf92c43043',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5454ff771e5bba8ffd226eaf92c43043',
+					'460': 'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=3d1f820bf4d1734bcd9b4f393fe5b8a1',
+				},
+				ageWarning: '2 years',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2020-04-14T17:25:20.000Z',
+				headline:
+					'Ireland’s Fine Gael and Fianna Fáil close to forming coalition government',
+				shortUrl: 'https://www.theguardian.com/p/dk7xx',
+			},
+			{
+				url: 'https://www.theguardian.com/world/2020/feb/24/micheal-martin-faces-a-battle-of-conscience-to-form-irish-government',
+				linkText:
+					'Micheál Martin faces a battle of conscience to form Irish government',
+				showByline: false,
+				byline: 'Rory Carroll Ireland correspondent',
+				image: 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=90c72aef08c983e57113372b4c764ed2',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=90c72aef08c983e57113372b4c764ed2',
+					'460': 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=37850ebf202911c3e6514774643da7f1',
+				},
+				ageWarning: '2 years',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Analysis',
+				format: {
+					design: 'AnalysisDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2020-02-24T05:00:11.000Z',
+				headline:
+					'Micheál Martin faces a battle of conscience to form Irish government',
+				shortUrl: 'https://www.theguardian.com/p/dayh8',
+			},
+			{
+				url: 'https://www.theguardian.com/world/2020/feb/20/irish-parliament-set-for-stalemate-in-attempt-to-form-new-government',
+				linkText:
+					'Varadkar resigns as Irish government enters stalemate',
+				showByline: false,
+				byline: 'Rory Carroll Ireland correspondent',
+				image: 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=300&quality=85&auto=format&fit=max&s=41b5c9371d1c654a683fd4579aa86f26',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=300&quality=85&auto=format&fit=max&s=41b5c9371d1c654a683fd4579aa86f26',
+					'460': 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=460&quality=85&auto=format&fit=max&s=a184021c28b1447a010f3067860b29fa',
+				},
+				ageWarning: '2 years',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2020-02-20T23:28:27.000Z',
+				headline:
+					'Varadkar resigns as Irish government enters stalemate',
+				shortUrl: 'https://www.theguardian.com/p/dayq6',
+			},
+			{
+				url: 'https://www.theguardian.com/world/2020/feb/17/fine-gael-fianna-fail-coalition-unthinkable-says-sinn-fein-leader-mary-lou-mcdonald',
+				linkText:
+					'Varadkar prepares to go into opposition as deadlock continues',
+				showByline: false,
+				byline: 'Rory Carroll Ireland correspondent',
+				image: 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=216097ca457fbb71772b7e4d4c9706f4',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=216097ca457fbb71772b7e4d4c9706f4',
+					'460': 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=46afd5a1dfecab703860022d16a77c9f',
+				},
+				ageWarning: '2 years',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2020-02-17T22:37:30.000Z',
+				headline:
+					'Varadkar prepares to go into opposition as deadlock continues',
+				shortUrl: 'https://www.theguardian.com/p/da75n',
+			},
+			{
+				url: 'https://www.theguardian.com/commentisfree/2020/feb/16/even-as-ireland-economy-booms-sinn-fein-win-is-bitter-cry-for-equality',
+				linkText:
+					'Ireland’s shock poll result was a vote against the success of globalisation | Fintan O’Toole',
+				showByline: true,
+				byline: 'Fintan O’Toole',
+				image: 'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=300&quality=85&auto=format&fit=max&s=d3a5ee06927c171df87e52cf31455ca6',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=300&quality=85&auto=format&fit=max&s=d3a5ee06927c171df87e52cf31455ca6',
+					'460': 'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=460&quality=85&auto=format&fit=max&s=c82d670a83a0644d74e7e8c451095703',
+				},
+				isLiveBlog: false,
+				pillar: 'opinion',
+				designType: 'Comment',
+				format: {
+					design: 'CommentDesign',
+					theme: 'OpinionPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2020-02-16T07:00:22.000Z',
+				headline:
+					'Ireland’s shock poll result was a vote against the success of globalisation',
+				shortUrl: 'https://www.theguardian.com/p/d9kx7',
+			},
+		],
+	},
 	headline: 'Irish general election: who won and what happens now?',
+	byline: 'Rory Carroll Ireland correspondent',
 	isLegacyInteractive: false,
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
@@ -1643,7 +1883,7 @@ export const Analysis: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '9a253143-64fb-4a32-833f-fbc7538428f1',
+			elementId: '4dcd53f8-4308-45e6-8673-4e40d0a3677c',
 		},
 	],
 	webPublicationDate: '2020-02-10T12:31:25.000Z',
@@ -1654,17 +1894,17 @@ export const Analysis: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Who won Ireland’s general election?</h2>',
-					elementId: '746b8fef-84dd-4df3-9a45-ccce1561d655',
+					elementId: '9b86ab02-34ea-410c-8892-62502fcb782f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Sinn Féin <a href="https://www.theguardian.com/world/2020/feb/09/sinn-fein-to-try-to-form-ruling-coalition-after-irish-election-success">won the most first-preference votes</a> – 24.5% – making it the most popular party and a strong contender to be included in the next government. <a href="https://www.theguardian.com/world/2020/jan/31/leo-varadkar-paradox-feted-abroad-can-pm-arrest-polls-slump-in-ireland-election">Leo Varadkar</a>’s ruling Fine Gael party slid to 20.8%, coming third, and Fianna Fáil, the main opposition party, also slipped, falling to 22.1% in second place. The rest of the vote was split between the Greens, on 7.1%, and small leftwing parties and independent candidates.</p>',
-					elementId: '503716d8-692c-4430-8476-9487a200b82a',
+					elementId: '69461504-274a-4c09-9099-af1154e24f55',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Sinn Féin fielded too few candidates to fully translate its support into seats so Fianna Fáil is expected to be the biggest party in Dáil Éireann, the Irish parliament’s lower house, which has 160 members, when all seats are allocated under Ireland’s single transferrable vote system of proportional representation.</p>',
-					elementId: '1adc86f7-74c2-4580-a048-0facdcadad93',
+					elementId: '6c35fe73-661b-4250-848d-af73106df201',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
@@ -1672,32 +1912,32 @@ export const Analysis: CAPIArticleType = {
 					text: 'Ireland election: latest results',
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: 'e43a368a-cdb7-41a0-a756-d0f6f4ab6578',
+					elementId: '9ec3806c-d135-4176-b729-aea5ec34e668',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Current projections give Fianna Fáil around 42, with Sinn Féin and <a href="https://www.theguardian.com/world/fine-gael" data-component="auto-linked-tag">Fine Gael</a> each in the mid to high 30s. Full results are expected later on Monday or Tuesday.</p>',
-					elementId: '98182e0c-cfe8-49dd-b03b-afda1ef53015',
+					elementId: '7e042fe5-e481-4077-a1bc-f3f03e3d3ff7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Was Sinn Féin’s success a surprise?</h2>',
-					elementId: 'b0ff637a-9155-4c24-8c5b-47dbb0984276',
+					elementId: 'c37be457-30de-471f-87e6-9b38077b3fc6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>An opinion poll signalled it last week but the result is still a big shock. Fine Gael and Fianna Fáil, centrist rivals, dominated Irish politics for the past century, taking turns to rule. That era appears over.</p>',
-					elementId: '15f0b780-5bc8-4f2b-b496-f1c0d6c21f50',
+					elementId: '521b793d-8a38-48e2-a8b7-a1325c9bec9a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Is Varadkar going to lose power?</h2>',
-					elementId: '1ecc4ae7-b50f-4d28-a8a6-9add739685a3',
+					elementId: '552d269b-bda1-44e2-9b74-041a68ead44f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Very possibly, but there’s a chance he could hang on as taoiseach after negotiations between party leaders to form a coalition with 80 seats, the magic number for a parliamentary majority. Varadkar says he would be willing to lead Fine Gael in opposition.</p>',
-					elementId: '7a77bebf-6fbd-4f89-b528-4df8adaeda2d',
+					elementId: 'b2d4a46d-09e1-49f4-a4e2-30ce860ebcf9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.QABlockElement',
@@ -1705,62 +1945,62 @@ export const Analysis: CAPIArticleType = {
 					title: 'What are the main political parties in Ireland?',
 					html: '<p><a href="https://www.theguardian.com/politics/fine-gael">Fine Gael</a><br></p><p>Its name can be translated as family or tribe of the Irish. A centre-right party with a socially progressive tilt. In office since 2011, first led by Enda Kenny, then&nbsp;<a href="https://www.theguardian.com/world/leo-varadkar">Leo Varadkar</a>, with support from smaller coalition partners. Traces roots to Michael Collins and the winning side in Ireland’s 1922-23 civil war. The party traditionally advocates market economics and fiscal discipline. Appeals to the urban middle class and well-off farmers.</p><p><a href="https://www.theguardian.com/politics/fianna-fail">Fianna Fáil</a></p><p>Its name means Soldiers of Destiny. A centrist, ideologically malleable party that dominated Irish politics until it steered the Celtic Tiger economy over a cliff, prompting decade-long banishment to opposition benches. Under Micheál Martin, a nimble political veteran, it has clawed back support and may overtake Fine Gael as the biggest party and lead the next coalition government. Founded by Éamon de Valera, who backed the civil war’s losing side but turned Fianna Fáil into an election-winning machine.</p><p><a href="https://www.theguardian.com/politics/sinn-fein">Sinn Féin</a></p><p>Its name means We Ourselves, signifying Irish sovereignty. A leftwing republican party that competes in Northern Ireland as well as the Republic. Traces roots to 1905. Emerged in current form during the Troubles, when it was linked to the IRA. Peace in Northern Ireland helped Sinn Féin rebrand as a working-class advocate opposed to austerity. Under Mary Lou McDonald, a Dubliner without paramilitary baggage, Sinn Féin has become the third-biggest party, and its vote share surged in the 2020 election.&nbsp;</p><p>Others</p><p>Partnership with Fine Gael during post-Celtic Tiger austerity tainted the centre-left <b>Labour</b> party. The political arm of the trade union movement, it is led by Brendan Howlin, a former teacher and government minister.</p><p>The <b>Social Democrats</b> and <b>Solidarity-People Before Profit</b> are part of an alphabet soup of smaller, more leftwing parties. The <b>Greens</b>, wiped out in 2011 after a ruinous coalition with Fianna Fáil, have campaigned on the back of climate crisis anxiety and youth-led protests. Independent TDs have prospered in recent elections, turning some into outsized players in ruling coalitions. <b>Rory Carroll</b></p>',
 					credit: '',
-					elementId: '0d351f19-cbf6-42c8-a4d7-9974763628fa',
+					elementId: '60fd2b02-5ee8-4e60-8960-e0573a9dae42',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Why did Sinn Féin do so well?</h2>',
-					elementId: '90557e20-63a3-4d9e-bbd2-649f12200d7d',
+					elementId: 'de062015-5e28-4942-bbc8-b5f58a32114b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>It rode a wave of anger over homelessness, soaring rents, hospital waiting lists and and fraying public services. Its leader, <a href="https://www.theguardian.com/politics/2020/feb/07/mary-lou-mcdonald-sinn-fein-leader-kingmaker-ireland-election-ireland">Mary Lou McDonald</a>, and party colleagues such as Eoin Ó Broin and Pearse Doherty offered leftwing solutions, such as an ambitious public housing building programme, that enthused voters, especially those under 50.</p>',
-					elementId: 'b0c1e92a-5dfb-4a8d-9811-7cb5b235e7ac',
+					elementId: '38d1c6e6-ac25-4ca9-b011-91442dd954e8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Varadkar’s attempt to frame the election around his Brexit diplomacy and the humming economy fell flat. Fianna Fáil was contaminated by its confidence-and-supply deal that had propped up Varadkar’s minority administration, leaving Sinn Féin to cast itself as the agent of real change. Voters forgot, forgave or did not care about its past as the IRA’s political wing during the Troubles.</p>',
-					elementId: 'd26facf9-d88e-4491-bcd0-1aaf0a3bc239',
+					elementId: '0f78b188-ec8f-4451-8f6f-7b7a04b40d1c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>What happens next?</h2>',
-					elementId: 'dbb31e7d-0b2e-4e1d-891a-b6ac2549408c',
+					elementId: 'dc1e52bc-555d-4f3c-94ac-02f4efb07111',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Weeks – possibly months – of negotiations between party leaders. McDonald is floating an alliance of leftwing parties led by Sinn Féin but that’s unlikely – it would be far short of 80 seats. The only viable looking option entails an alliance between two of the three main parties plus perhaps the Greens.</p>',
-					elementId: '8297d5be-8e27-4a76-921c-cd15e87480a4',
+					elementId: 'bbbca39f-6477-4a4e-ae5d-b04740c265a0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Varadkar has ruled out a pact with Sinn Féin and floated a deal with Fianna Fáil. During the campaign the Fianna Fáil leader, Micheál Martin, ruled out entering government with Fine Gael or Sinn Féin but since Sunday has hinted he may do a deal with one or the other.</p>',
-					elementId: '74a040bc-6b32-49c9-a832-4f05af0110a5',
+					elementId: '2119a0e1-3c6f-4256-9662-83de9eb355bd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Expect shadow boxing. Sinn Féin will be very wary about entering government as a junior partner – a recipe for punishment at the next election, as other parties have discovered. Some suspect its preferred outcome is a Fianna Fáil-Fine Gael government – an unpopular continuation of the status quo that would consolidate Sinn Féin as leader-in-waiting of the subsequent government.</p>',
-					elementId: '1510dd69-41f5-40e5-9a63-aae57fd36e3a',
+					elementId: '1dc0dcdf-1836-4361-9651-fd074bb1db73',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For that reason Fianna Fáil will hesitate to do a deal with Fine Gael. But Fianna Fáil may oust Martin if he does not become taoiseach.</p>',
-					elementId: '10a1379d-d385-433c-9b7f-ecfbcd0de1ae',
+					elementId: 'b299b431-f6ac-4a98-8769-2524bbbd3cfe',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>One plausible outcome: deadlock, and another election.</p>',
-					elementId: '8f121275-d02b-4cd3-af97-3c1812181db1',
+					elementId: 'cba7b368-f087-4095-a2a1-cb6b0d694591',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Read more</strong></p>',
-					elementId: 'fe764ab9-a1ac-4488-b5cb-3ff55d42f501',
+					elementId: 'd90fd655-6b32-4673-b8a0-942c6297a93b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><a href="https://www.theguardian.com/politics/2020/feb/07/mary-lou-mcdonald-sinn-fein-leader-kingmaker-ireland-election-ireland">Mary Lou McDonald: Sinn Féin leader who may play Dublin kingmaker</a><br><a href="https://www.theguardian.com/world/2020/feb/08/sinn-fein-on-election-day-shane-obrien">‘It’s a sea change’: Sinn Féin dares to dream on election day</a><br><a href="https://www.theguardian.com/commentisfree/2020/jan/31/sinn-fein-ireland-left-election-ira">Opinion: Can Sinn Féin’s young voters finally pull Ireland to the left?</a><br><a href="https://www.theguardian.com/world/2020/jan/31/leo-varadkar-paradox-feted-abroad-can-pm-arrest-polls-slump-in-ireland-election">The Varadkar paradox: feted abroad, can PM arrest polls slump in Ireland?</a></p>',
-					elementId: '9f5ce3ca-8c88-4037-b98b-21b6eaba1308',
+					elementId: 'fe67e93d-0865-4572-8485-15fe439c1d99',
 				},
 			],
 			attributes: {

@@ -9,7 +9,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { headline, remSpace } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
-import { standfirstBackgroundColour } from 'editorialStyles';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { pipe } from 'lib';
@@ -22,7 +21,7 @@ const isNotBlog = (format: ArticleFormat): boolean =>
 	format.design !== ArticleDesign.DeadBlog;
 
 const darkStyles = (format: ArticleFormat): SerializedStyles => darkModeCss`
-    background: ${background.standfirstDark(format)};
+    background-color: ${background.standfirstDark(format)};
     color: ${text.standfirstDark(format)};
 
     a {
@@ -37,7 +36,7 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 	margin-bottom: ${remSpace[3]};
 	color: ${text.standfirst(format)};
 
-	${standfirstBackgroundColour(format)}
+	background-color: ${background.standfirst(format)};
 
 	p,
 	ul {
@@ -51,7 +50,7 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 
 	a {
 		text-decoration: none;
-		border-bottom: 0.0625rem solid ${border.standfirstLink(format)};
+		border-bottom: 0.0625rem solid ${border.standfirstBlogLink(format)};
 	}
 
 	${isNotBlog(format) && darkStyles(format)}

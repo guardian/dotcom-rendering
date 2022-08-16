@@ -1,12 +1,42 @@
-export const getContributorTags = (tags: TagType[]): TagType[] => {
-	return tags.filter((t) => t.type === 'Contributor');
+interface ContributorTag extends TagType {
+	type: 'Contributor';
+}
+
+export const isContributor = (tag: TagType): tag is ContributorTag =>
+	tag.type === 'Contributor';
+
+/**
+ * Get the sole contributor on an article.
+ *
+ * This can be used to display more information about them,
+ * such as their picture, bio or social media handle.
+ *
+ * An article has a sole contributor only if all of the following are true:
+ * - there is a byline which is not an empty string
+ * - the byline does not include the word “and”
+ * - there is a `Contributor` tag whose title is included in the byline
+ *
+ * @returns A sole contributor if there is one, `undefined` otherwise.
+ */
+export const getSoleContributor = (
+	tags: TagType[],
+	byline: string | undefined,
+): ContributorTag | undefined => {
+	if (!byline) return undefined;
+	if (byline.includes(' and ')) return undefined;
+
+	const soleContributor = tags
+		.filter(isContributor)
+		.find(({ title }) => byline.includes(title));
+
+	return soleContributor;
 };
 
 export const getContributorTagsForToken = (
 	tags: TagType[],
 	token: string,
-): TagType[] => {
-	return getContributorTags(tags).filter((t) => t.title === token);
+): ContributorTag[] => {
+	return tags.filter(isContributor).filter((t) => t.title === token);
 };
 
 type BylineComponent = { token: string; tag: TagType } | string;

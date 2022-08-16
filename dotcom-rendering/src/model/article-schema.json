@@ -96,6 +96,9 @@
                         "$ref": "#/definitions/MultiImageBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/NewsletterSignupBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/NumberedTitleBlockElement"
                     },
                     {
@@ -182,9 +185,10 @@
         "pagination": {
             "$ref": "#/definitions/Pagination"
         },
-        "author": {
-            "$ref": "#/definitions/AuthorType"
+        "byline": {
+            "type": "string"
         },
+        "author": {},
         "webPublicationDateDeprecated": {
             "format": "date-time",
             "type": "string"
@@ -256,13 +260,13 @@
         "subMetaSectionLinks": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/SimpleLinkType"
+                "$ref": "#/definitions/CAPILinkType"
             }
         },
         "subMetaKeywordLinks": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/SimpleLinkType"
+                "$ref": "#/definitions/CAPILinkType"
             }
         },
         "shouldHideAds": {
@@ -316,6 +320,79 @@
         },
         "hasStoryPackage": {
             "type": "boolean"
+        },
+        "storyPackage": {
+            "type": "object",
+            "properties": {
+                "trails": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPITrailType"
+                    }
+                },
+                "heading": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "heading",
+                "trails"
+            ]
+        },
+        "onwards": {
+            "type": "array",
+            "items": {
+                "description": "Onwards",
+                "type": "object",
+                "properties": {
+                    "heading": {
+                        "type": "string"
+                    },
+                    "trails": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/CAPITrailType"
+                        }
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "onwardsType": {
+                        "$ref": "#/definitions/OnwardsType"
+                    },
+                    "format": {
+                        "type": "object",
+                        "properties": {
+                            "design": {
+                                "$ref": "#/definitions/CAPIDesign"
+                            },
+                            "theme": {
+                                "$ref": "#/definitions/CAPITheme"
+                            },
+                            "display": {
+                                "$ref": "#/definitions/CAPIDisplay"
+                            }
+                        },
+                        "required": [
+                            "design",
+                            "display",
+                            "theme"
+                        ]
+                    },
+                    "isCuratedContent": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "format",
+                    "heading",
+                    "onwardsType",
+                    "trails"
+                ]
+            }
         },
         "beaconURL": {
             "type": "string"
@@ -411,10 +488,48 @@
             "items": {
                 "$ref": "#/definitions/Topic"
             }
+        },
+        "promotedNewsletter": {
+            "type": "object",
+            "properties": {
+                "listId": {
+                    "type": "number"
+                },
+                "identityName": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "frequency": {
+                    "type": "string"
+                },
+                "successDescription": {
+                    "type": "string"
+                },
+                "theme": {
+                    "type": "string"
+                },
+                "group": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description",
+                "frequency",
+                "group",
+                "identityName",
+                "listId",
+                "name",
+                "successDescription",
+                "theme"
+            ]
         }
     },
     "required": [
-        "author",
         "beaconURL",
         "blocks",
         "commercialProperties",
@@ -590,7 +705,7 @@
                 "shouldLimitWidth": {
                     "type": "boolean"
                 },
-                "isOverlayed": {
+                "isOverlaid": {
                     "type": "boolean"
                 }
             },
@@ -2079,6 +2194,63 @@
                 "images"
             ]
         },
+        "NewsletterSignupBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.NewsletterSignupBlockElement"
+                    ]
+                },
+                "newsletter": {
+                    "type": "object",
+                    "properties": {
+                        "listId": {
+                            "type": "number"
+                        },
+                        "identityName": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "frequency": {
+                            "type": "string"
+                        },
+                        "successDescription": {
+                            "type": "string"
+                        },
+                        "theme": {
+                            "type": "string"
+                        },
+                        "group": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "description",
+                        "frequency",
+                        "group",
+                        "identityName",
+                        "listId",
+                        "name",
+                        "successDescription",
+                        "theme"
+                    ]
+                },
+                "elementId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "newsletter"
+            ]
+        },
         "NumberedTitleBlockElement": {
             "type": "object",
             "properties": {
@@ -3094,9 +3266,6 @@
                 "authorUsername": {
                     "type": "string"
                 },
-                "authorGuardianProfileUrl": {
-                    "type": "string"
-                },
                 "originalUrl": {
                     "type": "string"
                 },
@@ -3132,7 +3301,6 @@
                 "_type",
                 "alt",
                 "apiUrl",
-                "authorGuardianProfileUrl",
                 "authorName",
                 "authorUsername",
                 "authorWitnessProfileUrl",
@@ -3193,9 +3361,6 @@
                 "authorUsername": {
                     "type": "string"
                 },
-                "authorGuardianProfileUrl": {
-                    "type": "string"
-                },
                 "originalUrl": {
                     "type": "string"
                 },
@@ -3230,7 +3395,6 @@
             "required": [
                 "_type",
                 "apiUrl",
-                "authorGuardianProfileUrl",
                 "authorName",
                 "authorUsername",
                 "authorWitnessProfileUrl",
@@ -3300,9 +3464,6 @@
                 "authorWitnessProfileUrl": {
                     "type": "string"
                 },
-                "authorGuardianProfileUrl": {
-                    "type": "string"
-                },
                 "html": {
                     "type": "string"
                 }
@@ -3310,7 +3471,6 @@
             "required": [
                 "_type",
                 "apiUrl",
-                "authorGuardianProfileUrl",
                 "authorName",
                 "authorUsername",
                 "authorWitnessProfileUrl",
@@ -3414,6 +3574,9 @@
                             },
                             {
                                 "$ref": "#/definitions/MultiImageBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/NewsletterSignupBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/NumberedTitleBlockElement"
@@ -3621,20 +3784,6 @@
                 "totalPages"
             ]
         },
-        "AuthorType": {
-            "type": "object",
-            "properties": {
-                "byline": {
-                    "type": "string"
-                },
-                "twitterHandle": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                }
-            }
-        },
         "EditionId": {
             "enum": [
                 "AU",
@@ -3686,7 +3835,7 @@
             ],
             "type": "string"
         },
-        "SimpleLinkType": {
+        "CAPILinkType": {
             "type": "object",
             "properties": {
                 "url": {
@@ -3694,6 +3843,30 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "longTitle": {
+                    "type": "string"
+                },
+                "iconName": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPILinkType"
+                    }
+                },
+                "pillar": {
+                    "$ref": "#/definitions/LegacyPillar"
+                },
+                "more": {
+                    "type": "boolean"
+                },
+                "classList": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             },
             "required": [
@@ -3887,70 +4060,121 @@
                 "switches"
             ]
         },
-        "CommercialProperties": {
+        "CAPITrailType": {
             "type": "object",
             "properties": {
-                "AU": {
-                    "$ref": "#/definitions/EditionCommercialProperties"
+                "format": {
+                    "type": "object",
+                    "properties": {
+                        "design": {
+                            "$ref": "#/definitions/CAPIDesign"
+                        },
+                        "theme": {
+                            "$ref": "#/definitions/CAPITheme"
+                        },
+                        "display": {
+                            "$ref": "#/definitions/CAPIDisplay"
+                        }
+                    },
+                    "required": [
+                        "design",
+                        "display",
+                        "theme"
+                    ]
                 },
-                "US": {
-                    "$ref": "#/definitions/EditionCommercialProperties"
+                "designType": {
+                    "type": "string"
                 },
-                "UK": {
-                    "$ref": "#/definitions/EditionCommercialProperties"
+                "pillar": {
+                    "$ref": "#/definitions/LegacyPillar"
                 },
-                "INT": {
-                    "$ref": "#/definitions/EditionCommercialProperties"
-                }
-            },
-            "required": [
-                "AU",
-                "INT",
-                "UK",
-                "US"
-            ]
-        },
-        "EditionCommercialProperties": {
-            "type": "object",
-            "properties": {
-                "adTargeting": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/AdTargetParam"
+                "carouselImages": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
                     }
+                },
+                "isLiveBlog": {
+                    "type": "boolean"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "headline": {
+                    "type": "string"
+                },
+                "webPublicationDate": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "avatarUrl": {
+                    "type": "string"
+                },
+                "mediaType": {
+                    "$ref": "#/definitions/MediaType"
+                },
+                "mediaDuration": {
+                    "type": "number"
+                },
+                "ageWarning": {
+                    "type": "string"
+                },
+                "byline": {
+                    "type": "string"
+                },
+                "showByline": {
+                    "type": "boolean"
+                },
+                "kickerText": {
+                    "type": "string"
+                },
+                "shortUrl": {
+                    "type": "string"
+                },
+                "commentCount": {
+                    "type": "number"
+                },
+                "starRating": {
+                    "type": "number"
+                },
+                "linkText": {
+                    "type": "string"
                 },
                 "branding": {
                     "$ref": "#/definitions/Branding"
-                }
-            },
-            "required": [
-                "adTargeting"
-            ]
-        },
-        "AdTargetParam": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
                 },
-                "value": {
-                    "anyOf": [
-                        {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
+                "isSnap": {
+                    "type": "boolean"
+                },
+                "snapData": {
+                    "type": "object",
+                    "properties": {
+                        "embedHtml": {
+                            "type": "string"
                         },
-                        {
+                        "embedCss": {
                             "type": "string"
                         }
-                    ]
+                    }
                 }
             },
             "required": [
-                "name",
-                "value"
+                "designType",
+                "format",
+                "headline",
+                "pillar",
+                "url"
             ]
+        },
+        "MediaType": {
+            "enum": [
+                "Audio",
+                "Gallery",
+                "Video"
+            ],
+            "type": "string"
         },
         "Branding": {
             "type": "object",
@@ -4049,6 +4273,84 @@
                 "sponsorName"
             ]
         },
+        "OnwardsType": {
+            "enum": [
+                "curated-content",
+                "default-onwards",
+                "more-galleries",
+                "more-media-in-section",
+                "more-on-this-story",
+                "related-content",
+                "related-stories",
+                "series"
+            ],
+            "type": "string"
+        },
+        "CommercialProperties": {
+            "type": "object",
+            "properties": {
+                "AU": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "US": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "UK": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "INT": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                }
+            },
+            "required": [
+                "AU",
+                "INT",
+                "UK",
+                "US"
+            ]
+        },
+        "EditionCommercialProperties": {
+            "type": "object",
+            "properties": {
+                "adTargeting": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AdTargetParam"
+                    }
+                },
+                "branding": {
+                    "$ref": "#/definitions/Branding"
+                }
+            },
+            "required": [
+                "adTargeting"
+            ]
+        },
+        "AdTargetParam": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "anyOf": [
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "name",
+                "value"
+            ]
+        },
         "BadgeType": {
             "type": "object",
             "properties": {
@@ -4124,45 +4426,6 @@
                 "otherLinks",
                 "pillars",
                 "readerRevenueLinks"
-            ]
-        },
-        "CAPILinkType": {
-            "type": "object",
-            "properties": {
-                "url": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                },
-                "longTitle": {
-                    "type": "string"
-                },
-                "iconName": {
-                    "type": "string"
-                },
-                "children": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CAPILinkType"
-                    }
-                },
-                "pillar": {
-                    "$ref": "#/definitions/LegacyPillar"
-                },
-                "more": {
-                    "type": "boolean"
-                },
-                "classList": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "required": [
-                "title",
-                "url"
             ]
         },
         "ReaderRevenuePositions": {

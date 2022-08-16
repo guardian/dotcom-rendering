@@ -13,7 +13,9 @@ export const getProps = (marker: HTMLElement): { [key: string]: unknown } => {
 		props = serialised && JSON.parse(serialised);
 	} catch (error: unknown) {
 		console.error(
-			`🚨 Error parsing props. Is this data serialisable? ${serialised} 🚨`,
+			`🚨 Error parsing props. Is this data serialisable? ${String(
+				serialised,
+			)} 🚨`,
 		);
 		throw error;
 	}

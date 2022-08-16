@@ -2,6 +2,388 @@
     "type": "object",
     "properties": {
         "pressedPage": {
+            "$ref": "#/definitions/FEPressedPageType"
+        },
+        "nav": {
+            "$ref": "#/definitions/CAPINavType"
+        },
+        "editionId": {
+            "$ref": "#/definitions/EditionId"
+        },
+        "editionLongForm": {
+            "type": "string"
+        },
+        "guardianBaseURL": {
+            "type": "string"
+        },
+        "pageId": {
+            "type": "string"
+        },
+        "webTitle": {
+            "type": "string"
+        },
+        "webURL": {
+            "type": "string"
+        },
+        "config": {
+            "type": "object",
+            "properties": {
+                "avatarApiUrl": {
+                    "type": "string"
+                },
+                "externalEmbedHost": {
+                    "type": "string"
+                },
+                "ajaxUrl": {
+                    "type": "string"
+                },
+                "keywords": {
+                    "type": "string"
+                },
+                "revisionNumber": {
+                    "type": "string"
+                },
+                "isProd": {
+                    "type": "boolean"
+                },
+                "switches": {
+                    "$ref": "#/definitions/Switches"
+                },
+                "section": {
+                    "type": "string"
+                },
+                "keywordIds": {
+                    "type": "string"
+                },
+                "locationapiurl": {
+                    "type": "string"
+                },
+                "sharedAdTargeting": {
+                    "type": "object",
+                    "additionalProperties": {}
+                },
+                "buildNumber": {
+                    "type": "string"
+                },
+                "abTests": {
+                    "type": "object"
+                },
+                "pbIndexSites": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "additionalProperties": {}
+                    }
+                },
+                "ampIframeUrl": {
+                    "type": "string"
+                },
+                "beaconUrl": {
+                    "type": "string"
+                },
+                "userAttributesApiUrl": {
+                    "type": "string"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "brazeApiKey": {
+                    "type": "string"
+                },
+                "calloutsUrl": {
+                    "type": "string"
+                },
+                "requiresMembershipAccess": {
+                    "type": "boolean"
+                },
+                "onwardWebSocket": {
+                    "type": "string"
+                },
+                "a9PublisherId": {
+                    "type": "string"
+                },
+                "contentType": {
+                    "type": "string"
+                },
+                "facebookIaAdUnitRoot": {
+                    "type": "string"
+                },
+                "ophanEmbedJsUrl": {
+                    "type": "string"
+                },
+                "idUrl": {
+                    "type": "string"
+                },
+                "dcrSentryDsn": {
+                    "type": "string"
+                },
+                "isFront": {
+                    "type": "boolean",
+                    "enum": [
+                        true
+                    ]
+                },
+                "idWebAppUrl": {
+                    "type": "string"
+                },
+                "discussionApiUrl": {
+                    "type": "string"
+                },
+                "sentryPublicApiKey": {
+                    "type": "string"
+                },
+                "omnitureAccount": {
+                    "type": "string"
+                },
+                "dfpAccountId": {
+                    "type": "string"
+                },
+                "pageId": {
+                    "type": "string"
+                },
+                "forecastsapiurl": {
+                    "type": "string"
+                },
+                "assetsPath": {
+                    "type": "string"
+                },
+                "pillar": {
+                    "type": "string"
+                },
+                "commercialBundleUrl": {
+                    "type": "string"
+                },
+                "discussionApiClientHeader": {
+                    "type": "string"
+                },
+                "membershipUrl": {
+                    "type": "string"
+                },
+                "dfpHost": {
+                    "type": "string"
+                },
+                "cardStyle": {
+                    "type": "string"
+                },
+                "googletagUrl": {
+                    "type": "string"
+                },
+                "sentryHost": {
+                    "type": "string"
+                },
+                "shouldHideAdverts": {
+                    "type": "boolean"
+                },
+                "mmaUrl": {
+                    "type": "string"
+                },
+                "membershipAccess": {
+                    "type": "string"
+                },
+                "isPreview": {
+                    "type": "boolean"
+                },
+                "googletagJsUrl": {
+                    "type": "string"
+                },
+                "supportUrl": {
+                    "type": "string"
+                },
+                "edition": {
+                    "type": "string"
+                },
+                "discussionFrontendUrl": {
+                    "type": "string"
+                },
+                "ipsosTag": {
+                    "type": "string"
+                },
+                "ophanJsUrl": {
+                    "type": "string"
+                },
+                "isPaidContent": {
+                    "type": "boolean"
+                },
+                "mobileAppsAdUnitRoot": {
+                    "type": "string"
+                },
+                "plistaPublicApiKey": {
+                    "type": "string"
+                },
+                "frontendAssetsFullURL": {
+                    "type": "string"
+                },
+                "googleSearchId": {
+                    "type": "string"
+                },
+                "allowUserGeneratedContent": {
+                    "type": "boolean"
+                },
+                "dfpAdUnitRoot": {
+                    "type": "string"
+                },
+                "idApiUrl": {
+                    "type": "string"
+                },
+                "omnitureAmpAccount": {
+                    "type": "string"
+                },
+                "adUnit": {
+                    "type": "string"
+                },
+                "hasPageSkin": {
+                    "type": "boolean"
+                },
+                "webTitle": {
+                    "type": "string"
+                },
+                "stripePublicToken": {
+                    "type": "string"
+                },
+                "googleRecaptchaSiteKey": {
+                    "type": "string"
+                },
+                "discussionD2Uid": {
+                    "type": "string"
+                },
+                "weatherapiurl": {
+                    "type": "string"
+                },
+                "googleSearchUrl": {
+                    "type": "string"
+                },
+                "optimizeEpicUrl": {
+                    "type": "string"
+                },
+                "stage": {
+                    "$ref": "#/definitions/StageType"
+                },
+                "idOAuthUrl": {
+                    "type": "string"
+                },
+                "isSensitive": {
+                    "type": "boolean"
+                },
+                "isDev": {
+                    "type": "boolean"
+                },
+                "thirdPartyAppsAccount": {
+                    "type": "string"
+                },
+                "avatarImagesUrl": {
+                    "type": "string"
+                },
+                "fbAppId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "a9PublisherId",
+                "abTests",
+                "adUnit",
+                "ajaxUrl",
+                "allowUserGeneratedContent",
+                "ampIframeUrl",
+                "assetsPath",
+                "avatarApiUrl",
+                "avatarImagesUrl",
+                "beaconUrl",
+                "brazeApiKey",
+                "buildNumber",
+                "calloutsUrl",
+                "commercialBundleUrl",
+                "contentType",
+                "dcrSentryDsn",
+                "dfpAccountId",
+                "dfpAdUnitRoot",
+                "dfpHost",
+                "discussionApiClientHeader",
+                "discussionApiUrl",
+                "discussionD2Uid",
+                "discussionFrontendUrl",
+                "edition",
+                "externalEmbedHost",
+                "facebookIaAdUnitRoot",
+                "fbAppId",
+                "forecastsapiurl",
+                "frontendAssetsFullURL",
+                "googleRecaptchaSiteKey",
+                "googleSearchId",
+                "googleSearchUrl",
+                "googletagJsUrl",
+                "googletagUrl",
+                "hasPageSkin",
+                "host",
+                "idApiUrl",
+                "idOAuthUrl",
+                "idUrl",
+                "idWebAppUrl",
+                "ipsosTag",
+                "isDev",
+                "isFront",
+                "isPaidContent",
+                "isPreview",
+                "isProd",
+                "isSensitive",
+                "keywordIds",
+                "keywords",
+                "locationapiurl",
+                "membershipAccess",
+                "membershipUrl",
+                "mmaUrl",
+                "mobileAppsAdUnitRoot",
+                "omnitureAccount",
+                "omnitureAmpAccount",
+                "onwardWebSocket",
+                "ophanEmbedJsUrl",
+                "ophanJsUrl",
+                "optimizeEpicUrl",
+                "pageId",
+                "pbIndexSites",
+                "pillar",
+                "plistaPublicApiKey",
+                "requiresMembershipAccess",
+                "revisionNumber",
+                "section",
+                "sentryHost",
+                "sentryPublicApiKey",
+                "sharedAdTargeting",
+                "shouldHideAdverts",
+                "stage",
+                "stripePublicToken",
+                "supportUrl",
+                "switches",
+                "userAttributesApiUrl",
+                "weatherapiurl",
+                "webTitle"
+            ]
+        },
+        "commercialProperties": {
+            "$ref": "#/definitions/Record<string,unknown>"
+        },
+        "pageFooter": {
+            "$ref": "#/definitions/FooterType"
+        },
+        "isAdFreeUser": {
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "commercialProperties",
+        "config",
+        "editionId",
+        "editionLongForm",
+        "guardianBaseURL",
+        "isAdFreeUser",
+        "nav",
+        "pageFooter",
+        "pageId",
+        "pressedPage",
+        "webTitle",
+        "webURL"
+    ],
+    "definitions": {
+        "FEPressedPageType": {
             "type": "object",
             "properties": {
                 "id": {
@@ -244,7 +626,70 @@
                                                             "$ref": "#/definitions/Record<string,unknown>"
                                                         },
                                                         "tags": {
-                                                            "$ref": "#/definitions/Record<string,unknown>"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "tags": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "properties": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "id": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "url": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "tagType": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "sectionId": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "sectionName": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "webTitle": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "webUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "twitterHandle": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bio": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bylineImageUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "contributorLargeImagePath": {
+                                                                                        "type": "string"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "id",
+                                                                                    "sectionId",
+                                                                                    "sectionName",
+                                                                                    "tagType",
+                                                                                    "url",
+                                                                                    "webTitle",
+                                                                                    "webUrl"
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "properties"
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "tags"
+                                                            ]
                                                         }
                                                     },
                                                     "required": [
@@ -266,6 +711,26 @@
                                                 },
                                                 "byline": {
                                                     "type": "string"
+                                                },
+                                                "image": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "type": {
+                                                            "type": "string"
+                                                        },
+                                                        "item": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "imgSource": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "item",
+                                                        "type"
+                                                    ]
                                                 },
                                                 "webTitle": {
                                                     "type": "string"
@@ -297,6 +762,9 @@
                                                             "edition"
                                                         ]
                                                     }
+                                                },
+                                                "href": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "required": [
@@ -825,7 +1293,70 @@
                                                             "$ref": "#/definitions/Record<string,unknown>"
                                                         },
                                                         "tags": {
-                                                            "$ref": "#/definitions/Record<string,unknown>"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "tags": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "properties": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "id": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "url": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "tagType": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "sectionId": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "sectionName": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "webTitle": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "webUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "twitterHandle": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bio": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bylineImageUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "contributorLargeImagePath": {
+                                                                                        "type": "string"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "id",
+                                                                                    "sectionId",
+                                                                                    "sectionName",
+                                                                                    "tagType",
+                                                                                    "url",
+                                                                                    "webTitle",
+                                                                                    "webUrl"
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "properties"
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "tags"
+                                                            ]
                                                         }
                                                     },
                                                     "required": [
@@ -847,6 +1378,26 @@
                                                 },
                                                 "byline": {
                                                     "type": "string"
+                                                },
+                                                "image": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "type": {
+                                                            "type": "string"
+                                                        },
+                                                        "item": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "imgSource": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "item",
+                                                        "type"
+                                                    ]
                                                 },
                                                 "webTitle": {
                                                     "type": "string"
@@ -878,6 +1429,9 @@
                                                             "edition"
                                                         ]
                                                     }
+                                                },
+                                                "href": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "required": [
@@ -1406,7 +1960,70 @@
                                                             "$ref": "#/definitions/Record<string,unknown>"
                                                         },
                                                         "tags": {
-                                                            "$ref": "#/definitions/Record<string,unknown>"
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "tags": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "properties": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "id": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "url": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "tagType": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "sectionId": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "sectionName": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "webTitle": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "webUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "twitterHandle": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bio": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bylineImageUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "contributorLargeImagePath": {
+                                                                                        "type": "string"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "id",
+                                                                                    "sectionId",
+                                                                                    "sectionName",
+                                                                                    "tagType",
+                                                                                    "url",
+                                                                                    "webTitle",
+                                                                                    "webUrl"
+                                                                                ]
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "properties"
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            },
+                                                            "required": [
+                                                                "tags"
+                                                            ]
                                                         }
                                                     },
                                                     "required": [
@@ -1428,6 +2045,26 @@
                                                 },
                                                 "byline": {
                                                     "type": "string"
+                                                },
+                                                "image": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "type": {
+                                                            "type": "string"
+                                                        },
+                                                        "item": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "imgSource": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "item",
+                                                        "type"
+                                                    ]
                                                 },
                                                 "webTitle": {
                                                     "type": "string"
@@ -1459,6 +2096,9 @@
                                                             "edition"
                                                         ]
                                                     }
+                                                },
+                                                "href": {
+                                                    "type": "string"
                                                 }
                                             },
                                             "required": [
@@ -1940,381 +2580,6 @@
                 "seoData"
             ]
         },
-        "nav": {
-            "$ref": "#/definitions/CAPINavType"
-        },
-        "editionId": {
-            "$ref": "#/definitions/EditionId"
-        },
-        "editionLongForm": {
-            "type": "string"
-        },
-        "guardianBaseURL": {
-            "type": "string"
-        },
-        "pageId": {
-            "type": "string"
-        },
-        "webTitle": {
-            "type": "string"
-        },
-        "webURL": {
-            "type": "string"
-        },
-        "config": {
-            "type": "object",
-            "properties": {
-                "avatarApiUrl": {
-                    "type": "string"
-                },
-                "externalEmbedHost": {
-                    "type": "string"
-                },
-                "ajaxUrl": {
-                    "type": "string"
-                },
-                "keywords": {
-                    "type": "string"
-                },
-                "revisionNumber": {
-                    "type": "string"
-                },
-                "isProd": {
-                    "type": "boolean"
-                },
-                "switches": {
-                    "$ref": "#/definitions/Switches"
-                },
-                "section": {
-                    "type": "string"
-                },
-                "keywordIds": {
-                    "type": "string"
-                },
-                "locationapiurl": {
-                    "type": "string"
-                },
-                "sharedAdTargeting": {
-                    "type": "object",
-                    "additionalProperties": {}
-                },
-                "buildNumber": {
-                    "type": "string"
-                },
-                "abTests": {
-                    "type": "object"
-                },
-                "pbIndexSites": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "additionalProperties": {}
-                    }
-                },
-                "ampIframeUrl": {
-                    "type": "string"
-                },
-                "beaconUrl": {
-                    "type": "string"
-                },
-                "userAttributesApiUrl": {
-                    "type": "string"
-                },
-                "host": {
-                    "type": "string"
-                },
-                "brazeApiKey": {
-                    "type": "string"
-                },
-                "calloutsUrl": {
-                    "type": "string"
-                },
-                "requiresMembershipAccess": {
-                    "type": "boolean"
-                },
-                "onwardWebSocket": {
-                    "type": "string"
-                },
-                "a9PublisherId": {
-                    "type": "string"
-                },
-                "contentType": {
-                    "type": "string"
-                },
-                "facebookIaAdUnitRoot": {
-                    "type": "string"
-                },
-                "ophanEmbedJsUrl": {
-                    "type": "string"
-                },
-                "idUrl": {
-                    "type": "string"
-                },
-                "dcrSentryDsn": {
-                    "type": "string"
-                },
-                "isFront": {
-                    "type": "boolean",
-                    "enum": [
-                        true
-                    ]
-                },
-                "idWebAppUrl": {
-                    "type": "string"
-                },
-                "discussionApiUrl": {
-                    "type": "string"
-                },
-                "sentryPublicApiKey": {
-                    "type": "string"
-                },
-                "omnitureAccount": {
-                    "type": "string"
-                },
-                "dfpAccountId": {
-                    "type": "string"
-                },
-                "pageId": {
-                    "type": "string"
-                },
-                "forecastsapiurl": {
-                    "type": "string"
-                },
-                "assetsPath": {
-                    "type": "string"
-                },
-                "pillar": {
-                    "type": "string"
-                },
-                "commercialBundleUrl": {
-                    "type": "string"
-                },
-                "discussionApiClientHeader": {
-                    "type": "string"
-                },
-                "membershipUrl": {
-                    "type": "string"
-                },
-                "dfpHost": {
-                    "type": "string"
-                },
-                "cardStyle": {
-                    "type": "string"
-                },
-                "googletagUrl": {
-                    "type": "string"
-                },
-                "sentryHost": {
-                    "type": "string"
-                },
-                "shouldHideAdverts": {
-                    "type": "boolean"
-                },
-                "mmaUrl": {
-                    "type": "string"
-                },
-                "membershipAccess": {
-                    "type": "string"
-                },
-                "isPreview": {
-                    "type": "boolean"
-                },
-                "googletagJsUrl": {
-                    "type": "string"
-                },
-                "supportUrl": {
-                    "type": "string"
-                },
-                "edition": {
-                    "type": "string"
-                },
-                "discussionFrontendUrl": {
-                    "type": "string"
-                },
-                "ipsosTag": {
-                    "type": "string"
-                },
-                "ophanJsUrl": {
-                    "type": "string"
-                },
-                "isPaidContent": {
-                    "type": "boolean"
-                },
-                "mobileAppsAdUnitRoot": {
-                    "type": "string"
-                },
-                "plistaPublicApiKey": {
-                    "type": "string"
-                },
-                "frontendAssetsFullURL": {
-                    "type": "string"
-                },
-                "googleSearchId": {
-                    "type": "string"
-                },
-                "allowUserGeneratedContent": {
-                    "type": "boolean"
-                },
-                "dfpAdUnitRoot": {
-                    "type": "string"
-                },
-                "idApiUrl": {
-                    "type": "string"
-                },
-                "omnitureAmpAccount": {
-                    "type": "string"
-                },
-                "adUnit": {
-                    "type": "string"
-                },
-                "hasPageSkin": {
-                    "type": "boolean"
-                },
-                "webTitle": {
-                    "type": "string"
-                },
-                "stripePublicToken": {
-                    "type": "string"
-                },
-                "googleRecaptchaSiteKey": {
-                    "type": "string"
-                },
-                "discussionD2Uid": {
-                    "type": "string"
-                },
-                "weatherapiurl": {
-                    "type": "string"
-                },
-                "googleSearchUrl": {
-                    "type": "string"
-                },
-                "optimizeEpicUrl": {
-                    "type": "string"
-                },
-                "stage": {
-                    "$ref": "#/definitions/StageType"
-                },
-                "idOAuthUrl": {
-                    "type": "string"
-                },
-                "isSensitive": {
-                    "type": "boolean"
-                },
-                "isDev": {
-                    "type": "boolean"
-                },
-                "thirdPartyAppsAccount": {
-                    "type": "string"
-                },
-                "avatarImagesUrl": {
-                    "type": "string"
-                },
-                "fbAppId": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "a9PublisherId",
-                "abTests",
-                "adUnit",
-                "ajaxUrl",
-                "allowUserGeneratedContent",
-                "ampIframeUrl",
-                "assetsPath",
-                "avatarApiUrl",
-                "avatarImagesUrl",
-                "beaconUrl",
-                "brazeApiKey",
-                "buildNumber",
-                "calloutsUrl",
-                "commercialBundleUrl",
-                "contentType",
-                "dcrSentryDsn",
-                "dfpAccountId",
-                "dfpAdUnitRoot",
-                "dfpHost",
-                "discussionApiClientHeader",
-                "discussionApiUrl",
-                "discussionD2Uid",
-                "discussionFrontendUrl",
-                "edition",
-                "externalEmbedHost",
-                "facebookIaAdUnitRoot",
-                "fbAppId",
-                "forecastsapiurl",
-                "frontendAssetsFullURL",
-                "googleRecaptchaSiteKey",
-                "googleSearchId",
-                "googleSearchUrl",
-                "googletagJsUrl",
-                "googletagUrl",
-                "hasPageSkin",
-                "host",
-                "idApiUrl",
-                "idOAuthUrl",
-                "idUrl",
-                "idWebAppUrl",
-                "ipsosTag",
-                "isDev",
-                "isFront",
-                "isPaidContent",
-                "isPreview",
-                "isProd",
-                "isSensitive",
-                "keywordIds",
-                "keywords",
-                "locationapiurl",
-                "membershipAccess",
-                "membershipUrl",
-                "mmaUrl",
-                "mobileAppsAdUnitRoot",
-                "omnitureAccount",
-                "omnitureAmpAccount",
-                "onwardWebSocket",
-                "ophanEmbedJsUrl",
-                "ophanJsUrl",
-                "optimizeEpicUrl",
-                "pageId",
-                "pbIndexSites",
-                "pillar",
-                "plistaPublicApiKey",
-                "requiresMembershipAccess",
-                "revisionNumber",
-                "section",
-                "sentryHost",
-                "sentryPublicApiKey",
-                "sharedAdTargeting",
-                "shouldHideAdverts",
-                "stage",
-                "stripePublicToken",
-                "supportUrl",
-                "switches",
-                "userAttributesApiUrl",
-                "weatherapiurl",
-                "webTitle"
-            ]
-        },
-        "commercialProperties": {
-            "$ref": "#/definitions/Record<string,unknown>"
-        },
-        "pageFooter": {
-            "$ref": "#/definitions/FooterType"
-        }
-    },
-    "required": [
-        "commercialProperties",
-        "config",
-        "editionId",
-        "editionLongForm",
-        "guardianBaseURL",
-        "nav",
-        "pageFooter",
-        "pageId",
-        "pressedPage",
-        "webTitle",
-        "webURL"
-    ],
-    "definitions": {
         "Record<string,unknown>": {
             "type": "object"
         },

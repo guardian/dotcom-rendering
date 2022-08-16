@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 // ----- Imports ----- //
 
 import { none, some } from '@guardian/types';

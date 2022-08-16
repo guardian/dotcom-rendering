@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { between, textSans } from '@guardian/source-foundations';
 import CommentIcon from '../../static/icons/comment.svg';
+import type { DCRContainerPalette } from '../../types/front';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {

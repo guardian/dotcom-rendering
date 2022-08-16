@@ -11,7 +11,7 @@ import {
 } from '../../../../common-rendering/src/fixtures/article';
 import { ArticleMeta } from './ArticleMeta';
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			width: 220px;
@@ -70,7 +70,7 @@ export default {
 
 export const ArticleStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -79,10 +79,7 @@ export const ArticleStory = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -92,13 +89,13 @@ export const ArticleStory = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 
 export const BrandingStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				branding={{
 					sponsorName: 'Humanity United',
@@ -124,10 +121,7 @@ export const BrandingStory = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -137,7 +131,7 @@ export const BrandingStory = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 
@@ -145,7 +139,7 @@ ArticleStory.story = { name: 'Article' };
 
 export const FeatureStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -154,10 +148,7 @@ export const FeatureStory = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -167,14 +158,14 @@ export const FeatureStory = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 FeatureStory.story = { name: 'Feature' };
 
-export const FeatureStoryWithSmallBylineImage = () => {
+export const FeatureWithMismatchedContributor = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -183,9 +174,35 @@ export const FeatureStoryWithSmallBylineImage = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Nicola Slawson',
+				byline="Gabriel Smith"
+				tags={tagsWithLargeBylineImage}
+				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
+				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
+				isCommentable={false}
+				discussionApiUrl=""
+				shortUrlId=""
+				ajaxUrl=""
+				showShareCount={true}
+			/>
+		</Wrapper>
+	);
+};
+FeatureWithMismatchedContributor.story = {
+	name: 'Feature with a byline mismatching the contributor tag',
+};
+
+export const FeatureStoryWithSmallBylineImage = () => {
+	return (
+		<Wrapper>
+			<ArticleMeta
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Feature,
+					theme: ArticlePillar.Culture,
 				}}
+				pageId=""
+				webTitle=""
+				byline="Nicola Slawson"
 				tags={tagsWithSmallBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -195,7 +212,7 @@ export const FeatureStoryWithSmallBylineImage = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 FeatureStoryWithSmallBylineImage.story = {
@@ -204,7 +221,7 @@ FeatureStoryWithSmallBylineImage.story = {
 
 export const SpecialReportStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -213,10 +230,7 @@ export const SpecialReportStory = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -226,14 +240,14 @@ export const SpecialReportStory = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 SpecialReportStory.story = { name: 'SpecialReport' };
 
 export const CommentStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -242,10 +256,7 @@ export const CommentStory = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -255,14 +266,14 @@ export const CommentStory = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 CommentStory.story = { name: 'Comment' };
 
 export const InterviewStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -271,10 +282,7 @@ export const InterviewStory = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -284,14 +292,14 @@ export const InterviewStory = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 InterviewStory.story = { name: 'Interview' };
 
 export const ImmersiveStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Immersive,
@@ -300,10 +308,7 @@ export const ImmersiveStory = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -313,14 +318,14 @@ export const ImmersiveStory = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 ImmersiveStory.story = { name: 'Immersive' };
 
 export const TwoContributorsStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -329,10 +334,7 @@ export const TwoContributorsStory = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithByTwoContributors}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -342,7 +344,7 @@ export const TwoContributorsStory = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 TwoContributorsStory.story = { name: 'Feature, with two contributors' };
@@ -354,16 +356,13 @@ export const DeadBlogStory = () => {
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
 			}).map((format) => (
-				<Container>
+				<Wrapper>
 					<p>{getThemeNameAsString(format)}</p>
 					<ArticleMeta
 						format={format}
 						pageId=""
 						webTitle=""
-						author={{
-							byline: 'Lanre Bakare',
-							twitterHandle: 'lanre_bakare',
-						}}
+						byline="Lanre Bakare"
 						tags={tagsWithByTwoContributors}
 						primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 						secondaryDateline="Last modified on Sun 12 Jan 2020 21.00 GMT"
@@ -373,7 +372,7 @@ export const DeadBlogStory = () => {
 						ajaxUrl=""
 						showShareCount={true}
 					/>
-				</Container>
+				</Wrapper>
 			))}
 		</>
 	);
@@ -382,7 +381,7 @@ DeadBlogStory.story = { name: 'Deadblog - All pillars' };
 
 export const Dateline = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleMeta
 				format={{
 					display: ArticleDisplay.Standard,
@@ -391,10 +390,7 @@ export const Dateline = () => {
 				}}
 				pageId=""
 				webTitle=""
-				author={{
-					byline: 'Lanre Bakare',
-					twitterHandle: 'lanre_bakare',
-				}}
+				byline="Lanre Bakare"
 				tags={tagsWithLargeBylineImage}
 				primaryDateline="Sun 12 Jan 2020 18.00 GMT"
 				secondaryDateline=""
@@ -404,7 +400,7 @@ export const Dateline = () => {
 				ajaxUrl=""
 				showShareCount={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Dateline.story = { name: 'With no secondary dateline' };

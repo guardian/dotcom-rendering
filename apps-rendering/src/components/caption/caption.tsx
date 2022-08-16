@@ -2,6 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import {
@@ -10,10 +11,13 @@ import {
 	remSpace,
 	textSans,
 } from '@guardian/source-foundations';
+import type { Option } from '@guardian/types';
 import { withDefault } from '@guardian/types';
 import Anchor from 'components/Anchor';
+import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { getHref, renderTextElement } from 'renderer';
+import { darkModeCss } from 'styles';
 
 // ----- Caption Elements ----- //
 
@@ -37,9 +41,15 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles | undefined =>
 		  `
 		: undefined;
 
-const textStyles = css`
-	${textSans.xxsmall()}
-	color: ${neutral[46]};
+const textStyles = (format: ArticleFormat): SerializedStyles => css`
+	${textSans.xsmall({
+		lineHeight: 'regular',
+	})}
+	color: ${text.figCaption(format)};
+
+	${darkModeCss`
+		color: ${text.figCaptionDark(format)};
+	`}
 `;
 
 const captionElement =
@@ -83,7 +93,7 @@ const captionElement =
 				);
 			case '#text':
 				return (
-					<span css={textStyles} key={key}>
+					<span css={textStyles(format)} key={key}>
 						{text}
 					</span>
 				);
@@ -95,13 +105,14 @@ const captionElement =
 // ----- Component ----- //
 
 type Props = {
-	caption: DocumentFragment;
+	caption: Option<DocumentFragment>;
 	format: ArticleFormat;
 };
 
-const Caption: FC<Props> = ({ caption, format }) => (
-	<>{Array.from(caption.childNodes).map(captionElement(format))}</>
-);
+const Caption: FC<Props> = ({ caption, format }) =>
+	maybeRender(caption, (cap) => (
+		<>{Array.from(cap.childNodes).map(captionElement(format))}</>
+	));
 
 // ----- Exports ----- //
 

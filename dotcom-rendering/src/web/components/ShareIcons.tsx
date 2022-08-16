@@ -87,7 +87,6 @@ const decideIconColorOnHover = (format: ArticleFormat, context: Context) => {
 			}
 		`;
 	}
-
 	return css`
 		:hover {
 			background-color: ${palette.fill.shareIcon};
@@ -145,7 +144,7 @@ const getUrl = ({
 
 	const blockHash = blockId ? `#block-${blockId}` : '';
 	return new URL(
-		`${pageId}?${searchParams}${blockHash}`,
+		`${pageId}?${searchParams.toString()}${blockHash}`,
 		'https://www.theguardian.com/',
 	).href;
 };
@@ -209,7 +208,7 @@ export const ShareIcons = ({
 									CMP: 'share_btn_tw',
 								}),
 							},
-						)}`}
+						).toString()}`}
 						role="button"
 						aria-label="Share on Twitter"
 						target="_blank"
@@ -271,7 +270,7 @@ export const ShareIcons = ({
 								// TODO?: add &CMP=share_btn_*
 								url: getUrl({ pageId, blockId }),
 							},
-						)}`}
+						).toString()}`}
 						role="button"
 						aria-label="Share on LinkedIn"
 						target="_blank"
@@ -304,7 +303,7 @@ export const ShareIcons = ({
 										CMP: 'share_btn_wa',
 									}),
 								].join(' '),
-							})}`}
+							}).toString()}`}
 							role="button"
 							aria-label="Share on WhatsApp"
 							target="_blank"
@@ -336,7 +335,7 @@ export const ShareIcons = ({
 									CMP: 'share_btn_me',
 								}),
 								app_id: '180444840287',
-							})}`}
+							}).toString()}`}
 							role="button"
 							aria-label="Share on Messenger"
 							target="_blank"

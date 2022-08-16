@@ -11,6 +11,7 @@ import {
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
+import { getSoleContributor } from '../../lib/byline';
 import { parse } from '../../lib/slot-machine-flags';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
@@ -19,9 +20,10 @@ import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
+import { Carousel } from '../components/Carousel.importable';
 import { ContributorAvatar } from '../components/ContributorAvatar';
+import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { Header } from '../components/Header';
@@ -32,9 +34,9 @@ import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 import { Nav } from '../components/Nav/Nav';
-import { OnwardsLower } from '../components/OnwardsLower.importable';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
+import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -42,6 +44,7 @@ import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
+import { decideTrail } from '../lib/decideTrail';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
@@ -280,22 +283,12 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `CAPIArticle.config.shouldHideReaderRevenue` equals false.
 
-	const seriesTag = CAPIArticle.tags.find(
-		(tag) => tag.type === 'Series' || tag.type === 'Blog',
-	);
-	const showOnwardsLower = seriesTag && CAPIArticle.hasStoryPackage;
-
 	const showComments = CAPIArticle.isCommentable;
 
-	const contributorTag = CAPIArticle.tags.find(
-		(tag) => tag.type === 'Contributor',
-	);
-	const avatarUrl = contributorTag && contributorTag.bylineLargeImageUrl;
-	const onlyOneContributor: boolean =
-		CAPIArticle.tags.filter((tag) => tag.type === 'Contributor').length ===
-		1;
-
-	const showAvatar = avatarUrl && onlyOneContributor;
+	const avatarUrl = getSoleContributor(
+		CAPIArticle.tags,
+		CAPIArticle.byline,
+	)?.bylineLargeImageUrl;
 
 	const { branding } =
 		CAPIArticle.commercialProperties[CAPIArticle.editionId];
@@ -308,10 +301,11 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		<>
 			<div id="bannerandheader">
 				<Stuck>
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						showTopBorder={false}
 						showSideBorders={false}
-						padded={false}
+						padSides={false}
 						shouldCenter={false}
 					>
 						<HeaderAdSlot
@@ -319,14 +313,15 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							shouldHideAds={CAPIArticle.shouldHideAds}
 							display={format.display}
 						/>
-					</ElementContainer>
+					</Section>
 				</Stuck>
 				<SendToBack>
 					{format.theme !== ArticleSpecial.Labs && (
-						<ElementContainer
+						<Section
+							fullWidth={true}
 							showTopBorder={false}
 							showSideBorders={false}
-							padded={false}
+							padSides={false}
 							backgroundColour={brandBackground.primary}
 							element="header"
 						>
@@ -348,15 +343,16 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								contributionsServiceUrl={
 									contributionsServiceUrl
 								}
+								idApiUrl={CAPIArticle.config.idApiUrl}
 							/>
-						</ElementContainer>
+						</Section>
 					)}
 
-					<ElementContainer
-						showSideBorders={true}
+					<Section
+						fullWidth={true}
 						borderColour={brandLine.primary}
 						showTopBorder={false}
-						padded={false}
+						padSides={false}
 						backgroundColour={brandBackground.primary}
 						element="nav"
 					>
@@ -372,12 +368,13 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							}
 							editionId={CAPIArticle.editionId}
 						/>
-					</ElementContainer>
+					</Section>
 
 					{NAV.subNavSections && (
-						<ElementContainer
+						<Section
+							fullWidth={true}
 							backgroundColour={palette.background.article}
-							padded={false}
+							padSides={false}
 							element="aside"
 						>
 							<Island deferUntil="idle">
@@ -387,12 +384,13 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									format={format}
 								/>
 							</Island>
-						</ElementContainer>
+						</Section>
 					)}
 
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						backgroundColour={palette.background.article}
-						padded={false}
+						padSides={false}
 						showTopBorder={false}
 					>
 						<StraightLines
@@ -401,12 +399,13 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								display: block;
 							`}
 						/>
-					</ElementContainer>
+					</Section>
 				</SendToBack>
 			</div>
 
-			<main>
-				<ElementContainer
+			<main data-layout="CommentLayout">
+				<Section
+					fullWidth={true}
 					showTopBorder={false}
 					backgroundColour={palette.background.article}
 					element="article"
@@ -430,7 +429,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<div
 									css={[
 										avatarHeadlineWrapper,
-										showAvatar && minHeightWithAvatar,
+										avatarUrl && minHeightWithAvatar,
 									]}
 								>
 									{/* TOP - we position content in groups here using flex */}
@@ -438,7 +437,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										format={format}
 										headlineString={CAPIArticle.headline}
 										tags={CAPIArticle.tags}
-										byline={CAPIArticle.author.byline}
+										byline={CAPIArticle.byline}
 										webPublicationDateDeprecated={
 											CAPIArticle.webPublicationDateDeprecated
 										}
@@ -446,17 +445,16 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											!!CAPIArticle.starRating ||
 											CAPIArticle.starRating === 0
 										}
-										hasAvatar={!!showAvatar}
+										hasAvatar={!!avatarUrl}
 									/>
 									{/* BOTTOM */}
 									<div>
-										{showAvatar && avatarUrl && (
+										{!!avatarUrl && (
 											<div css={avatarPositionStyles}>
 												<ContributorAvatar
 													imageSrc={avatarUrl}
 													imageAlt={
-														CAPIArticle.author
-															.byline || ''
+														CAPIArticle.byline ?? ''
 													}
 												/>
 											</div>
@@ -525,7 +523,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									format={format}
 									pageId={CAPIArticle.pageId}
 									webTitle={CAPIArticle.webTitle}
-									author={CAPIArticle.author}
+									byline={CAPIArticle.byline}
 									tags={CAPIArticle.tags}
 									primaryDateline={
 										CAPIArticle.webPublicationDateDisplay
@@ -691,10 +689,11 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</div>
 						</GridItem>
 					</StandardGrid>
-				</ElementContainer>
+				</Section>
 
-				<ElementContainer
-					padded={false}
+				<Section
+					fullWidth={true}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
@@ -704,53 +703,67 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						position="merchandising-high"
 						display={format.display}
 					/>
-				</ElementContainer>
+				</Section>
 
-				<Island
-					clientOnly={true}
-					deferUntil="visible"
-					placeholderHeight={600}
-				>
-					<OnwardsUpper
-						ajaxUrl={CAPIArticle.config.ajaxUrl}
-						hasRelated={CAPIArticle.hasRelated}
-						hasStoryPackage={CAPIArticle.hasStoryPackage}
-						isAdFreeUser={CAPIArticle.isAdFreeUser}
-						pageId={CAPIArticle.pageId}
-						isPaidContent={
-							CAPIArticle.config.isPaidContent || false
-						}
-						showRelatedContent={
-							CAPIArticle.config.showRelatedContent
-						}
-						keywordIds={CAPIArticle.config.keywordIds}
-						contentType={CAPIArticle.contentType}
-						tags={CAPIArticle.tags}
+				{CAPIArticle.onwards ? (
+					<DecideOnwards
+						onwards={CAPIArticle.onwards}
 						format={format}
-						pillar={format.theme}
-						editionId={CAPIArticle.editionId}
-						shortUrlId={CAPIArticle.config.shortUrlId}
 					/>
-				</Island>
+				) : (
+					<>
+						{CAPIArticle.storyPackage && (
+							<Section fullWidth={true}>
+								<Island deferUntil="visible">
+									<Carousel
+										heading={
+											CAPIArticle.storyPackage.heading
+										}
+										trails={CAPIArticle.storyPackage.trails.map(
+											decideTrail,
+										)}
+										onwardsType="more-on-this-story"
+										format={format}
+									/>
+								</Island>
+							</Section>
+						)}
 
-				{showOnwardsLower && (
-					<ElementContainer
-						sectionId="onwards-lower"
-						element="section"
-					>
-						<Island clientOnly={true} deferUntil="visible">
-							<OnwardsLower
+						<Island
+							clientOnly={true}
+							deferUntil="visible"
+							placeholderHeight={600}
+						>
+							<OnwardsUpper
 								ajaxUrl={CAPIArticle.config.ajaxUrl}
+								hasRelated={CAPIArticle.hasRelated}
 								hasStoryPackage={CAPIArticle.hasStoryPackage}
+								isAdFreeUser={CAPIArticle.isAdFreeUser}
+								pageId={CAPIArticle.pageId}
+								isPaidContent={
+									CAPIArticle.config.isPaidContent || false
+								}
+								showRelatedContent={
+									CAPIArticle.config.showRelatedContent
+								}
+								keywordIds={CAPIArticle.config.keywordIds}
+								contentType={CAPIArticle.contentType}
 								tags={CAPIArticle.tags}
 								format={format}
+								pillar={format.theme}
+								editionId={CAPIArticle.editionId}
+								shortUrlId={CAPIArticle.config.shortUrlId}
 							/>
 						</Island>
-					</ElementContainer>
+					</>
 				)}
 
 				{!isPaidContent && showComments && (
-					<ElementContainer sectionId="comments" element="aside">
+					<Section
+						fullWidth={true}
+						sectionId="comments"
+						element="aside"
+					>
 						<DiscussionLayout
 							discussionApiUrl={
 								CAPIArticle.config.discussionApiUrl
@@ -768,32 +781,37 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
 							shouldHideAds={CAPIArticle.shouldHideAds}
 						/>
-					</ElementContainer>
+					</Section>
 				)}
 
 				{!isPaidContent && (
-					<ElementContainer data-print-layout="hide" element="aside">
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						element="aside"
+					>
 						<MostViewedFooterLayout
 							format={format}
 							sectionName={CAPIArticle.sectionName}
 							ajaxUrl={CAPIArticle.config.ajaxUrl}
 						/>
-					</ElementContainer>
+					</Section>
 				)}
 
-				<ElementContainer
-					padded={false}
+				<Section
+					fullWidth={true}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
 					element="aside"
 				>
 					<AdSlot position="merchandising" display={format.display} />
-				</ElementContainer>
+				</Section>
 			</main>
 
 			{NAV.subNavSections && (
-				<ElementContainer padded={false} element="aside">
+				<Section fullWidth={true} padSides={false} element="aside">
 					<Island deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
@@ -801,11 +819,12 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							format={format}
 						/>
 					</Island>
-				</ElementContainer>
+				</Section>
 			)}
 
-			<ElementContainer
-				padded={false}
+			<Section
+				fullWidth={true}
+				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
@@ -821,7 +840,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						CAPIArticle.contributionsServiceUrl
 					}
 				/>
-			</ElementContainer>
+			</Section>
 
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>

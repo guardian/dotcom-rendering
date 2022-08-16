@@ -1,35 +1,32 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleTheme } from '@guardian/libs';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
 import { headline } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import type { Series } from 'capi';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
-import { getThemeStyles } from 'themeStyles';
-import type { ThemeStyles } from 'themeStyles';
 
-const ArticleSeriesStyles = ({
-	inverted,
-}: ThemeStyles): SerializedStyles => css`
+const articleSeriesStyles = (format: ArticleFormat): SerializedStyles => css`
 	a {
 		${headline.xxxsmall({ lineHeight: 'loose', fontWeight: 'bold' })}
-		color: ${inverted};
+		color: ${text.mediaArticleSeries(format)};
 		text-decoration: none;
 	}
 `;
 
 interface ArticleSeriesProps {
 	series: Option<Series>;
-	theme: ArticleTheme;
+	format: ArticleFormat;
 }
 
-const ArticleSeries: FC<ArticleSeriesProps> = (props) =>
+const ArticleSeries: FC<ArticleSeriesProps> = ({ series, format }) =>
 	pipe(
-		props.series,
+		series,
 		map((series) => (
-			<nav css={ArticleSeriesStyles(getThemeStyles(props.theme))}>
+			<nav css={articleSeriesStyles(format)}>
 				<a href={series.webUrl}>{series.webTitle}</a>
 			</nav>
 		)),

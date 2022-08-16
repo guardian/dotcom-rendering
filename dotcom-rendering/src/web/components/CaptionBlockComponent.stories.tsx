@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { CaptionBlockComponent } from './CaptionBlockComponent';
-import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
+import { Section } from './Section';
 
 export default {
 	component: CaptionBlockComponent,
@@ -21,12 +21,12 @@ export default {
         credit?: string;
         displayCredit?: boolean;
         shouldLimitWidth?: boolean;
-        isOverlayed?: boolean;
+        isOverlaid?: boolean;
     };
  */
 
-const Container = ({ children }: { children: React.ReactNode }) => (
-	<ElementContainer showTopBorder={false}>
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
+	<Section fullWidth={true} showTopBorder={false}>
 		<Flex>
 			<LeftColumn borderType="full">
 				<></>
@@ -44,12 +44,12 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 				<></>
 			</RightColumn>
 		</Flex>
-	</ElementContainer>
+	</Section>
 );
 
 export const StandardArticle = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption text"
 				format={{
@@ -58,7 +58,7 @@ export const StandardArticle = () => {
 					theme: ArticlePillar.News,
 				}}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 StandardArticle.story = {
@@ -67,7 +67,7 @@ StandardArticle.story = {
 
 export const PhotoEssay = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption text"
 				format={{
@@ -79,9 +79,9 @@ export const PhotoEssay = () => {
 				credit="Credit text"
 				displayCredit={false}
 				shouldLimitWidth={false}
-				isOverlayed={false}
+				isOverlaid={false}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 PhotoEssay.story = {
@@ -90,7 +90,7 @@ PhotoEssay.story = {
 
 export const PhotoEssayHTML = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<CaptionBlockComponent
 				captionText="<ul><li>Line 1 text</li><li>Line 2 text</li><li>Line 3 text</li></ul>"
 				format={{
@@ -102,9 +102,9 @@ export const PhotoEssayHTML = () => {
 				credit="Credit text"
 				displayCredit={false}
 				shouldLimitWidth={false}
-				isOverlayed={false}
+				isOverlaid={false}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 PhotoEssayHTML.story = {
@@ -113,7 +113,7 @@ PhotoEssayHTML.story = {
 
 export const Padded = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption text"
 				format={{
@@ -125,9 +125,9 @@ export const Padded = () => {
 				credit="Credit text"
 				displayCredit={false}
 				shouldLimitWidth={false}
-				isOverlayed={false}
+				isOverlaid={false}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Padded.story = {
@@ -136,7 +136,7 @@ Padded.story = {
 
 export const WidthLimited = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
 				format={{
@@ -148,9 +148,9 @@ export const WidthLimited = () => {
 				credit="Credit text"
 				displayCredit={false}
 				shouldLimitWidth={true}
-				isOverlayed={false}
+				isOverlaid={false}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 WidthLimited.story = {
@@ -159,7 +159,7 @@ WidthLimited.story = {
 
 export const Credited = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
 				format={{
@@ -171,18 +171,18 @@ export const Credited = () => {
 				credit="Credit text"
 				displayCredit={true}
 				shouldLimitWidth={false}
-				isOverlayed={false}
+				isOverlaid={false}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Credited.story = {
 	name: 'with credit',
 };
 
-export const Overlayed = () => {
+export const Overlaid = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<CaptionBlockComponent
 				captionText="Caption textQuas repellat sapiente nobis vel. Expedita veniam ut officiis. Omnis tempore natus est distinctio sapiente aliquid dolores soluta. Vel facere vitae velit et non. Eveniet omnis impedit mollitia voluptas omnis sit"
 				format={{
@@ -194,11 +194,11 @@ export const Overlayed = () => {
 				credit="Credit text"
 				displayCredit={false}
 				shouldLimitWidth={false}
-				isOverlayed={true}
+				isOverlaid={true}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
-Overlayed.story = {
-	name: 'when overlayed',
+Overlaid.story = {
+	name: 'when overlaid',
 };

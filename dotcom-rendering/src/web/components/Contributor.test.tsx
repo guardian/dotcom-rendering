@@ -14,7 +14,7 @@ describe('Contributor', () => {
 		const { container } = render(
 			<Contributor
 				format={format}
-				author={{ byline: 'Observer writers' }}
+				byline="Observer writers"
 				tags={[
 					{
 						id: 'lifeandstyle/series/observer-design',
@@ -40,7 +40,7 @@ describe('Contributor', () => {
 		const { container } = render(
 			<Contributor
 				format={format}
-				author={{ byline: 'Observer writers' }}
+				byline="Observer writers"
 				tags={[
 					{
 						id: 'lifeandstyle/series/observer-design',

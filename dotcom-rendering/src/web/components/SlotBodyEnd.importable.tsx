@@ -114,7 +114,7 @@ export const SlotBodyEnd = ({
 					setCountryCode(cc || '');
 				})
 				.catch((e) =>
-					console.error(`countryCodePromise - error: ${e}`),
+					console.error(`countryCodePromise - error: ${String(e)}`),
 				);
 		};
 		callFetch();
@@ -164,7 +164,7 @@ export const SlotBodyEnd = ({
 		pickMessage(epicConfig)
 			.then((PickedEpic: () => MaybeFC) => setSelectedEpic(PickedEpic))
 			.catch((e) =>
-				console.error(`SlotBodyEnd pickMessage - error: ${e}`),
+				console.error(`SlotBodyEnd pickMessage - error: ${String(e)}`),
 			);
 	}, [isSignedIn, countryCode, brazeMessages, asyncArticleCount]);
 

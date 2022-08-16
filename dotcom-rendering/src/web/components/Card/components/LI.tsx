@@ -52,6 +52,10 @@ const decideSize = (percentage?: CardPercentageType, stretch?: boolean) => {
 	if (percentage) {
 		sizeStyle = css`
 			flex-basis: ${percentage};
+			${stretch &&
+			css`
+				flex-grow: 1;
+			`}
 		`;
 	} else if (stretch) {
 		sizeStyle = css`

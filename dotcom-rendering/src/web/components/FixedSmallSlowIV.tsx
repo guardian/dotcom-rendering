@@ -1,7 +1,7 @@
-import { ArticleDesign } from '@guardian/libs';
-import { Card } from './Card/Card';
+import type { DCRContainerPalette } from '../../types/front';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
+import { FrontCard } from './FrontCard';
 
 type Props = {
 	trails: TrailType[];
@@ -26,37 +26,12 @@ export const FixedSmallSlowIV = ({
 						showDivider={index > 0}
 						padBottomOnMobile={true}
 					>
-						<Card
+						<FrontCard
+							trail={trail}
+							starRating={trail.starRating}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							linkTo={trail.url}
-							format={trail.format}
-							headlineText={trail.headline}
-							headlineSize="medium"
-							byline={trail.byline}
-							showByline={trail.showByline}
-							showQuotes={
-								trail.format.design === ArticleDesign.Comment ||
-								trail.format.design === ArticleDesign.Letter
-							}
-							webPublicationDate={trail.webPublicationDate}
-							kickerText={trail.kickerText}
-							showPulsingDot={
-								trail.format.design === ArticleDesign.LiveBlog
-							}
-							showSlash={true}
-							showClock={false}
-							imageUrl={trail.image}
-							imagePosition="top"
-							imagePositionOnMobile="left"
 							imageSize="medium"
-							mediaType={trail.mediaType}
-							mediaDuration={trail.mediaDuration}
-							starRating={trail.starRating}
-							branding={trail.branding}
-							dataLinkName={trail.dataLinkName}
-							snapData={trail.snapData}
-							discussionId={trail.discussionId}
 						/>
 					</LI>
 				);

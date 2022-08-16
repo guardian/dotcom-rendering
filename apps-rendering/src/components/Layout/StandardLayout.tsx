@@ -142,11 +142,11 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 				</Body>
 				{epicContainer}
 				<section className="js-tags" css={articleWidthStyles}>
-					<Tags tags={item.tags} format={item} />
+					<Tags item={item} />
 				</section>
 			</article>
 			<section css={onwardStyles}>
-				<RelatedContent content={item.relatedContent} />
+				<RelatedContent item={item} />
 			</section>
 			{commentContainer}
 			<Footer isCcpa={false} format={item} />

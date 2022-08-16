@@ -202,7 +202,7 @@ try {
 	// MatchReport fixtures
 	requests.push(
 		fetch(
-			'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2021/02/28/29/1006.json?dcr=true&page=football%2F2021%2Ffeb%2F28%2Fleicester-arsenal-premier-league-match-report',
+			'https://api.nextgen.guardianapps.co.uk/football/api/match-nav/2022/07/11/8184/7514.json?dcr=true&page=football%2F2022%2Fjul%2F11%2Fengland-norway-womens-euro-2022-group-a-match-report',
 		)
 			.then((res) => res.json())
 			.then((json) => {

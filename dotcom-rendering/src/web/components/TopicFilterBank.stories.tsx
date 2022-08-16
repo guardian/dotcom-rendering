@@ -13,6 +13,14 @@ const availableTopics: Topic[] = [
 	{ type: 'GPE', value: 'Manchester', count: 4 },
 	{ type: 'GPE', value: 'United Kingdom', count: 4 },
 	{ type: 'PERSON', value: 'Anas Sarwar', count: 4 },
+	{ type: 'PERSON', value: 'Cameron', count: 2 },
+];
+
+const availableTopicsWithLowerCount: Topic[] = [
+	{ type: 'GPE', value: 'Manchester', count: 4 },
+	{ type: 'GPE', value: 'United Kingdom', count: 3 },
+	{ type: 'PERSON', value: 'Anas Sarwar', count: 2 },
+	{ type: 'PERSON', value: 'Cameron', count: 1 },
 ];
 
 const selectedTopics: Topic[] = [{ type: 'GPE', value: 'United Kingdom' }];
@@ -91,4 +99,28 @@ export const topicBankSelectedIsNotInTop5 = () => {
 };
 topicBankSelectedIsNotInTop5.story = {
 	name: 'topicBankSelectedIsNotInTop5',
+};
+
+export const notShowingTopicsWithLowerCounts = () => {
+	return (
+		<Wrapper>
+			<TopicFilterBank
+				id="key-events-carousel-desktop"
+				availableTopics={availableTopicsWithLowerCount}
+				selectedTopics={selectedTopics}
+				format={format}
+				keyEvents={[
+					{
+						...baseProperties,
+						blockFirstPublished: 1638279933000,
+						title: 'title',
+					},
+				]}
+				filterKeyEvents={false}
+			/>
+		</Wrapper>
+	);
+};
+notShowingTopicsWithLowerCounts.story = {
+	name: 'notShowingTopicsWithLowerCounts',
 };

@@ -100,7 +100,7 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
 					/>
 				)}
 			</div>
-			{trail.ageWarning && (
+			{!!trail.ageWarning && (
 				<div css={ageWarningStyles}>
 					<AgeWarning age={trail.ageWarning} size="small" />
 				</div>

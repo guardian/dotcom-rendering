@@ -1,6 +1,8 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, headline, remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
@@ -9,6 +11,7 @@ import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { ReactNode } from 'react';
 import { renderStandfirstText } from 'renderer';
+import { darkModeCss } from 'styles';
 
 // ----- Functions ----- //
 
@@ -45,22 +48,27 @@ const renderContent = (
 
 // ----- Component ----- //
 
-const styles = css`
-	${grid.span('centre-column-start', 3)}
+const styles = (format: ArticleFormat): SerializedStyles => css`
+	${grid.column.centre}
 	${headline.xsmall({ fontWeight: 'light' })}
-	padding: ${remSpace[4]} 0 ${remSpace[9]};
+	padding: ${remSpace[2]} ${remSpace[5]} ${remSpace[9]} 0;
+	color: ${text.standfirst(format)};
 
-	${from.tablet} {
-		${grid.span('centre-column-start', 8)}
+	${from.mobileLandscape} {
+		padding-top: ${remSpace[4]};
 	}
 
-	${from.desktop} {
-		${grid.span('centre-column-start', 6)}
+	${from.tablet} {
+		padding-top: ${remSpace[1]};
 	}
 
 	${from.leftCol} {
 		grid-row: 5;
 	}
+
+	${darkModeCss`
+		color: ${text.standfirstDark(format)};
+	`}
 `;
 
 type Props = {
@@ -77,7 +85,7 @@ const ImmersiveStandfirst: React.FC<Props> = ({
 	bylineHtml,
 }) =>
 	maybeRender(standfirst, (standfirstDoc) => (
-		<div css={styles}>
+		<div css={styles(format)}>
 			{renderContent(standfirstDoc, format, byline, bylineHtml)}
 		</div>
 	));

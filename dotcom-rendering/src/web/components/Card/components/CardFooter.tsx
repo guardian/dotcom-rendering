@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import type { DCRContainerPalette } from '../../../../types/front';
 import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {

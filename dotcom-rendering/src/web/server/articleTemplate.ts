@@ -18,7 +18,7 @@ export const articleTemplate = ({
 	openGraphData,
 	twitterData,
 	keywords,
-	initTwitter,
+	initTwitter = '',
 	recipeMarkup,
 }: {
 	title?: string;
@@ -273,9 +273,9 @@ https://workforus.theguardian.com/careers/product-engineering/
 					window.curl = window.curlConfig;
 				</script>
 
-				<script>
-					${initTwitter}
-				</script>
+
+				${initTwitter}
+
 
                 <noscript>
                     <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${encodeURIComponent(
@@ -292,7 +292,11 @@ https://workforus.theguardian.com/careers/product-engineering/
 			<body>
                 ${html}
                 ${[...lowPriorityScriptTags].join('\n')}
-				<script type="application/ld+json">${recipeMarkup}</script>
+				${
+					recipeMarkup !== undefined
+						? `<script type="application/ld+json">${recipeMarkup}</script>`
+						: ''
+				}
             </body>
         </html>`;
 };

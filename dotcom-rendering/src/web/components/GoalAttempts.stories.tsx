@@ -7,7 +7,7 @@ export default {
 	title: 'Components/GoalAttempts',
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			width: 340px;
@@ -21,7 +21,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const Default = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<GoalAttempts
 				left={{
 					onTarget: 23,
@@ -39,7 +39,7 @@ export const Default = () => {
 					display: ArticleDisplay.Standard,
 				}}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Default.story = { name: 'default' };
