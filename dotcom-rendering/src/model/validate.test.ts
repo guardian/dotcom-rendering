@@ -27,3 +27,5 @@ describe('validate', () => {
 		});
 	});
 });
+
+export { urlsToTest };
