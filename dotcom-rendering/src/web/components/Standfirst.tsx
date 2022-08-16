@@ -16,6 +16,23 @@ type Props = {
 	standfirst: string;
 };
 
+const titleStyles = (format: ArticleFormat, palette: Palette) => {
+	if (format.display === ArticleDisplay.Immersive) {
+		return css`
+			${headline.xsmall({
+				fontWeight: 'light',
+			})};
+			padding-top: ${space[4]}px;
+			color: ${palette.text.standfirst};
+		`;
+	}
+	return css`
+		${headline.xxxsmall({
+			fontWeight: 'bold',
+		})};
+	`;
+};
+
 const nestedStyles = (format: ArticleFormat, palette: Palette) => {
 	const offset = format.display === ArticleDisplay.Immersive ? space[6] : 19;
 	return css`
@@ -88,6 +105,23 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 						line-height: 22px;
 						max-width: 540px;
 						color: ${palette.text.standfirst};
+					`;
+				case ArticleDesign.Analysis:
+					return css`
+						${format.theme === ArticleSpecial.Labs
+							? textSans.medium()
+							: headline.xsmall({
+									fontWeight: 'light',
+							  })};
+						max-width: 280px;
+						${from.tablet} {
+							max-width: 460px;
+						}
+						color: ${palette.text.standfirst};
+						li:before {
+							height: 17px;
+							width: 17px;
+						}
 					`;
 				default:
 					return css`
@@ -197,32 +231,37 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 	const palette = decidePalette(format);
 
 	return (
-		<div
-			css={[
-				nestedStyles(format, palette),
-				standfirstStyles(format, palette),
-				hoverStyles(palette),
-			]}
-			className={
-				format.design === ArticleDesign.Interactive
-					? interactiveLegacyClasses.standFirst
-					: ''
-			}
-			dangerouslySetInnerHTML={{
-				__html: sanitise(standfirst, {
-					allowedTags: false, // Leave tags from CAPI alone
-					allowedAttributes: false, // Leave attributes from CAPI alone
-					transformTags: {
-						a: (tagName, attribs) => ({
-							tagName, // Just return anchors as is
-							attribs: {
-								...attribs, // Merge into the existing attributes
-								'data-link-name': 'in standfirst link', // Add the data-link-name for Ophan to anchors
-							},
-						}),
-					},
-				}),
-			}}
-		/>
+		<>
+			{format.design === ArticleDesign.Analysis && (
+				<p css={titleStyles(format, palette)}>Analysis</p>
+			)}
+			<div
+				css={[
+					nestedStyles(format, palette),
+					standfirstStyles(format, palette),
+					hoverStyles(palette),
+				]}
+				className={
+					format.design === ArticleDesign.Interactive
+						? interactiveLegacyClasses.standFirst
+						: ''
+				}
+				dangerouslySetInnerHTML={{
+					__html: sanitise(standfirst, {
+						allowedTags: false, // Leave tags from CAPI alone
+						allowedAttributes: false, // Leave attributes from CAPI alone
+						transformTags: {
+							a: (tagName, attribs) => ({
+								tagName, // Just return anchors as is
+								attribs: {
+									...attribs, // Merge into the existing attributes
+									'data-link-name': 'in standfirst link', // Add the data-link-name for Ophan to anchors
+								},
+							}),
+						},
+					}),
+				}}
+			/>
+		</>
 	);
 };
