@@ -8,6 +8,12 @@ interface Props {
 	item: Item;
 }
 
+const analysisStandfirstStyles = css`
+	${headline.xxxsmall()}
+	p:first-child {
+		padding-top: 0;
+	}
+`;
 const AnalysisStandfirst: React.FC<Props> = ({ item }) => (
 	<>
 		<p
@@ -19,14 +25,7 @@ const AnalysisStandfirst: React.FC<Props> = ({ item }) => (
 		</p>
 		<DefaultStandfirst
 			item={item}
-			css={css(
-				defaultStyles(getFormat(item)),
-				css`
-					p:first-child {
-						padding-top: 0;
-					}
-				`,
-			)}
+			css={css(defaultStyles(getFormat(item)), analysisStandfirstStyles)}
 		/>
 	</>
 );
