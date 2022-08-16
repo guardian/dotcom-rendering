@@ -191,6 +191,13 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 						max-width: 540px;
 						color: ${palette.text.standfirst};
 					`;
+				case ArticleDesign.Analysis:
+					return css`
+						${headline.xxxsmall()};
+						margin-bottom: ${space[3]}px;
+						max-width: 540px;
+						color: ${palette.text.standfirst};
+					`;
 				default:
 					switch (format.theme) {
 						case ArticleSpecial.Labs:
