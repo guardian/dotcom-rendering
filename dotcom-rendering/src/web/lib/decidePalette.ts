@@ -161,6 +161,8 @@ const textByline = (format: ArticleFormat): string => {
 };
 
 const textHeadlineByline = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis)
+		return pillarPalette[format.theme].main;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
@@ -617,6 +619,7 @@ const backgroundAgeWarning = (format: ArticleFormat): string => {
 };
 
 const backgroundHeadlineByline = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) return 'transparent';
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return brandAltBackground.primary;
 	return 'transparent';

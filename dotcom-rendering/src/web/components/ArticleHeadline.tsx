@@ -617,6 +617,13 @@ export const ArticleHeadline = ({
 								>
 									{curly(headlineString)}
 								</h1>
+								{!!byline && (
+									<HeadlineByline
+										format={format}
+										byline={byline}
+										tags={tags}
+									/>
+								)}
 							</WithAgeWarning>
 						</div>
 					);
