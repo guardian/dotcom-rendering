@@ -615,6 +615,7 @@ const backgroundArticle = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.Letter) return opinion[800];
 	if (format.design === ArticleDesign.Comment) return opinion[800];
 	if (format.design === ArticleDesign.Editorial) return opinion[800];
+	if (format.design === ArticleDesign.Analysis) return news[800];
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[800]; // Note, check theme rather than design here
 	if (
