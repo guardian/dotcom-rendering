@@ -17,6 +17,23 @@ type Props = {
 	standfirst: string;
 };
 
+const titleStyles = (format: ArticleFormat, palette: Palette) => {
+	if (format.display === ArticleDisplay.Immersive) {
+		return css`
+			${headline.xsmall({
+				fontWeight: 'light',
+			})};
+			padding-top: ${space[4]}px;
+			color: ${palette.text.standfirst};
+		`;
+	}
+	return css`
+		${headline.xxxsmall({
+			fontWeight: 'bold',
+		})};
+	`;
+};
+
 const nestedStyles = (format: ArticleFormat, palette: Palette) => {
 	const offset = format.display === ArticleDisplay.Immersive ? space[6] : 19;
 	return css`
@@ -89,6 +106,23 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 						line-height: 22px;
 						max-width: 540px;
 						color: ${palette.text.standfirst};
+					`;
+				case ArticleDesign.Analysis:
+					return css`
+						${format.theme === ArticleSpecial.Labs
+							? textSans.medium()
+							: headline.xsmall({
+									fontWeight: 'light',
+							  })};
+						max-width: 280px;
+						${from.tablet} {
+							max-width: 460px;
+						}
+						color: ${palette.text.standfirst};
+						li:before {
+							height: 17px;
+							width: 17px;
+						}
 					`;
 				default:
 					return css`
@@ -200,15 +234,7 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 	return (
 		<>
 			{format.design === ArticleDesign.Analysis && (
-				<p
-					css={css`
-						${headline.xxxsmall({
-							fontWeight: 'bold',
-						})};
-					`}
-				>
-					Analysis
-				</p>
+				<p css={titleStyles(format, palette)}>Analysis</p>
 			)}
 			<div
 				css={[
