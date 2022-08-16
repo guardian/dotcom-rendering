@@ -96,25 +96,6 @@ const lightFont = css`
 	}
 `;
 
-const underlinedStyles = (colour: string) => css`
-	line-height: 48px;
-	background-size: 1rem 48px;
-	${until.tablet} {
-		background-image: repeating-linear-gradient(
-			to bottom,
-			transparent,
-			transparent 39px,
-			${colour}
-		);
-		line-height: 40px;
-		background-size: 1px 40px;
-	}
-
-	background-position: top left;
-	background-clip: content-box;
-	background-origin: content-box;
-`;
-
 const displayBlock = css`
 	display: block;
 `;
@@ -511,6 +492,7 @@ export const ArticleHeadline = ({
 			switch (format.design) {
 				case ArticleDesign.Review:
 				case ArticleDesign.Recipe:
+
 				case ArticleDesign.Feature:
 					return (
 						<div
@@ -628,12 +610,8 @@ export const ArticleHeadline = ({
 							>
 								<h1
 									css={[
-										standardFont,
+										boldFont,
 										topPadding,
-										underlinedStyles(
-											palette.background
-												.analysisUnderline,
-										),
 										css`
 											color: ${palette.text.headline};
 										`,
