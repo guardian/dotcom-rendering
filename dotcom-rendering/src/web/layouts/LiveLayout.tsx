@@ -198,21 +198,6 @@ const maxWidth = css`
 	}
 `;
 
-const sticky = css`
-	${from.desktop} {
-		position: sticky;
-		top: 10px;
-	}
-`;
-
-const keyEventsMargins = css`
-	margin-bottom: ${space[3]}px;
-	${from.desktop} {
-		margin-top: ${space[1]}px;
-		margin-bottom: 0;
-	}
-`;
-
 const sidePaddingDesktop = css`
 	${from.desktop} {
 		padding-left: ${space[5]}px;
