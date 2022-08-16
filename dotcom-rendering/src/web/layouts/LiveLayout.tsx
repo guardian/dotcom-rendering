@@ -916,9 +916,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													filterKeyEvents={
 														CAPIArticle.filterKeyEvents
 													}
-													showKeyEventsCarousel={
-														showKeyEventsCarousel
-													}
 													availableTopics={
 														CAPIArticle.availableTopics
 													}
@@ -1069,9 +1066,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													}
 													filterKeyEvents={
 														CAPIArticle.filterKeyEvents
-													}
-													showKeyEventsCarousel={
-														showKeyEventsCarousel
 													}
 													availableTopics={
 														CAPIArticle.availableTopics
