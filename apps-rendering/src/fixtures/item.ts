@@ -18,6 +18,7 @@ import type { Contributor } from 'contributor';
 import type { MatchScores } from 'football';
 import type { Image } from 'image';
 import type {
+	Analysis,
 	Comment,
 	Editorial,
 	Feature,
@@ -380,7 +381,7 @@ const articleWithStandfirstLink: Item = {
 	standfirst: standfirstWithLink,
 };
 
-const analysis: Standard = {
+const analysis: Analysis = {
 	design: ArticleDesign.Analysis,
 	...fields,
 };
