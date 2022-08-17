@@ -5,6 +5,8 @@ import { breakpoints } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { partition, some, withDefault } from '@guardian/types';
 import Comment from 'components/Layout/CommentLayout';
+import AnalysisLayout from 'components/Layout/AnalysisLayout';
+
 import Standard from 'components/Layout/StandardLayout';
 import {
 	analysis,
@@ -186,12 +188,12 @@ Editorial.story = { name: 'Editorial' };
 
 export const Analysis = (): React.ReactNode => {
 	return (
-		<Standard item={analysis}>
+		<AnalysisLayout item={analysis}>
 			{renderAll(
 				formatFromItem(analysis, some(ArticleDisplay.Standard)),
 				partition(analysis.body).oks,
 			)}
-		</Standard>
+		</AnalysisLayout>
 	);
 };
 Analysis.story = { name: 'Analysis' };
