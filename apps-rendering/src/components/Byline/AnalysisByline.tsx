@@ -52,8 +52,8 @@ const AnalysisByline: React.FC<Props> = ({ format, bylineHtml }) => (
 	<DefaultByline
 		format={format}
 		bylineHtml={bylineHtml}
-		styles={css(blogStyles)}
-		anchorStyles={css([blogAnchorStyles(format)])}
+		styles={styles}
+		anchorStyles={anchorStyles(format)}
 	/>
 );
 
