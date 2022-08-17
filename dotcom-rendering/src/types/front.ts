@@ -443,9 +443,15 @@ export type DCRSupportingContent = {
 export type TreatType = {
 	text: string;
 	linkTo: string;
-	editionId: EditionId;
+	editionId?: EditionId;
 	imageUrl?: string;
 	altText?: string;
 	/** The container display name where this treat should show */
 	containerTitle?: string;
+	/**
+	 * `pageId` is the part of the url that comes after the slash
+	 *
+	 * So for https://www.theguardian.com/uk it would be 'uk'
+	 */
+	pageId?: string;
 };

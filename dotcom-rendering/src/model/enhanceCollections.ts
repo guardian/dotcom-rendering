@@ -18,6 +18,7 @@ const supportedContainers = (collection: FECollectionType) => {
 export const enhanceCollections = (
 	collections: FECollectionType[],
 	editionId: EditionId,
+	pageId: string,
 ): DCRCollectionType[] => {
 	return collections.filter(supportedContainers).map((collection) => {
 		const { id, displayName, collectionType } = collection;
@@ -37,7 +38,12 @@ export const enhanceCollections = (
 			),
 			curated: enhanceCards(collection.curated, containerPalette),
 			backfill: enhanceCards(collection.backfill, containerPalette),
-			treats: enhanceTreats(collection.treats, editionId, displayName),
+			treats: enhanceTreats(
+				collection.treats,
+				displayName,
+				editionId,
+				pageId,
+			),
 			config: {
 				showDateHeader: collection.config.showDateHeader,
 			},

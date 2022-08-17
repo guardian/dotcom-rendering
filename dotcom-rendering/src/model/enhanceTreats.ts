@@ -31,27 +31,37 @@ const PLATFORM_TREATS: TreatType[] = [
 			'https://interactive.guim.co.uk/thrashers/culture-nugget/hashed/thrasher_img_55.1c0762e5.png',
 		altText: "What's on Netflix and Amazon this month",
 		text: "What's on Netflix & Amazon this month",
+		pageId: 'uk',
 	},
 ];
 
 const getPlatformTreats = (
-	editionId: EditionId,
 	displayName: string,
+	editionId: EditionId,
+	pageId: string,
 ): TreatType[] => {
 	return PLATFORM_TREATS.filter((treat) => {
-		// We decide if a treat should be shown for a container based on
-		// if the editionId matches and if the containerTitle text is the same.
-		return (
-			treat.containerTitle === displayName &&
-			treat.editionId === editionId
-		);
+		/**
+		 * We decide if a treat should be shown for a container based on the container
+		 * name, the edition and the page id.
+		 *
+		 * Matching on edition or page id is optional. If either of these are not
+		 * provided then we return true for that check
+		 */
+		const matchesContainer = treat.containerTitle === displayName;
+		const matchesEdition =
+			!treat.editionId || treat.editionId === editionId;
+		const matchesPage = !treat.pageId || treat.pageId === pageId;
+
+		return matchesContainer && matchesEdition && matchesPage;
 	});
 };
 
 export const enhanceTreats = (
 	treats: FEFrontCard[],
-	editionId: EditionId,
 	displayName: string,
+	editionId: EditionId,
+	pageId: string,
 ): TreatType[] => {
 	const classicTreats = treats.map((treat) => ({
 		text: treat.header.headline,
@@ -60,7 +70,7 @@ export const enhanceTreats = (
 	}));
 
 	// Add any platform treats that we can find for this container
-	const platformTreats = getPlatformTreats(editionId, displayName);
+	const platformTreats = getPlatformTreats(displayName, editionId, pageId);
 
 	return [...platformTreats, ...classicTreats];
 };
