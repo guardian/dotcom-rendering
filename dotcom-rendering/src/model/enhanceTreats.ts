@@ -36,21 +36,22 @@ const PLATFORM_TREATS: TreatType[] = [
 
 const getPlatformTreats = (
 	editionId: EditionId,
-	containerTitle: string,
+	displayName: string,
 ): TreatType[] => {
 	return PLATFORM_TREATS.filter((treat) => {
 		// We decide if a treat should be shown for a container based on
 		// if the editionId matches and if the containerTitle text is the same.
 		return (
-			treat.containerTitle === containerTitle &&
+			treat.containerTitle === displayName &&
 			treat.editionId === editionId
 		);
 	});
 };
+
 export const enhanceTreats = (
 	treats: FEFrontCard[],
 	editionId: EditionId,
-	containerTitle: string,
+	displayName: string,
 ): TreatType[] => {
 	const classicTreats = treats.map((treat) => ({
 		text: treat.header.headline,
@@ -59,7 +60,7 @@ export const enhanceTreats = (
 	}));
 
 	// Add any platform treats that we can find for this container
-	const platformTreats = getPlatformTreats(editionId, containerTitle);
+	const platformTreats = getPlatformTreats(editionId, displayName);
 
 	return [...platformTreats, ...classicTreats];
 };
