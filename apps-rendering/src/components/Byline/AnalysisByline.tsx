@@ -11,7 +11,7 @@ import type { Option } from '@guardian/types';
 import { darkModeCss } from 'styles';
 import { DefaultByline } from './Byline.defaults';
 
-const blogStyles = css`
+const styles = css`
 	${headline.medium({
 		fontWeight: 'light',
 	})}
