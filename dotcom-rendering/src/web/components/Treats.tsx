@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
 	border,
 	headline,
@@ -8,6 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import type { TreatType } from '../../types/front';
+import { decidePalette } from '../lib/decidePalette';
 import { SvgCrossword } from './SvgCrossword';
 
 const TextTreat = ({
@@ -43,52 +45,53 @@ const TextTreat = ({
 
 const ImageTreat = ({
 	imageUrl,
-	linkTo,
+	links,
 	altText,
-	text,
+	backgroundColour,
 }: {
 	imageUrl: string;
-	linkTo: string;
+	links: { text: string; linkTo: string }[];
 	altText?: string;
-	text: string;
+	backgroundColour: string;
 }) => (
 	<li>
-		<a
-			href={linkTo}
-			data-ignore="global-link-styling"
-			css={css`
-				text-decoration: none;
-				:hover {
-					/* We target the span from here like this so that hovering the image also
-					   adds the underline to the text */
-					span {
-						text-decoration: underline;
-					}
-				}
-			`}
-		>
-			<img src={imageUrl} alt={altText} width="130px" height="130px" />
-			<div
+		<img src={imageUrl} alt={altText} width="130px" height="130px" />
+		{links.map((link, index) => (
+			<a
+				href={link.linkTo}
+				data-ignore="global-link-styling"
 				css={css`
-					margin-bottom: 8px;
-					display: block;
-					width: 80%;
+					text-decoration: none;
 				`}
 			>
-				<span
+				<div
 					css={css`
-						${headline.xxxsmall({ fontWeight: 'bold' })};
-						background-color: ${neutral[0]};
-						padding: 0 5px 4px;
-						box-decoration-break: clone;
-						position: relative;
-						color: ${neutral[100]};
+						margin-bottom: 8px;
+						display: block;
+						width: 80%;
 					`}
 				>
-					{text}
-				</span>
-			</div>
-		</a>
+					<span
+						css={css`
+							${headline.xxxsmall({ fontWeight: 'bold' })};
+							background-color: ${index % 2 === 0
+								? neutral[0]
+								: backgroundColour};
+							padding: 0 5px 4px;
+							box-decoration-break: clone;
+							position: relative;
+							color: ${neutral[100]};
+							text-decoration: none;
+							:hover {
+								text-decoration: underline;
+							}
+						`}
+					>
+						{link.text}
+					</span>
+				</div>
+			</a>
+		))}
 	</li>
 );
 
@@ -108,43 +111,61 @@ export const Treats = ({
 			`}
 		>
 			{treats.map((treat) => {
-				if (treat.linkTo === '/crosswords' && treat.text) {
+				if (
+					treat.links[0].linkTo === '/crosswords' &&
+					treat.links[0].text
+				) {
 					// Treats that link to /crosswords are special. If any
 					// treat has this exact url then an svg of a crossword
 					// is displayed above the text
 					return (
 						<>
 							<li>
-								<a href={treat.linkTo}>
+								<a href={treat.links[0].linkTo}>
 									<SvgCrossword />
 								</a>
 							</li>
-							<TextTreat
-								text={treat.text}
-								linkTo={treat.linkTo}
-								borderColour={borderColour}
-							/>
+							{treat.links.map((link) => (
+								<TextTreat
+									text={link.text}
+									linkTo={link.linkTo}
+									borderColour={borderColour}
+								/>
+							))}
 						</>
 					);
 				}
 
-				if (treat.imageUrl && treat.altText) {
+				if (
+					treat.imageUrl &&
+					treat.altText &&
+					(treat.theme || treat.theme === 0) // ArticlePillar.News is zero
+				) {
+					const palette = decidePalette({
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: treat.theme,
+					});
 					return (
 						<ImageTreat
 							imageUrl={treat.imageUrl}
-							linkTo={treat.linkTo}
+							links={treat.links}
 							altText={treat.altText}
-							text={treat.text}
+							backgroundColour={palette.background.treat}
 						/>
 					);
 				}
 
 				return (
-					<TextTreat
-						text={treat.text}
-						linkTo={treat.linkTo}
-						borderColour={borderColour}
-					/>
+					<>
+						{treat.links.map((link) => (
+							<TextTreat
+								text={link.text}
+								linkTo={link.linkTo}
+								borderColour={borderColour}
+							/>
+						))}
+					</>
 				);
 			})}
 		</ul>

@@ -1,3 +1,4 @@
+import { ArticlePillar } from '@guardian/libs';
 import type { FEFrontCard, TreatType } from '../types/front';
 
 /**
@@ -15,22 +16,40 @@ import type { FEFrontCard, TreatType } from '../types/front';
  */
 const PLATFORM_TREATS: TreatType[] = [
 	{
-		linkTo: '/info/2015/dec/08/daily-email-us?INTCMP=gdnwb_treat_election_today_us',
+		links: [
+			{
+				linkTo: '/info/2015/dec/08/daily-email-us?INTCMP=gdnwb_treat_election_today_us',
+				text: 'Guardian Today US: Get the headlines & more in a daily email',
+			},
+		],
+		theme: ArticlePillar.News,
 		containerTitle: 'Spotlight',
 		editionId: 'US',
 		imageUrl:
 			'https://uploads.guim.co.uk/2020/10/22/newsletter-treat-img.png',
 		altText: 'The White House',
-		text: 'Guardian Today US: Get the headlines & more in a daily email',
 	},
 	{
-		linkTo: '/tv-and-radio/ng-interactive/2022/aug/01/whats-on-netflix-and-amazon-this-month-august',
+		links: [
+			{
+				linkTo: '/tv-and-radio/ng-interactive/2022/aug/01/whats-on-netflix-and-amazon-this-month-august',
+				text: "What's on Netflix & Amazon this month",
+			},
+			{
+				linkTo: '/tv-and-radio/ng-interactive/2022/aug/01/whats-on-netflix-and-amazon-this-month-august',
+				text: 'Second link',
+			},
+			{
+				linkTo: '/tv-and-radio/ng-interactive/2022/aug/01/whats-on-netflix-and-amazon-this-month-august',
+				text: 'This is a third link with some longer text',
+			},
+		],
+		theme: ArticlePillar.Culture,
 		containerTitle: 'Culture',
 		editionId: 'UK',
 		imageUrl:
 			'https://interactive.guim.co.uk/thrashers/culture-nugget/hashed/thrasher_img_55.1c0762e5.png',
 		altText: "What's on Netflix and Amazon this month",
-		text: "What's on Netflix & Amazon this month",
 		pageId: 'uk',
 	},
 ];
@@ -64,8 +83,12 @@ export const enhanceTreats = (
 	pageId: string,
 ): TreatType[] => {
 	const classicTreats = treats.map((treat) => ({
-		text: treat.header.headline,
-		linkTo: treat.properties.href ?? treat.header.url,
+		links: [
+			{
+				text: treat.header.headline,
+				linkTo: treat.properties.href ?? treat.header.url,
+			},
+		],
 		editionId,
 	}));
 
