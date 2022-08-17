@@ -8,6 +8,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
+import { darkModeCss } from 'styles';
 import { DefaultByline } from './Byline.defaults';
 
 const blogStyles = css`
@@ -31,6 +32,11 @@ const blogStyles = css`
 
 const blogAnchorStyles = (format: ArticleFormat) => css`
 	color: ${background.byline(format)};
+
+	${darkModeCss`
+	color: ${background.byline(format)};
+	`}
+
 	text-decoration: none;
 	:hover {
 		text-decoration: underline;
@@ -47,7 +53,7 @@ const AnalysisByline: React.FC<Props> = ({ format, bylineHtml }) => (
 		format={format}
 		bylineHtml={bylineHtml}
 		styles={css(blogStyles)}
-		anchorStyles={css(blogAnchorStyles(format))}
+		anchorStyles={css([blogAnchorStyles(format)])}
 	/>
 );
 

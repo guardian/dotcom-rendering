@@ -635,10 +635,6 @@ const bylineDark = (format: ArticleFormat): Colour => {
 				return opinion[500];
 			case ArticlePillar.Lifestyle:
 				return lifestyle[500];
-			case ArticleSpecial.Labs:
-				return labs[500];
-			case ArticleSpecial.SpecialReport:
-				return brandAlt[500];
 			case ArticlePillar.News:
 			default:
 				return news[500];
