@@ -515,6 +515,9 @@
                 },
                 "group": {
                     "type": "string"
+                },
+                "regionalFocus": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -2228,6 +2231,9 @@
                             "type": "string"
                         },
                         "group": {
+                            "type": "string"
+                        },
+                        "regionalFocus": {
                             "type": "string"
                         }
                     },
