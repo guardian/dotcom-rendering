@@ -9,6 +9,8 @@ import {
 	headline,
 	textSans,
 } from '@guardian/source-foundations';
+import { SvgArrowRightStraight } from '@guardian/source-react-components';
+import { EditionDropdown } from '../../EditionDropdown.importable';
 import { Column } from './Column';
 import { MoreColumn } from './MoreColumn';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
@@ -115,6 +117,102 @@ const brandExtensionLink = css`
 	}
 `;
 
+const searchBar = css`
+	box-sizing: border-box;
+	display: block;
+	margin-left: 13px;
+	max-width: 80%;
+	position: relative;
+	width: 100%;
+	margin-bottom: 12px * 2;
+	margin-right: 42px / 2 + 20px;
+`;
+
+const searchInput = css`
+	background-color: #213f72;
+	border: 0;
+	border-radius: 1000px;
+	box-sizing: border-box;
+	color: #ffffff;
+	font-size: 20px;
+	height: 36px;
+	padding-left: 38px;
+	vertical-align: middle;
+	width: 100%;
+
+	&::placeholder {
+		color: #ffffff;
+	}
+
+	&:focus {
+		outline: none;
+		padding-right: 20px * 2;
+
+		&::placeholder {
+			opacity: 0;
+		}
+	}
+
+	:focus ~ &,
+	&:focus,
+	&:active {
+		opacity: 1;
+		outline: none;
+		pointer-events: all;
+	}
+`;
+
+const searchGlass = css`
+	position: absolute;
+	left: 10px;
+	top: 7px;
+	fill: #ffffff;
+	height: 22px;
+	width: 22px;
+`;
+
+const rightArrow = css`
+	fill: #ffffff;
+`;
+
+const searchSubmit = css`
+	background: transparent;
+	border: 0;
+	bottom: 0;
+	cursor: pointer;
+	display: block;
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 50px;
+
+	&:before,
+	&:after {
+		border: 2px solid #ffffff;
+		border-left: 0;
+		border-top: 0;
+		content: '';
+		display: block;
+		position: absolute;
+		right: 14px;
+	}
+
+	&:before {
+		height: 12px;
+		top: 11px;
+		transform: rotate(-45deg);
+		width: 12px;
+	}
+
+	&:after {
+		border-right: 0;
+		top: 17px;
+		width: 20px;
+	}
+`;
+
 export const Columns: React.FC<{
 	format: ArticleFormat;
 	nav: NavType;
@@ -131,7 +229,80 @@ export const Columns: React.FC<{
 				index={i}
 			/>
 		))}
+
+		<form
+			css={searchBar}
+			className="menu-search js-menu-search"
+			action="https://www.google.co.uk/search"
+		>
+			<input
+				css={searchInput}
+				type="text"
+				name="q"
+				className="menu-search__search-box js-menu-search-term"
+				id="google-search"
+				placeholder="Search"
+				data-link-name="nav2 : search"
+			/>
+
+			<label
+				css={searchGlass}
+				className="menu-search__glass"
+				htmlFor="google-search"
+			>
+				<span className="inline-search-36 inline-icon main-menu__icon main-menu__icon--search">
+					<svg
+						width="18"
+						height="18"
+						viewBox="0 0 18 18"
+						className="main-menu__icon__svg main-menu__icon--search__svg inline-search-36__svg inline-icon__svg"
+					>
+						<path d="M6.5 1.6c2.7 0 4.9 2.2 4.9 4.9s-2.2 4.9-4.9 4.9-4.9-2.2-4.9-4.9 2.2-4.9 4.9-4.9m0-1.6C2.9 0 0 2.9 0 6.5S2.9 13 6.5 13 13 10.1 13 6.5 10.1 0 6.5 0zm6.6 11.5 4.9 4.9-1.6 1.6-4.9-4.9v-.8l.8-.8h.8z"></path>
+					</svg>
+				</span>
+
+				<span className="u-h">What term do you want to search?</span>
+			</label>
+
+			<button
+				css={searchSubmit}
+				className="menu-search__submit"
+				data-link-name="nav2 : search : submit"
+				type="submit"
+			>
+				<div css={rightArrow} className="right-arrow__icon">
+					<svg
+						width="23"
+						height="23"
+						viewBox="0 0 23 23"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<title />
+						<desc />
+						<g fill="none">
+							<path
+								d="M23 11.501l-10.296 10.099-.959-.959 8.055-8.64h-19.8v-2h19.8l-8.055-9.04.959-.96 10.296 10.5v1"
+								fill="#fff"
+							/>
+							<path
+								d="M11.001 32.313c-11.752 0-21.313-9.561-21.313-21.313 0-11.751 9.561-21.312 21.313-21.312 11.751 0 21.312 9.561 21.312 21.312 0 11.752-9.561 21.313-21.312 21.313m0-43.313c-12.151 0-22.001 9.849-22.001 22s9.85 22.001 22.001 22.001c12.15 0 21.999-9.85 21.999-22.001 0-12.151-9.849-22-21.999-22"
+								fill="#707070"
+							/>
+						</g>
+					</svg>
+				</div>
+				<span className="u-h">Search with google</span>
+			</button>
+
+			<input
+				type="hidden"
+				name="as_sitesearch"
+				value="www.theguardian.com"
+			/>
+		</form>
+
 		<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
+		<EditionDropdown />
 		<MoreColumn
 			column={nav.otherLinks}
 			brandExtensions={nav.brandExtensions}
