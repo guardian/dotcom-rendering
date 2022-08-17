@@ -294,7 +294,6 @@ export const Card = ({
 			containerType={containerType}
 			isDynamo={isDynamo}
 		>
-			<CardLink linkTo={linkTo} dataLinkName={dataLinkName} />
 			<CardLayout
 				imagePosition={imageUrl !== undefined ? imagePosition : 'top'}
 				imagePositionOnMobile={
@@ -323,30 +322,36 @@ export const Card = ({
 				>
 					<Flex>
 						<HeadlineWrapper>
-							<CardHeadline
-								headlineText={headlineText}
-								format={format}
-								containerPalette={containerPalette}
-								size={headlineSize}
-								sizeOnMobile={headlineSizeOnMobile}
-								showQuotes={showQuotes}
-								kickerText={
-									format.design === ArticleDesign.LiveBlog
-										? 'Live'
-										: kickerText
-								}
-								showPulsingDot={
-									format.design === ArticleDesign.LiveBlog ||
-									showPulsingDot
-								}
-								showSlash={
-									format.design === ArticleDesign.LiveBlog ||
-									showSlash
-								}
-								byline={byline}
-								showByline={showByline}
-								isDynamo={isDynamo}
-							/>
+							<CardLink
+								linkTo={linkTo}
+								dataLinkName={dataLinkName}
+							>
+								<CardHeadline
+									headlineText={headlineText}
+									format={format}
+									containerPalette={containerPalette}
+									size={headlineSize}
+									sizeOnMobile={headlineSizeOnMobile}
+									showQuotes={showQuotes}
+									kickerText={
+										format.design === ArticleDesign.LiveBlog
+											? 'Live'
+											: kickerText
+									}
+									showPulsingDot={
+										format.design ===
+											ArticleDesign.LiveBlog ||
+										showPulsingDot
+									}
+									showSlash={
+										format.design ===
+											ArticleDesign.LiveBlog || showSlash
+									}
+									byline={byline}
+									showByline={showByline}
+									isDynamo={isDynamo}
+								/>
+							</CardLink>
 							{starRating !== undefined ? (
 								<StarRatingComponent rating={starRating} />
 							) : null}

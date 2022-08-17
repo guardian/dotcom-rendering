@@ -21,10 +21,17 @@ type Props = {
 	linkTo: string;
 	containerPalette?: DCRContainerPalette;
 	dataLinkName?: string;
+	children: React.ReactNode;
 };
 
-export const CardLink = ({ linkTo, dataLinkName = 'article' }: Props) => {
+export const CardLink = ({
+	linkTo,
+	dataLinkName = 'article',
+	children,
+}: Props) => {
 	return (
-		<a href={linkTo} css={fauxLinkStyles} data-link-name={dataLinkName} />
+		<a href={linkTo} css={fauxLinkStyles} data-link-name={dataLinkName}>
+			{children}
+		</a>
 	);
 };
