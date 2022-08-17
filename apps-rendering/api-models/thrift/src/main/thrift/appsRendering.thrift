@@ -128,8 +128,7 @@ struct Newsletter {
     5: required string frequency
     6: required i32 listId
     7: required string group
-	8: required string successDescription
-
+    8: required string successDescription
 }
 
 struct RenderingRequest {
@@ -142,5 +141,5 @@ struct RenderingRequest {
     7: optional RelatedContent relatedContent
     8: optional FootballContent footballContent
     9: optional Edition edition
-	10: optional Newsletter promotedNewsletter
+    10: optional Newsletter promotedNewsletter
 }
