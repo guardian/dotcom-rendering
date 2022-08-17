@@ -33,7 +33,6 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 		console.log({ newsletterId });
 	};
 
-	// TO DO - check what the hover color should be on the button (if any)
 	return (
 		<>
 			<Label
@@ -82,7 +81,7 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 							background-color: ${neutral[86]};
 							color: ${neutral[7]};
 							&:hover {
-								background-color: ${neutral[93]};
+								background-color: #d1d1d1;
 							}
 						`}
 					`}
