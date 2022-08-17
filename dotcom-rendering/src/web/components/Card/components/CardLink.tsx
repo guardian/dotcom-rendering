@@ -12,10 +12,6 @@ const fauxLinkStyles = css`
 	left: 0;
 	background-color: transparent;
 
-	opacity: 0;
-	text-indent: 200%;
-	overflow: hidden;
-
 	:focus {
 		${focusHalo};
 	}
@@ -34,8 +30,11 @@ export const CardLink = ({
 	dataLinkName = 'article',
 }: Props) => {
 	return (
-		<a href={linkTo} css={fauxLinkStyles} data-link-name={dataLinkName}>
-			{headlineText}
-		</a>
+		<a
+			href={linkTo}
+			css={fauxLinkStyles}
+			data-link-name={dataLinkName}
+			aria-label={headlineText}
+		/>
 	);
 };
