@@ -8,6 +8,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import type { BadgeType } from '../../types/badge';
+import type { Palette } from '../../types/palette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 import { Badge } from './Badge';

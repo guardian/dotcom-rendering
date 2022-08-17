@@ -11,6 +11,7 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { getSoleContributor } from '../../lib/byline';
 import type { Branding as BrandingType } from '../../types/branding';
+import type { Palette } from '../../types/palette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 import { Avatar } from './Avatar';

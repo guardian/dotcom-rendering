@@ -6,6 +6,7 @@ import type {
 	DCRContainerPalette,
 	DCRContainerType,
 } from '../../../../types/front';
+import type { Palette } from '../../../../types/palette';
 import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {

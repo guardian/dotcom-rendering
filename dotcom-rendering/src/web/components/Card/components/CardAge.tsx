@@ -3,6 +3,7 @@ import { ArticleDesign, timeAgo } from '@guardian/libs';
 import { textSans, until } from '@guardian/source-foundations';
 import ClockIcon from '../../../../static/icons/clock.svg';
 import type { DCRContainerPalette } from '../../../../types/front';
+import type { Palette } from '../../../../types/palette';
 import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {

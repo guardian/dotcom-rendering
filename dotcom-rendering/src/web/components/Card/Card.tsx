@@ -10,6 +10,7 @@ import type {
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../../../types/front';
+import type { Palette } from '../../../types/palette';
 import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { Avatar } from '../Avatar';

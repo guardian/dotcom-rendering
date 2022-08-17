@@ -8,6 +8,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { useState } from 'react';
+import type { Palette } from '../../types/palette';
 import type { TrailTabType, TrailType } from '../../types/trails';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 

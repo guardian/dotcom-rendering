@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source-foundations';
 import { border, from } from '@guardian/source-foundations';
 import { joinUrl } from '../../lib/joinUrl';
+import type { Palette } from '../../types/palette';
 import type {
 	CAPITrailTabType,
 	CAPITrailType,
