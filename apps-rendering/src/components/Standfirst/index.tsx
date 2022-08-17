@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { Item } from 'item';
 import { getFormat } from 'item';
+import AnalysisStandfirst from './AnalysisStandfirst';
 import DeadBlogStandfirst from './DeadBlogStandfirst';
 import GalleryStandfirst from './GalleryStandfirst';
 import ImmersiveLabsStandfirst from './ImmersiveLabsStandfirst';
@@ -60,6 +61,8 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 			return <ReviewStandfirst item={item} />;
 		case ArticleDesign.Interview:
 			return <InterviewStandfirst item={item} />;
+		case ArticleDesign.Analysis:
+			return <AnalysisStandfirst item={item} />;
 		default:
 			return (
 				<DefaultStandfirst
