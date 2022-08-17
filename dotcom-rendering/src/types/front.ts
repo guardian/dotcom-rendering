@@ -447,5 +447,5 @@ export type TreatType = {
 	imageUrl?: string;
 	altText?: string;
 	/** The container display name where this treat should show */
-	displayName?: string;
+	containerTitle?: string;
 };

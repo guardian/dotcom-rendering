@@ -7,7 +7,7 @@ import type { FEFrontCard, TreatType } from '../types/front';
  *
  * This list controls treats that will appear in the bottom of the left column for a
  * particular container. The actual container that a treat appears in is decided
- * based on the values of displayName and editionId
+ * based on the values of containerTitle and editionId
  *
  * If both imageUrl and altText are provided, then an image will be shown. Otherwise,
  * if no imageUrl or altText are given, then a basic text treat will be shown
@@ -16,7 +16,7 @@ import type { FEFrontCard, TreatType } from '../types/front';
 const PLATFORM_TREATS: TreatType[] = [
 	{
 		linkTo: '/info/2015/dec/08/daily-email-us?INTCMP=gdnwb_treat_election_today_us',
-		displayName: 'Spotlight',
+		containerTitle: 'Spotlight',
 		editionId: 'US',
 		imageUrl:
 			'https://uploads.guim.co.uk/2020/10/22/newsletter-treat-img.png',
@@ -25,7 +25,7 @@ const PLATFORM_TREATS: TreatType[] = [
 	},
 	{
 		linkTo: '/tv-and-radio/ng-interactive/2022/aug/01/whats-on-netflix-and-amazon-this-month-august',
-		displayName: 'Culture',
+		containerTitle: 'Culture',
 		editionId: 'UK',
 		imageUrl:
 			'https://interactive.guim.co.uk/thrashers/culture-nugget/hashed/thrasher_img_55.1c0762e5.png',
@@ -36,20 +36,21 @@ const PLATFORM_TREATS: TreatType[] = [
 
 const getPlatformTreats = (
 	editionId: EditionId,
-	displayName: string,
+	containerTitle: string,
 ): TreatType[] => {
 	return PLATFORM_TREATS.filter((treat) => {
 		// We decide if a treat should be shown for a container based on
-		// if the editionId matches and if the displayName text is the same.
+		// if the editionId matches and if the containerTitle text is the same.
 		return (
-			treat.displayName === displayName && treat.editionId === editionId
+			treat.containerTitle === containerTitle &&
+			treat.editionId === editionId
 		);
 	});
 };
 export const enhanceTreats = (
 	treats: FEFrontCard[],
 	editionId: EditionId,
-	displayName: string,
+	containerTitle: string,
 ): TreatType[] => {
 	const classicTreats = treats.map((treat) => ({
 		text: treat.header.headline,
@@ -58,7 +59,7 @@ export const enhanceTreats = (
 	}));
 
 	// Add any platform treats that we can find for this container
-	const platformTreats = getPlatformTreats(editionId, displayName);
+	const platformTreats = getPlatformTreats(editionId, containerTitle);
 
 	return [...platformTreats, ...classicTreats];
 };
