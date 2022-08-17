@@ -49,6 +49,15 @@ const Default: FC = () => (
 	/>
 );
 
+const Analysis: FC = () => (
+	<Byline
+		theme={selectPillar(ArticlePillar.News)}
+		design={ArticleDesign.Analysis}
+		display={ArticleDisplay.Standard}
+		bylineHtml={mockBylineHtml()}
+	/>
+);
+
 const Comment: FC = () => (
 	<Byline
 		theme={selectPillar(ArticlePillar.Opinion)}
@@ -97,4 +106,4 @@ export default {
 	decorators: [withKnobs],
 };
 
-export { Default, Comment, Labs, Deadblog };
+export { Default, Comment, Labs, Deadblog, Analysis };
