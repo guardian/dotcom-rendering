@@ -42,7 +42,12 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 					}
 				`}
 			/>
-			<form css={formStyle} action={undefined}>
+			<form
+				css={formStyle}
+				action={undefined}
+				className={'js-signup-form'}
+				data-newsletter-id={newsletterId}
+			>
 				<TextInput
 					type="email"
 					width={30}
@@ -60,6 +65,7 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 					onClick={handleSubmit}
 					size="small"
 					title="Sign up"
+					type="submit"
 					cssOverrides={css`
 						background-color: ${neutral[0]};
 						margin-bottom: ${remSpace[2]};
