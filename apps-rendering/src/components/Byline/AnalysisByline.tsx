@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline, until } from '@guardian/source-foundations';
+import { headline, remSpace, until } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { DefaultByline } from './Byline.defaults';
 
@@ -8,8 +8,7 @@ const blogStyles = css`
 	${headline.medium({
 		fontWeight: 'light',
 	})}
-	color: green;
-	// background: yellow;
+	color: #707070;
 	line-height: 38px;
 	display: flex;
 	flex-direction: column;
@@ -20,10 +19,11 @@ const blogStyles = css`
 			fontWeight: 'light',
 		})}
 	}
+	padding-bottom: ${remSpace[6]};
 `;
 
 const blogAnchorStyles = css`
-	color: red;
+	color: #ab0613;
 	text-decoration: none;
 	:hover {
 		text-decoration: underline;
@@ -35,7 +35,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const DeadblogByline: React.FC<Props> = ({ format, bylineHtml }) => (
+const AnalysisByline: React.FC<Props> = ({ format, bylineHtml }) => (
 	<DefaultByline
 		format={format}
 		bylineHtml={bylineHtml}
@@ -44,4 +44,4 @@ const DeadblogByline: React.FC<Props> = ({ format, bylineHtml }) => (
 	/>
 );
 
-export default DeadblogByline;
+export default AnalysisByline;
