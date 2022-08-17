@@ -1,18 +1,26 @@
 import { css } from '@emotion/react';
 import { focusHalo } from '@guardian/source-foundations';
 import type { DCRContainerPalette } from '../../../../types/front';
-import { getZIndex } from '../../../lib/getZIndex';
 
 const fauxLinkStyles = css`
-	position: absolute;
-	${getZIndex('card-link')};
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background-color: transparent;
-
-	:focus {
+	text-decoration: none;
+	a&:focus {
+		/*
+			remove focus styling for <a> tag because it's applied to the
+			:before pseudo-element instead.
+		*/
+		box-shadow: none;
+	}
+	:before {
+		position: absolute;
+		content: '';
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-color: transparent;
+	}
+	:focus:before {
 		${focusHalo};
 	}
 `;
