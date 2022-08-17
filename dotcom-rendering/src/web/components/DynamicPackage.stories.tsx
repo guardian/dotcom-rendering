@@ -1,8 +1,8 @@
 import { breakpoints } from '@guardian/source-foundations';
 import type { DCRGroupedTrails } from 'src/types/front';
 import { trails } from '../../../fixtures/manual/trails';
-import { Section } from './Section';
 import { DynamicPackage } from './DynamicPackage';
+import { Section } from './Section';
 
 const defaultGroupedTrails: DCRGroupedTrails = {
 	huge: [],
@@ -32,10 +32,9 @@ export default {
 };
 
 export const One = () => (
-	<ContainerLayout
+	<Section
 		title="DynamicPackage"
 		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -47,17 +46,16 @@ export const One = () => (
 			}}
 			containerPalette="LongRunningPalette"
 		/>
-	</ContainerLayout>
+	</Section>
 );
 One.story = {
 	name: 'With one standard card',
 };
 
 export const Two = () => (
-	<ContainerLayout
+	<Section
 		title="DynamicPackage"
 		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -69,7 +67,7 @@ export const Two = () => (
 			}}
 			containerPalette="LongRunningPalette"
 		/>
-	</ContainerLayout>
+	</Section>
 );
 Two.story = {
 	name: 'With two standard cards',
@@ -124,10 +122,9 @@ Five.story = {
 };
 
 export const Six = () => (
-	<ContainerLayout
+	<Section
 		title="DynamicPackage"
 		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -139,17 +136,16 @@ export const Six = () => (
 			}}
 			containerPalette="LongRunningPalette"
 		/>
-	</ContainerLayout>
+	</Section>
 );
 Six.story = {
 	name: 'With six standard cards',
 };
 
 export const Seven = () => (
-	<ContainerLayout
+	<Section
 		title="DynamicPackage"
 		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -161,17 +157,16 @@ export const Seven = () => (
 			}}
 			containerPalette="LongRunningPalette"
 		/>
-	</ContainerLayout>
+	</Section>
 );
 Seven.story = {
 	name: 'With seven standard cards',
 };
 
 export const Eight = () => (
-	<ContainerLayout
+	<Section
 		title="DynamicPackage"
 		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -183,17 +178,17 @@ export const Eight = () => (
 			}}
 			containerPalette="LongRunningPalette"
 		/>
-	</ContainerLayout>
+	</Section>
 );
 Eight.story = {
 	name: 'With eight standard cards',
 };
 
 export const Nine = () => (
-	<ContainerLayout
+	<Section
 		title="DynamicPackage"
 		showTopBorder={true}
-		sideBorders={true}
+		showSideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
@@ -205,7 +200,7 @@ export const Nine = () => (
 			}}
 			containerPalette="LongRunningPalette"
 		/>
-	</ContainerLayout>
+	</Section>
 );
 Nine.story = {
 	name: 'With nine standard cards',
@@ -215,10 +210,9 @@ export const Boosted1 = () => {
 	const primary = [...trails].slice(0)[0];
 
 	return (
-		<ContainerLayout
+		<Section
 			title="DynamicPackage"
 			showTopBorder={true}
-			sideBorders={true}
 			padContent={false}
 			centralBorder="partial"
 		>
@@ -231,7 +225,7 @@ export const Boosted1 = () => {
 				showAge={true}
 				containerPalette="LongRunningPalette"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Boosted1.story = {
@@ -243,10 +237,9 @@ export const Boosted2 = () => {
 	const remaining = [...trails].slice(1, 2);
 
 	return (
-		<ContainerLayout
+		<Section
 			title="DynamicPackage"
 			showTopBorder={true}
-			sideBorders={true}
 			padContent={false}
 			centralBorder="partial"
 		>
@@ -259,7 +252,7 @@ export const Boosted2 = () => {
 				showAge={true}
 				containerPalette="LongRunningPalette"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Boosted2.story = {
@@ -349,10 +342,9 @@ export const Boosted8 = () => {
 	const remaining = [...trails].slice(1, 8);
 
 	return (
-		<ContainerLayout
+		<Section
 			title="DynamicPackage"
 			showTopBorder={true}
-			sideBorders={true}
 			padContent={false}
 			centralBorder="partial"
 		>
@@ -365,7 +357,7 @@ export const Boosted8 = () => {
 				showAge={true}
 				containerPalette="LongRunningPalette"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Boosted8.story = {
@@ -377,10 +369,9 @@ export const Boosted9 = () => {
 	const remaining = [...trails].slice(1, 9);
 
 	return (
-		<ContainerLayout
+		<Section
 			title="DynamicPackage"
 			showTopBorder={true}
-			sideBorders={true}
 			padContent={false}
 			centralBorder="partial"
 		>
@@ -393,7 +384,7 @@ export const Boosted9 = () => {
 				showAge={true}
 				containerPalette="LongRunningPalette"
 			/>
-		</ContainerLayout>
+		</Section>
 	);
 };
 Boosted9.story = {
