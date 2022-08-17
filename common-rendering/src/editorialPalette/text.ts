@@ -65,6 +65,10 @@ const brandingDark = (_format: ArticleFormat): Colour => {
 	return neutral[86];
 };
 
+const byline = (_format: ArticleFormat): Colour => {
+	return neutral[46]
+};
+
 const bylineAnchor = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -1002,6 +1006,7 @@ const text = {
 	articleLink,
 	branding,
 	brandingDark,
+	byline,
 	bylineAnchor,
 	bylineAnchorDark,
 	bylineDark,

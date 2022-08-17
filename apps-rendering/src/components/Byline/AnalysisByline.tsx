@@ -1,24 +1,22 @@
 import { css } from '@emotion/react';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
-import type { ArticleFormat } from '@guardian/libs';
 import {
-	headline,
-	neutral,
-	remSpace,
-	until,
-} from '@guardian/source-foundations';
+	background,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
+import { headline, remSpace, until } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { darkModeCss } from 'styles';
 import { DefaultByline } from './Byline.defaults';
 
-const styles = css`
+const styles = (format: ArticleFormat) => css`
 	${headline.medium({
 		fontWeight: 'light',
 		fontStyle: 'italic',
 		lineHeight: 'tight',
 	})}
 
-	color: ${neutral[46]};
+	color: ${text.byline(format)};
 	display: flex;
 	flex-direction: column;
 
@@ -54,7 +52,7 @@ const AnalysisByline: React.FC<Props> = ({ format, bylineHtml }) => (
 	<DefaultByline
 		format={format}
 		bylineHtml={bylineHtml}
-		styles={styles}
+		styles={styles(format)}
 		anchorStyles={anchorStyles(format)}
 	/>
 );
