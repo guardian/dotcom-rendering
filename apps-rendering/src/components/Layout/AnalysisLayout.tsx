@@ -1,18 +1,14 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import {
-	background,
-	breakpoints,
-	from,
-	opinion,
-} from '@guardian/source-foundations';
+import { breakpoints, from } from '@guardian/source-foundations';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
+
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import ArticleBody from 'components/ArticleBody';
 import Byline from 'components/Byline';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
-import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
@@ -28,17 +24,18 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
+import { ArticleFormat } from '@guardian/libs';
 
 // ----- Styles ----- //
 
-const DarkStyles = darkModeCss`
-    background: ${background.inverse};
+const backgroundStyles = (format: ArticleFormat) => css`
+	background-color: ${background.articleContent(format)};
+
+	${darkModeCss`
+        background-color: ${background.articleContentDark(format)}
+    `}
 `;
-
 const BorderStyles = css`
-	background: ${opinion[800]};
-	${darkModeCss`background: ${background.inverse};`}
-
 	${from.wide} {
 		width: ${breakpoints.wide}px;
 		margin: 0 auto;
@@ -51,7 +48,7 @@ interface Props {
 }
 
 const AnalysisLayout: FC<Props> = ({ item, children }) => (
-	<main css={DarkStyles}>
+	<main css={backgroundStyles(item)}>
 		<article css={BorderStyles}>
 			<header css={articleWidthStyles}>
 				<MainMedia
@@ -66,9 +63,6 @@ const AnalysisLayout: FC<Props> = ({ item, children }) => (
 				<Standfirst item={item} />
 				<StraightLines cssOverrides={lineStyles} count={4} />
 				<Metadata item={item} />
-				<section css={articleWidthStyles}>
-					<Logo item={item} />
-				</section>
 			</header>
 			<ArticleBody className={[articleWidthStyles]} format={item}>
 				{children}
