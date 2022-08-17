@@ -126,9 +126,7 @@ struct Newsletter {
     3: required string theme
     4: required string description
     5: required string frequency
-    6: required i32 listId
-    7: required string group
-    8: required string successDescription
+    6: required string successDescription
 }
 
 struct RenderingRequest {
