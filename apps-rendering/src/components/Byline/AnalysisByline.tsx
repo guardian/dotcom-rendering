@@ -14,17 +14,19 @@ import { DefaultByline } from './Byline.defaults';
 const styles = css`
 	${headline.medium({
 		fontWeight: 'light',
+		fontStyle: 'italic',
+		lineHeight: 'tight',
 	})}
 
 	color: ${neutral[46]};
-	line-height: 38px;
 	display: flex;
 	flex-direction: column;
-	font-style: italic;
 
 	${until.mobileMedium} {
 		${headline.small({
 			fontWeight: 'light',
+			fontStyle: 'italic',
+			lineHeight: 'tight',
 		})}
 	}
 	padding-bottom: ${remSpace[6]};
