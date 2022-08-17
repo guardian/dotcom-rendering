@@ -47,6 +47,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	// const contributionsServiceUrl = getContributionsServiceUrl(front);
 
+	/**
+	 * This property currently only applies to the header and merchandising slots
+	 */
 	const renderAds = !front.isAdFreeUser;
 
 	return (

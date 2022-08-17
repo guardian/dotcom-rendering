@@ -210,6 +210,9 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 	/** TODO: this data needs to come from the newsletters API */
 	const newsletterRegionFocus = 'UK Focused';
 
+	/**
+	 * This property currently only applies to the header and merchandising slots
+	 */
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
 	return (

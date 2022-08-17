@@ -133,6 +133,9 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 	// often reach readers who are less familiar with the Guardian.
 	const isSlimNav = !CAPIArticle.config.switches.interactiveFullHeaderSwitch;
 
+	/**
+	 * This property currently only applies to the header and merchandising slots
+	 */
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
 	if (isSlimNav) {
