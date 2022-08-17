@@ -30,7 +30,7 @@ const styles = css`
 	padding-bottom: ${remSpace[6]};
 `;
 
-const blogAnchorStyles = (format: ArticleFormat) => css`
+const anchorStyles = (format: ArticleFormat) => css`
 	color: ${background.byline(format)};
 
 	${darkModeCss`
