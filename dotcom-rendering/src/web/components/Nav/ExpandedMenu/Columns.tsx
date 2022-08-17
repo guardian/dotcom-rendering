@@ -215,8 +215,7 @@ const searchSubmit = css`
 export const Columns: React.FC<{
 	format: ArticleFormat;
 	nav: NavType;
-	editionId: EditionId;
-}> = ({ format, nav, editionId }) => (
+}> = ({ format, nav }) => (
 	<ul
 		css={columnsStyle(format.display)}
 		role="menubar"
@@ -301,10 +300,6 @@ export const Columns: React.FC<{
 		</form>
 
 		<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
-		<EditionDropdown
-			editionId={editionId}
-			dataLinkName="nav2 : topbar : edition-picker: toggle"
-		/>
 		<MoreColumn
 			column={nav.otherLinks}
 			brandExtensions={nav.brandExtensions}
