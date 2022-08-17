@@ -9,7 +9,6 @@ import {
 	headline,
 	textSans,
 } from '@guardian/source-foundations';
-import { EditionDropdown } from '../../EditionDropdown.importable';
 import { Column } from './Column';
 import { MoreColumn } from './MoreColumn';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
