@@ -53,7 +53,7 @@ const starsWrapper = css`
 	}
 `;
 
-const PositionStarRating: React.FC<{ rating: number }> = ({ rating }) => (
+const PositionStarRating = ({ rating }: { rating: number }) => (
 	<div css={starsWrapper}>
 		<StarRating rating={rating} size="large" />
 	</div>
@@ -136,11 +136,15 @@ const titleWrapper = (palette: Palette) => css`
 	}
 `;
 
-const ImageTitle: React.FC<{
+const ImageTitle = ({
+	title,
+	role,
+	palette,
+}: {
 	title: string;
 	role: RoleType;
 	palette: Palette;
-}> = ({ title, role, palette }) => {
+}) => {
 	switch (role) {
 		case 'inline':
 		case 'thumbnail':
