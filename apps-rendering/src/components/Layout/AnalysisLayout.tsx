@@ -50,19 +50,19 @@ interface Props {
 const AnalysisLayout: FC<Props> = ({ item, children }) => (
 	<main css={backgroundStyles(item)}>
 		<article css={BorderStyles}>
-			<header css={articleWidthStyles}>
+			<header>
 				<MainMedia
 					format={getFormat(item)}
 					mainMedia={item.mainMedia}
 				/>
 				<Series item={item} />
 				<Headline item={item} />
-
-				<Byline {...item} />
-
-				<Standfirst item={item} />
-				<StraightLines cssOverrides={lineStyles} count={4} />
-				<Metadata item={item} />
+				<section css={[articleWidthStyles]}>
+					<Byline {...item} />
+					<Standfirst item={item} />
+					<StraightLines cssOverrides={lineStyles} count={4} />
+					<Metadata item={item} />
+				</section>
 			</header>
 			<ArticleBody className={[articleWidthStyles]} format={item}>
 				{children}
