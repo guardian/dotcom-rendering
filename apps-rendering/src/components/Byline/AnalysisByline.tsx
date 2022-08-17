@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { headline, remSpace, until } from '@guardian/source-foundations';
+import {
+	headline,
+	neutral,
+	remSpace,
+	until,
+} from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { DefaultByline } from './Byline.defaults';
 
@@ -8,7 +14,8 @@ const blogStyles = css`
 	${headline.medium({
 		fontWeight: 'light',
 	})}
-	color: #707070;
+
+	color: ${neutral[46]};
 	line-height: 38px;
 	display: flex;
 	flex-direction: column;
@@ -22,8 +29,8 @@ const blogStyles = css`
 	padding-bottom: ${remSpace[6]};
 `;
 
-const blogAnchorStyles = css`
-	color: #ab0613;
+const blogAnchorStyles = (format: ArticleFormat) => css`
+	color: ${background.byline(format)};
 	text-decoration: none;
 	:hover {
 		text-decoration: underline;
@@ -40,7 +47,7 @@ const AnalysisByline: React.FC<Props> = ({ format, bylineHtml }) => (
 		format={format}
 		bylineHtml={bylineHtml}
 		styles={css(blogStyles)}
-		anchorStyles={css(blogAnchorStyles)}
+		anchorStyles={css(blogAnchorStyles(format))}
 	/>
 );
 
