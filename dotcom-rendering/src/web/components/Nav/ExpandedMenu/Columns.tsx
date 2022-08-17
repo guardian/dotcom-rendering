@@ -9,7 +9,6 @@ import {
 	headline,
 	textSans,
 } from '@guardian/source-foundations';
-import { SvgArrowRightStraight } from '@guardian/source-react-components';
 import { EditionDropdown } from '../../EditionDropdown.importable';
 import { Column } from './Column';
 import { MoreColumn } from './MoreColumn';
@@ -245,12 +244,11 @@ export const Columns: React.FC<{
 				data-link-name="nav2 : search"
 			/>
 
-			<label
-				css={searchGlass}
-				className="menu-search__glass"
-				htmlFor="google-search"
-			>
-				<span className="inline-search-36 inline-icon main-menu__icon main-menu__icon--search">
+			<label className="menu-search__glass" htmlFor="google-search">
+				<span
+					css={searchGlass}
+					className="inline-search-36 inline-icon main-menu__icon main-menu__icon--search"
+				>
 					<svg
 						width="18"
 						height="18"
