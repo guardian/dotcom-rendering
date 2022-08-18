@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { Edition } from '@guardian/apps-rendering-api-models/edition';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import {
 	background,
 	border,
