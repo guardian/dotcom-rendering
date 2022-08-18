@@ -31,7 +31,7 @@ describe('Enhance h2 Embeds', () => {
 
 		expect(enhanceH2s(input)).toEqual(expectedOutput);
 	});
-	it('does not set an id when it is an h2 not of type TextBlockElement', () => {
+	it('does not set an id for h2s of type TextBlockElement', () => {
 		const input: Block[] = [
 			{
 				...blockMetaData,
