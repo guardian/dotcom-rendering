@@ -7,6 +7,7 @@ import {
 	brandText,
 	from,
 	headline,
+	palette,
 	textSans,
 } from '@guardian/source-foundations';
 import {
@@ -150,14 +151,14 @@ const searchInput = css`
 	border: 0;
 	border-radius: 1000px;
 	box-sizing: border-box;
-	color: #ffffff;
+	color: ${palette.neutral[100]};
 	height: 36px;
 	padding-left: 38px;
 	vertical-align: middle;
 	width: 100%;
 
 	&::placeholder {
-		color: #ffffff;
+		color: ${palette.neutral[100]};
 	}
 
 	&:focus {
@@ -180,7 +181,7 @@ const searchGlass = css`
 	position: absolute;
 	left: 7px;
 	top: 3px;
-	fill: #ffffff;
+	fill: ${palette.neutral[100]};
 `;
 
 const searchSubmit = css`
@@ -196,7 +197,7 @@ const searchSubmit = css`
 	top: 0;
 	padding-bottom: 11px;
 	width: 50px;
-	fill: #ffffff;
+	fill: ${palette.neutral[100]};
 
 	&:focus,
 	&:active {
