@@ -65,7 +65,7 @@ export const enhanceTableOfContents = (
 	blocks: Block[],
 ): TOCType[] | undefined => {
 	if (
-		format.design !== 'ArticleDesign' ||
+		format.design !== 'AnalysisDesign' ||
 		hasInteractiveContentsElement(blocks)
 	) {
 		return undefined;
