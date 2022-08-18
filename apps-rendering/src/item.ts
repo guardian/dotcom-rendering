@@ -324,13 +324,13 @@ const itemFieldsWithBody = (
 
 const hasSomeTag =
 	(tagIds: string[]) =>
-		(tags: Tag[]): boolean =>
-			tags.some((tag) => tagIds.includes(tag.id));
+	(tags: Tag[]): boolean =>
+		tags.some((tag) => tagIds.includes(tag.id));
 
 const hasTag =
 	(tagId: string) =>
-		(tags: Tag[]): boolean =>
-			tags.some((tag) => tag.id === tagId);
+	(tags: Tag[]): boolean =>
+		tags.some((tag) => tag.id === tagId);
 
 const isAudio = hasTag('type/audio');
 
@@ -374,145 +374,145 @@ const isPicture = hasTag('type/picture');
 
 const fromCapiLiveBlog =
 	(context: Context) =>
-		(
-			request: RenderingRequest,
-			blockId: Option<string>,
-		): LiveBlog | DeadBlog => {
-			const { content } = request;
-			const body = content.blocks?.body ?? [];
-			const pageSize = content.tags.map((c) => c.id).includes('sport/sport')
-				? 30
-				: 10;
+	(
+		request: RenderingRequest,
+		blockId: Option<string>,
+	): LiveBlog | DeadBlog => {
+		const { content } = request;
+		const body = content.blocks?.body ?? [];
+		const pageSize = content.tags.map((c) => c.id).includes('sport/sport')
+			? 30
+			: 10;
 
-			const parsedBlocks = parseLiveBlocks(context)(body, content.tags);
-			const pagedBlocks = getPagedBlocks(pageSize, parsedBlocks, blockId);
-			return {
-				design:
-					content.fields?.liveBloggingNow === true
-						? ArticleDesign.LiveBlog
-						: ArticleDesign.DeadBlog,
-				blocks: parsedBlocks,
-				pagedBlocks,
-				totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
-				...itemFields(context, request),
-			};
+		const parsedBlocks = parseLiveBlocks(context)(body, content.tags);
+		const pagedBlocks = getPagedBlocks(pageSize, parsedBlocks, blockId);
+		return {
+			design:
+				content.fields?.liveBloggingNow === true
+					? ArticleDesign.LiveBlog
+					: ArticleDesign.DeadBlog,
+			blocks: parsedBlocks,
+			pagedBlocks,
+			totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
+			...itemFields(context, request),
 		};
+	};
 
 const fromCapi =
 	(context: Context) =>
-		(request: RenderingRequest, page: Option<string>): Item => {
-			const { content } = request;
-			const { tags, fields } = content;
+	(request: RenderingRequest, page: Option<string>): Item => {
+		const { content } = request;
+		const { tags, fields } = content;
 
-			// These checks aim for parity with the CAPI Scala client:
-			// https://github.com/guardian/content-api-scala-client/blob/9e249bcef47cc048da483b3453c10dd7d2e9565d/client/src/main/scala/com.gu.contentapi.client/utils/CapiModelEnrichment.scala
-			if (isInteractive(content)) {
-				return {
-					design: ArticleDesign.Interactive,
-					...itemFieldsWithBody(context, request),
-				};
-				// This isn't accurate, picture pieces look different to galleries.
-				// This is to prevent accidentally breaking Editions until we have
-				// a model for pictures.
-			} else if (isGallery(tags) || isPicture(tags)) {
-				return {
-					design: ArticleDesign.Gallery,
-					...itemFieldsWithBody(context, request),
-				};
-			} else if (isAudio(tags)) {
-				return {
-					design: ArticleDesign.Audio,
-					...itemFieldsWithBody(context, request),
-				};
-			} else if (isVideo(tags)) {
-				return {
-					design: ArticleDesign.Video,
-					...itemFieldsWithBody(context, request),
-				};
-			} else if (isReview(tags)) {
-				return {
-					design: ArticleDesign.Review,
-					starRating: fromNullable(fields?.starRating),
-					...itemFieldsWithBody(context, request),
-				};
-			} else if (isAnalysis(tags)) {
-				return {
-					design: ArticleDesign.Analysis,
-					...itemFieldsWithBody(context, request),
-				};
-			} else if (isCorrection(tags)) {
-				return {
-					design: ArticleDesign.Correction,
-					...itemFieldsWithBody(context, request),
-				};
-			} else if (isLetter(tags)) {
-				return {
-					design: ArticleDesign.Letter,
-					...itemFieldsWithBody(context, request),
-				};
-			} else if (isObituary(tags)) {
-				return {
-					design: ArticleDesign.Obituary,
-					...itemFieldsWithBody(context, request),
-				};
-			} else if (isGuardianView(tags)) {
-				return {
-					design: ArticleDesign.Editorial,
-					...itemFieldsWithBody(context, request),
-				};
-			} else if (isComment(tags)) {
-				const item = itemFieldsWithBody(context, request);
-				return {
-					design: ArticleDesign.Comment,
-					...item,
-					theme:
-						item.theme === ArticlePillar.News
-							? ArticlePillar.Opinion
-							: item.theme,
-				};
-			} else if (isInterview(tags)) {
-				return {
-					design: ArticleDesign.Interview,
-					...itemFieldsWithBody(context, request),
-				};
-			} else if (isFeature(tags)) {
-				return {
-					design: ArticleDesign.Feature,
-					...itemFieldsWithBody(context, request),
-				};
-			} else if (isLive(tags)) {
-				return fromCapiLiveBlog(context)(request, page);
-			} else if (isRecipe(tags)) {
-				return {
-					design: ArticleDesign.Recipe,
-					...itemFieldsWithBody(context, request),
-				};
-			} else if (isQuiz(tags)) {
-				return {
-					design: ArticleDesign.Quiz,
-					...itemFieldsWithBody(context, request),
-				};
-			} else if (isLabs(tags)) {
-				return {
-					design: ArticleDesign.Standard,
-					...itemFieldsWithBody(context, request),
-					theme: ArticleSpecial.Labs,
-				};
-			} else if (isMatchReport(tags)) {
-				return {
-					design: ArticleDesign.MatchReport,
-					football: parseMatchScores(
-						fromNullable(request.footballContent),
-					),
-					...itemFieldsWithBody(context, request),
-				};
-			}
-
+		// These checks aim for parity with the CAPI Scala client:
+		// https://github.com/guardian/content-api-scala-client/blob/9e249bcef47cc048da483b3453c10dd7d2e9565d/client/src/main/scala/com.gu.contentapi.client/utils/CapiModelEnrichment.scala
+		if (isInteractive(content)) {
+			return {
+				design: ArticleDesign.Interactive,
+				...itemFieldsWithBody(context, request),
+			};
+			// This isn't accurate, picture pieces look different to galleries.
+			// This is to prevent accidentally breaking Editions until we have
+			// a model for pictures.
+		} else if (isGallery(tags) || isPicture(tags)) {
+			return {
+				design: ArticleDesign.Gallery,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isAudio(tags)) {
+			return {
+				design: ArticleDesign.Audio,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isVideo(tags)) {
+			return {
+				design: ArticleDesign.Video,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isReview(tags)) {
+			return {
+				design: ArticleDesign.Review,
+				starRating: fromNullable(fields?.starRating),
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isAnalysis(tags)) {
+			return {
+				design: ArticleDesign.Analysis,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isCorrection(tags)) {
+			return {
+				design: ArticleDesign.Correction,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isLetter(tags)) {
+			return {
+				design: ArticleDesign.Letter,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isObituary(tags)) {
+			return {
+				design: ArticleDesign.Obituary,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isGuardianView(tags)) {
+			return {
+				design: ArticleDesign.Editorial,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isComment(tags)) {
+			const item = itemFieldsWithBody(context, request);
+			return {
+				design: ArticleDesign.Comment,
+				...item,
+				theme:
+					item.theme === ArticlePillar.News
+						? ArticlePillar.Opinion
+						: item.theme,
+			};
+		} else if (isInterview(tags)) {
+			return {
+				design: ArticleDesign.Interview,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isFeature(tags)) {
+			return {
+				design: ArticleDesign.Feature,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isLive(tags)) {
+			return fromCapiLiveBlog(context)(request, page);
+		} else if (isRecipe(tags)) {
+			return {
+				design: ArticleDesign.Recipe,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isQuiz(tags)) {
+			return {
+				design: ArticleDesign.Quiz,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isLabs(tags)) {
 			return {
 				design: ArticleDesign.Standard,
 				...itemFieldsWithBody(context, request),
+				theme: ArticleSpecial.Labs,
 			};
+		} else if (isMatchReport(tags)) {
+			return {
+				design: ArticleDesign.MatchReport,
+				football: parseMatchScores(
+					fromNullable(request.footballContent),
+				),
+				...itemFieldsWithBody(context, request),
+			};
+		}
+
+		return {
+			design: ArticleDesign.Standard,
+			...itemFieldsWithBody(context, request),
 		};
+	};
 
 // ----- Exports ----- //
 
