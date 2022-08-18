@@ -255,6 +255,50 @@ const shouldShowDropCap = (
 	);
 };
 
+const headingTextElement =
+	(format: ArticleFormat, isEditions = false) =>
+	(node: Node, key: number): ReactNode => {
+		const text = node.textContent ?? '';
+		const children = Array.from(node.childNodes).map(
+			headingTextElement(format, isEditions),
+		);
+
+		switch (node.nodeName) {
+			case '#text':
+				return text;
+			case 'A':
+				return h(
+					Anchor,
+					{
+						href: withDefault('')(getHref(node)),
+						format,
+						key,
+						isEditions,
+					},
+					children,
+				);
+			case 'EM':
+				return h('em', { key }, children);
+			default:
+				return null;
+		}
+	};
+
+const headingTwoElement = (
+	format: ArticleFormat,
+	isEditions: boolean,
+	node: Node,
+): ReactNode => {
+	const text = node.textContent ?? '';
+	const children = Array.from(node.childNodes).map(
+		headingTextElement(format, isEditions),
+	);
+
+	return text.includes('* * *')
+		? h(HorizontalRule, null, null)
+		: styledH('h2', { css: HeadingTwoStyles(format) }, children);
+};
+
 const textElement =
 	(format: ArticleFormat, isEditions = false) =>
 	(node: Node, key: number): ReactNode => {
@@ -384,11 +428,10 @@ const standfirstTextElement =
 	};
 
 const renderText = (
-	doc: DocumentFragment,
+	doc: Node,
 	format: ArticleFormat,
 	isEditions = false,
-): ReactNode[] =>
-	Array.from(doc.childNodes).map(textElement(format, isEditions));
+): ReactNode => textElement(format, isEditions)(doc, 0);
 
 const editionsStandfirstFilter = (node: Node): boolean =>
 	!['UL', 'LI', 'A'].includes(node.nodeName);
@@ -630,7 +673,8 @@ const render =
 		switch (element.kind) {
 			case ElementKind.Text:
 				return textRenderer(format, excludeStyles, element);
-
+			case ElementKind.HeadingTwo:
+				return headingTwoElement(format, false, element.doc);
 			case ElementKind.Image:
 				return imageRenderer(format, element, key);
 
@@ -710,6 +754,9 @@ const renderEditions =
 		switch (element.kind) {
 			case ElementKind.Text:
 				return textRenderer(format, excludeStyles, element, true);
+
+			case ElementKind.HeadingTwo:
+				return headingTwoElement(format, true, element.doc);
 
 			case ElementKind.Image:
 				return format.design === ArticleDesign.Gallery ||

@@ -2,6 +2,7 @@
 
 const enum ElementKind {
 	Text,
+	HeadingTwo,
 	Image,
 	Pullquote,
 	Interactive,
