@@ -59,6 +59,9 @@ const getPlatformTreats = (
 		 *
 		 * Matching on edition or page id is optional. If either of these are not
 		 * provided then we return true for that check
+		 *
+		 * If editionId is given without pageId it will match against all readers who
+		 * have that edition cookie, regardless of which page they are viewing
 		 */
 		const matchesContainer = treat.containerTitle === displayName;
 		const matchesEdition =
