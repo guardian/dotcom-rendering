@@ -347,6 +347,7 @@ const enhance = (
 		new Enhancer(elements, format)
 			// Add the data-ignore='global-h2-styling' attribute
 			.removeGlobalH2Styles()
+			// Add styling to h3 tags
 			.addH3Spacing()
 			// Add item links
 			.addItemLinks()
