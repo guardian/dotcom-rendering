@@ -289,6 +289,7 @@ const Metadata: FC<Props> = (props: Props) => {
 				commentCount={props.item.commentCount}
 				contributors={props.item.contributors}
 				commentable={props.item.commentable}
+				edition={props.edition}
 			/>
 		);
 	}
