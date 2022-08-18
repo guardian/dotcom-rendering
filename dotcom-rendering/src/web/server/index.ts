@@ -4,6 +4,7 @@ import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
+import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import { articleToHtml } from './articleToHtml';
@@ -19,18 +20,23 @@ function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 const enhanceCAPIType = (body: unknown): CAPIArticleType => {
 	const data = validateAsCAPIType(body);
 
+	const enhancedBlocks = enhanceBlocks(
+		data.blocks,
+		data.format,
+		data.promotedNewsletter,
+	);
+
 	const CAPIArticle: CAPIArticleType = {
 		...data,
-		blocks: enhanceBlocks(
-			data.blocks,
-			data.format,
-			data.promotedNewsletter,
-		),
+		blocks: enhancedBlocks,
 		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
 		standfirst: enhanceStandfirst(data.standfirst),
 		commercialProperties: enhanceCommercialProperties(
 			data.commercialProperties,
 		),
+		tableOfContents: data.config.switches.tableOfContents
+			? enhanceTableOfContents(data.format, enhancedBlocks)
+			: undefined,
 	};
 	return CAPIArticle;
 };

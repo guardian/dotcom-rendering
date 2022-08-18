@@ -577,6 +577,7 @@ interface CAPIArticleType {
 	selectedTopics?: Topic[];
 
 	promotedNewsletter?: Newsletter;
+	tableOfContents?: TOCType[];
 }
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
@@ -589,6 +590,15 @@ interface TagType {
 	paidContentType?: string;
 	bylineImageUrl?: string;
 	bylineLargeImageUrl?: string;
+}
+
+interface TOCItem {
+	id: string;
+	title: string;
+	subtitle?: string;
+}
+interface TOCType extends TOCItem {
+	nested: TOCItem[];
 }
 
 /**
