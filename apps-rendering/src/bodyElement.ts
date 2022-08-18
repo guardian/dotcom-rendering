@@ -30,7 +30,12 @@ import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
 
 type Text = {
 	kind: ElementKind.Text;
-	doc: DocumentFragment;
+	doc: Node;
+};
+
+type HeadingTwo = {
+	kind: ElementKind.HeadingTwo;
+	doc: Node;
 };
 
 type Image = ImageData & {
@@ -123,6 +128,7 @@ interface NewsletterSignUp {
 
 type BodyElement =
 	| Text
+	| HeadingTwo
 	| Image
 	| {
 			kind: ElementKind.Pullquote;
@@ -199,9 +205,31 @@ const toEmbedElement: (
 	embed,
 }));
 
+const flattenTextElement = (doc: Node): BodyElement[] => {
+	const childNodes = Array.from(doc.childNodes);
+	return childNodes.map((node) => {
+		switch (node.nodeName) {
+			case 'H2':
+				console.log('textContent: ');
+				console.log(node.textContent);
+				return {
+					kind: ElementKind.HeadingTwo,
+					doc: node,
+				};
+			default:
+				return {
+					kind: ElementKind.Text,
+					doc: node,
+				};
+		}
+	});
+};
+
 const parse =
 	(context: Context, atoms?: Atoms, campaigns?: Campaign[]) =>
-	(element: BlockElement): Result<string, BodyElement> => {
+	(
+		element: BlockElement,
+	): Result<string, BodyElement> | Array<Result<string, BodyElement>> => {
 		switch (element.type) {
 			case ElementType.TEXT: {
 				const html = element.textTypeData?.html;
@@ -210,10 +238,9 @@ const parse =
 					return err('No html field on textTypeData');
 				}
 
-				return ok({
-					kind: ElementKind.Text,
-					doc: context.docParser(html),
-				});
+				const doc = context.docParser(html);
+
+				return flattenTextElement(doc).map(ok);
 			}
 
 			case ElementType.IMAGE:
@@ -394,7 +421,7 @@ const parseElements =
 		if (!elements) {
 			return [err('No body elements available')];
 		}
-		return elements.map(parse(context, atoms, campaigns));
+		return elements.flatMap(parse(context, atoms, campaigns));
 	};
 
 // ----- Exports ----- //
