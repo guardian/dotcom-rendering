@@ -40,7 +40,7 @@ const extractH3 = (element: CAPIElement): string => {
 				.split('<strong>')
 				.join('')
 				.split('</strong>')
-				.join('') || ''
+				.join('') ?? ''
 		);
 	}
 	return '';
@@ -62,7 +62,7 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
-			'model.dotcomrendering.pageElements.TextBlockElement' &&
+				'model.dotcomrendering.pageElements.TextBlockElement' &&
 			isFalseH3(thisElement)
 		) {
 			const h3Text = extractH3(thisElement);
@@ -71,7 +71,7 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 			// We determine if previous items are `ItemLinkBlockElement` through type and `isItemLink` functions
 			const isPreviousItemLink =
 				previousItem?._type ===
-				'model.dotcomrendering.pageElements.ItemLinkBlockElement' ||
+					'model.dotcomrendering.pageElements.ItemLinkBlockElement' ||
 				(previousItem && isItemLink(previousItem));
 
 			withH3s.push(
