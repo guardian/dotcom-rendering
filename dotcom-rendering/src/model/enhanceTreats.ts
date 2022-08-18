@@ -28,6 +28,7 @@ const PLATFORM_TREATS: TreatType[] = [
 		imageUrl:
 			'https://uploads.guim.co.uk/2020/10/22/newsletter-treat-img.png',
 		altText: 'The White House',
+		pageId: 'us',
 	},
 	{
 		links: [
