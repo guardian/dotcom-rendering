@@ -5,12 +5,11 @@ import type { ArticleFormat } from '@guardian/libs';
 import { map, partition, withDefault } from '@guardian/types';
 import { LastUpdated } from 'components/LastUpdated';
 import type { Contributor } from 'contributor';
-import { formatUTCTimeDateTz } from 'date';
 import { pipe } from 'lib';
 import type { LiveBlock as LiveBlockType } from 'liveBlock';
 import type { FC } from 'react';
 import { renderAll } from 'renderer';
-import { timestampFormat } from 'datetime';
+import { datetimeFormat, timestampFormat } from 'datetime';
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 
 // ----- Functions ----- //
@@ -69,7 +68,7 @@ const LiveBlock: FC<LiveBlockProps> = ({
 				{block.lastModified > block.firstPublished && (
 					<LastUpdated
 						lastUpdated={block.lastModified}
-						lastUpdatedDisplay={formatUTCTimeDateTz(
+						lastUpdatedDisplay={datetimeFormat(edition)(
 							block.lastModified,
 						)}
 					/>
