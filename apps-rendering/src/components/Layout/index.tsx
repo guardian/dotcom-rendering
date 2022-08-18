@@ -80,7 +80,11 @@ const Layout: FC<Props> = ({ item, shouldHideAds, edition }) => {
 		item.design === ArticleDesign.Letter ||
 		item.design === ArticleDesign.Editorial
 	) {
-		return <CommentLayout item={item}>{render(item, body)}</CommentLayout>;
+		return (
+			<CommentLayout item={item} edition={edition}>
+				{render(item, body)}
+			</CommentLayout>
+		);
 	}
 
 	if (item.design === ArticleDesign.Gallery) {
