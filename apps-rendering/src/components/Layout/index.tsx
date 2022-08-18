@@ -115,7 +115,7 @@ const Layout: FC<Props> = ({ item, shouldHideAds, edition }) => {
 	) {
 		if (item.display === ArticleDisplay.Immersive) {
 			return (
-				<ImmersiveLayout item={item}>
+				<ImmersiveLayout item={item} edition={edition}>
 					{render(item, body)}
 				</ImmersiveLayout>
 			);

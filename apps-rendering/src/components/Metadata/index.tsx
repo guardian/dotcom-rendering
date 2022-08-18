@@ -218,10 +218,10 @@ const MetadataWithByline: FC<Props> = ({ item, edition }: Props) => (
 	</div>
 );
 
-const ShortMetadata: FC<Props> = ({ item }: Props) => (
+const ShortMetadata: FC<Props> = ({ item, edition }: Props) => (
 	<div css={styles}>
 		<div css={textStyles}>
-			<Dateline date={item.publishDate} format={item} />
+			<Dateline date={item.publishDate} format={item} edition={edition} />
 			<Follow format={getFormat(item)} contributors={item.contributors} />
 		</div>
 		<CommentCount count={item.commentCount} {...item} />
