@@ -47,25 +47,28 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	// const contributionsServiceUrl = getContributionsServiceUrl(front);
 
+	/**
+	 * This property currently only applies to the header and merchandising slots
+	 */
+	const renderAds = !front.isAdFreeUser;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
 				<>
-					<Stuck>
-						<Section
-							fullWidth={true}
-							showTopBorder={false}
-							showSideBorders={false}
-							padSides={false}
-							shouldCenter={false}
-						>
-							<HeaderAdSlot
-								isAdFreeUser={front.isAdFreeUser}
-								shouldHideAds={false}
-								display={format.display}
-							/>
-						</Section>
-					</Stuck>
+					{renderAds && (
+						<Stuck>
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
+								showSideBorders={false}
+								padSides={false}
+								shouldCenter={false}
+							>
+								<HeaderAdSlot display={format.display} />
+							</Section>
+						</Stuck>
+					)}
 
 					<Section
 						fullWidth={true}
