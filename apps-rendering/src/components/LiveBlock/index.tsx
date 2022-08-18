@@ -10,6 +10,8 @@ import { pipe } from 'lib';
 import type { LiveBlock as LiveBlockType } from 'liveBlock';
 import type { FC } from 'react';
 import { renderAll } from 'renderer';
+import { timestampFormat } from 'datetime';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 
 // ----- Functions ----- //
 
@@ -31,6 +33,7 @@ interface LiveBlockProps {
 	format: ArticleFormat;
 	isPinnedPost: boolean;
 	isOriginalPinnedPost: boolean;
+	edition: Edition;
 }
 
 const LiveBlock: FC<LiveBlockProps> = ({
@@ -38,6 +41,7 @@ const LiveBlock: FC<LiveBlockProps> = ({
 	format,
 	isPinnedPost,
 	isOriginalPinnedPost,
+	edition,
 }) => {
 	return (
 		<LiveBlockContainer
@@ -45,6 +49,9 @@ const LiveBlock: FC<LiveBlockProps> = ({
 			format={format}
 			blockTitle={block.title}
 			blockFirstPublished={block.firstPublished.getTime()}
+			blockFirstPublishedDisplay={timestampFormat(edition)(
+				block.firstPublished,
+			)}
 			blockId={block.id}
 			isPinnedPost={isPinnedPost}
 			isOriginalPinnedPost={isOriginalPinnedPost}

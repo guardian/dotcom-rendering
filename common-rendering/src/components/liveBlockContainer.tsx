@@ -23,7 +23,7 @@ type Props = {
 	format: ArticleFormat;
 	blockTitle?: string;
 	blockFirstPublished?: number;
-	blockFirstPublishedDisplay?: string;
+	blockFirstPublishedDisplay: string;
 	blockId: string;
 	isLiveUpdate?: boolean;
 	contributors?: BlockContributor[];
@@ -183,7 +183,11 @@ const LiveBlockContainer = ({
 					contributors.map((contributor) => (
 						<BlockByline
 							name={contributor.name}
-							imageUrl={contributor.largeImageUrl ? contributor.largeImageUrl : contributor.imageUrl}
+							imageUrl={
+								contributor.largeImageUrl
+									? contributor.largeImageUrl
+									: contributor.imageUrl
+							}
 							format={format}
 						/>
 					))}
