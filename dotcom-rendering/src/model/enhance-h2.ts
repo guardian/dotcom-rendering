@@ -1,6 +1,7 @@
 const enhance = (elements: CAPIElement[]): CAPIElement[] => {
-	const enhancedWithIds: CAPIElement[] = [];
+	const enhanced: CAPIElement[] = [];
 	elements.forEach((element) => {
+		// If this element is a subheading, insert the element ID as its ID
 		if (
 			element._type ===
 			'model.dotcomrendering.pageElements.SubheadingBlockElement'
@@ -10,13 +11,16 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 				// add ID to H2 element
 				`<h2 id='${element.elementId}'>`,
 			);
-			enhancedWithIds.push({
+			enhanced.push({
 				...element,
 				html: withId,
 			});
+		} else {
+			// Otherwise, do nothing
+			enhanced.push(element);
 		}
 	});
-	return enhancedWithIds;
+	return enhanced;
 };
 
 export const enhanceH2 = (blocks: Block[]): Block[] =>
@@ -26,5 +30,3 @@ export const enhanceH2 = (blocks: Block[]): Block[] =>
 			elements: enhance(block.elements),
 		};
 	});
-
-
