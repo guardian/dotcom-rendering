@@ -192,6 +192,7 @@ const LiveLayout: FC<Props> = ({ item, edition }) => {
 							format={item}
 							pageNumber={item.pagedBlocks.currentPage.pageNumber}
 							pinnedPost={pinnedPost}
+							edition={edition}
 						/>
 						{pagination}
 					</div>

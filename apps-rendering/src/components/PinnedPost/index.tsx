@@ -1,5 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import {
 	background,
 	border,
@@ -152,9 +153,10 @@ const buttonIcon = css`
 type Props = {
 	pinnedPost: LiveBlockType;
 	format: ArticleFormat;
+	edition: Edition;
 };
 
-const PinnedPost: FC<Props> = ({ pinnedPost, format }: Props) => {
+const PinnedPost: FC<Props> = ({ pinnedPost, format, edition }: Props) => {
 	return (
 		<div
 			id="pinned-post"
@@ -184,6 +186,7 @@ const PinnedPost: FC<Props> = ({ pinnedPost, format }: Props) => {
 					format={format}
 					isPinnedPost={true}
 					isOriginalPinnedPost={false}
+					edition={edition}
 				/>
 			</div>
 			<div id="pinned-post-overlay" css={overlayStyles} />
