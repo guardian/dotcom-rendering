@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 import { css } from '@emotion/react';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
@@ -41,7 +42,11 @@ const Default: FC<{ pillar: ArticlePillar }> = ({
 	pillar = ArticlePillar.News,
 }) => (
 	<Wrapper>
-		<PinnedPost pinnedPost={pinnedBlock} format={getFormat(pillar)} />
+		<PinnedPost
+			pinnedPost={pinnedBlock}
+			format={getFormat(pillar)}
+			edition={Edition.UK}
+		/>
 	</Wrapper>
 );
 
