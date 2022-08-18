@@ -30,7 +30,7 @@ const columnLinkTitle = css`
 	text-align: left;
 	width: 100%;
 
-	${until.tablet} {
+	${until.desktop} {
 		color: ${brandAlt[400]};
 		font-size: 20px;
 		font-weight: 700;

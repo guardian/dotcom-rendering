@@ -119,15 +119,29 @@ const brandExtensionLink = css`
 	}
 `;
 
+const lineStyle = css`
+	background-color: ${brand[600]};
+	content: '';
+	display: block;
+	height: 1px;
+	left: 50px;
+	width: 100%;
+	right: 0;
+	margin-left: 50px;
+`;
+
 const searchBar = css`
+	${from.desktop} {
+		display: none;
+	}
 	box-sizing: border-box;
 	display: block;
 	margin-left: 13px;
-	max-width: 80%;
+	max-width: 23.75rem;
 	position: relative;
-	width: 100%;
-	margin-bottom: 12px * 2;
-	margin-right: 42px / 2 + 20px;
+	margin-bottom: 24px;
+	margin-right: 41px;
+	padding-bottom: 15px;
 `;
 
 const searchInput = css`
@@ -148,7 +162,7 @@ const searchInput = css`
 
 	&:focus {
 		outline: none;
-		padding-right: 20px * 2;
+		padding-right: 40px;
 
 		&::placeholder {
 			opacity: 0;
@@ -167,8 +181,6 @@ const searchGlass = css`
 	left: 7px;
 	top: 3px;
 	fill: #ffffff;
-	/* height: 22px;
-	width: 22px; */
 `;
 
 const searchSubmit = css`
@@ -182,14 +194,20 @@ const searchSubmit = css`
 	position: absolute;
 	right: 0;
 	top: 0;
-	padding-top: 3px;
+	padding-bottom: 11px;
 	width: 50px;
 	fill: #ffffff;
+
+	&:focus,
+	&:active {
+		opacity: 1;
+		outline: none;
+		pointer-events: all;
+	}
 
 	&:before {
 		height: 12px;
 		top: 11px;
-		transform: rotate(-45deg);
 		width: 12px;
 	}
 
@@ -217,43 +235,44 @@ export const Columns: React.FC<{
 				showLine={i !== nav.pillars.length - 1}
 			/>
 		))}
+		<li>
+			<form css={searchBar} action="https://www.google.co.uk/search">
+				<input
+					css={searchInput}
+					type="text"
+					name="q"
+					placeholder="Search"
+					data-link-name="nav2 : search"
+				/>
 
-		<form css={searchBar} action="https://www.google.co.uk/search">
-			<input
-				css={searchInput}
-				type="text"
-				name="q"
-				placeholder="Search"
-				data-link-name="nav2 : search"
-			/>
-
-			<label htmlFor="google-search">
-				<div css={searchGlass}>
-					<SvgMagnifyingGlass
+				<label htmlFor="google-search">
+					<div css={searchGlass}>
+						<SvgMagnifyingGlass
+							isAnnouncedByScreenReader={true}
+							size="medium"
+						/>
+					</div>
+				</label>
+				<button
+					aria-label="Search with google"
+					css={searchSubmit}
+					data-link-name="nav2 : search : submit"
+					type="submit"
+				>
+					<SvgArrowRightStraight
 						isAnnouncedByScreenReader={true}
 						size="medium"
 					/>
-				</div>
-			</label>
+				</button>
 
-			<button
-				aria-label="Search with google"
-				css={searchSubmit}
-				data-link-name="nav2 : search : submit"
-				type="submit"
-			>
-				<SvgArrowRightStraight
-					isAnnouncedByScreenReader={true}
-					size="medium"
+				<input
+					type="hidden"
+					name="as_sitesearch"
+					value="www.theguardian.com"
 				/>
-			</button>
-
-			<input
-				type="hidden"
-				name="as_sitesearch"
-				value="www.theguardian.com"
-			/>
-		</form>
+			</form>
+			<div css={lineStyle}></div>
+		</li>
 
 		<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
 		<MoreColumn
