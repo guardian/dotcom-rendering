@@ -9,7 +9,7 @@ import { from, neutral, text, textSans } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { formatDate } from 'date';
-import { fullyFormatDate } from 'editionDate';
+import { datetimeFormat } from 'datetime';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss as darkMode } from 'styles';
@@ -82,14 +82,10 @@ const Dateline: FC<Props> = ({ date, format, edition }) =>
 	pipe(
 		date,
 		map((d) => (
-			<time
-				css={getDatelineStyles(format)}
-				data-date={d}
-				className="date js-date"
-			>
+			<time css={getDatelineStyles(format)}>
 				{format.design === ArticleDesign.LiveBlog ||
 				format.design === ArticleDesign.DeadBlog
-					? fullyFormatDate(d, edition ?? Edition.UK)
+					? datetimeFormat(edition ?? Edition.UK)(d)
 					: formatDate(d)}
 			</time>
 		)),
