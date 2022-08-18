@@ -75,7 +75,7 @@ export const enhanceTreats = (
 	editionId: EditionId,
 	pageId: string,
 ): TreatType[] => {
-	const classicTreats = treats.map((treat) => ({
+	const existingTreats = treats.map((treat) => ({
 		links: [
 			{
 				text: treat.header.headline,
@@ -88,5 +88,5 @@ export const enhanceTreats = (
 	// Add any platform treats that we can find for this container
 	const platformTreats = getPlatformTreats(displayName, editionId, pageId);
 
-	return [...platformTreats, ...classicTreats];
+	return [...platformTreats, ...existingTreats];
 };
