@@ -9,6 +9,7 @@ import {
 	headline,
 	textSans,
 } from '@guardian/source-foundations';
+import type { NavType } from '../../../../model/extract-nav';
 import { Column } from './Column';
 import { MoreColumn } from './MoreColumn';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';

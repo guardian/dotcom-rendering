@@ -11,6 +11,7 @@ import {
 	neutral,
 	until,
 } from '@guardian/source-foundations';
+import type { NavType } from '../../model/extract-nav';
 import {
 	adCollapseStyles,
 	labelStyles as adLabelStyles,

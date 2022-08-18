@@ -2,8 +2,6 @@
 // CAPIArticleType and its subtypes //
 // ------------------------- //
 
-type NavType = import('./src/model/extract-nav').NavType;
-
 // Pillars are used for styling
 // RealPillars have pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article

@@ -7,6 +7,7 @@ import {
 	neutral,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import type { NavType } from '../../model/extract-nav';
 import type { DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
 import { Footer } from '../components/Footer';
