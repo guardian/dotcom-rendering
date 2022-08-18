@@ -19,7 +19,7 @@ Go to [dotcom rendering](dotcom-rendering/README.md) for more details.
 
 ## `common rendering`
 
-Go to [apps rendering](common-rendering/README.md) for more details.
+Go to [common rendering](common-rendering/README.md) for more details.
 
 ## Root actions
 
