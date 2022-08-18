@@ -1,7 +1,7 @@
 import type { Branding } from './branding';
 import type { EditionId } from './edition';
 
-interface EditionCommercialProperties {
+export interface EditionCommercialProperties {
 	adTargeting: AdTargetParam[];
 	branding?: Branding;
 }

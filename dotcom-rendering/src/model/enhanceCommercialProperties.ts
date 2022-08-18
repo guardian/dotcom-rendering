@@ -1,6 +1,8 @@
 import type { Branding } from '../types/branding';
-import type { CommercialProperties } from '../types/commercial';
-import type { EditionId } from '../types/edition';
+import type {
+	CommercialProperties,
+	EditionCommercialProperties,
+} from '../types/commercial';
 
 /**
  * Sponsorship logo should never be wider than 140px.
@@ -19,8 +21,8 @@ const cappedDimensions = ({
 };
 
 const enhanceEditionCommercialProperties = (
-	properties: CommercialProperties[EditionId],
-): CommercialProperties[EditionId] => {
+	properties: EditionCommercialProperties,
+): EditionCommercialProperties => {
 	const { branding } = properties;
 	if (!branding) return properties;
 
