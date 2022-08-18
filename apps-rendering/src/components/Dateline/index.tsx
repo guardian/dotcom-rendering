@@ -83,7 +83,7 @@ const Dateline: FC<Props> = ({ date, format, edition }) =>
 		date,
 		map((d) => (
 			<time css={getDatelineStyles(format)}>
-				{datetimeFormat(edition ?? Edition.UK)(d)}
+				{datetimeFormat(edition)(d)}
 			</time>
 		)),
 		withDefault<ReactElement | null>(null),
