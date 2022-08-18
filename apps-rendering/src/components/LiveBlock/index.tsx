@@ -1,16 +1,16 @@
 import { css } from '@emotion/react';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 import type { BlockContributor } from '@guardian/common-rendering/src/components/liveBlockContainer';
 import type { ArticleFormat } from '@guardian/libs';
 import { map, partition, withDefault } from '@guardian/types';
 import { LastUpdated } from 'components/LastUpdated';
 import type { Contributor } from 'contributor';
+import { datetimeFormat, timestampFormat } from 'datetime';
 import { pipe } from 'lib';
 import type { LiveBlock as LiveBlockType } from 'liveBlock';
 import type { FC } from 'react';
 import { renderAll } from 'renderer';
-import { datetimeFormat, timestampFormat } from 'datetime';
-import { Edition } from '@guardian/apps-rendering-api-models/edition';
 
 // ----- Functions ----- //
 
