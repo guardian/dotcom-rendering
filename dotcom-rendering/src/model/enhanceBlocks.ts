@@ -51,7 +51,7 @@ class BlockEnhancer {
 		return this;
 	}
 
-	enhanceH3() {
+	enhanceH3s() {
 		this.blocks = enhanceH3s(this.blocks);
 		return this;
 	}
