@@ -2,6 +2,11 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import {
+	background,
+	border,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
 import { ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
@@ -18,11 +23,6 @@ import { darkModeCss } from 'styles';
 import EmailSignupForm from './EmailSignupForm';
 import PrivacyWording from './PrivacyWording';
 import SvgNewsletter from './SvgNewsletter';
-import {
-	background,
-	border,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
 
 // ----- Component ----- //
 
@@ -125,7 +125,7 @@ const NewsletterSignup: FC<Props> = ({ format, element }) => {
 
 			<p css={descriptionStyles}>{description}</p>
 
-			<EmailSignupForm newsletterId={id} />
+			<EmailSignupForm newsletterId={id} format={format} />
 			<PrivacyWording useCaptcha={false} format={format} />
 		</aside>
 	);

@@ -3,6 +3,7 @@
 import { ArticleFormat, ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import {
 	news,
+	neutral,
 	lifestyle,
 	sport,
 	culture,
@@ -33,10 +34,15 @@ const pagination = (format: ArticleFormat): Colour => {
 	}
 };
 
+const signUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
+const signUpFormButtonDark = (_format: ArticleFormat): Colour => '#d1d1d1';
+
 // ----- API ----- //
 
 const hover = {
 	pagination,
+	signUpFormButton,
+	signUpFormButtonDark,
 };
 
 // ----- Exports ----- //

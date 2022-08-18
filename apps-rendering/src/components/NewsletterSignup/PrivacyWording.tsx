@@ -1,12 +1,13 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
 import { textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
-import { ArticleFormat } from '@guardian/libs';
 
 // ----- Component ----- //
 
@@ -15,7 +16,7 @@ interface Props {
 	useCaptcha: boolean;
 }
 
-const termsStyle = (format: ArticleFormat) => css`
+const termsStyle = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.xxsmall({ lineHeight: 'tight' })}
 	color: ${text.privacyMessage(format)};
 	a {

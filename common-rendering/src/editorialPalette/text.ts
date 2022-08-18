@@ -985,6 +985,13 @@ const privacyMessageDark = (_format: ArticleFormat): string => {
 	return neutral[46];
 };
 
+const signUpFormButton = (_format: ArticleFormat): string => {
+	return neutral[100];
+};
+
+const signUpFormButtonDark = (_format: ArticleFormat): string => {
+	return neutral[0];
+};
 
 // ----- API ----- //
 
@@ -1049,6 +1056,8 @@ const text = {
 	signUpFormDark,
 	privacyMessage,
 	privacyMessageDark,
+	signUpFormButton,
+	signUpFormButtonDark,
 };
 
 // ----- Exports ----- //
