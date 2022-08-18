@@ -15,6 +15,7 @@ import { getFormat } from 'item';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { articleWidthStyles, onwardStyles } from 'styles';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 
 // ----- Styles ----- //
 
@@ -35,9 +36,10 @@ const BorderStyles = css`
 interface Props {
 	item: Item;
 	children: ReactNode[];
+	edition: Edition;
 }
 
-const MediaLayout: FC<Props> = ({ item, children }) => {
+const MediaLayout: FC<Props> = ({ item, children, edition }) => {
 	const format = getFormat(item);
 	return (
 		<main css={[Styles]}>
@@ -59,6 +61,7 @@ const MediaLayout: FC<Props> = ({ item, children }) => {
 							publicationDate={item.publishDate}
 							className={articleWidthStyles}
 							item={item}
+							edition={edition}
 						/>
 					</section>
 				</header>

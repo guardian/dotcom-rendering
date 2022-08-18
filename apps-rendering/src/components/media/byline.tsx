@@ -11,6 +11,7 @@ import type { Item } from 'item';
 import { pipe } from 'lib';
 import type { FC, ReactNode } from 'react';
 import { renderText } from '../../renderer';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 
 // ----- Styles ----- //
 
@@ -42,9 +43,10 @@ interface Props {
 	publicationDate: Option<Date>;
 	className: SerializedStyles;
 	item: Item;
+	edition?: Edition;
 }
 
-const Byline: FC<Props> = ({ publicationDate, className, item }) => {
+const Byline: FC<Props> = ({ publicationDate, className, item, edition }) => {
 	const byline = pipe(
 		item.bylineHtml,
 		map((html) => <address>{renderText(html, getFormat(item))}</address>),
@@ -56,7 +58,11 @@ const Byline: FC<Props> = ({ publicationDate, className, item }) => {
 			<div>
 				<div className="author">
 					{byline}
-					<Dateline date={publicationDate} format={item} />
+					<Dateline
+						date={publicationDate}
+						format={item}
+						edition={edition}
+					/>
 				</div>
 			</div>
 		</div>

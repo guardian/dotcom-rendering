@@ -92,7 +92,7 @@ const Layout: FC<Props> = ({ item, shouldHideAds, edition }) => {
 		item.design === ArticleDesign.Video
 	) {
 		return (
-			<MediaLayout item={item}>
+			<MediaLayout item={item} edition={edition}>
 				{render(
 					item,
 					body.filter((elem) => elem.kind === ElementKind.Image),
