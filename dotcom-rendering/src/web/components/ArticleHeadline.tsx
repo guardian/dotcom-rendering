@@ -609,7 +609,7 @@ export const ArticleHeadline = ({
 							>
 								<h1
 									css={[
-										boldFont,
+										standardFont,
 										topPadding,
 										css`
 											color: ${palette.text.headline};
