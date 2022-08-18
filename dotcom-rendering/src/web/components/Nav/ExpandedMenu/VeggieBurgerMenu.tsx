@@ -78,8 +78,6 @@ const veggieBurgerStyles = (display: ArticleDisplay) => css`
 	border: 0;
 	border-radius: 50%;
 
-	${getZIndex('burger')}
-
 	right: 5px;
 	bottom: 58px;
 	${from.mobileMedium} {
@@ -94,6 +92,12 @@ const veggieBurgerStyles = (display: ArticleDisplay) => css`
 	}
 	${from.desktop} {
 		display: none;
+	}
+
+	/* We apply this style when the side navigation is open to prevent the burger from being hidden behind the overlay */
+	/* See Nav.tsx */
+	.nav-is-open & {
+		${getZIndex('burger')}
 	}
 
 	:focus {
