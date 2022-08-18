@@ -7,12 +7,13 @@ import {
 	brandText,
 	from,
 	headline,
-	palette,
+	neutral,
 	textSans,
 } from '@guardian/source-foundations';
 import {
 	SvgArrowRightStraight,
 	SvgMagnifyingGlass,
+	TextInput,
 } from '@guardian/source-react-components';
 import { Column } from './Column';
 import { MoreColumn } from './MoreColumn';
@@ -151,14 +152,14 @@ const searchInput = css`
 	border: 0;
 	border-radius: 1000px;
 	box-sizing: border-box;
-	color: ${palette.neutral[100]};
+	color: ${neutral[100]};
 	height: 36px;
 	padding-left: 38px;
 	vertical-align: middle;
 	width: 100%;
 
 	&::placeholder {
-		color: ${palette.neutral[100]};
+		color: ${neutral[100]};
 	}
 
 	&:focus {
@@ -180,8 +181,8 @@ const searchInput = css`
 const searchGlass = css`
 	position: absolute;
 	left: 7px;
-	top: 3px;
-	fill: ${palette.neutral[100]};
+	top: 6px;
+	fill: ${neutral[100]};
 `;
 
 const searchSubmit = css`
@@ -197,7 +198,7 @@ const searchSubmit = css`
 	top: 0;
 	padding-bottom: 11px;
 	width: 50px;
-	fill: ${palette.neutral[100]};
+	fill: ${neutral[100]};
 
 	&:focus,
 	&:active {
@@ -238,9 +239,8 @@ export const Columns: React.FC<{
 		))}
 		<li>
 			<form css={searchBar} action="https://www.google.co.uk/search">
-				<input
-					css={searchInput}
-					type="text"
+				<TextInput
+					cssOverrides={searchInput}
 					name="q"
 					placeholder="Search"
 					data-link-name="nav2 : search"
