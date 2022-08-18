@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
-import { Result, ResultKind, some } from '@guardian/types';
-import { Text } from 'bodyElement';
+import { Result, ResultKind, some, ok } from '@guardian/types';
+import type { NewsletterSignUp, Text } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
 import type { Standard, LiveBlog, Quiz } from 'item';
 import { JSDOM } from 'jsdom';
@@ -45,12 +45,12 @@ const makeBlog = (): LiveBlog =>
 		internalShortId: some('Blog id'),
 	} as LiveBlog);
 
-const makeQuiz =(): Quiz =>
-({
-	design: ArticleDesign.Quiz,
-	body: [makeTextElement(CONTENT_1), makeTextElement(CONTENT_2)],
-	internalShortId: some('quiz id'),
-} as Quiz)
+const makeQuiz = (): Quiz =>
+	({
+		design: ArticleDesign.Quiz,
+		body: [makeTextElement(CONTENT_1), makeTextElement(CONTENT_2)],
+		internalShortId: some('quiz id'),
+	} as Quiz);
 
 describe('Insert Newsletter Signups', () => {
 	it('makes no change if there is no newsletter', () => {
@@ -70,32 +70,28 @@ describe('Insert Newsletter Signups', () => {
 			NEWSLETTER,
 		) as Standard;
 
+		const expectedElement: NewsletterSignUp = {
+			kind: ElementKind.NewsletterSignUp,
+			...NEWSLETTER,
+		};
+
 		expect(after.body.length).toBe(before.body.length + 2);
-		expect(
-			after.body.some(
-				(bodyElement) =>
-					bodyElement.kind === ResultKind.Ok &&
-					bodyElement.value.kind === ElementKind.NewsletterSignUp,
-			),
-		).toBeTruthy();
+
+		expect(after.body).toEqual(
+			expect.arrayContaining([ok(expectedElement)]),
+		);
+
 	});
 
 	it('will not insert a NewsletterSignupBlockElement into a blog', () => {
 		const before = makeBlog();
 		const after = insertNewsletterIntoItem(makeBlog(), NEWSLETTER);
-		expect(after).toEqual(before)
+		expect(after).toEqual(before);
 	});
 
 	it('will not insert a NewsletterSignupBlockElement into a quiz', () => {
 		const before = makeQuiz();
-		const after = insertNewsletterIntoItem(makeQuiz(), NEWSLETTER) as Quiz;
+		const after = insertNewsletterIntoItem(makeQuiz(), NEWSLETTER);
 		expect(after).toEqual(before);
-		expect(
-			after.body.some(
-				(bodyElement) =>
-					bodyElement.kind === ResultKind.Ok &&
-					bodyElement.value.kind === ElementKind.NewsletterSignUp,
-			),
-		).toBeFalsy();
 	});
 });
