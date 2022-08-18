@@ -43,7 +43,7 @@ interface Props {
 	publicationDate: Option<Date>;
 	className: SerializedStyles;
 	item: Item;
-	edition?: Edition;
+	edition: Edition;
 }
 
 const Byline: FC<Props> = ({ publicationDate, className, item, edition }) => {

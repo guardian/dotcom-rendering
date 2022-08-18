@@ -34,7 +34,7 @@ type Props = {
 	contributors: Contributor[];
 	commentCount: Option<number>;
 	commentable: boolean;
-	edition?: Edition;
+	edition: Edition;
 };
 
 const ImmersiveMetadata: FC<Props> = ({
