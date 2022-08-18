@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { some } from '@guardian/types';
 import { date, withKnobs } from '@storybook/addon-knobs';
@@ -19,6 +20,7 @@ const Default: FC = () => (
 		date={some(
 			new Date(date('Publish Date', new Date('2019-12-17T03:24:00'))),
 		)}
+		edition={Edition.UK}
 	/>
 );
 
@@ -32,6 +34,7 @@ const LiveBlogDateline: FC = () => (
 		date={some(
 			new Date(date('Publish Date', new Date('2019-12-17T03:24:00'))),
 		)}
+		edition={Edition.UK}
 	/>
 );
 
@@ -45,6 +48,7 @@ const DeadBlogDateline: FC = () => (
 		date={some(
 			new Date(date('Publish Date', new Date('2019-12-17T03:24:00'))),
 		)}
+		edition={Edition.UK}
 	/>
 );
 
