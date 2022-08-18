@@ -5,6 +5,12 @@ import { SvgPinned } from '@guardian/source-react-components';
 import { border } from '../editorialPalette';
 import { darkModeCss } from '../lib';
 
+// TODO: update this code to use shared version when it is available
+const padString = (time: number) => (time < 10 ? `0${time}` : time);
+
+const fallbackDate = (date: Date) =>
+	`${padString(date.getHours())}.${padString(date.getMinutes())}`;
+
 const FirstPublished = ({
 	firstPublished,
 	firstPublishedDisplay,
@@ -17,7 +23,7 @@ const FirstPublished = ({
 	pageId,
 }: {
 	firstPublished: number;
-	firstPublishedDisplay: string;
+	firstPublishedDisplay?: string;
 	blockId: string;
 	isPinnedPost: boolean;
 	supportsDarkMode: boolean;
@@ -78,7 +84,7 @@ const FirstPublished = ({
 					`}
 					`}
 				>
-					{firstPublishedDisplay}
+					{firstPublishedDisplay || fallbackDate(publishedDate)}
 				</span>
 			</a>
 			{isOriginalPinnedPost && (
