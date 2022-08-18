@@ -1,52 +1,55 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { neutral, textSans } from '@guardian/source-foundations';
+import { textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
+import { ArticleFormat } from '@guardian/libs';
 
 // ----- Component ----- //
 
 interface Props {
+	format: ArticleFormat;
 	useCaptcha: boolean;
 }
 
-const termsStyle = css`
+const termsStyle = (format: ArticleFormat) => css`
 	${textSans.xxsmall({ lineHeight: 'tight' })}
-	color: ${neutral[46]};
+	color: ${text.privacyMessage(format)};
 	a {
 		${textSans.xxsmall({ fontWeight: 'bold' })};
-		color: ${neutral[0]};
+		color: ${text.signUpForm(format)};
 		text-decoration: underline;
 		:hover {
-			color: ${neutral[0]};
+			color: ${text.signUpForm(format)};
 			text-decoration: underline;
 		}
 	}
 	strong {
-		color: ${neutral[0]};
+		color: ${text.signUpForm(format)};
 		font-weight: bold;
 	}
 
 	${darkModeCss`
-		color: ${neutral[60]};
+		color: ${text.privacyMessageDark(format)};
 
 		a {
-			color: ${neutral[86]};
+			color: ${text.signUpFormDark(format)};
 			:hover {
-				color: ${neutral[86]};
+				color: ${text.signUpFormDark(format)};
 			}
 		}
 		strong {
-			color: ${neutral[86]};
+			color: ${text.signUpFormDark(format)};
 		}
 	`}
 `;
 
-const PrivacyWording: FC<Props> = ({ useCaptcha }) => {
+const PrivacyWording: FC<Props> = ({ useCaptcha, format }) => {
 	return (
-		<p css={termsStyle}>
+		<p css={termsStyle(format)}>
 			<strong>Privacy Notice: </strong>
 			<span>
 				Newsletters may contain info about charities, online ads, and

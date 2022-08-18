@@ -8,7 +8,6 @@ import {
 	brandAlt,
 	from,
 	headline,
-	neutral,
 	remSpace,
 	sport,
 	textSans,
@@ -19,6 +18,11 @@ import { darkModeCss } from 'styles';
 import EmailSignupForm from './EmailSignupForm';
 import PrivacyWording from './PrivacyWording';
 import SvgNewsletter from './SvgNewsletter';
+import {
+	background,
+	border,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
 
 // ----- Component ----- //
 
@@ -29,7 +33,8 @@ interface Props {
 
 const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 	clear: both;
-	border: ${neutral[0]} 0.1875rem dashed;
+	border: ${border.signUpForm(format)} 0.1875rem dashed;
+	color: ${text.signUpForm(format)};
 	border-radius: ${remSpace[3]};
 	margin-bottom: ${remSpace[3]};
 	padding: ${remSpace[2]};
@@ -39,9 +44,9 @@ const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 	}
 
 	${darkModeCss`
-		background-color: ${neutral[10]};
-		border-color: ${neutral[86]};
-		color: ${neutral[86]};
+		background-color: ${background.signUpFormDark(format)};
+		border-color: ${border.signUpFormDark(format)};
+		color: ${text.signUpFormDark(format)};
 	`}
 `;
 
@@ -121,7 +126,7 @@ const NewsletterSignup: FC<Props> = ({ format, element }) => {
 			<p css={descriptionStyles}>{description}</p>
 
 			<EmailSignupForm newsletterId={id} />
-			<PrivacyWording useCaptcha={true} />
+			<PrivacyWording useCaptcha={false} format={format} />
 		</aside>
 	);
 };
