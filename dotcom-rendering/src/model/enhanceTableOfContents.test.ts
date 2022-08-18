@@ -41,6 +41,11 @@ describe('Enhance Table of Contents', () => {
 						elementId: 'h3One',
 						html: '<h3>This is the h3 text</h3>',
 					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						elementId: 'h2Three',
+						html: '<h2>This is the h2 text</h2>',
+					},
 				],
 			},
 		];
@@ -52,6 +57,7 @@ describe('Enhance Table of Contents', () => {
 				nested: [{ id: 'h3One', title: 'This is the h3 text' }],
 				title: 'This is the h2 text',
 			},
+			{ id: 'h2Three', nested: [], title: 'This is the h2 text' },
 		]);
 	});
 	it('will ignore any h4s if there are h2s present in the document', () => {
@@ -84,6 +90,11 @@ describe('Enhance Table of Contents', () => {
 						elementId: 'h4Two',
 						html: '<h4>This is the h4 text</h4>',
 					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						elementId: 'h2Three',
+						html: '<h2>This is the h2 text</h2>',
+					},
 				],
 			},
 		];
@@ -95,6 +106,7 @@ describe('Enhance Table of Contents', () => {
 				nested: [{ id: 'h3One', title: 'This is the h3 text' }],
 				title: 'This is the h2 text',
 			},
+			{ id: 'h2Three', nested: [], title: 'This is the h2 text' },
 		]);
 	});
 	it('will ignore orphan h3s', () => {
@@ -122,6 +134,11 @@ describe('Enhance Table of Contents', () => {
 						elementId: 'h3Two',
 						html: '<h3>This is the h3 text</h3>',
 					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						elementId: 'h2Three',
+						html: '<h2>This is the h2 text</h2>',
+					},
 				],
 			},
 		];
@@ -133,9 +150,10 @@ describe('Enhance Table of Contents', () => {
 				nested: [{ id: 'h3Two', title: 'This is the h3 text' }],
 				title: 'This is the h2 text',
 			},
+			{ id: 'h2Three', nested: [], title: 'This is the h2 text' },
 		]);
 	});
-	it('will use h3s and h4s if no h2s exist', () => {
+	it('will only use h3s if no h2s exist', () => {
 		const input: Block[] = [
 			{
 				...blockMetaData,
@@ -173,106 +191,12 @@ describe('Enhance Table of Contents', () => {
 			{ id: 'h3One', nested: [], title: 'This is the h3 text' },
 			{
 				id: 'h3Two',
-				nested: [{ id: 'h4One', title: 'This is the h4 text' }],
+				nested: [],
 				title: 'This is the h3 text',
 			},
 			{
 				id: 'h3Three',
-				nested: [{ id: 'h4Two', title: 'This is the h4 text' }],
-				title: 'This is the h3 text',
-			},
-		]);
-	});
-	it('will ignore orphan h4s', () => {
-		const input: Block[] = [
-			{
-				...blockMetaData,
-				elements: [
-					{
-						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-						elementId: 'h4Id',
-						html: '<h4>This is the h4 text - this h4 will be ignored</h4>',
-					},
-					{
-						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-						elementId: 'h3One',
-						html: '<h3>This is the h3 text</h3>',
-					},
-					{
-						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-						elementId: 'h3Two',
-						html: '<h3>This is the h3 text</h3>',
-					},
-					{
-						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-						elementId: 'h4One',
-						html: '<h4>This is the h4 text</h4>',
-					},
-					{
-						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-						elementId: 'h3Three',
-						html: '<h3>This is the h3 text</h3>',
-					},
-					{
-						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-						elementId: 'h4Two',
-						html: '<h4>This is the h4 text</h4>',
-					},
-				],
-			},
-		];
-
-		expect(enhanceTableOfContents(ExampleArticle.format, input)).toEqual([
-			{ id: 'h3One', nested: [], title: 'This is the h3 text' },
-			{
-				id: 'h3Two',
-				nested: [{ id: 'h4One', title: 'This is the h4 text' }],
-				title: 'This is the h3 text',
-			},
-			{
-				id: 'h3Three',
-				nested: [{ id: 'h4Two', title: 'This is the h4 text' }],
-				title: 'This is the h3 text',
-			},
-		]);
-	});
-	it('will handle multiple nested h4 links', () => {
-		const input: Block[] = [
-			{
-				...blockMetaData,
-				elements: [
-					{
-						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-						elementId: 'h3One',
-						html: '<h3>This is the h3 text</h3>',
-					},
-					{
-						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-						elementId: 'h4One',
-						html: '<h4>This is the h4 text</h4>',
-					},
-					{
-						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-						elementId: 'h4Two',
-						html: '<h4>This is the h4 text</h4>',
-					},
-					{
-						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-						elementId: 'h4Three',
-						html: '<h4>This is the h4 text</h4>',
-					},
-				],
-			},
-		];
-
-		expect(enhanceTableOfContents(ExampleArticle.format, input)).toEqual([
-			{
-				id: 'h3One',
-				nested: [
-					{ id: 'h4One', title: 'This is the h4 text' },
-					{ id: 'h4Two', title: 'This is the h4 text' },
-					{ id: 'h4Three', title: 'This is the h4 text' },
-				],
+				nested: [],
 				title: 'This is the h3 text',
 			},
 		]);
@@ -302,6 +226,16 @@ describe('Enhance Table of Contents', () => {
 						elementId: 'h3Three',
 						html: '<h3>This is the h3 text</h3>',
 					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						elementId: 'h2Two',
+						html: '<h2>This is the h2 text</h2>',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						elementId: 'h2Three',
+						html: '<h2>This is the h2 text</h2>',
+					},
 				],
 			},
 		];
@@ -315,6 +249,50 @@ describe('Enhance Table of Contents', () => {
 					{ id: 'h3Three', title: 'This is the h3 text' },
 				],
 				title: 'This is the h2 text',
+			},
+			{ id: 'h2Two', nested: [], title: 'This is the h2 text' },
+			{ id: 'h2Three', nested: [], title: 'This is the h2 text' },
+		]);
+	});
+	it('will generate a toc if there are only h4s', () => {
+		const input: Block[] = [
+			{
+				...blockMetaData,
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						elementId: 'h4One',
+						html: '<h4>This is the h4 text</h4>',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						elementId: 'h4Two',
+						html: '<h4>This is the h4 text</h4>',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						elementId: 'h4Three',
+						html: '<h4>This is the h4 text</h4>',
+					},
+				],
+			},
+		];
+
+		expect(enhanceTableOfContents(ExampleArticle.format, input)).toEqual([
+			{
+				id: 'h4One',
+				nested: [],
+				title: 'This is the h4 text',
+			},
+			{
+				id: 'h4Two',
+				nested: [],
+				title: 'This is the h4 text',
+			},
+			{
+				id: 'h4Three',
+				nested: [],
+				title: 'This is the h4 text',
 			},
 		]);
 	});
@@ -401,5 +379,28 @@ describe('Enhance Table of Contents', () => {
 				title: 'This is the h2 text',
 			},
 		]);
+	});
+	it('will not return a toc if the are fewer than 3 headings', () => {
+		const input: Block[] = [
+			{
+				...blockMetaData,
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						elementId: 'h2One',
+						html: '<h2>This is the h2 text</h2>',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						elementId: 'h2Two',
+						html: '<h2>This is the h2 text</h2>',
+					},
+				],
+			},
+		];
+
+		expect(enhanceTableOfContents(ExampleArticle.format, input)).toEqual(
+			undefined,
+		);
 	});
 });

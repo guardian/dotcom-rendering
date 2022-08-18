@@ -46,6 +46,10 @@ const hasH3s = (blocks: Block[]) => {
 	return blocks.find((block) => block.elements.find(isH3));
 };
 
+const hasH4s = (blocks: Block[]) => {
+	return blocks.find((block) => block.elements.find(isH4));
+};
+
 const hasInteractiveContentsElement = (blocks: Block[]): boolean => {
 	return !!blocks.find((block) =>
 		block.elements.find(
@@ -87,7 +91,7 @@ export const enhanceTableOfContents = (
 						});
 					} else {
 						// This is an orphan h3 with no parent h2 element to assign it to
-						// so we drop it from the table
+						// so we don't show it in the table
 					}
 				}
 			});
@@ -102,21 +106,21 @@ export const enhanceTableOfContents = (
 						nested: [],
 					});
 				}
+			});
+		});
+	} else if (hasH4s(blocks)) {
+		blocks.forEach((block) => {
+			block.elements.forEach((element) => {
 				if (isH4(element)) {
-					if (tocs.length > 0) {
-						const lastItem = tocs[tocs.length - 1];
-						lastItem.nested.push({
-							id: element.elementId,
-							title: extractText(element),
-						});
-					} else {
-						// This is an orphan h4 with no parent h3 element to assign it to
-						// so we drop it from the table
-					}
+					tocs.push({
+						id: element.elementId,
+						title: extractText(element),
+						nested: [],
+					});
 				}
 			});
 		});
 	}
 
-	return tocs.length > 0 ? tocs : undefined;
+	return tocs.length >= 3 ? tocs : undefined;
 };
