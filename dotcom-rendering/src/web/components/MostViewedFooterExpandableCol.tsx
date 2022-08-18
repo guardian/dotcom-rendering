@@ -5,9 +5,26 @@ import {
 	border,
 	neutral,
 	textSans,
+	headline,
 } from '@guardian/source-foundations';
 import { useState } from 'react';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
+
+const thinGreySolid = `1px solid ${border.secondary}`;
+
+export const sharedButtonStyles = css`
+	z-index: 1;
+	height: 32px;
+	background-color: ${neutral[7]};
+	border-radius: 1600px;
+	color: ${neutral[97]};
+	border: none;
+	${textSans.small()};
+	font-weight: 700;
+	padding: 0 15px 0 7px;
+	position: absolute;
+	cursor: pointer;
+`;
 
 const gridList = (expandedState: boolean) => {
 	return css`
@@ -18,16 +35,29 @@ const gridList = (expandedState: boolean) => {
 			? `repeat(10, 1fr)`
 			: `repeat(5, 1fr)`};
 		height: 100%;
+		margin-bottom: 100px;
+		border-bottom: ${thinGreySolid};
 	`;
 };
-const thinGreySolid = `1px solid ${border.secondary}`;
 
 const columnHeading = (index: number) => {
 	return css`
-		padding: 16px;
+		${headline.xxxsmall()};
+		background: transparent;
+		border-bottom: ${thinGreySolid};
 		border-left: ${index === 0 ? thinGreySolid : 'none'};
 		border-right: ${thinGreySolid};
-		border-bottom: ${thinGreySolid};
+		color: ${neutral[7]};
+		display: block;
+		font-weight: 600;
+		margin: 0;
+		min-height: 36px;
+		padding-right: 6px;
+		padding-left: 6px;
+		padding-top: 6px;
+		text-align: left;
+		text-decoration: none;
+		width: 100%;
 
 		${until.leftCol} {
 			border-top: ${thinGreySolid};
@@ -96,16 +126,7 @@ export const MostViewedExpandableCol = ({
 			</ol>
 			<button
 				css={css`
-					height: 32px;
-					background-color: ${neutral[7]};
-					border-radius: 1600px;
-					color: ${neutral[100]};
-					border: none;
-					${textSans.small()};
-					font-weight: 700;
-					padding: 0 15px 0 7px;
-					position: absolute;
-					display: block;
+					${sharedButtonStyles}
 					${from.tablet} {
 						display: none;
 					}
@@ -115,7 +136,7 @@ export const MostViewedExpandableCol = ({
 					setColExpanded(!colExpanded);
 				}}
 			>
-				{!colExpanded ? 'Show More' : 'Show Less'}
+				{!colExpanded ? 'Show All +' : 'Show Fewer -'}
 			</button>
 		</div>
 	);

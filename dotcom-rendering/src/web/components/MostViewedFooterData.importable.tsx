@@ -6,6 +6,7 @@ import { abTestTest } from '../experiments/tests/ab-test-test';
 import { decideTrail } from '../lib/decideTrail';
 import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
+import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 // import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 import { MostViewedFooterGridExpandable } from './MostViewedFooterGridExpandable';
 import { MostViewedFooterSecondTierItem } from './MostViewedFooterSecondTierItem';
@@ -25,12 +26,13 @@ const stackBelow = (breakpoint: Breakpoint) => css`
 	}
 `;
 
-const secondTierStyles = css`
+const secondTierStyles = (inTest: boolean) => css`
 	border-left: 1px solid ${border.secondary};
 	border-right: 1px solid ${border.secondary};
+	margin-top: ${inTest ? '72px' : 0};
 
 	${from.tablet} {
-		padding-top: 24px;
+		padding-top: ${inTest ? '0' : '24px'};
 	}
 `;
 
@@ -68,6 +70,13 @@ export const MostViewedFooterData = ({
 	const variantFromRunnable =
 		(runnableTest && runnableTest.variantToRun.id) || 'not-runnable';
 
+	const isInDeeplyReadTest = ABTestAPI?.isUserInVariant(
+		'DeeplyReadArticleFooter',
+		'variant',
+	);
+
+	console.log(!!isInDeeplyReadTest);
+
 	const url = buildSectionUrl(ajaxUrl, sectionName);
 	const { data, error } = useApi<
 		MostViewedFooterPayloadType | CAPITrailTabType[]
@@ -90,11 +99,25 @@ export const MostViewedFooterData = ({
 				data-cy-ab-runnable-test={variantFromRunnable}
 			>
 				{/* Test switching to go here - either choosing MostViewedFooterGrid or variant (MostViewedFooterGridExpandable) */}
-				<MostViewedFooterGridExpandable
-					data={transformTabs(tabs)}
-					palette={palette}
-				/>
-				<div css={[stackBelow('tablet'), secondTierStyles]}>
+				{isInDeeplyReadTest ? (
+					<MostViewedFooterGridExpandable
+						data={transformTabs(tabs)}
+						palette={palette}
+					/>
+				) : (
+					<MostViewedFooterGrid
+						data={transformTabs(tabs)}
+						sectionName={sectionName}
+						palette={palette}
+					/>
+				)}
+
+				<div
+					css={[
+						stackBelow('tablet'),
+						secondTierStyles(!!isInDeeplyReadTest),
+					]}
+				>
 					{'mostCommented' in data && (
 						<MostViewedFooterSecondTierItem
 							trail={decideTrail(data.mostCommented)}

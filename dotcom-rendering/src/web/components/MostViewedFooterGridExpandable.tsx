@@ -1,13 +1,10 @@
 import { css } from '@emotion/react';
-import {
-	border,
-	from,
-	neutral,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { border, from, until } from '@guardian/source-foundations';
 import { useState } from 'react';
-import { MostViewedExpandableCol } from './MostViewedFooterExpandableCol';
+import {
+	MostViewedExpandableCol,
+	sharedButtonStyles,
+} from './MostViewedFooterExpandableCol';
 
 const gridContainer = css`
 	display: grid;
@@ -37,7 +34,11 @@ export const MostViewedFooterGridExpandable = ({ data }: Props) => {
 	const [bothExpanded, setBothExpanded] = useState<boolean>(false);
 
 	return (
-		<div>
+		<div
+			css={css`
+				position: relative;
+			`}
+		>
 			<div css={gridContainer}>
 				{data.map((tab: TrailTabType, i: number) => (
 					<MostViewedExpandableCol
@@ -50,17 +51,7 @@ export const MostViewedFooterGridExpandable = ({ data }: Props) => {
 			</div>
 			<button
 				css={css`
-					z-index: 1;
-					height: 32px;
-					background-color: ${neutral[7]};
-					border-radius: 1600px;
-					color: ${neutral[100]};
-					border: none;
-					${textSans.small()};
-					font-weight: 700;
-					padding: 0 15px 0 7px;
-					position: absolute;
-					display: block;
+					${sharedButtonStyles};
 					${until.tablet} {
 						display: none;
 					}
@@ -68,7 +59,7 @@ export const MostViewedFooterGridExpandable = ({ data }: Props) => {
 				type="button"
 				onClick={() => setBothExpanded(!bothExpanded)}
 			>
-				{!bothExpanded ? 'Show More' : 'Show Less'}
+				{!bothExpanded ? 'Show All +' : 'Show Fewer -'}
 			</button>
 		</div>
 	);
