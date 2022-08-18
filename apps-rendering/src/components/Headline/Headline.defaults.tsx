@@ -60,13 +60,6 @@ interface DefaultProps {
 	styles: SerializedStyles;
 }
 
-const boldFont = css`
-	${headline.small({ fontWeight: 'bold' })};
-	${from.tablet} {
-		${headline.medium({ fontWeight: 'bold' })};
-	}
-`;
-
 export const DefaultHeadline: React.FC<DefaultProps> = ({ item, styles }) => (
 	<h1 css={styles}>
 		<span>{item.headline}</span>
