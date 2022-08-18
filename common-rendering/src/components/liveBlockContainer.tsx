@@ -23,7 +23,7 @@ type Props = {
 	format: ArticleFormat;
 	blockTitle?: string;
 	blockFirstPublished?: number;
-	blockFirstPublishedDisplay: string;
+	blockFirstPublishedDisplay?: string;
 	blockId: string;
 	isLiveUpdate?: boolean;
 	contributors?: BlockContributor[];
