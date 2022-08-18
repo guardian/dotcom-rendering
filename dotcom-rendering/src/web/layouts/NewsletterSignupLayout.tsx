@@ -205,8 +205,9 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const showNewsletterPreview = Boolean(newsletterPreviewUrl);
 
 	// TODO: decide on the fallback value if not defined in newsletters API
-	const newsletterRegionFocus =
-		promotedNewsletter?.regionalFocus ?? 'UK Focused';
+	const newsletterRegionFocus = promotedNewsletter?.regionalFocus
+		? `${promotedNewsletter.regionalFocus} Focused`
+		: 'UK Focused';
 
 	return (
 		<>
