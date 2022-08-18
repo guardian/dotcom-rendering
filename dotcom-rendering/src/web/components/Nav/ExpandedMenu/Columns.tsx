@@ -240,6 +240,8 @@ export const Columns: React.FC<{
 		<li>
 			<form css={searchBar} action="https://www.google.co.uk/search">
 				<TextInput
+					hideLabel={true}
+					label="Search input"
 					cssOverrides={searchInput}
 					name="q"
 					placeholder="Search"
