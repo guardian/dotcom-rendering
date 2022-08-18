@@ -84,7 +84,11 @@ const Layout: FC<Props> = ({ item, shouldHideAds, edition }) => {
 	}
 
 	if (item.design === ArticleDesign.Gallery) {
-		return <GalleryLayout item={item}>{render(item, body)}</GalleryLayout>;
+		return (
+			<GalleryLayout item={item} edition={edition}>
+				{render(item, body)}
+			</GalleryLayout>
+		);
 	}
 
 	if (

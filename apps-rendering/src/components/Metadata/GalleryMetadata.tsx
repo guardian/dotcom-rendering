@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat } from '@guardian/libs';
 import { neutral, remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
@@ -31,6 +32,7 @@ type Props = {
 	contributors: Contributor[];
 	commentCount: Option<number>;
 	commentable: boolean;
+	edition?: Edition;
 };
 
 const GalleryMetadata: FC<Props> = ({
@@ -39,10 +41,11 @@ const GalleryMetadata: FC<Props> = ({
 	contributors,
 	commentCount,
 	commentable,
+	edition,
 }) => (
 	<div css={styles}>
 		<div css={textStyles}>
-			<Dateline date={publishDate} format={format} />
+			<Dateline date={publishDate} format={format} edition={edition} />
 			<Follow format={format} contributors={contributors} />
 		</div>
 		<CommentCount
