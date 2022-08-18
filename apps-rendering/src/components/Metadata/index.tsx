@@ -206,12 +206,12 @@ const BlogLines: FC<Item> = (item: Item) => (
 	</>
 );
 
-const MetadataWithByline: FC<Props> = ({ item }: Props) => (
+const MetadataWithByline: FC<Props> = ({ item, edition }: Props) => (
 	<div css={css(styles, withBylineStyles)}>
 		<Avatar {...item} />
 		<div css={css(textStyles, withBylineTextStyles)}>
 			<Byline {...item} />
-			<Dateline date={item.publishDate} format={item} />
+			<Dateline date={item.publishDate} format={item} edition={edition} />
 			<Follow format={getFormat(item)} contributors={item.contributors} />
 		</div>
 		<CommentCount count={item.commentCount} {...item} />

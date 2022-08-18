@@ -42,6 +42,7 @@ import {
 	onwardStyles,
 } from 'styles';
 import { themeToPillarString } from 'themeStyles';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 
 // ----- Styles ----- //
 
@@ -79,9 +80,10 @@ const decideLines = (
 interface Props {
 	item: StandardItem | ReviewItem | MatchReportItem;
 	children: ReactNode[];
+	edition: Edition;
 }
 
-const StandardLayout: FC<Props> = ({ item, children }) => {
+const StandardLayout: FC<Props> = ({ item, children, edition }) => {
 	// client side code won't render an Epic if there's an element with this id
 	const epicContainer = item.shouldHideReaderRevenue ? null : (
 		<div css={articleWidthStyles}>
@@ -133,7 +135,7 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 					</div>
 					{decideLines(item, lineStyles)}
 					<section css={articleWidthStyles}>
-						<Metadata item={item} />
+						<Metadata item={item} edition={edition} />
 						<Logo item={item} />
 					</section>
 				</header>

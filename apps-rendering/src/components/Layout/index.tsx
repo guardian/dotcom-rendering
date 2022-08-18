@@ -122,7 +122,9 @@ const Layout: FC<Props> = ({ item, shouldHideAds, edition }) => {
 		}
 
 		return (
-			<StandardLayout item={item}>{render(item, body)}</StandardLayout>
+			<StandardLayout item={item} edition={edition}>
+				{render(item, body)}
+			</StandardLayout>
 		);
 	}
 
