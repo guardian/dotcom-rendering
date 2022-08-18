@@ -7,7 +7,13 @@ import {
 	remSpace,
 	textSans,
 } from '@guardian/source-foundations';
-import { Button, Label, TextInput } from '@guardian/source-react-components';
+import {
+	Button,
+	Label,
+	SvgSpinner,
+	TextInput,
+	userFeedbackThemeDefault,
+} from '@guardian/source-react-components';
 import type { FC } from 'react';
 
 // ----- Component ----- //
@@ -20,6 +26,35 @@ const formStyle = css`
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
+
+	.js-sign-up-form__spinner {
+		display: none;
+	}
+
+	&.js-signup-form--waiting {
+		.js-sign-up-form__spinner {
+			display: inline-flex;
+		}
+	}
+
+	.js-sign-up-form__feedback-message {
+		display: none;
+		${textSans.medium({fontWeight:'bold'})}
+	}
+
+	&.js-signup-form--success {
+		.js-sign-up-form__feedback-message {
+			display: inline;
+			color: ${userFeedbackThemeDefault.userFeedback.textSuccess}
+		}
+	}
+
+	&.js-signup-form--failure {
+		.js-sign-up-form__feedback-message {
+			display: inline;
+			color: ${userFeedbackThemeDefault.userFeedback.textError}
+		}
+	}
 `;
 
 /**
@@ -43,11 +78,12 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 				`}
 			/>
 			<form
-				css={formStyle}
 				action={undefined}
 				className={'js-signup-form'}
 				data-newsletter-id={newsletterId}
+				css={formStyle}
 			>
+
 				<TextInput
 					type="email"
 					width={30}
@@ -71,10 +107,22 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 						margin-bottom: ${remSpace[2]};
 						flex-basis: ${pxToRem(118)}rem;
 						justify-content: center;
+
+						:disabled {
+							background-color: ${neutral[46]};
+						}
 					`}
 				>
 					Sign up
 				</Button>
+				<span
+					className="js-sign-up-form__spinner"
+				>
+					<SvgSpinner size="xsmall" />
+				</span>
+				<span
+					className="js-sign-up-form__feedback-message"
+				></span>
 			</form>
 		</>
 	);
