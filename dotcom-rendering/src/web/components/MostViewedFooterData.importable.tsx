@@ -75,9 +75,15 @@ export const MostViewedFooterData = ({
 		'variant',
 	);
 
+	// const isInDeeplyReadServerSideTest =
+	// 	window.guardian.config.tests.abDeeplyReadTestVariant === 'variant';
+
 	console.log(!!isInDeeplyReadTest);
 
-	const url = buildSectionUrl(ajaxUrl, sectionName);
+	const url = isInDeeplyReadTest
+		? `${ajaxUrl}/deeply-read.json`
+		: buildSectionUrl(ajaxUrl, sectionName);
+
 	const { data, error } = useApi<
 		MostViewedFooterPayloadType | CAPITrailTabType[]
 	>(url);
