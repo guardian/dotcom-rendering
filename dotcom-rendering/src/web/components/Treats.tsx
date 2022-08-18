@@ -139,7 +139,7 @@ export const Treats = ({
 				if (
 					treat.imageUrl &&
 					treat.altText &&
-					(treat.theme || treat.theme === 0) // ArticlePillar.News is zero
+					treat.theme !== undefined
 				) {
 					const palette = decidePalette({
 						display: ArticleDisplay.Standard,
