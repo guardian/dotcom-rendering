@@ -1,4 +1,4 @@
-import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
+import { Analysis as ExampleArticle } from '../../fixtures/generated/articles/Analysis';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
 import { enhanceTableOfContents } from './enhanceTableOfContents';
 
