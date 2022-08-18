@@ -324,13 +324,13 @@ const itemFieldsWithBody = (
 
 const hasSomeTag =
 	(tagIds: string[]) =>
-		(tags: Tag[]): boolean =>
-			tags.some((tag) => tagIds.includes(tag.id));
+	(tags: Tag[]): boolean =>
+		tags.some((tag) => tagIds.includes(tag.id));
 
 const hasTag =
 	(tagId: string) =>
-		(tags: Tag[]): boolean =>
-			tags.some((tag) => tag.id === tagId);
+	(tags: Tag[]): boolean =>
+		tags.some((tag) => tag.id === tagId);
 
 const isAudio = hasTag('type/audio');
 
@@ -376,35 +376,35 @@ const isPicture = hasTag('type/picture');
 
 const fromCapiLiveBlog =
 	(context: Context) =>
-		(
-			request: RenderingRequest,
-			blockId: Option<string>,
-		): LiveBlog | DeadBlog => {
-			const { content } = request;
-			const body = content.blocks?.body ?? [];
-			const pageSize = content.tags.map((c) => c.id).includes('sport/sport')
-				? 30
-				: 10;
+	(
+		request: RenderingRequest,
+		blockId: Option<string>,
+	): LiveBlog | DeadBlog => {
+		const { content } = request;
+		const body = content.blocks?.body ?? [];
+		const pageSize = content.tags.map((c) => c.id).includes('sport/sport')
+			? 30
+			: 10;
 
-			const parsedBlocks = parseLiveBlocks(context)(body, content.tags);
-			const pagedBlocks = getPagedBlocks(pageSize, parsedBlocks, blockId);
-			return {
-				design:
-					content.fields?.liveBloggingNow === true
-						? ArticleDesign.LiveBlog
-						: ArticleDesign.DeadBlog,
-				blocks: parsedBlocks,
-				pagedBlocks,
-				totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
-				...itemFields(context, request),
-			};
+		const parsedBlocks = parseLiveBlocks(context)(body, content.tags);
+		const pagedBlocks = getPagedBlocks(pageSize, parsedBlocks, blockId);
+		return {
+			design:
+				content.fields?.liveBloggingNow === true
+					? ArticleDesign.LiveBlog
+					: ArticleDesign.DeadBlog,
+			blocks: parsedBlocks,
+			pagedBlocks,
+			totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
+			...itemFields(context, request),
 		};
+	};
 
 const fromCapi =
 	(context: Context) =>
-		(request: RenderingRequest, page: Option<string>): Item => {
-			const { content } = request;
-			const { tags, fields } = content;
+	(request: RenderingRequest, page: Option<string>): Item => {
+		const { content } = request;
+		const { tags, fields } = content;
 
 		// These checks aim for parity with the CAPI Scala client:
 		// https://github.com/guardian/content-api-scala-client/blob/9e249bcef47cc048da483b3453c10dd7d2e9565d/client/src/main/scala/com.gu.contentapi.client/utils/CapiModelEnrichment.scala
@@ -515,11 +515,11 @@ const fromCapi =
 			};
 		}
 
-			return {
-				design: ArticleDesign.Standard,
-				...itemFieldsWithBody(context, request),
-			};
+		return {
+			design: ArticleDesign.Standard,
+			...itemFieldsWithBody(context, request),
 		};
+	};
 
 // ----- Exports ----- //
 
