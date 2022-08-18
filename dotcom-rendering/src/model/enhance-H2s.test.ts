@@ -1,5 +1,5 @@
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { enhanceH2 } from './enhance-h2';
+import { enhanceH2s } from './enhance-H2s';
 
 describe('Enhance h2 Embeds', () => {
 	it('sets an id when it is an h2 of type SubheadingBlockElement', () => {
@@ -29,7 +29,7 @@ describe('Enhance h2 Embeds', () => {
 			},
 		];
 
-		expect(enhanceH2(input)).toEqual(expectedOutput);
+		expect(enhanceH2s(input)).toEqual(expectedOutput);
 	});
 	it('does not set an id when it is an h2 not of type TextBlockElement', () => {
 		const input: Block[] = [
@@ -58,7 +58,7 @@ describe('Enhance h2 Embeds', () => {
 			},
 		];
 
-		expect(enhanceH2(input)).toEqual(expectedOutput);
+		expect(enhanceH2s(input)).toEqual(expectedOutput);
 	});
 	it('does not set an id when it is of type SubheadingBlockElement but not an h2', () => {
 		const input: Block[] = [
@@ -87,6 +87,6 @@ describe('Enhance h2 Embeds', () => {
 			},
 		];
 
-		expect(enhanceH2(input)).toEqual(expectedOutput);
+		expect(enhanceH2s(input)).toEqual(expectedOutput);
 	});
 });

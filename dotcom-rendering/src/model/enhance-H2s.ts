@@ -23,7 +23,7 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	return enhanced;
 };
 
-export const enhanceH2 = (blocks: Block[]): Block[] =>
+export const enhanceH2s = (blocks: Block[]): Block[] =>
 	blocks.map((block: Block) => {
 		return {
 			...block,
