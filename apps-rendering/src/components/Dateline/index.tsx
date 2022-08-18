@@ -8,7 +8,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, text, textSans } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
-import { formatDate } from 'date';
 import { datetimeFormat } from 'datetime';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
