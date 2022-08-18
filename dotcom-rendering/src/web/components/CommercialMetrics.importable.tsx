@@ -37,6 +37,8 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 
 		const serverSideTestsToForceMetrics: Array<keyof ServerSideTests> = [
 			/* keep array multi-line */
+			'commercialEndOfQuarterMegaTestVariant',
+			'commercialEndOfQuarterMegaTestControl',
 		];
 
 		const userInServerSideTestToForceMetrics =

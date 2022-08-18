@@ -64,6 +64,7 @@ export const ArticleRenderer: React.FC<{
 	isDev: boolean;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
+	abTests?: ServerSideTests;
 }> = ({
 	format,
 	elements,
@@ -82,6 +83,7 @@ export const ArticleRenderer: React.FC<{
 	isAdFreeUser,
 	isSensitive,
 	isDev,
+	abTests,
 }) => {
 	const renderedElements = elements.map((element, index) => {
 		return (
@@ -100,6 +102,7 @@ export const ArticleRenderer: React.FC<{
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
 				switches={switches}
+				abTests={abTests}
 			/>
 		);
 	});

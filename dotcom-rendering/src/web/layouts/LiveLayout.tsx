@@ -961,6 +961,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													selectedTopics={
 														CAPIArticle.selectedTopics
 													}
+													abTests={
+														CAPIArticle.config
+															.abTests
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1129,6 +1133,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													}
 													selectedTopics={
 														CAPIArticle.selectedTopics
+													}
+													abTests={
+														CAPIArticle.config
+															.abTests
 													}
 												/>
 												{pagination.totalPages > 1 && (
