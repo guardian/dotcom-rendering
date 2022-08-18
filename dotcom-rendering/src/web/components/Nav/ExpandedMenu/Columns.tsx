@@ -234,7 +234,7 @@ export const Columns: React.FC<{
 				column={column}
 				key={column.title.toLowerCase()}
 				index={i}
-				showLine={i !== nav.pillars.length - 1}
+				isLastColumn={i !== nav.pillars.length - 1}
 			/>
 		))}
 		<li>
