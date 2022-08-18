@@ -61,7 +61,11 @@ const Layout: FC<Props> = ({ item, shouldHideAds, edition }) => {
 	const render = renderWithAds(shouldHideAds);
 
 	if (item.theme === ArticleSpecial.Labs) {
-		return <LabsLayout item={item}>{render(item, body)}</LabsLayout>;
+		return (
+			<LabsLayout item={item} edition={edition}>
+				{render(item, body)}
+			</LabsLayout>
+		);
 	}
 
 	if (
