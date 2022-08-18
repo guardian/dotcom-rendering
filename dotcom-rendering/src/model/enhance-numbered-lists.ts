@@ -39,7 +39,7 @@ const extractStarCount = (element: CAPIElement): number => {
 const isStarableImage = (element: CAPIElement | undefined): boolean => {
 	return (
 		element?._type ===
-		'model.dotcomrendering.pageElements.ImageBlockElement' &&
+			'model.dotcomrendering.pageElements.ImageBlockElement' &&
 		element.role !== 'thumbnail'
 	);
 };
@@ -90,7 +90,7 @@ const inlineStarRatings = (elements: CAPIElement[]): CAPIElement[] => {
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
-			'model.dotcomrendering.pageElements.TextBlockElement' &&
+				'model.dotcomrendering.pageElements.TextBlockElement' &&
 			isStarRating(thisElement)
 		) {
 			const rating = extractStarCount(thisElement);
@@ -114,7 +114,7 @@ const makeThumbnailsRound = (elements: CAPIElement[]): CAPIElement[] => {
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
-			'model.dotcomrendering.pageElements.ImageBlockElement' &&
+				'model.dotcomrendering.pageElements.ImageBlockElement' &&
 			thisElement.role === 'thumbnail'
 		) {
 			// Make this image round
@@ -186,7 +186,7 @@ const addItemLinks = (elements: CAPIElement[]): CAPIElement[] => {
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
-			'model.dotcomrendering.pageElements.TextBlockElement' &&
+				'model.dotcomrendering.pageElements.TextBlockElement' &&
 			isItemLink(thisElement)
 		) {
 			withItemLink.push(
