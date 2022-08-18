@@ -339,7 +339,7 @@ const isReview = hasSomeTag([
 
 const isAnalysis = hasTag('tone/analysis');
 
-const isExplainer = hasTag('tone/explainer');
+const isExplainer = hasTag('tone/explainers');
 
 const isLetter = hasTag('tone/letters');
 
