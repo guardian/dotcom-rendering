@@ -1,4 +1,5 @@
 // ----- Imports ----- //
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
@@ -198,12 +199,18 @@ export const Analysis = (): React.ReactNode => {
 Analysis.story = { name: 'Analysis' };
 
 export const LiveBlog = (): ReactElement => (
-	<Live item={{ ...live, display: ArticleDisplay.Standard }} />
+	<Live
+		item={{ ...live, display: ArticleDisplay.Standard }}
+		edition={Edition.UK}
+	/>
 );
 LiveBlog.story = { name: 'LiveBlog ' };
 
 export const DeadBlog = (): ReactElement => (
-	<Live item={{ ...deadBlog, display: ArticleDisplay.Standard }} />
+	<Live
+		item={{ ...deadBlog, display: ArticleDisplay.Standard }}
+		edition={Edition.UK}
+	/>
 );
 DeadBlog.story = { name: 'DeadBlog ' };
 
