@@ -80,9 +80,10 @@ export const MostViewedFooterData = ({
 
 	console.log(!!isInDeeplyReadTest);
 
-	const url = isInDeeplyReadTest
-		? `${ajaxUrl}/deeply-read.json`
-		: buildSectionUrl(ajaxUrl, sectionName);
+	// const url = isInDeeplyReadTest
+	// 	? `${ajaxUrl}/deeply-read.json`
+	// 	: buildSectionUrl(ajaxUrl, sectionName);
+	const url = buildSectionUrl(ajaxUrl, sectionName);
 
 	const { data, error } = useApi<
 		MostViewedFooterPayloadType | CAPITrailTabType[]
