@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+import { isItemLink } from './enhance-numbered-lists';
 
 const isFalseH3 = (element: CAPIElement): boolean => {
 	if (!element) return false;
