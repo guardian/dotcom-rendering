@@ -527,6 +527,12 @@
                 "successDescription",
                 "theme"
             ]
+        },
+        "tableOfContents": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/TOCType"
+            }
         }
     },
     "required": [
@@ -4555,6 +4561,49 @@
                 "WORK_OF_ART"
             ],
             "type": "string"
+        },
+        "TOCType": {
+            "type": "object",
+            "properties": {
+                "nested": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TOCItem"
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "subtitle": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "nested",
+                "title"
+            ]
+        },
+        "TOCItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "subtitle": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "title"
+            ]
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"
