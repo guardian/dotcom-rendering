@@ -18,9 +18,8 @@ const isFalseH3 = (element: CAPIElement): boolean => {
 		frag.firstElementChild.outerHTML.includes('<strong>');
 	const doesNotContainLinks =
 		!frag.firstElementChild.outerHTML.includes('<a>');
-	const htmlLength = html.length;
-	const startStrong = html.substr(0, 11) === '<p><strong>';
-	const endsStrong = html.substr(htmlLength - 13) === '</strong></p>';
+	const startStrong = html.startsWith('<p><strong>');
+	const endsStrong = html.endsWith('</strong></p>');
 
 	return (
 		hasPwrapper &&
