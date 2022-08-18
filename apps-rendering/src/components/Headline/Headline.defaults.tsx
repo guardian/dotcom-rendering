@@ -35,7 +35,6 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 			return css`
 				${baseStyles}
 				${articleWidthStyles}
-				${boldFont}
 				background-color: ${background.headline(format)};
 				padding-bottom: ${remSpace[6]};
 
