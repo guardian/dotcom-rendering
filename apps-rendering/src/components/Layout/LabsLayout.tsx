@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import {
 	background,
 	breakpoints,
@@ -28,7 +29,6 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
-import { Edition } from '@guardian/apps-rendering-api-models/edition';
 
 // ----- Styles ----- //
 

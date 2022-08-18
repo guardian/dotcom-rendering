@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { background, breakpoints, from } from '@guardian/source-foundations';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
@@ -15,7 +16,6 @@ import { getFormat } from 'item';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { articleWidthStyles, onwardStyles } from 'styles';
-import { Edition } from '@guardian/apps-rendering-api-models/edition';
 
 // ----- Styles ----- //
 

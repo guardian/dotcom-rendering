@@ -2,6 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import {
 	background,
@@ -42,7 +43,6 @@ import {
 	onwardStyles,
 } from 'styles';
 import { themeToPillarString } from 'themeStyles';
-import { Edition } from '@guardian/apps-rendering-api-models/edition';
 
 // ----- Styles ----- //
 

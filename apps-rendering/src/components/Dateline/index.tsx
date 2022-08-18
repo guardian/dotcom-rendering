@@ -2,7 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { Edition } from '@guardian/apps-rendering-api-models/edition';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, text, textSans } from '@guardian/source-foundations';

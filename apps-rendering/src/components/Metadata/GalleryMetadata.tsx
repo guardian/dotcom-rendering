@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { Edition } from '@guardian/apps-rendering-api-models/edition';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat } from '@guardian/libs';
 import { neutral, remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
