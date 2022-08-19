@@ -23,7 +23,6 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
-import { Section } from '../components/Section';
 import { DecideLines } from '../components/DecideLines';
 import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -37,6 +36,7 @@ import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
@@ -228,6 +228,11 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
+	/**
+	 * This property currently only applies to the header and merchandising slots
+	 */
+	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
+
 	return (
 		<>
 			{CAPIArticle.isLegacyInteractive && (
@@ -235,23 +240,21 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			)}
 
 			<div>
-				<Stuck>
-					<div data-print-layout="hide">
-						<Section
-							fullWidth={true}
-							showTopBorder={false}
-							showSideBorders={false}
-							padSides={false}
-							shouldCenter={false}
-						>
-							<HeaderAdSlot
-								isAdFreeUser={CAPIArticle.isAdFreeUser}
-								shouldHideAds={CAPIArticle.shouldHideAds}
-								display={format.display}
-							/>
-						</Section>
-					</div>
-				</Stuck>
+				{renderAds && (
+					<Stuck>
+						<div data-print-layout="hide">
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
+								showSideBorders={false}
+								padSides={false}
+								shouldCenter={false}
+							>
+								<HeaderAdSlot display={format.display} />
+							</Section>
+						</div>
+					</Stuck>
+				)}
 
 				{format.theme !== ArticleSpecial.Labs && (
 					<div data-print-layout="hide">
@@ -358,7 +361,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				</Stuck>
 			)}
 
-			{CAPIArticle.config.switches.surveys && (
+			{renderAds && CAPIArticle.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 			<main data-layout="InteractiveLayout">
@@ -601,22 +604,23 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						badge={CAPIArticle.badge}
 					/>
 				</Section>
-
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					padSides={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot
+				{renderAds && (
+					<Section
+						fullWidth={true}
 						data-print-layout="hide"
-						position="merchandising-high"
-						display={format.display}
-					/>
-				</Section>
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							data-print-layout="hide"
+							position="merchandising-high"
+							display={format.display}
+						/>
+					</Section>
+				)}
 
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
@@ -711,18 +715,22 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					</Section>
 				)}
-
-				<Section
-					fullWidth={true}
-					data-print-layout="hide"
-					padSides={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot position="merchandising" display={format.display} />
-				</Section>
+				{renderAds && (
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising"
+							display={format.display}
+						/>
+					</Section>
+				)}
 			</main>
 
 			{NAV.subNavSections && (

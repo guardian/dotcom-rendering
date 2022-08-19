@@ -19,12 +19,22 @@ const fauxLinkStyles = css`
 
 type Props = {
 	linkTo: string;
+	headlineText: string;
 	containerPalette?: DCRContainerPalette;
 	dataLinkName?: string;
 };
 
-export const CardLink = ({ linkTo, dataLinkName = 'article' }: Props) => {
+export const CardLink = ({
+	linkTo,
+	headlineText,
+	dataLinkName = 'article',
+}: Props) => {
 	return (
-		<a href={linkTo} css={fauxLinkStyles} data-link-name={dataLinkName} />
+		<a
+			href={linkTo}
+			css={fauxLinkStyles}
+			data-link-name={dataLinkName}
+			aria-label={headlineText}
+		/>
 	);
 };

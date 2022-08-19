@@ -7,6 +7,7 @@ import {
 	sport,
 	textSans,
 } from '@guardian/source-foundations';
+import { buildDetailText } from '../lib/buildNewsletterSignUpText';
 import { NewsletterDetail } from './NewsletterDetail';
 import { SecureSignup } from './SecureSignup';
 
@@ -88,7 +89,7 @@ export const EmailSignup = ({
 					Sign up to <span>{name}</span>
 				</p>
 				<div css={noHeightFromTabletStyles}>
-					<NewsletterDetail text={frequency} />
+					<NewsletterDetail text={buildDetailText(frequency)} />
 				</div>
 			</div>
 			<p css={descriptionStyles}>{description}</p>
