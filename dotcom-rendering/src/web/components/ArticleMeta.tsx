@@ -241,7 +241,7 @@ const shouldShowContributor = (format: ArticleFormat) => {
 	}
 };
 
-const AvatarContainer = ({ children }: { children: React.ReactNode }) => (
+const MetaAvatarContainer = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			width: 140px;
@@ -353,13 +353,13 @@ export const ArticleMeta = ({
 				<RowBelowLeftCol>
 					<>
 						{!!avatarUrl && (
-							<AvatarContainer>
+							<MetaAvatarContainer>
 								<Avatar
 									imageSrc={avatarUrl}
 									imageAlt={authorName}
 									format={format}
 								/>
-							</AvatarContainer>
+							</MetaAvatarContainer>
 						)}
 
 						<div>
