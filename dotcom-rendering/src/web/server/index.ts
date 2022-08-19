@@ -44,7 +44,11 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 		...data,
 		pressedPage: {
 			...data.pressedPage,
-			collections: enhanceCollections(data.pressedPage.collections),
+			collections: enhanceCollections(
+				data.pressedPage.collections,
+				data.editionId,
+				data.pageId,
+			),
 		},
 	};
 };
