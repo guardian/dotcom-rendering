@@ -598,53 +598,6 @@ const articleContent = (format: ArticleFormat): string => {
 	}
 };
 
-
-
-const byline = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case ArticlePillar.Sport:
-				return sport[300];
-			case ArticlePillar.Culture:
-				return culture[300];
-			case ArticlePillar.Opinion:
-				return opinion[300];
-			case ArticlePillar.Lifestyle:
-				return lifestyle[300];
-			case ArticleSpecial.Labs:
-				return labs[300];
-			case ArticleSpecial.SpecialReport:
-				return brandAlt[300];
-			case ArticlePillar.News:
-			default:
-				return news[300];
-		}
-	}
-
-	return neutral[100];
-};
-
-const bylineDark = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.Analysis) {
-		switch (format.theme) {
-			case ArticlePillar.Sport:
-				return sport[500];
-			case ArticlePillar.Culture:
-				return culture[500];
-			case ArticlePillar.Opinion:
-				return opinion[500];
-			case ArticlePillar.Lifestyle:
-				return lifestyle[500];
-			case ArticlePillar.News:
-			default:
-				return news[500];
-		}
-	}
-
-	return neutral[0];
-};
-
-
 // ----- API ----- //
 
 const background = {
@@ -654,8 +607,6 @@ const background = {
 	avatar,
 	bullet,
 	bulletDark,
-	byline,
-	bylineDark,
 	calloutSpeechBubble,
 	footer,
 	footerDark,
