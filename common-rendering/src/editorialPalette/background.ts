@@ -553,6 +553,8 @@ const tag = (format: ArticleFormat): Colour => {
 			return neutral[86];
 		case ArticleDesign.LiveBlog:
 			return neutral[93];
+		case ArticleDesign.Analysis:
+			return neutral[100];
 		default:
 			return neutral[97];
 	}
