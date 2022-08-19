@@ -97,8 +97,8 @@ export const enhanceBlocks = (
 ): Block[] => {
 	return new BlockEnhancer(blocks, format, promotedNewsletter)
 		.enhanceDividers()
-		.enhanceH2s()
 		.enhanceH3s()
+		.enhanceH2s()
 		.enhanceInteractiveContentsElements()
 		.enhanceBlockquotes()
 		.enhanceDots()
