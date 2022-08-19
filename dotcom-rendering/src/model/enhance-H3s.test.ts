@@ -197,5 +197,4 @@ describe('Enhance H3s', () => {
 		];
 		expect(enhanceH3s(input)).toEqual(expectedOutput);
 	});
-
 });

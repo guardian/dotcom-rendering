@@ -56,17 +56,15 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
-			'model.dotcomrendering.pageElements.TextBlockElement' &&
+				'model.dotcomrendering.pageElements.TextBlockElement' &&
 			isFalseH3(thisElement)
 		) {
 			const h3Text = extractH3(thisElement);
 
-			withH3s.push(
-				{
-					...thisElement,
-					html: `<h3>${h3Text}</h3>`,
-				},
-			);
+			withH3s.push({
+				...thisElement,
+				html: `<h3>${h3Text}</h3>`,
+			});
 		} else {
 			// Pass through
 			withH3s.push(thisElement);
