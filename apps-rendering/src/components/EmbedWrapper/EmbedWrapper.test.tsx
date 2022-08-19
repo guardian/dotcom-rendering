@@ -4,7 +4,7 @@
 
 import { matchers } from '@emotion/jest';
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
-import { none, some } from '@guardian/types';
+import { none, ok, some } from '@guardian/types';
 import type {
 	EmailSignup,
 	Embed,
@@ -63,7 +63,7 @@ describe('EmbedComponentWrapper.embedComponentFromWrapperProps', () => {
 			const embedComponentFromWrapperProps =
 				createEmbedComponentFromProps(container.firstElementChild);
 			expect(embedComponentFromWrapperProps).toStrictEqual(
-				some(expectedWrapperContents),
+				ok(expectedWrapperContents),
 			);
 		} else {
 			fail('EmbedComponentWrapper was not rendered');
