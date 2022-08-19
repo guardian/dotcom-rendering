@@ -52,7 +52,10 @@ const applyCleverOrderingForMatching = (titles: string[]): string[] => {
  */
 export const bylineAsTokens = (byline: string, tags: TagType[]): string[] => {
 	const titles = tags.filter(isContributor).map((c) => c.title);
-	// The contributor tag title should exist inside the byline for this regex to work
+	// The contributor tag title should exist inside the byline for the regex
+	// below to work. If it doesn't, we return the whole byline to prevent the
+	// regex splitting the string into an array of single charaters
+	if (titles.length === 0) return [byline];
 
 	const regex = new RegExp(
 		`(${applyCleverOrderingForMatching(titles).join('|')})`,
