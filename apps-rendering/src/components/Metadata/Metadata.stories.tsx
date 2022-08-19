@@ -2,6 +2,7 @@
 
 import { css } from '@emotion/react';
 import { from, neutral } from '@guardian/source-foundations';
+import { comment } from 'fixtures/item';
 import { deadBlog, live } from 'fixtures/live';
 import type { FC } from 'react';
 import Metadata from './';
@@ -36,6 +37,12 @@ const DeadBlogMetadata: FC = () => (
 	</div>
 );
 
+const ShortMetadata: FC = () => (
+	<div css={deadContainerStyles}>
+		<Metadata item={{ ...comment }} />
+	</div>
+);
+
 // ----- Exports ----- //
 
 export default {
@@ -43,4 +50,4 @@ export default {
 	title: 'AR/Metadata',
 };
 
-export { LiveblogMetadata, DeadBlogMetadata };
+export { LiveblogMetadata, DeadBlogMetadata, ShortMetadata };
