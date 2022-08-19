@@ -4,15 +4,13 @@ import type { Scorer } from '@guardian/apps-rendering-api-models/scorer';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import {
-	err,
 	fromNullable,
 	map2,
 	none,
 	map as optMap,
-	resultAndThen,
 	some,
 } from '@guardian/types';
-import type { Option, Result } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import { padStart } from 'date';
 import { fold, pipe } from 'lib';
 import fetch from 'node-fetch';
@@ -30,6 +28,7 @@ import {
 	stringParser,
 	succeed,
 } from 'parser';
+import { Result } from 'result';
 
 type Teams = [string, string];
 
@@ -139,10 +138,9 @@ const parseFootballResponse = async (
 		return pipe(
 			await response.json(),
 			parse(footballErrorParser),
-			resultAndThen<string, string, FootballContent>(err),
-		);
+		).flatMap<FootballContent>(Result.err);
 	} else {
-		return err('Problem accessing PA API');
+		return Result.err('Problem accessing PA API');
 	}
 };
 
@@ -194,7 +192,7 @@ const getFootballContent = async (
 		);
 
 		return footballContent;
-	}, Promise.resolve(err('Could not get selectorId')))(selectorId);
+	}, Promise.resolve(Result.err('Could not get selectorId')))(selectorId);
 };
 
 export { getFootballContent };

@@ -4,19 +4,13 @@ import type { BlockElement } from '@guardian/content-api-models/v1/blockElement'
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
 import {
 	andThen,
-	either,
-	err,
 	fromNullable,
-	fromUnsafe,
-	ok,
-	resultAndThen,
-	ResultKind,
-	resultMap,
 	withDefault,
 } from '@guardian/types';
-import type { Option, Result } from '@guardian/types';
-import { compose, parseIntOpt, pipe, resultFromNullable } from 'lib';
+import type { Option } from '@guardian/types';
+import { parseIntOpt, pipe, resultFromNullable } from 'lib';
 import type { DocParser } from 'parserContext';
+import { Result } from 'result';
 
 // ----- Types ----- //
 
@@ -133,8 +127,7 @@ const parseInstagramHTML =
 			resultFromNullable(
 				"I couldn't find a blockquote in the html for this embed",
 			),
-			resultAndThen(getPermalink),
-		);
+		).flatMap(getPermalink);
 
 const getWidth = getNumericAttribute('width');
 const getHeight = getNumericAttribute('height');
@@ -144,13 +137,12 @@ const iframeAttributes = (iframe: HTMLIFrameElement): Result<string, IFrame> =>
 	pipe(
 		iframe.getAttribute('src'),
 		resultFromNullable("This iframe didn't have a 'src' attribute"),
-		resultMap((src) => ({
-			src,
-			width: withDefault(380)(getWidth(iframe)),
-			height: withDefault(300)(getHeight(iframe)),
-			component: withDefault('generic')(getComponent(iframe)),
-		})),
-	);
+	).map((src) => ({
+		src,
+		width: withDefault(380)(getWidth(iframe)),
+		height: withDefault(300)(getHeight(iframe)),
+		component: withDefault('generic')(getComponent(iframe)),
+	}));
 
 const parseIframe =
 	(parser: DocParser) =>
@@ -160,16 +152,12 @@ const parseIframe =
 			resultFromNullable(
 				"I couldn't find an iframe in the html for this embed",
 			),
-			resultAndThen(iframeAttributes),
-		);
+		).flatMap(iframeAttributes);
 
-const genericHeight = (parser: DocParser): ((html: string) => number) =>
-	compose(
-		either(
-			(_) => 300,
-			(attrs: IFrame) => attrs.height,
-		),
-		parseIframe(parser),
+const genericHeight = (parser: DocParser) => (html: string): number =>
+	parseIframe(parser)(html).either(
+		(_) => 300,
+		(attrs) => attrs.height,
 	);
 
 const isGuardianDomain = (href: string): boolean => {
@@ -196,7 +184,7 @@ const extractGenericHtml = (element: BlockElement): Result<string, string> =>
 	);
 
 const parseUrl = (url: string): Result<string, URL> =>
-	fromUnsafe(
+	Result.fromUnsafe(
 		() => new URL(url),
 		`The 'url' I was given is not valid: ${url}`,
 	);
@@ -217,11 +205,10 @@ const getInstagramPostId = (url: URL): Result<string, string> =>
 	)(url.pathname.split('/')[2]);
 
 const parseYoutubeVideo = (element: BlockElement): Result<string, YouTube> =>
-	pipe(
-		extractVideoUrl(element),
-		resultAndThen(parseUrl),
-		resultAndThen(getYoutubeIdParam),
-		resultMap((id) => ({
+	extractVideoUrl(element)
+		.flatMap(parseUrl)
+		.flatMap(getYoutubeIdParam)
+		.map((id) => ({
 			kind: EmbedKind.YouTube,
 			id,
 			width: element.videoTypeData?.width ?? 380,
@@ -230,16 +217,14 @@ const parseYoutubeVideo = (element: BlockElement): Result<string, YouTube> =>
 			sourceDomain: fromNullable(element.videoTypeData?.sourceDomain),
 			tracking:
 				element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
-		})),
-	);
+		}));
 
 const parseSpotifyAudio =
 	(parser: DocParser) =>
 	(element: BlockElement): Result<string, Spotify> =>
-		pipe(
-			extractAudioHtml(element),
-			resultAndThen(parseIframe(parser)),
-			resultMap(({ src, width, height }) => ({
+		extractAudioHtml(element)
+			.flatMap(parseIframe(parser))
+			.map(({ src, width, height }) => ({
 				kind: EmbedKind.Spotify,
 				src,
 				width,
@@ -248,12 +233,11 @@ const parseSpotifyAudio =
 				sourceDomain: fromNullable(element.audioTypeData?.sourceDomain),
 				tracking:
 					element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
-			})),
-		);
+			}));
 
 const parseVideo = (element: BlockElement): Result<string, Embed> => {
 	if (element.videoTypeData === undefined) {
-		return err(
+		return Result.err(
 			"I can't parse this video element, it has no 'videoTypeData' field",
 		);
 	}
@@ -262,7 +246,7 @@ const parseVideo = (element: BlockElement): Result<string, Embed> => {
 		return parseYoutubeVideo(element);
 	}
 
-	return err(
+	return Result.err(
 		`I don't recognise the 'source' of this video element: ${
 			element.videoTypeData.source ?? 'undefined'
 		}`,
@@ -273,7 +257,7 @@ const parseAudio =
 	(parser: DocParser) =>
 	(element: BlockElement): Result<string, Embed> => {
 		if (element.audioTypeData === undefined) {
-			return err(
+			return Result.err(
 				"I can't parse this audio element, it has no 'audioTypeData' field",
 			);
 		}
@@ -282,7 +266,7 @@ const parseAudio =
 			return parseSpotifyAudio(parser)(element);
 		}
 
-		return err(
+		return Result.err(
 			`I don't recognise the 'source' of this audio element: ${
 				element.audioTypeData.source ?? 'undefined'
 			}`,
@@ -291,16 +275,15 @@ const parseAudio =
 
 const parseInstagram = (element: BlockElement): Result<string, Embed> => {
 	if (element.instagramTypeData === undefined) {
-		return err(
+		return Result.err(
 			"I can't parse this Instagram element, it has no 'instagramTypeData' field",
 		);
 	}
 
-	return pipe(
-		extractInstagramUrl(element),
-		resultAndThen(parseUrl),
-		resultAndThen(getInstagramPostId),
-		resultMap((id) => ({
+	return extractInstagramUrl(element)
+		.flatMap(parseUrl)
+		.flatMap(getInstagramPostId)
+		.map((id) => ({
 			kind: EmbedKind.Instagram,
 			id,
 			caption: fromNullable(
@@ -311,8 +294,7 @@ const parseInstagram = (element: BlockElement): Result<string, Embed> => {
 			sourceDomain: fromNullable(element.instagramTypeData?.sourceDomain),
 			tracking:
 				element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
-		})),
-	);
+		}));
 };
 
 const parseGenericEmbedKind =
@@ -333,30 +315,21 @@ const extractIdFromInstagramUrl = (url: string): string => {
 const extractInstagramId =
 	(parser: DocParser) =>
 	(html: string): Result<string, string> =>
-		pipe(
-			html,
-			parseInstagramHTML(parser),
-			resultMap(extractIdFromInstagramUrl),
-		);
+		parseInstagramHTML(parser)(html).map(extractIdFromInstagramUrl);
 
 const parseGenericInstagram =
 	(parser: DocParser) =>
 	(element: BlockElement): Result<string, Instagram> =>
-		pipe(
-			element,
-			extractGenericHtml,
-			resultAndThen(extractInstagramId(parser)),
-			resultMap(
-				(id: string): Instagram => ({
-					kind: EmbedKind.Instagram,
-					id,
-					caption: fromNullable(element.embedTypeData?.alt),
-					tracking:
-						element.tracking?.tracks ??
-						EmbedTracksType.DOES_NOT_TRACK,
-				}),
-			),
-		);
+		extractGenericHtml(element)
+			.flatMap(extractInstagramId(parser))
+			.map((id: string): Instagram => ({
+				kind: EmbedKind.Instagram,
+				id,
+				caption: fromNullable(element.embedTypeData?.alt),
+				tracking:
+					element.tracking?.tracks ??
+					EmbedTracksType.DOES_NOT_TRACK,
+			}));
 
 const emailFromIframe =
 	(element: BlockElement) =>
@@ -365,7 +338,7 @@ const emailFromIframe =
 			iframe.component.includes('email-embed') &&
 			isGuardianDomain(iframe.src)
 		) {
-			return ok({
+			return Result.ok({
 				kind: EmbedKind.EmailSignup,
 				src: iframe.src,
 				alt: fromNullable(element.embedTypeData?.alt),
@@ -376,25 +349,22 @@ const emailFromIframe =
 				sourceDomain: fromNullable(element.embedTypeData?.sourceDomain),
 			});
 		} else {
-			return err('element is not an email signup');
+			return Result.err('element is not an email signup');
 		}
 	};
 
 const parseEmailSignup =
 	(parser: DocParser) =>
 	(element: BlockElement): Result<string, EmailSignup> =>
-		pipe(
-			element,
-			extractGenericHtml,
-			resultAndThen(parseIframe(parser)),
-			resultAndThen(emailFromIframe(element)),
-		);
+		extractGenericHtml(element)
+			.flatMap(parseIframe(parser))
+			.flatMap(emailFromIframe(element));
 
 const parseGeneric =
 	(parser: DocParser) =>
 	(element: BlockElement): Result<string, Embed> => {
 		if (element.embedTypeData === undefined) {
-			return err(
+			return Result.err(
 				"I can't parse this generic embed, it has no 'embedTypeData' field",
 			);
 		}
@@ -404,22 +374,23 @@ const parseGeneric =
 		}
 
 		const emailSignup = parseEmailSignup(parser)(element);
-		if (emailSignup.kind === ResultKind.Ok) {
+		if (emailSignup.isOk()) {
 			return emailSignup;
 		}
 
-		return resultMap((html: string): Generic | TikTok => ({
-			kind: parseGenericEmbedKind(parser)(element)(html),
-			alt: fromNullable(element.embedTypeData?.alt),
-			html,
-			height: genericHeight(parser)(html),
-			mandatory: element.embedTypeData?.isMandatory ?? false,
-			source: fromNullable(element.embedTypeData?.source),
-			sourceDomain: fromNullable(element.embedTypeData?.sourceDomain),
-			// If there's no tracking information the embed does not track
-			tracking:
-				element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
-		}))(extractGenericHtml(element));
+		return extractGenericHtml(element)
+			.map((html: string): Generic | TikTok => ({
+				kind: parseGenericEmbedKind(parser)(element)(html),
+				alt: fromNullable(element.embedTypeData?.alt),
+				html,
+				height: genericHeight(parser)(html),
+				mandatory: element.embedTypeData?.isMandatory ?? false,
+				source: fromNullable(element.embedTypeData?.source),
+				sourceDomain: fromNullable(element.embedTypeData?.sourceDomain),
+				// If there's no tracking information the embed does not track
+				tracking:
+					element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
+			}));
 	};
 
 // ----- Exports ----- //

@@ -8,8 +8,6 @@ import {
 } from '@guardian/atoms-rendering';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
-import type { Result } from '@guardian/types';
-import { fromUnsafe, resultAndThen, ResultKind } from '@guardian/types';
 import { ElementKind } from 'bodyElementKind';
 import { pipe, resultFromNullable } from 'lib';
 import type { Parser } from 'parser';
@@ -24,6 +22,7 @@ import {
 import type { QuizAtom } from 'quizAtom';
 import { parser as quizAtomParser } from 'quizAtom';
 import ReactDOM from 'react-dom';
+import { Result } from 'result';
 
 // ----- Types ----- //
 
@@ -72,14 +71,12 @@ const parseQuizProps = (
 		resultFromNullable(
 			'The quiz atom did not have an accompanying element containing props',
 		),
-		resultAndThen((p) =>
-			fromUnsafe<unknown, string>(
-				() => JSON.parse(p.replace(/&quot;/g, '"')),
-				'The props for the quiz atom are not valid JSON',
-			),
+	).flatMap((p) =>
+		Result.fromUnsafe(
+			(): unknown => JSON.parse(p.replace(/&quot;/g, '"')),
+			'The props for the quiz atom are not valid JSON',
 		),
-		resultAndThen(parse(quizPropsParser)),
-	);
+	).flatMap(parse(quizPropsParser));
 
 const hydrateQuizzes = (): void =>
 	Array.from(document.querySelectorAll('.js-quiz')).forEach((atomElement) => {
@@ -87,7 +84,7 @@ const hydrateQuizzes = (): void =>
 			atomElement.querySelector('.js-quiz-params')?.innerHTML;
 		const parsedProps = parseQuizProps(rawProps);
 
-		if (parsedProps.kind === ResultKind.Ok) {
+		if (parsedProps.isOk()) {
 			const quizProps = parsedProps.value;
 
 			const atom =
@@ -106,8 +103,10 @@ const hydrateQuizzes = (): void =>
 				);
 
 			ReactDOM.hydrate(atom, atomElement);
-		} else {
-			console.error(parsedProps.err);
+		}
+		
+		if (parsedProps.isErr()) {
+			console.error(parsedProps.error);
 		}
 	});
 
