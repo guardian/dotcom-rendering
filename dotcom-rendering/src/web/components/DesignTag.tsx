@@ -1,14 +1,57 @@
 import { css } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
 import { headline, space } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 
-export const DesignTag = ({
-	children,
-	format,
-}: {
-	children: React.ReactNode;
-	format: ArticleFormat;
-}) => {
+const decideText = (format: ArticleFormat) => {
+	switch (format.design) {
+		case ArticleDesign.Analysis:
+			return 'Analysis';
+		case ArticleDesign.Explainer:
+			return 'Explainer';
+		case ArticleDesign.Audio:
+			return 'Audio';
+		case ArticleDesign.Comment:
+			return 'Comment';
+		case ArticleDesign.Correction:
+			return 'Correction';
+		case ArticleDesign.DeadBlog:
+			return 'DeadBlog';
+		case ArticleDesign.Editorial:
+			return 'Editorial';
+		case ArticleDesign.Feature:
+			return 'Feature';
+		case ArticleDesign.Gallery:
+			return 'Gallery';
+		case ArticleDesign.Interview:
+			return 'Interview';
+		case ArticleDesign.Letter:
+			return 'Letter';
+		case ArticleDesign.LiveBlog:
+			return 'LiveBlog';
+		case ArticleDesign.MatchReport:
+			return 'MatchReport';
+		case ArticleDesign.NewsletterSignup:
+			return 'NewsletterSignup';
+		case ArticleDesign.Obituary:
+			return 'Obituary';
+		case ArticleDesign.PhotoEssay:
+			return 'PhotoEssay';
+		case ArticleDesign.PrintShop:
+			return 'PrintShop';
+		case ArticleDesign.Quiz:
+			return 'Quiz';
+		case ArticleDesign.Recipe:
+			return 'Recipe';
+		case ArticleDesign.Review:
+			return 'Review';
+		case ArticleDesign.Video:
+			return 'Video';
+		default:
+			return 'Article';
+	}
+};
+export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 	const palette = decidePalette(format);
 	return (
 		<div
@@ -24,7 +67,7 @@ export const DesignTag = ({
 				${headline.xxsmall({ fontWeight: 'bold' })}
 			`}
 		>
-			{children}
+			{decideText(format)}
 		</div>
 	);
 };
