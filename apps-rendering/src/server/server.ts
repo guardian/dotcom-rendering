@@ -33,6 +33,7 @@ import { MainMediaKind } from 'mainMedia';
 import type { Response } from 'node-fetch';
 import fetch from 'node-fetch';
 import { parseRelatedContent } from 'relatedContent';
+import { Result } from 'result';
 import {
 	capiContentDecoder,
 	capiDecoder,
@@ -42,7 +43,6 @@ import {
 import { render as renderEditions } from 'server/editionsPage';
 import { render } from 'server/page';
 import { getConfigValue } from 'server/ssmConfig';
-import { Result } from 'result';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
 import { getFootballContent } from './footballContent';

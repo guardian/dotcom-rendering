@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Optional } from 'optional';
+import type { Optional } from 'optional';
 import { Result } from 'result';
 
 // ----- Types ----- //
@@ -244,7 +244,12 @@ const arrayParser = <A>(pa: Parser<A>): Parser<A[]> =>
 			const parsed = pa.run(item);
 
 			return parsed.either(
-				(err) => Result.err(`Could not parse array item ${String(item)} because ${err}`),
+				(err) =>
+					Result.err(
+						`Could not parse array item ${String(
+							item,
+						)} because ${err}`,
+					),
 				(a) => f([...acc, a], tail),
 			);
 		};
@@ -310,11 +315,7 @@ const map2 =
 	<A, B, C>(f: (a: A, b: B) => C) =>
 	(pa: Parser<A>, pb: Parser<B>): Parser<C> =>
 		parser((a) =>
-			pa.run(a).flatMap(resA =>
-				pb.run(a).map(resB =>
-					f(resA, resB),
-				),
-			),
+			pa.run(a).flatMap((resA) => pb.run(a).map((resB) => f(resA, resB))),
 		);
 
 /**
@@ -325,13 +326,15 @@ const map3 =
 	<A, B, C, D>(f: (a: A, b: B, c: C) => D) =>
 	(pa: Parser<A>, pb: Parser<B>, pc: Parser<C>): Parser<D> =>
 		parser((a) =>
-			pa.run(a).flatMap(resA =>
-				pb.run(a).flatMap(resB =>
-					pc.run(a).map(resC =>
-						f(resA, resB, resC),
-					),
+			pa
+				.run(a)
+				.flatMap((resA) =>
+					pb
+						.run(a)
+						.flatMap((resB) =>
+							pc.run(a).map((resC) => f(resA, resB, resC)),
+						),
 				),
-			),
 		);
 
 /**
@@ -342,15 +345,23 @@ const map4 =
 	<A, B, C, D, E>(f: (a: A, b: B, c: C, d: D) => E) =>
 	(pa: Parser<A>, pb: Parser<B>, pc: Parser<C>, pd: Parser<D>): Parser<E> =>
 		parser((a) =>
-			pa.run(a).flatMap(resA =>
-				pb.run(a).flatMap(resB =>
-					pc.run(a).flatMap(resC =>
-						pd.run(a).map(resD =>
-							f(resA, resB, resC, resD),
+			pa
+				.run(a)
+				.flatMap((resA) =>
+					pb
+						.run(a)
+						.flatMap((resB) =>
+							pc
+								.run(a)
+								.flatMap((resC) =>
+									pd
+										.run(a)
+										.map((resD) =>
+											f(resA, resB, resC, resD),
+										),
+								),
 						),
-					),
 				),
-			),
 		);
 
 /**
@@ -367,17 +378,33 @@ const map5 =
 		pe: Parser<E>,
 	): Parser<F> =>
 		parser((a) =>
-			pa.run(a).flatMap(resA =>
-				pb.run(a).flatMap(resB =>
-					pc.run(a).flatMap(resC =>
-						pd.run(a).flatMap(resD =>
-							pe.run(a).map(resE =>
-								f(resA, resB, resC, resD, resE),
-							),
+			pa
+				.run(a)
+				.flatMap((resA) =>
+					pb
+						.run(a)
+						.flatMap((resB) =>
+							pc
+								.run(a)
+								.flatMap((resC) =>
+									pd
+										.run(a)
+										.flatMap((resD) =>
+											pe
+												.run(a)
+												.map((resE) =>
+													f(
+														resA,
+														resB,
+														resC,
+														resD,
+														resE,
+													),
+												),
+										),
+								),
 						),
-					),
 				),
-			),
 		);
 
 /**
@@ -395,19 +422,38 @@ const map6 =
 		pf: Parser<F>,
 	): Parser<G> =>
 		parser((a) =>
-			pa.run(a).flatMap(resA =>
-				pb.run(a).flatMap(resB =>
-					pc.run(a).flatMap(resC =>
-						pd.run(a).flatMap(resD =>
-							pe.run(a).flatMap(resE =>
-								pf.run(a).map(resF =>
-									f(resA, resB, resC, resD, resE, resF),
+			pa
+				.run(a)
+				.flatMap((resA) =>
+					pb
+						.run(a)
+						.flatMap((resB) =>
+							pc
+								.run(a)
+								.flatMap((resC) =>
+									pd
+										.run(a)
+										.flatMap((resD) =>
+											pe
+												.run(a)
+												.flatMap((resE) =>
+													pf
+														.run(a)
+														.map((resF) =>
+															f(
+																resA,
+																resB,
+																resC,
+																resD,
+																resE,
+																resF,
+															),
+														),
+												),
+										),
 								),
-							),
 						),
-					),
 				),
-			),
 		);
 
 /**
@@ -428,29 +474,43 @@ const map7 =
 		pg: Parser<G>,
 	): Parser<H> =>
 		parser((a) =>
-			pa.run(a).flatMap(resA =>
-				pb.run(a).flatMap(resB =>
-					pc.run(a).flatMap(resC =>
-						pd.run(a).flatMap(resD =>
-							pe.run(a).flatMap(resE =>
-								pf.run(a).flatMap(resF =>
-									pg.run(a).map(resG =>
-										f(
-											resA,
-											resB,
-											resC,
-											resD,
-											resE,
-											resF,
-											resG,
+			pa
+				.run(a)
+				.flatMap((resA) =>
+					pb
+						.run(a)
+						.flatMap((resB) =>
+							pc
+								.run(a)
+								.flatMap((resC) =>
+									pd
+										.run(a)
+										.flatMap((resD) =>
+											pe
+												.run(a)
+												.flatMap((resE) =>
+													pf
+														.run(a)
+														.flatMap((resF) =>
+															pg
+																.run(a)
+																.map((resG) =>
+																	f(
+																		resA,
+																		resB,
+																		resC,
+																		resD,
+																		resE,
+																		resF,
+																		resG,
+																	),
+																),
+														),
+												),
 										),
-									),
 								),
-							),
 						),
-					),
 				),
-			),
 		);
 
 /**
@@ -472,32 +532,54 @@ const map8 =
 		ph: Parser<H>,
 	): Parser<I> =>
 		parser((a) =>
-			pa.run(a).flatMap(resA =>
-				pb.run(a).flatMap(resB =>
-					pc.run(a).flatMap(resC =>
-						pd.run(a).flatMap(resD =>
-							pe.run(a).flatMap(resE =>
-								pf.run(a).flatMap(resF =>
-									pg.run(a).flatMap(resG =>
-										ph.run(a).map(resH =>
-											f(
-												resA,
-												resB,
-												resC,
-												resD,
-												resE,
-												resF,
-												resG,
-												resH,
-											),
+			pa
+				.run(a)
+				.flatMap((resA) =>
+					pb
+						.run(a)
+						.flatMap((resB) =>
+							pc
+								.run(a)
+								.flatMap((resC) =>
+									pd
+										.run(a)
+										.flatMap((resD) =>
+											pe
+												.run(a)
+												.flatMap((resE) =>
+													pf
+														.run(a)
+														.flatMap((resF) =>
+															pg
+																.run(a)
+																.flatMap(
+																	(resG) =>
+																		ph
+																			.run(
+																				a,
+																			)
+																			.map(
+																				(
+																					resH,
+																				) =>
+																					f(
+																						resA,
+																						resB,
+																						resC,
+																						resD,
+																						resE,
+																						resF,
+																						resG,
+																						resH,
+																					),
+																			),
+																),
+														),
+												),
 										),
-									),
 								),
-							),
 						),
-					),
 				),
-			),
 		);
 
 /**
@@ -535,9 +617,7 @@ const map8 =
 const andThen =
 	<A, B>(f: (a: A) => Parser<B>) =>
 	(pa: Parser<A>): Parser<B> =>
-		parser((a) =>
-			pa.run(a).flatMap((x) => f(x).run(a)),
-		);
+		parser((a) => pa.run(a).flatMap((x) => f(x).run(a)));
 
 /**
  * Handles situations where there are multiple valid ways that the input data
@@ -592,7 +672,9 @@ const oneOf = <A>(parsers: Array<Parser<A>>): Parser<A> =>
 		};
 
 		if (parsers.length === 0) {
-			return Result.err("The list of parsers passed to 'oneOf' was empty");
+			return Result.err(
+				"The list of parsers passed to 'oneOf' was empty",
+			);
 		}
 
 		return f(parsers, []);

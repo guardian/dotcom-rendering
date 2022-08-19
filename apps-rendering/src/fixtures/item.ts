@@ -57,18 +57,19 @@ const parseHtml = (html: string): Option<DocumentFragment> =>
 const headline =
 	'Reclaimed lakes and giant airports: how Mexico City might have looked';
 
-const standfirst =
-	parseHtml('<p>The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects</p>');
+const standfirst = parseHtml(
+	'<p>The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects</p>',
+);
 
+const standfirstWithLink = parseHtml(
+	'<p>Boris Johnson’s spokesperson says ‘it’s deeply regrettable that this took place at a time of national mourning’</p><ul><li><a href="https://www.theguardian.com/world/series/coronavirus-live/latest">Coronavirus – latest updates</a></li><li><a href="https://www.theguardian.com/world/coronavirus-outbreak">See all our coronavirus coverage</a></li></ul>',
+);
 
-const standfirstWithLink =
-	parseHtml('<p>Boris Johnson’s spokesperson says ‘it’s deeply regrettable that this took place at a time of national mourning’</p><ul><li><a href="https://www.theguardian.com/world/series/coronavirus-live/latest">Coronavirus – latest updates</a></li><li><a href="https://www.theguardian.com/world/coronavirus-outbreak">See all our coronavirus coverage</a></li></ul>');
+const bylineHtml = parseHtml(
+	'<a href="https://theguardian.com">Jane Smith</a> Editor of things',
+);
 
-const bylineHtml =
-	parseHtml('<a href="https://theguardian.com">Jane Smith</a> Editor of things');
-
-const captionDocFragment =
-	parseHtml('<em>Jane Smith</em> Editor of things');
+const captionDocFragment = parseHtml('<em>Jane Smith</em> Editor of things');
 
 const docFixture = (): Node => {
 	const doc = new DocumentFragment();

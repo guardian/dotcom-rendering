@@ -2,13 +2,13 @@ import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { fromNullable } from '@guardian/types';
-import { Result } from 'result';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import { atomScript } from 'components/InteractiveAtom';
 import { isValidDate } from 'date';
 import type Int64 from 'node-int64';
 import type { DocParser } from 'parserContext';
+import { Result } from 'result';
 
 function formatOptionalDate(date: Int64 | undefined): string | undefined {
 	if (date === undefined) return undefined;
@@ -272,7 +272,9 @@ function parseAtom(
 			const { kicker, trackUrl } = atom.data.audio;
 
 			if (!title) {
-				return Result.err(`No title for audio atom with id: ${audioId}`);
+				return Result.err(
+					`No title for audio atom with id: ${audioId}`,
+				);
 			}
 
 			return Result.ok({

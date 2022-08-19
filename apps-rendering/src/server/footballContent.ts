@@ -3,13 +3,7 @@ import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballT
 import type { Scorer } from '@guardian/apps-rendering-api-models/scorer';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import {
-	fromNullable,
-	map2,
-	none,
-	map as optMap,
-	some,
-} from '@guardian/types';
+import { fromNullable, map2, none, map as optMap, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { padStart } from 'date';
 import { fold, pipe } from 'lib';

@@ -8,11 +8,7 @@ import type { BlockElement } from '@guardian/content-api-models/v1/blockElement'
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { ArticleTheme } from '@guardian/libs';
 import type { Option } from '@guardian/types';
-import {
-	fromNullable,
-	map,
-	withDefault,
-} from '@guardian/types';
+import { fromNullable, map, withDefault } from '@guardian/types';
 import { parseAtom } from 'atoms';
 import { ElementKind } from 'bodyElementKind';
 import { formatDate } from 'date';
@@ -23,8 +19,8 @@ import { parseImage } from 'image';
 import { compose, pipe } from 'lib';
 import { Optional } from 'optional';
 import type { Context } from 'parserContext';
-import { Result } from 'result';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
+import { Result } from 'result';
 
 // ----- Types ----- //
 
@@ -203,10 +199,11 @@ const tweetContent = (
 
 const toEmbedElement = (
 	parsed: Result<string, Embed>,
-): Result<string, BodyElement> => parsed.map((embed) => ({
-	kind: ElementKind.Embed,
-	embed,
-}));
+): Result<string, BodyElement> =>
+	parsed.map((embed) => ({
+		kind: ElementKind.Embed,
+		embed,
+	}));
 
 const slugify = (text: string): string => {
 	return text
@@ -295,7 +292,9 @@ const parse =
 				const { iframeUrl, alt } = element.interactiveTypeData ?? {};
 
 				if (!iframeUrl) {
-					return Result.err('No iframeUrl field on interactiveTypeData');
+					return Result.err(
+						'No iframeUrl field on interactiveTypeData',
+					);
 				}
 
 				return Result.ok({
@@ -311,7 +310,9 @@ const parse =
 				if (!url) {
 					return Result.err('No "url" field on richLinkTypeData');
 				} else if (!linkText) {
-					return Result.err('No "linkText" field on richLinkTypeData');
+					return Result.err(
+						'No "linkText" field on richLinkTypeData',
+					);
 				}
 
 				return Result.ok({ kind: ElementKind.RichLink, url, linkText });
@@ -326,10 +327,12 @@ const parse =
 					return Result.err('No "html" field on tweetTypeData');
 				}
 
-				return tweetContent(id, context.docParser(h)).map((content) => ({
+				return tweetContent(id, context.docParser(h)).map(
+					(content) => ({
 						kind: ElementKind.Tweet,
 						content,
-					}));
+					}),
+				);
 			}
 
 			case ElementType.EMBED: {

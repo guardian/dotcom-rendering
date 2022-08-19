@@ -2,11 +2,7 @@
 
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
-import {
-	andThen,
-	fromNullable,
-	withDefault,
-} from '@guardian/types';
+import { andThen, fromNullable, withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { parseIntOpt, pipe, resultFromNullable } from 'lib';
 import type { DocParser } from 'parserContext';
@@ -154,11 +150,13 @@ const parseIframe =
 			),
 		).flatMap(iframeAttributes);
 
-const genericHeight = (parser: DocParser) => (html: string): number =>
-	parseIframe(parser)(html).either(
-		(_) => 300,
-		(attrs) => attrs.height,
-	);
+const genericHeight =
+	(parser: DocParser) =>
+	(html: string): number =>
+		parseIframe(parser)(html).either(
+			(_) => 300,
+			(attrs) => attrs.height,
+		);
 
 const isGuardianDomain = (href: string): boolean => {
 	try {
@@ -322,14 +320,16 @@ const parseGenericInstagram =
 	(element: BlockElement): Result<string, Instagram> =>
 		extractGenericHtml(element)
 			.flatMap(extractInstagramId(parser))
-			.map((id: string): Instagram => ({
-				kind: EmbedKind.Instagram,
-				id,
-				caption: fromNullable(element.embedTypeData?.alt),
-				tracking:
-					element.tracking?.tracks ??
-					EmbedTracksType.DOES_NOT_TRACK,
-			}));
+			.map(
+				(id: string): Instagram => ({
+					kind: EmbedKind.Instagram,
+					id,
+					caption: fromNullable(element.embedTypeData?.alt),
+					tracking:
+						element.tracking?.tracks ??
+						EmbedTracksType.DOES_NOT_TRACK,
+				}),
+			);
 
 const emailFromIframe =
 	(element: BlockElement) =>
@@ -378,8 +378,8 @@ const parseGeneric =
 			return emailSignup;
 		}
 
-		return extractGenericHtml(element)
-			.map((html: string): Generic | TikTok => ({
+		return extractGenericHtml(element).map(
+			(html: string): Generic | TikTok => ({
 				kind: parseGenericEmbedKind(parser)(element)(html),
 				alt: fromNullable(element.embedTypeData?.alt),
 				html,
@@ -390,7 +390,8 @@ const parseGeneric =
 				// If there's no tracking information the embed does not track
 				tracking:
 					element.tracking?.tracks ?? EmbedTracksType.DOES_NOT_TRACK,
-			}));
+			}),
+		);
 	};
 
 // ----- Exports ----- //

@@ -86,7 +86,9 @@ const resultMap3 =
 	<E>(resultA: Result<E, A>) =>
 	(resultB: Result<E, B>) =>
 	(resultC: Result<E, C>): Result<E, D> =>
-		resultA.flatMap(a => resultB.flatMap(b => resultC.map(c => f(a, b, c))));
+		resultA.flatMap((a) =>
+			resultB.flatMap((b) => resultC.map((c) => f(a, b, c))),
+		);
 
 const optionMap3 =
 	<A, B, C, D>(f: (a: A, b: B, c: C) => D) =>
@@ -108,7 +110,7 @@ const resultMap2 =
 	<A, B, C>(f: (a: A, b: B) => C) =>
 	<E>(resultA: Result<E, A>) =>
 	(resultB: Result<E, B>): Result<E, C> =>
-		resultA.flatMap(a => resultB.map(b => f(a, b)));
+		resultA.flatMap((a) => resultB.map((b) => f(a, b)));
 
 const fold =
 	<A, B>(f: (value: A) => B, ifNone: B) =>

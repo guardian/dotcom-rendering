@@ -87,7 +87,7 @@ const transformHref = (href: string): string => {
 
 	return Result.fromUnsafe(() => new URL(href), 'invalid url')
 		.toOptional()
-		.map(url => {
+		.map((url) => {
 			const path = url.pathname.split('/');
 			const isLatest =
 				url.hostname === 'www.theguardian.com' &&

@@ -71,12 +71,14 @@ const parseQuizProps = (
 		resultFromNullable(
 			'The quiz atom did not have an accompanying element containing props',
 		),
-	).flatMap((p) =>
-		Result.fromUnsafe(
-			(): unknown => JSON.parse(p.replace(/&quot;/g, '"')),
-			'The props for the quiz atom are not valid JSON',
-		),
-	).flatMap(parse(quizPropsParser));
+	)
+		.flatMap((p) =>
+			Result.fromUnsafe(
+				(): unknown => JSON.parse(p.replace(/&quot;/g, '"')),
+				'The props for the quiz atom are not valid JSON',
+			),
+		)
+		.flatMap(parse(quizPropsParser));
 
 const hydrateQuizzes = (): void =>
 	Array.from(document.querySelectorAll('.js-quiz')).forEach((atomElement) => {
@@ -104,7 +106,7 @@ const hydrateQuizzes = (): void =>
 
 			ReactDOM.hydrate(atom, atomElement);
 		}
-		
+
 		if (parsedProps.isErr()) {
 			console.error(parsedProps.error);
 		}
