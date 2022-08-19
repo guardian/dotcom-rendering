@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
@@ -6,7 +7,7 @@ import type { Option } from '@guardian/types';
 import { darkModeCss } from 'styles';
 import { DefaultByline } from './Byline.defaults';
 
-const styles = (format: ArticleFormat) => css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.medium({
 		fontWeight: 'light',
 		fontStyle: 'italic',
@@ -27,7 +28,7 @@ const styles = (format: ArticleFormat) => css`
 	padding-bottom: ${remSpace[6]};
 `;
 
-const anchorStyles = (format: ArticleFormat) => css`
+const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.bylineAnchor(format)};
 
 	${darkModeCss`

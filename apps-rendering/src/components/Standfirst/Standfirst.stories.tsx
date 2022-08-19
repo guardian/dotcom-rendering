@@ -17,8 +17,8 @@ import {
 import { deadBlog } from 'fixtures/live';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
-import Standfirst from './';
 import AnalysisStandfirst from './AnalysisStandfirst';
+import Standfirst from './';
 
 // ----- Stories ----- //
 

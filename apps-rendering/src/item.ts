@@ -187,7 +187,7 @@ type Item =
 	| Editorial
 	| Correction
 	| Interview
-	| Analysis
+	| Analysis;
 
 // ----- Convenience Types ----- //
 
