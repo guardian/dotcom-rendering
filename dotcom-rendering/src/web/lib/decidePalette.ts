@@ -89,6 +89,14 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Standard:
 			switch (format.design) {
+				case ArticleDesign.Analysis: {
+					switch (format.theme) {
+						case ArticlePillar.News:
+							return news[300];
+						default:
+							return pillarPalette[format.theme].main;
+					}
+				}
 				case ArticleDesign.LiveBlog:
 					switch (format.theme) {
 						case ArticlePillar.News:
@@ -150,6 +158,14 @@ const textByline = (format: ArticleFormat): string => {
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Standard:
 			switch (format.design) {
+				case ArticleDesign.Analysis: {
+					switch (format.theme) {
+						case ArticlePillar.News:
+							return news[300];
+						default:
+							return pillarPalette[format.theme].main;
+					}
+				}
 				case ArticleDesign.Interview:
 					return BLACK;
 				default:
@@ -164,6 +180,14 @@ const textHeadlineByline = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
 	return pillarPalette[format.theme].main;
 };
 
@@ -224,6 +248,14 @@ const textCaptionLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 	if (format.design === ArticleDesign.NewsletterSignup) return BLACK;
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
 	return pillarPalette[format.theme].main;
 };
 
@@ -236,6 +268,14 @@ const textSubMeta = (format: ArticleFormat): string => {
 		format.design === ArticleDesign.LiveBlog
 	)
 		return blogsGrayBackgroundPalette(format);
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
 	return pillarPalette[format.theme].main;
 };
 
@@ -279,7 +319,24 @@ const textArticleLink = (format: ArticleFormat): string => {
 				return specialReport[300];
 		}
 	}
-
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			case ArticlePillar.Culture:
+				return culture[350];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[400];
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Opinion:
+				return opinion[300];
+			case ArticleSpecial.Labs:
+				return BLACK;
+			case ArticleSpecial.SpecialReport:
+				return specialReport[300];
+		}
+	}
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport) {
 		return specialReport[300];
@@ -340,7 +397,16 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 				return pillarPalette[format.theme].dark;
 		}
 	}
-
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.Opinion:
+				return opinion[200];
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].dark;
+		}
+	}
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[400];
 	switch (format.theme) {
@@ -354,6 +420,14 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 
 const textBranding = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
 	return pillarPalette[format.theme].main;
 };
 
@@ -376,7 +450,24 @@ const textArticleLinkHover = (format: ArticleFormat): string => {
 				return specialReport[100];
 		}
 	}
-
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			case ArticlePillar.Culture:
+				return culture[350];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[400];
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Opinion:
+				return opinion[300];
+			case ArticleSpecial.Labs:
+				return BLACK;
+			case ArticleSpecial.SpecialReport:
+				return specialReport[100];
+		}
+	}
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
@@ -494,6 +585,14 @@ const textCardFooter = (format: ArticleFormat): string => {
 };
 
 const textLinkKicker = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
 	return pillarPalette[format.theme].main;
 };
 
@@ -625,6 +724,14 @@ const backgroundBullet = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
 	return pillarPalette[format.theme].main;
 };
 
@@ -703,10 +810,26 @@ const backgroundStandfirst = (format: ArticleFormat): string => {
 };
 
 const backgroundImageTitle = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
 	return pillarPalette[format.theme].main;
 };
 
 const backgroundSpeechBubble = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
 	return pillarPalette[format.theme].main;
 };
 
@@ -761,6 +884,14 @@ const fillCommentCount = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
 	return pillarPalette[format.theme].main;
 };
 
@@ -777,6 +908,24 @@ const fillShareIcon = (format: ArticleFormat): string => {
 				return culture[350];
 			case ArticlePillar.News:
 				return news[400];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[400];
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Opinion:
+				return opinion[300];
+			case ArticleSpecial.Labs:
+				return BLACK;
+			case ArticleSpecial.SpecialReport:
+				return specialReport[300];
+		}
+	}
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.Culture:
+				return culture[350];
+			case ArticlePillar.News:
+				return news[300];
 			case ArticlePillar.Lifestyle:
 				return lifestyle[400];
 			case ArticlePillar.Sport:
@@ -824,8 +973,17 @@ const fillShareIconGrayBackground = (format: ArticleFormat): string => {
 const fillCaptionCamera = (format: ArticleFormat): string =>
 	textCaption(format);
 
-const fillBlockquoteIcon = (format: ArticleFormat): string =>
-	pillarPalette[format.theme].main;
+const fillBlockquoteIcon = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
+	return pillarPalette[format.theme].main;
+};
 
 const fillTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
@@ -845,6 +1003,14 @@ const borderSyndicationButton = (format: ArticleFormat): string => {
 };
 
 const borderSubNav = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
 	return pillarPalette[format.theme].main;
 };
 
@@ -996,12 +1162,28 @@ const borderArticleLinkHover = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
 	return pillarPalette[format.theme].main;
 };
 
 const topBarCard = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return brandAltBackground.primary;
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
 	return pillarPalette[format.theme].main;
 };
 
@@ -1013,7 +1195,9 @@ const hoverHeadlineByline = (format: ArticleFormat): string => {
 const textRichLink = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return news[400];
+			return format.design === ArticleDesign.Analysis
+				? news[300]
+				: news[400];
 		case ArticlePillar.Culture:
 			return culture[350];
 		case ArticlePillar.Lifestyle:
@@ -1041,23 +1225,23 @@ const hoverStandfirstLink = (format: ArticleFormat): string => {
 };
 
 const borderRichLink: (format: ArticleFormat) => string = (format) => {
-	if (format) {
-		switch (format.theme) {
-			case ArticlePillar.News:
-				return news[400];
-			case ArticlePillar.Culture:
-				return culture[350];
-			case ArticlePillar.Lifestyle:
-				return lifestyle[300];
-			case ArticlePillar.Sport:
-				return sport[400];
-			case ArticlePillar.Opinion:
-				return opinion[300];
-			case ArticleSpecial.Labs:
-				return labs[400];
-			case ArticleSpecial.SpecialReport:
-				return specialReport[400];
-		}
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return format.design === ArticleDesign.Analysis
+				? news[300]
+				: news[400];
+		case ArticlePillar.Culture:
+			return culture[350];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
 	}
 	return pillarPalette[ArticlePillar.News][400];
 };
@@ -1087,6 +1271,14 @@ const borderLines = (format: ArticleFormat): string => {
 };
 
 const backgroundRichLink = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
 	return pillarPalette[format.theme].main;
 };
 
@@ -1122,6 +1314,14 @@ const fillRichLink = (format: ArticleFormat): string => {
 };
 
 const fillQuoteIcon = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
 	return pillarPalette[format.theme].main;
 };
 
@@ -1133,6 +1333,14 @@ const textSignInLink = (format: ArticleFormat): string => {
 };
 
 const textCarouselTitle = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
 	return pillarPalette[format.theme].main;
 };
 
@@ -1142,6 +1350,14 @@ const textCalloutHeading = (): string => {
 
 const textDropCap = (format: ArticleFormat): string => {
 	switch (format.design) {
+		case ArticleDesign.Analysis: {
+			switch (format.theme) {
+				case ArticlePillar.News:
+					return news[300];
+				default:
+					return pillarPalette[format.theme].main;
+			}
+		}
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
@@ -1195,6 +1411,14 @@ const backgroundCarouselDot = (format: ArticleFormat): string => {
 };
 
 const backgroundCarouselDotFocus = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.News:
+				return news[300];
+			default:
+				return pillarPalette[format.theme].main;
+		}
+	}
 	return pillarPalette[format.theme].main;
 };
 
