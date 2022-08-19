@@ -431,7 +431,9 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(expectedOutput);
+		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+			expectedOutput,
+		);
 	});
 
 	it('does set divider `spaceAbove` to `loose` if ItemLinkBlockElement is followed by h3', () => {
@@ -474,7 +476,9 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(expectedOutput);
+		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+			expectedOutput,
+		);
 	});
 	it('does set divider `spaceAbove` to `tight` if h3 is not proceeded by ItemLinkBlockElement', () => {
 		const input: Block[] = [
@@ -516,6 +520,8 @@ describe('Enhance Numbered Lists', () => {
 				],
 			},
 		];
-		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(expectedOutput);
+		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(
+			expectedOutput,
+		);
 	});
 });

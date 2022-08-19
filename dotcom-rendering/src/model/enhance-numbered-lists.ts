@@ -39,7 +39,7 @@ const extractStarCount = (element: CAPIElement): number => {
 const isStarableImage = (element: CAPIElement | undefined): boolean => {
 	return (
 		element?._type ===
-		'model.dotcomrendering.pageElements.ImageBlockElement' &&
+			'model.dotcomrendering.pageElements.ImageBlockElement' &&
 		element.role !== 'thumbnail'
 	);
 };
@@ -90,7 +90,7 @@ const inlineStarRatings = (elements: CAPIElement[]): CAPIElement[] => {
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
-			'model.dotcomrendering.pageElements.TextBlockElement' &&
+				'model.dotcomrendering.pageElements.TextBlockElement' &&
 			isStarRating(thisElement)
 		) {
 			const rating = extractStarCount(thisElement);
@@ -114,7 +114,7 @@ const makeThumbnailsRound = (elements: CAPIElement[]): CAPIElement[] => {
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
-			'model.dotcomrendering.pageElements.ImageBlockElement' &&
+				'model.dotcomrendering.pageElements.ImageBlockElement' &&
 			thisElement.role === 'thumbnail'
 		) {
 			// Make this image round
@@ -186,7 +186,7 @@ const addItemLinks = (elements: CAPIElement[]): CAPIElement[] => {
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
-			'model.dotcomrendering.pageElements.TextBlockElement' &&
+				'model.dotcomrendering.pageElements.TextBlockElement' &&
 			isItemLink(thisElement)
 		) {
 			withItemLink.push(
@@ -264,14 +264,14 @@ const addH3Spacing = (elements: CAPIElement[]): CAPIElement[] => {
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
-			'model.dotcomrendering.pageElements.TextBlockElement' &&
+				'model.dotcomrendering.pageElements.TextBlockElement' &&
 			thisElement.html.startsWith('<h3>')
 		) {
 			// To avoid having to depend on the ordering of the enhancer (which could easily be a source of bugs)
 			// We determine if previous items are `ItemLinkBlockElement` through type and `isItemLink` functions
 			const isPreviousItemLink =
 				previousItem?._type ===
-				'model.dotcomrendering.pageElements.ItemLinkBlockElement' ||
+					'model.dotcomrendering.pageElements.ItemLinkBlockElement' ||
 				(previousItem && isItemLink(previousItem));
 
 			withH3Spacings.push(
