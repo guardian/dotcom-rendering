@@ -37,6 +37,10 @@ const PLATFORM_TREATS: TreatType[] = [
 				linkTo: '/tv-and-radio/ng-interactive/2022/aug/01/whats-on-netflix-and-amazon-this-month-august',
 				text: "What's on Netflix & Amazon this month",
 			},
+			{
+				linkTo: '/books/ng-interactive/2022/aug/19/this-months-best-paperbacks-jan-morris-katie-kitamura-and-more',
+				text: "This month's best paperbacks",
+			},
 		],
 		theme: ArticlePillar.Culture,
 		containerTitle: 'Culture',
