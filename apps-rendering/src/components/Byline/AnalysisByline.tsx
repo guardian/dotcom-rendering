@@ -31,10 +31,10 @@ const styles = (format: ArticleFormat) => css`
 `;
 
 const anchorStyles = (format: ArticleFormat) => css`
-	color: ${background.byline(format)};
+	color: ${text.bylineAnchor(format)};
 
 	${darkModeCss`
-	color: ${background.byline(format)};
+	color: ${background.bylineAnchorDark(format)};
 	`}
 
 	text-decoration: none;
