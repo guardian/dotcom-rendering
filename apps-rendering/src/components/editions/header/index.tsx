@@ -12,6 +12,7 @@ import Series from 'components/editions/series';
 import Standfirst from 'components/editions/standfirst';
 import type { Item } from 'item';
 import { isPicture } from 'item';
+import { maybeRender } from 'lib';
 import type { FC, ReactElement } from 'react';
 import {
 	articleMarginStyles,
@@ -24,7 +25,6 @@ import {
 	wideContentWidth,
 	wideImmersiveWidth,
 } from '../styles';
-import { maybeRender } from 'lib';
 
 const wide = wideContentWidth + 12;
 const tablet = tabletContentWidth + 12;
