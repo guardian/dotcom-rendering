@@ -11,23 +11,20 @@ export const DesignTag = ({
 }) => {
 	const palette = decidePalette(format);
 	return (
-		<>
-			<div
-				css={css`
-					background-color: ${palette.background.designTag};
-					color: ${palette.text.designTag};
-					display: inline-block;
-					padding-left: ${space[2]}px;
-					padding-right: ${space[2]}px;
-					padding-bottom: ${space[1]}px;
-					margin-top: ${space[2]}px;
-					margin-bottom: ${space[1]}px;
-					${headline.xxsmall({ fontWeight: 'bold' })}
-				`}
-			>
-				{children}
-			</div>
-			<br />
-		</>
+		<div
+			css={css`
+				background-color: ${palette.background.designTag};
+				color: ${palette.text.designTag};
+				display: inline-block;
+				padding-left: ${space[2]}px;
+				padding-right: ${space[2]}px;
+				padding-bottom: ${space[1]}px;
+				margin-top: ${space[2]}px;
+				margin-bottom: ${space[1]}px;
+				${headline.xxsmall({ fontWeight: 'bold' })}
+			`}
+		>
+			{children}
+		</div>
 	);
 };
