@@ -19,6 +19,7 @@ import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
 import ImmersiveLayout from './ImmersiveLayout';
+import AnalysisLayout from './AnalysisLayout';
 
 // ----- Functions ----- //
 
@@ -81,6 +82,12 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		return <CommentLayout item={item}>{render(item, body)}</CommentLayout>;
 	}
 
+	if (item.design === ArticleDesign.Analysis) {
+		return (
+			<AnalysisLayout item={item}>{render(item, body)}</AnalysisLayout>
+		);
+	}
+
 	if (item.design === ArticleDesign.Gallery) {
 		return <GalleryLayout item={item}>{render(item, body)}</GalleryLayout>;
 	}
@@ -101,7 +108,6 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 
 	if (
 		item.design === ArticleDesign.Feature ||
-		item.design === ArticleDesign.Analysis ||
 		item.design === ArticleDesign.Explainer ||
 		item.design === ArticleDesign.Review ||
 		item.design === ArticleDesign.Standard ||
