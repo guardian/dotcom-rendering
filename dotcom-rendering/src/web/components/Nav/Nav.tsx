@@ -1,4 +1,4 @@
-import { css, ThemeProvider } from '@emotion/react';
+import { css, Global, ThemeProvider } from '@emotion/react';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { space, until, visuallyHidden } from '@guardian/source-foundations';
 import {
@@ -71,6 +71,17 @@ export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
 
 	return (
 		<div css={rowStyles}>
+			<Global
+				styles={css`
+					/* We apply this style when the side navigation is open the prevent the document body from scrolling */
+					/* See Nav.tsx */
+					.nav-is-open {
+						${until.desktop} {
+							overflow: hidden;
+						}
+					}
+				`}
+			/>
 			{/*
                 IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
 

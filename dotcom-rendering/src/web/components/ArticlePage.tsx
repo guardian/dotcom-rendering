@@ -1,11 +1,6 @@
 import { css, Global } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import {
-	brandAlt,
-	focusHalo,
-	neutral,
-	until,
-} from '@guardian/source-foundations';
+import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { filterABTestSwitches } from '../../model/enhance-switches';
 import type { NavType } from '../../model/extract-nav';
@@ -50,14 +45,6 @@ export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
 					::selection {
 						background: ${brandAlt[400]};
 						color: ${neutral[7]};
-					}
-
-					/* We apply this style when the side navigation is open the prevent the document body from scrolling */
-					/* See Nav.tsx */
-					.nav-is-open {
-						${until.desktop} {
-							overflow: hidden;
-						}
 					}
 				`}
 			/>
