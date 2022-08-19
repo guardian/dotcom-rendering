@@ -18,8 +18,8 @@ import StandardLayout from 'components/Layout/StandardLayout';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
-import ImmersiveLayout from './ImmersiveLayout';
 import AnalysisLayout from './AnalysisLayout';
+import ImmersiveLayout from './ImmersiveLayout';
 
 // ----- Functions ----- //
 

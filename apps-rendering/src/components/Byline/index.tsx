@@ -4,6 +4,7 @@ import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import type { FC } from 'react';
+import AnalysisByline from './AnalysisByline';
 import {
 	defaultAnchorStyles,
 	DefaultByline,
@@ -13,7 +14,6 @@ import CommentByline from './CommentByline';
 import DeadBlogByline from './DeadBlogByline';
 import LabsByline from './LabsByline';
 import LiveBlogByline from './LiveBlogByline';
-import AnalysisByline from './AnalysisByline';
 
 // ----- Component ----- //
 

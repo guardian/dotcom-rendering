@@ -1,9 +1,10 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { breakpoints, from } from '@guardian/source-foundations';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
-
+import type { ArticleFormat } from '@guardian/libs';
+import { breakpoints, from } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import ArticleBody from 'components/ArticleBody';
 import Byline from 'components/Byline';
@@ -24,17 +25,17 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
-import { ArticleFormat } from '@guardian/libs';
 
 // ----- Styles ----- //
 
-const backgroundStyles = (format: ArticleFormat) => css`
+const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${background.articleContent(format)};
 
 	${darkModeCss`
         background-color: ${background.articleContentDark(format)}
     `}
 `;
+
 const BorderStyles = css`
 	${from.wide} {
 		width: ${breakpoints.wide}px;
