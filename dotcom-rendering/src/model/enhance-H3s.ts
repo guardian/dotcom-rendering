@@ -1,5 +1,4 @@
 import { JSDOM } from 'jsdom';
-import { isItemLink } from './enhance-numbered-lists';
 
 const isFalseH3 = (element: CAPIElement): boolean => {
 	if (!element) return false;
@@ -57,7 +56,7 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
-				'model.dotcomrendering.pageElements.TextBlockElement' &&
+			'model.dotcomrendering.pageElements.TextBlockElement' &&
 			isFalseH3(thisElement)
 		) {
 			const h3Text = extractH3(thisElement);
