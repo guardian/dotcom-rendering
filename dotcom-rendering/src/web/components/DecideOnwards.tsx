@@ -1,3 +1,4 @@
+import type { CAPIOnwardsType } from '../../types/onwards';
 import { decideTrail } from '../lib/decideTrail';
 import { Carousel } from './Carousel.importable';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';

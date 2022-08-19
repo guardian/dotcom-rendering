@@ -1,3 +1,4 @@
+import type { EditionId } from '../types/edition';
 import type { DCRCollectionType, FECollectionType } from '../types/front';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';

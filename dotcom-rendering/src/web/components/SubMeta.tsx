@@ -9,6 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { LinkButton } from '@guardian/source-react-components';
 import type { BaseLinkType } from '../../model/extract-nav';
+import type { BadgeType } from '../../types/badge';
 import { decidePalette } from '../lib/decidePalette';
 import { Badge } from './Badge';
 import { ShareIcons } from './ShareIcons';

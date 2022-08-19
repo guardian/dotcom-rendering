@@ -9,6 +9,8 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import React from 'react';
+import type { NavType } from '../../model/extract-nav';
+import type { CAPIArticleType } from '../../types/frontend';
 import {
 	adCollapseStyles,
 	labelStyles as adLabelStyles,

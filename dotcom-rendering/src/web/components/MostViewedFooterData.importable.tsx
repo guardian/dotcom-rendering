@@ -2,6 +2,11 @@ import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source-foundations';
 import { border, from } from '@guardian/source-foundations';
 import { joinUrl } from '../../lib/joinUrl';
+import type {
+	CAPITrailTabType,
+	CAPITrailType,
+	TrailTabType,
+} from '../../types/trails';
 import { abTestTest } from '../experiments/tests/ab-test-test';
 import { decideTrail } from '../lib/decideTrail';
 import { useAB } from '../lib/useAB';
@@ -46,6 +51,12 @@ function transformTabs(tabs: CAPITrailTabType[]): TrailTabType[] {
 		...tab,
 		trails: tab.trails.map((trail) => decideTrail(trail)),
 	}));
+}
+
+interface MostViewedFooterPayloadType {
+	tabs: CAPITrailTabType[];
+	mostCommented: CAPITrailType;
+	mostShared: CAPITrailType;
 }
 
 export const MostViewedFooterData = ({

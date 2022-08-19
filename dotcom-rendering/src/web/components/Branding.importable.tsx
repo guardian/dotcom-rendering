@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { neutral, textSans, until } from '@guardian/source-foundations';
-
+import type { Branding as BrandingType } from '../../types/branding';
 import { trackSponsorLogoLinkClick } from '../browser/ga/ga';
 import { Hide } from './Hide';
 
@@ -110,7 +110,7 @@ const brandingAboutLink = (palette: Palette, format: ArticleFormat) => {
 	}
 };
 
-function decideLogo(branding: Branding, format: ArticleFormat) {
+function decideLogo(branding: BrandingType, format: ArticleFormat) {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog: {
 			/**
@@ -156,7 +156,7 @@ function decideLogo(branding: Branding, format: ArticleFormat) {
 }
 
 type Props = {
-	branding: Branding;
+	branding: BrandingType;
 	palette: Palette;
 	format: ArticleFormat;
 };

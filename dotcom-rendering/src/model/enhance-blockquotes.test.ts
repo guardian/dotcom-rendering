@@ -1,5 +1,6 @@
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
+import type { CAPIArticleType } from '../types/frontend';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 
 const example: CAPIArticleType = ExampleArticle;

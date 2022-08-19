@@ -1,3 +1,4 @@
+import type { CAPITrailType, TrailType } from '../../types/trails';
 import { decideFormat } from './decideFormat';
 import { getDataLinkNameCard } from './getDataLinkName';
 
