@@ -7,11 +7,7 @@ import {
 	remSpace,
 	textSans,
 } from '@guardian/source-foundations';
-import {
-	Button,
-	Label,
-	TextInput,
-} from '@guardian/source-react-components';
+import { Button, Label, TextInput } from '@guardian/source-react-components';
 import type { FC, FormEventHandler } from 'react';
 
 // ----- Component ----- //
@@ -24,7 +20,6 @@ const formStyle = css`
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
-
 `;
 
 /**
@@ -33,8 +28,7 @@ const formStyle = css`
  * when implemented
  */
 const HydratableEmailSignupForm: FC<Props> = ({ newsletterId }) => {
-
-	const handleSubmit:FormEventHandler = (event): void => {
+	const handleSubmit: FormEventHandler = (event): void => {
 		event.preventDefault();
 		console.log({ newsletterId });
 	};
@@ -50,7 +44,6 @@ const HydratableEmailSignupForm: FC<Props> = ({ newsletterId }) => {
 				`}
 			/>
 			<form
-
 				action={undefined}
 				className={'js-signup-form'}
 				data-newsletter-id={newsletterId}
@@ -71,7 +64,6 @@ const HydratableEmailSignupForm: FC<Props> = ({ newsletterId }) => {
 					`}
 				/>
 				<Button
-
 					size="small"
 					title="Sign up"
 					type="submit"
@@ -96,3 +88,4 @@ const HydratableEmailSignupForm: FC<Props> = ({ newsletterId }) => {
 // ----- Exports ----- //
 
 export default HydratableEmailSignupForm;
+export { Props };
