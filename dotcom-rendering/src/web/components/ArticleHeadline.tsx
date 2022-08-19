@@ -592,6 +592,44 @@ export const ArticleHeadline = ({
 							</WithAgeWarning>
 						</div>
 					);
+				case ArticleDesign.Explainer:
+					return (
+						<div
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
+						>
+							<WithAgeWarning
+								tags={tags}
+								webPublicationDateDeprecated={
+									webPublicationDateDeprecated
+								}
+								format={format}
+							>
+								<DesignTag format={format} />
+								<h1
+									css={[
+										boldFont,
+										topPadding,
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+								{!!byline && (
+									<HeadlineByline
+										format={format}
+										byline={byline}
+										tags={tags}
+									/>
+								)}
+							</WithAgeWarning>
+						</div>
+					);
 				case ArticleDesign.Analysis:
 					return (
 						<div
@@ -608,7 +646,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
-								<DesignTag format={format}>Analysis</DesignTag>
+								<DesignTag format={format} />
 								<h1
 									css={[
 										standardFont,

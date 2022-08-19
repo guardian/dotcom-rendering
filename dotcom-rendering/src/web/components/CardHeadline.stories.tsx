@@ -122,6 +122,92 @@ export const Analysis = () => (
 );
 Analysis.story = { name: 'Analysis' };
 
+export const Explainer = () => (
+	<>
+		{smallHeadlineSizes.map((size) => (
+			<div key={size}>
+				<Section
+					fullWidth={true}
+					showTopBorder={false}
+					showSideBorders={false}
+				>
+					<CardHeadline
+						headlineText={`This is how a ${size} Explainer card headline looks`}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Explainer,
+							theme: ArticlePillar.News,
+						}}
+						size={size}
+					/>
+				</Section>
+				<br />
+			</div>
+		))}
+		<br />
+		<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
+			<CardHeadline
+				headlineText="This is how an Sport Explainer card headline looks"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Explainer,
+					theme: ArticlePillar.Sport,
+				}}
+			/>
+		</Section>
+		<br />
+		<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
+			<CardHeadline
+				headlineText="This is how an Culture Explainer card headline looks"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Explainer,
+					theme: ArticlePillar.Culture,
+				}}
+			/>
+		</Section>
+		<br />
+		<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
+			<CardHeadline
+				headlineText="This is how an Opinion Explainer card headline looks"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Explainer,
+					theme: ArticlePillar.Opinion,
+				}}
+			/>
+		</Section>
+		<br />
+		<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
+			<CardHeadline
+				headlineText="This is how an Lifestyle Explainer card headline looks"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Explainer,
+					theme: ArticlePillar.Lifestyle,
+				}}
+			/>
+		</Section>
+		<br />
+		<Section
+			fullWidth={true}
+			showTopBorder={false}
+			showSideBorders={false}
+			backgroundColour={specialReport[300]}
+		>
+			<CardHeadline
+				headlineText="This is how an Special Report Explainer card headline looks"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Explainer,
+					theme: ArticleSpecial.SpecialReport,
+				}}
+			/>
+		</Section>
+	</>
+);
+Explainer.story = { name: 'Explainer' };
+
 export const Feature = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<CardHeadline

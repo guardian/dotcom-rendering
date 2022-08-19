@@ -55,6 +55,20 @@ export const Analysis = () => (
 );
 Analysis.story = { name: 'Analysis' };
 
+export const Explainer = () => (
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
+		<Caption
+			captionText="This is how an Explainer caption looks"
+			format={{
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Explainer,
+				theme: ArticlePillar.News,
+			}}
+		/>
+	</Section>
+);
+Explainer.story = { name: 'Explainer' };
+
 export const PhotoEssay = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption

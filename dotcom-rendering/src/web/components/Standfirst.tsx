@@ -175,6 +175,7 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 						color: ${palette.text.standfirst};
 					`;
 				case ArticleDesign.Analysis:
+				case ArticleDesign.Explainer:
 					return css`
 						${headline.xxxsmall()};
 						margin-bottom: ${space[3]}px;
