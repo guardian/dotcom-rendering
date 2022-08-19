@@ -6,6 +6,7 @@ import {
 	neutral,
 	text,
 } from '@guardian/source-foundations';
+import type { TrailType } from '../../types/trails';
 import { AgeWarning } from './AgeWarning';
 import { Avatar } from './Avatar';
 import { Flex } from './Flex';

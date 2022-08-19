@@ -1,4 +1,5 @@
 import { ArticlePillar } from '@guardian/libs';
+import type { EditionId } from '../types/edition';
 import type { FEFrontCard, TreatType } from '../types/front';
 
 /**
@@ -36,12 +37,16 @@ const PLATFORM_TREATS: TreatType[] = [
 				linkTo: '/tv-and-radio/ng-interactive/2022/aug/01/whats-on-netflix-and-amazon-this-month-august',
 				text: "What's on Netflix & Amazon this month",
 			},
+			{
+				linkTo: '/books/ng-interactive/2022/aug/19/this-months-best-paperbacks-jan-morris-katie-kitamura-and-more',
+				text: "This month's best paperbacks",
+			},
 		],
 		theme: ArticlePillar.Culture,
 		containerTitle: 'Culture',
 		editionId: 'UK',
 		imageUrl:
-			'https://interactive.guim.co.uk/thrashers/culture-nugget/hashed/thrasher_img_55.1c0762e5.png',
+			'https://uploads.guim.co.uk/2022/08/19/culture-nugget-august.png',
 		altText: "What's on Netflix and Amazon this month",
 		pageId: 'uk',
 	},

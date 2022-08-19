@@ -9,6 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { getSoleContributor } from '../../lib/byline';
 import TwitterIcon from '../../static/icons/twitter.svg';
+import type { Palette } from '../../types/palette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 import { BylineLink } from './BylineLink';

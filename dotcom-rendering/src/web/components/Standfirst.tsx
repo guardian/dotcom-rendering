@@ -8,6 +8,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import sanitise from 'sanitize-html';
+import type { Palette } from '../../types/palette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 

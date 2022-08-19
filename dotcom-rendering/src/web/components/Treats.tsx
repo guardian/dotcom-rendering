@@ -55,7 +55,7 @@ const ImageTreat = ({
 	backgroundColour: string;
 }) => (
 	<li>
-		<img src={imageUrl} alt={altText} width="130px" height="130px" />
+		<img src={imageUrl} alt={altText} width="130px" height="auto" />
 		{links.map((link, index) => (
 			<a
 				href={link.linkTo}

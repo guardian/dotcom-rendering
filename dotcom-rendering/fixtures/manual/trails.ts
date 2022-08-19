@@ -1,4 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import type { TrailType } from '../../src/types/trails';
 
 export const trails: TrailType[] = [
 	{

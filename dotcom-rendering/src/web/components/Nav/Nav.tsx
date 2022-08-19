@@ -7,6 +7,8 @@ import {
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
 import { clearFix } from '../../../lib/mixins';
+import type { NavType } from '../../../model/extract-nav';
+import type { EditionId } from '../../../types/edition';
 import { GuardianRoundel } from '../GuardianRoundel';
 import { Hide } from '../Hide';
 import { Pillars } from '../Pillars';

@@ -1,3 +1,5 @@
+import type { CommercialConfigType } from '../../types/config';
+
 export interface PermutivePayload {
 	'properties.content.premium'?: string;
 	'properties.content.id'?: string;

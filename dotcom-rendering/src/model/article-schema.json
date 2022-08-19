@@ -1,4 +1,5 @@
 {
+    "description": "WARNING: run `gen-schema` task if changing this to update the associated JSON\nschema definition.",
     "type": "object",
     "properties": {
         "headline": {
@@ -3897,7 +3898,15 @@
                     }
                 },
                 "abTests": {
-                    "type": "object"
+                    "description": "This type is not support by JSON-schema, it evaluates as `object`",
+                    "type": "object",
+                    "additionalProperties": {
+                        "enum": [
+                            "control",
+                            "variant"
+                        ],
+                        "type": "string"
+                    }
                 },
                 "dfpAccountId": {
                     "type": "string"

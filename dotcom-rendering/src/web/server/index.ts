@@ -6,6 +6,8 @@ import { enhanceCommercialProperties } from '../../model/enhanceCommercialProper
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
+import type { CAPIArticleType } from '../../types/frontend';
+import type { CAPIOnwardsType } from '../../types/onwards';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';

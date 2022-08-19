@@ -1,3 +1,5 @@
+import type { CAPITrailTabType } from '../../types/trails';
+
 export const mockTab1: CAPITrailTabType = {
 	heading: 'Across The Guardian',
 	trails: [
