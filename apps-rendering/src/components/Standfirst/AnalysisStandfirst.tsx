@@ -15,19 +15,10 @@ const styles = css`
 	}
 `;
 const AnalysisStandfirst: React.FC<Props> = ({ item }) => (
-	<>
-		<p
-			css={css`
-				${headline.xxxsmall({ fontWeight: 'bold' })}
-			`}
-		>
-			Analysis
-		</p>
-		<DefaultStandfirst
-			item={item}
-			css={css(defaultStyles(getFormat(item)), styles)}
-		/>
-	</>
+	<DefaultStandfirst
+		item={item}
+		css={css(defaultStyles(getFormat(item)), styles)}
+	/>
 );
 
 export default AnalysisStandfirst;

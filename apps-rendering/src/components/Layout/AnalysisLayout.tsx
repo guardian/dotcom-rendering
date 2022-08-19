@@ -25,6 +25,7 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
+import {DesignTag} from "../DesignTag";
 
 // ----- Styles ----- //
 
@@ -58,6 +59,7 @@ const AnalysisLayout: FC<Props> = ({ item, children }) => (
 						mainMedia={item.mainMedia}
 					/>
 					<Series item={item} />
+					<DesignTag format={item} />
 					<Headline item={item} />
 					<section css={[articleWidthStyles]}>
 						<Byline {...item} />
