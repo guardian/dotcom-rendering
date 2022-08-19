@@ -11,6 +11,8 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import {
+	Button,
+	Label,
 	SvgArrowRightStraight,
 	SvgMagnifyingGlass,
 	TextInput,
@@ -196,7 +198,6 @@ const searchSubmit = css`
 	position: absolute;
 	right: 0;
 	top: 0;
-	padding-bottom: 11px;
 	width: 50px;
 	fill: ${neutral[100]};
 
@@ -248,26 +249,26 @@ export const Columns: React.FC<{
 					data-link-name="nav2 : search"
 				/>
 
-				<label htmlFor="google-search">
+				<Label hideLabel={true} text="google-search">
 					<div css={searchGlass}>
 						<SvgMagnifyingGlass
 							isAnnouncedByScreenReader={true}
 							size="medium"
 						/>
 					</div>
-				</label>
-				<button
+				</Label>
+				<Button
+					icon={
+						<SvgArrowRightStraight
+							isAnnouncedByScreenReader={true}
+							size="medium"
+						/>
+					}
 					aria-label="Search with google"
-					css={searchSubmit}
+					cssOverrides={searchSubmit}
 					data-link-name="nav2 : search : submit"
 					type="submit"
-				>
-					<SvgArrowRightStraight
-						isAnnouncedByScreenReader={true}
-						size="medium"
-					/>
-				</button>
-
+				></Button>
 				<input
 					type="hidden"
 					name="as_sitesearch"
