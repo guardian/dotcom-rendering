@@ -37,7 +37,8 @@ import ReactDOM from 'react-dom';
 import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
-import { hydrateSignupForms } from './hydrateSignupForm';
+import { createSignUpComponentFromProps } from './createSignUpComponentFromProps';
+
 
 // ----- Run ----- //
 
@@ -476,6 +477,23 @@ function hydrateClickToView(): void {
 					ReactDOM.hydrate(embedComponent, container);
 				},
 			)(createEmbedComponentFromProps(container)),
+		);
+}
+
+function hydrateSignupForms(): void {
+	document
+		.querySelectorAll('.js-sign-up-form-container')
+		.forEach((container) =>
+			either(
+				(error: string) => {
+					logger.error(
+						`Failed to create SignupForm for hydration: ${error}`,
+					);
+				},
+				(signupContainer: ReactElement) => {
+					ReactDOM.hydrate(signupContainer, container);
+				},
+			)(createSignUpComponentFromProps(container)),
 		);
 }
 
