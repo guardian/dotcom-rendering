@@ -42,7 +42,7 @@ const PLATFORM_TREATS: TreatType[] = [
 		containerTitle: 'Culture',
 		editionId: 'UK',
 		imageUrl:
-			'https://interactive.guim.co.uk/thrashers/culture-nugget/hashed/thrasher_img_55.1c0762e5.png',
+			'https://uploads.guim.co.uk/2022/08/19/culture-nugget-august.png',
 		altText: "What's on Netflix and Amazon this month",
 		pageId: 'uk',
 	},
