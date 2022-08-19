@@ -166,6 +166,7 @@ type Palette = {
 		filterButton: Colour;
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
+		treat: Colour;
 	};
 	fill: {
 		commentCount: Colour;

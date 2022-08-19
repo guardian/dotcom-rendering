@@ -2,6 +2,7 @@
 
 import 'source-map-support/register'; // activating the source map support
 import path from 'path';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
@@ -311,6 +312,20 @@ async function serveEditionsArticlePost(
 	}
 }
 
+function editionFromString(editionString: string): Edition {
+	switch (editionString) {
+		case 'us':
+			return Edition.US;
+		case 'au':
+			return Edition.AU;
+		case 'international':
+			return Edition.INTERNATIONAL;
+		case 'uk':
+		default:
+			return Edition.UK;
+	}
+}
+
 async function serveArticleGet(
 	req: Request,
 	res: ExpressResponse,
@@ -319,6 +334,7 @@ async function serveArticleGet(
 		const articleId = req.params[0] || defaultId;
 		const isEditions = req.query.editions === '';
 		const capiContent = await askCapiFor(articleId);
+		const edition = editionFromString(req.params.edition);
 
 		await either(
 			(errorStatus: number) => {
@@ -337,6 +353,7 @@ async function serveArticleGet(
 					commentCount: 30,
 					relatedContent,
 					footballContent: resultToNullable(footballContent),
+					edition,
 				};
 
 				const richLinkDetails = req.query.richlink === '';
@@ -395,8 +412,12 @@ app.get('/healthcheck', (_req, res) => res.send('Ok'));
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 app.get('/fontSize.css', (_, res) => res.status(404).end());
 
-app.get('/rendered-items/*', express.raw(), serveArticleGet);
-app.get('/*', express.raw(), serveArticleGet);
+app.get(
+	'/:edition(uk|us|au|international)?/rendered-items/*',
+	express.raw(),
+	serveArticleGet,
+);
+app.get('/:edition(uk|us|au|international)?/*', express.raw(), serveArticleGet);
 
 app.post('/article', express.raw(), serveArticlePost);
 

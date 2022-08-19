@@ -1,3 +1,4 @@
+import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import type { ServerSideTests } from './config';
 import type { EditionId } from './edition';
 import type { FooterType } from './footer';
@@ -446,6 +447,17 @@ export type DCRSupportingContent = {
 };
 
 export type TreatType = {
-	text: string;
-	linkTo: string;
+	links: { text: string; linkTo: string }[];
+	theme?: ArticlePillar | ArticleSpecial;
+	editionId?: EditionId;
+	imageUrl?: string;
+	altText?: string;
+	/** The container display name where this treat should show */
+	containerTitle?: string;
+	/**
+	 * `pageId` is the part of the url that comes after the slash
+	 *
+	 * So for https://www.theguardian.com/uk it would be 'uk'
+	 */
+	pageId?: string;
 };
