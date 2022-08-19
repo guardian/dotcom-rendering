@@ -15,7 +15,7 @@ import {
 } from '@guardian/source-foundations';
 import type { NewsletterSignUp } from 'bodyElement';
 import type { FC } from 'react';
-import EmailSignupForm from './EmailSignupForm';
+import HydratableEmailSignupForm from './HydratableEmailSignupForm';
 import PrivacyWording from './PrivacyWording';
 import SvgNewsletter from './SvgNewsletter';
 
@@ -113,7 +113,9 @@ const NewsletterSignup: FC<Props> = ({ format, element }) => {
 
 			<p css={descriptionStyles}>{description}</p>
 
-			<EmailSignupForm newsletterId={id} />
+			<div className="js-sign-up-form-container" data-newsletter-id={id}>
+				<HydratableEmailSignupForm newsletterId={id} />
+			</div>
 			<PrivacyWording useCaptcha={true} />
 		</aside>
 	);
