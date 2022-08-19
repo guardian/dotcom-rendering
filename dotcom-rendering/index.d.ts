@@ -139,6 +139,7 @@ type Palette = {
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
 		betaLabel: Colour;
+		designTag: Colour;
 	};
 	background: {
 		article: Colour;
@@ -171,6 +172,7 @@ type Palette = {
 		filterButtonHover: Colour;
 		filterButtonActive: Colour;
 		treat: Colour;
+		designTag: Colour;
 	};
 	fill: {
 		commentCount: Colour;

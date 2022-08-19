@@ -1159,6 +1159,8 @@ const textDropCap = (format: ArticleFormat): string => {
 
 const textBetaLabel = (): string => neutral[46];
 
+const textDesignTag = (): string => neutral[100];
+
 const textBlockquote = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -1252,6 +1254,25 @@ const backgroundSummaryEventBullet = (format: ArticleFormat): string => {
 };
 
 const backgroundTreat = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+	}
+};
+
+const backgroundDesignTag = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[300];
@@ -1376,6 +1397,7 @@ export const decidePalette = (
 			filterButtonHover: textFilterButtonHover(),
 			filterButtonActive: textFilterButtonActive(),
 			betaLabel: textBetaLabel(),
+			designTag: textDesignTag(),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -1408,6 +1430,7 @@ export const decidePalette = (
 			filterButtonHover: backgroundFilterButtonHover(format),
 			filterButtonActive: backgroundFilterButtonActive(format),
 			treat: backgroundTreat(format),
+			designTag: backgroundDesignTag(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

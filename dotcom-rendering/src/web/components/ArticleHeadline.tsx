@@ -13,6 +13,7 @@ import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStylin
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { AgeWarning } from './AgeWarning';
+import { DesignTag } from './DesignTag';
 import { HeadlineByline } from './HeadlineByline';
 import { HeadlineTag } from './HeadlineTag';
 
@@ -606,6 +607,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
+								<DesignTag format={format}>Analysis</DesignTag>
 								<h1
 									css={[
 										standardFont,
