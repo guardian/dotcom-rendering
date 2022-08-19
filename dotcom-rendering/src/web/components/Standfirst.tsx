@@ -17,23 +17,6 @@ type Props = {
 	standfirst: string;
 };
 
-const titleStyles = (format: ArticleFormat, palette: Palette) => {
-	if (format.display === ArticleDisplay.Immersive) {
-		return css`
-			${headline.xsmall({
-				fontWeight: 'light',
-			})};
-			padding-top: ${space[4]}px;
-			color: ${palette.text.standfirst};
-		`;
-	}
-	return css`
-		${headline.xxxsmall({
-			fontWeight: 'bold',
-		})};
-	`;
-};
-
 const nestedStyles = (format: ArticleFormat, palette: Palette) => {
 	const offset = format.display === ArticleDisplay.Immersive ? space[6] : 19;
 	return css`
@@ -240,9 +223,6 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 
 	return (
 		<>
-			{format.design === ArticleDesign.Analysis && (
-				<p css={titleStyles(format, palette)}>Analysis</p>
-			)}
 			<div
 				css={[
 					nestedStyles(format, palette),
