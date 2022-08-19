@@ -24,6 +24,7 @@ import {
 	wideContentWidth,
 	wideImmersiveWidth,
 } from '../styles';
+import { maybeRender } from 'lib';
 
 const wide = wideContentWidth + 12;
 const tablet = tabletContentWidth + 12;
@@ -234,6 +235,17 @@ const LetterHeader: FC<HeaderProps> = ({ item }) => (
 		<HeaderMedia item={item} />
 		<Series item={item} />
 		<Headline item={item} />
+		{maybeRender(item.bylineHtml, (byline) => {
+			if (
+				Array.from(byline.childNodes)
+					.map((node) => node.textContent)
+					.findIndex((e) => e === 'Letters') > -1
+			) {
+				return null;
+			}
+
+			return <Byline item={item} shareIcon={false} />;
+		})}
 		<Lines />
 		<Standfirst item={item} shareIcon />
 	</header>
