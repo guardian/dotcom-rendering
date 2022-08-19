@@ -70,6 +70,25 @@ const byline = (_format: ArticleFormat): Colour => {
 };
 
 const bylineAnchor = (format: ArticleFormat): Colour => {
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.Sport:
+				return sport[300];
+			case ArticlePillar.Culture:
+				return culture[300];
+			case ArticlePillar.Opinion:
+				return opinion[300];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[300];
+			case ArticleSpecial.Labs:
+				return labs[300];
+			case ArticleSpecial.SpecialReport:
+				return brandAlt[300];
+			case ArticlePillar.News:
+			default:
+				return news[300];
+		}
+	}
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[400];
@@ -89,6 +108,22 @@ const bylineAnchor = (format: ArticleFormat): Colour => {
 };
 
 const bylineAnchorDark = (format: ArticleFormat): Colour => {
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.Sport:
+				return sport[500];
+			case ArticlePillar.Culture:
+				return culture[500];
+			case ArticlePillar.Opinion:
+				return opinion[500];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[500];
+			case ArticlePillar.News:
+			default:
+				return news[500];
+		}
+	}
+
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[500];

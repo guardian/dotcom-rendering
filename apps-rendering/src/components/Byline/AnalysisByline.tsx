@@ -34,7 +34,7 @@ const anchorStyles = (format: ArticleFormat) => css`
 	color: ${text.bylineAnchor(format)};
 
 	${darkModeCss`
-	color: ${background.bylineAnchorDark(format)};
+	color: ${text.bylineAnchorDark(format)};
 	`}
 
 	text-decoration: none;
