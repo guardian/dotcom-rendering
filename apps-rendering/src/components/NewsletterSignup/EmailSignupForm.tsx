@@ -39,20 +39,20 @@ const formStyle = css`
 
 	.js-sign-up-form__feedback-message {
 		display: none;
-		${textSans.medium({fontWeight:'bold'})}
+		${textSans.medium({ fontWeight: 'bold' })}
 	}
 
 	&.js-signup-form--success {
 		.js-sign-up-form__feedback-message {
 			display: inline;
-			color: ${userFeedbackThemeDefault.userFeedback.textSuccess}
+			color: ${userFeedbackThemeDefault.userFeedback.textSuccess};
 		}
 	}
 
 	&.js-signup-form--failure {
 		.js-sign-up-form__feedback-message {
 			display: inline;
-			color: ${userFeedbackThemeDefault.userFeedback.textError}
+			color: ${userFeedbackThemeDefault.userFeedback.textError};
 		}
 	}
 `;
@@ -83,7 +83,6 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 				data-newsletter-id={newsletterId}
 				css={formStyle}
 			>
-
 				<TextInput
 					type="email"
 					width={30}
@@ -115,14 +114,10 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 				>
 					Sign up
 				</Button>
-				<span
-					className="js-sign-up-form__spinner"
-				>
+				<span className="js-sign-up-form__spinner">
 					<SvgSpinner size="xsmall" />
 				</span>
-				<span
-					className="js-sign-up-form__feedback-message"
-				></span>
+				<span className="js-sign-up-form__feedback-message"></span>
 			</form>
 		</>
 	);

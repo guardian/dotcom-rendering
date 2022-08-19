@@ -39,7 +39,6 @@ import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
 import { createSignUpComponentFromProps } from './createSignUpComponentFromProps';
 
-
 // ----- Run ----- //
 
 interface FontFaceSet {
