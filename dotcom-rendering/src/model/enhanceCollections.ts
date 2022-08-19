@@ -4,10 +4,20 @@ import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';
 import { groupCards } from './groupCards';
 
+const FORBIDDEN_CONTAINERS = [
+	'Palette styles new do not delete',
+	'culture-treat',
+	'newsletter treat',
+];
+const isSupported = (collection: FECollectionType): boolean =>
+	!FORBIDDEN_CONTAINERS.includes(collection.displayName);
+
 export const enhanceCollections = (
 	collections: FECollectionType[],
+	editionId: EditionId,
+	pageId: string,
 ): DCRCollectionType[] => {
-	return collections.map((collection) => {
+	return collections.filter(isSupported).map((collection) => {
 		const { id, displayName, collectionType } = collection;
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
@@ -25,7 +35,12 @@ export const enhanceCollections = (
 			),
 			curated: enhanceCards(collection.curated, containerPalette),
 			backfill: enhanceCards(collection.backfill, containerPalette),
-			treats: enhanceTreats(collection.treats),
+			treats: enhanceTreats(
+				collection.treats,
+				displayName,
+				editionId,
+				pageId,
+			),
 			config: {
 				showDateHeader: collection.config.showDateHeader,
 			},
