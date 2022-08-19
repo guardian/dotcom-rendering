@@ -1,8 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	background,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { headline, remSpace, until } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
