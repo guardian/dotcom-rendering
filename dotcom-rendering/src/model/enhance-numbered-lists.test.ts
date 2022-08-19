@@ -400,4 +400,122 @@ describe('Enhance Numbered Lists', () => {
 			expectedOutput,
 		);
 	});
+
+	it('prefixes h3s with a divider', () => {
+		const input: Block[] = [
+			{
+				...blockMetaData,
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						elementId: 'mockId',
+						html: '<h3>Faux H3 text</h3>',
+					},
+				],
+			},
+		];
+		const expectedOutput: Block[] = [
+			{
+				...blockMetaData,
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
+						size: 'full',
+						spaceAbove: 'tight',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						elementId: 'mockId',
+						html: '<h3>Faux H3 text</h3>',
+					},
+				],
+			},
+		];
+		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(expectedOutput);
+	});
+
+	it('does set divider `spaceAbove` to `loose` if ItemLinkBlockElement is followed by h3', () => {
+		const input: Block[] = [
+			{
+				...blockMetaData,
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.ItemLinkBlockElement',
+						elementId: 'mockId',
+						html: '<ul><li><strong>Item link block</strong><a href="https://www.theguardian.com">Link</a></li></ul>',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						elementId: 'mockId',
+						html: '<h3>Faux H3 text</h3>',
+					},
+				],
+			},
+		];
+		const expectedOutput: Block[] = [
+			{
+				...blockMetaData,
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.ItemLinkBlockElement',
+						elementId: 'mockId',
+						html: '<ul><li><strong>Item link block</strong><a href="https://www.theguardian.com">Link</a></li></ul>',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
+						size: 'full',
+						spaceAbove: 'loose',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						elementId: 'mockId',
+						html: '<h3>Faux H3 text</h3>',
+					},
+				],
+			},
+		];
+		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(expectedOutput);
+	});
+	it('does set divider `spaceAbove` to `tight` if h3 is not proceeded by ItemLinkBlockElement', () => {
+		const input: Block[] = [
+			{
+				...blockMetaData,
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						elementId: 'mockId',
+						html: 'some HTML text',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						elementId: 'mockId',
+						html: '<h3>Faux H3 text</h3>',
+					},
+				],
+			},
+		];
+		const expectedOutput: Block[] = [
+			{
+				...blockMetaData,
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						elementId: 'mockId',
+						html: 'some HTML text',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
+						size: 'full',
+						spaceAbove: 'tight',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+						elementId: 'mockId',
+						html: '<h3>Faux H3 text</h3>',
+					},
+				],
+			},
+		];
+		expect(enhanceNumberedLists(input, NumberedList.format)).toEqual(expectedOutput);
+	});
 });
