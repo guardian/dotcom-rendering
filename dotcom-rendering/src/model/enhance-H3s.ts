@@ -1,5 +1,4 @@
 import { JSDOM } from 'jsdom';
-import { isItemLink } from './enhance-numbered-lists';
 
 const isFalseH3 = (element: CAPIElement): boolean => {
 	if (!element) return false;
@@ -52,34 +51,17 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	 * Truth is, you can't. So to get around this there's a convention that says if
 	 * you insert <p><strong>Faux H3!</strong>,</p> then we replace it with a h3 tag
 	 * instead.
-	 *
-	 * Note. H3s don't have any styles so we have to add them. In Frontend, they use
-	 * a 'fauxH3' class for this. In DCR we add `globalH3Styles` which was added at
-	 * the same time as this code.
 	 */
 	const withH3s: CAPIElement[] = [];
-	let previousItem: CAPIElement | undefined;
 	elements.forEach((thisElement) => {
 		if (
 			thisElement._type ===
-				'model.dotcomrendering.pageElements.TextBlockElement' &&
+			'model.dotcomrendering.pageElements.TextBlockElement' &&
 			isFalseH3(thisElement)
 		) {
 			const h3Text = extractH3(thisElement);
 
-			// To avoid having to depend on the ordering of the enhancer (which could easily be a source of bugs)
-			// We determine if previous items are `ItemLinkBlockElement` through type and `isItemLink` functions
-			const isPreviousItemLink =
-				previousItem?._type ===
-					'model.dotcomrendering.pageElements.ItemLinkBlockElement' ||
-				(previousItem && isItemLink(previousItem));
-
 			withH3s.push(
-				{
-					_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
-					size: 'full',
-					spaceAbove: isPreviousItemLink ? 'loose' : 'tight',
-				},
 				{
 					...thisElement,
 					html: `<h3>${h3Text}</h3>`,
@@ -89,7 +71,6 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 			// Pass through
 			withH3s.push(thisElement);
 		}
-		previousItem = thisElement;
 	});
 	return withH3s;
 };
