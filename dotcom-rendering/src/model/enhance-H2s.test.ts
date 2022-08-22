@@ -90,15 +90,20 @@ describe('Enhance h2 Embeds', () => {
 		expect(enhanceH2s(input)).toEqual(expectedOutput);
 	});
 
-
 	it('should add the number of occurences to the slug if it is not unique', () => {
-		const slug = "i-am-not-unique";
-		const array = ["my-id", "another-id", "i-am-not-unique", "i-am-not-unique", "i-am-not-unique"]
+		const slug = 'i-am-not-unique';
+		const array = [
+			'my-id',
+			'another-id',
+			'i-am-not-unique',
+			'i-am-not-unique',
+			'i-am-not-unique',
+		];
 
-		const input = getUnique(slug, array)
+		const input = getUnique(slug, array);
 
-		const expectedOutput = "i-am-not-unique-3"
+		const expectedOutput = 'i-am-not-unique-3';
 
-		expect(input).toEqual(expectedOutput)
+		expect(input).toEqual(expectedOutput);
 	});
 });
