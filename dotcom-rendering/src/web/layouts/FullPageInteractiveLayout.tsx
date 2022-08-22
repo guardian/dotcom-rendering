@@ -318,6 +318,7 @@ export const FullPageInteractiveLayout = ({
 					</Stuck>
 				)}
 			</header>
+<<<<<<< Updated upstream
 
 			<Section
 				fullWidth={true}
@@ -346,6 +347,36 @@ export const FullPageInteractiveLayout = ({
 					/>
 				</article>
 			</Section>
+=======
+			<div id="maincontent" tabIndex={-1}>
+				<ElementContainer
+					showTopBorder={false}
+					showSideBorders={false}
+					shouldCenter={false}
+					padSides={false}
+					backgroundColour={palette.background.article}
+					element="main"
+				>
+					<article>
+						<Renderer
+							format={format}
+							elements={
+								CAPIArticle.blocks[0]
+									? CAPIArticle.blocks[0].elements
+									: []
+							}
+							host={host}
+							pageId={CAPIArticle.pageId}
+							webTitle={CAPIArticle.webTitle}
+							ajaxUrl={CAPIArticle.config.ajaxUrl}
+							switches={CAPIArticle.config.switches}
+							isAdFreeUser={CAPIArticle.isAdFreeUser}
+							isSensitive={CAPIArticle.config.isSensitive}
+						/>
+					</article>
+				</ElementContainer>
+			</div>
+>>>>>>> Stashed changes
 
 			{NAV.subNavSections && (
 				<Section
