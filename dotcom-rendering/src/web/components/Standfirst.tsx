@@ -151,6 +151,7 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Review:
 				case ArticleDesign.NewsletterSignup:
+				case ArticleDesign.Explainer:
 					return css`
 						${headline.xxsmall({
 							fontWeight: 'light',
