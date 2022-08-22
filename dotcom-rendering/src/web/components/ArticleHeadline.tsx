@@ -649,6 +649,46 @@ export const ArticleHeadline = ({
 							)}
 						</div>
 					);
+				case ArticleDesign.Analysis:
+					return (
+						<div
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
+						>
+							<WithAgeWarning
+								tags={tags}
+								webPublicationDateDeprecated={
+									webPublicationDateDeprecated
+								}
+								format={format}
+							>
+								<DesignTag format={format} />
+								<h1
+									css={[
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: standardFont,
+										topPadding,
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
+								</h1>
+							</WithAgeWarning>
+							{!!byline && (
+								<HeadlineByline
+									format={format}
+									byline={byline}
+									tags={tags}
+								/>
+							)}
+						</div>
+					);
 				case ArticleDesign.LiveBlog:
 				case ArticleDesign.DeadBlog:
 					return (
