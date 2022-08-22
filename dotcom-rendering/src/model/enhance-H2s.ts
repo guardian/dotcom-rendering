@@ -8,11 +8,13 @@ const extractText = (element: SubheadingBlockElement): string => {
 
 /**
  * We need the ids to be unique so we can navigate to them.
- * This function checks if the slug already exists and if it does it adds the count to the end of the slug. 
+ * This function checks if the slug already exists and if it does it adds the count to the end of the slug.
  */
-export const getUnique = (slug: string, array: string[]) => {
+export const getUnique = (slug: string, array: string[]): string => {
 	if (array.includes(slug)) {
-		const occurenceCount = array.filter((currentItem) => currentItem == slug).length;
+		const occurenceCount = array.filter(
+			(currentItem) => currentItem == slug,
+		).length;
 		return `${slug}-${occurenceCount}`;
 	}
 	return slug;
@@ -20,17 +22,16 @@ export const getUnique = (slug: string, array: string[]) => {
 
 const slugify = (text: string) => {
 	return text
-		.toString() // Cast to string (optional)
 		.normalize('NFKD') // The normalize() using NFKD method returns the Unicode Normalization Form of a given string.
 		.toLowerCase() // Convert the string to lowercase letters
-		.trim() // Remove whitespace from both sides of a string (optional)
-		.replace(/\s+/g, '-') // Replace spaces with -
-		.replace(/[^\w\-]+/g, '') // Remove all non-word chars
-		.replace(/\-\-+/g, '-'); // Replace multiple - with single -
+		.trim() // Remove whitespace from both sides of a string
+		.replace(/\s+/g, '-') // Replace spaces with "-"
+		.replace(/[^\w-]+/g, '') // Remove all non-word chars
+		.replace(/--+/g, '-'); // Replace multiple "-" with single "-"
 };
 
 const enhance = (elements: CAPIElement[]): CAPIElement[] => {
-	const slugifiedIds: string[] = []
+	const slugifiedIds: string[] = [];
 	const enhanced: CAPIElement[] = [];
 	elements.forEach((element) => {
 		// If this element is a subheading, insert a humanised slug of the text as its ID
@@ -43,7 +44,7 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 			const uniqueSlug = getUnique(slug, slugifiedIds);
 
 			//remember the slug so we can check against it next time
-			slugifiedIds.push(slug)
+			slugifiedIds.push(slug);
 			const withId = element.html.replace(
 				'<h2>',
 				// add ID to H2 element
