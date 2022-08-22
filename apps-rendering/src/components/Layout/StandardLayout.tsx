@@ -39,6 +39,7 @@ import {
 	onwardStyles,
 } from 'styles';
 import { themeToPillarString } from 'themeStyles';
+import HeadlineTag from 'components/HeadlineTag';
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -100,7 +101,6 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 		: null;
 
 	const matchScores = 'football' in item ? item.football : none;
-
 	return (
 		<main css={backgroundStyles(format)}>
 			<article className="js-article" css={BorderStyles}>
@@ -121,6 +121,9 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 						mainMedia={item.mainMedia}
 					/>
 					<Series item={item} />
+					{item.design === ArticleDesign.Explainer && (
+						<HeadlineTag tagText={'Explainer'} format={item} />
+					)}
 					<Headline item={item} />
 					<div css={articleWidthStyles}>
 						<Standfirst item={item} />
