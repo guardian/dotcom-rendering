@@ -33,6 +33,7 @@ type CAPIDesign =
 	| 'ReviewDesign'
 	| 'AnalysisDesign'
 	| 'CommentDesign'
+	| 'ExplainerDesign'
 	| 'LetterDesign'
 	| 'FeatureDesign'
 	| 'LiveBlogDesign'
