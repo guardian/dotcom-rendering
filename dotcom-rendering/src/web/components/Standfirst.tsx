@@ -11,6 +11,7 @@ import sanitise from 'sanitize-html';
 import type { Palette } from '../../types/palette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
+import { DesignTag } from './DesignTag';
 
 type Props = {
 	format: ArticleFormat;
@@ -223,6 +224,10 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 
 	return (
 		<>
+			{format.display === ArticleDisplay.Immersive &&
+				format.design === ArticleDesign.Analysis && (
+					<DesignTag format={format}>Analysis</DesignTag>
+				)}
 			<div
 				css={[
 					nestedStyles(format, palette),
