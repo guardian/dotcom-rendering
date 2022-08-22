@@ -35,7 +35,7 @@ const pagination = (format: ArticleFormat): Colour => {
 };
 
 const signUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
-const signUpFormButtonDark = (_format: ArticleFormat): Colour => '#d1d1d1';
+const signUpFormButtonDark = (_format: ArticleFormat): Colour => neutral[86];
 
 // ----- API ----- //
 
