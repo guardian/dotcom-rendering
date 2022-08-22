@@ -16,7 +16,6 @@ import { getZIndex } from '../lib/getZIndex';
 import { AgeWarning } from './AgeWarning';
 import { DesignTag } from './DesignTag';
 import { HeadlineByline } from './HeadlineByline';
-import { HeadlineTag } from './HeadlineTag';
 
 type Props = {
 	headlineString: string;
@@ -473,6 +472,7 @@ export const ArticleHeadline = ({
 						}
 						format={format}
 					>
+						<DesignTag format={format} />
 						<h1
 							css={[
 								boldFont,
@@ -509,6 +509,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
+								<DesignTag format={format} />
 								<h1
 									css={[
 										boldFont,
@@ -540,6 +541,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
+								<DesignTag format={format} />
 								<h1
 									css={[
 										lightFont,
@@ -578,6 +580,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
+								<DesignTag format={format} />
 								<h1
 									css={[
 										lightFont,
@@ -589,44 +592,6 @@ export const ArticleHeadline = ({
 								>
 									{curly(headlineString)}
 								</h1>
-							</WithAgeWarning>
-						</div>
-					);
-				case ArticleDesign.Analysis:
-					return (
-						<div
-							css={decideBottomPadding({
-								format,
-								hasStarRating,
-								hasAvatar,
-							})}
-						>
-							<WithAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-							>
-								<DesignTag format={format}>Analysis</DesignTag>
-								<h1
-									css={[
-										standardFont,
-										topPadding,
-										css`
-											color: ${palette.text.headline};
-										`,
-									]}
-								>
-									{curly(headlineString)}
-								</h1>
-								{!!byline && (
-									<HeadlineByline
-										format={format}
-										byline={byline}
-										tags={tags}
-									/>
-								)}
 							</WithAgeWarning>
 						</div>
 					);
@@ -653,10 +618,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
-								<HeadlineTag
-									tagText="Interview"
-									palette={palette}
-								/>
+								<DesignTag format={format} />
 								<h1
 									css={[
 										invertedFont,
@@ -704,6 +666,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
+								<DesignTag format={format} />
 								<h1
 									css={[
 										standardFont,
@@ -741,6 +704,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
+								<DesignTag format={format} />
 								<h1
 									className={
 										interactiveLegacyClasses.headline
@@ -774,6 +738,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
+								<DesignTag format={format} />
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
