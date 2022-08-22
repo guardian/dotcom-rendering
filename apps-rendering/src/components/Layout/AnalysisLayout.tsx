@@ -25,7 +25,7 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
-import {DesignTag} from "../DesignTag";
+import { DesignTag } from '../DesignTag';
 
 // ----- Styles ----- //
 
