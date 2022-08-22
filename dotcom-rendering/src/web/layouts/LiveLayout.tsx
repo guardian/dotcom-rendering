@@ -18,6 +18,8 @@ import {
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
+import type { NavType } from '../../model/extract-nav';
+import type { CAPIArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -26,7 +28,6 @@ import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
 import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Carousel } from '../components/Carousel.importable';
-import { Section } from '../components/Section';
 import { DecideLines } from '../components/DecideLines';
 import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
@@ -47,6 +48,7 @@ import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
+import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -292,25 +294,28 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
 
+	/**
+	 * This property currently only applies to the header and merchandising slots
+	 */
+	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
+
 	return (
 		<>
 			<div data-print-layout="hide">
-				<Stuck>
-					<Section
-						fullWidth={true}
-						showTopBorder={false}
-						showSideBorders={false}
-						padSides={false}
-						shouldCenter={false}
-						element="aside"
-					>
-						<HeaderAdSlot
-							isAdFreeUser={CAPIArticle.isAdFreeUser}
-							shouldHideAds={CAPIArticle.shouldHideAds}
-							display={format.display}
-						/>
-					</Section>
-				</Stuck>
+				{renderAds && (
+					<Stuck>
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							showSideBorders={false}
+							padSides={false}
+							shouldCenter={false}
+							element="aside"
+						>
+							<HeaderAdSlot display={format.display} />
+						</Section>
+					</Stuck>
+				)}
 				<SendToBack>
 					<Section
 						fullWidth={true}
@@ -1146,21 +1151,23 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</LiveGrid>
 					</Section>
 
-					<Section
-						fullWidth={true}
-						data-print-layout="hide"
-						padSides={false}
-						showTopBorder={false}
-						showSideBorders={false}
-						backgroundColour={neutral[93]}
-						element="aside"
-					>
-						<AdSlot
+					{renderAds && (
+						<Section
+							fullWidth={true}
 							data-print-layout="hide"
-							position="merchandising-high"
-							display={format.display}
-						/>
-					</Section>
+							padSides={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={neutral[93]}
+							element="aside"
+						>
+							<AdSlot
+								data-print-layout="hide"
+								position="merchandising-high"
+								display={format.display}
+							/>
+						</Section>
+					)}
 
 					{CAPIArticle.onwards ? (
 						<DecideOnwards
@@ -1262,20 +1269,22 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</Section>
 					)}
 
-					<Section
-						fullWidth={true}
-						data-print-layout="hide"
-						padSides={false}
-						showTopBorder={false}
-						showSideBorders={false}
-						backgroundColour={neutral[93]}
-						element="aside"
-					>
-						<AdSlot
-							position="merchandising"
-							display={format.display}
-						/>
-					</Section>
+					{renderAds && (
+						<Section
+							fullWidth={true}
+							data-print-layout="hide"
+							padSides={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={neutral[93]}
+							element="aside"
+						>
+							<AdSlot
+								position="merchandising"
+								display={format.display}
+							/>
+						</Section>
+					)}
 				</div>
 			</main>
 

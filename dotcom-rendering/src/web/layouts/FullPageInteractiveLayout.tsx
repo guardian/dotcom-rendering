@@ -11,6 +11,8 @@ import {
 	neutral,
 	until,
 } from '@guardian/source-foundations';
+import type { NavType } from '../../model/extract-nav';
+import type { CAPIArticleType } from '../../types/frontend';
 import {
 	adCollapseStyles,
 	labelStyles as adLabelStyles,
@@ -133,6 +135,11 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 	// often reach readers who are less familiar with the Guardian.
 	const isSlimNav = !CAPIArticle.config.switches.interactiveFullHeaderSwitch;
 
+	/**
+	 * This property currently only applies to the header and merchandising slots
+	 */
+	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
+
 	if (isSlimNav) {
 		return (
 			<div
@@ -174,24 +181,22 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 				position: relative;
 			`}
 		>
-			<Stuck>
-				<div data-print-layout="hide">
-					<Section
-						fullWidth={true}
-						showTopBorder={false}
-						showSideBorders={false}
-						padSides={false}
-						shouldCenter={false}
-						element="aside"
-					>
-						<HeaderAdSlot
-							isAdFreeUser={CAPIArticle.isAdFreeUser}
-							shouldHideAds={CAPIArticle.shouldHideAds}
-							display={format.display}
-						/>
-					</Section>
-				</div>
-			</Stuck>
+			{renderAds && (
+				<Stuck>
+					<div data-print-layout="hide">
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							showSideBorders={false}
+							padSides={false}
+							shouldCenter={false}
+							element="aside"
+						>
+							<HeaderAdSlot display={format.display} />
+						</Section>
+					</div>
+				</Stuck>
+			)}
 
 			{format.theme !== ArticleSpecial.Labs && (
 				<div data-print-layout="hide">

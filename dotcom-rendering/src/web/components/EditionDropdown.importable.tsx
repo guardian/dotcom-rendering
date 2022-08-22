@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { brand, from } from '@guardian/source-foundations';
+import type { EditionId } from '../../types/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { Dropdown } from './Dropdown';
 

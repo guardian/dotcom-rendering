@@ -339,6 +339,8 @@ const isReview = hasSomeTag([
 
 const isAnalysis = hasTag('tone/analysis');
 
+const isExplainer = hasTag('tone/explainers');
+
 const isLetter = hasTag('tone/letters');
 
 const isComment = hasTag('tone/comment');
@@ -431,6 +433,11 @@ const fromCapi =
 		} else if (isAnalysis(tags)) {
 			return {
 				design: ArticleDesign.Analysis,
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isExplainer(tags)) {
+			return {
+				design: ArticleDesign.Explainer,
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isCorrection(tags)) {

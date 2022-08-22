@@ -1,3 +1,4 @@
+import type { CAPIArticleType } from '../../types/frontend';
 import { decideNavTheme } from './decideNavTheme';
 
 export const getCurrentPillar = (
