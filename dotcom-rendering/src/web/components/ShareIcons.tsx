@@ -7,6 +7,7 @@ import LinkedInIcon from '../../static/icons/linked-in.svg';
 import MessengerIcon from '../../static/icons/messenger.svg';
 import TwitterIconPadded from '../../static/icons/twitter-padded.svg';
 import WhatsAppIcon from '../../static/icons/whatsapp.svg';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Hide } from './Hide';
 

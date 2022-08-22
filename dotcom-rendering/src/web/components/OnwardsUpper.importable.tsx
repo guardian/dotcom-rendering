@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import { ArticlePillar } from '@guardian/libs';
 import { joinUrl } from '../../lib/joinUrl';
+import type { EditionId } from '../../types/edition';
+import type { OnwardsType } from '../../types/onwards';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
 import { Section } from './Section';
 

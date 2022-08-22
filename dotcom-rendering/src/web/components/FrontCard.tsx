@@ -1,4 +1,5 @@
 import { ArticleDesign } from '@guardian/libs';
+import type { TrailType } from '../../types/trails';
 import type { Props as CardProps } from './Card/Card';
 import { Card } from './Card/Card';
 

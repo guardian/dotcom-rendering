@@ -10,6 +10,7 @@ import {
 } from '@guardian/source-foundations';
 import CameraSvg from '../../static/icons/camera.svg';
 import VideoSvg from '../../static/icons/video-icon.svg';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {

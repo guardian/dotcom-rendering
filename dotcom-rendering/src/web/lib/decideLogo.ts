@@ -1,4 +1,5 @@
 import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import type { Branding } from '../../types/branding';
 
 const shouldUseLogoForDarkBackground = (format: ArticleFormat): boolean => {
 	if (format.theme === ArticleSpecial.SpecialReport) return true;
@@ -27,7 +28,7 @@ const shouldUseLogoForDarkBackground = (format: ArticleFormat): boolean => {
 export const decideLogo = (
 	format: ArticleFormat,
 	branding: Branding,
-): BrandingLogo => {
+): Branding['logo'] => {
 	return shouldUseLogoForDarkBackground(format) &&
 		branding.logoForDarkBackground
 		? branding.logoForDarkBackground

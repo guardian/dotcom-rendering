@@ -1,5 +1,7 @@
 // All GA fields should  fall back to default values -
 
+import type { CAPIArticleType } from '../types/frontend';
+
 const filterTags = (
 	tags: CAPIArticleType['tags'],
 	tagType: 'Contributor' | 'Keyword' | 'Tone' | 'Series', // Let’s make a decision to keep this tag getter small and well defined, we don't really want to use tags

@@ -23,12 +23,22 @@ export const Default = () => {
 			<Treats
 				treats={[
 					{
-						text: 'treat 1',
-						linkTo: '',
+						links: [
+							{
+								text: 'treat 1',
+								linkTo: '',
+							},
+						],
+						editionId: 'UK',
 					},
 					{
-						text: 'treat 2',
-						linkTo: '',
+						links: [
+							{
+								text: 'treat 2',
+								linkTo: '',
+							},
+						],
+						editionId: 'UK',
 					},
 				]}
 			/>
