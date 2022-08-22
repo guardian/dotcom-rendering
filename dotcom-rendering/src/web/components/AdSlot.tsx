@@ -371,6 +371,7 @@ export const AdSlot = ({
 					data-link-name="ad slot merchandising-high"
 					data-name="merchandising-high"
 					aria-hidden="true"
+					data-label="false"
 				/>
 			);
 		}
@@ -391,6 +392,7 @@ export const AdSlot = ({
 					data-link-name="ad slot merchandising"
 					data-name="merchandising"
 					aria-hidden="true"
+					data-label="false"
 				/>
 			);
 		}
