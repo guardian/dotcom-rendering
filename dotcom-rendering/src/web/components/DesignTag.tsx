@@ -18,15 +18,6 @@ const tagStyles = (palette: Palette) => css`
 	box-decoration-break: clone;
 `;
 
-const topMargins = css`
-	margin-top: ${space[2]}px;
-	margin-bottom: ${space[1]}px;
-`;
-
-const leftMargin = css`
-	margin-left: 6px;
-`;
-
 const Margins = ({
 	children,
 	format,
@@ -36,9 +27,28 @@ const Margins = ({
 }) => {
 	switch (format.design) {
 		case ArticleDesign.Interview:
-			return <div css={[leftMargin]}>{children}</div>;
+			return (
+				<div
+					css={css`
+						margin-left: 6px;
+						margin-top: ${space[1]}px;
+					`}
+				>
+					{children}
+				</div>
+			);
 		default:
-			return <div css={[leftMargin, topMargins]}>{children}</div>;
+			return (
+				<div
+					css={css`
+						margin-left: 6px;
+						margin-top: ${space[2]}px;
+						margin-bottom: ${space[1]}px;
+					`}
+				>
+					{children}
+				</div>
+			);
 	}
 };
 
