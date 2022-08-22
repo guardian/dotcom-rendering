@@ -39,6 +39,7 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 				padding-bottom: ${remSpace[1]};
 			`;
 		case ArticleDesign.Analysis:
+		case ArticleDesign.Explainer:
 			return css`
 				${baseStyles}
 				${articleWidthStyles}
@@ -46,10 +47,6 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 				${darkModeCss`
 					background-color: ${background.headlineDark(format)};
 				`}
-				${boldFontStyles}
-			`;
-		case ArticleDesign.Explainer:
-			return css`
 				${boldFontStyles}
 			`;
 		default:
