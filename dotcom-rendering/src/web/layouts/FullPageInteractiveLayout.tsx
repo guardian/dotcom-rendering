@@ -328,23 +328,25 @@ export const FullPageInteractiveLayout = ({
 				backgroundColour={palette.background.article}
 				element="main"
 			>
-				<article>
-					<Renderer
-						format={format}
-						elements={
-							CAPIArticle.blocks[0]
-								? CAPIArticle.blocks[0].elements
-								: []
-						}
-						host={host}
-						pageId={CAPIArticle.pageId}
-						webTitle={CAPIArticle.webTitle}
-						ajaxUrl={CAPIArticle.config.ajaxUrl}
-						switches={CAPIArticle.config.switches}
-						isAdFreeUser={CAPIArticle.isAdFreeUser}
-						isSensitive={CAPIArticle.config.isSensitive}
-					/>
-				</article>
+				<div id="maincontent" tabIndex={-1}>
+					<article>
+						<Renderer
+							format={format}
+							elements={
+								CAPIArticle.blocks[0]
+									? CAPIArticle.blocks[0].elements
+									: []
+							}
+							host={host}
+							pageId={CAPIArticle.pageId}
+							webTitle={CAPIArticle.webTitle}
+							ajaxUrl={CAPIArticle.config.ajaxUrl}
+							switches={CAPIArticle.config.switches}
+							isAdFreeUser={CAPIArticle.isAdFreeUser}
+							isSensitive={CAPIArticle.config.isSensitive}
+						/>
+					</article>
+				</div>
 			</Section>
 
 			{NAV.subNavSections && (
