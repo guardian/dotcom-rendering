@@ -494,6 +494,7 @@ export const ArticleHeadline = ({
 				case ArticleDesign.Review:
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Feature:
+				case ArticleDesign.Explainer:
 					return (
 						<div
 							css={decideBottomPadding({
@@ -687,39 +688,6 @@ export const ArticleHeadline = ({
 									tags={tags}
 								/>
 							)}
-						</div>
-					);
-				case ArticleDesign.Explainer:
-					return (
-						<div
-							css={decideBottomPadding({
-								format,
-								hasStarRating,
-								hasAvatar,
-							})}
-						>
-							<WithAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-							>
-								<DesignTag format={format} />
-								<h1
-									css={[
-										format.theme === ArticleSpecial.Labs
-											? labsFont
-											: boldFont,
-										topPadding,
-										css`
-											color: ${palette.text.headline};
-										`,
-									]}
-								>
-									{curly(headlineString)}
-								</h1>
-							</WithAgeWarning>
 						</div>
 					);
 				case ArticleDesign.LiveBlog:
