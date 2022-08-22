@@ -600,6 +600,8 @@ const articleContent = (format: ArticleFormat): string => {
 	}
 };
 
+const signUpFormDark =  (_format: ArticleFormat): Colour => neutral[10];
+
 // ----- API ----- //
 
 const background = {
