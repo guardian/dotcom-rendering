@@ -1,11 +1,14 @@
 // use the dailyArticleCount from the local storage to see how many articles the user has viewed in a day
 import { onConsent } from '@guardian/consent-management-platform';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
-import { getLocale } from '@guardian/libs';
+import {
+	getParticipationsFromLocalStorage,
+	setParticipationsInLocalStorage,
+} from '../../experiments/ab-localstorage';
 import type { DailyArticle } from '../../lib/dailyArticleCount';
 import { getDailyArticleCount } from '../../lib/dailyArticleCount';
 import { hasUserDismissedGateMoreThanCount } from './dismissGate';
-import type { CanShowGateProps } from './types';
+import type { CanShowGateProps, CurrentSignInGateABTest } from './types';
 
 // in our case if this is the n-numbered article or higher the user has viewed then set the gate
 export const isNPageOrHigherPageView = (n = 2): boolean => {
@@ -71,6 +74,41 @@ export const hasRequiredConsents = (): Promise<boolean> =>
 	onConsent()
 		.then(({ canTarget }: ConsentState) => canTarget)
 		.catch(() => false);
+
+/**
+ * Occasionally we may want to track long-running behavior of browsers in a certain test,
+ * without adding new browsers to the test bucket. We cannot rely on the GU_mvt_id bucketing alone to do this.
+ * You can use this method to show the gate based on local storage participation key ("gu.ab.participations") instead.
+ *
+ * After the cut off date users without the local storage participation key won't see the gate at all.
+ *
+ * @param cutOff - UTC timestamp
+ * @param currentTest - test the
+ * @returns Promise<boolean>
+ */
+export const useParticipations = (
+	cutOff: number,
+	currentTest: CurrentSignInGateABTest,
+): Promise<boolean> => {
+	const now = Date.now(); // UTC
+	const { id, name, variant } = currentTest;
+
+	// BEFORE cutoff date all users will be bucketed and potentially shown the gate if they satisfy all subsequent conditions
+	if (now < cutOff) {
+		// sets participation under local storage key: 'gu.ab.participations'
+		setParticipationsInLocalStorage({
+			[id]: { variant: variant },
+		});
+		return Promise.resolve(true); //  we only want to bucket until the cutoff
+	}
+
+	// AFTER cutoff date, browsers without local storage test paticipatieon
+	const participations = getParticipationsFromLocalStorage();
+	// if the test particpation exists, show the test gate
+	return !!participations[id] // TODO rely on id and variant, not just id ??
+		? Promise.resolve(true)
+		: Promise.resolve(false);
+};
 
 export const canShowSignInGate = ({
 	isSignedIn,

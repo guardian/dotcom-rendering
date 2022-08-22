@@ -1,11 +1,14 @@
 import { incrementDailyArticleCount } from '../../lib/dailyArticleCount';
+import { storage } from '@guardian/libs';
 import {
 	isIOS9,
 	isNPageOrHigherPageView,
 	isValidContentType,
 	isValidSection,
 	isValidTag,
+	useParticipations,
 } from './displayRule';
+import { CurrentSignInGateABTest } from './types';
 
 describe('SignInGate - displayRule methods', () => {
 	describe('isNPageOrHigherPageView', () => {
@@ -113,6 +116,45 @@ describe('SignInGate - displayRule methods', () => {
 
 		test('not ios device is false', () => {
 			expect(isIOS9()).toBe(false);
+		});
+	});
+
+	describe('useParticipations', () => {
+		beforeEach(() => {
+			localStorage.clear();
+		});
+		const getParticipationsFromLocalStorage = () =>
+			storage.local.get('gu.ab.participations');
+
+		const currentTest: CurrentSignInGateABTest = {
+			id: 'test-id',
+			name: 'test-name',
+			variant: 'test-variant',
+		};
+		const cutoff = Date.UTC(2000, 1, 1, 0, 0);
+		const before = Date.UTC(1999, 1, 1, 0, 0);
+		const after = Date.UTC(2001, 1, 1, 0, 0);
+
+		test('useParticipations adds participation key and returns true before the cutoff', async () => {
+			jest.spyOn(Date, 'now').mockReturnValue(before);
+
+			expect(await useParticipations(cutoff, currentTest)).toBe(true);
+			expect(
+				getParticipationsFromLocalStorage()[currentTest.id],
+			).toBeDefined();
+		});
+		test('useParticipations returns correctly after the cutoff if not in participation', async () => {
+			jest.spyOn(Date, 'now').mockReturnValue(after);
+
+			expect(await useParticipations(cutoff, currentTest)).toBe(false);
+			expect(getParticipationsFromLocalStorage()).toBeNull();
+		});
+		test('useParticipations returns correctly after the cutoff if in participation', async () => {
+			jest.spyOn(Date, 'now').mockReturnValue(after);
+			storage.local.set('gu.ab.participations', {
+				[currentTest.id]: { variant: `${currentTest.variant}` },
+			});
+			expect(await useParticipations(cutoff, currentTest)).toBe(true);
 		});
 	});
 
