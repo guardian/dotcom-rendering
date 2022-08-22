@@ -81,6 +81,7 @@ import {
 	themeToPillar,
 	themeToPillarString,
 } from 'themeStyles';
+import HeadingTwo from 'components/HeadingTwo';
 
 // ----- Renderer ----- //
 
@@ -137,22 +138,6 @@ const transform = (
 		return h(HorizontalRule, null, null);
 	}
 	return text;
-};
-
-const HeadingTwoStyles = (format: ArticleFormat): SerializedStyles => {
-	const font =
-		format.theme === ArticleSpecial.Labs
-			? textSans.large({ fontWeight: 'bold' })
-			: headline.xxsmall({ fontWeight: 'bold' });
-
-	return css`
-		${font}
-		margin: ${remSpace[4]} 0 4px 0;
-
-		& + p {
-			margin-top: 0;
-		}
-	`;
 };
 
 const TweetStyles = css`
@@ -253,50 +238,6 @@ const shouldShowDropCap = (
 	return (
 		allowsDropCaps(format) && text.length >= 200 && dropCapRegex.test(text)
 	);
-};
-
-const headingTextElement =
-	(format: ArticleFormat, isEditions = false) =>
-	(node: Node, key: number): ReactNode => {
-		const text = node.textContent ?? '';
-		const children = Array.from(node.childNodes).map(
-			headingTextElement(format, isEditions),
-		);
-
-		switch (node.nodeName) {
-			case '#text':
-				return text;
-			case 'A':
-				return h(
-					Anchor,
-					{
-						href: withDefault('')(getHref(node)),
-						format,
-						key,
-						isEditions,
-					},
-					children,
-				);
-			case 'EM':
-				return h('em', { key }, children);
-			default:
-				return null;
-		}
-	};
-
-const headingTwoElement = (
-	format: ArticleFormat,
-	isEditions: boolean,
-	node: Node,
-): ReactNode => {
-	const text = node.textContent ?? '';
-	const children = Array.from(node.childNodes).map(
-		headingTextElement(format, isEditions),
-	);
-
-	return text.includes('* * *')
-		? h(HorizontalRule, null, null)
-		: styledH('h2', { css: HeadingTwoStyles(format) }, children);
 };
 
 const textElement =
@@ -666,7 +607,11 @@ const render =
 			case ElementKind.Text:
 				return textRenderer(format, excludeStyles, element);
 			case ElementKind.HeadingTwo:
-				return headingTwoElement(format, false, element.doc);
+				return h(HeadingTwo, {
+					format,
+					isEditions: false,
+					element: element.doc,
+				});
 			case ElementKind.Image:
 				return imageRenderer(format, element, key);
 
@@ -748,7 +693,11 @@ const renderEditions =
 				return textRenderer(format, excludeStyles, element, true);
 
 			case ElementKind.HeadingTwo:
-				return headingTwoElement(format, true, element.doc);
+				return h(HeadingTwo, {
+					format,
+					isEditions: true,
+					element: element.doc,
+				});
 
 			case ElementKind.Image:
 				return format.design === ArticleDesign.Gallery ||
