@@ -1,15 +1,19 @@
-import { ArticleDesign, ArticleFormat} from '@guardian/libs';
-import {headline, remSpace} from '@guardian/source-foundations';
-import { background, text } from '@guardian/common-rendering/src/editorialPalette';
-import {FC} from "react";
-import {css} from "@emotion/react";
-import {articleWidthStyles} from "../../styles";
+import { css } from '@emotion/react';
+import {
+	background,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
+import { headline, remSpace } from '@guardian/source-foundations';
+import type { FC } from 'react';
+import { articleWidthStyles } from '../../styles';
 
 type Props = {
 	format: ArticleFormat;
 };
 
-const decideText = (format: ArticleFormat) => {
+const decideText = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Analysis:
 			return 'Analysis';
@@ -60,18 +64,24 @@ const decideText = (format: ArticleFormat) => {
 
 export const DesignTag: FC<Props> = ({ format }) => {
 	return (
-		<div css={css`${articleWidthStyles}`}>
-			<div css={css`
-				background-color: ${background.headlineTag(format)};
-				color: ${text.headlineTag(format)};
-				display: inline-block;
-				padding-left: ${remSpace[2]};
-				padding-right: ${remSpace[2]};
-				padding-bottom: ${remSpace[1]};
-				${headline.xxsmall({fontWeight: 'bold'})}
-			`}>
+		<div
+			css={css`
+				${articleWidthStyles}
+			`}
+		>
+			<div
+				css={css`
+					background-color: ${background.headlineTag(format)};
+					color: ${text.headlineTag(format)};
+					display: inline-block;
+					padding-left: ${remSpace[2]};
+					padding-right: ${remSpace[2]};
+					padding-bottom: ${remSpace[1]};
+					${headline.xxsmall({ fontWeight: 'bold' })}
+				`}
+			>
 				{decideText(format)}
 			</div>
 		</div>
-	)
+	);
 };
