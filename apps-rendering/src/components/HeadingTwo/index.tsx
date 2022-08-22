@@ -6,11 +6,12 @@ import Anchor from 'components/Anchor';
 import HorizontalRule from 'components/HorizontalRule';
 import { ReactNode } from 'react';
 import { getHref } from 'renderer';
+import type { HeadingTwo as HeadingTwoType } from 'bodyElement';
 
 interface Props {
 	format: ArticleFormat;
 	isEditions: boolean;
-	element: Node;
+	heading: HeadingTwoType;
 }
 
 const styles = (format: ArticleFormat): SerializedStyles => {
@@ -58,16 +59,23 @@ const headingTextElement =
 		}
 	};
 
-const HeadingTwo: React.FC<Props> = ({ format, isEditions, element }) => {
-	const text = element.textContent ?? '';
-	const children = Array.from(element.childNodes).map(
+const HeadingTwo: React.FC<Props> = ({ format, isEditions, heading }) => {
+	const text = heading.doc.textContent ?? '';
+	const children = Array.from(heading.doc.childNodes).map(
 		headingTextElement(format, isEditions),
 	);
 
 	return text.includes('* * *') ? (
 		<HorizontalRule />
 	) : (
-		<h2 css={styles(format)}>{children}</h2>
+		<h2
+			id={heading.toc
+				.map<string | undefined>((t) => t.id)
+				.withDefault(undefined)}
+			css={styles(format)}
+		>
+			{children}
+		</h2>
 	);
 };
 

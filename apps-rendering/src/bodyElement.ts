@@ -6,7 +6,7 @@ import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { ArticleTheme } from '@guardian/libs';
-import type { Option, Result } from '@guardian/types';
+import { Option, Result } from '@guardian/types';
 import {
 	err,
 	fromNullable,
@@ -25,6 +25,7 @@ import { parseImage } from 'image';
 import { compose, pipe } from 'lib';
 import type { Context } from 'parserContext';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
+import { Optional } from 'optional';
 
 // ----- Types ----- //
 
@@ -36,6 +37,7 @@ type Text = {
 type HeadingTwo = {
 	kind: ElementKind.HeadingTwo;
 	doc: Node;
+	toc: Optional<{ id: string; text: string }>;
 };
 
 type Image = ImageData & {
@@ -205,16 +207,32 @@ const toEmbedElement: (
 	embed,
 }));
 
+const slugify = (text: string): string => {
+	return text
+		.normalize('NFKD') // The normalize() using NFKD method returns the Unicode Normalization Form of a given string.
+		.toLowerCase() // Convert the string to lowercase letters
+		.trim() // Remove whitespace from both sides of a string
+		.replace(/\s+/g, '-') // Replace spaces with "-"
+		.replace(/[^\w-]+/g, '') // Remove all non-word chars
+		.replace(/--+/g, '-'); // Replace multiple "-" with single "-"
+};
+
 const flattenTextElement = (doc: Node): BodyElement[] => {
 	const childNodes = Array.from(doc.childNodes);
 	return childNodes.map((node) => {
 		switch (node.nodeName) {
 			case 'H2':
-				console.log('textContent: ');
-				console.log(node.textContent);
 				return {
 					kind: ElementKind.HeadingTwo,
 					doc: node,
+					toc: Optional.fromNullable(node.textContent).flatMap(
+						(text) => {
+							const slug = slugify(text);
+							return slug === ''
+								? Optional.none()
+								: Optional.some({ id: slug, text });
+						},
+					),
 				};
 			default:
 				return {
@@ -429,6 +447,7 @@ const parseElements =
 export {
 	ElementKind,
 	BodyElement,
+	HeadingTwo,
 	Body,
 	Image,
 	Text,

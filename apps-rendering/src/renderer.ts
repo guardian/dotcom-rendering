@@ -1,6 +1,5 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/react';
 import { css, jsx as styledH } from '@emotion/react';
 import {
 	AudioAtom,
@@ -16,13 +15,7 @@ import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Breakpoint } from '@guardian/source-foundations';
-import {
-	headline,
-	neutral,
-	remSpace,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { neutral, remSpace, until } from '@guardian/source-foundations';
 import {
 	andThen,
 	fromNullable,
@@ -610,7 +603,7 @@ const render =
 				return h(HeadingTwo, {
 					format,
 					isEditions: false,
-					element: element.doc,
+					heading: element,
 				});
 			case ElementKind.Image:
 				return imageRenderer(format, element, key);
@@ -696,7 +689,7 @@ const renderEditions =
 				return h(HeadingTwo, {
 					format,
 					isEditions: true,
-					element: element.doc,
+					heading: element,
 				});
 
 			case ElementKind.Image:
