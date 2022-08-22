@@ -407,374 +407,394 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</Stuck>
 				</>
 			)}
-
-			<main data-layout="ShowcaseLayout">
-				<Section
-					fullWidth={true}
-					showTopBorder={false}
-					backgroundColour={palette.background.article}
-					element="article"
-				>
-					<ShowcaseGrid>
-						<GridItem area="title" element="aside">
-							<ArticleTitle
-								format={format}
-								tags={CAPIArticle.tags}
-								sectionLabel={CAPIArticle.sectionLabel}
-								sectionUrl={CAPIArticle.sectionUrl}
-								guardianBaseURL={CAPIArticle.guardianBaseURL}
-								badge={CAPIArticle.badge}
-							/>
-						</GridItem>
-						<GridItem area="border">
-							<Border format={format} />
-						</GridItem>
-						<GridItem area="headline">
-							<PositionHeadline design={format.design}>
-								<ArticleHeadline
+			<div id="maincontent" tabIndex={-1}>
+				<main data-layout="ShowcaseLayout">
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						backgroundColour={palette.background.article}
+						element="article"
+					>
+						<ShowcaseGrid>
+							<GridItem area="title" element="aside">
+								<ArticleTitle
 									format={format}
-									headlineString={CAPIArticle.headline}
 									tags={CAPIArticle.tags}
-									byline={CAPIArticle.byline}
-									webPublicationDateDeprecated={
-										CAPIArticle.webPublicationDateDeprecated
+									sectionLabel={CAPIArticle.sectionLabel}
+									sectionUrl={CAPIArticle.sectionUrl}
+									guardianBaseURL={
+										CAPIArticle.guardianBaseURL
 									}
-									hasStarRating={
-										!!CAPIArticle.starRating ||
-										CAPIArticle.starRating === 0
-									}
+									badge={CAPIArticle.badge}
 								/>
-							</PositionHeadline>
-						</GridItem>
-						<GridItem area="media">
-							<div css={mainMediaWrapper}>
-								<MainMedia
-									format={format}
-									elements={CAPIArticle.mainMediaElements}
-									adTargeting={adTargeting}
-									starRating={
-										format.design ===
-											ArticleDesign.Review &&
-										CAPIArticle.starRating
-											? CAPIArticle.starRating
-											: undefined
-									}
-									host={host}
-									pageId={CAPIArticle.pageId}
-									webTitle={CAPIArticle.webTitle}
-									ajaxUrl={CAPIArticle.config.ajaxUrl}
-									switches={CAPIArticle.config.switches}
-									isAdFreeUser={CAPIArticle.isAdFreeUser}
-									isSensitive={CAPIArticle.config.isSensitive}
-								/>
-							</div>
-						</GridItem>
-						<GridItem area="standfirst">
-							<Standfirst
-								format={format}
-								standfirst={CAPIArticle.standfirst}
-							/>
-						</GridItem>
-						<GridItem area="lines">
-							<div css={maxWidth}>
-								<div css={stretchLines}>
-									<DecideLines format={format} />
+							</GridItem>
+							<GridItem area="border">
+								<Border format={format} />
+							</GridItem>
+							<GridItem area="headline">
+								<PositionHeadline design={format.design}>
+									<ArticleHeadline
+										format={format}
+										headlineString={CAPIArticle.headline}
+										tags={CAPIArticle.tags}
+										byline={CAPIArticle.byline}
+										webPublicationDateDeprecated={
+											CAPIArticle.webPublicationDateDeprecated
+										}
+										hasStarRating={
+											!!CAPIArticle.starRating ||
+											CAPIArticle.starRating === 0
+										}
+									/>
+								</PositionHeadline>
+							</GridItem>
+							<GridItem area="media">
+								<div css={mainMediaWrapper}>
+									<MainMedia
+										format={format}
+										elements={CAPIArticle.mainMediaElements}
+										adTargeting={adTargeting}
+										starRating={
+											format.design ===
+												ArticleDesign.Review &&
+											CAPIArticle.starRating
+												? CAPIArticle.starRating
+												: undefined
+										}
+										host={host}
+										pageId={CAPIArticle.pageId}
+										webTitle={CAPIArticle.webTitle}
+										ajaxUrl={CAPIArticle.config.ajaxUrl}
+										switches={CAPIArticle.config.switches}
+										isAdFreeUser={CAPIArticle.isAdFreeUser}
+										isSensitive={
+											CAPIArticle.config.isSensitive
+										}
+									/>
 								</div>
-							</div>
-						</GridItem>
-						<GridItem area="meta" element="aside">
-							<div css={maxWidth}>
-								<ArticleMeta
-									branding={branding}
+							</GridItem>
+							<GridItem area="standfirst">
+								<Standfirst
 									format={format}
-									pageId={CAPIArticle.pageId}
-									webTitle={CAPIArticle.webTitle}
-									byline={CAPIArticle.byline}
-									tags={CAPIArticle.tags}
-									primaryDateline={
-										CAPIArticle.webPublicationDateDisplay
-									}
-									secondaryDateline={
-										CAPIArticle.webPublicationSecondaryDateDisplay
-									}
-									isCommentable={CAPIArticle.isCommentable}
-									discussionApiUrl={
-										CAPIArticle.config.discussionApiUrl
-									}
-									shortUrlId={CAPIArticle.config.shortUrlId}
-									ajaxUrl={CAPIArticle.config.ajaxUrl}
-									showShareCount={
-										CAPIArticle.config.switches
-											.serverShareCounts
-									}
+									standfirst={CAPIArticle.standfirst}
 								/>
-							</div>
-						</GridItem>
-						<GridItem area="body">
-							<ArticleContainer format={format}>
-								<ArticleBody
-									format={format}
-									blocks={CAPIArticle.blocks}
-									adTargeting={adTargeting}
-									host={host}
-									pageId={CAPIArticle.pageId}
-									webTitle={CAPIArticle.webTitle}
-									ajaxUrl={CAPIArticle.config.ajaxUrl}
-									switches={CAPIArticle.config.switches}
-									isSensitive={CAPIArticle.config.isSensitive}
-									isAdFreeUser={CAPIArticle.isAdFreeUser}
-									section={CAPIArticle.config.section}
-									shouldHideReaderRevenue={
-										CAPIArticle.shouldHideReaderRevenue
-									}
-									tags={CAPIArticle.tags}
-									isPaidContent={
-										!!CAPIArticle.config.isPaidContent
-									}
-									contributionsServiceUrl={
-										contributionsServiceUrl
-									}
-									contentType={CAPIArticle.contentType}
-									sectionName={CAPIArticle.sectionName || ''}
-									isPreview={CAPIArticle.config.isPreview}
-									idUrl={CAPIArticle.config.idUrl || ''}
-									isDev={!!CAPIArticle.config.isDev}
-								/>
-								{showBodyEndSlot && (
-									<Island clientOnly={true}>
-										<SlotBodyEnd
-											contentType={
-												CAPIArticle.contentType
-											}
-											contributionsServiceUrl={
-												contributionsServiceUrl
-											}
-											idApiUrl={
-												CAPIArticle.config.idApiUrl
-											}
-											isMinuteArticle={
-												CAPIArticle.pageType
-													.isMinuteArticle
+							</GridItem>
+							<GridItem area="lines">
+								<div css={maxWidth}>
+									<div css={stretchLines}>
+										<DecideLines format={format} />
+									</div>
+								</div>
+							</GridItem>
+							<GridItem area="meta" element="aside">
+								<div css={maxWidth}>
+									<ArticleMeta
+										branding={branding}
+										format={format}
+										pageId={CAPIArticle.pageId}
+										webTitle={CAPIArticle.webTitle}
+										byline={CAPIArticle.byline}
+										tags={CAPIArticle.tags}
+										primaryDateline={
+											CAPIArticle.webPublicationDateDisplay
+										}
+										secondaryDateline={
+											CAPIArticle.webPublicationSecondaryDateDisplay
+										}
+										isCommentable={
+											CAPIArticle.isCommentable
+										}
+										discussionApiUrl={
+											CAPIArticle.config.discussionApiUrl
+										}
+										shortUrlId={
+											CAPIArticle.config.shortUrlId
+										}
+										ajaxUrl={CAPIArticle.config.ajaxUrl}
+										showShareCount={
+											CAPIArticle.config.switches
+												.serverShareCounts
+										}
+									/>
+								</div>
+							</GridItem>
+							<GridItem area="body">
+								<ArticleContainer format={format}>
+									<ArticleBody
+										format={format}
+										blocks={CAPIArticle.blocks}
+										adTargeting={adTargeting}
+										host={host}
+										pageId={CAPIArticle.pageId}
+										webTitle={CAPIArticle.webTitle}
+										ajaxUrl={CAPIArticle.config.ajaxUrl}
+										switches={CAPIArticle.config.switches}
+										isSensitive={
+											CAPIArticle.config.isSensitive
+										}
+										isAdFreeUser={CAPIArticle.isAdFreeUser}
+										section={CAPIArticle.config.section}
+										shouldHideReaderRevenue={
+											CAPIArticle.shouldHideReaderRevenue
+										}
+										tags={CAPIArticle.tags}
+										isPaidContent={
+											!!CAPIArticle.config.isPaidContent
+										}
+										contributionsServiceUrl={
+											contributionsServiceUrl
+										}
+										contentType={CAPIArticle.contentType}
+										sectionName={
+											CAPIArticle.sectionName || ''
+										}
+										isPreview={CAPIArticle.config.isPreview}
+										idUrl={CAPIArticle.config.idUrl || ''}
+										isDev={!!CAPIArticle.config.isDev}
+									/>
+									{showBodyEndSlot && (
+										<Island clientOnly={true}>
+											<SlotBodyEnd
+												contentType={
+													CAPIArticle.contentType
+												}
+												contributionsServiceUrl={
+													contributionsServiceUrl
+												}
+												idApiUrl={
+													CAPIArticle.config.idApiUrl
+												}
+												isMinuteArticle={
+													CAPIArticle.pageType
+														.isMinuteArticle
+												}
+												isPaidContent={
+													CAPIArticle.pageType
+														.isPaidContent
+												}
+												keywordsId={
+													CAPIArticle.config
+														.keywordIds
+												}
+												pageId={CAPIArticle.pageId}
+												sectionId={
+													CAPIArticle.config.section
+												}
+												sectionName={
+													CAPIArticle.sectionName
+												}
+												shouldHideReaderRevenue={
+													CAPIArticle.shouldHideReaderRevenue
+												}
+												stage={CAPIArticle.config.stage}
+												tags={CAPIArticle.tags}
+											/>
+										</Island>
+									)}
+									<StraightLines
+										count={4}
+										cssOverrides={css`
+											display: block;
+										`}
+									/>
+									<SubMeta
+										format={format}
+										subMetaKeywordLinks={
+											CAPIArticle.subMetaKeywordLinks
+										}
+										subMetaSectionLinks={
+											CAPIArticle.subMetaSectionLinks
+										}
+										pageId={CAPIArticle.pageId}
+										webUrl={CAPIArticle.webURL}
+										webTitle={CAPIArticle.webTitle}
+										showBottomSocialButtons={
+											CAPIArticle.showBottomSocialButtons
+										}
+										badge={CAPIArticle.badge}
+									/>
+								</ArticleContainer>
+							</GridItem>
+							<GridItem area="right-column">
+								<div
+									css={css`
+										padding-top: 6px;
+										height: 100%;
+										${from.desktop} {
+											/* above 980 */
+											margin-left: 20px;
+											margin-right: -20px;
+										}
+										${from.leftCol} {
+											/* above 1140 */
+											margin-left: 0px;
+											margin-right: 0px;
+										}
+									`}
+								>
+									<RightColumn>
+										<AdSlot
+											position="right"
+											display={format.display}
+											shouldHideReaderRevenue={
+												CAPIArticle.shouldHideReaderRevenue
 											}
 											isPaidContent={
 												CAPIArticle.pageType
 													.isPaidContent
 											}
-											keywordsId={
-												CAPIArticle.config.keywordIds
+										/>
+										{!isPaidContent ? (
+											<Island
+												clientOnly={true}
+												deferUntil="visible"
+											>
+												<MostViewedRightWrapper
+													isAdFreeUser={
+														CAPIArticle.isAdFreeUser
+													}
+												/>
+											</Island>
+										) : (
+											<></>
+										)}
+									</RightColumn>
+								</div>
+							</GridItem>
+						</ShowcaseGrid>
+					</Section>
+
+					{renderAds && (
+						<Section
+							fullWidth={true}
+							padSides={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={neutral[93]}
+							element="aside"
+						>
+							<AdSlot
+								position="merchandising-high"
+								display={format.display}
+							/>
+						</Section>
+					)}
+
+					{CAPIArticle.onwards ? (
+						<DecideOnwards
+							onwards={CAPIArticle.onwards}
+							format={format}
+						/>
+					) : (
+						<>
+							{CAPIArticle.storyPackage && (
+								<Section fullWidth={true}>
+									<Island deferUntil="visible">
+										<Carousel
+											heading={
+												CAPIArticle.storyPackage.heading
 											}
-											pageId={CAPIArticle.pageId}
-											sectionId={
-												CAPIArticle.config.section
-											}
-											sectionName={
-												CAPIArticle.sectionName
-											}
-											shouldHideReaderRevenue={
-												CAPIArticle.shouldHideReaderRevenue
-											}
-											stage={CAPIArticle.config.stage}
-											tags={CAPIArticle.tags}
+											trails={CAPIArticle.storyPackage.trails.map(
+												decideTrail,
+											)}
+											onwardsType="more-on-this-story"
+											format={format}
 										/>
 									</Island>
-								)}
-								<StraightLines
-									count={4}
-									cssOverrides={css`
-										display: block;
-									`}
-								/>
-								<SubMeta
-									format={format}
-									subMetaKeywordLinks={
-										CAPIArticle.subMetaKeywordLinks
-									}
-									subMetaSectionLinks={
-										CAPIArticle.subMetaSectionLinks
-									}
-									pageId={CAPIArticle.pageId}
-									webUrl={CAPIArticle.webURL}
-									webTitle={CAPIArticle.webTitle}
-									showBottomSocialButtons={
-										CAPIArticle.showBottomSocialButtons
-									}
-									badge={CAPIArticle.badge}
-								/>
-							</ArticleContainer>
-						</GridItem>
-						<GridItem area="right-column">
-							<div
-								css={css`
-									padding-top: 6px;
-									height: 100%;
-									${from.desktop} {
-										/* above 980 */
-										margin-left: 20px;
-										margin-right: -20px;
-									}
-									${from.leftCol} {
-										/* above 1140 */
-										margin-left: 0px;
-										margin-right: 0px;
-									}
-								`}
+								</Section>
+							)}
+
+							<Island
+								clientOnly={true}
+								deferUntil="visible"
+								placeholderHeight={600}
 							>
-								<RightColumn>
-									<AdSlot
-										position="right"
-										display={format.display}
-										shouldHideReaderRevenue={
-											CAPIArticle.shouldHideReaderRevenue
-										}
-										isPaidContent={
-											CAPIArticle.pageType.isPaidContent
-										}
-									/>
-									{!isPaidContent ? (
-										<Island
-											clientOnly={true}
-											deferUntil="visible"
-										>
-											<MostViewedRightWrapper
-												isAdFreeUser={
-													CAPIArticle.isAdFreeUser
-												}
-											/>
-										</Island>
-									) : (
-										<></>
-									)}
-								</RightColumn>
-							</div>
-						</GridItem>
-					</ShowcaseGrid>
-				</Section>
+								<OnwardsUpper
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
+									hasRelated={CAPIArticle.hasRelated}
+									hasStoryPackage={
+										CAPIArticle.hasStoryPackage
+									}
+									isAdFreeUser={CAPIArticle.isAdFreeUser}
+									pageId={CAPIArticle.pageId}
+									isPaidContent={
+										CAPIArticle.config.isPaidContent ||
+										false
+									}
+									showRelatedContent={
+										CAPIArticle.config.showRelatedContent
+									}
+									keywordIds={CAPIArticle.config.keywordIds}
+									contentType={CAPIArticle.contentType}
+									tags={CAPIArticle.tags}
+									format={format}
+									pillar={format.theme}
+									editionId={CAPIArticle.editionId}
+									shortUrlId={CAPIArticle.config.shortUrlId}
+								/>
+							</Island>
+						</>
+					)}
 
-				{renderAds && (
-					<Section
-						fullWidth={true}
-						padSides={false}
-						showTopBorder={false}
-						showSideBorders={false}
-						backgroundColour={neutral[93]}
-						element="aside"
-					>
-						<AdSlot
-							position="merchandising-high"
-							display={format.display}
-						/>
-					</Section>
-				)}
-
-				{CAPIArticle.onwards ? (
-					<DecideOnwards
-						onwards={CAPIArticle.onwards}
-						format={format}
-					/>
-				) : (
-					<>
-						{CAPIArticle.storyPackage && (
-							<Section fullWidth={true}>
-								<Island deferUntil="visible">
-									<Carousel
-										heading={
-											CAPIArticle.storyPackage.heading
-										}
-										trails={CAPIArticle.storyPackage.trails.map(
-											decideTrail,
-										)}
-										onwardsType="more-on-this-story"
-										format={format}
-									/>
-								</Island>
-							</Section>
-						)}
-
-						<Island
-							clientOnly={true}
-							deferUntil="visible"
-							placeholderHeight={600}
+					{!isPaidContent && showComments && (
+						<Section
+							fullWidth={true}
+							sectionId="comments"
+							element="section"
 						>
-							<OnwardsUpper
-								ajaxUrl={CAPIArticle.config.ajaxUrl}
-								hasRelated={CAPIArticle.hasRelated}
-								hasStoryPackage={CAPIArticle.hasStoryPackage}
-								isAdFreeUser={CAPIArticle.isAdFreeUser}
-								pageId={CAPIArticle.pageId}
-								isPaidContent={
-									CAPIArticle.config.isPaidContent || false
+							<DiscussionLayout
+								discussionApiUrl={
+									CAPIArticle.config.discussionApiUrl
 								}
-								showRelatedContent={
-									CAPIArticle.config.showRelatedContent
-								}
-								keywordIds={CAPIArticle.config.keywordIds}
-								contentType={CAPIArticle.contentType}
-								tags={CAPIArticle.tags}
-								format={format}
-								pillar={format.theme}
-								editionId={CAPIArticle.editionId}
 								shortUrlId={CAPIArticle.config.shortUrlId}
+								format={format}
+								discussionD2Uid={
+									CAPIArticle.config.discussionD2Uid
+								}
+								discussionApiClientHeader={
+									CAPIArticle.config.discussionApiClientHeader
+								}
+								enableDiscussionSwitch={
+									CAPIArticle.config.switches
+										.enableDiscussionSwitch
+								}
+								isAdFreeUser={CAPIArticle.isAdFreeUser}
+								shouldHideAds={CAPIArticle.shouldHideAds}
 							/>
-						</Island>
-					</>
-				)}
+						</Section>
+					)}
 
-				{!isPaidContent && showComments && (
-					<Section
-						fullWidth={true}
-						sectionId="comments"
-						element="section"
-					>
-						<DiscussionLayout
-							discussionApiUrl={
-								CAPIArticle.config.discussionApiUrl
-							}
-							shortUrlId={CAPIArticle.config.shortUrlId}
-							format={format}
-							discussionD2Uid={CAPIArticle.config.discussionD2Uid}
-							discussionApiClientHeader={
-								CAPIArticle.config.discussionApiClientHeader
-							}
-							enableDiscussionSwitch={
-								CAPIArticle.config.switches
-									.enableDiscussionSwitch
-							}
-							isAdFreeUser={CAPIArticle.isAdFreeUser}
-							shouldHideAds={CAPIArticle.shouldHideAds}
-						/>
-					</Section>
-				)}
+					{!isPaidContent && (
+						<Section
+							fullWidth={true}
+							data-print-layout="hide"
+							element="aside"
+						>
+							<MostViewedFooterLayout
+								format={format}
+								sectionName={CAPIArticle.sectionName}
+								ajaxUrl={CAPIArticle.config.ajaxUrl}
+							/>
+						</Section>
+					)}
 
-				{!isPaidContent && (
-					<Section
-						fullWidth={true}
-						data-print-layout="hide"
-						element="aside"
-					>
-						<MostViewedFooterLayout
-							format={format}
-							sectionName={CAPIArticle.sectionName}
-							ajaxUrl={CAPIArticle.config.ajaxUrl}
-						/>
-					</Section>
-				)}
-
-				{renderAds && (
-					<Section
-						fullWidth={true}
-						padSides={false}
-						showTopBorder={false}
-						showSideBorders={false}
-						backgroundColour={neutral[93]}
-						element="aside"
-					>
-						<AdSlot
-							position="merchandising"
-							display={format.display}
-						/>
-					</Section>
-				)}
-			</main>
+					{renderAds && (
+						<Section
+							fullWidth={true}
+							padSides={false}
+							showTopBorder={false}
+							showSideBorders={false}
+							backgroundColour={neutral[93]}
+							element="aside"
+						>
+							<AdSlot
+								position="merchandising"
+								display={format.display}
+							/>
+						</Section>
+					)}
+				</main>
+			</div>
 
 			{NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
