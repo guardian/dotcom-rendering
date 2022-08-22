@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { headline, space, until } from '@guardian/source-foundations';
+import { headline, space } from '@guardian/source-foundations';
+import { LinkButton } from '@guardian/source-react-components';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -67,24 +68,61 @@ const Tag = ({
 	return <div css={tagStyles(palette)}>{children}</div>;
 };
 
+const TagLink = ({
+	children,
+	href,
+}: {
+	children: React.ReactNode;
+	href: string;
+}) => {
+	return (
+		<LinkButton
+			priority="subdued"
+			href={href}
+			cssOverrides={css`
+				/* The following styles turn off those provided by LinkButton */
+				color: inherit;
+				/* stylelint-disable-next-line property-disallowed-list */
+				font-family: inherit;
+				font-size: inherit;
+				line-height: inherit;
+				:hover {
+					color: inherit;
+					text-decoration: underline;
+				}
+				min-height: initial;
+				height: initial;
+			`}
+		>
+			{children}
+		</LinkButton>
+	);
+};
+
 export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 	switch (format.design) {
 		case ArticleDesign.Analysis:
 			return (
 				<Margins format={format}>
-					<Tag format={format}>Analysis</Tag>
+					<Tag format={format}>
+						<TagLink href="/tone/analysis">Analysis</TagLink>
+					</Tag>
 				</Margins>
 			);
 		case ArticleDesign.Explainer:
 			return (
 				<Margins format={format}>
-					<Tag format={format}>Explainer</Tag>
+					<Tag format={format}>
+						<TagLink href="/tone/explainers">Explainer</TagLink>
+					</Tag>
 				</Margins>
 			);
 		case ArticleDesign.Interview:
 			return (
 				<Margins format={format}>
-					<Tag format={format}>Interview</Tag>
+					<Tag format={format}>
+						<TagLink href="/tone/interview">Interview</TagLink>
+					</Tag>
 				</Margins>
 			);
 		default:
