@@ -1,5 +1,5 @@
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { enhanceH2s } from './enhance-H2s';
+import { enhanceH2s, validateSlug } from './enhance-H2s';
 
 describe('Enhance h2 Embeds', () => {
 	it('sets an id when it is an h2 of type SubheadingBlockElement', () => {
@@ -88,5 +88,17 @@ describe('Enhance h2 Embeds', () => {
 		];
 
 		expect(enhanceH2s(input)).toEqual(expectedOutput);
+	});
+
+
+	it('should add the number of occurences to the slug if it is not unique', () => {
+		const slug = "i-am-not-unique";
+		const array = ["my-id", "another-id", "i-am-not-unique", "i-am-not-unique", "i-am-not-unique"]
+
+		const input = validateSlug(slug, array)
+
+		const expectedOutput = "i-am-not-unique-3"
+
+		expect(input).toEqual(expectedOutput)
 	});
 });
