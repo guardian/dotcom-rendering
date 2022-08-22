@@ -18,6 +18,7 @@ import {
 	labelStyles as adLabelStyles,
 	MobileStickyContainer,
 } from '../components/AdSlot';
+import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -318,8 +319,6 @@ export const FullPageInteractiveLayout = ({
 					</Stuck>
 				)}
 			</header>
-<<<<<<< Updated upstream
-
 			<Section
 				fullWidth={true}
 				showTopBorder={false}
@@ -347,16 +346,16 @@ export const FullPageInteractiveLayout = ({
 					/>
 				</article>
 			</Section>
-=======
-			<div id="maincontent" tabIndex={-1}>
-				<ElementContainer
-					showTopBorder={false}
-					showSideBorders={false}
-					shouldCenter={false}
-					padSides={false}
-					backgroundColour={palette.background.article}
-					element="main"
-				>
+			=======
+			<ElementContainer
+				showTopBorder={false}
+				showSideBorders={false}
+				shouldCenter={false}
+				padSides={false}
+				backgroundColour={palette.background.article}
+				element="main"
+			>
+				<div id="maincontent" tabIndex={-1}>
 					<article>
 						<Renderer
 							format={format}
@@ -374,10 +373,8 @@ export const FullPageInteractiveLayout = ({
 							isSensitive={CAPIArticle.config.isSensitive}
 						/>
 					</article>
-				</ElementContainer>
-			</div>
->>>>>>> Stashed changes
-
+				</div>
+			</ElementContainer>
 			{NAV.subNavSections && (
 				<Section
 					fullWidth={true}
@@ -394,7 +391,6 @@ export const FullPageInteractiveLayout = ({
 					</Island>
 				</Section>
 			)}
-
 			<Section
 				fullWidth={true}
 				padSides={false}
@@ -414,7 +410,6 @@ export const FullPageInteractiveLayout = ({
 					}
 				/>
 			</Section>
-
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>
 					<StickyBottomBanner
