@@ -2,7 +2,6 @@
 
 const enum ElementKind {
 	Text,
-	HeadingTwo,
 	Image,
 	Pullquote,
 	Interactive,
@@ -23,6 +22,7 @@ const enum ElementKind {
 	KnowledgeQuizAtom,
 	PersonalityQuizAtom,
 	NewsletterSignUp,
+	HeadingTwo,
 }
 
 // ----- Exports ----- //

@@ -573,7 +573,7 @@ describe('Paragraph tags rendered correctly', () => {
 			'<ul><li><strong><p>Standfirst link</p></strong></li></ul>',
 		);
 		const nodes = renderText(fragment, mockFormat);
-		const html = getHtml(nodes.flat()[0]);
+		const html = getHtml(nodes);
 		expect(html).not.toContain('<strong><p>Standfirst link</p></strong>');
 	});
 });
@@ -628,7 +628,11 @@ describe('Shows drop caps', () => {
 
 	test('Shows drop cap for eligible paragraphs including Unicode Latin-1 characters', () => {
 		const unicodeLatin = `Česká ${paragraph}`;
-		const showDropCap = shouldShowDropCap(unicodeLatin, format, !isEditions);
+		const showDropCap = shouldShowDropCap(
+			unicodeLatin,
+			format,
+			!isEditions,
+		);
 		expect(showDropCap).toBe(true);
 	});
 
@@ -657,17 +661,29 @@ describe('Shows drop caps', () => {
 	test('Does not show drop cap if the paragraph is shorter than 200 characters', () => {
 		const shortParagraph =
 			'The pen might not be mightier than the sword, but maybe the printing press was heavier than the siege weapon. Just a few words can change everything.';
-		const showDropCap = shouldShowDropCap(shortParagraph, format, !isEditions);
+		const showDropCap = shouldShowDropCap(
+			shortParagraph,
+			format,
+			!isEditions,
+		);
 		expect(showDropCap).toBe(false);
 	});
 
 	test('Does not show drop cap if the article is not an allowed design (e.g. standard design)', () => {
-		const showDropCap = shouldShowDropCap(paragraph, mockFormat, !isEditions);
+		const showDropCap = shouldShowDropCap(
+			paragraph,
+			mockFormat,
+			!isEditions,
+		);
 		expect(showDropCap).toBe(false);
 	});
 
 	test('Does not show drop cap if the article is an Editions article', () => {
-		const showDropCap = shouldShowDropCap(paragraph, mockFormat, isEditions);
+		const showDropCap = shouldShowDropCap(
+			paragraph,
+			mockFormat,
+			isEditions,
+		);
 		expect(showDropCap).toBe(false);
 	});
 });

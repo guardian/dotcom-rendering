@@ -330,14 +330,6 @@ const textElement =
 					},
 					children,
 				);
-			case 'H2':
-				return text.includes('* * *')
-					? h(HorizontalRule, null, null)
-					: styledH(
-							'h2',
-							{ css: HeadingTwoStyles(format), key },
-							children,
-					  );
 			case 'BLOCKQUOTE':
 				return isEditions
 					? h('blockquote', { key }, children)
