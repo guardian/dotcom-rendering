@@ -91,7 +91,7 @@ export const useParticipations = (
 	currentTest: CurrentSignInGateABTest,
 ): Promise<boolean> => {
 	const now = Date.now(); // UTC
-	const { id, name, variant } = currentTest;
+	const { id, variant } = currentTest;
 
 	// BEFORE cutoff date all users will be bucketed and potentially shown the gate if they satisfy all subsequent conditions
 	if (now < cutOff) {
@@ -105,7 +105,7 @@ export const useParticipations = (
 	// AFTER cutoff date, browsers without local storage test paticipatieon
 	const participations = getParticipationsFromLocalStorage();
 	// if the test particpation exists, show the test gate
-	return !!participations[id] // TODO rely on id and variant, not just id ??
+	return !!participations[id] && participations[id]?.variant === variant
 		? Promise.resolve(true)
 		: Promise.resolve(false);
 };
