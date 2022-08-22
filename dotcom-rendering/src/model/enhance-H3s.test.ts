@@ -30,7 +30,7 @@ describe('Enhance H3s', () => {
 		expect(enhanceH3s(input)).toEqual(expectedOutput);
 	});
 
-	it('does set a h3 if there is more than one strong tag', () => {
+	it('handles multiple strong tags where one contains an a tag inside it', () => {
 		const input: Block[] = [
 			{
 				...blockMetaData,
