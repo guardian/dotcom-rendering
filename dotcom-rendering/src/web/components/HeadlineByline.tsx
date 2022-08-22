@@ -87,7 +87,7 @@ const analysisStyles = (palette: Palette) => css`
 	color: ${palette.text.headlineByline};
 	background: ${palette.background.headlineByline};
 
-	${until.mobileMedium} {
+	${until.tablet} {
 		${headline.small({
 			fontWeight: 'light',
 		})}
