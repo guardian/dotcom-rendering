@@ -69,6 +69,12 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 					<Tag format={format}>Analysis</Tag>
 				</Margins>
 			);
+		case ArticleDesign.Explainer:
+			return (
+				<Margins format={format}>
+					<Tag format={format}>Explainer</Tag>
+				</Margins>
+			);
 		case ArticleDesign.Interview:
 			return (
 				<Margins format={format}>
