@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Explainer } from 'fixtures/generated/articles/Explainer';
 import { Analysis } from '../../../fixtures/generated/articles/Analysis';
 import { Audio } from '../../../fixtures/generated/articles/Audio';
 import { Comment } from '../../../fixtures/generated/articles/Comment';
@@ -52,6 +53,7 @@ const Fixtures: { [key: string]: CAPIArticleType } = {
 	SpecialReport,
 	NumberedList,
 	NewsletterSignup,
+	Explainer,
 };
 
 mockRESTCalls();
