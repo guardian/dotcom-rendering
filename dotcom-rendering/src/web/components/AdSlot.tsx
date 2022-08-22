@@ -312,7 +312,6 @@ export const AdSlot = ({
 			`;
 			return (
 				<>
-					<AdSlotLabelToggled />
 					<div
 						id="dfp-ad--top-above-nav"
 						className={[
@@ -326,7 +325,9 @@ export const AdSlot = ({
 						data-link-name="ad slot top-above-nav"
 						data-name="top-above-nav"
 						aria-hidden="true"
-					/>
+					>
+						<AdSlotLabelToggled />
+					</div>
 				</>
 			);
 		}
