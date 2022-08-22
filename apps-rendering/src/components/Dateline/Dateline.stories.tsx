@@ -34,7 +34,7 @@ const LiveBlogDateline: FC = () => (
 		date={some(
 			new Date(date('Publish Date', new Date('2019-12-17T03:24:00'))),
 		)}
-		edition={Edition.UK}
+		edition={Edition.US}
 	/>
 );
 
@@ -48,7 +48,7 @@ const DeadBlogDateline: FC = () => (
 		date={some(
 			new Date(date('Publish Date', new Date('2019-12-17T03:24:00'))),
 		)}
-		edition={Edition.UK}
+		edition={Edition.AU}
 	/>
 );
 

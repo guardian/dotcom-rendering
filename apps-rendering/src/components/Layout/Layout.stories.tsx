@@ -200,7 +200,7 @@ Analysis.story = { name: 'Analysis' };
 export const LiveBlog = (): ReactElement => (
 	<Live
 		item={{ ...live, display: ArticleDisplay.Standard }}
-		edition={Edition.UK}
+		edition={Edition.US}
 	/>
 );
 LiveBlog.story = { name: 'LiveBlog ' };
@@ -208,7 +208,7 @@ LiveBlog.story = { name: 'LiveBlog ' };
 export const DeadBlog = (): ReactElement => (
 	<Live
 		item={{ ...deadBlog, display: ArticleDisplay.Standard }}
-		edition={Edition.UK}
+		edition={Edition.AU}
 	/>
 );
 DeadBlog.story = { name: 'DeadBlog ' };
