@@ -23,7 +23,7 @@ describe('Enhance h2 Embeds', () => {
 					{
 						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 						elementId: 'mockId',
-						html: "<h2 id='mockId'>I should get an id.</h2>",
+						html: "<h2 id='i-should-get-an-id'>I should get an id.</h2>",
 					},
 				],
 			},
