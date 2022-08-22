@@ -8,22 +8,71 @@ const tagStyles = (palette: Palette) => css`
 	background-color: ${palette.background.designTag};
 	color: ${palette.text.designTag};
 	display: inline-block;
-	padding-left: ${space[2]}px;
+	/* padding-left: ${space[2]}px;
 	padding-right: ${space[2]}px;
-	padding-bottom: ${space[1]}px;
-	margin-top: ${space[2]}px;
-	margin-bottom: ${space[1]}px;
-	${headline.xxsmall({ fontWeight: 'bold' })}
+	padding-bottom: ${space[1]}px; */
+	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
+
+	box-shadow: 0.25rem 0 0 ${palette.background
+		.headlineTag}, -0.375rem 0 0 ${palette.background.headlineTag};
+	box-decoration-break: clone;
 `;
 
-export const DesignTag = ({ format }: { format: ArticleFormat }) => {
-	const palette = decidePalette(format);
+const topMargins = css`
+	margin-top: ${space[2]}px;
+	margin-bottom: ${space[1]}px;
+`;
 
+const leftMargin = css`
+	margin-left: 6px;
+`;
+
+const Margins = ({
+	children,
+	format,
+}: {
+	children: React.ReactNode;
+	format: ArticleFormat;
+}) => {
+	switch (format.design) {
+		case ArticleDesign.Interview:
+			return <div css={[leftMargin]}>{children}</div>;
+		default:
+			return <div css={[leftMargin, topMargins]}>{children}</div>;
+	}
+};
+
+const Tag = ({
+	children,
+	format,
+}: {
+	children: React.ReactNode;
+	format: ArticleFormat;
+}) => {
+	const palette = decidePalette(format);
+	return <div css={tagStyles(palette)}>{children}</div>;
+};
+
+export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 	switch (format.design) {
 		case ArticleDesign.Analysis:
-			return <div css={tagStyles(palette)}>Analysis</div>;
+			return (
+				<Margins format={format}>
+					<Tag format={format}>Analysis</Tag>
+				</Margins>
+			);
 		case ArticleDesign.Explainer:
-			return <div css={tagStyles(palette)}>Explainer</div>;
+			return (
+				<Margins format={format}>
+					<Tag format={format}>Explainer</Tag>
+				</Margins>
+			);
+		case ArticleDesign.Interview:
+			return (
+				<Margins format={format}>
+					<Tag format={format}>Interview</Tag>
+				</Margins>
+			);
 		default:
 			return null;
 	}
