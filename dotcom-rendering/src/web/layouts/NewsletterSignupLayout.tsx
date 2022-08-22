@@ -178,6 +178,34 @@ const getMainMediaCaptions = (
 			: undefined,
 	);
 
+const RegionalFocus = ({
+	promotedNewsletter,
+	position,
+}: {
+	promotedNewsletter: Newsletter | undefined;
+	position: 'leftContent' | 'main';
+}) => {
+	if (!promotedNewsletter?.regionalFocus) {
+		return null;
+	}
+	const text = `${promotedNewsletter.regionalFocus as string} Focused`;
+	switch (position) {
+		case 'main':
+			return (
+				<Hide from="leftCol">
+					<NewsletterDetail text={text} />
+				</Hide>
+			);
+		default:
+		case 'leftContent':
+			return (
+				<div css={topMarginStyle(space[4])}>
+					<NewsletterDetail text={text} />
+				</div>
+			);
+	}
+};
+
 export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		promotedNewsletter,
@@ -203,11 +231,6 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		.filter(Boolean)
 		.find((caption) => !!caption && isValidUrl(caption));
 	const showNewsletterPreview = Boolean(newsletterPreviewUrl);
-
-	// TODO: decide on the fallback value if not defined in newsletters API
-	const newsletterRegionFocus = promotedNewsletter?.regionalFocus
-		? `${promotedNewsletter.regionalFocus} Focused`
-		: 'UK Focused';
 
 	return (
 		<>
@@ -349,18 +372,18 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					showTopBorder={false}
 					stretchRight={true}
 					leftContent={
-						<div css={topMarginStyle(space[4])}>
-							<NewsletterDetail text={newsletterRegionFocus} />
-						</div>
+						<RegionalFocus
+							promotedNewsletter={promotedNewsletter}
+							position="leftContent"
+						/>
 					}
 				>
 					<Columns collapseUntil="desktop">
 						<Column width={[1, 1, 5 / 8, 1 / 2, 1 / 2]}>
-							<Hide from="leftCol">
-								<NewsletterDetail
-									text={newsletterRegionFocus}
-								/>
-							</Hide>
+							<RegionalFocus
+								promotedNewsletter={promotedNewsletter}
+								position="main"
+							/>
 							<ArticleHeadline
 								format={format}
 								headlineString={CAPIArticle.headline}
