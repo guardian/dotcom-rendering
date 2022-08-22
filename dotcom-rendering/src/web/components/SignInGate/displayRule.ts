@@ -1,6 +1,7 @@
 // use the dailyArticleCount from the local storage to see how many articles the user has viewed in a day
 import { onConsent } from '@guardian/consent-management-platform';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import { getLocale } from '@guardian/libs';
 import {
 	getParticipationsFromLocalStorage,
 	setParticipationsInLocalStorage,

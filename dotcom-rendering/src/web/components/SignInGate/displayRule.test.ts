@@ -9,6 +9,7 @@ import {
 	useParticipations,
 } from './displayRule';
 import { CurrentSignInGateABTest } from './types';
+import { Participations } from '@guardian/ab-core';
 
 describe('SignInGate - displayRule methods', () => {
 	describe('isNPageOrHigherPageView', () => {
@@ -124,7 +125,9 @@ describe('SignInGate - displayRule methods', () => {
 			localStorage.clear();
 		});
 		const getParticipationsFromLocalStorage = () =>
-			storage.local.get('gu.ab.participations');
+			(storage.local.get('gu.ab.participations') as
+				| Participations
+				| undefined) || {};
 
 		const currentTest: CurrentSignInGateABTest = {
 			id: 'test-id',
@@ -139,21 +142,22 @@ describe('SignInGate - displayRule methods', () => {
 			jest.spyOn(Date, 'now').mockReturnValue(before);
 
 			expect(await useParticipations(cutoff, currentTest)).toBe(true);
-			expect(
-				getParticipationsFromLocalStorage()[currentTest.id],
-			).toBeDefined();
+			expect(getParticipationsFromLocalStorage()).toBeDefined();
 		});
 		test('useParticipations returns correctly after the cutoff if not in participation', async () => {
 			jest.spyOn(Date, 'now').mockReturnValue(after);
 
 			expect(await useParticipations(cutoff, currentTest)).toBe(false);
-			expect(getParticipationsFromLocalStorage()).toBeNull();
+			expect(
+				getParticipationsFromLocalStorage()[currentTest.id],
+			).not.toBeDefined();
 		});
 		test('useParticipations returns correctly after the cutoff if in participation', async () => {
 			jest.spyOn(Date, 'now').mockReturnValue(after);
 			storage.local.set('gu.ab.participations', {
 				[currentTest.id]: { variant: `${currentTest.variant}` },
 			});
+
 			expect(await useParticipations(cutoff, currentTest)).toBe(true);
 		});
 	});
