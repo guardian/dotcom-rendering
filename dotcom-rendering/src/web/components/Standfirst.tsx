@@ -226,7 +226,7 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 		<>
 			{format.display === ArticleDisplay.Immersive &&
 				format.design === ArticleDesign.Analysis && (
-					<DesignTag format={format}>Analysis</DesignTag>
+					<DesignTag format={format} />
 				)}
 			<div
 				css={[

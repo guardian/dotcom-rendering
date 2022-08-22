@@ -608,7 +608,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
-								<DesignTag format={format}>Analysis</DesignTag>
+								<DesignTag format={format} />
 								<h1
 									css={[
 										standardFont,
