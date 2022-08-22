@@ -10,6 +10,13 @@ import { from, headline, remSpace } from '@guardian/source-foundations';
 import type { Item } from 'item';
 import { articleWidthStyles, darkModeCss } from 'styles';
 
+const boldFontStyles: SerializedStyles = css`
+	${headline.small({ fontWeight: 'bold' })}
+	${from.tablet} {
+		${headline.medium({ fontWeight: 'bold' })}
+	}
+`;
+
 export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 	const baseStyles = css`
 		${headline.small()}
@@ -39,6 +46,11 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 				${darkModeCss`
 					background-color: ${background.headlineDark(format)};
 				`}
+				${boldFontStyles}
+			`;
+		case ArticleDesign.Explainer:
+			return css`
+				${boldFontStyles}
 			`;
 		default:
 			return css`
