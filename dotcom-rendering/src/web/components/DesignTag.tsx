@@ -8,13 +8,11 @@ const tagStyles = (palette: Palette) => css`
 	background-color: ${palette.background.designTag};
 	color: ${palette.text.designTag};
 	display: inline-block;
-	/* padding-left: ${space[2]}px;
-	padding-right: ${space[2]}px;
-	padding-bottom: ${space[1]}px; */
-	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
-
-	box-shadow: 0.25rem 0 0 ${palette.background
-		.headlineTag}, -0.375rem 0 0 ${palette.background.headlineTag};
+	padding-bottom: 2px;
+	${headline.xxsmall({ fontWeight: 'bold' })}
+	line-height: 28px;
+	box-shadow: 4px 0 0 ${palette.background.headlineTag},
+		-6px 0 0 ${palette.background.headlineTag};
 	box-decoration-break: clone;
 `;
 
@@ -42,7 +40,7 @@ const Margins = ({
 				<div
 					css={css`
 						margin-left: 6px;
-						margin-top: ${space[2]}px;
+						margin-top: 5px;
 						margin-bottom: ${space[1]}px;
 					`}
 				>
