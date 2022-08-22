@@ -178,11 +178,6 @@ const textByline = (format: ArticleFormat): string => {
 };
 
 const textHeadlineByline = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.Analysis)
-		return pillarPalette[format.theme].main;
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
 			case ArticlePillar.News:
@@ -191,6 +186,9 @@ const textHeadlineByline = (format: ArticleFormat): string => {
 				return pillarPalette[format.theme].main;
 		}
 	}
+	if (format.theme === ArticleSpecial.SpecialReport)
+		return specialReport[300];
+	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	return pillarPalette[format.theme].main;
 };
 
