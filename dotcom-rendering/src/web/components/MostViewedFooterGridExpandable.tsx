@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, ThemeProvider } from '@emotion/react';
 import {
 	border,
 	from,
@@ -6,8 +6,13 @@ import {
 	neutral,
 	until,
 } from '@guardian/source-foundations';
+import {
+	Button,
+	buttonThemeBrandAlt,
+	SvgMinus,
+	SvgPlus,
+} from '@guardian/source-react-components';
 import { useState } from 'react';
-import { sharedButtonStyles } from './MostViewedFooterExpandableCol';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
 type Props = {
@@ -55,88 +60,157 @@ const columnHeading = (index: number) => {
 };
 
 const gridContainer = css`
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
+	position: relative;
+
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	grid-auto-flow: row dense;
+	gap: 0.25rem;
+
+	list-style-type: none;
+	grid-template-areas:
+		'most'
+		'deeply';
+
 	${from.tablet} {
-		flex-direction: row;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-areas: 'most deeply';
 	}
 `;
 
-const item = css`
-	${from.tablet} {
-		flex-basis: 50%;
-	}
+const gridColumn = (name: 'most' | 'deeply') => css`
+	grid-column: ${name};
 `;
 
-const order = (columnIndex: number, trailIndex: number) => {
-	// columnIndex 0, 1
-	// columnIndex 0 trailIndex 0 => 0
-	// columnIndex 1 trailIndex 0 => 1
-	// columnIndex 0 trailIndex 1 => 2
-	// columnIndex 1 trailIndex 1 => 3
-	// columnIndex 0 trailIndex 2 => 4
-	// columnIndex 1 trailIndex 2 => 5
+const item = (
+	column: 'most' | 'deeply',
+	bothExpanded: boolean,
+	mostExpanded: boolean,
+	deeplyExpanded: boolean,
+) => {
+	const styles = [
+		// By default, make sure display is none for both mobile & desktop views
+		css`
+			display: none;
+			${from.tablet} {
+				display: none;
+			}
+		`,
+	];
 
-	return css`
-		${from.tablet} {
-			order: ${trailIndex * 2 + columnIndex};
-		}
-	`;
+	if (bothExpanded) {
+		styles.push(css`
+			${from.tablet} {
+				display: list-item;
+			}
+		`);
+	}
+	if (mostExpanded && deeplyExpanded) {
+		styles.push(css`
+			display: list-item;
+		`);
+	}
+	if (
+		(mostExpanded && column === 'most') ||
+		(deeplyExpanded && column === 'deeply')
+	) {
+		styles.push(
+			css`
+				display: list-item;
+			`,
+		);
+	}
+
+	return styles;
 };
 
 export const MostViewedFooterGridExpandable = ({ data }: Props) => {
 	const [bothExpanded, setBothExpanded] = useState<boolean>(false);
+	const [mostExpanded, setMostExpanded] = useState<boolean>(false);
+	const [deeplyExpanded, setDeeplyExpanded] = useState<boolean>(false);
 
 	return (
-		<div
-			css={css`
-				position: relative;
-			`}
-		>
-			<div css={gridContainer}>
-				{data.map((column, index) => {
-					const numberShown = bothExpanded ? 10 : 5;
-					return (
-						<>
-							<div
-								css={[
-									item,
-									columnHeading(index),
-									order(index, 0),
-								]}
-							>
-								<ColumnHeading heading={column.heading} />
-							</div>
-							{column.trails
-								.slice(0, numberShown)
-								.map((trail, i) => {
-									return (
-										<div css={[item, order(index, i + 1)]}>
-											<MostViewedFooterItem
-												key={trail.url}
-												trail={trail}
-												position={i + 1}
-											/>
-										</div>
-									);
-								})}
-						</>
-					);
-				})}
-			</div>
-			<button
+		<ol css={gridContainer}>
+			{data.map((column, columnIndex) => {
+				// const numberShown = bothExpanded ? 10 : 5;
+				const columnName = columnIndex === 0 ? 'most' : 'deeply';
+				const expanded =
+					columnIndex === 0 ? mostExpanded : deeplyExpanded;
+				const setExpanded =
+					columnIndex === 0 ? setMostExpanded : setDeeplyExpanded;
+				return (
+					<>
+						<li
+							css={[
+								gridColumn(columnName),
+								columnHeading(columnIndex),
+							]}
+						>
+							<ColumnHeading heading={column.heading} />
+						</li>
+						{column.trails.map((trail, trailIndex) => {
+							return (
+								<li
+									css={[
+										gridColumn(columnName),
+										trailIndex >= 5 &&
+											item(
+												columnName,
+												bothExpanded,
+												mostExpanded,
+												deeplyExpanded,
+											),
+									]}
+								>
+									<MostViewedFooterItem
+										trail={trail}
+										position={trailIndex + 1}
+									/>
+								</li>
+							);
+						})}
+						<li css={gridColumn(columnName)}>
+							<ThemeProvider theme={buttonThemeBrandAlt}>
+								<Button
+									cssOverrides={css`
+										${from.tablet} {
+											display: none;
+										}
+									`}
+									priority="primary"
+									icon={expanded ? <SvgMinus /> : <SvgPlus />}
+									iconSide="right"
+									onClick={() => setExpanded(!expanded)}
+								>
+									{!expanded ? 'Show All' : 'Show Fewer'}
+								</Button>
+							</ThemeProvider>
+						</li>
+					</>
+				);
+			})}
+			<li
 				css={css`
-					${sharedButtonStyles};
-					${until.tablet} {
-						display: none;
-					}
+					grid-column-start: most;
+					grid-column-end: deeply;
 				`}
-				type="button"
-				onClick={() => setBothExpanded(!bothExpanded)}
 			>
-				{!bothExpanded ? 'Show All +' : 'Show Fewer -'}
-			</button>
-		</div>
+				<ThemeProvider theme={buttonThemeBrandAlt}>
+					<Button
+						cssOverrides={css`
+							${until.tablet} {
+								display: none;
+							}
+						`}
+						priority="primary"
+						icon={bothExpanded ? <SvgMinus /> : <SvgPlus />}
+						iconSide="right"
+						onClick={() => setBothExpanded(!bothExpanded)}
+					>
+						{!bothExpanded ? 'Show All' : 'Show Fewer'}
+					</Button>
+				</ThemeProvider>
+			</li>
+		</ol>
 	);
 };
