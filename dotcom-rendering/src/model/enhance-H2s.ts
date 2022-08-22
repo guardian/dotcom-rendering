@@ -13,7 +13,7 @@ const extractText = (element: SubheadingBlockElement): string => {
 export const getUnique = (slug: string, array: string[]): string => {
 	if (array.includes(slug)) {
 		const occurenceCount = array.filter(
-			(currentItem) => currentItem == slug,
+			(currentItem) => currentItem === slug,
 		).length;
 		return `${slug}-${occurenceCount}`;
 	}
