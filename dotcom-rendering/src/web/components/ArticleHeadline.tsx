@@ -670,7 +670,7 @@ export const ArticleHeadline = ({
 									css={[
 										format.theme === ArticleSpecial.Labs
 											? labsFont
-											: boldFont,
+											: standardFont,
 										topPadding,
 										css`
 											color: ${palette.text.headline};
