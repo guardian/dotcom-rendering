@@ -592,44 +592,6 @@ export const ArticleHeadline = ({
 							</WithAgeWarning>
 						</div>
 					);
-				case ArticleDesign.Analysis:
-					return (
-						<div
-							css={decideBottomPadding({
-								format,
-								hasStarRating,
-								hasAvatar,
-							})}
-						>
-							<WithAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-							>
-								<DesignTag format={format} />
-								<h1
-									css={[
-										standardFont,
-										topPadding,
-										css`
-											color: ${palette.text.headline};
-										`,
-									]}
-								>
-									{curly(headlineString)}
-								</h1>
-								{!!byline && (
-									<HeadlineByline
-										format={format}
-										byline={byline}
-										tags={tags}
-									/>
-								)}
-							</WithAgeWarning>
-						</div>
-					);
 				case ArticleDesign.Interview:
 					return (
 						// Inverted headlines have a wrapper div for positioning
@@ -774,6 +736,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
+								<DesignTag format={format} />
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
