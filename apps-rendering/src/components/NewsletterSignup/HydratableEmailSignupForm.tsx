@@ -93,7 +93,7 @@ const HydratableEmailSignupForm: FC<Props> = ({ newsletterId }) => {
 	const [isWaitingForResponse, setIsWaitingForResponse] = useState(false);
 	const [submitResult, setSubmitResult] = useState<
 		undefined | 'SUCCESS' | 'ERROR'
-	>('ERROR');
+	>(undefined);
 
 	const handleSubmit: FormEventHandler<HTMLFormElement> = async (
 		event,
