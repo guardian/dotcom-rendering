@@ -1,6 +1,7 @@
 import { incrementDailyArticleCount } from '../../lib/dailyArticleCount';
 import {
 	isIOS9,
+	isMobile,
 	isNPageOrHigherPageView,
 	isValidContentType,
 	isValidSection,
@@ -159,6 +160,45 @@ describe('SignInGate - displayRule methods', () => {
 					},
 				]),
 			).toBe(false);
+		});
+	});
+
+	describe('isMobile', () => {
+		// spy on user agent to mock return value
+		const userAgentGetter = jest.spyOn(
+			window.navigator,
+			'userAgent',
+			'get',
+		);
+
+		// FIXME sometimes this navigator property does not exist in testing env
+		!window.navigator.maxTouchPoints &&
+			Object.defineProperty(window.navigator, 'maxTouchPoints', {
+				configurable: true,
+				get: () => '',
+			});
+		const maxTouchPointGetter = jest.spyOn(
+			window.navigator,
+			'maxTouchPoints',
+			'get',
+		);
+		test('is mobile device', () => {
+			maxTouchPointGetter.mockReturnValue(1);
+			expect(isMobile()).toBe(true);
+		});
+		test('is not mobile device', () => {
+			maxTouchPointGetter.mockReturnValue(0);
+			expect(isMobile()).toBe(false);
+		});
+		test('is mobile device if touchpoint info missing', () => {
+			userAgentGetter.mockReturnValueOnce(
+				'Mozilla/5.0 (iPhone; CPU OS 10_3 like Mac OS X) AppleWebKit/601.1.17 (KHTML, like Gecko) Version/8.0 Mobile/13A175 Safari/600.1.4',
+			);
+			expect(isMobile()).toBe(true);
+		});
+		test('is not mobile device if touchpoint info missing', () => {
+			userAgentGetter.mockReturnValueOnce('');
+			expect(isMobile()).toBe(false);
 		});
 	});
 });

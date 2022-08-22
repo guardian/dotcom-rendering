@@ -30,6 +30,20 @@ export const isIOS9 = (): boolean => {
 	return appleDevice && os;
 };
 
+// determine if the browser is a mobile device if it supports touch points, with user agent fallback
+// https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent
+export const isMobile = (): boolean => {
+	if (!!navigator.maxTouchPoints) {
+		return navigator.maxTouchPoints > 0;
+	} else {
+		const ua = navigator.userAgent;
+		return (
+			/\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(ua) ||
+			/\b(Android|Windows Phone|iPad|iPod)\b/i.test(ua)
+		);
+	}
+};
+
 // hide the sign in gate on article types that are not supported
 export const isValidContentType = (contentType: string): boolean => {
 	// It's safer to definitively *include* types as we
