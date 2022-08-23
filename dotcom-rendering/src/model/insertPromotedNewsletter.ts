@@ -8,7 +8,7 @@ type PlaceInArticle = {
 };
 
 const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 3;
-// These values are an approximation - the aim is to avoid a blank space between
+// This value is an approximation - the aim is to avoid a blank space between
 // the element before the SignUp and the end of the floating element.
 // The SignUp block css uses 'clear:left' so a left floating element won't interfer
 // with its layout.
@@ -75,6 +75,11 @@ const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 3;
  *	14 TEXT
  */
 const MAXIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 4;
+
+/**
+ * The maximum distance from the center of the article that the
+ * signup can be placed.
+ */
 const MAXIMUM_DISTANCE_FROM_MIDDLE = 4;
 
 const checkIfAfterText = (index: number, elements: CAPIElement[]): boolean =>
@@ -98,7 +103,7 @@ const getDistanceAfterFloating = (
 	// it would be more logical to return Infinity here,
 	// but having an outsized finite value simplifies the sort function
 	// (Infinity - Infinity == NaN)
-	const outsizedValue = elements.length * 10;
+	const outsizedValue = elements.length + 1;
 
 	// if there are no floating elements before the position, return the outsizedValue
 	if (!lastFloatingElementBeforePlace) {
@@ -107,10 +112,7 @@ const getDistanceAfterFloating = (
 
 	// if the last floating element is more than the maximum distance before the postions, return the outsizedValue
 	const distance = index - elements.indexOf(lastFloatingElementBeforePlace);
-	if (
-		distance >
-		MAXIMUM_DISTANCE_AFTER_FLOATING_ELEMENT_TO_TAKE_ACCOUNT_OF_WHEN_SORTING
-	) {
+	if (distance > MAXIMUM_DISTANCE_AFTER_FLOATING_ELEMENT) {
 		return outsizedValue;
 	}
 
