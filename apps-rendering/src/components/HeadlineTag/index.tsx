@@ -17,7 +17,7 @@ const headlineTagStyles = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.headlineTag(format)};
 	display: inline-block;
 	box-decoration-break: clone;
-	padding: 0 6px 2px;
+	padding: 0 0.375rem 0.125rem;
 	${from.tablet} {
 		${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
 	}
