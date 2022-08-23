@@ -207,7 +207,7 @@ Nine.story = {
 };
 
 export const Boosted1 = () => {
-	const primary = [...trails].slice(0)[0];
+	const [primary] = trails;
 
 	return (
 		<Section
@@ -233,7 +233,7 @@ Boosted1.story = {
 };
 
 export const Boosted2 = () => {
-	const primary = [...trails].slice(0)[0];
+	const [primary] = trails;
 	const remaining = [...trails].slice(1, 2);
 
 	return (
@@ -260,7 +260,7 @@ Boosted2.story = {
 };
 
 export const Boosted3 = () => {
-	const primary = [...trails].slice(0)[0];
+	const [primary] = trails;
 	const remaining = [...trails].slice(1, 3);
 
 	return (
@@ -286,7 +286,7 @@ Boosted3.story = {
 };
 
 export const Boosted4 = () => {
-	const primary = [...trails].slice(0)[0];
+	const [primary] = trails;
 	const remaining = [...trails].slice(1, 4);
 
 	return (
@@ -312,7 +312,7 @@ Boosted4.story = {
 };
 
 export const Boosted5 = () => {
-	const primary = [...trails].slice(0)[0];
+	const [primary] = trails;
 	const remaining = [...trails].slice(1, 5);
 
 	return (
@@ -338,7 +338,7 @@ Boosted5.story = {
 };
 
 export const Boosted8 = () => {
-	const primary = [...trails].slice(0)[0];
+	const [primary] = trails;
 	const remaining = [...trails].slice(1, 8);
 
 	return (
@@ -365,7 +365,7 @@ Boosted8.story = {
 };
 
 export const Boosted9 = () => {
-	const primary = [...trails].slice(0)[0];
+	const [primary] = trails;
 	const remaining = [...trails].slice(1, 9);
 
 	return (
