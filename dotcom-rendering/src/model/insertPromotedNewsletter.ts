@@ -51,29 +51,30 @@ const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 3;
 //    | TextTextTextTextTextText  | +------+
 //    | TextTextTextText          |
 
-const MAXIMUM_DISTANCE_AFTER_FLOATING_ELEMENT_TO_TAKE_ACCOUNT_OF_WHEN_SORTING = 4;
-// The maximum distance is set so that the sort function does not always place
-// the SignUp as high as possible to be above a (fairly distant) floating element
-// resulting in the block being higher than is ideal.
-
-//	 0 TEXT
-//	 1 TEXT
-//	 2 TEXT
-//    [too high] <--  Without this rule the SignUp
-//	 3 RICHLINK     | tends to go too high so it's
-//	 4 TEXT         | above the floating element
-//	 5 TEXT         |
-//	 6 TEXT         |
-//	 7 TEXT         |
-//     [target] ----+ Staying here would probably be
-//	 8 TEXT           fine as there are four paragraphs
-//	 9 TEXT           between this spot and the richlink
-//	10 TEXT
-//	11 TEXT
-//	12 TEXT
-//	13 TEXT
-//	14 TEXT
-
+/**
+ * The maximum distance is set so that the sort function does not always place
+ * the SignUp as high as possible to be above a (fairly distant) floating element
+ * resulting in the block being higher than is ideal.
+ * @example
+ *	 0 TEXT
+ *	 1 TEXT
+ *	 2 TEXT
+ *    [too high] <--  Without this rule the SignUp
+ *	 3 RICHLINK     | tends to go too high so it's
+ *	 4 TEXT         | above the floating element
+ *	 5 TEXT         |
+ *	 6 TEXT         |
+ *	 7 TEXT         |
+ *     [target] ----+ Staying here would probably be
+ *	 8 TEXT           fine as there are four paragraphs
+ *	 9 TEXT           between this spot and the richlink
+ *	10 TEXT
+ *	11 TEXT
+ *	12 TEXT
+ *	13 TEXT
+ *	14 TEXT
+ */
+const MAXIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 4;
 const MAXIMUM_DISTANCE_FROM_MIDDLE = 4;
 
 const checkIfAfterText = (index: number, elements: CAPIElement[]): boolean =>
