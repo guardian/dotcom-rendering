@@ -111,6 +111,7 @@ export const Treats = ({
 			`}
 		>
 			{treats.map((treat) => {
+				if (!treat.links[0]) return null;
 				if (
 					treat.links[0].linkTo === '/crosswords' &&
 					treat.links[0].text

@@ -80,7 +80,7 @@ const Card75_Card25 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
-	if (cards.length < 2) return null;
+	if (!cards[0] || !cards[1]) return null;
 
 	return (
 		<UL direction="row">
@@ -379,6 +379,8 @@ const Card75_ColumnOfCards25 = ({
 	showAge?: boolean;
 }) => {
 	const [primary, ...remaining] = cards;
+	if (!primary) throw Error('No primary card');
+
 	return (
 		<UL direction="row">
 			<LI padSides={true} percentage="75%">
@@ -509,7 +511,7 @@ export const DynamicPackage = ({
 			secondSlice = cards.slice(0, 1);
 			break;
 		default:
-			if (cards[0].isBoosted) {
+			if (cards[0]?.isBoosted) {
 				layout = 'threeOrFourStandardsBoosted';
 				firstSlice = snaps;
 				secondSlice = cards.slice(0, 1);

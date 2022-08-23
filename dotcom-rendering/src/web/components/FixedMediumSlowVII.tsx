@@ -19,6 +19,8 @@ export const FixedMediumSlowVII = ({
 	const firstSlice = trails.slice(1, 3);
 	const secondSlice = trails.slice(3, 7);
 
+	if (!primary) throw new Error('Missing primary trail');
+
 	return (
 		<>
 			<UL direction="row" padBottom={true}>

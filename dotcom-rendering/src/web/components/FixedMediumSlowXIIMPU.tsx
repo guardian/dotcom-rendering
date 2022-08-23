@@ -29,23 +29,24 @@ const Card100 = ({
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-}) => (
-	<UL>
-		<LI padSides={true}>
-			<FrontCard
-				trail={trails[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				imagePosition="right"
-				imagePositionOnMobile="top"
-				imageSize="jumbo"
-				headlineSize="huge"
-				headlineSizeOnMobile="large"
-				trailText={trails[0].trailText}
-			/>
-		</LI>
-	</UL>
-);
+}) =>
+	trails[0] ? (
+		<UL>
+			<LI padSides={true}>
+				<FrontCard
+					trail={trails[0]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					imagePosition="right"
+					imagePositionOnMobile="top"
+					imageSize="jumbo"
+					headlineSize="huge"
+					headlineSizeOnMobile="large"
+					trailText={trails[0].trailText}
+				/>
+			</LI>
+		</UL>
+	) : null;
 
 /* ._________________._________________.
  * |#################|#################|
@@ -60,33 +61,34 @@ const Card50_Card50 = ({
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="50%" padSides={true}>
-			<FrontCard
-				trail={trails[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={trails[0].trailText}
-				imagePositionOnMobile="top"
-			/>
-		</LI>
-		<LI
-			percentage="50%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
-			<FrontCard
-				trail={trails[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={trails[1].trailText}
-				imagePositionOnMobile="top"
-			/>
-		</LI>
-	</UL>
-);
+}) =>
+	trails[0] && trails[1] ? (
+		<UL direction="row" padBottom={true}>
+			<LI percentage="50%" padSides={true}>
+				<FrontCard
+					trail={trails[0]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					trailText={trails[0].trailText}
+					imagePositionOnMobile="top"
+				/>
+			</LI>
+			<LI
+				percentage="50%"
+				padSides={true}
+				showTopMarginWhenStacked={true}
+				showDivider={true}
+			>
+				<FrontCard
+					trail={trails[1]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					trailText={trails[1].trailText}
+					imagePositionOnMobile="top"
+				/>
+			</LI>
+		</UL>
+	) : null;
 
 /* .___________.___________.___________.
  * |###########|###########|###########|
@@ -101,47 +103,48 @@ const Card33_Card33_Card33 = ({
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="33.333%" padSides={true}>
-			<FrontCard
-				trail={trails[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={trails[0].trailText}
-				imagePositionOnMobile="top"
-			/>
-		</LI>
-		<LI
-			percentage="33.333%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
-			<FrontCard
-				trail={trails[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={trails[1].trailText}
-				imagePositionOnMobile="left"
-			/>
-		</LI>
-		<LI
-			percentage="33.333%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
-			<FrontCard
-				trail={trails[2]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={trails[2].trailText}
-				imagePositionOnMobile="left"
-			/>
-		</LI>
-	</UL>
-);
+}) =>
+	trails[0] && trails[1] && trails[2] ? (
+		<UL direction="row" padBottom={true}>
+			<LI percentage="33.333%" padSides={true}>
+				<FrontCard
+					trail={trails[0]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					trailText={trails[0].trailText}
+					imagePositionOnMobile="top"
+				/>
+			</LI>
+			<LI
+				percentage="33.333%"
+				padSides={true}
+				showTopMarginWhenStacked={true}
+				showDivider={true}
+			>
+				<FrontCard
+					trail={trails[1]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					trailText={trails[1].trailText}
+					imagePositionOnMobile="left"
+				/>
+			</LI>
+			<LI
+				percentage="33.333%"
+				padSides={true}
+				showTopMarginWhenStacked={true}
+				showDivider={true}
+			>
+				<FrontCard
+					trail={trails[2]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					trailText={trails[2].trailText}
+					imagePositionOnMobile="left"
+				/>
+			</LI>
+		</UL>
+	) : null;
 
 /* ._______________________.___________.
  * |       ################|           |
@@ -158,26 +161,27 @@ const Card66_Ad33 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="66.666%" padSides={true}>
-			<FrontCard
-				trail={trails[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={trails[0].trailText}
-				imagePosition="right"
-				imageSize="large"
-				imagePositionOnMobile="top"
-			/>
-		</LI>
-		<LI percentage="33.333%" showDivider={true}>
-			<Hide until="tablet">
-				<AdSlot position="inline" index={index} />
-			</Hide>
-		</LI>
-	</UL>
-);
+}) =>
+	trails[0] ? (
+		<UL direction="row" padBottom={true}>
+			<LI percentage="66.666%" padSides={true}>
+				<FrontCard
+					trail={trails[0]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					trailText={trails[0].trailText}
+					imagePosition="right"
+					imageSize="large"
+					imagePositionOnMobile="top"
+				/>
+			</LI>
+			<LI percentage="33.333%" showDivider={true}>
+				<Hide until="tablet">
+					<AdSlot position="inline" index={index} />
+				</Hide>
+			</LI>
+		</UL>
+	) : null;
 
 /* .___________.___________.___________.
  * |###########|###########|           |
@@ -194,56 +198,57 @@ const Card33_Card33_Ad33 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="33.333%" padSides={true}>
-			<FrontCard
-				trail={trails[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={
-					trails[0]?.supportingContent &&
-					trails[0].supportingContent.length > 0
-						? undefined
-						: trails[0].trailText
-				}
-				supportingContent={
-					trails[0].trailText
-						? undefined
-						: trails[0].supportingContent
-				}
-			/>
-		</LI>
-		<LI
-			percentage="33.333%"
-			padSides={true}
-			showDivider={true}
-			showTopMarginWhenStacked={true}
-		>
-			<FrontCard
-				trail={trails[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={
-					trails[1]?.supportingContent &&
-					trails[1].supportingContent.length > 0
-						? undefined
-						: trails[1].trailText
-				}
-				supportingContent={
-					trails[1].trailText
-						? undefined
-						: trails[1].supportingContent
-				}
-			/>
-		</LI>
-		<LI percentage="33.333%" showDivider={true}>
-			<Hide until="tablet">
-				<AdSlot position="inline" index={index} />
-			</Hide>
-		</LI>
-	</UL>
-);
+}) =>
+	trails[0] && trails[1] ? (
+		<UL direction="row" padBottom={true}>
+			<LI percentage="33.333%" padSides={true}>
+				<FrontCard
+					trail={trails[0]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					trailText={
+						trails[0]?.supportingContent &&
+						trails[0].supportingContent.length > 0
+							? undefined
+							: trails[0].trailText
+					}
+					supportingContent={
+						trails[0].trailText
+							? undefined
+							: trails[0].supportingContent
+					}
+				/>
+			</LI>
+			<LI
+				percentage="33.333%"
+				padSides={true}
+				showDivider={true}
+				showTopMarginWhenStacked={true}
+			>
+				<FrontCard
+					trail={trails[1]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					trailText={
+						trails[1]?.supportingContent &&
+						trails[1].supportingContent.length > 0
+							? undefined
+							: trails[1].trailText
+					}
+					supportingContent={
+						trails[1].trailText
+							? undefined
+							: trails[1].supportingContent
+					}
+				/>
+			</LI>
+			<LI percentage="33.333%" showDivider={true}>
+				<Hide until="tablet">
+					<AdSlot position="inline" index={index} />
+				</Hide>
+			</LI>
+		</UL>
+	) : null;
 
 /**
  * If the count of cards is odd there is just a single card on

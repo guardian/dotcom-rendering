@@ -503,7 +503,7 @@ export const DynamicFast = ({
 						<UL direction="row" wrapCards={true}>
 							{/* If the first big is boosted & we have a second big,
 							it should be at the start of the standards but have an image  */}
-							{firstBigBoostedPlusBig ? (
+							{firstBigBoostedPlusBig && bigs[1] ? (
 								<FirstBigBoostedPlusBig
 									big={bigs[1]}
 									standards={[

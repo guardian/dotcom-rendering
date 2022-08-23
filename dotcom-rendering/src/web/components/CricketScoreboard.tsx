@@ -105,26 +105,27 @@ export const CricketInnings = ({
 	);
 
 	// There can be up to 2 innings per team in a cricket match
-	switch (teamInnings.length) {
-		case 1:
-			return (
-				<p>
-					{cricketScore({ innings: teamInnings[0] })} (
-					{teamInnings[0].overs} overs)
-				</p>
-			);
-		case 2:
-			return (
-				<p>
-					{cricketScore({ innings: teamInnings[0], short: true })}
-					{' & '}
-					{cricketScore({ innings: teamInnings[1] })} (
-					{teamInnings[1].overs} overs)
-				</p>
-			);
-		default:
-			return <p>Yet to bat</p>;
+	if (teamInnings[0] && teamInnings[1]) {
+		return (
+			<p>
+				{cricketScore({ innings: teamInnings[0], short: true })}
+				{' & '}
+				{cricketScore({ innings: teamInnings[1] })} (
+				{teamInnings[1].overs} overs)
+			</p>
+		);
 	}
+
+	if (teamInnings[0]) {
+		return (
+			<p>
+				{cricketScore({ innings: teamInnings[0] })} (
+				{teamInnings[0].overs} overs)
+			</p>
+		);
+	}
+
+	return <p>Yet to bat</p>;
 };
 
 export const CricketScoreboard = ({ scorecardUrl, match, format }: Props) => {

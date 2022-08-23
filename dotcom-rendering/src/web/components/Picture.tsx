@@ -198,7 +198,7 @@ const generateSignedUrl = ({
 
 	// Construct and sign the url
 	const url = new URL(master);
-	const service = url.hostname.split('.')[0];
+	const [service = 'unknown'] = url.hostname.split('.');
 	const params = new URLSearchParams({
 		width: imageWidth.toString(),
 		// Why 45 and 85?
@@ -258,6 +258,8 @@ export const Picture = ({
 				}),
 			};
 		});
+
+	if (!sources[0]) return null;
 
 	return (
 		<picture css={block}>

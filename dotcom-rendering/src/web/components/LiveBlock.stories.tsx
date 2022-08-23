@@ -1,9 +1,12 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints, from } from '@guardian/source-foundations';
-import { liveBlock } from '../../../fixtures/manual/liveBlock';
 import { images } from '../../../fixtures/generated/images';
+import { liveBlock } from '../../../fixtures/manual/liveBlock';
 import { LiveBlock } from './LiveBlock';
+
+const [firstImage] = images;
+if (!firstImage) throw new Error('No first image');
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -256,7 +259,7 @@ export const FirstImage = () => {
 		...liveBlock,
 		elements: [
 			{
-				...images[0],
+				...firstImage,
 				role: 'inline',
 			},
 		],
@@ -292,32 +295,32 @@ export const ImageRoles = () => {
 		...liveBlock,
 		elements: [
 			{
-				...images[0],
+				...firstImage,
 				role: 'inline',
 				title: 'Inline',
 			},
 			{
-				...images[0],
+				...firstImage,
 				role: 'thumbnail',
 				title: 'Thumbnail',
 			},
 			{
-				...images[0],
+				...firstImage,
 				role: 'immersive',
 				title: 'Immersive',
 			},
 			{
-				...images[0],
+				...firstImage,
 				role: 'supporting',
 				title: 'Supporting',
 			},
 			{
-				...images[0],
+				...firstImage,
 				role: 'showcase',
 				title: 'Showcase',
 			},
 			{
-				...images[0],
+				...firstImage,
 				role: 'halfWidth',
 				title: 'Half width',
 			},
@@ -359,7 +362,7 @@ export const Thumbnail = () => {
 				html: '<p>eos his vis cetero dicta usu eu duo officiis ei eleifend sed repudiandae consequat vitae splendide pretium est partiendo semper ne uonsetetur ipsum aliquam per leo odio inimicus eam his tincidunt et ne semper amet et voluptua mauris qui eum nec inimicus sed aenean eu mea odio vitae at.</p>',
 			},
 			{
-				...images[0],
+				...firstImage,
 				role: 'thumbnail',
 			},
 			{
@@ -406,7 +409,7 @@ export const ImageAndTitle = () => {
 		title: 'Afternoon summary',
 		elements: [
 			{
-				...images[0],
+				...firstImage,
 				role: 'inline',
 			},
 		],

@@ -22,7 +22,7 @@ export default {
 	},
 };
 
-const bigs = trails.slice(0, 3);
+const [bigOne, bigTwo, bigThree] = trails;
 const standards = trails.slice(3);
 
 export const NoBigs = () => (
@@ -49,7 +49,7 @@ export const OneBig = () => (
 				snap: [],
 				huge: [],
 				veryBig: [],
-				big: [bigs[0]],
+				big: [bigOne],
 				standard: standards,
 			}}
 			showAge={true}
@@ -66,7 +66,7 @@ export const TwoBigs = () => (
 				snap: [],
 				huge: [],
 				veryBig: [],
-				big: [bigs[0], bigs[1]],
+				big: [bigOne, bigTwo],
 				standard: standards,
 			}}
 			showAge={true}
@@ -85,10 +85,10 @@ export const FirstBigBoosted = () => (
 				veryBig: [],
 				big: [
 					{
-						...bigs[0],
+						...bigOne,
 						isBoosted: true,
 					},
-					bigs[1],
+					bigTwo,
 				],
 				standard: standards,
 			}}
@@ -106,7 +106,7 @@ export const ThreeBigs = () => (
 				snap: [],
 				huge: [],
 				veryBig: [],
-				big: [bigs[0], bigs[1], bigs[2]],
+				big: [bigOne, bigTwo, bigThree],
 				standard: standards,
 			}}
 			showAge={true}

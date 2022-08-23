@@ -29,57 +29,58 @@ const Card33_ColumnOfThree33_Ad33 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
-}) => (
-	<UL direction="row">
-		<LI percentage="33.333%" padSides={true}>
-			<FrontCard
-				trail={cards[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-		</LI>
-		<LI
-			percentage="33.333%"
-			showDivider={true}
-			showTopMarginWhenStacked={true}
-		>
-			<UL direction="column">
-				<LI padSides={true} padBottom={true}>
-					<FrontCard
-						trail={cards[1]}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						imageUrl={undefined}
-						headlineSize="small"
-					/>
-				</LI>
-				<LI padSides={true} padBottom={true}>
-					<FrontCard
-						trail={cards[2]}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						imageUrl={undefined}
-						headlineSize="small"
-					/>
-				</LI>
-				<LI padSides={true}>
-					<FrontCard
-						trail={cards[3]}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						imageUrl={undefined}
-						headlineSize="small"
-					/>
-				</LI>
-			</UL>
-		</LI>
-		<LI percentage="33.333%">
-			<Hide until="tablet">
-				<AdSlot position="inline" index={index} />
-			</Hide>
-		</LI>
-	</UL>
-);
+}) =>
+	cards[0] && cards[1] && cards[2] && cards[3] ? (
+		<UL direction="row">
+			<LI percentage="33.333%" padSides={true}>
+				<FrontCard
+					trail={cards[0]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			</LI>
+			<LI
+				percentage="33.333%"
+				showDivider={true}
+				showTopMarginWhenStacked={true}
+			>
+				<UL direction="column">
+					<LI padSides={true} padBottom={true}>
+						<FrontCard
+							trail={cards[1]}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							imageUrl={undefined}
+							headlineSize="small"
+						/>
+					</LI>
+					<LI padSides={true} padBottom={true}>
+						<FrontCard
+							trail={cards[2]}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							imageUrl={undefined}
+							headlineSize="small"
+						/>
+					</LI>
+					<LI padSides={true}>
+						<FrontCard
+							trail={cards[3]}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							imageUrl={undefined}
+							headlineSize="small"
+						/>
+					</LI>
+				</UL>
+			</LI>
+			<LI percentage="33.333%">
+				<Hide until="tablet">
+					<AdSlot position="inline" index={index} />
+				</Hide>
+			</LI>
+		</UL>
+	) : null;
 
 /* ._________________._________________.
  * |_###_____________|                 |
@@ -96,46 +97,47 @@ const ColumnOfThree50_Ad50 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
-}) => (
-	<UL direction="row">
-		<LI percentage="50%">
-			<UL direction="column">
-				<LI padSides={true} padBottom={true}>
-					<FrontCard
-						trail={cards[0]}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						imagePosition="left"
-						headlineSize="small"
-					/>
-				</LI>
-				<LI padSides={true} padBottom={true}>
-					<FrontCard
-						trail={cards[1]}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						imagePosition="left"
-						headlineSize="small"
-					/>
-				</LI>
-				<LI padSides={true}>
-					<FrontCard
-						trail={cards[2]}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						imagePosition="left"
-						headlineSize="small"
-					/>
-				</LI>
-			</UL>
-		</LI>
-		<LI percentage="50%">
-			<Hide until="tablet">
-				<AdSlot position="inline" index={index} />
-			</Hide>
-		</LI>
-	</UL>
-);
+}) =>
+	cards[0] && cards[1] && cards[2] ? (
+		<UL direction="row">
+			<LI percentage="50%">
+				<UL direction="column">
+					<LI padSides={true} padBottom={true}>
+						<FrontCard
+							trail={cards[0]}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							imagePosition="left"
+							headlineSize="small"
+						/>
+					</LI>
+					<LI padSides={true} padBottom={true}>
+						<FrontCard
+							trail={cards[1]}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							imagePosition="left"
+							headlineSize="small"
+						/>
+					</LI>
+					<LI padSides={true}>
+						<FrontCard
+							trail={cards[2]}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							imagePosition="left"
+							headlineSize="small"
+						/>
+					</LI>
+				</UL>
+			</LI>
+			<LI percentage="50%">
+				<Hide until="tablet">
+					<AdSlot position="inline" index={index} />
+				</Hide>
+			</LI>
+		</UL>
+	) : null;
 
 /* ._________________________._________.
  * |         ################|#########|
@@ -150,33 +152,34 @@ const Card75_Card25 = ({
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="75%" padSides={true}>
-			<FrontCard
-				trail={cards[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={cards[0].trailText}
-				imagePosition="right"
-				imageSize="large"
-				imagePositionOnMobile="top"
-			/>
-		</LI>
-		<LI
-			percentage="25%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
-			<FrontCard
-				trail={cards[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-		</LI>
-	</UL>
-);
+}) =>
+	cards[0] && cards[1] ? (
+		<UL direction="row" padBottom={true}>
+			<LI percentage="75%" padSides={true}>
+				<FrontCard
+					trail={cards[0]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					trailText={cards[0].trailText}
+					imagePosition="right"
+					imageSize="large"
+					imagePositionOnMobile="top"
+				/>
+			</LI>
+			<LI
+				percentage="25%"
+				padSides={true}
+				showTopMarginWhenStacked={true}
+				showDivider={true}
+			>
+				<FrontCard
+					trail={cards[1]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			</LI>
+		</UL>
+	) : null;
 
 /* ._________________._________________.
  * |#################|#################|
@@ -191,33 +194,34 @@ const Card50_Card50 = ({
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="50%" padSides={true}>
-			<FrontCard
-				trail={cards[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={cards[0].trailText}
-				imagePositionOnMobile="top"
-			/>
-		</LI>
-		<LI
-			percentage="50%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
-			<FrontCard
-				trail={cards[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={cards[1].trailText}
-				imagePositionOnMobile="top"
-			/>
-		</LI>
-	</UL>
-);
+}) =>
+	cards[0] && cards[1] ? (
+		<UL direction="row" padBottom={true}>
+			<LI percentage="50%" padSides={true}>
+				<FrontCard
+					trail={cards[0]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					trailText={cards[0].trailText}
+					imagePositionOnMobile="top"
+				/>
+			</LI>
+			<LI
+				percentage="50%"
+				padSides={true}
+				showTopMarginWhenStacked={true}
+				showDivider={true}
+			>
+				<FrontCard
+					trail={cards[1]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					trailText={cards[1].trailText}
+					imagePositionOnMobile="top"
+				/>
+			</LI>
+		</UL>
+	) : null;
 
 /* ._________________.________.________.
  * |#################|########|########|
@@ -232,63 +236,68 @@ const Card50_Card25_Card25 = ({
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="50%" padSides={true}>
-			<FrontCard
-				trail={cards[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				headlineSize="large"
-				imagePosition="top"
-				imagePositionOnMobile="top"
-				supportingContent={cards[0].supportingContent}
-			/>
-		</LI>
-		<LI
-			percentage="25%"
-			padSides={true}
-			showDivider={true}
-			showTopMarginWhenStacked={true}
-		>
-			<FrontCard
-				trail={cards[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={
-					cards[1]?.supportingContent &&
-					cards[1].supportingContent.length > 0
-						? undefined
-						: cards[1].trailText
-				}
-				supportingContent={
-					cards[1].trailText ? undefined : cards[1].supportingContent
-				}
-			/>
-		</LI>
-		<LI
-			percentage="25%"
-			padSides={true}
-			showDivider={true}
-			showTopMarginWhenStacked={true}
-		>
-			<FrontCard
-				trail={cards[2]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={
-					cards[2]?.supportingContent &&
-					cards[2].supportingContent.length > 0
-						? undefined
-						: cards[2].trailText
-				}
-				supportingContent={
-					cards[2].trailText ? undefined : cards[2].supportingContent
-				}
-			/>
-		</LI>
-	</UL>
-);
+}) =>
+	cards[0] && cards[1] && cards[2] ? (
+		<UL direction="row" padBottom={true}>
+			<LI percentage="50%" padSides={true}>
+				<FrontCard
+					trail={cards[0]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					headlineSize="large"
+					imagePosition="top"
+					imagePositionOnMobile="top"
+					supportingContent={cards[0].supportingContent}
+				/>
+			</LI>
+			<LI
+				percentage="25%"
+				padSides={true}
+				showDivider={true}
+				showTopMarginWhenStacked={true}
+			>
+				<FrontCard
+					trail={cards[1]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					trailText={
+						cards[1]?.supportingContent &&
+						cards[1].supportingContent.length > 0
+							? undefined
+							: cards[1].trailText
+					}
+					supportingContent={
+						cards[1].trailText
+							? undefined
+							: cards[1].supportingContent
+					}
+				/>
+			</LI>
+			<LI
+				percentage="25%"
+				padSides={true}
+				showDivider={true}
+				showTopMarginWhenStacked={true}
+			>
+				<FrontCard
+					trail={cards[2]}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					trailText={
+						cards[2]?.supportingContent &&
+						cards[2].supportingContent.length > 0
+							? undefined
+							: cards[2].trailText
+					}
+					supportingContent={
+						cards[2].trailText
+							? undefined
+							: cards[2].supportingContent
+					}
+				/>
+			</LI>
+		</UL>
+	) : null;
 
 /**
  * DynamicSlowMPU
@@ -331,7 +340,7 @@ export const DynamicSlowMPU = ({
 		case 2: {
 			bigCards = groupedTrails.big;
 			standardCards = groupedTrails.standard;
-			if (groupedTrails.big[0].isBoosted) {
+			if (groupedTrails.big[0]?.isBoosted) {
 				layout = 'twoBigsBoosted';
 			} else {
 				layout = 'twoBigs';

@@ -119,10 +119,11 @@ function getKey(
 			'filterKeyEvents',
 			filterKeyEvents ? 'true' : 'false',
 		);
-		if (selectedTopics && selectedTopics.length > 0)
+		const [selectedTopic] = selectedTopics ?? [];
+		if (selectedTopic)
 			url.searchParams.set(
 				'topics',
-				`${selectedTopics[0].type}:${selectedTopics[0].value}`,
+				`${selectedTopic.type}:${selectedTopic.value}`,
 			);
 		return url.href;
 	} catch {
@@ -229,9 +230,9 @@ export const Liveness = ({
 		if (!topOfBlog) return () => {};
 
 		const observer = new window.IntersectionObserver(([entry]) => {
-			setTopOfBlogVisible(entry.isIntersecting);
+			setTopOfBlogVisible(entry?.isIntersecting);
 
-			if (entry.isIntersecting && onFirstPage) {
+			if (entry?.isIntersecting && onFirstPage) {
 				// If on first page, reveal blocks
 				revealPendingBlocks();
 				setNumHiddenBlocks(0);

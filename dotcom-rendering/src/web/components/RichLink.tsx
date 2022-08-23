@@ -191,7 +191,8 @@ const readMoreText: (contentType: string) => string = (contentType) => {
 
 const getMainContributor: (tags: TagType[]) => string = (tags) => {
 	const contributorTags = tags.filter((t) => t.type === 'Contributor');
-	return contributorTags.length > 0 ? contributorTags[0].title : '';
+	const [mainContributor] = contributorTags;
+	return mainContributor?.title ?? '';
 };
 
 const imageStyles = css`

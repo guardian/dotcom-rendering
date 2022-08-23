@@ -93,180 +93,183 @@ export const MultiImageBlockComponent = ({
 	format,
 	caption,
 }: Props) => {
-	const imageCount = images.length;
-
-	switch (imageCount) {
-		case 1:
-			return (
-				<div
-					css={css`
-						margin-top: 12px;
-						margin-bottom: 12px;
-						img {
-							object-fit: cover;
-							width: 100%;
-						}
-					`}
-				>
-					<ImageComponent
+	if (images[3] && images[2] && images[1] && images[0]) {
+		return (
+			<div
+				css={css`
+					margin-top: 12px;
+					margin-bottom: 12px;
+					img {
+						object-fit: cover;
+						width: 100%;
+					}
+				`}
+			>
+				<GridOfFour>
+					<GridItem area="first">
+						<ImageComponent
+							element={images[0]}
+							format={format}
+							hideCaption={true}
+							role={images[0].role}
+						/>
+					</GridItem>
+					<GridItem area="second">
+						<ImageComponent
+							element={images[1]}
+							format={format}
+							hideCaption={true}
+							role={images[1].role}
+						/>
+					</GridItem>
+					<GridItem area="third">
+						<ImageComponent
+							element={images[2]}
+							format={format}
+							hideCaption={true}
+							role={images[2].role}
+						/>
+					</GridItem>
+					<GridItem area="forth">
+						<ImageComponent
+							element={images[3]}
+							format={format}
+							hideCaption={true}
+							role={images[3].role}
+						/>
+					</GridItem>
+				</GridOfFour>
+				{!!caption && (
+					<Caption
+						captionText={caption}
 						format={format}
-						element={images[0]}
-						hideCaption={true}
-						role={images[0].role}
+						shouldLimitWidth={false}
 					/>
-					{!!caption && (
-						<Caption
-							format={format}
-							captionText={caption}
-							shouldLimitWidth={false}
-						/>
-					)}
-				</div>
-			);
-		case 2:
-			return (
-				<div
-					css={css`
-						margin-top: 12px;
-						margin-bottom: 12px;
-
-						img {
-							object-fit: cover;
-							width: 100%;
-						}
-					`}
-				>
-					<SideBySideGrid>
-						<GridItem area="first">
-							<ImageComponent
-								element={images[0]}
-								format={format}
-								hideCaption={true}
-								role={images[0].role}
-							/>
-						</GridItem>
-						<GridItem area="second">
-							<ImageComponent
-								element={images[1]}
-								format={format}
-								hideCaption={true}
-								role={images[1].role}
-							/>
-						</GridItem>
-					</SideBySideGrid>
-					{!!caption && (
-						<Caption
-							captionText={caption}
-							format={format}
-							shouldLimitWidth={false}
-						/>
-					)}
-				</div>
-			);
-		case 3:
-			return (
-				<div
-					css={css`
-						margin-top: 12px;
-						margin-bottom: 12px;
-
-						img {
-							object-fit: cover;
-							width: 100%;
-						}
-					`}
-				>
-					<OneAboveTwoGrid>
-						<GridItem area="first">
-							<ImageComponent
-								element={images[0]}
-								format={format}
-								hideCaption={true}
-								role={images[0].role}
-							/>
-						</GridItem>
-						<GridItem area="second">
-							<ImageComponent
-								element={images[1]}
-								format={format}
-								hideCaption={true}
-								role={images[1].role}
-							/>
-						</GridItem>
-						<GridItem area="third">
-							<ImageComponent
-								element={images[2]}
-								format={format}
-								hideCaption={true}
-								role={images[2].role}
-							/>
-						</GridItem>
-					</OneAboveTwoGrid>
-					{!!caption && (
-						<Caption
-							captionText={caption}
-							format={format}
-							shouldLimitWidth={false}
-						/>
-					)}
-				</div>
-			);
-		case 4:
-			return (
-				<div
-					css={css`
-						margin-top: 12px;
-						margin-bottom: 12px;
-						img {
-							object-fit: cover;
-							width: 100%;
-						}
-					`}
-				>
-					<GridOfFour>
-						<GridItem area="first">
-							<ImageComponent
-								element={images[0]}
-								format={format}
-								hideCaption={true}
-								role={images[0].role}
-							/>
-						</GridItem>
-						<GridItem area="second">
-							<ImageComponent
-								element={images[1]}
-								format={format}
-								hideCaption={true}
-								role={images[1].role}
-							/>
-						</GridItem>
-						<GridItem area="third">
-							<ImageComponent
-								element={images[2]}
-								format={format}
-								hideCaption={true}
-								role={images[2].role}
-							/>
-						</GridItem>
-						<GridItem area="forth">
-							<ImageComponent
-								element={images[3]}
-								format={format}
-								hideCaption={true}
-								role={images[3].role}
-							/>
-						</GridItem>
-					</GridOfFour>
-					{!!caption && (
-						<Caption
-							captionText={caption}
-							format={format}
-							shouldLimitWidth={false}
-						/>
-					)}
-				</div>
-			);
-		default:
-			return null;
+				)}
+			</div>
+		);
 	}
+
+	if (images[2] && images[1] && images[0]) {
+		return (
+			<div
+				css={css`
+					margin-top: 12px;
+					margin-bottom: 12px;
+
+					img {
+						object-fit: cover;
+						width: 100%;
+					}
+				`}
+			>
+				<OneAboveTwoGrid>
+					<GridItem area="first">
+						<ImageComponent
+							element={images[0]}
+							format={format}
+							hideCaption={true}
+							role={images[0].role}
+						/>
+					</GridItem>
+					<GridItem area="second">
+						<ImageComponent
+							element={images[1]}
+							format={format}
+							hideCaption={true}
+							role={images[1].role}
+						/>
+					</GridItem>
+					<GridItem area="third">
+						<ImageComponent
+							element={images[2]}
+							format={format}
+							hideCaption={true}
+							role={images[2].role}
+						/>
+					</GridItem>
+				</OneAboveTwoGrid>
+				{!!caption && (
+					<Caption
+						captionText={caption}
+						format={format}
+						shouldLimitWidth={false}
+					/>
+				)}
+			</div>
+		);
+	}
+
+	if (images[1] && images[0]) {
+		return (
+			<div
+				css={css`
+					margin-top: 12px;
+					margin-bottom: 12px;
+
+					img {
+						object-fit: cover;
+						width: 100%;
+					}
+				`}
+			>
+				<SideBySideGrid>
+					<GridItem area="first">
+						<ImageComponent
+							element={images[0]}
+							format={format}
+							hideCaption={true}
+							role={images[0].role}
+						/>
+					</GridItem>
+					<GridItem area="second">
+						<ImageComponent
+							element={images[1]}
+							format={format}
+							hideCaption={true}
+							role={images[1].role}
+						/>
+					</GridItem>
+				</SideBySideGrid>
+				{!!caption && (
+					<Caption
+						captionText={caption}
+						format={format}
+						shouldLimitWidth={false}
+					/>
+				)}
+			</div>
+		);
+	}
+
+	if (images[0]) {
+		return (
+			<div
+				css={css`
+					margin-top: 12px;
+					margin-bottom: 12px;
+					img {
+						object-fit: cover;
+						width: 100%;
+					}
+				`}
+			>
+				<ImageComponent
+					format={format}
+					element={images[0]}
+					hideCaption={true}
+					role={images[0].role}
+				/>
+				{!!caption && (
+					<Caption
+						format={format}
+						captionText={caption}
+						shouldLimitWidth={false}
+					/>
+				)}
+			</div>
+		);
+	}
+
+	return null;
 };

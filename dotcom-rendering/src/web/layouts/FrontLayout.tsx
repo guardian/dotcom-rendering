@@ -169,7 +169,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								ophanComponentName={ophanName}
 								containerName={collection.collectionType}
 							>
-								<Snap snapData={trails[0].snapData} />
+								<Snap snapData={trails[0]?.snapData} />
 							</Section>
 						);
 					}

@@ -55,10 +55,9 @@ describe('Dropdown', () => {
 			/>,
 		);
 
-		expect(getByText(links[0].title)).toBeInTheDocument();
-		expect(getByText(links[1].title)).toBeInTheDocument();
-		expect(getByText(links[2].title)).toBeInTheDocument();
-		expect(getByText(links[3].title)).toBeInTheDocument();
+		for (const link of links) {
+			expect(getByText(link.title)).toBeInTheDocument();
+		}
 	});
 
 	it('should render the correct number of link items', () => {
