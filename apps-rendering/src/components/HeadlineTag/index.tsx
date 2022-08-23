@@ -9,7 +9,7 @@ import { articleWidthStyles } from '../../styles';
 
 const headlineTagWrapper = css`
 	${articleWidthStyles}
-	`;
+`;
 
 const headlineTagStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${background.headlineTag(format)};
