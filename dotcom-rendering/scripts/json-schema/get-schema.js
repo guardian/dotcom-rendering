@@ -1,5 +1,5 @@
-const TJS = require('typescript-json-schema');
 const path = require('path');
+const TJS = require('typescript-json-schema');
 
 const root = path.resolve(__dirname, '..', '..');
 
@@ -7,6 +7,7 @@ const program = TJS.getProgramFromFiles(
 	[
 		path.resolve(`${root}/src/lib/content.d.ts`),
 		path.resolve(`${root}/index.d.ts`),
+		path.resolve(`${root}/src/types/frontend.ts`),
 	],
 	{
 		skipLibCheck: true,

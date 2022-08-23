@@ -7,16 +7,16 @@ import {
 	neutral,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import type { NavType } from '../../model/extract-nav';
 import type { DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
-import { ContainerLayout } from '../components/ContainerLayout';
-import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
+import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { DecideContainer } from '../lib/DecideContainer';
@@ -48,26 +48,31 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	// const contributionsServiceUrl = getContributionsServiceUrl(front);
 
+	/**
+	 * This property currently only applies to the header and merchandising slots
+	 */
+	const renderAds = !front.isAdFreeUser;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
 				<>
-					<Stuck>
-						<ElementContainer
-							showTopBorder={false}
-							showSideBorders={false}
-							padSides={false}
-							shouldCenter={false}
-						>
-							<HeaderAdSlot
-								isAdFreeUser={front.isAdFreeUser}
-								shouldHideAds={false}
-								display={format.display}
-							/>
-						</ElementContainer>
-					</Stuck>
+					{renderAds && (
+						<Stuck>
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
+								showSideBorders={false}
+								padSides={false}
+								shouldCenter={false}
+							>
+								<HeaderAdSlot display={format.display} />
+							</Section>
+						</Stuck>
+					)}
 
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						showTopBorder={false}
 						showSideBorders={false}
 						padSides={false}
@@ -87,9 +92,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
 						/>
-					</ElementContainer>
-					<ElementContainer
-						showSideBorders={true}
+					</Section>
+					<Section
+						fullWidth={true}
 						borderColour={brandLine.primary}
 						showTopBorder={false}
 						padSides={false}
@@ -104,10 +109,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							}
 							editionId={front.editionId}
 						/>
-					</ElementContainer>
+					</Section>
 					{NAV.subNavSections && (
 						<>
-							<ElementContainer
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
 								backgroundColour={palette.background.article}
 								padSides={false}
 								element="aside"
@@ -119,8 +126,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										format={format}
 									/>
 								</Island>
-							</ElementContainer>
-							<ElementContainer
+							</Section>
+							<Section
+								fullWidth={true}
 								backgroundColour={palette.background.article}
 								padSides={false}
 								showTopBorder={false}
@@ -131,7 +139,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									`}
 									count={4}
 								/>
-							</ElementContainer>
+							</Section>
 						</>
 					)}
 				</>
@@ -139,7 +147,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 			<main data-layout="FrontLayout">
 				{front.pressedPage.collections.map((collection, index) => {
-					// TODO: We also need to support treats containers
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
 						collection.backfill,
@@ -147,22 +154,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					// There are some containers that have zero trails. We don't want to render these
 					if (trails.length === 0) return null;
 
-					// This is a legacy container used to add palette styling on Frontend. DCR ignores it
-					if (
-						collection.displayName ===
-						'Palette styles new do not delete'
-					) {
-						return null;
-					}
-
 					const ophanName = ophanComponentId(collection.displayName);
-					const ophanComponentLink = `container-${
-						index + 1
-					} | ${ophanName}`;
+					const ophanComponentLink = `container-${index} | ${ophanName}`;
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
-							<ElementContainer
+							<Section
+								fullWidth={true}
 								padSides={false}
 								padBottom={true}
 								showTopBorder={false}
@@ -170,25 +168,20 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								ophanComponentLink={ophanComponentLink}
 								ophanComponentName={ophanName}
 								containerName={collection.collectionType}
-								element="section"
 							>
 								<Snap snapData={trails[0].snapData} />
-							</ElementContainer>
+							</Section>
 						);
 					}
 
 					return (
-						<ContainerLayout
+						<Section
 							key={collection.id}
 							title={collection.displayName}
-							// TODO: This logic should be updated, as this relies
-							// on the first container being 'palette styles do not delete'
-							showTopBorder={index > 1}
-							sideBorders={true}
+							showTopBorder={index > 0}
 							padContent={false}
 							centralBorder="partial"
 							url={collection.href}
-							// same as above re 'palette styles' for index increment
 							ophanComponentLink={ophanComponentLink}
 							ophanComponentName={ophanName}
 							containerName={collection.collectionType}
@@ -207,22 +200,27 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								containerPalette={collection.containerPalette}
 								showAge={collection.displayName === 'Headlines'}
 							/>
-						</ContainerLayout>
+						</Section>
 					);
 				})}
 
 				{!isPaidContent && (
-					<ElementContainer data-print-layout="hide" element="aside">
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						element="aside"
+					>
 						<MostViewedFooterLayout
 							format={format}
 							sectionName="" // {front.sectionName}
 							ajaxUrl={front.config.ajaxUrl}
 						/>
-					</ElementContainer>
+					</Section>
 				)}
 			</main>
 
-			<ElementContainer
+			<Section
+				fullWidth={true}
 				data-print-layout="hide"
 				padSides={false}
 				showTopBorder={false}
@@ -231,10 +229,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				element="aside"
 			>
 				<AdSlot position="merchandising" display={format.display} />
-			</ElementContainer>
+			</Section>
 
 			{NAV.subNavSections && (
-				<ElementContainer
+				<Section
+					fullWidth={true}
+					showTopBorder={false}
 					data-print-layout="hide"
 					padSides={false}
 					element="aside"
@@ -246,15 +246,17 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							format={format}
 						/>
 					</Island>
-				</ElementContainer>
+				</Section>
 			)}
 
-			<ElementContainer
+			<Section
+				fullWidth={true}
 				data-print-layout="hide"
 				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
+				showTopBorder={false}
 				element="footer"
 			>
 				<Footer
@@ -265,7 +267,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					editionId={front.editionId}
 					contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 				/>
-			</ElementContainer>
+			</Section>
 		</>
 	);
 };

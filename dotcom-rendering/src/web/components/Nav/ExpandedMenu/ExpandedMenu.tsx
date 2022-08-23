@@ -6,6 +6,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import type { NavType } from '../../../../model/extract-nav';
 import { getZIndex } from '../../../lib/getZIndex';
 import { navInputCheckboxId } from '../config';
 import { Columns } from './Columns';

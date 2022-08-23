@@ -9,6 +9,9 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import React from 'react';
+import type { NavType } from '../../model/extract-nav';
+import type { CAPIArticleType } from '../../types/frontend';
+import type { Palette } from '../../types/palette';
 import {
 	adCollapseStyles,
 	labelStyles as adLabelStyles,
@@ -21,13 +24,13 @@ import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Caption } from '../components/Caption';
 import { DecideLines } from '../components/DecideLines';
-import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeadlineByline } from '../components/HeadlineByline';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
+import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubNav } from '../components/SubNav.importable';
@@ -300,14 +303,15 @@ export const InteractiveImmersiveLayout = ({
 				format={format}
 			/>
 			<main data-layout="InteractiveImmersiveLayout">
-				<ElementContainer
+				<Section
+					fullWidth={true}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={palette.background.article}
 					element="article"
 				>
 					<InteractiveImmersiveGrid>
-						{/* Above leftCol, the Caption is controled by ContainerLayout ^^ */}
+						{/* Above leftCol, the Caption is controlled by Section ^^ */}
 						<GridItem area="caption">
 							<Hide when="above" breakpoint="leftCol">
 								<Caption
@@ -438,8 +442,9 @@ export const InteractiveImmersiveLayout = ({
 							</div>
 						</GridItem>
 					</InteractiveImmersiveGrid>
-				</ElementContainer>
-				<ElementContainer
+				</Section>
+				<Section
+					fullWidth={true}
 					showTopBorder={false}
 					showSideBorders={false}
 					shouldCenter={false}
@@ -464,11 +469,12 @@ export const InteractiveImmersiveLayout = ({
 							isSensitive={CAPIArticle.config.isSensitive}
 						/>
 					</article>
-				</ElementContainer>
+				</Section>
 			</main>
 
 			{NAV.subNavSections && (
-				<ElementContainer
+				<Section
+					fullWidth={true}
 					padSides={false}
 					backgroundColour={neutral[100]}
 					element="aside"
@@ -480,14 +486,16 @@ export const InteractiveImmersiveLayout = ({
 							format={format}
 						/>
 					</Island>
-				</ElementContainer>
+				</Section>
 			)}
 
-			<ElementContainer
+			<Section
+				fullWidth={true}
 				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
+				showTopBorder={false}
 				element="footer"
 			>
 				<Footer
@@ -500,7 +508,7 @@ export const InteractiveImmersiveLayout = ({
 						CAPIArticle.contributionsServiceUrl
 					}
 				/>
-			</ElementContainer>
+			</Section>
 
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>

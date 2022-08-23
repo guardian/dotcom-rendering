@@ -7,6 +7,7 @@ import {
 	sport,
 	textSans,
 } from '@guardian/source-foundations';
+import { buildDetailText } from '../lib/buildNewsletterSignUpText';
 import { NewsletterDetail } from './NewsletterDetail';
 import { SecureSignup } from './SecureSignup';
 
@@ -40,7 +41,7 @@ const stackBelowTabletStyles = css`
 
 	${from.tablet} {
 		flex-direction: row;
-		margin-bottom: ${space[1]}px;
+		margin-bottom: 6px;
 	}
 `;
 
@@ -48,7 +49,7 @@ const titleStyles = (theme: string) => css`
 	${headline.xxsmall({ fontWeight: 'bold' })}
 	flex-grow: 1;
 	span {
-		color: ${theme === 'news' ? sport[500] : 'inherit'};
+		color: ${theme === 'news' ? sport[400] : 'inherit'};
 	}
 `;
 
@@ -67,9 +68,11 @@ const noHeightFromTabletStyles = css`
 	}
 `;
 
+// max-width is the wdith of the text field, the button and the margin between them
 const descriptionStyles = css`
 	${textSans.xsmall({ lineHeight: 'tight' })}
 	margin-bottom: ${space[2]}px;
+	max-width: ${335 + space[3] + 118}px;
 `;
 
 export const EmailSignup = ({
@@ -88,7 +91,7 @@ export const EmailSignup = ({
 					Sign up to <span>{name}</span>
 				</p>
 				<div css={noHeightFromTabletStyles}>
-					<NewsletterDetail text={frequency} />
+					<NewsletterDetail text={buildDetailText(frequency)} />
 				</div>
 			</div>
 			<p css={descriptionStyles}>{description}</p>

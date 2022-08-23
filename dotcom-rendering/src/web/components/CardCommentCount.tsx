@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { between, textSans } from '@guardian/source-foundations';
 import CommentIcon from '../../static/icons/comment.svg';
 import type { DCRContainerPalette } from '../../types/front';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {

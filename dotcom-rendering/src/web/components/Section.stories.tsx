@@ -5,11 +5,11 @@ import {
 	brandBorder,
 	breakpoints,
 } from '@guardian/source-foundations';
-import { ContainerLayout } from './ContainerLayout';
+import { Section } from './Section';
 
 export default {
-	component: ContainerLayout,
-	title: 'Components/ContainerLayout',
+	component: Section,
+	title: 'Components/Section',
 	parameters: {
 		viewport: {
 			// This has the effect of turning off the viewports addon by default
@@ -36,53 +36,56 @@ const Grey = ({ heightInPixels = 400 }: { heightInPixels?: number }) => (
 );
 
 export const PageTitleStory = () => {
-	return <ContainerLayout title="No Children" />;
+	return (
+		<Section
+			title="No Children"
+			showTopBorder={false}
+			showSideBorders={false}
+		/>
+	);
 };
 PageTitleStory.story = { name: 'with no children' };
 
 export const ContainerStory = () => {
 	return (
-		<ContainerLayout title="Default Container">
+		<Section
+			title="Default Container"
+			showTopBorder={false}
+			showSideBorders={false}
+		>
 			<Grey />
-		</ContainerLayout>
+		</Section>
 	);
 };
 ContainerStory.story = { name: 'default container' };
 
 export const NoTitleStory = () => {
 	return (
-		<ContainerLayout>
+		<Section showTopBorder={false} showSideBorders={false}>
 			<Grey />
-		</ContainerLayout>
+		</Section>
 	);
 };
 NoTitleStory.story = { name: 'with no title' };
 
 export const BordersStory = () => {
 	return (
-		<ContainerLayout
-			title="Borders"
-			showTopBorder={true}
-			sideBorders={true}
-			centralBorder="full"
-		>
+		<Section title="Borders" centralBorder="full">
 			<Grey />
-		</ContainerLayout>
+		</Section>
 	);
 };
 BordersStory.story = { name: 'with all borders' };
 
 export const LeftContentStory = () => {
 	return (
-		<ContainerLayout
+		<Section
 			title="Borders"
-			showTopBorder={true}
-			sideBorders={true}
 			centralBorder="full"
 			leftContent={<Grey heightInPixels={200} />}
 		>
 			<Grey />
-		</ContainerLayout>
+		</Section>
 	);
 };
 LeftContentStory.story = {
@@ -91,36 +94,32 @@ LeftContentStory.story = {
 
 export const BackgroundStory = () => {
 	return (
-		<ContainerLayout
+		<Section
 			title="Background Colour"
 			description="About this content"
 			fontColour={brandBackground.ctaPrimary}
-			showTopBorder={true}
-			sideBorders={true}
 			centralBorder="full"
 			backgroundColour={brandBackground.primary}
 			borderColour={brandBorder.primary}
 		>
 			<Grey />
-		</ContainerLayout>
+		</Section>
 	);
 };
 BackgroundStory.story = { name: 'with a blue background' };
 
 export const InnerBackgroundStory = () => {
 	return (
-		<ContainerLayout
+		<Section
 			title="Inner Background"
 			description="About this content"
 			fontColour={brandBackground.ctaPrimary}
-			showTopBorder={true}
-			sideBorders={true}
 			centralBorder="full"
 			innerBackgroundColour={brandBackground.primary}
 			borderColour={brandBorder.primary}
 		>
 			<Grey />
-		</ContainerLayout>
+		</Section>
 	);
 };
 InnerBackgroundStory.story = {
@@ -129,10 +128,8 @@ InnerBackgroundStory.story = {
 
 export const DifferentBackgrounds = () => {
 	return (
-		<ContainerLayout
+		<Section
 			title="Tip us off"
-			showTopBorder={true}
-			sideBorders={true}
 			centralBorder="full"
 			backgroundColour="#FFF280"
 			borderColour={brandBorder.primary}
@@ -141,7 +138,7 @@ export const DifferentBackgrounds = () => {
 			<h1>
 				👀 Share stories with the Guardian securely and confidentially
 			</h1>
-		</ContainerLayout>
+		</Section>
 	);
 };
 DifferentBackgrounds.story = {
@@ -150,16 +147,14 @@ DifferentBackgrounds.story = {
 
 export const StretchRightStory = () => {
 	return (
-		<ContainerLayout
+		<Section
 			title="Stretched Right"
 			description="About this content"
-			showTopBorder={true}
-			sideBorders={true}
 			centralBorder="full"
 			stretchRight={true}
 		>
 			<Grey />
-		</ContainerLayout>
+		</Section>
 	);
 };
 StretchRightStory.story = {
@@ -168,43 +163,39 @@ StretchRightStory.story = {
 
 export const PartialStory = () => {
 	return (
-		<ContainerLayout
-			title="Borders"
-			showTopBorder={false}
-			sideBorders={true}
-			centralBorder="partial"
-		>
+		<Section title="Borders" showTopBorder={false} centralBorder="partial">
 			<Grey />
-		</ContainerLayout>
+		</Section>
 	);
 };
 PartialStory.story = { name: 'with a partial border divider' };
 
 export const SidesStory = () => {
 	return (
-		<ContainerLayout
+		<Section
 			title="NoSides"
 			showTopBorder={false}
-			sideBorders={true}
 			centralBorder="full"
 			padSides={false}
 			padContent={false}
 		>
 			<Grey />
-		</ContainerLayout>
+		</Section>
 	);
 };
 SidesStory.story = { name: 'with a full border divider' };
 
 export const ToggleableStory = () => {
 	return (
-		<ContainerLayout
+		<Section
 			title="Toggleable Container"
 			toggleable={true}
 			sectionId="sectionId"
+			showTopBorder={false}
+			showSideBorders={false}
 		>
 			<Grey />
-		</ContainerLayout>
+		</Section>
 	);
 };
 ToggleableStory.story = { name: 'toggleable container' };
@@ -212,33 +203,27 @@ ToggleableStory.story = { name: 'toggleable container' };
 export const MarginsStory = () => {
 	return (
 		<>
-			<ContainerLayout
+			<Section
 				title="No Vertical Margins"
-				sideBorders={true}
-				showTopBorder={true}
 				centralBorder="full"
 				verticalMargins={false}
 			>
 				<Grey />
-			</ContainerLayout>
-			<ContainerLayout
+			</Section>
+			<Section
 				title="No Vertical Margins"
-				sideBorders={true}
-				showTopBorder={true}
 				centralBorder="full"
 				verticalMargins={false}
 			>
 				<Grey />
-			</ContainerLayout>
-			<ContainerLayout
+			</Section>
+			<Section
 				title="No Vertical Margins"
-				sideBorders={true}
-				showTopBorder={true}
 				centralBorder="full"
 				verticalMargins={false}
 			>
 				<Grey />
-			</ContainerLayout>
+			</Section>
 		</>
 	);
 };
@@ -247,58 +232,41 @@ MarginsStory.story = { name: 'with no vertical margins' };
 export const MultipleStory = () => {
 	return (
 		<>
-			<ContainerLayout
-				title="Page Title"
-				showTopBorder={false}
-				sideBorders={true}
-			/>
-			<ContainerLayout
-				title="Headlines"
-				showTopBorder={true}
-				sideBorders={true}
-				centralBorder="partial"
-			>
+			<Section title="Page Title" showTopBorder={false} />
+			<Section title="Headlines" centralBorder="partial">
 				<Grey />
-			</ContainerLayout>
-			<ContainerLayout
-				title="Useful links"
-				showTopBorder={true}
-				sideBorders={true}
-				centralBorder="partial"
-			/>
-			<ContainerLayout
+			</Section>
+			<Section title="Useful links" centralBorder="partial" />
+			<Section
 				title="Around the World - I'm a link"
 				url="https://www.theguardian.com/world"
-				showTopBorder={true}
-				sideBorders={true}
 				centralBorder="partial"
 			>
 				<Grey />
-			</ContainerLayout>
-			<ContainerLayout
+			</Section>
+			<Section
 				showTopBorder={false}
-				sideBorders={false}
+				showSideBorders={false}
 				backgroundColour={brandAltBackground.primary}
 			>
 				<h2>Insert call to action here</h2>
-			</ContainerLayout>
-			<ContainerLayout
+			</Section>
+			<Section
 				title="Videos"
 				fontColour="white"
 				showTopBorder={false}
 				backgroundColour="black"
+				showSideBorders={false}
 			>
 				<Grey />
-			</ContainerLayout>
-			<ContainerLayout
+			</Section>
+			<Section
 				title="Coronavirus"
 				description="A collection of stories about Coronavirus"
-				showTopBorder={true}
-				sideBorders={true}
 				centralBorder="partial"
 			>
 				<Grey />
-			</ContainerLayout>
+			</Section>
 		</>
 	);
 };
@@ -321,21 +289,33 @@ MultipleStory.story = {
 
 export const TreatsStory = () => {
 	return (
-		<ContainerLayout
+		<Section
 			title="Treats"
 			treats={[
 				{
-					text: 'The treat text',
-					linkTo: '',
+					links: [
+						{
+							text: 'The treat text',
+							linkTo: '',
+						},
+					],
+					editionId: 'UK',
 				},
 				{
-					text: 'Another piece of text',
-					linkTo: '',
+					links: [
+						{
+							text: 'Another piece of text',
+							linkTo: '',
+						},
+					],
+					editionId: 'UK',
 				},
 			]}
+			showTopBorder={false}
+			showSideBorders={false}
 		>
 			<Grey />
-		</ContainerLayout>
+		</Section>
 	);
 };
 TreatsStory.story = {

@@ -16,6 +16,7 @@ import { FixedSmallSlowIII } from '../components/FixedSmallSlowIII';
 import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
 import { FixedSmallSlowVMPU } from '../components/FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from '../components/FixedSmallSlowVThird';
+import { FixedMediumSlowVII } from '../components/FixedMediumSlowVII';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -120,6 +121,14 @@ export const DecideContainer = ({
 		case 'fixed/medium/slow-VI':
 			return (
 				<FixedMediumSlowVI
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			);
+		case 'fixed/medium/slow-VII':
+			return (
+				<FixedMediumSlowVII
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}

@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, body, headline, space } from '@guardian/source-foundations';
+import type { Palette } from '../../types/palette';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { decidePalette } from '../lib/decidePalette';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
@@ -32,7 +33,6 @@ type Props = {
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
 	filterKeyEvents?: boolean;
-	showKeyEventsCarousel?: boolean;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
 };
@@ -58,13 +58,22 @@ const globalOlStyles = () => css`
 `;
 
 const globalH3Styles = (display: ArticleDisplay) => {
-	if (display !== ArticleDisplay.NumberedList) return null;
-	return css`
-		h3 {
-			${headline.xsmall({ fontWeight: 'bold' })};
-			margin-bottom: ${space[2]}px;
-		}
-	`;
+	switch (display) {
+		case ArticleDisplay.NumberedList:
+			return css`
+				h3 {
+					${headline.xsmall({ fontWeight: 'bold' })};
+					margin-bottom: ${space[2]}px;
+				}
+			`;
+		default:
+			return css`
+				h3 {
+					${body.medium({ fontWeight: 'bold' })};
+					margin-bottom: ${space[4]}px;
+				}
+			`;
+	}
 };
 
 const globalStrongStyles = css`
@@ -117,7 +126,6 @@ export const ArticleBody = ({
 	onFirstPage,
 	keyEvents,
 	filterKeyEvents,
-	showKeyEventsCarousel,
 	availableTopics,
 	selectedTopics,
 }: Props) => {
@@ -167,7 +175,6 @@ export const ArticleBody = ({
 						onFirstPage={onFirstPage}
 						keyEvents={keyEvents}
 						filterKeyEvents={filterKeyEvents}
-						isKeyEventsCarousel={showKeyEventsCarousel}
 						availableTopics={availableTopics}
 						selectedTopics={selectedTopics}
 					/>

@@ -6,7 +6,7 @@ export default {
 	title: 'Components/Treats',
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			width: 620px;
@@ -19,20 +19,30 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const Default = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Treats
 				treats={[
 					{
-						text: 'treat 1',
-						linkTo: '',
+						links: [
+							{
+								text: 'treat 1',
+								linkTo: '',
+							},
+						],
+						editionId: 'UK',
 					},
 					{
-						text: 'treat 2',
-						linkTo: '',
+						links: [
+							{
+								text: 'treat 2',
+								linkTo: '',
+							},
+						],
+						editionId: 'UK',
 					},
 				]}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Default.story = { name: 'Default' };

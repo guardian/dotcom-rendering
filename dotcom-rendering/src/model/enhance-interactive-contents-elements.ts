@@ -22,37 +22,24 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 
 	if (hasInteractiveContentsBlockElement) {
 		// We want to record all `SubheadingBlockElement` to construct the interactive content block
-		const subheadingLinks: SubheadingBlockElement[] = [];
-		const withUpdatedSubheadings: CAPIElement[] = elements.map(
-			(thisElement) => {
-				if (
-					thisElement._type ===
+		const subheadingLinks = elements.filter(
+			(element): element is SubheadingBlockElement => {
+				return (
+					element._type ===
 					'model.dotcomrendering.pageElements.SubheadingBlockElement'
-				) {
-					const enhancedSubheading = {
-						...thisElement,
-						html: thisElement.html.replace(
-							'<h2>',
-							// add ID to H2 element
-							`<h2 id='${thisElement.elementId}'>`,
-						),
-					};
-					subheadingLinks.push(enhancedSubheading);
-					return enhancedSubheading;
-				}
-				return thisElement;
+				);
 			},
 		);
 
 		// Get the last element with an 'elementId'
 		// Using .slice() allows us to avoid mutating the original array
-		const endDocumentElement = withUpdatedSubheadings
+		const endDocumentElement = elements
 			.slice()
 			.reverse()
 			.find((element) => 'elementId' in element);
 
 		// replace interactive content block
-		withUpdatedSubheadings.forEach((element) => {
+		elements.forEach((element) => {
 			if (isInteractiveContentsBlockElement(element)) {
 				updatedElements.push({
 					_type: 'model.dotcomrendering.pageElements.DividerBlockElement',

@@ -21,6 +21,7 @@ import { SpecialReport } from '../../../fixtures/generated/articles/SpecialRepor
 import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { Video } from '../../../fixtures/generated/articles/Video';
 import { extractNAV } from '../../model/extract-nav';
+import type { CAPIArticleType } from '../../types/frontend';
 import { embedIframe } from '../browser/embedIframe/embedIframe';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 import { decideFormat } from '../lib/decideFormat';

@@ -22,7 +22,7 @@ const SomeText = () => (
 	/>
 );
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			padding-left: 250px;
@@ -35,7 +35,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const Default = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SomeText />
 			<SomeText />
 			<InteractiveBlockComponent
@@ -53,14 +53,14 @@ export const Default = () => {
 			<SomeText />
 			<SomeText />
 			<SomeText />
-		</Container>
+		</Wrapper>
 	);
 };
 Default.story = { name: 'default' };
 
 export const InlineMap = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SomeText />
 			<SomeText />
 			<InteractiveBlockComponent
@@ -77,14 +77,14 @@ export const InlineMap = () => {
 			/>
 			<SomeText />
 			<SomeText />
-		</Container>
+		</Wrapper>
 	);
 };
 InlineMap.story = { name: 'Inline interactive Map' };
 
 export const Showcase = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SomeText />
 			<SomeText />
 			<InteractiveBlockComponent
@@ -102,14 +102,14 @@ export const Showcase = () => {
 			<SomeText />
 			<SomeText />
 			<SomeText />
-		</Container>
+		</Wrapper>
 	);
 };
 Showcase.story = { name: 'Showcase interactive element' };
 
 export const WithCaption = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SomeText />
 			<SomeText />
 			<InteractiveBlockComponent
@@ -128,14 +128,14 @@ export const WithCaption = () => {
 			<SomeText />
 			<SomeText />
 			<SomeText />
-		</Container>
+		</Wrapper>
 	);
 };
 WithCaption.story = { name: 'with caption' };
 
 export const NonBootJs = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<SomeText />
 			<SomeText />
 			<InteractiveBlockComponent
@@ -153,7 +153,7 @@ export const NonBootJs = () => {
 			<SomeText />
 			<SomeText />
 			<SomeText />
-		</Container>
+		</Wrapper>
 	);
 };
 NonBootJs.story = { name: 'Non-boot.js interactive element' };

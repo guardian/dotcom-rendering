@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { Placeholder } from './Placeholder';
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			width: 620px;
@@ -41,75 +41,75 @@ export default {
 
 export const Basic = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Placeholder height={200} />
-		</Container>
+		</Wrapper>
 	);
 };
 Basic.story = { name: 'with 200px height' };
 
 export const Square = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Placeholder height={200} width={200} />
-		</Container>
+		</Wrapper>
 	);
 };
 Square.story = { name: 'with equal height and width' };
 
 export const InARow = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Row>
 				<Placeholder height={200} width={200} spaceLeft={2} />
 				<Placeholder height={200} width={200} spaceLeft={2} />
 				<Placeholder height={200} width={200} spaceLeft={2} />
 			</Row>
-		</Container>
+		</Wrapper>
 	);
 };
 InARow.story = { name: 'with elements in a row' };
 
 export const Stacked = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Column>
 				<Placeholder height={200} spaceBelow={5} />
 				<Placeholder height={200} spaceBelow={5} />
 				<Placeholder height={200} spaceBelow={5} />
 			</Column>
-		</Container>
+		</Wrapper>
 	);
 };
 Stacked.story = { name: 'with elements stacked' };
 
 export const Root = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Placeholder height={200} rootId="usedWithPortals" />
-		</Container>
+		</Wrapper>
 	);
 };
 Root.story = { name: 'with rootId set' };
 
 export const NoShimmer = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Placeholder height={200} shouldShimmer={false} />
-		</Container>
+		</Wrapper>
 	);
 };
 NoShimmer.story = { name: 'without shimmer' };
 
 export const Background = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Placeholder
 				height={200}
 				shouldShimmer={true}
 				backgroundColor="#ffff00"
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Background.story = { name: 'with backgroundColor set' };

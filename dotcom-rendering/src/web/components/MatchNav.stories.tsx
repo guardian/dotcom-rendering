@@ -1,10 +1,10 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { ArticleContainer } from './ArticleContainer';
-import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { MatchNav } from './MatchNav';
 import { RightColumn } from './RightColumn';
+import { Section } from './Section';
 
 const homeTeam: TeamType = {
 	name: 'Liverpool',
@@ -76,7 +76,7 @@ NoComments.story = { name: 'with no comments' };
 
 export const InContext = () => {
 	return (
-		<ElementContainer padSides={false}>
+		<Section fullWidth={true} padSides={false}>
 			<Flex>
 				<LeftColumn borderType="full">
 					<></>
@@ -98,7 +98,7 @@ export const InContext = () => {
 					<></>
 				</RightColumn>
 			</Flex>
-		</ElementContainer>
+		</Section>
 	);
 };
 InContext.story = { name: 'when placed in article context' };
