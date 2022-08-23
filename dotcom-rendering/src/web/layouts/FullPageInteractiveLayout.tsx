@@ -221,7 +221,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 							}
 							urls={CAPIArticle.nav.readerRevenueLinks.header}
 							remoteHeader={
-								CAPIArticle.config.switches.remoteHeader
+								!!CAPIArticle.config.switches.remoteHeader
 							}
 							contributionsServiceUrl={
 								CAPIArticle.contributionsServiceUrl
@@ -406,10 +406,10 @@ export const FullPageInteractiveLayout = ({
 							CAPIArticle.shouldHideReaderRevenue
 						}
 						remoteBannerSwitch={
-							CAPIArticle.config.switches.remoteBanner
+							!!CAPIArticle.config.switches.remoteBanner
 						}
 						puzzleBannerSwitch={
-							CAPIArticle.config.switches.puzzlesBanner
+							!!CAPIArticle.config.switches.puzzlesBanner
 						}
 						tags={CAPIArticle.tags}
 					/>

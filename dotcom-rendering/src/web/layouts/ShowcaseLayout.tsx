@@ -287,7 +287,8 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											.header
 									}
 									remoteHeader={
-										CAPIArticle.config.switches.remoteHeader
+										!!CAPIArticle.config.switches
+											.remoteHeader
 									}
 									contributionsServiceUrl={
 										contributionsServiceUrl
@@ -504,7 +505,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									shortUrlId={CAPIArticle.config.shortUrlId}
 									ajaxUrl={CAPIArticle.config.ajaxUrl}
 									showShareCount={
-										CAPIArticle.config.switches
+										!!CAPIArticle.config.switches
 											.serverShareCounts
 									}
 								/>
@@ -737,7 +738,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								CAPIArticle.config.discussionApiClientHeader
 							}
 							enableDiscussionSwitch={
-								CAPIArticle.config.switches
+								!!CAPIArticle.config.switches
 									.enableDiscussionSwitch
 							}
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
@@ -827,10 +828,10 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							CAPIArticle.shouldHideReaderRevenue
 						}
 						remoteBannerSwitch={
-							CAPIArticle.config.switches.remoteBanner
+							!!CAPIArticle.config.switches.remoteBanner
 						}
 						puzzleBannerSwitch={
-							CAPIArticle.config.switches.puzzlesBanner
+							!!CAPIArticle.config.switches.puzzlesBanner
 						}
 						tags={CAPIArticle.tags}
 					/>
