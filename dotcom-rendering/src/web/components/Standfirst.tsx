@@ -90,23 +90,6 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 						max-width: 540px;
 						color: ${palette.text.standfirst};
 					`;
-				case ArticleDesign.Analysis:
-					return css`
-						${format.theme === ArticleSpecial.Labs
-							? textSans.medium()
-							: headline.xsmall({
-									fontWeight: 'light',
-							  })};
-						max-width: 280px;
-						${from.tablet} {
-							max-width: 460px;
-						}
-						color: ${palette.text.standfirst};
-						li:before {
-							height: 17px;
-							width: 17px;
-						}
-					`;
 				default:
 					return css`
 						${format.theme === ArticleSpecial.Labs
