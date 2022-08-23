@@ -21,6 +21,7 @@ import type {
 	Analysis,
 	Comment,
 	Editorial,
+	Explainer,
 	Feature,
 	Interview,
 	Item,
@@ -474,6 +475,11 @@ const quiz: Quiz = {
 	theme: ArticlePillar.Sport,
 };
 
+const explainer: Explainer = {
+	design: ArticleDesign.Explainer,
+	...fields,
+};
+
 // ----- Exports ----- //
 
 export {
@@ -496,4 +502,5 @@ export {
 	recipe,
 	quiz,
 	pinnedBlock,
+	explainer,
 };

@@ -158,6 +158,11 @@ interface Analysis extends Fields {
 	design: ArticleDesign.Analysis;
 	body: Body;
 }
+
+interface Explainer extends Fields {
+	design: ArticleDesign.Explainer;
+	body: Body;
+}
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each ArticleDesign type.
 interface Standard extends Fields {
@@ -187,7 +192,8 @@ type Item =
 	| Editorial
 	| Correction
 	| Interview
-	| Analysis;
+	| Analysis
+	| Explainer;
 
 // ----- Convenience Types ----- //
 
@@ -541,6 +547,7 @@ export {
 	PhotoEssay,
 	Feature,
 	PrintShop,
+	Explainer,
 	fromCapi,
 	fromCapiLiveBlog,
 	getFormat,
