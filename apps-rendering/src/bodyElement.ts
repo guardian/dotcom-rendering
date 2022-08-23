@@ -137,6 +137,7 @@ interface NewsletterSignUp {
 type BodyElement =
 	| Text
 	| HeadingTwo
+	| HeadingThree
 	| Image
 	| {
 			kind: ElementKind.Pullquote;
