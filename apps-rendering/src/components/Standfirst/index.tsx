@@ -5,6 +5,7 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import AnalysisStandfirst from './AnalysisStandfirst';
 import DeadBlogStandfirst from './DeadBlogStandfirst';
+import ExplainerStandfirst from './ExplainerStandfirst';
 import GalleryStandfirst from './GalleryStandfirst';
 import ImmersiveLabsStandfirst from './ImmersiveLabsStandfirst';
 import ImmersiveStandfirst from './ImmersiveStandfirst';
@@ -63,6 +64,8 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 			return <InterviewStandfirst item={item} />;
 		case ArticleDesign.Analysis:
 			return <AnalysisStandfirst item={item} />;
+		case ArticleDesign.Explainer:
+			return <ExplainerStandfirst item={item} />;
 		default:
 			return (
 				<DefaultStandfirst
