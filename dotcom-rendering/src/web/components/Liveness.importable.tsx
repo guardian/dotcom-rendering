@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { initHydration } from '../browser/islands/initHydration';
 import { updateTimeElement } from '../browser/relativeTime/updateTimeElements';
+import { nonEmpty } from '../lib/tuple';
 import { useApi } from '../lib/useApi';
 import { Toast } from './Toast';
 
@@ -119,7 +120,7 @@ function getKey(
 			'filterKeyEvents',
 			filterKeyEvents ? 'true' : 'false',
 		);
-		if (selectedTopics && selectedTopics.length > 0)
+		if (selectedTopics && nonEmpty(selectedTopics))
 			url.searchParams.set(
 				'topics',
 				`${selectedTopics[0].type}:${selectedTopics[0].value}`,
@@ -229,6 +230,8 @@ export const Liveness = ({
 		if (!topOfBlog) return () => {};
 
 		const observer = new window.IntersectionObserver(([entry]) => {
+			if (!entry) return;
+
 			setTopOfBlogVisible(entry.isIntersecting);
 
 			if (entry.isIntersecting && onFirstPage) {

@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { between, space, textSans, until } from '@guardian/source-foundations';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
+import { isTuple } from '../lib/tuple';
 
 const ALL_OUT_WICKETS = 10;
 
@@ -106,14 +107,17 @@ export const CricketInnings = ({
 
 	// There can be up to 2 innings per team in a cricket match
 	switch (teamInnings.length) {
-		case 1:
+		case 1: {
+			if (!isTuple(teamInnings, 1)) throw new Error('Not two innings');
 			return (
 				<p>
 					{cricketScore({ innings: teamInnings[0] })} (
 					{teamInnings[0].overs} overs)
 				</p>
 			);
-		case 2:
+		}
+		case 2: {
+			if (!isTuple(teamInnings, 2)) throw new Error('Not two innings');
 			return (
 				<p>
 					{cricketScore({ innings: teamInnings[0], short: true })}
@@ -122,6 +126,7 @@ export const CricketInnings = ({
 					{teamInnings[1].overs} overs)
 				</p>
 			);
+		}
 		default:
 			return <p>Yet to bat</p>;
 	}

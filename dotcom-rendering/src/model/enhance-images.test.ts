@@ -3,7 +3,10 @@ import { PhotoEssay } from '../../fixtures/generated/articles/PhotoEssay';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { images } from '../../fixtures/generated/images';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
+import { nonEmpty } from '../web/lib/tuple';
 import { enhanceImages } from './enhance-images';
+
+if (!nonEmpty(images)) throw new Error('Empty images list');
 
 const image = {
 	...images[0],
@@ -76,7 +79,7 @@ describe('Enhance Images', () => {
 					elements: [
 						{
 							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
-							elementId: images[0].elementId,
+							elementId: image.elementId,
 							images: [
 								{
 									...image,
@@ -622,7 +625,7 @@ describe('Enhance Images', () => {
 					elements: [
 						{
 							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
-							elementId: images[0].elementId,
+							elementId: image.elementId,
 							images: [
 								{
 									...image,
@@ -640,7 +643,7 @@ describe('Enhance Images', () => {
 						},
 						{
 							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
-							elementId: images[0].elementId,
+							elementId: image.elementId,
 							images: [
 								{
 									...image,
@@ -672,6 +675,10 @@ describe('Enhance Images', () => {
 				elementId: 'mockId',
 				html: '<p>Just some normal text</p>',
 			};
+
+			if (!(images[0] && images[1] && images[2] && images[3])) {
+				throw new Error('Not enough images');
+			}
 
 			const input: Block[] = [
 				{
@@ -725,7 +732,7 @@ describe('Enhance Images', () => {
 					elements: [
 						{
 							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
-							elementId: images[0].elementId,
+							elementId: image.elementId,
 							images: [
 								{
 									...image,
@@ -895,7 +902,7 @@ describe('Enhance Images', () => {
 					elements: [
 						{
 							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
-							elementId: images[0].elementId,
+							elementId: image.elementId,
 							images: [
 								{
 									...image,
@@ -957,7 +964,7 @@ describe('Enhance Images', () => {
 						},
 						{
 							_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement',
-							elementId: images[0].elementId,
+							elementId: image.elementId,
 							images: [
 								{
 									...image,

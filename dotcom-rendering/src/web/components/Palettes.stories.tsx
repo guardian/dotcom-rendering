@@ -1,4 +1,6 @@
-import { trails } from '../../../fixtures/manual/trails';
+import { trails as mockTrails } from '../../../fixtures/manual/trails';
+import type { DCRGroupedTrails } from '../../types/front';
+import { isTuple } from '../lib/tuple';
 import { DynamicFast } from './DynamicFast';
 import { Section } from './Section';
 
@@ -6,7 +8,13 @@ export default {
 	title: 'Layouts/Palettes',
 };
 
-const groupedTrails = {
+const trails = mockTrails.slice(0, 10);
+
+if (!isTuple(trails, 10)) {
+	throw new Error('Invalid number of trails');
+}
+
+const groupedTrails: DCRGroupedTrails = {
 	snap: [],
 	huge: [],
 	veryBig: [{ isBoosted: true, ...trails[0] }, trails[1]],

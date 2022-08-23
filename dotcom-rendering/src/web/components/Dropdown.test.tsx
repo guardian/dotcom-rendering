@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
+import { isTuple } from '../lib/tuple';
 import { Dropdown } from './Dropdown';
 
 const links = [
@@ -54,6 +55,10 @@ describe('Dropdown', () => {
 				dataLinkName="linkname"
 			/>,
 		);
+
+		if (!isTuple(links, 4)) {
+			throw new Error('missing links');
+		}
 
 		expect(getByText(links[0].title)).toBeInTheDocument();
 		expect(getByText(links[1].title)).toBeInTheDocument();

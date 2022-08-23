@@ -10,6 +10,7 @@ import {
 import { Link } from '@guardian/source-react-components';
 import type { TreatType } from '../../types/front';
 import { decidePalette } from '../lib/decidePalette';
+import { nonEmpty } from '../lib/tuple';
 import { SvgCrossword } from './SvgCrossword';
 
 const TextTreat = ({
@@ -102,7 +103,8 @@ export const Treats = ({
 	treats: TreatType[];
 	borderColour?: string;
 }) => {
-	if (treats.length === 0) return null;
+	if (!nonEmpty(treats)) return null;
+
 	return (
 		<ul
 			css={css`
@@ -112,6 +114,7 @@ export const Treats = ({
 		>
 			{treats.map((treat) => {
 				if (
+					nonEmpty(treat.links) &&
 					treat.links[0].linkTo === '/crosswords' &&
 					treat.links[0].text
 				) {

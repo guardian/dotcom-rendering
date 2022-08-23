@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source-foundations';
+import { isTuple } from '../lib/tuple';
 import { Caption } from './Caption';
 import { GridItem } from './GridItem';
 import { ImageComponent } from './ImageComponent';
@@ -96,7 +97,8 @@ export const MultiImageBlockComponent = ({
 	const imageCount = images.length;
 
 	switch (imageCount) {
-		case 1:
+		case 1: {
+			if (!isTuple(images, 1)) throw new Error();
 			return (
 				<div
 					css={css`
@@ -123,7 +125,9 @@ export const MultiImageBlockComponent = ({
 					)}
 				</div>
 			);
-		case 2:
+		}
+		case 2: {
+			if (!isTuple(images, 2)) throw new Error();
 			return (
 				<div
 					css={css`
@@ -163,7 +167,9 @@ export const MultiImageBlockComponent = ({
 					)}
 				</div>
 			);
-		case 3:
+		}
+		case 3: {
+			if (!isTuple(images, 3)) throw new Error();
 			return (
 				<div
 					css={css`
@@ -211,7 +217,9 @@ export const MultiImageBlockComponent = ({
 					)}
 				</div>
 			);
-		case 4:
+		}
+		case 4: {
+			if (!isTuple(images, 4)) throw new Error();
 			return (
 				<div
 					css={css`
@@ -266,6 +274,7 @@ export const MultiImageBlockComponent = ({
 					)}
 				</div>
 			);
+		}
 		default:
 			return null;
 	}

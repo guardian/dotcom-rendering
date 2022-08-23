@@ -1,7 +1,11 @@
 import { breakpoints } from '@guardian/source-foundations';
-import { trails } from '../../../fixtures/manual/trails';
+import { trails as mockTrails } from '../../../fixtures/manual/trails';
+import { isTuple } from '../lib/tuple';
 import { DynamicFast } from './DynamicFast';
 import { Section } from './Section';
+
+const trails = mockTrails.slice(0, 12);
+if (!isTuple(trails, 12)) throw new Error('Invalid number of trails');
 
 export default {
 	component: DynamicFast,

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import { nonEmpty } from '../lib/tuple';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -80,7 +81,7 @@ const Card75_Card25 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
-	if (cards.length < 2) return null;
+	if (!(cards[0] && cards[1])) return null;
 
 	return (
 		<UL direction="row">
@@ -378,6 +379,7 @@ const Card75_ColumnOfCards25 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
+	if (!nonEmpty(cards)) throw new Error('Empty trails');
 	const [primary, ...remaining] = cards;
 	return (
 		<UL direction="row">
@@ -509,7 +511,7 @@ export const DynamicPackage = ({
 			secondSlice = cards.slice(0, 1);
 			break;
 		default:
-			if (cards[0].isBoosted) {
+			if (cards[0]?.isBoosted) {
 				layout = 'threeOrFourStandardsBoosted';
 				firstSlice = snaps;
 				secondSlice = cards.slice(0, 1);

@@ -2,6 +2,7 @@
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import { isTuple } from '../lib/tuple';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -26,7 +27,7 @@ const Card100 = ({
 	containerPalette,
 	showAge,
 }: {
-	trails: TrailType[];
+	trails: [TrailType];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => (
@@ -57,7 +58,7 @@ const Card50_Card50 = ({
 	containerPalette,
 	showAge,
 }: {
-	trails: TrailType[];
+	trails: [TrailType, TrailType];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => (
@@ -98,7 +99,7 @@ const Card33_Card33_Card33 = ({
 	containerPalette,
 	showAge,
 }: {
-	trails: TrailType[];
+	trails: [TrailType, TrailType, TrailType];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => (
@@ -154,7 +155,7 @@ const Card66_Ad33 = ({
 	showAge,
 	index,
 }: {
-	trails: TrailType[];
+	trails: [TrailType];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
@@ -190,7 +191,7 @@ const Card33_Card33_Ad33 = ({
 	showAge,
 	index,
 }: {
-	trails: TrailType[];
+	trails: [TrailType, TrailType];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
@@ -202,7 +203,7 @@ const Card33_Card33_Ad33 = ({
 				containerPalette={containerPalette}
 				showAge={showAge}
 				trailText={
-					trails[0]?.supportingContent &&
+					trails[0].supportingContent &&
 					trails[0].supportingContent.length > 0
 						? undefined
 						: trails[0].trailText
@@ -225,7 +226,7 @@ const Card33_Card33_Ad33 = ({
 				containerPalette={containerPalette}
 				showAge={showAge}
 				trailText={
-					trails[1]?.supportingContent &&
+					trails[1].supportingContent &&
 					trails[1].supportingContent.length > 0
 						? undefined
 						: trails[1].trailText
@@ -288,27 +289,33 @@ export const FixedMediumSlowXIIMPU = ({
 			return null;
 		}
 		case 1: {
+			const single = trails.slice(0, 1);
+			if (!isTuple(single, 1)) throw new Error('Not a 1-tuple');
 			return (
 				<Card100
-					trails={trails}
+					trails={single}
 					containerPalette={containerPalette}
 					showAge={showAge}
 				/>
 			);
 		}
 		case 2: {
+			const double = trails.slice(0, 2);
+			if (!isTuple(double, 2)) throw new Error('Not a 2-tuple');
 			return (
 				<Card50_Card50
-					trails={trails}
+					trails={double}
 					containerPalette={containerPalette}
 					showAge={showAge}
 				/>
 			);
 		}
 		case 3: {
+			const triple = trails.slice(0, 3);
+			if (!isTuple(triple, 3)) throw new Error('Not a 3-tuple');
 			return (
 				<Card33_Card33_Card33
-					trails={trails}
+					trails={triple}
 					containerPalette={containerPalette}
 					showAge={showAge}
 				/>
@@ -317,6 +324,9 @@ export const FixedMediumSlowXIIMPU = ({
 		case 4: {
 			const topThree = trails.slice(0, 3);
 			const remainingCards = trails.slice(3);
+			if (!(isTuple(topThree, 3) && isTuple(remainingCards, 1))) {
+				throw new Error('Invalid number of cards');
+			}
 			return (
 				<>
 					<Card33_Card33_Card33
@@ -336,7 +346,10 @@ export const FixedMediumSlowXIIMPU = ({
 		}
 		case 5: {
 			const topThree = trails.slice(0, 3);
-			const remainingCards = trails.slice(3);
+			const remainingCards = trails.slice(3, 5);
+			if (!(isTuple(topThree, 3) && isTuple(remainingCards, 2))) {
+				throw new Error('Invalid number of cards');
+			}
 			return (
 				<>
 					<Card33_Card33_Card33
@@ -362,6 +375,10 @@ export const FixedMediumSlowXIIMPU = ({
 			const topThree = trails.slice(0, 3);
 			const remainingCards = trails.slice(3, 9);
 			const lengthIsEven = remainingCards.length % 2 === 0;
+
+			if (!isTuple(topThree, 3)) {
+				throw new Error('Invalid number of topThree');
+			}
 			return (
 				<>
 					<Card33_Card33_Card33
