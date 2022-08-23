@@ -494,6 +494,7 @@ export const ArticleHeadline = ({
 				case ArticleDesign.Review:
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Feature:
+				case ArticleDesign.Explainer:
 					return (
 						<div
 							css={decideBottomPadding({

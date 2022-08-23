@@ -1641,7 +1641,7 @@ export const Editorial: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: 'bb322c8c-9bb8-449d-a111-369582ceb8ab',
+			elementId: '8fc15683-8282-45fe-b1da-e529dd90a8f1',
 		},
 	],
 	webPublicationDate: '2021-02-03T18:54:37.000Z',
@@ -1652,32 +1652,32 @@ export const Editorial: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The greatest advances in the battle against the coronavirus have been made by modern science, but before there were vaccines, countries had to rely on older techniques: stopping people mingling; preventing new cases of the disease arriving from overseas. Britain’s record with lockdowns is not great (late to implement, premature in lifting), but with quarantine at the border there is barely even a record to defend. For much of last year there was a notional obligation on travellers from various countries to self-isolate on arrival in the UK, but with a shifting roster of places that qualified for “safe” travel corridors.</p>',
-					elementId: '97e4528f-7e28-47e7-84f1-75a0b0bf6d55',
+					elementId: 'bdb49784-ad14-4343-816c-697a484f5833',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>There were many categories of exemption. The regulations were unclear and poorly implemented. <a href="https://www.theguardian.com/world/commentisfree/2021/jan/28/uk-covid-travel-quarantine-hotel" title="">Efforts at enforcement have been patchy</a>. Essentially, self-isolation has been self-policed. Only towards the end of last year, as it became clear that mutant strains of the virus were spreading – and that Britain’s approach was persistently failing – did the government start focusing on <a href="https://www.theguardian.com/world/2021/jan/27/how-quarantine-rules-work-and-what-uk-government-is-planning" title="">quarantine as part of the anti-virus arsenal</a>. More travellers are now required to show proof of a negative Covid test and there are tighter restrictions on arrivals from certain “hotspot” countries. That approach is still flawed. People, and the virus they might carry, do not always travel straight from the heart of an outbreak to the UK. Mutations are dispersed along multiple paths.</p>',
-					elementId: '474703ba-5537-4368-9fea-4617574c92e1',
+					elementId: '8cd8385c-450b-4695-b65d-8db8caa6d999',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Ministers have said further border measures are required, but cannot say when they will be applied. The new regime is expected to involve diverting large numbers of arrivals to government-approved hotels for up to 10 days, with an option of getting out sooner with a negative test. The Department for Transport and the Treasury <a href="https://www.theguardian.com/world/2021/feb/03/grant-shapps-resists-blanket-border-controls-to-stem-covid-in-britain" title="">have been squeamish</a> about the cost of such a regime. Passengers would get a bill, but the whole system would still be expensive and inflict another wound on an already injured aviation sector.</p>',
-					elementId: '84c7fa45-725b-414a-8150-50e3c4784f29',
+					elementId: '588c1d77-13a1-43f5-9680-8e36aaa0648d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>But, as has been demonstrated many times in the pandemic, resisting tighter restrictions to avoid an immediate financial burden is a false economy. Delay allows the disease to spread. The onerous measures are still required and have to be in place for longer. That remains true even as the vaccination programme is rolled out. Not enough is yet known about vaccine resilience in the face of recently discovered coronavirus variants, let alone any future mutations. <a href="https://www.theguardian.com/world/2021/jan/22/covid-vaccines-what-are-the-implications-of-new-variants-of-virus" title="">The risk is not negligible.</a></p>',
-					elementId: 'f87caa30-7c07-4234-914a-ef62c5552fad',
+					elementId: '1e322610-77db-4571-bf00-9bce366d30c7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Countries with the strongest records against disease have applied the full range of containment measures quickly and thoroughly, including efficient testing, contact tracing, and a presumption that all new arrivals face quarantine (with some flexibility for humanitarian exceptions, naturally). That principle should be the basis for the UK’s regime. A speedy vaccination roll-out has given Boris Johnson <a href="https://www.theguardian.com/society/2021/jan/31/daily-record-as-600000-people-in-the-uk-receive-covid-jabs-on-saturday" title="">cause to celebrate</a> his government’s accomplishments relative to other countries. Ministerial relief at having something to cheer is palpable, but it must not lead to neglect of other fronts in the battle or feed the culture of impatience and denial that causes many Conservative MPs to demand unwarranted easing of restrictions.</p>',
-					elementId: '2dcc3aef-42d8-428d-ae9b-e2fea551484d',
+					elementId: '70e33d97-51c8-46b1-a049-614193a3a073',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>No one should belittle the social, economic and psychological cost of anti-Covid restrictions. Quarantine, like lockdown, is a harsh instrument to be used only as an emergency resort. But we are now a year into such an emergency. The government’s haphazard approach, justified by a pursuit of short-term economic relief, has only prolonged the ordeal. The vaccine programme illuminates a way out. It would be a tragic squandering of that success if overreliance on new technology were to breed complacency regarding older but no less vital methods of protecting the public.</p>',
-					elementId: '25b0ef1b-4897-4057-82b2-72ac58d45459',
+					elementId: '2bb8f933-7506-493b-9a1b-9046fd5e69b0',
 				},
 			],
 			attributes: {
