@@ -64,13 +64,15 @@ const MAXIMUM_DISTANCE_AFTER_FLOATING_ELEMENT_TO_TAKE_ACCOUNT_OF_WHEN_SORTING = 
 //	 4 TEXT         | above the floating element
 //	 5 TEXT         |
 //	 6 TEXT         |
-//     [target] ----+
-//	 7 TEXT
-//	 8 TEXT
-//	 9 TEXT
+//	 7 TEXT         |
+//     [target] ----+ Staying here would probably be
+//	 8 TEXT           fine as there are four paragraphs
+//	 9 TEXT           between this spot and the richlink
 //	10 TEXT
 //	11 TEXT
 //	12 TEXT
+//	13 TEXT
+//	14 TEXT
 
 const MAXIMUM_DISTANCE_FROM_MIDDLE = 4;
 
@@ -120,8 +122,9 @@ const placeIsSuitable = (place: PlaceInArticle): boolean =>
 	place.distanceFromTarget <= MAXIMUM_DISTANCE_FROM_MIDDLE;
 
 /**
- * Sort the places, putting those furtherest from a previous floating elment
- * first, then by distance from the target
+ * Sort the suitable places in descending order of preference by:
+ *  - preferring places not close after a floating element, then
+ *  - preferrring places further down
  */
 const sortPlaces = (placeA: PlaceInArticle, placeB: PlaceInArticle): number => {
 	const floatingComparison =
@@ -129,7 +132,7 @@ const sortPlaces = (placeA: PlaceInArticle, placeB: PlaceInArticle): number => {
 	if (floatingComparison !== 0) {
 		return floatingComparison;
 	}
-	return placeA.distanceFromTarget - placeB.distanceFromTarget;
+	return placeB.position - placeA.position;
 };
 
 /**
