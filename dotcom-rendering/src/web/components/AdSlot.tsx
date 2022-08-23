@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { adSizes } from '@guardian/commercial-core';
+import type { SlotName } from '@guardian/commercial-core';
 import { ArticleDisplay } from '@guardian/libs';
 import {
 	border,
@@ -13,13 +14,28 @@ import {
 import { Island } from './Island';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
-type Props = {
+type InlineProps = {
 	display?: ArticleDisplay;
-	position: AdSlotType;
+	position: 'inline';
+	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
-	shouldReserveMerchSpace?: boolean;
 };
+
+type NonInlineProps = {
+	display?: ArticleDisplay;
+	position: Omit<SlotName, 'inline'>;
+	index?: never;
+	shouldHideReaderRevenue?: boolean;
+	isPaidContent?: boolean;
+};
+
+/**
+ * This union type allows us to conditionally require the index property
+ * based on position. If position = 'inline' then we expect the index
+ * value. If not, then we explictly refuse this property
+ */
+type Props = InlineProps | NonInlineProps;
 
 export const labelHeight = 24;
 
@@ -77,9 +93,6 @@ export const adCollapseStyles = css`
 
 const merchandisingAdStyles = css`
 	position: relative;
-`;
-
-const merchandisingReservedSpace = css`
 	min-height: 250px;
 `;
 
@@ -213,7 +226,7 @@ export const AdSlot = ({
 	display,
 	shouldHideReaderRevenue = false,
 	isPaidContent = false,
-	shouldReserveMerchSpace = false,
+	index,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -351,7 +364,6 @@ export const AdSlot = ({
 					].join(' ')}
 					css={[
 						merchandisingAdStyles,
-						shouldReserveMerchSpace && merchandisingReservedSpace,
 						adStyles,
 						fluidFullWidthAdStyles,
 					]}
@@ -372,7 +384,6 @@ export const AdSlot = ({
 					].join(' ')}
 					css={[
 						merchandisingAdStyles,
-						shouldReserveMerchSpace && merchandisingReservedSpace,
 						adStyles,
 						fluidFullWidthAdStyles,
 					]}
@@ -397,6 +408,32 @@ export const AdSlot = ({
 					data-label="false"
 					data-refresh="false"
 					data-out-of-page="true"
+					aria-hidden="true"
+				/>
+			);
+		}
+		case 'inline': {
+			// index will always be defined here but ts isn't as sure
+			// so I'm falling back to 'inline-0' to keep it happy
+			const advertId = index ? `inline${index}` : 'inline-0';
+			return (
+				<div
+					id={`dfp-ad--${advertId}`}
+					className={[
+						'js-ad-slot',
+						'ad-slot',
+						`ad-slot--${advertId}`,
+						'ad-slot--container-inline',
+						'ad-slot--rendered',
+					].join(' ')}
+					css={[
+						css`
+							position: relative;
+						`,
+						adStyles,
+					]}
+					data-link-name={`ad slot ${advertId}`}
+					data-name={`${advertId}`}
 					aria-hidden="true"
 				/>
 			);

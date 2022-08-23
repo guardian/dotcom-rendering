@@ -1,4 +1,5 @@
 {
+    "description": "WARNING: run `gen-schema` task if changing this to update the associated JSON\nschema definition.",
     "type": "object",
     "properties": {
         "headline": {
@@ -2305,6 +2306,7 @@
                 "CommentDesign",
                 "DeadBlogDesign",
                 "EditorialDesign",
+                "ExplainerDesign",
                 "FeatureDesign",
                 "FullPageInteractiveDesign",
                 "GalleryDesign",
@@ -3266,9 +3268,6 @@
                 "authorUsername": {
                     "type": "string"
                 },
-                "authorGuardianProfileUrl": {
-                    "type": "string"
-                },
                 "originalUrl": {
                     "type": "string"
                 },
@@ -3304,7 +3303,6 @@
                 "_type",
                 "alt",
                 "apiUrl",
-                "authorGuardianProfileUrl",
                 "authorName",
                 "authorUsername",
                 "authorWitnessProfileUrl",
@@ -3365,9 +3363,6 @@
                 "authorUsername": {
                     "type": "string"
                 },
-                "authorGuardianProfileUrl": {
-                    "type": "string"
-                },
                 "originalUrl": {
                     "type": "string"
                 },
@@ -3402,7 +3397,6 @@
             "required": [
                 "_type",
                 "apiUrl",
-                "authorGuardianProfileUrl",
                 "authorName",
                 "authorUsername",
                 "authorWitnessProfileUrl",
@@ -3472,9 +3466,6 @@
                 "authorWitnessProfileUrl": {
                     "type": "string"
                 },
-                "authorGuardianProfileUrl": {
-                    "type": "string"
-                },
                 "html": {
                     "type": "string"
                 }
@@ -3482,7 +3473,6 @@
             "required": [
                 "_type",
                 "apiUrl",
-                "authorGuardianProfileUrl",
                 "authorName",
                 "authorUsername",
                 "authorWitnessProfileUrl",
@@ -3909,7 +3899,15 @@
                     }
                 },
                 "abTests": {
-                    "type": "object"
+                    "description": "This type is not support by JSON-schema, it evaluates as `object`",
+                    "type": "object",
+                    "additionalProperties": {
+                        "enum": [
+                            "control",
+                            "variant"
+                        ],
+                        "type": "string"
+                    }
                 },
                 "dfpAccountId": {
                     "type": "string"

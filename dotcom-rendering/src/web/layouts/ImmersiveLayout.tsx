@@ -12,6 +12,8 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
+import type { NavType } from '../../model/extract-nav';
+import type { CAPIArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -24,7 +26,6 @@ import { Carousel } from '../components/Carousel.importable';
 import { DecideLines } from '../components/DecideLines';
 import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { GuardianLabsLines } from '../components/GuardianLabsLines';
@@ -34,6 +35,7 @@ import { Island } from '../components/Island';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
+import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
@@ -176,10 +178,12 @@ interface Props {
 
 const decideCaption = (mainMedia: ImageBlockElement): string => {
 	const caption = [];
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because sometimes mainMedia isn't an image
 	if (mainMedia?.data?.caption) {
 		caption.push(mainMedia.data.caption);
 	}
 
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because sometimes mainMedia isn't an image
 	if (mainMedia?.displayCredit && mainMedia?.data?.credit) {
 		caption.push(mainMedia.data.credit);
 	}
@@ -206,9 +210,6 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		parse(CAPIArticle.slotMachineFlags || '').showBodyEnd ||
 		CAPIArticle.config.switches.slotBodyEnd;
 
-	const shouldReserveMerchSpace =
-		!!CAPIArticle.config.abTests.merchandisingMinHeightVariant;
-
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `CAPIArticle.config.shouldHideReaderRevenue` equals false.
@@ -230,14 +231,15 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				format={format}
 			/>
 			<main data-layout="ImmersiveLayout">
-				<ElementContainer
+				<Section
+					fullWidth={true}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={decidePalette(format).background.article}
 					element="article"
 				>
 					<ImmersiveGrid>
-						{/* Above leftCol, the Caption is controled by ContainerLayout ^^ */}
+						{/* Above leftCol, the Caption is controlled by Section ^^ */}
 						<GridItem area="caption">
 							<Hide when="above" breakpoint="leftCol">
 								<Caption
@@ -497,10 +499,11 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</div>
 						</GridItem>
 					</ImmersiveGrid>
-				</ElementContainer>
+				</Section>
 
-				<ElementContainer
-					padded={false}
+				<Section
+					fullWidth={true}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
@@ -509,9 +512,8 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					<AdSlot
 						position="merchandising-high"
 						display={format.display}
-						shouldReserveMerchSpace={shouldReserveMerchSpace}
 					/>
-				</ElementContainer>
+				</Section>
 
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
@@ -521,7 +523,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				) : (
 					<>
 						{CAPIArticle.storyPackage && (
-							<ElementContainer>
+							<Section fullWidth={true}>
 								<Island deferUntil="visible">
 									<Carousel
 										heading={
@@ -534,7 +536,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										format={format}
 									/>
 								</Island>
-							</ElementContainer>
+							</Section>
 						)}
 
 						<Island
@@ -567,7 +569,11 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				)}
 
 				{!isPaidContent && showComments && (
-					<ElementContainer sectionId="comments" element="aside">
+					<Section
+						fullWidth={true}
+						sectionId="comments"
+						element="aside"
+					>
 						<DiscussionLayout
 							discussionApiUrl={
 								CAPIArticle.config.discussionApiUrl
@@ -585,36 +591,37 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
 							shouldHideAds={CAPIArticle.shouldHideAds}
 						/>
-					</ElementContainer>
+					</Section>
 				)}
 
 				{!isPaidContent && (
-					<ElementContainer data-print-layout="hide" element="aside">
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						element="aside"
+					>
 						<MostViewedFooterLayout
 							format={format}
 							sectionName={CAPIArticle.sectionName}
 							ajaxUrl={CAPIArticle.config.ajaxUrl}
 						/>
-					</ElementContainer>
+					</Section>
 				)}
 
-				<ElementContainer
-					padded={false}
+				<Section
+					fullWidth={true}
+					padSides={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					backgroundColour={neutral[93]}
 					element="aside"
 				>
-					<AdSlot
-						position="merchandising"
-						display={format.display}
-						shouldReserveMerchSpace={shouldReserveMerchSpace}
-					/>
-				</ElementContainer>
+					<AdSlot position="merchandising" display={format.display} />
+				</Section>
 			</main>
 
 			{NAV.subNavSections && (
-				<ElementContainer padded={false} element="aside">
+				<Section fullWidth={true} padSides={false} element="aside">
 					<Island deferUntil="visible">
 						<SubNav
 							subNavSections={NAV.subNavSections}
@@ -622,11 +629,12 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							format={format}
 						/>
 					</Island>
-				</ElementContainer>
+				</Section>
 			)}
 
-			<ElementContainer
-				padded={false}
+			<Section
+				fullWidth={true}
+				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
@@ -642,7 +650,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						CAPIArticle.contributionsServiceUrl
 					}
 				/>
-			</ElementContainer>
+			</Section>
 
 			<BannerWrapper>
 				<Island deferUntil="idle" clientOnly={true}>

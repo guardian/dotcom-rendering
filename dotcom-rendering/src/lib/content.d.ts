@@ -493,7 +493,6 @@ interface YoutubeBlockElement {
 
 interface WitnessTypeDataBase {
 	authorUsername: string;
-	authorGuardianProfileUrl: string;
 	originalUrl: string;
 	source: string;
 	title: string;

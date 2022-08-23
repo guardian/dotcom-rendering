@@ -3,12 +3,14 @@ import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground, space } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import type { Branding } from '../../../types/branding';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../../../types/front';
+import type { Palette } from '../../../types/palette';
 import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { Avatar } from '../Avatar';
@@ -296,20 +298,27 @@ export const Card = ({
 		>
 			<CardLink
 				linkTo={linkTo}
+				headlineText={headlineText}
 				dataLinkName={dataLinkName}
-				format={format}
-				containerPalette={containerPalette}
 			/>
 			<CardLayout
-				imagePosition={imagePosition}
-				imagePositionOnMobile={imagePositionOnMobile}
+				imagePosition={imageUrl !== undefined ? imagePosition : 'top'}
+				imagePositionOnMobile={
+					imageUrl !== undefined ? imagePositionOnMobile : 'top'
+				}
 				minWidthInPixels={minWidthInPixels}
 			>
 				{imageType === 'mainmedia' && (
 					<ImageWrapper
 						imageSize={imageSize}
-						imagePosition={imagePosition}
-						imagePositionOnMobile={imagePositionOnMobile}
+						imagePosition={
+							imageUrl !== undefined ? imagePosition : 'top'
+						}
+						imagePositionOnMobile={
+							imageUrl !== undefined
+								? imagePositionOnMobile
+								: 'top'
+						}
 					>
 						<img src={imageUrl} alt="" role="presentation" />
 					</ImageWrapper>
@@ -420,7 +429,9 @@ export const Card = ({
 				<SupportingContent
 					supportingContent={supportingContent}
 					alignment={
-						imagePosition === 'top' || imagePosition === 'bottom'
+						imagePosition === 'top' ||
+						imagePosition === 'bottom' ||
+						imageUrl === undefined
 							? 'vertical'
 							: 'horizontal'
 					}

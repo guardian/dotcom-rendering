@@ -4,12 +4,12 @@ import { decidePalette } from '../lib/decidePalette';
 import { isLight } from '../lib/isLight';
 
 type Props = {
-	left: Section;
-	right: Section;
+	left: SectionType;
+	right: SectionType;
 	format: ArticleFormat;
 };
 
-type Section = {
+type SectionType = {
 	onTarget: number;
 	offTarget: number;
 	color: string;

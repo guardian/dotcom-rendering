@@ -224,6 +224,18 @@ const pinnedPost = (format: ArticleFormat): string => {
 	}
 };
 
+const galleryImage = (_format: ArticleFormat): string => {
+	return neutral[20];
+};
+
+const signUpForm = (_format: ArticleFormat): string => {
+	return neutral[0];
+};
+
+const signUpFormDark = (_format: ArticleFormat): string => {
+	return neutral[86];
+};
+
 // ----- API ----- //
 
 const border = {
@@ -250,6 +262,9 @@ const border = {
 	standfirstBlogLink,
 	standfirstLinkDark,
 	pinnedPost,
+	galleryImage,
+	signUpForm,
+	signUpFormDark,
 };
 
 // ----- Exports ----- //

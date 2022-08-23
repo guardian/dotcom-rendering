@@ -15,6 +15,8 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import React from 'react';
 import { buildAdTargeting } from '../../lib/ad-targeting';
+import type { NavType } from '../../model/extract-nav';
+import type { CAPIArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -23,11 +25,9 @@ import { ArticleMeta } from '../components/ArticleMeta';
 import { ArticleTitle } from '../components/ArticleTitle';
 import { Border } from '../components/Border';
 import { Carousel } from '../components/Carousel.importable';
-import { ContainerLayout } from '../components/ContainerLayout';
 import { DecideLines } from '../components/DecideLines';
 import { DecideOnwards } from '../components/DecideOnwards';
 import { DiscussionLayout } from '../components/DiscussionLayout';
-import { ElementContainer } from '../components/ElementContainer';
 import { Footer } from '../components/Footer';
 import { GridItem } from '../components/GridItem';
 import { Header } from '../components/Header';
@@ -38,6 +38,7 @@ import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { Section } from '../components/Section';
 import { SlotBodyEnd } from '../components/SlotBodyEnd.importable';
 import { Standfirst } from '../components/Standfirst';
 import { StarRating } from '../components/StarRating/StarRating';
@@ -229,8 +230,10 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
-	const shouldReserveMerchSpace =
-		!!CAPIArticle.config.abTests.merchandisingMinHeightVariant;
+	/**
+	 * This property currently only applies to the header and merchandising slots
+	 */
+	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
 	return (
 		<>
@@ -239,29 +242,29 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 			)}
 
 			<div>
-				<Stuck>
-					<div data-print-layout="hide">
-						<ElementContainer
-							showTopBorder={false}
-							showSideBorders={false}
-							padded={false}
-							shouldCenter={false}
-						>
-							<HeaderAdSlot
-								isAdFreeUser={CAPIArticle.isAdFreeUser}
-								shouldHideAds={CAPIArticle.shouldHideAds}
-								display={format.display}
-							/>
-						</ElementContainer>
-					</div>
-				</Stuck>
+				{renderAds && (
+					<Stuck>
+						<div data-print-layout="hide">
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
+								showSideBorders={false}
+								padSides={false}
+								shouldCenter={false}
+							>
+								<HeaderAdSlot display={format.display} />
+							</Section>
+						</div>
+					</Stuck>
+				)}
 
 				{format.theme !== ArticleSpecial.Labs && (
 					<div data-print-layout="hide">
-						<ElementContainer
+						<Section
+							fullWidth={true}
 							showTopBorder={false}
 							showSideBorders={false}
-							padded={false}
+							padSides={false}
 							backgroundColour={brandBackground.primary}
 							element="header"
 						>
@@ -285,15 +288,15 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
 							/>
-						</ElementContainer>
+						</Section>
 					</div>
 				)}
 
-				<ElementContainer
-					showSideBorders={true}
+				<Section
+					fullWidth={true}
 					borderColour={brandLine.primary}
 					showTopBorder={false}
-					padded={false}
+					padSides={false}
 					backgroundColour={brandBackground.primary}
 					element="nav"
 				>
@@ -308,12 +311,13 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						}
 						editionId={CAPIArticle.editionId}
 					/>
-				</ElementContainer>
+				</Section>
 
 				{NAV.subNavSections && format.theme !== ArticleSpecial.Labs && (
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						backgroundColour={palette.background.article}
-						padded={false}
+						padSides={false}
 						element="aside"
 					>
 						<Island deferUntil="idle">
@@ -323,13 +327,14 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								format={format}
 							/>
 						</Island>
-					</ElementContainer>
+					</Section>
 				)}
 
 				{format.theme !== ArticleSpecial.Labs && (
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						backgroundColour={palette.background.article}
-						padded={false}
+						padSides={false}
 						showTopBorder={false}
 					>
 						<StraightLines
@@ -338,14 +343,14 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							`}
 							count={4}
 						/>
-					</ElementContainer>
+					</Section>
 				)}
 			</div>
 
 			{format.theme === ArticleSpecial.Labs && (
 				<Stuck>
-					<ElementContainer
-						showSideBorders={true}
+					<Section
+						fullWidth={true}
 						showTopBorder={false}
 						backgroundColour={labs[400]}
 						borderColour={border.primary}
@@ -354,15 +359,16 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<Island deferUntil="idle">
 							<LabsHeader />
 						</Island>
-					</ElementContainer>
+					</Section>
 				</Stuck>
 			)}
 
-			{CAPIArticle.config.switches.surveys && (
+			{renderAds && CAPIArticle.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 			<main data-layout="InteractiveLayout">
-				<ElementContainer
+				<Section
+					fullWidth={true}
 					data-print-layout="hide"
 					showTopBorder={false}
 					backgroundColour={palette.background.article}
@@ -526,11 +532,11 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</GridItem>
 						</InteractiveGrid>
 					</div>
-				</ElementContainer>
+				</Section>
 
-				<ContainerLayout
-					sideBorders={true}
+				<Section
 					stretchRight={false}
+					showTopBorder={false}
 					backgroundColour={palette.background.article}
 					borderColour={palette.border.article}
 					padContent={false}
@@ -565,11 +571,12 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							/>
 						</Island>
 					</div>
-				</ContainerLayout>
+				</Section>
 
-				<ElementContainer
+				<Section
+					fullWidth={true}
 					showTopBorder={false}
-					padded={false}
+					padSides={false}
 					backgroundColour={palette.background.article}
 				>
 					<StraightLines
@@ -579,9 +586,10 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							display: block;
 						`}
 					/>
-				</ElementContainer>
+				</Section>
 
-				<ElementContainer
+				<Section
+					fullWidth={true}
 					showTopBorder={false}
 					backgroundColour={palette.background.article}
 				>
@@ -597,23 +605,24 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						}
 						badge={CAPIArticle.badge}
 					/>
-				</ElementContainer>
-
-				<ElementContainer
-					data-print-layout="hide"
-					padded={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot
+				</Section>
+				{renderAds && (
+					<Section
+						fullWidth={true}
 						data-print-layout="hide"
-						position="merchandising-high"
-						display={format.display}
-						shouldReserveMerchSpace={shouldReserveMerchSpace}
-					/>
-				</ElementContainer>
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							data-print-layout="hide"
+							position="merchandising-high"
+							display={format.display}
+						/>
+					</Section>
+				)}
 
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
@@ -623,7 +632,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				) : (
 					<>
 						{CAPIArticle.storyPackage && (
-							<ElementContainer>
+							<Section fullWidth={true} showTopBorder={false}>
 								<Island deferUntil="visible">
 									<Carousel
 										heading={
@@ -636,7 +645,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										format={format}
 									/>
 								</Island>
-							</ElementContainer>
+							</Section>
 						)}
 
 						<Island
@@ -669,7 +678,8 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				)}
 
 				{!isPaidContent && showComments && (
-					<ElementContainer
+					<Section
+						fullWidth={true}
 						sectionId="comments"
 						data-print-layout="hide"
 						element="section"
@@ -691,39 +701,45 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
 							shouldHideAds={CAPIArticle.shouldHideAds}
 						/>
-					</ElementContainer>
+					</Section>
 				)}
 
 				{!isPaidContent && (
-					<ElementContainer data-print-layout="hide" element="aside">
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						element="aside"
+					>
 						<MostViewedFooterLayout
 							format={format}
 							sectionName={CAPIArticle.sectionName}
 							ajaxUrl={CAPIArticle.config.ajaxUrl}
 						/>
-					</ElementContainer>
+					</Section>
 				)}
-
-				<ElementContainer
-					data-print-layout="hide"
-					padded={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot
-						position="merchandising"
-						display={format.display}
-						shouldReserveMerchSpace={shouldReserveMerchSpace}
-					/>
-				</ElementContainer>
+				{renderAds && (
+					<Section
+						fullWidth={true}
+						data-print-layout="hide"
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising"
+							display={format.display}
+						/>
+					</Section>
+				)}
 			</main>
 
 			{NAV.subNavSections && (
-				<ElementContainer
+				<Section
+					fullWidth={true}
 					data-print-layout="hide"
-					padded={false}
+					padSides={false}
 					element="aside"
 				>
 					<Island deferUntil="visible">
@@ -733,12 +749,13 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							format={format}
 						/>
 					</Island>
-				</ElementContainer>
+				</Section>
 			)}
 
-			<ElementContainer
+			<Section
+				fullWidth={true}
 				data-print-layout="hide"
-				padded={false}
+				padSides={false}
 				backgroundColour={brandBackground.primary}
 				borderColour={brandBorder.primary}
 				showSideBorders={false}
@@ -754,7 +771,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						CAPIArticle.contributionsServiceUrl
 					}
 				/>
-			</ElementContainer>
+			</Section>
 
 			<BannerWrapper data-print-layout="hide">
 				<Island deferUntil="idle" clientOnly={true}>

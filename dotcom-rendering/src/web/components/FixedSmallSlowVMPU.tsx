@@ -1,5 +1,6 @@
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette } from '../../types/front';
+import type { TrailType } from '../../types/trails';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -9,12 +10,14 @@ type Props = {
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	index: number;
 };
 
 export const FixedSmallSlowVMPU = ({
 	trails,
 	containerPalette,
 	showAge,
+	index,
 }: Props) => {
 	return (
 		<UL direction="row">
@@ -63,8 +66,7 @@ export const FixedSmallSlowVMPU = ({
 			</LI>
 			<LI percentage="33.333%" padSides={true} showDivider={true}>
 				<Hide until="tablet">
-					{/* TODO: Replace mostpop with a more appropriate value */}
-					<AdSlot position="mostpop" />
+					<AdSlot position="inline" index={index} />
 				</Hide>
 			</LI>
 		</UL>

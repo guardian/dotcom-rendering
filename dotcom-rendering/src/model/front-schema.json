@@ -66,7 +66,15 @@
                     "type": "string"
                 },
                 "abTests": {
-                    "type": "object"
+                    "description": "This type is not support by JSON-schema, it evaluates as `object`",
+                    "type": "object",
+                    "additionalProperties": {
+                        "enum": [
+                            "control",
+                            "variant"
+                        ],
+                        "type": "string"
+                    }
                 },
                 "pbIndexSites": {
                     "type": "array",
@@ -363,6 +371,9 @@
         },
         "pageFooter": {
             "$ref": "#/definitions/FooterType"
+        },
+        "isAdFreeUser": {
+            "type": "boolean"
         }
     },
     "required": [
@@ -371,6 +382,7 @@
         "editionId",
         "editionLongForm",
         "guardianBaseURL",
+        "isAdFreeUser",
         "nav",
         "pageFooter",
         "pageId",
@@ -2587,6 +2599,7 @@
                 "CommentDesign",
                 "DeadBlogDesign",
                 "EditorialDesign",
+                "ExplainerDesign",
                 "FeatureDesign",
                 "FullPageInteractiveDesign",
                 "GalleryDesign",

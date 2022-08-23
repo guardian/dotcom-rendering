@@ -1,4 +1,5 @@
 import type { DCRContainerPalette } from '../../types/front';
+import type { TrailType } from '../../types/trails';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -52,7 +53,7 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 					/>
 				</LI>
 			</UL>
-			<UL direction="row-reverse" padBottom={true}>
+			<UL direction="row-reverse">
 				<LI percentage="50%" showTopMarginWhenStacked={true}>
 					<UL direction="row" wrapCards={true} showDivider={true}>
 						{bigCards.map((card, cardIndex) => {

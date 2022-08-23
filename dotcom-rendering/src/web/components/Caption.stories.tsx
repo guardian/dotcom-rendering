@@ -7,7 +7,7 @@ import {
 } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { Caption } from './Caption';
-import { ElementContainer } from './ElementContainer';
+import { Section } from './Section';
 import { StarRating } from './StarRating/StarRating';
 
 export default {
@@ -28,7 +28,7 @@ export default {
  */
 
 export const Article = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how an Article caption looks"
 			format={{
@@ -37,12 +37,12 @@ export const Article = () => (
 				theme: ArticlePillar.News,
 			}}
 		/>
-	</ElementContainer>
+	</Section>
 );
 Article.story = { name: 'Article' };
 
 export const Analysis = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how an Analysis caption looks"
 			format={{
@@ -51,12 +51,12 @@ export const Analysis = () => (
 				theme: ArticlePillar.News,
 			}}
 		/>
-	</ElementContainer>
+	</Section>
 );
 Analysis.story = { name: 'Analysis' };
 
 export const PhotoEssay = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="<ul><li>This is how a PhotoEssay caption looks</li></ul>"
 			format={{
@@ -65,12 +65,12 @@ export const PhotoEssay = () => (
 				theme: ArticlePillar.News,
 			}}
 		/>
-	</ElementContainer>
+	</Section>
 );
 PhotoEssay.story = { name: 'PhotoEssay' };
 
 export const SpecialReport = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how a SpecialReport caption looks"
 			format={{
@@ -79,12 +79,12 @@ export const SpecialReport = () => (
 				theme: ArticleSpecial.SpecialReport,
 			}}
 		/>
-	</ElementContainer>
+	</Section>
 );
 SpecialReport.story = { name: 'SpecialReport' };
 
 export const PhotoEssayLimitedWidth = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="<ul><li>This is how a PhotoEssay caption looks when width is limited</li></ul>"
 			format={{
@@ -94,12 +94,12 @@ export const PhotoEssayLimitedWidth = () => (
 			}}
 			shouldLimitWidth={true}
 		/>
-	</ElementContainer>
+	</Section>
 );
 PhotoEssayLimitedWidth.story = { name: 'PhotoEssay with width limited' };
 
 export const Credit = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how a Feature caption looks with credit showing"
 			format={{
@@ -110,12 +110,12 @@ export const Credit = () => (
 			credit="Credited to Able Jones"
 			displayCredit={true}
 		/>
-	</ElementContainer>
+	</Section>
 );
 Credit.story = { name: 'with credit' };
 
 export const WidthLimited = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how a caption looks with width limited"
 			format={{
@@ -125,12 +125,12 @@ export const WidthLimited = () => (
 			}}
 			shouldLimitWidth={true}
 		/>
-	</ElementContainer>
+	</Section>
 );
 WidthLimited.story = { name: 'with width limited' };
 
 export const Padded = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how a caption looks when padded"
 			format={{
@@ -140,12 +140,12 @@ export const Padded = () => (
 			}}
 			padCaption={true}
 		/>
-	</ElementContainer>
+	</Section>
 );
 Padded.story = { name: 'when padded' };
 
 export const Overlaid = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<div
 			css={css`
 				position: relative;
@@ -174,12 +174,12 @@ export const Overlaid = () => (
 				padCaption={true}
 			/>
 		</div>
-	</ElementContainer>
+	</Section>
 );
 Overlaid.story = { name: 'when overlaid' };
 
 export const OverlaidWithStars = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<div
 			css={css`
 				position: relative;
@@ -217,12 +217,12 @@ export const OverlaidWithStars = () => (
 				<StarRating rating={3} size="large" />
 			</div>
 		</div>
-	</ElementContainer>
+	</Section>
 );
 OverlaidWithStars.story = { name: 'when overlaid on stars' };
 
 export const VideoCaption = () => (
-	<ElementContainer showTopBorder={false} showSideBorders={false}>
+	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>
 		<Caption
 			captionText="This is how an Article caption looks"
 			format={{
@@ -232,7 +232,7 @@ export const VideoCaption = () => (
 			}}
 			mediaType="Video"
 		/>
-	</ElementContainer>
+	</Section>
 );
 VideoCaption.story = {
 	name: 'for videos',

@@ -2,13 +2,13 @@ import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
 import React, { useEffect } from 'react';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
-import { ElementContainer } from './ElementContainer';
 import {
 	responseWithMissingImage,
 	responseWithOneTab,
 	responseWithTwoTabs,
 } from './MostViewed.mocks';
 import { MostViewedFooterLayout } from './MostViewedFooterLayout';
+import { Section } from './Section';
 
 const Hydrated = ({ children }: { children: React.ReactNode }) => {
 	useEffect(() => {
@@ -33,7 +33,7 @@ export const withTwoTabs = () => {
 
 	return (
 		<Hydrated>
-			<ElementContainer>
+			<Section fullWidth={true}>
 				<MostViewedFooterLayout
 					format={{
 						display: ArticleDisplay.Standard,
@@ -43,7 +43,7 @@ export const withTwoTabs = () => {
 					sectionName="politics"
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 				/>
-			</ElementContainer>
+			</Section>
 		</Hydrated>
 	);
 };
@@ -57,7 +57,7 @@ export const withOneTabs = () => {
 
 	return (
 		<Hydrated>
-			<ElementContainer>
+			<Section fullWidth={true}>
 				<MostViewedFooterLayout
 					format={{
 						display: ArticleDisplay.Standard,
@@ -66,7 +66,7 @@ export const withOneTabs = () => {
 					}}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 				/>
-			</ElementContainer>
+			</Section>
 		</Hydrated>
 	);
 };
@@ -80,7 +80,7 @@ export const withNoMostSharedImage = () => {
 
 	return (
 		<Hydrated>
-			<ElementContainer>
+			<Section fullWidth={true}>
 				<MostViewedFooterLayout
 					format={{
 						display: ArticleDisplay.Standard,
@@ -89,7 +89,7 @@ export const withNoMostSharedImage = () => {
 					}}
 					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 				/>
-			</ElementContainer>
+			</Section>
 		</Hydrated>
 	);
 };

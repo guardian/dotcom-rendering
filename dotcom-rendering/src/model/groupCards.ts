@@ -30,9 +30,26 @@ export const groupCards = (
 	containerPalette?: DCRContainerPalette,
 ): DCRGroupedTrails => {
 	switch (container) {
+		case 'dynamic/slow-mpu':
+			return {
+				// Only big and standard cards are supported on dynamic/slow-mpu
+				snap: [],
+				huge: [],
+				veryBig: [],
+				big: enhanceCards(
+					curated.filter(({ card }) => card.group === '1'),
+					containerPalette,
+				),
+				standard: enhanceCards(
+					// Backfilled cards will always be treated as 'standard' cards
+					curated
+						.filter(({ card }) => card.group === '0')
+						.concat(backfill),
+					containerPalette,
+				),
+			};
 		case 'dynamic/fast':
 		case 'dynamic/slow':
-		case 'dynamic/slow-mpu':
 			return {
 				// Snap is not supported on these container types
 				snap: [],

@@ -154,7 +154,10 @@ const commentCount = (format: ArticleFormat): Colour => {
 };
 
 const commentCountDark = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.LiveBlog || format.design === ArticleDesign.DeadBlog) {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	) {
 		return neutral[60];
 	}
 
@@ -951,13 +954,44 @@ const figCaption = (_format: ArticleFormat): Colour => neutral[46];
 
 const figCaptionDark = (_format: ArticleFormat): Colour => neutral[60];
 
-const tag = (_format: ArticleFormat): Colour => neutral[7];
+const tag = (format: ArticleFormat): Colour => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return neutral[97];
+		default:
+			return neutral[7];
+	}
+};
 
 const tagDark = (_format: ArticleFormat): Colour => neutral[86];
 
 const paragraph = (_format: ArticleFormat): Colour => neutral[7];
 
 const paragraphDark = (_format: ArticleFormat): Colour => neutral[86];
+
+const signUpForm = (_format: ArticleFormat): string => {
+	return neutral[7];
+};
+
+const signUpFormDark = (_format: ArticleFormat): string => {
+	return neutral[86];
+};
+
+const privacyMessage = (_format: ArticleFormat): string => {
+	return neutral[46];
+};
+
+const privacyMessageDark = (_format: ArticleFormat): string => {
+	return neutral[46];
+};
+
+const signUpFormButton = (_format: ArticleFormat): string => {
+	return neutral[100];
+};
+
+const signUpFormButtonDark = (_format: ArticleFormat): string => {
+	return neutral[0];
+};
 
 // ----- API ----- //
 
@@ -1018,6 +1052,12 @@ const text = {
 	pagination,
 	paragraph,
 	paragraphDark,
+	signUpForm,
+	signUpFormDark,
+	privacyMessage,
+	privacyMessageDark,
+	signUpFormButton,
+	signUpFormButtonDark,
 };
 
 // ----- Exports ----- //

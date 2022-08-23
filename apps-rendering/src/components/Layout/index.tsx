@@ -102,6 +102,7 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 	if (
 		item.design === ArticleDesign.Feature ||
 		item.design === ArticleDesign.Analysis ||
+		item.design === ArticleDesign.Explainer ||
 		item.design === ArticleDesign.Review ||
 		item.design === ArticleDesign.Standard ||
 		item.design === ArticleDesign.Interactive ||
