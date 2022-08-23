@@ -105,4 +105,14 @@ export interface CAPIArticleType {
 	selectedTopics?: Topic[];
 
 	promotedNewsletter?: Newsletter;
+	tableOfContents?: TOCType[];
+}
+
+interface TOCItem {
+	id: string;
+	title: string;
+	subtitle?: string;
+}
+export interface TOCType extends TOCItem {
+	nested: TOCItem[];
 }

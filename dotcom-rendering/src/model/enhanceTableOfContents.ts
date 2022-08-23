@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+import type { TOCType } from 'src/types/frontend';
 
 const isHeading = (element: CAPIElement, level: 'H2' | 'H3' | 'H4') => {
 	if (
