@@ -366,7 +366,9 @@ export const ArticleHeadline = ({
 							>
 								<h1
 									css={[
-										jumboFont,
+										format.theme === ArticleSpecial.Labs
+											? jumboLabsFont
+											: jumboFont,
 										maxWidth,
 										immersiveStyles,
 										displayBlock,
@@ -398,7 +400,9 @@ export const ArticleHeadline = ({
 							>
 								<h1
 									css={[
-										lightFont,
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: lightFont,
 										invertedText,
 										css`
 											color: ${palette.text.headline};
@@ -475,7 +479,9 @@ export const ArticleHeadline = ({
 						<DesignTag format={format} />
 						<h1
 							css={[
-								boldFont,
+								format.theme === ArticleSpecial.Labs
+									? labsFont
+									: boldFont,
 								topPadding,
 								css`
 									color: ${palette.text.headline};
@@ -513,7 +519,9 @@ export const ArticleHeadline = ({
 								<DesignTag format={format} />
 								<h1
 									css={[
-										boldFont,
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: boldFont,
 										topPadding,
 										css`
 											color: ${palette.text.headline};
@@ -545,7 +553,9 @@ export const ArticleHeadline = ({
 								<DesignTag format={format} />
 								<h1
 									css={[
-										lightFont,
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: lightFont,
 										topPadding,
 										css`
 											color: ${palette.text.headline};
@@ -584,7 +594,9 @@ export const ArticleHeadline = ({
 								<DesignTag format={format} />
 								<h1
 									css={[
-										lightFont,
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: lightFont,
 										topPadding,
 										css`
 											color: ${palette.text.headline};
@@ -622,7 +634,9 @@ export const ArticleHeadline = ({
 								<DesignTag format={format} />
 								<h1
 									css={[
-										invertedFont,
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: invertedFont,
 										invertedWrapper,
 										zIndex,
 										css`
@@ -710,7 +724,9 @@ export const ArticleHeadline = ({
 								<DesignTag format={format} />
 								<h1
 									css={[
-										standardFont,
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: standardFont,
 										css`
 											color: ${isMatch
 												? palette.text.headlineWhenMatch
@@ -751,7 +767,9 @@ export const ArticleHeadline = ({
 										interactiveLegacyClasses.headline
 									}
 									css={[
-										standardFont,
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: standardFont,
 										topPadding,
 										css`
 											color: ${palette.text.headline};
