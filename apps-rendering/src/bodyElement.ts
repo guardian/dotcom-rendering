@@ -37,7 +37,13 @@ type Text = {
 type HeadingTwo = {
 	kind: ElementKind.HeadingTwo;
 	doc: Node;
-	toc: Optional<{ id: string; text: string }>;
+	id: Optional<string>;
+};
+
+type HeadingThree = {
+	kind: ElementKind.HeadingThree;
+	doc: Node;
+	id: Optional<string>;
 };
 
 type Image = ImageData & {
@@ -225,12 +231,12 @@ const flattenTextElement = (doc: Node): BodyElement[] => {
 				return {
 					kind: ElementKind.HeadingTwo,
 					doc: node,
-					toc: Optional.fromNullable(node.textContent).flatMap(
+					id: Optional.fromNullable(node.textContent).flatMap(
 						(text) => {
 							const slug = slugify(text);
 							return slug === ''
 								? Optional.none()
-								: Optional.some({ id: slug, text });
+								: Optional.some(slug);
 						},
 					),
 				};
@@ -448,6 +454,7 @@ export {
 	ElementKind,
 	BodyElement,
 	HeadingTwo,
+	HeadingThree,
 	Body,
 	Image,
 	Text,

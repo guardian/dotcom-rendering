@@ -8,6 +8,7 @@ import type { HeadingTwo as HeadingTwoType } from 'bodyElement';
 import Anchor from 'components/Anchor';
 import HorizontalRule from 'components/HorizontalRule';
 import { getHref } from 'renderer';
+import { identity } from 'lib';
 
 interface HeadingTwoProps {
 	format: ArticleFormat;
@@ -94,8 +95,8 @@ const HeadingTwo: React.FC<HeadingTwoProps> = ({
 		<HorizontalRule />
 	) : (
 		<h2
-			id={heading.toc
-				.map<string | undefined>((t) => t.id)
+			id={heading.id
+				.map<string | undefined>(identity)
 				.withDefault(undefined)}
 			css={styles(format)}
 		>
