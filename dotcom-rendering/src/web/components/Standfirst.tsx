@@ -225,10 +225,9 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 
 	return (
 		<>
-			{format.display === ArticleDisplay.Immersive &&
-				format.design === ArticleDesign.Analysis && (
-					<DesignTag format={format} />
-				)}
+			{format.display === ArticleDisplay.Immersive && (
+				<DesignTag format={format} />
+			)}
 			<div
 				css={[
 					nestedStyles(format, palette),
