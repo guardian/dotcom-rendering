@@ -13,6 +13,8 @@ import {
 	SvgPlus,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
+import type { Palette } from 'src/types/palette';
+import type { TrailTabType } from 'src/types/trails';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
 type Props = {
