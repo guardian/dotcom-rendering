@@ -52,6 +52,7 @@ import GalleryImage from 'components/editions/galleryImage';
 import EditionsPullquote from 'components/editions/pullquote';
 import Video from 'components/editions/video';
 import EmbedComponentWrapper from 'components/EmbedWrapper';
+import HeadingTwo from 'components/HeadingTwo';
 import HorizontalRule from 'components/HorizontalRule';
 import Interactive from 'components/Interactive';
 import InteractiveAtom, {
@@ -74,7 +75,6 @@ import {
 	themeToPillar,
 	themeToPillarString,
 } from 'themeStyles';
-import HeadingTwo from 'components/HeadingTwo';
 
 // ----- Renderer ----- //
 
