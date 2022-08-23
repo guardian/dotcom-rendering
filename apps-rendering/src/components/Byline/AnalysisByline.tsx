@@ -18,7 +18,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	display: flex;
 	flex-direction: column;
 
-	${until.mobileMedium} {
+	${until.tablet} {
 		${headline.small({
 			fontWeight: 'light',
 			fontStyle: 'italic',

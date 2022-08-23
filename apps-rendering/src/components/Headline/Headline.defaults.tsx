@@ -47,7 +47,6 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 				${darkModeCss`
 					background-color: ${background.headlineDark(format)};
 				`}
-				${boldFontStyles}
 			`;
 		default:
 			return css`

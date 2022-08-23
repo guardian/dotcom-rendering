@@ -9,17 +9,17 @@ import { articleWidthStyles } from '../../styles';
 
 const headlineTagWrapper = css`
 	${articleWidthStyles}
-`;
+	`;
 
 const headlineTagStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${background.headlineTag(format)};
+	${headline.xxxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
 	color: ${text.headlineTag(format)};
-	${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
 	display: inline-block;
 	box-decoration-break: clone;
-	padding: 0 ${remSpace[3]};
-	${from.wide} {
-		padding: 0 ${remSpace[2]};
+	padding: 0 6px 2px;
+	${from.tablet} {
+		${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
 	}
 `;
 
