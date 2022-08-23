@@ -419,7 +419,12 @@ const headlineTag = (_format: ArticleFormat): Colour => neutral[100];
 const follow = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return news[400];
+			switch (format.design) {
+				case ArticleDesign.Analysis:
+					return news[300];
+				default:
+					return news[400];
+			}
 		case ArticlePillar.Lifestyle:
 			return lifestyle[300];
 		case ArticlePillar.Sport:
