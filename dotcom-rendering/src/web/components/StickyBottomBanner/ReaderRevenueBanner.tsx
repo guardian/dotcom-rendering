@@ -76,7 +76,7 @@ const getArticleCountToday = (
 	const latest = articleCounts?.dailyArticleHistory[0];
 	if (latest) {
 		if (latest.day === getToday()) {
-			return articleCounts.dailyArticleHistory[0].count;
+			return latest.count;
 		}
 		// article counting is enabled, but none so far today
 		return 0;
@@ -324,7 +324,7 @@ const RemoteBanner = ({
 		window
 			.guardianPolyfilledImport(module.url)
 			.then((bannerModule: { [key: string]: JSX.Element }) => {
-				setBanner(() => bannerModule[module.name]); // useState requires functions to be wrapped
+				setBanner(() => bannerModule[module.name] ?? null); // useState requires functions to be wrapped
 			})
 			.catch((error) => {
 				const msg = `Error importing RR banner: ${String(error)}`;

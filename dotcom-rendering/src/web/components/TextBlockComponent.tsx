@@ -105,7 +105,7 @@ const sanitiserOptions: IOptions = {
 	allowedAttributes: false, // Leave attributes from CAPI alone
 	transformTags: {
 		a: (tagName, attribs) => {
-			const mailto = attribs.href.startsWith('mailto:')
+			const mailto = attribs.href?.startsWith('mailto:')
 				? ` | ${attribs.href}`
 				: '';
 

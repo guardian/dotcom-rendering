@@ -93,7 +93,7 @@ describe('dailyArticleCount', () => {
 
 		// set up expected object (views for today should be incremented)
 		const expected = [...validDailyArticleCount];
-		expected[0].count += 1;
+		if (expected[0]) expected[0].count += 1;
 
 		const output = getDailyArticleCount();
 
@@ -115,7 +115,7 @@ describe('dailyArticleCount', () => {
 
 		// set up expected object (views for today should be 1)
 		const expected = [...validDailyArticleCount];
-		expected[0].count = 1;
+		if (expected[0]) expected[0].count = 1;
 
 		const output = getDailyArticleCount();
 
@@ -144,7 +144,7 @@ describe('dailyArticleCount', () => {
 
 		// set up expected object (views for today should be incremented, older than 60 days removed)
 		const expected = [...validDailyArticleCount];
-		expected[0].count = 1;
+		if (expected[0]) expected[0].count = 1;
 
 		const output = getDailyArticleCount();
 

@@ -84,8 +84,9 @@ const hasForwardBuffer = (
 
 	const enoughCharsForward = meetsThreshold || noForwardsEmbeds;
 
-	const neighbourSuitable = elements[index]
-		? suitableAdNeighbour(elements[index])
+	const neighbour = elements[index];
+	const neighbourSuitable = neighbour
+		? suitableAdNeighbour(neighbour)
 		: false;
 	return enoughCharsForward && neighbourSuitable;
 };
@@ -104,7 +105,8 @@ const hasBackwardBuffer = (
 
 	const enoughCharsBackward = meetsThreshold || noBackwardsEmbeds;
 
-	return suitableAdNeighbour(elements[index]) && enoughCharsBackward;
+	const neighbour = elements[index];
+	return !!neighbour && suitableAdNeighbour(neighbour) && enoughCharsBackward;
 };
 
 /**
@@ -144,8 +146,12 @@ export const findAdSlots = (elements: CAPIElement[]): number[] => {
 	const elementsWithLength = getElementsWithLength(elements);
 
 	for (let i = 0; i < elementsWithLength.length; i += 1) {
-		if (adCount < AD_LIMIT && isTextElement(elements[i])) {
-			charsSinceLastAd += elementsWithLength[i].length;
+		const element = elements[i];
+		const elementWithLength = elementsWithLength[i];
+		if (!element || !elementWithLength) throw new Error('Invalid element');
+
+		if (adCount < AD_LIMIT && isTextElement(element)) {
+			charsSinceLastAd += elementWithLength.length;
 
 			if (
 				hasSpaceForAd(

@@ -37,7 +37,7 @@ const groupNotificationsByTarget = (
 				groupings[notification.target] = [];
 			}
 
-			groupings[notification.target].push(notification);
+			groupings[notification.target]?.push(notification);
 
 			return groupings;
 		},
@@ -58,9 +58,8 @@ export const addNotificationsToDropdownLinks = (
 		);
 
 		if (targetHasNewNotifications) {
-			const newMessages = notificationsByTarget[link.id].map(
-				(n) => n.message,
-			);
+			const newMessages =
+				notificationsByTarget[link.id]?.map((n) => n.message) ?? [];
 
 			const existingNotifications = link.notifications;
 			if (existingNotifications) {

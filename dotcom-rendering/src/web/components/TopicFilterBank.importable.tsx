@@ -93,9 +93,10 @@ export const TopicFilterBank = ({
 		const selectedIndex = availableTopics.findIndex((availableTopic) =>
 			isEqual(selectedTopic, availableTopic),
 		);
+		const topic = availableTopics[selectedIndex];
 
-		if (selectedIndex > 4) {
-			topFiveTopics.splice(4, 1, availableTopics[selectedIndex]);
+		if (selectedIndex > 4 && topic) {
+			topFiveTopics.splice(4, 1, topic);
 		}
 	}
 

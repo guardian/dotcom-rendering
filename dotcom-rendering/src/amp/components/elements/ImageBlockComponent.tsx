@@ -25,10 +25,9 @@ export const ImageBlockComponent: React.FC<{
 		element.imageSources,
 		containerWidth,
 	);
-	const height: number = heightEstimate(
-		element.media.allImages[0],
-		image.width,
-	);
+	const height: number = element.media.allImages[0]
+		? heightEstimate(element.media.allImages[0], image.width)
+		: 0;
 	const iconStyle = css`
 		fill: ${pillarPalette_DO_NOT_USE[pillar].main};
 		padding-right: 3px;

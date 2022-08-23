@@ -71,10 +71,9 @@ const mainImage = (element: ImageBlockElement) => {
 		element.imageSources,
 		containerWidth,
 	);
-	const height: number = heightEstimate(
-		element.media.allImages[0],
-		image.width,
-	);
+	const height: number = element.media.allImages[0]
+		? heightEstimate(element.media.allImages[0], image.width)
+		: 0;
 
 	if (!image) {
 		return null;

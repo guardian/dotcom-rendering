@@ -111,7 +111,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 			<BrazeComponent
 				logButtonClickWithBraze={meta.logButtonClickWithBraze}
 				submitComponentEvent={submitComponentEvent}
-				componentName={meta.dataFromBraze.componentName}
+				componentName={meta.dataFromBraze.componentName ?? 'unknown'}
 				brazeMessageProps={meta.dataFromBraze}
 			/>
 		</div>

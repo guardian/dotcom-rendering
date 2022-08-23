@@ -20,7 +20,7 @@ async function getContentFromURL(_url, _headers) {
 		const url = new URL(_url);
 
 		// searchParams will only work for the first set of query params because 'url' is already a query param itself
-		const searchparams = url.searchParams?.toString();
+		const searchparams = url.searchParams.toString();
 
 		// Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
 		const jsonUrl = `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
@@ -81,9 +81,7 @@ const parseURL = (requestURL, requestPath) => {
 	 *
 	 */
 
-	let url = requestURL.includes('url=')
-		? requestURL.split('url=')[1]
-		: requestURL;
+	let url = requestURL.split('url=')[1] ?? requestURL;
 
 	url = decodeURIComponent(url);
 

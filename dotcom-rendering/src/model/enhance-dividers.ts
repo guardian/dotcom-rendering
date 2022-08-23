@@ -27,6 +27,7 @@ const checkForDividers = (elements: CAPIElement[]): CAPIElement[] => {
 	// set to true
 	const enhanced: CAPIElement[] = [];
 	elements.forEach((element, i) => {
+		const prev = elements[i - 1];
 		if (i === 0) {
 			// Always pass first element through
 			enhanced.push(element);
@@ -36,8 +37,9 @@ const checkForDividers = (elements: CAPIElement[]): CAPIElement[] => {
 				_type: 'model.dotcomrendering.pageElements.DividerBlockElement',
 			});
 		} else if (
+			prev &&
 			// If the previous element was a dinkus and this one is a text block, set it's dropCap flag
-			isDinkus(elements[i - 1]) &&
+			isDinkus(prev) &&
 			element._type ===
 				'model.dotcomrendering.pageElements.TextBlockElement'
 		) {

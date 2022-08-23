@@ -457,7 +457,7 @@ export const Carousel = ({ heading, trails, onwardsType, format }: Props) => {
 			.filter(notPresentation)
 			.map((el) => el.offsetLeft);
 
-		const scrolled = (current.scrollLeft || 0) + offsets[0];
+		const scrolled = (current.scrollLeft || 0) + (offsets[0] ?? 0);
 		const active = offsets.findIndex((el) => el >= scrolled);
 
 		return Math.max(0, active);
@@ -488,7 +488,7 @@ export const Carousel = ({ heading, trails, onwardsType, format }: Props) => {
 			.filter(notPresentation)
 			.map((el) => el.offsetLeft);
 
-		const scrolled = (current.scrollLeft || 0) + offsets[0];
+		const scrolled = (current.scrollLeft || 0) + (offsets[0] ?? 0);
 
 		const nextOffset = offsets
 			.reverse()
@@ -510,7 +510,7 @@ export const Carousel = ({ heading, trails, onwardsType, format }: Props) => {
 			.filter(notPresentation)
 			.map((el) => el.offsetLeft);
 
-		const scrolled = (current.scrollLeft || 0) + offsets[0];
+		const scrolled = (current.scrollLeft || 0) + (offsets[0] ?? 0);
 		const nextOffset = offsets.find((offset) => offset > scrolled);
 
 		if (nextOffset) {

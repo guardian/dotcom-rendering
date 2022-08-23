@@ -21,8 +21,5 @@ export const getAllThemes = (format: {
 	];
 };
 
-export const getThemeNameAsString = (format: ArticleFormat): string => {
-	return format.theme < 5
-		? ArticlePillar[format.theme]
-		: ArticleSpecial[format.theme];
-};
+export const getThemeNameAsString = (format: ArticleFormat): string =>
+	ArticlePillar[format.theme] ?? ArticleSpecial[format.theme] ?? 'unknown';

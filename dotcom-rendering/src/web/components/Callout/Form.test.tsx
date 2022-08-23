@@ -164,13 +164,13 @@ describe('Callout from', () => {
 			getByTestId(`form-field-${fieldId}`);
 
 		const radioFieldComponent1 = getByFieldId(
-			radioField.options[0].value,
+			radioField.options[0]?.value ?? '',
 		) as HTMLInputElement;
 		fireEvent.click(radioFieldComponent1);
 		expect(radioFieldComponent1.checked).toBe(true);
 
 		const radioFieldComponent2 = getByFieldId(
-			radioField.options[1].value,
+			radioField.options[1]?.value ?? '',
 		) as HTMLInputElement;
 		fireEvent.click(radioFieldComponent2);
 		expect(radioFieldComponent2.checked).toBe(true);
@@ -196,13 +196,13 @@ describe('Callout from', () => {
 			getByTestId(`form-field-${fieldId}`);
 
 		const checkBoxFieldComponent1 = getByFieldId(
-			checkboxField.options[0].value,
+			checkboxField.options[0]?.value ?? '',
 		) as HTMLInputElement;
 		fireEvent.click(checkBoxFieldComponent1);
 		expect(checkBoxFieldComponent1.checked).toBe(true);
 
 		const checkBoxFieldComponent3 = getByFieldId(
-			checkboxField.options[2].value,
+			checkboxField.options[2]?.value ?? '',
 		) as HTMLInputElement;
 		fireEvent.click(checkBoxFieldComponent3);
 		expect(checkBoxFieldComponent3.checked).toBe(true);
@@ -284,19 +284,19 @@ describe('Callout from', () => {
 			getByTestId(`form-field-${fieldId}`);
 
 		const radioFieldComponent = getByFieldId(
-			radioField.options[0].value,
+			radioField.options[0]?.value ?? '',
 		) as HTMLInputElement;
 		fireEvent.click(radioFieldComponent);
 		expect(radioFieldComponent.checked).toBe(true);
 
 		const checkBoxFieldComponent1 = getByFieldId(
-			checkboxField.options[0].value,
+			checkboxField.options[0]?.value ?? '',
 		) as HTMLInputElement;
 		fireEvent.click(checkBoxFieldComponent1);
 		expect(checkBoxFieldComponent1.checked).toBe(true);
 
 		const checkBoxFieldComponent2 = getByFieldId(
-			checkboxField.options[1].value,
+			checkboxField.options[1]?.value ?? '',
 		) as HTMLInputElement;
 		fireEvent.click(checkBoxFieldComponent2);
 		expect(checkBoxFieldComponent2.checked).toBe(true);

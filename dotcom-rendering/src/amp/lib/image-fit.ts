@@ -16,6 +16,7 @@ export const bestFitImage = (
 		.sort((a, b) => a.width - b.width)
 		.find((img) => img.width >= containerWidth);
 
+	// @ts-expect-error -- we’re checking the array is not empty above
 	return bestFit || srcSets[srcSets.length - 1];
 };
 

@@ -209,7 +209,7 @@ export const InteractiveContentsBlockComponent = ({
 					);
 					if (index > 0)
 						return setStickyNavCurrentHeader(
-							enhancedSubheadings[index - 1],
+							enhancedSubheadings[index - 1] ?? null,
 						);
 					// We've scrolled back past the top element
 					return setStickyNavCurrentHeader(null);
@@ -221,21 +221,19 @@ export const InteractiveContentsBlockComponent = ({
 					return setStickyNavCurrentHeader(
 						enhancedSubheadings[
 							getSubheadingIndexById(element.target.id)
-						],
+						] ?? null,
 					);
 
 				// Check if we're scrolling up past the end of the document and set sticky nav to the last element
 				const lastElement =
-					enhancedSubheadings[enhancedSubheadings.length - 1];
+					enhancedSubheadings[enhancedSubheadings.length - 1] ?? null;
 				if (
 					endElement &&
 					endElement.boundingClientRect.y > 0 &&
-					lastElement.ref &&
+					lastElement?.ref &&
 					lastElement.ref.getBoundingClientRect().y < 0
 				) {
-					return setStickyNavCurrentHeader(
-						enhancedSubheadings[enhancedSubheadings.length - 1],
-					);
+					return setStickyNavCurrentHeader(lastElement);
 				}
 			};
 

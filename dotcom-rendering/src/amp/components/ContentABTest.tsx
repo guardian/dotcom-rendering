@@ -28,7 +28,10 @@ export const getGroup = (pageId: string): ContentABTestGroup => {
 	const lastFourBytes = hashedPageId.words[hashedPageId.words.length - 1];
 	// Assign the group by applying mod base 12
 	// Mod can return negative values so we apply `Math.abs` to avoid negative groups
-	const group = Math.abs(lastFourBytes) % NUM_GROUPS;
+	const group =
+		typeof lastFourBytes === 'number'
+			? Math.abs(lastFourBytes) % NUM_GROUPS
+			: -1;
 
 	if (isContentABTestGroup(group)) {
 		return group;

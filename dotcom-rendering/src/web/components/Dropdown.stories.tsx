@@ -62,12 +62,13 @@ const links = [
 
 const linksWithNoneActive = [
 	{
-		...links[0],
+		id: 'uk',
+		url: '/preference/edition/uk',
+		title: 'UK edition',
 		isActive: false,
+		dataLinkName: 'linkname-UK',
 	},
-	{ ...links[1] },
-	{ ...links[2] },
-	{ ...links[3] },
+	...links.slice(1),
 ];
 
 export default {

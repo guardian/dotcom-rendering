@@ -19,6 +19,7 @@ export const FixedSmallSlowVMPU = ({
 	showAge,
 	index,
 }: Props) => {
+	if (!(trails[0] && trails[1] && trails[2] && trails[3])) return null;
 	return (
 		<UL direction="row">
 			<LI percentage="33.333%" padSides={true} padBottomOnMobile={true}>

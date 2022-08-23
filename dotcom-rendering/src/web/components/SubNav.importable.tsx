@@ -160,7 +160,7 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 			const lastLi = lis[lis.length - 1];
 
 			const ulTop = ulEl.getBoundingClientRect().top;
-			const liTop = lastLi.getBoundingClientRect().top;
+			const liTop = lastLi?.getBoundingClientRect().top;
 
 			setShowMore(ulTop !== liTop);
 		} else {

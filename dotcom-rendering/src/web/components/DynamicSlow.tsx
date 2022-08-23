@@ -21,6 +21,8 @@ export const DynamicSlow = ({ trails, containerPalette, showAge }: Props) => {
 	const bigCards = trails.slice(2, 4);
 	const smallCards = trails.slice(4, 8);
 
+	if (!(primary && secondary)) return null;
+
 	return (
 		<>
 			<UL direction="row" padBottom={true}>

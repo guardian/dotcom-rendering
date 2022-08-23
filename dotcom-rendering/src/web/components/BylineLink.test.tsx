@@ -94,7 +94,7 @@ describe('BylineLink', () => {
 
 		expect(container).toHaveTextContent(byline);
 		expect(links.length).toBe(1);
-		expect(links.item(0).href).toContain(tags[0].id);
+		expect(links.item(0).href).toContain(tags[0]?.id);
 	});
 
 	it('should link multiple tags by linking name tokens with Contributor tag titles', () => {
@@ -119,8 +119,8 @@ describe('BylineLink', () => {
 
 		expect(container).toHaveTextContent(byline);
 		expect(links.length).toBe(2);
-		expect(links.item(0).href).toContain(tags[0].id);
-		expect(links.item(1).href).toContain(tags[1].id);
+		expect(links.item(0).href).toContain(tags[0]?.id);
+		expect(links.item(1).href).toContain(tags[1]?.id);
 	});
 
 	it('should not reuse a contributor tag, to successfully disambiguate identical names', () => {
@@ -146,7 +146,7 @@ describe('BylineLink', () => {
 
 		expect(container).toHaveTextContent(byline);
 		expect(links.length).toBe(2);
-		expect(links.item(0).href).toContain(tags[0].id);
-		expect(links.item(1).href).toContain(tags[1].id);
+		expect(links.item(0).href).toContain(tags[0]?.id);
+		expect(links.item(1).href).toContain(tags[1]?.id);
 	});
 });

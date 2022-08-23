@@ -5,8 +5,9 @@ const specialCasedValues: Record<string, string> = {
 export const buildDetailText = (input: string) => {
 	const normalisedInput = input.toLowerCase().trim();
 
-	if (normalisedInput in specialCasedValues) {
-		return `Free ${specialCasedValues[normalisedInput]} newsletter`;
+	const specialCase = specialCasedValues[normalisedInput];
+	if (specialCase) {
+		return `Free ${specialCase} newsletter`;
 	}
 
 	if (supportedFrequencyValues.includes(normalisedInput)) {

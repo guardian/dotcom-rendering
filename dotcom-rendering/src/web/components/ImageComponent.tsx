@@ -254,7 +254,9 @@ export const ImageComponent = ({
 		const descendingByWidth = (a: Image, b: Image) => {
 			return parseInt(b.fields.width) - parseInt(a.fields.width);
 		};
-		return images.slice().sort(descendingByWidth)[0].url;
+		const [largest] = images.slice().sort(descendingByWidth);
+		if (!largest) throw new Error('No largest image');
+		return largest.url;
 	};
 	// Legacy images do not have a master so we fallback to the largest available
 	const image =

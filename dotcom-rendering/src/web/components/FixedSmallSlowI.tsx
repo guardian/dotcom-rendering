@@ -16,6 +16,7 @@ export const FixedSmallSlowI = ({
 	showAge,
 }: Props) => {
 	const trail = trails[0];
+	if (!trail) return null;
 
 	return (
 		<UL>

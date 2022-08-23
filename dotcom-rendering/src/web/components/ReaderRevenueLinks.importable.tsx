@@ -208,7 +208,9 @@ const ReaderRevenueLinksRemote: React.FC<{
 				return window
 					.guardianPolyfilledImport(module.url)
 					.then((headerModule: { [key: string]: JSX.Element }) => {
-						setSupportHeader(() => headerModule[module.name]);
+						setSupportHeader(
+							() => headerModule[module.name] ?? null,
+						);
 					});
 			})
 			.catch((error) => {

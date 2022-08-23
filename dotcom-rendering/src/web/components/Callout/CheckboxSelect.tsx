@@ -14,8 +14,7 @@ export const CheckboxSelect = ({ formField, formData, setFormData }: Props) => (
 			{formField.options.map((option, index) => {
 				// data related to this field is mapped to `formData` using `formField.id`
 				// We cannot assume that the data exists, so we need to check if `formField.id` key exists in `formData`
-				const selectedCheckboxesArray =
-					formField.id in formData ? formData[formField.id] : [];
+				const selectedCheckboxesArray = formData[formField.id] ?? [];
 
 				const isCheckboxChecked = !!selectedCheckboxesArray.find(
 					(ele: string) => ele === option.value,

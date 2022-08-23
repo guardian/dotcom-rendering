@@ -155,7 +155,7 @@ export const enhanceCards = (
 			image: faciaCard.display.imageHide
 				? undefined
 				: faciaCard.properties.maybeContent?.trail.trailPicture
-						?.allImages[0].url,
+						?.allImages[0]?.url,
 			kickerText: faciaCard.header.kicker?.item?.properties.kickerText,
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(

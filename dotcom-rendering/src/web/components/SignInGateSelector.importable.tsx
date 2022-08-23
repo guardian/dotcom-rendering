@@ -102,7 +102,7 @@ const ShowSignInGate = ({
 	useEffect(() => {
 		submitViewEventTracking({
 			component: withComponentId(
-				signInGateTestIdToComponentId[abTest.id],
+				signInGateTestIdToComponentId[abTest.id] ?? 'unknown',
 			),
 			abTest,
 		});
@@ -120,7 +120,8 @@ const ShowSignInGate = ({
 				dismissGate(setShowGate, abTest);
 			},
 			abTest,
-			ophanComponentId: signInGateTestIdToComponentId[abTest.id],
+			ophanComponentId:
+				signInGateTestIdToComponentId[abTest.id] ?? 'unknown',
 			isComment:
 				format.design === ArticleDesign.Comment ||
 				format.design === ArticleDesign.Editorial,

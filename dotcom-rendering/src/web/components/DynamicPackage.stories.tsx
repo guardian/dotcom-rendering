@@ -423,12 +423,14 @@ ThreeSnapTwoStandard.story = {
 	name: 'With three snaps - two standard cards',
 };
 
+const [one, two, three] = trails;
+
 export const ThreeSnapTwoStandard2ndBoosted = () => (
 	<Section title="DynamicPackage" padContent={false} centralBorder="partial">
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
-				snap: [trails[0], { ...trails[1], isBoosted: true }, trails[2]],
+				snap: [one, { ...two, isBoosted: true }, three],
 				standard: [...trails].slice(3, 5),
 			}}
 			containerPalette="LongRunningPalette"

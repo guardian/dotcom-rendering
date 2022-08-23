@@ -68,7 +68,7 @@ const makeFallback = (html: string): string | null => {
 	}
 
 	const q = blockquotes[0];
-	return q.innerHTML;
+	return q?.innerHTML ?? null;
 };
 
 export const TwitterBlockComponent: React.FC<{

@@ -9,7 +9,7 @@ const appendParamsToBaseUrl: (
 
 		return `${shareUrl}${separator}${encodeURIComponent(
 			param,
-		)}=${encodeURIComponent(params[param])}`;
+		)}=${encodeURIComponent(value)}`;
 	}, baseUrl);
 
 export const getSharingUrls = (

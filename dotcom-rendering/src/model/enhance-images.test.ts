@@ -3,7 +3,7 @@ import { PhotoEssay } from '../../fixtures/generated/articles/PhotoEssay';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { images } from '../../fixtures/generated/images';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { nonEmpty } from '../web/lib/tuple';
+import { isTuple, nonEmpty } from '../web/lib/tuple';
 import { enhanceImages } from './enhance-images';
 
 if (!nonEmpty(images)) throw new Error('Empty images list');
@@ -676,7 +676,7 @@ describe('Enhance Images', () => {
 				html: '<p>Just some normal text</p>',
 			};
 
-			if (!(images[0] && images[1] && images[2] && images[3])) {
+			if (!(images[1] && images[2] && images[3])) {
 				throw new Error('Not enough images');
 			}
 

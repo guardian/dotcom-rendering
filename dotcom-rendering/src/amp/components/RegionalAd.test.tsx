@@ -72,6 +72,17 @@ describe('RegionalAd', () => {
 
 		const ampAdElement = container.querySelectorAll('amp-ad');
 
+		if (
+			!(
+				ampAdElement[0] &&
+				ampAdElement[1] &&
+				ampAdElement[2] &&
+				ampAdElement[3]
+			)
+		) {
+			throw new Error('Not enough ad elements');
+		}
+
 		expect(ampAdElement).not.toBeNull();
 
 		const ukRtcAttribute: Record<string, unknown> = JSON.parse(
@@ -120,6 +131,17 @@ describe('RegionalAd', () => {
 		);
 
 		const ampAdElement = container.querySelectorAll('amp-ad');
+
+		if (
+			!(
+				ampAdElement[0] &&
+				ampAdElement[1] &&
+				ampAdElement[2] &&
+				ampAdElement[3]
+			)
+		) {
+			throw new Error('Not enough ad elements');
+		}
 
 		expect(ampAdElement).not.toBeNull();
 
@@ -170,6 +192,17 @@ describe('RegionalAd', () => {
 
 		const ampAdElement = container.querySelectorAll('amp-ad');
 
+		if (
+			!(
+				ampAdElement[0] &&
+				ampAdElement[1] &&
+				ampAdElement[2] &&
+				ampAdElement[3]
+			)
+		) {
+			throw new Error('Not enough ad elements');
+		}
+
 		expect(ampAdElement).not.toBeNull();
 
 		const ukRtcAttribute: Record<string, unknown> = JSON.parse(
@@ -218,6 +251,17 @@ describe('RegionalAd', () => {
 		);
 
 		const ampAdElement = container.querySelectorAll('amp-ad');
+
+		if (
+			!(
+				ampAdElement[0] &&
+				ampAdElement[1] &&
+				ampAdElement[2] &&
+				ampAdElement[3]
+			)
+		) {
+			throw new Error('Not enough ad elements');
+		}
 
 		expect(ampAdElement).not.toBeNull();
 
@@ -268,6 +312,17 @@ describe('RegionalAd', () => {
 
 		const ampAdElement = container.querySelectorAll('amp-ad');
 
+		if (
+			!(
+				ampAdElement[0] &&
+				ampAdElement[1] &&
+				ampAdElement[2] &&
+				ampAdElement[3]
+			)
+		) {
+			throw new Error('Not enough ad elements');
+		}
+
 		expect(ampAdElement).not.toBeNull();
 
 		const ukRtcAttribute: Record<string, unknown> = JSON.parse(
@@ -316,6 +371,17 @@ describe('RegionalAd', () => {
 		);
 
 		const ampAdElement = container.querySelectorAll('amp-ad');
+
+		if (
+			!(
+				ampAdElement[0] &&
+				ampAdElement[1] &&
+				ampAdElement[2] &&
+				ampAdElement[3]
+			)
+		) {
+			throw new Error('Not enough ad elements');
+		}
 
 		expect(ampAdElement).not.toBeNull();
 
@@ -368,6 +434,17 @@ describe('RegionalAd', () => {
 		);
 
 		const ampAdElement = container.querySelectorAll('amp-ad');
+
+		if (
+			!(
+				ampAdElement[0] &&
+				ampAdElement[1] &&
+				ampAdElement[2] &&
+				ampAdElement[3]
+			)
+		) {
+			throw new Error('Not enough ad elements');
+		}
 
 		expect(ampAdElement).not.toBeNull();
 
@@ -428,6 +505,17 @@ describe('RegionalAd', () => {
 		);
 
 		const ampAdElement = container.querySelectorAll('amp-ad');
+
+		if (
+			!(
+				ampAdElement[0] &&
+				ampAdElement[1] &&
+				ampAdElement[2] &&
+				ampAdElement[3]
+			)
+		) {
+			throw new Error('Not enough ad elements');
+		}
 
 		expect(ampAdElement).not.toBeNull();
 

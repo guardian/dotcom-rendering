@@ -20,6 +20,8 @@ export const FixedLargeSlowXIV = ({
 	const secondSlice = trails.slice(2, 6);
 	const thirdSlice = trails.slice(6, 14);
 
+	if (!(primary && secondary)) return null;
+
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
