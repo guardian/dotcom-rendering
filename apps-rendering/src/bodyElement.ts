@@ -6,7 +6,7 @@ import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { ArticleTheme } from '@guardian/libs';
-import { Option, Result } from '@guardian/types';
+import type { Option, Result } from '@guardian/types';
 import {
 	err,
 	fromNullable,
@@ -23,9 +23,9 @@ import type { Embed } from 'embed';
 import type { Image as ImageData } from 'image';
 import { parseImage } from 'image';
 import { compose, pipe } from 'lib';
+import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
-import { Optional } from 'optional';
 
 // ----- Types ----- //
 
@@ -217,7 +217,7 @@ const slugify = (text: string): string => {
 		.replace(/--+/g, '-'); // Replace multiple "-" with single "-"
 };
 
-export const flattenTextElement = (doc: Node): BodyElement[] => {
+const flattenTextElement = (doc: Node): BodyElement[] => {
 	const childNodes = Array.from(doc.childNodes);
 	return childNodes.map((node) => {
 		switch (node.nodeName) {
@@ -461,4 +461,5 @@ export {
 	AudioAtom,
 	parseElements,
 	NewsletterSignUp,
+	flattenTextElement,
 };
