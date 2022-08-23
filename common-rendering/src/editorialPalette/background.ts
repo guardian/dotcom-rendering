@@ -581,6 +581,8 @@ const footer = (_format: ArticleFormat): Colour => neutral[97];
 
 const footerDark = (_format: ArticleFormat): Colour => neutral[0];
 
+const signUpFormDark =  (_format: ArticleFormat): Colour => neutral[10];
+
 // ----- API ----- //
 
 const background = {
@@ -624,6 +626,7 @@ const background = {
 	tag,
 	tagDark,
 	pinnedPost,
+	signUpFormDark,
 };
 
 // ----- Exports ----- //

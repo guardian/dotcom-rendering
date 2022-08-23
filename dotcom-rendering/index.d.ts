@@ -2,10 +2,6 @@
 // CAPIArticleType and its subtypes //
 // ------------------------- //
 
-type DCRSnapType = import('./src/types/front').DCRSnapType;
-type DCRSupportingContent = import('./src/types/front').DCRSupportingContent;
-type NavType = import('./src/model/extract-nav').NavType;
-
 // Pillars are used for styling
 // RealPillars have pillar palette colours
 // FakePillars allow us to make modifications to style based on rules outside of the pillar of an article
@@ -37,6 +33,7 @@ type CAPIDesign =
 	| 'ReviewDesign'
 	| 'AnalysisDesign'
 	| 'CommentDesign'
+	| 'ExplainerDesign'
 	| 'LetterDesign'
 	| 'FeatureDesign'
 	| 'LiveBlogDesign'
@@ -81,181 +78,6 @@ type ArticleFormat = import('@guardian/libs').ArticleFormat;
 
 type DesignTypesObj = { [key in ArticleDesign]: any };
 
-type Colour = string;
-
-type Palette = {
-	text: {
-		headline: Colour;
-		headlineWhenMatch: Colour;
-		seriesTitle: Colour;
-		sectionTitle: Colour;
-		seriesTitleWhenMatch: Colour;
-		byline: Colour;
-		twitterHandle: Colour;
-		twitterHandleBelowDesktop: Colour;
-		caption: Colour;
-		captionLink: Colour;
-		subMeta: Colour;
-		subMetaLabel: Colour;
-		subMetaLink: Colour;
-		syndicationButton: Colour;
-		articleLink: Colour;
-		articleLinkHover: Colour;
-		cardHeadline: Colour;
-		cardByline: Colour;
-		cardKicker: Colour;
-		dynamoHeadline: Colour;
-		dynamoKicker: Colour;
-		dynamoMeta: Colour;
-		linkKicker: Colour;
-		cardStandfirst: Colour;
-		cardFooter: Colour;
-		headlineByline: Colour;
-		standfirst: Colour;
-		standfirstLink: Colour;
-		lastUpdated: Colour;
-		branding: Colour;
-		disclaimerLink: Colour;
-		signInLink: Colour;
-		richLink: Colour;
-		witnessIcon: Colour;
-		witnessAuthor: Colour;
-		witnessTitle: Colour;
-		carouselTitle: Colour;
-		calloutHeading: Colour;
-		pullQuote: Colour;
-		pullQuoteAttribution: Colour;
-		dropCap: Colour;
-		blockquote: Colour;
-		numberedTitle: Colour;
-		numberedPosition: Colour;
-		overlaidCaption: Colour;
-		shareCount: Colour;
-		shareCountUntilDesktop: Colour;
-		cricketScoreboardLink: Colour;
-		keyEvent: Colour;
-		keyEventTime: Colour;
-		filterButton: Colour;
-		filterButtonHover: Colour;
-		filterButtonActive: Colour;
-		betaLabel: Colour;
-	};
-	background: {
-		article: Colour;
-		seriesTitle: Colour;
-		sectionTitle: Colour;
-		avatar: Colour;
-		card: Colour;
-		headline: Colour;
-		headlineByline: Colour;
-		bullet: Colour;
-		bulletStandfirst: Colour;
-		header: Colour;
-		standfirst: Colour;
-		richLink: Colour;
-		imageTitle: Colour;
-		speechBubble: Colour;
-		carouselDot: Colour;
-		carouselDotFocus: Colour;
-		headlineTag: Colour;
-		mostViewedTab: Colour;
-		matchNav: Colour;
-		analysisUnderline: Colour;
-		matchStats: Colour;
-		ageWarning: Colour;
-		keyEventBullet: Colour;
-		summaryEventBullet: Colour;
-		keyEvent: Colour;
-		keyEventFromDesktop: Colour;
-		filterButton: Colour;
-		filterButtonHover: Colour;
-		filterButtonActive: Colour;
-	};
-	fill: {
-		commentCount: Colour;
-		commentCountUntilDesktop: Colour;
-		shareCountIcon: Colour;
-		shareCountIconUntilDesktop: Colour;
-		shareIcon: Colour;
-		shareIconGrayBackground: Colour;
-		cameraCaptionIcon: Colour;
-		richLink: Colour;
-		quoteIcon: Colour;
-		blockquoteIcon: Colour;
-		twitterHandleBelowDesktop: Colour;
-		guardianLogo: Colour;
-	};
-	border: {
-		syndicationButton: Colour;
-		subNav: Colour;
-		articleLink: Colour;
-		articleLinkHover: Colour;
-		liveBlock: Colour;
-		pinnedPost: Colour;
-		standfirstLink: Colour;
-		headline: Colour;
-		standfirst: Colour;
-		richLink: Colour;
-		navPillar: Colour;
-		article: Colour;
-		lines: Colour;
-		matchTab: Colour;
-		activeMatchTab: Colour;
-		cricketScoreboardTop: Colour;
-		cricketScoreboardDivider: Colour;
-		cardSupporting: Colour;
-		keyEvent: Colour;
-		filterButton: Colour;
-	};
-	topBar: {
-		card: Colour;
-	};
-	hover: {
-		headlineByline: Colour;
-		standfirstLink: Colour;
-		keyEventLink: Colour;
-		keyEventBullet: Colour;
-		summaryEventBullet: Colour;
-	};
-};
-
-type ContainerOverrides = {
-	text: {
-		cardHeadline: Colour;
-		cardStandfirst: Colour;
-		cardKicker: Colour;
-		cardByline: Colour;
-		cardFooter: Colour;
-		cardCommentCount: Colour;
-		dynamoHeadline: Colour;
-		dynamoKicker: Colour;
-		dynamoSublinkKicker: Colour;
-		dynamoMeta: Colour;
-		container: Colour;
-		containerToggle: Colour;
-		containerDate: Colour;
-	};
-	border: {
-		container: Colour;
-		lines: Colour;
-	};
-	background: {
-		container: Colour;
-		card: Colour;
-	};
-	topBar: {
-		card: Colour;
-	};
-};
-
-type EditionId = 'UK' | 'US' | 'INT' | 'AU';
-
-type Edition = {
-	id: EditionId;
-	displayName: string;
-	locale: string;
-};
-
 type SharePlatform =
 	| 'facebook'
 	| 'twitter'
@@ -290,28 +112,6 @@ type AdTargeting =
 interface SectionNielsenAPI {
 	name: string;
 	apiID: string;
-}
-
-interface EditionCommercialProperties {
-	adTargeting: AdTargetParam[];
-	branding?: Branding;
-}
-
-type CommercialProperties = { [E in EditionId]: EditionCommercialProperties };
-
-type BrandingLogo = {
-	src: string;
-	link: string;
-	label: string;
-	dimensions: { width: number; height: number };
-};
-
-interface Branding {
-	brandingType?: { name: string };
-	sponsorName: string;
-	logo: BrandingLogo;
-	aboutThisLink: string;
-	logoForDarkBackground?: BrandingLogo;
 }
 
 interface ReaderRevenueCategories {
@@ -380,16 +180,6 @@ interface Pagination {
 	newer?: string;
 	oldest?: string;
 	older?: string;
-}
-
-interface FooterLink {
-	text: string;
-	url: string;
-	dataLinkName: string;
-	extraClasses?: string;
-}
-interface FooterType {
-	footerLinks: FooterLink[][];
 }
 
 type ContentType =
@@ -480,106 +270,6 @@ interface CAPINavType {
 	readerRevenueLinks: ReaderRevenuePositions;
 }
 
-// WARNING: run `gen-schema` task if changing this to update the associated JSON
-// schema definition.
-interface CAPIArticleType {
-	headline: string;
-	standfirst: string;
-	webTitle: string;
-	mainMediaElements: CAPIElement[];
-	main: string;
-	keyEvents: Block[];
-	blocks: Block[];
-	pinnedPost?: Block;
-	pagination?: Pagination;
-	byline?: string;
-	/** @deprecated - will be removed in the next model version */
-	author?: unknown;
-
-	/**
-	 * @TJS-format date-time
-	 */
-	webPublicationDateDeprecated: string;
-	webPublicationDate: string;
-	webPublicationDateDisplay: string;
-	webPublicationSecondaryDateDisplay: string;
-	editionLongForm: string;
-	editionId: EditionId;
-	pageId: string;
-	version: number; // TODO: check who uses?
-	tags: TagType[];
-	format: CAPIFormat;
-
-	// Include pillar and designType until we remove them upstream
-	// We type designType as `string` for now so that the field is present,
-	// but we don't care what's in it. Pillar we have a type for so we use it
-	// but it shouldn't be important.
-	designType: string;
-	pillar: LegacyPillar;
-
-	isImmersive: boolean;
-	sectionLabel: string;
-	sectionUrl: string;
-	sectionName?: string;
-	subMetaSectionLinks: CAPILinkType[];
-	subMetaKeywordLinks: CAPILinkType[];
-	shouldHideAds: boolean;
-	isAdFreeUser: boolean;
-	openGraphData: { [key: string]: string };
-	twitterData: { [key: string]: string };
-	webURL: string;
-	linkedData: { [key: string]: any }[];
-	config: ConfigType;
-
-	showBottomSocialButtons: boolean;
-	shouldHideReaderRevenue: boolean;
-
-	// AMP specific (for now)
-	guardianBaseURL: string;
-	contentType: string;
-	hasRelated: boolean;
-	publication: string; // TODO: check who uses?
-	hasStoryPackage: boolean;
-	storyPackage?: {
-		trails: CAPITrailType[];
-		heading: string;
-	};
-	onwards?: CAPIOnwardsType[];
-	beaconURL: string;
-	isCommentable: boolean;
-	commercialProperties: CommercialProperties;
-	starRating?: number;
-	trailText: string;
-	badge?: BadgeType;
-
-	nav: CAPINavType; // TODO move this out as most code uses a different internal NAV model.
-
-	pageFooter: FooterType;
-
-	contributionsServiceUrl: string;
-	slotMachineFlags?: string;
-
-	pageType: PageTypeType;
-
-	matchUrl?: string;
-	matchType?: MatchType;
-	isSpecialReport: boolean;
-
-	// Interactives made on Frontend rather than DCR require special handling.
-	// The logic is date-driven. See:
-	// https://github.com/guardian/frontend/blob/main/common/app/model/dotcomrendering/InteractiveSwitchOver.scala#L7.
-	isLegacyInteractive?: boolean;
-	filterKeyEvents: boolean;
-
-	// Included on live and dead blogs. Used when polling
-	mostRecentBlockId?: string;
-	availableTopics?: Topic[];
-	selectedTopics?: Topic[];
-
-	promotedNewsletter?: Newsletter;
-	tableOfContents?: TOCType[];
-}
-
 type StageType = 'DEV' | 'CODE' | 'PROD';
 
 interface TagType {
@@ -590,15 +280,6 @@ interface TagType {
 	paidContentType?: string;
 	bylineImageUrl?: string;
 	bylineLargeImageUrl?: string;
-}
-
-interface TOCItem {
-	id: string;
-	title: string;
-	subtitle?: string;
-}
-interface TOCType extends TOCItem {
-	nested: TOCItem[];
 }
 
 /**
@@ -628,11 +309,6 @@ interface KeyEventsRequest {
 	keyEvents: Block[];
 	format: CAPIFormat;
 	filterKeyEvents: boolean;
-}
-
-interface BadgeType {
-	seriesTag: string;
-	imageUrl: string;
 }
 
 type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
@@ -746,97 +422,6 @@ interface Topic {
 
 type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
 
-/**
- * Onwards
- */
-type CAPIOnwardsType = {
-	heading: string;
-	trails: CAPITrailType[];
-	description?: string;
-	url?: string;
-	onwardsType: OnwardsType;
-	format: CAPIFormat;
-	isCuratedContent?: boolean;
-};
-
-type OnwardsType =
-	| 'series'
-	| 'more-on-this-story'
-	| 'related-stories'
-	| 'related-content'
-	| 'more-media-in-section'
-	| 'more-galleries'
-	| 'curated-content'
-	| 'default-onwards'; // We should never see this in the analytics data!
-
-interface CommercialConfigType {
-	isPaidContent?: boolean;
-	pageId: string;
-	webPublicationDate?: number;
-	headline?: string;
-	author?: string;
-	keywords?: string;
-	section?: string;
-	edition?: string;
-	series?: string;
-	toneIds?: string;
-	contentType: string;
-	ampIframeUrl: string;
-}
-
-type ServerSideTests = {
-	[k: `${string}Variant`]: 'variant';
-	[k: `${string}Control`]: 'control';
-};
-
-/**
- * the config model will contain useful app/site
- * level data. Although currently derived from the config model
- * constructed in frontend and passed to dotcom-rendering
- * this data could eventually be defined in dotcom-rendering
- */
-interface ConfigType extends CommercialConfigType {
-	ajaxUrl: string;
-	sentryPublicApiKey: string;
-	sentryHost: string;
-	dcrSentryDsn: string;
-	switches: { [key: string]: boolean };
-	abTests: ServerSideTests;
-	dfpAccountId: string;
-	commercialBundleUrl: string;
-	revisionNumber: string;
-	shortUrlId: string;
-	isDev?: boolean;
-	googletagUrl: string;
-	stage: string;
-	frontendAssetsFullURL: string;
-	adUnit: string;
-	isSensitive: boolean;
-	videoDuration?: number;
-	edition: string;
-	section: string;
-
-	sharedAdTargeting: { [key: string]: any };
-	isPaidContent?: boolean;
-	keywordIds: string;
-	showRelatedContent: boolean;
-	shouldHideReaderRevenue?: boolean;
-	idApiUrl: string;
-	discussionApiUrl: string;
-	discussionD2Uid: string;
-	discussionApiClientHeader: string;
-	isPhotoEssay?: boolean;
-	references?: { [key: string]: string }[];
-	host?: string;
-	idUrl?: string;
-	mmaUrl?: string;
-	brazeApiKey?: string;
-	ipsosTag?: string;
-	isLiveBlog?: boolean;
-	isLive?: boolean;
-	isPreview?: boolean;
-}
-
 interface GADataType {
 	pillar: LegacyPillar;
 	webTitle: string;
@@ -873,47 +458,9 @@ interface BaseTrailType {
 	commentCount?: number;
 	starRating?: number;
 	linkText?: string;
-	branding?: Branding;
+	branding?: import('src/types/branding').Branding;
 	isSnap?: boolean;
-	snapData?: DCRSnapType;
-}
-interface TrailType extends BaseTrailType {
-	palette?: never;
-	format: ArticleFormat;
-	supportingContent?: DCRSupportingContent[];
-	trailText?: string;
-	/** @see JSX.IntrinsicAttributes["data-link-name"] */
-	dataLinkName: string;
-	discussionId?: string;
-	isBoosted?: boolean;
-}
-
-interface CAPITrailType extends BaseTrailType {
-	format: CAPIFormat;
-	// Include pillar and designType until we remove them upstream
-	// We type designType as `string` for now so that the field is present,
-	// but we don't care what's in it. Pillar we have a type for so we use it
-	// but it shouldn't be important.
-	designType: string;
-	pillar: LegacyPillar;
-	carouselImages?: { [key: string]: string };
-	isLiveBlog?: boolean;
-}
-
-interface TrailTabType {
-	heading: string;
-	trails: TrailType[];
-}
-
-interface CAPITrailTabType {
-	heading: string;
-	trails: CAPITrailType[];
-}
-
-interface MostViewedFooterPayloadType {
-	tabs: CAPITrailTabType[];
-	mostCommented: CAPITrailType;
-	mostShared: CAPITrailType;
+	snapData?: import('./src/types/front').DCRSnapType;
 }
 
 // ------------

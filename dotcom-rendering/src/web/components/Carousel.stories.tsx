@@ -1,5 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import type { TrailType } from '../../types/trails';
 import { Carousel } from './Carousel.importable';
 import { Section } from './Section';
 

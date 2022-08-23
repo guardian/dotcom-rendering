@@ -14,6 +14,8 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
+import type { NavType } from '../../model/extract-nav';
+import type { CAPIArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -237,26 +239,29 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
+	/**
+	 * This property currently only applies to the header and merchandising slots
+	 */
+	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
+
 	return (
 		<>
 			{format.theme !== ArticleSpecial.Labs ? (
 				<>
 					<div>
-						<Stuck>
-							<Section
-								fullWidth={true}
-								showTopBorder={false}
-								showSideBorders={false}
-								padSides={false}
-								shouldCenter={false}
-							>
-								<HeaderAdSlot
-									isAdFreeUser={CAPIArticle.isAdFreeUser}
-									shouldHideAds={CAPIArticle.shouldHideAds}
-									display={format.display}
-								/>
-							</Section>
-						</Stuck>
+						{renderAds && (
+							<Stuck>
+								<Section
+									fullWidth={true}
+									showTopBorder={false}
+									showSideBorders={false}
+									padSides={false}
+									shouldCenter={false}
+								>
+									<HeaderAdSlot display={format.display} />
+								</Section>
+							</Stuck>
+						)}
 						<SendToBack>
 							<Section
 								fullWidth={true}
@@ -351,20 +356,18 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				// Else, this is a labs article so just show Nav and the Labs header
 				<>
 					<div>
-						<Stuck zIndex="stickyAdWrapper">
-							<Section
-								fullWidth={true}
-								showTopBorder={false}
-								showSideBorders={false}
-								padSides={false}
-							>
-								<HeaderAdSlot
-									isAdFreeUser={CAPIArticle.isAdFreeUser}
-									shouldHideAds={CAPIArticle.shouldHideAds}
-									display={format.display}
-								/>
-							</Section>
-						</Stuck>
+						{renderAds && (
+							<Stuck zIndex="stickyAdWrapper">
+								<Section
+									fullWidth={true}
+									showTopBorder={false}
+									showSideBorders={false}
+									padSides={false}
+								>
+									<HeaderAdSlot display={format.display} />
+								</Section>
+							</Stuck>
+						)}
 						<Stuck zIndex="stickyAdWrapperNav">
 							<Section
 								fullWidth={true}
@@ -647,19 +650,21 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</ShowcaseGrid>
 				</Section>
 
-				<Section
-					fullWidth={true}
-					padSides={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot
-						position="merchandising-high"
-						display={format.display}
-					/>
-				</Section>
+				{renderAds && (
+					<Section
+						fullWidth={true}
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising-high"
+							display={format.display}
+						/>
+					</Section>
+				)}
 
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
@@ -754,16 +759,21 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				<Section
-					fullWidth={true}
-					padSides={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot position="merchandising" display={format.display} />
-				</Section>
+				{renderAds && (
+					<Section
+						fullWidth={true}
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising"
+							display={format.display}
+						/>
+					</Section>
+				)}
 			</main>
 
 			{NAV.subNavSections && (

@@ -8,7 +8,9 @@ import {
 	text,
 	until,
 } from '@guardian/source-foundations';
+import type { EditionId } from '../../types/edition';
 import type { DCRContainerPalette } from '../../types/front';
+import type { Colour } from '../../types/palette';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { getEditionFromId } from '../lib/edition';
 

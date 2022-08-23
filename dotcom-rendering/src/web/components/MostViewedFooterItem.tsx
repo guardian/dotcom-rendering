@@ -7,6 +7,7 @@ import {
 	text,
 	until,
 } from '@guardian/source-foundations';
+import type { TrailType } from '../../types/trails';
 import { AgeWarning } from './AgeWarning';
 import { BigNumber } from './BigNumber/BigNumber';
 import { LinkHeadline } from './LinkHeadline';
