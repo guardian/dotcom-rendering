@@ -293,12 +293,22 @@ export const TreatsStory = () => {
 			title="Treats"
 			treats={[
 				{
-					text: 'The treat text',
-					linkTo: '',
+					links: [
+						{
+							text: 'The treat text',
+							linkTo: '',
+						},
+					],
+					editionId: 'UK',
 				},
 				{
-					text: 'Another piece of text',
-					linkTo: '',
+					links: [
+						{
+							text: 'Another piece of text',
+							linkTo: '',
+						},
+					],
+					editionId: 'UK',
 				},
 			]}
 			showTopBorder={false}

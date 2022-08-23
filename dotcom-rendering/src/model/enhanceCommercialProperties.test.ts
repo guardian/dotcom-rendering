@@ -1,5 +1,6 @@
 import { Labs } from '../../fixtures/generated/articles/Labs';
 import { Standard } from '../../fixtures/generated/articles/Standard';
+import type { CommercialProperties } from '../types/commercial';
 import { enhanceCommercialProperties } from './enhanceCommercialProperties';
 
 const isNumber = (width: unknown): width is number => typeof width === 'number';

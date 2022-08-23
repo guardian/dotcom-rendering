@@ -8,6 +8,9 @@ import {
 	labs,
 } from '@guardian/source-foundations';
 import { buildAdTargeting } from '../../../lib/ad-targeting';
+import type { NavType } from '../../../model/extract-nav';
+import type { CAPIArticleType } from '../../../types/frontend';
+import type { Palette } from '../../../types/palette';
 import { ArticleHeadline } from '../../components/ArticleHeadline';
 import { ArticleTitle } from '../../components/ArticleTitle';
 import { Caption } from '../../components/Caption';

@@ -1,4 +1,3 @@
-/* eslint-disable default-case */
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
@@ -13,6 +12,7 @@ import {
 import { Link } from '@guardian/source-react-components';
 import React from 'react';
 import type { DCRContainerPalette } from '../../types/front';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { Byline } from './Byline';
