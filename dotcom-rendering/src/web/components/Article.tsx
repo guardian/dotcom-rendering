@@ -3,6 +3,8 @@ import { ArticleDesign } from '@guardian/libs';
 import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { filterABTestSwitches } from '../../model/enhance-switches';
+import type { NavType } from '../../model/extract-nav';
+import type { CAPIArticleType } from '../../types/frontend';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
@@ -60,7 +62,7 @@ export const Article = ({ CAPIArticle, NAV, format }: Props) => {
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<CommercialMetrics
-					enabled={CAPIArticle.config.switches.commercialMetrics}
+					enabled={!!CAPIArticle.config.switches.commercialMetrics}
 				/>
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">

@@ -22,6 +22,8 @@ import {
 } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
+import type { NavType } from '../../model/extract-nav';
+import type { CAPIArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
@@ -210,24 +212,27 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 	/** TODO: this data needs to come from the newsletters API */
 	const newsletterRegionFocus = 'UK Focused';
 
+	/**
+	 * This property currently only applies to the header and merchandising slots
+	 */
+	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
-				<Stuck>
-					<Section
-						fullWidth={true}
-						showTopBorder={false}
-						showSideBorders={false}
-						padSides={false}
-						shouldCenter={false}
-					>
-						<HeaderAdSlot
-							isAdFreeUser={CAPIArticle.isAdFreeUser}
-							shouldHideAds={CAPIArticle.shouldHideAds}
-							display={format.display}
-						/>
-					</Section>
-				</Stuck>
+				{renderAds && (
+					<Stuck>
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							showSideBorders={false}
+							padSides={false}
+							shouldCenter={false}
+						>
+							<HeaderAdSlot display={format.display} />
+						</Section>
+					</Stuck>
+				)}
 
 				<Section
 					fullWidth={true}
@@ -246,7 +251,9 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 						}
 						discussionApiUrl={CAPIArticle.config.discussionApiUrl}
 						urls={CAPIArticle.nav.readerRevenueLinks.header}
-						remoteHeader={CAPIArticle.config.switches.remoteHeader}
+						remoteHeader={
+							!!CAPIArticle.config.switches.remoteHeader
+						}
 						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPIArticle.config.idApiUrl}
 					/>
@@ -307,7 +314,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 				)}
 			</div>
 
-			{!!CAPIArticle.config.switches.surveys && (
+			{renderAds && !!CAPIArticle.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 

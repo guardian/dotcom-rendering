@@ -1,5 +1,8 @@
 import { extract as extractGA } from '../model/extract-ga';
+import type { ConfigType, ServerSideTests } from '../types/config';
+import type { EditionId } from '../types/edition';
 import type { DCRFrontType } from '../types/front';
+import type { CAPIArticleType } from '../types/frontend';
 
 export interface WindowGuardianConfig {
 	isDotcomRendering: boolean;

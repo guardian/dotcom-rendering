@@ -9,6 +9,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { getSoleContributor } from '../../lib/byline';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { BylineLink } from './BylineLink';
 

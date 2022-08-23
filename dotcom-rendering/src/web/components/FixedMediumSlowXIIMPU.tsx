@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette } from '../../types/front';
+import type { TrailType } from '../../types/trails';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';

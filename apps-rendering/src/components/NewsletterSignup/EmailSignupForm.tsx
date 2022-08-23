@@ -14,11 +14,21 @@ import {
 	TextInput,
 	userFeedbackThemeDefault,
 } from '@guardian/source-react-components';
+import {
+	background,
+	fill,
+	hover,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
+
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
 interface Props {
+	format: ArticleFormat;
 	newsletterId: string;
 }
 
@@ -62,7 +72,7 @@ const formStyle = css`
  * The UI for the NewsletterSignup might not use an HTML form for apps
  * when implemented
  */
-const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
+const EmailSignupForm: FC<Props> = ({ newsletterId, format }) => {
 	const handleSubmit = (): void => {
 		console.log({ newsletterId });
 	};
@@ -74,6 +84,10 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 				cssOverrides={css`
 					div {
 						${textSans.xsmall({ fontWeight: 'bold' })};
+
+						${darkModeCss`
+							color: ${text.signUpFormDark(format)};
+						`}
 					}
 				`}
 			/>
@@ -94,6 +108,11 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 						margin-top: 0;
 						margin-bottom: ${remSpace[2]};
 						flex-basis: ${pxToRem(335)}rem;
+
+						${darkModeCss`
+							background-color: ${background.signUpFormDark(format)};
+							color: ${text.signUpFormDark(format)};
+						`}
 					`}
 				/>
 				<Button
@@ -102,7 +121,8 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 					title="Sign up"
 					type="submit"
 					cssOverrides={css`
-						background-color: ${neutral[0]};
+						background-color: ${fill.signUpFormButton(format)};
+						color: ${text.signUpFormButton(format)};
 						margin-bottom: ${remSpace[2]};
 						flex-basis: ${pxToRem(118)}rem;
 						justify-content: center;
@@ -110,6 +130,17 @@ const EmailSignupForm: FC<Props> = ({ newsletterId }) => {
 						:disabled {
 							background-color: ${neutral[46]};
 						}
+						&:hover {
+							background-color: ${hover.signUpFormButton(format)};
+						}
+
+						${darkModeCss`
+							background-color: ${fill.signUpFormButtonDark(format)};
+							color: ${text.signUpFormButtonDark(format)};
+							&:hover {
+								background-color: ${hover.signUpFormButtonDark(format)}
+							}
+						`}
 					`}
 				>
 					Sign up

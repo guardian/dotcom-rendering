@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
+import type { OnwardsType } from '../../types/onwards';
+import type { CAPITrailType, TrailType } from '../../types/trails';
 import { decideTrail } from '../lib/decideTrail';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';

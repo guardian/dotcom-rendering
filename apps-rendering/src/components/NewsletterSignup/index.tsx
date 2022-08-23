@@ -2,13 +2,17 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import {
+	background,
+	border,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
 import { ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
 	brandAlt,
 	from,
 	headline,
-	neutral,
 	remSpace,
 	sport,
 	textSans,
@@ -16,6 +20,7 @@ import {
 import type { NewsletterSignUp } from 'bodyElement';
 import type { FC } from 'react';
 import HydratableEmailSignupForm from './HydratableEmailSignupForm';
+import { darkModeCss } from 'styles';
 import PrivacyWording from './PrivacyWording';
 import SvgNewsletter from './SvgNewsletter';
 
@@ -28,7 +33,8 @@ interface Props {
 
 const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 	clear: both;
-	border: ${neutral[0]} 0.1875rem dashed;
+	border: ${border.signUpForm(format)} 0.1875rem dashed;
+	color: ${text.signUpForm(format)};
 	border-radius: ${remSpace[3]};
 	margin-bottom: ${remSpace[3]};
 	padding: ${remSpace[2]};
@@ -36,6 +42,12 @@ const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 	${from.tablet} {
 		padding: ${remSpace[2]} ${remSpace[3]};
 	}
+
+	${darkModeCss`
+		background-color: ${background.signUpFormDark(format)};
+		border-color: ${border.signUpFormDark(format)};
+		color: ${text.signUpFormDark(format)};
+	`}
 `;
 
 const stackBelowTabletStyles = css`
@@ -116,7 +128,7 @@ const NewsletterSignup: FC<Props> = ({ format, element }) => {
 			<div className="js-sign-up-form-container" data-newsletter-id={id}>
 				<HydratableEmailSignupForm newsletterId={id} />
 			</div>
-			<PrivacyWording useCaptcha={true} />
+			<PrivacyWording useCaptcha={false} format={format}/>
 		</aside>
 	);
 };

@@ -13,6 +13,8 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { getSoleContributor } from '../../lib/byline';
 import { parse } from '../../lib/slot-machine-flags';
+import type { NavType } from '../../model/extract-nav';
+import type { CAPIArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -297,24 +299,28 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
+	/**
+	 * This property currently only applies to the header and merchandising slots
+	 */
+	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
+
 	return (
 		<>
 			<div id="bannerandheader">
-				<Stuck>
-					<Section
-						fullWidth={true}
-						showTopBorder={false}
-						showSideBorders={false}
-						padSides={false}
-						shouldCenter={false}
-					>
-						<HeaderAdSlot
-							isAdFreeUser={CAPIArticle.isAdFreeUser}
-							shouldHideAds={CAPIArticle.shouldHideAds}
-							display={format.display}
-						/>
-					</Section>
-				</Stuck>
+				{renderAds && (
+					<Stuck>
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							showSideBorders={false}
+							padSides={false}
+							shouldCenter={false}
+						>
+							<HeaderAdSlot display={format.display} />
+						</Section>
+					</Stuck>
+				)}
+
 				<SendToBack>
 					{format.theme !== ArticleSpecial.Labs && (
 						<Section
@@ -338,7 +344,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								}
 								urls={CAPIArticle.nav.readerRevenueLinks.header}
 								remoteHeader={
-									CAPIArticle.config.switches.remoteHeader
+									!!CAPIArticle.config.switches.remoteHeader
 								}
 								contributionsServiceUrl={
 									contributionsServiceUrl
@@ -538,7 +544,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									shortUrlId={CAPIArticle.config.shortUrlId}
 									ajaxUrl={CAPIArticle.config.ajaxUrl}
 									showShareCount={
-										CAPIArticle.config.switches
+										!!CAPIArticle.config.switches
 											.serverShareCounts
 									}
 								/>
@@ -578,6 +584,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										isPreview={CAPIArticle.config.isPreview}
 										idUrl={CAPIArticle.config.idUrl || ''}
 										isDev={!!CAPIArticle.config.isDev}
+										abTests={CAPIArticle.config.abTests}
 									/>
 									{showBodyEndSlot && (
 										<Island clientOnly={true}>
@@ -691,19 +698,21 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</StandardGrid>
 				</Section>
 
-				<Section
-					fullWidth={true}
-					padSides={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot
-						position="merchandising-high"
-						display={format.display}
-					/>
-				</Section>
+				{renderAds && (
+					<Section
+						fullWidth={true}
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising-high"
+							display={format.display}
+						/>
+					</Section>
+				)}
 
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
@@ -775,7 +784,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								CAPIArticle.config.discussionApiClientHeader
 							}
 							enableDiscussionSwitch={
-								CAPIArticle.config.switches
+								!!CAPIArticle.config.switches
 									.enableDiscussionSwitch
 							}
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
@@ -797,17 +806,21 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					</Section>
 				)}
-
-				<Section
-					fullWidth={true}
-					padSides={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot position="merchandising" display={format.display} />
-				</Section>
+				{renderAds && (
+					<Section
+						fullWidth={true}
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising"
+							display={format.display}
+						/>
+					</Section>
+				)}
 			</main>
 
 			{NAV.subNavSections && (
@@ -860,10 +873,10 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							CAPIArticle.shouldHideReaderRevenue
 						}
 						remoteBannerSwitch={
-							CAPIArticle.config.switches.remoteBanner
+							!!CAPIArticle.config.switches.remoteBanner
 						}
 						puzzleBannerSwitch={
-							CAPIArticle.config.switches.puzzlesBanner
+							!!CAPIArticle.config.switches.puzzlesBanner
 						}
 						tags={CAPIArticle.tags}
 					/>

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
+import type { Palette } from '../../types/palette';
 import { decideFormat } from '../lib/decideFormat';
 import { decidePalette } from '../lib/decidePalette';
 

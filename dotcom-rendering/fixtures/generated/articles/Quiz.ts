@@ -11,6 +11,8 @@
  *    gen-fixtures.ts directly.
  */
 
+import type { CAPIArticleType } from '../../../src/types/frontend';
+
 export const Quiz: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image element--showcase" data-media-id="0584dd0a4813e6002e11ff67c28aff9b32da7abf"> \n <img src="https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/1000.jpg" alt="Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s." width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.</span> \n  <span class="element-image__credit">Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy</span> \n </figcaption> \n</figure>',
@@ -357,11 +359,6 @@ export const Quiz: CAPIArticleType = {
 						url: '/football',
 						children: [
 							{
-								title: "Women's Euro 2022",
-								url: '/football/women-s-euro-2022',
-								longTitle: 'football/women-s-euro-2022',
-							},
-							{
 								title: 'Live scores',
 								url: '/football/live',
 								longTitle: 'football/live',
@@ -562,11 +559,6 @@ export const Quiz: CAPIArticleType = {
 						title: 'Football',
 						url: '/football',
 						children: [
-							{
-								title: "Women's Euro 2022",
-								url: '/football/women-s-euro-2022',
-								longTitle: 'football/women-s-euro-2022',
-							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -944,11 +936,6 @@ export const Quiz: CAPIArticleType = {
 				url: '/football',
 				children: [
 					{
-						title: "Women's Euro 2022",
-						url: '/football/women-s-euro-2022',
-						longTitle: 'football/women-s-euro-2022',
-					},
-					{
 						title: 'Live scores',
 						url: '/football/live',
 						longTitle: 'football/live',
@@ -981,11 +968,6 @@ export const Quiz: CAPIArticleType = {
 				],
 			},
 			links: [
-				{
-					title: "Women's Euro 2022",
-					url: '/football/women-s-euro-2022',
-					longTitle: 'football/women-s-euro-2022',
-				},
 				{
 					title: 'Live scores',
 					url: '/football/live',
@@ -1601,7 +1583,7 @@ export const Quiz: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: 'b6d8c688-1039-447a-b454-f20646c9ada7',
+			elementId: '0921ea5f-0720-4d46-a9f4-36b8b71b1e89',
 		},
 	],
 	webPublicationDate: '2020-06-12T09:09:24.000Z',
@@ -2214,7 +2196,7 @@ export const Quiz: CAPIArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: 'd394395e-01f0-4172-b312-765705738195',
+					elementId: '348ffe21-7d45-4833-ba6e-99a5be457c3d',
 				},
 			],
 			attributes: {
