@@ -190,7 +190,7 @@ const RegionalFocus = ({
 	if (!promotedNewsletter?.regionalFocus) {
 		return null;
 	}
-	const text = `${promotedNewsletter.regionalFocus as string} Focused`;
+	const text = `${promotedNewsletter.regionalFocus} Focused`;
 	switch (position) {
 		case 'main':
 			return (
