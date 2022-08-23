@@ -46,7 +46,7 @@ const Margins = ({
 						margin-left: 6px;
 						margin-top: 5px;
 						${until.tablet} {
-							margin-top: ${space[1]}px;
+							margin-top: ${space[2]}px;
 							margin-bottom: ${space[1]}px;
 						}
 					`}
