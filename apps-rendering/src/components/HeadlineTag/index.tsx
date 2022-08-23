@@ -2,7 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette/background';
 import { text } from '@guardian/common-rendering/src/editorialPalette/text';
-import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { from, headline } from '@guardian/source-foundations';
 import type { FC } from 'react';
 import { articleWidthStyles } from '../../styles';
@@ -28,11 +28,19 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const HeadlineTag: FC<Props> = ({ tagText, format }) => (
-	<div css={headlineTagWrapper}>
-		<span css={headlineTagStyles(format)}>{tagText}</span>
-	</div>
-);
+const HeadlineTag: FC<Props> = ({ tagText, format }) => {
+	switch (format.design) {
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Explainer:
+			return (
+				<div css={headlineTagWrapper}>
+					<span css={headlineTagStyles(format)}>{tagText}</span>
+				</div>
+			);
+		default:
+			return <span css={headlineTagStyles(format)}>{tagText}</span>;
+	}
+};
 
 // ----- Exports ----- //
 
