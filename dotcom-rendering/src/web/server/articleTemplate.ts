@@ -2,12 +2,14 @@ import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
 import { ASSET_ORIGIN } from '../../lib/assets';
 import { getFontsCss } from '../../lib/fonts-css';
+import { partytownSnippet } from '@builder.io/partytown/integration';
 
 export const articleTemplate = ({
 	title = 'The Guardian',
 	description,
 	linkedData,
 	priorityScriptTags,
+	partyTownScriptTags,
 	lowPriorityScriptTags,
 	css,
 	html,
@@ -25,6 +27,7 @@ export const articleTemplate = ({
 	description: string;
 	linkedData: { [key: string]: any };
 	priorityScriptTags: string[];
+	partyTownScriptTags: string[];
 	lowPriorityScriptTags: string[];
 	css: string;
 	html: string;
@@ -282,7 +285,17 @@ https://workforus.theguardian.com/careers/product-engineering/
 						keywords,
 					).replace(/%20/g, '+')}" />
                 </noscript>
+                <script>
+                partytown = {
+                    lib: "/static/frontend/~partytown/",
+                    debug: true,
+                };
+                </script>
+                <script>
+                ${partytownSnippet()}
+                </script>
                 ${priorityScriptTags.join('\n')}
+                ${partyTownScriptTags.join('\n')}
                 <style class="webfont">${getFontsCss()}</style>
                 <style>${resets.resetCSS}</style>
 				${css}

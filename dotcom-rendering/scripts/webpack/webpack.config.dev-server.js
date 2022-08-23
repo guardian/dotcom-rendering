@@ -32,6 +32,7 @@ module.exports = {
 		},
 		allowedHosts: ['r.thegulocal.com'],
 		devMiddleware: {
+			writeToDisk: true,
 			publicPath: '/assets/',
 			serverSideRender: true,
 			headers: (req, res) => {

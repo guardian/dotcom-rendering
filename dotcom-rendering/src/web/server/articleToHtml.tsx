@@ -22,6 +22,7 @@ interface Props {
 
 const generateScriptTags = (
 	scripts: Array<{ src: string; legacy?: boolean } | false>,
+	useWebWorker = false,
 ) =>
 	scripts.reduce<string[]>((scriptTags, script) => {
 		if (script === false) return scriptTags;
@@ -37,6 +38,10 @@ const generateScriptTags = (
 			default:
 				attrs = 'defer';
 				break;
+		}
+
+		if (!script.legacy && useWebWorker) {
+			attrs = 'type="text/partytown"';
 		}
 
 		return [
@@ -137,12 +142,7 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 			{ src: polyfillIO },
 			...getScriptArrayFromFile('bootCmp.js'),
 			...getScriptArrayFromFile('ophan.js'),
-			CAPIArticle.config && {
-				src:
-					process.env.COMMERCIAL_BUNDLE_URL ??
-					CAPIArticle.config.commercialBundleUrl,
-			},
-			...getScriptArrayFromFile('sentryLoader.js'),
+
 			...getScriptArrayFromFile('dynamicImport.js'),
 			pageHasNonBootInteractiveElements && {
 				src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
@@ -156,6 +156,22 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 				? { ...script, src: getHttp3Url(script.src) }
 				: script,
 		),
+	);
+
+	const partyTownScriptTags = generateScriptTags(
+		[
+			...getScriptArrayFromFile('sentryLoader.js'),
+			CAPIArticle.config && {
+				src:
+					process.env.COMMERCIAL_BUNDLE_URL ??
+					CAPIArticle.config.commercialBundleUrl,
+			},
+		].map((script) =>
+			offerHttp3 && script
+				? { ...script, src: getHttp3Url(script.src) }
+				: script,
+		),
+		true,
 	);
 
 	/**
@@ -240,6 +256,7 @@ window.twttr = (function(d, s, id) {
 	return articleTemplate({
 		linkedData,
 		priorityScriptTags,
+		partyTownScriptTags,
 		lowPriorityScriptTags,
 		css: extractedCss,
 		html,
