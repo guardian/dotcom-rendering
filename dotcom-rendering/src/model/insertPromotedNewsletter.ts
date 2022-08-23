@@ -7,14 +7,14 @@ type PlaceInArticle = {
 	distanceAfterFloating: number;
 };
 
-const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 4;
-// This value is an approximation - the aim is to avoid a blank space between
+const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 3;
+// These values are an approximation - the aim is to avoid a blank space between
 // the element before the SignUp and the end of the floating element.
 // The SignUp block css uses 'clear:left' so a left floating element won't interfer
 // with its layout.
 // However, the actual heights of the elements when rendered is not taken into
-// account. 4 paragraphs should be enough, but if the floating element was
-// taller than all 4 paragraphs combined, there would be a gap, as illustrated below.
+// account. 3 paragraphs should be enough, but if the floating element was
+// taller than all 3 paragraphs combined, there would be a gap, as illustrated below.
 // This is why sortPlaces prioritises  distanceAfterFloating over distanceFromTarget.
 
 //    | TextTextTextTextTextText
@@ -27,7 +27,6 @@ const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 4;
 //  |float|
 //  |float| TextTextTextTextText
 //  |float|
-//  |float| TextTextTextText
 //  |float|
 //  |float|
 //  |float|
@@ -52,6 +51,27 @@ const MINIMUM_DISTANCE_AFTER_FLOATING_ELEMENT = 4;
 //    | TextTextTextTextTextText  | +------+
 //    | TextTextTextText          |
 
+const MAXIMUM_DISTANCE_AFTER_FLOATING_ELEMENT_TO_TAKE_ACCOUNT_OF_WHEN_SORTING = 4;
+// The maximum distance is set so that the sort function does not always place
+// the SignUp as high as possible to be above a (fairly distant) floating element
+// resulting in the block being higher than is ideal.
+
+//	 0 TEXT
+//	 1 TEXT
+//	 2 TEXT
+//    [too high] <--  Without this rule the SignUp
+//	 3 RICHLINK     | tends to go too high so it's
+//	 4 TEXT         | above the floating element
+//	 5 TEXT         |
+//	 6 TEXT         |
+//     [target] ----+
+//	 7 TEXT
+//	 8 TEXT
+//	 9 TEXT
+//	10 TEXT
+//	11 TEXT
+//	12 TEXT
+
 const MAXIMUM_DISTANCE_FROM_MIDDLE = 4;
 
 const checkIfAfterText = (index: number, elements: CAPIElement[]): boolean =>
@@ -72,14 +92,26 @@ const getDistanceAfterFloating = (
 				['supporting', 'thumbnail', 'richLink'].includes(element.role),
 		);
 
+	// it would be more logical to return Infinity here,
+	// but having an outsized finite value simplifies the sort function
+	// (Infinity - Infinity == NaN)
+	const outsizedValue = elements.length * 10;
+
+	// if there are no floating elements before the position, return the outsizedValue
 	if (!lastFloatingElementBeforePlace) {
-		// it would be more logical to return Infinity here,
-		// but having an outsized finite value simplifies the sort function
-		// (Infinity - Infinity == NaN)
-		return elements.length * 10;
+		return outsizedValue;
 	}
 
-	return index - elements.indexOf(lastFloatingElementBeforePlace);
+	// if the last floating element is more than the maximum distance before the postions, return the outsizedValue
+	const distance = index - elements.indexOf(lastFloatingElementBeforePlace);
+	if (
+		distance >
+		MAXIMUM_DISTANCE_AFTER_FLOATING_ELEMENT_TO_TAKE_ACCOUNT_OF_WHEN_SORTING
+	) {
+		return outsizedValue;
+	}
+
+	return distance;
 };
 
 const placeIsSuitable = (place: PlaceInArticle): boolean =>
