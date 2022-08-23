@@ -1,4 +1,5 @@
 // ----- Imports ----- //
+import { fakeRequestToEmailSignupService } from './requestEmailSignUp';
 
 // ----- Types ----- //
 interface FormBundle {
@@ -11,25 +12,6 @@ interface FormBundle {
 
 // ----- Procedures ----- //
 
-// TO DO - add the domain for the sign-up endpoint to the content security policy
-// 'connect-src' attribute.
-//apps-rendering/src/server/csp.ts
-
-async function mockedResponse(
-	emailAddress: string,
-	newsletterId: string,
-): Promise<{ status: number }> {
-	await new Promise((r) => {
-		setTimeout(r, 1000);
-	});
-
-	if (!emailAddress.includes('.')) {
-		return { status: 500 };
-	}
-
-	return { status: 200 };
-}
-
 async function handleSubmission(bundle: FormBundle): Promise<void> {
 	const { input, newsletterId, button, form, feedback } = bundle;
 
@@ -37,7 +19,10 @@ async function handleSubmission(bundle: FormBundle): Promise<void> {
 	input.setAttribute('disabled', '');
 	button.setAttribute('disabled', '');
 
-	const response = await mockedResponse(input.value, newsletterId);
+	const response = await fakeRequestToEmailSignupService(
+		input.value,
+		newsletterId,
+	);
 	form.classList.remove('js-signup-form--waiting');
 
 	if (response.status === 200) {
@@ -88,4 +73,4 @@ function initSignupForms(): void {
 
 // ----- Exports ----- //
 
-export default initSignupForms;
+export { initSignupForms };

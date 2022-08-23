@@ -17,6 +17,7 @@ import {
 	SvgSpinner,
 	TextInput,
 } from '@guardian/source-react-components';
+import { fakeRequestToEmailSignupService } from 'client/requestEmailSignUp';
 import { FC, FormEventHandler, useState } from 'react';
 
 // ----- sub-Components ----- //
@@ -47,23 +48,6 @@ const SuccessMessage = ({ text }: { text?: string }) => (
 		</span>
 	</InlineSuccess>
 );
-
-// ----- Procedures ----- //
-
-async function mockedResponse(
-	emailAddress: string,
-	newsletterId?: string,
-): Promise<{ status: number }> {
-	await new Promise((r) => {
-		setTimeout(r, 1000);
-	});
-
-	if (!newsletterId || !emailAddress.includes('.')) {
-		return { status: 500 };
-	}
-
-	return { status: 200 };
-}
 
 // ----- Styles ----- //
 const formStyle = css`
@@ -109,7 +93,10 @@ const HydratableEmailSignupForm: FC<Props> = ({ newsletterId }) => {
 			return;
 		}
 
-		const response = await mockedResponse(emailAddress, newsletterId);
+		const response = await fakeRequestToEmailSignupService(
+			emailAddress,
+			newsletterId,
+		);
 		setIsWaitingForResponse(false);
 
 		if (response.status === 200) {

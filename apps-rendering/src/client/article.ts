@@ -38,6 +38,7 @@ import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
 import { createSignUpComponentFromProps } from './createSignUpComponentFromProps';
+import { initSignupForms } from './signupForm';
 
 // ----- Run ----- //
 
@@ -527,4 +528,6 @@ hydrateAtoms();
 localDates();
 richLinks();
 hydrateClickToView();
+
 hydrateSignupForms();
+initSignupForms();

@@ -23,6 +23,7 @@ import HydratableEmailSignupForm from './HydratableEmailSignupForm';
 import { darkModeCss } from 'styles';
 import PrivacyWording from './PrivacyWording';
 import SvgNewsletter from './SvgNewsletter';
+import EmailSignupForm from './EmailSignupForm';
 
 // ----- Component ----- //
 
@@ -103,6 +104,8 @@ const noHeightFromTabletStyles = css`
 	}
 `;
 
+const USE_HYRDATED_FORM = true
+
 /**
  * NOTE: this component is non functional and is for demonstration only.
  */
@@ -125,10 +128,17 @@ const NewsletterSignup: FC<Props> = ({ format, element }) => {
 
 			<p css={descriptionStyles}>{description}</p>
 
-			<div className="js-sign-up-form-container" data-newsletter-id={id}>
-				<HydratableEmailSignupForm newsletterId={id} />
-			</div>
-			<PrivacyWording useCaptcha={false} format={format}/>
+			{USE_HYRDATED_FORM ? (
+				<div
+					className="js-sign-up-form-container"
+					data-newsletter-id={id}
+				>
+					<HydratableEmailSignupForm newsletterId={id} />
+				</div>
+			) : (
+				<EmailSignupForm newsletterId={id} format={format} />
+			)}
+			<PrivacyWording useCaptcha={false} format={format} />
 		</aside>
 	);
 };
