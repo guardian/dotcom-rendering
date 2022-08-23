@@ -63,12 +63,9 @@ const columnHeading = (index: number) => {
 
 const gridContainer = css`
 	position: relative;
-
 	display: grid;
 	grid-template-columns: repeat(1, 1fr);
 	grid-auto-flow: row dense;
-	gap: 0.25rem;
-
 	list-style-type: none;
 	grid-template-areas:
 		'most'
@@ -82,6 +79,11 @@ const gridContainer = css`
 
 const gridColumn = (name: 'most' | 'deeply') => css`
 	grid-column: ${name};
+`;
+
+const buttonPosition = css`
+	position: absolute;
+	bottom: -30px;
 `;
 
 const item = (
@@ -166,6 +168,7 @@ export const MostViewedFooterGridExpandable = ({ data }: Props) => {
 									cssOverrides={cssOverrides}
 									trail={trail}
 									position={trailIndex + 1}
+									isExpandable={true}
 								/>
 							);
 						})}
@@ -198,6 +201,7 @@ export const MostViewedFooterGridExpandable = ({ data }: Props) => {
 				<ThemeProvider theme={buttonThemeBrandAlt}>
 					<Button
 						cssOverrides={css`
+							${buttonPosition}
 							${until.tablet} {
 								display: none;
 							}

@@ -13,21 +13,26 @@ import { AgeWarning } from './AgeWarning';
 import { BigNumber } from './BigNumber/BigNumber';
 import { LinkHeadline } from './LinkHeadline';
 
-const gridItem = (position: number) => css`
+const thinGreySolid = `1px solid ${border.secondary}`;
+
+const gridItem = (position: number, isExpandable: bool) => css`
 	position: relative;
 
 	${until.leftCol} {
 		/* Below leftCol always set top border */
-		border-top: 1px solid ${border.secondary};
+		border-top: ${thinGreySolid};
 	}
 	/* Above leftCol, don't apply a top border on the 1st and 6th
-       items to prevent double borders */
-	border-top: ${position !== 1 &&
-	position !== 6 &&
-	`1px solid ${border.secondary}`};
+       items to prevent double borders, except when in expandable list, 
+	   which only skips first li*/
+	border-top: ${position !== 1 && position !== 6 && thinGreySolid};
+	border-bottom: ${isExpandable && (position === 10 || position === 5)
+		? thinGreySolid
+		: 'none'};
 
-	/* The left border is set on the container */
-	border-right: 1px solid ${border.secondary};
+	/* The left border is set on the container except when expandable */
+	border-left: ${isExpandable ? thinGreySolid : 'none'};
+	border-right: ${thinGreySolid};
 	min-height: 3.25rem;
 
 	&:hover {
@@ -72,15 +77,17 @@ type Props = {
 	trail: TrailType;
 	position: number;
 	cssOverrides?: SerializedStyles;
+	isExpandable?: boolean;
 };
 
 export const MostViewedFooterItem = ({
 	trail,
 	position,
 	cssOverrides,
+	isExpandable = false,
 }: Props) => (
 	<li
-		css={[gridItem(position), cssOverrides]}
+		css={[gridItem(position, isExpandable), cssOverrides]}
 		data-link-name={`${position} | text`}
 	>
 		<a css={headlineLink} href={trail.url} data-link-name="article">
