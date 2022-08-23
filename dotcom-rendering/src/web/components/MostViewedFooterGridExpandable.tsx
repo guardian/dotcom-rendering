@@ -134,7 +134,6 @@ export const MostViewedFooterGridExpandable = ({ data }: Props) => {
 	return (
 		<ol css={gridContainer}>
 			{data.map((column, columnIndex) => {
-				// const numberShown = bothExpanded ? 10 : 5;
 				const columnName = columnIndex === 0 ? 'most' : 'deeply';
 				const expanded =
 					columnIndex === 0 ? mostExpanded : deeplyExpanded;
@@ -151,24 +150,23 @@ export const MostViewedFooterGridExpandable = ({ data }: Props) => {
 							<ColumnHeading heading={column.heading} />
 						</li>
 						{column.trails.map((trail, trailIndex) => {
+							// Construct cssOverrides per <li>
+							const cssOverrides = css`
+								${trailIndex >= 5 &&
+								item(
+									columnName,
+									bothExpanded,
+									mostExpanded,
+									deeplyExpanded,
+								)};
+								${gridColumn(columnName)};
+							`;
 							return (
-								<li
-									css={[
-										gridColumn(columnName),
-										trailIndex >= 5 &&
-											item(
-												columnName,
-												bothExpanded,
-												mostExpanded,
-												deeplyExpanded,
-											),
-									]}
-								>
-									<MostViewedFooterItem
-										trail={trail}
-										position={trailIndex + 1}
-									/>
-								</li>
+								<MostViewedFooterItem
+									cssOverrides={cssOverrides}
+									trail={trail}
+									position={trailIndex + 1}
+								/>
 							);
 						})}
 						<li css={gridColumn(columnName)}>

@@ -1,3 +1,4 @@
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import {
@@ -70,10 +71,18 @@ const ageWarningStyles = css`
 type Props = {
 	trail: TrailType;
 	position: number;
+	cssOverrides?: SerializedStyles;
 };
 
-export const MostViewedFooterItem = ({ trail, position }: Props) => (
-	<li css={gridItem(position)} data-link-name={`${position} | text`}>
+export const MostViewedFooterItem = ({
+	trail,
+	position,
+	cssOverrides,
+}: Props) => (
+	<li
+		css={[gridItem(position), cssOverrides]}
+		data-link-name={`${position} | text`}
+	>
 		<a css={headlineLink} href={trail.url} data-link-name="article">
 			<span css={bigNumber}>
 				<BigNumber index={position} />
