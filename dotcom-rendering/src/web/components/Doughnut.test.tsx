@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { Doughnut } from './Doughnut';
 
-const mockSections = [
+const [one, two] = [
 	{
 		value: 29,
 		label: 'Dat1',
@@ -16,43 +16,39 @@ const mockSections = [
 
 describe('Doughnut', () => {
 	it('should display the given labels', () => {
-		const { getByText } = render(<Doughnut sections={mockSections} />);
+		const { getByText } = render(<Doughnut sections={[one, two]} />);
 
-		expect(getByText(mockSections[0].label)).toBeInTheDocument();
-		expect(getByText(mockSections[1].label)).toBeInTheDocument();
+		expect(getByText(one.label)).toBeInTheDocument();
+		expect(getByText(two.label)).toBeInTheDocument();
 	});
 
 	it('should display the given labels when sizing is customised', () => {
 		const { getByText } = render(
-			<Doughnut sections={mockSections} percentCutout={20} size={200} />,
+			<Doughnut sections={[one, two]} percentCutout={20} size={200} />,
 		);
 
-		expect(getByText(mockSections[0].label)).toBeInTheDocument();
-		expect(getByText(mockSections[1].label)).toBeInTheDocument();
+		expect(getByText(one.label)).toBeInTheDocument();
+		expect(getByText(two.label)).toBeInTheDocument();
 	});
 
 	it('should return a circle if only one section is passed', () => {
-		const { container } = render(<Doughnut sections={[mockSections[0]]} />);
+		const { container } = render(<Doughnut sections={[one]} />);
 
 		expect(container.firstChild).not.toBeNull();
 	});
 
 	it('should handle if a section has a zero value', () => {
+		const three = {
+			value: 0,
+			label: 'IamZero',
+			color: '#ce070c ',
+		};
 		const { container, queryByText } = render(
-			<Doughnut
-				sections={[
-					...mockSections,
-					{
-						value: 0,
-						label: 'IamZero',
-						color: '#ce070c ',
-					},
-				]}
-			/>,
+			<Doughnut sections={[one, two, three]} />,
 		);
 
 		expect(container.firstChild).not.toBeNull();
-		expect(queryByText(mockSections[0].label)).toBeInTheDocument();
-		expect(queryByText('IamZero')).not.toBeInTheDocument();
+		expect(queryByText(one.label)).toBeInTheDocument();
+		expect(queryByText(three.label)).not.toBeInTheDocument();
 	});
 });
