@@ -15,7 +15,7 @@ import { LinkHeadline } from './LinkHeadline';
 
 const thinGreySolid = `1px solid ${border.secondary}`;
 
-const gridItem = (position: number, isExpandable: bool) => css`
+const gridItem = (position: number, isExpandable: boolean) => css`
 	position: relative;
 
 	${until.leftCol} {
