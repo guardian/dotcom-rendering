@@ -251,7 +251,9 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 						}
 						discussionApiUrl={CAPIArticle.config.discussionApiUrl}
 						urls={CAPIArticle.nav.readerRevenueLinks.header}
-						remoteHeader={CAPIArticle.config.switches.remoteHeader}
+						remoteHeader={
+							!!CAPIArticle.config.switches.remoteHeader
+						}
 						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPIArticle.config.idApiUrl}
 					/>
