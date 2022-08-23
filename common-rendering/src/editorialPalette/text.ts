@@ -416,6 +416,8 @@ const bylineInlineDark = (format: ArticleFormat): Colour => {
 
 const headlineTag = (_format: ArticleFormat): Colour => neutral[100];
 
+const headlineTagDark = (_format: ArticleFormat): Colour => neutral[10];
+
 const follow = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -1063,6 +1065,7 @@ const text = {
 	headline,
 	headlineDark,
 	headlineTag,
+	headlineTagDark,
 	interactiveAtomLink,
 	keyEventsInline,
 	keyEventsLeftColumn,

@@ -385,6 +385,25 @@ const headlineTag = (format: ArticleFormat): Colour => {
 	}
 };
 
+const headlineTagDark = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[500];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[500];
+		case ArticlePillar.Sport:
+			return sport[500];
+		case ArticlePillar.Culture:
+			return culture[500];
+		case ArticlePillar.Opinion:
+			return opinion[500];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[500];
+	}
+};
+
 const relatedCard = (format: ArticleFormat): Colour => {
 	if (format.theme === ArticleSpecial.Labs) {
 		return neutral[93];
@@ -598,7 +617,7 @@ const articleContent = (format: ArticleFormat): string => {
 	}
 };
 
-const signUpFormDark =  (_format: ArticleFormat): Colour => neutral[10];
+const signUpFormDark = (_format: ArticleFormat): Colour => neutral[10];
 
 // ----- API ----- //
 
@@ -617,6 +636,7 @@ const background = {
 	headlineBylineDark,
 	headlineDark,
 	headlineTag,
+	headlineTagDark,
 	keyEvents,
 	keyEventsWide,
 	keyEventsDark,

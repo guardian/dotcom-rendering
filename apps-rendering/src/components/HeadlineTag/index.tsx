@@ -5,7 +5,7 @@ import { text } from '@guardian/common-rendering/src/editorialPalette/text';
 import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { from, headline } from '@guardian/source-foundations';
 import type { FC } from 'react';
-import { articleWidthStyles } from '../../styles';
+import { articleWidthStyles, darkModeCss } from '../../styles';
 
 const headlineTagWrapper = css`
 	${articleWidthStyles}
@@ -21,6 +21,10 @@ const headlineTagStyles = (format: ArticleFormat): SerializedStyles => css`
 	${from.tablet} {
 		${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
 	}
+	${darkModeCss`
+		background-color: ${background.headlineTagDark(format)};
+		color: ${text.headlineTagDark(format)};
+	`}
 `;
 
 type Props = {
