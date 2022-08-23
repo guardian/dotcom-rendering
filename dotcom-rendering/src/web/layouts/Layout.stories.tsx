@@ -83,7 +83,7 @@ export const HydratedLayoutWrapper = ({
 	designName: string;
 	theme: string;
 }) => {
-	const fixture = Fixtures[designName] || Fixtures.Standard;
+	const fixture = Fixtures[designName] ?? Standard;
 
 	const serverCAPI = {
 		...fixture,
@@ -114,7 +114,7 @@ export const Liveblog = () => {
 	return (
 		<HydratedLayout
 			ServerCAPI={{
-				...Fixtures.LiveBlog,
+				...Live,
 				keyEvents: [],
 			}}
 		/>

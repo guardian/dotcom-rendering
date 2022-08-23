@@ -126,9 +126,9 @@ export const Body: React.FC<{
 		contentType: data.contentType,
 		commercialProperties: data.commercialProperties,
 		switches: {
-			ampPrebid: config.switches.ampPrebid,
-			permutive: config.switches.permutive,
-			ampAmazon: config.switches.ampAmazon,
+			ampPrebid: !!config.switches.ampPrebid,
+			permutive: !!config.switches.permutive,
+			ampAmazon: !!config.switches.ampAmazon,
 		},
 	};
 

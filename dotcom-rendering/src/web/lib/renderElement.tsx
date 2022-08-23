@@ -154,7 +154,7 @@ export const renderElement = ({
 						duration={element.duration}
 						pillar={format.theme}
 						contentIsNotSensitive={!isSensitive}
-						aCastisEnabled={switches.acast}
+						aCastisEnabled={!!switches.acast}
 						readerCanBeShownAds={!isAdFreeUser}
 					/>
 				</Island>,
@@ -440,7 +440,7 @@ export const renderElement = ({
 				true,
 				<VideoAtom
 					assets={element.assets}
-					poster={element.posterImage && element.posterImage[0].url}
+					poster={element.posterImage?.[0]?.url}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
@@ -757,7 +757,7 @@ export const renderElement = ({
 						mediaTitle={element.mediaTitle}
 						altText={element.altText}
 						origin={host}
-						stickyVideos={isBlog && switches.stickyVideos}
+						stickyVideos={!!(isBlog && switches.stickyVideos)}
 					/>
 				</Island>,
 			];
