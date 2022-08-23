@@ -17,7 +17,8 @@ const Default: FC = () => (
 			name: 'The Week in Patriarchy',
 			frequency: 'Weekly',
 			theme: ArticlePillar.Opinion,
-			successDescription: 'We\'ll send you The Week in Patriarchy every week',
+			successDescription:
+				"We'll send you The Week in Patriarchy every week",
 		}}
 		format={{
 			design: selectDesign(ArticleDesign.Standard),
@@ -37,7 +38,7 @@ const NewsTheme: FC = () => (
 			name: 'First Edition',
 			frequency: 'Every weekday',
 			theme: ArticlePillar.News,
-			successDescription: 'We\'ll send you first edition every weekday',
+			successDescription: "We'll send you first edition every weekday",
 		}}
 		format={{
 			design: selectDesign(ArticleDesign.Standard),
