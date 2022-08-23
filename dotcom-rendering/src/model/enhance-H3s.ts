@@ -73,10 +73,20 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	return withH3s;
 };
 
-export const enhanceH3s = (blocks: Block[]): Block[] =>
-	blocks.map((block: Block) => {
+export const enhanceH3s = (blocks: Block[], format: CAPIFormat): Block[] => {
+	const hasChapteredUI =
+		format.display === 'NumberedListDisplay' ||
+		format.design === 'AnalysisDesign' ||
+		format.design === 'ExplainerDesign';
+
+	if (!hasChapteredUI) {
+		return blocks;
+	}
+
+	return blocks.map((block: Block) => {
 		return {
 			...block,
 			elements: enhance(block.elements),
 		};
 	});
+};
