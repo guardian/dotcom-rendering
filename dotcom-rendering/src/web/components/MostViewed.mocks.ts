@@ -347,7 +347,7 @@ export const mockMostCommented = {
 	designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 	avatarUrl:
 		'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
-};
+} as const;
 
 export const mockMostShared = {
 	url: 'https://www.theguardian.com/us-news/2019/sep/15/brett-kavanaugh-donald-trump-impeachment-supreme-court-justice',
@@ -363,19 +363,19 @@ export const mockMostShared = {
 	pillar: 'opinion',
 	designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 	ageWarning: '1 year old',
-};
+} as const;
 
 export const responseWithTwoTabs = {
 	tabs: [mockTab1, mockTab2],
 	mostCommented: mockMostCommented,
 	mostShared: mockMostShared,
-};
+} as const;
 
 export const responseWithOneTab = {
 	tabs: [mockTab1],
 	mostCommented: mockMostCommented,
 	mostShared: mockMostShared,
-};
+} as const;
 
 export const responseWithMissingImage = {
 	tabs: [mockTab1],
@@ -384,4 +384,4 @@ export const responseWithMissingImage = {
 		...mockMostShared,
 		image: null,
 	},
-};
+} as const;

@@ -4,6 +4,8 @@ import { images } from '../../fixtures/generated/images';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
 
+const [image] = images as [ImageBlockElement];
+
 describe('Enhance Numbered Lists', () => {
 	it('does not enhance articles if they are not numbered lists', () => {
 		const input: Block[] = [
@@ -11,7 +13,7 @@ describe('Enhance Numbered Lists', () => {
 				...blockMetaData,
 				elements: [
 					{
-						...images[0],
+						...image,
 						role: 'thumbnail',
 					},
 				],
@@ -22,7 +24,7 @@ describe('Enhance Numbered Lists', () => {
 				...blockMetaData,
 				elements: [
 					{
-						...images[0],
+						...image,
 						role: 'thumbnail',
 					},
 				],
@@ -554,7 +556,7 @@ describe('Enhance Numbered Lists', () => {
 						elementId: 'mockId',
 						html: '<p>★☆☆☆☆</p>',
 					},
-					images[0],
+					image,
 				],
 			},
 		];
@@ -564,7 +566,7 @@ describe('Enhance Numbered Lists', () => {
 				...blockMetaData,
 				elements: [
 					{
-						...images[0],
+						...image,
 						starRating: 1,
 					},
 				],
@@ -586,7 +588,7 @@ describe('Enhance Numbered Lists', () => {
 						elementId: 'mockId',
 						html: '<p>☆☆☆☆☆</p>',
 					},
-					images[0],
+					image,
 				],
 			},
 		];
@@ -596,7 +598,7 @@ describe('Enhance Numbered Lists', () => {
 				...blockMetaData,
 				elements: [
 					{
-						...images[0],
+						...image,
 						starRating: 0,
 					},
 				],
@@ -612,14 +614,14 @@ describe('Enhance Numbered Lists', () => {
 		const input: Block[] = [
 			{
 				...blockMetaData,
-				elements: [{ ...images[0], role: 'thumbnail' }],
+				elements: [{ ...image, role: 'thumbnail' }],
 			},
 		];
 
 		const expectedOutput: Block[] = [
 			{
 				...blockMetaData,
-				elements: [{ ...images[0], role: 'thumbnail', isAvatar: true }],
+				elements: [{ ...image, role: 'thumbnail', isAvatar: true }],
 			},
 		];
 
@@ -682,7 +684,7 @@ describe('Enhance Numbered Lists', () => {
 						elementId: 'mockId',
 						html: '<p>☆☆☆☆☆</p>',
 					},
-					images[0],
+					image,
 					{
 						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 						elementId: 'mockId2',
@@ -714,7 +716,7 @@ describe('Enhance Numbered Lists', () => {
 						format: NumberedList.format,
 					},
 					{
-						...images[0],
+						...image,
 						starRating: 0,
 					},
 					{

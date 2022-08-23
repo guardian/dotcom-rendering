@@ -87,7 +87,7 @@ describe('returns section for each subsection', () => {
 		[['technology'], 'Technology'],
 		[['travel', 'travel/offers'], 'Travel'],
 		[['tv-and-radio'], 'TvRadio'],
-	];
+	] as const;
 
 	it('returns correct Section for each test case', () => {
 		testCases.forEach((testCase) => {

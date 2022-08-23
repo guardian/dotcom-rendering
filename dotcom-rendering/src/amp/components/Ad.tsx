@@ -10,10 +10,10 @@ const inlineSizes = [
 	{ width: 320, height: 480 }, // Picnic story
 	{ width: 300, height: 250 }, // MPU
 	{ width: 250, height: 250 }, // Square
-];
+] as const;
 
 // Note: amp-sticky-ad has max height of 100
-const stickySizes = [{ width: 320, height: 50 }]; // Mobile Leaderboard
+const stickySizes = [{ width: 320, height: 50 }] as const; // Mobile Leaderboard
 
 const dfpAdUnitRoot = 'theguardian.com';
 

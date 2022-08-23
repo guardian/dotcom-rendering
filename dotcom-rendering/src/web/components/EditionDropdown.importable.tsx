@@ -62,7 +62,7 @@ export const EditionDropdown: React.FC<{
 			title: 'International edition',
 			dataLinkName: 'nav2 : topbar : edition-picker: INT',
 		},
-	];
+	] as const;
 
 	// Find active link, default to UK
 	const activeLink = links.find((link) => link.isActive) || links[0];
