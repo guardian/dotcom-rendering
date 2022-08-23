@@ -35,6 +35,7 @@ type Props = {
 	filterKeyEvents?: boolean;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
+	abTests?: ServerSideTests;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -128,6 +129,7 @@ export const ArticleBody = ({
 	filterKeyEvents,
 	availableTopics,
 	selectedTopics,
+	abTests,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
@@ -213,6 +215,7 @@ export const ArticleBody = ({
 				isDev={isDev}
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
+				abTests={abTests}
 			/>
 		</div>
 	);

@@ -80,6 +80,7 @@ type Props = {
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
 	isPinnedPost?: boolean;
+	abTests?: ServerSideTests;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -134,12 +135,16 @@ export const renderElement = ({
 	switches,
 	isSensitive,
 	isPinnedPost,
+	abTests,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
 
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
+
+	const shouldLazyLoadInteractives =
+		!!abTests?.commercialEndOfQuarterMegaTestControl;
 
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -388,7 +393,9 @@ export const renderElement = ({
 				true,
 				// Deferring interactives until CPU idle achieves the lowest Cumulative Layout Shift (CLS)
 				// For more information on the experiment we ran see: https://github.com/guardian/dotcom-rendering/pull/4942
-				<Island deferUntil="idle">
+				<Island
+					deferUntil={shouldLazyLoadInteractives ? 'visible' : 'idle'}
+				>
 					<InteractiveBlockComponent
 						url={element.url}
 						scriptUrl={element.scriptUrl}
