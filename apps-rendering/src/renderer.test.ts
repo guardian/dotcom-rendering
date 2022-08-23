@@ -15,7 +15,7 @@ import { JSDOM } from 'jsdom';
 import { ArticlePillar } from '@guardian/libs';
 import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
-import { BodyElement, ElementKind } from 'bodyElement';
+import { BodyElement, ElementKind, flattenTextElement } from 'bodyElement';
 import { none, some } from '@guardian/types';
 import { ArticleDesign, ArticleDisplay, ArticleFormat } from '@guardian/libs';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -35,10 +35,12 @@ beforeEach(() => {
 	console.error = jest.fn();
 });
 
-const textElement = (nodes: string[]): BodyElement => ({
-	kind: ElementKind.Text,
-	doc: JSDOM.fragment(nodes.join('')),
-});
+const textElements = (nodes: string[]): BodyElement[] => {
+	const frag = JSDOM.fragment(nodes.join(''));
+	const res = flattenTextElement(frag);
+
+	return res;
+};
 
 const imageElement = (): BodyElement => ({
 	kind: ElementKind.Image,
@@ -223,20 +225,23 @@ const audioAtom = (): BodyElement => ({
 const render = (element: BodyElement): ReactNode[] =>
 	renderAll(mockFormat, [element]);
 
+const renderElements = (elements: BodyElement[]): ReactNode[] =>
+	renderAll(mockFormat, elements);
+
 const renderEditions = (element: BodyElement): ReactNode[] =>
 	renderEditionsAll(mockFormat, [element]);
 
-const renderWithoutStyles = (element: BodyElement): ReactNode[] =>
-	renderAllWithoutStyles(mockFormat, [element]);
+const renderWithoutStyles = (elements: BodyElement[]): ReactNode[] =>
+	renderAllWithoutStyles(mockFormat, elements);
 
 const renderCaption = (element: BodyElement): ReactNode[] =>
 	renderAll(mockFormat, [element]);
 
-const renderTextElement = compose(render, textElement);
+const renderTextElement = compose(renderElements, textElements);
 
 const renderTextElementWithoutStyles = compose(
 	renderWithoutStyles,
-	textElement,
+	textElements,
 );
 
 const renderCaptionElement = compose(renderCaption, imageElement);
@@ -260,8 +265,8 @@ describe('renderer returns expected content', () => {
 			'text',
 		];
 
-		expect(renderTextElement(elements).flat().length).toBe(11);
-		expect(renderTextElementWithoutStyles(elements).flat().length).toBe(11);
+		expect(renderTextElement(elements).length).toBe(11);
+		expect(renderTextElementWithoutStyles(elements).length).toBe(11);
 	});
 
 	test('Renders caption node types', () => {

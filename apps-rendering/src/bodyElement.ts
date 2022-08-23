@@ -217,7 +217,7 @@ const slugify = (text: string): string => {
 		.replace(/--+/g, '-'); // Replace multiple "-" with single "-"
 };
 
-const flattenTextElement = (doc: Node): BodyElement[] => {
+export const flattenTextElement = (doc: Node): BodyElement[] => {
 	const childNodes = Array.from(doc.childNodes);
 	return childNodes.map((node) => {
 		switch (node.nodeName) {

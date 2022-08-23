@@ -9,7 +9,7 @@ import {
 	ArticleDisplay,
 } from '@guardian/libs';
 import { compose } from 'lib';
-import { ElementKind, BodyElement } from 'bodyElement';
+import { BodyElement, flattenTextElement } from 'bodyElement';
 import AdSlot from 'adSlot';
 
 const shouldHideAdverts = false;
@@ -20,16 +20,18 @@ const mockFormat: ArticleFormat = {
 	display: ArticleDisplay.Standard,
 };
 
-const textElement = (nodes: string[]): BodyElement => ({
-	kind: ElementKind.Text,
-	doc: JSDOM.fragment(nodes.join('')),
-});
+const textElement = (nodes: string[]): BodyElement[] => {
+	const frag = JSDOM.fragment(nodes.join(''));
+	return flattenTextElement(frag);
+};
 
-const generateParas = (paras: number): BodyElement =>
-	textElement(Array(paras).fill('<p>foo</p>'));
+const generateParas = (paras: number): BodyElement[] => {
+	const frag = JSDOM.fragment(Array(paras).fill('<p>foo</p>').join(''));
+	return flattenTextElement(frag);
+};
 
-const render = (element: BodyElement): ReactNode[] =>
-	renderAll(mockFormat, [element]);
+const render = (elements: BodyElement[]): ReactNode[] =>
+	renderAll(mockFormat, elements);
 
 const renderParagraphs = compose(render, generateParas);
 
