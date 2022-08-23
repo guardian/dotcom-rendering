@@ -2,6 +2,7 @@
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import { isTuple } from '../lib/tuple';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -25,7 +26,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 	showAge,
 	index,
 }: {
-	cards: TrailType[];
+	cards: [TrailType, TrailType, TrailType, TrailType];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
@@ -92,7 +93,7 @@ const ColumnOfThree50_Ad50 = ({
 	showAge,
 	index,
 }: {
-	cards: TrailType[];
+	cards: [TrailType, TrailType, TrailType];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
@@ -147,7 +148,7 @@ const Card75_Card25 = ({
 	containerPalette,
 	showAge,
 }: {
-	cards: TrailType[];
+	cards: [TrailType, TrailType];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => (
@@ -188,7 +189,7 @@ const Card50_Card50 = ({
 	containerPalette,
 	showAge,
 }: {
-	cards: TrailType[];
+	cards: [TrailType, TrailType];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => (
@@ -229,7 +230,7 @@ const Card50_Card25_Card25 = ({
 	containerPalette,
 	showAge,
 }: {
-	cards: TrailType[];
+	cards: [TrailType, TrailType, TrailType];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => (
@@ -256,7 +257,7 @@ const Card50_Card25_Card25 = ({
 				containerPalette={containerPalette}
 				showAge={showAge}
 				trailText={
-					cards[1]?.supportingContent &&
+					cards[1].supportingContent &&
 					cards[1].supportingContent.length > 0
 						? undefined
 						: cards[1].trailText
@@ -277,7 +278,7 @@ const Card50_Card25_Card25 = ({
 				containerPalette={containerPalette}
 				showAge={showAge}
 				trailText={
-					cards[2]?.supportingContent &&
+					cards[2].supportingContent &&
 					cards[2].supportingContent.length > 0
 						? undefined
 						: cards[2].trailText
@@ -315,7 +316,7 @@ export const DynamicSlowMPU = ({
 	let standardCards: TrailType[] = [];
 	switch (groupedTrails.big.length) {
 		case 0: {
-			standardCards = groupedTrails.standard;
+			standardCards = groupedTrails.standard.slice(0, 4);
 			layout = 'noBigs';
 			break;
 		}
@@ -324,14 +325,14 @@ export const DynamicSlowMPU = ({
 			// there is always at least two
 			const promoted = groupedTrails.standard.slice(0, 1);
 			bigCards = [...groupedTrails.big, ...promoted];
-			standardCards = groupedTrails.standard.slice(1);
+			standardCards = groupedTrails.standard.slice(1, 4);
 			layout = 'twoBigs';
 			break;
 		}
 		case 2: {
 			bigCards = groupedTrails.big;
-			standardCards = groupedTrails.standard;
-			if (groupedTrails.big[0].isBoosted) {
+			standardCards = groupedTrails.standard.slice(0, 3);
+			if (groupedTrails.big[0]?.isBoosted) {
 				layout = 'twoBigsBoosted';
 			} else {
 				layout = 'twoBigs';
@@ -340,7 +341,7 @@ export const DynamicSlowMPU = ({
 		}
 		case 3: {
 			bigCards = groupedTrails.big;
-			standardCards = groupedTrails.standard;
+			standardCards = groupedTrails.standard.slice(0, 3);
 			layout = 'threeBigs';
 			break;
 		}
@@ -348,7 +349,7 @@ export const DynamicSlowMPU = ({
 			// If there are more than three big cards, these extra bigs are demoted to
 			// standard.
 			const demoted = groupedTrails.big.slice(3);
-			standardCards = [...demoted, ...groupedTrails.standard];
+			standardCards = [...demoted, ...groupedTrails.standard].slice(0, 3);
 			bigCards = groupedTrails.big.slice(0, 3);
 			layout = 'threeBigs';
 		}
@@ -356,6 +357,11 @@ export const DynamicSlowMPU = ({
 
 	switch (layout) {
 		case 'noBigs': {
+			if (!isTuple(standardCards, 4)) {
+				throw new Error(
+					`Invalid number of cards: ${bigCards.length} big & ${standardCards.length} standard`,
+				);
+			}
 			return (
 				<Card33_ColumnOfThree33_Ad33
 					cards={standardCards}
@@ -366,6 +372,11 @@ export const DynamicSlowMPU = ({
 			);
 		}
 		case 'twoBigs': {
+			if (!(isTuple(bigCards, 2) && isTuple(standardCards, 3))) {
+				throw new Error(
+					`Invalid number of cards: ${bigCards.length} big & ${standardCards.length} standard`,
+				);
+			}
 			return (
 				<>
 					<Card50_Card50
@@ -383,6 +394,11 @@ export const DynamicSlowMPU = ({
 			);
 		}
 		case 'twoBigsBoosted': {
+			if (!(isTuple(bigCards, 2) && isTuple(standardCards, 3))) {
+				throw new Error(
+					`Invalid number of cards: ${bigCards.length} big & ${standardCards.length} standard`,
+				);
+			}
 			return (
 				<>
 					<Card75_Card25
@@ -400,6 +416,11 @@ export const DynamicSlowMPU = ({
 			);
 		}
 		case 'threeBigs': {
+			if (!(isTuple(bigCards, 3) && isTuple(standardCards, 3))) {
+				throw new Error(
+					`Invalid number of cards: ${bigCards.length} big & ${standardCards.length} standard`,
+				);
+			}
 			return (
 				<>
 					<Card50_Card25_Card25

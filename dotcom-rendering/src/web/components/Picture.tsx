@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import React from 'react';
+import { nonEmpty } from '../lib/tuple';
 
 /**
  * Working on this file? Checkout out 027-pictures.md & 029-signing-image-urls.md for background information & context
@@ -198,7 +199,7 @@ const generateSignedUrl = ({
 
 	// Construct and sign the url
 	const url = new URL(master);
-	const service = url.hostname.split('.')[0];
+	const [service = 'unknown'] = url.hostname.split('.');
 	const params = new URLSearchParams({
 		width: imageWidth.toString(),
 		// Why 45 and 85?
@@ -258,6 +259,8 @@ export const Picture = ({
 				}),
 			};
 		});
+
+	if (!nonEmpty(sources)) return null;
 
 	return (
 		<picture css={block}>

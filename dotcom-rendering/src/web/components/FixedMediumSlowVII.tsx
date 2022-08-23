@@ -1,5 +1,6 @@
 import type { DCRContainerPalette } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import { nonEmpty } from '../lib/tuple';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -15,6 +16,8 @@ export const FixedMediumSlowVII = ({
 	containerPalette,
 	showAge,
 }: Props) => {
+	if (!nonEmpty(trails)) throw new Error('Empty trails');
+
 	const primary = trails[0];
 	const firstSlice = trails.slice(1, 3);
 	const secondSlice = trails.slice(3, 7);

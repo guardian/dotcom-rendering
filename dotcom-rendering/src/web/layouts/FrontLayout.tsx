@@ -21,6 +21,7 @@ import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { DecideContainer } from '../lib/DecideContainer';
 import { decidePalette } from '../lib/decidePalette';
+import { nonEmpty } from '../lib/tuple';
 import { Stuck } from './lib/stickiness';
 
 interface Props {
@@ -152,7 +153,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						collection.backfill,
 					);
 					// There are some containers that have zero trails. We don't want to render these
-					if (trails.length === 0) return null;
+					if (!nonEmpty(trails)) return null;
 
 					const ophanName = ophanComponentId(collection.displayName);
 					const ophanComponentLink = `container-${index} | ${ophanName}`;

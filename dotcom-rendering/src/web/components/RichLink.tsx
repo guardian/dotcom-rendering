@@ -12,6 +12,7 @@ import {
 import ArrowInCircle from '../../static/icons/arrow-in-circle.svg';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
+import { nonEmpty } from '../lib/tuple';
 import { Avatar } from './Avatar';
 import { Hide } from './Hide';
 import { QuoteIcon } from './QuoteIcon';
@@ -191,7 +192,8 @@ const readMoreText: (contentType: string) => string = (contentType) => {
 
 const getMainContributor: (tags: TagType[]) => string = (tags) => {
 	const contributorTags = tags.filter((t) => t.type === 'Contributor');
-	return contributorTags.length > 0 ? contributorTags[0].title : '';
+	if (!nonEmpty(contributorTags)) return '';
+	return contributorTags[0].title;
 };
 
 const imageStyles = css`

@@ -1,5 +1,6 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
+import { isTuple } from '../lib/tuple';
 import { DynamicSlowMPU } from './DynamicSlowMPU';
 import { Section } from './Section';
 
@@ -23,6 +24,7 @@ export default {
 };
 
 const bigs = trails.slice(0, 3);
+if (!isTuple(bigs, 3)) throw new Error('Invalid number of bigs');
 const standards = trails.slice(3);
 
 export const NoBigs = () => (

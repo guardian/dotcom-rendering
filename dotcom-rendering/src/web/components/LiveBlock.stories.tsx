@@ -1,8 +1,9 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints, from } from '@guardian/source-foundations';
-import { liveBlock } from '../../../fixtures/manual/liveBlock';
 import { images } from '../../../fixtures/generated/images';
+import { liveBlock } from '../../../fixtures/manual/liveBlock';
+import { nonEmpty } from '../lib/tuple';
 import { LiveBlock } from './LiveBlock';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
@@ -252,6 +253,7 @@ export const RichLink = () => {
 RichLink.story = { name: 'with a rich link being forced inline' };
 
 export const FirstImage = () => {
+	if (!nonEmpty(images)) return null;
 	const block: Block = {
 		...liveBlock,
 		elements: [
@@ -288,6 +290,7 @@ export const FirstImage = () => {
 FirstImage.story = { name: 'with an image as the first element' };
 
 export const ImageRoles = () => {
+	if (!nonEmpty(images)) return null;
 	const block: Block = {
 		...liveBlock,
 		elements: [
@@ -350,6 +353,7 @@ export const ImageRoles = () => {
 ImageRoles.story = { name: 'with images at different roles' };
 
 export const Thumbnail = () => {
+	if (!nonEmpty(images)) return null;
 	const block: Block = {
 		...liveBlock,
 		elements: [
@@ -401,6 +405,7 @@ export const Thumbnail = () => {
 Thumbnail.story = { name: 'with a thumbnail image surrounded by text' };
 
 export const ImageAndTitle = () => {
+	if (!nonEmpty(images)) return null;
 	const block: Block = {
 		...liveBlock,
 		title: 'Afternoon summary',
