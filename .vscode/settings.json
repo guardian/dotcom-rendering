@@ -24,5 +24,7 @@
     ],
     "git.branchProtection": [
         "main"
-    ]
+    ],
+    "javascript.preferences.importModuleSpecifier": "relative",
+    "typescript.preferences.importModuleSpecifier": "relative"
 }
