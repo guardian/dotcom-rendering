@@ -969,6 +969,30 @@ const paragraph = (_format: ArticleFormat): Colour => neutral[7];
 
 const paragraphDark = (_format: ArticleFormat): Colour => neutral[86];
 
+const signUpForm = (_format: ArticleFormat): string => {
+	return neutral[7];
+};
+
+const signUpFormDark = (_format: ArticleFormat): string => {
+	return neutral[86];
+};
+
+const privacyMessage = (_format: ArticleFormat): string => {
+	return neutral[46];
+};
+
+const privacyMessageDark = (_format: ArticleFormat): string => {
+	return neutral[46];
+};
+
+const signUpFormButton = (_format: ArticleFormat): string => {
+	return neutral[100];
+};
+
+const signUpFormButtonDark = (_format: ArticleFormat): string => {
+	return neutral[0];
+};
+
 // ----- API ----- //
 
 const text = {
@@ -1028,6 +1052,12 @@ const text = {
 	pagination,
 	paragraph,
 	paragraphDark,
+	signUpForm,
+	signUpFormDark,
+	privacyMessage,
+	privacyMessageDark,
+	signUpFormButton,
+	signUpFormButtonDark,
 };
 
 // ----- Exports ----- //
