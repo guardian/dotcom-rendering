@@ -14,6 +14,7 @@ import { grid } from 'grid/grid';
 import type { FC } from 'react';
 import { getDefaultImgStyles, getDefaultSizes } from './BodyImage.defaults';
 import type { BodyImageProps } from './BodyImage.defaults';
+import { darkModeCss } from 'styles';
 
 const figureStyles = css`
 	${grid.container}
@@ -103,6 +104,10 @@ const captionStyles = (format: ArticleFormat): SerializedStyles => css`
 			left: -10px;
 		}
 	}
+
+	${darkModeCss`
+		color: ${neutral[86]};
+	`}
 `;
 
 const GalleryBodyImage: FC<BodyImageProps> = ({

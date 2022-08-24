@@ -16,6 +16,7 @@ import { grid } from 'grid/grid';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
@@ -23,10 +24,18 @@ const headerStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.container}
 	background-color: ${neutral[7]};
 	border-bottom: 1px solid ${border.galleryImage(format)};
+
+	${darkModeCss`
+		background-color: ${neutral[10]};
+	`}
 `;
 
 const wrapperStyles = css`
 	background-color: ${neutral[7]};
+
+	${darkModeCss`
+		background-color: ${neutral[10]};
+	`}
 `;
 
 type Props = {
@@ -41,17 +50,14 @@ const GalleryLayout: FC<Props> = ({ item, children }) => {
 			<main>
 				<article css={wrapperStyles}>
 					<header css={headerStyles(format)}>
-						<MainMedia
-							mainMedia={item.mainMedia}
-							format={getFormat(item)}
-						/>
+						<MainMedia mainMedia={item.mainMedia} format={format} />
 						<Series item={item} />
 						<Headline item={item} />
 						<Standfirst item={item} />
 						<Metadata item={item} />
 						<GalleryCaption
 							mainMedia={item.mainMedia}
-							format={getFormat(item)}
+							format={format}
 						/>
 					</header>
 					{children}
@@ -59,7 +65,7 @@ const GalleryLayout: FC<Props> = ({ item, children }) => {
 				</article>
 			</main>
 			<RelatedContent item={item} />
-			<Footer isCcpa={false} format={item} />
+			<Footer isCcpa={false} format={format} />
 		</>
 	);
 };

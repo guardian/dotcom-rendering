@@ -48,6 +48,8 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 			return (
 				<GalleryStandfirst
 					standfirst={item.standfirst}
+					byline={item.byline}
+					bylineHtml={item.bylineHtml}
 					format={format}
 				/>
 			);

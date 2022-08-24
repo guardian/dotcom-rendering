@@ -9,6 +9,7 @@ import {
 	remSpace,
 } from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
@@ -28,6 +29,11 @@ const styles = css`
 		${headline.xlarge({ fontWeight: 'bold' })}
 		${grid.span('centre-column-start', 8)}
 	}
+
+	${darkModeCss`
+		background-color: ${neutral[10]};
+		color: ${neutral[86]};
+	`}
 `;
 
 const backgroundStyles = css`
@@ -43,6 +49,10 @@ const backgroundStyles = css`
 		${grid.between('centre-column-start', 'viewport-end')}
 		margin-left: calc(${grid.columnGap} * -1/2);
 	}
+
+	${darkModeCss`
+		background-color: ${neutral[10]};
+	`}
 `;
 
 interface Props {

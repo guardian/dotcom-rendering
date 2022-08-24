@@ -16,6 +16,7 @@ import { maybeRender } from 'lib';
 import type { MainMedia } from 'mainMedia';
 import { MainMediaKind } from 'mainMedia';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
@@ -36,6 +37,11 @@ const styles = css`
 	span {
 		color: ${neutral[86]};
 	}
+
+	${darkModeCss`
+		background-color: ${neutral[10]};
+		color: ${neutral[86]};
+	`}
 `;
 
 type Props = {

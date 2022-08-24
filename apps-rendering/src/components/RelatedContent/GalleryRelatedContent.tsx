@@ -10,6 +10,7 @@ import { grid } from 'grid/grid';
 import type { ResizedRelatedContent } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 import {
 	COMMENT,
 	defaultHeadingStyles,
@@ -21,6 +22,10 @@ import {
 const styles = css`
 	${grid.container}
 	background-color: ${neutral[97]};
+
+	${darkModeCss`
+		background-color: ${neutral[10]};
+	`}
 `;
 
 const relatedContentStyles = css`
@@ -64,6 +69,21 @@ const headingStyles = css`
 		border-left: 1px solid ${neutral[86]};
 		right: -10px;
 	}
+
+	${darkModeCss`
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			border-left: 1px solid ${neutral[20]};
+			left: -10px;
+		}
+
+		&::after {
+			border-color: ${neutral[20]}
+		}
+	`}
 `;
 
 type Props = {
