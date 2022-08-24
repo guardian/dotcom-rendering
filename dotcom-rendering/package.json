@@ -29,6 +29,7 @@
     "cypress:open:e2e": "cypress open --e2e --browser=chrome",
     "cypress:run:e2e": "cypress run --spec 'cypress/e2e/**/*'",
     "cypress:run:percy": "percy exec -- cypress run --config specPattern='cypress/snapshot/**/*'",
+    "unused-exports": "yarn ts-unused-exports tsconfig.json --excludePathsFromReport='stories.tsx'",
     "makeBuild": "NODE_ENV=production CI_ENV=github webpack --config ./scripts/webpack/webpack.config.js"
   },
   "bundlesize": [
@@ -188,6 +189,7 @@
     "swr": "^1.3.0",
     "to-string-loader": "^1.2.0",
     "ts-jest": "^24.3.0",
+    "ts-unused-exports": "^8.0.0",
     "tslint": "^6.1.3",
     "tslint-config-airbnb": "^5.11.2",
     "tslint-config-prettier": "^1.18.0",
