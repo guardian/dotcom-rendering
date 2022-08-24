@@ -32,13 +32,13 @@ const NewsTheme: FC = () => (
 	<NewsletterSignup
 		element={{
 			kind: ElementKind.NewsletterSignUp,
-			identityName: 'monring-briefing',
+			identityName: 'morning-briefing',
 			description:
 				'Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning',
 			name: 'First Edition',
 			frequency: 'Every weekday',
 			theme: ArticlePillar.News,
-			successDescription: "We'll send you first edition every weekday",
+			successDescription: "We'll send you First Edition every weekday",
 		}}
 		format={{
 			design: selectDesign(ArticleDesign.Standard),
