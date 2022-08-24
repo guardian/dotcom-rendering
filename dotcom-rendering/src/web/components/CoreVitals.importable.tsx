@@ -31,6 +31,8 @@ export const CoreVitals = () => {
 
 	const serverSideTestsToForceMetrics: Array<ServerSideTestNames> = [
 		/* linter, please keep this array multi-line */
+		'commercialEndOfQuarterMegaTestVariant',
+		'commercialEndOfQuarterMegaTestControl',
 	];
 
 	const userInServerSideTestToForceMetrics =

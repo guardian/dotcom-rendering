@@ -125,9 +125,9 @@ export const Blocks: React.FunctionComponent<{
 		contentType,
 		commercialProperties,
 		switches: {
-			ampPrebid: switches.ampPrebid,
-			permutive: switches.permutive,
-			ampAmazon: switches.ampAmazon,
+			ampPrebid: !!switches.ampPrebid,
+			permutive: !!switches.permutive,
+			ampAmazon: !!switches.ampAmazon,
 		},
 	};
 

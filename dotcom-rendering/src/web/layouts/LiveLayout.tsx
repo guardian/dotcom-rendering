@@ -286,11 +286,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const showKeyEventsCarousel = CAPIArticle.config.switches.keyEventsCarousel;
 
-	const isInFilteringBeta =
+	const isInFilteringBeta = !!(
 		CAPIArticle.config.switches.automaticFilters &&
-		CAPIArticle.availableTopics;
+		CAPIArticle.availableTopics
+	);
 
-	const showTopicFilterBank = CAPIArticle.config.switches.automaticFilters;
+	const showTopicFilterBank = !!CAPIArticle.config.switches.automaticFilters;
 
 	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
 
@@ -338,7 +339,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							}
 							urls={CAPIArticle.nav.readerRevenueLinks.header}
 							remoteHeader={
-								CAPIArticle.config.switches.remoteHeader
+								!!CAPIArticle.config.switches.remoteHeader
 							}
 							contributionsServiceUrl={contributionsServiceUrl}
 							idApiUrl={CAPIArticle.config.idApiUrl}
@@ -575,7 +576,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										}
 										ajaxUrl={CAPIArticle.config.ajaxUrl}
 										showShareCount={
-											CAPIArticle.config.switches
+											!!CAPIArticle.config.switches
 												.serverShareCounts
 										}
 									/>
@@ -647,7 +648,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									}
 									format={format}
 									enhanceTweetsSwitch={
-										CAPIArticle.config.switches
+										!!CAPIArticle.config.switches
 											.enhanceTweets
 									}
 									onFirstPage={pagination.currentPage === 1}
@@ -747,7 +748,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											}
 											ajaxUrl={CAPIArticle.config.ajaxUrl}
 											showShareCount={
-												CAPIArticle.config.switches
+												!!CAPIArticle.config.switches
 													.serverShareCounts
 											}
 										/>
@@ -912,6 +913,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													selectedTopics={
 														CAPIArticle.selectedTopics
 													}
+													abTests={
+														CAPIArticle.config
+															.abTests
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1062,6 +1067,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													}
 													selectedTopics={
 														CAPIArticle.selectedTopics
+													}
+													abTests={
+														CAPIArticle.config
+															.abTests
 													}
 												/>
 												{pagination.totalPages > 1 && (
@@ -1246,7 +1255,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									CAPIArticle.config.discussionApiClientHeader
 								}
 								enableDiscussionSwitch={
-									CAPIArticle.config.switches
+									!!CAPIArticle.config.switches
 										.enableDiscussionSwitch
 								}
 								isAdFreeUser={CAPIArticle.isAdFreeUser}
@@ -1344,10 +1353,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							CAPIArticle.shouldHideReaderRevenue
 						}
 						remoteBannerSwitch={
-							CAPIArticle.config.switches.remoteBanner
+							!!CAPIArticle.config.switches.remoteBanner
 						}
 						puzzleBannerSwitch={
-							CAPIArticle.config.switches.puzzlesBanner
+							!!CAPIArticle.config.switches.puzzlesBanner
 						}
 						tags={CAPIArticle.tags}
 					/>
