@@ -4,7 +4,6 @@ import type {
 	OphanABTestMeta,
 	OphanAction,
 	OphanComponentEvent,
-	OphanComponentType,
 } from '@guardian/libs';
 import { log } from '@guardian/libs';
 
@@ -128,13 +127,4 @@ export const recordPerformance = (): void => {
 	record({
 		performance,
 	});
-};
-
-export {
-	OphanABEvent,
-	OphanABPayload,
-	OphanAction,
-	OphanComponentEvent,
-	OphanComponentType,
-	OphanABTestMeta,
 };
