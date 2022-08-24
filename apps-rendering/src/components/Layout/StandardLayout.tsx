@@ -27,6 +27,7 @@ import Tags from 'components/Tags';
 import { getFormat } from 'item';
 import type {
 	Item,
+	Explainer as ExplainerItem,
 	MatchReport as MatchReportItem,
 	Review as ReviewItem,
 	Standard as StandardItem,
@@ -71,7 +72,7 @@ const decideLines = (
 };
 
 interface Props {
-	item: StandardItem | ReviewItem | MatchReportItem;
+	item: StandardItem | ReviewItem | MatchReportItem | ExplainerItem;
 	children: ReactNode[];
 }
 
