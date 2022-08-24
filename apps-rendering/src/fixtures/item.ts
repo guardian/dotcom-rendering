@@ -40,6 +40,7 @@ import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
 import { galleryBody } from './galleryBody';
 import { relatedContent } from './relatedContent';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 
 // ----- Fixture ----- //
 
@@ -370,6 +371,7 @@ const fields = {
 	logo: none,
 	webUrl: '',
 	promotedNewsletter: none,
+	edition: Edition.UK,
 };
 
 const article: Standard = {
