@@ -119,6 +119,7 @@ interface NewsletterSignUp {
 	description: string;
 	group: string;
 	theme: ArticleTheme;
+	successDescription: string;
 }
 
 type BodyElement =

@@ -104,13 +104,13 @@ const noHeightFromTabletStyles = css`
 	}
 `;
 
-const USE_HYRDATED_FORM = true
+const USE_HYRDATED_FORM = false
 
 /**
  * NOTE: this component is non functional and is for demonstration only.
  */
 const NewsletterSignup: FC<Props> = ({ format, element }) => {
-	const { displayName, frequency, description, theme, id } = element;
+	const { displayName, frequency, description, theme, id, successDescription  } = element;
 	return (
 		<aside css={containerStyles(format)}>
 			<div css={stackBelowTabletStyles}>
@@ -136,7 +136,7 @@ const NewsletterSignup: FC<Props> = ({ format, element }) => {
 					<HydratableEmailSignupForm newsletterId={id} />
 				</div>
 			) : (
-				<EmailSignupForm newsletterId={id} format={format} />
+				<EmailSignupForm newsletterId={id} format={format} successDescription={successDescription} />
 			)}
 			<PrivacyWording useCaptcha={false} format={format} />
 		</aside>

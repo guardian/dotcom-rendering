@@ -9,6 +9,8 @@ import {
 } from '@guardian/source-foundations';
 import {
 	Button,
+	InlineError,
+	InlineSuccess,
 	Label,
 	SvgSpinner,
 	TextInput,
@@ -30,6 +32,7 @@ import { darkModeCss } from 'styles';
 interface Props {
 	format: ArticleFormat;
 	newsletterId: string;
+	successDescription: string;
 }
 
 const formStyle = css`
@@ -37,31 +40,26 @@ const formStyle = css`
 	align-items: center;
 	flex-wrap: wrap;
 
-	.js-sign-up-form__spinner {
+	.js-sign-up-form__feedback {
 		display: none;
 	}
 
 	&.js-signup-form--waiting {
-		.js-sign-up-form__spinner {
+		.js-sign-up-form__feedback--waiting {
 			display: inline-flex;
 		}
 	}
 
-	.js-sign-up-form__feedback-message {
-		display: none;
-		${textSans.medium({ fontWeight: 'bold' })}
-	}
-
 	&.js-signup-form--success {
-		.js-sign-up-form__feedback-message {
-			display: inline;
+		.js-sign-up-form__feedback--success {
+			display: block;
 			color: ${userFeedbackThemeDefault.userFeedback.textSuccess};
 		}
 	}
 
 	&.js-signup-form--failure {
-		.js-sign-up-form__feedback-message {
-			display: inline;
+		.js-sign-up-form__feedback--failure {
+			display: block;
 			color: ${userFeedbackThemeDefault.userFeedback.textError};
 		}
 	}
@@ -72,7 +70,11 @@ const formStyle = css`
  * The UI for the NewsletterSignup might not use an HTML form for apps
  * when implemented
  */
-const EmailSignupForm: FC<Props> = ({ newsletterId, format }) => {
+const EmailSignupForm: FC<Props> = ({
+	newsletterId,
+	successDescription,
+	format,
+}) => {
 	const handleSubmit = (): void => {
 		console.log({ newsletterId });
 	};
@@ -145,10 +147,15 @@ const EmailSignupForm: FC<Props> = ({ newsletterId, format }) => {
 				>
 					Sign up
 				</Button>
-				<span className="js-sign-up-form__spinner">
+				<span className="js-sign-up-form__feedback js-sign-up-form__feedback--waiting">
 					<SvgSpinner size="xsmall" />
 				</span>
-				<span className="js-sign-up-form__feedback-message"></span>
+				<div className="js-sign-up-form__feedback js-sign-up-form__feedback--success">
+					<InlineSuccess>{successDescription}</InlineSuccess>
+				</div>
+				<div className="js-sign-up-form__feedback js-sign-up-form__feedback--failure">
+					<InlineError>error - failed to sign up</InlineError>
+				</div>
 			</form>
 		</>
 	);

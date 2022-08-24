@@ -7,13 +7,12 @@ interface FormBundle {
 	button: HTMLButtonElement;
 	input: HTMLInputElement;
 	newsletterId: string;
-	feedback: Element;
 }
 
 // ----- Procedures ----- //
 
 async function handleSubmission(bundle: FormBundle): Promise<void> {
-	const { input, newsletterId, button, form, feedback } = bundle;
+	const { input, newsletterId, button, form } = bundle;
 
 	form.classList.add('js-signup-form--waiting');
 	input.setAttribute('disabled', '');
@@ -27,10 +26,8 @@ async function handleSubmission(bundle: FormBundle): Promise<void> {
 
 	if (response.status === 200) {
 		form.classList.add('js-signup-form--success');
-		feedback.innerHTML = `SIGNED UP to ${newsletterId}`;
 	} else {
 		form.classList.add('js-signup-form--failure');
-		feedback.innerHTML = `Failed to sign up to ${newsletterId}`;
 	}
 }
 
@@ -38,14 +35,13 @@ function setup(form: HTMLFormElement): void {
 	const newsletterId = form.getAttribute('data-newsletter-id');
 	const button = form.querySelector('button');
 	const input = form.querySelector('input');
-	const feedback = form.querySelector('.js-sign-up-form__feedback-message');
 
-	if (!input || !newsletterId || !button || !feedback) {
-		console.log('MISSING', { button, input, newsletterId, feedback });
+	if (!input || !newsletterId || !button) {
+		console.log('MISSING', { button, input, newsletterId });
 		return;
 	}
 
-	const bundle: FormBundle = { form, button, input, newsletterId, feedback };
+	const bundle: FormBundle = { form, button, input, newsletterId };
 
 	form.addEventListener('submit', (event) => {
 		event.preventDefault();
