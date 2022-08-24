@@ -40,6 +40,11 @@ const makeRichLinkElement = (): BodyElement => ({
 });
 
 describe('outline', () => {
+	test('it creates an empty outline given an empty list of body elements', () => {
+		const output = fromBodyElements([]);
+
+		expect(output.length).toEqual(0);
+	});
 	test('it creates an outline given a list of H2 and H3 body elements', () => {
 		const output = fromBodyElements([
 			makeHeadingTwo('Interesting topic 1', 'interesting-topic-1'),
