@@ -88,11 +88,40 @@ describe('checkBrazeDependecies', () => {
 		const got = await checkBrazeDependencies(isSignedIn, idApiUrl);
 
 		expect(got.isSuccessful).toEqual(false);
-		expect(got.data).toEqual({});
 		// Condition to keep TypeScript happy
 		if (!got.isSuccessful) {
 			expect(got.failure.field).toEqual('brazeSwitch');
 			expect(got.failure.data).toEqual(false);
+		}
+	});
+
+	it('returns the apiKey if the switch is disabled', async () => {
+		setWindow({
+			guardian: {
+				config: {
+					switches: {
+						brazeSwitch: false,
+					},
+					page: {
+						brazeApiKey: 'fake-api-key',
+						isPaidContent: false,
+					},
+				},
+			},
+		});
+		mockBrazeUuid = 'fake-uuid';
+		mockConsentsPromise = Promise.resolve(true);
+
+		const isSignedIn = true;
+		const idApiUrl = 'https://idapi.example.com';
+		const got = await checkBrazeDependencies(isSignedIn, idApiUrl);
+
+		expect(got.isSuccessful).toEqual(false);
+		expect(got.data).toEqual({
+			apiKey: 'fake-api-key',
+		});
+		if (!got.isSuccessful) {
+			expect(got.failure.field).toEqual('brazeSwitch');
 		}
 	});
 
@@ -118,9 +147,6 @@ describe('checkBrazeDependecies', () => {
 		const got = await checkBrazeDependencies(isSignedIn, idApiUrl);
 
 		expect(got.isSuccessful).toEqual(false);
-		expect(got.data).toEqual({
-			brazeSwitch: true,
-		});
 		// Condition to keep TypeScript happy
 		if (!got.isSuccessful) {
 			expect(got.failure.field).toEqual('apiKey');
