@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { border } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
@@ -32,10 +31,9 @@ const wrapperStyles = css`
 
 type Props = {
 	item: Item;
-	edition: Edition;
 };
 
-const GalleryLayout: FC<Props> = ({ item, children, edition }) => {
+const GalleryLayout: FC<Props> = ({ item, children }) => {
 	const format = getFormat(item);
 
 	return (
@@ -50,7 +48,7 @@ const GalleryLayout: FC<Props> = ({ item, children, edition }) => {
 						<Series item={item} />
 						<Headline item={item} />
 						<Standfirst item={item} />
-						<Metadata item={item} edition={edition} />
+						<Metadata item={item} />
 						<GalleryCaption
 							mainMedia={item.mainMedia}
 							format={getFormat(item)}

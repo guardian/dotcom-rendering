@@ -2,7 +2,6 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
@@ -35,7 +34,6 @@ import ImmersiveMetadata from './ImmersiveMetadata';
 
 interface Props {
 	item: Item;
-	edition: Edition;
 }
 
 const styles = css`
@@ -206,29 +204,37 @@ const BlogLines: FC<Item> = (item: Item) => (
 	</>
 );
 
-const MetadataWithByline: FC<Props> = ({ item, edition }: Props) => (
+const MetadataWithByline: FC<Props> = ({ item }: Props) => (
 	<div css={css(styles, withBylineStyles)}>
 		<Avatar {...item} />
 		<div css={css(textStyles, withBylineTextStyles)}>
 			<Byline {...item} />
-			<Dateline date={item.publishDate} format={item} edition={edition} />
+			<Dateline
+				date={item.publishDate}
+				format={item}
+				edition={item.edition}
+			/>
 			<Follow format={getFormat(item)} contributors={item.contributors} />
 		</div>
 		<CommentCount count={item.commentCount} {...item} />
 	</div>
 );
 
-const ShortMetadata: FC<Props> = ({ item, edition }: Props) => (
+const ShortMetadata: FC<Props> = ({ item }: Props) => (
 	<div css={styles}>
 		<div css={textStyles}>
-			<Dateline date={item.publishDate} format={item} edition={edition} />
+			<Dateline
+				date={item.publishDate}
+				format={item}
+				edition={item.edition}
+			/>
 			<Follow format={getFormat(item)} contributors={item.contributors} />
 		</div>
 		<CommentCount count={item.commentCount} {...item} />
 	</div>
 );
 
-const MetadataWithAlertSwitch: FC<Props> = ({ item, edition }: Props) => {
+const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 	const { design } = item;
 	const [checked, setChecked] = useState<boolean>(false);
 	return (
@@ -250,7 +256,7 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item, edition }: Props) => {
 				<Dateline
 					date={item.publishDate}
 					format={item}
-					edition={edition}
+					edition={item.edition}
 				/>
 				<Follow
 					format={getFormat(item)}
@@ -289,7 +295,7 @@ const Metadata: FC<Props> = (props: Props) => {
 				commentCount={props.item.commentCount}
 				contributors={props.item.contributors}
 				commentable={props.item.commentable}
-				edition={props.edition}
+				edition={props.item.edition}
 			/>
 		);
 	}
@@ -302,7 +308,7 @@ const Metadata: FC<Props> = (props: Props) => {
 				commentCount={props.item.commentCount}
 				contributors={props.item.contributors}
 				commentable={props.item.commentable}
-				edition={props.edition}
+				edition={props.item.edition}
 			/>
 		);
 	} else if (

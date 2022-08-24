@@ -4,7 +4,6 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { breakpoints, from } from '@guardian/source-foundations';
 import {
@@ -74,10 +73,9 @@ const decideLines = (
 interface Props {
 	item: StandardItem | ReviewItem | MatchReportItem;
 	children: ReactNode[];
-	edition: Edition;
 }
 
-const StandardLayout: FC<Props> = ({ item, children, edition }) => {
+const StandardLayout: FC<Props> = ({ item, children }) => {
 	const format = getFormat(item);
 	// client side code won't render an Epic if there's an element with this id
 	const epicContainer = item.shouldHideReaderRevenue ? null : (
@@ -132,7 +130,7 @@ const StandardLayout: FC<Props> = ({ item, children, edition }) => {
 					</div>
 					{decideLines(item, lineStyles)}
 					<section css={articleWidthStyles}>
-						<Metadata item={item} edition={edition} />
+						<Metadata item={item} />
 						<Logo item={item} />
 					</section>
 				</header>

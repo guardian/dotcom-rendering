@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
@@ -37,7 +36,6 @@ const renderWithAds =
 interface Props {
 	item: Item;
 	shouldHideAds: boolean;
-	edition: Edition;
 }
 
 const notImplemented = (
@@ -50,23 +48,19 @@ const notImplemented = (
 	</p>
 );
 
-const Layout: FC<Props> = ({ item, shouldHideAds, edition }) => {
+const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 	if (
 		item.design === ArticleDesign.LiveBlog ||
 		item.design === ArticleDesign.DeadBlog
 	) {
-		return <LiveLayout item={item} edition={edition} />;
+		return <LiveLayout item={item} />;
 	}
 
 	const body = partition(item.body).oks;
 	const render = renderWithAds(shouldHideAds);
 
 	if (item.theme === ArticleSpecial.Labs) {
-		return (
-			<LabsLayout item={item} edition={edition}>
-				{render(item, body)}
-			</LabsLayout>
-		);
+		return <LabsLayout item={item}>{render(item, body)}</LabsLayout>;
 	}
 
 	if (
@@ -85,11 +79,7 @@ const Layout: FC<Props> = ({ item, shouldHideAds, edition }) => {
 		item.design === ArticleDesign.Letter ||
 		item.design === ArticleDesign.Editorial
 	) {
-		return (
-			<CommentLayout item={item} edition={edition}>
-				{render(item, body)}
-			</CommentLayout>
-		);
+		return <CommentLayout item={item}>{render(item, body)}</CommentLayout>;
 	}
 
 	if (item.design === ArticleDesign.Analysis) {
@@ -99,11 +89,7 @@ const Layout: FC<Props> = ({ item, shouldHideAds, edition }) => {
 	}
 
 	if (item.design === ArticleDesign.Gallery) {
-		return (
-			<GalleryLayout item={item} edition={edition}>
-				{render(item, body)}
-			</GalleryLayout>
-		);
+		return <GalleryLayout item={item}>{render(item, body)}</GalleryLayout>;
 	}
 
 	if (
@@ -111,7 +97,7 @@ const Layout: FC<Props> = ({ item, shouldHideAds, edition }) => {
 		item.design === ArticleDesign.Video
 	) {
 		return (
-			<MediaLayout item={item} edition={edition}>
+			<MediaLayout item={item}>
 				{render(
 					item,
 					body.filter((elem) => elem.kind === ElementKind.Image),
@@ -134,16 +120,14 @@ const Layout: FC<Props> = ({ item, shouldHideAds, edition }) => {
 	) {
 		if (item.display === ArticleDisplay.Immersive) {
 			return (
-				<ImmersiveLayout item={item} edition={edition}>
+				<ImmersiveLayout item={item}>
 					{render(item, body)}
 				</ImmersiveLayout>
 			);
 		}
 
 		return (
-			<StandardLayout item={item} edition={edition}>
-				{render(item, body)}
-			</StandardLayout>
+			<StandardLayout item={item}>{render(item, body)}</StandardLayout>
 		);
 	}
 

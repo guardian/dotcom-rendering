@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { KeyEvent } from '@guardian/common-rendering/src/components/keyEvents';
 import KeyEvents from '@guardian/common-rendering/src/components/keyEvents';
 import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
@@ -115,10 +114,9 @@ const keyEvents = (blocks: LiveBlock[]): KeyEvent[] =>
 
 interface Props {
 	item: LiveBlog | DeadBlog;
-	edition: Edition;
 }
 
-const LiveLayout: FC<Props> = ({ item, edition }) => {
+const LiveLayout: FC<Props> = ({ item }) => {
 	const pinnedPost = fromNullable(item.blocks.find((b) => b.isPinned));
 	const pagination = (
 		<Pagination
@@ -143,7 +141,7 @@ const LiveLayout: FC<Props> = ({ item, edition }) => {
 			<main css={mainStyles(item)}>
 				<GridItem area="metadata">
 					<div css={metadataWrapperStyles(item)}>
-						<Metadata item={item} edition={edition} />
+						<Metadata item={item} />
 					</div>
 				</GridItem>
 
@@ -192,7 +190,7 @@ const LiveLayout: FC<Props> = ({ item, edition }) => {
 							format={item}
 							pageNumber={item.pagedBlocks.currentPage.pageNumber}
 							pinnedPost={pinnedPost}
-							edition={edition}
+							edition={item.edition}
 						/>
 						{pagination}
 					</div>

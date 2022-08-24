@@ -4,7 +4,6 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import type { EmotionCritical } from '@emotion/server/create-instance';
-import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
@@ -20,7 +19,6 @@ import Scripts from 'components/Scripts';
 import { fromCapi } from 'item';
 import type { Item } from 'item';
 import { JSDOM } from 'jsdom';
-import { Optional } from 'optional';
 import type { ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
@@ -69,9 +67,6 @@ const scriptName = ({ design, display }: ArticleFormat): Option<string> => {
 
 const shouldHideAds = (request: RenderingRequest): boolean =>
 	request.content.fields?.shouldHideAdverts ?? false;
-
-const getEdition = (request: RenderingRequest): Edition =>
-	Optional.fromNullable(request.edition).withDefault(Edition.UK);
 
 const styles = (format: ArticleFormat): string => `
     ${pageFonts}
@@ -137,11 +132,7 @@ const renderBody = (item: Item, request: RenderingRequest): EmotionCritical =>
 	emotionServer.extractCritical(
 		renderToString(
 			<CacheProvider value={emotionCache}>
-				<Layout
-					item={item}
-					edition={getEdition(request)}
-					shouldHideAds={shouldHideAds(request)}
-				/>
+				<Layout item={item} shouldHideAds={shouldHideAds(request)} />
 			</CacheProvider>,
 		),
 	);

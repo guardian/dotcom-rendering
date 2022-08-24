@@ -2,6 +2,7 @@
 
 import type { Branding } from '@guardian/apps-rendering-api-models/branding';
 import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Asset } from '@guardian/content-api-models/v1/asset';
@@ -41,6 +42,7 @@ import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import { parseMany as parseLiveBlocks } from 'liveBlock';
 import type { MainMedia } from 'mainMedia';
+import { Optional } from 'optional';
 import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
@@ -66,6 +68,7 @@ interface Fields extends ArticleFormat {
 	relatedContent: Option<ResizedRelatedContent>;
 	logo: Option<Logo>;
 	webUrl: string;
+	edition: Edition;
 	promotedNewsletter: Option<Newsletter>;
 }
 
@@ -309,6 +312,7 @@ const itemFields = (
 		),
 		logo: paidContentLogo(content.tags),
 		webUrl: content.webUrl,
+		edition: Optional.fromNullable(request.edition).withDefault(Edition.UK),
 		promotedNewsletter: fromNullable(request.promotedNewsletter),
 	};
 };
