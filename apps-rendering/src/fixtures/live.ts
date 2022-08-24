@@ -15,6 +15,7 @@ import type { LiveBlock } from 'liveBlock';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
 import type { LiveBlogPagedBlocks } from 'pagination';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 
 const parser = new DOMParser();
 const parseHtml = parse(parser);
@@ -257,6 +258,7 @@ const fields = {
 	footballContent: none,
 	logo: none,
 	webUrl: '',
+	edition: Edition.UK,
 	promotedNewsletter: none,
 };
 
