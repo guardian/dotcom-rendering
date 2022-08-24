@@ -236,11 +236,7 @@ const LetterHeader: FC<HeaderProps> = ({ item }) => (
 		<Series item={item} />
 		<Headline item={item} />
 		{maybeRender(item.bylineHtml, (byline) => {
-			if (
-				Array.from(byline.childNodes)
-					.map((node) => node.textContent)
-					.findIndex((e) => e === 'Letters') > -1
-			) {
+			if (byline.textContent === 'Letters') {
 				return null;
 			}
 
