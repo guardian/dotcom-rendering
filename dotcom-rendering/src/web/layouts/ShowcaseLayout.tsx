@@ -685,7 +685,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										trails={CAPIArticle.storyPackage.trails.map(
 											decideTrail,
 										)}
-										onwardsType="more-on-this-story"
+										onwardsSource="more-on-this-story"
 										format={format}
 									/>
 								</Island>
