@@ -7,8 +7,8 @@ import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
-import { renderStandfirstText } from 'renderer';
 import type { ReactNode } from 'react';
+import { renderStandfirstText } from 'renderer';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

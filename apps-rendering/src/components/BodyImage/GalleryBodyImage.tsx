@@ -12,9 +12,9 @@ import {
 import Img from 'components/ImgAlt';
 import { grid } from 'grid/grid';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 import { getDefaultImgStyles, getDefaultSizes } from './BodyImage.defaults';
 import type { BodyImageProps } from './BodyImage.defaults';
-import { darkModeCss } from 'styles';
 
 const figureStyles = css`
 	${grid.container}

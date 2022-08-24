@@ -4,8 +4,8 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { FC } from 'react';
 import DefaultFooter, { defaultStyles } from './Footer.defaults';
-import ImmersiveFooter from './ImmersiveFooter';
 import GalleryFooter from './GalleryFooter';
+import ImmersiveFooter from './ImmersiveFooter';
 
 // ----- Component ----- //
 
