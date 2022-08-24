@@ -103,10 +103,10 @@ export const useParticipations = (
 		return Promise.resolve(true); //  we only want to bucket until the cutoff
 	}
 
-	// AFTER cutoff date, browsers without local storage test paticipatieon
+	// AFTER cutoff date, browsers without local storage test participation will not be shown the gate
 	const participations = getParticipationsFromLocalStorage();
-	// if the test particpation exists, show the test gate
-	return !!participations[id] && participations[id]?.variant === variant
+	// if the test participation exists, show the test gate
+	return participations[id]?.variant === variant
 		? Promise.resolve(true)
 		: Promise.resolve(false);
 };
