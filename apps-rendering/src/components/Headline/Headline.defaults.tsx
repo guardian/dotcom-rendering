@@ -39,6 +39,7 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 				padding-bottom: ${remSpace[1]};
 			`;
 		case ArticleDesign.Analysis:
+<<<<<<< Updated upstream
 			return css`
 				${baseStyles}
 				${articleWidthStyles}
@@ -48,6 +49,8 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 				`}
 			`;
 		case ArticleDesign.Explainer:
+=======
+>>>>>>> Stashed changes
 			return css`
 				${baseStyles}
 				${articleWidthStyles}
