@@ -1,5 +1,4 @@
 // ----- Imports ----- //
-import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
