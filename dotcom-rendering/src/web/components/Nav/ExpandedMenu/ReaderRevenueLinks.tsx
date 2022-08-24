@@ -4,7 +4,6 @@ import {
 	brandText,
 	from,
 	textSans,
-	until,
 } from '@guardian/source-foundations';
 import type { LinkType } from '../../../../model/extract-nav';
 
@@ -29,12 +28,6 @@ const columnLinkTitle = css`
 	position: relative;
 	text-align: left;
 	width: 100%;
-
-	${until.desktop} {
-		color: ${brandAlt[400]};
-		font-size: 20px;
-		font-weight: 700;
-	}
 
 	${from.tablet} {
 		padding-left: 60px;
