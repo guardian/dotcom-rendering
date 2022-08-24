@@ -141,8 +141,6 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 		[
 			{ src: polyfillIO },
 			...getScriptArrayFromFile('bootCmp.js'),
-			...getScriptArrayFromFile('ophan.js'),
-
 			...getScriptArrayFromFile('dynamicImport.js'),
 			pageHasNonBootInteractiveElements && {
 				src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
@@ -160,7 +158,7 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 
 	const partyTownScriptTags = generateScriptTags(
 		[
-			...getScriptArrayFromFile('sentryLoader.js'),
+			...getScriptArrayFromFile('ophan.js'),
 			CAPIArticle.config && {
 				src:
 					process.env.COMMERCIAL_BUNDLE_URL ??

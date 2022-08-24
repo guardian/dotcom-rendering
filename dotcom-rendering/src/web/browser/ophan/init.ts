@@ -2,7 +2,6 @@ import '../webpackPublicPath';
 import { startup } from '../startup';
 import { recordPerformance, sendOphanPlatformRecord } from './ophan';
 
-// side effect only
 import 'ophan-tracker-js';
 
 const init = (): Promise<void> => {
@@ -12,7 +11,6 @@ const init = (): Promise<void> => {
 		recordPerformance();
 		window.removeEventListener('load', load, false);
 	});
-
 	return Promise.resolve();
 };
 

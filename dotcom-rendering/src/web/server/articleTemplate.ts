@@ -288,7 +288,10 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <script>
                 partytown = {
                     lib: "/static/frontend/~partytown/",
-                    debug: true,
+					forward: ['guardian.test.record'],
+					mainWindowAccessors: ['guardian'],
+					debug: true,
+					logCalls: true
                 };
                 </script>
                 <script>
