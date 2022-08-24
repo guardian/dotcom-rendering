@@ -44,7 +44,7 @@ const formatFromItem = (
 
 export const Article = (): React.ReactNode => {
 	return (
-		<Standard item={article} edition={Edition.UK}>
+		<Standard item={article}>
 			{renderAll(
 				formatFromItem(article, some(ArticleDisplay.Standard)),
 				partition(article.body).oks,
@@ -56,7 +56,7 @@ Article.story = { name: 'Article' };
 
 export const Review = (): React.ReactNode => {
 	return (
-		<Standard item={review} edition={Edition.UK}>
+		<Standard item={review}>
 			{renderAll(
 				formatFromItem(review, some(ArticleDisplay.Standard)),
 				partition(review.body).oks,
@@ -68,7 +68,7 @@ Review.story = { name: 'Review' };
 
 export const MatchReport = (): React.ReactNode => {
 	return (
-		<Standard item={matchReport} edition={Edition.UK}>
+		<Standard item={matchReport}>
 			{renderAll(
 				formatFromItem(matchReport, some(ArticleDisplay.Standard)),
 				partition(matchReport.body).oks,
@@ -80,7 +80,7 @@ MatchReport.story = { name: 'Match Report' };
 
 export const PrintShop = (): React.ReactNode => {
 	return (
-		<Standard item={printShop} edition={Edition.UK}>
+		<Standard item={printShop}>
 			{renderAll(
 				formatFromItem(printShop, some(ArticleDisplay.Standard)),
 				partition(printShop.body).oks,
@@ -92,7 +92,7 @@ PrintShop.story = { name: 'PrintShop' };
 
 export const PhotoEssay = (): React.ReactNode => {
 	return (
-		<Standard item={photoEssay} edition={Edition.UK}>
+		<Standard item={photoEssay}>
 			{renderAll(
 				formatFromItem(photoEssay, some(ArticleDisplay.Standard)),
 				partition(photoEssay.body).oks,
@@ -104,7 +104,7 @@ PhotoEssay.story = { name: 'Photo Essay' };
 
 export const Feature = (): React.ReactNode => {
 	return (
-		<Standard item={feature} edition={Edition.UK}>
+		<Standard item={feature}>
 			{renderAll(
 				formatFromItem(feature, some(ArticleDisplay.Standard)),
 				partition(feature.body).oks,
@@ -116,7 +116,7 @@ Feature.story = { name: 'Feature' };
 
 export const Interview = (): React.ReactNode => {
 	return (
-		<Standard item={interview} edition={Edition.UK}>
+		<Standard item={interview}>
 			{renderAll(
 				formatFromItem(interview, some(ArticleDisplay.Standard)),
 				partition(interview.body).oks,
@@ -128,7 +128,7 @@ Interview.story = { name: 'Interview' };
 
 export const Quiz = (): React.ReactNode => {
 	return (
-		<Standard item={quiz} edition={Edition.UK}>
+		<Standard item={quiz}>
 			{renderAll(
 				formatFromItem(quiz, some(ArticleDisplay.Standard)),
 				partition(quiz.body).oks,
@@ -140,7 +140,7 @@ Quiz.story = { name: 'Quiz' };
 
 export const Recipe = (): React.ReactNode => {
 	return (
-		<Standard item={recipe} edition={Edition.UK}>
+		<Standard item={recipe}>
 			{renderAll(
 				formatFromItem(recipe, some(ArticleDisplay.Standard)),
 				partition(recipe.body).oks,
@@ -152,7 +152,7 @@ Recipe.story = { name: 'Recipe' };
 
 export const CommentItem = (): React.ReactNode => {
 	return (
-		<Comment item={comment} edition={Edition.UK}>
+		<Comment item={comment}>
 			{renderAll(
 				formatFromItem(comment, some(ArticleDisplay.Standard)),
 				partition(comment.body).oks,
@@ -164,7 +164,7 @@ CommentItem.story = { name: 'Comment' };
 
 export const Letter = (): React.ReactNode => {
 	return (
-		<Comment item={letter} edition={Edition.UK}>
+		<Comment item={letter}>
 			{renderAll(
 				formatFromItem(letter, some(ArticleDisplay.Standard)),
 				partition(letter.body).oks,
@@ -176,7 +176,7 @@ Letter.story = { name: 'Letter' };
 
 export const Editorial = (): React.ReactNode => {
 	return (
-		<Comment item={editorial} edition={Edition.UK}>
+		<Comment item={editorial}>
 			{renderAll(
 				formatFromItem(editorial, some(ArticleDisplay.Standard)),
 				partition(editorial.body).oks,
@@ -188,7 +188,7 @@ Editorial.story = { name: 'Editorial' };
 
 export const Analysis = (): React.ReactNode => {
 	return (
-		<AnalysisLayout item={analysis} edition={Edition.UK}>
+		<AnalysisLayout item={analysis}>
 			{renderAll(
 				formatFromItem(analysis, some(ArticleDisplay.Standard)),
 				partition(analysis.body).oks,
@@ -199,18 +199,12 @@ export const Analysis = (): React.ReactNode => {
 Analysis.story = { name: 'Analysis' };
 
 export const LiveBlog = (): ReactElement => (
-	<Live
-		item={{ ...live, display: ArticleDisplay.Standard }}
-		edition={Edition.US}
-	/>
+	<Live item={{ ...live, display: ArticleDisplay.Standard }} />
 );
 LiveBlog.story = { name: 'LiveBlog ' };
 
 export const DeadBlog = (): ReactElement => (
-	<Live
-		item={{ ...deadBlog, display: ArticleDisplay.Standard }}
-		edition={Edition.AU}
-	/>
+	<Live item={{ ...deadBlog, display: ArticleDisplay.Standard }} />
 );
 DeadBlog.story = { name: 'DeadBlog ' };
 
