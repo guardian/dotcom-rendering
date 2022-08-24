@@ -35,7 +35,7 @@ import ImmersiveMetadata from './ImmersiveMetadata';
 
 interface Props {
 	item: Item;
-	edition?: Edition;
+	edition: Edition;
 }
 
 const styles = css`
@@ -206,22 +206,22 @@ const BlogLines: FC<Item> = (item: Item) => (
 	</>
 );
 
-const MetadataWithByline: FC<Props> = ({ item }: Props) => (
+const MetadataWithByline: FC<Props> = ({ item, edition }: Props) => (
 	<div css={css(styles, withBylineStyles)}>
 		<Avatar {...item} />
 		<div css={css(textStyles, withBylineTextStyles)}>
 			<Byline {...item} />
-			<Dateline date={item.publishDate} format={item} />
+			<Dateline date={item.publishDate} format={item} edition={edition} />
 			<Follow format={getFormat(item)} contributors={item.contributors} />
 		</div>
 		<CommentCount count={item.commentCount} {...item} />
 	</div>
 );
 
-const ShortMetadata: FC<Props> = ({ item }: Props) => (
+const ShortMetadata: FC<Props> = ({ item, edition }: Props) => (
 	<div css={styles}>
 		<div css={textStyles}>
-			<Dateline date={item.publishDate} format={item} />
+			<Dateline date={item.publishDate} format={item} edition={edition} />
 			<Follow format={getFormat(item)} contributors={item.contributors} />
 		</div>
 		<CommentCount count={item.commentCount} {...item} />
@@ -289,6 +289,7 @@ const Metadata: FC<Props> = (props: Props) => {
 				commentCount={props.item.commentCount}
 				contributors={props.item.contributors}
 				commentable={props.item.commentable}
+				edition={props.edition}
 			/>
 		);
 	}
@@ -301,6 +302,7 @@ const Metadata: FC<Props> = (props: Props) => {
 				commentCount={props.item.commentCount}
 				contributors={props.item.contributors}
 				commentable={props.item.commentable}
+				edition={props.edition}
 			/>
 		);
 	} else if (

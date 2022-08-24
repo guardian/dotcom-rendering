@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import {
 	background,
 	breakpoints,
@@ -54,9 +55,10 @@ const BorderStyles = css`
 interface Props {
 	item: Item;
 	children: ReactNode[];
+	edition: Edition;
 }
 
-const LabsLayout: FC<Props> = ({ item, children }) => {
+const LabsLayout: FC<Props> = ({ item, children, edition }) => {
 	return (
 		<main css={[Styles, DarkStyles]}>
 			<article css={BorderStyles}>
@@ -74,7 +76,7 @@ const LabsLayout: FC<Props> = ({ item, children }) => {
 					</div>
 					<DottedLines count={1} cssOverrides={lineStyles} />
 					<section css={articleWidthStyles}>
-						<Metadata item={item} />
+						<Metadata item={item} edition={edition} />
 						{pipe(
 							item.logo,
 							map((props) => <Logo logo={props} />),

@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { background, breakpoints, from } from '@guardian/source-foundations';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
@@ -35,9 +36,10 @@ const BorderStyles = css`
 interface Props {
 	item: Item;
 	children: ReactNode[];
+	edition: Edition;
 }
 
-const MediaLayout: FC<Props> = ({ item, children }) => {
+const MediaLayout: FC<Props> = ({ item, children, edition }) => {
 	const format = getFormat(item);
 	return (
 		<main css={[Styles]}>
@@ -59,6 +61,7 @@ const MediaLayout: FC<Props> = ({ item, children }) => {
 							publicationDate={item.publishDate}
 							className={articleWidthStyles}
 							item={item}
+							edition={edition}
 						/>
 					</section>
 				</header>

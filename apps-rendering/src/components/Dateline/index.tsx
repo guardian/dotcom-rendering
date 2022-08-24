@@ -2,13 +2,12 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { Edition } from '@guardian/apps-rendering-api-models/edition';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, text, textSans } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
-import { formatDate } from 'date';
 import { datetimeFormat } from 'datetime';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
@@ -19,7 +18,7 @@ import { darkModeCss as darkMode } from 'styles';
 interface Props {
 	date: Option<Date>;
 	format: ArticleFormat;
-	edition?: Edition;
+	edition: Edition;
 }
 
 const darkStyles = darkMode`
@@ -83,10 +82,7 @@ const Dateline: FC<Props> = ({ date, format, edition }) =>
 		date,
 		map((d) => (
 			<time css={getDatelineStyles(format)}>
-				{format.design === ArticleDesign.LiveBlog ||
-				format.design === ArticleDesign.DeadBlog
-					? datetimeFormat(edition ?? Edition.UK)(d)
-					: formatDate(d)}
+				{datetimeFormat(edition)(d)}
 			</time>
 		)),
 		withDefault<ReactElement | null>(null),

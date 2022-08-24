@@ -2,6 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import {
 	background,
 	fill,
@@ -74,9 +75,10 @@ const linesStyles = (format: ArticleFormat): SerializedStyles => css`
 
 type Props = {
 	item: Item;
+	edition: Edition;
 };
 
-const ImmersiveLayout: FC<Props> = ({ item, children }) => {
+const ImmersiveLayout: FC<Props> = ({ item, children, edition }) => {
 	const format = getFormat(item);
 
 	return (
@@ -97,7 +99,7 @@ const ImmersiveLayout: FC<Props> = ({ item, children }) => {
 					<div css={mainContentStyles(format)}>
 						<LeftCentreBorder rows={[1, 5]} />
 						<StraightLines cssOverrides={linesStyles(format)} />
-						<Metadata item={item} />
+						<Metadata item={item} edition={edition} />
 						<div css={bodyStyles}>{children}</div>
 						<Tags item={item} />
 					</div>

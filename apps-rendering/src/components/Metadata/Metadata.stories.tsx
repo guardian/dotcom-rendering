@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { from, neutral } from '@guardian/source-foundations';
 import { comment } from 'fixtures/item';
 import { deadBlog, live } from 'fixtures/live';
@@ -27,13 +28,13 @@ const deadContainerStyles = css`
 
 const LiveblogMetadata: FC = () => (
 	<div css={liveContainerStyles}>
-		<Metadata item={{ ...live }} />
+		<Metadata item={{ ...live }} edition={Edition.UK} />
 	</div>
 );
 
 const DeadBlogMetadata: FC = () => (
 	<div css={deadContainerStyles}>
-		<Metadata item={{ ...deadBlog }} />
+		<Metadata item={{ ...deadBlog }} edition={Edition.UK} />
 	</div>
 );
 

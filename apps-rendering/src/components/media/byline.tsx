@@ -2,6 +2,7 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { neutral, remSpace, textSans } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
@@ -42,9 +43,10 @@ interface Props {
 	publicationDate: Option<Date>;
 	className: SerializedStyles;
 	item: Item;
+	edition: Edition;
 }
 
-const Byline: FC<Props> = ({ publicationDate, className, item }) => {
+const Byline: FC<Props> = ({ publicationDate, className, item, edition }) => {
 	const byline = pipe(
 		item.bylineHtml,
 		map((html) => <address>{renderText(html, getFormat(item))}</address>),
@@ -56,7 +58,11 @@ const Byline: FC<Props> = ({ publicationDate, className, item }) => {
 			<div>
 				<div className="author">
 					{byline}
-					<Dateline date={publicationDate} format={item} />
+					<Dateline
+						date={publicationDate}
+						format={item}
+						edition={edition}
+					/>
 				</div>
 			</div>
 		</div>

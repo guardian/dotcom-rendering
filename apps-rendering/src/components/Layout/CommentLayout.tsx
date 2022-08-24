@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import {
 	background,
 	breakpoints,
@@ -72,9 +73,10 @@ const commentLineStylePosition = css`
 interface Props {
 	item: CommentItem | Letter | Editorial;
 	children: ReactNode[];
+	edition: Edition;
 }
 
-const CommentLayout: FC<Props> = ({ item, children }) => (
+const CommentLayout: FC<Props> = ({ item, children, edition }) => (
 	<main css={[Styles, DarkStyles]}>
 		<article css={BorderStyles}>
 			<header>
@@ -97,7 +99,7 @@ const CommentLayout: FC<Props> = ({ item, children }) => (
 				</div>
 
 				<section css={[articleWidthStyles, topBorder]}>
-					<Metadata item={item} />
+					<Metadata item={item} edition={edition} />
 				</section>
 
 				<MainMedia
