@@ -19,7 +19,6 @@ const headlineTagStyles = (format: ArticleFormat): SerializedStyles => css`
 	display: inline-block;
 	box-decoration-break: clone;
 	padding: 0 0.375rem 0.125rem;
-	margin-bottom: 0.25rem;
 	${from.tablet} {
 		${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
 	}

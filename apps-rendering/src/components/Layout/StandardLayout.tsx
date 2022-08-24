@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
-import { breakpoints, from } from '@guardian/source-foundations';
+import {breakpoints, from, remSpace} from '@guardian/source-foundations';
 import {
 	DottedLines,
 	StraightLines,
@@ -122,7 +122,9 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 					/>
 					<Series item={item} />
 					{item.design === ArticleDesign.Explainer && (
-						<HeadlineTag tagText={'Explainer'} format={item} />
+						<div css={css`margin-bottom: ${remSpace[1]};`}>
+							<HeadlineTag tagText={'Explainer'} format={item} />
+						</div>
 					)}
 					<Headline item={item} />
 					<div css={articleWidthStyles}>
