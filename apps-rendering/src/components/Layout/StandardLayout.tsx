@@ -41,6 +41,7 @@ import {
 	onwardStyles,
 } from 'styles';
 import { themeToPillarString } from 'themeStyles';
+import TableOfContent from 'components/TableOfContent';
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -134,6 +135,12 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 						<Metadata item={item} />
 						<Logo item={item} />
 					</section>
+					{item.design === ArticleDesign.Explainer && (
+						<TableOfContent
+							format={getFormat(item)}
+							outline={item.outline}
+						/>
+					)}
 				</header>
 				<Body className={[articleWidthStyles]} format={item}>
 					{children}
