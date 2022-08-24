@@ -2890,6 +2890,11 @@
   resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.4.tgz#1d09ce408bcfa435eb2411255688e22a2eede032"
   integrity sha512-g23KJoJiJVIC75DZW87zyblmNMnjujCgCKntLVLblKoSxIzOBLhzkPUnJqzPtG3aztTPRbqmhLzqgzm6M56/qw==
 
+"@guardian/tsconfig@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@guardian/tsconfig/-/tsconfig-0.1.4.tgz#6f9b78f36b14dbe9507658e7d8bb49b61398b641"
+  integrity sha512-QLHYlDSUksxQw3hzbAFhdC/NS7RMlw7fsdg0fL2CaOeGmOSwEmPJTbsqJAp3KxvpCuLK3ZtCSDnOY7sLcuQ+Ig==
+
 "@guardian/types@^9.0.1":
   version "9.0.1"
   resolved "https://registry.yarnpkg.com/@guardian/types/-/types-9.0.1.tgz#a03682d9c2942560714f9c724a1cd7068f772a93"
@@ -20334,9 +20339,9 @@ type-detect@4.0.8:
   integrity sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==
 
 type-fest@^0.18.0, type-fest@^0.20.2, type-fest@^0.21.3, type-fest@^0.6.0, type-fest@^0.8.1, type-fest@^1.4.0, type-fest@^2.8.0:
-  version "2.19.0"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.19.0.tgz#88068015bb33036a598b952e55e9311a60fd3a9b"
-  integrity sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==
+  version "2.18.1"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.18.1.tgz#a94f068c60b5a2d6beccccffa711210d7dd99b38"
+  integrity sha512-UKCINsd4qiATXD6OIlnQw9t1ux/n2ld+Nl0kzPbCONhCaUIS/BhJbNw14w6584HCQWf3frBK8vmWnGZq/sbPHQ==
 
 type-is@~1.6.18:
   version "1.6.18"
