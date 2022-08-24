@@ -70,7 +70,7 @@ const captionDocFragment: Option<DocumentFragment> = pipe(
 	toOption,
 );
 
-const docFixture = (): DocumentFragment => {
+const docFixture = (): Node => {
 	const doc = new DocumentFragment();
 
 	const el = document.createElement('p');
@@ -80,7 +80,7 @@ const docFixture = (): DocumentFragment => {
 
 	doc.appendChild(el);
 
-	return doc;
+	return doc.firstChild!;
 };
 
 const srcset =
