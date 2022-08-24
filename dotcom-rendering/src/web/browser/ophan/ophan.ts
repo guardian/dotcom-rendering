@@ -3,10 +3,8 @@ import type {
 	OphanABPayload,
 	OphanABTestMeta,
 	OphanAction,
-	OphanComponent,
 	OphanComponentEvent,
 	OphanComponentType,
-	OphanProduct,
 } from '@guardian/libs';
 import { log } from '@guardian/libs';
 
@@ -41,7 +39,7 @@ export const submitComponentEvent = (
 	ophanRecord({ componentEvent });
 };
 
-export interface SdcTestMeta extends OphanABTestMeta {
+interface SdcTestMeta extends OphanABTestMeta {
 	labels?: string[];
 }
 
@@ -136,9 +134,7 @@ export {
 	OphanABEvent,
 	OphanABPayload,
 	OphanAction,
-	OphanComponent,
 	OphanComponentEvent,
 	OphanComponentType,
-	OphanProduct,
 	OphanABTestMeta,
 };

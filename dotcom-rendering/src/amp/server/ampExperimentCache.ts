@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-export type AmpExperiment = {
+type AmpExperiment = {
 	sticky?: boolean;
 	consentNotificationId?: string;
 	variants: {
@@ -12,7 +12,7 @@ export type AmpExperiments = {
 	[key: string]: AmpExperiment;
 };
 
-export const ampExperimentsDataUrl =
+const ampExperimentsDataUrl =
 	process.env.GU_STAGE === 'PROD'
 		? 'https://contributions.guardianapis.com/amp/experiments_data'
 		: 'https://contributions.code.dev-guardianapis.com/amp/experiments_data';

@@ -33,4 +33,4 @@ const getInitialisedAppboy = (() => {
 	};
 })();
 
-export { getInitialisedAppboy, SDK_OPTIONS };
+export { getInitialisedAppboy };

@@ -1,12 +1,12 @@
 import { ArticlePillar } from '@guardian/libs';
 import { findPillar } from './find-pillar';
 
-interface BaseLinkType {
+export interface BaseLinkType {
 	url: string;
 	title: string;
 }
 
-interface LinkType extends BaseLinkType {
+export interface LinkType extends BaseLinkType {
 	longTitle: string;
 	children?: LinkType[];
 	mobileOnly?: boolean;
@@ -14,7 +14,7 @@ interface LinkType extends BaseLinkType {
 	more?: boolean;
 }
 
-interface PillarType extends LinkType {
+export interface PillarType extends LinkType {
 	pillar: ArticleTheme;
 }
 
@@ -22,7 +22,7 @@ interface MoreType extends LinkType {
 	more: true;
 }
 
-interface SubNavType {
+export interface SubNavType {
 	parent?: LinkType;
 	links: LinkType[];
 }
@@ -35,6 +35,8 @@ interface BaseNavType {
 	readerRevenueLinks: ReaderRevenuePositions;
 }
 
+// @ts-expect-error -- we know we are not using it
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- we’ll remove it soon
 interface SimpleNavType {
 	pillars: PillarType[];
 	otherLinks: MoreType;
@@ -42,7 +44,7 @@ interface SimpleNavType {
 	readerRevenueLinks: ReaderRevenuePositions;
 }
 
-interface NavType extends BaseNavType {
+export interface NavType extends BaseNavType {
 	pillars: PillarType[];
 }
 
@@ -112,13 +114,4 @@ export const extractNAV = (data: CAPINavType): NavType => {
 			: undefined,
 		readerRevenueLinks: buildRRLinkModel(data),
 	};
-};
-
-export type {
-	SimpleNavType,
-	NavType,
-	PillarType,
-	BaseLinkType,
-	SubNavType,
-	LinkType,
 };

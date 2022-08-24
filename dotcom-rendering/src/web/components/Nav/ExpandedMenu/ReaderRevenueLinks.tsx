@@ -8,7 +8,7 @@ import {
 } from '@guardian/source-foundations';
 import type { LinkType } from '../../../../model/extract-nav';
 
-export const hideDesktop = css`
+const hideDesktop = css`
 	${from.desktop} {
 		display: none;
 	}
