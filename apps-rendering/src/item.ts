@@ -155,6 +155,16 @@ interface PrintShop extends Fields {
 	design: ArticleDesign.PrintShop;
 	body: Body;
 }
+
+interface Analysis extends Fields {
+	design: ArticleDesign.Analysis;
+	body: Body;
+}
+
+interface Explainer extends Fields {
+	design: ArticleDesign.Explainer;
+	body: Body;
+}
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each ArticleDesign type.
 interface Standard extends Fields {
@@ -166,6 +176,7 @@ interface Standard extends Fields {
 		| ArticleDesign.Comment
 		| ArticleDesign.Letter
 		| ArticleDesign.Editorial
+		| ArticleDesign.Analysis
 	>;
 	body: Body;
 }
@@ -182,7 +193,9 @@ type Item =
 	| Obituary
 	| Editorial
 	| Correction
-	| Interview;
+	| Interview
+	| Analysis
+	| Explainer;
 
 // ----- Convenience Types ----- //
 
@@ -521,6 +534,7 @@ const fromCapi =
 
 export {
 	Item,
+	Analysis,
 	Comment,
 	LiveBlog,
 	DeadBlog,
@@ -536,6 +550,7 @@ export {
 	PhotoEssay,
 	Feature,
 	PrintShop,
+	Explainer,
 	fromCapi,
 	fromCapiLiveBlog,
 	getFormat,
