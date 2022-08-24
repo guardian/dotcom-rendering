@@ -35,15 +35,6 @@ interface BaseNavType {
 	readerRevenueLinks: ReaderRevenuePositions;
 }
 
-// @ts-expect-error -- we know we are not using it
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- we’ll remove it soon
-interface SimpleNavType {
-	pillars: PillarType[];
-	otherLinks: MoreType;
-	brandExtensions: LinkType[];
-	readerRevenueLinks: ReaderRevenuePositions;
-}
-
 export interface NavType extends BaseNavType {
 	pillars: PillarType[];
 }
