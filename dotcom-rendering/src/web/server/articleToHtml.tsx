@@ -159,11 +159,11 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	const partyTownScriptTags = generateScriptTags(
 		[
 			...getScriptArrayFromFile('ophan.js'),
-			CAPIArticle.config && {
-				src:
-					process.env.COMMERCIAL_BUNDLE_URL ??
-					CAPIArticle.config.commercialBundleUrl,
-			},
+			// CAPIArticle.config && {
+			// 	src:
+			// 		process.env.COMMERCIAL_BUNDLE_URL ??
+			// 		CAPIArticle.config.commercialBundleUrl,
+			// },
 		].map((script) =>
 			offerHttp3 && script
 				? { ...script, src: getHttp3Url(script.src) }
