@@ -22,6 +22,15 @@ e.g. [Fallback for images salt](#) (In development so not linked to)
 
 Any script added to the website that is not critical to rendering must must not block first paint or cause a dramatic repaint. Such scripts should have an `async` or `defer` attribute, be loaded programmatically from within our application JavaScript, or be added at the bottom of the document body.
 
+
+## Simple
+
+The dotcom team ensures that our codebase is simple to work on, regardless of what team you’re on or the problem you’re trying to solve
+
+
+### Lines in the sand
+
+
 <!--
 Todo:
 
@@ -32,5 +41,4 @@ Todo:
 ## Transparent
 
 ## Open
-
-## Simple -->
+ -->
