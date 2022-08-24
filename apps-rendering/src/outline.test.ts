@@ -1,4 +1,4 @@
-import { HeadingThree, HeadingTwo } from 'bodyElement';
+import { BodyElement, HeadingThree, HeadingTwo } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
 import { JSDOM } from 'jsdom';
 import { Optional } from 'optional';
@@ -20,8 +20,27 @@ const makeHeadingThree = (text: string, id: string): HeadingThree => {
 	};
 };
 
+const makeParagraph = (text: string): BodyElement => {
+	return {
+		kind: ElementKind.Text,
+		doc: JSDOM.fragment(`<p>${text}</p>`).firstChild!,
+	};
+};
+
+const makeLiveEventElement = (): BodyElement => ({
+	kind: ElementKind.LiveEvent,
+	linkText: 'this links to a live event',
+	url: 'https://theguardian.com',
+});
+
+const makeRichLinkElement = (): BodyElement => ({
+	kind: ElementKind.RichLink,
+	url: 'https://theguardian.com',
+	linkText: 'this links to a related article',
+});
+
 describe('outline', () => {
-	test('it creates an outline', () => {
+	test('it creates an outline given a list of H2 and H3 body elements', () => {
 		const output = fromBodyElements([
 			makeHeadingTwo('Interesting topic 1', 'interesting-topic-1'),
 			makeHeadingTwo('Interesting topic 2', 'interesting-topic-2'),
@@ -39,6 +58,29 @@ describe('outline', () => {
 		expect(output[1].subheadings.length).toEqual(2);
 		expect(output[1].subheadings[0].id).toEqual('subtopic-1');
 		expect(output[1].subheadings[1].id).toEqual('subtopic-2');
-		console.log(output);
+	});
+
+	test('it creates an outline given a list of mixed body elements', () => {
+		const output = fromBodyElements([
+			makeHeadingTwo('Interesting topic 1', 'interesting-topic-1'),
+			makeParagraph('paragraph 1'),
+			makeHeadingThree('Subtopic 1', 'subtopic-1'),
+			makeParagraph('paragraph 1'),
+			makeLiveEventElement(),
+			makeHeadingThree('Subtopic 2', 'subtopic-2'),
+			makeHeadingTwo('Interesting topic 2', 'interesting-topic-2'),
+			makeRichLinkElement(),
+			makeHeadingThree('Subtopic 3', 'subtopic-3'),
+		]);
+
+		expect(output.length).toEqual(2);
+		expect(output[0].id).toEqual('interesting-topic-1');
+		expect(output[0].subheadings.length).toEqual(2);
+		expect(output[0].subheadings[0].id).toEqual('subtopic-1');
+		expect(output[0].subheadings[1].id).toEqual('subtopic-2');
+		expect(output[0].subheadings.length).toEqual(2);
+		expect(output[1].id).toEqual('interesting-topic-2');
+		expect(output[1].subheadings.length).toEqual(1);
+		expect(output[1].subheadings[0].id).toEqual('subtopic-3');
 	});
 });
