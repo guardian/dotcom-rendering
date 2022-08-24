@@ -1,4 +1,4 @@
-export const sections: SectionNielsenAPI[] = [
+export const sections = [
 	{
 		name: 'Guardian',
 		apiID: '2879C1E1-7EF9-459B-9C5C-6F4D2BC9DD53',
@@ -87,9 +87,9 @@ export const sections: SectionNielsenAPI[] = [
 		name: 'TvRadio',
 		apiID: '3277F0D0-9389-4A32-A4D6-516B49D87E45',
 	},
-];
+] as const;
 
-const subsections: { [key: string]: any } = {
+const subsections: { [key: string]: SectionNielsenAPI | undefined } = {
 	books: sections[1],
 	'childrens-books-site': sections[1],
 	business: sections[2],
