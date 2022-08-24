@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
 import {
@@ -40,7 +41,6 @@ import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
 import { galleryBody } from './galleryBody';
 import { relatedContent } from './relatedContent';
-import { Edition } from '@guardian/apps-rendering-api-models/edition';
 
 // ----- Fixture ----- //
 

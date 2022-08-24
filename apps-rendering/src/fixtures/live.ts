@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -15,7 +16,6 @@ import type { LiveBlock } from 'liveBlock';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
 import type { LiveBlogPagedBlocks } from 'pagination';
-import { Edition } from '@guardian/apps-rendering-api-models/edition';
 
 const parser = new DOMParser();
 const parseHtml = parse(parser);
