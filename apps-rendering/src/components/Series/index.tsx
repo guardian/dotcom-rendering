@@ -132,7 +132,9 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog
 	) {
-		return css();
+		return css`
+			margin-top: ${remSpace[1]};
+		`;
 	}
 
 	return standardStyles;
