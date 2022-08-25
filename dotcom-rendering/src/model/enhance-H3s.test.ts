@@ -1,7 +1,7 @@
+import { Analysis as AnalysisArticle } from '../../fixtures/generated/articles/Analysis';
+import { Standard as StandardArticle } from '../../fixtures/generated/articles/Standard';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
 import { enhanceH3s } from './enhance-H3s';
-import { Analysis as ExampleArticle } from '../../fixtures/generated/articles/Analysis';
-import { Standard as StandardArticle } from '../../fixtures/generated/articles/Standard';
 
 describe('Enhance H3s', () => {
 	it('does set a h3 if there is more than one strong tag', () => {
@@ -29,7 +29,7 @@ describe('Enhance H3s', () => {
 				],
 			},
 		];
-		expect(enhanceH3s(input, ExampleArticle.format)).toEqual(
+		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -88,7 +88,7 @@ describe('Enhance H3s', () => {
 				],
 			},
 		];
-		expect(enhanceH3s(input, ExampleArticle.format)).toEqual(
+		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -118,7 +118,7 @@ describe('Enhance H3s', () => {
 				],
 			},
 		];
-		expect(enhanceH3s(input, ExampleArticle.format)).toEqual(
+		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -148,7 +148,7 @@ describe('Enhance H3s', () => {
 				],
 			},
 		];
-		expect(enhanceH3s(input, ExampleArticle.format)).toEqual(
+		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -178,7 +178,7 @@ describe('Enhance H3s', () => {
 				],
 			},
 		];
-		expect(enhanceH3s(input, ExampleArticle.format)).toEqual(
+		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -208,7 +208,7 @@ describe('Enhance H3s', () => {
 				],
 			},
 		];
-		expect(enhanceH3s(input, ExampleArticle.format)).toEqual(
+		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(
 			expectedOutput,
 		);
 	});
@@ -238,7 +238,7 @@ describe('Enhance H3s', () => {
 				],
 			},
 		];
-		expect(enhanceH3s(input, ExampleArticle.format)).toEqual(
+		expect(enhanceH3s(input, AnalysisArticle.format)).toEqual(
 			expectedOutput,
 		);
 	});
