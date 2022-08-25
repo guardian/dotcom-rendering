@@ -50,6 +50,7 @@ const listItemStyles: SerializedStyles = css`
 `;
 
 const detailsStyles: SerializedStyles = css`
+	margin-bottom: 1.25rem;
 	&:not([open]) .is-on,
 	&[open] .is-off {
 		display: none;

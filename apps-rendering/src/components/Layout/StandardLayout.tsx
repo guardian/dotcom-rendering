@@ -135,11 +135,14 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 						<Metadata item={item} />
 						<Logo item={item} />
 					</section>
+
 					{item.design === ArticleDesign.Explainer && (
-						<TableOfContent
-							format={getFormat(item)}
-							outline={item.outline}
-						/>
+						<section css={articleWidthStyles}>
+							<TableOfContent
+								format={getFormat(item)}
+								outline={item.outline}
+							/>
+						</section>
 					)}
 				</header>
 				<Body className={[articleWidthStyles]} format={item}>
