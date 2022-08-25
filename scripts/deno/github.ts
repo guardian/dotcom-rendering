@@ -3,7 +3,7 @@ import type { RestEndpointMethodTypes } from 'https://cdn.skypack.dev/@octokit/p
 
 /** Github token for Authentication */
 const token = Deno.env.get('GITHUB_TOKEN');
-if (!token) throw new Error('Missing GITHUB_TOKEN');
+if (!token) console.warn('Missing GITHUB_TOKEN');
 
 type OctokitWithRest = {
 	rest: {
@@ -18,5 +18,7 @@ type OctokitWithRest = {
 /**
  * A hydrated Octokit with types for the rest API.
  */
-// @ts-expect-error -- Octokit’s own types are not as good as ours
-export const octokit = new Octokit({ auth: token }) as OctokitWithRest;
+export const octokit = token
+	? // @ts-expect-error -- Octokit’s own types are not as good as ours
+	  (new Octokit({ auth: token }) as OctokitWithRest)
+	: undefined;
