@@ -136,14 +136,15 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 						<Logo item={item} />
 					</section>
 
-					{item.design === ArticleDesign.Explainer && (
-						<section css={articleWidthStyles}>
-							<TableOfContent
-								format={getFormat(item)}
-								outline={item.outline}
-							/>
-						</section>
-					)}
+					{item.design === ArticleDesign.Explainer &&
+						item.outline.length > 0 && (
+							<section css={articleWidthStyles}>
+								<TableOfContent
+									format={getFormat(item)}
+									outline={item.outline}
+								/>
+							</section>
+						)}
 				</header>
 				<Body className={[articleWidthStyles]} format={item}>
 					{children}
