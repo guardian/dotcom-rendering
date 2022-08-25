@@ -85,6 +85,12 @@ const HeadingTextElement: React.FC<HeadingTextElementProps> = ({
 			`;
 			return styledH('sup', { css: styles, key }, children);
 		}
+		case 'STRONG':
+			return styledH(
+				'strong',
+				{ css: { fontWeight: 'bold' }, key },
+				children,
+			);
 		default:
 			return null;
 	}
