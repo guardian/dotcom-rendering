@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { neutral, remSpace, textSans } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
