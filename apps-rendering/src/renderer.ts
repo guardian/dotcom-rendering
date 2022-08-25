@@ -285,7 +285,7 @@ const textElement =
 			case 'OL':
 				return h(OrderedList, { children });
 			case 'LI':
-				return h(ListItem, { format, children });
+				return h(ListItem, { children });
 			case 'MARK':
 				return styledH('mark', { key }, children);
 			case 'SUB':
@@ -342,7 +342,7 @@ const standfirstTextElement =
 					usePillarColour: true,
 				});
 			case 'LI':
-				return h(ListItem, { format, children });
+				return h(ListItem, { children });
 			case 'A': {
 				const styles = css`
 					color: ${text.standfirstLink(format)};
