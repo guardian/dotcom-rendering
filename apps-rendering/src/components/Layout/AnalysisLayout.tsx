@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { breakpoints, from, remSpace } from '@guardian/source-foundations';
+import { breakpoints, from } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import ArticleBody from 'components/ArticleBody';
 import Byline from 'components/Byline';
@@ -59,13 +59,7 @@ const AnalysisLayout: FC<Props> = ({ item, children }) => (
 						mainMedia={item.mainMedia}
 					/>
 					<Series item={item} />
-					<div
-						css={css`
-							margin-bottom: ${remSpace[1]};
-						`}
-					>
-						<HeadlineTag tagText={'Analysis'} format={item} />
-					</div>
+					<HeadlineTag tagText={'Analysis'} format={item} />
 					<Headline item={item} />
 					<section css={[articleWidthStyles]}>
 						<Byline {...item} />
