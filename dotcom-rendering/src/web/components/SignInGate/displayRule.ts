@@ -69,7 +69,7 @@ export const isValidTag = (tags: TagType[]): boolean => {
 // check CMP banner consents
 export const hasRequiredConsents = (): Promise<boolean> =>
 	onConsent()
-		.then((consentState: ConsentState) => consentState.canTarget)
+		.then(({ canTarget }: ConsentState) => canTarget)
 		.catch(() => false);
 
 export const canShowSignInGate = ({
