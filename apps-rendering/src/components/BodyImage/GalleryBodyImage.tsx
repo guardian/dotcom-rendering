@@ -1,14 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
-import { border } from '@guardian/common-rendering/src/editorialPalette';
+import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	from,
-	headline,
-	neutral,
-	textSans,
-} from '@guardian/source-foundations';
+import { from, headline, textSans } from '@guardian/source-foundations';
 import Img from 'components/ImgAlt';
 import { grid } from 'grid/grid';
 import type { FC } from 'react';
@@ -80,7 +75,7 @@ const captionStyles = (format: ArticleFormat): SerializedStyles => css`
 	span,
 	a,
 	& {
-		color: ${neutral[100]};
+		color: ${text.gallery(format)};
 	}
 	> span {
 		${textSans.xsmall({ lineHeight: 'regular' })}
@@ -106,7 +101,7 @@ const captionStyles = (format: ArticleFormat): SerializedStyles => css`
 	}
 
 	${darkModeCss`
-		color: ${neutral[86]};
+		color: ${text.galleryDark(format)};
 	`}
 `;
 

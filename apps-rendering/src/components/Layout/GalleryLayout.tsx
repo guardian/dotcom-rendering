@@ -1,7 +1,10 @@
 // ----- Imports ----- //
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { border } from '@guardian/common-rendering/src/editorialPalette';
+import {
+	background,
+	border,
+} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
 import Footer from 'components/Footer';
@@ -22,19 +25,19 @@ import { darkModeCss } from 'styles';
 
 const headerStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.container}
-	background-color: ${neutral[7]};
+	background-color: ${background.articleContent(format)};
 	border-bottom: 1px solid ${border.galleryImage(format)};
 
 	${darkModeCss`
-		background-color: ${neutral[10]};
+		background-color: ${background.articleContentDark(format)};
 	`}
 `;
 
-const wrapperStyles = css`
-	background-color: ${neutral[7]};
+const wrapperStyles = (format: ArticleFormat) => css`
+	background-color: ${background.articleContent(format)};
 
 	${darkModeCss`
-		background-color: ${neutral[10]};
+		background-color: ${background.articleContentDark(format)};
 	`}
 `;
 
@@ -48,7 +51,7 @@ const GalleryLayout: FC<Props> = ({ item, children }) => {
 	return (
 		<>
 			<main>
-				<article css={wrapperStyles}>
+				<article css={wrapperStyles(format)}>
 					<header css={headerStyles(format)}>
 						<MainMedia mainMedia={item.mainMedia} format={format} />
 						<Series item={item} />

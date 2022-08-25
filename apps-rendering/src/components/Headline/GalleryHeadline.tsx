@@ -1,6 +1,10 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import {
+	background,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
@@ -13,10 +17,10 @@ import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
-const styles = css`
+const styles = (format: ArticleFormat) => css`
 	${headline.medium({ fontWeight: 'bold' })}
-	background-color: ${neutral[7]};
-	color: ${neutral[100]};
+	background-color: ${background.headline(format)};
+	color: ${text.gallery(format)};
 	padding: 0 ${remSpace[5]} ${remSpace[9]} 0;
 	${grid.column.centre}
 	grid-row: 3 / 5;
@@ -31,13 +35,13 @@ const styles = css`
 	}
 
 	${darkModeCss`
-		background-color: ${neutral[10]};
-		color: ${neutral[86]};
+		background-color: ${background.headlineDark(format)};
+		color: ${text.galleryDark(format)};
 	`}
 `;
 
-const backgroundStyles = css`
-	background-color: ${neutral[7]};
+const backgroundStyles = (format: ArticleFormat) => css`
+	background-color: ${background.headline(format)};
 	${grid.between('viewport-start', 'centre-column-end')}
 	grid-row: 3 / 5;
 
@@ -51,7 +55,7 @@ const backgroundStyles = css`
 	}
 
 	${darkModeCss`
-		background-color: ${neutral[10]};
+		background-color: ${background.headlineDark(format)};
 	`}
 `;
 
@@ -60,10 +64,10 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const GalleryHeadline: React.FC<Props> = ({ headline }) => (
+const GalleryHeadline: React.FC<Props> = ({ headline, format }) => (
 	<>
-		<div css={backgroundStyles} />
-		<h1 css={styles}>{headline}</h1>
+		<div css={backgroundStyles(format)} />
+		<h1 css={styles(format)}>{headline}</h1>
 	</>
 );
 

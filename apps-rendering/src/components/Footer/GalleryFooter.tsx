@@ -2,7 +2,11 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
+import {
+	background,
+	border,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, remSpace } from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
@@ -17,11 +21,11 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${background.footer(format)};
 
 	${darkModeCss`
-		background-color: ${neutral[10]};
+		background-color: ${background.footerDark(format)};
 	`}
 `;
 
-const spacerStyles = css`
+const spacerStyles = (format: ArticleFormat) => css`
 	${grid.column.centre}
 	padding: ${remSpace[3]};
 	margin: 0;
@@ -46,18 +50,18 @@ const spacerStyles = css`
 				position: absolute;
 				top: 0;
 				bottom: 0;
-				border-left: 1px solid ${neutral[20]};
+				border-left: 1px solid ${border.galleryImage(format)};
 				left: -10px;
 			}
 
 			&::after {
-				border-color: ${neutral[20]}
+				border-color: ${border.galleryImage(format)}
 			}
 		`}
 	}
 `;
 
-const footerStyles: SerializedStyles = css`
+const footerStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.column.centre}
 	padding-left: 0;
 	padding-right: 0;
@@ -68,8 +72,8 @@ const footerStyles: SerializedStyles = css`
 	}
 
 	${darkModeCss`
-		background-color: ${neutral[10]};
-		color: ${neutral[86]};
+		background-color: ${background.articleContentDark(format)};
+		color: ${text.galleryDark(format)};
 	`}
 `;
 
@@ -78,11 +82,11 @@ interface Props {
 	isCcpa: boolean;
 }
 
-const ImmersiveFooter: FC<Props> = ({ format, isCcpa }) => (
+const GalleryFooter: FC<Props> = ({ format, isCcpa }) => (
 	<div css={styles(format)}>
-		<div css={spacerStyles} />
+		<div css={spacerStyles(format)} />
 		<DefaultFooter
-			css={css(defaultStyles(format), footerStyles)}
+			css={css(defaultStyles(format), footerStyles(format))}
 			isCcpa={isCcpa}
 		/>
 	</div>
@@ -90,4 +94,4 @@ const ImmersiveFooter: FC<Props> = ({ format, isCcpa }) => (
 
 // ----- Exports ----- //
 
-export default ImmersiveFooter;
+export default GalleryFooter;

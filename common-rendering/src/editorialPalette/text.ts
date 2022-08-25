@@ -66,7 +66,7 @@ const brandingDark = (_format: ArticleFormat): Colour => {
 };
 
 const byline = (_format: ArticleFormat): Colour => {
-	return neutral[46]
+	return neutral[46];
 };
 
 const bylineAnchor = (format: ArticleFormat): Colour => {
@@ -1039,6 +1039,14 @@ const signUpFormButtonDark = (_format: ArticleFormat): string => {
 	return neutral[0];
 };
 
+const gallery = (_format: ArticleFormat): string => {
+	return neutral[100];
+};
+
+const galleryDark = (_format: ArticleFormat): string => {
+	return neutral[86];
+};
+
 // ----- API ----- //
 
 const text = {
@@ -1106,6 +1114,8 @@ const text = {
 	privacyMessageDark,
 	signUpFormButton,
 	signUpFormButtonDark,
+	gallery,
+	galleryDark,
 };
 
 // ----- Exports ----- //
