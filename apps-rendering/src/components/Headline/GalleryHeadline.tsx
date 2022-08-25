@@ -7,12 +7,7 @@ import {
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	from,
-	headline,
-	neutral,
-	remSpace,
-} from '@guardian/source-foundations';
+import { from, headline, remSpace } from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
 import { darkModeCss } from 'styles';
 

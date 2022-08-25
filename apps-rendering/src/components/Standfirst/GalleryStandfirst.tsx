@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { body, from, neutral, remSpace } from '@guardian/source-foundations';
+import { body, from, remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import { grid } from 'grid/grid';

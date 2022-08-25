@@ -7,12 +7,7 @@ import {
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	from,
-	neutral,
-	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+import { from, remSpace, textSans } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import Caption from 'components/caption';
