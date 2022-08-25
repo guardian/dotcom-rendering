@@ -36,29 +36,37 @@ interface Props {
 }
 
 const formStyle = css`
-	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
+	min-height: 2.75rem;
 
-	.js-sign-up-form__feedback {
+	.js-signup-form__inputs {
+		display: flex;
+	}
+
+	.js-signup-form__feedback {
 		display: none;
 	}
 
 	&.js-signup-form--waiting {
-		.js-sign-up-form__feedback--waiting {
+		.js-signup-form__feedback--waiting {
 			display: inline-flex;
 		}
 	}
 
 	&.js-signup-form--success {
-		.js-sign-up-form__feedback--success {
+		.js-signup-form__inputs {
+			display: none;
+		}
+		.js-signup-form__feedback--success {
 			display: block;
 			color: ${userFeedbackThemeDefault.userFeedback.textSuccess};
 		}
 	}
 
 	&.js-signup-form--failure {
-		.js-sign-up-form__feedback--failure {
+		.js-signup-form__inputs {
+			display: none;
+		}
+		.js-signup-form__feedback--failure {
 			display: block;
 			color: ${userFeedbackThemeDefault.userFeedback.textError};
 		}
@@ -94,66 +102,75 @@ const EmailSignupForm: FC<Props> = ({
 				`}
 			/>
 			<form
-				action={undefined}
 				className={'js-signup-form'}
 				data-newsletter-id={newsletterId}
 				css={formStyle}
 			>
-				<TextInput
-					type="email"
-					width={30}
-					hideLabel
-					label="Enter your email address"
-					cssOverrides={css`
-						height: 2.25rem;
-						margin-right: ${remSpace[3]};
-						margin-top: 0;
-						margin-bottom: ${remSpace[2]};
-						flex-basis: ${pxToRem(335)}rem;
+				<div
+					className={'js-signup-form__inputs'}
+					css={css`
+						align-items: center;
+						flex-wrap: wrap;
+					`}
+				>
+					<TextInput
+						type="email"
+						width={30}
+						hideLabel
+						label="Enter your email address"
+						cssOverrides={css`
+							height: 2.25rem;
+							margin-right: ${remSpace[3]};
+							margin-top: 0;
+							margin-bottom: ${remSpace[2]};
+							flex-basis: ${pxToRem(335)}rem;
 
-						${darkModeCss`
+							${darkModeCss`
 							background-color: ${background.signUpFormDark(format)};
 							color: ${text.signUpFormDark(format)};
 						`}
-					`}
-				/>
-				<Button
-					onClick={handleSubmit}
-					size="small"
-					title="Sign up"
-					type="submit"
-					cssOverrides={css`
-						background-color: ${fill.signUpFormButton(format)};
-						color: ${text.signUpFormButton(format)};
-						margin-bottom: ${remSpace[2]};
-						flex-basis: ${pxToRem(118)}rem;
-						justify-content: center;
+						`}
+					/>
+					<Button
+						onClick={handleSubmit}
+						size="small"
+						title="Sign up"
+						type="submit"
+						cssOverrides={css`
+							background-color: ${fill.signUpFormButton(format)};
+							color: ${text.signUpFormButton(format)};
+							margin-bottom: ${remSpace[2]};
+							flex-basis: ${pxToRem(118)}rem;
+							justify-content: center;
 
-						:disabled {
-							background-color: ${neutral[46]};
-						}
-						&:hover {
-							background-color: ${hover.signUpFormButton(format)};
-						}
+							:disabled {
+								background-color: ${neutral[46]};
+							}
+							&:hover {
+								background-color: ${hover.signUpFormButton(
+									format,
+								)};
+							}
 
-						${darkModeCss`
+							${darkModeCss`
 							background-color: ${fill.signUpFormButtonDark(format)};
 							color: ${text.signUpFormButtonDark(format)};
 							&:hover {
 								background-color: ${hover.signUpFormButtonDark(format)}
 							}
 						`}
-					`}
-				>
-					Sign up
-				</Button>
-				<span className="js-sign-up-form__feedback js-sign-up-form__feedback--waiting">
-					<SvgSpinner size="xsmall" />
-				</span>
-				<div className="js-sign-up-form__feedback js-sign-up-form__feedback--success">
+						`}
+					>
+						Sign up
+						<span className="js-signup-form__feedback js-signup-form__feedback--waiting">
+							<SvgSpinner size="small" />
+						</span>
+					</Button>
+				</div>
+				<div className="js-signup-form__feedback js-signup-form__feedback--success">
 					<InlineSuccess>{successDescription}</InlineSuccess>
 				</div>
-				<div className="js-sign-up-form__feedback js-sign-up-form__feedback--failure">
+				<div className="js-signup-form__feedback js-signup-form__feedback--failure">
 					<InlineError>error - failed to sign up</InlineError>
 				</div>
 			</form>
