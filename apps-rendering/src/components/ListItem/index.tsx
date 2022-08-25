@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import type { FC, ReactNode } from 'react';
@@ -20,10 +20,11 @@ const baseStyles = css`
 interface Props {
 	format: ArticleFormat;
 	children: ReactNode;
+	className?: SerializedStyles;
 }
 
-const ListItem: FC<Props> = ({ format, children }) => (
-	<li css={baseStyles}>{children}</li>
+const ListItem: FC<Props> = ({ format, children, className }) => (
+	<li css={[baseStyles, className]}>{children}</li>
 );
 
 // ----- Exports ----- //
