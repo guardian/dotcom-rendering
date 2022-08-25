@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, jsx as styledH } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
@@ -71,6 +71,20 @@ const HeadingTextElement: React.FC<HeadingTextElementProps> = ({
 			);
 		case 'EM':
 			return <em key={key}>{children}</em>;
+		case 'SUB': {
+			const styles = css`
+				font-size: smaller;
+				vertical-align: sub;
+			`;
+			return styledH('sub', { css: styles, key }, children);
+		}
+		case 'SUP': {
+			const styles = css`
+				font-size: smaller;
+				vertical-align: super;
+			`;
+			return styledH('sup', { css: styles, key }, children);
+		}
 		default:
 			return null;
 	}
