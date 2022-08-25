@@ -11,7 +11,30 @@
  *    gen-fixtures.ts directly.
  */
 
-export const images: ImageBlockElement[] = [
+export const images: [
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+] = [
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 		media: {
