@@ -133,7 +133,9 @@ const getStyles = (format: ArticleFormat): SerializedStyles => {
 		format.design === ArticleDesign.DeadBlog
 	) {
 		return css`
-			margin-top: ${remSpace[1]};
+			${from.desktop} {
+				margin-top: ${remSpace[1]};
+			}
 		`;
 	}
 
