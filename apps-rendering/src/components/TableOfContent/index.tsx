@@ -1,24 +1,26 @@
 import { css, SerializedStyles } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette/text';
 import { ArticleFormat } from '@guardian/libs';
-import { neutral, remSpace, textSans } from '@guardian/source-foundations';
+import {
+	line,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
+import {
+	SvgChevronDownSingle,
+	SvgChevronUpSingle,
+} from '@guardian/source-react-components';
 import Anchor from 'components/Anchor';
 import ListItem from 'components/ListItem';
 import OrderedList from 'components/OrderedList';
 import { Outline } from 'outline';
 import { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 interface Props {
 	format: ArticleFormat;
 	outline: Outline;
-}
-
-interface SubContentsProps {
-	format: ArticleFormat;
-	subheadings: {
-		id: string;
-		doc: Node;
-	}[];
 }
 
 const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -29,38 +31,82 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 	}
 `;
 
-const listStyles = css`
+const listStyles: SerializedStyles = css`
 	> li::before {
 		content: none;
 	}
 
-	padding-left: ${remSpace[3]};
+	margin: 0;
+
+	> li {
+		padding-left: ${remSpace[3]};
+	}
 `;
 
-const listItemStyles = css`
+const listItemStyles: SerializedStyles = css`
 	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'regular' })}
+	border-bottom: ${line.primary} 1px solid;
+	padding-top: ${remSpace[2]};
 `;
 
-const SubContents: FC<SubContentsProps> = ({ format, subheadings }) => {
-	return (
-		<OrderedList>
-			{subheadings.map((heading) => (
-				<ListItem format={format}>
-					<Anchor format={format} href={'#' + heading.id}>
-						{heading.doc.textContent}
-					</Anchor>
-				</ListItem>
-			))}
-		</OrderedList>
-	);
-};
+const detailsStyles: SerializedStyles = css`
+	&:not([open]) .is-on,
+	&[open] .is-off {
+		display: none;
+	}
+	summary::-webkit-details-marker {
+		display: none;
+	}
+`;
+
+const summaryStyles: SerializedStyles = css`
+	cursor: pointer;
+	position: relative;
+	list-style: none;
+	align-items: center;
+	padding-left: ${remSpace[3]};
+	padding-top: 0.44rem;
+	padding-bottom: 0.375rem;
+	border-bottom: ${line.primary} 1px solid;
+	border-top: ${line.primary} 1px solid;
+
+	path {
+		fill: ${neutral[46]};
+	}
+	svg {
+		height: 2rem;
+	}
+`;
+
+const titleStyle: SerializedStyles = css`
+	${textSans.xsmall({ lineHeight: 'regular' })}
+	color: ${neutral[46]};
+	${darkModeCss`
+		color: ${neutral[86]};
+	`}
+`;
+
+const arrowPosition: SerializedStyles = css`
+	position: absolute;
+	right: ${remSpace[1]};
+	top: 0;
+`;
 
 const TableOfContent: FC<Props> = ({ format, outline }) => {
 	return (
-		<div>
+		<details open={outline.length < 5} css={detailsStyles}>
+			<summary css={summaryStyles}>
+				<h2 css={titleStyle}>Jump to...</h2>
+				<span className="is-off" css={arrowPosition}>
+					<SvgChevronDownSingle size="xsmall" />
+				</span>
+				<span className="is-on" css={arrowPosition}>
+					<SvgChevronUpSingle size="xsmall" />
+				</span>
+			</summary>
 			<OrderedList className={listStyles}>
 				{outline.map((ol) => (
-					<ListItem format={format} className={listItemStyles}>
+					<ListItem className={listItemStyles}>
 						<Anchor
 							format={format}
 							href={'#' + ol.id}
@@ -68,16 +114,10 @@ const TableOfContent: FC<Props> = ({ format, outline }) => {
 						>
 							{ol.doc.textContent}
 						</Anchor>
-						{ol.subheadings && (
-							<SubContents
-								format={format}
-								subheadings={ol.subheadings}
-							/>
-						)}
 					</ListItem>
 				))}
 			</OrderedList>
-		</div>
+		</details>
 	);
 };
 
