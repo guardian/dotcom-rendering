@@ -43,10 +43,9 @@ interface Props {
 	publicationDate: Option<Date>;
 	className: SerializedStyles;
 	item: Item;
-	edition: Edition;
 }
 
-const Byline: FC<Props> = ({ publicationDate, className, item, edition }) => {
+const Byline: FC<Props> = ({ publicationDate, className, item }) => {
 	const byline = pipe(
 		item.bylineHtml,
 		map((html) => <address>{renderText(html, getFormat(item))}</address>),
@@ -61,7 +60,7 @@ const Byline: FC<Props> = ({ publicationDate, className, item, edition }) => {
 					<Dateline
 						date={publicationDate}
 						format={item}
-						edition={edition}
+						edition={item.edition}
 					/>
 				</div>
 			</div>

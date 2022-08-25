@@ -59,7 +59,6 @@ const MediaLayout: FC<Props> = ({ item, children }) => {
 							publicationDate={item.publishDate}
 							className={articleWidthStyles}
 							item={item}
-							edition={item.edition}
 						/>
 					</section>
 				</header>
