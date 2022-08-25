@@ -66,7 +66,7 @@ interface Fields extends ArticleFormat {
 	relatedContent: Option<ResizedRelatedContent>;
 	logo: Option<Logo>;
 	webUrl: string;
-	promotedNewsletter?: Newsletter;
+	promotedNewsletter: Option<Newsletter>;
 }
 
 interface MatchReport extends Fields {
@@ -309,7 +309,7 @@ const itemFields = (
 		),
 		logo: paidContentLogo(content.tags),
 		webUrl: content.webUrl,
-		promotedNewsletter: request.promotedNewsletter,
+		promotedNewsletter: fromNullable(request.promotedNewsletter),
 	};
 };
 
