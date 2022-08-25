@@ -369,6 +369,7 @@ const fields = {
 	footballContent: none,
 	logo: none,
 	webUrl: '',
+	promotedNewsletter: none,
 };
 
 const article: Standard = {
