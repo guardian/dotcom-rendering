@@ -52,8 +52,9 @@ const bigNumber = css`
 	fill: ${text.primary};
 `;
 
-const headlineHeader = css`
-	padding: 0.1875rem 0.625rem 1.125rem 4.6875rem;
+const headlineHeader = (isExpandable: boolean) => css`
+	padding: 0.1875rem 0.625rem ${isExpandable ? `1.75rem` : `1.125rem`}
+		4.6875rem;
 	word-wrap: break-word;
 	overflow: hidden;
 `;
@@ -94,7 +95,7 @@ export const MostViewedFooterItem = ({
 			<span css={bigNumber}>
 				<BigNumber index={position} />
 			</span>
-			<div css={headlineHeader}>
+			<div css={headlineHeader(isExpandable)}>
 				{trail.format.design === ArticleDesign.LiveBlog ? (
 					<LinkHeadline
 						headlineText={trail.headline}

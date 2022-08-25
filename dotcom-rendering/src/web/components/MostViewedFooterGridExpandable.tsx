@@ -37,7 +37,7 @@ const thinGreySolid = `1px solid ${border.secondary}`;
 
 const columnHeading = (index: number) => {
 	return css`
-		${headline.xxxsmall()};
+		${headline.xxsmall()};
 		background: transparent;
 		border-bottom: ${thinGreySolid};
 		border-left: ${index === 0 ? thinGreySolid : 'none'};
@@ -53,6 +53,11 @@ const columnHeading = (index: number) => {
 		text-align: left;
 		text-decoration: none;
 		width: 100%;
+
+		${until.tablet} {
+			border: 0;
+			margin-top: ${index === 0 ? 'none' : `48px`};
+		}
 
 		${until.leftCol} {
 			border-top: ${thinGreySolid};
@@ -83,7 +88,14 @@ const gridColumn = (name: 'most' | 'deeply') => css`
 
 const buttonPosition = css`
 	position: absolute;
-	bottom: -30px;
+	margin-top: -18px;
+	margin-left: 10px;
+	height: 36px;
+	min-height: 36px;
+	z-index: 1;
+	svg {
+		width: 18px;
+	}
 `;
 
 const item = (
@@ -176,6 +188,7 @@ export const MostViewedFooterGridExpandable = ({ data }: Props) => {
 							<ThemeProvider theme={buttonThemeBrandAlt}>
 								<Button
 									cssOverrides={css`
+										${buttonPosition}
 										${from.tablet} {
 											display: none;
 										}
@@ -208,10 +221,10 @@ export const MostViewedFooterGridExpandable = ({ data }: Props) => {
 						`}
 						priority="primary"
 						icon={bothExpanded ? <SvgMinus /> : <SvgPlus />}
-						iconSide="right"
+						iconSide="left"
 						onClick={() => setBothExpanded(!bothExpanded)}
 					>
-						{!bothExpanded ? 'Show All' : 'Show Fewer'}
+						{!bothExpanded ? 'Show more' : 'Show less'}
 					</Button>
 				</ThemeProvider>
 			</li>
