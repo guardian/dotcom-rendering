@@ -300,7 +300,8 @@ const Metadata: FC<Props> = (props: Props) => {
 	} else if (
 		design === ArticleDesign.Comment ||
 		design === ArticleDesign.Letter ||
-		design === ArticleDesign.Editorial
+		design === ArticleDesign.Editorial ||
+		design === ArticleDesign.Analysis
 	) {
 		return <ShortMetadata {...props} />;
 	} else if (

@@ -435,7 +435,7 @@ export const InteractiveImmersiveLayout = ({
 									shortUrlId={CAPIArticle.config.shortUrlId}
 									ajaxUrl={CAPIArticle.config.ajaxUrl}
 									showShareCount={
-										CAPIArticle.config.switches
+										!!CAPIArticle.config.switches
 											.serverShareCounts
 									}
 								/>
@@ -530,10 +530,10 @@ export const InteractiveImmersiveLayout = ({
 							CAPIArticle.shouldHideReaderRevenue
 						}
 						remoteBannerSwitch={
-							CAPIArticle.config.switches.remoteBanner
+							!!CAPIArticle.config.switches.remoteBanner
 						}
 						puzzleBannerSwitch={
-							CAPIArticle.config.switches.puzzlesBanner
+							!!CAPIArticle.config.switches.puzzlesBanner
 						}
 						tags={CAPIArticle.tags}
 					/>

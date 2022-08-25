@@ -18,8 +18,10 @@ import type { Contributor } from 'contributor';
 import type { MatchScores } from 'football';
 import type { Image } from 'image';
 import type {
+	Analysis,
 	Comment,
 	Editorial,
+	Explainer,
 	Feature,
 	Interview,
 	Item,
@@ -380,7 +382,7 @@ const articleWithStandfirstLink: Item = {
 	standfirst: standfirstWithLink,
 };
 
-const analysis: Standard = {
+const analysis: Analysis = {
 	design: ArticleDesign.Analysis,
 	...fields,
 };
@@ -473,6 +475,11 @@ const quiz: Quiz = {
 	theme: ArticlePillar.Sport,
 };
 
+const explainer: Explainer = {
+	design: ArticleDesign.Explainer,
+	...fields,
+};
+
 // ----- Exports ----- //
 
 export {
@@ -495,4 +502,5 @@ export {
 	recipe,
 	quiz,
 	pinnedBlock,
+	explainer,
 };

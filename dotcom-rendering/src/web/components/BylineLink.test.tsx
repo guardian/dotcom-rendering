@@ -1,3 +1,4 @@
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
 import { getContributorTagsForToken } from '../../lib/byline';
 import { bylineAsTokens, BylineLink } from './BylineLink';
@@ -87,7 +88,15 @@ describe('BylineLink', () => {
 		];
 
 		const { container } = render(
-			<BylineLink byline={byline} tags={tags} />,
+			<BylineLink
+				byline={byline}
+				tags={tags}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			/>,
 		);
 
 		const links = container.querySelectorAll('a');
@@ -112,7 +121,15 @@ describe('BylineLink', () => {
 			},
 		];
 		const { container } = render(
-			<BylineLink byline={byline} tags={tags} />,
+			<BylineLink
+				byline={byline}
+				tags={tags}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			/>,
 		);
 
 		const links = container.querySelectorAll('a');
@@ -139,7 +156,15 @@ describe('BylineLink', () => {
 		];
 
 		const { container } = render(
-			<BylineLink byline={byline} tags={tags} />,
+			<BylineLink
+				byline={byline}
+				tags={tags}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			/>,
 		);
 
 		const links = container.querySelectorAll('a');
