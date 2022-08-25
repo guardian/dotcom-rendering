@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
 import type { Branding } from '@guardian/apps-rendering-api-models/branding';
-import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
+import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Asset } from '@guardian/content-api-models/v1/asset';
