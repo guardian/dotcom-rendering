@@ -1,6 +1,12 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import {
+	background,
+	border,
+} from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, remSpace, until } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { none } from '@guardian/types';
@@ -19,12 +25,12 @@ import {
 
 // ----- Component ----- //
 
-const styles = css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.container}
-	background-color: ${neutral[97]};
+	background-color: ${background.onwardContent(format)};
 
 	${darkModeCss`
-		background-color: ${neutral[10]};
+		background-color: ${background.onwardContentDark(format)};
 	`}
 `;
 
@@ -50,7 +56,7 @@ const relatedContentStyles = css`
 	}
 `;
 
-const headingStyles = css`
+const headingStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.column.centre}
 	padding: ${remSpace[3]};
 	margin: 0;
@@ -76,29 +82,32 @@ const headingStyles = css`
 			position: absolute;
 			top: 0;
 			bottom: 0;
-			border-left: 1px solid ${neutral[20]};
+			border-left: 1px solid ${border.galleryImage(format)};
 			left: -10px;
 		}
 
 		&::after {
-			border-color: ${neutral[20]}
+			border-color: ${border.galleryImage(format)}
 		}
 	`}
 `;
 
 type Props = {
 	content: Option<ResizedRelatedContent>;
+	format: ArticleFormat;
 };
 
-const GalleryRelatedContent: FC<Props> = ({ content }) =>
+const GalleryRelatedContent: FC<Props> = ({ content, format }) =>
 	maybeRender(content, ({ title, relatedItems, resizedImages }) => {
 		if (relatedItems.length === 0) {
 			return null;
 		}
 
 		return (
-			<aside css={styles}>
-				<h2 css={css(defaultHeadingStyles, headingStyles)}>{title}</h2>
+			<aside css={styles(format)}>
+				<h2 css={css(defaultHeadingStyles, headingStyles(format))}>
+					{title}
+				</h2>
 
 				<ul
 					css={css(defaultListStyles, relatedContentStyles)}

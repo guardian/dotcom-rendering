@@ -25,7 +25,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 	`}
 `;
 
-const spacerStyles = (format: ArticleFormat) => css`
+const spacerStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.column.centre}
 	padding: ${remSpace[3]};
 	margin: 0;

@@ -6,7 +6,6 @@ import {
 	border,
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral } from '@guardian/source-foundations';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import MainMedia, { GalleryCaption } from 'components/MainMedia';
@@ -33,7 +32,7 @@ const headerStyles = (format: ArticleFormat): SerializedStyles => css`
 	`}
 `;
 
-const wrapperStyles = (format: ArticleFormat) => css`
+const wrapperStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${background.articleContent(format)};
 
 	${darkModeCss`

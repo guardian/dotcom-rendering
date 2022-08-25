@@ -603,7 +603,14 @@ const pinnedPost = (format: ArticleFormat): string => {
 
 const onwardContent = (_format: ArticleFormat): Colour => neutral[97];
 
-const onwardContentDark = (_format: ArticleFormat): Colour => neutral[0];
+const onwardContentDark = (format: ArticleFormat): Colour => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return neutral[10];
+		default:
+			return neutral[0];
+	}
+};
 
 const footer = (_format: ArticleFormat): Colour => neutral[97];
 

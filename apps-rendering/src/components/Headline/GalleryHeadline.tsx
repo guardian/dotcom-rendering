@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
 	background,
@@ -17,7 +18,7 @@ import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
-const styles = (format: ArticleFormat) => css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.medium({ fontWeight: 'bold' })}
 	background-color: ${background.headline(format)};
 	color: ${text.gallery(format)};
@@ -40,7 +41,7 @@ const styles = (format: ArticleFormat) => css`
 	`}
 `;
 
-const backgroundStyles = (format: ArticleFormat) => css`
+const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${background.headline(format)};
 	${grid.between('viewport-start', 'centre-column-end')}
 	grid-row: 3 / 5;

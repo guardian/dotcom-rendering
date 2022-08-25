@@ -626,6 +626,7 @@ const standfirst = ({ design }: ArticleFormat): Colour => {
 		case ArticleDesign.LiveBlog:
 			return neutral[100];
 		case ArticleDesign.Gallery:
+			return neutral[100];
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			return neutral[86];
@@ -639,6 +640,8 @@ const standfirstDark = ({ design }: ArticleFormat): Colour => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return neutral[93];
+		case ArticleDesign.Gallery:
+			return neutral[86];
 		default:
 			return neutral[60];
 	}

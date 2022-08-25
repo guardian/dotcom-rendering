@@ -1,6 +1,11 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import {
+	background,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	from,
@@ -20,9 +25,9 @@ import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
-const styles = css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.xxsmall()}
-	background-color: ${neutral[7]};
+	background-color: ${background.articleContent(format)};
 
 	${grid.column.centre}
 	padding-top: ${remSpace[9]};
@@ -35,12 +40,16 @@ const styles = css`
 
 	&,
 	span {
-		color: ${neutral[86]};
+		color: ${text.gallery(format)};
 	}
 
 	${darkModeCss`
-		background-color: ${neutral[10]};
-		color: ${neutral[86]};
+		background-color: ${background.articleContentDark(format)};
+
+		&,
+		span {
+			color: ${text.galleryDark(format)};
+		}
 	`}
 `;
 
@@ -65,7 +74,7 @@ const GalleryCaption: FC<Props> = ({ mainMedia, format }) =>
 		}
 
 		return (
-			<p css={styles}>
+			<p css={styles(format)}>
 				<Caption caption={caption} format={format} />{' '}
 				{maybeRender(credit, (cred) => (
 					<>{cred}</>
