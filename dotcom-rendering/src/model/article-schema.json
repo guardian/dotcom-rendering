@@ -361,8 +361,8 @@
                     "url": {
                         "type": "string"
                     },
-                    "onwardsType": {
-                        "$ref": "#/definitions/OnwardsType"
+                    "onwardsSource": {
+                        "$ref": "#/definitions/OnwardsSource"
                     },
                     "format": {
                         "type": "object",
@@ -390,7 +390,7 @@
                 "required": [
                     "format",
                     "heading",
-                    "onwardsType",
+                    "onwardsSource",
                     "trails"
                 ]
             }
@@ -4283,16 +4283,16 @@
                 "sponsorName"
             ]
         },
-        "OnwardsType": {
+        "OnwardsSource": {
             "enum": [
                 "curated-content",
-                "default-onwards",
                 "more-galleries",
                 "more-media-in-section",
                 "more-on-this-story",
                 "related-content",
                 "related-stories",
-                "series"
+                "series",
+                "unknown-source"
             ],
             "type": "string"
         },

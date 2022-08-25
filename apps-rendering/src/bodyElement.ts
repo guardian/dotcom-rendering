@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
+import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
@@ -111,13 +112,8 @@ interface AudioAtom {
 	title: string;
 }
 
-interface NewsletterSignUp {
+interface NewsletterSignUp extends Omit<Newsletter, 'theme'> {
 	kind: ElementKind.NewsletterSignUp;
-	id: string;
-	displayName: string;
-	frequency: string;
-	description: string;
-	group: string;
 	theme: ArticleTheme;
 	successDescription: string;
 }

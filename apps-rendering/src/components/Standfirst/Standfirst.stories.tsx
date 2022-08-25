@@ -7,6 +7,7 @@ import {
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { boolean, withKnobs } from '@storybook/addon-knobs';
 import {
+	analysis,
 	article,
 	articleWithStandfirstLink,
 	comment,
@@ -16,6 +17,7 @@ import {
 import { deadBlog } from 'fixtures/live';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
+import AnalysisStandfirst from './AnalysisStandfirst';
 import Standfirst from './';
 
 // ----- Stories ----- //
@@ -100,6 +102,18 @@ const Deadblog = (): ReactElement => {
 	);
 };
 
+const Analysis = (): ReactElement => (
+	<AnalysisStandfirst
+		item={{
+			...analysis,
+			display: boolean('Immersive', false)
+				? ArticleDisplay.Immersive
+				: ArticleDisplay.Standard,
+			theme: selectPillar(ArticlePillar.Culture),
+		}}
+	/>
+);
+
 // ----- Exports ----- //
 
 export default {
@@ -108,4 +122,4 @@ export default {
 	decorators: [withKnobs],
 };
 
-export { Default, Review, Feature, Comment, Link, Deadblog };
+export { Default, Review, Feature, Comment, Link, Deadblog, Analysis };
