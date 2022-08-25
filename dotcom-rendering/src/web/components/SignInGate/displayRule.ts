@@ -33,7 +33,7 @@ export const isIOS9 = (): boolean => {
 // determine if the browser is a mobile device if it supports touch points, with user agent fallback
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Browser_detection_using_the_user_agent
 export const isMobile = (): boolean => {
-	if (!!navigator.maxTouchPoints) {
+	if (navigator.maxTouchPoints) {
 		return navigator.maxTouchPoints > 0;
 	} else {
 		const ua = navigator.userAgent;

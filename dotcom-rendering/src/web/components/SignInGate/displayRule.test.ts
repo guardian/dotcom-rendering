@@ -171,17 +171,19 @@ describe('SignInGate - displayRule methods', () => {
 			'get',
 		);
 
-		// FIXME sometimes this navigator property does not exist in testing env
-		!window.navigator.maxTouchPoints &&
+		// Sometimes this navigator property does not exist in testing env
+		if (!window.navigator.maxTouchPoints) {
 			Object.defineProperty(window.navigator, 'maxTouchPoints', {
 				configurable: true,
 				get: () => '',
 			});
+		}
 		const maxTouchPointGetter = jest.spyOn(
 			window.navigator,
 			'maxTouchPoints',
 			'get',
 		);
+
 		test('is mobile device', () => {
 			maxTouchPointGetter.mockReturnValue(1);
 			expect(isMobile()).toBe(true);
