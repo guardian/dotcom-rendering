@@ -326,9 +326,8 @@ const textElement =
 					{
 						key,
 						css: {
-							position: 'relative',
-							top: '-0.5em',
-							fontSize: '75%',
+							fontSize: 'smaller',
+							verticalAlign: 'super',
 						},
 					},
 					children,
