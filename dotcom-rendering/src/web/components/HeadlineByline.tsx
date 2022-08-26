@@ -76,16 +76,20 @@ const opinionStyles = (palette: Palette, format: ArticleFormat) => css`
 	}
 `;
 
-const analysisStyles = (palette: Palette) => css`
+const analysisStyles = (palette: Palette, hasSingleContributor: boolean) => css`
 	${headline.medium({
 		fontWeight: 'light',
 	})}
 	line-height: 38px;
-	display: flex;
-	flex-direction: column;
 	font-style: italic;
 	color: ${palette.text.headlineByline};
 	background: ${palette.background.headlineByline};
+
+	${hasSingleContributor &&
+	css`
+		display: flex;
+		flex-direction: column;
+	`}
 
 	${until.tablet} {
 		${headline.small({
@@ -203,7 +207,12 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 				case ArticleDesign.Analysis:
 					return (
 						<div css={opinionWrapperStyles}>
-							<div css={analysisStyles(palette)}>
+							<div
+								css={analysisStyles(
+									palette,
+									hasSingleContributor,
+								)}
+							>
 								<BylineLink
 									byline={byline}
 									tags={tags}
