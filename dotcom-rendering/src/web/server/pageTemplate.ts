@@ -198,19 +198,23 @@ https://workforus.theguardian.com/careers/product-engineering/
 						? ` <script type="application/ld+json">
                     			${JSON.stringify(linkedData)}
                 			</script>`
-						: ''
+						: '<!-- no linked data -->'
 				}
 
                 <!-- TODO make this conditional when we support more content types -->
-                ${ampLink ? `<link rel="amphtml" href="${ampLink}">` : ''}
+                ${
+					ampLink
+						? `<link rel="amphtml" href="${ampLink}">`
+						: '<!-- no Amp link -->'
+				}
 
                 ${fontPreloadTags.join('\n')}
 
-                ${openGraphMetaTags ?? ''}
+                ${openGraphMetaTags ?? '<!-- no Open Graph meta tags -->'}
 
                 ${twitterSecAndPrivacyMetaTags}
 
-                ${twitterMetaTags ?? ''}
+                ${twitterMetaTags ?? '<!-- no Twitter meta tags -->'}
 
                 <!--  This tag enables pages to be featured in Google Discover as large previews
                     See: https://developers.google.com/search/docs/advanced/mobile/google-discover?hl=en&visit_id=637424198370039526-3805703503&rd=1 -->
@@ -327,7 +331,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 				${
 					recipeMarkup !== undefined
 						? `<script type="application/ld+json">${recipeMarkup}</script>`
-						: ''
+						: '<!-- no recipe markup -->'
 				}
             </body>
         </html>`;
