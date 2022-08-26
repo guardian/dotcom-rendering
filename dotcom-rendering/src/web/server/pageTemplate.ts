@@ -301,9 +301,16 @@ https://workforus.theguardian.com/careers/product-engineering/
 
 
                 <noscript>
-                    <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${encodeURIComponent(
-						keywords,
-					).replace(/%20/g, '+')}" />
+                    <img src="https://sb.scorecardresearch.com/p?${new URLSearchParams(
+						{
+							c1: '2',
+							c2: '6035250',
+							cv: '2.0',
+							cj: '1',
+							cs_ucfr: '0',
+							comscorekw: keywords,
+						},
+					).toString()}" />
                 </noscript>
                 ${priorityScriptTags.join('\n')}
                 <style class="webfont">${getFontsCss()}</style>
