@@ -90,6 +90,11 @@ const richLinkStyles = (format: ArticleFormat): SerializedStyles => {
 			${richLinkPillarStyles(formatFromTheme(ArticlePillar.Lifestyle))}
 		}
 
+		img {
+			width: calc(100% + ${remSpace[6]});
+			margin: -${remSpace[3]} 0 0 -${remSpace[3]};
+		}
+
 		button {
 			background: none;
 			border: none;
