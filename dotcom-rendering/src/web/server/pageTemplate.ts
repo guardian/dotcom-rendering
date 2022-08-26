@@ -33,7 +33,7 @@ export const pageTemplate = ({
 	gaPath: { modern: string; legacy: string };
 	keywords: string;
 	ampLink?: string;
-	openGraphData: { [key: string]: string };
+	openGraphData?: { [key: string]: string };
 	twitterData: { [key: string]: string };
 	initTwitter?: string;
 	recipeMarkup?: string;
@@ -82,7 +82,8 @@ export const pageTemplate = ({
 		return '';
 	};
 
-	const openGraphMetaTags = generateMetaTags(openGraphData, 'property');
+	const openGraphMetaTags =
+		openGraphData && generateMetaTags(openGraphData, 'property');
 
 	// Opt out of having information from our website used for personalization of content and suggestions for Twitter users, including ads
 	// See https://developer.twitter.com/en/docs/twitter-for-websites/webpage-properties/overview
@@ -204,7 +205,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 
                 ${fontPreloadTags.join('\n')}
 
-                ${openGraphMetaTags}
+                ${openGraphMetaTags ?? ''}
 
                 ${twitterSecAndPrivacyMetaTags}
 
