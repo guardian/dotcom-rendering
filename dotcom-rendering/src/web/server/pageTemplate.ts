@@ -5,39 +5,39 @@ import { getFontsCss } from '../../lib/fonts-css';
 import { getHttp3Url } from '../lib/getHttp3Url';
 
 export const pageTemplate = ({
-	title = 'The Guardian',
-	description = 'Latest news, sport, business, comment, analysis and reviews from the Guardian, the world&#x27;s leading liberal voice',
-	linkedData,
-	priorityScriptTags,
-	lowPriorityScriptTags,
 	css,
 	html,
 	windowGuardian,
+	priorityScriptTags,
+	lowPriorityScriptTags,
 	gaPath,
 	keywords,
+	offerHttp3,
+	title = 'The Guardian',
+	description = 'Latest news, sport, business, comment, analysis and reviews from the Guardian, the world&#x27;s leading liberal voice',
+	linkedData,
 	ampLink,
 	openGraphData,
 	twitterData,
 	initTwitter,
 	recipeMarkup,
-	offerHttp3,
 }: {
-	title?: string;
-	description?: string;
-	linkedData?: { [key: string]: any };
-	priorityScriptTags: string[];
-	lowPriorityScriptTags: string[];
 	css: string;
 	html: string;
 	windowGuardian: string;
+	priorityScriptTags: string[];
+	lowPriorityScriptTags: string[];
 	gaPath: { modern: string; legacy: string };
 	keywords: string;
+	offerHttp3: boolean;
+	title?: string;
+	description?: string;
+	linkedData?: { [key: string]: any };
 	ampLink?: string;
 	openGraphData?: { [key: string]: string };
 	twitterData?: { [key: string]: string };
 	initTwitter?: string;
 	recipeMarkup?: string;
-	offerHttp3: boolean;
 }): string => {
 	const favicon =
 		process.env.NODE_ENV === 'production'
