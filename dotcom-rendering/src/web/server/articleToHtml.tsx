@@ -12,8 +12,8 @@ import { Article } from '../components/Article';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { getHttp3Url } from '../lib/getHttp3Url';
-import { articleTemplate } from './articleTemplate';
 import { extractExpeditedIslands } from './extractIslands';
+import { pageTemplate } from './pageTemplate';
 import { recipeSchema } from './temporaryRecipeStructuredData';
 
 interface Props {
@@ -219,7 +219,7 @@ window.twttr = (function(d, s, id) {
 
 	const recipeMarkup = url in recipeSchema ? recipeSchema[url] : undefined;
 
-	return articleTemplate({
+	return pageTemplate({
 		linkedData,
 		priorityScriptTags,
 		lowPriorityScriptTags,

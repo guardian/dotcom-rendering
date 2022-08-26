@@ -4,9 +4,9 @@ import { ASSET_ORIGIN } from '../../lib/assets';
 import { getFontsCss } from '../../lib/fonts-css';
 import { getHttp3Url } from '../lib/getHttp3Url';
 
-export const articleTemplate = ({
+export const pageTemplate = ({
 	title = 'The Guardian',
-	description,
+	description = 'Latest news, sport, business, comment, analysis and reviews from the Guardian, the world&#x27;s leading liberal voice',
 	linkedData,
 	priorityScriptTags,
 	lowPriorityScriptTags,
@@ -23,8 +23,8 @@ export const articleTemplate = ({
 	offerHttp3,
 }: {
 	title?: string;
-	description: string;
-	linkedData: { [key: string]: any };
+	description?: string;
+	linkedData?: { [key: string]: any };
 	priorityScriptTags: string[];
 	lowPriorityScriptTags: string[];
 	css: string;
@@ -191,9 +191,13 @@ https://workforus.theguardian.com/careers/product-engineering/
                 ${preconnectTags.join('\n')}
                 ${prefetchTags.join('\n')}
 
-                <script type="application/ld+json">
-                    ${JSON.stringify(linkedData)}
-                </script>
+                ${
+					linkedData !== undefined
+						? ` <script type="application/ld+json">
+                    			${JSON.stringify(linkedData)}
+                			</script>`
+						: ''
+				}
 
                 <!-- TODO make this conditional when we support more content types -->
                 ${ampLink ? `<link rel="amphtml" href="${ampLink}">` : ''}
