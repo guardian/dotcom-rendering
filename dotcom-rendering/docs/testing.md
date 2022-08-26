@@ -1,4 +1,4 @@
-	# Testing your JavaScript
+# Testing your JavaScript
 
 ## Jest Tests
 
