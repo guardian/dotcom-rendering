@@ -2,39 +2,40 @@ import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
 import { ASSET_ORIGIN } from '../../lib/assets';
 import { getFontsCss } from '../../lib/fonts-css';
+import { getHttp3Url } from '../lib/getHttp3Url';
 
-export const articleTemplate = ({
-	title = 'The Guardian',
-	description,
-	linkedData,
-	priorityScriptTags,
-	lowPriorityScriptTags,
+export const pageTemplate = ({
 	css,
 	html,
 	windowGuardian,
+	priorityScriptTags,
+	lowPriorityScriptTags,
 	gaPath,
-	fontFiles = [],
+	keywords,
+	offerHttp3,
+	title = 'The Guardian',
+	description = 'Latest news, sport, business, comment, analysis and reviews from the Guardian, the world&#x27;s leading liberal voice',
+	linkedData,
 	ampLink,
 	openGraphData,
 	twitterData,
-	keywords,
-	initTwitter = '',
+	initTwitter,
 	recipeMarkup,
 }: {
-	title?: string;
-	description: string;
-	linkedData: { [key: string]: any };
-	priorityScriptTags: string[];
-	lowPriorityScriptTags: string[];
 	css: string;
 	html: string;
-	fontFiles?: string[];
 	windowGuardian: string;
+	priorityScriptTags: string[];
+	lowPriorityScriptTags: string[];
 	gaPath: { modern: string; legacy: string };
-	ampLink?: string;
-	openGraphData: { [key: string]: string };
-	twitterData: { [key: string]: string };
 	keywords: string;
+	offerHttp3: boolean;
+	title?: string;
+	description?: string;
+	linkedData?: { [key: string]: any };
+	ampLink?: string;
+	openGraphData?: { [key: string]: string };
+	twitterData?: { [key: string]: string };
 	initTwitter?: string;
 	recipeMarkup?: string;
 }): string => {
@@ -42,6 +43,24 @@ export const articleTemplate = ({
 		process.env.NODE_ENV === 'production'
 			? 'favicon-32x32.ico'
 			: 'favicon-32x32-dev-yellow.ico';
+
+	/**
+	 * Preload the following woff2 font files
+	 * TODO: Identify critical fonts to preload
+	 */
+	const fontFiles = [
+		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2',
+		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
+		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
+		// 'http://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
+	].map((font) => (offerHttp3 ? getHttp3Url(font) : font));
 
 	const fontPreloadTags = fontFiles.map(
 		(fontFile) =>
@@ -63,13 +82,15 @@ export const articleTemplate = ({
 		return '';
 	};
 
-	const openGraphMetaTags = generateMetaTags(openGraphData, 'property');
+	const openGraphMetaTags =
+		openGraphData && generateMetaTags(openGraphData, 'property');
 
 	// Opt out of having information from our website used for personalization of content and suggestions for Twitter users, including ads
 	// See https://developer.twitter.com/en/docs/twitter-for-websites/webpage-properties/overview
 	const twitterSecAndPrivacyMetaTags = `<meta name="twitter:dnt" content="on">`;
 
-	const twitterMetaTags = generateMetaTags(twitterData, 'name');
+	const twitterMetaTags =
+		twitterData && generateMetaTags(twitterData, 'name');
 
 	// Duplicated prefetch and preconnect tags from DCP:
 	// Documented here: https://github.com/guardian/frontend/pull/12935
@@ -172,20 +193,28 @@ https://workforus.theguardian.com/careers/product-engineering/
                 ${preconnectTags.join('\n')}
                 ${prefetchTags.join('\n')}
 
-                <script type="application/ld+json">
-                    ${JSON.stringify(linkedData)}
-                </script>
+                ${
+					linkedData !== undefined
+						? ` <script type="application/ld+json">
+                    			${JSON.stringify(linkedData)}
+                			</script>`
+						: '<!-- no linked data -->'
+				}
 
                 <!-- TODO make this conditional when we support more content types -->
-                ${ampLink ? `<link rel="amphtml" href="${ampLink}">` : ''}
+                ${
+					ampLink
+						? `<link rel="amphtml" href="${ampLink}">`
+						: '<!-- no Amp link -->'
+				}
 
                 ${fontPreloadTags.join('\n')}
 
-                ${openGraphMetaTags}
+                ${openGraphMetaTags ?? '<!-- no Open Graph meta tags -->'}
 
                 ${twitterSecAndPrivacyMetaTags}
 
-                ${twitterMetaTags}
+                ${twitterMetaTags ?? '<!-- no Twitter meta tags -->'}
 
                 <!--  This tag enables pages to be featured in Google Discover as large previews
                     See: https://developers.google.com/search/docs/advanced/mobile/google-discover?hl=en&visit_id=637424198370039526-3805703503&rd=1 -->
@@ -274,13 +303,20 @@ https://workforus.theguardian.com/careers/product-engineering/
 				</script>
 
 
-				${initTwitter}
+				${initTwitter ?? ''}
 
 
                 <noscript>
-                    <img src="https://sb.scorecardresearch.com/p?c1=2&c2=6035250&cv=2.0&cj=1&cs_ucfr=0&comscorekw=${encodeURIComponent(
-						keywords,
-					).replace(/%20/g, '+')}" />
+                    <img src="https://sb.scorecardresearch.com/p?${new URLSearchParams(
+						{
+							c1: '2',
+							c2: '6035250',
+							cv: '2.0',
+							cj: '1',
+							cs_ucfr: '0',
+							comscorekw: keywords,
+						},
+					).toString()}" />
                 </noscript>
                 ${priorityScriptTags.join('\n')}
                 <style class="webfont">${getFontsCss()}</style>
@@ -295,7 +331,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 				${
 					recipeMarkup !== undefined
 						? `<script type="application/ld+json">${recipeMarkup}</script>`
-						: ''
+						: '<!-- no recipe markup -->'
 				}
             </body>
         </html>`;
