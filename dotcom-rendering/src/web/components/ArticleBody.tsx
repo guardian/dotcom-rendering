@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, body, headline, space } from '@guardian/source-foundations';
-import type { ServerSideTests } from '../../types/config';
+import type { ServerSideTests, Switches } from '../../types/config';
 import type { Palette } from '../../types/palette';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { decidePalette } from '../lib/decidePalette';
@@ -19,7 +19,7 @@ type Props = {
 	webTitle: string;
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
-	switches: { [key: string]: boolean };
+	switches: Switches;
 	section: string;
 	shouldHideReaderRevenue: boolean;
 	tags: TagType[];

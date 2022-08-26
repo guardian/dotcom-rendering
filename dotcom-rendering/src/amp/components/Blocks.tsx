@@ -3,6 +3,7 @@ import { neutral, text, textSans } from '@guardian/source-foundations';
 import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import type { CommercialProperties } from '../../types/commercial';
+import type { Switches } from '../../types/config';
 import type { EditionId } from '../../types/edition';
 import { blockLink } from '../lib/block-link';
 import { findBlockAdSlots } from '../lib/find-adslots';
