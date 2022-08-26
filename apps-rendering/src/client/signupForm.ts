@@ -4,7 +4,8 @@ import { fakeRequestToEmailSignupService } from './requestEmailSignUp';
 // ----- Types ----- //
 interface FormBundle {
 	form: HTMLFormElement;
-	button: HTMLButtonElement;
+	submitButton: HTMLButtonElement;
+	resetButton: HTMLButtonElement;
 	input: HTMLInputElement;
 	newsletterId: string;
 }
@@ -12,11 +13,15 @@ interface FormBundle {
 // ----- Procedures ----- //
 
 async function handleSubmission(bundle: FormBundle): Promise<void> {
-	const { input, newsletterId, button, form } = bundle;
+	const { input, newsletterId, submitButton, form } = bundle;
+
+	if (!input.value) {
+		return;
+	}
 
 	form.classList.add('js-signup-form--waiting');
 	input.setAttribute('disabled', '');
-	button.setAttribute('disabled', '');
+	submitButton.setAttribute('disabled', '');
 
 	const response = await fakeRequestToEmailSignupService(
 		input.value,
@@ -31,27 +36,49 @@ async function handleSubmission(bundle: FormBundle): Promise<void> {
 	}
 }
 
+function handleReset(bundle: FormBundle): void {
+	const { form, input, submitButton } = bundle;
+	form.classList.remove('js-signup-form--waiting');
+	form.classList.remove('js-signup-form--success');
+	form.classList.remove('js-signup-form--failure');
+	input.removeAttribute('disabled');
+	submitButton.removeAttribute('disabled');
+}
+
 function setup(form: HTMLFormElement): void {
 	const newsletterId = form.getAttribute('data-newsletter-id');
-	const button = form.querySelector('button');
+	const submitButton = form.querySelector('button[type=submit]');
+	const resetButton = form.querySelector('button[type=reset]');
 	const input = form.querySelector('input');
 
-	if (!input || !newsletterId || !button) {
-		console.log('MISSING', { button, input, newsletterId });
+	if (!input || !newsletterId || !submitButton || !resetButton) {
+		console.error('MISSING', {
+			submitButton,
+			input,
+			newsletterId,
+			resetButton,
+		});
 		return;
 	}
 
-	const bundle: FormBundle = { form, button, input, newsletterId };
+	const bundle: FormBundle = {
+		form,
+		submitButton: submitButton as HTMLButtonElement,
+		resetButton: resetButton as HTMLButtonElement,
+		input,
+		newsletterId,
+	};
 
 	form.addEventListener('submit', (event) => {
 		event.preventDefault();
-		if (!input.value) {
-			return;
-		}
-
 		handleSubmission(bundle).catch((err: unknown) => {
 			console.error(err);
 		});
+	});
+
+	resetButton.addEventListener('click', (event) => {
+		event.preventDefault(); // default behaviour would clear the input field
+		handleReset(bundle);
 	});
 }
 
