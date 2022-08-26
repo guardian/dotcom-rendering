@@ -51,14 +51,6 @@ import { isValidUrl } from '../lib/isValidUrl';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
-// This Layout is not currently in use.
-// It is an outline of a design for articles with the ArticleDesign.NewsletterSignup
-// which are currently rendered using the standard layout.
-// The full version of the design is to be implemented by the newsletters team.
-
-// to use this layout, edit ./dotcom-rendering/src/web/layouts/DecideLayout.tsx
-// to return is on articles with  ArticleDisplay.Standard && ArticleDesign.NewsletterSignup
-
 type Props = {
 	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
@@ -180,34 +172,6 @@ const getMainMediaCaptions = (
 			: undefined,
 	);
 
-const RegionalFocus = ({
-	promotedNewsletter,
-	position,
-}: {
-	promotedNewsletter: Newsletter | undefined;
-	position: 'leftContent' | 'main';
-}) => {
-	if (!promotedNewsletter?.regionalFocus) {
-		return null;
-	}
-	const text = `${promotedNewsletter.regionalFocus} Focused`;
-	switch (position) {
-		case 'main':
-			return (
-				<Hide from="leftCol">
-					<NewsletterDetail text={text} />
-				</Hide>
-			);
-		default:
-		case 'leftContent':
-			return (
-				<div css={topMarginStyle(space[4])}>
-					<NewsletterDetail text={text} />
-				</div>
-			);
-	}
-};
-
 export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		promotedNewsletter,
@@ -226,6 +190,11 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
 	const palette = decidePalette(format);
+
+	const regionalFocusText = promotedNewsletter?.regionFocus
+		? `${promotedNewsletter.regionFocus} Focused`
+		: '';
+	const showRegionalFocus = Boolean(regionalFocusText);
 
 	/**	Newsletter preview will be linked if the caption of the main media is a URL */
 	const captions = getMainMediaCaptions(CAPIArticle);
@@ -379,18 +348,22 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					showTopBorder={false}
 					stretchRight={true}
 					leftContent={
-						<RegionalFocus
-							promotedNewsletter={promotedNewsletter}
-							position="leftContent"
-						/>
+						showRegionalFocus && (
+							<div css={topMarginStyle(space[4])}>
+								<NewsletterDetail text={regionalFocusText} />
+							</div>
+						)
 					}
 				>
 					<Columns collapseUntil="desktop">
 						<Column width={[1, 1, 5 / 8, 1 / 2, 1 / 2]}>
-							<RegionalFocus
-								promotedNewsletter={promotedNewsletter}
-								position="main"
-							/>
+							{showRegionalFocus && (
+								<Hide from="leftCol">
+									<NewsletterDetail
+										text={regionalFocusText}
+									/>
+								</Hide>
+							)}
 							<ArticleHeadline
 								format={format}
 								headlineString={CAPIArticle.headline}
@@ -400,12 +373,10 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									CAPIArticle.webPublicationDateDeprecated
 								}
 							/>
-
 							<Standfirst
 								format={format}
 								standfirst={CAPIArticle.standfirst}
 							/>
-
 							{showNewsletterPreview && (
 								<div css={previewButtonWrapperStyle}>
 									<LinkButton
@@ -420,7 +391,6 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</LinkButton>
 								</div>
 							)}
-
 							{promotedNewsletter && (
 								<>
 									<SecureSignup
@@ -438,7 +408,6 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									/>
 								</>
 							)}
-
 							<div css={shareDivStyle}>
 								<span css={shareSpanStyle}>
 									Tell your friends

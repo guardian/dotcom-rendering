@@ -7,6 +7,7 @@ import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
+import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
 
@@ -111,6 +112,14 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
+							CAPIArticle={CAPIArticle}
+							NAV={NAV}
+							format={format}
+						/>
+					);
+				case ArticleDesign.NewsletterSignup:
+					return (
+						<NewsletterSignupLayout
 							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}
