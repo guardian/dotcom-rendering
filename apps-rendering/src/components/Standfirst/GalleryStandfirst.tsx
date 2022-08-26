@@ -35,8 +35,6 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 
 type Props = {
 	standfirst: Option<DocumentFragment>;
-	byline: string;
-	bylineHtml: Option<DocumentFragment>;
 	format: ArticleFormat;
 };
 
