@@ -93,7 +93,7 @@ describe('Enhance H3s', () => {
 		);
 	});
 
-	it('does set an h3 and extract all text even if it is between stong tages', () => {
+	it('does set an h3 and extract all text even if it is between strong tags', () => {
 		const input: Block[] = [
 			{
 				...blockMetaData,
