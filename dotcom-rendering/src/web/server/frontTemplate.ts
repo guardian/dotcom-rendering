@@ -1,6 +1,7 @@
 import { brandBackground, resets } from '@guardian/source-foundations';
 import { ASSET_ORIGIN } from '../../lib/assets';
 import { getFontsCss } from '../../lib/fonts-css';
+import { getHttp3Url } from '../lib/getHttp3Url';
 
 export const frontTemplate = ({
 	title = 'The Guardian',
@@ -10,8 +11,8 @@ export const frontTemplate = ({
 	html,
 	windowGuardian,
 	gaPath,
-	fontFiles = [],
 	keywords,
+	offerHttp3,
 }: {
 	title?: string;
 	priorityScriptTags: string[];
@@ -19,14 +20,32 @@ export const frontTemplate = ({
 	css: string;
 	html: string;
 	windowGuardian: string;
-	fontFiles?: string[];
 	gaPath: { modern: string; legacy: string };
 	keywords: string;
+	offerHttp3: boolean;
 }): string => {
 	const favicon =
 		process.env.NODE_ENV === 'production'
 			? 'favicon-32x32.ico'
 			: 'favicon-32x32-dev-yellow.ico';
+
+	/**
+	 * Preload the following woff2 font files
+	 * TODO: Identify critical fonts to preload
+	 */
+	const fontFiles = [
+		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2',
+		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
+		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
+		// 'http://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
+		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
+	].map((font) => (offerHttp3 ? getHttp3Url(font) : font));
 
 	const fontPreloadTags = fontFiles.map(
 		(fontFile) =>
