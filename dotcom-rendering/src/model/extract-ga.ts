@@ -49,7 +49,7 @@ const formatStringForGa = (string: string): string =>
 	string.toLowerCase().split(' ').join('');
 
 // we should not bring down the website if a trackable field is missing!
-export const extract = ({
+export const extractGA = ({
 	webTitle,
 	format,
 	sectionName,
