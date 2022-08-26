@@ -18,7 +18,7 @@ export const pageTemplate = ({
 	ampLink,
 	openGraphData,
 	twitterData,
-	initTwitter = '',
+	initTwitter,
 	recipeMarkup,
 	offerHttp3,
 }: {
@@ -299,7 +299,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 				</script>
 
 
-				${initTwitter}
+				${initTwitter ?? ''}
 
 
                 <noscript>
