@@ -49,7 +49,7 @@ const links = [
 	{
 		id: 'au',
 		url: '/preference/edition/au',
-		title: 'Australian edition',
+		title: 'Australia edition',
 		dataLinkName: 'linkname-AU',
 	},
 	{
