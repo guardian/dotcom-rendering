@@ -17,7 +17,7 @@ const styles = css`
 	display: flex;
 	color: ${neutral[100]};
 	${grid.column.centre}
-	grid-row: 6/7;
+	grid-row: 7/8;
 	padding: 0 ${remSpace[5]} ${remSpace[9]} 0;
 `;
 

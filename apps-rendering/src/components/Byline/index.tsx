@@ -12,6 +12,7 @@ import {
 } from './Byline.defaults';
 import CommentByline from './CommentByline';
 import DeadBlogByline from './DeadBlogByline';
+import GalleryByline from './GalleryByline';
 import LabsByline from './LabsByline';
 import LiveBlogByline from './LiveBlogByline';
 
@@ -39,6 +40,8 @@ const Byline: FC<Props> = ({ bylineHtml, ...format }) => {
 			return <CommentByline bylineHtml={bylineHtml} format={format} />;
 		case ArticleDesign.Analysis:
 			return <AnalysisByline bylineHtml={bylineHtml} format={format} />;
+		case ArticleDesign.Gallery:
+			return <GalleryByline bylineHtml={bylineHtml} format={format} />;
 		default:
 			return (
 				<DefaultByline
