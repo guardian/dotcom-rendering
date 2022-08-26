@@ -96,7 +96,7 @@
     "@types/react": "^18.0.5",
     "@types/react-dom": "^18.0.1",
     "@types/react-google-recaptcha": "^2.1.5",
-    "@types/react-test-renderer": "17.0.1",
+    "@types/react-test-renderer": "18.0.0",
     "@types/response-time": "^2.3.4",
     "@types/sanitize-html": "^2.6.0",
     "@types/twitter-for-web": "^0.0.2",
