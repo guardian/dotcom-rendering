@@ -517,7 +517,7 @@
                 "group": {
                     "type": "string"
                 },
-                "regionalFocus": {
+                "regionFocus": {
                     "type": "string"
                 }
             },
@@ -2234,7 +2234,7 @@
                         "group": {
                             "type": "string"
                         },
-                        "regionalFocus": {
+                        "regionFocus": {
                             "type": "string"
                         }
                     },
