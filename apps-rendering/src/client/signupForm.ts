@@ -10,6 +10,14 @@ interface FormBundle {
 	newsletterId: string;
 }
 
+// ----- Constants ----- //
+const COMPONENT_BASE_CLASSNAME = "js-signup-form" as const;
+const MODIFIER_CLASSNAME = {
+	waiting: `${COMPONENT_BASE_CLASSNAME}--waiting`,
+	success: `${COMPONENT_BASE_CLASSNAME}--success`,
+	failure: `${COMPONENT_BASE_CLASSNAME}--failure`,
+} as const;
+
 // ----- Procedures ----- //
 
 async function handleSubmission(bundle: FormBundle): Promise<void> {
@@ -19,7 +27,7 @@ async function handleSubmission(bundle: FormBundle): Promise<void> {
 		return;
 	}
 
-	form.classList.add('js-signup-form--waiting');
+	form.classList.add(MODIFIER_CLASSNAME.waiting);
 	input.setAttribute('disabled', '');
 	submitButton.setAttribute('disabled', '');
 
@@ -27,20 +35,20 @@ async function handleSubmission(bundle: FormBundle): Promise<void> {
 		input.value,
 		newsletterId,
 	);
-	form.classList.remove('js-signup-form--waiting');
+	form.classList.remove(MODIFIER_CLASSNAME.waiting);
 
 	if (response.status === 200) {
-		form.classList.add('js-signup-form--success');
+		form.classList.add(MODIFIER_CLASSNAME.success);
 	} else {
-		form.classList.add('js-signup-form--failure');
+		form.classList.add(MODIFIER_CLASSNAME.failure);
 	}
 }
 
 function handleReset(bundle: FormBundle): void {
 	const { form, input, submitButton } = bundle;
-	form.classList.remove('js-signup-form--waiting');
-	form.classList.remove('js-signup-form--success');
-	form.classList.remove('js-signup-form--failure');
+	form.classList.remove(MODIFIER_CLASSNAME.failure);
+	form.classList.remove(MODIFIER_CLASSNAME.success);
+	form.classList.remove(MODIFIER_CLASSNAME.waiting);
 	input.removeAttribute('disabled');
 	submitButton.removeAttribute('disabled');
 }
@@ -84,7 +92,7 @@ function setup(form: HTMLFormElement): void {
 
 function initSignupForms(): void {
 	const signupForms = Array.from(
-		document.querySelectorAll('form.js-signup-form'),
+		document.querySelectorAll(`form.${COMPONENT_BASE_CLASSNAME}`),
 	) as unknown as HTMLFormElement[];
 	// Should be cast directly to HTMLFormElement[] but:
 	// Prettier: "This assertion is unnecessary since it does not change the type of the expression"
