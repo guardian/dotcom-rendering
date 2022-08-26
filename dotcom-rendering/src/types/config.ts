@@ -43,7 +43,7 @@ export interface ConfigType extends CommercialConfigType {
 	shortUrlId: string;
 	isDev?: boolean;
 	googletagUrl: string;
-	stage: string;
+	stage: StageType;
 	frontendAssetsFullURL: string;
 	adUnit: string;
 	isSensitive: boolean;

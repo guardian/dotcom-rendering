@@ -55,6 +55,7 @@ interface WindowGuardianFrontConfig {
 		showRelatedContent: boolean;
 		ajaxUrl: string;
 		shouldHideReaderRevenue: boolean;
+		googleRecaptchaSiteKey?: string;
 	};
 	libs: {
 		googletag: string;
@@ -66,43 +67,6 @@ interface WindowGuardianFrontConfig {
 		browserId: string;
 	};
 }
-
-const makeWindowGuardianConfig = (
-	CAPIArticle: CAPIArticleType,
-): WindowGuardianConfig => {
-	const { config } = CAPIArticle;
-	return {
-		// This indicates to the client side code that we are running a dotcom-rendering rendered page.
-		isDotcomRendering: true,
-		isDev: process.env.NODE_ENV !== 'production',
-		stage: config.stage,
-		frontendAssetsFullURL: config.frontendAssetsFullURL,
-		page: Object.assign(config, {
-			dcrCouldRender: true,
-			contentType: CAPIArticle.contentType,
-			edition: CAPIArticle.editionId,
-			revisionNumber: config.revisionNumber,
-			dcrSentryDsn:
-				'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-			sentryPublicApiKey: config.sentryPublicApiKey,
-			sentryHost: config.sentryHost,
-			keywordIds: config.keywordIds,
-			dfpAccountId: config.dfpAccountId,
-			adUnit: config.adUnit,
-			showRelatedContent: true,
-			ajaxUrl: config.ajaxUrl,
-		}),
-		libs: {
-			googletag: config.googletagUrl,
-		},
-		switches: config.switches,
-		tests: config.abTests,
-		ophan: {
-			pageViewId: '',
-			browserId: '',
-		},
-	} as WindowGuardianConfig;
-};
 
 export const makeWindowGuardian = (
 	CAPIArticle: CAPIArticleType,
@@ -121,8 +85,41 @@ export const makeWindowGuardian = (
 	};
 	GAData: GADataType;
 } => {
+	const { config, editionId } = CAPIArticle;
 	return {
-		config: makeWindowGuardianConfig(CAPIArticle),
+		config: {
+			// This indicates to the client side code that we are running a dotcom-rendering rendered page.
+			isDotcomRendering: true,
+			isDev: process.env.NODE_ENV !== 'production',
+			stage: config.stage,
+			frontendAssetsFullURL: config.frontendAssetsFullURL,
+			page: Object.assign(config, {
+				dcrCouldRender: true,
+				contentType: CAPIArticle.contentType,
+				edition: editionId,
+				revisionNumber: config.revisionNumber,
+				dcrSentryDsn:
+					'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+				sentryPublicApiKey: config.sentryPublicApiKey,
+				sentryHost: config.sentryHost,
+				keywordIds: config.keywordIds,
+				dfpAccountId: config.dfpAccountId,
+				adUnit: config.adUnit,
+				showRelatedContent: true,
+				ajaxUrl: config.ajaxUrl,
+				shouldHideReaderRevenue:
+					config.shouldHideReaderRevenue ?? false,
+			}),
+			libs: {
+				googletag: config.googletagUrl,
+			},
+			switches: config.switches,
+			tests: config.abTests,
+			ophan: {
+				pageViewId: '',
+				browserId: '',
+			},
+		},
 		polyfilled: false,
 		adBlockers: {
 			active: undefined,
@@ -134,44 +131,6 @@ export const makeWindowGuardian = (
 			},
 		},
 		GAData: extractGA(CAPIArticle),
-	};
-};
-
-const makeFrontWindowGuardianConfig = ({
-	config,
-	editionId,
-}: DCRFrontType): WindowGuardianFrontConfig => {
-	return {
-		// This indicates to the client side code that we are running a dotcom-rendering rendered page.
-		isDotcomRendering: true,
-		isDev: process.env.NODE_ENV !== 'production',
-		stage: config.stage,
-		frontendAssetsFullURL: config.frontendAssetsFullURL,
-		page: {
-			dcrCouldRender: true,
-			contentType: 'TODO: Do we need this?',
-			edition: editionId,
-			revisionNumber: config.revisionNumber,
-			dcrSentryDsn:
-				'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-			sentryPublicApiKey: config.sentryPublicApiKey,
-			sentryHost: config.sentryHost,
-			keywordIds: config.keywordIds,
-			dfpAccountId: config.dfpAccountId,
-			adUnit: config.adUnit,
-			showRelatedContent: true,
-			ajaxUrl: config.ajaxUrl,
-			shouldHideReaderRevenue: false, // TODO Pass this in
-		},
-		libs: {
-			googletag: config.googletagUrl,
-		},
-		switches: config.switches,
-		tests: config.abTests,
-		ophan: {
-			pageViewId: '',
-			browserId: '',
-		},
 	};
 };
 
@@ -191,8 +150,40 @@ export const makeFrontWindowGuardian = (
 		};
 	};
 } => {
+	const { config, editionId } = front;
 	return {
-		config: makeFrontWindowGuardianConfig(front),
+		config: {
+			// This indicates to the client side code that we are running a dotcom-rendering rendered page.
+			isDotcomRendering: true,
+			isDev: process.env.NODE_ENV !== 'production',
+			stage: config.stage,
+			frontendAssetsFullURL: config.frontendAssetsFullURL,
+			page: {
+				dcrCouldRender: true,
+				contentType: 'TODO: Do we need this?',
+				edition: editionId,
+				revisionNumber: config.revisionNumber,
+				dcrSentryDsn:
+					'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+				sentryPublicApiKey: config.sentryPublicApiKey,
+				sentryHost: config.sentryHost,
+				keywordIds: config.keywordIds,
+				dfpAccountId: config.dfpAccountId,
+				adUnit: config.adUnit,
+				showRelatedContent: true,
+				ajaxUrl: config.ajaxUrl,
+				shouldHideReaderRevenue: false, // TODO Pass this in
+			},
+			libs: {
+				googletag: config.googletagUrl,
+			},
+			switches: config.switches,
+			tests: config.abTests,
+			ophan: {
+				pageViewId: '',
+				browserId: '',
+			},
+		},
 		polyfilled: false,
 		adBlockers: {
 			active: undefined,
