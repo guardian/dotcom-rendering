@@ -9,7 +9,7 @@ import { makeFrontWindowGuardian } from '../../model/window-guardian';
 import type { DCRFrontType } from '../../types/front';
 import { FrontPage } from '../components/FrontPage';
 import { getHttp3Url } from '../lib/getHttp3Url';
-import { frontTemplate } from './frontTemplate';
+import { pageTemplate } from './pageTemplate';
 
 interface Props {
 	front: DCRFrontType;
@@ -130,7 +130,7 @@ export const frontToHtml = ({ front }: Props): string => {
 
 	const keywords = front.config.keywords ?? '';
 
-	return frontTemplate({
+	return pageTemplate({
 		priorityScriptTags,
 		lowPriorityScriptTags,
 		css: extractedCss,
