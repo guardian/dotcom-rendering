@@ -1,21 +1,22 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import {
-	from,
-	headline,
-	neutral,
-	remSpace,
-} from '@guardian/source-foundations';
+	background,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
+import { from, headline, remSpace } from '@guardian/source-foundations';
 import { grid } from 'grid/grid';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
-const styles = css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.medium({ fontWeight: 'bold' })}
-	background-color: ${neutral[7]};
-	color: ${neutral[100]};
+	background-color: ${background.headline(format)};
+	color: ${text.gallery(format)};
 	padding: 0 ${remSpace[5]} ${remSpace[9]} 0;
 	${grid.column.centre}
 	grid-row: 3 / 5;
@@ -28,10 +29,15 @@ const styles = css`
 		${headline.xlarge({ fontWeight: 'bold' })}
 		${grid.span('centre-column-start', 8)}
 	}
+
+	${darkModeCss`
+		background-color: ${background.headlineDark(format)};
+		color: ${text.galleryDark(format)};
+	`}
 `;
 
-const backgroundStyles = css`
-	background-color: ${neutral[7]};
+const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
+	background-color: ${background.headline(format)};
 	${grid.between('viewport-start', 'centre-column-end')}
 	grid-row: 3 / 5;
 
@@ -43,6 +49,10 @@ const backgroundStyles = css`
 		${grid.between('centre-column-start', 'viewport-end')}
 		margin-left: calc(${grid.columnGap} * -1/2);
 	}
+
+	${darkModeCss`
+		background-color: ${background.headlineDark(format)};
+	`}
 `;
 
 interface Props {
@@ -50,10 +60,10 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const GalleryHeadline: React.FC<Props> = ({ headline }) => (
+const GalleryHeadline: React.FC<Props> = ({ headline, format }) => (
 	<>
-		<div css={backgroundStyles} />
-		<h1 css={styles}>{headline}</h1>
+		<div css={backgroundStyles(format)} />
+		<h1 css={styles(format)}>{headline}</h1>
 	</>
 );
 
