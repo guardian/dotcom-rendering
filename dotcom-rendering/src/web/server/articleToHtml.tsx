@@ -8,7 +8,7 @@ import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { CAPIArticleType } from '../../types/frontend';
-import { Article } from '../components/Article';
+import { ArticlePage } from '../components/ArticlePage';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { getHttp3Url } from '../lib/getHttp3Url';
@@ -70,7 +70,7 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 
 	const html = renderToString(
 		<CacheProvider value={cache}>
-			<Article format={format} CAPIArticle={CAPIArticle} NAV={NAV} />
+			<ArticlePage format={format} CAPIArticle={CAPIArticle} NAV={NAV} />
 		</CacheProvider>,
 	);
 

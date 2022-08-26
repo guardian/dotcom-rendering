@@ -32,7 +32,7 @@ type Props = {
  * @param {NAVType} props.NAV - The article JSON data
  * @param {ArticleFormat} props.format - The format model for the article
  * */
-export const Article = ({ CAPIArticle, NAV, format }: Props) => {
+export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
 	return (
 		<StrictMode>
 			<Global
