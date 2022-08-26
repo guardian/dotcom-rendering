@@ -25,7 +25,7 @@ type Props = {
 
 /**
  * @description
- * Article is a high level wrapper for pages on Dotcom. Sets strict mode and some globals
+ * Article is a high level wrapper for article pages on Dotcom. Sets strict mode and some globals
  *
  * @param {Props} props
  * @param {CAPIArticleType} props.CAPIArticle - The article JSON data
