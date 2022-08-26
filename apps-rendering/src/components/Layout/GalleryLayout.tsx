@@ -6,6 +6,7 @@ import {
 	border,
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
+import Byline from 'components/Byline';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import MainMedia, { GalleryCaption } from 'components/MainMedia';
@@ -56,6 +57,7 @@ const GalleryLayout: FC<Props> = ({ item, children }) => {
 						<Series item={item} />
 						<Headline item={item} />
 						<Standfirst item={item} />
+						<Byline bylineHtml={item.bylineHtml} {...format} />
 						<Metadata item={item} />
 						<GalleryCaption
 							mainMedia={item.mainMedia}
