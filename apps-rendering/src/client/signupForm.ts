@@ -3,9 +3,9 @@ import { fakeRequestToEmailSignupService } from './requestEmailSignUp';
 
 // ----- Types ----- //
 interface FormBundle {
-	form: HTMLFormElement;
-	submitButton: HTMLButtonElement;
-	resetButton: HTMLButtonElement;
+	form: Element;
+	submitButton: Element;
+	resetButton: Element;
 	input: HTMLInputElement;
 	newsletterId: string;
 }
@@ -53,7 +53,7 @@ function handleReset(bundle: FormBundle): void {
 	submitButton.removeAttribute('disabled');
 }
 
-function setup(form: HTMLFormElement): void {
+function setup(form: Element): void {
 	const newsletterId = form.getAttribute('data-newsletter-id');
 	const submitButton = form.querySelector('button[type=submit]');
 	const resetButton = form.querySelector('button[type=reset]');
@@ -71,8 +71,8 @@ function setup(form: HTMLFormElement): void {
 
 	const bundle: FormBundle = {
 		form,
-		submitButton: submitButton as HTMLButtonElement,
-		resetButton: resetButton as HTMLButtonElement,
+		submitButton,
+		resetButton,
 		input,
 		newsletterId,
 	};
@@ -93,12 +93,7 @@ function setup(form: HTMLFormElement): void {
 function initSignupForms(): void {
 	const signupForms = Array.from(
 		document.querySelectorAll(`form.${COMPONENT_BASE_CLASSNAME}`),
-	) as unknown as HTMLFormElement[];
-	// Should be cast directly to HTMLFormElement[] but:
-	// Prettier: "This assertion is unnecessary since it does not change the type of the expression"
-	// The compiler disagrees. It types querySelectorAll to NodeListOf<Element>, so does needs to be
-	// told they will be HTMLFormElement
-
+	);
 	signupForms.forEach(setup);
 }
 
