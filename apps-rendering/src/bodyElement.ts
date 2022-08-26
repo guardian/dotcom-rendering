@@ -115,7 +115,6 @@ interface AudioAtom {
 interface NewsletterSignUp extends Omit<Newsletter, 'theme'> {
 	kind: ElementKind.NewsletterSignUp;
 	theme: ArticleTheme;
-	successDescription: string;
 }
 
 type BodyElement =
