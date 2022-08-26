@@ -39,7 +39,7 @@
     "@babel/preset-env": "^7.15.6",
     "@creditkarma/thrift-server-core": "^0.16.1",
     "@emotion/jest": "^11.9.4",
-    "@guardian/apps-rendering-api-models": "^1.0.0",
+    "@guardian/apps-rendering-api-models": "^1.1.0",
     "@guardian/atoms-rendering": "^22.0.0",
     "@guardian/bridget": "^1.11.0",
     "@guardian/cdk": "37.0.0",

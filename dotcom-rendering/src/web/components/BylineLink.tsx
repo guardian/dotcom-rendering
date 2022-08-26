@@ -1,5 +1,9 @@
 import { ArticleDesign } from '@guardian/libs';
-import { getBylineComponentsFromTokens, isContributor } from '../../lib/byline';
+import {
+	getBylineComponentsFromTokens,
+	getSoleContributor,
+	isContributor,
+} from '../../lib/byline';
 
 type Props = {
 	byline: string;
@@ -88,12 +92,13 @@ function removeComma(bylinePart: string) {
 
 export const BylineLink = ({ byline, tags, format }: Props) => {
 	const tokens = bylineAsTokens(byline, tags);
-
+	const hasSingleContributor = !!getSoleContributor(tags, byline);
 	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
+
 	const renderedTokens = bylineComponents.map((bylineComponent) => {
 		if (typeof bylineComponent === 'string') {
 			const displayString =
-				format.design === ArticleDesign.Analysis
+				format.design === ArticleDesign.Analysis && hasSingleContributor
 					? removeComma(bylineComponent)
 					: bylineComponent;
 			return displayString ? <span>{displayString}</span> : null;
