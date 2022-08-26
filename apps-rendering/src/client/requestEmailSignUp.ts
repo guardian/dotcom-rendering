@@ -1,4 +1,3 @@
-
 /**
  * Simulate an async request to an email sign-up service.
  *
@@ -10,7 +9,8 @@
  *
  * @param emailAddress an unverified email address
  * @param newsletterIdentityName the identityName of a newsletter
- * @returns an object with a status code (500 if the email address has no "." character, otherwise 200) and message string.
+ * @returns an object with a status code (500 if the email address
+ * has no "." character, otherwise 200) and message string.
  */
 export async function fakeRequestToEmailSignupService(
 	emailAddress: string,
@@ -27,5 +27,8 @@ export async function fakeRequestToEmailSignupService(
 		};
 	}
 
-	return { status: 200, message: `fake signed up to ${newsletterIdentityName}` };
+	return {
+		status: 200,
+		message: `fake signed up to ${newsletterIdentityName}`,
+	};
 }

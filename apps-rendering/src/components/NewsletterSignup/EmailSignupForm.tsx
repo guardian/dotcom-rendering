@@ -1,6 +1,14 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import {
+	background,
+	fill,
+	hover,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	neutral,
 	pxToRem,
@@ -19,14 +27,6 @@ import {
 	TextInput,
 	userFeedbackThemeDefault,
 } from '@guardian/source-react-components';
-import {
-	background,
-	fill,
-	hover,
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
-import type { ArticleFormat } from '@guardian/libs';
-
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -76,7 +76,7 @@ const formStyle = css`
 	}
 `;
 
-const buttonStyle = (format: ArticleFormat) => css`
+const buttonStyle = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${fill.signUpFormButton(format)};
 	color: ${text.signUpFormButton(format)};
 	margin-bottom: ${remSpace[2]};
@@ -173,7 +173,7 @@ const EmailSignupForm: FC<Props> = ({
 				<div className="js-signup-form__feedback js-signup-form__feedback--success">
 					<InlineSuccess>
 						<span>
-							<b>Subscription Confirmed.{' '}</b>
+							<b>Subscription Confirmed. </b>
 							<span>{successDescription}</span>
 						</span>
 					</InlineSuccess>

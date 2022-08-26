@@ -20,9 +20,9 @@ import {
 import type { NewsletterSignUp } from 'bodyElement';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
+import EmailSignupForm from './EmailSignupForm';
 import PrivacyWording from './PrivacyWording';
 import SvgNewsletter from './SvgNewsletter';
-import EmailSignupForm from './EmailSignupForm';
 
 // ----- Component ----- //
 

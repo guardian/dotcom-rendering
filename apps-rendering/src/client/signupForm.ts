@@ -11,7 +11,7 @@ interface FormBundle {
 }
 
 // ----- Constants ----- //
-const COMPONENT_BASE_CLASSNAME = "js-signup-form" as const;
+const COMPONENT_BASE_CLASSNAME = 'js-signup-form' as const;
 const MODIFIER_CLASSNAME = {
 	waiting: `${COMPONENT_BASE_CLASSNAME}--waiting`,
 	success: `${COMPONENT_BASE_CLASSNAME}--success`,
