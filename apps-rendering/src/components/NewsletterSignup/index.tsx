@@ -19,7 +19,6 @@ import {
 } from '@guardian/source-foundations';
 import type { NewsletterSignUp } from 'bodyElement';
 import type { FC } from 'react';
-import HydratableEmailSignupForm from './HydratableEmailSignupForm';
 import { darkModeCss } from 'styles';
 import PrivacyWording from './PrivacyWording';
 import SvgNewsletter from './SvgNewsletter';
@@ -104,13 +103,18 @@ const noHeightFromTabletStyles = css`
 	}
 `;
 
-const USE_HYRDATED_FORM = false
-
 /**
  * NOTE: this component is non functional and is for demonstration only.
  */
 const NewsletterSignup: FC<Props> = ({ format, element }) => {
-	const { name, frequency, description, theme, identityName, successDescription } = element;
+	const {
+		name,
+		frequency,
+		description,
+		theme,
+		identityName,
+		successDescription,
+	} = element;
 	return (
 		<aside css={containerStyles(format)}>
 			<div css={stackBelowTabletStyles}>
@@ -128,16 +132,12 @@ const NewsletterSignup: FC<Props> = ({ format, element }) => {
 
 			<p css={descriptionStyles}>{description}</p>
 
-			{USE_HYRDATED_FORM ? (
-				<div
-					className="js-sign-up-form-container"
-					data-newsletter-id={identityName}
-				>
-					<HydratableEmailSignupForm newsletterId={identityName} />
-				</div>
-			) : (
-				<EmailSignupForm newsletterId={identityName} format={format} successDescription={successDescription} />
-			)}
+			<EmailSignupForm
+				newsletterId={identityName}
+				format={format}
+				successDescription={successDescription}
+			/>
+
 			<PrivacyWording useCaptcha={false} format={format} />
 		</aside>
 	);

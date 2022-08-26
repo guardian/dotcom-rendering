@@ -37,7 +37,6 @@ import ReactDOM from 'react-dom';
 import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
-import { createSignUpComponentFromProps } from './createSignUpComponentFromProps';
 import { initSignupForms } from './signupForm';
 
 // ----- Run ----- //
@@ -480,23 +479,6 @@ function hydrateClickToView(): void {
 		);
 }
 
-function hydrateSignupForms(): void {
-	document
-		.querySelectorAll('.js-sign-up-form-container')
-		.forEach((container) =>
-			either(
-				(error: string) => {
-					logger.error(
-						`Failed to create SignupForm for hydration: ${error}`,
-					);
-				},
-				(signupContainer: ReactElement) => {
-					ReactDOM.hydrate(signupContainer, container);
-				},
-			)(createSignUpComponentFromProps(container)),
-		);
-}
-
 const isIframe = (elem: Element): elem is HTMLIFrameElement =>
 	elem.tagName === 'IFRAME';
 
@@ -528,6 +510,4 @@ hydrateAtoms();
 localDates();
 richLinks();
 hydrateClickToView();
-
-hydrateSignupForms();
 initSignupForms();

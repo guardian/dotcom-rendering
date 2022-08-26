@@ -1,7 +1,12 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import { partition } from '@guardian/types';
@@ -15,6 +20,7 @@ import LabsLayout from 'components/Layout/LabsLayout';
 import LiveLayout from 'components/Layout/LiveLayout';
 import MediaLayout from 'components/Layout/MediaLayout';
 import StandardLayout from 'components/Layout/StandardLayout';
+import NewsletterSignup from 'components/NewsletterSignup';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
@@ -127,7 +133,26 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		}
 
 		return (
-			<StandardLayout item={item}>{render(item, body)}</StandardLayout>
+			<StandardLayout item={item}>
+				<NewsletterSignup
+					element={{
+						kind: ElementKind.NewsletterSignUp,
+						identityName: 'patriarchy',
+						description:
+							'Reviewing the most important stories on feminism and sexism and those fighting for equality',
+						name: 'The Week in Patriarchy',
+						frequency: 'Weekly',
+						theme: ArticlePillar.Opinion,
+						successDescription: 'You are now signed up, but not.'
+					}}
+					format={{
+						theme: ArticlePillar.News,
+						design: ArticleDesign.Standard,
+						display: ArticleDisplay.Standard,
+					}}
+				/>
+				{render(item, body)}
+			</StandardLayout>
 		);
 	}
 
