@@ -14,10 +14,10 @@ export const pageTemplate = ({
 	html,
 	windowGuardian,
 	gaPath,
+	keywords,
 	ampLink,
 	openGraphData,
 	twitterData,
-	keywords,
 	initTwitter = '',
 	recipeMarkup,
 	offerHttp3,
@@ -31,10 +31,10 @@ export const pageTemplate = ({
 	html: string;
 	windowGuardian: string;
 	gaPath: { modern: string; legacy: string };
+	keywords: string;
 	ampLink?: string;
 	openGraphData: { [key: string]: string };
 	twitterData: { [key: string]: string };
-	keywords: string;
 	initTwitter?: string;
 	recipeMarkup?: string;
 	offerHttp3: boolean;
