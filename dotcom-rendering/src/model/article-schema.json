@@ -3893,10 +3893,7 @@
                     "type": "string"
                 },
                 "switches": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "boolean"
-                    }
+                    "$ref": "#/definitions/Switches"
                 },
                 "abTests": {
                     "description": "This type is not support by JSON-schema, it evaluates as `object`",
@@ -4069,6 +4066,12 @@
                 "stage",
                 "switches"
             ]
+        },
+        "Switches": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "boolean"
+            }
         },
         "CAPITrailType": {
             "type": "object",
