@@ -36,10 +36,8 @@ const extractH3 = (element: CAPIElement): string => {
 	if (isFalseH3(element)) {
 		return (
 			frag.firstElementChild?.innerHTML
-				.split('<strong>')
-				.join('')
-				.split('</strong>')
-				.join('') ?? ''
+				.replaceAll('<strong>', '')
+				.replaceAll('</strong>', '') ?? ''
 		);
 	}
 	return '';
