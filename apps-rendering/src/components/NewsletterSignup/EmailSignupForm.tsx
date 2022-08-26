@@ -171,7 +171,12 @@ const EmailSignupForm: FC<Props> = ({
 					</Button>
 				</div>
 				<div className="js-signup-form__feedback js-signup-form__feedback--success">
-					<InlineSuccess>{successDescription}</InlineSuccess>
+					<InlineSuccess>
+						<span>
+							<b>Subscription Confirmed.{' '}</b>
+							<span>{successDescription}</span>
+						</span>
+					</InlineSuccess>
 				</div>
 				<div
 					className="js-signup-form__feedback js-signup-form__feedback--failure"
