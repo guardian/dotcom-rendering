@@ -19,18 +19,24 @@ val libraryDeps = Seq(
   "com.gu" % "content-entity-thrift" % contentEntityVersion
 )
 
+lazy val commonSettings = Seq(
+    description := "Models used by the apps-rendering API",
+	// downgrade scrooge reserved word clashes to warnings
+	Compile / scroogeDisableStrict := true,
+	Compile / scroogeThriftSourceFolder := baseDirectory.value / "../thrift/src/main/thrift",
+	Compile / scroogeThriftDependencies ++= scroogeDependencies,
+)
+
 ThisBuild / organization := "com.gu"
 ThisBuild / scalaVersion := "2.12.11"
 ThisBuild / licenses += ("Apache-2.0", url("https://www.apache.org/licenses/LICENSE-2.0.html"))
 
 lazy val scalaApiModels = project.in(file("api-models") / "scala")
+  .settings(commonSettings)
   .settings(
     name := "apps-rendering-api-models",
-    description := "Models used by the apps-rendering API",
 
 	Compile / scroogeLanguages := Seq("scala"),
-	Compile / scroogeThriftSourceFolder := baseDirectory.value / "../thrift/src/main/thrift",
-	Compile / scroogeThriftDependencies ++= scroogeDependencies,
 
     libraryDependencies ++= Seq(
       "org.apache.thrift" % "libthrift" % "0.15.0",
@@ -73,16 +79,14 @@ lazy val scalaApiModels = project.in(file("api-models") / "scala")
 
 lazy val tsApiModels = project.in(file("api-models") / "ts")
   .enablePlugins(ScroogeTypescriptGen)
+  .settings(commonSettings)
   .settings(
     name := "apps-rendering-api-models-ts",
     scroogeTypescriptNpmPackageName := "@guardian/apps-rendering-api-models",
     Compile / scroogeDefaultJavaNamespace := scroogeTypescriptNpmPackageName.value,
-    description := "Models used by the apps-rendering API",
 
     scroogeTypescriptPackageLicense := "Apache-2.0",
-	Compile / scroogeThriftSourceFolder := baseDirectory.value / "../thrift/src/main/thrift",
 	Compile / scroogeLanguages := Seq("typescript"),
-	Compile / scroogeThriftDependencies ++= scroogeDependencies,
 
     scroogeTypescriptPackageMapping := Map(
       "content-api-models" -> "@guardian/content-api-models",
