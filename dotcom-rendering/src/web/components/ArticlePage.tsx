@@ -25,14 +25,14 @@ type Props = {
 
 /**
  * @description
- * Article is a high level wrapper for pages on Dotcom. Sets strict mode and some globals
+ * Article is a high level wrapper for article pages on Dotcom. Sets strict mode and some globals
  *
  * @param {Props} props
  * @param {CAPIArticleType} props.CAPIArticle - The article JSON data
  * @param {NAVType} props.NAV - The article JSON data
  * @param {ArticleFormat} props.format - The format model for the article
  * */
-export const Article = ({ CAPIArticle, NAV, format }: Props) => {
+export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
 	return (
 		<StrictMode>
 			<Global

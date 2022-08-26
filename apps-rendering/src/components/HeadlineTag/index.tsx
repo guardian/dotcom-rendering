@@ -4,12 +4,13 @@ import { background } from '@guardian/common-rendering/src/editorialPalette/back
 import { text } from '@guardian/common-rendering/src/editorialPalette/text';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { from, headline } from '@guardian/source-foundations';
+import { from, headline, remSpace } from '@guardian/source-foundations';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss } from '../../styles';
 
 const headlineTagWrapper = css`
-	${articleWidthStyles}
+	${articleWidthStyles};
+	margin-bottom: ${remSpace[1]};
 `;
 
 const headlineTagStyles = (format: ArticleFormat): SerializedStyles => css`

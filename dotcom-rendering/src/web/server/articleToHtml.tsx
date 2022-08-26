@@ -8,12 +8,12 @@ import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { CAPIArticleType } from '../../types/frontend';
-import { Article } from '../components/Article';
+import { ArticlePage } from '../components/ArticlePage';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { getHttp3Url } from '../lib/getHttp3Url';
-import { articleTemplate } from './articleTemplate';
 import { extractExpeditedIslands } from './extractIslands';
+import { pageTemplate } from './pageTemplate';
 import { recipeSchema } from './temporaryRecipeStructuredData';
 
 interface Props {
@@ -70,7 +70,7 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 
 	const html = renderToString(
 		<CacheProvider value={cache}>
-			<Article format={format} CAPIArticle={CAPIArticle} NAV={NAV} />
+			<ArticlePage format={format} CAPIArticle={CAPIArticle} NAV={NAV} />
 		</CacheProvider>,
 	);
 
@@ -88,25 +88,7 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
-	const { offerHttp3 } = CAPIArticle.config.switches;
-
-	/**
-	 * Preload the following woff2 font files
-	 * TODO: Identify critical fonts to preload
-	 */
-	const fontFiles = [
-		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2',
-		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
-		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
-		// 'http://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
-	].map((font) => (offerHttp3 ? getHttp3Url(font) : font));
+	const { offerHttp3 = false } = CAPIArticle.config.switches;
 
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
@@ -237,13 +219,12 @@ window.twttr = (function(d, s, id) {
 
 	const recipeMarkup = url in recipeSchema ? recipeSchema[url] : undefined;
 
-	return articleTemplate({
+	return pageTemplate({
 		linkedData,
 		priorityScriptTags,
 		lowPriorityScriptTags,
 		css: extractedCss,
 		html,
-		fontFiles,
 		title,
 		description: CAPIArticle.trailText,
 		windowGuardian,
@@ -257,5 +238,6 @@ window.twttr = (function(d, s, id) {
 				? initTwitter
 				: undefined,
 		recipeMarkup,
+		offerHttp3,
 	});
 };

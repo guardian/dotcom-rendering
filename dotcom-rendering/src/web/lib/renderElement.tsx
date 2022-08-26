@@ -7,7 +7,7 @@ import {
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { getSharingUrls } from '../../lib/sharing-urls';
-import type { ServerSideTests } from '../../types/config';
+import type { ServerSideTests, Switches } from '../../types/config';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
@@ -79,7 +79,7 @@ type Props = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	switches: { [key: string]: boolean };
+	switches: Switches;
 	isPinnedPost?: boolean;
 	abTests?: ServerSideTests;
 };
