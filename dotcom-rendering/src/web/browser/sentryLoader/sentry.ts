@@ -51,6 +51,11 @@ Sentry.init({
 	},
 });
 
+Sentry.setTag(
+	'dcr.bundle',
+	window.guardian.config.page.abTests.jsBundleVariant,
+);
+
 export const reportError = (error: Error, feature?: string): void => {
 	Sentry.withScope(() => {
 		if (feature) {
