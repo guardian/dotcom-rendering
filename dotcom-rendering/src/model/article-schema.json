@@ -361,8 +361,8 @@
                     "url": {
                         "type": "string"
                     },
-                    "onwardsType": {
-                        "$ref": "#/definitions/OnwardsType"
+                    "onwardsSource": {
+                        "$ref": "#/definitions/OnwardsSource"
                     },
                     "format": {
                         "type": "object",
@@ -390,7 +390,7 @@
                 "required": [
                     "format",
                     "heading",
-                    "onwardsType",
+                    "onwardsSource",
                     "trails"
                 ]
             }
@@ -3899,10 +3899,7 @@
                     "type": "string"
                 },
                 "switches": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "boolean"
-                    }
+                    "$ref": "#/definitions/Switches"
                 },
                 "abTests": {
                     "description": "This type is not support by JSON-schema, it evaluates as `object`",
@@ -4075,6 +4072,12 @@
                 "stage",
                 "switches"
             ]
+        },
+        "Switches": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "boolean"
+            }
         },
         "CAPITrailType": {
             "type": "object",
@@ -4289,16 +4292,16 @@
                 "sponsorName"
             ]
         },
-        "OnwardsType": {
+        "OnwardsSource": {
             "enum": [
                 "curated-content",
-                "default-onwards",
                 "more-galleries",
                 "more-media-in-section",
                 "more-on-this-story",
                 "related-content",
                 "related-stories",
-                "series"
+                "series",
+                "unknown-source"
             ],
             "type": "string"
         },

@@ -321,7 +321,17 @@ const textElement =
 			case 'SUB':
 				return h('sub', { key }, children);
 			case 'SUP':
-				return h('sup', { key }, children);
+				return styledH(
+					'sup',
+					{
+						key,
+						css: {
+							fontSize: 'smaller',
+							verticalAlign: 'super',
+						},
+					},
+					children,
+				);
 			default:
 				return null;
 		}

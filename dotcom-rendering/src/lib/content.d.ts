@@ -683,10 +683,6 @@ interface TimelineEvent {
 	toUnixDate?: number;
 }
 
-interface Switches {
-	[key: string]: boolean;
-}
-
 type RatingSizeType = 'large' | 'medium' | 'small';
 
 // -------------------------------------

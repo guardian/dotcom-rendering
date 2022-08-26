@@ -6,20 +6,20 @@ export interface Notification {
 	message: string;
 }
 
+const hasTargetAndMessage = (
+	card: BrazeCard,
+): card is BrazeCard & { extras: Notification } =>
+	Boolean(card.extras.message) && Boolean(card.extras.target);
+
 export const mapBrazeCardsToNotifications = (
 	cards: BrazeCard[],
 ): Notification[] => {
-	return cards
-		.filter(
-			(card: BrazeCard) =>
-				Boolean(card.extras.message) && Boolean(card.extras.target),
-		)
-		.map((card) => {
-			return {
-				target: card.extras.target,
-				message: card.extras.message,
-			};
-		});
+	return cards.filter(hasTargetAndMessage).map((card) => {
+		return {
+			target: card.extras.target,
+			message: card.extras.message,
+		};
+	});
 };
 
 const groupNotificationsByTarget = (

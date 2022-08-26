@@ -12,6 +12,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import type { NavType } from '../../model/extract-nav';
+import type { Switches } from '../../types/config';
 import type { CAPIArticleType } from '../../types/frontend';
 import {
 	adCollapseStyles,
@@ -49,7 +50,7 @@ const Renderer: React.FC<{
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	switches: { [key: string]: boolean };
+	switches: Switches;
 }> = ({
 	format,
 	elements,
@@ -221,7 +222,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 							}
 							urls={CAPIArticle.nav.readerRevenueLinks.header}
 							remoteHeader={
-								CAPIArticle.config.switches.remoteHeader
+								!!CAPIArticle.config.switches.remoteHeader
 							}
 							contributionsServiceUrl={
 								CAPIArticle.contributionsServiceUrl
@@ -328,7 +329,7 @@ export const FullPageInteractiveLayout = ({
 				backgroundColour={palette.background.article}
 				element="main"
 			>
-				<article>
+				<article id="maincontent" tabIndex={-1}>
 					<Renderer
 						format={format}
 						elements={
@@ -404,10 +405,10 @@ export const FullPageInteractiveLayout = ({
 							CAPIArticle.shouldHideReaderRevenue
 						}
 						remoteBannerSwitch={
-							CAPIArticle.config.switches.remoteBanner
+							!!CAPIArticle.config.switches.remoteBanner
 						}
 						puzzleBannerSwitch={
-							CAPIArticle.config.switches.puzzlesBanner
+							!!CAPIArticle.config.switches.puzzlesBanner
 						}
 						tags={CAPIArticle.tags}
 					/>

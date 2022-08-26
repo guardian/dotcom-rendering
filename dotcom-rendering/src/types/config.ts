@@ -20,6 +20,10 @@ export type ServerSideTests = {
 
 export type ServerSideTestNames = `${string}Control` | `${string}Variant`;
 
+export interface Switches {
+	[key: string]: boolean | undefined;
+}
+
 /**
  * the config model will contain useful app/site
  * level data. Although currently derived from the config model
@@ -31,7 +35,7 @@ export interface ConfigType extends CommercialConfigType {
 	sentryPublicApiKey: string;
 	sentryHost: string;
 	dcrSentryDsn: string;
-	switches: { [key: string]: boolean };
+	switches: Switches;
 	abTests: ServerSideTests;
 	dfpAccountId: string;
 	commercialBundleUrl: string;
