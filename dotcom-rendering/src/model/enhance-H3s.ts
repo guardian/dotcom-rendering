@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+import { sanitiseHTML } from './sanitise';
 
 /**
  * Checks if this element is a 'false h3' based on the convention: <p><strong>H3 text</strong></p>
@@ -37,11 +38,9 @@ interface FalseH3 extends TextBlockElement {
 
 const extractH3 = (element: FalseH3): string => {
 	const frag = JSDOM.fragment(element.html);
-	return (
-		frag.firstElementChild?.innerHTML
-			.replaceAll('<strong>', '')
-			.replaceAll('</strong>', '') ?? ''
-	);
+	return sanitiseHTML(frag.firstElementChild?.innerHTML ?? '', {
+		FORBID_TAGS: ['strong'],
+	});
 };
 
 /**
