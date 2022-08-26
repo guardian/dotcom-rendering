@@ -34,7 +34,7 @@ export const pageTemplate = ({
 	keywords: string;
 	ampLink?: string;
 	openGraphData?: { [key: string]: string };
-	twitterData: { [key: string]: string };
+	twitterData?: { [key: string]: string };
 	initTwitter?: string;
 	recipeMarkup?: string;
 	offerHttp3: boolean;
@@ -89,7 +89,8 @@ export const pageTemplate = ({
 	// See https://developer.twitter.com/en/docs/twitter-for-websites/webpage-properties/overview
 	const twitterSecAndPrivacyMetaTags = `<meta name="twitter:dnt" content="on">`;
 
-	const twitterMetaTags = generateMetaTags(twitterData, 'name');
+	const twitterMetaTags =
+		twitterData && generateMetaTags(twitterData, 'name');
 
 	// Duplicated prefetch and preconnect tags from DCP:
 	// Documented here: https://github.com/guardian/frontend/pull/12935
@@ -209,7 +210,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 
                 ${twitterSecAndPrivacyMetaTags}
 
-                ${twitterMetaTags}
+                ${twitterMetaTags ?? ''}
 
                 <!--  This tag enables pages to be featured in Google Discover as large previews
                     See: https://developers.google.com/search/docs/advanced/mobile/google-discover?hl=en&visit_id=637424198370039526-3805703503&rd=1 -->
