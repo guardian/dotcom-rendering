@@ -1,7 +1,6 @@
 import type { ConfigType, ServerSideTests, Switches } from '../types/config';
 import type { EditionId } from '../types/edition';
 import type { DCRFrontType } from '../types/front';
-import type { CAPIArticleType } from '../types/frontend';
 
 export interface WindowGuardianConfig {
 	isDotcomRendering: boolean;
@@ -70,15 +69,43 @@ interface WindowGuardianFrontConfig {
 }
 
 export const makeWindowGuardian = ({
-	CAPIArticle,
+	stage,
+	frontendAssetsFullURL,
+	revisionNumber,
+	sentryPublicApiKey,
+	sentryHost,
+	keywordIds,
+	dfpAccountId,
+	adUnit,
+	ajaxUrl,
+	shouldHideReaderRevenue,
+	isPaidContent,
+	googletagUrl,
+	switches,
+	abTests,
 	editionId,
 	contentType,
+	brazeApiKey,
 	GAData,
 	unknownConfig = {},
 }: {
-	CAPIArticle: CAPIArticleType;
+	stage: StageType;
+	frontendAssetsFullURL: string;
+	revisionNumber: string;
+	sentryPublicApiKey: string;
+	sentryHost: string;
+	keywordIds: string;
+	dfpAccountId: string;
+	adUnit: string;
+	ajaxUrl: string;
+	shouldHideReaderRevenue: boolean;
+	isPaidContent: boolean;
+	googletagUrl: string;
+	switches: Switches;
+	abTests: ServerSideTests;
 	editionId: EditionId;
 	contentType?: string;
+	brazeApiKey?: string;
 	GAData: GADataType;
 	/**
 	 * In the case of articles we don't know the exact values that need to exist
@@ -105,37 +132,36 @@ export const makeWindowGuardian = ({
 	};
 	GAData: GADataType;
 } => {
-	const { config } = CAPIArticle;
 	return {
 		config: {
 			// This indicates to the client side code that we are running a dotcom-rendering rendered page.
 			isDotcomRendering: true,
 			isDev: process.env.NODE_ENV !== 'production',
-			stage: config.stage,
-			frontendAssetsFullURL: config.frontendAssetsFullURL,
+			stage: stage,
+			frontendAssetsFullURL: frontendAssetsFullURL,
 			page: Object.assign(unknownConfig, {
 				dcrCouldRender: true,
 				contentType: contentType ?? '',
 				edition: editionId,
-				revisionNumber: config.revisionNumber,
+				revisionNumber,
 				dcrSentryDsn:
 					'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
-				sentryPublicApiKey: config.sentryPublicApiKey,
-				sentryHost: config.sentryHost,
-				keywordIds: config.keywordIds,
-				dfpAccountId: config.dfpAccountId,
-				adUnit: config.adUnit,
+				sentryPublicApiKey,
+				sentryHost,
+				keywordIds,
+				dfpAccountId,
+				adUnit,
 				showRelatedContent: true,
-				ajaxUrl: config.ajaxUrl,
-				shouldHideReaderRevenue:
-					config.shouldHideReaderRevenue ?? false,
-				isPaidContent: config.isPaidContent ?? false,
+				ajaxUrl,
+				shouldHideReaderRevenue,
+				isPaidContent,
+				brazeApiKey,
 			}),
 			libs: {
-				googletag: config.googletagUrl,
+				googletag: googletagUrl,
 			},
-			switches: config.switches,
-			tests: config.abTests,
+			switches: switches,
+			tests: abTests,
 			ophan: {
 				pageViewId: '',
 				browserId: '',

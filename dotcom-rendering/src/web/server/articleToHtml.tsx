@@ -175,9 +175,23 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	const windowGuardian = escapeData(
 		JSON.stringify(
 			makeWindowGuardian({
-				CAPIArticle,
 				editionId: CAPIArticle.editionId,
+				stage: CAPIArticle.config.stage,
+				frontendAssetsFullURL: CAPIArticle.config.frontendAssetsFullURL,
+				revisionNumber: CAPIArticle.config.revisionNumber,
+				sentryPublicApiKey: CAPIArticle.config.sentryPublicApiKey,
+				sentryHost: CAPIArticle.config.sentryHost,
+				keywordIds: CAPIArticle.config.keywordIds,
+				dfpAccountId: CAPIArticle.config.dfpAccountId,
+				adUnit: CAPIArticle.config.adUnit,
+				ajaxUrl: CAPIArticle.config.ajaxUrl,
+				googletagUrl: CAPIArticle.config.googletagUrl,
+				switches: CAPIArticle.config.switches,
+				abTests: CAPIArticle.config.abTests,
+				brazeApiKey: CAPIArticle.config.brazeApiKey,
+				isPaidContent: CAPIArticle.pageType.isPaidContent,
 				contentType: CAPIArticle.contentType,
+				shouldHideReaderRevenue: CAPIArticle.shouldHideReaderRevenue,
 				GAData: extractGA({
 					webTitle: CAPIArticle.webTitle,
 					format: CAPIArticle.format,
