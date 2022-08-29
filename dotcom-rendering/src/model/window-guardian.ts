@@ -68,6 +68,10 @@ interface WindowGuardianFrontConfig {
 	};
 }
 
+/**
+ * This function constructs the data object that gets written to the global
+ * window.guardian property
+ */
 export const makeWindowGuardian = ({
 	stage,
 	frontendAssetsFullURL,
