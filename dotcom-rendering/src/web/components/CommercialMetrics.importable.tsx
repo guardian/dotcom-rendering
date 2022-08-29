@@ -48,7 +48,7 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 			);
 
 		const isDev =
-			window.guardian.config.page.isDev ||
+			window.guardian.config.isDev ||
 			window.location.hostname.includes(
 				process.env.HOSTNAME || 'localhost',
 			);
