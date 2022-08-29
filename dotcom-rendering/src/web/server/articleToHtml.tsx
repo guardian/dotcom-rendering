@@ -174,9 +174,9 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	 */
 	const windowGuardian = escapeData(
 		JSON.stringify(
-			makeWindowGuardian(
+			makeWindowGuardian({
 				CAPIArticle,
-				extractGA({
+				GAData: extractGA({
 					webTitle: CAPIArticle.webTitle,
 					format: CAPIArticle.format,
 					sectionName: CAPIArticle.sectionName,
@@ -186,7 +186,7 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 					editionId: CAPIArticle.editionId,
 					beaconURL: CAPIArticle.beaconURL,
 				}),
-			),
+			}),
 		),
 	);
 
