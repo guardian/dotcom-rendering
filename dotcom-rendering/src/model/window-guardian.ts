@@ -1,4 +1,4 @@
-import { extract as extractGA } from '../model/extract-ga';
+import { extractGA } from '../model/extract-ga';
 import type { ConfigType, ServerSideTests, Switches } from '../types/config';
 import type { EditionId } from '../types/edition';
 import type { DCRFrontType } from '../types/front';

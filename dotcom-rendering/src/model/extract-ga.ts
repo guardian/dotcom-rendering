@@ -48,7 +48,7 @@ const formatStringForGa = (string: string): string =>
 	string.toLowerCase().split(' ').join('');
 
 // we should not bring down the website if a trackable field is missing!
-export const extract = (data: CAPIArticleType): GADataType => ({
+export const extractGA = (data: CAPIArticleType): GADataType => ({
 	webTitle: data.webTitle,
 	pillar: convertToLegacyPillar(data.format.theme),
 	section: data.sectionName || '',
