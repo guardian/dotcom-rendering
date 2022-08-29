@@ -6,9 +6,24 @@ type Props = {
 	imagePosition: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
+	imageType?: CardImageType;
 };
 
-const decideDirection = (imagePosition?: ImagePositionType) => {
+const decideDirection = (
+	imagePosition?: ImagePositionType,
+	imageType?: CardImageType,
+) => {
+	if (imageType === 'avatar') {
+		switch (imagePosition) {
+			case 'left':
+			case 'right':
+				return 'row-reverse';
+			case 'top':
+			case 'bottom':
+			default:
+				return 'column-reverse';
+		}
+	}
 	switch (imagePosition) {
 		case 'top':
 			return 'column';
@@ -38,11 +53,15 @@ const decideWidth = (minWidthInPixels?: number) => {
 const decidePosition = (
 	imagePosition: ImagePositionType,
 	imagePositionOnMobile: ImagePositionType,
+	imageType?: CardImageType,
 ) => {
 	return css`
-		flex-direction: ${decideDirection(imagePosition)};
+		flex-direction: ${decideDirection(imagePosition, imageType)};
 		${until.tablet} {
-			flex-direction: ${decideDirection(imagePositionOnMobile)};
+			flex-direction: ${decideDirection(
+				imagePositionOnMobile,
+				imageType,
+			)};
 		}
 	`;
 };
@@ -52,6 +71,7 @@ export const CardLayout = ({
 	imagePosition,
 	imagePositionOnMobile,
 	minWidthInPixels,
+	imageType,
 }: Props) => (
 	<div
 		css={[
@@ -60,7 +80,7 @@ export const CardLayout = ({
 				flex-basis: 100%;
 			`,
 			decideWidth(minWidthInPixels),
-			decidePosition(imagePosition, imagePositionOnMobile),
+			decidePosition(imagePosition, imagePositionOnMobile, imageType),
 		]}
 	>
 		{children}

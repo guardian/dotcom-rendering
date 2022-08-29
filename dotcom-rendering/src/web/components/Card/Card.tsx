@@ -305,6 +305,7 @@ export const Card = ({
 					imageUrl !== undefined ? imagePositionOnMobile : 'top'
 				}
 				minWidthInPixels={minWidthInPixels}
+				imageType={imageType}
 			>
 				{imageType === 'mainmedia' && (
 					<ImageWrapper
