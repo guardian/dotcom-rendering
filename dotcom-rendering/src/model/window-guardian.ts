@@ -1,5 +1,8 @@
 import { extract as extractGA } from '../model/extract-ga';
+import type { ConfigType, ServerSideTests, Switches } from '../types/config';
+import type { EditionId } from '../types/edition';
 import type { DCRFrontType } from '../types/front';
+import type { CAPIArticleType } from '../types/frontend';
 
 export interface WindowGuardianConfig {
 	isDotcomRendering: boolean;
@@ -25,7 +28,7 @@ export interface WindowGuardianConfig {
 	libs: {
 		googletag: string;
 	};
-	switches: { [key: string]: boolean };
+	switches: Switches;
 	tests: ServerSideTests;
 	ophan: {
 		pageViewId: string;
@@ -56,7 +59,7 @@ interface WindowGuardianFrontConfig {
 	libs: {
 		googletag: string;
 	};
-	switches: { [key: string]: boolean };
+	switches: Switches;
 	tests: ServerSideTests;
 	ophan: {
 		pageViewId: string;

@@ -7,6 +7,7 @@ import {
 	neutral,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import type { NavType } from '../../model/extract-nav';
 import type { DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
 import { Footer } from '../components/Footer';
@@ -87,7 +88,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							}
 							discussionApiUrl={front.config.discussionApiUrl}
 							urls={front.nav.readerRevenueLinks.header}
-							remoteHeader={front.config.switches.remoteHeader}
+							remoteHeader={!!front.config.switches.remoteHeader}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
 						/>
@@ -146,7 +147,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 			<main data-layout="FrontLayout">
 				{front.pressedPage.collections.map((collection, index) => {
-					// TODO: We also need to support treats containers
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
 						collection.backfill,
@@ -154,18 +154,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					// There are some containers that have zero trails. We don't want to render these
 					if (trails.length === 0) return null;
 
-					// This is a legacy container used to add palette styling on Frontend. DCR ignores it
-					if (
-						collection.displayName ===
-						'Palette styles new do not delete'
-					) {
-						return null;
-					}
-
 					const ophanName = ophanComponentId(collection.displayName);
-					const ophanComponentLink = `container-${
-						index + 1
-					} | ${ophanName}`;
+					const ophanComponentLink = `container-${index} | ${ophanName}`;
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
@@ -178,7 +168,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								ophanComponentLink={ophanComponentLink}
 								ophanComponentName={ophanName}
 								containerName={collection.collectionType}
-								element="section"
 							>
 								<Snap snapData={trails[0].snapData} />
 							</Section>
@@ -189,13 +178,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<Section
 							key={collection.id}
 							title={collection.displayName}
-							// TODO: This logic should be updated, as this relies
-							// on the first container being 'palette styles do not delete'
-							showTopBorder={index > 1}
+							showTopBorder={index > 0}
 							padContent={false}
 							centralBorder="partial"
 							url={collection.href}
-							// same as above re 'palette styles' for index increment
 							ophanComponentLink={ophanComponentLink}
 							ophanComponentName={ophanName}
 							containerName={collection.collectionType}

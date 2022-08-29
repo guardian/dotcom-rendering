@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { brand } from '@guardian/source-foundations';
+import type { EditionId } from '../../types/edition';
 import { EditionDropdown } from './EditionDropdown.importable';
 import { Hide } from './Hide';
 import { Island } from './Island';

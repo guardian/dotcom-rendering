@@ -11,6 +11,8 @@
  *    gen-fixtures.ts directly.
  */
 
+import type { CAPIArticleType } from '../../../src/types/frontend';
+
 export const PrintShop: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '',
@@ -220,6 +222,10 @@ export const PrintShop: CAPIArticleType = {
 		'The latest in a Guardian Print Shop series featuring classic sports images. This week’s picture shows England’s greatest captain, Bobby Moore, in the autumn of his international career',
 	subMetaKeywordLinks: [
 		{
+			url: '/football/england',
+			title: 'England',
+		},
+		{
 			url: '/artanddesign/photography',
 			title: 'Photography',
 		},
@@ -348,11 +354,6 @@ export const PrintShop: CAPIArticleType = {
 						title: 'Football',
 						url: '/football',
 						children: [
-							{
-								title: "Women's Euro 2022",
-								url: '/football/women-s-euro-2022',
-								longTitle: 'football/women-s-euro-2022',
-							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -554,11 +555,6 @@ export const PrintShop: CAPIArticleType = {
 						title: 'Football',
 						url: '/football',
 						children: [
-							{
-								title: "Women's Euro 2022",
-								url: '/football/women-s-euro-2022',
-								longTitle: 'football/women-s-euro-2022',
-							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -1620,47 +1616,47 @@ export const PrintShop: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '576dc62c-60f2-434f-bfb5-7a54ae75031d',
+					elementId: 'f7c65c93-947d-481c-ac02-c8b3e39fa826',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>This photograph captures Bobby Moore in 1973, standing statuesque in the twilight of his international career, just a few months after winning his 100th cap for England. It was shot prior to a 1-0 friendly win over Scotland which would prove to be Moore’s final victory in an England shirt at Wembley. It possesses a kind of majesty reminiscent of the bronze statue of him at the new Wembley, beneath which an inscription reads: <em>‘Immaculate footballer. Imperial <a href="https://en.wikipedia.org/wiki/Defender_(association_football)">defender</a>. Immortal hero of <a href="https://en.wikipedia.org/wiki/1966_FIFA_World_Cup_Final">1966</a>. First <a href="https://en.wikipedia.org/wiki/List_of_England_international_footballers">Englishman</a> to raise the <a href="https://en.wikipedia.org/wiki/FIFA_World_Cup_Trophy">World Cup</a> aloft. Favourite son of London’s <a href="https://en.wikipedia.org/wiki/East_End_of_London">East End</a>. Finest legend of <a href="https://en.wikipedia.org/wiki/West_Ham_United_F.C.">West Ham United</a>. National Treasure. Master of <a href="https://en.wikipedia.org/wiki/Wembley_Stadium_(1923)">Wembley</a>. Lord of the game. <a href="https://en.wikipedia.org/wiki/List_of_England_national_football_team_captains">Captain</a> extraordinary. Gentleman of all time.’</em></p>',
-					elementId: '6442a2e7-f1ec-472d-a18d-3396a0bcc27b',
+					elementId: '8d509efe-85b5-4f5e-b129-7e2cc5ce0fbe',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Photograph: Gerry Cranham / Offside</em></p>',
-					elementId: '4abb8f0f-f9b2-495b-a7ff-ac55eeb0828b',
+					elementId: '08945320-6c90-4920-ba7e-4eb401191619',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Words: Jonny Weeks</em></p>',
-					elementId: 'b91a4994-ca7c-430e-8451-1fba515edd10',
+					elementId: 'b9a6ae9f-1d9e-47dc-81c1-441bd2b0031e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy your exclusive print <a href="https://guardianprintshop.com/collections/the-big-sport-picture">here</a></strong></p>',
-					elementId: '910b3a8e-f219-4964-be77-555ddd922723',
+					elementId: '37e63b4f-a137-4b77-a4f8-7eb3c2105c21',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Price</strong> <br>£55 including free delivery (30x40cm print size).</p>',
-					elementId: '46817fbc-1807-44b0-bce7-35e12c8a520d',
+					elementId: '02715a7b-c2fd-464a-85a8-47709f728c11',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Prints<br></strong>Photographs are presented on museum-grade, fine-art paper stocks, with archival standards guaranteeing quality for 100-plus years. All editions are printed and quality checked by experts at theprintspace, the UK’s leading photo and fine-art print provider.</p>',
-					elementId: '2993ef23-b60d-41a9-8f00-683822212177',
+					elementId: '2e24cc7a-b109-43de-bb6f-d5bd1e892478',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Delivery<br></strong>Artworks are dispatched via Royal Mail and delivered within three to five working days. Theprintspace takes great care in packaging your artwork, with a no-quibble satisfaction guarantee should you be unhappy in any way. Global shipping is available.</p>',
-					elementId: '1910520d-4aaf-4cbf-b923-03d6b7132070',
+					elementId: '7610a5ee-c9f6-42c0-9db9-39f29b59fefa',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Contact</strong><br>Email: <a href="mailto:guardianprintsales@theprintspace.co.uk">guardianprintsales@theprintspace.co.uk</a></p>',
-					elementId: '7ac16283-1927-418d-9087-5e611c840d77',
+					elementId: '376a38a1-1b96-449f-a1f9-91e10c2fecbc',
 				},
 			],
 			attributes: {

@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import type { Branding } from '@guardian/apps-rendering-api-models/branding';
+import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Asset } from '@guardian/content-api-models/v1/asset';
@@ -65,6 +66,7 @@ interface Fields extends ArticleFormat {
 	relatedContent: Option<ResizedRelatedContent>;
 	logo: Option<Logo>;
 	webUrl: string;
+	promotedNewsletter: Option<Newsletter>;
 }
 
 interface MatchReport extends Fields {
@@ -153,6 +155,16 @@ interface PrintShop extends Fields {
 	design: ArticleDesign.PrintShop;
 	body: Body;
 }
+
+interface Analysis extends Fields {
+	design: ArticleDesign.Analysis;
+	body: Body;
+}
+
+interface Explainer extends Fields {
+	design: ArticleDesign.Explainer;
+	body: Body;
+}
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each ArticleDesign type.
 interface Standard extends Fields {
@@ -164,6 +176,7 @@ interface Standard extends Fields {
 		| ArticleDesign.Comment
 		| ArticleDesign.Letter
 		| ArticleDesign.Editorial
+		| ArticleDesign.Analysis
 	>;
 	body: Body;
 }
@@ -180,7 +193,9 @@ type Item =
 	| Obituary
 	| Editorial
 	| Correction
-	| Interview;
+	| Interview
+	| Analysis
+	| Explainer;
 
 // ----- Convenience Types ----- //
 
@@ -294,6 +309,7 @@ const itemFields = (
 		),
 		logo: paidContentLogo(content.tags),
 		webUrl: content.webUrl,
+		promotedNewsletter: fromNullable(request.promotedNewsletter),
 	};
 };
 
@@ -338,6 +354,8 @@ const isReview = hasSomeTag([
 ]);
 
 const isAnalysis = hasTag('tone/analysis');
+
+const isExplainer = hasTag('tone/explainers');
 
 const isLetter = hasTag('tone/letters');
 
@@ -433,6 +451,11 @@ const fromCapi =
 				design: ArticleDesign.Analysis,
 				...itemFieldsWithBody(context, request),
 			};
+		} else if (isExplainer(tags)) {
+			return {
+				design: ArticleDesign.Explainer,
+				...itemFieldsWithBody(context, request),
+			};
 		} else if (isCorrection(tags)) {
 			return {
 				design: ArticleDesign.Correction,
@@ -511,6 +534,7 @@ const fromCapi =
 
 export {
 	Item,
+	Analysis,
 	Comment,
 	LiveBlog,
 	DeadBlog,
@@ -526,6 +550,7 @@ export {
 	PhotoEssay,
 	Feature,
 	PrintShop,
+	Explainer,
 	fromCapi,
 	fromCapiLiveBlog,
 	getFormat,

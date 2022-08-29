@@ -6,6 +6,7 @@ import {
 	render as renderAMPArticle,
 	renderPerfTest as renderAMPArticlePerfTest,
 } from '../amp/server';
+import type { CAPIArticleType } from '../types/frontend';
 import {
 	renderArticle,
 	renderArticleJson,

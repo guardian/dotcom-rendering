@@ -6,6 +6,7 @@ import {
 	SvgVideo,
 } from '@guardian/source-react-components';
 import type { DCRContainerPalette } from '../../types/front';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
