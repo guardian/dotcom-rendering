@@ -176,6 +176,8 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 		JSON.stringify(
 			makeWindowGuardian({
 				CAPIArticle,
+				editionId: CAPIArticle.editionId,
+				contentType: CAPIArticle.contentType,
 				GAData: extractGA({
 					webTitle: CAPIArticle.webTitle,
 					format: CAPIArticle.format,

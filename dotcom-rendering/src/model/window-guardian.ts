@@ -71,10 +71,14 @@ interface WindowGuardianFrontConfig {
 
 export const makeWindowGuardian = ({
 	CAPIArticle,
+	editionId,
+	contentType,
 	GAData,
 	unknownConfig = {},
 }: {
 	CAPIArticle: CAPIArticleType;
+	editionId: EditionId;
+	contentType?: string;
 	GAData: GADataType;
 	/**
 	 * In the case of articles we don't know the exact values that need to exist
@@ -111,8 +115,8 @@ export const makeWindowGuardian = ({
 			frontendAssetsFullURL: config.frontendAssetsFullURL,
 			page: Object.assign(unknownConfig, {
 				dcrCouldRender: true,
-				contentType: CAPIArticle.contentType,
-				edition: CAPIArticle.editionId,
+				contentType: contentType ?? '',
+				edition: editionId,
 				revisionNumber: config.revisionNumber,
 				dcrSentryDsn:
 					'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
