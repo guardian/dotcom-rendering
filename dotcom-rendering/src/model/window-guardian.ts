@@ -98,15 +98,15 @@ export const makeWindowGuardian = ({
 	dfpAccountId: string;
 	adUnit: string;
 	ajaxUrl: string;
-	shouldHideReaderRevenue: boolean;
-	isPaidContent: boolean;
 	googletagUrl: string;
 	switches: Switches;
 	abTests: ServerSideTests;
 	editionId: EditionId;
+	shouldHideReaderRevenue?: boolean;
+	isPaidContent?: boolean;
 	contentType?: string;
 	brazeApiKey?: string;
-	GAData: GADataType;
+	GAData?: GADataType;
 	/**
 	 * In the case of articles we don't know the exact values that need to exist
 	 * on the window.guardian.config.page property so rather than filter them we
@@ -130,7 +130,7 @@ export const makeWindowGuardian = ({
 			reportError: (error: Error, feature: string) => void;
 		};
 	};
-	GAData: GADataType;
+	GAData?: GADataType;
 } => {
 	return {
 		config: {
@@ -153,8 +153,8 @@ export const makeWindowGuardian = ({
 				adUnit,
 				showRelatedContent: true,
 				ajaxUrl,
-				shouldHideReaderRevenue,
-				isPaidContent,
+				shouldHideReaderRevenue: shouldHideReaderRevenue ?? false,
+				isPaidContent: isPaidContent ?? false,
 				brazeApiKey,
 			}),
 			libs: {
