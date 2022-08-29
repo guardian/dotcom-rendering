@@ -1,5 +1,5 @@
 import { extractGA } from '../model/extract-ga';
-import type { ConfigType, ServerSideTests, Switches } from '../types/config';
+import type { ServerSideTests, Switches } from '../types/config';
 import type { EditionId } from '../types/edition';
 import type { DCRFrontType } from '../types/front';
 import type { CAPIArticleType } from '../types/frontend';
@@ -24,7 +24,10 @@ export interface WindowGuardianConfig {
 		ajaxUrl: string;
 		shouldHideReaderRevenue: boolean;
 		googleRecaptchaSiteKey?: string;
-	} & ConfigType;
+		brazeApiKey?: string;
+		isPaidContent: boolean;
+		isDev?: boolean;
+	};
 	libs: {
 		googletag: string;
 	};
