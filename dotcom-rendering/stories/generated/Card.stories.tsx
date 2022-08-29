@@ -95,6 +95,19 @@ StandardAnalysis.story = {
 	name: 'StandardDisplay AnalysisDesign'
 };
 
+export const StandardExplainer = () => {
+	return (
+		<CardsWithDifferentThemes
+			display={ArticleDisplay.Standard}
+			design={ArticleDesign.Explainer}
+			title="StandardExplainer"
+		/>
+	);
+};
+StandardExplainer.story = {
+	name: 'StandardDisplay ExplainerDesign'
+};
+
 export const StandardComment = () => {
 	return (
 		<CardsWithDifferentThemes
@@ -392,6 +405,19 @@ export const ImmersiveAnalysis = () => {
 };
 ImmersiveAnalysis.story = {
 	name: 'ImmersiveDisplay AnalysisDesign'
+};
+
+export const ImmersiveExplainer = () => {
+	return (
+		<CardsWithDifferentThemes
+			display={ArticleDisplay.Immersive}
+			design={ArticleDesign.Explainer}
+			title="ImmersiveExplainer"
+		/>
+	);
+};
+ImmersiveExplainer.story = {
+	name: 'ImmersiveDisplay ExplainerDesign'
 };
 
 export const ImmersiveComment = () => {
@@ -693,6 +719,19 @@ ShowcaseAnalysis.story = {
 	name: 'ShowcaseDisplay AnalysisDesign'
 };
 
+export const ShowcaseExplainer = () => {
+	return (
+		<CardsWithDifferentThemes
+			display={ArticleDisplay.Showcase}
+			design={ArticleDesign.Explainer}
+			title="ShowcaseExplainer"
+		/>
+	);
+};
+ShowcaseExplainer.story = {
+	name: 'ShowcaseDisplay ExplainerDesign'
+};
+
 export const ShowcaseComment = () => {
 	return (
 		<CardsWithDifferentThemes
@@ -990,6 +1029,19 @@ export const NumberedListAnalysis = () => {
 };
 NumberedListAnalysis.story = {
 	name: 'NumberedListDisplay AnalysisDesign'
+};
+
+export const NumberedListExplainer = () => {
+	return (
+		<CardsWithDifferentThemes
+			display={ArticleDisplay.NumberedList}
+			design={ArticleDesign.Explainer}
+			title="NumberedListExplainer"
+		/>
+	);
+};
+NumberedListExplainer.story = {
+	name: 'NumberedListDisplay ExplainerDesign'
 };
 
 export const NumberedListComment = () => {
