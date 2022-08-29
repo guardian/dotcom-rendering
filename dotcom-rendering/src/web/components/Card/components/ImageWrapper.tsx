@@ -5,6 +5,7 @@ import { between, from, until } from '@guardian/source-foundations';
 type Props = {
 	children: React.ReactNode;
 	imageSize: ImageSizeType;
+	imageType?: CardImageType;
 	imagePosition: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 };
@@ -48,6 +49,7 @@ const flexBasisStyles = ({
 export const ImageWrapper = ({
 	children,
 	imageSize,
+	imageType,
 	imagePosition,
 	imagePositionOnMobile,
 }: Props) => {
@@ -58,9 +60,15 @@ export const ImageWrapper = ({
 		<div
 			css={[
 				isHorizontal &&
+					imageType === 'mainmedia' &&
 					flexBasisStyles({
 						imageSize,
 					}),
+				imageType === 'avatar' &&
+					css`
+						display: flex;
+						justify-content: flex-end;
+					`,
 				/* If no image position for mobile is provided then hide the image */
 				imagePositionOnMobile === 'none' &&
 					css`

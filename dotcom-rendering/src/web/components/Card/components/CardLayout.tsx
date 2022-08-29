@@ -3,27 +3,13 @@ import { until } from '@guardian/source-foundations';
 
 type Props = {
 	children: React.ReactNode;
+	imageType: CardImageType | undefined;
 	imagePosition: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
-	imageType?: CardImageType;
 };
 
-const decideDirection = (
-	imagePosition?: ImagePositionType,
-	imageType?: CardImageType,
-) => {
-	if (imageType === 'avatar') {
-		switch (imagePosition) {
-			case 'left':
-			case 'right':
-				return 'row-reverse';
-			case 'top':
-			case 'bottom':
-			default:
-				return 'column-reverse';
-		}
-	}
+const decideDirection = (imagePosition?: ImagePositionType) => {
 	switch (imagePosition) {
 		case 'top':
 			return 'column';
@@ -55,13 +41,31 @@ const decidePosition = (
 	imagePositionOnMobile: ImagePositionType,
 	imageType?: CardImageType,
 ) => {
+	if (imageType === 'avatar') {
+		switch (imagePosition) {
+			case 'left':
+			case 'right': {
+				return css`
+					flex-direction: row-reverse;
+					${until.tablet} {
+						flex-direction: row-reverse;
+					}
+				`;
+			}
+			default: {
+				return css`
+					flex-direction: column-reverse;
+					${until.tablet} {
+						flex-direction: row-reverse;
+					}
+				`;
+			}
+		}
+	}
 	return css`
-		flex-direction: ${decideDirection(imagePosition, imageType)};
+		flex-direction: ${decideDirection(imagePosition)};
 		${until.tablet} {
-			flex-direction: ${decideDirection(
-				imagePositionOnMobile,
-				imageType,
-			)};
+			flex-direction: ${decideDirection(imagePositionOnMobile)};
 		}
 	`;
 };
