@@ -1,4 +1,4 @@
-import type { ServerSideTests, Switches } from '../types/config';
+import type { ConfigType, ServerSideTests, Switches } from '../types/config';
 import type { EditionId } from '../types/edition';
 import type { DCRFrontType } from '../types/front';
 import type { CAPIArticleType } from '../types/frontend';
@@ -72,9 +72,20 @@ interface WindowGuardianFrontConfig {
 export const makeWindowGuardian = ({
 	CAPIArticle,
 	GAData,
+	unknownConfig = {},
 }: {
 	CAPIArticle: CAPIArticleType;
 	GAData: GADataType;
+	/**
+	 * In the case of articles we don't know the exact values that need to exist
+	 * on the window.guardian.config.page property so rather than filter them we
+	 * allow the entire object to be passed through here and we then extend it
+	 * using Object.assigns
+	 *
+	 * This is obviously rubbish but has to be weighed against the risk of the
+	 * commercial code failing because it depended on a property we removed
+	 */
+	unknownConfig?: ConfigType | object;
 }): {
 	// The 'config' attribute is derived from CAPIArticle and contains
 	// all the data that, for legacy reasons, for instance compatibility
@@ -98,7 +109,7 @@ export const makeWindowGuardian = ({
 			isDev: process.env.NODE_ENV !== 'production',
 			stage: config.stage,
 			frontendAssetsFullURL: config.frontendAssetsFullURL,
-			page: Object.assign(config, {
+			page: Object.assign(unknownConfig, {
 				dcrCouldRender: true,
 				contentType: CAPIArticle.contentType,
 				edition: CAPIArticle.editionId,

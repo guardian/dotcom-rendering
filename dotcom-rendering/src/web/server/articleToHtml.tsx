@@ -186,6 +186,7 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 					editionId: CAPIArticle.editionId,
 					beaconURL: CAPIArticle.beaconURL,
 				}),
+				unknownConfig: CAPIArticle.config,
 			}),
 		),
 	);
