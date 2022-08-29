@@ -103,7 +103,7 @@ export const ImageWrapper = ({
 			<>
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
-				<div className="image-overlay" />
+				{imageType === 'mainmedia' && <div className="image-overlay" />}
 			</>
 		</div>
 	);
