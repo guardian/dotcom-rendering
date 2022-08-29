@@ -34,6 +34,7 @@ export const Avatar = () => {
 	const avatarTrails = trails.map((trail) => {
 		return {
 			...trail,
+			trailText: 'This is the trail text',
 			avatarUrl:
 				'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
 			format: {
