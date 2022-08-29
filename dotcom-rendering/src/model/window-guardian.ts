@@ -1,4 +1,3 @@
-import { extractGA } from '../model/extract-ga';
 import type { ServerSideTests, Switches } from '../types/config';
 import type { EditionId } from '../types/edition';
 import type { DCRFrontType } from '../types/front';
@@ -109,6 +108,7 @@ const makeWindowGuardianConfig = (
 
 export const makeWindowGuardian = (
 	CAPIArticle: CAPIArticleType,
+	GAData: GADataType,
 ): {
 	// The 'config' attribute is derived from CAPIArticle and contains
 	// all the data that, for legacy reasons, for instance compatibility
@@ -136,7 +136,7 @@ export const makeWindowGuardian = (
 				reportError: () => null,
 			},
 		},
-		GAData: extractGA(CAPIArticle),
+		GAData: GAData,
 	};
 };
 

@@ -5,6 +5,7 @@ import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import { ASSET_ORIGIN, getScriptArrayFromFile } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
+import { extractGA } from '../../model/extract-ga';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { CAPIArticleType } from '../../types/frontend';
@@ -172,7 +173,21 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	 * is placed in a script tag on the page
 	 */
 	const windowGuardian = escapeData(
-		JSON.stringify(makeWindowGuardian(CAPIArticle)),
+		JSON.stringify(
+			makeWindowGuardian(
+				CAPIArticle,
+				extractGA({
+					webTitle: CAPIArticle.webTitle,
+					format: CAPIArticle.format,
+					sectionName: CAPIArticle.sectionName,
+					contentType: CAPIArticle.contentType,
+					tags: CAPIArticle.tags,
+					pageId: CAPIArticle.pageId,
+					editionId: CAPIArticle.editionId,
+					beaconURL: CAPIArticle.beaconURL,
+				}),
+			),
+		),
 	);
 
 	const hasAmpInteractiveTag = CAPIArticle.tags.some(
