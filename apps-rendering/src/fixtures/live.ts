@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -257,6 +258,7 @@ const fields = {
 	footballContent: none,
 	logo: none,
 	webUrl: '',
+	edition: Edition.UK,
 	promotedNewsletter: none,
 };
 
