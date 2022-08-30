@@ -67,7 +67,7 @@ export const extractGA = ({
 	editionId: EditionId;
 	beaconURL: string;
 }): GADataType => ({
-	webTitle: webTitle,
+	webTitle,
 	pillar: convertToLegacyPillar(format.theme),
 	section: sectionName || '',
 	contentType: formatStringForGa(contentType),

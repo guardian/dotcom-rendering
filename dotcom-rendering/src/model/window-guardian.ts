@@ -109,8 +109,8 @@ export const makeWindowGuardian = ({
 			// This indicates to the client side code that we are running a dotcom-rendering rendered page.
 			isDotcomRendering: true,
 			isDev: process.env.NODE_ENV !== 'production',
-			stage: stage,
-			frontendAssetsFullURL: frontendAssetsFullURL,
+			stage,
+			frontendAssetsFullURL,
 			page: Object.assign(unknownConfig, {
 				dcrCouldRender: true,
 				contentType: contentType ?? '',
@@ -132,7 +132,7 @@ export const makeWindowGuardian = ({
 			libs: {
 				googletag: googletagUrl,
 			},
-			switches: switches,
+			switches,
 			tests: abTests,
 			ophan: {
 				pageViewId: '',
@@ -149,6 +149,6 @@ export const makeWindowGuardian = ({
 				reportError: () => null,
 			},
 		},
-		GAData: GAData,
+		GAData,
 	};
 };
