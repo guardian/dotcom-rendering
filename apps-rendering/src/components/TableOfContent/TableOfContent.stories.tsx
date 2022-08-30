@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import {
 	ArticleDesign,
 	ArticleDisplay,
@@ -15,12 +14,8 @@ const format: ArticleFormat = {
 	theme: ArticlePillar.News,
 };
 
-const wrapperStyles = css``;
-
 const Default = (): ReactElement => (
-	<div css={wrapperStyles}>
-		<TableOfContent outline={explainer.outline} format={format} />
-	</div>
+	<TableOfContent outline={explainer.outline} format={format} />
 );
 
 export default {

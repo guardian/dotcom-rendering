@@ -204,7 +204,7 @@ export const Explainer = (): React.ReactNode => {
 		<Standard item={explainer}>
 			{renderAll(
 				formatFromItem(analysis, some(ArticleDisplay.Standard)),
-				partition(analysis.body).oks,
+				partition(explainer.body).oks,
 			)}
 		</Standard>
 	);

@@ -50,7 +50,7 @@ const listItemStyles: SerializedStyles = css`
 `;
 
 const detailsStyles: SerializedStyles = css`
-	margin-bottom: 1.25rem;
+	margin-bottom: ${remSpace[6]};
 	&:not([open]) .is-on,
 	&[open] .is-off {
 		display: none;
@@ -79,11 +79,11 @@ const summaryStyles: SerializedStyles = css`
 	}
 `;
 
-const titleStyle: SerializedStyles = css`
+const titleStyle = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
-	color: ${neutral[46]};
+	color: ${text.tableOfContentsTitle(format)};
 	${darkModeCss`
-		color: ${neutral[86]};
+		color: ${text.tableOfContentsTitleDark(format)};
 	`}
 `;
 
@@ -97,7 +97,7 @@ const TableOfContent: FC<Props> = ({ format, outline }) => {
 	return (
 		<details open={outline.length < 5} css={detailsStyles}>
 			<summary css={summaryStyles}>
-				<h2 css={titleStyle}>Jump to...</h2>
+				<h2 css={titleStyle(format)}>Jump to...</h2>
 				<span className="is-off" css={arrowPosition}>
 					<SvgChevronDownSingle size="xsmall" />
 				</span>
@@ -110,7 +110,7 @@ const TableOfContent: FC<Props> = ({ format, outline }) => {
 					<ListItem className={listItemStyles}>
 						<Anchor
 							format={format}
-							href={'#' + ol.id}
+							href={`#${ol.id}`}
 							className={anchorStyles(format)}
 						>
 							{ol.doc.textContent}
