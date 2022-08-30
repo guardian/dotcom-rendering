@@ -55,7 +55,7 @@
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.12.7",
     "@babel/runtime": "^7.12.5",
-    "@braze/web-sdk-core": "3.3.0",
+    "@braze/web-sdk-core": "3.5.1",
     "@cypress/skip-test": "^2.6.0",
     "@emotion/babel-plugin": "^11.3.0",
     "@guardian/ab-core": "^2.0.0",
