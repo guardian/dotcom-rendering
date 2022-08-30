@@ -59,8 +59,8 @@ export const ImageWrapper = ({
 	return (
 		<div
 			css={[
-				isHorizontal &&
-					imageType === 'mainMedia' &&
+				imageType === 'mainMedia' &&
+					isHorizontal &&
 					flexBasisStyles({
 						imageSize,
 					}),
