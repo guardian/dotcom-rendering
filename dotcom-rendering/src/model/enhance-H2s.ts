@@ -40,7 +40,7 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 			'model.dotcomrendering.pageElements.SubheadingBlockElement'
 		) {
 			const text = extractText(element);
-			const slug = text ? slugify(text) : element.elementId;
+			const slug = text || text != "" ? slugify(text) : element.elementId;
 			const uniqueSlug = getUnique(slug, slugifiedIds);
 
 			//remember the slug so we can check against it next time
