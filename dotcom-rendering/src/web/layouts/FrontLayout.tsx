@@ -10,6 +10,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import type { NavType } from '../../model/extract-nav';
 import type { DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
+import { Carousel } from '../components/Carousel.importable';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
@@ -170,6 +171,27 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								containerName={collection.collectionType}
 							>
 								<Snap snapData={trails[0].snapData} />
+							</Section>
+						);
+					}
+
+					if (collection.collectionType === 'fixed/video') {
+						return (
+							<Section
+								fullWidth={true}
+								padBottom={true}
+								showSideBorders={true}
+								ophanComponentLink={ophanComponentLink}
+								ophanComponentName={ophanName}
+								containerName={collection.collectionType}
+							>
+								<Island deferUntil="visible">
+									<Carousel
+										heading={collection.displayName}
+										trails={trails}
+										onwardsSource="unknown-source"
+									/>
+								</Island>
 							</Section>
 						);
 					}
