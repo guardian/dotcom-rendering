@@ -13,6 +13,7 @@ const errorAndThrow = (error) => {
 	throw new Error(error);
 };
 
+/** @type {(glob: string) => Promise<void>} */
 const fileExists = async (glob) => {
 	await find.file(glob, `./dist/`, (files) => {
 		if (files.length === 1) {
@@ -25,11 +26,12 @@ const fileExists = async (glob) => {
 
 (async () => {
 	// Check that the manifest files exist
-	await fileExists('manifest.json');
+	await fileExists('manifest.modern.json');
 	await fileExists('manifest.legacy.json');
+	await fileExists('manifest.variant.json');
 
 	// Check that the manifest files return values for all the chunks
-	const manifest = await loadJsonFile('./dist/manifest.json');
+	const manifest = await loadJsonFile('./dist/manifest.modern.json');
 	const legacyManifest = await loadJsonFile('./dist/manifest.legacy.json');
 
 	[
@@ -44,7 +46,7 @@ const fileExists = async (glob) => {
 		'newsletterEmbedIframe.js',
 		'relativeTime.js',
 		'initDiscussion.js',
-	].map((name) => {
+	].forEach((name) => {
 		if (manifest[name]) {
 			console.log(`Manifest returned value ${name}`);
 		} else {
