@@ -33,7 +33,7 @@ const slugify = (text: string) => {
 		.replace(/\s+/g, '-') // Replace spaces with "-"
 		.replace(/[^\w-]+/g, '') // Remove all non-word chars
 		.replace(/--+/g, '-') // Replace multiple "-" with single "-"
-		.replace(/\-$/g, ''); // Remove trailing -
+		.replace(/-$/g, ''); // Remove trailing -
 };
 
 /**
