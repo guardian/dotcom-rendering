@@ -219,6 +219,11 @@ export const TextBlockComponent = ({
 						prefix: '<ul>',
 						suffix: '</ul>',
 					},
+					{
+						unwrappedElement: 'h3',
+						prefix: '<h3>',
+						suffix: '</h3>',
+					},
 				],
 				html,
 			});

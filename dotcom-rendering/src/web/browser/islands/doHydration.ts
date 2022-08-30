@@ -48,6 +48,8 @@ export const doHydration = (
 			return { clientOnly, timeTaken };
 		})
 		.then(({ clientOnly, timeTaken }) => {
+			if (!('getEntriesByType' in window.performance)) return;
+
 			// Log performance info
 			const { duration: download = -1 } =
 				window.performance

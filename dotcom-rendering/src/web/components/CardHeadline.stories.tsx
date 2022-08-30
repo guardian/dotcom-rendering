@@ -120,7 +120,7 @@ export const Analysis = () => (
 		</Section>
 	</>
 );
-Analysis.story = { name: 'Analysis (Underline)' };
+Analysis.story = { name: 'Analysis' };
 
 export const Feature = () => (
 	<Section fullWidth={true} showTopBorder={false} showSideBorders={false}>

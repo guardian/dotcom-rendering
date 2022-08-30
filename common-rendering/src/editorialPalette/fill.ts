@@ -25,7 +25,7 @@ const cameraCaptionIconDark = (): Colour => neutral[60];
 
 const commentCount = (format: ArticleFormat): Colour => {
 	if (format.design === ArticleDesign.LiveBlog) {
-			return neutral[86];
+		return neutral[86];
 	}
 
 	if (format.design === ArticleDesign.DeadBlog) {
@@ -48,9 +48,12 @@ const commentCount = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
 	}
-}
+};
 const commentCountDark = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.LiveBlog || format.design === ArticleDesign.DeadBlog) {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	) {
 		return neutral[60];
 	}
 
@@ -73,7 +76,10 @@ const commentCountDark = (format: ArticleFormat): Colour => {
 };
 
 const commentCountWide = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.LiveBlog || format.design === ArticleDesign.DeadBlog) {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	) {
 		return neutral[46];
 	}
 
@@ -202,11 +208,13 @@ const richLinkSvgPreloadDark = (_format: ArticleFormat): Colour => {
 	return neutral[86];
 };
 
-const lines = (_format: ArticleFormat): Colour =>
-	neutral[86];
+const lines = (_format: ArticleFormat): Colour => neutral[86];
 
-const linesDark = (_format: ArticleFormat): Colour =>
-	neutral[20];
+const linesDark = (_format: ArticleFormat): Colour => neutral[20];
+
+const signUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
+
+const signUpFormButtonDark = (_format: ArticleFormat): Colour => neutral[86];
 
 // ----- API ----- //
 
@@ -226,6 +234,8 @@ const fill = {
 	richLinkDark,
 	richLinkSvgPreload,
 	richLinkSvgPreloadDark,
+	signUpFormButton,
+	signUpFormButtonDark,
 };
 
 // ----- Exports ----- //

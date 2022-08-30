@@ -361,8 +361,8 @@
                     "url": {
                         "type": "string"
                     },
-                    "onwardsType": {
-                        "$ref": "#/definitions/OnwardsType"
+                    "onwardsSource": {
+                        "$ref": "#/definitions/OnwardsSource"
                     },
                     "format": {
                         "type": "object",
@@ -390,7 +390,7 @@
                 "required": [
                     "format",
                     "heading",
-                    "onwardsType",
+                    "onwardsSource",
                     "trails"
                 ]
             }
@@ -3880,6 +3880,9 @@
             "description": "the config model will contain useful app/site\nlevel data. Although currently derived from the config model\nconstructed in frontend and passed to dotcom-rendering\nthis data could eventually be defined in dotcom-rendering",
             "type": "object",
             "properties": {
+                "dcrCouldRender": {
+                    "type": "boolean"
+                },
                 "ajaxUrl": {
                     "type": "string"
                 },
@@ -3893,10 +3896,7 @@
                     "type": "string"
                 },
                 "switches": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "boolean"
-                    }
+                    "$ref": "#/definitions/Switches"
                 },
                 "abTests": {
                     "description": "This type is not support by JSON-schema, it evaluates as `object`",
@@ -3928,7 +3928,7 @@
                     "type": "string"
                 },
                 "stage": {
-                    "type": "string"
+                    "$ref": "#/definitions/StageType"
                 },
                 "frontendAssetsFullURL": {
                     "type": "string"
@@ -3943,7 +3943,7 @@
                     "type": "number"
                 },
                 "edition": {
-                    "type": "string"
+                    "$ref": "#/definitions/EditionId"
                 },
                 "section": {
                     "type": "string"
@@ -4069,6 +4069,20 @@
                 "stage",
                 "switches"
             ]
+        },
+        "Switches": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "boolean"
+            }
+        },
+        "StageType": {
+            "enum": [
+                "CODE",
+                "DEV",
+                "PROD"
+            ],
+            "type": "string"
         },
         "CAPITrailType": {
             "type": "object",
@@ -4283,16 +4297,16 @@
                 "sponsorName"
             ]
         },
-        "OnwardsType": {
+        "OnwardsSource": {
             "enum": [
                 "curated-content",
-                "default-onwards",
                 "more-galleries",
                 "more-media-in-section",
                 "more-on-this-story",
                 "related-content",
                 "related-stories",
-                "series"
+                "series",
+                "unknown-source"
             ],
             "type": "string"
         },
