@@ -15,12 +15,17 @@ import Anchor from 'components/Anchor';
 import ListItem from 'components/ListItem';
 import OrderedList from 'components/OrderedList';
 import { Outline } from 'outline';
-import { FC } from 'react';
+import { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
 interface Props {
 	format: ArticleFormat;
 	outline: Outline;
+}
+
+interface TextElementProps {
+	node: Node;
+	key: number;
 }
 
 const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -93,6 +98,66 @@ const arrowPosition: SerializedStyles = css`
 	top: 0;
 `;
 
+const TocTextElement: React.FC<TextElementProps> = ({
+	node,
+	key,
+}): ReactElement => {
+	const text = node.textContent ?? '';
+	const children = Array.from(node.childNodes).map((item, i) => {
+		console.log(`I'm children node ${item.nodeName}`);
+		return <TocTextElement node={item} key={i} />;
+	});
+
+	console.log(`I'm node ${node.nodeName}`);
+
+	switch (node.nodeName) {
+		case 'H2':
+			return <span>{children}</span>;
+		case 'EM':
+			return <em key={key}>{children}</em>;
+		case 'SUB': {
+			return (
+				<sub
+					css={css`
+						font-size: smaller;
+						vertical-align: sub;
+					`}
+					key={key}
+				>
+					{children}
+				</sub>
+			);
+		}
+		case 'SUP': {
+			return (
+				<sup
+					css={css`
+						font-size: smaller;
+						vertical-align: super;
+					`}
+					key={key}
+				>
+					{children}
+				</sup>
+			);
+		}
+		case 'STRONG':
+			return (
+				<strong
+					css={css`
+						font-weight: bold;
+					`}
+					key={key}
+				>
+					{children}
+				</strong>
+			);
+		case '#text':
+		default:
+			return <>{text}</>;
+	}
+};
+
 const TableOfContent: FC<Props> = ({ format, outline }) => {
 	return (
 		<details open={outline.length < 5} css={detailsStyles}>
@@ -113,7 +178,10 @@ const TableOfContent: FC<Props> = ({ format, outline }) => {
 							href={`#${ol.id}`}
 							className={anchorStyles(format)}
 						>
-							{ol.doc.textContent}
+							<TocTextElement
+								node={ol.doc}
+								key={0}
+							></TocTextElement>
 						</Anchor>
 					</ListItem>
 				))}
