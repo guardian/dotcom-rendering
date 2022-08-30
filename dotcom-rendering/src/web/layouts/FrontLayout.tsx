@@ -178,12 +178,25 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					if (collection.collectionType === 'fixed/video') {
 						return (
 							<Section
+								key={collection.id}
 								fullWidth={true}
 								padBottom={true}
 								showSideBorders={true}
+								showTopBorder={index > 0}
+								padContent={false}
+								centralBorder="partial"
+								url={collection.href}
 								ophanComponentLink={ophanComponentLink}
 								ophanComponentName={ophanName}
 								containerName={collection.collectionType}
+								containerPalette={collection.containerPalette}
+								toggleable={true}
+								sectionId={collection.id}
+								showDateHeader={
+									collection.config.showDateHeader
+								}
+								editionId={front.editionId}
+								treats={collection.treats}
 							>
 								<Island deferUntil="visible">
 									<Carousel
