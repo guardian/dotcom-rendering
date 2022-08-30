@@ -82,6 +82,7 @@ const docFixture = (): Node => {
 
 	doc.appendChild(el);
 
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- this value is not `null`
 	return doc.firstChild!;
 };
 

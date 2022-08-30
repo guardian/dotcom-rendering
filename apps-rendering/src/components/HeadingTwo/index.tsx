@@ -1,4 +1,4 @@
-import { css, jsx as styledH } from '@emotion/react';
+import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
@@ -31,7 +31,7 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 
 	return css`
 		${font}
-		margin: ${remSpace[4]} 0 4px 0;
+		margin: ${remSpace[4]} 0 ${remSpace[1]} 0;
 
 		& + p {
 			margin-top: 0;
@@ -72,24 +72,41 @@ const HeadingTextElement: React.FC<HeadingTextElementProps> = ({
 		case 'EM':
 			return <em key={key}>{children}</em>;
 		case 'SUB': {
-			const styles = css`
-				font-size: smaller;
-				vertical-align: sub;
-			`;
-			return styledH('sub', { css: styles, key }, children);
+			return (
+				<sub
+					css={css`
+						font-size: smaller;
+						vertical-align: sub;
+					`}
+					key={key}
+				>
+					{children}
+				</sub>
+			);
 		}
 		case 'SUP': {
-			const styles = css`
-				font-size: smaller;
-				vertical-align: super;
-			`;
-			return styledH('sup', { css: styles, key }, children);
+			return (
+				<sup
+					css={css`
+						font-size: smaller;
+						vertical-align: super;
+					`}
+					key={key}
+				>
+					{children}
+				</sup>
+			);
 		}
 		case 'STRONG':
-			return styledH(
-				'strong',
-				{ css: { fontWeight: 'bold' }, key },
-				children,
+			return (
+				<strong
+					css={css`
+						font-weight: bold;
+					`}
+					key={key}
+				>
+					{children}
+				</strong>
 			);
 		default:
 			return null;

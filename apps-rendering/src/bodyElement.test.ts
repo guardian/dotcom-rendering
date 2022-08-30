@@ -3,7 +3,7 @@ import { JSDOM } from 'jsdom';
 
 describe('flattenTextElement', () => {
 	test('it returns HeadingTwo body element with text content', () => {
-		const node = JSDOM.fragment(`<h2>some text</h2>`);
+		const node = JSDOM.fragment('<h2>some text</h2>');
 		const result = flattenTextElement(node);
 
 		expect(result.length).toEqual(1);
