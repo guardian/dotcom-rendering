@@ -16,7 +16,7 @@ type PillarForContainer =
 // This list is a direct copy from https://github.com/guardian/frontend/blob/6da0b3d8bfd58e8e20f80fc738b070fb23ed154e/static/src/javascripts/projects/common/modules/onward/related.js#L27
 // If you change this list then you should also update ^
 // order matters here (first match wins)
-export const WHITELISTED_TAGS = [
+export const ALLOWED_TAGS = [
 	// sport tags
 	'sport/cricket',
 	'sport/rugby-union',
@@ -51,7 +51,7 @@ const firstPopularTag = (
 	pageTags: string | string[],
 	isPaidContent: boolean,
 ) => {
-	// This function looks for the first tag in pageTags, that also exists in our whitelist
+	// This function looks for the first tag in pageTags, that also exists in our allowlist
 	if (!pageTags) {
 		// If there are no page tags we will never find a match so
 		return false;
@@ -65,12 +65,12 @@ const firstPopularTag = (
 		tags = pageTags;
 	}
 
-	const firstTagInWhitelist =
-		tags.find((tag: string) => WHITELISTED_TAGS.includes(tag)) || false;
+	const firstTagInAllowedList =
+		tags.find((tag: string) => ALLOWED_TAGS.includes(tag)) || false;
 
 	// For paid content we just return the first tag, otherwise we
-	// filter for the first tag in the whitelist
-	return isPaidContent ? tags[0] : firstTagInWhitelist;
+	// filter for the first tag in the allowlist
+	return isPaidContent ? tags[0] : firstTagInAllowedList;
 };
 
 const onwardsWrapper = css`
