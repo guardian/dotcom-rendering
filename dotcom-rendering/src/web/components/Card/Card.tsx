@@ -285,7 +285,7 @@ export const Card = ({
 	if (imageUrl && avatarUrl) {
 		imageType = 'avatar';
 	} else if (imageUrl) {
-		imageType = 'mainmedia';
+		imageType = 'mainMedia';
 	}
 
 	return (

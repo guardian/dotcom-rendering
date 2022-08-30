@@ -315,7 +315,7 @@ type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 
-type CardImageType = 'mainmedia' | 'avatar';
+type CardImageType = 'mainMedia' | 'avatar';
 
 type SmallHeadlineSize =
 	| 'tiny'

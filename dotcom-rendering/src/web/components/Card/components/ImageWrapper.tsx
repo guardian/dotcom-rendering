@@ -60,7 +60,7 @@ export const ImageWrapper = ({
 		<div
 			css={[
 				isHorizontal &&
-					imageType === 'mainmedia' &&
+					imageType === 'mainMedia' &&
 					flexBasisStyles({
 						imageSize,
 					}),
@@ -103,7 +103,7 @@ export const ImageWrapper = ({
 			<>
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
-				{imageType === 'mainmedia' && <div className="image-overlay" />}
+				{imageType === 'mainMedia' && <div className="image-overlay" />}
 			</>
 		</div>
 	);
