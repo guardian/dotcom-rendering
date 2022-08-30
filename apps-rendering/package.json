@@ -64,7 +64,7 @@
     "@types/uuid": "^8.3.1",
     "@types/webpack": "^4.41.31",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.31.2",
+    "@typescript-eslint/parser": "^4.33.0",
     "aws-cdk": "1.147.0",
     "aws-sdk": "^2.1200.0",
     "babel-loader": "^8.2.5",
