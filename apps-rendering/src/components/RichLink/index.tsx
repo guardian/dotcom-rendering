@@ -209,13 +209,11 @@ const RichLink = (props: {
 						<div className="js-image" key={`${url}-div`} />
 					</>
 				)}
-				<>
-					<h1 key={`${url}-h1`}>{linkText}</h1>
-					<button key={`${url}-button`}>
-						<SvgArrowRightStraight key={`${url}-svg`} />
-						Read more
-					</button>
-				</>
+				<h1 key={`${url}-h1`}>{linkText}</h1>
+				<button key={`${url}-button`}>
+					<SvgArrowRightStraight key={`${url}-svg`} />
+					Read more
+				</button>
 			</a>
 		</aside>
 	);
