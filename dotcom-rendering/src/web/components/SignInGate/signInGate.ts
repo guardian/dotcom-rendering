@@ -3,6 +3,7 @@ import type { ABTest } from '@guardian/ab-core';
 // Sign in Gate A/B Tests
 import { signInGateMainControl } from '../../experiments/tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from '../../experiments/tests/sign-in-gate-main-variant';
+import { signInGateMandatoryLongTestRun } from '../../experiments/tests/sign-in-gate-mandatory-long-testrun';
 
 // Sign in Gate Types
 import { signInGateComponent as gateMainControl } from './gates/main-control';
@@ -20,14 +21,17 @@ export const componentName = 'sign-in-gate';
 export const signInGateTests: ReadonlyArray<ABTest> = [
 	signInGateMainVariant,
 	signInGateMainControl,
+	signInGateMandatoryLongTestRun,
 ];
 
 export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
 	'main-control-4': gateMainControl,
 	'main-variant-4': gateMainVariant,
+	'mandatory-long-testrun': gateMainVariant, // showing main gate for test run
 };
 
 export const signInGateTestIdToComponentId: { [key: string]: string } = {
 	SignInGateMainVariant: 'main_variant_4',
 	SignInGateMainControl: 'main_control_4',
+	signInGateMandatoryLongTestRun: 'mandatory_long_testrun',
 };
