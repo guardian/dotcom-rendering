@@ -1,6 +1,5 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/react';
 import { css, jsx as styledH } from '@emotion/react';
 import {
 	AudioAtom,
@@ -16,13 +15,7 @@ import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Breakpoint } from '@guardian/source-foundations';
-import {
-	headline,
-	neutral,
-	remSpace,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { neutral, remSpace, until } from '@guardian/source-foundations';
 import {
 	andThen,
 	fromNullable,
@@ -59,6 +52,7 @@ import GalleryImage from 'components/editions/galleryImage';
 import EditionsPullquote from 'components/editions/pullquote';
 import Video from 'components/editions/video';
 import EmbedComponentWrapper from 'components/EmbedWrapper';
+import HeadingTwo from 'components/HeadingTwo';
 import HorizontalRule from 'components/HorizontalRule';
 import Interactive from 'components/Interactive';
 import InteractiveAtom, {
@@ -137,22 +131,6 @@ const transform = (
 		return h(HorizontalRule, null, null);
 	}
 	return text;
-};
-
-const HeadingTwoStyles = (format: ArticleFormat): SerializedStyles => {
-	const font =
-		format.theme === ArticleSpecial.Labs
-			? textSans.large({ fontWeight: 'bold' })
-			: headline.xxsmall({ fontWeight: 'bold' });
-
-	return css`
-		${font}
-		margin: ${remSpace[4]} 0 4px 0;
-
-		& + p {
-			margin-top: 0;
-		}
-	`;
 };
 
 const TweetStyles = css`
@@ -286,14 +264,6 @@ const textElement =
 					},
 					children,
 				);
-			case 'H2':
-				return text.includes('* * *')
-					? h(HorizontalRule, null, null)
-					: styledH(
-							'h2',
-							{ css: HeadingTwoStyles(format), key },
-							children,
-					  );
 			case 'BLOCKQUOTE':
 				return isEditions
 					? h('blockquote', { key }, children)
@@ -394,11 +364,10 @@ const standfirstTextElement =
 	};
 
 const renderText = (
-	doc: DocumentFragment,
+	doc: Node,
 	format: ArticleFormat,
 	isEditions = false,
-): ReactNode[] =>
-	Array.from(doc.childNodes).map(textElement(format, isEditions));
+): ReactNode => textElement(format, isEditions)(doc, 0);
 
 const editionsStandfirstFilter = (node: Node): boolean =>
 	!['UL', 'LI', 'A'].includes(node.nodeName);
@@ -640,7 +609,12 @@ const render =
 		switch (element.kind) {
 			case ElementKind.Text:
 				return textRenderer(format, excludeStyles, element);
-
+			case ElementKind.HeadingTwo:
+				return h(HeadingTwo, {
+					format,
+					isEditions: false,
+					heading: element,
+				});
 			case ElementKind.Image:
 				return imageRenderer(format, element, key);
 
@@ -720,6 +694,13 @@ const renderEditions =
 		switch (element.kind) {
 			case ElementKind.Text:
 				return textRenderer(format, excludeStyles, element, true);
+
+			case ElementKind.HeadingTwo:
+				return h(HeadingTwo, {
+					format,
+					isEditions: true,
+					heading: element,
+				});
 
 			case ElementKind.Image:
 				return format.design === ArticleDesign.Gallery ||
