@@ -1,9 +1,11 @@
 import { array, object, string } from 'https://deno.land/x/zod@v3.17.3/mod.ts';
 import { fetchJSON } from './json.ts';
-import prettyBytes from 'https://esm.sh/pretty-bytes';
+import prettyBytes from 'https://esm.sh/pretty-bytes@6.0.0';
 import { octokit } from './github.ts';
 
 // -- Constants -- //
+
+const gu = 'https://www.theguardian.com/';
 
 const fronts = ['uk', 'us', 'international', 'au'] as const;
 
@@ -69,7 +71,7 @@ const getThrasherResources = (urls: URL[]) => {
 };
 
 const getFrontThrashers = async (path: string) => {
-	const url = new URL(`https://theguardian.com/${path}.json?dcr`);
+	const url = new URL(`${path}.json?dcr`, gu);
 	const {
 		pressedPage: { collections },
 	} = await fetchJSON(url, { parser: frontSchema.parse });
@@ -146,14 +148,14 @@ const getTable = (data: Awaited<ReturnType<typeof getFrontThrashers>>) => {
 
 const lines = ['# Largest thrashers on network fronts'];
 
-for (const id of fronts) {
+for (const front of fronts) {
 	lines.push(
 		'',
 		'',
-		`## [${id.toUpperCase()} Front](https://www.theguardian.com/${id}) `,
+		`## [${front.toUpperCase()} Front](${new URL(front, gu).toString()}) `,
 		'',
 	);
-	const data = await getFrontThrashers(id);
+	const data = await getFrontThrashers(front);
 
 	lines.push(...getTable(data));
 }
