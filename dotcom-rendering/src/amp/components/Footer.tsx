@@ -13,6 +13,7 @@ import {
 	isOnPlatform,
 	LinkPlatform,
 } from '../../lib/footer-links';
+import type { NavType } from '../../model/extract-nav';
 import { useContentABTestGroup } from './ContentABTest';
 import { ReaderRevenueButton } from './ReaderRevenueButton';
 

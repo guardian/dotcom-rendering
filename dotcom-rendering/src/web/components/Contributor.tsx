@@ -9,6 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { getSoleContributor } from '../../lib/byline';
 import TwitterIcon from '../../static/icons/twitter.svg';
+import type { Palette } from '../../types/palette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 import { BylineLink } from './BylineLink';
@@ -132,7 +133,7 @@ export const Contributor = ({ byline, tags, format }: Props) => {
 						bylineColorStyles(palette, format),
 					]}
 				>
-					<BylineLink byline={byline} tags={tags} />
+					<BylineLink byline={byline} tags={tags} format={format} />
 				</div>
 			)}
 			{!!twitterHandle && (

@@ -11,7 +11,30 @@
  *    gen-fixtures.ts directly.
  */
 
-export const images: ImageBlockElement[] = [
+export const images: [
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+	ImageBlockElement,
+] = [
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
 		media: {
@@ -325,7 +348,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: 'f8d733af-4a51-401d-82cf-62f1e3a36fd1',
+		elementId: 'a12a7166-4495-47a0-94dd-6e0d5bb9bc2e',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -640,7 +663,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: 'bc0466c4-8602-4e1f-bfea-fb1fd48e4f1c',
+		elementId: '8ba1fa13-fc11-4c28-8483-19a6a20556af',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -955,7 +978,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: '376589e7-6bde-4938-9176-5e21527d3e30',
+		elementId: '6a9aed57-f6ba-4700-b351-15647748b1d6',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -1270,7 +1293,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: 'db140408-154e-442e-9300-90050863b52e',
+		elementId: '24dddaeb-faa8-4b35-8c94-00a5749f5ec9',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -1585,7 +1608,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: 'fb617709-0445-4e6d-9343-5a4cc2473571',
+		elementId: '3193b1bc-40f4-42a6-a787-626e5817d606',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -1900,7 +1923,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: 'bd5045da-49f6-4799-af72-1671cf780371',
+		elementId: '34d5c98b-7dde-4ff5-9568-5f39658e1e9d',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2215,7 +2238,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: 'b9b969aa-f1f5-4e1a-9dac-7efe76420660',
+		elementId: '40951265-4565-4161-83a8-ed1f8476d430',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2520,7 +2543,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: 'e1df28f1-6454-43b5-8a8a-c3c6d2b17018',
+		elementId: 'b7800058-686a-4913-a004-a24958666c31',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2835,7 +2858,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: '03a3c15a-c0b3-4aa2-81c9-e44c645820cb',
+		elementId: 'aa772744-4126-4ada-b020-b0046d8da5cc',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3150,7 +3173,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: 'ed8dcae7-5e6d-4024-993d-fab8de4a02ff',
+		elementId: 'e311a296-6c63-4d21-85d4-29c20d40d4d8',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3465,7 +3488,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: '610b0ee7-c85c-4647-aeae-6f0bcba3e313',
+		elementId: 'a6ec091a-76a4-4b7e-9a8c-09923112d789',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3780,7 +3803,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: 'cb514f6a-092a-4e27-a99e-cd4c88b2e014',
+		elementId: '437fa66f-ef65-454b-b5fb-1e3a95549c2b',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4095,7 +4118,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: 'e46df8e7-6d0c-40b3-93cc-6b3fe854f124',
+		elementId: 'adea7311-b367-416e-a077-4116e1a99bf2',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4410,7 +4433,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: '2a3292ba-0f36-49a1-a053-9277a9366ee2',
+		elementId: '654cbab8-b034-4781-a3cb-40c8ba3963f0',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4725,7 +4748,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: 'bd61ea51-3a2b-48e5-83b7-1a3c34b6292f',
+		elementId: '8a4fe1c6-d875-4552-8654-70902deba771',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5041,7 +5064,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: 'e6b359f9-0279-4d58-acb9-d95a624ef0ac',
+		elementId: 'c0d5bc9f-9648-4f46-8785-d4bd2c8ca269',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5356,7 +5379,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: '83d5a7fb-e07a-4f3f-ade2-971bb8f9d293',
+		elementId: 'dc202abd-70f9-4471-a9ba-93602b9ed002',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5671,7 +5694,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: '989d3a68-19c1-4b4a-943d-a500bcf00991',
+		elementId: '0ead734a-bcd0-4038-9531-d5b203f25a37',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5986,7 +6009,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: '487ee5b1-2ea8-461a-a731-f5838833210c',
+		elementId: 'ff5d48c1-5ef7-4a56-b931-0510943e4172',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6301,7 +6324,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: '9dc6f4ef-be47-477c-a660-17a71e8abe23',
+		elementId: 'c4722b1b-96e5-4c46-8af0-de479c7fcd80',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6616,7 +6639,7 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: '6ebb0902-efbd-4c1e-b0c1-b4890b4fe331',
+		elementId: '7fdcb843-b116-4fdf-b113-cf35e45974ea',
 	},
 	{
 		_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6931,6 +6954,6 @@ export const images: ImageBlockElement[] = [
 				],
 			},
 		],
-		elementId: '0bd667b9-ec7c-4f01-800b-dc4d32dbc245',
+		elementId: 'd3421bfc-85fd-4665-83ee-d091951e7975',
 	},
 ];

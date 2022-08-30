@@ -10,6 +10,8 @@ import {
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { getSoleContributor } from '../../lib/byline';
+import type { Branding as BrandingType } from '../../types/branding';
+import type { Palette } from '../../types/palette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 import { Avatar } from './Avatar';
@@ -30,7 +32,7 @@ type Props = {
 	tags: TagType[];
 	primaryDateline: string;
 	secondaryDateline: string;
-	branding?: Branding;
+	branding?: BrandingType;
 	discussionApiUrl: string;
 	shortUrlId: string;
 	isCommentable: boolean;
@@ -231,6 +233,7 @@ const shouldShowContributor = (format: ArticleFormat) => {
 			switch (format.design) {
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
+				case ArticleDesign.Analysis:
 					return false;
 				default:
 					return true;

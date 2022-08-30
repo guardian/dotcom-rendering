@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { between, textSans, until } from '@guardian/source-foundations';
 import { joinUrl } from '../../lib/joinUrl';
 import ShareIcon from '../../static/icons/share.svg';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { formatCount } from '../lib/formatCount';
 import { useApi } from '../lib/useApi';

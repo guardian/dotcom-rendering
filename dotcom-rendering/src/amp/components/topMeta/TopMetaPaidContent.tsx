@@ -4,6 +4,7 @@ import React from 'react';
 import { getAgeWarning } from '../../../lib/age-warning';
 import { getSoleContributor } from '../../../lib/byline';
 import { getSharingUrls } from '../../../lib/sharing-urls';
+import type { Branding } from '../../../types/branding';
 import type { ArticleModel } from '../../types/ArticleModel';
 import { MainMedia } from '../MainMedia';
 import { BrandingRegionContainer } from './Branding';

@@ -8,6 +8,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { unescapeData } from '../../lib/escapeData';
+import type { Palette } from '../../types/palette';
 import { QuoteIcon } from './QuoteIcon';
 
 const partiallyLeft = css`

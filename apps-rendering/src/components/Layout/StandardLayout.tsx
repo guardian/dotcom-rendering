@@ -2,13 +2,10 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
-import {
-	background,
-	breakpoints,
-	from,
-	neutral,
-} from '@guardian/source-foundations';
+import { breakpoints, from } from '@guardian/source-foundations';
 import {
 	DottedLines,
 	StraightLines,
@@ -19,6 +16,7 @@ import Epic from 'components/Epic';
 import FootballScores from 'components/FootballScores';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
+import HeadlineTag from 'components/HeadlineTag';
 import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
@@ -44,19 +42,15 @@ import {
 import { themeToPillarString } from 'themeStyles';
 
 // ----- Styles ----- //
+const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
+	background-color: ${background.articleContent(format)};
 
-const Styles = css`
-	background: ${neutral[97]};
-`;
-
-const DarkStyles = darkModeCss`
-    background: ${background.inverse};
+	${darkModeCss`
+        background-color: ${background.articleContentDark(format)}
+    `}
 `;
 
 const BorderStyles = css`
-	background: ${neutral[100]};
-	${darkModeCss`background: ${background.inverse};`}
-
 	${from.wide} {
 		width: ${breakpoints.wide}px;
 		margin: 0 auto;
@@ -82,6 +76,7 @@ interface Props {
 }
 
 const StandardLayout: FC<Props> = ({ item, children }) => {
+	const format = getFormat(item);
 	// client side code won't render an Epic if there's an element with this id
 	const epicContainer = item.shouldHideReaderRevenue ? null : (
 		<div css={articleWidthStyles}>
@@ -106,9 +101,8 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 		: null;
 
 	const matchScores = 'football' in item ? item.football : none;
-
 	return (
-		<main css={[Styles, DarkStyles]}>
+		<main css={backgroundStyles(format)}>
 			<article className="js-article" css={BorderStyles}>
 				{maybeRender(matchScores, (scores) => (
 					<div id="js-football-scores">
@@ -127,6 +121,9 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 						mainMedia={item.mainMedia}
 					/>
 					<Series item={item} />
+					{item.design === ArticleDesign.Explainer && (
+						<HeadlineTag tagText={'Explainer'} format={item} />
+					)}
 					<Headline item={item} />
 					<div css={articleWidthStyles}>
 						<Standfirst item={item} />

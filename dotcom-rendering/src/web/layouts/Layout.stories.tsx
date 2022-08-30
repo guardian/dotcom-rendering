@@ -3,6 +3,7 @@ import { Analysis } from '../../../fixtures/generated/articles/Analysis';
 import { Audio } from '../../../fixtures/generated/articles/Audio';
 import { Comment } from '../../../fixtures/generated/articles/Comment';
 import { Editorial } from '../../../fixtures/generated/articles/Editorial';
+import { Explainer } from '../../../fixtures/generated/articles/Explainer';
 import { Feature } from '../../../fixtures/generated/articles/Feature';
 import { Gallery } from '../../../fixtures/generated/articles/Gallery';
 import { Interview } from '../../../fixtures/generated/articles/Interview';
@@ -21,6 +22,7 @@ import { SpecialReport } from '../../../fixtures/generated/articles/SpecialRepor
 import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { Video } from '../../../fixtures/generated/articles/Video';
 import { extractNAV } from '../../model/extract-nav';
+import type { CAPIArticleType } from '../../types/frontend';
 import { embedIframe } from '../browser/embedIframe/embedIframe';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 import { decideFormat } from '../lib/decideFormat';
@@ -51,6 +53,7 @@ const Fixtures: { [key: string]: CAPIArticleType } = {
 	SpecialReport,
 	NumberedList,
 	NewsletterSignup,
+	Explainer,
 };
 
 mockRESTCalls();
@@ -82,7 +85,7 @@ export const HydratedLayoutWrapper = ({
 	designName: string;
 	theme: string;
 }) => {
-	const fixture = Fixtures[designName] || Fixtures.Standard;
+	const fixture = Fixtures[designName] ?? Standard;
 
 	const serverCAPI = {
 		...fixture,
@@ -113,7 +116,7 @@ export const Liveblog = () => {
 	return (
 		<HydratedLayout
 			ServerCAPI={{
-				...Fixtures.LiveBlog,
+				...Live,
 				keyEvents: [],
 			}}
 		/>
