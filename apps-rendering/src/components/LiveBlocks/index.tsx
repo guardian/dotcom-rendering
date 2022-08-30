@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import { map, OptionKind, withDefault } from '@guardian/types';
@@ -15,6 +16,7 @@ interface LiveBlocksProps {
 	format: ArticleFormat;
 	pageNumber: number;
 	pinnedPost: Option<LiveBlockType>;
+	edition: Edition;
 }
 
 const LiveBlocks: FC<LiveBlocksProps> = ({
@@ -22,6 +24,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({
 	format,
 	pageNumber,
 	pinnedPost,
+	edition,
 }) => {
 	const showPinnedPost =
 		pageNumber === 1 && pinnedPost.kind === OptionKind.Some;
@@ -30,7 +33,11 @@ const LiveBlocks: FC<LiveBlocksProps> = ({
 		<>
 			{/* Accordion? */}
 			{showPinnedPost && (
-				<PinnedPost pinnedPost={pinnedPost.value} format={format} />
+				<PinnedPost
+					pinnedPost={pinnedPost.value}
+					format={format}
+					edition={edition}
+				/>
 			)}
 			{blocks.map((block) => (
 				<LiveBlock
@@ -45,6 +52,7 @@ const LiveBlocks: FC<LiveBlocksProps> = ({
 						map((pinned) => block.id === pinned.id),
 						withDefault<boolean>(false),
 					)}
+					edition={edition}
 				/>
 			))}
 		</>

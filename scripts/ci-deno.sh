@@ -8,6 +8,6 @@ deno run \
 
 deno run \
 	--no-check=remote \
-	--allow-net=www.theguardian.com,api.github.com \
+	--allow-net \
 	--allow-env="GITHUB_TOKEN" \
-	scripts/deno//thrasher-tracker.ts
+	scripts/deno/thrasher-tracker.ts

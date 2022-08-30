@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
 import {
@@ -370,6 +371,7 @@ const fields = {
 	logo: none,
 	webUrl: '',
 	promotedNewsletter: none,
+	edition: Edition.UK,
 };
 
 const article: Standard = {

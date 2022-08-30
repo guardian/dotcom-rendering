@@ -345,7 +345,7 @@ type FEFrontConfigType = {
 	beaconUrl: string;
 	userAttributesApiUrl: string;
 	host: string;
-	brazeApiKey: string;
+	brazeApiKey?: string;
 	calloutsUrl: string;
 	requiresMembershipAccess: boolean;
 	onwardWebSocket: string;

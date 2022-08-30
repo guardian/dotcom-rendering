@@ -1,3 +1,5 @@
+import type { EditionId } from './edition';
+
 export interface CommercialConfigType {
 	isPaidContent?: boolean;
 	pageId: string;
@@ -31,6 +33,7 @@ export interface Switches {
  * this data could eventually be defined in dotcom-rendering
  */
 export interface ConfigType extends CommercialConfigType {
+	dcrCouldRender?: boolean;
 	ajaxUrl: string;
 	sentryPublicApiKey: string;
 	sentryHost: string;
@@ -43,12 +46,12 @@ export interface ConfigType extends CommercialConfigType {
 	shortUrlId: string;
 	isDev?: boolean;
 	googletagUrl: string;
-	stage: string;
+	stage: StageType;
 	frontendAssetsFullURL: string;
 	adUnit: string;
 	isSensitive: boolean;
 	videoDuration?: number;
-	edition: string;
+	edition: EditionId;
 	section: string;
 
 	sharedAdTargeting: { [key: string]: any };

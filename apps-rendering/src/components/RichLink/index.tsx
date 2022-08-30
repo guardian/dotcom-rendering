@@ -1,5 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
-import { css, jsx as styledH } from '@emotion/react';
+import { css } from '@emotion/react';
 import {
 	background,
 	border,
@@ -15,7 +15,6 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { SvgArrowRightStraight } from '@guardian/source-react-components';
-import { createElement as h } from 'react';
 import type { ReactElement } from 'react';
 import { darkModeCss, darkModeStyles } from 'styles';
 
@@ -191,41 +190,32 @@ const RichLink = (props: {
 	const webUrl = 'https://www.theguardian.com';
 
 	const articleId = url.includes(webUrl)
-		? { 'data-article-id': url.replace(webUrl, '/rendered-items') }
-		: {};
+		? url.replace(webUrl, '/rendered-items')
+		: undefined;
 
-	const attributes = {
-		css: styles(format),
-		className: 'js-rich-link',
-		...articleId,
-	};
+	const showImage =
+		format.design !== ArticleDesign.LiveBlog &&
+		format.design !== ArticleDesign.DeadBlog;
 
-	const children = [
-		h('h1', { key: `${url}-h1` }, linkText),
-		h('button', { key: `${url}-button` }, [
-			h(SvgArrowRightStraight, { key: `${url}-svg` }),
-			'Read more',
-		]),
-	];
-
-	return styledH(
-		'aside',
-		{ ...attributes },
-		styledH(
-			'a',
-			{ href: url },
-			format.design === ArticleDesign.LiveBlog ||
-				format.design === ArticleDesign.DeadBlog
-				? children
-				: [
-						h(
-							'div',
-							{ className: 'js-image', key: `${url}-div` },
-							null,
-						),
-						...children,
-				  ],
-		),
+	return (
+		<aside
+			css={styles(format)}
+			className="js-rich-link"
+			data-article-id={articleId}
+		>
+			<a href={url}>
+				{showImage && (
+					<>
+						<div className="js-image" key={`${url}-div`} />
+					</>
+				)}
+				<h1 key={`${url}-h1`}>{linkText}</h1>
+				<button key={`${url}-button`}>
+					<SvgArrowRightStraight key={`${url}-svg`} />
+					Read more
+				</button>
+			</a>
+		</aside>
 	);
 };
 

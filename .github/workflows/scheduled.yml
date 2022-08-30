@@ -1,4 +1,4 @@
-name: Scheduled daily jobs
+name: ⏰ Scheduled daily jobs
 on:
   schedule:
     # Every work day of the week at 08:08
