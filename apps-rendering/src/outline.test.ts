@@ -27,17 +27,17 @@ const makeParagraph = (text: string): BodyElement => {
 	};
 };
 
-const makeLiveEventElement = (): BodyElement => ({
+const liveEventElement: BodyElement = {
 	kind: ElementKind.LiveEvent,
 	linkText: 'this links to a live event',
 	url: 'https://theguardian.com',
-});
+};
 
-const makeRichLinkElement = (): BodyElement => ({
+const richLinkElement: BodyElement = {
 	kind: ElementKind.RichLink,
 	url: 'https://theguardian.com',
 	linkText: 'this links to a related article',
-});
+};
 
 describe('outline', () => {
 	test('it creates an empty outline given an empty list of body elements', () => {
@@ -71,10 +71,10 @@ describe('outline', () => {
 			makeParagraph('paragraph 1'),
 			makeHeadingThree('Subtopic 1', 'subtopic-1'),
 			makeParagraph('paragraph 1'),
-			makeLiveEventElement(),
+			liveEventElement,
 			makeHeadingThree('Subtopic 2', 'subtopic-2'),
 			makeHeadingTwo('Interesting topic 2', 'interesting-topic-2'),
-			makeRichLinkElement(),
+			richLinkElement,
 			makeHeadingThree('Subtopic 3', 'subtopic-3'),
 		]);
 
@@ -83,7 +83,7 @@ describe('outline', () => {
 		expect(output[0].subheadings.length).toEqual(2);
 		expect(output[0].subheadings[0].id).toEqual('subtopic-1');
 		expect(output[0].subheadings[1].id).toEqual('subtopic-2');
-		expect(output[0].subheadings.length).toEqual(2);
+		expect(output[1].subheadings.length).toEqual(1);
 		expect(output[1].id).toEqual('interesting-topic-2');
 		expect(output[1].subheadings.length).toEqual(1);
 		expect(output[1].subheadings[0].id).toEqual('subtopic-3');

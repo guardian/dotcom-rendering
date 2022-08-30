@@ -14,44 +14,39 @@ type Outline = Array<
 	}
 >;
 
-const fromBodyElements = (elements: BodyElement[]): Outline => {
-	return elements.reduce(
-		(outline: Outline, element: BodyElement): Outline => {
-			switch (element.kind) {
-				case ElementKind.HeadingTwo:
-					return element.id
-						.map((id) => [
-							...outline,
+const fromBodyElements = (elements: BodyElement[]): Outline =>
+	elements.reduce((outline: Outline, element: BodyElement): Outline => {
+		switch (element.kind) {
+			case ElementKind.HeadingTwo:
+				return element.id
+					.map((id) => [
+						...outline,
+						{
+							id,
+							doc: element.doc,
+							subheadings: [],
+						},
+					])
+					.withDefault(outline);
+			case ElementKind.HeadingThree:
+				const currentH2 = indexOptional(outline.length - 1)(outline);
+				return Optional.map2(currentH2, element.id, (h2, id) => [
+					...outline.slice(0, outline.length - 1),
+					{
+						...h2,
+						subheadings: [
+							...h2.subheadings,
 							{
 								id,
 								doc: element.doc,
-								subheadings: [],
 							},
-						])
-						.withDefault(outline);
-
-				case ElementKind.HeadingThree:
-					const last = indexOptional(outline.length - 1)(outline);
-					return Optional.map2(last, element.id, (l, id) => [
-						...outline.slice(0, outline.length - 1),
-						{
-							...l,
-							subheadings: [
-								...l.subheadings,
-								{
-									id,
-									doc: element.doc,
-								},
-							],
-						},
-					]).withDefault(outline);
-				default:
-					return outline;
-			}
-		},
-		[],
-	);
-};
+						],
+					},
+				]).withDefault(outline);
+			default:
+				return outline;
+		}
+	}, []);
 
 export type { Outline };
 export { fromBodyElements };
