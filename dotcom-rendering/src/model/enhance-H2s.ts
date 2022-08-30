@@ -20,6 +20,11 @@ const getUnique = (slug: string, array: string[]): string => {
 	return slug;
 };
 
+/**
+ * We want ids to be readable to humans so that we can use them for navigation.
+ * This function takes a string and turns it into a slug.
+ * There's a bunch of ways to achieve this but we have taken inspiration from https://gist.github.com/codeguy/6684588?permalink_comment_id=3243980#gistcomment-3243980
+ */
 const slugify = (text: string) => {
 	return text
 		.normalize('NFKD') // The normalize() using NFKD method returns the Unicode Normalization Form of a given string.
@@ -39,25 +44,27 @@ const generateId = (text: string, elementId: string) => {
 	return slugify(text) || elementId;
 };
 
+/**
+ * If our h2 element is a subheading then we want to insert a humanised slug of the header text as its ID.
+ * We make sure to store each slug inside an array so that we can verify if this slug already exists as an id. If it does, we add the number of times it appears on the page to make sure the id is always unique.
+ */
 const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	const slugifiedIds: string[] = [];
 	const enhanced: CAPIElement[] = [];
 	elements.forEach((element) => {
-		// If this element is a subheading, insert a humanised slug of the text as its ID
 		if (
 			element._type ===
 			'model.dotcomrendering.pageElements.SubheadingBlockElement'
 		) {
 			const text = extractText(element);
-			const slug = text || text != "" ? slugify(text) : element.elementId;
-			const uniqueSlug = getUnique(slug, slugifiedIds);
+			const id = generateId(text, element.elementId);
+			const uniqueId = getUnique(id, slugifiedIds);
 
-			//remember the slug so we can check against it next time
-			slugifiedIds.push(slug);
+			slugifiedIds.push(id);
 			const withId = element.html.replace(
 				'<h2>',
 				// add ID to H2 element
-				`<h2 id='${uniqueSlug}'>`,
+				`<h2 id='${uniqueId}'>`,
 			);
 			enhanced.push({
 				...element,
