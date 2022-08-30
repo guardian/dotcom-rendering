@@ -85,7 +85,6 @@ describe('outline', () => {
 		expect(output[0].subheadings[1].id).toEqual('subtopic-2');
 		expect(output[1].subheadings.length).toEqual(1);
 		expect(output[1].id).toEqual('interesting-topic-2');
-		expect(output[1].subheadings.length).toEqual(1);
 		expect(output[1].subheadings[0].id).toEqual('subtopic-3');
 	});
 });
