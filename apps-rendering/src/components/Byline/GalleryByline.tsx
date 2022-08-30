@@ -1,6 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { text, border } from '@guardian/common-rendering/src/editorialPalette';
+import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { headline, remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
