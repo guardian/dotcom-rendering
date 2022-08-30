@@ -1,3 +1,4 @@
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
 import type { DCRGroupedTrails } from '../../types/front';
@@ -15,21 +16,53 @@ const defaultGroupedTrails: DCRGroupedTrails = {
 export default {
 	component: DynamicSlow,
 	title: 'Components/DynamicSlow',
-	parameters: {
-		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.mobileMedium,
-				breakpoints.mobileLandscape,
-				breakpoints.phablet,
-				breakpoints.tablet,
-				breakpoints.desktop,
-				breakpoints.leftCol,
-				breakpoints.wide,
-			],
-		},
+	chromatic: {
+		viewports: [
+			breakpoints.mobile,
+			breakpoints.mobileMedium,
+			breakpoints.mobileLandscape,
+			breakpoints.phablet,
+			breakpoints.tablet,
+			breakpoints.desktop,
+			breakpoints.leftCol,
+			breakpoints.wide,
+		],
 	},
 };
+
+/* With Avatars */
+export const Avatar = () => {
+	const avatarTrails = trails.map((trail) => {
+		return {
+			...trail,
+			trailText: 'This is the trail text',
+			avatarUrl:
+				'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
+			format: {
+				display: ArticleDisplay.Standard,
+				design: ArticleDesign.Comment,
+				theme: ArticlePillar.Opinion,
+			},
+		};
+	});
+	return (
+		<Section title="DynamicSlow" padContent={false} centralBorder="partial">
+			<DynamicSlow
+				groupedTrails={{
+					...defaultGroupedTrails,
+					veryBig: [
+						{ ...avatarTrails[0], isBoosted: true },
+						avatarTrails[1],
+					],
+					big: avatarTrails.slice(2, 4),
+					standard: avatarTrails.slice(4, 8),
+				}}
+				showAge={true}
+			/>
+		</Section>
+	);
+};
+Avatar.story = { name: 'With avatars' };
 
 /* First Slice Variants */
 export const OneHugeTwoBigsFourStandards = () => (
@@ -147,6 +180,7 @@ export const TwoVeryBigsOneBig4Standards = () => (
 		/>
 	</Section>
 );
+
 TwoVeryBigsOneBig4Standards.story = {
 	name: 'with 2 very bigs, 1 big, 8 standards',
 };

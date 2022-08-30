@@ -107,12 +107,12 @@ const noHeightFromTabletStyles = css`
  * NOTE: this component is non functional and is for demonstration only.
  */
 const NewsletterSignup: FC<Props> = ({ format, element }) => {
-	const { displayName, frequency, description, theme, id } = element;
+	const { name, frequency, description, theme, identityName } = element;
 	return (
 		<aside css={containerStyles(format)}>
 			<div css={stackBelowTabletStyles}>
 				<p css={titleStyles(theme)}>
-					Sign up to <span>{displayName}</span>
+					Sign up to <span>{name}</span>
 				</p>
 
 				<div css={noHeightFromTabletStyles}>
@@ -125,7 +125,7 @@ const NewsletterSignup: FC<Props> = ({ format, element }) => {
 
 			<p css={descriptionStyles}>{description}</p>
 
-			<EmailSignupForm newsletterId={id} format={format} />
+			<EmailSignupForm newsletterId={identityName} format={format} />
 			<PrivacyWording useCaptcha={false} format={format} />
 		</aside>
 	);

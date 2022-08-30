@@ -434,12 +434,15 @@ const EmbedComponentInClickToView: FC<EmbedComponentInClickToViewProps> = ({
 const withDatasetKeyFormat = (
 	dataSet: Record<string, string>,
 ): Record<string, string> => {
-	return Object.keys(dataSet).reduce((accumulatedObject, currentKey) => {
-		const newKey =
-			'data-' +
-			currentKey.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-		return { ...accumulatedObject, [newKey]: dataSet[currentKey] };
-	}, {});
+	return Object.entries(dataSet).reduce(
+		(accumulatedObject, [currentKey, currentValue]) => {
+			const newKey =
+				'data-' +
+				currentKey.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+			return { ...accumulatedObject, [newKey]: currentValue };
+		},
+		{},
+	);
 };
 
 const EmbedComponentWrapper: FC<Props> = ({ embed, editions }: Props) => {

@@ -437,6 +437,32 @@ export const PhotoEssay = () => {
 };
 PhotoEssay.story = { name: 'PhotoEssay' };
 
+export const Explainer = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Explainer,
+		theme: ArticlePillar.News,
+	};
+	return (
+		<Section fullWidth={true}>
+			<Flex>
+				<LeftColumn borderType="full">
+					<></>
+				</LeftColumn>
+				<ArticleContainer format={format}>
+					<ArticleHeadline
+						headlineString="This is the headline you see when design type is Explainer"
+						format={format}
+						tags={[]}
+						webPublicationDateDeprecated=""
+					/>
+				</ArticleContainer>
+			</Flex>
+		</Section>
+	);
+};
+Review.story = { name: 'Review' };
+
 export const Quiz = () => {
 	const format = {
 		display: ArticleDisplay.Standard,

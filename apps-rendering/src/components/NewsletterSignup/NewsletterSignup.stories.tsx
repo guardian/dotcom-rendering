@@ -11,13 +11,14 @@ const Default: FC = () => (
 	<NewsletterSignup
 		element={{
 			kind: ElementKind.NewsletterSignUp,
-			id: 'patriarchy',
+			identityName: 'patriarchy',
 			description:
 				'Reviewing the most important stories on feminism and sexism and those fighting for equality',
-			displayName: 'The Week in Patriarchy',
+			name: 'The Week in Patriarchy',
 			frequency: 'Weekly',
 			theme: ArticlePillar.Opinion,
-			group: 'opinion',
+			successDescription:
+				"We'll send you The Week in Patriarchy every week",
 		}}
 		format={{
 			design: selectDesign(ArticleDesign.Standard),
@@ -31,13 +32,13 @@ const NewsTheme: FC = () => (
 	<NewsletterSignup
 		element={{
 			kind: ElementKind.NewsletterSignUp,
-			id: 'monring-briefing',
+			identityName: 'morning-briefing',
 			description:
 				'Archie Bland and Nimo Omer take you through the top stories and what they mean, free every weekday morning',
-			displayName: 'First Edition',
+			name: 'First Edition',
 			frequency: 'Every weekday',
 			theme: ArticlePillar.News,
-			group: 'News',
+			successDescription: "We'll send you First Edition every weekday",
 		}}
 		format={{
 			design: selectDesign(ArticleDesign.Standard),

@@ -1,6 +1,8 @@
 // ----- Imports ----- //
 
 import type { Branding } from '@guardian/apps-rendering-api-models/branding';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
+import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Asset } from '@guardian/content-api-models/v1/asset';
@@ -40,6 +42,7 @@ import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import { parseMany as parseLiveBlocks } from 'liveBlock';
 import type { MainMedia } from 'mainMedia';
+import { Optional } from 'optional';
 import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
@@ -65,6 +68,8 @@ interface Fields extends ArticleFormat {
 	relatedContent: Option<ResizedRelatedContent>;
 	logo: Option<Logo>;
 	webUrl: string;
+	edition: Edition;
+	promotedNewsletter: Option<Newsletter>;
 }
 
 interface MatchReport extends Fields {
@@ -153,6 +158,16 @@ interface PrintShop extends Fields {
 	design: ArticleDesign.PrintShop;
 	body: Body;
 }
+
+interface Analysis extends Fields {
+	design: ArticleDesign.Analysis;
+	body: Body;
+}
+
+interface Explainer extends Fields {
+	design: ArticleDesign.Explainer;
+	body: Body;
+}
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each ArticleDesign type.
 interface Standard extends Fields {
@@ -164,6 +179,7 @@ interface Standard extends Fields {
 		| ArticleDesign.Comment
 		| ArticleDesign.Letter
 		| ArticleDesign.Editorial
+		| ArticleDesign.Analysis
 	>;
 	body: Body;
 }
@@ -180,7 +196,9 @@ type Item =
 	| Obituary
 	| Editorial
 	| Correction
-	| Interview;
+	| Interview
+	| Analysis
+	| Explainer;
 
 // ----- Convenience Types ----- //
 
@@ -294,6 +312,8 @@ const itemFields = (
 		),
 		logo: paidContentLogo(content.tags),
 		webUrl: content.webUrl,
+		edition: Optional.fromNullable(request.edition).withDefault(Edition.UK),
+		promotedNewsletter: fromNullable(request.promotedNewsletter),
 	};
 };
 
@@ -518,6 +538,7 @@ const fromCapi =
 
 export {
 	Item,
+	Analysis,
 	Comment,
 	LiveBlog,
 	DeadBlog,
@@ -533,6 +554,7 @@ export {
 	PhotoEssay,
 	Feature,
 	PrintShop,
+	Explainer,
 	fromCapi,
 	fromCapiLiveBlog,
 	getFormat,

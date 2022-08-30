@@ -119,6 +119,8 @@ module.exports = {
 			{ packageDir: ['..', '.'] },
 		],
 
+		'id-denylist': ['error', 'whitelist', 'whiteList', 'WHITELIST'],
+
 		...rulesToReview,
 		...rulesToEnforce,
 		...rulesToOverrideGuardianConfig,

@@ -5,15 +5,16 @@ import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import { ASSET_ORIGIN, getScriptArrayFromFile } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
+import { extractGA } from '../../model/extract-ga';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { CAPIArticleType } from '../../types/frontend';
-import { Article } from '../components/Article';
+import { ArticlePage } from '../components/ArticlePage';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { getHttp3Url } from '../lib/getHttp3Url';
-import { articleTemplate } from './articleTemplate';
 import { extractExpeditedIslands } from './extractIslands';
+import { pageTemplate } from './pageTemplate';
 import { recipeSchema } from './temporaryRecipeStructuredData';
 
 interface Props {
@@ -70,7 +71,7 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 
 	const html = renderToString(
 		<CacheProvider value={cache}>
-			<Article format={format} CAPIArticle={CAPIArticle} NAV={NAV} />
+			<ArticlePage format={format} CAPIArticle={CAPIArticle} NAV={NAV} />
 		</CacheProvider>,
 	);
 
@@ -88,25 +89,7 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
-	const { offerHttp3 } = CAPIArticle.config.switches;
-
-	/**
-	 * Preload the following woff2 font files
-	 * TODO: Identify critical fonts to preload
-	 */
-	const fontFiles = [
-		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2',
-		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
-		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
-		// 'http://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
-	].map((font) => (offerHttp3 ? getHttp3Url(font) : font));
+	const { offerHttp3 = false } = CAPIArticle.config.switches;
 
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
@@ -190,7 +173,38 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	 * is placed in a script tag on the page
 	 */
 	const windowGuardian = escapeData(
-		JSON.stringify(makeWindowGuardian(CAPIArticle)),
+		JSON.stringify(
+			makeWindowGuardian({
+				editionId: CAPIArticle.editionId,
+				stage: CAPIArticle.config.stage,
+				frontendAssetsFullURL: CAPIArticle.config.frontendAssetsFullURL,
+				revisionNumber: CAPIArticle.config.revisionNumber,
+				sentryPublicApiKey: CAPIArticle.config.sentryPublicApiKey,
+				sentryHost: CAPIArticle.config.sentryHost,
+				keywordIds: CAPIArticle.config.keywordIds,
+				dfpAccountId: CAPIArticle.config.dfpAccountId,
+				adUnit: CAPIArticle.config.adUnit,
+				ajaxUrl: CAPIArticle.config.ajaxUrl,
+				googletagUrl: CAPIArticle.config.googletagUrl,
+				switches: CAPIArticle.config.switches,
+				abTests: CAPIArticle.config.abTests,
+				brazeApiKey: CAPIArticle.config.brazeApiKey,
+				isPaidContent: CAPIArticle.pageType.isPaidContent,
+				contentType: CAPIArticle.contentType,
+				shouldHideReaderRevenue: CAPIArticle.shouldHideReaderRevenue,
+				GAData: extractGA({
+					webTitle: CAPIArticle.webTitle,
+					format: CAPIArticle.format,
+					sectionName: CAPIArticle.sectionName,
+					contentType: CAPIArticle.contentType,
+					tags: CAPIArticle.tags,
+					pageId: CAPIArticle.pageId,
+					editionId: CAPIArticle.editionId,
+					beaconURL: CAPIArticle.beaconURL,
+				}),
+				unknownConfig: CAPIArticle.config,
+			}),
+		),
 	);
 
 	const hasAmpInteractiveTag = CAPIArticle.tags.some(
@@ -237,13 +251,12 @@ window.twttr = (function(d, s, id) {
 
 	const recipeMarkup = url in recipeSchema ? recipeSchema[url] : undefined;
 
-	return articleTemplate({
+	return pageTemplate({
 		linkedData,
 		priorityScriptTags,
 		lowPriorityScriptTags,
 		css: extractedCss,
 		html,
-		fontFiles,
 		title,
 		description: CAPIArticle.trailText,
 		windowGuardian,
@@ -257,5 +270,6 @@ window.twttr = (function(d, s, id) {
 				? initTwitter
 				: undefined,
 		recipeMarkup,
+		offerHttp3,
 	});
 };

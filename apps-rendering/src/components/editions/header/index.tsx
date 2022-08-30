@@ -12,6 +12,7 @@ import Series from 'components/editions/series';
 import Standfirst from 'components/editions/standfirst';
 import type { Item } from 'item';
 import { isPicture } from 'item';
+import { maybeRender } from 'lib';
 import type { FC, ReactElement } from 'react';
 import {
 	articleMarginStyles,
@@ -234,6 +235,13 @@ const LetterHeader: FC<HeaderProps> = ({ item }) => (
 		<HeaderMedia item={item} />
 		<Series item={item} />
 		<Headline item={item} />
+		{maybeRender(item.bylineHtml, (byline) => {
+			if (byline.textContent === 'Letters') {
+				return null;
+			}
+
+			return <Byline item={item} shareIcon={false} />;
+		})}
 		<Lines />
 		<Standfirst item={item} shareIcon />
 	</header>

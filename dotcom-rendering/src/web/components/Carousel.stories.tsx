@@ -186,7 +186,7 @@ export const Headlines = () => (
 			<Carousel
 				heading="More on this story"
 				trails={trails}
-				onwardsType="more-on-this-story"
+				onwardsSource="more-on-this-story"
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
@@ -198,7 +198,7 @@ export const Headlines = () => (
 			<Carousel
 				heading="Sport"
 				trails={trails}
-				onwardsType="curated-content"
+				onwardsSource="curated-content"
 				format={{
 					theme: ArticlePillar.Sport,
 					design: ArticleDesign.Standard,
@@ -217,7 +217,7 @@ export const SingleItemCarousel = () => (
 			<Carousel
 				heading="More on this story"
 				trails={trails.slice(1, 2)}
-				onwardsType="more-on-this-story"
+				onwardsSource="more-on-this-story"
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
@@ -236,7 +236,7 @@ export const Immersive = () => (
 			<Carousel
 				heading="More on this story"
 				trails={immersiveTrails}
-				onwardsType="more-on-this-story"
+				onwardsSource="more-on-this-story"
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
@@ -248,7 +248,7 @@ export const Immersive = () => (
 			<Carousel
 				heading="Sport"
 				trails={immersiveTrails}
-				onwardsType="curated-content"
+				onwardsSource="curated-content"
 				format={{
 					theme: ArticlePillar.Sport,
 					design: ArticleDesign.Standard,
