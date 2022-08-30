@@ -30,7 +30,7 @@ type Props = {
 	description?: string;
 	url?: string;
 	onwardsSource: OnwardsSource;
-	format: ArticleFormat;
+	format?: ArticleFormat;
 };
 
 // Carousel icons - need replicating from source for centring
@@ -158,12 +158,12 @@ const dotStyle = css`
 	}
 `;
 
-const dotActiveStyle = (palette: Palette) => css`
-	background-color: ${palette.background.carouselDot};
+const dotActiveStyle = (palette?: Palette) => css`
+	background-color: ${palette?.background.carouselDot ?? neutral[0]};
 
 	&:hover,
 	&:focus {
-		background-color: ${palette.background.carouselDotFocus};
+		background-color: ${palette?.background.carouselDotFocus ?? neutral[0]};
 	}
 `;
 
@@ -197,8 +197,8 @@ const buttonContainerStyle = css`
 		display: none;
 	}
 `;
-const prevButtonContainerStyle = (format: ArticleFormat) => {
-	switch (format.design) {
+const prevButtonContainerStyle = (format?: ArticleFormat) => {
+	switch (format?.design) {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog: {
 			return css`
@@ -310,8 +310,10 @@ const headerStyles = css`
 	margin-left: 0;
 `;
 
-const titleStyle = (palette: Palette, isCuratedContent?: boolean) => css`
-	color: ${isCuratedContent ? palette.text.carouselTitle : text.primary};
+const titleStyle = (palette?: Palette, isCuratedContent?: boolean) => css`
+	color: ${isCuratedContent && palette
+		? palette.text.carouselTitle
+		: text.primary};
 `;
 
 const Title = ({
@@ -320,7 +322,7 @@ const Title = ({
 	isCuratedContent,
 }: {
 	title: string;
-	palette: Palette;
+	palette?: Palette;
 	isCuratedContent?: boolean;
 }) => (
 	<h2 css={headerStyles}>
@@ -387,7 +389,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 type HeaderAndNavProps = {
 	heading: string;
 	trails: TrailType[];
-	palette: Palette;
+	palette?: Palette;
 	index: number;
 	isCuratedContent?: boolean;
 	goToIndex: (newIndex: number) => void;
@@ -429,7 +431,7 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 );
 
 export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
-	const palette = decidePalette(format);
+	const palette = format && decidePalette(format);
 	const carouselRef = useRef<HTMLUListElement>(null);
 
 	const [index, setIndex] = useState(0);
@@ -545,8 +547,8 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 			<LeftColumn
 				borderType="partial"
 				size={
-					format.design === ArticleDesign.LiveBlog ||
-					format.design === ArticleDesign.DeadBlog
+					format?.design === ArticleDesign.LiveBlog ||
+					format?.design === ArticleDesign.DeadBlog
 						? 'wide'
 						: 'compact'
 				}
