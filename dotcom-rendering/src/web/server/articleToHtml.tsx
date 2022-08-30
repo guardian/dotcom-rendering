@@ -3,7 +3,12 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
-import { ASSET_ORIGIN, getScriptsFromManifest } from '../../lib/assets';
+import type { ManifestPath } from '../../lib/assets';
+import {
+	ASSET_ORIGIN,
+	generateScriptTags,
+	getScriptsFromManifest,
+} from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractGA } from '../../model/extract-ga';
 import { extractNAV } from '../../model/extract-nav';
@@ -20,31 +25,6 @@ import { recipeSchema } from './temporaryRecipeStructuredData';
 interface Props {
 	article: CAPIArticleType;
 }
-
-const generateScriptTags = (
-	scripts: Array<{ src: string; legacy?: boolean } | false>,
-) =>
-	scripts.reduce<string[]>((scriptTags, script) => {
-		if (script === false) return scriptTags;
-
-		let attrs: string;
-		switch (script.legacy) {
-			case true:
-				attrs = 'defer nomodule';
-				break;
-			case false:
-				attrs = 'type="module"';
-				break;
-			default:
-				attrs = 'defer';
-				break;
-		}
-
-		return [
-			...scriptTags,
-			`<script ${attrs} src="${script.src}"></script>`,
-		];
-	}, []);
 
 const decideTitle = (CAPIArticle: CAPIArticleType): string => {
 	if (
@@ -108,12 +88,12 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
-	const manifestPath =
+	const manifestPaths: ManifestPath[] =
 		CAPIArticle.config.abTests.jsBundleVariant === 'variant'
-			? './manifest.variant.json'
-			: './manifest.json';
+			? ['./manifest.variant.json', './manifest.legacy.json']
+			: ['./manifest.modern.json', './manifest.legacy.json'];
 
-	const getScripts = getScriptsFromManifest(manifestPath);
+	const getScripts = getScriptsFromManifest(manifestPaths);
 
 	/**
 	 * The highest priority scripts.
@@ -124,25 +104,19 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	 */
 	const priorityScriptTags = generateScriptTags(
 		[
-			{ src: polyfillIO },
+			polyfillIO,
 			...getScripts('bootCmp.js'),
 			...getScripts('ophan.js'),
-			CAPIArticle.config && {
-				src:
-					process.env.COMMERCIAL_BUNDLE_URL ??
-					CAPIArticle.config.commercialBundleUrl,
-			},
+			process.env.COMMERCIAL_BUNDLE_URL ??
+				CAPIArticle.config.commercialBundleUrl,
 			...getScripts('sentryLoader.js'),
 			...getScripts('dynamicImport.js'),
-			pageHasNonBootInteractiveElements && {
-				src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
-			},
+			pageHasNonBootInteractiveElements &&
+				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 			...getScripts('islands.js'),
 			...expeditedIslands.flatMap((name) => getScripts(`${name}.js`)),
 		].map((script) =>
-			offerHttp3 && script
-				? { ...script, src: getHttp3Url(script.src) }
-				: script,
+			offerHttp3 && script ? getHttp3Url(script) : script,
 		),
 	);
 
@@ -160,17 +134,15 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 			...getScripts('newsletterEmbedIframe.js'),
 			...getScripts('relativeTime.js'),
 			...getScripts('initDiscussion.js'),
-		].map((script) =>
-			offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
-		),
+		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
 	const gaChunk = getScripts('ga.js');
-	const modernScript = gaChunk.find((script) => !script.legacy);
-	const legacyScript = gaChunk.find((script) => script.legacy);
+	const modernScript = gaChunk.find((script) => script.includes('.modern.'));
+	const legacyScript = gaChunk.find((script) => script.includes('.legacy.'));
 	const gaPath = {
-		modern: modernScript?.src as string,
-		legacy: legacyScript?.src as string,
+		modern: modernScript as string,
+		legacy: legacyScript as string,
 	};
 
 	/**

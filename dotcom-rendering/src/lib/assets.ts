@@ -1,5 +1,6 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
+import { isString } from '@guardian/libs';
 
 interface AssetHash {
 	[key: string]: string;
@@ -53,44 +54,46 @@ const getManifest = (path: string): AssetHash => {
 	}
 };
 
-type Script = { src: string; legacy: boolean };
+export type ManifestPath = `./manifest.${string}.json`;
 
 const getScripts = (
-	manifestPath: `./manifest${string}.json`,
+	manifestPaths: Array<ManifestPath>,
 	file: `${string}.js`,
-): Script[] => {
+): string[] => {
 	if (!file.endsWith('.js'))
 		throw new Error('Invalid filename: extension must be .js');
 
-	const [manifest, legacyManifest] = [
-		manifestPath,
-		'./manifest.legacy.json',
-	].map(getManifest);
-
-	const filename = isDev ? file : manifest[file];
-	const legacyFilename = isDev
-		? file.replace('.js', '.legacy.js')
-		: legacyManifest[file];
-
-	const scripts: Script[] = [];
-
-	if (filename) {
-		scripts.push({
-			src: `${ASSET_ORIGIN}assets/${filename}`,
-			legacy: false,
-		});
-	}
-	if (legacyFilename) {
-		scripts.push({
-			src: `${ASSET_ORIGIN}assets/${legacyFilename}`,
-			legacy: true,
-		});
+	if (isDev) {
+		return [
+			`${ASSET_ORIGIN}assets/${file.replace('.js', '.modern.js')}`,
+			`${ASSET_ORIGIN}assets/${file.replace('.js', '.legacy.js')}`,
+		];
 	}
 
-	return scripts;
+	return manifestPaths.map((manifestPath) => {
+		const manifest = getManifest(manifestPath);
+		const filename = manifest[file];
+
+		return `${ASSET_ORIGIN}assets/${filename}`;
+	});
 };
 
 export const getScriptsFromManifest =
-	(manifestPath: `./manifest${string}.json`) =>
+	(manifestPaths: Array<`./manifest.${string}.json`>) =>
 	(file: `${string}.js`): ReturnType<typeof getScripts> =>
-		getScripts(manifestPath, file);
+		getScripts(manifestPaths, file);
+
+export const generateScriptTags = (scripts: Array<string | false>): string[] =>
+	scripts.filter(isString).map((script) => {
+		if (script.includes('.legacy.')) {
+			return `<script defer nomodule src="${script}"></script>`;
+		}
+		if (script.includes('.modern.')) {
+			return `<script type="module" src="${script}"></script>`;
+		}
+
+		return [
+			'<!-- The following script does not vary between modern & legacy browsers -->',
+			`<script defer src="${script}"></script>`,
+		].join('\n');
+	});

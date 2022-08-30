@@ -2,7 +2,8 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { renderToString } from 'react-dom/server';
-import { getScriptsFromManifest } from '../../lib/assets';
+import type { ManifestPath } from '../../lib/assets';
+import { generateScriptTags, getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
@@ -14,31 +15,6 @@ import { pageTemplate } from './pageTemplate';
 interface Props {
 	front: DCRFrontType;
 }
-
-const generateScriptTags = (
-	scripts: Array<{ src: string; legacy?: boolean } | false>,
-) =>
-	scripts.reduce<string[]>((scriptTags, script) => {
-		if (script === false) return scriptTags;
-
-		let attrs: string;
-		switch (script.legacy) {
-			case true:
-				attrs = 'defer nomodule';
-				break;
-			case false:
-				attrs = 'type="module"';
-				break;
-			default:
-				attrs = 'defer';
-				break;
-		}
-
-		return [
-			...scriptTags,
-			`<script ${attrs} src="${script.src}"></script>`,
-		];
-	}, []);
 
 export const frontToHtml = ({ front }: Props): string => {
 	const title = front.webTitle;
@@ -66,12 +42,12 @@ export const frontToHtml = ({ front }: Props): string => {
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
-	const manifestPath =
+	const manifestPaths: ManifestPath[] =
 		front.config.abTests.jsBundleVariant === 'variant'
-			? './manifest.variant.json'
-			: './manifest.json';
+			? ['./manifest.variant.json', './manifest.legacy.json']
+			: ['./manifest.modern.json', './manifest.legacy.json'];
 
-	const getScripts = getScriptsFromManifest(manifestPath);
+	const getScripts = getScriptsFromManifest(manifestPaths);
 
 	/**
 	 * The highest priority scripts.
@@ -82,20 +58,15 @@ export const frontToHtml = ({ front }: Props): string => {
 	 */
 	const priorityScriptTags = generateScriptTags(
 		[
-			{ src: polyfillIO },
+			polyfillIO,
 			...getScripts('bootCmp.js'),
 			...getScripts('ophan.js'),
-			front.config && {
-				src:
-					process.env.COMMERCIAL_BUNDLE_URL ??
-					front.config.commercialBundleUrl,
-			},
+			process.env.COMMERCIAL_BUNDLE_URL ??
+				front.config.commercialBundleUrl,
 			...getScripts('sentryLoader.js'),
 			...getScripts('dynamicImport.js'),
 			...getScripts('islands.js'),
-		].map((script) =>
-			offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
-		),
+		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
 	/**
@@ -111,19 +82,15 @@ export const frontToHtml = ({ front }: Props): string => {
 			...getScripts('embedIframe.js'),
 			...getScripts('newsletterEmbedIframe.js'),
 			...getScripts('relativeTime.js'),
-		].map((script) =>
-			offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
-		),
+		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
-	const gaChunk = getScripts('ga.js').map((script) =>
-		offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
-	);
-	const modernScript = gaChunk.find((script) => !script.legacy);
-	const legacyScript = gaChunk.find((script) => script.legacy);
+	const gaChunk = getScripts('ga.js');
+	const modernScript = gaChunk.find((script) => script.includes('.modern.'));
+	const legacyScript = gaChunk.find((script) => script.includes('.legacy.'));
 	const gaPath = {
-		modern: modernScript?.src as string,
-		legacy: legacyScript?.src as string,
+		modern: modernScript as string,
+		legacy: legacyScript as string,
 	};
 
 	/**

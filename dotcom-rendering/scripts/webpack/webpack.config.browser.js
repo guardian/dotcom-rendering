@@ -8,9 +8,8 @@ const DEV = process.env.NODE_ENV === 'development';
  * @returns {string}
  */
 const generateName = (bundle) => {
-	const bundleString = bundle === 'modern' ? '' : `.${bundle}`;
 	const chunkhashString = DEV ? '' : '.[chunkhash]';
-	return `[name]${bundleString}${chunkhashString}.js`;
+	return `[name].${bundle}${chunkhashString}.js`;
 };
 
 /**
@@ -135,16 +134,12 @@ module.exports = ({ bundle, sessionId }) => ({
 	},
 	plugins: [
 		new WebpackManifestPlugin({
-			fileName:
-				bundle === 'modern'
-					? 'manifest.json'
-					: `manifest.${bundle}.json`,
+			fileName: `manifest.${bundle}.json`,
 		}),
 		...(DEV
 			? [
 					new GuStatsReportPlugin({
-						buildName:
-							bundle === 'modern' ? 'client' : `${bundle}-client`,
+						buildName: `${bundle}-client`,
 						project: 'dotcom-rendering',
 						team: 'dotcom',
 						sessionId,
