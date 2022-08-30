@@ -26,8 +26,8 @@ import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
 import { getFormat } from 'item';
 import type {
-	Item,
 	Explainer as ExplainerItem,
+	Item,
 	MatchReport as MatchReportItem,
 	Review as ReviewItem,
 	Standard as StandardItem,

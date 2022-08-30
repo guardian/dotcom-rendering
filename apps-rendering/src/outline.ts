@@ -1,4 +1,4 @@
-import { BodyElement } from 'bodyElement';
+import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
 import { indexOptional } from 'lib';
 import { Optional } from 'optional';
@@ -10,7 +10,7 @@ type Fields = {
 
 type Outline = Array<
 	Fields & {
-		subheadings: Array<Fields>;
+		subheadings: Fields[];
 	}
 >;
 
@@ -28,7 +28,7 @@ const fromBodyElements = (elements: BodyElement[]): Outline =>
 						},
 					])
 					.withDefault(outline);
-			case ElementKind.HeadingThree:
+			case ElementKind.HeadingThree: {
 				const currentH2 = indexOptional(outline.length - 1)(outline);
 				return Optional.map2(currentH2, element.id, (h2, id) => [
 					...outline.slice(0, outline.length - 1),
@@ -43,6 +43,7 @@ const fromBodyElements = (elements: BodyElement[]): Outline =>
 						],
 					},
 				]).withDefault(outline);
+			}
 			default:
 				return outline;
 		}

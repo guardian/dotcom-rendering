@@ -43,11 +43,12 @@ import type { LiveBlock } from 'liveBlock';
 import { parseMany as parseLiveBlocks } from 'liveBlock';
 import type { MainMedia } from 'mainMedia';
 import { Optional } from 'optional';
+import type { Outline } from 'outline';
+import { fromBodyElements } from 'outline';
 import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
 import { themeFromString } from 'themeStyles';
-import { fromBodyElements, Outline } from 'outline';
 
 // ----- Item Type ----- //
 
