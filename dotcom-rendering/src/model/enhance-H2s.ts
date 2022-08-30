@@ -31,6 +31,14 @@ const slugify = (text: string) => {
 		.replace(/\-$/g, ''); // Remove trailing -
 };
 
+/**
+ * This function creates a sluggified string if we have test available. If not, then it retuns the element id so that we always have an id.
+ */
+const generateId = (text: string, elementId: string) => {
+	if (!text) return elementId;
+	return slugify(text) || elementId;
+};
+
 const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	const slugifiedIds: string[] = [];
 	const enhanced: CAPIElement[] = [];
