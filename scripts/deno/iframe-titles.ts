@@ -165,6 +165,11 @@ ${formatter(ok, true)}
 
 const issue_number = 5510;
 
+if (!octokit) {
+	console.log(body);
+	Deno.exit(0);
+}
+
 try {
 	const {
 		data: { html_url },

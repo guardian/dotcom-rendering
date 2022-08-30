@@ -200,17 +200,32 @@ const RichLink = (props: {
 		...articleId,
 	};
 
+	const children = [
+		h('h1', { key: `${url}-h1` }, linkText),
+		h('button', { key: `${url}-button` }, [
+			h(SvgArrowRightStraight, { key: `${url}-svg` }),
+			'Read more',
+		]),
+	];
+
 	return styledH(
 		'aside',
 		{ ...attributes },
-		styledH('a', { href: url }, [
-			h('div', { className: 'js-image', key: `${url}-div` }, null),
-			h('h1', { key: `${url}-h1` }, linkText),
-			h('button', { key: `${url}-button` }, [
-				h(SvgArrowRightStraight, { key: `${url}-svg` }),
-				'Read more',
-			]),
-		]),
+		styledH(
+			'a',
+			{ href: url },
+			format.design === ArticleDesign.LiveBlog ||
+				format.design === ArticleDesign.DeadBlog
+				? children
+				: [
+						h(
+							'div',
+							{ className: 'js-image', key: `${url}-div` },
+							null,
+						),
+						...children,
+				  ],
+		),
 	);
 };
 
