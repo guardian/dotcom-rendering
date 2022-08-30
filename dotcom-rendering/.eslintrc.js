@@ -113,6 +113,8 @@ module.exports = {
 		'no-underscore-dangle': ['warn', { allow: ['_type'] }],
 		'no-useless-escape': 'error',
 
+		"object-shorthand": ["error", "always"],
+
 		'import/no-extraneous-dependencies': [
 			'error',
 			// https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md#options
