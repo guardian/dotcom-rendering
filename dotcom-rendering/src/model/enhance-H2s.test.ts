@@ -1,5 +1,5 @@
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import { enhanceH2s, getUnique } from './enhance-H2s';
+import { enhanceH2s } from './enhance-H2s';
 
 describe('Enhance h2 Embeds', () => {
 	it('sets an id when it is an h2 of type SubheadingBlockElement', () => {
@@ -91,19 +91,53 @@ describe('Enhance h2 Embeds', () => {
 	});
 
 	it('should add the number of occurences to the slug if it is not unique', () => {
-		const slug = 'i-am-not-unique';
-		const array = [
-			'my-id',
-			'another-id',
-			'i-am-not-unique',
-			'i-am-not-unique',
-			'i-am-not-unique',
+
+		const input: Block[] = [
+			{
+				...blockMetaData,
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						elementId: 'mockId',
+						html: '<h2>I am not unique.</h2>',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						elementId: 'mockId',
+						html: '<h2>I am not unique.</h2>',
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						elementId: 'mockId',
+						html: '<h2>I am not unique.</h2>',
+					},
+				],
+			},
 		];
 
-		const input = getUnique(slug, array);
+		const expectedOutput = [
+			{
+				...blockMetaData,
+				elements: [
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						elementId: 'mockId',
+						html: "<h2 id='i-am-not-unique'>I am not unique.</h2>",
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						elementId: 'mockId',
+						html: "<h2 id='i-am-not-unique-1'>I am not unique.</h2>",
+					},
+					{
+						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+						elementId: 'mockId',
+						html: "<h2 id='i-am-not-unique-2'>I am not unique.</h2>",
+					},
+				],
+			},
+		];
 
-		const expectedOutput = 'i-am-not-unique-3';
-
-		expect(input).toEqual(expectedOutput);
+		expect(enhanceH2s(input)).toEqual(expectedOutput);
 	});
 });

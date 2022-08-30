@@ -10,7 +10,7 @@ const extractText = (element: SubheadingBlockElement): string => {
  * We need the ids to be unique so we can navigate to them.
  * This function checks if the slug already exists and if it does it adds the count to the end of the slug.
  */
-export const getUnique = (slug: string, array: string[]): string => {
+const getUnique = (slug: string, array: string[]): string => {
 	if (array.includes(slug)) {
 		const occurenceCount = array.filter(
 			(currentItem) => currentItem === slug,
