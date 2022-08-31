@@ -25,12 +25,10 @@ export const TopRightAdSlot = ({
 	adStyles,
 	shouldHideReaderRevenue,
 	isPaidContent,
-	shouldHideAds,
 }: {
 	adStyles: SerializedStyles[];
 	shouldHideReaderRevenue: boolean;
 	isPaidContent: boolean;
-	shouldHideAds: boolean;
 }) => {
 	const adBlockerDetected = useAdBlockInUse();
 	const isSignedIn =
@@ -41,8 +39,7 @@ export const TopRightAdSlot = ({
 		!isSignedIn &&
 		!shouldHideReaderRevenue &&
 		!isPaidContent &&
-		!isServer &&
-		!shouldHideAds
+		!isServer
 	) {
 		// Show a fixed image asking people to subscribe
 		return <ShadyPie />;
