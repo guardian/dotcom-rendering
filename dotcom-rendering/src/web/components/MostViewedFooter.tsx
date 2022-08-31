@@ -2,20 +2,15 @@ import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source-foundations';
 import { border, from } from '@guardian/source-foundations';
 import type { Palette } from '../../types/palette';
-import type {
-	CAPITrailTabType,
-	CAPITrailType,
-	TrailTabType,
-} from '../../types/trails';
-import { decideTrail } from '../lib/decideTrail';
+import type { TrailTabType, TrailType } from '../../types/trails';
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 import { MostViewedFooterSecondTierItem } from './MostViewedFooterSecondTierItem';
 
 type Props = {
-	tabs: CAPITrailTabType[];
+	tabs: TrailTabType[];
 	palette: Palette;
-	mostCommented?: CAPITrailType;
-	mostShared?: CAPITrailType;
+	mostCommented?: TrailType;
+	mostShared?: TrailType;
 	abTestCypressDataAttr?: string;
 	variantFromRunnable?: string;
 	sectionName?: string;
@@ -39,13 +34,6 @@ const secondTierStyles = css`
 	}
 `;
 
-function transformTabs(tabs: CAPITrailTabType[]): TrailTabType[] {
-	return tabs.map((tab) => ({
-		...tab,
-		trails: tab.trails.map((trail) => decideTrail(trail)),
-	}));
-}
-
 export const MostViewedFooter = ({
 	tabs,
 	mostCommented,
@@ -65,21 +53,21 @@ export const MostViewedFooter = ({
 			data-cy-ab-runnable-test={variantFromRunnable}
 		>
 			<MostViewedFooterGrid
-				data={transformTabs(tabs)}
+				data={tabs}
 				sectionName={sectionName}
 				palette={palette}
 			/>
 			<div css={[stackBelow('tablet'), secondTierStyles]}>
 				{mostCommented && (
 					<MostViewedFooterSecondTierItem
-						trail={decideTrail(mostCommented)}
+						trail={mostCommented}
 						title="Most commented"
 						showRightBorder={true}
 					/>
 				)}
 				{mostShared && (
 					<MostViewedFooterSecondTierItem
-						trail={decideTrail(mostShared)}
+						trail={mostShared}
 						title="Most shared"
 					/>
 				)}

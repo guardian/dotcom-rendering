@@ -1,7 +1,12 @@
 import { joinUrl } from '../../lib/joinUrl';
 import type { Palette } from '../../types/palette';
-import type { CAPITrailTabType, CAPITrailType } from '../../types/trails';
+import type {
+	CAPITrailTabType,
+	CAPITrailType,
+	TrailTabType,
+} from '../../types/trails';
 import { abTestTest } from '../experiments/tests/ab-test-test';
+import { decideTrail } from '../lib/decideTrail';
 import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
 import { MostViewedFooter } from './MostViewedFooter';
@@ -18,6 +23,13 @@ function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
 		sectionName && !sectionsWithoutPopular.includes(sectionName);
 	const endpoint = `/most-read${hasSection ? `/${sectionName}` : ''}.json`;
 	return joinUrl([ajaxUrl, `${endpoint}?dcr=true`]);
+}
+
+function transformTabs(tabs: CAPITrailTabType[]): TrailTabType[] {
+	return tabs.map((tab) => ({
+		...tab,
+		trails: tab.trails.map((trail) => decideTrail(trail)),
+	}));
 }
 
 interface MostViewedFooterPayloadType {
@@ -58,11 +70,17 @@ export const MostViewedFooterData = ({
 		const tabs = 'tabs' in data ? data.tabs : data;
 		return (
 			<MostViewedFooter
-				tabs={tabs}
+				tabs={transformTabs(tabs)}
 				mostCommented={
-					'mostCommented' in data ? data.mostCommented : undefined
+					'mostCommented' in data
+						? decideTrail(data.mostCommented)
+						: undefined
 				}
-				mostShared={'mostShared' in data ? data.mostShared : undefined}
+				mostShared={
+					'mostShared' in data
+						? decideTrail(data.mostShared)
+						: undefined
+				}
 				abTestCypressDataAttr={abTestCypressDataAttr}
 				variantFromRunnable={variantFromRunnable}
 				sectionName={sectionName}
