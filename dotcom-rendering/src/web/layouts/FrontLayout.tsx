@@ -187,7 +187,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					if (
 						collection.collectionType === 'news/most-popular' &&
-						!isPaidContent
+						!isPaidContent &&
+						front.config.switches.mostViewedFronts
 					) {
 						return (
 							<Section
