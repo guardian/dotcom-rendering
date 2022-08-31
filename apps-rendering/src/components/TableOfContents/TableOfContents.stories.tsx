@@ -2,7 +2,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { explainer } from 'fixtures/item';
 import type { ReactElement } from 'react';
-import TableOfContent from './';
+import TableOfContents from '.';
 
 const format: ArticleFormat = {
 	design: ArticleDesign.Standard,
@@ -11,12 +11,12 @@ const format: ArticleFormat = {
 };
 
 const Default = (): ReactElement => (
-	<TableOfContent outline={explainer.outline} format={format} />
+	<TableOfContents outline={explainer.outline} format={format} />
 );
 
 export default {
-	component: TableOfContent,
-	title: 'AR/TableOfContent',
+	component: TableOfContents,
+	title: 'AR/TableOfContents',
 };
 
 export { Default };

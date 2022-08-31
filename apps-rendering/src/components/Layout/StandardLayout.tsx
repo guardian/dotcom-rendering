@@ -23,7 +23,7 @@ import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
-import TableOfContent from 'components/TableOfContent';
+import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
 import { getFormat } from 'item';
 import type {
@@ -139,7 +139,7 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 					{item.design === ArticleDesign.Explainer &&
 						item.outline.length > 0 && (
 							<section css={articleWidthStyles}>
-								<TableOfContent
+								<TableOfContents
 									format={getFormat(item)}
 									outline={item.outline}
 								/>

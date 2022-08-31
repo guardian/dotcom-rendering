@@ -156,7 +156,7 @@ const TocTextElement: React.FC<TextElementProps> = ({
 	}
 };
 
-const TableOfContent: FC<Props> = ({ format, outline }) => {
+const TableOfContents: FC<Props> = ({ format, outline }) => {
 	return (
 		<details open={outline.length < 5} css={detailsStyles}>
 			<summary css={summaryStyles}>
@@ -185,4 +185,4 @@ const TableOfContent: FC<Props> = ({ format, outline }) => {
 	);
 };
 
-export default TableOfContent;
+export default TableOfContents;
