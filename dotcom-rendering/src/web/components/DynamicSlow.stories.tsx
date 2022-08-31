@@ -16,17 +16,19 @@ const defaultGroupedTrails: DCRGroupedTrails = {
 export default {
 	component: DynamicSlow,
 	title: 'Components/DynamicSlow',
-	chromatic: {
-		viewports: [
-			breakpoints.mobile,
-			breakpoints.mobileMedium,
-			breakpoints.mobileLandscape,
-			breakpoints.phablet,
-			breakpoints.tablet,
-			breakpoints.desktop,
-			breakpoints.leftCol,
-			breakpoints.wide,
-		],
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.mobileMedium,
+				breakpoints.mobileLandscape,
+				breakpoints.phablet,
+				breakpoints.tablet,
+				breakpoints.desktop,
+				breakpoints.leftCol,
+				breakpoints.wide,
+			],
+		},
 	},
 };
 
