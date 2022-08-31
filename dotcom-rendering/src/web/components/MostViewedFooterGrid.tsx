@@ -189,8 +189,10 @@ export const MostViewedFooterGrid = ({
 					{(tab.trails || []).map((trail: TrailType, ii: number) => (
 						<MostViewedFooterItem
 							key={trail.url}
-							trail={trail}
 							position={ii + 1}
+							url={trail.url}
+							format={trail.format}
+							headlineText={trail.headline}
 						/>
 					))}
 				</ol>
