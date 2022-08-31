@@ -45,8 +45,22 @@ const decideImageWidths = ({
 	format: ArticleFormat;
 }): ImageWidthType[] => {
 	if (isMainMedia) {
-		switch (role) {
-			case 'showcase':
+		switch (format.display) {
+			case ArticleDisplay.Immersive: {
+				// If display is Immersive then main media should *always*
+				// use these larger image sources
+				return [
+					{ breakpoint: breakpoints.mobile, width: 480 },
+					{ breakpoint: breakpoints.mobileLandscape, width: 660 },
+					{ breakpoint: breakpoints.phablet, width: 740 },
+					{ breakpoint: breakpoints.tablet, width: 980 },
+					{ breakpoint: breakpoints.desktop, width: 1140 },
+					{ breakpoint: breakpoints.leftCol, width: 1300 },
+					{ breakpoint: breakpoints.wide, width: 1900 },
+				];
+			}
+			case ArticleDisplay.Showcase:
+			case ArticleDisplay.NumberedList: {
 				if (format.design === ArticleDesign.Feature) {
 					// The main image on feature articles gets larger sources when showcase
 					// e.g.: http://www.theguardian.com/politics/2015/may/02/nicola-sturgeon-im-the-boss-now
@@ -69,20 +83,7 @@ const decideImageWidths = ({
 						{ breakpoint: breakpoints.wide, width: 1020 },
 					];
 				}
-			case 'immersive':
-				return [
-					{ breakpoint: breakpoints.mobile, width: 480 },
-					{ breakpoint: breakpoints.mobileLandscape, width: 660 },
-					{ breakpoint: breakpoints.phablet, width: 740 },
-					{ breakpoint: breakpoints.tablet, width: 980 },
-					{ breakpoint: breakpoints.desktop, width: 1140 },
-					{ breakpoint: breakpoints.leftCol, width: 1300 },
-					{ breakpoint: breakpoints.wide, width: 1900 },
-				];
-			case 'supporting':
-			case 'thumbnail':
-			case 'halfWidth':
-			case 'inline':
+			}
 			default:
 				return [
 					{ breakpoint: breakpoints.mobile, width: 465 },

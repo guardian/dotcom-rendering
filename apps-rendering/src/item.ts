@@ -1,6 +1,8 @@
 // ----- Imports ----- //
 
 import type { Branding } from '@guardian/apps-rendering-api-models/branding';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
+import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Asset } from '@guardian/content-api-models/v1/asset';
@@ -16,7 +18,7 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { fromNullable, map, none } from '@guardian/types';
+import { fromNullable, map, none, partition } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
@@ -40,6 +42,9 @@ import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import { parseMany as parseLiveBlocks } from 'liveBlock';
 import type { MainMedia } from 'mainMedia';
+import { Optional } from 'optional';
+import type { Outline } from 'outline';
+import { fromBodyElements } from 'outline';
 import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
@@ -65,6 +70,8 @@ interface Fields extends ArticleFormat {
 	relatedContent: Option<ResizedRelatedContent>;
 	logo: Option<Logo>;
 	webUrl: string;
+	edition: Edition;
+	promotedNewsletter: Option<Newsletter>;
 }
 
 interface MatchReport extends Fields {
@@ -157,11 +164,13 @@ interface PrintShop extends Fields {
 interface Analysis extends Fields {
 	design: ArticleDesign.Analysis;
 	body: Body;
+	outline: Outline;
 }
 
 interface Explainer extends Fields {
 	design: ArticleDesign.Explainer;
 	body: Body;
+	outline: Outline;
 }
 // Catch-all for other Designs for now. As coverage of Designs increases,
 // this will likely be split out into each ArticleDesign type.
@@ -175,6 +184,7 @@ interface Standard extends Fields {
 		| ArticleDesign.Letter
 		| ArticleDesign.Editorial
 		| ArticleDesign.Analysis
+		| ArticleDesign.Explainer
 	>;
 	body: Body;
 }
@@ -307,7 +317,14 @@ const itemFields = (
 		),
 		logo: paidContentLogo(content.tags),
 		webUrl: content.webUrl,
+		edition: Optional.fromNullable(request.edition).withDefault(Edition.UK),
+		promotedNewsletter: fromNullable(request.promotedNewsletter),
 	};
+};
+
+const outlineFromItem = (item: ItemFieldsWithBody): Outline => {
+	const elements = partition(item.body).oks;
+	return fromBodyElements(elements);
 };
 
 const itemFieldsWithBody = (
@@ -444,14 +461,18 @@ const fromCapi =
 				...itemFieldsWithBody(context, request),
 			};
 		} else if (isAnalysis(tags)) {
+			const item = itemFieldsWithBody(context, request);
 			return {
 				design: ArticleDesign.Analysis,
-				...itemFieldsWithBody(context, request),
+				...item,
+				outline: outlineFromItem(item),
 			};
 		} else if (isExplainer(tags)) {
+			const item = itemFieldsWithBody(context, request);
 			return {
 				design: ArticleDesign.Explainer,
-				...itemFieldsWithBody(context, request),
+				...item,
+				outline: outlineFromItem(item),
 			};
 		} else if (isCorrection(tags)) {
 			return {

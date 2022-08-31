@@ -13,7 +13,7 @@ const innerContainerStyles = css`
 `;
 
 const sectionHasMostViewed = (sectionID: string): boolean => {
-	const whitelist = new Set([
+	const allowed = new Set([
 		'commentisfree',
 		'sport',
 		'football',
@@ -40,7 +40,7 @@ const sectionHasMostViewed = (sectionID: string): boolean => {
 		'global-development',
 	]);
 
-	return whitelist.has(sectionID);
+	return allowed.has(sectionID);
 };
 
 export const Onward: React.FC<{

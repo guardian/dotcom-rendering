@@ -194,8 +194,14 @@ try {
 						'model.dotcomrendering.pageElements.ImageBlockElement',
 				);
 
+				const type = Array.isArray(images)
+					? '[' +
+					  images.map(() => 'ImageBlockElement').join(',') +
+					  ']'
+					: 'unknown';
+
 				// Write the new fixture data
-				const contents = `${HEADER}export const images: ImageBlockElement[] = ${JSON.stringify(
+				const contents = `${HEADER}export const images: ${type} = ${JSON.stringify(
 					images,
 					null,
 					4,

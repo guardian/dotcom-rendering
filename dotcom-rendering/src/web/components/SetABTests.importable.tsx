@@ -1,6 +1,7 @@
 import { AB } from '@guardian/ab-core';
 import type { CoreAPIConfig } from '@guardian/ab-core/dist/types';
 import { getCookie, log } from '@guardian/libs';
+import type { ABTestSwitches } from '../../model/enhance-switches';
 import { getOphanRecordFunction } from '../browser/ophan/ophan';
 import { tests } from '../experiments/ab-tests';
 import { getCypressSwitches } from '../experiments/cypress-switches';
@@ -8,7 +9,7 @@ import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
 import { setABTests } from '../lib/useAB';
 
 type Props = {
-	abTestSwitches: CoreAPIConfig['abTestSwitches'];
+	abTestSwitches: ABTestSwitches;
 	forcedTestVariants?: CoreAPIConfig['forcedTestVariants'];
 	isDev: boolean;
 	pageIsSensitive: CoreAPIConfig['pageIsSensitive'];

@@ -1,4 +1,4 @@
-name: DCR Fronts Ophan Components
+name: ⏰ Scheduled daily jobs
 on:
   schedule:
     # Every work day of the week at 08:08
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  ophan-components:
+  scheduled:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -17,9 +17,9 @@ jobs:
       - name: Setup deno
         uses: denolib/setup-deno@v2
         with:
-          deno-version: v1.21.0
+          deno-version: v1.25.0
 
-      - name: Compare Ophan components
-        run: scripts/ci-ophan.sh
+      - name: Run Deno scripts
+        run: scripts/ci-deno.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
