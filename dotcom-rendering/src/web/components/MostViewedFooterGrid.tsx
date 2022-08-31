@@ -133,6 +133,7 @@ export const MostViewedFooterGrid = ({
 			{Array.isArray(data) && data.length > 1 && (
 				<ul css={tabsContainer} role="tablist">
 					{data.map((tab: TrailTabType, i: number) => {
+						if (!tab.heading) return null;
 						const isSelected = i === selectedTabIndex;
 						const isFirst = i === 0;
 						const selectedStyles =
