@@ -492,6 +492,9 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														CAPIArticle.pageType
 															.isPaidContent
 													}
+													shouldHideAds={
+														CAPIArticle.shouldHideAds
+													}
 												/>
 											</div>
 										)}

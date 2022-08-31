@@ -761,6 +761,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										isPaidContent={
 											CAPIArticle.pageType.isPaidContent
 										}
+										shouldHideAds={
+											CAPIArticle.shouldHideAds
+										}
 									/>
 									{!isPaidContent ? (
 										<Island

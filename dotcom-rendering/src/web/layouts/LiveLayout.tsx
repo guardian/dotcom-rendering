@@ -1153,6 +1153,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.pageType
 													.isPaidContent
 											}
+											shouldHideAds={
+												CAPIArticle.shouldHideAds
+											}
 										/>
 									</RightColumn>
 								</div>

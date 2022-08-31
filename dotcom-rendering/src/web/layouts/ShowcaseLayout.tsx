@@ -631,6 +631,9 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										isPaidContent={
 											CAPIArticle.pageType.isPaidContent
 										}
+										shouldHideAds={
+											CAPIArticle.shouldHideAds
+										}
 									/>
 									{!isPaidContent ? (
 										<Island
