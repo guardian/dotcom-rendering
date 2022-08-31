@@ -26,7 +26,7 @@ interface Props {
 
 interface TextElementProps {
 	node: Node;
-	key: number;
+	key: string;
 }
 
 const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -51,7 +51,7 @@ const listStyles: SerializedStyles = css`
 
 const listItemStyles: SerializedStyles = css`
 	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'regular' })}
-	border-bottom: ${line.primary} 1px solid;
+	border-bottom: 1px solid ${line.primary};
 	padding-top: ${remSpace[2]};
 `;
 
@@ -70,12 +70,12 @@ const summaryStyles: SerializedStyles = css`
 	cursor: pointer;
 	position: relative;
 	list-style: none;
-	align-items: center;
+	//align-items: center;
 	padding-left: ${remSpace[3]};
 	padding-top: 0.44rem;
 	padding-bottom: 0.375rem;
-	border-bottom: ${line.primary} 1px solid;
-	border-top: ${line.primary} 1px solid;
+	border-bottom: 1px solid ${line.primary};
+	border-top: 1px solid ${line.primary};
 
 	path {
 		fill: ${neutral[46]};
@@ -105,7 +105,7 @@ const TocTextElement: React.FC<TextElementProps> = ({
 }): ReactElement => {
 	const text = node.textContent ?? '';
 	const children = Array.from(node.childNodes).map((item, i) => {
-		return <TocTextElement node={item} key={i} />;
+		return <TocTextElement node={item} key={i.toString()} />;
 	});
 
 	switch (node.nodeName) {
@@ -169,14 +169,17 @@ const TableOfContents: FC<Props> = ({ format, outline }) => {
 				</span>
 			</summary>
 			<OrderedList className={listStyles}>
-				{outline.map((ol, index) => (
+				{outline.map((outlineItem, index) => (
 					<ListItem className={listItemStyles} key={index}>
 						<Anchor
 							format={format}
-							href={`#${ol.id}`}
+							href={`#${outlineItem.id}`}
 							className={anchorStyles(format)}
 						>
-							<TocTextElement node={ol.doc} key={0} />
+							<TocTextElement
+								node={outlineItem.doc}
+								key={outlineItem.id}
+							/>
 						</Anchor>
 					</ListItem>
 				))}
