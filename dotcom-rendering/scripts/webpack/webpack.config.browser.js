@@ -46,7 +46,7 @@ const getLoaders = (bundle) => {
 					},
 				},
 			];
-		case 'modern':
+		case 'variant':
 			return [
 				{
 					loader: 'babel-loader',
@@ -74,7 +74,7 @@ const getLoaders = (bundle) => {
 					},
 				},
 			];
-		case 'variant':
+		case 'modern':
 			return [
 				{
 					loader: 'babel-loader',
@@ -84,8 +84,10 @@ const getLoaders = (bundle) => {
 							[
 								'@babel/preset-env',
 								{
-									targets:
-										'extends @guardian/browserslist-config',
+									bugfixes: true,
+									targets: {
+										esmodules: true,
+									},
 								},
 							],
 						],
