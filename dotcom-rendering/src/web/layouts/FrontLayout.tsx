@@ -14,7 +14,7 @@ import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
-import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { MostViewedFooter } from '../components/MostViewedFooter';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
@@ -174,6 +174,44 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
+					if (
+						collection.collectionType === 'news/most-popular' &&
+						!isPaidContent
+					) {
+						return (
+							<Section
+								key={collection.id}
+								title={collection.displayName}
+								showTopBorder={index > 0}
+								padContent={false}
+								verticalMargins={false}
+								url={collection.href}
+								ophanComponentLink={ophanComponentLink}
+								ophanComponentName={ophanName}
+								containerName={collection.collectionType}
+								containerPalette={collection.containerPalette}
+								sectionId={collection.id}
+								showDateHeader={
+									collection.config.showDateHeader
+								}
+								editionId={front.editionId}
+								treats={collection.treats}
+								data-print-layout="hide"
+								element="aside"
+							>
+								<MostViewedFooter
+									tabs={[
+										{
+											trails: trails.slice(10),
+										},
+									]}
+									sectionName="Most viewed"
+									// TODO: Include mostCommented & mostShared once we have this data in the FE response
+								/>
+							</Section>
+						);
+					}
+
 					return (
 						<Section
 							key={collection.id}
@@ -203,20 +241,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						</Section>
 					);
 				})}
-
-				{!isPaidContent && (
-					<Section
-						fullWidth={true}
-						data-print-layout="hide"
-						element="aside"
-					>
-						<MostViewedFooterLayout
-							format={format}
-							sectionName="" // {front.sectionName}
-							ajaxUrl={front.config.ajaxUrl}
-						/>
-					</Section>
-				)}
 			</main>
 
 			<Section
