@@ -117,8 +117,7 @@ const h2ElementWithSub = (): Node => {
 	const sub = document.createElement('SUB');
 	sub.innerText = 'student';
 
-	const el2 = document.createElement('text');
-	el2.innerText = 'loan forgiveness? ';
+	const el2 = document.createTextNode('loan forgiveness? ');
 
 	el.innerText = ' Who qualifies for ';
 	el.appendChild(sub);

@@ -105,15 +105,12 @@ const TocTextElement: React.FC<TextElementProps> = ({
 }): ReactElement => {
 	const text = node.textContent ?? '';
 	const children = Array.from(node.childNodes).map((item, i) => {
-		console.log(`I'm children node ${item.nodeName}`);
 		return <TocTextElement node={item} key={i} />;
 	});
 
-	console.log(`I'm node ${node.nodeName}`);
-
 	switch (node.nodeName) {
 		case 'H2':
-			return <span>{children}</span>;
+			return <>{children}</>;
 		case 'EM':
 			return <em key={key}>{children}</em>;
 		case 'SUB': {
@@ -179,10 +176,7 @@ const TableOfContent: FC<Props> = ({ format, outline }) => {
 							href={`#${ol.id}`}
 							className={anchorStyles(format)}
 						>
-							<TocTextElement
-								node={ol.doc}
-								key={0}
-							></TocTextElement>
+							<TocTextElement node={ol.doc} key={0} />
 						</Anchor>
 					</ListItem>
 				))}

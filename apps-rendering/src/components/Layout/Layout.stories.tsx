@@ -203,7 +203,7 @@ export const Explainer = (): React.ReactNode => {
 	return (
 		<Standard item={explainer}>
 			{renderAll(
-				formatFromItem(analysis, some(ArticleDisplay.Standard)),
+				formatFromItem(explainer, some(ArticleDisplay.Standard)),
 				partition(explainer.body).oks,
 			)}
 		</Standard>
