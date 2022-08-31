@@ -1143,20 +1143,19 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									`}
 								>
 									<RightColumn>
-										<AdSlot
-											position="right"
-											display={format.display}
-											shouldHideReaderRevenue={
-												CAPIArticle.shouldHideReaderRevenue
-											}
-											isPaidContent={
-												CAPIArticle.pageType
-													.isPaidContent
-											}
-											shouldHideAds={
-												CAPIArticle.shouldHideAds
-											}
-										/>
+										{!CAPIArticle.shouldHideAds && (
+											<AdSlot
+												position="right"
+												display={format.display}
+												shouldHideReaderRevenue={
+													CAPIArticle.shouldHideReaderRevenue
+												}
+												isPaidContent={
+													CAPIArticle.pageType
+														.isPaidContent
+												}
+											/>
+										)}
 									</RightColumn>
 								</div>
 							</GridItem>
