@@ -79,7 +79,7 @@ const getScripts = (
 };
 
 export const getScriptsFromManifest =
-	(manifestPaths: Array<`./manifest.${string}.json`>) =>
+	(manifestPaths: ManifestPath[]) =>
 	(file: `${string}.js`): ReturnType<typeof getScripts> =>
 		getScripts(manifestPaths, file);
 
