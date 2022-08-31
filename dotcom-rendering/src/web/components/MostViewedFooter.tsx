@@ -1,14 +1,13 @@
 import { css } from '@emotion/react';
 import type { Breakpoint } from '@guardian/source-foundations';
 import { border, from } from '@guardian/source-foundations';
-import type { Palette } from '../../types/palette';
 import type { TrailTabType, TrailType } from '../../types/trails';
 import { MostViewedFooterGrid } from './MostViewedFooterGrid';
 import { MostViewedFooterSecondTierItem } from './MostViewedFooterSecondTierItem';
 
 type Props = {
 	tabs: TrailTabType[];
-	palette: Palette;
+	selectedColour?: string;
 	mostCommented?: TrailType;
 	mostShared?: TrailType;
 	abTestCypressDataAttr?: string;
@@ -41,7 +40,7 @@ export const MostViewedFooter = ({
 	abTestCypressDataAttr,
 	variantFromRunnable,
 	sectionName,
-	palette,
+	selectedColour,
 }: Props) => {
 	return (
 		<div
@@ -55,7 +54,7 @@ export const MostViewedFooter = ({
 			<MostViewedFooterGrid
 				data={tabs}
 				sectionName={sectionName}
-				palette={palette}
+				selectedColour={selectedColour}
 			/>
 			<div css={[stackBelow('tablet'), secondTierStyles]}>
 				{mostCommented && (

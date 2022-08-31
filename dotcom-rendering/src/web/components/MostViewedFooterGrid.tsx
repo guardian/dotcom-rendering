@@ -8,7 +8,6 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { useState } from 'react';
-import type { Palette } from '../../types/palette';
 import type { TrailTabType, TrailType } from '../../types/trails';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
@@ -45,9 +44,9 @@ const listTab = css`
 const firstTab = css`
 	border-right: ${thinGreySolid};
 `;
-const selectedListTabStyles = (palette: Palette) => css`
+const selectedListTabStyles = (selectedColour: string) => css`
 	/* TODO: Using a pseudo selector here could be faster? */
-	box-shadow: inset 0px 4px 0px 0px ${palette.background.mostViewedTab};
+	box-shadow: inset 0px 4px 0px 0px ${selectedColour};
 	transition: box-shadow 0.3s ease-in-out;
 `;
 
@@ -100,7 +99,7 @@ const gridContainer = css`
 type Props = {
 	data: TrailTabType[];
 	sectionName?: string;
-	palette: Palette;
+	selectedColour?: string;
 };
 
 // To avoid having to handle multiple ways of reducing the capitalisation styling
@@ -126,7 +125,7 @@ const TabHeading = ({ heading }: { heading: string }) => {
 export const MostViewedFooterGrid = ({
 	data,
 	sectionName = '',
-	palette,
+	selectedColour = neutral[0],
 }: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 	return (
@@ -136,7 +135,8 @@ export const MostViewedFooterGrid = ({
 					{data.map((tab: TrailTabType, i: number) => {
 						const isSelected = i === selectedTabIndex;
 						const isFirst = i === 0;
-						const selectedStyles = selectedListTabStyles(palette);
+						const selectedStyles =
+							selectedListTabStyles(selectedColour);
 						return (
 							<li
 								css={[

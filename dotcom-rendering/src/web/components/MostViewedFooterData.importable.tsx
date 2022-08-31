@@ -1,11 +1,11 @@
 import { joinUrl } from '../../lib/joinUrl';
-import type { Palette } from '../../types/palette';
 import type {
 	CAPITrailTabType,
 	CAPITrailType,
 	TrailTabType,
 } from '../../types/trails';
 import { abTestTest } from '../experiments/tests/ab-test-test';
+import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
@@ -13,7 +13,7 @@ import { MostViewedFooter } from './MostViewedFooter';
 
 interface Props {
 	sectionName?: string;
-	palette: Palette;
+	format: ArticleFormat;
 	ajaxUrl: string;
 }
 
@@ -40,9 +40,10 @@ interface MostViewedFooterPayloadType {
 
 export const MostViewedFooterData = ({
 	sectionName,
-	palette,
+	format,
 	ajaxUrl,
 }: Props) => {
+	const palette = decidePalette(format);
 	// Example usage of AB Tests
 	// Used in the Cypress tests as smoke test of the AB tests framework integration
 	const ABTestAPI = useAB();
@@ -84,7 +85,7 @@ export const MostViewedFooterData = ({
 				abTestCypressDataAttr={abTestCypressDataAttr}
 				variantFromRunnable={variantFromRunnable}
 				sectionName={sectionName}
-				palette={palette}
+				selectedColour={palette.background.mostViewedTab}
 			/>
 		);
 	}

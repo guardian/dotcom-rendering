@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import type { Breakpoint } from '@guardian/source-foundations';
 import { from, headline, text } from '@guardian/source-foundations';
-import { decidePalette } from '../lib/decidePalette';
 import { AdSlot, labelStyles } from './AdSlot';
 import { Hide } from './Hide';
 import { Island } from './Island';
@@ -71,8 +70,6 @@ export const MostViewedFooterLayout = ({
 	format,
 	ajaxUrl,
 }: Props) => {
-	const palette = decidePalette(format);
-
 	return (
 		<div
 			data-print-layout="hide"
@@ -106,7 +103,7 @@ export const MostViewedFooterLayout = ({
 						<Island clientOnly={true} deferUntil="visible">
 							<MostViewedFooterData
 								sectionName={sectionName}
-								palette={palette}
+								format={format}
 								ajaxUrl={ajaxUrl}
 							/>
 						</Island>
