@@ -1,6 +1,7 @@
-import { css, SerializedStyles } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette/text';
-import { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	line,
 	neutral,
@@ -14,8 +15,8 @@ import {
 import Anchor from 'components/Anchor';
 import ListItem from 'components/ListItem';
 import OrderedList from 'components/OrderedList';
-import { Outline } from 'outline';
-import { FC, ReactElement } from 'react';
+import type { Outline } from 'outline';
+import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
 interface Props {
@@ -171,8 +172,8 @@ const TableOfContent: FC<Props> = ({ format, outline }) => {
 				</span>
 			</summary>
 			<OrderedList className={listStyles}>
-				{outline.map((ol) => (
-					<ListItem className={listItemStyles}>
+				{outline.map((ol, index) => (
+					<ListItem className={listItemStyles} key={index}>
 						<Anchor
 							format={format}
 							href={`#${ol.id}`}

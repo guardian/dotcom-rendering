@@ -23,6 +23,7 @@ import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
+import TableOfContent from 'components/TableOfContent';
 import Tags from 'components/Tags';
 import { getFormat } from 'item';
 import type {
@@ -41,7 +42,6 @@ import {
 	onwardStyles,
 } from 'styles';
 import { themeToPillarString } from 'themeStyles';
-import TableOfContent from 'components/TableOfContent';
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`

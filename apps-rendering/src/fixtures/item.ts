@@ -46,10 +46,11 @@ import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
+import { Optional } from 'optional';
+import type { Outline } from 'outline';
+import { fromBodyElements } from 'outline';
 import { galleryBody } from './galleryBody';
 import { relatedContent } from './relatedContent';
-import { fromBodyElements, Outline } from 'outline';
-import { Optional } from 'optional';
 
 // ----- Fixture ----- //
 
@@ -105,28 +106,28 @@ const elementFixture = (element: string, innerText: string): Node => {
 
 	doc.appendChild(el);
 
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- this value is not `null`
 	return doc.firstChild!;
 };
 
-const h2ElementWithSub = () => {
-	{
-		const doc = new DocumentFragment();
+const h2ElementWithSub = (): Node => {
+	const doc = new DocumentFragment();
 
-		const el = document.createElement('H2');
-		const sub = document.createElement('SUB');
-		sub.innerText = 'student';
+	const el = document.createElement('H2');
+	const sub = document.createElement('SUB');
+	sub.innerText = 'student';
 
-		const el2 = document.createElement('text');
-		el2.innerText = 'loan forgiveness? ';
+	const el2 = document.createElement('text');
+	el2.innerText = 'loan forgiveness? ';
 
-		el.innerText = ' Who qualifies for ';
-		el.appendChild(sub);
-		el.appendChild(el2);
+	el.innerText = ' Who qualifies for ';
+	el.appendChild(sub);
+	el.appendChild(el2);
 
-		doc.appendChild(el);
+	doc.appendChild(el);
 
-		return doc.firstChild!;
-	}
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- this value is not `null`
+	return doc.firstChild!;
 };
 
 const srcset =

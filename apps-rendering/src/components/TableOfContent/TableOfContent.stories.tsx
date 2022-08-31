@@ -1,12 +1,8 @@
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticleFormat,
-	ArticlePillar,
-} from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { explainer } from 'fixtures/item';
-import { ReactElement } from 'react';
-import TableOfContent from '.';
+import type { ReactElement } from 'react';
+import TableOfContent from './';
 
 const format: ArticleFormat = {
 	design: ArticleDesign.Standard,
