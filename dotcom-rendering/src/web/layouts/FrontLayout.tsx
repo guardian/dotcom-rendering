@@ -221,16 +221,19 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										sectionName="Most viewed"
 										// TODO: Include mostCommented & mostShared once we have this data in the FE response
 									/>
-									<div
-										css={css`
-											margin: 6px 0 0 10px;
-										`}
-									>
-										<AdSlot
-											position="mostpop"
-											display={format.display}
-										/>
-									</div>
+									{front.config.switches
+										.extendedMostPopularFronts && (
+										<div
+											css={css`
+												margin: 6px 0 0 10px;
+											`}
+										>
+											<AdSlot
+												position="mostpop"
+												display={format.display}
+											/>
+										</div>
+									)}
 								</div>
 							</Section>
 						);
