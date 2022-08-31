@@ -13,6 +13,7 @@ import {
 	some,
 	withDefault,
 } from '@guardian/types';
+import { Optional } from 'optional';
 
 // ----- Functions ----- //
 
@@ -65,6 +66,11 @@ const index =
 	(i: number) =>
 	<A>(arr: A[]): Option<A> =>
 		fromNullable(arr[i]);
+
+const indexOptional =
+	(i: number) =>
+	<A>(arr: A[]): Optional<A> =>
+		Optional.fromNullable(arr[i]);
 
 const resultFromNullable =
 	<E>(e: E) =>
@@ -151,6 +157,7 @@ export {
 	maybeRender,
 	handleErrors,
 	index,
+	indexOptional,
 	resultFromNullable,
 	optionMap3,
 	parseIntOpt,

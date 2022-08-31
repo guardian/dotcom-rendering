@@ -73,7 +73,7 @@ const captionDocFragment: Option<DocumentFragment> = pipe(
 	toOption,
 );
 
-const docFixture = (): DocumentFragment => {
+const docFixture = (): Node => {
 	const doc = new DocumentFragment();
 
 	const el = document.createElement('p');
@@ -83,7 +83,8 @@ const docFixture = (): DocumentFragment => {
 
 	doc.appendChild(el);
 
-	return doc;
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- this value is not `null`
+	return doc.firstChild!;
 };
 
 const srcset =
@@ -388,6 +389,7 @@ const articleWithStandfirstLink: Item = {
 const analysis: Analysis = {
 	design: ArticleDesign.Analysis,
 	...fields,
+	outline: [],
 };
 
 const feature: Feature = {
@@ -481,6 +483,7 @@ const quiz: Quiz = {
 const explainer: Explainer = {
 	design: ArticleDesign.Explainer,
 	...fields,
+	outline: [],
 };
 
 // ----- Exports ----- //
