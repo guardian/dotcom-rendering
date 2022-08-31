@@ -96,6 +96,19 @@ const merchandisingAdStyles = css`
 	min-height: 250px;
 `;
 
+const mostpopAdStyles = css`
+	position: relative;
+	min-height: 274px;
+	min-width: 300px;
+	width: 300px;
+	margin: 12px auto;
+	text-align: center;
+	${from.desktop} {
+		margin: 0;
+		width: auto;
+	}
+`;
+
 /**
  * For implementation in Frontend, see mark: dca5c7dd-dda4-4922-9317-a55a3789fe4c
  * These styles come mostly from RichLink in DCR.
@@ -342,12 +355,7 @@ export const AdSlot = ({
 						'ad-slot--mpu-banner-ad',
 						'ad-slot--rendered',
 					].join(' ')}
-					css={[
-						css`
-							position: relative;
-						`,
-						adStyles,
-					]}
+					css={[adStyles, mostpopAdStyles]}
 					data-link-name="ad slot mostpop"
 					data-name="mostpop"
 					aria-hidden="true"

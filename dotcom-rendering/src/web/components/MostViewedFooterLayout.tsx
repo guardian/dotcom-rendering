@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import type { Breakpoint } from '@guardian/source-foundations';
 import { from, headline, text } from '@guardian/source-foundations';
-import { AdSlot, labelStyles } from './AdSlot';
+import { AdSlot } from './AdSlot';
 import { Hide } from './Hide';
 import { Island } from './Island';
 import { LeftColumn } from './LeftColumn';
@@ -35,30 +35,6 @@ const headingStyles = css`
 	}
 `;
 
-const adSlotUnspecifiedWidth = css`
-	.ad-slot {
-		margin: 12px auto;
-		min-width: 300px;
-		min-height: 274px;
-		text-align: center;
-	}
-`;
-
-const mostPopularAdStyle = css`
-	.ad-slot--mostpop {
-		width: 300px;
-		margin: 12px auto;
-		min-width: 300px;
-		min-height: 274px;
-		text-align: center;
-		${from.desktop} {
-			margin: 0;
-			width: auto;
-		}
-	}
-	${labelStyles};
-`;
-
 interface Props {
 	sectionName?: string;
 	format: ArticleFormat;
@@ -71,13 +47,9 @@ export const MostViewedFooterLayout = ({
 	ajaxUrl,
 }: Props) => {
 	return (
-		<div
-			data-print-layout="hide"
-			className="content-footer"
-			css={adSlotUnspecifiedWidth}
-		>
+		<div data-print-layout="hide" className="content-footer">
 			<div
-				css={[stackBelow('leftCol'), mostPopularAdStyle]}
+				css={stackBelow('leftCol')}
 				data-link-name="most-popular"
 				data-component="most-popular"
 			>
