@@ -14,7 +14,7 @@ const bylineStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.column.centre}
 	grid-row: 6/7;
 	color: ${text.gallery(format)};
-	font-style: italic;
+	${headline.xxxsmall({ fontWeight: 'medium', fontStyle: 'italic' })}
 
 	${darkModeCss`
 		color: ${text.galleryDark(format)};
@@ -22,8 +22,7 @@ const bylineStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.xxxsmall({ fontWeight: 'bold' })}
-
+	${headline.xxxsmall({ fontWeight: 'bold', fontStyle: 'italic' })}
 	color: ${text.gallery(format)};
 	text-decoration: none;
 	border-bottom: 1px solid ${border.bylineLink(format)};
