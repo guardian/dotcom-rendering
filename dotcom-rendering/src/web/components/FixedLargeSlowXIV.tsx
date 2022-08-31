@@ -23,7 +23,7 @@ export const FixedLargeSlowXIV = ({
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
-				<LI padSides={true} percentage="75%" padBottomOnMobile={true}>
+				<LI padSides={true} percentage="75%">
 					<FrontCard
 						trail={primary}
 						starRating={primary.starRating}
@@ -51,9 +51,8 @@ export const FixedLargeSlowXIV = ({
 						<LI
 							padSides={true}
 							percentage="25%"
-							showDivider={cardIndex !== 0}
+							showDivider={cardIndex > 0}
 							key={card.url}
-							padBottomOnMobile={cardIndex != 3}
 						>
 							<FrontCard
 								trail={card}
@@ -66,7 +65,7 @@ export const FixedLargeSlowXIV = ({
 					);
 				})}
 			</UL>
-			<UL direction="row" padBottom={true} wrapCards={true}>
+			<UL direction="row" wrapCards={true}>
 				{thirdSlice.map((card, cardIndex) => {
 					return (
 						<LI
@@ -77,8 +76,7 @@ export const FixedLargeSlowXIV = ({
 								cardIndex !== 4 &&
 								cardIndex !== 8
 							}
-							padBottom={cardIndex < 4}
-							padBottomOnMobile={
+							offsetBottomPaddingOnDivider={
 								cardIndex !== thirdSlice.length - 1
 							}
 							key={card.url}
