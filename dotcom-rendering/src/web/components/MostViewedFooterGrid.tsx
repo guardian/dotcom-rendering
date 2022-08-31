@@ -130,7 +130,7 @@ export const MostViewedFooterGrid = ({
 }: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 	return (
-		<div>
+		<>
 			{Array.isArray(data) && data.length > 1 && (
 				<ul css={tabsContainer} role="tablist">
 					{data.map((tab: TrailTabType, i: number) => {
@@ -197,6 +197,6 @@ export const MostViewedFooterGrid = ({
 					))}
 				</ol>
 			))}
-		</div>
+		</>
 	);
 };
