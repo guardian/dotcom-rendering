@@ -13,12 +13,12 @@ import { MostViewedFooterSecondTierItem } from './MostViewedFooterSecondTierItem
 
 type Props = {
 	tabs: CAPITrailTabType[];
+	palette: Palette;
 	mostCommented?: CAPITrailType;
 	mostShared?: CAPITrailType;
-	abTestCypressDataAttr: string;
-	variantFromRunnable: string;
+	abTestCypressDataAttr?: string;
+	variantFromRunnable?: string;
 	sectionName?: string;
-	palette: Palette;
 };
 
 const stackBelow = (breakpoint: Breakpoint) => css`
