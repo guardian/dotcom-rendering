@@ -389,6 +389,7 @@ const articleWithStandfirstLink: Item = {
 const analysis: Analysis = {
 	design: ArticleDesign.Analysis,
 	...fields,
+	outline: [],
 };
 
 const feature: Feature = {
@@ -482,6 +483,7 @@ const quiz: Quiz = {
 const explainer: Explainer = {
 	design: ArticleDesign.Explainer,
 	...fields,
+	outline: [],
 };
 
 // ----- Exports ----- //
