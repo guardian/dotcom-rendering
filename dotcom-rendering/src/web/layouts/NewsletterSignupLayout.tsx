@@ -251,7 +251,9 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 						}
 						discussionApiUrl={CAPIArticle.config.discussionApiUrl}
 						urls={CAPIArticle.nav.readerRevenueLinks.header}
-						remoteHeader={CAPIArticle.config.switches.remoteHeader}
+						remoteHeader={
+							!!CAPIArticle.config.switches.remoteHeader
+						}
 						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPIArticle.config.idApiUrl}
 					/>
@@ -481,7 +483,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 										trails={CAPIArticle.storyPackage.trails.map(
 											decideTrail,
 										)}
-										onwardsType="more-on-this-story"
+										onwardsSource="more-on-this-story"
 										format={format}
 									/>
 								</Island>

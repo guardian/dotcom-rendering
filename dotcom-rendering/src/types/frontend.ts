@@ -3,7 +3,7 @@ import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
 import type { EditionId } from './edition';
 import type { FooterType } from './footer';
-import type { CAPIOnwardsType } from './onwards';
+import type { CAPIOnwards } from './onwards';
 import type { CAPITrailType } from './trails';
 
 /**
@@ -72,7 +72,7 @@ export interface CAPIArticleType {
 		trails: CAPITrailType[];
 		heading: string;
 	};
-	onwards?: CAPIOnwardsType[];
+	onwards?: CAPIOnwards[];
 	beaconURL: string;
 	isCommentable: boolean;
 	commercialProperties: CommercialProperties;

@@ -130,6 +130,11 @@ ${
 
 	const issue_number = issues[attribute];
 
+	if (!octokit) {
+		console.log(body);
+		return;
+	}
+
 	const {
 		data: { body: previousBody },
 	} = await octokit.rest.issues.get({

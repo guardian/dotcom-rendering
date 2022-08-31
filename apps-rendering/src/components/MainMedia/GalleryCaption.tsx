@@ -1,13 +1,13 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
 import {
-	from,
-	neutral,
-	remSpace,
-	textSans,
-} from '@guardian/source-foundations';
+	background,
+	text,
+} from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
+import { from, remSpace, textSans } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import Caption from 'components/caption';
@@ -16,12 +16,13 @@ import { maybeRender } from 'lib';
 import type { MainMedia } from 'mainMedia';
 import { MainMediaKind } from 'mainMedia';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
-const styles = css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.xxsmall()}
-	background-color: ${neutral[7]};
+	background-color: ${background.articleContent(format)};
 
 	${grid.column.centre}
 	padding-top: ${remSpace[9]};
@@ -34,8 +35,17 @@ const styles = css`
 
 	&,
 	span {
-		color: ${neutral[86]};
+		color: ${text.gallery(format)};
 	}
+
+	${darkModeCss`
+		background-color: ${background.articleContentDark(format)};
+
+		&,
+		span {
+			color: ${text.galleryDark(format)};
+		}
+	`}
 `;
 
 type Props = {
@@ -59,7 +69,7 @@ const GalleryCaption: FC<Props> = ({ mainMedia, format }) =>
 		}
 
 		return (
-			<p css={styles}>
+			<p css={styles(format)}>
 				<Caption caption={caption} format={format} />{' '}
 				{maybeRender(credit, (cred) => (
 					<>{cred}</>

@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
 import {
@@ -18,8 +19,10 @@ import type { Contributor } from 'contributor';
 import type { MatchScores } from 'football';
 import type { Image } from 'image';
 import type {
+	Analysis,
 	Comment,
 	Editorial,
+	Explainer,
 	Feature,
 	Interview,
 	Item,
@@ -70,7 +73,7 @@ const captionDocFragment: Option<DocumentFragment> = pipe(
 	toOption,
 );
 
-const docFixture = (): DocumentFragment => {
+const docFixture = (): Node => {
 	const doc = new DocumentFragment();
 
 	const el = document.createElement('p');
@@ -80,7 +83,8 @@ const docFixture = (): DocumentFragment => {
 
 	doc.appendChild(el);
 
-	return doc;
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- this value is not `null`
+	return doc.firstChild!;
 };
 
 const srcset =
@@ -367,6 +371,8 @@ const fields = {
 	footballContent: none,
 	logo: none,
 	webUrl: '',
+	promotedNewsletter: none,
+	edition: Edition.UK,
 };
 
 const article: Standard = {
@@ -380,9 +386,10 @@ const articleWithStandfirstLink: Item = {
 	standfirst: standfirstWithLink,
 };
 
-const analysis: Standard = {
+const analysis: Analysis = {
 	design: ArticleDesign.Analysis,
 	...fields,
+	outline: [],
 };
 
 const feature: Feature = {
@@ -473,6 +480,12 @@ const quiz: Quiz = {
 	theme: ArticlePillar.Sport,
 };
 
+const explainer: Explainer = {
+	design: ArticleDesign.Explainer,
+	...fields,
+	outline: [],
+};
+
 // ----- Exports ----- //
 
 export {
@@ -495,4 +508,5 @@ export {
 	recipe,
 	quiz,
 	pinnedBlock,
+	explainer,
 };

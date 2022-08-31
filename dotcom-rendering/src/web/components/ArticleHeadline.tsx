@@ -14,8 +14,8 @@ import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStylin
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { AgeWarning } from './AgeWarning';
+import { DesignTag } from './DesignTag';
 import { HeadlineByline } from './HeadlineByline';
-import { HeadlineTag } from './HeadlineTag';
 
 type Props = {
 	headlineString: string;
@@ -94,31 +94,6 @@ const lightFont = css`
 	${until.mobileMedium} {
 		${headline.small({ fontWeight: 'light' })};
 	}
-`;
-
-const underlinedStyles = (colour: string) => css`
-	background-image: repeating-linear-gradient(
-		to bottom,
-		transparent,
-		transparent 47px,
-		${colour}
-	);
-	line-height: 48px;
-	background-size: 1rem 48px;
-	${until.tablet} {
-		background-image: repeating-linear-gradient(
-			to bottom,
-			transparent,
-			transparent 39px,
-			${colour}
-		);
-		line-height: 40px;
-		background-size: 1px 40px;
-	}
-
-	background-position: top left;
-	background-clip: content-box;
-	background-origin: content-box;
 `;
 
 const displayBlock = css`
@@ -391,7 +366,9 @@ export const ArticleHeadline = ({
 							>
 								<h1
 									css={[
-										jumboFont,
+										format.theme === ArticleSpecial.Labs
+											? jumboLabsFont
+											: jumboFont,
 										maxWidth,
 										immersiveStyles,
 										displayBlock,
@@ -423,7 +400,9 @@ export const ArticleHeadline = ({
 							>
 								<h1
 									css={[
-										lightFont,
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: lightFont,
 										invertedText,
 										css`
 											color: ${palette.text.headline};
@@ -497,9 +476,12 @@ export const ArticleHeadline = ({
 						}
 						format={format}
 					>
+						<DesignTag format={format} />
 						<h1
 							css={[
-								boldFont,
+								format.theme === ArticleSpecial.Labs
+									? labsFont
+									: boldFont,
 								topPadding,
 								css`
 									color: ${palette.text.headline};
@@ -518,6 +500,7 @@ export const ArticleHeadline = ({
 				case ArticleDesign.Review:
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Feature:
+				case ArticleDesign.Explainer:
 					return (
 						<div
 							css={decideBottomPadding({
@@ -533,9 +516,12 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
+								<DesignTag format={format} />
 								<h1
 									css={[
-										boldFont,
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: boldFont,
 										topPadding,
 										css`
 											color: ${palette.text.headline};
@@ -564,9 +550,12 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
+								<DesignTag format={format} />
 								<h1
 									css={[
-										lightFont,
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: lightFont,
 										topPadding,
 										css`
 											color: ${palette.text.headline};
@@ -602,44 +591,13 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
+								<DesignTag format={format} />
 								<h1
 									css={[
-										lightFont,
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: lightFont,
 										topPadding,
-										css`
-											color: ${palette.text.headline};
-										`,
-									]}
-								>
-									{curly(headlineString)}
-								</h1>
-							</WithAgeWarning>
-						</div>
-					);
-				case ArticleDesign.Analysis:
-					return (
-						<div
-							css={decideBottomPadding({
-								format,
-								hasStarRating,
-								hasAvatar,
-							})}
-						>
-							<WithAgeWarning
-								tags={tags}
-								webPublicationDateDeprecated={
-									webPublicationDateDeprecated
-								}
-								format={format}
-							>
-								<h1
-									css={[
-										standardFont,
-										topPadding,
-										underlinedStyles(
-											palette.background
-												.analysisUnderline,
-										),
 										css`
 											color: ${palette.text.headline};
 										`,
@@ -673,13 +631,12 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
-								<HeadlineTag
-									tagText="Interview"
-									palette={palette}
-								/>
+								<DesignTag format={format} />
 								<h1
 									css={[
-										invertedFont,
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: invertedFont,
 										invertedWrapper,
 										zIndex,
 										css`
@@ -696,6 +653,46 @@ export const ArticleHeadline = ({
 									>
 										{curly(headlineString)}
 									</span>
+								</h1>
+							</WithAgeWarning>
+							{!!byline && (
+								<HeadlineByline
+									format={format}
+									byline={byline}
+									tags={tags}
+								/>
+							)}
+						</div>
+					);
+				case ArticleDesign.Analysis:
+					return (
+						<div
+							css={decideBottomPadding({
+								format,
+								hasStarRating,
+								hasAvatar,
+							})}
+						>
+							<WithAgeWarning
+								tags={tags}
+								webPublicationDateDeprecated={
+									webPublicationDateDeprecated
+								}
+								format={format}
+							>
+								<DesignTag format={format} />
+								<h1
+									css={[
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: standardFont,
+										topPadding,
+										css`
+											color: ${palette.text.headline};
+										`,
+									]}
+								>
+									{curly(headlineString)}
 								</h1>
 							</WithAgeWarning>
 							{!!byline && (
@@ -724,9 +721,12 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
+								<DesignTag format={format} />
 								<h1
 									css={[
-										standardFont,
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: standardFont,
 										css`
 											color: ${isMatch
 												? palette.text.headlineWhenMatch
@@ -761,12 +761,15 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
+								<DesignTag format={format} />
 								<h1
 									className={
 										interactiveLegacyClasses.headline
 									}
 									css={[
-										standardFont,
+										format.theme === ArticleSpecial.Labs
+											? labsFont
+											: standardFont,
 										topPadding,
 										css`
 											color: ${palette.text.headline};
@@ -794,6 +797,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
+								<DesignTag format={format} />
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs

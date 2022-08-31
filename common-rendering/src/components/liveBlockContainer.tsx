@@ -183,7 +183,11 @@ const LiveBlockContainer = ({
 					contributors.map((contributor) => (
 						<BlockByline
 							name={contributor.name}
-							imageUrl={contributor.largeImageUrl ? contributor.largeImageUrl : contributor.imageUrl}
+							imageUrl={
+								contributor.largeImageUrl
+									? contributor.largeImageUrl
+									: contributor.imageUrl
+							}
 							format={format}
 						/>
 					))}
