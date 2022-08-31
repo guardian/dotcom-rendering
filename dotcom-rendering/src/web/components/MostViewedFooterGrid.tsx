@@ -194,6 +194,7 @@ export const MostViewedFooterGrid = ({
 							url={trail.url}
 							format={trail.format}
 							headlineText={trail.headline}
+							ageWarning={trail.ageWarning}
 						/>
 					))}
 				</ol>
