@@ -71,7 +71,6 @@ export const MostViewedFooterData = ({
 	// Example usage of AB Tests
 	// Used in the Cypress tests as smoke test of the AB tests framework integration
 	const ABTestAPI = useAB();
-
 	const abTestCypressDataAttr =
 		(ABTestAPI?.isUserInVariant('AbTestTest', 'control') &&
 			'ab-test-control') ||
@@ -87,15 +86,9 @@ export const MostViewedFooterData = ({
 		'variant',
 	);
 
-	// const isInDeeplyReadServerSideTest =
-	// 	window.guardian.config.tests.abDeeplyReadTestVariant === 'variant';
-
-	console.log(!!isInDeeplyReadTest);
-
-	// const url = isInDeeplyReadTest
-	// 	? `${ajaxUrl}/deeply-read.json`
-	// 	: buildSectionUrl(ajaxUrl, sectionName);
-	const url = buildSectionUrl(ajaxUrl, sectionName);
+	const url = isInDeeplyReadTest
+		? joinUrl([ajaxUrl, `/most-read-deeply-read.json?dcr=true`])
+		: buildSectionUrl(ajaxUrl, sectionName);
 
 	const { data, error } = useApi<
 		MostViewedFooterPayloadType | CAPITrailTabType[]
