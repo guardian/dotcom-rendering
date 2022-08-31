@@ -124,15 +124,19 @@ export const Card25_Card75 = ({
 /**
  * Abstraction to decide whether to show padding on wrapped rows of cards, e.g
  *
+ * ```
  * Card - Card - Card ↵
  * Card - Card
+ * ```
  *
  * In the above example we want padding on all but the bottom two cards,
  * but in another example
  *
+ * ```
  * Card - Card - Card ↵
  * Card - Card - Card ↵
  * Card - Card - Card
+ * ```
  *
  * We want padding on all but the last 3.
  *

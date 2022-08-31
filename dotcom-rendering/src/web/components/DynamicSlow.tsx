@@ -357,7 +357,7 @@ export const DynamicSlow = ({
 					/>
 				);
 			default:
-				return <></>;
+				return null;
 		}
 	};
 

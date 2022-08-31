@@ -472,7 +472,11 @@ export const DynamicFast = ({
 				})}
 				{standardsDisplayConfig.columns > 0 && (
 					<LI percentage={standardsDisplayConfig.containerWidth}>
-						<UL direction="row" wrapCards={true}>
+						<UL
+							direction="row"
+							wrapCards={true}
+							showDivider={bigs.length > 0}
+						>
 							{/* If the first big is boosted & we have a second big,
 							it should be at the start of the standards but have an image  */}
 							{firstBigBoostedPlusBig ? (
@@ -488,6 +492,7 @@ export const DynamicFast = ({
 							) : (
 								// Regular standards layout
 								standards.map((card, cardIndex) => {
+									const { columns } = standardsDisplayConfig;
 									return (
 										<LI
 											key={card.url}
@@ -495,12 +500,14 @@ export const DynamicFast = ({
 												standardsDisplayConfig.cardWidth
 											}
 											stretch={true}
-											showDivider={true}
+											showDivider={
+												cardIndex % columns !== 0
+											}
 											padSides={true}
 											offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 												cardIndex,
 												standards.length,
-												standardsDisplayConfig.columns,
+												columns,
 											)}
 										>
 											<FrontCard
