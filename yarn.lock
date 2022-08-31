@@ -2818,6 +2818,11 @@
   resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-7.4.0.tgz#cccd1e39156a12ca4304bfb4f6113d41521af753"
   integrity sha512-r3+yM/qh45g1gI/FCD1ooCwOntcHnemcjo/E+phgYLvXGGDG82l6AzdMVyC8c4ZGfeFu2EnUPhHALUMyaT/qdg==
 
+"@guardian/browserslist-config@^2.0.3":
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/@guardian/browserslist-config/-/browserslist-config-2.0.3.tgz#1c8b832ab564b257f8146ca1b3183b7683026ec9"
+  integrity sha512-mALAjz+4Hb2zLxfVz11PSKp6410boWqf0FFYhgzMKOhby0bZjfEKsQIH//U15M5ELibIMG1ryHSP/SFV4C2ovg==
+
 "@guardian/commercial-core@^4.3.0":
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-4.3.0.tgz#f04bc56d4eedef9feb2a4c844142a7b11082d9bd"
