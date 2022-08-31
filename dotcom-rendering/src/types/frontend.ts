@@ -114,5 +114,5 @@ interface TOCItem {
 	subtitle?: string;
 }
 export interface TOCType extends TOCItem {
-	nested: TOCItem[];
+	nested?: TOCItem[];
 }
