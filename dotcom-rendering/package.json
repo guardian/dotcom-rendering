@@ -102,7 +102,7 @@
     "@types/twitter-for-web": "^0.0.2",
     "@types/uuid": "^8.3.4",
     "@types/webpack-bundle-analyzer": "^4.4.1",
-    "@types/webpack-env": "^1.16.0",
+    "@types/webpack-env": "^1.18.0",
     "@types/webpack-node-externals": "^2.5.3",
     "@types/youtube": "^0.0.46",
     "@typescript-eslint/eslint-plugin": "^5",
