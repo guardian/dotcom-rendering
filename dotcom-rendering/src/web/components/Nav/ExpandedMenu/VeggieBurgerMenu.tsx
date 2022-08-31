@@ -94,12 +94,11 @@ const veggieBurgerStyles = (display: ArticleDisplay) => css`
 		display: none;
 	}
 
-	/* We apply this style when the side navigation is open to prevent the burger from being hidden behind the overlay */
-	/* See Nav.tsx */
-	.nav-is-open & {
+	/* refer to comment above */
+	/* stylelint-disable-next-line selector-type-no-unknown */
+	${`#${navInputCheckboxId}`}:checked ~ div & {
 		${getZIndex('burger')}
 	}
-
 	:focus {
 		outline: none;
 	}
