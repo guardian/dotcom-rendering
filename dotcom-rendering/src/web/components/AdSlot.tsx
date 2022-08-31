@@ -20,6 +20,7 @@ type InlineProps = {
 	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
+	shouldHideAds?: boolean;
 };
 
 type NonInlineProps = {
@@ -28,6 +29,7 @@ type NonInlineProps = {
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
+	shouldHideAds?: boolean;
 };
 
 /**
@@ -227,6 +229,7 @@ export const AdSlot = ({
 	shouldHideReaderRevenue = false,
 	isPaidContent = false,
 	index,
+	shouldHideAds = false,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -261,6 +264,7 @@ export const AdSlot = ({
 								}
 								isPaidContent={isPaidContent}
 								adStyles={adStyles}
+								shouldHideAds={shouldHideAds}
 							/>
 						</Island>
 					);
