@@ -7,7 +7,7 @@ describe('canRun using participations', () => {
 		localStorage.clear();
 	});
 	const getParticipationsFromLocalStorage = () =>
-		storage.local.get('gu.ab.participations') as Participations | undefined;
+		storage.local.get('gu.ab.participations');
 
 	const abTestId = 'test-id';
 	const variantId = 'variant-id';
@@ -18,15 +18,14 @@ describe('canRun using participations', () => {
 		'test-id': { variant: 'variant-id' },
 	};
 
-	test('canRun using participations sets participation key and returns true if setParticipationsFlag is true', async () => {
+	test('canRun using participations sets participation key and returns true if setParticipationsFlag is true', () => {
 		expect(setOrUseParticipations(true, abTestId, variantId)).toBe(true);
-
 		expect(getParticipationsFromLocalStorage()).toStrictEqual(
 			currentTestParticipation,
 		);
 	});
 
-	test('canRun using participations sets participation key and returns true if setParticipationsFlag is true, even if other participatio is present', async () => {
+	test('canRun using participations sets participation key and returns true if setParticipationsFlag is true, even if other participatio is present', () => {
 		storage.local.set('gu.ab.participations', otherParticipation);
 
 		expect(setOrUseParticipations(true, abTestId, variantId)).toBe(true);
@@ -36,12 +35,12 @@ describe('canRun using participations', () => {
 		});
 	});
 
-	test('canRun using participations returns correctly if setParticipationsFlag is false and no localstorage participation is set,', async () => {
+	test('canRun using participations returns correctly if setParticipationsFlag is false and no localstorage participation is set', () => {
 		expect(setOrUseParticipations(false, abTestId, variantId)).toBe(false);
 		expect(getParticipationsFromLocalStorage()).toBeNull();
 	});
 
-	test('canRun using participations returns correctly if setParticipationsFlag is false and correct localstorgae participation is present,', async () => {
+	test('canRun using participations returns correctly if setParticipationsFlag is false and correct localstorage participation is present', () => {
 		storage.local.set('gu.ab.participations', currentTestParticipation);
 
 		expect(setOrUseParticipations(false, abTestId, variantId)).toBe(true);
@@ -50,7 +49,7 @@ describe('canRun using participations', () => {
 		);
 	});
 
-	test('canRun using participations returns correctly if setParticipationsFlag is false and multiple localstorgae participations present,', async () => {
+	test('canRun using participations returns correctly if setParticipationsFlag is false and multiple localstorage participations present', () => {
 		storage.local.set('gu.ab.participations', {
 			...otherParticipation,
 			...currentTestParticipation,

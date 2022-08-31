@@ -32,9 +32,7 @@ export const setOrUseParticipations = (
 
 	if (setParticipationsFlag) {
 		// check if participation already exists
-		if (participations[abTestId]?.variant === variantId) {
-			return true;
-		}
+		if (participations[abTestId]?.variant === variantId) return true;
 
 		// else set add participation to local storage
 		setParticipations({
