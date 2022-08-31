@@ -86,13 +86,15 @@ export const enhanceTableOfContents = (
 				if (isH3(element)) {
 					if (tocs.length > 0) {
 						const lastItem = tocs[tocs.length - 1];
-						lastItem.nested.push({
-							id: element.elementId,
-							title: extractText(element),
-						});
-					} else {
-						// This is an orphan h3 with no parent h2 element to assign it to
-						// so we don't show it in the table
+						if (lastItem.nested != undefined) {
+							lastItem.nested.push({
+								id: element.elementId,
+								title: extractText(element),
+							});
+						} else {
+							// This is an orphan h3 with no parent h2 element to assign it to
+							// so we don't show it in the table
+						}
 					}
 				}
 			});
