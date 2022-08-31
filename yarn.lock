@@ -2815,11 +2815,6 @@
   resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-7.4.0.tgz#cccd1e39156a12ca4304bfb4f6113d41521af753"
   integrity sha512-r3+yM/qh45g1gI/FCD1ooCwOntcHnemcjo/E+phgYLvXGGDG82l6AzdMVyC8c4ZGfeFu2EnUPhHALUMyaT/qdg==
 
-"@guardian/browserslist-config@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@guardian/browserslist-config/-/browserslist-config-1.0.1.tgz#694ab24f6a028646ae752f5e035ea13a0746c30a"
-  integrity sha512-xjQSUXmln96Qr/G8yRCaDWe5HbablzGU9lax1zDUZkfArV/rBj8P34x/RH0ksf3J8BaykVTma97W+g/WRz7Isw==
-
 "@guardian/commercial-core@^4.3.0":
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-4.3.0.tgz#f04bc56d4eedef9feb2a4c844142a7b11082d9bd"
@@ -19635,9 +19630,9 @@ supports-color@^9.2.1:
   integrity sha512-Obv7ycoCTG51N7y175StI9BlAXrmgZrFhZOb0/PyjHBher/NmsdBgbbQ1Inhq+gIhz6+7Gb+jWF2Vqi7Mf1xnQ==
 
 supports-hyperlinks@^2.0.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/supports-hyperlinks/-/supports-hyperlinks-2.2.0.tgz#4f77b42488765891774b70c79babd87f9bd594bb"
-  integrity sha512-6sXEzV5+I5j8Bmq9/vUphGRM/RJNT9SCURJLjwfOg51heRtguGWDzcaBlgAzKhQa0EVNpPEKzQuBwZ8S8WaCeQ==
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/supports-hyperlinks/-/supports-hyperlinks-2.3.0.tgz#3943544347c1ff90b15effb03fc14ae45ec10624"
+  integrity sha512-RpsAZlpWcDwOPQA22aCH4J0t7L8JmAvsCxfOSEwm7cQs3LshN36QaTkwd70DnBOXDWGssw2eUoc8CaRWT0XunA==
   dependencies:
     has-flag "^4.0.0"
     supports-color "^7.0.0"

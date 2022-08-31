@@ -43,7 +43,7 @@ export const frontToHtml = ({ front }: Props): string => {
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
 	const manifestPaths: ManifestPath[] =
-		front.config.abTests.jsBundleVariant === 'variant'
+		front.config.abTests.dcrJsBundleVariant === 'variant'
 			? ['./manifest.variant.json', './manifest.legacy.json']
 			: ['./manifest.modern.json', './manifest.legacy.json'];
 

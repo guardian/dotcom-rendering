@@ -89,7 +89,7 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	);
 
 	const manifestPaths: ManifestPath[] =
-		CAPIArticle.config.abTests.jsBundleVariant === 'variant'
+		CAPIArticle.config.abTests.dcrJsBundleVariant === 'variant'
 			? ['./manifest.variant.json', './manifest.legacy.json']
 			: ['./manifest.modern.json', './manifest.legacy.json'];
 
