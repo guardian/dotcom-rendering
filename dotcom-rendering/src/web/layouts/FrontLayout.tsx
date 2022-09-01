@@ -1,11 +1,9 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import type { Breakpoint } from '@guardian/source-foundations';
 import {
 	brandBackground,
 	brandBorder,
 	brandLine,
-	from,
 	neutral,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
@@ -17,6 +15,7 @@ import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { MostViewedFooter } from '../components/MostViewedFooter';
+import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { Snap } from '../components/Snap';
@@ -34,15 +33,6 @@ const spaces = / /g;
 /** TODO: Confirm with is a valid way to generate component IDs. */
 const ophanComponentId = (name: string) =>
 	name.toLowerCase().replace(spaces, '-');
-
-const stackBelow = (breakpoint: Breakpoint) => css`
-	display: flex;
-	flex-direction: column;
-
-	${from[breakpoint]} {
-		flex-direction: row;
-	}
-`;
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
@@ -211,7 +201,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								data-print-layout="hide"
 								element="aside"
 							>
-								<div css={stackBelow('desktop')}>
+								<MostViewedFooterLayout>
 									<MostViewedFooter
 										tabs={[
 											{
@@ -221,20 +211,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										sectionName="Most viewed"
 										// TODO: Include mostCommented & mostShared once we have this data in the FE response
 									/>
-									{front.config.switches
-										.extendedMostPopularFronts && (
-										<div
-											css={css`
-												margin: 6px 0 0 10px;
-											`}
-										>
-											<AdSlot
-												position="mostpop"
-												display={format.display}
-											/>
-										</div>
-									)}
-								</div>
+								</MostViewedFooterLayout>
 							</Section>
 						);
 					}
