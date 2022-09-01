@@ -193,7 +193,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						return (
 							<Section
 								key={collection.id}
-								title={collection.displayName}
+								title="Most viewed"
 								showTopBorder={index > 0}
 								padContent={false}
 								verticalMargins={false}
