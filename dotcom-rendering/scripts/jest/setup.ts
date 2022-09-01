@@ -1,6 +1,6 @@
 // add some helpful assertions
 import '@testing-library/jest-dom/extend-expect';
-
+import { TextDecoder, TextEncoder } from 'util';
 import type { WindowGuardianConfig } from '../../src/model/window-guardian';
 
 const windowGuardianConfig = {
@@ -93,3 +93,19 @@ const localStorageMock = (function () {
 Object.defineProperty(window, 'localStorage', {
 	value: localStorageMock,
 });
+
+/**
+ * This is to polyfill `TextEncoder` and `TextDecoder`.
+ * @see https://github.com/jsdom/whatwg-encoding/pull/11
+ *
+ * `jest` and `jsdom` have issues exposing `TextEncoder` and `TextDecoder
+ * that are being looked at:
+ * @see https://github.com/jsdom/jsdom/issues/2524
+ * @see https://github.com/facebook/jest/issues/9983
+ *
+ * The odd type coercion of `global.TextDecoder` is because of slight differences between
+ * DOM and NodeJS versions of `TextDecoder`. This affect the running of the application and
+ * allows us to update jsdom.
+ */
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder as unknown as typeof global.TextDecoder;

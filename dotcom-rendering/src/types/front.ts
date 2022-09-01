@@ -1,5 +1,5 @@
 import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
-import type { ServerSideTests } from './config';
+import type { ServerSideTests, Switches } from './config';
 import type { EditionId } from './edition';
 import type { FooterType } from './footer';
 import type { TrailType } from './trails';
@@ -345,7 +345,7 @@ type FEFrontConfigType = {
 	beaconUrl: string;
 	userAttributesApiUrl: string;
 	host: string;
-	brazeApiKey: string;
+	brazeApiKey?: string;
 	calloutsUrl: string;
 	requiresMembershipAccess: boolean;
 	onwardWebSocket: string;

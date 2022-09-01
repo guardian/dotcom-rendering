@@ -81,9 +81,9 @@ export const abTestPayload = (tests: {
 	[key: string]: string;
 }): OphanABPayload => {
 	const records: { [key: string]: OphanABEvent } = {};
-	Object.keys(tests).forEach((testName) => {
+	Object.entries(tests).forEach(([testName, variantName]) => {
 		records[`ab${testName}`] = {
-			variantName: tests[testName],
+			variantName,
 			complete: false,
 		};
 	});

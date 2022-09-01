@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
 import {
@@ -9,7 +10,14 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { none, OptionKind, ResultKind, some, toOption } from '@guardian/types';
+import {
+	none,
+	OptionKind,
+	partition,
+	ResultKind,
+	some,
+	toOption,
+} from '@guardian/types';
 import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
@@ -18,8 +26,10 @@ import type { Contributor } from 'contributor';
 import type { MatchScores } from 'football';
 import type { Image } from 'image';
 import type {
+	Analysis,
 	Comment,
 	Editorial,
+	Explainer,
 	Feature,
 	Interview,
 	Item,
@@ -36,6 +46,9 @@ import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
+import { Optional } from 'optional';
+import type { Outline } from 'outline';
+import { fromBodyElements } from 'outline';
 import { galleryBody } from './galleryBody';
 import { relatedContent } from './relatedContent';
 
@@ -70,7 +83,7 @@ const captionDocFragment: Option<DocumentFragment> = pipe(
 	toOption,
 );
 
-const docFixture = (): DocumentFragment => {
+const docFixture = (): Node => {
 	const doc = new DocumentFragment();
 
 	const el = document.createElement('p');
@@ -80,7 +93,40 @@ const docFixture = (): DocumentFragment => {
 
 	doc.appendChild(el);
 
-	return doc;
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- this value is not `null`
+	return doc.firstChild!;
+};
+
+const elementFixture = (element: string, innerText: string): Node => {
+	const doc = new DocumentFragment();
+
+	const el = document.createElement(element);
+
+	el.innerText = innerText;
+
+	doc.appendChild(el);
+
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- this value is not `null`
+	return doc.firstChild!;
+};
+
+const h2ElementWithSub = (): Node => {
+	const doc = new DocumentFragment();
+
+	const el = document.createElement('H2');
+	const sub = document.createElement('SUB');
+	sub.innerText = 'student';
+
+	const el2 = document.createTextNode('loan forgiveness? ');
+
+	el.innerText = ' Who qualifies for ';
+	el.appendChild(sub);
+	el.appendChild(el2);
+
+	doc.appendChild(el);
+
+	// eslint-disable-next-line @typescript-eslint/no-non-null-assertion -- this value is not `null`
+	return doc.firstChild!;
 };
 
 const srcset =
@@ -147,6 +193,14 @@ const body: Body = [
 	{
 		kind: ResultKind.Ok,
 		value: {
+			kind: ElementKind.HeadingTwo,
+			id: Optional.some('who-qualifies-for-student-loan-forgiveness'),
+			doc: h2ElementWithSub(),
+		},
+	},
+	{
+		kind: ResultKind.Ok,
+		value: {
 			kind: ElementKind.Image,
 			src: 'https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d',
 			srcset: 'https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=85&fit=bounds&s=978ea68731deea77a6ec549b36f5e32b 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=85&fit=bounds&s=8d92ccc42745c327145fa3bcd7aea0c1 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=85&fit=bounds&s=f677266ce93d0c51eb6a7a5c0162ed89 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=85&fit=bounds&s=90415465f0f60ef29d5067933e7df697 2000w',
@@ -180,6 +234,14 @@ const body: Body = [
 	{
 		kind: ResultKind.Ok,
 		value: {
+			kind: ElementKind.HeadingTwo,
+			id: Optional.some('how-the-student-debt-crisis-started'),
+			doc: elementFixture('h2', 'How the student debt crisis started?'),
+		},
+	},
+	{
+		kind: ResultKind.Ok,
+		value: {
 			kind: ElementKind.Text,
 			doc,
 		},
@@ -200,6 +262,14 @@ const body: Body = [
 		value: {
 			kind: ElementKind.Text,
 			doc,
+		},
+	},
+	{
+		kind: ResultKind.Ok,
+		value: {
+			kind: ElementKind.HeadingTwo,
+			id: Optional.some('what-student-debt-looks-like-today'),
+			doc: elementFixture('h2', 'What student debt looks like today?'),
 		},
 	},
 	{
@@ -367,6 +437,8 @@ const fields = {
 	footballContent: none,
 	logo: none,
 	webUrl: '',
+	promotedNewsletter: none,
+	edition: Edition.UK,
 };
 
 const article: Standard = {
@@ -380,9 +452,14 @@ const articleWithStandfirstLink: Item = {
 	standfirst: standfirstWithLink,
 };
 
-const analysis: Standard = {
+const outlineFromItem = (body: Body): Outline => {
+	const elements = partition(body).oks;
+	return fromBodyElements(elements);
+};
+const analysis: Analysis = {
 	design: ArticleDesign.Analysis,
 	...fields,
+	outline: outlineFromItem(fields.body),
 };
 
 const feature: Feature = {
@@ -473,6 +550,12 @@ const quiz: Quiz = {
 	theme: ArticlePillar.Sport,
 };
 
+const explainer: Explainer = {
+	design: ArticleDesign.Explainer,
+	...fields,
+	outline: outlineFromItem(fields.body),
+};
+
 // ----- Exports ----- //
 
 export {
@@ -495,4 +578,5 @@ export {
 	recipe,
 	quiz,
 	pinnedBlock,
+	explainer,
 };

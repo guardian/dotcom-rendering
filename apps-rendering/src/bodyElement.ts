@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
+import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
@@ -23,6 +24,7 @@ import type { Embed } from 'embed';
 import type { Image as ImageData } from 'image';
 import { parseImage } from 'image';
 import { compose, pipe } from 'lib';
+import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
 
@@ -30,7 +32,19 @@ import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
 
 type Text = {
 	kind: ElementKind.Text;
-	doc: DocumentFragment;
+	doc: Node;
+};
+
+type HeadingTwo = {
+	kind: ElementKind.HeadingTwo;
+	doc: Node;
+	id: Optional<string>;
+};
+
+type HeadingThree = {
+	kind: ElementKind.HeadingThree;
+	doc: Node;
+	id: Optional<string>;
 };
 
 type Image = ImageData & {
@@ -111,18 +125,15 @@ interface AudioAtom {
 	title: string;
 }
 
-interface NewsletterSignUp {
+interface NewsletterSignUp extends Omit<Newsletter, 'theme'> {
 	kind: ElementKind.NewsletterSignUp;
-	id: string;
-	displayName: string;
-	frequency: string;
-	description: string;
-	group: string;
 	theme: ArticleTheme;
 }
 
 type BodyElement =
 	| Text
+	| HeadingTwo
+	| HeadingThree
 	| Image
 	| {
 			kind: ElementKind.Pullquote;
@@ -199,9 +210,47 @@ const toEmbedElement: (
 	embed,
 }));
 
+const slugify = (text: string): string => {
+	return text
+		.normalize('NFKD') // The normalize() using NFKD method returns the Unicode Normalization Form of a given string.
+		.toLowerCase() // Convert the string to lowercase letters
+		.trim() // Remove whitespace from both sides of a string
+		.replace(/\s+/g, '-') // Replace spaces with "-"
+		.replace(/[^\w-]+/g, '') // Remove all non-word chars
+		.replace(/--+/g, '-'); // Replace multiple "-" with single "-"
+};
+
+const flattenTextElement = (doc: Node): BodyElement[] => {
+	const childNodes = Array.from(doc.childNodes);
+	return childNodes.map((node) => {
+		switch (node.nodeName) {
+			case 'H2':
+				return {
+					kind: ElementKind.HeadingTwo,
+					doc: node,
+					id: Optional.fromNullable(node.textContent).flatMap(
+						(text) => {
+							const slug = slugify(text);
+							return slug === ''
+								? Optional.none()
+								: Optional.some(slug);
+						},
+					),
+				};
+			default:
+				return {
+					kind: ElementKind.Text,
+					doc: node,
+				};
+		}
+	});
+};
+
 const parse =
 	(context: Context, atoms?: Atoms, campaigns?: Campaign[]) =>
-	(element: BlockElement): Result<string, BodyElement> => {
+	(
+		element: BlockElement,
+	): Result<string, BodyElement> | Array<Result<string, BodyElement>> => {
 		switch (element.type) {
 			case ElementType.TEXT: {
 				const html = element.textTypeData?.html;
@@ -210,10 +259,9 @@ const parse =
 					return err('No html field on textTypeData');
 				}
 
-				return ok({
-					kind: ElementKind.Text,
-					doc: context.docParser(html),
-				});
+				const doc = context.docParser(html);
+
+				return flattenTextElement(doc).map(ok);
 			}
 
 			case ElementType.IMAGE:
@@ -394,7 +442,7 @@ const parseElements =
 		if (!elements) {
 			return [err('No body elements available')];
 		}
-		return elements.map(parse(context, atoms, campaigns));
+		return elements.flatMap(parse(context, atoms, campaigns));
 	};
 
 // ----- Exports ----- //
@@ -402,6 +450,8 @@ const parseElements =
 export {
 	ElementKind,
 	BodyElement,
+	HeadingTwo,
+	HeadingThree,
 	Body,
 	Image,
 	Text,
@@ -415,4 +465,5 @@ export {
 	AudioAtom,
 	parseElements,
 	NewsletterSignUp,
+	flattenTextElement,
 };

@@ -1,39 +1,9 @@
 import { getAdPlaceholderInserter } from './ads';
-import { ReactNode } from 'react';
-import { renderAll } from 'renderer';
-import { JSDOM } from 'jsdom';
-import {
-	ArticlePillar,
-	ArticleFormat,
-	ArticleDesign,
-	ArticleDisplay,
-} from '@guardian/libs';
-import { compose } from 'lib';
-import { ElementKind, BodyElement } from 'bodyElement';
 import AdSlot from 'adSlot';
+import { mockFormat, renderParagraphs, renderTextElement } from 'testsHelper';
 
 const shouldHideAdverts = false;
 const insertAdPlaceholders = getAdPlaceholderInserter(shouldHideAdverts);
-const mockFormat: ArticleFormat = {
-	theme: ArticlePillar.News,
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-};
-
-const textElement = (nodes: string[]): BodyElement => ({
-	kind: ElementKind.Text,
-	doc: JSDOM.fragment(nodes.join('')),
-});
-
-const generateParas = (paras: number): BodyElement =>
-	textElement(Array(paras).fill('<p>foo</p>'));
-
-const render = (element: BodyElement): ReactNode[] =>
-	renderAll(mockFormat, [element]);
-
-const renderParagraphs = compose(render, generateParas);
-
-const renderTextElement = compose(render, textElement);
 
 describe('Adds the correct number of ad placeholders', () => {
 	test('Adds no placeholders for 2 paragraphs', () => {

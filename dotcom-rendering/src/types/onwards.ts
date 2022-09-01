@@ -3,17 +3,17 @@ import type { CAPITrailType } from './trails';
 /**
  * Onwards
  */
-export type CAPIOnwardsType = {
+export type CAPIOnwards = {
 	heading: string;
 	trails: CAPITrailType[];
 	description?: string;
 	url?: string;
-	onwardsType: OnwardsType;
+	onwardsSource: OnwardsSource;
 	format: CAPIFormat;
 	isCuratedContent?: boolean;
 };
 
-export type OnwardsType =
+export type OnwardsSource =
 	| 'series'
 	| 'more-on-this-story'
 	| 'related-stories'
@@ -21,4 +21,4 @@ export type OnwardsType =
 	| 'more-media-in-section'
 	| 'more-galleries'
 	| 'curated-content'
-	| 'default-onwards'; // We should never see this in the analytics data!
+	| 'unknown-source'; // We should never see this in the analytics data!

@@ -178,9 +178,6 @@ const textByline = (format: ArticleFormat): string => {
 };
 
 const textHeadlineByline = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[300];
-	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
 			case ArticlePillar.News:
@@ -189,6 +186,9 @@ const textHeadlineByline = (format: ArticleFormat): string => {
 				return pillarPalette[format.theme].main;
 		}
 	}
+	if (format.theme === ArticleSpecial.SpecialReport)
+		return specialReport[300];
+	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	return pillarPalette[format.theme].main;
 };
 
@@ -613,6 +613,7 @@ const backgroundArticle = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.Letter) return opinion[800];
 	if (format.design === ArticleDesign.Comment) return opinion[800];
 	if (format.design === ArticleDesign.Editorial) return opinion[800];
+	if (format.design === ArticleDesign.Analysis) return news[800];
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[800]; // Note, check theme rather than design here
 	if (
@@ -716,6 +717,7 @@ const backgroundAgeWarning = (format: ArticleFormat): string => {
 };
 
 const backgroundHeadlineByline = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Analysis) return 'transparent';
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return brandAltBackground.primary;
 	return 'transparent';
@@ -1215,14 +1217,7 @@ const textRichLink = (format: ArticleFormat): string => {
 };
 
 const hoverStandfirstLink = (format: ArticleFormat): string => {
-	if (format.design === ArticleDesign.DeadBlog)
-		return pillarPalette[format.theme].main;
-	if (format.design === ArticleDesign.LiveBlog) {
-		return WHITE;
-	}
-	if (format.theme === ArticleSpecial.SpecialReport)
-		return specialReport[400];
-	return border.secondary;
+	return textStandfirstLink(format);
 };
 
 const borderRichLink: (format: ArticleFormat) => string = (format) => {
@@ -1372,6 +1367,8 @@ const textDropCap = (format: ArticleFormat): string => {
 
 const textBetaLabel = (): string => neutral[46];
 
+const textDesignTag = (): string => neutral[100];
+
 const textBlockquote = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -1473,6 +1470,25 @@ const backgroundSummaryEventBullet = (format: ArticleFormat): string => {
 };
 
 const backgroundTreat = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+	}
+};
+
+const backgroundDesignTag = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[300];
@@ -1597,6 +1613,7 @@ export const decidePalette = (
 			filterButtonHover: textFilterButtonHover(),
 			filterButtonActive: textFilterButtonActive(),
 			betaLabel: textBetaLabel(),
+			designTag: textDesignTag(),
 		},
 		background: {
 			article: backgroundArticle(format),
@@ -1629,6 +1646,7 @@ export const decidePalette = (
 			filterButtonHover: backgroundFilterButtonHover(format),
 			filterButtonActive: backgroundFilterButtonActive(format),
 			treat: backgroundTreat(format),
+			designTag: backgroundDesignTag(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),
