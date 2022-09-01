@@ -53,11 +53,12 @@ const getLoaders = (bundle) => {
 					loader: 'swc-loader',
 					options: {
 						...swcConfig,
-						env: {
-							// https://swc.rs/docs/configuration/supported-browsers#targets
-							// https://github.com/browserslist/browserslist
-							targets: 'supports es6-module',
-						},
+						// TODO investigate regression in browserlist support in 1.2.245
+						// env: {
+						// https://swc.rs/docs/configuration/supported-browsers#targets
+						// https://github.com/browserslist/browserslist
+						// 	targets: 'supports es6-module',
+						// },
 					},
 				},
 			];
