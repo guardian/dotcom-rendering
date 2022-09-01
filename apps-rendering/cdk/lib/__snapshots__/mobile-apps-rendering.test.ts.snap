@@ -165,7 +165,7 @@ Object {
         "ImageId": Object {
           "Ref": "AMIMobileappsrendering",
         },
-        "InstanceType": "t4g.micro",
+        "InstanceType": "t4g.small",
         "SecurityGroups": Array [
           Object {
             "Fn::GetAtt": Array [
@@ -1186,7 +1186,7 @@ Object {
         "ImageId": Object {
           "Ref": "AMIMobileappsrendering",
         },
-        "InstanceType": "t4g.micro",
+        "InstanceType": "t4g.small",
         "SecurityGroups": Array [
           Object {
             "Fn::GetAtt": Array [
