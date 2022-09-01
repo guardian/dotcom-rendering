@@ -32,7 +32,9 @@ export const FetchOnwardsData = ({
 	onwardsSource,
 	format,
 }: Props) => {
-	const { data, loading, error } = useApi<OnwardsResponse>(url);
+	const { data, loading, error } = useApi<OnwardsResponse>(url, {
+		errorRetryCount: 3,
+	});
 
 	const buildTrails = (
 		trails: CAPITrailType[],
