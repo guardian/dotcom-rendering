@@ -23,6 +23,7 @@ import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
+import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
 import { getFormat } from 'item';
 import type {
@@ -134,6 +135,16 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 						<Metadata item={item} />
 						<Logo item={item} />
 					</section>
+
+					{item.design === ArticleDesign.Explainer &&
+						item.outline.length > 0 && (
+							<section css={articleWidthStyles}>
+								<TableOfContents
+									format={getFormat(item)}
+									outline={item.outline}
+								/>
+							</section>
+						)}
 				</header>
 				<Body className={[articleWidthStyles]} format={item}>
 					{children}
