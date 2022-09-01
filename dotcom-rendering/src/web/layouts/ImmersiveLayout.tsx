@@ -482,17 +482,19 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													margin-top: ${space[4]}px;
 												`}
 											>
-												<AdSlot
-													position="right"
-													display={format.display}
-													shouldHideReaderRevenue={
-														CAPIArticle.shouldHideReaderRevenue
-													}
-													isPaidContent={
-														CAPIArticle.pageType
-															.isPaidContent
-													}
-												/>
+												{!CAPIArticle.shouldHideAds && (
+													<AdSlot
+														position="right"
+														display={format.display}
+														shouldHideReaderRevenue={
+															CAPIArticle.shouldHideReaderRevenue
+														}
+														isPaidContent={
+															CAPIArticle.pageType
+																.isPaidContent
+														}
+													/>
+												)}
 											</div>
 										)}
 									</>
