@@ -1,22 +1,22 @@
-import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import { GuEc2App } from '@guardian/cdk';
+import { AccessScope } from '@guardian/cdk/lib/constants';
+import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import { GuStack } from '@guardian/cdk/lib/constructs/core';
+import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
 import type { App, CfnElement } from 'aws-cdk-lib';
+import { Duration } from 'aws-cdk-lib';
+import {
+	InstanceClass,
+	InstanceSize,
+	InstanceType,
+	Peer,
+} from 'aws-cdk-lib/aws-ec2';
 import {
 	HostedZone,
 	RecordSet,
 	RecordTarget,
 	RecordType,
 } from 'aws-cdk-lib/aws-route53';
-import { AccessScope } from '@guardian/cdk/lib/constants';
-import {
-	Peer,
-	InstanceType,
-	InstanceClass,
-	InstanceSize,
-} from 'aws-cdk-lib/aws-ec2';
-import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
-import { Duration } from 'aws-cdk-lib';
 
 interface AppsStackProps extends GuStackProps {
 	recordPrefix: string;
