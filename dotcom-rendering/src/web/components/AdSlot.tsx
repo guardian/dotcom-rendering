@@ -96,7 +96,7 @@ const merchandisingAdStyles = css`
 	min-height: 250px;
 `;
 
-const mostpopAdStyles = css`
+const mostPopAdStyles = css`
 	position: relative;
 	min-height: 274px;
 	min-width: 300px;
@@ -355,7 +355,7 @@ export const AdSlot = ({
 						'ad-slot--mpu-banner-ad',
 						'ad-slot--rendered',
 					].join(' ')}
-					css={[adStyles, mostpopAdStyles]}
+					css={[adStyles, mostPopAdStyles]}
 					data-link-name="ad slot mostpop"
 					data-name="mostpop"
 					aria-hidden="true"
