@@ -1,6 +1,5 @@
-import '@aws-cdk/assert/jest';
-import { SynthUtils } from '@aws-cdk/assert';
-import { App } from '@aws-cdk/core';
+import { App } from 'aws-cdk-lib';
+import { Template } from 'aws-cdk-lib/assertions';
 import { MobileAppsRendering } from './mobile-apps-rendering';
 
 describe('The MobileAppsRendering stack', () => {
@@ -8,11 +7,16 @@ describe('The MobileAppsRendering stack', () => {
 		const app = new App();
 		const stack = new MobileAppsRendering(app, 'MobileAppsRendering', {
 			stack: 'mobile',
+			stage: 'TEST',
 			recordPrefix: 'mobile-rendering',
-			asgMinSize: { CODE: 1, PROD: 3 },
-			asgMaxSize: { CODE: 2, PROD: 12 },
+			asgMinSize: 1,
+			asgMaxSize: 2,
+			domainName: 'mobile-aws.code.dev-guardianapis.com',
+			hostedZoneId: 'TEST-HOSTED-ZONE-ID',
+			targetCpuUtilisation: 10,
 		});
-		expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+		const template = Template.fromStack(stack);
+		expect(template.toJSON()).toMatchSnapshot();
 	});
 });
 
@@ -24,11 +28,16 @@ describe('The MobileAppsRenderingPreview stack', () => {
 			'MobileAppsRenderingPreview',
 			{
 				stack: 'mobile-preview',
+				stage: 'TEST',
 				recordPrefix: 'mobile-preview-rendering',
-				asgMinSize: { CODE: 1, PROD: 1 },
-				asgMaxSize: { CODE: 2, PROD: 2 },
+				asgMinSize: 1,
+				asgMaxSize: 2,
+				domainName: 'mobile-aws.code.dev-guardianapis.com',
+				hostedZoneId: 'TEST-HOSTED-ZONE-ID',
+				targetCpuUtilisation: 10,
 			},
 		);
-		expect(SynthUtils.toCloudFormation(stack)).toMatchSnapshot();
+		const template = Template.fromStack(stack);
+		expect(template.toJSON()).toMatchSnapshot();
 	});
 });
