@@ -70,7 +70,6 @@ const summaryStyles: SerializedStyles = css`
 	cursor: pointer;
 	position: relative;
 	list-style: none;
-	//align-items: center;
 	padding-left: ${remSpace[3]};
 	padding-top: 0.44rem;
 	padding-bottom: 0.375rem;
@@ -169,8 +168,8 @@ const TableOfContents: FC<Props> = ({ format, outline }) => {
 				</span>
 			</summary>
 			<OrderedList className={listStyles}>
-				{outline.map((outlineItem, index) => (
-					<ListItem className={listItemStyles} key={index}>
+				{outline.map((outlineItem) => (
+					<ListItem className={listItemStyles} key={outlineItem.id}>
 						<Anchor
 							format={format}
 							href={`#${outlineItem.id}`}
