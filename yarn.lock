@@ -7377,11 +7377,6 @@ boolbase@^1.0.0:
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
 
-boolean@^3.1.4:
-  version "3.1.4"
-  resolved "https://registry.yarnpkg.com/boolean/-/boolean-3.1.4.tgz#f51a2fb5838a99e06f9b6ec1edb674de67026435"
-  integrity sha512-3hx0kwU3uzG6ReQ3pnaFQPSktpBw6RHN3/ivDKEuU8g1XSfafowyvDnadjv1xp8IZqhtSukxlwv9bF6FhX8m0w==
-
 boundary@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/boundary/-/boundary-1.0.1.tgz#4d67dc2602c0cc16dd9bce7ebf87e948290f5812"
@@ -7976,22 +7971,7 @@ chokidar@^2.1.8:
   optionalDependencies:
     fsevents "^1.2.7"
 
-chokidar@^3.4.1, chokidar@^3.4.2, chokidar@^3.5.1, chokidar@^3.5.2:
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.2.tgz#dba3976fcadb016f66fd365021d91600d01c1e75"
-  integrity sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==
-  dependencies:
-    anymatch "~3.1.2"
-    braces "~3.0.2"
-    glob-parent "~5.1.2"
-    is-binary-path "~2.1.0"
-    is-glob "~4.0.1"
-    normalize-path "~3.0.0"
-    readdirp "~3.6.0"
-  optionalDependencies:
-    fsevents "~2.3.2"
-
-chokidar@^3.5.3:
+chokidar@^3.4.1, chokidar@^3.4.2, chokidar@^3.5.1, chokidar@^3.5.2, chokidar@^3.5.3:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.3.tgz#1cf37c8707b932bd1af1ae22c0432e2acd1903bd"
   integrity sha512-Dr3sfKRP6oTcjf2JmUmFJfeVMvXBdegxB0iVQ5eb2V10uFJUCAS8OByZdVAyVb8xXNz3GjjTgj9kLWsZTqE6kw==
@@ -8649,12 +8629,10 @@ create-require@^1.1.0:
   resolved "https://registry.yarnpkg.com/create-require/-/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
   integrity sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==
 
-cron@1.8.2:
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/cron/-/cron-1.8.2.tgz#4ac5e3c55ba8c163d84f3407bde94632da8370ce"
-  integrity sha512-Gk2c4y6xKEO8FSAUTklqtfSr7oTq0CiPQeLBG5Fl0qoXpZyMcj1SG59YL+hqq04bu6/IuEA7lMkYDAplQNKkyg==
-  dependencies:
-    moment-timezone "^0.5.x"
+croner@~4.1.92:
+  version "4.1.97"
+  resolved "https://registry.yarnpkg.com/croner/-/croner-4.1.97.tgz#6e373dc7bb3026fab2deb0d82685feef20796766"
+  integrity sha512-/f6gpQuxDaqXu+1kwQYSckUglPaOrHdbIlBAu0YuW8/Cdb45XwXYNUBXg3r/9Mo6n540Kn/smKcZWko5x99KrQ==
 
 cross-spawn@7.0.3, cross-spawn@^7.0.0, cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"
@@ -10766,13 +10744,6 @@ fast-levenshtein@^2.0.6, fast-levenshtein@~2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
-
-fast-printf@^1.3.0:
-  version "1.6.9"
-  resolved "https://registry.yarnpkg.com/fast-printf/-/fast-printf-1.6.9.tgz#212f56570d2dc8ccdd057ee93d50dd414d07d676"
-  integrity sha512-FChq8hbz65WMj4rstcQsFB0O7Cy++nmbNfLYnD9cYv2cRn8EG6k/MGn9kO/tjO66t09DLDugj3yL+V2o6Qftrg==
-  dependencies:
-    boolean "^3.1.4"
 
 fast-xml-parser@3.19.0:
   version "3.19.0"
@@ -15430,18 +15401,6 @@ module-details-from-path@^1.0.3:
   resolved "https://registry.yarnpkg.com/module-details-from-path/-/module-details-from-path-1.0.3.tgz#114c949673e2a8a35e9d35788527aa37b679da2b"
   integrity sha1-EUyUlnPiqKNenTV4hSeqN7Z52is=
 
-moment-timezone@^0.5.x:
-  version "0.5.37"
-  resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.37.tgz#adf97f719c4e458fdb12e2b4e87b8bec9f4eef1e"
-  integrity sha512-uEDzDNFhfaywRl+vwXxffjjq1q0Vzr+fcQpQ1bU0kbzorfS7zVtZnCnGc8mhWmF39d4g4YriF6kwA75mJKE/Zg==
-  dependencies:
-    moment ">= 2.9.0"
-
-"moment@>= 2.9.0":
-  version "2.29.4"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
-  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
-
 move-concurrently@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/move-concurrently/-/move-concurrently-1.0.1.tgz#be2c005fda32e0b29af1f05d7c4b33214c701f92"
@@ -16524,10 +16483,17 @@ pidtree@^0.3.0:
   resolved "https://registry.yarnpkg.com/pidtree/-/pidtree-0.3.1.tgz#ef09ac2cc0533df1f3250ccf2c4d366b0d12114a"
   integrity sha512-qQbW94hLHEqCg7nhby4yRC7G2+jYHY4Rguc2bjw7Uug4GIJuu1tvf2uHaZv5Q8zdt+WKJ6qK1FOI6amaWUo5FA==
 
-pidusage@2.0.21, pidusage@^2.0.21:
+pidusage@^2.0.21:
   version "2.0.21"
   resolved "https://registry.yarnpkg.com/pidusage/-/pidusage-2.0.21.tgz#7068967b3d952baea73e57668c98b9eaa876894e"
   integrity sha512-cv3xAQos+pugVX+BfXpHsbyz/dLzX+lr44zNMsYiGxUw+kV5sgQCIcLd1z+0vq+KyC7dJ+/ts2PsfgWfSC3WXA==
+  dependencies:
+    safe-buffer "^5.2.1"
+
+pidusage@~3.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/pidusage/-/pidusage-3.0.0.tgz#69108079724c9afdd958644b920bc40bac964044"
+  integrity sha512-8VJLToXhj+RYZGNVw8oxc7dS54iCQXUJ+MDFHezQ/fwF5B8W4OWodAMboc1wb08S/4LiHwAmkT4ohf/d3YPPsw==
   dependencies:
     safe-buffer "^5.2.1"
 
@@ -16621,7 +16587,7 @@ pm2-multimeter@^0.1.2:
   dependencies:
     charm "~0.1.1"
 
-pm2-sysmonit@^1.2.6:
+pm2-sysmonit@^1.2.8:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/pm2-sysmonit/-/pm2-sysmonit-1.2.8.tgz#eddea34a53fd8c8d7c3efb73b97a3c548686e24d"
   integrity sha512-ACOhlONEXdCTVwKieBIQLSi2tQZ8eKinhcr9JpZSUAL8Qy0ajIgRtsLxG/lwPOW3JEKqPyw/UaHmTWhUzpP4kA==
@@ -16632,10 +16598,10 @@ pm2-sysmonit@^1.2.6:
     systeminformation "^5.7"
     tx2 "~1.0.4"
 
-pm2@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/pm2/-/pm2-5.0.0.tgz#3f9a71706fab06e121e4cfa96749e50d965d9bf0"
-  integrity sha512-K66p6CX3TLpD/5r9DXvZpppu857tzE6pv0Q+GOIUKgxbMLYvV5tkvvToAFZB5DAGS4hECFDCVbQ+lo7zLFHTMQ==
+pm2@5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/pm2/-/pm2-5.2.0.tgz#fda71fab4b8fcfa5b7f546ca55a6e59e9ec5a68d"
+  integrity sha512-PO5hMVhQ85cTszFM++6v07Me9hPJMkFbHjkFigtMMk+La8ty2wCi2dlBTeZYJDhPUSjK8Ccltpq2buNRcyMOTw==
   dependencies:
     "@pm2/agent" "~2.0.0"
     "@pm2/io" "~5.0.0"
@@ -16647,16 +16613,15 @@ pm2@5.0.0:
     chokidar "^3.5.1"
     cli-tableau "^2.0.0"
     commander "2.15.1"
-    cron "1.8.2"
+    croner "~4.1.92"
     dayjs "~1.8.25"
     debug "^4.3.1"
     enquirer "2.3.6"
     eventemitter2 "5.0.1"
-    fast-printf "^1.3.0"
     fclone "1.0.11"
     mkdirp "1.0.4"
     needle "2.4.0"
-    pidusage "2.0.21"
+    pidusage "~3.0"
     pm2-axon "~4.0.1"
     pm2-axon-rpc "~0.7.1"
     pm2-deploy "~1.0.2"
@@ -16664,10 +16629,11 @@ pm2@5.0.0:
     promptly "^2"
     semver "^7.2"
     source-map-support "0.5.19"
+    sprintf-js "1.1.2"
     vizion "~2.2.1"
     yamljs "0.3.0"
   optionalDependencies:
-    pm2-sysmonit "^1.2.6"
+    pm2-sysmonit "^1.2.8"
 
 pn@^1.1.0:
   version "1.1.0"
@@ -19020,6 +18986,11 @@ split@0.3:
   integrity sha1-zQ7qXmOiEd//frDwkcQTPi0N0o8=
   dependencies:
     through "2"
+
+sprintf-js@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.1.2.tgz#da1765262bf8c0f571749f2ad6c26300207ae673"
+  integrity sha512-VE0SOVEHCk7Qc8ulkWw3ntAzXuqf7S2lvwQaDLRnUeIEaKNQJzV6BwmLKhOqT61aGhfUMrXeaBk+oDGCzvhcug==
 
 sprintf-js@~1.0.2:
   version "1.0.3"
