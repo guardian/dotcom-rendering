@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { Optional } from 'optional';
+import { none } from '@guardian/types';
 import { Result } from 'result';
 import {
 	maybe,
@@ -147,7 +147,7 @@ describe('parser', () => {
 			const parser = maybe(fieldParser('bar', numberParser));
 			const result = parse(parser)(json);
 
-			expect(result).toStrictEqual(Result.ok(Optional.none()));
+			expect(result).toStrictEqual(Result.ok(none));
 		});
 
 		it("produces a failed parse result when it doesn't wrap the parser that fails", () => {
