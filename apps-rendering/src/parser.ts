@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 
 import type { Option } from '@guardian/types';
-import { none, some } from '@guardian/types';
 import { Result } from 'result';
 
 // ----- Types ----- //
@@ -131,11 +130,7 @@ const dateParser: Parser<Date> = parser((a) => {
  * const resultB = parse(parserB)(json); // Err<string>, with 'missing field' err
  */
 const maybe = <A>(pa: Parser<A>): Parser<Option<A>> =>
-	parser((a) => {
-		const result = pa.run(a);
-
-		return Result.ok(result.isOk() ? some(result.value) : none);
-	});
+	parser((a) => Result.ok(pa.run(a).toOption()));
 
 // ----- Data Structure Parsers ----- //
 
