@@ -2,6 +2,31 @@
 
 exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
 Object {
+  "Metadata": Object {
+    "gu:cdk:constructs": Array [
+      "GuAllowPolicy",
+      "GuVpcParameter",
+      "GuSubnetListParameter",
+      "GuCertificate",
+      "GuInstanceRole",
+      "GuSSMRunCommandPolicy",
+      "GuDescribeEC2Policy",
+      "GuLoggingStreamNameParameter",
+      "GuLogShippingPolicy",
+      "GuDistributionBucketParameter",
+      "GuGetDistributablePolicy",
+      "GuParameterStoreReadPolicy",
+      "GuAmiParameter",
+      "GuHttpsEgressSecurityGroup",
+      "GuAutoScalingGroup",
+      "GuWazuhAccess",
+      "GuApplicationLoadBalancer",
+      "GuApplicationTargetGroup",
+      "GuHttpsApplicationListener",
+      "GuSecurityGroup",
+    ],
+    "gu:cdk:version": "47.3.0",
+  },
   "Outputs": Object {
     "LoadBalancerMobileappsrenderingDnsName": Object {
       "Description": "DNS entry for LoadBalancerMobileappsrendering",
@@ -889,6 +914,31 @@ Object {
 
 exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
 Object {
+  "Metadata": Object {
+    "gu:cdk:constructs": Array [
+      "GuAllowPolicy",
+      "GuVpcParameter",
+      "GuSubnetListParameter",
+      "GuCertificate",
+      "GuInstanceRole",
+      "GuSSMRunCommandPolicy",
+      "GuDescribeEC2Policy",
+      "GuLoggingStreamNameParameter",
+      "GuLogShippingPolicy",
+      "GuDistributionBucketParameter",
+      "GuGetDistributablePolicy",
+      "GuParameterStoreReadPolicy",
+      "GuAmiParameter",
+      "GuHttpsEgressSecurityGroup",
+      "GuAutoScalingGroup",
+      "GuWazuhAccess",
+      "GuApplicationLoadBalancer",
+      "GuApplicationTargetGroup",
+      "GuHttpsApplicationListener",
+      "GuSecurityGroup",
+    ],
+    "gu:cdk:version": "47.3.0",
+  },
   "Outputs": Object {
     "LoadBalancerMobileappsrenderingDnsName": Object {
       "Description": "DNS entry for LoadBalancerMobileappsrendering",
