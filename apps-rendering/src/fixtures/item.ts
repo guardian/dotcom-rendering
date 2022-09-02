@@ -10,7 +10,7 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { none, OptionKind, partition, some } from '@guardian/types';
+import { none, OptionKind, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
@@ -399,7 +399,7 @@ const articleWithStandfirstLink: Item = {
 };
 
 const outlineFromItem = (body: Body): Outline => {
-	const elements = partition(body).oks;
+	const elements = Result.partition(body).oks;
 	return fromBodyElements(elements);
 };
 const analysis: Analysis = {
