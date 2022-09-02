@@ -32,9 +32,6 @@
   "license": "ISC",
   "prettier": "@guardian/prettier",
   "dependencies": {
-    "@aws-cdk/assert": "1.147.0",
-    "@aws-cdk/cloudformation-include": "1.147.0",
-    "@aws-cdk/core": "1.147.0",
     "@babel/core": "^7.18.13",
     "@babel/preset-env": "^7.15.6",
     "@creditkarma/thrift-server-core": "^0.16.1",
