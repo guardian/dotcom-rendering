@@ -1,8 +1,8 @@
+import { partytownSnippet } from '@builder.io/partytown/integration';
 import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
 import { ASSET_ORIGIN } from '../../lib/assets';
 import { getFontsCss } from '../../lib/fonts-css';
-import { partytownSnippet } from '@builder.io/partytown/integration';
 
 export const articleTemplate = ({
 	title = 'The Guardian',
@@ -276,6 +276,10 @@ https://workforus.theguardian.com/careers/product-engineering/
 					window.curl = window.curlConfig;
 				</script>
 
+				<script>
+					window.guardianProxy = window.guardian;
+				</script>
+
 
 				${initTwitter}
 
@@ -288,10 +292,9 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <script>
                 partytown = {
                     lib: "/static/frontend/~partytown/",
-					forward: ['guardian.test.record'],
-					mainWindowAccessors: ['guardian'],
+					forward: ['guardian.ophan.record'],
+					mainWindowAccessors: ['guardianProxy'],
 					debug: true,
-					logCalls: true
                 };
                 </script>
                 <script>
