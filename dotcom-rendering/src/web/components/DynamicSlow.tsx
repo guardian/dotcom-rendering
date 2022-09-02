@@ -255,7 +255,7 @@ export const DynamicSlow = ({
 		| 'TwoVeryBigsSecondBoosted';
 
 	let firstSliceCards: TrailType[] = [];
-	// this is updated to container all the trails *not* used in the first slice
+	// Any trails not used in the first slice are demoted to here
 	let secondSliceGroupedTrails: DCRGroupedTrails = { ...groupedTrails };
 
 	// Decide the layout and contents for the first slice, demoting any remaining cards to the second slice
