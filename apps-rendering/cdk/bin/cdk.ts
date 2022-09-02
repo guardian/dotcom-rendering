@@ -15,7 +15,7 @@ new MobileAppsRendering(app, 'MobileAppsRendering-CODE', {
 		min: 1,
 		max: 2,
 	},
-	domainName: 'mobile-aws.code.dev-guardianapis.com',
+	appsRenderingDomain: 'mobile-aws.code.dev-guardianapis.com',
 	hostedZoneId: 'Z6PRU8YR6TQDK',
 	targetCpuUtilisation: 20,
 });
@@ -30,7 +30,7 @@ new MobileAppsRendering(app, 'MobileAppsRendering-PROD', {
 		min: 3,
 		max: 12,
 	},
-	domainName: 'mobile-aws.guardianapis.com',
+	appsRenderingDomain: 'mobile-aws.guardianapis.com',
 	hostedZoneId: 'Z1EYB4AREPXE3B',
 	targetCpuUtilisation: 20,
 });
@@ -45,7 +45,7 @@ new MobileAppsRendering(app, 'MobileAppsRenderingPreview-CODE', {
 		min: 1,
 		max: 2,
 	},
-	domainName: 'mobile-aws.code.dev-guardianapis.com',
+	appsRenderingDomain: 'mobile-aws.code.dev-guardianapis.com',
 	hostedZoneId: 'Z6PRU8YR6TQDK',
 	targetCpuUtilisation: 20,
 });
@@ -60,7 +60,7 @@ new MobileAppsRendering(app, 'MobileAppsRenderingPreview-PROD', {
 		min: 1,
 		max: 2,
 	},
-	domainName: 'mobile-aws.guardianapis.com',
+	appsRenderingDomain: 'mobile-aws.guardianapis.com',
 	hostedZoneId: 'Z1EYB4AREPXE3B',
 	targetCpuUtilisation: 20,
 });

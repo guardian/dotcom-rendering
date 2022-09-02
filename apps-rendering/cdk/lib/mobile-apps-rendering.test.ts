@@ -13,7 +13,7 @@ describe('The MobileAppsRendering stack', () => {
 				min: 1,
 				max: 2,
 			},
-			domainName: 'mobile-aws.code.dev-guardianapis.com',
+			appsRenderingDomain: 'mobile-aws.code.dev-guardianapis.com',
 			hostedZoneId: 'TEST-HOSTED-ZONE-ID',
 			targetCpuUtilisation: 10,
 		});
@@ -36,7 +36,7 @@ describe('The MobileAppsRenderingPreview stack', () => {
 					min: 1,
 					max: 2,
 				},
-				domainName: 'mobile-aws.code.dev-guardianapis.com',
+				appsRenderingDomain: 'mobile-aws.code.dev-guardianapis.com',
 				hostedZoneId: 'TEST-HOSTED-ZONE-ID',
 				targetCpuUtilisation: 10,
 			},

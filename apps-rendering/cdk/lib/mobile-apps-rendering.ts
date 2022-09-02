@@ -26,7 +26,7 @@ interface AsgSize {
 interface AppsStackProps extends GuStackProps {
 	recordPrefix: string;
 	asgSize: AsgSize;
-	domainName: string;
+	appsRenderingDomain: string;
 	hostedZoneId: string;
 	targetCpuUtilisation: number;
 }
@@ -36,15 +36,12 @@ export class MobileAppsRendering extends GuStack {
 		super(scope, id, props);
 
 		const appName = 'mobile-apps-rendering';
-
-		const appsRenderingDomain = props.domainName;
-		const domainName = `${props.recordPrefix}.${appsRenderingDomain}`;
-
+		const domainName = `${props.recordPrefix}.${props.appsRenderingDomain}`;
 		const hostedZone = HostedZone.fromHostedZoneAttributes(
 			this,
 			'HostedZone',
 			{
-				zoneName: appsRenderingDomain,
+				zoneName: props.appsRenderingDomain,
 				hostedZoneId: props.hostedZoneId,
 			},
 		);
