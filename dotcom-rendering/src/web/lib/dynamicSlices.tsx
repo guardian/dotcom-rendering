@@ -9,8 +9,8 @@ import { FrontCard } from '../components/FrontCard';
  * A place for shared slices which are used across multiple dynamic/ containers
  *
  * ASCII Art Guide:
- * '#' 			=> Image
- * ' ' | '_' 	=> text / trail / supporting content
+ * '#'            => Image
+ * ' ' | '_'      => text / trail / supporting content
  */
 
 /* ._________________._________________.
