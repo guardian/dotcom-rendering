@@ -252,7 +252,7 @@ export const DynamicSlow = ({
 		| 'oneVeryBig'
 		| 'twoVeryBigs'
 		| 'TwoVeryBigsFirstBoosted'
-		| 'TwoVeryBigsSecondBoosted' = undefined;
+		| 'TwoVeryBigsSecondBoosted';
 
 	let firstSliceCards: TrailType[] = [];
 	// this is updated to container all the trails *not* used in the first slice
