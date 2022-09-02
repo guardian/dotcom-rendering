@@ -18,10 +18,14 @@ import {
 	RecordType,
 } from 'aws-cdk-lib/aws-route53';
 
+interface AsgSize {
+	min: number;
+	max: number;
+}
+
 interface AppsStackProps extends GuStackProps {
 	recordPrefix: string;
-	asgMinSize: number;
-	asgMaxSize: number;
+	asgSize: AsgSize;
 	domainName: string;
 	hostedZoneId: string;
 	targetCpuUtilisation: number;
@@ -99,8 +103,8 @@ export class MobileAppsRendering extends GuStack {
 			/opt/aws-kinesis-agent/configure-aws-kinesis-agent ${this.region} mobile-log-aggregation-${this.stage} '/var/log/${appName}/*'
 			/usr/local/node/pm2 logrotate -u ${appName}`,
 			scaling: {
-				minimumInstances: props.asgMinSize,
-				maximumInstances: props.asgMaxSize,
+				minimumInstances: props.asgSize.min,
+				maximumInstances: props.asgSize.max,
 			},
 		});
 
