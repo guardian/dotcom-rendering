@@ -4,7 +4,6 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
-import { partition } from '@guardian/types';
 import { getAdPlaceholderInserter } from 'ads';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
@@ -20,6 +19,7 @@ import type { FC, ReactNode } from 'react';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
 import AnalysisLayout from './AnalysisLayout';
 import ImmersiveLayout from './ImmersiveLayout';
+import { Result } from 'result';
 
 // ----- Functions ----- //
 
@@ -56,7 +56,7 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		return <LiveLayout item={item} />;
 	}
 
-	const body = partition(item.body).oks;
+	const body = Result.partition(item.body).oks;
 	const render = renderWithAds(shouldHideAds);
 
 	if (item.theme === ArticleSpecial.Labs) {
