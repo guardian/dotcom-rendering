@@ -78,30 +78,30 @@ export class MobileAppsRendering extends GuStack {
 				],
 			},
 			userData: `#!/bin/bash -ev
-			groupadd mapi
-			useradd -r -m -s /usr/bin/nologin -g mapi ${appName}
+groupadd mapi
+useradd -r -m -s /usr/bin/nologin -g mapi ${appName}
 
-			export App=${appName}
-			export Stack=${this.stack}
-			export Stage=${this.stage}
-			export NODE_ENV=production
+export App=${appName}
+export Stack=${this.stack}
+export Stage=${this.stage}
+export NODE_ENV=production
 
-			aws s3 cp s3://mobile-dist/${this.stack}/${this.stage}/${appName}/${appName}.zip /tmp
-			mkdir -p /opt/${appName}
-			unzip /tmp/${appName}.zip -d /opt/${appName}
-			chown -R ${appName}:mapi /opt/${appName}
+aws s3 cp s3://mobile-dist/${this.stack}/${this.stage}/${appName}/${appName}.zip /tmp
+mkdir -p /opt/${appName}
+unzip /tmp/${appName}.zip -d /opt/${appName}
+chown -R ${appName}:mapi /opt/${appName}
 
-			mkdir -p /usr/share/${appName}/logs
-			chown -R ${appName}:mapi /usr/share/${appName}
-			ln -s /usr/share/${appName}/logs /var/log/${appName}
-			chown -R ${appName}:mapi /var/log/${appName}
+mkdir -p /usr/share/${appName}/logs
+chown -R ${appName}:mapi /usr/share/${appName}
+ln -s /usr/share/${appName}/logs /var/log/${appName}
+chown -R ${appName}:mapi /var/log/${appName}
 
-			export PM2_HOME="/usr/share/${appName}"
-			export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
+export PM2_HOME="/usr/share/${appName}"
+export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 
-			/usr/local/node/pm2 start --name ${appName} --uid ${appName} --gid mapi /opt/${appName}/server.js
-			/opt/aws-kinesis-agent/configure-aws-kinesis-agent ${this.region} mobile-log-aggregation-${this.stage} '/var/log/${appName}/*'
-			/usr/local/node/pm2 logrotate -u ${appName}`,
+/usr/local/node/pm2 start --name ${appName} --uid ${appName} --gid mapi /opt/${appName}/server.js
+/opt/aws-kinesis-agent/configure-aws-kinesis-agent ${this.region} mobile-log-aggregation-${this.stage} '/var/log/${appName}/*'
+/usr/local/node/pm2 logrotate -u ${appName}`,
 			scaling: {
 				minimumInstances: props.asgSize.min,
 				maximumInstances: props.asgSize.max,

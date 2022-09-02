@@ -174,34 +174,34 @@ Object {
               "",
               Array [
                 "#!/bin/bash -ev
-			groupadd mapi
-			useradd -r -m -s /usr/bin/nologin -g mapi mobile-apps-rendering
+groupadd mapi
+useradd -r -m -s /usr/bin/nologin -g mapi mobile-apps-rendering
 
-			export App=mobile-apps-rendering
-			export Stack=mobile
-			export Stage=TEST
-			export NODE_ENV=production
+export App=mobile-apps-rendering
+export Stack=mobile
+export Stage=TEST
+export NODE_ENV=production
 
-			aws s3 cp s3://mobile-dist/mobile/TEST/mobile-apps-rendering/mobile-apps-rendering.zip /tmp
-			mkdir -p /opt/mobile-apps-rendering
-			unzip /tmp/mobile-apps-rendering.zip -d /opt/mobile-apps-rendering
-			chown -R mobile-apps-rendering:mapi /opt/mobile-apps-rendering
+aws s3 cp s3://mobile-dist/mobile/TEST/mobile-apps-rendering/mobile-apps-rendering.zip /tmp
+mkdir -p /opt/mobile-apps-rendering
+unzip /tmp/mobile-apps-rendering.zip -d /opt/mobile-apps-rendering
+chown -R mobile-apps-rendering:mapi /opt/mobile-apps-rendering
 
-			mkdir -p /usr/share/mobile-apps-rendering/logs
-			chown -R mobile-apps-rendering:mapi /usr/share/mobile-apps-rendering
-			ln -s /usr/share/mobile-apps-rendering/logs /var/log/mobile-apps-rendering
-			chown -R mobile-apps-rendering:mapi /var/log/mobile-apps-rendering
+mkdir -p /usr/share/mobile-apps-rendering/logs
+chown -R mobile-apps-rendering:mapi /usr/share/mobile-apps-rendering
+ln -s /usr/share/mobile-apps-rendering/logs /var/log/mobile-apps-rendering
+chown -R mobile-apps-rendering:mapi /var/log/mobile-apps-rendering
 
-			export PM2_HOME=\\"/usr/share/mobile-apps-rendering\\"
-			export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
+export PM2_HOME=\\"/usr/share/mobile-apps-rendering\\"
+export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
 
-			/usr/local/node/pm2 start --name mobile-apps-rendering --uid mobile-apps-rendering --gid mapi /opt/mobile-apps-rendering/server.js
-			/opt/aws-kinesis-agent/configure-aws-kinesis-agent ",
+/usr/local/node/pm2 start --name mobile-apps-rendering --uid mobile-apps-rendering --gid mapi /opt/mobile-apps-rendering/server.js
+/opt/aws-kinesis-agent/configure-aws-kinesis-agent ",
                 Object {
                   "Ref": "AWS::Region",
                 },
                 " mobile-log-aggregation-TEST '/var/log/mobile-apps-rendering/*'
-			/usr/local/node/pm2 logrotate -u mobile-apps-rendering",
+/usr/local/node/pm2 logrotate -u mobile-apps-rendering",
               ],
             ],
           },
@@ -1086,34 +1086,34 @@ Object {
               "",
               Array [
                 "#!/bin/bash -ev
-			groupadd mapi
-			useradd -r -m -s /usr/bin/nologin -g mapi mobile-apps-rendering
+groupadd mapi
+useradd -r -m -s /usr/bin/nologin -g mapi mobile-apps-rendering
 
-			export App=mobile-apps-rendering
-			export Stack=mobile-preview
-			export Stage=TEST
-			export NODE_ENV=production
+export App=mobile-apps-rendering
+export Stack=mobile-preview
+export Stage=TEST
+export NODE_ENV=production
 
-			aws s3 cp s3://mobile-dist/mobile-preview/TEST/mobile-apps-rendering/mobile-apps-rendering.zip /tmp
-			mkdir -p /opt/mobile-apps-rendering
-			unzip /tmp/mobile-apps-rendering.zip -d /opt/mobile-apps-rendering
-			chown -R mobile-apps-rendering:mapi /opt/mobile-apps-rendering
+aws s3 cp s3://mobile-dist/mobile-preview/TEST/mobile-apps-rendering/mobile-apps-rendering.zip /tmp
+mkdir -p /opt/mobile-apps-rendering
+unzip /tmp/mobile-apps-rendering.zip -d /opt/mobile-apps-rendering
+chown -R mobile-apps-rendering:mapi /opt/mobile-apps-rendering
 
-			mkdir -p /usr/share/mobile-apps-rendering/logs
-			chown -R mobile-apps-rendering:mapi /usr/share/mobile-apps-rendering
-			ln -s /usr/share/mobile-apps-rendering/logs /var/log/mobile-apps-rendering
-			chown -R mobile-apps-rendering:mapi /var/log/mobile-apps-rendering
+mkdir -p /usr/share/mobile-apps-rendering/logs
+chown -R mobile-apps-rendering:mapi /usr/share/mobile-apps-rendering
+ln -s /usr/share/mobile-apps-rendering/logs /var/log/mobile-apps-rendering
+chown -R mobile-apps-rendering:mapi /var/log/mobile-apps-rendering
 
-			export PM2_HOME=\\"/usr/share/mobile-apps-rendering\\"
-			export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
+export PM2_HOME=\\"/usr/share/mobile-apps-rendering\\"
+export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
 
-			/usr/local/node/pm2 start --name mobile-apps-rendering --uid mobile-apps-rendering --gid mapi /opt/mobile-apps-rendering/server.js
-			/opt/aws-kinesis-agent/configure-aws-kinesis-agent ",
+/usr/local/node/pm2 start --name mobile-apps-rendering --uid mobile-apps-rendering --gid mapi /opt/mobile-apps-rendering/server.js
+/opt/aws-kinesis-agent/configure-aws-kinesis-agent ",
                 Object {
                   "Ref": "AWS::Region",
                 },
                 " mobile-log-aggregation-TEST '/var/log/mobile-apps-rendering/*'
-			/usr/local/node/pm2 logrotate -u mobile-apps-rendering",
+/usr/local/node/pm2 logrotate -u mobile-apps-rendering",
               ],
             ],
           },
