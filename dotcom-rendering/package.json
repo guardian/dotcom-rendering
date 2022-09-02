@@ -72,7 +72,7 @@
     "@guardian/tsconfig": "^0.1.4",
     "@percy/cli": "^1.4.0",
     "@percy/cypress": "^3.1.2",
-    "@sentry/browser": "^5.30.0",
+    "@sentry/browser": "^7.12.1",
     "@sentry/integrations": "^5.30.0",
     "@testing-library/dom": "^8.13.0",
     "@testing-library/jest-dom": "^5.16.4",
