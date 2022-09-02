@@ -98,10 +98,11 @@ const ColumnOfCards50_Card50 = ({
 				<FrontCard
 					trail={big}
 					containerPalette={containerPalette}
+					headlineSize="large"
 					headlineSizeOnMobile="large"
-					showAge={showAge}
-					trailText={big.trailText}
 					imagePositionOnMobile="top"
+					showAge={showAge}
+					supportingContent={big.supportingContent}
 				/>
 			</LI>
 			<LI percentage="50%">
@@ -122,9 +123,9 @@ const ColumnOfCards50_Card50 = ({
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									supportingContent={card.supportingContent}
 									imagePosition="left"
 									imagePositionOnMobile="left"
+									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -160,9 +161,16 @@ const ColumnOfCards50_Card25_Card25 = ({
 						<FrontCard
 							trail={big}
 							containerPalette={containerPalette}
-							showAge={showAge}
-							trailText={big.trailText}
 							imagePositionOnMobile="left"
+							showAge={showAge}
+							trailText={
+								// Only show trail text if there is no supportContent
+								big.supportingContent === undefined ||
+								big.supportingContent.length === 0
+									? big.trailText
+									: undefined
+							}
+							supportingContent={big.supportingContent}
 						/>
 					</LI>
 				);
@@ -185,9 +193,9 @@ const ColumnOfCards50_Card25_Card25 = ({
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									supportingContent={card.supportingContent}
 									imagePosition="left"
 									imagePositionOnMobile="none"
+									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -225,7 +233,6 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							supportingContent={card.supportingContent}
 							imagePosition="left"
 							imagePositionOnMobile="none"
 						/>
@@ -301,7 +308,7 @@ export const DynamicSlow = ({
 	switch (bigs.length) {
 		case 0: {
 			secondSliceLayout = 'noBigs';
-			// We support up to 6 standards when there are no bigs
+			// We support up to 8 standards when there are no bigs
 			secondSliceCards = [
 				...secondSliceGroupedTrails.standard.slice(0, 8),
 			];
