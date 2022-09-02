@@ -258,7 +258,7 @@ export const DynamicSlow = ({
 	// this is updated to container all the trails *not* used in the first slice
 	let secondSliceGroupedTrails: DCRGroupedTrails = { ...groupedTrails };
 
-	// Decide the contents of the first slice
+	// Decide the layout and contents for the first slice, demoting any remaining cards to the second slice
 	if (groupedTrails.huge.length > 0) {
 		firstSliceLayout = 'oneHuge';
 		firstSliceCards = groupedTrails.huge.slice(0, 1);
