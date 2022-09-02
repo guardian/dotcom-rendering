@@ -256,7 +256,7 @@ const parse =
 
 				const doc = context.docParser(html);
 
-				return flattenTextElement(doc).map(Result.ok);
+				return flattenTextElement(doc).map((elem) => Result.ok(elem));
 			}
 
 			case ElementType.IMAGE:

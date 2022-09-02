@@ -129,10 +129,9 @@ const parseFootballResponse = async (
 		const parser = footballContentParserFor(selectorId);
 		return pipe(await response.json(), parse(parser));
 	} else if (response.status === 400) {
-		return pipe(
-			await response.json(),
-			parse(footballErrorParser),
-		).flatMap<FootballContent>(Result.err);
+		return pipe(await response.json(), parse(footballErrorParser)).flatMap(
+			(error) => Result.err(error),
+		);
 	} else {
 		return Result.err('Problem accessing PA API');
 	}
