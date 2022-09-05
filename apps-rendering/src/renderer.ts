@@ -242,7 +242,12 @@ const textElement =
 		);
 		switch (node.nodeName) {
 			case 'P': {
+				if (text === '* * *') {
+					return children;
+				}
+
 				const showDropCap = shouldShowDropCap(text, format, isEditions);
+
 				return h(
 					Paragraph,
 					{ key, format, showDropCap, isEditions },
