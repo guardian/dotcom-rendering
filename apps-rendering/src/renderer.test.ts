@@ -321,9 +321,9 @@ describe('Renders different types of elements', () => {
 	test('ElementKind.Interactive', () => {
 		const nodes = renderElement(interactiveElement());
 		const interactive = nodes.flat()[0];
-		expect(getHtml(interactive)).toContain(
-			'<iframe src="https://theguardian.com" height="500" title=""></iframe>',
-		);
+		expect(getHtml(interactive)).toContain('iframe');
+		expect(getHtml(interactive)).toContain('src="https://theguardian.com"');
+		expect(getHtml(interactive)).toContain('height="500"');
 	});
 
 	test('ElementKind.Tweet', () => {
