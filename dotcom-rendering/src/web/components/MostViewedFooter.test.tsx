@@ -87,7 +87,7 @@ describe('MostViewedFooterData', () => {
 		expect(getByTestId(secondHeading)).toHaveStyle(HIDDEN);
 	});
 
-	it('should not show the tab menu when there is only one group of tabs', async () => {
+	it('should still show the tab menu when there is only one group of tabs', async () => {
 		useApi.mockReturnValue({ data: responseWithOneTab });
 
 		const { queryByText } = render(
@@ -104,7 +104,7 @@ describe('MostViewedFooterData', () => {
 
 		expect(
 			queryByText(responseWithOneTab.tabs[0].heading),
-		).not.toBeInTheDocument();
+		).toBeInTheDocument();
 	});
 
 	it("should display the text 'Live' for live blogs", () => {
