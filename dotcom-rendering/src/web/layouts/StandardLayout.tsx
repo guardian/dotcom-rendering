@@ -15,8 +15,9 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
+import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import type { NavType } from '../../model/extract-nav';
-import type { CAPIArticleType } from '../../types/frontend';
+import type { CAPIArticleType, TOCType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -51,6 +52,7 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { TableOfContents } from '../components/TableOfContents';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
@@ -344,6 +346,12 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	 */
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
+	const CAPIFormat = CAPIArticle.format;
+
+	const CAPIBlocks = CAPIArticle.blocks;
+
+	const tableOfContents = enhanceTableOfContents(CAPIFormat, CAPIBlocks);
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -624,6 +632,16 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									}
 								/>
 							</div>
+							{format.design === ArticleDesign.Explainer && (
+								// tableOfContents != undefined && (
+								<div css={maxWidth}>
+									<TableOfContents
+										tableOfContents={
+											tableOfContents as TOCType[]
+										}
+									></TableOfContents>
+								</div>
+							)}
 						</GridItem>
 						<GridItem area="body">
 							<ArticleContainer format={format}>

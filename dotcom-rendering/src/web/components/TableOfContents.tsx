@@ -4,7 +4,6 @@ import {
 	line,
 	neutral,
 	remSpace,
-	// text,
 	textSans,
 } from '@guardian/source-foundations';
 import {
@@ -17,29 +16,27 @@ interface Props {
 	tableOfContents: TOCType[];
 }
 
-// const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
-// 	color: ${text.paragraph(format)};
-// 	border-bottom: none;
-// 	:hover {
-// 		border-bottom: 0.0625rem solid ${neutral[86]};
-// 	}
-// `;
+const anchorStyles: SerializedStyles = css`
+	color: black;
+	border-bottom: none;
+	text-decoration: none;
+`;
 
-// const listStyles: SerializedStyles = css`
-// 	> li::before {
-// 		content: none;
-// 	}
-// 	margin: 0;
-// 	> li {
-// 		padding-left: ${remSpace[3]};
-// 	}
-// `;
+const listStyles: SerializedStyles = css`
+	> li::before {
+		content: none;
+	}
+	margin: 0;
+	> li {
+		padding-left: ${remSpace[3]};
+	}
+`;
 
-// const listItemStyles: SerializedStyles = css`
-// 	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'regular' })}
-// 	border-bottom: ${line.primary} 1px solid;
-// 	padding-top: ${remSpace[2]};
-// `;
+const listItemStyles: SerializedStyles = css`
+	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'regular' })}
+	border-bottom: ${line.primary} 1px solid;
+	padding-top: ${remSpace[2]};
+`;
 
 const detailsStyles: SerializedStyles = css`
 	margin-bottom: 1.25rem;
@@ -92,12 +89,17 @@ export const TableOfContents = ({ tableOfContents }: Props) => {
 				<span className="is-on" css={arrowPosition}>
 					<SvgChevronUpSingle size="xsmall" />
 				</span>
+			</summary>
+
+			<ul css={listStyles}>
 				{tableOfContents.map((item) => (
-					<li>
-						<a href={`#${item.id}`}>{item.title}</a>
+					<li css={listItemStyles}>
+						<a href={`#${item.id}`} css={anchorStyles}>
+							{item.title}
+						</a>
 					</li>
 				))}
-			</summary>
+			</ul>
 		</details>
 	);
 };
