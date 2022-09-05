@@ -77,10 +77,13 @@ const captionStyles = (format: ArticleFormat): SerializedStyles => css`
 	& {
 		color: ${text.gallery(format)};
 	}
-	> span {
+
+	span {
 		${textSans.xsmall({ lineHeight: 'regular' })}
 	}
-	> h2 {
+
+	h2,
+	h2 > span {
 		${headline.xxxsmall()}
 	}
 

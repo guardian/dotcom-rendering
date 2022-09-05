@@ -4,7 +4,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { body, from, remSpace } from '@guardian/source-foundations';
+import { from, headline, remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
@@ -15,7 +15,7 @@ import { darkModeCss } from 'styles';
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.span('centre-column-start', 3)}
-	${body.medium({ fontWeight: 'bold', lineHeight: 'tight' })}
+	${headline.xxxsmall({ fontWeight: 'bold' })}
 	color: ${text.standfirst(format)};
 	grid-row: 5/6;
 	padding-bottom: ${remSpace[2]};

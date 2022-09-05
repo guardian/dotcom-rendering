@@ -626,7 +626,6 @@ const standfirst = ({ design }: ArticleFormat): Colour => {
 		case ArticleDesign.LiveBlog:
 			return neutral[100];
 		case ArticleDesign.Gallery:
-			return neutral[100];
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			return neutral[86];
@@ -669,6 +668,7 @@ const standfirstLink = (format: ArticleFormat): Colour => {
 					return specialReport[300];
 			}
 		case ArticleDesign.Gallery:
+			return neutral[100];
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			switch (format.theme) {
@@ -1043,7 +1043,7 @@ const signUpFormButtonDark = (_format: ArticleFormat): string => {
 };
 
 const gallery = (_format: ArticleFormat): string => {
-	return neutral[100];
+	return neutral[86];
 };
 
 const galleryDark = (_format: ArticleFormat): string => {

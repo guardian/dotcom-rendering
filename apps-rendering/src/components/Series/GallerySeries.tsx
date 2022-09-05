@@ -28,8 +28,8 @@ const styles = css`
 `;
 
 const linkStyles = (format: ArticleFormat): SerializedStyles => css`
-	color: ${text.seriesTitle(format)};
-	background-color: ${background.series(format)};
+	background-color: ${text.seriesTitle(format)};
+	color: ${background.series(format)};
 	${headline.xxxsmall({ fontWeight: 'bold' })}
 	line-height: 2;
 	text-decoration: none;
