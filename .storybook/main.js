@@ -15,6 +15,9 @@ module.exports = {
 		'../dotcom-rendering/stories/**/*.stories.@(tsx)',
 		'../common-rendering/src/**/*.stories.@(tsx)',
 	],
+	staticDirs: [
+		'./dotcom-rendering/src/static',
+	],
 	addons: [
 		'@storybook/addon-essentials',
 		'storybook-addon-turbo-build',

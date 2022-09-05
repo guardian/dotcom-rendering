@@ -10,8 +10,8 @@
 	],
 	"scripts": {
 		"postinstall": "if [ \"$CI\" = true ]; then npm ci --prefix ./apps-rendering ; else npm install --prefix ./apps-rendering ; fi",
-		"storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook --static-dir ./dotcom-rendering/src/static -p 6006",
-		"build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ./dotcom-rendering/src/static",
+		"storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook -p 6006",
+		"build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook",
 		"build:dcr": "cd ./dotcom-rendering && yarn makeBuild",
 		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
 		"prepare": "husky install"
