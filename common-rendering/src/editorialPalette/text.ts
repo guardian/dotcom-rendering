@@ -1050,6 +1050,14 @@ const galleryDark = (_format: ArticleFormat): string => {
 	return neutral[86];
 };
 
+const tableOfContentsTitle = (_format: ArticleFormat): string => {
+	return neutral[46];
+};
+
+const tableOfContentsTitleDark = (_format: ArticleFormat): string => {
+	return neutral[86];
+};
+
 // ----- API ----- //
 
 const text = {
@@ -1119,6 +1127,8 @@ const text = {
 	signUpFormButtonDark,
 	gallery,
 	galleryDark,
+	tableOfContentsTitle,
+	tableOfContentsTitleDark,
 };
 
 // ----- Exports ----- //

@@ -13,6 +13,7 @@ import {
 	article,
 	comment,
 	editorial,
+	explainer,
 	feature,
 	interview,
 	letter,
@@ -197,6 +198,18 @@ export const Analysis = (): React.ReactNode => {
 	);
 };
 Analysis.story = { name: 'Analysis' };
+
+export const Explainer = (): React.ReactNode => {
+	return (
+		<Standard item={explainer}>
+			{renderAll(
+				formatFromItem(explainer, some(ArticleDisplay.Standard)),
+				partition(explainer.body).oks,
+			)}
+		</Standard>
+	);
+};
+Explainer.story = { name: 'Explainer' };
 
 export const LiveBlog = (): ReactElement => (
 	<Live

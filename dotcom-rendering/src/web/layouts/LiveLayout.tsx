@@ -1144,17 +1144,19 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									`}
 								>
 									<RightColumn>
-										<AdSlot
-											position="right"
-											display={format.display}
-											shouldHideReaderRevenue={
-												CAPIArticle.shouldHideReaderRevenue
-											}
-											isPaidContent={
-												CAPIArticle.pageType
-													.isPaidContent
-											}
-										/>
+										{!CAPIArticle.shouldHideAds && (
+											<AdSlot
+												position="right"
+												display={format.display}
+												shouldHideReaderRevenue={
+													CAPIArticle.shouldHideReaderRevenue
+												}
+												isPaidContent={
+													CAPIArticle.pageType
+														.isPaidContent
+												}
+											/>
+										)}
 									</RightColumn>
 								</div>
 							</GridItem>
@@ -1274,6 +1276,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							data-print-layout="hide"
 							data-link-name="most-popular"
 							data-component="most-popular"
+							leftColSize="wide"
 						>
 							<MostViewedFooterLayout>
 								<Island clientOnly={true} deferUntil="visible">
