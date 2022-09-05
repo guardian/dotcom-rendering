@@ -1,6 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { fireEvent, render } from '@testing-library/react';
-import { decidePalette } from '../lib/decidePalette';
 import { useApi as useApi_ } from '../lib/useApi';
 import { responseWithOneTab, responseWithTwoTabs } from './MostViewed.mocks';
 import { MostViewedFooterData } from './MostViewedFooterData.importable';
@@ -25,11 +24,11 @@ describe('MostViewedFooterData', () => {
 		const { getByText, getAllByText, getByTestId } = render(
 			<MostViewedFooterData
 				sectionName="Section Name"
-				palette={decidePalette({
+				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
-				})}
+				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
 		);
@@ -61,11 +60,11 @@ describe('MostViewedFooterData', () => {
 		const { getByTestId, getByText } = render(
 			<MostViewedFooterData
 				sectionName="Section Name"
-				palette={decidePalette({
+				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
-				})}
+				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
 		);
@@ -94,11 +93,11 @@ describe('MostViewedFooterData', () => {
 		const { queryByText } = render(
 			<MostViewedFooterData
 				sectionName="Section Name"
-				palette={decidePalette({
+				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
-				})}
+				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
 		);
@@ -137,11 +136,11 @@ describe('MostViewedFooterData', () => {
 		const { getByText } = render(
 			<MostViewedFooterData
 				sectionName="Section Name"
-				palette={decidePalette({
+				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
-				})}
+				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
 		);
@@ -178,11 +177,11 @@ describe('MostViewedFooterData', () => {
 		const { queryByText } = render(
 			<MostViewedFooterData
 				sectionName="Section Name"
-				palette={decidePalette({
+				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
-				})}
+				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
 		);
@@ -196,11 +195,11 @@ describe('MostViewedFooterData', () => {
 		const { asFragment } = render(
 			<MostViewedFooterData
 				sectionName="Section Name"
-				palette={decidePalette({
+				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
-				})}
+				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
 		);
