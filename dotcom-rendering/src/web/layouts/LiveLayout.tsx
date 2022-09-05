@@ -1274,6 +1274,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							data-print-layout="hide"
 							data-link-name="most-popular"
 							data-component="most-popular"
+							leftColSize="wide"
 						>
 							<MostViewedFooterLayout>
 								<Island clientOnly={true} deferUntil="visible">
