@@ -6,6 +6,9 @@ export const getHttp3Url = (url: string): string => {
 		urlObject.searchParams.append('http3', 'true');
 		return urlObject.toString();
 	} catch (e) {
+		// if we are given an invalid url, `new URL()` will throw a
+		// `TypeError` exception. In which case we can't safely apply
+		// the http3 param anyway so just return it unchanged.
 		if (e instanceof TypeError) {
 			return url;
 		} else {
