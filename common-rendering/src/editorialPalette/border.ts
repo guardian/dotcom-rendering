@@ -110,6 +110,10 @@ const relatedCardDark = (_format: ArticleFormat): Colour => {
 };
 
 const standfirstLink = (format: ArticleFormat): Colour => {
+	if (format.design === ArticleDesign.Gallery) {
+		return neutral[46];
+	}
+
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[600];

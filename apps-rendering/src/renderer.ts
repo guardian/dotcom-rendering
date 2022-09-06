@@ -310,7 +310,9 @@ const borderFromFormat = (format: ArticleFormat): string => {
 		text-decoration: none;
 	`;
 
-	return isBlog(format) ? styles : 'none';
+	return isBlog(format) || format.design === ArticleDesign.Gallery
+		? styles
+		: 'none';
 };
 
 const standfirstTextElement =

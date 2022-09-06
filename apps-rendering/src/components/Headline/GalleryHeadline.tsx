@@ -16,7 +16,7 @@ import { darkModeCss } from 'styles';
 const styles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.medium({ fontWeight: 'bold' })}
 	background-color: ${background.headline(format)};
-	color: ${text.gallery(format)};
+	color: ${text.headline(format)};
 	padding: 0 ${remSpace[5]} ${remSpace[9]} 0;
 	${grid.column.centre}
 	grid-row: 3 / 5;
@@ -32,7 +32,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 
 	${darkModeCss`
 		background-color: ${background.headlineDark(format)};
-		color: ${text.galleryDark(format)};
+		color: ${text.headlineDark(format)};
 	`}
 `;
 
