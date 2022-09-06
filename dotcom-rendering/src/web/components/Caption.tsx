@@ -30,6 +30,7 @@ type IconProps = {
 	format: ArticleFormat;
 };
 
+//TODO change caption color
 const captionStyle = (palette: Palette) => css`
 	${textSans.xsmall()};
 	line-height: 135%;
@@ -147,18 +148,10 @@ const hideIconBelowLeftCol = css`
 	}
 `;
 
-const videoCaptionOverlayStyles = css`
-	${until.phablet} {
-		margin-left: 0px;
-	}
-	top: 0px;
-	bottom: auto;
-	line-height: 32px;
-`;
-
 const pictureRatio = (13 / 18) * 100;
 const videoRatio = (23 / 36) * 100;
 
+//TODO change caption icon color
 const iconStyle = (palette: Palette) => css`
 	fill: ${palette.fill.cameraCaptionIcon};
 	margin-right: ${space[1]}px;
@@ -191,7 +184,7 @@ const videoIconStyle = css`
 
 const captionLink = (palette: Palette) => css`
 	a {
-		color: ${palette.text.captionLink};
+		color: white;
 		text-decoration: none;
 	}
 	a:hover {
@@ -265,10 +258,6 @@ export const Caption = ({
 				isMainMedia && isBlog && tabletCaptionPadding,
 				padCaption && captionPadding,
 				mediaType === 'Video' && videoPadding,
-				mediaType === 'Video' &&
-					isMainMedia &&
-					isBlog &&
-					videoCaptionOverlayStyles,
 			]}
 		>
 			{mediaType === 'Video' ? (

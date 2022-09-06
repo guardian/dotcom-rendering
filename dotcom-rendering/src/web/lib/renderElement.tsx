@@ -80,7 +80,6 @@ type Props = {
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
 	isPinnedPost?: boolean;
-	showOverlayCaption?: boolean;
 	isMainMediaTest?: boolean;
 };
 
@@ -136,7 +135,6 @@ export const renderElement = ({
 	switches,
 	isSensitive,
 	isPinnedPost,
-	showOverlayCaption,
 	isMainMediaTest,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
@@ -763,7 +761,6 @@ export const renderElement = ({
 						altText={element.altText}
 						origin={host}
 						stickyVideos={isBlog && switches.stickyVideos}
-						showOverlayCaption={showOverlayCaption}
 					/>
 				</Island>,
 			];
@@ -812,7 +809,6 @@ export const RenderArticleElement = ({
 	isSensitive,
 	switches,
 	isPinnedPost,
-	showOverlayCaption,
 	isMainMediaTest,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
@@ -832,7 +828,6 @@ export const RenderArticleElement = ({
 		isAdFreeUser,
 		isSensitive,
 		switches,
-		showOverlayCaption,
 		isMainMediaTest,
 		isPinnedPost,
 	});

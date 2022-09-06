@@ -81,7 +81,6 @@ export const MainMedia: React.FC<{
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
-	showOverlayCaption?: boolean;
 	isMainMediaTest?: boolean;
 }> = ({
 	elements,
@@ -96,7 +95,6 @@ export const MainMedia: React.FC<{
 	isAdFreeUser,
 	isSensitive,
 	switches,
-	showOverlayCaption,
 	isMainMediaTest,
 }) => {
 	return (
@@ -119,7 +117,6 @@ export const MainMedia: React.FC<{
 					switches={switches}
 					hideCaption={hideCaption}
 					starRating={starRating}
-					showOverlayCaption={showOverlayCaption}
 					isMainMediaTest={isMainMediaTest}
 				/>
 			))}

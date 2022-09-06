@@ -2,12 +2,11 @@ import { css } from '@emotion/react';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { body, neutral, space } from '@guardian/source-foundations';
-import { Hide, SvgAlertRound } from '@guardian/source-react-components';
+import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { trackVideoInteraction } from '../browser/ga/ga';
 import { record } from '../browser/ophan/ophan';
 import { Caption } from './Caption';
-import { CaptionToggle } from './CaptionToggle';
 
 type Props = {
 	id: string;
@@ -31,7 +30,6 @@ type Props = {
 	duration?: number; // in seconds
 	origin?: string;
 	stickyVideos: boolean;
-	showOverlayCaption?: boolean;
 };
 
 const expiredOverlayStyles = (overrideImage?: string) =>
@@ -90,27 +88,9 @@ export const YoutubeBlockComponent = ({
 	duration,
 	origin,
 	stickyVideos,
-	showOverlayCaption,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
-	);
-
-	useEffect(
-		function hideOverlayCaptionOnPlay() {
-			const hideOverlayCaption = () => {
-				if (showOverlayCaption) {
-					const caption: HTMLElement | null =
-						document.querySelector('.overlay-caption');
-					if (caption) caption.style.display = 'none';
-				}
-			};
-			document.addEventListener('video:play', hideOverlayCaption);
-
-			return () =>
-				document.removeEventListener('video:play', hideOverlayCaption);
-		},
-		[showOverlayCaption],
 	);
 
 	useEffect(() => {
@@ -194,13 +174,7 @@ export const YoutubeBlockComponent = ({
 	};
 
 	return (
-		<div
-			data-chromatic="ignore"
-			data-component="youtube-atom"
-			css={css`
-				position: relative;
-			`}
-		>
+		<div data-chromatic="ignore" data-component="youtube-atom">
 			<YoutubeAtom
 				elementId={elementId}
 				videoId={assetId}
@@ -244,7 +218,7 @@ export const YoutubeBlockComponent = ({
 				shouldStick={stickyVideos}
 				isMainMedia={isMainMedia}
 			/>
-			{!(hideCaption ?? showOverlayCaption) && (
+			{!hideCaption && (
 				<Caption
 					captionText={mediaTitle || ''}
 					format={format}
@@ -253,24 +227,6 @@ export const YoutubeBlockComponent = ({
 					mediaType="Video"
 					isMainMedia={isMainMedia}
 				/>
-			)}
-
-			{showOverlayCaption && (
-				<Hide from="desktop">
-					<div className="overlay-caption">
-						<CaptionToggle mediaType="Video">
-							<Caption
-								mediaType="Video"
-								captionText={mediaTitle || ''}
-								format={format}
-								displayCredit={false}
-								shouldLimitWidth={shouldLimitWidth}
-								isOverlayed={true}
-								isMainMedia={isMainMedia}
-							/>
-						</CaptionToggle>
-					</div>
-				</Hide>
 			)}
 		</div>
 	);

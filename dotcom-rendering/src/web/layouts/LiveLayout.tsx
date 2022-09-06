@@ -556,7 +556,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											isAdFreeUser={
 												CAPIArticle.isAdFreeUser
 											}
-											showOverlayCaption={true}
 											isMainMediaTest={isMainMediaTest}
 										/>
 									</Hide>
