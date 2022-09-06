@@ -37,6 +37,19 @@ const noGutters = css`
 	}
 `;
 
+// TODO: remove this in favor of one gutter function
+const noLiveBlogGutters = css`
+	${until.desktop} {
+		margin-left: -20px;
+		margin-right: -20px;
+	}
+
+	${until.mobileLandscape} {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+`;
+
 const immersiveWrapper = css`
 	/*
         Immersive main media is wrapped in a flex div with height 100vw and then
@@ -55,7 +68,7 @@ const chooseWrapper = (format: ArticleFormat, isMainMediaTest?: boolean) => {
 		case ArticleDisplay.Standard: {
 			switch (format.design) {
 				case ArticleDesign.LiveBlog:
-					if (isMainMediaTest) return noGutters;
+					if (isMainMediaTest) return noLiveBlogGutters;
 					return '';
 				case ArticleDesign.DeadBlog:
 					return '';
