@@ -1041,11 +1041,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											</ArticleContainer>
 										</div>
 									) : (
-										<Accordion
-											supportsDarkMode={false}
-											accordionTitle="Live feed"
-											context="liveFeed"
-										>
+										<div css={paddingBody}>
 											<ArticleContainer format={format}>
 												{pagination.currentPage !==
 													1 && (
@@ -1194,7 +1190,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													badge={CAPIArticle.badge}
 												/>
 											</ArticleContainer>
-										</Accordion>
+										</div>
 									)}
 								</div>
 							</GridItem>
