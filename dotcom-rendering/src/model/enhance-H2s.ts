@@ -1,5 +1,15 @@
 import { JSDOM } from 'jsdom';
 
+const hasInteractiveContentsElement = (blocks: Block[]): boolean => {
+	return !!blocks.find((block) =>
+		block.elements.find(
+			(element) =>
+				element._type ===
+				'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
+		),
+	);
+};
+
 const extractText = (element: SubheadingBlockElement): string => {
 	const frag = JSDOM.fragment(element.html);
 	if (!frag.firstElementChild) return '';
@@ -78,10 +88,16 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	return enhanced;
 };
 
-export const enhanceH2s = (blocks: Block[]): Block[] =>
-	blocks.map((block: Block) => {
+export const enhanceH2s = (blocks: Block[]): Block[] => {
+	if (hasInteractiveContentsElement(blocks)) {
+		// Don't enhance h2s if there's an existing table of contents element on the page
+		return blocks;
+	}
+
+	return blocks.map((block: Block) => {
 		return {
 			...block,
 			elements: enhance(block.elements),
 		};
 	});
+};
