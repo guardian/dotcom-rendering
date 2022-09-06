@@ -318,9 +318,11 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
 
-	const showMediaAboveHeadline =
-		CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant ===
-		'variant';
+	const isMainMediaTest = true;
+
+	// const isMainMediaTest =
+	// 	CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant ===
+	// 	'variant';
 
 	return (
 		<>
@@ -494,12 +496,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.guardianBaseURL
 									}
 									badge={CAPIArticle.badge}
-									showMediaAboveHeadline={
-										showMediaAboveHeadline
-									}
+									isMainMediaTest={isMainMediaTest}
 								/>
 							</GridItem>
-							{showMediaAboveHeadline && (
+							{isMainMediaTest && (
 								<GridItem area="mainmedia">
 									<Hide from="desktop">
 										<MainMedia
@@ -522,7 +522,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.isAdFreeUser
 											}
 											showOverlayCaption={true}
-											showMediaAboveHeadline={true}
+											isMainMediaTest={isMainMediaTest}
 										/>
 									</Hide>
 								</GridItem>
@@ -753,7 +753,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											/>
 										</Island>
 									)}
-									{showMediaAboveHeadline ? (
+									{isMainMediaTest ? (
 										<Hide until="desktop">
 											<MainMedia
 												format={format}

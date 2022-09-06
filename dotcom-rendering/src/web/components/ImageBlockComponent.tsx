@@ -8,7 +8,7 @@ type Props = {
 	isMainMedia?: boolean;
 	starRating?: number;
 	isAvatar?: boolean;
-	showMediaAboveHeadline?: boolean;
+	isMainMediaTest?: boolean;
 };
 
 export const ImageBlockComponent = ({
@@ -19,7 +19,7 @@ export const ImageBlockComponent = ({
 	isMainMedia,
 	starRating,
 	isAvatar,
-	showMediaAboveHeadline,
+	isMainMediaTest,
 }: Props) => {
 	const { role } = element;
 	return (
@@ -32,7 +32,7 @@ export const ImageBlockComponent = ({
 			role={role}
 			title={title}
 			isAvatar={isAvatar}
-			showMediaAboveHeadline={showMediaAboveHeadline}
+			isMainMediaTest={isMainMediaTest}
 		/>
 	);
 };

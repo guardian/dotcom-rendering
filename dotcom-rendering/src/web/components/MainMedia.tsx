@@ -48,18 +48,15 @@ const immersiveWrapper = css`
     overflow: hidden;
 `;
 
-const chooseWrapper = (
-	format: ArticleFormat,
-	showMediaAboveHeadline?: boolean,
-) => {
-	if (showMediaAboveHeadline) return noGutters;
-
+const chooseWrapper = (format: ArticleFormat, isMainMediaTest?: boolean) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 			return immersiveWrapper;
 		case ArticleDisplay.Standard: {
 			switch (format.design) {
 				case ArticleDesign.LiveBlog:
+					if (isMainMediaTest) return noGutters;
+					return '';
 				case ArticleDesign.DeadBlog:
 					return '';
 				default:
@@ -85,7 +82,7 @@ export const MainMedia: React.FC<{
 	isSensitive: boolean;
 	switches: { [key: string]: boolean };
 	showOverlayCaption?: boolean;
-	showMediaAboveHeadline?: boolean;
+	isMainMediaTest?: boolean;
 }> = ({
 	elements,
 	format,
@@ -100,10 +97,10 @@ export const MainMedia: React.FC<{
 	isSensitive,
 	switches,
 	showOverlayCaption,
-	showMediaAboveHeadline,
+	isMainMediaTest,
 }) => {
 	return (
-		<div css={[mainMedia, chooseWrapper(format, showMediaAboveHeadline)]}>
+		<div css={[mainMedia, chooseWrapper(format, isMainMediaTest)]}>
 			{elements.map((element, index) => (
 				<RenderArticleElement
 					// eslint-disable-next-line react/no-array-index-key -- This is only rendered once so we can safely use index to suppress the warning
@@ -123,7 +120,7 @@ export const MainMedia: React.FC<{
 					hideCaption={hideCaption}
 					starRating={starRating}
 					showOverlayCaption={showOverlayCaption}
-					showMediaAboveHeadline={showMediaAboveHeadline}
+					isMainMediaTest={isMainMediaTest}
 				/>
 			))}
 		</div>

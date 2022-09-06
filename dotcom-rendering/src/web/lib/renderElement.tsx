@@ -81,7 +81,7 @@ type Props = {
 	switches: { [key: string]: boolean };
 	isPinnedPost?: boolean;
 	showOverlayCaption?: boolean;
-	showMediaAboveHeadline?: boolean;
+	isMainMediaTest?: boolean;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -137,7 +137,7 @@ export const renderElement = ({
 	isSensitive,
 	isPinnedPost,
 	showOverlayCaption,
-	showMediaAboveHeadline,
+	isMainMediaTest,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
 
@@ -347,7 +347,7 @@ export const renderElement = ({
 					starRating={starRating || element.starRating}
 					title={element.title}
 					isAvatar={element.isAvatar}
-					showMediaAboveHeadline={showMediaAboveHeadline}
+					isMainMediaTest={isMainMediaTest}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.InstagramBlockElement':
@@ -813,7 +813,7 @@ export const RenderArticleElement = ({
 	switches,
 	isPinnedPost,
 	showOverlayCaption,
-	showMediaAboveHeadline,
+	isMainMediaTest,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -833,7 +833,7 @@ export const RenderArticleElement = ({
 		isSensitive,
 		switches,
 		showOverlayCaption,
-		showMediaAboveHeadline,
+		isMainMediaTest,
 		isPinnedPost,
 	});
 
