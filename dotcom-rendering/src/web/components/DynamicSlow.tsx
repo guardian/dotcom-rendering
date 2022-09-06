@@ -2,6 +2,8 @@
 import type { TrailType } from 'src/types/trails';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import {
+	Card100PictureRight,
+	Card100PictureTop,
 	Card25_Card75,
 	Card50_Card50,
 	Card75_Card25,
@@ -15,64 +17,6 @@ type Props = {
 	groupedTrails: DCRGroupedTrails;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-};
-
-const Card100PictureTop = ({
-	cards,
-	showAge,
-	containerPalette,
-}: {
-	cards: TrailType[];
-	showAge?: boolean;
-	containerPalette?: DCRContainerPalette;
-}) => {
-	if (!cards[0]) return null;
-	return (
-		<UL>
-			<LI percentage="100%" padSides={true} padBottom={true}>
-				<FrontCard
-					trail={cards[0]}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					headlineSize="huge"
-					headlineSizeOnMobile="large"
-					imageUrl={cards[0].image}
-					imagePosition={'top'}
-					imagePositionOnMobile={'top'}
-				/>
-			</LI>
-		</UL>
-	);
-};
-
-const Card100PictureRight = ({
-	cards,
-	showAge,
-	containerPalette,
-}: {
-	cards: TrailType[];
-	showAge?: boolean;
-	containerPalette?: DCRContainerPalette;
-}) => {
-	if (!cards[0]) return null;
-	return (
-		<UL>
-			<LI percentage="100%" padSides={true} padBottom={true}>
-				<FrontCard
-					trail={cards[0]}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					headlineSize="huge"
-					headlineSizeOnMobile="large"
-					imageUrl={cards[0].image}
-					imageSize={'jumbo'}
-					imagePosition={'right'}
-					imagePositionOnMobile={'top'}
-					trailText={cards[0].trailText}
-				/>
-			</LI>
-		</UL>
-	);
 };
 
 const ColumnOfCards50_Card50 = ({
