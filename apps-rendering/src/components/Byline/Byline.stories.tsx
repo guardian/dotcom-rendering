@@ -10,11 +10,9 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { toOption } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { text, withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
-import { pipe } from 'lib';
 import type { FC } from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Byline from './';
@@ -32,11 +30,9 @@ const byline = (): string => text('Byline', 'Jane Smith');
 const job = (): string => text('Job Title', 'Editor of things');
 
 const mockBylineHtml = (): Option<DocumentFragment> =>
-	pipe(
+	parseByline(
 		`<a href="${profileLink()}">${byline()}</a> ${job()}`,
-		parseByline,
-		toOption,
-	);
+	).toOption();
 
 // ----- Stories ----- //
 
@@ -44,6 +40,15 @@ const Default: FC = () => (
 	<Byline
 		theme={selectPillar(ArticlePillar.News)}
 		design={ArticleDesign.Standard}
+		display={ArticleDisplay.Standard}
+		bylineHtml={mockBylineHtml()}
+	/>
+);
+
+const Analysis: FC = () => (
+	<Byline
+		theme={selectPillar(ArticlePillar.News)}
+		design={ArticleDesign.Analysis}
 		display={ArticleDisplay.Standard}
 		bylineHtml={mockBylineHtml()}
 	/>
@@ -97,4 +102,4 @@ export default {
 	decorators: [withKnobs],
 };
 
-export { Default, Comment, Labs, Deadblog };
+export { Default, Comment, Labs, Deadblog, Analysis };

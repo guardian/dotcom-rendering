@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import { useEffect } from 'react';
+import type { OnwardsSource } from '../../types/onwards';
+import type { CAPITrailType, TrailType } from '../../types/trails';
 import { decideTrail } from '../lib/decideTrail';
 import { revealStyles } from '../lib/revealStyles';
 import { useApi } from '../lib/useApi';
@@ -9,7 +11,7 @@ import { Placeholder } from './Placeholder';
 type Props = {
 	url: string;
 	limit: number; // Limit the number of items shown (the api often returns more)
-	onwardsType: OnwardsType;
+	onwardsSource: OnwardsSource;
 	format: ArticleFormat;
 };
 
@@ -27,7 +29,7 @@ const minHeight = css`
 export const FetchOnwardsData = ({
 	url,
 	limit,
-	onwardsType,
+	onwardsSource,
 	format,
 }: Props) => {
 	const { data, loading, error } = useApi<OnwardsResponse>(url);
@@ -76,7 +78,7 @@ export const FetchOnwardsData = ({
 						heading={data.heading || data.displayname} // Sometimes the api returns heading as 'displayName'
 						trails={buildTrails(data.trails, limit)}
 						description={data.description}
-						onwardsType={onwardsType}
+						onwardsSource={onwardsSource}
 						format={format}
 					/>
 				</div>

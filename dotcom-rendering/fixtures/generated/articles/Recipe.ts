@@ -11,6 +11,8 @@
  *    gen-fixtures.ts directly.
  */
 
+import type { CAPIArticleType } from '../../../src/types/frontend';
+
 export const Recipe: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="e5a2cb2a63b788eae68ff654f739eff53a0cee28"> <img src="https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/851.jpg" alt="Meera Sodha’s spring onion pancakes with sesame sauce" width="851" height="1000" class="gu-image" /> <figcaption> <span class="element-image__caption">Meera Sodha’s spring onion pancakes with sesame sauce.</span> <span class="element-image__credit">Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.</span> </figcaption> </figure>',
@@ -401,11 +403,6 @@ export const Recipe: CAPIArticleType = {
 						url: '/football',
 						children: [
 							{
-								title: "Women's Euro 2022",
-								url: '/football/women-s-euro-2022',
-								longTitle: 'football/women-s-euro-2022',
-							},
-							{
 								title: 'Live scores',
 								url: '/football/live',
 								longTitle: 'football/live',
@@ -606,11 +603,6 @@ export const Recipe: CAPIArticleType = {
 						title: 'Football',
 						url: '/football',
 						children: [
-							{
-								title: "Women's Euro 2022",
-								url: '/football/women-s-euro-2022',
-								longTitle: 'football/women-s-euro-2022',
-							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -1692,7 +1684,7 @@ export const Recipe: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '47fbb615-a6df-49b7-beef-9324a714a16f',
+			elementId: '5af8f70f-3643-4178-8f09-af0dd91a7bf2',
 		},
 	],
 	webPublicationDate: '2021-02-06T10:30:38.000Z',
@@ -1703,62 +1695,62 @@ export const Recipe: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p> The world of pancakes is so vast, it is hard to think that on <a href="https://en.wikipedia.org/wiki/Shrove_Tuesday">Pancake Day</a>, there could be only one type proffered across the world. Of course, traditionally, pancakes were a way to use up eggs and animal fats before the Lent fast, but with those ingredients off the table in vegan cooking, a new array of pancakes can take centre stage. Today’s offering is for <em>cong you bing</em>, a flaky, coiled, spring onion pancake ubiquitous across China. It’s as enjoyable to make as it is to eat and, happily, there’s no whiff of abstinence about it.</p>',
-					elementId: 'f2fc0a8c-9475-4a89-866a-065eb4ede843',
+					elementId: '24dd6111-7a50-4868-82af-a2c781ff685c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Spring onion pancakes with sesame sauce</h2>',
-					elementId: '11234277-1f28-42b9-abd7-0afb31707a65',
+					elementId: 'a3a0cb34-d6ab-4cdf-af80-7d0268812e04',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Prep <strong>5 min<br></strong>Rest <strong>30 min<br></strong>Cook<strong> 1 hr<br></strong>Makes <strong>4, to serve 2 for lunch</strong></p>',
-					elementId: 'b12bb214-1f88-4d08-827e-fef141ce1caf',
+					elementId: 'baade2a5-1d07-4637-80c9-f1c3b826218a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Making these involves a particular set of processes that includes binding, rolling, folding, squashing and frying. I would have had trouble learning them by myself during the pandemic were it not for the help of a library of online cooks, and in particular Wei Guo of the wonderful <a href="https://redhousespice.com/">Red House Spice blog</a>.</p>',
-					elementId: '1a0118ea-80e8-4486-a33b-c876f2d93593',
+					elementId: 'ae869406-1a9f-4855-a73f-4b3bd633f3d3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For the pancakes<br><strong>275g plain flour</strong>, plus 2 tbsp extra<br><strong>Fine sea salt<br>Coconut oil</strong><br><strong>½ tsp Chinese five spice</strong> powder – I like <a href="https://bart.co.uk/products/chinese-five-spice-powder">Bart Ingredients</a> <br><strong>6 spring onions</strong>, trimmed and finely sliced</p>',
-					elementId: '5bcce97d-3ecb-4c1d-b93d-44d6d812304b',
+					elementId: 'c49fdbf7-64e5-4e31-9484-19b24c93d9a1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For the sesame sauce<br><strong>30g tahini<br>75g sweet white miso</strong> – I like <a href="https://www.clearspring.co.uk/products/organic-japanese-sweet-white-miso-paste-pasteurised">Clearspring</a><br><strong>1 tbsp toasted sesame oil<br>2 tbsp white-wine vinegar<br>½ tsp chilli oil sediment plus 1 tbsp oil </strong>– I like <a href="https://uk.lkk.com/products/chiu-chow-chilli-oil">Lee Kum Kee</a></p>',
-					elementId: '8e1b70bb-926e-4ef6-abe6-febb18915f49',
+					elementId: '4dfb276d-c50a-4b9b-a9d2-8452681b5c38',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Fill and boil half a kettle of water. In a large heatproof bowl, use a fork to mix the flour, a big pinch of salt and 165ml freshly boiled water until it comes together into a rough dough and is cool enough to handle. Knead for five minutes, then cover with a clean tea towel and set aside to rest for 30 minutes.</p>',
-					elementId: '2730a4d8-5105-4aa4-ab43-b4d8027625d7',
+					elementId: 'af1298db-40b5-424b-81bf-29855c34754f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>While the dough is resting, prepare the filling. Melt two tablespoons of coconut oil in a nonstick pan, then pour into a small heatproof bowl. Put the pan to one side, but don’t wash it up – you’ll use it again later, to cook the pancakes. Add the five spice, the two extra tablespoons of flour and a quarter-teaspoon of salt to the melted oil, stir to combine and set aside.</p>',
-					elementId: '80e81ab2-e76b-4b8e-a3b4-9c03d34c79cd',
+					elementId: 'd97d8bef-08da-4a41-8494-a392d7b96d06',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Mix all the sauce ingredients in a small bowl, add two tablespoons of cold water to loosen it a little, and set aside.</p>',
-					elementId: '02f66fd3-f523-4c85-acd6-ce97475438e9',
+					elementId: '05cc8439-5b75-4176-a1b0-87f0ba635034',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Once the dough has rested, rub a little coconut oil on a worktop and on a rolling pin, then roll the dough into a roughly 20cm x 30cm rectangle. Spread the five spice mix evenly over the top (take care not to tear the dough) and sprinkle the sliced spring onions on top of that. Starting at one short end of the dough rectangle, roll up the whole thing into a tight cigar. Move the dough sausage so it’s horizontally in line with the edge of the worktop, then cut into four even slices. Put the slices cut side down on the worktop and, using the greased rolling pin, gently press each slice into a round pancake shape measuring about 13cm across.</p>',
-					elementId: 'c8f59af9-cb84-4958-a36f-ac2e43da82a3',
+					elementId: 'ec86e15c-aa7c-42c2-a68b-8526a3127866',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>When you are ready to cook the pancakes, melt two tablespoons of coconut oil in the nonstick pan, gently lift in one pancake and cook for three to four minutes on each side, until golden brown all over. Remove from the pan and keep somewhere warm while you repeat with the remaining oil and pancakes (keep a close eye on the heat under the pan – you may need to reduce it to make sure the pan doesn’t get too hot).</p>',
-					elementId: '65f0c92a-49ff-4c99-8236-72a9c2ee895b',
+					elementId: '473cd0bc-03cf-48ee-ba53-ae94e6d14546',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Serve the pancakes hot with the sauce for dipping or drizzling over the top.</p>',
-					elementId: '54c969ce-dbea-4bee-9371-e1d7d795e289',
+					elementId: '468eea48-c232-4c98-a883-0bc7e0aa8c67',
 				},
 			],
 			attributes: {

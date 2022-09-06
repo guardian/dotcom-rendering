@@ -190,6 +190,7 @@ const LiveLayout: FC<Props> = ({ item }) => {
 							format={item}
 							pageNumber={item.pagedBlocks.currentPage.pageNumber}
 							pinnedPost={pinnedPost}
+							edition={item.edition}
 						/>
 						{pagination}
 					</div>

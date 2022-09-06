@@ -7,6 +7,8 @@ import {
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
 import { clearFix } from '../../../lib/mixins';
+import type { NavType } from '../../../model/extract-nav';
+import type { EditionId } from '../../../types/edition';
 import { GuardianRoundel } from '../GuardianRoundel';
 import { Hide } from '../Hide';
 import { Pillars } from '../Pillars';
@@ -108,12 +110,14 @@ export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
 
                         navInputCheckbox.addEventListener('click',function(){
                           if(!navInputCheckbox.checked) {
+							firstColLabel.setAttribute('aria-expanded', 'false')
                             showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: show')
                             veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: show')
                             expandedMenuClickableTags.forEach(function($selectableElement){
                                 $selectableElement.setAttribute('tabindex','-1')
                             })
                           } else {
+							firstColLabel.setAttribute('aria-expanded', 'true')
                             showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: hide')
                             veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: hide')
                             expandedMenuClickableTags.forEach(function($selectableElement){
@@ -201,6 +205,9 @@ export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
 					tabIndex={-1}
 					key="OpenExpandedMenuCheckbox"
 					aria-hidden="true"
+					role="button"
+					aria-expanded="false"
+					aria-haspopup="true"
 				/>
 				<Pillars
 					display={format.display}

@@ -5,6 +5,7 @@ import { between, from, until } from '@guardian/source-foundations';
 type Props = {
 	children: React.ReactNode;
 	imageSize: ImageSizeType;
+	imageType?: CardImageType;
 	imagePosition: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 };
@@ -48,6 +49,7 @@ const flexBasisStyles = ({
 export const ImageWrapper = ({
 	children,
 	imageSize,
+	imageType,
 	imagePosition,
 	imagePositionOnMobile,
 }: Props) => {
@@ -57,10 +59,16 @@ export const ImageWrapper = ({
 	return (
 		<div
 			css={[
-				isHorizontal &&
+				imageType === 'mainMedia' &&
+					isHorizontal &&
 					flexBasisStyles({
 						imageSize,
 					}),
+				imageType === 'avatar' &&
+					css`
+						display: flex;
+						justify-content: flex-end;
+					`,
 				/* If no image position for mobile is provided then hide the image */
 				imagePositionOnMobile === 'none' &&
 					css`
@@ -95,7 +103,7 @@ export const ImageWrapper = ({
 			<>
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
-				<div className="image-overlay" />
+				{imageType === 'mainMedia' && <div className="image-overlay" />}
 			</>
 		</div>
 	);

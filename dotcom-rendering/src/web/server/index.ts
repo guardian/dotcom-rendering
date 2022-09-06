@@ -6,6 +6,8 @@ import { enhanceCommercialProperties } from '../../model/enhanceCommercialProper
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
+import type { CAPIArticleType } from '../../types/frontend';
+import type { CAPIOnwards } from '../../types/onwards';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
@@ -44,7 +46,11 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 		...data,
 		pressedPage: {
 			...data.pressedPage,
-			collections: enhanceCollections(data.pressedPage.collections),
+			collections: enhanceCollections(
+				data.pressedPage.collections,
+				data.editionId,
+				data.pageId,
+			),
 		},
 	};
 };
@@ -173,17 +179,18 @@ export const renderKeyEvents = (
 };
 
 export const renderOnwards = (
-	{ body }: { body: CAPIOnwardsType },
+	{ body }: { body: CAPIOnwards },
 	res: express.Response,
 ): void => {
 	try {
-		const { heading, description, url, onwardsType, trails, format } = body;
+		const { heading, description, url, onwardsSource, trails, format } =
+			body;
 
 		const html = onwardsToHtml({
 			heading,
 			description,
 			url,
-			onwardsType,
+			onwardsSource,
 			trails,
 			format,
 		});

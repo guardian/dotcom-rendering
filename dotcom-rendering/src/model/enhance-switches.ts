@@ -1,4 +1,6 @@
-export type ABTestSwitches = { [key: `ab${string}`]: boolean };
+import type { Switches } from '../types/config';
+
+export type ABTestSwitches = { [key: `ab${string}`]: boolean | undefined };
 
 /**
  * Switches that start with "ab" are used for AB tests.

@@ -2,6 +2,7 @@ import { ClassNames } from '@emotion/react';
 import { body } from '@guardian/source-foundations';
 import { renderToString } from 'react-dom/server';
 import { unwrapHtml } from '../../model/unwrapHtml';
+import type { Palette } from '../../types/palette';
 import { QuoteIcon } from './QuoteIcon';
 import { RewrappedComponent } from './RewrappedComponent';
 

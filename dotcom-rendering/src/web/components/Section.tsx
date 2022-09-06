@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from, space, until } from '@guardian/source-foundations';
+import type { EditionId } from '../../types/edition';
 import type { DCRContainerPalette, TreatType } from '../../types/front';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { hiddenStyles } from '../lib/hiddenStyles';

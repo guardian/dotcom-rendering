@@ -38,12 +38,12 @@ const buildDependencies = (
 ): DependencyResult[] => {
 	return [
 		{
-			name: 'brazeSwitch',
-			value: Promise.resolve(window.guardian.config.switches.brazeSwitch),
-		},
-		{
 			name: 'apiKey',
 			value: Promise.resolve(window.guardian.config.page.brazeApiKey),
+		},
+		{
+			name: 'brazeSwitch',
+			value: Promise.resolve(window.guardian.config.switches.brazeSwitch),
 		},
 		{
 			name: 'brazeUuid',

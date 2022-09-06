@@ -3,6 +3,8 @@ import { ArticleDesign } from '@guardian/libs';
 import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { filterABTestSwitches } from '../../model/enhance-switches';
+import type { NavType } from '../../model/extract-nav';
+import type { CAPIArticleType } from '../../types/frontend';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
@@ -23,16 +25,14 @@ type Props = {
 
 /**
  * @description
- * Article is a high level wrapper for pages on Dotcom. Sets strict mode and some globals
+ * Article is a high level wrapper for article pages on Dotcom. Sets strict mode and some globals
  *
  * @param {Props} props
  * @param {CAPIArticleType} props.CAPIArticle - The article JSON data
  * @param {NAVType} props.NAV - The article JSON data
  * @param {ArticleFormat} props.format - The format model for the article
  * */
-export const Article = ({ CAPIArticle, NAV, format }: Props) => {
-	const showKeyEventsCarousel = CAPIArticle.config.switches.keyEventsCarousel;
-
+export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
 	return (
 		<StrictMode>
 			<Global
@@ -52,14 +52,7 @@ export const Article = ({ CAPIArticle, NAV, format }: Props) => {
 			<SkipTo id="navigation" label="Skip to navigation" />
 			{(format.design === ArticleDesign.LiveBlog ||
 				format.design === ArticleDesign.DeadBlog) && (
-				<SkipTo
-					id={
-						showKeyEventsCarousel
-							? 'key-events-carousel'
-							: 'keyevents'
-					}
-					label="Skip to key events"
-				/>
+				<SkipTo id={'key-events-carousel'} label="Skip to key events" />
 			)}
 			<Island clientOnly={true} deferUntil="idle">
 				<AlreadyVisited />
@@ -69,7 +62,7 @@ export const Article = ({ CAPIArticle, NAV, format }: Props) => {
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<CommercialMetrics
-					enabled={CAPIArticle.config.switches.commercialMetrics}
+					enabled={!!CAPIArticle.config.switches.commercialMetrics}
 				/>
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">

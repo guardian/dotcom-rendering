@@ -1,14 +1,19 @@
-import { storage } from '@guardian/libs';
+import { isObject, isString, storage } from '@guardian/libs';
 import { useOnce } from '../lib/useOnce';
 
 type ContainerStates = { [id: string]: string };
 
+const isContainerStates = (item: unknown): item is ContainerStates => {
+	if (!isObject(item)) return false;
+	if (!Object.keys(item).every(isString)) return false;
+	if (!Object.values(item).every(isString)) return false;
+	return true;
+};
+
 const getContainerStates = (): ContainerStates => {
 	const item = storage.local.get(`gu.prefs.container-states`);
 
-	if (!item) {
-		return {};
-	}
+	if (!isContainerStates(item)) return {};
 
 	return item;
 };

@@ -7,12 +7,14 @@ import {
 	neutral,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import type { NavType } from '../../model/extract-nav';
 import type { DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { MostViewedFooter } from '../components/MostViewedFooter';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
@@ -47,25 +49,28 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 	// const contributionsServiceUrl = getContributionsServiceUrl(front);
 
+	/**
+	 * This property currently only applies to the header and merchandising slots
+	 */
+	const renderAds = !front.isAdFreeUser;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
 				<>
-					<Stuck>
-						<Section
-							fullWidth={true}
-							showTopBorder={false}
-							showSideBorders={false}
-							padSides={false}
-							shouldCenter={false}
-						>
-							<HeaderAdSlot
-								isAdFreeUser={front.isAdFreeUser}
-								shouldHideAds={false}
-								display={format.display}
-							/>
-						</Section>
-					</Stuck>
+					{renderAds && (
+						<Stuck>
+							<Section
+								fullWidth={true}
+								showTopBorder={false}
+								showSideBorders={false}
+								padSides={false}
+								shouldCenter={false}
+							>
+								<HeaderAdSlot display={format.display} />
+							</Section>
+						</Stuck>
+					)}
 
 					<Section
 						fullWidth={true}
@@ -84,7 +89,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							}
 							discussionApiUrl={front.config.discussionApiUrl}
 							urls={front.nav.readerRevenueLinks.header}
-							remoteHeader={front.config.switches.remoteHeader}
+							remoteHeader={!!front.config.switches.remoteHeader}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
 						/>
@@ -143,7 +148,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 			<main data-layout="FrontLayout">
 				{front.pressedPage.collections.map((collection, index) => {
-					// TODO: We also need to support treats containers
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
 						collection.backfill,
@@ -151,18 +155,8 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					// There are some containers that have zero trails. We don't want to render these
 					if (trails.length === 0) return null;
 
-					// This is a legacy container used to add palette styling on Frontend. DCR ignores it
-					if (
-						collection.displayName ===
-						'Palette styles new do not delete'
-					) {
-						return null;
-					}
-
 					const ophanName = ophanComponentId(collection.displayName);
-					const ophanComponentLink = `container-${
-						index + 1
-					} | ${ophanName}`;
+					const ophanComponentLink = `container-${index} | ${ophanName}`;
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
@@ -175,9 +169,49 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								ophanComponentLink={ophanComponentLink}
 								ophanComponentName={ophanName}
 								containerName={collection.collectionType}
-								element="section"
 							>
 								<Snap snapData={trails[0].snapData} />
+							</Section>
+						);
+					}
+
+					if (
+						collection.collectionType === 'news/most-popular' &&
+						!isPaidContent &&
+						front.config.switches.mostViewedFronts
+					) {
+						return (
+							<Section
+								key={collection.id}
+								title="Most viewed"
+								showTopBorder={index > 0}
+								padContent={false}
+								verticalMargins={false}
+								url={collection.href}
+								ophanComponentLink={ophanComponentLink}
+								ophanComponentName={ophanName}
+								containerName={collection.collectionType}
+								containerPalette={collection.containerPalette}
+								sectionId={collection.id}
+								showDateHeader={
+									collection.config.showDateHeader
+								}
+								editionId={front.editionId}
+								treats={collection.treats}
+								data-print-layout="hide"
+								element="aside"
+							>
+								<MostViewedFooterLayout>
+									<MostViewedFooter
+										tabs={[
+											{
+												trails: trails.slice(10),
+											},
+										]}
+										sectionName="Most viewed"
+										// TODO: Include mostCommented & mostShared once we have this data in the FE response
+									/>
+								</MostViewedFooterLayout>
 							</Section>
 						);
 					}
@@ -186,13 +220,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						<Section
 							key={collection.id}
 							title={collection.displayName}
-							// TODO: This logic should be updated, as this relies
-							// on the first container being 'palette styles do not delete'
-							showTopBorder={index > 1}
+							showTopBorder={index > 0}
 							padContent={false}
 							centralBorder="partial"
 							url={collection.href}
-							// same as above re 'palette styles' for index increment
 							ophanComponentLink={ophanComponentLink}
 							ophanComponentName={ophanName}
 							containerName={collection.collectionType}
@@ -214,20 +245,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						</Section>
 					);
 				})}
-
-				{!isPaidContent && (
-					<Section
-						fullWidth={true}
-						data-print-layout="hide"
-						element="aside"
-					>
-						<MostViewedFooterLayout
-							format={format}
-							sectionName="" // {front.sectionName}
-							ajaxUrl={front.config.ajaxUrl}
-						/>
-					</Section>
-				)}
 			</main>
 
 			<Section
