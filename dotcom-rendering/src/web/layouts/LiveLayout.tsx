@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
 // eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
-import Accordion from '@guardian/common-rendering/src/components/accordion';
-// eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
 import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
 import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
