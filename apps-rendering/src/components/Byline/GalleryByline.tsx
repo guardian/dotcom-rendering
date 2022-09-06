@@ -9,7 +9,6 @@ import { darkModeCss } from 'styles';
 import { DefaultByline } from './Byline.defaults';
 
 const bylineStyles = (format: ArticleFormat): SerializedStyles => css`
-	padding-top: ${remSpace[2]};
 	padding-bottom: ${remSpace[2]};
 	${grid.column.centre}
 	grid-row: 6/7;

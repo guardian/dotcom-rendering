@@ -14,18 +14,18 @@ import { darkModeCss } from 'styles';
 // ----- Component ----- //
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
-	${grid.span('centre-column-start', 3)}
+	${grid.column.centre}
 	${headline.xxxsmall({ fontWeight: 'bold' })}
 	color: ${text.standfirst(format)};
 	grid-row: 5/6;
-	padding-bottom: ${remSpace[2]};
+	padding: ${remSpace[2]} ${remSpace[5]} ${remSpace[9]} 0;
 
-	${from.tablet} {
-		${grid.span('centre-column-start', 8)}
+	${from.mobileLandscape} {
+		padding-top: ${remSpace[4]};
 	}
 
-	${from.desktop} {
-		${grid.span('centre-column-start', 6)}
+	${from.tablet} {
+		padding-top: ${remSpace[1]};
 	}
 
 	${darkModeCss`
