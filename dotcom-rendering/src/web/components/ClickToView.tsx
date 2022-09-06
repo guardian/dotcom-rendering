@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import {
 	background,
 	border,
@@ -16,6 +17,7 @@ type Props = {
 	isMainMedia?: boolean;
 	source?: string;
 	sourceDomain?: string;
+	format: ArticleFormat;
 };
 
 const roleTextSize = (role: RoleType) => {
@@ -89,15 +91,23 @@ const shouldDisplayOverlay = ({
 	isTracking,
 	isOverlayClicked,
 	isMainMedia,
+	format,
 }: {
 	isTracking: boolean;
 	isOverlayClicked: boolean;
 	isMainMedia?: boolean;
+	format: ArticleFormat;
 }) => {
-	if (isMainMedia || !isTracking) {
+	if (isMainMedia) {
 		return false;
 	}
-	if (isOverlayClicked) {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	) {
+		return true;
+	}
+	if (!isTracking || isOverlayClicked) {
 		return false;
 	}
 	return true;
@@ -111,6 +121,7 @@ export const ClickToView = ({
 	isMainMedia,
 	source,
 	sourceDomain = 'unknown',
+	format,
 }: Props) => {
 	const [isOverlayClicked, setIsOverlayClicked] = useState<boolean>(false);
 
@@ -128,6 +139,7 @@ export const ClickToView = ({
 			isTracking,
 			isOverlayClicked,
 			isMainMedia,
+			format,
 		})
 	) {
 		return (

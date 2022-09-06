@@ -249,6 +249,7 @@ export const renderElement = ({
 						sourceDomain={element.sourceDomain}
 						title={element.title}
 						width={element.width}
+						format={format}
 					/>
 				</Island>,
 			];
@@ -278,6 +279,7 @@ export const renderElement = ({
 							source={element.source}
 							sourceDomain={element.sourceDomain}
 							isPinnedPost={isPinnedPost}
+							format={format}
 						/>
 					</Island>,
 				];
@@ -294,6 +296,7 @@ export const renderElement = ({
 						isMainMedia={isMainMedia}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
+						format={format}
 					/>
 				</Island>,
 			];
@@ -360,6 +363,7 @@ export const renderElement = ({
 						element={element}
 						index={index}
 						isMainMedia={isMainMedia}
+						format={format}
 					/>
 				</Island>,
 			];
@@ -695,6 +699,7 @@ export const renderElement = ({
 						isTracking={element.isThirdPartyTracking}
 						source={element.source}
 						sourceDomain={element.sourceDomain}
+						format={format}
 					/>
 				</Island>,
 			];

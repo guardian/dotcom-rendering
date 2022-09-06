@@ -72,6 +72,11 @@ const RoleStory = ({
 						source="A Thirdparty Provider"
 						sourceDomain="thirdparty.com"
 						onAccept={() => {}}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					>
 						{children}
 					</ClickToView>
@@ -502,6 +507,11 @@ export const EmbedBlockComponentStory = () => {
 						source={facebookEmbed.source}
 						sourceDomain={facebookEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
@@ -528,6 +538,11 @@ export const EmbedBlockComponentStory = () => {
 						source={vimeoEmbedEmbed.source}
 						sourceDomain={vimeoEmbedEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
@@ -554,6 +569,11 @@ export const EmbedBlockComponentStory = () => {
 						source={youtubeEmbedEmbed.source}
 						sourceDomain={youtubeEmbedEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
@@ -580,6 +600,11 @@ export const EmbedBlockComponentStory = () => {
 						source={spotifyEmbedEmbed.source}
 						sourceDomain={spotifyEmbedEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
@@ -606,6 +631,11 @@ export const EmbedBlockComponentStory = () => {
 						source={bandcampEmbedEmbed.source}
 						sourceDomain={bandcampEmbedEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
@@ -632,6 +662,11 @@ export const EmbedBlockComponentStory = () => {
 						source={ourworldindataEmbedEmbed.source}
 						sourceDomain={ourworldindataEmbedEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
@@ -658,6 +693,11 @@ export const EmbedBlockComponentStory = () => {
 						source={bbcEmbedEmbed.source}
 						sourceDomain={bbcEmbedEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					/>
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>,
@@ -709,6 +749,11 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						source={instagramEmbedEmbed.source}
 						sourceDomain={instagramEmbedEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
@@ -735,6 +780,11 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						source={formStackEmbed.source}
 						sourceDomain={formStackEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
@@ -762,6 +812,11 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						source={scribdEmbedEmbed.source}
 						sourceDomain={scribdEmbedEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
@@ -789,6 +844,11 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						source={scribdEmbedEmbed.source}
 						sourceDomain={scribdEmbedEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					/>
 				</Figure>
 				<p css={paragraphStyle}>
@@ -816,6 +876,11 @@ export const UnsafeEmbedBlockComponentStory = () => {
 						source={scribdEmbedEmbed.source}
 						sourceDomain={scribdEmbedEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					/>
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>,
@@ -864,6 +929,11 @@ export const VimeoBlockComponentStory = () => {
 						source={vimeoVideoEmbed.source}
 						sourceDomain={vimeoVideoEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					>
 						<VimeoBlockComponent
 							format={{
@@ -927,6 +997,11 @@ export const DocumentBlockComponentStory = () => {
 						source={scribdDocumentEmbed.source}
 						sourceDomain={scribdDocumentEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					>
 						<DocumentBlockComponent
 							embedUrl={scribdDocumentEmbed.embedUrl}
@@ -935,6 +1010,11 @@ export const DocumentBlockComponentStory = () => {
 							title={scribdDocumentEmbed.title}
 							isTracking={false}
 							isMainMedia={false}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: ArticlePillar.News,
+							}}
 						/>
 					</ClickToView>
 				</Figure>
@@ -984,6 +1064,11 @@ export const SoundCloudBlockComponentStory = () => {
 						source={soundcloudAudioEmbed.source}
 						sourceDomain={soundcloudAudioEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					>
 						<SoundcloudBlockComponent
 							element={soundcloudAudioEmbed}
@@ -1011,6 +1096,11 @@ export const SoundCloudBlockComponentStory = () => {
 						source={soundcloudEmbedEmbed.source}
 						sourceDomain={soundcloudEmbedEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					>
 						<SoundcloudBlockComponent
 							element={soundcloudEmbedEmbed}
@@ -1063,6 +1153,11 @@ export const SpotifyBlockComponentStory = () => {
 						source={spotifyAudioEmbed.source}
 						sourceDomain={spotifyAudioEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					>
 						<SpotifyBlockComponent
 							embedUrl={spotifyAudioEmbed.embedUrl}
@@ -1129,6 +1224,11 @@ export const TweetBlockComponentStory = () => {
 						source={twitterTweetEmbed.source}
 						sourceDomain={twitterTweetEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					>
 						<TweetBlockComponent element={twitterTweetEmbed} />
 					</ClickToView>
@@ -1178,6 +1278,11 @@ export const InstagramBlockComponentStory = () => {
 						element={instagramInstramEmbed}
 						index={1}
 						isMainMedia={false}
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					/>
 				</Figure>
 				<p css={paragraphStyle}>The end.</p>,
@@ -1224,6 +1329,11 @@ export const MapBlockComponentStory = () => {
 						source={mapEmbedEmbed.source}
 						sourceDomain={mapEmbedEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					>
 						<MapEmbedBlockComponent
 							embedUrl={mapEmbedEmbed.embedUrl}
@@ -1287,11 +1397,21 @@ export const VineBlockComponentStory = () => {
 						source={vineEmbedEmbed.source}
 						sourceDomain={vineEmbedEmbed.sourceDomain}
 						role="inline"
+						format={{
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.Standard,
+							theme: ArticlePillar.News,
+						}}
 					>
 						<VineBlockComponent
 							element={vineEmbedEmbed}
 							role="inline"
 							isTracking={false}
+							format={{
+								display: ArticleDisplay.Standard,
+								design: ArticleDesign.Standard,
+								theme: ArticlePillar.News,
+							}}
 						/>
 					</ClickToView>
 				</Figure>

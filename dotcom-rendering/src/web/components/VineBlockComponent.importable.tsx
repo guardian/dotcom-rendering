@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleFormat } from '@guardian/libs';
 import { textSans } from '@guardian/source-foundations';
 import { ClickToView } from './ClickToView';
 import { MaintainAspectRatio } from './MaintainAspectRatio';
@@ -16,6 +17,7 @@ type Props = {
 	isTracking: boolean;
 	source?: string;
 	sourceDomain?: string;
+	format: ArticleFormat;
 };
 
 export const VineBlockComponent = ({
@@ -24,6 +26,7 @@ export const VineBlockComponent = ({
 	isTracking,
 	source,
 	sourceDomain,
+	format,
 }: Props) => {
 	return (
 		<ClickToView
@@ -31,6 +34,7 @@ export const VineBlockComponent = ({
 			isTracking={isTracking}
 			source={source}
 			sourceDomain={sourceDomain}
+			format={format}
 		>
 			{!!(element.url && element.width && element.height) && (
 				<div>

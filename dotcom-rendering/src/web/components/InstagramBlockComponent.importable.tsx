@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleFormat } from '@guardian/libs';
 import { updateIframeHeight } from '../browser/updateIframeHeight';
 import { ClickToView } from './ClickToView';
 
@@ -15,7 +16,8 @@ export const InstagramBlockComponent: React.FC<{
 	element: InstagramBlockElement;
 	index: number;
 	isMainMedia: boolean;
-}> = ({ element, index, isMainMedia }) => {
+	format: ArticleFormat;
+}> = ({ element, index, isMainMedia, format }) => {
 	return (
 		<ClickToView
 			role={element.role}
@@ -26,6 +28,7 @@ export const InstagramBlockComponent: React.FC<{
 			onAccept={() =>
 				updateIframeHeight(`iframe[name="instagram-embed-${index}"]`)
 			}
+			format={format}
 		>
 			<iframe
 				css={fullWidthStyles}

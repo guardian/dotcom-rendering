@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleFormat } from '@guardian/libs';
 import { LinkButton } from '@guardian/source-react-components';
 import { ClickToView } from './ClickToView';
 
@@ -35,6 +36,7 @@ type Props = {
 	sourceDomain?: string;
 	title?: string;
 	width: number;
+	format: ArticleFormat;
 };
 
 export const DocumentBlockComponent = ({
@@ -47,6 +49,7 @@ export const DocumentBlockComponent = ({
 	sourceDomain,
 	title,
 	width,
+	format,
 }: Props) => {
 	return (
 		<ClickToView
@@ -55,6 +58,7 @@ export const DocumentBlockComponent = ({
 			isMainMedia={isMainMedia}
 			source={source}
 			sourceDomain={sourceDomain}
+			format={format}
 		>
 			<div css={widthOverride}>
 				<iframe

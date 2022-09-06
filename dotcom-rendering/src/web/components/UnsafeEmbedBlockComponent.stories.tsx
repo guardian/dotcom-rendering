@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { useEffect } from 'react';
 import { embedIframe } from '../browser/embedIframe/embedIframe';
 import { UnsafeEmbedBlockComponent } from './UnsafeEmbedBlockComponent.importable';
@@ -30,6 +31,11 @@ export const DefaultStory = () => {
 				source=""
 				sourceDomain=""
 				role="inline"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
 			/>
 		</div>
 	);

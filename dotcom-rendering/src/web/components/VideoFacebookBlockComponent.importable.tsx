@@ -54,6 +54,7 @@ export const VideoFacebookBlockComponent = ({
 			isMainMedia={isMainMedia}
 			source={source}
 			sourceDomain={sourceDomain}
+			format={format}
 		>
 			<div css={embedContainer}>
 				<MaintainAspectRatio height={height} width={width}>

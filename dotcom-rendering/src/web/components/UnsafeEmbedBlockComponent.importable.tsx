@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleFormat } from '@guardian/libs';
 import { updateIframeHeight } from '../browser/updateIframeHeight';
 import { ClickToView } from './ClickToView';
 
@@ -12,6 +13,7 @@ type Props = {
 	source?: string;
 	sourceDomain?: string;
 	isPinnedPost?: boolean;
+	format: ArticleFormat;
 };
 
 const fullWidthStyles = css`
@@ -28,6 +30,7 @@ export const UnsafeEmbedBlockComponent = ({
 	source,
 	sourceDomain,
 	isPinnedPost,
+	format,
 }: Props) => {
 	// This allows for when a block is duplicated on a live blog inside a pinned post
 	const uniqueIndex = isPinnedPost ? `${index}-pinned` : index;
@@ -41,6 +44,7 @@ export const UnsafeEmbedBlockComponent = ({
 			onAccept={() =>
 				updateIframeHeight(`iframe[name="unsafe-embed-${uniqueIndex}"]`)
 			}
+			format={format}
 		>
 			<iframe
 				css={fullWidthStyles}

@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { DocumentBlockComponent } from './DocumentBlockComponent.importable';
 
 export default {
@@ -28,6 +29,11 @@ export const documentEmbed = () => {
 				title=""
 				isTracking={false}
 				isMainMedia={false}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
 			/>
 			<p>DocumentCloud Document</p>
 			<DocumentBlockComponent
@@ -38,6 +44,11 @@ export const documentEmbed = () => {
 				source="DocumentCloud"
 				isTracking={false}
 				isMainMedia={false}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
 			/>
 		</Wrapper>
 	);

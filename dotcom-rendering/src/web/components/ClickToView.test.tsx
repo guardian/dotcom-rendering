@@ -1,16 +1,21 @@
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
 import { ClickToView } from './ClickToView';
 
 describe('ClickToView', () => {
 	it('It should render the third party content if it is not tracking', () => {
-		const thirdPartyContent = <div data-testid="third-party-content" />;
 		const { getByTestId } = render(
 			<ClickToView
 				isTracking={false}
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
 			>
-				{thirdPartyContent}
+				<div data-testid="third-party-content" />
 			</ClickToView>,
 		);
 
@@ -23,6 +28,11 @@ describe('ClickToView', () => {
 				isTracking={true}
 				source="A Third Party"
 				sourceDomain="athirdparty.com"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
 			>
 				<div id="third-party-content" />
 			</ClickToView>,
@@ -38,7 +48,15 @@ describe('ClickToView', () => {
 	});
 	it('It should render a generic overlay if a source is not present', () => {
 		const { getByText } = render(
-			<ClickToView isTracking={true} sourceDomain="athirdparty.com">
+			<ClickToView
+				isTracking={true}
+				sourceDomain="athirdparty.com"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			>
 				<div id="third-party-content" />
 			</ClickToView>,
 		);
@@ -52,5 +70,22 @@ describe('ClickToView', () => {
 				{ exact: false },
 			),
 		).toBeInTheDocument();
+	});
+	it('It should render a overlay if its a liveblog', () => {
+		const { queryByTestId } = render(
+			<ClickToView
+				isTracking={true}
+				sourceDomain="athirdparty.com"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: ArticlePillar.News,
+				}}
+			>
+				<div data-testid="third-party-content" />
+			</ClickToView>,
+		);
+
+		expect(queryByTestId('third-party-content')).not.toBeInTheDocument();
 	});
 });
