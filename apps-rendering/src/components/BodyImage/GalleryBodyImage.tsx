@@ -30,8 +30,12 @@ const figureStyles = css`
 `;
 
 const imageWrapperStyles = (format: ArticleFormat): SerializedStyles => css`
-	${grid.column.centre}
+	${grid.column.all}
 	grid-row: 1;
+
+	${from.tablet} {
+		${grid.column.centre}
+	}
 
 	${from.leftCol} {
 		${grid.between('centre-column-start', 'right-column-end')}
@@ -84,7 +88,7 @@ const captionStyles = (format: ArticleFormat): SerializedStyles => css`
 
 	h2,
 	h2 > span {
-		${headline.xxxsmall()}
+		${headline.xxxsmall({ lineHeight: 'regular' })}
 	}
 
 	${from.leftCol} {
