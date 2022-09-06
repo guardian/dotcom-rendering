@@ -639,8 +639,7 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 						// Don't try to render cards that have no publication date. This property is technically optional
 						// but we rarely if ever expect it not to exist
 						if (!webPublicationDate) return null;
-						const discussionId =
-							shortUrl && new URL(shortUrl).pathname;
+						const discussionId = shortUrl;
 
 						return (
 							<CarouselCard
