@@ -1,9 +1,10 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral, remSpace } from '@guardian/source-foundations';
+import { remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import CommentCount from 'components/CommentCount';
 import Dateline from 'components/Dateline';
@@ -14,9 +15,9 @@ import type { FC } from 'react';
 
 // ----- Component ----- //
 
-const styles = css`
+const styles = (format: ArticleFormat): SerializedStyles => css`
 	display: flex;
-	color: ${neutral[100]};
+	color: ${text.gallery(format)};
 	${grid.column.centre}
 	grid-row: 7/8;
 	padding: 0 ${remSpace[5]} ${remSpace[9]} 0;
@@ -43,7 +44,7 @@ const GalleryMetadata: FC<Props> = ({
 	commentable,
 	edition,
 }) => (
-	<div css={styles}>
+	<div css={styles(format)}>
 		<div css={textStyles}>
 			<Dateline date={publishDate} format={format} edition={edition} />
 			<Follow format={format} contributors={contributors} />
