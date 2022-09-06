@@ -46,8 +46,7 @@ export const withOneTabs = () => {
 					<MostViewedFooter
 						tabs={[
 							{
-								heading:
-									'The heading does not show when there is one tab',
+								heading: 'in the UK',
 								trails: trails.slice(0, 10),
 							},
 						]}

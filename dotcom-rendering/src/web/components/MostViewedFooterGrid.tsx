@@ -57,7 +57,7 @@ const unselectedStyles = css`
 	}
 `;
 
-const tabButton = css`
+const buttonStyles = (isSelected: boolean) => css`
 	${headline.xxxsmall()};
 	color: ${neutral[7]};
 	margin: 0;
@@ -73,7 +73,7 @@ const tabButton = css`
 	width: 100%;
 
 	&:hover {
-		cursor: pointer;
+		cursor: ${isSelected ? 'default' : 'pointer'};
 	}
 `;
 
@@ -130,7 +130,7 @@ export const MostViewedFooterGrid = ({
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 	return (
 		<>
-			{Array.isArray(data) && data.length > 1 && (
+			{Array.isArray(data) && (
 				<ul css={tabsContainer} role="tablist">
 					{data.map((tab: TrailTabType, i: number) => {
 						if (!tab.heading) return null;
@@ -157,7 +157,7 @@ export const MostViewedFooterGrid = ({
 								data-chromatic="ignore"
 							>
 								<button
-									css={tabButton}
+									css={buttonStyles(isSelected)}
 									onClick={() => setSelectedTabIndex(i)}
 								>
 									<span
