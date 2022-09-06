@@ -101,6 +101,9 @@ const shouldDisplayOverlay = ({
 	if (isMainMedia) {
 		return false;
 	}
+
+	// See https://github.com/guardian/frontend/issues/25454
+	// This dependency on format can be removed once CAPI is properly setting the tracking field correctly.
 	if (
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog
