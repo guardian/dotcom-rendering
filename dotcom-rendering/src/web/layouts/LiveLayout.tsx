@@ -91,8 +91,8 @@ const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 					grid-template-columns: minmax(0, 1fr); /* Main content */
 					grid-template-areas:
 						'title'
-						'mainmedia'
-						'headline';
+						'headline'
+						'mainmedia';
 				}
 				${until.tablet} {
 					grid-column-gap: 0px;
@@ -499,35 +499,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									isMainMediaTest={isMainMediaTest}
 								/>
 							</GridItem>
-							{isMainMediaTest && (
-								<GridItem area="mainmedia">
-									<Hide from="desktop">
-										<MainMedia
-											format={format}
-											elements={
-												CAPIArticle.mainMediaElements
-											}
-											adTargeting={adTargeting}
-											host={host}
-											pageId={CAPIArticle.pageId}
-											webTitle={CAPIArticle.webTitle}
-											ajaxUrl={CAPIArticle.config.ajaxUrl}
-											switches={
-												CAPIArticle.config.switches
-											}
-											isSensitive={
-												CAPIArticle.config.isSensitive
-											}
-											isAdFreeUser={
-												CAPIArticle.isAdFreeUser
-											}
-											showOverlayCaption={true}
-											isMainMediaTest={isMainMediaTest}
-										/>
-									</Hide>
-								</GridItem>
-							)}
-
 							<GridItem area="headline">
 								<div css={maxWidth}>
 									{!footballMatchUrl && (
@@ -560,6 +531,34 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									<></>
 								)}
 							</GridItem>
+							{isMainMediaTest && (
+								<GridItem area="mainmedia">
+									<Hide from="desktop">
+										<MainMedia
+											format={format}
+											elements={
+												CAPIArticle.mainMediaElements
+											}
+											adTargeting={adTargeting}
+											host={host}
+											pageId={CAPIArticle.pageId}
+											webTitle={CAPIArticle.webTitle}
+											ajaxUrl={CAPIArticle.config.ajaxUrl}
+											switches={
+												CAPIArticle.config.switches
+											}
+											isSensitive={
+												CAPIArticle.config.isSensitive
+											}
+											isAdFreeUser={
+												CAPIArticle.isAdFreeUser
+											}
+											showOverlayCaption={true}
+											isMainMediaTest={isMainMediaTest}
+										/>
+									</Hide>
+								</GridItem>
+							)}
 						</HeadlineGrid>
 					</Section>
 				)}
