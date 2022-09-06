@@ -6,9 +6,11 @@ import type { ArticleFormat } from '@guardian/libs';
 import { from, headline, textSans } from '@guardian/source-foundations';
 import Img from 'components/ImgAlt';
 import { grid } from 'grid/grid';
+import type { Image } from 'image/image';
+import type { Sizes } from 'image/sizes';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
-import { getDefaultImgStyles, getDefaultSizes } from './BodyImage.defaults';
+import { getDefaultImgStyles } from './BodyImage.defaults';
 import type { BodyImageProps } from './BodyImage.defaults';
 
 const figureStyles = css`
@@ -108,6 +110,19 @@ const captionStyles = (format: ArticleFormat): SerializedStyles => css`
 	`}
 `;
 
+const imgSizes = (image: Image): Sizes => {
+	const ratio = image.width / image.height;
+
+	return {
+		mediaQueries: [
+			{ breakpoint: 'wide', size: `min(1020px, 100vh * ${ratio})` },
+			{ breakpoint: 'leftCol', size: `min(940px, 100vh * ${ratio})` },
+			{ breakpoint: 'phablet', size: `min(620px, 100vh * ${ratio})` },
+		],
+		default: `min(100vw, 100vh * ${ratio})`,
+	};
+};
+
 const GalleryBodyImage: FC<BodyImageProps> = ({
 	image,
 	format,
@@ -119,7 +134,7 @@ const GalleryBodyImage: FC<BodyImageProps> = ({
 		<div css={imageWrapperStyles(format)}>
 			<Img
 				image={image}
-				sizes={getDefaultSizes(image.role)}
+				sizes={imgSizes(image)}
 				className={getDefaultImgStyles(image.role, supportsDarkMode)}
 				format={format}
 				supportsDarkMode={supportsDarkMode}
