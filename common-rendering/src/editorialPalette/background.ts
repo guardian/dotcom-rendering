@@ -516,7 +516,10 @@ const supportBannerDark = (_format: ArticleFormat): Colour => {
 };
 
 const series = (format: ArticleFormat): Colour => {
-	if (format.display === ArticleDisplay.Immersive) {
+	if (
+		format.display === ArticleDisplay.Immersive ||
+		format.design === ArticleDesign.Gallery
+	) {
 		switch (format.theme) {
 			case ArticlePillar.Sport:
 				return sport[400];

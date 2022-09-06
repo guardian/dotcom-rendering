@@ -2,13 +2,13 @@
 
 import { createHash } from 'crypto';
 import { ArticleDesign } from '@guardian/libs';
-import { map, partition, withDefault } from '@guardian/types';
-import type { Result } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import type { ThirdPartyEmbeds } from 'capi';
 import type { Item } from 'item';
 import { compose, pipe } from 'lib';
+import { Result } from 'result';
 
 // ----- Types ----- //
 
@@ -55,7 +55,7 @@ const getElements = (item: Item): Array<Result<string, BodyElement>> =>
 		: item.body;
 
 const getValidElements = (item: Item): BodyElement[] =>
-	partition(getElements(item)).oks;
+	Result.partition(getElements(item)).oks;
 
 const interactiveAssets = compose(extractInteractiveAssets, getValidElements);
 

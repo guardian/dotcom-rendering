@@ -1,6 +1,5 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from '@emotion/react';
 import { css, jsx as styledH } from '@emotion/react';
 import {
 	AudioAtom,
@@ -16,24 +15,16 @@ import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Breakpoint } from '@guardian/source-foundations';
-import {
-	headline,
-	neutral,
-	remSpace,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { neutral, remSpace, until } from '@guardian/source-foundations';
 import {
 	andThen,
 	fromNullable,
-	fromUnsafe,
 	map,
 	none,
 	some,
-	toOption,
 	withDefault,
 } from '@guardian/types';
-import type { Option, Result } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import { ElementKind } from 'bodyElement';
 import type {
 	AudioAtom as AudioAtomElement,
@@ -59,6 +50,7 @@ import GalleryImage from 'components/editions/galleryImage';
 import EditionsPullquote from 'components/editions/pullquote';
 import Video from 'components/editions/video';
 import EmbedComponentWrapper from 'components/EmbedWrapper';
+import HeadingTwo from 'components/HeadingTwo';
 import HorizontalRule from 'components/HorizontalRule';
 import Interactive from 'components/Interactive';
 import InteractiveAtom, {
@@ -75,6 +67,7 @@ import RichLink from 'components/RichLink';
 import { isElement, pipe } from 'lib';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
+import { Result } from 'result';
 import { backgroundColor, darkModeCss } from 'styles';
 import {
 	themeFromString,
@@ -92,14 +85,9 @@ const transformHref = (href: string): string => {
 		return `https://www.theguardian.com/${href}`;
 	}
 
-	const url: Result<string, URL> = fromUnsafe(
-		() => new URL(href),
-		'invalid url',
-	);
-
-	return pipe(
-		toOption(url),
-		map((url) => {
+	return Result.fromUnsafe(() => new URL(href), 'invalid url')
+		.toOptional()
+		.map((url) => {
 			const path = url.pathname.split('/');
 			const isLatest =
 				url.hostname === 'www.theguardian.com' &&
@@ -110,9 +98,8 @@ const transformHref = (href: string): string => {
 			}
 
 			return href;
-		}),
-		withDefault(href),
-	);
+		})
+		.withDefault(href);
 };
 
 const getHref = (node: Node): Option<string> =>
@@ -137,22 +124,6 @@ const transform = (
 		return h(HorizontalRule, null, null);
 	}
 	return text;
-};
-
-const HeadingTwoStyles = (format: ArticleFormat): SerializedStyles => {
-	const font =
-		format.theme === ArticleSpecial.Labs
-			? textSans.large({ fontWeight: 'bold' })
-			: headline.xxsmall({ fontWeight: 'bold' });
-
-	return css`
-		${font}
-		margin: ${remSpace[4]} 0 4px 0;
-
-		& + p {
-			margin-top: 0;
-		}
-	`;
 };
 
 const TweetStyles = css`
@@ -286,14 +257,6 @@ const textElement =
 					},
 					children,
 				);
-			case 'H2':
-				return text.includes('* * *')
-					? h(HorizontalRule, null, null)
-					: styledH(
-							'h2',
-							{ css: HeadingTwoStyles(format), key },
-							children,
-					  );
 			case 'BLOCKQUOTE':
 				return isEditions
 					? h('blockquote', { key }, children)
@@ -315,7 +278,7 @@ const textElement =
 			case 'OL':
 				return h(OrderedList, { children });
 			case 'LI':
-				return h(ListItem, { format, children });
+				return h(ListItem, { children });
 			case 'MARK':
 				return styledH('mark', { key }, children);
 			case 'SUB':
@@ -347,7 +310,9 @@ const borderFromFormat = (format: ArticleFormat): string => {
 		text-decoration: none;
 	`;
 
-	return isBlog(format) ? styles : 'none';
+	return isBlog(format) || format.design === ArticleDesign.Gallery
+		? styles
+		: 'none';
 };
 
 const standfirstTextElement =
@@ -372,7 +337,7 @@ const standfirstTextElement =
 					usePillarColour: true,
 				});
 			case 'LI':
-				return h(ListItem, { format, children });
+				return h(ListItem, { children });
 			case 'A': {
 				const styles = css`
 					color: ${text.standfirstLink(format)};
@@ -394,11 +359,10 @@ const standfirstTextElement =
 	};
 
 const renderText = (
-	doc: DocumentFragment,
+	doc: Node,
 	format: ArticleFormat,
 	isEditions = false,
-): ReactNode[] =>
-	Array.from(doc.childNodes).map(textElement(format, isEditions));
+): ReactNode => textElement(format, isEditions)(doc, 0);
 
 const editionsStandfirstFilter = (node: Node): boolean =>
 	!['UL', 'LI', 'A'].includes(node.nodeName);
@@ -640,7 +604,12 @@ const render =
 		switch (element.kind) {
 			case ElementKind.Text:
 				return textRenderer(format, excludeStyles, element);
-
+			case ElementKind.HeadingTwo:
+				return h(HeadingTwo, {
+					format,
+					isEditions: false,
+					heading: element,
+				});
 			case ElementKind.Image:
 				return imageRenderer(format, element, key);
 
@@ -720,6 +689,13 @@ const renderEditions =
 		switch (element.kind) {
 			case ElementKind.Text:
 				return textRenderer(format, excludeStyles, element, true);
+
+			case ElementKind.HeadingTwo:
+				return h(HeadingTwo, {
+					format,
+					isEditions: true,
+					heading: element,
+				});
 
 			case ElementKind.Image:
 				return format.design === ArticleDesign.Gallery ||

@@ -1,6 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { fireEvent, render } from '@testing-library/react';
-import { decidePalette } from '../lib/decidePalette';
 import { useApi as useApi_ } from '../lib/useApi';
 import { responseWithOneTab, responseWithTwoTabs } from './MostViewed.mocks';
 import { MostViewedFooterData } from './MostViewedFooterData.importable';
@@ -25,11 +24,11 @@ describe('MostViewedFooterData', () => {
 		const { getByText, getAllByText, getByTestId } = render(
 			<MostViewedFooterData
 				sectionName="Section Name"
-				palette={decidePalette({
+				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
-				})}
+				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
 		);
@@ -61,11 +60,11 @@ describe('MostViewedFooterData', () => {
 		const { getByTestId, getByText } = render(
 			<MostViewedFooterData
 				sectionName="Section Name"
-				palette={decidePalette({
+				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
-				})}
+				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
 		);
@@ -88,24 +87,24 @@ describe('MostViewedFooterData', () => {
 		expect(getByTestId(secondHeading)).toHaveStyle(HIDDEN);
 	});
 
-	it('should not show the tab menu when there is only one group of tabs', async () => {
+	it('should still show the tab menu when there is only one group of tabs', async () => {
 		useApi.mockReturnValue({ data: responseWithOneTab });
 
 		const { queryByText } = render(
 			<MostViewedFooterData
 				sectionName="Section Name"
-				palette={decidePalette({
+				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
-				})}
+				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
 		);
 
 		expect(
 			queryByText(responseWithOneTab.tabs[0].heading),
-		).not.toBeInTheDocument();
+		).toBeInTheDocument();
 	});
 
 	it("should display the text 'Live' for live blogs", () => {
@@ -137,11 +136,11 @@ describe('MostViewedFooterData', () => {
 		const { getByText } = render(
 			<MostViewedFooterData
 				sectionName="Section Name"
-				palette={decidePalette({
+				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
-				})}
+				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
 		);
@@ -178,11 +177,11 @@ describe('MostViewedFooterData', () => {
 		const { queryByText } = render(
 			<MostViewedFooterData
 				sectionName="Section Name"
-				palette={decidePalette({
+				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
-				})}
+				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
 		);
@@ -196,11 +195,11 @@ describe('MostViewedFooterData', () => {
 		const { asFragment } = render(
 			<MostViewedFooterData
 				sectionName="Section Name"
-				palette={decidePalette({
+				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
 					theme: ArticlePillar.News,
-				})}
+				}}
 				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
 			/>,
 		);

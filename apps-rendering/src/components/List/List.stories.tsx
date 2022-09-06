@@ -13,7 +13,7 @@ const format = {
 	theme: ArticlePillar.News,
 };
 
-const listItem = <ListItem format={format}>A bullet point</ListItem>;
+const listItem = <ListItem>A bullet point</ListItem>;
 
 // ----- Stories ----- //
 

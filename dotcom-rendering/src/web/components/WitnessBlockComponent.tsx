@@ -126,7 +126,7 @@ const WitnessWrapper = ({
 
 type ImageProps = {
 	assets: WitnessAssetType[];
-	caption: string;
+	caption?: string;
 	title: string;
 	authorName: string;
 	dateCreated: string;
@@ -170,14 +170,16 @@ export const WitnessImageBlockComponent = ({
 						itemProp="name"
 						dangerouslySetInnerHTML={{ __html: title }}
 					/>
-					<div itemProp="description">
-						<p
-							css={css`
-								${body.medium()}
-							`}
-							dangerouslySetInnerHTML={{ __html: caption }}
-						/>
-					</div>
+					{!!caption && (
+						<div itemProp="description">
+							<p
+								css={css`
+									${body.medium()}
+								`}
+								dangerouslySetInnerHTML={{ __html: caption }}
+							/>
+						</div>
+					)}
 				</figcaption>
 			</>
 		</WitnessWrapper>

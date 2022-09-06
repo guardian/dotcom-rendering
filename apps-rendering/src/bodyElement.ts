@@ -7,15 +7,8 @@ import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { ArticleTheme } from '@guardian/libs';
-import type { Option, Result } from '@guardian/types';
-import {
-	err,
-	fromNullable,
-	map,
-	ok,
-	resultMap,
-	withDefault,
-} from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { fromNullable, map, withDefault } from '@guardian/types';
 import { parseAtom } from 'atoms';
 import { ElementKind } from 'bodyElementKind';
 import { formatDate } from 'date';
@@ -24,14 +17,28 @@ import type { Embed } from 'embed';
 import type { Image as ImageData } from 'image';
 import { parseImage } from 'image';
 import { compose, pipe } from 'lib';
+import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
+import { Result } from 'result';
 
 // ----- Types ----- //
 
 type Text = {
 	kind: ElementKind.Text;
-	doc: DocumentFragment;
+	doc: Node;
+};
+
+type HeadingTwo = {
+	kind: ElementKind.HeadingTwo;
+	doc: Node;
+	id: Optional<string>;
+};
+
+type HeadingThree = {
+	kind: ElementKind.HeadingThree;
+	doc: Node;
+	id: Optional<string>;
 };
 
 type Image = ImageData & {
@@ -119,6 +126,8 @@ interface NewsletterSignUp extends Omit<Newsletter, 'theme'> {
 
 type BodyElement =
 	| Text
+	| HeadingTwo
+	| HeadingThree
 	| Image
 	| {
 			kind: ElementKind.Pullquote;
@@ -180,49 +189,87 @@ const tweetContent = (
 	const blockquote = doc.querySelector('blockquote');
 
 	if (blockquote !== null) {
-		return ok(blockquote.childNodes);
+		return Result.ok(blockquote.childNodes);
 	}
 
-	return err(
+	return Result.err(
 		`There was no blockquote element in the tweet with id: ${tweetId}`,
 	);
 };
 
-const toEmbedElement: (
+const toEmbedElement = (
 	parsed: Result<string, Embed>,
-) => Result<string, BodyElement> = resultMap((embed) => ({
-	kind: ElementKind.Embed,
-	embed,
-}));
+): Result<string, BodyElement> =>
+	parsed.map((embed) => ({
+		kind: ElementKind.Embed,
+		embed,
+	}));
+
+const slugify = (text: string): string => {
+	return text
+		.normalize('NFKD') // The normalize() using NFKD method returns the Unicode Normalization Form of a given string.
+		.toLowerCase() // Convert the string to lowercase letters
+		.trim() // Remove whitespace from both sides of a string
+		.replace(/\s+/g, '-') // Replace spaces with "-"
+		.replace(/[^\w-]+/g, '') // Remove all non-word chars
+		.replace(/--+/g, '-'); // Replace multiple "-" with single "-"
+};
+
+const flattenTextElement = (doc: Node): BodyElement[] => {
+	const childNodes = Array.from(doc.childNodes);
+	return childNodes.map((node) => {
+		switch (node.nodeName) {
+			case 'H2':
+				return {
+					kind: ElementKind.HeadingTwo,
+					doc: node,
+					id: Optional.fromNullable(node.textContent).flatMap(
+						(text) => {
+							const slug = slugify(text);
+							return slug === ''
+								? Optional.none()
+								: Optional.some(slug);
+						},
+					),
+				};
+			default:
+				return {
+					kind: ElementKind.Text,
+					doc: node,
+				};
+		}
+	});
+};
 
 const parse =
 	(context: Context, atoms?: Atoms, campaigns?: Campaign[]) =>
-	(element: BlockElement): Result<string, BodyElement> => {
+	(
+		element: BlockElement,
+	): Result<string, BodyElement> | Array<Result<string, BodyElement>> => {
 		switch (element.type) {
 			case ElementType.TEXT: {
 				const html = element.textTypeData?.html;
 
 				if (!html) {
-					return err('No html field on textTypeData');
+					return Result.err('No html field on textTypeData');
 				}
 
-				return ok({
-					kind: ElementKind.Text,
-					doc: context.docParser(html),
-				});
+				const doc = context.docParser(html);
+
+				return flattenTextElement(doc).map((elem) => Result.ok(elem));
 			}
 
 			case ElementType.IMAGE:
 				return pipe(
 					parseImage(context)(element),
 					map<ImageData, Result<string, Image>>((image) =>
-						ok({
+						Result.ok({
 							kind: ElementKind.Image,
 							...image,
 						}),
 					),
 					withDefault<Result<string, Image>>(
-						err("I couldn't find a master asset"),
+						Result.err("I couldn't find a master asset"),
 					),
 				);
 
@@ -231,10 +278,10 @@ const parse =
 					element.pullquoteTypeData ?? {};
 
 				if (!quote) {
-					return err('No quote field on pullquoteTypeData');
+					return Result.err('No quote field on pullquoteTypeData');
 				}
 
-				return ok({
+				return Result.ok({
 					kind: ElementKind.Pullquote,
 					quote,
 					attribution: fromNullable(attribution),
@@ -245,10 +292,12 @@ const parse =
 				const { iframeUrl, alt } = element.interactiveTypeData ?? {};
 
 				if (!iframeUrl) {
-					return err('No iframeUrl field on interactiveTypeData');
+					return Result.err(
+						'No iframeUrl field on interactiveTypeData',
+					);
 				}
 
-				return ok({
+				return Result.ok({
 					kind: ElementKind.Interactive,
 					url: iframeUrl,
 					alt: fromNullable(alt),
@@ -259,29 +308,30 @@ const parse =
 				const { url, linkText } = element.richLinkTypeData ?? {};
 
 				if (!url) {
-					return err('No "url" field on richLinkTypeData');
+					return Result.err('No "url" field on richLinkTypeData');
 				} else if (!linkText) {
-					return err('No "linkText" field on richLinkTypeData');
+					return Result.err(
+						'No "linkText" field on richLinkTypeData',
+					);
 				}
 
-				return ok({ kind: ElementKind.RichLink, url, linkText });
+				return Result.ok({ kind: ElementKind.RichLink, url, linkText });
 			}
 
 			case ElementType.TWEET: {
 				const { id, html: h } = element.tweetTypeData ?? {};
 
 				if (!id) {
-					return err('No "id" field on tweetTypeData');
+					return Result.err('No "id" field on tweetTypeData');
 				} else if (!h) {
-					return err('No "html" field on tweetTypeData');
+					return Result.err('No "html" field on tweetTypeData');
 				}
 
-				return pipe(
-					tweetContent(id, context.docParser(h)),
-					resultMap((content) => ({
+				return tweetContent(id, context.docParser(h)).map(
+					(content) => ({
 						kind: ElementKind.Tweet,
 						content,
-					})),
+					}),
 				);
 			}
 
@@ -289,7 +339,7 @@ const parse =
 				const { html: embedHtml } = element.embedTypeData ?? {};
 
 				if (!embedHtml) {
-					return err('No html field on embedTypeData');
+					return Result.err('No html field on embedTypeData');
 				}
 
 				const id = context
@@ -299,7 +349,7 @@ const parse =
 
 				if (id) {
 					if (!campaigns) {
-						return err('No campaign data for this callout');
+						return Result.err('No campaign data for this callout');
 					}
 
 					const campaign = campaigns.find(
@@ -307,13 +357,13 @@ const parse =
 					);
 
 					if (!campaign) {
-						return err('No matching campaign');
+						return Result.err('No matching campaign');
 					}
 
 					const description = context.docParser(
 						campaign.fields.description ?? '',
 					);
-					return ok({
+					return Result.ok({
 						kind: ElementKind.Callout,
 						id,
 						campaign,
@@ -337,7 +387,7 @@ const parse =
 				} = element.membershipTypeData ?? {};
 
 				if (!linkText || !url) {
-					return err(
+					return Result.err(
 						'No linkText or originalUrl field on membershipTypeData',
 					);
 				}
@@ -347,7 +397,7 @@ const parse =
 						? formatDate(new Date(start.iso8601))
 						: undefined;
 
-				return ok({
+				return Result.ok({
 					kind: ElementKind.LiveEvent,
 					linkText,
 					url,
@@ -371,14 +421,14 @@ const parse =
 
 			case ElementType.CONTENTATOM: {
 				if (!atoms) {
-					return err('No atom data returned by capi');
+					return Result.err('No atom data returned by capi');
 				}
 
 				return parseAtom(element, atoms, context.docParser);
 			}
 
 			default:
-				return err(
+				return Result.err(
 					`I'm afraid I don't understand the element I was given: ${element.type}`,
 				);
 		}
@@ -388,9 +438,9 @@ const parseElements =
 	(context: Context, atoms?: Atoms, campaigns?: Campaign[]) =>
 	(elements: Elements): Array<Result<string, BodyElement>> => {
 		if (!elements) {
-			return [err('No body elements available')];
+			return [Result.err('No body elements available')];
 		}
-		return elements.map(parse(context, atoms, campaigns));
+		return elements.flatMap(parse(context, atoms, campaigns));
 	};
 
 // ----- Exports ----- //
@@ -398,6 +448,8 @@ const parseElements =
 export {
 	ElementKind,
 	BodyElement,
+	HeadingTwo,
+	HeadingThree,
 	Body,
 	Image,
 	Text,
@@ -411,4 +463,5 @@ export {
 	AudioAtom,
 	parseElements,
 	NewsletterSignUp,
+	flattenTextElement,
 };
