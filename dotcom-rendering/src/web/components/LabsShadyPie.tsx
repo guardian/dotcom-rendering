@@ -75,13 +75,13 @@ export const LabsShadyPie = ({
 }) => {
 	return (
 		<div css={shadyBackground}>
+			<div css={shadyBanner}>
+				<p>Paid content</p>
+			</div>
 			<a css={shadyStyle} href={articleLink} tabIndex={-1}>
 				<img src={articleImageLink} width="300" alt="" />
 				<p css={shadyTitle}>{articleTitle}</p>
 			</a>
-			<div css={shadyBanner}>
-				<p>Paid content</p>
-			</div>
 			<div css={parentContainer}>
 				<div css={labsLogoContainer}>
 					<Logo />
