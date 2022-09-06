@@ -1,5 +1,6 @@
 import { ClassNames, css as emoCss } from '@emotion/react';
-import { border, from, space } from '@guardian/source-foundations';
+import { ArticleDesign } from '@guardian/libs';
+import { border, from, neutral, space } from '@guardian/source-foundations';
 // @ts-expect-error
 import { jsx as _jsx } from 'react/jsx-runtime';
 import { center } from '../lib/center';
@@ -29,7 +30,25 @@ const topBorderStyles = (colour: string) => emoCss`
 	border-top: 1px solid ${colour};
 `;
 
-const setBackgroundColour = (colour: string) => emoCss`
+const setBackgroundColour = (
+	colour: string,
+	format?: ArticleFormat,
+	isMainMediaTest?: boolean,
+) => {
+	if (format?.design === ArticleDesign.LiveBlog && isMainMediaTest) {
+		return emoCss`
+		background-color: ${neutral[97]};
+		${from.desktop} {
+			background-color: ${colour};
+		}
+	`;
+	}
+	return emoCss`
+	background-color: ${colour};
+`;
+};
+
+const setInnerBackgroundColour = (colour: string) => emoCss`
 	background-color: ${colour};
 `;
 
@@ -57,6 +76,8 @@ type Props = {
 	ophanComponentName?: string;
 	ophanComponentLink?: string;
 	containerName?: string;
+	format?: ArticleFormat;
+	isMainMediaTest?: boolean;
 };
 
 /**
@@ -78,6 +99,8 @@ export const ElementContainer = ({
 	ophanComponentName,
 	ophanComponentLink,
 	containerName,
+	format,
+	isMainMediaTest,
 }: Props) => (
 	<ClassNames>
 		{({ css }) => {
@@ -89,7 +112,7 @@ export const ElementContainer = ({
 						showSideBorders && sideBorderStyles(borderColour),
 						showTopBorder && topBorderStyles(borderColour),
 						innerBackgroundColour &&
-							setBackgroundColour(innerBackgroundColour),
+							setInnerBackgroundColour(innerBackgroundColour),
 						padSides && sidePadding,
 						padBottom && bottomPadding,
 					]}
@@ -98,7 +121,8 @@ export const ElementContainer = ({
 				</div>
 			);
 			const style = css`
-				${backgroundColour && setBackgroundColour(backgroundColour)};
+				${backgroundColour &&
+				setBackgroundColour(backgroundColour, format, isMainMediaTest)};
 			`;
 			// Create a react element from the tagName passed in OR
 			// default to <div>

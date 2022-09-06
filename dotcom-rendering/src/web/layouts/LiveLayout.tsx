@@ -483,7 +483,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						fullWidth={true}
 						showTopBorder={false}
 						backgroundColour={palette.background.header}
+						innerBackgroundColour={palette.background.header}
 						borderColour={palette.border.headline}
+						format={format}
+						isMainMediaTest={isMainMediaTest}
 					>
 						<HeadlineGrid>
 							<GridItem area="title">
@@ -567,7 +570,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					fullWidth={true}
 					showTopBorder={false}
 					backgroundColour={palette.background.standfirst}
+					innerBackgroundColour={palette.background.standfirst}
 					borderColour={palette.border.standfirst}
+					format={format}
+					isMainMediaTest={isMainMediaTest}
 				>
 					<StandFirstGrid>
 						<GridItem area="standfirst">

@@ -103,6 +103,11 @@ type Props = {
 	 * Legacy className prop only used for supporting old interactives
 	 */
 	className?: string;
+	/**
+	 *
+	 * Temporary A/B test
+	 */
+	isMainMediaTest?: boolean;
 };
 
 const containerStyles = css`
@@ -224,6 +229,7 @@ export const Section = ({
 	element = 'section',
 	shouldCenter,
 	className,
+	isMainMediaTest,
 }: Props) => {
 	const overrides =
 		containerPalette && decideContainerOverrides(containerPalette);
@@ -247,6 +253,8 @@ export const Section = ({
 				className={className}
 				element={element}
 				shouldCenter={shouldCenter}
+				format={format}
+				isMainMediaTest={isMainMediaTest}
 			>
 				{children}
 			</ElementContainer>
@@ -268,6 +276,8 @@ export const Section = ({
 			ophanComponentName={ophanComponentName}
 			containerName={containerName}
 			innerBackgroundColour={innerBackgroundColour}
+			format={format}
+			isMainMediaTest={isMainMediaTest}
 		>
 			<Flex>
 				<LeftColumn
