@@ -184,7 +184,7 @@ const videoIconStyle = css`
 
 const captionLink = (palette: Palette) => css`
 	a {
-		color: white;
+		color: ${palette.text.captionLink};
 		text-decoration: none;
 	}
 	a:hover {
