@@ -83,6 +83,7 @@ export const Card75_Card25 = ({
 				imagePosition="right"
 				imageSize="large"
 				imagePositionOnMobile="top"
+				headlineSize="large"
 			/>
 		</LI>
 		<LI
@@ -136,6 +137,7 @@ export const Card25_Card75 = ({
 				showAge={showAge}
 				trailText={cards[1].trailText}
 				supportingContent={cards[1].supportingContent}
+				headlineSize="large"
 				imagePosition="left"
 				imageSize="large"
 				imagePositionOnMobile="top"
