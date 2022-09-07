@@ -485,6 +485,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						showTopBorder={false}
 						backgroundColour={palette.background.header}
 						innerBackgroundColour={palette.background.header}
+						showSideBorders={isMainMediaTest ? false : true}
 						borderColour={palette.border.headline}
 						format={format}
 						isMainMediaTest={isMainMediaTest}
@@ -571,6 +572,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					showTopBorder={false}
 					backgroundColour={palette.background.standfirst}
 					innerBackgroundColour={palette.background.standfirst}
+					showSideBorders={isMainMediaTest ? false : true}
 					borderColour={palette.border.standfirst}
 					format={format}
 					isMainMediaTest={isMainMediaTest}
