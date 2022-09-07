@@ -626,7 +626,6 @@ const standfirst = ({ design }: ArticleFormat): Colour => {
 		case ArticleDesign.LiveBlog:
 			return neutral[100];
 		case ArticleDesign.Gallery:
-			return neutral[100];
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			return neutral[86];
@@ -669,6 +668,7 @@ const standfirstLink = (format: ArticleFormat): Colour => {
 					return specialReport[300];
 			}
 		case ArticleDesign.Gallery:
+			return neutral[86];
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			switch (format.theme) {
@@ -812,6 +812,8 @@ const seriesTitle = (format: ArticleFormat): Colour => {
 	}
 
 	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return neutral[100];
 		case ArticleDesign.DeadBlog:
 			switch (format.theme) {
 				case ArticlePillar.News:
@@ -1043,10 +1045,18 @@ const signUpFormButtonDark = (_format: ArticleFormat): string => {
 };
 
 const gallery = (_format: ArticleFormat): string => {
-	return neutral[100];
+	return neutral[86];
 };
 
 const galleryDark = (_format: ArticleFormat): string => {
+	return neutral[86];
+};
+
+const tableOfContentsTitle = (_format: ArticleFormat): string => {
+	return neutral[46];
+};
+
+const tableOfContentsTitleDark = (_format: ArticleFormat): string => {
 	return neutral[86];
 };
 
@@ -1119,6 +1129,8 @@ const text = {
 	signUpFormButtonDark,
 	gallery,
 	galleryDark,
+	tableOfContentsTitle,
+	tableOfContentsTitleDark,
 };
 
 // ----- Exports ----- //

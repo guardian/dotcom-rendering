@@ -30,8 +30,12 @@ const figureStyles = css`
 `;
 
 const imageWrapperStyles = (format: ArticleFormat): SerializedStyles => css`
-	${grid.column.centre}
+	${grid.column.all}
 	grid-row: 1;
+
+	${from.tablet} {
+		${grid.column.centre}
+	}
 
 	${from.leftCol} {
 		${grid.between('centre-column-start', 'right-column-end')}
@@ -77,11 +81,14 @@ const captionStyles = (format: ArticleFormat): SerializedStyles => css`
 	& {
 		color: ${text.gallery(format)};
 	}
-	> span {
+
+	span {
 		${textSans.xsmall({ lineHeight: 'regular' })}
 	}
-	> h2 {
-		${headline.xxxsmall()}
+
+	h2,
+	h2 > span {
+		${headline.xxxsmall({ lineHeight: 'regular' })}
 	}
 
 	${from.leftCol} {

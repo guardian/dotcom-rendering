@@ -32,6 +32,7 @@ import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeadlineByline } from '../components/HeadlineByline';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
@@ -482,17 +483,19 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													margin-top: ${space[4]}px;
 												`}
 											>
-												<AdSlot
-													position="right"
-													display={format.display}
-													shouldHideReaderRevenue={
-														CAPIArticle.shouldHideReaderRevenue
-													}
-													isPaidContent={
-														CAPIArticle.pageType
-															.isPaidContent
-													}
-												/>
+												{!CAPIArticle.shouldHideAds && (
+													<AdSlot
+														position="right"
+														display={format.display}
+														shouldHideReaderRevenue={
+															CAPIArticle.shouldHideReaderRevenue
+														}
+														isPaidContent={
+															CAPIArticle.pageType
+																.isPaidContent
+														}
+													/>
+												)}
 											</div>
 										)}
 									</>
@@ -597,15 +600,23 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 				{!isPaidContent && (
 					<Section
-						fullWidth={true}
-						data-print-layout="hide"
+						title="Most viewed"
+						padContent={false}
+						verticalMargins={false}
 						element="aside"
+						data-print-layout="hide"
+						data-link-name="most-popular"
+						data-component="most-popular"
 					>
-						<MostViewedFooterLayout
-							format={format}
-							sectionName={CAPIArticle.sectionName}
-							ajaxUrl={CAPIArticle.config.ajaxUrl}
-						/>
+						<MostViewedFooterLayout>
+							<Island clientOnly={true} deferUntil="visible">
+								<MostViewedFooterData
+									sectionName={CAPIArticle.sectionName}
+									format={format}
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
+								/>
+							</Island>
+						</MostViewedFooterLayout>
 					</Section>
 				)}
 
