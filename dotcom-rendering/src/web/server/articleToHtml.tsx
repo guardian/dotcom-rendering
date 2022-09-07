@@ -207,16 +207,20 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 		),
 	);
 
-	const hasAmpInteractiveTag = CAPIArticle.tags.some(
-		(tag) => tag.id === 'tracking/platformfunctional/ampinteractive',
-	);
+	const getAmpLink = (tags: TagType[]) => {
+		if (CAPIArticle.format.design === 'InteractiveDesign') {
+			const hasAmpInteractiveTag = tags.some(
+				(tag) =>
+					tag.id === 'tracking/platformfunctional/ampinteractive',
+			);
+			if (!hasAmpInteractiveTag) return undefined;
+		}
+
+		return `https://amp.theguardian.com/${CAPIArticle.pageId}`;
+	};
 
 	// Only include AMP link for interactives which have the 'ampinteractive' tag
-	const ampLink =
-		CAPIArticle.format.design !== 'InteractiveDesign' ||
-		hasAmpInteractiveTag
-			? `https://amp.theguardian.com/${CAPIArticle.pageId}`
-			: undefined;
+	const ampLink = getAmpLink(CAPIArticle.tags);
 
 	const { openGraphData } = CAPIArticle;
 	const { twitterData } = CAPIArticle;

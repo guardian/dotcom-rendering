@@ -150,7 +150,7 @@ Object {
         "ImageId": Object {
           "Ref": "AMIMobileappsrendering",
         },
-        "InstanceType": "t4g.micro",
+        "InstanceType": "t4g.small",
         "MetadataOptions": Object {
           "HttpTokens": "required",
         },
@@ -1062,7 +1062,7 @@ Object {
         "ImageId": Object {
           "Ref": "AMIMobileappsrendering",
         },
-        "InstanceType": "t4g.micro",
+        "InstanceType": "t4g.small",
         "MetadataOptions": Object {
           "HttpTokens": "required",
         },

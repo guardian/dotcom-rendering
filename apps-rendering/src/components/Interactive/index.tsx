@@ -23,9 +23,18 @@ const styles = css`
     `}
 `;
 
+const iframeStyles = css`
+	width: 100%;
+`;
+
 const Interactive: FC<Props> = ({ url, title }) => (
 	<figure css={styles} className="interactive">
-		<iframe src={url} height="500" title={withDefault('')(title)} />
+		<iframe
+			css={iframeStyles}
+			src={url}
+			height="500"
+			title={withDefault('')(title)}
+		/>
 	</figure>
 );
 

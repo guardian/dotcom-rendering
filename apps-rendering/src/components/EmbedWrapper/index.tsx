@@ -1,18 +1,8 @@
 // ----- Imports ----- //
 
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
-import type { Option, Result } from '@guardian/types';
-import {
-	err,
-	fromNullable,
-	map,
-	none,
-	ok,
-	resultAndThen,
-	resultMap,
-	some,
-	withDefault,
-} from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { fromNullable, map, none, some, withDefault } from '@guardian/types';
 import ClickToView from 'components/ClickToView';
 import EmbedComponent from 'components/Embed';
 import { EmbedKind } from 'embed';
@@ -29,6 +19,7 @@ import type {
 import { pipe, resultFromNullable, resultMap2, resultMap3 } from 'lib';
 import { createElement as h } from 'react';
 import type { FC, ReactElement } from 'react';
+import { Result } from 'result';
 
 // ----- Component ----- //
 
@@ -159,47 +150,45 @@ const divElementPropsToEmbedComponentProps = (
 	const requiredNumberParam = (
 		container: Record<string, string | undefined>,
 		parameterName: string,
-	): Result<string, number> => {
-		return pipe(
-			requiredStringParam(container, parameterName),
-			resultAndThen((value: string) => {
+	): Result<string, number> =>
+		requiredStringParam(container, parameterName).flatMap(
+			(value: string) => {
 				const parsedValue = Number.parseInt(value);
 
 				if (Number.isNaN(parsedValue)) {
-					return err(`${value} is not a integer`);
+					return Result.err(`${value} is not a integer`);
 				}
 
-				return ok(parsedValue);
-			}),
+				return Result.ok(parsedValue);
+			},
 		);
-	};
 
 	const requiredBooleanParam = (
 		container: Record<string, string | undefined>,
 		parameterName: string,
-	): Result<string, boolean> => {
-		return pipe(
-			requiredStringParam(container, parameterName),
-			resultAndThen((value: string) => {
+	): Result<string, boolean> =>
+		requiredStringParam(container, parameterName).flatMap(
+			(value: string) => {
 				if (value === 'true') {
-					return ok(true);
+					return Result.ok(true);
 				}
 				if (value === 'false') {
-					return ok(false);
+					return Result.ok(false);
 				}
 
-				return err(`${value} is not a valid boolean value`);
-			}),
+				return Result.err(`${value} is not a valid boolean value`);
+			},
 		);
-	};
 
 	const getDataAttributesFromElement = (
 		container: Element,
 	): Result<string, Record<string, string | undefined>> => {
 		if (container instanceof HTMLElement) {
-			return ok({ ...container.dataset });
+			return Result.ok({ ...container.dataset });
 		} else {
-			return err('Embed wrapper Element does not have a dataset field');
+			return Result.err(
+				'Embed wrapper Element does not have a dataset field',
+			);
 		}
 	};
 
@@ -207,10 +196,10 @@ const divElementPropsToEmbedComponentProps = (
 		kindValue: string | undefined,
 	): Result<string, EmbedKind> => {
 		if (kindValue && kindValue in EmbedKind) {
-			return ok(kindValue as EmbedKind);
+			return Result.ok(kindValue as EmbedKind);
 		}
 
-		return err(`'${kindValue ?? 'undefined'}' is not an EmbedKind`);
+		return Result.err(`'${kindValue ?? 'undefined'}' is not an EmbedKind`);
 	};
 
 	type ElementProps = Record<string, string | undefined>;
@@ -233,10 +222,9 @@ const divElementPropsToEmbedComponentProps = (
 		);
 	const dataAttributesToEmbed = (
 		elementProps: Record<string, string | undefined>,
-	): Result<string, Embed> => {
-		return pipe(
-			parseEmbedKind(elementProps['kind']),
-			resultAndThen((embedKind: EmbedKind): Result<string, Embed> => {
+	): Result<string, Embed> =>
+		parseEmbedKind(elementProps['kind']).flatMap(
+			(embedKind: EmbedKind): Result<string, Embed> => {
 				switch (embedKind) {
 					case EmbedKind.Spotify:
 						return resultMap3(
@@ -275,7 +263,7 @@ const divElementPropsToEmbedComponentProps = (
 							requiredNumberParam(elementProps, 'width'),
 						)(requiredNumberParam(elementProps, 'height'));
 					case EmbedKind.Instagram: {
-						return resultMap<string, Instagram>(
+						return requiredStringParam(elementProps, 'id').map(
 							(id: string): Instagram => ({
 								kind: EmbedKind.Instagram,
 								id,
@@ -284,34 +272,26 @@ const divElementPropsToEmbedComponentProps = (
 									elementProps['tracking'],
 								),
 							}),
-						)(requiredStringParam(elementProps, 'id'));
+						);
 					}
 					case EmbedKind.Generic: {
-						return pipe(
-							elementProps,
-							parseGenericFields,
-							resultMap(
-								(genericFields: GenericFields): Generic => ({
-									kind: EmbedKind.Generic,
-									...genericFields,
-								}),
-							),
+						return parseGenericFields(elementProps).map(
+							(genericFields: GenericFields): Generic => ({
+								kind: EmbedKind.Generic,
+								...genericFields,
+							}),
 						);
 					}
 					case EmbedKind.TikTok: {
-						return pipe(
-							elementProps,
-							parseGenericFields,
-							resultMap(
-								(genericFields: GenericFields): TikTok => ({
-									kind: EmbedKind.TikTok,
-									...genericFields,
-								}),
-							),
+						return parseGenericFields(elementProps).map(
+							(genericFields: GenericFields): TikTok => ({
+								kind: EmbedKind.TikTok,
+								...genericFields,
+							}),
 						);
 					}
 					case EmbedKind.EmailSignup: {
-						return resultMap<string, EmailSignup>(
+						return requiredStringParam(elementProps, 'src').map(
 							(src: string): EmailSignup => ({
 								kind: EmbedKind.EmailSignup,
 								src,
@@ -325,37 +305,31 @@ const divElementPropsToEmbedComponentProps = (
 									elementProps['sourceDomain'],
 								),
 							}),
-						)(requiredStringParam(elementProps, 'src'));
+						);
 					}
 				}
-			}),
+			},
 		);
-	};
 
-	return pipe(
-		getDataAttributesFromElement(container),
-		resultAndThen((dataAttributes) => {
-			return resultMap2((editions: boolean, embed: Embed) => {
-				const sourceDetails = getSourceDetailsForEmbed(embed);
-				return { editions, embed, sourceDetails };
-			})(requiredBooleanParam(dataAttributes, 'editions'))(
-				dataAttributesToEmbed(dataAttributes),
-			);
-		}),
+	return getDataAttributesFromElement(container).flatMap((dataAttributes) =>
+		resultMap2((editions: boolean, embed: Embed) => {
+			const sourceDetails = getSourceDetailsForEmbed(embed);
+			return { editions, embed, sourceDetails };
+		})(requiredBooleanParam(dataAttributes, 'editions'))(
+			dataAttributesToEmbed(dataAttributes),
+		),
 	);
 };
 
 const createEmbedComponentFromProps = (
 	container: Element,
-): Result<string, ReactElement> => {
-	return resultAndThen(
-		(embedComponentProps: EmbedComponentInClickToViewProps) => {
-			return resultFromNullable(
+): Result<string, ReactElement> =>
+	divElementPropsToEmbedComponentProps(container).flatMap(
+		(embedComponentProps: EmbedComponentInClickToViewProps) =>
+			resultFromNullable(
 				`I can't construct a Component for embed of type ${embedComponentProps.embed.kind}`,
-			)(h(EmbedComponentInClickToView, embedComponentProps));
-		},
-	)(divElementPropsToEmbedComponentProps(container));
-};
+			)(h(EmbedComponentInClickToView, embedComponentProps)),
+	);
 
 type SourceDetails = { source: Option<string>; sourceDomain: Option<string> };
 

@@ -329,4 +329,85 @@ describe('YouTube Atom', function () {
 		// Video is playing, overlay is gone
 		cy.get(overlaySelector).should('not.exist');
 	});
+
+	it('video is sticky when the user plays a video then scrolls the video out of the viewport', function () {
+		cy.visit(
+			'/Article?url=https://www.theguardian.com/world/live/2022/mar/28/russia-ukraine-war-latest-news-zelenskiy-putin-live-updates?dcr=true',
+		);
+		cmpIframe().contains("It's your choice");
+		cmpIframe().find("[title='Manage my cookies']").click();
+		privacySettingsIframe().contains('Privacy settings');
+		privacySettingsIframe()
+			.find("[title='Accept all']", { timeout: 12000 })
+			.click();
+
+		// Wait for hydration
+		cy.get('[data-component=youtube-atom]')
+			.should('have.length', 3)
+			.each((item) => {
+				cy.wrap(item)
+					.parent()
+					.should('have.attr', 'data-gu-ready', 'true');
+			});
+
+		const mediaDiv = 'div[data-gu-name="media"]';
+		const overlaySelectorforMultipleVideos = `[data-cy^="youtube-overlay-qkC9z-dSAOE"]`;
+		const stickySelector = '[data-cy^="youtube-sticky-qkC9z-dSAOE"]';
+		const stickyCloseSelector =
+			'[data-cy^="youtube-sticky-close-qkC9z-dSAOE"]';
+
+		/**
+		 * Main media video
+		 */
+
+		// Scroll to main media video
+		cy.get(mediaDiv).scrollIntoView();
+
+		// Play main media video
+		cy.get(mediaDiv).within(() => {
+			cy.get(overlaySelectorforMultipleVideos).click();
+		});
+
+		// Scroll past the main media video to the third block
+		cy.get('.block')
+			.eq(2)
+			.scrollIntoView({ duration: 1000, timeout: 10000 });
+
+		// Main media video should now be sticky
+		cy.get(mediaDiv).within(() => {
+			cy.get(stickySelector).should(
+				'have.attr',
+				'data-is-sticky',
+				'true',
+			);
+		});
+
+		// Scroll to main media video
+		cy.get(mediaDiv).scrollIntoView({ duration: 1000, timeout: 10000 });
+
+		// Main media video should NOT be sticky
+		// Attributes set with a value of 'false' are removed from the DOM
+		cy.get(mediaDiv).within(() => {
+			cy.get(stickySelector).should('not.have.attr', 'data-is-sticky');
+		});
+
+		// Scroll past the main media video to the third block
+		cy.get('.block')
+			.eq(2)
+			.scrollIntoView({ duration: 1000, timeout: 10000 });
+
+		cy.get(mediaDiv).within(() => {
+			// video is sticky again
+			cy.get(stickySelector).should(
+				'have.attr',
+				'data-is-sticky',
+				'true',
+			);
+			// close the video
+			// TODO find a way to hover and make the close button visible rather than forcing
+			cy.get(stickyCloseSelector).click({ force: true });
+			// video is NOT sticky
+			cy.get(stickySelector).should('not.have.attr', 'data-is-sticky');
+		});
+	});
 });

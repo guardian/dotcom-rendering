@@ -1,8 +1,7 @@
 // ----- Imports ----- //
 
-import type { Result } from '@guardian/types';
-import { err, ok } from '@guardian/types';
 import { errorToString } from 'lib';
+import { Result } from 'result';
 
 // ----- Functions ----- //
 
@@ -15,10 +14,10 @@ const parse =
 				.childNodes;
 
 			Array.from(docNodes).forEach((node) => frag.appendChild(node));
-			return ok(frag);
+			return Result.ok(frag);
 		} catch (e) {
 			const errString = errorToString(e, 'unknown reason');
-			return err(
+			return Result.err(
 				`I wasn't able to parse the string into a DocumentFragment because: ${errString}`,
 			);
 		}
