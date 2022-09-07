@@ -300,11 +300,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	 */
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
-	const isMainMediaTest = true;
-
-	// const isMainMediaTest =
-	// 	CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant ===
-	// 	'variant';
+	const isMainMediaTest =
+		CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant ===
+		'variant';
 
 	return (
 		<>

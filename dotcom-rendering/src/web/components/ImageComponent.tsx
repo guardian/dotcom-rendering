@@ -192,6 +192,7 @@ const CaptionToggle = () => (
 				bottom: 6px;
 				border: none;
 				cursor: pointer;
+
 				svg {
 					top: 0;
 					bottom: 0;
@@ -382,7 +383,12 @@ export const ImageComponent = ({
 					// the image which, when clicked, toggles the caption as an overlay
 					<Hide
 						when="above"
-						breakpoint={isMainMediaTest ? 'desktop' : 'tablet'}
+						breakpoint={
+							format.design === ArticleDesign.LiveBlog &&
+							isMainMediaTest
+								? 'desktop'
+								: 'tablet'
+						}
 					>
 						<Row>
 							<div
@@ -428,7 +434,12 @@ export const ImageComponent = ({
 			{isMainMedia ? (
 				<Hide
 					when="below"
-					breakpoint={isMainMediaTest ? 'desktop' : 'tablet'}
+					breakpoint={
+						format.design === ArticleDesign.LiveBlog &&
+						isMainMediaTest
+							? 'desktop'
+							: 'tablet'
+					}
 				>
 					<Caption
 						captionText={element.data.caption || ''}

@@ -294,3 +294,5 @@ export const WithPosterAndOverlayImage = () => {
 		</Wrapper>
 	);
 };
+
+WithPosterAndOverlayImage.story = { name: 'with poster and overlay image' };
