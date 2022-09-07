@@ -34,6 +34,7 @@ export const Card50_Card50 = ({
 				containerPalette={containerPalette}
 				showAge={showAge}
 				trailText={cards[0].trailText}
+				supportingContent={cards[0].supportingContent}
 				imagePositionOnMobile="top"
 			/>
 		</LI>
@@ -48,6 +49,7 @@ export const Card50_Card50 = ({
 				containerPalette={containerPalette}
 				showAge={showAge}
 				trailText={cards[1].trailText}
+				supportingContent={cards[1].supportingContent}
 				imagePositionOnMobile="top"
 			/>
 		</LI>
@@ -168,6 +170,7 @@ export const Card100PictureTop = ({
 					imageUrl={cards[0].image}
 					imagePosition={'top'}
 					imagePositionOnMobile={'top'}
+					supportingContent={cards[0].supportingContent}
 				/>
 			</LI>
 		</UL>
@@ -204,6 +207,7 @@ export const Card100PictureRight = ({
 					imagePosition={'right'}
 					imagePositionOnMobile={'top'}
 					trailText={cards[0].trailText}
+					supportingContent={cards[0].supportingContent}
 				/>
 			</LI>
 		</UL>
