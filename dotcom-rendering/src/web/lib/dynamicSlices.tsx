@@ -136,7 +136,7 @@ export const Card25_Card75 = ({
 				showAge={showAge}
 				trailText={cards[1].trailText}
 				supportingContent={cards[1].supportingContent}
-				imagePosition="right"
+				imagePosition="left"
 				imageSize="large"
 				imagePositionOnMobile="top"
 			/>
