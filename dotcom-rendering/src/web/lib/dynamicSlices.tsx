@@ -36,6 +36,7 @@ export const Card50_Card50 = ({
 				trailText={cards[0].trailText}
 				supportingContent={cards[0].supportingContent}
 				imagePositionOnMobile="top"
+				headlineSize="large"
 			/>
 		</LI>
 		<LI
@@ -51,6 +52,7 @@ export const Card50_Card50 = ({
 				trailText={cards[1].trailText}
 				supportingContent={cards[1].supportingContent}
 				imagePositionOnMobile="top"
+				headlineSize="large"
 			/>
 		</LI>
 	</UL>
