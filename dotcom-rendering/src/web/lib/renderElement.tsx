@@ -769,6 +769,7 @@ export const renderElement = ({
 						altText={element.altText}
 						origin={host}
 						stickyVideos={!!(isBlog && switches.stickyVideos)}
+						isMainMediaTest={isMainMediaTest}
 					/>
 				</Island>,
 			];

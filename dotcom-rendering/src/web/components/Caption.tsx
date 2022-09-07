@@ -4,6 +4,7 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	between,
 	from,
+	neutral,
 	space,
 	textSans,
 	until,
@@ -24,14 +25,15 @@ type Props = {
 	isLeftCol?: boolean;
 	mediaType?: MediaType;
 	isMainMedia?: boolean;
+	isMainMediaTest?: boolean;
 };
 
 type IconProps = {
 	palette: Palette;
 	format: ArticleFormat;
+	isMainMediaTest?: boolean;
 };
 
-//TODO change caption color
 const captionStyle = (palette: Palette) => css`
 	${textSans.xsmall()};
 	line-height: 135%;
@@ -152,7 +154,6 @@ const hideIconBelowLeftCol = css`
 const pictureRatio = (13 / 18) * 100;
 const videoRatio = (23 / 36) * 100;
 
-//TODO change caption icon color
 const iconStyle = (palette: Palette) => css`
 	fill: ${palette.fill.cameraCaptionIcon};
 	margin-right: ${space[1]}px;
@@ -210,7 +211,7 @@ const CameraIcon = ({ palette, format }: IconProps) => {
 	);
 };
 
-const VideoIcon = ({ palette, format }: IconProps) => {
+const VideoIcon = ({ palette, format, isMainMediaTest }: IconProps) => {
 	return (
 		<span
 			css={[
@@ -218,6 +219,12 @@ const VideoIcon = ({ palette, format }: IconProps) => {
 				format.display === ArticleDisplay.Immersive &&
 					hideIconBelowLeftCol,
 				videoIconStyle,
+				// Temporary for AB test. Once complete this will be moved to palette
+				format.design === ArticleDesign.LiveBlog &&
+					isMainMediaTest &&
+					css`
+						fill: ${neutral[100]};
+					`,
 			]}
 		>
 			<VideoSvg />
@@ -236,6 +243,7 @@ export const Caption = ({
 	isLeftCol,
 	mediaType = 'Gallery',
 	isMainMedia = false,
+	isMainMediaTest,
 }: Props) => {
 	// Sometimes captions come thorough as a single blank space, so we trim here to ignore those
 	const noCaption = !captionText?.trim();
@@ -259,10 +267,20 @@ export const Caption = ({
 				isMainMedia && isBlog && tabletCaptionPadding,
 				padCaption && captionPadding,
 				mediaType === 'Video' && videoPadding,
+				// Temporary for AB test. Once complete this will be moved to palette
+				format.design === ArticleDesign.LiveBlog &&
+					isMainMediaTest &&
+					css`
+						color: ${neutral[100]};
+					`,
 			]}
 		>
 			{mediaType === 'Video' ? (
-				<VideoIcon palette={palette} format={format} />
+				<VideoIcon
+					palette={palette}
+					format={format}
+					isMainMediaTest={isMainMediaTest}
+				/>
 			) : (
 				<CameraIcon palette={palette} format={format} />
 			)}

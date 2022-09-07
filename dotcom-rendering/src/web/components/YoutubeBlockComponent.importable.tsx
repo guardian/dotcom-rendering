@@ -30,6 +30,7 @@ type Props = {
 	duration?: number; // in seconds
 	origin?: string;
 	stickyVideos: boolean;
+	isMainMediaTest?: boolean;
 };
 
 const expiredOverlayStyles = (overrideImage?: string) =>
@@ -88,6 +89,7 @@ export const YoutubeBlockComponent = ({
 	duration,
 	origin,
 	stickyVideos,
+	isMainMediaTest,
 }: Props) => {
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
@@ -226,6 +228,7 @@ export const YoutubeBlockComponent = ({
 					shouldLimitWidth={shouldLimitWidth}
 					mediaType="Video"
 					isMainMedia={isMainMedia}
+					isMainMediaTest={isMainMediaTest}
 				/>
 			)}
 		</div>

@@ -272,9 +272,9 @@ const decideBottomPadding = ({
 	hasAvatar?: boolean;
 }) => {
 	const defaultPadding = css`
-		// padding-bottom: ${space[6]}px;
+		padding-bottom: ${space[6]}px;
 		${from.tablet} {
-			// padding-bottom: ${space[9]}px;
+			padding-bottom: ${space[9]}px;
 		}
 	`;
 	switch (format.display) {
