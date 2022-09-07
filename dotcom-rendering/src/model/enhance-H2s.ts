@@ -45,11 +45,14 @@ const slugify = (text: string) => {
 };
 
 /**
- * This function creates a sluggified string if we have test available. If not, then it retuns the element id so that we always have an id.
+ * This function attempts to create a slugified string to use as the id. It fails over to elementId.
  */
-const generateId = (text: string, elementId: string) => {
-	if (!text) return elementId;
-	return slugify(text) || elementId;
+const generateId = (element: SubheadingBlockElement, existingIds: string[]) => {
+	const text = extractText(element);
+	if (!text) return element.elementId;
+	const slug = slugify(text);
+	if (!slug) return element.elementId;
+	return getUnique(slug, existingIds);
 };
 
 /**
@@ -65,17 +68,15 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 			element._type ===
 			'model.dotcomrendering.pageElements.SubheadingBlockElement'
 		) {
-			const text = extractText(element);
 			const id = shouldUseElementId
 				? element.elementId
-				: generateId(text, element.elementId);
-			const uniqueId = getUnique(id, slugifiedIds);
+				: generateId(element, slugifiedIds);
 
 			slugifiedIds.push(id);
 			const withId = element.html.replace(
 				'<h2>',
 				// add ID to H2 element
-				`<h2 id='${uniqueId}'>`,
+				`<h2 id='${id}'>`,
 			);
 			enhanced.push({
 				...element,
