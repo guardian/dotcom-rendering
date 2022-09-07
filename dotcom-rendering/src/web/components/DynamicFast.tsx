@@ -64,7 +64,11 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 
 	return (
 		<UL direction="row">
-			<LI percentage="50%" padSides={true}>
+			<LI
+				percentage="50%"
+				padSides={true}
+				padBottomOnMobile={columnOne.length > 0}
+			>
 				<FrontCard
 					trail={big}
 					starRating={big.starRating}
@@ -187,8 +191,6 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	if (!cards[0]) return null;
 	const big = cards[0];
 	const remaining = cards.slice(1, 7);
-
-	console.log('hello');
 
 	return (
 		<UL direction="row" wrapCards={true}>
