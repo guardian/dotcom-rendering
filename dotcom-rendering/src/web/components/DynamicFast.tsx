@@ -79,49 +79,83 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 				/>
 			</LI>
 			<LI percentage="50%">
-				{/**
-				 * These row & columns are a little outside of the standard of what the standard
-				 * LI and UL components we have support - it made more sense to manually create the CSS for this use case
-				 * than to expand & muddy the APIs of both components to support this layout type.
-				 */}
-				<li
-					css={css`
-						position: relative;
-						display: flex;
-						flex-basis: 100%;
-						flex-wrap: wrap;
-					`}
-				>
-					<ul css={manualUlStyles}>
-						{columnOne.map((card, cardIndex) => {
-							return (
-								<LI
-									key={card.url}
-									showDivider={true}
-									padSides={true}
-									padBottom={cardIndex < columnOne.length - 1}
-									padBottomOnMobile={
-										// If there are cards in the second col, we always want padding
-										columnTwo.length > 0 ||
-										cardIndex < columnOne.length - 1
-									}
-								>
-									{/* The first card shows an image */}
-									{cardIndex === 0 ? (
-										<FrontCard
-											trail={card}
-											starRating={card.starRating}
-											containerPalette={containerPalette}
-											showAge={showAge}
-											supportingContent={
-												card.supportingContent
-											}
-											headlineSize="medium"
-											imageUrl={card.image}
-											imagePosition="top"
-											imagePositionOnMobile="left"
-										/>
-									) : (
+				<UL direction="row">
+					{/**
+					 * These row & columns are a little outside of the standard of what the standard
+					 * LI and UL components we have support - it made more sense to manually create the CSS for this use case
+					 * than to expand & muddy the APIs of both components to support this layout type.
+					 */}
+					<li
+						css={css`
+							position: relative;
+							display: flex;
+							flex-basis: 100%;
+							flex-wrap: wrap;
+						`}
+					>
+						<ul css={manualUlStyles}>
+							{columnOne.map((card, cardIndex) => {
+								return (
+									<LI
+										key={card.url}
+										showDivider={true}
+										padSides={true}
+										padBottom={
+											cardIndex < columnOne.length - 1
+										}
+										padBottomOnMobile={
+											// If there are cards in the second col, we always want padding
+											columnTwo.length > 0 ||
+											cardIndex < columnOne.length - 1
+										}
+									>
+										{/* The first card shows an image */}
+										{cardIndex === 0 ? (
+											<FrontCard
+												trail={card}
+												starRating={card.starRating}
+												containerPalette={
+													containerPalette
+												}
+												showAge={showAge}
+												supportingContent={
+													card.supportingContent
+												}
+												headlineSize="medium"
+												imageUrl={card.image}
+												imagePosition="top"
+												imagePositionOnMobile="left"
+											/>
+										) : (
+											<FrontCard
+												trail={card}
+												starRating={card.starRating}
+												containerPalette={
+													containerPalette
+												}
+												showAge={showAge}
+												imageUrl={undefined}
+												headlineSize="small"
+											/>
+										)}
+									</LI>
+								);
+							})}
+						</ul>
+						<ul css={manualUlStyles}>
+							{columnTwo.map((card, cardIndex) => {
+								return (
+									<LI
+										key={card.url}
+										showDivider={true}
+										padSides={true}
+										padBottom={
+											cardIndex < columnTwo.length - 1
+										}
+										padBottomOnMobile={
+											cardIndex < columnTwo.length - 1
+										}
+									>
 										<FrontCard
 											trail={card}
 											starRating={card.starRating}
@@ -130,36 +164,12 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 											imageUrl={undefined}
 											headlineSize="small"
 										/>
-									)}
-								</LI>
-							);
-						})}
-					</ul>
-					<ul css={manualUlStyles}>
-						{columnTwo.map((card, cardIndex) => {
-							return (
-								<LI
-									key={card.url}
-									showDivider={true}
-									padSides={true}
-									padBottom={cardIndex < columnTwo.length - 1}
-									padBottomOnMobile={
-										cardIndex < columnTwo.length - 1
-									}
-								>
-									<FrontCard
-										trail={card}
-										starRating={card.starRating}
-										containerPalette={containerPalette}
-										showAge={showAge}
-										imageUrl={undefined}
-										headlineSize="small"
-									/>
-								</LI>
-							);
-						})}
-					</ul>
-				</li>
+									</LI>
+								);
+							})}
+						</ul>
+					</li>
+				</UL>
 			</LI>
 		</UL>
 	);
