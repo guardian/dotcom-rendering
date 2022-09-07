@@ -1,7 +1,7 @@
 import { JSDOM } from 'jsdom';
 
 const hasInteractiveContentsElement = (elements: CAPIElement[]): boolean => {
-	return !!elements.find(
+	return elements.some(
 		(element) =>
 			element._type ===
 			'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
