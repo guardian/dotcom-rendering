@@ -64,7 +64,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 
 	return (
 		<UL direction="row">
-			<LI percentage="50%">
+			<LI percentage="50%" padSides={true}>
 				<FrontCard
 					trail={big}
 					starRating={big.starRating}
@@ -188,6 +188,8 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	const big = cards[0];
 	const remaining = cards.slice(1, 7);
 
+	console.log('hello');
+
 	return (
 		<UL direction="row" wrapCards={true}>
 			<LI
@@ -223,7 +225,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								padBottom={shouldPadWrappableRows(
 									cardIndex,
 									cards.length,
-									3,
+									2,
 								)}
 								padBottomOnMobile={
 									cardIndex < remaining.length - 1
@@ -264,7 +266,7 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 							key={card.url}
 							percentage="25%"
 							stretch={true}
-							showDivider={true}
+							showDivider={cardIndex % 4 !== 0}
 							padSides={true}
 							padBottom={shouldPadWrappableRows(
 								cardIndex,
@@ -305,7 +307,7 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 		<UL direction="row" wrapCards={true}>
 			<LI
 				key={big.url}
-				percentage="50%"
+				percentage="25%"
 				padSides={true}
 				padBottomOnMobile={remaining.length > 0}
 				showDivider={false}
