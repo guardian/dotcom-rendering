@@ -175,6 +175,77 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 	);
 };
 
+const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
+	cards,
+	showAge,
+	containerPalette,
+}: {
+	cards: TrailType[];
+	showAge?: boolean;
+	containerPalette?: DCRContainerPalette;
+}) => {
+	if (!cards[0]) return null;
+	const big = cards[0];
+	const remaining = cards.slice(1, 7);
+
+	return (
+		<UL direction="row" wrapCards={true}>
+			<LI
+				key={big.url}
+				percentage="50%"
+				padSides={true}
+				padBottomOnMobile={remaining.length > 0}
+				showDivider={false}
+			>
+				<FrontCard
+					trail={big}
+					starRating={big.starRating}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					supportingContent={big.supportingContent}
+					headlineSize="large"
+					trailText={big.trailText}
+					imageUrl={big.image}
+					imagePosition="top"
+					imagePositionOnMobile="top"
+				/>
+			</LI>
+			<LI percentage="50%">
+				<UL direction="row" wrapCards={true}>
+					{remaining.map((card, cardIndex) => {
+						return (
+							<LI
+								key={card.url}
+								percentage="50%"
+								stretch={true}
+								showDivider={true}
+								padSides={true}
+								padBottom={shouldPadWrappableRows(
+									cardIndex,
+									cards.length,
+									3,
+								)}
+								padBottomOnMobile={
+									cardIndex < remaining.length - 1
+								}
+							>
+								<FrontCard
+									trail={card}
+									starRating={card.starRating}
+									containerPalette={containerPalette}
+									showAge={showAge}
+									imageUrl={undefined}
+									headlineSize="small"
+								/>
+							</LI>
+						);
+					})}
+				</UL>
+			</LI>
+		</UL>
+	);
+};
+
 const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 =
 	({
 		cards,
@@ -234,7 +305,7 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 		<UL direction="row" wrapCards={true}>
 			<LI
 				key={big.url}
-				percentage={`25%`}
+				percentage="50%"
 				padSides={true}
 				padBottomOnMobile={remaining.length > 0}
 				showDivider={false}
@@ -519,6 +590,7 @@ export const DynamicFast = ({
 	}
 
 	let secondSliceLayout:
+		| 'oneBigBoosted'
 		| 'twoOrMoreBigsFirstBoosted'
 		| 'fourBigs'
 		| 'threeBigs'
@@ -543,11 +615,19 @@ export const DynamicFast = ({
 			break;
 		}
 		case 1: {
-			secondSliceLayout = 'oneBig';
-			secondSliceCards = [
-				...bigs.slice(0, 1),
-				...secondSliceGroupedTrails.standard.slice(0, 9),
-			];
+			if (bigs[0].isBoosted) {
+				secondSliceLayout = 'oneBigBoosted';
+				secondSliceCards = [
+					...bigs.slice(0, 1),
+					...secondSliceGroupedTrails.standard.slice(0, 6),
+				];
+			} else {
+				secondSliceLayout = 'oneBig';
+				secondSliceCards = [
+					...bigs.slice(0, 1),
+					...secondSliceGroupedTrails.standard.slice(0, 9),
+				];
+			}
 			break;
 		}
 		case 2: {
@@ -646,6 +726,14 @@ export const DynamicFast = ({
 
 	const SecondSlice = () => {
 		switch (secondSliceLayout) {
+			case 'oneBigBoosted':
+				return (
+					<Card50_ColumnOfThreeCards25_ColumnOfThreeCards25
+						cards={secondSliceCards}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				);
 			case 'twoOrMoreBigsFirstBoosted':
 				return (
 					<Card50_ColumnOfThreeCards25_ColumnOfFiveCards
