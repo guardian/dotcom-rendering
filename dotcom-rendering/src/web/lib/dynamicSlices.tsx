@@ -75,6 +75,7 @@ export const Card75_Card25 = ({
 				containerPalette={containerPalette}
 				showAge={showAge}
 				trailText={cards[0].trailText}
+				supportingContent={cards[0].supportingContent}
 				imagePosition="right"
 				imageSize="large"
 				imagePositionOnMobile="top"
@@ -89,6 +90,7 @@ export const Card75_Card25 = ({
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
+				supportingContent={cards[1].supportingContent}
 				showAge={showAge}
 			/>
 		</LI>
@@ -112,7 +114,8 @@ export const Card25_Card75 = ({
 	<UL direction="row" padBottom={true}>
 		<LI percentage="25%" padSides={true}>
 			<FrontCard
-				trail={cards[1]}
+				trail={cards[0]}
+				supportingContent={cards[0].supportingContent}
 				containerPalette={containerPalette}
 				showAge={showAge}
 			/>
@@ -124,10 +127,11 @@ export const Card25_Card75 = ({
 			showDivider={true}
 		>
 			<FrontCard
-				trail={cards[0]}
+				trail={cards[1]}
 				containerPalette={containerPalette}
 				showAge={showAge}
-				trailText={cards[0].trailText}
+				trailText={cards[1].trailText}
+				supportingContent={cards[1].supportingContent}
 				imagePosition="right"
 				imageSize="large"
 				imagePositionOnMobile="top"
