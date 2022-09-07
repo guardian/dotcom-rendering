@@ -3,13 +3,11 @@ import { App } from 'aws-cdk-lib';
 import { MobileAppsRendering } from '../lib/mobile-apps-rendering';
 
 const app = new App();
-const cloudFormationStackName = process.env.GU_CFN_STACK_NAME;
 
 // ----- MobileAppsRendering CODE ----- //
 new MobileAppsRendering(app, 'MobileAppsRendering-CODE', {
 	stack: 'mobile',
 	stage: 'CODE',
-	cloudFormationStackName,
 	recordPrefix: 'mobile-rendering',
 	asgSize: {
 		min: 1,
@@ -24,7 +22,6 @@ new MobileAppsRendering(app, 'MobileAppsRendering-CODE', {
 new MobileAppsRendering(app, 'MobileAppsRendering-PROD', {
 	stack: 'mobile',
 	stage: 'PROD',
-	cloudFormationStackName,
 	recordPrefix: 'mobile-rendering',
 	asgSize: {
 		min: 3,
@@ -39,7 +36,6 @@ new MobileAppsRendering(app, 'MobileAppsRendering-PROD', {
 new MobileAppsRendering(app, 'MobileAppsRenderingPreview-CODE', {
 	stack: 'mobile-preview',
 	stage: 'CODE',
-	cloudFormationStackName,
 	recordPrefix: 'mobile-preview-rendering',
 	asgSize: {
 		min: 1,
@@ -54,7 +50,6 @@ new MobileAppsRendering(app, 'MobileAppsRenderingPreview-CODE', {
 new MobileAppsRendering(app, 'MobileAppsRenderingPreview-PROD', {
 	stack: 'mobile-preview',
 	stage: 'PROD',
-	cloudFormationStackName,
 	recordPrefix: 'mobile-preview-rendering',
 	asgSize: {
 		min: 1,
