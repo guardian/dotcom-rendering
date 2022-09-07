@@ -15,11 +15,11 @@ import type { CAPIArticleType } from '../../../src/types/frontend';
 
 export const Explainer: CAPIArticleType = {
 	slotMachineFlags: '',
-	main: '<figure class="element element-image" data-media-id="59ff93fd27eea2be66feecf0b9a7c0b98d12877a"> \n <img src="https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/1000.jpg" alt="The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters" width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.</span> \n  <span class="element-image__credit">Photograph: Peter Morrison/AP</span> \n </figcaption> \n</figure>',
+	main: '<figure class="element element-image" data-media-id="7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62"> <img src="https://media.guim.co.uk/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/1000.jpg" alt="Mick Goodna, Dr Jackie Huggins, Craig Crawford MP, and Queensland premier Annastacia Palaszczuk sign path to treaty documents in Brisbane, Tuesday, 16 August, 2022. " width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">Queensland premier Annastacia Palaszczuk co-signs path to treaty documents in Brisbane, 16 August, 2022. A federally negotiated treaty seems a long way off.</span> <span class="element-image__credit">Photograph: Jono Searle/AAP</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
 		{
-			url: '/world/ireland',
-			title: 'Ireland',
+			url: '/australia-news/indigenous-australians',
+			title: 'Indigenous Australians',
 		},
 	],
 	commercialProperties: {
@@ -30,12 +30,21 @@ export const Explainer: CAPIArticleType = {
 					value: 'uk',
 				},
 				{
-					name: 'tn',
-					value: ['analysis', 'explainers'],
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/m493v',
 				},
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d9vgg',
+					name: 'k',
+					value: [
+						'indigenous-peoples',
+						'uluru-statement-from-the-heart',
+						'australia-news',
+						'indigenous-australians',
+					],
+				},
+				{
+					name: 'co',
+					value: ['lorena-allam'],
 				},
 				{
 					name: 'su',
@@ -43,22 +52,7 @@ export const Explainer: CAPIArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-				},
-				{
-					name: 'co',
-					value: ['rorycarroll'],
-				},
-				{
-					name: 'k',
-					value: [
-						'sinn-fein',
-						'world',
-						'europe-news',
-						'ireland',
-						'fianna-fail',
-						'fine-gael',
-					],
+					value: '/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 				},
 				{
 					name: 'ct',
@@ -67,18 +61,31 @@ export const Explainer: CAPIArticleType = {
 				{
 					name: 'p',
 					value: 'ng',
+				},
+				{
+					name: 'tn',
+					value: ['explainers'],
 				},
 			],
 		},
 		US: {
 			adTargeting: [
 				{
-					name: 'tn',
-					value: ['analysis', 'explainers'],
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/m493v',
 				},
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d9vgg',
+					name: 'k',
+					value: [
+						'indigenous-peoples',
+						'uluru-statement-from-the-heart',
+						'australia-news',
+						'indigenous-australians',
+					],
+				},
+				{
+					name: 'co',
+					value: ['lorena-allam'],
 				},
 				{
 					name: 'su',
@@ -86,22 +93,7 @@ export const Explainer: CAPIArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-				},
-				{
-					name: 'co',
-					value: ['rorycarroll'],
-				},
-				{
-					name: 'k',
-					value: [
-						'sinn-fein',
-						'world',
-						'europe-news',
-						'ireland',
-						'fianna-fail',
-						'fine-gael',
-					],
+					value: '/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 				},
 				{
 					name: 'ct',
@@ -110,6 +102,10 @@ export const Explainer: CAPIArticleType = {
 				{
 					name: 'p',
 					value: 'ng',
+				},
+				{
+					name: 'tn',
+					value: ['explainers'],
 				},
 				{
 					name: 'edition',
@@ -120,12 +116,21 @@ export const Explainer: CAPIArticleType = {
 		AU: {
 			adTargeting: [
 				{
-					name: 'tn',
-					value: ['analysis', 'explainers'],
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/m493v',
 				},
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d9vgg',
+					name: 'k',
+					value: [
+						'indigenous-peoples',
+						'uluru-statement-from-the-heart',
+						'australia-news',
+						'indigenous-australians',
+					],
+				},
+				{
+					name: 'co',
+					value: ['lorena-allam'],
 				},
 				{
 					name: 'su',
@@ -133,22 +138,7 @@ export const Explainer: CAPIArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-				},
-				{
-					name: 'co',
-					value: ['rorycarroll'],
-				},
-				{
-					name: 'k',
-					value: [
-						'sinn-fein',
-						'world',
-						'europe-news',
-						'ireland',
-						'fianna-fail',
-						'fine-gael',
-					],
+					value: '/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 				},
 				{
 					name: 'ct',
@@ -159,6 +149,10 @@ export const Explainer: CAPIArticleType = {
 					value: 'ng',
 				},
 				{
+					name: 'tn',
+					value: ['explainers'],
+				},
+				{
 					name: 'edition',
 					value: 'au',
 				},
@@ -167,12 +161,21 @@ export const Explainer: CAPIArticleType = {
 		INT: {
 			adTargeting: [
 				{
-					name: 'tn',
-					value: ['analysis', 'explainers'],
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/m493v',
 				},
 				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d9vgg',
+					name: 'k',
+					value: [
+						'indigenous-peoples',
+						'uluru-statement-from-the-heart',
+						'australia-news',
+						'indigenous-australians',
+					],
+				},
+				{
+					name: 'co',
+					value: ['lorena-allam'],
 				},
 				{
 					name: 'edition',
@@ -184,22 +187,7 @@ export const Explainer: CAPIArticleType = {
 				},
 				{
 					name: 'url',
-					value: '/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-				},
-				{
-					name: 'co',
-					value: ['rorycarroll'],
-				},
-				{
-					name: 'k',
-					value: [
-						'sinn-fein',
-						'world',
-						'europe-news',
-						'ireland',
-						'fianna-fail',
-						'fine-gael',
-					],
+					value: '/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 				},
 				{
 					name: 'ct',
@@ -209,33 +197,29 @@ export const Explainer: CAPIArticleType = {
 					name: 'p',
 					value: 'ng',
 				},
+				{
+					name: 'tn',
+					value: ['explainers'],
+				},
 			],
 		},
 	},
 	beaconURL: '//phar.gu-web.net',
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Thu 13 Feb 2020 10.21 GMT',
+		'Last modified on Sun 21 Aug 2022 08.05 BST',
 	editionLongForm: 'UK edition',
 	hasRelated: true,
-	publication: 'The Guardian',
+	publication: 'theguardian.com',
 	trailText:
-		'Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing',
+		'Calls go back decades for a binding agreement between First Nations and the commonwealth. States have started the process but prospects for a federal treaty are less clear',
 	subMetaKeywordLinks: [
 		{
-			url: '/politics/sinn-fein',
-			title: 'Sinn Féin',
+			url: '/australia-news/uluru-statement-from-the-heart',
+			title: 'Uluru Statement from the Heart',
 		},
 		{
-			url: '/world/fine-gael',
-			title: 'Fine Gael',
-		},
-		{
-			url: '/world/fianna-fail',
-			title: 'Fianna Fail',
-		},
-		{
-			url: '/world/europe-news',
-			title: 'Europe',
+			url: '/world/indigenous-peoples',
+			title: 'Indigenous peoples',
 		},
 		{
 			url: '/tone/explainers',
@@ -244,7 +228,7 @@ export const Explainer: CAPIArticleType = {
 	],
 	contentType: 'Article',
 	nav: {
-		currentUrl: '/world/europe-news',
+		currentUrl: '/australia-news/indigenous-australians',
 		pillars: [
 			{
 				title: 'News',
@@ -936,92 +920,203 @@ export const Explainer: CAPIArticleType = {
 				url: 'https://licensing.theguardian.com/',
 			},
 		],
-		currentNavLinkTitle: 'Europe',
+		currentNavLinkTitle: 'Indigenous Australia',
 		currentPillarTitle: 'News',
 		subNavSections: {
-			parent: {
-				title: 'World',
-				url: '/world',
-				longTitle: 'World news',
-				children: [
-					{
-						title: 'Europe',
-						url: '/world/europe-news',
-					},
-					{
-						title: 'US',
-						url: '/us-news',
-						longTitle: 'US news',
-					},
-					{
-						title: 'Americas',
-						url: '/world/americas',
-					},
-					{
-						title: 'Asia',
-						url: '/world/asia',
-					},
-					{
-						title: 'Australia',
-						url: '/australia-news',
-						longTitle: 'Australia news',
-					},
-					{
-						title: 'Middle East',
-						url: '/world/middleeast',
-					},
-					{
-						title: 'Africa',
-						url: '/world/africa',
-					},
-					{
-						title: 'Inequality',
-						url: '/inequality',
-					},
-					{
-						title: 'Global development',
-						url: '/global-development',
-					},
-				],
-			},
 			links: [
-				{
-					title: 'Europe',
-					url: '/world/europe-news',
-				},
-				{
-					title: 'US',
-					url: '/us-news',
-					longTitle: 'US news',
-				},
-				{
-					title: 'Americas',
-					url: '/world/americas',
-				},
-				{
-					title: 'Asia',
-					url: '/world/asia',
-				},
 				{
 					title: 'Australia',
 					url: '/australia-news',
 					longTitle: 'Australia news',
 				},
 				{
-					title: 'Middle East',
-					url: '/world/middleeast',
+					title: 'Coronavirus',
+					url: '/world/coronavirus-outbreak',
+					longTitle: 'Coronavirus',
 				},
 				{
-					title: 'Africa',
-					url: '/world/africa',
+					title: 'World',
+					url: '/world',
+					longTitle: 'World news',
+					children: [
+						{
+							title: 'Europe',
+							url: '/world/europe-news',
+						},
+						{
+							title: 'US',
+							url: '/us-news',
+							longTitle: 'US news',
+						},
+						{
+							title: 'Americas',
+							url: '/world/americas',
+						},
+						{
+							title: 'Asia',
+							url: '/world/asia',
+						},
+						{
+							title: 'Australia',
+							url: '/australia-news',
+							longTitle: 'Australia news',
+						},
+						{
+							title: 'Middle East',
+							url: '/world/middleeast',
+						},
+						{
+							title: 'Africa',
+							url: '/world/africa',
+						},
+						{
+							title: 'Inequality',
+							url: '/inequality',
+						},
+						{
+							title: 'Global development',
+							url: '/global-development',
+						},
+					],
 				},
 				{
-					title: 'Inequality',
-					url: '/inequality',
+					title: 'AU politics',
+					url: '/australia-news/australian-politics',
+					longTitle: 'Politics',
 				},
 				{
-					title: 'Global development',
-					url: '/global-development',
+					title: 'Environment',
+					url: '/environment',
+					children: [
+						{
+							title: 'Climate crisis',
+							url: '/environment/climate-crisis',
+						},
+						{
+							title: 'Energy',
+							url: '/environment/energy',
+						},
+						{
+							title: 'Wildlife',
+							url: '/environment/wildlife',
+						},
+						{
+							title: 'Biodiversity',
+							url: '/environment/biodiversity',
+						},
+						{
+							title: 'Oceans',
+							url: '/environment/oceans',
+						},
+						{
+							title: 'Pollution',
+							url: '/environment/pollution',
+						},
+						{
+							title: 'Great Barrier Reef',
+							url: '/environment/great-barrier-reef',
+						},
+					],
+				},
+				{
+					title: 'Football',
+					url: '/football',
+					children: [
+						{
+							title: 'Live scores',
+							url: '/football/live',
+							longTitle: 'football/live',
+						},
+						{
+							title: 'Tables',
+							url: '/football/tables',
+							longTitle: 'football/tables',
+						},
+						{
+							title: 'Fixtures',
+							url: '/football/fixtures',
+							longTitle: 'football/fixtures',
+						},
+						{
+							title: 'Results',
+							url: '/football/results',
+							longTitle: 'football/results',
+						},
+						{
+							title: 'Competitions',
+							url: '/football/competitions',
+							longTitle: 'football/competitions',
+						},
+						{
+							title: 'Clubs',
+							url: '/football/teams',
+							longTitle: 'football/teams',
+						},
+					],
+				},
+				{
+					title: 'Indigenous Australia',
+					url: '/australia-news/indigenous-australians',
+				},
+				{
+					title: 'Immigration',
+					url: '/australia-news/australian-immigration-and-asylum',
+				},
+				{
+					title: 'Media',
+					url: '/media',
+				},
+				{
+					title: 'Business',
+					url: '/business',
+					children: [
+						{
+							title: 'Markets',
+							url: '/business/stock-markets',
+						},
+						{
+							title: 'Money',
+							url: '/money',
+							children: [
+								{
+									title: 'Property',
+									url: '/money/property',
+								},
+								{
+									title: 'Pensions',
+									url: '/money/pensions',
+								},
+								{
+									title: 'Savings',
+									url: '/money/savings',
+								},
+								{
+									title: 'Borrowing',
+									url: '/money/debt',
+								},
+								{
+									title: 'Careers',
+									url: '/money/work-and-careers',
+								},
+							],
+						},
+						{
+							title: 'Project Syndicate',
+							url: '/business/series/project-syndicate-economists',
+						},
+						{
+							title: 'Retail',
+							url: '/business/retail',
+						},
+					],
+				},
+				{
+					title: 'Science',
+					url: '/science',
+				},
+				{
+					title: 'Tech',
+					url: '/technology',
 				},
 			],
 		},
@@ -1079,10 +1174,9 @@ export const Explainer: CAPIArticleType = {
 		},
 	},
 	author: {
-		byline: 'Rory Carroll Ireland correspondent',
-		twitterHandle: 'rorycarroll72',
+		byline: 'Lorena Allam',
 	},
-	designType: 'Explainer',
+	designType: 'Article',
 	editionId: 'UK',
 	format: {
 		design: 'ExplainerDesign',
@@ -1090,65 +1184,56 @@ export const Explainer: CAPIArticleType = {
 		display: 'StandardDisplay',
 	},
 	standfirst:
-		'<p>Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing</p>\n<ul>\n <li><a href="https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail">Irish elections – latest results</a></li>\n</ul>',
+		'<p>Calls go back decades for a binding agreement between First Nations and the commonwealth. States have started the process but prospects for a federal treaty are less clear</p>\n<ul>\n <li>Get our <a href="https://www.theguardian.com/technology/ng-interactive/2018/may/15/the-guardian-app?CMP=cvau_sfl">free news app</a>, <a href="https://www.theguardian.com/world/guardian-australia-morning-mail/2014/jun/24/-sp-guardian-australias-morning-mail-subscribe-by-email?CMP=cvau_sfl">morning email briefing</a> or <a href="https://www.theguardian.com/australia-news/series/full-story?CMP=cvau_sfl">daily news podcast</a></li>\n</ul>',
 	openGraphData: {
 		'og:url':
-			'http://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
-		'article:author': 'https://www.theguardian.com/profile/rorycarroll',
+			'https://www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
+		'article:author': 'https://www.theguardian.com/profile/lorena-allam',
 		'og:image:height': '720',
 		'og:description':
-			'Weeks – possibly months – of negotiations are likely to follow Sinn Féin’s strong showing',
+			'Calls go back decades for a binding agreement between First Nations and the commonwealth. States have started the process but prospects for a federal treaty are less clear',
 		'og:image:width': '1200',
 		'og:image':
-			'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=b28b8384d380e834b173b07cc071778a',
+			'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=68b8407353dca67494a586a75805b954',
 		'al:ios:url':
-			'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=applinks',
+			'gnmguardian://australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
-		'article:section': 'World news',
-		'article:published_time': '2020-02-10T12:31:25.000Z',
-		'og:title': 'Irish general election: who won and what happens now?',
+		'article:section': 'Australia news',
+		'article:published_time': '2022-08-20T20:00:50.000Z',
+		'og:title':
+			'What is an Indigenous treaty and how would it work in Australia?',
 		'fb:app_id': '180444840287',
 		'article:tag':
-			'Ireland,Sinn Féin,Fine Gael,Fianna Fail,World news,Europe',
+			'Indigenous Australians,Uluru Statement from the Heart,Australia news,Indigenous peoples',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2020-02-13T10:21:28.000Z',
+		'article:modified_time': '2022-08-21T07:05:36.000Z',
 	},
-	sectionUrl: 'world/ireland',
-	pageId: 'world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+	sectionUrl: 'australia-news/indigenous-australians',
+	pageId: 'australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 	version: 3,
 	tags: [
 		{
-			id: 'world/ireland',
+			id: 'australia-news/indigenous-australians',
 			type: 'Keyword',
-			title: 'Ireland',
+			title: 'Indigenous Australians',
 		},
 		{
-			id: 'politics/sinn-fein',
+			id: 'australia-news/uluru-statement-from-the-heart',
 			type: 'Keyword',
-			title: 'Sinn Féin',
+			title: 'Uluru Statement from the Heart',
 		},
 		{
-			id: 'world/fine-gael',
+			id: 'australia-news/australia-news',
 			type: 'Keyword',
-			title: 'Fine Gael',
+			title: 'Australia news',
 		},
 		{
-			id: 'world/fianna-fail',
+			id: 'world/indigenous-peoples',
 			type: 'Keyword',
-			title: 'Fianna Fail',
-		},
-		{
-			id: 'world/world',
-			type: 'Keyword',
-			title: 'World news',
-		},
-		{
-			id: 'world/europe-news',
-			type: 'Keyword',
-			title: 'Europe',
+			title: 'Indigenous peoples',
 		},
 		{
 			id: 'type/article',
@@ -1161,46 +1246,25 @@ export const Explainer: CAPIArticleType = {
 			title: 'Explainers',
 		},
 		{
-			id: 'tone/analysis',
-			type: 'Tone',
-			title: 'Analysis',
-		},
-		{
-			id: 'profile/rorycarroll',
+			id: 'profile/lorena-allam',
 			type: 'Contributor',
-			title: 'Rory Carroll',
-			twitterHandle: 'rorycarroll72',
+			title: 'Lorena Allam',
 			bylineImageUrl:
-				'https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/contributor/2014/11/14/1415969428559/Rory-Carroll.jpg?width=300&quality=85&auto=format&fit=max&s=837a72cedb4881df331863d9fdbe9566',
+				'https://i.guim.co.uk/img/uploads/2019/02/28/Lorena_Allam.jpg?width=300&quality=85&auto=format&fit=max&s=6f17e762c129139dfb0f60dd1012729f',
 			bylineLargeImageUrl:
-				'https://i.guim.co.uk/img/uploads/2017/10/09/Rory-Carroll,-L.png?width=300&quality=85&auto=format&fit=max&s=149d14183d07b7c04e04798e0edbc5e4',
+				'https://i.guim.co.uk/img/uploads/2019/02/28/Lorena_Allam.png?width=300&quality=85&auto=format&fit=max&s=51237ae29cdfa8f64b23361f7ee8a9a5',
 		},
 		{
-			id: 'publication/theguardian',
-			type: 'Publication',
-			title: 'The Guardian',
-		},
-		{
-			id: 'theguardian/mainsection',
-			type: 'NewspaperBook',
-			title: 'Main section',
-		},
-		{
-			id: 'theguardian/mainsection/uknews',
-			type: 'NewspaperBookSection',
-			title: 'UK news',
-		},
-		{
-			id: 'tracking/commissioningdesk/uk-foreign',
+			id: 'tracking/commissioningdesk/australia-news',
 			type: 'Tracking',
-			title: 'UK Foreign',
+			title: 'Australia News',
 		},
 	],
 	pillar: 'news',
-	webURL: 'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+	webURL: 'https://www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 	showBottomSocialButtons: true,
 	isImmersive: false,
-	sectionLabel: 'Ireland',
+	sectionLabel: 'Indigenous Australians',
 	shouldHideReaderRevenue: false,
 	isAdFreeUser: false,
 	pageFooter: {
@@ -1356,22 +1420,21 @@ export const Explainer: CAPIArticleType = {
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
 		'twitter:image':
-			'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=a8472a00c286382a50660ee970061b0f',
+			'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=e1f79181244df0cee25f0251a5cc132f',
 		'twitter:site': '@guardian',
 		'twitter:app:url:ipad':
-			'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=twitter',
+			'gnmguardian://australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia?contenttype=Article&source=twitter',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
-		'twitter:creator': '@rorycarroll72',
 		'twitter:app:id:ipad': '409128287',
 		'twitter:app:id:googleplay': 'com.guardian',
 		'twitter:app:url:googleplay':
-			'guardian://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+			'guardian://www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 		'twitter:app:url:iphone':
-			'gnmguardian://world/2020/feb/10/irish-general-election-everything-you-need-to-know?contenttype=Article&source=twitter',
+			'gnmguardian://australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia?contenttype=Article&source=twitter',
 	},
-	sectionName: 'world',
-	webPublicationDateDeprecated: '2020-02-10T12:31:25.000Z',
+	sectionName: 'australia-news',
+	webPublicationDateDeprecated: '2022-08-20T20:00:50.000Z',
 	pageType: {
 		hasShowcaseMainElement: false,
 		isFront: false,
@@ -1381,239 +1444,11 @@ export const Explainer: CAPIArticleType = {
 		isPreview: false,
 		isSensitive: false,
 	},
-	hasStoryPackage: true,
+	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	storyPackage: {
-		heading: 'More on this story',
-		trails: [
-			{
-				url: 'https://www.theguardian.com/world/2020/jun/27/micheal-martin-irish-taoiseach-coalition-fianna-fail-fine-gael',
-				linkText:
-					'Micheál Martin becomes Irish taoiseach in historic coalition',
-				showByline: false,
-				byline: 'Molly Blackall and agencies',
-				image: 'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=300&quality=85&auto=format&fit=max&s=de7acc6ba1d17ac4f62486c0bd389f45',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=300&quality=85&auto=format&fit=max&s=de7acc6ba1d17ac4f62486c0bd389f45',
-					'460': 'https://i.guim.co.uk/img/media/5006d5c1b2790c2c2565fcb7e67456b88d974283/395_464_1854_1112/master/1854.jpg?width=460&quality=85&auto=format&fit=max&s=47e501f3f89c12283597a9b2a893cd98',
-				},
-				ageWarning: '2 years',
-				isLiveBlog: false,
-				pillar: 'news',
-				designType: 'Article',
-				format: {
-					design: 'ArticleDesign',
-					theme: 'NewsPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-06-27T14:53:17.000Z',
-				headline:
-					'Micheál Martin becomes Irish taoiseach in historic coalition',
-				shortUrl: 'https://www.theguardian.com/p/e79et',
-			},
-			{
-				url: 'https://www.theguardian.com/world/2020/jun/26/irish-government-to-be-formed-after-greens-vote-yes-to-coalition',
-				linkText:
-					'Ireland to form new government after Green party votes for coalition',
-				showByline: false,
-				byline: 'PA Media',
-				image: 'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=9dd8d486eaaa0475d873738f00a3992e',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=9dd8d486eaaa0475d873738f00a3992e',
-					'460': 'https://i.guim.co.uk/img/media/b6b0133fad044783951a97015706a67fecb37f59/0_134_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=60336706f5f85058c7b9676adf263572',
-				},
-				ageWarning: '2 years',
-				isLiveBlog: false,
-				pillar: 'news',
-				designType: 'Article',
-				format: {
-					design: 'ArticleDesign',
-					theme: 'NewsPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-06-26T21:03:02.000Z',
-				headline:
-					'Ireland to form new government after Green party votes for coalition',
-				shortUrl: 'https://www.theguardian.com/p/e7572',
-			},
-			{
-				url: 'https://www.theguardian.com/world/2020/jun/15/fine-gael-fianna-fail-and-greens-agree-deal-to-form-irish-coalition',
-				linkText:
-					'Fine Gael, Fianna Fáil and Greens agree deal to form Irish coalition',
-				showByline: false,
-				byline: 'Rory Carroll Ireland correspondent',
-				image: 'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5486bc1d1e8ffd2be9676e6c1b4b31db',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5486bc1d1e8ffd2be9676e6c1b4b31db',
-					'460': 'https://i.guim.co.uk/img/media/f52d3ac0dd142b1866a32fe32a68288067845c5b/0_117_3500_2101/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=8fd8c760b6624d89ccd26f9eb512fb08',
-				},
-				ageWarning: '2 years',
-				isLiveBlog: false,
-				pillar: 'news',
-				designType: 'Article',
-				format: {
-					design: 'ArticleDesign',
-					theme: 'NewsPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-06-15T11:59:47.000Z',
-				headline:
-					'Fine Gael, Fianna Fáil and Greens agree deal to form Irish coalition',
-				shortUrl: 'https://www.theguardian.com/p/e49gh',
-			},
-			{
-				url: 'https://www.theguardian.com/world/2020/may/26/irish-taoiseach-leo-varadkar-denies-picnic-with-friends-was-covid-19-rule-breach',
-				linkText:
-					'Irish taoiseach Leo Varadkar denies picnic with friends was Covid-19 rule breach',
-				showByline: false,
-				byline: 'Rory Carroll Ireland correspondent',
-				image: 'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=300&quality=85&auto=format&fit=max&s=129882ff7e6d9bdea3456d4877c4a96f',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=300&quality=85&auto=format&fit=max&s=129882ff7e6d9bdea3456d4877c4a96f',
-					'460': 'https://i.guim.co.uk/img/media/9b76af0224249c790c43a1aeabf6d293eaeca542/651_648_4239_2545/master/4239.jpg?width=460&quality=85&auto=format&fit=max&s=60b5912cc4074d8502b9cae4becce57c',
-				},
-				ageWarning: '2 years',
-				isLiveBlog: false,
-				pillar: 'news',
-				designType: 'Article',
-				format: {
-					design: 'ArticleDesign',
-					theme: 'NewsPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-05-26T05:00:11.000Z',
-				headline:
-					'Irish taoiseach Leo Varadkar denies picnic with friends was Covid-19 rule breach',
-				shortUrl: 'https://www.theguardian.com/p/evan3',
-			},
-			{
-				url: 'https://www.theguardian.com/world/2020/apr/14/ireland-fine-gael-fianna-fail-close-forming-coalition-government',
-				linkText:
-					'Ireland’s Fine Gael and Fianna Fáil close to forming coalition government',
-				showByline: false,
-				byline: 'Rory Carroll Ireland correspondent',
-				image: 'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5454ff771e5bba8ffd226eaf92c43043',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=5454ff771e5bba8ffd226eaf92c43043',
-					'460': 'https://i.guim.co.uk/img/media/8c4efd702ba76e762c15a0f5ea3d2dccd9d53305/0_0_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=3d1f820bf4d1734bcd9b4f393fe5b8a1',
-				},
-				ageWarning: '2 years',
-				isLiveBlog: false,
-				pillar: 'news',
-				designType: 'Article',
-				format: {
-					design: 'ArticleDesign',
-					theme: 'NewsPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-04-14T17:25:20.000Z',
-				headline:
-					'Ireland’s Fine Gael and Fianna Fáil close to forming coalition government',
-				shortUrl: 'https://www.theguardian.com/p/dk7xx',
-			},
-			{
-				url: 'https://www.theguardian.com/world/2020/feb/24/micheal-martin-faces-a-battle-of-conscience-to-form-irish-government',
-				linkText:
-					'Micheál Martin faces a battle of conscience to form Irish government',
-				showByline: false,
-				byline: 'Rory Carroll Ireland correspondent',
-				image: 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=90c72aef08c983e57113372b4c764ed2',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=90c72aef08c983e57113372b4c764ed2',
-					'460': 'https://i.guim.co.uk/img/media/d0d4465b4bcbe49a5dc173752c7c1a1d070d7b5c/0_81_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=37850ebf202911c3e6514774643da7f1',
-				},
-				ageWarning: '2 years',
-				isLiveBlog: false,
-				pillar: 'news',
-				designType: 'Explainer',
-				format: {
-					design: 'ExplainerDesign',
-					theme: 'NewsPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-02-24T05:00:11.000Z',
-				headline:
-					'Micheál Martin faces a battle of conscience to form Irish government',
-				shortUrl: 'https://www.theguardian.com/p/dayh8',
-			},
-			{
-				url: 'https://www.theguardian.com/world/2020/feb/20/irish-parliament-set-for-stalemate-in-attempt-to-form-new-government',
-				linkText:
-					'Varadkar resigns as Irish government enters stalemate',
-				showByline: false,
-				byline: 'Rory Carroll Ireland correspondent',
-				image: 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=300&quality=85&auto=format&fit=max&s=41b5c9371d1c654a683fd4579aa86f26',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=300&quality=85&auto=format&fit=max&s=41b5c9371d1c654a683fd4579aa86f26',
-					'460': 'https://i.guim.co.uk/img/media/063c66e56d2758fa8f5b289e0200f3de7c68fd98/0_158_5568_3341/master/5568.jpg?width=460&quality=85&auto=format&fit=max&s=a184021c28b1447a010f3067860b29fa',
-				},
-				ageWarning: '2 years',
-				isLiveBlog: false,
-				pillar: 'news',
-				designType: 'Article',
-				format: {
-					design: 'ArticleDesign',
-					theme: 'NewsPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-02-20T23:28:27.000Z',
-				headline:
-					'Varadkar resigns as Irish government enters stalemate',
-				shortUrl: 'https://www.theguardian.com/p/dayq6',
-			},
-			{
-				url: 'https://www.theguardian.com/world/2020/feb/17/fine-gael-fianna-fail-coalition-unthinkable-says-sinn-fein-leader-mary-lou-mcdonald',
-				linkText:
-					'Varadkar prepares to go into opposition as deadlock continues',
-				showByline: false,
-				byline: 'Rory Carroll Ireland correspondent',
-				image: 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=216097ca457fbb71772b7e4d4c9706f4',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=216097ca457fbb71772b7e4d4c9706f4',
-					'460': 'https://i.guim.co.uk/img/media/0f11b4a5e5c30756ad66b6db895b4752178556d8/0_18_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=46afd5a1dfecab703860022d16a77c9f',
-				},
-				ageWarning: '2 years',
-				isLiveBlog: false,
-				pillar: 'news',
-				designType: 'Article',
-				format: {
-					design: 'ArticleDesign',
-					theme: 'NewsPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-02-17T22:37:30.000Z',
-				headline:
-					'Varadkar prepares to go into opposition as deadlock continues',
-				shortUrl: 'https://www.theguardian.com/p/da75n',
-			},
-			{
-				url: 'https://www.theguardian.com/commentisfree/2020/feb/16/even-as-ireland-economy-booms-sinn-fein-win-is-bitter-cry-for-equality',
-				linkText:
-					'Ireland’s shock poll result was a vote against the success of globalisation | Fintan O’Toole',
-				showByline: true,
-				byline: 'Fintan O’Toole',
-				image: 'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=300&quality=85&auto=format&fit=max&s=d3a5ee06927c171df87e52cf31455ca6',
-				carouselImages: {
-					'300': 'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=300&quality=85&auto=format&fit=max&s=d3a5ee06927c171df87e52cf31455ca6',
-					'460': 'https://i.guim.co.uk/img/media/8e4c578d67caed1b866fb08d48428d50e21e1fb3/0_2_4256_2554/master/4256.jpg?width=460&quality=85&auto=format&fit=max&s=c82d670a83a0644d74e7e8c451095703',
-				},
-				isLiveBlog: false,
-				pillar: 'opinion',
-				designType: 'Comment',
-				format: {
-					design: 'CommentDesign',
-					theme: 'OpinionPillar',
-					display: 'StandardDisplay',
-				},
-				webPublicationDate: '2020-02-16T07:00:22.000Z',
-				headline:
-					'Ireland’s shock poll result was a vote against the success of globalisation',
-				shortUrl: 'https://www.theguardian.com/p/d9kx7',
-			},
-		],
-	},
-	headline: 'Irish general election: who won and what happens now?',
-	byline: 'Rory Carroll Ireland correspondent',
+	headline:
+		'What is an Indigenous treaty and how would it work in Australia?',
+	byline: 'Lorena Allam',
 	isLegacyInteractive: false,
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
@@ -1629,7 +1464,7 @@ export const Explainer: CAPIArticleType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/2000.jpg',
+						url: 'https://media.guim.co.uk/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/2000.jpg',
 					},
 					{
 						index: 1,
@@ -1639,7 +1474,7 @@ export const Explainer: CAPIArticleType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/1000.jpg',
+						url: 'https://media.guim.co.uk/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/1000.jpg',
 					},
 					{
 						index: 2,
@@ -1649,7 +1484,7 @@ export const Explainer: CAPIArticleType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/500.jpg',
+						url: 'https://media.guim.co.uk/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/500.jpg',
 					},
 					{
 						index: 3,
@@ -1659,38 +1494,36 @@ export const Explainer: CAPIArticleType = {
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/140.jpg',
+						url: 'https://media.guim.co.uk/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/140.jpg',
 					},
 					{
 						index: 4,
 						fields: {
-							height: '4032',
-							width: '6720',
+							height: '2598',
+							width: '4330',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/6720.jpg',
+						url: 'https://media.guim.co.uk/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/4330.jpg',
 					},
 					{
 						index: 5,
 						fields: {
 							isMaster: 'true',
-							height: '4032',
-							width: '6720',
+							height: '2598',
+							width: '4330',
 						},
 						mediaType: 'Image',
 						mimeType: 'image/jpeg',
-						url: 'https://media.guim.co.uk/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg',
+						url: 'https://media.guim.co.uk/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg',
 					},
 				],
 			},
 			data: {
-				copyright:
-					'Copyright 2020 The Associated Press. All rights reserved.',
-				alt: 'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters',
+				alt: 'Mick Goodna, Dr Jackie Huggins, Craig Crawford MP, and Queensland premier Annastacia Palaszczuk sign path to treaty documents in Brisbane, Tuesday, 16 August, 2022. ',
 				caption:
-					'The Sinn Féin leader, Mary Lou McDonald, celebrates with supporters.',
-				credit: 'Photograph: Peter Morrison/AP',
+					'Queensland premier Annastacia Palaszczuk co-signs path to treaty documents in Brisbane, 16 August, 2022. A federally negotiated treaty seems a long way off.',
+				credit: 'Photograph: Jono Searle/AAP',
 			},
 			displayCredit: true,
 			role: 'inline',
@@ -1699,43 +1532,43 @@ export const Explainer: CAPIArticleType = {
 					weighting: 'inline',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=85&auto=format&fit=max&s=b490a5e80a678a72158cff730598095b',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=620&quality=85&auto=format&fit=max&s=cc53c2c073ebd198b5b236562959a6a8',
 							width: 620,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=43a6e0a34d02982b5631347657445aea',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=c0627f2df75c9e68f70f5ec6fc1efc00',
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=85&auto=format&fit=max&s=eba8938f937d6826e8a0b7537b834df6',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=700&quality=85&auto=format&fit=max&s=2a52fac49858f411d825eac2e82d05d7',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=ce2dbf7d2b54e58c40db8477a2dca627',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=dbb9f385651153ca8afc4965701cb152',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=85&auto=format&fit=max&s=b490a5e80a678a72158cff730598095b',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=620&quality=85&auto=format&fit=max&s=cc53c2c073ebd198b5b236562959a6a8',
 							width: 620,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=43a6e0a34d02982b5631347657445aea',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=c0627f2df75c9e68f70f5ec6fc1efc00',
 							width: 1240,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=85&auto=format&fit=max&s=8102ac3d76fed14e425489005180dece',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=645&quality=85&auto=format&fit=max&s=a5c71e1ceb863ebc525f7d697f557c78',
 							width: 645,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e1e042b164aed358f2dc46469613c7e6',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=85fdef5c6794dc18482bb7e53ded550a',
 							width: 1290,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=85&auto=format&fit=max&s=959ca6b18d7602a881555d6ab3b92039',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=465&quality=85&auto=format&fit=max&s=849566613ee8beb55605f6bb52216393',
 							width: 465,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=6722dbe9a8105c4018fdeab5bfb71339',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=273ed41a5339a0a716bd4a52c763f617',
 							width: 930,
 						},
 					],
@@ -1752,59 +1585,59 @@ export const Explainer: CAPIArticleType = {
 					weighting: 'showcase',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1020&quality=85&auto=format&fit=max&s=c57f8ebe5a46216266ad61f68760d728',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=1020&quality=85&auto=format&fit=max&s=38ab1f58ab2761342d1d8d6696aad636',
 							width: 1020,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=4caf16ea11bc11f8cd36d708ad693fc7',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=1020&quality=45&auto=format&fit=max&dpr=2&s=9b7adc800aec0389c255df97f2be381c',
 							width: 2040,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=940&quality=85&auto=format&fit=max&s=f1fe8cae541632aa81b6bf041c0f0bc8',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=940&quality=85&auto=format&fit=max&s=d117ea1c3ef484cb2560bff756f41edc',
 							width: 940,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=2f3ac8a7d5ccde1e6bd97f274cb969e7',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=940&quality=45&auto=format&fit=max&dpr=2&s=7717a61085ed505650c3380a502569d6',
 							width: 1880,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=85&auto=format&fit=max&s=eba8938f937d6826e8a0b7537b834df6',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=700&quality=85&auto=format&fit=max&s=2a52fac49858f411d825eac2e82d05d7',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=ce2dbf7d2b54e58c40db8477a2dca627',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=dbb9f385651153ca8afc4965701cb152',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=85&auto=format&fit=max&s=eba8938f937d6826e8a0b7537b834df6',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=700&quality=85&auto=format&fit=max&s=2a52fac49858f411d825eac2e82d05d7',
 							width: 700,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=ce2dbf7d2b54e58c40db8477a2dca627',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=dbb9f385651153ca8afc4965701cb152',
 							width: 1400,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=660&quality=85&auto=format&fit=max&s=b9d5bc484b3842d85a3186a1f154b737',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=660&quality=85&auto=format&fit=max&s=24305d590d342242fce9c5a6e487e38f',
 							width: 660,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=c47c5613370a89200b152a2fb089a4f0',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=3aac5e93b05551099168f6e5d208c149',
 							width: 1320,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=85&auto=format&fit=max&s=8102ac3d76fed14e425489005180dece',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=645&quality=85&auto=format&fit=max&s=a5c71e1ceb863ebc525f7d697f557c78',
 							width: 645,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=e1e042b164aed358f2dc46469613c7e6',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=645&quality=45&auto=format&fit=max&dpr=2&s=85fdef5c6794dc18482bb7e53ded550a',
 							width: 1290,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=85&auto=format&fit=max&s=959ca6b18d7602a881555d6ab3b92039',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=465&quality=85&auto=format&fit=max&s=849566613ee8beb55605f6bb52216393',
 							width: 465,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=6722dbe9a8105c4018fdeab5bfb71339',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=465&quality=45&auto=format&fit=max&dpr=2&s=273ed41a5339a0a716bd4a52c763f617',
 							width: 930,
 						},
 					],
@@ -1817,182 +1650,910 @@ export const Explainer: CAPIArticleType = {
 					weighting: 'immersive',
 					srcSet: [
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1900&quality=85&auto=format&fit=max&s=b0ae64aef784b1011e04dd6f308d8244',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=1900&quality=85&auto=format&fit=max&s=fcd120fc340e533deee663ce51b33ad2',
 							width: 1900,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=05eab6892ebd44f37a5e32341c8275cf',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=9cd52a8206a29734c769310990b65dbd',
 							width: 3800,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1300&quality=85&auto=format&fit=max&s=6fe8456e8f8e556969cf0e81b12519c3',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=1300&quality=85&auto=format&fit=max&s=70d02abe3f4533d4ccc0cc5c7631e9cc',
 							width: 1300,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=8f1f1cd318caa33147a222f2925cffa0',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=98a5579e4186523c6eb4c11d12aaf87b',
 							width: 2600,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1140&quality=85&auto=format&fit=max&s=67cc1c1f38c58d7b7ca441c22f6d3e7e',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=1140&quality=85&auto=format&fit=max&s=71940b44a0bea5a96511b5b73a47f6c3',
 							width: 1140,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=837af7b12f2f8f6aca7caa166623628f',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=86eeb0e169f214047ea3d9683ae5f286',
 							width: 2280,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=980&quality=85&auto=format&fit=max&s=3f1b086ce428b84de00a4b0e3f9b0869',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=980&quality=85&auto=format&fit=max&s=9f19af79ffa71623a36a8cdeebe6226d',
 							width: 980,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=959495e768104d8fb648fe8eec16f08c',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=d643e6f526780ebee2d512672b567d4f',
 							width: 1960,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=740&quality=85&auto=format&fit=max&s=91d116598cb707d7d642f96e4048c7cd',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=740&quality=85&auto=format&fit=max&s=2074395421af2470e271a526335f3015',
 							width: 740,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=1ba9b2bb88590a28515ea576ea197df2',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=93da8a763a67a4bcc8cdcae0e200f1ca',
 							width: 1480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=660&quality=85&auto=format&fit=max&s=b9d5bc484b3842d85a3186a1f154b737',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=660&quality=85&auto=format&fit=max&s=24305d590d342242fce9c5a6e487e38f',
 							width: 660,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=c47c5613370a89200b152a2fb089a4f0',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=3aac5e93b05551099168f6e5d208c149',
 							width: 1320,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=480&quality=85&auto=format&fit=max&s=7b4cd7e2c1ccb55af1bdc47faa5ef6b4',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=480&quality=85&auto=format&fit=max&s=7e7fbee4080fbe803ee2fbf6aa345a6d',
 							width: 480,
 						},
 						{
-							src: 'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=d38edaef1aa8039ac1304194a0c8393a',
+							src: 'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=6ee6fd168fa434bcba58e937d1ab761e',
 							width: 960,
 						},
 					],
 				},
 			],
-			elementId: '6436c76c-fee6-4527-bab9-0888fa9f289f',
+			elementId: '2908c275-790d-4d99-9a79-8ae9d5867615',
 		},
 	],
-	webPublicationDate: '2020-02-10T12:31:25.000Z',
+	webPublicationDate: '2022-08-20T20:00:50.000Z',
 	blocks: [
 		{
-			id: '5e413c398f0811db2faf4cdd',
+			id: '62fdd0bf8f0892f840b8947f',
 			elements: [
 				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>In 2017, the <a href="https://www.theguardian.com/australia-news/uluru-statement-from-the-heart" data-component="auto-linked-tag">Uluru Statement from the Heart</a> called for three things: voice, treaty and truth. Or, a voice to parliament enshrined in the constitution and a Makarrata<em><strong> </strong></em>commission to oversee a process of treaty-making and truth-telling.</p>',
+					elementId: '80921122-1368-410d-9c97-b29019db8139',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Successive prime ministers rejected those calls. In 2017, Malcolm Turnbull dismissed the voice as a “third chamber” – a position he has since changed, <a href="https://www.theguardian.com/australia-news/commentisfree/2022/aug/15/i-will-be-voting-yes-to-establish-an-indigenous-voice-to-parliament">publicly declaring on Monday</a> he would vote yes in a referendum. In 2020, Scott Morrison <a href="https://www.smh.com.au/politics/federal/why-would-i-morrison-rules-out-referendum-on-indigenous-voice-if-re-elected-20220502-p5ahue.html">simply ruled it out</a>.</p>',
+					elementId: '156e36c8-b4a8-4613-895d-ff6f08680534',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>In May, Labor was elected on a promise to implement the Uluru statement in full. But in the intervening five years, state and territory governments went ahead with treaty-making and truth-telling processes, and a couple of big milestones were reached this week.</p>',
+					elementId: '74ce856a-20bd-4c51-b8a4-6f54c1f019d5',
+				},
+				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>Who won Ireland’s general election?</h2>',
-					elementId: 'a2356ea4-ec7d-47b4-947e-bb92a1bb2e14',
+					html: '<h2>So what is a treaty and how do they work?</h2>',
+					elementId: 'b282752d-545a-408b-b7c9-fbcd2fb6fc6b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Sinn Féin <a href="https://www.theguardian.com/world/2020/feb/09/sinn-fein-to-try-to-form-ruling-coalition-after-irish-election-success">won the most first-preference votes</a> – 24.5% – making it the most popular party and a strong contender to be included in the next government. <a href="https://www.theguardian.com/world/2020/jan/31/leo-varadkar-paradox-feted-abroad-can-pm-arrest-polls-slump-in-ireland-election">Leo Varadkar</a>’s ruling Fine Gael party slid to 20.8%, coming third, and Fianna Fáil, the main opposition party, also slipped, falling to 22.1% in second place. The rest of the vote was split between the Greens, on 7.1%, and small leftwing parties and independent candidates.</p>',
-					elementId: '7ded3bfd-fc18-41e4-83de-f3fb5c592b08',
+					html: '<p>A treaty is a binding agreement between two or more parties. A treaty sets out the terms of engagement and obligations of all sides to maintain the agreement.</p>',
+					elementId: 'a2e5254e-577d-4b71-9868-54a6a4ed6db4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Sinn Féin fielded too few candidates to fully translate its support into seats so Fianna Fáil is expected to be the biggest party in Dáil Éireann, the Irish parliament’s lower house, which has 160 members, when all seats are allocated under Ireland’s single transferrable vote system of proportional representation.</p>',
-					elementId: '5a161746-640c-419b-b030-193b2199359c',
+					html: '<p>New Zealand (Aotearoa), Canada, Norway, Sweden, Finland, Japan, Greenland and the US have all negotiated treaties with <a href="https://www.theguardian.com/world/indigenous-peoples" data-component="auto-linked-tag">Indigenous peoples</a>.</p>',
+					elementId: '4b45231c-f3ee-44db-8502-22e467785f78',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
-					url: 'https://www.theguardian.com/world/2020/feb/10/ireland-election-latest-results-live-sinn-fein-fine-gael-fianna-fail',
-					text: 'Ireland election: latest results',
+					url: 'https://www.theguardian.com/australia-news/2022/aug/16/victoria-passes-landmark-legislation-to-create-first-nations-treaty-authority',
+					text: 'Victoria passes landmark legislation to create First Nations treaty authority',
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: '954a0ff7-bfc5-4b06-8158-2f764284841b',
+					elementId: '5319e91b-74d1-41b6-875d-213067a9112b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Current projections give Fianna Fáil around 42, with Sinn Féin and <a href="https://www.theguardian.com/world/fine-gael" data-component="auto-linked-tag">Fine Gael</a> each in the mid to high 30s. Full results are expected later on Monday or Tuesday.</p>',
-					elementId: 'b4bdff4c-6b41-47d5-a425-4822392c3b5d',
+					html: '<p>Canada<strong> </strong>has made about 70<a href="https://www.rcaanc-cirnac.gc.ca/eng/1100100028574/1529354437231"> recognised treaties</a> with First Nations peoples since 1701. In some cases, such as Nunavut in northern Canada, they have led to self-government. But not all treaties are <a href="https://indigenousstudies.utoronto.ca/news/treaty-myths/">easily understood</a>, workable or extant.</p>',
+					elementId: 'd257a35f-bc99-4c9c-bc8f-45f5385834f9',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The United States government ratified more than 364 treaties between 1778 and 1868. Treaties were largely used by the US to put an end to conflict, and later used to <a href="http://recordsofrights.org/themes/4/rights-of-native-americans#the-end-of-treaty-making">force Native Americans off their </a>lands. The vast majority of treaties were<a href="https://theintercept.com/2020/07/17/mcgirt-v-oklahoma-indian-native-treaties/"> broken or never honoured</a> by the US government.</p>',
+					elementId: '327e0174-c1b0-40f9-94b3-78fe203d325c',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+					media: {
+						allImages: [
+							{
+								index: 0,
+								fields: {
+									height: '4756',
+									width: '7926',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/7926.jpg',
+							},
+							{
+								index: 1,
+								fields: {
+									isMaster: 'true',
+									height: '4756',
+									width: '7926',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg',
+							},
+							{
+								index: 2,
+								fields: {
+									height: '1200',
+									width: '2000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/2000.jpg',
+							},
+							{
+								index: 3,
+								fields: {
+									height: '600',
+									width: '1000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/1000.jpg',
+							},
+							{
+								index: 4,
+								fields: {
+									height: '300',
+									width: '500',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/500.jpg',
+							},
+							{
+								index: 5,
+								fields: {
+									height: '84',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/140.jpg',
+							},
+						],
+					},
+					data: {
+						alt: 'Co-chair of the First Peoples Assembly of Victoria Marcus Stewart address the Victorian parliament in Melbourne, 22 June, 2022.',
+						caption:
+							'Co-chair of the First Peoples Assembly of Victoria Marcus Stewart address the Victorian parliament in Melbourne, 22 June, 2022.',
+						credit: 'Photograph: Joel Carrett/AAP',
+					},
+					displayCredit: true,
+					role: 'inline',
+					imageSources: [
+						{
+							weighting: 'inline',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=620&quality=85&auto=format&fit=max&s=a53e7c8f6cb090ae5a1a1417c28f0b16',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=16f2fa6ec916725f2a48cc8e32508d82',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=605&quality=85&auto=format&fit=max&s=9803579f9b56d2bbbcf1ec7ed1e3810c',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=9c2cdd4bd2b38a07a0765d47fd841a26',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=445&quality=85&auto=format&fit=max&s=7c5e965c385e1dfeccc3b0672d8ece52',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=7d416f951afbcda3dc888d0a08ae6d42',
+									width: 890,
+								},
+							],
+						},
+						{
+							weighting: 'thumbnail',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=140&quality=85&auto=format&fit=max&s=f85b861a9df3fa6fc016d455191004c0',
+									width: 140,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=82abfb34b0c984108b13cb29fd5ef128',
+									width: 280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=120&quality=85&auto=format&fit=max&s=5822fc8e69b25b6e98f5cac9931731f2',
+									width: 120,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=1e298ea4f878996f579045008da5aee8',
+									width: 240,
+								},
+							],
+						},
+						{
+							weighting: 'supporting',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=380&quality=85&auto=format&fit=max&s=cddf248934e1d02bbbe79bbeb3247fed',
+									width: 380,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=e1fd6d07bee1040121b5576f80037db4',
+									width: 760,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=300&quality=85&auto=format&fit=max&s=5d32684cf017f192d2dfb34d1cb8cb99',
+									width: 300,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=3650285cf62d56b73120aab668f829dd',
+									width: 600,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=620&quality=85&auto=format&fit=max&s=a53e7c8f6cb090ae5a1a1417c28f0b16',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=16f2fa6ec916725f2a48cc8e32508d82',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=605&quality=85&auto=format&fit=max&s=9803579f9b56d2bbbcf1ec7ed1e3810c',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=9c2cdd4bd2b38a07a0765d47fd841a26',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=445&quality=85&auto=format&fit=max&s=7c5e965c385e1dfeccc3b0672d8ece52',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=7d416f951afbcda3dc888d0a08ae6d42',
+									width: 890,
+								},
+							],
+						},
+						{
+							weighting: 'showcase',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=860&quality=85&auto=format&fit=max&s=bce5e7218990d57e69becf295313ffa4',
+									width: 860,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=e10fc1f635f12e0aaaff4dda270a08eb',
+									width: 1720,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=780&quality=85&auto=format&fit=max&s=ad8203250a1a00e56e266abbb483a5c6',
+									width: 780,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=b0c9a513e59b0e817862a9016adbe554',
+									width: 1560,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=620&quality=85&auto=format&fit=max&s=a53e7c8f6cb090ae5a1a1417c28f0b16',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=16f2fa6ec916725f2a48cc8e32508d82',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=605&quality=85&auto=format&fit=max&s=9803579f9b56d2bbbcf1ec7ed1e3810c',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=9c2cdd4bd2b38a07a0765d47fd841a26',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=445&quality=85&auto=format&fit=max&s=7c5e965c385e1dfeccc3b0672d8ece52',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=7d416f951afbcda3dc888d0a08ae6d42',
+									width: 890,
+								},
+							],
+						},
+						{
+							weighting: 'halfwidth',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=620&quality=85&auto=format&fit=max&s=a53e7c8f6cb090ae5a1a1417c28f0b16',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=16f2fa6ec916725f2a48cc8e32508d82',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=605&quality=85&auto=format&fit=max&s=9803579f9b56d2bbbcf1ec7ed1e3810c',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=9c2cdd4bd2b38a07a0765d47fd841a26',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=445&quality=85&auto=format&fit=max&s=7c5e965c385e1dfeccc3b0672d8ece52',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=7d416f951afbcda3dc888d0a08ae6d42',
+									width: 890,
+								},
+							],
+						},
+						{
+							weighting: 'immersive',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=1900&quality=85&auto=format&fit=max&s=87280175bd06b35a71821a306ad1812d',
+									width: 1900,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=c4a6bee8330341d7f40cb0683e29b599',
+									width: 3800,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=1300&quality=85&auto=format&fit=max&s=dae077febe79711a408bdd40d3318ea8',
+									width: 1300,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=e5f9940c4c128c32ff462188b13db25f',
+									width: 2600,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=1140&quality=85&auto=format&fit=max&s=fa201ee7547f1e5132940e277906282b',
+									width: 1140,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=70d3a46dca7d74a3b96d978229d96c48',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=980&quality=85&auto=format&fit=max&s=e10c58612714cde68ec0f5a7f64e03c5',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=613699ee9a7c3d5b0c67657be22579b5',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=740&quality=85&auto=format&fit=max&s=5aee9bf259345f12c60c2fa758f06dfb',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=49dc908fb91e42fc2a2b597eec6cba1d',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=660&quality=85&auto=format&fit=max&s=99098cd8f3b73921efef4c876c47518d',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=20b8f3ff3e474b99c72928b7e31d3519',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=480&quality=85&auto=format&fit=max&s=47c8451d24ad7351709c51a175c4671b',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/d3623b981bcf1ce0c348d160d7075e428d795402/0_140_7926_4756/master/7926.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=3864953e436039b47438f4785185cc1e',
+									width: 960,
+								},
+							],
+						},
+					],
+					elementId: 'e3a0a4ba-550e-4dda-bd9a-d2b0936b55eb',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>In New Zealand (Aotearoa), Māori and the British signed the treaty of Waitangi in 1840. It is still being grappled with. There were two versions – one in English and one in Māori - and they were not exact translations, so there were major differences in interpretation, especially around Māori sovereignty. In 1975, the <a href="https://waitangitribunal.govt.nz/treaty-of-waitangi/meaning-of-the-treaty/">Waitangi tribunal</a> was set up to determine the issues raised by these different meanings. In 2014 it decided the Māori leaders who signed did not cede sovereignty, a big step forward.</p>',
+					elementId: '8ce2640a-d820-4304-8dcb-80c18acecc36',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>Was Sinn Féin’s success a surprise?</h2>',
-					elementId: '27b66c0d-7a24-40ab-9163-db457a2e13cc',
+					html: '<h2>How long has treaty-making been on the agenda in Australia?</h2>',
+					elementId: 'ce6dd570-66b6-4e32-96ca-db87a016fca2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>An opinion poll signalled it last week but the result is still a big shock. Fine Gael and Fianna Fáil, centrist rivals, dominated Irish politics for the past century, taking turns to rule. That era appears over.</p>',
-					elementId: '0ff53a21-8572-4f7b-8704-cd21153080b8',
+					html: '<p>In Australia, there has never been a treaty negotiated between Aboriginal and Islander nations and the commonwealth.</p>',
+					elementId: '455f30ce-b219-469f-8b8f-44fbaa1f4659',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Calls for treaty<strong>-</strong>making go back decades. A line is often traced from the 1963 Yirrkala bark petition – in which Yolngu (the Indigenous people of north-east Arnhem Land) asserted their sovereignty over lands where the federal government had allowed a bauxite mine – through the 1966 <a href="https://www.nma.gov.au/defining-moments/resources/wave-hill-walk-off">Gurindji walk-off</a> at Wave Hill station, and the NT Aboriginal Land Rights Act in 1976, all the way to 1988, when the Treaty 88 campaign took off amid <a href="https://www.youtube.com/watch?v=5nlCxz650Yo&amp;ab_channel=DreamscapePublishing">huge Aboriginal protests </a>against the bicentennial.</p>',
+					elementId: '65015484-7930-4bd0-ac76-35782c62a948',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>In June that year, traditional owners presented <a href="https://aiatsis.gov.au/explore/barunga-statement">the Barunga statement</a> to Bob Hawke, who promised there’d be a treaty by the end of 1990. As Yothu Yindi sang in Treaty, a 1991 song about the events that day, “promises can disappear, just like writing in the sand”.</p>',
+					elementId: '73c3c9a7-ac96-49e1-b0ea-8c3a457327d8',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>In 2007, in perhaps an attempt to derail further treaty calls, the Howard government developed a plan for symbolic constitutional recognition. Successive governments have committed to some form of recognition.</p>',
+					elementId: 'b544a110-abec-441d-9b09-ba2d9a289d06',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>Is Varadkar going to lose power?</h2>',
-					elementId: '92a8d8c3-78f8-4205-a879-349f23cd021b',
+					html: '<h2>What are the states doing on treaty-making?</h2>',
+					elementId: '83b429c4-f978-488c-9b84-5102b348ef2d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Very possibly, but there’s a chance he could hang on as taoiseach after negotiations between party leaders to form a coalition with 80 seats, the magic number for a parliamentary majority. Varadkar says he would be willing to lead Fine Gael in opposition.</p>',
-					elementId: '82a3ae4c-caa8-4f95-b465-b249e5237622',
+					html: '<p>At least three states have formally embarked on treaty processes, and some are also exploring truth-telling.</p>',
+					elementId: '87c6a65c-d146-48d1-9ae0-fd01c7033ca5',
 				},
 				{
-					_type: 'model.dotcomrendering.pageElements.QABlockElement',
-					id: '95c8ba09-ecce-4bfa-9140-a262990fbdce',
-					title: 'What are the main political parties in Ireland?',
-					html: '<p><a href="https://www.theguardian.com/politics/fine-gael">Fine Gael</a><br></p><p>Its name can be translated as family or tribe of the Irish. A centre-right party with a socially progressive tilt. In office since 2011, first led by Enda Kenny, then&nbsp;<a href="https://www.theguardian.com/world/leo-varadkar">Leo Varadkar</a>, with support from smaller coalition partners. Traces roots to Michael Collins and the winning side in Ireland’s 1922-23 civil war. The party traditionally advocates market economics and fiscal discipline. Appeals to the urban middle class and well-off farmers.</p><p><a href="https://www.theguardian.com/politics/fianna-fail">Fianna Fáil</a></p><p>Its name means Soldiers of Destiny. A centrist, ideologically malleable party that dominated Irish politics until it steered the Celtic Tiger economy over a cliff, prompting decade-long banishment to opposition benches. Under Micheál Martin, a nimble political veteran, it has clawed back support and may overtake Fine Gael as the biggest party and lead the next coalition government. Founded by Éamon de Valera, who backed the civil war’s losing side but turned Fianna Fáil into an election-winning machine.</p><p><a href="https://www.theguardian.com/politics/sinn-fein">Sinn Féin</a></p><p>Its name means We Ourselves, signifying Irish sovereignty. A leftwing republican party that competes in Northern Ireland as well as the Republic. Traces roots to 1905. Emerged in current form during the Troubles, when it was linked to the IRA. Peace in Northern Ireland helped Sinn Féin rebrand as a working-class advocate opposed to austerity. Under Mary Lou McDonald, a Dubliner without paramilitary baggage, Sinn Féin has become the third-biggest party, and its vote share surged in the 2020 election.&nbsp;</p><p>Others</p><p>Partnership with Fine Gael during post-Celtic Tiger austerity tainted the centre-left <b>Labour</b> party. The political arm of the trade union movement, it is led by Brendan Howlin, a former teacher and government minister.</p><p>The <b>Social Democrats</b> and <b>Solidarity-People Before Profit</b> are part of an alphabet soup of smaller, more leftwing parties. The <b>Greens</b>, wiped out in 2011 after a ruinous coalition with Fianna Fáil, have campaigned on the back of climate crisis anxiety and youth-led protests. Independent TDs have prospered in recent elections, turning some into outsized players in ruling coalitions. <b>Rory Carroll</b></p>',
-					credit: '',
-					elementId: '9b64c8e8-8804-427e-875e-2147d10d212d',
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The Queensland government <a href="https://www.theguardian.com/australia-news/2022/aug/16/queensland-to-unveil-indigenous-truth-telling-inquiry-as-part-of-path-to-treaty">announced on Monday</a> it would set up an independent treaty institute to design a framework for agreement making with the government and it will support a three-year long truth-telling inquiry.</p>',
+					elementId: '6c5f26dc-26c5-4e73-9def-4f23c8c42fb1',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>On Tuesday, Victoria became the first state to pass legislation to set up an independent <a href="https://www.theguardian.com/australia-news/2022/jun/07/decolonisation-in-action-victorian-treaty-negotiations-to-be-overseen-by-independent-authority">Indigenous treaty authority</a>, to “umpire” treaty negotiations and resolve disputes between traditional owner groups and the state government.</p>',
+					elementId: '7587a0c5-2cf9-4976-9d37-cfedbc7c17f4',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>Victoria has also embarked on truth-telling, which is proving challenging for many reasons. The Yoorrook justice commission handed down its first report in July, outlining elders’ experiences of colonisation and the stolen generations. It is seeking a two-year extension on its final report to 2026, to ensure the truth-telling process does not “<a href="https://www.theguardian.com/australia-news/2022/jul/09/yoorrook-the-fight-for-victorias-truth-telling-commission-to-achieve-its-groundbreaking-goals">replicate colonial injustices</a>” and re-traumatise Aboriginal people.</p>',
+					elementId: '49cd4bff-352d-4617-9e94-1b011a26e765',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The Northern Territory treaty commission handed its final report to the government in March, after four years of consultation with communities. It said the firm focus of any treaties must be to <a href="https://www.theguardian.com/australia-news/2022/jun/29/nt-treaties-must-achieve-highest-levels-of-self-determination-for-first-nations-commissioner-says">enable First Nations self-government</a>. The NT should establish a First Nations forum and develop a territory-wide agreement that would set the minimum standards for all subsequent treaties. Importantly, treaty-making could be between Indigenous nations as well as with governments.</p>',
+					elementId: '95ba4042-a829-4040-b215-f13a3ab03e06',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>The government said it would provide a comprehensive response by the end of 2022.</p>',
+					elementId: '254f6aa1-33fe-42d1-8e47-04b09bc381f5',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>In March, Tasmania’s<strong> </strong>then<strong> </strong>premier, Peter Gutwein, said there was<strong> “</strong>broad support to take further steps” on truth-telling and treaty. There are plans for an advisory body, Gutwein said, and all registered Aboriginal community organisations were invited to be involved.</p>',
+					elementId: '11648863-db9e-4710-8727-30892b7fe7d8',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
+					url: 'https://www.theguardian.com/australia-news/2022/aug/16/queensland-to-unveil-indigenous-truth-telling-inquiry-as-part-of-path-to-treaty',
+					text: 'Queensland to unveil Indigenous truth-telling inquiry as part of path to treaty',
+					prefix: 'Related: ',
+					role: 'thumbnail',
+					elementId: '6b49f003-7bcc-4dde-b75a-d29014f40cac',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>In Western Australia, the landmark <a href="https://www.wa.gov.au/organisation/department-of-the-premier-and-cabinet/south-west-native-title-settlement">south-west native title settlement </a>is often cited as Australia’s first treaty. It is the most comprehensive native title agreement negotiated in history, a $1.3bn settlement of Noongar peoples’ native title over 200,000 square kilometres of their traditional lands including Perth.</p>',
+					elementId: '2d14454b-d7ae-4743-a816-a134aa564785',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>South Australia’s<strong> </strong>process had<strong> </strong>stalled under the previous government, but the new Labor attorney general, Kyam Maher, has said he is determined to reignite the process.</p>',
+					elementId: 'ca11bc55-9208-4df7-8468-d1844e54ab6e',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>New South Wales is the outlier. There has been no commitment to a treaty, but a broad commitment to the principles of the Uluru statement.</p>',
+					elementId: '7e86537e-dd21-4bc6-917a-86a014a88f83',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>Why did Sinn Féin do so well?</h2>',
-					elementId: '00d72c55-6e5a-4fc4-be1e-8377920d1ce9',
+					html: '<h2>What about a national treaty?</h2>',
+					elementId: '6014974a-242d-4b88-852a-aa2913ad7ae2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>It rode a wave of anger over homelessness, soaring rents, hospital waiting lists and and fraying public services. Its leader, <a href="https://www.theguardian.com/politics/2020/feb/07/mary-lou-mcdonald-sinn-fein-leader-kingmaker-ireland-election-ireland">Mary Lou McDonald</a>, and party colleagues such as Eoin Ó Broin and Pearse Doherty offered leftwing solutions, such as an ambitious public housing building programme, that enthused voters, especially those under 50.</p>',
-					elementId: 'a41010c7-4b5e-4304-b6d7-9f55e60d9a15',
+					html: '<p>In 2017 at Uluru, the <a href="https://www.referendumcouncil.org.au/">Referendum Council</a> convened the First Nations constitutional convention, where the Uluru Statement from the Heart called for sequential reforms: a voice, treaty and truth.</p>',
+					elementId: '53a5a1a7-a365-40c2-8b89-2726c77859a6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Varadkar’s attempt to frame the election around his Brexit diplomacy and the humming economy fell flat. Fianna Fáil was contaminated by its confidence-and-supply deal that had propped up Varadkar’s minority administration, leaving Sinn Féin to cast itself as the agent of real change. Voters forgot, forgave or did not care about its past as the IRA’s political wing during the Troubles.</p>',
-					elementId: '600a5296-3d47-4a25-b6c9-78b89564ddfd',
+					html: '<p>In July this year the prime minister, Anthony Albanese, released <a href="https://www.theguardian.com/australia-news/2022/jul/29/anthony-albanese-reveals-simple-and-clear-wording-of-referendum-question-on-indigenous-voice">a preferred form of words</a> he wants to put to the Australian people in a referendum, to amend the constitution to enable a voice to parliament to be established.</p>',
+					elementId: '2d2dfb4b-6f99-4c49-b82d-b47d422e90ee',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
+					media: {
+						allImages: [
+							{
+								index: 0,
+								fields: {
+									height: '4918',
+									width: '8192',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/8192.jpg',
+							},
+							{
+								index: 1,
+								fields: {
+									isMaster: 'true',
+									height: '4918',
+									width: '8192',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg',
+							},
+							{
+								index: 2,
+								fields: {
+									height: '1200',
+									width: '2000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/2000.jpg',
+							},
+							{
+								index: 3,
+								fields: {
+									height: '600',
+									width: '1000',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/1000.jpg',
+							},
+							{
+								index: 4,
+								fields: {
+									height: '300',
+									width: '500',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/500.jpg',
+							},
+							{
+								index: 5,
+								fields: {
+									height: '84',
+									width: '140',
+								},
+								mediaType: 'Image',
+								mimeType: 'image/jpeg',
+								url: 'https://media.guim.co.uk/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/140.jpg',
+							},
+						],
+					},
+					data: {
+						alt: 'Minister for Indigenous Australians Linda Burney and prime minister of Australia Anthony Albanese at Garma festival 2022.',
+						caption:
+							'Minister for Indigenous Australians Linda Burney and prime minister of Australia Anthony Albanese at Garma festival 2022.',
+						credit: 'Photograph: Carly Earl/The Guardian',
+					},
+					displayCredit: true,
+					role: 'inline',
+					imageSources: [
+						{
+							weighting: 'inline',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=620&quality=85&auto=format&fit=max&s=8092f6a187dca31845bb6756f95cb802',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=d4d6ba6ca75858c8d8c29c90be5e9113',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=605&quality=85&auto=format&fit=max&s=9e096812bc93b86aa462a849af1ce4de',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8f54b3ccae56d0b9375ea2c010eb9e68',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=445&quality=85&auto=format&fit=max&s=e80afa47768d9a30b70381f0eaafb5e5',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=9d8fb6c7d15b6364e0b17322a1c3caed',
+									width: 890,
+								},
+							],
+						},
+						{
+							weighting: 'thumbnail',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=140&quality=85&auto=format&fit=max&s=e710b6934bd8080ed862fc0fd62d1c72',
+									width: 140,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=140&quality=45&auto=format&fit=max&dpr=2&s=8b4e1bfc13bc4f6d4b32b0d463c34624',
+									width: 280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=120&quality=85&auto=format&fit=max&s=f45d9930ad030b17bbbfba29d104c8e9',
+									width: 120,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=120&quality=45&auto=format&fit=max&dpr=2&s=b7ca74280d639cab622a0489ebf91fed',
+									width: 240,
+								},
+							],
+						},
+						{
+							weighting: 'supporting',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=380&quality=85&auto=format&fit=max&s=0a1b87018c349133d5f6a3bdd83c6388',
+									width: 380,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=380&quality=45&auto=format&fit=max&dpr=2&s=145b57836c11cb7607c3ab563f8b80c1',
+									width: 760,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=300&quality=85&auto=format&fit=max&s=d8ee8531f0cb4bbc7977149a1e77b43a',
+									width: 300,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=300&quality=45&auto=format&fit=max&dpr=2&s=42f01c3f355e5a46251a3753e2adc6b3',
+									width: 600,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=620&quality=85&auto=format&fit=max&s=8092f6a187dca31845bb6756f95cb802',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=d4d6ba6ca75858c8d8c29c90be5e9113',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=605&quality=85&auto=format&fit=max&s=9e096812bc93b86aa462a849af1ce4de',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8f54b3ccae56d0b9375ea2c010eb9e68',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=445&quality=85&auto=format&fit=max&s=e80afa47768d9a30b70381f0eaafb5e5',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=9d8fb6c7d15b6364e0b17322a1c3caed',
+									width: 890,
+								},
+							],
+						},
+						{
+							weighting: 'showcase',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=860&quality=85&auto=format&fit=max&s=714263fc6d572cf9dbc7837b1d61be5d',
+									width: 860,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=860&quality=45&auto=format&fit=max&dpr=2&s=458b9f39538a4de36f8b434772f39fc2',
+									width: 1720,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=780&quality=85&auto=format&fit=max&s=5427b65c29b332ae2d8e0c51e8c8a28a',
+									width: 780,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=780&quality=45&auto=format&fit=max&dpr=2&s=24cd69715fc662d87d32d6fdf37e20d6',
+									width: 1560,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=620&quality=85&auto=format&fit=max&s=8092f6a187dca31845bb6756f95cb802',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=d4d6ba6ca75858c8d8c29c90be5e9113',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=605&quality=85&auto=format&fit=max&s=9e096812bc93b86aa462a849af1ce4de',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8f54b3ccae56d0b9375ea2c010eb9e68',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=445&quality=85&auto=format&fit=max&s=e80afa47768d9a30b70381f0eaafb5e5',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=9d8fb6c7d15b6364e0b17322a1c3caed',
+									width: 890,
+								},
+							],
+						},
+						{
+							weighting: 'halfwidth',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=620&quality=85&auto=format&fit=max&s=8092f6a187dca31845bb6756f95cb802',
+									width: 620,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=d4d6ba6ca75858c8d8c29c90be5e9113',
+									width: 1240,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=605&quality=85&auto=format&fit=max&s=9e096812bc93b86aa462a849af1ce4de',
+									width: 605,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=8f54b3ccae56d0b9375ea2c010eb9e68',
+									width: 1210,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=445&quality=85&auto=format&fit=max&s=e80afa47768d9a30b70381f0eaafb5e5',
+									width: 445,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=9d8fb6c7d15b6364e0b17322a1c3caed',
+									width: 890,
+								},
+							],
+						},
+						{
+							weighting: 'immersive',
+							srcSet: [
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=1900&quality=85&auto=format&fit=max&s=a1840687352b98bc49bef6de272f9948',
+									width: 1900,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=2743dc38d99f7aa9b2d286c2e603f4b6',
+									width: 3800,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=1300&quality=85&auto=format&fit=max&s=5a03f92c935550ae99c6b8b2f6b8e6c9',
+									width: 1300,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=bed78af32d98b4d90b373efe68a70d04',
+									width: 2600,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=1140&quality=85&auto=format&fit=max&s=72db7446ac196cfeab1ad40e808e6591',
+									width: 1140,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=114886cd900f70822f7e826d57b469b6',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=980&quality=85&auto=format&fit=max&s=d96f37624911e4f2232a0e80c15a058b',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=06bbd9e4ff1c71bfa365080856e9d053',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=740&quality=85&auto=format&fit=max&s=6adc4ff4b18aa2ae9cbe4f0789c563e1',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=6b45237eb1152a37d6227d78c466d5b1',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=660&quality=85&auto=format&fit=max&s=1c9c4376d9b21af10ecb80bfa1e122ef',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=5ef988827d5c100c5714f4fb1e8b576a',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=480&quality=85&auto=format&fit=max&s=2b801ab14ef6e468ef68fbf2a22f863b',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/234a7db93bfe5c2f3e07b5558a2ac2caf08fecaa/0_147_8192_4918/master/8192.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=e65c5a24484bdad6be2047d8b4ddff32',
+									width: 960,
+								},
+							],
+						},
+					],
+					elementId: 'f7650a24-a355-49b5-945b-b6af44bb015e',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>If successful, it will give parliament the enabling power to settle on the details of the voice after a referendum. The Balnaves chair for constitutional law at the University of New South Wales, Prof Megan Davis, said in early August it was a “<a href="https://www.theguardian.com/australia-news/2022/aug/06/a-civil-mature-conversation-architects-of-the-uluru-statement-make-plea-for-consensus-on-referendum">common constitutional technique” to defer detail </a>to the parliament at a later date.</p>',
+					elementId: 'e86da63d-ea67-4a77-8df5-ec18cb0aa866',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>“That’s how, for example, the high court was set up,” Davis said. “The enabling provision has passed, and the institution’s been set up later.”</p>',
+					elementId: '648544c5-276d-42c1-abb5-96d75a2b0e41',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>On Friday, the minister for <a href="https://www.theguardian.com/australia-news/indigenous-australians" data-component="auto-linked-tag">Indigenous Australians</a>, Linda Burney, said the government’s “priority” is to conduct the referendum.</p>',
+					elementId: 'c4f323c0-48cb-4e0f-b768-3d6aea862384',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>“I’m not sure people appreciate just how complex and how involving that is,” Burney told the ABC.</p>',
+					elementId: '1cac7494-156f-4d55-875f-4a0956901923',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
+					html: '<p>So, to follow the sequence, any federally negotiated treaties are still a long way off.</p>',
+					elementId: '4167f73e-45cc-4b84-a619-e427fbb95c5a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-					html: '<h2>What happens next?</h2>',
-					elementId: 'd8183aaa-2ea1-40de-9b36-fd1bdeeed14e',
+					html: '<h2>Why do First Nations want to negotiate a treaty or treaties?</h2>',
+					elementId: '9e89e054-ad77-40ba-b063-2365033545d7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Weeks – possibly months – of negotiations between party leaders. McDonald is floating an alliance of leftwing parties led by Sinn Féin but that’s unlikely – it would be far short of 80 seats. The only viable looking option entails an alliance between two of the three main parties plus perhaps the Greens.</p>',
-					elementId: '483e7888-94ab-43bd-8f23-9d6230a4f38c',
+					html: '<p>“So that we can overcome those huge injustices that still, unfortunately, persist in our society,” the Queensland treaty advancement committee co-chair Dr Jackie Huggins said this week.</p>',
+					elementId: '23935559-f2f3-4939-9bf0-25a77e5b9011',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Varadkar has ruled out a pact with Sinn Féin and floated a deal with Fianna Fáil. During the campaign the Fianna Fáil leader, Micheál Martin, ruled out entering government with Fine Gael or Sinn Féin but since Sunday has hinted he may do a deal with one or the other.</p>',
-					elementId: '8c652fc7-43a2-4883-9aec-77cdfee6c276',
+					html: '<p>“The path to treaty is about how we mend the very fabric of our society.”</p>',
+					elementId: '983baf95-0253-4f7d-9768-daab10a6a752',
+				},
+				{
+					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
+					html: '<h2>And what about the view that treaties are only symbolic; they don’t achieve practical change?</h2>',
+					elementId: 'a4567eed-512e-4f91-bd17-5e8bf2913903',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>Expect shadow boxing. Sinn Féin will be very wary about entering government as a junior partner – a recipe for punishment at the next election, as other parties have discovered. Some suspect its preferred outcome is a Fianna Fáil-Fine Gael government – an unpopular continuation of the status quo that would consolidate Sinn Féin as leader-in-waiting of the subsequent government.</p>',
-					elementId: 'b814ef11-8ae0-45cb-8e02-6bdc93d02aae',
+					html: '<p>If done right, treaties allow Aboriginal people to run their own affairs, the NT acting treaty commissioner, Tony McAvoy, <a href="https://www.abc.net.au/news/2022-06-29/nt-treaty-report-released-by-commissioner/101192202">told the ABC</a> in March.</p>',
+					elementId: '439cc521-384d-4763-8692-6d5c027b1ae9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>For that reason Fianna Fáil will hesitate to do a deal with Fine Gael. But Fianna Fáil may oust Martin if he does not become taoiseach.</p>',
-					elementId: '6cfe25ef-d22e-4c0e-b770-92660d496725',
+					html: '<p>“When Aboriginal communities [and] Aboriginal organisations design and deliver the services for Aboriginal people, those services are the most effective at that time. We would see a significant change in the levels of disadvantage if we’re able to ensure those governments are supported and properly resourced to do the work,” McAvoy said.</p>',
+					elementId: '43cd4ac6-2403-423c-9018-eee8fb88f685',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p>One plausible outcome: deadlock, and another election.</p>',
-					elementId: 'ff4ffaef-b600-4c88-8fa9-4cee22a4982d',
+					html: '<p>Pat Anderson, one of the key campaigners for the Uluru statement, said these reforms <a href="https://www.theguardian.com/australia-news/2022/aug/06/a-civil-mature-conversation-architects-of-the-uluru-statement-make-plea-for-consensus-on-referendum">allow for Aboriginal people to directly tell governments</a> what they want and need.</p>',
+					elementId: '3e3fab6e-9bc1-45d1-8645-dd7da5e8b092',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p><strong>Read more</strong></p>',
-					elementId: 'ee9c4e34-b0fe-41b3-830d-d44056723acd',
-				},
-				{
-					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
-					html: '<p><a href="https://www.theguardian.com/politics/2020/feb/07/mary-lou-mcdonald-sinn-fein-leader-kingmaker-ireland-election-ireland">Mary Lou McDonald: Sinn Féin leader who may play Dublin kingmaker</a><br><a href="https://www.theguardian.com/world/2020/feb/08/sinn-fein-on-election-day-shane-obrien">‘It’s a sea change’: Sinn Féin dares to dream on election day</a><br><a href="https://www.theguardian.com/commentisfree/2020/jan/31/sinn-fein-ireland-left-election-ira">Opinion: Can Sinn Féin’s young voters finally pull Ireland to the left?</a><br><a href="https://www.theguardian.com/world/2020/jan/31/leo-varadkar-paradox-feted-abroad-can-pm-arrest-polls-slump-in-ireland-election">The Varadkar paradox: feted abroad, can PM arrest polls slump in Ireland?</a></p>',
-					elementId: '9f984a35-fb02-4954-94c7-848b8d746bee',
+					html: '<p>“We won’t have to beg anymore, we won’t have to justify ourselves. We will set the agenda by sitting at that table, with what our priorities are,” Anderson said.<br></p>',
+					elementId: 'fbb93701-5206-46bf-a595-6f37d7e80281',
 				},
 			],
 			attributes: {
@@ -2000,23 +2561,23 @@ export const Explainer: CAPIArticleType = {
 				keyEvent: false,
 				summary: false,
 			},
-			blockCreatedOn: 1581333561000,
-			blockCreatedOnDisplay: '11.19 GMT',
-			blockLastUpdated: 1581377261000,
-			blockLastUpdatedDisplay: '23.27 GMT',
-			blockFirstPublished: 1581333562000,
-			blockFirstPublishedDisplay: '11.19 GMT',
-			blockFirstPublishedDisplayNoTimezone: '11.19',
+			blockCreatedOn: 1661025650000,
+			blockCreatedOnDisplay: '21.00 BST',
+			blockLastUpdated: 1661065534000,
+			blockLastUpdatedDisplay: '08.05 BST',
+			blockFirstPublished: 1661025650000,
+			blockFirstPublishedDisplay: '21.00 BST',
+			blockFirstPublishedDisplayNoTimezone: '21.00',
 			contributors: [],
-			primaryDateLine: 'Mon 10 Feb 2020 12.31 GMT',
-			secondaryDateLine: 'Last modified on Thu 13 Feb 2020 10.21 GMT',
+			primaryDateLine: 'Sat 20 Aug 2022 21.00 BST',
+			secondaryDateLine: 'Last modified on Sun 21 Aug 2022 08.05 BST',
 		},
 	],
 	linkedData: [
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://amp.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+			'@id': 'https://amp.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -2042,37 +2603,39 @@ export const Explainer: CAPIArticleType = {
 				productID: 'theguardian.com:basic',
 			},
 			image: [
-				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=b28b8384d380e834b173b07cc071778a',
-				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=ba485dba18852475fb1d5dd00b53b972',
-				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=6af71c15d6d5a2b9786dba8fbce11dd7',
-				'https://i.guim.co.uk/img/media/59ff93fd27eea2be66feecf0b9a7c0b98d12877a/0_71_6720_4032/master/6720.jpg?width=1200&quality=85&auto=format&fit=max&s=8bce617f8e49c9291611c693c259264c',
+				'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=68b8407353dca67494a586a75805b954',
+				'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=bfe212ea18d0d992f1639a85b534d033',
+				'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=1200&height=900&quality=85&auto=format&fit=crop&s=6ef3ba7aa363ebab9f57ce6509a2a2a9',
+				'https://i.guim.co.uk/img/media/7a0ffc9b223847aa86a31c5fa362b7b3b3d37c62/0_85_4330_2598/master/4330.jpg?width=1200&quality=85&auto=format&fit=max&s=f55d12353f96d9c13ad5fe63183f64a9',
 			],
 			author: [
 				{
 					'@type': 'Person',
-					name: 'Rory Carroll',
-					sameAs: 'https://www.theguardian.com/profile/rorycarroll',
+					name: 'Lorena Allam',
+					sameAs: 'https://www.theguardian.com/profile/lorena-allam',
 				},
 			],
-			datePublished: '2020-02-10T12:31:25.000Z',
-			headline: 'Irish general election: who won and what happens now?',
-			dateModified: '2020-02-13T10:21:28.000Z',
+			datePublished: '2022-08-20T20:00:50.000Z',
+			headline:
+				'What is an Indigenous treaty and how would it work in Australia?',
+			dateModified: '2022-08-21T07:05:36.000Z',
 			mainEntityOfPage:
-				'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+				'https://www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 		},
 		{
 			'@type': 'WebPage',
 			'@context': 'https://schema.org',
-			'@id': 'https://www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+			'@id': 'https://www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 			potentialAction: {
 				'@type': 'ViewAction',
-				target: 'android-app://com.guardian/https/www.theguardian.com/world/2020/feb/10/irish-general-election-everything-you-need-to-know',
+				target: 'android-app://com.guardian/https/www.theguardian.com/australia-news/2022/aug/21/what-is-an-indigenous-treaty-and-how-would-it-work-in-australia',
 			},
 		},
 	],
-	webPublicationDateDisplay: 'Mon 10 Feb 2020 12.31 GMT',
+	webPublicationDateDisplay: 'Sat 20 Aug 2022 21.00 BST',
 	shouldHideAds: false,
-	webTitle: 'Irish general election: who won and what happens now?',
+	webTitle:
+		'What is an Indigenous treaty and how would it work in Australia?',
 	isSpecialReport: false,
 	isCommentable: false,
 	keyEvents: [],

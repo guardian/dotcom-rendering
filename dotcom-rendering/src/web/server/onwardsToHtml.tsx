@@ -1,5 +1,5 @@
 import { renderToString } from 'react-dom/server';
-import type { CAPIOnwardsType } from '../../types/onwards';
+import type { CAPIOnwards } from '../../types/onwards';
 import type { CAPITrailType, TrailType } from '../../types/trails';
 import { Carousel } from '../components/Carousel.importable';
 import { decideFormat } from '../lib/decideFormat';
@@ -22,16 +22,16 @@ export const onwardsToHtml = ({
 	heading,
 	// description,
 	// url,
-	onwardsType,
+	onwardsSource,
 	trails,
 	format: CAPIFormat,
-}: CAPIOnwardsType): string => {
+}: CAPIOnwards): string => {
 	const format = decideFormat(CAPIFormat);
 
 	const html = renderToString(
 		<Carousel
 			heading={heading}
-			onwardsType={onwardsType}
+			onwardsSource={onwardsSource}
 			trails={buildTrails(trails, 8)}
 			format={format}
 		/>,

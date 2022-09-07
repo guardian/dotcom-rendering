@@ -2,14 +2,14 @@
 
 import type { Block } from '@guardian/content-api-models/v1/block';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import type { Result } from '@guardian/types';
-import { err, ok, OptionKind, partition } from '@guardian/types';
+import { OptionKind } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
 import { maybeCapiDate } from 'capi';
 import type { Contributor } from 'contributor';
 import { tagToContributor } from 'contributor';
 import type { Context } from 'parserContext';
+import { Result } from 'result';
 
 // ----- Types ----- //
 
@@ -45,18 +45,18 @@ const parse =
 		const lastModifiedDate = maybeCapiDate(block.lastModifiedDate);
 
 		if (firstPublishedDate.kind === OptionKind.None) {
-			return err(
+			return Result.err(
 				"Could not parse live block: 'firstPublishedDate' was invalid",
 			);
 		}
 
 		if (lastModifiedDate.kind === OptionKind.None) {
-			return err(
+			return Result.err(
 				"Could not parse live block: 'lastModifiedDate' was invalid",
 			);
 		}
 
-		return ok({
+		return Result.ok({
 			id: block.id,
 			isKeyEvent: block.attributes.keyEvent ?? false,
 			title: block.title ?? '',
@@ -74,7 +74,7 @@ const parse =
 const parseMany =
 	(context: Context) =>
 	(blocks: Block[], tags: Tag[]): LiveBlock[] =>
-		partition(blocks.map(parse(context, tags))).oks;
+		Result.partition(blocks.map(parse(context, tags))).oks;
 
 // ----- Exports ----- //
 

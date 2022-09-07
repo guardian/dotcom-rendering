@@ -21,10 +21,7 @@ const LastUpdated: FC<Props> = ({ lastUpdatedDisplay, lastUpdated }: Props) => (
 			`}
 		`}
 	>
-		<time
-			className="js-last-updated-time"
-			dateTime={lastUpdated.toISOString()}
-		>
+		<time dateTime={lastUpdated.toISOString()}>
 			{`Updated: ${lastUpdatedDisplay}`}
 		</time>
 	</div>

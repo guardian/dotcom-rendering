@@ -1,9 +1,12 @@
 // ----- Imports ----- //
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { border } from '@guardian/common-rendering/src/editorialPalette';
+import {
+	background,
+	border,
+} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral } from '@guardian/source-foundations';
+import Byline from 'components/Byline';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import MainMedia, { GalleryCaption } from 'components/MainMedia';
@@ -16,17 +19,26 @@ import { grid } from 'grid/grid';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
 const headerStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.container}
-	background-color: ${neutral[7]};
+	background-color: ${background.articleContent(format)};
 	border-bottom: 1px solid ${border.galleryImage(format)};
+
+	${darkModeCss`
+		background-color: ${background.articleContentDark(format)};
+	`}
 `;
 
-const wrapperStyles = css`
-	background-color: ${neutral[7]};
+const wrapperStyles = (format: ArticleFormat): SerializedStyles => css`
+	background-color: ${background.articleContent(format)};
+
+	${darkModeCss`
+		background-color: ${background.articleContentDark(format)};
+	`}
 `;
 
 type Props = {
@@ -39,19 +51,17 @@ const GalleryLayout: FC<Props> = ({ item, children }) => {
 	return (
 		<>
 			<main>
-				<article css={wrapperStyles}>
+				<article css={wrapperStyles(format)}>
 					<header css={headerStyles(format)}>
-						<MainMedia
-							mainMedia={item.mainMedia}
-							format={getFormat(item)}
-						/>
+						<MainMedia mainMedia={item.mainMedia} format={format} />
 						<Series item={item} />
 						<Headline item={item} />
 						<Standfirst item={item} />
+						<Byline bylineHtml={item.bylineHtml} {...format} />
 						<Metadata item={item} />
 						<GalleryCaption
 							mainMedia={item.mainMedia}
-							format={getFormat(item)}
+							format={format}
 						/>
 					</header>
 					{children}
@@ -59,7 +69,7 @@ const GalleryLayout: FC<Props> = ({ item, children }) => {
 				</article>
 			</main>
 			<RelatedContent item={item} />
-			<Footer isCcpa={false} format={item} />
+			<Footer isCcpa={false} format={format} />
 		</>
 	);
 };

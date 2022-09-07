@@ -28,32 +28,6 @@ export const NewsletterSignup: CAPIArticleType = {
 	],
 	commercialProperties: {
 		UK: {
-			branding: {
-				brandingType: {
-					name: 'sponsored',
-				},
-				sponsorName: 'Visa',
-				logo: {
-					src: 'https://static.theguardian.com/commercial/sponsor/30/Jun/2022/ed7ede61-c3de-4daa-9358-4ffe6953e228-SupportedByVISA-LOCK-UP_AH_280X180.jpg',
-					dimensions: {
-						width: 280,
-						height: 180,
-					},
-					link: 'https://www.visa.co.uk/about-visa/sponsorships-promotions/wuefa2022.html?utm_medium=display&utm_source=the-guardian&utm_campaign=uefa-womens-euro-22&dclid=CN_8p9rf0vgCFdYiGwodcVsFcA',
-					label: 'Supported by',
-				},
-				logoForDarkBackground: {
-					src: 'https://static.theguardian.com/commercial/sponsor/30/Jun/2022/6633b76b-5fac-4427-b368-5d786e6acdae-SupportedByVISA-LOCK-UP_AH-WHITE_280X180.png',
-					dimensions: {
-						width: 280,
-						height: 180,
-					},
-					link: 'https://www.visa.co.uk/about-visa/sponsorships-promotions/wuefa2022.html?utm_medium=display&utm_source=the-guardian&utm_campaign=uefa-womens-euro-22&dclid=CN_8p9rf0vgCFdYiGwodcVsFcA',
-					label: 'Supported by',
-				},
-				aboutThisLink:
-					'https://www.theguardian.com/info/2016/jan/25/content-funding',
-			},
 			adTargeting: [
 				{
 					name: 'edition',
@@ -62,10 +36,6 @@ export const NewsletterSignup: CAPIArticleType = {
 				{
 					name: 'url',
 					value: '/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
-				},
-				{
-					name: 'br',
-					value: 's',
 				},
 				{
 					name: 'sh',
@@ -98,40 +68,10 @@ export const NewsletterSignup: CAPIArticleType = {
 			],
 		},
 		US: {
-			branding: {
-				brandingType: {
-					name: 'sponsored',
-				},
-				sponsorName: 'Visa',
-				logo: {
-					src: 'https://static.theguardian.com/commercial/sponsor/30/Jun/2022/ed7ede61-c3de-4daa-9358-4ffe6953e228-SupportedByVISA-LOCK-UP_AH_280X180.jpg',
-					dimensions: {
-						width: 280,
-						height: 180,
-					},
-					link: 'https://www.visa.co.uk/about-visa/sponsorships-promotions/wuefa2022.html?utm_medium=display&utm_source=the-guardian&utm_campaign=uefa-womens-euro-22&dclid=CN_8p9rf0vgCFdYiGwodcVsFcA',
-					label: 'Supported by',
-				},
-				logoForDarkBackground: {
-					src: 'https://static.theguardian.com/commercial/sponsor/30/Jun/2022/6633b76b-5fac-4427-b368-5d786e6acdae-SupportedByVISA-LOCK-UP_AH-WHITE_280X180.png',
-					dimensions: {
-						width: 280,
-						height: 180,
-					},
-					link: 'https://www.visa.co.uk/about-visa/sponsorships-promotions/wuefa2022.html?utm_medium=display&utm_source=the-guardian&utm_campaign=uefa-womens-euro-22&dclid=CN_8p9rf0vgCFdYiGwodcVsFcA',
-					label: 'Supported by',
-				},
-				aboutThisLink:
-					'https://www.theguardian.com/info/2016/jan/25/content-funding',
-			},
 			adTargeting: [
 				{
 					name: 'url',
 					value: '/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
-				},
-				{
-					name: 'br',
-					value: 's',
 				},
 				{
 					name: 'sh',
@@ -168,40 +108,10 @@ export const NewsletterSignup: CAPIArticleType = {
 			],
 		},
 		AU: {
-			branding: {
-				brandingType: {
-					name: 'sponsored',
-				},
-				sponsorName: 'Visa',
-				logo: {
-					src: 'https://static.theguardian.com/commercial/sponsor/30/Jun/2022/ed7ede61-c3de-4daa-9358-4ffe6953e228-SupportedByVISA-LOCK-UP_AH_280X180.jpg',
-					dimensions: {
-						width: 280,
-						height: 180,
-					},
-					link: 'https://www.visa.co.uk/about-visa/sponsorships-promotions/wuefa2022.html?utm_medium=display&utm_source=the-guardian&utm_campaign=uefa-womens-euro-22&dclid=CN_8p9rf0vgCFdYiGwodcVsFcA',
-					label: 'Supported by',
-				},
-				logoForDarkBackground: {
-					src: 'https://static.theguardian.com/commercial/sponsor/30/Jun/2022/6633b76b-5fac-4427-b368-5d786e6acdae-SupportedByVISA-LOCK-UP_AH-WHITE_280X180.png',
-					dimensions: {
-						width: 280,
-						height: 180,
-					},
-					link: 'https://www.visa.co.uk/about-visa/sponsorships-promotions/wuefa2022.html?utm_medium=display&utm_source=the-guardian&utm_campaign=uefa-womens-euro-22&dclid=CN_8p9rf0vgCFdYiGwodcVsFcA',
-					label: 'Supported by',
-				},
-				aboutThisLink:
-					'https://www.theguardian.com/info/2016/jan/25/content-funding',
-			},
 			adTargeting: [
 				{
 					name: 'url',
 					value: '/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
-				},
-				{
-					name: 'br',
-					value: 's',
 				},
 				{
 					name: 'sh',
@@ -238,40 +148,10 @@ export const NewsletterSignup: CAPIArticleType = {
 			],
 		},
 		INT: {
-			branding: {
-				brandingType: {
-					name: 'sponsored',
-				},
-				sponsorName: 'Visa',
-				logo: {
-					src: 'https://static.theguardian.com/commercial/sponsor/30/Jun/2022/ed7ede61-c3de-4daa-9358-4ffe6953e228-SupportedByVISA-LOCK-UP_AH_280X180.jpg',
-					dimensions: {
-						width: 280,
-						height: 180,
-					},
-					link: 'https://www.visa.co.uk/about-visa/sponsorships-promotions/wuefa2022.html?utm_medium=display&utm_source=the-guardian&utm_campaign=uefa-womens-euro-22&dclid=CN_8p9rf0vgCFdYiGwodcVsFcA',
-					label: 'Supported by',
-				},
-				logoForDarkBackground: {
-					src: 'https://static.theguardian.com/commercial/sponsor/30/Jun/2022/6633b76b-5fac-4427-b368-5d786e6acdae-SupportedByVISA-LOCK-UP_AH-WHITE_280X180.png',
-					dimensions: {
-						width: 280,
-						height: 180,
-					},
-					link: 'https://www.visa.co.uk/about-visa/sponsorships-promotions/wuefa2022.html?utm_medium=display&utm_source=the-guardian&utm_campaign=uefa-womens-euro-22&dclid=CN_8p9rf0vgCFdYiGwodcVsFcA',
-					label: 'Supported by',
-				},
-				aboutThisLink:
-					'https://www.theguardian.com/info/2016/jan/25/content-funding',
-			},
 			adTargeting: [
 				{
 					name: 'url',
 					value: '/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
-				},
-				{
-					name: 'br',
-					value: 's',
 				},
 				{
 					name: 'sh',
@@ -1663,7 +1543,7 @@ export const NewsletterSignup: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '878db714-b553-409a-a33f-f69a2f7f7fe3',
+			elementId: '53fc8369-cb1e-4aab-bbec-9930c963a09f',
 		},
 	],
 	webPublicationDate: '2022-03-22T16:57:35.000Z',
@@ -1674,7 +1554,7 @@ export const NewsletterSignup: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Join us as we delve deeper into the wonderful world of women’s football in our weekly newsletter. It is informative, entertaining, global, critical – when needed – and, above all, passionate. Written mainly by <a href="https://www.theguardian.com/profile/julia-belas-trindade">Júlia Belas Trindade</a> and <a href="https://www.theguardian.com/profile/sophie-downey">Sophie Downey</a>, expect guest appearances from stars such as Anita Asante, Ada Hegerberg and many more.</p>',
-					elementId: 'bb71e4dc-2937-4662-8a37-447253865062',
+					elementId: 'e6e89442-f6a1-4b00-bb93-2029a490bdb0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -1685,22 +1565,22 @@ export const NewsletterSignup: CAPIArticleType = {
 					isThirdPartyTracking: false,
 					source: 'The Guardian',
 					sourceDomain: 'theguardian.com',
-					elementId: 'a5312565-2180-4449-abba-c3c5fb7f344c',
+					elementId: '741a1aac-212d-4251-8c17-73b5d0251f42',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p>Try our other sports emails: as well as the occasionally funny football email <a href="https://www.theguardian.com/info/2016/jan/05/the-fiver-email-sign-up">The Fiver </a>from Monday to Friday, there are weekly catch-ups for cricket in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-spin">The Spin</a> and rugby union in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-breakdown">The Breakdown</a>, and our seven-day roundup of the best of our sports journalism in <a href="https://www.theguardian.com/sport/2017/may/15/the-recap-sign-up-for-the-best-of-the-guardians-sport-coverage">The Recap</a>.</p></li> \n <li><p>Living in Australia? Try the <a href="https://www.theguardian.com/info/2015/jun/05/guardian-australia-sport-newsletter-subscribe-by-email">Guardian Australia’s daily sports newsletter</a></p></li> \n</ul>',
-					elementId: '7650fe03-4960-4a1e-9383-b47e54bb4b25',
+					elementId: '35dbf7f4-e10f-4f2c-9423-c3c1408df7e0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>***</p>',
-					elementId: '26b67f1d-a0bd-4446-b503-0b08b9fdde58',
+					elementId: 'b2e17758-303d-4953-ba11-d45ef29f4249',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong><a href="https://www.theguardian.com/email-newsletters">Explore all our newsletters:</a></strong><a href="https://www.theguardian.com/email-newsletters"> whether you love film, football, fashion or food, we’ve got something for you</a></p>',
-					elementId: '6acb84ef-631d-4b9e-be99-0da7b90f4b92',
+					elementId: '88843ca2-f3e3-498e-8ace-416125ede17d',
 				},
 			],
 			attributes: {

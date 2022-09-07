@@ -38,6 +38,12 @@ const articleLink = (format: ArticleFormat): Colour => {
 
 const articleLinkDark = articleLink;
 
+const bylineLink = (_format: ArticleFormat): Colour => {
+	return neutral[46];
+};
+
+const bylineLinkDark = bylineLink;
+
 const commentCount = (_format: ArticleFormat): Colour => {
 	return 'rgba(255, 255, 255, 0.4)';
 };
@@ -104,6 +110,10 @@ const relatedCardDark = (_format: ArticleFormat): Colour => {
 };
 
 const standfirstLink = (format: ArticleFormat): Colour => {
+	if (format.design === ArticleDesign.Gallery) {
+		return neutral[46];
+	}
+
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[600];
@@ -241,6 +251,8 @@ const signUpFormDark = (_format: ArticleFormat): string => {
 const border = {
 	articleLink,
 	articleLinkDark,
+	bylineLink,
+	bylineLinkDark,
 	commentCount,
 	commentCountDark,
 	commentCountWide,

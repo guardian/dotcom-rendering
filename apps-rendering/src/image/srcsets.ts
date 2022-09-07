@@ -1,8 +1,7 @@
 // ----- Imports ----- //
 
 import { createHash } from 'crypto';
-import type { Result } from '@guardian/types';
-import { fromUnsafe, ResultKind } from '@guardian/types';
+import { Result } from 'result';
 
 // ----- Setup ----- //
 
@@ -36,14 +35,9 @@ const sign = (salt: string, path: string): string =>
 		.digest('hex');
 
 function src(salt: string, input: string, width: number, dpr: Dpr): string {
-	const maybeUrl: Result<string, URL> = fromUnsafe(
-		() => new URL(input),
-		'invalid url',
-	);
-
-	switch (maybeUrl.kind) {
-		case ResultKind.Ok: {
-			const url = maybeUrl.value;
+	return Result.fromUnsafe(() => new URL(input), 'invalid url').either(
+		(_err) => input,
+		(url) => {
 			const service = getSubdomain(url.hostname);
 
 			const params = new URLSearchParams({
@@ -59,12 +53,8 @@ function src(salt: string, input: string, width: number, dpr: Dpr): string {
 			const sig = sign(salt, path);
 
 			return `${imageResizer}/${service}${path}&s=${sig}`;
-		}
-		case ResultKind.Err:
-		default: {
-			return input;
-		}
-	}
+		},
+	);
 }
 
 const srcsetWithWidths =

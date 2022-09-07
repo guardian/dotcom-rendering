@@ -33,6 +33,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
 import { MainMedia } from '../components/MainMedia';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 import { Nav } from '../components/Nav/Nav';
@@ -344,7 +345,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								}
 								urls={CAPIArticle.nav.readerRevenueLinks.header}
 								remoteHeader={
-									CAPIArticle.config.switches.remoteHeader
+									!!CAPIArticle.config.switches.remoteHeader
 								}
 								contributionsServiceUrl={
 									contributionsServiceUrl
@@ -544,7 +545,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									shortUrlId={CAPIArticle.config.shortUrlId}
 									ajaxUrl={CAPIArticle.config.ajaxUrl}
 									showShareCount={
-										CAPIArticle.config.switches
+										!!CAPIArticle.config.switches
 											.serverShareCounts
 									}
 								/>
@@ -584,6 +585,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										isPreview={CAPIArticle.config.isPreview}
 										idUrl={CAPIArticle.config.idUrl || ''}
 										isDev={!!CAPIArticle.config.isDev}
+										abTests={CAPIArticle.config.abTests}
 									/>
 									{showBodyEndSlot && (
 										<Island clientOnly={true}>
@@ -667,16 +669,20 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								`}
 							>
 								<RightColumn>
-									<AdSlot
-										position="right"
-										display={format.display}
-										shouldHideReaderRevenue={
-											CAPIArticle.shouldHideReaderRevenue
-										}
-										isPaidContent={
-											CAPIArticle.pageType.isPaidContent
-										}
-									/>
+									{!CAPIArticle.shouldHideAds && (
+										<AdSlot
+											position="right"
+											display={format.display}
+											shouldHideReaderRevenue={
+												CAPIArticle.shouldHideReaderRevenue
+											}
+											isPaidContent={
+												CAPIArticle.pageType
+													.isPaidContent
+											}
+										/>
+									)}
+
 									{!isPaidContent ? (
 										<Island
 											clientOnly={true}
@@ -730,7 +736,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										trails={CAPIArticle.storyPackage.trails.map(
 											decideTrail,
 										)}
-										onwardsType="more-on-this-story"
+										onwardsSource="more-on-this-story"
 										format={format}
 									/>
 								</Island>
@@ -783,7 +789,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								CAPIArticle.config.discussionApiClientHeader
 							}
 							enableDiscussionSwitch={
-								CAPIArticle.config.switches
+								!!CAPIArticle.config.switches
 									.enableDiscussionSwitch
 							}
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
@@ -794,17 +800,26 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 				{!isPaidContent && (
 					<Section
-						fullWidth={true}
-						data-print-layout="hide"
+						title="Most viewed"
+						padContent={false}
+						verticalMargins={false}
 						element="aside"
+						data-print-layout="hide"
+						data-link-name="most-popular"
+						data-component="most-popular"
 					>
-						<MostViewedFooterLayout
-							format={format}
-							sectionName={CAPIArticle.sectionName}
-							ajaxUrl={CAPIArticle.config.ajaxUrl}
-						/>
+						<MostViewedFooterLayout>
+							<Island clientOnly={true} deferUntil="visible">
+								<MostViewedFooterData
+									sectionName={CAPIArticle.sectionName}
+									format={format}
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
+								/>
+							</Island>
+						</MostViewedFooterLayout>
 					</Section>
 				)}
+
 				{renderAds && (
 					<Section
 						fullWidth={true}
@@ -872,10 +887,10 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							CAPIArticle.shouldHideReaderRevenue
 						}
 						remoteBannerSwitch={
-							CAPIArticle.config.switches.remoteBanner
+							!!CAPIArticle.config.switches.remoteBanner
 						}
 						puzzleBannerSwitch={
-							CAPIArticle.config.switches.puzzlesBanner
+							!!CAPIArticle.config.switches.puzzlesBanner
 						}
 						tags={CAPIArticle.tags}
 					/>
