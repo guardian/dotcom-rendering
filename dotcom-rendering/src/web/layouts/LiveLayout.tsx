@@ -414,7 +414,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					<Section
 						showTopBorder={false}
 						backgroundColour={palette.background.matchNav}
+						innerBackgroundColour={palette.background.matchNav}
 						borderColour={palette.border.headline}
+						showSideBorders={isMainMediaTest ? false : true}
 						leftContent={
 							<ArticleTitle
 								format={format}
@@ -429,6 +431,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						leftColSize="wide"
 						padContent={false}
 						verticalMargins={false}
+						format={format}
+						isMainMediaTest={isMainMediaTest}
 					>
 						<Hide above="leftCol">
 							<ArticleTitle
