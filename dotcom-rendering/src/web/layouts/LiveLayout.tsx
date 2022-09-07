@@ -457,6 +457,23 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								}
 							/>
 						</Island>
+						{isMainMediaTest && (
+							<Hide from="desktop">
+								<MainMedia
+									format={format}
+									elements={CAPIArticle.mainMediaElements}
+									adTargeting={adTargeting}
+									host={host}
+									pageId={CAPIArticle.pageId}
+									webTitle={CAPIArticle.webTitle}
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
+									switches={CAPIArticle.config.switches}
+									isSensitive={CAPIArticle.config.isSensitive}
+									isAdFreeUser={CAPIArticle.isAdFreeUser}
+									isMainMediaTest={isMainMediaTest}
+								/>
+							</Hide>
+						)}
 					</Section>
 				) : (
 					<Section
