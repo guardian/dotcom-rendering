@@ -500,7 +500,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										CAPIArticle.guardianBaseURL
 									}
 									badge={CAPIArticle.badge}
-									isMainMediaTest={isMainMediaTest}
 								/>
 							</GridItem>
 							<GridItem area="headline">
@@ -520,6 +519,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												!!CAPIArticle.starRating ||
 												CAPIArticle.starRating === 0
 											}
+											isMainMediaTest={isMainMediaTest}
 										/>
 									)}
 								</div>

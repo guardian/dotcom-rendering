@@ -26,6 +26,7 @@ type Props = {
 	hasStarRating?: boolean;
 	hasAvatar?: boolean;
 	isMatch?: boolean;
+	isMainMediaTest?: boolean;
 };
 
 const curly = (x: any) => x;
@@ -271,9 +272,9 @@ const decideBottomPadding = ({
 	hasAvatar?: boolean;
 }) => {
 	const defaultPadding = css`
-		padding-bottom: ${space[6]}px;
+		// padding-bottom: ${space[6]}px;
 		${from.tablet} {
-			padding-bottom: ${space[9]}px;
+			// padding-bottom: ${space[9]}px;
 		}
 	`;
 	switch (format.display) {
@@ -341,6 +342,7 @@ export const ArticleHeadline = ({
 	hasStarRating,
 	hasAvatar,
 	isMatch,
+	isMainMediaTest,
 }: Props) => {
 	const palette = decidePalette(format);
 
@@ -731,7 +733,9 @@ export const ArticleHeadline = ({
 											color: ${isMatch
 												? palette.text.headlineWhenMatch
 												: palette.text.headline};
-											padding-bottom: ${space[9]}px;
+											padding-bottom: ${isMainMediaTest
+												? '32'
+												: space[9]}px;
 										`,
 									]}
 								>
