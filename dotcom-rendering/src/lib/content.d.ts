@@ -509,7 +509,7 @@ interface WitnessTypeDataImage extends WitnessTypeDataBase {
 	_type: 'model.dotcomrendering.pageElements.WitnessTypeDataImage';
 	type: 'image';
 	alt: string;
-	caption: string;
+	caption?: string;
 	mediaId: string;
 	photographer: string;
 }

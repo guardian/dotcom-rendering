@@ -530,10 +530,7 @@
             ]
         },
         "tableOfContents": {
-            "type": "array",
-            "items": {
-                "$ref": "#/definitions/TOCType"
-            }
+            "$ref": "#/definitions/TableOfContents"
         }
     },
     "required": [
@@ -3312,7 +3309,6 @@
                 "authorName",
                 "authorUsername",
                 "authorWitnessProfileUrl",
-                "caption",
                 "dateCreated",
                 "mediaId",
                 "originalUrl",
@@ -4586,41 +4582,27 @@
             ],
             "type": "string"
         },
-        "TOCType": {
+        "TableOfContents": {
             "type": "object",
             "properties": {
-                "nested": {
+                "items": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/TOCItem"
+                        "$ref": "#/definitions/TableOfContentsItem"
                     }
-                },
-                "id": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                },
-                "subtitle": {
-                    "type": "string"
                 }
             },
             "required": [
-                "id",
-                "nested",
-                "title"
+                "items"
             ]
         },
-        "TOCItem": {
+        "TableOfContentsItem": {
             "type": "object",
             "properties": {
                 "id": {
                     "type": "string"
                 },
                 "title": {
-                    "type": "string"
-                },
-                "subtitle": {
                     "type": "string"
                 }
             },

@@ -18,7 +18,7 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { fromNullable, map, none, partition } from '@guardian/types';
+import { fromNullable, map, none } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
@@ -48,6 +48,7 @@ import { fromBodyElements } from 'outline';
 import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
+import { Result } from 'result';
 import { themeFromString } from 'themeStyles';
 
 // ----- Item Type ----- //
@@ -323,7 +324,7 @@ const itemFields = (
 };
 
 const outlineFromItem = (item: ItemFieldsWithBody): Outline => {
-	const elements = partition(item.body).oks;
+	const elements = Result.partition(item.body).oks;
 	return fromBodyElements(elements);
 };
 

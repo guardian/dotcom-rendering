@@ -1,54 +1,22 @@
 import { JSDOM } from 'jsdom';
-import type { TOCType } from 'src/types/frontend';
+import type { TableOfContents, TableOfContentsItem } from 'src/types/frontend';
 
-const isHeading = (element: CAPIElement, level: 'H2' | 'H3' | 'H4') => {
-	if (
-		element._type !==
-			'model.dotcomrendering.pageElements.TextBlockElement' &&
-		element._type !==
-			'model.dotcomrendering.pageElements.SubheadingBlockElement'
-	)
-		return false;
-	const frag = JSDOM.fragment(element.html);
-	return frag.firstElementChild?.nodeName === level;
+const isHeading = (element: CAPIElement): boolean => {
+	return (
+		element._type ==
+		'model.dotcomrendering.pageElements.SubheadingBlockElement'
+	);
 };
 
-const isH2 = (
-	element: CAPIElement,
-): element is SubheadingBlockElement | TextBlockElement => {
-	return isHeading(element, 'H2');
+const isH2 = (element: CAPIElement): element is SubheadingBlockElement => {
+	console.log('isheading', element, isHeading(element));
+	return isHeading(element);
 };
 
-const isH3 = (
-	element: CAPIElement,
-): element is SubheadingBlockElement | TextBlockElement => {
-	return isHeading(element, 'H3');
-};
-
-const isH4 = (
-	element: CAPIElement,
-): element is SubheadingBlockElement | TextBlockElement => {
-	return isHeading(element, 'H4');
-};
-
-const extractText = (
-	element: SubheadingBlockElement | TextBlockElement,
-): string => {
+const extractText = (element: SubheadingBlockElement): string => {
 	const frag = JSDOM.fragment(element.html);
 	if (!frag.firstElementChild) return '';
 	return frag.textContent?.trim() ?? '';
-};
-
-const hasH2s = (blocks: Block[]) => {
-	return blocks.find((block) => block.elements.find(isH2));
-};
-
-const hasH3s = (blocks: Block[]) => {
-	return blocks.find((block) => block.elements.find(isH3));
-};
-
-const hasH4s = (blocks: Block[]) => {
-	return blocks.find((block) => block.elements.find(isH4));
 };
 
 const hasInteractiveContentsElement = (blocks: Block[]): boolean => {
@@ -64,66 +32,29 @@ const hasInteractiveContentsElement = (blocks: Block[]): boolean => {
 export const enhanceTableOfContents = (
 	format: CAPIFormat,
 	blocks: Block[],
-): TOCType[] | undefined => {
+): TableOfContents | undefined => {
+	console.log(format);
 	if (
-		format.design !== 'AnalysisDesign' ||
+		format.design !== 'ExplainerDesign' ||
 		hasInteractiveContentsElement(blocks)
 	) {
+		console.log('not explainer or not hashasInteractiveContentsElement');
 		return undefined;
 	}
 
-	const tocs: TOCType[] = [];
-	if (hasH2s(blocks)) {
-		blocks.forEach((block) => {
-			block.elements.forEach((element) => {
-				if (isH2(element)) {
-					tocs.push({
-						id: element.elementId,
-						title: extractText(element),
-						nested: [],
-					});
-				}
-				if (isH3(element)) {
-					if (tocs.length > 0) {
-						const lastItem = tocs[tocs.length - 1];
-						if (lastItem.nested != undefined) {
-							lastItem.nested.push({
-								id: element.elementId,
-								title: extractText(element),
-							});
-						} else {
-							// This is an orphan h3 with no parent h2 element to assign it to
-							// so we don't show it in the table
-						}
-					}
-				}
-			});
-		});
-	} else if (hasH3s(blocks)) {
-		blocks.forEach((block) => {
-			block.elements.forEach((element) => {
-				if (isH3(element)) {
-					tocs.push({
-						id: element.elementId,
-						title: extractText(element),
-						nested: [],
-					});
-				}
-			});
-		});
-	} else if (hasH4s(blocks)) {
-		blocks.forEach((block) => {
-			block.elements.forEach((element) => {
-				if (isH4(element)) {
-					tocs.push({
-						id: element.elementId,
-						title: extractText(element),
-						nested: [],
-					});
-				}
-			});
-		});
-	}
+	const tocItems: TableOfContentsItem[] = [];
 
-	return tocs.length >= 3 ? tocs : undefined;
+	blocks.forEach((block) => {
+		console.log(block.elements);
+		block.elements.forEach((element) => {
+			if (isH2(element)) {
+				tocItems.push({
+					id: element.elementId,
+					title: extractText(element),
+				});
+			}
+		});
+	});
+
+	return tocItems.length >= 3 ? { items: tocItems } : undefined;
 };

@@ -84,7 +84,7 @@ export class MobileAppsRendering extends GuStack {
 			},
 			instanceType: InstanceType.of(
 				InstanceClass.T4G,
-				InstanceSize.MICRO,
+				InstanceSize.SMALL,
 			),
 			certificateProps: {
 				CODE: {

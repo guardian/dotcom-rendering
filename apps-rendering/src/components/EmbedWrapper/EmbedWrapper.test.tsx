@@ -16,6 +16,7 @@ import type {
 import { EmbedKind } from 'embed';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
+import { Result } from 'result';
 import type { SourceDetails } from './';
 import EmbedComponentWrapper, {
 	createEmbedComponentFromProps,
@@ -63,7 +64,7 @@ describe('EmbedComponentWrapper.embedComponentFromWrapperProps', () => {
 			const embedComponentFromWrapperProps =
 				createEmbedComponentFromProps(container.firstElementChild);
 			expect(embedComponentFromWrapperProps).toStrictEqual(
-				some(expectedWrapperContents),
+				Result.ok(expectedWrapperContents),
 			);
 		} else {
 			fail('EmbedComponentWrapper was not rendered');

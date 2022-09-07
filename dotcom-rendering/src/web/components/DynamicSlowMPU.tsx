@@ -2,6 +2,7 @@
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import { Card50_Card50, Card75_Card25 } from '../lib/dynamicSlices';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -133,88 +134,6 @@ const ColumnOfThree50_Ad50 = ({
 			<Hide until="tablet">
 				<AdSlot position="inline" index={index} />
 			</Hide>
-		</LI>
-	</UL>
-);
-
-/* ._________________________._________.
- * |         ################|#########|
- * |         ################|         |
- * |_________################|_________|
- */
-const Card75_Card25 = ({
-	cards,
-	containerPalette,
-	showAge,
-}: {
-	cards: TrailType[];
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="75%" padSides={true}>
-			<FrontCard
-				trail={cards[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={cards[0].trailText}
-				imagePosition="right"
-				imageSize="large"
-				imagePositionOnMobile="top"
-			/>
-		</LI>
-		<LI
-			percentage="25%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
-			<FrontCard
-				trail={cards[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-		</LI>
-	</UL>
-);
-
-/* ._________________._________________.
- * |#################|#################|
- * |                 |                 |
- * |_________________|_________________|
- */
-const Card50_Card50 = ({
-	cards,
-	containerPalette,
-	showAge,
-}: {
-	cards: TrailType[];
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="50%" padSides={true}>
-			<FrontCard
-				trail={cards[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={cards[0].trailText}
-				imagePositionOnMobile="top"
-			/>
-		</LI>
-		<LI
-			percentage="50%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
-			<FrontCard
-				trail={cards[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={cards[1].trailText}
-				imagePositionOnMobile="top"
-			/>
 		</LI>
 	</UL>
 );

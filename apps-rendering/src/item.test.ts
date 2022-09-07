@@ -7,22 +7,14 @@ import { AssetType } from '@guardian/content-api-models/v1/assetType';
 import { AtomType } from '@guardian/content-atom-model/atomType';
 import { Atoms } from '@guardian/content-api-models/v1/atoms';
 import { fromCapi, Standard, Review, getFormat } from 'item';
-import { ElementKind, BodyElement } from 'bodyElement';
-import {
-	err,
-	none,
-	ok,
-	resultAndThen,
-	resultMap,
-	toOption,
-	withDefault,
-} from '@guardian/types';
+import { ElementKind } from 'bodyElement';
+import { none } from '@guardian/types';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { JSDOM } from 'jsdom';
 import { Content } from '@guardian/content-api-models/v1/content';
-import { pipe } from 'lib';
 import { articleContentWith } from 'helperTest';
-import { EmbedKind } from 'embed';
+import { EmbedKind, Spotify, YouTube } from 'embed';
+import { Result } from 'result';
 
 const articleContent = {
 	id: '',
@@ -197,15 +189,13 @@ const f = (content: Content) =>
 	);
 
 const getFirstBody = (item: Review | Standard) =>
-	pipe(
-		item.body[0],
-		toOption,
-		withDefault<BodyElement>({
+	item.body[0]
+		.toOptional()
+		.withDefault({
 			kind: ElementKind.Interactive,
 			url: '',
 			alt: none,
-		}),
-	);
+		});
 
 describe('fromCapi returns correct Item', () => {
 	test('media', () => {
@@ -361,15 +351,13 @@ describe('interactive elements', () => {
 			},
 		};
 		const item = f(articleContentWith(interactiveElement)) as Standard;
-		const element = pipe(
-			item.body[0],
-			toOption,
-			withDefault<BodyElement>({
+		const element = item.body[0]
+			.toOptional()
+			.withDefault({
 				kind: ElementKind.RichLink,
 				url: '',
 				linkText: '',
-			}),
-		);
+			});
 		expect(element.kind).toBe(ElementKind.Interactive);
 	});
 
@@ -382,15 +370,13 @@ describe('interactive elements', () => {
 			},
 		};
 		const item = f(articleContentWith(interactiveElement)) as Standard;
-		const element = pipe(
-			item.body[0],
-			toOption,
-			withDefault<BodyElement>({
+		const element = item.body[0]
+			.toOptional()
+			.withDefault({
 				kind: ElementKind.RichLink,
 				url: '',
 				linkText: '',
-			}),
-		);
+			});
 		expect(element.kind).toBe(ElementKind.RichLink);
 	});
 });
@@ -606,20 +592,21 @@ describe('audio elements', () => {
 			},
 		};
 		const item = f(articleContentWith(audioElement)) as Standard;
-		pipe(
-			item.body[0],
-			resultAndThen((element) =>
+		const embed = item.body[0]
+			.flatMap<Spotify>((element) =>
 				element.kind === ElementKind.Embed &&
 				element.embed.kind === EmbedKind.Spotify
-					? ok(element.embed)
-					: err('Not an audio embed'),
-			),
-			resultMap(({ src, width, height }) => {
-				expect(src).toContain('https://open.spotify.com/embed/track/');
-				expect(width).toBe(300);
-				expect(height).not.toBe(380);
-			}),
-		);
+					? Result.ok(element.embed)
+					: Result.err('Not an audio embed'),
+			)
+		
+		expect(embed.isOk()).toBe(true);
+		
+		if (embed.isOk()) {
+			expect(embed.value.src).toContain('https://open.spotify.com/embed/track/');
+			expect(embed.value.width).toBe(300);
+			expect(embed.value.height).not.toBe(380);
+		}
 	});
 
 	test('does not render if no iframe inside the html', () => {
@@ -668,23 +655,27 @@ describe('video elements', () => {
 			videoTypeData: {
 				html: "<iframe height='259' width='460' src='https://www.youtube-nocookie.com/embed/' frameborder='0' allowfullscreen ></iframe>",
 				url: 'https://www.youtube.com/watch?v=mockVideoId',
+				source: 'YouTube',
+				width: 460,
+				height: 259,
 			},
 		};
 		const item = f(articleContentWith(videoElement)) as Standard;
-		pipe(
-			item.body[0],
-			resultAndThen((element) =>
+		const embed = item.body[0]
+			.flatMap<YouTube>((element) =>
 				element.kind === ElementKind.Embed &&
 				element.embed.kind === EmbedKind.YouTube
-					? ok(element.embed)
-					: err('Not a YouTube embed'),
-			),
-			resultMap(({ id, width, height }) => {
-				expect(id).toBe('mockVideoId');
-				expect(width).toBe('460');
-				expect(height).toBe('259');
-			}),
-		);
+					? Result.ok(element.embed)
+					: Result.err('Not a YouTube embed'),
+			);
+		
+		expect(embed.isOk()).toBe(true);
+		
+		if (embed.isOk()) {
+			expect(embed.value.id).toBe('mockVideoId');
+			expect(embed.value.width).toBe(460);
+			expect(embed.value.height).toBe(259);
+		}
 	});
 
 	test('does not render if no iframe inside the html', () => {
