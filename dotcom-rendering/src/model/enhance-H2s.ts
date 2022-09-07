@@ -1,12 +1,10 @@
 import { JSDOM } from 'jsdom';
 
-const hasInteractiveContentsElement = (blocks: Block[]): boolean => {
-	return !!blocks.find((block) =>
-		block.elements.find(
-			(element) =>
-				element._type ===
-				'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
-		),
+const hasInteractiveContentsElement = (elements: CAPIElement[]): boolean => {
+	return !!elements.find(
+		(element) =>
+			element._type ===
+			'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
 	);
 };
 
@@ -61,13 +59,16 @@ const generateId = (text: string, elementId: string) => {
 const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	const slugifiedIds: string[] = [];
 	const enhanced: CAPIElement[] = [];
+	const shouldUseElementId = hasInteractiveContentsElement(elements);
 	elements.forEach((element) => {
 		if (
 			element._type ===
 			'model.dotcomrendering.pageElements.SubheadingBlockElement'
 		) {
 			const text = extractText(element);
-			const id = generateId(text, element.elementId);
+			const id = shouldUseElementId
+				? element.elementId
+				: generateId(text, element.elementId);
 			const uniqueId = getUnique(id, slugifiedIds);
 
 			slugifiedIds.push(id);
@@ -89,11 +90,6 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 };
 
 export const enhanceH2s = (blocks: Block[]): Block[] => {
-	if (hasInteractiveContentsElement(blocks)) {
-		// Don't enhance h2s if there's an existing table of contents element on the page
-		return blocks;
-	}
-
 	return blocks.map((block: Block) => {
 		return {
 			...block,
