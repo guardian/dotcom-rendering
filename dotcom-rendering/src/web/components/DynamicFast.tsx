@@ -564,7 +564,7 @@ export const DynamicFast = ({
 					...secondSliceGroupedTrails.standard.slice(0, 6),
 				];
 			} else {
-				secondSliceLayout = 'twoBigs';
+				secondSliceLayout = 'threeBigs';
 				secondSliceCards = [
 					...bigs.slice(0, 2),
 					...secondSliceGroupedTrails.standard.slice(0, 3),
