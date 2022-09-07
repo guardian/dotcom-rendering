@@ -7,6 +7,7 @@
 
 const find = require('find');
 const loadJsonFile = require('load-json-file');
+const { BUILD_VARIANT } = require('../webpack/bundles');
 
 const errorAndThrow = (error) => {
 	console.error(error);
@@ -28,7 +29,7 @@ const fileExists = async (glob) => {
 	// Check that the manifest files exist
 	await fileExists('manifest.modern.json');
 	await fileExists('manifest.legacy.json');
-	await fileExists('manifest.variant.json');
+	if (BUILD_VARIANT) await fileExists('manifest.variant.json');
 
 	// Check that the manifest files return values for all the chunks
 	const manifest = await loadJsonFile('./dist/manifest.modern.json');

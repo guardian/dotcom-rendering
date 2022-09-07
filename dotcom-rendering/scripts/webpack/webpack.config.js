@@ -1,3 +1,4 @@
+/* eslint-disable global-require -- we merge configs in the export */
 // @ts-check
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
@@ -6,6 +7,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const { merge } = require('webpack-merge');
 const WebpackMessages = require('webpack-messages');
+const { BUILD_VARIANT } = require('./bundles');
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
@@ -129,13 +131,17 @@ module.exports = [
 			sessionId,
 		}),
 	),
-	merge(
-		commonConfigs({
-			platform: 'browser.variant',
-		}),
-		require(`./webpack.config.browser`)({
-			bundle: 'variant',
-			sessionId,
-		}),
-	),
+	...(BUILD_VARIANT
+		? [
+				merge(
+					commonConfigs({
+						platform: 'browser.variant',
+					}),
+					require(`./webpack.config.browser`)({
+						bundle: 'variant',
+						sessionId,
+					}),
+				),
+		  ]
+		: []),
 ];

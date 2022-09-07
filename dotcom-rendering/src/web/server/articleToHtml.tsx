@@ -3,6 +3,7 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
+import { BUILD_VARIANT } from '../../../scripts/webpack/bundles';
 import type { ManifestPath } from '../../lib/assets';
 import {
 	ASSET_ORIGIN,
@@ -89,6 +90,7 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	);
 
 	const manifestPaths: ManifestPath[] =
+		BUILD_VARIANT &&
 		CAPIArticle.config.abTests.dcrJsBundleVariant === 'variant'
 			? ['./manifest.variant.json', './manifest.legacy.json']
 			: ['./manifest.modern.json', './manifest.legacy.json'];
