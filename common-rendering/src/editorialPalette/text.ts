@@ -419,6 +419,10 @@ const headlineTag = (_format: ArticleFormat): Colour => neutral[100];
 const headlineTagDark = (_format: ArticleFormat): Colour => neutral[10];
 
 const follow = (format: ArticleFormat): Colour => {
+	if (format.design === ArticleDesign.Gallery) {
+		return neutral[86];
+	}
+
 	switch (format.theme) {
 		case ArticlePillar.News:
 			switch (format.design) {
@@ -447,6 +451,8 @@ const followDark = (format: ArticleFormat): Colour => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return neutral[100];
+		case ArticleDesign.Gallery:
+			return neutral[86];
 		default:
 			switch (format.theme) {
 				case ArticlePillar.News:
