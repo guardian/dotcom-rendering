@@ -22,7 +22,7 @@ const getUnique = (slug: string, array: string[]): string => {
 	const occurenceCount = array.filter(
 		(currentItem) => currentItem === slug,
 	).length;
-	return occurenceCount > 1 ? `${slug}-${occurenceCount - 1}` : slug;
+	return occurenceCount > 0 ? `${slug}-${occurenceCount}` : slug;
 };
 
 /**
@@ -49,8 +49,9 @@ const generateId = (element: SubheadingBlockElement, existingIds: string[]) => {
 	if (!text) return element.elementId;
 	const slug = slugify(text);
 	if (!slug) return element.elementId;
+	const unique = getUnique(slug, existingIds);
 	existingIds.push(slug);
-	return getUnique(slug, existingIds);
+	return unique;
 };
 
 /**
