@@ -19,13 +19,10 @@ const extractText = (element: SubheadingBlockElement): string => {
  * This function checks if the slug already exists and if it does it adds the count to the end of the slug.
  */
 const getUnique = (slug: string, array: string[]): string => {
-	if (array.includes(slug)) {
-		const occurenceCount = array.filter(
-			(currentItem) => currentItem === slug,
-		).length;
-		return `${slug}-${occurenceCount}`;
-	}
-	return slug;
+	const occurenceCount = array.filter(
+		(currentItem) => currentItem === slug,
+	).length;
+	return occurenceCount > 1 ? `${slug}-${occurenceCount - 1}` : slug;
 };
 
 /**
@@ -52,6 +49,7 @@ const generateId = (element: SubheadingBlockElement, existingIds: string[]) => {
 	if (!text) return element.elementId;
 	const slug = slugify(text);
 	if (!slug) return element.elementId;
+	existingIds.push(slug);
 	return getUnique(slug, existingIds);
 };
 
@@ -72,7 +70,6 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 				? element.elementId
 				: generateId(element, slugifiedIds);
 
-			slugifiedIds.push(id);
 			const withId = element.html.replace(
 				'<h2>',
 				// add ID to H2 element
