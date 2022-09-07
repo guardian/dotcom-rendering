@@ -206,7 +206,13 @@ export const Card100PictureRight = ({
 					imageSize={'jumbo'}
 					imagePosition={'right'}
 					imagePositionOnMobile={'top'}
-					trailText={cards[0].trailText}
+					trailText={
+						// Only show trail text if there is no supportContent
+						cards[0].supportingContent === undefined ||
+						cards[0].supportingContent.length === 0
+							? cards[0].trailText
+							: undefined
+					}
 					supportingContent={cards[0].supportingContent}
 				/>
 			</LI>
