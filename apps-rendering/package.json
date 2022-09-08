@@ -39,7 +39,7 @@
     "@guardian/apps-rendering-api-models": "^1.1.0",
     "@guardian/atoms-rendering": "^22.0.0",
     "@guardian/bridget": "^1.11.0",
-    "@guardian/cdk": "47.3.0",
+    "@guardian/cdk": "^47.3.2",
     "@guardian/content-api-models": "^17.3.0",
     "@guardian/content-atom-model": "^3.4.0",
     "@guardian/discussion-rendering": "^10.1.1",
