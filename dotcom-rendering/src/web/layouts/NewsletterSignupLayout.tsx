@@ -89,7 +89,7 @@ const mainColNewsLettersBadgeContainerStyle = css`
 		bottom: -10px;
 
 		${until.wide} {
-			bottom: -9px;
+			bottom: -8px;
 		}
 
 		${until.leftCol} {
@@ -103,7 +103,6 @@ const leftColWrapperStyle = css`
 	display: flex;
 	justify-content: flex-end;
 	margin-top: ${space[2]}px;
-	margin-bottom: ${space[9]}px;
 `;
 
 const previewButtonWrapperStyle = css`
@@ -475,7 +474,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				) : (
 					<>
 						{CAPIArticle.storyPackage && (
-							<Section fullWidth={true} showTopBorder={false}>
+							<Section fullWidth={true}>
 								<Island deferUntil="visible">
 									<Carousel
 										heading={
