@@ -80,7 +80,7 @@ Mappings:
   StageMap:
     PROD:
       MinCapacity: 18
-      MaxCapacity: 36
+      MaxCapacity: 72
     CODE:
       MinCapacity: 1
       MaxCapacity: 4
