@@ -10,10 +10,10 @@ import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
-import type { TOCType } from 'src/types/frontend';
+import type { TableOfContentsItem } from 'src/types/frontend';
 
 interface Props {
-	tableOfContents: TOCType[];
+	tableOfContents: TableOfContentsItem[];
 }
 
 const anchorStyles: SerializedStyles = css`
