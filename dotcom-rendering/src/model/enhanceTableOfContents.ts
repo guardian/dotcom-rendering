@@ -12,7 +12,6 @@ const isH2 = (element: CAPIElement): element is SubheadingBlockElement => {
 	console.log('isheading', element, isHeading(element));
 	return isHeading(element);
 };
-
 const extractText = (element: SubheadingBlockElement): string => {
 	const frag = JSDOM.fragment(element.html);
 	if (!frag.firstElementChild) return '';
@@ -32,29 +31,29 @@ const hasInteractiveContentsElement = (blocks: Block[]): boolean => {
 export const enhanceTableOfContents = (
 	format: CAPIFormat,
 	blocks: Block[],
-): TableOfContents => {
+): TableOfContents | undefined => {
 	console.log(format);
+	if (
+		format.design !== 'ExplainerDesign' ||
+		hasInteractiveContentsElement(blocks)
+	) {
+		console.log('not explainer or not hashasInteractiveContentsElement');
+		return undefined;
+	}
 
 	const tocItems: TableOfContentsItem[] = [];
 
-	if (
-		!(
-			format.design !== 'ExplainerDesign' ||
-			hasInteractiveContentsElement(blocks)
-		)
-	) {
-		blocks.forEach((block) => {
-			console.log(block.elements);
-			block.elements.forEach((element) => {
-				if (isH2(element)) {
-					tocItems.push({
-						id: element.elementId,
-						title: extractText(element),
-					});
-				}
-			});
+	blocks.forEach((block) => {
+		console.log(block.elements);
+		block.elements.forEach((element) => {
+			if (isH2(element)) {
+				tocItems.push({
+					id: element.elementId,
+					title: extractText(element),
+				});
+			}
 		});
-	}
+	});
 
-	return { items: tocItems };
+	return tocItems.length >= 3 ? { items: tocItems } : undefined;
 };
