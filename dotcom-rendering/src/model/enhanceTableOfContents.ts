@@ -32,29 +32,29 @@ const hasInteractiveContentsElement = (blocks: Block[]): boolean => {
 export const enhanceTableOfContents = (
 	format: CAPIFormat,
 	blocks: Block[],
-): TableOfContents | undefined => {
+): TableOfContents => {
 	console.log(format);
-	if (
-		format.design !== 'ExplainerDesign' ||
-		hasInteractiveContentsElement(blocks)
-	) {
-		console.log('not explainer or not hashasInteractiveContentsElement');
-		return undefined;
-	}
 
 	const tocItems: TableOfContentsItem[] = [];
 
-	blocks.forEach((block) => {
-		console.log(block.elements);
-		block.elements.forEach((element) => {
-			if (isH2(element)) {
-				tocItems.push({
-					id: element.elementId,
-					title: extractText(element),
-				});
-			}
+	if (
+		!(
+			format.design !== 'ExplainerDesign' ||
+			hasInteractiveContentsElement(blocks)
+		)
+	) {
+		blocks.forEach((block) => {
+			console.log(block.elements);
+			block.elements.forEach((element) => {
+				if (isH2(element)) {
+					tocItems.push({
+						id: element.elementId,
+						title: extractText(element),
+					});
+				}
+			});
 		});
-	});
+	}
 
-	return tocItems.length >= 3 ? { items: tocItems } : undefined;
+	return { items: tocItems };
 };
