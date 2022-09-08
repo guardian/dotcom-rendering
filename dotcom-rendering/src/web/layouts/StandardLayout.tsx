@@ -17,7 +17,7 @@ import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
 import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import type { NavType } from '../../model/extract-nav';
-import type { CAPIArticleType, TOCType } from '../../types/frontend';
+import type { CAPIArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -633,19 +633,18 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									}
 								/>
 							</div>
-							{format.design === ArticleDesign.Explainer && (
-								// tableOfContents != undefined && (
-								<div css={maxWidth}>
-									<TableOfContents
-										tableOfContents={
-											tableOfContents as TOCType[]
-										}
-									></TableOfContents>
-								</div>
-							)}
 						</GridItem>
 						<GridItem area="body">
 							<ArticleContainer format={format}>
+								{tableOfContents.items.length > 3 && (
+									<div>
+										<TableOfContents
+											tableOfContents={
+												tableOfContents.items
+											}
+										></TableOfContents>
+									</div>
+								)}
 								<ArticleBody
 									format={format}
 									blocks={CAPIArticle.blocks}
