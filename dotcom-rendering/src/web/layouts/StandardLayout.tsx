@@ -636,7 +636,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 						<GridItem area="body">
 							<ArticleContainer format={format}>
-								{tableOfContents.items.length > 3 && (
+								{tableOfContents && (
 									<div>
 										<TableOfContents
 											tableOfContents={
