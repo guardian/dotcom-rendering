@@ -561,7 +561,7 @@ const mediaAtomRenderer = (
 		'data-posterUrl': posterUrl,
 		'data-videoId': videoId,
 		'data-duration': duration,
-		className: 'native-video',
+		className: 'js-native-video',
 		css: styles,
 	};
 	const figcaption = h(FigCaption, {
