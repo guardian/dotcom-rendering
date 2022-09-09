@@ -100,7 +100,7 @@
     "webpack-dev-server": "^4.9.3",
     "webpack-manifest-plugin": "^5.0.0",
     "whatwg-fetch": "^3.6.2",
-    "winston": "^3.3.3",
+    "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.5.5"
   }
 }
