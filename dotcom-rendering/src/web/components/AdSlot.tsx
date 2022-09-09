@@ -11,6 +11,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import type { EditionId } from '../../types/edition';
 import { Island } from './Island';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
@@ -21,6 +22,7 @@ type InlineProps = {
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
 	sectionName?: string;
+	editionId?: EditionId;
 };
 
 type NonInlineProps = {
@@ -30,6 +32,7 @@ type NonInlineProps = {
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
 	sectionName?: string;
+	editionId?: EditionId;
 };
 
 /**
@@ -243,6 +246,7 @@ export const AdSlot = ({
 	isPaidContent = false,
 	index,
 	sectionName = '',
+	editionId = 'INT',
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -278,6 +282,7 @@ export const AdSlot = ({
 								isPaidContent={isPaidContent}
 								adStyles={adStyles}
 								sectionName={sectionName}
+								editionId={editionId}
 							/>
 						</Island>
 					);

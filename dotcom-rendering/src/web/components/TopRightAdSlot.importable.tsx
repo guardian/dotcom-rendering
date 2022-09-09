@@ -1,6 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { getCookie } from '@guardian/libs';
+import type { EditionId } from '../../types/edition';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { ShadyPie } from './ShadyPie';
 
@@ -26,11 +27,13 @@ export const TopRightAdSlot = ({
 	shouldHideReaderRevenue,
 	isPaidContent,
 	sectionName,
+	editionId,
 }: {
 	adStyles: SerializedStyles[];
 	shouldHideReaderRevenue: boolean;
 	isPaidContent: boolean;
 	sectionName: string;
+	editionId: EditionId;
 }) => {
 	const adBlockerDetected = useAdBlockInUse();
 	const isSignedIn =
@@ -44,7 +47,7 @@ export const TopRightAdSlot = ({
 		!isServer
 	) {
 		// Show a fixed image asking people to subscribe
-		return <ShadyPie sectionName={sectionName} />;
+		return <ShadyPie sectionName={sectionName} editionId={editionId} />;
 	}
 
 	// Otherwise return the classic ad slot
