@@ -245,9 +245,11 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	 */
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
+	const isLabs = format.theme === ArticleSpecial.Labs;
+
 	return (
 		<>
-			{format.theme !== ArticleSpecial.Labs ? (
+			{!isLabs ? (
 				<>
 					<div>
 						{renderAds && (
@@ -657,7 +659,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</ShowcaseGrid>
 				</Section>
 
-				{renderAds && (
+				{renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
 						padSides={false}
@@ -774,7 +776,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</Section>
 				)}
 
-				{renderAds && (
+				{renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
 						padSides={false}

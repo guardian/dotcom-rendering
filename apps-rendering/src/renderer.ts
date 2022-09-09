@@ -235,7 +235,12 @@ const textElement =
 		);
 		switch (node.nodeName) {
 			case 'P': {
+				if (text === '* * *') {
+					return children;
+				}
+
 				const showDropCap = shouldShowDropCap(text, format, isEditions);
+
 				return h(
 					Paragraph,
 					{ key, format, showDropCap, isEditions },
@@ -556,7 +561,7 @@ const mediaAtomRenderer = (
 		'data-posterUrl': posterUrl,
 		'data-videoId': videoId,
 		'data-duration': duration,
-		className: 'native-video',
+		className: 'js-native-video',
 		css: styles,
 	};
 	const figcaption = h(FigCaption, {
