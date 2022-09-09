@@ -390,7 +390,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</LinkButton>
 								</div>
 							)}
-							{promotedNewsletter && (
+							{!!promotedNewsletter && (
 								<>
 									<SecureSignup
 										newsletterId={
