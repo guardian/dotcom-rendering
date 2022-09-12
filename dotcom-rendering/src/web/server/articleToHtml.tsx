@@ -208,9 +208,6 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	);
 
 	const getAmpLink = (tags: TagType[]) => {
-		// We don’t support AMP for Immersive articles in frontend
-		// https://github.com/guardian/frontend/blob/149c8d3be273edf784465a780ee332bd58e2a9b3/common/app/model/content.scala#L95
-		if (CAPIArticle.format.display === 'ImmersiveDisplay') return undefined;
 		if (CAPIArticle.format.design === 'InteractiveDesign') {
 			const hasAmpInteractiveTag = tags.some(
 				(tag) =>

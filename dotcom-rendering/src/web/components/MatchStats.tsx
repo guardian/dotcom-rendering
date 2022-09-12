@@ -121,16 +121,15 @@ const StatsGrid = ({
 							}
 
 							${until.phablet} {
-								grid-template-columns: 100%;
+								grid-template-columns: 50% 50%;
 								grid-template-areas:
-									'title'
-									'possession'
-									'attempts'
-									'corners'
-									'fouls'
-									'subtitle'
-									'home'
-									'away';
+									'title			title'
+									'possession		possession'
+									'attempts		attempts'
+									'corners		corners'
+									'fouls			fouls'
+									'subtitle		subtitle'
+									'home			away';
 							}
 						}
 					`}
