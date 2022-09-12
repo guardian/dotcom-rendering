@@ -14,12 +14,22 @@
     },
     {
       "action": "mobile-apps-rendering-cfn",
-      "path": "cdk.out/MobileAppsRendering.template.json",
+      "path": "cdk.out/MobileAppsRendering-CODE.template.json",
+      "compress": false
+    },
+    {
+      "action": "mobile-apps-rendering-cfn",
+      "path": "cdk.out/MobileAppsRendering-PROD.template.json",
       "compress": false
     },
 	{
 	  "action": "mobile-apps-rendering-preview-cfn",
-	  "path": "cdk.out/MobileAppsRenderingPreview.template.json",
+	  "path": "cdk.out/MobileAppsRenderingPreview-CODE.template.json",
+	  "compress": false
+	},
+	{
+	  "action": "mobile-apps-rendering-preview-cfn",
+	  "path": "cdk.out/MobileAppsRenderingPreview-PROD.template.json",
 	  "compress": false
 	}
   ]
