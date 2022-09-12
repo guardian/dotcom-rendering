@@ -1,12 +1,12 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { getCookie } from '@guardian/libs';
+import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { ShadyPie } from './ShadyPie';
 
 const isServer = typeof window === 'undefined';
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
-const LABS_HEADER_HEIGHT = 55;
 
 /**
  * TopRightAdSlot decides if we should render the ShadyPie or not
