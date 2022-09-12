@@ -25,7 +25,7 @@ Object {
       "GuHttpsApplicationListener",
       "GuSecurityGroup",
     ],
-    "gu:cdk:version": "1.0.0",
+    "gu:cdk:version": "TEST",
   },
   "Outputs": Object {
     "LoadBalancerMobileappsrenderingDnsName": Object {
@@ -937,7 +937,7 @@ Object {
       "GuHttpsApplicationListener",
       "GuSecurityGroup",
     ],
-    "gu:cdk:version": "1.0.0",
+    "gu:cdk:version": "TEST",
   },
   "Outputs": Object {
     "LoadBalancerMobileappsrenderingDnsName": Object {
