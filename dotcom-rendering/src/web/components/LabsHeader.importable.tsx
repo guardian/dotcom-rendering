@@ -14,11 +14,13 @@ import {
 import LabsLogo from '../../static/logos/the-guardian-labs.svg';
 import { Dropdown } from './Dropdown';
 
+export const LABS_HEADER_HEIGHT = 55;
+
 const FlexWrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			position: relative;
-			height: 55px;
+			height: ${LABS_HEADER_HEIGHT}px;
 			display: flex;
 			justify-content: space-between;
 		`}

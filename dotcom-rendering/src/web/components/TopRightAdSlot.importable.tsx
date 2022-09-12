@@ -2,6 +2,7 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { getCookie } from '@guardian/libs';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
+import { LABS_HEADER_HEIGHT } from './LabsHeader.importable';
 import { ShadyPie } from './ShadyPie';
 
 const isServer = typeof window === 'undefined';
@@ -67,7 +68,8 @@ export const TopRightAdSlot = ({
 				css={[
 					css`
 						position: sticky;
-						top: 0;
+						/* Possibly account for the sticky Labs header and 6px of padding */
+						top: ${isPaidContent ? LABS_HEADER_HEIGHT + 6 : 0}px;
 					`,
 					adStyles,
 				]}
