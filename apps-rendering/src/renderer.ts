@@ -404,7 +404,7 @@ const imageRenderer = (
 ): ReactNode => {
 	const { caption, credit, nativeCaption } = element;
 
-	const cap =
+	const maybeCaption =
 		caption.kind === OptionKind.Some || credit.kind === OptionKind.Some
 			? some([
 					h(Caption, { format, caption }),
@@ -413,7 +413,7 @@ const imageRenderer = (
 			: none;
 
 	return h(BodyImage, {
-		caption: cap,
+		caption: maybeCaption,
 		format,
 		key,
 		supportsDarkMode: true,
