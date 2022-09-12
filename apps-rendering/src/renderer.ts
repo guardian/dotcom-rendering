@@ -21,6 +21,7 @@ import {
 	fromNullable,
 	map,
 	none,
+	OptionKind,
 	some,
 	withDefault,
 } from '@guardian/types';
@@ -402,12 +403,18 @@ const imageRenderer = (
 	key: number,
 ): ReactNode => {
 	const { caption, credit, nativeCaption } = element;
+
+	const maybeCaption =
+		caption.kind === OptionKind.Some || credit.kind === OptionKind.Some
+			? some([
+					h(Caption, { format, caption }),
+					h(Credit, { credit, format, key }),
+			  ])
+			: none;
+
 	return h(BodyImage, {
-		caption: some([
-			h(Caption, { format, caption }),
-			h(Credit, { credit, format, key }),
-		]),
-		format: format,
+		caption: maybeCaption,
+		format,
 		key,
 		supportsDarkMode: true,
 		lightbox: some({
