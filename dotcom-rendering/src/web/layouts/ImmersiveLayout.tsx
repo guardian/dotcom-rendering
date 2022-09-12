@@ -224,6 +224,8 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
+	const isLabs = format.theme === ArticleSpecial.Labs;
+
 	return (
 		<>
 			<ImmersiveHeader
@@ -327,7 +329,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 						<GridItem area="lines">
 							{format.design === ArticleDesign.PhotoEssay &&
-							format.theme !== ArticleSpecial.Labs ? (
+							!isLabs ? (
 								<></>
 							) : (
 								<div css={maxWidth}>
@@ -504,21 +506,21 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</ImmersiveGrid>
 				</Section>
-
-				<Section
-					fullWidth={true}
-					padSides={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot
-						position="merchandising-high"
-						display={format.display}
-					/>
-				</Section>
-
+				{!isLabs && (
+					<Section
+						fullWidth={true}
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising-high"
+							display={format.display}
+						/>
+					</Section>
+				)}
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
 						onwards={CAPIArticle.onwards}
@@ -571,7 +573,6 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</Island>
 					</>
 				)}
-
 				{!isPaidContent && showComments && (
 					<Section
 						fullWidth={true}
@@ -597,7 +598,6 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					</Section>
 				)}
-
 				{!isPaidContent && (
 					<Section
 						title="Most viewed"
@@ -619,17 +619,21 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</MostViewedFooterLayout>
 					</Section>
 				)}
-
-				<Section
-					fullWidth={true}
-					padSides={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot position="merchandising" display={format.display} />
-				</Section>
+				{!isLabs && (
+					<Section
+						fullWidth={true}
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising"
+							display={format.display}
+						/>
+					</Section>
+				)}
 			</main>
 
 			{NAV.subNavSections && (
