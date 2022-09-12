@@ -33,8 +33,8 @@ interface Props {
 
 const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 	clear: both;
-	border: ${border.signUpForm(format)} 0.1875rem dashed;
-	color: ${text.signUpForm(format)};
+	border: ${border.newsletterSignUpForm(format)} 0.1875rem dashed;
+	color: ${text.newsletterSignUpForm(format)};
 	border-radius: ${remSpace[3]};
 	margin-bottom: ${remSpace[3]};
 	padding: ${remSpace[2]};
@@ -44,9 +44,9 @@ const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 	}
 
 	${darkModeCss`
-		background-color: ${background.signUpFormDark(format)};
-		border-color: ${border.signUpFormDark(format)};
-		color: ${text.signUpFormDark(format)};
+		background-color: ${background.newsletterSignUpFormDark(format)};
+		border-color: ${border.newsletterSignUpFormDark(format)};
+		color: ${text.newsletterSignUpFormDark(format)};
 	`}
 `;
 

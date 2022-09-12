@@ -77,8 +77,8 @@ const formStyle = css`
 `;
 
 const buttonStyle = (format: ArticleFormat): SerializedStyles => css`
-	background-color: ${fill.signUpFormButton(format)};
-	color: ${text.signUpFormButton(format)};
+	background-color: ${fill.newsletterSignUpFormButton(format)};
+	color: ${text.newsletterSignUpFormButton(format)};
 	margin-bottom: ${remSpace[2]};
 	flex-basis: ${pxToRem(118)}rem;
 	justify-content: center;
@@ -87,14 +87,14 @@ const buttonStyle = (format: ArticleFormat): SerializedStyles => css`
 		background-color: ${neutral[46]};
 	}
 	&:hover {
-		background-color: ${hover.signUpFormButton(format)};
+		background-color: ${hover.newsletterSignUpFormButton(format)};
 	}
 
 	${darkModeCss`
-		background-color: ${fill.signUpFormButtonDark(format)};
-		color: ${text.signUpFormButtonDark(format)};
+		background-color: ${fill.newsletterSignUpFormButtonDark(format)};
+		color: ${text.newsletterSignUpFormButtonDark(format)};
 		&:hover {
-			background-color: ${hover.signUpFormButtonDark(format)}
+			background-color: ${hover.newsletterSignUpFormButtonDark(format)}
 		}
 `}
 `;
@@ -122,7 +122,7 @@ const EmailSignupForm: FC<Props> = ({
 						${textSans.xsmall({ fontWeight: 'bold' })};
 
 						${darkModeCss`
-							color: ${text.signUpFormDark(format)};
+							color: ${text.newsletterSignUpFormDark(format)};
 						`}
 					}
 				`}
@@ -152,8 +152,8 @@ const EmailSignupForm: FC<Props> = ({
 							flex-basis: ${pxToRem(335)}rem;
 
 							${darkModeCss`
-							background-color: ${background.signUpFormDark(format)};
-							color: ${text.signUpFormDark(format)};
+							background-color: ${background.newsletterSignUpFormDark(format)};
+							color: ${text.newsletterSignUpFormDark(format)};
 						`}
 						`}
 					/>
