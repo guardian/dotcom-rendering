@@ -65,8 +65,9 @@ const headline = (format: ArticleFormat): Colour => {
 		format.design === ArticleDesign.Editorial
 	) {
 		return opinion[800];
+	} else if (format.design === ArticleDesign.Gallery) {
+		return neutral[7];
 	} else if (
-		format.design === ArticleDesign.Gallery ||
 		format.design === ArticleDesign.Audio ||
 		format.design === ArticleDesign.Video
 	) {
@@ -515,7 +516,10 @@ const supportBannerDark = (_format: ArticleFormat): Colour => {
 };
 
 const series = (format: ArticleFormat): Colour => {
-	if (format.display === ArticleDisplay.Immersive) {
+	if (
+		format.display === ArticleDisplay.Immersive ||
+		format.design === ArticleDesign.Gallery
+	) {
 		switch (format.theme) {
 			case ArticlePillar.Sport:
 				return sport[400];
@@ -602,16 +606,32 @@ const pinnedPost = (format: ArticleFormat): string => {
 
 const onwardContent = (_format: ArticleFormat): Colour => neutral[97];
 
-const onwardContentDark = (_format: ArticleFormat): Colour => neutral[0];
+const onwardContentDark = (format: ArticleFormat): Colour => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return neutral[10];
+		default:
+			return neutral[0];
+	}
+};
 
 const footer = (_format: ArticleFormat): Colour => neutral[97];
 
-const footerDark = (_format: ArticleFormat): Colour => neutral[0];
+const footerDark = (format: ArticleFormat): Colour => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return neutral[10];
+		default:
+			return neutral[0];
+	}
+};
 
 const articleContent = (format: ArticleFormat): string => {
 	switch (format.design) {
 		case ArticleDesign.Analysis:
 			return news[800];
+		case ArticleDesign.Gallery:
+			return neutral[7];
 		default:
 			return neutral[100];
 	}

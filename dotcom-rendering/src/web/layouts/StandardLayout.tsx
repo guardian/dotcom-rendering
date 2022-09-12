@@ -39,6 +39,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader.importable';
 import { MainMedia } from '../components/MainMedia';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 import { Nav } from '../components/Nav/Nav';
@@ -344,6 +345,8 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	 */
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
+	const isLabs = format.theme === ArticleSpecial.Labs;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -361,7 +364,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</Section>
 						</Stuck>
 					)}
-					{format.theme !== ArticleSpecial.Labs && (
+					{!isLabs && (
 						<Section
 							fullWidth={true}
 							showTopBorder={false}
@@ -410,42 +413,37 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							editionId={CAPIArticle.editionId}
 						/>
 					</Section>
-					{NAV.subNavSections &&
-						format.theme !== ArticleSpecial.Labs && (
-							<>
-								<Section
-									fullWidth={true}
-									backgroundColour={
-										palette.background.article
-									}
-									padSides={false}
-									element="aside"
-								>
-									<Island deferUntil="idle">
-										<SubNav
-											subNavSections={NAV.subNavSections}
-											currentNavLink={NAV.currentNavLink}
-											format={format}
-										/>
-									</Island>
-								</Section>
-								<Section
-									fullWidth={true}
-									backgroundColour={
-										palette.background.article
-									}
-									padSides={false}
-									showTopBorder={false}
-								>
-									<StraightLines
-										count={4}
-										cssOverrides={css`
-											display: block;
-										`}
+					{NAV.subNavSections && !isLabs && (
+						<>
+							<Section
+								fullWidth={true}
+								backgroundColour={palette.background.article}
+								padSides={false}
+								element="aside"
+							>
+								<Island deferUntil="idle">
+									<SubNav
+										subNavSections={NAV.subNavSections}
+										currentNavLink={NAV.currentNavLink}
+										format={format}
 									/>
-								</Section>
-							</>
-						)}
+								</Island>
+							</Section>
+							<Section
+								fullWidth={true}
+								backgroundColour={palette.background.article}
+								padSides={false}
+								showTopBorder={false}
+							>
+								<StraightLines
+									count={4}
+									cssOverrides={css`
+										display: block;
+									`}
+								/>
+							</Section>
+						</>
+					)}
 				</>
 			</div>
 
@@ -752,16 +750,19 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								`}
 							>
 								<RightColumn>
-									<AdSlot
-										position="right"
-										display={format.display}
-										shouldHideReaderRevenue={
-											CAPIArticle.shouldHideReaderRevenue
-										}
-										isPaidContent={
-											CAPIArticle.pageType.isPaidContent
-										}
-									/>
+									{!CAPIArticle.shouldHideAds && (
+										<AdSlot
+											position="right"
+											display={format.display}
+											shouldHideReaderRevenue={
+												CAPIArticle.shouldHideReaderRevenue
+											}
+											isPaidContent={
+												CAPIArticle.pageType
+													.isPaidContent
+											}
+										/>
+									)}
 									{!isPaidContent ? (
 										<Island
 											clientOnly={true}
@@ -782,7 +783,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</StandardGrid>
 				</Section>
 
-				{renderAds && (
+				{renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"
@@ -882,19 +883,27 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 				{!isPaidContent && (
 					<Section
-						fullWidth={true}
-						data-print-layout="hide"
+						title="Most viewed"
+						padContent={false}
+						verticalMargins={false}
 						element="aside"
+						data-print-layout="hide"
+						data-link-name="most-popular"
+						data-component="most-popular"
 					>
-						<MostViewedFooterLayout
-							format={format}
-							sectionName={CAPIArticle.sectionName}
-							ajaxUrl={CAPIArticle.config.ajaxUrl}
-						/>
+						<MostViewedFooterLayout>
+							<Island clientOnly={true} deferUntil="visible">
+								<MostViewedFooterData
+									sectionName={CAPIArticle.sectionName}
+									format={format}
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
+								/>
+							</Island>
+						</MostViewedFooterLayout>
 					</Section>
 				)}
 
-				{renderAds && (
+				{renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"

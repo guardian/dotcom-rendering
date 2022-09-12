@@ -8,8 +8,8 @@ new MobileAppsRendering(app, 'MobileAppsRendering', {
 	stack: 'mobile',
 	cloudFormationStackName,
 	recordPrefix: 'mobile-rendering',
-	asgMinSize: { CODE: 1, PROD: 3 },
-	asgMaxSize: { CODE: 2, PROD: 12 },
+	asgMinSize: { CODE: 1, PROD: 6 },
+	asgMaxSize: { CODE: 2, PROD: 24 },
 });
 
 new MobileAppsRendering(app, 'MobileAppsRenderingPreview', {

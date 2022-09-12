@@ -5,7 +5,7 @@ import { renderToString } from 'react-dom/server';
 import { getScriptArrayFromFile } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
-import { makeFrontWindowGuardian } from '../../model/window-guardian';
+import { makeWindowGuardian } from '../../model/window-guardian';
 import type { DCRFrontType } from '../../types/front';
 import { FrontPage } from '../components/FrontPage';
 import { getHttp3Url } from '../lib/getHttp3Url';
@@ -125,7 +125,24 @@ export const frontToHtml = ({ front }: Props): string => {
 	 * is placed in a script tag on the page
 	 */
 	const windowGuardian = escapeData(
-		JSON.stringify(makeFrontWindowGuardian(front)),
+		JSON.stringify(
+			makeWindowGuardian({
+				editionId: front.editionId,
+				stage: front.config.stage,
+				frontendAssetsFullURL: front.config.frontendAssetsFullURL,
+				revisionNumber: front.config.revisionNumber,
+				sentryPublicApiKey: front.config.sentryPublicApiKey,
+				sentryHost: front.config.sentryHost,
+				keywordIds: front.config.keywordIds,
+				dfpAccountId: front.config.dfpAccountId,
+				adUnit: front.config.adUnit,
+				ajaxUrl: front.config.ajaxUrl,
+				googletagUrl: front.config.googletagUrl,
+				switches: front.config.switches,
+				abTests: front.config.abTests,
+				brazeApiKey: front.config.brazeApiKey,
+			}),
+		),
 	);
 
 	const keywords = front.config.keywords ?? '';

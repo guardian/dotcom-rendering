@@ -7,7 +7,6 @@ import { AudioAtom } from '@guardian/atoms-rendering';
 import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
 import { App } from '@guardian/discussion-rendering/build/App';
-import { either } from '@guardian/types';
 import {
 	ads,
 	getAdSlots,
@@ -21,7 +20,6 @@ import { createEmbedComponentFromProps } from 'components/EmbedWrapper';
 import EpicContent from 'components/EpicContent';
 import FollowStatus from 'components/FollowStatus';
 import FooterContent from 'components/FooterContent';
-import { formatDate, formatLocal, isValidDate } from 'date';
 import { handleErrors, isObject } from 'lib';
 import {
 	acquisitionsClient,
@@ -124,22 +122,6 @@ function topics(): void {
 			}
 		});
 	}
-}
-
-function formatDates(): void {
-	Array.from(document.querySelectorAll('time[data-date]')).forEach((time) => {
-		const timestamp = time.getAttribute('data-date');
-
-		try {
-			if (timestamp) {
-				time.textContent = formatDate(new Date(timestamp));
-			}
-		} catch (e) {
-			const message =
-				timestamp ?? 'because the data-date attribute was empty';
-			logger.error(`Unable to parse and format date ${message}`, e);
-		}
-	});
 }
 
 // TODO: show epics on opinion articles
@@ -401,20 +383,6 @@ function initAudioAtoms(): void {
 	});
 }
 
-function localDates(): void {
-	const date = document.querySelector('time.js-date');
-	const dateString = date?.getAttribute('data-date');
-	if (!dateString || !date) return;
-	try {
-		const localDate = new Date(dateString);
-		if (isValidDate(localDate)) {
-			date.textContent = formatLocal(localDate);
-		}
-	} catch (e) {
-		console.error('Could not set a local date', e);
-	}
-}
-
 function richLinks(): void {
 	document
 		.querySelectorAll('.js-rich-link[data-article-id]')
@@ -466,7 +434,7 @@ function hydrateClickToView(): void {
 	document
 		.querySelectorAll('.js-click-to-view-container')
 		.forEach((container) =>
-			either(
+			createEmbedComponentFromProps(container).either(
 				(error: string) => {
 					logger.error(
 						`Failed to create Embed for hydration: ${error}`,
@@ -475,7 +443,7 @@ function hydrateClickToView(): void {
 				(embedComponent: ReactElement) => {
 					ReactDOM.hydrate(embedComponent, container);
 				},
-			)(createEmbedComponentFromProps(container)),
+			),
 		);
 }
 
@@ -499,7 +467,6 @@ resizeEmailSignups();
 reportNativeElementPositionChanges();
 topics();
 slideshow();
-formatDates();
 footerInit();
 insertEpic();
 callouts();
@@ -507,7 +474,6 @@ renderComments();
 hasSeenCards();
 initAudioAtoms();
 hydrateAtoms();
-localDates();
 richLinks();
 hydrateClickToView();
 initSignupForms();

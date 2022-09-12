@@ -5,6 +5,7 @@ import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import { ASSET_ORIGIN, getScriptArrayFromFile } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
+import { extractGA } from '../../model/extract-ga';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
 import type { CAPIArticleType } from '../../types/frontend';
@@ -172,19 +173,54 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	 * is placed in a script tag on the page
 	 */
 	const windowGuardian = escapeData(
-		JSON.stringify(makeWindowGuardian(CAPIArticle)),
+		JSON.stringify(
+			makeWindowGuardian({
+				editionId: CAPIArticle.editionId,
+				stage: CAPIArticle.config.stage,
+				frontendAssetsFullURL: CAPIArticle.config.frontendAssetsFullURL,
+				revisionNumber: CAPIArticle.config.revisionNumber,
+				sentryPublicApiKey: CAPIArticle.config.sentryPublicApiKey,
+				sentryHost: CAPIArticle.config.sentryHost,
+				keywordIds: CAPIArticle.config.keywordIds,
+				dfpAccountId: CAPIArticle.config.dfpAccountId,
+				adUnit: CAPIArticle.config.adUnit,
+				ajaxUrl: CAPIArticle.config.ajaxUrl,
+				googletagUrl: CAPIArticle.config.googletagUrl,
+				switches: CAPIArticle.config.switches,
+				abTests: CAPIArticle.config.abTests,
+				brazeApiKey: CAPIArticle.config.brazeApiKey,
+				isPaidContent: CAPIArticle.pageType.isPaidContent,
+				contentType: CAPIArticle.contentType,
+				shouldHideReaderRevenue: CAPIArticle.shouldHideReaderRevenue,
+				GAData: extractGA({
+					webTitle: CAPIArticle.webTitle,
+					format: CAPIArticle.format,
+					sectionName: CAPIArticle.sectionName,
+					contentType: CAPIArticle.contentType,
+					tags: CAPIArticle.tags,
+					pageId: CAPIArticle.pageId,
+					editionId: CAPIArticle.editionId,
+					beaconURL: CAPIArticle.beaconURL,
+				}),
+				unknownConfig: CAPIArticle.config,
+			}),
+		),
 	);
 
-	const hasAmpInteractiveTag = CAPIArticle.tags.some(
-		(tag) => tag.id === 'tracking/platformfunctional/ampinteractive',
-	);
+	const getAmpLink = (tags: TagType[]) => {
+		if (CAPIArticle.format.design === 'InteractiveDesign') {
+			const hasAmpInteractiveTag = tags.some(
+				(tag) =>
+					tag.id === 'tracking/platformfunctional/ampinteractive',
+			);
+			if (!hasAmpInteractiveTag) return undefined;
+		}
+
+		return `https://amp.theguardian.com/${CAPIArticle.pageId}`;
+	};
 
 	// Only include AMP link for interactives which have the 'ampinteractive' tag
-	const ampLink =
-		CAPIArticle.format.design !== 'InteractiveDesign' ||
-		hasAmpInteractiveTag
-			? `https://amp.theguardian.com/${CAPIArticle.pageId}`
-			: undefined;
+	const ampLink = getAmpLink(CAPIArticle.tags);
 
 	const { openGraphData } = CAPIArticle;
 	const { twitterData } = CAPIArticle;
