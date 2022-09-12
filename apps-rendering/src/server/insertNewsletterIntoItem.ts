@@ -14,6 +14,14 @@ type BodyResult = Result<string, BodyElement>;
 
 // ----- Constants ----- //
 
+const enum BodyResultCategory {
+	'paragraphText' = 'PARAGRAPH',
+	'whiteSpaceText' = 'WHITE SPACE',
+	'nonParagraphText' = 'OTHER TEXT ELEMENT',
+	'nonText' = 'NON TEXT',
+	'error' = 'error',
+}
+
 const TEST_NEWSLETTER: Newsletter = {
 	identityName: 'patriarchy',
 	description:
@@ -25,6 +33,26 @@ const TEST_NEWSLETTER: Newsletter = {
 };
 
 // ----- pure functions ---//
+
+function categoriseResult(result: BodyResult): BodyResultCategory {
+
+	if (result.isOk() ) {
+		if (result.value.kind !== ElementKind.Text) {
+			return BodyResultCategory.nonText
+		}
+		if (result.value.doc.textContent?.trim().length === 0){
+			return BodyResultCategory.whiteSpaceText
+		}
+		if (result.value.doc.nodeName === 'P') {
+			return BodyResultCategory.paragraphText
+		} else {
+			return BodyResultCategory.nonParagraphText
+		}
+	} else {
+		return BodyResultCategory.error
+	}
+
+}
 
 function isNonEmptyText(result: BodyResult): boolean {
 	if (result.isOk() && result.value.kind === ElementKind.Text) {
@@ -40,23 +68,6 @@ function isWhiteSpace(result: BodyResult): boolean {
 		return textContent ? textContent.trim().length === 0 : false;
 	}
 	return false;
-}
-
-function describeResult(result: BodyResult): string {
-	if (isNonEmptyText(result)) {
-		const node =
-			result.isOk() && result.value.kind === ElementKind.Text
-				? result.value.doc
-				: undefined;
-		return `TEXT, [${node}] "${node?.textContent}"`;
-	}
-	if (isWhiteSpace(result)) {
-		return '-WHITE SPACE-';
-	}
-	if (result.isOk()) {
-		return `[KIND:${result.value.kind}]`;
-	}
-	return 'error';
 }
 
 // ----- Procedures ----- //
@@ -107,8 +118,8 @@ function findInsertIndex(body: Body): number {
 
 	// note - the min and max should ignore whitespace
 	// and error, but do not.
-	const minIndex = 8;
-	const maxIndex = body.length - 8;
+	const minIndex = 0;
+	const maxIndex = body.length;
 
 	function findPreviousOkThatIsNotWhiteSpace(
 		index: number,
@@ -145,7 +156,7 @@ function findInsertIndex(body: Body): number {
 		console.log(
 			`[${index}]`,
 			isASuitableIndex(index),
-			describeResult(result),
+			categoriseResult(result),
 		);
 	});
 
