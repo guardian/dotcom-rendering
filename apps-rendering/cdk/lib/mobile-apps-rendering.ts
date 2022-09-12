@@ -95,10 +95,7 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 /usr/local/node/pm2 start --name ${appName} --uid ${appName} --gid mapi /opt/${appName}/server.js
 /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${this.region} mobile-log-aggregation-${this.stage} '/var/log/${appName}/*'
 /usr/local/node/pm2 logrotate -u ${appName}`,
-			scaling: {
-				minimumInstances: props.asgCapacity.minimumInstances,
-				maximumInstances: props.asgCapacity.maximumInstances,
-			},
+			scaling: props.asgCapacity,
 		});
 
 		const asg = appsRenderingApp.autoScalingGroup;
