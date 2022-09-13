@@ -329,7 +329,7 @@ export const FullPageInteractiveLayout = ({
 				backgroundColour={palette.background.article}
 				element="main"
 			>
-				<article id="maincontent" tabIndex={-1}>
+				<article id="maincontent">
 					<Renderer
 						format={format}
 						elements={
