@@ -6,6 +6,9 @@ export interface PermutiveModel {
 	payload: PermutivePayload;
 }
 
+/**
+ * Responsible for ensuring the necessary scripts are placed on articles in order to run the Permutive SDK
+ */
 export const Permutive = ({ apiKey, projectId, payload }: PermutiveModel) => {
 	const permutiveConfig = `
 		<script type="application/json">
@@ -43,6 +46,7 @@ export const Permutive = ({ apiKey, projectId, payload }: PermutiveModel) => {
 			/>
 			<amp-script
 				id="permutiveCachedTargeting"
+				// Empty string required to pass AMP validation
 				sandboxed=""
 				script="permutiveCachedTargetingScript"
 			></amp-script>
@@ -55,7 +59,11 @@ export const Permutive = ({ apiKey, projectId, payload }: PermutiveModel) => {
 					__html: permutiveCachedTargetingScript,
 				}}
 			></script>
-			<amp-script sandboxed="" script="pamp-json"></amp-script>
+			<amp-script
+				// Empty string required to pass AMP validation
+				sandboxed=""
+				script="pamp-json"
+			></amp-script>
 			<script
 				id="pamp-json"
 				type="text/plain"
@@ -68,6 +76,7 @@ export const Permutive = ({ apiKey, projectId, payload }: PermutiveModel) => {
 			<amp-script
 				data-block-on-consent={true}
 				id="permutiveSdk"
+				// Empty string required to pass AMP validation
 				sandboxed=""
 				src={`https://cdn.permutive.app/ampsdk/${projectId}-ampscript.js`}
 			></amp-script>
