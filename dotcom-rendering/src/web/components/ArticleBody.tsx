@@ -187,7 +187,6 @@ export const ArticleBody = ({
 	}
 	return (
 		<div
-			tabIndex={0}
 			id="maincontent"
 			css={[
 				isInteractive ? null : bodyPadding,
