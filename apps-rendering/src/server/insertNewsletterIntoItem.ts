@@ -13,12 +13,12 @@ import { stringToPillar } from 'themeStyles';
 // ----- Constants ----- //
 
 const enum ElementCategory {
-	'paragraphText' = 'PARAGRAPH',
-	'boldParagraphText' = 'BOLD_PARAGRAPH',
-	'nonParagraphText' = 'OTHER TEXT ELEMENT',
-	'nonText' = 'NON TEXT',
-	'whiteSpace' = 'WHITE SPACE',
-	'error' = 'error',
+	'ParagraphText' = 'PARAGRAPH',
+	'BoldParagraphText' = 'BOLD_PARAGRAPH',
+	'NonParagraphText' = 'OTHER TEXT ELEMENT',
+	'NonText' = 'NON TEXT',
+	'WhiteSpace' = 'WHITE SPACE',
+	'Error' = 'error',
 }
 
 const TEST_NEWSLETTER: Newsletter = {
@@ -31,8 +31,8 @@ const TEST_NEWSLETTER: Newsletter = {
 	successDescription: 'signed up',
 };
 
-const DEBUG_LOG = true;
-const DEBUG_LOG_CONTENT = false;
+const DEBUG_LOG: boolean = true;
+const DEBUG_LOG_CONTENT: boolean = false;
 
 // ----- pure functions ---//
 
@@ -41,11 +41,11 @@ function categoriseResult(
 ): ElementCategory {
 	if (result.isOk()) {
 		if (result.value.kind !== ElementKind.Text) {
-			return ElementCategory.nonText;
+			return ElementCategory.NonText;
 		}
 		const { doc } = result.value;
 		if (doc.textContent?.trim().length === 0) {
-			return ElementCategory.whiteSpace;
+			return ElementCategory.WhiteSpace;
 		}
 		if (doc.nodeName === 'P') {
 			if (doc.nodeType === 1) {
@@ -56,15 +56,15 @@ function categoriseResult(
 					element.children.length === 1 &&
 					element.firstElementChild?.tagName === 'STRONG'
 				) {
-					return ElementCategory.boldParagraphText;
+					return ElementCategory.BoldParagraphText;
 				}
 			}
-			return ElementCategory.paragraphText;
+			return ElementCategory.ParagraphText;
 		} else {
-			return ElementCategory.nonParagraphText;
+			return ElementCategory.NonParagraphText;
 		}
 	} else {
-		return ElementCategory.error;
+		return ElementCategory.Error;
 	}
 }
 
@@ -87,7 +87,7 @@ function getRange(numberOfElements: number): [number, number] {
  *   - Hide embeds in articles that are less than 300 words         (DO SERVER SIDE!)
  *	 - Prevent sign up form from appearing straight after bold text (done)
  *	 - Prevent sign up from from appearing under headings           (done)
- *	 - Prevent embeds from rendering in heavily formatted articles  (not done - needs clarification )
+ *	 - Prevent embeds from rendering in heavily formatted articles  (needs clarification)
  *	 - Must have plain body text above and below                    (done)
  *
  * 	Rules to duplicat DCR behaviour:
@@ -117,10 +117,9 @@ function findInsertIndex(body: Body): number {
 	// create a filtered copy of the body without whitespace and errors
 	const contentOnlyBody = body.filter(
 		(result) =>
-			![
-				ElementCategory.error,
-				ElementCategory.whiteSpace,
-			].includes(categoriseResult(result)),
+			![ElementCategory.Error, ElementCategory.WhiteSpace].includes(
+				categoriseResult(result),
+			),
 	);
 
 	const [minIndex, maxIndex] = getRange(contentOnlyBody.length);
@@ -139,10 +138,10 @@ function findInsertIndex(body: Body): number {
 
 		return (
 			[
-				ElementCategory.paragraphText,
-				ElementCategory.boldParagraphText,
+				ElementCategory.ParagraphText,
+				ElementCategory.BoldParagraphText,
 			].includes(categoriseResult(contentAfter)) &&
-			[ElementCategory.paragraphText].includes(
+			[ElementCategory.ParagraphText].includes(
 				categoriseResult(contentBefore),
 			)
 		);
