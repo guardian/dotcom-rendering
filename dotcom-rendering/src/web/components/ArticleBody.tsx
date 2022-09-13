@@ -140,49 +140,46 @@ export const ArticleBody = ({
 		format.design === ArticleDesign.DeadBlog
 	) {
 		return (
-			<>
-				<div
-					tabIndex={0}
-					id="liveblog-body"
-					// This classname is used by Spacefinder as the container in which it'll attempt to insert inline ads
-					className="js-liveblog-body"
-					css={[
-						globalStrongStyles,
-						globalH2Styles(format.display),
-						globalH3Styles(format.display),
-						globalLinkStyles(palette),
-						// revealStyles is used to animate the reveal of new blocks
-						(format.design === ArticleDesign.DeadBlog ||
-							format.design === ArticleDesign.LiveBlog) &&
-							revealStyles,
-					]}
-				>
-					<LiveBlogRenderer
-						format={format}
-						blocks={blocks}
-						pinnedPost={pinnedPost}
-						adTargeting={adTargeting}
-						host={host}
-						pageId={pageId}
-						webTitle={webTitle}
-						ajaxUrl={ajaxUrl}
-						switches={switches}
-						isAdFreeUser={isAdFreeUser}
-						isSensitive={isSensitive}
-						isLiveUpdate={false}
-						section={section}
-						shouldHideReaderRevenue={shouldHideReaderRevenue}
-						tags={tags}
-						isPaidContent={isPaidContent}
-						contributionsServiceUrl={contributionsServiceUrl}
-						onFirstPage={onFirstPage}
-						keyEvents={keyEvents}
-						filterKeyEvents={filterKeyEvents}
-						availableTopics={availableTopics}
-						selectedTopics={selectedTopics}
-					/>
-				</div>
-			</>
+			<div
+				id="liveblog-body"
+				// This classname is used by Spacefinder as the container in which it'll attempt to insert inline ads
+				className="js-liveblog-body"
+				css={[
+					globalStrongStyles,
+					globalH2Styles(format.display),
+					globalH3Styles(format.display),
+					globalLinkStyles(palette),
+					// revealStyles is used to animate the reveal of new blocks
+					(format.design === ArticleDesign.DeadBlog ||
+						format.design === ArticleDesign.LiveBlog) &&
+						revealStyles,
+				]}
+			>
+				<LiveBlogRenderer
+					format={format}
+					blocks={blocks}
+					pinnedPost={pinnedPost}
+					adTargeting={adTargeting}
+					host={host}
+					pageId={pageId}
+					webTitle={webTitle}
+					ajaxUrl={ajaxUrl}
+					switches={switches}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					isLiveUpdate={false}
+					section={section}
+					shouldHideReaderRevenue={shouldHideReaderRevenue}
+					tags={tags}
+					isPaidContent={isPaidContent}
+					contributionsServiceUrl={contributionsServiceUrl}
+					onFirstPage={onFirstPage}
+					keyEvents={keyEvents}
+					filterKeyEvents={filterKeyEvents}
+					availableTopics={availableTopics}
+					selectedTopics={selectedTopics}
+				/>
+			</div>
 		);
 	}
 	return (

@@ -329,6 +329,8 @@ export const SecureSignupIframe = ({
 	return (
 		<>
 			<iframe
+				// @TODO check with @dblatcher if there is a better title
+				title={`Sign up to ${newsletterId}`}
 				ref={iframeRef}
 				css={css`
 					width: 100%;
