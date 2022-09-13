@@ -72,24 +72,30 @@ function buildBodyElement(item: Item): NewsletterSignUp | undefined {
 }
 
 /**
- * 	Desired Rules:
- *   - Hide embeds in articles that are less than 300 words (DO SERVER SIDE!)
- *	 - Prevent sign up form from appearing straight after bold text
- *	 - Prevent sign up from from appearing under headings
- *	 - Prevent embeds from rendering in heavily formatted articles
- *	 - Must have plain body text above and below
- * @param body
- * @returns the index to insert at
+ * 	Rules Desired by editorial/Product:
+ *   - Hide embeds in articles that are less than 300 words         (DO SERVER SIDE!)
+ *	 - Prevent sign up form from appearing straight after bold text (not done)
+ *	 - Prevent sign up from from appearing under headings           (done)
+ *	 - Prevent embeds from rendering in heavily formatted articles  (not done - needs clarification )
+ *	 - Must have plain body text above and below                    (done)
+ *
+ * 	Rules assumed for development purposes:
+ *   - Must be at least 4 elements after the start of the article
+ *   - Must be at least 2 element before the end of the article
+ *   - The best position is the last (furthest down) of the suitable positions
+ * @param body an Item.Body
+ * @returns the best index in that body to insert a sign-up block, or -1
+ * if there is no suitable place
  */
 function findInsertIndex(body: Body): number {
-	// Item.Body can contain 'Error' Results as well as 'ok' Results
-	// these are not rendered, but cannot be excluded from the array
-	// so need to be ignored for the purpose of choosing an index.
+	// Item.Body can contain:
+	//  - 'Error' Results as well as 'ok' Results
+	//  -  Text BodyElements representing text node of whitespace between HTML element
+	// These are not rendered/visibile, so are should be ignored
+	// when deciding which elements to put the sign-up block between.
 
-	// Item.Body models white space between HTML elements as Text BodyElements
-	// These need to be ignore for the purpose of the placemenr rules
-	// IE this is not a valid placement - the SignUp appears direcly below the
-	// Image even though there is a "Text" between them.
+	// IE this is NOT a valid placement - visually, the SignUp appears
+	// direcly below the Image even though there is a "Text" between them.
 	//
 	// [Text]
 	// [Text]
@@ -98,46 +104,26 @@ function findInsertIndex(body: Body): number {
 	// <-------------------- [SignUp]
 	// [Text]
 
-	// note - the min and max should ignore whitespace
-	// and error, but do not.
-	const minIndex = 0;
-	const maxIndex = body.length;
+	// create a filtered copy of the body without whitespace and errors
+	const contentOnlyBody = body.filter(
+		(result) =>
+			![
+				BodyResultCategory.error,
+				BodyResultCategory.whiteSpaceText,
+			].includes(categoriseResult(result)),
+	);
 
-	function findPreviousOkThatIsNotWhiteSpace(
-		index: number,
-	): BodyResult | undefined {
-		return body
-			.slice(0, index)
-			.reverse()
-			.find((result) =>
-				[
-					BodyResultCategory.nonParagraphText,
-					BodyResultCategory.nonText,
-					BodyResultCategory.paragraphText,
-				].includes(categoriseResult(result)),
-			);
-	}
+	const minIndex = 4;
+	const maxIndex = contentOnlyBody.length - 2;
 
-	function findNextOkThatIsNotWhiteSpace(
-		index: number,
-	): BodyResult | undefined {
-		return body
-			.slice(index)
-			.find((result) =>
-				[
-					BodyResultCategory.nonParagraphText,
-					BodyResultCategory.nonText,
-					BodyResultCategory.paragraphText,
-				].includes(categoriseResult(result)),
-			);
-	}
-
+	// Define the test for whether an index would be suitable to
+	// insert the signup component into the filtered copy of the body
 	function isASuitableIndex(index: number): boolean {
 		if (index > maxIndex || index < minIndex) {
 			return false;
 		}
-		const contentBefore = findPreviousOkThatIsNotWhiteSpace(index);
-		const contentAfter = findNextOkThatIsNotWhiteSpace(index);
+		const contentBefore = contentOnlyBody[index - 1];
+		const contentAfter = contentOnlyBody[index];
 		if (!contentBefore || !contentAfter) {
 			return false;
 		}
@@ -149,19 +135,41 @@ function findInsertIndex(body: Body): number {
 		);
 	}
 
-	const suitabilityMap = body.map((_, index) => isASuitableIndex(index));
+	// Map the filtered copy to boolean array:
+	const suitabilityList = contentOnlyBody.map((_, index) =>
+		isASuitableIndex(index),
+	);
 
-	body.forEach((result, index) => {
+	// Find the best place in the contentOnly array:
+	const bestIndexInContentOnlyBody = suitabilityList.lastIndexOf(true);
+
+	// The body is not mutated by this function. The return value
+	// needs to be the index in the original body array, not the
+	// filtered body.
+
+	// Find the corresponding index in the original body array:
+	const bestIndexInOriginalBody = body.indexOf(
+		contentOnlyBody[bestIndexInContentOnlyBody],
+	);
+
+	// logging - TO DO - remove when ready
+	contentOnlyBody.forEach((result, index) => {
+		if (index === bestIndexInContentOnlyBody) {
+			console.log('[SIGN UP GOES HERE]');
+		}
 		console.log(
 			`[${index}]`,
 			isASuitableIndex(index),
 			categoriseResult(result),
 		);
 	});
+	console.log({
+		method: 'new',
+		bestIndexInContentOnlyBody,
+		bestIndexInOriginalBody,
+	});
 
-	const bestIndex = suitabilityMap.lastIndexOf(true);
-	console.log({ bestIndex });
-	return bestIndex;
+	return bestIndexInOriginalBody;
 }
 
 function insertNewsletterIntoBody(
