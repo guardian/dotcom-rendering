@@ -195,9 +195,11 @@ const columnStyle = css`
 export const Column = ({
 	column,
 	index,
+	isLastColumn,
 }: {
 	column: PillarType;
 	index: number;
+	isLastColumn: boolean;
 }) => {
 	// As the elements are dynamic we need to specify the IDs here
 	const columnInputId = `${column.title}-checkbox-input`;
@@ -289,7 +291,9 @@ export const Column = ({
 					</li>
 				))}
 			</ul>
-			<div css={[hideWhenChecked(columnInputId), lineStyle]}></div>
+			{isLastColumn && (
+				<div css={[hideWhenChecked(columnInputId), lineStyle]}></div>
+			)}
 		</li>
 	);
 };
