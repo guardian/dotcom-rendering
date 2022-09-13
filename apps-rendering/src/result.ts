@@ -1,5 +1,7 @@
 // ----- Imports ----- //
 
+import type { Option } from '@guardian/types';
+import { none, some } from '@guardian/types';
 import { Optional } from 'optional';
 
 // ----- Classes ----- //
@@ -67,6 +69,12 @@ abstract class Result<E, A> {
 	 * @returns {Optional<A>} An {@linkcode Optional}
 	 */
 	abstract toOptional(): Optional<A>;
+
+	/**
+	 * Temporary method to convert to the old `Option` type. Same functionality
+	 * as {@linkcode toOptional} but with `Option`.
+	 */
+	abstract toOption(): Option<A>;
 
 	/**
 	 * Checks if a {@linkcode Result} is an `Ok`. Can be used in type guards to
@@ -209,6 +217,10 @@ class Ok<E, A> extends Result<E, A> {
 		return Optional.some(this.value);
 	}
 
+	toOption(): Option<A> {
+		return some(this.value);
+	}
+
 	isOk(): this is Ok<E, A> {
 		return true;
 	}
@@ -245,6 +257,10 @@ class Err<E, A> extends Result<E, A> {
 
 	toOptional(): Optional<A> {
 		return Optional.none();
+	}
+
+	toOption(): Option<A> {
+		return none;
 	}
 
 	isOk(): this is Ok<E, A> {

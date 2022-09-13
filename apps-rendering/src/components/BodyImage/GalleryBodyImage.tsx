@@ -1,18 +1,16 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
-import { border } from '@guardian/common-rendering/src/editorialPalette';
+import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	from,
-	headline,
-	neutral,
-	textSans,
-} from '@guardian/source-foundations';
+import { from, headline, textSans } from '@guardian/source-foundations';
 import Img from 'components/ImgAlt';
 import { grid } from 'grid/grid';
+import type { Image } from 'image/image';
+import type { Sizes } from 'image/sizes';
 import type { FC } from 'react';
-import { getDefaultImgStyles, getDefaultSizes } from './BodyImage.defaults';
+import { darkModeCss } from 'styles';
+import { getDefaultImgStyles } from './BodyImage.defaults';
 import type { BodyImageProps } from './BodyImage.defaults';
 
 const figureStyles = css`
@@ -34,8 +32,12 @@ const figureStyles = css`
 `;
 
 const imageWrapperStyles = (format: ArticleFormat): SerializedStyles => css`
-	${grid.column.centre}
+	${grid.column.all}
 	grid-row: 1;
+
+	${from.tablet} {
+		${grid.column.centre}
+	}
 
 	${from.leftCol} {
 		${grid.between('centre-column-start', 'right-column-end')}
@@ -79,13 +81,16 @@ const captionStyles = (format: ArticleFormat): SerializedStyles => css`
 	span,
 	a,
 	& {
-		color: ${neutral[100]};
+		color: ${text.gallery(format)};
 	}
-	> span {
+
+	span {
 		${textSans.xsmall({ lineHeight: 'regular' })}
 	}
-	> h2 {
-		${headline.xxxsmall()}
+
+	h2,
+	h2 > span {
+		${headline.xxxsmall({ lineHeight: 'regular' })}
 	}
 
 	${from.leftCol} {
@@ -103,7 +108,24 @@ const captionStyles = (format: ArticleFormat): SerializedStyles => css`
 			left: -10px;
 		}
 	}
+
+	${darkModeCss`
+		color: ${text.galleryDark(format)};
+	`}
 `;
+
+const imgSizes = (image: Image): Sizes => {
+	const ratio = image.width / image.height;
+
+	return {
+		mediaQueries: [
+			{ breakpoint: 'wide', size: `min(1020px, 100vh * ${ratio})` },
+			{ breakpoint: 'leftCol', size: `min(940px, 100vh * ${ratio})` },
+			{ breakpoint: 'phablet', size: `min(620px, 100vh * ${ratio})` },
+		],
+		default: `min(100vw, 100vh * ${ratio})`,
+	};
+};
 
 const GalleryBodyImage: FC<BodyImageProps> = ({
 	image,
@@ -116,7 +138,7 @@ const GalleryBodyImage: FC<BodyImageProps> = ({
 		<div css={imageWrapperStyles(format)}>
 			<Img
 				image={image}
-				sizes={getDefaultSizes(image.role)}
+				sizes={imgSizes(image)}
 				className={getDefaultImgStyles(image.role, supportsDarkMode)}
 				format={format}
 				supportsDarkMode={supportsDarkMode}

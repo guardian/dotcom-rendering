@@ -4,6 +4,7 @@ import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import {
 	brandAltBackground,
 	headline,
+	neutral,
 	space,
 	textSans,
 	until,
@@ -75,6 +76,39 @@ const opinionStyles = (palette: Palette, format: ArticleFormat) => css`
 	}
 `;
 
+const analysisStyles = (palette: Palette, hasSingleContributor: boolean) => css`
+	${headline.medium({
+		fontWeight: 'light',
+	})}
+	line-height: 38px;
+	font-style: italic;
+	color: ${palette.text.headlineByline};
+	background: ${palette.background.headlineByline};
+
+	${hasSingleContributor &&
+	css`
+		display: flex;
+		flex-direction: column;
+	`}
+
+	${until.tablet} {
+		${headline.small({
+			fontWeight: 'light',
+		})}
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+		:hover {
+			text-decoration: underline;
+		}
+	}
+	span {
+		color: ${neutral[46]};
+	}
+`;
+
 const immersiveStyles = (format: ArticleFormat) => css`
 	${format.theme === ArticleSpecial.Labs
 		? textSans.large({ lineHeight: 'tight' })
@@ -126,7 +160,11 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 				<div css={immersiveStyles(format)}>
 					by{' '}
 					<span css={immersiveLinkStyles(palette, format)}>
-						<BylineLink byline={byline} tags={tags} />
+						<BylineLink
+							byline={byline}
+							tags={tags}
+							format={format}
+						/>
 					</span>
 				</div>
 			);
@@ -139,7 +177,11 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 					return (
 						<div css={wrapperStyles}>
 							<div css={yellowBoxStyles(format)}>
-								<BylineLink byline={byline} tags={tags} />
+								<BylineLink
+									byline={byline}
+									tags={tags}
+									format={format}
+								/>
 							</div>
 						</div>
 					);
@@ -154,7 +196,28 @@ export const HeadlineByline = ({ format, byline, tags }: Props) => {
 							]}
 						>
 							<div css={opinionStyles(palette, format)}>
-								<BylineLink byline={byline} tags={tags} />
+								<BylineLink
+									byline={byline}
+									tags={tags}
+									format={format}
+								/>
+							</div>
+						</div>
+					);
+				case ArticleDesign.Analysis:
+					return (
+						<div css={opinionWrapperStyles}>
+							<div
+								css={analysisStyles(
+									palette,
+									hasSingleContributor,
+								)}
+							>
+								<BylineLink
+									byline={byline}
+									tags={tags}
+									format={format}
+								/>
 							</div>
 						</div>
 					);

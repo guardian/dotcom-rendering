@@ -52,7 +52,7 @@ export const EditionDropdown: React.FC<{
 			id: 'au',
 			url: '/preference/edition/au',
 			isActive: editionId === 'AU',
-			title: 'Australian edition',
+			title: 'Australia edition',
 			dataLinkName: 'nav2 : topbar : edition-picker: AU',
 		},
 		{

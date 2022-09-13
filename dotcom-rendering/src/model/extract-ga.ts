@@ -1,5 +1,6 @@
 // All GA fields should  fall back to default values -
 
+import type { EditionId } from 'src/types/edition';
 import type { CAPIArticleType } from '../types/frontend';
 
 const filterTags = (
@@ -47,19 +48,36 @@ const convertToLegacyPillar = (theme: CAPITheme): LegacyPillar => {
 const formatStringForGa = (string: string): string =>
 	string.toLowerCase().split(' ').join('');
 
-// we should not bring down the website if a trackable field is missing!
-export const extract = (data: CAPIArticleType): GADataType => ({
-	webTitle: data.webTitle,
-	pillar: convertToLegacyPillar(data.format.theme),
-	section: data.sectionName || '',
-	contentType: formatStringForGa(data.contentType),
-	commissioningDesks: formatStringForGa(getCommissioningDesk(data.tags)),
-	contentId: data.pageId,
-	authorIds: filterTags(data.tags, 'Contributor'),
-	keywordIds: filterTags(data.tags, 'Keyword'),
-	toneIds: filterTags(data.tags, 'Tone'),
-	seriesId: filterTags(data.tags, 'Series'),
+export const extractGA = ({
+	webTitle,
+	format,
+	sectionName,
+	contentType,
+	tags,
+	pageId,
+	editionId,
+	beaconURL,
+}: {
+	webTitle: string;
+	format: CAPIFormat;
+	sectionName?: string;
+	contentType: string;
+	tags: TagType[];
+	pageId: string;
+	editionId: EditionId;
+	beaconURL: string;
+}): GADataType => ({
+	webTitle,
+	pillar: convertToLegacyPillar(format.theme),
+	section: sectionName || '',
+	contentType: formatStringForGa(contentType),
+	commissioningDesks: formatStringForGa(getCommissioningDesk(tags)),
+	contentId: pageId,
+	authorIds: filterTags(tags, 'Contributor'),
+	keywordIds: filterTags(tags, 'Keyword'),
+	toneIds: filterTags(tags, 'Tone'),
+	seriesId: filterTags(tags, 'Series'),
 	isHosted: 'false', // TODO - This is missing from the Frontend Data model
-	edition: data.editionId.toLowerCase(),
-	beaconUrl: data.beaconURL,
+	edition: editionId.toLowerCase(),
+	beaconUrl: beaconURL,
 });

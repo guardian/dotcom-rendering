@@ -5,11 +5,11 @@ import { renderToString } from 'react-dom/server';
 import { getScriptArrayFromFile } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
-import { makeFrontWindowGuardian } from '../../model/window-guardian';
+import { makeWindowGuardian } from '../../model/window-guardian';
 import type { DCRFrontType } from '../../types/front';
 import { FrontPage } from '../components/FrontPage';
 import { getHttp3Url } from '../lib/getHttp3Url';
-import { frontTemplate } from './frontTemplate';
+import { pageTemplate } from './pageTemplate';
 
 interface Props {
 	front: DCRFrontType;
@@ -61,25 +61,7 @@ export const frontToHtml = ({ front }: Props): string => {
 
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
-	const { offerHttp3 } = front.config.switches;
-
-	/**
-	 * Preload the following woff2 font files
-	 * TODO: Identify critical fonts to preload
-	 */
-	const fontFiles = [
-		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2',
-		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
-		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
-		// 'http://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
-	].map((font) => (offerHttp3 ? getHttp3Url(font) : font));
+	const { offerHttp3 = false } = front.config.switches;
 
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
@@ -143,20 +125,37 @@ export const frontToHtml = ({ front }: Props): string => {
 	 * is placed in a script tag on the page
 	 */
 	const windowGuardian = escapeData(
-		JSON.stringify(makeFrontWindowGuardian(front)),
+		JSON.stringify(
+			makeWindowGuardian({
+				editionId: front.editionId,
+				stage: front.config.stage,
+				frontendAssetsFullURL: front.config.frontendAssetsFullURL,
+				revisionNumber: front.config.revisionNumber,
+				sentryPublicApiKey: front.config.sentryPublicApiKey,
+				sentryHost: front.config.sentryHost,
+				keywordIds: front.config.keywordIds,
+				dfpAccountId: front.config.dfpAccountId,
+				adUnit: front.config.adUnit,
+				ajaxUrl: front.config.ajaxUrl,
+				googletagUrl: front.config.googletagUrl,
+				switches: front.config.switches,
+				abTests: front.config.abTests,
+				brazeApiKey: front.config.brazeApiKey,
+			}),
+		),
 	);
 
 	const keywords = front.config.keywords ?? '';
 
-	return frontTemplate({
+	return pageTemplate({
 		priorityScriptTags,
 		lowPriorityScriptTags,
 		css: extractedCss,
 		html,
-		fontFiles,
 		title,
 		windowGuardian,
 		gaPath,
 		keywords,
+		offerHttp3,
 	});
 };

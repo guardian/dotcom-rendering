@@ -186,6 +186,22 @@ export const Analysis = () => {
 };
 Analysis.story = { name: 'Analysis' };
 
+export const Explainer = () => {
+	return (
+		<Section fullWidth={true}>
+			<Standfirst
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Explainer,
+					theme: ArticlePillar.News,
+				}}
+				standfirst="This is how Explainer standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
+			/>
+		</Section>
+	);
+};
+Explainer.story = { name: 'Explainer' };
+
 export const Gallery = () => {
 	return (
 		<Section fullWidth={true}>
