@@ -66,16 +66,29 @@ function categoriseResult(
 }
 
 /**
+ * Get the target range of places within a list of visible elements
+ * that the sign-up block can be placed in, being the places within
+ * 3 elements from the middle of the article (by element number only;
+ * not taking account of the length/height of each element)
+ *
+ * @param numberOfElements
+ * @returns The minimum and maximum index for the target range
+ */
+function getRange(numberOfElements: number): [number, number] {
+	const middle = Math.floor(numberOfElements / 2);
+	return [Math.max(0, middle - 3), Math.min(numberOfElements, middle + 3)];
+}
+
+/**
  * 	Rules Desired by editorial/Product:
  *   - Hide embeds in articles that are less than 300 words         (DO SERVER SIDE!)
- *	 - Prevent sign up form from appearing straight after bold text (not done)
+ *	 - Prevent sign up form from appearing straight after bold text (done)
  *	 - Prevent sign up from from appearing under headings           (done)
  *	 - Prevent embeds from rendering in heavily formatted articles  (not done - needs clarification )
  *	 - Must have plain body text above and below                    (done)
  *
- * 	Rules assumed for development purposes:
- *   - Must be at least 4 elements after the start of the article
- *   - Must be at least 2 element before the end of the article
+ * 	Rules to duplicat DCR behaviour:
+ *   - Must be within 3 elements from the middle of the article
  *   - The best position is the last (furthest down) of the suitable positions
  * @param body an Item.Body
  * @returns the best index in that body to insert a sign-up block, or -1
@@ -107,8 +120,7 @@ function findInsertIndex(body: Body): number {
 			].includes(categoriseResult(result)),
 	);
 
-	const minIndex = 4;
-	const maxIndex = contentOnlyBody.length - 2;
+	const [minIndex, maxIndex] = getRange(contentOnlyBody.length);
 
 	// Define the test for whether an index would be suitable to
 	// insert the signup component into the filtered copy of the body
