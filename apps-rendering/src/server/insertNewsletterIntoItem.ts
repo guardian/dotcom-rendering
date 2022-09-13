@@ -6,6 +6,7 @@ import { OptionKind } from '@guardian/types';
 import type { Body, BodyElement, NewsletterSignUp } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
 import type { Item } from 'item';
+import { logger } from 'logger';
 import { Result } from 'result';
 import { stringToPillar } from 'themeStyles';
 
@@ -174,6 +175,9 @@ function insertNewsletterIntoBody(
 ): Item {
 	const insertIndex = findInsertIndex(item.body);
 	if (insertIndex === -1) {
+		logger.warn(
+			`Unable to find suitable place for NewsletterSignUp: ${item.webUrl}`,
+		);
 		return item;
 	}
 	item.body = [
