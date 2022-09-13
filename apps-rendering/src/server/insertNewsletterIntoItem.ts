@@ -49,25 +49,6 @@ function categoriseResult(result: Result<string, BodyElement>): BodyResultCatego
 	}
 }
 
-// ----- Procedures ----- //
-
-function buildBodyElement(item: Item): NewsletterSignUp | undefined {
-	const newsletter =
-		item.promotedNewsletter.kind === OptionKind.Some
-			? item.promotedNewsletter.value
-			: TEST_NEWSLETTER; // TO DO - change to undefined when done testing
-
-	// if (!newsletter) {
-	// 	return undefined;
-	// }
-
-	return {
-		kind: ElementKind.NewsletterSignUp,
-		...newsletter,
-		theme: stringToPillar(newsletter.theme),
-	};
-}
-
 /**
  * 	Rules Desired by editorial/Product:
  *   - Hide embeds in articles that are less than 300 words         (DO SERVER SIDE!)
@@ -84,7 +65,7 @@ function buildBodyElement(item: Item): NewsletterSignUp | undefined {
  * @returns the best index in that body to insert a sign-up block, or -1
  * if there is no suitable place
  */
-function findInsertIndex(body: Body): number {
+ function findInsertIndex(body: Body): number {
 	// Item.Body can contain:
 	//  - 'Error' Results as well as 'ok' Results
 	//  -  Text BodyElements representing text node of whitespace between HTML element
@@ -166,6 +147,25 @@ function findInsertIndex(body: Body): number {
 	});
 
 	return bestIndexInOriginalBody;
+}
+
+// ----- Procedures ----- //
+
+function buildBodyElement(item: Item): NewsletterSignUp | undefined {
+	const newsletter =
+		item.promotedNewsletter.kind === OptionKind.Some
+			? item.promotedNewsletter.value
+			: TEST_NEWSLETTER; // TO DO - change to undefined when done testing
+
+	// if (!newsletter) {
+	// 	return undefined;
+	// }
+
+	return {
+		kind: ElementKind.NewsletterSignUp,
+		...newsletter,
+		theme: stringToPillar(newsletter.theme),
+	};
 }
 
 function insertNewsletterIntoBody(
