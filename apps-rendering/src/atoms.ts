@@ -302,6 +302,7 @@ function parseAtom(
 				return {
 					text: question.questionText,
 					...question,
+					// TODO: imageUrl & imageAlt should be set here, by parsing question.assets[x].data
 					answers: question.answers.map((answer) => {
 						return {
 							id: answer.id,
