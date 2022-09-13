@@ -242,6 +242,8 @@ export const Columns: React.FC<{
 		<li>
 			<form css={searchBar} action="https://www.google.co.uk/search">
 				<TextInput
+					tabIndex={-1}
+					className="selectableMenuItem"
 					hideLabel={true}
 					label="Search input"
 					cssOverrides={searchInput}
@@ -259,6 +261,8 @@ export const Columns: React.FC<{
 					</div>
 				</Label>
 				<Button
+					tabIndex={-1}
+					className="selectableMenuItem"
 					icon={
 						<SvgArrowRightStraight
 							isAnnouncedByScreenReader={true}
