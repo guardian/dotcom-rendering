@@ -31,6 +31,9 @@ const TEST_NEWSLETTER: Newsletter = {
 	successDescription: 'signed up',
 };
 
+const DEBUG_LOG = true;
+const DEBUG_LOG_CONTENT = false;
+
 // ----- pure functions ---//
 
 function categoriseResult(
@@ -162,38 +165,35 @@ function findInsertIndex(body: Body): number {
 		contentOnlyBody[bestIndexInContentOnlyBody],
 	);
 
-	// logging - TO DO - remove when ready
-	contentOnlyBody.forEach((result, index) => {
-		if (index === bestIndexInContentOnlyBody) {
-			console.log('[SIGN UP GOES HERE]');
-		}
-		console.log(
-			`[${index}]`,
-			isASuitableIndex(index),
-			categoriseResult(result),
-		);
-
-		if (
-			[
-				BodyResultCategory.paragraphText,
-				BodyResultCategory.boldParagraphText,
-			].includes(categoriseResult(result))
-		) {
-			const doc =
-				result.isOk() && result.value.kind === ElementKind.Text
-					? result.value.doc
-					: undefined;
-
-			if (doc && doc.nodeType === 1) {
-				const element = doc as Element;
-				console.log(element.outerHTML);
+	// TO DO - remove when ready
+	if (DEBUG_LOG) {
+		contentOnlyBody.forEach((result, index) => {
+			if (index === bestIndexInContentOnlyBody) {
+				console.log('[SIGN UP GOES HERE]');
 			}
-		}
-	});
-	console.log({
-		bestIndexInContentOnlyBody,
-		bestIndexInOriginalBody,
-	});
+			console.log(
+				`[${index}]`,
+				isASuitableIndex(index),
+				categoriseResult(result),
+			);
+
+			if (DEBUG_LOG_CONTENT) {
+				const doc =
+					result.isOk() && result.value.kind === ElementKind.Text
+						? result.value.doc
+						: undefined;
+
+				if (doc && doc.nodeType === 1) {
+					const element = doc as Element;
+					console.log(element.outerHTML);
+				}
+			}
+		});
+		console.log({
+			bestIndexInContentOnlyBody,
+			bestIndexInOriginalBody,
+		});
+	}
 
 	return bestIndexInOriginalBody;
 }
