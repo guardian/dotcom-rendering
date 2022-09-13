@@ -14,9 +14,10 @@ import { stringToPillar } from 'themeStyles';
 
 const enum BodyResultCategory {
 	'paragraphText' = 'PARAGRAPH',
-	'whiteSpaceText' = 'WHITE SPACE',
+	'boldParagraphText' = 'BOLD_PARAGRAPH',
 	'nonParagraphText' = 'OTHER TEXT ELEMENT',
 	'nonText' = 'NON TEXT',
+	'whiteSpaceText' = 'WHITE SPACE',
 	'error' = 'error',
 }
 
@@ -32,15 +33,29 @@ const TEST_NEWSLETTER: Newsletter = {
 
 // ----- pure functions ---//
 
-function categoriseResult(result: Result<string, BodyElement>): BodyResultCategory {
+function categoriseResult(
+	result: Result<string, BodyElement>,
+): BodyResultCategory {
 	if (result.isOk()) {
 		if (result.value.kind !== ElementKind.Text) {
 			return BodyResultCategory.nonText;
 		}
-		if (result.value.doc.textContent?.trim().length === 0) {
+		const { doc } = result.value;
+		if (doc.textContent?.trim().length === 0) {
 			return BodyResultCategory.whiteSpaceText;
 		}
-		if (result.value.doc.nodeName === 'P') {
+		if (doc.nodeName === 'P') {
+			if (doc.nodeType === 1) {
+				const element = doc as Element;
+				// for paragraphs containing only single <strong> child ("bold text"),
+				// the sign up block can be put before them, but not after them.
+				if (
+					element.children.length === 1 &&
+					element.firstElementChild?.tagName === 'STRONG'
+				) {
+					return BodyResultCategory.boldParagraphText;
+				}
+			}
 			return BodyResultCategory.paragraphText;
 		} else {
 			return BodyResultCategory.nonParagraphText;
@@ -66,7 +81,7 @@ function categoriseResult(result: Result<string, BodyElement>): BodyResultCatego
  * @returns the best index in that body to insert a sign-up block, or -1
  * if there is no suitable place
  */
- function findInsertIndex(body: Body): number {
+function findInsertIndex(body: Body): number {
 	// Item.Body can contain:
 	//  - 'Error' Results as well as 'ok' Results
 	//  -  Text BodyElements representing text node of whitespace between HTML element
@@ -108,9 +123,13 @@ function categoriseResult(result: Result<string, BodyElement>): BodyResultCatego
 		}
 
 		return (
-			categoriseResult(contentAfter) ===
-				BodyResultCategory.paragraphText &&
-			categoriseResult(contentBefore) === BodyResultCategory.paragraphText
+			[
+				BodyResultCategory.paragraphText,
+				BodyResultCategory.boldParagraphText,
+			].includes(categoriseResult(contentAfter)) &&
+			[BodyResultCategory.paragraphText].includes(
+				categoriseResult(contentBefore),
+			)
 		);
 	}
 
@@ -141,6 +160,23 @@ function categoriseResult(result: Result<string, BodyElement>): BodyResultCatego
 			isASuitableIndex(index),
 			categoriseResult(result),
 		);
+
+		if (
+			[
+				BodyResultCategory.paragraphText,
+				BodyResultCategory.boldParagraphText,
+			].includes(categoriseResult(result))
+		) {
+			const doc =
+				result.isOk() && result.value.kind === ElementKind.Text
+					? result.value.doc
+					: undefined;
+
+			if (doc && doc.nodeType === 1) {
+				const element = doc as Element;
+				console.log(element.outerHTML);
+			}
+		}
 	});
 	console.log({
 		bestIndexInContentOnlyBody,
