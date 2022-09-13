@@ -407,7 +407,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</Stuck>
 				</>
 			)}
-			<div id="maincontent" tabIndex={-1}>
+			<div id="maincontent">
 				<main data-layout="ShowcaseLayout">
 					<Section
 						fullWidth={true}
