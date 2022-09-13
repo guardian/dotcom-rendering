@@ -274,7 +274,6 @@ export const Pillars: React.FC<{
 							showDivider && pillarDivider,
 						]}
 						id={isTopNav && i === 0 ? 'navigation' : undefined}
-						aria-label={i === 0 ? 'Navigation' : undefined}
 						href={p.url}
 						data-link-name={`${dataLinkName} : primary : ${p.title}`}
 					>
