@@ -35,39 +35,21 @@ const TEST_NEWSLETTER: Newsletter = {
 // ----- pure functions ---//
 
 function categoriseResult(result: BodyResult): BodyResultCategory {
-
-	if (result.isOk() ) {
+	if (result.isOk()) {
 		if (result.value.kind !== ElementKind.Text) {
-			return BodyResultCategory.nonText
+			return BodyResultCategory.nonText;
 		}
-		if (result.value.doc.textContent?.trim().length === 0){
-			return BodyResultCategory.whiteSpaceText
+		if (result.value.doc.textContent?.trim().length === 0) {
+			return BodyResultCategory.whiteSpaceText;
 		}
 		if (result.value.doc.nodeName === 'P') {
-			return BodyResultCategory.paragraphText
+			return BodyResultCategory.paragraphText;
 		} else {
-			return BodyResultCategory.nonParagraphText
+			return BodyResultCategory.nonParagraphText;
 		}
 	} else {
-		return BodyResultCategory.error
+		return BodyResultCategory.error;
 	}
-
-}
-
-function isNonEmptyText(result: BodyResult): boolean {
-	if (result.isOk() && result.value.kind === ElementKind.Text) {
-		const { textContent } = result.value.doc;
-		return textContent ? textContent.trim().length > 0 : false;
-	}
-	return false;
-}
-
-function isWhiteSpace(result: BodyResult): boolean {
-	if (result.isOk() && result.value.kind === ElementKind.Text) {
-		const { textContent } = result.value.doc;
-		return textContent ? textContent.trim().length === 0 : false;
-	}
-	return false;
 }
 
 // ----- Procedures ----- //
@@ -127,7 +109,13 @@ function findInsertIndex(body: Body): number {
 		return body
 			.slice(0, index)
 			.reverse()
-			.find((result) => result.isOk() && !isWhiteSpace(result));
+			.find((result) =>
+				[
+					BodyResultCategory.nonParagraphText,
+					BodyResultCategory.nonText,
+					BodyResultCategory.paragraphText,
+				].includes(categoriseResult(result)),
+			);
 	}
 
 	function findNextOkThatIsNotWhiteSpace(
@@ -135,7 +123,13 @@ function findInsertIndex(body: Body): number {
 	): BodyResult | undefined {
 		return body
 			.slice(index)
-			.find((result) => result.isOk() && !isWhiteSpace(result));
+			.find((result) =>
+				[
+					BodyResultCategory.nonParagraphText,
+					BodyResultCategory.nonText,
+					BodyResultCategory.paragraphText,
+				].includes(categoriseResult(result)),
+			);
 	}
 
 	function isASuitableIndex(index: number): boolean {
@@ -147,7 +141,12 @@ function findInsertIndex(body: Body): number {
 		if (!contentBefore || !contentAfter) {
 			return false;
 		}
-		return isNonEmptyText(contentAfter) && isNonEmptyText(contentBefore);
+
+		return (
+			categoriseResult(contentAfter) ===
+				BodyResultCategory.paragraphText &&
+			categoriseResult(contentBefore) === BodyResultCategory.paragraphText
+		);
 	}
 
 	const suitabilityMap = body.map((_, index) => isASuitableIndex(index));
