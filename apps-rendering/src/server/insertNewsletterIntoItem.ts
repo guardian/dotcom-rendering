@@ -9,9 +9,6 @@ import type { Item } from 'item';
 import { Result } from 'result';
 import { stringToPillar } from 'themeStyles';
 
-// ----- type ----- //
-type BodyResult = Result<string, BodyElement>;
-
 // ----- Constants ----- //
 
 const enum BodyResultCategory {
@@ -34,7 +31,7 @@ const TEST_NEWSLETTER: Newsletter = {
 
 // ----- pure functions ---//
 
-function categoriseResult(result: BodyResult): BodyResultCategory {
+function categoriseResult(result: Result<string, BodyElement>): BodyResultCategory {
 	if (result.isOk()) {
 		if (result.value.kind !== ElementKind.Text) {
 			return BodyResultCategory.nonText;
@@ -164,7 +161,6 @@ function findInsertIndex(body: Body): number {
 		);
 	});
 	console.log({
-		method: 'new',
 		bestIndexInContentOnlyBody,
 		bestIndexInOriginalBody,
 	});
@@ -182,7 +178,7 @@ function insertNewsletterIntoBody(
 	}
 	item.body = [
 		...item.body.slice(0, insertIndex),
-		Result.ok(newsletterSignUp) as BodyResult,
+		Result.ok(newsletterSignUp),
 		...item.body.slice(insertIndex),
 	];
 	return item;
