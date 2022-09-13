@@ -34,6 +34,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader.importable';
 import { MainMedia } from '../components/MainMedia';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 import { Nav } from '../components/Nav/Nav';
@@ -244,9 +245,11 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	 */
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
+	const isLabs = format.theme === ArticleSpecial.Labs;
+
 	return (
 		<>
-			{format.theme !== ArticleSpecial.Labs ? (
+			{!isLabs ? (
 				<>
 					<div>
 						{renderAds && (
@@ -287,7 +290,8 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											.header
 									}
 									remoteHeader={
-										CAPIArticle.config.switches.remoteHeader
+										!!CAPIArticle.config.switches
+											.remoteHeader
 									}
 									contributionsServiceUrl={
 										contributionsServiceUrl
@@ -472,9 +476,117 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										}
 									/>
 								</div>
+
 							</GridItem>
 							<GridItem area="standfirst">
 								<Standfirst
+							</div>
+						</GridItem>
+						<GridItem area="meta" element="aside">
+							<div css={maxWidth}>
+								<ArticleMeta
+									branding={branding}
+									format={format}
+									pageId={CAPIArticle.pageId}
+									webTitle={CAPIArticle.webTitle}
+									byline={CAPIArticle.byline}
+									tags={CAPIArticle.tags}
+									primaryDateline={
+										CAPIArticle.webPublicationDateDisplay
+									}
+									secondaryDateline={
+										CAPIArticle.webPublicationSecondaryDateDisplay
+									}
+									isCommentable={CAPIArticle.isCommentable}
+									discussionApiUrl={
+										CAPIArticle.config.discussionApiUrl
+									}
+									shortUrlId={CAPIArticle.config.shortUrlId}
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
+									showShareCount={
+										!!CAPIArticle.config.switches
+											.serverShareCounts
+									}
+								/>
+							</div>
+						</GridItem>
+						<GridItem area="body">
+							<ArticleContainer format={format}>
+								<ArticleBody
+									format={format}
+									blocks={CAPIArticle.blocks}
+									adTargeting={adTargeting}
+									host={host}
+									pageId={CAPIArticle.pageId}
+									webTitle={CAPIArticle.webTitle}
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
+									switches={CAPIArticle.config.switches}
+									isSensitive={CAPIArticle.config.isSensitive}
+									isAdFreeUser={CAPIArticle.isAdFreeUser}
+									section={CAPIArticle.config.section}
+									shouldHideReaderRevenue={
+										CAPIArticle.shouldHideReaderRevenue
+									}
+									tags={CAPIArticle.tags}
+									isPaidContent={
+										!!CAPIArticle.config.isPaidContent
+									}
+									contributionsServiceUrl={
+										contributionsServiceUrl
+									}
+									contentType={CAPIArticle.contentType}
+									sectionName={CAPIArticle.sectionName || ''}
+									isPreview={CAPIArticle.config.isPreview}
+									idUrl={CAPIArticle.config.idUrl || ''}
+									isDev={!!CAPIArticle.config.isDev}
+									abTests={CAPIArticle.config.abTests}
+								/>
+								{showBodyEndSlot && (
+									<Island clientOnly={true}>
+										<SlotBodyEnd
+											contentType={
+												CAPIArticle.contentType
+											}
+											contributionsServiceUrl={
+												contributionsServiceUrl
+											}
+											idApiUrl={
+												CAPIArticle.config.idApiUrl
+											}
+											isMinuteArticle={
+												CAPIArticle.pageType
+													.isMinuteArticle
+											}
+											isPaidContent={
+												CAPIArticle.pageType
+													.isPaidContent
+											}
+											keywordsId={
+												CAPIArticle.config.keywordIds
+											}
+											pageId={CAPIArticle.pageId}
+											sectionId={
+												CAPIArticle.config.section
+											}
+											sectionName={
+												CAPIArticle.sectionName
+											}
+											shouldHideReaderRevenue={
+												CAPIArticle.shouldHideReaderRevenue
+											}
+											stage={CAPIArticle.config.stage}
+											tags={CAPIArticle.tags}
+										/>
+									</Island>
+								)}
+								<StraightLines
+									count={4}
+									cssOverrides={css`
+										display: block;
+									`}
+								/>
+								<SubMeta
+
 									format={format}
 									standfirst={CAPIArticle.standfirst}
 								/>
@@ -571,6 +683,48 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												isPaidContent={
 													CAPIArticle.pageType
 														.isPaidContent
+							</ArticleContainer>
+						</GridItem>
+						<GridItem area="right-column">
+							<div
+								css={css`
+									padding-top: 6px;
+									height: 100%;
+									${from.desktop} {
+										/* above 980 */
+										margin-left: 20px;
+										margin-right: -20px;
+									}
+									${from.leftCol} {
+										/* above 1140 */
+										margin-left: 0px;
+										margin-right: 0px;
+									}
+								`}
+							>
+								<RightColumn>
+									{!CAPIArticle.shouldHideAds && (
+										<AdSlot
+											position="right"
+											display={format.display}
+											shouldHideReaderRevenue={
+												CAPIArticle.shouldHideReaderRevenue
+											}
+											isPaidContent={
+												CAPIArticle.pageType
+													.isPaidContent
+											}
+										/>
+									)}
+
+									{!isPaidContent ? (
+										<Island
+											clientOnly={true}
+											deferUntil="visible"
+										>
+											<MostViewedRightWrapper
+												isAdFreeUser={
+													CAPIArticle.isAdFreeUser
 												}
 												keywordsId={
 													CAPIArticle.config
@@ -591,6 +745,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											/>
 										</Island>
 									)}
+
 									<StraightLines
 										count={4}
 										cssOverrides={css`
@@ -598,6 +753,46 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										`}
 									/>
 									<SubMeta
+								</RightColumn>
+							</div>
+						</GridItem>
+					</ShowcaseGrid>
+				</Section>
+
+				{renderAds && !isLabs && (
+					<Section
+						fullWidth={true}
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising-high"
+							display={format.display}
+						/>
+					</Section>
+				)}
+
+				{CAPIArticle.onwards ? (
+					<DecideOnwards
+						onwards={CAPIArticle.onwards}
+						format={format}
+					/>
+				) : (
+					<>
+						{CAPIArticle.storyPackage && (
+							<Section fullWidth={true}>
+								<Island deferUntil="visible">
+									<Carousel
+										heading={
+											CAPIArticle.storyPackage.heading
+										}
+										trails={CAPIArticle.storyPackage.trails.map(
+											decideTrail,
+										)}
+										onwardsSource="more-on-this-story"
 										format={format}
 										subMetaKeywordLinks={
 											CAPIArticle.subMetaKeywordLinks
@@ -684,6 +879,16 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<DecideOnwards
 							onwards={CAPIArticle.onwards}
 							format={format}
+							discussionD2Uid={CAPIArticle.config.discussionD2Uid}
+							discussionApiClientHeader={
+								CAPIArticle.config.discussionApiClientHeader
+							}
+							enableDiscussionSwitch={
+								!!CAPIArticle.config.switches
+									.enableDiscussionSwitch
+							}
+							isAdFreeUser={CAPIArticle.isAdFreeUser}
+							shouldHideAds={CAPIArticle.shouldHideAds}
 						/>
 					) : (
 						<>
@@ -703,6 +908,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</Island>
 								</Section>
 							)}
+
 
 							<Island
 								clientOnly={true}
@@ -795,6 +1001,44 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					)}
 				</main>
 			</div>
+				{!isPaidContent && (
+					<Section
+						title="Most viewed"
+						padContent={false}
+						verticalMargins={false}
+						element="aside"
+						data-print-layout="hide"
+						data-link-name="most-popular"
+						data-component="most-popular"
+					>
+						<MostViewedFooterLayout>
+							<Island clientOnly={true} deferUntil="visible">
+								<MostViewedFooterData
+									sectionName={CAPIArticle.sectionName}
+									format={format}
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
+								/>
+							</Island>
+						</MostViewedFooterLayout>
+					</Section>
+				)}
+
+				{renderAds && !isLabs && (
+					<Section
+						fullWidth={true}
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising"
+							display={format.display}
+						/>
+					</Section>
+				)}
+			</main>
 
 			{NAV.subNavSections && (
 				<Section fullWidth={true} padSides={false} element="aside">
@@ -846,10 +1090,10 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							CAPIArticle.shouldHideReaderRevenue
 						}
 						remoteBannerSwitch={
-							CAPIArticle.config.switches.remoteBanner
+							!!CAPIArticle.config.switches.remoteBanner
 						}
 						puzzleBannerSwitch={
-							CAPIArticle.config.switches.puzzlesBanner
+							!!CAPIArticle.config.switches.puzzlesBanner
 						}
 						tags={CAPIArticle.tags}
 					/>

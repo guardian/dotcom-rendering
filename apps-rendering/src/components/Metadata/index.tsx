@@ -209,7 +209,11 @@ const MetadataWithByline: FC<Props> = ({ item }: Props) => (
 		<Avatar {...item} />
 		<div css={css(textStyles, withBylineTextStyles)}>
 			<Byline {...item} />
-			<Dateline date={item.publishDate} format={item} />
+			<Dateline
+				date={item.publishDate}
+				format={item}
+				edition={item.edition}
+			/>
 			<Follow format={getFormat(item)} contributors={item.contributors} />
 		</div>
 		<CommentCount count={item.commentCount} {...item} />
@@ -219,7 +223,11 @@ const MetadataWithByline: FC<Props> = ({ item }: Props) => (
 const ShortMetadata: FC<Props> = ({ item }: Props) => (
 	<div css={styles}>
 		<div css={textStyles}>
-			<Dateline date={item.publishDate} format={item} />
+			<Dateline
+				date={item.publishDate}
+				format={item}
+				edition={item.edition}
+			/>
 			<Follow format={getFormat(item)} contributors={item.contributors} />
 		</div>
 		<CommentCount count={item.commentCount} {...item} />
@@ -245,7 +253,11 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 				<div css={liveBylineStyles}>
 					<Byline {...item} />
 				</div>
-				<Dateline date={item.publishDate} format={item} />
+				<Dateline
+					date={item.publishDate}
+					format={item}
+					edition={item.edition}
+				/>
 				<Follow
 					format={getFormat(item)}
 					contributors={item.contributors}
@@ -283,6 +295,7 @@ const Metadata: FC<Props> = (props: Props) => {
 				commentCount={props.item.commentCount}
 				contributors={props.item.contributors}
 				commentable={props.item.commentable}
+				edition={props.item.edition}
 			/>
 		);
 	}
@@ -295,12 +308,14 @@ const Metadata: FC<Props> = (props: Props) => {
 				commentCount={props.item.commentCount}
 				contributors={props.item.contributors}
 				commentable={props.item.commentable}
+				edition={props.item.edition}
 			/>
 		);
 	} else if (
 		design === ArticleDesign.Comment ||
 		design === ArticleDesign.Letter ||
-		design === ArticleDesign.Editorial
+		design === ArticleDesign.Editorial ||
+		design === ArticleDesign.Analysis
 	) {
 		return <ShortMetadata {...props} />;
 	} else if (

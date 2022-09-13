@@ -15,7 +15,6 @@ import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { Avatar } from '../Avatar';
 import { CardHeadline } from '../CardHeadline';
-import { Flex } from '../Flex';
 import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
 import { Snap } from '../Snap';
@@ -282,11 +281,11 @@ export const Card = ({
 	}
 
 	// Decide what type of image to show, main media, avatar or none
-	let imageType: 'mainmedia' | 'avatar' | undefined;
+	let imageType: CardImageType | undefined;
 	if (imageUrl && avatarUrl) {
 		imageType = 'avatar';
 	} else if (imageUrl) {
-		imageType = 'mainmedia';
+		imageType = 'mainMedia';
 	}
 
 	return (
@@ -307,80 +306,79 @@ export const Card = ({
 					imageUrl !== undefined ? imagePositionOnMobile : 'top'
 				}
 				minWidthInPixels={minWidthInPixels}
+				imageType={imageType}
 			>
-				{imageType === 'mainmedia' && (
-					<ImageWrapper
-						imageSize={imageSize}
-						imagePosition={
-							imageUrl !== undefined ? imagePosition : 'top'
-						}
-						imagePositionOnMobile={
-							imageUrl !== undefined
-								? imagePositionOnMobile
-								: 'top'
-						}
-					>
+				<ImageWrapper
+					imageSize={imageSize}
+					imageType={imageType}
+					imagePosition={
+						imageUrl !== undefined ? imagePosition : 'top'
+					}
+					imagePositionOnMobile={
+						imageUrl !== undefined ? imagePositionOnMobile : 'top'
+					}
+				>
+					{imageType === 'avatar' && !!avatarUrl ? (
+						<AvatarContainer
+							imageSize={imageSize}
+							imagePosition={imagePosition}
+						>
+							<Avatar
+								imageSrc={avatarUrl}
+								imageAlt={byline ?? ''}
+								containerPalette={containerPalette}
+								format={format}
+							/>
+						</AvatarContainer>
+					) : (
 						<img src={imageUrl} alt="" role="presentation" />
-					</ImageWrapper>
-				)}
+					)}
+				</ImageWrapper>
 				<ContentWrapper
+					imageType={imageType}
 					imageSize={imageSize}
 					imagePosition={imagePosition}
 				>
-					<Flex>
-						<HeadlineWrapper>
-							<CardHeadline
-								headlineText={headlineText}
-								format={format}
+					<HeadlineWrapper>
+						<CardHeadline
+							headlineText={headlineText}
+							format={format}
+							containerPalette={containerPalette}
+							size={headlineSize}
+							sizeOnMobile={headlineSizeOnMobile}
+							showQuotes={showQuotes}
+							kickerText={
+								format.design === ArticleDesign.LiveBlog
+									? 'Live'
+									: kickerText
+							}
+							showPulsingDot={
+								format.design === ArticleDesign.LiveBlog ||
+								showPulsingDot
+							}
+							showSlash={
+								format.design === ArticleDesign.LiveBlog ||
+								showSlash
+							}
+							byline={byline}
+							showByline={showByline}
+							isDynamo={isDynamo}
+						/>
+						{starRating !== undefined ? (
+							<StarRatingComponent rating={starRating} />
+						) : null}
+						{(format.design === ArticleDesign.Gallery ||
+							format.design === ArticleDesign.Audio ||
+							format.design === ArticleDesign.Video) &&
+						mediaType ? (
+							<MediaMeta
 								containerPalette={containerPalette}
-								size={headlineSize}
-								sizeOnMobile={headlineSizeOnMobile}
-								showQuotes={showQuotes}
-								kickerText={
-									format.design === ArticleDesign.LiveBlog
-										? 'Live'
-										: kickerText
-								}
-								showPulsingDot={
-									format.design === ArticleDesign.LiveBlog ||
-									showPulsingDot
-								}
-								showSlash={
-									format.design === ArticleDesign.LiveBlog ||
-									showSlash
-								}
-								byline={byline}
-								showByline={showByline}
-								isDynamo={isDynamo}
+								format={format}
+								mediaType={mediaType}
+								mediaDuration={mediaDuration}
 							/>
-							{starRating !== undefined ? (
-								<StarRatingComponent rating={starRating} />
-							) : null}
-							{(format.design === ArticleDesign.Gallery ||
-								format.design === ArticleDesign.Audio ||
-								format.design === ArticleDesign.Video) &&
-							mediaType ? (
-								<MediaMeta
-									containerPalette={containerPalette}
-									format={format}
-									mediaType={mediaType}
-									mediaDuration={mediaDuration}
-								/>
-							) : undefined}
-						</HeadlineWrapper>
-						{imageType === 'avatar' && !!avatarUrl && (
-							<Hide when="above" breakpoint="tablet">
-								<AvatarContainer>
-									<Avatar
-										imageSrc={avatarUrl}
-										imageAlt={byline ?? ''}
-										containerPalette={containerPalette}
-										format={format}
-									/>
-								</AvatarContainer>
-							</Hide>
-						)}
-					</Flex>
+						) : undefined}
+					</HeadlineWrapper>
 					{/* This div is needed to push this content to the bottom of the card */}
 					<div>
 						{!!trailText && (
@@ -394,18 +392,6 @@ export const Card = ({
 									}}
 								/>
 							</TrailTextWrapper>
-						)}
-						{imageType === 'avatar' && !!avatarUrl && (
-							<Hide when="below" breakpoint="tablet">
-								<AvatarContainer>
-									<Avatar
-										imageSrc={avatarUrl}
-										imageAlt={byline ?? ''}
-										containerPalette={containerPalette}
-										format={format}
-									/>
-								</AvatarContainer>
-							</Hide>
 						)}
 						<DecideFooter
 							isOpinion={isOpinion}

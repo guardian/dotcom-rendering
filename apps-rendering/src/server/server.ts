@@ -8,14 +8,11 @@ import type { RenderingRequest } from '@guardian/apps-rendering-api-models/rende
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
-import type { Option, Result } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import {
-	either,
-	err,
 	fromNullable,
 	map,
 	none,
-	ok,
 	OptionKind,
 	some,
 	withDefault,
@@ -36,6 +33,7 @@ import { MainMediaKind } from 'mainMedia';
 import type { Response } from 'node-fetch';
 import fetch from 'node-fetch';
 import { parseRelatedContent } from 'relatedContent';
+import { Result } from 'result';
 import {
 	capiContentDecoder,
 	capiDecoder,
@@ -106,20 +104,20 @@ const parseCapiResponse =
 					logger.error(
 						`CAPI returned a 200 for ${articleId}, but didn't give me any content`,
 					);
-					return err(500);
+					return Result.err(500);
 				}
 
 				if (response.relatedContent === undefined) {
 					logger.error(
 						`Unable to fetch related content for ${articleId}`,
 					);
-					return err(500);
+					return Result.err(500);
 				}
 
 				const relatedContent = parseRelatedContent(
 					response.relatedContent,
 				);
-				return ok([response.content, relatedContent]);
+				return Result.ok([response.content, relatedContent]);
 			}
 
 			case 404:
@@ -127,7 +125,7 @@ const parseCapiResponse =
 					`CAPI says that it doesn't recognise this resource: ${articleId}`,
 				);
 
-				return err(404);
+				return Result.err(404);
 
 			default: {
 				const response = await errorDecoder(buffer);
@@ -135,7 +133,7 @@ const parseCapiResponse =
 				logger.error(
 					`I received a ${status} code from CAPI with the message: ${response.message} for resource ${capiResponse.url}`,
 				);
-				return err(500);
+				return Result.err(500);
 			}
 		}
 	};
@@ -145,7 +143,7 @@ const askCapiFor = (articleId: string): CapiReturn =>
 		if (key === undefined) {
 			logger.error('Could not get CAPI key');
 
-			return err(500);
+			return Result.err(500);
 		}
 
 		return capiRequest(articleId)(key).then(parseCapiResponse(articleId));
@@ -336,7 +334,7 @@ async function serveArticleGet(
 		const capiContent = await askCapiFor(articleId);
 		const edition = editionFromString(req.params.edition);
 
-		await either(
+		await capiContent.either(
 			(errorStatus: number) => {
 				res.sendStatus(errorStatus);
 				return Promise.resolve();
@@ -372,7 +370,7 @@ async function serveArticleGet(
 					);
 				}
 			},
-		)(capiContent);
+		);
 	} catch (e) {
 		logger.error(`This error occurred`, e);
 		res.sendStatus(500);

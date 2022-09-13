@@ -1,3 +1,5 @@
+import type { EditionId } from './edition';
+
 export interface CommercialConfigType {
 	isPaidContent?: boolean;
 	pageId: string;
@@ -20,6 +22,10 @@ export type ServerSideTests = {
 
 export type ServerSideTestNames = `${string}Control` | `${string}Variant`;
 
+export interface Switches {
+	[key: string]: boolean | undefined;
+}
+
 /**
  * the config model will contain useful app/site
  * level data. Although currently derived from the config model
@@ -27,11 +33,12 @@ export type ServerSideTestNames = `${string}Control` | `${string}Variant`;
  * this data could eventually be defined in dotcom-rendering
  */
 export interface ConfigType extends CommercialConfigType {
+	dcrCouldRender?: boolean;
 	ajaxUrl: string;
 	sentryPublicApiKey: string;
 	sentryHost: string;
 	dcrSentryDsn: string;
-	switches: { [key: string]: boolean };
+	switches: Switches;
 	abTests: ServerSideTests;
 	dfpAccountId: string;
 	commercialBundleUrl: string;
@@ -39,12 +46,12 @@ export interface ConfigType extends CommercialConfigType {
 	shortUrlId: string;
 	isDev?: boolean;
 	googletagUrl: string;
-	stage: string;
+	stage: StageType;
 	frontendAssetsFullURL: string;
 	adUnit: string;
 	isSensitive: boolean;
 	videoDuration?: number;
-	edition: string;
+	edition: EditionId;
 	section: string;
 
 	sharedAdTargeting: { [key: string]: any };
