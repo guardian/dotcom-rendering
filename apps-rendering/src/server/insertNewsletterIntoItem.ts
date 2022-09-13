@@ -12,12 +12,12 @@ import { stringToPillar } from 'themeStyles';
 
 // ----- Constants ----- //
 
-const enum BodyResultCategory {
+const enum ElementCategory {
 	'paragraphText' = 'PARAGRAPH',
 	'boldParagraphText' = 'BOLD_PARAGRAPH',
 	'nonParagraphText' = 'OTHER TEXT ELEMENT',
 	'nonText' = 'NON TEXT',
-	'whiteSpaceText' = 'WHITE SPACE',
+	'whiteSpace' = 'WHITE SPACE',
 	'error' = 'error',
 }
 
@@ -38,14 +38,14 @@ const DEBUG_LOG_CONTENT = false;
 
 function categoriseResult(
 	result: Result<string, BodyElement>,
-): BodyResultCategory {
+): ElementCategory {
 	if (result.isOk()) {
 		if (result.value.kind !== ElementKind.Text) {
-			return BodyResultCategory.nonText;
+			return ElementCategory.nonText;
 		}
 		const { doc } = result.value;
 		if (doc.textContent?.trim().length === 0) {
-			return BodyResultCategory.whiteSpaceText;
+			return ElementCategory.whiteSpace;
 		}
 		if (doc.nodeName === 'P') {
 			if (doc.nodeType === 1) {
@@ -56,15 +56,15 @@ function categoriseResult(
 					element.children.length === 1 &&
 					element.firstElementChild?.tagName === 'STRONG'
 				) {
-					return BodyResultCategory.boldParagraphText;
+					return ElementCategory.boldParagraphText;
 				}
 			}
-			return BodyResultCategory.paragraphText;
+			return ElementCategory.paragraphText;
 		} else {
-			return BodyResultCategory.nonParagraphText;
+			return ElementCategory.nonParagraphText;
 		}
 	} else {
-		return BodyResultCategory.error;
+		return ElementCategory.error;
 	}
 }
 
@@ -118,8 +118,8 @@ function findInsertIndex(body: Body): number {
 	const contentOnlyBody = body.filter(
 		(result) =>
 			![
-				BodyResultCategory.error,
-				BodyResultCategory.whiteSpaceText,
+				ElementCategory.error,
+				ElementCategory.whiteSpace,
 			].includes(categoriseResult(result)),
 	);
 
@@ -139,10 +139,10 @@ function findInsertIndex(body: Body): number {
 
 		return (
 			[
-				BodyResultCategory.paragraphText,
-				BodyResultCategory.boldParagraphText,
+				ElementCategory.paragraphText,
+				ElementCategory.boldParagraphText,
 			].includes(categoriseResult(contentAfter)) &&
-			[BodyResultCategory.paragraphText].includes(
+			[ElementCategory.paragraphText].includes(
 				categoriseResult(contentBefore),
 			)
 		);
