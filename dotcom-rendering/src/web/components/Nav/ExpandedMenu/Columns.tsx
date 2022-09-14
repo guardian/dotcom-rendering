@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, ThemeProvider } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import {
@@ -7,15 +7,12 @@ import {
 	brandText,
 	from,
 	headline,
-	neutral,
 	textSans,
 } from '@guardian/source-foundations';
 import {
-	Button,
-	Label,
-	SvgArrowRightStraight,
+	buttonThemeBrand,
+	LinkButton,
 	SvgMagnifyingGlass,
-	TextInput,
 } from '@guardian/source-react-components';
 import type { NavType } from '../../../../model/extract-nav';
 import { Column } from './Column';
@@ -136,83 +133,10 @@ const lineStyle = css`
 `;
 
 const searchBar = css`
-	${from.desktop} {
-		display: none;
-	}
-	box-sizing: border-box;
-	display: block;
-	margin-left: 13px;
-	max-width: 23.75rem;
-	position: relative;
+	margin-left: 45px;
 	margin-bottom: 24px;
 	margin-right: 41px;
 	padding-bottom: 15px;
-`;
-
-const searchInput = css`
-	${textSans.large()}
-	background-color: rgba(255,255,255, .1);
-	border: 0;
-	border-radius: 1000px;
-	box-sizing: border-box;
-	color: ${neutral[100]};
-	height: 36px;
-	padding-left: 38px;
-	vertical-align: middle;
-	width: 100%;
-	&::placeholder {
-		color: ${neutral[100]};
-	}
-	&:focus {
-		outline: none;
-		padding-right: 40px;
-		&::placeholder {
-			opacity: 0;
-		}
-	}
-	&:focus ~ button {
-		opacity: 1;
-		outline: none;
-		pointer-events: all;
-	}
-`;
-
-const searchGlass = css`
-	position: absolute;
-	left: 7px;
-	top: 6px;
-	fill: ${neutral[100]};
-`;
-
-const searchSubmit = css`
-	background: transparent;
-	border: 0;
-	bottom: 0;
-	cursor: pointer;
-	display: block;
-	opacity: 0;
-	pointer-events: none;
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 50px;
-	fill: ${neutral[100]};
-	&:focus,
-	&:active {
-		opacity: 1;
-		outline: none;
-		pointer-events: all;
-	}
-	&:before {
-		height: 12px;
-		top: 11px;
-		width: 12px;
-	}
-	&:after {
-		border-right: 0;
-		top: 17px;
-		width: 20px;
-	}
 `;
 
 export const Columns: React.FC<{
@@ -234,46 +158,28 @@ export const Columns: React.FC<{
 		))}
 
 		<li>
-			<form css={searchBar} action="https://www.google.co.uk/search">
-				<TextInput
-					tabIndex={-1}
-					className="selectableMenuItem"
-					hideLabel={true}
-					label="Search input"
-					cssOverrides={searchInput}
-					name="q"
-					placeholder="Search"
-					data-link-name="nav2 : search"
-				/>
+			<ThemeProvider theme={{ ...buttonThemeBrand }}>
+				<div css={searchBar}>
+					<LinkButton
+						href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
+						tabIndex={-1}
+						className="selectableMenuItem"
+						priority="secondary"
+						icon={
+							<SvgMagnifyingGlass
+								isAnnouncedByScreenReader={true}
+								size="medium"
+							/>
+						}
+						aria-label="Search with google"
+						data-link-name="nav2 : search : submit"
+						type="submit"
+					>
+						Search
+					</LinkButton>
+				</div>
+			</ThemeProvider>
 
-				<Label hideLabel={true} text="google-search">
-					<div css={searchGlass}>
-						<SvgMagnifyingGlass
-							isAnnouncedByScreenReader={true}
-							size="medium"
-						/>
-					</div>
-				</Label>
-				<Button
-					tabIndex={-1}
-					className="selectableMenuItem"
-					icon={
-						<SvgArrowRightStraight
-							isAnnouncedByScreenReader={true}
-							size="medium"
-						/>
-					}
-					aria-label="Search with google"
-					cssOverrides={searchSubmit}
-					data-link-name="nav2 : search : submit"
-					type="submit"
-				></Button>
-				<input
-					type="hidden"
-					name="as_sitesearch"
-					value="www.theguardian.com"
-				/>
-			</form>
 			<div css={lineStyle}></div>
 		</li>
 
