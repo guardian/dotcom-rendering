@@ -133,6 +133,9 @@ const lineStyle = css`
 `;
 
 const searchBar = css`
+	${from.desktop} {
+		display: none;
+	}
 	margin-left: 45px;
 	margin-bottom: 24px;
 	margin-right: 41px;
