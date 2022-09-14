@@ -19,7 +19,7 @@ const extractText = (element: SubheadingBlockElement): string => {
 
 const extractID = (element: SubheadingBlockElement): string => {
 	return (
-		JSDOM.fragment(element.html).querySelector('H2')?.getAttribute('id') ||
+		JSDOM.fragment(element.html).querySelector('H2')?.getAttribute('id') ??
 		''
 	);
 };
