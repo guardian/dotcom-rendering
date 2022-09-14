@@ -24,6 +24,7 @@ import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
 import { pageFonts } from 'styles';
 import { hydrationTestComponentClassName } from 'components/HydrationTestComponent';
+import { hydrateableNewsletterSignupClassName } from 'components/HydrateableNewsletterSignup';
 
 // ----- Types ----- //
 
@@ -162,7 +163,10 @@ const buildHtml = (
 };
 
 const hasHydratedElement = (body: EmotionCritical): boolean => {
-	return body.html.includes(hydrationTestComponentClassName);
+	return [
+		hydrateableNewsletterSignupClassName,
+		hydrationTestComponentClassName,
+	].some((className) => body.html.includes(className));
 };
 
 function render(

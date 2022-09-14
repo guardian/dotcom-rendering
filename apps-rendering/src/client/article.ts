@@ -20,6 +20,18 @@ import { createEmbedComponentFromProps } from 'components/EmbedWrapper';
 import EpicContent from 'components/EpicContent';
 import FollowStatus from 'components/FollowStatus';
 import FooterContent from 'components/FooterContent';
+import {
+	getPropsForHydrationTestComponent,
+	hydrationTestComponentClassName,
+	HydrationTestComponentInner,
+} from 'components/HydrationTestComponent';
+
+import {
+	getPropsForHydrateableNewsletterSignup,
+	hydrateableNewsletterSignupClassName,
+	HydrateableNewsletterSignupInner,
+} from 'components/HydrateableNewsletterSignup';
+
 import { handleErrors, isObject } from 'lib';
 import {
 	acquisitionsClient,
@@ -36,11 +48,6 @@ import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
 import { initSignupForms } from './signupForm';
-import {
-	getPropsForHydrationTestComponent,
-	hydrationTestComponentClassName,
-	HydrationTestComponentInner,
-} from 'components/HydrationTestComponent';
 
 // ----- Run ----- //
 
@@ -456,7 +463,22 @@ function hydrateTestComponents(): void {
 	document
 		.querySelectorAll(`.${hydrationTestComponentClassName}`)
 		.forEach((container) => {
-			const component = h(HydrationTestComponentInner, getPropsForHydrationTestComponent(container));
+			const component = h(
+				HydrationTestComponentInner,
+				getPropsForHydrationTestComponent(container),
+			);
+			ReactDOM.hydrate(component, container);
+		});
+}
+
+function hydrateEmailSignUp(): void {
+	document
+		.querySelectorAll(`.${hydrateableNewsletterSignupClassName}`)
+		.forEach((container) => {
+			const component = h(
+				HydrateableNewsletterSignupInner,
+				getPropsForHydrateableNewsletterSignup(container),
+			);
 			ReactDOM.hydrate(component, container);
 		});
 }
@@ -492,3 +514,4 @@ richLinks();
 hydrateClickToView();
 initSignupForms();
 hydrateTestComponents();
+hydrateEmailSignUp();

@@ -21,6 +21,7 @@ import { Result } from 'result';
 import AnalysisLayout from './AnalysisLayout';
 import ImmersiveLayout from './ImmersiveLayout';
 import HydrationTestComponent from 'components/HydrationTestComponent';
+import HydrateableNewsletterSignup from 'components/HydrateableNewsletterSignup';
 
 // ----- Functions ----- //
 
@@ -129,7 +130,20 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 
 		return (
 			<StandardLayout item={item}>
-				<HydrationTestComponent text="into standard" />
+				<HydrationTestComponent text="This is a test component" />
+				<HydrateableNewsletterSignup
+					element={{
+						kind: ElementKind.NewsletterSignUp,
+						identityName: 'patriarchy',
+						description:
+							'Reviewing the most important stories on feminism and sexism and those fighting for equality',
+						name: 'The Week in Patriarchy',
+						frequency: 'Weekly',
+						theme: 1,
+						successDescription:
+							"We'll send you The Week in Patriarchy every week",
+					}}
+				/>
 
 				{render(item, body)}
 			</StandardLayout>
