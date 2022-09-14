@@ -78,7 +78,11 @@ export const LabsShadyPie = ({
 			<div css={shadyBanner}>
 				<p>Paid content</p>
 			</div>
-			<a css={shadyStyle} href={articleLink} tabIndex={-1}>
+			<a
+				css={shadyStyle}
+				href={articleLink + '?utm_source=shady-pie'}
+				tabIndex={-1}
+			>
 				<img src={articleImageLink} width="300" alt="" />
 				<p css={shadyTitle}>{articleTitle}</p>
 			</a>
