@@ -1,6 +1,26 @@
 import { storage } from '@guardian/libs';
 import { Participations } from '@guardian/ab-core';
-import { setOrUseParticipations } from './ab-exclusions';
+import { setOrUseParticipations, isInRegion } from './ab-exclusions';
+import * as lib from '../../lib/getCountryCode';
+
+describe('canRun using isInRegion', () => {
+	beforeEach(() => {
+		localStorage.clear();
+	});
+
+	test('isInRegion exclusion returns false if geolocation is not available', () => {
+		jest.spyOn(lib, 'getCountryCodeSync').mockReturnValue(null);
+		expect(isInRegion(['US', 'CA'])).toBe(false);
+	});
+	test('isInRegion exclusion returns true if geolocation is in region', () => {
+		jest.spyOn(lib, 'getCountryCodeSync').mockReturnValue('CA');
+		expect(isInRegion(['US', 'CA'])).toBe(true);
+	});
+	test('isInRegion exclusion returns false if geolocation is not in region', () => {
+		jest.spyOn(lib, 'getCountryCodeSync').mockReturnValue('GB');
+		expect(isInRegion(['US', 'CA'])).toBe(false);
+	});
+});
 
 describe('canRun using participations', () => {
 	beforeEach(() => {

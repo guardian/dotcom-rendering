@@ -1,4 +1,5 @@
 import { Participations } from '@guardian/ab-core';
+import { getCountryCodeSync } from '../../lib/getCountryCode';
 import {
 	getParticipationsFromLocalStorage,
 	setParticipationsInLocalStorage,
@@ -8,8 +9,6 @@ import {
  * Occasionally we may want to track long-running behavior of browsers in a certain test,
  * without adding new browsers to the test bucket. We cannot rely on the GU_mvt_id bucketing alone to do this.
  * You can use this method to show the gate based on local storage participation key ("gu.ab.participations") instead.
- *
- * After the cut off date users without the local storage participation key won't see the gate at all.
  *
  * Caveats - There will be natural churn of users to account for. Users can manually delete localStorage at any time.
  * Some browsers also automatically delete local storage specifically on Webkit browsers (Safari/iOS) since iOS and iPadOS 13.4, Safari 13.1 on macOS
@@ -47,3 +46,64 @@ export const setOrUseParticipations = (
 		return participations[abTestId]?.variant === variantId;
 	}
 };
+
+/**
+ * Regional Exclusions
+ */
+export const isInRegion = (region: string[]): boolean => {
+	const countryCode = getCountryCodeSync();
+	return !!countryCode && region.includes(countryCode);
+};
+export const EuropeList = [
+	'AX',
+	'AL',
+	'AD',
+	'AT',
+	'BE',
+	'BG',
+	'BA',
+	'BY',
+	'CH',
+	'CZ',
+	'DE',
+	'DK',
+	'ES',
+	'EE',
+	'FI',
+	'FR',
+	'FO',
+	'GG',
+	'GI',
+	'GR',
+	'HR',
+	'HU',
+	'IM',
+	'IE',
+	'IS',
+	'IT',
+	'JE',
+	'LI',
+	'LT',
+	'LU',
+	'LV',
+	'MC',
+	'MD',
+	'MK',
+	'MT',
+	'ME',
+	'NL',
+	'NO',
+	'PL',
+	'PT',
+	'RO',
+	'RU',
+	'SJ',
+	'SM',
+	'RS',
+	'SK',
+	'SI',
+	'SE',
+	'UA',
+	'VA',
+	'XK',
+];
