@@ -28,6 +28,7 @@ const isServer = typeof window === 'undefined';
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 
 type Props = {
+	name: string;
 	styles: string;
 	html: string;
 	newsletterId: string;
@@ -171,6 +172,7 @@ const sendTracking = (
 };
 
 export const SecureSignupIframe = ({
+	name,
 	styles,
 	html,
 	newsletterId,
@@ -329,8 +331,7 @@ export const SecureSignupIframe = ({
 	return (
 		<>
 			<iframe
-				// @TODO check with @dblatcher if there is a better title
-				title={`Sign up to ${newsletterId}`}
+				title={`Sign up to ${name}`}
 				ref={iframeRef}
 				css={css`
 					width: 100%;
