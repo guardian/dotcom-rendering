@@ -8,12 +8,6 @@ const isH2 = (element: CAPIElement): element is SubheadingBlockElement => {
 	);
 };
 
-<<<<<<< HEAD
-const isH2 = (element: CAPIElement): element is SubheadingBlockElement => {
-	return isHeading(element);
-};
-=======
->>>>>>> feature-table-of-contents
 const extractText = (element: SubheadingBlockElement): string => {
 	const frag = JSDOM.fragment(element.html);
 	if (!frag.firstElementChild) return '';
