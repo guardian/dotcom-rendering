@@ -132,6 +132,11 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 			<StandardLayout item={item}>
 				<HydrationTestComponent text="This is a test component" />
 				<HydrateableNewsletterSignup
+					format={{
+						theme: 0,
+						design: 0,
+						display: 0,
+					}}
 					element={{
 						kind: ElementKind.NewsletterSignUp,
 						identityName: 'patriarchy',

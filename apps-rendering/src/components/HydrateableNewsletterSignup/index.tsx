@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { HydrateableNewsletterSignupInner, Props } from './inner';
+import { NewsletterSignup as HydrateableNewsletterSignupInner, Props } from './inner';
 
 const hydrateableNewsletterSignupClassName =
 	'js-hydrateableNewsletterSignup-component-container';
