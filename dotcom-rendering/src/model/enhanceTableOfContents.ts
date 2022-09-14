@@ -1,16 +1,19 @@
 import { JSDOM } from 'jsdom';
 import type { TableOfContents, TableOfContentsItem } from 'src/types/frontend';
 
-const isHeading = (element: CAPIElement): boolean => {
+const isH2 = (element: CAPIElement): element is SubheadingBlockElement => {
 	return (
 		element._type ==
 		'model.dotcomrendering.pageElements.SubheadingBlockElement'
 	);
 };
 
+<<<<<<< HEAD
 const isH2 = (element: CAPIElement): element is SubheadingBlockElement => {
 	return isHeading(element);
 };
+=======
+>>>>>>> feature-table-of-contents
 const extractText = (element: SubheadingBlockElement): string => {
 	const frag = JSDOM.fragment(element.html);
 	if (!frag.firstElementChild) return '';
@@ -25,8 +28,8 @@ const extractID = (element: SubheadingBlockElement): string => {
 };
 
 const hasInteractiveContentsElement = (blocks: Block[]): boolean => {
-	return !!blocks.find((block) =>
-		block.elements.find(
+	return blocks.some((block) =>
+		block.elements.some(
 			(element) =>
 				element._type ===
 				'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
