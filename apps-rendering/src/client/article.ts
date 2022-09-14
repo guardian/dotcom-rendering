@@ -36,6 +36,11 @@ import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
 import { initSignupForms } from './signupForm';
+import {
+	getPropsForHydrationTestComponent,
+	hydrationTestComponentClassName,
+	HydrationTestComponentInner,
+} from 'components/HydrationTestComponent';
 
 // ----- Run ----- //
 
@@ -447,6 +452,15 @@ function hydrateClickToView(): void {
 		);
 }
 
+function hydrateTestComponents(): void {
+	document
+		.querySelectorAll(`.${hydrationTestComponentClassName}`)
+		.forEach((container) => {
+			const component = h(HydrationTestComponentInner, getPropsForHydrationTestComponent(container));
+			ReactDOM.hydrate(component, container);
+		});
+}
+
 const isIframe = (elem: Element): elem is HTMLIFrameElement =>
 	elem.tagName === 'IFRAME';
 
@@ -477,3 +491,4 @@ hydrateAtoms();
 richLinks();
 hydrateClickToView();
 initSignupForms();
+hydrateTestComponents();

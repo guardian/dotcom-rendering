@@ -20,6 +20,7 @@ import { renderAll, renderAllWithoutStyles } from 'renderer';
 import { Result } from 'result';
 import AnalysisLayout from './AnalysisLayout';
 import ImmersiveLayout from './ImmersiveLayout';
+import HydrationTestComponent from 'components/HydrationTestComponent';
 
 // ----- Functions ----- //
 
@@ -127,7 +128,11 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		}
 
 		return (
-			<StandardLayout item={item}>{render(item, body)}</StandardLayout>
+			<StandardLayout item={item}>
+				<HydrationTestComponent text="into standard" />
+
+				{render(item, body)}
+			</StandardLayout>
 		);
 	}
 
