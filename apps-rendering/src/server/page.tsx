@@ -23,6 +23,7 @@ import type { ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
 import { pageFonts } from 'styles';
+import { hydrationTestComponentClassName } from 'components/HydrationTestComponent';
 
 // ----- Types ----- //
 
@@ -160,6 +161,10 @@ const buildHtml = (
 `;
 };
 
+const hasHydratedElement = (body: EmotionCritical): boolean => {
+	return body.html.includes(hydrationTestComponentClassName);
+};
+
 function render(
 	imageSalt: string,
 	request: RenderingRequest,
@@ -170,7 +175,8 @@ function render(
 	const clientScript = map(getAssetLocation)(scriptName(item));
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
 	const body = renderBody(item, request);
-	const inlineStyles = requiresInlineStyles(request.content);
+	const inlineStyles =
+		hasHydratedElement(body) || requiresInlineStyles(request.content);
 	const head = renderHead(
 		item,
 		request,
