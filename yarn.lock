@@ -2808,14 +2808,10 @@
   dependencies:
     "@guardian/libs" "^7.1.4"
 
-"@guardian/discussion-rendering@^10.1.1":
-  version "10.1.1"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-10.1.1.tgz#7613046322253bdcbd18b2a96647911df27fce25"
-  integrity sha512-HHAIkVw+CnJizYESYCm8Dt3rlLVVVmbRMaVqCT1E09uio7Zg5ShXMcv2rjJ/WzsjCGGtBTJ66v5x+dkZqWeZqA==
-  dependencies:
-    babel-plugin-emotion "^10.0.33"
-    customize-cra "^1.0.0"
-    timeago.js "^4.0.2"
+"@guardian/discussion-rendering@^10.2.1":
+  version "10.2.1"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-10.2.1.tgz#226483a2fc08931d6d1a5f3ea2e35a42d6dae166"
+  integrity sha512-IrelTlH1s+yhvNq6ohOZycW+vD1iUu9fD66leJw4JUNBBSEy2RMKV0h0LdEDnhKiT4v9m+r61H02mgWQDkZS4w==
 
 "@guardian/eslint-config-typescript@^1.0.1":
   version "1.0.1"
@@ -7018,7 +7014,7 @@ babel-plugin-dynamic-import-node@^2.3.3:
   dependencies:
     object.assign "^4.1.0"
 
-babel-plugin-emotion@^10.0.27, babel-plugin-emotion@^10.0.33:
+babel-plugin-emotion@^10.0.27:
   version "10.2.2"
   resolved "https://registry.yarnpkg.com/babel-plugin-emotion/-/babel-plugin-emotion-10.2.2.tgz#a1fe3503cff80abfd0bdda14abd2e8e57a79d17d"
   integrity sha512-SMSkGoqTbTyUTDeuVuPIWifPdUGkTk1Kf9BWRiXIOIcuyMfsdp2EjeiiFvOzX8NOBvEh/ypKYvUh2rkgAJMCLA==
@@ -8842,13 +8838,6 @@ curlyquotes@^1.5.5:
   version "1.5.5"
   resolved "https://registry.yarnpkg.com/curlyquotes/-/curlyquotes-1.5.5.tgz#f46dfa04bf477fbbda77bbd1572d5412f71f13b4"
   integrity sha512-r1JwsUV8BJyaHP2WCfkAof8ut07bC8k1RGU/1idDqlTpUzz5e4EiOn8AsocpsYYbp0J2EWGb67aDNwdbOd9gjg==
-
-customize-cra@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/customize-cra/-/customize-cra-1.0.0.tgz#73286563631aa08127ad4d30a2e3c89cf4e93c8d"
-  integrity sha512-DbtaLuy59224U+xCiukkxSq8clq++MOtJ1Et7LED1fLszWe88EoblEYFBJ895sB1mC6B4uu3xPT/IjClELhMbA==
-  dependencies:
-    lodash.flow "^3.5.0"
 
 cyclist@^1.0.1:
   version "1.0.1"
@@ -14730,11 +14719,6 @@ lodash.debounce@^4.0.8:
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
 
-lodash.flow@^3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.flow/-/lodash.flow-3.5.0.tgz#87bf40292b8cf83e4e8ce1a3ae4209e20071675a"
-  integrity sha1-h79AKSuM+D5OjOGjrkIJ4gBxZ1o=
-
 lodash.get@^4.0, lodash.get@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
@@ -19896,11 +19880,6 @@ thunky@^1.0.2:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/thunky/-/thunky-1.1.0.tgz#5abaf714a9405db0504732bbccd2cedd9ef9537d"
   integrity sha512-eHY7nBftgThBqOyHGVN+l8gF0BucP09fMo0oO/Lb0w1OF80dJv+lDVpXG60WMQvkcxAkNybKsrEIE3ZtKGmPrA==
-
-timeago.js@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/timeago.js/-/timeago.js-4.0.2.tgz#724e8c8833e3490676c7bb0a75f5daf20e558028"
-  integrity sha512-a7wPxPdVlQL7lqvitHGGRsofhdwtkoSXPGATFuSOA2i1ZNQEPLrGnj68vOp2sOJTCFAQVXPeNMX/GctBaO9L2w==
 
 timed-out@4.0.1:
   version "4.0.1"
