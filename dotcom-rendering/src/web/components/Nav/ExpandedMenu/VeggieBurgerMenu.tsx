@@ -101,9 +101,11 @@ const veggieBurgerStyles = (display: ArticleDisplay) => css`
 	}
 `;
 
-export const VeggieBurgerMenu: React.FC<{
+type Props = {
 	display: ArticleDisplay;
-}> = ({ display }) => {
+};
+
+export const VeggieBurgerMenu = ({ display }: Props) => {
 	return (
 		<label
 			id={veggieBurgerId}
@@ -113,6 +115,7 @@ export const VeggieBurgerMenu: React.FC<{
 			htmlFor={navInputCheckboxId}
 			data-link-name="nav2 : veggie-burger: show"
 			tabIndex={0}
+			// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- we’re using this label for a CSS-only toggle
 			role="button"
 			data-cy="veggie-burger"
 		>

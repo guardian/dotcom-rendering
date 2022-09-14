@@ -400,6 +400,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 							)}
 
 							<SecureSignup
+								name="One Two Three Four"
 								newsletterId="1234"
 								successDescription="nice"
 								hidePrivacyMessage={true}

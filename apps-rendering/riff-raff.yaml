@@ -19,13 +19,17 @@ deployments:
     stacks:
         - mobile
     parameters:
-      templatePath: MobileAppsRendering.template.json
+      templateStagePaths:
+        CODE: MobileAppsRendering-CODE.template.json
+        PROD: MobileAppsRendering-PROD.template.json
   mobile-apps-rendering-preview-cfn:
     template: cloudformation
     stacks:
         - mobile-preview
     parameters:
-      templatePath: MobileAppsRenderingPreview.template.json
+      templateStagePaths:
+        CODE: MobileAppsRenderingPreview-CODE.template.json
+        PROD: MobileAppsRenderingPreview-PROD.template.json
   mobile-apps-rendering:
     type: autoscaling
     parameters:
