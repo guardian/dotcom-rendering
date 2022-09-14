@@ -65,13 +65,19 @@ const collapseColumnButton = css`
 		color: ${brandAlt[400]};
 	}
 `;
-
-export const CollapseColumnButton: React.FC<{
+type Props = {
 	title: string;
 	columnInputId: string;
 	collapseColumnInputId: string;
 	ariaControls: string;
-}> = ({ title, columnInputId, collapseColumnInputId, ariaControls }) => (
+};
+
+export const CollapseColumnButton = ({
+	title,
+	columnInputId,
+	collapseColumnInputId,
+	ariaControls,
+}: Props) => (
 	<label
 		id={collapseColumnInputId}
 		className="selectableMenuItem"
@@ -85,6 +91,7 @@ export const CollapseColumnButton: React.FC<{
 		aria-haspopup="true"
 		aria-controls={ariaControls}
 		tabIndex={-1}
+		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- we’re using this label for a CSS-only toggle
 		role="menuitem"
 		data-cy={`column-collapse-${title}`}
 		data-link-name={`nav2 : column-toggle-${title}: show`}

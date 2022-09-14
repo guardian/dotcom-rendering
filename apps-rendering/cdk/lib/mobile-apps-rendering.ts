@@ -1,33 +1,34 @@
+import { GuEc2App } from '@guardian/cdk';
+import { AccessScope } from '@guardian/cdk/lib/constants';
+import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
+import { GuStack } from '@guardian/cdk/lib/constructs/core';
+import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
+import type { App, CfnElement } from 'aws-cdk-lib';
+import { Duration } from 'aws-cdk-lib';
 import {
 	InstanceClass,
 	InstanceSize,
 	InstanceType,
 	Peer,
-} from '@aws-cdk/aws-ec2';
+} from 'aws-cdk-lib/aws-ec2';
 import {
 	HostedZone,
 	RecordSet,
 	RecordTarget,
 	RecordType,
-} from '@aws-cdk/aws-route53';
-import type { App, CfnElement } from '@aws-cdk/core';
-import { Duration } from '@aws-cdk/core';
-import { GuEc2App } from '@guardian/cdk';
-import { AccessScope } from '@guardian/cdk/lib/constants/access';
-import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
-import { GuStack } from '@guardian/cdk/lib/constructs/core';
-import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
+} from 'aws-cdk-lib/aws-route53';
+
+interface AsgSize {
+	min: number;
+	max: number;
+}
 
 interface AppsStackProps extends GuStackProps {
 	recordPrefix: string;
-	asgMinSize: {
-		CODE: number;
-		PROD: number;
-	};
-	asgMaxSize: {
-		CODE: number;
-		PROD: number;
-	};
+	asgSize: AsgSize;
+	appsRenderingDomain: string;
+	hostedZoneId: string;
+	targetCpuUtilisation: number;
 }
 
 export class MobileAppsRendering extends GuStack {
@@ -35,45 +36,17 @@ export class MobileAppsRendering extends GuStack {
 		super(scope, id, props);
 
 		const appName = 'mobile-apps-rendering';
-
-		const appsRenderingDomain = this.withStageDependentValue({
-			variableName: 'domain',
-			app: appName,
-			stageValues: {
-				CODE: 'mobile-aws.code.dev-guardianapis.com',
-				PROD: 'mobile-aws.guardianapis.com',
-			},
-		});
-		const codeDomainName = `${props.recordPrefix}.mobile-aws.code.dev-guardianapis.com`;
-		const prodDomainName = `${props.recordPrefix}.mobile-aws.guardianapis.com`;
-
-		const hostedZoneIdCode = 'Z6PRU8YR6TQDK';
-		const hostedZoneIdProd = 'Z1EYB4AREPXE3B';
+		const domainName = `${props.recordPrefix}.${props.appsRenderingDomain}`;
 		const hostedZone = HostedZone.fromHostedZoneAttributes(
 			this,
 			'HostedZone',
 			{
-				zoneName: appsRenderingDomain,
-				hostedZoneId: this.withStageDependentValue({
-					variableName: 'hostedZoneId',
-					app: appName,
-					stageValues: {
-						CODE: hostedZoneIdCode,
-						PROD: hostedZoneIdProd,
-					},
-				}),
+				zoneName: props.appsRenderingDomain,
+				hostedZoneId: props.hostedZoneId,
 			},
 		);
 
-		const scalingTargetCpuUtilisation =
-			this.withStageDependentValue<number>({
-				variableName: 'targetCpuUtilisation',
-				app: appName,
-				stageValues: {
-					CODE: 20,
-					PROD: 20,
-				},
-			});
+		const scalingTargetCpuUtilisation = props.targetCpuUtilisation;
 
 		const appsRenderingApp = new GuEc2App(this, {
 			applicationPort: 3040,
@@ -87,21 +60,14 @@ export class MobileAppsRendering extends GuStack {
 				InstanceSize.SMALL,
 			),
 			certificateProps: {
-				CODE: {
-					domainName: codeDomainName,
-					hostedZoneId: hostedZoneIdCode,
-				},
-				PROD: {
-					domainName: prodDomainName,
-					hostedZoneId: hostedZoneIdProd,
-				},
+				domainName,
+				hostedZoneId: props.hostedZoneId,
 			},
 			monitoringConfiguration: {
 				noMonitoring: true,
 			},
 			roleConfiguration: {
 				additionalPolicies: [
-					// Get the list of regions.
 					new GuAllowPolicy(this, 'GetParametersByPath', {
 						resources: ['*'],
 						actions: ['ssm:GetParametersByPath'],
@@ -134,14 +100,8 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${this.region} mobile-log-aggregation-${this.stage} '/var/log/${appName}/*'
 /usr/local/node/pm2 logrotate -u ${appName}`,
 			scaling: {
-				CODE: {
-					minimumInstances: props.asgMinSize.CODE,
-					maximumInstances: props.asgMaxSize.CODE,
-				},
-				PROD: {
-					minimumInstances: props.asgMinSize.PROD,
-					maximumInstances: props.asgMaxSize.PROD,
-				},
+				minimumInstances: props.asgSize.min,
+				maximumInstances: props.asgSize.max,
 			},
 		});
 
@@ -159,6 +119,7 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 			recordName: props.recordPrefix,
 			ttl: Duration.hours(1),
 		});
+
 		const defaultChild = recordSet.node.defaultChild as CfnElement;
 		defaultChild.overrideLogicalId('DnsRecord');
 	}

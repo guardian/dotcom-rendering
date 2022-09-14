@@ -393,6 +393,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							{!!promotedNewsletter && (
 								<>
 									<SecureSignup
+										name={promotedNewsletter.name}
 										newsletterId={
 											promotedNewsletter.identityName
 										}
