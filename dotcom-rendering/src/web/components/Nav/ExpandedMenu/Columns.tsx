@@ -15,7 +15,7 @@ import {
 	SvgMagnifyingGlass,
 } from '@guardian/source-react-components';
 import type { NavType } from '../../../../model/extract-nav';
-import { Column } from './Column';
+import { Column, lineStyle } from './Column';
 import { MoreColumn } from './MoreColumn';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 
@@ -119,17 +119,6 @@ const brandExtensionLink = css`
 	> * {
 		pointer-events: none;
 	}
-`;
-
-const lineStyle = css`
-	background-color: ${brand[600]};
-	content: '';
-	display: block;
-	height: 1px;
-	left: 50px;
-	width: 100%;
-	right: 0;
-	margin-left: 50px;
 `;
 
 const searchBar = css`
