@@ -23,8 +23,7 @@ import type { ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
 import { pageFonts } from 'styles';
-import { hydrationTestComponentClassName } from 'components/HydrationTestComponent';
-import { hydrateableNewsletterSignupClassName } from 'components/HydrateableNewsletterSignup';
+import { hydrateables } from 'client/hydratables';
 
 // ----- Types ----- //
 
@@ -162,12 +161,13 @@ const buildHtml = (
 `;
 };
 
-const hasHydratedElement = (body: EmotionCritical): boolean => {
-	return [
-		hydrateableNewsletterSignupClassName,
-		hydrationTestComponentClassName,
-	].some((className) => body.html.includes(className));
-};
+const hasHydratedElementNeedingInlineStyles = (
+	body: EmotionCritical,
+): boolean =>
+	hydrateables
+		.filter((_) => _.needsInlineStyles)
+		.map((_) => _.containerClassName)
+		.some((className) => body.html.includes(className));
 
 function render(
 	imageSalt: string,
@@ -180,7 +180,8 @@ function render(
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
 	const body = renderBody(item, request);
 	const inlineStyles =
-		hasHydratedElement(body) || requiresInlineStyles(request.content);
+		hasHydratedElementNeedingInlineStyles(body) ||
+		requiresInlineStyles(request.content);
 	const head = renderHead(
 		item,
 		request,

@@ -20,15 +20,6 @@ import { createEmbedComponentFromProps } from 'components/EmbedWrapper';
 import EpicContent from 'components/EpicContent';
 import FollowStatus from 'components/FollowStatus';
 import FooterContent from 'components/FooterContent';
-import {
-	hydrationTestComponentClassName,
-	renderHydratedTestComponentInner,
-} from 'components/HydrationTestComponent';
-
-import {
-	hydrateableNewsletterSignupClassName,
-	renderHydratedNewsletterInner,
-} from 'components/HydrateableNewsletterSignup';
 
 import { handleErrors, isObject } from 'lib';
 import {
@@ -46,6 +37,7 @@ import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
 import { initSignupForms } from './signupForm';
+import { hydrateables } from './hydratables';
 
 // ----- Run ----- //
 
@@ -457,22 +449,16 @@ function hydrateClickToView(): void {
 		);
 }
 
-function hydrateTestComponents(): void {
-	document
-		.querySelectorAll(`.${hydrationTestComponentClassName}`)
-		.forEach((container) => {
-			const component = renderHydratedTestComponentInner(container);
-			ReactDOM.hydrate(component, container);
-		});
-}
-
-function hydrateEmailSignUp(): void {
-	document
-		.querySelectorAll(`.${hydrateableNewsletterSignupClassName}`)
-		.forEach((container) => {
-			const component = renderHydratedNewsletterInner(container);
-			ReactDOM.hydrate(component, container);
-		});
+function hydrateHydratables(): void {
+	hydrateables.forEach((hydratable) => {
+		const { renderInnerComponent, containerClassName } = hydratable;
+		document
+			.querySelectorAll(`.${containerClassName}`)
+			.forEach((container) => {
+				const component = renderInnerComponent(container);
+				ReactDOM.hydrate(component, container);
+			});
+	});
 }
 
 const isIframe = (elem: Element): elem is HTMLIFrameElement =>
@@ -505,5 +491,4 @@ hydrateAtoms();
 richLinks();
 hydrateClickToView();
 initSignupForms();
-hydrateTestComponents();
-hydrateEmailSignUp();
+hydrateHydratables();

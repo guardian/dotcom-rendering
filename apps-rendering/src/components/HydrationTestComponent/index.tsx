@@ -1,12 +1,13 @@
+import { Hydrateable } from 'client/hydratables';
 import { createElement, FC } from 'react';
 import { HydrationTestComponentInner, Props } from './inner';
 
-const hydrationTestComponentClassName = 'js-test-component-container';
+const containerClassName = 'js-test-component-container';
 
 const HydrationTestComponent: FC<Props> = (props) => {
 	return (
 		<div
-			className={hydrationTestComponentClassName}
+			className={containerClassName}
 			data-props={JSON.stringify(props)}
 		>
 			<HydrationTestComponentInner {...props} />
@@ -22,14 +23,20 @@ const getPropsFromContainer: { (container: Element): Props } = (container) => {
 	return props;
 };
 
-const renderHydratedTestComponentInner = (container: Element) => {
+const renderInnerComponent = (container: Element) => {
 	return createElement(
 		HydrationTestComponentInner,
 		getPropsFromContainer(container),
 	);
 };
 
+const testComponentnHydrateable: Hydrateable = {
+	containerClassName,
+	renderInnerComponent,
+	needsInlineStyles: true,
+}
+
 // ----- Exports ----- //
 
 export default HydrationTestComponent;
-export { hydrationTestComponentClassName, renderHydratedTestComponentInner };
+export { testComponentnHydrateable };
