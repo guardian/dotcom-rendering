@@ -75,9 +75,7 @@ export const LabsShadyPie = ({
 }) => {
 	return (
 		<div css={shadyBackground}>
-			<div css={shadyBanner}>
-				<p>Paid content</p>
-			</div>
+			<p css={shadyBanner}>Paid content</p>
 			<a css={shadyStyle} href={contentLink} tabIndex={-1}>
 				<img src={imageLink} width="300" alt="" />
 				<p css={shadyTitle}>{title}</p>

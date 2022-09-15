@@ -26,14 +26,12 @@ export const TopRightAdSlot = ({
 	adStyles,
 	shouldHideReaderRevenue,
 	isPaidContent,
-	sectionName,
 	editionId,
 	pillar,
 }: {
 	adStyles: SerializedStyles[];
 	shouldHideReaderRevenue: boolean;
 	isPaidContent: boolean;
-	sectionName?: string;
 	editionId?: EditionId;
 	pillar?: ArticleTheme;
 }) => {
