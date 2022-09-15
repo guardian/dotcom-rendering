@@ -2784,10 +2784,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^23.4.0":
-  version "23.4.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-23.4.0.tgz#5d875d719a994c6b255c71f5a9105af26aae60ce"
-  integrity sha512-d2EhP5WKv01p6fVNfAmyiS81ys4omfdHMFi1cL27YBqGDU2yKcyxjEPdlJknuN+Mv1V/C3+9+nDRSgDSYytfxQ==
+"@guardian/atoms-rendering@^23.6.0":
+  version "23.6.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-23.6.0.tgz#624dc68120f00d47f21bae0ca059f31e65f56f59"
+  integrity sha512-GMeDnvEXXXtSu1YvBvm9UO015GS2OhR9tog/ebMXWJ+Y8qfW35OrniualVtLRxwmuTU3Bs5bM1kShKBU8P7yGQ==
   dependencies:
     is-mobile "^3.1.1"
 
@@ -20318,9 +20318,9 @@ type-detect@4.0.8:
   integrity sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==
 
 type-fest@^0.18.0, type-fest@^0.20.2, type-fest@^0.21.3, type-fest@^0.6.0, type-fest@^0.8.1, type-fest@^1.4.0, type-fest@^2.8.0:
-  version "2.18.1"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.18.1.tgz#a94f068c60b5a2d6beccccffa711210d7dd99b38"
-  integrity sha512-UKCINsd4qiATXD6OIlnQw9t1ux/n2ld+Nl0kzPbCONhCaUIS/BhJbNw14w6584HCQWf3frBK8vmWnGZq/sbPHQ==
+  version "2.18.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.18.0.tgz#fdef3a74e0a9e68ebe46054836650fb91ac3881e"
+  integrity sha512-pRS+/yrW5TjPPHNOvxhbNZexr2bS63WjrMU8a+VzEBhUi9Tz1pZeD+vQz3ut0svZ46P+SRqMEPnJmk2XnvNzTw==
 
 type-is@~1.6.18:
   version "1.6.18"
