@@ -14,8 +14,10 @@ import {
 	LinkButton,
 	SvgMagnifyingGlass,
 } from '@guardian/source-react-components';
+import type { Format } from 'log4js';
 import type { NavType } from '../../../../model/extract-nav';
 import { Column, lineStyle } from './Column';
+import { EditionDropdown, EditionSwitch } from './EditionsSwitch';
 import { MoreColumn } from './MoreColumn';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 
@@ -132,9 +134,10 @@ const searchBar = css`
 `;
 
 export const Columns: React.FC<{
+	editionId: Format;
 	format: ArticleFormat;
 	nav: NavType;
-}> = ({ format, nav }) => (
+}> = ({ format, nav, editionId }) => (
 	<ul
 		css={columnsStyle(format.display)}
 		role="menubar"
@@ -176,6 +179,12 @@ export const Columns: React.FC<{
 		</li>
 
 		<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
+
+		<EditionDropdown
+			editionId={editionId}
+			dataLinkName="nav2 : topbar : edition-picker: toggle"
+		/>
+
 		<MoreColumn
 			column={nav.otherLinks}
 			brandExtensions={nav.brandExtensions}

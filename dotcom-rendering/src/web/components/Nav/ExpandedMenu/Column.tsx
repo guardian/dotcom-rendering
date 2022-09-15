@@ -34,7 +34,7 @@ const pillarDivider = css`
 	}
 `;
 
-const columnLinkTitle = css`
+export const columnLinkTitle = css`
 	${textSans.medium({ lineHeight: 'tight' })};
 	background-color: transparent;
 	text-decoration: none;
@@ -70,7 +70,7 @@ const columnLinkTitle = css`
 	}
 `;
 
-const mainMenuLinkStyle = css`
+export const mainMenuLinkStyle = css`
 	box-sizing: border-box;
 	overflow: hidden;
 	position: relative;
@@ -80,7 +80,7 @@ const mainMenuLinkStyle = css`
 	}
 `;
 
-const columnLinks = css`
+export const columnLinks = css`
 	${textSans.medium()};
 	box-sizing: border-box;
 	display: flex;
