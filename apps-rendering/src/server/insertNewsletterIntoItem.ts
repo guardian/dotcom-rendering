@@ -20,7 +20,7 @@ const enum ElementCategory {
 	'Heading' = 'HEADING',
 	'NonText' = 'NON TEXT',
 	'WhiteSpace' = 'WHITE SPACE',
-	'Error' = 'error',
+	'Error' = 'ERROR',
 }
 
 const TEST_NEWSLETTER: Newsletter = {
@@ -40,41 +40,42 @@ const DEBUG = {
 
 // ----- pure functions ---//
 
-function categoriseResult(
+function categoriseElement(
 	result: Result<string, BodyElement>,
 ): ElementCategory {
-	if (result.isOk()) {
-		if (
-			result.value.kind === ElementKind.HeadingThree ||
-			result.value.kind === ElementKind.HeadingTwo
-		) {
-			return ElementCategory.Heading;
-		}
-		if (result.value.kind !== ElementKind.Text) {
-			return ElementCategory.NonText;
-		}
-		const { doc } = result.value;
-		if (doc.textContent?.trim().length === 0) {
-			return ElementCategory.WhiteSpace;
-		}
-		if (doc.nodeName === 'P') {
-			if (doc.nodeType === 1) {
-				const element = doc as Element;
-				// for paragraphs containing only single <strong> child ("bold text"),
-				// the sign up block can be put before them, but not after them.
-				if (
-					element.children.length === 1 &&
-					element.firstElementChild?.tagName === 'STRONG'
-				) {
-					return ElementCategory.BoldParagraphText;
-				}
-			}
-			return ElementCategory.ParagraphText;
-		} else {
-			return ElementCategory.NonParagraphText;
-		}
-	} else {
+	if (!result.isOk()) { // using result.isErr does not convince the compiler that result.value exists
 		return ElementCategory.Error;
+	}
+
+	switch (result.value.kind) {
+		case ElementKind.HeadingThree:
+		case ElementKind.HeadingTwo:
+			return ElementCategory.Heading;
+		case ElementKind.Text: {
+			const { doc } = result.value;
+			if (doc.textContent?.trim().length === 0) {
+				return ElementCategory.WhiteSpace;
+			}
+
+			if (doc.nodeName === 'P') {
+				if (doc.nodeType === 1) {
+					const element = doc as Element;
+					// for paragraphs containing only single <strong> child ("bold text"),
+					// the sign up block can be put before them, but not after them.
+					if (
+						element.children.length === 1 &&
+						element.firstElementChild?.tagName === 'STRONG'
+					) {
+						return ElementCategory.BoldParagraphText;
+					}
+				}
+				return ElementCategory.ParagraphText;
+			} else {
+				return ElementCategory.NonParagraphText;
+			}
+		}
+		default:
+			return ElementCategory.NonText;
 	}
 }
 
@@ -117,7 +118,7 @@ function predictIndicesOfParagraphsAfterAdslots(
 				ElementCategory.ParagraphText,
 				ElementCategory.NonParagraphText,
 				ElementCategory.BoldParagraphText,
-			].includes(categoriseResult(result)),
+			].includes(categoriseElement(result)),
 		)
 		.map((result) => contentOnlyBody.indexOf(result));
 
@@ -146,14 +147,12 @@ function predictIndicesOfParagraphsAfterAdslots(
  */
 function findInsertIndex(body: Body): number {
 	// create a filtered copy of the body without:
-	//  - 'Error' Results as well as 'ok' Results
-	//  -  Text BodyElements representing text node of whitespace between HTML element
-	// These are not rendered/visibile, so are should be ignored
-	// when deciding which elements to put the sign-up block between.
+	//  - 'Error' Results
+	//  -  Text BodyElements representing whitespace between HTML elements
 	const contentOnlyBody = body.filter(
 		(result) =>
 			![ElementCategory.Error, ElementCategory.WhiteSpace].includes(
-				categoriseResult(result),
+				categoriseElement(result),
 			),
 	);
 
@@ -186,12 +185,12 @@ function findInsertIndex(body: Body): number {
 		// plain or bold paragraph after it.
 		return (
 			[ElementCategory.ParagraphText].includes(
-				categoriseResult(contentBefore),
+				categoriseElement(contentBefore),
 			) &&
 			[
 				ElementCategory.ParagraphText,
 				ElementCategory.BoldParagraphText,
-			].includes(categoriseResult(contentAfter))
+			].includes(categoriseElement(contentAfter))
 		);
 	}
 
@@ -244,7 +243,7 @@ function debugLoggingForFindIndex(
 		console.log(
 			`[${index}]`,
 			suitabilityList[index],
-			categoriseResult(result),
+			categoriseElement(result),
 		);
 
 		if (DEBUG.logContent) {
