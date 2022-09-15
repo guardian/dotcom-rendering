@@ -123,6 +123,7 @@ function predictIndicesOfParagraphsAfterAdslots(
  *	 - Don't put under headings
  *	 - Must have plain body text above and below
  *   - Must be within 3 elements from the middle of the article
+ *   - Should not be next to a adSlot
  *   - The best place is the last place meeting the criteria above.
  *
  * @param body an Item.Body
