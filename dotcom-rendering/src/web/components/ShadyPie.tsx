@@ -17,12 +17,11 @@ export const ShadyPie = ({
 	sectionName,
 	editionId,
 }: {
-	sectionName: string;
-	editionId: EditionId;
+	sectionName?: string;
+	editionId?: EditionId;
 }) => {
-	let pieFilling;
 	if (sectionName == 'lifestyle' && editionId == 'UK') {
-		pieFilling = (
+		return (
 			<LabsShadyPie
 				articleTitle="It’s all about the berries: meet one of the farmers growing blackcurrants for Ribena"
 				articleImageLink="https://i.guim.co.uk/img/media/f98f93c22a563b3107394d64e8410a062172de7d/0_37_2122_1273/master/2122.jpg?width=620&quality=45&fit=max&dpr=2&s=9e01623babd043c1a2fbaec9db29fca2"
@@ -31,7 +30,7 @@ export const ShadyPie = ({
 			/>
 		);
 	} else if (sectionName == 'lifestyle' && editionId == 'US') {
-		pieFilling = (
+		return (
 			<LabsShadyPie
 				articleTitle="Taiwan’s wind power revolution: leading the way in Asia-Pacific"
 				articleImageLink="https://i.guim.co.uk/img/media/cd203c4a6361bc2143fdd4cc034ebd0609872ea9/0_256_4032_2419/master/4032.jpg?width=300&quality=85&auto=format&fit=max&s=2f6cdfaa6047e7db6c7f5cc73a3d8f57"
@@ -40,7 +39,7 @@ export const ShadyPie = ({
 			/>
 		);
 	} else {
-		pieFilling = (
+		return (
 			<a
 				href={`https://support.theguardian.com/uk/subscribe/digital?${params.toString()}`}
 				tabIndex={-1}
@@ -53,5 +52,4 @@ export const ShadyPie = ({
 			</a>
 		);
 	}
-	return pieFilling;
 };

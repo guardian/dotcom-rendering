@@ -245,8 +245,8 @@ export const AdSlot = ({
 	shouldHideReaderRevenue = false,
 	isPaidContent = false,
 	index,
-	sectionName = '',
-	editionId = 'INT',
+	sectionName,
+	editionId,
 }: Props) => {
 	switch (position) {
 		case 'right':

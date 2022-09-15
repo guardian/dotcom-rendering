@@ -32,8 +32,8 @@ export const TopRightAdSlot = ({
 	adStyles: SerializedStyles[];
 	shouldHideReaderRevenue: boolean;
 	isPaidContent: boolean;
-	sectionName: string;
-	editionId: EditionId;
+	sectionName?: string;
+	editionId?: EditionId;
 }) => {
 	const adBlockerDetected = useAdBlockInUse();
 	const isSignedIn =
