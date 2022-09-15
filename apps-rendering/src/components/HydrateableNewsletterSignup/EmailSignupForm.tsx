@@ -27,6 +27,7 @@ import {
 } from '@guardian/source-react-components';
 import { FC, useState } from 'react';
 import { darkModeCss } from 'styles';
+import { fakeRequestToEmailSignupService } from 'client/requestEmailSignUp';
 
 // ----- Component ----- //
 
@@ -73,24 +74,44 @@ const EmailSignupForm: FC<Props> = ({
 	successDescription,
 	format,
 }) => {
-	const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (
+	const [inputValue, setInputValue] = useState('');
+	const [isWaiting, setIsWaiting] = useState(false);
+	const [responseType, setResponseType] = useState<
+		undefined | 'success' | 'failure'
+	>(undefined);
+
+	const sendRequest = async (emailAddress: string, newsletterId: string) => {
+		const response = await fakeRequestToEmailSignupService(
+			emailAddress,
+			newsletterId,
+		);
+		setIsWaiting(false);
+		if (response.status === 200) {
+			setResponseType('success');
+		} else {
+			setResponseType('failure');
+		}
+	};
+
+	const handleSubmit: React.FormEventHandler<HTMLFormElement> = (
 		event,
 	): void => {
 		event.preventDefault();
-		setFormCondition('failure');
-		console.log({ newsletterId });
+		setIsWaiting(true);
+		sendRequest(inputValue, newsletterId);
 	};
 	const handleReset: React.MouseEventHandler<HTMLButtonElement> = (
 		event,
 	): void => {
 		event.preventDefault();
-		setFormCondition('initial');
-		console.log({ newsletterId });
+		setResponseType(undefined);
 	};
-
-	const [formCondition, setFormCondition] = useState<
-		'initial' | 'waiting' | 'success' | 'failure'
-	>('initial');
+	const handleInputChange: React.ChangeEventHandler<HTMLInputElement> = (
+		event,
+	) => {
+		event.preventDefault();
+		setInputValue(event.target.value);
+	};
 
 	return (
 		<>
@@ -106,9 +127,12 @@ const EmailSignupForm: FC<Props> = ({
 					}
 				`}
 			/>
-			<form data-newsletter-id={newsletterId} css={formStyle}>
-				{(formCondition === 'initial' ||
-					formCondition === 'waiting') && (
+			<form
+				data-newsletter-id={newsletterId}
+				css={formStyle}
+				onSubmit={handleSubmit}
+			>
+				{!responseType && (
 					<div
 						css={css`
 							display: flex;
@@ -120,6 +144,8 @@ const EmailSignupForm: FC<Props> = ({
 							type="email"
 							width={30}
 							hideLabel
+							value={inputValue}
+							onChange={handleInputChange}
 							label="Enter your email address"
 							cssOverrides={css`
 								height: 2.25rem;
@@ -135,19 +161,18 @@ const EmailSignupForm: FC<Props> = ({
 							`}
 						/>
 						<Button
-							onClick={handleSubmit}
 							size="small"
 							title="Sign up"
 							type="submit"
 							cssOverrides={buttonStyle(format)}
-							isLoading={formCondition === 'waiting'}
+							isLoading={isWaiting}
 						>
 							Sign up
 						</Button>
 					</div>
 				)}
 
-				{formCondition === 'success' && (
+				{responseType === 'success' && (
 					<InlineSuccess>
 						<span>
 							<b>Subscription Confirmed. </b>
@@ -156,7 +181,7 @@ const EmailSignupForm: FC<Props> = ({
 					</InlineSuccess>
 				)}
 
-				{formCondition === 'failure' && (
+				{responseType === 'failure' && (
 					<div
 						css={css`
 							align-items: center;
