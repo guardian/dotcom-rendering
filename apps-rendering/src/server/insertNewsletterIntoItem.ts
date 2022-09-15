@@ -210,56 +210,62 @@ function findInsertIndex(body: Body): number {
 		contentOnlyBody[bestIndexInContentOnlyBody],
 	);
 
-	// TO DO - remove when ready
 	if (DEBUG_LOG) {
-		console.log('*********');
-		console.log('********');
-		console.log('*******');
-		console.log('*****');
-		contentOnlyBody.forEach((result, index) => {
-			if (paragraphsAfterAnAdslot.includes(index)) {
-				console.log('\n*** ADSLOT before paragaph ***\n');
-				// on the actual render, the find ad slot script count the
-				// 3x paragraphs in the sign-up block when placing the ads
-				// so this logging wont be accurate after bestIndexInContentOnlyBody
-			}
-			if (index === bestIndexInContentOnlyBody) {
-				console.log('[SIGN UP GOES HERE]');
-			}
-			console.log(
-				`[${index}]`,
-				isASuitableIndex(index),
-				categoriseResult(result),
-			);
-
-			if (DEBUG_LOG_CONTENT) {
-				const doc =
-					result.isOk() && result.value.kind === ElementKind.Text
-						? result.value.doc
-						: undefined;
-
-				if (doc && doc.nodeType === 1) {
-					const element = doc as Element;
-					console.log(element.outerHTML);
-				}
-			}
-		});
-		console.log({
+		debugLoggingForFindIndex(
 			bestIndexInContentOnlyBody,
 			bestIndexInOriginalBody,
+			contentOnlyBody,
+			suitabilityList,
 			paragraphsAfterAnAdslot,
-		});
-
-		console.log('*****');
-		console.log('*******');
-		console.log('********');
-		console.log('*********');
+		);
 	}
 
 	return bestIndexInOriginalBody;
 }
 
 // ----- Procedures ----- //
+
+function debugLoggingForFindIndex(
+	bestIndexInContentOnlyBody: number,
+	bestIndexInOriginalBody: number,
+	contentOnlyBody: Body,
+	suitabilityList: boolean[],
+	paragraphsAfterAnAdslot: number[],
+) {
+	contentOnlyBody.forEach((result, index) => {
+		if (paragraphsAfterAnAdslot.includes(index)) {
+			console.log('\n*** ADSLOT before paragaph ***\n');
+			// on the actual render, the find ad slot script count the
+			// 3x paragraphs in the sign-up block when placing the ads
+			// so this logging wont be accurate after bestIndexInContentOnlyBody
+		}
+		if (index === bestIndexInContentOnlyBody) {
+			console.log('[SIGN UP GOES HERE]');
+		}
+		console.log(
+			`[${index}]`,
+			suitabilityList[index],
+			categoriseResult(result),
+		);
+
+		if (DEBUG_LOG_CONTENT) {
+			const doc =
+				result.isOk() && result.value.kind === ElementKind.Text
+					? result.value.doc
+					: undefined;
+
+			if (doc && doc.nodeType === 1) {
+				const element = doc as Element;
+				console.log(element.outerHTML);
+			}
+		}
+	});
+	console.log({
+		bestIndexInContentOnlyBody,
+		bestIndexInOriginalBody,
+		paragraphsAfterAnAdslot,
+	});
+}
 
 function buildBodyElement(item: Item): NewsletterSignUp | undefined {
 	const newsletter =
