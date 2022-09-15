@@ -46,7 +46,6 @@ export const TopRightAdSlot = ({
 		!isPaidContent &&
 		!isServer
 	) {
-		// Show a fixed image asking people to subscribe
 		return <ShadyPie format={format} editionId={editionId} />;
 	}
 
