@@ -3,6 +3,7 @@
 import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import { ArticleDesign } from '@guardian/libs';
 import { OptionKind } from '@guardian/types';
+import { getAdIndices } from 'ads';
 import type { Body, BodyElement, NewsletterSignUp } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
 import type { Item } from 'item';
@@ -16,6 +17,7 @@ const enum ElementCategory {
 	'ParagraphText' = 'PARAGRAPH',
 	'BoldParagraphText' = 'BOLD_PARAGRAPH',
 	'NonParagraphText' = 'OTHER TEXT ELEMENT',
+	'Heading' = 'HEADING',
 	'NonText' = 'NON TEXT',
 	'WhiteSpace' = 'WHITE SPACE',
 	'Error' = 'error',
@@ -31,8 +33,8 @@ const TEST_NEWSLETTER: Newsletter = {
 	successDescription: 'signed up',
 };
 
-const DEBUG_LOG: boolean = true;
-const DEBUG_LOG_CONTENT: boolean = false;
+const DEBUG_LOG = true;
+const DEBUG_LOG_CONTENT = true;
 
 // ----- pure functions ---//
 
@@ -40,6 +42,12 @@ function categoriseResult(
 	result: Result<string, BodyElement>,
 ): ElementCategory {
 	if (result.isOk()) {
+		if (
+			result.value.kind === ElementKind.HeadingThree ||
+			result.value.kind === ElementKind.HeadingTwo
+		) {
+			return ElementCategory.Heading;
+		}
 		if (result.value.kind !== ElementKind.Text) {
 			return ElementCategory.NonText;
 		}
@@ -83,6 +91,49 @@ function getRange(numberOfElements: number): [number, number] {
 }
 
 /**
+ * Predict the indices of bodyElement that would
+ * have an ad slot inserted before them on the current
+ * ad placement logic.
+ *
+ * This logic is not perfect as the ad placement logic
+ * insert after the bodyElement have been renderer by
+ * counting paragraph elements in ReactNodes, whereas here
+ * we are looking at bodyElement before they are have been
+ * rendered.
+ *
+ * @param contentOnlyBody an array of BodyElement Results
+ * @returns the indices of the element that are expected to
+ * have an adslot placed before them.
+ */
+function predictAdPlacement(contentOnlyBody: Body): number[] {
+	const adIndices = getAdIndices();
+	const textElements = contentOnlyBody
+		.filter((result) =>
+			[
+				ElementCategory.ParagraphText,
+				ElementCategory.NonParagraphText,
+				ElementCategory.BoldParagraphText,
+			].includes(categoriseResult(result)),
+		)
+		.map((result) => ({
+			indexInContentOnlyBody: contentOnlyBody.indexOf(result),
+		}));
+
+	const paragraphsAfterAnAdslot: number[] = [];
+
+	adIndices.forEach((i) => {
+		const paragraphDetails = textElements[i];
+		if (paragraphDetails) {
+			paragraphsAfterAnAdslot.push(
+				paragraphDetails.indexInContentOnlyBody,
+			);
+		}
+	});
+
+	return paragraphsAfterAnAdslot;
+}
+
+/**
  * 	Rules Desired by editorial/Product:
  *   - Hide embeds in articles that are less than 300 words         (DO SERVER SIDE!)
  *	 - Prevent sign up form from appearing straight after bold text (done)
@@ -93,28 +144,19 @@ function getRange(numberOfElements: number): [number, number] {
  * 	Rules to duplicat DCR behaviour:
  *   - Must be within 3 elements from the middle of the article
  *   - The best position is the last (furthest down) of the suitable positions
+ *
+ * 	The body is not mutated by this function.
+ *
  * @param body an Item.Body
  * @returns the best index in that body to insert a sign-up block, or -1
  * if there is no suitable place
  */
 function findInsertIndex(body: Body): number {
-	// Item.Body can contain:
+	// create a filtered copy of the body without:
 	//  - 'Error' Results as well as 'ok' Results
 	//  -  Text BodyElements representing text node of whitespace between HTML element
 	// These are not rendered/visibile, so are should be ignored
 	// when deciding which elements to put the sign-up block between.
-
-	// IE this is NOT a valid placement - visually, the SignUp appears
-	// direcly below the Image even though there is a "Text" between them.
-	//
-	// [Text]
-	// [Text]
-	// [Image]
-	// [Text](whitespace)
-	// <-------------------- [SignUp]
-	// [Text]
-
-	// create a filtered copy of the body without whitespace and errors
 	const contentOnlyBody = body.filter(
 		(result) =>
 			![ElementCategory.Error, ElementCategory.WhiteSpace].includes(
@@ -122,12 +164,18 @@ function findInsertIndex(body: Body): number {
 			),
 	);
 
+	const paragraphsAfterAnAdslot = predictAdPlacement(contentOnlyBody);
 	const [minIndex, maxIndex] = getRange(contentOnlyBody.length);
 
 	// Define the test for whether an index would be suitable to
 	// insert the signup component into the filtered copy of the body
 	function isASuitableIndex(index: number): boolean {
-		if (index > maxIndex || index < minIndex) {
+		// must be within range and not next to an adslot
+		if (
+			index > maxIndex ||
+			index < minIndex ||
+			paragraphsAfterAnAdslot.includes(index)
+		) {
 			return false;
 		}
 		const contentBefore = contentOnlyBody[index - 1];
@@ -136,14 +184,16 @@ function findInsertIndex(body: Body): number {
 			return false;
 		}
 
+		// must be have a plain paragraph before it and a
+		// plain or bold paragraph after it.
 		return (
+			[ElementCategory.ParagraphText].includes(
+				categoriseResult(contentBefore),
+			) &&
 			[
 				ElementCategory.ParagraphText,
 				ElementCategory.BoldParagraphText,
-			].includes(categoriseResult(contentAfter)) &&
-			[ElementCategory.ParagraphText].includes(
-				categoriseResult(contentBefore),
-			)
+			].includes(categoriseResult(contentAfter))
 		);
 	}
 
@@ -155,10 +205,6 @@ function findInsertIndex(body: Body): number {
 	// Find the best place in the contentOnly array:
 	const bestIndexInContentOnlyBody = suitabilityList.lastIndexOf(true);
 
-	// The body is not mutated by this function. The return value
-	// needs to be the index in the original body array, not the
-	// filtered body.
-
 	// Find the corresponding index in the original body array:
 	const bestIndexInOriginalBody = body.indexOf(
 		contentOnlyBody[bestIndexInContentOnlyBody],
@@ -166,7 +212,17 @@ function findInsertIndex(body: Body): number {
 
 	// TO DO - remove when ready
 	if (DEBUG_LOG) {
+		console.log('*********');
+		console.log('********');
+		console.log('*******');
+		console.log('*****');
 		contentOnlyBody.forEach((result, index) => {
+			if (paragraphsAfterAnAdslot.includes(index)) {
+				console.log('\n*** ADSLOT before paragaph ***\n');
+				// on the actual render, the find ad slot script count the
+				// 3x paragraphs in the sign-up block when placing the ads
+				// so this logging wont be accurate after bestIndexInContentOnlyBody
+			}
 			if (index === bestIndexInContentOnlyBody) {
 				console.log('[SIGN UP GOES HERE]');
 			}
@@ -191,7 +247,13 @@ function findInsertIndex(body: Body): number {
 		console.log({
 			bestIndexInContentOnlyBody,
 			bestIndexInOriginalBody,
+			paragraphsAfterAnAdslot,
 		});
+
+		console.log('*****');
+		console.log('*******');
+		console.log('********');
+		console.log('*********');
 	}
 
 	return bestIndexInOriginalBody;
