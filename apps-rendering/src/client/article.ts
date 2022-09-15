@@ -36,7 +36,6 @@ import ReactDOM from 'react-dom';
 import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
-import { initSignupForms } from './signupForm';
 import { hydrateables } from './hydratables';
 
 // ----- Run ----- //
@@ -490,5 +489,4 @@ initAudioAtoms();
 hydrateAtoms();
 richLinks();
 hydrateClickToView();
-initSignupForms();
 hydrateHydratables();
