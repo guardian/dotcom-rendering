@@ -761,7 +761,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.pageType
 													.isPaidContent
 											}
-											pillar={format.theme}
+											format={format}
 											editionId={CAPIArticle.editionId}
 										/>
 									)}

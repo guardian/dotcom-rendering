@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { adSizes } from '@guardian/commercial-core';
 import type { SlotName } from '@guardian/commercial-core';
 import { ArticleDisplay } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	border,
 	from,
@@ -21,7 +22,7 @@ type InlineProps = {
 	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
-	pillar?: ArticleTheme;
+	format?: ArticleFormat;
 	editionId?: EditionId;
 };
 
@@ -31,7 +32,7 @@ type NonInlineProps = {
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
-	pillar?: ArticleTheme;
+	format?: ArticleFormat;
 	editionId?: EditionId;
 };
 
@@ -245,7 +246,7 @@ export const AdSlot = ({
 	shouldHideReaderRevenue = false,
 	isPaidContent = false,
 	index,
-	pillar,
+	format,
 	editionId,
 }: Props) => {
 	switch (position) {
@@ -281,7 +282,7 @@ export const AdSlot = ({
 								}
 								isPaidContent={isPaidContent}
 								adStyles={adStyles}
-								pillar={pillar}
+								format={format}
 								editionId={editionId}
 							/>
 						</Island>
