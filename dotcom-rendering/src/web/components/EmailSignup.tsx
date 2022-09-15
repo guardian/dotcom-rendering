@@ -96,6 +96,7 @@ export const EmailSignup = ({
 			</div>
 			<p css={descriptionStyles}>{description}</p>
 			<SecureSignup
+				name={name}
 				newsletterId={identityName}
 				successDescription={successDescription}
 				hidePrivacyMessage={hidePrivacyMessage}

@@ -9,6 +9,7 @@ import { SecureSignupIframe } from './SecureSignupIframe.importable';
 
 export type Props = {
 	newsletterId: string;
+	name: string;
 	successDescription: string;
 	/** Override this with caution: you _must_ ensure this wording exists nearby if not included in this component */
 	hidePrivacyMessage?: boolean;
@@ -61,6 +62,7 @@ export const SecureSignup = ({
 	newsletterId,
 	successDescription,
 	hidePrivacyMessage = false,
+	name,
 }: Props) => {
 	const { html, styles } = generateForm(newsletterId);
 
@@ -72,6 +74,7 @@ export const SecureSignup = ({
 				placeholderHeight={65}
 			>
 				<SecureSignupIframe
+					name={name}
 					html={html}
 					styles={styles}
 					newsletterId={newsletterId}

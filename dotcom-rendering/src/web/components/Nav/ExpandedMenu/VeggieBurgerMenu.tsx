@@ -78,8 +78,6 @@ const veggieBurgerStyles = (display: ArticleDisplay) => css`
 	border: 0;
 	border-radius: 50%;
 
-	${getZIndex('burger')}
-
 	right: 5px;
 	bottom: 58px;
 	${from.mobileMedium} {
@@ -96,14 +94,21 @@ const veggieBurgerStyles = (display: ArticleDisplay) => css`
 		display: none;
 	}
 
+	/* refer to comment above */
+	/* stylelint-disable-next-line selector-type-no-unknown */
+	${`#${navInputCheckboxId}`}:checked ~ div & {
+		${getZIndex('burger')}
+	}
 	:focus {
 		outline: none;
 	}
 `;
 
-export const VeggieBurgerMenu: React.FC<{
+type Props = {
 	display: ArticleDisplay;
-}> = ({ display }) => {
+};
+
+export const VeggieBurgerMenu = ({ display }: Props) => {
 	return (
 		<label
 			id={veggieBurgerId}
@@ -113,6 +118,7 @@ export const VeggieBurgerMenu: React.FC<{
 			htmlFor={navInputCheckboxId}
 			data-link-name="nav2 : veggie-burger: show"
 			tabIndex={0}
+			// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- we’re using this label for a CSS-only toggle
 			role="button"
 			data-cy="veggie-burger"
 		>
