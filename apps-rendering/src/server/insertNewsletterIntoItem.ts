@@ -1,6 +1,4 @@
 // ----- Imports ----- //
-
-import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import { ArticleDesign } from '@guardian/libs';
 import { OptionKind } from '@guardian/types';
 import { getAdIndices } from 'ads';
@@ -23,18 +21,8 @@ const enum ElementCategory {
 	'Error' = 'ERROR',
 }
 
-const TEST_NEWSLETTER: Newsletter = {
-	identityName: 'patriarchy',
-	description:
-		'Reviewing the most important stories on feminism and sexism and those fighting for equality',
-	name: 'The Week in Patriarchy',
-	frequency: 'Weekly',
-	theme: 'opinion',
-	successDescription: 'signed up',
-};
-
 const DEBUG = {
-	log: true,
+	log: false,
 	logContent: false,
 };
 
@@ -256,15 +244,10 @@ function debugLoggingForFindIndex(
 }
 
 function buildBodyElement(item: Item): NewsletterSignUp | undefined {
-	const newsletter =
-		item.promotedNewsletter.kind === OptionKind.Some
-			? item.promotedNewsletter.value
-			: TEST_NEWSLETTER; // TO DO - change to undefined when done testing
-
-	// if (!newsletter) {
-	// 	return undefined;
-	// }
-
+	if (item.promotedNewsletter.kind === OptionKind.None) {
+		return undefined;
+	}
+	const { value: newsletter } = item.promotedNewsletter;
 	return {
 		kind: ElementKind.NewsletterSignUp,
 		...newsletter,
