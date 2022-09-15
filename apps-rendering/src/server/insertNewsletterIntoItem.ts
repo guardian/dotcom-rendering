@@ -33,8 +33,10 @@ const TEST_NEWSLETTER: Newsletter = {
 	successDescription: 'signed up',
 };
 
-const DEBUG_LOG = true;
-const DEBUG_LOG_CONTENT = true;
+const DEBUG = {
+	log: true,
+	logContent: false,
+};
 
 // ----- pure functions ---//
 
@@ -101,13 +103,15 @@ function getRange(numberOfElements: number): [number, number] {
  * we are looking at bodyElement before they are have been
  * rendered.
  *
- * @param contentOnlyBody an array of BodyElement Results
- * @returns the indices of the element that are expected to
+ * @param contentOnlyBody an subset of an article Body, with the
+ * non-rendered elements (errors and whitespace) removed.
+ * @returns the indices of the elements that are expected to
  * have an adslot placed before them.
  */
-function predictAdPlacement(contentOnlyBody: Body): number[] {
-	const adIndices = getAdIndices();
-	const textElements = contentOnlyBody
+function predictIndicesOfParagraphsAfterAdslots(
+	contentOnlyBody: Body,
+): number[] {
+	const indicesOfParagraphs = contentOnlyBody
 		.filter((result) =>
 			[
 				ElementCategory.ParagraphText,
@@ -115,22 +119,11 @@ function predictAdPlacement(contentOnlyBody: Body): number[] {
 				ElementCategory.BoldParagraphText,
 			].includes(categoriseResult(result)),
 		)
-		.map((result) => ({
-			indexInContentOnlyBody: contentOnlyBody.indexOf(result),
-		}));
+		.map((result) => contentOnlyBody.indexOf(result));
 
-	const paragraphsAfterAnAdslot: number[] = [];
-
-	adIndices.forEach((i) => {
-		const paragraphDetails = textElements[i];
-		if (paragraphDetails) {
-			paragraphsAfterAnAdslot.push(
-				paragraphDetails.indexInContentOnlyBody,
-			);
-		}
-	});
-
-	return paragraphsAfterAnAdslot;
+	return getAdIndices()
+		.filter((index) => index < indicesOfParagraphs.length)
+		.map((index) => indicesOfParagraphs[index]);
 }
 
 /**
@@ -164,13 +157,12 @@ function findInsertIndex(body: Body): number {
 			),
 	);
 
-	const paragraphsAfterAnAdslot = predictAdPlacement(contentOnlyBody);
+	const paragraphsAfterAnAdslot =
+		predictIndicesOfParagraphsAfterAdslots(contentOnlyBody);
 	const [minIndex, maxIndex] = getRange(contentOnlyBody.length);
 
-	// Define the test for whether an index would be suitable to
-	// insert the signup component into the filtered copy of the body
-	function isASuitableIndex(index: number): boolean {
-		// must be within range and not next to an adslot
+	function isSuitable(index: number): boolean {
+		// RULE: must be within range and not next to an adslot
 		if (
 			index > maxIndex ||
 			index < minIndex ||
@@ -178,13 +170,19 @@ function findInsertIndex(body: Body): number {
 		) {
 			return false;
 		}
+
 		const contentBefore = contentOnlyBody[index - 1];
 		const contentAfter = contentOnlyBody[index];
+
+		// NOTE - this is a type safety check. TypeScript will cast a value
+		// accessed from an array index as being of type of the Array member, even
+		// if the index is out of bounds and the value is actually undefined.
+		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because 👆
 		if (!contentBefore || !contentAfter) {
 			return false;
 		}
 
-		// must be have a plain paragraph before it and a
+		// RULE: Must be have a plain paragraph before it and a
 		// plain or bold paragraph after it.
 		return (
 			[ElementCategory.ParagraphText].includes(
@@ -199,10 +197,11 @@ function findInsertIndex(body: Body): number {
 
 	// Map the filtered copy to boolean array:
 	const suitabilityList = contentOnlyBody.map((_, index) =>
-		isASuitableIndex(index),
+		isSuitable(index),
 	);
 
 	// Find the best place in the contentOnly array:
+	// RULE: the best place is the last suitable place
 	const bestIndexInContentOnlyBody = suitabilityList.lastIndexOf(true);
 
 	// Find the corresponding index in the original body array:
@@ -210,7 +209,7 @@ function findInsertIndex(body: Body): number {
 		contentOnlyBody[bestIndexInContentOnlyBody],
 	);
 
-	if (DEBUG_LOG) {
+	if (DEBUG.log) {
 		debugLoggingForFindIndex(
 			bestIndexInContentOnlyBody,
 			bestIndexInOriginalBody,
@@ -231,7 +230,7 @@ function debugLoggingForFindIndex(
 	contentOnlyBody: Body,
 	suitabilityList: boolean[],
 	paragraphsAfterAnAdslot: number[],
-) {
+): void {
 	contentOnlyBody.forEach((result, index) => {
 		if (paragraphsAfterAnAdslot.includes(index)) {
 			console.log('\n*** ADSLOT before paragaph ***\n');
@@ -240,7 +239,7 @@ function debugLoggingForFindIndex(
 			// so this logging wont be accurate after bestIndexInContentOnlyBody
 		}
 		if (index === bestIndexInContentOnlyBody) {
-			console.log('[SIGN UP GOES HERE]');
+			console.log('\n[SIGN UP GOES HERE]\n');
 		}
 		console.log(
 			`[${index}]`,
@@ -248,7 +247,7 @@ function debugLoggingForFindIndex(
 			categoriseResult(result),
 		);
 
-		if (DEBUG_LOG_CONTENT) {
+		if (DEBUG.logContent) {
 			const doc =
 				result.isOk() && result.value.kind === ElementKind.Text
 					? result.value.doc
