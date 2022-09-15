@@ -19,20 +19,20 @@ const shadyBackground = css`
 const shadyBanner = css`
 	background-color: ${labs[400]};
 	${textSans.xsmall({ fontWeight: 'bold' })};
-	padding: 0.5rem;
+	padding: 8px;
 `;
 
 const shadyTitle = css`
 	color: ${neutral[7]};
-	padding-left: 0.5rem;
-	padding-bottom: 0.5rem;
+	padding-left: 8px;
+	padding-bottom: 8px;
 `;
 
 const shadySponsorText = css`
 	color: ${text.supporting};
 	${textSans.xxsmall({ fontWeight: 'bold' })};
 	text-align: center;
-	padding-top: 1rem;
+	padding-top: 16px;
 `;
 
 const shadySponsorImg = css`
@@ -48,7 +48,7 @@ const parentContainer = css`
 const labsLogoContainer = css`
 	width: 180px;
 	display: inline-block;
-	padding: 0.5rem;
+	padding: 8px;
 `;
 
 const shadySponsorContainer = css`
@@ -63,14 +63,14 @@ const Logo = () => (
 );
 
 export const LabsShadyPie = ({
-	articleTitle,
-	articleImageLink,
-	articleLink,
+	title,
+	imageLink,
+	contentLink,
 	sponsorLogoLink,
 }: {
-	articleTitle: string;
-	articleImageLink: string;
-	articleLink: string;
+	title: string;
+	imageLink: string;
+	contentLink: string;
 	sponsorLogoLink: string;
 }) => {
 	return (
@@ -78,13 +78,9 @@ export const LabsShadyPie = ({
 			<div css={shadyBanner}>
 				<p>Paid content</p>
 			</div>
-			<a
-				css={shadyStyle}
-				href={articleLink + '?utm_source=shady-pie'}
-				tabIndex={-1}
-			>
-				<img src={articleImageLink} width="300" alt="" />
-				<p css={shadyTitle}>{articleTitle}</p>
+			<a css={shadyStyle} href={contentLink} tabIndex={-1}>
+				<img src={imageLink} width="300" alt="" />
+				<p css={shadyTitle}>{title}</p>
 			</a>
 			<div css={parentContainer}>
 				<div css={labsLogoContainer}>
