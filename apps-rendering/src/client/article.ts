@@ -21,15 +21,13 @@ import EpicContent from 'components/EpicContent';
 import FollowStatus from 'components/FollowStatus';
 import FooterContent from 'components/FooterContent';
 import {
-	getPropsForHydrationTestComponent,
 	hydrationTestComponentClassName,
-	HydrationTestComponentInner,
+	renderHydratedTestComponentInner,
 } from 'components/HydrationTestComponent';
 
 import {
-	getPropsForHydrateableNewsletterSignup,
 	hydrateableNewsletterSignupClassName,
-	HydrateableNewsletterSignupInner,
+	renderHydratedNewsletterInner,
 } from 'components/HydrateableNewsletterSignup';
 
 import { handleErrors, isObject } from 'lib';
@@ -463,10 +461,7 @@ function hydrateTestComponents(): void {
 	document
 		.querySelectorAll(`.${hydrationTestComponentClassName}`)
 		.forEach((container) => {
-			const component = h(
-				HydrationTestComponentInner,
-				getPropsForHydrationTestComponent(container),
-			);
+			const component = renderHydratedTestComponentInner(container);
 			ReactDOM.hydrate(component, container);
 		});
 }
@@ -475,10 +470,7 @@ function hydrateEmailSignUp(): void {
 	document
 		.querySelectorAll(`.${hydrateableNewsletterSignupClassName}`)
 		.forEach((container) => {
-			const component = h(
-				HydrateableNewsletterSignupInner,
-				getPropsForHydrateableNewsletterSignup(container),
-			);
+			const component = renderHydratedNewsletterInner(container);
 			ReactDOM.hydrate(component, container);
 		});
 }

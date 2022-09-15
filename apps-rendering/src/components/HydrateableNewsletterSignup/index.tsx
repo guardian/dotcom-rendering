@@ -1,5 +1,8 @@
-import { FC } from 'react';
-import { NewsletterSignup as HydrateableNewsletterSignupInner, Props } from './inner';
+import { FC, createElement } from 'react';
+import {
+	NewsletterSignup as HydrateableNewsletterSignupInner,
+	Props,
+} from './inner';
 
 const hydrateableNewsletterSignupClassName =
 	'js-hydrateableNewsletterSignup-component-container';
@@ -15,7 +18,7 @@ const HydrateableNewsletterSignup: FC<Props> = (props) => {
 	);
 };
 
-const getPropsForHydrateableNewsletterSignup: {
+const getPropsFromContainer: {
 	(container: Element): Props;
 } = (container) => {
 	const props = JSON.parse(
@@ -25,11 +28,14 @@ const getPropsForHydrateableNewsletterSignup: {
 	return props;
 };
 
+const renderHydratedNewsletterInner = (container: Element) => {
+	return createElement(
+		HydrateableNewsletterSignupInner,
+		getPropsFromContainer(container),
+	);
+};
+
 // ----- Exports ----- //
 
 export default HydrateableNewsletterSignup;
-export {
-	hydrateableNewsletterSignupClassName,
-	HydrateableNewsletterSignupInner,
-	getPropsForHydrateableNewsletterSignup,
-};
+export { hydrateableNewsletterSignupClassName, renderHydratedNewsletterInner };
