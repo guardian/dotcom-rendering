@@ -43,7 +43,8 @@ const DEBUG = {
 function categoriseElement(
 	result: Result<string, BodyElement>,
 ): ElementCategory {
-	if (!result.isOk()) { // using result.isErr does not convince the compiler that result.value exists
+	if (!result.isOk()) {
+		// using result.isErr does not convince the compiler that result.value exists
 		return ElementCategory.Error;
 	}
 
@@ -128,18 +129,13 @@ function predictIndicesOfParagraphsAfterAdslots(
 }
 
 /**
- * 	Rules Desired by editorial/Product:
- *   - Hide embeds in articles that are less than 300 words         (DO SERVER SIDE!)
- *	 - Prevent sign up form from appearing straight after bold text (done)
- *	 - Prevent sign up from from appearing under headings           (done)
- *	 - Prevent embeds from rendering in heavily formatted articles  (needs clarification)
- *	 - Must have plain body text above and below                    (done)
- *
- * 	Rules to duplicat DCR behaviour:
+ *  Find the place to insert a insert a sign-up block in to an article body,
+ *  using these rules:
+ *	 - Don't put straight after bold text
+ *	 - Don't put under headings
+ *	 - Must have plain body text above and below
  *   - Must be within 3 elements from the middle of the article
- *   - The best position is the last (furthest down) of the suitable positions
- *
- * 	The body is not mutated by this function.
+ *   - The best place is the last place meeting the criteria above.
  *
  * @param body an Item.Body
  * @returns the best index in that body to insert a sign-up block, or -1
@@ -156,12 +152,11 @@ function findInsertIndex(body: Body): number {
 			),
 	);
 
+	const [minIndex, maxIndex] = getRange(contentOnlyBody.length);
 	const paragraphsAfterAnAdslot =
 		predictIndicesOfParagraphsAfterAdslots(contentOnlyBody);
-	const [minIndex, maxIndex] = getRange(contentOnlyBody.length);
 
 	function isSuitable(index: number): boolean {
-		// RULE: must be within range and not next to an adslot
 		if (
 			index > maxIndex ||
 			index < minIndex ||
@@ -181,8 +176,6 @@ function findInsertIndex(body: Body): number {
 			return false;
 		}
 
-		// RULE: Must be have a plain paragraph before it and a
-		// plain or bold paragraph after it.
 		return (
 			[ElementCategory.ParagraphText].includes(
 				categoriseElement(contentBefore),
@@ -194,13 +187,10 @@ function findInsertIndex(body: Body): number {
 		);
 	}
 
-	// Map the filtered copy to boolean array:
 	const suitabilityList = contentOnlyBody.map((_, index) =>
 		isSuitable(index),
 	);
 
-	// Find the best place in the contentOnly array:
-	// RULE: the best place is the last suitable place
 	const bestIndexInContentOnlyBody = suitabilityList.lastIndexOf(true);
 
 	// Find the corresponding index in the original body array:
