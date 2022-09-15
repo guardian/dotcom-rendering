@@ -43,13 +43,13 @@ build-ci: clean-dist install
 start-ci: export NODE_ENV=production
 start-ci: install gen-dotenv-ci
 	$(call log, "starting PROD server...")
-	@DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
+	@DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.cjs
 
 start: export NODE_ENV=production
 start: install gen-dotenv
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	pm2 start dist/frontend.server.js
+	pm2 start dist/frontend.server.cjs
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 	@pm2 logs
@@ -61,7 +61,7 @@ start-prod: export NODE_ENV=production
 start-prod: gen-dotenv
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	/usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
+	/usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.cjs
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 
@@ -96,12 +96,12 @@ dev-legacy: clear clean-dist install gen-dotenv
 cypress: export NODE_ENV=production
 cypress: clear clean-dist install build
 	$(call log, "starting frontend PROD server for Cypress")
-	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
+	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.cjs' 9000 'cypress run --spec "cypress/e2e/**/*"'
 
 ampValidation: export NODE_ENV=production
 ampValidation: clean-dist install build
 	$(call log, "starting frontend PROD server for AMP Validation")
-	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'node scripts/test/amp-validation.js'
+	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.cjs' 9000 'node scripts/test/amp-validation.js'
 
 buildCheck:
 	$(call log, "checking build files")

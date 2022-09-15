@@ -1,8 +1,8 @@
 // @ts-check
-const fetch = require('node-fetch');
-const os = require('os');
-const { exec } = require('child_process');
-const chalk = require('chalk');
+import fetch from 'node-fetch';
+import { cpus, totalmem } from 'os';
+import { exec } from 'child_process';
+import chalk from 'chalk';
 
 const PLUGIN_NAME = 'GuStatsReportPlugin';
 
@@ -109,11 +109,11 @@ class GuStatsReportPlugin {
 						},
 						{
 							name: 'cpus',
-							value: String(os.cpus().length),
+							value: String(cpus().length),
 						},
 						{
 							name: 'memoryKb',
-							value: String(Math.round(os.totalmem() / 1024)),
+							value: String(Math.round(totalmem() / 1024)),
 						},
 					],
 					/** @type {Array<{ name: string, value: number}>} */
@@ -161,4 +161,4 @@ class GuStatsReportPlugin {
 	}
 }
 
-module.exports = GuStatsReportPlugin;
+export default GuStatsReportPlugin;

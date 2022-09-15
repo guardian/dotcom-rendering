@@ -1,5 +1,5 @@
 // @ts-check
-const fetch = require('node-fetch').default;
+import fetch from 'node-fetch';
 
 /** @type {(_: [string, unknown]) => _ is [string, string]} */
 const isStringTuple = (_) => typeof _[1] === 'string';
@@ -11,7 +11,7 @@ const isStringTuple = (_) => typeof _[1] === 'string';
  * @param {string} _url
  * @param {import('http').IncomingHttpHeaders} _headers
  */
-async function getContentFromURL(_url, _headers) {
+export async function getContentFromURL(_url, _headers) {
 	try {
 		if (!_url) {
 			throw new Error('The url query parameter is mandatory');
@@ -20,7 +20,7 @@ async function getContentFromURL(_url, _headers) {
 		const url = new URL(_url);
 
 		// searchParams will only work for the first set of query params because 'url' is already a query param itself
-		const searchparams = url.searchParams?.toString();
+		const searchparams = url.searchParams.toString();
 
 		// Reconstruct the parsed url adding .json?dcr which we need to force dcr to return json
 		const jsonUrl = `${url.origin}${url.pathname}.json?dcr=true&${searchparams}`;
@@ -44,13 +44,11 @@ async function getContentFromURL(_url, _headers) {
 	}
 }
 
-exports.default = getContentFromURL;
-
 /**
  * @param {string} requestURL
  * @param {string} requestPath
  */
-const parseURL = (requestURL, requestPath) => {
+export const parseURL = (requestURL, requestPath) => {
 	/**
 	 * We use string manipulation on the raw value of req.url
 	 * here instead of the url property of the req.query object
@@ -96,14 +94,12 @@ const parseURL = (requestURL, requestPath) => {
 	return url;
 };
 
-exports.parseURL = parseURL;
-
 /** @type {import('webpack-dev-server').ExpressRequestHandler} */
-exports.getContentFromURLMiddleware = async (req, res, next) => {
+export async function getContentFromURLMiddleware(req, res, next) {
 	if (req.query.url) {
 		const url = parseURL(req.url, req.path);
 
 		req.body = await getContentFromURL(url, req.headers);
 	}
 	next();
-};
+}

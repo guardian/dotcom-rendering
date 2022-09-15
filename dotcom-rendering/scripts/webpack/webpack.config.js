@@ -1,18 +1,25 @@
 // @ts-check
-const path = require('path');
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-const { v4: uuidv4 } = require('uuid');
-const WebpackMessages = require('webpack-messages');
+import { resolve as _resolve, join } from 'path';
+import { fileURLToPath } from 'url';
+import { v4 as uuidv4 } from 'uuid';
+import webpack from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import FilterWarningsPlugin from 'webpack-filter-warnings-plugin';
+import { merge } from 'webpack-merge';
+import WebpackMessages from 'webpack-messages';
+import { log } from '../env/log.js';
+import webpackBrowser from './webpack.config.browser.js';
+import webpackDevServer from './webpack.config.dev-server.js';
+import webpackServer from './webpack.config.server.js';
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
 const INCLUDE_LEGACY = process.env.SKIP_LEGACY !== 'true';
-const dist = path.resolve(__dirname, '..', '..', 'dist');
+const dist = _resolve(fileURLToPath(import.meta.url), '..', '..', '..', 'dist');
 
 const sessionId = uuidv4();
+
+const { DefinePlugin, IgnorePlugin } = webpack;
 
 let builds = 0;
 
@@ -41,39 +48,41 @@ const commonConfigs = ({ platform }) => ({
 		symlinks: false,
 	},
 	plugins: [
-		new webpack.DefinePlugin({
+		new DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			'process.env.HOSTNAME': JSON.stringify(process.env.HOSTNAME),
 		}),
-		// @ts-ignore -- somehow the type declaration isn’t playing nice
+		// @ts-expect-error -- the types are missing
 		new FilterWarningsPlugin({
 			exclude: /export .* was not found in/,
 		}),
 		// Matching modules specified in this regex will not be imported during the webpack build
 		// We use this if there are optional dependencies (e.g in jsdom, ws) to remove uneccesary warnings in our builds / console outpouts.
-		new webpack.IgnorePlugin({
+		new IgnorePlugin({
 			resourceRegExp: /^(canvas|bufferutil|utf-8-validate)$/,
 		}),
+		// @ts-expect-error -- somehow the type declaration isn’t playing nice
 		...(DEV
 			? // DEV plugins
 			  [
-					// @ts-ignore -- somehow the type declaration isn’t playing nice
 					new WebpackMessages({
 						name: platform,
 						/** @type {(message: string) => void} */
 						logger: (message) => {
 							// distinguish between initial and subsequent (re)builds in console output
-							if (builds < module.exports.length * 2) {
-								message = message
-									.replace('Building', 'Building initial')
-									.replace('Completed', 'Completed initial');
-							} else {
-								message = message.replace(
-									'Building',
-									'Rebuilding',
+							if (builds < configs.length * 2) {
+								log(
+									message
+										.replace('Building', 'Building initial')
+										.replace(
+											'Completed',
+											'Completed initial',
+										),
 								);
+							} else {
+								log(message.replace('Building', 'Rebuilding'));
 							}
-							console.log(message);
+
 							builds += 1;
 						},
 					}),
@@ -81,10 +90,7 @@ const commonConfigs = ({ platform }) => ({
 			: // PROD plugins
 			  [
 					new BundleAnalyzerPlugin({
-						reportFilename: path.join(
-							dist,
-							`${platform}-bundles.html`,
-						),
+						reportFilename: join(dist, `${platform}-bundles.html`),
 						analyzerMode: 'static',
 						openAnalyzer: false,
 						logLevel: 'warn',
@@ -96,14 +102,14 @@ const commonConfigs = ({ platform }) => ({
 	},
 });
 
-module.exports = [
+const configs = [
 	// server bundle config
 	merge(
 		commonConfigs({
 			platform: 'server',
 		}),
-		require(`./webpack.config.server`)({ sessionId }),
-		DEV ? require(`./webpack.config.dev-server`) : {},
+		webpackServer({ sessionId }),
+		DEV ? webpackDevServer : {},
 	),
 	// browser bundle configs
 	// TODO: ignore static files for legacy compilation
@@ -113,7 +119,7 @@ module.exports = [
 					commonConfigs({
 						platform: 'browser.legacy',
 					}),
-					require(`./webpack.config.browser`)({
+					webpackBrowser({
 						isLegacyJS: true,
 						sessionId,
 					}),
@@ -124,9 +130,12 @@ module.exports = [
 		commonConfigs({
 			platform: 'browser',
 		}),
-		require(`./webpack.config.browser`)({
+		webpackBrowser({
 			isLegacyJS: false,
 			sessionId,
 		}),
 	),
 ];
+
+// eslint-disable-next-line import/no-default-export -- this is how Webpack works
+export default configs;

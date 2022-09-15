@@ -1,2 +1,4 @@
 node_modules
-.eslintrc.js
+.eslintrc.cjs
+babel.config.cjs
+scripts

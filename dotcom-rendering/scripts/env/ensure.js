@@ -2,22 +2,27 @@
 // if they've been installed yet (with yarn) by temporarily
 // installing with npm if node cannot resolve the package
 
-const { log } = require('./log');
+import { log } from './log.js';
 
-module.exports = (...packages) =>
-	new Promise((resolve) => {
+/** @type {(...packages: string[]) => Promise<any[]>} */
+export const ensure = (...packages) =>
+	new Promise(async (resolve) => {
 		try {
-			resolve(packages.map(require));
+			resolve(await Promise.all(packages.map((pkg) => import(pkg))));
 		} catch (e) {
 			log(`Pre-installing dependency (${packages.join(', ')})...`);
-			require('child_process')
+			(await import('child_process'))
 				.spawn('npm', ['i', ...packages, '--no-save'])
-				.on('close', (code) => {
+				.on('close', async (code) => {
 					if (code !== 0) {
 						process.exit(code);
 					}
 					try {
-						resolve(packages.map(require));
+						resolve(
+							await Promise.all(
+								packages.map((pkg) => import(pkg)),
+							),
+						);
 					} catch (e2) {
 						// eslint-disable-next-line no-console
 						console.log(e2);

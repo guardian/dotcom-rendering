@@ -1,5 +1,5 @@
-const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
-const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin';
+import GuStatsReportPlugin from './plugins/gu-stats-report-plugin.js';
 
 const DEV = process.env.NODE_ENV === 'development';
 
@@ -17,7 +17,7 @@ const generateName = (isLegacyJS) => {
  * @param {{ isLegacyJS: boolean, sessionId: string }} options
  * @returns {import('webpack').Configuration}
  */
-module.exports = ({ isLegacyJS, sessionId }) => ({
+export default ({ isLegacyJS, sessionId }) => ({
 	entry: {
 		sentryLoader: './src/web/browser/sentryLoader/init.ts',
 		bootCmp: './src/web/browser/bootCmp/init.ts',
@@ -61,7 +61,7 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 		rules: [
 			{
 				test: /\.[jt]sx?|mjs$/,
-				exclude: module.exports.babelExclude,
+				exclude: babelExclude,
 
 				use: [
 					{
@@ -113,7 +113,7 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 	},
 });
 
-module.exports.babelExclude = {
+export const babelExclude = {
 	and: [/node_modules/],
 	not: [
 		// Include all @guardian modules, except automat-modules

@@ -1,5 +1,6 @@
 // BRANDED LOGGING
 
+/** @type {(str: string) => string} */
 const capitalize = (str) =>
 	str.replace(/^([a-z])/, (match) => match.toUpperCase());
 
@@ -11,7 +12,9 @@ const green = '\u001b[32m';
 const dim = '\x1b[2m';
 const reset = '\x1b[0m';
 
+/** @type {(messages?: unknown[], color?: string) => void} */
 const logIt = (messages = [], color = dim) => {
+	// eslint-disable-next-line no-console -- these are build tools!
 	console.log(`${color}%s${reset}`, capitalize(messages.join('\n')));
 };
 
@@ -37,9 +40,4 @@ if (messages) {
 }
 
 // exports for modules to use
-module.exports = {
-	log,
-	warn,
-	prompt,
-	success,
-};
+export { log, warn, prompt, success };

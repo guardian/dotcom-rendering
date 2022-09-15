@@ -1,21 +1,30 @@
 // @ts-check
-const nodeExternals = require('webpack-node-externals');
-const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
+import { readFile } from 'fs/promises';
+import { join } from 'node:path';
+import { fileURLToPath } from 'url';
+import nodeExternals from 'webpack-node-externals';
+import GuStatsReportPlugin from './plugins/gu-stats-report-plugin.js';
 
 const DEV = process.env.NODE_ENV === 'development';
 
+/** The (major.minor) node version */
+const version = await readFile(
+	join(fileURLToPath(import.meta.url), '..', '..', '..', '..', '.nvmrc'),
+	'utf-8',
+).then((s) => s.split('.').slice(0, 2).join('.'));
+
 /** @type {(options: { sessionId: string } ) => import('webpack').Configuration} */
-module.exports = ({ sessionId }) => ({
+export default ({ sessionId }) => ({
 	entry: {
 		'frontend.server': './src/server/index.ts',
 	},
 	output: {
-		filename: `[name].js`,
-		chunkFilename: `[name].js`,
+		filename: `[name].cjs`,
+		chunkFilename: `[name].cjs`,
 		libraryTarget: 'commonjs2',
 		pathinfo: true,
 	},
-	target: 'node',
+	target: `node${version}`,
 	externalsPresets: { node: true },
 	optimization: {
 		minimize: false,

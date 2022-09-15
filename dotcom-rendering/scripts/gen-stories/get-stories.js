@@ -17,7 +17,7 @@ const {
 	ArticlePillar,
 	ArticleSpecial,
 } = require('@guardian/libs');
-const { log, success, warn } = require('../env/log');
+const { log, success, warn } = require('../env/log.js').default;
 
 const STORIES_PATH = path.resolve(
 	__dirname,

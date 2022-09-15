@@ -1,7 +1,4 @@
-const {
-	GetParametersByPathCommand,
-	SSMClient,
-} = require('@aws-sdk/client-ssm');
+import { GetParametersByPathCommand, SSMClient } from '@aws-sdk/client-ssm';
 
 process.env.AWS_PROFILE = 'frontend';
 const ssm = new SSMClient({ region: 'eu-west-1' });
@@ -37,7 +34,7 @@ async function* scrollParameters(params) {
 	}
 }
 
-async function getAwsSsmParameters() {
+export async function getAwsSsmParameters() {
 	const parameters = {};
 	const params = {
 		Path: `/dotcom/${env}/`,
@@ -52,5 +49,3 @@ async function getAwsSsmParameters() {
 
 	return parameters;
 }
-
-module.exports = { getAwsSsmParameters };

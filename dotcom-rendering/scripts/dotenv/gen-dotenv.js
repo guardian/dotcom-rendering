@@ -1,15 +1,17 @@
-const fs = require('fs');
-const path = require('path');
-const { CredentialsProviderError } = require('@aws-sdk/property-provider');
-const { prompt, log, success, warn } = require('../env/log');
-const secrets = require('../secrets');
-const { getAwsSsmParameters } = require('./get-aws-ssm-parameters');
+import { readFileSync, writeFileSync } from 'fs';
+import { resolve } from 'path';
+// eslint-disable-next-line import/no-extraneous-dependencies -- it works, somehow
+import { CredentialsProviderError } from '@aws-sdk/property-provider';
+import { log, prompt, success, warn } from '../env/log.js';
+import { secrets } from '../secrets.js';
+import { getAwsSsmParameters } from './get-aws-ssm-parameters.js';
+import { fileURLToPath } from 'url';
 
-const ENV_PATH = path.resolve(__dirname, '../../.env');
+const ENV_PATH = resolve(fileURLToPath(import.meta.url), '../../../.env');
 
 const checkEnv = () => {
 	try {
-		const content = fs.readFileSync(ENV_PATH).toString().split('\n');
+		const content = readFileSync(ENV_PATH).toString().split('\n');
 		const entries = content
 			.filter((line) => line.trim() !== '')
 			.map((line) => line.split('='));
@@ -38,7 +40,7 @@ const genEnv = (parameters) => {
 		envString += `${secret.key}=${parameters[secret.key]}\n`;
 	}
 
-	fs.writeFileSync(ENV_PATH, envString);
+	writeFileSync(ENV_PATH, envString);
 
 	success('[scripts/dotenv] ✓ Generated .env file');
 };

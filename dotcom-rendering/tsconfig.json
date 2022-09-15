@@ -16,5 +16,5 @@
     },
     "preserveConstEnums": true
   },
-  "exclude": ["cypress", "./cypress.config.js"]
+  "exclude": [".eslintrc.cjs", "cypress", "cypress.config.cjs", "scripts/*"]
 }
