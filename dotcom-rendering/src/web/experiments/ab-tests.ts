@@ -8,7 +8,12 @@ import {
 } from './tests/newsletter-merch-unit-test';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
-import { signInGateMandatoryLongTestRun } from './tests/sign-in-gate-mandatory-long-testrun';
+import {
+	signInGateMandatoryLongTestRunUk,
+	signInGateMandatoryLongTestRunAunz,
+	signInGateMandatoryLongTestRunEu,
+	signInGateMandatoryLongTestRunNa,
+} from './tests/sign-in-gate-mandatory-long-testrun';
 
 // keep in sync with ab-tests in frontend
 // https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts
@@ -20,5 +25,8 @@ export const tests: ABTest[] = [
 	newsletterMerchUnitLighthouseVariants,
 	consentlessAds,
 	integrateIMA,
-	signInGateMandatoryLongTestRun,
+	signInGateMandatoryLongTestRunUk,
+	signInGateMandatoryLongTestRunAunz,
+	signInGateMandatoryLongTestRunEu,
+	signInGateMandatoryLongTestRunNa,
 ];
