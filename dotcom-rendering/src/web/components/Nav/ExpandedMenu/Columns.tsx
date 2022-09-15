@@ -14,10 +14,9 @@ import {
 	LinkButton,
 	SvgMagnifyingGlass,
 } from '@guardian/source-react-components';
-import type { Format } from 'log4js';
-import type { NavType } from '../../../../model/extract-nav';
+import type { EditionLinkType, NavType } from '../../../../model/extract-nav';
+import type { EditionId } from '../../../../types/edition';
 import { Column, lineStyle } from './Column';
-import { EditionDropdown, EditionSwitch } from './EditionsSwitch';
 import { MoreColumn } from './MoreColumn';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 
@@ -133,81 +132,135 @@ const searchBar = css`
 	padding-bottom: 15px;
 `;
 
+const editionList: EditionLinkType[] = [
+	{
+		url: '/preference/edition/int',
+		id: 'INT',
+		longTitle: 'International edition',
+		title: 'International edition',
+	},
+	{
+		url: '/preference/edition/au',
+		id: 'AU',
+		longTitle: 'UK edition',
+		title: 'UK edition',
+	},
+	{
+		url: '/preference/edition/us',
+		id: 'US',
+		longTitle: 'US edition',
+		title: 'US edition',
+	},
+	{
+		url: '/preference/edition/au',
+		id: 'AU',
+		longTitle: 'Australia edition',
+		title: 'AU edition',
+	},
+];
+
+const getEdition = (editionId: EditionId): EditionLinkType => {
+	return (
+		editionList.find((edition) => edition.id === editionId) ??
+		editionList[0]
+	);
+};
+
+const getRemainingEditions = (editionId: EditionId): EditionLinkType[] => {
+	return editionList.filter((edition) => edition.id !== editionId);
+};
+
 export const Columns: React.FC<{
-	editionId: Format;
+	editionId: EditionId;
 	format: ArticleFormat;
 	nav: NavType;
-}> = ({ format, nav, editionId }) => (
-	<ul
-		css={columnsStyle(format.display)}
-		role="menubar"
-		data-cy="nav-menu-columns"
-	>
-		{nav.pillars.map((column, i) => (
-			<Column
-				column={column}
-				key={column.title.toLowerCase()}
-				index={i}
-				isLastColumn={i !== nav.pillars.length - 1}
-			/>
-		))}
+}> = ({ format, nav, editionId }) => {
+	const activeEdition = getEdition(editionId);
+	const remainingEditions = getRemainingEditions(activeEdition.id);
+	return (
+		<ul
+			css={columnsStyle(format.display)}
+			role="menubar"
+			data-cy="nav-menu-columns"
+		>
+			{nav.pillars.map((column, i) => (
+				<Column
+					column={column}
+					key={column.title.toLowerCase()}
+					index={i}
+					isLastColumn={i !== nav.pillars.length - 1}
+				/>
+			))}
 
-		<li>
-			<ThemeProvider theme={{ ...buttonThemeBrand }}>
-				<div css={searchBar}>
-					<LinkButton
-						href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
-						tabIndex={-1}
-						className="selectableMenuItem"
-						priority="secondary"
-						icon={
-							<SvgMagnifyingGlass
-								isAnnouncedByScreenReader={true}
-								size="medium"
-							/>
-						}
-						aria-label="Search with google"
-						data-link-name="nav2 : search : submit"
-						type="submit"
-					>
-						Search
-					</LinkButton>
-				</div>
-			</ThemeProvider>
-
-			<div css={lineStyle}></div>
-		</li>
-
-		<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
-
-		<EditionDropdown
-			editionId={editionId}
-			dataLinkName="nav2 : topbar : edition-picker: toggle"
-		/>
-
-		<MoreColumn
-			column={nav.otherLinks}
-			brandExtensions={nav.brandExtensions}
-			key="more"
-		/>
-		<li css={desktopBrandExtensionColumn} role="none">
-			<ul css={brandExtensionList} role="menu">
-				{nav.brandExtensions.map((brandExtension) => (
-					<li css={brandExtensionListItem} key={brandExtension.title}>
-						<a
-							className="selectableMenuItem"
-							css={brandExtensionLink}
-							href={brandExtension.url}
-							key={brandExtension.title}
-							role="menuitem"
-							data-link-name={`nav2 : brand extension : ${brandExtension.longTitle}`}
+			<li>
+				<ThemeProvider theme={{ ...buttonThemeBrand }}>
+					<div css={searchBar}>
+						<LinkButton
+							href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
 							tabIndex={-1}
+							className="selectableMenuItem"
+							priority="secondary"
+							icon={
+								<SvgMagnifyingGlass
+									isAnnouncedByScreenReader={true}
+									size="medium"
+								/>
+							}
+							aria-label="Search with google"
+							data-link-name="nav2 : search : submit"
+							type="submit"
 						>
-							{brandExtension.longTitle}
-						</a>
-					</li>
-				))}
-			</ul>
-		</li>
-	</ul>
-);
+							Search
+						</LinkButton>
+					</div>
+				</ThemeProvider>
+
+				<div css={lineStyle}></div>
+			</li>
+
+			<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
+
+			{/* <EditionDropdown
+				editionId={editionId}
+				dataLinkName="nav2 : topbar : edition-picker: toggle"
+			/> */}
+
+			<Column
+				column={{
+					...activeEdition,
+					children: remainingEditions,
+				}}
+				index={10}
+				isLastColumn={true}
+			/>
+
+			<MoreColumn
+				column={nav.otherLinks}
+				brandExtensions={nav.brandExtensions}
+				key="more"
+			/>
+			<li css={desktopBrandExtensionColumn} role="none">
+				<ul css={brandExtensionList} role="menu">
+					{nav.brandExtensions.map((brandExtension) => (
+						<li
+							css={brandExtensionListItem}
+							key={brandExtension.title}
+						>
+							<a
+								className="selectableMenuItem"
+								css={brandExtensionLink}
+								href={brandExtension.url}
+								key={brandExtension.title}
+								role="menuitem"
+								data-link-name={`nav2 : brand extension : ${brandExtension.longTitle}`}
+								tabIndex={-1}
+							>
+								{brandExtension.longTitle}
+							</a>
+						</li>
+					))}
+				</ul>
+			</li>
+		</ul>
+	);
+};

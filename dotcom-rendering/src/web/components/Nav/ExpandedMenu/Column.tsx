@@ -8,7 +8,10 @@ import {
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import type { PillarType } from '../../../../model/extract-nav';
+import type {
+	EditionLinkType,
+	PillarType,
+} from '../../../../model/extract-nav';
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS
@@ -197,13 +200,14 @@ export const Column = ({
 	index,
 	isLastColumn,
 }: {
-	column: PillarType;
+	column: PillarType | EditionLinkType;
 	index: number;
 	isLastColumn: boolean;
 }) => {
 	// As the elements are dynamic we need to specify the IDs here
-	const columnInputId = `${column.title}-checkbox-input`;
-	const collapseColumnInputId = `${column.title}-button`;
+	//Replace whitespace with hyphen https://stackoverflow.com/questions/3794919/replace-all-spaces-in-a-string-with/3795147#3795147
+	const columnInputId = `${column.title}-checkbox-input`.split(' ').join('-');
+	const collapseColumnInputId = `${column.title}-button`.split(' ').join('-');
 
 	return (
 		<li css={[columnStyle, pillarDivider]} role="none">
