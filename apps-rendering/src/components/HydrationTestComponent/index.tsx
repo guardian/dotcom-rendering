@@ -15,18 +15,14 @@ const HydrationTestComponent: FC<Props> = (props) => {
 	);
 };
 
-const getPropsFromContainer: { (container: Element): Props } = (container) => {
+const renderInnerComponent = (container: Element) => {
 	const props = JSON.parse(
-		container.getAttribute('data-props') || '',
+		container.getAttribute('data-props') || '{}',
 	) as Props;
 
-	return props;
-};
-
-const renderInnerComponent = (container: Element) => {
 	return createElement(
 		HydrationTestComponentInner,
-		getPropsFromContainer(container),
+		props,
 	);
 };
 
