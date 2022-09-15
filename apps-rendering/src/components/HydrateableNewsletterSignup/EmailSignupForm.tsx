@@ -23,11 +23,9 @@ import {
 	Label,
 	Link,
 	SvgReload,
-	SvgSpinner,
 	TextInput,
-	userFeedbackThemeDefault,
 } from '@guardian/source-react-components';
-import type { FC } from 'react';
+import { FC, useState } from 'react';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -40,40 +38,6 @@ interface Props {
 
 const formStyle = css`
 	min-height: 2.75rem;
-
-	.js-signup-form__inputs {
-		display: flex;
-	}
-
-	.js-signup-form__feedback {
-		display: none;
-	}
-
-	&.js-signup-form--waiting {
-		.js-signup-form__feedback--waiting {
-			display: inline-flex;
-		}
-	}
-
-	&.js-signup-form--success {
-		.js-signup-form__inputs {
-			display: none;
-		}
-		.js-signup-form__feedback--success {
-			display: flex;
-			color: ${userFeedbackThemeDefault.userFeedback.textSuccess};
-		}
-	}
-
-	&.js-signup-form--failure {
-		.js-signup-form__inputs {
-			display: none;
-		}
-		.js-signup-form__feedback--failure {
-			display: flex;
-			color: ${userFeedbackThemeDefault.userFeedback.textError};
-		}
-	}
 `;
 
 const buttonStyle = (format: ArticleFormat): SerializedStyles => css`
@@ -109,9 +73,24 @@ const EmailSignupForm: FC<Props> = ({
 	successDescription,
 	format,
 }) => {
-	const handleSubmit = (): void => {
+	const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = (
+		event,
+	): void => {
+		event.preventDefault();
+		setFormCondition('failure');
 		console.log({ newsletterId });
 	};
+	const handleReset: React.MouseEventHandler<HTMLButtonElement> = (
+		event,
+	): void => {
+		event.preventDefault();
+		setFormCondition('initial');
+		console.log({ newsletterId });
+	};
+
+	const [formCondition, setFormCondition] = useState<
+		'initial' | 'waiting' | 'success' | 'failure'
+	>('initial');
 
 	return (
 		<>
@@ -127,94 +106,94 @@ const EmailSignupForm: FC<Props> = ({
 					}
 				`}
 			/>
-			<form
-				className={'js-signup-form'}
-				data-newsletter-id={newsletterId}
-				css={formStyle}
-			>
-				<div
-					className={'js-signup-form__inputs'}
-					css={css`
-						align-items: center;
-						flex-wrap: wrap;
-					`}
-				>
-					<TextInput
-						type="email"
-						width={30}
-						hideLabel
-						label="Enter your email address"
-						cssOverrides={css`
-							height: 2.25rem;
-							margin-right: ${remSpace[3]};
-							margin-top: 0;
-							margin-bottom: ${remSpace[2]};
-							flex-basis: ${pxToRem(335)}rem;
+			<form data-newsletter-id={newsletterId} css={formStyle}>
+				{(formCondition === 'initial' ||
+					formCondition === 'waiting') && (
+					<div
+						css={css`
+							display: flex;
+							align-items: center;
+							flex-wrap: wrap;
+						`}
+					>
+						<TextInput
+							type="email"
+							width={30}
+							hideLabel
+							label="Enter your email address"
+							cssOverrides={css`
+								height: 2.25rem;
+								margin-right: ${remSpace[3]};
+								margin-top: 0;
+								margin-bottom: ${remSpace[2]};
+								flex-basis: ${pxToRem(335)}rem;
 
-							${darkModeCss`
+								${darkModeCss`
 							background-color: ${background.newsletterSignUpFormDark(format)};
 							color: ${text.newsletterSignUpFormDark(format)};
 						`}
-						`}
-					/>
-					<Button
-						onClick={handleSubmit}
-						size="small"
-						title="Sign up"
-						type="submit"
-						cssOverrides={buttonStyle(format)}
-					>
-						Sign up
-						<span className="js-signup-form__feedback js-signup-form__feedback--waiting">
-							<SvgSpinner size="small" />
-						</span>
-					</Button>
-				</div>
-				<div className="js-signup-form__feedback js-signup-form__feedback--success">
+							`}
+						/>
+						<Button
+							onClick={handleSubmit}
+							size="small"
+							title="Sign up"
+							type="submit"
+							cssOverrides={buttonStyle(format)}
+							isLoading={formCondition === 'waiting'}
+						>
+							Sign up
+						</Button>
+					</div>
+				)}
+
+				{formCondition === 'success' && (
 					<InlineSuccess>
 						<span>
 							<b>Subscription Confirmed. </b>
 							<span>{successDescription}</span>
 						</span>
 					</InlineSuccess>
-				</div>
-				<div
-					className="js-signup-form__feedback js-signup-form__feedback--failure"
-					css={css`
-						align-items: center;
-						justify-content: flex-start;
-						${until.tablet} {
-							flex-wrap: wrap;
-						}
-					`}
-				>
-					<InlineError
-						cssOverrides={css`
-							margin-right: ${remSpace[3]};
+				)}
+
+				{formCondition === 'failure' && (
+					<div
+						css={css`
+							align-items: center;
+							justify-content: flex-start;
+							${until.tablet} {
+								flex-wrap: wrap;
+							}
 						`}
 					>
-						<span>
-							Sign up failed. Please try again or contact{' '}
-							<Link
-								href="mailto:customer.help@theguardian.com"
-								target="_blank"
-							>
-								customer.help@theguardian.com
-							</Link>
-						</span>
-					</InlineError>
-					<Button
-						onClick={handleSubmit}
-						size="small"
-						icon={<SvgReload />}
-						iconSide={'right'}
-						title="Try signing up again"
-						type="reset"
-						cssOverrides={buttonStyle(format)}
-					>
-						Try again
-					</Button>
-				</div>
+						<InlineError
+							cssOverrides={css`
+								margin-right: ${remSpace[3]};
+							`}
+						>
+							<span>
+								Sign up failed. Please try again or contact{' '}
+								<Link
+									href="mailto:customer.help@theguardian.com"
+									target="_blank"
+								>
+									customer.help@theguardian.com
+								</Link>
+							</span>
+						</InlineError>
+						<Button
+							onClick={handleReset}
+							size="small"
+							icon={<SvgReload />}
+							iconSide={'right'}
+							title="Try signing up again"
+							type="reset"
+							cssOverrides={buttonStyle(format)}
+						>
+							Try again
+						</Button>
+					</div>
+				)}
 			</form>
 		</>
 	);

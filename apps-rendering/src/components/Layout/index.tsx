@@ -20,7 +20,6 @@ import { renderAll, renderAllWithoutStyles } from 'renderer';
 import { Result } from 'result';
 import AnalysisLayout from './AnalysisLayout';
 import ImmersiveLayout from './ImmersiveLayout';
-import HydrationTestComponent from 'components/HydrationTestComponent';
 import HydrateableNewsletterSignup from 'components/HydrateableNewsletterSignup';
 
 // ----- Functions ----- //
@@ -130,7 +129,6 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 
 		return (
 			<StandardLayout item={item}>
-				<HydrationTestComponent text="This is a test component" />
 				<HydrateableNewsletterSignup
 					format={{
 						theme: 0,
