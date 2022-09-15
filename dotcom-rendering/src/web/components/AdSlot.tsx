@@ -21,7 +21,7 @@ type InlineProps = {
 	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
-	sectionName?: string;
+	pillar?: ArticleTheme;
 	editionId?: EditionId;
 };
 
@@ -31,7 +31,7 @@ type NonInlineProps = {
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
-	sectionName?: string;
+	pillar?: ArticleTheme;
 	editionId?: EditionId;
 };
 
@@ -245,7 +245,7 @@ export const AdSlot = ({
 	shouldHideReaderRevenue = false,
 	isPaidContent = false,
 	index,
-	sectionName,
+	pillar,
 	editionId,
 }: Props) => {
 	switch (position) {
@@ -281,7 +281,7 @@ export const AdSlot = ({
 								}
 								isPaidContent={isPaidContent}
 								adStyles={adStyles}
-								sectionName={sectionName}
+								pillar={pillar}
 								editionId={editionId}
 							/>
 						</Island>

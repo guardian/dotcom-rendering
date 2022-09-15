@@ -1,3 +1,4 @@
+import { ArticlePillar } from '@guardian/libs';
 import type { EditionId } from '../../types/edition';
 import { LabsShadyPie } from './LabsShadyPie';
 
@@ -14,13 +15,13 @@ params.set(
 params.set('INTCMP', 'shady_pie_open_2019');
 
 export const ShadyPie = ({
-	sectionName,
 	editionId,
+	pillar,
 }: {
-	sectionName?: string;
 	editionId?: EditionId;
+	pillar?: ArticleTheme;
 }) => {
-	if (sectionName == 'lifestyle' && editionId == 'UK') {
+	if (pillar == ArticlePillar.Lifestyle && editionId == 'UK') {
 		return (
 			<LabsShadyPie
 				title="It’s all about the berries: meet one of the farmers growing blackcurrants for Ribena"
@@ -29,7 +30,7 @@ export const ShadyPie = ({
 				sponsorLogoLink="https://static.theguardian.com/commercial/sponsor/20/Jul/2022/0a826298-8684-420d-90ab-d6d2797fbf6a-Suntory%20Logo.png"
 			/>
 		);
-	} else if (sectionName == 'lifestyle' && editionId == 'US') {
+	} else if (pillar == ArticlePillar.Lifestyle && editionId == 'US') {
 		return (
 			<LabsShadyPie
 				title="Taiwan’s wind power revolution: leading the way in Asia-Pacific"

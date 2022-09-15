@@ -28,12 +28,14 @@ export const TopRightAdSlot = ({
 	isPaidContent,
 	sectionName,
 	editionId,
+	pillar,
 }: {
 	adStyles: SerializedStyles[];
 	shouldHideReaderRevenue: boolean;
 	isPaidContent: boolean;
 	sectionName?: string;
 	editionId?: EditionId;
+	pillar?: ArticleTheme;
 }) => {
 	const adBlockerDetected = useAdBlockInUse();
 	const isSignedIn =
@@ -47,7 +49,7 @@ export const TopRightAdSlot = ({
 		!isServer
 	) {
 		// Show a fixed image asking people to subscribe
-		return <ShadyPie sectionName={sectionName} editionId={editionId} />;
+		return <ShadyPie pillar={pillar} editionId={editionId} />;
 	}
 
 	// Otherwise return the classic ad slot
