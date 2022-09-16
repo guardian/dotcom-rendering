@@ -141,7 +141,7 @@ const editionList: EditionLinkType[] = [
 	},
 	{
 		url: '/preference/edition/au',
-		id: 'AU',
+		id: 'UK',
 		longTitle: 'UK edition',
 		title: 'UK edition',
 	},
@@ -162,7 +162,7 @@ const editionList: EditionLinkType[] = [
 const getEdition = (editionId: EditionId): EditionLinkType => {
 	return (
 		editionList.find((edition) => edition.id === editionId) ??
-		editionList[0]
+		editionList[1]
 	);
 };
 
