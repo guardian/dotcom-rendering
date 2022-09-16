@@ -1,6 +1,6 @@
 // ----- Imports ----- //
 
-import { css } from '@emotion/react';
+import { CacheProvider, css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import {
 	background,
@@ -23,6 +23,10 @@ import { darkModeCss } from 'styles';
 import EmailSignupForm from './EmailSignupForm';
 import PrivacyWording from './PrivacyWording';
 import SvgNewsletter from './SvgNewsletter';
+import createCache from '@emotion/cache';
+
+// ----- Setup ----- //
+const emotionCache = createCache({ key: 'ar' });
 
 // ----- Component ----- //
 
@@ -30,6 +34,7 @@ interface Props {
 	format: ArticleFormat;
 	element: NewsletterSignUp;
 }
+
 
 const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 	clear: both;
@@ -106,7 +111,7 @@ const noHeightFromTabletStyles = css`
 /**
  * NOTE: this component is non functional and is for demonstration only.
  */
-const NewsletterSignup:  VFC< Props> = ({ format, element }) => {
+const NewsletterSignup: VFC<Props> = ({ format, element }) => {
 	const {
 		name,
 		frequency,
@@ -116,30 +121,32 @@ const NewsletterSignup:  VFC< Props> = ({ format, element }) => {
 		successDescription,
 	} = element;
 	return (
-		<aside css={containerStyles(format)}>
-			<div css={stackBelowTabletStyles}>
-				<p css={titleStyles(theme)}>
-					Sign up to <span>{name}</span>
-				</p>
+		<CacheProvider value={emotionCache}>
+			<aside css={containerStyles(format)}>
+				<div css={stackBelowTabletStyles}>
+					<p css={titleStyles(theme)}>
+						Sign up to <span>{name}</span>
+					</p>
 
-				<div css={noHeightFromTabletStyles}>
-					<div css={iconHolderStyles}>
-						<SvgNewsletter size="small" />
-						<b>{frequency}</b>
+					<div css={noHeightFromTabletStyles}>
+						<div css={iconHolderStyles}>
+							<SvgNewsletter size="small" />
+							<b>{frequency}</b>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<p css={descriptionStyles}>{description}</p>
+				<p css={descriptionStyles}>{description}</p>
 
-			<EmailSignupForm
-				newsletterId={identityName}
-				format={format}
-				successDescription={successDescription}
-			/>
+				<EmailSignupForm
+					newsletterId={identityName}
+					format={format}
+					successDescription={successDescription}
+				/>
 
-			<PrivacyWording useCaptcha={false} format={format} />
-		</aside>
+				<PrivacyWording useCaptcha={false} format={format} />
+			</aside>
+		</CacheProvider>
 	);
 };
 

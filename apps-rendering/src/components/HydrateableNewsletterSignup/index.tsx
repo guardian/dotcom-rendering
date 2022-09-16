@@ -3,26 +3,21 @@ import {
 	Hydrateable,
 } from 'client/hydratables';
 import { FC } from 'react';
-import {
-	NewsletterSignup as HydrateableNewsletterSignupInner,
-	Props,
-} from './inner';
+import { NewsletterSignup, Props } from './inner';
 
 const containerClassName = 'js-hydrateableNewsletterSignup-component-container';
 
 const HydrateableNewsletterSignup: FC<Props> = (props) => {
 	return (
 		<div className={containerClassName} data-props={JSON.stringify(props)}>
-			<HydrateableNewsletterSignupInner {...props} />
+			<NewsletterSignup {...props} />
 		</div>
 	);
 };
 
 const newsletterSignHydrateable: Hydrateable = {
 	containerClassName,
-	renderInnerComponent: makeRenderInnerComponentFunction(
-		HydrateableNewsletterSignupInner,
-	),
+	renderInnerComponent: makeRenderInnerComponentFunction(NewsletterSignup),
 	needsInlineStyles: true,
 };
 
