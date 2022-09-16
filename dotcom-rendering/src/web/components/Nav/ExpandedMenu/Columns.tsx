@@ -220,11 +220,6 @@ export const Columns: React.FC<{
 
 			<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
 
-			{/* <EditionDropdown
-				editionId={editionId}
-				dataLinkName="nav2 : topbar : edition-picker: toggle"
-			/> */}
-
 			<Column
 				column={{
 					...activeEdition,

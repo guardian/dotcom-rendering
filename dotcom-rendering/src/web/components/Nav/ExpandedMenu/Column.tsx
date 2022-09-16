@@ -266,6 +266,7 @@ export const Column = ({
 					columnLinks,
 					index === 0 && firstColumnLinks,
 					!!column.pillar && pillarColumnLinks,
+					index === 10 && pillarColumnLinks,
 					hideWhenNotChecked(columnInputId),
 				]}
 				role="menu"
