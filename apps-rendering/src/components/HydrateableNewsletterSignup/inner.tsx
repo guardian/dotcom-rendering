@@ -18,7 +18,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import type { NewsletterSignUp } from 'bodyElement';
-import type { FC } from 'react';
+import type { VFC } from 'react';
 import { darkModeCss } from 'styles';
 import EmailSignupForm from './EmailSignupForm';
 import PrivacyWording from './PrivacyWording';
@@ -106,7 +106,7 @@ const noHeightFromTabletStyles = css`
 /**
  * NOTE: this component is non functional and is for demonstration only.
  */
-const NewsletterSignup: FC<Props> = ({ format, element }) => {
+const NewsletterSignup:  VFC< Props> = ({ format, element }) => {
 	const {
 		name,
 		frequency,

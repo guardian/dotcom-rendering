@@ -36,7 +36,7 @@ import ReactDOM from 'react-dom';
 import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
-import { hydrateables } from './hydratables';
+import { hydratablesComponentList } from './hydratablesComponentList';
 
 // ----- Run ----- //
 
@@ -449,7 +449,7 @@ function hydrateClickToView(): void {
 }
 
 function hydrateHydratables(): void {
-	hydrateables.forEach((hydratable) => {
+	hydratablesComponentList.forEach((hydratable) => {
 		const { renderInnerComponent, containerClassName } = hydratable;
 		document
 			.querySelectorAll(`.${containerClassName}`)

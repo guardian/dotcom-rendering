@@ -23,7 +23,7 @@ import type { ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
 import { pageFonts } from 'styles';
-import { hydrateables } from 'client/hydratables';
+import { hydratablesComponentList } from 'client/hydratablesComponentList';
 
 // ----- Types ----- //
 
@@ -164,7 +164,7 @@ const buildHtml = (
 const hasHydratedElementNeedingInlineStyles = (
 	body: EmotionCritical,
 ): boolean =>
-	hydrateables
+	hydratablesComponentList
 		.filter((_) => _.needsInlineStyles)
 		.map((_) => _.containerClassName)
 		.some((className) => body.html.includes(className));

@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { InlineSuccess } from '@guardian/source-react-components';
-import { FC, useState } from 'react';
+import { VFC, useState } from 'react';
 
 type Props = {
 	text: string;
 };
 
-const HydrationTestComponentInner: FC<Props> = ({ text }) => {
+const HydrationTestComponentInner: VFC<Props> = ({ text }) => {
 	const [clickCount, setClickCount] = useState(0);
 
 	return (
