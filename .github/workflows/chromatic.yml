@@ -23,3 +23,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
           onlyChanged: true
+          untraced: '**/(package**.json|yarn.lock)'
