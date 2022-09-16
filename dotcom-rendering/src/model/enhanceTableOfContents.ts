@@ -15,10 +15,9 @@ const extractText = (element: SubheadingBlockElement): string => {
 };
 
 const extractID = (element: SubheadingBlockElement): string => {
-	return (
-		JSDOM.fragment(element.html).querySelector('H2')?.getAttribute('id') ??
-		''
-	);
+	const frag = JSDOM.fragment(element.html);
+	if (!frag.firstElementChild) return '';
+	return frag.querySelector('H2')?.getAttribute('id') ?? '';
 };
 
 const hasInteractiveContentsElement = (blocks: Block[]): boolean => {
