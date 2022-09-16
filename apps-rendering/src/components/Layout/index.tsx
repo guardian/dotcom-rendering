@@ -20,7 +20,7 @@ import { renderAll, renderAllWithoutStyles } from 'renderer';
 import { Result } from 'result';
 import AnalysisLayout from './AnalysisLayout';
 import ImmersiveLayout from './ImmersiveLayout';
-import HydrateableNewsletterSignup from 'components/HydrateableNewsletterSignup';
+import NewsletterSignup from 'components/NewsletterSignup';
 
 // ----- Functions ----- //
 
@@ -129,7 +129,7 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 
 		return (
 			<StandardLayout item={item}>
-				<HydrateableNewsletterSignup
+				<NewsletterSignup
 					format={{
 						theme: 0,
 						design: 0,

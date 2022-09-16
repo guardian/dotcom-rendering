@@ -111,7 +111,7 @@ const noHeightFromTabletStyles = css`
 /**
  * NOTE: this component is non functional and is for demonstration only.
  */
-const NewsletterSignup: VFC<Props> = ({ format, element }) => {
+const NewsletterSignupInner: VFC<Props> = ({ format, element }) => {
 	const {
 		name,
 		frequency,
@@ -152,5 +152,5 @@ const NewsletterSignup: VFC<Props> = ({ format, element }) => {
 
 // ----- Exports ----- //
 
-export default NewsletterSignup;
-export { Props, NewsletterSignup };
+export default NewsletterSignupInner;
+export { Props };

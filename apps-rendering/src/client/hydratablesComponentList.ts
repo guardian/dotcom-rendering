@@ -1,4 +1,4 @@
-import { newsletterSignHydrateable } from 'components/HydrateableNewsletterSignup';
+import { newsletterSignHydrateable } from 'components/NewsletterSignup';
 import { testComponentnHydrateable } from 'components/HydrationTestComponent';
 import { Hydrateable } from './hydratables';
 
