@@ -43,10 +43,6 @@ const listStyles: SerializedStyles = css`
 	}
 
 	margin: 0;
-
-	> li {
-		padding-left: ${remSpace[3]};
-	}
 `;
 
 const listItemStyles: SerializedStyles = css`
@@ -70,7 +66,6 @@ const summaryStyles: SerializedStyles = css`
 	cursor: pointer;
 	position: relative;
 	list-style: none;
-	padding-left: ${remSpace[3]};
 	padding-top: 0.44rem;
 	padding-bottom: 0.375rem;
 	border-bottom: 1px solid ${line.primary};

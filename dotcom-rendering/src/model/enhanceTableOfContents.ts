@@ -1,5 +1,5 @@
 import { JSDOM } from 'jsdom';
-import type { TableOfContents, TableOfContentsItem } from 'src/types/frontend';
+import type { TableOfContentsItem } from 'src/types/frontend';
 
 const isH2 = (element: CAPIElement): element is SubheadingBlockElement => {
 	return (
@@ -33,7 +33,7 @@ const hasInteractiveContentsElement = (blocks: Block[]): boolean => {
 export const enhanceTableOfContents = (
 	format: CAPIFormat,
 	blocks: Block[],
-): TableOfContents | undefined => {
+): TableOfContentsItem[] | undefined => {
 	if (
 		format.design !== 'ExplainerDesign' ||
 		hasInteractiveContentsElement(blocks)
@@ -54,5 +54,5 @@ export const enhanceTableOfContents = (
 		});
 	});
 
-	return tocItems.length >= 3 ? { items: tocItems } : undefined;
+	return tocItems.length >= 3 ? tocItems : undefined;
 };

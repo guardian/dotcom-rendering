@@ -105,11 +105,7 @@ export interface CAPIArticleType {
 	selectedTopics?: Topic[];
 
 	promotedNewsletter?: Newsletter;
-	tableOfContents?: TableOfContents;
-}
-
-export interface TableOfContents {
-	items: TableOfContentsItem[];
+	tableOfContents?: TableOfContentsItem[];
 }
 
 export interface TableOfContentsItem {

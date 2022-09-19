@@ -15,7 +15,6 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
-import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import type { NavType } from '../../model/extract-nav';
 import type { CAPIArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
@@ -347,12 +346,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	 */
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
-	const CAPIFormat = CAPIArticle.format;
-
-	const CAPIBlocks = CAPIArticle.blocks;
-
-	const tableOfContents = enhanceTableOfContents(CAPIFormat, CAPIBlocks);
-
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	return (
@@ -633,11 +626,11 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 						<GridItem area="body">
 							<ArticleContainer format={format}>
-								{tableOfContents && (
+								{CAPIArticle.tableOfContents && (
 									<div>
 										<TableOfContents
 											tableOfContents={
-												tableOfContents.items
+												CAPIArticle.tableOfContents
 											}
 										></TableOfContents>
 									</div>
