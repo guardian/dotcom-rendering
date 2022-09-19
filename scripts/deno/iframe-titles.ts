@@ -167,7 +167,7 @@ const issue_number = 5510;
 
 if (!octokit) {
 	console.log(body);
-	Deno.exit(0);
+	Deno.exit();
 }
 
 try {
@@ -185,8 +185,9 @@ try {
 } catch (error) {
 	// do_something
 	console.warn(`Failed to update issue #${issue_number}`);
+	console.error(error);
 
 	console.log(body);
 }
 
-Deno.exit(0);
+Deno.exit();

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid -- It’s AMP! */
 import { css } from '@emotion/react';
 import {
 	body,
