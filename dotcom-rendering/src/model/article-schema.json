@@ -533,7 +533,10 @@
             ]
         },
         "tableOfContents": {
-            "$ref": "#/definitions/TableOfContents"
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/TableOfContentsItem"
+            }
         }
     },
     "required": [
@@ -4587,20 +4590,6 @@
                 "WORK_OF_ART"
             ],
             "type": "string"
-        },
-        "TableOfContents": {
-            "type": "object",
-            "properties": {
-                "items": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/TableOfContentsItem"
-                    }
-                }
-            },
-            "required": [
-                "items"
-            ]
         },
         "TableOfContentsItem": {
             "type": "object",

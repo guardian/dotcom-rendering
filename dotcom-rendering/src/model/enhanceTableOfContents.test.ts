@@ -46,22 +46,20 @@ describe('Enhance Table of Contents', () => {
 			},
 		];
 
-		expect(enhanceTableOfContents(ExampleArticle.format, input)).toEqual({
-			items: [
-				{
-					id: 'first-h2-text',
-					title: 'First h2 text',
-				},
-				{
-					id: 'second-h2-text',
-					title: 'Second h2 text',
-				},
-				{
-					id: 'third-h2-text',
-					title: 'Third h2 text',
-				},
-			],
-		});
+		expect(enhanceTableOfContents(ExampleArticle.format, input)).toEqual([
+			{
+				id: 'first-h2-text',
+				title: 'First h2 text',
+			},
+			{
+				id: 'second-h2-text',
+				title: 'Second h2 text',
+			},
+			{
+				id: 'third-h2-text',
+				title: 'Third h2 text',
+			},
+		]);
 	});
 
 	it('will not return a toc if the are fewer than 3 h2s', () => {
