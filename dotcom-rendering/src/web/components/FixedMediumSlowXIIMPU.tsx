@@ -2,7 +2,7 @@
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette } from '../../types/front';
 import type { TrailType } from '../../types/trails';
-import { Card100, Card50_Card50 } from '../lib/slices';
+import { Card100, Card33_Card33_Card33, Card50_Card50 } from '../lib/slices';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -14,61 +14,6 @@ type Props = {
 	showAge?: boolean;
 	index: number;
 };
-
-/* .___________.___________.___________.
- * |###########|###########|###########|
- * |           |           |           |
- * |___________|___________|___________|
- */
-const Card33_Card33_Card33 = ({
-	trails,
-	containerPalette,
-	showAge,
-}: {
-	trails: TrailType[];
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="33.333%" padSides={true}>
-			<FrontCard
-				trail={trails[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={trails[0].trailText}
-				imagePositionOnMobile="top"
-			/>
-		</LI>
-		<LI
-			percentage="33.333%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
-			<FrontCard
-				trail={trails[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={trails[1].trailText}
-				imagePositionOnMobile="left"
-			/>
-		</LI>
-		<LI
-			percentage="33.333%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
-			<FrontCard
-				trail={trails[2]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={trails[2].trailText}
-				imagePositionOnMobile="left"
-			/>
-		</LI>
-	</UL>
-);
 
 /* ._______________________.___________.
  * |       ################|           |
@@ -235,7 +180,7 @@ export const FixedMediumSlowXIIMPU = ({
 		case 3: {
 			return (
 				<Card33_Card33_Card33
-					trails={trails}
+					cards={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
 				/>
@@ -247,7 +192,7 @@ export const FixedMediumSlowXIIMPU = ({
 			return (
 				<>
 					<Card33_Card33_Card33
-						trails={topThree}
+						cards={topThree}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
@@ -267,7 +212,7 @@ export const FixedMediumSlowXIIMPU = ({
 			return (
 				<>
 					<Card33_Card33_Card33
-						trails={topThree}
+						cards={topThree}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
@@ -292,7 +237,7 @@ export const FixedMediumSlowXIIMPU = ({
 			return (
 				<>
 					<Card33_Card33_Card33
-						trails={topThree}
+						cards={topThree}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>
