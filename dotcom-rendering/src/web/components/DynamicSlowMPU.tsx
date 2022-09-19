@@ -2,7 +2,11 @@
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
-import { Card50_Card50, Card75_Card25 } from '../lib/slices';
+import {
+	Card50_Card25_Card25,
+	Card50_Card50,
+	Card75_Card25,
+} from '../lib/slices';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -134,77 +138,6 @@ const ColumnOfThree50_Ad50 = ({
 			<Hide until="tablet">
 				<AdSlot position="inline" index={index} />
 			</Hide>
-		</LI>
-	</UL>
-);
-
-/* ._________________.________.________.
- * |#################|########|########|
- * |                 |        |        |
- * |_________________|________|________|
- */
-const Card50_Card25_Card25 = ({
-	cards,
-	containerPalette,
-	showAge,
-}: {
-	cards: TrailType[];
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="50%" padSides={true}>
-			<FrontCard
-				trail={cards[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				headlineSize="large"
-				imagePosition="top"
-				imagePositionOnMobile="top"
-				supportingContent={cards[0].supportingContent}
-			/>
-		</LI>
-		<LI
-			percentage="25%"
-			padSides={true}
-			showDivider={true}
-			showTopMarginWhenStacked={true}
-		>
-			<FrontCard
-				trail={cards[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={
-					cards[1]?.supportingContent &&
-					cards[1].supportingContent.length > 0
-						? undefined
-						: cards[1].trailText
-				}
-				supportingContent={
-					cards[1].trailText ? undefined : cards[1].supportingContent
-				}
-			/>
-		</LI>
-		<LI
-			percentage="25%"
-			padSides={true}
-			showDivider={true}
-			showTopMarginWhenStacked={true}
-		>
-			<FrontCard
-				trail={cards[2]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={
-					cards[2]?.supportingContent &&
-					cards[2].supportingContent.length > 0
-						? undefined
-						: cards[2].trailText
-				}
-				supportingContent={
-					cards[2].trailText ? undefined : cards[2].supportingContent
-				}
-			/>
 		</LI>
 	</UL>
 );
