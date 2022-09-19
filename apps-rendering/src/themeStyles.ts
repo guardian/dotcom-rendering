@@ -177,7 +177,6 @@ const stringToPillar = (pillar: string): ArticlePillar => {
 // ----- Exports ----- //
 
 export {
-	ThemeStyles,
 	getThemeStyles,
 	themeFromString,
 	themeToPillarString,
