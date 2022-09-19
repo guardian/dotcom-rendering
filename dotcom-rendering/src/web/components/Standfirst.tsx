@@ -8,6 +8,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import sanitise from 'sanitize-html';
+import type { Palette } from '../../types/palette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 
@@ -132,6 +133,7 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 				case ArticleDesign.Recipe:
 				case ArticleDesign.Review:
 				case ArticleDesign.NewsletterSignup:
+				case ArticleDesign.Explainer:
 					return css`
 						${headline.xxsmall({
 							fontWeight: 'light',
@@ -152,6 +154,13 @@ const standfirstStyles = (format: ArticleFormat, palette: Palette) => {
 						})};
 						line-height: 20px;
 						margin-top: ${space[1]}px;
+						margin-bottom: ${space[3]}px;
+						max-width: 540px;
+						color: ${palette.text.standfirst};
+					`;
+				case ArticleDesign.Analysis:
+					return css`
+						${headline.xxxsmall()};
 						margin-bottom: ${space[3]}px;
 						max-width: 540px;
 						color: ${palette.text.standfirst};
@@ -197,32 +206,34 @@ export const Standfirst = ({ format, standfirst }: Props) => {
 	const palette = decidePalette(format);
 
 	return (
-		<div
-			css={[
-				nestedStyles(format, palette),
-				standfirstStyles(format, palette),
-				hoverStyles(palette),
-			]}
-			className={
-				format.design === ArticleDesign.Interactive
-					? interactiveLegacyClasses.standFirst
-					: ''
-			}
-			dangerouslySetInnerHTML={{
-				__html: sanitise(standfirst, {
-					allowedTags: false, // Leave tags from CAPI alone
-					allowedAttributes: false, // Leave attributes from CAPI alone
-					transformTags: {
-						a: (tagName, attribs) => ({
-							tagName, // Just return anchors as is
-							attribs: {
-								...attribs, // Merge into the existing attributes
-								'data-link-name': 'in standfirst link', // Add the data-link-name for Ophan to anchors
-							},
-						}),
-					},
-				}),
-			}}
-		/>
+		<>
+			<div
+				css={[
+					nestedStyles(format, palette),
+					standfirstStyles(format, palette),
+					hoverStyles(palette),
+				]}
+				className={
+					format.design === ArticleDesign.Interactive
+						? interactiveLegacyClasses.standFirst
+						: ''
+				}
+				dangerouslySetInnerHTML={{
+					__html: sanitise(standfirst, {
+						allowedTags: false, // Leave tags from CAPI alone
+						allowedAttributes: false, // Leave attributes from CAPI alone
+						transformTags: {
+							a: (tagName, attribs) => ({
+								tagName, // Just return anchors as is
+								attribs: {
+									...attribs, // Merge into the existing attributes
+									'data-link-name': 'in standfirst link', // Add the data-link-name for Ophan to anchors
+								},
+							}),
+						},
+					}),
+				}}
+			/>
+		</>
 	);
 };

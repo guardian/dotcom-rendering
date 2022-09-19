@@ -1,6 +1,7 @@
 import { css, Global } from '@emotion/react';
 import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
+import type { NavType } from '../../model/extract-nav';
 import type { DCRFrontType } from '../../types/front';
 import { FrontLayout } from '../layouts/FrontLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
@@ -18,7 +19,7 @@ type Props = {
 
 /**
  * @description
- * Article is a high level wrapper for pages on Dotcom. Sets strict mode and some globals
+ * FrontPage is a high level wrapper for front pages on Dotcom. Sets strict mode and some globals
  *
  * @param {Props} props
  * @param {DCRFrontType} props.front - The article JSON data

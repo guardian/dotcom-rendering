@@ -21,7 +21,10 @@ module.exports = defineConfig({
     '*the-ozone-project.com',
     '*openx.net',
   ],
-  retries: 2,
+  retries: {
+    "runMode": 2,
+    "openMode": 0
+  },
   e2e: {
     setupNodeEvents(on, config) {
       return plugins(on, config)

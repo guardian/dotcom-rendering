@@ -1,6 +1,25 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import type { TrailType } from '../../src/types/trails';
 
-export const trails: TrailType[] = [
+export const trails: [
+	TrailType,
+	TrailType,
+	TrailType,
+	TrailType,
+	TrailType,
+	TrailType,
+	TrailType,
+	TrailType,
+	TrailType,
+	TrailType,
+	TrailType,
+	TrailType,
+	TrailType,
+	TrailType,
+	TrailType,
+	TrailType,
+	TrailType,
+] = [
 	{
 		url: 'https://www.theguardian.com/business/2019/dec/02/directors-climate-disclosures-tci-hedge-fund',
 		headline:

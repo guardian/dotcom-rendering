@@ -30,7 +30,12 @@ const RelatedContent: FC<Props> = ({ item }) => {
 
 	switch (format.design) {
 		case ArticleDesign.Gallery:
-			return <GalleryRelatedContent content={item.relatedContent} />;
+			return (
+				<GalleryRelatedContent
+					content={item.relatedContent}
+					format={format}
+				/>
+			);
 		default:
 			return (
 				<DefaultRelatedContent

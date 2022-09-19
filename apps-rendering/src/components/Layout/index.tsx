@@ -4,7 +4,6 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
-import { partition } from '@guardian/types';
 import { getAdPlaceholderInserter } from 'ads';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
@@ -18,6 +17,8 @@ import StandardLayout from 'components/Layout/StandardLayout';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { renderAll, renderAllWithoutStyles } from 'renderer';
+import { Result } from 'result';
+import AnalysisLayout from './AnalysisLayout';
 import ImmersiveLayout from './ImmersiveLayout';
 
 // ----- Functions ----- //
@@ -55,7 +56,7 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		return <LiveLayout item={item} />;
 	}
 
-	const body = partition(item.body).oks;
+	const body = Result.partition(item.body).oks;
 	const render = renderWithAds(shouldHideAds);
 
 	if (item.theme === ArticleSpecial.Labs) {
@@ -81,6 +82,12 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		return <CommentLayout item={item}>{render(item, body)}</CommentLayout>;
 	}
 
+	if (item.design === ArticleDesign.Analysis) {
+		return (
+			<AnalysisLayout item={item}>{render(item, body)}</AnalysisLayout>
+		);
+	}
+
 	if (item.design === ArticleDesign.Gallery) {
 		return <GalleryLayout item={item}>{render(item, body)}</GalleryLayout>;
 	}
@@ -101,7 +108,7 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 
 	if (
 		item.design === ArticleDesign.Feature ||
-		item.design === ArticleDesign.Analysis ||
+		item.design === ArticleDesign.Explainer ||
 		item.design === ArticleDesign.Review ||
 		item.design === ArticleDesign.Standard ||
 		item.design === ArticleDesign.Interactive ||

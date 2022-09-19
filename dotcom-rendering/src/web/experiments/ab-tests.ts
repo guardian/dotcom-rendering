@@ -1,5 +1,7 @@
 import type { ABTest } from '@guardian/ab-core';
 import { abTestTest } from './tests/ab-test-test';
+import { consentlessAds } from './tests/consentless-ads';
+import { integrateIMA } from './tests/integrate-ima';
 import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
@@ -15,4 +17,6 @@ export const tests: ABTest[] = [
 	signInGateMainControl,
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
+	consentlessAds,
+	integrateIMA,
 ];

@@ -9,6 +9,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import type { PillarType } from '../../model/extract-nav';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { navInputCheckboxId } from './Nav/config';
 
@@ -273,7 +274,6 @@ export const Pillars: React.FC<{
 							showDivider && pillarDivider,
 						]}
 						id={isTopNav && i === 0 ? 'navigation' : undefined}
-						aria-label={i === 0 ? 'Navigation' : undefined}
 						href={p.url}
 						data-link-name={`${dataLinkName} : primary : ${p.title}`}
 					>

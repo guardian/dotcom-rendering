@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { text, textSans, until } from '@guardian/source-foundations';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 
 const captionFont = css`

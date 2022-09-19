@@ -10,6 +10,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
+import type { Palette } from '../../types/palette';
 
 type Props = {
 	commentCount?: number;

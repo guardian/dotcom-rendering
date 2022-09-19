@@ -1,7 +1,6 @@
 import createCache from '@emotion/cache';
-import { CacheProvider, css } from '@emotion/react';
+import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
-import { space } from '@guardian/source-foundations';
 import { renderToString } from 'react-dom/server';
 import { Island } from './Island';
 import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
@@ -10,14 +9,11 @@ import { SecureSignupIframe } from './SecureSignupIframe.importable';
 
 export type Props = {
 	newsletterId: string;
+	name: string;
 	successDescription: string;
 	/** Override this with caution: you _must_ ensure this wording exists nearby if not included in this component */
 	hidePrivacyMessage?: boolean;
 };
-
-const marginTopStyle = css`
-	margin-top: ${space[2]}px;
-`;
 
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. <SecureSignupIframe> hides the
@@ -66,6 +62,7 @@ export const SecureSignup = ({
 	newsletterId,
 	successDescription,
 	hidePrivacyMessage = false,
+	name,
 }: Props) => {
 	const { html, styles } = generateForm(newsletterId);
 
@@ -77,17 +74,14 @@ export const SecureSignup = ({
 				placeholderHeight={65}
 			>
 				<SecureSignupIframe
+					name={name}
 					html={html}
 					styles={styles}
 					newsletterId={newsletterId}
 					successDescription={successDescription}
 				/>
 			</Island>
-			{!hidePrivacyMessage && (
-				<div css={marginTopStyle}>
-					<NewsletterPrivacyMessage />
-				</div>
-			)}
+			{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
 		</>
 	);
 };

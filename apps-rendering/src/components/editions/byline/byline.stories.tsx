@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 
 import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { none, some, toOption } from '@guardian/types';
+import { none, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { boolean, text, withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
@@ -15,7 +15,6 @@ import {
 	review,
 } from 'fixtures/item';
 import type { Image } from 'image';
-import { pipe } from 'lib';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Byline from './index';
@@ -58,11 +57,9 @@ const byline = (): string => text('Byline', 'Jane Smith');
 const job = (): string => text('Job Title', 'Editor of things');
 
 const mockBylineHtml = (): Option<DocumentFragment> =>
-	pipe(
+	parseByline(
 		`<a href="${profileLink()}">${byline()}</a> ${job()}`,
-		parseByline,
-		toOption,
-	);
+	).toOption();
 
 const isImmersive = (): { display: ArticleDisplay } => {
 	return {

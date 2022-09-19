@@ -66,7 +66,15 @@
                     "type": "string"
                 },
                 "abTests": {
-                    "type": "object"
+                    "description": "This type is not support by JSON-schema, it evaluates as `object`",
+                    "type": "object",
+                    "additionalProperties": {
+                        "enum": [
+                            "control",
+                            "variant"
+                        ],
+                        "type": "string"
+                    }
                 },
                 "pbIndexSites": {
                     "type": "array",
@@ -288,7 +296,6 @@
                 "avatarApiUrl",
                 "avatarImagesUrl",
                 "beaconUrl",
-                "brazeApiKey",
                 "buildNumber",
                 "calloutsUrl",
                 "commercialBundleUrl",
@@ -2591,6 +2598,7 @@
                 "CommentDesign",
                 "DeadBlogDesign",
                 "EditorialDesign",
+                "ExplainerDesign",
                 "FeatureDesign",
                 "FullPageInteractiveDesign",
                 "GalleryDesign",

@@ -150,6 +150,7 @@ const createLighthouseResultsMd = (): string => {
 };
 
 const getCommentID = async (): Promise<number | null> => {
+	if (!octokit) return null;
 	const { data: comments } = await octokit.rest.issues.listComments({
 		...GIHUB_PARAMS,
 	});
@@ -161,8 +162,14 @@ const getCommentID = async (): Promise<number | null> => {
 	return comment?.id ?? null;
 };
 
+const body = createLighthouseResultsMd();
+
+if (!octokit) {
+	console.log(body);
+	Deno.exit();
+}
+
 try {
-	const body = createLighthouseResultsMd();
 	const comment_id = await getCommentID();
 
 	const { data } = comment_id

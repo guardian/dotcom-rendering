@@ -8,6 +8,7 @@ import {
 } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
 import type { SubNavType } from '../../model/extract-nav';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
@@ -177,11 +178,13 @@ export const SubNav = ({ subNavSections, currentNavLink, format }: Props) => {
 			data-cy="sub-nav"
 			data-component="sub-nav"
 		>
+			{/* eslint-disable jsx-a11y/no-redundant-roles -- A11y fix for Safari {@see https://github.com/guardian/dotcom-rendering/pull/5041} */}
 			<ul
 				ref={ulRef}
 				css={[expandSubNav ? expandedStyles : collapsedStyles]}
 				role="list"
 			>
+				{/* eslint-enable jsx-a11y/no-redundant-roles */}
 				{subNavSections.parent && (
 					<li
 						key={subNavSections.parent.url}

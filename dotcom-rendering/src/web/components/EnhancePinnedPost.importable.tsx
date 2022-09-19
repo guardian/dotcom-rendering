@@ -27,10 +27,22 @@ function toggleShowMore(show: boolean) {
 	const pinnedPostOverlay = document.querySelector<HTMLElement>(
 		'#pinned-post-overlay',
 	);
-	if (pinnedPostButton)
-		pinnedPostButton.style.display = show ? 'inline-flex' : 'none';
-	if (pinnedPostOverlay)
-		pinnedPostOverlay.style.display = show ? 'block' : 'none';
+
+	if (pinnedPostButton) {
+		if (show) {
+			pinnedPostButton.style.removeProperty('display');
+		} else {
+			pinnedPostButton.style.display = 'none';
+		}
+	}
+
+	if (pinnedPostOverlay) {
+		if (show) {
+			pinnedPostOverlay.style.removeProperty('display');
+		} else {
+			pinnedPostOverlay.style.display = 'none';
+		}
+	}
 }
 
 /**

@@ -150,6 +150,7 @@ export const TextBlockComponent = ({
 				li {
 					margin-bottom: 6px;
 					padding-left: 20px;
+					display: flow-root;
 
 					p {
 						display: inline;
@@ -218,6 +219,11 @@ export const TextBlockComponent = ({
 						unwrappedElement: 'ul',
 						prefix: '<ul>',
 						suffix: '</ul>',
+					},
+					{
+						unwrappedElement: 'h3',
+						prefix: '<h3>',
+						suffix: '</h3>',
 					},
 				],
 				html,
