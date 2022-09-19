@@ -13,6 +13,39 @@ import { FrontCard } from '../components/FrontCard';
  * ' ' | '_'      => text / trail / supporting content
  */
 
+/* .___________________________________.
+ * |         ##########################|
+ * |         ###########(^)>###########|
+ * |         ###########(_)############|
+ * |         ##########################|
+ * |_________##########################|
+ */
+export const Card100 = ({
+	cards,
+	containerPalette,
+	showAge,
+}: {
+	cards: TrailType[];
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+}) => (
+	<UL>
+		<LI padSides={true}>
+			<FrontCard
+				trail={cards[0]}
+				containerPalette={containerPalette}
+				showAge={showAge}
+				imagePosition="right"
+				imagePositionOnMobile="top"
+				imageSize="jumbo"
+				headlineSize="huge"
+				headlineSizeOnMobile="large"
+				trailText={cards[0].trailText}
+			/>
+		</LI>
+	</UL>
+);
+
 /* ._________________._________________.
  * |#################|#################|
  * |#################|#################|

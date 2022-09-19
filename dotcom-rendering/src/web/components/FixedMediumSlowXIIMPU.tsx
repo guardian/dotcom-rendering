@@ -2,6 +2,7 @@
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import { Card100, Card50_Card50 } from '../lib/slices';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -13,80 +14,6 @@ type Props = {
 	showAge?: boolean;
 	index: number;
 };
-
-/* .___________________________________.
- * |         ##########################|
- * |         ###########(^)>###########|
- * |         ###########(_)############|
- * |         ##########################|
- * |_________##########################|
- */
-const Card100 = ({
-	trails,
-	containerPalette,
-	showAge,
-}: {
-	trails: TrailType[];
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-}) => (
-	<UL>
-		<LI padSides={true}>
-			<FrontCard
-				trail={trails[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				imagePosition="right"
-				imagePositionOnMobile="top"
-				imageSize="jumbo"
-				headlineSize="huge"
-				headlineSizeOnMobile="large"
-				trailText={trails[0].trailText}
-			/>
-		</LI>
-	</UL>
-);
-
-/* ._________________._________________.
- * |#################|#################|
- * |                 |                 |
- * |_________________|_________________|
- */
-const Card50_Card50 = ({
-	trails,
-	containerPalette,
-	showAge,
-}: {
-	trails: TrailType[];
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="50%" padSides={true}>
-			<FrontCard
-				trail={trails[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={trails[0].trailText}
-				imagePositionOnMobile="top"
-			/>
-		</LI>
-		<LI
-			percentage="50%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
-			<FrontCard
-				trail={trails[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={trails[1].trailText}
-				imagePositionOnMobile="top"
-			/>
-		</LI>
-	</UL>
-);
 
 /* .___________.___________.___________.
  * |###########|###########|###########|
@@ -290,7 +217,7 @@ export const FixedMediumSlowXIIMPU = ({
 		case 1: {
 			return (
 				<Card100
-					trails={trails}
+					cards={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
 				/>
@@ -299,7 +226,7 @@ export const FixedMediumSlowXIIMPU = ({
 		case 2: {
 			return (
 				<Card50_Card50
-					trails={trails}
+					cards={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
 				/>
