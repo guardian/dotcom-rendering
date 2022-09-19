@@ -150,6 +150,7 @@ export const TextBlockComponent = ({
 				li {
 					margin-bottom: 6px;
 					padding-left: 20px;
+					display: flow-root;
 
 					p {
 						display: inline;

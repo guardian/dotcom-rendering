@@ -21,6 +21,7 @@ import {
 	fromNullable,
 	map,
 	none,
+	OptionKind,
 	some,
 	withDefault,
 } from '@guardian/types';
@@ -235,7 +236,12 @@ const textElement =
 		);
 		switch (node.nodeName) {
 			case 'P': {
+				if (text === '* * *') {
+					return children;
+				}
+
 				const showDropCap = shouldShowDropCap(text, format, isEditions);
+
 				return h(
 					Paragraph,
 					{ key, format, showDropCap, isEditions },
@@ -397,12 +403,18 @@ const imageRenderer = (
 	key: number,
 ): ReactNode => {
 	const { caption, credit, nativeCaption } = element;
+
+	const maybeCaption =
+		caption.kind === OptionKind.Some || credit.kind === OptionKind.Some
+			? some([
+					h(Caption, { format, caption }),
+					h(Credit, { credit, format, key }),
+			  ])
+			: none;
+
 	return h(BodyImage, {
-		caption: some([
-			h(Caption, { format, caption }),
-			h(Credit, { credit, format, key }),
-		]),
-		format: format,
+		caption: maybeCaption,
+		format,
 		key,
 		supportsDarkMode: true,
 		lightbox: some({
@@ -556,7 +568,7 @@ const mediaAtomRenderer = (
 		'data-posterUrl': posterUrl,
 		'data-videoId': videoId,
 		'data-duration': duration,
-		className: 'native-video',
+		className: 'js-native-video',
 		css: styles,
 	};
 	const figcaption = h(FigCaption, {
