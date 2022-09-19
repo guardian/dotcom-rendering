@@ -12,13 +12,14 @@ import {
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
 import LabsLogo from '../../static/logos/the-guardian-labs.svg';
+import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { Dropdown } from './Dropdown';
 
 const FlexWrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			position: relative;
-			height: 55px;
+			height: ${LABS_HEADER_HEIGHT}px;
 			display: flex;
 			justify-content: space-between;
 		`}

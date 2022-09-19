@@ -56,6 +56,8 @@ export const decideDesign = ({
 			return ArticleDesign.FullPageInteractive;
 		case 'NewsletterSignupDesign':
 			return ArticleDesign.NewsletterSignup;
+		case 'ExplainerDesign':
+			return ArticleDesign.Explainer;
 		default:
 			return ArticleDesign.Standard;
 	}

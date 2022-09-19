@@ -1,3 +1,4 @@
+import type { ConfigType } from '../../types/config';
 import { generatePermutivePayload } from './permutive';
 
 describe('generatePermutivePayload', () => {

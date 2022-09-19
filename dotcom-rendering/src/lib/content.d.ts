@@ -509,7 +509,7 @@ interface WitnessTypeDataImage extends WitnessTypeDataBase {
 	_type: 'model.dotcomrendering.pageElements.WitnessTypeDataImage';
 	type: 'image';
 	alt: string;
-	caption: string;
+	caption?: string;
 	mediaId: string;
 	photographer: string;
 }
@@ -683,10 +683,6 @@ interface TimelineEvent {
 	toUnixDate?: number;
 }
 
-interface Switches {
-	[key: string]: boolean;
-}
-
 type RatingSizeType = 'large' | 'medium' | 'small';
 
 // -------------------------------------
@@ -791,4 +787,5 @@ type Newsletter = {
 	successDescription: string;
 	theme: string;
 	group: string;
+	regionFocus?: string;
 };

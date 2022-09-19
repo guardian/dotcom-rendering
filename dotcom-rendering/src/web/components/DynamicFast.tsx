@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import { until } from '@guardian/source-foundations';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
+import type { TrailType } from '../../types/trails';
+import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -524,18 +526,11 @@ export const DynamicFast = ({
 											stretch={true}
 											showDivider={true}
 											padSides={true}
-											padBottom={
-												// Never give bottom margin to the last card
-												// cardIndex !== standards.length - 1 &&
-												// Any cards not on the bottom row!
-												cardIndex <
-												standards.length -
-													// Get leftover (modulo), if none fall back to columns as the whole bottom row
-													// won't want to be padded
-													(standards.length %
-														standardsDisplayConfig.columns ||
-														standardsDisplayConfig.columns)
-											}
+											padBottom={shouldPadWrappableRows(
+												cardIndex,
+												standards.length,
+												standardsDisplayConfig.columns,
+											)}
 											padBottomOnMobile={
 												cardIndex < standards.length - 1
 											}

@@ -12,6 +12,8 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
+import type { NavType } from '../../model/extract-nav';
+import type { CAPIArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -30,6 +32,7 @@ import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeadlineByline } from '../components/HeadlineByline';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
@@ -221,6 +224,8 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
+	const isLabs = format.theme === ArticleSpecial.Labs;
+
 	return (
 		<>
 			<ImmersiveHeader
@@ -324,7 +329,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 						<GridItem area="lines">
 							{format.design === ArticleDesign.PhotoEssay &&
-							format.theme !== ArticleSpecial.Labs ? (
+							!isLabs ? (
 								<></>
 							) : (
 								<div css={maxWidth}>
@@ -361,7 +366,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									shortUrlId={CAPIArticle.config.shortUrlId}
 									ajaxUrl={CAPIArticle.config.ajaxUrl}
 									showShareCount={
-										CAPIArticle.config.switches
+										!!CAPIArticle.config.switches
 											.serverShareCounts
 									}
 								/>
@@ -396,6 +401,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									isPreview={CAPIArticle.config.isPreview}
 									idUrl={CAPIArticle.config.idUrl || ''}
 									isDev={!!CAPIArticle.config.isDev}
+									abTests={CAPIArticle.config.abTests}
 								/>
 								{showBodyEndSlot && (
 									<Island clientOnly={true}>
@@ -479,17 +485,19 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													margin-top: ${space[4]}px;
 												`}
 											>
-												<AdSlot
-													position="right"
-													display={format.display}
-													shouldHideReaderRevenue={
-														CAPIArticle.shouldHideReaderRevenue
-													}
-													isPaidContent={
-														CAPIArticle.pageType
-															.isPaidContent
-													}
-												/>
+												{!CAPIArticle.shouldHideAds && (
+													<AdSlot
+														position="right"
+														display={format.display}
+														shouldHideReaderRevenue={
+															CAPIArticle.shouldHideReaderRevenue
+														}
+														isPaidContent={
+															CAPIArticle.pageType
+																.isPaidContent
+														}
+													/>
+												)}
 											</div>
 										)}
 									</>
@@ -498,21 +506,21 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</ImmersiveGrid>
 				</Section>
-
-				<Section
-					fullWidth={true}
-					padSides={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot
-						position="merchandising-high"
-						display={format.display}
-					/>
-				</Section>
-
+				{!isLabs && (
+					<Section
+						fullWidth={true}
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
+						element="aside"
+					>
+						<AdSlot
+							position="merchandising-high"
+							display={format.display}
+						/>
+					</Section>
+				)}
 				{CAPIArticle.onwards ? (
 					<DecideOnwards
 						onwards={CAPIArticle.onwards}
@@ -530,7 +538,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										trails={CAPIArticle.storyPackage.trails.map(
 											decideTrail,
 										)}
-										onwardsType="more-on-this-story"
+										onwardsSource="more-on-this-story"
 										format={format}
 									/>
 								</Island>
@@ -565,7 +573,6 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</Island>
 					</>
 				)}
-
 				{!isPaidContent && showComments && (
 					<Section
 						fullWidth={true}
@@ -583,7 +590,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								CAPIArticle.config.discussionApiClientHeader
 							}
 							enableDiscussionSwitch={
-								CAPIArticle.config.switches
+								!!CAPIArticle.config.switches
 									.enableDiscussionSwitch
 							}
 							isAdFreeUser={CAPIArticle.isAdFreeUser}
@@ -591,31 +598,42 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					</Section>
 				)}
-
 				{!isPaidContent && (
 					<Section
-						fullWidth={true}
+						title="Most viewed"
+						padContent={false}
+						verticalMargins={false}
+						element="aside"
 						data-print-layout="hide"
+						data-link-name="most-popular"
+						data-component="most-popular"
+					>
+						<MostViewedFooterLayout>
+							<Island clientOnly={true} deferUntil="visible">
+								<MostViewedFooterData
+									sectionName={CAPIArticle.sectionName}
+									format={format}
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
+								/>
+							</Island>
+						</MostViewedFooterLayout>
+					</Section>
+				)}
+				{!isLabs && (
+					<Section
+						fullWidth={true}
+						padSides={false}
+						showTopBorder={false}
+						showSideBorders={false}
+						backgroundColour={neutral[93]}
 						element="aside"
 					>
-						<MostViewedFooterLayout
-							format={format}
-							sectionName={CAPIArticle.sectionName}
-							ajaxUrl={CAPIArticle.config.ajaxUrl}
+						<AdSlot
+							position="merchandising"
+							display={format.display}
 						/>
 					</Section>
 				)}
-
-				<Section
-					fullWidth={true}
-					padSides={false}
-					showTopBorder={false}
-					showSideBorders={false}
-					backgroundColour={neutral[93]}
-					element="aside"
-				>
-					<AdSlot position="merchandising" display={format.display} />
-				</Section>
 			</main>
 
 			{NAV.subNavSections && (
@@ -668,10 +686,10 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							CAPIArticle.shouldHideReaderRevenue
 						}
 						remoteBannerSwitch={
-							CAPIArticle.config.switches.remoteBanner
+							!!CAPIArticle.config.switches.remoteBanner
 						}
 						puzzleBannerSwitch={
-							CAPIArticle.config.switches.puzzlesBanner
+							!!CAPIArticle.config.switches.puzzlesBanner
 						}
 						tags={CAPIArticle.tags}
 					/>

@@ -74,6 +74,7 @@ module.exports = {
 		'airbnb-typescript',
 		'prettier',
 		'plugin:@guardian/source-react-components/recommended',
+		'plugin:jsx-a11y/recommended',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
@@ -102,6 +103,20 @@ module.exports = {
 		'react/no-danger': 'off', // We use `dangerouslySetInnerHTML` in several components
 		'react/prop-types': [0],
 		'jsx-expressions/strict-logical-expressions': 'error',
+		'jsx-a11y/aria-role': [
+			'error',
+			{
+				/**
+				 * As we use the `role` prop for editorial weighting,
+				 * we do not want to check developer-created components’
+				 * use of the `role` attribute.
+				 *
+				 * @see RoleType
+				 * @see https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/main/docs/rules/aria-role.md#rule-details
+				 */
+				ignoreNonDOM: true,
+			},
+		],
 
 		'array-callback-return': 'error',
 		'global-require': 'error',
@@ -113,11 +128,15 @@ module.exports = {
 		'no-underscore-dangle': ['warn', { allow: ['_type'] }],
 		'no-useless-escape': 'error',
 
+		'object-shorthand': ['error', 'always'],
+
 		'import/no-extraneous-dependencies': [
 			'error',
 			// https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md#options
 			{ packageDir: ['..', '.'] },
 		],
+
+		'id-denylist': ['error', 'whitelist', 'whiteList', 'WHITELIST'],
 
 		...rulesToReview,
 		...rulesToEnforce,

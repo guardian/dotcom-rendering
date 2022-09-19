@@ -2,6 +2,8 @@ import { enhanceBlockquotes } from './enhance-blockquotes';
 import { enhanceDividers } from './enhance-dividers';
 import { enhanceDots } from './enhance-dots';
 import { enhanceEmbeds } from './enhance-embeds';
+import { enhanceH2s } from './enhance-H2s';
+import { enhanceH3s } from './enhance-H3s';
 import { enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
@@ -41,6 +43,16 @@ class BlockEnhancer {
 
 	enhanceDots() {
 		this.blocks = enhanceDots(this.blocks);
+		return this;
+	}
+
+	enhanceH2s() {
+		this.blocks = enhanceH2s(this.blocks);
+		return this;
+	}
+
+	enhanceH3s() {
+		this.blocks = enhanceH3s(this.blocks, this.format);
 		return this;
 	}
 
@@ -85,6 +97,8 @@ export const enhanceBlocks = (
 ): Block[] => {
 	return new BlockEnhancer(blocks, format, promotedNewsletter)
 		.enhanceDividers()
+		.enhanceH3s()
+		.enhanceH2s()
 		.enhanceInteractiveContentsElements()
 		.enhanceBlockquotes()
 		.enhanceDots()

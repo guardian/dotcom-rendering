@@ -22,6 +22,8 @@ import {
 } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
+import type { NavType } from '../../model/extract-nav';
+import type { CAPIArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
@@ -48,14 +50,6 @@ import { decideTrail } from '../lib/decideTrail';
 import { isValidUrl } from '../lib/isValidUrl';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, Stuck } from './lib/stickiness';
-
-// This Layout is not currently in use.
-// It is an outline of a design for articles with the ArticleDesign.NewsletterSignup
-// which are currently rendered using the standard layout.
-// The full version of the design is to be implemented by the newsletters team.
-
-// to use this layout, edit ./dotcom-rendering/src/web/layouts/DecideLayout.tsx
-// to return is on articles with  ArticleDisplay.Standard && ArticleDesign.NewsletterSignup
 
 type Props = {
 	CAPIArticle: CAPIArticleType;
@@ -95,7 +89,7 @@ const mainColNewsLettersBadgeContainerStyle = css`
 		bottom: -10px;
 
 		${until.wide} {
-			bottom: -9px;
+			bottom: -8px;
 		}
 
 		${until.leftCol} {
@@ -109,7 +103,6 @@ const leftColWrapperStyle = css`
 	display: flex;
 	justify-content: flex-end;
 	margin-top: ${space[2]}px;
-	margin-bottom: ${space[9]}px;
 `;
 
 const previewButtonWrapperStyle = css`
@@ -178,12 +171,9 @@ const getMainMediaCaptions = (
 			: undefined,
 	);
 
-export const NewsletterSignupLayout: React.FC<Props> = ({
-	CAPIArticle,
-	NAV,
-	format,
-}) => {
+export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
+		promotedNewsletter,
 		config: { host },
 	} = CAPIArticle;
 
@@ -200,6 +190,11 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 
 	const palette = decidePalette(format);
 
+	const regionalFocusText = promotedNewsletter?.regionFocus
+		? `${promotedNewsletter.regionFocus} Focused`
+		: '';
+	const showRegionalFocus = Boolean(regionalFocusText);
+
 	/**	Newsletter preview will be linked if the caption of the main media is a URL */
 	const captions = getMainMediaCaptions(CAPIArticle);
 	const newsletterPreviewUrl = captions
@@ -207,27 +202,27 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 		.find((caption) => !!caption && isValidUrl(caption));
 	const showNewsletterPreview = Boolean(newsletterPreviewUrl);
 
-	/** TODO: this data needs to come from the newsletters API */
-	const newsletterRegionFocus = 'UK Focused';
+	/**
+	 * This property currently only applies to the header and merchandising slots
+	 */
+	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
-				<Stuck>
-					<Section
-						fullWidth={true}
-						showTopBorder={false}
-						showSideBorders={false}
-						padSides={false}
-						shouldCenter={false}
-					>
-						<HeaderAdSlot
-							isAdFreeUser={CAPIArticle.isAdFreeUser}
-							shouldHideAds={CAPIArticle.shouldHideAds}
-							display={format.display}
-						/>
-					</Section>
-				</Stuck>
+				{renderAds && (
+					<Stuck>
+						<Section
+							fullWidth={true}
+							showTopBorder={false}
+							showSideBorders={false}
+							padSides={false}
+							shouldCenter={false}
+						>
+							<HeaderAdSlot display={format.display} />
+						</Section>
+					</Stuck>
+				)}
 
 				<Section
 					fullWidth={true}
@@ -246,7 +241,9 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 						}
 						discussionApiUrl={CAPIArticle.config.discussionApiUrl}
 						urls={CAPIArticle.nav.readerRevenueLinks.header}
-						remoteHeader={CAPIArticle.config.switches.remoteHeader}
+						remoteHeader={
+							!!CAPIArticle.config.switches.remoteHeader
+						}
 						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPIArticle.config.idApiUrl}
 					/>
@@ -307,7 +304,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 				)}
 			</div>
 
-			{!!CAPIArticle.config.switches.surveys && (
+			{renderAds && !!CAPIArticle.config.switches.surveys && (
 				<AdSlot position="survey" display={format.display} />
 			)}
 
@@ -350,18 +347,22 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 					showTopBorder={false}
 					stretchRight={true}
 					leftContent={
-						<div css={topMarginStyle(space[4])}>
-							<NewsletterDetail text={newsletterRegionFocus} />
-						</div>
+						showRegionalFocus && (
+							<div css={topMarginStyle(space[4])}>
+								<NewsletterDetail text={regionalFocusText} />
+							</div>
+						)
 					}
 				>
 					<Columns collapseUntil="desktop">
 						<Column width={[1, 1, 5 / 8, 1 / 2, 1 / 2]}>
-							<Hide from="leftCol">
-								<NewsletterDetail
-									text={newsletterRegionFocus}
-								/>
-							</Hide>
+							{showRegionalFocus && (
+								<Hide from="leftCol">
+									<NewsletterDetail
+										text={regionalFocusText}
+									/>
+								</Hide>
+							)}
 							<ArticleHeadline
 								format={format}
 								headlineString={CAPIArticle.headline}
@@ -371,12 +372,10 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 									CAPIArticle.webPublicationDateDeprecated
 								}
 							/>
-
 							<Standfirst
 								format={format}
 								standfirst={CAPIArticle.standfirst}
 							/>
-
 							{showNewsletterPreview && (
 								<div css={previewButtonWrapperStyle}>
 									<LinkButton
@@ -391,15 +390,24 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 									</LinkButton>
 								</div>
 							)}
+							{!!promotedNewsletter && (
+								<>
+									<SecureSignup
+										name={promotedNewsletter.name}
+										newsletterId={
+											promotedNewsletter.identityName
+										}
+										successDescription={
+											promotedNewsletter.successDescription
+										}
+										hidePrivacyMessage={true}
+									/>
 
-							<SecureSignup
-								newsletterId="1234"
-								successDescription="nice"
-								hidePrivacyMessage={true}
-							/>
-
-							<NewsletterFrequency frequency="Weekly" />
-
+									<NewsletterFrequency
+										frequency={promotedNewsletter.frequency}
+									/>
+								</>
+							)}
 							<div css={shareDivStyle}>
 								<span css={shareSpanStyle}>
 									Tell your friends
@@ -467,7 +475,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 				) : (
 					<>
 						{CAPIArticle.storyPackage && (
-							<Section fullWidth={true} showTopBorder={false}>
+							<Section fullWidth={true}>
 								<Island deferUntil="visible">
 									<Carousel
 										heading={
@@ -476,7 +484,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 										trails={CAPIArticle.storyPackage.trails.map(
 											decideTrail,
 										)}
-										onwardsType="more-on-this-story"
+										onwardsSource="more-on-this-story"
 										format={format}
 									/>
 								</Island>
@@ -495,7 +503,7 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 								isAdFreeUser={CAPIArticle.isAdFreeUser}
 								pageId={CAPIArticle.pageId}
 								isPaidContent={
-									CAPIArticle.config.isPaidContent || false
+									CAPIArticle.config.isPaidContent ?? false
 								}
 								showRelatedContent={
 									CAPIArticle.config.showRelatedContent

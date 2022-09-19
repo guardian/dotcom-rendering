@@ -96,6 +96,19 @@ const merchandisingAdStyles = css`
 	min-height: 250px;
 `;
 
+const mostPopAdStyles = css`
+	position: relative;
+	min-height: 274px;
+	min-width: 300px;
+	width: 300px;
+	margin: 12px auto;
+	text-align: center;
+	${from.desktop} {
+		margin: 0;
+		width: auto;
+	}
+`;
+
 /**
  * For implementation in Frontend, see mark: dca5c7dd-dda4-4922-9317-a55a3789fe4c
  * These styles come mostly from RichLink in DCR.
@@ -312,7 +325,6 @@ export const AdSlot = ({
 			`;
 			return (
 				<>
-					<AdSlotLabelToggled />
 					<div
 						id="dfp-ad--top-above-nav"
 						className={[
@@ -326,7 +338,9 @@ export const AdSlot = ({
 						data-link-name="ad slot top-above-nav"
 						data-name="top-above-nav"
 						aria-hidden="true"
-					/>
+					>
+						<AdSlotLabelToggled />
+					</div>
 				</>
 			);
 		}
@@ -341,12 +355,7 @@ export const AdSlot = ({
 						'ad-slot--mpu-banner-ad',
 						'ad-slot--rendered',
 					].join(' ')}
-					css={[
-						css`
-							position: relative;
-						`,
-						adStyles,
-					]}
+					css={[adStyles, mostPopAdStyles]}
 					data-link-name="ad slot mostpop"
 					data-name="mostpop"
 					aria-hidden="true"
@@ -370,6 +379,7 @@ export const AdSlot = ({
 					data-link-name="ad slot merchandising-high"
 					data-name="merchandising-high"
 					aria-hidden="true"
+					data-label="false"
 				/>
 			);
 		}
@@ -390,6 +400,7 @@ export const AdSlot = ({
 					data-link-name="ad slot merchandising"
 					data-name="merchandising"
 					aria-hidden="true"
+					data-label="false"
 				/>
 			);
 		}

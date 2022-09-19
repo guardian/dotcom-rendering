@@ -1,3 +1,9 @@
+import type { Branding } from '../types/branding';
+import type {
+	CommercialProperties,
+	EditionCommercialProperties,
+} from '../types/commercial';
+
 /**
  * Sponsorship logo should never be wider than 140px.
  * This method returns dimensions in the correct aspect ratio,

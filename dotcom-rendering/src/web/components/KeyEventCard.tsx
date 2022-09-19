@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { timeAgo } from '@guardian/libs';
 import { from, space, textSans } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 
 interface Props {

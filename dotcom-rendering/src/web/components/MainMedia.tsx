@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { until } from '@guardian/source-foundations';
+import type { Switches } from '../../types/config';
 import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
 
@@ -78,7 +79,7 @@ export const MainMedia: React.FC<{
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	switches: { [key: string]: boolean };
+	switches: Switches;
 }> = ({
 	elements,
 	format,
