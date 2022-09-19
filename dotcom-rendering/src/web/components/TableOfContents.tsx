@@ -1,4 +1,3 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { line, neutral, space, textSans } from '@guardian/source-foundations';
 import {
@@ -11,29 +10,30 @@ interface Props {
 	tableOfContents: TableOfContentsItem[];
 }
 
-const anchorStyles: SerializedStyles = css`
+const anchorStyles = css`
 	color: black;
 	text-decoration: none;
 `;
 
-const listItemStyles: SerializedStyles = css`
+const listItemStyles = css`
 	${textSans.xsmall({ fontWeight: 'bold', lineHeight: 'regular' })}
 	border-bottom: 1px solid ${line.primary};
 	padding: 6px 0;
 `;
 
-const detailsStyles: SerializedStyles = css`
+const detailsStyles = css`
 	padding: 6px 0;
 	&:not([open]) .is-on,
 	&[open] .is-off {
 		display: none;
 	}
+	/* removes toggle triangle from webkit browsers such as Safari */
 	summary::-webkit-details-marker {
 		display: none;
 	}
 `;
 
-const summaryStyles: SerializedStyles = css`
+const summaryStyles = css`
 	cursor: pointer;
 	position: relative;
 	list-style: none;
@@ -50,12 +50,12 @@ const summaryStyles: SerializedStyles = css`
 	}
 `;
 
-const titleStyle: SerializedStyles = css`
+const titleStyle = css`
 	${textSans.xsmall({ lineHeight: 'regular' })}
 	color: ${neutral[46]};
 `;
 
-const arrowPosition: SerializedStyles = css`
+const arrowPosition = css`
 	position: absolute;
 	right: ${space[1]}px;
 	top: 0;
