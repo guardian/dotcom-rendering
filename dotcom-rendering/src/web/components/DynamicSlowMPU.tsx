@@ -2,7 +2,7 @@
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
-import { Card50_Card50, Card75_Card25 } from '../lib/dynamicSlices';
+import { Card50_Card50, Card75_Card25 } from '../lib/slices';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';

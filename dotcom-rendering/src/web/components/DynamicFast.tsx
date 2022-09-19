@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { until } from '@guardian/source-foundations';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
-import { shouldPadWrappableRows } from '../lib/dynamicSlices';
+import { shouldPadWrappableRows } from '../lib/slices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';

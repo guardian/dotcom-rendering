@@ -6,7 +6,7 @@ import {
 	Card50_Card50,
 	Card75_Card25,
 	shouldPadWrappableRows,
-} from '../lib/dynamicSlices';
+} from '../lib/slices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
