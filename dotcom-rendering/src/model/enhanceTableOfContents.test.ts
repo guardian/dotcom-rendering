@@ -29,17 +29,17 @@ describe('Enhance Table of Contents', () => {
 				elements: [
 					{
 						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-						elementId: '<h2> id=first-h2-text</h2>',
+						elementId: 'h2One',
 						html: "<h2 id='first-h2-text'><strong>First h2 text</strong></h2>",
 					},
 					{
 						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-						elementId: '<h2> id=second-h2-text</h2>',
+						elementId: 'h2Two',
 						html: "<h2 id='second-h2-text'><strong>Second h2 text</strong></h2>",
 					},
 					{
 						_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
-						elementId: '<h2> id=third-h2-text</h2>',
+						elementId: 'h2Three',
 						html: "<h2 id='third-h2-text'><strong>Third h2 text</strong></h2>",
 					},
 				],
