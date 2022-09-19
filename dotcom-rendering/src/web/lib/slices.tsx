@@ -142,6 +142,47 @@ export const Card33_Card33_Card33 = ({
 	</UL>
 );
 
+/* ._______________________.___________.
+ * |#######################|###########|
+ * |                       |           |
+ * |_______________________|___________|
+ */
+export const Card66_Card33 = ({
+	cards,
+	containerPalette,
+	showAge,
+}: {
+	cards: TrailType[];
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+}) => (
+	<UL direction="row" padBottom={true}>
+		<LI percentage="66.666%" padSides={true}>
+			<FrontCard
+				trail={cards[0]}
+				containerPalette={containerPalette}
+				showAge={showAge}
+				trailText={cards[0].trailText}
+				imagePositionOnMobile="top"
+			/>
+		</LI>
+		<LI
+			percentage="33.333%"
+			padSides={true}
+			showTopMarginWhenStacked={true}
+			showDivider={true}
+		>
+			<FrontCard
+				trail={cards[1]}
+				containerPalette={containerPalette}
+				showAge={showAge}
+				trailText={cards[1].trailText}
+				imagePositionOnMobile="left"
+			/>
+		</LI>
+	</UL>
+);
+
 /* ._________________.________.________.
  * |#################|########|########|
  * |                 |        |        |
