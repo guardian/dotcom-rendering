@@ -12,7 +12,7 @@ import type { PillarType } from '../../../../model/extract-nav';
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS
-export const hideDesktop = css`
+const hideDesktop = css`
 	${from.desktop} {
 		display: none;
 	}

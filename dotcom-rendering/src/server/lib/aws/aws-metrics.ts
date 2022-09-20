@@ -45,44 +45,6 @@ const collectAndSendAWSMetrics = (...metrics: Metric[]): void => {
 	}, METRICS_TIME_RESOLUTION);
 };
 
-// to record things like latency
-
-const TimingMetric = (
-	app: string,
-	stage: string,
-	metricName: string,
-): { recordDuration: (n: number) => void; send: () => void } => {
-	const values: number[] = [];
-
-	return {
-		recordDuration: (n: number) => {
-			values.push(n);
-		},
-
-		send: () => {
-			sendMetric(
-				values.map((v) => ({
-					Dimensions: [
-						{
-							Name: 'ApplicationName',
-							Value: app,
-						},
-						{
-							Name: 'Stage',
-							Value: stage,
-						},
-					],
-					MetricName: metricName,
-					Unit: 'Milliseconds',
-					Value: v,
-				})),
-			);
-
-			values.length = 0;
-		},
-	};
-};
-
 // to record memory or file sizes
 
 const BytesMetric = (
@@ -121,4 +83,4 @@ const BytesMetric = (
 	};
 };
 
-export { collectAndSendAWSMetrics, BytesMetric, TimingMetric };
+export { collectAndSendAWSMetrics, BytesMetric };
