@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 // eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
+import Accordion from '@guardian/common-rendering/src/components/accordion';
+// eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
 import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
 import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
@@ -300,9 +302,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	 */
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
-	const isMainMediaTest = true;
-	// CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant ===
-	// 'variant';
+	const isMainMediaTest =
+		CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant ===
+		'variant';
 
 	return (
 		<>
@@ -1059,7 +1061,11 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											</ArticleContainer>
 										</div>
 									) : (
-										<div css={paddingBody}>
+										<Accordion
+											supportsDarkMode={false}
+											accordionTitle="Live feed"
+											context="liveFeed"
+										>
 											<ArticleContainer format={format}>
 												{pagination.currentPage !==
 													1 && (
@@ -1208,7 +1214,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													badge={CAPIArticle.badge}
 												/>
 											</ArticleContainer>
-										</div>
+										</Accordion>
 									)}
 								</div>
 							</GridItem>
