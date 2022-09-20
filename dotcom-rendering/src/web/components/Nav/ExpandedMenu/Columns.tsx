@@ -219,7 +219,7 @@ export const Columns: React.FC<{
 			</li>
 
 			<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
-
+			{/* This is where the edition dropdown is inserted					 */}
 			<Column
 				column={{
 					...activeEdition,
