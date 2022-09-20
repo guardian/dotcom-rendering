@@ -6,14 +6,17 @@ import {
 	render as renderAMPArticle,
 	renderPerfTest as renderAMPArticlePerfTest,
 } from '../amp/server';
+import type { CAPIArticleType } from '../types/frontend';
 import {
 	renderArticle,
 	renderArticleJson,
 	renderPerfTest as renderArticlePerfTest,
 	renderBlocks,
 	renderFront,
+	renderFrontJson,
 	renderInteractive,
 	renderKeyEvents,
+	renderOnwards,
 } from '../web/server';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
@@ -56,7 +59,9 @@ export const prodServer = (): void => {
 	app.post('/AMPInteractive', logRenderTime, renderAMPArticle);
 	app.post('/Blocks', logRenderTime, renderBlocks);
 	app.post('/KeyEvents', logRenderTime, renderKeyEvents);
+	app.post('/Onwards', logRenderTime, renderOnwards);
 	app.post('/Front', logRenderTime, renderFront);
+	app.post('/FrontJSON', logRenderTime, renderFrontJson);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
@@ -102,6 +107,21 @@ export const prodServer = (): void => {
 		},
 	);
 
+	app.get(
+		'/FrontJSON',
+		logRenderTime,
+		// TODO: ensure getContentFromURLMiddleware supports fronts
+		getContentFromURLMiddleware,
+		async (req: Request, res: Response) => {
+			// Eg. http://localhost:9000/FrontJSON?url=https://www.theguardian.com/uk/sport
+			try {
+				return renderFrontJson(req, res);
+			} catch (error) {
+				console.error(error);
+			}
+		},
+	);
+
 	app.use('/ArticlePerfTest', renderArticlePerfTest);
 	app.use('/AMPArticlePerfTest', renderAMPArticlePerfTest);
 	app.use('/ArticleJson', renderArticleJson);
@@ -126,16 +146,20 @@ export const prodServer = (): void => {
                 </html>
             `);
 		} catch (e) {
-			const error = e as Error;
-			res.status(500).send(`<pre>${error.stack}</pre>`);
+			const message =
+				e instanceof Error
+					? e.stack ?? 'Unknown stack'
+					: 'Unknown error';
+			res.status(500).send(`<pre>${message}</pre>`);
 		}
 	});
 
 	// express requires all 4 args here:
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	app.use((e: any, req: any, res: Response, next: any) => {
-		const error = e as Error;
-		res.status(500).send(`<pre>${error.stack}</pre>`);
+		const message =
+			e instanceof Error ? e.stack ?? 'Unknown stack' : 'Unknown error';
+		res.status(500).send(`<pre>${message}</pre>`);
 	});
 
 	if (process.env.DISABLE_LOGGING_AND_METRICS !== 'true') {

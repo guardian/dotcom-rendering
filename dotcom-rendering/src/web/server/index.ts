@@ -4,39 +4,59 @@ import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
-import { extract as extractGA } from '../../model/extract-ga';
-import { extractNAV } from '../../model/extract-nav';
+import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
+import type { DCRFrontType, FEFrontType } from '../../types/front';
+import type { CAPIArticleType } from '../../types/frontend';
+import type { CAPIOnwards } from '../../types/onwards';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
+import { onwardsToHtml } from './onwardsToHtml';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
 }
 
-const enhanceCAPIType = (body: Record<string, unknown>): CAPIArticleType => {
+const enhanceCAPIType = (body: unknown): CAPIArticleType => {
 	const data = validateAsCAPIType(body);
+
+	const enhancedBlocks = enhanceBlocks(
+		data.blocks,
+		data.format,
+		data.promotedNewsletter,
+	);
+
 	const CAPIArticle: CAPIArticleType = {
 		...data,
-		blocks: enhanceBlocks(data.blocks, data.format),
+		blocks: enhancedBlocks,
 		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
 		standfirst: enhanceStandfirst(data.standfirst),
 		commercialProperties: enhanceCommercialProperties(
 			data.commercialProperties,
 		),
+		tableOfContents: data.config.switches.tableOfContents
+			? enhanceTableOfContents(data.format, enhancedBlocks)
+			: undefined,
 	};
 	return CAPIArticle;
 };
 
-const enhanceFront = (body: Record<string, unknown>): DCRFrontType => {
+const getStack = (e: unknown): string =>
+	e instanceof Error ? e.stack ?? 'No error stack' : 'Unknown error';
+
+const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
 	return {
 		...data,
 		pressedPage: {
 			...data.pressedPage,
-			collections: enhanceCollections(data.pressedPage.collections),
+			collections: enhanceCollections(
+				data.pressedPage.collections,
+				data.editionId,
+				data.pageId,
+			),
 		},
 	};
 };
@@ -46,22 +66,14 @@ export const renderArticle = (
 	res: express.Response,
 ): void => {
 	try {
-		const CAPIArticle = enhanceCAPIType(body);
+		const article = enhanceCAPIType(body);
 		const resp = articleToHtml({
-			data: {
-				CAPIArticle,
-				site: 'frontend',
-				page: 'Article',
-				NAV: extractNAV(CAPIArticle.nav),
-				GA: extractGA(CAPIArticle),
-				linkedData: CAPIArticle.linkedData,
-			},
+			article,
 		});
 
 		res.status(200).send(resp);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -74,18 +86,12 @@ export const renderArticleJson = (
 		const resp = {
 			data: {
 				CAPIArticle,
-				site: 'frontend',
-				page: 'Article',
-				NAV: extractNAV(CAPIArticle.nav),
-				GA: extractGA(CAPIArticle),
-				linkedData: CAPIArticle.linkedData,
 			},
 		};
 
 		res.status(200).send(resp);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -102,22 +108,14 @@ export const renderInteractive = (
 	res: express.Response,
 ): void => {
 	try {
-		const CAPIArticle = enhanceCAPIType(body);
+		const article = enhanceCAPIType(body);
 		const resp = articleToHtml({
-			data: {
-				CAPIArticle,
-				site: 'frontend',
-				page: 'Interactive',
-				NAV: extractNAV(CAPIArticle.nav),
-				GA: extractGA(CAPIArticle),
-				linkedData: CAPIArticle.linkedData,
-			},
+			article,
 		});
 
 		res.status(200).send(resp);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -163,8 +161,7 @@ export const renderBlocks = (
 
 		res.status(200).send(html);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -183,8 +180,30 @@ export const renderKeyEvents = (
 
 		res.status(200).send(html);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
+	}
+};
+
+export const renderOnwards = (
+	{ body }: { body: CAPIOnwards },
+	res: express.Response,
+): void => {
+	try {
+		const { heading, description, url, onwardsSource, trails, format } =
+			body;
+
+		const html = onwardsToHtml({
+			heading,
+			description,
+			url,
+			onwardsSource,
+			trails,
+			format,
+		});
+
+		res.status(200).send(html);
+	} catch (e) {
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
 };
 
@@ -196,11 +215,16 @@ export const renderFront = (
 		const front = enhanceFront(body);
 		const html = frontToHtml({
 			front,
-			NAV: extractNAV(front.nav),
 		});
 		res.status(200).send(html);
 	} catch (e) {
-		const message = e instanceof Error ? e.stack : 'Unknown Error';
-		res.status(500).send(`<pre>${message}</pre>`);
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
+};
+
+export const renderFrontJson = (
+	{ body }: express.Request,
+	res: express.Response,
+): void => {
+	res.json(enhanceFront(body));
 };

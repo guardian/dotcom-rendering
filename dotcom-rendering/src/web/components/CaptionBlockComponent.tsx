@@ -7,7 +7,7 @@ type Props = {
 	credit?: string;
 	displayCredit?: boolean;
 	shouldLimitWidth?: boolean;
-	isOverlayed?: boolean;
+	isOverlaid?: boolean;
 };
 
 export const CaptionBlockComponent = ({
@@ -17,7 +17,7 @@ export const CaptionBlockComponent = ({
 	credit,
 	displayCredit = true,
 	shouldLimitWidth = false,
-	isOverlayed,
+	isOverlaid,
 }: Props) => (
 	<Caption
 		format={format}
@@ -26,6 +26,6 @@ export const CaptionBlockComponent = ({
 		credit={credit}
 		displayCredit={displayCredit}
 		shouldLimitWidth={shouldLimitWidth}
-		isOverlayed={isOverlayed}
+		isOverlaid={isOverlaid}
 	/>
 );

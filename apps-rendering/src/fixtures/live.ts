@@ -1,16 +1,16 @@
 // ----- Imports ----- //
 
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticleElementRole,
 	ArticlePillar,
 } from '@guardian/libs';
-import { none, OptionKind, some, toOption } from '@guardian/types';
+import { none, OptionKind, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { parse } from 'client/parser';
 import type { DeadBlog, LiveBlog } from 'item';
-import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
@@ -22,22 +22,17 @@ const parseHtml = parse(parser);
 const headline =
 	'Covid live: Brazil health minister who shook hands with maskless Boris Johnson at UN tests positive';
 
-const standfirst: Option<DocumentFragment> = pipe(
+const standfirst: Option<DocumentFragment> = parseHtml(
 	'<p><a href="x-gu://item/mobile.guardianapis.com/uk/items/world/live/2021/sep/22/coronavirus-live-news-brazil-health-minister-tests-positive-at-un-india-urges-uk-to-resolve-quarantine-dispute?page=with:block-614ae7e58f08b228c9498279#block-614ae7e58f08b228c9498279">Marcelo Quiroga tests positive</a> at UN general assembly in New York; <a href="x-gu://item/mobile.guardianapis.com/uk/items/world/live/2021/sep/22/coronavirus-live-news-brazil-health-minister-tests-positive-at-un-india-urges-uk-to-resolve-quarantine-dispute?page=with:block-614ad64b8f087b5c6fb4a8dc#block-614ad64b8f087b5c6fb4a8dc">Australia tourism minister says</a> on track to reopen borders ‘by Christmas’</p>\n<ul>\n <li><a href="x-gu://item/mobile.guardianapis.com/uk/items/world/2021/sep/22/calculated-risk-ardern-gambles-as-new-zealand-covid-restrictions-eased">Ardern gambles as New Zealand Covid restrictions eased</a></li>\n <li><a href="x-gu://item/mobile.guardianapis.com/uk/items/australia-news/2021/sep/22/riot-police-on-melbourne-streets-to-prevent-third-day-of-protests">Riot police on Melbourne streets to prevent third day of protests</a></li>\n <li><a href="x-gu://item/mobile.guardianapis.com/uk/items/global-development/2021/sep/21/argentina-to-lift-almost-all-covid-restrictions-as-cases-and-deaths-fall">Argentina to lift almost all Covid restrictions as cases and deaths fall</a></li>\n <li><a href="x-gu://item/mobile.guardianapis.com/uk/items/education/2021/sep/21/more-than-100000-pupils-off-school-in-england-last-week-amid-covid-surge">‘High alert’ warning as more than 100,000 pupils in England miss school</a></li>\n</ul>',
-	parseHtml,
-	toOption,
-);
+).toOption();
 
-const bylineHtml: Option<DocumentFragment> = pipe(
+const bylineHtml: Option<DocumentFragment> = parseHtml(
 	'<a href="https://theguardian.com">Tom Ambrose</a> (now); <a href="https://theguardian.com">Miranda Bryant</a> and <a href="https://theguardian.com">Helen Sullivan</a> (earlier)',
-	parseHtml,
-	toOption,
-);
-const captionDocFragment: Option<DocumentFragment> = pipe(
+).toOption();
+
+const captionDocFragment: Option<DocumentFragment> = parseHtml(
 	'<em>Jane Smith</em> Editor of things',
-	parseHtml,
-	toOption,
-);
+).toOption();
 
 const mainMedia: Option<MainMedia> = {
 	kind: OptionKind.Some,
@@ -257,6 +252,19 @@ const fields = {
 	footballContent: none,
 	logo: none,
 	webUrl: '',
+	edition: Edition.UK,
+	promotedNewsletter: none,
+};
+
+const pinnedBlock: LiveBlock = {
+	id: '5',
+	isKeyEvent: false,
+	title: 'Block Five',
+	firstPublished: new Date('2021-11-02T10:20:20Z'),
+	lastModified: new Date('2021-11-02T11:13:13Z'),
+	body: [],
+	contributors: [],
+	isPinned: true,
 };
 
 const blocks: LiveBlock[] = [
@@ -287,6 +295,7 @@ const blocks: LiveBlock[] = [
 				}),
 			},
 		],
+		isPinned: false,
 	},
 	{
 		id: '2',
@@ -296,6 +305,7 @@ const blocks: LiveBlock[] = [
 		lastModified: new Date('2021-11-02T13:03:13Z'),
 		body: [],
 		contributors: [],
+		isPinned: false,
 	},
 	{
 		id: '3',
@@ -305,6 +315,7 @@ const blocks: LiveBlock[] = [
 		lastModified: new Date('2021-11-02T12:13:13Z'),
 		body: [],
 		contributors: [],
+		isPinned: false,
 	},
 	{
 		id: '4',
@@ -314,16 +325,9 @@ const blocks: LiveBlock[] = [
 		lastModified: new Date('2021-11-02T11:13:13Z'),
 		body: [],
 		contributors: [],
+		isPinned: false,
 	},
-	{
-		id: '5',
-		isKeyEvent: false,
-		title: 'Block Five',
-		firstPublished: new Date('2021-11-02T10:20:20Z'),
-		lastModified: new Date('2021-11-02T11:13:13Z'),
-		body: [],
-		contributors: [],
-	},
+	pinnedBlock,
 ];
 
 const pagedBlocks: LiveBlogPagedBlocks = {

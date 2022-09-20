@@ -2,12 +2,13 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, text, textSans } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
-import { formatDate, fullyFormatDate } from 'date';
+import { datetimeFormat } from 'datetime';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss as darkMode } from 'styles';
@@ -17,13 +18,14 @@ import { darkModeCss as darkMode } from 'styles';
 interface Props {
 	date: Option<Date>;
 	format: ArticleFormat;
+	edition: Edition;
 }
 
 const darkStyles = darkMode`
     color: ${neutral[60]};
 `;
 
-const styles = css`
+const defaultStyles = css`
 	${textSans.xsmall()}
 	color: ${text.supporting};
 
@@ -37,12 +39,16 @@ const commentDatelineStyles = css`
 	${darkStyles}
 `;
 
-const blogDatelineStyles = (color: string): SerializedStyles => css`
-	${textSans.xxsmall()}
-	color: ${color};
+const getStyles = (
+	colour: string,
+	desktopColour: string,
+): SerializedStyles => css`
+	color: ${colour};
+	display: block;
+	${textSans.xxsmall({ lineHeight: 'tight' })}
 
 	${from.desktop} {
-		color: ${neutral[20]};
+		color: ${desktopColour};
 	}
 
 	${darkMode`
@@ -55,33 +61,28 @@ const blogDatelineStyles = (color: string): SerializedStyles => css`
 
 const getDatelineStyles = (format: ArticleFormat): SerializedStyles => {
 	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return getStyles(neutral[86], neutral[86]);
 		case ArticleDesign.LiveBlog:
-			return blogDatelineStyles(neutral[100]);
+			return getStyles(neutral[100], neutral[20]);
 		case ArticleDesign.DeadBlog:
-			return blogDatelineStyles(neutral[20]);
+			return getStyles(neutral[20], neutral[20]);
 		default:
 			switch (format.theme) {
 				case ArticlePillar.Opinion:
 					return commentDatelineStyles;
 				default:
-					return styles;
+					return defaultStyles;
 			}
 	}
 };
 
-const Dateline: FC<Props> = ({ date, format }) =>
+const Dateline: FC<Props> = ({ date, format, edition }) =>
 	pipe(
 		date,
 		map((d) => (
-			<time
-				css={getDatelineStyles(format)}
-				data-date={d}
-				className="date js-date"
-			>
-				{format.design === ArticleDesign.LiveBlog ||
-				format.design === ArticleDesign.DeadBlog
-					? fullyFormatDate(d)
-					: formatDate(d)}
+			<time css={getDatelineStyles(format)}>
+				{datetimeFormat(edition)(d)}
 			</time>
 		)),
 		withDefault<ReactElement | null>(null),

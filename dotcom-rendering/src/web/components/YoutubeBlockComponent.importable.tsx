@@ -6,6 +6,7 @@ import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { trackVideoInteraction } from '../browser/ga/ga';
 import { record } from '../browser/ophan/ophan';
+import { useAB } from '../lib/useAB';
 import { Caption } from './Caption';
 
 type Props = {
@@ -32,17 +33,20 @@ type Props = {
 	stickyVideos: boolean;
 };
 
-const expiredOverlayStyles = (overrideImage: string) => css`
-	height: 0px;
-	position: relative;
-	background-image: url(${overrideImage});
-	background-size: cover;
-	background-position: 49% 49%;
-	background-repeat: no-repeat;
-	padding-bottom: 56%;
-	color: ${neutral[100]};
-	background-color: ${neutral[20]};
-`;
+const expiredOverlayStyles = (overrideImage?: string) =>
+	overrideImage
+		? css`
+				height: 0px;
+				position: relative;
+				background-image: url(${overrideImage});
+				background-size: cover;
+				background-position: 49% 49%;
+				background-repeat: no-repeat;
+				padding-bottom: 56%;
+				color: ${neutral[100]};
+				background-color: ${neutral[20]};
+		  `
+		: undefined;
 
 const expiredTextWrapperStyles = css`
 	display: flex;
@@ -90,6 +94,17 @@ export const YoutubeBlockComponent = ({
 		undefined,
 	);
 
+	const ABTestAPI = useAB();
+	const userInImaTestVariant = ABTestAPI?.isUserInVariant(
+		'IntegrateIMA',
+		'variant',
+	);
+	const imaAdTagUrl = userInImaTestVariant
+		? 'https://pubads.g.doubleclick.net/gampad/live/ads?iu=/59666047/theguardian.com&' +
+		  'description_url=[placeholder]&tfcd=0&npa=0&sz=400x300&gdfp_req=1&output=vast&' +
+		  'unviewed_position_start=1&env=vp&impl=s&correlator=&vad_type=linear&cust_params=at%3Dfixed-puppies'
+		: undefined;
+
 	useEffect(() => {
 		const defineConsentState = async () => {
 			const { onConsentChange } = await import(
@@ -102,7 +117,7 @@ export const YoutubeBlockComponent = ({
 
 		defineConsentState().catch((error) => {
 			window.guardian.modules.sentry.reportError(
-				new Error(`Error: ${error}`),
+				error instanceof Error ? error : new Error(`Error: unknown`),
 				'youtube-consent',
 			);
 		});
@@ -120,7 +135,7 @@ export const YoutubeBlockComponent = ({
 					margin-bottom: 16px;
 				`}
 			>
-				<div css={overrideImage && expiredOverlayStyles(overrideImage)}>
+				<div css={expiredOverlayStyles(overrideImage)}>
 					<div css={expiredTextWrapperStyles}>
 						<div css={expiredSVGWrapperStyles}>
 							<SvgAlertRound />
@@ -214,6 +229,7 @@ export const YoutubeBlockComponent = ({
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 				shouldStick={stickyVideos}
 				isMainMedia={isMainMedia}
+				imaAdTagUrl={imaAdTagUrl}
 			/>
 			{!hideCaption && (
 				<Caption

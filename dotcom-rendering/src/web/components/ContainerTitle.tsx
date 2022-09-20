@@ -3,11 +3,14 @@ import {
 	between,
 	from,
 	headline,
+	news,
 	space,
 	text,
 	until,
-	news,
 } from '@guardian/source-foundations';
+import type { EditionId } from '../../types/edition';
+import type { DCRContainerPalette } from '../../types/front';
+import type { Colour } from '../../types/palette';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { getEditionFromId } from '../lib/edition';
 
@@ -92,10 +95,10 @@ export const ContainerTitle = ({
 		containerPalette && decideContainerOverrides(containerPalette);
 
 	const now = new Date();
-	const locale = editionId && getEditionFromId(editionId)?.locale;
+	const locale = editionId && getEditionFromId(editionId).locale;
 
 	return (
-		<>
+		<div>
 			{url ? (
 				<a css={linkStyles} href={url}>
 					<h2 css={headerStyles(fontColour)}>{title}</h2>
@@ -103,7 +106,7 @@ export const ContainerTitle = ({
 			) : (
 				<h2 css={headerStyles(fontColour)}>{title}</h2>
 			)}
-			{description && (
+			{!!description && (
 				<p
 					css={descriptionStyles(fontColour)}
 					dangerouslySetInnerHTML={{ __html: description }}
@@ -136,6 +139,6 @@ export const ContainerTitle = ({
 					</span>
 				</div>
 			)}
-		</>
+		</div>
 	);
 };

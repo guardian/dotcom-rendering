@@ -1,5 +1,5 @@
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
-import { extract } from './extract-ga';
+import { extractGA } from './extract-ga';
 
 const pillar: LegacyPillar = 'news';
 const base = {
@@ -36,6 +36,6 @@ const CAPIArticle = {
 
 describe('Google Analytics extracts and formats CAPIArticle response correctly', () => {
 	it('GA Extract returns correctly formatted GA response', () => {
-		expect(extract(CAPIArticle)).toEqual(base);
+		expect(extractGA(CAPIArticle)).toEqual(base);
 	});
 });

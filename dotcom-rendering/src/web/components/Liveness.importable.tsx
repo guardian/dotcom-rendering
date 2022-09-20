@@ -190,11 +190,11 @@ export const Liveness = ({
 					// Increment the count of new posts
 					setNumHiddenBlocks(numHiddenBlocks + data.numNewBlocks);
 				}
+			}
 
-				// Update the block id we use for polling
-				if (data.mostRecentBlockId) {
-					setLatestBlockId(data.mostRecentBlockId);
-				}
+			// Update the block id we use for polling
+			if (data.mostRecentBlockId) {
+				setLatestBlockId(data.mostRecentBlockId);
 			}
 		},
 		[onFirstPage, topOfBlogVisible, numHiddenBlocks, enhanceTweetsSwitch],

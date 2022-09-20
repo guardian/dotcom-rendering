@@ -9,7 +9,7 @@ import { darkModeCss } from '../lib';
 const padString = (time: number) => (time < 10 ? `0${time}` : time);
 
 const fallbackDate = (date: Date) =>
-	`${padString(date.getHours())}:${padString(date.getMinutes())}`;
+	`${padString(date.getHours())}.${padString(date.getMinutes())}`;
 
 const FirstPublished = ({
 	firstPublished,

@@ -33,6 +33,7 @@ type CAPIDesign =
 	| 'ReviewDesign'
 	| 'AnalysisDesign'
 	| 'CommentDesign'
+	| 'ExplainerDesign'
 	| 'LetterDesign'
 	| 'FeatureDesign'
 	| 'LiveBlogDesign'
@@ -70,182 +71,12 @@ type ArticleDisplay = import('@guardian/libs').ArticleDisplay;
 type ArticleDesign = import('@guardian/libs').ArticleDesign;
 type ArticleTheme = import('@guardian/libs').ArticleTheme;
 type ArticleFormat = import('@guardian/libs').ArticleFormat;
-type ArticlePillar = ArticleTheme;
 
 // This is an object that allows you Type defaults of the designTypes.
 // The return type looks like: { Feature: any, Live: any, ...}
 // and can be used to add TypeSafety when needing to override a style in a designType
 
 type DesignTypesObj = { [key in ArticleDesign]: any };
-
-type Colour = string;
-
-type Palette = {
-	text: {
-		headline: Colour;
-		seriesTitle: Colour;
-		sectionTitle: Colour;
-		seriesTitleWhenMatch: Colour;
-		byline: Colour;
-		twitterHandle: Colour;
-		twitterHandleBelowDesktop: Colour;
-		caption: Colour;
-		captionLink: Colour;
-		subMeta: Colour;
-		subMetaLabel: Colour;
-		subMetaLink: Colour;
-		syndicationButton: Colour;
-		articleLink: Colour;
-		articleLinkHover: Colour;
-		cardHeadline: Colour;
-		cardByline: Colour;
-		cardKicker: Colour;
-		linkKicker: Colour;
-		cardStandfirst: Colour;
-		cardFooter: Colour;
-		headlineByline: Colour;
-		standfirst: Colour;
-		standfirstLink: Colour;
-		lastUpdated: Colour;
-		branding: Colour;
-		disclaimerLink: Colour;
-		signInLink: Colour;
-		richLink: Colour;
-		witnessIcon: Colour;
-		witnessAuthor: Colour;
-		witnessTitle: Colour;
-		carouselTitle: Colour;
-		calloutHeading: Colour;
-		pullQuote: Colour;
-		pullQuoteAttribution: Colour;
-		dropCap: Colour;
-		blockquote: Colour;
-		numberedTitle: Colour;
-		numberedPosition: Colour;
-		overlayedCaption: Colour;
-		shareCount: Colour;
-		shareCountUntilDesktop: Colour;
-		cricketScoreboardLink: Colour;
-		keyEvent: Colour;
-		keyEventTime: Colour;
-		filterButton: Colour;
-		filterButtonHover: Colour;
-		filterButtonActive: Colour;
-	};
-	background: {
-		article: Colour;
-		seriesTitle: Colour;
-		sectionTitle: Colour;
-		avatar: Colour;
-		card: Colour;
-		headline: Colour;
-		headlineByline: Colour;
-		bullet: Colour;
-		bulletStandfirst: Colour;
-		header: Colour;
-		standfirst: Colour;
-		richLink: Colour;
-		imageTitle: Colour;
-		speechBubble: Colour;
-		carouselDot: Colour;
-		carouselDotFocus: Colour;
-		headlineTag: Colour;
-		mostViewedTab: Colour;
-		matchNav: Colour;
-		analysisUnderline: Colour;
-		matchStats: Colour;
-		ageWarning: Colour;
-		keyEventBullet: Colour;
-		summaryEventBullet: Colour;
-		keyEvent: Colour;
-		keyEventFromDesktop: Colour;
-		filterButton: Colour;
-		filterButtonHover: Colour;
-		filterButtonActive: Colour;
-	};
-	fill: {
-		commentCount: Colour;
-		commentCountUntilDesktop: Colour;
-		shareCountIcon: Colour;
-		shareCountIconUntilDesktop: Colour;
-		shareIcon: Colour;
-		shareIconGrayBackground: Colour;
-		cameraCaptionIcon: Colour;
-		richLink: Colour;
-		quoteIcon: Colour;
-		blockquoteIcon: Colour;
-		twitterHandleBelowDesktop: Colour;
-	};
-	border: {
-		syndicationButton: Colour;
-		subNav: Colour;
-		articleLink: Colour;
-		articleLinkHover: Colour;
-		liveBlock: Colour;
-		pinnedPost: Colour;
-		standfirstLink: Colour;
-		headline: Colour;
-		standfirst: Colour;
-		richLink: Colour;
-		navPillar: Colour;
-		article: Colour;
-		lines: Colour;
-		matchTab: Colour;
-		activeMatchTab: Colour;
-		cricketScoreboardTop: Colour;
-		cricketScoreboardDivider: Colour;
-		cardSupporting: Colour;
-		keyEvent: Colour;
-		filterButton: Colour;
-	};
-	topBar: {
-		card: Colour;
-	};
-	hover: {
-		headlineByline: Colour;
-		standfirstLink: Colour;
-		keyEventLink: Colour;
-		keyEventBullet: Colour;
-		summaryEventBullet: Colour;
-	};
-};
-
-type ContainerOverrides = {
-	text: {
-		cardHeadline: Colour;
-		cardStandfirst: Colour;
-		cardKicker: Colour;
-		cardByline: Colour;
-		cardFooter: Colour;
-		cardCommentCount: Colour;
-		dynamoHeadline: Colour;
-		dynamoKicker: Colour;
-		dynamoSublinkKicker: Colour;
-		dynamoMeta: Colour;
-		container: Colour;
-		containerToggle: Colour;
-		containerDate: Colour;
-	};
-	border: {
-		container: Colour;
-		lines: Colour;
-	};
-	background: {
-		container: Colour;
-		card: Colour;
-	};
-	topBar: {
-		card: Colour;
-	};
-};
-
-type EditionId = 'UK' | 'US' | 'INT' | 'AU';
-
-type Edition = {
-	id: EditionId;
-	displayName: string;
-	locale: string;
-};
 
 type SharePlatform =
 	| 'facebook'
@@ -256,10 +87,6 @@ type SharePlatform =
 	| 'messenger';
 
 // shared type declarations
-interface SimpleLinkType {
-	url: string;
-	title: string;
-}
 
 interface AdTargetParam {
 	name: string;
@@ -287,44 +114,6 @@ interface SectionNielsenAPI {
 	apiID: string;
 }
 
-interface EditionCommercialProperties {
-	adTargeting: AdTargetParam[];
-	branding?: Branding;
-}
-
-type CommercialProperties = { [E in EditionId]: EditionCommercialProperties };
-
-type BrandingLogo = {
-	src: string;
-	link: string;
-	label: string;
-	dimensions: { width: number; height: number };
-};
-
-interface Branding {
-	brandingType?: { name: string };
-	sponsorName: string;
-	logo: BrandingLogo;
-	aboutThisLink: string;
-	logoForDarkBackground?: BrandingLogo;
-}
-
-interface LinkType extends SimpleLinkType {
-	longTitle: string;
-	children?: LinkType[];
-	mobileOnly?: boolean;
-	pillar?: ArticlePillar;
-	more?: boolean;
-}
-
-interface PillarType extends LinkType {
-	pillar: ArticlePillar;
-}
-
-interface MoreType extends LinkType {
-	more: true;
-}
-
 interface ReaderRevenueCategories {
 	contribute: string;
 	subscribe: string;
@@ -342,48 +131,7 @@ interface ReaderRevenuePositions {
 	ampFooter: ReaderRevenueCategories;
 }
 
-type ReaderRevenuePosition =
-	| 'header'
-	| 'footer'
-	| 'sideMenu'
-	| 'ampHeader'
-	| 'ampFooter';
-
-interface BaseNavType {
-	otherLinks: MoreType;
-	brandExtensions: LinkType[];
-	currentNavLink: string;
-	subNavSections?: SubNavType;
-	readerRevenueLinks: ReaderRevenuePositions;
-}
-
-// TODO rename
-interface SimpleNavType {
-	pillars: PillarType[];
-	otherLinks: MoreType;
-	brandExtensions: LinkType[];
-	readerRevenueLinks: ReaderRevenuePositions;
-}
-
-interface NavType extends BaseNavType {
-	pillars: PillarType[];
-}
-
-interface SubNavBrowserType {
-	currentNavLink: string;
-	subNavSections?: SubNavType;
-}
-
-interface SubNavType {
-	parent?: LinkType;
-	links: LinkType[];
-}
-
-interface AuthorType {
-	byline?: string;
-	twitterHandle?: string;
-	email?: string;
-}
+type ReaderRevenuePosition = keyof ReaderRevenuePositions;
 
 interface MembershipPlaceholder {
 	campaignCode?: string;
@@ -432,16 +180,6 @@ interface Pagination {
 	newer?: string;
 	oldest?: string;
 	older?: string;
-}
-
-interface FooterLink {
-	text: string;
-	url: string;
-	dataLinkName: string;
-	extraClasses?: string;
-}
-interface FooterType {
-	footerLinks: FooterLink[][];
 }
 
 type ContentType =
@@ -532,503 +270,7 @@ interface CAPINavType {
 	readerRevenueLinks: ReaderRevenuePositions;
 }
 
-// WARNING: run `gen-schema` task if changing this to update the associated JSON
-// schema definition.
-interface CAPIArticleType {
-	headline: string;
-	standfirst: string;
-	webTitle: string;
-	mainMediaElements: CAPIElement[];
-	main: string;
-	keyEvents: Block[];
-	blocks: Block[];
-	pinnedPost?: Block;
-	pagination?: Pagination;
-	author: AuthorType;
-
-	/**
-	 * @TJS-format date-time
-	 */
-	webPublicationDateDeprecated: string;
-	webPublicationDate: string;
-	webPublicationDateDisplay: string;
-	webPublicationSecondaryDateDisplay: string;
-	editionLongForm: string;
-	editionId: EditionId;
-	pageId: string;
-	version: number; // TODO: check who uses?
-	tags: TagType[];
-	format: CAPIFormat;
-
-	// Include pillar and designType until we remove them upstream
-	// We type designType as `string` for now so that the field is present,
-	// but we don't care what's in it. Pillar we have a type for so we use it
-	// but it shouldn't be important.
-	designType: string;
-	pillar: LegacyPillar;
-
-	isImmersive: boolean;
-	sectionLabel: string;
-	sectionUrl: string;
-	sectionName?: string;
-	subMetaSectionLinks: SimpleLinkType[];
-	subMetaKeywordLinks: SimpleLinkType[];
-	shouldHideAds: boolean;
-	isAdFreeUser: boolean;
-	openGraphData: { [key: string]: string };
-	twitterData: { [key: string]: string };
-	webURL: string;
-	linkedData: { [key: string]: any }[];
-	config: ConfigType;
-
-	showBottomSocialButtons: boolean;
-	shouldHideReaderRevenue: boolean;
-
-	// AMP specific (for now)
-	guardianBaseURL: string;
-	contentType: string;
-	hasRelated: boolean;
-	publication: string; // TODO: check who uses?
-	hasStoryPackage: boolean;
-	beaconURL: string;
-	isCommentable: boolean;
-	commercialProperties: CommercialProperties;
-	starRating?: number;
-	trailText: string;
-	badge?: BadgeType;
-
-	nav: CAPINavType; // TODO move this out as most code uses a different internal NAV model.
-
-	pageFooter: FooterType;
-
-	contributionsServiceUrl: string;
-	slotMachineFlags?: string;
-
-	pageType: PageTypeType;
-
-	matchUrl?: string;
-	matchType?: MatchType;
-	isSpecialReport: boolean;
-
-	// Interactives made on Frontend rather than DCR require special handling.
-	// The logic is date-driven. See:
-	// https://github.com/guardian/frontend/blob/main/common/app/model/dotcomrendering/InteractiveSwitchOver.scala#L7.
-	isLegacyInteractive?: boolean;
-	filterKeyEvents: boolean;
-
-	// Included on live and dead blogs. Used when polling
-	mostRecentBlockId?: string;
-	availableTopics?: Topic[];
-	selectedTopics?: Topic[];
-}
-
 type StageType = 'DEV' | 'CODE' | 'PROD';
-
-// FE* types are coming from Frontend
-interface FEFrontType {
-	pressedPage: FEPressedPageType;
-	nav: CAPINavType;
-	editionId: EditionId;
-	editionLongForm: string;
-	guardianBaseURL: string;
-	pageId: string;
-	webTitle: string;
-	webURL: string;
-	config: FEFrontConfigType;
-	commercialProperties: Record<string, unknown>;
-	pageFooter: FooterType;
-}
-
-type DCRFrontType = {
-	pressedPage: DCRPressedPageType;
-	nav: CAPINavType;
-	editionId: EditionId;
-	webTitle: string;
-	config: FEFrontConfigType;
-	pageFooter: FooterType;
-};
-
-type FEPressedPageType = {
-	id: string;
-	seoData: FESeoDataType;
-	frontProperties: FEFrontPropertiesType;
-	collections: FECollectionType[];
-};
-
-type DCRPressedPageType = {
-	id: string;
-	seoData: FESeoDataType;
-	frontProperties: FEFrontPropertiesType;
-	collections: DCRCollectionType[];
-};
-
-type FESeoDataType = {
-	id: string;
-	navSection: string;
-	webTitle: string;
-	description: string;
-};
-
-type FEFrontPropertiesType = {
-	isImageDisplayed: boolean;
-	commercial: Record<string, unknown>;
-};
-
-type FESupportingContent = {
-	properties: {
-		href?: string;
-	};
-	header?: {
-		kicker?: {
-			item?: {
-				properties: {
-					kickerText: string;
-				};
-			};
-		};
-		headline: string;
-		url: string;
-	};
-	format?: CAPIFormat;
-};
-
-type DCRSupportingContent = {
-	headline: string;
-	url?: string;
-	kickerText?: string;
-	format: ArticleFormat;
-};
-
-type FESnapType = {
-	embedHtml?: string;
-	embedCss?: string;
-	embedJs?: string;
-};
-
-type DCRSnapType = {
-	embedHtml?: string;
-	embedCss?: string;
-};
-
-type FEContainerType =
-	| 'dynamic/fast'
-	| 'dynamic/package'
-	| 'dynamic/slow'
-	| 'dynamic/slow-mpu'
-	| 'fixed/large/slow-XIV'
-	| 'fixed/medium/fast-XI'
-	| 'fixed/medium/fast-XII'
-	| 'fixed/medium/slow-VI'
-	| 'fixed/medium/slow-VII'
-	| 'fixed/medium/slow-XII-mpu'
-	| 'fixed/small/fast-VIII'
-	| 'fixed/small/slow-I'
-	| 'fixed/small/slow-III'
-	| 'fixed/small/slow-IV'
-	| 'fixed/small/slow-V-half'
-	| 'fixed/small/slow-V-mpu'
-	| 'fixed/small/slow-V-third'
-	| 'fixed/thrasher'
-	| 'fixed/video'
-	| 'nav/list'
-	| 'nav/media-list'
-	| 'news/most-popular';
-
-type FEContainerPalette =
-	| 'EventPalette'
-	| 'SombreAltPalette'
-	| 'EventAltPalette'
-	| 'InvestigationPalette'
-	| 'LongRunningAltPalette'
-	| 'LongRunningPalette'
-	| 'SombrePalette'
-	| 'Canonical'
-	| 'Dynamo'
-	| 'Special'
-	| 'DynamoLike'
-	| 'Special'
-	| 'Breaking'
-	| 'Podcast'
-	| 'Branded'
-	| 'BreakingPalette';
-
-type DCRContainerPalette =
-	| 'EventPalette'
-	| 'SombreAltPalette'
-	| 'EventAltPalette'
-	| 'InvestigationPalette'
-	| 'LongRunningAltPalette'
-	| 'LongRunningPalette'
-	| 'SombrePalette'
-	| 'BreakingPalette';
-
-// TODO: These may need to be declared differently than the front types in the future
-type DCRContainerType = FEContainerType;
-
-type FEFrontCard = {
-	properties: {
-		isBreaking: boolean;
-		showMainVideo: boolean;
-		showKickerTag: boolean;
-		showByline: boolean;
-		imageSlideshowReplace: boolean;
-		maybeContent?: {
-			trail: {
-				trailPicture?: {
-					allImages: {
-						index: number;
-						fields: {
-							displayCredit?: string;
-							source?: string;
-							photographer?: string;
-							isMaster?: string;
-							altText?: string;
-							height: string;
-							credit: string;
-							mediaId: string;
-							width: string;
-						};
-						mediaType: string;
-						url: string;
-					}[];
-				};
-				byline?: string;
-				thumbnailPath?: string;
-				webPublicationDate: number;
-			};
-			metadata: {
-				id: string;
-				webTitle: string;
-				webUrl: string;
-				type: string;
-				sectionId?: { value: string };
-				format: CAPIFormat;
-			};
-			fields: {
-				main: string;
-				body: string;
-				standfirst?: string;
-			};
-			elements: Record<string, unknown>;
-			tags: Record<string, unknown>;
-		};
-		maybeContentId?: string;
-		isLiveBlog: boolean;
-		isCrossword: boolean;
-		byline?: string;
-		webTitle: string;
-		linkText?: string;
-		webUrl?: string;
-		editionBrandings: { edition: { id: EditionId } }[];
-	};
-	header: {
-		isVideo: boolean;
-		isComment: boolean;
-		isGallery: boolean;
-		isAudio: boolean;
-		kicker?: {
-			type: string;
-			item?: {
-				properties: {
-					kickerText: string;
-				};
-			};
-		};
-		seriesOrBlogKicker?: {
-			properties: {
-				kickerText: string;
-			};
-			name: string;
-			url: string;
-			id: string;
-		};
-		headline: string;
-		url: string;
-		hasMainVideoElement: boolean;
-	};
-	card: {
-		id: string;
-		cardStyle: {
-			type: string;
-		};
-		webPublicationDateOption?: number;
-		lastModifiedOption?: number;
-		trailText?: string;
-		starRating?: number;
-		shortUrlPath?: string;
-		shortUrl: string;
-		group: string;
-		isLive: boolean;
-	};
-	discussion: {
-		isCommentable: boolean;
-		isClosedForComments: boolean;
-		discussionId?: string;
-	};
-	display: {
-		isBoosted: boolean;
-		showBoostedHeadline: boolean;
-		showQuotedHeadline: boolean;
-		imageHide: boolean;
-		showLivePlayable: boolean;
-	};
-	format?: CAPIFormat;
-	enriched?: FESnapType;
-	supportingContent?: FESupportingContent[];
-	cardStyle?: {
-		type: string;
-	};
-	type: string;
-};
-
-type DCRFrontCard = {
-	format: ArticleFormat;
-	url: string;
-	headline: string;
-	trailText?: string;
-	webPublicationDate?: string;
-	image?: string;
-	kickerText?: string;
-	snapData?: DCRSnapType;
-	/** @see JSX.IntrinsicAttributes["data-link-name"] */
-	dataLinkName: string;
-	discussionId?: string;
-	byline?: string;
-	showByline?: boolean;
-};
-
-type FECollectionType = {
-	id: string;
-	displayName: string;
-	curated: FEFrontCard[];
-	backfill: FEFrontCard[];
-	treats: FEFrontCard[];
-	lastUpdate?: number;
-	href?: string;
-	groups?: string[];
-	collectionType: FEContainerType;
-	uneditable: boolean;
-	showTags: boolean;
-	showSections: boolean;
-	hideKickers: boolean;
-	showDateHeader: boolean;
-	showLatestUpdate: boolean;
-	config: {
-		displayName: string;
-		metadata?: { type: FEContainerPalette }[];
-		collectionType: FEContainerType;
-		href?: string;
-		groups?: string[];
-		uneditable: boolean;
-		showTags: boolean;
-		showSections: boolean;
-		hideKickers: boolean;
-		showDateHeader: boolean;
-		showLatestUpdate: boolean;
-		excludeFromRss: boolean;
-		showTimestamps: boolean;
-		hideShowMore: boolean;
-		platform: string;
-	};
-	hasMore: boolean;
-};
-
-type DCRCollectionType = {
-	id: string;
-	displayName: string;
-	collectionType: DCRContainerType;
-	containerPalette?: DCRContainerPalette;
-	curated: DCRFrontCard[];
-	backfill: DCRFrontCard[];
-	treats: DCRFrontCard[];
-	href?: string;
-	config: {
-		showDateHeader: boolean;
-	};
-};
-
-type FEFrontConfigType = {
-	avatarApiUrl: string;
-	externalEmbedHost: string;
-	ajaxUrl: string;
-	keywords: string;
-	revisionNumber: string;
-	isProd: boolean;
-	switches: Switches;
-	section: string;
-	keywordIds: string;
-	locationapiurl: string;
-	sharedAdTargeting: { [key: string]: any };
-	buildNumber: string;
-	abTests: ServerSideTests;
-	pbIndexSites: { [key: string]: unknown }[];
-	ampIframeUrl: string;
-	beaconUrl: string;
-	userAttributesApiUrl: string;
-	host: string;
-	brazeApiKey: string;
-	calloutsUrl: string;
-	requiresMembershipAccess: boolean;
-	onwardWebSocket: string;
-	a9PublisherId: string;
-	contentType: string;
-	facebookIaAdUnitRoot: string;
-	ophanEmbedJsUrl: string;
-	idUrl: string;
-	dcrSentryDsn: string;
-	isFront: true;
-	idWebAppUrl: string;
-	discussionApiUrl: string;
-	sentryPublicApiKey: string;
-	omnitureAccount: string;
-	dfpAccountId: string;
-	pageId: string;
-	forecastsapiurl: string;
-	assetsPath: string;
-	pillar: string;
-	commercialBundleUrl: string;
-	discussionApiClientHeader: string;
-	membershipUrl: string;
-	dfpHost: string;
-	cardStyle?: string;
-	googletagUrl: string;
-	sentryHost: string;
-	shouldHideAdverts: boolean;
-	mmaUrl: string;
-	membershipAccess: string;
-	isPreview: boolean;
-	googletagJsUrl: string;
-	supportUrl: string;
-	edition: string;
-	discussionFrontendUrl: string;
-	ipsosTag: string;
-	ophanJsUrl: string;
-	isPaidContent: boolean;
-	mobileAppsAdUnitRoot: string;
-	plistaPublicApiKey: string;
-	frontendAssetsFullURL: string;
-	googleSearchId: string;
-	allowUserGeneratedContent: boolean;
-	dfpAdUnitRoot: string;
-	idApiUrl: string;
-	omnitureAmpAccount: string;
-	adUnit: string;
-	hasPageSkin: boolean;
-	webTitle: string;
-	stripePublicToken: string;
-	googleRecaptchaSiteKey: string;
-	discussionD2Uid: string;
-	weatherapiurl: string;
-	googleSearchUrl: string;
-	optimizeEpicUrl: string;
-	stage: StageType;
-	idOAuthUrl: string;
-	isSensitive: boolean;
-	isDev: boolean;
-	thirdPartyAppsAccount?: string;
-	avatarImagesUrl: string;
-	fbAppId: string;
-};
 
 interface TagType {
 	id: string;
@@ -1069,21 +311,19 @@ interface KeyEventsRequest {
 	filterKeyEvents: boolean;
 }
 
-interface BadgeType {
-	seriesTag: string;
-	imageUrl: string;
-}
-
 type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
 
-type SmallHeadlineSize = 'tiny' | 'small' | 'medium' | 'large' | 'huge';
+type CardImageType = 'mainMedia' | 'avatar';
 
-type AvatarType = {
-	src: string;
-	alt: string;
-};
+type SmallHeadlineSize =
+	| 'tiny'
+	| 'small'
+	| 'medium'
+	| 'large'
+	| 'huge'
+	| 'ginormous';
 
 type MediaType = 'Video' | 'Audio' | 'Gallery';
 
@@ -1091,7 +331,13 @@ type LineEffectType = 'labs' | 'dotted' | 'straight';
 
 type LeftColSize = 'compact' | 'wide';
 
-type CardPercentageType = '25%' | '34%' | '50%' | '66%' | '75%' | '100%';
+type CardPercentageType =
+	| '25%'
+	| '33.333%'
+	| '50%'
+	| '66.666%'
+	| '75%'
+	| '100%';
 
 type HeadlineLink = {
 	to: string; // the href for the anchor tag
@@ -1178,97 +424,6 @@ interface Topic {
 
 type TopicType = 'ORG' | 'PRODUCT' | 'PERSON' | 'GPE' | 'WORK_OF_ART' | 'LOC';
 
-/**
- * Onwards
- */
-type OnwardsType = {
-	heading: string;
-	trails: TrailType[];
-	description?: string;
-	url?: string;
-	ophanComponentName: OphanComponentName;
-	format: ArticleFormat;
-	isCuratedContent?: boolean;
-};
-
-type OphanComponentName =
-	| 'series'
-	| 'more-on-this-story'
-	| 'related-stories'
-	| 'related-content'
-	| 'more-media-in-section'
-	| 'more-galleries'
-	| 'curated-content'
-	| 'default-onwards'; // We should never see this in the analytics data!
-
-interface CommercialConfigType {
-	isPaidContent?: boolean;
-	pageId: string;
-	webPublicationDate?: number;
-	headline?: string;
-	author?: string;
-	keywords?: string;
-	section?: string;
-	edition?: string;
-	series?: string;
-	toneIds?: string;
-	contentType: string;
-	ampIframeUrl: string;
-}
-
-type ServerSideTests = {
-	[k: `${string}Variant`]: 'variant';
-	[k: `${string}Control`]: 'control';
-};
-
-/**
- * the config model will contain useful app/site
- * level data. Although currently derived from the config model
- * constructed in frontend and passed to dotcom-rendering
- * this data could eventually be defined in dotcom-rendering
- */
-interface ConfigType extends CommercialConfigType {
-	ajaxUrl: string;
-	sentryPublicApiKey: string;
-	sentryHost: string;
-	dcrSentryDsn: string;
-	switches: { [key: string]: boolean };
-	abTests: ServerSideTests;
-	dfpAccountId: string;
-	commercialBundleUrl: string;
-	revisionNumber: string;
-	shortUrlId: string;
-	isDev?: boolean;
-	googletagUrl: string;
-	stage: string;
-	frontendAssetsFullURL: string;
-	adUnit: string;
-	isSensitive: boolean;
-	videoDuration?: number;
-	edition: string;
-	section: string;
-
-	sharedAdTargeting: { [key: string]: any };
-	isPaidContent?: boolean;
-	keywordIds: string;
-	showRelatedContent: boolean;
-	shouldHideReaderRevenue?: boolean;
-	idApiUrl: string;
-	discussionApiUrl: string;
-	discussionD2Uid: string;
-	discussionApiClientHeader: string;
-	isPhotoEssay?: boolean;
-	references?: { [key: string]: string }[];
-	host?: string;
-	idUrl?: string;
-	mmaUrl?: string;
-	brazeApiKey?: string;
-	ipsosTag?: string;
-	isLiveBlog?: boolean;
-	isLive?: boolean;
-	isPreview?: boolean;
-}
-
 interface GADataType {
 	pillar: LegacyPillar;
 	webTitle: string;
@@ -1289,15 +444,6 @@ interface GADataType {
 // General DataTypes //
 // ----------------- //
 
-interface DCRServerDocumentData {
-	page: string;
-	site: string;
-	CAPIArticle: CAPIArticleType;
-	NAV: NavType;
-	GA: GADataType;
-	linkedData: { [key: string]: any };
-}
-
 interface BaseTrailType {
 	url: string;
 	headline: string;
@@ -1314,44 +460,9 @@ interface BaseTrailType {
 	commentCount?: number;
 	starRating?: number;
 	linkText?: string;
-	branding?: Branding;
+	branding?: import('src/types/branding').Branding;
 	isSnap?: boolean;
-	snapData?: DCRSnapType;
-}
-interface TrailType extends BaseTrailType {
-	palette?: never;
-	format: ArticleFormat;
-	supportingContent?: DCRSupportingContent[];
-	trailText?: string;
-	/** @see JSX.IntrinsicAttributes["data-link-name"] */
-	dataLinkName: string;
-	discussionId?: string;
-}
-
-interface CAPITrailType extends BaseTrailType {
-	format: CAPIFormat;
-	// Include pillar and designType until we remove them upstream
-	// We type designType as `string` for now so that the field is present,
-	// but we don't care what's in it. Pillar we have a type for so we use it
-	// but it shouldn't be important.
-	designType: string;
-	pillar: LegacyPillar;
-}
-
-interface TrailTabType {
-	heading: string;
-	trails: TrailType[];
-}
-
-interface CAPITrailTabType {
-	heading: string;
-	trails: CAPITrailType[];
-}
-
-interface MostViewedFooterPayloadType {
-	tabs: CAPITrailTabType[];
-	mostCommented: CAPITrailType;
-	mostShared: CAPITrailType;
+	snapData?: import('./src/types/front').DCRSnapType;
 }
 
 // ------------
@@ -1397,20 +508,16 @@ type AdSlotType =
 // 3rd party type declarations //
 // ------------------------------
 
-declare module 'compose-function' {
-	const compose: any;
-	// eslint-disable-next-line import/no-default-export -- TODO: use type definition @types/compose-function
-	export default compose;
-}
-declare module 'minify-css-string' {
-	const minifyCSSString: any;
-	// eslint-disable-next-line import/no-default-export -- it’s that 6yo module works
-	export default minifyCSSString;
-}
 declare module 'chromatic/isChromatic';
 
 declare module 'dynamic-import-polyfill' {
-	export const initialize: any;
+	export const initialize: ({
+		modulePath,
+		importFunctionName,
+	}: {
+		modulePath?: string;
+		importFunctionName?: string;
+	}) => void;
 }
 
 // ------------------------------------- //

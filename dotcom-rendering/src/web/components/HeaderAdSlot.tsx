@@ -5,6 +5,10 @@ import { border, neutral, space } from '@guardian/source-foundations';
 import { AdSlot, labelHeight } from './AdSlot';
 import { Hide } from './Hide';
 
+type Props = {
+	display: ArticleDisplay;
+};
+
 const headerWrapper = css`
 	position: static;
 `;
@@ -27,15 +31,7 @@ const headerAdWrapper = css`
 	top: 0;
 `;
 
-const headerAdWrapperHidden = css`
-	display: none;
-`;
-
-export const HeaderAdSlot: React.FC<{
-	isAdFreeUser: boolean;
-	shouldHideAds: boolean;
-	display: ArticleDisplay;
-}> = ({ isAdFreeUser, shouldHideAds, display }) => (
+export const HeaderAdSlot = ({ display }: Props) => (
 	<div css={headerWrapper}>
 		<Global
 			styles={css`
@@ -52,13 +48,7 @@ export const HeaderAdSlot: React.FC<{
 			`}
 		/>
 		<Hide when="below" breakpoint="tablet">
-			<div
-				css={[
-					headerAdWrapper,
-					(isAdFreeUser || shouldHideAds) && headerAdWrapperHidden,
-				]}
-				className="top-banner-ad-container"
-			>
+			<div css={[headerAdWrapper]} className="top-banner-ad-container">
 				<AdSlot position="top-above-nav" display={display} />
 			</div>
 		</Hide>

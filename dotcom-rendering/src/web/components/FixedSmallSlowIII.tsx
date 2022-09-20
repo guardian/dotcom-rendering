@@ -1,7 +1,8 @@
-import { ArticleDesign } from '@guardian/libs';
-import { Card } from './Card/Card';
+import type { DCRContainerPalette } from '../../types/front';
+import type { TrailType } from '../../types/trails';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
+import { FrontCard } from './FrontCard';
 
 type Props = {
 	trails: TrailType[];
@@ -27,36 +28,13 @@ export const FixedSmallSlowIII = ({
 						percentage={index === 0 ? '50%' : '25%'}
 						key={trail.url}
 					>
-						<Card
+						<FrontCard
+							trail={trail}
+							starRating={trail.starRating}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							linkTo={trail.url}
-							format={trail.format}
-							headlineText={trail.headline}
 							headlineSize={index === 0 ? 'large' : 'medium'}
-							byline={trail.byline}
-							showByline={trail.showByline}
-							showQuotes={
-								trail.format.design === ArticleDesign.Comment ||
-								trail.format.design === ArticleDesign.Letter
-							}
-							webPublicationDate={trail.webPublicationDate}
-							kickerText={trail.kickerText}
-							showPulsingDot={
-								trail.format.design === ArticleDesign.LiveBlog
-							}
-							showSlash={true}
-							showClock={false}
-							imageUrl={trail.image}
-							imagePosition="top"
 							imagePositionOnMobile={index === 0 ? 'top' : 'left'}
-							imageSize="medium"
-							mediaType={trail.mediaType}
-							mediaDuration={trail.mediaDuration}
-							starRating={trail.starRating}
-							branding={trail.branding}
-							dataLinkName={trail.dataLinkName}
-							discussionId={trail.discussionId}
 							trailText={
 								index === 0 ? undefined : trail.trailText
 							}

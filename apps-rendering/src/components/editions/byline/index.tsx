@@ -82,7 +82,11 @@ const addressStyles = css`
 
 // ----- Byline Component Styles ----- //
 
-const styles = (iconColor: string, hasAvatar: boolean): SerializedStyles => {
+const styles = (
+	iconColor: string,
+	hasAvatar: boolean,
+	shareIcon: boolean,
+): SerializedStyles => {
 	return css`
 		position: relative;
 		display: flex;
@@ -104,12 +108,12 @@ const styles = (iconColor: string, hasAvatar: boolean): SerializedStyles => {
 		}
 		min-height: ${remSpace[12]};
 
-		${!hasAvatar && `padding-bottom: ${remSpace[4]};`}
+		${!hasAvatar && shareIcon && `padding-bottom: ${remSpace[4]};`}
 		margin: 0;
 
 		${from.tablet} {
 			min-height: ${remSpace[9]};
-			${!hasAvatar && `padding-bottom: ${remSpace[9]};`}
+			${!hasAvatar && shareIcon && `padding-bottom: ${remSpace[9]};`}
 		}
 	`;
 };
@@ -180,34 +184,36 @@ const getBylineStyles = (
 	format: ArticleFormat,
 	iconColor: string,
 	hasAvatar: boolean,
+	shareIcon: boolean,
 ): SerializedStyles => {
 	// ArticleDisplay.Immersive needs to come before ArticleDesign.Interview
 	if (format.display === ArticleDisplay.Immersive) {
-		return css(styles(iconColor, hasAvatar), immersiveStyles);
+		return css(styles(iconColor, hasAvatar, shareIcon), immersiveStyles);
 	}
 	if (format.design === ArticleDesign.Interview) {
-		return css(styles(iconColor, hasAvatar), interviewStyles);
+		return css(styles(iconColor, hasAvatar, shareIcon), interviewStyles);
 	}
 	if (format.design === ArticleDesign.Comment) {
-		return css(styles(iconColor, hasAvatar));
+		return css(styles(iconColor, hasAvatar, shareIcon));
 	}
 	if (format.display === ArticleDisplay.Showcase) {
-		return css(styles(iconColor, hasAvatar), showcaseStyles);
+		return css(styles(iconColor, hasAvatar, shareIcon), showcaseStyles);
 	}
 	if (
 		format.design === ArticleDesign.Gallery ||
 		format.design === ArticleDesign.Audio ||
 		format.design === ArticleDesign.Video
 	) {
-		return css(styles(iconColor, hasAvatar), galleryStyles);
+		return css(styles(iconColor, hasAvatar, shareIcon), galleryStyles);
 	}
-	return styles(iconColor, hasAvatar);
+	return styles(iconColor, hasAvatar, shareIcon);
 };
 
 // ----- Component ----- //
 
 interface Props {
 	item: Item;
+	shareIcon?: boolean;
 }
 
 const renderText = (
@@ -255,15 +261,17 @@ const ignoreTextColour = (format: ArticleFormat): boolean =>
 	format.design === ArticleDesign.Video ||
 	format.display === ArticleDisplay.Immersive;
 
-const Byline: FC<Props> = ({ item }) => {
+const Byline: FC<Props> = ({ item, shareIcon = true }) => {
 	const format = getFormat(item);
 	const { kicker: kickerColor } = getThemeStyles(format.theme);
 
 	const iconColor = ignoreIconColour(format) ? neutral[100] : kickerColor;
-	const showShareIcon = hasShareIcon(format);
+	const showShareIcon = hasShareIcon(format) && shareIcon;
 
 	return maybeRender(item.bylineHtml, (byline) => (
-		<div css={getBylineStyles(format, iconColor, hasAvatar(item))}>
+		<div
+			css={getBylineStyles(format, iconColor, hasAvatar(item), shareIcon)}
+		>
 			<address css={addressStyles}>{renderText(byline, format)}</address>
 			{showShareIcon && <ShareIcon />}
 			{hasAvatar(item) && (

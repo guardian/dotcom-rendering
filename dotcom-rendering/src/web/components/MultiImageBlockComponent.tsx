@@ -114,7 +114,7 @@ export const MultiImageBlockComponent = ({
 						hideCaption={true}
 						role={images[0].role}
 					/>
-					{caption && (
+					{!!caption && (
 						<Caption
 							format={format}
 							captionText={caption}
@@ -154,7 +154,7 @@ export const MultiImageBlockComponent = ({
 							/>
 						</GridItem>
 					</SideBySideGrid>
-					{caption && (
+					{!!caption && (
 						<Caption
 							captionText={caption}
 							format={format}
@@ -202,7 +202,7 @@ export const MultiImageBlockComponent = ({
 							/>
 						</GridItem>
 					</OneAboveTwoGrid>
-					{caption && (
+					{!!caption && (
 						<Caption
 							captionText={caption}
 							format={format}
@@ -257,7 +257,7 @@ export const MultiImageBlockComponent = ({
 							/>
 						</GridItem>
 					</GridOfFour>
-					{caption && (
+					{!!caption && (
 						<Caption
 							captionText={caption}
 							format={format}

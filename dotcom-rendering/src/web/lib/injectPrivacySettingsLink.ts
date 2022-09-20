@@ -43,7 +43,9 @@ export const injectPrivacySettingsLink = (): void => {
 						cmp.showPrivacyManager,
 					);
 				})
-				.catch((e) => console.error(`privacy settings - error: ${e}`));
+				.catch((e) =>
+					console.error(`privacy settings - error: ${String(e)}`),
+				);
 		}
 	}
 };

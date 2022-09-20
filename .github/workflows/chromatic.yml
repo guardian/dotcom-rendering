@@ -1,9 +1,8 @@
 name: Chromatic 👓
 on:
   push:
-    branches:
-      - main
-  pull_request:
+    paths-ignore:
+      - "dotcom-rendering/docs/**"
 jobs:
   chromatic:
     name: Chromatic
@@ -18,13 +17,9 @@ jobs:
       # Root yarn installs all workspaces (root, common, dotcom)
       - uses: bahmutov/npm-install@v1
 
-      # Install packages for apps-rendering project
-      - uses: bahmutov/npm-install@v1
-        with:
-          working-directory: apps-rendering
-
       - uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
+          onlyChanged: true

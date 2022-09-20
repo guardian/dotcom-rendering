@@ -1,11 +1,14 @@
+import { ArticleDesign } from '@guardian/libs';
 import {
 	getBylineComponentsFromTokens,
-	getContributorTags,
+	getSoleContributor,
+	isContributor,
 } from '../../lib/byline';
 
 type Props = {
 	byline: string;
 	tags: TagType[];
+	format: ArticleFormat;
 };
 
 const applyCleverOrderingForMatching = (titles: string[]): string[] => {
@@ -44,14 +47,19 @@ const applyCleverOrderingForMatching = (titles: string[]): string[] => {
 		.reverse();
 };
 
-// This crazy function aims to split bylines such as
-// 'Harry Potter in Hogwarts' to ['Harry Potter', 'in Hogwarts']
-// Or
-// 'Jane Doe and John Smith` to ['Jane Doe', ' and ', 'John Smith']
-// It does this so we can have separate links to both contributors
+/**
+ * This crazy function aims to split bylines such as
+ * 'Harry Potter in Hogwarts' to ['Harry Potter', 'in Hogwarts']
+ * Or
+ * 'Jane Doe and John Smith` to ['Jane Doe', ' and ', 'John Smith']
+ * It does this so we can have separate links to both contributors
+ */
 export const bylineAsTokens = (byline: string, tags: TagType[]): string[] => {
-	const titles = getContributorTags(tags).map((c) => c.title);
-	// The contributor tag title should exist inside the byline for this regex to work
+	const titles = tags.filter(isContributor).map((c) => c.title);
+	// The contributor tag title should exist inside the byline for the regex
+	// below to work. If it doesn't, we return the whole byline to prevent the
+	// regex splitting the string into an array of single charaters
+	if (titles.length === 0) return [byline];
 
 	const regex = new RegExp(
 		`(${applyCleverOrderingForMatching(titles).join('|')})`,
@@ -60,10 +68,13 @@ export const bylineAsTokens = (byline: string, tags: TagType[]): string[] => {
 	return byline.split(regex);
 };
 
-const ContributorLink: React.FC<{
+const ContributorLink = ({
+	contributor,
+	contributorTagId,
+}: {
 	contributor: string;
 	contributorTagId: string;
-}> = ({ contributor, contributorTagId }) => (
+}) => (
 	<a
 		rel="author"
 		data-link-name="auto tag link"
@@ -73,14 +84,24 @@ const ContributorLink: React.FC<{
 	</a>
 );
 
-export const BylineLink = ({ byline, tags }: Props) => {
-	const tokens = bylineAsTokens(byline, tags);
+function removeComma(bylinePart: string) {
+	return bylinePart.startsWith(',')
+		? bylinePart.slice(1).trimStart()
+		: bylinePart;
+}
 
+export const BylineLink = ({ byline, tags, format }: Props) => {
+	const tokens = bylineAsTokens(byline, tags);
+	const hasSingleContributor = !!getSoleContributor(tags, byline);
 	const bylineComponents = getBylineComponentsFromTokens(tokens, tags);
 
 	const renderedTokens = bylineComponents.map((bylineComponent) => {
 		if (typeof bylineComponent === 'string') {
-			return bylineComponent;
+			const displayString =
+				format.design === ArticleDesign.Analysis && hasSingleContributor
+					? removeComma(bylineComponent)
+					: bylineComponent;
+			return displayString ? <span>{displayString}</span> : null;
 		}
 		return (
 			<ContributorLink

@@ -9,6 +9,9 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import { getSoleContributor } from '../../lib/byline';
+import type { Branding as BrandingType } from '../../types/branding';
+import type { Palette } from '../../types/palette';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 import { Avatar } from './Avatar';
@@ -25,11 +28,11 @@ type Props = {
 	format: ArticleFormat;
 	pageId: string;
 	webTitle: string;
-	author: AuthorType;
+	byline?: string;
 	tags: TagType[];
 	primaryDateline: string;
 	secondaryDateline: string;
-	branding?: Branding;
+	branding?: BrandingType;
 	discussionApiUrl: string;
 	shortUrlId: string;
 	isCommentable: boolean;
@@ -197,16 +200,6 @@ const metaContainer = (format: ArticleFormat) => {
 	}
 };
 
-const getBylineImageUrl = (tags: TagType[]) => {
-	const contributorTag = tags.find((tag) => tag.type === 'Contributor');
-	return contributorTag?.bylineLargeImageUrl;
-};
-
-const getAuthorName = (tags: TagType[]) => {
-	const contributorTag = tags.find((tag) => tag.type === 'Contributor');
-	return contributorTag?.title;
-};
-
 const shouldShowAvatar = (format: ArticleFormat) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
@@ -224,6 +217,8 @@ const shouldShowAvatar = (format: ArticleFormat) => {
 					return false;
 			}
 		}
+		default:
+			return false;
 	}
 };
 
@@ -238,15 +233,18 @@ const shouldShowContributor = (format: ArticleFormat) => {
 			switch (format.design) {
 				case ArticleDesign.Comment:
 				case ArticleDesign.Editorial:
+				case ArticleDesign.Analysis:
 					return false;
 				default:
 					return true;
 			}
 		}
+		default:
+			return false;
 	}
 };
 
-const AvatarContainer = ({ children }: { children: React.ReactNode }) => (
+const MetaAvatarContainer = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			width: 140px;
@@ -302,7 +300,7 @@ export const ArticleMeta = ({
 	format,
 	pageId,
 	webTitle,
-	author,
+	byline,
 	tags,
 	primaryDateline,
 	secondaryDateline,
@@ -312,27 +310,12 @@ export const ArticleMeta = ({
 	ajaxUrl,
 	showShareCount,
 }: Props) => {
-	const bylineImageUrl = getBylineImageUrl(tags);
-	const authorName = getAuthorName(tags);
+	const soleContributor = getSoleContributor(tags, byline);
+	const authorName = soleContributor?.title ?? 'Author Image';
 
-	const showAvatarFromAuthor = () => {
-		if (
-			author.byline === undefined ||
-			!author.byline ||
-			author.byline === ''
-		) {
-			return false;
-		}
-		return true;
-	};
-
-	const onlyOneContributor: boolean =
-		tags.filter((tag) => tag.type === 'Contributor').length === 1;
-
-	const showAvatar =
-		onlyOneContributor &&
-		showAvatarFromAuthor() &&
-		shouldShowAvatar(format);
+	const avatarUrl = shouldShowAvatar(format)
+		? soleContributor?.bylineLargeImageUrl
+		: undefined;
 	const isInteractive = format.design === ArticleDesign.Interactive;
 
 	const palette = decidePalette(format);
@@ -347,7 +330,11 @@ export const ArticleMeta = ({
 			<div css={meta(format)}>
 				{branding && (
 					<Island deferUntil="visible">
-						<Branding branding={branding} palette={palette} />
+						<Branding
+							branding={branding}
+							palette={palette}
+							format={format}
+						/>
 					</Island>
 				)}
 				{format.theme === ArticleSpecial.Labs ? (
@@ -368,20 +355,20 @@ export const ArticleMeta = ({
 				)}
 				<RowBelowLeftCol>
 					<>
-						{showAvatar && bylineImageUrl && (
-							<AvatarContainer>
+						{!!avatarUrl && (
+							<MetaAvatarContainer>
 								<Avatar
-									imageSrc={bylineImageUrl}
-									imageAlt={authorName || 'Author image'}
+									imageSrc={avatarUrl}
+									imageAlt={authorName}
 									format={format}
 								/>
-							</AvatarContainer>
+							</MetaAvatarContainer>
 						)}
 
 						<div>
-							{shouldShowContributor(format) && (
+							{shouldShowContributor(format) && !!byline && (
 								<Contributor
-									author={author}
+									byline={byline}
 									tags={tags}
 									format={format}
 								/>

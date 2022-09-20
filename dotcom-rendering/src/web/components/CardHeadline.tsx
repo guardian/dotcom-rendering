@@ -1,9 +1,18 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial } from '@guardian/libs';
 import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
-import { headline, space, textSans, until } from '@guardian/source-foundations';
+import {
+	between,
+	from,
+	headline,
+	space,
+	textSans,
+	until,
+} from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import React from 'react';
+import type { DCRContainerPalette } from '../../types/front';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { Byline } from './Byline';
@@ -19,10 +28,12 @@ type Props = {
 	showSlash?: boolean;
 	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
 	size?: SmallHeadlineSize;
+	sizeOnMobile?: SmallHeadlineSize;
 	byline?: string;
 	showByline?: boolean;
 	showLine?: boolean; // If true a short line is displayed above, used for sublinks
 	linkTo?: string; // If provided, the headline is wrapped in a link
+	isDynamo?: true;
 };
 
 const fontStyles = ({
@@ -36,26 +47,24 @@ const fontStyles = ({
 	if (fontWeight) options.fontWeight = fontWeight;
 
 	switch (size) {
+		case 'ginormous':
+			return css`
+				${from.desktop} {
+					${headline.large(options)};
+					font-size: 50px;
+				}
+			`;
 		case 'huge':
 			return css`
 				${headline.small(options)};
-				${until.desktop} {
-					${headline.xsmall(options)};
-				}
 			`;
 		case 'large':
 			return css`
 				${headline.xsmall(options)};
-				${until.desktop} {
-					${headline.xxsmall(options)};
-				}
 			`;
 		case 'medium':
 			return css`
 				${headline.xxsmall(options)};
-				${until.desktop} {
-					${headline.xxxsmall(options)};
-				}
 			`;
 		case 'small':
 			return css`
@@ -69,8 +78,52 @@ const fontStyles = ({
 	}
 };
 
+const fontStylesOnMobile = ({
+	size,
+	fontWeight,
+}: {
+	size: SmallHeadlineSize;
+	fontWeight?: FontWeight;
+}) => {
+	const options: FontScaleArgs = {};
+	if (fontWeight) options.fontWeight = fontWeight;
+
+	switch (size) {
+		case 'ginormous':
+			return css`
+				${until.mobileLandscape} {
+					${headline.medium(options)};
+				}
+				${between.mobileLandscape.and.desktop} {
+					${headline.large(options)};
+				}
+			`;
+		case 'huge':
+			return css`
+				${until.desktop} {
+					${headline.xsmall(options)};
+				}
+			`;
+		case 'large':
+			return css`
+				${until.desktop} {
+					${headline.xxsmall(options)};
+				}
+			`;
+		case 'medium':
+			return css`
+				${until.desktop} {
+					${headline.xxxsmall(options)};
+				}
+			`;
+		default:
+			return undefined;
+	}
+};
+
 const labTextStyles = (size: SmallHeadlineSize) => {
 	switch (size) {
+		case 'ginormous':
 		case 'huge':
 		case 'large':
 			return css`
@@ -96,49 +149,6 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 				${textSans.xxsmall()};
 				font-size: 14px;
 			`;
-	}
-};
-
-const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
-	function underlinedCss(baseSize: number) {
-		return css`
-			background-image: linear-gradient(
-				to bottom,
-				transparent,
-				transparent ${baseSize - 1}px,
-				${colour}
-			);
-			line-height: ${baseSize}px;
-			background-size: 1px ${baseSize}px;
-			background-origin: content-box;
-			background-clip: content-box;
-			margin-right: -5px;
-		`;
-	}
-
-	function underlinedCssWithMediaQuery(
-		baseSize: number,
-		untilDesktopSize: number,
-	) {
-		return css`
-			${until.desktop} {
-				${underlinedCss(untilDesktopSize)}
-			}
-
-			${underlinedCss(baseSize)}
-		`;
-	}
-
-	switch (size) {
-		case 'huge':
-		case 'large':
-			return underlinedCssWithMediaQuery(29, 29);
-		case 'medium':
-			return underlinedCssWithMediaQuery(25, 25);
-		case 'small':
-			return underlinedCss(22);
-		case 'tiny':
-			return underlinedCss(24);
 	}
 };
 
@@ -169,7 +179,7 @@ const WithLink = ({
 				subdued={true}
 				cssOverrides={css`
 					/* See: https://css-tricks.com/nested-links/ */
-					${getZIndex('card-nested-link')};
+					${getZIndex('card-nested-link')}
 					/* The following styles turn off those provided by Link */
 					color: inherit;
 					/* stylelint-disable-next-line property-disallowed-list */
@@ -203,12 +213,17 @@ export const CardHeadline = ({
 	showPulsingDot,
 	showSlash,
 	size = 'medium',
+	sizeOnMobile,
 	byline,
 	showByline,
 	showLine,
 	linkTo,
+	isDynamo,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
+	const kickerColour = isDynamo
+		? palette.text.dynamoKicker
+		: palette.text.cardKicker;
 	return (
 		<>
 			<h4
@@ -221,32 +236,30 @@ export const CardHeadline = ({
 									? 'bold'
 									: 'regular',
 						  }),
-					format.design === ArticleDesign.Analysis &&
-						!containerPalette &&
-						underlinedStyles(
-							size,
-							palette.background.analysisUnderline,
-						),
+					format.theme !== ArticleSpecial.Labs &&
+						fontStylesOnMobile({
+							size: sizeOnMobile ?? size,
+							fontWeight: containerPalette ? 'bold' : 'regular',
+						}),
 					showLine && lineStyles(palette),
 				]}
 			>
 				<WithLink linkTo={linkTo}>
-					{kickerText && (
+					{!!kickerText && (
 						<Kicker
 							text={kickerText}
-							palette={palette}
+							color={kickerColour}
 							showPulsingDot={showPulsingDot}
 							showSlash={showSlash}
-							inCard={true}
 						/>
 					)}
-					{showQuotes && (
-						<QuoteIcon colour={palette.text.cardKicker} />
-					)}
+					{showQuotes && <QuoteIcon colour={kickerColour} />}
 
 					<span
 						css={css`
-							color: ${palette.text.cardHeadline};
+							color: ${isDynamo
+								? palette.text.dynamoHeadline
+								: palette.text.cardHeadline};
 						`}
 						className="show-underline"
 					>
@@ -254,7 +267,7 @@ export const CardHeadline = ({
 					</span>
 				</WithLink>
 			</h4>
-			{byline && showByline && (
+			{!!byline && showByline && (
 				<Byline
 					text={byline}
 					format={format}

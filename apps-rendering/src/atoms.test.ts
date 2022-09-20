@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { Atoms } from '@guardian/content-api-models/v1/atoms';
 import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
@@ -20,11 +24,12 @@ import { QAndAItem } from '@guardian/content-atom-model/qanda/qAndAItem';
 import { QuizAtom } from '@guardian/content-atom-model/quiz/quizAtom';
 import { TimelineAtom } from '@guardian/content-atom-model/timeline/timelineAtom';
 import { TimelineItem } from '@guardian/content-atom-model/timeline/timelineItem';
-import { err, fromNullable, ok, some } from '@guardian/types';
+import { fromNullable, some } from '@guardian/types';
 import { ElementKind } from 'bodyElement';
 import { atomScript } from 'components/InteractiveAtom';
 import Int64 from 'node-int64';
 import { DocParser } from 'parserContext';
+import { Result } from 'result';
 import { formatOptionalDate, parseAtom } from './atoms';
 
 describe('formatOptionalDate', () => {
@@ -67,7 +72,7 @@ describe('parseAtom', () => {
 	it('returns an error if the atom has no data', () => {
 		blockElement.contentAtomTypeData = undefined;
 		expect(parseAtom(blockElement, {}, docParser)).toEqual(
-			err('The atom has no data'),
+			Result.err('The atom has no data'),
 		);
 	});
 
@@ -78,7 +83,7 @@ describe('parseAtom', () => {
 			atomType: unsupportedAtomType,
 		};
 		expect(parseAtom(blockElement, {}, docParser)).toEqual(
-			err(`Atom type not supported: ${unsupportedAtomType}`),
+			Result.err(`Atom type not supported: ${unsupportedAtomType}`),
 		);
 	});
 
@@ -113,13 +118,13 @@ describe('parseAtom', () => {
 			atoms.interactives = [];
 
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No atom matched this id: ${atomId}`),
+				Result.err(`No atom matched this id: ${atomId}`),
 			);
 		});
 
 		it(`returns an error if there's not atom content`, () => {
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No content for atom: ${atomId}`),
+				Result.err(`No content for atom: ${atomId}`),
 			);
 		});
 
@@ -144,7 +149,7 @@ describe('parseAtom', () => {
 			atomsWithData.interactives = [interactiveWithData];
 
 			expect(parseAtom(blockElement, atomsWithData, docParser)).toEqual(
-				ok({
+				Result.ok({
 					kind: ElementKind.InteractiveAtom,
 					html,
 					css,
@@ -194,20 +199,20 @@ describe('parseAtom', () => {
 		it(`returns an error if no guide atom id matches`, () => {
 			guide.data.kind = 'interactive';
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No atom matched this id: ${atomId}`),
+				Result.err(`No atom matched this id: ${atomId}`),
 			);
 		});
 
 		it(`returns an error if no guide title or body`, () => {
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No title or body for atom: ${atomId}`),
+				Result.err(`No title or body for atom: ${atomId}`),
 			);
 		});
 
 		it(`returns GuideAtom result type given the correct guide`, () => {
 			guide.title = 'guide title';
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				ok({
+				Result.ok({
 					kind: ElementKind.GuideAtom,
 					html: 'guide body',
 					title: guide.title,
@@ -224,7 +229,7 @@ describe('parseAtom', () => {
 			};
 
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				ok({
+				Result.ok({
 					kind: ElementKind.GuideAtom,
 					html: 'guide body',
 					title: guide.title,
@@ -275,20 +280,20 @@ describe('parseAtom', () => {
 		it(`returns an error if no guide atom id matches`, () => {
 			qanda.data.kind = 'interactive';
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No atom matched this id: ${atomId}`),
+				Result.err(`No atom matched this id: ${atomId}`),
 			);
 		});
 
 		it(`returns an error if no guide title or body`, () => {
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No title or body for atom: ${atomId}`),
+				Result.err(`No title or body for atom: ${atomId}`),
 			);
 		});
 
 		it(`returns GuideAtom result type given the correct guide`, () => {
 			qanda.title = 'qanda title';
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				ok({
+				Result.ok({
 					kind: ElementKind.QandaAtom,
 					html: 'qanda body',
 					title: qanda.title,
@@ -305,7 +310,7 @@ describe('parseAtom', () => {
 			};
 
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				ok({
+				Result.ok({
 					kind: ElementKind.QandaAtom,
 					html: 'qanda body',
 					id: atomId,
@@ -356,20 +361,20 @@ describe('parseAtom', () => {
 		it(`returns an error if no profile atom id matches`, () => {
 			profile.data.kind = 'interactive';
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No atom matched this id: ${atomId}`),
+				Result.err(`No atom matched this id: ${atomId}`),
 			);
 		});
 
 		it(`returns an error if no profile title or body`, () => {
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No title or body for atom: ${atomId}`),
+				Result.err(`No title or body for atom: ${atomId}`),
 			);
 		});
 
 		it(`returns ProfileAtom result type given the correct profile`, () => {
 			profile.title = 'profile title';
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				ok({
+				Result.ok({
 					kind: ElementKind.ProfileAtom,
 					html: 'profile body',
 					title: profile.title,
@@ -386,7 +391,7 @@ describe('parseAtom', () => {
 			};
 
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				ok({
+				Result.ok({
 					kind: ElementKind.ProfileAtom,
 					html: 'profile body',
 					id: atomId,
@@ -429,13 +434,13 @@ describe('parseAtom', () => {
 		it(`returns an error if no chart atom id matches`, () => {
 			chart.data.kind = 'interactive';
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No atom matched this id: ${atomId}`),
+				Result.err(`No atom matched this id: ${atomId}`),
 			);
 		});
 
 		it(`returns an error if no chart title or defaultHtml`, () => {
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No title or defaultHtml for atom: ${atomId}`),
+				Result.err(`No title or defaultHtml for atom: ${atomId}`),
 			);
 		});
 
@@ -444,7 +449,7 @@ describe('parseAtom', () => {
 			chart.defaultHtml = 'some default html';
 
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				ok({
+				Result.ok({
 					kind: ElementKind.ChartAtom,
 					title: 'chart title',
 					id: atomId,
@@ -471,7 +476,7 @@ describe('parseAtom', () => {
 			docParser = jest.fn(() => frag);
 
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				ok({
+				Result.ok({
 					kind: ElementKind.ChartAtom,
 					title: 'chart title',
 					id: atomId,
@@ -523,13 +528,13 @@ describe('parseAtom', () => {
 		it(`returns an error if no timeline atom id matches`, () => {
 			timeline.data.kind = 'interactive';
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No atom matched this id: ${atomId}`),
+				Result.err(`No atom matched this id: ${atomId}`),
 			);
 		});
 
 		it(`returns an error if no timeline title or body`, () => {
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No title for atom: ${atomId}`),
+				Result.err(`No title for atom: ${atomId}`),
 			);
 		});
 
@@ -538,7 +543,7 @@ describe('parseAtom', () => {
 			timelineItem.body = 'timeline item body';
 			timelineItem.date = new Int64('123456789abcdef0');
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`Invalid date in timeline atom`),
+				Result.err(`Invalid date in timeline atom`),
 			);
 		});
 
@@ -549,7 +554,7 @@ describe('parseAtom', () => {
 			timelineItem.toDate = new Int64(1614157023336);
 
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				ok({
+				Result.ok({
 					kind: ElementKind.TimelineAtom,
 					title: 'timeline title',
 					id: atomId,
@@ -604,13 +609,13 @@ describe('parseAtom', () => {
 		it(`returns an error if no explainer atom id matches`, () => {
 			explainer.data.kind = 'interactive';
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No atom matched this id: ${atomId}`),
+				Result.err(`No atom matched this id: ${atomId}`),
 			);
 		});
 
 		it(`returns an error if no explainer title or body`, () => {
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No title or body for atom: ${atomId}`),
+				Result.err(`No title or body for atom: ${atomId}`),
 			);
 		});
 
@@ -619,7 +624,7 @@ describe('parseAtom', () => {
 			explainerAtom.body = 'explainer body';
 
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				ok({
+				Result.ok({
 					kind: ElementKind.ExplainerAtom,
 					html: 'explainer body',
 					title: 'explainer title',
@@ -675,21 +680,21 @@ describe('parseAtom', () => {
 		it(`returns an error if no media atom id matches`, () => {
 			media.data.kind = 'interactive';
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No atom matched this id: ${atomId}`),
+				Result.err(`No atom matched this id: ${atomId}`),
 			);
 		});
 
 		it(`returns an error given no poster url`, () => {
 			mediaAtom.posterUrl = '';
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No posterUrl for atom: ${atomId}`),
+				Result.err(`No posterUrl for atom: ${atomId}`),
 			);
 		});
 
 		it(`returns an error given no video id`, () => {
 			mediaAtom.activeVersion = new Int64(42);
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No videoId for atom: ${atomId}`),
+				Result.err(`No videoId for atom: ${atomId}`),
 			);
 		});
 
@@ -701,7 +706,7 @@ describe('parseAtom', () => {
 			docParser = jest.fn(() => frag);
 
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				ok({
+				Result.ok({
 					kind: ElementKind.MediaAtom,
 					posterUrl: 'poster-url',
 					caption: some(frag),
@@ -752,20 +757,20 @@ describe('parseAtom', () => {
 		it(`returns an error if no audio atom id matches`, () => {
 			audio.data.kind = 'interactive';
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No atom matched this id: ${atomId}`),
+				Result.err(`No atom matched this id: ${atomId}`),
 			);
 		});
 
 		it(`returns an error given no audio title`, () => {
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No title for audio atom with id: ${atomId}`),
+				Result.err(`No title for audio atom with id: ${atomId}`),
 			);
 		});
 
 		it(`parses audio atom correctly`, () => {
 			audio.title = 'audio title';
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				ok({
+				Result.ok({
 					kind: ElementKind.AudioAtom,
 					id: 'atom-id',
 					kicker: 'audio-kickcer',
@@ -831,20 +836,20 @@ describe('parseAtom', () => {
 		it(`returns an error if no quiz atom id matches`, () => {
 			quiz.data.kind = 'interactive';
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No atom matched this id: ${atomId}`),
+				Result.err(`No atom matched this id: ${atomId}`),
 			);
 		});
 
 		it(`returns an error of quiz atom has no content`, () => {
 			quizAtom.content.questions = [];
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				err(`No content for atom: ${atomId}`),
+				Result.err(`No content for atom: ${atomId}`),
 			);
 		});
 
 		it(`parses knowledge quiz atom correctly`, () => {
 			expect(parseAtom(blockElement, atoms, docParser)).toEqual(
-				ok({
+				Result.ok({
 					kind: ElementKind.KnowledgeQuizAtom,
 					id: atomId,
 					questions: [

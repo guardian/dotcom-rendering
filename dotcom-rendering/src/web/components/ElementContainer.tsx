@@ -1,25 +1,31 @@
 import { ClassNames, css as emoCss } from '@emotion/react';
-import { border, from } from '@guardian/source-foundations';
+import { border, from, space } from '@guardian/source-foundations';
 // @ts-expect-error
 import { jsx as _jsx } from 'react/jsx-runtime';
 import { center } from '../lib/center';
 
-const padding = emoCss`
-	padding: 0 10px;
+const sidePadding = emoCss`
+	padding-left: 10px;
+	padding-right: 10px;
 
 	${from.mobileLandscape} {
-		padding: 0 20px;
+		padding-left: 20px;
+		padding-right: 20px;
 	}
 `;
 
-const sideBorders = (colour: string) => emoCss`
+const bottomPadding = emoCss`
+	padding-bottom: ${space[9]}px;
+`;
+
+const sideBorderStyles = (colour: string) => emoCss`
 	${from.tablet} {
 		border-left: 1px solid ${colour};
 		border-right: 1px solid ${colour};
 	}
 `;
 
-const topBorder = (colour: string) => emoCss`
+const topBorderStyles = (colour: string) => emoCss`
 	border-top: 1px solid ${colour};
 `;
 
@@ -31,7 +37,8 @@ type Props = {
 	sectionId?: string;
 	showSideBorders?: boolean;
 	showTopBorder?: boolean;
-	padded?: boolean;
+	padSides?: boolean;
+	padBottom?: boolean;
 	backgroundColour?: string;
 	innerBackgroundColour?: string;
 	borderColour?: string;
@@ -49,13 +56,18 @@ type Props = {
 	className?: string;
 	ophanComponentName?: string;
 	ophanComponentLink?: string;
+	containerName?: string;
 };
 
+/**
+ * @deprecated please use Section fullWidth={true}  instead
+ */
 export const ElementContainer = ({
 	sectionId,
 	showSideBorders = true,
 	showTopBorder = true,
-	padded = true,
+	padSides = true,
+	padBottom = false,
 	borderColour = border.secondary,
 	backgroundColour,
 	innerBackgroundColour,
@@ -65,6 +77,7 @@ export const ElementContainer = ({
 	className,
 	ophanComponentName,
 	ophanComponentLink,
+	containerName,
 }: Props) => (
 	<ClassNames>
 		{({ css }) => {
@@ -73,14 +86,15 @@ export const ElementContainer = ({
 					id={sectionId}
 					css={[
 						shouldCenter && center,
-						showSideBorders && sideBorders(borderColour),
-						showTopBorder && topBorder(borderColour),
+						showSideBorders && sideBorderStyles(borderColour),
+						showTopBorder && topBorderStyles(borderColour),
 						innerBackgroundColour &&
 							setBackgroundColour(innerBackgroundColour),
-						padded && padding,
+						padSides && sidePadding,
+						padBottom && bottomPadding,
 					]}
 				>
-					{children && children}
+					{children}
 				</div>
 			);
 			const style = css`
@@ -91,6 +105,7 @@ export const ElementContainer = ({
 			return _jsx(`${element}`, {
 				'data-link-name': ophanComponentLink,
 				'data-component': ophanComponentName,
+				'data-container-name': containerName,
 				className: className ? `${style} ${className}` : style,
 				children: child,
 			});

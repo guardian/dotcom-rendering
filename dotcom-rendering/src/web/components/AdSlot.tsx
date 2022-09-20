@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-import {
-	adSizes,
-	slotSizeMappings as sizeMappings,
-} from '@guardian/commercial-core';
+import { adSizes } from '@guardian/commercial-core';
+import type { SlotName } from '@guardian/commercial-core';
 import { ArticleDisplay } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	border,
 	from,
@@ -13,15 +12,36 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import type { EditionId } from '../../types/edition';
 import { Island } from './Island';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
-type Props = {
-	display: ArticleDisplay;
-	position: AdSlotType;
+type InlineProps = {
+	display?: ArticleDisplay;
+	position: 'inline';
+	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
+	format?: ArticleFormat;
+	editionId?: EditionId;
 };
+
+type NonInlineProps = {
+	display?: ArticleDisplay;
+	position: Omit<SlotName, 'inline'>;
+	index?: never;
+	shouldHideReaderRevenue?: boolean;
+	isPaidContent?: boolean;
+	format?: ArticleFormat;
+	editionId?: EditionId;
+};
+
+/**
+ * This union type allows us to conditionally require the index property
+ * based on position. If position = 'inline' then we expect the index
+ * value. If not, then we explictly refuse this property
+ */
+type Props = InlineProps | NonInlineProps;
 
 export const labelHeight = 24;
 
@@ -74,6 +94,24 @@ export const labelStyles = css`
 export const adCollapseStyles = css`
 	& .ad-slot.ad-slot--collapse {
 		display: none;
+	}
+`;
+
+const merchandisingAdStyles = css`
+	position: relative;
+	min-height: 250px;
+`;
+
+const mostPopAdStyles = css`
+	position: relative;
+	min-height: 274px;
+	min-width: 300px;
+	width: 300px;
+	margin: 12px auto;
+	text-align: center;
+	${from.desktop} {
+		margin: 0;
+		width: auto;
 	}
 `;
 
@@ -191,7 +229,7 @@ const mobileStickyAdStyles = css`
 
 const adStyles = [labelStyles, fluidAdStyles];
 
-const AdSlotLabelToggled: React.FC = () => (
+const AdSlotLabelToggled = () => (
 	<div
 		className={['ad-slot__label', 'ad-slot__label--toggle', 'hidden'].join(
 			' ',
@@ -202,12 +240,15 @@ const AdSlotLabelToggled: React.FC = () => (
 	</div>
 );
 
-export const AdSlot: React.FC<Props> = ({
+export const AdSlot = ({
 	position,
 	display,
 	shouldHideReaderRevenue = false,
 	isPaidContent = false,
-}) => {
+	index,
+	format,
+	editionId,
+}: Props) => {
 	switch (position) {
 		case 'right':
 			switch (display) {
@@ -228,10 +269,6 @@ export const AdSlot: React.FC<Props> = ({
 							css={adStyles}
 							data-link-name="ad slot right"
 							data-name="right"
-							// mark: 01303e88-ef1f-462d-9b6e-242419435cec
-							data-mobile={(sizeMappings.right.mobile || [])
-								.map((size) => size.toString())
-								.join('|')}
 							aria-hidden="true"
 						/>
 					);
@@ -245,6 +282,8 @@ export const AdSlot: React.FC<Props> = ({
 								}
 								isPaidContent={isPaidContent}
 								adStyles={adStyles}
+								format={format}
+								editionId={editionId}
 							/>
 						</Island>
 					);
@@ -280,15 +319,6 @@ export const AdSlot: React.FC<Props> = ({
 						]}
 						data-link-name="ad slot comments"
 						data-name="comments"
-						data-mobile={(sizeMappings.comments.mobile || [])
-							.map((size) => size.toString())
-							.join('|')}
-						data-desktop={(sizeMappings.comments.desktop || [])
-							.map((size) => size.toString())
-							.join('|')}
-						data-phablet={(sizeMappings.comments.phablet || [])
-							.map((size) => size.toString())
-							.join('|')}
 						aria-hidden="true"
 					/>
 				</div>
@@ -305,7 +335,6 @@ export const AdSlot: React.FC<Props> = ({
 			`;
 			return (
 				<>
-					<AdSlotLabelToggled />
 					<div
 						id="dfp-ad--top-above-nav"
 						className={[
@@ -318,22 +347,10 @@ export const AdSlot: React.FC<Props> = ({
 						css={[adStyles, fluidFullWidthAdStyles, adSlotAboveNav]}
 						data-link-name="ad slot top-above-nav"
 						data-name="top-above-nav"
-						// The sizes here come from two places in the frontend code
-						// 1. file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-						// 2. file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
-						data-tablet={(
-							sizeMappings['top-above-nav'].tablet || []
-						)
-							.map((size) => size.toString())
-							.join('|')}
-						data-desktop={(
-							sizeMappings['top-above-nav'].desktop || []
-						)
-							.map((size) => size.toString())
-							.join('|')}
-						// Values from file mark: c66fae4e-1d29-467a-a081-caad7a90cacd
 						aria-hidden="true"
-					/>
+					>
+						<AdSlotLabelToggled />
+					</div>
 				</>
 			);
 		}
@@ -348,27 +365,9 @@ export const AdSlot: React.FC<Props> = ({
 						'ad-slot--mpu-banner-ad',
 						'ad-slot--rendered',
 					].join(' ')}
-					css={[
-						css`
-							position: relative;
-						`,
-						adStyles,
-					]}
+					css={[adStyles, mostPopAdStyles]}
 					data-link-name="ad slot mostpop"
 					data-name="mostpop"
-					// mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-					data-mobile={(sizeMappings.mostpop.mobile || [])
-						.map((size) => size.toString())
-						.join('|')}
-					data-tablet={(sizeMappings.mostpop.tablet || [])
-						.map((size) => size.toString())
-						.join('|')}
-					data-phablet={(sizeMappings.mostpop.phablet || [])
-						.map((size) => size.toString())
-						.join('|')}
-					data-desktop={(sizeMappings.mostpop.desktop || [])
-						.map((size) => size.toString())
-						.join('|')}
 					aria-hidden="true"
 				/>
 			);
@@ -383,21 +382,14 @@ export const AdSlot: React.FC<Props> = ({
 						'ad-slot--merchandising-high',
 					].join(' ')}
 					css={[
-						css`
-							position: relative;
-						`,
+						merchandisingAdStyles,
 						adStyles,
 						fluidFullWidthAdStyles,
 					]}
 					data-link-name="ad slot merchandising-high"
 					data-name="merchandising-high"
-					// mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-					data-mobile={(
-						sizeMappings['merchandising-high'].mobile || []
-					)
-						.map((size) => size.toString())
-						.join('|')}
 					aria-hidden="true"
+					data-label="false"
 				/>
 			);
 		}
@@ -411,19 +403,14 @@ export const AdSlot: React.FC<Props> = ({
 						'ad-slot--merchandising',
 					].join(' ')}
 					css={[
-						css`
-							position: relative;
-						`,
+						merchandisingAdStyles,
 						adStyles,
 						fluidFullWidthAdStyles,
 					]}
 					data-link-name="ad slot merchandising"
 					data-name="merchandising"
-					// mirror frontend file mark: 432b3a46-90c1-4573-90d3-2400b51af8d0
-					data-mobile={(sizeMappings.merchandising.mobile || [])
-						.map((size) => size.toString())
-						.join('|')}
 					aria-hidden="true"
+					data-label="false"
 				/>
 			);
 		}
@@ -442,9 +429,32 @@ export const AdSlot: React.FC<Props> = ({
 					data-label="false"
 					data-refresh="false"
 					data-out-of-page="true"
-					data-desktop={(sizeMappings.survey.desktop || [])
-						.map((size) => size.toString())
-						.join('|')}
+					aria-hidden="true"
+				/>
+			);
+		}
+		case 'inline': {
+			// index will always be defined here but ts isn't as sure
+			// so I'm falling back to 'inline-0' to keep it happy
+			const advertId = index ? `inline${index}` : 'inline-0';
+			return (
+				<div
+					id={`dfp-ad--${advertId}`}
+					className={[
+						'js-ad-slot',
+						'ad-slot',
+						`ad-slot--${advertId}`,
+						'ad-slot--container-inline',
+						'ad-slot--rendered',
+					].join(' ')}
+					css={[
+						css`
+							position: relative;
+						`,
+						adStyles,
+					]}
+					data-link-name={`ad slot ${advertId}`}
+					data-name={`${advertId}`}
 					aria-hidden="true"
 				/>
 			);
@@ -454,7 +464,7 @@ export const AdSlot: React.FC<Props> = ({
 	}
 };
 
-export const MobileStickyContainer: React.FC = () => {
+export const MobileStickyContainer = () => {
 	return (
 		<div className="mobilesticky-container" css={mobileStickyAdStyles} />
 	);

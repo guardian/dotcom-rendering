@@ -347,22 +347,18 @@ export const WithNoSlash = () => {
 	);
 };
 
-export const WithAnAvatarWhenVertical = () => {
+export const WithAnAvatar = () => {
 	return (
 		<>
 			<CardWrapper>
 				<div
 					css={css`
-						width: 260px;
+						width: 280px;
 					`}
 				>
 					<Card
 						{...basicCardProps}
-						imageUrl=""
-						avatar={{
-							src: 'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
-							alt: '',
-						}}
+						avatarUrl="https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3"
 						format={{
 							display: ArticleDisplay.Standard,
 							design: ArticleDesign.Comment,
@@ -370,28 +366,6 @@ export const WithAnAvatarWhenVertical = () => {
 						}}
 					/>
 				</div>
-			</CardWrapper>
-		</>
-	);
-};
-
-export const WithAnAvatarWhenHorizontal = () => {
-	return (
-		<>
-			<CardWrapper>
-				<Card
-					{...basicCardProps}
-					imageUrl=""
-					avatar={{
-						src: 'https://i.guim.co.uk/img/uploads/2017/10/06/George-Monbiot,-L.png?width=173&quality=85&auto=format&fit=max&s=be5b0d3f3aa55682e4930057fc3929a3',
-						alt: '',
-					}}
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Comment,
-						theme: ArticlePillar.Opinion,
-					}}
-				/>
 			</CardWrapper>
 		</>
 	);

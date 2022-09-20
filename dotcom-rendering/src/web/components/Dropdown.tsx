@@ -17,6 +17,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { linkNotificationCount } from '../lib/linkNotificationCount';
 
 export interface DropdownLinkType {
+	id: string;
 	url: string;
 	title: string;
 	isActive?: boolean;
@@ -379,10 +380,9 @@ export const Dropdown = ({
 											)}
 										</a>
 
-										{l.notifications?.length &&
-											l.notifications.length > 0 && (
-												<RedDot />
-											)}
+										{!!l.notifications?.length && (
+											<RedDot />
+										)}
 									</li>
 								))}
 							</ul>

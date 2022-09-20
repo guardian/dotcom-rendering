@@ -31,10 +31,11 @@ const styles: SerializedStyles = css`
 
 interface Props {
 	children: ReactNode;
+	className?: SerializedStyles;
 }
 
-const OrderedList: FC<Props> = ({ children }) => (
-	<ol css={styles}>{children}</ol>
+const OrderedList: FC<Props> = ({ children, className }) => (
+	<ol css={[styles, className]}>{children}</ol>
 );
 
 // ----- Exports ----- //

@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { OphanAction } from '@guardian/libs';
 import { neutral, space, until } from '@guardian/source-foundations';
 import {
 	Button,
@@ -11,7 +12,6 @@ import {
 import type { ReactEventHandler } from 'react';
 import { useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import type { OphanAction } from '../browser/ophan/ophan';
 import {
 	getOphanRecordFunction,
 	submitComponentEvent,
@@ -28,10 +28,16 @@ const isServer = typeof window === 'undefined';
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 
 type Props = {
+	name: string;
 	styles: string;
 	html: string;
 	newsletterId: string;
-	successText: string;
+	successDescription: string;
+};
+
+// The ts.dom interface for FontFaceSet does not contain the .add method
+type FontFaceSetWithAdd = FontFaceSet & {
+	add?: { (font: FontFace): void };
 };
 
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
@@ -100,48 +106,57 @@ const postFormData = async (
 	});
 };
 
+type EventDescription =
+	| 'click-button'
+	| 'form-submission'
+	| 'submission-confirmed'
+	| 'submission-failed'
+	| 'open-captcha'
+	| 'captcha-load-error'
+	| 'form-submit-error'
+	| 'captcha-not-passed'
+	| 'captcha-passed';
+
 const sendTracking = (
 	newsletterId: string,
-	event:
-		| 'click-button'
-		| 'submit-form'
-		| 'form-submit-error'
-		| 'captcha-load-error'
-		| 'open-captcha'
-		| 'captcha-not-passed'
-		| 'captcha-passed'
-		| 'success-response-received'
-		| 'fail-response-received',
+	eventDescription: EventDescription,
 ): void => {
 	const ophanRecord = getOphanRecordFunction();
 
 	let action: OphanAction = 'CLICK';
-	const value = `${event} ${newsletterId}`;
 
-	switch (event) {
-		case 'submit-form':
-			action = 'SUBSCRIBE';
-			break;
-		case 'open-captcha':
-			action = 'EXPAND';
-			break;
-		case 'form-submit-error':
-		case 'captcha-load-error':
-			action = 'CLOSE';
-			break;
+	switch (eventDescription) {
+		case 'form-submission':
 		case 'captcha-not-passed':
 		case 'captcha-passed':
 			action = 'ANSWER';
 			break;
-		case 'success-response-received':
-		case 'fail-response-received':
-			action = 'RETURN';
+		case 'submission-confirmed':
+			action = 'SUBSCRIBE';
+			break;
+		case 'captcha-load-error':
+		case 'form-submit-error':
+		case 'submission-failed':
+			action = 'CLOSE';
+			break;
+		case 'open-captcha':
+			action = 'EXPAND';
 			break;
 		case 'click-button':
 		default:
 			action = 'CLICK';
 			break;
 	}
+
+	// The data team use a custom date format for timestamps,
+	// (yyy-MM-dd hh:mm:ss.ssssss UTC)
+	// and will cast the integer value  to this
+	// format at their end
+	const value = JSON.stringify({
+		eventDescription,
+		newsletterId,
+		timestamp: Date.now(),
+	});
 
 	submitComponentEvent(
 		{
@@ -157,10 +172,11 @@ const sendTracking = (
 };
 
 export const SecureSignupIframe = ({
+	name,
 	styles,
 	html,
 	newsletterId,
-	successText,
+	successDescription,
 }: Props) => {
 	const iframeRef = useRef<HTMLIFrameElement>(null);
 	const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -184,7 +200,7 @@ export const SecureSignupIframe = ({
 			null;
 		const emailAddress: string = input?.value ?? '';
 
-		sendTracking(newsletterId, 'submit-form');
+		sendTracking(newsletterId, 'form-submission');
 		const response = await postFormData(
 			window.guardian.config.page.ajaxUrl + '/email',
 			buildFormData(emailAddress, newsletterId, token),
@@ -199,9 +215,7 @@ export const SecureSignupIframe = ({
 
 		sendTracking(
 			newsletterId,
-			response.ok
-				? 'success-response-received'
-				: 'fail-response-received',
+			response.ok ? 'submission-confirmed' : 'submission-failed',
 		);
 	};
 
@@ -245,7 +259,7 @@ export const SecureSignupIframe = ({
 
 		const body = iframe.contentDocument?.body;
 		const scrollHeight = body ? body.scrollHeight : 0;
-		setIFrameHeight(Math.max(0, requestedHeight, scrollHeight + 15));
+		setIFrameHeight(Math.max(0, requestedHeight, scrollHeight));
 	};
 
 	const resetIframeHeight = (): void => {
@@ -276,6 +290,40 @@ export const SecureSignupIframe = ({
 		resetIframeHeight();
 	};
 
+	const addFontsToIframe = (requiredFontNames: string[]) => {
+		const { current: iframe } = iframeRef;
+
+		// FontFace.add is not supported (IE), allow fallback to system fonts
+		const iframeFontFaceSet = iframe?.contentDocument?.fonts as
+			| undefined
+			| FontFaceSetWithAdd;
+		if (!iframeFontFaceSet || !iframeFontFaceSet.add) {
+			return;
+		}
+
+		// get all the fontFaces on the parent matching the list of font names
+		const requiredFonts: FontFace[] = [];
+		document.fonts.forEach((fontFace) => {
+			if (requiredFontNames.includes(fontFace.family)) {
+				requiredFonts.push(fontFace);
+			}
+		});
+
+		// add the fonts to the iframe
+		requiredFonts.forEach((font) => {
+			// it shouldn't be necessary to test for the add method again
+			// but still ts considers it possibily undefined
+			if (iframeFontFaceSet.add) {
+				iframeFontFaceSet.add(font);
+			}
+		});
+	};
+
+	const onIFrameLoad = (): void => {
+		attachListenersToIframe();
+		addFontsToIframe(['GuardianTextSans']);
+	};
+
 	const captchaSiteKey = isServer
 		? undefined
 		: window.guardian.config.page.googleRecaptchaSiteKey;
@@ -283,10 +331,11 @@ export const SecureSignupIframe = ({
 	return (
 		<>
 			<iframe
+				title={`Sign up to ${name}`}
 				ref={iframeRef}
 				css={css`
 					width: 100%;
-					min-height: 90px;
+					min-height: 65px;
 					overflow: hidden;
 				`}
 				style={{
@@ -299,9 +348,9 @@ export const SecureSignupIframe = ({
 					<head>
 						${styles}
 					</head>
-					<body style="margin: 0;">${html}</body>
+					<body style="margin: 0; overflow:hidden;">${html}</body>
 				</html>`}
-				onLoad={attachListenersToIframe}
+				onLoad={onIFrameLoad}
 			/>
 
 			{isWaitingForResponse && (
@@ -310,12 +359,12 @@ export const SecureSignupIframe = ({
 				</div>
 			)}
 
-			{errorMessage && <ErrorMessageWithAdvice text={errorMessage} />}
+			{!!errorMessage && <ErrorMessageWithAdvice text={errorMessage} />}
 
 			{hasResponse &&
 				(responseOk ? (
 					<div>
-						<SuccessMessage text={successText} />
+						<SuccessMessage text={successDescription} />
 					</div>
 				) : (
 					<div
@@ -346,7 +395,7 @@ export const SecureSignupIframe = ({
 					</div>
 				))}
 
-			{captchaSiteKey && (
+			{!!captchaSiteKey && (
 				<div
 					css={css`
 						.grecaptcha-badge {

@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { text, textSans, until } from '@guardian/source-foundations';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 
 const captionFont = css`
@@ -16,11 +17,14 @@ const datelineStyles = css`
 const primaryStyles = css`
 	list-style: none;
 	cursor: pointer;
-	:hover {
-		text-decoration: underline;
-	}
 	&::-webkit-details-marker {
 		display: none;
+	}
+`;
+
+const hoverUnderline = css`
+	:hover {
+		text-decoration: underline;
 	}
 `;
 
@@ -52,7 +56,9 @@ export const Dateline: React.FC<{
 						standfirstColouring(palette),
 				]}
 			>
-				<summary css={primaryStyles}>{primaryDateline}</summary>
+				<summary css={primaryStyles}>
+					<span css={hoverUnderline}>{primaryDateline}</span>
+				</summary>
 				{secondaryDateline}
 			</details>
 		);

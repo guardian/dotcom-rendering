@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { border, headline, neutral, text } from '@guardian/source-foundations';
+import type { TrailType } from '../../types/trails';
 import { useHover } from '../lib/useHover';
 import { AgeWarning } from './AgeWarning';
 import { Avatar } from './Avatar';
@@ -79,7 +80,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 		>
 			<a css={linkTagStyles} href={trail.url} ref={hoverRef}>
 				<div css={lineWrapperStyles}>
-					{trail.image && (
+					{!!trail.image && (
 						<div css={imageWrapperStyles}>
 							<Avatar
 								imageSrc={trail.image}
@@ -115,7 +116,7 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 							/>
 						)}
 						<div css={marginTopStyles}>
-							{trail.ageWarning && (
+							{!!trail.ageWarning && (
 								<AgeWarning
 									age={trail.ageWarning}
 									size="small"

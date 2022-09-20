@@ -1,4 +1,5 @@
 {
+    "description": "WARNING: run `gen-schema` task if changing this to update the associated JSON\nschema definition.",
     "type": "object",
     "properties": {
         "headline": {
@@ -96,6 +97,9 @@
                         "$ref": "#/definitions/MultiImageBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/NewsletterSignupBlockElement"
+                    },
+                    {
                         "$ref": "#/definitions/NumberedTitleBlockElement"
                     },
                     {
@@ -182,9 +186,10 @@
         "pagination": {
             "$ref": "#/definitions/Pagination"
         },
-        "author": {
-            "$ref": "#/definitions/AuthorType"
+        "byline": {
+            "type": "string"
         },
+        "author": {},
         "webPublicationDateDeprecated": {
             "format": "date-time",
             "type": "string"
@@ -256,13 +261,13 @@
         "subMetaSectionLinks": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/SimpleLinkType"
+                "$ref": "#/definitions/CAPILinkType"
             }
         },
         "subMetaKeywordLinks": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/SimpleLinkType"
+                "$ref": "#/definitions/CAPILinkType"
             }
         },
         "shouldHideAds": {
@@ -316,6 +321,79 @@
         },
         "hasStoryPackage": {
             "type": "boolean"
+        },
+        "storyPackage": {
+            "type": "object",
+            "properties": {
+                "trails": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPITrailType"
+                    }
+                },
+                "heading": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "heading",
+                "trails"
+            ]
+        },
+        "onwards": {
+            "type": "array",
+            "items": {
+                "description": "Onwards",
+                "type": "object",
+                "properties": {
+                    "heading": {
+                        "type": "string"
+                    },
+                    "trails": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/CAPITrailType"
+                        }
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "onwardsSource": {
+                        "$ref": "#/definitions/OnwardsSource"
+                    },
+                    "format": {
+                        "type": "object",
+                        "properties": {
+                            "design": {
+                                "$ref": "#/definitions/CAPIDesign"
+                            },
+                            "theme": {
+                                "$ref": "#/definitions/CAPITheme"
+                            },
+                            "display": {
+                                "$ref": "#/definitions/CAPIDisplay"
+                            }
+                        },
+                        "required": [
+                            "design",
+                            "display",
+                            "theme"
+                        ]
+                    },
+                    "isCuratedContent": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "format",
+                    "heading",
+                    "onwardsSource",
+                    "trails"
+                ]
+            }
         },
         "beaconURL": {
             "type": "string"
@@ -411,10 +489,54 @@
             "items": {
                 "$ref": "#/definitions/Topic"
             }
+        },
+        "promotedNewsletter": {
+            "type": "object",
+            "properties": {
+                "listId": {
+                    "type": "number"
+                },
+                "identityName": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "frequency": {
+                    "type": "string"
+                },
+                "successDescription": {
+                    "type": "string"
+                },
+                "theme": {
+                    "type": "string"
+                },
+                "group": {
+                    "type": "string"
+                },
+                "regionFocus": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description",
+                "frequency",
+                "group",
+                "identityName",
+                "listId",
+                "name",
+                "successDescription",
+                "theme"
+            ]
+        },
+        "tableOfContents": {
+            "$ref": "#/definitions/TableOfContents"
         }
     },
     "required": [
-        "author",
         "beaconURL",
         "blocks",
         "commercialProperties",
@@ -590,7 +712,7 @@
                 "shouldLimitWidth": {
                     "type": "boolean"
                 },
-                "isOverlayed": {
+                "isOverlaid": {
                     "type": "boolean"
                 }
             },
@@ -2079,6 +2201,66 @@
                 "images"
             ]
         },
+        "NewsletterSignupBlockElement": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.NewsletterSignupBlockElement"
+                    ]
+                },
+                "newsletter": {
+                    "type": "object",
+                    "properties": {
+                        "listId": {
+                            "type": "number"
+                        },
+                        "identityName": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "frequency": {
+                            "type": "string"
+                        },
+                        "successDescription": {
+                            "type": "string"
+                        },
+                        "theme": {
+                            "type": "string"
+                        },
+                        "group": {
+                            "type": "string"
+                        },
+                        "regionFocus": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "description",
+                        "frequency",
+                        "group",
+                        "identityName",
+                        "listId",
+                        "name",
+                        "successDescription",
+                        "theme"
+                    ]
+                },
+                "elementId": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "_type",
+                "newsletter"
+            ]
+        },
         "NumberedTitleBlockElement": {
             "type": "object",
             "properties": {
@@ -2133,6 +2315,7 @@
                 "CommentDesign",
                 "DeadBlogDesign",
                 "EditorialDesign",
+                "ExplainerDesign",
                 "FeatureDesign",
                 "FullPageInteractiveDesign",
                 "GalleryDesign",
@@ -3094,9 +3277,6 @@
                 "authorUsername": {
                     "type": "string"
                 },
-                "authorGuardianProfileUrl": {
-                    "type": "string"
-                },
                 "originalUrl": {
                     "type": "string"
                 },
@@ -3132,11 +3312,9 @@
                 "_type",
                 "alt",
                 "apiUrl",
-                "authorGuardianProfileUrl",
                 "authorName",
                 "authorUsername",
                 "authorWitnessProfileUrl",
-                "caption",
                 "dateCreated",
                 "mediaId",
                 "originalUrl",
@@ -3193,9 +3371,6 @@
                 "authorUsername": {
                     "type": "string"
                 },
-                "authorGuardianProfileUrl": {
-                    "type": "string"
-                },
                 "originalUrl": {
                     "type": "string"
                 },
@@ -3230,7 +3405,6 @@
             "required": [
                 "_type",
                 "apiUrl",
-                "authorGuardianProfileUrl",
                 "authorName",
                 "authorUsername",
                 "authorWitnessProfileUrl",
@@ -3300,9 +3474,6 @@
                 "authorWitnessProfileUrl": {
                     "type": "string"
                 },
-                "authorGuardianProfileUrl": {
-                    "type": "string"
-                },
                 "html": {
                     "type": "string"
                 }
@@ -3310,7 +3481,6 @@
             "required": [
                 "_type",
                 "apiUrl",
-                "authorGuardianProfileUrl",
                 "authorName",
                 "authorUsername",
                 "authorWitnessProfileUrl",
@@ -3414,6 +3584,9 @@
                             },
                             {
                                 "$ref": "#/definitions/MultiImageBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/NewsletterSignupBlockElement"
                             },
                             {
                                 "$ref": "#/definitions/NumberedTitleBlockElement"
@@ -3621,20 +3794,6 @@
                 "totalPages"
             ]
         },
-        "AuthorType": {
-            "type": "object",
-            "properties": {
-                "byline": {
-                    "type": "string"
-                },
-                "twitterHandle": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                }
-            }
-        },
         "EditionId": {
             "enum": [
                 "AU",
@@ -3686,7 +3845,7 @@
             ],
             "type": "string"
         },
-        "SimpleLinkType": {
+        "CAPILinkType": {
             "type": "object",
             "properties": {
                 "url": {
@@ -3694,6 +3853,30 @@
                 },
                 "title": {
                     "type": "string"
+                },
+                "longTitle": {
+                    "type": "string"
+                },
+                "iconName": {
+                    "type": "string"
+                },
+                "children": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CAPILinkType"
+                    }
+                },
+                "pillar": {
+                    "$ref": "#/definitions/LegacyPillar"
+                },
+                "more": {
+                    "type": "boolean"
+                },
+                "classList": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             },
             "required": [
@@ -3705,6 +3888,9 @@
             "description": "the config model will contain useful app/site\nlevel data. Although currently derived from the config model\nconstructed in frontend and passed to dotcom-rendering\nthis data could eventually be defined in dotcom-rendering",
             "type": "object",
             "properties": {
+                "dcrCouldRender": {
+                    "type": "boolean"
+                },
                 "ajaxUrl": {
                     "type": "string"
                 },
@@ -3718,13 +3904,18 @@
                     "type": "string"
                 },
                 "switches": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "boolean"
-                    }
+                    "$ref": "#/definitions/Switches"
                 },
                 "abTests": {
-                    "type": "object"
+                    "description": "This type is not support by JSON-schema, it evaluates as `object`",
+                    "type": "object",
+                    "additionalProperties": {
+                        "enum": [
+                            "control",
+                            "variant"
+                        ],
+                        "type": "string"
+                    }
                 },
                 "dfpAccountId": {
                     "type": "string"
@@ -3745,7 +3936,7 @@
                     "type": "string"
                 },
                 "stage": {
-                    "type": "string"
+                    "$ref": "#/definitions/StageType"
                 },
                 "frontendAssetsFullURL": {
                     "type": "string"
@@ -3760,7 +3951,7 @@
                     "type": "number"
                 },
                 "edition": {
-                    "type": "string"
+                    "$ref": "#/definitions/EditionId"
                 },
                 "section": {
                     "type": "string"
@@ -3887,70 +4078,135 @@
                 "switches"
             ]
         },
-        "CommercialProperties": {
+        "Switches": {
             "type": "object",
-            "properties": {
-                "AU": {
-                    "$ref": "#/definitions/EditionCommercialProperties"
-                },
-                "US": {
-                    "$ref": "#/definitions/EditionCommercialProperties"
-                },
-                "UK": {
-                    "$ref": "#/definitions/EditionCommercialProperties"
-                },
-                "INT": {
-                    "$ref": "#/definitions/EditionCommercialProperties"
-                }
-            },
-            "required": [
-                "AU",
-                "INT",
-                "UK",
-                "US"
-            ]
+            "additionalProperties": {
+                "type": "boolean"
+            }
         },
-        "EditionCommercialProperties": {
+        "StageType": {
+            "enum": [
+                "CODE",
+                "DEV",
+                "PROD"
+            ],
+            "type": "string"
+        },
+        "CAPITrailType": {
             "type": "object",
             "properties": {
-                "adTargeting": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/AdTargetParam"
+                "format": {
+                    "type": "object",
+                    "properties": {
+                        "design": {
+                            "$ref": "#/definitions/CAPIDesign"
+                        },
+                        "theme": {
+                            "$ref": "#/definitions/CAPITheme"
+                        },
+                        "display": {
+                            "$ref": "#/definitions/CAPIDisplay"
+                        }
+                    },
+                    "required": [
+                        "design",
+                        "display",
+                        "theme"
+                    ]
+                },
+                "designType": {
+                    "type": "string"
+                },
+                "pillar": {
+                    "$ref": "#/definitions/LegacyPillar"
+                },
+                "carouselImages": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
                     }
+                },
+                "isLiveBlog": {
+                    "type": "boolean"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "headline": {
+                    "type": "string"
+                },
+                "webPublicationDate": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "avatarUrl": {
+                    "type": "string"
+                },
+                "mediaType": {
+                    "$ref": "#/definitions/MediaType"
+                },
+                "mediaDuration": {
+                    "type": "number"
+                },
+                "ageWarning": {
+                    "type": "string"
+                },
+                "byline": {
+                    "type": "string"
+                },
+                "showByline": {
+                    "type": "boolean"
+                },
+                "kickerText": {
+                    "type": "string"
+                },
+                "shortUrl": {
+                    "type": "string"
+                },
+                "commentCount": {
+                    "type": "number"
+                },
+                "starRating": {
+                    "type": "number"
+                },
+                "linkText": {
+                    "type": "string"
                 },
                 "branding": {
                     "$ref": "#/definitions/Branding"
-                }
-            },
-            "required": [
-                "adTargeting"
-            ]
-        },
-        "AdTargetParam": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string"
                 },
-                "value": {
-                    "anyOf": [
-                        {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
+                "isSnap": {
+                    "type": "boolean"
+                },
+                "snapData": {
+                    "type": "object",
+                    "properties": {
+                        "embedHtml": {
+                            "type": "string"
                         },
-                        {
+                        "embedCss": {
                             "type": "string"
                         }
-                    ]
+                    }
                 }
             },
             "required": [
-                "name",
-                "value"
+                "designType",
+                "format",
+                "headline",
+                "pillar",
+                "url"
             ]
+        },
+        "MediaType": {
+            "enum": [
+                "Audio",
+                "Gallery",
+                "Video"
+            ],
+            "type": "string"
         },
         "Branding": {
             "type": "object",
@@ -4049,6 +4305,84 @@
                 "sponsorName"
             ]
         },
+        "OnwardsSource": {
+            "enum": [
+                "curated-content",
+                "more-galleries",
+                "more-media-in-section",
+                "more-on-this-story",
+                "related-content",
+                "related-stories",
+                "series",
+                "unknown-source"
+            ],
+            "type": "string"
+        },
+        "CommercialProperties": {
+            "type": "object",
+            "properties": {
+                "AU": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "US": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "UK": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "INT": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
+                }
+            },
+            "required": [
+                "AU",
+                "INT",
+                "UK",
+                "US"
+            ]
+        },
+        "EditionCommercialProperties": {
+            "type": "object",
+            "properties": {
+                "adTargeting": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/AdTargetParam"
+                    }
+                },
+                "branding": {
+                    "$ref": "#/definitions/Branding"
+                }
+            },
+            "required": [
+                "adTargeting"
+            ]
+        },
+        "AdTargetParam": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "value": {
+                    "anyOf": [
+                        {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "name",
+                "value"
+            ]
+        },
         "BadgeType": {
             "type": "object",
             "properties": {
@@ -4124,45 +4458,6 @@
                 "otherLinks",
                 "pillars",
                 "readerRevenueLinks"
-            ]
-        },
-        "CAPILinkType": {
-            "type": "object",
-            "properties": {
-                "url": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                },
-                "longTitle": {
-                    "type": "string"
-                },
-                "iconName": {
-                    "type": "string"
-                },
-                "children": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CAPILinkType"
-                    }
-                },
-                "pillar": {
-                    "$ref": "#/definitions/LegacyPillar"
-                },
-                "more": {
-                    "type": "boolean"
-                },
-                "classList": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "required": [
-                "title",
-                "url"
             ]
         },
         "ReaderRevenuePositions": {
@@ -4292,6 +4587,35 @@
                 "WORK_OF_ART"
             ],
             "type": "string"
+        },
+        "TableOfContents": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TableOfContentsItem"
+                    }
+                }
+            },
+            "required": [
+                "items"
+            ]
+        },
+        "TableOfContentsItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "title"
+            ]
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"

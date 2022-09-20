@@ -1,16 +1,29 @@
 import { trails } from '../../../fixtures/manual/trails';
-import { ContainerLayout } from './ContainerLayout';
 import { DynamicFast } from './DynamicFast';
+import { Section } from './Section';
 
 export default {
 	title: 'Layouts/Palettes',
 };
 
+const groupedTrails = {
+	snap: [],
+	huge: [],
+	veryBig: [{ isBoosted: true, ...trails[0] }, trails[1]],
+	big: [trails[2], trails[3]],
+	standard: [
+		trails[4],
+		trails[5],
+		trails[6],
+		trails[7],
+		trails[8],
+		trails[9],
+	],
+};
+
 export const EventPalette = () => (
-	<ContainerLayout
+	<Section
 		title="EventPalette"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="EventPalette"
@@ -18,18 +31,16 @@ export const EventPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			trails={trails}
+			groupedTrails={groupedTrails}
 			containerPalette="EventPalette"
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 export const EventAltPalette = () => (
-	<ContainerLayout
+	<Section
 		title="EventAltPalette"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="EventAltPalette"
@@ -37,18 +48,16 @@ export const EventAltPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			trails={trails}
+			groupedTrails={groupedTrails}
 			containerPalette="EventAltPalette"
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 export const SombrePalette = () => (
-	<ContainerLayout
+	<Section
 		title="SombrePalette"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="SombrePalette"
@@ -56,18 +65,16 @@ export const SombrePalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			trails={trails}
+			groupedTrails={groupedTrails}
 			containerPalette="SombrePalette"
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 export const SombreAltPalette = () => (
-	<ContainerLayout
+	<Section
 		title="SombreAltPalette"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="SombreAltPalette"
@@ -75,18 +82,16 @@ export const SombreAltPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			trails={trails}
+			groupedTrails={groupedTrails}
 			containerPalette="SombreAltPalette"
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 export const BreakingPalette = () => (
-	<ContainerLayout
+	<Section
 		title="BreakingPalette"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="BreakingPalette"
@@ -94,18 +99,16 @@ export const BreakingPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			trails={trails}
+			groupedTrails={groupedTrails}
 			containerPalette="BreakingPalette"
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 export const LongRunningPalette = () => (
-	<ContainerLayout
+	<Section
 		title="LongRunningPalette"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="LongRunningPalette"
@@ -113,18 +116,16 @@ export const LongRunningPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			trails={trails}
+			groupedTrails={groupedTrails}
 			containerPalette="LongRunningPalette"
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 export const LongRunningAltPalette = () => (
-	<ContainerLayout
+	<Section
 		title="LongRunningAltPalette"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="LongRunningAltPalette"
@@ -132,18 +133,16 @@ export const LongRunningAltPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			trails={trails}
+			groupedTrails={groupedTrails}
 			containerPalette="LongRunningAltPalette"
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 
 export const InvestigationPalette = () => (
-	<ContainerLayout
+	<Section
 		title="InvestigationPalette"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 		containerPalette="InvestigationPalette"
@@ -151,9 +150,9 @@ export const InvestigationPalette = () => (
 		editionId={'UK'}
 	>
 		<DynamicFast
-			trails={trails}
+			groupedTrails={groupedTrails}
 			containerPalette="InvestigationPalette"
 			showAge={true}
 		/>
-	</ContainerLayout>
+	</Section>
 );

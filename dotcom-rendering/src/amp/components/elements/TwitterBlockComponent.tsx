@@ -4,7 +4,7 @@ import { JSDOM } from 'jsdom';
 import React from 'react';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 
-export const ListStyle = (iconColour: string) => css`
+const ListStyle = (iconColour: string) => css`
 	li {
 		margin-bottom: 6px;
 		padding-left: 20px;
@@ -85,7 +85,7 @@ export const TwitterBlockComponent: React.FC<{
 			data-tweetid={element.id}
 			data-dnt="true"
 		>
-			{fallbackHTML && (
+			{!!fallbackHTML && (
 				<div placeholder="" css={TextStyle(pillar)}>
 					<blockquote
 						dangerouslySetInnerHTML={{ __html: fallbackHTML }}

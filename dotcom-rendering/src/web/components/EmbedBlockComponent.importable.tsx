@@ -58,7 +58,7 @@ export const EmbedBlockComponent = ({
 			sourceDomain={sourceDomain}
 		>
 			<div data-cy="embed-block" css={embedContainerStyles(isEmailEmbed)}>
-				{isEmailEmbed && caption && (
+				{!!(isEmailEmbed && caption) && (
 					<div
 						css={emailCaptionStyle}
 						dangerouslySetInnerHTML={{

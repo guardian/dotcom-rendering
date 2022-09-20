@@ -21,6 +21,9 @@ const enum ElementKind {
 	AudioAtom,
 	KnowledgeQuizAtom,
 	PersonalityQuizAtom,
+	NewsletterSignUp,
+	HeadingTwo,
+	HeadingThree,
 }
 
 // ----- Exports ----- //

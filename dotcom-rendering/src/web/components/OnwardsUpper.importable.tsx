@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { ArticlePillar } from '@guardian/libs';
 import { joinUrl } from '../../lib/joinUrl';
-import { Carousel } from './Carousel';
-import { ElementContainer } from './ElementContainer';
-import { OnwardsData } from './OnwardsData';
-import { OnwardsLayout } from './OnwardsLayout';
+import type { EditionId } from '../../types/edition';
+import type { OnwardsSource } from '../../types/onwards';
+import { FetchOnwardsData } from './FetchOnwardsData.importable';
+import { Section } from './Section';
 
 type PillarForContainer =
 	| 'headlines'
@@ -16,7 +16,7 @@ type PillarForContainer =
 // This list is a direct copy from https://github.com/guardian/frontend/blob/6da0b3d8bfd58e8e20f80fc738b070fb23ed154e/static/src/javascripts/projects/common/modules/onward/related.js#L27
 // If you change this list then you should also update ^
 // order matters here (first match wins)
-export const WHITELISTED_TAGS = [
+const ALLOWED_TAGS = [
 	// sport tags
 	'sport/cricket',
 	'sport/rugby-union',
@@ -51,7 +51,7 @@ const firstPopularTag = (
 	pageTags: string | string[],
 	isPaidContent: boolean,
 ) => {
-	// This function looks for the first tag in pageTags, that also exists in our whitelist
+	// This function looks for the first tag in pageTags, that also exists in our allowlist
 	if (!pageTags) {
 		// If there are no page tags we will never find a match so
 		return false;
@@ -65,12 +65,12 @@ const firstPopularTag = (
 		tags = pageTags;
 	}
 
-	const firstTagInWhitelist =
-		tags.find((tag: string) => WHITELISTED_TAGS.includes(tag)) || false;
+	const firstTagInAllowedList =
+		tags.find((tag: string) => ALLOWED_TAGS.includes(tag)) || false;
 
 	// For paid content we just return the first tag, otherwise we
-	// filter for the first tag in the whitelist
-	return isPaidContent ? tags[0] : firstTagInWhitelist;
+	// filter for the first tag in the allowlist
+	return isPaidContent ? tags[0] : firstTagInAllowedList;
 };
 
 const onwardsWrapper = css`
@@ -202,15 +202,13 @@ export const OnwardsUpper = ({
 	);
 
 	let url;
-	let ophanComponentName: OphanComponentName = 'default-onwards';
+	let onwardsSource: OnwardsSource = 'unknown-source';
 
 	if (!showRelatedContent) {
 		// Then don't show related content
 		// This is the first priority for deciding whether to include related content
 	} else if (hasStoryPackage) {
-		// Always fetch the story package if it exists
-		url = joinUrl([ajaxUrl, 'story-package', `${pageId}.json?dcr=true`]);
-		ophanComponentName = 'more-on-this-story';
+		// We server render story packages so do nothing
 	} else if (isAdFreeUser && isPaidContent) {
 		// Don't show any related content (other than story packages) for
 		// adfree users when the content is paid for
@@ -227,7 +225,7 @@ export const OnwardsUpper = ({
 			'series',
 			`${seriesTag.id}.json?dcr&shortUrl=${shortUrlId}`,
 		]);
-		ophanComponentName = 'series';
+		onwardsSource = 'series';
 	} else if (!hasRelated) {
 		// There is no related content to show
 	} else if (tagToFilterBy) {
@@ -257,43 +255,40 @@ export const OnwardsUpper = ({
 		}
 
 		url = joinUrl([ajaxUrl, popularInTagUrl]);
-		ophanComponentName = 'related-content';
+		onwardsSource = 'related-content';
 	} else {
 		// Default to generic related endpoint
 		const relatedUrl = `/related/${pageId}.json?dcr=true`;
 
 		url = joinUrl([ajaxUrl, relatedUrl]);
-		ophanComponentName = 'related-stories';
+		onwardsSource = 'related-stories';
 	}
 
 	const curatedDataUrl = showRelatedContent
 		? getContainerDataUrl(pillar, editionId, ajaxUrl)
-		: null;
+		: undefined;
 
 	return (
 		<div css={onwardsWrapper}>
-			{url && (
-				<ElementContainer>
-					<OnwardsData
+			{!!url && (
+				<Section fullWidth={true}>
+					<FetchOnwardsData
 						url={url}
 						limit={8}
-						ophanComponentName={ophanComponentName}
-						Container={isPaidContent ? OnwardsLayout : Carousel}
+						onwardsSource={onwardsSource}
 						format={format}
 					/>
-				</ElementContainer>
+				</Section>
 			)}
-			{!isPaidContent && curatedDataUrl && (
-				<ElementContainer showTopBorder={true}>
-					<OnwardsData
+			{!!(!isPaidContent && curatedDataUrl) && (
+				<Section fullWidth={true}>
+					<FetchOnwardsData
 						url={curatedDataUrl}
 						limit={20}
-						ophanComponentName="curated-content"
-						Container={Carousel}
-						isCuratedContent={true}
+						onwardsSource="curated-content"
 						format={format}
 					/>
-				</ElementContainer>
+				</Section>
 			)}
 		</div>
 	);

@@ -18,6 +18,11 @@ updates:
       labels:
         - "AR Dependency"
       rebase-strategy: "disabled"
+      ignore:
+        # The version of the aws-cdk[-lib] & constructs dependencies should match exactly the version specified by @guardian/cdk
+        - dependency-name: 'aws-cdk'
+        - dependency-name: 'aws-cdk-lib'
+        - dependency-name: 'constructs'
     - package-ecosystem: "npm"
       directory: "/dotcom-rendering"
       schedule:

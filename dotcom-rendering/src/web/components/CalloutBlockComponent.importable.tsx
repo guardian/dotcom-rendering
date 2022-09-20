@@ -4,6 +4,7 @@ import { Button } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import MinusIcon from '../../static/icons/minus.svg';
 import PlusIcon from '../../static/icons/plus.svg';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Form } from './Callout/Form';
 
@@ -326,7 +327,7 @@ export const CalloutBlockComponent = ({
 						</div>
 						<div css={headingTextStyles(palette)}>
 							<h4 css={headingTextHeaderStyles}>{title}</h4>
-							{description && (
+							{!!description && (
 								<div
 									css={descriptionStyles}
 									dangerouslySetInnerHTML={{

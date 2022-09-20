@@ -31,9 +31,14 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 			'./src/web/browser/newsletterEmbedIframe/init.ts',
 		relativeTime: './src/web/browser/relativeTime/init.ts',
 		initDiscussion: './src/web/browser/initDiscussion/init.ts',
+		debug: './src/web/browser/debug/init.ts',
 	},
 	output: {
-		filename: generateName(isLegacyJS),
+		filename: (data) => {
+			// We don't want to hash the debug script so it can be used in bookmarklets
+			if (data.chunk.name === 'debug') return `[name].js`;
+			return generateName(isLegacyJS);
+		},
 		chunkFilename: generateName(isLegacyJS),
 		publicPath: '',
 	},

@@ -6,6 +6,7 @@ interface ThirdPartyEmbeddedContent {
 	source?: string;
 	sourceDomain?: string;
 }
+
 interface AudioAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
 	elementId: string;
@@ -38,7 +39,7 @@ interface CaptionBlockElement {
 	credit?: string;
 	displayCredit?: boolean;
 	shouldLimitWidth?: boolean;
-	isOverlayed?: boolean;
+	isOverlaid?: boolean;
 }
 
 interface CalloutBlockElement {
@@ -286,6 +287,12 @@ interface MultiImageBlockElement {
 	role?: RoleType;
 }
 
+interface NewsletterSignupBlockElement {
+	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement';
+	newsletter: Newsletter;
+	elementId?: string;
+}
+
 interface NumberedTitleBlockElement {
 	_type: 'model.dotcomrendering.pageElements.NumberedTitleBlockElement';
 	elementId: string;
@@ -486,7 +493,6 @@ interface YoutubeBlockElement {
 
 interface WitnessTypeDataBase {
 	authorUsername: string;
-	authorGuardianProfileUrl: string;
 	originalUrl: string;
 	source: string;
 	title: string;
@@ -503,7 +509,7 @@ interface WitnessTypeDataImage extends WitnessTypeDataBase {
 	_type: 'model.dotcomrendering.pageElements.WitnessTypeDataImage';
 	type: 'image';
 	alt: string;
-	caption: string;
+	caption?: string;
 	mediaId: string;
 	photographer: string;
 }
@@ -586,6 +592,7 @@ type CAPIElement =
 	| MediaAtomBlockElement
 	| MultiImageBlockElement
 	| NumberedTitleBlockElement
+	| NewsletterSignupBlockElement
 	| ProfileAtomBlockElement
 	| PullquoteBlockElement
 	| QABlockElement
@@ -674,10 +681,6 @@ interface TimelineEvent {
 	body?: string;
 	toDate?: string;
 	toUnixDate?: number;
-}
-
-interface Switches {
-	[key: string]: boolean;
 }
 
 type RatingSizeType = 'large' | 'medium' | 'small';
@@ -769,4 +772,20 @@ type ResultBucketsType = {
 	id: string;
 	title: string;
 	description: string;
+};
+
+// -------------------------------------
+// Newsletter
+// -------------------------------------
+
+type Newsletter = {
+	listId: number;
+	identityName: string;
+	name: string;
+	description: string;
+	frequency: string;
+	successDescription: string;
+	theme: string;
+	group: string;
+	regionFocus?: string;
 };

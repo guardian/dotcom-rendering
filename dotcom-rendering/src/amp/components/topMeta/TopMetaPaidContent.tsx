@@ -2,7 +2,9 @@ import { css } from '@emotion/react';
 import { body, neutral, text, textSans } from '@guardian/source-foundations';
 import React from 'react';
 import { getAgeWarning } from '../../../lib/age-warning';
+import { getSoleContributor } from '../../../lib/byline';
 import { getSharingUrls } from '../../../lib/sharing-urls';
+import type { Branding } from '../../../types/branding';
 import type { ArticleModel } from '../../types/ArticleModel';
 import { MainMedia } from '../MainMedia';
 import { BrandingRegionContainer } from './Branding';
@@ -100,7 +102,7 @@ export const TopMetaPaidContent: React.FC<{
 
 		<div css={bylineStyle}>
 			<Byline
-				byline={articleData.author.byline}
+				byline={articleData.byline}
 				tags={articleData.tags}
 				guardianBaseURL={articleData.guardianBaseURL}
 			/>
@@ -117,7 +119,10 @@ export const TopMetaPaidContent: React.FC<{
 				articleData.webPublicationDateDeprecated,
 			)}
 			webPublicationDate={articleData.webPublicationDateDisplay}
-			twitterHandle={articleData.author.twitterHandle}
+			twitterHandle={
+				getSoleContributor(articleData.tags, articleData.byline)
+					?.twitterHandle
+			}
 		/>
 	</header>
 );

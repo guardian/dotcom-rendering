@@ -1,3 +1,6 @@
+import type { CommercialProperties } from '../../types/commercial';
+import type { EditionId } from '../../types/edition';
+
 // This is a subset of CAPIArticleType for use in AMP and as a result there needs to be parity between the types of shared fields.
 export interface ArticleModel {
 	headline: string;
@@ -7,7 +10,7 @@ export interface ArticleModel {
 	keyEvents: Block[]; // liveblog-specific
 	pagination?: Pagination;
 	blocks: Block[];
-	author: AuthorType;
+	byline?: string;
 	webPublicationDateDeprecated: string;
 	webPublicationDateDisplay: string;
 	pageId: string;
@@ -24,8 +27,8 @@ export interface ArticleModel {
 	sectionUrl?: string;
 	sectionName?: string;
 	tags: TagType[];
-	subMetaSectionLinks: SimpleLinkType[];
-	subMetaKeywordLinks: SimpleLinkType[];
+	subMetaSectionLinks: CAPILinkType[];
+	subMetaKeywordLinks: CAPILinkType[];
 	webURL: string;
 	shouldHideAds: boolean;
 	shouldHideReaderRevenue: boolean;

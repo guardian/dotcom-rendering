@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { brand, from } from '@guardian/source-foundations';
+import type { EditionId } from '../../types/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { Dropdown } from './Dropdown';
 
@@ -34,24 +35,28 @@ export const EditionDropdown: React.FC<{
 }> = ({ editionId, dataLinkName }) => {
 	const links = [
 		{
+			id: 'uk',
 			url: '/preference/edition/uk',
 			isActive: editionId === 'UK',
 			title: 'UK edition',
 			dataLinkName: 'nav2 : topbar : edition-picker: UK',
 		},
 		{
+			id: 'us',
 			url: '/preference/edition/us',
 			isActive: editionId === 'US',
 			title: 'US edition',
 			dataLinkName: 'nav2 : topbar : edition-picker: US',
 		},
 		{
+			id: 'au',
 			url: '/preference/edition/au',
 			isActive: editionId === 'AU',
-			title: 'Australian edition',
+			title: 'Australia edition',
 			dataLinkName: 'nav2 : topbar : edition-picker: AU',
 		},
 		{
+			id: 'int',
 			url: '/preference/edition/int',
 			isActive: editionId === 'INT',
 			title: 'International edition',

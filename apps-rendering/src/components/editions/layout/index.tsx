@@ -11,11 +11,11 @@ import {
 	neutral,
 	remSpace,
 } from '@guardian/source-foundations';
-import { partition } from '@guardian/types';
 import type { Item } from 'item';
 import { isPicture } from 'item';
 import type { FC } from 'react';
 import { renderEditionsAll } from 'renderer';
+import { Result } from 'result';
 import Header from '../header';
 import {
 	articleMarginStyles,
@@ -62,32 +62,47 @@ const headerStyles = css`
 	}
 `;
 
-const bodyStyles = css`
-	padding-top: ${remSpace[3]};
-	padding-bottom: ${remSpace[3]};
-	iframe {
-		width: 100%;
-		border: none;
-	}
-
-	figcaption {
-		background: ${background.primary};
+const bodyStyles = (item: Item): SerializedStyles => {
+	const defaultStyles = css`
+		padding-top: ${remSpace[3]};
 		padding-bottom: ${remSpace[3]};
-	}
+		iframe {
+			width: 100%;
+			border: none;
+		}
 
-	${from.tablet} {
-		padding-top: 0;
-		padding-bottom: 0;
-
-		p {
-			margin: 0;
-			padding-top: ${remSpace[3]};
+		figcaption {
+			background: ${background.primary};
 			padding-bottom: ${remSpace[3]};
 		}
-	}
 
-	${sidePadding}
-`;
+		${from.tablet} {
+			padding-top: 0;
+			padding-bottom: 0;
+
+			p {
+				margin: 0;
+				padding-top: ${remSpace[3]};
+				padding-bottom: ${remSpace[3]};
+			}
+		}
+
+		${sidePadding}
+	`;
+
+	switch (item.design) {
+		case ArticleDesign.Gallery:
+			return css(
+				defaultStyles,
+				css`
+					padding-top: 0;
+					padding-bottom: 0;
+				`,
+			);
+		default:
+			return defaultStyles;
+	}
+};
 
 const bodyWrapperStyles = css`
 	${articleWidthStyles}
@@ -103,7 +118,7 @@ const extendedBodyStyles = css`
 	background-color: ${neutral[7]};
 `;
 
-export const galleryWrapperStyles = css`
+export const mediaWrapperStyles = css`
 	box-sizing: border-box;
 	padding-top: ${remSpace[3]};
 	padding-right: 0;
@@ -117,6 +132,22 @@ export const galleryWrapperStyles = css`
 
 	${from.desktop} {
 		width: ${wide}px;
+	}
+`;
+
+export const galleryWrapperStyles = css`
+	${mediaWrapperStyles}
+	border-right: 0;
+	width: auto;
+	padding: 0;
+	margin: 0;
+
+	${from.tablet} {
+		width: auto;
+	}
+
+	${from.desktop} {
+		width: auto;
 	}
 `;
 
@@ -139,6 +170,7 @@ const getSectionStyles = (item: ArticleFormat): SerializedStyles[] => {
 
 const Layout: FC<Props> = ({ item }) => {
 	if (
+		item.design === ArticleDesign.Explainer ||
 		item.design === ArticleDesign.Analysis ||
 		item.design === ArticleDesign.Standard ||
 		item.design === ArticleDesign.Comment ||
@@ -169,15 +201,23 @@ const Layout: FC<Props> = ({ item }) => {
 							bodyWrapperStyles,
 							articleStyles,
 							isPicture(item.tags) && extendedBodyStyles,
-							item.design === ArticleDesign.Gallery ||
+							item.design === ArticleDesign.Gallery
+								? galleryWrapperStyles
+								: null,
 							item.design === ArticleDesign.Audio ||
 							item.design === ArticleDesign.Video
-								? galleryWrapperStyles
+								? mediaWrapperStyles
 								: null,
 						]}
 					>
-						<section className={'body-content'} css={bodyStyles}>
-							{renderEditionsAll(item, partition(item.body).oks)}
+						<section
+							className={'body-content'}
+							css={bodyStyles(item)}
+						>
+							{renderEditionsAll(
+								item,
+								Result.partition(item.body).oks,
+							)}
 						</section>
 					</div>
 				</article>

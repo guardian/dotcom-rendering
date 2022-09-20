@@ -10,6 +10,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import ArrowInCircle from '../../static/icons/arrow-in-circle.svg';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Avatar } from './Avatar';
 import { Hide } from './Hide';
@@ -84,9 +85,9 @@ const richLinkHeader = css`
 	color: ${neutral[0]};
 `;
 
-const richLinkTitle = css`
+const richLinkTitle = (parentIsBlog: boolean) => css`
 	${headline.xxxsmall()};
-	font-size: 14px;
+	${!parentIsBlog && 'font-size: 14px'};
 	padding-top: 1px;
 	padding-bottom: 1px;
 	font-weight: 400;
@@ -234,6 +235,10 @@ export const RichLink = ({
 	const mainContributor = getMainContributor(tags);
 	const isLabs = linkFormat.theme === ArticleSpecial.Labs;
 
+	const richLinkTitlePicker = isLabs
+		? labsRichLinkTitle
+		: richLinkTitle(parentIsBlog);
+
 	return (
 		<div
 			data-print-layout="hide"
@@ -245,7 +250,7 @@ export const RichLink = ({
 			<div css={neutralBackground}>
 				<a css={richLinkLink} href={url}>
 					<div css={richLinkTopBorder(palette)} />
-					{showImage && (
+					{!!showImage && (
 						<div>
 							<img
 								css={imageStyles}
@@ -258,9 +263,7 @@ export const RichLink = ({
 					)}
 					<div css={richLinkElements}>
 						<div css={richLinkHeader}>
-							<div
-								css={isLabs ? labsRichLinkTitle : richLinkTitle}
-							>
+							<div css={richLinkTitlePicker}>
 								{isOpinion && (
 									<>
 										<Hide when="above" breakpoint="wide">
@@ -282,7 +285,7 @@ export const RichLink = ({
 									{mainContributor}
 								</div>
 							)}
-							{starRating && starRating > 0 && (
+							{!!starRating && (
 								<div css={starWrapper}>
 									<StarRating
 										rating={starRating}
@@ -290,13 +293,13 @@ export const RichLink = ({
 									/>
 								</div>
 							)}
-							{isPaidContent && sponsorName && (
+							{!!(isPaidContent && sponsorName) && (
 								<div css={paidForBranding}>
 									Paid for by {sponsorName}
 								</div>
 							)}
 						</div>
-						{isOpinion && contributorImage && (
+						{!!(isOpinion && contributorImage) && (
 							<div css={contributorImageWrapper}>
 								<Avatar
 									imageSrc={contributorImage}

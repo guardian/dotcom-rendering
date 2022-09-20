@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { space, textSans } from '@guardian/source-foundations';
 import { Button, SvgCross } from '@guardian/source-react-components';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 
 interface LabelProps {
@@ -62,7 +63,7 @@ const valueStyles = css`
 const Label = ({ value, count }: LabelProps) => (
 	<>
 		<span css={valueStyles}>{value}</span>{' '}
-		{count && <span css={countStyles}>({count})</span>}
+		{!!count && <span css={countStyles}>({count})</span>}
 	</>
 );
 

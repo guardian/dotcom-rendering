@@ -1,4 +1,4 @@
-import { css, ThemeProvider } from '@emotion/react';
+import { css, Global, ThemeProvider } from '@emotion/react';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { space, until, visuallyHidden } from '@guardian/source-foundations';
 import {
@@ -7,6 +7,8 @@ import {
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
 import { clearFix } from '../../../lib/mixins';
+import type { NavType } from '../../../model/extract-nav';
+import type { EditionId } from '../../../types/edition';
 import { GuardianRoundel } from '../GuardianRoundel';
 import { Hide } from '../Hide';
 import { Pillars } from '../Pillars';
@@ -69,6 +71,17 @@ export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
 
 	return (
 		<div css={rowStyles}>
+			<Global
+				styles={css`
+					/* We apply this style when the side navigation is open the prevent the document body from scrolling */
+					/* See Nav.tsx */
+					.nav-is-open {
+						${until.desktop} {
+							overflow: hidden;
+						}
+					}
+				`}
+			/>
 			{/*
                 IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
 
@@ -107,13 +120,17 @@ export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
 						if (!navInputCheckbox) return; // Sticky nav replaces the nav so element no longer exists for users in test.
 
                         navInputCheckbox.addEventListener('click',function(){
+                          document.body.classList.toggle('nav-is-open')
+
                           if(!navInputCheckbox.checked) {
+							firstColLabel.setAttribute('aria-expanded', 'false')
                             showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: show')
                             veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: show')
                             expandedMenuClickableTags.forEach(function($selectableElement){
                                 $selectableElement.setAttribute('tabindex','-1')
                             })
                           } else {
+							firstColLabel.setAttribute('aria-expanded', 'true')
                             showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: hide')
                             veggieBurger.setAttribute('data-link-name','nav2 : veggie-burger: hide')
                             expandedMenuClickableTags.forEach(function($selectableElement){
@@ -201,6 +218,9 @@ export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
 					tabIndex={-1}
 					key="OpenExpandedMenuCheckbox"
 					aria-hidden="true"
+					role="button"
+					aria-expanded="false"
+					aria-haspopup="true"
 				/>
 				<Pillars
 					display={format.display}

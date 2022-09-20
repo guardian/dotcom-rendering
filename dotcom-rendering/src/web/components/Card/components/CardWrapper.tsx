@@ -1,7 +1,12 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { neutral } from '@guardian/source-foundations';
+import { from, neutral } from '@guardian/source-foundations';
+import type {
+	DCRContainerPalette,
+	DCRContainerType,
+} from '../../../../types/front';
+import type { Palette } from '../../../../types/palette';
 import { decidePalette } from '../../../lib/decidePalette';
 
 type Props = {
@@ -9,15 +14,16 @@ type Props = {
 	format: ArticleFormat;
 	containerPalette?: DCRContainerPalette;
 	containerType?: DCRContainerType;
-	transparent?: boolean;
+	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
+	isDynamo?: true;
 };
 
 const cardStyles = (
 	format: ArticleFormat,
-	palette?: Palette,
-	containerType?: DCRContainerType,
+	palette: Palette,
+	isDynamo?: true,
+	containerPalette?: DCRContainerPalette,
 ) => {
-	const cardPalette = palette ?? decidePalette(format);
 	const baseCardStyles = css`
 		display: flex;
 		flex-direction: column;
@@ -26,14 +32,6 @@ const cardStyles = (
 		/* We absolutely position the faux link
 		so this is required here */
 		position: relative;
-
-		/* Styling for top bar */
-		:before {
-			background-color: ${cardPalette.topBar.card};
-			content: '';
-			height: ${containerType === 'dynamic/package' ? '4px' : '1px'};
-			z-index: 2;
-		}
 
 		:hover .image-overlay {
 			position: absolute;
@@ -48,8 +46,41 @@ const cardStyles = (
 		/* a tag specific styles */
 		color: inherit;
 		text-decoration: none;
-		background-color: ${cardPalette.background.card};
+		background-color: ${isDynamo ? 'transparent' : palette.background.card};
 	`;
+
+	const decidePaletteBrightness = (thePalette: DCRContainerPalette) => {
+		switch (thePalette) {
+			case 'EventPalette':
+				return `96%`;
+			case 'BreakingPalette':
+				return `85%`;
+			case 'EventAltPalette':
+				return `95%`;
+			case 'InvestigationPalette':
+				return `90%`;
+			case 'LongRunningPalette':
+				return `84%`;
+			case 'LongRunningAltPalette':
+				return `95%`;
+			case 'SombrePalette':
+				return `90%`;
+			case 'SombreAltPalette':
+				return `85%`;
+			default:
+				return `90%`;
+		}
+	};
+	if (containerPalette) {
+		return css`
+			${baseCardStyles};
+			:hover {
+				filter: brightness(
+					${decidePaletteBrightness(containerPalette)}
+				);
+			}
+		`;
+	}
 
 	if (format.theme === ArticleSpecial.SpecialReport) {
 		return css`
@@ -94,22 +125,56 @@ const cardStyles = (
 	}
 };
 
+const topBarStyles = ({
+	isDynamo,
+	palette,
+	containerType,
+}: {
+	isDynamo?: true;
+	palette: Palette;
+	containerType?: DCRContainerType;
+}) => {
+	/* Styling for top bar */
+	const baseStyles = css`
+		background-color: ${isDynamo
+			? palette.text.dynamoKicker
+			: palette.topBar.card};
+		content: '';
+		height: ${containerType === 'dynamic/package' ? '4px' : '1px'};
+		z-index: 2;
+		width: 100%;
+	`;
+
+	if (isDynamo) {
+		return css`
+			:before {
+				${baseStyles}
+				${from.phablet} {
+					width: 25%;
+				}
+			}
+		`;
+	}
+	return css`
+		:before {
+			${baseStyles}
+		}
+	`;
+};
+
 export const CardWrapper = ({
 	children,
 	format,
 	containerPalette,
 	containerType,
-	transparent,
+	isDynamo,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	return (
 		<div
 			css={[
-				cardStyles(format, palette, containerType),
-				transparent &&
-					css`
-						background: transparent;
-					`,
+				cardStyles(format, palette, isDynamo, containerPalette),
+				topBarStyles({ isDynamo, palette, containerType }),
 			]}
 		>
 			{children}

@@ -1,12 +1,15 @@
 import { css, Global } from '@emotion/react';
 import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
+import type { NavType } from '../../model/extract-nav';
+import type { DCRFrontType } from '../../types/front';
 import { FrontLayout } from '../layouts/FrontLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { CoreVitals } from './CoreVitals.importable';
 import { FetchCommentCounts } from './FetchCommentCounts.importable';
 import { FocusStyles } from './FocusStyles.importable';
 import { Island } from './Island';
+import { ShowHideContainers } from './ShowHideContainers.importable';
 import { SkipTo } from './SkipTo';
 
 type Props = {
@@ -16,7 +19,7 @@ type Props = {
 
 /**
  * @description
- * Article is a high level wrapper for pages on Dotcom. Sets strict mode and some globals
+ * FrontPage is a high level wrapper for front pages on Dotcom. Sets strict mode and some globals
  *
  * @param {Props} props
  * @param {DCRFrontType} props.front - The article JSON data
@@ -51,6 +54,9 @@ export const FrontPage = ({ front, NAV }: Props) => {
 			</Island>
 			<Island clientOnly={true} deferUntil="idle">
 				<FetchCommentCounts repeat={true} />
+			</Island>
+			<Island clientOnly={true} expediteLoading={true}>
+				<ShowHideContainers />
 			</Island>
 			<FrontLayout front={front} NAV={NAV} />
 		</StrictMode>

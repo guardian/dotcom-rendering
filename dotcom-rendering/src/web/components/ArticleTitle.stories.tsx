@@ -11,7 +11,7 @@ import {
 } from '../../../../common-rendering/src/fixtures/article';
 import { ArticleTitle } from './ArticleTitle';
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			width: 200px;
@@ -62,7 +62,7 @@ export default {
 
 export const defaultStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleTitle
 				{...brexitCAPI}
 				format={{
@@ -71,14 +71,14 @@ export const defaultStory = () => {
 					design: ArticleDesign.Standard,
 				}}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 defaultStory.story = { name: 'Brexit badge' };
 
 export const beyondTheBlade = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleTitle
 				{...beyondTheBladeCAPI}
 				format={{
@@ -87,7 +87,7 @@ export const beyondTheBlade = () => {
 					design: ArticleDesign.Standard,
 				}}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 beyondTheBlade.story = { name: 'Beyond the blade badge' };
@@ -143,7 +143,7 @@ immersiveCommentTag.story = { name: 'Immersive comment piece with Blog tag' };
 
 export const ImmersiveSeriesTag = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleTitle
 				{...CAPIArticle}
 				format={{
@@ -159,14 +159,14 @@ export const ImmersiveSeriesTag = () => {
 					},
 				]}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 ImmersiveSeriesTag.story = { name: 'Immersive with a Series tag' };
 
 export const ArticleBlogTag = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleTitle
 				{...CAPIArticle}
 				format={{
@@ -182,14 +182,14 @@ export const ArticleBlogTag = () => {
 					},
 				]}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 ArticleBlogTag.story = { name: 'Article with a Blog tag' };
 
 export const LiveblogTitle = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<div
 				css={css`
 					/* stylelint-disable-next-line color-no-hex */
@@ -235,14 +235,14 @@ export const LiveblogTitle = () => {
 					isMatch={true}
 				/>
 			</div>
-		</Container>
+		</Wrapper>
 	);
 };
 LiveblogTitle.story = { name: 'Liveblog title' };
 
 export const ArticleOpinionTag = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleTitle
 				{...CAPIArticle}
 				format={{
@@ -258,14 +258,14 @@ export const ArticleOpinionTag = () => {
 					},
 				]}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 ArticleOpinionTag.story = { name: 'Article with a Opinion tag' };
 
 export const ArticleSeriesTag = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleTitle
 				{...CAPIArticle}
 				format={{
@@ -281,14 +281,14 @@ export const ArticleSeriesTag = () => {
 					},
 				]}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 ArticleSeriesTag.story = { name: 'Article with a Series tag' };
 
 export const SpecialReportTitle = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleTitle
 				{...CAPIArticle}
 				format={{
@@ -304,14 +304,14 @@ export const SpecialReportTitle = () => {
 					},
 				]}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 SpecialReportTitle.story = { name: 'Special report' };
 
 export const ArticleNoTags = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleTitle
 				{...CAPIArticle}
 				format={{
@@ -320,14 +320,14 @@ export const ArticleNoTags = () => {
 					design: ArticleDesign.Standard,
 				}}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 ArticleNoTags.story = { name: 'Article with no tags' };
 
 export const LabsStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleTitle
 				{...CAPIArticle}
 				format={{
@@ -343,14 +343,14 @@ export const LabsStory = () => {
 					},
 				]}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 LabsStory.story = { name: 'Labs' };
 
 export const LongStory = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleTitle
 				{...CAPIArticle}
 				format={{
@@ -366,14 +366,14 @@ export const LongStory = () => {
 					},
 				]}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 LongStory.story = { name: 'Long title' };
 
 export const LongWord = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ArticleTitle
 				{...CAPIArticle}
 				format={{
@@ -389,7 +389,7 @@ export const LongWord = () => {
 					},
 				]}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 LongWord.story = { name: 'Long word' };

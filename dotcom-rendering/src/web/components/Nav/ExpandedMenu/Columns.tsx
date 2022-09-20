@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, ThemeProvider } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import {
@@ -9,7 +9,13 @@ import {
 	headline,
 	textSans,
 } from '@guardian/source-foundations';
-import { Column } from './Column';
+import {
+	buttonThemeBrand,
+	LinkButton,
+	SvgMagnifyingGlass,
+} from '@guardian/source-react-components';
+import type { NavType } from '../../../../model/extract-nav';
+import { Column, lineStyle } from './Column';
 import { MoreColumn } from './MoreColumn';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 
@@ -115,6 +121,16 @@ const brandExtensionLink = css`
 	}
 `;
 
+const searchBar = css`
+	${from.desktop} {
+		display: none;
+	}
+	margin-left: 45px;
+	margin-bottom: 24px;
+	margin-right: 41px;
+	padding-bottom: 15px;
+`;
+
 export const Columns: React.FC<{
 	format: ArticleFormat;
 	nav: NavType;
@@ -129,8 +145,36 @@ export const Columns: React.FC<{
 				column={column}
 				key={column.title.toLowerCase()}
 				index={i}
+				isLastColumn={i !== nav.pillars.length - 1}
 			/>
 		))}
+
+		<li>
+			<ThemeProvider theme={{ ...buttonThemeBrand }}>
+				<div css={searchBar}>
+					<LinkButton
+						href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
+						tabIndex={-1}
+						className="selectableMenuItem"
+						priority="secondary"
+						icon={
+							<SvgMagnifyingGlass
+								isAnnouncedByScreenReader={true}
+								size="medium"
+							/>
+						}
+						aria-label="Search with google"
+						data-link-name="nav2 : search : submit"
+						type="submit"
+					>
+						Search
+					</LinkButton>
+				</div>
+			</ThemeProvider>
+
+			<div css={lineStyle}></div>
+		</li>
+
 		<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
 		<MoreColumn
 			column={nav.otherLinks}

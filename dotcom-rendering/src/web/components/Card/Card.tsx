@@ -3,11 +3,18 @@ import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground, space } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import type { Branding } from '../../../types/branding';
+import type {
+	DCRContainerPalette,
+	DCRContainerType,
+	DCRSnapType,
+	DCRSupportingContent,
+} from '../../../types/front';
+import type { Palette } from '../../../types/palette';
 import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { Avatar } from '../Avatar';
 import { CardHeadline } from '../CardHeadline';
-import { Flex } from '../Flex';
 import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
 import { Snap } from '../Snap';
@@ -30,28 +37,31 @@ export type Props = {
 	format: ArticleFormat;
 	headlineText: string;
 	headlineSize?: SmallHeadlineSize;
-	showQuotes?: boolean; // Even with design !== Comment, a piece can be opinion
+	headlineSizeOnMobile?: SmallHeadlineSize;
+	/** Even with design !== Comment, a piece can be opinion */
+	showQuotes?: boolean;
 	byline?: string;
 	showByline?: boolean;
 	webPublicationDate?: string;
 	imageUrl?: string;
 	imagePosition?: ImagePositionType;
 	imagePositionOnMobile?: ImagePositionType;
-	imageSize?: ImageSizeType; // Size is ignored when position = 'top' because in that case the image flows based on width
+	/** Size is ignored when position = 'top' because in that case the image flows based on width */
+	imageSize?: ImageSizeType;
 	trailText?: string;
-	avatar?: AvatarType;
+	avatarUrl?: string;
 	showClock?: boolean;
 	mediaType?: MediaType;
 	mediaDuration?: number;
-	// Kicker
 	kickerText?: string;
 	showPulsingDot?: boolean;
+	/** Sometimes kickers and headlines are separated by a slash */
 	showSlash?: boolean;
 	starRating?: number;
 	minWidthInPixels?: number;
 	/** Used for Ophan tracking */
 	dataLinkName?: string;
-	// Labs
+	/** Only used on Labs cards */
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
 	snapData?: DCRSnapType;
@@ -59,7 +69,8 @@ export type Props = {
 	containerType?: DCRContainerType;
 	showAge?: boolean;
 	discussionId?: string;
-	transparent?: boolean;
+	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
+	isDynamo?: true;
 };
 
 const StarRatingComponent = ({ rating }: { rating: number }) => (
@@ -160,6 +171,7 @@ export const Card = ({
 	format,
 	headlineText,
 	headlineSize,
+	headlineSizeOnMobile,
 	showQuotes,
 	byline,
 	showByline,
@@ -169,7 +181,7 @@ export const Card = ({
 	imagePositionOnMobile = 'left',
 	imageSize = 'small',
 	trailText,
-	avatar,
+	avatarUrl,
 	showClock,
 	mediaType,
 	mediaDuration,
@@ -186,7 +198,7 @@ export const Card = ({
 	containerType,
 	showAge = false,
 	discussionId,
-	transparent,
+	isDynamo,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -217,6 +229,7 @@ export const Card = ({
 							containerPalette={containerPalette}
 							webPublicationDate={webPublicationDate}
 							showClock={showClock}
+							isDynamo={isDynamo}
 						/>
 					) : undefined
 				}
@@ -229,13 +242,15 @@ export const Card = ({
 							data-name="comment-count-marker"
 							data-discussion-id={discussionId}
 							data-format={JSON.stringify(format)}
+							data-is-dynamo={isDynamo ? 'true' : undefined}
+							data-container-palette={containerPalette}
 							data-ignore="global-link-styling"
 							data-link-name="Comment count"
 							href={`${linkTo}#comments`}
 							subdued={true}
 							cssOverrides={css`
 								/* See: https://css-tricks.com/nested-links/ */
-								${getZIndex('card-nested-link')};
+								${getZIndex('card-nested-link')}
 								/* The following styles turn off those provided by Link */
 								color: inherit;
 								/* stylelint-disable-next-line property-disallowed-list */
@@ -265,92 +280,108 @@ export const Card = ({
 		return <Snap snapData={snapData} />;
 	}
 
+	// Decide what type of image to show, main media, avatar or none
+	let imageType: CardImageType | undefined;
+	if (imageUrl && avatarUrl) {
+		imageType = 'avatar';
+	} else if (imageUrl) {
+		imageType = 'mainMedia';
+	}
+
 	return (
 		<CardWrapper
 			format={format}
 			containerPalette={containerPalette}
 			containerType={containerType}
-			transparent={transparent}
+			isDynamo={isDynamo}
 		>
 			<CardLink
 				linkTo={linkTo}
+				headlineText={headlineText}
 				dataLinkName={dataLinkName}
-				format={format}
-				containerPalette={containerPalette}
 			/>
 			<CardLayout
-				imagePosition={imagePosition}
-				imagePositionOnMobile={imagePositionOnMobile}
+				imagePosition={imageUrl !== undefined ? imagePosition : 'top'}
+				imagePositionOnMobile={
+					imageUrl !== undefined ? imagePositionOnMobile : 'top'
+				}
 				minWidthInPixels={minWidthInPixels}
+				imageType={imageType}
 			>
-				{imageUrl && (
-					<ImageWrapper
-						imageSize={imageSize}
-						imagePosition={imagePosition}
-						imagePositionOnMobile={imagePositionOnMobile}
-					>
+				<ImageWrapper
+					imageSize={imageSize}
+					imageType={imageType}
+					imagePosition={
+						imageUrl !== undefined ? imagePosition : 'top'
+					}
+					imagePositionOnMobile={
+						imageUrl !== undefined ? imagePositionOnMobile : 'top'
+					}
+				>
+					{imageType === 'avatar' && !!avatarUrl ? (
+						<AvatarContainer
+							imageSize={imageSize}
+							imagePosition={imagePosition}
+						>
+							<Avatar
+								imageSrc={avatarUrl}
+								imageAlt={byline ?? ''}
+								containerPalette={containerPalette}
+								format={format}
+							/>
+						</AvatarContainer>
+					) : (
 						<img src={imageUrl} alt="" role="presentation" />
-					</ImageWrapper>
-				)}
+					)}
+				</ImageWrapper>
 				<ContentWrapper
+					imageType={imageType}
 					imageSize={imageSize}
 					imagePosition={imagePosition}
 				>
-					<Flex>
-						<HeadlineWrapper>
-							<CardHeadline
-								headlineText={headlineText}
-								format={format}
+					<HeadlineWrapper>
+						<CardHeadline
+							headlineText={headlineText}
+							format={format}
+							containerPalette={containerPalette}
+							size={headlineSize}
+							sizeOnMobile={headlineSizeOnMobile}
+							showQuotes={showQuotes}
+							kickerText={
+								format.design === ArticleDesign.LiveBlog
+									? 'Live'
+									: kickerText
+							}
+							showPulsingDot={
+								format.design === ArticleDesign.LiveBlog ||
+								showPulsingDot
+							}
+							showSlash={
+								format.design === ArticleDesign.LiveBlog ||
+								showSlash
+							}
+							byline={byline}
+							showByline={showByline}
+							isDynamo={isDynamo}
+						/>
+						{starRating !== undefined ? (
+							<StarRatingComponent rating={starRating} />
+						) : null}
+						{(format.design === ArticleDesign.Gallery ||
+							format.design === ArticleDesign.Audio ||
+							format.design === ArticleDesign.Video) &&
+						mediaType ? (
+							<MediaMeta
 								containerPalette={containerPalette}
-								size={headlineSize}
-								showQuotes={showQuotes}
-								kickerText={
-									format.design === ArticleDesign.LiveBlog
-										? 'Live'
-										: kickerText
-								}
-								showPulsingDot={
-									format.design === ArticleDesign.LiveBlog ||
-									showPulsingDot
-								}
-								showSlash={
-									format.design === ArticleDesign.LiveBlog ||
-									showSlash
-								}
-								byline={byline}
-								showByline={showByline}
+								format={format}
+								mediaType={mediaType}
+								mediaDuration={mediaDuration}
 							/>
-							{starRating !== undefined ? (
-								<StarRatingComponent rating={starRating} />
-							) : null}
-							{(format.design === ArticleDesign.Gallery ||
-								format.design === ArticleDesign.Audio ||
-								format.design === ArticleDesign.Video) &&
-							mediaType ? (
-								<MediaMeta
-									containerPalette={containerPalette}
-									format={format}
-									mediaType={mediaType}
-									mediaDuration={mediaDuration}
-								/>
-							) : undefined}
-						</HeadlineWrapper>
-						{avatar && (
-							<Hide when="above" breakpoint="tablet">
-								<AvatarContainer>
-									<Avatar
-										imageSrc={avatar.src}
-										imageAlt={avatar.alt}
-										containerPalette={containerPalette}
-										format={format}
-									/>
-								</AvatarContainer>
-							</Hide>
-						)}
-					</Flex>
+						) : undefined}
+					</HeadlineWrapper>
 					{/* This div is needed to push this content to the bottom of the card */}
 					<div>
-						{trailText && (
+						{!!trailText && (
 							<TrailTextWrapper
 								containerPalette={containerPalette}
 								format={format}
@@ -361,18 +392,6 @@ export const Card = ({
 									}}
 								/>
 							</TrailTextWrapper>
-						)}
-						{avatar && (
-							<Hide when="below" breakpoint="tablet">
-								<AvatarContainer>
-									<Avatar
-										imageSrc={avatar.src}
-										imageAlt={avatar.alt}
-										containerPalette={containerPalette}
-										format={format}
-									/>
-								</AvatarContainer>
-							</Hide>
 						)}
 						<DecideFooter
 							isOpinion={isOpinion}
@@ -396,7 +415,9 @@ export const Card = ({
 				<SupportingContent
 					supportingContent={supportingContent}
 					alignment={
-						imagePosition === 'top' || imagePosition === 'bottom'
+						imagePosition === 'top' ||
+						imagePosition === 'bottom' ||
+						imageUrl === undefined
 							? 'vertical'
 							: 'horizontal'
 					}

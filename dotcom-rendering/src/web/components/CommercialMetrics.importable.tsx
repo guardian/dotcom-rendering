@@ -4,9 +4,8 @@ import {
 	bypassCommercialMetricsSampling as switchOffSampling,
 } from '@guardian/commercial-core';
 import { getCookie } from '@guardian/libs';
+import type { ServerSideTestNames } from '../../types/config';
 import { tests } from '../experiments/ab-tests';
-import { commercialLazyLoadMarginReloaded } from '../experiments/tests/commercial-lazy-load-margin-reloaded';
-import { multiStickyRightAds } from '../experiments/tests/multi-sticky-right-ads';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useOnce } from '../lib/useOnce';
@@ -29,8 +28,6 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 		// For these tests switch off sampling and collect metrics for 100% of views
 		const clientSideTestsToForceMetrics: ABTest[] = [
 			/* keep array multi-line */
-			commercialLazyLoadMarginReloaded,
-			multiStickyRightAds,
 		];
 
 		const userInClientSideTestToForceMetrics = ABTestAPI?.allRunnableTests(
@@ -39,8 +36,10 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 			clientSideTestsToForceMetrics.map((t) => t.id).includes(test.id),
 		);
 
-		const serverSideTestsToForceMetrics: Array<keyof ServerSideTests> = [
+		const serverSideTestsToForceMetrics: Array<ServerSideTestNames> = [
 			/* keep array multi-line */
+			'commercialEndOfQuarterMegaTestVariant',
+			'commercialEndOfQuarterMegaTestControl',
 		];
 
 		const userInServerSideTestToForceMetrics =
@@ -71,7 +70,9 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 				}
 			})
 			.catch((e) =>
-				console.error(`Error initialising commercial metrics: ${e}`),
+				console.error(
+					`Error initialising commercial metrics: ${String(e)}`,
+				),
 			);
 	}, [ABTestAPI, adBlockerInUse, enabled]);
 

@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
 import { from, headline } from '@guardian/source-foundations';
+import StarRating from 'components/StarRating';
 import type { Item } from 'item';
-import { DefaultHeadline, defaultStyles } from './Headline.defaults';
+import { defaultStyles } from './Headline.defaults';
 
 const reviewStyles = css`
 	${headline.small({ fontWeight: 'bold' })}
@@ -16,10 +17,10 @@ interface Props {
 }
 
 const ReviewHeadline: React.FC<Props> = ({ item }) => (
-	<DefaultHeadline
-		item={item}
-		styles={css(defaultStyles(item), reviewStyles)}
-	/>
+	<h1 css={css(defaultStyles(item), reviewStyles)}>
+		<span>{item.headline}</span>
+		<StarRating item={item} />
+	</h1>
 );
 
 export default ReviewHeadline;

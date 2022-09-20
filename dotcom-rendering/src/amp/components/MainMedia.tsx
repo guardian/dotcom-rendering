@@ -91,8 +91,10 @@ const mainImage = (element: ImageBlockElement) => {
 				layout="responsive"
 				srcset={scrsetStringFromImagesSources(element.imageSources)}
 			/>
-			{(element.data.caption ||
-				(element.data.credit && element.displayCredit)) && (
+			{!!(
+				element.data.caption ||
+				(element.data.credit && element.displayCredit)
+			) && (
 				<>
 					<input
 						aria-checked={false}
@@ -128,7 +130,7 @@ const expanded = css`
 
 const asComponent = (
 	element: CAPIElement,
-	pillar: ArticlePillar,
+	pillar: ArticleTheme,
 	adTargeting?: any,
 ) => {
 	switch (element._type) {

@@ -11,6 +11,8 @@
  *    gen-fixtures.ts directly.
  */
 
+import type { CAPIArticleType } from '../../../src/types/frontend';
+
 export const Review: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image element--showcase" data-media-id="39892d930be2203c5ea452d130772c0279f7dc0c"> <img src="https://media.guim.co.uk/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/1000.jpg" alt="Sex Education." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">So brilliant you can only boggle ... Ncuti Gatwa as Eric in Sex Education.</span> <span class="element-image__credit">Photograph: Sam Taylor/Netflix</span> </figcaption> </figure>',
@@ -1293,7 +1295,7 @@ export const Review: CAPIArticleType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2021/07/27/STL_&_GMG_Modern_Slavery_Act_Statement_2021.pdf',
+					url: 'https://uploads.guim.co.uk/2022/07/20/STL_Modern_Slavery_Statement_2022.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1403,6 +1405,7 @@ export const Review: CAPIArticleType = {
 	starRating: 5,
 	headline:
 		'Sex Education season two review – fast, funny and still not for the faint-hearted',
+	byline: 'Lucy Mangan',
 	isLegacyInteractive: false,
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
@@ -1662,7 +1665,7 @@ export const Review: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: 'b413b7e6-4a1d-4216-a7ea-6c2868d078a1',
+			elementId: '57f51b88-fbed-4543-81e9-a5c3ef6d016b',
 		},
 	],
 	webPublicationDate: '2020-01-17T12:00:05.000Z',
@@ -1673,15 +1676,16 @@ export const Review: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The new season of <a href="https://www.theguardian.com/tv-and-radio/2019/jan/17/sex-education-asa-butterfield-gillian-anderson-netflix">Sex Education</a> (Netflix) opens with a bravura sequence that swiftly takes its place in the pantheon of peen-based comedy greats. Suffice to say that since we left Otis at the end of the <a href="https://www.theguardian.com/tv-and-radio/2019/jan/11/sex-education-review-netflix-asa-butterfield-gillian-anderson">glorious inaugural run</a> having successfully masturbated for the first time, he has taken gleefully to his new hobby and – I don’t know if you know the French expression to encourage reluctant diners, “the appetite comes with eating”? – but we need to come up with the carnal equivalent for his joyful daily pursuits of the big O.</p>',
-					elementId: '511931e4-a13c-4756-b78a-d6eed25a74fd',
+					elementId: '1b40f108-7213-4683-967c-e86fc44ea513',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The scene establishes the tone of the new season – furiously fast, furiously funny, and not for the faint of heart any more than the first series was. And, just like the first series, it underpins the comedy arising from the sixth form students’ sexual escapades, experiments and baffled queries (“My cum tastes like kimchi! Why do I have a fermented dick?”) with deeper explorations of the main characters and the emotional pressures engendered by bigger problems.</p>',
-					elementId: '9690460e-5593-4077-b733-c2992559d704',
+					elementId: 'f37ed266-fc78-46a6-b1ff-c9b8c7d02f82',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
+					title: 'Sex Education: Season 2 | Official Trailer | Netflix',
 					url: 'https://www.youtube.com/watch?v=qZhb0Vl_BaM',
 					originalUrl: 'https://www.youtube.com/watch?v=qZhb0Vl_BaM',
 					embedUrl:
@@ -1692,12 +1696,12 @@ export const Review: CAPIArticleType = {
 					isThirdPartyTracking: false,
 					source: 'YouTube',
 					sourceDomain: 'youtube-nocookie.com',
-					elementId: '0d27d400-18a2-4107-82b9-cbedb26b0486',
+					elementId: '67d1570b-7969-4173-905b-55476b8a6f24',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>With the help of Miss Sands, Maeve (Emma Mackey) finagles her way back into school and the special ability programme. All she has to do thereafter is wrestle with her unwelcoming and far more privileged peers and the return of her errant mother Erin (Anne-Marie Duff), allegedly clean for a year and with a three-year-old half-sister in tow. Otis (<a href="https://www.theguardian.com/tv-and-radio/2019/dec/28/sex-education-asa-butterfield-feel-more-confident-talking-about-sex">Asa Butterfield</a>) must negotiate his new relationship with Ola (Patricia Allison) while his mother Jean (Gillian Anderson, given a whole heap more to do this time round and rightly relishing every moment) throws more spanners in to his sexual works by dating Ola’s dad. Adam – poor beleaguered Adam (Connor Swindells) – is unjustly expelled from military school and sent back home to a dead-end job and his ever more hateful father. Swindells gives an extraordinary performance with what amounts to barely a hundred lines in the entire eight episodes, and if your heart doesn’t break at at least three points for him then I have no use for you. I don’t want to spoil Eric’s storyline because it doesn’t get going until a few episodes in, but <a href="https://www.theguardian.com/culture/2020/jan/05/ncuti-gatwa-i-will-say-yes-to-anything-sex-education">Ncuti Gatwa</a> remains the find of the age and handles everything thrown at him with such deftness and authenticity that you can only boggle at the fact that Laurie Nunn’s creation is his first major role.</p>',
-					elementId: '2be42c9a-edc4-4878-8b0e-eadbc808681d',
+					elementId: 'e4d4a005-3a01-43fd-89cb-c6e22a143060',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -1948,43 +1952,75 @@ export const Review: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=620&quality=85&auto=format&fit=max&s=706994190152b4f3c89f851cb410188a',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=1900&quality=85&auto=format&fit=max&s=62d000ed14cf6fb85a9110c396609d7c',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=87c1e03c237478f1a63999836a3104ab',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=5b89e0731fe5bc27bbc9640ebb991a5c',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=605&quality=85&auto=format&fit=max&s=3f18a6534b7404f4dbf187271fd006cc',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=1300&quality=85&auto=format&fit=max&s=7ab4c02896ee5724af35e87643524041',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=75cf2b8b8f2e7f6bb9916956225677ff',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=3354a2144e9740a2343204d9bdbb642f',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=445&quality=85&auto=format&fit=max&s=27b07e6e79d11741cdf9d4af1ac2a995',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=1140&quality=85&auto=format&fit=max&s=ad34ccc49889d2966651fa9159b69438',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=9d260fed90c125fbed32371d622639b7',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=28ad40911f677be29ef042a1c2b81a1d',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=980&quality=85&auto=format&fit=max&s=b59ee09c43ab7bfce15c8331c1a7f9bb',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=6d0ff7e6fdc426df0c8d0fd93f534ced',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=740&quality=85&auto=format&fit=max&s=66bee95908ce0a3ea23aefee7af10101',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=4361a815dcddfc24526854c2dd95d396',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=660&quality=85&auto=format&fit=max&s=160fe53250d52042b0b21d0ea6eb4d8a',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=5fb881dab9133fdc2f18621324313b3f',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=480&quality=85&auto=format&fit=max&s=a1c39aea3594c16c18fd57ec3d4655f7',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/b1ea8f7ee34d51f0ecddeb1190f64924bedd4fae/0_0_6000_4000/master/6000.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=51c559c22e1047080c7a17040260f55f',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: '3e9ec294-9726-43c1-a417-a0abb03e6c79',
+					elementId: '8661d8c4-1a62-4eb9-a836-e7fabffda0f0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Every performer is wonderful, not least because the script is wonderful, playing the sex for laughs and the search for intimacy as something serious, good and noble. Not a single character is a cipher – even the smallest parts have a sketched backstory and some good gags. It’s all of a piece with the charm and generosity of spirit that suffuses the whole thing. <a href="https://www.theguardian.com/tv-and-radio/sex-education" data-component="auto-linked-tag">Sex Education</a> sets so many conventions cheerily but firmly aside that you feel like an entire forest of received wisdom is being clear-cut. Light floods in, new growth springs up. Such a sense of revelry and optimism abounds that you can feel it doing your heart and soul good as you watch. And all without missing a comic or emotional beat or deviating from its moral core, which urges us all to connect.</p>',
-					elementId: '8a9c101d-b754-44a8-a3b0-d69d3007d575',
+					elementId: 'f59e0651-eb28-41f5-9a1c-907d559d1799',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>So welcome once more, Otis (and your newly excitable penis), Maeve with her troubles to seek, Jackson (Kedar Williams-Stirling) whose mental health plummets to new lows as his swimming career reaches new heights, Aimee through whose experience on a local bus the issue of sexual assault is channelled, and all the magnificent rest of you. Nobody does it better. In fact, nobody does anything quite like it at all.</p>',
-					elementId: '1d977843-5afe-44bd-9379-b444f740de56',
+					elementId: 'e955f568-1bf4-4fec-82e5-7e7bd31690b7',
 				},
 			],
 			attributes: {

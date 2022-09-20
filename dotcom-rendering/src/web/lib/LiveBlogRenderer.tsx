@@ -1,4 +1,5 @@
 import { Hide } from '@guardian/source-react-components';
+import type { Switches } from '../../types/config';
 import { EnhancePinnedPost } from '../components/EnhancePinnedPost.importable';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
 import { Island } from '../components/Island';
@@ -19,7 +20,7 @@ type Props = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	switches: { [key: string]: boolean };
+	switches: Switches;
 	isLiveUpdate?: boolean;
 	section: string;
 	shouldHideReaderRevenue: boolean;
@@ -57,9 +58,12 @@ export const LiveBlogRenderer = ({
 	availableTopics,
 	selectedTopics,
 }: Props) => {
+	const filtered =
+		(selectedTopics && selectedTopics.length > 0) || filterKeyEvents;
+
 	return (
 		<>
-			{pinnedPost && onFirstPage && (
+			{pinnedPost && onFirstPage && !filtered && (
 				<>
 					<Island clientOnly={true} deferUntil="idle">
 						<EnhancePinnedPost />
@@ -82,7 +86,7 @@ export const LiveBlogRenderer = ({
 					</PinnedPost>
 				</>
 			)}
-			{keyEvents?.length && (
+			{keyEvents?.length ? (
 				<Hide above="desktop">
 					<Island deferUntil="visible">
 						<KeyEventsCarousel
@@ -101,6 +105,8 @@ export const LiveBlogRenderer = ({
 						</Island>
 					)}
 				</Hide>
+			) : (
+				<></>
 			)}
 
 			{switches.automaticFilters && availableTopics && (

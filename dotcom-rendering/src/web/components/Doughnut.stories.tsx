@@ -58,7 +58,7 @@ const threeSections = [
 	},
 ];
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			width: 620px;
@@ -71,45 +71,45 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const NinetyNineToOne = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Doughnut sections={ninetyNineToOne} />
-		</Container>
+		</Wrapper>
 	);
 };
 NinetyNineToOne.story = { name: 'with one section at 99 and the other at 1' };
 
 export const One = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Doughnut sections={oneSection} />
-		</Container>
+		</Wrapper>
 	);
 };
 One.story = { name: 'with one section' };
 
 export const Two = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Doughnut sections={twoSections} />
-		</Container>
+		</Wrapper>
 	);
 };
 Two.story = { name: 'with two sections' };
 
 export const Three = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Doughnut sections={threeSections} />
-		</Container>
+		</Wrapper>
 	);
 };
 Three.story = { name: 'with three sections' };
 
 export const Smaller = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<Doughnut sections={twoSections} percentCutout={20} size={200} />
-		</Container>
+		</Wrapper>
 	);
 };
 Smaller.story = { name: 'with props used to change size' };

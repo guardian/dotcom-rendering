@@ -13,7 +13,7 @@ interface ShouldNotShow {
 }
 export type CanShowResult<T> = ShouldShow<T> | ShouldNotShow;
 
-export type Candidate<T> = {
+type Candidate<T> = {
 	id: string;
 	show: ShowMessage<T>;
 	canShow: () => Promise<CanShowResult<T>>;
@@ -77,7 +77,7 @@ const timeoutify = <T>(
 					}
 				})
 				.catch((e) =>
-					console.error(`timeoutify candidate - error: ${e}`),
+					console.error(`timeoutify candidate - error: ${String(e)}`),
 				);
 		});
 
@@ -153,5 +153,7 @@ export const pickMessage = ({
 					resolve(() => candidate.show(meta));
 				}
 			})
-			.catch((e) => console.error(`pickMessage winner - error: ${e}`));
+			.catch((e) =>
+				console.error(`pickMessage winner - error: ${String(e)}`),
+			);
 	});

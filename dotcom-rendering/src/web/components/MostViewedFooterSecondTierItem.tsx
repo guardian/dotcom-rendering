@@ -6,6 +6,7 @@ import {
 	neutral,
 	text,
 } from '@guardian/source-foundations';
+import type { TrailType } from '../../types/trails';
 import { AgeWarning } from './AgeWarning';
 import { Avatar } from './Avatar';
 import { Flex } from './Flex';
@@ -114,14 +115,14 @@ export const MostViewedFooterSecondTierItem = ({
 							byline={showByline ? byline : undefined}
 						/>
 
-						{ageWarning && (
+						{!!ageWarning && (
 							<div css={ageWarningStyles}>
 								<AgeWarning age={ageWarning} size="small" />
 							</div>
 						)}
 					</div>
 					<>
-						{avatarToShow && (
+						{!!avatarToShow && (
 							<div css={avatarContainerStyles}>
 								<div css={avatarSizeStyles}>
 									<Avatar

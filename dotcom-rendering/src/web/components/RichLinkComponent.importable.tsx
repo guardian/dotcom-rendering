@@ -22,7 +22,7 @@ interface CAPIRichLinkType {
 	format: CAPIFormat;
 	starRating?: number;
 	contributorImage?: string;
-	imageAsset: ImageAsset;
+	imageAsset?: ImageAsset;
 }
 interface ImageAsset {
 	index: number;
@@ -64,7 +64,7 @@ export const RichLinkComponent = ({
 		window.guardian.modules.sentry.reportError(error, 'rich-link');
 	}
 
-	if (data) {
+	if (data?.imageAsset) {
 		const richLinkImageData: RichLinkImageData = {
 			thumbnailUrl: data.thumbnailUrl,
 			altText: data.imageAsset.fields.altText,

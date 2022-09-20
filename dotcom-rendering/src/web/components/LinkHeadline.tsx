@@ -19,7 +19,9 @@ type Props = {
 };
 
 const fontStyles = (size: SmallHeadlineSize) => {
+	// eslint-disable-next-line default-case -- because a default case here makes no sense
 	switch (size) {
+		case 'ginormous':
 		case 'huge':
 			return css`
 				${headline.small()};
@@ -79,10 +81,10 @@ export const LinkHeadline = ({
 
 	return (
 		<h4 css={fontStyles(size)}>
-			{kickerText && (
+			{!!kickerText && (
 				<Kicker
 					text={kickerText}
-					palette={palette}
+					color={palette.text.linkKicker}
 					showPulsingDot={showPulsingDot}
 					showSlash={showSlash}
 				/>
@@ -107,7 +109,7 @@ export const LinkHeadline = ({
 					>
 						{headlineText}
 					</a>
-					{byline && (
+					{!!byline && (
 						<Byline text={byline} format={format} size={size} />
 					)}
 				</>
@@ -115,7 +117,7 @@ export const LinkHeadline = ({
 				// We don't have a link so simply use a span here
 				<>
 					<span>{headlineText}</span>
-					{byline && (
+					{!!byline && (
 						<Byline text={byline} size={size} format={format} />
 					)}
 				</>

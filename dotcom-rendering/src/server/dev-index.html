@@ -58,6 +58,10 @@
 				<a href="/Front?url=https://www.theguardian.com/international"
 					>International Front</a
 				>
+				(<a
+					href="/FrontJSON?url=https://www.theguardian.com/international"
+					>Enhanced JSON</a
+				>)
 			</li>
 		</ul>
 
@@ -368,15 +372,23 @@
 						const a = document.createElement('a');
 						const slug = text.slice(guurl.length, 64);
 
-						a.setAttribute(
-							'href',
-							`/${getPageType(text)}?url=${text}`,
-						);
-						a.innerText = `📋 ${getPageType(
-							text,
-						)} from clipboard: /${slug}…`;
+						const pageType = getPageType(text);
+
+						a.setAttribute('href', `/${pageType}?url=${text}`);
+						a.innerText = `📋 ${pageType} from clipboard: /${slug}…`;
 
 						li.appendChild(a);
+
+						if (pageType === 'Front') {
+							const aJSON = document.createElement('a');
+							aJSON.setAttribute(
+								'href',
+								`/${pageType}JSON?url=${text}`,
+							);
+							aJSON.innerHTML = 'Enhanced JSON';
+							li.append(' (', aJSON, ')');
+						}
+
 						fragment.appendChild(li);
 
 						document
@@ -391,14 +403,14 @@
 			checkClipboard();
 
 			const makeTestArticle = (a) => `
-                <div class="test-article">
-                    <span>${a.name}</span>
-                    <span><a href="/Article?url=https://www.theguardian.com${a.article}">🔗</a> <a href="/Article?url=http://localhost:9000${a.article}">🔗(local FE)</a></span>
-                    <span><a href="/AMPArticle?url=https://www.theguardian.com${a.article}">🔗</a> <a href="/AMPArticle?url=http://localhost:9000${a.article}">🔗(local FE)</a></span>
-                    <span><a href="https://www.theguardian.com${a.article}">example</a></span>
-                    <span><a href="https://amp.theguardian.com${a.article}">example</a></span>
-                </div>
-            `;
+			             <div class="test-article">
+			                 <span>${a.name}</span>
+			                 <span><a href="/Article?url=https://www.theguardian.com${a.article}">🔗</a> <a href="/Article?url=http://localhost:9000${a.article}">🔗(local FE)</a></span>
+			                 <span><a href="/AMPArticle?url=https://www.theguardian.com${a.article}">🔗</a> <a href="/AMPArticle?url=http://localhost:9000${a.article}">🔗(local FE)</a></span>
+			                 <span><a href="https://www.theguardian.com${a.article}">example</a></span>
+			                 <span><a href="https://amp.theguardian.com${a.article}">example</a></span>
+			             </div>
+			         `;
 
 			testContentTypes.forEach((a) => {
 				document.getElementById('test-articles-by-content').innerHTML +=

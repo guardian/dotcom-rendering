@@ -67,21 +67,30 @@ const ageWarningStyles = css`
 `;
 
 type Props = {
-	trail: TrailType;
 	position: number;
+	url: string;
+	format: ArticleFormat;
+	headlineText: string;
+	ageWarning?: string;
 };
 
-export const MostViewedFooterItem = ({ trail, position }: Props) => (
+export const MostViewedFooterItem = ({
+	position,
+	url,
+	format,
+	headlineText,
+	ageWarning,
+}: Props) => (
 	<li css={gridItem(position)} data-link-name={`${position} | text`}>
-		<a css={headlineLink} href={trail.url} data-link-name="article">
+		<a css={headlineLink} href={url} data-link-name="article">
 			<span css={bigNumber}>
 				<BigNumber index={position} />
 			</span>
 			<div css={headlineHeader}>
-				{trail.format.design === ArticleDesign.LiveBlog ? (
+				{format.design === ArticleDesign.LiveBlog ? (
 					<LinkHeadline
-						headlineText={trail.headline}
-						format={trail.format}
+						headlineText={headlineText}
+						format={format}
 						size="small"
 						kickerText="Live"
 						showSlash={true}
@@ -90,19 +99,19 @@ export const MostViewedFooterItem = ({ trail, position }: Props) => (
 					/>
 				) : (
 					<LinkHeadline
-						headlineText={trail.headline}
-						format={trail.format}
+						headlineText={headlineText}
+						format={format}
 						size="small"
 						showQuotes={
-							trail.format.design === ArticleDesign.Comment ||
-							trail.format.design === ArticleDesign.Letter
+							format.design === ArticleDesign.Comment ||
+							format.design === ArticleDesign.Letter
 						}
 					/>
 				)}
 			</div>
-			{trail.ageWarning && (
+			{!!ageWarning && (
 				<div css={ageWarningStyles}>
-					<AgeWarning age={trail.ageWarning} size="small" />
+					<AgeWarning age={ageWarning} size="small" />
 				</div>
 			)}
 		</a>

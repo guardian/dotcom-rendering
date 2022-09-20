@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { headline, neutral } from '@guardian/source-foundations';
 import React from 'react';
 import { getAgeWarning } from '../../../lib/age-warning';
+import { getSoleContributor } from '../../../lib/byline';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 import { getSharingUrls } from '../../../lib/sharing-urls';
 import type { ArticleModel } from '../../types/ArticleModel';
@@ -86,13 +87,13 @@ const BylineMeta: React.FunctionComponent<{
 				]}
 			>
 				<Byline
-					byline={articleData.author.byline}
+					byline={articleData.byline}
 					tags={articleData.tags}
 					guardianBaseURL={articleData.guardianBaseURL}
 				/>
 			</div>
 
-			{shouldShowBylineImage && (
+			{!!shouldShowBylineImage && (
 				<amp-img
 					class={bylineImageStyle}
 					src={bylineImageUrl}
@@ -145,7 +146,10 @@ export const TopMetaOpinion: React.FC<{
 					articleData.webPublicationDateDeprecated,
 				)}
 				webPublicationDate={articleData.webPublicationDateDisplay}
-				twitterHandle={articleData.author.twitterHandle}
+				twitterHandle={
+					getSoleContributor(articleData.tags, articleData.byline)
+						?.twitterHandle
+				}
 			/>
 		</header>
 	);

@@ -14,6 +14,7 @@ import React from 'react';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import { getSharingUrls } from '../../lib/sharing-urls';
+import type { ConfigType } from '../../types/config';
 import { decideDesign } from '../../web/lib/decideDesign';
 import { decideTheme } from '../../web/lib/decideTheme';
 import { findAdSlots } from '../lib/find-adslots';
@@ -59,7 +60,7 @@ const decideBackground = (design: Design, pillar: ArticleTheme): string => {
 	}
 };
 
-const body = (pillar: ArticlePillar, design: Design) => {
+const body = (pillar: ArticleTheme, design: Design) => {
 	return css`
 		background-color: ${decideBackground(design, pillar)};
 		${bulletStyle(pillar)}
@@ -125,9 +126,9 @@ export const Body: React.FC<{
 		contentType: data.contentType,
 		commercialProperties: data.commercialProperties,
 		switches: {
-			ampPrebid: config.switches.ampPrebid,
-			permutive: config.switches.permutive,
-			ampAmazon: config.switches.ampAmazon,
+			ampPrebid: !!config.switches.ampPrebid,
+			permutive: !!config.switches.permutive,
+			ampAmazon: !!config.switches.ampAmazon,
 		},
 	};
 

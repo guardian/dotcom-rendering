@@ -4,11 +4,10 @@ import {
 	onConsentChange,
 } from '@guardian/consent-management-platform';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
-import { getCookie, log } from '@guardian/libs';
+import type { OphanAction, OphanComponentType } from '@guardian/libs';
+import { getCookie, loadScript, log } from '@guardian/libs';
 import { getLocaleCode } from '../../lib/getCountryCode';
 import { injectPrivacySettingsLink } from '../../lib/injectPrivacySettingsLink';
-import { loadScript } from '../../lib/loadScript';
-import type { OphanAction, OphanComponentType } from '../ophan/ophan';
 import { submitComponentEvent } from '../ophan/ophan';
 import { startup } from '../startup';
 
@@ -54,7 +53,7 @@ const init = async (): Promise<void> => {
 			);
 		})
 		.catch((e) =>
-			log('dotcom', `CMP willShowPrivacyMessage - error: ${e}`),
+			log('dotcom', `CMP willShowPrivacyMessage - error: ${String(e)}`),
 		);
 
 	onConsentChange((consentState: ConsentState) => {
@@ -153,7 +152,7 @@ const init = async (): Promise<void> => {
 				.then(() => {
 					log('dotcom', 'GA script loaded');
 				})
-				.catch((e) => console.error(`GA - error: ${e}`));
+				.catch((e) => console.error(`GA - error: ${String(e)}`));
 		} else {
 			// Disable Google Analytics
 			// Note. We should never be able to directly set things to the global window object

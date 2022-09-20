@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { brand } from '@guardian/source-foundations';
+import type { EditionId } from '../../types/edition';
 import { EditionDropdown } from './EditionDropdown.importable';
 import { Hide } from './Hide';
 import { Island } from './Island';
@@ -24,6 +25,7 @@ type Props = {
 	urls: ReaderRevenueCategories;
 	remoteHeader: boolean;
 	contributionsServiceUrl: string;
+	idApiUrl: string;
 };
 
 export const Header = ({
@@ -35,6 +37,7 @@ export const Header = ({
 	urls,
 	remoteHeader,
 	contributionsServiceUrl,
+	idApiUrl,
 }: Props) => (
 	<div css={headerStyles}>
 		<Hide when="below" breakpoint="desktop">
@@ -63,6 +66,7 @@ export const Header = ({
 					idUrl={idUrl}
 					mmaUrl={mmaUrl}
 					discussionApiUrl={discussionApiUrl}
+					idApiUrl={idApiUrl}
 				/>
 			</Island>
 		</div>

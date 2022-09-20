@@ -9,6 +9,7 @@ import {
 	SvgChevronRightSingle,
 } from '@guardian/source-react-components';
 import { useRef } from 'react';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { KeyEventCard } from './KeyEventCard';
 
@@ -118,7 +119,7 @@ export const KeyEventsCarousel = ({
 		<>
 			<span id={id} />
 			<Hide from="desktop">
-				<div css={titleStyles}>Key events:</div>
+				<div css={titleStyles}>Key events</div>
 			</Hide>
 			<div
 				ref={carousel}
@@ -156,6 +157,7 @@ export const KeyEventsCarousel = ({
 								onClick={goPrevious}
 								aria-label="Move key events carousel backwards"
 								data-link-name="key event carousel left chevron"
+								size="small"
 							/>
 							<Button
 								hideLabel={true}
@@ -165,6 +167,7 @@ export const KeyEventsCarousel = ({
 								onClick={goNext}
 								aria-label="Move key events carousel forwards"
 								data-link-name="key event carousel right chevron"
+								size="small"
 							/>
 						</>
 					)}

@@ -104,6 +104,9 @@ module.exports = {
 				ul: ['list'],
 			},
 		],
+		// eslint-plugin-react doesn't seem to understand the Emotion `css` prop,
+		// so we ignore it from this rule
+		'react/no-unknown-property': ['error', { ignore: ['css'] }],
 	},
 	settings: {
 		react: {

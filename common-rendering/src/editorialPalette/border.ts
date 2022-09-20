@@ -38,6 +38,31 @@ const articleLink = (format: ArticleFormat): Colour => {
 
 const articleLinkDark = articleLink;
 
+const bylineLink = (_format: ArticleFormat): Colour => {
+	return neutral[46];
+};
+
+const bylineLinkDark = bylineLink;
+
+const commentCount = (_format: ArticleFormat): Colour => {
+	return 'rgba(255, 255, 255, 0.4)';
+};
+
+const commentCountDark = (_format: ArticleFormat): Colour => {
+	return neutral[20];
+};
+
+const commentCountWide = (_format: ArticleFormat): Colour => {
+	return neutral[86];
+};
+
+const commentCountWideDark = (_format: ArticleFormat): Colour => {
+	return neutral[20];
+};
+const interactiveAtomLink = (_format: ArticleFormat): Colour => {
+	return neutral[86];
+};
+
 const liveBlock = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -76,7 +101,38 @@ const liveBlockDark = (format: ArticleFormat): Colour => {
 	}
 };
 
+const relatedCard = (_format: ArticleFormat): Colour => {
+	return neutral[86];
+};
+
+const relatedCardDark = (_format: ArticleFormat): Colour => {
+	return neutral[20];
+};
+
 const standfirstLink = (format: ArticleFormat): Colour => {
+	if (format.design === ArticleDesign.Gallery) {
+		return neutral[46];
+	}
+
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[600];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[500];
+		case ArticlePillar.Sport:
+			return sport[600];
+		case ArticlePillar.Culture:
+			return culture[600];
+		case ArticlePillar.Opinion:
+			return opinion[600];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+	}
+};
+
+const standfirstBlogLink = (format: ArticleFormat): Colour => {
 	if (format.design === ArticleDesign.LiveBlog) {
 		return neutral[100];
 	}
@@ -107,7 +163,6 @@ const richLink = (format: ArticleFormat): Colour => {
 
 const richLinkSvg = richLink;
 
-
 const richLinkSvgDark = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -130,7 +185,7 @@ const richLinkSvgDark = (format: ArticleFormat): Colour => {
 /**
  *  This is applied server-side. When the page loads, client-side JS applies a class name that overrides this style.
  */
- const richLinkPreload = (_format: ArticleFormat): Colour => {
+const richLinkPreload = (_format: ArticleFormat): Colour => {
 	return neutral[60];
 };
 
@@ -139,18 +194,18 @@ const richLinkSvgDark = (format: ArticleFormat): Colour => {
  */
 const richLinkSvgPreload = (_format: ArticleFormat): Colour => {
 	return neutral[7];
-}
+};
 
 /**
  *  This is applied server-side. When the page loads, client-side JS applies a class name that overrides this style.
  */
- const richLinkSvgPreloadDark = (_format: ArticleFormat): Colour => {
+const richLinkSvgPreloadDark = (_format: ArticleFormat): Colour => {
 	return neutral[60];
 };
 
 const richLinkDark = (format: ArticleFormat): Colour => {
 	return neutral[60];
-}
+};
 
 const standfirstLinkDark = (format: ArticleFormat): Colour => {
 	return neutral[46];
@@ -160,16 +215,54 @@ const pagination = (format: ArticleFormat): Colour => {
 	return neutral[86];
 };
 
+const pinnedPost = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[300];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+	}
+};
+
+const galleryImage = (_format: ArticleFormat): string => {
+	return neutral[20];
+};
+
+const signUpForm = (_format: ArticleFormat): string => {
+	return neutral[0];
+};
+
+const signUpFormDark = (_format: ArticleFormat): string => {
+	return neutral[86];
+};
+
 // ----- API ----- //
 
 const border = {
 	articleLink,
 	articleLinkDark,
+	bylineLink,
+	bylineLinkDark,
+	commentCount,
+	commentCountDark,
+	commentCountWide,
+	commentCountWideDark,
+	interactiveAtomLink,
 	liveBlock,
 	liveBlockDark,
-	standfirstLink,
-	standfirstLinkDark,
 	pagination,
+	relatedCard,
+	relatedCardDark,
 	richLink,
 	richLinkDark,
 	richLinkPreload,
@@ -177,6 +270,13 @@ const border = {
 	richLinkSvgDark,
 	richLinkSvgPreload,
 	richLinkSvgPreloadDark,
+	standfirstLink,
+	standfirstBlogLink,
+	standfirstLinkDark,
+	pinnedPost,
+	galleryImage,
+	signUpForm,
+	signUpFormDark,
 };
 
 // ----- Exports ----- //

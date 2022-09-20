@@ -7,12 +7,13 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import type { LinkType } from '../../../../model/extract-nav';
 import FacebookIcon from '../../../../static/icons/facebook.svg';
 import TwitterIconPadded from '../../../../static/icons/twitter-padded.svg';
 
 const pillarHeight = 42;
 
-export const hideDesktop = css`
+const hideDesktop = css`
 	${from.desktop} {
 		display: none;
 	}

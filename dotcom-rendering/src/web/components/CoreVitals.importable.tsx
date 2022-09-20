@@ -4,8 +4,7 @@ import {
 	getCookie,
 	initCoreWebVitals,
 } from '@guardian/libs';
-import { commercialLazyLoadMarginReloaded } from '../experiments/tests/commercial-lazy-load-margin-reloaded';
-import { multiStickyRightAds } from '../experiments/tests/multi-sticky-right-ads';
+import type { ServerSideTestNames } from '../../types/config';
 import { useAB } from '../lib/useAB';
 
 export const CoreVitals = () => {
@@ -23,8 +22,6 @@ export const CoreVitals = () => {
 	// For these tests switch off sampling and collect metrics for 100% of views
 	const clientSideTestsToForceMetrics: ABTest[] = [
 		/* keep array multi-line */
-		commercialLazyLoadMarginReloaded,
-		multiStickyRightAds,
 	];
 
 	const userInClientSideTestToForceMetrics =
@@ -32,8 +29,10 @@ export const CoreVitals = () => {
 			ABTestAPI?.runnableTest(test),
 		);
 
-	const serverSideTestsToForceMetrics: Array<keyof ServerSideTests> = [
+	const serverSideTestsToForceMetrics: Array<ServerSideTestNames> = [
 		/* linter, please keep this array multi-line */
+		'commercialEndOfQuarterMegaTestVariant',
+		'commercialEndOfQuarterMegaTestControl',
 	];
 
 	const userInServerSideTestToForceMetrics =

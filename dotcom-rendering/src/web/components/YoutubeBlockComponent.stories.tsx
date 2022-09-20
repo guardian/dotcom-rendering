@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { ElementContainer } from './ElementContainer';
 import { Flex } from './Flex';
 import { LeftColumn } from './LeftColumn';
 import { RightColumn } from './RightColumn';
+import { Section } from './Section';
 import { YoutubeBlockComponent } from './YoutubeBlockComponent.importable';
 
 export default {
@@ -11,8 +11,8 @@ export default {
 	title: 'Components/YoutubeBlockComponent',
 };
 
-const Container = ({ children }: { children: React.ReactNode }) => (
-	<ElementContainer showTopBorder={false}>
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
+	<Section fullWidth={true} showTopBorder={false}>
 		<Flex>
 			<LeftColumn borderType="full">
 				<></>
@@ -29,12 +29,12 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 				<></>
 			</RightColumn>
 		</Flex>
-	</ElementContainer>
+	</Section>
 );
 
 export const Default = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -61,14 +61,14 @@ export const Default = () => {
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
 				nisi ut aliquip ex ea commodo consequat.{' '}
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 Default.story = { name: 'default' };
 
 export const Vertical = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -97,14 +97,14 @@ export const Vertical = () => {
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
 				nisi ut aliquip ex ea commodo consequat.{' '}
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 Vertical.story = { name: 'with height and width set' };
 
 export const Expired = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -134,14 +134,14 @@ export const Expired = () => {
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
 				nisi ut aliquip ex ea commodo consequat.{' '}
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 Expired.story = { name: 'expired video' };
 
 export const WithOverlayImage = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -172,14 +172,14 @@ export const WithOverlayImage = () => {
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
 				nisi ut aliquip ex ea commodo consequat.{' '}
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 WithOverlayImage.story = { name: 'with overlay image' };
 
 export const WithPosterImage = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -231,14 +231,14 @@ export const WithPosterImage = () => {
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
 				nisi ut aliquip ex ea commodo consequat.{' '}
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 WithPosterImage.story = { name: 'with poster image' };
 
 export const WithPosterAndOverlayImage = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
 				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -291,7 +291,7 @@ export const WithPosterAndOverlayImage = () => {
 				enim ad minim veniam, quis nostrud exercitation ullamco laboris
 				nisi ut aliquip ex ea commodo consequat.{' '}
 			</p>
-		</Container>
+		</Wrapper>
 	);
 };
 WithPosterAndOverlayImage.story = { name: 'with poster and overlay image' };

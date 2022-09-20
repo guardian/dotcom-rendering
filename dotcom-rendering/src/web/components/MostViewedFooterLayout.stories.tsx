@@ -1,14 +1,9 @@
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import fetchMock from 'fetch-mock';
 import React, { useEffect } from 'react';
+import { trails } from '../../../fixtures/manual/trails';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
-import { ElementContainer } from './ElementContainer';
-import {
-	responseWithMissingImage,
-	responseWithOneTab,
-	responseWithTwoTabs,
-} from './MostViewed.mocks';
+import { MostViewedFooter } from './MostViewedFooter';
 import { MostViewedFooterLayout } from './MostViewedFooterLayout';
+import { Section } from './Section';
 
 const Hydrated = ({ children }: { children: React.ReactNode }) => {
 	useEffect(() => {
@@ -26,71 +21,39 @@ export default {
 };
 
 export const withTwoTabs = () => {
-	fetchMock.restore().getOnce('*', {
-		status: 200,
-		body: responseWithTwoTabs,
-	});
-
 	return (
 		<Hydrated>
-			<ElementContainer>
-				<MostViewedFooterLayout
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					}}
-					sectionName="politics"
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				/>
-			</ElementContainer>
+			<Section>
+				<MostViewedFooterLayout>
+					<MostViewedFooter
+						tabs={[
+							{ heading: 'Tab 1', trails: trails.slice(0, 10) },
+							{ heading: 'Tab 2', trails: trails.slice(5, 15) },
+						]}
+					/>
+				</MostViewedFooterLayout>
+			</Section>
 		</Hydrated>
 	);
 };
 withTwoTabs.story = { name: 'with two tabs' };
 
 export const withOneTabs = () => {
-	fetchMock.restore().getOnce('*', {
-		status: 200,
-		body: responseWithOneTab,
-	});
-
 	return (
 		<Hydrated>
-			<ElementContainer>
-				<MostViewedFooterLayout
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					}}
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				/>
-			</ElementContainer>
+			<Section>
+				<MostViewedFooterLayout>
+					<MostViewedFooter
+						tabs={[
+							{
+								heading: 'in the UK',
+								trails: trails.slice(0, 10),
+							},
+						]}
+					/>
+				</MostViewedFooterLayout>
+			</Section>
 		</Hydrated>
 	);
 };
 withOneTabs.story = { name: 'with one tab' };
-
-export const withNoMostSharedImage = () => {
-	fetchMock.restore().getOnce('*', {
-		status: 200,
-		body: responseWithMissingImage,
-	});
-
-	return (
-		<Hydrated>
-			<ElementContainer>
-				<MostViewedFooterLayout
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					}}
-					ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-				/>
-			</ElementContainer>
-		</Hydrated>
-	);
-};
-withNoMostSharedImage.story = { name: 'with a missing image on most shared' };

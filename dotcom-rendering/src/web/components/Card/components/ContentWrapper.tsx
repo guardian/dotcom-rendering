@@ -15,9 +15,16 @@ const sizingStyles = css`
  */
 const flexBasisStyles = ({
 	imageSize,
+	imageType,
 }: {
 	imageSize: ImageSizeType;
+	imageType?: CardImageType;
 }): SerializedStyles => {
+	if (imageType === 'avatar') {
+		return css`
+			flex-basis: 100%;
+		`;
+	}
 	switch (imageSize) {
 		case 'small':
 			return css`
@@ -31,27 +38,35 @@ const flexBasisStyles = ({
 			`;
 		case 'medium':
 			return css`
-				flex-basis: 50%;
+				${from.tablet} {
+					flex-basis: 50%;
+				}
 			`;
 		case 'large':
 			return css`
-				flex-basis: 34%;
+				${from.tablet} {
+					flex-basis: 34%;
+				}
 			`;
 		case 'jumbo':
 			return css`
-				flex-basis: 25%;
+				${from.tablet} {
+					flex-basis: 25%;
+				}
 			`;
 	}
 };
 
 type Props = {
 	children: React.ReactNode;
+	imageType?: CardImageType;
 	imageSize: ImageSizeType;
 	imagePosition: ImagePositionType;
 };
 
 export const ContentWrapper = ({
 	children,
+	imageType,
 	imageSize,
 	imagePosition,
 }: Props) => {
@@ -61,7 +76,7 @@ export const ContentWrapper = ({
 		<div
 			css={[
 				sizingStyles,
-				isHorizontal && flexBasisStyles({ imageSize }),
+				isHorizontal && flexBasisStyles({ imageSize, imageType }),
 				/* If the image is top or bottom positioned then it takes 100% of the width and
 				   we want the content to grow into the remaining vertical space */
 				isVertical &&

@@ -3,11 +3,11 @@ import { headline, text } from '@guardian/source-foundations';
 import { isLight } from '../lib/isLight';
 
 type Props = {
-	left: Section;
-	right: Section;
+	left: BarType;
+	right: BarType;
 };
 
-type Section = {
+type BarType = {
 	value: number;
 	color: string;
 };

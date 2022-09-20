@@ -87,7 +87,7 @@ const LabsLayout: FC<Props> = ({ item, children }) => {
 				</Body>
 			</article>
 			<section css={onwardStyles}>
-				<RelatedContent content={item.relatedContent} />
+				<RelatedContent item={item} />
 			</section>
 			<Footer isCcpa={false} format={item} />
 		</main>

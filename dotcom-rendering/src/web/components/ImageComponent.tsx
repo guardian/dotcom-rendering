@@ -8,6 +8,7 @@ import {
 	neutral,
 	until,
 } from '@guardian/source-foundations';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Caption } from './Caption';
 import { Hide } from './Hide';
@@ -52,7 +53,7 @@ const starsWrapper = css`
 	}
 `;
 
-const PositionStarRating: React.FC<{ rating: number }> = ({ rating }) => (
+const PositionStarRating = ({ rating }: { rating: number }) => (
 	<div css={starsWrapper}>
 		<StarRating rating={rating} size="large" />
 	</div>
@@ -135,11 +136,15 @@ const titleWrapper = (palette: Palette) => css`
 	}
 `;
 
-const ImageTitle: React.FC<{
+const ImageTitle = ({
+	title,
+	role,
+	palette,
+}: {
 	title: string;
 	role: RoleType;
 	palette: Palette;
-}> = ({ title, role, palette }) => {
+}) => {
 	switch (role) {
 		case 'inline':
 		case 'thumbnail':
@@ -306,7 +311,7 @@ export const ImageComponent = ({
 					isLazy={!isMainMedia}
 					isMainMedia={isMainMedia}
 				/>
-				{title && (
+				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 			</div>
@@ -337,8 +342,10 @@ export const ImageComponent = ({
 					isLazy={!isMainMedia}
 					isMainMedia={isMainMedia}
 				/>
-				{starRating && <PositionStarRating rating={starRating} />}
-				{title && (
+				{typeof starRating === 'number' && (
+					<PositionStarRating rating={starRating} />
+				)}
+				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 			</div>
@@ -399,7 +406,7 @@ export const ImageComponent = ({
 										credit={element.data.credit}
 										displayCredit={element.displayCredit}
 										shouldLimitWidth={shouldLimitWidth}
-										isOverlayed={true}
+										isOverlaid={true}
 										isMainMedia={isMainMedia}
 									/>
 								</div>
@@ -407,8 +414,10 @@ export const ImageComponent = ({
 						</Row>
 					</Hide>
 				)}
-				{starRating && <PositionStarRating rating={starRating} />}
-				{title && (
+				{typeof starRating === 'number' && (
+					<PositionStarRating rating={starRating} />
+				)}
+				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
 			</div>

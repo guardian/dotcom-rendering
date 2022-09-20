@@ -1,8 +1,8 @@
 // @ts-check
 const path = require('path');
+const bodyParser = require('body-parser');
 const chalk = require('chalk');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
-const bodyParser = require('body-parser');
 const {
 	getContentFromURLMiddleware,
 } = require('../../src/server/lib/get-content-from-url');
@@ -30,6 +30,7 @@ module.exports = {
 			directory: path.join(__dirname, '..', '..', 'src', 'static'),
 			publicPath: '/static/frontend',
 		},
+		allowedHosts: ['r.thegulocal.com'],
 		devMiddleware: {
 			publicPath: '/assets/',
 			serverSideRender: true,
@@ -46,7 +47,7 @@ module.exports = {
 			},
 		},
 		setupMiddlewares: (middlewares, devServer) => {
-			if (!devServer?.app) {
+			if (!devServer.app) {
 				throw new Error('webpack-dev-server is not defined');
 			}
 

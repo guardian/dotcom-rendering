@@ -15,6 +15,7 @@ import {
 	SvgPinned,
 	SvgPlus,
 } from '@guardian/source-react-components';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 
 const pinnedPostContainer = (palette: Palette) => css`
@@ -162,7 +163,7 @@ export const PinnedPost = ({ pinnedPost, children, format }: Props) => {
 			/>
 			<div css={rowStyles(palette)}>
 				<SvgPinned />
-				{pinnedPost.blockFirstPublished && (
+				{!!pinnedPost.blockFirstPublished && (
 					<time data-relativeformat="med" css={timeAgoStyles}>
 						From {timeAgo(pinnedPost.blockFirstPublished)}
 					</time>

@@ -3,6 +3,7 @@ import { ArticleSpecial } from '@guardian/libs';
 import { body, space, textSans } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useRef, useState } from 'react';
+import type { Palette } from '../../types/palette';
 import { interactiveLegacyFigureClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 import { useOnce } from '../lib/useOnce';
@@ -324,7 +325,7 @@ export const InteractiveBlockComponent = ({
 					</>
 				)}
 			</figure>
-			{caption && (
+			{!!caption && (
 				<Caption
 					captionText={caption}
 					format={format}

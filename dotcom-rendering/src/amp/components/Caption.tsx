@@ -67,7 +67,7 @@ export const Caption = ({
 	return (
 		<figure css={figureStyle}>
 			{children}
-			{captionText && (
+			{!!captionText && (
 				<>
 					<figcaption
 						css={[captionStyle, padCaption && captionPadding]}

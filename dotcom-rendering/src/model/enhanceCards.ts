@@ -1,4 +1,13 @@
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { getSoleContributor } from '../lib/byline';
+import type {
+	DCRContainerPalette,
+	DCRFrontCard,
+	DCRSupportingContent,
+	FEFrontCard,
+	FESupportingContent,
+	FETagType,
+} from '../types/front';
 import { decideFormat } from '../web/lib/decideFormat';
 import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
 import { enhanceSnaps } from './enhanceSnaps';
@@ -38,6 +47,17 @@ const decidePresentationFormat = ({
 		containerFormat.design === ArticleDesign.Analysis
 	)
 		return containerFormat;
+
+	// These types of link format designs mean the headline could render
+	// poorly (e.g.: white) so we use the container format
+	if (
+		linkFormat.design === ArticleDesign.LiveBlog ||
+		linkFormat.design === ArticleDesign.Gallery ||
+		linkFormat.design === ArticleDesign.Audio ||
+		linkFormat.design === ArticleDesign.Video
+	)
+		return containerFormat;
+
 	// Otherwise, we can allow the sublink to express its own styling
 	return linkFormat;
 };
@@ -68,12 +88,42 @@ const enhanceSupportingContent = (
 	});
 };
 
+const decideAvatarUrl = (
+	tags: TagType[] = [],
+	byline?: string,
+): string | undefined => {
+	const soleContributor = getSoleContributor(tags, byline);
+	return soleContributor?.bylineLargeImageUrl ?? undefined;
+};
+
+const enhanceTags = (tags: { properties: FETagType }[]): TagType[] => {
+	return tags.map((tag) => {
+		const {
+			id,
+			tagType,
+			webTitle,
+			twitterHandle,
+			bylineImageUrl,
+			contributorLargeImagePath,
+		} = tag.properties;
+
+		return {
+			id,
+			type: tagType,
+			title: webTitle,
+			twitterHandle,
+			bylineImageUrl,
+			bylineLargeImageUrl: contributorLargeImagePath,
+		};
+	});
+};
+
 export const enhanceCards = (
 	collections: FEFrontCard[],
 	containerPalette?: DCRContainerPalette,
 ): DCRFrontCard[] =>
 	collections.map((faciaCard, index) => {
-		// Snap cards may not have a format, default to a standard format if thats the case.
+		// Snap cards may not have a format, default to a standard format if that's the case.
 		const format = decideFormat(
 			faciaCard.format || {
 				design: 'ArticleDesign',
@@ -85,19 +135,27 @@ export const enhanceCards = (
 			faciaCard.display.isBoosted ? '+' : ''
 		}`;
 		const dataLinkName = getDataLinkNameCard(format, group, index + 1);
+
+		const tags = faciaCard.properties.maybeContent?.tags.tags
+			? enhanceTags(faciaCard.properties.maybeContent.tags.tags)
+			: [];
+
 		return {
 			format,
 			dataLinkName,
 			url: faciaCard.header.url,
 			headline: faciaCard.header.headline,
 			trailText: faciaCard.card.trailText,
+			starRating: faciaCard.card.starRating,
 			webPublicationDate: faciaCard.card.webPublicationDateOption
 				? new Date(
 						faciaCard.card.webPublicationDateOption,
 				  ).toISOString()
 				: undefined,
-			image: faciaCard.properties.maybeContent?.trail.trailPicture
-				?.allImages[0].url,
+			image: faciaCard.display.imageHide
+				? undefined
+				: faciaCard.properties.maybeContent?.trail.trailPicture
+						?.allImages[0].url,
 			kickerText: faciaCard.header.kicker?.item?.properties.kickerText,
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(
@@ -106,12 +164,23 @@ export const enhanceCards = (
 						containerPalette,
 				  )
 				: undefined,
-			discussionId: faciaCard.discussion.discussionId,
+			discussionId: faciaCard.discussion.isCommentable
+				? faciaCard.discussion.discussionId
+				: undefined,
 			// nb. there is a distinct 'byline' property on FEFrontCard, at
 			// card.properties.byline
 			byline:
 				faciaCard.properties.maybeContent?.trail.byline ?? undefined,
 			showByline: faciaCard.properties.showByline,
 			snapData: enhanceSnaps(faciaCard.enriched),
+			isBoosted: faciaCard.display.isBoosted,
+			avatarUrl:
+				faciaCard.properties.maybeContent?.tags.tags &&
+				faciaCard.properties.image?.type === 'Cutout'
+					? decideAvatarUrl(
+							tags,
+							faciaCard.properties.maybeContent.trail.byline,
+					  )
+					: undefined,
 		};
 	});

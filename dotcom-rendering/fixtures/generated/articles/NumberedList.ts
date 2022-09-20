@@ -11,6 +11,8 @@
  *    gen-fixtures.ts directly.
  */
 
+import type { CAPIArticleType } from '../../../src/types/frontend';
+
 export const NumberedList: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="2ce8db064eabb9e22a69cc45a9b6d4e10d595f06"> \n <img src="https://media.guim.co.uk/2ce8db064eabb9e22a69cc45a9b6d4e10d595f06/392_612_4171_2503/1000.jpg" alt="best smartphone 2019" width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">Which is the best premium smartphone for you? Check out this guide to the top mobile phones including iPhone, Samsung, Huawei, OnePlus and Google. </span> \n  <span class="element-image__credit">Photograph: Samuel Gibbs/The Guardian</span> \n </figcaption> \n</figure>',
@@ -1539,7 +1541,7 @@ export const NumberedList: CAPIArticleType = {
 				},
 				{
 					text: 'Modern Slavery Act',
-					url: 'https://uploads.guim.co.uk/2021/07/27/STL_&_GMG_Modern_Slavery_Act_Statement_2021.pdf',
+					url: 'https://uploads.guim.co.uk/2022/07/20/STL_Modern_Slavery_Statement_2022.pdf',
 					dataLinkName: 'uk : footer : modern slavery act statement',
 					extraClasses: '',
 				},
@@ -1645,8 +1647,264 @@ export const NumberedList: CAPIArticleType = {
 	},
 	hasStoryPackage: true,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
+	storyPackage: {
+		heading: 'More on this story',
+		trails: [
+			{
+				url: 'https://www.theguardian.com/technology/2022/jun/07/all-smartphones-to-use-usb-c-charging-ports-from-autumn-2024-says-eu',
+				linkText:
+					'EU deal will force iPhones to use USB-C charger by 2024',
+				showByline: false,
+				byline: 'Jedidajah Otte',
+				image: 'https://i.guim.co.uk/img/media/3b11e9285fbd7f3945a72de492296c75c44c3a2d/0_69_5000_3000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=40ba0cb00cf6d86377f22795c7ceff1d',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/3b11e9285fbd7f3945a72de492296c75c44c3a2d/0_69_5000_3000/master/5000.jpg?width=300&quality=85&auto=format&fit=max&s=40ba0cb00cf6d86377f22795c7ceff1d',
+					'460': 'https://i.guim.co.uk/img/media/3b11e9285fbd7f3945a72de492296c75c44c3a2d/0_69_5000_3000/master/5000.jpg?width=460&quality=85&auto=format&fit=max&s=4bd688c1ee9f6054eb8aa44519759dd5',
+				},
+				ageWarning: '2 months',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2022-06-07T18:25:06.000Z',
+				headline:
+					'EU deal will force iPhones to use USB-C charger by 2024',
+				shortUrl: 'https://www.theguardian.com/p/ytt7j',
+			},
+			{
+				url: 'https://www.theguardian.com/uk-news/2021/aug/09/vodaphone-to-reintroduce-roaming-fees-for-uk-customers-in-europe',
+				linkText:
+					'Vodafone to reintroduce roaming fees for UK customers in Europe',
+				showByline: false,
+				byline: 'Mark Sweney',
+				image: 'https://i.guim.co.uk/img/media/b6ad84789aad661eb89d56f40abed3ecf437881b/0_0_1740_1044/master/1740.jpg?width=300&quality=85&auto=format&fit=max&s=1edf4e723f0d1c24db74964f0f56521d',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/b6ad84789aad661eb89d56f40abed3ecf437881b/0_0_1740_1044/master/1740.jpg?width=300&quality=85&auto=format&fit=max&s=1edf4e723f0d1c24db74964f0f56521d',
+					'460': 'https://i.guim.co.uk/img/media/b6ad84789aad661eb89d56f40abed3ecf437881b/0_0_1740_1044/master/1740.jpg?width=460&quality=85&auto=format&fit=max&s=11786a02661ffb47e5b1249dad959e16',
+				},
+				ageWarning: '1 year',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2021-08-09T17:05:01.000Z',
+				headline:
+					'Vodafone to reintroduce roaming fees for UK customers in Europe',
+				shortUrl: 'https://www.theguardian.com/p/teezg',
+			},
+			{
+				url: 'https://www.theguardian.com/technology/2020/apr/23/bug-leaves-iphones-vulnerable-hackers-stealing-email-contents',
+				linkText:
+					'Bug leaves iPhones vulnerable to hackers stealing email contents',
+				showByline: false,
+				byline: 'Alex Hern',
+				image: 'https://i.guim.co.uk/img/media/ef63d92867428c7c3aa5bed1f049f0e6677517f8/28_197_3937_2362/master/3937.jpg?width=300&quality=85&auto=format&fit=max&s=4d5067150158994ad43cff9ccb7c121d',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/ef63d92867428c7c3aa5bed1f049f0e6677517f8/28_197_3937_2362/master/3937.jpg?width=300&quality=85&auto=format&fit=max&s=4d5067150158994ad43cff9ccb7c121d',
+					'460': 'https://i.guim.co.uk/img/media/ef63d92867428c7c3aa5bed1f049f0e6677517f8/28_197_3937_2362/master/3937.jpg?width=460&quality=85&auto=format&fit=max&s=181534ce45db4426c3f6c2ddc58ab15b',
+				},
+				ageWarning: '2 years',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2020-04-23T15:50:07.000Z',
+				headline:
+					'Bug leaves iPhones vulnerable to hackers stealing email contents',
+				shortUrl: 'https://www.theguardian.com/p/dyyea',
+			},
+			{
+				url: 'https://www.theguardian.com/technology/2020/feb/24/mate-xs-huawei-launches-latest-version-of-folding-smartphone',
+				linkText:
+					'Mate Xs: Huawei launches latest version of folding smartphone',
+				showByline: false,
+				byline: 'Samuel Gibbs',
+				image: 'https://i.guim.co.uk/img/media/dda4e2c5c3efe4a89410ee2fd059ccb8647fc5eb/733_759_3355_2014/master/3355.jpg?width=300&quality=85&auto=format&fit=max&s=cc844a549cf927fa1ca3f8380d5099ce',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/dda4e2c5c3efe4a89410ee2fd059ccb8647fc5eb/733_759_3355_2014/master/3355.jpg?width=300&quality=85&auto=format&fit=max&s=cc844a549cf927fa1ca3f8380d5099ce',
+					'460': 'https://i.guim.co.uk/img/media/dda4e2c5c3efe4a89410ee2fd059ccb8647fc5eb/733_759_3355_2014/master/3355.jpg?width=460&quality=85&auto=format&fit=max&s=90eb8b5a7156fe1906637aeb0e5a93ac',
+				},
+				ageWarning: '2 years',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2020-02-24T13:30:21.000Z',
+				headline:
+					'Mate Xs: Huawei launches latest version of folding smartphone',
+				shortUrl: 'https://www.theguardian.com/p/dap9k',
+			},
+			{
+				url: 'https://www.theguardian.com/technology/2020/feb/11/samsung-launches-galaxy-s20-range-with-up-to-100x-zoom-camera',
+				linkText:
+					'Samsung launches Galaxy S20 range with up to 100x zoom camera',
+				showByline: false,
+				byline: 'Samuel Gibbs Consumer technology editor',
+				image: 'https://i.guim.co.uk/img/media/473c8279a42f2121ef812deebeedcbcf82dfcfc9/74_256_4854_2913/master/4854.jpg?width=300&quality=85&auto=format&fit=max&s=46ae25e8604012942043576e68253d73',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/473c8279a42f2121ef812deebeedcbcf82dfcfc9/74_256_4854_2913/master/4854.jpg?width=300&quality=85&auto=format&fit=max&s=46ae25e8604012942043576e68253d73',
+					'460': 'https://i.guim.co.uk/img/media/473c8279a42f2121ef812deebeedcbcf82dfcfc9/74_256_4854_2913/master/4854.jpg?width=460&quality=85&auto=format&fit=max&s=2cbe7691e08707c0e223ccdee9d8c8b9',
+				},
+				ageWarning: '2 years',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2020-02-11T19:00:11.000Z',
+				headline:
+					'Samsung launches Galaxy S20 range with up to 100x zoom camera',
+				shortUrl: 'https://www.theguardian.com/p/d9ve7',
+			},
+			{
+				url: 'https://www.theguardian.com/technology/2020/feb/11/samsung-galaxy-z-flip-folding-screen-flip-phone-launches',
+				linkText:
+					'Samsung Galaxy Z Flip: folding-screen flip-phone launches',
+				showByline: false,
+				byline: 'Samuel Gibbs Consumer technology editor',
+				image: 'https://i.guim.co.uk/img/media/769c194f69d4f5f196a07628dc90c8db763842d1/202_0_3097_1860/master/3097.jpg?width=300&quality=85&auto=format&fit=max&s=0b774f1c72f7138d4309e1bfe16167d3',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/769c194f69d4f5f196a07628dc90c8db763842d1/202_0_3097_1860/master/3097.jpg?width=300&quality=85&auto=format&fit=max&s=0b774f1c72f7138d4309e1bfe16167d3',
+					'460': 'https://i.guim.co.uk/img/media/769c194f69d4f5f196a07628dc90c8db763842d1/202_0_3097_1860/master/3097.jpg?width=460&quality=85&auto=format&fit=max&s=1aa4f66d90255dacc1e2933ea77c8da3',
+				},
+				ageWarning: '2 years',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2020-02-11T19:00:11.000Z',
+				headline:
+					'Samsung Galaxy Z Flip: folding-screen flip-phone launches',
+				shortUrl: 'https://www.theguardian.com/p/d9xdb',
+			},
+			{
+				url: 'https://www.theguardian.com/technology/2019/oct/21/google-eye-detection-pixel-4-smartphone-unlock',
+				linkText:
+					'Google to add eye detection to Pixel 4 after privacy concerns',
+				showByline: false,
+				byline: 'Alex Hern',
+				image: 'https://i.guim.co.uk/img/media/052ba41b6e01156ff428ff25244b07c564d12f35/0_178_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=be535d1a85feb3ea408554ce90bb0800',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/052ba41b6e01156ff428ff25244b07c564d12f35/0_178_3500_2100/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=be535d1a85feb3ea408554ce90bb0800',
+					'460': 'https://i.guim.co.uk/img/media/052ba41b6e01156ff428ff25244b07c564d12f35/0_178_3500_2100/master/3500.jpg?width=460&quality=85&auto=format&fit=max&s=4634b91d1efaa0361ca2de743eabbd5c',
+				},
+				ageWarning: '2 years',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2019-10-21T12:35:43.000Z',
+				headline:
+					'Google to add eye detection to Pixel 4 after privacy concerns',
+				shortUrl: 'https://www.theguardian.com/p/chhfd',
+			},
+			{
+				url: 'https://www.theguardian.com/technology/2019/oct/02/microsoft-launches-surface-pro-x-and-previews-folding-phone',
+				linkText:
+					'Microsoft launches Surface Pro X and previews folding phone',
+				showByline: false,
+				byline: 'Samuel Gibbs Consumer technology editor',
+				image: 'https://i.guim.co.uk/img/media/24743531a1d6b61a170fcf3c033402c45296b2cc/220_50_3756_2254/master/3756.jpg?width=300&quality=85&auto=format&fit=max&s=97a90f58133cc091185db568e95d0ea3',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/24743531a1d6b61a170fcf3c033402c45296b2cc/220_50_3756_2254/master/3756.jpg?width=300&quality=85&auto=format&fit=max&s=97a90f58133cc091185db568e95d0ea3',
+					'460': 'https://i.guim.co.uk/img/media/24743531a1d6b61a170fcf3c033402c45296b2cc/220_50_3756_2254/master/3756.jpg?width=460&quality=85&auto=format&fit=max&s=1710f18ea560ebf7a0103547985f0f6e',
+				},
+				ageWarning: '2 years',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2019-10-02T17:37:00.000Z',
+				headline:
+					'Microsoft launches Surface Pro X and previews folding phone',
+				shortUrl: 'https://www.theguardian.com/p/cechh',
+			},
+			{
+				url: 'https://www.theguardian.com/technology/2019/aug/07/samsung-galaxy-note-10-launch-big-screens-and-stylus-air-gestures',
+				linkText:
+					'Samsung Galaxy Note 10 launch: big screens and stylus air gestures',
+				showByline: false,
+				byline: 'Samuel Gibbs Consumer technology editor',
+				image: 'https://i.guim.co.uk/img/media/ff2e53ded1836e8fcca5cd369a67a1cec9022bd1/67_0_1875_1125/master/1875.jpg?width=300&quality=85&auto=format&fit=max&s=4ce853f45bce833480f17b254102a3e2',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/ff2e53ded1836e8fcca5cd369a67a1cec9022bd1/67_0_1875_1125/master/1875.jpg?width=300&quality=85&auto=format&fit=max&s=4ce853f45bce833480f17b254102a3e2',
+					'460': 'https://i.guim.co.uk/img/media/ff2e53ded1836e8fcca5cd369a67a1cec9022bd1/67_0_1875_1125/master/1875.jpg?width=460&quality=85&auto=format&fit=max&s=d2b6c757a75a7f68a53a0db0f3896e05',
+				},
+				ageWarning: '3 years',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2019-08-07T12:05:08.000Z',
+				headline:
+					'Samsung Galaxy Note 10 launch: big screens and stylus air gestures',
+				shortUrl: 'https://www.theguardian.com/p/c4chq',
+			},
+			{
+				url: 'https://www.theguardian.com/technology/2019/may/21/honor-20-launch-huawei-quad-camera-phone',
+				linkText:
+					'Honor 20: Huawei Android phone launch defies Donald Trump',
+				showByline: false,
+				byline: 'Samuel Gibbs',
+				image: 'https://i.guim.co.uk/img/media/8cbcc01d95fc2470ff6acc1f4782ffb14f7dc222/314_204_4360_2617/master/4360.jpg?width=300&quality=85&auto=format&fit=max&s=6a8cc95cfad6603d731e0f226551f4e4',
+				carouselImages: {
+					'300': 'https://i.guim.co.uk/img/media/8cbcc01d95fc2470ff6acc1f4782ffb14f7dc222/314_204_4360_2617/master/4360.jpg?width=300&quality=85&auto=format&fit=max&s=6a8cc95cfad6603d731e0f226551f4e4',
+					'460': 'https://i.guim.co.uk/img/media/8cbcc01d95fc2470ff6acc1f4782ffb14f7dc222/314_204_4360_2617/master/4360.jpg?width=460&quality=85&auto=format&fit=max&s=d7dbccc6c34b88e4cfc234e888400419',
+				},
+				ageWarning: '3 years',
+				isLiveBlog: false,
+				pillar: 'news',
+				designType: 'Article',
+				format: {
+					design: 'ArticleDesign',
+					theme: 'NewsPillar',
+					display: 'StandardDisplay',
+				},
+				webPublicationDate: '2019-05-21T14:46:14.000Z',
+				headline:
+					'Honor 20: Huawei Android phone launch defies Donald Trump',
+				shortUrl: 'https://www.theguardian.com/p/bgcja',
+			},
+		],
+	},
 	headline:
 		'Best smartphone 2019: iPhone, OnePlus, Samsung and Huawei compared and ranked',
+	byline: 'Samuel Gibbs Consumer technology editor',
 	isLegacyInteractive: false,
 	guardianBaseURL: 'https://www.theguardian.com',
 	mainMediaElements: [
@@ -1906,7 +2164,7 @@ export const NumberedList: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: 'd2397142-6cca-4ce5-bed5-c5ff6e1efd14',
+			elementId: 'dbe6aa70-f34e-4d6f-984e-87b0a1e8ec04',
 		},
 	],
 	webPublicationDate: '2019-12-17T07:00:44.000Z',
@@ -1917,17 +2175,17 @@ export const NumberedList: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Need a new smartphone but don’t know which one is the very best? Here’s a guide comparing the current top-end smartphones from Apple, <a href="https://www.theguardian.com/technology/samsung" data-component="auto-linked-tag">Samsung</a>, Huawei, OnePlus and others to help you pick the best handset for you.</p>',
-					elementId: '8ec57627-b6c1-4364-85b1-92c21fc14cdd',
+					elementId: '034fa89f-22fe-4e81-bc99-7885c82a5303',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>There has never been a better time to buy a new flagship smartphone with many quality handsets available at a wider range of prices than ever before. Whether your priority is two-day battery life, fantastic camera performance or a spectacular screen, there’s plenty to choose from.</p>',
-					elementId: 'b4c9a4a2-2cdd-46fd-8722-9a3c0fdf56e9',
+					elementId: '24bffdf9-474a-421f-a97f-6e347713ee2f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>This Guardian buyer’s guide to top-end smartphones was last updated on 17 December 2019, and represents the best available models at the time. As new models are released and tested, this guide will be updated to help you choose the right flagship phone for you.</p>',
-					elementId: '80168208-2c00-4fc0-a725-3e6bf5b35918',
+					elementId: '28238dfb-04e3-494f-8d39-78bb3a6d0927',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.QABlockElement',
@@ -1935,27 +2193,27 @@ export const NumberedList: CAPIArticleType = {
 					title: "What is a buyer's guide?",
 					html: "<p>Welcome to one of the Guardian’s new buyer’s guides. This article represents hundreds of hours of testing by the author to bring together a succinct list of recommended products or services so you can pick from the best and ignore the rest without having to do hours of your own research.</p><p>While the Guardian may earn a small commission from items bought through affiliate links, the items featured in this buyer's guide have been tested and included without influence from any advertiser or commercial initiative.</p>",
 					credit: '',
-					elementId: 'dbacabb8-00bf-4e9b-879b-f43f9ca03091',
+					elementId: 'd0f893f8-1a8c-4c4c-9732-2efa0a65cdf3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.InteractiveBlockElement',
 					scriptUrl: 'https://uploads.guim.co.uk/2019/03/20/boot.js',
-					elementId: 'b5932998-a70b-4d8f-ba0b-5f806915ca99',
+					elementId: '0056c217-4393-4796-a1cc-b3f4eb7d2580',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Best overall: </strong>OnePlus 7T Pro</h2>',
-					elementId: 'b7c60ea2-8100-4835-87dd-753bf8bc4abf',
+					elementId: '32cfa4cc-8384-42f4-8fca-e83d71719b86',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.oneplus.com%2Fuk%2Foneplus-7t-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£699</a></p>',
-					elementId: '8acffe0f-4f80-4c0b-946a-15c7b6cc18bd',
+					elementId: 'b2ed224c-442b-46a3-97c3-5549bf69a635',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★★</p>',
-					elementId: '50c880e1-0c40-4f47-ad1a-15c2bec13701',
+					elementId: '64a17a5c-af0a-4fc2-8995-acd6e693787e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2206,33 +2464,65 @@ export const NumberedList: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=620&quality=85&auto=format&fit=max&s=0ad987d572ab1626667cfe4b151312d8',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1900&quality=85&auto=format&fit=max&s=6dc4fbf4fc3564a9da7b475dc2242244',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=7cb7abd112cc40a06727a9dffb7b3ccc',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=a3a33732666d5af6ca17b6782feec5e5',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=605&quality=85&auto=format&fit=max&s=78d70ac6d8bc9d5a2019d83731ba748b',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1300&quality=85&auto=format&fit=max&s=22b003bb01b6d0c13069997b36e1fdcf',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=90a251be2767192e9f336cb56f773133',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=e05d4bfd5c4545bb0e4c3560df7cb324',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=445&quality=85&auto=format&fit=max&s=c5a3a87df30a2b084c6e381269781523',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1140&quality=85&auto=format&fit=max&s=d2b5d140665d4c89f74f038eb65dbff1',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4bad4e5f70170bd34d8535417fefcbed',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=34020ffdba4b0637ee7b922727fb0e2c',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=980&quality=85&auto=format&fit=max&s=e88ad41fd3875600c2c2115f9fe1376f',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=74a830f46b82d06ad8af96e8cd6d00d3',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=740&quality=85&auto=format&fit=max&s=dfd4c6e706745e84479a369b40de9672',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=ae1b612165021b3f2667e16ef7a5a3fb',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=660&quality=85&auto=format&fit=max&s=01e2495cf7e32939048a12c660622700',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=d4ed1701600a9b11d57979911d141ed2',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=480&quality=85&auto=format&fit=max&s=48d1af1103851897475d065c09188f55',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/6964477dfce17db06281f5461dd5f89588df7ee3/329_428_4203_2523/master/4203.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=78c22f6da5ffb65dba9e394173cd32f1',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: 'd454bfab-7c6d-4530-a1b3-fa3c422fc945',
+					elementId: '52ffe337-1d4f-42ed-8dd2-2255d0d69e45',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -2245,82 +2535,82 @@ export const NumberedList: CAPIArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: 'e334eec7-04d9-44c9-93d0-6a22a79ab5ee',
+					elementId: '76833301-db74-408b-ae5a-6601542230be',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The follow-up to the <a href="https://www.theguardian.com/technology/2019/may/31/oneplus-7-pro-review-an-absolute-beast-in-every-way">best smartphone of the first half of 2019</a> is, unsurprisingly, the best phone to end 2019. The OnePlus 7T Pro is a minor update to the stellar OnePlus 7 Pro that keeps all the good bits, improves the camera, and speeds up the fingerprint scanner.</p>',
-					elementId: '13c8361b-0c9c-4631-a72e-4fcd980818f6',
+					elementId: '37f2d7d0-3526-4758-af13-270caff181ce',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The monster 6.67in QHD+ AMOLED screen runs at 90Hz – compared with 60Hz for most of the competition – is arguably the best in the business. It’s bright, crisp and super smooth, plus it’s free of holes or camera notches. The selfie camera pops up from the top on command – a consistent crowd-pleaser.</p>',
-					elementId: '44e38f70-45b9-4d49-b196-aae43e4f7f90',
+					elementId: '9e519362-943b-4677-81da-5d44df56ff31',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The 7T Pro is the fastest-feeling phone – everything zips along. It has Qualcomm’s top chip, the Snapdragon 855+, 8GB of RAM and 256GB of fast UFS3.0 storage – plenty for practically everything. The optical in-display fingerprint scanner is even faster than before continuing to put the competition to shame.</p>',
-					elementId: 'e151cef1-173c-4ba5-8703-650ba7b2fb35',
+					elementId: '27633b0f-8a7c-45e1-99d7-1fb27c1b44fd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The latest OxygenOS 10, the firm’s super-slick version of <a href="https://www.theguardian.com/technology/2019/sep/04/android-10-released-everything-you-need-to-know-about-google-update">Android 10</a>, is arguably the best in the business too, and you’ll get prompt updates for three years.</p>',
-					elementId: '974de257-b24b-4a67-9a05-798ad2b06a88',
+					elementId: 'd62265ef-7566-427d-8430-af1faab924b4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The triple camera system on the back is good too, combining a 48MP main, a 16MP ultra-wide angle and an 8MP telephoto camera. New for the 7T Pro is a super-macro mode, which is surprisingly good, producing crisp images up to just 2.5cm from the lens – great fun. The 7T Pro can’t quite beat the <a href="https://www.theguardian.com/technology/iphone" data-component="auto-linked-tag">iPhone</a> 11 Pro or Pixel 4XL, but it matches or beats the rest on detail and utility.</p>',
-					elementId: 'cf5aacee-11a6-4194-9a61-b922783da506',
+					elementId: '8ec654ad-f3ff-4abb-8986-48a31334780a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The 7T Pro lasts about 32 hours between charges, making it one of the better performers. Charging is exceptionally fast via the firm’s WarpCharge system too, hitting 70% in just 34 minutes via cable. There’s no wireless charging though.</p>',
-					elementId: '4bd0f797-6b67-4367-a775-6b4d7aaaeeb8',
+					elementId: '7a1814ff-657d-417d-aa16-91ec7e869708',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Dual-sim support is handy for work or travelling. It’s water resistant to some extent, but has no IP rating. There’s a McLaren limited edition and a 5G version in the US, but not UK where the OnePlus 7 Pro 5G is still the current model.</p>',
-					elementId: '80602e06-56f2-4bc5-9efd-7ea189ff0a49',
+					elementId: 'f2b4c076-7d39-4f59-b951-c1e3847d6f86',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Why should you buy it?</strong></p>',
-					elementId: 'bc208c27-7456-4f4b-806d-d4ebf6ade6eb',
+					elementId: 'e4952108-900f-41a4-ac92-e753bc694747',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The unrivalled screen, sheer speed and in-display fingerprint scanner, combined with the slick OxygenOS 10 make even mundane tasks a joy. The massive OnePlus 7T Pro is a stretch worth making.</p>',
-					elementId: 'e795279e-d7e3-4813-ad28-dc1a12485a16',
+					elementId: '9b36af27-0ba1-45c3-b9d9-716c767ae026',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy if:</strong> you want the best and fastest superphone experience</p>',
-					elementId: '076957ad-4728-4e0c-b084-57ad6e027ff6',
+					elementId: '3e5233dc-5958-4fb4-88ee-fd3630a7e2d1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Don’t buy if:</strong> you don’t want to stretch to such a big phone</p>',
-					elementId: '0092aa60-0fae-438d-9982-ef6e7e9be14d',
+					elementId: '8481e604-79a8-4ebb-bbf6-642bdc0bd662',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu">OnePlus 7T Pro review: the best kind of deja vu</a></p></li> \n</ul>',
-					elementId: '28790257-f7a7-4d12-be01-e1f3e1453e37',
+					elementId: 'e1bc3152-d058-47a1-ab2f-ced05f9a3e14',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Best iOS:</strong> Apple iPhone 11 Pro</h2>',
-					elementId: 'ffe47884-5786-4f60-8b31-060aaa43efbe',
+					elementId: 'a84b2c9f-16c2-4ded-aa83-a44096fa0deb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fuk%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£1,049</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$999</a></p>',
-					elementId: '6fdf85ad-661b-43d0-910e-7218bef7a3f8',
+					elementId: '1a8d2ccd-6352-4047-8b9a-5b3386311236',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★★</p>',
-					elementId: '3626f818-2f29-4b03-9bde-81b1921c4fb8',
+					elementId: '391a3f00-1383-4720-8d74-e84e96ae138d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2571,33 +2861,65 @@ export const NumberedList: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=620&quality=85&auto=format&fit=max&s=2a1e90c78ba947283b9737eb6606ec7e',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1900&quality=85&auto=format&fit=max&s=de5686b0ba9a7753b9845b99d44c3622',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=dbc833edcf6427df1651eafbf5febb7c',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=21363e143ae166e69c1ac8dd69e9296b',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=605&quality=85&auto=format&fit=max&s=24b8fdc281bb0b5dd7bc2f6166cbda65',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1300&quality=85&auto=format&fit=max&s=66aeb5b2973b67c26c1b815b8ea9976a',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=13d728a5b4712db2e0b4ea6f1736ddf0',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=7ec904470251d0b00a92a8267df9109d',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=445&quality=85&auto=format&fit=max&s=f8afb28b073bbc48e0b4c8a0f6417b46',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1140&quality=85&auto=format&fit=max&s=0f0004d9d49b3a0bbef5de8845887eb9',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e4e40e37f64afe70e10bf514ab0f1c3e',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=251e1a7a515649c965a61e8038497cd5',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=980&quality=85&auto=format&fit=max&s=33f8e27f732c39a5ec5e25f9e831c857',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=b7c5869a24be2c34c8acc605153e9192',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=740&quality=85&auto=format&fit=max&s=c487ec7d1f347c33f03f6af2f2a0f96e',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=48d00048dd1816e27e9ac8ae6558bcff',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=660&quality=85&auto=format&fit=max&s=9fa37176c71d559b5fe026e0b13369a4',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=bc74f9a7c39b3ddbd370030c4158c5bd',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=480&quality=85&auto=format&fit=max&s=5b7fc48c122b39e9c02a3901642477b9',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/fafda794e7f84de992bc9d36260da92150c4031c/373_518_4075_2445/master/4075.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=31e77b986d0f98834cce26d4b8fbaa98',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: 'aa040ad0-7e50-4042-bab9-cfba8ed43fec',
+					elementId: '9e8edbff-4e02-4db1-a320-83d0d4bb99d7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -2610,82 +2932,82 @@ export const NumberedList: CAPIArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: '1cf59a5f-b506-4da1-b121-4acb5e0bae95',
+					elementId: '44d4b8ee-969a-4af1-bb80-9af3eb04da8c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Good things come in smaller packages. The iPhone 11 Pro isn’t the biggest or the most expensive of Apple’s 2019 smartphones, but it is the best and very nearly the best phone of the year.</p>',
-					elementId: 'ab11b71e-79de-4484-bb73-5a2e1deb0d84',
+					elementId: 'ffc585ba-742c-441b-b9de-67b84ff4b8e8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The iPhone 11 Pro combines a stunning, big-enough 5.8in screen, svelte, luxurious-feeling body, top-notch performance and battery life to keep up with most of the competition.</p>',
-					elementId: '95d879f2-bb65-4dc3-88be-d3c2155e74e6',
+					elementId: '465d6826-7637-41b8-a6d6-42dcd81fe2c7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Truth be told, the design is basically uncharged since the mould-breaking <a href="https://www.theguardian.com/technology/2017/nov/10/iphone-x-review-apple-face-id-all-screen-design-home-button">iPhone X from 2017</a>. The back is now frosted glass, which looks particularly good in silver, and has a triple camera lump in the top left. The rest stays pretty much unchanged.</p>',
-					elementId: '69d2367e-5b56-49b1-9027-1b2f880fe108',
+					elementId: '59a94b9a-ffd0-4f5c-b948-c4a28ff8062f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Apple’s Face ID is still the best, most widely-supported face recognition system in the business. The new A13 Bionic chip continues to lead the pack. The gesture navigation system continues to be one of the best, and you’re in line for around five years of <a href="https://www.theguardian.com/technology/ios" data-component="auto-linked-tag">iOS</a> software updates from release - at least two more than any other manufacturer will provide.</p>',
-					elementId: '6764d902-f25b-428c-aa5f-138516878aa0',
+					elementId: 'bbc3a3b6-0d55-41f1-8960-1e05d0f3b644',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>This year the iPhone 11 Pro introduces a significantly improved triple camera with ultra-wide, wide and telephoto lenses, which matches the best rivals in photography and beats them in video. It even has an effective night mode now.</p>',
-					elementId: 'e005fbdd-23c9-42ed-8dfe-b17a773826d9',
+					elementId: 'a9ff9f87-9b9e-4fa9-b363-8bf125b746bf',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>It’s not all gravy – starting with just 64GB of storage is poor. The old Lightning connector still persists, rather than the newer standard of USB-C. There’s no 5G option and it is exceedingly expensive – you don’t buy the iPhone 11 Pro looking for value for money. Plus iOS 13 has been a mixed bag since its introduction, with a lot of bugs that needed fixing.</p>',
-					elementId: '7a8bd6b2-010e-477e-b2f5-eed77204bc9c',
+					elementId: 'a0f5f2f3-6bce-4a87-834d-8effa084960c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>But as a whole, no other phone can match the iPhone 11 Pro in power, capability and size. The iPhone 11 Pro is the smaller phone to buy and the best running iOS.</p>',
-					elementId: 'eb9f4c04-953d-466d-963d-c2e476f6125f',
+					elementId: '76efb6e9-a09b-4aa5-8a3b-14bf340d182b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Why should you buy it?</strong></p>',
-					elementId: 'bfeeb674-e860-42ae-9272-e1d895f239f4',
+					elementId: 'a452eda4-dcc8-46bd-b993-208fccdfddc2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>You want the best smaller phone, or simply the best Apple phone, then the iPhone 11 Pro is fantastic, but comes at a considerable cost</p>',
-					elementId: '7844a2b7-5929-4af2-afa8-ee3bd8bc0048',
+					elementId: 'f1fe9805-fd0f-4894-a1bb-61c65e8d8657',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy if:</strong> you want the best iPhone</p>',
-					elementId: 'df326276-bcd0-4824-af67-687820ed6560',
+					elementId: '5c61d968-0199-49ac-a018-778c39f6f722',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Don’t buy if:</strong> you don’t want to spend £1,049 or want to use Android</p>',
-					elementId: '8c945282-36c7-48bb-a255-9d9260a9fd73',
+					elementId: '4d9941c5-35fa-4141-9b35-406c716927b2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/07/iphone-11-pro-the-best-small-phone-available">iPhone 11 Pro review: the best small phone available</a></p></li> \n</ul>',
-					elementId: '48c31812-e521-498d-a05c-95333293c378',
+					elementId: 'd4bfe763-d2ba-48a0-bcb4-1bbf8dea3b14',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Best smaller Android:</strong> Samsung Galaxy S10</h2>',
-					elementId: 'b6483074-ac6d-4d64-bb68-62cf5bc1e44e',
+					elementId: '912bd5bc-d5b9-41b8-85ee-37181561d777',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£799</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$899</a></p>',
-					elementId: '01b14a3f-ecd3-413f-83dd-eed5cf2483e6',
+					elementId: '43c768f7-8c76-44f0-ac24-b403deccf1db',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★★</p>',
-					elementId: '50b2b54a-ec5e-4053-a3b1-23f8614fc3dd',
+					elementId: 'e2f2d6aa-972e-4492-a177-19a3e801dae3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2936,33 +3258,65 @@ export const NumberedList: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=620&quality=85&auto=format&fit=max&s=548aaa2cbb4ce837508d757542e646f5',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1900&quality=85&auto=format&fit=max&s=60becc0c143cf64b3df8a8b10e478c97',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=d9e414cfb993a883f339e9052257085b',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=e4dcc515521e5a258aa9d74b1b1b8586',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=605&quality=85&auto=format&fit=max&s=a964d6bc877695afcaee371e6dd80a0a',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1300&quality=85&auto=format&fit=max&s=e818449b2a79faf5c7ac0904d32f41dd',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=f0e27d9b606d586d8b7ea71318717cbf',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=6e2f3f57ce2e66ff1914623d3135aa7b',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=445&quality=85&auto=format&fit=max&s=bab4c0dc353cbdb781bb52d93af66723',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1140&quality=85&auto=format&fit=max&s=4efb88ce0bcc049fa4a8eee758382781',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=f5c9d5106e023a1da5e985331a19d5f4',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=31835d471df3f8be97ce6f70b05668b8',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=980&quality=85&auto=format&fit=max&s=69eec75f8966f2971c172b3ae0694519',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=d7888d9eb803a9b2fe7674c2a1ff7e4e',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=740&quality=85&auto=format&fit=max&s=3986c6ad51df503df51d2985a4acc33e',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=a4bb017740b175d5d5c4857f1a9d2b99',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=660&quality=85&auto=format&fit=max&s=63ad920e4ee5a9c43f39abf04f7be687',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=26985049894d44aeaf4c0b5821e4d80e',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=480&quality=85&auto=format&fit=max&s=a85750610fd6174e563699a7e421f037',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/6ead18d1b23b6cdaa33f6731c0c417a8f0576552/539_452_3726_2236/master/3726.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=04b9b10cf8314068db5e25edf2c8d831',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: 'afdbddcd-4ad9-4afb-be78-d5aa4bd91349',
+					elementId: 'af8f0d31-3428-435b-835b-4172940d0524',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -2975,77 +3329,77 @@ export const NumberedList: CAPIArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>.',
-					elementId: 'c09f777a-c0de-42c4-8ef8-1c516deb9292',
+					elementId: '839d8df6-b354-47f3-b640-86f02a65c9bb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>If you want the Android sweet-spot between a big, stunning screen and smaller phone size that’s easier to handle and fit in a pocket, that’s the Galaxy S10.</p>',
-					elementId: '11cd98ba-6e90-4fc8-9f05-3916903f6ff0',
+					elementId: '53863373-d723-4056-9f42-6e7fce4d234f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The 6.1in QHD+ AMOLED screen with a small hole-punch notch in the top right is one of the best on the market and is big enough to make the most of apps and movies look great.</p>',
-					elementId: '13b55c20-6b10-4f85-9e3d-fb8c7112f911',
+					elementId: 'e35e8f1f-2ca9-4ab0-995f-8aabbacece27',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Small bezels all round make the phone pretty compact compared with rivals, and it’s light too. It’s still a glass and metal sandwich, which means you might need a case to protect against falls.</p>',
-					elementId: 'e52f4ada-d1a2-4992-b8a6-115eb550c98f',
+					elementId: 'ee42e3e3-4b2b-4a86-bee2-69c8c7ac2c6a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The Galaxy S10 was recently updated with Samsung’s new One UI 2 software, based on the latest Android 10 including much-improved navigation gestures. You should get about three years of software support from release from Samsung, although the company is usually slower than <a href="https://www.theguardian.com/technology/google" data-component="auto-linked-tag">Google</a> and OnePlus to deliver big Android version updates.</p>',
-					elementId: 'e6835fc8-af37-497f-b76b-0d6a1740df91',
+					elementId: 'bd8bbe0c-3c7e-47b3-8c7b-2d10f99923d6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The rear triple camera is good allowing you to zoom from 0.5 through 2x, and on to a 10x hybrid zoom. It won’t beat the <a href="https://www.theguardian.com/technology/2019/oct/29/google-pixel-4-xl-review-not-quite-ready-for-primetime">Pixel 4 XL</a> or <a href="https://www.theguardian.com/technology/2019/oct/07/iphone-11-pro-the-best-small-phone-available">iPhone 11 Pro</a>, but gets the job done. The selfie camera pokes straight though the screen and is one of the better ones on the market.</p>',
-					elementId: '664b417b-bf91-4163-8070-60860c9e9677',
+					elementId: 'ab6b59e0-46b3-42c9-befa-df171cc15db2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Performance is good but battery life is a bit weak, lasting a day of usage but not much more. The ultrasonic fingerprint sensor mounted under the display has proved to be a bit slow and finickity over time, which can be annoying.</p>',
-					elementId: 'd1d237db-31e3-4555-9950-f81e084387d1',
+					elementId: '92767a35-ff0a-436f-b608-5b4c242657e8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Why should you buy it?</strong></p>',
-					elementId: '624ae07f-2183-4c24-9a0e-62ea0ca7f3b9',
+					elementId: '25754508-f7d0-4174-9981-08e4c147e752',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>A big screen Android experience in a relatively small phone is the main selling point, but the good camera, performance and looks help too.</p>',
-					elementId: '1ea64efa-1873-4423-b6e4-5d1d3ea80b17',
+					elementId: '353f0d55-1334-45e6-b15c-8778c93fc166',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy if:</strong> you want a good balance of screen and phone size without breaking the bank</p>',
-					elementId: 'e8d736a2-9928-41b3-b7ba-56ee6f07ddde',
+					elementId: '5296fcbb-e256-42bc-959c-c791debd22be',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Don’t buy if:</strong> you want brilliant battery life</p>',
-					elementId: 'c545a1f3-70ac-46cd-a281-5777a61bdc4f',
+					elementId: '532341a4-a447-4a5e-b43f-b26b83420c98',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p><strong>Full review: </strong><a href="https://www.theguardian.com/technology/2019/jun/06/samsung-galaxy-s10-review-the-sweet-spot">Samsung Galaxy S10 review: the sweet spot</a></p></li> \n</ul>',
-					elementId: '1176fc06-3452-4cae-bba7-e22666edc8ae',
+					elementId: 'da5242a9-bdda-4160-ab08-ed72d1bb5811',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Best camera: </strong>Huawei P30 Pro</h2>',
-					elementId: '6e2856a3-42f6-4c03-b59b-10dab11d8877',
+					elementId: 'fe43bb26-67b0-4458-88b7-479c7ce59754',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fconsumer.huawei.com%2Fuk%2Fphones%2Fp30-pro%2F%23buy&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£750</a></p>',
-					elementId: 'cb6b36d4-c86a-43e8-9e71-5fd5e2907ef2',
+					elementId: '91dd57a7-7a89-482b-89f9-77130568c024',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★★</p>',
-					elementId: '08428feb-7a0d-43d9-8495-e7a5c107e738',
+					elementId: '9dde833f-8465-4ff5-a5fa-e56d600f4a45',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3296,33 +3650,65 @@ export const NumberedList: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=620&quality=85&auto=format&fit=max&s=9ff6fc1cc4133ad0a89ba008dadefe04',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1900&quality=85&auto=format&fit=max&s=ba82a289dc1ec00eb6628aad7a332af1',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=2b1d22219c16d798b02444a282e97ce2',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=c15460ea1681c849ec302ab03aed3fe2',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=605&quality=85&auto=format&fit=max&s=5fbee0897a4ccc4ddc6fd7dd3dbaa1c3',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1300&quality=85&auto=format&fit=max&s=9dd4557ccfc393f8ac3638a8e116c64c',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=c3cd6d80572976497b3869e535c6b63e',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=fd5d76266faca2fc915dd513c4f604f1',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=445&quality=85&auto=format&fit=max&s=93fc4d6ad344b4c51de3d23ec4ef253f',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1140&quality=85&auto=format&fit=max&s=249a24f4c59359fd747511fc835f780b',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=2f764856905ec2733c11ff900bea58df',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=2656ca360ebe0176dc78ff8ee838ca4f',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=980&quality=85&auto=format&fit=max&s=7ecd1254e5c98980c27e6189dea15088',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=2b2a67897d0ee983197a670df5d2ca12',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=740&quality=85&auto=format&fit=max&s=bdc0a68436f9cc16b824e035966991e8',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=ec3b95586d68d4f3feba74824209b7e0',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=660&quality=85&auto=format&fit=max&s=f4e280adb384be75233c8b97abfcb1a8',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=b921d07fee240dc5920324b8b389a486',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=480&quality=85&auto=format&fit=max&s=66f796b91d8c965581efb3243aa5bc62',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/8ce65a044590439fdc2f80e97a8e24f291772e95/367_420_4327_2597/master/4327.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=ed60877f3f54fd6b3871f8c608331cd7',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: 'd208fed2-d89c-4104-ba6f-a8db7eb45385',
+					elementId: '60f9e560-c122-49d4-aef3-bf6899fc32f8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -3335,77 +3721,77 @@ export const NumberedList: CAPIArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>.',
-					elementId: 'ca2b9d6f-4cd1-44dd-bd66-ac1e224c8dc1',
+					elementId: '25da280e-029a-4391-8a46-21639a1a29dd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The best camera on a phone is the <a href="https://www.theguardian.com/technology/huawei" data-component="auto-linked-tag">Huawei</a> P30 Pro by some margin. Even at the end of 2019, no other phone provides as comprehensive a combination as Huawei’s new Leica quad camera.</p>',
-					elementId: 'fafa05f1-e144-44fc-86ea-a99513684020',
+					elementId: '974ee7dd-a833-4d13-bdd9-f7d2522f17de',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The 20MP 0.6x ultra-wide angle camera is fun, the main 40MP camera is terrific and it’s joined by a new periscopic 5x optical zoom camera that gets you closer than any other smartphone. If five times magnification wasn’t enough, there’s an excellent 10x hybrid zoom on top and then a digital zoom all the way up to 50x. A 3D depth-sensing time-of-flight sensor rounds out the modules on the back.</p>',
-					elementId: '509a493b-2603-47bb-838e-a5c32a4fc6ee',
+					elementId: 'aa1b05c0-bab7-4e48-8a87-33df489f4c67',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Remarkable levels of zoom aside, the P30 Pro also has low-light performance that instantly turns night into day without having to wait for a couple of seconds of capture. The P30 Pro might not have the best Night Sight rival, but most of the time it simply doesn’t need it.</p>',
-					elementId: 'b199993d-3c7e-4e93-b831-e57d1979ee71',
+					elementId: '939273cb-70f6-457f-a40d-9a4322777dc6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The rest of the phone is excellent, too, with stunning colour options. The large 6.47in FHD+ OLED is great, with a small notch in the top containing the selfie camera and slim bezels all round. The curved edges keep the width of the phone to a narrow 73.4mm wide, meaning it’s still relatively manageable and easier to wield day-to-day particularly compared with the <a href="https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu">OnePlus 7T Pro</a> or <a href="https://www.theguardian.com/technology/2019/oct/09/iphone-11-pro-max-review-battery-camera-screen">iPhone 11 Pro Max</a>.</p>',
-					elementId: 'b49629e4-9e5c-4c3b-9c34-005e302789fd',
+					elementId: 'c17bedbd-9fb9-46be-8959-53b2c3dae82a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The in-screen optical fingerprint sensor is second only to the OnePlus 7T Pro’s. Huawei’s Kirin 980 processor, 8GB of RAM and 128GB of storage, provides great performance and a battery that will last about two days. Plus the battery charges super fast and has wireless charging and power sharing.</p>',
-					elementId: '794f25af-ec99-4b63-8f21-69495ea7aa59',
+					elementId: '498adbd1-41b8-4e46-80cf-fd27246a5ae7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Huawei’s modified Android 10, EMUI 10, is highly customisable and has plenty of features but may not be to everyone’s tastes. Huawei is still facing sanctions from the US as part of the <a href="https://www.theguardian.com/technology/2019/may/20/trump-us-ban-huawei-google-trade-war">US-China trade war</a>, which <a href="https://www.theguardian.com/technology/2019/may/19/google-huawei-trump-blacklist-report">makes its future uncertain</a>. The P30 Pro’s recent Android 10 update showed that it should <a href="https://www.theguardian.com/technology/2019/may/20/huawei-blockade-do-i-need-to-stop-using-my-android-phone">continue to receive updates as normal</a>, however.</p>',
-					elementId: '86046060-d49c-4a0a-96e2-4a530248e258',
+					elementId: '6f294ed0-cb83-4d0b-bc00-aab85500f0ea',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Why should you buy it?</strong></p>',
-					elementId: 'f53234e8-99fe-44f4-84ba-2a63b78d8b7d',
+					elementId: '00771566-1b36-4f07-a79c-9e43bc1042f7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The camera is game-changing in meaningful, not gimmick-filled ways, while the rest of the phone is excellent</p>',
-					elementId: '25a8c065-1e11-4c31-9b55-9328356433af',
+					elementId: '52b27665-ca83-4b4c-a10a-419a39a9202e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy if:</strong> you want the best camera on a great phone</p>',
-					elementId: '372c3867-7e65-41f6-b9ce-8d6dcba04798',
+					elementId: 'cd233a62-2bba-40b3-97e7-f642b8d7967c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Don’t buy if:</strong> you want a smaller phone or are worried about US blockade of Huawei</p>',
-					elementId: '242b066b-e52c-4809-9131-7a9d251f3e95',
+					elementId: 'a4b0228e-7f8e-43f8-a1c9-1f49353bf077',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/apr/24/huawei-p30-pro-review-leica-quad-camera-zoom">Huawei P30 Pro review: game-changing camera, stellar battery life</a></p></li> \n</ul>',
-					elementId: 'd2e2ecef-6123-4f1c-a58d-b1796a94e794',
+					elementId: 'aec84f67-c709-4d4e-a98b-b9d48e6010e2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Best value:</strong> OnePlus 7T</h2>',
-					elementId: '9cfda1f0-19ae-4b87-9bc1-346885d11467',
+					elementId: 'da3fc91e-2b2c-439f-a97b-8d1a9343248c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Price:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.oneplus.com%2Fuk%2Foneplus-7t&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£549</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.oneplus.com%2Foneplus-7t&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$599</a></p>',
-					elementId: '6e5c13bd-100d-4a2a-ad87-968901101ec4',
+					elementId: '33a15bbc-1f89-4566-b77d-904f2148c126',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★★</p>',
-					elementId: '888a724f-eec5-44f5-ba6a-43bff2ca5ca2',
+					elementId: 'a4b94bbc-568f-483f-b889-f3db7601e681',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3656,33 +4042,65 @@ export const NumberedList: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=620&quality=85&auto=format&fit=max&s=fc66322cec73bb046c44532d65303ac5',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1900&quality=85&auto=format&fit=max&s=892893dbcde3f7f9d5ac6d9b8821b4df',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8b73f95319d545de2ba9c4aea98a7d0d',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=67e40d86e003dae3452fa29895e9b848',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=605&quality=85&auto=format&fit=max&s=8b3cabd994b10a9001fdfe7685416f8e',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1300&quality=85&auto=format&fit=max&s=4aef811346afba8d78fca461e14c9624',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=ad318cb6fcd262e7a190bd85d45f349c',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=e56606499dcaa855b5c4028b94a9fc51',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=445&quality=85&auto=format&fit=max&s=9529b23d97cc8f61f674df317a0f272b',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1140&quality=85&auto=format&fit=max&s=944d2e332a3d38b79bcc683af94d1360',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a1246bda866f7f5ea6dcf661a0a379b6',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=c001e916c98f2b93e31405d02062dd99',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=980&quality=85&auto=format&fit=max&s=d3987d59ac6f40e031821802ad1e8153',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=bab477f6af86a78887b86d5a40d35a7d',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=740&quality=85&auto=format&fit=max&s=9d5d1f4c7e4d29467d7760cb9a66a813',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=47caf27d04ad05f66c8f6b243455b7fb',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=660&quality=85&auto=format&fit=max&s=caad0f9d500ea181ac2f921b75992b5b',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=a453a954fd92ab6086dce61695f1dca3',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=480&quality=85&auto=format&fit=max&s=0daece0f28e5318d733e5b2ed1f3a645',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/17f4fcce97af5df64be4c949200cc148030007e6/335_399_4219_2533/master/4219.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=4ee93eb610458e3fd810ef28bd2a94c5',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: '83f3ac44-ff26-474c-be4a-b1171715765d',
+					elementId: 'fe050bdb-da0d-44c8-93b7-ef6435f32919',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -3695,57 +4113,57 @@ export const NumberedList: CAPIArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: 'fd23cbf7-90c2-47ee-b12b-e9269a7717af',
+					elementId: '8040b17a-ee4c-4d52-9ddd-a6a03b2f0a5b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Pound for pound the OnePlus 7T offers the best performance, design and experience than any other smartphone.</p>',
-					elementId: '41ef171e-2c9f-4e9c-a281-8c5327c13cbc',
+					elementId: '8ec0a14a-0d56-4690-8e2e-8dadc1394a2c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>It’s got the big, good-looking 6.41in full HD OLED screen, with a small, widow’s-peak-like notch at the top for a selfie camera. New for the 7T is a 90Hz refresh rate, which like its <a href="https://www.theguardian.com/technology/2019/oct/22/oneplus-7t-pro-review-the-best-kind-of-deja-vu">bigger sibling the 7T Pro</a>, makes even the mundane silky smooth.</p>',
-					elementId: 'b03198ee-e4d0-4132-8e74-1ae147c03ef0',
+					elementId: 'd90faaf3-f394-4109-a48d-7dd3f9c1bd4a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>It’s got 2019’s top-of-the-line Snapdragon 855+ processor, 8GB of RAM and 128GB of fast UFS3.0 storage. It also lasts a good 31 hours on a charge, and its OxygenOS 10 Android software is fast and slick. OnePlus guarantees two years of software updates and an additional year of bi-monthly security updates from the release date of the phone too.</p>',
-					elementId: 'dc1a0837-6374-4c56-a47a-13258dc03eed',
+					elementId: 'b8060147-4b33-480b-9904-c78877899874',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>It even has the fastest and best in-display fingerprint scanner currently available, which is as good as the best dedicated capacitive sensors, good haptics and dual-sim support for having two mobile phone network connections at the same time.</p>',
-					elementId: '0a30ae3a-864d-4c91-af0f-01cacde9c5b4',
+					elementId: '15b3630c-d49c-4e95-b6e5-a297ce2ae297',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The triple camera is good too, with ultra-wide, wide and 2x telephoto lenses, plus a dedicated macro mode, but it can’t beat the very best in the market. There’s no formal water resistance rating and no wireless charging, but WarpCharge sees it hit full charge in 60 minutes flat.</p>',
-					elementId: '296cb47f-3b8c-4657-83dd-a4624bd5c2d0',
+					elementId: '8c6fd32e-6810-46a9-89de-7a1a07a0afc3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Why should you buy it?</strong></p>',
-					elementId: 'a0e3984f-f659-45fe-ae0e-e726a6be5715',
+					elementId: 'c43d4a0d-a339-4efe-af3b-a74010759f6b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>A great 90Hz screen, excellent software and the best performance, in-display fingerprint scanner and a good camera mean you have to spend significantly more to get a better phone than this</p>',
-					elementId: 'e24df0f2-24fd-421f-960f-b761bc561d3d',
+					elementId: '013734de-1495-4bd1-898d-e2d67f6b1e44',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy if:</strong> you want a top-notch phone but don’t want to spend more than £549</p>',
-					elementId: '21c64bf4-2876-4e55-a3a1-401eed611178',
+					elementId: '5e87c466-b742-4a3f-9234-51f8cfbfe38c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Don’t buy if:</strong> you want a really good camera</p>',
-					elementId: 'a734e277-d235-4b49-b436-451ee986928a',
+					elementId: '940683c7-965b-4619-af13-527855a1abb7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/16/oneplus-7t-review-the-new-cut-price-flagship-king">OnePlus 7T review: the new cut-price flagship king</a></p></li> \n</ul>',
-					elementId: '486b1eaf-578e-492d-bb78-5c285339080b',
+					elementId: '92a11b7d-8843-44f0-b394-a29568cd3642',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.GuideAtomBlockElement',
@@ -3754,32 +4172,32 @@ export const NumberedList: CAPIArticleType = {
 					title: 'Smartphone jargon',
 					html: "<p><strong>Size</strong></p><p>Smartphones are rated by screen size measured on the diagonal in inches. The bigger the number the larger the phone, but different phones use different ratios of height to width.</p><p>How easy it is to handle comes down to the width of the phone and its weight. The narrower and lighter it is, the easier it is to hold in one hand and the less likely you are to drop it.</p><p><strong>Processor</strong></p><p>What is commonly called the processor in a phone is actually a system-on-a-chip combining the processor, graphics and other essential systems into one.</p><p>Generally the newer the processor the more powerful and battery efficient it will be. Samsung, Huawei and Apple make their own, while Qualcomm is the largest supplier to other brands at the high end, with its Snapdragon 8-series range at the top.</p><p><strong>RAM</strong></p><p>The RAM (memory) is where your apps and processes are stored when in use, so the you more your phone has the better, up to a point.</p><p>Android requires more RAM than iOS, so it's difficult to directly compare them. But with Android at least 4GB of RAM is currently recommended.</p><p><strong>Storage</strong></p><p>Different from memory, storage is where everything is stored on the phone, including apps and media. While a few phones can have their storage expanded with microSD cards, most cannot.</p><p>That means you should aim for 64GB of storage at a minimum, but more if you want to store lots of photos. Cloud services such as Spotify or Google's Photos can help offload your music, photos or videos to the internet.</p><p><strong>Software updates</strong></p><p>Keeping your phone secure from hackers is essential, which makes software updates critical to patch bugs and security holes, as well as adding new features and improving things such as battery life and the camera.</p><p>Not all phones receive regular updates. Apple's support of older phones is the best in the business of around 5 years, followed by Samsung and Google's three years, both from when the phone was released - not when you buy it.</p><p><strong>Battery life</strong></p><p>Battery life varies drastically between devices, and \"all-day battery\" often doesn't mean 24 hours between charges. Some may not last long enough, particularly if you're out in the evening.</p><p>Battery life gets worse as the battery ages too, so a two-day battery will likely make sure the phone lasts at least a day two years later.</p><p><strong>Camera</strong></p><p>Cameras are the current battleground between the big players, but the margins between them are slimming.</p><p>Most use computational photography that combines hardware with advanced software algorithms, typically allowing multiple cameras to combine to make one image.</p><p>As such the camera software makes as much difference as the hardware, and is one of the few areas that actually improves over time with updates.</p><p>Multi-camera systems often offer more, such as useful zooms, portrait modes and better low-light performance, but they are not all created equally. There are also 3D cameras, which can detect facial expressions and other fun tricks.</p><p>The number of megapixels (MP) also makes a difference. Having more MP doesn't necessarily equal a better image, but modern smartphone cameras combine multiple pixels to improve image quality producing 12MP shots from 48MP sensors, for example.</p><p><strong>Other things to consider</strong></p><p><b>Wireless charging:</b>&nbsp;convenient, but slower than via cable and normally a charging pad doesn't come in the box</p><p><b>Durability:</b>&nbsp;generally glass on the front and back of the phone makes it more fragile</p><p><b>Resale value:</b>&nbsp;iPhones hold their value better than most others</p><p><b>OLED versus LCD:</b> OLED screens emit their own light so have much deeper blacks and more vibrant colours, while LCD screens are cheaper</p>",
 					credit: '',
-					elementId: '082cf5a7-0893-469f-9010-48aa6a2e4401',
+					elementId: 'b9ff8774-859e-472d-aeec-7c737c0d52d7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Runners up</h2>',
-					elementId: '46e2e403-f317-4fb0-9806-078a3dd7b00c',
+					elementId: '0e28ce3a-0e63-4f0a-a19b-d7d0006bed9f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>These are good phones still worth buying if none of the top smartphones fit the bill.</p>',
-					elementId: '4458eefd-c06a-4e26-b528-f1b133556cd1',
+					elementId: '5e2bd71b-27bf-46a6-8e99-8a29c982fd3f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Apple iPhone 11</strong></p>',
-					elementId: 'b789117d-2a19-4963-afde-5dff951c3b4f',
+					elementId: '1aeeff08-6c81-419a-9e92-e23320514340',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fuk%2Fshop%2Fbuy-iphone%2Fiphone-11&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£729</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fus%2Fshop%2Fbuy-iphone%2Fiphone-11&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$699</a></p>',
-					elementId: '22f0f3ff-407e-4760-9aeb-81aca03b0dd5',
+					elementId: '0adfde0b-8896-4c15-9d07-99af9ae288c5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★☆</p>',
-					elementId: '7797f849-98e4-4f06-bfb7-765e1ca35cbb',
+					elementId: '6ff0b0a7-c829-4270-9268-6936852c597b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4018,43 +4436,75 @@ export const NumberedList: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=620&quality=85&auto=format&fit=max&s=2355947a4d51c8efcccf2f7af5f5dafa',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1900&quality=85&auto=format&fit=max&s=84654e91dea8bb0d472e927f10f938cd',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=908d467cdd8c734f849f308fdf66715a',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=bd09eb7b9938905e7089344eeb21805d',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=605&quality=85&auto=format&fit=max&s=557ec054d1014ee850c5e7e639f38431',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1300&quality=85&auto=format&fit=max&s=c60dc7d354b494c78bfbd3fdc18727d6',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=32277bd4595764f8117b54d992ee9079',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=17fc739f8115bf92e4d00ac5f1d66647',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=445&quality=85&auto=format&fit=max&s=b9e6527f87fe3e082ea6e2c1a438f954',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1140&quality=85&auto=format&fit=max&s=12865ebf097f8331bc452c067562ec0e',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=07364ebd108137f3a92cb09ee6f82034',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=060c7e4ae38a9c16feff6d3570757e7a',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=980&quality=85&auto=format&fit=max&s=a8e24c6d8953e8c7de7b6ebb4193093d',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=252f51c75c6645ebc4040b68b3bcdba7',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=740&quality=85&auto=format&fit=max&s=c4366356b49a5fd7bfa8104b1f5bce39',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=27096aaebba13d07bc7afbda80ad90a4',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=660&quality=85&auto=format&fit=max&s=f1d28ce7a5ab567127ba926afce3d555',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=a59f31093acff15e79ecf4cce962811e',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=480&quality=85&auto=format&fit=max&s=48a97b995a0f343010b56fcaccfe2095',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/4d15e7605d06515d0bba590b3c101ba27fe5b572/1193_325_2683_2684/master/2683.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=de330d2ea12df103c75d26d7972d5db5',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: '2bc8a0e1-8d18-4a21-83de-f516219e7384',
+					elementId: 'ff7870dd-7837-436f-80b6-47b69a901c16',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Apple’s cheaper iPhone 11 is the follow-up to last year’s iPhone XR and offers most of the features of the iPhone 11 Pro. It has slightly battery life too, but is missing the excellent ultra-wide angle camera, has a slightly larger, but worse screen. It is made of aluminium and glass, instead of stainless steel, losing its luxurious feel and the knowledge that it’s the best Apple can make.</p>',
-					elementId: '70ed5f51-3fe2-441a-9e17-3a7e47dbc00a',
+					elementId: '779f6e28-d161-403d-9228-9ea18d2d5cfc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The iPhone 11 looks great in red or white, but it’s not cheap by any stretch of the imagination, costing as much or more as true flagship phones from competitors. The iPhone 11 certainly holds its own for the money, but the <a href="https://www.theguardian.com/technology/2019/oct/07/iphone-11-pro-the-best-small-phone-available">iPhone 11 Pro</a> still the one to buy if you want the best iPhone. If you want a cheaper phone, switch to Android or buy last <a href="https://www.theguardian.com/technology/2018/oct/31/iphone-xr-review-apple-big-bezels-battery-face-id-screen">year’s iPhone XR</a>.</p>',
-					elementId: '5c72f046-9722-433b-a30a-2bfd70bd0a19',
+					elementId: '0f166b3f-e8bb-4820-9ca2-5c4b8b2f434e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -4067,27 +4517,27 @@ export const NumberedList: CAPIArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>.',
-					elementId: 'd456941f-3893-4533-8a00-adf154dfc8d2',
+					elementId: '080e5cf3-24f5-4ca3-bb37-36cbdf462b20',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/01/iphone-11-review-iphone-xr-dual-camera-a13-smartphone">iPhone 11 review: an iPhone XR with a better camera</a></p></li> \n</ul>',
-					elementId: '7a063cb6-5f0a-47de-a082-c06f4ddf05ab',
+					elementId: 'e4a8f256-a7c2-4459-b026-953dc4b55293',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Apple iPhone 11 Pro Max</strong></p>',
-					elementId: '8b9afadd-3ebf-483a-bf74-7be4fee42502',
+					elementId: 'ff0ebf0b-05de-4f1c-be68-c91580f5694e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP: </strong><a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fuk%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£1,149</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.apple.com%2Fus%2Fshop%2Fbuy-iphone%2Fiphone-11-pro&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$1,099</a></p>',
-					elementId: '0bb04033-de86-40c2-bac6-b92b42b795ee',
+					elementId: 'b84c76cb-ce1a-46e2-b0d8-1064daa822cc',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★☆</p>',
-					elementId: '4dd2dabc-c180-426a-8bd8-4b37079637a0',
+					elementId: '4ffad9ef-b8cd-4e29-9fe0-13d68d911ea7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4326,38 +4776,70 @@ export const NumberedList: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=620&quality=85&auto=format&fit=max&s=4f8f22c0634c1d465981ce86b86eb85f',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1900&quality=85&auto=format&fit=max&s=23aae3447d08e917c00b6982fce5544b',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1ea97dfe600b9469e13dc392d380bd22',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=e25fe7637064c6593ff68aae43ca844c',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=605&quality=85&auto=format&fit=max&s=548f76e63dbb5fd6d45f96c9c91d76b2',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1300&quality=85&auto=format&fit=max&s=3cd7cd1a0a8ec404508ff7a7ca04320f',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=90d27bfea238dc8ada26fba30a241066',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=956f4b36f0d67c51d369de6f5decb5d0',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=445&quality=85&auto=format&fit=max&s=e8862f38b816533c5e1118f2a5f9f4ae',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1140&quality=85&auto=format&fit=max&s=4d40ccd600185b89ffd640f3038826f2',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=35947b1e4a42ac4667f885e2b6e2a77d',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=f31f9d20decf455c8adc55b9e75d7c1a',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=980&quality=85&auto=format&fit=max&s=4f248b2e2861ff8c4ca32fd0703fb966',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=ea6e29e35e0dcba02f45bdfce1b4218e',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=740&quality=85&auto=format&fit=max&s=3e3c372169e2f4b707be61a7dcdc8a0a',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=0406c1ca5f0f8696d92953c34ddab77b',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=660&quality=85&auto=format&fit=max&s=e9c28ea9d1f2ac0be4a7a9a40c599e40',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=6b3695f767330ce77083d680cd42cf8b',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=480&quality=85&auto=format&fit=max&s=ed5463244c8f5dbe9cc83fb88c909c6b',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/c6a9e4684a795b5f2d5332c80a08b6da9426b037/1072_434_1883_1883/master/1883.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=7634676bba199f9bc27d8795106058f1',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: '0fbb8c18-e541-40da-8552-0fc1fd70b1f0',
+					elementId: '7d3365e2-e94b-4a3f-8ebd-b109c7cf2c6b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>If you must have an iPhone and it must have a massive screen or epic battery life then the iPhone 11 Pro Max is your only option. But it has really poor ergonomics, is big, expensive and heavy, making the smaller iPhone 11 Pro or iPhone 11 are better options.</p>',
-					elementId: '612e3407-4933-4ffb-a842-469723193c36',
+					elementId: '033a753e-b391-4e93-ba08-895051a70e81',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -4370,27 +4852,27 @@ export const NumberedList: CAPIArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: '0c81d6a6-3b46-4847-8234-0d3969a6439c',
+					elementId: '934499e9-3de8-4c1c-8882-74763aacc561',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/09/iphone-11-pro-max-review-battery-camera-screen">iPhone 11 Pro Max review: salvaged by epic battery life</a></p></li> \n</ul>',
-					elementId: '7af04df7-3e4f-451f-8246-4352fc8896d8',
+					elementId: '9d2e3bc3-bb6e-4693-8cdf-8063e0bcf7d3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Samsung Galaxy S10e</strong></p>',
-					elementId: 'b26235fd-48d6-4491-b353-552f23407caa',
+					elementId: '947ae3d8-12b5-43be-8b2b-96e5865db7df',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£669</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$650</a></p>',
-					elementId: '701851bc-00b7-473c-a7eb-36128e45e860',
+					elementId: '7dd71435-4ef3-43f1-ab50-b4f5c4bf4300',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★☆</p>',
-					elementId: '14e0bf5e-3168-4b47-9815-19e0be792dc7',
+					elementId: '6ecfeb84-a99c-465c-970f-46b9c1363814',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4639,43 +5121,75 @@ export const NumberedList: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=620&quality=85&auto=format&fit=max&s=13c5bf82f41524439394bedc273792fc',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1900&quality=85&auto=format&fit=max&s=175943efd496e74eb5be701a0338736d',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8ae0274386f4a8608179e3b27f6bdd1b',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=9c9cd563c4f1592f5f4f5a24679301b6',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=605&quality=85&auto=format&fit=max&s=8f57a6a733aee91736d419969a75c855',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1300&quality=85&auto=format&fit=max&s=e0b92b50523039d34a2dadedc70ae640',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=3dece1fe2d9b2c8c276bbcd2b7957330',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=2a179402732384730217ff940c9b8385',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=445&quality=85&auto=format&fit=max&s=8bc78a610614f6255674107e4ce0e839',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1140&quality=85&auto=format&fit=max&s=0b690f1686e258dc2681e00f67dee406',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=4d6bbcf3f5e536ea3d52a9350ca08e8a',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=c8a70b64374cc534a595623f9698e03b',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=980&quality=85&auto=format&fit=max&s=8d34b0817537ac9f488df536ce9f2834',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=e3d8f0cf30ac40f30184c13128347b7c',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=740&quality=85&auto=format&fit=max&s=e331e25a32308ad88fc46a1b654444dc',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=64b5573877d7d18cc2575abfe10169f4',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=660&quality=85&auto=format&fit=max&s=8a2781a2d8d1e3bb254d4cc995714222',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=edf1cdcd883d9f35e2103e09c12cf760',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=480&quality=85&auto=format&fit=max&s=a70f9157fd6f333e61c5f3cc960e293c',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/da7e6922279d59e22a8206007eef863980c998cc/1217_356_2618_2618/master/2618.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=c6a393ccc0e2f3cc947f275bedcb04a1',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: '8ced81d1-3a89-4aa1-88d5-eced4ae4b325',
+					elementId: '2f32f6f7-3485-4a57-9820-a70855799d7a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The smallest, cheapest variant of Samsung’s current S10 line is still good, but falls slightly short of the high bar set by the regular Galaxy S10. The Galaxy S10e loses the optical zoom with only two cameras on the back, has a flat, slightly smaller screen and a lower capacity battery. It also ditches in the in-screen fingerprint scanner for one embedded in the power button – great for right-handed users but not so for the left handed.</p>',
-					elementId: '8070fe3d-27f1-49cb-9474-3974700bc7e2',
+					elementId: '95ecdf75-86c6-4a6e-bc8a-6b1eaf6c1ec3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>It doesn’t feel any smaller in the hand, but can be had for less if you must have a top-end Samsung for the lowest possible cost or dislike curved screens.</p>',
-					elementId: '272be1be-4e73-4249-b8ba-d8c6208c5b23',
+					elementId: '69c24558-7b74-4cb3-ba9b-97490b1816ab',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -4688,22 +5202,22 @@ export const NumberedList: CAPIArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: '9dde1efe-04ac-4fd2-8bd3-654da6823fbd',
+					elementId: '49b364a8-c029-4989-9a28-23f4b841b704',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Samsung Galaxy S10+</strong></p>',
-					elementId: 'f2d43e0b-8137-4747-91b7-0decb5da7613',
+					elementId: '8e5b2d94-dcbb-4eaa-b2a7-b63d1314bea0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£899</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-s10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$999</a></p>',
-					elementId: 'cfbf5539-9b50-4409-849a-84ea57e1e454',
+					elementId: 'a63a4809-a050-4538-bad3-8ce7ce3cd3f8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★★</p>',
-					elementId: '63d8006c-e441-4c69-bf0e-bb45598b69ee',
+					elementId: 'cb78035b-872c-4a01-99cc-86049d5ca30b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4952,38 +5466,70 @@ export const NumberedList: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=620&quality=85&auto=format&fit=max&s=39af1e48032054f8d7aa5534909c5934',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1900&quality=85&auto=format&fit=max&s=b82df79da04b820ac0b3281b91a71d23',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=5af11279fab1fffec968a049ea656b47',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=53510e8446e5b562b91082412a7b75f3',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=605&quality=85&auto=format&fit=max&s=9a527fc97fadcdcf83773ec1dc5b35d8',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1300&quality=85&auto=format&fit=max&s=27ee98efa6d0d4f8eec2ce7062d08059',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=31d28dce7ec7002c9ffda771b9838743',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=91ad7c54c1d9efa05949116a0841470a',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=445&quality=85&auto=format&fit=max&s=fd477718698cb317b86bcaacf4dafb30',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1140&quality=85&auto=format&fit=max&s=654d005ee800b0956a55c1d6e0135711',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e4833e866766b70e8d2e395dcf773625',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=12cf7492da8dd5f7cace47d4598c3f1c',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=980&quality=85&auto=format&fit=max&s=4d1bf391bf9fedd360770c36cc6c707e',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=26ce9b182450bd9b443a3923a9e87a2e',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=740&quality=85&auto=format&fit=max&s=6eaac2fbac8e1222341743b07ec8641e',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=a1e87626ef522e418ad5e5af70e5c830',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=660&quality=85&auto=format&fit=max&s=795dcd5ad3400f1b230d45b175dd4bca',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=37b660e0988c941222d9aca8a1221d21',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=480&quality=85&auto=format&fit=max&s=9c8bee947df4b0f4d3e8a41173576435',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/f76dd5973467036f3da6355c86645d8b88b22506/851_0_2406_2406/master/2406.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=cfd8cefc2f293c5c8942fd1d258112fe',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: 'de27fedc-9be8-4ab2-bb5b-d2cba461aa1b',
+					elementId: 'dbda0ccf-6cb3-483b-93ce-95a62a208e0f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The bigger version of the Galaxy S10 with a 6.4in QHD+ display has the best screen available on any device. The oval-shaped hole-punch notch is novel, containing two good selfie cameras. The triple rear camera is good, but not a patch on the Huawei P30 Pro. Performance is good, so is the software, but the battery life is slightly disappointing compared with the best. The fingerprint scanner is a bit slow and can be frustrating to use.</p>',
-					elementId: '22321998-1cd9-4be7-beb5-1266d98ba53a',
+					elementId: 'b241cbf7-e532-4ccd-8b4e-fcec63c1663e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -4996,27 +5542,27 @@ export const NumberedList: CAPIArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: '150f2e59-95a6-4fa7-b23f-423868e66304',
+					elementId: '4d3df915-547e-49d6-b020-be37525f1e7b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/mar/11/samsung-galaxy-s10-plus-review-smartphone-ultrasonic-triple-camera">Samsung Galaxy S10+ review: a simply stunning screen</a></p></li> \n</ul>',
-					elementId: '83d9b60e-4a75-416f-964a-bf8ccdabbe38',
+					elementId: 'eb2427f0-a362-49c7-bd19-230c4b86423c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Samsung Galaxy Note 10+</strong></p>',
-					elementId: 'e16e2350-57c5-42f6-94d8-f64506389d94',
+					elementId: 'a2e0e879-ebe8-4c24-b9bb-72ae73a8fda7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-note10plus-sm-n975%2FSM-N975FZSDBTU%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£999</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-note10%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$1,099</a></p>',
-					elementId: 'd61f2fb7-e3bc-4c99-b5ea-5a349fb93a9f',
+					elementId: '6ce28bc0-3345-4f14-9363-97a42bf216e8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★☆</p>',
-					elementId: 'ba3100be-7358-4735-a18e-5a6413814076',
+					elementId: '26598fd6-5447-456a-98f6-83708ac5b450',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5255,38 +5801,70 @@ export const NumberedList: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=620&quality=85&auto=format&fit=max&s=89759f27477c279473618b5f7146cade',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1900&quality=85&auto=format&fit=max&s=85e286c39a55e64a86088d330f420a1e',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=1b4f8a1acc1f255ab5edee2301c79b03',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=e2c423d10b0358ad84f4220fa90fb5af',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=605&quality=85&auto=format&fit=max&s=bd9ae1182d7ad6d0c9bf8363193f4158',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1300&quality=85&auto=format&fit=max&s=4d38de129313ac74bee8eeb4ea987d35',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=29fb3b2eebfb8f8c98072f00c6f7c4a3',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=b540dba8b6ab3b9c9b9093643c4c0d6c',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=445&quality=85&auto=format&fit=max&s=933484680da15c6a869ebe29e7dcd478',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1140&quality=85&auto=format&fit=max&s=5254fa62003d39895adfbcc7a2114f6d',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=165d1eac8772a3570f3cacd1f8d2ba43',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=521adc7ab4560e3259e196938ba0c18c',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=980&quality=85&auto=format&fit=max&s=d887f2406867577169b5a18686c1f5fe',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=494aa096296b070a147a5c55ff7a3acf',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=740&quality=85&auto=format&fit=max&s=fdd93305176771eb6b6577c62d2586f5',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=47569c97ddcfc979a5964ea7e7d4aa0d',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=660&quality=85&auto=format&fit=max&s=d04aa693ae33914fbe51bf25f9415b38',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=984615c01b025ac27c0920b5da705fb7',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=480&quality=85&auto=format&fit=max&s=a18044a4d05a4ed1e0c3734072fca937',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/f421848829b3fbb287ea67dd87ae29a1910791a1/1075_294_2784_2786/master/2784.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=24b1bead7dc86371d43661030f7ac339',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: 'a09f571f-ce1f-43b3-a14f-62044d7e884c',
+					elementId: '16d92f96-5a99-44dc-b03c-45bd34772da4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The Galaxy Note 10+ is a Samsung super-fan’s dream. It has the biggest screen on a Samsung with a monstrous 6.8in on the diagonal, new faster UFS3.0 storage, reasonable battery life and plenty of party tricks. The stylus can now be used as a magic wand for gestures, there are three cameras on the back and is available in a 5G version too. The fingerprint scanner is a bit slow and can be a bit frustrating to use.</p>',
-					elementId: '1be39589-12b2-4555-83ca-30b712b95055',
+					elementId: '4310fd40-a5bd-48ac-9355-340dc12f1dc8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -5299,27 +5877,27 @@ export const NumberedList: CAPIArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: 'a89e1f2e-51b1-4bc0-a664-98da60c9f2e5',
+					elementId: 'b5ecc138-e8f8-4ca4-b028-b447c94d372e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/sep/12/samsung-galaxy-note-10-review-bigger-and-now-with-a-magic-wand">Samsung Galaxy Note 10+ review: bigger and now with a magic wand</a></p></li> \n</ul>',
-					elementId: '0e00c8ba-05d8-48b7-8e8f-97a1cac83639',
+					elementId: '7200c21b-a3e1-4021-88d5-5a49a1029197',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Samsung Galaxy S10 5G</strong></p>',
-					elementId: '8b7d0a54-7b2f-4946-97cc-2bd9e919b08b',
+					elementId: 'b116bc8c-d45e-4b77-9805-951222a0326a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fuk%2Fsmartphones%2Fgalaxy-s10-sm-g977-5g%2FSM-G977BZAABTU%2Fbuy%2F&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">£1,099</a> / <a href="https://go.skimresources.com/?id=114047X1572903&amp;url=https%3A%2F%2Fwww.samsung.com%2Fus%2Fmobile%2Fgalaxy-s10%2Fbuy%2Fv2%2F%3Flink%3Dgalaxy-s10%2B&amp;sref=https://www.theguardian.com/technology/2019/dec/17/best-smartphone-2019-iphone-oneplus-samsung-and-huawei-compared-and-ranked.json?dcr">$1,299</a></p>',
-					elementId: 'a2427022-c4d8-432a-b99d-70cbb7fcea77',
+					elementId: 'f71780ff-b18f-4948-ab1c-07fa37196ff0',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★☆</p>',
-					elementId: '07b3d690-ec19-4da0-8c1e-12a8e1f6fad4',
+					elementId: '47d08f60-018a-4313-a0ec-b4d67b0055f7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5558,38 +6136,70 @@ export const NumberedList: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=620&quality=85&auto=format&fit=max&s=1c9d85e54f8e72439479b49679a85c02',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1900&quality=85&auto=format&fit=max&s=316872a58529527efce91f0ca2979b0f',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=76692d25f67756d0c74be1ce2724ece4',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=8dcb968411026b5b8ad63a37036a3e0b',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=605&quality=85&auto=format&fit=max&s=db0e5c99c30a76320d0219f9d31b4894',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1300&quality=85&auto=format&fit=max&s=911f989e58119a71923e43cc68720681',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=3069dbd3e7d4ad685abffab321b3423c',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=ec4f65c08da26c48f865913c5fdad7cc',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=445&quality=85&auto=format&fit=max&s=3f8757cb8ae92200b44455d2b366aeec',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1140&quality=85&auto=format&fit=max&s=5eb96daf5236817d76117bc533f1d556',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=e93197d23f1c1b35e0583eb3e3065fe2',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=65dc9e36832543934c553570a77a58f8',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=980&quality=85&auto=format&fit=max&s=86a9d83cc2dc23c093cc38f0bf3f7b6a',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=004755244c85177809adf85510e5cba0',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=740&quality=85&auto=format&fit=max&s=3de3bcbb90d0524bb8c5e699bf4f0bb2',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=1fb433c3553f3293f8e71828a5e37628',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=660&quality=85&auto=format&fit=max&s=4528c57d40ab224539d7aa9a1801cd88',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=f2912944cb65764d234876899c630b76',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=480&quality=85&auto=format&fit=max&s=8430deadfd4168f3a1feff88700252e5',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/edec099c259e51e4e552aeae738e16e9fd23ac92/1257_422_2602_2604/master/2602.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=ada51577e69249e12ae77a0016283ea3',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: 'a4519ac2-713c-48d9-8b27-664cc30e63f4',
+					elementId: '257c2add-61df-46b5-a6b9-d23691dcb830',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The biggest, most powerful version of Samsung’s S-line is the S10 5G and it’s huge with a 6.7in QHD+ AMOLED screen, long oval-shaped hole-punch notch for the selfie cameras, and four cameras on the back. Performance, software and battery are good, but it’s not as slick or ergonomic as the OnePlus 7 Pro 5G. The fingerprint scanner is a bit slow and can be frustrating to use.</p>',
-					elementId: '8b1d8ac3-e840-479b-ad03-f45973eb9091',
+					elementId: '67dfdd94-1468-4162-b394-863e8bd9c3b1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -5602,27 +6212,27 @@ export const NumberedList: CAPIArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>.',
-					elementId: '3b8e9815-3a04-408f-bad1-194f515f9212',
+					elementId: '3faa82e9-3848-49a9-8b3a-f24f0588119b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/aug/21/samsung-galaxy-s10-5g-review-bigger-faster-and-lasts-longer">Samsung Galaxy S10 5G review: bigger, faster and lasts longer</a></p></li> \n</ul>',
-					elementId: '986f1fa9-8d6b-4eba-ab26-c4c7af89480c',
+					elementId: '55b50540-2635-4e76-a6a0-8b3fd811f533',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Huawei Mate 20 Pro</strong></p>',
-					elementId: 'db4350aa-2d19-45ee-a835-eda712ab1baa',
+					elementId: 'ae25befb-0c7b-4ddb-a8d4-cd3a6d485c85',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP: </strong>£899.99</p>',
-					elementId: '3584f8a9-2033-48cb-bbd1-f4f775a22705',
+					elementId: '22579fd9-809a-4d8c-9e76-886693d05da9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★★</p>',
-					elementId: 'c1181b75-2203-4ddd-81e0-a63f7958edf8',
+					elementId: 'e94add48-2e73-461c-b58b-8c1316aaa579',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5871,38 +6481,70 @@ export const NumberedList: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=620&quality=85&auto=format&fit=max&s=805c5fbff7431f93dab075de73b6e477',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1900&quality=85&auto=format&fit=max&s=6496899d8b2b7bbfd9825c2f4052fb9d',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=8196c3ea81581d5d7bbafbbed70b40ad',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=68edd3807742afe63688dfdc5f262067',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=605&quality=85&auto=format&fit=max&s=00d68514d2e041127c46334a39da162f',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1300&quality=85&auto=format&fit=max&s=24cc0a4371e0d529f66c1062ed5590e2',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=5d893b9313b825bc3e78195a02e2dc8b',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=efa1af746b116072b25db31fd4d22911',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=445&quality=85&auto=format&fit=max&s=3b348d173cbe3eb2020f37e098832a72',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1140&quality=85&auto=format&fit=max&s=3aefface9a9b6b0dcb85f4d96d3b96e0',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=328f565150b50c0ed7caae86fccd9d1f',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=3a4a9879fe22959880722e105bade1fc',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=980&quality=85&auto=format&fit=max&s=c39deb0c30b8b91864a95d714d931816',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=a28222cfdb7ac268489eddfca0021d10',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=740&quality=85&auto=format&fit=max&s=86d48ee9119a7c58efa7e1deb7c13333',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=d7858f2b53f5b83104e725e59a31ad21',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=660&quality=85&auto=format&fit=max&s=48fa99d38d75df98560acd9270e88e08',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=4fc3d30ccd111d745196410c491e0700',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=480&quality=85&auto=format&fit=max&s=8611ff7cf1ad382f1b340bd69ce2b890',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/c4f31f22d1d4e9eb053a0aa6e6614437940920b8/732_0_2309_2309/master/2309.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=cd4a9f73b6e669a66d1db37dad13a392',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: '15be73c2-518c-4561-990b-31b80cc34144',
+					elementId: 'ff9f4601-7fe8-4664-8b32-c0bbb37ed864',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The Mate 20 Pro has the big, attractive 6.39in QHD+ screen, svelte body, long battery life and great performance that made it the top phone of 2018. However, its excellent triple camera system with 3x optical zoom has been outdone by Huawei’s newer P30 Pro, which has a Leica quad camera with 5x optical zoom. It recently received EMUI 10 (Android 10) and is worth looking out for deals, particularly if you want the 3D face unlock option.</p>',
-					elementId: '4f7b1898-7a46-436c-9c14-84edb8404d40',
+					elementId: '37d530ef-092e-426f-85f5-ac7a352253db',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -5915,27 +6557,27 @@ export const NumberedList: CAPIArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>.',
-					elementId: 'd54648c0-bd6e-4273-a4de-1521d099cfd4',
+					elementId: 'dcd4a5fe-8b5d-4c0d-8338-4f73a5a94002',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2018/oct/29/huawei-mate-20-pro-cutting-edge-brilliance-in-display-fingerprint-and-3d-face-scanning-triple-camera-long-battery-life">Huawei Mate 20 Pro review: cutting-edge brilliance</a></p></li> \n</ul>',
-					elementId: 'de40a1d1-5bd2-4381-bd2b-46431a2beb73',
+					elementId: '12a0af8b-fadd-4398-a539-4dea6fb9afcd',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Google Pixel 4 XL</strong></p>',
-					elementId: '92a1a605-dcc1-4584-b5d4-f9dc4b009611',
+					elementId: 'e198ed6c-898c-4098-8aa6-c841943f6795',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://store.google.com/gb/config/pixel_4">£829</a> / <a href="https://store.google.com/config/pixel_4">$899</a></p>',
-					elementId: '811f770d-47b9-4b7b-a93f-ddc387a76bc9',
+					elementId: 'a700c513-1f5e-4526-b8f8-d2f7a062e470',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★☆</p>',
-					elementId: '3d703993-c4f1-4de9-ae05-8311ad3297d2',
+					elementId: '998adf44-81e5-4956-9944-11984f5933a5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6174,38 +6816,70 @@ export const NumberedList: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=620&quality=85&auto=format&fit=max&s=e58069073e7562cc9fdd5a3487730b04',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1900&quality=85&auto=format&fit=max&s=46eb5f036bad8a63d5a966fb4eb065f4',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=3070dd72306dfe47d3ea790a0d446fa1',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=59e34eb4424d289ce9667a36cb5c464d',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=605&quality=85&auto=format&fit=max&s=771798cf9f2d9c0926cd4b52630c80a9',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1300&quality=85&auto=format&fit=max&s=dc89c011ee5d19f207866b72edcbe661',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=f6fd843aefe34ae5db01a5fefbb112c3',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=bb40548b8617c58295b00a0484c839b5',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=445&quality=85&auto=format&fit=max&s=d778ad245273ec7afbf8b2a5fbe136e9',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1140&quality=85&auto=format&fit=max&s=9586791926217a3620161ff359154529',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=373c340205a827095338704f6d9f29de',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=f139685957f49d6fbbe5e2244f8f3eff',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=980&quality=85&auto=format&fit=max&s=2bdffcefb94f4233ea0228f3fdc1a08b',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=babc4cac934d020052204f8adc37a288',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=740&quality=85&auto=format&fit=max&s=55e9c8c4c2f14fceca01612c77550b2e',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=b47d44826d12a72ce1623e50bafeef84',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=660&quality=85&auto=format&fit=max&s=6c9fe8abb3bfe69547c53aeaa5fd539b',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=8802c47ceb09f85d00c5bfde1906c847',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=480&quality=85&auto=format&fit=max&s=48df785f3806b1b9d35a83b316d44fe6',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/ce35f9eedf1f077938e26bf8a639ef8b58cf6c97/1235_503_2693_2695/master/2693.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=03ec494aa282da1795c90476925a2b51',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: '4852be15-51e5-4328-aaee-eef37afb57a6',
+					elementId: '9ef24a7b-837e-4c6d-9180-9c9df0e7085e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The Google Pixel 4 XL is a mixed bag. On the one hand you have a good-looking 6.3in QHD+ AMOLED display running at 90Hz, a stellar camera, new Soli radar gesture system, amazing new on-device AI and super-fast 3D Face Unlock. But on the other you have no fingerprint scanner, meaning until apps are updated to use the Face Unlock you’re forced back to using the old pin or password, the battery life is fairly short and there have been quite a few bugs that have needed fixing since launch. One day it might be great.</p>',
-					elementId: '0e380a27-e3ec-4e87-9921-480a635a261b',
+					elementId: 'ff9fb4f3-7d36-48a9-bbc1-abe090141b14',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -6218,27 +6892,27 @@ export const NumberedList: CAPIArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: '9d31a05f-3388-4c2f-9162-32ef0e5595a9',
+					elementId: '3f522423-e30f-463f-905b-70f1062deaa6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/oct/29/google-pixel-4-xl-review-not-quite-ready-for-primetime">Google Pixel 4 XL review: not quite ready for primetime</a></p></li> \n</ul>',
-					elementId: 'cf83fa9a-72d2-4909-b021-3549f1755562',
+					elementId: '5dd1156b-da0a-4baa-aa35-f387d1220bfa',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Xiaomi Mi Mix 3</strong></p>',
-					elementId: '262d9bad-f7cb-416a-ad59-af5f84438357',
+					elementId: '780e26e3-c480-47bb-b02c-5f48b005f831',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>RRP:</strong> <a href="https://buy.mi.com/uk/buy/product/mix3">£499</a></p>',
-					elementId: '5515cce5-aa89-48e7-b705-bd3f645e7fa0',
+					elementId: '29dce62a-efbc-4db2-9d2f-c440c55637b1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>★★★★☆</p>',
-					elementId: 'b5e6ee78-6b95-4c27-94d1-8292045f5860',
+					elementId: 'a6f667de-c09a-4c63-b2c8-440f2f1e4a09',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6487,43 +7161,75 @@ export const NumberedList: CAPIArticleType = {
 							weighting: 'immersive',
 							srcSet: [
 								{
-									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=620&quality=85&auto=format&fit=max&s=6405cc5360b28c13c57ff720a0dcbf83',
-									width: 620,
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1900&quality=85&auto=format&fit=max&s=17059ad70f9f7453f3e1253613d5a414',
+									width: 1900,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=620&quality=45&auto=format&fit=max&dpr=2&s=87952983329d86853791f47ade5bf818',
-									width: 1240,
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1900&quality=45&auto=format&fit=max&dpr=2&s=efb3e10477d3fa308a7e18fea6db2c31',
+									width: 3800,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=605&quality=85&auto=format&fit=max&s=a4f338e55da6c099f8f6fd40dd1ef386',
-									width: 605,
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1300&quality=85&auto=format&fit=max&s=9cf28c9dd25f68983f644b65308a5463',
+									width: 1300,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=605&quality=45&auto=format&fit=max&dpr=2&s=28ab6fd7de2c7016e3d9c759315ec52b',
-									width: 1210,
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1300&quality=45&auto=format&fit=max&dpr=2&s=2a6223b0c29eda3f576edad8939a8307',
+									width: 2600,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=445&quality=85&auto=format&fit=max&s=9c86c44b49e7f7560e556347548b98b9',
-									width: 445,
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1140&quality=85&auto=format&fit=max&s=f666bacda95a36974d29d2ffef26d6cf',
+									width: 1140,
 								},
 								{
-									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=445&quality=45&auto=format&fit=max&dpr=2&s=a94b8a2e0bc213ac904e8d99f22f20ee',
-									width: 890,
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=1140&quality=45&auto=format&fit=max&dpr=2&s=b8e756ec8a46538ccfe1fcc4a00149bb',
+									width: 2280,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=980&quality=85&auto=format&fit=max&s=80a308edfb70c13758dfce3a3c9c493b',
+									width: 980,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=980&quality=45&auto=format&fit=max&dpr=2&s=f0a2c36bf48a815ae40cbda51d521a94',
+									width: 1960,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=740&quality=85&auto=format&fit=max&s=0223ddfd4f7ab79e885eb6137113d45e',
+									width: 740,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=740&quality=45&auto=format&fit=max&dpr=2&s=341a1164f86d2943d9a96b1b7a830c28',
+									width: 1480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=660&quality=85&auto=format&fit=max&s=1ababbe281cb55df4590af64910cca83',
+									width: 660,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=660&quality=45&auto=format&fit=max&dpr=2&s=37868eb83520571571058aed3e9405e6',
+									width: 1320,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=480&quality=85&auto=format&fit=max&s=615d166c4d4fb7e45d4d78615ca1c657',
+									width: 480,
+								},
+								{
+									src: 'https://i.guim.co.uk/img/media/1126b8acae87d55a690592fdfa74478938561e5f/770_0_2302_2302/master/2302.jpg?width=480&quality=45&auto=format&fit=max&dpr=2&s=99600d6c63d2f0216b03300a9256a327',
+									width: 960,
 								},
 							],
 						},
 					],
-					elementId: 'fc453f46-b173-4b81-a70d-037d551e86d5',
+					elementId: '4483626a-0d99-4b5a-afc4-9c055d709c1a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Xiaomi’s first slider phone offers more than most for the money, with top-flight specs for 2018 competing directly with the OnePlus 6T and Honor View20. It takes a different approach to the problem of where to put the selfie camera in an all-screen design, hiding it behind the screen on slide-out section.</p>',
-					elementId: 'bdc090e9-b0f3-4f13-a501-a609d0b63b6d',
+					elementId: '67362ab4-fc1b-4df3-a478-9c4d23c872c9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Good, but quite as great as its competition, this huge phone is held back by a heavy weight and a software experience that just isn’t as good, despite solid gesture navigation options.</p>',
-					elementId: '408dc10b-d1cf-49bc-9811-a2cc326a6258',
+					elementId: '7f1b443f-8399-4be6-852f-b9b6456921e7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -6536,42 +7242,42 @@ export const NumberedList: CAPIArticleType = {
 					sourceDomain: 'm.skimresources.com',
 					caption:
 						'These regularly updated deals have been sourced through a third-party price comparison service. The Guardian may make a small commission if a reader clicks through and makes a purchase. <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links">More information</a>. ',
-					elementId: 'a9707faf-fe39-4ff9-97e6-136f3fcaa484',
+					elementId: '104db142-4e6e-42d2-b58f-e3abc8d751ba',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p><strong>Full review:</strong> <a href="https://www.theguardian.com/technology/2019/feb/27/xiaomi-mi-mix-3-review-novel-slider-finally-hits-the-uk">Xiaomi Mi Mix 3 review: novel slider finally hits the UK</a></p></li> \n</ul>',
-					elementId: 'e2a1e2ce-cfb1-422d-b7d0-a98a043d2271',
+					elementId: '8c38e1f9-82ea-4b99-8a44-9c26663c30ce',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Not recommended</h2>',
-					elementId: 'aebda421-1f5d-4375-99d1-fa77e2277654',
+					elementId: 'ce4ef214-22dc-457e-ac12-91bc92568fc3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Google Pixel 4</strong> - Great phone utterly ruined by <a href="https://www.theguardian.com/technology/2019/oct/31/google-pixel-4-review-battery-life-camera">terrible battery life</a> - £669</p>',
-					elementId: 'd8a7fbd3-0bc7-48e4-9cc8-4f7bd4d3f79e',
+					elementId: 'b329d344-c93f-4447-bc2a-3506b2d319b2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Razer Phone 2</strong> - Gaming phone beast that falls down on camera performance – £500</p>',
-					elementId: '955dc40a-148c-4c1b-bd46-e5400731629c',
+					elementId: '31d2ec7c-cd5c-4757-a3c6-c041bd503163',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Sony Xperia XZ3</strong> – Good, but not great phone that misses the mark – £699</p>',
-					elementId: '3c69cc4e-19d4-4eb8-a8c2-ee1c7ebdbb2b',
+					elementId: '1993e44e-4841-44af-b9b5-61638846d7d7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p><strong><a href="https://www.theguardian.com/technology/2019/may/01/best-true-wireless-earbuds-airpods-samsung-jabra-sennheiser-anker-compared-and-ranked">Best true wireless earbuds: AirPods, Samsung, Jabra and Anker compared and ranked</a></strong></p></li> \n</ul>',
-					elementId: '5a3ea142-ee55-4b85-963f-d325921aa57b',
+					elementId: '799e3a0f-3e3f-4941-ac71-bf1a4b4e9416',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.DisclaimerBlockElement',
 					html: '\n\n\n\n\n\n\n    <p><em><sup>\n        This article contains affiliate links, which means we may earn a small commission if a reader clicks through and\n        makes a purchase. All our journalism is independent and is in no way influenced by any advertiser or commercial initiative.\n        By clicking on an affiliate link, you accept that third-party cookies will be set.\n        <a href="https://www.theguardian.com/info/2017/nov/01/reader-information-on-affiliate-links" data-link-name="in body link" class="u-underline">More information</a>.\n    </sup></em></p>\n\n',
-					elementId: '6b3db124-1c6a-432c-b2ed-9bf5d5d982f9',
+					elementId: 'e40a0938-559c-4b0b-85e6-45fdb83f2d7f',
 				},
 			],
 			attributes: {

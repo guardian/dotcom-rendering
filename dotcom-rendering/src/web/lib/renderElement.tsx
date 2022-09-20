@@ -7,6 +7,7 @@ import {
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { getSharingUrls } from '../../lib/sharing-urls';
+import type { ServerSideTests, Switches } from '../../types/config';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
@@ -17,6 +18,7 @@ import { CommentBlockComponent } from '../components/CommentBlockComponent';
 import { DisclaimerBlockComponent } from '../components/DisclaimerBlockComponent';
 import { DividerBlockComponent } from '../components/DividerBlockComponent';
 import { DocumentBlockComponent } from '../components/DocumentBlockComponent.importable';
+import { EmailSignup } from '../components/EmailSignup';
 import { EmbedBlockComponent } from '../components/EmbedBlockComponent.importable';
 import { Figure } from '../components/Figure';
 import { GuideAtomWrapper } from '../components/GuideAtomWrapper.importable';
@@ -77,7 +79,9 @@ type Props = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	switches: { [key: string]: boolean };
+	switches: Switches;
+	isPinnedPost?: boolean;
+	abTests?: ServerSideTests;
 };
 
 // updateRole modifies the role of an element in a way appropriate for most
@@ -131,12 +135,17 @@ export const renderElement = ({
 	isAdFreeUser,
 	switches,
 	isSensitive,
+	isPinnedPost,
+	abTests,
 }: Props): [boolean, JSX.Element] => {
 	const palette = decidePalette(format);
 
 	const isBlog =
 		format.design === ArticleDesign.LiveBlog ||
 		format.design === ArticleDesign.DeadBlog;
+
+	const shouldLazyLoadInteractives =
+		!!abTests?.commercialEndOfQuarterMegaTestControl;
 
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
@@ -151,7 +160,7 @@ export const renderElement = ({
 						duration={element.duration}
 						pillar={format.theme}
 						contentIsNotSensitive={!isSensitive}
-						aCastisEnabled={switches.acast}
+						aCastisEnabled={!!switches.acast}
 						readerCanBeShownAds={!isAdFreeUser}
 					/>
 				</Island>,
@@ -185,7 +194,7 @@ export const renderElement = ({
 					credit={element.credit}
 					displayCredit={element.displayCredit}
 					shouldLimitWidth={element.shouldLimitWidth}
-					isOverlayed={element.isOverlayed}
+					isOverlaid={element.isOverlaid}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.ChartAtomBlockElement':
@@ -268,6 +277,7 @@ export const renderElement = ({
 							isMainMedia={isMainMedia}
 							source={element.source}
 							sourceDomain={element.sourceDomain}
+							isPinnedPost={isPinnedPost}
 						/>
 					</Island>,
 				];
@@ -384,7 +394,9 @@ export const renderElement = ({
 				true,
 				// Deferring interactives until CPU idle achieves the lowest Cumulative Layout Shift (CLS)
 				// For more information on the experiment we ran see: https://github.com/guardian/dotcom-rendering/pull/4942
-				<Island deferUntil="idle">
+				<Island
+					deferUntil={shouldLazyLoadInteractives ? 'visible' : 'idle'}
+				>
 					<InteractiveBlockComponent
 						url={element.url}
 						scriptUrl={element.scriptUrl}
@@ -436,7 +448,7 @@ export const renderElement = ({
 				true,
 				<VideoAtom
 					assets={element.assets}
-					poster={element.posterImage && element.posterImage[0].url}
+					poster={element.posterImage?.[0]?.url}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.MultiImageBlockElement':
@@ -447,6 +459,18 @@ export const renderElement = ({
 					key={index}
 					images={element.images}
 					caption={element.caption}
+				/>,
+			];
+		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
+			return [
+				true,
+				<EmailSignup
+					identityName={element.newsletter.identityName}
+					description={element.newsletter.description}
+					name={element.newsletter.name}
+					frequency={element.newsletter.frequency}
+					successDescription={element.newsletter.successDescription}
+					theme={element.newsletter.theme}
 				/>,
 			];
 		case 'model.dotcomrendering.pageElements.NumberedTitleBlockElement':
@@ -741,7 +765,7 @@ export const renderElement = ({
 						mediaTitle={element.mediaTitle}
 						altText={element.altText}
 						origin={host}
-						stickyVideos={isBlog && switches.stickyVideos}
+						stickyVideos={!!(isBlog && switches.stickyVideos)}
 					/>
 				</Island>,
 			];
@@ -789,6 +813,7 @@ export const RenderArticleElement = ({
 	isAdFreeUser,
 	isSensitive,
 	switches,
+	isPinnedPost,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -807,6 +832,7 @@ export const RenderArticleElement = ({
 		isAdFreeUser,
 		isSensitive,
 		switches,
+		isPinnedPost,
 	});
 
 	if (!ok) {
