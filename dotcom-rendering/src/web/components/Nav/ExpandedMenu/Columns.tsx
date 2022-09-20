@@ -135,25 +135,25 @@ const searchBar = css`
 const editionList: EditionLinkType[] = [
 	{
 		url: '/preference/edition/int',
-		id: 'INT',
+		editionId: 'INT',
 		longTitle: 'International edition',
 		title: 'International edition',
 	},
 	{
 		url: '/preference/edition/au',
-		id: 'UK',
+		editionId: 'UK',
 		longTitle: 'UK edition',
 		title: 'UK edition',
 	},
 	{
 		url: '/preference/edition/us',
-		id: 'US',
+		editionId: 'US',
 		longTitle: 'US edition',
 		title: 'US edition',
 	},
 	{
 		url: '/preference/edition/au',
-		id: 'AU',
+		editionId: 'AU',
 		longTitle: 'Australia edition',
 		title: 'AU edition',
 	},
