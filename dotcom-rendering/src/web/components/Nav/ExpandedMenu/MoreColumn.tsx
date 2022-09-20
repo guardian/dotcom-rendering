@@ -13,7 +13,7 @@ import TwitterIconPadded from '../../../../static/icons/twitter-padded.svg';
 
 const pillarHeight = 42;
 
-export const hideDesktop = css`
+const hideDesktop = css`
 	${from.desktop} {
 		display: none;
 	}

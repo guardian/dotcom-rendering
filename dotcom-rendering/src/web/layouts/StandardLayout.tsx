@@ -761,6 +761,8 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.pageType
 													.isPaidContent
 											}
+											format={format}
+											editionId={CAPIArticle.editionId}
 										/>
 									)}
 									{!isPaidContent ? (

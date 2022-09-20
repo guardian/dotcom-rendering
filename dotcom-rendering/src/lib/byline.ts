@@ -25,11 +25,14 @@ export const getSoleContributor = (
 	if (!byline) return undefined;
 	if (byline.includes(' and ')) return undefined;
 
-	const soleContributor = tags
+	const [firstContributor, otherContributor] = tags
 		.filter(isContributor)
-		.find(({ title }) => byline.includes(title));
+		.filter(({ title }) => byline.includes(title));
 
-	return soleContributor;
+	// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- we don’t have unchecked indexed access
+	if (otherContributor) return undefined;
+
+	return firstContributor;
 };
 
 export const getContributorTagsForToken = (

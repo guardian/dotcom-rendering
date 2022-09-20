@@ -15,11 +15,11 @@ import { navInputCheckboxId } from './Nav/config';
 
 // CSS Vars
 
-export const firstPillarWidth = 171;
-export const pillarWidth = 160;
-export const preLeftColFirstPillarWidth = 144;
-export const preLeftColPillarWidth = 134;
-export const preDesktopPillarWidth = 'auto';
+const firstPillarWidth = 171;
+const pillarWidth = 160;
+const preLeftColFirstPillarWidth = 144;
+const preLeftColPillarWidth = 134;
+const preDesktopPillarWidth = 'auto';
 
 // CSS
 const pillarsStyles = (display: ArticleDisplay) => css`
@@ -274,7 +274,6 @@ export const Pillars: React.FC<{
 							showDivider && pillarDivider,
 						]}
 						id={isTopNav && i === 0 ? 'navigation' : undefined}
-						aria-label={i === 0 ? 'Navigation' : undefined}
 						href={p.url}
 						data-link-name={`${dataLinkName} : primary : ${p.title}`}
 					>

@@ -15,7 +15,7 @@ import type {
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS
-export const hideDesktop = css`
+const hideDesktop = css`
 	${from.desktop} {
 		display: none;
 	}
