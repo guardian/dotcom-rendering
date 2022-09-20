@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type {
@@ -20,7 +21,6 @@ import type { Item } from 'item';
 import { getFormat } from 'item';
 import { maybeRender } from 'lib';
 import type { FC, ReactNode } from 'react';
-import { getThemeStyles } from 'themeStyles';
 import EditionsAvatar from '../avatar';
 import ShareIcon from '../shareIcon';
 import {
@@ -143,7 +143,7 @@ const standardTextStyles = (
 `;
 
 const bylinePrimaryStyles = (format: ArticleFormat): SerializedStyles => {
-	const { kicker: kickerColor } = getThemeStyles(format.theme);
+	const kickerColor = text.editionsKicker(format);
 	const color = ignoreTextColour(format) ? neutral[100] : kickerColor;
 
 	if (
@@ -263,7 +263,7 @@ const ignoreTextColour = (format: ArticleFormat): boolean =>
 
 const Byline: FC<Props> = ({ item, shareIcon = true }) => {
 	const format = getFormat(item);
-	const { kicker: kickerColor } = getThemeStyles(format.theme);
+	const kickerColor = text.editionsKicker(format);
 
 	const iconColor = ignoreIconColour(format) ? neutral[100] : kickerColor;
 	const showShareIcon = hasShareIcon(format) && shareIcon;

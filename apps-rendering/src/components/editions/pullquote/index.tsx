@@ -1,5 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, headline } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
@@ -7,13 +8,12 @@ import type { Option } from '@guardian/types';
 import { map, withDefault } from '@guardian/types';
 import { pipe } from 'lib';
 import type { FC, ReactNode } from 'react';
-import { getThemeStyles } from 'themeStyles';
 
 export const pullquoteWidth = '10.875rem';
 const pullquoteTailSize = '1.5rem';
 
 const styles = (format: ArticleFormat): SerializedStyles => {
-	const { kicker } = getThemeStyles(format.theme);
+	const kicker = text.editionsKicker(format);
 	return css`
 		width: ${pullquoteWidth};
 		position: relative;
@@ -60,7 +60,7 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 };
 
 const quoteStyles = (format: ArticleFormat): SerializedStyles => {
-	const { kicker } = getThemeStyles(format.theme);
+	const kicker = text.editionsKicker(format);
 
 	return css`
 		margin: 0;
