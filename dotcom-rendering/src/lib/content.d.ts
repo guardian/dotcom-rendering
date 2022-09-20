@@ -788,4 +788,5 @@ type Newsletter = {
 	successDescription: string;
 	theme: string;
 	group: string;
+	regionFocus?: string;
 };
