@@ -2,12 +2,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { ShadyPie } from './ShadyPie';
 
-const defaultFormat: ArticleFormat = {
-	theme: ArticlePillar.News,
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-};
-
 const labsFormat: ArticleFormat = {
 	theme: ArticlePillar.Lifestyle,
 	design: ArticleDesign.Standard,
@@ -22,7 +16,7 @@ export default {
 export const Default = () => {
 	return (
 		<div style={{ width: '300px' }}>
-			<ShadyPie format={defaultFormat} editionId={'UK'} />
+			<ShadyPie />
 		</div>
 	);
 };
