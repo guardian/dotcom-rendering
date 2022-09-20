@@ -14,7 +14,7 @@ export const signInGateMandatoryLongTestRunUk: ABTest = {
 	description:
 		'Test run for long mandatory test - Show sign in gate to global users on 3rd article view of simple article templates, with higher priority over banners and epic.',
 	audience: 0.0025,
-	audienceOffset: 0.89,
+	audienceOffset: 0.89, // 890001 - 892500
 	successMeasure: 'Users sign in or create a Guardian account',
 	audienceCriteria:
 		'Global, 3rd article of the day, lower priority than consent banner, simple articles (not gallery, live etc.), not signed in, not shown after dismiss, not on help, info sections etc. Exclude iOS 9 and guardian-live-australia. Suppresses other banners, and appears over epics',
@@ -22,17 +22,18 @@ export const signInGateMandatoryLongTestRunUk: ABTest = {
 	idealOutcome:
 		'Increase the number of users signed in whilst running at a reasonable scale',
 	showForSensitive: false,
-	canRun: () =>
-		['GB'].includes(getCountryCodeSync() ?? '') &&
-		setOrUseParticipations(
-			setParticipationsFlag,
-			'SignInGateMandatoryLongTestRunUk', // test id
-			'mandatory-long-testrun-uk', // variant id - can only be used for single variant test
-		),
+	canRun: () => true,
 	variants: [
 		{
 			id: 'mandatory-long-testrun-uk',
 			test: (): void => {},
+			canRun: () =>
+				['GB'].includes(getCountryCodeSync() ?? '') &&
+				setOrUseParticipations(
+					setParticipationsFlag,
+					'SignInGateMandatoryLongTestRunUk', // test id
+					'mandatory-long-testrun-uk', // variant id - can only be used for single variant test
+				),
 		},
 	],
 };
@@ -45,7 +46,7 @@ export const signInGateMandatoryLongTestRunNa: ABTest = {
 	description:
 		'Test run for long mandatory test - Show sign in gate to global users on 3rd article view of simple article templates, with higher priority over banners and epic.',
 	audience: 0.0025,
-	audienceOffset: 0.8925,
+	audienceOffset: 0.8925, // 892501 - 895000
 	successMeasure: 'Users sign in or create a Guardian account',
 	audienceCriteria:
 		'Global, 3rd article of the day, lower priority than consent banner, simple articles (not gallery, live etc.), not signed in, not shown after dismiss, not on help, info sections etc. Exclude iOS 9 and guardian-live-australia. Suppresses other banners, and appears over epics',
@@ -53,17 +54,18 @@ export const signInGateMandatoryLongTestRunNa: ABTest = {
 	idealOutcome:
 		'Increase the number of users signed in whilst running at a reasonable scale',
 	showForSensitive: false,
-	canRun: () =>
-		['US', 'CA'].includes(getCountryCodeSync() ?? '') &&
-		setOrUseParticipations(
-			setParticipationsFlag,
-			'SignInGateMandatoryLongTestRunNa', // test id
-			'mandatory-long-testrun-na', // variant id - can only be used for single variant test
-		),
+	canRun: () => true,
 	variants: [
 		{
 			id: 'mandatory-long-testrun-na',
 			test: (): void => {},
+			canRun: () =>
+				['US', 'CA'].includes(getCountryCodeSync() ?? '') &&
+				setOrUseParticipations(
+					setParticipationsFlag,
+					'SignInGateMandatoryLongTestRunNa', // test id
+					'mandatory-long-testrun-na', // variant id - can only be used for single variant test
+				),
 		},
 	],
 };
@@ -76,7 +78,7 @@ export const signInGateMandatoryLongTestRunAunz: ABTest = {
 	description:
 		'Test run for long mandatory test - Show sign in gate to global users on 3rd article view of simple article templates, with higher priority over banners and epic.',
 	audience: 0.0025,
-	audienceOffset: 0.895,
+	audienceOffset: 0.895, // 895001 - 897500
 	successMeasure: 'Users sign in or create a Guardian account',
 	audienceCriteria:
 		'Global, 3rd article of the day, lower priority than consent banner, simple articles (not gallery, live etc.), not signed in, not shown after dismiss, not on help, info sections etc. Exclude iOS 9 and guardian-live-australia. Suppresses other banners, and appears over epics',
@@ -84,17 +86,18 @@ export const signInGateMandatoryLongTestRunAunz: ABTest = {
 	idealOutcome:
 		'Increase the number of users signed in whilst running at a reasonable scale',
 	showForSensitive: false,
-	canRun: () =>
-		['AU', 'NZ'].includes(getCountryCodeSync() ?? '') &&
-		setOrUseParticipations(
-			setParticipationsFlag,
-			'SignInGateMandatoryLongTestRunAunz', // test id
-			'mandatory-long-testrun-aunz', // variant id - can only be used for single variant test
-		),
+	canRun: () => true,
 	variants: [
 		{
 			id: 'mandatory-long-testrun-aunz',
 			test: (): void => {},
+			canRun: () =>
+				['AU', 'NZ'].includes(getCountryCodeSync() ?? '') &&
+				setOrUseParticipations(
+					setParticipationsFlag,
+					'SignInGateMandatoryLongTestRunAunz', // test id
+					'mandatory-long-testrun-aunz', // variant id - can only be used for single variant test
+				),
 		},
 	],
 };
@@ -161,7 +164,7 @@ export const signInGateMandatoryLongTestRunEu: ABTest = {
 	description:
 		'Test run for long mandatory test - Show sign in gate to global users on 3rd article view of simple article templates, with higher priority over banners and epic.',
 	audience: 0.0025,
-	audienceOffset: 0.8975,
+	audienceOffset: 0.8975, // 897501 - 900000
 	successMeasure: 'Users sign in or create a Guardian account',
 	audienceCriteria:
 		'Global, 3rd article of the day, lower priority than consent banner, simple articles (not gallery, live etc.), not signed in, not shown after dismiss, not on help, info sections etc. Exclude iOS 9 and guardian-live-australia. Suppresses other banners, and appears over epics',
@@ -169,17 +172,18 @@ export const signInGateMandatoryLongTestRunEu: ABTest = {
 	idealOutcome:
 		'Increase the number of users signed in whilst running at a reasonable scale',
 	showForSensitive: false,
-	canRun: () =>
-		[...EuropeList].includes(getCountryCodeSync() ?? '') &&
-		setOrUseParticipations(
-			setParticipationsFlag,
-			'SignInGateMandatoryLongTestRunEu', // test id
-			'mandatory-long-testrun-eu', // variant id - can only be used for single variant test
-		),
+	canRun: () => true,
 	variants: [
 		{
 			id: 'mandatory-long-testrun-eu',
 			test: (): void => {},
+			canRun: () =>
+				[...EuropeList].includes(getCountryCodeSync() ?? '') &&
+				setOrUseParticipations(
+					setParticipationsFlag,
+					'SignInGateMandatoryLongTestRunEu', // test id
+					'mandatory-long-testrun-eu', // variant id - can only be used for single variant test
+				),
 		},
 	],
 };
