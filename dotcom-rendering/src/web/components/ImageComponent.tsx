@@ -12,6 +12,8 @@ import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Caption } from './Caption';
 import { Hide } from './Hide';
+import { Island } from './Island';
+import { Lightbox } from './Lightbox.importable';
 import { Picture } from './Picture';
 import { StarRating } from './StarRating/StarRating';
 
@@ -301,6 +303,9 @@ export const ImageComponent = ({
 					}
 				`}
 			>
+				<Island deferUntil="interaction">
+					<Lightbox />
+				</Island>
 				<Picture
 					role={role}
 					format={format}
@@ -332,6 +337,9 @@ export const ImageComponent = ({
 					}
 				`}
 			>
+				<Island deferUntil="interaction">
+					<Lightbox />
+				</Island>
 				<Picture
 					role={role}
 					format={format}
@@ -366,6 +374,9 @@ export const ImageComponent = ({
 					}
 				`}
 			>
+				<Island deferUntil="interaction">
+					<Lightbox />
+				</Island>
 				<Picture
 					role={role}
 					format={format}

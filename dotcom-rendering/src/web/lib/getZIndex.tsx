@@ -23,6 +23,7 @@
  */
 const indices = [
 	// Modals will go here at the top
+	'lightbox',
 
 	// Sticky video and button need to be above everything
 	'sticky-video-button',

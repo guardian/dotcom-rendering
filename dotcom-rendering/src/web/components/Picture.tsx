@@ -8,7 +8,7 @@ import React from 'react';
  * Working on this file? Checkout out 027-pictures.md & 029-signing-image-urls.md for background information & context
  **/
 
-type Props = {
+export type Props = {
 	role: RoleType;
 	format: ArticleFormat;
 	master: string;
@@ -17,6 +17,7 @@ type Props = {
 	width: string;
 	isMainMedia?: boolean;
 	isLazy?: boolean;
+	isLightBox?: boolean;
 };
 
 type ImageWidthType = { breakpoint: number; width: number };
@@ -38,12 +39,25 @@ type ImageWidthType = { breakpoint: number; width: number };
 const decideImageWidths = ({
 	role,
 	isMainMedia,
+	isLightBox,
 	format,
 }: {
 	role: RoleType;
 	isMainMedia?: boolean;
+	isLightBox?: boolean;
 	format: ArticleFormat;
 }): ImageWidthType[] => {
+	if (isLightBox) {
+		return [
+			{ breakpoint: breakpoints.mobile, width: 480 },
+			{ breakpoint: breakpoints.mobileLandscape, width: 660 },
+			{ breakpoint: breakpoints.phablet, width: 740 },
+			{ breakpoint: breakpoints.tablet, width: 980 },
+			{ breakpoint: breakpoints.desktop, width: 1140 },
+			{ breakpoint: breakpoints.leftCol, width: 1300 },
+			{ breakpoint: breakpoints.wide, width: 1900 },
+		];
+	}
 	if (isMainMedia) {
 		switch (format.display) {
 			case ArticleDisplay.Immersive: {
@@ -238,8 +252,14 @@ export const Picture = ({
 	width,
 	isMainMedia = false,
 	isLazy = true,
+	isLightBox = false,
 }: Props) => {
-	const imageWidths = decideImageWidths({ role, format, isMainMedia });
+	const imageWidths = decideImageWidths({
+		role,
+		format,
+		isMainMedia,
+		isLightBox,
+	});
 	const sources = imageWidths
 		.slice()
 		.sort(descendingByBreakpoint)

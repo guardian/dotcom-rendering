@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { log } from '@guardian/libs';
-import type { Attributes } from 'preact';
 import { h, hydrate, render } from 'preact';
 import { initPerf } from '../initPerf';
 
@@ -17,7 +16,7 @@ import { initPerf } from '../initPerf';
  */
 export const doHydration = (
 	name: string,
-	data: Attributes | null,
+	data: { [key: string]: unknown } | null,
 	element: HTMLElement,
 ): void => {
 	// If this function has already been run for an element then don't try to

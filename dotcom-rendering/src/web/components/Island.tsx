@@ -2,7 +2,7 @@
 
 import { Placeholder } from './Placeholder';
 
-type When = 'idle' | 'visible';
+type When = 'idle' | 'visible' | 'interaction';
 
 interface HydrateProps {
 	deferUntil?: When;
@@ -20,13 +20,21 @@ interface ClientOnlyProps {
 	expediteLoading?: boolean;
 }
 
+interface InteractionProps {
+	deferUntil: 'interaction';
+	clientOnly?: false;
+	placeholderHeight?: never;
+	children: JSX.Element;
+	expediteLoading?: false;
+}
+
 /**
  * Props
  *
  * We use a union type here to support conditional typing. This means you
  * can only supply placeholderHeight if clientOnly is true.
  */
-type Props = HydrateProps | ClientOnlyProps;
+type Props = HydrateProps | ClientOnlyProps | InteractionProps;
 
 const decideChildren = (
 	children: JSX.Element,

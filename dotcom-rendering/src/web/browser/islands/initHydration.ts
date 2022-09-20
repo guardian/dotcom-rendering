@@ -1,6 +1,7 @@
 import { doHydration } from './doHydration';
 import { getName } from './getName';
 import { getProps } from './getProps';
+import { onInteraction } from './onInteraction';
 import { whenIdle } from './whenIdle';
 import { whenVisible } from './whenVisible';
 
@@ -33,6 +34,12 @@ export const initHydration = (elements: NodeListOf<Element>): void => {
 				}
 				case 'visible': {
 					whenVisible(element, () => {
+						doHydration(name, props, element);
+					});
+					break;
+				}
+				case 'interaction': {
+					onInteraction(element, () => {
 						doHydration(name, props, element);
 					});
 					break;
