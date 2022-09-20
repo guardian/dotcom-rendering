@@ -7,6 +7,7 @@ import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
 import { InteractiveLayout } from './InteractiveLayout';
 import { LiveLayout } from './LiveLayout';
+import { NewsletterSignupLayout } from './NewsletterSignupLayout';
 import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
 
@@ -111,6 +112,25 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				case ArticleDesign.Letter:
 					return (
 						<CommentLayout
+							CAPIArticle={CAPIArticle}
+							NAV={NAV}
+							format={format}
+						/>
+					);
+				case ArticleDesign.NewsletterSignup:
+					// eslint and prettier have an argument if I use the switch directly in the ternary operator
+					// This is a compromise where eslint gives me a warning over an error
+					const showSignupLayout =
+						CAPIArticle.config.switches.newsletterSignupLayout;
+
+					return showSignupLayout ? (
+						<NewsletterSignupLayout
+							CAPIArticle={CAPIArticle}
+							NAV={NAV}
+							format={format}
+						/>
+					) : (
+						<StandardLayout
 							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}

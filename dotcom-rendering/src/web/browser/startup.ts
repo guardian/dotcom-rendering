@@ -1,9 +1,5 @@
 import { initPerf } from './initPerf';
 
-export interface Reporter {
-	report: (err: Error, tags: { [key: string]: string }) => void;
-}
-
 const measure = (name: string, task: () => Promise<void>): void => {
 	const { start, end } = initPerf(name);
 

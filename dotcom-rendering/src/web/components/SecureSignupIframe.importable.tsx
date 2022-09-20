@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { OphanAction } from '@guardian/libs';
 import { neutral, space, until } from '@guardian/source-foundations';
 import {
 	Button,
@@ -11,7 +12,6 @@ import {
 import type { ReactEventHandler } from 'react';
 import { useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import type { OphanAction } from '../browser/ophan/ophan';
 import {
 	getOphanRecordFunction,
 	submitComponentEvent,
@@ -28,6 +28,7 @@ const isServer = typeof window === 'undefined';
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 
 type Props = {
+	name: string;
 	styles: string;
 	html: string;
 	newsletterId: string;
@@ -171,6 +172,7 @@ const sendTracking = (
 };
 
 export const SecureSignupIframe = ({
+	name,
 	styles,
 	html,
 	newsletterId,
@@ -329,6 +331,7 @@ export const SecureSignupIframe = ({
 	return (
 		<>
 			<iframe
+				title={`Sign up to ${name}`}
 				ref={iframeRef}
 				css={css`
 					width: 100%;
