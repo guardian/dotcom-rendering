@@ -37,7 +37,7 @@
     "@creditkarma/thrift-server-core": "^0.16.1",
     "@emotion/jest": "^11.10.0",
     "@guardian/apps-rendering-api-models": "^1.1.0",
-    "@guardian/atoms-rendering": "^23.5.0",
+    "@guardian/atoms-rendering": "^23.6.0",
     "@guardian/bridget": "^1.11.0",
     "@guardian/cdk": "^47.3.3",
     "@guardian/content-api-models": "^17.3.0",
