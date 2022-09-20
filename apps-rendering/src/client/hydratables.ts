@@ -2,7 +2,6 @@ import { createElement, Fragment, VFC } from 'react';
 
 export type Hydrateable = {
 	containerClassName: string;
-	renderInnerComponent: { (container: Element): React.ReactElement };
 	needsInlineStyles: boolean;
 };
 

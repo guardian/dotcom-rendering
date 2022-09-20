@@ -36,7 +36,10 @@ import ReactDOM from 'react-dom';
 import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
-import { hydratablesComponentList } from './hydratablesComponentList';
+import {
+	newsletterSignupContainerClassName,
+	renderNewsletterSignupInner,
+} from 'components/NewsletterSignup';
 
 // ----- Run ----- //
 
@@ -448,16 +451,13 @@ function hydrateClickToView(): void {
 		);
 }
 
-function hydrateHydratables(): void {
-	hydratablesComponentList.forEach((hydratable) => {
-		const { renderInnerComponent, containerClassName } = hydratable;
-		document
-			.querySelectorAll(`.${containerClassName}`)
-			.forEach((container) => {
-				const component = renderInnerComponent(container);
-				ReactDOM.hydrate(component, container);
-			});
-	});
+function hydrateNewsletterSignup(): void {
+	document
+		.querySelectorAll(`.${newsletterSignupContainerClassName}`)
+		.forEach((container) => {
+			const component = renderNewsletterSignupInner(container);
+			ReactDOM.hydrate(component, container);
+		});
 }
 
 const isIframe = (elem: Element): elem is HTMLIFrameElement =>
@@ -489,4 +489,4 @@ initAudioAtoms();
 hydrateAtoms();
 richLinks();
 hydrateClickToView();
-hydrateHydratables();
+hydrateNewsletterSignup();
