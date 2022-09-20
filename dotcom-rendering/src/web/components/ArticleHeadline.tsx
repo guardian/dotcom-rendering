@@ -26,7 +26,6 @@ type Props = {
 	hasStarRating?: boolean;
 	hasAvatar?: boolean;
 	isMatch?: boolean;
-	isMainMediaTest?: boolean;
 };
 
 const curly = (x: any) => x;
@@ -342,7 +341,6 @@ export const ArticleHeadline = ({
 	hasStarRating,
 	hasAvatar,
 	isMatch,
-	isMainMediaTest,
 }: Props) => {
 	const palette = decidePalette(format);
 
@@ -730,12 +728,8 @@ export const ArticleHeadline = ({
 											? labsFont
 											: standardFont,
 										css`
-											color: ${isMatch
-												? palette.text.headlineWhenMatch
-												: palette.text.headline};
-											padding-bottom: ${isMainMediaTest
-												? '32'
-												: space[9]}px;
+											color: ${isMatch ? palette.text.headlineWhenMatch : palette.text.headline};
+											padding-bottom: space[9]}px;
 										`,
 									]}
 								>

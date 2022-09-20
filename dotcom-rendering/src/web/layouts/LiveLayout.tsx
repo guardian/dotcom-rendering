@@ -300,9 +300,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	 */
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
-	const isMainMediaTest =
-		CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant ===
-		'variant';
+	const isMainMediaTest = true;
+	// CAPIArticle.config.abTests.LiveBlogMainMediaPositionVariant ===
+	// 'variant';
 
 	return (
 		<>
@@ -518,7 +518,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												!!CAPIArticle.starRating ||
 												CAPIArticle.starRating === 0
 											}
-											isMainMediaTest={isMainMediaTest}
 										/>
 									)}
 								</div>
