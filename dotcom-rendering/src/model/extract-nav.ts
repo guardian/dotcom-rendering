@@ -15,7 +15,7 @@ export interface LinkType extends BaseLinkType {
 	more?: boolean;
 }
 
-interface EditionLinkType extends LinkType {
+export interface EditionLinkType extends LinkType {
 	editionId: EditionId;
 }
 
@@ -110,14 +110,4 @@ export const extractNAV = (data: CAPINavType): NavType => {
 			: undefined,
 		readerRevenueLinks: buildRRLinkModel(data),
 	};
-};
-
-export type {
-	SimpleNavType,
-	NavType,
-	PillarType,
-	BaseLinkType,
-	SubNavType,
-	LinkType,
-	EditionLinkType,
 };
