@@ -2784,10 +2784,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^23.5.0":
-  version "23.5.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-23.5.0.tgz#3f4a434a9932cfa3c28712432ae1122285d9f628"
-  integrity sha512-LQkgg1rQugbdVBVc/7EHXNQ5BOuMB8FqY3l+on1/vS0tB234WwmhfHIotK1wdWStBrG41Tezy9yOfjltau4Uzg==
+"@guardian/atoms-rendering@^23.6.0":
+  version "23.6.0"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-23.6.0.tgz#624dc68120f00d47f21bae0ca059f31e65f56f59"
+  integrity sha512-GMeDnvEXXXtSu1YvBvm9UO015GS2OhR9tog/ebMXWJ+Y8qfW35OrniualVtLRxwmuTU3Bs5bM1kShKBU8P7yGQ==
   dependencies:
     is-mobile "^3.1.1"
 
