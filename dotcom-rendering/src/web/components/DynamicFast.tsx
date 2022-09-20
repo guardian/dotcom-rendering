@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { until } from '@guardian/source-foundations';
+import { space, until } from '@guardian/source-foundations';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
@@ -161,7 +161,7 @@ const FirstBigBoostedPlusBig = ({
 		flex-direction: column;
 		flex-basis: 50%;
 		flex-grow: 1;
-		row-gap: 12px;
+		row-gap: ${space[3]}px;
 		${until.tablet} {
 			flex-basis: 100%;
 		}
@@ -179,7 +179,7 @@ const FirstBigBoostedPlusBig = ({
 				display: flex;
 				flex-basis: 100%;
 				flex-wrap: wrap;
-				row-gap: 10px;
+				row-gap: ${space[3]}px;
 			`}
 		>
 			<ul css={[manualUlStyles, verticalDivider]}>
