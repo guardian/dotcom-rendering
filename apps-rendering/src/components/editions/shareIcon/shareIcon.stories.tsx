@@ -7,7 +7,6 @@ import { ArticlePillar } from '@guardian/libs';
 import { withKnobs } from '@storybook/addon-knobs';
 import { article } from 'fixtures/item';
 import type { ReactElement } from 'react';
-// import { selectPillar } from 'storybookHelpers';
 import { selectPillar } from 'storybookHelpers';
 import ShareIcon from '.';
 
