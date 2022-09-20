@@ -34,6 +34,28 @@ const spaces = / /g;
 const ophanComponentId = (name: string) =>
 	name.toLowerCase().replace(spaces, '-');
 
+const shouldInsertMerchHigh = (
+	index: number,
+	isNetworkFront: boolean,
+	collectionCount: number,
+	isPaidContent: boolean,
+) => {
+	const minContainers = isPaidContent ? 1 : 2;
+	if (collectionCount < minContainers) {
+		return false;
+	}
+	let desiredPosition;
+	if (collectionCount < 4) {
+		desiredPosition = 2;
+	} else if (isNetworkFront) {
+		desiredPosition = 5;
+	} else {
+		desiredPosition = 4;
+	}
+
+	return index === desiredPosition;
+};
+
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
 		config: { isPaidContent },
@@ -217,32 +239,52 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					}
 
 					return (
-						<Section
-							key={collection.id}
-							title={collection.displayName}
-							showTopBorder={index > 0}
-							padContent={false}
-							centralBorder="partial"
-							url={collection.href}
-							ophanComponentLink={ophanComponentLink}
-							ophanComponentName={ophanName}
-							containerName={collection.collectionType}
-							containerPalette={collection.containerPalette}
-							toggleable={true}
-							sectionId={collection.id}
-							showDateHeader={collection.config.showDateHeader}
-							editionId={front.editionId}
-							treats={collection.treats}
-						>
-							<DecideContainer
-								trails={trails}
-								index={index}
-								groupedTrails={collection.grouped}
-								containerType={collection.collectionType}
+						<>
+							<Section
+								key={collection.id}
+								title={collection.displayName}
+								showTopBorder={index > 0}
+								padContent={false}
+								centralBorder="partial"
+								url={collection.href}
+								ophanComponentLink={ophanComponentLink}
+								ophanComponentName={ophanName}
+								containerName={collection.collectionType}
 								containerPalette={collection.containerPalette}
-								showAge={collection.displayName === 'Headlines'}
-							/>
-						</Section>
+								toggleable={true}
+								sectionId={collection.id}
+								showDateHeader={
+									collection.config.showDateHeader
+								}
+								editionId={front.editionId}
+								treats={collection.treats}
+							>
+								<DecideContainer
+									trails={trails}
+									index={index}
+									groupedTrails={collection.grouped}
+									containerType={collection.collectionType}
+									containerPalette={
+										collection.containerPalette
+									}
+									showAge={
+										collection.displayName === 'Headlines'
+									}
+								/>
+							</Section>
+							{shouldInsertMerchHigh(
+								index,
+								front.pressedPage.isNetworkFront,
+								front.pressedPage.collections.length,
+								front.pressedPage.frontProperties.isPaidContent,
+							) && (
+								<AdSlot
+									data-print-layout="hide"
+									position="merchandising-high"
+									display={format.display}
+								/>
+							)}
+						</>
 					);
 				})}
 			</main>
