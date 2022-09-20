@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import { Card25_Card25_Card25_Card25 } from '../lib/slices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -106,45 +107,6 @@ const Card75_Card25 = ({
 					showAge={showAge}
 				/>
 			</LI>
-		</UL>
-	);
-};
-
-const Card25_Card25_Card25_Card25 = ({
-	cards,
-	containerPalette,
-	showAge,
-	showImage = true,
-	padBottom,
-}: {
-	cards: TrailType[];
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-	showImage?: boolean;
-	padBottom?: boolean;
-}) => {
-	return (
-		<UL direction="row" padBottom={padBottom}>
-			{cards.map((card, cardIndex) => {
-				return (
-					<LI
-						key={card.url}
-						padSides={true}
-						padBottom={false}
-						padBottomOnMobile={cardIndex < cards.length - 1}
-						showDivider={true}
-					>
-						<FrontCard
-							trail={card}
-							containerPalette={containerPalette}
-							containerType="dynamic/package"
-							showAge={showAge}
-							supportingContent={card.supportingContent}
-							imageUrl={showImage ? card.image : undefined}
-						/>
-					</LI>
-				);
-			})}
 		</UL>
 	);
 };

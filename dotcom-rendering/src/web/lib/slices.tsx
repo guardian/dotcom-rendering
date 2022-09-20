@@ -254,6 +254,49 @@ export const Card50_Card25_Card25 = ({
 	</UL>
 );
 
+/* .________.________.________.________.
+ * |########|########|########|########|
+ * |        |        |        |        |
+ * |________|________|________|________|
+ */
+export const Card25_Card25_Card25_Card25 = ({
+	cards,
+	containerPalette,
+	showAge,
+	showImage = true,
+	padBottom,
+}: {
+	cards: TrailType[];
+	containerPalette?: DCRContainerPalette;
+	showAge?: boolean;
+	showImage?: boolean;
+	padBottom?: boolean;
+}) => {
+	return (
+		<UL direction="row" padBottom={padBottom}>
+			{cards.map((card, cardIndex) => {
+				return (
+					<LI
+						key={card.url}
+						padSides={true}
+						padBottom={false}
+						padBottomOnMobile={cardIndex < cards.length - 1}
+						showDivider={true}
+					>
+						<FrontCard
+							trail={card}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							supportingContent={card.supportingContent}
+							imageUrl={showImage ? card.image : undefined}
+						/>
+					</LI>
+				);
+			})}
+		</UL>
+	);
+};
+
 /* ._________________________._________.
  * |         ################|#########|
  * |         ################|#########|
