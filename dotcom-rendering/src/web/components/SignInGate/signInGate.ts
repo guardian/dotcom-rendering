@@ -9,9 +9,6 @@ import { signInGateComponent as gateMainControl } from './gates/main-control';
 import { signInGateComponent as gateMainVariant } from './gates/main-variant';
 import type { SignInGateTestMap } from './types';
 
-// component name, should always be sign-in-gate
-export const componentName = 'sign-in-gate';
-
 /* When adding a new test, you need to add the test name to the tests array below,
    and add a entry for each variant that maps it to a SignInGateComponent in
    signInGateTestVariantToGateMapping, and in turn match each test id to an component
