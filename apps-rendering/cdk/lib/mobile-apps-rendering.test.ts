@@ -9,9 +9,9 @@ describe('The MobileAppsRendering stack', () => {
 			stack: 'mobile',
 			stage: 'TEST',
 			recordPrefix: 'mobile-rendering',
-			asgSize: {
-				min: 1,
-				max: 2,
+			asgCapacity: {
+				minimumInstances: 1,
+				maximumInstances: 2,
 			},
 			appsRenderingDomain: 'mobile-aws.code.dev-guardianapis.com',
 			hostedZoneId: 'TEST-HOSTED-ZONE-ID',
@@ -32,9 +32,9 @@ describe('The MobileAppsRenderingPreview stack', () => {
 				stack: 'mobile-preview',
 				stage: 'TEST',
 				recordPrefix: 'mobile-preview-rendering',
-				asgSize: {
-					min: 1,
-					max: 2,
+				asgCapacity: {
+					minimumInstances: 1,
+					maximumInstances: 2,
 				},
 				appsRenderingDomain: 'mobile-aws.code.dev-guardianapis.com',
 				hostedZoneId: 'TEST-HOSTED-ZONE-ID',
