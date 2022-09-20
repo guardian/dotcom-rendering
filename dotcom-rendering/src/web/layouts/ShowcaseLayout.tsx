@@ -412,7 +412,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				</>
 			)}
 
-			<main data-layout="ShowcaseLayout">
+			<main data-layout="ShowcaseLayout" id="maincontent">
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
@@ -636,6 +636,8 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.pageType
 													.isPaidContent
 											}
+											format={format}
+											editionId={CAPIArticle.editionId}
 										/>
 									)}
 

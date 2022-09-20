@@ -6,6 +6,7 @@ import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { trackVideoInteraction } from '../browser/ga/ga';
 import { record } from '../browser/ophan/ophan';
+import { useAB } from '../lib/useAB';
 import { Caption } from './Caption';
 
 type Props = {
@@ -92,6 +93,17 @@ export const YoutubeBlockComponent = ({
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
 	);
+
+	const ABTestAPI = useAB();
+	const userInImaTestVariant = ABTestAPI?.isUserInVariant(
+		'IntegrateIMA',
+		'variant',
+	);
+	const imaAdTagUrl = userInImaTestVariant
+		? 'https://pubads.g.doubleclick.net/gampad/live/ads?iu=/59666047/theguardian.com&' +
+		  'description_url=[placeholder]&tfcd=0&npa=0&sz=400x300&gdfp_req=1&output=vast&' +
+		  'unviewed_position_start=1&env=vp&impl=s&correlator=&vad_type=linear&cust_params=at%3Dfixed-puppies'
+		: undefined;
 
 	useEffect(() => {
 		const defineConsentState = async () => {
@@ -217,6 +229,7 @@ export const YoutubeBlockComponent = ({
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 				shouldStick={stickyVideos}
 				isMainMedia={isMainMedia}
+				imaAdTagUrl={imaAdTagUrl}
 			/>
 			{!hideCaption && (
 				<Caption
