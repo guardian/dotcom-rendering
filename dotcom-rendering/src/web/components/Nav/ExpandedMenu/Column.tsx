@@ -37,7 +37,7 @@ const pillarDivider = css`
 	}
 `;
 
-export const columnLinkTitle = css`
+const columnLinkTitle = css`
 	${textSans.medium({ lineHeight: 'tight' })};
 	background-color: transparent;
 	text-decoration: none;
@@ -198,11 +198,11 @@ const columnStyle = css`
 export const Column = ({
 	column,
 	index,
-	isLastColumn,
+	showLineBelow,
 }: {
 	column: PillarType | EditionLinkType;
 	index: number;
-	isLastColumn: boolean;
+	showLineBelow: boolean;
 }) => {
 	// As the elements are dynamic we need to specify the IDs here
 	//Replace whitespace with hyphen https://stackoverflow.com/questions/3794919/replace-all-spaces-in-a-string-with/3795147#3795147
@@ -265,8 +265,7 @@ export const Column = ({
 				css={[
 					columnLinks,
 					index === 0 && firstColumnLinks,
-					!!column.pillar && pillarColumnLinks,
-					index === 10 && pillarColumnLinks,
+					!!column.children && pillarColumnLinks,
 					hideWhenNotChecked(columnInputId),
 				]}
 				role="menu"
@@ -296,7 +295,7 @@ export const Column = ({
 					</li>
 				))}
 			</ul>
-			{isLastColumn && (
+			{showLineBelow && (
 				<div css={[hideWhenChecked(columnInputId), lineStyle]}></div>
 			)}
 		</li>

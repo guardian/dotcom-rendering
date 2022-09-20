@@ -16,7 +16,7 @@ interface LinkType extends BaseLinkType {
 }
 
 interface EditionLinkType extends LinkType {
-	id: EditionId;
+	editionId: EditionId;
 }
 
 interface PillarType extends LinkType {

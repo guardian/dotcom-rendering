@@ -188,7 +188,7 @@ export const Columns: React.FC<{
 					column={column}
 					key={column.title.toLowerCase()}
 					index={i}
-					isLastColumn={i !== nav.pillars.length - 1}
+					showLineBelow={i !== nav.pillars.length - 1}
 				/>
 			))}
 
@@ -226,7 +226,7 @@ export const Columns: React.FC<{
 					children: remainingEditions,
 				}}
 				index={10}
-				isLastColumn={true}
+				showLineBelow={true}
 			/>
 
 			<MoreColumn
