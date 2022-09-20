@@ -15,14 +15,11 @@ export interface LinkType extends BaseLinkType {
 	more?: boolean;
 }
 
-
 interface EditionLinkType extends LinkType {
 	editionId: EditionId;
 }
 
-interface PillarType extends LinkType {
 export interface PillarType extends LinkType {
-
 	pillar: ArticleTheme;
 }
 
@@ -114,7 +111,6 @@ export const extractNAV = (data: CAPINavType): NavType => {
 		readerRevenueLinks: buildRRLinkModel(data),
 	};
 };
-
 
 export type {
 	SimpleNavType,
