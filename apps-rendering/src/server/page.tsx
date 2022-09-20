@@ -23,7 +23,7 @@ import type { ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
 import { pageFonts } from 'styles';
-import { hydratablesComponentList } from 'client/hydratablesComponentList';
+import { newsletterSignupContainerClassName } from 'components/NewsletterSignup';
 
 // ----- Types ----- //
 
@@ -163,11 +163,7 @@ const buildHtml = (
 
 const hasHydratedElementNeedingInlineStyles = (
 	body: EmotionCritical,
-): boolean =>
-	hydratablesComponentList
-		.filter((_) => _.needsInlineStyles)
-		.map((_) => _.containerClassName)
-		.some((className) => body.html.includes(className));
+): boolean => body.html.includes(newsletterSignupContainerClassName);
 
 function render(
 	imageSalt: string,
