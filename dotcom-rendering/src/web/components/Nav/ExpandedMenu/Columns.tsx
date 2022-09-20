@@ -161,13 +161,13 @@ const editionList: EditionLinkType[] = [
 
 const getEdition = (editionId: EditionId): EditionLinkType => {
 	return (
-		editionList.find((edition) => edition.id === editionId) ??
+		editionList.find((edition) => edition.editionId === editionId) ??
 		editionList[1]
 	);
 };
 
 const getRemainingEditions = (editionId: EditionId): EditionLinkType[] => {
-	return editionList.filter((edition) => edition.id !== editionId);
+	return editionList.filter((edition) => edition.editionId !== editionId);
 };
 
 export const Columns: React.FC<{
@@ -176,7 +176,7 @@ export const Columns: React.FC<{
 	nav: NavType;
 }> = ({ format, nav, editionId }) => {
 	const activeEdition = getEdition(editionId);
-	const remainingEditions = getRemainingEditions(activeEdition.id);
+	const remainingEditions = getRemainingEditions(activeEdition.editionId);
 	return (
 		<ul
 			css={columnsStyle(format.display)}
