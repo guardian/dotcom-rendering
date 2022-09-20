@@ -2,7 +2,7 @@ const editions = ['UK', 'US', 'INT', 'AU'] as const;
 export type EditionId = typeof editions[number];
 
 export type Edition = {
-	id: EditionId;
+	editionId: EditionId;
 	displayName: string;
 	locale: string;
 };
