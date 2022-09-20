@@ -41,6 +41,8 @@ import {
 	onwardStyles,
 } from 'styles';
 import { themeToPillarString } from 'themeStyles';
+import { ElementKind } from 'bodyElementKind';
+import NewsletterSignup from 'components/NewsletterSignup';
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -137,6 +139,32 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 				</header>
 				<Body className={[articleWidthStyles]} format={item}>
 					{children}
+					<div
+						className="js-newsletter-signup-container"
+						data-element={JSON.stringify({
+							description: 'a',
+							frequency: '1',
+							identityName: 'morning-briefing',
+							name: 'First Edition',
+							successDescription: 'well done',
+							theme: ArticlePillar.News,
+							kind: ElementKind.NewsletterSignUp,
+						})}
+						data-format={JSON.stringify(getFormat(item))}
+					>
+						<NewsletterSignup
+							element={{
+								description: 'a',
+								frequency: '1',
+								identityName: 'morning-briefing',
+								name: 'First Edition',
+								successDescription: 'well done',
+								theme: ArticlePillar.News,
+								kind: ElementKind.NewsletterSignUp,
+							}}
+							format={getFormat(item)}
+						/>
+					</div>
 				</Body>
 				{epicContainer}
 				<section className="js-tags" css={articleWidthStyles}>

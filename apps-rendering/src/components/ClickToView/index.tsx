@@ -184,6 +184,7 @@ const ClickToView: FC<ClickToViewProps> = ({
 						icon={<SvgCheckmark />}
 						iconSide="left"
 						onClick={handleClick}
+						isLoading={true}
 					>
 						{roleButtonText(roleWithDefault)}
 					</Button>

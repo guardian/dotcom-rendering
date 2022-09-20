@@ -35,7 +35,8 @@ import ReactDOM from 'react-dom';
 import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
-import { initSignupForms } from './signupForm';
+import NewsletterSignup from 'components/NewsletterSignup';
+// import { initSignupForms } from './signupForm';
 
 // ----- Run ----- //
 
@@ -459,6 +460,24 @@ function resizeEmailSignups(): void {
 		});
 }
 
+function hydrateNewsletterSignup(): void {
+	document
+		.querySelectorAll('.js-newsletter-signup-container')
+		.forEach((element) =>
+			ReactDOM.hydrate(
+				h(NewsletterSignup, {
+					element: JSON.parse(
+						element.getAttribute('data-element') ?? '',
+					),
+					format: JSON.parse(
+						element.getAttribute('data-format') ?? '',
+					),
+				}),
+				element,
+			),
+		);
+}
+
 setup();
 sendTargetingParams();
 ads();
@@ -476,4 +495,5 @@ initAudioAtoms();
 hydrateAtoms();
 richLinks();
 hydrateClickToView();
-initSignupForms();
+// initSignupForms();
+hydrateNewsletterSignup();

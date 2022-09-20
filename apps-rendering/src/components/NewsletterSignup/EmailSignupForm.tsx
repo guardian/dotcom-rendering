@@ -29,6 +29,7 @@ import {
 } from '@guardian/source-react-components';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
+import { useState } from 'react';
 
 // ----- Component ----- //
 
@@ -109,8 +110,11 @@ const EmailSignupForm: FC<Props> = ({
 	successDescription,
 	format,
 }) => {
+	const [clicked, setClicked] = useState<boolean>(false);
+
 	const handleSubmit = (): void => {
-		console.log({ newsletterId });
+		setClicked(!clicked);
+		console.log({ newsletterId }, clicked);
 	};
 
 	return (
@@ -158,16 +162,15 @@ const EmailSignupForm: FC<Props> = ({
 						`}
 					/>
 					<Button
-						onClick={handleSubmit}
+						onClick={() => handleSubmit()}
 						size="small"
 						title="Sign up"
-						type="submit"
+						type="button"
+						isLoading={true}
+						priority="primary"
 						cssOverrides={buttonStyle(format)}
 					>
 						Sign up
-						<span className="js-signup-form__feedback js-signup-form__feedback--waiting">
-							<SvgSpinner size="small" />
-						</span>
 					</Button>
 				</div>
 				<div className="js-signup-form__feedback js-signup-form__feedback--success">
