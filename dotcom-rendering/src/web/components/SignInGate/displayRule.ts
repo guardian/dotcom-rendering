@@ -1,7 +1,6 @@
 // use the dailyArticleCount from the local storage to see how many articles the user has viewed in a day
 import { onConsent } from '@guardian/consent-management-platform';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
-import { getLocale } from '@guardian/libs';
 import type { DailyArticle } from '../../lib/dailyArticleCount';
 import { getDailyArticleCount } from '../../lib/dailyArticleCount';
 import { hasUserDismissedGateMoreThanCount } from './dismissGate';
@@ -99,7 +98,7 @@ export const canShowSignInGate = ({
 			!isIOS9(),
 	);
 
-export const canShowMandatoryUs: ({
+export const canShowSignInGateMandatory: ({
 	isSignedIn,
 	currentTest,
 	contentType,
@@ -117,8 +116,7 @@ export const canShowMandatoryUs: ({
 	isPreview,
 }: CanShowGateProps) => {
 	return (
-		(await getLocale()) === 'US' &&
-		(await hasRequiredConsents()) &&
+		(await hasRequiredConsents()) && // TODO check this
 		(await canShowSignInGate({
 			isSignedIn,
 			currentTest,
