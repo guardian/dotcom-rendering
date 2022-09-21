@@ -99,12 +99,28 @@ export const getScriptsFromManifest =
 			file,
 		);
 
+/** To ensure this only applies to guardian scripts,
+ * we check that it is served from a asset/ directory
+ * and that it ends with the bundle type and extension,
+ * with an optional hash for local development
+ * and stripped query parameters.
+ */
+const getScriptRegex = (bundle: 'modern' | 'legacy' | 'variant') =>
+	new RegExp(`assets\\/\\w+\\.${bundle}\\.(\\d{20}\\.)?js(\\?.*)?$`);
+
+const LEGACY_SCRIPT = getScriptRegex('legacy');
+const MODERN_SCRIPT = getScriptRegex('modern');
+const VARIANT_SCRIPT = getScriptRegex('variant');
+
 export const generateScriptTags = (scripts: Array<string | false>): string[] =>
 	scripts.filter(isString).map((script) => {
-		if (script.includes('.legacy.')) {
+		if (script.match(LEGACY_SCRIPT)) {
 			return `<script defer nomodule src="${script}"></script>`;
 		}
-		if (script.includes('.modern.')) {
+		if (script.match(MODERN_SCRIPT)) {
+			return `<script type="module" src="${script}"></script>`;
+		}
+		if (script.match(VARIANT_SCRIPT)) {
 			return `<script type="module" src="${script}"></script>`;
 		}
 
