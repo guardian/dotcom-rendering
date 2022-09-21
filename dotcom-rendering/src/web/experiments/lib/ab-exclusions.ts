@@ -12,7 +12,8 @@ import {
  * After the cut off date users without the local storage participation key won't see the gate at all.
  *
  * Caveats - There will be natural churn of users to account for. Users can manually delete localStorage at any time.
- * Some browsers also automatically delete local storage specifically on Webkit browsers (Safari/iOS) since iOS and iPadOS 13.4, Safari 13.1 on macOS
+ * Some browsers also automatically delete local storage after some time.
+ * Notably: ITP in Safari since iOS and iPadOS 13.4, Safari 13.1 on macOS @see https://webkit.org/tracking-prevention/#intelligent-tracking-prevention-itp
  *
  */
 export const setParticipations = (
