@@ -25,7 +25,7 @@
     "createtoc": "doctoc $npm_package_tocList --github --title '<!-- Automatically created with yarn run createtoc and on push hook -->' ",
     "addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update' || true",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
+    "cypress:run": "cypress run --browser chrome",
     "cypress:open:e2e": "cypress open --e2e --browser chrome",
     "cypress:run:e2e": "cypress run --browser chrome --spec 'cypress/e2e/**/*'",
     "cypress:run:percy": "percy exec -- cypress run --browser chrome --config specPattern='cypress/snapshot/**/*'",
