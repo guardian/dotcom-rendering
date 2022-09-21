@@ -30,7 +30,7 @@
 		"@guardian/eslint-config-typescript": "^1.0.1",
 		"@guardian/eslint-plugin-source-react-components": "^4.1.0",
 		"@guardian/prettier": "^1.0.0",
-		"@guardian/source-foundations": "^4.0.3",
+		"@guardian/source-foundations": "^5.3.0",
 		"@guardian/source-react-components": "^4.4.0",
 		"@guardian/source-react-components-development-kitchen": "1.0.1",
 		"@storybook/addon-essentials": "^6.3.7",
