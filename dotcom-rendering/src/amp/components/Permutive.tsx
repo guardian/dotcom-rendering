@@ -37,14 +37,17 @@ export const Permutive = ({ apiKey, projectId, payload }: PermutiveModel) => {
 	return (
 		<>
 			<amp-state
+				data-block-on-consent=""
 				id="permutiveConfig"
 				dangerouslySetInnerHTML={{ __html: permutiveConfig }}
 			/>
 			<amp-analytics
+				data-block-on-consent=""
 				type="permutive-ampscript"
 				dangerouslySetInnerHTML={{ __html: permutiveAmpScript }}
 			/>
 			<amp-script
+				data-block-on-consent=""
 				id="permutiveCachedTargeting"
 				// Empty string required to pass AMP validation
 				sandboxed=""
@@ -60,6 +63,7 @@ export const Permutive = ({ apiKey, projectId, payload }: PermutiveModel) => {
 				}}
 			></script>
 			<amp-script
+				data-block-on-consent=""
 				// Empty string required to pass AMP validation
 				sandboxed=""
 				script="pamp-json"
@@ -74,7 +78,7 @@ export const Permutive = ({ apiKey, projectId, payload }: PermutiveModel) => {
 				}}
 			></script>
 			<amp-script
-				data-block-on-consent={true}
+				data-block-on-consent=""
 				id="permutiveSdk"
 				// Empty string required to pass AMP validation
 				sandboxed=""
