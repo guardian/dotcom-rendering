@@ -1,8 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { getCookie } from '@guardian/libs';
+import { ArticlePillar, getCookie } from '@guardian/libs';
 import type { EditionId } from '../../types/edition';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
+import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { ShadyPie } from './ShadyPie';
 
@@ -40,12 +41,24 @@ export const TopRightAdSlot = ({
 	const isSignedIn =
 		!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
 
+	const ABTestAPI = useAB();
+
+	const userInShadyPieTestVariant = ABTestAPI?.isUserInVariant(
+		'shadyPieClickThrough',
+		'variant',
+	);
+
 	if (
 		adBlockerDetected &&
 		!isSignedIn &&
 		!shouldHideReaderRevenue &&
 		!isPaidContent &&
 		!isServer
+	) {
+		return <ShadyPie format={format} editionId={editionId} />;
+	} else if (
+		userInShadyPieTestVariant &&
+		format?.theme == ArticlePillar.Lifestyle
 	) {
 		return <ShadyPie format={format} editionId={editionId} />;
 	}
