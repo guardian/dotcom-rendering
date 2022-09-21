@@ -8,6 +8,9 @@ import {
 	ASSET_ORIGIN,
 	generateScriptTags,
 	getScriptsFromManifest,
+	LEGACY_SCRIPT,
+	MODERN_SCRIPT,
+	VARIANT_SCRIPT,
 } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractGA } from '../../model/extract-ga';
@@ -148,10 +151,13 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	);
 
 	const gaChunk = getScriptArrayFromFile('ga.js');
-	const modernScript = gaChunk.find((script) => script.includes('.modern.'));
-	const legacyScript = gaChunk.find((script) => script.includes('.legacy.'));
+	const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
+	const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
+	const variantScript = gaChunk.find((script) =>
+		script.match(VARIANT_SCRIPT),
+	);
 	const gaPath = {
-		modern: modernScript as string,
+		modern: (modernScript ?? variantScript) as string,
 		legacy: legacyScript as string,
 	};
 

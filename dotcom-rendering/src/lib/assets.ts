@@ -108,9 +108,9 @@ export const getScriptsFromManifest =
 const getScriptRegex = (bundle: 'modern' | 'legacy' | 'variant') =>
 	new RegExp(`assets\\/\\w+\\.${bundle}\\.(\\d{20}\\.)?js(\\?.*)?$`);
 
-const LEGACY_SCRIPT = getScriptRegex('legacy');
-const MODERN_SCRIPT = getScriptRegex('modern');
-const VARIANT_SCRIPT = getScriptRegex('variant');
+export const LEGACY_SCRIPT = getScriptRegex('legacy');
+export const MODERN_SCRIPT = getScriptRegex('modern');
+export const VARIANT_SCRIPT = getScriptRegex('variant');
 
 export const generateScriptTags = (scripts: Array<string | false>): string[] =>
 	scripts.filter(isString).map((script) => {

@@ -3,7 +3,13 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { renderToString } from 'react-dom/server';
 import { BUILD_VARIANT } from '../../../scripts/webpack/bundles';
-import { generateScriptTags, getScriptsFromManifest } from '../../lib/assets';
+import {
+	generateScriptTags,
+	getScriptsFromManifest,
+	LEGACY_SCRIPT,
+	MODERN_SCRIPT,
+	VARIANT_SCRIPT,
+} from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
@@ -53,7 +59,7 @@ export const frontToHtml = ({ front }: Props): string => {
 	 *
 	 * @see getScriptsFromManifest
 	 */
-	const getScriptsArrayFromFile = getScriptsFromManifest(
+	const getScriptArrayFromFile = getScriptsFromManifest(
 		shouldServeVariantBundle,
 	);
 
@@ -67,13 +73,13 @@ export const frontToHtml = ({ front }: Props): string => {
 	const priorityScriptTags = generateScriptTags(
 		[
 			polyfillIO,
-			...getScriptsArrayFromFile('bootCmp.js'),
-			...getScriptsArrayFromFile('ophan.js'),
+			...getScriptArrayFromFile('bootCmp.js'),
+			...getScriptArrayFromFile('ophan.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				front.config.commercialBundleUrl,
-			...getScriptsArrayFromFile('sentryLoader.js'),
-			...getScriptsArrayFromFile('dynamicImport.js'),
-			...getScriptsArrayFromFile('islands.js'),
+			...getScriptArrayFromFile('sentryLoader.js'),
+			...getScriptArrayFromFile('dynamicImport.js'),
+			...getScriptArrayFromFile('islands.js'),
 		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
@@ -86,18 +92,21 @@ export const frontToHtml = ({ front }: Props): string => {
 	 */
 	const lowPriorityScriptTags = generateScriptTags(
 		[
-			...getScriptsArrayFromFile('atomIframe.js'),
-			...getScriptsArrayFromFile('embedIframe.js'),
-			...getScriptsArrayFromFile('newsletterEmbedIframe.js'),
-			...getScriptsArrayFromFile('relativeTime.js'),
+			...getScriptArrayFromFile('atomIframe.js'),
+			...getScriptArrayFromFile('embedIframe.js'),
+			...getScriptArrayFromFile('newsletterEmbedIframe.js'),
+			...getScriptArrayFromFile('relativeTime.js'),
 		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
-	const gaChunk = getScriptsArrayFromFile('ga.js');
-	const modernScript = gaChunk.find((script) => script.includes('.modern.'));
-	const legacyScript = gaChunk.find((script) => script.includes('.legacy.'));
+	const gaChunk = getScriptArrayFromFile('ga.js');
+	const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
+	const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
+	const variantScript = gaChunk.find((script) =>
+		script.match(VARIANT_SCRIPT),
+	);
 	const gaPath = {
-		modern: modernScript as string,
+		modern: (modernScript ?? variantScript) as string,
 		legacy: legacyScript as string,
 	};
 
