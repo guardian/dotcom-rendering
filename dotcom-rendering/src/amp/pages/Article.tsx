@@ -34,16 +34,12 @@ const Body: React.FunctionComponent<{
 }> = ({ data, config }) => {
 	const { format } = data;
 
-	switch (format.design) {
-		case 'LiveBlogDesign':
-		case 'DeadBlogDesign':
-			return <BodyLiveblog data={data} config={config} />;
-
-		case 'NewsletterSignupDesign':
-			// Insert change here
-			return <BodyArticle data={data} config={config} />;
+	if (
+		format.design === 'LiveBlogDesign' ||
+		format.design === 'DeadBlogDesign'
+	) {
+		return <BodyLiveblog data={data} config={config} />;
 	}
-
 	return <BodyArticle data={data} config={config} />;
 };
 
