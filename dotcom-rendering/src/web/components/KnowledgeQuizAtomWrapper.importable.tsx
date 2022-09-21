@@ -15,6 +15,7 @@ type QuestionType = {
 	text: string;
 	answers: AnswerType[];
 	imageUrl?: string;
+	imageAlt?: string;
 };
 
 type ResultGroupsType = {

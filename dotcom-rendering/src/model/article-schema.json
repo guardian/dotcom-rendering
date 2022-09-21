@@ -1206,6 +1206,9 @@
                             },
                             "imageUrl": {
                                 "type": "string"
+                            },
+                            "imageAlt": {
+                                "type": "string"
                             }
                         },
                         "required": [
