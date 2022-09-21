@@ -67,16 +67,17 @@ export const FixedLargeSlowXIV = ({
 				})}
 			</UL>
 			<UL direction="row" wrapCards={true}>
-				{thirdSlice.map((card, cardIndex) => {
+				{thirdSlice.map((card, cardIndex, { length }) => {
+					const columns = 4;
 					return (
 						<LI
 							padSides={true}
 							percentage="25%"
-							showDivider={cardIndex % 4 !== 0}
+							showDivider={cardIndex % columns !== 0}
 							offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 								cardIndex,
-								thirdSlice.length,
-								4,
+								length,
+								columns,
 							)}
 							key={card.url}
 						>
