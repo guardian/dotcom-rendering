@@ -32,8 +32,13 @@ const fileExists = async (glob) => {
 	if (BUILD_VARIANT) await fileExists('manifest.variant.json');
 
 	// Check that the manifest files return values for all the chunks
-	const manifest = await loadJsonFile('./dist/manifest.modern.json');
-	const legacyManifest = await loadJsonFile('./dist/manifest.legacy.json');
+	const manifests = [
+		await loadJsonFile('./dist/manifest.modern.json'),
+		await loadJsonFile('./dist/manifest.legacy.json'),
+	];
+	if (BUILD_VARIANT) {
+		manifests.push(await loadJsonFile('./dist/manifest.variant.json'));
+	}
 
 	[
 		'sentryLoader.js',
@@ -48,18 +53,12 @@ const fileExists = async (glob) => {
 		'relativeTime.js',
 		'initDiscussion.js',
 	].forEach((name) => {
-		if (manifest[name]) {
-			console.log(`Manifest returned value ${name}`);
-		} else {
-			errorAndThrow(`Manifest did not return a value for ${name}`);
-		}
-
-		if (legacyManifest[name]) {
-			console.log(`Legacy manifest returned value ${name}`);
-		} else {
-			errorAndThrow(
-				`Legacy Loadabl manifest did not return a value for ${name}`,
-			);
+		for (const manifest of manifests) {
+			if (manifest[name]) {
+				console.log(`A manifest returned value ${name}`);
+			} else {
+				errorAndThrow(`A manifest did not return a value for ${name}`);
+			}
 		}
 	});
 })();
