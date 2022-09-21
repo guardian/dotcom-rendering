@@ -491,14 +491,13 @@ export const DynamicFast = ({
 								/>
 							) : (
 								// Regular standards layout
-								standards.map((card, cardIndex) => {
-									const { columns } = standardsDisplayConfig;
+								standards.map((card, cardIndex, { length }) => {
+									const { columns, cardWidth } =
+										standardsDisplayConfig;
 									return (
 										<LI
 											key={card.url}
-											percentage={
-												standardsDisplayConfig.cardWidth
-											}
+											percentage={cardWidth}
 											stretch={true}
 											showDivider={
 												cardIndex % columns !== 0
@@ -506,7 +505,7 @@ export const DynamicFast = ({
 											padSides={true}
 											offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 												cardIndex,
-												standards.length,
+												length - (length % columns),
 												columns,
 											)}
 										>

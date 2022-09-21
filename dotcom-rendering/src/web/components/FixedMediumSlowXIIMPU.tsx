@@ -341,27 +341,31 @@ export const FixedMediumSlowXIIMPU = ({
 							 * |_______________________|
 							 */}
 							<UL direction="row" wrapCards={true}>
-								{remainingCards.map((trail, trailIndex) => (
-									<LI
-										padSides={true}
-										offsetBottomPaddingOnDivider={shouldPadWrappableRows(
-											trailIndex,
-											remainingCards.length,
-											2,
-										)}
-										showDivider={trailIndex % 2 !== 0}
-										percentage="50%"
-										stretch={true}
-									>
-										<FrontCard
-											trail={trail}
-											containerPalette={containerPalette}
-											showAge={showAge}
-											imageUrl={undefined}
-											headlineSize="small"
-										/>
-									</LI>
-								))}
+								{remainingCards.map(
+									(trail, trailIndex, { length }) => (
+										<LI
+											padSides={true}
+											offsetBottomPaddingOnDivider={shouldPadWrappableRows(
+												trailIndex,
+												length - (length % 2),
+												2,
+											)}
+											showDivider={trailIndex % 2 !== 0}
+											percentage="50%"
+											stretch={true}
+										>
+											<FrontCard
+												trail={trail}
+												containerPalette={
+													containerPalette
+												}
+												showAge={showAge}
+												imageUrl={undefined}
+												headlineSize="small"
+											/>
+										</LI>
+									),
+								)}
 							</UL>
 						</LI>
 						<LI percentage="33.333%" showDivider={true}>
