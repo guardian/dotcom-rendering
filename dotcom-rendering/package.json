@@ -26,7 +26,7 @@
     "addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update' || true",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "cypress:open:e2e": "cypress open --e2e --browser=chrome",
+    "cypress:open:e2e": "cypress open --e2e --browser chrome",
     "cypress:run:e2e": "cypress run --spec 'cypress/e2e/**/*'",
     "cypress:run:percy": "percy exec -- cypress run --config specPattern='cypress/snapshot/**/*'",
     "unused-exports": "yarn ts-unused-exports ./tsconfig.json --ignoreFiles='(/(fixtures|__mocks__)/|.+\\.(stories|mocks))' --exitWithCount",
