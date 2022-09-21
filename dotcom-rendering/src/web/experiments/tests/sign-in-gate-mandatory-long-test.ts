@@ -72,7 +72,7 @@ const sharedTestData = {
 	idealOutcome:
 		'Significantly grow the number of registered and signed in users amongst this cohort, with appropriate permissions but achieve this without meaningfully denting engagement with our journalism or long-term ad revenue',
 	showForSensitive: false,
-	canRun: () => true,
+	canRun: (): boolean => true,
 };
 
 export const signInGateMandatoryLongTestControlUk = {
@@ -84,8 +84,8 @@ export const signInGateMandatoryLongTestControlUk = {
 	variants: [
 		{
 			id: 'mandatory-long-test-control-uk',
-			test: () => {},
-			canRun: () =>
+			test: (): void => {},
+			canRun: (): boolean =>
 				['GB'].includes(getCountryCodeSync() ?? '') &&
 				setOrUseParticipations(
 					setParticipationsFlag,
@@ -105,8 +105,8 @@ export const signInGateMandatoryLongTestVariantUk = {
 	variants: [
 		{
 			id: 'mandatory-long-test-variant-uk',
-			test: () => {},
-			canRun: () =>
+			test: (): void => {},
+			canRun: (): boolean =>
 				['GB'].includes(getCountryCodeSync() ?? '') &&
 				setOrUseParticipations(
 					setParticipationsFlag,
@@ -126,8 +126,8 @@ export const signInGateMandatoryLongTestControlNa = {
 	variants: [
 		{
 			id: 'mandatory-long-test-control-na',
-			test: () => {},
-			canRun: () =>
+			test: (): void => {},
+			canRun: (): boolean =>
 				['US', 'CA'].includes(getCountryCodeSync() ?? '') &&
 				setOrUseParticipations(
 					setParticipationsFlag,
@@ -147,8 +147,8 @@ export const signInGateMandatoryLongTestVariantNa = {
 	variants: [
 		{
 			id: 'mandatory-long-test-variant-na',
-			test: () => {},
-			canRun: () =>
+			test: (): void => {},
+			canRun: (): boolean =>
 				['US', 'CA'].includes(getCountryCodeSync() ?? '') &&
 				setOrUseParticipations(
 					setParticipationsFlag,
@@ -168,8 +168,8 @@ export const signInGateMandatoryLongTestControlAunz = {
 	variants: [
 		{
 			id: 'mandatory-long-test-control-aunz',
-			test: () => {},
-			canRun: () =>
+			test: (): void => {},
+			canRun: (): boolean =>
 				['AU', 'NZ'].includes(getCountryCodeSync() ?? '') &&
 				setOrUseParticipations(
 					setParticipationsFlag,
@@ -189,8 +189,8 @@ export const signInGateMandatoryLongTestVariantAunz = {
 	variants: [
 		{
 			id: 'mandatory-long-test-variant-aunz',
-			test: () => {},
-			canRun: () =>
+			test: (): void => {},
+			canRun: (): boolean =>
 				['AU', 'NZ'].includes(getCountryCodeSync() ?? '') &&
 				setOrUseParticipations(
 					setParticipationsFlag,
@@ -210,8 +210,8 @@ export const signInGateMandatoryLongTestControlEu = {
 	variants: [
 		{
 			id: 'mandatory-long-test-control-eu',
-			test: () => {},
-			canRun: () =>
+			test: (): void => {},
+			canRun: (): boolean =>
 				[...EuropeList].includes(getCountryCodeSync() ?? '') &&
 				setOrUseParticipations(
 					setParticipationsFlag,
@@ -231,8 +231,8 @@ export const signInGateMandatoryLongTestVariantEu: ABTest = {
 	variants: [
 		{
 			id: 'mandatory-long-test-variant-eu',
-			test: () => {},
-			canRun: () =>
+			test: (): void => {},
+			canRun: (): boolean =>
 				[...EuropeList].includes(getCountryCodeSync() ?? '') &&
 				setOrUseParticipations(
 					setParticipationsFlag,

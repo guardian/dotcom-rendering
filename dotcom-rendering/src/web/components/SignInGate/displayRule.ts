@@ -116,7 +116,7 @@ export const canShowSignInGateMandatory: ({
 	isPreview,
 }: CanShowGateProps) => {
 	return (
-		(await hasRequiredConsents()) && // TODO check this
+		(await hasRequiredConsents()) &&
 		(await canShowSignInGate({
 			isSignedIn,
 			currentTest,
