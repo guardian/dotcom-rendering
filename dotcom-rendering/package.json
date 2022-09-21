@@ -28,7 +28,7 @@
     "cypress:run": "cypress run",
     "cypress:open:e2e": "cypress open --e2e --browser chrome",
     "cypress:run:e2e": "cypress run --browser chrome --spec 'cypress/e2e/**/*'",
-    "cypress:run:percy": "percy exec -- cypress run --config specPattern='cypress/snapshot/**/*'",
+    "cypress:run:percy": "percy exec -- cypress run --browser chrome --config specPattern='cypress/snapshot/**/*'",
     "unused-exports": "yarn ts-unused-exports ./tsconfig.json --ignoreFiles='(/(fixtures|__mocks__)/|.+\\.(stories|mocks))' --exitWithCount",
     "makeBuild": "NODE_ENV=production CI_ENV=github webpack --config ./scripts/webpack/webpack.config.js"
   },
