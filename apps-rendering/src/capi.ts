@@ -160,7 +160,7 @@ const requiresInlineStyles = (content: Content): boolean => {
 	//	   content.atoms?.audios ??
 	//	   content.atoms?.charts
 	// );
-	return true;
+	return false;
 };
 
 const paidContentLogo = (tags: Tag[]): Option<Logo> => {
