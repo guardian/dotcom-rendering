@@ -106,7 +106,7 @@ export const getScriptsFromManifest =
  * and stripped query parameters.
  */
 const getScriptRegex = (bundle: 'modern' | 'legacy' | 'variant') =>
-	new RegExp(`assets\\/\\w+\\.${bundle}\\.(\\d{20}\\.)?js(\\?.*)?$`);
+	new RegExp(`assets\\/\\w+\\.${bundle}\\.(\\w{20}\\.)?js(\\?.*)?$`);
 
 export const LEGACY_SCRIPT = getScriptRegex('legacy');
 export const MODERN_SCRIPT = getScriptRegex('modern');
