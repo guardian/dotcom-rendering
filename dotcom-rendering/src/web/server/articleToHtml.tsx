@@ -4,7 +4,6 @@ import createEmotionServer from '@emotion/server/create-instance';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import { BUILD_VARIANT } from '../../../scripts/webpack/bundles';
-import type { ManifestPath } from '../../lib/assets';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -89,13 +88,20 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
-	const manifestPaths: ManifestPath[] =
-		BUILD_VARIANT &&
-		CAPIArticle.config.abTests.dcrJsBundleVariant === 'variant'
-			? ['./manifest.variant.json', './manifest.legacy.json']
-			: ['./manifest.modern.json', './manifest.legacy.json'];
+	const shouldServeVariantBundle: boolean = [
+		BUILD_VARIANT,
+		CAPIArticle.config.abTests.dcrJsBundleVariant === 'variant',
+	].every(Boolean);
 
-	const getScripts = getScriptsFromManifest(manifestPaths);
+	/**
+	 * This function returns an array of files found in the manifests
+	 * defined by `manifestPaths`.
+	 *
+	 * @see getScriptsFromManifest
+	 */
+	const getScriptArrayFromFile = getScriptsFromManifest(
+		shouldServeVariantBundle,
+	);
 
 	/**
 	 * The highest priority scripts.
@@ -107,16 +113,18 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	const priorityScriptTags = generateScriptTags(
 		[
 			polyfillIO,
-			...getScripts('bootCmp.js'),
-			...getScripts('ophan.js'),
+			...getScriptArrayFromFile('bootCmp.js'),
+			...getScriptArrayFromFile('ophan.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				CAPIArticle.config.commercialBundleUrl,
-			...getScripts('sentryLoader.js'),
-			...getScripts('dynamicImport.js'),
+			...getScriptArrayFromFile('sentryLoader.js'),
+			...getScriptArrayFromFile('dynamicImport.js'),
 			pageHasNonBootInteractiveElements &&
 				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
-			...getScripts('islands.js'),
-			...expeditedIslands.flatMap((name) => getScripts(`${name}.js`)),
+			...getScriptArrayFromFile('islands.js'),
+			...expeditedIslands.flatMap((name) =>
+				getScriptArrayFromFile(`${name}.js`),
+			),
 		].map((script) =>
 			offerHttp3 && script ? getHttp3Url(script) : script,
 		),
@@ -131,15 +139,15 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	 */
 	const lowPriorityScriptTags = generateScriptTags(
 		[
-			...getScripts('atomIframe.js'),
-			...getScripts('embedIframe.js'),
-			...getScripts('newsletterEmbedIframe.js'),
-			...getScripts('relativeTime.js'),
-			...getScripts('initDiscussion.js'),
+			...getScriptArrayFromFile('atomIframe.js'),
+			...getScriptArrayFromFile('embedIframe.js'),
+			...getScriptArrayFromFile('newsletterEmbedIframe.js'),
+			...getScriptArrayFromFile('relativeTime.js'),
+			...getScriptArrayFromFile('initDiscussion.js'),
 		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
-	const gaChunk = getScripts('ga.js');
+	const gaChunk = getScriptArrayFromFile('ga.js');
 	const modernScript = gaChunk.find((script) => script.includes('.modern.'));
 	const legacyScript = gaChunk.find((script) => script.includes('.legacy.'));
 	const gaPath = {

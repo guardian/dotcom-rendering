@@ -3,7 +3,6 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { renderToString } from 'react-dom/server';
 import { BUILD_VARIANT } from '../../../scripts/webpack/bundles';
-import type { ManifestPath } from '../../lib/assets';
 import { generateScriptTags, getScriptsFromManifest } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
@@ -43,12 +42,20 @@ export const frontToHtml = ({ front }: Props): string => {
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
-	const manifestPaths: ManifestPath[] =
-		BUILD_VARIANT && front.config.abTests.dcrJsBundleVariant === 'variant'
-			? ['./manifest.variant.json', './manifest.legacy.json']
-			: ['./manifest.modern.json', './manifest.legacy.json'];
+	const shouldServeVariantBundle: boolean = [
+		BUILD_VARIANT,
+		front.config.abTests.dcrJsBundleVariant === 'variant',
+	].every(Boolean);
 
-	const getScripts = getScriptsFromManifest(manifestPaths);
+	/**
+	 * This function returns an array of files found in the manifests
+	 * defined by `manifestPaths`.
+	 *
+	 * @see getScriptsFromManifest
+	 */
+	const getScriptsArrayFromFile = getScriptsFromManifest(
+		shouldServeVariantBundle,
+	);
 
 	/**
 	 * The highest priority scripts.
@@ -60,13 +67,13 @@ export const frontToHtml = ({ front }: Props): string => {
 	const priorityScriptTags = generateScriptTags(
 		[
 			polyfillIO,
-			...getScripts('bootCmp.js'),
-			...getScripts('ophan.js'),
+			...getScriptsArrayFromFile('bootCmp.js'),
+			...getScriptsArrayFromFile('ophan.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				front.config.commercialBundleUrl,
-			...getScripts('sentryLoader.js'),
-			...getScripts('dynamicImport.js'),
-			...getScripts('islands.js'),
+			...getScriptsArrayFromFile('sentryLoader.js'),
+			...getScriptsArrayFromFile('dynamicImport.js'),
+			...getScriptsArrayFromFile('islands.js'),
 		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
@@ -79,14 +86,14 @@ export const frontToHtml = ({ front }: Props): string => {
 	 */
 	const lowPriorityScriptTags = generateScriptTags(
 		[
-			...getScripts('atomIframe.js'),
-			...getScripts('embedIframe.js'),
-			...getScripts('newsletterEmbedIframe.js'),
-			...getScripts('relativeTime.js'),
+			...getScriptsArrayFromFile('atomIframe.js'),
+			...getScriptsArrayFromFile('embedIframe.js'),
+			...getScriptsArrayFromFile('newsletterEmbedIframe.js'),
+			...getScriptsArrayFromFile('relativeTime.js'),
 		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
-	const gaChunk = getScripts('ga.js');
+	const gaChunk = getScriptsArrayFromFile('ga.js');
 	const modernScript = gaChunk.find((script) => script.includes('.modern.'));
 	const legacyScript = gaChunk.find((script) => script.includes('.legacy.'));
 	const gaPath = {

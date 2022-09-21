@@ -54,7 +54,14 @@ const getManifest = (path: string): AssetHash => {
 	}
 };
 
-export type ManifestPath = `./manifest.${string}.json`;
+const getManifestPaths = (
+	manifests: 'control' | 'variant',
+): [ManifestPath, ManifestPath] =>
+	manifests === 'variant'
+		? ['./manifest.variant.json', './manifest.legacy.json']
+		: ['./manifest.modern.json', './manifest.legacy.json'];
+
+type ManifestPath = `./manifest.${string}.json`;
 
 const getScripts = (
 	manifestPaths: Array<ManifestPath>,
@@ -78,10 +85,19 @@ const getScripts = (
 	});
 };
 
+/**
+ * A curried function that takes an array of manifests.
+ *
+ * The returned function takes a script name and returns
+ * an array of scripts found in the manifests.
+ */
 export const getScriptsFromManifest =
-	(manifestPaths: ManifestPath[]) =>
+	(shouldServeVariantBundle: boolean) =>
 	(file: `${string}.js`): ReturnType<typeof getScripts> =>
-		getScripts(manifestPaths, file);
+		getScripts(
+			getManifestPaths(shouldServeVariantBundle ? 'variant' : 'control'),
+			file,
+		);
 
 export const generateScriptTags = (scripts: Array<string | false>): string[] =>
 	scripts.filter(isString).map((script) => {
