@@ -168,9 +168,9 @@ const blockquoteIcon = (format: ArticleFormat): Colour => {
 				case ArticlePillar.Sport:
 					return sport[400];
 				case ArticlePillar.Culture:
-					return culture[350];
+					return culture[400];
 				case ArticlePillar.Opinion:
-					return opinion[300];
+					return opinion[400];
 				case ArticleSpecial.Labs:
 					return labs[300];
 				case ArticleSpecial.SpecialReport:

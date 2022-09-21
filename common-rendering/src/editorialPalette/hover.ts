@@ -26,7 +26,7 @@ const pagination = (format: ArticleFormat): Colour => {
 		case ArticlePillar.Culture:
 			return culture[300];
 		case ArticlePillar.Opinion:
-			return opinion[300];
+			return opinion[400];
 		case ArticleSpecial.Labs:
 			return labs[300];
 		case ArticleSpecial.SpecialReport:

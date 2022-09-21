@@ -77,7 +77,7 @@ const bylineAnchor = (format: ArticleFormat): Colour => {
 			case ArticlePillar.Culture:
 				return culture[300];
 			case ArticlePillar.Opinion:
-				return opinion[300];
+				return opinion[400];
 			case ArticlePillar.Lifestyle:
 				return lifestyle[300];
 			case ArticleSpecial.Labs:
@@ -225,7 +225,7 @@ const commentCountWide = (_format: ArticleFormat): Colour => {
 const dropCap = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.Opinion:
-			return opinion[300];
+			return opinion[400];
 		case ArticlePillar.Culture:
 			return culture[300];
 		case ArticlePillar.Lifestyle:
@@ -281,7 +281,7 @@ const headline = (format: ArticleFormat): Colour => {
 	) {
 		switch (format.theme) {
 			case ArticlePillar.Opinion:
-				return opinion[300];
+				return opinion[400];
 			case ArticlePillar.Sport:
 				return sport[300];
 			case ArticlePillar.Culture:
@@ -326,7 +326,7 @@ const bylineLeftColumn = (format: ArticleFormat): Colour => {
 				case ArticlePillar.Culture:
 					return culture[300];
 				case ArticlePillar.Opinion:
-					return opinion[300];
+					return opinion[400];
 				case ArticleSpecial.Labs:
 					return labs[300];
 				case ArticleSpecial.SpecialReport:
@@ -343,7 +343,7 @@ const bylineLeftColumn = (format: ArticleFormat): Colour => {
 				case ArticlePillar.Culture:
 					return culture[300];
 				case ArticlePillar.Opinion:
-					return opinion[300];
+					return opinion[400];
 				case ArticleSpecial.Labs:
 					return labs[300];
 				case ArticleSpecial.SpecialReport:
@@ -360,7 +360,7 @@ const bylineLeftColumn = (format: ArticleFormat): Colour => {
 				case ArticlePillar.Culture:
 					return culture[400];
 				case ArticlePillar.Opinion:
-					return opinion[300];
+					return opinion[400];
 				case ArticleSpecial.Labs:
 					return labs[400];
 				case ArticleSpecial.SpecialReport:
@@ -523,9 +523,9 @@ const articleLink = (format: ArticleFormat): Colour => {
 				case ArticlePillar.Sport:
 					return sport[400];
 				case ArticlePillar.Culture:
-					return culture[350];
+					return culture[400];
 				case ArticlePillar.Opinion:
-					return opinion[300];
+					return opinion[400];
 				case ArticleSpecial.Labs:
 					return specialReport[400];
 				case ArticleSpecial.SpecialReport:
@@ -542,7 +542,7 @@ const articleLink = (format: ArticleFormat): Colour => {
 				case ArticlePillar.Culture:
 					return culture[300];
 				case ArticlePillar.Opinion:
-					return opinion[300];
+					return opinion[400];
 				case ArticleSpecial.Labs:
 					return specialReport[300];
 				case ArticleSpecial.SpecialReport:
@@ -579,9 +579,9 @@ const keyEventsInline = ({ theme }: ArticleFormat): Colour => {
 		case ArticlePillar.Lifestyle:
 			return lifestyle[400];
 		case ArticlePillar.Culture:
-			return culture[350];
+			return culture[400];
 		case ArticlePillar.Opinion:
-			return opinion[300];
+			return opinion[400];
 		case ArticleSpecial.Labs:
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
@@ -600,7 +600,7 @@ const keyEventsLeftColumn = ({ theme }: ArticleFormat): Colour => {
 		case ArticlePillar.Culture:
 			return culture[300];
 		case ArticlePillar.Opinion:
-			return opinion[300];
+			return opinion[400];
 		case ArticleSpecial.Labs:
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
@@ -799,7 +799,7 @@ const kicker = (format: ArticleFormat): Colour => {
 				case ArticlePillar.Sport:
 					return sport[400];
 				case ArticlePillar.Opinion:
-					return opinion[300];
+					return opinion[400];
 				case ArticlePillar.Culture:
 					return culture[400];
 				case ArticlePillar.Lifestyle:
@@ -979,7 +979,7 @@ const pagination = (format: ArticleFormat): Colour => {
 		case ArticlePillar.Culture:
 			return culture[300];
 		case ArticlePillar.Opinion:
-			return opinion[300];
+			return opinion[400];
 		case ArticleSpecial.Labs:
 			return labs[300];
 		case ArticleSpecial.SpecialReport:

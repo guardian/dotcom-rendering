@@ -307,13 +307,13 @@ const textArticleLink = (format: ArticleFormat): string => {
 			case ArticlePillar.News:
 				return news[400];
 			case ArticlePillar.Culture:
-				return culture[350];
+				return culture[400];
 			case ArticlePillar.Lifestyle:
 				return lifestyle[400];
 			case ArticlePillar.Sport:
 				return sport[400];
 			case ArticlePillar.Opinion:
-				return opinion[300];
+				return opinion[400];
 			case ArticleSpecial.Labs:
 				return BLACK;
 			case ArticleSpecial.SpecialReport:
@@ -325,13 +325,13 @@ const textArticleLink = (format: ArticleFormat): string => {
 			case ArticlePillar.News:
 				return news[300];
 			case ArticlePillar.Culture:
-				return culture[350];
+				return culture[400];
 			case ArticlePillar.Lifestyle:
 				return lifestyle[400];
 			case ArticlePillar.Sport:
 				return sport[400];
 			case ArticlePillar.Opinion:
-				return opinion[300];
+				return opinion[400];
 			case ArticleSpecial.Labs:
 				return BLACK;
 			case ArticleSpecial.SpecialReport:
@@ -378,7 +378,7 @@ const textKeyEvent = (format: ArticleFormat): string => {
 		case ArticlePillar.Culture:
 			return culture[300];
 		case ArticlePillar.Opinion:
-			return opinion[300];
+			return opinion[400];
 		case ArticleSpecial.Labs:
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
@@ -438,13 +438,13 @@ const textArticleLinkHover = (format: ArticleFormat): string => {
 			case ArticlePillar.News:
 				return news[400];
 			case ArticlePillar.Culture:
-				return culture[350];
+				return culture[400];
 			case ArticlePillar.Lifestyle:
 				return lifestyle[400];
 			case ArticlePillar.Sport:
 				return sport[400];
 			case ArticlePillar.Opinion:
-				return opinion[300];
+				return opinion[400];
 			case ArticleSpecial.Labs:
 				return BLACK;
 			case ArticleSpecial.SpecialReport:
@@ -456,13 +456,13 @@ const textArticleLinkHover = (format: ArticleFormat): string => {
 			case ArticlePillar.News:
 				return news[300];
 			case ArticlePillar.Culture:
-				return culture[350];
+				return culture[400];
 			case ArticlePillar.Lifestyle:
 				return lifestyle[400];
 			case ArticlePillar.Sport:
 				return sport[400];
 			case ArticlePillar.Opinion:
-				return opinion[300];
+				return opinion[400];
 			case ArticleSpecial.Labs:
 				return BLACK;
 			case ArticleSpecial.SpecialReport:
@@ -868,7 +868,7 @@ const backgroundFilterButtonActive = (format: ArticleFormat): string => {
 		case ArticlePillar.Sport:
 			return sport[300];
 		case ArticlePillar.Opinion:
-			return opinion[300];
+			return opinion[400];
 		case ArticleSpecial.Labs:
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
@@ -908,7 +908,7 @@ const fillShareIcon = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.DeadBlog) {
 		switch (format.theme) {
 			case ArticlePillar.Culture:
-				return culture[350];
+				return culture[400];
 			case ArticlePillar.News:
 				return news[400];
 			case ArticlePillar.Lifestyle:
@@ -916,7 +916,7 @@ const fillShareIcon = (format: ArticleFormat): string => {
 			case ArticlePillar.Sport:
 				return sport[400];
 			case ArticlePillar.Opinion:
-				return opinion[300];
+				return opinion[400];
 			case ArticleSpecial.Labs:
 				return BLACK;
 			case ArticleSpecial.SpecialReport:
@@ -926,7 +926,7 @@ const fillShareIcon = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
 			case ArticlePillar.Culture:
-				return culture[350];
+				return culture[400];
 			case ArticlePillar.News:
 				return news[300];
 			case ArticlePillar.Lifestyle:
@@ -934,7 +934,7 @@ const fillShareIcon = (format: ArticleFormat): string => {
 			case ArticlePillar.Sport:
 				return sport[400];
 			case ArticlePillar.Opinion:
-				return opinion[300];
+				return opinion[400];
 			case ArticleSpecial.Labs:
 				return BLACK;
 			case ArticleSpecial.SpecialReport:
@@ -1023,13 +1023,13 @@ const borderLiveBlock = (format: ArticleFormat): string => {
 			case ArticlePillar.News:
 				return news[400];
 			case ArticlePillar.Culture:
-				return culture[350];
+				return culture[400];
 			case ArticlePillar.Lifestyle:
 				return lifestyle[400];
 			case ArticlePillar.Sport:
 				return sport[400];
 			case ArticlePillar.Opinion:
-				return opinion[300];
+				return opinion[400];
 			case ArticleSpecial.Labs:
 				return labs[400];
 			case ArticleSpecial.SpecialReport:
@@ -1202,13 +1202,13 @@ const textRichLink = (format: ArticleFormat): string => {
 				? news[300]
 				: news[400];
 		case ArticlePillar.Culture:
-			return culture[350];
+			return culture[400];
 		case ArticlePillar.Lifestyle:
 			return lifestyle[300];
 		case ArticlePillar.Sport:
 			return sport[400];
 		case ArticlePillar.Opinion:
-			return opinion[300];
+			return opinion[400];
 		case ArticleSpecial.Labs:
 			return BLACK;
 		case ArticleSpecial.SpecialReport:
@@ -1227,13 +1227,13 @@ const borderRichLink: (format: ArticleFormat) => string = (format) => {
 				? news[300]
 				: news[400];
 		case ArticlePillar.Culture:
-			return culture[350];
+			return culture[400];
 		case ArticlePillar.Lifestyle:
 			return lifestyle[300];
 		case ArticlePillar.Sport:
 			return sport[400];
 		case ArticlePillar.Opinion:
-			return opinion[300];
+			return opinion[400];
 		case ArticleSpecial.Labs:
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
@@ -1295,13 +1295,13 @@ const fillRichLink = (format: ArticleFormat): string => {
 		case ArticlePillar.News:
 			return news[400];
 		case ArticlePillar.Culture:
-			return culture[350];
+			return culture[400];
 		case ArticlePillar.Lifestyle:
 			return lifestyle[300];
 		case ArticlePillar.Sport:
 			return sport[400];
 		case ArticlePillar.Opinion:
-			return opinion[300];
+			return opinion[400];
 		case ArticleSpecial.Labs:
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
@@ -1480,7 +1480,7 @@ const backgroundTreat = (format: ArticleFormat): string => {
 		case ArticlePillar.Culture:
 			return culture[300];
 		case ArticlePillar.Opinion:
-			return opinion[300];
+			return opinion[400];
 		case ArticleSpecial.Labs:
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
@@ -1499,7 +1499,7 @@ const backgroundDesignTag = (format: ArticleFormat): string => {
 		case ArticlePillar.Culture:
 			return culture[300];
 		case ArticlePillar.Opinion:
-			return opinion[300];
+			return opinion[400];
 		case ArticleSpecial.Labs:
 			return labs[300];
 		case ArticleSpecial.SpecialReport:

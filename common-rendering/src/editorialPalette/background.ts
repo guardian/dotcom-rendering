@@ -53,7 +53,7 @@ const headline = (format: ArticleFormat): Colour => {
 			case ArticlePillar.Lifestyle:
 				return lifestyle[300];
 			case ArticlePillar.Opinion:
-				return opinion[300];
+				return opinion[400];
 			case ArticlePillar.News:
 				return news[300];
 			default:
@@ -322,7 +322,7 @@ const avatar = (format: ArticleFormat): string => {
 		case ArticleSpecial.Labs:
 			return labs[400];
 		case ArticlePillar.Opinion:
-			return opinion[300];
+			return opinion[400];
 		case ArticlePillar.Culture:
 			return culture[500];
 		case ArticlePillar.Lifestyle:
@@ -374,7 +374,7 @@ const headlineTag = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.Labs:
 			return labs[300];
 		case ArticlePillar.Opinion:
-			return opinion[300];
+			return opinion[400];
 		case ArticlePillar.Culture:
 			return culture[300];
 		case ArticlePillar.Lifestyle:
@@ -596,7 +596,7 @@ const pinnedPost = (format: ArticleFormat): string => {
 		case ArticlePillar.Culture:
 			return culture[300];
 		case ArticlePillar.Opinion:
-			return opinion[300];
+			return opinion[400];
 		case ArticleSpecial.Labs:
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
