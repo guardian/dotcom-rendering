@@ -59,7 +59,7 @@ describe('Sign In Gate Tests', function () {
 		beforeEach(function () {
 			disableCMP();
 			// sign in gate main runs from 0-900000 MVT IDs, so 500 forces user into test
-			setMvtCookie('500');
+			setMvtCookie('500000');
 
 			// set article count to be min number to view gate
 			setArticleCount(3);
