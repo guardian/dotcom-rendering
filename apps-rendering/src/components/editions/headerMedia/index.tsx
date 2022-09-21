@@ -2,6 +2,10 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import {
+	background,
+	fill,
+} from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { brandAltBackground, from } from '@guardian/source-foundations';
@@ -18,7 +22,6 @@ import { isPicture as checkIfPicture, getFormat } from 'item';
 import { maybeRender } from 'lib';
 import { MainMediaKind } from 'mainMedia';
 import type { FC } from 'react';
-import { getThemeStyles } from 'themeStyles';
 import FootballScores from '../footballScores';
 import { wideImageWidth } from '../styles';
 import Video from '../video';
@@ -166,8 +169,8 @@ interface Props {
 const HeaderMedia: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 	const isPicture = checkIfPicture(item.tags);
-	const { cameraIcon: iconColor, cameraIconBackground: iconBackgroundColor } =
-		getThemeStyles(format.theme);
+	const iconColour = fill.editionsCameraIcon(format);
+	const iconBackgroundColour = background.editionsCameraIcon(format);
 	const matchScores = 'football' in item ? item.football : none;
 
 	return maybeRender(item.mainMedia, (media) => {
@@ -212,8 +215,8 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 						caption={caption}
 						credit={credit}
 						styles={getCaptionStyles(format)}
-						iconColor={iconColor}
-						iconBackgroundColor={iconBackgroundColor}
+						iconColor={iconColour}
+						iconBackgroundColor={iconBackgroundColour}
 						isFullWidthImage={isFullWidthImage(format)}
 					/>
 					<StarRating item={item} />

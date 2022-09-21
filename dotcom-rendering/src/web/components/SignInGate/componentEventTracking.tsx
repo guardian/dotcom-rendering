@@ -40,7 +40,7 @@ export const submitViewEventTracking = (
 		action: 'VIEW',
 	});
 
-export const submitClickEventTracking = (
+const submitClickEventTracking = (
 	componentEvent: ComponentEventWithoutAction,
 ) =>
 	submitComponentEventTracking({

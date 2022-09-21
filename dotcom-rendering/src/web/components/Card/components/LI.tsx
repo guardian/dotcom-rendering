@@ -1,50 +1,38 @@
 import { css } from '@emotion/react';
-import { from, until } from '@guardian/source-foundations';
+import { from, space, until } from '@guardian/source-foundations';
 import { verticalDivider } from '../../../lib/verticalDivider';
 import { verticalDividerWithBottomOffset } from '../../../lib/verticalDividerWithBottomOffset';
+
+/**
+ * This value needs to match the one set
+ * in the `verticalDividerWithBottomOffset`
+ */
+const GAP_SIZE = `${space[3]}px`;
 
 const liStyles = css`
 	/* This position relative is needed to contain the vertical divider */
 	position: relative;
 
 	display: flex;
+	row-gap: ${GAP_SIZE};
 `;
 
-const sidePaddingStyles = (
-	padSidesOnMobile: boolean,
-	paddingSize: string,
-) => css`
+const sidePaddingStyles = (padSidesOnMobile: boolean) => css`
 	/* Set spacing on the li element */
 	${padSidesOnMobile && until.tablet} {
-		padding-left: ${paddingSize};
-		padding-right: ${paddingSize};
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 
 	${from.tablet} {
-		padding-left: ${paddingSize};
-		padding-right: ${paddingSize};
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 `;
 
 const snapAlignStartStyles = css`
 	/* Snap start of card */
 	scroll-snap-align: start;
-`;
-
-const paddingBottomStyles = (paddingSize: string) => css`
-	padding-bottom: ${paddingSize};
-`;
-
-const mobilePaddingBottomStyles = (paddingSize: string) => css`
-	${until.tablet} {
-		padding-bottom: ${paddingSize};
-	}
-`;
-
-const marginTopStyles = css`
-	${until.tablet} {
-		margin-top: 12px;
-	}
 `;
 
 const decideSize = (percentage?: CardPercentageType, stretch?: boolean) => {
@@ -69,28 +57,30 @@ const decideSize = (percentage?: CardPercentageType, stretch?: boolean) => {
 	return sizeStyle;
 };
 
-function decideDivider(
+const decideDivider = (
 	offsetBottomPaddingOnDivider: boolean,
 	paddingSize: string,
-) {
-	return offsetBottomPaddingOnDivider
+) =>
+	offsetBottomPaddingOnDivider
 		? verticalDividerWithBottomOffset(paddingSize)
 		: verticalDivider;
-}
 
 type Props = {
 	children: React.ReactNode;
-	percentage?: CardPercentageType; // Used to give a particular LI more or less weight / space
-	stretch?: boolean; // When true, the card stretches based on content
-	showDivider?: boolean; // If this LI wraps a card in a row this should be true
-	padSides?: boolean; // If this LI directly wraps a card this should be true
-	padSidesOnMobile?: boolean; // Should be true if spacing between cards is desired on mobile devices
-	padBottom?: boolean;
-	padBottomOnMobile?: boolean; // Should be true if spacing below is desired on mobile devices
-	showTopMarginWhenStacked?: boolean;
-	snapAlignStart?: boolean; // True when snapping card when scrolling e.g. in carousel
-	// Prevent the divider from spanning the LI's bottom padding. To be used when you know that the
-	// LI will have bottom padding, but won't have another card in the same container directly below it.
+	/** Used to give a particular LI more or less weight / space */
+	percentage?: CardPercentageType;
+	/** When true, the card stretches based on content */
+	stretch?: boolean;
+	/** If this LI wraps a card in a row this should be true */
+	showDivider?: boolean;
+	/** If this LI directly wraps a card this should be true */
+	padSides?: boolean;
+	/** Should be true if spacing between cards is desired on mobile devices */
+	padSidesOnMobile?: boolean;
+	/** True when snapping card when scrolling e.g. in carousel */
+	snapAlignStart?: boolean;
+	/** Prevent the divider from spanning the LI's bottom padding. To be used when you know that the
+	LI will have bottom padding, but won't have another card in the same container directly below it. */
 	offsetBottomPaddingOnDivider?: boolean;
 };
 
@@ -101,18 +91,11 @@ export const LI = ({
 	showDivider,
 	padSides = false,
 	padSidesOnMobile = false,
-	padBottom,
-	padBottomOnMobile,
-	showTopMarginWhenStacked,
 	snapAlignStart = false,
 	offsetBottomPaddingOnDivider = false,
 }: Props) => {
 	// Decide sizing
 	const sizeStyles = decideSize(percentage, stretch);
-	// paddingSize is set here because the offset value used for the
-	// verticalDividerWithBottomOffset needs to match the value used for
-	// paddingBottom
-	const paddingSize = '10px';
 
 	return (
 		<li
@@ -120,11 +103,8 @@ export const LI = ({
 				liStyles,
 				sizeStyles,
 				showDivider &&
-					decideDivider(offsetBottomPaddingOnDivider, paddingSize),
-				padSides && sidePaddingStyles(padSidesOnMobile, paddingSize),
-				padBottom && paddingBottomStyles(paddingSize),
-				padBottomOnMobile && mobilePaddingBottomStyles(paddingSize),
-				showTopMarginWhenStacked && marginTopStyles,
+					decideDivider(offsetBottomPaddingOnDivider, GAP_SIZE),
+				padSides && sidePaddingStyles(padSidesOnMobile),
 				snapAlignStart && snapAlignStartStyles,
 			]}
 		>

@@ -26,7 +26,6 @@ export const FixedMediumSlowVII = ({
 					key={primary.url}
 					padSides={true}
 					showDivider={false}
-					padBottomOnMobile={true}
 					percentage="50%"
 				>
 					<FrontCard
@@ -40,13 +39,12 @@ export const FixedMediumSlowVII = ({
 						supportingContent={primary.supportingContent}
 					/>
 				</LI>
-				{firstSlice.map((trail, index) => {
+				{firstSlice.map((trail) => {
 					return (
 						<LI
 							key={trail.url}
 							padSides={true}
 							showDivider={true}
-							padBottomOnMobile={index !== 1}
 							percentage="25%"
 						>
 							<FrontCard
@@ -74,14 +72,13 @@ export const FixedMediumSlowVII = ({
 					);
 				})}
 			</UL>
-			<UL direction="row" padBottom={true}>
+			<UL direction="row">
 				{secondSlice.map((trail, index) => {
 					return (
 						<LI
 							key={trail.url}
 							padSides={true}
 							showDivider={index > 0}
-							padBottomOnMobile={true}
 						>
 							<FrontCard
 								trail={trail}

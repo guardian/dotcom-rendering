@@ -26,7 +26,6 @@ export const FixedSmallSlowVThird = ({
 						key={trail.url}
 						padSides={true}
 						showDivider={index > 0}
-						padBottomOnMobile={true}
 						percentage="25%"
 					>
 						<FrontCard
@@ -41,14 +40,9 @@ export const FixedSmallSlowVThird = ({
 			})}
 			<LI showDivider={true} percentage="50%">
 				<UL direction="column">
-					{secondaries.map((trail, index) => {
+					{secondaries.map((trail) => {
 						return (
-							<LI
-								key={trail.url}
-								padBottom={index != 2}
-								padSides={true}
-								padBottomOnMobile={true}
-							>
+							<LI key={trail.url} padSides={true}>
 								<FrontCard
 									trail={trail}
 									containerPalette={containerPalette}

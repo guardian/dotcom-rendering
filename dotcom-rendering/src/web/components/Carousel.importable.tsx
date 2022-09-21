@@ -343,7 +343,7 @@ type CarouselCardProps = {
 	branding?: Branding;
 };
 
-export const CarouselCard: React.FC<CarouselCardProps> = ({
+const CarouselCard: React.FC<CarouselCardProps> = ({
 	format,
 	linkTo,
 	imageUrl,
