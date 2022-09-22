@@ -105,7 +105,7 @@ export const Card33_Card33_Card33 = ({
 	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => (
-	<UL direction="row">
+	<UL direction="row" padBottom={true}>
 		<LI percentage="33.333%" padSides={true}>
 			<FrontCard
 				trail={cards[0]}
