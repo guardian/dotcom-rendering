@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
-import type { DCRContainerPalette } from '../../types/front';
+import type { DCRContainerPalette, DCRContainerType } from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import { LI } from '../components/Card/components/LI';
 import { UL } from '../components/Card/components/UL';
@@ -23,10 +23,12 @@ import { FrontCard } from '../components/FrontCard';
 export const Card100 = ({
 	cards,
 	containerPalette,
+	containerType,
 	showAge,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
+	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => (
 	<UL>
@@ -34,6 +36,7 @@ export const Card100 = ({
 			<FrontCard
 				trail={cards[0]}
 				containerPalette={containerPalette}
+				containerType={containerType}
 				showAge={showAge}
 				imagePosition="right"
 				imagePositionOnMobile="top"
@@ -54,10 +57,12 @@ export const Card100 = ({
 export const Card50_Card50 = ({
 	cards,
 	containerPalette,
+	containerType,
 	showAge,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
+	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => (
 	<UL direction="row" padBottom={true}>
@@ -65,6 +70,7 @@ export const Card50_Card50 = ({
 			<FrontCard
 				trail={cards[0]}
 				containerPalette={containerPalette}
+				containerType={containerType}
 				showAge={showAge}
 				trailText={cards[0].trailText}
 				imagePositionOnMobile="top"
@@ -79,6 +85,7 @@ export const Card50_Card50 = ({
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
+				containerType={containerType}
 				showAge={showAge}
 				trailText={cards[1].trailText}
 				imagePositionOnMobile="top"
@@ -95,10 +102,12 @@ export const Card50_Card50 = ({
 export const Card33_Card33_Card33 = ({
 	cards,
 	containerPalette,
+	containerType,
 	showAge,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
+	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => (
 	<UL direction="row" padBottom={true}>
@@ -106,6 +115,7 @@ export const Card33_Card33_Card33 = ({
 			<FrontCard
 				trail={cards[0]}
 				containerPalette={containerPalette}
+				containerType={containerType}
 				showAge={showAge}
 				trailText={cards[0].trailText}
 				imagePositionOnMobile="top"
@@ -120,6 +130,7 @@ export const Card33_Card33_Card33 = ({
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
+				containerType={containerType}
 				showAge={showAge}
 				trailText={cards[1].trailText}
 				imagePositionOnMobile="left"
@@ -134,6 +145,7 @@ export const Card33_Card33_Card33 = ({
 			<FrontCard
 				trail={cards[2]}
 				containerPalette={containerPalette}
+				containerType={containerType}
 				showAge={showAge}
 				trailText={cards[2].trailText}
 				imagePositionOnMobile="left"
@@ -150,10 +162,12 @@ export const Card33_Card33_Card33 = ({
 export const Card66_Card33 = ({
 	cards,
 	containerPalette,
+	containerType,
 	showAge,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
+	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => (
 	<UL direction="row" padBottom={true}>
@@ -161,6 +175,7 @@ export const Card66_Card33 = ({
 			<FrontCard
 				trail={cards[0]}
 				containerPalette={containerPalette}
+				containerType={containerType}
 				showAge={showAge}
 				trailText={cards[0].trailText}
 				imagePositionOnMobile="top"
@@ -175,6 +190,7 @@ export const Card66_Card33 = ({
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
+				containerType={containerType}
 				showAge={showAge}
 				trailText={cards[1].trailText}
 				imagePositionOnMobile="left"
@@ -191,10 +207,12 @@ export const Card66_Card33 = ({
 export const Card50_Card25_Card25 = ({
 	cards,
 	containerPalette,
+	containerType,
 	showAge,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
+	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => (
 	<UL direction="row" padBottom={true}>
@@ -202,6 +220,7 @@ export const Card50_Card25_Card25 = ({
 			<FrontCard
 				trail={cards[0]}
 				containerPalette={containerPalette}
+				containerType={containerType}
 				showAge={showAge}
 				headlineSize="large"
 				imagePosition="top"
@@ -218,6 +237,7 @@ export const Card50_Card25_Card25 = ({
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
+				containerType={containerType}
 				showAge={showAge}
 				trailText={
 					cards[1]?.supportingContent &&
@@ -239,6 +259,7 @@ export const Card50_Card25_Card25 = ({
 			<FrontCard
 				trail={cards[2]}
 				containerPalette={containerPalette}
+				containerType={containerType}
 				showAge={showAge}
 				trailText={
 					cards[2]?.supportingContent &&
@@ -262,12 +283,14 @@ export const Card50_Card25_Card25 = ({
 export const Card25_Card25_Card25_Card25 = ({
 	cards,
 	containerPalette,
+	containerType,
 	showAge,
 	showImage = true,
 	padBottom,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
+	containerType?: DCRContainerType;
 	showAge?: boolean;
 	showImage?: boolean;
 	padBottom?: boolean;
@@ -286,6 +309,7 @@ export const Card25_Card25_Card25_Card25 = ({
 						<FrontCard
 							trail={card}
 							containerPalette={containerPalette}
+							containerType={containerType}
 							showAge={showAge}
 							supportingContent={card.supportingContent}
 							imageUrl={showImage ? card.image : undefined}
@@ -305,10 +329,12 @@ export const Card25_Card25_Card25_Card25 = ({
 export const Card75_Card25 = ({
 	cards,
 	containerPalette,
+	containerType,
 	showAge,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
+	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => (
 	<UL direction="row" padBottom={true}>
@@ -316,6 +342,7 @@ export const Card75_Card25 = ({
 			<FrontCard
 				trail={cards[0]}
 				containerPalette={containerPalette}
+				containerType={containerType}
 				showAge={showAge}
 				trailText={cards[0].trailText}
 				imagePosition="right"
@@ -332,6 +359,7 @@ export const Card75_Card25 = ({
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
+				containerType={containerType}
 				showAge={showAge}
 			/>
 		</LI>
@@ -346,10 +374,12 @@ export const Card75_Card25 = ({
 export const Card25_Card75 = ({
 	cards,
 	containerPalette,
+	containerType,
 	showAge,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
+	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => (
 	<UL direction="row" padBottom={true}>
@@ -357,6 +387,7 @@ export const Card25_Card75 = ({
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
+				containerType={containerType}
 				showAge={showAge}
 			/>
 		</LI>
@@ -369,6 +400,7 @@ export const Card25_Card75 = ({
 			<FrontCard
 				trail={cards[0]}
 				containerPalette={containerPalette}
+				containerType={containerType}
 				showAge={showAge}
 				trailText={cards[0].trailText}
 				imagePosition="right"

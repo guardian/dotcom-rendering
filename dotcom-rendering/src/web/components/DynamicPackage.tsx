@@ -533,6 +533,7 @@ export const DynamicPackage = ({
 					<Card25_Card25_Card25_Card25
 						cards={thirdSlice}
 						containerPalette={containerPalette}
+						containerType="dynamic/package"
 						showAge={showAge}
 					/>
 				</>
@@ -568,6 +569,7 @@ export const DynamicPackage = ({
 					<Card25_Card25_Card25_Card25
 						cards={thirdSlice}
 						containerPalette={containerPalette}
+						containerType="dynamic/package"
 						showAge={showAge}
 					/>
 				</>
@@ -648,12 +650,14 @@ export const DynamicPackage = ({
 					<Card25_Card25_Card25_Card25
 						cards={thirdSlice}
 						containerPalette={containerPalette}
+						containerType="dynamic/package"
 						showAge={showAge}
 						padBottom={true}
 					/>
 					<Card25_Card25_Card25_Card25
 						cards={fourthSlice}
 						containerPalette={containerPalette}
+						containerType="dynamic/package"
 						showAge={showAge}
 						showImage={false}
 					/>
