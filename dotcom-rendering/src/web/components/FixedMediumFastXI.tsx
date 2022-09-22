@@ -56,7 +56,6 @@ export const FixedMediumFastXI = ({
 		default: {
 			const topThree = trails.slice(0, 3);
 			const remainingCards = trails.slice(3, 11);
-			const lengthIsEven = remainingCards.length % 2 === 0;
 			return (
 				<>
 					<Card50_Card25_Card25
@@ -78,7 +77,6 @@ export const FixedMediumFastXI = ({
 						{remainingCards.map((trail, trailIndex) => (
 							<LI
 								padSides={true}
-								padBottom={trailIndex < 4}
 								offsetBottomPaddingOnDivider={
 									trails.length === 11
 										? false
@@ -87,10 +85,6 @@ export const FixedMediumFastXI = ({
 								showDivider={trailIndex % 4 !== 0}
 								percentage="25%"
 								stretch={true}
-								showTopMarginWhenStacked={
-									lengthIsEven &&
-									remainingCards.length === trailIndex + 1
-								}
 							>
 								<FrontCard
 									trail={trail}

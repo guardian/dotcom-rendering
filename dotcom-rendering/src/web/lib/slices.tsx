@@ -65,7 +65,7 @@ export const Card50_Card50 = ({
 	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => (
-	<UL direction="row" padBottom={true}>
+	<UL direction="row">
 		<LI percentage="50%" padSides={true}>
 			<FrontCard
 				trail={cards[0]}
@@ -76,12 +76,7 @@ export const Card50_Card50 = ({
 				imagePositionOnMobile="top"
 			/>
 		</LI>
-		<LI
-			percentage="50%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
+		<LI percentage="50%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -110,7 +105,7 @@ export const Card33_Card33_Card33 = ({
 	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => (
-	<UL direction="row" padBottom={true}>
+	<UL direction="row">
 		<LI percentage="33.333%" padSides={true}>
 			<FrontCard
 				trail={cards[0]}
@@ -121,12 +116,7 @@ export const Card33_Card33_Card33 = ({
 				imagePositionOnMobile="top"
 			/>
 		</LI>
-		<LI
-			percentage="33.333%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
+		<LI percentage="33.333%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -136,12 +126,7 @@ export const Card33_Card33_Card33 = ({
 				imagePositionOnMobile="left"
 			/>
 		</LI>
-		<LI
-			percentage="33.333%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
+		<LI percentage="33.333%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={cards[2]}
 				containerPalette={containerPalette}
@@ -170,7 +155,7 @@ export const Card66_Card33 = ({
 	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => (
-	<UL direction="row" padBottom={true}>
+	<UL direction="row">
 		<LI percentage="66.666%" padSides={true}>
 			<FrontCard
 				trail={cards[0]}
@@ -181,12 +166,7 @@ export const Card66_Card33 = ({
 				imagePositionOnMobile="top"
 			/>
 		</LI>
-		<LI
-			percentage="33.333%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
+		<LI percentage="33.333%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -228,12 +208,7 @@ export const Card50_Card25_Card25 = ({
 				supportingContent={cards[0].supportingContent}
 			/>
 		</LI>
-		<LI
-			percentage="25%"
-			padSides={true}
-			showDivider={true}
-			showTopMarginWhenStacked={true}
-		>
+		<LI percentage="25%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -250,12 +225,7 @@ export const Card50_Card25_Card25 = ({
 				}
 			/>
 		</LI>
-		<LI
-			percentage="25%"
-			padSides={true}
-			showDivider={true}
-			showTopMarginWhenStacked={true}
-		>
+		<LI percentage="25%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={cards[2]}
 				containerPalette={containerPalette}
@@ -297,15 +267,9 @@ export const Card25_Card25_Card25_Card25 = ({
 }) => {
 	return (
 		<UL direction="row" padBottom={padBottom}>
-			{cards.map((card, cardIndex) => {
+			{cards.map((card) => {
 				return (
-					<LI
-						key={card.url}
-						padSides={true}
-						padBottom={false}
-						padBottomOnMobile={cardIndex < cards.length - 1}
-						showDivider={true}
-					>
+					<LI key={card.url} padSides={true} showDivider={true}>
 						<FrontCard
 							trail={card}
 							containerPalette={containerPalette}
@@ -350,12 +314,7 @@ export const Card75_Card25 = ({
 				imagePositionOnMobile="top"
 			/>
 		</LI>
-		<LI
-			percentage="25%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
+		<LI percentage="25%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -391,12 +350,7 @@ export const Card25_Card75 = ({
 				showAge={showAge}
 			/>
 		</LI>
-		<LI
-			percentage="75%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
+		<LI percentage="75%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={cards[0]}
 				containerPalette={containerPalette}
