@@ -34,7 +34,7 @@ interface FEPressedPageType {
 	seoData: FESeoDataType;
 	frontProperties: FEFrontPropertiesType;
 	collections: FECollectionType[];
-	isNetworkFront?: boolean;
+	isNetworkFront: boolean;
 }
 
 interface DCRPressedPageType {
@@ -42,7 +42,7 @@ interface DCRPressedPageType {
 	seoData: FESeoDataType;
 	frontProperties: FEFrontPropertiesType;
 	collections: DCRCollectionType[];
-	isNetworkFront?: boolean;
+	isNetworkFront: boolean;
 }
 
 type FEContainerType =
@@ -384,7 +384,7 @@ type FEFrontConfigType = {
 	discussionFrontendUrl: string;
 	ipsosTag: string;
 	ophanJsUrl: string;
-	isPaidContent?: boolean;
+	isPaidContent: boolean;
 	mobileAppsAdUnitRoot: string;
 	plistaPublicApiKey: string;
 	frontendAssetsFullURL: string;
@@ -421,7 +421,7 @@ type FESeoDataType = {
 type FEFrontPropertiesType = {
 	isImageDisplayed: boolean;
 	commercial: Record<string, unknown>;
-	isPaidContent?: boolean;
+	isPaidContent: boolean;
 };
 
 export type FESupportingContent = {
