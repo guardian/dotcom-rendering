@@ -434,7 +434,8 @@
                     },
                     "required": [
                         "commercial",
-                        "isImageDisplayed"
+                        "isImageDisplayed",
+                        "isPaidContent"
                     ]
                 },
                 "collections": {
@@ -2590,6 +2591,7 @@
                 "collections",
                 "frontProperties",
                 "id",
+                "isNetworkFront",
                 "seoData"
             ]
         },
