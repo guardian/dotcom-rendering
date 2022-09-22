@@ -47,12 +47,7 @@ export const FixedMediumFastXI = ({
 				/>
 			);
 		}
-		case 4:
-		case 5:
-		case 6:
-		case 7:
-		case 8:
-		case 9:
+		case 4: 
 		default: {
 			const topThree = trails.slice(0, 3);
 			const remainingCards = trails.slice(3, 11);
