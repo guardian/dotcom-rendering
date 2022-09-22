@@ -3,6 +3,7 @@ import { AccessScope } from '@guardian/cdk/lib/constants';
 import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
 import { GuStack } from '@guardian/cdk/lib/constructs/core';
 import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
+import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
 import type { App, CfnElement } from 'aws-cdk-lib';
 import { Duration } from 'aws-cdk-lib';
 import {
@@ -18,14 +19,9 @@ import {
 	RecordType,
 } from 'aws-cdk-lib/aws-route53';
 
-interface AsgSize {
-	min: number;
-	max: number;
-}
-
 interface AppsStackProps extends GuStackProps {
 	recordPrefix: string;
-	asgSize: AsgSize;
+	asgCapacity: GuAsgCapacity;
 	appsRenderingDomain: string;
 	hostedZoneId: string;
 	targetCpuUtilisation: number;
@@ -99,10 +95,7 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 /usr/local/node/pm2 start --name ${appName} --uid ${appName} --gid mapi /opt/${appName}/server.js
 /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${this.region} mobile-log-aggregation-${this.stage} '/var/log/${appName}/*'
 /usr/local/node/pm2 logrotate -u ${appName}`,
-			scaling: {
-				minimumInstances: props.asgSize.min,
-				maximumInstances: props.asgSize.max,
-			},
+			scaling: props.asgCapacity,
 		});
 
 		const asg = appsRenderingApp.autoScalingGroup;

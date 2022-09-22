@@ -3,6 +3,7 @@ import { until } from '@guardian/source-foundations';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import { shouldPadWrappableRows } from '../lib/slices';
+import { verticalDivider } from '../lib/verticalDivider';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -66,7 +67,6 @@ const Primaries = ({
 								index === boostedIndex ? '75%' : '25%'
 							}
 							showDivider={index > 0}
-							showTopMarginWhenStacked={index > 0}
 						>
 							<FrontCard
 								trail={card}
@@ -111,7 +111,6 @@ const Primaries = ({
 						padSides={true}
 						percentage={primaries.length === 1 ? '100%' : '50%'}
 						showDivider={index > 0}
-						showTopMarginWhenStacked={index > 0}
 					>
 						<FrontCard
 							trail={card}
@@ -162,6 +161,7 @@ const FirstBigBoostedPlusBig = ({
 		flex-direction: column;
 		flex-basis: 50%;
 		flex-grow: 1;
+		row-gap: 12px;
 		${until.tablet} {
 			flex-basis: 100%;
 		}
@@ -179,15 +179,11 @@ const FirstBigBoostedPlusBig = ({
 				display: flex;
 				flex-basis: 100%;
 				flex-wrap: wrap;
+				row-gap: 10px;
 			`}
 		>
-			<ul css={manualUlStyles}>
-				<LI
-					showDivider={true}
-					padSides={true}
-					padBottom={standardsCol1.length > 0}
-					padBottomOnMobile={standardsCol1.length > 0}
-				>
+			<ul css={[manualUlStyles, verticalDivider]}>
+				<LI showDivider={true} padSides={true}>
 					<FrontCard
 						trail={big}
 						starRating={big.starRating}
@@ -200,19 +196,9 @@ const FirstBigBoostedPlusBig = ({
 						imagePositionOnMobile="left"
 					/>
 				</LI>
-				{standardsCol1.map((card, cardIndex) => {
+				{standardsCol1.map((card) => {
 					return (
-						<LI
-							key={card.url}
-							showDivider={true}
-							padSides={true}
-							padBottom={cardIndex < standardsCol1.length - 1}
-							padBottomOnMobile={
-								// If there are cards in the second col, we always want padding
-								standardsCol2.length > 0 ||
-								cardIndex < standardsCol1.length - 1
-							}
-						>
+						<LI key={card.url} padSides={true}>
 							<FrontCard
 								trail={card}
 								starRating={card.starRating}
@@ -225,18 +211,10 @@ const FirstBigBoostedPlusBig = ({
 					);
 				})}
 			</ul>
-			<ul css={manualUlStyles}>
-				{standardsCol2.map((card, cardIndex) => {
+			<ul css={[manualUlStyles, verticalDivider]}>
+				{standardsCol2.map((card) => {
 					return (
-						<LI
-							key={card.url}
-							showDivider={true}
-							padSides={true}
-							padBottom={cardIndex < standardsCol2.length - 1}
-							padBottomOnMobile={
-								cardIndex < standardsCol2.length - 1
-							}
-						>
+						<LI key={card.url} padSides={true}>
 							<FrontCard
 								trail={card}
 								starRating={card.starRating}
@@ -455,8 +433,6 @@ export const DynamicFast = ({
 								key={card.url}
 								percentage={`50%`}
 								padSides={true}
-								padBottom={false}
-								showTopMarginWhenStacked={cardIndex > 0}
 								showDivider={cardIndex > 0}
 							>
 								<FrontCard
@@ -480,8 +456,6 @@ export const DynamicFast = ({
 							key={card.url}
 							percentage={`25%`}
 							padSides={true}
-							padBottom={false}
-							showTopMarginWhenStacked={cardIndex > 0}
 							showDivider={cardIndex > 0}
 						>
 							<FrontCard
@@ -497,10 +471,7 @@ export const DynamicFast = ({
 					);
 				})}
 				{standardsDisplayConfig.columns > 0 && (
-					<LI
-						percentage={standardsDisplayConfig.containerWidth}
-						showTopMarginWhenStacked={true}
-					>
+					<LI percentage={standardsDisplayConfig.containerWidth}>
 						<UL direction="row" wrapCards={true}>
 							{/* If the first big is boosted & we have a second big,
 							it should be at the start of the standards but have an image  */}
@@ -526,14 +497,11 @@ export const DynamicFast = ({
 											stretch={true}
 											showDivider={true}
 											padSides={true}
-											padBottom={shouldPadWrappableRows(
+											offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 												cardIndex,
 												standards.length,
 												standardsDisplayConfig.columns,
 											)}
-											padBottomOnMobile={
-												cardIndex < standards.length - 1
-											}
 										>
 											<FrontCard
 												trail={card}

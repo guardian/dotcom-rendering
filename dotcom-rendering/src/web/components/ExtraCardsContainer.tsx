@@ -44,18 +44,16 @@ export const ExtraCardsContainer = ({
 	const percentage = '25%';
 	return (
 		<>
-			<UL direction="row" padBottom={true} wrapCards={true}>
+			<UL direction="row" wrapCards={true}>
 				{trails.map((trail, index) => (
 					<LI
 						padSides={true}
 						percentage={percentage}
-						padBottom={true}
 						showDivider={!isFirstInRow(index)}
 						key={trail.url}
-						offsetBottomPaddingOnDivider={hasNoCardBelowIt(
-							index,
-							trails.length,
-						)}
+						offsetBottomPaddingOnDivider={
+							!hasNoCardBelowIt(index, trails.length)
+						}
 					>
 						<Card
 							containerPalette={containerPalette}

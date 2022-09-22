@@ -31,7 +31,7 @@ const Card66_Ad33 = ({
 	showAge?: boolean;
 	index: number;
 }) => (
-	<UL direction="row" padBottom={true}>
+	<UL direction="row">
 		<LI percentage="66.666%" padSides={true}>
 			<FrontCard
 				trail={trails[0]}
@@ -67,7 +67,7 @@ const Card33_Card33_Ad33 = ({
 	showAge?: boolean;
 	index: number;
 }) => (
-	<UL direction="row" padBottom={true}>
+	<UL direction="row">
 		<LI percentage="33.333%" padSides={true}>
 			<FrontCard
 				trail={trails[0]}
@@ -86,12 +86,7 @@ const Card33_Card33_Ad33 = ({
 				}
 			/>
 		</LI>
-		<LI
-			percentage="33.333%"
-			padSides={true}
-			showDivider={true}
-			showTopMarginWhenStacked={true}
-		>
+		<LI percentage="33.333%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={trails[1]}
 				containerPalette={containerPalette}
@@ -116,23 +111,6 @@ const Card33_Card33_Ad33 = ({
 		</LI>
 	</UL>
 );
-
-/**
- * If the count of cards is odd there is just a single card on
- * the bottom row with nothing under it which does not need
- * padding
- */
-function shouldPadWhenOdd(i: number, noOfCards: number) {
-	return i !== noOfCards - 1;
-}
-
-/**
- * If the count of cards is even the last two sit on the bottom
- * row with nothing underneath so we don't want to pad them
- */
-function shouldPadWhenEven(i: number, noOfCards: number) {
-	return i !== noOfCards - 1 && i !== noOfCards - 2;
-}
 
 /**
  *
@@ -245,7 +223,7 @@ export const FixedMediumSlowXIIMPU = ({
 						<LI percentage="66.666%">
 							{/*
 							 *	This pattern of using wrapCards on the UL + percentage=50 and stretch=true
-							 * on the LI creates a dynanic list of cards over two columns. Crucially,
+							 * on the LI creates a dynamic list of cards over two columns. Crucially,
 							 * cards align horizontally in rows. If the number of trails is odd the last
 							 * card stretches full width.
 							 *
@@ -259,17 +237,6 @@ export const FixedMediumSlowXIIMPU = ({
 								{remainingCards.map((trail, trailIndex) => (
 									<LI
 										padSides={true}
-										padBottom={
-											lengthIsEven
-												? shouldPadWhenEven(
-														trailIndex,
-														remainingCards.length,
-												  )
-												: shouldPadWhenOdd(
-														trailIndex,
-														remainingCards.length,
-												  )
-										}
 										offsetBottomPaddingOnDivider={
 											lengthIsEven
 												? false
@@ -281,11 +248,6 @@ export const FixedMediumSlowXIIMPU = ({
 										showDivider={trailIndex % 2 !== 0}
 										percentage="50%"
 										stretch={true}
-										showTopMarginWhenStacked={
-											lengthIsEven &&
-											remainingCards.length ===
-												trailIndex + 1
-										}
 									>
 										<FrontCard
 											trail={trail}

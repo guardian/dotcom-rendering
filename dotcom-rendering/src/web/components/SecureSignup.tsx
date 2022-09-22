@@ -7,7 +7,7 @@ import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { NewsletterSignupForm } from './NewsletterSignupForm';
 import { SecureSignupIframe } from './SecureSignupIframe.importable';
 
-export type Props = {
+type Props = {
 	newsletterId: string;
 	name: string;
 	successDescription: string;

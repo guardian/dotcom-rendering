@@ -1,4 +1,5 @@
-import { css, SerializedStyles } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import { border, from } from '@guardian/source-foundations';
 
 export function verticalDividerWithBottomOffset(
@@ -16,7 +17,7 @@ export function verticalDividerWithBottomOffset(
 				width: 1px;
 				/* 100% is a reasonable fallback for browsers which don't support calc() */
 				height: 100%;
-				height: calc(100% - ${bottomPaddingSize});
+				height: calc(100% + ${bottomPaddingSize});
 				border-left: 1px solid ${border.secondary};
 			}
 		}
