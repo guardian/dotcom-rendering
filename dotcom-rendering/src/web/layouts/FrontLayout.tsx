@@ -36,9 +36,9 @@ const ophanComponentId = (name: string) =>
 
 const shouldInsertMerchHigh = (
 	index: number,
-	isNetworkFront: boolean,
+	isNetworkFront: boolean | undefined,
 	collectionCount: number,
-	isPaidContent: boolean,
+	isPaidContent: boolean | undefined,
 ) => {
 	const minContainers = isPaidContent ? 1 : 2;
 	if (collectionCount < minContainers) {
