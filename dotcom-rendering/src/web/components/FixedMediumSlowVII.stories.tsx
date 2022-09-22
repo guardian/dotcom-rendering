@@ -1,6 +1,5 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
-
 import { FixedMediumSlowVII } from './FixedMediumSlowVII';
 import { Section } from './Section';
 
@@ -9,16 +8,7 @@ export default {
 	title: 'Components/FixedMediumSlowVII',
 	parameters: {
 		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.mobileMedium,
-				breakpoints.mobileLandscape,
-				breakpoints.phablet,
-				breakpoints.tablet,
-				breakpoints.desktop,
-				breakpoints.leftCol,
-				breakpoints.wide,
-			],
+			viewports: [breakpoints.mobile, breakpoints.wide],
 		},
 	},
 };

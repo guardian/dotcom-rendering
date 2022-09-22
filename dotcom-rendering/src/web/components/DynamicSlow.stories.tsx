@@ -18,16 +18,7 @@ export default {
 	title: 'Components/DynamicSlow',
 	parameters: {
 		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.mobileMedium,
-				breakpoints.mobileLandscape,
-				breakpoints.phablet,
-				breakpoints.tablet,
-				breakpoints.desktop,
-				breakpoints.leftCol,
-				breakpoints.wide,
-			],
+			viewports: [breakpoints.mobile, breakpoints.wide],
 		},
 	},
 };

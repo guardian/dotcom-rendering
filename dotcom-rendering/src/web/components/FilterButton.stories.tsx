@@ -25,15 +25,7 @@ export default {
 	parameters: {
 		// Set the viewports in Chromatic at a component level.
 		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.mobileMedium,
-				breakpoints.phablet,
-				breakpoints.tablet,
-				breakpoints.desktop,
-				breakpoints.leftCol,
-				breakpoints.wide,
-			],
+			viewports: [breakpoints.mobile, breakpoints.wide],
 		},
 	},
 };

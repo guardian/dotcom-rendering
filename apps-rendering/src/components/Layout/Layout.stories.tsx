@@ -240,12 +240,7 @@ export default {
 		layout: 'fullscreen',
 		chromatic: {
 			diffThreshold: 0.4,
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.phablet,
-				breakpoints.tablet,
-				breakpoints.wide,
-			],
+			viewports: [breakpoints.mobile, breakpoints.wide],
 		},
 	},
 };
