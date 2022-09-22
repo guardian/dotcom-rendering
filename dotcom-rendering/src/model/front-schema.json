@@ -328,7 +328,6 @@
                 "ipsosTag",
                 "isDev",
                 "isFront",
-                "isPaidContent",
                 "isPreview",
                 "isProd",
                 "isSensitive",
@@ -434,8 +433,7 @@
                     },
                     "required": [
                         "commercial",
-                        "isImageDisplayed",
-                        "isPaidContent"
+                        "isImageDisplayed"
                     ]
                 },
                 "collections": {
@@ -2591,7 +2589,6 @@
                 "collections",
                 "frontProperties",
                 "id",
-                "isNetworkFront",
                 "seoData"
             ]
         },
