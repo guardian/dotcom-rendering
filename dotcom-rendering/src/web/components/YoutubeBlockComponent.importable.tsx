@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { YoutubeAtom } from '@guardian/atoms-rendering';
+import { buildImaAdTagUrl } from '@guardian/commercial-core';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import { body, neutral, space } from '@guardian/source-foundations';
 import { SvgAlertRound } from '@guardian/source-react-components';
@@ -99,11 +100,14 @@ export const YoutubeBlockComponent = ({
 		'IntegrateIMA',
 		'variant',
 	);
-	const imaAdTagUrl = userInImaTestVariant
-		? 'https://pubads.g.doubleclick.net/gampad/live/ads?iu=/59666047/theguardian.com&' +
-		  'description_url=[placeholder]&tfcd=0&npa=0&sz=400x300&gdfp_req=1&output=vast&' +
-		  'unviewed_position_start=1&env=vp&impl=s&correlator=&vad_type=linear&cust_params=at%3Dfixed-puppies'
-		: undefined;
+	const imaAdTagUrl =
+		userInImaTestVariant &&
+		adTargeting &&
+		!adTargeting.disableAds &&
+		adTargeting.adUnit
+			? buildImaAdTagUrl(adTargeting.adUnit, adTargeting.customParams)
+			: undefined;
+	console.log('IMA AD TAG URL', imaAdTagUrl);
 
 	useEffect(() => {
 		const defineConsentState = async () => {
