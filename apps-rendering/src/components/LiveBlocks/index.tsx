@@ -1,9 +1,10 @@
 // ----- Imports ----- //
 
 import type { Edition } from '@guardian/apps-rendering-api-models/edition';
-import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import { map, OptionKind, withDefault } from '@guardian/types';
+import AdSlot from 'adSlot';
 import LiveBlock from 'components/LiveBlock';
 import PinnedPost from 'components/PinnedPost';
 import { pipe } from 'lib';
@@ -29,6 +30,12 @@ const LiveBlocks: FC<LiveBlocksProps> = ({
 	const showPinnedPost =
 		pageNumber === 1 && pinnedPost.kind === OptionKind.Some;
 
+	const showAd = (index: number): boolean =>
+		// This can be removed when LiveBlogs are deployed
+		format.design === ArticleDesign.DeadBlog &&
+		// Add an AdSlot at 2nd and every other 5 blocks
+		(index === 1 || (index - 1) % 5 === 0);
+
 	return (
 		<>
 			{/* Accordion? */}
@@ -39,21 +46,30 @@ const LiveBlocks: FC<LiveBlocksProps> = ({
 					edition={edition}
 				/>
 			)}
-			{blocks.map((block) => (
-				<LiveBlock
-					key={block.id}
-					block={block}
-					format={format}
-					// This is false because it's only true when it's
-					// used for the actual pinned post on top of the page
-					isPinnedPost={false}
-					isOriginalPinnedPost={pipe(
-						pinnedPost,
-						map((pinned) => block.id === pinned.id),
-						withDefault<boolean>(false),
-					)}
-					edition={edition}
-				/>
+			{blocks.map((block, index) => (
+				<>
+					<LiveBlock
+						key={block.id}
+						block={block}
+						format={format}
+						// This is false because it's only true when it's
+						// used for the actual pinned post on top of the page
+						isPinnedPost={false}
+						isOriginalPinnedPost={pipe(
+							pinnedPost,
+							map((pinned) => block.id === pinned.id),
+							withDefault<boolean>(false),
+						)}
+						edition={edition}
+					/>
+					{showAd(index) ? (
+						<AdSlot
+							className="ad-placeholder hidden"
+							format={format}
+							paragraph={index}
+						/>
+					) : null}
+				</>
 			))}
 		</>
 	);
