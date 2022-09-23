@@ -4,7 +4,7 @@ import { setOrUseParticipations } from '../lib/ab-exclusions';
 
 // Flag to determine whether the canRun function 'setOrUseParticipations' will set a participation (true)
 // or use localstorage participation key to decide canRun result (false)
-const setParticipationsFlag = true;
+const setParticipationsFlag = false;
 
 export const signInGateMandatoryLongTestRunUk: ABTest = {
 	id: 'SignInGateMandatoryLongTestRunUk',
