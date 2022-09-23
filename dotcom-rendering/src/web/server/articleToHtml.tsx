@@ -251,9 +251,10 @@ window.twttr = (function(d, s, id) {
 }(document, "script", "twitter-wjs"));
 </script>`;
 
-	const url = CAPIArticle.webURL;
+	const webURL = CAPIArticle.webURL;
 
-	const recipeMarkup = url in recipeSchema ? recipeSchema[url] : undefined;
+	const recipeMarkup =
+		webURL in recipeSchema ? recipeSchema[webURL] : undefined;
 
 	return pageTemplate({
 		linkedData,
@@ -275,6 +276,6 @@ window.twttr = (function(d, s, id) {
 				: undefined,
 		recipeMarkup,
 		offerHttp3,
-		canonicalURL: url,
+		canonicalURL: webURL,
 	});
 };
