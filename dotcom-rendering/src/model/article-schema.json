@@ -534,11 +534,15 @@
         },
         "tableOfContents": {
             "$ref": "#/definitions/TableOfContents"
+        },
+        "canonicalUrl": {
+            "type": "string"
         }
     },
     "required": [
         "beaconURL",
         "blocks",
+        "canonicalUrl",
         "commercialProperties",
         "config",
         "contentType",
