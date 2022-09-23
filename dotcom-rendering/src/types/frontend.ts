@@ -106,6 +106,7 @@ export interface CAPIArticleType {
 
 	promotedNewsletter?: Newsletter;
 	tableOfContents?: TableOfContents;
+	canonicalUrl: string;
 }
 
 export interface TableOfContents {

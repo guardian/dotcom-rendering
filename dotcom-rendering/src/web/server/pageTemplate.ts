@@ -21,7 +21,7 @@ export const pageTemplate = ({
 	twitterData,
 	initTwitter,
 	recipeMarkup,
-	canonicalURL,
+	canonicalUrl,
 }: {
 	css: string;
 	html: string;
@@ -39,7 +39,7 @@ export const pageTemplate = ({
 	twitterData?: { [key: string]: string };
 	initTwitter?: string;
 	recipeMarkup?: string;
-	canonicalURL?: string;
+	canonicalUrl?: string;
 }): string => {
 	const favicon =
 		process.env.NODE_ENV === 'production'
@@ -187,8 +187,8 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <title>${title}</title>
                 <meta name="description" content="${he.encode(description)}" />
 				${
-					canonicalURL !== undefined
-						? `<link rel="canonical" href="${canonicalURL}" />`
+					canonicalUrl !== undefined
+						? `<link rel="canonical" href="${canonicalUrl}" />`
 						: '<!-- no canonical URL -->'
 				}
                 <meta charset="utf-8">
