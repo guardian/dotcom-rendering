@@ -25,9 +25,18 @@ export default {
 };
 
 export const defaultStory = () => {
-	const headline1: TableOfContentsItem = { id: '1234', title: 'Headline1' };
-	const headline2: TableOfContentsItem = { id: '1235', title: 'Headline2' };
-	const headline3: TableOfContentsItem = { id: '1236', title: 'Headline3' };
+	const headline1: TableOfContentsItem = {
+		id: 'first-h2-text',
+		title: 'First h2 text',
+	};
+	const headline2: TableOfContentsItem = {
+		id: 'second-h2-text',
+		title: 'Second h2 text',
+	};
+	const headline3: TableOfContentsItem = {
+		id: 'third-h2-text',
+		title: 'Third h2 text',
+	};
 
 	const tableItems = [headline1, headline2, headline3];
 
