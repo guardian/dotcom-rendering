@@ -23,11 +23,16 @@ import {
 	Label,
 	Link,
 	SvgReload,
+	SvgSpinner,
 	TextInput,
 } from '@guardian/source-react-components';
 import { FC, useState } from 'react';
 import { darkModeCss } from 'styles';
 import { fakeRequestToEmailSignupService } from 'client/requestEmailSignUp';
+
+// ----- Constants ----- //
+
+const VISUALLY_HIDDEN_CSS_CLASS = 'js-EmailSignupForm__hide';
 
 // ----- Component ----- //
 
@@ -47,6 +52,7 @@ const buttonStyle = (format: ArticleFormat): SerializedStyles => css`
 	margin-bottom: ${remSpace[2]};
 	flex-basis: ${pxToRem(118)}rem;
 	justify-content: center;
+	align-items: center;
 
 	:disabled {
 		background-color: ${neutral[46]};
@@ -62,6 +68,29 @@ const buttonStyle = (format: ArticleFormat): SerializedStyles => css`
 			background-color: ${hover.newsletterSignUpFormButtonDark(format)}
 		}
 `}
+`;
+
+// Instead of conditionally rendering content based on state, this component
+// renders all the content in advance and the VISUALLY_HIDDEN_CSS_CLASS
+// to hide the content based on state.
+
+// Why?
+// Rendering or changing Source Components client-side involves Emotion
+// dynamically generating new stylesheets needed to render those components
+// with the specific combination of props and css-overrides used.
+
+// The Content Security policy (CSP) blocks any stylesheet or scripts not
+// signed as safe in the server-side-rendering stage, so any Source Component
+// created or modified client side will be unstyled.
+
+// By "pre-rendering" all the content that could be required, the component
+// can be hydrated for client-side interactions without Emotion generating
+// any new stylesheets.
+
+const stateControlCss = css`
+	.${VISUALLY_HIDDEN_CSS_CLASS} {
+		display: none !important;
+	}
 `;
 
 /**
@@ -114,7 +143,7 @@ const EmailSignupForm: FC<Props> = ({
 	};
 
 	return (
-		<>
+		<div css={stateControlCss}>
 			<Label
 				text="Enter your email address"
 				cssOverrides={css`
@@ -127,100 +156,120 @@ const EmailSignupForm: FC<Props> = ({
 					}
 				`}
 			/>
+
 			<form
 				data-newsletter-id={newsletterId}
 				css={formStyle}
 				onSubmit={handleSubmit}
 			>
-				{!responseType && (
-					<div
-						css={css`
-							display: flex;
-							align-items: center;
-							flex-wrap: wrap;
-						`}
-					>
-						<TextInput
-							type="email"
-							width={30}
-							hideLabel
-							value={inputValue}
-							onChange={handleInputChange}
-							label="Enter your email address"
-							cssOverrides={css`
-								height: 2.25rem;
-								margin-right: ${remSpace[3]};
-								margin-top: 0;
-								margin-bottom: ${remSpace[2]};
-								flex-basis: ${pxToRem(335)}rem;
+				<div
+					className={
+						responseType === undefined
+							? undefined
+							: VISUALLY_HIDDEN_CSS_CLASS
+					}
+					css={css`
+						display: flex;
+						align-items: center;
+						flex-wrap: wrap;
+					`}
+				>
+					<TextInput
+						type="email"
+						width={30}
+						hideLabel
+						value={inputValue}
+						onChange={handleInputChange}
+						label="Enter your email address"
+						cssOverrides={css`
+							height: 2.25rem;
+							margin-right: ${remSpace[3]};
+							margin-top: 0;
+							margin-bottom: ${remSpace[2]};
+							flex-basis: ${pxToRem(335)}rem;
 
-								${darkModeCss`
+							${darkModeCss`
 							background-color: ${background.newsletterSignUpFormDark(format)};
 							color: ${text.newsletterSignUpFormDark(format)};
 						`}
+						`}
+					/>
+					<Button
+						size="small"
+						title="Sign up"
+						type="submit"
+						cssOverrides={buttonStyle(format)}
+					>
+						Sign up
+						<span
+							className={isWaiting ? undefined : VISUALLY_HIDDEN_CSS_CLASS}
+							css={css`
+								display: inline-flex;
 							`}
-						/>
-						<Button
-							size="small"
-							title="Sign up"
-							type="submit"
-							cssOverrides={buttonStyle(format)}
-							isLoading={isWaiting}
 						>
-							Sign up
-						</Button>
-					</div>
-				)}
+							<SvgSpinner size="xsmall" />
+						</span>
+					</Button>
+				</div>
 
-				{responseType === 'success' && (
+				<div
+					className={
+						responseType === 'success'
+							? undefined
+							: VISUALLY_HIDDEN_CSS_CLASS
+					}
+				>
 					<InlineSuccess>
 						<span>
 							<b>Subscription Confirmed. </b>
 							<span>{successDescription}</span>
 						</span>
 					</InlineSuccess>
-				)}
+				</div>
 
-				{responseType === 'failure' && (
-					<div
-						css={css`
-							align-items: center;
-							justify-content: flex-start;
-							${until.tablet} {
-								flex-wrap: wrap;
-							}
+				<div
+					className={
+						responseType === 'failure'
+							? undefined
+							: VISUALLY_HIDDEN_CSS_CLASS
+					}
+					css={css`
+						align-items: center;
+						justify-content: flex-start;
+						${until.tablet} {
+							flex-wrap: wrap;
+						}
+					`}
+				>
+					<InlineError
+						cssOverrides={css`
+							margin-right: ${remSpace[3]};
 						`}
 					>
-						<InlineError
-							cssOverrides={css`
-								margin-right: ${remSpace[3]};
-							`}
-						>
-							<span>
-								Sign up failed. Please try again or contact{' '}
-								<Link
-									href="mailto:customer.help@theguardian.com"
-									target="_blank"
-								>
-									customer.help@theguardian.com
-								</Link>
-							</span>
-						</InlineError>
-						<Button
-							onClick={handleReset}
-							size="small"
-							icon={<SvgReload />}
-							iconSide={'right'}
-							title="Try signing up again"
-							type="reset"
-							cssOverrides={buttonStyle(format)}
-						>
-							Try again
-						</Button>
-					</div>
-				)}
+						<span>
+							Sign up failed. Please try again or contact{' '}
+							<Link
+								href="mailto:customer.help@theguardian.com"
+								target="_blank"
+							>
+								customer.help@theguardian.com
+							</Link>
+						</span>
+					</InlineError>
+					<Button
+						onClick={handleReset}
+						size="small"
+						icon={<SvgReload />}
+						iconSide={'right'}
+						title="Try signing up again"
+						type="reset"
+						cssOverrides={buttonStyle(format)}
+					>
+						Try again
+					</Button>
+				</div>
 			</form>
-		</>
+		</div>
 	);
 };
 
