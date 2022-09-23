@@ -8,7 +8,11 @@ export default {
 	title: 'Components/FixedMediumSlowVII',
 	parameters: {
 		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.wide],
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.wide,
+			],
 		},
 	},
 };
