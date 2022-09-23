@@ -276,6 +276,6 @@ window.twttr = (function(d, s, id) {
 				: undefined,
 		recipeMarkup,
 		offerHttp3,
-		canonicalURL: webURL,
+		canonicalUrl: webURL,
 	});
 };
