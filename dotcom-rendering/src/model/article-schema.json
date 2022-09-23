@@ -537,11 +537,15 @@
             "items": {
                 "$ref": "#/definitions/TableOfContentsItem"
             }
+        },
+        "canonicalUrl": {
+            "type": "string"
         }
     },
     "required": [
         "beaconURL",
         "blocks",
+        "canonicalUrl",
         "commercialProperties",
         "config",
         "contentType",
@@ -1208,6 +1212,9 @@
                                 }
                             },
                             "imageUrl": {
+                                "type": "string"
+                            },
+                            "imageAlt": {
                                 "type": "string"
                             }
                         },

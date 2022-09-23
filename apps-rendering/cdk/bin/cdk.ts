@@ -9,9 +9,9 @@ new MobileAppsRendering(app, 'MobileAppsRendering-CODE', {
 	stack: 'mobile',
 	stage: 'CODE',
 	recordPrefix: 'mobile-rendering',
-	asgSize: {
-		min: 1,
-		max: 2,
+	asgCapacity: {
+		minimumInstances: 1,
+		maximumInstances: 2,
 	},
 	appsRenderingDomain: 'mobile-aws.code.dev-guardianapis.com',
 	hostedZoneId: 'Z6PRU8YR6TQDK',
@@ -23,9 +23,9 @@ new MobileAppsRendering(app, 'MobileAppsRendering-PROD', {
 	stack: 'mobile',
 	stage: 'PROD',
 	recordPrefix: 'mobile-rendering',
-	asgSize: {
-		min: 3,
-		max: 12,
+	asgCapacity: {
+		minimumInstances: 3,
+		maximumInstances: 12,
 	},
 	appsRenderingDomain: 'mobile-aws.guardianapis.com',
 	hostedZoneId: 'Z1EYB4AREPXE3B',
@@ -37,9 +37,9 @@ new MobileAppsRendering(app, 'MobileAppsRenderingPreview-CODE', {
 	stack: 'mobile-preview',
 	stage: 'CODE',
 	recordPrefix: 'mobile-preview-rendering',
-	asgSize: {
-		min: 1,
-		max: 2,
+	asgCapacity: {
+		minimumInstances: 1,
+		maximumInstances: 2,
 	},
 	appsRenderingDomain: 'mobile-aws.code.dev-guardianapis.com',
 	hostedZoneId: 'Z6PRU8YR6TQDK',
@@ -51,9 +51,9 @@ new MobileAppsRendering(app, 'MobileAppsRenderingPreview-PROD', {
 	stack: 'mobile-preview',
 	stage: 'PROD',
 	recordPrefix: 'mobile-preview-rendering',
-	asgSize: {
-		min: 1,
-		max: 2,
+	asgCapacity: {
+		minimumInstances: 1,
+		maximumInstances: 2,
 	},
 	appsRenderingDomain: 'mobile-aws.guardianapis.com',
 	hostedZoneId: 'Z1EYB4AREPXE3B',
