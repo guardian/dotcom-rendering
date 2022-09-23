@@ -23,7 +23,6 @@ import type { ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
 import { pageFonts } from 'styles';
-import { newsletterSignupContainerClassName } from 'components/NewsletterSignup';
 
 // ----- Types ----- //
 
@@ -161,9 +160,6 @@ const buildHtml = (
 `;
 };
 
-const hasHydratedElementNeedingInlineStyles = (
-	body: EmotionCritical,
-): boolean => body.html.includes(newsletterSignupContainerClassName);
 
 function render(
 	imageSalt: string,
@@ -176,7 +172,6 @@ function render(
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
 	const body = renderBody(item, request);
 	const inlineStyles =
-		hasHydratedElementNeedingInlineStyles(body) ||
 		requiresInlineStyles(request.content);
 	const head = renderHead(
 		item,
