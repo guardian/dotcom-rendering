@@ -23,8 +23,8 @@ const listItemStyles = css`
 
 const detailsStyles = css`
 	padding: 6px 0;
-	&:not([open]) .is-on,
-	&[open] .is-off {
+	&:not([open]) .is-open,
+	&[open] .is-closed {
 		display: none;
 	}
 	/* removes toggle triangle from webkit browsers such as Safari */
@@ -55,7 +55,7 @@ const titleStyle = css`
 	color: ${neutral[46]};
 `;
 
-const arrowPosition = css`
+const chevronPosition = css`
 	position: absolute;
 	right: ${space[1]}px;
 	top: 0;
@@ -66,10 +66,10 @@ export const TableOfContents = ({ tableOfContents }: Props) => {
 		<details open={tableOfContents.length < 5} css={detailsStyles}>
 			<summary css={summaryStyles}>
 				<h2 css={titleStyle}>Jump to...</h2>
-				<span className="is-off" css={arrowPosition}>
+				<span className="is-closed" css={chevronPosition}>
 					<SvgChevronDownSingle size="xsmall" />
 				</span>
-				<span className="is-on" css={arrowPosition}>
+				<span className="is-open" css={chevronPosition}>
 					<SvgChevronUpSingle size="xsmall" />
 				</span>
 			</summary>
