@@ -188,7 +188,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <meta name="description" content="${he.encode(description)}" />
 				${
 					canonicalURL !== undefined
-						? '<link rel="canonical" href="${canonicalURL}" />'
+						? `<link rel="canonical" href="${canonicalURL}" />`
 						: '<!-- no canonical URL -->'
 				}
                 <meta charset="utf-8">
