@@ -3,7 +3,8 @@ import { ContentABTestProvider } from './ContentABTest';
 import { RegionalAd } from './RegionalAd';
 
 describe('RegionalAd', () => {
-	const permutiveURL = 'amp-script:permutiveCachedTargeting.ct';
+	const permutiveURL =
+		'https://guardian.amp.permutive.com/rtc?type=doubleclick';
 
 	const ukRelevantYieldURL =
 		'https://guardian-pbs.relevant-digital.com/openrtb2/amp?tag_id=6214ca675cf18e70cbaeef37_6214c9a4b73a6613d4aeef2f&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING&tgt_pfx=rv&dummy_param=ATTR(data-amp-slot-index)';

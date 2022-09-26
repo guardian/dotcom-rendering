@@ -14,8 +14,6 @@ import { ContentABTestProvider } from '../components/ContentABTest';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Onward } from '../components/Onward';
-import type { PermutiveModel } from '../components/Permutive';
-import { Permutive } from '../components/Permutive';
 import { Sidebar } from '../components/Sidebar';
 import { filterForTagsOfType } from '../lib/tag-utils';
 import type { AmpExperiments } from '../server/ampExperimentCache';
@@ -51,25 +49,12 @@ export const Article: React.FC<{
 	articleData: ArticleModel;
 	config: ConfigType;
 	analytics: AnalyticsModel;
-	permutive: PermutiveModel;
-}> = ({
-	nav,
-	articleData,
-	config,
-	analytics,
-	experimentsData,
-	permutive: { projectId, apiKey, payload },
-}) => {
+}> = ({ nav, articleData, config, analytics, experimentsData }) => {
 	return (
 		<ContentABTestProvider
 			switches={config.switches}
 			pageId={config.pageId}
 		>
-			<Permutive
-				projectId={projectId}
-				apiKey={apiKey}
-				payload={payload}
-			/>
 			<Analytics key="analytics" analytics={analytics} />
 			<AnalyticsIframe url={config.ampIframeUrl} />
 			<AdConsent />

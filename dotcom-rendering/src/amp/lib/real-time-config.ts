@@ -80,7 +80,7 @@ export const getRTCParameters = (adType: AdType): RTCParameters => ({
 	...getPubAndProfileIds(adType),
 });
 
-const permutiveURL = 'amp-script:permutiveCachedTargeting.ct';
+const permutiveURL = 'https://guardian.amp.permutive.com/rtc?type=doubleclick';
 
 const amazonConfig = {
 	aps: { PUB_ID: '3722', PARAMS: { amp: '1' } },
