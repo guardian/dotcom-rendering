@@ -2,7 +2,6 @@ import validator from 'amphtml-validator';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { extractNAV } from '../../model/extract-nav';
 import type { AnalyticsModel } from '../components/Analytics';
-import type { PermutiveModel } from '../components/Permutive';
 import { Article } from '../pages/Article';
 import { document } from './document';
 
@@ -46,15 +45,14 @@ test('produces valid AMP doc', async () => {
 		id: ExampleArticle.pageId,
 		neilsenAPIID: 'XXXXXX-XXXX-XXXX-XXXX-XXXXXXXXX',
 		domain: 'amp.theguardian.com',
-		ipsosSectionName: 'section',
-	};
-
-	const permutive: PermutiveModel = {
-		projectId: 'example',
-		apiKey: '42-2020',
-		payload: {
-			'properties.content.title': 'article title',
+		permutive: {
+			namespace: 'guardian',
+			apiKey: '42-2020',
+			payload: {
+				'properties.content.title': 'article title',
+			},
 		},
+		ipsosSectionName: 'section',
 	};
 
 	const body = (
@@ -64,7 +62,6 @@ test('produces valid AMP doc', async () => {
 			articleData={{ ...ExampleArticle, shouldHideReaderRevenue: false }}
 			config={config}
 			analytics={analytics}
-			permutive={permutive}
 		/>
 	);
 
