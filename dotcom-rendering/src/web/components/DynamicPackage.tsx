@@ -126,9 +126,13 @@ const Card25_Card25_Card25_Card25 = ({
 }) => {
 	return (
 		<UL direction="row" padBottom={padBottom}>
-			{cards.map((card) => {
+			{cards.map((card, cardIndex) => {
 				return (
-					<LI key={card.url} padSides={true} showDivider={true}>
+					<LI
+						key={card.url}
+						padSides={true}
+						showDivider={cardIndex > 0}
+					>
 						<FrontCard
 							trail={card}
 							containerPalette={containerPalette}
@@ -158,12 +162,12 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 
 	return (
 		<UL direction="row">
-			{bigs.map((card) => {
+			{bigs.map((card, cardIndex) => {
 				return (
 					<LI
 						key={card.url}
 						padSides={true}
-						showDivider={true}
+						showDivider={cardIndex > 0}
 						percentage="25%"
 					>
 						<FrontCard
@@ -176,7 +180,7 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 					</LI>
 				);
 			})}
-			<LI showDivider={true} percentage="25%">
+			<LI showDivider={bigs.length > 0} percentage="25%">
 				<UL direction="row" wrapCards={true}>
 					{remaining.map((card) => {
 						return (
@@ -216,13 +220,13 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 
 	return (
 		<UL direction="row">
-			{bigs.map((card) => {
+			{bigs.map((card, cardIndex) => {
 				return (
 					<LI
 						key={card.url}
 						padSides={true}
 						percentage="25%"
-						showDivider={true}
+						showDivider={cardIndex > 0}
 					>
 						<FrontCard
 							trail={card}
