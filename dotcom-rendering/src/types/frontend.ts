@@ -105,7 +105,7 @@ export interface CAPIArticleType {
 	selectedTopics?: Topic[];
 
 	promotedNewsletter?: Newsletter;
-	tableOfContents?: TableOfContents;
+	tableOfContents?: TableOfContentsItem[];
 	canonicalUrl: string;
 }
 
