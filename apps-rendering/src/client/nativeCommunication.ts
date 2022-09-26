@@ -258,6 +258,9 @@ function reportNativeElementPositionChanges(): void {
 		},
 		false,
 	);
+
+	window.addEventListener('load', callback);
+
 	const observer = new MutationObserver(callback);
 	observer.observe(targetNode, config);
 
