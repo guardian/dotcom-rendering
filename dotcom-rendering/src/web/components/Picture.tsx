@@ -265,6 +265,9 @@ export const Picture = ({
 	 * The assumption here is readers on devices that do not support srcset
 	 * are likely to be on poor network connections so we're going
 	 * to fallback to the smallest image.
+	 *
+	 * Sources are ordered in `descendingByBreakpoint` order,
+	 * so the last one is the smallest.
 	 */
 	const [fallbackSource] = sources.slice(-1);
 
