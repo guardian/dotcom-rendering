@@ -15,6 +15,7 @@ import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { Avatar } from '../Avatar';
 import { CardHeadline } from '../CardHeadline';
+import { FrontPicture } from '../FrontPicture';
 import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
 import { Snap } from '../Snap';
@@ -335,7 +336,7 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						) : (
-							<img src={image.src} alt="" role="presentation" />
+							<FrontPicture master={image.src} alt="" />
 						)}
 					</ImageWrapper>
 				)}

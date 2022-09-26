@@ -18,7 +18,7 @@ type Props = {
 	isLazy?: boolean;
 };
 
-type ImageWidthType = { breakpoint: number; width: number };
+export type ImageWidthType = { breakpoint: number; width: number };
 
 /**
  * All business logic for image sizing is contained in this one function. This
@@ -168,7 +168,7 @@ const decideImageWidths = ({
  * @see https://github.com/guardian/fastly-image-service/blob/main/fastly-io_guim_co_uk/src/main/resources/varnish/main.vcl
  *
  */
-const generateImageURL = ({
+export const generateImageURL = ({
 	master,
 	imageWidth,
 	resolution,
@@ -197,7 +197,10 @@ const generateImageURL = ({
 	}?${params.toString()}`;
 };
 
-const descendingByBreakpoint = (a: ImageWidthType, b: ImageWidthType) => {
+export const descendingByBreakpoint = (
+	a: ImageWidthType,
+	b: ImageWidthType,
+) => {
 	// We need to list the largest images first as browsers read top down and stop
 	// as soon as they hit a matching media query
 	return b.breakpoint - a.breakpoint;
