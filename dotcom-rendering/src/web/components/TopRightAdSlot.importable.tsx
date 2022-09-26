@@ -60,7 +60,7 @@ export const TopRightAdSlot = ({
 		userInShadyPieTestVariant &&
 		format?.theme == ArticlePillar.Lifestyle
 	) {
-		return <ShadyPie format={format} editionId={editionId} />;
+		return <ShadyPie format={format} editionId={editionId} abTest={true} />;
 	}
 
 	// Otherwise return the classic ad slot
