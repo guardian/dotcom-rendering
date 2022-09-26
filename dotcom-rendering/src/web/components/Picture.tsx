@@ -260,6 +260,14 @@ export const Picture = ({
 			};
 		});
 
+	const ratio = parseInt(height, 10) / parseInt(width, 10);
+	/**
+	 * The assumption here is readers on devices that do not support srcset
+	 * are likely to be on poor network connections so we're going
+	 * to fallback to the smallest image.
+	 */
+	const [fallbackSource] = sources.slice(-1);
+
 	return (
 		<picture css={block}>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
@@ -319,11 +327,9 @@ export const Picture = ({
 
 			<img
 				alt={alt}
-				// The assumption here is readers on devices that do not support srcset are likely to be on poor
-				// network connections so we're going to fallback to the smallest image
-				src={sources[0].lowResUrl}
-				height={height}
-				width={width}
+				src={fallbackSource.lowResUrl}
+				width={fallbackSource.width}
+				height={fallbackSource.width * ratio}
 				loading={
 					isLazy && !Picture.disableLazyLoading ? 'lazy' : undefined
 				}
