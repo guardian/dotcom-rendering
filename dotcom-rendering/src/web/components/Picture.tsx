@@ -260,6 +260,17 @@ export const Picture = ({
 			};
 		});
 
+	const ratio = parseInt(height, 10) / parseInt(width, 10);
+	/**
+	 * The assumption here is readers on devices that do not support srcset
+	 * are likely to be on poor network connections so we're going
+	 * to fallback to the smallest image.
+	 *
+	 * Sources are ordered in `descendingByBreakpoint` order,
+	 * so the last one is the smallest.
+	 */
+	const [fallbackSource] = sources.slice(-1);
+
 	return (
 		<picture css={block}>
 			{/* Immersive Main Media images get additional sources specifically for when in portrait orientation */}
@@ -272,7 +283,7 @@ export const Picture = ({
 						calculate width. The value of 167vh relates to an assumed image ratio of 5:3
 						which is equal to 167 (viewport height) : 100 (viewport width)
 
-						If either of these media queires match then the browser will choose an image from the
+						If either of these media queries match then the browser will choose an image from the
 						list of sources in srcset based on the viewport list. If the media query doesn't match
 						it continues checking using the standard sources underneath
 					*/}
@@ -319,11 +330,9 @@ export const Picture = ({
 
 			<img
 				alt={alt}
-				// The assumption here is readers on devices that do not support srcset are likely to be on poor
-				// network connections so we're going to fallback to the smallest image
-				src={sources[0].lowResUrl}
-				height={height}
-				width={width}
+				src={fallbackSource.lowResUrl}
+				width={fallbackSource.width}
+				height={fallbackSource.width * ratio}
 				loading={
 					isLazy && !Picture.disableLazyLoading ? 'lazy' : undefined
 				}
