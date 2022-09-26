@@ -283,7 +283,7 @@ export const Picture = ({
 						calculate width. The value of 167vh relates to an assumed image ratio of 5:3
 						which is equal to 167 (viewport height) : 100 (viewport width)
 
-						If either of these media queires match then the browser will choose an image from the
+						If either of these media queries match then the browser will choose an image from the
 						list of sources in srcset based on the viewport list. If the media query doesn't match
 						it continues checking using the standard sources underneath
 					*/}
