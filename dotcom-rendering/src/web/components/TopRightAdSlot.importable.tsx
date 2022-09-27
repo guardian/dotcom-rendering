@@ -8,7 +8,6 @@ import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { ShadyPie } from './ShadyPie';
 
-const isServer = typeof window === 'undefined';
 const MOSTVIEWED_STICKY_HEIGHT = 1059;
 
 /**
@@ -48,15 +47,12 @@ export const TopRightAdSlot = ({
 		format?.theme == ArticlePillar.Lifestyle;
 
 	useEffect(() => {
-		const isSignedIn =
-			!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
+		const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 		setIsShady(
-			(adBlockerDetected &&
+			(adBlockerDetected || !!userInShadyPieTestVariant) &&
 				!isSignedIn &&
 				!shouldHideReaderRevenue &&
-				!isPaidContent &&
-				!isServer) ||
-				!!userInShadyPieTestVariant,
+				!isPaidContent,
 		);
 	}, [
 		shouldHideReaderRevenue,
