@@ -37,8 +37,8 @@ const decideWidth = (minWidthInPixels?: number) => {
 };
 
 const decidePosition = (
-	imagePosition: ImagePositionType,
-	imagePositionOnMobile: ImagePositionType,
+	imagePosition?: ImagePositionType,
+	imagePositionOnMobile?: ImagePositionType,
 	imageType?: CardImageType,
 ) => {
 	if (imageType === 'avatar') {
