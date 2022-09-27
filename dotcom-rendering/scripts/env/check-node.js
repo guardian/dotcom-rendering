@@ -1,20 +1,16 @@
-const { promisify } = require('util');
 const { join } = require('path');
+const { promisify } = require('util');
 const readFile = promisify(require('fs').readFile);
-
-const ensure = require('./ensure');
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async () => {
 	try {
-		const [semver] = await ensure('semver');
-
 		const nodeVersion = /^v(\d+\.\d+\.\d+)/.exec(process.version)[1];
 		const nvmrcVersion = (
 			await readFile(join(__dirname, '..', '..', '..', '.nvmrc'), 'utf8')
 		).trim();
 
-		if (!semver.satisfies(nodeVersion, nvmrcVersion)) {
+		if (nodeVersion !== nvmrcVersion) {
 			const { warn, prompt, log } = require('./log');
 			warn(
 				`dotcom-rendering requires Node v${nvmrcVersion}`,

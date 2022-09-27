@@ -1,10 +1,12 @@
 const { promisify } = require('util');
 const exec = promisify(require('child_process').execFile);
 
-const ensure = require('./ensure');
-
-// Yarn v1.x support .yarnrc, so we can use a local (check-in) copy of yarn
-const YARN_MIN_VERSION = '1.x';
+/**
+ * Yarn v1.x support .yarnrc, so we can use a local (check-in) copy of yarn
+ *
+ * Yarn 2 is unsupported
+ */
+const YARN_VERSION = '1';
 
 // eslint-disable-next-line @typescript-eslint/no-floating-promises
 (async () => {
@@ -13,12 +15,10 @@ const YARN_MIN_VERSION = '1.x';
 		// where we install yarn with NPM (mainly for CI)
 		const { stdout: version } = await exec('yarn', ['--version']);
 
-		const [semver] = await ensure('semver');
-
-		if (!semver.satisfies(version, YARN_MIN_VERSION)) {
+		if (version.split('.')[0] !== YARN_VERSION) {
 			const { warn, prompt, log } = require('./log');
 			warn(
-				`dotcom-rendering requires Yarn >=${YARN_MIN_VERSION}`,
+				`dotcom-rendering requires Yarn ${YARN_VERSION}`,
 				`You are using v${version}`,
 			);
 			prompt('Please upgrade yarn');
@@ -28,6 +28,6 @@ const YARN_MIN_VERSION = '1.x';
 		}
 	} catch (e) {
 		require('./log').log(`Installing yarn`);
-		await exec('npm', ['i', '-g', `yarn@${YARN_MIN_VERSION}`]);
+		await exec('npm', ['i', '-g', `yarn@${YARN_VERSION}`]);
 	}
 })();
