@@ -449,6 +449,33 @@ export const AdSlot = ({
 				/>
 			);
 		}
+		case 'mobile-front': {
+			return (
+				<div
+					id={`dfp-ad--mobile-front`}
+					className={[
+						'js-ad-slot',
+						'ad-slot',
+						`ad-slot--mobile-front`,
+						'ad-slot--container-inline',
+						'ad-slot--rendered',
+					].join(' ')}
+					css={[
+						css`
+							position: relative;
+							min-height: 274px;
+							min-width: 300px;
+							width: 300px;
+							margin: 12px auto;
+						`,
+						adStyles,
+					]}
+					data-link-name={`ad slot mobile-front`}
+					data-name={`mobile-front`}
+					aria-hidden="true"
+				/>
+			);
+		}
 		default:
 			return null;
 	}
