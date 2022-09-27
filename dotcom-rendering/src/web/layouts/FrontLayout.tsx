@@ -8,7 +8,7 @@ import {
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { NavType } from '../../model/extract-nav';
-import type { DCRFrontType } from '../../types/front';
+import type { DCRCollectionType, DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
@@ -54,6 +54,14 @@ const shouldInsertMerchHigh = (
 	}
 
 	return index === desiredPosition;
+};
+
+const isToggleable = (index: number, collection: DCRCollectionType) => {
+	return (
+		index != 0 &&
+		collection.collectionType != 'nav/list' &&
+		collection.collectionType != 'nav/media-list'
+	);
 };
 
 export const FrontLayout = ({ front, NAV }: Props) => {
@@ -251,7 +259,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								ophanComponentName={ophanName}
 								containerName={collection.collectionType}
 								containerPalette={collection.containerPalette}
-								toggleable={true}
+								toggleable={isToggleable(index, collection)}
 								sectionId={collection.id}
 								showDateHeader={
 									collection.config.showDateHeader
