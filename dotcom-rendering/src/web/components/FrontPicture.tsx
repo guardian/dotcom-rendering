@@ -29,6 +29,20 @@ const block = css`
 	display: block;
 `;
 
+/** On fronts, all images are 5:3 */
+const aspectRatio = css`
+	padding-top: ${(3 / 5) * 100}%;
+	position: relative;
+
+	& > * {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+`;
+
 export const FrontPicture = ({ master, alt }: Props) => {
 	const imageWidths = decideImageWidths();
 	const sources = imageWidths
@@ -51,7 +65,6 @@ export const FrontPicture = ({ master, alt }: Props) => {
 			};
 		});
 
-	const ratio = 5 / 3;
 	/**
 	 * The assumption here is readers on devices that do not support srcset
 	 * are likely to be on poor network connections so we're going
@@ -63,7 +76,7 @@ export const FrontPicture = ({ master, alt }: Props) => {
 	const [{ lowResUrl: fallbackSource }] = sources.slice(-1);
 
 	return (
-		<picture css={block}>
+		<picture css={[block, aspectRatio]}>
 			{sources.map((source) => {
 				return (
 					<React.Fragment key={source.breakpoint}>
