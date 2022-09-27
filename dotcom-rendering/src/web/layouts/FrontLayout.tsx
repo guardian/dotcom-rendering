@@ -90,7 +90,9 @@ const getMobileAddPosition = (
 		}
 		return false;
 	});
-	if (mobileAddPosition.length > 10) mobileAddPosition.length = 10;
+	if (mobileAddPosition.length > 10) {
+		mobileAddPosition.length = 10;
+	}
 };
 
 const isNavList = (collection: DCRCollectionType) => {
@@ -133,12 +135,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	 */
 	const renderAds = !front.isAdFreeUser;
 
-	if (front.pressedPage.isNetworkFront) {
+	if (front.isNetworkFront) {
 		getMobileAddPosition(
-			front.pressedPage.isNetworkFront,
+			front.isNetworkFront,
 			front.pressedPage.collections,
 		);
 	}
+
+	console.log(front.isNetworkFront);
 
 	return (
 		<>
