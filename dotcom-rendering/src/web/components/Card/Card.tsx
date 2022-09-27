@@ -310,8 +310,8 @@ export const Card = ({
 				dataLinkName={dataLinkName}
 			/>
 			<CardLayout
-				imagePosition={image ? imagePosition : 'top'}
-				imagePositionOnMobile={image ? imagePositionOnMobile : 'top'}
+				imagePosition={imagePosition}
+				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
 				imageType={image?.type}
 			>
