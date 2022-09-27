@@ -1,6 +1,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { ArticlePillar, getCookie } from '@guardian/libs';
+import { useEffect, useState } from 'react';
 import type { EditionId } from '../../types/edition';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { useAB } from '../lib/useAB';
@@ -38,62 +39,74 @@ export const TopRightAdSlot = ({
 	format?: ArticleFormat;
 }) => {
 	const adBlockerDetected = useAdBlockInUse();
-	const isSignedIn =
-		!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
+	const [isShady, setIsShady] = useState(false);
 
 	const ABTestAPI = useAB();
 
-	const userInShadyPieTestVariant = ABTestAPI?.isUserInVariant(
-		'shadyPieClickThrough',
-		'variant',
-	);
+	const userInShadyPieTestVariant =
+		ABTestAPI?.isUserInVariant('shadyPieClickThrough', 'variant') &&
+		format?.theme == ArticlePillar.Lifestyle;
 
-	if (
-		adBlockerDetected &&
-		!isSignedIn &&
-		!shouldHideReaderRevenue &&
-		!isPaidContent &&
-		!isServer
-	) {
-		return <ShadyPie format={format} editionId={editionId} />;
-	} else if (
-		userInShadyPieTestVariant &&
-		format?.theme == ArticlePillar.Lifestyle
-	) {
-		return <ShadyPie format={format} editionId={editionId} abTest={true} />;
-	}
+	useEffect(() => {
+		const isSignedIn =
+			!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
+		setIsShady(
+			(adBlockerDetected &&
+				!isSignedIn &&
+				!shouldHideReaderRevenue &&
+				!isPaidContent &&
+				!isServer) ||
+				!!userInShadyPieTestVariant,
+		);
+	}, [
+		shouldHideReaderRevenue,
+		isPaidContent,
+		adBlockerDetected,
+		userInShadyPieTestVariant,
+	]);
 
-	// Otherwise return the classic ad slot
-	return (
-		<div
-			id="top-right-ad-slot"
-			css={css`
-				position: static;
-				height: ${MOSTVIEWED_STICKY_HEIGHT}px;
-			`}
-		>
+	if (!isShady) {
+		return (
 			<div
-				id="dfp-ad--right"
-				className={[
-					'js-ad-slot',
-					'ad-slot',
-					'ad-slot--right',
-					'ad-slot--mpu-banner-ad',
-					'ad-slot--rendered',
-					'js-sticky-mpu',
-				].join(' ')}
-				css={[
-					css`
-						position: sticky;
-						/* Possibly account for the sticky Labs header and 6px of padding */
-						top: ${isPaidContent ? LABS_HEADER_HEIGHT + 6 : 0}px;
-					`,
-					adStyles,
-				]}
-				data-link-name="ad slot right"
-				data-name="right"
-				aria-hidden="true"
+				id="top-right-ad-slot"
+				css={css`
+					position: static;
+					height: ${MOSTVIEWED_STICKY_HEIGHT}px;
+				`}
+			>
+				<div
+					id="dfp-ad--right"
+					className={[
+						'js-ad-slot',
+						'ad-slot',
+						'ad-slot--right',
+						'ad-slot--mpu-banner-ad',
+						'ad-slot--rendered',
+						'js-sticky-mpu',
+					].join(' ')}
+					css={[
+						css`
+							position: sticky;
+							/* Possibly account for the sticky Labs header and 6px of padding */
+							top: ${isPaidContent
+								? LABS_HEADER_HEIGHT + 6
+								: 0}px;
+						`,
+						adStyles,
+					]}
+					data-link-name="ad slot right"
+					data-name="right"
+					aria-hidden="true"
+				/>
+			</div>
+		);
+	} else {
+		return (
+			<ShadyPie
+				format={format}
+				editionId={editionId}
+				abTest={userInShadyPieTestVariant}
 			/>
-		</div>
-	);
+		);
+	}
 };
