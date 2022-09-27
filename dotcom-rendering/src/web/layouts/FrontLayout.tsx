@@ -87,8 +87,6 @@ const getMobileAddPosition = (
 			return false;
 		} else if (ind % 2 === 0) {
 			mobileAddPosition.push(ind);
-		} else {
-			return false;
 		}
 	});
 	if (mobileAddPosition.length > 10) mobileAddPosition.length = 10;
