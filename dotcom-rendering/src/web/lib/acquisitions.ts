@@ -1,5 +1,5 @@
+import type { OphanComponentType } from '@guardian/libs';
 import { constructQuery } from '../../lib/querystring';
-import type { OphanComponentType } from '../browser/ophan/ophan';
 
 type AcquisitionLinkParams = {
 	base: string;

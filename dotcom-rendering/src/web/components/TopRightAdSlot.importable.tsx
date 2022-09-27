@@ -1,6 +1,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { getCookie } from '@guardian/libs';
+import type { EditionId } from '../../types/edition';
+import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { ShadyPie } from './ShadyPie';
 
@@ -25,10 +27,14 @@ export const TopRightAdSlot = ({
 	adStyles,
 	shouldHideReaderRevenue,
 	isPaidContent,
+	editionId,
+	format,
 }: {
 	adStyles: SerializedStyles[];
 	shouldHideReaderRevenue: boolean;
 	isPaidContent: boolean;
+	editionId?: EditionId;
+	format?: ArticleFormat;
 }) => {
 	const adBlockerDetected = useAdBlockInUse();
 	const isSignedIn =
@@ -41,8 +47,7 @@ export const TopRightAdSlot = ({
 		!isPaidContent &&
 		!isServer
 	) {
-		// Show a fixed image asking people to subscribe
-		return <ShadyPie />;
+		return <ShadyPie format={format} editionId={editionId} />;
 	}
 
 	// Otherwise return the classic ad slot
@@ -67,7 +72,8 @@ export const TopRightAdSlot = ({
 				css={[
 					css`
 						position: sticky;
-						top: 0;
+						/* Possibly account for the sticky Labs header and 6px of padding */
+						top: ${isPaidContent ? LABS_HEADER_HEIGHT + 6 : 0}px;
 					`,
 					adStyles,
 				]}

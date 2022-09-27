@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import { css } from '@emotion/react';
-import { until } from '@guardian/source-foundations';
+import { space, until } from '@guardian/source-foundations';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import {
@@ -9,8 +9,8 @@ import {
 	Card25_Card75,
 	Card50_Card50,
 	Card75_Card25,
-	shouldPadWrappableRows,
 } from '../lib/dynamicSlices';
+import { verticalDivider } from '../lib/verticalDivider';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -57,6 +57,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 		flex-direction: column;
 		flex-basis: 50%;
 		flex-grow: 1;
+		row-gap: ${space[3]}px;
 		${until.tablet} {
 			flex-basis: 100%;
 		}
@@ -64,11 +65,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 
 	return (
 		<UL direction="row">
-			<LI
-				percentage="50%"
-				padSides={true}
-				padBottomOnMobile={columnOne.length > 0}
-			>
+			<LI percentage="50%" padSides={true}>
 				<FrontCard
 					trail={big}
 					starRating={big.starRating}
@@ -95,23 +92,16 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 							display: flex;
 							flex-basis: 100%;
 							flex-wrap: wrap;
+							row-gap: ${space[3]}px;
 						`}
 					>
-						<ul css={manualUlStyles}>
+						<ul css={[manualUlStyles, verticalDivider]}>
 							{columnOne.map((card, cardIndex) => {
 								return (
 									<LI
 										key={card.url}
 										showDivider={true}
 										padSides={true}
-										padBottom={
-											cardIndex < columnOne.length - 1
-										}
-										padBottomOnMobile={
-											// If there are cards in the second col, we always want padding
-											columnTwo.length > 0 ||
-											cardIndex < columnOne.length - 1
-										}
 									>
 										{/* The first card shows an image */}
 										{cardIndex === 0 ? (
@@ -146,19 +136,13 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 								);
 							})}
 						</ul>
-						<ul css={manualUlStyles}>
-							{columnTwo.map((card, cardIndex) => {
+						<ul css={[manualUlStyles, verticalDivider]}>
+							{columnTwo.map((card) => {
 								return (
 									<LI
 										key={card.url}
 										showDivider={true}
 										padSides={true}
-										padBottom={
-											cardIndex < columnTwo.length - 1
-										}
-										padBottomOnMobile={
-											cardIndex < columnTwo.length - 1
-										}
 									>
 										<FrontCard
 											trail={card}
@@ -198,7 +182,6 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 				key={big.url}
 				percentage="50%"
 				padSides={true}
-				padBottomOnMobile={remaining.length > 0}
 				showDivider={false}
 			>
 				<FrontCard
@@ -216,7 +199,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 			</LI>
 			<LI percentage="50%">
 				<UL direction="row" wrapCards={true}>
-					{remaining.map((card, cardIndex) => {
+					{remaining.map((card) => {
 						return (
 							<LI
 								key={card.url}
@@ -224,14 +207,6 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								stretch={true}
 								showDivider={true}
 								padSides={true}
-								padBottom={shouldPadWrappableRows(
-									cardIndex,
-									cards.length,
-									2,
-								)}
-								padBottomOnMobile={
-									cardIndex < remaining.length - 1
-								}
 							>
 								<FrontCard
 									trail={card}
@@ -268,14 +243,8 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 							key={card.url}
 							percentage="25%"
 							stretch={true}
-							showDivider={cardIndex % 4 !== 0}
 							padSides={true}
-							padBottom={shouldPadWrappableRows(
-								cardIndex,
-								cards.length,
-								4,
-							)}
-							padBottomOnMobile={cardIndex < cards.length - 1}
+							showDivider={cardIndex > 0}
 						>
 							<FrontCard
 								trail={card}
@@ -311,7 +280,6 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 				key={big.url}
 				percentage="25%"
 				padSides={true}
-				padBottomOnMobile={remaining.length > 0}
 				showDivider={false}
 			>
 				<FrontCard
@@ -326,7 +294,7 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 			</LI>
 			<LI percentage="75%">
 				<UL direction="row" wrapCards={true}>
-					{remaining.map((card, cardIndex) => {
+					{remaining.map((card) => {
 						return (
 							<LI
 								key={card.url}
@@ -334,15 +302,8 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								stretch={true}
 								showDivider={true}
 								padSides={true}
-								padBottom={shouldPadWrappableRows(
-									cardIndex,
-									cards.length,
-									3,
-								)}
-								padBottomOnMobile={
-									cardIndex < remaining.length - 1
-								}
 							>
+								{/* 33.3333% of 75% = ~25% */}
 								<FrontCard
 									trail={card}
 									starRating={card.starRating}
@@ -380,10 +341,7 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 						key={card.url}
 						percentage={`25%`}
 						padSides={true}
-						padBottomOnMobile={
-							remaining.length > 0 || cardIndex < bigs.length - 1
-						}
-						showDivider={cardIndex !== 0}
+						showDivider={cardIndex > 0}
 					>
 						<FrontCard
 							trail={card}
@@ -400,7 +358,7 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 
 			<LI percentage="50%">
 				<UL direction="row" wrapCards={true}>
-					{remaining.map((card, cardIndex) => {
+					{remaining.map((card) => {
 						return (
 							<LI
 								key={card.url}
@@ -408,14 +366,6 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								stretch={true}
 								showDivider={true}
 								padSides={true}
-								padBottom={shouldPadWrappableRows(
-									cardIndex,
-									cards.length,
-									3,
-								)}
-								padBottomOnMobile={
-									cardIndex < remaining.length - 1
-								}
 							>
 								<FrontCard
 									trail={card}
@@ -454,9 +404,6 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 						key={card.url}
 						percentage={`25%`}
 						padSides={true}
-						padBottomOnMobile={
-							remaining.length > 0 || cardIndex < bigs.length - 1
-						}
 						showDivider={cardIndex !== 0}
 					>
 						<FrontCard
@@ -474,7 +421,7 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 
 			<LI percentage="25%">
 				<UL direction="row" wrapCards={true}>
-					{remaining.map((card, cardIndex) => {
+					{remaining.map((card) => {
 						return (
 							<LI
 								key={card.url}
@@ -482,14 +429,6 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 								stretch={true}
 								showDivider={true}
 								padSides={true}
-								padBottom={shouldPadWrappableRows(
-									cardIndex,
-									cards.length,
-									3,
-								)}
-								padBottomOnMobile={
-									cardIndex < remaining.length - 1
-								}
 							>
 								<FrontCard
 									trail={card}
@@ -527,7 +466,6 @@ const Card25_Card25_Card25_Card25 = ({
 						key={card.url}
 						percentage={`25%`}
 						padSides={true}
-						padBottomOnMobile={cardIndex < bigs.length - 1}
 						showDivider={cardIndex !== 0}
 					>
 						<FrontCard

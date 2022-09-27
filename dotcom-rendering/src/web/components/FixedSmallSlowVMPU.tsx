@@ -21,21 +21,16 @@ export const FixedSmallSlowVMPU = ({
 }: Props) => {
 	return (
 		<UL direction="row">
-			<LI percentage="33.333%" padSides={true} padBottomOnMobile={true}>
+			<LI percentage="33.333%" padSides={true}>
 				<FrontCard
 					trail={trails[0]}
 					containerPalette={containerPalette}
 					showAge={showAge}
 				/>
 			</LI>
-			<LI
-				percentage="33.333%"
-				padSides={true}
-				showDivider={true}
-				padBottomOnMobile={true}
-			>
+			<LI percentage="33.333%" padSides={true} showDivider={true}>
 				<UL direction="column">
-					<LI padBottom={true}>
+					<LI>
 						<FrontCard
 							trail={trails[1]}
 							containerPalette={containerPalette}
@@ -44,7 +39,7 @@ export const FixedSmallSlowVMPU = ({
 							headlineSize="small"
 						/>
 					</LI>
-					<LI padBottom={true}>
+					<LI>
 						<FrontCard
 							trail={trails[2]}
 							containerPalette={containerPalette}

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { cmp } from '@guardian/consent-management-platform';
+import type { OphanComponentEvent } from '@guardian/libs';
 import { getCookie, storage } from '@guardian/libs';
 import { getEpic, getEpicViewLog } from '@guardian/support-dotcom-components';
 import type {
@@ -10,7 +11,6 @@ import type {
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import { initPerf } from '../../browser/initPerf';
-import type { OphanComponentEvent } from '../../browser/ophan/ophan';
 import { submitComponentEvent } from '../../browser/ophan/ophan';
 import {
 	getLastOneOffContributionTimestamp,

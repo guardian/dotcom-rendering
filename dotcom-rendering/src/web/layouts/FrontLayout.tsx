@@ -14,6 +14,7 @@ import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
+import { MostViewedFooter } from '../components/MostViewedFooter';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
@@ -32,6 +33,28 @@ const spaces = / /g;
 /** TODO: Confirm with is a valid way to generate component IDs. */
 const ophanComponentId = (name: string) =>
 	name.toLowerCase().replace(spaces, '-');
+
+const shouldInsertMerchHigh = (
+	index: number,
+	isNetworkFront: boolean | undefined,
+	collectionCount: number,
+	isPaidContent: boolean | undefined,
+) => {
+	const minContainers = isPaidContent ? 1 : 2;
+	if (collectionCount < minContainers) {
+		return false;
+	}
+	let desiredPosition;
+	if (collectionCount < 4) {
+		desiredPosition = 2;
+	} else if (isNetworkFront) {
+		desiredPosition = 5;
+	} else {
+		desiredPosition = 4;
+	}
+
+	return index === desiredPosition;
+};
 
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
@@ -174,49 +197,96 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						);
 					}
 
-					return (
-						<Section
-							key={collection.id}
-							title={collection.displayName}
-							showTopBorder={index > 0}
-							padContent={false}
-							centralBorder="partial"
-							url={collection.href}
-							ophanComponentLink={ophanComponentLink}
-							ophanComponentName={ophanName}
-							containerName={collection.collectionType}
-							containerPalette={collection.containerPalette}
-							toggleable={true}
-							sectionId={collection.id}
-							showDateHeader={collection.config.showDateHeader}
-							editionId={front.editionId}
-							treats={collection.treats}
-						>
-							<DecideContainer
-								trails={trails}
-								index={index}
-								groupedTrails={collection.grouped}
-								containerType={collection.collectionType}
+					if (
+						collection.collectionType === 'news/most-popular' &&
+						!isPaidContent &&
+						front.config.switches.mostViewedFronts
+					) {
+						return (
+							<Section
+								key={collection.id}
+								title="Most viewed"
+								showTopBorder={index > 0}
+								padContent={false}
+								verticalMargins={false}
+								url={collection.href}
+								ophanComponentLink={ophanComponentLink}
+								ophanComponentName={ophanName}
+								containerName={collection.collectionType}
 								containerPalette={collection.containerPalette}
-								showAge={collection.displayName === 'Headlines'}
-							/>
-						</Section>
+								sectionId={collection.id}
+								showDateHeader={
+									collection.config.showDateHeader
+								}
+								editionId={front.editionId}
+								treats={collection.treats}
+								data-print-layout="hide"
+								element="aside"
+							>
+								<MostViewedFooterLayout>
+									<MostViewedFooter
+										tabs={[
+											{
+												trails: trails.slice(10),
+											},
+										]}
+										sectionName="Most viewed"
+										// TODO: Include mostCommented & mostShared once we have this data in the FE response
+									/>
+								</MostViewedFooterLayout>
+							</Section>
+						);
+					}
+
+					return (
+						<>
+							<Section
+								key={collection.id}
+								title={collection.displayName}
+								showTopBorder={index > 0}
+								padContent={false}
+								centralBorder="partial"
+								url={collection.href}
+								ophanComponentLink={ophanComponentLink}
+								ophanComponentName={ophanName}
+								containerName={collection.collectionType}
+								containerPalette={collection.containerPalette}
+								toggleable={true}
+								sectionId={collection.id}
+								showDateHeader={
+									collection.config.showDateHeader
+								}
+								editionId={front.editionId}
+								treats={collection.treats}
+							>
+								<DecideContainer
+									trails={trails}
+									index={index}
+									groupedTrails={collection.grouped}
+									containerType={collection.collectionType}
+									containerPalette={
+										collection.containerPalette
+									}
+									showAge={
+										collection.displayName === 'Headlines'
+									}
+								/>
+							</Section>
+							{shouldInsertMerchHigh(
+								index,
+								front.pressedPage.isNetworkFront,
+								front.pressedPage.collections.length,
+								front.pressedPage.frontProperties.isPaidContent,
+							) && (
+								<AdSlot
+									data-print-layout="hide"
+									position="merchandising-high"
+									display={format.display}
+								/>
+							)}
+						</>
 					);
 				})}
-
-				{!isPaidContent && (
-					<Section
-						fullWidth={true}
-						data-print-layout="hide"
-						element="aside"
-					>
-						<MostViewedFooterLayout
-							format={format}
-							sectionName="" // {front.sectionName}
-							ajaxUrl={front.config.ajaxUrl}
-						/>
-					</Section>
-				)}
 			</main>
 
 			<Section

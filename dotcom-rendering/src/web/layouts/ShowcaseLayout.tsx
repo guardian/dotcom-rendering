@@ -34,6 +34,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader.importable';
 import { MainMedia } from '../components/MainMedia';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 import { Nav } from '../components/Nav/Nav';
@@ -244,9 +245,11 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	 */
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
+	const isLabs = format.theme === ArticleSpecial.Labs;
+
 	return (
 		<>
-			{format.theme !== ArticleSpecial.Labs ? (
+			{!isLabs ? (
 				<>
 					<div>
 						{renderAds && (
@@ -409,7 +412,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				</>
 			)}
 
-			<main data-layout="ShowcaseLayout">
+			<main data-layout="ShowcaseLayout" id="maincontent">
 				<Section
 					fullWidth={true}
 					showTopBorder={false}
@@ -633,6 +636,8 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.pageType
 													.isPaidContent
 											}
+											format={format}
+											editionId={CAPIArticle.editionId}
 										/>
 									)}
 
@@ -656,7 +661,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</ShowcaseGrid>
 				</Section>
 
-				{renderAds && (
+				{renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
 						padSides={false}
@@ -753,19 +758,27 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 				{!isPaidContent && (
 					<Section
-						fullWidth={true}
-						data-print-layout="hide"
+						title="Most viewed"
+						padContent={false}
+						verticalMargins={false}
 						element="aside"
+						data-print-layout="hide"
+						data-link-name="most-popular"
+						data-component="most-popular"
 					>
-						<MostViewedFooterLayout
-							format={format}
-							sectionName={CAPIArticle.sectionName}
-							ajaxUrl={CAPIArticle.config.ajaxUrl}
-						/>
+						<MostViewedFooterLayout>
+							<Island clientOnly={true} deferUntil="visible">
+								<MostViewedFooterData
+									sectionName={CAPIArticle.sectionName}
+									format={format}
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
+								/>
+							</Island>
+						</MostViewedFooterLayout>
 					</Section>
 				)}
 
-				{renderAds && (
+				{renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
 						padSides={false}

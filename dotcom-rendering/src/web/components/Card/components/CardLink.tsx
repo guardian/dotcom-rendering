@@ -30,6 +30,7 @@ export const CardLink = ({
 	dataLinkName = 'article',
 }: Props) => {
 	return (
+		// eslint-disable-next-line jsx-a11y/anchor-has-content -- we have an aria-label attribute describing the content
 		<a
 			href={linkTo}
 			css={fauxLinkStyles}

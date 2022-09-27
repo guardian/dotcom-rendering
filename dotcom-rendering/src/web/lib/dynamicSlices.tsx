@@ -39,12 +39,7 @@ export const Card50_Card50 = ({
 				headlineSize="large"
 			/>
 		</LI>
-		<LI
-			percentage="50%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
+		<LI percentage="50%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -86,12 +81,7 @@ export const Card75_Card25 = ({
 				headlineSize="large"
 			/>
 		</LI>
-		<LI
-			percentage="25%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
+		<LI percentage="25%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -125,12 +115,7 @@ export const Card25_Card75 = ({
 				showAge={showAge}
 			/>
 		</LI>
-		<LI
-			percentage="75%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
+		<LI percentage="75%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -163,8 +148,8 @@ export const Card100PictureTop = ({
 }) => {
 	if (!cards[0]) return null;
 	return (
-		<UL>
-			<LI percentage="100%" padSides={true} padBottom={true}>
+		<UL padBottom={true}>
+			<LI percentage="100%" padSides={true}>
 				<FrontCard
 					trail={cards[0]}
 					containerPalette={containerPalette}
@@ -198,8 +183,8 @@ export const Card100PictureRight = ({
 }) => {
 	if (!cards[0]) return null;
 	return (
-		<UL>
-			<LI percentage="100%" padSides={true} padBottom={true}>
+		<UL padBottom={true}>
+			<LI percentage="100%" padSides={true}>
 				<FrontCard
 					trail={cards[0]}
 					containerPalette={containerPalette}

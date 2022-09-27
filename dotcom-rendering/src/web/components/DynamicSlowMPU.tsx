@@ -39,13 +39,9 @@ const Card33_ColumnOfThree33_Ad33 = ({
 				showAge={showAge}
 			/>
 		</LI>
-		<LI
-			percentage="33.333%"
-			showDivider={true}
-			showTopMarginWhenStacked={true}
-		>
+		<LI percentage="33.333%" showDivider={true}>
 			<UL direction="column">
-				<LI padSides={true} padBottom={true}>
+				<LI padSides={true}>
 					<FrontCard
 						trail={cards[1]}
 						containerPalette={containerPalette}
@@ -54,7 +50,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 						headlineSize="small"
 					/>
 				</LI>
-				<LI padSides={true} padBottom={true}>
+				<LI padSides={true}>
 					<FrontCard
 						trail={cards[2]}
 						containerPalette={containerPalette}
@@ -101,7 +97,7 @@ const ColumnOfThree50_Ad50 = ({
 	<UL direction="row">
 		<LI percentage="50%">
 			<UL direction="column">
-				<LI padSides={true} padBottom={true}>
+				<LI padSides={true}>
 					<FrontCard
 						trail={cards[0]}
 						containerPalette={containerPalette}
@@ -110,7 +106,7 @@ const ColumnOfThree50_Ad50 = ({
 						headlineSize="small"
 					/>
 				</LI>
-				<LI padSides={true} padBottom={true}>
+				<LI padSides={true}>
 					<FrontCard
 						trail={cards[1]}
 						containerPalette={containerPalette}
@@ -164,12 +160,7 @@ const Card50_Card25_Card25 = ({
 				supportingContent={cards[0].supportingContent}
 			/>
 		</LI>
-		<LI
-			percentage="25%"
-			padSides={true}
-			showDivider={true}
-			showTopMarginWhenStacked={true}
-		>
+		<LI percentage="25%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -185,12 +176,7 @@ const Card50_Card25_Card25 = ({
 				}
 			/>
 		</LI>
-		<LI
-			percentage="25%"
-			padSides={true}
-			showDivider={true}
-			showTopMarginWhenStacked={true}
-		>
+		<LI percentage="25%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={cards[2]}
 				containerPalette={containerPalette}

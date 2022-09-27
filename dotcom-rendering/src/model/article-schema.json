@@ -516,6 +516,9 @@
                 },
                 "group": {
                     "type": "string"
+                },
+                "regionFocus": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -528,6 +531,9 @@
                 "successDescription",
                 "theme"
             ]
+        },
+        "tableOfContents": {
+            "$ref": "#/definitions/TableOfContents"
         }
     },
     "required": [
@@ -1199,6 +1205,9 @@
                                 }
                             },
                             "imageUrl": {
+                                "type": "string"
+                            },
+                            "imageAlt": {
                                 "type": "string"
                             }
                         },
@@ -2229,6 +2238,9 @@
                             "type": "string"
                         },
                         "group": {
+                            "type": "string"
+                        },
+                        "regionFocus": {
                             "type": "string"
                         }
                     },
@@ -4578,6 +4590,35 @@
                 "WORK_OF_ART"
             ],
             "type": "string"
+        },
+        "TableOfContents": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/TableOfContentsItem"
+                    }
+                }
+            },
+            "required": [
+                "items"
+            ]
+        },
+        "TableOfContentsItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "title"
+            ]
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"

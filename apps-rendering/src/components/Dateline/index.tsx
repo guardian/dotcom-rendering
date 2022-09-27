@@ -62,7 +62,7 @@ const getStyles = (
 const getDatelineStyles = (format: ArticleFormat): SerializedStyles => {
 	switch (format.design) {
 		case ArticleDesign.Gallery:
-			return getStyles(neutral[100], neutral[100]);
+			return getStyles(neutral[86], neutral[86]);
 		case ArticleDesign.LiveBlog:
 			return getStyles(neutral[100], neutral[20]);
 		case ArticleDesign.DeadBlog:

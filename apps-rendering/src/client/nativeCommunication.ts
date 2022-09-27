@@ -188,7 +188,7 @@ function slideshow(): void {
 }
 
 function getVideoSlots(): VideoSlot[] {
-	const videoSlots = document.querySelectorAll('.native-video');
+	const videoSlots = document.querySelectorAll('.js-native-video');
 
 	if (videoSlots.length === 0) {
 		return [];

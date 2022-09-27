@@ -33,12 +33,7 @@ const ColumnOfCards50_Card50 = ({
 
 	return (
 		<UL direction="row-reverse">
-			<LI
-				percentage="50%"
-				padSides={true}
-				showDivider={true}
-				padBottomOnMobile={true}
-			>
+			<LI percentage="50%" padSides={true} showDivider={true}>
 				<FrontCard
 					trail={big}
 					containerPalette={containerPalette}
@@ -51,17 +46,12 @@ const ColumnOfCards50_Card50 = ({
 			</LI>
 			<LI percentage="50%">
 				<UL direction="row" wrapCards={true}>
-					{remaining.map((card, cardIndex) => {
+					{remaining.map((card) => {
 						return (
 							<LI
 								percentage="100%"
 								key={card.url}
 								padSides={true}
-								showTopMarginWhenStacked={false}
-								padBottom={cardIndex < remaining.length - 1}
-								padBottomOnMobile={
-									cardIndex < remaining.length - 1
-								}
 							>
 								<FrontCard
 									trail={card}
@@ -96,12 +86,7 @@ const ColumnOfCards50_Card25_Card25 = ({
 		<UL direction="row-reverse">
 			{bigs.map((big) => {
 				return (
-					<LI
-						percentage="25%"
-						padSides={true}
-						padBottomOnMobile={true}
-						showDivider={true}
-					>
+					<LI percentage="25%" padSides={true} showDivider={true}>
 						<FrontCard
 							trail={big}
 							containerPalette={containerPalette}
@@ -121,17 +106,12 @@ const ColumnOfCards50_Card25_Card25 = ({
 			})}
 			<LI percentage="50%">
 				<UL direction="row" wrapCards={true}>
-					{remaining.map((card, cardIndex) => {
+					{remaining.map((card) => {
 						return (
 							<LI
 								percentage="100%"
 								key={card.url}
 								padSides={true}
-								showTopMarginWhenStacked={false}
-								padBottom={cardIndex < remaining.length - 1}
-								padBottomOnMobile={
-									cardIndex < remaining.length - 1
-								}
 							>
 								<FrontCard
 									trail={card}
@@ -167,7 +147,7 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 						percentage="50%"
 						padSides={true}
 						showDivider={index % 2 === 1}
-						padBottom={shouldPadWrappableRows(
+						offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 							index,
 							cards.length,
 							2,

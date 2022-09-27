@@ -1,6 +1,6 @@
 import { constructQuery } from './querystring';
 
-export type AuthenticationComponentId =
+type AuthenticationComponentId =
 	| 'amp_sidebar_signin'
 	| 'guardian_signin_header'
 	| 'signin_to_comment'

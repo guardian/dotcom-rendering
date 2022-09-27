@@ -229,6 +229,40 @@ describe('Byline utilities', () => {
 
 				expect(soleContributor).toBe(undefined);
 			});
+
+			it('Paul MacInnes, Nesrine Malik, Julie Bindel, Peter Preston', () => {
+				// https://www.theguardian.com/commentisfree/2011/dec/30/person-of-2011-writers-verdict
+
+				const soleContributor = getSoleContributor(
+					[
+						{
+							id: 'profile/paulmacinnes',
+							type: 'Contributor',
+							title: 'Paul MacInnes',
+							twitterHandle: 'PaulMac',
+						},
+						{
+							id: 'profile/peterpreston',
+							type: 'Contributor',
+							title: 'Peter Preston',
+						},
+						{
+							id: 'profile/nesrinemalik',
+							type: 'Contributor',
+							title: 'Nesrine Malik',
+						},
+						{
+							id: 'profile/juliebindel',
+							type: 'Contributor',
+							title: 'Julie Bindel',
+							twitterHandle: 'bindelj',
+						},
+					],
+					'Paul MacInnes, Nesrine Malik, Julie Bindel, Peter Preston',
+				);
+
+				expect(soleContributor).toBe(undefined);
+			});
 		});
 	});
 });
