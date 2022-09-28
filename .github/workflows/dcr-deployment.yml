@@ -23,26 +23,6 @@ jobs:
           path: ${{env.cache_path}}
           key: ${{env.cache_name}}
       - run: whereis node
-  lint:
-    name: Lint
-    needs: [setup]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/cache@v3
-        with:
-          path: ${{env.cache_path}}
-          key: ${{env.cache_name}}
-      - name: Install Node
-        uses: guardian/actions-setup-node@v2.4.1
-      - name: Lint
-        run: make lint
-        working-directory: dotcom-rendering
-      - name: Stylelint
-        run: make stylelint
-        working-directory: dotcom-rendering
-      - name: Prettier check
-        run: yarn prettier:check
-        working-directory: dotcom-rendering
   build:
     needs: [setup]
     runs-on: ubuntu-latest
@@ -59,6 +39,28 @@ jobs:
 
       - name: Validate Build
         run: make buildCheck
+        working-directory: dotcom-rendering
+  lint:
+    name: Lint
+    needs: [setup]
+    runs-on: ubuntu-latest
+    steps:
+      # Setup Environment
+      - uses: actions/cache@v3
+        with:
+          path: ${{env.cache_path}}
+          key: ${{env.cache_name}}
+      - name: Install Node
+        uses: guardian/actions-setup-node@v2.4.1
+      # Job Steps
+      - name: Lint
+        run: make lint
+        working-directory: dotcom-rendering
+      - name: Stylelint
+        run: make stylelint
+        working-directory: dotcom-rendering
+      - name: Prettier check
+        run: yarn prettier:check
         working-directory: dotcom-rendering
   deploy:
     needs: [build, lint]
