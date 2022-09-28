@@ -3,7 +3,7 @@ import type { ABTest } from '@guardian/ab-core';
 export const shadyPieClickThrough: ABTest = {
 	id: 'shadyPieClickThrough',
 	start: '2022-09-26',
-	expiry: '2022-10-11',
+	expiry: '2022-10-25',
 	author: 'Emma Imber',
 	description:
 		'Test the click through rate of the new labs shady pie component',
