@@ -142,8 +142,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		);
 	}
 
-	console.log(front.isNetworkFront);
-
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -265,7 +263,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								</Section>
 								{shouldInsertMerchHigh(
 									index,
-									front.pressedPage.isNetworkFront,
+									front.isNetworkFront,
 									front.pressedPage.collections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
@@ -332,7 +330,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								</Section>
 								{shouldInsertMerchHigh(
 									index,
-									front.pressedPage.isNetworkFront,
+									front.isNetworkFront,
 									front.pressedPage.collections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
