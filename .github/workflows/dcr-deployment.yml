@@ -6,7 +6,9 @@ on:
 
 env:
   cache_name: ${{github.run_id}}-${{github.run_number}}-setup-output
-  cache_path: ./
+  cache_path: |
+    ./
+    /usr/local/bin/node
 jobs:
   setup:
     runs-on: ubuntu-latest
