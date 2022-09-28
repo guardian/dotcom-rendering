@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Node
-      - uses: guardian/actions-setup-node@v2
+        uses: guardian/actions-setup-node@v2
         with:
           cache: 'yarn'
 
