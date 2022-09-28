@@ -208,6 +208,9 @@ export const Column = ({
 	//Replace whitespace with hyphen https://stackoverflow.com/questions/3794919/replace-all-spaces-in-a-string-with/3795147#3795147
 	const columnInputId = `${column.title}-checkbox-input`.split(' ').join('-');
 	const collapseColumnInputId = `${column.title}-button`.split(' ').join('-');
+	const ariaControls = `${column.title.toLowerCase()}-Links`
+		.split(' ')
+		.join('-');
 
 	return (
 		<li css={[columnStyle, pillarDivider]} role="none">
@@ -257,7 +260,7 @@ export const Column = ({
 				collapseColumnInputId={collapseColumnInputId}
 				title={column.title}
 				columnInputId={columnInputId}
-				ariaControls={`${column.title.toLowerCase()}Links`}
+				ariaControls={ariaControls}
 			/>
 
 			{/* ColumnLinks */}
@@ -269,8 +272,8 @@ export const Column = ({
 					hideWhenNotChecked(columnInputId),
 				]}
 				role="menu"
-				id={`${column.title.toLowerCase()}Links`}
-				data-cy={`${column.title.toLowerCase()}Links`}
+				id={ariaControls}
+				data-cy={ariaControls}
 			>
 				{(column.children || []).map((link) => (
 					<li

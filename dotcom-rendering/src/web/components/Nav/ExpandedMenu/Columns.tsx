@@ -192,7 +192,7 @@ export const Columns: React.FC<{
 				/>
 			))}
 
-			<li>
+			<li role="none">
 				<ThemeProvider theme={{ ...buttonThemeBrand }}>
 					<div css={searchBar}>
 						<LinkButton
