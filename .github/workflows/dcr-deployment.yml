@@ -28,14 +28,12 @@ jobs:
     needs: [setup]
     runs-on: ubuntu-latest
     steps:
-      - name: Install Node
-        uses: guardian/actions-setup-node@v2.4.1
-        with:
-          cache: 'yarn'
       - uses: actions/cache@v3
         with:
           path: ${{env.cache_path}}
           key: ${{env.cache_name}}
+      - name: Install Node
+        uses: guardian/actions-setup-node@v2.4.1
       - name: Lint
         run: make lint
         working-directory: dotcom-rendering
@@ -49,14 +47,12 @@ jobs:
     needs: [setup]
     runs-on: ubuntu-latest
     steps:
-      - name: Install Node
-        uses: guardian/actions-setup-node@v2.4.1
-        with:
-          cache: 'yarn'
       - uses: actions/cache@v3
         with:
           path: ${{env.cache_path}}
           key: ${{env.cache_name}}
+      - name: Install Node
+        uses: guardian/actions-setup-node@v2.4.1
       - name: Generate production build
         run: make build
         working-directory: dotcom-rendering
