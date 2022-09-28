@@ -24,6 +24,7 @@ const fetchExperimentsData = (): Promise<void> => {
 	return fetch(ampExperimentsDataUrl)
 		.then((rawResponse) => rawResponse.json())
 		.then((json) => {
+			// @ts-expect-error -- this is now `unknown` instead of `any`
 			ampExperimentCache = json;
 		});
 };

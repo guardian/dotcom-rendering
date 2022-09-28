@@ -39,6 +39,7 @@ Sentry.init({
 	allowUrls,
 	dsn: dcrSentryDsn,
 	environment: stage || 'DEV',
+	// @ts-expect-error -- the integrations do not match
 	integrations: [new CaptureConsole({ levels: ['error'] })],
 	maxBreadcrumbs: 50,
 	// sampleRate: // We use Math.random in init.ts to sample errors

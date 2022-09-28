@@ -34,6 +34,7 @@ async function getContentFromURL(_url, _headers) {
 		);
 
 		// pick all the keys from the JSON except `html`
+		// @ts-expect-error -- JSON responses are now `unknown`
 		const { html, ...config } = await fetch(jsonUrl, { headers }).then(
 			(response) => response.json(),
 		);

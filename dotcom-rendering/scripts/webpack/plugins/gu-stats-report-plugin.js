@@ -74,7 +74,7 @@ class GuStatsReportPlugin {
 				);
 
 			const URL = 'https://logs.guardianapis.com/log';
-			// @ts-ignore -- the type declaration isn’t playing nice
+			// @ts-expect-error -- the type declaration isn’t playing nice
 			fetch(URL, {
 				method: 'POST',
 				body: JSON.stringify({
