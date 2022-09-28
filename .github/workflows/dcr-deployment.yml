@@ -1,0 +1,48 @@
+name: DCR Deployment
+on:
+  push:
+    paths-ignore:
+      - 'apps-rendering/**'
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node
+      - uses: guardian/actions-setup-node@v2
+        with:
+          cache: 'yarn'
+
+      - name: Yarn install
+        run: yarn
+  lint:
+    name: Lint
+    needs: [setup]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lint
+        run: make lint
+        working-directory: dotcom-rendering
+      - name: Stylelint
+        run: make stylelint
+        working-directory: dotcom-rendering
+      - name: Prettier check
+        run: yarn prettier:check
+        working-directory: dotcom-rendering
+  build:
+    needs: [setup]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate production build
+        run: make build
+        working-directory: dotcom-rendering
+
+      - name: Validate Build
+        run: make buildCheck
+        working-directory: dotcom-rendering
+  deploy:
+    needs: [build, lint]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        run: echo "Coming soon...
