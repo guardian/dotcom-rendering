@@ -7,6 +7,7 @@ on:
 env:
   cache_name: ${{github.run_id}}-${{github.run_number}}-setup-output
   cache_path: ./
+  NODE_ENV: production
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -18,25 +19,26 @@ jobs:
           cache: 'yarn'
       - name: Yarn install
         run: yarn --frozen-lockfile
+      # Cache the output for use in further jobs
       - uses: actions/cache@v3
         with:
           path: ${{env.cache_path}}
           key: ${{env.cache_name}}
-      - run: whereis node
   build:
     needs: [setup]
     runs-on: ubuntu-latest
     steps:
+      # Setup Environment
       - uses: actions/cache@v3
         with:
           path: ${{env.cache_path}}
           key: ${{env.cache_name}}
       - name: Install Node
         uses: guardian/actions-setup-node@v2.4.1
+      # Job Steps
       - name: Generate production build
         run: make build
         working-directory: dotcom-rendering
-
       - name: Validate Build
         run: make buildCheck
         working-directory: dotcom-rendering
@@ -67,4 +69,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
-        run: echo "Coming soon...
+        run: echo "Coming soon..."
