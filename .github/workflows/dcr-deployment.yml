@@ -34,6 +34,8 @@ jobs:
         with:
           path: ${{env.cache_path}}
           key: ${{env.cache_name}}
+      - run: whereis node
+      - run: ls -la /usr/local/bin/node
       - name: Lint
         run: make lint
         working-directory: dotcom-rendering
