@@ -6,6 +6,7 @@ import type {
 	OphanComponentEvent,
 } from '@guardian/libs';
 import { log } from '@guardian/libs';
+import type { ServerSideTests } from 'src/types/config';
 
 export type OphanRecordFunction = (
 	event: { [key: string]: any },
@@ -74,9 +75,7 @@ export const sendOphanComponentEvent = (
 	submitComponentEvent(componentEvent, ophanRecord);
 };
 
-export const abTestPayload = (tests: {
-	[key: string]: string;
-}): OphanABPayload => {
+export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {
 	const records: { [key: string]: OphanABEvent } = {};
 	Object.entries(tests).forEach(([testName, variantName]) => {
 		records[`ab${testName}`] = {
