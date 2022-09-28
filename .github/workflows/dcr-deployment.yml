@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Node
-        uses: guardian/actions-setup-node@v2
+        uses: guardian/actions-setup-node@v2.4.1
         with:
           cache: 'yarn'
       - name: Yarn install
@@ -22,6 +22,7 @@ jobs:
         with:
           path: ${{env.cache_path}}
           key: ${{env.cache_name}}
+      - run: whereis node
   lint:
     name: Lint
     needs: [setup]
