@@ -31,11 +31,13 @@ const LiveBlocks: FC<LiveBlocksProps> = ({
 	const showPinnedPost =
 		pageNumber === 1 && pinnedPost.kind === OptionKind.Some;
 
+	const firstAdIndex = 1;
+
 	const showAd = (index: number): boolean =>
 		// This can be removed when LiveBlogs are deployed
 		format.design === ArticleDesign.DeadBlog &&
 		// Add an AdSlot at 2nd and every other 5 blocks
-		(index === 1 || (index - 1) % 5 === 0);
+		(index === firstAdIndex || (index - firstAdIndex) % 5 === 0);
 
 	return (
 		<>
