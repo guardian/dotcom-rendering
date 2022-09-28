@@ -565,8 +565,8 @@ const mediaAtomRenderer = (
 	};
 
 	const attributes = {
-		'data-posterUrl': posterUrl,
-		'data-videoId': videoId,
+		'data-posterurl': posterUrl,
+		'data-videoid': videoId,
 		'data-duration': withDefault<number | null>(null)(duration),
 		className: 'js-native-video',
 		css: styles,
