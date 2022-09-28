@@ -218,7 +218,7 @@ describe('Callout from', () => {
 			[checkboxField.id]: ['checkbox 1', 'checkbox 3'],
 		});
 	});
-	test('should upload the file', () => {
+	test('should upload the file', async () => {
 		const file = new File(['hello'], 'hello.png', { type: 'image/png' });
 		const mockSubmit = jest.fn();
 		const { queryByText } = render(
@@ -228,7 +228,7 @@ describe('Callout from', () => {
 		const input = screen.getByTestId<HTMLInputElement>(
 			`form-field-${fileField.id}`,
 		);
-		user.upload(input, file);
+		await user.upload(input, file);
 
 		const inputFiles = input.files ? input.files : [];
 
