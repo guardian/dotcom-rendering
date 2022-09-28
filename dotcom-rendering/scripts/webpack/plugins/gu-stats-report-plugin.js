@@ -2,8 +2,9 @@
 const fetch = require('node-fetch');
 const os = require('os');
 const { exec } = require('child_process');
-const chalk = require('chalk');
+const { Chalk } = require('chalk');
 
+const chalk = new Chalk();
 const PLUGIN_NAME = 'GuStatsReportPlugin';
 
 /**

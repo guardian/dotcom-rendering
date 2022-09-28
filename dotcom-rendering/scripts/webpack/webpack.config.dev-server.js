@@ -1,12 +1,13 @@
 // @ts-check
 const path = require('path');
 const bodyParser = require('body-parser');
-const chalk = require('chalk');
+const { Chalk } = require('chalk');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 const {
 	getContentFromURLMiddleware,
 } = require('../../src/server/lib/get-content-from-url');
 
+const chalk = new Chalk();
 const port = 3030;
 
 console.log(
