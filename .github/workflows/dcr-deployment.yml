@@ -5,7 +5,7 @@ on:
       - 'apps-rendering/**'
 
 env:
-  CACHE_NAME: setup-output
+  cache_name: ${{github.run_id}}-${{github.run_number}}-setup-output
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -20,7 +20,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: dotcom-rendering
-          key: ${{GITHUB_RUN_ID}}-${{GITHUB_RUN_NUMBER}}-${{CACHE_NAME}}
+          key: ${{env.cache_name}}
   lint:
     name: Lint
     needs: [setup]
@@ -29,7 +29,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: dotcom-rendering
-          key: ${{GITHUB_RUN_ID}}-${{GITHUB_RUN_NUMBER}}-${{CACHE_NAME}}
+          key: ${{env.cache_name}}
       - name: Lint
         run: make lint
         working-directory: dotcom-rendering
@@ -46,7 +46,7 @@ jobs:
       - uses: actions/cache@v3
         with:
           path: dotcom-rendering
-          key: ${{GITHUB_RUN_ID}}-${{GITHUB_RUN_NUMBER}}-${{CACHE_NAME}}
+          key: ${{env.cache_name}}
       - name: Generate production build
         run: make build
         working-directory: dotcom-rendering
