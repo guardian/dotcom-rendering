@@ -3,6 +3,9 @@ on:
   push:
     paths-ignore:
       - 'apps-rendering/**'
+
+env:
+  CACHE_NAME: setup-output
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -12,14 +15,21 @@ jobs:
         uses: guardian/actions-setup-node@v2
         with:
           cache: 'yarn'
-
       - name: Yarn install
         run: yarn --frozen-lockfile
+      - uses: actions/cache@v3
+        with:
+          path: dotcom-rendering
+          key: ${{GITHUB_RUN_ID}}-${{GITHUB_RUN_NUMBER}}-${{CACHE_NAME}}
   lint:
     name: Lint
     needs: [setup]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/cache@v3
+        with:
+          path: dotcom-rendering
+          key: ${{GITHUB_RUN_ID}}-${{GITHUB_RUN_NUMBER}}-${{CACHE_NAME}}
       - name: Lint
         run: make lint
         working-directory: dotcom-rendering
@@ -33,6 +43,10 @@ jobs:
     needs: [setup]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/cache@v3
+        with:
+          path: dotcom-rendering
+          key: ${{GITHUB_RUN_ID}}-${{GITHUB_RUN_NUMBER}}-${{CACHE_NAME}}
       - name: Generate production build
         run: make build
         working-directory: dotcom-rendering
