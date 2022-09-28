@@ -196,7 +196,7 @@
     "tslint-plugin-prettier": "^2.3.0",
     "tslint-react": "^5.0.0",
     "tslint-react-a11y": "^1.1.0",
-    "typescript-json-schema": "^0.50.0",
+    "typescript-json-schema": "^0.54.0",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.0",
     "webpack-assets-manifest": "^5.1.0",
