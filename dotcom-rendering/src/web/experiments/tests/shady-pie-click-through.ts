@@ -1,7 +1,7 @@
 import type { ABTest } from '@guardian/ab-core';
 
 export const shadyPieClickThrough: ABTest = {
-	id: 'shadyPieClickThrough',
+	id: 'ShadyPieClickThrough',
 	start: '2022-09-26',
 	expiry: '2022-10-25',
 	author: 'Emma Imber',
