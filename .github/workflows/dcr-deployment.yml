@@ -5,9 +5,9 @@ on:
       - 'apps-rendering/**'
 
 env:
-  cache_name: ${{github.run_id}}-${{github.run_number}}-setup-output
-  cache_path: ./
+  # We set NODE_ENV=production globally, this ensures we have consistent yarn installs between jobs
   NODE_ENV: production
+  built_project_filename: built-project.tar.gz
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -72,14 +72,42 @@ jobs:
         run: make buildCheck
         working-directory: dotcom-rendering
       - name: Tar files
-        run: touch built-project.tar.gz && tar --exclude=built-project.tar.gz -czf built-project.tar.gz .
+        run: touch ${{env.built_project_filename}} && tar --exclude=${{env.built_project_filename}} -czf ${{env.built_project_filename}} .
       - name: Upload built project
         uses: actions/upload-artifact@v3
         with:
           name: built-project-output
-          path: built-project.tar.gz
+          path: ${{env.built_project_filename}}
+  cypress:
+    needs: [build]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [1, 2, 3, 4, 5, 6]
+    steps:
+      # Setup Environment
+      - name: Download built project
+        uses: actions/download-artifact@v3
+        with:
+          name: built-project-output
+      - name: Extract project
+        run: tar -xzf ${{env.built_project_filename}}
+      - name: Install Node
+        uses: guardian/actions-setup-node@v2.4.1
+      # Job Steps
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
+        with:
+          start: make start-ci
+          working-directory: dotcom-rendering
+          wait-on: 'http://localhost:9000'
+          wait-on-timeout: 30
+          browser: chrome
+          spec: cypress/e2e/parallel-${{ matrix.group }}/*.js
+
   deploy:
-    needs: [build, lint]
+    needs: [build, lint, cypress]
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
