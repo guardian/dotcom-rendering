@@ -49,6 +49,7 @@ type Question = {
 	text: string;
 	answers: Answer[];
 	imageUrl?: string;
+	imageAlt?: string;
 };
 
 type ResultGroup = {
@@ -156,11 +157,12 @@ const answerParser: Parser<Answer> = map5(makeAnswer)(
 	fieldParser('answerBuckets', arrayParser(stringParser)),
 );
 
-const questionParser: Parser<Question> = map4(makeQuestion)(
+const questionParser: Parser<Question> = map5(makeQuestion)(
 	fieldParser('id', stringParser),
 	fieldParser('text', stringParser),
 	fieldParser('answers', arrayParser(answerParser)),
 	aOrUndefinedParser(fieldParser('imageUrl', stringParser)),
+	aOrUndefinedParser(fieldParser('imageAlt', stringParser)),
 );
 
 const resultGroupParser: Parser<ResultGroup> = map4(makeResultGroup)(

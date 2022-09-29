@@ -44,6 +44,7 @@ import { Island } from '../components/Island';
 import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
 import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
@@ -283,13 +284,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const cricketMatchUrl =
 		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
-
-	const showKeyEventsCarousel = CAPIArticle.config.switches.keyEventsCarousel;
-
-	const isInFilteringBeta = !!(
-		CAPIArticle.config.switches.automaticFilters &&
-		CAPIArticle.availableTopics
-	);
 
 	const showTopicFilterBank = !!CAPIArticle.config.switches.automaticFilters;
 
@@ -585,7 +579,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandFirstGrid>
 				</Section>
-				{showKeyEventsCarousel && CAPIArticle.keyEvents.length > 0 ? (
+				{CAPIArticle.keyEvents.length > 0 ? (
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
@@ -813,7 +807,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									) : (
 										<></>
 									)}
-									{isInFilteringBeta ? (
+									{showTopicFilterBank &&
+									CAPIArticle.availableTopics ? (
 										<div css={paddingBody}>
 											<ArticleContainer format={format}>
 												{pagination.currentPage !==
@@ -1162,6 +1157,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													CAPIArticle.pageType
 														.isPaidContent
 												}
+												format={format}
+												editionId={
+													CAPIArticle.editionId
+												}
 											/>
 										)}
 									</RightColumn>
@@ -1276,15 +1275,24 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 					{!isPaidContent && (
 						<Section
-							fullWidth={true}
-							data-print-layout="hide"
+							title="Most viewed"
+							padContent={false}
+							verticalMargins={false}
 							element="aside"
+							data-print-layout="hide"
+							data-link-name="most-popular"
+							data-component="most-popular"
+							leftColSize="wide"
 						>
-							<MostViewedFooterLayout
-								format={format}
-								sectionName={CAPIArticle.sectionName}
-								ajaxUrl={CAPIArticle.config.ajaxUrl}
-							/>
+							<MostViewedFooterLayout>
+								<Island clientOnly={true} deferUntil="visible">
+									<MostViewedFooterData
+										sectionName={CAPIArticle.sectionName}
+										format={format}
+										ajaxUrl={CAPIArticle.config.ajaxUrl}
+									/>
+								</Island>
+							</MostViewedFooterLayout>
 						</Section>
 					)}
 

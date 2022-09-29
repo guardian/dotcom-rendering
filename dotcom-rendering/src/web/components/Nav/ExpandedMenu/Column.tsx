@@ -8,11 +8,14 @@ import {
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import type { PillarType } from '../../../../model/extract-nav';
+import type {
+	EditionLinkType,
+	PillarType,
+} from '../../../../model/extract-nav';
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS
-export const hideDesktop = css`
+const hideDesktop = css`
 	${from.desktop} {
 		display: none;
 	}
@@ -70,7 +73,7 @@ const columnLinkTitle = css`
 	}
 `;
 
-const mainMenuLinkStyle = css`
+export const mainMenuLinkStyle = css`
 	box-sizing: border-box;
 	overflow: hidden;
 	position: relative;
@@ -80,7 +83,7 @@ const mainMenuLinkStyle = css`
 	}
 `;
 
-const columnLinks = css`
+export const columnLinks = css`
 	${textSans.medium()};
 	box-sizing: border-box;
 	display: flex;
@@ -141,7 +144,7 @@ const hideWhenNotChecked = (columnInputId: string) => css`
 	}
 `;
 
-const lineStyle = css`
+export const lineStyle = css`
 	background-color: ${brand[600]};
 	content: '';
 	display: block;
@@ -195,13 +198,19 @@ const columnStyle = css`
 export const Column = ({
 	column,
 	index,
+	showLineBelow,
 }: {
-	column: PillarType;
+	column: PillarType | EditionLinkType;
 	index: number;
+	showLineBelow: boolean;
 }) => {
 	// As the elements are dynamic we need to specify the IDs here
-	const columnInputId = `${column.title}-checkbox-input`;
-	const collapseColumnInputId = `${column.title}-button`;
+	//Replace whitespace with hyphen https://stackoverflow.com/questions/3794919/replace-all-spaces-in-a-string-with/3795147#3795147
+	const columnInputId = `${column.title}-checkbox-input`.split(' ').join('-');
+	const collapseColumnInputId = `${column.title}-button`.split(' ').join('-');
+	const ariaControls = `${column.title.toLowerCase()}Links`
+		.split(' ')
+		.join('-');
 
 	return (
 		<li css={[columnStyle, pillarDivider]} role="none">
@@ -251,7 +260,7 @@ export const Column = ({
 				collapseColumnInputId={collapseColumnInputId}
 				title={column.title}
 				columnInputId={columnInputId}
-				ariaControls={`${column.title.toLowerCase()}Links`}
+				ariaControls={ariaControls}
 			/>
 
 			{/* ColumnLinks */}
@@ -259,12 +268,12 @@ export const Column = ({
 				css={[
 					columnLinks,
 					index === 0 && firstColumnLinks,
-					!!column.pillar && pillarColumnLinks,
+					!!column.children && pillarColumnLinks,
 					hideWhenNotChecked(columnInputId),
 				]}
 				role="menu"
-				id={`${column.title.toLowerCase()}Links`}
-				data-cy={`${column.title.toLowerCase()}Links`}
+				id={ariaControls}
+				data-cy={ariaControls}
 			>
 				{(column.children || []).map((link) => (
 					<li
@@ -289,7 +298,9 @@ export const Column = ({
 					</li>
 				))}
 			</ul>
-			<div css={[hideWhenChecked(columnInputId), lineStyle]}></div>
+			{showLineBelow && (
+				<div css={[hideWhenChecked(columnInputId), lineStyle]}></div>
+			)}
 		</li>
 	);
 };

@@ -11,11 +11,11 @@ import {
 	neutral,
 	remSpace,
 } from '@guardian/source-foundations';
-import { partition } from '@guardian/types';
 import type { Item } from 'item';
 import { isPicture } from 'item';
 import type { FC } from 'react';
 import { renderEditionsAll } from 'renderer';
+import { Result } from 'result';
 import Header from '../header';
 import {
 	articleMarginStyles,
@@ -214,7 +214,10 @@ const Layout: FC<Props> = ({ item }) => {
 							className={'body-content'}
 							css={bodyStyles(item)}
 						>
-							{renderEditionsAll(item, partition(item.body).oks)}
+							{renderEditionsAll(
+								item,
+								Result.partition(item.body).oks,
+							)}
 						</section>
 					</div>
 				</article>

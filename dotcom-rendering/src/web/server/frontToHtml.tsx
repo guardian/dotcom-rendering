@@ -2,7 +2,14 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { renderToString } from 'react-dom/server';
-import { getScriptArrayFromFile } from '../../lib/assets';
+import { BUILD_VARIANT } from '../../../scripts/webpack/bundles';
+import {
+	generateScriptTags,
+	getScriptsFromManifest,
+	LEGACY_SCRIPT,
+	MODERN_SCRIPT,
+	VARIANT_SCRIPT,
+} from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
@@ -14,31 +21,6 @@ import { pageTemplate } from './pageTemplate';
 interface Props {
 	front: DCRFrontType;
 }
-
-const generateScriptTags = (
-	scripts: Array<{ src: string; legacy?: boolean } | false>,
-) =>
-	scripts.reduce<string[]>((scriptTags, script) => {
-		if (script === false) return scriptTags;
-
-		let attrs: string;
-		switch (script.legacy) {
-			case true:
-				attrs = 'defer nomodule';
-				break;
-			case false:
-				attrs = 'type="module"';
-				break;
-			default:
-				attrs = 'defer';
-				break;
-		}
-
-		return [
-			...scriptTags,
-			`<script ${attrs} src="${script.src}"></script>`,
-		];
-	}, []);
 
 export const frontToHtml = ({ front }: Props): string => {
 	const title = front.webTitle;
@@ -66,6 +48,21 @@ export const frontToHtml = ({ front }: Props): string => {
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
 
+	const shouldServeVariantBundle: boolean = [
+		BUILD_VARIANT,
+		front.config.abTests.dcrJsBundleVariant === 'variant',
+	].every(Boolean);
+
+	/**
+	 * This function returns an array of files found in the manifests
+	 * defined by `manifestPaths`.
+	 *
+	 * @see getScriptsFromManifest
+	 */
+	const getScriptArrayFromFile = getScriptsFromManifest(
+		shouldServeVariantBundle,
+	);
+
 	/**
 	 * The highest priority scripts.
 	 * These scripts have a considerable impact on site performance.
@@ -73,23 +70,17 @@ export const frontToHtml = ({ front }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-
 	const priorityScriptTags = generateScriptTags(
 		[
-			{ src: polyfillIO },
+			polyfillIO,
 			...getScriptArrayFromFile('bootCmp.js'),
 			...getScriptArrayFromFile('ophan.js'),
-			front.config && {
-				src:
-					process.env.COMMERCIAL_BUNDLE_URL ??
-					front.config.commercialBundleUrl,
-			},
+			process.env.COMMERCIAL_BUNDLE_URL ??
+				front.config.commercialBundleUrl,
 			...getScriptArrayFromFile('sentryLoader.js'),
 			...getScriptArrayFromFile('dynamicImport.js'),
 			...getScriptArrayFromFile('islands.js'),
-		].map((script) =>
-			offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
-		),
+		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
 	/**
@@ -105,19 +96,18 @@ export const frontToHtml = ({ front }: Props): string => {
 			...getScriptArrayFromFile('embedIframe.js'),
 			...getScriptArrayFromFile('newsletterEmbedIframe.js'),
 			...getScriptArrayFromFile('relativeTime.js'),
-		].map((script) =>
-			offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
-		),
+		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
-	const gaChunk = getScriptArrayFromFile('ga.js').map((script) =>
-		offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
+	const gaChunk = getScriptArrayFromFile('ga.js');
+	const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
+	const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
+	const variantScript = gaChunk.find((script) =>
+		script.match(VARIANT_SCRIPT),
 	);
-	const modernScript = gaChunk.find((script) => script.legacy === false);
-	const legacyScript = gaChunk.find((script) => script.legacy === true);
 	const gaPath = {
-		modern: modernScript?.src as string,
-		legacy: legacyScript?.src as string,
+		modern: (modernScript ?? variantScript) as string,
+		legacy: legacyScript as string,
 	};
 
 	/**

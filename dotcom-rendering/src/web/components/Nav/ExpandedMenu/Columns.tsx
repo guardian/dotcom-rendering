@@ -1,4 +1,4 @@
-import { css } from '@emotion/react';
+import { css, ThemeProvider } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import {
@@ -9,8 +9,14 @@ import {
 	headline,
 	textSans,
 } from '@guardian/source-foundations';
-import type { NavType } from '../../../../model/extract-nav';
-import { Column } from './Column';
+import {
+	buttonThemeBrand,
+	LinkButton,
+	SvgMagnifyingGlass,
+} from '@guardian/source-react-components';
+import type { EditionLinkType, NavType } from '../../../../model/extract-nav';
+import type { EditionId } from '../../../../types/edition';
+import { Column, lineStyle } from './Column';
 import { MoreColumn } from './MoreColumn';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
 
@@ -116,46 +122,140 @@ const brandExtensionLink = css`
 	}
 `;
 
+const searchBar = css`
+	${from.desktop} {
+		display: none;
+	}
+	margin-left: 45px;
+	margin-bottom: 24px;
+	margin-right: 41px;
+	padding-bottom: 15px;
+`;
+
+const editionList: EditionLinkType[] = [
+	{
+		url: '/preference/edition/int',
+		editionId: 'INT',
+		longTitle: 'International edition',
+		title: 'International edition',
+	},
+	{
+		url: '/preference/edition/au',
+		editionId: 'UK',
+		longTitle: 'UK edition',
+		title: 'UK edition',
+	},
+	{
+		url: '/preference/edition/us',
+		editionId: 'US',
+		longTitle: 'US edition',
+		title: 'US edition',
+	},
+	{
+		url: '/preference/edition/au',
+		editionId: 'AU',
+		longTitle: 'Australia edition',
+		title: 'AU edition',
+	},
+];
+
+const getEdition = (editionId: EditionId): EditionLinkType => {
+	return (
+		editionList.find((edition) => edition.editionId === editionId) ??
+		editionList[1]
+	);
+};
+
+const getRemainingEditions = (editionId: EditionId): EditionLinkType[] => {
+	return editionList.filter((edition) => edition.editionId !== editionId);
+};
+
 export const Columns: React.FC<{
+	editionId: EditionId;
 	format: ArticleFormat;
 	nav: NavType;
-}> = ({ format, nav }) => (
-	<ul
-		css={columnsStyle(format.display)}
-		role="menubar"
-		data-cy="nav-menu-columns"
-	>
-		{nav.pillars.map((column, i) => (
-			<Column
-				column={column}
-				key={column.title.toLowerCase()}
-				index={i}
-			/>
-		))}
-		<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
-		<MoreColumn
-			column={nav.otherLinks}
-			brandExtensions={nav.brandExtensions}
-			key="more"
-		/>
-		<li css={desktopBrandExtensionColumn} role="none">
-			<ul css={brandExtensionList} role="menu">
-				{nav.brandExtensions.map((brandExtension) => (
-					<li css={brandExtensionListItem} key={brandExtension.title}>
-						<a
-							className="selectableMenuItem"
-							css={brandExtensionLink}
-							href={brandExtension.url}
-							key={brandExtension.title}
-							role="menuitem"
-							data-link-name={`nav2 : brand extension : ${brandExtension.longTitle}`}
+}> = ({ format, nav, editionId }) => {
+	const activeEdition = getEdition(editionId);
+	const remainingEditions = getRemainingEditions(activeEdition.editionId);
+	return (
+		<ul
+			css={columnsStyle(format.display)}
+			role="menubar"
+			data-cy="nav-menu-columns"
+		>
+			{nav.pillars.map((column, i) => (
+				<Column
+					column={column}
+					key={column.title.toLowerCase()}
+					index={i}
+					showLineBelow={i !== nav.pillars.length - 1}
+				/>
+			))}
+
+			<li role="none">
+				<ThemeProvider theme={{ ...buttonThemeBrand }}>
+					<div css={searchBar}>
+						<LinkButton
+							href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
 							tabIndex={-1}
+							className="selectableMenuItem"
+							priority="secondary"
+							icon={
+								<SvgMagnifyingGlass
+									isAnnouncedByScreenReader={true}
+									size="medium"
+								/>
+							}
+							aria-label="Search with google"
+							data-link-name="nav2 : search : submit"
+							type="submit"
 						>
-							{brandExtension.longTitle}
-						</a>
-					</li>
-				))}
-			</ul>
-		</li>
-	</ul>
-);
+							Search
+						</LinkButton>
+					</div>
+				</ThemeProvider>
+
+				<div css={lineStyle}></div>
+			</li>
+
+			<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
+			{/* This is where the edition dropdown is inserted					 */}
+			<Column
+				column={{
+					...activeEdition,
+					children: remainingEditions,
+				}}
+				index={10}
+				showLineBelow={true}
+			/>
+
+			<MoreColumn
+				column={nav.otherLinks}
+				brandExtensions={nav.brandExtensions}
+				key="more"
+			/>
+			<li css={desktopBrandExtensionColumn} role="none">
+				<ul css={brandExtensionList} role="menu">
+					{nav.brandExtensions.map((brandExtension) => (
+						<li
+							css={brandExtensionListItem}
+							key={brandExtension.title}
+						>
+							<a
+								className="selectableMenuItem"
+								css={brandExtensionLink}
+								href={brandExtension.url}
+								key={brandExtension.title}
+								role="menuitem"
+								data-link-name={`nav2 : brand extension : ${brandExtension.longTitle}`}
+								tabIndex={-1}
+							>
+								{brandExtension.longTitle}
+							</a>
+						</li>
+					))}
+				</ul>
+			</li>
+		</ul>
+	);
+};

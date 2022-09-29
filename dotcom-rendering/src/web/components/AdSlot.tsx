@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { adSizes } from '@guardian/commercial-core';
 import type { SlotName } from '@guardian/commercial-core';
 import { ArticleDisplay } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	border,
 	from,
@@ -11,6 +12,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import type { EditionId } from '../../types/edition';
 import { Island } from './Island';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
@@ -20,6 +22,8 @@ type InlineProps = {
 	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
+	format?: ArticleFormat;
+	editionId?: EditionId;
 };
 
 type NonInlineProps = {
@@ -28,6 +32,8 @@ type NonInlineProps = {
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
+	format?: ArticleFormat;
+	editionId?: EditionId;
 };
 
 /**
@@ -94,6 +100,19 @@ export const adCollapseStyles = css`
 const merchandisingAdStyles = css`
 	position: relative;
 	min-height: 250px;
+`;
+
+const mostPopAdStyles = css`
+	position: relative;
+	min-height: 274px;
+	min-width: 300px;
+	width: 300px;
+	margin: 12px auto;
+	text-align: center;
+	${from.desktop} {
+		margin: 0;
+		width: auto;
+	}
 `;
 
 /**
@@ -227,6 +246,8 @@ export const AdSlot = ({
 	shouldHideReaderRevenue = false,
 	isPaidContent = false,
 	index,
+	format,
+	editionId,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -261,6 +282,8 @@ export const AdSlot = ({
 								}
 								isPaidContent={isPaidContent}
 								adStyles={adStyles}
+								format={format}
+								editionId={editionId}
 							/>
 						</Island>
 					);
@@ -342,12 +365,7 @@ export const AdSlot = ({
 						'ad-slot--mpu-banner-ad',
 						'ad-slot--rendered',
 					].join(' ')}
-					css={[
-						css`
-							position: relative;
-						`,
-						adStyles,
-					]}
+					css={[adStyles, mostPopAdStyles]}
 					data-link-name="ad slot mostpop"
 					data-name="mostpop"
 					aria-hidden="true"

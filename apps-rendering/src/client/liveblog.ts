@@ -1,4 +1,3 @@
-import { ResultKind } from '@guardian/types';
 import { formatLocalTimeDateTz } from 'date';
 import { dateParser, parse } from 'parser';
 import { logger } from '../logger';
@@ -9,12 +8,12 @@ function lastUpdatedDates(): void {
 			const isoDateTimeString = element.getAttribute('datetime');
 			const date = parse(dateParser)(isoDateTimeString);
 
-			if (date.kind === ResultKind.Ok) {
+			if (date.isOk()) {
 				element.textContent = `Updated: ${formatLocalTimeDateTz(
 					date.value,
 				)}`;
-			} else {
-				logger.warn(`Unable to parse and format date: ${date.err}`);
+			} else if (date.isErr()) {
+				logger.warn(`Unable to parse and format date: ${date.error}`);
 			}
 		},
 	);

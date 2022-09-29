@@ -6,9 +6,11 @@ import type { ArticleFormat } from '@guardian/libs';
 import { from, headline, textSans } from '@guardian/source-foundations';
 import Img from 'components/ImgAlt';
 import { grid } from 'grid/grid';
+import type { Image } from 'image/image';
+import type { Sizes } from 'image/sizes';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
-import { getDefaultImgStyles, getDefaultSizes } from './BodyImage.defaults';
+import { getDefaultImgStyles } from './BodyImage.defaults';
 import type { BodyImageProps } from './BodyImage.defaults';
 
 const figureStyles = css`
@@ -30,8 +32,12 @@ const figureStyles = css`
 `;
 
 const imageWrapperStyles = (format: ArticleFormat): SerializedStyles => css`
-	${grid.column.centre}
+	${grid.column.all}
 	grid-row: 1;
+
+	${from.tablet} {
+		${grid.column.centre}
+	}
 
 	${from.leftCol} {
 		${grid.between('centre-column-start', 'right-column-end')}
@@ -77,11 +83,14 @@ const captionStyles = (format: ArticleFormat): SerializedStyles => css`
 	& {
 		color: ${text.gallery(format)};
 	}
-	> span {
+
+	span {
 		${textSans.xsmall({ lineHeight: 'regular' })}
 	}
-	> h2 {
-		${headline.xxxsmall()}
+
+	h2,
+	h2 > span {
+		${headline.xxxsmall({ lineHeight: 'regular' })}
 	}
 
 	${from.leftCol} {
@@ -105,6 +114,19 @@ const captionStyles = (format: ArticleFormat): SerializedStyles => css`
 	`}
 `;
 
+const imgSizes = (image: Image): Sizes => {
+	const ratio = image.width / image.height;
+
+	return {
+		mediaQueries: [
+			{ breakpoint: 'wide', size: `min(1020px, 100vh * ${ratio})` },
+			{ breakpoint: 'leftCol', size: `min(940px, 100vh * ${ratio})` },
+			{ breakpoint: 'phablet', size: `min(620px, 100vh * ${ratio})` },
+		],
+		default: `min(100vw, 100vh * ${ratio})`,
+	};
+};
+
 const GalleryBodyImage: FC<BodyImageProps> = ({
 	image,
 	format,
@@ -116,7 +138,7 @@ const GalleryBodyImage: FC<BodyImageProps> = ({
 		<div css={imageWrapperStyles(format)}>
 			<Img
 				image={image}
-				sizes={getDefaultSizes(image.role)}
+				sizes={imgSizes(image)}
 				className={getDefaultImgStyles(image.role, supportsDarkMode)}
 				format={format}
 				supportsDarkMode={supportsDarkMode}

@@ -766,6 +766,7 @@ type QuestionType = {
 	text: string;
 	answers: AnswerType[];
 	imageUrl?: string;
+	imageAlt?: string;
 };
 
 type ResultBucketsType = {
@@ -787,4 +788,5 @@ type Newsletter = {
 	successDescription: string;
 	theme: string;
 	group: string;
+	regionFocus?: string;
 };

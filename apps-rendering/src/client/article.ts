@@ -7,7 +7,6 @@ import { AudioAtom } from '@guardian/atoms-rendering';
 import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
 import { App } from '@guardian/discussion-rendering/build/App';
-import { either } from '@guardian/types';
 import {
 	ads,
 	getAdSlots,
@@ -434,7 +433,7 @@ function hydrateClickToView(): void {
 	document
 		.querySelectorAll('.js-click-to-view-container')
 		.forEach((container) =>
-			either(
+			createEmbedComponentFromProps(container).either(
 				(error: string) => {
 					logger.error(
 						`Failed to create Embed for hydration: ${error}`,
@@ -443,7 +442,7 @@ function hydrateClickToView(): void {
 				(embedComponent: ReactElement) => {
 					ReactDOM.hydrate(embedComponent, container);
 				},
-			)(createEmbedComponentFromProps(container)),
+			),
 		);
 }
 
@@ -464,7 +463,6 @@ sendTargetingParams();
 ads();
 videos();
 resizeEmailSignups();
-reportNativeElementPositionChanges();
 topics();
 slideshow();
 footerInit();
@@ -476,3 +474,9 @@ initAudioAtoms();
 hydrateAtoms();
 richLinks();
 hydrateClickToView();
+
+/*
+ We run this last to help precisely position native elements over their placeholders in the webview.
+ For more detail see https://github.com/guardian/dotcom-rendering/pull/6047
+ */
+reportNativeElementPositionChanges();

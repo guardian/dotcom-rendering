@@ -61,9 +61,10 @@ interface Props {
 
 const MainMediaVideo: FC<Props> = ({ video, format }) => (
 	<div
+		className="js-native-video"
 		css={styles(format)}
-		data-posterUrl={video.posterUrl}
-		data-videoId={video.videoId}
+		data-posterurl={video.posterUrl}
+		data-videoid={video.videoId}
 		data-duration={video.duration}
 	></div>
 );

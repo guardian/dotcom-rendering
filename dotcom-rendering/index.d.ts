@@ -527,30 +527,31 @@ declare module 'dynamic-import-polyfill' {
 
 declare namespace JSX {
 	interface IntrinsicElements {
-		'amp-state': any;
-		'amp-form': any;
-		'amp-experiment': any;
-		'amp-sidebar': any;
 		'amp-accordion': any;
-		'amp-img': any;
-		'amp-twitter': any;
-		'amp-list': any;
-		'amp-vimeo': any;
-		'amp-facebook': any;
-		'amp-video': any;
-		'amp-instagram': any;
-		'amp-soundcloud': any;
-		'amp-iframe': any;
-		'amp-analytics': any;
-		'amp-pixel': any;
 		'amp-ad': any;
-		'amp-sticky-ad': any;
-		'amp-youtube': any;
-		'amp-geo': any;
-		'amp-consent': any;
-		'amp-live-list': any;
+		'amp-analytics': any;
 		'amp-audio': any;
+		'amp-consent': any;
 		'amp-embed': any;
+		'amp-experiment': any;
+		'amp-facebook': any;
+		'amp-form': any;
+		'amp-geo': any;
+		'amp-iframe': any;
+		'amp-img': any;
+		'amp-instagram': any;
+		'amp-list': any;
+		'amp-live-list': any;
+		'amp-pixel': any;
+		'amp-script': any;
+		'amp-sidebar': any;
+		'amp-soundcloud': any;
+		'amp-state': any;
+		'amp-sticky-ad': any;
+		'amp-twitter': any;
+		'amp-video': any;
+		'amp-vimeo': any;
+		'amp-youtube': any;
 	}
 }
 
