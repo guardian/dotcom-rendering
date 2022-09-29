@@ -110,14 +110,14 @@ const adSlotStyles = css`
 	}
 `;
 
-const AdSlot: FC<Props> = ({ className, paragraph, format }): ReactElement => (
+const AdSlot: FC<Props> = ({ className, paragraph, format }) => (
 	<aside
 		css={styles(format)}
 		className={className}
 		key={`ad-after-${paragraph}-para`}
 	>
 		<div css={adLabelsStyles(format)} className="ad-labels">
-			<h1>Advertisement</h1>
+			<h2>Advertisement</h2>
 		</div>
 		<div css={adSlotStyles} className="ad-slot"></div>
 		<div css={supportBannerStyles(format)} className="support-banner">
