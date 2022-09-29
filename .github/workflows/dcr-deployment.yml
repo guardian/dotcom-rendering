@@ -21,7 +21,7 @@ jobs:
         run: yarn --frozen-lockfile
       # Save the output for use in further jobs
       - name: Tar files
-        run: tar -czf setup-project.tar.gz .
+        run: touch setup-project.tar.gz && tar --exclude=setup-project.tar.gz -czf setup-project.tar.gz .
       - name: Upload setup project
         uses: actions/upload-artifact@v3
         with:
@@ -72,12 +72,12 @@ jobs:
         run: make buildCheck
         working-directory: dotcom-rendering
       - name: Tar files
-        run: tar -czf built-project.tar.gz .
+        run: touch built-project.tar.gz && tar --exclude=built-project.tar.gz -czf built-project.tar.gz .
       - name: Upload built project
         uses: actions/upload-artifact@v3
         with:
           name: built-project-output
-          path: build-project.tar.gz
+          path: built-project.tar.gz
   deploy:
     needs: [build, lint]
     runs-on: ubuntu-latest
