@@ -40,6 +40,17 @@ const columnStyle = css`
 	padding-bottom: 10px;
 	position: relative;
 
+	:after {
+		background-color: ${brand[600]};
+		top: 0;
+		content: '';
+		display: block;
+		height: 1px;
+		left: 50px;
+		position: absolute;
+		right: 0;
+	}
+
 	/* Remove the border from the top item on mobile */
 	:first-of-type:after {
 		content: none;

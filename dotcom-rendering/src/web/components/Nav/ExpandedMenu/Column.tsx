@@ -8,10 +8,7 @@ import {
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import type {
-	EditionLinkType,
-	PillarType,
-} from '../../../../model/extract-nav';
+import type { PillarType } from '../../../../model/extract-nav';
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS
@@ -73,7 +70,7 @@ const columnLinkTitle = css`
 	}
 `;
 
-export const mainMenuLinkStyle = css`
+const mainMenuLinkStyle = css`
 	box-sizing: border-box;
 	overflow: hidden;
 	position: relative;
@@ -83,7 +80,7 @@ export const mainMenuLinkStyle = css`
 	}
 `;
 
-export const columnLinks = css`
+const columnLinks = css`
 	${textSans.medium()};
 	box-sizing: border-box;
 	display: flex;
@@ -198,19 +195,15 @@ const columnStyle = css`
 export const Column = ({
 	column,
 	index,
-	showLineBelow,
+	isLastColumn,
 }: {
-	column: PillarType | EditionLinkType;
+	column: PillarType;
 	index: number;
-	showLineBelow: boolean;
+	isLastColumn: boolean;
 }) => {
 	// As the elements are dynamic we need to specify the IDs here
-	//Replace whitespace with hyphen https://stackoverflow.com/questions/3794919/replace-all-spaces-in-a-string-with/3795147#3795147
-	const columnInputId = `${column.title}-checkbox-input`.split(' ').join('-');
-	const collapseColumnInputId = `${column.title}-button`.split(' ').join('-');
-	const ariaControls = `${column.title.toLowerCase()}Links`
-		.split(' ')
-		.join('-');
+	const columnInputId = `${column.title}-checkbox-input`;
+	const collapseColumnInputId = `${column.title}-button`;
 
 	return (
 		<li css={[columnStyle, pillarDivider]} role="none">
@@ -260,7 +253,7 @@ export const Column = ({
 				collapseColumnInputId={collapseColumnInputId}
 				title={column.title}
 				columnInputId={columnInputId}
-				ariaControls={ariaControls}
+				ariaControls={`${column.title.toLowerCase()}Links`}
 			/>
 
 			{/* ColumnLinks */}
@@ -268,12 +261,12 @@ export const Column = ({
 				css={[
 					columnLinks,
 					index === 0 && firstColumnLinks,
-					!!column.children && pillarColumnLinks,
+					!!column.pillar && pillarColumnLinks,
 					hideWhenNotChecked(columnInputId),
 				]}
 				role="menu"
-				id={ariaControls}
-				data-cy={ariaControls}
+				id={`${column.title.toLowerCase()}Links`}
+				data-cy={`${column.title.toLowerCase()}Links`}
 			>
 				{(column.children || []).map((link) => (
 					<li
@@ -298,7 +291,7 @@ export const Column = ({
 					</li>
 				))}
 			</ul>
-			{showLineBelow && (
+			{isLastColumn && (
 				<div css={[hideWhenChecked(columnInputId), lineStyle]}></div>
 			)}
 		</li>

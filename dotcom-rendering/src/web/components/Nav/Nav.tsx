@@ -229,7 +229,7 @@ export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
 					dataLinkName="nav2"
 					isTopNav={true}
 				/>
-				<ExpandedMenu editionId={editionId} nav={nav} format={format} />
+				<ExpandedMenu nav={nav} format={format} />
 			</div>
 			{displayRoundel && (
 				<PositionRoundel>
