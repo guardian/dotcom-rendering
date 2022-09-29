@@ -27,6 +27,7 @@ type Props = {
 	contributionsServiceUrl: string;
 	contentType: string;
 	sectionName: string;
+	keywordIds: string;
 	isPreview?: boolean;
 	idUrl: string;
 	isSensitive: boolean;
@@ -131,6 +132,7 @@ export const ArticleBody = ({
 	availableTopics,
 	selectedTopics,
 	abTests,
+	keywordIds,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
@@ -180,6 +182,7 @@ export const ArticleBody = ({
 						filterKeyEvents={filterKeyEvents}
 						availableTopics={availableTopics}
 						selectedTopics={selectedTopics}
+						keywordIds={keywordIds}
 					/>
 				</div>
 			</>

@@ -37,7 +37,7 @@ type Props = {
 	idApiUrl: string;
 	stage: string;
 	pageId: string;
-	keywordsId: string;
+	keywordIds: string;
 };
 
 const buildReaderRevenueEpicConfig = (
@@ -96,7 +96,7 @@ export const SlotBodyEnd = ({
 	idApiUrl,
 	stage,
 	pageId,
-	keywordsId,
+	keywordIds,
 }: Props) => {
 	const { brazeMessages } = useBraze(idApiUrl);
 
@@ -122,11 +122,11 @@ export const SlotBodyEnd = ({
 
 	useEffect(() => {
 		setAsyncArticleCount(
-			getArticleCounts(pageId, keywordsId).then(
+			getArticleCounts(pageId, keywordIds).then(
 				(counts) => counts?.weeklyArticleHistory,
 			),
 		);
-	}, [pageId, keywordsId]);
+	}, [pageId, keywordIds]);
 
 	useOnce(() => {
 		const readerRevenueEpic = buildReaderRevenueEpicConfig({
