@@ -19,39 +19,22 @@ jobs:
           cache: 'yarn'
       - name: Yarn install
         run: yarn --frozen-lockfile
-      # Cache the output for use in further jobs
-      - uses: actions/cache@v3
+      # Save the output for use in further jobs
+      - name: Upload setup project
+        uses: actions/upload-artifact@v3
         with:
-          path: ${{env.cache_path}}
-          key: ${{env.cache_name}}
-  build:
-    needs: [setup]
-    runs-on: ubuntu-latest
-    steps:
-      # Setup Environment
-      - uses: actions/cache@v3
-        with:
-          path: ${{env.cache_path}}
-          key: ${{env.cache_name}}
-      - name: Install Node
-        uses: guardian/actions-setup-node@v2.4.1
-      # Job Steps
-      - name: Generate production build
-        run: make build
-        working-directory: dotcom-rendering
-      - name: Validate Build
-        run: make buildCheck
-        working-directory: dotcom-rendering
+          name: setup-project-output
+          path: ./
   lint:
-    name: Lint
+    name: lint
     needs: [setup]
     runs-on: ubuntu-latest
     steps:
       # Setup Environment
-      - uses: actions/cache@v3
+      - name: Download setup project
+        uses: actions/download-artifact@v3
         with:
-          path: ${{env.cache_path}}
-          key: ${{env.cache_name}}
+          name: setup-project-output
       - name: Install Node
         uses: guardian/actions-setup-node@v2.4.1
       # Job Steps
@@ -64,6 +47,29 @@ jobs:
       - name: Prettier check
         run: yarn prettier:check
         working-directory: dotcom-rendering
+  build:
+    needs: [setup]
+    runs-on: ubuntu-latest
+    steps:
+      # Setup Environment
+      - name: Download setup project
+        uses: actions/download-artifact@v3
+        with:
+          name: setup-project-output
+      - name: Install Node
+        uses: guardian/actions-setup-node@v2.4.1
+      # Job Steps
+      - name: Generate production build
+        run: make build
+        working-directory: dotcom-rendering
+      - name: Validate Build
+        run: make buildCheck
+        working-directory: dotcom-rendering
+      - name: Upload built project
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-project-output
+          path: ./
   deploy:
     needs: [build, lint]
     runs-on: ubuntu-latest
