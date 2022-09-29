@@ -11,6 +11,7 @@ import {
 } from '@guardian/source-foundations';
 import {
 	buttonThemeBrand,
+	Hide,
 	LinkButton,
 	SvgMagnifyingGlass,
 } from '@guardian/source-react-components';
@@ -220,14 +221,17 @@ export const Columns: React.FC<{
 
 			<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
 			{/* This is where the edition dropdown is inserted					 */}
-			<Column
-				column={{
-					...activeEdition,
-					children: remainingEditions,
-				}}
-				index={10}
-				showLineBelow={true}
-			/>
+
+			<Hide from="tablet">
+				<Column
+					column={{
+						...activeEdition,
+						children: remainingEditions,
+					}}
+					index={10}
+					showLineBelow={true}
+				/>
+			</Hide>
 
 			<MoreColumn
 				column={nav.otherLinks}
