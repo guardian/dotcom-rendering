@@ -133,6 +133,7 @@ export const renderBlocks = (
 			sharedAdTargeting,
 			adUnit,
 			switches,
+			keywordIds,
 		} = body;
 
 		const enhancedBlocks = enhanceBlocks(blocks, format);
@@ -151,6 +152,7 @@ export const renderBlocks = (
 			sharedAdTargeting,
 			adUnit,
 			switches,
+			keywordIds,
 		});
 
 		res.status(200).send(html);
