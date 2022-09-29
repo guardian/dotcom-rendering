@@ -1,4 +1,5 @@
 import { ArticlePillar } from '@guardian/libs';
+import type { EditionId } from '../types/edition';
 import { findPillar } from './find-pillar';
 
 export interface BaseLinkType {
@@ -12,6 +13,10 @@ export interface LinkType extends BaseLinkType {
 	mobileOnly?: boolean;
 	pillar?: ArticleTheme;
 	more?: boolean;
+}
+
+export interface EditionLinkType extends LinkType {
+	editionId: EditionId;
 }
 
 export interface PillarType extends LinkType {
