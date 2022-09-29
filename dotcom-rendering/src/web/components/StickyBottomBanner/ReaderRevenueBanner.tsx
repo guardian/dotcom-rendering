@@ -14,6 +14,7 @@ import type { ArticleCounts } from '../../../lib/article-count';
 import { trackNonClickInteraction } from '../../browser/ga/ga';
 import { submitComponentEvent } from '../../browser/ophan/ophan';
 import {
+	getLastOneOffContributionTimestamp,
 	getPurchaseInfo,
 	hasCmpConsentForBrowserId,
 	hasOptedOutOfArticleCount,
@@ -130,12 +131,13 @@ const buildPayload = async ({
 			modulesVersion: MODULES_VERSION,
 			sectionId,
 			tagIds: tags.map((tag) => tag.id),
-			contentType,
+			contentType,p
 			browserId: (await hasCmpConsentForBrowserId())
 				? browserId || undefined
 				: undefined,
 			purchaseInfo: getPurchaseInfo(),
 			isSignedIn,
+			lastOneOffContributionDate: getLastOneOffContributionTimestamp(),
 		},
 	};
 };
