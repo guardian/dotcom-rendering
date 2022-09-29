@@ -208,7 +208,7 @@ export const Column = ({
 	//Replace whitespace with hyphen https://stackoverflow.com/questions/3794919/replace-all-spaces-in-a-string-with/3795147#3795147
 	const columnInputId = `${column.title}-checkbox-input`.split(' ').join('-');
 	const collapseColumnInputId = `${column.title}-button`.split(' ').join('-');
-	const ariaControls = `${column.title.toLowerCase()}-Links`
+	const ariaControls = `${column.title.toLowerCase()}Links`
 		.split(' ')
 		.join('-');
 
