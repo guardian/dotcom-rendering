@@ -21,7 +21,7 @@ jobs:
         run: yarn --frozen-lockfile
       # Save the output for use in further jobs
       - name: Tar files
-        run: tar -czvf setup-project.tar.gz .
+        run: tar -czf setup-project.tar.gz .
       - name: Upload setup project
         uses: actions/upload-artifact@v3
         with:
@@ -38,7 +38,7 @@ jobs:
         with:
           name: setup-project-output
       - name: Extract project
-        run: tar -xzvf setup-project.tar.gz
+        run: tar -xzf setup-project.tar.gz
       - name: Install Node
         uses: guardian/actions-setup-node@v2.4.1
       # Job Steps
@@ -61,7 +61,7 @@ jobs:
         with:
           name: setup-project-output
       - name: Extract project
-        run: tar -xzvf setup-project.tar.gz
+        run: tar -xzf setup-project.tar.gz
       - name: Install Node
         uses: guardian/actions-setup-node@v2.4.1
       # Job Steps
@@ -72,7 +72,7 @@ jobs:
         run: make buildCheck
         working-directory: dotcom-rendering
       - name: Tar files
-        run: tar -czvf built-project.tar.gz .
+        run: tar -czf built-project.tar.gz .
       - name: Upload built project
         uses: actions/upload-artifact@v3
         with:
