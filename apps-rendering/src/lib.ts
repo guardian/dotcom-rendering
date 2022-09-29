@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
 import { maybeRender, pipe } from '@guardian/common-rendering/src/lib';
 import type { Option } from '@guardian/types';
 import {
@@ -12,6 +13,13 @@ import {
 } from '@guardian/types';
 import { Optional } from 'optional';
 import { Result } from 'result';
+
+// ----- Types ----- //
+
+type Styleable<Props> = Props & {
+	css?: SerializedStyles;
+	className?: string;
+}
 
 // ----- Functions ----- //
 
@@ -145,3 +153,5 @@ export {
 	fold,
 	toNullable,
 };
+
+export type { Styleable };
