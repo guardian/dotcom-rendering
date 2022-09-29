@@ -3,7 +3,8 @@
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
 import type { FC } from 'react';
-import DefaultHeadingTwo, { DefaultProps } from './HeadingTwo.defaults';
+import type { DefaultProps } from './HeadingTwo.defaults';
+import DefaultHeadingTwo from './HeadingTwo.defaults';
 
 // ----- Component ----- //
 
@@ -12,11 +13,8 @@ const styles = css`
 `;
 
 const ImmersiveHeadingTwo: FC<DefaultProps> = (props) => (
-	<DefaultHeadingTwo
-		{...props}
-		css={styles}
-	/>
-)
+	<DefaultHeadingTwo {...props} css={styles} />
+);
 
 // ----- Exports ----- //
 

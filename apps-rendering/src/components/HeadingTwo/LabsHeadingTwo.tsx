@@ -3,7 +3,8 @@
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
 import type { FC } from 'react';
-import DefaultHeadingTwo, { DefaultProps, defaultStyles } from './HeadingTwo.defaults';
+import type { DefaultProps } from './HeadingTwo.defaults';
+import DefaultHeadingTwo, { defaultStyles } from './HeadingTwo.defaults';
 
 // ----- Component ----- //
 
@@ -12,11 +13,8 @@ const styles = css`
 `;
 
 const LabsHeadingTwo: FC<DefaultProps> = (props) => (
-	<DefaultHeadingTwo
-		{...props}
-		css={css(defaultStyles, styles)}
-	/>
-)
+	<DefaultHeadingTwo {...props} css={css(defaultStyles, styles)} />
+);
 
 // ----- Exports ----- //
 

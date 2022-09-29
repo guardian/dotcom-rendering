@@ -19,7 +19,7 @@ import { Result } from 'result';
 type Styleable<Props> = Props & {
 	css?: SerializedStyles;
 	className?: string;
-}
+};
 
 // ----- Functions ----- //
 
