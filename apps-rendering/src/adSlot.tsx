@@ -13,7 +13,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { Button, buttonThemeBrandAlt } from '@guardian/source-react-components';
-import type { FC, ReactElement } from 'react';
+import type { FC } from 'react';
 import { darkModeCss, wideContentWidth } from 'styles';
 
 type Props = {
