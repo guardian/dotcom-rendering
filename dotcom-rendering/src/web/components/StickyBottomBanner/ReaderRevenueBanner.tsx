@@ -131,7 +131,7 @@ const buildPayload = async ({
 			modulesVersion: MODULES_VERSION,
 			sectionId,
 			tagIds: tags.map((tag) => tag.id),
-			contentType,p
+			contentType,
 			browserId: (await hasCmpConsentForBrowserId())
 				? browserId || undefined
 				: undefined,
