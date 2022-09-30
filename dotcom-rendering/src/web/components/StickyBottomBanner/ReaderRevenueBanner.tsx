@@ -14,7 +14,7 @@ import type { ArticleCounts } from '../../../lib/article-count';
 import { trackNonClickInteraction } from '../../browser/ga/ga';
 import { submitComponentEvent } from '../../browser/ophan/ophan';
 import {
-	getLastOneOffContributionTimestamp,
+	getLastOneOffContributionDate,
 	getPurchaseInfo,
 	hasCmpConsentForBrowserId,
 	hasOptedOutOfArticleCount,
@@ -137,7 +137,7 @@ const buildPayload = async ({
 				: undefined,
 			purchaseInfo: getPurchaseInfo(),
 			isSignedIn,
-			lastOneOffContributionDate: getLastOneOffContributionTimestamp(),
+			lastOneOffContributionDate: getLastOneOffContributionDate(),
 		},
 	};
 };
