@@ -27,7 +27,6 @@ jobs:
           path: ${{env.cache_path}}
           key: ${{env.setup_cache_name}}
   lint:
-    name: lint
     needs: [setup]
     runs-on: ubuntu-latest
     steps:
@@ -55,7 +54,6 @@ jobs:
         run: yarn prettier:check
         working-directory: dotcom-rendering
   typescript:
-    name: lint
     needs: [setup]
     runs-on: ubuntu-latest
     steps:
@@ -77,7 +75,7 @@ jobs:
         run: yarn tsc
         working-directory: dotcom-rendering
   development-checks:
-    name: lint
+    name: stories & schema check
     needs: [setup]
     runs-on: ubuntu-latest
     steps:
@@ -102,7 +100,6 @@ jobs:
         run: make check-stories
         working-directory: dotcom-rendering
   jest:
-    name: lint
     needs: [setup]
     runs-on: ubuntu-latest
     steps:
