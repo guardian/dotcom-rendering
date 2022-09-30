@@ -36,8 +36,11 @@ jobs:
         with:
           path: ${{env.cache_path}}
           key: ${{env.setup_cache_name}}
-      - name: Extract project
-        run: tar -xzf setup-project.tar.gz
+      - if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Missing cache - Please re-run the full dcr-deployment action!')
       - name: Install Node
         uses: guardian/actions-setup-node@v2.4.1
       # Job Steps
@@ -59,6 +62,11 @@ jobs:
         with:
           path: ${{env.cache_path}}
           key: ${{env.setup_cache_name}}
+      - if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Missing cache - Please re-run the full dcr-deployment action!')
       - name: Install Node
         uses: guardian/actions-setup-node@v2.4.1
       # Job Steps
@@ -86,6 +94,11 @@ jobs:
         with:
           path: ${{env.cache_path}}
           key: ${{env.build_cache_name}}
+      - if: steps.cache.outputs.cache-hit != 'true'
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Missing cache - Please re-run the full dcr-deployment action!')
       - name: Install Node
         uses: guardian/actions-setup-node@v2.4.1
       # Job Steps
