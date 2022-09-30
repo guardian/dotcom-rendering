@@ -54,6 +54,75 @@ jobs:
       - name: Prettier check
         run: yarn prettier:check
         working-directory: dotcom-rendering
+  typescript:
+    name: lint
+    needs: [setup]
+    runs-on: ubuntu-latest
+    steps:
+      # Setup Environment
+      - uses: actions/cache@v3
+        id: setup-cache
+        with:
+          path: ${{env.cache_path}}
+          key: ${{env.setup_cache_name}}
+      - if: steps.setup-cache.outputs.cache-hit != 'true'
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Missing cache - Please re-run the full dcr-deployment action!')
+      - name: Install Node
+        uses: guardian/actions-setup-node@v2.4.1
+      # Job Steps
+      - name: Check typescript
+        run: yarn tsc
+        working-directory: dotcom-rendering
+  development-checks:
+    name: lint
+    needs: [setup]
+    runs-on: ubuntu-latest
+    steps:
+      # Setup Environment
+      - uses: actions/cache@v3
+        id: setup-cache
+        with:
+          path: ${{env.cache_path}}
+          key: ${{env.setup_cache_name}}
+      - if: steps.setup-cache.outputs.cache-hit != 'true'
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Missing cache - Please re-run the full dcr-deployment action!')
+      - name: Install Node
+        uses: guardian/actions-setup-node@v2.4.1
+      # Job Steps
+      - name: Run check-schema script
+        run: make check-schema
+        working-directory: dotcom-rendering
+      - name: Run check-stories script
+        run: make check-stories
+        working-directory: dotcom-rendering
+  jest:
+    name: lint
+    needs: [setup]
+    runs-on: ubuntu-latest
+    steps:
+      # Setup Environment
+      - uses: actions/cache@v3
+        id: setup-cache
+        with:
+          path: ${{env.cache_path}}
+          key: ${{env.setup_cache_name}}
+      - if: steps.setup-cache.outputs.cache-hit != 'true'
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Missing cache - Please re-run the full dcr-deployment action!')
+      - name: Install Node
+        uses: guardian/actions-setup-node@v2.4.1
+      # Job Steps
+      - name: Run Jest
+        run: CI=true yarn test
+        working-directory: dotcom-rendering
   build:
     needs: [setup]
     runs-on: ubuntu-latest
@@ -114,9 +183,84 @@ jobs:
           wait-on-timeout: 30
           browser: chrome
           spec: cypress/e2e/parallel-${{ matrix.group }}/*.js
+  percy:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      # Setup Environment
+      - uses: actions/cache@v3
+        id: build-cache
+        with:
+          path: ${{env.cache_path}}
+          key: ${{env.build_cache_name}}
+      - if: steps.build-cache.outputs.cache-hit != 'true'
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Missing cache - Please re-run the full dcr-deployment action!')
+      - name: Install Node
+        uses: guardian/actions-setup-node@v2.4.1
+      # Job Steps
+      - name: Install cypress
+        uses: cypress-io/github-action@v4
+        with:
+          runTests: false
+          start: make start-ci
+          working-directory: dotcom-rendering
+          wait-on: 'http://localhost:9000'
+          wait-on-timeout: 30
+      - name: Percy Test
+        working-directory: dotcom-rendering
+        run: yarn cypress:run:percy
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+  lighthouse:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      # Setup Environment
+      - uses: actions/cache@v3
+        id: build-cache
+        with:
+          path: ${{env.cache_path}}
+          key: ${{env.build_cache_name}}
+      - if: steps.build-cache.outputs.cache-hit != 'true'
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Missing cache - Please re-run the full dcr-deployment action!')
+      - name: Install Node
+        uses: guardian/actions-setup-node@v2.4.1
+      # Job Steps
+      - name: Install and run Lighthouse CI
+        working-directory: dotcom-rendering
+        env:
+          LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
+        run: |
+          npm install -g puppeteer-core@2.1.0 @lhci/cli@0.8.2
+          lhci autorun
 
+      - name: Setup deno
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: v1.21.0
+
+      - name: Surface Lighthouse Results
+        run: deno run --no-check --allow-net=api.github.com --allow-env="GITHUB_TOKEN","GITHUB_EVENT_PATH" --allow-read scripts/deno/surface-lighthouse-results.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   deploy:
-    needs: [build, lint, cypress]
+    needs:
+      [
+        build,
+        lint,
+        typescript,
+        development-checks,
+        jest,
+        cypress,
+        percy,
+        lighthouse,
+      ]
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
