@@ -7,12 +7,14 @@
 
 const find = require('find');
 const loadJsonFile = require('load-json-file');
+const { BUILD_VARIANT } = require('../webpack/bundles');
 
 const errorAndThrow = (error) => {
 	console.error(error);
 	throw new Error(error);
 };
 
+/** @type {(glob: string) => Promise<void>} */
 const fileExists = async (glob) => {
 	await find.file(glob, `./dist/`, (files) => {
 		if (files.length === 1) {
@@ -25,12 +27,18 @@ const fileExists = async (glob) => {
 
 (async () => {
 	// Check that the manifest files exist
-	await fileExists('manifest.json');
+	await fileExists('manifest.modern.json');
 	await fileExists('manifest.legacy.json');
+	if (BUILD_VARIANT) await fileExists('manifest.variant.json');
 
 	// Check that the manifest files return values for all the chunks
-	const manifest = await loadJsonFile('./dist/manifest.json');
-	const legacyManifest = await loadJsonFile('./dist/manifest.legacy.json');
+	const manifests = [
+		await loadJsonFile('./dist/manifest.modern.json'),
+		await loadJsonFile('./dist/manifest.legacy.json'),
+	];
+	if (BUILD_VARIANT) {
+		manifests.push(await loadJsonFile('./dist/manifest.variant.json'));
+	}
 
 	[
 		'sentryLoader.js',
@@ -44,19 +52,13 @@ const fileExists = async (glob) => {
 		'newsletterEmbedIframe.js',
 		'relativeTime.js',
 		'initDiscussion.js',
-	].map((name) => {
-		if (manifest[name]) {
-			console.log(`Manifest returned value ${name}`);
-		} else {
-			errorAndThrow(`Manifest did not return a value for ${name}`);
-		}
-
-		if (legacyManifest[name]) {
-			console.log(`Legacy manifest returned value ${name}`);
-		} else {
-			errorAndThrow(
-				`Legacy Loadabl manifest did not return a value for ${name}`,
-			);
+	].forEach((name) => {
+		for (const manifest of manifests) {
+			if (manifest[name]) {
+				console.log(`A manifest returned value ${name}`);
+			} else {
+				errorAndThrow(`A manifest did not return a value for ${name}`);
+			}
 		}
 	});
 })();

@@ -6,6 +6,7 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from './tests/newsletter-merch-unit-test';
+import { shadyPieClickThrough } from './tests/shady-pie-click-through';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 import {
@@ -37,4 +38,5 @@ export const tests: ABTest[] = [
 	signInGateMandatoryLongTestVariantNa,
 	signInGateMandatoryLongTestVariantEu,
 	signInGateMandatoryLongTestVariantUk,
+	shadyPieClickThrough,
 ];
