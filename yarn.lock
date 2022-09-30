@@ -2907,10 +2907,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-4.4.0.tgz#69cf404b56db3ca507702d29dae6a40eeb145cf4"
   integrity sha512-5Q4Vl8ek0UV0Y9ob5y3Smq5xHs1d3lEzLynv5qqlYqVBlhze5Ypg5IzrPcEpKtcUaCIQeI9d5FevHM9fmm18sQ==
 
-"@guardian/support-dotcom-components@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.4.tgz#1d09ce408bcfa435eb2411255688e22a2eede032"
-  integrity sha512-g23KJoJiJVIC75DZW87zyblmNMnjujCgCKntLVLblKoSxIzOBLhzkPUnJqzPtG3aztTPRbqmhLzqgzm6M56/qw==
+"@guardian/support-dotcom-components@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.5.tgz#659720c332c62b211efab9a45350c042184a5082"
+  integrity sha512-BVvGeyS5dAD9Qu7NwFUsDou9LN5o9LZH5I4BnVf2Tg7Rj/mxdnO5qPygwI0dKFEbNHql4BEhJqSBdWI9MUSPWw==
 
 "@guardian/tsconfig@^0.1.4":
   version "0.1.4"
