@@ -37,7 +37,7 @@ jobs:
           path: ${{env.cache_path}}
           key: ${{env.setup_cache_name}}
       - if: steps.setup-cache.outputs.cache-hit != 'true'
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           script: |
             core.setFailed('Missing cache - Please re-run the full dcr-deployment action!')
@@ -66,7 +66,7 @@ jobs:
           path: ${{env.cache_path}}
           key: ${{env.setup_cache_name}}
       - if: steps.setup-cache.outputs.cache-hit != 'true'
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           script: |
             core.setFailed('Missing cache - Please re-run the full dcr-deployment action!')
@@ -93,7 +93,7 @@ jobs:
           path: ${{env.cache_path}}
           key: ${{env.setup_cache_name}}
       - if: steps.setup-cache.outputs.cache-hit != 'true'
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           script: |
             core.setFailed('Missing cache - Please re-run the full dcr-deployment action!')
@@ -115,7 +115,7 @@ jobs:
           path: ${{env.cache_path}}
           key: ${{env.setup_cache_name}}
       - if: steps.setup-cache.outputs.cache-hit != 'true'
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           script: |
             core.setFailed('Missing cache - Please re-run the full dcr-deployment action!')
@@ -139,7 +139,7 @@ jobs:
           path: ${{env.cache_path}}
           key: ${{env.setup_cache_name}}
       - if: steps.setup-cache.outputs.cache-hit != 'true'
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           script: |
             core.setFailed('Missing cache - Please re-run the full dcr-deployment action!')
@@ -164,7 +164,7 @@ jobs:
           path: ${{env.cache_path}}
           key: ${{env.build_cache_name}}
       - if: steps.build-cache.outputs.cache-hit != 'true'
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           script: |
             core.setFailed('Missing cache - Please re-run the full dcr-deployment action!')
@@ -262,3 +262,21 @@ jobs:
     steps:
       - name: Deploy
         run: echo "Coming soon..."
+  clear-cache:
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clear cache
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.actions.deleteActionsCacheByKey({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              key: "${{setup_cache_name}}"
+            })
+            await github.rest.actions.deleteActionsCacheByKey({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              key: "${{built_cache_name}}"
+            })
