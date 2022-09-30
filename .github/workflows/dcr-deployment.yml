@@ -21,7 +21,7 @@ jobs:
           cache: 'yarn'
       - name: Yarn install
         run: yarn --frozen-lockfile
-      # Cache the output for use in further jobs
+      # Cache the setup output for use in further jobs
       - uses: actions/cache@v3
         with:
           path: ${{env.cache_path}}
@@ -33,10 +33,11 @@ jobs:
     steps:
       # Setup Environment
       - uses: actions/cache@v3
+        id: setup-cache
         with:
           path: ${{env.cache_path}}
           key: ${{env.setup_cache_name}}
-      - if: steps.cache.outputs.cache-hit != 'true'
+      - if: steps.setup-cache.outputs.cache-hit != 'true'
         uses: actions/github-script@v3
         with:
           script: |
@@ -59,10 +60,11 @@ jobs:
     steps:
       # Setup Environment
       - uses: actions/cache@v3
+        id: setup-cache
         with:
           path: ${{env.cache_path}}
           key: ${{env.setup_cache_name}}
-      - if: steps.cache.outputs.cache-hit != 'true'
+      - if: steps.setup-cache.outputs.cache-hit != 'true'
         uses: actions/github-script@v3
         with:
           script: |
@@ -76,7 +78,7 @@ jobs:
       - name: Validate Build
         run: make buildCheck
         working-directory: dotcom-rendering
-      # Cache the output for further steps
+      # Cache the build output for further steps
       - uses: actions/cache@v3
         with:
           path: ${{env.cache_path}}
@@ -91,10 +93,11 @@ jobs:
     steps:
       # Setup Environment
       - uses: actions/cache@v3
+        id: build-cache
         with:
           path: ${{env.cache_path}}
           key: ${{env.build_cache_name}}
-      - if: steps.cache.outputs.cache-hit != 'true'
+      - if: steps.build-cache.outputs.cache-hit != 'true'
         uses: actions/github-script@v3
         with:
           script: |
