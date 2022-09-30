@@ -278,5 +278,5 @@ jobs:
             await github.rest.actions.deleteActionsCacheByKey({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              key: "${{env.built_cache_name}}"
+              key: "${{env.build_cache_name}}"
             })
