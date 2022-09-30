@@ -21,7 +21,7 @@
     "tsc": "tsc",
     "test": "jest --maxWorkers=50%",
     "test:watch": "jest --watch --maxWorkers=25%",
-    "test:ci": "jest --runInBand",
+    "test:ci": "DISABLE_LOGGING_AND_METRICS=true jest",
     "createtoc": "doctoc $npm_package_tocList --github --title '<!-- Automatically created with yarn run createtoc and on push hook -->' ",
     "addandcommittoc": "git add $npm_package_tocList && git commit -m 'Add TOC update' || true",
     "cypress:open": "cypress open",

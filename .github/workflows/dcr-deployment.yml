@@ -26,6 +26,35 @@ jobs:
         with:
           path: ${{env.cache_path}}
           key: ${{env.setup_cache_name}}
+  build:
+    needs: [setup]
+    runs-on: ubuntu-latest
+    steps:
+      # Setup Environment
+      - uses: actions/cache@v3
+        id: setup-cache
+        with:
+          path: ${{env.cache_path}}
+          key: ${{env.setup_cache_name}}
+      - if: steps.setup-cache.outputs.cache-hit != 'true'
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Missing cache - Please re-run the full dcr-deployment action!')
+      - name: Install Node
+        uses: guardian/actions-setup-node@v2.4.1
+      # Job Steps
+      - name: Generate production build
+        run: make build
+        working-directory: dotcom-rendering
+      - name: Validate Build
+        run: make buildCheck
+        working-directory: dotcom-rendering
+      # Cache the build output for further steps
+      - uses: actions/cache@v3
+        with:
+          path: ${{env.cache_path}}
+          key: ${{env.build_cache_name}}
   lint:
     needs: [setup]
     runs-on: ubuntu-latest
@@ -118,37 +147,8 @@ jobs:
         uses: guardian/actions-setup-node@v2.4.1
       # Job Steps
       - name: Run Jest
-        run: CI=true yarn test
+        run: CI=true yarn test:ci
         working-directory: dotcom-rendering
-  build:
-    needs: [setup]
-    runs-on: ubuntu-latest
-    steps:
-      # Setup Environment
-      - uses: actions/cache@v3
-        id: setup-cache
-        with:
-          path: ${{env.cache_path}}
-          key: ${{env.setup_cache_name}}
-      - if: steps.setup-cache.outputs.cache-hit != 'true'
-        uses: actions/github-script@v3
-        with:
-          script: |
-            core.setFailed('Missing cache - Please re-run the full dcr-deployment action!')
-      - name: Install Node
-        uses: guardian/actions-setup-node@v2.4.1
-      # Job Steps
-      - name: Generate production build
-        run: make build
-        working-directory: dotcom-rendering
-      - name: Validate Build
-        run: make buildCheck
-        working-directory: dotcom-rendering
-      # Cache the build output for further steps
-      - uses: actions/cache@v3
-        with:
-          path: ${{env.cache_path}}
-          key: ${{env.build_cache_name}}
   cypress:
     needs: [build]
     runs-on: ubuntu-latest
