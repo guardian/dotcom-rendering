@@ -7,7 +7,9 @@ on:
 env:
   # We set NODE_ENV=production globally, this ensures we have consistent yarn installs between jobs
   NODE_ENV: production
-  built_project_filename: built-project.tar.gz
+  setup_cache_name: ${{github.run_id}}-${{github.run_number}}-setup-output
+  build_cache_name: ${{github.run_id}}-${{github.run_number}}-build-output
+  cache_path: ./
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -19,24 +21,21 @@ jobs:
           cache: 'yarn'
       - name: Yarn install
         run: yarn --frozen-lockfile
-      # Save the output for use in further jobs
-      - name: Tar files
-        run: touch setup-project.tar.gz && tar --exclude=setup-project.tar.gz -czf setup-project.tar.gz .
-      - name: Upload setup project
-        uses: actions/upload-artifact@v3
+      # Cache the output for use in further jobs
+      - uses: actions/cache@v3
         with:
-          name: setup-project-output
-          path: setup-project.tar.gz
+          path: ${{env.cache_path}}
+          key: ${{env.setup_cache_name}}
   lint:
     name: lint
     needs: [setup]
     runs-on: ubuntu-latest
     steps:
       # Setup Environment
-      - name: Download setup project
-        uses: actions/download-artifact@v3
+      - uses: actions/cache@v3
         with:
-          name: setup-project-output
+          path: ${{env.cache_path}}
+          key: ${{env.setup_cache_name}}
       - name: Extract project
         run: tar -xzf setup-project.tar.gz
       - name: Install Node
@@ -56,12 +55,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Setup Environment
-      - name: Download setup project
-        uses: actions/download-artifact@v3
+      - uses: actions/cache@v3
         with:
-          name: setup-project-output
-      - name: Extract project
-        run: tar -xzf setup-project.tar.gz
+          path: ${{env.cache_path}}
+          key: ${{env.setup_cache_name}}
       - name: Install Node
         uses: guardian/actions-setup-node@v2.4.1
       # Job Steps
@@ -71,13 +68,11 @@ jobs:
       - name: Validate Build
         run: make buildCheck
         working-directory: dotcom-rendering
-      - name: Tar files
-        run: touch ${{env.built_project_filename}} && tar --exclude=${{env.built_project_filename}} -czf ${{env.built_project_filename}} .
-      - name: Upload built project
-        uses: actions/upload-artifact@v3
+      # Cache the output for further steps
+      - uses: actions/cache@v3
         with:
-          name: built-project-output
-          path: ${{env.built_project_filename}}
+          path: ${{env.cache_path}}
+          key: ${{env.build_cache_name}}
   cypress:
     needs: [build]
     runs-on: ubuntu-latest
@@ -87,12 +82,10 @@ jobs:
         group: [1, 2, 3, 4, 5, 6]
     steps:
       # Setup Environment
-      - name: Download built project
-        uses: actions/download-artifact@v3
+      - uses: actions/cache@v3
         with:
-          name: built-project-output
-      - name: Extract project
-        run: tar -xzf ${{env.built_project_filename}}
+          path: ${{env.cache_path}}
+          key: ${{env.build_cache_name}}
       - name: Install Node
         uses: guardian/actions-setup-node@v2.4.1
       # Job Steps
