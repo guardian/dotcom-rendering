@@ -61,7 +61,11 @@ function setup(form: Element): void {
 	// string is just the tag - IE querySelector('input') is automatically typed as
 	// (HTMLInputElement | null), but querySelector('input[type=email]') is typed to
 	// (Element | null) so needs to be cast.
-	const input = form.querySelector('input[type=email]') as HTMLInputElement | null;
+
+	// eslint-disable-next-line -- because 👆 but eslint disagrees.
+	const input = form.querySelector(
+		'input[type=email]',
+	) as HTMLInputElement | null;
 
 	// see: apps-rendering/src/components/NewsletterSignup/EmailSignupForm.tsx
 	// All of these should always be present in the component, so in theory they
