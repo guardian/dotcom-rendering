@@ -19,7 +19,6 @@ import type { Response } from 'express';
 import type { Item } from 'item';
 import { fromCapi } from 'item';
 import { JSDOM } from 'jsdom';
-import { compose } from 'lib';
 import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
@@ -130,13 +129,12 @@ function renderHead(
 }
 
 const renderBody = (item: Item): EmotionCritical =>
-	compose(
-		emotionServer.extractCritical,
-		renderToString,
-	)(
-		<CacheProvider value={emotionCache}>
-			<Layout item={item} />
-		</CacheProvider>,
+	emotionServer.extractCritical(
+		renderToString(
+			<CacheProvider value={emotionCache}>
+				<Layout item={item} />
+			</CacheProvider>,
+		),
 	);
 
 const buildHtml = (
