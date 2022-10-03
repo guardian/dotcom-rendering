@@ -209,7 +209,7 @@ export const Column = ({
 	const columnId = column.title.split(' ').join('-');
 	const columnInputId = `${columnId}-checkbox-input`;
 	const collapseColumnInputId = `${columnId}-button`;
-	const ariaControls = `${columnId}Links`;
+	const ariaControls = `${columnId.toLowerCase()}Links`;
 
 	return (
 		<li css={[columnStyle, pillarDivider]} role="none">
