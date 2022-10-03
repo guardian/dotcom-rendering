@@ -67,7 +67,7 @@ const results: AssertionResult[] = JSON.parse(
 /* -- Definitions -- */
 
 /** The string to search for when looking for a comment */
-const IDENTIFIER_COMMENT = `<-- url: ${process.env.LHCI_URL} -->`;
+const IDENTIFIER_COMMENT = `<-- url: ${Deno.env.get('LHCI_URL')} -->`;
 const GIHUB_PARAMS = {
 	owner: 'guardian',
 	repo: 'dotcom-rendering',
@@ -108,7 +108,7 @@ const generateAuditTable = (
 			)} | ${expected} | ${formatNumber(expected, actual)} |`,
 	);
 
-	const [, testUrlClean] = process.env.LHCI_URL.split('?url=');
+	const [, testUrlClean] = Deno.env.get('LHCI_URL').split('?url=');
 
 	const table = [
 		`> tested url \`${testUrlClean}\``,
@@ -126,7 +126,7 @@ const createLighthouseResultsMd = (): string => {
 	const failedAuditCount = results.filter((result) => !result.passed).length;
 	const reportUrl = results[0].url;
 
-	const [endpoint] = process.env.LHCI_URL.split('?url=');
+	const [endpoint] = Deno.env.get('LHCI_URL').split('?url=');
 
 	return [
 		IDENTIFIER_COMMENT,
