@@ -57,7 +57,11 @@ function setup(form: Element): void {
 	const newsletterId = form.getAttribute('data-newsletter-id');
 	const submitButton = form.querySelector('button[type=submit]');
 	const resetButton = form.querySelector('button[type=reset]');
-	const input = form.querySelector('input[type=email]');
+	// typeScript will only cast to the right sub-type of Element if the querySelector
+	// string is just the tag - IE querySelector('input') is automatically typed as
+	// (HTMLInputElement | null), but querySelector('input[type=email]') is typed to
+	// (Element | null) so needs to be cast.
+	const input = form.querySelector('input[type=email]') as HTMLInputElement | null;
 
 	// see: apps-rendering/src/components/NewsletterSignup/EmailSignupForm.tsx
 	// All of these should always be present in the component, so in theory they
