@@ -57,7 +57,7 @@ function setup(form: Element): void {
 	const newsletterId = form.getAttribute('data-newsletter-id');
 	const submitButton = form.querySelector('button[type=submit]');
 	const resetButton = form.querySelector('button[type=reset]');
-	const input = form.querySelector('input');
+	const input = form.querySelector('input[type=email]');
 
 	// see: apps-rendering/src/components/NewsletterSignup/EmailSignupForm.tsx
 	// All of these should always be present in the component, so in theory they
