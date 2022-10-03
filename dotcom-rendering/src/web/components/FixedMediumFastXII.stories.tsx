@@ -1,11 +1,11 @@
-import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
-import { FixedLargeSlowXIV } from './FixedLargeSlowXIV';
+import { breakpoints } from '@guardian/source-foundations';
 import { Section } from './Section';
+import { FixedMediumFastXII } from './FixedMediumFastXII';
 
 export default {
-	component: FixedLargeSlowXIV,
-	title: 'Components/FixedLargeSlowXIV',
+	component: FixedMediumFastXII,
+	title: 'Components/FixedMediumFastXII',
 	parameters: {
 		chromatic: {
 			viewports: [
@@ -19,11 +19,11 @@ export default {
 
 export const Default = () => (
 	<Section
-		title="FixedLargeSlowXIV"
+		title="FixedMediumFastXII"
 		padContent={false}
 		centralBorder="partial"
 	>
-		<FixedLargeSlowXIV trails={trails} showAge={true} />
+		<FixedMediumFastXII trails={trails} showAge={true} />
 	</Section>
 );
-Default.story = { name: 'FixedLargeSlowXIV' };
+Default.story = { name: 'FixedMediumFastXII' };

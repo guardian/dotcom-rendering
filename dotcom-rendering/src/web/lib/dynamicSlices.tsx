@@ -210,19 +210,31 @@ export const Card100PictureRight = ({
 };
 
 /**
- * Abstraction to decide whether to show padding on wrapped rows of cards, e.g
+ * Abstraction to decide whether to show padding on wrapped rows of cards.
  *
- * Card - Card - Card ↵
- * Card - Card
+ * For three columns, We have different results with 5 or 9 cards
  *
- * In the above example we want padding on all but the bottom two cards,
- * but in another example
- *
- * Card - Card - Card ↵
- * Card - Card - Card ↵
- * Card - Card - Card
- *
- * We want padding on all but the last 3.
+ * @example - All but last 2
+ * ```
+ * ┌───┐ ┌───┐ ┌───┐
+ * │Pad│ │Pad│ │Pad│
+ * └───┘ └───┘ └───┘
+ * ┌───┐ ┌───┐
+ * │No!│ │No!│
+ * └───┘ └───┘
+ * ```
+ * - All but last 3
+ * ```
+ * ┌───┐ ┌───┐ ┌───┐
+ * │Pad│ │Pad│ │Pad│
+ * └───┘ └───┘ └───┘
+ * ┌───┐ ┌───┐ ┌───┐
+ * │Pad│ │Pad│ │Pad│
+ * └───┘ └───┘ └───┘
+ * ┌───┐ ┌───┐ ┌───┐
+ * │No!│ │No!│ │No!│
+ * └───┘ └───┘ └───┘
+ * ```
  *
  * @param index - Index of the current card
  * @param totalCards - Total number of cards being shown

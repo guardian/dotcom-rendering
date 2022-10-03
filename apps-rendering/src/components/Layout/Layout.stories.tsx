@@ -242,7 +242,6 @@ export default {
 			diffThreshold: 0.4,
 			viewports: [
 				breakpoints.mobile,
-				breakpoints.phablet,
 				breakpoints.tablet,
 				breakpoints.wide,
 			],

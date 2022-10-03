@@ -1,5 +1,6 @@
 import type { DCRContainerPalette } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -66,19 +67,18 @@ export const FixedLargeSlowXIV = ({
 				})}
 			</UL>
 			<UL direction="row" wrapCards={true}>
-				{thirdSlice.map((card, cardIndex) => {
+				{thirdSlice.map((card, cardIndex, { length }) => {
+					const columns = 4;
 					return (
 						<LI
 							padSides={true}
 							percentage="25%"
-							showDivider={
-								cardIndex !== 0 &&
-								cardIndex !== 4 &&
-								cardIndex !== 8
-							}
-							offsetBottomPaddingOnDivider={
-								cardIndex !== thirdSlice.length - 1
-							}
+							showDivider={cardIndex % columns !== 0}
+							offsetBottomPaddingOnDivider={shouldPadWrappableRows(
+								cardIndex,
+								length,
+								columns,
+							)}
 							key={card.url}
 						>
 							<FrontCard

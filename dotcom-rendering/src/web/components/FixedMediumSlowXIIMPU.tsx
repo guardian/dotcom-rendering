@@ -2,6 +2,7 @@
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
@@ -228,17 +229,6 @@ const Card33_Card33_Ad33 = ({
 );
 
 /**
- *
- * When there is an odd number of cards the last card spans
- * both columns so we don't want to push the divider for the
- * previous two cards above it down. If we did it would
- * touch
- */
-function shouldOffsetWhenOdd(i: number, noOfCards: number) {
-	return i === noOfCards - 2 || i === noOfCards - 3;
-}
-
-/**
  * FixedMediumSlowXIIMPU
  *
  */
@@ -328,7 +318,6 @@ export const FixedMediumSlowXIIMPU = ({
 		default: {
 			const topThree = trails.slice(0, 3);
 			const remainingCards = trails.slice(3, 9);
-			const lengthIsEven = remainingCards.length % 2 === 0;
 			return (
 				<>
 					<Card33_Card33_Card33
@@ -352,30 +341,31 @@ export const FixedMediumSlowXIIMPU = ({
 							 * |_______________________|
 							 */}
 							<UL direction="row" wrapCards={true}>
-								{remainingCards.map((trail, trailIndex) => (
-									<LI
-										padSides={true}
-										offsetBottomPaddingOnDivider={
-											lengthIsEven
-												? false
-												: shouldOffsetWhenOdd(
-														trailIndex,
-														remainingCards.length,
-												  )
-										}
-										showDivider={trailIndex % 2 !== 0}
-										percentage="50%"
-										stretch={true}
-									>
-										<FrontCard
-											trail={trail}
-											containerPalette={containerPalette}
-											showAge={showAge}
-											imageUrl={undefined}
-											headlineSize="small"
-										/>
-									</LI>
-								))}
+								{remainingCards.map(
+									(trail, trailIndex, { length }) => (
+										<LI
+											padSides={true}
+											offsetBottomPaddingOnDivider={shouldPadWrappableRows(
+												trailIndex,
+												length - (length % 2),
+												2,
+											)}
+											showDivider={trailIndex % 2 !== 0}
+											percentage="50%"
+											stretch={true}
+										>
+											<FrontCard
+												trail={trail}
+												containerPalette={
+													containerPalette
+												}
+												showAge={showAge}
+												imageUrl={undefined}
+												headlineSize="small"
+											/>
+										</LI>
+									),
+								)}
 							</UL>
 						</LI>
 						<LI percentage="33.333%" showDivider={true}>

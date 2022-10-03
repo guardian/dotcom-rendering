@@ -141,7 +141,8 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 }) => {
 	return (
 		<UL direction="row" wrapCards={true}>
-			{cards.map((card, index) => {
+			{cards.map((card, index, { length }) => {
+				const columns = 2;
 				return (
 					<LI
 						percentage="50%"
@@ -149,8 +150,8 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 						showDivider={index % 2 === 1}
 						offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 							index,
-							cards.length,
-							2,
+							length - (length % columns),
+							columns,
 						)}
 					>
 						<FrontCard
@@ -301,7 +302,7 @@ export const DynamicSlow = ({
 					/>
 				);
 			default:
-				return <></>;
+				return null;
 		}
 	};
 

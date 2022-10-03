@@ -285,13 +285,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const cricketMatchUrl =
 		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
 
-	const showKeyEventsCarousel = CAPIArticle.config.switches.keyEventsCarousel;
-
-	const isInFilteringBeta = !!(
-		CAPIArticle.config.switches.automaticFilters &&
-		CAPIArticle.availableTopics
-	);
-
 	const showTopicFilterBank = !!CAPIArticle.config.switches.automaticFilters;
 
 	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
@@ -586,7 +579,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandFirstGrid>
 				</Section>
-				{showKeyEventsCarousel && CAPIArticle.keyEvents.length > 0 ? (
+				{CAPIArticle.keyEvents.length > 0 ? (
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
@@ -814,7 +807,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									) : (
 										<></>
 									)}
-									{isInFilteringBeta ? (
+									{showTopicFilterBank &&
+									CAPIArticle.availableTopics ? (
 										<div css={paddingBody}>
 											<ArticleContainer format={format}>
 												{pagination.currentPage !==
