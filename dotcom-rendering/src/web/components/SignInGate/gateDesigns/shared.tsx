@@ -136,6 +136,7 @@ export const firstParagraphOverlay = (isComment: boolean) => css`
 		70%,
 		rgba(255, 255, 255, 0)
 	);
+	mask-image: linear-gradient(rgba(0, 0, 0, 0), transparent);
 `;
 
 // This css does 3 things
