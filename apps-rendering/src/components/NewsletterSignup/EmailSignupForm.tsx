@@ -109,10 +109,6 @@ const EmailSignupForm: FC<Props> = ({
 	successDescription,
 	format,
 }) => {
-	const handleSubmit = (): void => {
-		console.log({ identityName });
-	};
-
 	return (
 		<>
 			<Label
@@ -158,7 +154,6 @@ const EmailSignupForm: FC<Props> = ({
 						`}
 					/>
 					<Button
-						onClick={handleSubmit}
 						size="small"
 						title="Sign up"
 						type="submit"
@@ -204,7 +199,6 @@ const EmailSignupForm: FC<Props> = ({
 						</span>
 					</InlineError>
 					<Button
-						onClick={handleSubmit}
 						size="small"
 						icon={<SvgReload />}
 						iconSide={'right'}
