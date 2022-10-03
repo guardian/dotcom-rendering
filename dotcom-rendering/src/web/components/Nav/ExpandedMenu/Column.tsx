@@ -206,11 +206,10 @@ export const Column = ({
 }) => {
 	// As the elements are dynamic we need to specify the IDs here
 	//Replace whitespace with hyphen https://stackoverflow.com/questions/3794919/replace-all-spaces-in-a-string-with/3795147#3795147
-	const columnInputId = `${column.title}-checkbox-input`.split(' ').join('-');
-	const collapseColumnInputId = `${column.title}-button`.split(' ').join('-');
-	const ariaControls = `${column.title.toLowerCase()}Links`
-		.split(' ')
-		.join('-');
+	const columnId = column.title.toLowerCase().split(' ').join('-');
+	const columnInputId = `${columnId}-checkbox-input`;
+	const collapseColumnInputId = `${columnId}-button`;
+	const ariaControls = `${columnId}Links`;
 
 	return (
 		<li css={[columnStyle, pillarDivider]} role="none">

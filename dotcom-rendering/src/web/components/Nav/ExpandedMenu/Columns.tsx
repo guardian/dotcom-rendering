@@ -133,13 +133,13 @@ const searchBar = css`
 	padding-bottom: 15px;
 `;
 
+const editionsSwitch = css`
+	${from.desktop} {
+		display: none;
+	}
+`;
+
 const editionList: EditionLinkType[] = [
-	{
-		url: '/preference/edition/int',
-		editionId: 'INT',
-		longTitle: 'International edition',
-		title: 'International edition',
-	},
 	{
 		url: '/preference/edition/au',
 		editionId: 'UK',
@@ -158,12 +158,18 @@ const editionList: EditionLinkType[] = [
 		longTitle: 'Australia edition',
 		title: 'AU edition',
 	},
+	{
+		url: '/preference/edition/int',
+		editionId: 'INT',
+		longTitle: 'International edition',
+		title: 'International edition',
+	},
 ];
 
 const getEdition = (editionId: EditionId): EditionLinkType => {
 	return (
 		editionList.find((edition) => edition.editionId === editionId) ??
-		editionList[1]
+		editionList[0]
 	);
 };
 
@@ -222,7 +228,7 @@ export const Columns: React.FC<{
 			<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
 			{/* This is where the edition dropdown is inserted					 */}
 
-			<Hide from="tablet">
+			<section css={editionsSwitch}>
 				<Column
 					column={{
 						...activeEdition,
@@ -231,7 +237,7 @@ export const Columns: React.FC<{
 					index={10}
 					showLineBelow={true}
 				/>
-			</Hide>
+			</section>
 
 			<MoreColumn
 				column={nav.otherLinks}
