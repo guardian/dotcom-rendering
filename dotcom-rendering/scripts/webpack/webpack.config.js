@@ -1,11 +1,13 @@
+/* eslint-disable global-require -- we merge configs in the export */
 // @ts-check
 const path = require('path');
+const { v4: uuidv4 } = require('uuid');
 const webpack = require('webpack');
-const { merge } = require('webpack-merge');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-const { v4: uuidv4 } = require('uuid');
+const { merge } = require('webpack-merge');
 const WebpackMessages = require('webpack-messages');
+const { BUILD_VARIANT } = require('./bundles');
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
@@ -17,7 +19,7 @@ const sessionId = uuidv4();
 let builds = 0;
 
 /**
- * @param {{ platform: 'server' | 'browser' | 'browser.legacy'}} options
+ * @param {{ platform: 'server' | 'browser.legacy' | 'browser.modern' | 'browser.variant'}} options
  * @returns {import('webpack').Configuration}
  */
 const commonConfigs = ({ platform }) => ({
@@ -45,7 +47,7 @@ const commonConfigs = ({ platform }) => ({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			'process.env.HOSTNAME': JSON.stringify(process.env.HOSTNAME),
 		}),
-		// @ts-ignore -- somehow the type declaration isn’t playing nice
+		// @ts-expect-error -- somehow the type declaration isn’t playing nice
 		new FilterWarningsPlugin({
 			exclude: /export .* was not found in/,
 		}),
@@ -57,7 +59,7 @@ const commonConfigs = ({ platform }) => ({
 		...(DEV
 			? // DEV plugins
 			  [
-					// @ts-ignore -- somehow the type declaration isn’t playing nice
+					// @ts-expect-error -- somehow the type declaration isn’t playing nice
 					new WebpackMessages({
 						name: platform,
 						/** @type {(message: string) => void} */
@@ -114,7 +116,7 @@ module.exports = [
 						platform: 'browser.legacy',
 					}),
 					require(`./webpack.config.browser`)({
-						isLegacyJS: true,
+						bundle: 'legacy',
 						sessionId,
 					}),
 				),
@@ -122,11 +124,24 @@ module.exports = [
 		: []),
 	merge(
 		commonConfigs({
-			platform: 'browser',
+			platform: 'browser.modern',
 		}),
 		require(`./webpack.config.browser`)({
-			isLegacyJS: false,
+			bundle: 'modern',
 			sessionId,
 		}),
 	),
+	...(BUILD_VARIANT
+		? [
+				merge(
+					commonConfigs({
+						platform: 'browser.variant',
+					}),
+					require(`./webpack.config.browser`)({
+						bundle: 'variant',
+						sessionId,
+					}),
+				),
+		  ]
+		: []),
 ];
