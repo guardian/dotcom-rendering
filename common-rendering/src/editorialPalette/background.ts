@@ -639,6 +639,26 @@ const articleContent = (format: ArticleFormat): string => {
 
 const newsletterSignUpFormDark = (_format: ArticleFormat): Colour => neutral[10];
 
+const editionsCameraIcon = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+		case ArticleSpecial.Labs:
+			return specialReport[400];
+		case ArticlePillar.News:
+		default:
+			return news[400];
+	}
+};
+
 // ----- API ----- //
 
 const background = {
@@ -685,6 +705,7 @@ const background = {
 	pinnedPost,
 	articleContent,
 	newsletterSignUpFormDark,
+	editionsCameraIcon,
 };
 
 // ----- Exports ----- //

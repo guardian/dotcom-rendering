@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { OphanAction } from '@guardian/libs';
 import { neutral, space, until } from '@guardian/source-foundations';
 import {
 	Button,
@@ -11,7 +12,6 @@ import {
 import type { ReactEventHandler } from 'react';
 import { useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import type { OphanAction } from '../browser/ophan/ophan';
 import {
 	getOphanRecordFunction,
 	submitComponentEvent,

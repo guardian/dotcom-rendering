@@ -464,7 +464,6 @@ sendTargetingParams();
 ads();
 videos();
 resizeEmailSignups();
-reportNativeElementPositionChanges();
 topics();
 slideshow();
 footerInit();
@@ -477,3 +476,9 @@ hydrateAtoms();
 richLinks();
 hydrateClickToView();
 initSignupForms();
+
+/*
+ We run this last to help precisely position native elements over their placeholders in the webview.
+ For more detail see https://github.com/guardian/dotcom-rendering/pull/6047
+ */
+reportNativeElementPositionChanges();

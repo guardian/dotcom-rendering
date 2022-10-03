@@ -78,8 +78,6 @@ const veggieBurgerStyles = (display: ArticleDisplay) => css`
 	border: 0;
 	border-radius: 50%;
 
-	${getZIndex('burger')}
-
 	right: 5px;
 	bottom: 58px;
 	${from.mobileMedium} {
@@ -96,6 +94,11 @@ const veggieBurgerStyles = (display: ArticleDisplay) => css`
 		display: none;
 	}
 
+	/* refer to comment above */
+	/* stylelint-disable-next-line selector-type-no-unknown */
+	${`#${navInputCheckboxId}`}:checked ~ div & {
+		${getZIndex('burger')}
+	}
 	:focus {
 		outline: none;
 	}

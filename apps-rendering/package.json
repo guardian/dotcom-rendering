@@ -36,8 +36,8 @@
     "@babel/preset-env": "^7.15.6",
     "@creditkarma/thrift-server-core": "^0.16.1",
     "@emotion/jest": "^11.10.0",
-    "@guardian/apps-rendering-api-models": "^1.1.0",
-    "@guardian/atoms-rendering": "^22.0.0",
+    "@guardian/apps-rendering-api-models": "^1.1.1",
+    "@guardian/atoms-rendering": "^23.6.0",
     "@guardian/bridget": "^1.11.0",
     "@guardian/cdk": "^47.3.3",
     "@guardian/content-api-models": "^17.3.0",
@@ -99,7 +99,7 @@
     "webpack-dev-server": "^4.9.3",
     "webpack-manifest-plugin": "^5.0.0",
     "whatwg-fetch": "^3.6.2",
-    "winston": "^3.3.3",
+    "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.5.5"
   }
 }

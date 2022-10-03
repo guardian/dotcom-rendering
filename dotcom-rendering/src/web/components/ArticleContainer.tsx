@@ -139,6 +139,31 @@ const adStyles = css`
 			margin-right: -398px;
 		}
 	}
+
+	.ad-slot-container--im {
+		float: left;
+		background-color: transparent;
+
+		.ad-slot {
+			width: 130px;
+
+			${from.mobileLandscape} {
+				width: 220px;
+			}
+			&:not(.ad-slot--rendered) {
+				width: 0;
+				height: 0;
+			}
+
+			&.ad-slot--rendered {
+				margin: 5px 10px 6px 0;
+				${from.mobileLandscape} {
+					margin-bottom: 12px;
+					margin-right: 20px;
+				}
+			}
+		}
+	}
 `;
 
 export const ArticleContainer = ({ children, format }: Props) => {

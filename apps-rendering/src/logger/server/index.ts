@@ -56,8 +56,12 @@ class ServerLogger implements LoggerFunctions {
 						typeof maybeTimestamp === 'string'
 							? maybeTimestamp
 							: 'Unknown Timestamp';
+					const message =
+						typeof logObject.message === 'string'
+							? logObject.message
+							: '';
 
-					return `${timestamp} [${logObject.level}] ${logObject.message}${stackTrace}`;
+					return `${timestamp} [${logObject.level}] ${message}${stackTrace}`;
 				}),
 			};
 		}
