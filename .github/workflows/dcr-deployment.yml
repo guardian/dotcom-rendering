@@ -214,6 +214,12 @@ jobs:
   lighthouse:
     needs: [build]
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        group:
+          - 'http://localhost:9000/Article?url=https://www.theguardian.com/commentisfree/2020/feb/08/hungary-now-for-the-new-right-what-venezuela-once-was-for-the-left#noads'
+          - 'http://localhost:9000/Front?url=https://www.theguardian.com/uk'
     steps:
       # Setup Environment
       - uses: actions/cache@v3
@@ -233,6 +239,7 @@ jobs:
         working-directory: dotcom-rendering
         env:
           LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN }}
+          LHCI_URL: ${{ matrix.group }}
         run: |
           npm install -g puppeteer-core@2.1.0 @lhci/cli@0.8.2
           lhci autorun
@@ -243,8 +250,9 @@ jobs:
           deno-version: v1.21.0
 
       - name: Surface Lighthouse Results
-        run: deno run --no-check --allow-net=api.github.com --allow-env="GITHUB_TOKEN","GITHUB_EVENT_PATH" --allow-read scripts/deno/surface-lighthouse-results.ts
+        run: deno run --no-check --allow-net=api.github.com --allow-env="GITHUB_TOKEN","GITHUB_EVENT_PATH","LHCI_URL" --allow-read scripts/deno/surface-lighthouse-results.ts
         env:
+          LHCI_URL: ${{ matrix.group }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   deploy:
     needs:

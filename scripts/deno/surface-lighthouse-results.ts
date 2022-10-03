@@ -42,10 +42,6 @@ console.log(`Using issue #${issue_number}`);
 /** The Lighthouse results directory  */
 const dir = 'dotcom-rendering/.lighthouseci';
 
-const links: Record<string, string> = JSON.parse(
-	Deno.readTextFileSync(`${dir}/links.json`),
-);
-
 /** https://github.com/GoogleChrome/lighthouse-ci/blob/5963dcce0e88b8d3aedaba56a93ec4b93cf073a1/packages/utils/src/assertions.js#L15-L30 */
 interface AssertionResult {
 	url: string;
@@ -71,7 +67,7 @@ const results: AssertionResult[] = JSON.parse(
 /* -- Definitions -- */
 
 /** The string to search for when looking for a comment */
-const REPORT_TITLE = '⚡️ Lighthouse report';
+const IDENTIFIER_COMMENT = `<-- url: ${process.env.LHCI_URL} -->`;
 const GIHUB_PARAMS = {
 	owner: 'guardian',
 	repo: 'dotcom-rendering',
@@ -104,8 +100,6 @@ const generateAuditTable = (
 	auditUrl: string,
 	results: AssertionResult[],
 ): string => {
-	const reportUrl = links[auditUrl];
-
 	const resultsTemplateString = results.map(
 		({ auditTitle, auditProperty, passed, expected, actual, level }) =>
 			`| ${auditTitle ?? auditProperty ?? 'Unknown Test'} | ${getStatus(
@@ -114,16 +108,14 @@ const generateAuditTable = (
 			)} | ${expected} | ${formatNumber(expected, actual)} |`,
 	);
 
-	const [endpoint, testUrlClean] = auditUrl.split('?url=');
+	const [, testUrlClean] = process.env.LHCI_URL.split('?url=');
 
 	const table = [
-		`### [Report for ${endpoint.split('/').slice(-1)}](${reportUrl})`,
 		`> tested url \`${testUrlClean}\``,
 		'',
 		'| Category | Status | Expected | Actual |',
 		'| --- | --- | --- | --- |',
 		...resultsTemplateString,
-		'',
 	].join('\n');
 
 	return table;
@@ -132,20 +124,18 @@ const generateAuditTable = (
 const createLighthouseResultsMd = (): string => {
 	const auditCount = results.length;
 	const failedAuditCount = results.filter((result) => !result.passed).length;
-	const auditUrls = [...new Set<string>(results.map((result) => result.url))];
+	const reportUrl = results[0].url;
+
+	const [endpoint] = process.env.LHCI_URL.split('?url=');
 
 	return [
-		`## ${REPORT_TITLE} for the changes in this PR`,
-		`Lighthouse tested ${auditUrls.length} URLs  `,
+		IDENTIFIER_COMMENT,
+		`## ⚡️ Lighthouse report for the changes in this PR`,
+		`### [Report for ${endpoint.split('/').slice(-1)}](${reportUrl})`,
 		failedAuditCount > 0
 			? `⚠️ Budget exceeded for ${failedAuditCount} of ${auditCount} audits.`
 			: 'All audits passed',
-		...auditUrls.map((url) =>
-			generateAuditTable(
-				url,
-				results.filter((result) => result.url === url),
-			),
-		),
+		generateAuditTable(reportUrl, results),
 	].join('\n\n');
 };
 
@@ -156,7 +146,7 @@ const getCommentID = async (): Promise<number | null> => {
 	});
 
 	const comment = comments.find((comment) =>
-		comment.body?.includes(REPORT_TITLE),
+		comment.body?.includes(IDENTIFIER_COMMENT),
 	);
 
 	return comment?.id ?? null;
