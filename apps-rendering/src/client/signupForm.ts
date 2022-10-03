@@ -59,13 +59,12 @@ function setup(form: Element): void {
 	const resetButton = form.querySelector('button[type=reset]');
 	const input = form.querySelector('input');
 
+	// see: apps-rendering/src/components/NewsletterSignup/EmailSignupForm.tsx
+	// All of these should always be present in the component, so in theory they
+	// could be cast as truthy - but to protect against future bugs, this
+	// script does not assume that the component will continue to follow the
+	// 'contract' and have the required attributes and elements.
 	if (!input || !newsletterId || !submitButton || !resetButton) {
-		console.error('MISSING', {
-			submitButton,
-			input,
-			newsletterId,
-			resetButton,
-		});
 		return;
 	}
 
