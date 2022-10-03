@@ -11,7 +11,6 @@ import {
 } from '@guardian/source-foundations';
 import {
 	buttonThemeBrand,
-	Hide,
 	LinkButton,
 	SvgMagnifyingGlass,
 } from '@guardian/source-react-components';
