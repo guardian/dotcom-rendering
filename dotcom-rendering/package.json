@@ -128,7 +128,7 @@
     "cypress-plugin-tab": "^1.0.5",
     "cypress-wait-until": "^1.7.1",
     "cypress-webpack-preprocessor-v5": "^5.0.0-alpha.1",
-    "doctoc": "^2.1.0",
+    "doctoc": "^2.2.1",
     "dompurify": "^2.3.6",
     "dotenv": "^16.0.1",
     "dynamic-import-polyfill": "^0.1.1",
