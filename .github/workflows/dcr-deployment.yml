@@ -262,8 +262,9 @@ jobs:
     steps:
       - name: Deploy
         run: echo "Coming soon..."
-  clear-cache:
-    needs: [deploy]
+  cleanup-setup-cache:
+    # IMPORTANT: 'needs' should include any job using on 'env.setup_cache_name' in actions/cache
+    needs: [build, lint, typescript, development-checks, jest]
     runs-on: ubuntu-latest
     steps:
       - name: Clear cache
@@ -275,6 +276,14 @@ jobs:
               repo: context.repo.repo,
               key: "${{env.setup_cache_name}}"
             })
+  cleanup-build-cache:
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clear cache
+        uses: actions/github-script@v6
+        with:
+          script: |
             await github.rest.actions.deleteActionsCacheByKey({
               owner: context.repo.owner,
               repo: context.repo.repo,
