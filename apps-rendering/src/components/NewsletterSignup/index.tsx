@@ -133,7 +133,7 @@ const NewsletterSignup: FC<Props> = ({ format, element }) => {
 			<p css={descriptionStyles}>{description}</p>
 
 			<EmailSignupForm
-				newsletterId={identityName}
+				identityName={identityName}
 				format={format}
 				successDescription={successDescription}
 			/>

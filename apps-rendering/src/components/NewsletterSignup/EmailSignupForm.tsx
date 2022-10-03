@@ -34,7 +34,7 @@ import { darkModeCss } from 'styles';
 
 interface Props {
 	format: ArticleFormat;
-	newsletterId: string;
+	identityName: string;
 	successDescription: string;
 }
 
@@ -105,12 +105,12 @@ const buttonStyle = (format: ArticleFormat): SerializedStyles => css`
  * when implemented
  */
 const EmailSignupForm: FC<Props> = ({
-	newsletterId,
+	identityName,
 	successDescription,
 	format,
 }) => {
 	const handleSubmit = (): void => {
-		console.log({ newsletterId });
+		console.log({ identityName });
 	};
 
 	return (
@@ -129,7 +129,7 @@ const EmailSignupForm: FC<Props> = ({
 			/>
 			<form
 				className={'js-signup-form'}
-				data-newsletter-id={newsletterId}
+				data-newsletter-id={identityName}
 				css={formStyle}
 			>
 				<div
