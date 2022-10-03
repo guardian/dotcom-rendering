@@ -5124,10 +5124,10 @@
   resolved "https://registry.yarnpkg.com/@types/html-minifier-terser/-/html-minifier-terser-6.1.0.tgz#4fc33a00c1d0c16987b1a20cf92d20614c55ac35"
   integrity sha512-oh/6byDPnL1zeNXFrDXFLyZjkr1MsBG667IM792caf1L2UPOOMf65NFzjUH/ltyfwjAGfs1rsX1eftK0jC/KIg==
 
-"@types/html-minifier@^4.0.0":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@types/html-minifier/-/html-minifier-4.0.1.tgz#9486ffc144f8d7b8f75b07939c500ac3d73617a0"
-  integrity sha512-6u58FWQbWP45bsxVeMJo0yk2LEsjjZsCwn0JDe/i5Edk3L+b9TR5eZ2FGaMCrLdtGYpME5AGxUqv8o+3hWKogw==
+"@types/html-minifier@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@types/html-minifier/-/html-minifier-4.0.2.tgz#ea0b927ad0019821a2e9d14ba9c57d105b63cecc"
+  integrity sha512-4IkmkXJP/25R2fZsCHDX2abztXuQRzUAZq39PfCMz2loLFj8vS9y7aF6vDl58koXSTpsF+eL4Lc5Y4Aww/GCTQ==
   dependencies:
     "@types/clean-css" "*"
     "@types/relateurl" "*"
@@ -20403,9 +20403,9 @@ type-detect@4.0.8:
   integrity sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==
 
 type-fest@^0.18.0, type-fest@^0.20.2, type-fest@^0.21.3, type-fest@^0.6.0, type-fest@^0.8.1, type-fest@^1.4.0, type-fest@^2.8.0:
-  version "2.18.0"
-  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.18.0.tgz#fdef3a74e0a9e68ebe46054836650fb91ac3881e"
-  integrity sha512-pRS+/yrW5TjPPHNOvxhbNZexr2bS63WjrMU8a+VzEBhUi9Tz1pZeD+vQz3ut0svZ46P+SRqMEPnJmk2XnvNzTw==
+  version "2.19.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.19.0.tgz#88068015bb33036a598b952e55e9311a60fd3a9b"
+  integrity sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==
 
 type-is@~1.6.18:
   version "1.6.18"
