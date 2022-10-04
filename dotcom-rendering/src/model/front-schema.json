@@ -328,7 +328,6 @@
                 "ipsosTag",
                 "isDev",
                 "isFront",
-                "isPaidContent",
                 "isPreview",
                 "isProd",
                 "isSensitive",
@@ -427,6 +426,9 @@
                         },
                         "commercial": {
                             "$ref": "#/definitions/Record<string,unknown>"
+                        },
+                        "isPaidContent": {
+                            "type": "boolean"
                         }
                     },
                     "required": [
@@ -2578,6 +2580,9 @@
                             "uneditable"
                         ]
                     }
+                },
+                "isNetworkFront": {
+                    "type": "boolean"
                 }
             },
             "required": [

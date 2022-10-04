@@ -17,6 +17,7 @@ import { FixedSmallSlowIII } from '../components/FixedSmallSlowIII';
 import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
 import { FixedSmallSlowVMPU } from '../components/FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from '../components/FixedSmallSlowVThird';
+import { FixedMediumFastXII } from '../components/FixedMediumFastXII';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -141,6 +142,14 @@ export const DecideContainer = ({
 					containerPalette={containerPalette}
 					showAge={showAge}
 					index={index}
+				/>
+			);
+		case 'fixed/medium/fast-XII':
+			return (
+				<FixedMediumFastXII
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
 				/>
 			);
 		default:

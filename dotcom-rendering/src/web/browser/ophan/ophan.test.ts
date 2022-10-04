@@ -1,8 +1,9 @@
+import type { ServerSideTests } from 'src/types/config';
 import { abTestPayload } from './ophan';
 
 describe('abTestPayload', () => {
 	test('constructs payload correctly from config test data', () => {
-		const tests = {
+		const tests: ServerSideTests = {
 			MyTest: 'variant',
 		};
 

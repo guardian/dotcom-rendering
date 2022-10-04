@@ -166,6 +166,18 @@ const CommentFooter = ({
 	);
 };
 
+const getImage = ({
+	imageUrl,
+	avatarUrl,
+}: {
+	imageUrl?: string;
+	avatarUrl?: string;
+}): { type: CardImageType; src: string } | undefined => {
+	if (avatarUrl) return { type: 'avatar', src: avatarUrl };
+	if (imageUrl) return { type: 'mainMedia', src: imageUrl };
+	return undefined;
+};
+
 export const Card = ({
 	linkTo,
 	format,
@@ -280,13 +292,10 @@ export const Card = ({
 		return <Snap snapData={snapData} />;
 	}
 
-	// Decide what type of image to show, main media, avatar or none
-	let imageType: CardImageType | undefined;
-	if (imageUrl && avatarUrl) {
-		imageType = 'avatar';
-	} else if (imageUrl) {
-		imageType = 'mainMedia';
-	}
+	const image = getImage({
+		imageUrl,
+		avatarUrl,
+	});
 
 	return (
 		<CardWrapper
@@ -301,41 +310,37 @@ export const Card = ({
 				dataLinkName={dataLinkName}
 			/>
 			<CardLayout
-				imagePosition={imageUrl !== undefined ? imagePosition : 'top'}
-				imagePositionOnMobile={
-					imageUrl !== undefined ? imagePositionOnMobile : 'top'
-				}
+				imagePosition={imagePosition}
+				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
-				imageType={imageType}
+				imageType={image?.type}
 			>
-				<ImageWrapper
-					imageSize={imageSize}
-					imageType={imageType}
-					imagePosition={
-						imageUrl !== undefined ? imagePosition : 'top'
-					}
-					imagePositionOnMobile={
-						imageUrl !== undefined ? imagePositionOnMobile : 'top'
-					}
-				>
-					{imageType === 'avatar' && !!avatarUrl ? (
-						<AvatarContainer
-							imageSize={imageSize}
-							imagePosition={imagePosition}
-						>
-							<Avatar
-								imageSrc={avatarUrl}
-								imageAlt={byline ?? ''}
-								containerPalette={containerPalette}
-								format={format}
-							/>
-						</AvatarContainer>
-					) : (
-						<img src={imageUrl} alt="" role="presentation" />
-					)}
-				</ImageWrapper>
+				{image && (
+					<ImageWrapper
+						imageSize={imageSize}
+						imageType={image.type}
+						imagePosition={imagePosition}
+						imagePositionOnMobile={imagePositionOnMobile}
+					>
+						{image.type === 'avatar' ? (
+							<AvatarContainer
+								imageSize={imageSize}
+								imagePosition={imagePosition}
+							>
+								<Avatar
+									imageSrc={image.src}
+									imageAlt={byline ?? ''}
+									containerPalette={containerPalette}
+									format={format}
+								/>
+							</AvatarContainer>
+						) : (
+							<img src={image.src} alt="" role="presentation" />
+						)}
+					</ImageWrapper>
+				)}
 				<ContentWrapper
-					imageType={imageType}
+					imageType={image?.type}
 					imageSize={imageSize}
 					imagePosition={imagePosition}
 				>

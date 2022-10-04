@@ -1,4 +1,3 @@
-import { createHash } from 'crypto';
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
@@ -163,12 +162,13 @@ const decideImageWidths = ({
 };
 
 /**
- * Generates a url for calling the Fastly Image Optimiser
+ * Generates a URL for calling the Fastly Image Optimiser.
  *
- * @see {@link https://developer.fastly.com/reference/io/}
+ * @see https://developer.fastly.com/reference/io/
+ * @see https://github.com/guardian/fastly-image-service/blob/main/fastly-io_guim_co_uk/src/main/resources/varnish/main.vcl
  *
  */
-const generateSignedUrl = ({
+const generateImageURL = ({
 	master,
 	imageWidth,
 	resolution,
@@ -177,40 +177,24 @@ const generateSignedUrl = ({
 	imageWidth: number;
 	resolution: 'low' | 'high';
 }): string => {
-	const sign = (salt: string, path: string): string => {
-		return createHash('md5')
-			.update(salt + path)
-			.digest('hex');
-	};
-
-	const salt = process.env.IMAGE_SALT;
-	if (!salt && process.env.NODE_ENV === 'production' && !process.env.CI) {
-		// If no IMAGE_SALT env variable is set in production then something has
-		// gone wrong and we want to know about it
-		throw new Error(
-			'No IMAGE_SALT value found when constructing picture source',
-		);
-	} else if (!salt) {
-		// If no IMAGE_SALT is set outside of production it likely means the
-		// developer has yet to set the env file. In this case we continue
-		// using a default image
-		return 'https://i.guim.co.uk/img/media/52f8e9183bbc03c48fcdf4ed9a4e12b3a19a9927/0_0_5000_3000/master/5000.jpg?width=700&quality=45&auto=format&fit=max&dpr=2&s=196c7f25bf2fddcb45512d3ff25e20c0';
-	}
-
-	// Construct and sign the url
 	const url = new URL(master);
-	const service = url.hostname.split('.')[0];
+	const [service] = url.hostname.split('.');
+
 	const params = new URLSearchParams({
 		width: imageWidth.toString(),
 		// Why 45 and 85?
-		// See: https://github.com/guardian/fastly-image-service/blob/21312b81955d57338b3efd7a0c21b3987f13e7ed/fastly-io_guim_co_uk/src/main/resources/varnish/main.vcl
-		quality: resolution === 'high' ? '45' : '85',
-		fit: 'max',
+		// This numbers have been picked in 2018 as the right
+		// balance between image fidelity and file size
+		// https://github.com/guardian/fastly-image-service/pull/35
+		...(resolution === 'high'
+			? { quality: '45', dpr: '2' }
+			: { quality: '85', dpr: '1' }),
+		s: 'none',
 	});
-	if (resolution === 'high') params.set('dpr', '2');
-	const path = `${url.pathname}?${params.toString()}`;
-	const sig = sign(salt, path);
-	return `https://i.guim.co.uk/img/${service}${path}&s=${sig}`;
+
+	return `https://i.guim.co.uk/img/${service}${
+		url.pathname
+	}?${params.toString()}`;
 };
 
 const descendingByBreakpoint = (a: ImageWidthType, b: ImageWidthType) => {
@@ -247,18 +231,29 @@ export const Picture = ({
 			return {
 				breakpoint,
 				width: imageWidth,
-				hiResUrl: generateSignedUrl({
+				hiResUrl: generateImageURL({
 					master,
 					imageWidth,
 					resolution: 'high',
 				}),
-				lowResUrl: generateSignedUrl({
+				lowResUrl: generateImageURL({
 					master,
 					imageWidth,
 					resolution: 'low',
 				}),
 			};
 		});
+
+	const ratio = parseInt(height, 10) / parseInt(width, 10);
+	/**
+	 * The assumption here is readers on devices that do not support srcset
+	 * are likely to be on poor network connections so we're going
+	 * to fallback to the smallest image.
+	 *
+	 * Sources are ordered in `descendingByBreakpoint` order,
+	 * so the last one is the smallest.
+	 */
+	const [fallbackSource] = sources.slice(-1);
 
 	return (
 		<picture css={block}>
@@ -272,7 +267,7 @@ export const Picture = ({
 						calculate width. The value of 167vh relates to an assumed image ratio of 5:3
 						which is equal to 167 (viewport height) : 100 (viewport width)
 
-						If either of these media queires match then the browser will choose an image from the
+						If either of these media queries match then the browser will choose an image from the
 						list of sources in srcset based on the viewport list. If the media query doesn't match
 						it continues checking using the standard sources underneath
 					*/}
@@ -319,11 +314,9 @@ export const Picture = ({
 
 			<img
 				alt={alt}
-				// The assumption here is readers on devices that do not support srcset are likely to be on poor
-				// network connections so we're going to fallback to the smallest image
-				src={sources[0].lowResUrl}
-				height={height}
-				width={width}
+				src={fallbackSource.lowResUrl}
+				width={fallbackSource.width}
+				height={fallbackSource.width * ratio}
 				loading={
 					isLazy && !Picture.disableLazyLoading ? 'lazy' : undefined
 				}

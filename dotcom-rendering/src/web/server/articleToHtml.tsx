@@ -3,7 +3,15 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
-import { ASSET_ORIGIN, getScriptArrayFromFile } from '../../lib/assets';
+import { BUILD_VARIANT } from '../../../scripts/webpack/bundles';
+import {
+	ASSET_ORIGIN,
+	generateScriptTags,
+	getScriptsFromManifest,
+	LEGACY_SCRIPT,
+	MODERN_SCRIPT,
+	VARIANT_SCRIPT,
+} from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractGA } from '../../model/extract-ga';
 import { extractNAV } from '../../model/extract-nav';
@@ -20,31 +28,6 @@ import { recipeSchema } from './temporaryRecipeStructuredData';
 interface Props {
 	article: CAPIArticleType;
 }
-
-const generateScriptTags = (
-	scripts: Array<{ src: string; legacy?: boolean } | false>,
-) =>
-	scripts.reduce<string[]>((scriptTags, script) => {
-		if (script === false) return scriptTags;
-
-		let attrs: string;
-		switch (script.legacy) {
-			case true:
-				attrs = 'defer nomodule';
-				break;
-			case false:
-				attrs = 'type="module"';
-				break;
-			default:
-				attrs = 'defer';
-				break;
-		}
-
-		return [
-			...scriptTags,
-			`<script ${attrs} src="${script.src}"></script>`,
-		];
-	}, []);
 
 const decideTitle = (CAPIArticle: CAPIArticleType): string => {
 	if (
@@ -108,6 +91,21 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
+	const shouldServeVariantBundle: boolean = [
+		BUILD_VARIANT,
+		CAPIArticle.config.abTests.dcrJsBundleVariant === 'variant',
+	].every(Boolean);
+
+	/**
+	 * This function returns an array of files found in the manifests
+	 * defined by `manifestPaths`.
+	 *
+	 * @see getScriptsFromManifest
+	 */
+	const getScriptArrayFromFile = getScriptsFromManifest(
+		shouldServeVariantBundle,
+	);
+
 	/**
 	 * The highest priority scripts.
 	 * These scripts have a considerable impact on site performance.
@@ -117,27 +115,21 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	 */
 	const priorityScriptTags = generateScriptTags(
 		[
-			{ src: polyfillIO },
+			polyfillIO,
 			...getScriptArrayFromFile('bootCmp.js'),
 			...getScriptArrayFromFile('ophan.js'),
-			CAPIArticle.config && {
-				src:
-					process.env.COMMERCIAL_BUNDLE_URL ??
-					CAPIArticle.config.commercialBundleUrl,
-			},
+			process.env.COMMERCIAL_BUNDLE_URL ??
+				CAPIArticle.config.commercialBundleUrl,
 			...getScriptArrayFromFile('sentryLoader.js'),
 			...getScriptArrayFromFile('dynamicImport.js'),
-			pageHasNonBootInteractiveElements && {
-				src: `${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
-			},
+			pageHasNonBootInteractiveElements &&
+				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
 			...getScriptArrayFromFile('islands.js'),
 			...expeditedIslands.flatMap((name) =>
 				getScriptArrayFromFile(`${name}.js`),
 			),
 		].map((script) =>
-			offerHttp3 && script
-				? { ...script, src: getHttp3Url(script.src) }
-				: script,
+			offerHttp3 && script ? getHttp3Url(script) : script,
 		),
 	);
 
@@ -155,17 +147,18 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 			...getScriptArrayFromFile('newsletterEmbedIframe.js'),
 			...getScriptArrayFromFile('relativeTime.js'),
 			...getScriptArrayFromFile('initDiscussion.js'),
-		].map((script) =>
-			offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
-		),
+		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
 	const gaChunk = getScriptArrayFromFile('ga.js');
-	const modernScript = gaChunk.find((script) => script.legacy === false);
-	const legacyScript = gaChunk.find((script) => script.legacy === true);
+	const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
+	const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
+	const variantScript = gaChunk.find((script) =>
+		script.match(VARIANT_SCRIPT),
+	);
 	const gaPath = {
-		modern: modernScript?.src as string,
-		legacy: legacyScript?.src as string,
+		modern: (modernScript ?? variantScript) as string,
+		legacy: legacyScript as string,
 	};
 
 	/**
@@ -251,9 +244,10 @@ window.twttr = (function(d, s, id) {
 }(document, "script", "twitter-wjs"));
 </script>`;
 
-	const url = CAPIArticle.webURL;
+	const { webURL, canonicalUrl } = CAPIArticle;
 
-	const recipeMarkup = url in recipeSchema ? recipeSchema[url] : undefined;
+	const recipeMarkup =
+		webURL in recipeSchema ? recipeSchema[webURL] : undefined;
 
 	return pageTemplate({
 		linkedData,
@@ -275,5 +269,6 @@ window.twttr = (function(d, s, id) {
 				: undefined,
 		recipeMarkup,
 		offerHttp3,
+		canonicalUrl,
 	});
 };

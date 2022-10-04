@@ -37,12 +37,7 @@ export const Card50_Card50 = ({
 				imagePositionOnMobile="top"
 			/>
 		</LI>
-		<LI
-			percentage="50%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
+		<LI percentage="50%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -80,12 +75,7 @@ export const Card75_Card25 = ({
 				imagePositionOnMobile="top"
 			/>
 		</LI>
-		<LI
-			percentage="25%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
+		<LI percentage="25%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -117,12 +107,7 @@ export const Card25_Card75 = ({
 				showAge={showAge}
 			/>
 		</LI>
-		<LI
-			percentage="75%"
-			padSides={true}
-			showTopMarginWhenStacked={true}
-			showDivider={true}
-		>
+		<LI percentage="75%" padSides={true} showDivider={true}>
 			<FrontCard
 				trail={cards[0]}
 				containerPalette={containerPalette}
@@ -137,19 +122,31 @@ export const Card25_Card75 = ({
 );
 
 /**
- * Abstraction to decide whether to show padding on wrapped rows of cards, e.g
+ * Abstraction to decide whether to show padding on wrapped rows of cards.
  *
- * Card - Card - Card ↵
- * Card - Card
+ * For three columns, We have different results with 5 or 9 cards
  *
- * In the above example we want padding on all but the bottom two cards,
- * but in another example
- *
- * Card - Card - Card ↵
- * Card - Card - Card ↵
- * Card - Card - Card
- *
- * We want padding on all but the last 3.
+ * @example - All but last 2
+ * ```
+ * ┌───┐ ┌───┐ ┌───┐
+ * │Pad│ │Pad│ │Pad│
+ * └───┘ └───┘ └───┘
+ * ┌───┐ ┌───┐
+ * │No!│ │No!│
+ * └───┘ └───┘
+ * ```
+ * - All but last 3
+ * ```
+ * ┌───┐ ┌───┐ ┌───┐
+ * │Pad│ │Pad│ │Pad│
+ * └───┘ └───┘ └───┘
+ * ┌───┐ ┌───┐ ┌───┐
+ * │Pad│ │Pad│ │Pad│
+ * └───┘ └───┘ └───┘
+ * ┌───┐ ┌───┐ ┌───┐
+ * │No!│ │No!│ │No!│
+ * └───┘ └───┘ └───┘
+ * ```
  *
  * @param index - Index of the current card
  * @param totalCards - Total number of cards being shown
