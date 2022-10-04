@@ -1,6 +1,7 @@
 import { onConsentChange } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import { useEffect, useState } from 'react';
 import type { CAPIArticleType } from '../../types/frontend';
 import type { IdApiUserData } from './getIdapiUserData';
 import { getIdApiUserData } from './getIdapiUserData';
@@ -176,6 +177,19 @@ export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
 			}
 		});
 	});
+};
+
+// A hook to find out if a user has consented to article counting
+export const useConsentForArticleCount = (): boolean | 'Pending' => {
+	const [consent, setConsent] = useState<boolean | 'Pending'>('Pending');
+
+	useEffect(() => {
+		hasCmpConsentForArticleCount()
+			.then(setConsent)
+			.catch(() => setConsent(false));
+	}, []);
+
+	return consent;
 };
 
 export const hasOptedOutOfArticleCount = async (): Promise<boolean> => {

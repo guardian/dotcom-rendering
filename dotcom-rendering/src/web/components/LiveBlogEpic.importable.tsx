@@ -1,6 +1,4 @@
 import { css } from '@emotion/react';
-import { onConsentChange } from '@guardian/consent-management-platform';
-import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import type { CountryCode } from '@guardian/libs';
 import { getCookie, log, storage } from '@guardian/libs';
 import { space } from '@guardian/source-foundations';
@@ -13,8 +11,8 @@ import { submitComponentEvent } from '../browser/ophan/ophan';
 import {
 	getLastOneOffContributionTimestamp,
 	isRecurringContributor,
-	REQUIRED_CONSENTS_FOR_ARTICLE_COUNT,
 	shouldHideSupportMessaging,
+	useConsentForArticleCount,
 } from '../lib/contributions';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
@@ -28,20 +26,6 @@ type Props = {
 	contributionsServiceUrl: string;
 	pageId: string;
 	keywordIds: string;
-};
-
-const useConsent = () => {
-	const [consent, setConsent] = useState<ConsentState>();
-	const hasOptedOut = getCookie({ name: 'gu_article_count_opt_out' });
-
-	useEffect(() => {
-		if (hasOptedOut) return;
-		onConsentChange((state) => {
-			setConsent(state);
-		});
-	}, [hasOptedOut]);
-
-	return consent;
 };
 
 const useCountryCode = () => {
@@ -89,29 +73,6 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 	return { Epic };
 };
 
-function consentGivenForArticleCounts(consent: ConsentState): boolean {
-	const { ccpa, tcfv2, aus } = consent;
-
-	if (ccpa || aus) {
-		return true;
-	}
-
-	if (tcfv2) {
-		const hasRequiredConsents = REQUIRED_CONSENTS_FOR_ARTICLE_COUNT.every(
-			(tcfConsent) => tcfv2.consents[tcfConsent],
-		);
-
-		if (!hasRequiredConsents) {
-			storage.local.remove('gu.history.dailyArticleCount');
-			storage.local.remove('gu.history.weeklyArticleCount');
-		}
-
-		return hasRequiredConsents;
-	}
-
-	return false;
-}
-
 /**
  * usePayload
  *
@@ -137,14 +98,14 @@ const usePayload = ({
 	keywordIds: string;
 }): EpicPayload | undefined => {
 	const articleCounts = useArticleCounts(pageId, keywordIds);
-	const consent = useConsent();
+	const consentForArticleCount = useConsentForArticleCount();
 	const countryCode = useCountryCode();
 	const mvtId =
 		Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })) || 0;
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 
 	if (articleCounts === 'Pending') return;
-	if (!consent) return;
+	if (consentForArticleCount === 'Pending') return;
 	log('dotcom', 'LiveBlogEpic has consent state');
 	if (!countryCode) return;
 	log('dotcom', 'LiveBlogEpic has countryCode');
@@ -171,7 +132,7 @@ const usePayload = ({
 			countryCode,
 			epicViewLog: getEpicViewLog(storage.local),
 			weeklyArticleHistory: articleCounts?.weeklyArticleHistory,
-			hasOptedOutOfArticleCount: !consentGivenForArticleCounts(consent),
+			hasOptedOutOfArticleCount: !consentForArticleCount,
 			modulesVersion: 'v3',
 			url: window.location.origin + window.location.pathname,
 		},
