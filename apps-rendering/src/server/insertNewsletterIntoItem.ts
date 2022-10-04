@@ -262,7 +262,7 @@ function insertNewsletterIntoBody(
 ): Item {
 	const insertIndex = findInsertIndex(item.body);
 	if (insertIndex === -1) {
-		logger.warn(
+		logger.info(
 			`Unable to find suitable place for NewsletterSignUp: ${item.webUrl}`,
 		);
 		return item;
