@@ -162,6 +162,7 @@ function findInsertIndex(body: Body): Result<string, number> {
 
 // ----- Procedures ----- //
 
+// TO DO - remove the debugging functions before using this module in production
 function debugLoggingForFindIndex(
 	bestIndexInContentOnlyBody: number,
 	bestIndexInOriginalBody: number,
