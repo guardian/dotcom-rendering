@@ -140,73 +140,80 @@ export const Columns: React.FC<{
 		role="menubar"
 		data-cy="nav-menu-columns"
 	>
-		{nav.pillars.forEach((pillar) =>
-			pillar.children?.unshift({
-				title: pillar.title,
-				longTitle: `View all ${pillar.title}`,
-				url: pillar.url,
-				pillar: undefined,
-				children: [],
-				mobileOnly: true,
-			}),
-		)}
-		{nav.pillars.map((column, i) => (
-			<Column
-				column={column}
-				key={column.title.toLowerCase()}
-				index={i}
-				isLastColumn={i !== nav.pillars.length - 1}
-			/>
-		))}
-		<li>
-			<ThemeProvider theme={{ ...buttonThemeBrand }}>
-				<div css={searchBar}>
-					<LinkButton
-						href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
-						tabIndex={-1}
-						className="selectableMenuItem"
-						priority="secondary"
-						icon={
-							<SvgMagnifyingGlass
-								isAnnouncedByScreenReader={true}
-								size="medium"
-							/>
-						}
-						aria-label="Search with google"
-						data-link-name="nav2 : search : submit"
-						type="submit"
-					>
-						Search
-					</LinkButton>
-				</div>
-			</ThemeProvider>
+		<>
+			{nav.pillars.forEach((pillar) =>
+				pillar.children?.unshift({
+					title: pillar.title,
+					longTitle: `View all ${pillar.title}`,
+					url: pillar.url,
+					pillar: undefined,
+					children: [],
+					mobileOnly: true,
+				}),
+			)}
 
-			<div css={lineStyle}></div>
-		</li>
-		<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
-		<MoreColumn
-			column={nav.otherLinks}
-			brandExtensions={nav.brandExtensions}
-			key="more"
-		/>
-		<li css={desktopBrandExtensionColumn} role="none">
-			<ul css={brandExtensionList} role="menu">
-				{nav.brandExtensions.map((brandExtension) => (
-					<li css={brandExtensionListItem} key={brandExtension.title}>
-						<a
-							className="selectableMenuItem"
-							css={brandExtensionLink}
-							href={brandExtension.url}
-							key={brandExtension.title}
-							role="menuitem"
-							data-link-name={`nav2 : brand extension : ${brandExtension.longTitle}`}
+			{nav.pillars.map((column, i) => (
+				<Column
+					column={column}
+					key={column.title.toLowerCase()}
+					index={i}
+					isLastColumn={i !== nav.pillars.length - 1}
+				/>
+			))}
+
+			<li>
+				<ThemeProvider theme={{ ...buttonThemeBrand }}>
+					<div css={searchBar}>
+						<LinkButton
+							href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
 							tabIndex={-1}
+							className="selectableMenuItem"
+							priority="secondary"
+							icon={
+								<SvgMagnifyingGlass
+									isAnnouncedByScreenReader={true}
+									size="medium"
+								/>
+							}
+							aria-label="Search with google"
+							data-link-name="nav2 : search : submit"
+							type="submit"
 						>
-							{brandExtension.longTitle}
-						</a>
-					</li>
-				))}
-			</ul>
-		</li>
+							Search
+						</LinkButton>
+					</div>
+				</ThemeProvider>
+
+				<div css={lineStyle}></div>
+			</li>
+			<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
+			<MoreColumn
+				column={nav.otherLinks}
+				brandExtensions={nav.brandExtensions}
+				key="more"
+			/>
+			<li css={desktopBrandExtensionColumn} role="none">
+				<ul css={brandExtensionList} role="menu">
+					{nav.brandExtensions.map((brandExtension) => (
+						<li
+							css={brandExtensionListItem}
+							key={brandExtension.title}
+						>
+							<a
+								className="selectableMenuItem"
+								css={brandExtensionLink}
+								href={brandExtension.url}
+								key={brandExtension.title}
+								role="menuitem"
+								data-link-name={`nav2 : brand extension : ${brandExtension.longTitle}`}
+								tabIndex={-1}
+							>
+								{brandExtension.longTitle}
+							</a>
+						</li>
+					))}
+				</ul>
+			</li>
+		</>
 	</ul>
 );
