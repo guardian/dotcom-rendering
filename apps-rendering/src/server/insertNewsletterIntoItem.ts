@@ -1,4 +1,5 @@
 // ----- Imports ----- //
+import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import { ArticleDesign } from '@guardian/libs';
 import { OptionKind } from '@guardian/types';
 import { getAdIndices } from 'ads';
@@ -244,11 +245,7 @@ function debugLoggingForFindIndex(
 	});
 }
 
-function buildBodyElement(item: Item): NewsletterSignUp | undefined {
-	if (item.promotedNewsletter.kind === OptionKind.None) {
-		return undefined;
-	}
-	const { value: newsletter } = item.promotedNewsletter;
+function buildBodyElement(newsletter: Newsletter): NewsletterSignUp {
 	return {
 		kind: ElementKind.NewsletterSignUp,
 		...newsletter,
@@ -276,10 +273,10 @@ function insertNewsletterIntoBody(
 }
 
 function insertNewsletterIntoItem(item: Item): void {
-	const newsletterSignUp = buildBodyElement(item);
-	if (!newsletterSignUp) {
-		return;
+	if (item.promotedNewsletter.kind === OptionKind.None) {
+		return
 	}
+	const newsletterSignUp = buildBodyElement(item.promotedNewsletter.value);
 
 	switch (item.design) {
 		case ArticleDesign.Standard:
