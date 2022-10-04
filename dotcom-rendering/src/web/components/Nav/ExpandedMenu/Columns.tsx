@@ -140,6 +140,16 @@ export const Columns: React.FC<{
 		role="menubar"
 		data-cy="nav-menu-columns"
 	>
+		{nav.pillars.forEach((pillar) =>
+			pillar.children?.unshift({
+				title: pillar.title,
+				longTitle: `View all ${pillar.title}`,
+				url: pillar.url,
+				pillar: undefined,
+				children: [],
+				mobileOnly: true,
+			}),
+		)}
 		{nav.pillars.map((column, i) => (
 			<Column
 				column={column}
@@ -148,7 +158,6 @@ export const Columns: React.FC<{
 				isLastColumn={i !== nav.pillars.length - 1}
 			/>
 		))}
-
 		<li>
 			<ThemeProvider theme={{ ...buttonThemeBrand }}>
 				<div css={searchBar}>
@@ -174,7 +183,6 @@ export const Columns: React.FC<{
 
 			<div css={lineStyle}></div>
 		</li>
-
 		<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
 		<MoreColumn
 			column={nav.otherLinks}
