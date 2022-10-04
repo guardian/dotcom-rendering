@@ -3,17 +3,18 @@ import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground, space } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import type { Branding } from '../../../types/branding';
 import type {
 	DCRContainerPalette,
 	DCRContainerType,
 	DCRSnapType,
 	DCRSupportingContent,
 } from '../../../types/front';
+import type { Palette } from '../../../types/palette';
 import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { Avatar } from '../Avatar';
 import { CardHeadline } from '../CardHeadline';
-import { Flex } from '../Flex';
 import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
 import { Snap } from '../Snap';
@@ -165,6 +166,18 @@ const CommentFooter = ({
 	);
 };
 
+const getImage = ({
+	imageUrl,
+	avatarUrl,
+}: {
+	imageUrl?: string;
+	avatarUrl?: string;
+}): { type: CardImageType; src: string } | undefined => {
+	if (avatarUrl) return { type: 'avatar', src: avatarUrl };
+	if (imageUrl) return { type: 'mainMedia', src: imageUrl };
+	return undefined;
+};
+
 export const Card = ({
 	linkTo,
 	format,
@@ -279,13 +292,10 @@ export const Card = ({
 		return <Snap snapData={snapData} />;
 	}
 
-	// Decide what type of image to show, main media, avatar or none
-	let imageType: 'mainmedia' | 'avatar' | undefined;
-	if (imageUrl && avatarUrl) {
-		imageType = 'avatar';
-	} else if (imageUrl) {
-		imageType = 'mainmedia';
-	}
+	const image = getImage({
+		imageUrl,
+		avatarUrl,
+	});
 
 	return (
 		<CardWrapper
@@ -296,82 +306,84 @@ export const Card = ({
 		>
 			<CardLink
 				linkTo={linkTo}
+				headlineText={headlineText}
 				dataLinkName={dataLinkName}
-				format={format}
-				containerPalette={containerPalette}
 			/>
 			<CardLayout
 				imagePosition={imagePosition}
 				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
+				imageType={image?.type}
 			>
-				{imageType === 'mainmedia' && (
+				{image && (
 					<ImageWrapper
 						imageSize={imageSize}
+						imageType={image.type}
 						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
 					>
-						<img src={imageUrl} alt="" role="presentation" />
+						{image.type === 'avatar' ? (
+							<AvatarContainer
+								imageSize={imageSize}
+								imagePosition={imagePosition}
+							>
+								<Avatar
+									imageSrc={image.src}
+									imageAlt={byline ?? ''}
+									containerPalette={containerPalette}
+									format={format}
+								/>
+							</AvatarContainer>
+						) : (
+							<img src={image.src} alt="" role="presentation" />
+						)}
 					</ImageWrapper>
 				)}
 				<ContentWrapper
+					imageType={image?.type}
 					imageSize={imageSize}
 					imagePosition={imagePosition}
 				>
-					<Flex>
-						<HeadlineWrapper>
-							<CardHeadline
-								headlineText={headlineText}
-								format={format}
+					<HeadlineWrapper>
+						<CardHeadline
+							headlineText={headlineText}
+							format={format}
+							containerPalette={containerPalette}
+							size={headlineSize}
+							sizeOnMobile={headlineSizeOnMobile}
+							showQuotes={showQuotes}
+							kickerText={
+								format.design === ArticleDesign.LiveBlog
+									? 'Live'
+									: kickerText
+							}
+							showPulsingDot={
+								format.design === ArticleDesign.LiveBlog ||
+								showPulsingDot
+							}
+							showSlash={
+								format.design === ArticleDesign.LiveBlog ||
+								showSlash
+							}
+							byline={byline}
+							showByline={showByline}
+							isDynamo={isDynamo}
+						/>
+						{starRating !== undefined ? (
+							<StarRatingComponent rating={starRating} />
+						) : null}
+						{(format.design === ArticleDesign.Gallery ||
+							format.design === ArticleDesign.Audio ||
+							format.design === ArticleDesign.Video) &&
+						mediaType ? (
+							<MediaMeta
 								containerPalette={containerPalette}
-								size={headlineSize}
-								sizeOnMobile={headlineSizeOnMobile}
-								showQuotes={showQuotes}
-								kickerText={
-									format.design === ArticleDesign.LiveBlog
-										? 'Live'
-										: kickerText
-								}
-								showPulsingDot={
-									format.design === ArticleDesign.LiveBlog ||
-									showPulsingDot
-								}
-								showSlash={
-									format.design === ArticleDesign.LiveBlog ||
-									showSlash
-								}
-								byline={byline}
-								showByline={showByline}
-								isDynamo={isDynamo}
+								format={format}
+								mediaType={mediaType}
+								mediaDuration={mediaDuration}
 							/>
-							{starRating !== undefined ? (
-								<StarRatingComponent rating={starRating} />
-							) : null}
-							{(format.design === ArticleDesign.Gallery ||
-								format.design === ArticleDesign.Audio ||
-								format.design === ArticleDesign.Video) &&
-							mediaType ? (
-								<MediaMeta
-									containerPalette={containerPalette}
-									format={format}
-									mediaType={mediaType}
-									mediaDuration={mediaDuration}
-								/>
-							) : undefined}
-						</HeadlineWrapper>
-						{imageType === 'avatar' && !!avatarUrl && (
-							<Hide when="above" breakpoint="tablet">
-								<AvatarContainer>
-									<Avatar
-										imageSrc={avatarUrl}
-										imageAlt={byline ?? ''}
-										containerPalette={containerPalette}
-										format={format}
-									/>
-								</AvatarContainer>
-							</Hide>
-						)}
-					</Flex>
+						) : undefined}
+					</HeadlineWrapper>
 					{/* This div is needed to push this content to the bottom of the card */}
 					<div>
 						{!!trailText && (
@@ -385,18 +397,6 @@ export const Card = ({
 									}}
 								/>
 							</TrailTextWrapper>
-						)}
-						{imageType === 'avatar' && !!avatarUrl && (
-							<Hide when="below" breakpoint="tablet">
-								<AvatarContainer>
-									<Avatar
-										imageSrc={avatarUrl}
-										imageAlt={byline ?? ''}
-										containerPalette={containerPalette}
-										format={format}
-									/>
-								</AvatarContainer>
-							</Hide>
 						)}
 						<DecideFooter
 							isOpinion={isOpinion}
@@ -420,7 +420,9 @@ export const Card = ({
 				<SupportingContent
 					supportingContent={supportingContent}
 					alignment={
-						imagePosition === 'top' || imagePosition === 'bottom'
+						imagePosition === 'top' ||
+						imagePosition === 'bottom' ||
+						imageUrl === undefined
 							? 'vertical'
 							: 'horizontal'
 					}

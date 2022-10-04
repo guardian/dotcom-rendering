@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import { neutral } from '@guardian/source-foundations';
 import React from 'react';
+import type { NavType } from '../../model/extract-nav';
+import type { ConfigType } from '../../types/config';
 import { AdConsent } from '../components/AdConsent';
 import { AmpExperimentComponent } from '../components/AmpExperiment';
 import type { AnalyticsModel } from '../components/Analytics';
@@ -12,6 +14,8 @@ import { ContentABTestProvider } from '../components/ContentABTest';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { Onward } from '../components/Onward';
+import type { PermutiveModel } from '../components/Permutive';
+import { Permutive } from '../components/Permutive';
 import { Sidebar } from '../components/Sidebar';
 import { filterForTagsOfType } from '../lib/tag-utils';
 import type { AmpExperiments } from '../server/ampExperimentCache';
@@ -47,12 +51,25 @@ export const Article: React.FC<{
 	articleData: ArticleModel;
 	config: ConfigType;
 	analytics: AnalyticsModel;
-}> = ({ nav, articleData, config, analytics, experimentsData }) => {
+	permutive: PermutiveModel;
+}> = ({
+	nav,
+	articleData,
+	config,
+	analytics,
+	experimentsData,
+	permutive: { projectId, apiKey, payload },
+}) => {
 	return (
 		<ContentABTestProvider
 			switches={config.switches}
 			pageId={config.pageId}
 		>
+			<Permutive
+				projectId={projectId}
+				apiKey={apiKey}
+				payload={payload}
+			/>
 			<Analytics key="analytics" analytics={analytics} />
 			<AnalyticsIframe url={config.ampIframeUrl} />
 			<AdConsent />

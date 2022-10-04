@@ -12,7 +12,7 @@ import type { PillarType } from '../../../../model/extract-nav';
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS
-export const hideDesktop = css`
+const hideDesktop = css`
 	${from.desktop} {
 		display: none;
 	}
@@ -112,6 +112,9 @@ const firstColumnLinks = css`
 	${from.desktop} {
 		padding-left: 0;
 	}
+	${until.tablet} {
+		background: ${brand[300]};
+	}
 `;
 
 const pillarColumnLinks = css`
@@ -120,7 +123,16 @@ const pillarColumnLinks = css`
 	}
 `;
 
-const hideStyles = (columnInputId: string) => css`
+const hideWhenChecked = (columnInputId: string) => css`
+	${until.desktop} {
+		/* stylelint-disable-next-line selector-type-no-unknown */
+		${`#${columnInputId}`}:checked ~ & {
+			display: none;
+		}
+	}
+`;
+
+const hideWhenNotChecked = (columnInputId: string) => css`
 	${until.desktop} {
 		/* stylelint-disable-next-line selector-type-no-unknown */
 		${`#${columnInputId}`}:not(:checked) ~ & {
@@ -129,36 +141,32 @@ const hideStyles = (columnInputId: string) => css`
 	}
 `;
 
+export const lineStyle = css`
+	background-color: ${brand[600]};
+	content: '';
+	display: block;
+	height: 1px;
+	left: 50px;
+	position: absolute;
+	right: 0;
+`;
+
 const columnStyle = css`
 	${textSans.medium()};
 	list-style: none;
 	/* https://developer.mozilla.org/en-US/docs/Web/CSS/list-style#accessibility_concerns */
 	/* Needs double escape char: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#es2018_revision_of_illegal_escape_sequences */
+
 	&::before {
 		content: '\\200B'; /* Zero width space */
 		display: block;
 		height: 0;
 		width: 0;
 	}
+
 	margin: 0;
 	padding-bottom: 10px;
 	position: relative;
-
-	:after {
-		background-color: ${brand[600]};
-		top: 0;
-		content: '';
-		display: block;
-		height: 1px;
-		left: 50px;
-		position: absolute;
-		right: 0;
-	}
-
-	/* Remove the border from the top item on mobile */
-	:first-of-type:after {
-		content: none;
-	}
 
 	${from.desktop} {
 		width: 134px;
@@ -187,9 +195,11 @@ const columnStyle = css`
 export const Column = ({
 	column,
 	index,
+	isLastColumn,
 }: {
 	column: PillarType;
 	index: number;
+	isLastColumn: boolean;
 }) => {
 	// As the elements are dynamic we need to specify the IDs here
 	const columnInputId = `${column.title}-checkbox-input`;
@@ -252,7 +262,7 @@ export const Column = ({
 					columnLinks,
 					index === 0 && firstColumnLinks,
 					!!column.pillar && pillarColumnLinks,
-					columnInputId && hideStyles(columnInputId),
+					hideWhenNotChecked(columnInputId),
 				]}
 				role="menu"
 				id={`${column.title.toLowerCase()}Links`}
@@ -281,6 +291,9 @@ export const Column = ({
 					</li>
 				))}
 			</ul>
+			{isLastColumn && (
+				<div css={[hideWhenChecked(columnInputId), lineStyle]}></div>
+			)}
 		</li>
 	);
 };

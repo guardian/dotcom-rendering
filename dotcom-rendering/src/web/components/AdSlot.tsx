@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { adSizes } from '@guardian/commercial-core';
 import type { SlotName } from '@guardian/commercial-core';
 import { ArticleDisplay } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	border,
 	from,
@@ -11,6 +12,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import type { EditionId } from '../../types/edition';
 import { Island } from './Island';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
@@ -20,7 +22,8 @@ type InlineProps = {
 	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
-	shouldReserveMerchSpace?: boolean;
+	format?: ArticleFormat;
+	editionId?: EditionId;
 };
 
 type NonInlineProps = {
@@ -29,7 +32,8 @@ type NonInlineProps = {
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
-	shouldReserveMerchSpace?: boolean;
+	format?: ArticleFormat;
+	editionId?: EditionId;
 };
 
 /**
@@ -95,10 +99,20 @@ export const adCollapseStyles = css`
 
 const merchandisingAdStyles = css`
 	position: relative;
+	min-height: 250px;
 `;
 
-const merchandisingReservedSpace = css`
-	min-height: 250px;
+const mostPopAdStyles = css`
+	position: relative;
+	min-height: 274px;
+	min-width: 300px;
+	width: 300px;
+	margin: 12px auto;
+	text-align: center;
+	${from.desktop} {
+		margin: 0;
+		width: auto;
+	}
 `;
 
 /**
@@ -231,8 +245,9 @@ export const AdSlot = ({
 	display,
 	shouldHideReaderRevenue = false,
 	isPaidContent = false,
-	shouldReserveMerchSpace = false,
 	index,
+	format,
+	editionId,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -267,6 +282,8 @@ export const AdSlot = ({
 								}
 								isPaidContent={isPaidContent}
 								adStyles={adStyles}
+								format={format}
+								editionId={editionId}
 							/>
 						</Island>
 					);
@@ -318,7 +335,6 @@ export const AdSlot = ({
 			`;
 			return (
 				<>
-					<AdSlotLabelToggled />
 					<div
 						id="dfp-ad--top-above-nav"
 						className={[
@@ -332,7 +348,9 @@ export const AdSlot = ({
 						data-link-name="ad slot top-above-nav"
 						data-name="top-above-nav"
 						aria-hidden="true"
-					/>
+					>
+						<AdSlotLabelToggled />
+					</div>
 				</>
 			);
 		}
@@ -347,12 +365,7 @@ export const AdSlot = ({
 						'ad-slot--mpu-banner-ad',
 						'ad-slot--rendered',
 					].join(' ')}
-					css={[
-						css`
-							position: relative;
-						`,
-						adStyles,
-					]}
+					css={[adStyles, mostPopAdStyles]}
 					data-link-name="ad slot mostpop"
 					data-name="mostpop"
 					aria-hidden="true"
@@ -370,13 +383,13 @@ export const AdSlot = ({
 					].join(' ')}
 					css={[
 						merchandisingAdStyles,
-						shouldReserveMerchSpace && merchandisingReservedSpace,
 						adStyles,
 						fluidFullWidthAdStyles,
 					]}
 					data-link-name="ad slot merchandising-high"
 					data-name="merchandising-high"
 					aria-hidden="true"
+					data-label="false"
 				/>
 			);
 		}
@@ -391,13 +404,13 @@ export const AdSlot = ({
 					].join(' ')}
 					css={[
 						merchandisingAdStyles,
-						shouldReserveMerchSpace && merchandisingReservedSpace,
 						adStyles,
 						fluidFullWidthAdStyles,
 					]}
 					data-link-name="ad slot merchandising"
 					data-name="merchandising"
 					aria-hidden="true"
+					data-label="false"
 				/>
 			);
 		}

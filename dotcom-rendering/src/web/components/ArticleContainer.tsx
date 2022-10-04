@@ -95,6 +95,19 @@ const adStyles = css`
 		.ad-slot--interscroller {
 			/* this fixes inter-scrollers stealing mouse events */
 			overflow: hidden;
+			position: relative;
+
+			/* position the iframe absolutely (relative to the slot) so that it is in the correct position to detect viewability */
+			.ad-slot__content {
+				position: absolute;
+				height: 100%;
+				left: 0;
+				top: 0;
+				right: 0;
+
+				/* must be behind as the actual ad is on top of the iframe */
+				z-index: -1;
+			}
 		}
 
 		/* liveblogs ads have different background colours due the darker page background */
@@ -124,6 +137,31 @@ const adStyles = css`
 
 		${from.wide} {
 			margin-right: -398px;
+		}
+	}
+
+	.ad-slot-container--im {
+		float: left;
+		background-color: transparent;
+
+		.ad-slot {
+			width: 130px;
+
+			${from.mobileLandscape} {
+				width: 220px;
+			}
+			&:not(.ad-slot--rendered) {
+				width: 0;
+				height: 0;
+			}
+
+			&.ad-slot--rendered {
+				margin: 5px 10px 6px 0;
+				${from.mobileLandscape} {
+					margin-bottom: 12px;
+					margin-right: 20px;
+				}
+			}
 		}
 	}
 `;

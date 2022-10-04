@@ -3,12 +3,10 @@ import type {
 	OphanABPayload,
 	OphanABTestMeta,
 	OphanAction,
-	OphanComponent,
 	OphanComponentEvent,
-	OphanComponentType,
-	OphanProduct,
 } from '@guardian/libs';
 import { log } from '@guardian/libs';
+import type { ServerSideTests } from 'src/types/config';
 
 export type OphanRecordFunction = (
 	event: { [key: string]: any },
@@ -41,7 +39,7 @@ export const submitComponentEvent = (
 	ophanRecord({ componentEvent });
 };
 
-export interface SdcTestMeta extends OphanABTestMeta {
+interface SdcTestMeta extends OphanABTestMeta {
 	labels?: string[];
 }
 
@@ -77,13 +75,11 @@ export const sendOphanComponentEvent = (
 	submitComponentEvent(componentEvent, ophanRecord);
 };
 
-export const abTestPayload = (tests: {
-	[key: string]: string;
-}): OphanABPayload => {
+export const abTestPayload = (tests: ServerSideTests): OphanABPayload => {
 	const records: { [key: string]: OphanABEvent } = {};
-	Object.keys(tests).forEach((testName) => {
+	Object.entries(tests).forEach(([testName, variantName]) => {
 		records[`ab${testName}`] = {
-			variantName: tests[testName],
+			variantName,
 			complete: false,
 		};
 	});
@@ -130,15 +126,4 @@ export const recordPerformance = (): void => {
 	record({
 		performance,
 	});
-};
-
-export {
-	OphanABEvent,
-	OphanABPayload,
-	OphanAction,
-	OphanComponent,
-	OphanComponentEvent,
-	OphanComponentType,
-	OphanProduct,
-	OphanABTestMeta,
 };

@@ -1,7 +1,8 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
+import type { TrailType } from '../../types/trails';
 import { Carousel } from './Carousel.importable';
-import { ElementContainer } from './ElementContainer';
+import { Section } from './Section';
 
 export default {
 	component: Carousel,
@@ -181,30 +182,30 @@ const immersiveTrails = convertToImmersive(trails);
 
 export const Headlines = () => (
 	<>
-		<ElementContainer showTopBorder={true}>
+		<Section fullWidth={true}>
 			<Carousel
 				heading="More on this story"
 				trails={trails}
-				onwardsType="more-on-this-story"
+				onwardsSource="more-on-this-story"
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
 			/>
-		</ElementContainer>
-		<ElementContainer showTopBorder={true}>
+		</Section>
+		<Section fullWidth={true}>
 			<Carousel
 				heading="Sport"
 				trails={trails}
-				onwardsType="curated-content"
+				onwardsSource="curated-content"
 				format={{
 					theme: ArticlePillar.Sport,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
 			/>
-		</ElementContainer>
+		</Section>
 	</>
 );
 
@@ -212,18 +213,18 @@ Headlines.story = 'Headlines carousel';
 
 export const SingleItemCarousel = () => (
 	<>
-		<ElementContainer showTopBorder={true}>
+		<Section fullWidth={true}>
 			<Carousel
 				heading="More on this story"
 				trails={trails.slice(1, 2)}
-				onwardsType="more-on-this-story"
+				onwardsSource="more-on-this-story"
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Standard,
 				}}
 			/>
-		</ElementContainer>
+		</Section>
 	</>
 );
 
@@ -231,30 +232,30 @@ Headlines.story = 'Carousel with single item';
 
 export const Immersive = () => (
 	<>
-		<ElementContainer showTopBorder={true}>
+		<Section fullWidth={true}>
 			<Carousel
 				heading="More on this story"
 				trails={immersiveTrails}
-				onwardsType="more-on-this-story"
+				onwardsSource="more-on-this-story"
 				format={{
 					theme: ArticlePillar.News,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Immersive,
 				}}
 			/>
-		</ElementContainer>
-		<ElementContainer showTopBorder={true}>
+		</Section>
+		<Section fullWidth={true}>
 			<Carousel
 				heading="Sport"
 				trails={immersiveTrails}
-				onwardsType="curated-content"
+				onwardsSource="curated-content"
 				format={{
 					theme: ArticlePillar.Sport,
 					design: ArticleDesign.Standard,
 					display: ArticleDisplay.Immersive,
 				}}
 			/>
-		</ElementContainer>
+		</Section>
 	</>
 );
 

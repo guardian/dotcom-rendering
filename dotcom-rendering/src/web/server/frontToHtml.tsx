@@ -2,43 +2,25 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { renderToString } from 'react-dom/server';
-import { getScriptArrayFromFile } from '../../lib/assets';
+import { BUILD_VARIANT } from '../../../scripts/webpack/bundles';
+import {
+	generateScriptTags,
+	getScriptsFromManifest,
+	LEGACY_SCRIPT,
+	MODERN_SCRIPT,
+	VARIANT_SCRIPT,
+} from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractNAV } from '../../model/extract-nav';
-import { makeFrontWindowGuardian } from '../../model/window-guardian';
+import { makeWindowGuardian } from '../../model/window-guardian';
 import type { DCRFrontType } from '../../types/front';
 import { FrontPage } from '../components/FrontPage';
 import { getHttp3Url } from '../lib/getHttp3Url';
-import { frontTemplate } from './frontTemplate';
+import { pageTemplate } from './pageTemplate';
 
 interface Props {
 	front: DCRFrontType;
 }
-
-const generateScriptTags = (
-	scripts: Array<{ src: string; legacy?: boolean } | false>,
-) =>
-	scripts.reduce<string[]>((scriptTags, script) => {
-		if (script === false) return scriptTags;
-
-		let attrs: string;
-		switch (script.legacy) {
-			case true:
-				attrs = 'defer nomodule';
-				break;
-			case false:
-				attrs = 'type="module"';
-				break;
-			default:
-				attrs = 'defer';
-				break;
-		}
-
-		return [
-			...scriptTags,
-			`<script ${attrs} src="${script.src}"></script>`,
-		];
-	}, []);
 
 export const frontToHtml = ({ front }: Props): string => {
 	const title = front.webTitle;
@@ -61,28 +43,25 @@ export const frontToHtml = ({ front }: Props): string => {
 
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
-	const { offerHttp3 } = front.config.switches;
-
-	/**
-	 * Preload the following woff2 font files
-	 * TODO: Identify critical fonts to preload
-	 */
-	const fontFiles = [
-		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Light.woff2',
-		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-LightItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Medium.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-MediumItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-headline/noalts-not-hinted/GHGuardianHeadline-Bold.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Regular.woff2',
-		// 'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-RegularItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textegyptian/noalts-not-hinted/GuardianTextEgyptian-Bold.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Regular.woff2',
-		// 'http://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-RegularItalic.woff2',
-		'https://assets.guim.co.uk/static/frontend/fonts/guardian-textsans/noalts-not-hinted/GuardianTextSans-Bold.woff2',
-	].map((font) => (offerHttp3 ? getHttp3Url(font) : font));
+	const { offerHttp3 = false } = front.config.switches;
 
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
+
+	const shouldServeVariantBundle: boolean = [
+		BUILD_VARIANT,
+		front.config.abTests.dcrJsBundleVariant === 'variant',
+	].every(Boolean);
+
+	/**
+	 * This function returns an array of files found in the manifests
+	 * defined by `manifestPaths`.
+	 *
+	 * @see getScriptsFromManifest
+	 */
+	const getScriptArrayFromFile = getScriptsFromManifest(
+		shouldServeVariantBundle,
+	);
 
 	/**
 	 * The highest priority scripts.
@@ -91,23 +70,17 @@ export const frontToHtml = ({ front }: Props): string => {
 	 * Please talk to the dotcom platform team before adding more.
 	 * Scripts will be executed in the order they appear in this array
 	 */
-
 	const priorityScriptTags = generateScriptTags(
 		[
-			{ src: polyfillIO },
+			polyfillIO,
 			...getScriptArrayFromFile('bootCmp.js'),
 			...getScriptArrayFromFile('ophan.js'),
-			front.config && {
-				src:
-					process.env.COMMERCIAL_BUNDLE_URL ??
-					front.config.commercialBundleUrl,
-			},
+			process.env.COMMERCIAL_BUNDLE_URL ??
+				front.config.commercialBundleUrl,
 			...getScriptArrayFromFile('sentryLoader.js'),
 			...getScriptArrayFromFile('dynamicImport.js'),
 			...getScriptArrayFromFile('islands.js'),
-		].map((script) =>
-			offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
-		),
+		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
 	/**
@@ -123,19 +96,18 @@ export const frontToHtml = ({ front }: Props): string => {
 			...getScriptArrayFromFile('embedIframe.js'),
 			...getScriptArrayFromFile('newsletterEmbedIframe.js'),
 			...getScriptArrayFromFile('relativeTime.js'),
-		].map((script) =>
-			offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
-		),
+		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
-	const gaChunk = getScriptArrayFromFile('ga.js').map((script) =>
-		offerHttp3 ? { ...script, src: getHttp3Url(script.src) } : script,
+	const gaChunk = getScriptArrayFromFile('ga.js');
+	const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
+	const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
+	const variantScript = gaChunk.find((script) =>
+		script.match(VARIANT_SCRIPT),
 	);
-	const modernScript = gaChunk.find((script) => script.legacy === false);
-	const legacyScript = gaChunk.find((script) => script.legacy === true);
 	const gaPath = {
-		modern: modernScript?.src as string,
-		legacy: legacyScript?.src as string,
+		modern: (modernScript ?? variantScript) as string,
+		legacy: legacyScript as string,
 	};
 
 	/**
@@ -143,20 +115,37 @@ export const frontToHtml = ({ front }: Props): string => {
 	 * is placed in a script tag on the page
 	 */
 	const windowGuardian = escapeData(
-		JSON.stringify(makeFrontWindowGuardian(front)),
+		JSON.stringify(
+			makeWindowGuardian({
+				editionId: front.editionId,
+				stage: front.config.stage,
+				frontendAssetsFullURL: front.config.frontendAssetsFullURL,
+				revisionNumber: front.config.revisionNumber,
+				sentryPublicApiKey: front.config.sentryPublicApiKey,
+				sentryHost: front.config.sentryHost,
+				keywordIds: front.config.keywordIds,
+				dfpAccountId: front.config.dfpAccountId,
+				adUnit: front.config.adUnit,
+				ajaxUrl: front.config.ajaxUrl,
+				googletagUrl: front.config.googletagUrl,
+				switches: front.config.switches,
+				abTests: front.config.abTests,
+				brazeApiKey: front.config.brazeApiKey,
+			}),
+		),
 	);
 
 	const keywords = front.config.keywords ?? '';
 
-	return frontTemplate({
+	return pageTemplate({
 		priorityScriptTags,
 		lowPriorityScriptTags,
 		css: extractedCss,
 		html,
-		fontFiles,
 		title,
 		windowGuardian,
 		gaPath,
 		keywords,
+		offerHttp3,
 	});
 };

@@ -16,7 +16,7 @@ const revenueUrls = {
 const contributionsServiceUrl =
 	'https://contributions.code.dev-guardianapis.com';
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			margin: 40px;
@@ -32,7 +32,7 @@ const Container = ({ children }: { children: React.ReactNode }) => (
 
 export const Header = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ReaderRevenueLinks
 				editionId="UK"
 				urls={revenueUrls}
@@ -41,7 +41,7 @@ export const Header = () => {
 				remoteHeader={false}
 				contributionsServiceUrl={contributionsServiceUrl}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Header.story = {
@@ -54,7 +54,7 @@ Header.story = {
 
 export const HeaderMobile = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ReaderRevenueLinks
 				editionId="UK"
 				urls={revenueUrls}
@@ -63,7 +63,7 @@ export const HeaderMobile = () => {
 				remoteHeader={false}
 				contributionsServiceUrl={contributionsServiceUrl}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 HeaderMobile.story = {
@@ -76,7 +76,7 @@ HeaderMobile.story = {
 
 export const Footer = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ReaderRevenueLinks
 				editionId="UK"
 				urls={revenueUrls}
@@ -85,7 +85,7 @@ export const Footer = () => {
 				remoteHeader={false}
 				contributionsServiceUrl={contributionsServiceUrl}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 Footer.story = {
@@ -98,7 +98,7 @@ Footer.story = {
 
 export const FooterMobile = () => {
 	return (
-		<Container>
+		<Wrapper>
 			<ReaderRevenueLinks
 				editionId="UK"
 				urls={revenueUrls}
@@ -107,7 +107,7 @@ export const FooterMobile = () => {
 				remoteHeader={false}
 				contributionsServiceUrl={contributionsServiceUrl}
 			/>
-		</Container>
+		</Wrapper>
 	);
 };
 FooterMobile.story = {

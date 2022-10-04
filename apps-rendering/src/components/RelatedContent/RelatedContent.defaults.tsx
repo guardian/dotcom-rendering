@@ -27,7 +27,7 @@ interface Props {
 	className?: string;
 }
 
-const headingStyles = css`
+export const defaultHeadingStyles = css`
 	${headline.xsmall({ fontWeight: 'bold' })}
 	margin: 0 0 ${remSpace[4]} 0;
 
@@ -36,7 +36,7 @@ const headingStyles = css`
     `}
 `;
 
-const listStyles = css`
+export const defaultListStyles = css`
 	list-style: none;
 	display: flex;
 	flex-direction: row;
@@ -106,7 +106,7 @@ const defaultStyles = css`
 	`}
 `;
 
-const COMMENT = RelatedItemType.COMMENT;
+export const COMMENT = RelatedItemType.COMMENT;
 
 const DefaultRelatedContent: FC<Props> = ({ content, className }) => {
 	return pipe(
@@ -118,8 +118,8 @@ const DefaultRelatedContent: FC<Props> = ({ content, className }) => {
 
 			return (
 				<section css={className}>
-					<h2 css={headingStyles}>{title}</h2>
-					<ul css={listStyles} role="list">
+					<h2 css={defaultHeadingStyles}>{title}</h2>
+					<ul css={defaultListStyles} role="list">
 						{relatedItems.map((relatedItem, key) => {
 							return relatedItem.type === COMMENT &&
 								relatedItem.bylineImage ? (

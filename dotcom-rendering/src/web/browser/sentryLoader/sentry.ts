@@ -1,8 +1,9 @@
 import * as Sentry from '@sentry/browser';
+import type { BrowserOptions } from '@sentry/browser';
 import { CaptureConsole } from '@sentry/integrations';
+import { BUILD_VARIANT } from '../../../../scripts/webpack/bundles';
 
-// Only send errors matching these regexes
-const whitelistUrls = [
+const allowUrls: BrowserOptions['allowUrls'] = [
 	/webpack-internal/,
 	new RegExp(`/$(process.env.HOSTNAME || 'localhost')/`),
 	/assets\.guim\.co\.uk/,
@@ -35,7 +36,7 @@ const {
 
 Sentry.init({
 	ignoreErrors,
-	whitelistUrls,
+	allowUrls,
 	dsn: dcrSentryDsn,
 	environment: stage || 'DEV',
 	integrations: [new CaptureConsole({ levels: ['error'] })],
@@ -50,6 +51,14 @@ Sentry.init({
 		return event;
 	},
 });
+
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- dcrJsBundleVariant could also be `undefined`
+if (BUILD_VARIANT && !!window.guardian.config.tests.dcrJsBundleVariant) {
+	Sentry.setTag(
+		'dcr.bundle',
+		window.guardian.config.tests.dcrJsBundleVariant,
+	);
+}
 
 export const reportError = (error: Error, feature?: string): void => {
 	Sentry.withScope(() => {

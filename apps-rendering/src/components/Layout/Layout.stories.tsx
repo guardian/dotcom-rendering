@@ -1,9 +1,11 @@
 // ----- Imports ----- //
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
-import { partition, some, withDefault } from '@guardian/types';
+import { some, withDefault } from '@guardian/types';
+import AnalysisLayout from 'components/Layout/AnalysisLayout';
 import Comment from 'components/Layout/CommentLayout';
 import Standard from 'components/Layout/StandardLayout';
 import {
@@ -11,6 +13,7 @@ import {
 	article,
 	comment,
 	editorial,
+	explainer,
 	feature,
 	interview,
 	letter,
@@ -25,6 +28,7 @@ import { deadBlog, live } from 'fixtures/live';
 import type { Item } from 'item';
 import type { ReactElement } from 'react';
 import { renderAll } from 'renderer';
+import { Result } from 'result';
 import Live from './LiveLayout';
 
 // ----- Functions ----- //
@@ -45,7 +49,7 @@ export const Article = (): React.ReactNode => {
 		<Standard item={article}>
 			{renderAll(
 				formatFromItem(article, some(ArticleDisplay.Standard)),
-				partition(article.body).oks,
+				Result.partition(article.body).oks,
 			)}
 		</Standard>
 	);
@@ -57,7 +61,7 @@ export const Review = (): React.ReactNode => {
 		<Standard item={review}>
 			{renderAll(
 				formatFromItem(review, some(ArticleDisplay.Standard)),
-				partition(review.body).oks,
+				Result.partition(review.body).oks,
 			)}
 		</Standard>
 	);
@@ -69,7 +73,7 @@ export const MatchReport = (): React.ReactNode => {
 		<Standard item={matchReport}>
 			{renderAll(
 				formatFromItem(matchReport, some(ArticleDisplay.Standard)),
-				partition(matchReport.body).oks,
+				Result.partition(matchReport.body).oks,
 			)}
 		</Standard>
 	);
@@ -81,7 +85,7 @@ export const PrintShop = (): React.ReactNode => {
 		<Standard item={printShop}>
 			{renderAll(
 				formatFromItem(printShop, some(ArticleDisplay.Standard)),
-				partition(printShop.body).oks,
+				Result.partition(printShop.body).oks,
 			)}
 		</Standard>
 	);
@@ -93,7 +97,7 @@ export const PhotoEssay = (): React.ReactNode => {
 		<Standard item={photoEssay}>
 			{renderAll(
 				formatFromItem(photoEssay, some(ArticleDisplay.Standard)),
-				partition(photoEssay.body).oks,
+				Result.partition(photoEssay.body).oks,
 			)}
 		</Standard>
 	);
@@ -105,7 +109,7 @@ export const Feature = (): React.ReactNode => {
 		<Standard item={feature}>
 			{renderAll(
 				formatFromItem(feature, some(ArticleDisplay.Standard)),
-				partition(feature.body).oks,
+				Result.partition(feature.body).oks,
 			)}
 		</Standard>
 	);
@@ -117,7 +121,7 @@ export const Interview = (): React.ReactNode => {
 		<Standard item={interview}>
 			{renderAll(
 				formatFromItem(interview, some(ArticleDisplay.Standard)),
-				partition(interview.body).oks,
+				Result.partition(interview.body).oks,
 			)}
 		</Standard>
 	);
@@ -129,7 +133,7 @@ export const Quiz = (): React.ReactNode => {
 		<Standard item={quiz}>
 			{renderAll(
 				formatFromItem(quiz, some(ArticleDisplay.Standard)),
-				partition(quiz.body).oks,
+				Result.partition(quiz.body).oks,
 			)}
 		</Standard>
 	);
@@ -141,7 +145,7 @@ export const Recipe = (): React.ReactNode => {
 		<Standard item={recipe}>
 			{renderAll(
 				formatFromItem(recipe, some(ArticleDisplay.Standard)),
-				partition(recipe.body).oks,
+				Result.partition(recipe.body).oks,
 			)}
 		</Standard>
 	);
@@ -153,7 +157,7 @@ export const CommentItem = (): React.ReactNode => {
 		<Comment item={comment}>
 			{renderAll(
 				formatFromItem(comment, some(ArticleDisplay.Standard)),
-				partition(comment.body).oks,
+				Result.partition(comment.body).oks,
 			)}
 		</Comment>
 	);
@@ -165,7 +169,7 @@ export const Letter = (): React.ReactNode => {
 		<Comment item={letter}>
 			{renderAll(
 				formatFromItem(letter, some(ArticleDisplay.Standard)),
-				partition(letter.body).oks,
+				Result.partition(letter.body).oks,
 			)}
 		</Comment>
 	);
@@ -177,7 +181,7 @@ export const Editorial = (): React.ReactNode => {
 		<Comment item={editorial}>
 			{renderAll(
 				formatFromItem(editorial, some(ArticleDisplay.Standard)),
-				partition(editorial.body).oks,
+				Result.partition(editorial.body).oks,
 			)}
 		</Comment>
 	);
@@ -186,23 +190,47 @@ Editorial.story = { name: 'Editorial' };
 
 export const Analysis = (): React.ReactNode => {
 	return (
-		<Standard item={analysis}>
+		<AnalysisLayout item={analysis}>
 			{renderAll(
 				formatFromItem(analysis, some(ArticleDisplay.Standard)),
-				partition(analysis.body).oks,
+				Result.partition(analysis.body).oks,
 			)}
-		</Standard>
+		</AnalysisLayout>
 	);
 };
 Analysis.story = { name: 'Analysis' };
 
+export const Explainer = (): React.ReactNode => {
+	return (
+		<Standard item={explainer}>
+			{renderAll(
+				formatFromItem(explainer, some(ArticleDisplay.Standard)),
+				Result.partition(explainer.body).oks,
+			)}
+		</Standard>
+	);
+};
+Explainer.story = { name: 'Explainer' };
+
 export const LiveBlog = (): ReactElement => (
-	<Live item={{ ...live, display: ArticleDisplay.Standard }} />
+	<Live
+		item={{
+			...live,
+			display: ArticleDisplay.Standard,
+			edition: Edition.US,
+		}}
+	/>
 );
 LiveBlog.story = { name: 'LiveBlog ' };
 
 export const DeadBlog = (): ReactElement => (
-	<Live item={{ ...deadBlog, display: ArticleDisplay.Standard }} />
+	<Live
+		item={{
+			...deadBlog,
+			display: ArticleDisplay.Standard,
+			edition: Edition.AU,
+		}}
+	/>
 );
 DeadBlog.story = { name: 'DeadBlog ' };
 
@@ -214,7 +242,6 @@ export default {
 			diffThreshold: 0.4,
 			viewports: [
 				breakpoints.mobile,
-				breakpoints.phablet,
 				breakpoints.tablet,
 				breakpoints.wide,
 			],

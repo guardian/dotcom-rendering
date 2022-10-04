@@ -3,17 +3,9 @@ import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballT
 import type { Scorer } from '@guardian/apps-rendering-api-models/scorer';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import {
-	err,
-	fromNullable,
-	map2,
-	none,
-	map as optMap,
-	resultAndThen,
-	some,
-} from '@guardian/types';
-import type { Option, Result } from '@guardian/types';
-import { padZero } from 'date';
+import { fromNullable, map2, none, map as optMap, some } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { padStart } from 'date';
 import { fold, pipe } from 'lib';
 import fetch from 'node-fetch';
 import type { Response } from 'node-fetch';
@@ -30,6 +22,7 @@ import {
 	stringParser,
 	succeed,
 } from 'parser';
+import { Result } from 'result';
 
 type Teams = [string, string];
 
@@ -39,8 +32,8 @@ const getFootballSelector = (date: Date, [teamA, teamB]: Teams): string => {
 
 	const d = date;
 	const year = d.getUTCFullYear();
-	const month = padZero(d.getUTCMonth() + 1);
-	const day = padZero(d.getUTCDate());
+	const month = padStart(d.getUTCMonth() + 1);
+	const day = padStart(d.getUTCDate());
 
 	return `${year}-${month}-${day}_${teams[0]}_${teams[1]}`;
 };
@@ -136,13 +129,11 @@ const parseFootballResponse = async (
 		const parser = footballContentParserFor(selectorId);
 		return pipe(await response.json(), parse(parser));
 	} else if (response.status === 400) {
-		return pipe(
-			await response.json(),
-			parse(footballErrorParser),
-			resultAndThen<string, string, FootballContent>(err),
+		return pipe(await response.json(), parse(footballErrorParser)).flatMap(
+			(error) => Result.err(error),
 		);
 	} else {
-		return err('Problem accessing PA API');
+		return Result.err('Problem accessing PA API');
 	}
 };
 
@@ -194,7 +185,7 @@ const getFootballContent = async (
 		);
 
 		return footballContent;
-	}, Promise.resolve(err('Could not get selectorId')))(selectorId);
+	}, Promise.resolve(Result.err('Could not get selectorId')))(selectorId);
 };
 
 export { getFootballContent };

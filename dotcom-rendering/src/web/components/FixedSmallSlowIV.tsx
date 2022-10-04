@@ -1,4 +1,5 @@
 import type { DCRContainerPalette } from '../../types/front';
+import type { TrailType } from '../../types/trails';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -20,12 +21,7 @@ export const FixedSmallSlowIV = ({
 		<UL direction="row">
 			{slicedTrails.map((trail, index) => {
 				return (
-					<LI
-						key={trail.url}
-						padSides={true}
-						showDivider={index > 0}
-						padBottomOnMobile={true}
-					>
+					<LI key={trail.url} padSides={true} showDivider={index > 0}>
 						<FrontCard
 							trail={trail}
 							starRating={trail.starRating}

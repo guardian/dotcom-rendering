@@ -1,36 +1,45 @@
+import type { CAPIOnwards } from '../../types/onwards';
 import { decideTrail } from '../lib/decideTrail';
 import { Carousel } from './Carousel.importable';
-import { ElementContainer } from './ElementContainer';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
 import { Island } from './Island';
+import { Section } from './Section';
 
 export const DecideOnwards = ({
 	onwards,
 	format,
 }: {
-	onwards: CAPIOnwardsType[];
+	onwards: CAPIOnwards[];
 	format: ArticleFormat;
 }) => (
 	<>
-		{onwards.map(({ heading, trails, onwardsType, url }) => {
+		{onwards.map(({ heading, trails, onwardsSource, url }) => {
 			if (trails.length > 0) {
 				return (
-					<ElementContainer key={onwardsType}>
+					<Section
+						fullWidth={true}
+						key={onwardsSource}
+						showTopBorder={false}
+					>
 						<Island deferUntil="visible">
 							<Carousel
 								heading={heading}
 								trails={trails.map(decideTrail)}
-								onwardsType={onwardsType}
+								onwardsSource={onwardsSource}
 								format={format}
 							/>
 						</Island>
-					</ElementContainer>
+					</Section>
 				);
 			}
 
 			if (url) {
 				return (
-					<ElementContainer key={onwardsType}>
+					<Section
+						fullWidth={true}
+						key={onwardsSource}
+						showTopBorder={false}
+					>
 						<Island
 							clientOnly={true}
 							deferUntil="visible"
@@ -39,11 +48,11 @@ export const DecideOnwards = ({
 							<FetchOnwardsData
 								url={url}
 								limit={8}
-								onwardsType={onwardsType}
+								onwardsSource={onwardsSource}
 								format={format}
 							/>
 						</Island>
-					</ElementContainer>
+					</Section>
 				);
 			}
 

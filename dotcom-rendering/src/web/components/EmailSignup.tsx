@@ -7,7 +7,8 @@ import {
 	sport,
 	textSans,
 } from '@guardian/source-foundations';
-import { NewsletterFrequency } from './NewsletterFrequency';
+import { buildDetailText } from '../lib/buildNewsletterSignUpText';
+import { NewsletterDetail } from './NewsletterDetail';
 import { SecureSignup } from './SecureSignup';
 
 type Props = {
@@ -17,10 +18,12 @@ type Props = {
 	frequency: string;
 	successDescription: string;
 	theme: string;
+	/** You should only set this to true if the privacy message will be shown elsewhere on the page */
+	hidePrivacyMessage?: boolean;
 };
 
 const containerStyles = css`
-	clear: both;
+	clear: left;
 	border: ${neutral[0]} 3px dashed;
 	border-radius: 12px;
 	margin-bottom: ${space[3]}px;
@@ -38,7 +41,7 @@ const stackBelowTabletStyles = css`
 
 	${from.tablet} {
 		flex-direction: row;
-		margin-bottom: ${space[1]}px;
+		margin-bottom: 6px;
 	}
 `;
 
@@ -46,11 +49,11 @@ const titleStyles = (theme: string) => css`
 	${headline.xxsmall({ fontWeight: 'bold' })}
 	flex-grow: 1;
 	span {
-		color: ${theme === 'news' ? sport[500] : 'inherit'};
+		color: ${theme === 'news' ? sport[400] : 'inherit'};
 	}
 `;
 
-// When in a row with the title, the Icon in the NewsletterFrequency
+// When in a row with the title, the Icon in the NewsletterDetail
 // component should not affect the spacing between the title text and
 // the description text, which should be 4px (space [1]).
 // When stacked below the title, there should be 8px (space[2]) between
@@ -65,9 +68,11 @@ const noHeightFromTabletStyles = css`
 	}
 `;
 
+// max-width is the wdith of the text field, the button and the margin between them
 const descriptionStyles = css`
 	${textSans.xsmall({ lineHeight: 'tight' })}
 	margin-bottom: ${space[2]}px;
+	max-width: ${335 + space[3] + 118}px;
 `;
 
 export const EmailSignup = ({
@@ -77,21 +82,24 @@ export const EmailSignup = ({
 	frequency,
 	successDescription,
 	theme,
+	hidePrivacyMessage,
 }: Props) => {
 	return (
 		<aside css={containerStyles}>
 			<div css={stackBelowTabletStyles}>
 				<p css={titleStyles(theme)}>
-					Sign up to <span>{name}</span> today
+					Sign up to <span>{name}</span>
 				</p>
 				<div css={noHeightFromTabletStyles}>
-					<NewsletterFrequency frequency={frequency} />
+					<NewsletterDetail text={buildDetailText(frequency)} />
 				</div>
 			</div>
 			<p css={descriptionStyles}>{description}</p>
 			<SecureSignup
+				name={name}
 				newsletterId={identityName}
 				successDescription={successDescription}
+				hidePrivacyMessage={hidePrivacyMessage}
 			/>
 		</aside>
 	);

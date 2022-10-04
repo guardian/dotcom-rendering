@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { body, headline, neutral, space } from '@guardian/source-foundations';
+import type { Palette } from '../../types/palette';
 
 // Wrapper Styles
 const wrapperStyles = css`
@@ -125,7 +126,7 @@ const WitnessWrapper = ({
 
 type ImageProps = {
 	assets: WitnessAssetType[];
-	caption: string;
+	caption?: string;
 	title: string;
 	authorName: string;
 	dateCreated: string;
@@ -169,14 +170,16 @@ export const WitnessImageBlockComponent = ({
 						itemProp="name"
 						dangerouslySetInnerHTML={{ __html: title }}
 					/>
-					<div itemProp="description">
-						<p
-							css={css`
-								${body.medium()}
-							`}
-							dangerouslySetInnerHTML={{ __html: caption }}
-						/>
-					</div>
+					{!!caption && (
+						<div itemProp="description">
+							<p
+								css={css`
+									${body.medium()}
+								`}
+								dangerouslySetInnerHTML={{ __html: caption }}
+							/>
+						</div>
+					)}
 				</figcaption>
 			</>
 		</WitnessWrapper>

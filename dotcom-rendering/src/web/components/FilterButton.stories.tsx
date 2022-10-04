@@ -3,7 +3,7 @@ import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import { FilterButton } from './FilterButton.importable';
 
-const Container = ({ children }: { children: React.ReactNode }) => (
+const Wrapper = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			margin: 40px;
@@ -27,11 +27,7 @@ export default {
 		chromatic: {
 			viewports: [
 				breakpoints.mobile,
-				breakpoints.mobileMedium,
-				breakpoints.phablet,
 				breakpoints.tablet,
-				breakpoints.desktop,
-				breakpoints.leftCol,
 				breakpoints.wide,
 			],
 		},
@@ -39,7 +35,7 @@ export default {
 };
 
 export const DefaultStory = () => (
-	<Container>
+	<Wrapper>
 		<FilterButton
 			isActive={false}
 			type="ORG"
@@ -48,13 +44,13 @@ export const DefaultStory = () => (
 			format={format}
 			onClick={() => {}}
 		/>
-	</Container>
+	</Wrapper>
 );
 
 DefaultStory.story = { name: 'Default' };
 
 export const ActiveStory = () => (
-	<Container>
+	<Wrapper>
 		<FilterButton
 			isActive={true}
 			type="ORG"
@@ -63,13 +59,13 @@ export const ActiveStory = () => (
 			format={format}
 			onClick={() => {}}
 		/>
-	</Container>
+	</Wrapper>
 );
 
 ActiveStory.story = { name: 'Active' };
 
 export const TruncatedStory = () => (
-	<Container>
+	<Wrapper>
 		<FilterButton
 			isActive={false}
 			type="ORG"
@@ -78,13 +74,13 @@ export const TruncatedStory = () => (
 			format={format}
 			onClick={() => {}}
 		/>
-	</Container>
+	</Wrapper>
 );
 
 TruncatedStory.story = { name: 'Truncated' };
 
 export const TruncatedActiveStory = () => (
-	<Container>
+	<Wrapper>
 		<FilterButton
 			isActive={true}
 			type="ORG"
@@ -93,33 +89,33 @@ export const TruncatedActiveStory = () => (
 			format={format}
 			onClick={() => {}}
 		/>
-	</Container>
+	</Wrapper>
 );
 
 TruncatedActiveStory.story = { name: 'TruncatedActive' };
 
 export const FilterKeyEventsStory = () => (
-	<Container>
+	<Wrapper>
 		<FilterButton
 			isActive={false}
 			value="Filter Key Events"
 			format={format}
 			onClick={() => {}}
 		/>
-	</Container>
+	</Wrapper>
 );
 
 FilterKeyEventsStory.story = { name: 'FilterKeyEvents' };
 
 export const FilterKeyEventsActiveStory = () => (
-	<Container>
+	<Wrapper>
 		<FilterButton
 			isActive={true}
 			value="Filter Key Events"
 			format={format}
 			onClick={() => {}}
 		/>
-	</Container>
+	</Wrapper>
 );
 
 FilterKeyEventsActiveStory.story = { name: 'FilterKeyEventsActive' };

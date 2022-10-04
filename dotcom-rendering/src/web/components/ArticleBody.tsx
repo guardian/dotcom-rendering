@@ -2,6 +2,8 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, body, headline, space } from '@guardian/source-foundations';
+import type { ServerSideTests, Switches } from '../../types/config';
+import type { Palette } from '../../types/palette';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { decidePalette } from '../lib/decidePalette';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
@@ -17,7 +19,7 @@ type Props = {
 	webTitle: string;
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
-	switches: { [key: string]: boolean };
+	switches: Switches;
 	section: string;
 	shouldHideReaderRevenue: boolean;
 	tags: TagType[];
@@ -32,9 +34,9 @@ type Props = {
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
 	filterKeyEvents?: boolean;
-	showKeyEventsCarousel?: boolean;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
+	abTests?: ServerSideTests;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -58,13 +60,22 @@ const globalOlStyles = () => css`
 `;
 
 const globalH3Styles = (display: ArticleDisplay) => {
-	if (display !== ArticleDisplay.NumberedList) return null;
-	return css`
-		h3 {
-			${headline.xsmall({ fontWeight: 'bold' })};
-			margin-bottom: ${space[2]}px;
-		}
-	`;
+	switch (display) {
+		case ArticleDisplay.NumberedList:
+			return css`
+				h3 {
+					${headline.xsmall({ fontWeight: 'bold' })};
+					margin-bottom: ${space[2]}px;
+				}
+			`;
+		default:
+			return css`
+				h3 {
+					${body.medium({ fontWeight: 'bold' })};
+					margin-bottom: ${space[4]}px;
+				}
+			`;
+	}
 };
 
 const globalStrongStyles = css`
@@ -117,9 +128,9 @@ export const ArticleBody = ({
 	onFirstPage,
 	keyEvents,
 	filterKeyEvents,
-	showKeyEventsCarousel,
 	availableTopics,
 	selectedTopics,
+	abTests,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
@@ -129,55 +140,50 @@ export const ArticleBody = ({
 		format.design === ArticleDesign.DeadBlog
 	) {
 		return (
-			<>
-				<div
-					tabIndex={0}
-					id="liveblog-body"
-					// This classname is used by Spacefinder as the container in which it'll attempt to insert inline ads
-					className="js-liveblog-body"
-					css={[
-						globalStrongStyles,
-						globalH2Styles(format.display),
-						globalH3Styles(format.display),
-						globalLinkStyles(palette),
-						// revealStyles is used to animate the reveal of new blocks
-						(format.design === ArticleDesign.DeadBlog ||
-							format.design === ArticleDesign.LiveBlog) &&
-							revealStyles,
-					]}
-				>
-					<LiveBlogRenderer
-						format={format}
-						blocks={blocks}
-						pinnedPost={pinnedPost}
-						adTargeting={adTargeting}
-						host={host}
-						pageId={pageId}
-						webTitle={webTitle}
-						ajaxUrl={ajaxUrl}
-						switches={switches}
-						isAdFreeUser={isAdFreeUser}
-						isSensitive={isSensitive}
-						isLiveUpdate={false}
-						section={section}
-						shouldHideReaderRevenue={shouldHideReaderRevenue}
-						tags={tags}
-						isPaidContent={isPaidContent}
-						contributionsServiceUrl={contributionsServiceUrl}
-						onFirstPage={onFirstPage}
-						keyEvents={keyEvents}
-						filterKeyEvents={filterKeyEvents}
-						isKeyEventsCarousel={showKeyEventsCarousel}
-						availableTopics={availableTopics}
-						selectedTopics={selectedTopics}
-					/>
-				</div>
-			</>
+			<div
+				id="liveblog-body"
+				// This classname is used by Spacefinder as the container in which it'll attempt to insert inline ads
+				className="js-liveblog-body"
+				css={[
+					globalStrongStyles,
+					globalH2Styles(format.display),
+					globalH3Styles(format.display),
+					globalLinkStyles(palette),
+					// revealStyles is used to animate the reveal of new blocks
+					(format.design === ArticleDesign.DeadBlog ||
+						format.design === ArticleDesign.LiveBlog) &&
+						revealStyles,
+				]}
+			>
+				<LiveBlogRenderer
+					format={format}
+					blocks={blocks}
+					pinnedPost={pinnedPost}
+					adTargeting={adTargeting}
+					host={host}
+					pageId={pageId}
+					webTitle={webTitle}
+					ajaxUrl={ajaxUrl}
+					switches={switches}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+					isLiveUpdate={false}
+					section={section}
+					shouldHideReaderRevenue={shouldHideReaderRevenue}
+					tags={tags}
+					isPaidContent={isPaidContent}
+					contributionsServiceUrl={contributionsServiceUrl}
+					onFirstPage={onFirstPage}
+					keyEvents={keyEvents}
+					filterKeyEvents={filterKeyEvents}
+					availableTopics={availableTopics}
+					selectedTopics={selectedTopics}
+				/>
+			</div>
 		);
 	}
 	return (
 		<div
-			tabIndex={0}
 			id="maincontent"
 			css={[
 				isInteractive ? null : bodyPadding,
@@ -206,6 +212,7 @@ export const ArticleBody = ({
 				isDev={isDev}
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
+				abTests={abTests}
 			/>
 		</div>
 	);

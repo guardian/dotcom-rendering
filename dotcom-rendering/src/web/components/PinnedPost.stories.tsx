@@ -35,7 +35,11 @@ export default {
 			values: [{ name: 'grey', value: 'lightgrey' }],
 		},
 		chromatic: {
-			viewports: [breakpoints.mobile, breakpoints.wide],
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.wide,
+			],
 		},
 	},
 };

@@ -1,18 +1,25 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
 import { maybeRender, pipe } from '@guardian/common-rendering/src/lib';
-import type { Option, Result } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import {
-	err,
 	fromNullable,
 	map,
 	none,
-	ok,
 	OptionKind,
-	ResultKind,
 	some,
 	withDefault,
 } from '@guardian/types';
+import { Optional } from 'optional';
+import { Result } from 'result';
+
+// ----- Types ----- //
+
+type Styleable<Props> = Props & {
+	css?: SerializedStyles;
+	className?: string;
+};
 
 // ----- Functions ----- //
 
@@ -66,10 +73,15 @@ const index =
 	<A>(arr: A[]): Option<A> =>
 		fromNullable(arr[i]);
 
+const indexOptional =
+	(i: number) =>
+	<A>(arr: A[]): Optional<A> =>
+		Optional.fromNullable(arr[i]);
+
 const resultFromNullable =
 	<E>(e: E) =>
 	<A>(a: A | null | undefined): Result<E, A> =>
-		a === null || a === undefined ? err(e) : ok(a);
+		a === null || a === undefined ? Result.err(e) : Result.ok(a);
 
 const parseIntOpt = (int: string): Option<number> => {
 	const parsed = parseInt(int);
@@ -81,21 +93,10 @@ const resultMap3 =
 	<A, B, C, D>(f: (a: A, b: B, c: C) => D) =>
 	<E>(resultA: Result<E, A>) =>
 	(resultB: Result<E, B>) =>
-	(resultC: Result<E, C>): Result<E, D> => {
-		if (resultA.kind === ResultKind.Err) {
-			return resultA;
-		}
-
-		if (resultB.kind === ResultKind.Err) {
-			return resultB;
-		}
-
-		if (resultC.kind === ResultKind.Err) {
-			return resultC;
-		}
-
-		return ok(f(resultA.value, resultB.value, resultC.value));
-	};
+	(resultC: Result<E, C>): Result<E, D> =>
+		resultA.flatMap((a) =>
+			resultB.flatMap((b) => resultC.map((c) => f(a, b, c))),
+		);
 
 const optionMap3 =
 	<A, B, C, D>(f: (a: A, b: B, c: C) => D) =>
@@ -111,22 +112,13 @@ const optionMap3 =
 	};
 
 const resultToNullable = <E, A>(result: Result<E, A>): A | undefined =>
-	result.kind === ResultKind.Ok ? result.value : undefined;
+	result.isOk() ? result.value : undefined;
 
 const resultMap2 =
 	<A, B, C>(f: (a: A, b: B) => C) =>
 	<E>(resultA: Result<E, A>) =>
-	(resultB: Result<E, B>): Result<E, C> => {
-		if (resultA.kind === ResultKind.Err) {
-			return resultA;
-		}
-
-		if (resultB.kind === ResultKind.Err) {
-			return resultB;
-		}
-
-		return ok(f(resultA.value, resultB.value));
-	};
+	(resultB: Result<E, B>): Result<E, C> =>
+		resultA.flatMap((a) => resultB.map((b) => f(a, b)));
 
 const fold =
 	<A, B>(f: (value: A) => B, ifNone: B) =>
@@ -151,6 +143,7 @@ export {
 	maybeRender,
 	handleErrors,
 	index,
+	indexOptional,
 	resultFromNullable,
 	optionMap3,
 	parseIntOpt,
@@ -160,3 +153,5 @@ export {
 	fold,
 	toNullable,
 };
+
+export type { Styleable };

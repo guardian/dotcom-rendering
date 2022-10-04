@@ -23,9 +23,29 @@ import { Colour } from '.';
 const cameraCaptionIcon = (): Colour => neutral[46];
 const cameraCaptionIconDark = (): Colour => neutral[60];
 
+const editionsCameraIcon = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.Opinion:
+			return opinion[800];
+		case ArticlePillar.Sport:
+			return sport[800];
+		case ArticlePillar.Culture:
+			return culture[800];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[800];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[800];
+		case ArticleSpecial.Labs:
+			return specialReport[800];
+		case ArticlePillar.News:
+		default:
+			return news[800];
+	}
+};
+
 const commentCount = (format: ArticleFormat): Colour => {
 	if (format.design === ArticleDesign.LiveBlog) {
-			return neutral[86];
+		return neutral[86];
 	}
 
 	if (format.design === ArticleDesign.DeadBlog) {
@@ -48,9 +68,12 @@ const commentCount = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
 	}
-}
+};
 const commentCountDark = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.LiveBlog || format.design === ArticleDesign.DeadBlog) {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	) {
 		return neutral[60];
 	}
 
@@ -73,7 +96,10 @@ const commentCountDark = (format: ArticleFormat): Colour => {
 };
 
 const commentCountWide = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.LiveBlog || format.design === ArticleDesign.DeadBlog) {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	) {
 		return neutral[46];
 	}
 
@@ -202,17 +228,20 @@ const richLinkSvgPreloadDark = (_format: ArticleFormat): Colour => {
 	return neutral[86];
 };
 
-const lines = (_format: ArticleFormat): Colour =>
-	neutral[86];
+const lines = (_format: ArticleFormat): Colour => neutral[86];
 
-const linesDark = (_format: ArticleFormat): Colour =>
-	neutral[20];
+const linesDark = (_format: ArticleFormat): Colour => neutral[20];
+
+const signUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
+
+const signUpFormButtonDark = (_format: ArticleFormat): Colour => neutral[86];
 
 // ----- API ----- //
 
 const fill = {
 	cameraCaptionIcon,
 	cameraCaptionIconDark,
+	editionsCameraIcon,
 	commentCount,
 	commentCountDark,
 	commentCountWide,
@@ -226,6 +255,8 @@ const fill = {
 	richLinkDark,
 	richLinkSvgPreload,
 	richLinkSvgPreloadDark,
+	signUpFormButton,
+	signUpFormButtonDark,
 };
 
 // ----- Exports ----- //

@@ -1,4 +1,5 @@
 import type { DCRContainerPalette } from '../../types/front';
+import type { TrailType } from '../../types/trails';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -23,7 +24,6 @@ export const FixedSmallSlowIII = ({
 					<LI
 						padSides={true}
 						showDivider={index > 0}
-						padBottomOnMobile={true}
 						percentage={index === 0 ? '50%' : '25%'}
 						key={trail.url}
 					>

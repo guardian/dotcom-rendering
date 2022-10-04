@@ -1,6 +1,5 @@
-/* eslint-disable default-case */
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { ArticleSpecial } from '@guardian/libs';
 import type { FontScaleArgs, FontWeight } from '@guardian/source-foundations';
 import {
 	between,
@@ -13,6 +12,7 @@ import {
 import { Link } from '@guardian/source-react-components';
 import React from 'react';
 import type { DCRContainerPalette } from '../../types/front';
+import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';
 import { Byline } from './Byline';
@@ -152,52 +152,6 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 	}
 };
 
-const underlinedStyles = (size: SmallHeadlineSize, colour: string) => {
-	function underlinedCss(baseSize: number) {
-		return css`
-			background-image: linear-gradient(
-				to bottom,
-				transparent,
-				transparent ${baseSize - 1}px,
-				${colour}
-			);
-			line-height: ${baseSize}px;
-			background-size: 1px ${baseSize}px;
-			background-origin: content-box;
-			background-clip: content-box;
-			margin-right: -5px;
-		`;
-	}
-
-	function underlinedCssWithMediaQuery(
-		baseSize: number,
-		untilDesktopSize: number,
-	) {
-		return css`
-			${until.desktop} {
-				${underlinedCss(untilDesktopSize)}
-			}
-
-			${underlinedCss(baseSize)}
-		`;
-	}
-
-	switch (size) {
-		case 'ginormous':
-			return underlinedCssWithMediaQuery(50, 50);
-		case 'huge':
-			return underlinedCssWithMediaQuery(34, 34);
-		case 'large':
-			return underlinedCssWithMediaQuery(29, 29);
-		case 'medium':
-			return underlinedCssWithMediaQuery(25, 25);
-		case 'small':
-			return underlinedCss(22);
-		case 'tiny':
-			return underlinedCss(24);
-	}
-};
-
 const lineStyles = (palette: Palette) => css`
 	padding-top: 1px;
 	:before {
@@ -225,7 +179,7 @@ const WithLink = ({
 				subdued={true}
 				cssOverrides={css`
 					/* See: https://css-tricks.com/nested-links/ */
-					${getZIndex('card-nested-link')};
+					${getZIndex('card-nested-link')}
 					/* The following styles turn off those provided by Link */
 					color: inherit;
 					/* stylelint-disable-next-line property-disallowed-list */
@@ -284,15 +238,9 @@ export const CardHeadline = ({
 						  }),
 					format.theme !== ArticleSpecial.Labs &&
 						fontStylesOnMobile({
-							size: sizeOnMobile || size,
+							size: sizeOnMobile ?? size,
 							fontWeight: containerPalette ? 'bold' : 'regular',
 						}),
-					format.design === ArticleDesign.Analysis &&
-						!containerPalette &&
-						underlinedStyles(
-							size,
-							palette.background.analysisUnderline,
-						),
 					showLine && lineStyles(palette),
 				]}
 			>

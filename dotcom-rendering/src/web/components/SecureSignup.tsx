@@ -7,12 +7,20 @@ import { NewsletterPrivacyMessage } from './NewsletterPrivacyMessage';
 import { NewsletterSignupForm } from './NewsletterSignupForm';
 import { SecureSignupIframe } from './SecureSignupIframe.importable';
 
-type Props = { newsletterId: string; successDescription: string };
+type Props = {
+	newsletterId: string;
+	name: string;
+	successDescription: string;
+	/** Override this with caution: you _must_ ensure this wording exists nearby if not included in this component */
+	hidePrivacyMessage?: boolean;
+};
 
 // The Google documentation specifies that if the 'recaptcha-badge' is hidden,
 // their T+C's must be displayed instead. <SecureSignupIframe> hides the
 // badge, so <NewsletterPrivacyMessage> must be displayed with it.
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
+// It is possible to override this but ONLY in the case where the privacy message will be shown elsewhere
+// on the page ie. the single newsletter signup screens
 
 /**
  * This function renders the content to be used within the iframe,
@@ -50,7 +58,12 @@ const generateForm = (
 	return { html, styles };
 };
 
-export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
+export const SecureSignup = ({
+	newsletterId,
+	successDescription,
+	hidePrivacyMessage = false,
+	name,
+}: Props) => {
 	const { html, styles } = generateForm(newsletterId);
 
 	return (
@@ -61,13 +74,14 @@ export const SecureSignup = ({ newsletterId, successDescription }: Props) => {
 				placeholderHeight={65}
 			>
 				<SecureSignupIframe
+					name={name}
 					html={html}
 					styles={styles}
 					newsletterId={newsletterId}
 					successDescription={successDescription}
 				/>
 			</Island>
-			<NewsletterPrivacyMessage />
+			{!hidePrivacyMessage && <NewsletterPrivacyMessage />}
 		</>
 	);
 };

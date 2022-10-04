@@ -493,7 +493,6 @@ interface YoutubeBlockElement {
 
 interface WitnessTypeDataBase {
 	authorUsername: string;
-	authorGuardianProfileUrl: string;
 	originalUrl: string;
 	source: string;
 	title: string;
@@ -510,7 +509,7 @@ interface WitnessTypeDataImage extends WitnessTypeDataBase {
 	_type: 'model.dotcomrendering.pageElements.WitnessTypeDataImage';
 	type: 'image';
 	alt: string;
-	caption: string;
+	caption?: string;
 	mediaId: string;
 	photographer: string;
 }
@@ -684,10 +683,6 @@ interface TimelineEvent {
 	toUnixDate?: number;
 }
 
-interface Switches {
-	[key: string]: boolean;
-}
-
 type RatingSizeType = 'large' | 'medium' | 'small';
 
 // -------------------------------------
@@ -771,6 +766,7 @@ type QuestionType = {
 	text: string;
 	answers: AnswerType[];
 	imageUrl?: string;
+	imageAlt?: string;
 };
 
 type ResultBucketsType = {
@@ -792,4 +788,5 @@ type Newsletter = {
 	successDescription: string;
 	theme: string;
 	group: string;
+	regionFocus?: string;
 };

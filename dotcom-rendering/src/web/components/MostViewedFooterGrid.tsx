@@ -8,6 +8,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { useState } from 'react';
+import type { TrailTabType, TrailType } from '../../types/trails';
 import { MostViewedFooterItem } from './MostViewedFooterItem';
 
 const thinGreySolid = `1px solid ${border.secondary}`;
@@ -43,9 +44,9 @@ const listTab = css`
 const firstTab = css`
 	border-right: ${thinGreySolid};
 `;
-const selectedListTabStyles = (palette: Palette) => css`
+const selectedListTabStyles = (selectedColour: string) => css`
 	/* TODO: Using a pseudo selector here could be faster? */
-	box-shadow: inset 0px 4px 0px 0px ${palette.background.mostViewedTab};
+	box-shadow: inset 0px 4px 0px 0px ${selectedColour};
 	transition: box-shadow 0.3s ease-in-out;
 `;
 
@@ -56,7 +57,7 @@ const unselectedStyles = css`
 	}
 `;
 
-const tabButton = css`
+const buttonStyles = (isSelected: boolean) => css`
 	${headline.xxxsmall()};
 	color: ${neutral[7]};
 	margin: 0;
@@ -72,7 +73,7 @@ const tabButton = css`
 	width: 100%;
 
 	&:hover {
-		cursor: pointer;
+		cursor: ${isSelected ? 'default' : 'pointer'};
 	}
 `;
 
@@ -98,7 +99,7 @@ const gridContainer = css`
 type Props = {
 	data: TrailTabType[];
 	sectionName?: string;
-	palette: Palette;
+	selectedColour?: string;
 };
 
 // To avoid having to handle multiple ways of reducing the capitalisation styling
@@ -124,17 +125,19 @@ const TabHeading = ({ heading }: { heading: string }) => {
 export const MostViewedFooterGrid = ({
 	data,
 	sectionName = '',
-	palette,
+	selectedColour = neutral[0],
 }: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 	return (
-		<div>
-			{Array.isArray(data) && data.length > 1 && (
+		<>
+			{Array.isArray(data) && (
 				<ul css={tabsContainer} role="tablist">
 					{data.map((tab: TrailTabType, i: number) => {
+						if (!tab.heading) return null;
 						const isSelected = i === selectedTabIndex;
 						const isFirst = i === 0;
-						const selectedStyles = selectedListTabStyles(palette);
+						const selectedStyles =
+							selectedListTabStyles(selectedColour);
 						return (
 							<li
 								css={[
@@ -154,7 +157,7 @@ export const MostViewedFooterGrid = ({
 								data-chromatic="ignore"
 							>
 								<button
-									css={tabButton}
+									css={buttonStyles(isSelected)}
 									onClick={() => setSelectedTabIndex(i)}
 								>
 									<span
@@ -187,12 +190,15 @@ export const MostViewedFooterGrid = ({
 					{(tab.trails || []).map((trail: TrailType, ii: number) => (
 						<MostViewedFooterItem
 							key={trail.url}
-							trail={trail}
 							position={ii + 1}
+							url={trail.url}
+							format={trail.format}
+							headlineText={trail.headline}
+							ageWarning={trail.ageWarning}
 						/>
 					))}
 				</ol>
 			))}
-		</div>
+		</>
 	);
 };

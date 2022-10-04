@@ -1,4 +1,5 @@
-import { DCRContainerPalette } from '../../types/front';
+import type { DCRContainerPalette } from '../../types/front';
+import type { TrailType } from '../../types/trails';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -25,7 +26,6 @@ export const FixedSmallSlowVThird = ({
 						key={trail.url}
 						padSides={true}
 						showDivider={index > 0}
-						padBottomOnMobile={true}
 						percentage="25%"
 					>
 						<FrontCard
@@ -40,14 +40,9 @@ export const FixedSmallSlowVThird = ({
 			})}
 			<LI showDivider={true} percentage="50%">
 				<UL direction="column">
-					{secondaries.map((trail, index) => {
+					{secondaries.map((trail) => {
 						return (
-							<LI
-								key={trail.url}
-								padBottom={index != 2}
-								padSides={true}
-								padBottomOnMobile={true}
-							>
+							<LI key={trail.url} padSides={true}>
 								<FrontCard
 									trail={trail}
 									containerPalette={containerPalette}

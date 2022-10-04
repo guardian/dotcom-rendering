@@ -11,6 +11,8 @@
  *    gen-fixtures.ts directly.
  */
 
+import type { CAPIArticleType } from '../../../src/types/frontend';
+
 export const Letter: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0"> <img src="https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/1000.jpg" alt="Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975." width="1000" height="797" class="gu-image" /> <figcaption> <span class="element-image__caption">Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.</span> <span class="element-image__credit">Photograph: taken from picture library</span> </figcaption> </figure>',
@@ -28,149 +30,149 @@ export const Letter: CAPIArticleType = {
 					value: 'uk',
 				},
 				{
-					name: 'k',
-					value: ['women', 'family', 'gender'],
-				},
-				{
-					name: 'tn',
-					value: ['letters'],
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
 					name: 'ct',
 					value: 'article',
+				},
+				{
+					name: 'url',
+					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
 				},
 				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'k',
+					value: ['women', 'family', 'gender'],
+				},
+				{
 					name: 'sh',
 					value: 'https://www.theguardian.com/p/hx6ty',
 				},
 				{
-					name: 'url',
-					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+					name: 'tn',
+					value: ['letters'],
 				},
 			],
 		},
 		US: {
 			adTargeting: [
 				{
-					name: 'k',
-					value: ['women', 'family', 'gender'],
-				},
-				{
-					name: 'tn',
-					value: ['letters'],
-				},
-				{
-					name: 'su',
-					value: ['0'],
+					name: 'edition',
+					value: 'us',
 				},
 				{
 					name: 'ct',
 					value: 'article',
 				},
 				{
+					name: 'url',
+					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+				},
+				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
-					name: 'edition',
-					value: 'us',
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'k',
+					value: ['women', 'family', 'gender'],
 				},
 				{
 					name: 'sh',
 					value: 'https://www.theguardian.com/p/hx6ty',
 				},
 				{
-					name: 'url',
-					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+					name: 'tn',
+					value: ['letters'],
 				},
 			],
 		},
 		AU: {
 			adTargeting: [
 				{
-					name: 'k',
-					value: ['women', 'family', 'gender'],
-				},
-				{
-					name: 'tn',
-					value: ['letters'],
-				},
-				{
-					name: 'su',
-					value: ['0'],
+					name: 'edition',
+					value: 'au',
 				},
 				{
 					name: 'ct',
 					value: 'article',
 				},
 				{
+					name: 'url',
+					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+				},
+				{
 					name: 'p',
 					value: 'ng',
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'k',
+					value: ['women', 'family', 'gender'],
 				},
 				{
 					name: 'sh',
 					value: 'https://www.theguardian.com/p/hx6ty',
 				},
 				{
-					name: 'url',
-					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
-				},
-				{
-					name: 'edition',
-					value: 'au',
+					name: 'tn',
+					value: ['letters'],
 				},
 			],
 		},
 		INT: {
 			adTargeting: [
 				{
-					name: 'k',
-					value: ['women', 'family', 'gender'],
+					name: 'ct',
+					value: 'article',
 				},
 				{
-					name: 'tn',
-					value: ['letters'],
+					name: 'url',
+					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
 				},
 				{
 					name: 'edition',
 					value: 'int',
 				},
 				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
 					name: 'su',
 					value: ['0'],
 				},
 				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'p',
-					value: 'ng',
+					name: 'k',
+					value: ['women', 'family', 'gender'],
 				},
 				{
 					name: 'sh',
 					value: 'https://www.theguardian.com/p/hx6ty',
 				},
 				{
-					name: 'url',
-					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+					name: 'tn',
+					value: ['letters'],
 				},
 			],
 		},
 	},
 	beaconURL: '//phar.gu-web.net',
+	hasRelated: true,
 	webPublicationSecondaryDateDisplay:
 		'Last modified on Mon 5 Apr 2021 18.36 BST',
 	editionLongForm: 'UK edition',
-	hasRelated: true,
 	publication: 'The Guardian',
 	trailText:
 		'Letters: <strong>Rosemary Johnson</strong> and <strong>Margaret Davis</strong> reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while <strong>Brian Saperia</strong> looks back to 1939',
@@ -312,11 +314,6 @@ export const Letter: CAPIArticleType = {
 						title: 'Football',
 						url: '/football',
 						children: [
-							{
-								title: "Women's Euro 2022",
-								url: '/football/women-s-euro-2022',
-								longTitle: 'football/women-s-euro-2022',
-							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -476,7 +473,7 @@ export const Letter: CAPIArticleType = {
 					},
 					{
 						title: 'Obituaries',
-						url: '/tone/obituaries',
+						url: '/obituaries',
 					},
 				],
 			},
@@ -518,11 +515,6 @@ export const Letter: CAPIArticleType = {
 						title: 'Football',
 						url: '/football',
 						children: [
-							{
-								title: "Women's Euro 2022",
-								url: '/football/women-s-euro-2022',
-								longTitle: 'football/women-s-euro-2022',
-							},
 							{
 								title: 'Live scores',
 								url: '/football/live',
@@ -757,7 +749,7 @@ export const Letter: CAPIArticleType = {
 				children: [
 					{
 						title: 'Obituaries',
-						url: '/tone/obituaries',
+						url: '/obituaries',
 					},
 					{
 						title: 'G2',
@@ -1033,32 +1025,32 @@ export const Letter: CAPIArticleType = {
 		theme: 'OpinionPillar',
 		display: 'StandardDisplay',
 	},
-	standfirst:
-		'<p><strong>Rosemary Johnson</strong> and <strong>Margaret Davis</strong> reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while <strong>Brian Saperia</strong> looks back to 1939</p>',
 	openGraphData: {
 		'og:url':
 			'http://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
 		'article:author': 'Letters',
-		'og:image:height': '720',
-		'og:description':
-			'Letters: Rosemary Johnson and Margaret Davis reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while Brian Saperia looks back to 1939',
 		'og:image:width': '1200',
 		'og:image':
 			'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=dcd621765221570f91e3ac722f3a4b02',
 		'al:ios:url':
 			'gnmguardian://world/2021/apr/05/why-is-a-womans-work-never-done?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
+		'og:title': 'Why is a woman’s work never done? | Letters',
+		'fb:app_id': '180444840287',
+		'article:modified_time': '2021-04-05T17:36:25.000Z',
+		'og:image:height': '720',
+		'og:description':
+			'Letters: Rosemary Johnson and Margaret Davis reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while Brian Saperia looks back to 1939',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
 		'article:section': 'World news',
 		'article:published_time': '2021-04-05T16:04:21.000Z',
-		'og:title': 'Why is a woman’s work never done? | Letters',
-		'fb:app_id': '180444840287',
 		'article:tag': 'Gender,Women,Family',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2021-04-05T17:36:25.000Z',
 	},
+	standfirst:
+		'<p><strong>Rosemary Johnson</strong> and <strong>Margaret Davis</strong> reflect on changes in attitudes to women and work – including unpaid work at home – since the 1970s, while <strong>Brian Saperia</strong> looks back to 1939</p>',
 	sectionUrl: 'world/gender',
 	pageId: 'world/2021/apr/05/why-is-a-womans-work-never-done',
 	version: 3,
@@ -1268,11 +1260,6 @@ export const Letter: CAPIArticleType = {
 		'twitter:app:id:iphone': '409128287',
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
-		'twitter:image':
-			'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=c2fa1bf478107e8638d4ec680e498e54',
-		'twitter:site': '@guardian',
-		'twitter:app:url:ipad':
-			'gnmguardian://world/2021/apr/05/why-is-a-womans-work-never-done?contenttype=Article&source=twitter',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
 		'twitter:app:id:ipad': '409128287',
@@ -1280,6 +1267,11 @@ export const Letter: CAPIArticleType = {
 		'twitter:app:url:googleplay':
 			'guardian://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
 		'twitter:app:url:iphone':
+			'gnmguardian://world/2021/apr/05/why-is-a-womans-work-never-done?contenttype=Article&source=twitter',
+		'twitter:image':
+			'https://i.guim.co.uk/img/media/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_187_1969_1182/master/1969.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=c2fa1bf478107e8638d4ec680e498e54',
+		'twitter:site': '@guardian',
+		'twitter:app:url:ipad':
 			'gnmguardian://world/2021/apr/05/why-is-a-womans-work-never-done?contenttype=Article&source=twitter',
 	},
 	sectionName: 'world',
@@ -1295,10 +1287,11 @@ export const Letter: CAPIArticleType = {
 	},
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	headline: 'Why is a woman’s work never done?',
 	byline: 'Letters',
-	isLegacyInteractive: false,
+	headline: 'Why is a woman’s work never done?',
 	guardianBaseURL: 'https://www.theguardian.com',
+	isLegacyInteractive: false,
+	webPublicationDate: '2021-04-05T16:04:21.000Z',
 	mainMediaElements: [
 		{
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -1546,10 +1539,11 @@ export const Letter: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '574fbed0-62f9-449a-9265-f5fa74ba6b58',
+			elementId: 'b661537e-4ec9-47fe-b73b-7feecd193196',
 		},
 	],
-	webPublicationDate: '2021-04-05T16:04:21.000Z',
+	canonicalUrl:
+		'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
 	blocks: [
 		{
 			id: '5e74b1928f089367b3d0b644',
@@ -1557,17 +1551,17 @@ export const Letter: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Your article (<a href="https://www.theguardian.com/society/2021/mar/30/bob-pape-was-a-beloved-father-and-foster-carer-did-eat-out-to-help-out-cost-him-his-life">Lost to the virus</a>, 30 March) and the <a href="https://www.theguardian.com/uk-news/2021/apr/01/peace-camp-support-for-swiss-army-underwear-move">subsequent letter</a> about women at home “not working” (1 April) reminded me of the 1971-72 television series Budgie,&nbsp;written by Keith Waterhouse and Willis Hall. In one episode, the Soho&nbsp;gangster Charlie&nbsp;Endell (played by Iain Cuthbertson) declared proudly: “Mrs Endell, since the day&nbsp;I married her, has not done a stroke of work – except cooking, cleaning, and bringing up the kids.”<br><strong>Rosemary </strong><strong>Johnson<br></strong><em>Byfield, Northamptonshire</em></p>',
-					elementId: '06b72cd5-acfd-4907-befb-3448999a49b5',
+					elementId: 'd2fe904c-ce13-4aaa-86d9-209cb46e908b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>• In the 1970s, when feminism was&nbsp;working well, before it lost its way, we referred to women who stay at home as “women who&nbsp;don’t work outside the home”. In other words they had one job, unlike women who “work outside the home”, having two jobs. Then&nbsp;along came Thatcher.<br><strong>Margaret Davis<br></strong><em>Loanhead, Midlothian</em></p>',
-					elementId: '0da67a8a-b494-451b-95a7-a20af1b5ea75',
+					elementId: '78ab9f81-13a6-4c55-8d57-0b5ce8b21780',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>• Maybe the hurried “census” carried out in 1939 got it right by defining wives as undertaking “<a href="https://www.theguardian.com/news/datablog/2015/nov/02/the-1939-register-a-tale-of-a-country-ravaged-by-war">unpaid domestic duties</a>”.<br><strong>Brian Saperia<br></strong><em>Harrow, London</em></p>',
-					elementId: 'e0f2d955-b811-4644-8343-a781f776eaf3',
+					elementId: '5a7eae93-1f06-435f-a8bb-5a497e550685',
 				},
 			],
 			attributes: {

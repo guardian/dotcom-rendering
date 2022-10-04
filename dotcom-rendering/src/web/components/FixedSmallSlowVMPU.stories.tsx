@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
-import { ContainerLayout } from './ContainerLayout';
 import { FixedSmallSlowVMPU } from './FixedSmallSlowVMPU';
+import { Section } from './Section';
 
 export default {
 	component: FixedSmallSlowVMPU,
@@ -10,12 +10,7 @@ export default {
 		chromatic: {
 			viewports: [
 				breakpoints.mobile,
-				breakpoints.mobileMedium,
-				breakpoints.mobileLandscape,
-				breakpoints.phablet,
 				breakpoints.tablet,
-				breakpoints.desktop,
-				breakpoints.leftCol,
 				breakpoints.wide,
 			],
 		},
@@ -23,14 +18,12 @@ export default {
 };
 
 export const Default = () => (
-	<ContainerLayout
+	<Section
 		title="FixedSmallSlowVMPU"
-		showTopBorder={true}
-		sideBorders={true}
 		padContent={false}
 		centralBorder="partial"
 	>
 		<FixedSmallSlowVMPU trails={trails} showAge={true} index={1} />
-	</ContainerLayout>
+	</Section>
 );
 Default.story = { name: 'FixedSmallSlowVMPU' };

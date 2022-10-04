@@ -3,12 +3,13 @@ import { until } from '@guardian/source-foundations';
 
 type Props = {
 	children: React.ReactNode;
+	imageType: CardImageType | undefined;
 	imagePosition: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
 	minWidthInPixels?: number;
 };
 
-const decideDirection = (imagePosition?: ImagePositionType) => {
+const decideDirection = (imagePosition: ImagePositionType) => {
 	switch (imagePosition) {
 		case 'top':
 			return 'column';
@@ -19,7 +20,7 @@ const decideDirection = (imagePosition?: ImagePositionType) => {
 		case 'right':
 			return 'row-reverse';
 		// If there's no image (so no imagePosition) default to top down
-		default:
+		case 'none':
 			return 'column';
 	}
 };
@@ -38,7 +39,29 @@ const decideWidth = (minWidthInPixels?: number) => {
 const decidePosition = (
 	imagePosition: ImagePositionType,
 	imagePositionOnMobile: ImagePositionType,
+	imageType?: CardImageType,
 ) => {
+	if (imageType === 'avatar') {
+		switch (imagePosition) {
+			case 'left':
+			case 'right': {
+				return css`
+					flex-direction: row-reverse;
+					${until.tablet} {
+						flex-direction: row-reverse;
+					}
+				`;
+			}
+			default: {
+				return css`
+					flex-direction: column-reverse;
+					${until.tablet} {
+						flex-direction: row-reverse;
+					}
+				`;
+			}
+		}
+	}
 	return css`
 		flex-direction: ${decideDirection(imagePosition)};
 		${until.tablet} {
@@ -52,6 +75,7 @@ export const CardLayout = ({
 	imagePosition,
 	imagePositionOnMobile,
 	minWidthInPixels,
+	imageType,
 }: Props) => (
 	<div
 		css={[
@@ -60,7 +84,7 @@ export const CardLayout = ({
 				flex-basis: 100%;
 			`,
 			decideWidth(minWidthInPixels),
-			decidePosition(imagePosition, imagePositionOnMobile),
+			decidePosition(imagePosition, imagePositionOnMobile, imageType),
 		]}
 	>
 		{children}

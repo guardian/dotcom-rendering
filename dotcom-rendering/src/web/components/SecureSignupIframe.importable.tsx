@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { OphanAction } from '@guardian/libs';
 import { neutral, space, until } from '@guardian/source-foundations';
 import {
 	Button,
@@ -11,7 +12,6 @@ import {
 import type { ReactEventHandler } from 'react';
 import { useRef, useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import type { OphanAction } from '../browser/ophan/ophan';
 import {
 	getOphanRecordFunction,
 	submitComponentEvent,
@@ -28,10 +28,16 @@ const isServer = typeof window === 'undefined';
 // https://developers.google.com/recaptcha/docs/faq#id-like-to-hide-the-recaptcha-badge.-what-is-allowed
 
 type Props = {
+	name: string;
 	styles: string;
 	html: string;
 	newsletterId: string;
 	successDescription: string;
+};
+
+// The ts.dom interface for FontFaceSet does not contain the .add method
+type FontFaceSetWithAdd = FontFaceSet & {
+	add?: { (font: FontFace): void };
 };
 
 const ErrorMessageWithAdvice = ({ text }: { text?: string }) => (
@@ -166,6 +172,7 @@ const sendTracking = (
 };
 
 export const SecureSignupIframe = ({
+	name,
 	styles,
 	html,
 	newsletterId,
@@ -283,6 +290,40 @@ export const SecureSignupIframe = ({
 		resetIframeHeight();
 	};
 
+	const addFontsToIframe = (requiredFontNames: string[]) => {
+		const { current: iframe } = iframeRef;
+
+		// FontFace.add is not supported (IE), allow fallback to system fonts
+		const iframeFontFaceSet = iframe?.contentDocument?.fonts as
+			| undefined
+			| FontFaceSetWithAdd;
+		if (!iframeFontFaceSet || !iframeFontFaceSet.add) {
+			return;
+		}
+
+		// get all the fontFaces on the parent matching the list of font names
+		const requiredFonts: FontFace[] = [];
+		document.fonts.forEach((fontFace) => {
+			if (requiredFontNames.includes(fontFace.family)) {
+				requiredFonts.push(fontFace);
+			}
+		});
+
+		// add the fonts to the iframe
+		requiredFonts.forEach((font) => {
+			// it shouldn't be necessary to test for the add method again
+			// but still ts considers it possibily undefined
+			if (iframeFontFaceSet.add) {
+				iframeFontFaceSet.add(font);
+			}
+		});
+	};
+
+	const onIFrameLoad = (): void => {
+		attachListenersToIframe();
+		addFontsToIframe(['GuardianTextSans']);
+	};
+
 	const captchaSiteKey = isServer
 		? undefined
 		: window.guardian.config.page.googleRecaptchaSiteKey;
@@ -290,6 +331,7 @@ export const SecureSignupIframe = ({
 	return (
 		<>
 			<iframe
+				title={`Sign up to ${name}`}
 				ref={iframeRef}
 				css={css`
 					width: 100%;
@@ -308,7 +350,7 @@ export const SecureSignupIframe = ({
 					</head>
 					<body style="margin: 0; overflow:hidden;">${html}</body>
 				</html>`}
-				onLoad={attachListenersToIframe}
+				onLoad={onIFrameLoad}
 			/>
 
 			{isWaitingForResponse && (

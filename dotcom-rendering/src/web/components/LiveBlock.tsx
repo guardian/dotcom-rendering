@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 // eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
+import type { Switches } from '../../types/config';
 import { RenderArticleElement } from '../lib/renderElement';
 import { LastUpdated } from './LastUpdated';
 import { ShareIcons } from './ShareIcons';
@@ -15,7 +16,7 @@ type Props = {
 	ajaxUrl: string;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	switches: { [key: string]: boolean };
+	switches: Switches;
 	isLiveUpdate?: boolean;
 	isPinnedPost: boolean;
 	pinnedPostId?: string;
@@ -51,9 +52,7 @@ export const LiveBlock = ({
 			id={block.id}
 			blockTitle={block.title}
 			blockFirstPublished={block.blockFirstPublished}
-			blockFirstPublishedDisplay={
-				block.blockFirstPublishedDisplayNoTimezone
-			}
+			blockFirstPublishedDisplay={block.blockFirstPublishedDisplay}
 			blockId={block.id}
 			isLiveUpdate={isLiveUpdate}
 			contributors={block.contributors}

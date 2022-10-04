@@ -11,6 +11,10 @@ import {
 } from '@guardian/source-foundations';
 import libDebounce from 'lodash.debounce';
 import { useEffect, useRef, useState } from 'react';
+import type { Branding } from '../../types/branding';
+import type { OnwardsSource } from '../../types/onwards';
+import type { Palette } from '../../types/palette';
+import type { TrailType } from '../../types/trails';
 import { decidePalette } from '../lib/decidePalette';
 import { formatAttrString } from '../lib/formatAttrString';
 import { getZIndex } from '../lib/getZIndex';
@@ -25,7 +29,7 @@ type Props = {
 	trails: TrailType[];
 	description?: string;
 	url?: string;
-	onwardsType: OnwardsType;
+	onwardsSource: OnwardsSource;
 	format: ArticleFormat;
 };
 
@@ -339,7 +343,7 @@ type CarouselCardProps = {
 	branding?: Branding;
 };
 
-export const CarouselCard: React.FC<CarouselCardProps> = ({
+const CarouselCard: React.FC<CarouselCardProps> = ({
 	format,
 	linkTo,
 	imageUrl,
@@ -424,7 +428,7 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 	</div>
 );
 
-export const Carousel = ({ heading, trails, onwardsType, format }: Props) => {
+export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 	const palette = decidePalette(format);
 	const carouselRef = useRef<HTMLUListElement>(null);
 
@@ -433,7 +437,7 @@ export const Carousel = ({ heading, trails, onwardsType, format }: Props) => {
 
 	const arrowName = 'carousel-small-arrow';
 
-	const isCuratedContent = onwardsType === 'curated-content';
+	const isCuratedContent = onwardsSource === 'curated-content';
 
 	const notPresentation = (el: HTMLElement): boolean =>
 		el.getAttribute('role') !== 'presentation';
@@ -579,7 +583,7 @@ export const Carousel = ({ heading, trails, onwardsType, format }: Props) => {
 			</div>
 			<div
 				css={[containerStyles, containerMargins]}
-				data-component={onwardsType}
+				data-component={onwardsSource}
 				data-link={formatAttrString(heading)}
 			>
 				<Hide when="above" breakpoint="leftCol">

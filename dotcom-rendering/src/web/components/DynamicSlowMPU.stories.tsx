@@ -1,7 +1,7 @@
 import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
-import { ContainerLayout } from './ContainerLayout';
 import { DynamicSlowMPU } from './DynamicSlowMPU';
+import { Section } from './Section';
 
 export default {
 	component: DynamicSlowMPU,
@@ -10,12 +10,7 @@ export default {
 		chromatic: {
 			viewports: [
 				breakpoints.mobile,
-				breakpoints.mobileMedium,
-				breakpoints.mobileLandscape,
-				breakpoints.phablet,
 				breakpoints.tablet,
-				breakpoints.desktop,
-				breakpoints.leftCol,
 				breakpoints.wide,
 			],
 		},
@@ -26,13 +21,7 @@ const bigs = trails.slice(0, 3);
 const standards = trails.slice(3);
 
 export const NoBigs = () => (
-	<ContainerLayout
-		title="DynamicSlowMPU"
-		showTopBorder={true}
-		sideBorders={true}
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -44,18 +33,12 @@ export const NoBigs = () => (
 			showAge={true}
 			index={1}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 NoBigs.story = { name: 'with no big cards, only standard' };
 
 export const OneBig = () => (
-	<ContainerLayout
-		title="DynamicSlowMPU"
-		showTopBorder={true}
-		sideBorders={true}
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -67,18 +50,12 @@ export const OneBig = () => (
 			showAge={true}
 			index={1}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 OneBig.story = { name: 'with just one big' };
 
 export const TwoBigs = () => (
-	<ContainerLayout
-		title="DynamicSlowMPU"
-		showTopBorder={true}
-		sideBorders={true}
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -90,18 +67,12 @@ export const TwoBigs = () => (
 			showAge={true}
 			index={1}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 TwoBigs.story = { name: 'with two bigs' };
 
 export const FirstBigBoosted = () => (
-	<ContainerLayout
-		title="DynamicSlowMPU"
-		showTopBorder={true}
-		sideBorders={true}
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -119,18 +90,12 @@ export const FirstBigBoosted = () => (
 			showAge={true}
 			index={1}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 FirstBigBoosted.story = { name: 'with the first of two bigs boosted' };
 
 export const ThreeBigs = () => (
-	<ContainerLayout
-		title="DynamicSlowMPU"
-		showTopBorder={true}
-		sideBorders={true}
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -142,18 +107,12 @@ export const ThreeBigs = () => (
 			showAge={true}
 			index={1}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 ThreeBigs.story = { name: 'with three bigs' };
 
 export const AllBigs = () => (
-	<ContainerLayout
-		title="DynamicSlowMPU"
-		showTopBorder={true}
-		sideBorders={true}
-		padContent={false}
-		centralBorder="partial"
-	>
+	<Section title="DynamicSlowMPU" padContent={false} centralBorder="partial">
 		<DynamicSlowMPU
 			groupedTrails={{
 				snap: [],
@@ -165,6 +124,6 @@ export const AllBigs = () => (
 			showAge={true}
 			index={1}
 		/>
-	</ContainerLayout>
+	</Section>
 );
 AllBigs.story = { name: 'with lots of bigs and no standards' };

@@ -1,4 +1,5 @@
 import type { DCRContainerPalette } from '../../types/front';
+import type { TrailType } from '../../types/trails';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -26,7 +27,6 @@ export const FixedMediumSlowVI = ({
 							key={trail.url}
 							padSides={true}
 							showDivider={index > 0}
-							padBottomOnMobile={index === 0 ? true : false}
 							percentage={index === 0 ? '75%' : '25%'}
 						>
 							<FrontCard
@@ -54,7 +54,6 @@ export const FixedMediumSlowVI = ({
 							key={trail.url}
 							padSides={true}
 							showDivider={index > 0}
-							padBottomOnMobile={true}
 						>
 							<FrontCard
 								trail={trail}

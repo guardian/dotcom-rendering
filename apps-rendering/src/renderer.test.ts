@@ -1,7 +1,4 @@
 import {
-	renderAll,
-	renderEditionsAll,
-	renderAllWithoutStyles,
 	renderStandfirstText,
 	renderText,
 	transformHref,
@@ -13,25 +10,22 @@ import { isValidElement, ReactNode } from 'react';
 import { compose } from 'lib';
 import { BodyElement, ElementKind } from 'bodyElement';
 import { none, some } from '@guardian/types';
-import { ArticleDesign, ArticleDisplay, ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { EmbedKind } from 'embed';
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
 import { ArticleElementRole } from '@guardian/libs';
-
-const mockFormat: ArticleFormat = {
-	theme: ArticlePillar.News,
-	design: ArticleDesign.Standard,
-	display: ArticleDisplay.Standard,
-};
+import {
+	mockFormat,
+	renderEditions,
+	renderElement,
+	renderTextElement,
+	renderWithoutStyles,
+	textElements,
+} from 'testsHelper';
 
 beforeEach(() => {
 	console.error = jest.fn();
-});
-
-const textElement = (nodes: string[]): BodyElement => ({
-	kind: ElementKind.Text,
-	doc: JSDOM.fragment(nodes.join('')),
 });
 
 const imageElement = (): BodyElement => ({
@@ -214,26 +208,12 @@ const audioAtom = (): BodyElement => ({
 	kicker: 'kicker',
 });
 
-const render = (element: BodyElement): ReactNode[] =>
-	renderAll(mockFormat, [element]);
-
-const renderEditions = (element: BodyElement): ReactNode[] =>
-	renderEditionsAll(mockFormat, [element]);
-
-const renderWithoutStyles = (element: BodyElement): ReactNode[] =>
-	renderAllWithoutStyles(mockFormat, [element]);
-
-const renderCaption = (element: BodyElement): ReactNode[] =>
-	renderAll(mockFormat, [element]);
-
-const renderTextElement = compose(render, textElement);
-
 const renderTextElementWithoutStyles = compose(
 	renderWithoutStyles,
-	textElement,
+	textElements,
 );
 
-const renderCaptionElement = compose(renderCaption, imageElement);
+const renderCaptionElement = compose(renderElement, imageElement);
 
 const getHtml = (node: ReactNode): string =>
 	isValidElement(node) ? renderToStaticMarkup(node) : '';
@@ -254,8 +234,8 @@ describe('renderer returns expected content', () => {
 			'text',
 		];
 
-		expect(renderTextElement(elements).flat().length).toBe(11);
-		expect(renderTextElementWithoutStyles(elements).flat().length).toBe(11);
+		expect(renderTextElement(elements).length).toBe(11);
+		expect(renderTextElementWithoutStyles(elements).length).toBe(11);
 	});
 
 	test('Renders caption node types', () => {
@@ -295,7 +275,7 @@ describe('Transforms text nodes', () => {
 
 describe('Renders different types of elements', () => {
 	test('ElementKind.Image', () => {
-		const nodes = render(imageElement());
+		const nodes = renderElement(imageElement());
 		const bodyImage = nodes.flat()[0];
 		expect(getHtml(bodyImage)).toContain('img');
 		expect(getHtml(bodyImage)).toContain('figcaption');
@@ -304,27 +284,27 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.Image with thumbnail role', () => {
-		const nodes = render(imageElementWithRole());
+		const nodes = renderElement(imageElementWithRole());
 		const bodyImage = nodes.flat()[0];
 		expect(getHtml(bodyImage)).toContain('img');
 	});
 
 	test('ElementKind.Pullquote', () => {
-		const nodes = render(pullquoteElement());
+		const nodes = renderElement(pullquoteElement());
 		const pullquote = nodes.flat()[0];
 		expect(getHtml(pullquote)).toContain('quote');
 		expect(getHtml(pullquote)).not.toContain('attribution');
 	});
 
 	test('ElementKind.Pullquote with attribution', () => {
-		const nodes = render(pullquoteWithAttributionElement());
+		const nodes = renderElement(pullquoteWithAttributionElement());
 		const pullquote = nodes.flat()[0];
 		expect(getHtml(pullquote)).toContain('attribution');
 		expect(getHtml(pullquote)).toContain('quote');
 	});
 
 	test('ElementKind.RichLink', () => {
-		const nodes = render(richLinkElement());
+		const nodes = renderElement(richLinkElement());
 		const richLink = nodes.flat()[0];
 		expect(getHtml(richLink)).toContain(
 			'<h1>this links to a related article</h1>',
@@ -333,21 +313,21 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.Interactive', () => {
-		const nodes = render(interactiveElement());
+		const nodes = renderElement(interactiveElement());
 		const interactive = nodes.flat()[0];
-		expect(getHtml(interactive)).toContain(
-			'<iframe src="https://theguardian.com" height="500" title=""></iframe>',
-		);
+		expect(getHtml(interactive)).toContain('iframe');
+		expect(getHtml(interactive)).toContain('src="https://theguardian.com"');
+		expect(getHtml(interactive)).toContain('height="500"');
 	});
 
 	test('ElementKind.Tweet', () => {
-		const nodes = render(tweetElement());
+		const nodes = renderElement(tweetElement());
 		const tweet = nodes.flat()[0];
 		expect(getHtml(tweet)).toContain('twitter-tweet');
 	});
 
 	test('ElementKind.Instagram', () => {
-		const nodes = render(instagramElement());
+		const nodes = renderElement(instagramElement());
 		const instagram = nodes.flat()[0];
 		expect(getHtml(instagram)).toBe(
 			'<iframe src="https://www.instagram.com/p/embedId/embed" height="830" title="&lt;blockquote&gt;Instagram&lt;/blockquote&gt;"></iframe>',
@@ -355,7 +335,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.Embed', () => {
-		const nodes = render(embedElement);
+		const nodes = renderElement(embedElement);
 		const embed = nodes.flat()[0];
 		expect(getHtml(embed)).toContain(
 			'<iframe srcDoc="&lt;section&gt;Embed&lt;/section&gt;" title="Embed" height="322"></iframe>',
@@ -363,7 +343,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.Audio', () => {
-		const nodes = render(audioElement);
+		const nodes = renderElement(audioElement);
 		const audio = nodes.flat()[0];
 		expect(getHtml(audio)).toContain(
 			'src="https://www.spotify.com/" sandbox="allow-scripts" height="300" width="500" title="Audio element"',
@@ -371,7 +351,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.Video', () => {
-		const nodes = render(videoElement);
+		const nodes = renderElement(videoElement);
 		const video = nodes.flat()[0];
 		expect(getHtml(video)).toContain(
 			'src="https://www.youtube-nocookie.com/embed/mockYoutubeId?wmode=opaque&amp;feature=oembed" height="300" width="500" allowfullscreen="" title="Video element"',
@@ -379,7 +359,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.LiveEvent', () => {
-		const nodes = render(liveEventElement());
+		const nodes = renderElement(liveEventElement());
 		const liveEvent = nodes.flat()[0];
 		expect(getHtml(liveEvent)).toContain(
 			'<h1>this links to a live event</h1>',
@@ -387,7 +367,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.InteractiveAtom', () => {
-		const nodes = render(atomElement());
+		const nodes = renderElement(atomElement());
 		const atom = nodes.flat()[0];
 		expect(getHtml(atom)).toContain('main { background: yellow; }');
 		expect(getHtml(atom)).toContain('console.log(&#x27;init&#x27;)');
@@ -395,31 +375,31 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.ExplainerAtom', () => {
-		const nodes = render(explainerElement());
+		const nodes = renderElement(explainerElement());
 		const explainer = nodes.flat()[0];
 		expect(getHtml(explainer)).toContain('<main>Explainer content</main>');
 	});
 
 	test('ElementKind.GuideAtom', () => {
-		const nodes = render(guideElement());
+		const nodes = renderElement(guideElement());
 		const guide = nodes.flat()[0];
 		expect(getHtml(guide)).toContain('<main>Guide content</main>');
 	});
 
 	test('ElementKind.QandaAtom', () => {
-		const nodes = render(qandaElement());
+		const nodes = renderElement(qandaElement());
 		const qanda = nodes.flat()[0];
 		expect(getHtml(qanda)).toContain('<main>QandA content</main>');
 	});
 
 	test('ElementKind.ProfileAtom', () => {
-		const nodes = render(profileElement());
+		const nodes = renderElement(profileElement());
 		const profile = nodes.flat()[0];
 		expect(getHtml(profile)).toContain('<main>Profile content</main>');
 	});
 
 	test('ElementKind.TimelineAtom', () => {
-		const nodes = render(timelineElement());
+		const nodes = renderElement(timelineElement());
 		const timeline = nodes.flat()[0];
 		expect(getHtml(timeline)).toContain(
 			'<p>Swedish prosecutors announce they are <a href="https://www.theguardian.com/media/2019/may/13/sweden-reopens-case-against-julian-assange">reopening an investigation into a rape allegation</a> against Julian Assange.</p><p><br></p>',
@@ -427,7 +407,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.ChartAtom', () => {
-		const nodes = render(chartElement());
+		const nodes = renderElement(chartElement());
 		const chart = nodes.flat()[0];
 		expect(getHtml(chart)).toContain(
 			'srcDoc="&lt;main&gt;Chart content&lt;/main&gt;"',
@@ -435,7 +415,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.KnowledgeQuizAtom', () => {
-		const nodes = render(knowledgeQuizAtom());
+		const nodes = renderElement(knowledgeQuizAtom());
 		const quiz = nodes.flat()[0];
 		const html = getHtml(quiz);
 		expect(html).toContain('<div class="js-quiz">');
@@ -445,7 +425,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.AudioAtom', () => {
-		const nodes = render(audioAtom());
+		const nodes = renderElement(audioAtom());
 		const audio = nodes.flat()[0];
 		const html = getHtml(audio);
 		expect(html).toContain(
@@ -529,7 +509,7 @@ describe('Paragraph tags rendered correctly', () => {
 			'<ul><li><strong><p>Standfirst link</p></strong></li></ul>',
 		);
 		const nodes = renderText(fragment, mockFormat);
-		const html = getHtml(nodes.flat()[0]);
+		const html = getHtml(nodes);
 		expect(html).not.toContain('<strong><p>Standfirst link</p></strong>');
 	});
 });
@@ -584,7 +564,11 @@ describe('Shows drop caps', () => {
 
 	test('Shows drop cap for eligible paragraphs including Unicode Latin-1 characters', () => {
 		const unicodeLatin = `Česká ${paragraph}`;
-		const showDropCap = shouldShowDropCap(unicodeLatin, format, !isEditions);
+		const showDropCap = shouldShowDropCap(
+			unicodeLatin,
+			format,
+			!isEditions,
+		);
 		expect(showDropCap).toBe(true);
 	});
 
@@ -613,17 +597,29 @@ describe('Shows drop caps', () => {
 	test('Does not show drop cap if the paragraph is shorter than 200 characters', () => {
 		const shortParagraph =
 			'The pen might not be mightier than the sword, but maybe the printing press was heavier than the siege weapon. Just a few words can change everything.';
-		const showDropCap = shouldShowDropCap(shortParagraph, format, !isEditions);
+		const showDropCap = shouldShowDropCap(
+			shortParagraph,
+			format,
+			!isEditions,
+		);
 		expect(showDropCap).toBe(false);
 	});
 
 	test('Does not show drop cap if the article is not an allowed design (e.g. standard design)', () => {
-		const showDropCap = shouldShowDropCap(paragraph, mockFormat, !isEditions);
+		const showDropCap = shouldShowDropCap(
+			paragraph,
+			mockFormat,
+			!isEditions,
+		);
 		expect(showDropCap).toBe(false);
 	});
 
 	test('Does not show drop cap if the article is an Editions article', () => {
-		const showDropCap = shouldShowDropCap(paragraph, mockFormat, isEditions);
+		const showDropCap = shouldShowDropCap(
+			paragraph,
+			mockFormat,
+			isEditions,
+		);
 		expect(showDropCap).toBe(false);
 	});
 });

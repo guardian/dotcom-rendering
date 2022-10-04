@@ -65,7 +65,30 @@ const brandingDark = (_format: ArticleFormat): Colour => {
 	return neutral[86];
 };
 
+const byline = (_format: ArticleFormat): Colour => {
+	return neutral[46];
+};
+
 const bylineAnchor = (format: ArticleFormat): Colour => {
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.Sport:
+				return sport[300];
+			case ArticlePillar.Culture:
+				return culture[300];
+			case ArticlePillar.Opinion:
+				return opinion[300];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[300];
+			case ArticleSpecial.Labs:
+				return labs[300];
+			case ArticleSpecial.SpecialReport:
+				return brandAlt[300];
+			case ArticlePillar.News:
+			default:
+				return news[300];
+		}
+	}
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[400];
@@ -85,6 +108,22 @@ const bylineAnchor = (format: ArticleFormat): Colour => {
 };
 
 const bylineAnchorDark = (format: ArticleFormat): Colour => {
+	if (format.design === ArticleDesign.Analysis) {
+		switch (format.theme) {
+			case ArticlePillar.Sport:
+				return sport[500];
+			case ArticlePillar.Culture:
+				return culture[500];
+			case ArticlePillar.Opinion:
+				return opinion[500];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[500];
+			case ArticlePillar.News:
+			default:
+				return news[500];
+		}
+	}
+
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[500];
@@ -154,7 +193,10 @@ const commentCount = (format: ArticleFormat): Colour => {
 };
 
 const commentCountDark = (format: ArticleFormat): Colour => {
-	if (format.design === ArticleDesign.LiveBlog || format.design === ArticleDesign.DeadBlog) {
+	if (
+		format.design === ArticleDesign.LiveBlog ||
+		format.design === ArticleDesign.DeadBlog
+	) {
 		return neutral[60];
 	}
 
@@ -374,10 +416,21 @@ const bylineInlineDark = (format: ArticleFormat): Colour => {
 
 const headlineTag = (_format: ArticleFormat): Colour => neutral[100];
 
+const headlineTagDark = (_format: ArticleFormat): Colour => neutral[10];
+
 const follow = (format: ArticleFormat): Colour => {
+	if (format.design === ArticleDesign.Gallery) {
+		return neutral[86];
+	}
+
 	switch (format.theme) {
 		case ArticlePillar.News:
-			return news[400];
+			switch (format.design) {
+				case ArticleDesign.Analysis:
+					return news[300];
+				default:
+					return news[400];
+			}
 		case ArticlePillar.Lifestyle:
 			return lifestyle[300];
 		case ArticlePillar.Sport:
@@ -398,6 +451,8 @@ const followDark = (format: ArticleFormat): Colour => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return neutral[100];
+		case ArticleDesign.Gallery:
+			return neutral[86];
 		default:
 			switch (format.theme) {
 				case ArticlePillar.News:
@@ -590,6 +645,8 @@ const standfirstDark = ({ design }: ArticleFormat): Colour => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return neutral[93];
+		case ArticleDesign.Gallery:
+			return neutral[86];
 		default:
 			return neutral[60];
 	}
@@ -617,6 +674,7 @@ const standfirstLink = (format: ArticleFormat): Colour => {
 					return specialReport[300];
 			}
 		case ArticleDesign.Gallery:
+			return neutral[86];
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			switch (format.theme) {
@@ -754,12 +812,32 @@ const kicker = (format: ArticleFormat): Colour => {
 	}
 };
 
+const editionsKicker = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.Labs:
+			return specialReport[400];
+		default:
+			return news[400];
+	}
+};
+
 const seriesTitle = (format: ArticleFormat): Colour => {
 	if (format.display === ArticleDisplay.Immersive) {
 		return neutral[100];
 	}
 
 	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return neutral[100];
 		case ArticleDesign.DeadBlog:
 			switch (format.theme) {
 				case ArticlePillar.News:
@@ -951,13 +1029,60 @@ const figCaption = (_format: ArticleFormat): Colour => neutral[46];
 
 const figCaptionDark = (_format: ArticleFormat): Colour => neutral[60];
 
-const tag = (_format: ArticleFormat): Colour => neutral[7];
+const tag = (format: ArticleFormat): Colour => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return neutral[97];
+		default:
+			return neutral[7];
+	}
+};
 
 const tagDark = (_format: ArticleFormat): Colour => neutral[86];
 
 const paragraph = (_format: ArticleFormat): Colour => neutral[7];
 
 const paragraphDark = (_format: ArticleFormat): Colour => neutral[86];
+
+const signUpForm = (_format: ArticleFormat): string => {
+	return neutral[7];
+};
+
+const signUpFormDark = (_format: ArticleFormat): string => {
+	return neutral[86];
+};
+
+const privacyMessage = (_format: ArticleFormat): string => {
+	return neutral[46];
+};
+
+const privacyMessageDark = (_format: ArticleFormat): string => {
+	return neutral[46];
+};
+
+const signUpFormButton = (_format: ArticleFormat): string => {
+	return neutral[100];
+};
+
+const signUpFormButtonDark = (_format: ArticleFormat): string => {
+	return neutral[0];
+};
+
+const gallery = (_format: ArticleFormat): string => {
+	return neutral[86];
+};
+
+const galleryDark = (_format: ArticleFormat): string => {
+	return neutral[86];
+};
+
+const tableOfContentsTitle = (_format: ArticleFormat): string => {
+	return neutral[46];
+};
+
+const tableOfContentsTitleDark = (_format: ArticleFormat): string => {
+	return neutral[86];
+};
 
 // ----- API ----- //
 
@@ -968,6 +1093,7 @@ const text = {
 	articleLink,
 	branding,
 	brandingDark,
+	byline,
 	bylineAnchor,
 	bylineAnchorDark,
 	bylineDark,
@@ -989,10 +1115,12 @@ const text = {
 	headline,
 	headlineDark,
 	headlineTag,
+	headlineTagDark,
 	interactiveAtomLink,
 	keyEventsInline,
 	keyEventsLeftColumn,
 	kicker,
+	editionsKicker,
 	linkDark,
 	mediaArticleBody,
 	mediaArticleBodyLinkDark,
@@ -1018,6 +1146,16 @@ const text = {
 	pagination,
 	paragraph,
 	paragraphDark,
+	signUpForm,
+	signUpFormDark,
+	privacyMessage,
+	privacyMessageDark,
+	signUpFormButton,
+	signUpFormButtonDark,
+	gallery,
+	galleryDark,
+	tableOfContentsTitle,
+	tableOfContentsTitleDark,
 };
 
 // ----- Exports ----- //

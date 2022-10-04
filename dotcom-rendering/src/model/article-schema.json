@@ -1,4 +1,5 @@
 {
+    "description": "WARNING: run `gen-schema` task if changing this to update the associated JSON\nschema definition.",
     "type": "object",
     "properties": {
         "headline": {
@@ -360,8 +361,8 @@
                     "url": {
                         "type": "string"
                     },
-                    "onwardsType": {
-                        "$ref": "#/definitions/OnwardsType"
+                    "onwardsSource": {
+                        "$ref": "#/definitions/OnwardsSource"
                     },
                     "format": {
                         "type": "object",
@@ -389,7 +390,7 @@
                 "required": [
                     "format",
                     "heading",
-                    "onwardsType",
+                    "onwardsSource",
                     "trails"
                 ]
             }
@@ -515,6 +516,9 @@
                 },
                 "group": {
                     "type": "string"
+                },
+                "regionFocus": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -527,11 +531,21 @@
                 "successDescription",
                 "theme"
             ]
+        },
+        "tableOfContents": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/TableOfContentsItem"
+            }
+        },
+        "canonicalUrl": {
+            "type": "string"
         }
     },
     "required": [
         "beaconURL",
         "blocks",
+        "canonicalUrl",
         "commercialProperties",
         "config",
         "contentType",
@@ -1198,6 +1212,9 @@
                                 }
                             },
                             "imageUrl": {
+                                "type": "string"
+                            },
+                            "imageAlt": {
                                 "type": "string"
                             }
                         },
@@ -2229,6 +2246,9 @@
                         },
                         "group": {
                             "type": "string"
+                        },
+                        "regionFocus": {
+                            "type": "string"
                         }
                     },
                     "required": [
@@ -2305,6 +2325,7 @@
                 "CommentDesign",
                 "DeadBlogDesign",
                 "EditorialDesign",
+                "ExplainerDesign",
                 "FeatureDesign",
                 "FullPageInteractiveDesign",
                 "GalleryDesign",
@@ -3266,9 +3287,6 @@
                 "authorUsername": {
                     "type": "string"
                 },
-                "authorGuardianProfileUrl": {
-                    "type": "string"
-                },
                 "originalUrl": {
                     "type": "string"
                 },
@@ -3304,11 +3322,9 @@
                 "_type",
                 "alt",
                 "apiUrl",
-                "authorGuardianProfileUrl",
                 "authorName",
                 "authorUsername",
                 "authorWitnessProfileUrl",
-                "caption",
                 "dateCreated",
                 "mediaId",
                 "originalUrl",
@@ -3365,9 +3381,6 @@
                 "authorUsername": {
                     "type": "string"
                 },
-                "authorGuardianProfileUrl": {
-                    "type": "string"
-                },
                 "originalUrl": {
                     "type": "string"
                 },
@@ -3402,7 +3415,6 @@
             "required": [
                 "_type",
                 "apiUrl",
-                "authorGuardianProfileUrl",
                 "authorName",
                 "authorUsername",
                 "authorWitnessProfileUrl",
@@ -3472,9 +3484,6 @@
                 "authorWitnessProfileUrl": {
                     "type": "string"
                 },
-                "authorGuardianProfileUrl": {
-                    "type": "string"
-                },
                 "html": {
                     "type": "string"
                 }
@@ -3482,7 +3491,6 @@
             "required": [
                 "_type",
                 "apiUrl",
-                "authorGuardianProfileUrl",
                 "authorName",
                 "authorUsername",
                 "authorWitnessProfileUrl",
@@ -3890,6 +3898,9 @@
             "description": "the config model will contain useful app/site\nlevel data. Although currently derived from the config model\nconstructed in frontend and passed to dotcom-rendering\nthis data could eventually be defined in dotcom-rendering",
             "type": "object",
             "properties": {
+                "dcrCouldRender": {
+                    "type": "boolean"
+                },
                 "ajaxUrl": {
                     "type": "string"
                 },
@@ -3903,13 +3914,18 @@
                     "type": "string"
                 },
                 "switches": {
-                    "type": "object",
-                    "additionalProperties": {
-                        "type": "boolean"
-                    }
+                    "$ref": "#/definitions/Switches"
                 },
                 "abTests": {
-                    "type": "object"
+                    "description": "This type is not support by JSON-schema, it evaluates as `object`",
+                    "type": "object",
+                    "additionalProperties": {
+                        "enum": [
+                            "control",
+                            "variant"
+                        ],
+                        "type": "string"
+                    }
                 },
                 "dfpAccountId": {
                     "type": "string"
@@ -3930,7 +3946,7 @@
                     "type": "string"
                 },
                 "stage": {
-                    "type": "string"
+                    "$ref": "#/definitions/StageType"
                 },
                 "frontendAssetsFullURL": {
                     "type": "string"
@@ -3945,7 +3961,7 @@
                     "type": "number"
                 },
                 "edition": {
-                    "type": "string"
+                    "$ref": "#/definitions/EditionId"
                 },
                 "section": {
                     "type": "string"
@@ -4071,6 +4087,20 @@
                 "stage",
                 "switches"
             ]
+        },
+        "Switches": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "boolean"
+            }
+        },
+        "StageType": {
+            "enum": [
+                "CODE",
+                "DEV",
+                "PROD"
+            ],
+            "type": "string"
         },
         "CAPITrailType": {
             "type": "object",
@@ -4285,16 +4315,16 @@
                 "sponsorName"
             ]
         },
-        "OnwardsType": {
+        "OnwardsSource": {
             "enum": [
                 "curated-content",
-                "default-onwards",
                 "more-galleries",
                 "more-media-in-section",
                 "more-on-this-story",
                 "related-content",
                 "related-stories",
-                "series"
+                "series",
+                "unknown-source"
             ],
             "type": "string"
         },
@@ -4567,6 +4597,21 @@
                 "WORK_OF_ART"
             ],
             "type": "string"
+        },
+        "TableOfContentsItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "title"
+            ]
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"

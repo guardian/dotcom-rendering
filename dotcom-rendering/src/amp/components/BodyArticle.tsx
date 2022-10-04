@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	ArticleDesign,
 	ArticleDesign as Design,
 	ArticleSpecial as Special,
 } from '@guardian/libs';
@@ -14,16 +15,21 @@ import React from 'react';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import { getSharingUrls } from '../../lib/sharing-urls';
+import type { ConfigType } from '../../types/config';
 import { decideDesign } from '../../web/lib/decideDesign';
 import { decideTheme } from '../../web/lib/decideTheme';
 import { findAdSlots } from '../lib/find-adslots';
 import type { ArticleModel } from '../types/ArticleModel';
 import { Elements } from './Elements';
+import { TextBlockComponent } from './elements/TextBlockComponent';
 import { Epic } from './Epic';
 import { RegionalAd } from './RegionalAd';
 import { StickyAd } from './StickyAd';
 import { SubMeta } from './SubMeta';
 import { TopMeta } from './topMeta/TopMeta';
+
+const getNewsletterSignupDefaultHTML = (webURL: string): string =>
+	`<p><strong>No sign-up button?</strong> Users viewing this page via Google Amp may experience a technical fault. <a href="${webURL}">Please click here to reload the page on theguardian.com</a> which should correct the problem.</p>`;
 
 const innerContainerStyles = css`
 	padding-left: 10px;
@@ -125,9 +131,9 @@ export const Body: React.FC<{
 		contentType: data.contentType,
 		commercialProperties: data.commercialProperties,
 		switches: {
-			ampPrebid: config.switches.ampPrebid,
-			permutive: config.switches.permutive,
-			ampAmazon: config.switches.ampAmazon,
+			ampPrebid: !!config.switches.ampPrebid,
+			permutive: !!config.switches.permutive,
+			ampAmazon: !!config.switches.ampAmazon,
 		},
 	};
 
@@ -189,7 +195,17 @@ export const Body: React.FC<{
 				adTargeting={adTargeting}
 			/>
 
-			{elements}
+			{
+				/** For newsletter sign up articles, replace body with link straight back to web URL */
+				design === ArticleDesign.NewsletterSignup ? (
+					<TextBlockComponent
+						html={getNewsletterSignupDefaultHTML(data.webURL)}
+						pillar={pillar}
+					/>
+				) : (
+					elements
+				)
+			}
 
 			{epic}
 

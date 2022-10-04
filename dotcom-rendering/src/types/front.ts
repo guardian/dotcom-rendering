@@ -1,3 +1,9 @@
+import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import type { ServerSideTests, Switches } from './config';
+import type { EditionId } from './edition';
+import type { FooterType } from './footer';
+import type { TrailType } from './trails';
+
 export interface FEFrontType {
 	pressedPage: FEPressedPageType;
 	nav: CAPINavType;
@@ -28,6 +34,7 @@ interface FEPressedPageType {
 	seoData: FESeoDataType;
 	frontProperties: FEFrontPropertiesType;
 	collections: FECollectionType[];
+	isNetworkFront?: boolean;
 }
 
 interface DCRPressedPageType {
@@ -35,6 +42,7 @@ interface DCRPressedPageType {
 	seoData: FESeoDataType;
 	frontProperties: FEFrontPropertiesType;
 	collections: DCRCollectionType[];
+	isNetworkFront?: boolean;
 }
 
 type FEContainerType =
@@ -339,7 +347,7 @@ type FEFrontConfigType = {
 	beaconUrl: string;
 	userAttributesApiUrl: string;
 	host: string;
-	brazeApiKey: string;
+	brazeApiKey?: string;
 	calloutsUrl: string;
 	requiresMembershipAccess: boolean;
 	onwardWebSocket: string;
@@ -376,7 +384,7 @@ type FEFrontConfigType = {
 	discussionFrontendUrl: string;
 	ipsosTag: string;
 	ophanJsUrl: string;
-	isPaidContent: boolean;
+	isPaidContent?: boolean;
 	mobileAppsAdUnitRoot: string;
 	plistaPublicApiKey: string;
 	frontendAssetsFullURL: string;
@@ -413,6 +421,7 @@ type FESeoDataType = {
 type FEFrontPropertiesType = {
 	isImageDisplayed: boolean;
 	commercial: Record<string, unknown>;
+	isPaidContent?: boolean;
 };
 
 export type FESupportingContent = {
@@ -441,6 +450,17 @@ export type DCRSupportingContent = {
 };
 
 export type TreatType = {
-	text: string;
-	linkTo: string;
+	links: { text: string; linkTo: string }[];
+	theme?: ArticlePillar | ArticleSpecial;
+	editionId?: EditionId;
+	imageUrl?: string;
+	altText?: string;
+	/** The container display name where this treat should show */
+	containerTitle?: string;
+	/**
+	 * `pageId` is the part of the url that comes after the slash
+	 *
+	 * So for https://www.theguardian.com/uk it would be 'uk'
+	 */
+	pageId?: string;
 };

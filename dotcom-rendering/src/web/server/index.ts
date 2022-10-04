@@ -4,8 +4,11 @@ import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
 import { enhanceStandfirst } from '../../model/enhanceStandfirst';
+import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
+import type { CAPIArticleType } from '../../types/frontend';
+import type { CAPIOnwards } from '../../types/onwards';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
@@ -19,18 +22,23 @@ function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 const enhanceCAPIType = (body: unknown): CAPIArticleType => {
 	const data = validateAsCAPIType(body);
 
+	const enhancedBlocks = enhanceBlocks(
+		data.blocks,
+		data.format,
+		data.promotedNewsletter,
+	);
+
 	const CAPIArticle: CAPIArticleType = {
 		...data,
-		blocks: enhanceBlocks(
-			data.blocks,
-			data.format,
-			data.promotedNewsletter,
-		),
+		blocks: enhancedBlocks,
 		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
 		standfirst: enhanceStandfirst(data.standfirst),
 		commercialProperties: enhanceCommercialProperties(
 			data.commercialProperties,
 		),
+		tableOfContents: data.config.switches.tableOfContents
+			? enhanceTableOfContents(data.format, enhancedBlocks)
+			: undefined,
 	};
 	return CAPIArticle;
 };
@@ -44,7 +52,11 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 		...data,
 		pressedPage: {
 			...data.pressedPage,
-			collections: enhanceCollections(data.pressedPage.collections),
+			collections: enhanceCollections(
+				data.pressedPage.collections,
+				data.editionId,
+				data.pageId,
+			),
 		},
 	};
 };
@@ -173,17 +185,18 @@ export const renderKeyEvents = (
 };
 
 export const renderOnwards = (
-	{ body }: { body: CAPIOnwardsType },
+	{ body }: { body: CAPIOnwards },
 	res: express.Response,
 ): void => {
 	try {
-		const { heading, description, url, onwardsType, trails, format } = body;
+		const { heading, description, url, onwardsSource, trails, format } =
+			body;
 
 		const html = onwardsToHtml({
 			heading,
 			description,
 			url,
-			onwardsType,
+			onwardsSource,
 			trails,
 			format,
 		});

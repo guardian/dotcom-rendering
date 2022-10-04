@@ -2,19 +2,17 @@
 
 import 'source-map-support/register'; // activating the source map support
 import path from 'path';
+import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
-import type { Option, Result } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import {
-	either,
-	err,
 	fromNullable,
 	map,
 	none,
-	ok,
 	OptionKind,
 	some,
 	withDefault,
@@ -35,6 +33,7 @@ import { MainMediaKind } from 'mainMedia';
 import type { Response } from 'node-fetch';
 import fetch from 'node-fetch';
 import { parseRelatedContent } from 'relatedContent';
+import { Result } from 'result';
 import {
 	capiContentDecoder,
 	capiDecoder,
@@ -105,20 +104,20 @@ const parseCapiResponse =
 					logger.error(
 						`CAPI returned a 200 for ${articleId}, but didn't give me any content`,
 					);
-					return err(500);
+					return Result.err(500);
 				}
 
 				if (response.relatedContent === undefined) {
 					logger.error(
 						`Unable to fetch related content for ${articleId}`,
 					);
-					return err(500);
+					return Result.err(500);
 				}
 
 				const relatedContent = parseRelatedContent(
 					response.relatedContent,
 				);
-				return ok([response.content, relatedContent]);
+				return Result.ok([response.content, relatedContent]);
 			}
 
 			case 404:
@@ -126,7 +125,7 @@ const parseCapiResponse =
 					`CAPI says that it doesn't recognise this resource: ${articleId}`,
 				);
 
-				return err(404);
+				return Result.err(404);
 
 			default: {
 				const response = await errorDecoder(buffer);
@@ -134,7 +133,7 @@ const parseCapiResponse =
 				logger.error(
 					`I received a ${status} code from CAPI with the message: ${response.message} for resource ${capiResponse.url}`,
 				);
-				return err(500);
+				return Result.err(500);
 			}
 		}
 	};
@@ -144,7 +143,7 @@ const askCapiFor = (articleId: string): CapiReturn =>
 		if (key === undefined) {
 			logger.error('Could not get CAPI key');
 
-			return err(500);
+			return Result.err(500);
 		}
 
 		return capiRequest(articleId)(key).then(parseCapiResponse(articleId));
@@ -311,6 +310,20 @@ async function serveEditionsArticlePost(
 	}
 }
 
+function editionFromString(editionString: string): Edition {
+	switch (editionString) {
+		case 'us':
+			return Edition.US;
+		case 'au':
+			return Edition.AU;
+		case 'international':
+			return Edition.INTERNATIONAL;
+		case 'uk':
+		default:
+			return Edition.UK;
+	}
+}
+
 async function serveArticleGet(
 	req: Request,
 	res: ExpressResponse,
@@ -319,8 +332,9 @@ async function serveArticleGet(
 		const articleId = req.params[0] || defaultId;
 		const isEditions = req.query.editions === '';
 		const capiContent = await askCapiFor(articleId);
+		const edition = editionFromString(req.params.edition);
 
-		await either(
+		await capiContent.either(
 			(errorStatus: number) => {
 				res.sendStatus(errorStatus);
 				return Promise.resolve();
@@ -337,6 +351,7 @@ async function serveArticleGet(
 					commentCount: 30,
 					relatedContent,
 					footballContent: resultToNullable(footballContent),
+					edition,
 				};
 
 				const richLinkDetails = req.query.richlink === '';
@@ -355,7 +370,7 @@ async function serveArticleGet(
 					);
 				}
 			},
-		)(capiContent);
+		);
 	} catch (e) {
 		logger.error(`This error occurred`, e);
 		res.sendStatus(500);
@@ -395,8 +410,12 @@ app.get('/healthcheck', (_req, res) => res.send('Ok'));
 app.get('/favicon.ico', (_, res) => res.status(404).end());
 app.get('/fontSize.css', (_, res) => res.status(404).end());
 
-app.get('/rendered-items/*', express.raw(), serveArticleGet);
-app.get('/*', express.raw(), serveArticleGet);
+app.get(
+	'/:edition(uk|us|au|international)?/rendered-items/*',
+	express.raw(),
+	serveArticleGet,
+);
+app.get('/:edition(uk|us|au|international)?/*', express.raw(), serveArticleGet);
 
 app.post('/article', express.raw(), serveArticlePost);
 
