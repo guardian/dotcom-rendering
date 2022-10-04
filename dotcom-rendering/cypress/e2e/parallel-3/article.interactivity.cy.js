@@ -200,7 +200,7 @@ describe('Interactivity', function () {
 				cy.focused().should(
 					'have.attr',
 					'data-cy',
-					'column-collapse-sublink-The Guardian view',
+					'column-collapse-sublink-Opinion',
 				);
 			});
 
