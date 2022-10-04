@@ -87,7 +87,7 @@
     "@types/gapi.analytics": "^0.0.4",
     "@types/google.analytics": "^0.0.42",
     "@types/he": "^1.1.1",
-    "@types/html-minifier": "^4.0.0",
+    "@types/html-minifier": "^4.0.2",
     "@types/jest": "^27.4.0",
     "@types/jsdom": "^16.2.10",
     "@types/lodash.debounce": "^4.0.7",
