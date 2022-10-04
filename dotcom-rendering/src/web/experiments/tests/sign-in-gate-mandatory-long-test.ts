@@ -1,4 +1,5 @@
 import type { ABTest } from '@guardian/ab-core';
+import { CountryCode } from '@guardian/libs';
 import { getCountryCodeSync } from '../../lib/getCountryCode';
 import { setOrUseParticipations } from '../lib/ab-exclusions';
 
@@ -6,7 +7,7 @@ import { setOrUseParticipations } from '../lib/ab-exclusions';
 // or use localstorage participation key to decide canRun result (false)
 const setParticipationsFlag = true;
 
-const EuropeList = [
+const EuropeList: (CountryCode | '')[] = [
 	'AX',
 	'AL',
 	'AD',
@@ -161,7 +162,7 @@ export const signInGateMandatoryLongTestVariantNa = {
 
 export const signInGateMandatoryLongTestControlAunz = {
 	...sharedTestData,
-	id: 'SignInGateMandatoryLongTestControl',
+	id: 'SignInGateMandatoryLongTestControlAunz',
 	audience: 0.1254,
 	audienceOffset: 0,
 	dataLinkNames: 'SignInGateMandatoryLongTestControlAunz',
