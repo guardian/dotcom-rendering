@@ -128,10 +128,9 @@ function predictIndicesOfParagraphsAfterAdslots(
  *   - The best place is the last place meeting the criteria above.
  *
  * @param body an Item.Body
- * @returns the best index in that body to insert a sign-up block, or -1
- * if there is no suitable place
+ * @returns A Result with the insertIndex or an error
  */
-function findInsertIndex(body: Body): number {
+function findInsertIndex(body: Body): Result<string, number> {
 	// create a filtered copy of the body without:
 	//  - 'Error' Results
 	//  -  Text BodyElements representing whitespace between HTML elements
@@ -198,7 +197,9 @@ function findInsertIndex(body: Body): number {
 		);
 	}
 
-	return bestIndexInOriginalBody;
+	return bestIndexInOriginalBody === -1
+		? Result.err('Unable to find suitable place for NewsletterSignUp')
+		: Result.ok(bestIndexInOriginalBody);
 }
 
 // ----- Procedures ----- //
@@ -254,27 +255,26 @@ function buildBodyElement(newsletter: Newsletter): NewsletterSignUp {
 }
 
 function insertNewsletterIntoBody(
-	item: Item & { body: Body },
+	body: Body,
 	newsletterSignUp: NewsletterSignUp,
-): Item {
-	const insertIndex = findInsertIndex(item.body);
-	if (insertIndex === -1) {
-		logger.info(
-			`Unable to find suitable place for NewsletterSignUp: ${item.webUrl}`,
-		);
-		return item;
-	}
-	item.body = [
-		...item.body.slice(0, insertIndex),
-		Result.ok(newsletterSignUp),
-		...item.body.slice(insertIndex),
-	];
-	return item;
+): Result<string, Body> {
+	return findInsertIndex(body).either(
+		(errorString) => {
+			return Result.err(errorString);
+		},
+		(insertIndex) => {
+			return Result.ok([
+				...body.slice(0, insertIndex),
+				Result.ok(newsletterSignUp),
+				...body.slice(insertIndex),
+			]);
+		},
+	);
 }
 
-function insertNewsletterIntoItem(item: Item): void {
+function insertNewsletterIntoItem(item: Item): Item {
 	if (item.promotedNewsletter.kind === OptionKind.None) {
-		return
+		return item;
 	}
 	const newsletterSignUp = buildBodyElement(item.promotedNewsletter.value);
 
@@ -291,11 +291,21 @@ function insertNewsletterIntoItem(item: Item): void {
 		case ArticleDesign.MatchReport:
 		case ArticleDesign.Interview:
 		case ArticleDesign.Editorial:
-		case ArticleDesign.Obituary:
-			insertNewsletterIntoBody(item, newsletterSignUp);
-			break;
+		case ArticleDesign.Obituary: {
+			return insertNewsletterIntoBody(item.body, newsletterSignUp).either(
+				(errorString) => {
+					logger.info(`${errorString}: ${item.webUrl}`);
+					return item;
+				},
+
+				(body) => ({
+					...item,
+					body,
+				}),
+			);
+		}
 		default:
-			break;
+			return item;
 	}
 }
 
