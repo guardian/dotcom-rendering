@@ -2,7 +2,6 @@
 import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import { ArticleDesign } from '@guardian/libs';
 import { OptionKind } from '@guardian/types';
-import { getAdIndices } from 'ads';
 import type { Body, BodyElement, NewsletterSignUp } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
 import type { Item } from 'item';
@@ -84,47 +83,13 @@ function getRange(numberOfElements: number): [number, number] {
 }
 
 /**
- * Predict the indices of bodyElement that would
- * have an ad slot inserted before them on the current
- * ad placement logic.
- *
- * This logic is not perfect as the ad placement logic
- * insert after the bodyElement have been renderer by
- * counting paragraph elements in ReactNodes, whereas here
- * we are looking at bodyElement before they are have been
- * rendered.
- *
- * @param contentOnlyBody an subset of an article Body, with the
- * non-rendered elements (errors and whitespace) removed.
- * @returns the indices of the elements that are expected to
- * have an adslot placed before them.
- */
-function predictIndicesOfParagraphsAfterAdslots(
-	contentOnlyBody: Body,
-): number[] {
-	const indicesOfParagraphs = contentOnlyBody
-		.filter((result) =>
-			[
-				ElementCategory.ParagraphText,
-				ElementCategory.NonParagraphText,
-				ElementCategory.BoldParagraphText,
-			].includes(categoriseElement(result)),
-		)
-		.map((result) => contentOnlyBody.indexOf(result));
-
-	return getAdIndices()
-		.filter((index) => index < indicesOfParagraphs.length)
-		.map((index) => indicesOfParagraphs[index]);
-}
-
-/**
  *  Find the place to insert a insert a sign-up block in to an article body,
  *  using these rules:
  *	 - Don't put straight after bold text
  *	 - Don't put under headings
  *	 - Must have plain body text above and below
  *   - Must be within 3 elements from the middle of the article
- *   - Should not be next to a adSlot
+ *   - Should not be next to an adSlot (NOT IMPLEMENTED HERE)
  *   - The best place is the last place meeting the criteria above.
  *
  * @param body an Item.Body
@@ -142,15 +107,9 @@ function findInsertIndex(body: Body): Result<string, number> {
 	);
 
 	const [minIndex, maxIndex] = getRange(contentOnlyBody.length);
-	const paragraphsAfterAnAdslot =
-		predictIndicesOfParagraphsAfterAdslots(contentOnlyBody);
 
 	function isSuitable(index: number): boolean {
-		if (
-			index > maxIndex ||
-			index < minIndex ||
-			paragraphsAfterAnAdslot.includes(index)
-		) {
+		if (index > maxIndex || index < minIndex) {
 			return false;
 		}
 
@@ -193,7 +152,6 @@ function findInsertIndex(body: Body): Result<string, number> {
 			bestIndexInOriginalBody,
 			contentOnlyBody,
 			suitabilityList,
-			paragraphsAfterAnAdslot,
 		);
 	}
 
@@ -209,15 +167,8 @@ function debugLoggingForFindIndex(
 	bestIndexInOriginalBody: number,
 	contentOnlyBody: Body,
 	suitabilityList: boolean[],
-	paragraphsAfterAnAdslot: number[],
 ): void {
 	contentOnlyBody.forEach((result, index) => {
-		if (paragraphsAfterAnAdslot.includes(index)) {
-			console.log('\n*** ADSLOT before paragaph ***\n');
-			// on the actual render, the find ad slot script count the
-			// 3x paragraphs in the sign-up block when placing the ads
-			// so this logging wont be accurate after bestIndexInContentOnlyBody
-		}
 		if (index === bestIndexInContentOnlyBody) {
 			console.log('\n[SIGN UP GOES HERE]\n');
 		}
@@ -242,7 +193,6 @@ function debugLoggingForFindIndex(
 	console.log({
 		bestIndexInContentOnlyBody,
 		bestIndexInOriginalBody,
-		paragraphsAfterAnAdslot,
 	});
 }
 

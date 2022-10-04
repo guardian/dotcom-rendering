@@ -61,4 +61,4 @@ const getAdPlaceholderInserter = (
 		? (reactNodes: ReactNode[]): ReactNode[] => reactNodes
 		: insertPlaceholders;
 
-export { getAdPlaceholderInserter, getAdIndices };
+export { getAdPlaceholderInserter };
