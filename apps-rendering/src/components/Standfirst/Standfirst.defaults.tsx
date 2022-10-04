@@ -6,7 +6,6 @@ import {
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign } from '@guardian/libs';
 import { headline, remSpace } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import type { Item } from 'item';
