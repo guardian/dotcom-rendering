@@ -1,5 +1,5 @@
 // ----- Imports ----- //
-import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
+import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import { ArticleDesign } from '@guardian/libs';
 import { OptionKind } from '@guardian/types';
 import type { Body, BodyElement, NewsletterSignUp } from 'bodyElement';
