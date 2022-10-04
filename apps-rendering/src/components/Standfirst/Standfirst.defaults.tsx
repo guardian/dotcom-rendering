@@ -16,10 +16,6 @@ import type { FC, ReactElement } from 'react';
 import { renderStandfirstText } from 'renderer';
 import { darkModeCss } from 'styles';
 
-const isNotBlog = (format: ArticleFormat): boolean =>
-	format.design !== ArticleDesign.LiveBlog &&
-	format.design !== ArticleDesign.DeadBlog;
-
 const darkStyles = (format: ArticleFormat): SerializedStyles => darkModeCss`
     background-color: ${background.standfirstDark(format)};
     color: ${text.standfirstDark(format)};
@@ -53,7 +49,7 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 		border-bottom: 0.0625rem solid ${border.standfirstBlogLink(format)};
 	}
 
-	${isNotBlog(format) && darkStyles(format)}
+	${darkStyles(format)}
 `;
 
 interface Props {
