@@ -186,15 +186,17 @@ export const hasOptedOutOfArticleCount = async (): Promise<boolean> => {
 
 // A hook to find out if a user has opted out of article counting
 export const useHasOptedOutOfArticleCount = (): boolean | 'Pending' => {
-	const [consent, setConsent] = useState<boolean | 'Pending'>('Pending');
+	const [hasOptedOut, setHasOptedOut] = useState<boolean | 'Pending'>(
+		'Pending',
+	);
 
 	useEffect(() => {
 		hasOptedOutOfArticleCount()
-			.then(setConsent)
-			.catch(() => setConsent(false));
+			.then(setHasOptedOut)
+			.catch(() => setHasOptedOut(true));
 	}, []);
 
-	return consent;
+	return hasOptedOut;
 };
 
 export const hasCmpConsentForBrowserId = (): Promise<boolean> =>
