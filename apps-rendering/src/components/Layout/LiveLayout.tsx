@@ -131,6 +131,7 @@ const LiveLayout: FC<Props> = ({ item }) => {
 			newer={toNullable(item.pagedBlocks.pagination.newer)}
 			oldest={toNullable(item.pagedBlocks.pagination.oldest)}
 			older={toNullable(item.pagedBlocks.pagination.older)}
+			supportsDarkMode={true}
 		/>
 	);
 
