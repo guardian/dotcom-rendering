@@ -1,6 +1,6 @@
 import { SerializedStyles, css } from '@emotion/react';
 
-import { space, textSans, until } from '@guardian/source-foundations';
+import { neutral, space, textSans, until } from '@guardian/source-foundations';
 import {
 	Hide,
 	LinkButton,
@@ -12,6 +12,7 @@ import {
 
 import { border, hover, text } from '../editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
+import { darkModeCss } from '../lib';
 
 type Props = {
 	currentPage: number;
@@ -51,6 +52,10 @@ const FlexSection = ({
 			display: flex;
 			align-items: center;
 			visibility: ${hide ? 'hidden' : 'visible'};
+
+			${darkModeCss(true)`
+				color: ${neutral[60]};
+			`}
 		`}
 	>
 		{children}
