@@ -60,7 +60,8 @@ const columnLinkTitle = css`
 		padding: 6px 0;
 		:hover,
 		:focus {
-		border: 5px solid ${border.focusHalo};
+			border: 5px solid ${border.focusHalo};
+		}
 	}
 
 	:hover,
