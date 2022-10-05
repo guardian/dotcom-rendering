@@ -6,7 +6,7 @@ import { getEpicViewLog } from '@guardian/support-dotcom-components';
 import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useArticleCounts } from '../../lib/article-count';
+import { useArticleCounts } from '../../lib/articleCount';
 import { submitComponentEvent } from '../browser/ophan/ophan';
 import {
 	getLastOneOffContributionTimestamp,

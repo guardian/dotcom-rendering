@@ -5,8 +5,8 @@ import type {
 import { cmp } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import type { ArticleCounts } from '../../lib/article-count';
-import { getArticleCounts } from '../../lib/article-count';
+import type { ArticleCounts } from '../../lib/articleCount';
+import { getArticleCounts } from '../../lib/articleCount';
 import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
 import { getLocaleCode } from '../lib/getCountryCode';
 import type {

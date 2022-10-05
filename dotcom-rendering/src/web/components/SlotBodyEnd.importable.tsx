@@ -5,7 +5,7 @@ import type {
 import { getCookie } from '@guardian/libs';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import { getArticleCounts } from '../../lib/article-count';
+import { getArticleCounts } from '../../lib/articleCount';
 import { getLocaleCode } from '../lib/getCountryCode';
 import type {
 	CandidateConfig,
