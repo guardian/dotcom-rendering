@@ -97,15 +97,13 @@ const Space = () => (
 	/>
 );
 
-const decidePaginationCss = (format: ArticleFormat): SerializedStyles => {
-	return css`
-		color: ${text.pagination(format)};
-		border: 1px solid ${border.pagination(format)};
-		:hover {
-			border: 1px solid ${hover.pagination(format)};
-		}
-	`;
-};
+const decidePaginationCss = (format: ArticleFormat): SerializedStyles => css`
+	color: ${text.pagination(format)};
+	border: 1px solid ${border.pagination(format)};
+	:hover {
+		border: 1px solid ${hover.pagination(format)};
+	}
+`;
 
 const Pagination = ({
 	currentPage,
