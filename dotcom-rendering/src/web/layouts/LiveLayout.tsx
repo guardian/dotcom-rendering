@@ -829,6 +829,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
+														supportsDarkMode={false}
 													/>
 												)}
 												<ArticleBody
@@ -934,6 +935,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
+														supportsDarkMode={false}
 													/>
 												)}
 												<StraightLines
@@ -988,6 +990,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
+														supportsDarkMode={false}
 													/>
 												)}
 												<ArticleBody
@@ -1093,6 +1096,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
+														supportsDarkMode={false}
 													/>
 												)}
 												<StraightLines

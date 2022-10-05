@@ -8,7 +8,6 @@ import {
 	renderFrontJson,
 	renderInteractive,
 	renderKeyEvents,
-	renderOnwards,
 } from '../web/server';
 
 // see https://www.npmjs.com/package/webpack-hot-server-middleware
@@ -30,8 +29,6 @@ export const devServer = () => {
 				return renderBlocks(req, res);
 			case '/KeyEvents':
 				return renderKeyEvents(req, res);
-			case '/Onwards':
-				return renderOnwards(req, res);
 			case '/Front':
 				return renderFront(req, res);
 			case '/FrontJSON':

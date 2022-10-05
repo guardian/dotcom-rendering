@@ -21,7 +21,12 @@ export const notFirstPage = () => {
 	return (
 		<>
 			{formats.map((format) => (
-				<Pagination currentPage={2} totalPages={6} format={format} />
+				<Pagination
+					currentPage={2}
+					totalPages={6}
+					format={format}
+					supportsDarkMode
+				/>
 			))}
 		</>
 	);
@@ -34,7 +39,12 @@ export const firstPageStory = () => {
 	return (
 		<>
 			{formats.map((format) => (
-				<Pagination currentPage={1} totalPages={4} format={format} />
+				<Pagination
+					currentPage={1}
+					totalPages={4}
+					format={format}
+					supportsDarkMode
+				/>
 			))}
 		</>
 	);
