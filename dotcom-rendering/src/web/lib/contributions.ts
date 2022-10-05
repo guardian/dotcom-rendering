@@ -179,22 +179,22 @@ export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
 	});
 };
 
-// A hook to find out if a user has consented to article counting
-export const useConsentForArticleCount = (): boolean | 'Pending' => {
+export const hasOptedOutOfArticleCount = async (): Promise<boolean> => {
+	const hasCmpConsent = await hasCmpConsentForArticleCount();
+	return !hasCmpConsent || hasArticleCountOptOutCookie();
+};
+
+// A hook to find out if a user has opted out of article counting
+export const useHasOptedOutOfArticleCount = (): boolean | 'Pending' => {
 	const [consent, setConsent] = useState<boolean | 'Pending'>('Pending');
 
 	useEffect(() => {
-		hasCmpConsentForArticleCount()
+		hasOptedOutOfArticleCount()
 			.then(setConsent)
 			.catch(() => setConsent(false));
 	}, []);
 
 	return consent;
-};
-
-export const hasOptedOutOfArticleCount = async (): Promise<boolean> => {
-	const hasCmpConsent = await hasCmpConsentForArticleCount();
-	return !hasCmpConsent || hasArticleCountOptOutCookie();
 };
 
 export const hasCmpConsentForBrowserId = (): Promise<boolean> =>

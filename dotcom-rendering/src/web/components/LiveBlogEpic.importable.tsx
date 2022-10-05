@@ -12,7 +12,7 @@ import {
 	getLastOneOffContributionTimestamp,
 	isRecurringContributor,
 	shouldHideSupportMessaging,
-	useConsentForArticleCount,
+	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
@@ -98,14 +98,14 @@ const usePayload = ({
 	keywordIds: string;
 }): EpicPayload | undefined => {
 	const articleCounts = useArticleCounts(pageId, keywordIds);
-	const consentForArticleCount = useConsentForArticleCount();
+	const hasOptedOutOfArticleCount = useHasOptedOutOfArticleCount();
 	const countryCode = useCountryCode();
 	const mvtId =
 		Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })) || 0;
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 
 	if (articleCounts === 'Pending') return;
-	if (consentForArticleCount === 'Pending') return;
+	if (hasOptedOutOfArticleCount === 'Pending') return;
 	log('dotcom', 'LiveBlogEpic has consent state');
 	if (!countryCode) return;
 	log('dotcom', 'LiveBlogEpic has countryCode');
@@ -132,7 +132,7 @@ const usePayload = ({
 			countryCode,
 			epicViewLog: getEpicViewLog(storage.local),
 			weeklyArticleHistory: articleCounts?.weeklyArticleHistory,
-			hasOptedOutOfArticleCount: !consentForArticleCount,
+			hasOptedOutOfArticleCount,
 			modulesVersion: 'v3',
 			url: window.location.origin + window.location.pathname,
 		},
