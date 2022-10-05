@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import {
+	border,
 	brand,
 	brandAlt,
 	brandText,
@@ -57,6 +58,9 @@ const columnLinkTitle = css`
 	${from.desktop} {
 		font-size: 16px;
 		padding: 6px 0;
+		:hover,
+		:focus {
+		border: 5px solid ${border.focusHalo};
 	}
 
 	:hover,
