@@ -1,10 +1,11 @@
 import { onConsentChange } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { CAPIArticleType } from '../../types/frontend';
 import type { IdApiUserData } from './getIdapiUserData';
 import { getIdApiUserData } from './getIdapiUserData';
+import { useOnce } from './useOnce';
 
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
@@ -190,7 +191,7 @@ export const useHasOptedOutOfArticleCount = (): boolean | 'Pending' => {
 		'Pending',
 	);
 
-	useEffect(() => {
+	useOnce(() => {
 		hasOptedOutOfArticleCount()
 			.then(setHasOptedOut)
 			.catch(() => setHasOptedOut(true));
