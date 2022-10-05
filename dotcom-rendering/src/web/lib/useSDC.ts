@@ -11,6 +11,17 @@ import type {
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import useSWRImmutable from 'swr';
 
+const useSDC = <T>(
+	key: string,
+	fetcher: (baseUrl: string, payload: T) => Promise<ModuleDataResponse>,
+): ModuleDataResponse | undefined => {
+	const { data, error } = useSWRImmutable(key, fetcher);
+	if (error) {
+		window.guardian.modules.sentry.reportError(error, 'rr-epic');
+	}
+	return data;
+};
+
 /**
  * Hooks for making requests to the support-dotcom-components API
  */
@@ -20,14 +31,13 @@ type UseSDC<T> = (
 ) => ModuleDataResponse | undefined;
 
 export const useSDCEpic: UseSDC<EpicPayload> = (baseUrl, payload) =>
-	useSWRImmutable('epic', () => getEpic(baseUrl, payload)).data;
+	useSDC('epic', () => getEpic(baseUrl, payload));
 
 export const useSDCLiveblogEpic: UseSDC<EpicPayload> = (baseUrl, payload) =>
-	useSWRImmutable('liveblog-epic', () => getLiveblogEpic(baseUrl, payload))
-		.data;
+	useSDC('liveblog-epic', () => getLiveblogEpic(baseUrl, payload));
 
 export const useSDCBanner: UseSDC<BannerPayload> = (baseUrl, payload) =>
-	useSWRImmutable('banner', () => getBanner(baseUrl, payload)).data;
+	useSDC('banner', () => getBanner(baseUrl, payload));
 
 export const useSDCPuzzlesBanner: UseSDC<BannerPayload> = (baseUrl, payload) =>
-	useSWRImmutable('puzzles', () => getPuzzlesBanner(baseUrl, payload)).data;
+	useSDC('puzzles', () => getPuzzlesBanner(baseUrl, payload));
