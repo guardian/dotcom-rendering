@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	border,
 	brand,
 	brandAlt,
 	brandText,
