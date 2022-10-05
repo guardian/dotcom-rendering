@@ -80,6 +80,10 @@ const metadataWrapperStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.DeadBlog:
 			return css`
 				background-color: ${neutral[93]};
+
+				${darkModeCss`
+					background-color: ${background.articleContentDark(format)};
+				`}
 			`;
 		default:
 			return css`
