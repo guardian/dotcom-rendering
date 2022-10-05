@@ -22,6 +22,7 @@ type Props = {
 	oldest?: string;
 	older?: string;
 	format: ArticleFormat;
+	supportsDarkMode: boolean;
 };
 
 const NavWrapper = ({ children }: { children: React.ReactNode }) => (
@@ -52,10 +53,6 @@ const FlexSection = ({
 			display: flex;
 			align-items: center;
 			visibility: ${hide ? 'hidden' : 'visible'};
-
-			${darkModeCss(true)`
-				color: ${neutral[60]};
-			`}
 		`}
 	>
 		{children}
@@ -72,12 +69,22 @@ const Bold = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-const Position = ({ children }: { children: React.ReactNode }) => (
+const Position = ({
+	children,
+	supportsDarkMode,
+}: {
+	children: React.ReactNode;
+	supportsDarkMode: boolean;
+}) => (
 	<div
 		css={css`
 			display: flex;
 			flex-direction: row;
 			${textSans.small()}
+
+			${darkModeCss(supportsDarkMode)`
+				color: ${neutral[60]};
+			`}
 		`}
 	>
 		{children}
@@ -113,6 +120,7 @@ const Pagination = ({
 	newest,
 	newer,
 	format,
+	supportsDarkMode,
 }: Props) => {
 	return (
 		<NavWrapper>
@@ -155,7 +163,7 @@ const Pagination = ({
 				</LinkButton>
 			</FlexSection>
 			<FlexSection>
-				<Position>
+				<Position supportsDarkMode={supportsDarkMode}>
 					<Bold>{currentPage}</Bold>
 					<Of />
 					<Bold>{totalPages}</Bold>
