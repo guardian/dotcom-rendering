@@ -9,14 +9,7 @@ import type {
 	BannerPayload,
 	EpicPayload,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import type { SWRConfiguration } from 'swr';
-import useSWR from 'swr';
-
-const options: SWRConfiguration = {
-	revalidateIfStale: false,
-	revalidateOnFocus: false,
-	revalidateOnReconnect: false,
-};
+import useSWRImmutable from 'swr';
 
 /**
  * Hooks for making requests to the support-dotcom-components API
@@ -27,14 +20,14 @@ type UseSDC<T> = (
 ) => ModuleDataResponse | undefined;
 
 export const useSDCEpic: UseSDC<EpicPayload> = (baseUrl, payload) =>
-	useSWR('epic', () => getEpic(baseUrl, payload), options).data;
+	useSWRImmutable('epic', () => getEpic(baseUrl, payload)).data;
 
 export const useSDCLiveblogEpic: UseSDC<EpicPayload> = (baseUrl, payload) =>
-	useSWR('liveblog-epic', () => getLiveblogEpic(baseUrl, payload), options)
+	useSWRImmutable('liveblog-epic', () => getLiveblogEpic(baseUrl, payload))
 		.data;
 
 export const useSDCBanner: UseSDC<BannerPayload> = (baseUrl, payload) =>
-	useSWR('banner', () => getBanner(baseUrl, payload), options).data;
+	useSWRImmutable('banner', () => getBanner(baseUrl, payload)).data;
 
 export const useSDCPuzzlesBanner: UseSDC<BannerPayload> = (baseUrl, payload) =>
-	useSWR('puzzles', () => getPuzzlesBanner(baseUrl, payload), options).data;
+	useSWRImmutable('puzzles', () => getPuzzlesBanner(baseUrl, payload)).data;
