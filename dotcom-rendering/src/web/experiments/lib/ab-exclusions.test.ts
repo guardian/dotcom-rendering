@@ -25,7 +25,16 @@ describe('canRun using participations', () => {
 		);
 	});
 
-	test('canRun using participations sets participation key and returns true if setParticipationsFlag is true, even if other participatio is present', () => {
+	test('canRun using participations returns true if setParticipationsFlag is true and participation already set', () => {
+		storage.local.set('gu.ab.participations', currentTestParticipation);
+
+		expect(setOrUseParticipations(true, abTestId, variantId)).toBe(true);
+		expect(getParticipationsFromLocalStorage()).toStrictEqual(
+			currentTestParticipation,
+		);
+	});
+
+	test('canRun using participations sets participation key and returns true if setParticipationsFlag is true, even if other participation is present', () => {
 		storage.local.set('gu.ab.participations', otherParticipation);
 
 		expect(setOrUseParticipations(true, abTestId, variantId)).toBe(true);
