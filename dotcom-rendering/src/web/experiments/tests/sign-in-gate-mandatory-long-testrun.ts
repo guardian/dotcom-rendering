@@ -17,7 +17,7 @@ export const signInGateMandatoryLongBucketingTestRun: ABTest = {
 	successMeasure: 'Users sign in or create a Guardian account',
 	audienceCriteria:
 		'Global, 3rd article of the day, lower priority than consent banner, simple articles (not gallery, live etc.), not signed in, not shown after dismiss, not on help, info sections etc. Exclude iOS 9 and guardian-live-australia. Suppresses other banners, and appears over epics',
-	dataLinkNames: 'SignInGateMandatoryLongTestRunUk',
+	dataLinkNames: 'SignInGateMandatoryLongBucketingTestRun',
 	idealOutcome:
 		'Increase the number of users signed in whilst running at a reasonable scale',
 	showForSensitive: false,
