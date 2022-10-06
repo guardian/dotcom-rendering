@@ -50,7 +50,6 @@ const notImplemented = (
 );
 
 const Layout: FC<Props> = ({ item, shouldHideAds }) => {
-	console.log('\n\n\nDESIGN', item.design);
 
 	if (
 		item.design === ArticleDesign.LiveBlog ||
