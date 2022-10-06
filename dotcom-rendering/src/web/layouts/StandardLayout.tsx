@@ -535,34 +535,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								)}
 							</div>
 						</GridItem>
-						<GridItem area="headline">
-							<div css={maxWidth}>
-								<ArticleHeadline
-									format={format}
-									headlineString={CAPIArticle.headline}
-									tags={CAPIArticle.tags}
-									byline={CAPIArticle.byline}
-									webPublicationDateDeprecated={
-										CAPIArticle.webPublicationDateDeprecated
-									}
-									hasStarRating={
-										!!CAPIArticle.starRating ||
-										CAPIArticle.starRating === 0
-									}
-								/>
-							</div>
-							{CAPIArticle.starRating ||
-							CAPIArticle.starRating === 0 ? (
-								<div css={starWrapper}>
-									<StarRating
-										rating={CAPIArticle.starRating}
-										size="large"
-									/>
-								</div>
-							) : (
-								<></>
-							)}
-						</GridItem>
 						<GridItem area="standfirst">
 							<Standfirst
 								format={format}
