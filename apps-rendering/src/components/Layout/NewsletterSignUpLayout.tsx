@@ -31,7 +31,14 @@ import {
 	onwardStyles,
 } from 'styles';
 import { themeToPillarString } from 'themeStyles';
-import NewsletterSignUpBanner from 'components/NewsletterSignUpBanner';
+import NewsletterSignUpPageBanner from 'components/NewsletterSignUpPageBanner';
+import NewsletterSignUpPageForm from 'components/NewsletterSignUpPageForm';
+import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
+
+// --- constants ---//
+const TEST_NEWSLETTER = {
+	identityName: 'test',
+} as Newsletter;
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -96,7 +103,7 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 		<main css={backgroundStyles(format)}>
 			<article className="js-article" css={BorderStyles}>
 				<header>
-					<NewsletterSignUpBanner format={getFormat(item)} />
+					<NewsletterSignUpPageBanner format={format} />
 					<Headline item={item} />
 
 					<Series item={item} />
@@ -110,7 +117,12 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 						<Logo item={item} />
 					</section>
 				</header>
-				<section>
+
+				<NewsletterSignUpPageForm
+					format={format}
+					newsletter={TEST_NEWSLETTER}
+				/>
+				<section css={BorderStyles}>
 					<MainMedia
 						format={getFormat(item)}
 						mainMedia={item.mainMedia}
