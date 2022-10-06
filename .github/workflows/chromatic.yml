@@ -3,11 +3,7 @@ name: Chromatic 👓
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - "dotcom-rendering/docs/**"
   pull_request:
-    paths-ignore:
-        - "dotcom-rendering/docs/**"
 
 jobs:
   chromatic:
