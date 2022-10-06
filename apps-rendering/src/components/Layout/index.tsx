@@ -20,6 +20,7 @@ import { renderAll, renderAllWithoutStyles } from 'renderer';
 import { Result } from 'result';
 import AnalysisLayout from './AnalysisLayout';
 import ImmersiveLayout from './ImmersiveLayout';
+import NewsletterSignUpLayout from './NewsletterSignUpLayout';
 
 // ----- Functions ----- //
 
@@ -49,6 +50,8 @@ const notImplemented = (
 );
 
 const Layout: FC<Props> = ({ item, shouldHideAds }) => {
+	console.log('\n\n\nDESIGN', item.design);
+
 	if (
 		item.design === ArticleDesign.LiveBlog ||
 		item.design === ArticleDesign.DeadBlog
@@ -128,6 +131,14 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 
 		return (
 			<StandardLayout item={item}>{render(item, body)}</StandardLayout>
+		);
+	}
+
+	if (item.design === ArticleDesign.NewsletterSignup) {
+		return (
+			<NewsletterSignUpLayout item={item}>
+				{render(item, body)}
+			</NewsletterSignUpLayout>
 		);
 	}
 

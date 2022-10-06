@@ -17,6 +17,7 @@ import {
 	specialReport,
 	labs,
 	brandAlt,
+	brand,
 } from '@guardian/source-foundations';
 import { Colour } from '.';
 
@@ -659,6 +660,10 @@ const editionsCameraIcon = (format: ArticleFormat): Colour => {
 	}
 };
 
+const newsletterSignUpBanner = (_format: ArticleFormat): Colour => {
+	return brand[400]
+}
+
 // ----- API ----- //
 
 const background = {
@@ -706,6 +711,7 @@ const background = {
 	articleContent,
 	signUpFormDark,
 	editionsCameraIcon,
+	newsletterSignUpBanner,
 };
 
 // ----- Exports ----- //
