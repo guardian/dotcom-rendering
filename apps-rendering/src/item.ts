@@ -398,6 +398,8 @@ const isCorrection = hasTag('theguardian/series/correctionsandclarifications');
 
 const isPicture = hasTag('type/picture');
 
+const isNewsletterSignUpPage = hasTag('info/newsletter-sign-up')
+
 const fromCapiLiveBlog =
 	(context: Context) =>
 	(
@@ -539,6 +541,11 @@ const fromCapi =
 				football: parseMatchScores(
 					fromNullable(request.footballContent),
 				),
+				...itemFieldsWithBody(context, request),
+			};
+		} else if (isNewsletterSignUpPage(tags)) {
+			return {
+				design: ArticleDesign.NewsletterSignup,
 				...itemFieldsWithBody(context, request),
 			};
 		}
