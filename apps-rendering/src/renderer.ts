@@ -10,8 +10,10 @@ import {
 	QandaAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
-import FigCaption from '@guardian/common-rendering/src/components/figCaption';
-import { Variant as FigCaptionVariant } from '@guardian/common-rendering/src/components/figCaption';
+import {
+	default as FigCaption,
+	Variant as FigCaptionVariant,
+} from '@guardian/common-rendering/src/components/figCaption';
 import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
