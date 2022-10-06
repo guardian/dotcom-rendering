@@ -469,7 +469,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				<AdSlot position="survey" display={format.display} />
 			)}
 
-			<main data-layout="StandardLayout">
+			<main data-layout="StandardLayouts">
 				<Section
 					fullWidth={true}
 					data-print-layout="hide"
