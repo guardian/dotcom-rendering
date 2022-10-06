@@ -96,6 +96,17 @@ const roleButtonText = (role: ArticleElementRole): string => {
 	}
 };
 
+const buttonStyles = css`
+	${darkModeCss`
+		color: ${neutral[10]};
+		background-color: ${neutral[86]};
+
+		&:hover {
+			background-color: ${neutral[97]};
+		}
+	`}
+`;
+
 const ClickToView: FC<ClickToViewProps> = ({
 	children,
 	role,
@@ -191,6 +202,7 @@ const ClickToView: FC<ClickToViewProps> = ({
 						icon={<SvgCheckmark />}
 						iconSide="left"
 						onClick={handleClick}
+						css={buttonStyles}
 					>
 						{roleButtonText(roleWithDefault)}
 					</Button>
