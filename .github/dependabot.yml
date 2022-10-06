@@ -17,6 +17,7 @@ updates:
           interval: 'daily'
       labels:
         - "AR Dependency"
+        - "dependencies"
       rebase-strategy: "disabled"
       ignore:
         # The version of the aws-cdk[-lib] & constructs dependencies should match exactly the version specified by @guardian/cdk
@@ -29,6 +30,7 @@ updates:
         interval: "daily"
       labels:
         - "DCR Dependency"
+        - "dependencies"
       open-pull-requests-limit: 10
       rebase-strategy: "disabled"
     - package-ecosystem: 'github-actions'
