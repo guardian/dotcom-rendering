@@ -10,13 +10,12 @@ import Headline from 'components/Headline';
 import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import RelatedContent from 'components/RelatedContent';
-import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import { getFormat } from 'item';
 import type { Standard as StandardItem } from 'item';
 import type { FC, ReactNode } from 'react';
 import {
-	articleWidthStyles,
+	// articleWidthStyles, [might want to use this]
 	darkModeCss,
 	onwardStyles,
 	wideContentWidth,
@@ -44,15 +43,13 @@ const sectionStyles = (format: ArticleFormat): SerializedStyles => css`
 	margin: 0 auto;
 	position: relative;
 
-	${from.tablet} {
-		width: ${tabletContentWidth}px;
-	}
+	max-width: ${tabletContentWidth}px;
 
 	${from.desktop} {
-		width: ${wideContentWidth}px;
+		max-width: ${wideContentWidth}px;
 	}
 
-	padding: ${remSpace[1]};
+	padding: 0 ${remSpace[2]};
 `;
 
 const BorderStyles = css`
@@ -75,16 +72,11 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 			<article className="js-article" css={BorderStyles}>
 				<header>
 					<NewsletterSignUpPageBanner format={format} />
-					<Headline item={item} />
-
-					<Series item={item} />
-					<div css={articleWidthStyles}>
+					<div css={sectionStyles(format)}>
+						<Headline item={item} />
 						<Standfirst item={item} />
-					</div>
-
-					<section css={articleWidthStyles}>
 						<Logo item={item} />
-					</section>
+					</div>
 				</header>
 
 				<section css={sectionStyles(format)}>
@@ -92,8 +84,7 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 						format={format}
 						newsletter={TEST_NEWSLETTER}
 					/>
-				</section>
-				<section css={sectionStyles(format)}>
+
 					<MainMedia
 						format={getFormat(item)}
 						mainMedia={item.mainMedia}

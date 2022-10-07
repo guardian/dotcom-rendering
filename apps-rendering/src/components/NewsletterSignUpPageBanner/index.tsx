@@ -7,7 +7,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import type { FC } from 'react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import { headline } from '@guardian/source-foundations';
-import { wideContentWidth } from 'styles';
 
 // ----- Component ----- //
 
@@ -17,7 +16,6 @@ interface Props {
 
 const style = (format: ArticleFormat): SerializedStyles => css`
 	margin: 0 auto;
-	max-width: ${wideContentWidth}px;
 	background-color: ${background.newsletterSignUpBanner(format)};
 	color: ${text.headlineDark(format)};
 	${headline.small()}
