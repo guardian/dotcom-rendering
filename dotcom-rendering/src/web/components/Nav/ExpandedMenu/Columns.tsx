@@ -14,8 +14,9 @@ import {
 	LinkButton,
 	SvgMagnifyingGlass,
 } from '@guardian/source-react-components';
-import type { EditionLinkType, NavType } from '../../../../model/extract-nav';
+import type { NavType } from '../../../../model/extract-nav';
 import type { EditionId } from '../../../../types/edition';
+import { getEditionFromId, getRemainingEditions } from '../../../lib/edition';
 import { Column, lineStyle } from './Column';
 import { MoreColumn } from './MoreColumn';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
@@ -138,50 +139,12 @@ const editionsSwitch = css`
 	}
 `;
 
-const editionList: EditionLinkType[] = [
-	{
-		url: '/preference/edition/au',
-		editionId: 'UK',
-		longTitle: 'UK edition',
-		title: 'UK edition',
-	},
-	{
-		url: '/preference/edition/us',
-		editionId: 'US',
-		longTitle: 'US edition',
-		title: 'US edition',
-	},
-	{
-		url: '/preference/edition/au',
-		editionId: 'AU',
-		longTitle: 'Australia edition',
-		title: 'AU edition',
-	},
-	{
-		url: '/preference/edition/int',
-		editionId: 'INT',
-		longTitle: 'International edition',
-		title: 'International edition',
-	},
-];
-
-const getEdition = (editionId: EditionId): EditionLinkType => {
-	return (
-		editionList.find((edition) => edition.editionId === editionId) ??
-		editionList[0]
-	);
-};
-
-const getRemainingEditions = (editionId: EditionId): EditionLinkType[] => {
-	return editionList.filter((edition) => edition.editionId !== editionId);
-};
-
 export const Columns: React.FC<{
 	editionId: EditionId;
 	format: ArticleFormat;
 	nav: NavType;
 }> = ({ format, nav, editionId }) => {
-	const activeEdition = getEdition(editionId);
+	const activeEdition = getEditionFromId(editionId);
 	const remainingEditions = getRemainingEditions(activeEdition.editionId);
 	return (
 		<ul
