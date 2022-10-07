@@ -42,6 +42,7 @@ const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
 
 const sectionStyles = (format: ArticleFormat): SerializedStyles => css`
 	margin: 0 auto;
+	position: relative;
 
 	${from.tablet} {
 		width: ${tabletContentWidth}px;

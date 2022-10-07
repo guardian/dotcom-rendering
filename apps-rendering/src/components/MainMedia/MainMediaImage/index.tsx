@@ -15,6 +15,7 @@ import DefaultMainMediaImage, {
 	defaultSizes,
 	defaultStyles,
 } from './MainMediaImage.defaults';
+import NewsletterSignupMainMediaImage from './NewsletterSignupMainMediaImage';
 
 // ----- Component ----- //
 
@@ -41,6 +42,8 @@ const MainMediaImage: FC<Props> = ({ image, format }: Props) => {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 			return <CommentMainMediaImage image={image} format={format} />;
+		case ArticleDesign.NewsletterSignup:
+			return <NewsletterSignupMainMediaImage image={image} format={format} />;
 		default:
 			return (
 				<DefaultMainMediaImage
