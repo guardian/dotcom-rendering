@@ -96,15 +96,13 @@ const roleButtonText = (role: ArticleElementRole): string => {
 	}
 };
 
-const buttonStyles = css`
-	${darkModeCss`
-		color: ${neutral[10]};
-		background-color: ${neutral[86]};
+const buttonStyles = darkModeCss`
+	color: ${neutral[10]};
+	background-color: ${neutral[86]};
 
-		&:hover {
-			background-color: ${neutral[97]};
-		}
-	`}
+	&:hover {
+		background-color: ${neutral[97]};
+	}
 `;
 
 const ClickToView: FC<ClickToViewProps> = ({
