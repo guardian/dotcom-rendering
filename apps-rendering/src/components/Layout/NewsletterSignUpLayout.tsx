@@ -28,6 +28,7 @@ import { tabletContentWidth } from 'components/editions/styles';
 // --- constants ---//
 const TEST_NEWSLETTER = {
 	identityName: 'test',
+	frequency: 'quarterly'
 } as Newsletter;
 
 // ----- Styles ----- //
