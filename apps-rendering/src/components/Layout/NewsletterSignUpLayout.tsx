@@ -28,7 +28,7 @@ import { tabletContentWidth } from 'components/editions/styles';
 // --- constants ---//
 const TEST_NEWSLETTER = {
 	identityName: 'test',
-	frequency: 'quarterly'
+	frequency: 'quarterly',
 } as Newsletter;
 
 // ----- Styles ----- //
@@ -72,7 +72,10 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 		<main css={backgroundStyles(format)}>
 			<article className="js-article" css={BorderStyles}>
 				<header>
-					<NewsletterSignUpPageBanner format={format} />
+					<NewsletterSignUpPageBanner
+						format={format}
+						innerCss={sectionStyles(format)}
+					/>
 					<div css={sectionStyles(format)}>
 						<Headline item={item} />
 						<Standfirst item={item} />
