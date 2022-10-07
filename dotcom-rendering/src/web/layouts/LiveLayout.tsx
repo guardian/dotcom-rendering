@@ -829,6 +829,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
+														supportsDarkMode={false}
 													/>
 												)}
 												<ArticleBody
@@ -912,6 +913,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														CAPIArticle.config
 															.abTests
 													}
+													keywordIds={
+														CAPIArticle.config
+															.keywordIds
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -930,6 +935,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
+														supportsDarkMode={false}
 													/>
 												)}
 												<StraightLines
@@ -984,6 +990,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
+														supportsDarkMode={false}
 													/>
 												)}
 												<ArticleBody
@@ -1067,6 +1074,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														CAPIArticle.config
 															.abTests
 													}
+													keywordIds={
+														CAPIArticle.config
+															.keywordIds
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1085,6 +1096,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
+														supportsDarkMode={false}
 													/>
 												)}
 												<StraightLines
@@ -1355,7 +1367,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						isPaidContent={CAPIArticle.pageType.isPaidContent}
 						isPreview={!!CAPIArticle.config.isPreview}
 						isSensitive={CAPIArticle.config.isSensitive}
-						keywordsId={CAPIArticle.config.keywordIds}
+						keywordIds={CAPIArticle.config.keywordIds}
 						pageId={CAPIArticle.pageId}
 						section={CAPIArticle.config.section}
 						sectionName={CAPIArticle.sectionName}

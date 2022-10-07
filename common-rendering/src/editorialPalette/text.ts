@@ -914,6 +914,8 @@ const relatedCardTimeAgo = (format: ArticleFormat): Colour => {
 	return neutral[46];
 };
 
+const relatedCardTimeAgoDark = (_format: ArticleFormat): Colour => neutral[60];
+
 const richLink = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -1131,6 +1133,7 @@ const text = {
 	relatedCardLink,
 	relatedCardLinkDark,
 	relatedCardTimeAgo,
+	relatedCardTimeAgoDark,
 	richLink,
 	richLinkAnchor,
 	richLinkAnchorDark,

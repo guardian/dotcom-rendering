@@ -49,7 +49,7 @@ import { MyComponent } from './MyComponent';
 
 ### Never name a file `index.ts` or `index.tsx`
 
-> Why? There is a common Node.js idiom to give the name `index` to the module at the entry point to a directory. This leads to an adundance of files named `index.ts*`, which makes it
+> Why? There is a common Node.js idiom to give the name `index` to the module at the entry point to a directory. This leads to an abundance of files named `index.ts*`, which makes it
 > harder to find a file in the IDE. When editing a number of files called `index.ts*` in an IDE, it is hard to see at a glance which one is which.
 
 ```js

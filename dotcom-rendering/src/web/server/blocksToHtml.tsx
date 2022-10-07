@@ -24,6 +24,7 @@ export const blocksToHtml = ({
 	sharedAdTargeting,
 	adUnit,
 	switches,
+	keywordIds,
 }: BlocksRequest): string => {
 	const format: ArticleFormat = decideFormat(CAPIFormat);
 
@@ -56,6 +57,7 @@ export const blocksToHtml = ({
 			tags={[]}
 			isPaidContent={false}
 			contributionsServiceUrl=""
+			keywordIds={keywordIds}
 		/>,
 	);
 
