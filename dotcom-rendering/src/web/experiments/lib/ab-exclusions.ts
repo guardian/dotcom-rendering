@@ -1,4 +1,6 @@
 import { Participations } from '@guardian/ab-core';
+import { OphanABEvent, OphanABPayload } from '@guardian/libs';
+import { getOphanRecordFunction } from '../../../web/browser/ophan/ophan';
 import {
 	getParticipationsFromLocalStorage,
 	setParticipationsInLocalStorage,
@@ -23,6 +25,21 @@ export const setParticipations = (
 	setParticipationsInLocalStorage(currentTestParticipation);
 };
 
+export const abTestPayload = (
+	testId: string,
+	variantName: string,
+): OphanABPayload => {
+	const records: { [key: string]: OphanABEvent } = {};
+	{
+		records[`ab${testId} - AbBucketed`] = {
+			variantName,
+			complete: false,
+		};
+	}
+
+	return { abTestRegister: records };
+};
+
 // Put this LAST in any row of canRun boolean functions so we don't set the flag unless all other criteria are true
 export const setOrUseParticipations = (
 	setParticipationsFlag: boolean, // If setParticipationsFlag is true, will set flag and run test, else will run based on flag
@@ -30,6 +47,7 @@ export const setOrUseParticipations = (
 	variantId: string, // IMPORTANT: Can only be used for single variant AB Tests!
 ): boolean => {
 	const participations = getParticipationsFromLocalStorage();
+	const ophanRecord = getOphanRecordFunction();
 
 	if (setParticipationsFlag) {
 		// check if participation already exists
@@ -42,6 +60,9 @@ export const setOrUseParticipations = (
 				variant: variantId,
 			},
 		});
+
+		ophanRecord(abTestPayload(abTestId, variantId));
+
 		return true; // test will be run
 	} else {
 		// if the test participation exists in localstorage, run the test

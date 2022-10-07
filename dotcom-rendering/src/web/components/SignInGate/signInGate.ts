@@ -4,10 +4,10 @@ import type { ABTest } from '@guardian/ab-core';
 import { signInGateMainControl } from '../../experiments/tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from '../../experiments/tests/sign-in-gate-main-variant';
 import {
-	signInGateMandatoryLongTestRunUk,
-	signInGateMandatoryLongTestRunAunz,
-	signInGateMandatoryLongTestRunEu,
-	signInGateMandatoryLongTestRunNa,
+	signInGateMandatoryLongBucketingTestRun,
+	signInGateMandatoryLongBucketingTestRunEu,
+	signInGateMandatoryLongBucketingTestRunNa,
+	signInGateMandatoryLongBucketingTestRunUk,
 } from '../../experiments/tests/sign-in-gate-mandatory-long-testrun';
 
 // Sign in Gate Types
@@ -23,26 +23,29 @@ import type { SignInGateTestMap } from './types';
 export const signInGateTests: ReadonlyArray<ABTest> = [
 	signInGateMainVariant,
 	signInGateMainControl,
-	signInGateMandatoryLongTestRunUk,
-	signInGateMandatoryLongTestRunAunz,
-	signInGateMandatoryLongTestRunEu,
-	signInGateMandatoryLongTestRunNa,
+	signInGateMandatoryLongBucketingTestRun,
+	signInGateMandatoryLongBucketingTestRunEu,
+	signInGateMandatoryLongBucketingTestRunNa,
+	signInGateMandatoryLongBucketingTestRunUk,
 ];
 
 export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
 	'main-control-4': gateMainControl,
 	'main-variant-4': gateMainVariant,
-	'mandatory-long-testrun-uk': gateMainVariant, // showing main gate for test run
-	'mandatory-long-testrun-na': gateMainVariant, // showing main gate for test run
-	'mandatory-long-testrun-aunz': gateMainVariant, // showing main gate for test run
-	'mandatory-long-testrun-eu': gateMainVariant, // showing main gate for test run
+	'mandatory-long-bucketing-testrun': gateMainVariant, // showing main gate for test run
+	'mandatory-long-bucketing-testrun-uk': gateMainVariant, // showing main gate for test run
+	'mandatory-long-bucketing-testrun-na': gateMainVariant, // showing main gate for test run
+	'mandatory-long-bucketing-testrun-eu': gateMainVariant, // showing main gate for test run
 };
 
 export const signInGateTestIdToComponentId: { [key: string]: string } = {
 	SignInGateMainVariant: 'main_variant_4',
 	SignInGateMainControl: 'main_control_4',
-	SignInGateMandatoryLongTestRunUk: 'mandatory_long_testrun_uk',
-	SignInGateMandatoryLongTestRunAunz: 'mandatory_long_testrun_aunz',
-	SignInGateMandatoryLongTestRunEu: 'mandatory_long_testrun_eu',
-	SignInGateMandatoryLongTestRunNa: 'mandatory_long_testrun_na',
+	SignInGateMandatoryLongBucketingTestRun: 'mandatory_long_bucketing_testrun',
+	SignInGateMandatoryLongBucketingTestRunUk:
+		'mandatory_long_bucketing_testrun_uk',
+	SignInGateMandatoryLongBucketingTestRunNa:
+		'mandatory_long_bucketing_testrun_na',
+	SignInGateMandatoryLongBucketingTestRunEu:
+		'mandatory_long_bucketing_testrun_eu',
 };
