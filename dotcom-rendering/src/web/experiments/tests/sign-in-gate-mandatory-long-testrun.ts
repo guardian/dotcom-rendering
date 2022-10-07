@@ -1,5 +1,5 @@
 import type { ABTest } from '@guardian/ab-core';
-import { getCountryCodeSync } from 'src/web/lib/getCountryCode';
+import { getCountryCodeSync } from '../../../web/lib/getCountryCode';
 import { setOrUseParticipations } from '../lib/ab-exclusions';
 
 // Flag to determine whether the canRun function 'setOrUseParticipations' will set a participation (true)
