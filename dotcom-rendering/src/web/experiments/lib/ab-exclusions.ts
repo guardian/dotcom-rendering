@@ -9,7 +9,7 @@ import {
 /**
  * Occasionally we may want to track long-running behavior of browsers in a certain test,
  * without adding new browsers to the test bucket. We cannot rely on the GU_mvt_id bucketing alone to do this.
- * You can use this method to show the gate based on local storage participation key ("gu.ab.participations") instead.
+ * You can use this method to show the gate based on local storage participation key ("gu.ab._participations") instead.
  *
  * After the cut off date users without the local storage participation key won't see the gate at all.
  *
@@ -21,7 +21,7 @@ import {
 export const setParticipations = (
 	currentTestParticipation: Participations,
 ): void => {
-	// sets participation under local storage key: 'gu.ab.participations'
+	// sets participation under local storage key: 'gu.ab._participations'
 	setParticipationsInLocalStorage(currentTestParticipation);
 };
 
