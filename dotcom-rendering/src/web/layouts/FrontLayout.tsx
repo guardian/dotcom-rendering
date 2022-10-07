@@ -66,12 +66,11 @@ const shouldInsertMerchHigh = (
 // we also exclude any containers that are directly before a thrasher
 // then we take every other container, up to a maximum of 10, for targeting MPU insertion
 
-const mobileAddPosition: number[] = [];
-
-const getMobileAddPosition = (
+const getMobileAdPositions = (
 	isNetworkFront: boolean | undefined,
 	collections: DCRCollectionType[],
 ) => {
+	let positions: number[] = [];
 	const merchHighPosition = getMerchHighPosition(
 		collections.length,
 		isNetworkFront,
@@ -86,13 +85,14 @@ const getMobileAddPosition = (
 		) {
 			return false;
 		} else if (ind % 2 === 0) {
-			mobileAddPosition.push(ind);
+			positions.push(ind);
 		}
 		return false;
 	});
-	if (mobileAddPosition.length > 10) {
-		mobileAddPosition.length = 10;
-	}
+
+	positions = positions.slice(0, 10);
+
+	return positions;
 };
 
 const isNavList = (collection: DCRCollectionType) => {
@@ -135,12 +135,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	 */
 	const renderAds = !front.isAdFreeUser;
 
-	if (front.isNetworkFront) {
-		getMobileAddPosition(
-			front.isNetworkFront,
-			front.pressedPage.collections,
-		);
-	}
+	const mobileAdPositions = front.isNetworkFront
+		? getMobileAdPositions(
+				front.isNetworkFront,
+				front.pressedPage.collections,
+		  )
+		: [];
 
 	return (
 		<>
@@ -274,11 +274,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										display={format.display}
 									/>
 								)}
-								{mobileAddPosition.includes(index) && (
+								{mobileAdPositions.includes(index) && (
 									<Hide from="tablet">
 										<AdSlot
+											index={index}
 											data-print-layout="hide"
-											position="merchandising"
+											position="mobile-front"
 											display={format.display}
 										/>
 									</Hide>
@@ -341,11 +342,12 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										display={format.display}
 									/>
 								)}
-								{mobileAddPosition.includes(index) && (
+								{mobileAdPositions.includes(index) && (
 									<Hide from="tablet">
 										<AdSlot
+											index={index}
 											data-print-layout="hide"
-											position="merchandising"
+											position="mobile-front"
 											display={format.display}
 										/>
 									</Hide>
@@ -405,9 +407,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									display={format.display}
 								/>
 							)}
-							{mobileAddPosition.includes(index) && (
+							{mobileAdPositions.includes(index) && (
 								<Hide from="tablet">
 									<AdSlot
+										index={index}
 										data-print-layout="hide"
 										position="mobile-front"
 										display={format.display}

@@ -255,7 +255,6 @@ export type DCRFrontCard = {
 	byline?: string;
 	showByline?: boolean;
 	avatarUrl?: string;
-	editionBrandings?: { edition: { id: EditionId } }[];
 };
 
 export type FESnapType = {

@@ -450,15 +450,17 @@ export const AdSlot = ({
 			);
 		}
 		case 'mobile-front': {
+			const advertId = index ? `inline${index}` : 'inline-0';
 			return (
 				<div
-					id={`dfp-ad--mobile-front`}
+					id={`dfp-ad--${advertId}`}
 					className={[
 						'js-ad-slot',
 						'ad-slot',
-						`ad-slot--mobile-front`,
+						`ad-slot--${advertId}`,
 						'ad-slot--container-inline',
-						'ad-slot--rendered',
+						'ad-slot--mobile',
+						'mobile-only',
 					].join(' ')}
 					css={[
 						css`
@@ -470,8 +472,8 @@ export const AdSlot = ({
 						`,
 						adStyles,
 					]}
-					data-link-name={`ad slot mobile-front`}
-					data-name={`mobile-front`}
+					data-link-name={`ad slot ${advertId}`}
+					data-name={`${advertId}`}
 					aria-hidden="true"
 				/>
 			);
