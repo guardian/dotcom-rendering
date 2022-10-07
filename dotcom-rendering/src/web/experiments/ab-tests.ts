@@ -1,6 +1,5 @@
 import type { ABTest } from '@guardian/ab-core';
 import { abTestTest } from './tests/ab-test-test';
-import { confiantSDKUpdateTest } from './tests/confiant-sdk-update';
 import { consentlessAds } from './tests/consentless-ads';
 import { integrateIMA } from './tests/integrate-ima';
 import {
@@ -32,5 +31,4 @@ export const tests: ABTest[] = [
 	signInGateMandatoryLongTestRunEu,
 	signInGateMandatoryLongTestRunNa,
 	shadyPieClickThrough,
-	confiantSDKUpdateTest,
 ];
