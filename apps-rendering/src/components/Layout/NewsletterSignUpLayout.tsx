@@ -4,36 +4,27 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticlePillar } from '@guardian/libs';
-import { breakpoints, from } from '@guardian/source-foundations';
-import {
-	DottedLines,
-	StraightLines,
-} from '@guardian/source-react-components-development-kitchen';
-import { map, withDefault } from '@guardian/types';
-import Epic from 'components/Epic';
+import { breakpoints, from, remSpace } from '@guardian/source-foundations';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
-import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import { getFormat } from 'item';
-import type { Item, Standard as StandardItem } from 'item';
-import { pipe } from 'lib';
+import type { Standard as StandardItem } from 'item';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
-	lineStyles,
 	onwardStyles,
+	wideContentWidth,
 } from 'styles';
-import { themeToPillarString } from 'themeStyles';
 import NewsletterSignUpPageBanner from 'components/NewsletterSignUpPageBanner';
 import NewsletterSignUpPageForm from 'components/NewsletterSignUpPageForm';
 import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
+import { tabletContentWidth } from 'components/editions/styles';
 
 // --- constants ---//
 const TEST_NEWSLETTER = {
@@ -49,25 +40,26 @@ const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
     `}
 `;
 
+const sectionStyles = (format: ArticleFormat): SerializedStyles => css`
+	margin: 0 auto;
+
+	${from.tablet} {
+		width: ${tabletContentWidth}px;
+	}
+
+	${from.desktop} {
+		width: ${wideContentWidth}px;
+	}
+
+	padding: ${remSpace[1]};
+`;
+
 const BorderStyles = css`
 	${from.wide} {
 		width: ${breakpoints.wide}px;
 		margin: 0 auto;
 	}
 `;
-
-const decideLines = (
-	item: Item,
-	cssOverrides?: SerializedStyles | SerializedStyles[],
-): JSX.Element => {
-	const count = item.design === ArticleDesign.Comment ? 8 : 4;
-
-	if (item.theme === ArticlePillar.Sport) {
-		return <DottedLines cssOverrides={cssOverrides} count={count} />;
-	}
-
-	return <StraightLines cssOverrides={cssOverrides} count={count} />;
-};
 
 interface Props {
 	item: StandardItem;
@@ -76,28 +68,6 @@ interface Props {
 
 const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 	const format = getFormat(item);
-	// client side code won't render an Epic if there's an element with this id
-	const epicContainer = item.shouldHideReaderRevenue ? null : (
-		<div css={articleWidthStyles}>
-			<Epic />
-		</div>
-	);
-
-	const commentContainer = item.commentable
-		? pipe(
-				item.internalShortId,
-				map((id) => (
-					<section
-						css={onwardStyles}
-						id="comments"
-						data-closed={false}
-						data-pillar={themeToPillarString(item.theme)}
-						data-short-id={id}
-					></section>
-				)),
-				withDefault(<></>),
-		  )
-		: null;
 
 	return (
 		<main css={backgroundStyles(format)}>
@@ -111,30 +81,28 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 						<Standfirst item={item} />
 					</div>
 
-					{decideLines(item, lineStyles)}
 					<section css={articleWidthStyles}>
-						<Metadata item={item} />
 						<Logo item={item} />
 					</section>
 				</header>
 
-				<NewsletterSignUpPageForm
-					format={format}
-					newsletter={TEST_NEWSLETTER}
-				/>
-				<section css={BorderStyles}>
+				<section css={sectionStyles(format)}>
+					<NewsletterSignUpPageForm
+						format={format}
+						newsletter={TEST_NEWSLETTER}
+					/>
+				</section>
+				<section css={sectionStyles(format)}>
 					<MainMedia
 						format={getFormat(item)}
 						mainMedia={item.mainMedia}
 					/>
 				</section>
-
-				{epicContainer}
 			</article>
 			<section css={onwardStyles}>
 				<RelatedContent item={item} />
 			</section>
-			{commentContainer}
+
 			<Footer isCcpa={false} format={item} />
 		</main>
 	);
