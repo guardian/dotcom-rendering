@@ -5,7 +5,7 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { some } from '@guardian/types';
 import type { FC } from 'react';
-import FigCaption, { Variant } from './figCaption';
+import FigCaption, { IconVariant } from './figCaption';
 
 // ----- Stories ----- //
 
@@ -17,7 +17,7 @@ const Image: FC = () => (
 			theme: ArticlePillar.News,
 		}}
 		supportsDarkMode={true}
-		variant={Variant.Image}
+		variant={IconVariant.Image}
 	>
 		{some(
 			'Age of the train … a tourist train in Switzerland. Photograph: Kisa_Markiza/Getty Images',
@@ -33,7 +33,7 @@ const Video: FC = () => (
 			theme: ArticlePillar.News,
 		}}
 		supportsDarkMode={true}
-		variant={Variant.Video}
+		variant={IconVariant.Video}
 	>
 		{some(
 			'Age of the train … a tourist train in Switzerland. Photograph: Kisa_Markiza/Getty Images',

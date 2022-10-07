@@ -10,9 +10,8 @@ import {
 	QandaAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
-import {
-	default as FigCaption,
-	Variant as FigCaptionVariant,
+import FigCaption, {
+	IconVariant as FigCaptionIconVariant,
 } from '@guardian/common-rendering/src/components/figCaption';
 import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
@@ -578,7 +577,7 @@ const mediaAtomRenderer = (
 		format: format,
 		supportsDarkMode: true,
 		children: some(h(Caption, { caption, format })),
-		variant: FigCaptionVariant.Video,
+		variant: FigCaptionIconVariant.Video,
 	});
 	return styledH('figure', figureAttributes, [
 		isEditions

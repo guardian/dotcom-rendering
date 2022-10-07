@@ -16,7 +16,7 @@ import { fill, text } from '@guardian/common-rendering/src/editorialPalette';
 
 // ----- Sub-Components ----- //
 
-enum Variant {
+enum IconVariant {
 	Image,
 	Video,
 }
@@ -24,7 +24,7 @@ enum Variant {
 interface IconProps {
 	format: ArticleFormat;
 	supportsDarkMode: boolean;
-	variant: Variant;
+	variant: IconVariant;
 }
 
 const iconStyles = (supportsDarkMode: boolean): SerializedStyles => css`
@@ -61,7 +61,11 @@ const Icon: FC<IconProps> = ({ format, supportsDarkMode, variant }) => {
 		default:
 			return (
 				<span css={iconStyles(supportsDarkMode)}>
-					{variant === Variant.Image ? <SvgCamera /> : <SvgVideo />}
+					{variant === IconVariant.Image ? (
+						<SvgCamera />
+					) : (
+						<SvgVideo />
+					)}
 				</span>
 			);
 	}
@@ -75,7 +79,7 @@ type Props = {
 	children: Option<ReactNode>;
 	className?: string;
 	css?: SerializedStyles;
-	variant?: Variant;
+	variant?: IconVariant;
 };
 
 const styles = (format: ArticleFormat, supportsDarkMode: boolean) => css`
@@ -118,7 +122,7 @@ const FigCaption: FC<Props> = ({
 	supportsDarkMode,
 	children,
 	className,
-	variant = Variant.Image,
+	variant = IconVariant.Image,
 }) => {
 	switch (children.kind) {
 		case OptionKind.Some:
@@ -145,4 +149,4 @@ const FigCaption: FC<Props> = ({
 
 export default FigCaption;
 
-export { Variant };
+export { IconVariant };
