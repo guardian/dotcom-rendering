@@ -453,7 +453,7 @@ export const AdSlot = ({
 			const advertId = index ? `inline${index}` : 'inline-0';
 			return (
 				<div
-					id={`dfp-ad--${advertId}`}
+					id={`dfp-ad--${advertId}--mobile`}
 					className={[
 						'js-ad-slot',
 						'ad-slot',
@@ -461,6 +461,7 @@ export const AdSlot = ({
 						'ad-slot--container-inline',
 						'ad-slot--mobile',
 						'mobile-only',
+						'ad-slot--rendered',
 					].join(' ')}
 					css={[
 						css`
