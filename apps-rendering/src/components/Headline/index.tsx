@@ -50,7 +50,12 @@ const Headline: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Gallery:
 			return <GalleryHeadline headline={item.headline} format={format} />;
 		case ArticleDesign.NewsletterSignup:
-			return <NewsletterSignupHeadline headline={item.headline} format={format} />;
+			return (
+				<NewsletterSignupHeadline
+					headline={item.headline}
+					format={format}
+				/>
+			);
 		default:
 			return (
 				<DefaultHeadline

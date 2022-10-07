@@ -1,14 +1,15 @@
 // ----- Imports ----- //
 
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
+import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
+import { NewsletterFrequency } from '@guardian/common-rendering/src/components/NewsletterFrequency';
 import type { ArticleFormat } from '@guardian/libs';
-import type { FC } from 'react';
-import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
+import { neutral, remSpace, textSans } from '@guardian/source-foundations';
+import ShareIcon from 'components/editions/shareIcon';
 import EmailSignupForm from 'components/NewsletterSignup/EmailSignupForm';
 import PrivacyWording from 'components/NewsletterSignup/PrivacyWording';
-import { NewsletterFrequency } from '@guardian/common-rendering/src/components/NewsletterFrequency';
-import ShareIcon from 'components/editions/shareIcon';
-import { SerializedStyles, css } from '@emotion/react';
-import { neutral, remSpace, textSans } from '@guardian/source-foundations';
+import type { FC } from 'react';
 
 // ----- Component ----- //
 

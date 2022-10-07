@@ -2,13 +2,17 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { breakpoints, from, remSpace } from '@guardian/source-foundations';
+import { tabletContentWidth } from 'components/editions/styles';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
+import NewsletterSignUpPageBanner from 'components/NewsletterSignUpPageBanner';
+import NewsletterSignUpPageForm from 'components/NewsletterSignUpPageForm';
 import RelatedContent from 'components/RelatedContent';
 import Standfirst from 'components/Standfirst';
 import { getFormat } from 'item';
@@ -20,10 +24,6 @@ import {
 	onwardStyles,
 	wideContentWidth,
 } from 'styles';
-import NewsletterSignUpPageBanner from 'components/NewsletterSignUpPageBanner';
-import NewsletterSignUpPageForm from 'components/NewsletterSignUpPageForm';
-import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
-import { tabletContentWidth } from 'components/editions/styles';
 
 // --- constants ---//
 const TEST_NEWSLETTER = {

@@ -43,7 +43,9 @@ const MainMediaImage: FC<Props> = ({ image, format }: Props) => {
 		case ArticleDesign.Letter:
 			return <CommentMainMediaImage image={image} format={format} />;
 		case ArticleDesign.NewsletterSignup:
-			return <NewsletterSignupMainMediaImage image={image} format={format} />;
+			return (
+				<NewsletterSignupMainMediaImage image={image} format={format} />
+			);
 		default:
 			return (
 				<DefaultMainMediaImage

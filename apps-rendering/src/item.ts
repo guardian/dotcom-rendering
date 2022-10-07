@@ -398,7 +398,7 @@ const isCorrection = hasTag('theguardian/series/correctionsandclarifications');
 
 const isPicture = hasTag('type/picture');
 
-const isNewsletterSignUpPage = hasTag('info/newsletter-sign-up')
+const isNewsletterSignUpPage = hasTag('info/newsletter-sign-up');
 
 const fromCapiLiveBlog =
 	(context: Context) =>
