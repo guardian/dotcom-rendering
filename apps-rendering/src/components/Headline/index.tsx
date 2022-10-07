@@ -11,6 +11,7 @@ import ImmersiveHeadline from './ImmersiveHeadline';
 import InterviewHeadline from './InterviewHeadline';
 import LabsHeadline from './LabsHeadline';
 import MediaHeadline from './MediaHeadline';
+import NewsletterSignupHeadline from './NewsletterSignupHeadline';
 import ReviewHeadline from './ReviewHeadline';
 
 interface Props {
@@ -48,6 +49,8 @@ const Headline: React.FC<Props> = ({ item }) => {
 			return <ReviewHeadline item={item} />;
 		case ArticleDesign.Gallery:
 			return <GalleryHeadline headline={item.headline} format={format} />;
+		case ArticleDesign.NewsletterSignup:
+			return <NewsletterSignupHeadline headline={item.headline} format={format} />;
 		default:
 			return (
 				<DefaultHeadline

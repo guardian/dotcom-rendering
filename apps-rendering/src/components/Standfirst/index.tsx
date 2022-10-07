@@ -13,6 +13,7 @@ import InterviewStandfirst from './InterviewStandfirst';
 import LabsStandfirst from './LabsStandfirst';
 import LiveBlogStandfirst from './LiveBlogStandfirst';
 import MediaStandfirst from './MediaStandfirst';
+import NewsletterSignupStandfirst from './NewsletterSignupStandfirst';
 import ReviewStandfirst from './ReviewStandfirst';
 import DefaultStandfirst, { defaultStyles } from './Standfirst.defaults';
 
@@ -66,6 +67,8 @@ const Standfirst: React.FC<Props> = ({ item }) => {
 			return <AnalysisStandfirst item={item} />;
 		case ArticleDesign.Explainer:
 			return <ExplainerStandfirst item={item} />;
+		case ArticleDesign.NewsletterSignup:
+			return <NewsletterSignupStandfirst item={item} />;
 		default:
 			return (
 				<DefaultStandfirst
