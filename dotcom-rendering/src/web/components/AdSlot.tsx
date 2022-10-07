@@ -16,7 +16,7 @@ import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
 type InlineProps = {
 	display?: ArticleDisplay;
-	position: 'inline';
+	position: 'inline' | 'mobile-front';
 	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
@@ -32,8 +32,8 @@ type NonInlineProps = {
 
 /**
  * This union type allows us to conditionally require the index property
- * based on position. If position = 'inline' then we expect the index
- * value. If not, then we explictly refuse this property
+ * based on position. If position = 'inline' | 'mobile-front' then we expect the index
+ * value. If not, then we explicitly refuse this property
  */
 type Props = InlineProps | NonInlineProps;
 
