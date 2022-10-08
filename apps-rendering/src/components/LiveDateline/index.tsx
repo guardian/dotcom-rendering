@@ -8,6 +8,7 @@ import type { Option } from '@guardian/types';
 import { makeRelativeDate } from 'date';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
+import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
@@ -21,6 +22,10 @@ const livePulse = keyframes`
 const timestampStyles = (isDeadBlog = false): ReturnType<typeof css> => css`
 	color: ${isDeadBlog ? neutral[7] : neutral[100]};
 	${textSans.xxsmall({ lineHeight: 'tight' })}
+
+	${darkModeCss`
+		color: ${isDeadBlog ? neutral[60] : neutral[100]};
+	`}
 `;
 
 const liveSpanStyles = css`

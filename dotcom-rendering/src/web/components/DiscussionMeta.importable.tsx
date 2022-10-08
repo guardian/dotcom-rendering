@@ -4,7 +4,7 @@ import { useApi } from '../lib/useApi';
 import { useDiscussion } from '../lib/useDiscussion';
 import { SignedInAs } from './SignedInAs';
 
-export type Props = {
+type Props = {
 	format: ArticleFormat;
 	discussionApiUrl: string;
 	shortUrlId: string;

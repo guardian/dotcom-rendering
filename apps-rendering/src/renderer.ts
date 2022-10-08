@@ -10,7 +10,9 @@ import {
 	QandaAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
-import FigCaption from '@guardian/common-rendering/src/components/figCaption';
+import FigCaption, {
+	IconVariant as FigCaptionIconVariant,
+} from '@guardian/common-rendering/src/components/figCaption';
 import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
@@ -565,9 +567,9 @@ const mediaAtomRenderer = (
 	};
 
 	const attributes = {
-		'data-posterUrl': posterUrl,
-		'data-videoId': videoId,
-		'data-duration': duration,
+		'data-posterurl': posterUrl,
+		'data-videoid': videoId,
+		'data-duration': withDefault<number | null>(null)(duration),
 		className: 'js-native-video',
 		css: styles,
 	};
@@ -575,6 +577,7 @@ const mediaAtomRenderer = (
 		format: format,
 		supportsDarkMode: true,
 		children: some(h(Caption, { caption, format })),
+		variant: FigCaptionIconVariant.Video,
 	});
 	return styledH('figure', figureAttributes, [
 		isEditions

@@ -26,6 +26,7 @@ type Props = {
 	shouldHideReaderRevenue: boolean;
 	tags: TagType[];
 	isPaidContent: boolean;
+	keywordIds: string;
 	contributionsServiceUrl: string;
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
@@ -51,6 +52,7 @@ export const LiveBlogRenderer = ({
 	shouldHideReaderRevenue,
 	tags,
 	isPaidContent,
+	keywordIds,
 	contributionsServiceUrl,
 	onFirstPage,
 	keyEvents,
@@ -86,7 +88,7 @@ export const LiveBlogRenderer = ({
 					</PinnedPost>
 				</>
 			)}
-			{switches.keyEventsCarousel && keyEvents?.length ? (
+			{keyEvents?.length ? (
 				<Hide above="desktop">
 					<Island deferUntil="visible">
 						<KeyEventsCarousel
@@ -96,15 +98,14 @@ export const LiveBlogRenderer = ({
 							id={'key-events-carousel-mobile'}
 						/>
 					</Island>
-					{!switches.automaticFilters ||
-						(!availableTopics && (
-							<Island deferUntil="visible">
-								<FilterKeyEventsToggle
-									filterKeyEvents={filterKeyEvents}
-									id="filter-toggle-mobile"
-								/>
-							</Island>
-						))}
+					{(!switches.automaticFilters || !availableTopics) && (
+						<Island deferUntil="visible">
+							<FilterKeyEventsToggle
+								filterKeyEvents={filterKeyEvents}
+								id="filter-toggle-mobile"
+							/>
+						</Island>
+					)}
 				</Hide>
 			) : (
 				<></>
@@ -153,6 +154,8 @@ export const LiveBlogRenderer = ({
 						tags={tags}
 						isPaidContent={isPaidContent}
 						contributionsServiceUrl={contributionsServiceUrl}
+						pageId={pageId}
+						keywordIds={keywordIds}
 					/>
 				</Island>
 			)}

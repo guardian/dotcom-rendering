@@ -52,9 +52,7 @@ export const LiveBlock = ({
 			id={block.id}
 			blockTitle={block.title}
 			blockFirstPublished={block.blockFirstPublished}
-			blockFirstPublishedDisplay={
-				block.blockFirstPublishedDisplayNoTimezone
-			}
+			blockFirstPublishedDisplay={block.blockFirstPublishedDisplay}
 			blockId={block.id}
 			isLiveUpdate={isLiveUpdate}
 			contributors={block.contributors}

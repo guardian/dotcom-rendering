@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -22,8 +23,8 @@ const Snap100 = ({
 }) => {
 	if (!snaps[0]) return null;
 	return (
-		<UL>
-			<LI padSides={true} padBottom={true}>
+		<UL padBottom={true}>
+			<LI padSides={true}>
 				<FrontCard
 					trail={snaps[0]}
 					containerPalette={containerPalette}
@@ -52,8 +53,8 @@ const Card100 = ({
 }) => {
 	if (!cards[0]) return null;
 	return (
-		<UL>
-			<LI padSides={true} padBottom={true}>
+		<UL padBottom={true}>
+			<LI padSides={true}>
 				<FrontCard
 					trail={cards[0]}
 					containerPalette={containerPalette}
@@ -84,7 +85,7 @@ const Card75_Card25 = ({
 
 	return (
 		<UL direction="row">
-			<LI padSides={true} padBottomOnMobile={true} percentage="75%">
+			<LI padSides={true} percentage="75%">
 				<FrontCard
 					trail={cards[0]}
 					containerPalette={containerPalette}
@@ -98,7 +99,7 @@ const Card75_Card25 = ({
 					trailText={cards[0].trailText}
 				/>
 			</LI>
-			<LI padSides={true} padBottomOnMobile={false} percentage="25%">
+			<LI padSides={true} percentage="25%" showDivider={true}>
 				<FrontCard
 					trail={cards[1]}
 					containerPalette={containerPalette}
@@ -130,9 +131,7 @@ const Card25_Card25_Card25_Card25 = ({
 					<LI
 						key={card.url}
 						padSides={true}
-						padBottom={false}
-						padBottomOnMobile={cardIndex < cards.length - 1}
-						showDivider={true}
+						showDivider={cardIndex > 0}
 					>
 						<FrontCard
 							trail={card}
@@ -168,10 +167,7 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 					<LI
 						key={card.url}
 						padSides={true}
-						showTopMarginWhenStacked={false}
-						padBottom={false}
-						padBottomOnMobile={cardIndex < bigs.length - 1}
-						showDivider={true}
+						showDivider={cardIndex > 0}
 						percentage="25%"
 					>
 						<FrontCard
@@ -184,26 +180,14 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 					</LI>
 				);
 			})}
-			<LI
-				showDivider={true}
-				showTopMarginWhenStacked={true}
-				percentage="25%"
-			>
+			<LI showDivider={bigs.length > 0} percentage="25%">
 				<UL direction="row" wrapCards={true}>
-					{remaining.map((card, cardIndex) => {
+					{remaining.map((card) => {
 						return (
 							<LI
 								percentage="100%"
 								key={card.url}
 								padSides={true}
-								showTopMarginWhenStacked={false}
-								padBottom={
-									// No bottom margin on the last card
-									cardIndex < 1
-								}
-								padBottomOnMobile={
-									cardIndex < remaining.length - 1
-								}
 							>
 								<FrontCard
 									trail={card}
@@ -241,11 +225,8 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 					<LI
 						key={card.url}
 						padSides={true}
-						showTopMarginWhenStacked={false}
-						padBottom={false}
-						padBottomOnMobile={cardIndex < bigs.length - 1}
 						percentage="25%"
-						showDivider={true}
+						showDivider={cardIndex > 0}
 					>
 						<FrontCard
 							trail={card}
@@ -257,11 +238,7 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 					</LI>
 				);
 			})}
-			<LI
-				showDivider={true}
-				showTopMarginWhenStacked={true}
-				percentage="50%"
-			>
+			<LI showDivider={true} percentage="50%">
 				<UL direction="row" wrapCards={true}>
 					{remaining.map((card, cardIndex) => {
 						return (
@@ -269,14 +246,12 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 								percentage="50%"
 								key={card.url}
 								padSides={true}
-								showTopMarginWhenStacked={false}
-								padBottom={
-									// No bottom margin on the last card
-									cardIndex < 2
-								}
-								padBottomOnMobile={
-									cardIndex < remaining.length - 1
-								}
+								showDivider={true}
+								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
+									cardIndex,
+									remaining.length,
+									2,
+								)}
 							>
 								<FrontCard
 									trail={card}
@@ -309,17 +284,9 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 
 	return (
 		<UL direction="row">
-			{bigs.map((card, cardIndex) => {
+			{bigs.map((card) => {
 				return (
-					<LI
-						key={card.url}
-						padSides={true}
-						showTopMarginWhenStacked={false}
-						padBottom={false}
-						padBottomOnMobile={cardIndex < bigs.length - 1}
-						percentage="25%"
-						showDivider={true}
-					>
+					<LI key={card.url} padSides={true} percentage="25%">
 						<FrontCard
 							trail={card}
 							containerPalette={containerPalette}
@@ -330,11 +297,7 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 					</LI>
 				);
 			})}
-			<LI
-				showDivider={true}
-				showTopMarginWhenStacked={true}
-				percentage="75%"
-			>
+			<LI showDivider={true} percentage="75%">
 				<UL direction="row" wrapCards={true}>
 					{remaining.map((card, cardIndex) => {
 						return (
@@ -342,15 +305,12 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 								percentage="33.333%"
 								key={card.url}
 								padSides={true}
-								showTopMarginWhenStacked={false}
-								padBottom={
-									// No bottom margin on the last card
-									cardIndex < 3
-								}
 								showDivider={true}
-								padBottomOnMobile={
-									cardIndex < remaining.length - 1
-								}
+								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
+									cardIndex,
+									remaining.length,
+									3,
+								)}
 							>
 								<FrontCard
 									trail={card}
@@ -380,7 +340,7 @@ const Card75_ColumnOfCards25 = ({
 }) => {
 	const [primary, ...remaining] = cards;
 	return (
-		<UL direction="row">
+		<UL direction="row" padBottom={true}>
 			<LI padSides={true} percentage="75%">
 				<FrontCard
 					trail={primary}
@@ -395,24 +355,11 @@ const Card75_ColumnOfCards25 = ({
 					isDynamo={true}
 				/>
 			</LI>
-			<LI
-				showDivider={true}
-				showTopMarginWhenStacked={true}
-				percentage="25%"
-			>
+			<LI showDivider={true} percentage="25%">
 				<UL direction="column">
 					{remaining.map((card, cardIndex) => {
 						return (
-							<LI
-								key={card.url}
-								padSides={true}
-								showTopMarginWhenStacked={false}
-								padBottom={
-									// No bottom margin on the last card
-									cardIndex < remaining.length - 1
-								}
-								padBottomOnMobile={false}
-							>
+							<LI key={card.url} padSides={true}>
 								<FrontCard
 									trail={card}
 									containerPalette={containerPalette}

@@ -13,15 +13,6 @@ import {
 
 type ColourType = string;
 
-export const pillarNames: ArticleTheme[] = [
-	ArticlePillar.News,
-	ArticlePillar.Opinion,
-	ArticlePillar.Sport,
-	ArticlePillar.Culture,
-	ArticlePillar.Lifestyle,
-	ArticleSpecial.Labs,
-];
-
 type PillarPalette = {
 	dark: ColourType;
 	main: ColourType;

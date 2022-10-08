@@ -3,6 +3,7 @@ import {
 	brand,
 	brandAlt,
 	brandText,
+	focusHalo,
 	from,
 	textSans,
 	until,
@@ -13,7 +14,7 @@ import TwitterIconPadded from '../../../../static/icons/twitter-padded.svg';
 
 const pillarHeight = 42;
 
-export const hideDesktop = css`
+const hideDesktop = css`
 	${from.desktop} {
 		display: none;
 	}
@@ -146,6 +147,7 @@ const columnLinks = css`
 `;
 
 const columnLinkTitle = css`
+	overflow: clip;
 	${textSans.medium({ lineHeight: 'tight' })};
 	background-color: transparent;
 	text-decoration: none;
@@ -168,6 +170,10 @@ const columnLinkTitle = css`
 	${from.desktop} {
 		font-size: 16px;
 		padding: 6px 0;
+		:hover,
+		:focus {
+			${focusHalo};
+		}
 	}
 
 	:hover,
@@ -183,7 +189,6 @@ const columnLinkTitle = css`
 
 const mainMenuLinkStyle = css`
 	box-sizing: border-box;
-	overflow: hidden;
 	position: relative;
 	width: 100%;
 	${from.desktop} {

@@ -20,7 +20,6 @@ import { getFormat } from 'item';
 import { index } from 'lib';
 import { MainMediaKind } from 'mainMedia';
 import type { FC } from 'react';
-import { getThemeStyles } from 'themeStyles';
 import Series from '../series';
 import {
 	articleWidthStyles,
@@ -152,7 +151,7 @@ const getSharedStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const getQuoteStyles = (format: ArticleFormat): SerializedStyles => {
-	const { kicker } = getThemeStyles(format.theme);
+	const kicker = text.editionsKicker(format);
 
 	return css`
 		margin: 0;
@@ -265,7 +264,7 @@ interface Props {
 
 const Headline: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
-	const { kicker: kickerColor } = getThemeStyles(format.theme);
+	const kickerColor = text.editionsKicker(format);
 	const contributor = index(0)(item.contributors);
 
 	const hasImage =

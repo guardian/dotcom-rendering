@@ -3,6 +3,7 @@ import {
 	brand,
 	brandAlt,
 	brandText,
+	focusHalo,
 	from,
 	textSans,
 	until,
@@ -12,7 +13,7 @@ import type { PillarType } from '../../../../model/extract-nav';
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS
-export const hideDesktop = css`
+const hideDesktop = css`
 	${from.desktop} {
 		display: none;
 	}
@@ -35,6 +36,7 @@ const pillarDivider = css`
 `;
 
 const columnLinkTitle = css`
+	overflow: clip;
 	${textSans.medium({ lineHeight: 'tight' })};
 	background-color: transparent;
 	text-decoration: none;
@@ -57,6 +59,10 @@ const columnLinkTitle = css`
 	${from.desktop} {
 		font-size: 16px;
 		padding: 6px 0;
+		:hover,
+		:focus {
+			${focusHalo};
+		}
 	}
 
 	:hover,
@@ -72,7 +78,6 @@ const columnLinkTitle = css`
 
 const mainMenuLinkStyle = css`
 	box-sizing: border-box;
-	overflow: hidden;
 	position: relative;
 	width: 100%;
 	${from.desktop} {
@@ -141,7 +146,7 @@ const hideWhenNotChecked = (columnInputId: string) => css`
 	}
 `;
 
-const lineStyle = css`
+export const lineStyle = css`
 	background-color: ${brand[600]};
 	content: '';
 	display: block;
@@ -195,9 +200,11 @@ const columnStyle = css`
 export const Column = ({
 	column,
 	index,
+	isLastColumn,
 }: {
 	column: PillarType;
 	index: number;
+	isLastColumn: boolean;
 }) => {
 	// As the elements are dynamic we need to specify the IDs here
 	const columnInputId = `${column.title}-checkbox-input`;
@@ -289,7 +296,9 @@ export const Column = ({
 					</li>
 				))}
 			</ul>
-			<div css={[hideWhenChecked(columnInputId), lineStyle]}></div>
+			{isLastColumn && (
+				<div css={[hideWhenChecked(columnInputId), lineStyle]}></div>
+			)}
 		</li>
 	);
 };

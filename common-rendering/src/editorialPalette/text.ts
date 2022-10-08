@@ -812,6 +812,24 @@ const kicker = (format: ArticleFormat): Colour => {
 	}
 };
 
+const editionsKicker = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.Labs:
+			return specialReport[400];
+		default:
+			return news[400];
+	}
+};
+
 const seriesTitle = (format: ArticleFormat): Colour => {
 	if (format.display === ArticleDisplay.Immersive) {
 		return neutral[100];
@@ -895,6 +913,8 @@ const relatedCardTimeAgo = (format: ArticleFormat): Colour => {
 	}
 	return neutral[46];
 };
+
+const relatedCardTimeAgoDark = (_format: ArticleFormat): Colour => neutral[60];
 
 const richLink = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
@@ -1102,6 +1122,7 @@ const text = {
 	keyEventsInline,
 	keyEventsLeftColumn,
 	kicker,
+	editionsKicker,
 	linkDark,
 	mediaArticleBody,
 	mediaArticleBodyLinkDark,
@@ -1112,6 +1133,7 @@ const text = {
 	relatedCardLink,
 	relatedCardLinkDark,
 	relatedCardTimeAgo,
+	relatedCardTimeAgoDark,
 	richLink,
 	richLinkAnchor,
 	richLinkAnchorDark,

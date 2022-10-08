@@ -285,13 +285,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const cricketMatchUrl =
 		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
 
-	const showKeyEventsCarousel = CAPIArticle.config.switches.keyEventsCarousel;
-
-	const isInFilteringBeta = !!(
-		CAPIArticle.config.switches.automaticFilters &&
-		CAPIArticle.availableTopics
-	);
-
 	const showTopicFilterBank = !!CAPIArticle.config.switches.automaticFilters;
 
 	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
@@ -586,7 +579,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandFirstGrid>
 				</Section>
-				{showKeyEventsCarousel && CAPIArticle.keyEvents.length > 0 ? (
+				{CAPIArticle.keyEvents.length > 0 ? (
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
@@ -814,7 +807,8 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									) : (
 										<></>
 									)}
-									{isInFilteringBeta ? (
+									{showTopicFilterBank &&
+									CAPIArticle.availableTopics ? (
 										<div css={paddingBody}>
 											<ArticleContainer format={format}>
 												{pagination.currentPage !==
@@ -835,6 +829,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
+														supportsDarkMode={false}
 													/>
 												)}
 												<ArticleBody
@@ -918,6 +913,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														CAPIArticle.config
 															.abTests
 													}
+													keywordIds={
+														CAPIArticle.config
+															.keywordIds
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -936,6 +935,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
+														supportsDarkMode={false}
 													/>
 												)}
 												<StraightLines
@@ -990,6 +990,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
+														supportsDarkMode={false}
 													/>
 												)}
 												<ArticleBody
@@ -1073,6 +1074,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														CAPIArticle.config
 															.abTests
 													}
+													keywordIds={
+														CAPIArticle.config
+															.keywordIds
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1091,6 +1096,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
+														supportsDarkMode={false}
 													/>
 												)}
 												<StraightLines
@@ -1154,6 +1160,10 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												isPaidContent={
 													CAPIArticle.pageType
 														.isPaidContent
+												}
+												format={format}
+												editionId={
+													CAPIArticle.editionId
 												}
 											/>
 										)}
@@ -1357,7 +1367,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						isPaidContent={CAPIArticle.pageType.isPaidContent}
 						isPreview={!!CAPIArticle.config.isPreview}
 						isSensitive={CAPIArticle.config.isSensitive}
-						keywordsId={CAPIArticle.config.keywordIds}
+						keywordIds={CAPIArticle.config.keywordIds}
 						pageId={CAPIArticle.pageId}
 						section={CAPIArticle.config.section}
 						sectionName={CAPIArticle.sectionName}

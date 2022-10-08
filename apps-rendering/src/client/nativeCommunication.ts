@@ -196,8 +196,8 @@ function getVideoSlots(): VideoSlot[] {
 
 	return Array.from(videoSlots).reduce((slots: VideoSlot[], elem) => {
 		const slotPosition = elem.getBoundingClientRect();
-		const videoId = elem.getAttribute('data-videoId');
-		const posterUrl = elem.getAttribute('data-posterUrl');
+		const videoId = elem.getAttribute('data-videoid');
+		const posterUrl = elem.getAttribute('data-posterurl');
 		const durationString = elem.getAttribute('data-duration');
 		const rect = getRect(slotPosition);
 		if (videoId && posterUrl) {
@@ -258,6 +258,9 @@ function reportNativeElementPositionChanges(): void {
 		},
 		false,
 	);
+
+	window.addEventListener('load', callback);
+
 	const observer = new MutationObserver(callback);
 	observer.observe(targetNode, config);
 
