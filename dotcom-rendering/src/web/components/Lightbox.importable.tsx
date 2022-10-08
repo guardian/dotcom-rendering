@@ -78,9 +78,12 @@ export const Lightbox = (initialElementProps: Props) => {
 							<div
 								css={css`
 									margin-bottom: ${space[2]}px;
+									color: #fff;
 								`}
 							>
-								<span>Index: {index}</span>
+								<span>
+									{index + 1}/{elements.length}
+								</span>
 								<button
 									type="button"
 									disabled={!canNext()}
