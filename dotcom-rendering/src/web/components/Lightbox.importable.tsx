@@ -78,7 +78,7 @@ export const Lightbox = (initialElementProps: Props) => {
 							<div
 								css={css`
 									margin-bottom: ${space[2]}px;
-									color: #fff;
+									color: #ffffff;
 								`}
 							>
 								<span>
@@ -111,7 +111,7 @@ export const Lightbox = (initialElementProps: Props) => {
 							</div>
 							<figcaption
 								css={css`
-									color: #fff;
+									color: #ffffff;
 								`}
 							>
 								{caption}
