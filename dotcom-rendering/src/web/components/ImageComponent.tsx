@@ -304,7 +304,11 @@ export const ImageComponent = ({
 				`}
 			>
 				<Island deferUntil="interaction">
-					<Lightbox />
+					<Lightbox
+						master={image}
+						alt={element.data.alt || ''}
+						caption={element.data.caption}
+					/>
 				</Island>
 				<Picture
 					role={role}
@@ -338,7 +342,11 @@ export const ImageComponent = ({
 				`}
 			>
 				<Island deferUntil="interaction">
-					<Lightbox />
+					<Lightbox
+						master={image}
+						alt={element.data.alt || ''}
+						caption={element.data.caption}
+					/>
 				</Island>
 				<Picture
 					role={role}
@@ -375,7 +383,11 @@ export const ImageComponent = ({
 				`}
 			>
 				<Island deferUntil="interaction">
-					<Lightbox />
+					<Lightbox
+						master={image}
+						alt={element.data.alt || ''}
+						caption={element.data.caption}
+					/>
 				</Island>
 				<Picture
 					role={role}
