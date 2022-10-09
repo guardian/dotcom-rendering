@@ -44,7 +44,7 @@ export const Lightbox = ({
 	const canPrev = () => index > 0;
 	const canNext = () => index < elements.length - 1;
 
-	const { master, alt, caption } = elements[index];
+	const { caption } = elements[index];
 
 	return (
 		<dialog
@@ -63,14 +63,27 @@ export const Lightbox = ({
 					flex-direction: row;
 				`}
 			>
-				<div
-					id={`lightbox-image-${index}`}
-					css={css`
-						flex-basis: 85%;
-					`}
-				>
-					<LightboxPicture master={master} alt={alt} />
-				</div>
+				{/* We render all the images & show/hide the one we want to better support loading images
+					(& later, animations & swiping on mobile */}
+				{elements.map((element, elementIndex) => {
+					return (
+						<div
+							key={element.master}
+							id={`lightbox-image-${elementIndex}`}
+							css={css`
+								display: ${index === elementIndex
+									? 'block'
+									: 'none'};
+								flex-basis: 85%;
+							`}
+						>
+							<LightboxPicture
+								master={element.master}
+								alt={element.alt}
+							/>
+						</div>
+					);
+				})}
 				<div
 					css={css`
 						flex-basis: 15%;

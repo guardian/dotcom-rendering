@@ -42,17 +42,17 @@ const block = css`
 `;
 
 /** On fronts, all images are 5:3 */
-const aspectRatio = css`
-	padding-top: ${(3 / 5) * 100}%;
-	position: relative;
-	& > * {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-	}
-`;
+// const aspectRatio = css`
+// 	padding-top: ${(3 / 5) * 100}%;
+// 	position: relative;
+// 	& > * {
+// 		position: absolute;
+// 		top: 0;
+// 		left: 0;
+// 		width: 100%;
+// 		height: 100%;
+// 	}
+// `;
 
 export const LightboxPicture = ({ master, alt }: Props) => {
 	const imageWidths = decideImageWidths();
@@ -87,7 +87,7 @@ export const LightboxPicture = ({ master, alt }: Props) => {
 	const [fallbackSource] = sources.slice(-1);
 
 	return (
-		<picture css={[block, aspectRatio]}>
+		<picture css={[block]}>
 			{sources.map((source) => {
 				return (
 					<React.Fragment key={source.breakpoint}>
