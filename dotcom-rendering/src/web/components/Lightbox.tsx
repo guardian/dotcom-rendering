@@ -106,7 +106,7 @@ export const Lightbox = ({
 					<div
 						css={css`
 							margin-bottom: ${space[2]}px;
-							color: #ffffff;
+							color: white;
 						`}
 					>
 						<span>
@@ -133,7 +133,7 @@ export const Lightbox = ({
 					</div>
 					<figcaption
 						css={css`
-							color: #ffffff;
+							color: white;
 						`}
 					>
 						{caption}
