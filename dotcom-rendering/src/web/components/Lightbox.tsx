@@ -54,8 +54,10 @@ export const Lightbox = ({
 	useEffect(() => {
 		if (index !== -1) {
 			if (isOpen && !dialogElement.current?.open)
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-call -- typescript doesn't know this method exists for some reason
 				dialogElement.current?.showModal();
 			else if (!isOpen && dialogElement.current?.open)
+				// eslint-disable-next-line @typescript-eslint/no-unsafe-call -- typescript doesn't know this method exists for some reason
 				dialogElement.current.close();
 		}
 	}, [isOpen, dialogElement, index]);
