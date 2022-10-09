@@ -1,19 +1,13 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
-import { getIslandsByName } from '../browser/islands/getIslandsByName';
-import { getProps } from '../browser/islands/getProps';
 import { LightboxPicture } from './LightboxPicture';
 import type { Props as LightboxProps } from './LightboxWrapper.importable';
 
 type Props = LightboxProps & {
 	isOpen: boolean;
 	onClose: () => void;
-};
-
-const getLightboxElements = (): LightboxProps[] => {
-	const elements = getIslandsByName('LightboxWrapper');
-	return elements.map((element) => getProps(element) as LightboxProps);
+	elements: LightboxProps[];
 };
 
 // Browsers apply some weird default styling to dialogs,
@@ -28,43 +22,23 @@ const dialogElementCssReset = css`
 export const Lightbox = ({
 	isOpen,
 	onClose,
+	elements,
 	...initialElementProps
 }: Props) => {
 	const dialogElement = useRef<HTMLDialogElement>(null);
-	const [elements, setElements] = useState<LightboxProps[]>([]);
-	const [index, setIndex] = useState(-1);
-	useEffect(() => {
-		const lightboxElements = getLightboxElements();
-		const initialIndex = lightboxElements.findIndex(
+	const [index, setIndex] = useState(
+		elements.findIndex(
 			(element) => element.master === initialElementProps.master,
-		);
-
-		if (initialIndex === -1) {
-			const error = new Error(
-				'Unable to find lightbox element when opening',
-			);
-			window.guardian.modules.sentry.reportError(error, 'lightbox');
-			throw error;
-		}
-
-		setElements(lightboxElements);
-		setIndex(initialIndex);
-	}, [initialElementProps.master]);
+		),
+	);
 
 	useEffect(() => {
-		if (index !== -1) {
-			if (isOpen && !dialogElement.current?.open)
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-call -- typescript doesn't know this method exists for some reason
-				dialogElement.current?.showModal();
-			else if (!isOpen && dialogElement.current?.open)
-				// eslint-disable-next-line @typescript-eslint/no-unsafe-call -- typescript doesn't know this method exists for some reason
-				dialogElement.current.close();
-		}
-	}, [isOpen, dialogElement, index]);
-
-	if (index === -1) {
-		return null;
-	}
+		if (isOpen)
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-call -- typescript doesn't know this method exists for some reason
+			dialogElement.current?.showModal();
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-call -- typescript doesn't know this method exists for some reason
+		else dialogElement.current?.close();
+	}, [isOpen, dialogElement]);
 
 	const canPrev = () => index > 0;
 	const canNext = () => index < elements.length - 1;
