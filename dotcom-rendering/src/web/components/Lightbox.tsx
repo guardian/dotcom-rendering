@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source-foundations';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getIslandsByName } from '../browser/islands/getIslandsByName';
 import { getProps } from '../browser/islands/getProps';
-import { getZIndex } from '../lib/getZIndex';
 import { LightboxPicture } from './LightboxPicture';
 import type { Props as LightboxProps } from './LightboxWrapper.importable';
 
@@ -17,11 +16,21 @@ const getLightboxElements = (): LightboxProps[] => {
 	return elements.map((element) => getProps(element) as LightboxProps);
 };
 
+// Browsers apply some weird default styling to dialogs,
+// lets reset that!
+const dialogElementCssReset = css`
+	margin: 0;
+	max-width: none;
+	max-height: none;
+	box-sizing: border-box;
+`;
+
 export const Lightbox = ({
 	isOpen,
 	onClose,
 	...initialElementProps
 }: Props) => {
+	const dialogElement = useRef<HTMLDialogElement>(null);
 	const [elements, setElements] = useState<LightboxProps[]>([]);
 	const [index, setIndex] = useState(-1);
 	useEffect(() => {
@@ -42,6 +51,15 @@ export const Lightbox = ({
 		setIndex(initialIndex);
 	}, [initialElementProps.master]);
 
+	useEffect(() => {
+		if (index !== -1) {
+			if (isOpen && !dialogElement.current?.open)
+				dialogElement.current?.showModal();
+			else if (!isOpen && dialogElement.current?.open)
+				dialogElement.current.close();
+		}
+	}, [isOpen, dialogElement, index]);
+
 	if (index === -1) {
 		return null;
 	}
@@ -52,16 +70,14 @@ export const Lightbox = ({
 	const { master, alt, caption } = elements[index];
 
 	return (
-		<div
+		<dialog
+			ref={dialogElement}
 			css={css`
-				display: ${isOpen ? 'block' : 'none'};
-				position: fixed;
-				top: 0;
-				right: 0;
+				${dialogElementCssReset}
+
 				width: 100vw;
 				height: 100vh;
 				background-color: black;
-				${getZIndex('lightbox')};
 			`}
 		>
 			<div
@@ -71,6 +87,7 @@ export const Lightbox = ({
 				`}
 			>
 				<div
+					id={`lightbox-image-${index}`}
 					css={css`
 						flex-basis: 85%;
 					`}
@@ -97,18 +114,19 @@ export const Lightbox = ({
 						</span>
 						<button
 							type="button"
-							disabled={!canNext()}
-							onClick={() => canNext() && setIndex(index + 1)}
-						>
-							Next
-						</button>
-						<button
-							type="button"
 							disabled={!canPrev()}
 							onClick={() => canPrev() && setIndex(index - 1)}
 						>
 							Prev
 						</button>
+						<button
+							type="button"
+							disabled={!canNext()}
+							onClick={() => canNext() && setIndex(index + 1)}
+						>
+							Next
+						</button>
+
 						<button type="button" onClick={() => onClose()}>
 							Close
 						</button>
@@ -122,6 +140,6 @@ export const Lightbox = ({
 					</figcaption>
 				</div>
 			</div>
-		</div>
+		</dialog>
 	);
 };
