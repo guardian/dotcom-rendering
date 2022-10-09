@@ -13,7 +13,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { Caption } from './Caption';
 import { Hide } from './Hide';
 import { Island } from './Island';
-import { Lightbox } from './Lightbox.importable';
+import { LightboxWrapper } from './LightboxWrapper.importable';
 import { Picture } from './Picture';
 import { StarRating } from './StarRating/StarRating';
 
@@ -304,7 +304,7 @@ export const ImageComponent = ({
 				`}
 			>
 				<Island deferUntil="interaction">
-					<Lightbox
+					<LightboxWrapper
 						master={image}
 						alt={element.data.alt || ''}
 						caption={element.data.caption}
@@ -342,7 +342,7 @@ export const ImageComponent = ({
 				`}
 			>
 				<Island deferUntil="interaction">
-					<Lightbox
+					<LightboxWrapper
 						master={image}
 						alt={element.data.alt || ''}
 						caption={element.data.caption}
@@ -383,7 +383,7 @@ export const ImageComponent = ({
 				`}
 			>
 				<Island deferUntil="interaction">
-					<Lightbox
+					<LightboxWrapper
 						master={image}
 						alt={element.data.alt || ''}
 						caption={element.data.caption}
