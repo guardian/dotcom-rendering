@@ -33,11 +33,12 @@ export const Lightbox = ({
 	);
 
 	useEffect(() => {
-		if (isOpen)
-			// eslint-disable-next-line @typescript-eslint/no-unsafe-call -- typescript doesn't know this method exists for some reason
-			dialogElement.current?.showModal();
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-call -- typescript doesn't know this method exists for some reason
+		/* eslint-disable @typescript-eslint/no-unsafe-call -- Typescript doesn't know these properties exist */
+		// @ts-expect-error -- Typescript's version of this interface is missing these properties
+		if (isOpen) dialogElement.current?.showModal();
+		// @ts-expect-error -- Typescript's version of this interface is missing these properties
 		else dialogElement.current?.close();
+		/* eslint-enable @typescript-eslint/no-unsafe-call */
 	}, [isOpen, dialogElement]);
 
 	const canPrev = () => index > 0;
