@@ -393,6 +393,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									isPaidContent={
 										!!CAPIArticle.config.isPaidContent
 									}
+									keywordIds={CAPIArticle.config.keywordIds}
 									contributionsServiceUrl={
 										contributionsServiceUrl
 									}
@@ -423,7 +424,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.pageType
 													.isPaidContent
 											}
-											keywordsId={
+											keywordIds={
 												CAPIArticle.config.keywordIds
 											}
 											pageId={CAPIArticle.pageId}
@@ -682,7 +683,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						isPaidContent={CAPIArticle.pageType.isPaidContent}
 						isPreview={!!CAPIArticle.config.isPreview}
 						isSensitive={CAPIArticle.config.isSensitive}
-						keywordsId={CAPIArticle.config.keywordIds}
+						keywordIds={CAPIArticle.config.keywordIds}
 						pageId={CAPIArticle.pageId}
 						section={CAPIArticle.config.section}
 						sectionName={CAPIArticle.sectionName}

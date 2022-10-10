@@ -10,10 +10,10 @@ import { shadyPieClickThrough } from './tests/shady-pie-click-through';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 import {
-	signInGateMandatoryLongTestRunAunz,
-	signInGateMandatoryLongTestRunEu,
-	signInGateMandatoryLongTestRunNa,
-	signInGateMandatoryLongTestRunUk,
+	signInGateMandatoryLongBucketingTestRun,
+	signInGateMandatoryLongBucketingTestRunEu,
+	signInGateMandatoryLongBucketingTestRunNa,
+	signInGateMandatoryLongBucketingTestRunUk,
 } from './tests/sign-in-gate-mandatory-long-testrun';
 
 // keep in sync with ab-tests in frontend
@@ -26,9 +26,9 @@ export const tests: ABTest[] = [
 	newsletterMerchUnitLighthouseVariants,
 	consentlessAds,
 	integrateIMA,
-	signInGateMandatoryLongTestRunUk,
-	signInGateMandatoryLongTestRunAunz,
-	signInGateMandatoryLongTestRunEu,
-	signInGateMandatoryLongTestRunNa,
 	shadyPieClickThrough,
+	signInGateMandatoryLongBucketingTestRun,
+	signInGateMandatoryLongBucketingTestRunEu,
+	signInGateMandatoryLongBucketingTestRunNa,
+	signInGateMandatoryLongBucketingTestRunUk,
 ];
