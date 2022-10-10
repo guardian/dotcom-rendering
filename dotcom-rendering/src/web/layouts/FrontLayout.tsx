@@ -56,12 +56,24 @@ const shouldInsertMerchHigh = (
 	return index === desiredPosition;
 };
 
-const isToggleable = (index: number, collection: DCRCollectionType) => {
+const isNavList = (collection: DCRCollectionType) => {
 	return (
-		index != 0 &&
-		collection.collectionType != 'nav/list' &&
-		collection.collectionType != 'nav/media-list'
+		collection.collectionType == 'nav/list' ||
+		collection.collectionType == 'nav/media-list'
 	);
+};
+
+const isToggleable = (
+	index: number,
+	collection: DCRCollectionType,
+	isNetworkFront: boolean,
+) => {
+	if (isNetworkFront) {
+		return (
+			collection.displayName.toLowerCase() != 'headlines' &&
+			!isNavList(collection)
+		);
+	} else return index != 0 && !isNavList(collection);
 };
 
 export const FrontLayout = ({ front, NAV }: Props) => {
@@ -259,7 +271,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								ophanComponentName={ophanName}
 								containerName={collection.collectionType}
 								containerPalette={collection.containerPalette}
-								toggleable={isToggleable(index, collection)}
+								toggleable={isToggleable(
+									index,
+									collection,
+									front.isNetworkFront,
+								)}
 								sectionId={collection.id}
 								showDateHeader={
 									collection.config.showDateHeader
@@ -282,7 +298,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							</Section>
 							{shouldInsertMerchHigh(
 								index,
-								front.pressedPage.isNetworkFront,
+								front.isNetworkFront,
 								front.pressedPage.collections.length,
 								front.pressedPage.frontProperties.isPaidContent,
 							) && (
