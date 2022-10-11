@@ -43,6 +43,10 @@ const shareMessageStyles: SerializedStyles = css`
 	}
 `;
 
+/**
+ * Contains the currently non-functional EmailSignupForm - do not use until
+ * that works.
+ */
 const NewsletterSignUpPageForm: FC<Props> = ({ format, newsletter }: Props) => (
 	<>
 		<EmailSignupForm
