@@ -84,7 +84,9 @@ function getRange(numberOfElements: number): [number, number] {
  *	 - Don't put under headings
  *	 - Must have plain body text above and below
  *   - Must be within 3 elements from the middle of the article
- *   - Should not be next to an adSlot (NOT IMPLEMENTED HERE)
+ *   - Should not be next to an adSlot (currented addressed by the
+ *     existing adslot placement module - the sidgn-up block is enclosed
+ *     in an <aside> and the adslots are placed after <p> elements  )
  *   - The best place is the last place meeting the criteria above.
  *
  * @param body an Item.Body
