@@ -227,7 +227,7 @@ export const PullQuoteBlockComponent: React.FC<{
 								height: 25px;
 								bottom: -25px;
 								position: absolute;
-								background-color: ${neutral[97]};
+								background-color: ${neutral[100]};
 							}
 						`,
 					]}
