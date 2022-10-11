@@ -293,7 +293,7 @@ const itemFields = (
 		bylineHtml: pipe(
 			content.fields?.bylineHtml,
 			fromNullable,
-			andThen(html => html !== '' ? some(html) : none),
+			andThen((html) => (html !== '' ? some(html) : none)),
 			map(context.docParser),
 		),
 		publishDate: maybeCapiDate(content.webPublicationDate),
