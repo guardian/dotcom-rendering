@@ -31,7 +31,7 @@ const makeTextElementNode = (html: string, outerTag = 'p'): Node => {
 	return doc.firstChild!;
 };
 
-const makeBodyWithPlaceToInsert: { (): Body } = () => [
+const makeBodyWithPlaceToInsert = (): Body => [
 	Result.ok({
 		kind: ElementKind.Text,
 		doc: makeTextElementNode('Introductory paragraph.'),
@@ -97,8 +97,7 @@ const makeBodyWithPlaceToInsert: { (): Body } = () => [
 	}),
 ];
 
-const makeBodyWithNoPlacesToInsert
-: { (): Body } = () => [
+const makeBodyWithNoPlacesToInsert = (): Body => [
 	Result.ok({
 		kind: ElementKind.Text,
 		doc: makeTextElementNode('Introductory paragraph.'),
