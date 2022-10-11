@@ -21,6 +21,54 @@ import { VideoYoutubeBlockComponent } from './elements/VideoYoutubeBlockComponen
 import { YoutubeBlockComponentAMP } from './elements/YoutubeBlockComponentAMP';
 import { Expandable } from './Expandable';
 
+export const isAmpSupported = (elements: CAPIElement[]): boolean => {
+	// Elements that are supported & rendered when mandatory
+	const supportedElements = [
+		'model.dotcomrendering.pageElements.AudioAtomBlockElement',
+		'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+		'model.dotcomrendering.pageElements.ChartAtomBlockElement',
+		'model.dotcomrendering.pageElements.CommentBlockElement',
+		'model.dotcomrendering.pageElements.ContentAtomBlockElement',
+		'model.dotcomrendering.pageElements.DisclaimerBlockElement',
+		// We do not support EmbedBlockElement's when they are mandatory
+		// 'model.dotcomrendering.pageElements.EmbedBlockElement',
+		'model.dotcomrendering.pageElements.GenericAtomBlockElement',
+		'model.dotcomrendering.pageElements.GuideAtomBlockElement',
+		'model.dotcomrendering.pageElements.GuVideoBlockElement',
+		'model.dotcomrendering.pageElements.ImageBlockElement',
+		'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
+		// We do not support InteractiveBlockElement's when they are mandatory
+		// 'model.dotcomrendering.pageElements.InteractiveBlockElement',
+		'model.dotcomrendering.pageElements.ProfileAtomBlockElement',
+		'model.dotcomrendering.pageElements.PullquoteBlockElement',
+		'model.dotcomrendering.pageElements.QABlockElement',
+		'model.dotcomrendering.pageElements.RichLinkBlockElement',
+		'model.dotcomrendering.pageElements.SoundcloudBlockElement',
+		'model.dotcomrendering.pageElements.SubheadingBlockElement',
+		'model.dotcomrendering.pageElements.TextBlockElement',
+		'model.dotcomrendering.pageElements.TimelineBlockElement',
+		'model.dotcomrendering.pageElements.TweetBlockElement',
+		'model.dotcomrendering.pageElements.VideoVimeoBlockElement',
+		'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
+		'model.dotcomrendering.pageElements.YoutubeBlockElement',
+	];
+
+	return elements.every((element) => {
+		console.log(element._type);
+		if (
+			element._type ===
+			'model.dotcomrendering.pageElements.InteractiveBlockElement'
+		) {
+			console.log(element.isMandatory);
+		}
+		if ((element as { isMandatory?: boolean }).isMandatory) {
+			console.log('isMandatory');
+			return supportedElements.includes(element._type);
+		}
+		return true;
+	});
+};
+
 export const Elements = (
 	elements: CAPIElement[],
 	pillar: ArticleTheme,

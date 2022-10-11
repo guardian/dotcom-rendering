@@ -4,6 +4,7 @@ import createEmotionServer from '@emotion/server/create-instance';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import { BUILD_VARIANT } from '../../../scripts/webpack/bundles';
+import { isAmpSupported } from '../../amp/components/Elements';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -198,6 +199,11 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 				unknownConfig: CAPIArticle.config,
 			}),
 		),
+	);
+
+	console.log(
+		'isAmpSupported',
+		isAmpSupported(CAPIArticle.blocks.flatMap((block) => block.elements)),
 	);
 
 	const getAmpLink = (tags: TagType[]) => {
