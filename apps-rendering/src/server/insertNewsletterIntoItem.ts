@@ -11,20 +11,15 @@ import { stringToPillar } from 'themeStyles';
 
 // ----- Constants ----- //
 
-const enum ElementCategory {
-	'ParagraphText' = 'PARAGRAPH',
-	'BoldParagraphText' = 'BOLD_PARAGRAPH',
-	'NonParagraphText' = 'OTHER TEXT ELEMENT',
-	'Heading' = 'HEADING',
-	'NonText' = 'NON TEXT',
-	'WhiteSpace' = 'WHITE SPACE',
-	'Error' = 'ERROR',
+enum ElementCategory {
+	'ParagraphText',
+	'BoldParagraphText',
+	'NonParagraphText',
+	'Heading',
+	'NonText',
+	'WhiteSpace',
+	'Error',
 }
-
-const DEBUG = {
-	log: false,
-	logContent: false,
-};
 
 // ----- pure functions ---//
 
@@ -146,56 +141,12 @@ function findInsertIndex(body: Body): Result<string, number> {
 		contentOnlyBody[bestIndexInContentOnlyBody],
 	);
 
-	if (DEBUG.log) {
-		debugLoggingForFindIndex(
-			bestIndexInContentOnlyBody,
-			bestIndexInOriginalBody,
-			contentOnlyBody,
-			suitabilityList,
-		);
-	}
-
 	return bestIndexInOriginalBody === -1
 		? Result.err('Unable to find suitable place for NewsletterSignUp')
 		: Result.ok(bestIndexInOriginalBody);
 }
 
 // ----- Procedures ----- //
-
-// TO DO - remove the debugging functions before using this module in production
-function debugLoggingForFindIndex(
-	bestIndexInContentOnlyBody: number,
-	bestIndexInOriginalBody: number,
-	contentOnlyBody: Body,
-	suitabilityList: boolean[],
-): void {
-	contentOnlyBody.forEach((result, index) => {
-		if (index === bestIndexInContentOnlyBody) {
-			console.log('\n[SIGN UP GOES HERE]\n');
-		}
-		console.log(
-			`[${index}]`,
-			suitabilityList[index],
-			categoriseElement(result),
-		);
-
-		if (DEBUG.logContent) {
-			const doc =
-				result.isOk() && result.value.kind === ElementKind.Text
-					? result.value.doc
-					: undefined;
-
-			if (doc && doc.nodeType === 1) {
-				const element = doc as Element;
-				console.log(element.outerHTML);
-			}
-		}
-	});
-	console.log({
-		bestIndexInContentOnlyBody,
-		bestIndexInOriginalBody,
-	});
-}
 
 function buildBodyElement(newsletter: Newsletter): NewsletterSignUp {
 	return {
