@@ -1,4 +1,4 @@
-import { ArticleDesign, getCookie } from '@guardian/libs';
+import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { constructQuery } from '../../lib/querystring';
 import { useOnce } from '../lib/useOnce';
@@ -91,7 +91,6 @@ const generateSignInUrl = ({
 // fires a VIEW ophan component event
 // and show the gate component if it exists
 const ShowSignInGate = ({
-	format,
 	abTest,
 	setShowGate,
 	signInUrl,
@@ -121,9 +120,6 @@ const ShowSignInGate = ({
 			},
 			abTest,
 			ophanComponentId: signInGateTestIdToComponentId[abTest.id],
-			isComment:
-				format.design === ArticleDesign.Comment ||
-				format.design === ArticleDesign.Editorial,
 		});
 	}
 	// return nothing if no gate needs to be shown

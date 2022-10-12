@@ -909,10 +909,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													selectedTopics={
 														CAPIArticle.selectedTopics
 													}
-													abTests={
-														CAPIArticle.config
-															.abTests
-													}
 													keywordIds={
 														CAPIArticle.config
 															.keywordIds
@@ -1069,10 +1065,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													}
 													selectedTopics={
 														CAPIArticle.selectedTopics
-													}
-													abTests={
-														CAPIArticle.config
-															.abTests
 													}
 													keywordIds={
 														CAPIArticle.config

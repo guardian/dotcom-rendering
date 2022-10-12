@@ -528,7 +528,6 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										isPreview={CAPIArticle.config.isPreview}
 										idUrl={CAPIArticle.config.idUrl || ''}
 										isDev={!!CAPIArticle.config.isDev}
-										abTests={CAPIArticle.config.abTests}
 										keywordIds={
 											CAPIArticle.config.keywordIds
 										}

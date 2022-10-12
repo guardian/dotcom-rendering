@@ -1,11 +1,9 @@
 import { css } from '@emotion/react';
 import {
-	background,
 	brand,
 	from,
 	headline,
 	line,
-	opinion,
 	space,
 	text,
 	textSans,
@@ -123,40 +121,40 @@ export const privacyLink = css`
 	cursor: pointer;
 `;
 
-export const firstParagraphOverlay = (isComment: boolean) => css`
+export const firstParagraphOverlay = css`
 	margin-top: -250px;
 	width: 100%;
 	height: 250px;
 	position: absolute;
-
-	/* "transparent" only works here because == rgba(0,0,0,0) */
-	background-image: linear-gradient(
-		0deg,
-		${isComment ? opinion[800] : background.primary},
-		70%,
-		rgba(255, 255, 255, 0)
-	);
-	mask-image: linear-gradient(rgba(0, 0, 0, 0), transparent);
 `;
 
-// This css does 3 things
-// 1. first hide all article content using display: none; (.article-body-commercial-selector > *)
-// 2. make the sign in gate (#sign-in-gate), and the first 2 paragraphs of the article visible (.article-body-commercial-selector p:nth-of-type(-n+3))
-// 3. hide any siblings after the sign in gate in case a paragraph is still visible (#sign-in-gate ~ *) because of the css in 2
-export const hideElementsCss = `
-    .article-body-commercial-selector > * {
+/**
+ * This CSS hides everything in an article, except the first two paragraphs and
+ * the sign-in gate. The order in which rules are laid out matters.
+ */
+export const hideElementsCss = [
+	// 1. hide all article content
+	`.article-body-commercial-selector > * {
         display: none;
-    }
-
-    #sign-in-gate, .article-body-commercial-selector p:nth-of-type(-n + 3) {
+    }`,
+	// 2. make the sign in gate and the first 2 paragraphs of the article visible
+	`#sign-in-gate, .article-body-commercial-selector p:nth-of-type(-n + 3) {
         display: block;
+    }`,
+	// 3. mask the first and second with a gradient overlay
+	`.article-body-commercial-selector > p:nth-of-type(1) {
+        mask-image: linear-gradient(black, rgba(0, 0, 0, 0.5));
     }
-
-    #sign-in-gate ~ * {
+	.article-body-commercial-selector > p:nth-of-type(2) {
+        mask-image: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
+    }
+	`,
+	// 4. hide any siblings after the sign in gate in case a paragraph
+	// is still visible because of the CSS in 2
+	`#sign-in-gate ~ * {
         display: none;
-    }
-
-    #slot-body-end {
+    }`,
+	`#slot-body-end {
         display: none;
-    }
-`;
+    }`,
+].join('\n');
