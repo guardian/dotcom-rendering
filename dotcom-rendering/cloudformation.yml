@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: "2010-09-09"
+AWSTemplateFormatVersion: '2010-09-09'
 Description: Frontend rendering service
 Parameters:
   Subnets:
@@ -68,8 +68,8 @@ Parameters:
     Type: String
 
 Conditions:
-    HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
-    HasBackend5XXAlarm: !Equals [!Ref Stage, 'PROD']
+  HasLatencyScalingAlarm: !Equals [!Ref Stage, 'PROD']
+  HasBackend5XXAlarm: !Equals [!Ref Stage, 'PROD']
 
 Mappings:
   Constants:
@@ -93,24 +93,24 @@ Resources:
       VpcId:
         Ref: VpcId
       SecurityGroupIngress:
-      - IpProtocol: tcp
-        FromPort: '80'
-        ToPort: '80'
-        CidrIp: !Ref VPCIpBlock
-      - IpProtocol: tcp
-        FromPort: '443'
-        ToPort: '443'
-        CidrIp: !Ref VPCIpBlock
+        - IpProtocol: tcp
+          FromPort: '80'
+          ToPort: '80'
+          CidrIp: !Ref VPCIpBlock
+        - IpProtocol: tcp
+          FromPort: '443'
+          ToPort: '443'
+          CidrIp: !Ref VPCIpBlock
       Tags:
-      - Key: Stage
-        Value:
-          Ref: Stage
-      - Key: Stack
-        Value:
-          Fn::FindInMap: [ Constants, Stack, Value ]
-      - Key: App
-        Value:
-          Fn::FindInMap: [ Constants, App, Value ]
+        - Key: Stage
+          Value:
+            Ref: Stage
+        - Key: Stack
+          Value:
+            Fn::FindInMap: [Constants, Stack, Value]
+        - Key: App
+          Value:
+            Fn::FindInMap: [Constants, App, Value]
 
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
@@ -120,80 +120,80 @@ Resources:
         Ref: VpcId
       SecurityGroupIngress:
         # allow ELB to talk to instance
-      - IpProtocol: tcp
-        FromPort: 9000
-        ToPort: 9000
-        SourceSecurityGroupId:
-          Ref: InternalLoadBalancerSecurityGroup
+        - IpProtocol: tcp
+          FromPort: 9000
+          ToPort: 9000
+          SourceSecurityGroupId:
+            Ref: InternalLoadBalancerSecurityGroup
       Tags:
-      - Key: Stage
-        Value:
-          Ref: Stage
-      - Key: Stack
-        Value:
-          Fn::FindInMap: [ Constants, Stack, Value ]
-      - Key: App
-        Value:
-          Fn::FindInMap: [ Constants, App, Value ]
+        - Key: Stage
+          Value:
+            Ref: Stage
+        - Key: Stack
+          Value:
+            Fn::FindInMap: [Constants, Stack, Value]
+        - Key: App
+          Value:
+            Fn::FindInMap: [Constants, App, Value]
 
   InstanceRole:
     Type: AWS::IAM::Role
     Properties:
       ManagedPolicyArns:
-      - arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM
+        - arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM
       AssumeRolePolicyDocument:
         Statement:
-        - Effect: Allow
-          Principal:
-            Service:
-            - ec2.amazonaws.com
-          Action:
-          - sts:AssumeRole
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - sts:AssumeRole
       Path: /
       Policies:
-      - PolicyName: instance-policy
-        PolicyDocument:
-          Statement:
-          # grant access to the distribution bucket in S3
-          - Effect: Allow
-            Action: s3:GetObject
-            Resource: arn:aws:s3:::aws-frontend-artifacts/*
-          - Effect: Allow
-            Action:
-            - cloudwatch:*
-            - logs:*
-            Resource: '*'
-          - Effect: Allow
-            Action:
-            - ec2:DescribeTags
-            - ec2:DescribeInstances
-            - autoscaling:DescribeAutoScalingGroups
-            - autoscaling:DescribeAutoScalingInstances
-            Resource: '*'
-          - Resource: !Ref FrontendConfigKey
-            Effect: Allow
-            Action:
-            - kms:Decrypt
-            - kms:DescribeKey
-          - Effect: Allow
-            Action:
-              - ssm:GetParametersByPath
-              - ssm:GetParameter
-            Resource:
-              - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/frontend/*
-          - Effect: Allow
-            Action:
-              - ssm:GetParametersByPath
-              - ssm:GetParameter
-            Resource:
-              - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/dotcom/*
+        - PolicyName: instance-policy
+          PolicyDocument:
+            Statement:
+              # grant access to the distribution bucket in S3
+              - Effect: Allow
+                Action: s3:GetObject
+                Resource: arn:aws:s3:::aws-frontend-artifacts/*
+              - Effect: Allow
+                Action:
+                  - cloudwatch:*
+                  - logs:*
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - ec2:DescribeTags
+                  - ec2:DescribeInstances
+                  - autoscaling:DescribeAutoScalingGroups
+                  - autoscaling:DescribeAutoScalingInstances
+                Resource: '*'
+              - Resource: !Ref FrontendConfigKey
+                Effect: Allow
+                Action:
+                  - kms:Decrypt
+                  - kms:DescribeKey
+              - Effect: Allow
+                Action:
+                  - ssm:GetParametersByPath
+                  - ssm:GetParameter
+                Resource:
+                  - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/frontend/*
+              - Effect: Allow
+                Action:
+                  - ssm:GetParametersByPath
+                  - ssm:GetParameter
+                Resource:
+                  - !Sub arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/dotcom/*
 
   InstanceProfile:
     Type: AWS::IAM::InstanceProfile
     Properties:
       Path: /
       Roles:
-      - Ref: InstanceRole
+        - Ref: InstanceRole
 
   InternalLoadBalancer:
     Type: AWS::ElasticLoadBalancing::LoadBalancer
@@ -201,7 +201,7 @@ Resources:
       Scheme: internal
       LoadBalancerName: !Sub '${Stack}-${Stage}-${App}-ELB'
       Listeners:
-      - { LoadBalancerPort: 80, InstancePort: 9000, Protocol: HTTP }
+        - { LoadBalancerPort: 80, InstancePort: 9000, Protocol: HTTP }
       CrossZone: true
       HealthCheck:
         Target: HTTP:9000/_healthcheck
@@ -212,29 +212,28 @@ Resources:
       Subnets:
         Ref: Subnets
       SecurityGroups:
-      - Ref: InternalLoadBalancerSecurityGroup
+        - Ref: InternalLoadBalancerSecurityGroup
       AccessLoggingPolicy:
         EmitInterval: 5
         Enabled: true
         S3BucketName: gu-elb-logs
         S3BucketPrefix:
           Fn::Join:
-          - "/"
-          - - ELBLogs
-            - Fn::FindInMap: [ Constants, Stack, Value ]
-            - Fn::FindInMap: [ Constants, App, Value ]
-            - Ref: Stage
+            - '/'
+            - - ELBLogs
+              - Fn::FindInMap: [Constants, Stack, Value]
+              - Fn::FindInMap: [Constants, App, Value]
+              - Ref: Stage
       Tags:
-      - Key: Stage
-        Value:
-          Ref: Stage
-      - Key: Stack
-        Value:
-          Fn::FindInMap: [ Constants, Stack, Value ]
-      - Key: App
-        Value:
-          Fn::FindInMap: [ Constants, App, Value ]
-
+        - Key: Stage
+          Value:
+            Ref: Stage
+        - Key: Stack
+          Value:
+            Fn::FindInMap: [Constants, Stack, Value]
+        - Key: App
+          Value:
+            Fn::FindInMap: [Constants, App, Value]
 
   LaunchConfig:
     Type: AWS::AutoScaling::LaunchConfiguration
@@ -242,37 +241,36 @@ Resources:
       ImageId:
         Ref: AMI
       SecurityGroups:
-      - Ref: InstanceSecurityGroup
+        - Ref: InstanceSecurityGroup
       InstanceType: !Ref InstanceType
       IamInstanceProfile:
         Ref: InstanceProfile
       AssociatePublicIpAddress: true
       UserData:
-        'Fn::Base64':
-          !Sub |
-              #!/bin/bash -ev
+        'Fn::Base64': !Sub |
+          #!/bin/bash -ev
 
-              groupadd frontend
-              useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
-              cd /home/dotcom-rendering
+          groupadd frontend
+          useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
+          cd /home/dotcom-rendering
 
-              aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${Stage}/${App}/dist/${App}.zip ./
-              unzip -q ${App}.zip -d ${App}
+          aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${Stage}/${App}/dist/${App}.zip ./
+          unzip -q ${App}.zip -d ${App}
 
-              chown -R dotcom-rendering:frontend ${App}
+          chown -R dotcom-rendering:frontend ${App}
 
-              cd ${App}/dotcom-rendering
+          cd ${App}/dotcom-rendering
 
-              export TERM=xterm-256color
-              export NODE_ENV=production
-              export GU_STAGE=${Stage}
+          export TERM=xterm-256color
+          export NODE_ENV=production
+          export GU_STAGE=${Stage}
 
-              mkdir /var/log/dotcom-rendering
-              chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
+          mkdir /var/log/dotcom-rendering
+          chown -R dotcom-rendering:frontend /var/log/dotcom-rendering
 
-              make start-prod
+          make start-prod
 
-              /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${AWS::Region} ${ELKStream} /var/log/dotcom-rendering/dotcom-rendering.log
+          /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${AWS::Region} ${ELKStream} /var/log/dotcom-rendering/dotcom-rendering.log
 
   AutoscalingGroup:
     Type: AWS::AutoScaling::AutoScalingGroup
@@ -287,20 +285,20 @@ Resources:
       HealthCheckType: ELB
       HealthCheckGracePeriod: 120
       LoadBalancerNames:
-      - Ref: InternalLoadBalancer
+        - Ref: InternalLoadBalancer
       Tags:
-      - Key: Stage
-        Value:
-          Ref: Stage
-        PropagateAtLaunch: true
-      - Key: Stack
-        Value:
-          Fn::FindInMap: [ Constants, Stack, Value ]
-        PropagateAtLaunch: true
-      - Key: App
-        Value:
-          Fn::FindInMap: [ Constants, App, Value ]
-        PropagateAtLaunch: true
+        - Key: Stage
+          Value:
+            Ref: Stage
+          PropagateAtLaunch: true
+        - Key: Stack
+          Value:
+            Fn::FindInMap: [Constants, Stack, Value]
+          PropagateAtLaunch: true
+        - Key: App
+          Value:
+            Fn::FindInMap: [Constants, App, Value]
+          PropagateAtLaunch: true
 
   ScaleDownPolicy:
     Type: AWS::AutoScaling::ScalingPolicy
@@ -324,8 +322,8 @@ Resources:
       AlarmDescription: !Sub |
         Scale-Up if latency is greater than ${LatencyAlarmThreshold} seconds over ${LatencyScalingEvaluationPeriods} period(s) of ${LatencyAlarmPeriod} seconds
       Dimensions:
-      - Name: LoadBalancerName
-        Value: !Ref InternalLoadBalancer
+        - Name: LoadBalancerName
+          Value: !Ref InternalLoadBalancer
       EvaluationPeriods: !Ref LatencyScalingEvaluationPeriods
       MetricName: Latency
       Namespace: AWS/ELB
@@ -334,9 +332,9 @@ Resources:
       Threshold: !Ref LatencyAlarmThreshold
       ComparisonOperator: GreaterThanOrEqualToThreshold
       OKActions:
-      - !Ref ScaleDownPolicy
+        - !Ref ScaleDownPolicy
       AlarmActions:
-      - !Ref ScaleUpPolicy
+        - !Ref ScaleUpPolicy
     Type: AWS::CloudWatch::Alarm
 
   Backend5xxAlarm:
@@ -347,8 +345,8 @@ Resources:
         Alarm if 5XX backend errors are greater than ${Backend5XXAlarmThreshold} over last ${Backend5XXAlarmPeriod} seconds
       ComparisonOperator: GreaterThanOrEqualToThreshold
       Dimensions:
-      - Name: LoadBalancerName
-        Value: !Ref InternalLoadBalancer
+        - Name: LoadBalancerName
+          Value: !Ref InternalLoadBalancer
       MetricName: HTTPCode_Backend_5XX
       Namespace: AWS/ELB
       EvaluationPeriods: !Ref Backend5XXConsecutivePeriod
@@ -362,5 +360,5 @@ Outputs:
   LoadBalancerUrl:
     Value:
       'Fn::GetAtt':
-      - InternalLoadBalancer
-      - DNSName
+        - InternalLoadBalancer
+        - DNSName
