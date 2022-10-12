@@ -1,17 +1,24 @@
 // ----- Imports ----- //
 
 import type { Image as CardImage } from '@guardian/apps-rendering-api-models/image';
+import type { Asset } from '@guardian/content-api-models/v1/asset';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ArticleElementRole } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import { Option, OptionKind } from '@guardian/types';
-import { andThen, fromNullable, map, none, some } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import {
+	andThen,
+	fromNullable,
+	map,
+	none,
+	OptionKind,
+	some,
+} from '@guardian/types';
 import type { Image as ImageData } from 'image/image';
 import { Dpr, src, srcsets } from 'image/srcsets';
 import { pipe } from 'lib';
 import type { Context } from 'parserContext';
 import type { ReactNode } from 'react';
-import { Asset } from '@guardian/content-api-models/v1/asset';
 
 // ----- Types ----- //
 
@@ -50,18 +57,13 @@ const parseRole = (role: string | undefined): ArticleElementRole => {
 	}
 };
 
-const sortAscendingWidth = (a: Asset, b: Asset) =>
+const sortAscendingWidth = (a: Asset, b: Asset): number =>
 	a.typeData?.width && b.typeData?.width
 		? a.typeData.width - b.typeData.width
 		: 0;
 
 const getHighestResAsset = (assets: Asset[]): Option<Asset> =>
-	fromNullable(
-		assets
-			.filter((asset) => asset.typeData?.width && asset.typeData?.height)
-			.sort(sortAscendingWidth)
-			.pop(),
-	);
+	fromNullable(assets.slice().sort(sortAscendingWidth).pop());
 
 const parseImage =
 	({ docParser, salt }: Context) =>
