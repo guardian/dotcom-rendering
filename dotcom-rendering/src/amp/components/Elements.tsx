@@ -21,49 +21,46 @@ import { VideoYoutubeBlockComponent } from './elements/VideoYoutubeBlockComponen
 import { YoutubeBlockComponentAMP } from './elements/YoutubeBlockComponentAMP';
 import { Expandable } from './Expandable';
 
-export const isAmpSupported = (elements: CAPIElement[]): boolean => {
-	// Elements that are supported & rendered when mandatory
-	const supportedElements = [
-		'model.dotcomrendering.pageElements.AudioAtomBlockElement',
-		'model.dotcomrendering.pageElements.BlockquoteBlockElement',
-		'model.dotcomrendering.pageElements.ChartAtomBlockElement',
-		'model.dotcomrendering.pageElements.CommentBlockElement',
-		'model.dotcomrendering.pageElements.ContentAtomBlockElement',
-		'model.dotcomrendering.pageElements.DisclaimerBlockElement',
-		// We do not support EmbedBlockElement's when they are mandatory
-		// 'model.dotcomrendering.pageElements.EmbedBlockElement',
-		'model.dotcomrendering.pageElements.GenericAtomBlockElement',
-		'model.dotcomrendering.pageElements.GuideAtomBlockElement',
-		'model.dotcomrendering.pageElements.GuVideoBlockElement',
-		'model.dotcomrendering.pageElements.ImageBlockElement',
-		'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
-		// We do not support InteractiveBlockElement's when they are mandatory
-		// 'model.dotcomrendering.pageElements.InteractiveBlockElement',
-		'model.dotcomrendering.pageElements.ProfileAtomBlockElement',
-		'model.dotcomrendering.pageElements.PullquoteBlockElement',
-		'model.dotcomrendering.pageElements.QABlockElement',
-		'model.dotcomrendering.pageElements.RichLinkBlockElement',
-		'model.dotcomrendering.pageElements.SoundcloudBlockElement',
-		'model.dotcomrendering.pageElements.SubheadingBlockElement',
-		'model.dotcomrendering.pageElements.TextBlockElement',
-		'model.dotcomrendering.pageElements.TimelineBlockElement',
-		'model.dotcomrendering.pageElements.TweetBlockElement',
-		'model.dotcomrendering.pageElements.VideoVimeoBlockElement',
-		'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
-		'model.dotcomrendering.pageElements.YoutubeBlockElement',
-	];
+/**
+ * Elements we support on AMP -
+ *
+ * Elements with isMandatory property should only be included if we render
+ * them when isMandatory is true
+ */
+const AMP_SUPPORTED_ELEMENTS = [
+	'model.dotcomrendering.pageElements.AudioAtomBlockElement',
+	'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+	'model.dotcomrendering.pageElements.ChartAtomBlockElement',
+	'model.dotcomrendering.pageElements.CommentBlockElement',
+	'model.dotcomrendering.pageElements.ContentAtomBlockElement',
+	'model.dotcomrendering.pageElements.DisclaimerBlockElement',
+	// We do not support EmbedBlockElement's when they are mandatory
+	// 'model.dotcomrendering.pageElements.EmbedBlockElement',
+	'model.dotcomrendering.pageElements.GenericAtomBlockElement',
+	'model.dotcomrendering.pageElements.GuideAtomBlockElement',
+	'model.dotcomrendering.pageElements.GuVideoBlockElement',
+	'model.dotcomrendering.pageElements.ImageBlockElement',
+	'model.dotcomrendering.pageElements.InteractiveAtomBlockElement',
+	// We do not support InteractiveBlockElement's when they are mandatory
+	// 'model.dotcomrendering.pageElements.InteractiveBlockElement',
+	'model.dotcomrendering.pageElements.ProfileAtomBlockElement',
+	'model.dotcomrendering.pageElements.PullquoteBlockElement',
+	'model.dotcomrendering.pageElements.QABlockElement',
+	'model.dotcomrendering.pageElements.RichLinkBlockElement',
+	'model.dotcomrendering.pageElements.SoundcloudBlockElement',
+	'model.dotcomrendering.pageElements.SubheadingBlockElement',
+	'model.dotcomrendering.pageElements.TextBlockElement',
+	'model.dotcomrendering.pageElements.TimelineBlockElement',
+	'model.dotcomrendering.pageElements.TweetBlockElement',
+	'model.dotcomrendering.pageElements.VideoVimeoBlockElement',
+	'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
+	'model.dotcomrendering.pageElements.YoutubeBlockElement',
+];
 
+export const isAmpSupported = (elements: CAPIElement[]): boolean => {
 	return elements.every((element) => {
-		console.log(element._type);
-		if (
-			element._type ===
-			'model.dotcomrendering.pageElements.InteractiveBlockElement'
-		) {
-			console.log(element.isMandatory);
-		}
 		if ((element as { isMandatory?: boolean }).isMandatory) {
-			console.log('isMandatory');
-			return supportedElements.includes(element._type);
+			return AMP_SUPPORTED_ELEMENTS.includes(element._type);
 		}
 		return true;
 	});
@@ -78,6 +75,12 @@ export const Elements = (
 ): JSX.Element[] => {
 	const cleanedElements = enhance(elements);
 	const output = cleanedElements.map((element) => {
+		/**
+		 * Addding something to this list?
+		 *
+		 * Please make sure you keep the 'AMP_SUPPORTED_ELEMENTS' array above
+		 * up-to-date with any changes you make!
+		 */
 		switch (element._type) {
 			case 'model.dotcomrendering.pageElements.AudioAtomBlockElement':
 				return (

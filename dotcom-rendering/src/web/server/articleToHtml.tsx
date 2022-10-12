@@ -201,12 +201,15 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 		),
 	);
 
-	console.log(
-		'isAmpSupported',
-		isAmpSupported(CAPIArticle.blocks.flatMap((block) => block.elements)),
-	);
-
 	const getAmpLink = (tags: TagType[]) => {
+		if (
+			!isAmpSupported(
+				CAPIArticle.blocks.flatMap((block) => block.elements),
+			)
+		) {
+			return undefined;
+		}
+
 		if (CAPIArticle.format.design === 'InteractiveDesign') {
 			const hasAmpInteractiveTag = tags.some(
 				(tag) =>
