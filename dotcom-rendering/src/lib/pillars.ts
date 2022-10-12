@@ -134,6 +134,16 @@ export const pillarPalette_DO_NOT_USE: Record<
 		500: specialReport[500],
 		800: specialReport[800],
 	},
+	[ArticleSpecial.SpecialReportAlt]: {
+		dark: specialReport[300],
+		main: specialReport[400],
+		bright: specialReport[500],
+		faded: specialReport[800],
+		300: specialReport[300],
+		400: specialReport[400],
+		500: specialReport[500],
+		800: specialReport[800],
+	},
 };
 
 /*
@@ -150,6 +160,7 @@ export const pillarMap: <T>(f: (name: ArticleTheme) => T) => {
 	[ArticlePillar.Lifestyle]: f(ArticlePillar.Lifestyle),
 	[ArticleSpecial.Labs]: f(ArticleSpecial.Labs),
 	[ArticleSpecial.SpecialReport]: f(ArticleSpecial.SpecialReport),
+	[ArticleSpecial.SpecialReportAlt]: f(ArticleSpecial.SpecialReportAlt),
 });
 /*
 Further notes on this function:
