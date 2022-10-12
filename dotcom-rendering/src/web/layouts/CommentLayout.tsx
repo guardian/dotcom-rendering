@@ -217,6 +217,9 @@ const avatarPositionStyles = css`
 	margin-bottom: -29px;
 	margin-top: -50px;
 	pointer-events: none;
+	${until.tablet} {
+		overflow: hidden;
+	}
 
 	/*  Why target img element?
 
