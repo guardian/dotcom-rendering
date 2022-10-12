@@ -143,7 +143,7 @@ export const enhanceCards = (
 		// The URL parameter on a Snap header will be a link to the Snap itself, there is a second href
 		// property which contains what the snap is actually linking to.
 		const url =
-			faciaCard.type == 'LinkSnap' && faciaCard.properties.href
+			faciaCard.type === 'LinkSnap' && faciaCard.properties.href
 				? faciaCard.properties.href
 				: faciaCard.header.url;
 
