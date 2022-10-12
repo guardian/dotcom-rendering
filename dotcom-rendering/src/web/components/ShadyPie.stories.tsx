@@ -1,12 +1,12 @@
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+//import type { ArticleFormat } from '@guardian/libs';
+//import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { ShadyPie } from './ShadyPie';
 
-const labsFormat: ArticleFormat = {
+/*const labsFormat: ArticleFormat = {
 	theme: ArticlePillar.Lifestyle,
 	design: ArticleDesign.Standard,
 	display: ArticleDisplay.Standard,
-};
+};*/
 
 export default {
 	component: ShadyPie,
@@ -24,7 +24,8 @@ Default.story = {
 	name: 'Default',
 };
 
-export const UKLabs = () => {
+//commenting out these components as we update the logic around shady pie for the ab test
+/*export const UKLabs = () => {
 	return (
 		<div style={{ width: '300px' }}>
 			<ShadyPie format={labsFormat} editionId={'UK'} />
@@ -45,3 +46,4 @@ export const USLabs = () => {
 USLabs.story = {
 	name: 'US Labs',
 };
+*/
