@@ -1,5 +1,5 @@
 // ----- Imports ----- //
-import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
+import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { FC } from 'react';
 import NewsletterSignUpPageForm from './';

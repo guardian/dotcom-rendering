@@ -2,8 +2,8 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
 import { NewsletterBadge } from '@guardian/common-rendering/src/components/NewsletterBadge';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	breakpoints,
@@ -12,8 +12,8 @@ import {
 	remSpace,
 } from '@guardian/source-foundations';
 import { SvgGuardianLogo } from '@guardian/source-react-components';
-import { tabletContentWidth } from 'components/editions/styles';
 import Body from 'components/ArticleBody';
+import { tabletContentWidth } from 'components/editions/styles';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import Logo from 'components/Logo';

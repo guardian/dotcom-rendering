@@ -1,17 +1,17 @@
 // ----- Imports ----- //
 
+import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
 import { ArticleElementRole } from '@guardian/libs';
 import { none, OptionKind, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import { parse } from 'client/parser';
+import { EmbedKind } from 'embed';
 import type { Standard } from 'item';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
 import { Result } from 'result';
-import { EmbedKind } from 'embed';
-import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
 
 const parser = new DOMParser();
 const parseHtml = (html: string): Option<DocumentFragment> =>

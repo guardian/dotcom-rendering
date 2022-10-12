@@ -43,8 +43,8 @@ import type { Outline } from 'outline';
 import { fromBodyElements } from 'outline';
 import { Result } from 'result';
 import { galleryBody } from './galleryBody';
-import { relatedContent } from './relatedContent';
 import { partialNewsletterItem } from './newsletterSignUpContent';
+import { relatedContent } from './relatedContent';
 
 // ----- Fixture ----- //
 
