@@ -6,6 +6,7 @@ import { NewsletterBadge } from '@guardian/common-rendering/src/components/Newsl
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
+	brand,
 	breakpoints,
 	from,
 	neutral,
@@ -61,8 +62,8 @@ const borderStyles = css`
 	}
 `;
 
-const bannerStyle = (format: ArticleFormat): SerializedStyles => css`
-	background-color: ${background.newsletterSignUpBanner(format)};
+const bannerStyle: SerializedStyles = css`
+	background-color: ${brand[400]};
 	padding: ${remSpace[2]} 0 ${remSpace[9]};
 `;
 
@@ -97,7 +98,7 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 		<main css={backgroundStyles(format)}>
 			<article className="js-article" css={borderStyles}>
 				<header>
-					<div css={bannerStyle(format)}>
+					<div css={bannerStyle}>
 						<div css={sectionStyles}>
 							<figure
 								css={figureStyle}
