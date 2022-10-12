@@ -2,17 +2,16 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { breakpoints, from, remSpace } from '@guardian/source-foundations';
 import { tabletContentWidth } from 'components/editions/styles';
+import Body from 'components/ArticleBody';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import NewsletterSignUpPageBanner from 'components/NewsletterSignUpPageBanner';
-import NewsletterSignUpPageForm from 'components/NewsletterSignUpPageForm';
 import RelatedContent from 'components/RelatedContent';
 import Standfirst from 'components/Standfirst';
 import { getFormat } from 'item';
@@ -25,11 +24,6 @@ import {
 	wideContentWidth,
 } from 'styles';
 
-// --- constants ---//
-const TEST_NEWSLETTER = {
-	identityName: 'test',
-	frequency: 'quarterly',
-} as Newsletter;
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -84,11 +78,7 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 				</header>
 
 				<section css={sectionStyles(format)}>
-					<NewsletterSignUpPageForm
-						format={format}
-						newsletter={TEST_NEWSLETTER}
-					/>
-
+					<Body format={item}>{children}</Body>
 					<MainMedia
 						format={getFormat(item)}
 						mainMedia={item.mainMedia}
