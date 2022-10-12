@@ -7,10 +7,10 @@ import {
 	lifestyle,
 	news,
 	opinion,
+	palette,
 	specialReport,
 	sport,
 } from '@guardian/source-foundations';
-import { specialReportAlt } from '@guardian/source-foundations/dist/cjs/colour/palette';
 
 type ColourType = string;
 
@@ -149,16 +149,16 @@ export const pillarPalette_DO_NOT_USE: Record<
 		800: specialReport[800],
 	},
 	[ArticleSpecial.SpecialReportAlt]: {
-		dark: specialReportAlt[100],
-		main: specialReportAlt[200],
-		bright: specialReportAlt[300],
-		pastel: specialReportAlt[700],
-		faded: specialReportAlt[800],
-		100: specialReportAlt[100],
-		200: specialReportAlt[200],
-		300: specialReportAlt[300],
-		700: specialReportAlt[700],
-		800: specialReportAlt[800],
+		dark: palette.specialReportAlt[100],
+		main: palette.specialReportAlt[200],
+		bright: palette.specialReportAlt[300],
+		pastel: palette.specialReportAlt[700],
+		faded: palette.specialReportAlt[800],
+		100: palette.specialReportAlt[100],
+		200: palette.specialReportAlt[200],
+		300: palette.specialReportAlt[300],
+		700: palette.specialReportAlt[700],
+		800: palette.specialReportAlt[800],
 	},
 };
 
