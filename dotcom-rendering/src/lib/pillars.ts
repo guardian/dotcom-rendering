@@ -10,6 +10,7 @@ import {
 	specialReport,
 	sport,
 } from '@guardian/source-foundations';
+import { specialReportAlt } from '@guardian/source-foundations/dist/cjs/colour/palette';
 
 type ColourType = string;
 
@@ -48,11 +49,24 @@ type LabsPalette = {
 	800: ColourType;
 };
 
+type SpecialAltPalette = {
+	dark: ColourType;
+	main: ColourType;
+	bright: ColourType;
+	pastel: ColourType;
+	faded: ColourType;
+	100: ColourType;
+	200: ColourType;
+	300: ColourType;
+	700: ColourType;
+	800: ColourType;
+};
+
 // pillarPalette_DO_NOT_USE should no longer be used. Use palette from  decidePalette instead
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const pillarPalette_DO_NOT_USE: Record<
 	ArticleTheme,
-	PillarPalette | SpecialPalette | LabsPalette
+	PillarPalette | SpecialPalette | LabsPalette | SpecialAltPalette
 > = {
 	[ArticlePillar.News]: {
 		dark: news[300],
@@ -135,14 +149,16 @@ export const pillarPalette_DO_NOT_USE: Record<
 		800: specialReport[800],
 	},
 	[ArticleSpecial.SpecialReportAlt]: {
-		dark: specialReport[300],
-		main: specialReport[400],
-		bright: specialReport[500],
-		faded: specialReport[800],
-		300: specialReport[300],
-		400: specialReport[400],
-		500: specialReport[500],
-		800: specialReport[800],
+		dark: specialReportAlt[100],
+		main: specialReportAlt[200],
+		bright: specialReportAlt[300],
+		pastel: specialReportAlt[700],
+		faded: specialReportAlt[800],
+		100: specialReportAlt[100],
+		200: specialReportAlt[200],
+		300: specialReportAlt[300],
+		700: specialReportAlt[700],
+		800: specialReportAlt[800],
 	},
 };
 

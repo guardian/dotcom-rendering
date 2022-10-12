@@ -16,6 +16,7 @@ import {
 	specialReport,
 	neutral,
 } from '@guardian/source-foundations';
+import { specialReportAlt } from '@guardian/source-foundations/dist/cjs/colour/palette';
 import { Colour } from '.';
 
 // ----- Functions ----- //
@@ -67,6 +68,8 @@ const commentCount = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return specialReportAlt[300];
 	}
 };
 const commentCountDark = (format: ArticleFormat): Colour => {
@@ -92,6 +95,8 @@ const commentCountDark = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -118,6 +123,8 @@ const commentCountWide = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -175,6 +182,8 @@ const blockquoteIcon = (format: ArticleFormat): Colour => {
 					return labs[300];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[400];
 			}
 		default:
 			switch (format.theme) {
@@ -192,6 +201,8 @@ const blockquoteIcon = (format: ArticleFormat): Colour => {
 					return labs[400];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[400];
 			}
 	}
 };
