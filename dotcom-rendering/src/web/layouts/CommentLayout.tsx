@@ -213,7 +213,6 @@ const minHeightWithAvatar = css`
 const avatarPositionStyles = css`
 	display: flex;
 	justify-content: flex-end;
-	overflow: hidden;
 	position: relative;
 	margin-bottom: -29px;
 	margin-top: -50px;
