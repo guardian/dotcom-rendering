@@ -17,7 +17,6 @@ import {
 	specialReport,
 	labs,
 	brandAlt,
-	brand,
 } from '@guardian/source-foundations';
 import { Colour } from '.';
 
