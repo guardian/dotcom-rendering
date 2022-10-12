@@ -55,32 +55,32 @@ const sortAscendingWidth = (a: Asset, b: Asset) =>
 		? a.typeData.width - b.typeData.width
 		: 0;
 
-const getHighestResAsset = (assets: Asset[]): Option<Asset> => {
-	const asset = assets
-		.filter((asset) => asset.typeData?.width && asset.typeData?.height)
-		.sort(sortAscendingWidth)
-		.pop();
-	return fromNullable(asset);
-};
+const getHighestResAsset = (assets: Asset[]): Option<Asset> =>
+	fromNullable(
+		assets
+			.filter((asset) => asset.typeData?.width && asset.typeData?.height)
+			.sort(sortAscendingWidth)
+			.pop(),
+	);
 
 const parseImage =
 	({ docParser, salt }: Context) =>
 	(element: BlockElement): Option<Image> => {
-		const maybeMasterAsset = fromNullable(
+		const masterAsset = fromNullable(
 			element.assets.find((asset) => asset.typeData?.isMaster),
 		);
 
-		const maybeHighestResAsset = getHighestResAsset(element.assets);
+		const highestResAsset = getHighestResAsset(element.assets);
 
-		const maybeBestAsset =
-			maybeMasterAsset.kind === OptionKind.Some
-				? maybeMasterAsset
-				: maybeHighestResAsset;
+		const bestAsset =
+			masterAsset.kind === OptionKind.Some
+				? masterAsset
+				: highestResAsset;
 
 		const data = element.imageTypeData;
 
 		return pipe(
-			maybeBestAsset,
+			bestAsset,
 			andThen((asset) => {
 				if (
 					asset.file === undefined ||
