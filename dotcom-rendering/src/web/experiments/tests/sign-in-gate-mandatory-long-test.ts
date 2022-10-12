@@ -61,8 +61,8 @@ const EuropeList: (CountryCode | '')[] = [
 ];
 
 const sharedTestData = {
-	start: '2022-10-04',
-	expiry: '2023-01-18',
+	start: '2022-10-11',
+	expiry: '2023-01-31',
 	author: 'vlbee',
 	description:
 		'Long-running mandatory sign in gate - Show gate to global users on 3rd article view of simple article templates, with higher priority over banners and epic.',
@@ -79,7 +79,7 @@ const sharedTestData = {
 export const signInGateMandatoryLongTestControlUk = {
 	...sharedTestData,
 	id: 'SignInGateMandatoryLongTestControlUk',
-	audience: 0.0358,
+	audience: 0.0393,
 	audienceOffset: 0,
 	dataLinkNames: 'SignInGateMandatoryLongTestControlUk',
 	variants: [
@@ -100,7 +100,7 @@ export const signInGateMandatoryLongTestControlUk = {
 export const signInGateMandatoryLongTestVariantUk = {
 	...sharedTestData,
 	id: 'SignInGateMandatoryLongTestVariantUk',
-	audience: 0.0165,
+	audience: 0.0182,
 	audienceOffset: 0.8373,
 	dataLinkNames: 'SignInGateMandatoryLongTestVariantUk',
 	variants: [
@@ -121,7 +121,7 @@ export const signInGateMandatoryLongTestVariantUk = {
 export const signInGateMandatoryLongTestControlNa = {
 	...sharedTestData,
 	id: 'SignInGateMandatoryLongTestControlNa',
-	audience: 0.0919,
+	audience: 0.1131,
 	audienceOffset: 0,
 	dataLinkNames: 'SignInGateMandatoryLongTestControlNA',
 	variants: [
@@ -142,7 +142,7 @@ export const signInGateMandatoryLongTestControlNa = {
 export const signInGateMandatoryLongTestVariantNa = {
 	...sharedTestData,
 	id: 'SignInGateMandatoryLongTestVariantNa',
-	audience: 0.042,
+	audience: 0.0544,
 	audienceOffset: 0.8373,
 	dataLinkNames: 'SignInGateMandatoryLongTestVariantNA',
 	variants: [
