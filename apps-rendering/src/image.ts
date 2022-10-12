@@ -60,24 +60,26 @@ const parseRole = (role: string | undefined): ArticleElementRole => {
 const sortAscendingWidth = (a: Asset, b: Asset): number =>
 	a.typeData?.width && b.typeData?.width
 		? a.typeData.width - b.typeData.width
-		: 0;
+		: -1;
 
 const getHighestResAsset = (assets: Asset[]): Option<Asset> =>
 	fromNullable(assets.slice().sort(sortAscendingWidth).pop());
 
+const getBestAsset = (assets: Asset[]): Option<Asset> => {
+	const masterAsset = fromNullable(
+		assets.find((asset) => asset.typeData?.isMaster),
+	);
+	if (masterAsset.kind === OptionKind.Some) {
+		return masterAsset;
+	}
+
+	return getHighestResAsset(assets);
+};
+
 const parseImage =
 	({ docParser, salt }: Context) =>
 	(element: BlockElement): Option<Image> => {
-		const masterAsset = fromNullable(
-			element.assets.find((asset) => asset.typeData?.isMaster),
-		);
-
-		const highestResAsset = getHighestResAsset(element.assets);
-
-		const bestAsset =
-			masterAsset.kind === OptionKind.Some
-				? masterAsset
-				: highestResAsset;
+		const bestAsset = getBestAsset(element.assets);
 
 		const data = element.imageTypeData;
 
