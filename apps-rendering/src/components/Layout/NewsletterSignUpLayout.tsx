@@ -18,12 +18,11 @@ import { getFormat } from 'item';
 import type { Standard as StandardItem } from 'item';
 import type { FC, ReactNode } from 'react';
 import {
-	// articleWidthStyles, [might want to use this]
 	darkModeCss,
 	onwardStyles,
+	sidePadding,
 	wideContentWidth,
 } from 'styles';
-
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -34,17 +33,19 @@ const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
     `}
 `;
 
-const sectionStyles = (format: ArticleFormat): SerializedStyles => css`
+const sectionStyles: SerializedStyles = css`
 	margin: 0 auto;
 	position: relative;
 
-	max-width: ${tabletContentWidth}px;
+	${from.phablet} {
+		max-width: ${tabletContentWidth}px;
+	}
 
 	${from.desktop} {
 		max-width: ${wideContentWidth}px;
 	}
 
-	padding: 0 ${remSpace[2]};
+	${sidePadding.styles}
 `;
 
 const BorderStyles = css`
@@ -68,16 +69,16 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 				<header>
 					<NewsletterSignUpPageBanner
 						format={format}
-						innerCss={sectionStyles(format)}
+						innerCss={sectionStyles}
 					/>
-					<div css={sectionStyles(format)}>
+					<div css={sectionStyles}>
 						<Headline item={item} />
 						<Standfirst item={item} />
 						<Logo item={item} />
 					</div>
 				</header>
 
-				<section css={sectionStyles(format)}>
+				<section css={sectionStyles}>
 					<Body format={item}>{children}</Body>
 					<MainMedia
 						format={getFormat(item)}
