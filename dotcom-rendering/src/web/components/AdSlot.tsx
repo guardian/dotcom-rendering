@@ -32,7 +32,7 @@ type NonInlineProps = {
 
 /**
  * This union type allows us to conditionally require the index property
- * based on position. If position = 'inline' | 'mobile-front' then we expect the index
+ * based on position. If `position` is 'inline' or 'mobile-front' then we expect the index
  * value. If not, then we explicitly refuse this property
  */
 type Props = InlineProps | NonInlineProps;
