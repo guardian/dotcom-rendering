@@ -101,4 +101,4 @@ Stories are deployed on [GitHub pages](https://guardian.github.io/apps-rendering
 > **Note**
 > These models have moved! You can now find them, along with release instructions, at [`guardian/apps-rendering-api-models`](https://github.com/guardian/apps-rendering-api-models).
 
-The `apps-rendering` API models are used to communicate with the Apps Rendering API.
+The `apps-rendering-api-models` are used to communicate with the Apps Rendering API. [`MAPI`](https://github.com/guardian/mobile-apps-api) constructs a `RenderingRequest` when it wants Apps Rendering to render an article. This includes all the information Apps Rendering requires to do the render. `RenderingRequest` and other associated types are all defined in `apps-rendering-api-models`.
