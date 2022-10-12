@@ -44,6 +44,7 @@ import { fromBodyElements } from 'outline';
 import { Result } from 'result';
 import { galleryBody } from './galleryBody';
 import { relatedContent } from './relatedContent';
+import { partialNewsletterItem } from './newsletterSignUpContent';
 
 // ----- Fixture ----- //
 
@@ -502,6 +503,12 @@ const explainer: Explainer = {
 	outline: outlineFromItem(fields.body),
 };
 
+const newsletterSignUp: Standard = {
+	...fields,
+	design: ArticleDesign.NewsletterSignup,
+	...partialNewsletterItem,
+};
+
 // ----- Exports ----- //
 
 export {
@@ -525,4 +532,5 @@ export {
 	quiz,
 	pinnedBlock,
 	explainer,
+	newsletterSignUp,
 };
