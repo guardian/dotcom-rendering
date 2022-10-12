@@ -215,6 +215,8 @@ const textLastUpdated = (format: ArticleFormat): string => {
 				return news[600];
 			case ArticleSpecial.SpecialReport:
 				return specialReport[700];
+			case ArticleSpecial.SpecialReportAlt:
+				return news[600];
 		}
 	}
 	return BLACK;
@@ -319,6 +321,8 @@ const textArticleLink = (format: ArticleFormat): string => {
 				return BLACK;
 			case ArticleSpecial.SpecialReport:
 				return specialReport[300];
+			case ArticleSpecial.SpecialReportAlt:
+				return news[400];
 		}
 	}
 	if (format.design === ArticleDesign.Analysis) {
@@ -337,6 +341,8 @@ const textArticleLink = (format: ArticleFormat): string => {
 				return BLACK;
 			case ArticleSpecial.SpecialReport:
 				return specialReport[300];
+			case ArticleSpecial.SpecialReportAlt:
+				return news[300];
 		}
 	}
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
@@ -452,6 +458,8 @@ const textArticleLinkHover = (format: ArticleFormat): string => {
 				return BLACK;
 			case ArticleSpecial.SpecialReport:
 				return specialReport[100];
+			case ArticleSpecial.SpecialReportAlt:
+				return news[400];
 		}
 	}
 	if (format.design === ArticleDesign.Analysis) {
@@ -470,6 +478,8 @@ const textArticleLinkHover = (format: ArticleFormat): string => {
 				return BLACK;
 			case ArticleSpecial.SpecialReport:
 				return specialReport[100];
+			case ArticleSpecial.SpecialReportAlt:
+				return news[300];
 		}
 	}
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
@@ -765,6 +775,8 @@ const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 				return news[600];
 			case ArticleSpecial.SpecialReport:
 				return specialReport[700];
+			case ArticleSpecial.SpecialReportAlt:
+				return news[600];
 		}
 	}
 
@@ -930,6 +942,8 @@ const fillShareIcon = (format: ArticleFormat): string => {
 				return BLACK;
 			case ArticleSpecial.SpecialReport:
 				return specialReport[300];
+			case ArticleSpecial.SpecialReportAlt:
+				return news[400];
 		}
 	}
 	if (format.design === ArticleDesign.Analysis) {
@@ -948,6 +962,8 @@ const fillShareIcon = (format: ArticleFormat): string => {
 				return BLACK;
 			case ArticleSpecial.SpecialReport:
 				return specialReport[300];
+			case ArticleSpecial.SpecialReportAlt:
+				return news[300];
 		}
 	}
 	if (
@@ -1043,6 +1059,8 @@ const borderLiveBlock = (format: ArticleFormat): string => {
 				return labs[400];
 			case ArticleSpecial.SpecialReport:
 				return specialReport[400];
+			case ArticleSpecial.SpecialReportAlt:
+				return news[400];
 		}
 	}
 
@@ -1077,6 +1095,8 @@ const borderStandfirstLink = (format: ArticleFormat): string => {
 				return news[600];
 			case ArticleSpecial.SpecialReport:
 				return specialReport[450];
+			case ArticleSpecial.SpecialReportAlt:
+				return news[600];
 		}
 	}
 	if (format.theme === ArticleSpecial.SpecialReport)
