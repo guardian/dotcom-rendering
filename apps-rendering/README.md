@@ -98,19 +98,7 @@ Stories are deployed on [GitHub pages](https://guardian.github.io/apps-rendering
 
 ### Generating apps-rendering API models
 
-In order to release the models you'll need to:
+> **Note**
+> These models have moved! You can now find them, along with release instructions, at [`guardian/apps-rendering-api-models`](https://github.com/guardian/apps-rendering-api-models).
 
-- have a Sonatype account with access to the guardian organisation
-- have an NPM account, part of the [@guardian](https://www.npmjs.com/org/guardian) org with a [configured token](https://docs.npmjs.com/creating-and-viewing-authentication-tokens)
-
-Make sure you set upstream `git push --set-upstream origin <BRANCH_NAME>`
-
-In the SBT repl:
-
-```sbtshell
-clean
-project scalaApiModels
-release
-project tsApiModels
-releaseNpm <versionNumber>
-```
+The `apps-rendering` API models are used to communicate with the Apps Rendering API.
