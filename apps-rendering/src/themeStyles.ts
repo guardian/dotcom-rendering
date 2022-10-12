@@ -43,6 +43,7 @@ function themeToPillarString(theme: ArticleTheme): string {
 function themeToPillar(theme: ArticleTheme): ArticlePillar {
 	switch (theme) {
 		case ArticleSpecial.SpecialReport:
+		case ArticleSpecial.SpecialReportAlt:
 		case ArticleSpecial.Labs:
 			return ArticlePillar.News;
 		default:

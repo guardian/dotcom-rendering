@@ -15,8 +15,8 @@ import {
 	labs,
 	specialReport,
 	neutral,
+	palette,
 } from '@guardian/source-foundations';
-import { specialReportAlt } from '@guardian/source-foundations/dist/cjs/colour/palette';
 import { Colour } from '.';
 
 // ----- Functions ----- //
@@ -243,7 +243,7 @@ const pinnedPost = (format: ArticleFormat): string => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
-			return specialReportAlt[300];
+			return palette.specialReportAlt[300];
 	}
 };
 
