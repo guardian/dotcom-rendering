@@ -79,12 +79,11 @@ const getBestAsset = (assets: Asset[]): Option<Asset> => {
 const parseImage =
 	({ docParser, salt }: Context) =>
 	(element: BlockElement): Option<Image> => {
-		const bestAsset = getBestAsset(element.assets);
-
 		const data = element.imageTypeData;
 
 		return pipe(
-			bestAsset,
+			element.assets,
+			getBestAsset,
 			andThen((asset) => {
 				if (
 					asset.file === undefined ||
