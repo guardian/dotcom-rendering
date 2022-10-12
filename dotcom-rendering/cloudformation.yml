@@ -1,9 +1,14 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Frontend rendering service
 Parameters:
-  Subnets:
+  PublicSubnets:
+    Description: Used for the load balancer. Technically this could be in the private subnets too, but isn't for historic reasons (to avoid a replacement/migration).
+    Type: AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>
+    Default: /account/vpc/primary/subnets/public
+  PrivateSubnets:
     Description: The subnets where rendering instances will run
-    Type: List<AWS::EC2::Subnet::Id>
+    Type: AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>
+    Default: /account/vpc/primary/subnets/private
   VpcId:
     Description: The VPC in which rendering instances will run
     Type: AWS::EC2::VPC::Id
@@ -210,7 +215,7 @@ Resources:
         Interval: 30
         Timeout: 10
       Subnets:
-        Ref: Subnets
+        Ref: PublicSubnets
       SecurityGroups:
         - Ref: InternalLoadBalancerSecurityGroup
       AccessLoggingPolicy:
@@ -277,7 +282,7 @@ Resources:
     Properties:
       AvailabilityZones: !GetAZs ''
       VPCZoneIdentifier:
-        Ref: Subnets
+        Ref: PrivateSubnets
       LaunchConfigurationName:
         Ref: LaunchConfig
       MinSize: !FindInMap [StageMap, !Ref Stage, MinCapacity]
