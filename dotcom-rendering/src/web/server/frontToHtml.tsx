@@ -2,7 +2,10 @@ import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { renderToString } from 'react-dom/server';
-import { BUILD_VARIANT } from '../../../scripts/webpack/bundles';
+import {
+	BUILD_VARIANT,
+	dcrJavascriptBundle,
+} from '../../../scripts/webpack/bundles';
 import {
 	generateScriptTags,
 	getScriptsFromManifest,
@@ -50,7 +53,7 @@ export const frontToHtml = ({ front }: Props): string => {
 
 	const shouldServeVariantBundle: boolean = [
 		BUILD_VARIANT,
-		front.config.abTests.dcrJsBundleVariant === 'variant',
+		front.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
 	].every(Boolean);
 
 	/**
