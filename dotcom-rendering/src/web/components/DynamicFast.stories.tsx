@@ -231,7 +231,7 @@ TwoVeryBigsTwoBigsFiveStandards.story = {
 	name: 'with 2 very big cards, 2 bigs, 5 standards',
 };
 
-export const TwoVeryBigsTwoBigsFirstBoostedSevenStandards = () => (
+export const TwoVeryBigsTwoBigsFirstBoostedEightStandards = () => (
 	<Section
 		title="DynamicFast"
 		padContent={false}
@@ -243,15 +243,15 @@ export const TwoVeryBigsTwoBigsFirstBoostedSevenStandards = () => (
 				...defaultGroupedTrails,
 				veryBig: [trails[0], trails[1]],
 				big: [{ ...trails[3], isBoosted: true }, trails[4]],
-				standard: trails.slice(5, 11),
+				standard: trails.slice(5, 12),
 			}}
 			showAge={true}
 		/>
 	</Section>
 );
 
-TwoVeryBigsTwoBigsFirstBoostedSevenStandards.story = {
-	name: 'with 2 very big cards, 2 bigs (first boosted), 7 standards',
+TwoVeryBigsTwoBigsFirstBoostedEightStandards.story = {
+	name: 'with 2 very big cards, 2 bigs (first boosted), 8 standards',
 };
 
 export const TwoVeryBigsThreeBigsThreeStandards = () => (

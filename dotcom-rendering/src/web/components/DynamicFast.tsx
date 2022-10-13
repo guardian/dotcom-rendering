@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
-import { css } from '@emotion/react';
-import { space, until } from '@guardian/source-foundations';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import {
@@ -11,7 +9,6 @@ import {
 	Card75_Card25,
 	shouldPadWrappableRows,
 } from '../lib/dynamicSlices';
-import { verticalDivider } from '../lib/verticalDivider';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -52,18 +49,6 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 	const columnOne = cards.slice(1, 4);
 	const columnTwo = cards.slice(4, 10);
 
-	const manualUlStyles = css`
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		flex-basis: 50%;
-		flex-grow: 1;
-		row-gap: ${space[3]}px;
-		${until.tablet} {
-			flex-basis: 100%;
-		}
-	`;
-
 	return (
 		<UL direction="row">
 			<LI percentage="50%" padSides={true}>
@@ -79,81 +64,62 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 					imagePositionOnMobile="top"
 				/>
 			</LI>
-			<LI percentage="50%">
-				<UL direction="row">
-					{/**
-					 * These row & columns are a little outside of the standard of what the standard
-					 * LI and UL components we have support - it made more sense to manually create the CSS for this use case
-					 * than to expand & muddy the APIs of both components to support this layout type.
-					 */}
-					<li
-						css={css`
-							position: relative;
-							display: flex;
-							flex-basis: 100%;
-							flex-wrap: wrap;
-							row-gap: ${space[3]}px;
-						`}
-					>
-						<ul css={[manualUlStyles, verticalDivider]}>
-							{columnOne.map((card, cardIndex) => {
-								return (
-									<LI
-										key={card.url}
-										showDivider={true}
-										padSides={true}
-									>
-										{/* The first card shows an image */}
-										{cardIndex === 0 ? (
-											<FrontCard
-												trail={card}
-												containerPalette={
-													containerPalette
-												}
-												showAge={showAge}
-												supportingContent={
-													card.supportingContent
-												}
-												headlineSize="medium"
-												imageUrl={card.image}
-												imagePosition="top"
-												imagePositionOnMobile="left"
-											/>
-										) : (
-											<FrontCard
-												trail={card}
-												containerPalette={
-													containerPalette
-												}
-												showAge={showAge}
-												imageUrl={undefined}
-												headlineSize="small"
-											/>
-										)}
-									</LI>
-								);
-							})}
-						</ul>
-						<ul css={[manualUlStyles, verticalDivider]}>
-							{columnTwo.map((card) => {
-								return (
-									<LI
-										key={card.url}
-										showDivider={true}
-										padSides={true}
-									>
-										<FrontCard
-											trail={card}
-											containerPalette={containerPalette}
-											showAge={showAge}
-											imageUrl={undefined}
-											headlineSize="small"
-										/>
-									</LI>
-								);
-							})}
-						</ul>
-					</li>
+			<LI percentage="25%" showDivider={true}>
+				<UL direction="column">
+					{columnOne.map((card, cardIndex) => {
+						return (
+							<LI
+								key={card.url}
+								showDivider={false}
+								padSides={true}
+							>
+								{/* The first card shows an image */}
+								{cardIndex === 0 ? (
+									<FrontCard
+										trail={card}
+										containerPalette={containerPalette}
+										showAge={showAge}
+										supportingContent={
+											card.supportingContent
+										}
+										headlineSize="medium"
+										imageUrl={card.image}
+										imagePosition="top"
+										imagePositionOnMobile="left"
+									/>
+								) : (
+									<FrontCard
+										trail={card}
+										containerPalette={containerPalette}
+										showAge={showAge}
+										imageUrl={undefined}
+										headlineSize="small"
+									/>
+								)}
+							</LI>
+						);
+					})}
+				</UL>
+			</LI>
+			<LI percentage="25%" showDivider={columnTwo.length > 0}>
+				<UL direction="column">
+					{columnTwo.map((card) => {
+						return (
+							<LI
+								key={card.url}
+								showDivider={false}
+								padSides={true}
+							>
+								<FrontCard
+									trail={card}
+									containerPalette={containerPalette}
+									showAge={showAge}
+									imageUrl={undefined}
+									headlineSize="small"
+								/>
+							</LI>
+						);
+					})}
 				</UL>
 			</LI>
 		</UL>
