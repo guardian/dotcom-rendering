@@ -693,6 +693,8 @@ export const DynamicFast = ({
 						containerPalette={containerPalette}
 					/>
 				);
+			default:
+				return <></>;
 		}
 	};
 
