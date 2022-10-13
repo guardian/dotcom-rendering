@@ -156,7 +156,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 			</LI>
 			<LI percentage="50%">
 				<UL direction="row" wrapCards={true} showDivider={true}>
-					{remaining.map((card, cardIndex, { length }) => {
+					{remaining.map((card, cardIndex) => {
 						const columns = 2;
 						return (
 							<LI
@@ -166,7 +166,8 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								showDivider={cardIndex > 0}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
-									length - (length % columns),
+									remaining.length -
+										(remaining.length % columns),
 									columns,
 								)}
 								padSides={true}
@@ -199,7 +200,7 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 	}) => {
 		return (
 			<UL direction="row" wrapCards={true}>
-				{cards.map((card, cardIndex, { length }) => {
+				{cards.map((card, cardIndex) => {
 					const columns = 4;
 					return (
 						<LI
@@ -210,7 +211,7 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 							showDivider={cardIndex % columns !== 0}
 							offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 								cardIndex,
-								length,
+								cards.length,
 								columns,
 							)}
 						>
@@ -255,7 +256,7 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 			</LI>
 			<LI percentage="75%">
 				<UL direction="row" wrapCards={true} showDivider={true}>
-					{remaining.map((card, cardIndex, { length }) => {
+					{remaining.map((card, cardIndex) => {
 						const columns = 3;
 						return (
 							<LI
@@ -266,7 +267,8 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								showDivider={cardIndex % columns !== 0}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
-									length - (length % columns),
+									remaining.length -
+										(remaining.length % columns),
 									columns,
 								)}
 							>
@@ -322,7 +324,7 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 
 			<LI percentage="50%">
 				<UL direction="row" wrapCards={true} showDivider={true}>
-					{remaining.map((card, cardIndex, { length }) => {
+					{remaining.map((card, cardIndex) => {
 						const columns = 2;
 						return (
 							<LI
@@ -333,7 +335,8 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								showDivider={cardIndex % columns !== 0}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
-									length - (length % columns),
+									remaining.length -
+										(remaining.length % columns),
 									columns,
 								)}
 							>
