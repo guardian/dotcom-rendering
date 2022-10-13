@@ -10,6 +10,7 @@ import ArticleBody from 'components/ArticleBody';
 import Byline from 'components/Byline';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
+import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
@@ -66,6 +67,7 @@ const AnalysisLayout: FC<Props> = ({ item, children }) => (
 						<Standfirst item={item} />
 						<StraightLines cssOverrides={lineStyles} count={4} />
 						<Metadata item={item} />
+						<Logo item={item} />
 					</section>
 				</header>
 				<ArticleBody className={[articleWidthStyles]} format={item}>
