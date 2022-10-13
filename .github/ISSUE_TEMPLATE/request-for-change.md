@@ -1,8 +1,8 @@
 ---
-name: Request for change
+name: DCR Request for change
 about: Tell us about a feature that you're working on
 title: "[RFC]"
-labels: RFC
+labels: RFC, dotcom-rendering
 assignees: ''
 
 ---
