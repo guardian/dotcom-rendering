@@ -26,6 +26,7 @@ import {
 	onwardStyles,
 } from 'styles';
 import HeadlineTag from '../HeadlineTag';
+import Logo from 'components/Logo';
 
 // ----- Styles ----- //
 
@@ -66,6 +67,7 @@ const AnalysisLayout: FC<Props> = ({ item, children }) => (
 						<Standfirst item={item} />
 						<StraightLines cssOverrides={lineStyles} count={4} />
 						<Metadata item={item} />
+						<Logo item={item} />
 					</section>
 				</header>
 				<ArticleBody className={[articleWidthStyles]} format={item}>

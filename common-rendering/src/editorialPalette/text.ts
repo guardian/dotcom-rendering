@@ -57,8 +57,13 @@ const mediaArticleBodyLinkDark = (format: ArticleFormat): Colour => {
 	}
 };
 
-const branding = (_format: ArticleFormat): Colour => {
-	return neutral[20];
+const branding = (format: ArticleFormat): Colour => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return neutral[86];
+		default:
+			return neutral[20];
+	}
 };
 
 const brandingDark = (_format: ArticleFormat): Colour => {
@@ -531,6 +536,8 @@ const articleLink = (format: ArticleFormat): Colour => {
 				case ArticleSpecial.SpecialReport:
 					return specialReport[400];
 			}
+		case ArticleDesign.Gallery:
+			return neutral[86];
 		default:
 			switch (format.theme) {
 				case ArticlePillar.News:

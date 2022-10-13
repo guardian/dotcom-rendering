@@ -14,7 +14,7 @@ const styles = css`
 	${grid.column.centre}
 
 	${from.leftCol} {
-		grid-row: 4;
+		grid-row: 6;
 	}
 `;
 
