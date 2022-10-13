@@ -19,6 +19,7 @@ import { FixedSmallSlowVMPU } from '../components/FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from '../components/FixedSmallSlowVThird';
 import { FixedMediumFastXII } from '../components/FixedMediumFastXII';
 import { NavList } from '../components/NavList';
+import { NavMediaList } from '../components/NavMediaList';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -156,6 +157,13 @@ export const DecideContainer = ({
 		case 'nav/list':
 			return (
 				<NavList trails={trails} containerPalette={containerPalette} />
+			);
+		case 'nav/media-list':
+			return (
+				<NavMediaList
+					trails={trails}
+					containerPalette={containerPalette}
+				/>
 			);
 		default:
 			return <p>{containerType} is not yet supported</p>;
