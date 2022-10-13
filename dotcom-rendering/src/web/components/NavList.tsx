@@ -31,7 +31,7 @@ const ulStyles = css`
 	column-gap: 0.625rem;
 `;
 
-const divStyles = css`
+const liStyles = css`
 	color: ${palette.neutral[7]};
 	border-top: 0.0625rem solid ${palette.neutral[93]};
 	padding-top: ${space[1]}px;
@@ -50,23 +50,21 @@ export const NavList = ({ trails, containerPalette }: Props) => {
 	return (
 		<ul css={ulStyles}>
 			{trails.map((trail) => (
-				<li>
-					<div css={divStyles}>
-						<Link
-							href={trail.url}
-							priority="secondary"
-							subdued={true}
-							cssOverrides={css`
-								${body.medium()}
-								font-weight: bold;
-								line-height: ${space[6]}px;
-								${containerOverrides &&
-								`color: ${containerOverrides.text.cardHeadline}`}
-							`}
-						>
-							{trail.headline}
-						</Link>
-					</div>
+				<li css={liStyles}>
+					<Link
+						href={trail.url}
+						priority="secondary"
+						subdued={true}
+						cssOverrides={css`
+							${body.medium()}
+							font-weight: bold;
+							line-height: ${space[6]}px;
+							${containerOverrides &&
+							`color: ${containerOverrides.text.cardHeadline}`}
+						`}
+					>
+						{trail.headline}
+					</Link>
 				</li>
 			))}
 		</ul>
