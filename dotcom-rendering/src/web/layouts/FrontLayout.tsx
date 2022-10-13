@@ -48,19 +48,6 @@ const getMerchHighPosition = (
 	}
 };
 
-const shouldInsertMerchHigh = (
-	index: number,
-	isPaidContent: boolean | undefined,
-	collectionCount: number,
-	isNetworkFront: boolean | undefined,
-) => {
-	const minContainers = isPaidContent ? 1 : 2;
-	if (collectionCount < minContainers) {
-		return false;
-	}
-
-	return index === getMerchHighPosition(collectionCount, isNetworkFront);
-};
 // On mobile, we remove the first container if it is a thrasher
 // and remove a container if it, or the next sibling, is a commercial container
 // we also exclude any containers that are directly before a thrasher
@@ -70,31 +57,69 @@ const getMobileAdPositions = (
 	isNetworkFront: boolean | undefined,
 	collections: DCRCollectionType[],
 ) => {
-	let positions: number[] = [];
+	const positions: number[] = [];
 	const merchHighPosition = getMerchHighPosition(
 		collections.length,
 		isNetworkFront,
 	);
 
 	collections.forEach((collection, collectionIndex) => {
-		if (
-			(collectionIndex === 0 &&
-				collection.collectionType === 'fixed/thrasher') ||
+		const isThrasher = collection.collectionType === 'fixed/thrasher';
+		const isFirst = collectionIndex === 0;
+		const isNearMerchandising =
 			collectionIndex === merchHighPosition ||
-			collectionIndex + 1 === merchHighPosition ||
+			collectionIndex + 1 === merchHighPosition;
+		const isNearThrasher =
 			collections[collectionIndex + 1]?.collectionType ===
-				'fixed/thrasher'
+			'fixed/thrasher';
+		if (isFirst && isThrasher) return false;
+		if (isNearMerchandising) return false;
+		if (isNearThrasher) return false;
+		else if (
+			collectionIndex % 2 === 0 &&
+			collectionIndex < collections.length - 1
 		) {
-			return false;
-		} else if (collectionIndex % 2 === 0) {
 			positions.push(collectionIndex);
 		}
 		return false;
 	});
-	//Shouldn't insert more than ten ads.
-	positions = positions.slice(0, 10);
+	//Should insert no more than 10 ads
+	return positions.slice(0, 10);
+};
 
-	return positions;
+const decideAdSlot = (
+	index: number,
+	isNetworkFront: boolean | undefined,
+	collectionCount: number,
+	isPaidContent: boolean | undefined,
+	format: ArticleDisplay,
+	mobileAdPositions: number[],
+) => {
+	const minContainers = isPaidContent ? 1 : 2;
+	if (
+		collectionCount > minContainers &&
+		index === getMerchHighPosition(collectionCount, isNetworkFront)
+	) {
+		return (
+			<AdSlot
+				data-print-layout="hide"
+				position="merchandising-high"
+				display={format}
+			/>
+		);
+	} else if (mobileAdPositions.includes(index)) {
+		return (
+			<Hide from="tablet">
+				<AdSlot
+					index={index}
+					data-print-layout="hide"
+					position="mobile-front"
+					display={format}
+				/>
+			</Hide>
+		);
+	}
+	return false;
 };
 
 const isNavList = (collection: DCRCollectionType) => {
@@ -137,11 +162,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	 */
 	const renderAds = !front.isAdFreeUser;
 
+	const isFront = front.isNetworkFront;
+
 	const mobileAdPositions = front.isNetworkFront
-		? getMobileAdPositions(
-				front.isNetworkFront,
-				front.pressedPage.collections,
-		  )
+		? getMobileAdPositions(isFront, front.pressedPage.collections)
 		: [];
 
 	return (
@@ -263,28 +287,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								>
 									<Snap snapData={trails[0].snapData} />
 								</Section>
-								{shouldInsertMerchHigh(
+								{decideAdSlot(
 									index,
-									front.isNetworkFront,
+									isFront,
 									front.pressedPage.collections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
-								) && (
-									<AdSlot
-										data-print-layout="hide"
-										position="merchandising-high"
-										display={format.display}
-									/>
-								)}
-								{mobileAdPositions.includes(index) && (
-									<Hide from="tablet">
-										<AdSlot
-											index={index}
-											data-print-layout="hide"
-											position="mobile-front"
-											display={format.display}
-										/>
-									</Hide>
+									format.display,
+									mobileAdPositions,
 								)}
 							</>
 						);
@@ -331,28 +341,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										/>
 									</MostViewedFooterLayout>
 								</Section>
-								{shouldInsertMerchHigh(
+								{decideAdSlot(
 									index,
-									front.isNetworkFront,
+									isFront,
 									front.pressedPage.collections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
-								) && (
-									<AdSlot
-										data-print-layout="hide"
-										position="merchandising-high"
-										display={format.display}
-									/>
-								)}
-								{mobileAdPositions.includes(index) && (
-									<Hide from="tablet">
-										<AdSlot
-											index={index}
-											data-print-layout="hide"
-											position="mobile-front"
-											display={format.display}
-										/>
-									</Hide>
+									format.display,
+									mobileAdPositions,
 								)}
 							</>
 						);
@@ -396,28 +392,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 								/>
 							</Section>
-
-							{shouldInsertMerchHigh(
+							{decideAdSlot(
 								index,
-								front.isNetworkFront,
+								isFront,
 								front.pressedPage.collections.length,
 								front.pressedPage.frontProperties.isPaidContent,
-							) && (
-								<AdSlot
-									data-print-layout="hide"
-									position="merchandising-high"
-									display={format.display}
-								/>
-							)}
-							{mobileAdPositions.includes(index) && (
-								<Hide from="tablet">
-									<AdSlot
-										index={index}
-										data-print-layout="hide"
-										position="mobile-front"
-										display={format.display}
-									/>
-								</Hide>
+								format.display,
+								mobileAdPositions,
 							)}
 						</>
 					);
