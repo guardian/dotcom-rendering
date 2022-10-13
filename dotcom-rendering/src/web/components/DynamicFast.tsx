@@ -198,6 +198,8 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 		showAge?: boolean;
 		containerPalette?: DCRContainerPalette;
 	}) => {
+		if (cards.length === 0) return null;
+
 		return (
 			<UL direction="row" wrapCards={true}>
 				{cards.map((card, cardIndex) => {
@@ -297,6 +299,8 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
+	if (cards.length < 0) return null;
+
 	const bigs = cards.slice(0, 2);
 	const remaining = cards.slice(2, 8);
 
@@ -365,6 +369,8 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
+	if (cards.length < 3) return null;
+
 	const bigs = cards.slice(0, 3);
 	const remaining = cards.slice(3, 6);
 
@@ -426,6 +432,8 @@ const Card25_Card25_Card25_Card25 = ({
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
+	if (cards.length < 4) return null;
+
 	const bigs = cards.slice(0, 4);
 
 	return (
