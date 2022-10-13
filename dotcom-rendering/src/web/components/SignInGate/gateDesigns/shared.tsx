@@ -143,9 +143,11 @@ export const hideElementsCss = [
     }`,
 	// 3. mask the first and second with a gradient overlay
 	`.article-body-commercial-selector > p:nth-of-type(1) {
+        -webkit-mask-image: linear-gradient(black, rgba(0, 0, 0, 0.5));
         mask-image: linear-gradient(black, rgba(0, 0, 0, 0.5));
     }
 	.article-body-commercial-selector > p:nth-of-type(2) {
+        -webkit-mask-image: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
         mask-image: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
     }
 	`,

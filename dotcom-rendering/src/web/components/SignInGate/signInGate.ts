@@ -4,15 +4,20 @@ import type { ABTest } from '@guardian/ab-core';
 import { signInGateMainControl } from '../../experiments/tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from '../../experiments/tests/sign-in-gate-main-variant';
 import {
-	signInGateMandatoryLongBucketingTestRun,
-	signInGateMandatoryLongBucketingTestRunEu,
-	signInGateMandatoryLongBucketingTestRunNa,
-	signInGateMandatoryLongBucketingTestRunUk,
-} from '../../experiments/tests/sign-in-gate-mandatory-long-testrun';
+	signInGateMandatoryLongTestControlAunz,
+	signInGateMandatoryLongTestControlEu,
+	signInGateMandatoryLongTestControlNa,
+	signInGateMandatoryLongTestControlUk,
+	signInGateMandatoryLongTestVariantAunz,
+	signInGateMandatoryLongTestVariantNa,
+	signInGateMandatoryLongTestVariantEu,
+	signInGateMandatoryLongTestVariantUk,
+} from '../../experiments/tests/sign-in-gate-mandatory-long-test';
 
 // Sign in Gate Types
 import { signInGateComponent as gateMainControl } from './gates/main-control';
 import { signInGateComponent as gateMainVariant } from './gates/main-variant';
+import { signInGateMandatoryComponent as gateMainMandatoryVariant } from './gates/main-mandatory-variant';
 import type { SignInGateTestMap } from './types';
 
 /* When adding a new test, you need to add the test name to the tests array below,
@@ -23,29 +28,38 @@ import type { SignInGateTestMap } from './types';
 export const signInGateTests: ReadonlyArray<ABTest> = [
 	signInGateMainVariant,
 	signInGateMainControl,
-	signInGateMandatoryLongBucketingTestRun,
-	signInGateMandatoryLongBucketingTestRunEu,
-	signInGateMandatoryLongBucketingTestRunNa,
-	signInGateMandatoryLongBucketingTestRunUk,
+	signInGateMandatoryLongTestControlAunz,
+	signInGateMandatoryLongTestControlEu,
+	signInGateMandatoryLongTestControlNa,
+	signInGateMandatoryLongTestControlUk,
+	signInGateMandatoryLongTestVariantAunz,
+	signInGateMandatoryLongTestVariantNa,
+	signInGateMandatoryLongTestVariantEu,
+	signInGateMandatoryLongTestVariantUk,
 ];
 
 export const signInGateTestVariantToGateMapping: SignInGateTestMap = {
 	'main-control-4': gateMainControl,
 	'main-variant-4': gateMainVariant,
-	'mandatory-long-bucketing-testrun': gateMainVariant, // showing main gate for test run
-	'mandatory-long-bucketing-testrun-uk': gateMainVariant, // showing main gate for test run
-	'mandatory-long-bucketing-testrun-na': gateMainVariant, // showing main gate for test run
-	'mandatory-long-bucketing-testrun-eu': gateMainVariant, // showing main gate for test run
+	'mandatory-long-test-control-uk': gateMainVariant, // showing main dismissable gate
+	'mandatory-long-test-control-na': gateMainVariant, // showing main dismissable gate
+	'mandatory-long-test-control-aunz': gateMainVariant, // showing main dismissable gate
+	'mandatory-long-test-control-eu': gateMainVariant, // showing main dismissable gate
+	'mandatory-long-test-variant-uk': gateMainMandatoryVariant,
+	'mandatory-long-test-variant-na': gateMainMandatoryVariant,
+	'mandatory-long-test-variant-aunz': gateMainMandatoryVariant,
+	'mandatory-long-test-variant-eu': gateMainMandatoryVariant,
 };
 
 export const signInGateTestIdToComponentId: { [key: string]: string } = {
 	SignInGateMainVariant: 'main_variant_4',
 	SignInGateMainControl: 'main_control_4',
-	SignInGateMandatoryLongBucketingTestRun: 'mandatory_long_bucketing_testrun',
-	SignInGateMandatoryLongBucketingTestRunUk:
-		'mandatory_long_bucketing_testrun_uk',
-	SignInGateMandatoryLongBucketingTestRunNa:
-		'mandatory_long_bucketing_testrun_na',
-	SignInGateMandatoryLongBucketingTestRunEu:
-		'mandatory_long_bucketing_testrun_eu',
+	signInGateMandatoryLongTestControlAunz: 'mandatory_long_test_control_uk',
+	signInGateMandatoryLongTestControlEu: 'mandatory_long_test_control_na',
+	signInGateMandatoryLongTestControlNa: 'mandatory_long_test_control_aunz',
+	signInGateMandatoryLongTestControlUk: 'mandatory_long_test_control_eu',
+	signInGateMandatoryLongTestVariantAunz: 'mandatory_long_test_variant_uk',
+	signInGateMandatoryLongTestVariantNa: 'mandatory_long_test_variant_na',
+	signInGateMandatoryLongTestVariantEu: 'mandatory_long_test_variant_aunz',
+	signInGateMandatoryLongTestVariantUk: 'mandatory_long_test_variant_eu',
 };
