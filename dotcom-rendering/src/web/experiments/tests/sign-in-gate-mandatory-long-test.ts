@@ -123,7 +123,7 @@ export const signInGateMandatoryLongTestControlNa = {
 	id: 'SignInGateMandatoryLongTestControlNa',
 	audience: 0.1131,
 	audienceOffset: 0,
-	dataLinkNames: 'SignInGateMandatoryLongTestControlNA',
+	dataLinkNames: 'SignInGateMandatoryLongTestControlNa',
 	variants: [
 		{
 			id: 'mandatory-long-test-control-na',
@@ -144,7 +144,7 @@ export const signInGateMandatoryLongTestVariantNa = {
 	id: 'SignInGateMandatoryLongTestVariantNa',
 	audience: 0.0544,
 	audienceOffset: 0.8373,
-	dataLinkNames: 'SignInGateMandatoryLongTestVariantNA',
+	dataLinkNames: 'SignInGateMandatoryLongTestVariantNa',
 	variants: [
 		{
 			id: 'mandatory-long-test-variant-na',
