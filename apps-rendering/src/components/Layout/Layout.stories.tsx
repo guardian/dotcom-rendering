@@ -3,12 +3,11 @@ import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import { none, Option } from '@guardian/types';
-import { some, withDefault } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { none, some, withDefault } from '@guardian/types';
 import AnalysisLayout from 'components/Layout/AnalysisLayout';
 import Comment from 'components/Layout/CommentLayout';
 import Standard from 'components/Layout/StandardLayout';
-import ImmersiveLayout from './ImmersiveLayout';
 import {
 	analysis,
 	article,
@@ -32,8 +31,9 @@ import type { Item } from 'item';
 import type { ReactElement } from 'react';
 import { renderAll } from 'renderer';
 import { Result } from 'result';
-import Live from './LiveLayout';
 import GalleryLayout from './GalleryLayout';
+import ImmersiveLayout from './ImmersiveLayout';
+import Live from './LiveLayout';
 
 // ----- Functions ----- //
 

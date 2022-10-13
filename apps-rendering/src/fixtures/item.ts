@@ -521,7 +521,11 @@ const immersive: Standard = {
 const gallery: Standard = {
 	design: ArticleDesign.Gallery,
 	...fields,
-	body: body.filter(element => element.isErr() || (element.isOk() && element.value.kind === ElementKind.Image)),
+	body: body.filter(
+		(element) =>
+			element.isErr() ||
+			(element.isOk() && element.value.kind === ElementKind.Image),
+	),
 };
 
 // ----- Exports ----- //

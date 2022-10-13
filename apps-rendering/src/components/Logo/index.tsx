@@ -71,7 +71,7 @@ const blogStyles = css`
 
 const galleryStyles = (lightModeImage: string, darkModeImage?: string) => css`
 	img {
-		content: url("${darkModeImage ?? lightModeImage}");
+		content: url('${darkModeImage ?? lightModeImage}');
 	}
 `;
 
