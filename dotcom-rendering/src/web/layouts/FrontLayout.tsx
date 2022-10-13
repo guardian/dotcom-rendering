@@ -76,20 +76,22 @@ const getMobileAdPositions = (
 		isNetworkFront,
 	);
 
-	collections.forEach((el, ind, arr) => {
+	collections.forEach((collection, collectionIndex) => {
 		if (
-			(ind === 0 && el.collectionType === 'fixed/thrasher') ||
-			ind === merchHighPosition ||
-			ind + 1 === merchHighPosition ||
-			arr[ind + 1]?.collectionType === 'fixed/thrasher'
+			(collectionIndex === 0 &&
+				collection.collectionType === 'fixed/thrasher') ||
+			collectionIndex === merchHighPosition ||
+			collectionIndex + 1 === merchHighPosition ||
+			collections[collectionIndex + 1]?.collectionType ===
+				'fixed/thrasher'
 		) {
 			return false;
-		} else if (ind % 2 === 0) {
-			positions.push(ind);
+		} else if (collectionIndex % 2 === 0) {
+			positions.push(collectionIndex);
 		}
 		return false;
 	});
-
+	//Shouldn't insert more than ten ads.
 	positions = positions.slice(0, 10);
 
 	return positions;
