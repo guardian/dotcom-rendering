@@ -85,6 +85,13 @@ export const Card75_Card25 = ({
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
+				trailText={
+					// Only show trail text if there is no supportContent
+					cards[1].supportingContent === undefined ||
+					cards[1].supportingContent.length === 0
+						? cards[1].trailText
+						: undefined
+				}
 				supportingContent={cards[1].supportingContent}
 				showAge={showAge}
 			/>
@@ -110,6 +117,13 @@ export const Card25_Card75 = ({
 		<LI percentage="25%" padSides={true}>
 			<FrontCard
 				trail={cards[0]}
+				trailText={
+					// Only show trail text if there is no supportContent
+					cards[0].supportingContent === undefined ||
+					cards[0].supportingContent.length === 0
+						? cards[0].trailText
+						: undefined
+				}
 				supportingContent={cards[0].supportingContent}
 				containerPalette={containerPalette}
 				showAge={showAge}
