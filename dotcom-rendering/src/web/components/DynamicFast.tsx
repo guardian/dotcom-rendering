@@ -69,7 +69,6 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 			<LI percentage="50%" padSides={true}>
 				<FrontCard
 					trail={big}
-					starRating={big.starRating}
 					containerPalette={containerPalette}
 					showAge={showAge}
 					supportingContent={big.supportingContent}
@@ -108,7 +107,6 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 										{cardIndex === 0 ? (
 											<FrontCard
 												trail={card}
-												starRating={card.starRating}
 												containerPalette={
 													containerPalette
 												}
@@ -124,7 +122,6 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 										) : (
 											<FrontCard
 												trail={card}
-												starRating={card.starRating}
 												containerPalette={
 													containerPalette
 												}
@@ -147,7 +144,6 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 									>
 										<FrontCard
 											trail={card}
-											starRating={card.starRating}
 											containerPalette={containerPalette}
 											showAge={showAge}
 											imageUrl={undefined}
@@ -187,7 +183,6 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 			>
 				<FrontCard
 					trail={big}
-					starRating={big.starRating}
 					containerPalette={containerPalette}
 					showAge={showAge}
 					supportingContent={big.supportingContent}
@@ -217,7 +212,6 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 							>
 								<FrontCard
 									trail={card}
-									starRating={card.starRating}
 									containerPalette={containerPalette}
 									showAge={showAge}
 									imageUrl={undefined}
@@ -261,7 +255,6 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 						>
 							<FrontCard
 								trail={card}
-								starRating={card.starRating}
 								containerPalette={containerPalette}
 								showAge={showAge}
 								imageUrl={undefined}
@@ -297,7 +290,6 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 			>
 				<FrontCard
 					trail={big}
-					starRating={big.starRating}
 					containerPalette={containerPalette}
 					showAge={showAge}
 					supportingContent={big.supportingContent}
@@ -324,7 +316,6 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 							>
 								<FrontCard
 									trail={card}
-									starRating={card.starRating}
 									containerPalette={containerPalette}
 									showAge={showAge}
 									imageUrl={undefined}
@@ -363,7 +354,6 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 					>
 						<FrontCard
 							trail={card}
-							starRating={card.starRating}
 							containerPalette={containerPalette}
 							showAge={showAge}
 							supportingContent={card.supportingContent}
@@ -393,7 +383,6 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 							>
 								<FrontCard
 									trail={card}
-									starRating={card.starRating}
 									containerPalette={containerPalette}
 									showAge={showAge}
 									imageUrl={undefined}
@@ -432,7 +421,6 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 					>
 						<FrontCard
 							trail={card}
-							starRating={card.starRating}
 							containerPalette={containerPalette}
 							showAge={showAge}
 							supportingContent={card.supportingContent}
@@ -456,7 +444,6 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 							>
 								<FrontCard
 									trail={card}
-									starRating={card.starRating}
 									containerPalette={containerPalette}
 									showAge={showAge}
 									imageUrl={undefined}
@@ -494,7 +481,6 @@ const Card25_Card25_Card25_Card25 = ({
 					>
 						<FrontCard
 							trail={card}
-							starRating={card.starRating}
 							containerPalette={containerPalette}
 							showAge={showAge}
 							supportingContent={card.supportingContent}
