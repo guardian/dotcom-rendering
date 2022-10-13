@@ -10,7 +10,14 @@ const init = async (): Promise<void> => {
 	// Sentry 99% of the time. So instead we just do some basic math here
 	// and use that to prevent the Sentry script from ever loading.
 	const randomCentile = Math.floor(Math.random() * 100) + 1; // A number between 1 - 100
-	if (randomCentile <= 99) {
+	// This sampling logic is bypassed for the `codeTestUrl` to allow us to reliably
+	// check that Sentry is working on CODE, given that CODE doesn't receive much traffic.
+	// (nb. Sentry logging is also controlled via switches, and is turned off
+	// by default at the time of writing.)
+	const windowHref = window.location.href;
+	const codeTestUrl =
+		'https://m.code.dev-theguardian.com/science/grrlscientist/2012/aug/07/3';
+	if (randomCentile <= 99 && windowHref != codeTestUrl) {
 		// 99% of the time we don't want to remotely log errors with Sentry and so
 		// we just console them out
 		window.guardian.modules.sentry.reportError = (error) => {
