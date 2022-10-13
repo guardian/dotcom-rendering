@@ -111,7 +111,7 @@ export const LiveBlogRenderer = ({
 				<></>
 			)}
 
-			{switches.automaticFilters && availableTopics && (
+			{switches.automaticFilters && !!availableTopics?.length && (
 				<Hide above="desktop">
 					<Island>
 						<TopicFilterBank

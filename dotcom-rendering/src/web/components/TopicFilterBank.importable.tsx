@@ -83,9 +83,6 @@ export const TopicFilterBank = ({
 	filterKeyEvents = false,
 	id,
 }: Props) => {
-	const showFilters = keyEvents?.length || availableTopics.length;
-	if (!showFilters) return null;
-
 	const palette = decidePalette(format);
 	const selectedTopic = selectedTopics?.[0];
 	const topFiveTopics = availableTopics
