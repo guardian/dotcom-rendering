@@ -96,6 +96,16 @@ const decideAvatarUrl = (
 	return soleContributor?.bylineLargeImageUrl ?? undefined;
 };
 
+const decideImage = (trail: FEFrontCard): string | undefined => {
+	if (trail.type === 'LinkSnap') {
+		return trail.properties.image?.item.imageSrc;
+	}
+
+	if (trail.display.imageHide) return undefined;
+
+	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0].url;
+};
+
 const enhanceTags = (tags: { properties: FETagType }[]): TagType[] => {
 	return tags.map((tag) => {
 		const {
@@ -159,10 +169,7 @@ export const enhanceCards = (
 						faciaCard.card.webPublicationDateOption,
 				  ).toISOString()
 				: undefined,
-			image: faciaCard.display.imageHide
-				? undefined
-				: faciaCard.properties.maybeContent?.trail.trailPicture
-						?.allImages[0].url,
+			image: decideImage(faciaCard),
 			kickerText: faciaCard.header.kicker?.item?.properties.kickerText,
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(
