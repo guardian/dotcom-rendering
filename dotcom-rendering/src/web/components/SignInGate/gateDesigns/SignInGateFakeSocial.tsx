@@ -17,7 +17,6 @@ import {
 	bodySeparator,
 	bodyText,
 	faq,
-	firstParagraphOverlay,
 	hideElementsCss,
 	laterButton,
 	privacyLink,
@@ -294,7 +293,6 @@ export const SignInGateFakeSocial = ({
 	return (
 		<div css={signInGateContainer} data-cy="sign-in-gate-fake-social">
 			<style>{hideElementsCss}</style>
-			<div css={firstParagraphOverlay} />
 			<h1 css={[heading, bodyPadding]}>
 				You need to register to keep reading
 			</h1>

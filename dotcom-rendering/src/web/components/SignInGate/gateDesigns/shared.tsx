@@ -121,13 +121,6 @@ export const privacyLink = css`
 	cursor: pointer;
 `;
 
-export const firstParagraphOverlay = css`
-	margin-top: -250px;
-	width: 100%;
-	height: 250px;
-	position: absolute;
-`;
-
 /**
  * This CSS hides everything in an article, except the first two paragraphs and
  * the sign-in gate. The order in which rules are laid out matters.
@@ -138,7 +131,7 @@ export const hideElementsCss = [
         display: none;
     }`,
 	// 2. make the sign in gate and the first 2 paragraphs of the article visible
-	`#sign-in-gate, .article-body-commercial-selector p:nth-of-type(-n + 3) {
+	`#sign-in-gate, .article-body-commercial-selector > p:nth-of-type(-n + 3) {
         display: block;
     }`,
 	// 3. mask the first and second with a gradient overlay
