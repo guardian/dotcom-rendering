@@ -24,7 +24,7 @@ type InlineProps = {
 
 type NonInlineProps = {
 	display?: ArticleDisplay;
-	position: Omit<SlotName, 'inline'>;
+	position: Omit<SlotName, 'inline' | 'mobile-front'>;
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
