@@ -69,7 +69,10 @@ const blogStyles = css`
 	}
 `;
 
-const galleryStyles = (lightModeImage: string, darkModeImage?: string) => css`
+const galleryStyles = (
+	lightModeImage: string,
+	darkModeImage?: string,
+): SerializedStyles => css`
 	img {
 		content: url('${darkModeImage ?? lightModeImage}');
 	}
