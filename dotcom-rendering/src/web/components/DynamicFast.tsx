@@ -141,12 +141,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 
 	return (
 		<UL direction="row" wrapCards={true}>
-			<LI
-				key={big.url}
-				percentage="50%"
-				padSides={true}
-				showDivider={false}
-			>
+			<LI percentage="50%" padSides={true} showDivider={false}>
 				<FrontCard
 					trail={big}
 					containerPalette={containerPalette}
@@ -248,12 +243,7 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 
 	return (
 		<UL direction="row" wrapCards={true}>
-			<LI
-				key={big.url}
-				percentage="25%"
-				padSides={true}
-				showDivider={false}
-			>
+			<LI percentage="25%" padSides={true} showDivider={false}>
 				<FrontCard
 					trail={big}
 					containerPalette={containerPalette}
