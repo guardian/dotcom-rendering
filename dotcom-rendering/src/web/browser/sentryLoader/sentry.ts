@@ -28,8 +28,6 @@ const ignoreErrors = [
 
 const { config } = window.guardian;
 const {
-	switches: { enableSentryReporting },
-	isDev,
 	page: { dcrSentryDsn },
 	stage,
 } = config;
@@ -42,14 +40,6 @@ Sentry.init({
 	integrations: [new CaptureConsole({ levels: ['error'] })],
 	maxBreadcrumbs: 50,
 	// sampleRate: // We use Math.random in init.ts to sample errors
-	beforeSend(event) {
-		// Skip sending events in certain situations
-		const dontSend = isDev || !enableSentryReporting;
-		if (dontSend) {
-			return null;
-		}
-		return event;
-	},
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- dcrJsBundleVariant could also be `undefined`
