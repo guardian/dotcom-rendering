@@ -8,7 +8,7 @@ const init = async (): Promise<void> => {
 		switches: { enableSentryReporting },
 		isDev,
 	} = window.guardian.config;
-	const dontSend = isDev || !enableSentryReporting;
+	const sentryDisabled = isDev || !enableSentryReporting;
 	// Sentry lets you configure sampleRate to reduce the volume of events sent
 	// but this filter only happens _after_ the library is loaded. The Guardian
 	// measures page views in the billions so we only want to log 1% of errors that
