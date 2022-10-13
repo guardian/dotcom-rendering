@@ -16,7 +16,7 @@ const init = async (): Promise<void> => {
 	// Sentry 99% of the time. So instead we just do some basic math here
 	// and use that to prevent the Sentry script from ever loading.
 	const randomCentile = Math.floor(Math.random() * 100) + 1; // A number between 1 - 100
-	if (randomCentile <= 99 || dontSend) {
+	if (randomCentile <= 99 || sentryDisabled) {
 		// 99% of the time we don't want to remotely log errors with Sentry and so
 		// we just console them out
 		window.guardian.modules.sentry.reportError = (error) => {
