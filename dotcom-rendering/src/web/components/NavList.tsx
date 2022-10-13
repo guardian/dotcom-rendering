@@ -27,19 +27,19 @@ const ulStyles = css`
 	}
 	column-count: 4;
 
-	column-rule: 0.0625rem solid ${border.secondary};
-	column-gap: 0.625rem;
+	column-rule: 1px solid ${border.secondary};
+	column-gap: 10px;
 `;
 
 const liStyles = css`
 	color: ${palette.neutral[7]};
-	border-top: 0.0625rem solid ${palette.neutral[93]};
+	border-top: 1px solid ${palette.neutral[93]};
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[3]}px;
 
 	${from.tablet} {
-		margin-left: 0.625rem;
-		margin-right: 0.625rem;
+		margin-left: 10px;
+		margin-right: 10px;
 	}
 `;
 
