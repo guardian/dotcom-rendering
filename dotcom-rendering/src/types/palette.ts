@@ -90,6 +90,7 @@ export type Palette = {
 		filterButtonActive: Colour;
 		treat: Colour;
 		designTag: Colour;
+		pullQuote: Colour;
 	};
 	fill: {
 		commentCount: Colour;
