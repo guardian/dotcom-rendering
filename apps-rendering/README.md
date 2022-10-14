@@ -96,9 +96,9 @@ npm run storybook
 
 Stories are deployed on [GitHub pages](https://guardian.github.io/apps-rendering)
 
-### Generating apps-rendering API models
+### Generating `apps-rendering-api-models`
 
 > **Note**
 > These models have moved! You can now find them, along with release instructions, at [`guardian/apps-rendering-api-models`](https://github.com/guardian/apps-rendering-api-models).
 
-The `apps-rendering-api-models` are used to communicate with the Apps Rendering API. [`MAPI`](https://github.com/guardian/mobile-apps-api) constructs a `RenderingRequest` when it wants Apps Rendering to render an article. This includes all the information Apps Rendering requires to do the render. `RenderingRequest` and other associated types are all defined in `apps-rendering-api-models`.
+[`MAPI`](https://github.com/guardian/mobile-apps-api) uses `apps-rendering-api-models` to communicate with the Apps Rendering API. To render an article, MAPI sends a `RenderingRequest` to Apps Rendering. The `RenderingRequest` includes all the information Apps Rendering requires for rendering. `RenderingRequest` and other associated models are defined in `apps-rendering-api-models`.
