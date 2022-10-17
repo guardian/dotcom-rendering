@@ -41,9 +41,7 @@ export const CoreVitals = () => {
 			Object.keys(window.guardian.config.tests).includes(test),
 		);
 
-	/* eslint-disable @typescript-eslint/no-floating-promises -- they’re async methods */
-
-	initCoreWebVitals({
+	void initCoreWebVitals({
 		browserId,
 		pageViewId,
 		isDev,
@@ -52,16 +50,14 @@ export const CoreVitals = () => {
 	});
 
 	if (window.location.hostname === (process.env.HOSTNAME || 'localhost')) {
-		bypassCoreWebVitalsSampling('dotcom');
+		void bypassCoreWebVitalsSampling('dotcom');
 	}
 	if (
 		userInClientSideTestToForceMetrics ||
 		userInServerSideTestToForceMetrics
 	) {
-		bypassCoreWebVitalsSampling('commercial');
+		void bypassCoreWebVitalsSampling('commercial');
 	}
-
-	/* eslint-enable @typescript-eslint/no-floating-promises */
 
 	// don’t render anything
 	return null;
