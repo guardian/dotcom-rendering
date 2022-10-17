@@ -5,18 +5,59 @@ import type { ImageWidthType } from './Picture';
 import { descendingByBreakpoint, generateImageURL } from './Picture';
 
 type Props = {
+	imageSize: ImageSizeType;
 	master: string;
 	alt: string;
 };
 
 /**
- * WIP: this should cover all use cases with a lot more precision
+ * **WIP – Some size may be unaccounted for**
+ *
+ * Currently, this only handles the four (4) image sizes of `ImageSizeType`.
+ *
+ * This method should cover all use cases with a lot more precision once
+ * implemented thoroughly
  */
-const decideImageWidths = (): ImageWidthType[] => {
-	return [
-		{ breakpoint: breakpoints.mobile, width: 240 },
-		{ breakpoint: breakpoints.tablet, width: 460 },
-	];
+const decideImageWidths = (imageSize: ImageSizeType): ImageWidthType[] => {
+	switch (imageSize) {
+		// @TODO missing image size option
+		// case 'tiny':
+		// 	return [
+		// 		{ breakpoint: breakpoints.mobile, width: 120 },
+		// 		{ breakpoint: breakpoints.tablet, width: 130 },
+		// 		{ breakpoint: breakpoints.desktop, width: 140 },
+		// 	];
+
+		case 'small':
+			return [
+				{ breakpoint: breakpoints.mobile, width: 120 },
+				{ breakpoint: breakpoints.tablet, width: 160 },
+				{ breakpoint: breakpoints.desktop, width: 220 },
+			];
+
+		case 'medium':
+			return [
+				{ breakpoint: breakpoints.mobile, width: 240 },
+				{ breakpoint: breakpoints.tablet, width: 330 },
+				{ breakpoint: breakpoints.desktop, width: 460 },
+			];
+
+		case 'large':
+			return [
+				{ breakpoint: breakpoints.mobile, width: 360 },
+				{ breakpoint: breakpoints.mobileLandscape, width: 480 },
+				{ breakpoint: breakpoints.tablet, width: 500 },
+				{ breakpoint: breakpoints.desktop, width: 700 },
+			];
+
+		case 'jumbo':
+			return [
+				{ breakpoint: breakpoints.mobile, width: 360 },
+				{ breakpoint: breakpoints.mobileLandscape, width: 480 },
+				{ breakpoint: breakpoints.tablet, width: 680 },
+				{ breakpoint: breakpoints.desktop, width: 940 },
+			];
+	}
 };
 
 /**
@@ -43,8 +84,8 @@ const aspectRatio = css`
 	}
 `;
 
-export const FrontPicture = ({ master, alt }: Props) => {
-	const imageWidths = decideImageWidths();
+export const FrontPicture = ({ master, alt, imageSize }: Props) => {
+	const imageWidths = decideImageWidths(imageSize);
 	const sources = imageWidths
 		.slice()
 		.sort(descendingByBreakpoint)
@@ -76,7 +117,7 @@ export const FrontPicture = ({ master, alt }: Props) => {
 	const [{ lowResUrl: fallbackSource }] = sources.slice(-1);
 
 	return (
-		<picture css={[block, aspectRatio]}>
+		<picture data-size={imageSize} css={[block, aspectRatio]}>
 			{sources.map((source) => {
 				return (
 					<React.Fragment key={source.breakpoint}>

@@ -336,7 +336,11 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						) : (
-							<FrontPicture master={image.src} alt="" />
+							<FrontPicture
+								master={image.src}
+								imageSize={imageSize}
+								alt=""
+							/>
 						)}
 					</ImageWrapper>
 				)}
