@@ -1,9 +1,15 @@
-import { css } from '@emotion/react';
-import { space, until } from '@guardian/source-foundations';
+/* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
-import { shouldPadWrappableRows } from '../lib/dynamicSlices';
-import { verticalDivider } from '../lib/verticalDivider';
+import {
+	Card100PictureRight,
+	Card100PictureTop,
+	Card25_Card75,
+	Card50_Card50,
+	Card75_Card25,
+	filterGroupedTrails,
+	shouldPadWrappableRows,
+} from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -22,106 +28,432 @@ type Props = {
 	showAge?: boolean;
 };
 
-/**
- * 'Primaries' renders the first row of dynamic/fast
- * This row will consist of either 1 huge, 1 very big, or 2 very bigs.
- *
- * When there is 1 huge or 1 very big, these will be treated the same, and take
- * up 100% of the horizontal space
- *
- * When there are 2 very bigs in the primaries row, they each take 50% of the horizontal space.
- * Either of the 2 very bigs can be 'boosted', in which case the boosted card will receive
- * 75% of the horizontal space.
+/* ._________________.________.________.
+ * |#################|########|________|
+ * |#################|########|________|
+ * |#################|________|________|
+ * |#################|________|________|
+ * |_________________|________|________|
  */
-const Primaries = ({
-	primaries,
+const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
+	cards,
 	showAge,
 	containerPalette,
 }: {
-	primaries: [] | [TrailType] | [TrailType, TrailType];
+	cards: TrailType[];
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
-	// Gets the index of the first primary card which is boosted, returns -1 if none are.
-	const boostedIndex = primaries.findIndex((card) => !!card.isBoosted);
+	if (!cards[0]) return null;
+
+	const big = cards[0];
+	const columnOne = cards.slice(1, 4);
+	const columnTwo = cards.slice(4, 10);
 
 	return (
-		<UL direction="row" padBottom={true}>
-			{primaries.map((card, index) => {
-				/**
-				 * Primaries boosted -
-				 * Switches to either a 75% - 25% or 25% - 75% layout, depending on which card gets boosted.
-				 *
-				 * Only supported when there are 2 cards in the primaries.
-				 * If both are boosted only the first card will be chosen to appear 'boosted'.
-				 */
-				if (primaries.length > 1 && boostedIndex !== -1) {
-					const boostedImagePosition = index === 0 ? 'right' : 'left';
+		<UL direction="row">
+			<LI percentage="50%" padSides={true}>
+				<FrontCard
+					trail={big}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					supportingContent={big.supportingContent}
+					headlineSize="large"
+					trailText={big.trailText}
+					imageUrl={big.image}
+					imagePosition="top"
+					imagePositionOnMobile="top"
+				/>
+			</LI>
+			<LI percentage="25%" showDivider={true}>
+				<UL direction="column">
+					{columnOne.map((card, cardIndex) => {
+						return (
+							<LI
+								key={card.url}
+								showDivider={false}
+								padSides={true}
+							>
+								{/* The first card shows an image */}
+								{cardIndex === 0 ? (
+									<FrontCard
+										trail={card}
+										containerPalette={containerPalette}
+										showAge={showAge}
+										supportingContent={
+											card.supportingContent
+										}
+										headlineSize="medium"
+										imageUrl={card.image}
+										imagePosition="top"
+										imagePositionOnMobile="left"
+									/>
+								) : (
+									<FrontCard
+										trail={card}
+										containerPalette={containerPalette}
+										showAge={showAge}
+										imageUrl={undefined}
+										headlineSize="small"
+									/>
+								)}
+							</LI>
+						);
+					})}
+				</UL>
+			</LI>
+			<LI percentage="25%" showDivider={columnTwo.length > 0}>
+				<UL direction="column">
+					{columnTwo.map((card) => {
+						return (
+							<LI
+								key={card.url}
+								showDivider={false}
+								padSides={true}
+							>
+								<FrontCard
+									trail={card}
+									containerPalette={containerPalette}
+									showAge={showAge}
+									imageUrl={undefined}
+									headlineSize="small"
+								/>
+							</LI>
+						);
+					})}
+				</UL>
+			</LI>
+		</UL>
+	);
+};
 
+const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
+	cards,
+	showAge,
+	containerPalette,
+}: {
+	cards: TrailType[];
+	showAge?: boolean;
+	containerPalette?: DCRContainerPalette;
+}) => {
+	if (!cards[0]) return null;
+	const big = cards[0];
+	const remaining = cards.slice(1, 7);
+
+	return (
+		<UL direction="row" wrapCards={true}>
+			<LI percentage="50%" padSides={true} showDivider={false}>
+				<FrontCard
+					trail={big}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					supportingContent={big.supportingContent}
+					headlineSize="large"
+					trailText={big.trailText}
+					imageUrl={big.image}
+					imagePosition="top"
+					imagePositionOnMobile="top"
+				/>
+			</LI>
+			<LI percentage="50%">
+				<UL direction="row" wrapCards={true} showDivider={true}>
+					{remaining.map((card, cardIndex) => {
+						const columns = 2;
+						return (
+							<LI
+								key={card.url}
+								percentage="50%"
+								stretch={true}
+								showDivider={cardIndex > 0}
+								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
+									cardIndex,
+									remaining.length -
+										(remaining.length % columns),
+									columns,
+								)}
+								padSides={true}
+							>
+								<FrontCard
+									trail={card}
+									containerPalette={containerPalette}
+									showAge={showAge}
+									imageUrl={undefined}
+									headlineSize="small"
+								/>
+							</LI>
+						);
+					})}
+				</UL>
+			</LI>
+		</UL>
+	);
+};
+
+const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 =
+	({
+		cards,
+		showAge,
+		containerPalette,
+	}: {
+		cards: TrailType[];
+		showAge?: boolean;
+		containerPalette?: DCRContainerPalette;
+	}) => {
+		if (cards.length === 0) return null;
+
+		return (
+			<UL direction="row" wrapCards={true}>
+				{cards.map((card, cardIndex) => {
+					const columns = 4;
 					return (
 						<LI
 							key={card.url}
+							percentage="25%"
+							stretch={true}
 							padSides={true}
-							percentage={
-								// Boosted primaries take up 75% of the horizontal space
-								index === boostedIndex ? '75%' : '25%'
-							}
-							showDivider={index > 0}
+							showDivider={cardIndex % columns !== 0}
+							offsetBottomPaddingOnDivider={shouldPadWrappableRows(
+								cardIndex,
+								cards.length,
+								columns,
+							)}
 						>
 							<FrontCard
 								trail={card}
-								starRating={card.starRating}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								supportingContent={card.supportingContent}
-								headlineSize={
-									index === boostedIndex ? 'large' : 'medium'
-								}
-								trailText={
-									index === boostedIndex
-										? card.trailText
-										: undefined
-								}
-								imageUrl={card.image}
-								imagePosition={
-									index === boostedIndex
-										? boostedImagePosition
-										: 'top'
-								}
-								imagePositionOnMobile={
-									index === boostedIndex ? 'top' : 'left'
-								}
-								imageSize={
-									index === boostedIndex ? 'large' : 'small'
-								}
+								imageUrl={undefined}
+								headlineSize="small"
 							/>
 						</LI>
 					);
-				}
+				})}
+			</UL>
+		);
+	};
 
-				/**
-				 * Unboosted primaries / single primary layout -
-				 *
-				 * If there is 1 primary, it is given 100% of the row.
-				 * If there are 2 primaries, they are split 50/50%.
-				 */
+const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
+	cards,
+	showAge,
+	containerPalette,
+}: {
+	cards: TrailType[];
+	showAge?: boolean;
+	containerPalette?: DCRContainerPalette;
+}) => {
+	if (!cards[0]) return null;
+	const big = cards[0];
+	const remaining = cards.slice(1, 10);
+
+	return (
+		<UL direction="row" wrapCards={true}>
+			<LI percentage="25%" padSides={true} showDivider={false}>
+				<FrontCard
+					trail={big}
+					containerPalette={containerPalette}
+					showAge={showAge}
+					supportingContent={big.supportingContent}
+					headlineSize="medium"
+					imageUrl={big.image}
+				/>
+			</LI>
+			<LI percentage="75%">
+				<UL direction="row" wrapCards={true} showDivider={true}>
+					{remaining.map((card, cardIndex) => {
+						const columns = 3;
+						return (
+							<LI
+								key={card.url}
+								percentage="33.333%"
+								stretch={true}
+								padSides={true}
+								showDivider={cardIndex % columns !== 0}
+								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
+									cardIndex,
+									remaining.length -
+										(remaining.length % columns),
+									columns,
+								)}
+							>
+								<FrontCard
+									trail={card}
+									containerPalette={containerPalette}
+									showAge={showAge}
+									imageUrl={undefined}
+									headlineSize="small"
+								/>
+							</LI>
+						);
+					})}
+				</UL>
+			</LI>
+		</UL>
+	);
+};
+
+const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
+	cards,
+	showAge,
+	containerPalette,
+}: {
+	cards: TrailType[];
+	showAge?: boolean;
+	containerPalette?: DCRContainerPalette;
+}) => {
+	if (cards.length < 0) return null;
+
+	const bigs = cards.slice(0, 2);
+	const remaining = cards.slice(2, 8);
+
+	return (
+		<UL direction="row" wrapCards={true}>
+			{bigs.map((card, cardIndex) => {
 				return (
 					<LI
 						key={card.url}
+						percentage={`25%`}
 						padSides={true}
-						percentage={primaries.length === 1 ? '100%' : '50%'}
-						showDivider={index > 0}
+						showDivider={cardIndex > 0}
 					>
 						<FrontCard
 							trail={card}
-							starRating={card.starRating}
 							containerPalette={containerPalette}
 							showAge={showAge}
 							supportingContent={card.supportingContent}
-							headlineSize="large"
+							headlineSize="medium"
 							imageUrl={card.image}
-							imagePosition={'top'}
-							imagePositionOnMobile={'top'}
+						/>
+					</LI>
+				);
+			})}
+
+			<LI percentage="50%">
+				<UL direction="row" wrapCards={true} showDivider={true}>
+					{remaining.map((card, cardIndex) => {
+						const columns = 2;
+						return (
+							<LI
+								key={card.url}
+								percentage="50%"
+								stretch={true}
+								padSides={true}
+								showDivider={cardIndex % columns !== 0}
+								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
+									cardIndex,
+									remaining.length -
+										(remaining.length % columns),
+									columns,
+								)}
+							>
+								<FrontCard
+									trail={card}
+									containerPalette={containerPalette}
+									showAge={showAge}
+									imageUrl={undefined}
+									headlineSize="small"
+								/>
+							</LI>
+						);
+					})}
+				</UL>
+			</LI>
+		</UL>
+	);
+};
+
+const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
+	cards,
+	showAge,
+	containerPalette,
+}: {
+	cards: TrailType[];
+	showAge?: boolean;
+	containerPalette?: DCRContainerPalette;
+}) => {
+	if (cards.length < 3) return null;
+
+	const bigs = cards.slice(0, 3);
+	const remaining = cards.slice(3, 6);
+
+	return (
+		<UL direction="row" wrapCards={true}>
+			{bigs.map((card, cardIndex) => {
+				return (
+					<LI
+						key={card.url}
+						percentage={`25%`}
+						padSides={true}
+						showDivider={cardIndex !== 0}
+					>
+						<FrontCard
+							trail={card}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							supportingContent={card.supportingContent}
+							headlineSize="medium"
+							imageUrl={card.image}
+						/>
+					</LI>
+				);
+			})}
+
+			<LI percentage="25%">
+				<UL direction="row" wrapCards={true} showDivider={true}>
+					{remaining.map((card) => {
+						return (
+							<LI
+								key={card.url}
+								percentage="100%"
+								stretch={true}
+								showDivider={false}
+								padSides={true}
+							>
+								<FrontCard
+									trail={card}
+									containerPalette={containerPalette}
+									showAge={showAge}
+									imageUrl={undefined}
+									headlineSize="small"
+								/>
+							</LI>
+						);
+					})}
+				</UL>
+			</LI>
+		</UL>
+	);
+};
+
+const Card25_Card25_Card25_Card25 = ({
+	cards,
+	showAge,
+	containerPalette,
+}: {
+	cards: TrailType[];
+	showAge?: boolean;
+	containerPalette?: DCRContainerPalette;
+}) => {
+	if (cards.length < 4) return null;
+
+	const bigs = cards.slice(0, 4);
+
+	return (
+		<UL direction="row" wrapCards={true}>
+			{bigs.map((card, cardIndex) => {
+				return (
+					<LI
+						key={card.url}
+						percentage={`25%`}
+						padSides={true}
+						showDivider={cardIndex !== 0}
+					>
+						<FrontCard
+							trail={card}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							supportingContent={card.supportingContent}
+							headlineSize="medium"
+							imageUrl={card.image}
 						/>
 					</LI>
 				);
@@ -130,402 +462,248 @@ const Primaries = ({
 	);
 };
 
-/**
- * When the first 'big' is boosted & there is at least 1 more big, we switch up the layout a little -
- *
- * The 'standards' section (what this component renders), consists of 2 columns, rather than a wrapped row,
- * where the first big (all other 'bigs' fallback to standards) sits in the first slot of the left hand column,
- * and it gets a top image (left on mobile), and is followed by up to the next 2 standards.
- * The right hand column will take (up to) the remaining 5 standards. Any more standards will not be rendered.
- *
- */
-const FirstBigBoostedPlusBig = ({
-	big,
-	standards,
-	showAge,
-	containerPalette,
-}: {
-	big: TrailType;
-	standards: TrailType[];
-	showAge?: boolean;
-	containerPalette?: DCRContainerPalette;
-}) => {
-	// 'col1' has 1 big & up to 2 standards
-	const standardsCol1 = standards.splice(0, 2);
-	// 'col2' has up to 5 standards
-	const standardsCol2 = standards.splice(0, 5);
-
-	const manualUlStyles = css`
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		flex-basis: 50%;
-		flex-grow: 1;
-		row-gap: ${space[3]}px;
-		${until.tablet} {
-			flex-basis: 100%;
-		}
-	`;
-
-	/**
-	 * The row & columns in this component are a little outside of the standard of what the standard
-	 * LI and UL components we have support - it made more sense to manually create the CSS for this use case
-	 * than to expand & muddy the APIs of both components to support this layout type.
-	 */
-	return (
-		<li
-			css={css`
-				position: relative;
-				display: flex;
-				flex-basis: 100%;
-				flex-wrap: wrap;
-				row-gap: ${space[3]}px;
-			`}
-		>
-			<ul css={[manualUlStyles, verticalDivider]}>
-				<LI showDivider={true} padSides={true}>
-					<FrontCard
-						trail={big}
-						starRating={big.starRating}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						supportingContent={big.supportingContent}
-						headlineSize="medium"
-						imageUrl={big.image}
-						imagePosition="top"
-						imagePositionOnMobile="left"
-					/>
-				</LI>
-				{standardsCol1.map((card) => {
-					return (
-						<LI key={card.url} padSides={true}>
-							<FrontCard
-								trail={card}
-								starRating={card.starRating}
-								containerPalette={containerPalette}
-								showAge={showAge}
-								imageUrl={undefined}
-								headlineSize="small"
-							/>
-						</LI>
-					);
-				})}
-			</ul>
-			<ul css={[manualUlStyles, verticalDivider]}>
-				{standardsCol2.map((card) => {
-					return (
-						<LI key={card.url} padSides={true}>
-							<FrontCard
-								trail={card}
-								starRating={card.starRating}
-								containerPalette={containerPalette}
-								showAge={showAge}
-								imageUrl={undefined}
-								headlineSize="small"
-							/>
-						</LI>
-					);
-				})}
-			</ul>
-		</li>
-	);
-};
-
-/**
- * Returns display information for rendering the 'standard' cards in the container
- * containerWidth: % width for the container which holds all the standards
- * columns: no. of columns of standard cards there will be
- * cardWidth: % width within the container each card should take up
- */
-const getStandardsDisplayConfig = (
-	firstBigBoosted: boolean,
-	noOfBigs: number,
-): {
-	containerWidth?: CardPercentageType;
-	columns: number;
-	cardWidth?: CardPercentageType;
-} => {
-	if (firstBigBoosted) {
-		// When the first big is boosted, it takes up 50% of the row,
-		// Other bigs will be added to the standards array as part of
-		// 'ThirdBoostedPlusBig' layout
-		return {
-			containerWidth: '50%',
-			columns: 2,
-			cardWidth: '50%',
-		};
-	} else if (noOfBigs === 0) {
-		return {
-			containerWidth: '100%',
-			columns: 4,
-			cardWidth: '25%',
-		};
-	} else if (noOfBigs === 1) {
-		return {
-			containerWidth: '75%',
-			columns: 3,
-			cardWidth: '33.333%',
-		};
-	} else if (noOfBigs === 2) {
-		return {
-			containerWidth: '50%',
-			columns: 2,
-			cardWidth: '50%',
-		};
-	} else if (noOfBigs === 3) {
-		return {
-			containerWidth: '25%',
-			columns: 1,
-			cardWidth: '100%',
-		};
-	} else {
-		// noOfBigs is 4 or more, so we won't render any standards
-		return {
-			columns: 0,
-		};
-	}
-};
-
-/**
- * Dynamic/fast is a dynamic container often used for headlines on network fronts,
- * for this reason it has a lot of configuration & customisation.
- *
- * It supports 4 categories of cards, 'huge', 'very big', 'big', and 'standard'.
- * As the tools do not limit the configurations of these categories, we must normalise them
- * and have cards 'fall through' depending on the layout configuration,
- * for example if you had 3 very bigs, the 3rd would 'fall through' to being the first big.
- *
- * 'Default' Container layout is
- *      veryBig1     -   	veryBig2
- *      big - big - standard - standard
- *       ^  -  ^  - standard - standard
- *       ^  -  ^  - standard - standard
- *
- * '1st boosted' Container layout is
- *      veryBig1 (boosted)   - veryBig2
- *      big - big - standard - standard
- *       ^  -  ^  - standard - standard
- *       ^  -  ^  - standard - standard
- * '2nd boosted' Container layout is
- *      veryBig1  - veryBig2 (boosted)
- *      big - big - standard - standard
- *       ^  -  ^  - standard - standard
- *       ^  -  ^  - standard - standard
- *
- * '3rd boosted' Container layout is
- * (3rd can be boosted in combination with default, 1st boosted or 2nd boosted)
- *       veryBig1     -   	veryBig2
- *      big (boosted) - standard - standard
- *            ^       - standard - standard
- *            ^       - standard - standard
- *            ^       - standard - standard
- *
- * '3rd boosted + 1 big' Container layout is
- * (can be used in combination with default, 1st boosted or 2nd boosted)
- *       veryBig1     -   	veryBig2
- *      big (boosted) -    big   - standard
- *            ^       -     ^    - standard
- *            ^       -     ^    - standard
- *            ^       - standard - standard
- *            ^       - standard - standard
- *
- * There are also variations where a 'huge' is provided, or only 1 very big, where the top
- * rows become just 1 'huge' card, instead of the 2 primaries shown in the layouts above.
- *
- * Note: Array.splice is used a lot in this component - this modifies the array in place, allowing us
- * 	to 'take' a number of cards from an array, see more:
- * 	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
- */
 export const DynamicFast = ({
 	groupedTrails,
 	containerPalette,
 	showAge,
 }: Props) => {
-	/**
-	 * Primaries - The first row
-	 *
-	 * Can hold 0, 1, or 2 cards in the combinations
-	 *  - 1 huge
-	 *  - 1 very big
-	 *  - 2 very bigs
-	 *
-	 * If excess cards in these categoriesare provided from fronts tool,
-	 * these will be left to 'fall through' into the 'bigs' categories.
-	 */
-	let primaries: [] | [TrailType] | [TrailType, TrailType] = [];
+	let firstSliceLayout:
+		| undefined // If there are no very bigs or huges, there is no first slice
+		| 'oneHuge'
+		| 'oneVeryBig'
+		| 'twoVeryBigs'
+		| 'TwoVeryBigsFirstBoosted'
+		| 'TwoVeryBigsSecondBoosted';
+
+	let firstSliceCards: TrailType[] = [];
+
+	// Decide the layout and contents for the first slice, demoting any remaining cards to the second slice
 	if (groupedTrails.huge.length > 0) {
-		primaries = groupedTrails.huge.splice(0, 1) as [TrailType];
+		firstSliceLayout = 'oneHuge';
+		firstSliceCards = groupedTrails.huge.slice(0, 1);
 	} else if (groupedTrails.veryBig.length === 1) {
-		primaries = groupedTrails.veryBig.splice(0, 1) as [TrailType];
+		firstSliceLayout = 'oneVeryBig';
+		firstSliceCards = groupedTrails.veryBig.slice(0, 1);
 	} else if (groupedTrails.veryBig.length > 1) {
-		primaries = groupedTrails.veryBig.splice(0, 2) as [
-			TrailType,
-			TrailType,
-		];
+		if (groupedTrails.veryBig[0].isBoosted) {
+			firstSliceLayout = 'TwoVeryBigsFirstBoosted';
+		} else if (groupedTrails.veryBig[1].isBoosted) {
+			firstSliceLayout = 'TwoVeryBigsSecondBoosted';
+		} else {
+			firstSliceLayout = 'twoVeryBigs';
+		}
+		firstSliceCards = groupedTrails.veryBig.slice(0, 2);
 	}
 
-	/**
-	 * Bigs - Starting from the left of the second row
-	 *
-	 * Put together from (in order)
-	 *  - Any left over huges
-	 *  - Any left over very bigs
-	 *  - All bigs
-	 *
-	 * Limited to 4 as each big (unboosted) takes up 25% of the row
-	 */
+	let secondSliceLayout:
+		| 'oneBigBoosted'
+		| 'twoOrMoreBigsFirstBoosted'
+		| 'fourBigs'
+		| 'threeBigs'
+		| 'twoBigs'
+		| 'oneBig'
+		| 'noBigs';
+
+	// Create our object of grouped trails that doesn't include any
+	// cards used by the first slice
+	const secondSliceGroupedTrails = filterGroupedTrails({
+		groupedTrails,
+		filter: firstSliceCards,
+	});
+
+	let secondSliceCards: TrailType[] = [];
 	const bigs = [
-		...groupedTrails.huge,
-		...groupedTrails.veryBig,
-		...groupedTrails.big,
-	].slice(0, 4);
+		// Demote any left over 'huge' or 'veryBig' grouped cards
+		...secondSliceGroupedTrails.huge,
+		...secondSliceGroupedTrails.veryBig,
+		...secondSliceGroupedTrails.big,
+	];
 
-	const firstBigBoosted = !!bigs[0]?.isBoosted;
+	switch (bigs.length) {
+		case 0: {
+			secondSliceLayout = 'noBigs';
+			secondSliceCards = [
+				...secondSliceGroupedTrails.standard.slice(0, 12),
+			];
+			break;
+		}
+		case 1: {
+			if (bigs[0].isBoosted) {
+				secondSliceLayout = 'oneBigBoosted';
+				secondSliceCards = [
+					...bigs.slice(0, 1),
+					...secondSliceGroupedTrails.standard.slice(0, 6),
+				];
+			} else {
+				secondSliceLayout = 'oneBig';
+				secondSliceCards = [
+					...bigs.slice(0, 1),
+					...secondSliceGroupedTrails.standard.slice(0, 9),
+				];
+			}
+			break;
+		}
+		case 2: {
+			if (bigs[0].isBoosted) {
+				secondSliceLayout = 'twoOrMoreBigsFirstBoosted';
+				secondSliceCards = [
+					...bigs,
+					...secondSliceGroupedTrails.standard.slice(0, 7),
+				];
+			} else {
+				secondSliceLayout = 'twoBigs';
+				secondSliceCards = [
+					...bigs.slice(0, 2),
+					...secondSliceGroupedTrails.standard.slice(0, 6),
+				];
+			}
+			break;
+		}
+		case 3: {
+			if (bigs[0].isBoosted) {
+				secondSliceLayout = 'twoOrMoreBigsFirstBoosted';
+				secondSliceCards = [
+					...bigs,
+					...secondSliceGroupedTrails.standard.slice(0, 6),
+				];
+			} else {
+				secondSliceLayout = 'threeBigs';
+				secondSliceCards = [
+					...bigs.slice(0, 3),
+					...secondSliceGroupedTrails.standard.slice(0, 3),
+				];
+			}
+			break;
+		}
+		default: {
+			if (bigs[0].isBoosted) {
+				secondSliceLayout = 'twoOrMoreBigsFirstBoosted';
+				secondSliceCards = [
+					...bigs,
+					...secondSliceGroupedTrails.standard.slice(0, 5),
+				];
+			} else {
+				secondSliceLayout = 'fourBigs';
+				secondSliceCards = [...bigs.slice(0, 4)];
+			}
+			break;
+		}
+	}
 
-	/**
-	 * firstBigBoostedPlusBig is a layout used when the first big has been boosted,
-	 * and additional bigs have been added in fronts tool.
-	 *
-	 * When this happens, we switch to the FirstBigBoostedPlusBig component for rendering
-	 * the standards section of the second row.
-	 */
-	const firstBigBoostedPlusBig = firstBigBoosted && !!bigs[1];
+	const FirstSlice = () => {
+		switch (firstSliceLayout) {
+			case 'oneHuge':
+				return (
+					<Card100PictureTop
+						cards={firstSliceCards}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				);
+			case 'oneVeryBig':
+				return (
+					<Card100PictureRight
+						cards={firstSliceCards}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				);
+			case 'TwoVeryBigsFirstBoosted':
+				return (
+					<Card75_Card25
+						cards={firstSliceCards}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				);
+			case 'TwoVeryBigsSecondBoosted':
+				return (
+					<Card25_Card75
+						cards={firstSliceCards}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				);
+			case 'twoVeryBigs':
+				return (
+					<Card50_Card50
+						cards={firstSliceCards}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				);
+			default:
+				return <></>;
+		}
+	};
 
-	const standardsDisplayConfig = getStandardsDisplayConfig(
-		firstBigBoosted,
-		bigs.length,
-	);
-
-	/**
-	 * Standards - Left over space from bigs in the second row
-	 *
-	 * Standards will use all the columns left over from the bigs, this
-	 * is decided in standardsDisplayConfig.columns
-	 *
-	 * Each column available gives room for up to 3 standards.
-	 *
-	 * When firstBigBoostedPlusBig we constuct a different list of standards,
-	 * so we don't select any standards here.
-	 */
-	const standards: TrailType[] = firstBigBoostedPlusBig
-		? []
-		: groupedTrails.standard.splice(0, standardsDisplayConfig.columns * 3);
+	const SecondSlice = () => {
+		switch (secondSliceLayout) {
+			case 'oneBigBoosted':
+				return (
+					<Card50_ColumnOfThreeCards25_ColumnOfThreeCards25
+						cards={secondSliceCards}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				);
+			case 'twoOrMoreBigsFirstBoosted':
+				return (
+					<Card50_ColumnOfThreeCards25_ColumnOfFiveCards
+						cards={secondSliceCards}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				);
+			case 'noBigs':
+				return (
+					<ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25
+						cards={secondSliceCards}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				);
+			case 'oneBig':
+				return (
+					<Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25
+						cards={secondSliceCards}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				);
+			case 'twoBigs':
+				return (
+					<Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25
+						cards={secondSliceCards}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				);
+			case 'threeBigs':
+				return (
+					<Card25_Card25_Card25_ColumnOfThreeCards25
+						cards={secondSliceCards}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				);
+			case 'fourBigs':
+				return (
+					<Card25_Card25_Card25_Card25
+						cards={secondSliceCards}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				);
+			default:
+				return <></>;
+		}
+	};
 
 	return (
 		<>
-			{primaries.length > 0 && (
-				<Primaries
-					primaries={primaries}
-					showAge={showAge}
-					containerPalette={containerPalette}
-				/>
-			)}
-			<UL direction="row">
-				{/* Leftover huges, very bigs & all bigs */}
-				{bigs.map((card, cardIndex) => {
-					if (firstBigBoosted) {
-						// We only render the first card here if it's boosted
-						// Any other bigs will be rendered in 'ThirdBoostedPlusBig' component
-						if (cardIndex > 0) return undefined;
-
-						return (
-							<LI
-								key={card.url}
-								percentage={`50%`}
-								padSides={true}
-								showDivider={cardIndex > 0}
-							>
-								<FrontCard
-									trail={card}
-									starRating={card.starRating}
-									containerPalette={containerPalette}
-									showAge={showAge}
-									supportingContent={card.supportingContent}
-									headlineSize="large"
-									trailText={card.trailText}
-									imageUrl={card.image}
-									imagePosition="top"
-									imagePositionOnMobile="top"
-								/>
-							</LI>
-						);
-					}
-
-					return (
-						<LI
-							key={card.url}
-							percentage={`25%`}
-							padSides={true}
-							showDivider={cardIndex > 0}
-						>
-							<FrontCard
-								trail={card}
-								starRating={card.starRating}
-								containerPalette={containerPalette}
-								showAge={showAge}
-								supportingContent={card.supportingContent}
-								headlineSize="medium"
-								imageUrl={card.image}
-							/>
-						</LI>
-					);
-				})}
-				{standardsDisplayConfig.columns > 0 && (
-					<LI percentage={standardsDisplayConfig.containerWidth}>
-						<UL
-							direction="row"
-							wrapCards={true}
-							showDivider={bigs.length > 0}
-						>
-							{/* If the first big is boosted & we have a second big,
-							it should be at the start of the standards but have an image  */}
-							{firstBigBoostedPlusBig ? (
-								<FirstBigBoostedPlusBig
-									big={bigs[1]}
-									standards={[
-										...bigs.splice(2, bigs.length - 1),
-										...groupedTrails.standard,
-									]}
-									containerPalette={containerPalette}
-									showAge={showAge}
-								/>
-							) : (
-								// Regular standards layout
-								standards.map((card, cardIndex, { length }) => {
-									const { columns, cardWidth } =
-										standardsDisplayConfig;
-									return (
-										<LI
-											key={card.url}
-											percentage={cardWidth}
-											stretch={true}
-											showDivider={
-												cardIndex % columns !== 0
-											}
-											padSides={true}
-											offsetBottomPaddingOnDivider={shouldPadWrappableRows(
-												cardIndex,
-												length - (length % columns),
-												columns,
-											)}
-										>
-											<FrontCard
-												trail={card}
-												starRating={card.starRating}
-												containerPalette={
-													containerPalette
-												}
-												imageUrl={undefined}
-												headlineSize="small"
-											/>
-										</LI>
-									);
-								})
-							)}
-						</UL>
-					</LI>
-				)}
-			</UL>
+			<FirstSlice />
+			<SecondSlice />
 		</>
 	);
 };
