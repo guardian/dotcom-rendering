@@ -120,7 +120,3 @@ export const FrontPicture = ({ master, alt, imageSize }: Props) => {
 		</picture>
 	);
 };
-
-// We use disableLazyLoading to decide if we want to turn off lazy loading of images site wide. We use this
-// to prevent false negatives on Chromatic snapshots (see /.storybook/config)
-FrontPicture.disableLazyLoading = false;
