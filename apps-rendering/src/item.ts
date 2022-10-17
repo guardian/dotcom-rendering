@@ -18,7 +18,14 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { andThen, fromNullable, map, none, some, withDefault } from '@guardian/types';
+import {
+	andThen,
+	fromNullable,
+	map,
+	none,
+	some,
+	withDefault,
+} from '@guardian/types';
 import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
@@ -36,6 +43,7 @@ import type { Contributor } from 'contributor';
 import { parseContributors } from 'contributor';
 import type { MatchScores } from 'football';
 import { parseMatchScores } from 'football';
+import { getPillarFromId } from 'format';
 import type { Image } from 'image';
 import { parseCardImage } from 'image';
 import { pipe } from 'lib';
@@ -49,7 +57,6 @@ import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
 import { Result } from 'result';
-import { getPillarFromId } from 'format';
 
 // ----- Item Type ----- //
 

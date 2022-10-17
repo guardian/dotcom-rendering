@@ -24,6 +24,7 @@ import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
+import { pillarToId, themeToPillar } from 'format';
 import { getFormat } from 'item';
 import type {
 	Explainer as ExplainerItem,
@@ -40,7 +41,6 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
-import { pillarToId, themeToPillar } from 'format';
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -93,7 +93,11 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 						css={onwardStyles}
 						id="comments"
 						data-closed={false}
-						data-pillar={pipe(item.theme, themeToPillar, pillarToId)}
+						data-pillar={pipe(
+							item.theme,
+							themeToPillar,
+							pillarToId,
+						)}
 						data-short-id={id}
 					></section>
 				)),

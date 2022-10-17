@@ -7,6 +7,7 @@ import { AudioAtom } from '@guardian/atoms-rendering';
 import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
 import { App } from '@guardian/discussion-rendering/build/App';
+import { andThen, fromNullable, OptionKind } from '@guardian/types';
 import {
 	ads,
 	getAdSlots,
@@ -20,6 +21,7 @@ import { createEmbedComponentFromProps } from 'components/EmbedWrapper';
 import EpicContent from 'components/EpicContent';
 import FollowStatus from 'components/FollowStatus';
 import FooterContent from 'components/FooterContent';
+import { getPillarFromId } from 'format';
 import { handleErrors, isObject, pipe } from 'lib';
 import {
 	acquisitionsClient,
@@ -35,8 +37,6 @@ import ReactDOM from 'react-dom';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
 import { initSignupForms } from './signupForm';
-import { getPillarFromId } from 'format';
-import { andThen, fromNullable, OptionKind } from '@guardian/types';
 
 // ----- Run ----- //
 
