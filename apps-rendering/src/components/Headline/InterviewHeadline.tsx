@@ -39,7 +39,9 @@ const InterviewHeadline: React.FC<Props> = ({ item }) => {
 				}
 			`}
 		>
-			<HeadlineTag tagText="Interview" format={format} />
+			<a href="https://www.theguardian.com/tone/interview">
+				<HeadlineTag tagText="Interview" format={format} />
+			</a>
 			<h1 css={css(defaultStyles(item), interviewStyles)}>
 				<span
 					css={css`
