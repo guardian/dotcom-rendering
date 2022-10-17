@@ -276,7 +276,7 @@ export const filterGroupedTrails = ({
 	filter: TrailType[];
 }): DCRGroupedTrails => {
 	const shouldFilterCard = (card: TrailType) =>
-		filter.findIndex((filterCard) => filterCard.url === card.url) !== -1;
+		filter.findIndex((filterCard) => filterCard.url === card.url) === -1;
 	return {
 		snap: groupedTrails.snap.filter(shouldFilterCard),
 		huge: groupedTrails.huge.filter(shouldFilterCard),
