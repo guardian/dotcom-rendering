@@ -258,33 +258,85 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 				/>
 			</LI>
 			<LI percentage="75%">
-				<UL direction="row" wrapCards={true} showDivider={true}>
-					{remaining.map((card, cardIndex) => {
-						const columns = 3;
-						return (
-							<LI
-								key={card.url}
-								percentage="33.333%"
-								stretch={true}
-								padSides={true}
-								showDivider={cardIndex % columns !== 0}
-								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
-									cardIndex,
-									remaining.length -
-										(remaining.length % columns),
-									columns,
-								)}
-							>
-								<FrontCard
-									trail={card}
-									containerPalette={containerPalette}
-									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
-								/>
-							</LI>
-						);
-					})}
+				<UL showDivider={true}>
+					<LI>
+						<UL
+							direction="row"
+							showDivider={false}
+							padBottom={false}
+						>
+							{remaining.slice(0, 3).map((card, cardIndex) => {
+								return (
+									<LI
+										key={card.url}
+										percentage="33.333%"
+										stretch={true}
+										padSides={true}
+										offsetBottomPaddingOnDivider={true}
+										showDivider={cardIndex !== 0}
+									>
+										<FrontCard
+											trail={card}
+											containerPalette={containerPalette}
+											showAge={showAge}
+											imageUrl={undefined}
+											headlineSize="small"
+										/>
+									</LI>
+								);
+							})}
+						</UL>
+					</LI>
+					<LI>
+						<UL direction="row" showDivider={false}>
+							{remaining.slice(3, 6).map((card, cardIndex) => {
+								return (
+									<LI
+										key={card.url}
+										percentage="33.333%"
+										stretch={true}
+										padSides={true}
+										showDivider={cardIndex !== 0}
+									>
+										<FrontCard
+											trail={card}
+											containerPalette={containerPalette}
+											showAge={showAge}
+											imageUrl={undefined}
+											headlineSize="small"
+										/>
+									</LI>
+								);
+							})}
+						</UL>
+					</LI>
+					<LI>
+						<UL
+							direction="row"
+							wrapCards={true}
+							showDivider={false}
+						>
+							{remaining.slice(6, 8).map((card, cardIndex) => {
+								return (
+									<LI
+										key={card.url}
+										percentage="50%"
+										stretch={true}
+										padSides={true}
+										showDivider={cardIndex !== 0}
+									>
+										<FrontCard
+											trail={card}
+											containerPalette={containerPalette}
+											showAge={showAge}
+											imageUrl={undefined}
+											headlineSize="small"
+										/>
+									</LI>
+								);
+							})}
+						</UL>
+					</LI>
 				</UL>
 			</LI>
 		</UL>
