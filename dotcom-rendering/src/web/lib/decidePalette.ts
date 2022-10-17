@@ -16,11 +16,11 @@ import {
 	neutral,
 	news,
 	opinion,
+	palette,
 	specialReport,
 	sport,
 	text,
 } from '@guardian/source-foundations';
-import { specialReportAlt } from '@guardian/source-foundations/dist/cjs/colour/palette';
 // Here is the one place where we use `pillarPalette`
 import { pillarPalette_DO_NOT_USE as pillarPalette } from '../../lib/pillars';
 import type { DCRContainerPalette } from '../../types/front';
@@ -1621,7 +1621,7 @@ const hoverSummaryEventBullet = (format: ArticleFormat): string => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[200];
 		case ArticleSpecial.SpecialReportAlt:
-			return specialReportAlt[200];
+			return palette.specialReportAlt[200];
 	}
 };
 
