@@ -57,6 +57,10 @@ const textHeadline = (format: ArticleFormat): string => {
 				format.design !== ArticleDesign.Interview
 			)
 				return specialReport[100];
+
+			if (format.theme === ArticleSpecial.SpecialReportAlt)
+				return neutral[7];
+
 			switch (format.design) {
 				case ArticleDesign.Review:
 				case ArticleDesign.Recipe:
@@ -194,6 +198,7 @@ const textHeadlineByline = (format: ArticleFormat): string => {
 
 const textStandfirst = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[7];
 	return BLACK;
 };
 
@@ -418,6 +423,10 @@ const textStandfirstLink = (format: ArticleFormat): string => {
 	}
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[400];
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
 	switch (format.theme) {
 		case ArticlePillar.Opinion:
 		case ArticlePillar.Culture:
@@ -758,6 +767,11 @@ const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.DeadBlog) {
 		return neutral[60];
 	}
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt) {
+		return palette.specialReportAlt[100];
+	}
+
 	if (format.design === ArticleDesign.LiveBlog) {
 		switch (format.theme) {
 			case ArticlePillar.News:
@@ -774,8 +788,6 @@ const backgroundBulletStandfirst = (format: ArticleFormat): string => {
 				return news[600];
 			case ArticleSpecial.SpecialReport:
 				return specialReport[700];
-			case ArticleSpecial.SpecialReportAlt:
-				return news[600];
 		}
 	}
 
@@ -1095,7 +1107,7 @@ const borderStandfirstLink = (format: ArticleFormat): string => {
 			case ArticleSpecial.SpecialReport:
 				return specialReport[450];
 			case ArticleSpecial.SpecialReportAlt:
-				return news[600];
+				return neutral[46];
 		}
 	}
 	if (format.theme === ArticleSpecial.SpecialReport)
