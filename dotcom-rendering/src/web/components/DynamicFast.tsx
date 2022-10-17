@@ -7,6 +7,7 @@ import {
 	Card25_Card75,
 	Card50_Card50,
 	Card75_Card25,
+	filterGroupedTrails,
 	shouldPadWrappableRows,
 } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
@@ -475,24 +476,14 @@ export const DynamicFast = ({
 		| 'TwoVeryBigsSecondBoosted';
 
 	let firstSliceCards: TrailType[] = [];
-	// Any trails not used in the first slice are demoted to here
-	let secondSliceGroupedTrails: DCRGroupedTrails = { ...groupedTrails };
 
 	// Decide the layout and contents for the first slice, demoting any remaining cards to the second slice
 	if (groupedTrails.huge.length > 0) {
 		firstSliceLayout = 'oneHuge';
 		firstSliceCards = groupedTrails.huge.slice(0, 1);
-		secondSliceGroupedTrails = {
-			...groupedTrails,
-			huge: groupedTrails.huge.slice(1),
-		};
 	} else if (groupedTrails.veryBig.length === 1) {
 		firstSliceLayout = 'oneVeryBig';
 		firstSliceCards = groupedTrails.veryBig.slice(0, 1);
-		secondSliceGroupedTrails = {
-			...groupedTrails,
-			veryBig: groupedTrails.veryBig.slice(1),
-		};
 	} else if (groupedTrails.veryBig.length > 1) {
 		if (groupedTrails.veryBig[0].isBoosted) {
 			firstSliceLayout = 'TwoVeryBigsFirstBoosted';
@@ -502,10 +493,6 @@ export const DynamicFast = ({
 			firstSliceLayout = 'twoVeryBigs';
 		}
 		firstSliceCards = groupedTrails.veryBig.slice(0, 2);
-		secondSliceGroupedTrails = {
-			...groupedTrails,
-			veryBig: groupedTrails.veryBig.slice(2),
-		};
 	}
 
 	let secondSliceLayout:
@@ -516,6 +503,13 @@ export const DynamicFast = ({
 		| 'twoBigs'
 		| 'oneBig'
 		| 'noBigs';
+
+	// Create our object of grouped trails that doesn't include any
+	// cards used by the first slice
+	const secondSliceGroupedTrails = filterGroupedTrails({
+		groupedTrails,
+		filter: firstSliceCards,
+	});
 
 	let secondSliceCards: TrailType[] = [];
 	const bigs = [
