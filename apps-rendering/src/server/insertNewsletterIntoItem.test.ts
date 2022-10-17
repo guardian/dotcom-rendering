@@ -139,42 +139,35 @@ const makeBodyWithNoPlacesToInsert = (): Body => [
 	}),
 ];
 
-// Note - the fxtures are imported as constants. Mutating them could impact
-// other tests - do not pass the fixtures to insertNewsletterIntoItem.
-// For each test, create a shallow copy of the fixture with the Body property
-// replaced with a new Object.
-
 describe('Insert Newsletter Signups', () => {
 	it('makes no change if there is no newsletter', () => {
-		const unmodifiedBody = makeBodyWithPlaceToInsert();
-		const articleCopy: Standard = {
+		const originalBody = makeBodyWithPlaceToInsert();
+		const newItem = insertNewsletterIntoItem({
 			...article,
-			body: makeBodyWithPlaceToInsert(),
+			body: originalBody,
 			promotedNewsletter: none,
-		};
-		insertNewsletterIntoItem(articleCopy);
-		expect(articleCopy.body).toEqual(unmodifiedBody);
+		}) as Standard;
+		expect(originalBody).toEqual(newItem.body);
 	});
 
 	it('makes no change if there are no suitable places in the body', () => {
-		const unmodifiedBody = makeBodyWithNoPlacesToInsert();
-		const articleCopy: Standard = {
+		const originalBody = makeBodyWithNoPlacesToInsert();
+		const newItem = insertNewsletterIntoItem({
 			...article,
-			body: makeBodyWithNoPlacesToInsert(),
+			body: originalBody,
 			promotedNewsletter: some(TEST_NEWSLETTER),
-		};
-		insertNewsletterIntoItem(articleCopy);
-		expect(articleCopy.body).toEqual(unmodifiedBody);
+		}) as Standard;
+		expect(newItem.body).toEqual(originalBody);
 	});
 
 	it('inserts a NewsletterSignupBlockElement to a standard article if there is a newsletter', () => {
-		const articleCopy: Standard = {
+		const newItem = insertNewsletterIntoItem({
 			...article,
 			body: makeBodyWithPlaceToInsert(),
 			promotedNewsletter: some(TEST_NEWSLETTER),
-		};
-		insertNewsletterIntoItem(articleCopy);
-		const insertedElement = articleCopy.body.find(
+		}) as Standard;
+
+		const insertedElement = newItem.body.find(
 			(result) =>
 				result.isOk() &&
 				result.value.kind === ElementKind.NewsletterSignUp,
@@ -183,7 +176,7 @@ describe('Insert Newsletter Signups', () => {
 	});
 
 	it('will not insert a NewsletterSignupBlockElement into a blog', () => {
-		const unmodifiedBlogCopy: DeadBlog = {
+		const blogWithPromotedNewsletter: DeadBlog = {
 			...deadBlog,
 			blocks: deadBlog.blocks.map((block) => ({
 				...block,
@@ -191,26 +184,17 @@ describe('Insert Newsletter Signups', () => {
 			})),
 			promotedNewsletter: some(TEST_NEWSLETTER),
 		};
-		const blogCopyToTryInsertFunctionOn: DeadBlog = {
-			...deadBlog,
-			blocks: deadBlog.blocks.map((block) => ({
-				...block,
-				body: makeBodyWithPlaceToInsert(),
-			})),
-			promotedNewsletter: some(TEST_NEWSLETTER),
-		};
-		insertNewsletterIntoItem(blogCopyToTryInsertFunctionOn);
-		expect(unmodifiedBlogCopy).toEqual(blogCopyToTryInsertFunctionOn);
+		const newItem = insertNewsletterIntoItem(blogWithPromotedNewsletter);
+		expect(blogWithPromotedNewsletter).toEqual(newItem);
 	});
 
 	it('will not insert a NewsletterSignupBlockElement into a quiz', () => {
-		const unmodifiedBody = makeBodyWithPlaceToInsert();
-		const quizCopy: Quiz = {
+		const originalBody = makeBodyWithPlaceToInsert();
+		const newItem = insertNewsletterIntoItem({
 			...quiz,
-			body: makeBodyWithPlaceToInsert(),
+			body: originalBody,
 			promotedNewsletter: some(TEST_NEWSLETTER),
-		};
-		insertNewsletterIntoItem(quizCopy);
-		expect(quizCopy.body).toEqual(unmodifiedBody);
+		}) as Quiz;
+		expect(newItem.body).toEqual(originalBody);
 	});
 });
