@@ -55,12 +55,12 @@ export const FrontPicture = ({ master, alt }: Props) => {
 	/**
 	 * The assumption here is readers on devices that do not support srcset
 	 * are likely to be on poor network connections so we're going
-	 * to fallback to the smallest image.
+	 * to fallback to the smallest image at low resolution.
 	 *
 	 * Sources are ordered in `descendingByBreakpoint` order,
 	 * so the last one is the smallest.
 	 */
-	const [fallbackSource] = sources.slice(-1);
+	const [{ lowResUrl: fallbackSource }] = sources.slice(-1);
 
 	return (
 		<picture css={block}>
@@ -81,15 +81,7 @@ export const FrontPicture = ({ master, alt }: Props) => {
 				);
 			})}
 
-			<img
-				alt={alt}
-				// The assumption here is readers on devices that do not support srcset are likely to be on poor
-				// network connections so we're going to fallback to the smallest image
-				src={fallbackSource.lowResUrl}
-				width={fallbackSource.width}
-				// height={fallbackSource.hei / ratio}
-				css={block}
-			/>
+			<img alt={alt} src={fallbackSource} css={block} />
 		</picture>
 	);
 };
