@@ -676,6 +676,32 @@ export const SpecialReport = () => {
 };
 SpecialReport.story = { name: 'SpecialReport' };
 
+export const SpecialReportAlt = () => {
+	const format = {
+		display: ArticleDisplay.Standard,
+		design: ArticleDesign.Standard,
+		theme: ArticleSpecial.SpecialReportAlt,
+	};
+	return (
+		<Section fullWidth={true}>
+			<Flex>
+				<LeftColumn borderType="full">
+					<></>
+				</LeftColumn>
+				<ArticleContainer format={format}>
+					<ArticleHeadline
+						headlineString="This is the headline you see when pillar is SpecialReportAlt"
+						format={format}
+						tags={[]}
+						webPublicationDateDeprecated=""
+					/>
+				</ArticleContainer>
+			</Flex>
+		</Section>
+	);
+};
+SpecialReportAlt.story = { name: 'SpecialReportAlt' };
+
 export const LiveBlog = () => {
 	const format = {
 		display: ArticleDisplay.Standard,
