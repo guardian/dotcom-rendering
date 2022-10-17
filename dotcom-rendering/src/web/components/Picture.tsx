@@ -168,7 +168,7 @@ const decideImageWidths = ({
  * @see https://github.com/guardian/fastly-image-service/blob/main/fastly-io_guim_co_uk/src/main/resources/varnish/main.vcl
  *
  */
-export const generateImageURL = ({
+const generateImageURL = ({
 	master,
 	imageWidth,
 	resolution,
@@ -197,10 +197,7 @@ export const generateImageURL = ({
 	}?${params.toString()}`;
 };
 
-export const descendingByBreakpoint = (
-	a: ImageWidthType,
-	b: ImageWidthType,
-) => {
+const descendingByBreakpoint = (a: ImageWidthType, b: ImageWidthType) => {
 	// We need to list the largest images first as browsers read top down and stop
 	// as soon as they hit a matching media query
 	return b.breakpoint - a.breakpoint;
@@ -216,18 +213,24 @@ const block = css`
 	display: block;
 `;
 
-export const Picture = ({
-	role,
-	format,
-	master,
-	alt,
-	height,
-	width,
-	isMainMedia = false,
-	isLazy = true,
-}: Props) => {
-	const imageWidths = decideImageWidths({ role, format, isMainMedia });
-	const sources = imageWidths
+type ImageSource = {
+	breakpoint: number;
+	width: number;
+	hiResUrl: string;
+	lowResUrl: string;
+};
+
+/**
+ * Generate image sources for an image.
+ *
+ * @param master source image URL
+ * @param imageWidths list of image widths
+ */
+export const generateSources = (
+	master: string,
+	imageWidths: ImageWidthType[],
+): ImageSource[] =>
+	imageWidths
 		.slice()
 		.sort(descendingByBreakpoint)
 		.map(({ width: imageWidth, breakpoint }) => {
@@ -246,6 +249,21 @@ export const Picture = ({
 				}),
 			};
 		});
+
+export const Picture = ({
+	role,
+	format,
+	master,
+	alt,
+	height,
+	width,
+	isMainMedia = false,
+	isLazy = true,
+}: Props) => {
+	const sources = generateSources(
+		master,
+		decideImageWidths({ role, format, isMainMedia }),
+	);
 
 	const ratio = parseInt(height, 10) / parseInt(width, 10);
 	/**

@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { breakpoints } from '@guardian/source-foundations';
 import React from 'react';
 import type { ImageWidthType } from './Picture';
-import { descendingByBreakpoint, generateImageURL } from './Picture';
+import { generateSources } from './Picture';
 
 type Props = {
 	imageSize: ImageSizeType;
@@ -85,26 +85,7 @@ const aspectRatio = css`
 `;
 
 export const FrontPicture = ({ master, alt, imageSize }: Props) => {
-	const imageWidths = decideImageWidths(imageSize);
-	const sources = imageWidths
-		.slice()
-		.sort(descendingByBreakpoint)
-		.map(({ width: imageWidth, breakpoint }) => {
-			return {
-				breakpoint,
-				width: imageWidth,
-				hiResUrl: generateImageURL({
-					master,
-					imageWidth,
-					resolution: 'high',
-				}),
-				lowResUrl: generateImageURL({
-					master,
-					imageWidth,
-					resolution: 'low',
-				}),
-			};
-		});
+	const sources = generateSources(master, decideImageWidths(imageSize));
 
 	/**
 	 * The assumption here is readers on devices that do not support srcset
