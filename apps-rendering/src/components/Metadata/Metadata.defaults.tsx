@@ -1,14 +1,14 @@
-import type { FC } from 'react';
-import type { Item } from 'item';
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { remSpace } from '@guardian/source-foundations';
-import { getFormat } from 'item';
 import Avatar from 'components/Avatar';
 import Byline from 'components/Byline';
-import Dateline from 'components/Dateline';
 import CommentCount from 'components/CommentCount';
+import Dateline from 'components/Dateline';
 import Follow from 'components/Follow';
+import { getFormat } from 'item';
+import type { Item } from 'item';
+import type { FC } from 'react';
 
 export const defaultStyles = css`
 	display: flex;

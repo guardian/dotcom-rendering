@@ -1,8 +1,8 @@
-import type { FC } from 'react';
-import { useState } from 'react';
-import type { Item } from 'item';
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import {
 	breakpoints,
 	from,
@@ -10,19 +10,20 @@ import {
 	remSpace,
 	until,
 } from '@guardian/source-foundations';
-import { getFormat } from 'item';
+import { ToggleSwitch } from '@guardian/source-react-components-development-kitchen';
 import Avatar from 'components/Avatar';
 import Byline from 'components/Byline';
-import Dateline from 'components/Dateline';
 import CommentCount from 'components/CommentCount';
+import Dateline from 'components/Dateline';
 import Follow from 'components/Follow';
-import Logo from 'components/Logo';
-import { ToggleSwitch } from '@guardian/source-react-components-development-kitchen';
-import { defaultStyles, defaultTextStyles } from './Metadata.defaults';
-import { ArticleDesign, ArticleFormat } from '@guardian/libs';
-import { darkModeCss } from 'styles';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
 import LiveblogMetadataLines from 'components/LiveblogMetadataLines';
+import Logo from 'components/Logo';
+import { getFormat } from 'item';
+import type { Item } from 'item';
+import { useState } from 'react';
+import type { FC } from 'react';
+import { darkModeCss } from 'styles';
+import { defaultStyles, defaultTextStyles } from './Metadata.defaults';
 
 const blogStyles = css`
 	display: block;
