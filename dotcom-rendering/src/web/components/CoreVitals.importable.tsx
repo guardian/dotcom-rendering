@@ -4,6 +4,7 @@ import {
 	getCookie,
 	initCoreWebVitals,
 } from '@guardian/libs';
+import { dcrJavascriptBundle } from '../../../scripts/webpack/bundles';
 import type { ServerSideTestNames } from '../../types/config';
 import { useAB } from '../lib/useAB';
 
@@ -31,8 +32,8 @@ export const CoreVitals = () => {
 
 	const serverSideTestsToForceMetrics: Array<ServerSideTestNames> = [
 		/* linter, please keep this array multi-line */
-		'commercialEndOfQuarterMegaTestVariant',
-		'commercialEndOfQuarterMegaTestControl',
+		dcrJavascriptBundle('Variant'),
+		dcrJavascriptBundle('Control'),
 	];
 
 	const userInServerSideTestToForceMetrics =

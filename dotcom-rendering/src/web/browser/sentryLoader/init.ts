@@ -3,6 +3,12 @@ import { isAdBlockInUse } from '@guardian/commercial-core';
 import { startup } from '../startup';
 
 const init = async (): Promise<void> => {
+	// We don't send errors on the dev server, or if the enableSentryReporting switch is off.
+	const {
+		switches: { enableSentryReporting },
+		isDev,
+	} = window.guardian.config;
+	const sentryDisabled = isDev || !enableSentryReporting;
 	// Sentry lets you configure sampleRate to reduce the volume of events sent
 	// but this filter only happens _after_ the library is loaded. The Guardian
 	// measures page views in the billions so we only want to log 1% of errors that
@@ -10,7 +16,7 @@ const init = async (): Promise<void> => {
 	// Sentry 99% of the time. So instead we just do some basic math here
 	// and use that to prevent the Sentry script from ever loading.
 	const randomCentile = Math.floor(Math.random() * 100) + 1; // A number between 1 - 100
-	if (randomCentile <= 99) {
+	if (randomCentile <= 99 || sentryDisabled) {
 		// 99% of the time we don't want to remotely log errors with Sentry and so
 		// we just console them out
 		window.guardian.modules.sentry.reportError = (error) => {

@@ -8,12 +8,10 @@ import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import type { CAPIArticleType } from '../../types/frontend';
-import type { CAPIOnwards } from '../../types/onwards';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
-import { onwardsToHtml } from './onwardsToHtml';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
@@ -139,6 +137,7 @@ export const renderBlocks = (
 			sharedAdTargeting,
 			adUnit,
 			switches,
+			keywordIds,
 		} = body;
 
 		const enhancedBlocks = enhanceBlocks(blocks, format);
@@ -157,6 +156,7 @@ export const renderBlocks = (
 			sharedAdTargeting,
 			adUnit,
 			switches,
+			keywordIds,
 		});
 
 		res.status(200).send(html);
@@ -176,29 +176,6 @@ export const renderKeyEvents = (
 			keyEvents,
 			format,
 			filterKeyEvents,
-		});
-
-		res.status(200).send(html);
-	} catch (e) {
-		res.status(500).send(`<pre>${getStack(e)}</pre>`);
-	}
-};
-
-export const renderOnwards = (
-	{ body }: { body: CAPIOnwards },
-	res: express.Response,
-): void => {
-	try {
-		const { heading, description, url, onwardsSource, trails, format } =
-			body;
-
-		const html = onwardsToHtml({
-			heading,
-			description,
-			url,
-			onwardsSource,
-			trails,
-			format,
 		});
 
 		res.status(200).send(html);

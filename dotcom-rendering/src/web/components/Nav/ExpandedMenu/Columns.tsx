@@ -140,14 +140,26 @@ export const Columns: React.FC<{
 		role="menubar"
 		data-cy="nav-menu-columns"
 	>
-		{nav.pillars.map((column, i) => (
-			<Column
-				column={column}
-				key={column.title.toLowerCase()}
-				index={i}
-				isLastColumn={i !== nav.pillars.length - 1}
-			/>
-		))}
+		{nav.pillars.map(
+			(column, i) => (
+				column.children?.unshift({
+					title: column.title,
+					longTitle: `View all ${column.title}`,
+					url: column.url,
+					pillar: undefined,
+					children: [],
+					mobileOnly: true,
+				}),
+				(
+					<Column
+						column={column}
+						key={column.title.toLowerCase()}
+						index={i}
+						isLastColumn={i !== nav.pillars.length - 1}
+					/>
+				)
+			),
+		)}
 
 		<li>
 			<ThemeProvider theme={{ ...buttonThemeBrand }}>
@@ -174,7 +186,6 @@ export const Columns: React.FC<{
 
 			<div css={lineStyle}></div>
 		</li>
-
 		<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
 		<MoreColumn
 			column={nav.otherLinks}

@@ -25,13 +25,12 @@ export const SignInGateMain = ({
 	dismissGate,
 	abTest,
 	ophanComponentId,
-	isComment,
 	isMandatory = false,
 }: SignInGateProps) => {
 	return (
 		<div css={signInGateContainer} data-cy="sign-in-gate-main">
 			<style>{hideElementsCss}</style>
-			<div css={firstParagraphOverlay(!!isComment)} />
+			<div css={firstParagraphOverlay} />
 			<h1 css={headingStyles}>You need to register to keep reading</h1>
 			<p css={bodyBold}>
 				It’s still free to read - this is not a paywall
