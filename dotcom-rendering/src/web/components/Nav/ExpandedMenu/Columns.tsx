@@ -1,4 +1,4 @@
-import { css, ThemeProvider } from '@emotion/react';
+import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import {
@@ -7,10 +7,10 @@ import {
 	brandText,
 	from,
 	headline,
+	neutral,
 	textSans,
 } from '@guardian/source-foundations';
 import {
-	buttonThemeBrand,
 	LinkButton,
 	SvgMagnifyingGlass,
 } from '@guardian/source-react-components';
@@ -125,10 +125,21 @@ const searchBar = css`
 	${from.desktop} {
 		display: none;
 	}
-	margin-left: 45px;
+	margin-left: 12px;
 	margin-bottom: 24px;
 	margin-right: 41px;
 	padding-bottom: 15px;
+`;
+
+const searchButton = css`
+	max-width: 23.75rem;
+	${textSans.large()}
+	background-color: rgba(255,255,255, .1);
+	color: ${neutral[100]};
+	padding-left: 12px;
+	padding-top: 2px;
+	width: 100%;
+	justify-content: flex-end;
 `;
 
 export const Columns: React.FC<{
@@ -162,30 +173,30 @@ export const Columns: React.FC<{
 		)}
 
 		<li>
-			<ThemeProvider theme={{ ...buttonThemeBrand }}>
-				<div css={searchBar}>
-					<LinkButton
-						href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
-						tabIndex={-1}
-						className="selectableMenuItem"
-						priority="secondary"
-						icon={
-							<SvgMagnifyingGlass
-								isAnnouncedByScreenReader={true}
-								size="medium"
-							/>
-						}
-						aria-label="Search with google"
-						data-link-name="nav2 : search : submit"
-						type="submit"
-					>
-						Search
-					</LinkButton>
-				</div>
-			</ThemeProvider>
-
+			<div css={searchBar}>
+				<LinkButton
+					css={searchButton}
+					href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
+					tabIndex={-1}
+					className="selectableMenuItem"
+					priority="secondary"
+					size="small"
+					icon={
+						<SvgMagnifyingGlass
+							isAnnouncedByScreenReader={true}
+							size="medium"
+						/>
+					}
+					aria-label="Search with google"
+					data-link-name="nav2 : search : submit"
+					type="submit"
+				>
+					Search
+				</LinkButton>
+			</div>
 			<div css={lineStyle}></div>
 		</li>
+
 		<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
 		<MoreColumn
 			column={nav.otherLinks}
