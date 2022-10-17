@@ -3,7 +3,7 @@
  */
 import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import { none, some } from '@guardian/types';
-import type { Body } from 'bodyElement';
+import type { Body, BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
 import type { DeadBlog, Quiz, Standard } from 'item';
 import { Optional } from 'optional';
@@ -31,112 +31,52 @@ const makeTextElementNode = (html: string, outerTag = 'p'): Node => {
 	return doc.firstChild!;
 };
 
-const makeBodyWithPlaceToInsert = (): Body => [
+const makeParagraphResult = (html: string): Result<string, BodyElement> =>
 	Result.ok({
 		kind: ElementKind.Text,
-		doc: makeTextElementNode('Introductory paragraph.'),
-	}),
+		doc: makeTextElementNode(html),
+	});
+const makeHeadingResult = (
+	html: string,
+	id: string,
+): Result<string, BodyElement> =>
 	Result.ok({
 		kind: ElementKind.HeadingTwo,
-		id: Optional.some('who-qualifies-for-student-loan-forgiveness'),
-		doc: makeTextElementNode(
-			'Who qualifies for student loan forgiveness?',
-			'h2',
-		),
-	}),
-	Result.ok({
-		kind: ElementKind.Text,
-		doc: makeTextElementNode('Another paragraph.'),
-	}),
-	Result.ok({
-		kind: ElementKind.HeadingTwo,
-		id: Optional.some('how-the-student-debt-crisis-started'),
-		doc: makeTextElementNode('How the student debt crisis started?', 'h2'),
-	}),
-	Result.ok({
-		kind: ElementKind.Text,
-		doc: makeTextElementNode('Another paragraph.'),
-	}),
-	Result.ok({
-		kind: ElementKind.Text,
-		doc: makeTextElementNode('Another paragraph.'),
-	}),
-	Result.ok({
-		kind: ElementKind.Text,
-		doc: makeTextElementNode('Another paragraph.'),
-	}),
-	Result.ok({
-		kind: ElementKind.Text,
-		doc: makeTextElementNode('Another paragraph.'),
-	}),
-	Result.ok({
-		kind: ElementKind.Text,
-		doc: makeTextElementNode('Another paragraph.'),
-	}),
-	Result.ok({
-		kind: ElementKind.HeadingTwo,
-		id: Optional.some('what-student-debt-looks-like-today'),
-		doc: makeTextElementNode('What student debt looks like today?', 'h2'),
-	}),
-	Result.ok({
-		kind: ElementKind.Text,
-		doc: makeTextElementNode('Another paragraph.'),
-	}),
+		id: Optional.some(id),
+		doc: makeTextElementNode(html, 'h2'),
+	});
+const makePullquoteResult = (): Result<string, BodyElement> =>
 	Result.ok({
 		kind: ElementKind.Pullquote,
 		quote: 'Why should the crown be allowed to carry on with a feudal system just because they want to?',
 		attribution: { kind: 0, value: 'Jane Giddins' },
-	}),
-	Result.ok({
-		kind: ElementKind.Text,
-		doc: makeTextElementNode('Another paragraph.'),
-	}),
-	Result.ok({
-		kind: ElementKind.Text,
-		doc: makeTextElementNode('Another paragraph.'),
-	}),
+	});
+
+const makeBodyWithPlaceToInsert = (): Body => [
+	makeParagraphResult('Introductory paragraph.'),
+	makeHeadingResult('first subheading', 'first-subheading'),
+	makeParagraphResult('Another paragraph.'),
+	makeHeadingResult('Another heading', 'another-heading'),
+	makeParagraphResult('Another paragraph.'),
+	makeParagraphResult('Another paragraph.'),
+	makeParagraphResult('Another paragraph.'),
+	makeParagraphResult('Another paragraph.'),
+	makeHeadingResult('Another heading', 'another-heading'),
+	makeParagraphResult('Another paragraph.'),
+	makePullquoteResult(),
+	makeParagraphResult('Another paragraph.'),
+	makeParagraphResult('Another paragraph.'),
 ];
 
 const makeBodyWithNoPlacesToInsert = (): Body => [
-	Result.ok({
-		kind: ElementKind.Text,
-		doc: makeTextElementNode('Introductory paragraph.'),
-	}),
-	Result.ok({
-		kind: ElementKind.HeadingTwo,
-		id: Optional.some('who-qualifies-for-student-loan-forgiveness'),
-		doc: makeTextElementNode(
-			'Who qualifies for student loan forgiveness?',
-			'h2',
-		),
-	}),
-	Result.ok({
-		kind: ElementKind.Text,
-		doc: makeTextElementNode('Another paragraph.'),
-	}),
-	Result.ok({
-		kind: ElementKind.HeadingTwo,
-		id: Optional.some('how-the-student-debt-crisis-started'),
-		doc: makeTextElementNode('How the student debt crisis started?', 'h2'),
-	}),
-	Result.ok({
-		kind: ElementKind.Text,
-		doc: makeTextElementNode('Another paragraph.'),
-	}),
-	Result.ok({
-		kind: ElementKind.HeadingTwo,
-		id: Optional.some('what-student-debt-looks-like-today'),
-		doc: makeTextElementNode('What student debt looks like today?', 'h2'),
-	}),
-	Result.ok({
-		kind: ElementKind.Text,
-		doc: makeTextElementNode('Another paragraph.'),
-	}),
-	Result.ok({
-		kind: ElementKind.Pullquote,
-		quote: 'Why should the crown be allowed to carry on with a feudal system just because they want to?',
-		attribution: { kind: 0, value: 'Jane Giddins' },
-	}),
+	makeParagraphResult('Introductory paragraph.'),
+	makeHeadingResult('first subheading', 'first-subheading'),
+	makeParagraphResult('Another paragraph.'),
+	makeHeadingResult('Another heading', 'another-heading'),
+	makeParagraphResult('Another paragraph.'),
+	makeHeadingResult('Another heading', 'another-heading'),
+	makeParagraphResult('Another paragraph.'),
+	makePullquoteResult(),
 ];
 
 describe('Insert Newsletter Signups', () => {
