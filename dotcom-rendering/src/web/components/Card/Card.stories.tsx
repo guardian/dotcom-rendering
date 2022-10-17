@@ -24,7 +24,7 @@ const basicCardProps: CardProps = {
 	kickerText: '',
 	webPublicationDate: '2019-11-11T09:45:30.000Z',
 	imageUrl:
-		'https://i.guim.co.uk/img/media/6537e163c9164d25ec6102641f6a04fa5ba76560/0_0_5472_3648/master/5472.jpg?width=1140&quality=85&s=15053eb16d6829d670fb348d8d26aabd',
+		'https://i.guim.co.uk/img/media/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg?width=1140&quality=85&s=4d24eb891f991a2cc2f46e9a821fe9e6',
 	imagePosition: 'top',
 	showAge: true,
 };
