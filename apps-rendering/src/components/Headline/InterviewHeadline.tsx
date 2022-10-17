@@ -4,6 +4,7 @@ import {
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
 import { from, headline, remSpace } from '@guardian/source-foundations';
+import { fromNullable, OptionKind } from '@guardian/types';
 import HeadlineByline from 'components/HeadlineByline';
 import HeadlineTag from 'components/HeadlineTag';
 import type { Item } from 'item';
@@ -26,6 +27,10 @@ const interviewStyles = css`
 
 const InterviewHeadline: React.FC<Props> = ({ item }) => {
 	const format = getFormat(item);
+	const interviewToneTag = fromNullable(
+		item.tags.find((tag) => tag.id === 'tone/interview'),
+	);
+	const headlineTag = <HeadlineTag tagText="Interview" format={format} />;
 
 	return (
 		<div
@@ -39,9 +44,13 @@ const InterviewHeadline: React.FC<Props> = ({ item }) => {
 				}
 			`}
 		>
-			<a href="https://www.theguardian.com/tone/interview">
-				<HeadlineTag tagText="Interview" format={format} />
-			</a>
+			{interviewToneTag.kind === OptionKind.Some ? (
+				<nav>
+					<a href={interviewToneTag.value.webUrl}>{headlineTag}</a>
+				</nav>
+			) : (
+				headlineTag
+			)}
 			<h1 css={css(defaultStyles(item), interviewStyles)}>
 				<span
 					css={css`
