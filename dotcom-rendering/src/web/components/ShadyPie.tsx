@@ -23,10 +23,12 @@ export const ShadyPie = ({
 	format?: ArticleFormat;
 	abTest?: boolean;
 }) => {
-	const queryString = abTest
-		? 'utm_source=shady-pie-variant'
-		: 'utm_source=shady-pie';
-	if (format?.theme == ArticlePillar.Lifestyle && editionId == 'UK') {
+	const queryString = 'utm_source=shady-pie-variant';
+	if (
+		format?.theme == ArticlePillar.Lifestyle &&
+		editionId == 'UK' &&
+		abTest
+	) {
 		return (
 			<LabsShadyPie
 				title="Can you feel it? How to use texture to give your home sensory appeal"
@@ -35,7 +37,11 @@ export const ShadyPie = ({
 				sponsorLogoLink="https://static.theguardian.com/commercial/sponsor/15/Sep/2022/0cd11bda-eeb4-4bf6-a328-da8cbc0ffe45-ebay_logo.png"
 			/>
 		);
-	} else if (format?.theme == ArticlePillar.Lifestyle && editionId == 'US') {
+	} else if (
+		format?.theme == ArticlePillar.Lifestyle &&
+		editionId == 'US' &&
+		abTest
+	) {
 		return (
 			<LabsShadyPie
 				title="Taiwan’s wind power revolution: leading the way in Asia-Pacific"

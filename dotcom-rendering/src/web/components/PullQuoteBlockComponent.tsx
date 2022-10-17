@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import {
-	from,
-	headline,
-	neutral,
-	text,
-	until,
-} from '@guardian/source-foundations';
+import { from, headline, text, until } from '@guardian/source-foundations';
 import { unescapeData } from '../../lib/escapeData';
 import type { Palette } from '../../types/palette';
 import { QuoteIcon } from './QuoteIcon';
@@ -135,9 +129,7 @@ export const PullQuoteBlockComponent: React.FC<{
 							${headline.xxsmall({ fontWeight: 'light' })};
 							line-height: 25px;
 							position: relative;
-							/* TODO: Source foundation doesn't have this colour, once it does, remove the hex below */
-							/* stylelint-disable-next-line color-no-hex */
-							background-color: #fbe6d5;
+							background-color: ${palette.background.pullQuote};
 							padding-top: 6px;
 							padding-bottom: 12px;
 							margin-bottom: 28px;
@@ -148,9 +140,8 @@ export const PullQuoteBlockComponent: React.FC<{
 								height: 25px;
 								bottom: -25px;
 								position: absolute;
-								/* TODO: Source foundation doesn't have this colour, once it does, remove the hex below */
-								/* stylelint-disable-next-line color-no-hex */
-								background-color: #fbe6d5;
+								background-color: ${palette.background
+									.pullQuote};
 							}
 						`,
 					]}
@@ -213,7 +204,7 @@ export const PullQuoteBlockComponent: React.FC<{
 							${headline.xxsmall({ fontWeight: 'bold' })};
 							line-height: 25px;
 							position: relative;
-							background-color: ${neutral[97]};
+							background-color: ${palette.background.pullQuote};
 							padding-left: 10px;
 							padding-right: 10px;
 							padding-top: 6px;
@@ -227,7 +218,8 @@ export const PullQuoteBlockComponent: React.FC<{
 								height: 25px;
 								bottom: -25px;
 								position: absolute;
-								background-color: ${neutral[97]};
+								background-color: ${palette.background
+									.pullQuote};
 							}
 						`,
 					]}
