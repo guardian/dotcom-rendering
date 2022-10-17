@@ -11,14 +11,14 @@ import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Element } from '@guardian/content-api-models/v1/element';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import type { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { andThen, fromNullable, map, none, some } from '@guardian/types';
+import { andThen, fromNullable, map, none, some, withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
@@ -49,7 +49,7 @@ import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
 import { Result } from 'result';
-import { themeFromString } from 'themeStyles';
+import { getPillarFromId } from 'format';
 
 // ----- Item Type ----- //
 
@@ -281,7 +281,12 @@ const itemFields = (
 ): ItemFields => {
 	const { content, commentCount, relatedContent } = request;
 	return {
-		theme: themeFromString(content.pillarId),
+		theme: pipe(
+			content.pillarId,
+			fromNullable,
+			andThen(getPillarFromId),
+			withDefault<ArticleTheme>(ArticlePillar.News),
+		),
 		display: getDisplay(content),
 		headline: content.fields?.headline ?? '',
 		standfirst: pipe(
