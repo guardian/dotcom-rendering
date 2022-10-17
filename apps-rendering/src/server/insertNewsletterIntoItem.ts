@@ -12,13 +12,13 @@ import { stringToPillar } from 'themeStyles';
 // ----- Constants ----- //
 
 enum ElementCategory {
-	'ParagraphText',
-	'BoldParagraphText',
-	'NonParagraphText',
-	'Heading',
-	'NonText',
-	'WhiteSpace',
-	'Error',
+	ParagraphText,
+	BoldParagraphText,
+	NonParagraphText,
+	Heading,
+	NonText,
+	WhiteSpace,
+	Error,
 }
 
 // ----- pure functions ---//
