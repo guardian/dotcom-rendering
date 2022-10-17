@@ -103,49 +103,73 @@ function findInsertIndex(body: Body): Result<string, number> {
 			),
 	);
 
+	// get the slice from contentOnlyBody that has the elements
+	// with the target range.
+	// The slice starts are minIndex-1 as the isSuitable function
+	// needs to check the category of the element before the element
+	// it is testing.
 	const [minIndex, maxIndex] = getRange(contentOnlyBody.length);
+	const possibleElementsToPlaceBefore = contentOnlyBody.slice(
+		minIndex - 1,
+		maxIndex,
+	);
 
 	function isSuitable(index: number): boolean {
-		if (index > maxIndex || index < minIndex) {
-			return false;
-		}
-
-		const contentBefore = contentOnlyBody[index - 1];
-		const contentAfter = contentOnlyBody[index];
+		const elementBeforeInsertPoint = possibleElementsToPlaceBefore[index - 1];
+		const elementAfterInsertPoint = possibleElementsToPlaceBefore[index];
 
 		// NOTE - this is a type safety check. TypeScript will cast a value
 		// accessed from an array index as being of type of the Array member, even
 		// if the index is out of bounds and the value is actually undefined.
 		// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- because 👆
-		if (!contentBefore || !contentAfter) {
+		if (!elementBeforeInsertPoint || !elementAfterInsertPoint) {
 			return false;
 		}
 
 		return (
 			[ElementCategory.ParagraphText].includes(
-				categoriseElement(contentBefore),
+				categoriseElement(elementBeforeInsertPoint),
 			) &&
 			[
 				ElementCategory.ParagraphText,
 				ElementCategory.BoldParagraphText,
-			].includes(categoriseElement(contentAfter))
+			].includes(categoriseElement(elementAfterInsertPoint))
 		);
 	}
 
-	const suitabilityList = contentOnlyBody.map((_, index) =>
-		isSuitable(index),
+	// Define a recursive function go backwards through the possible
+	// positions until it finds one that is suitable or reaches
+	// possibleElementsToPlaceBefore[0] - which is actually out of range, but
+	// has to be include to test if possiblePoistions[1] is suitable.
+	const findLastSuitablePosition = (
+		idx: number,
+	): Result<string, number> => {
+		if (idx <= 0) {
+			return Result.err(
+				'Unable to find suitable place for NewsletterSignUp',
+			);
+		}
+		if (isSuitable(idx)) {
+			return Result.ok(idx);
+		}
+		return findLastSuitablePosition(idx - 1);
+	};
+
+	// call the recursive function, starting at the last position in
+	// possibleElementsToPlaceBefore
+	const positionInPossibleElements = findLastSuitablePosition(
+		possibleElementsToPlaceBefore.length - 1,
 	);
 
-	const bestIndexInContentOnlyBody = suitabilityList.lastIndexOf(true);
-
-	// Find the corresponding index in the original body array:
-	const bestIndexInOriginalBody = body.indexOf(
-		contentOnlyBody[bestIndexInContentOnlyBody],
+	return positionInPossibleElements.either(
+		(err) => Result.err(err),
+		(indexInPossibleElements) => {
+			const bestIndexInOriginalBody = body.indexOf(
+				possibleElementsToPlaceBefore[indexInPossibleElements],
+			);
+			return Result.ok(bestIndexInOriginalBody) as Result<string, number>;
+		},
 	);
-
-	return bestIndexInOriginalBody === -1
-		? Result.err('Unable to find suitable place for NewsletterSignUp')
-		: Result.ok(bestIndexInOriginalBody);
 }
 
 // ----- Procedures ----- //
