@@ -149,4 +149,4 @@ const FigCaption: FC<Props> = ({
 
 export default FigCaption;
 
-export { IconVariant };
+export { IconVariant, Icon as CaptionIcon };
