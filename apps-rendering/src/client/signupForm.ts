@@ -7,7 +7,7 @@ interface FormBundle {
 	submitButton: Element;
 	resetButton: Element;
 	input: HTMLInputElement;
-	newsletterId: string;
+	identityName: string;
 }
 
 // ----- Constants ----- //
@@ -21,7 +21,7 @@ const MODIFIER_CLASSNAME = {
 // ----- Procedures ----- //
 
 async function handleSubmission(bundle: FormBundle): Promise<void> {
-	const { input, newsletterId, submitButton, form } = bundle;
+	const { input, identityName, submitButton, form } = bundle;
 
 	if (!input.value) {
 		return;
@@ -33,7 +33,7 @@ async function handleSubmission(bundle: FormBundle): Promise<void> {
 
 	const response = await fakeRequestToEmailSignupService(
 		input.value,
-		newsletterId,
+		identityName,
 	);
 	form.classList.remove(MODIFIER_CLASSNAME.waiting);
 
@@ -54,7 +54,7 @@ function handleReset(bundle: FormBundle): void {
 }
 
 function setup(form: Element): void {
-	const newsletterId = form.getAttribute('data-newsletter-id');
+	const identityName = form.getAttribute('data-newsletter-id');
 	const submitButton = form.querySelector('button[type=submit]');
 	const resetButton = form.querySelector('button[type=reset]');
 	// typeScript will only cast to the right sub-type of Element if the querySelector
@@ -72,7 +72,7 @@ function setup(form: Element): void {
 	// could be cast as truthy - but to protect against future bugs, this
 	// script does not assume that the component will continue to follow the
 	// 'contract' and have the required attributes and elements.
-	if (!input || !newsletterId || !submitButton || !resetButton) {
+	if (!input || !identityName || !submitButton || !resetButton) {
 		return;
 	}
 
@@ -81,7 +81,7 @@ function setup(form: Element): void {
 		submitButton,
 		resetButton,
 		input,
-		newsletterId,
+		identityName,
 	};
 
 	form.addEventListener('submit', (event) => {
