@@ -2869,10 +2869,10 @@
     "@typescript-eslint/eslint-plugin" "5.21.0"
     "@typescript-eslint/parser" "5.21.0"
 
-"@guardian/libs@^9.0.0":
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-9.0.0.tgz#bb16cbfa4b367d2488e45dfab5d86add893eb028"
-  integrity sha512-VTNP04HisGts8ebnigRwsT255Wcf4ask9puc0AeP29Fj93Hs0rVkh8TAZ5VHEZ5ncNARiJTGAKc7ahatd7QYGQ==
+"@guardian/libs@^9.0.1":
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-9.0.1.tgz#0cae687b733d8ab34af6482edb5da07e815eb58f"
+  integrity sha512-3nDfG/wRjhAXejQH4MCc0C0fpl5aSDQhuyOYqi5lb+nfrpw5uldH89xVIB/fcIK+OcrrCeCEndbPvpP41298vw==
 
 "@guardian/prettier@^1.0.0":
   version "1.0.0"
