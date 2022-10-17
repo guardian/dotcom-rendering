@@ -14,7 +14,7 @@ import {
 } from '@guardian/source-foundations';
 import {
 	StraightLines,
-	ToggleSwitch,
+	ToggleSwitchApps,
 } from '@guardian/source-react-components-development-kitchen';
 import Avatar from 'components/Avatar';
 import Byline from 'components/Byline';
@@ -266,7 +266,7 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 			<div css={metaBottomStyles(isLive(design))}>
 				{isLive(design) && (
 					<div css={css(toggleStyles, liveBlogPadding)}>
-						<ToggleSwitch
+						<ToggleSwitchApps
 							platform="ios"
 							checked={checked}
 							label={'Get alerts on this story'}
@@ -275,7 +275,7 @@ const MetadataWithAlertSwitch: FC<Props> = ({ item }: Props) => {
 								setChecked(!checked);
 								console.log('changed toggle');
 							}}
-						></ToggleSwitch>
+						></ToggleSwitchApps>
 					</div>
 				)}
 				<CommentCount count={item.commentCount} {...item} />
