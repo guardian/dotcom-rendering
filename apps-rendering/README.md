@@ -96,21 +96,9 @@ npm run storybook
 
 Stories are deployed on [GitHub pages](https://guardian.github.io/apps-rendering)
 
-### Generating apps-rendering API models
+### Generating `apps-rendering-api-models`
 
-In order to release the models you'll need to:
+> **Note**
+> These models have moved! You can now find them, along with release instructions, at [`guardian/apps-rendering-api-models`](https://github.com/guardian/apps-rendering-api-models).
 
-- have a Sonatype account with access to the guardian organisation
-- have an NPM account, part of the [@guardian](https://www.npmjs.com/org/guardian) org with a [configured token](https://docs.npmjs.com/creating-and-viewing-authentication-tokens)
-
-Make sure you set upstream `git push --set-upstream origin <BRANCH_NAME>`
-
-In the SBT repl:
-
-```sbtshell
-clean
-project scalaApiModels
-release
-project tsApiModels
-releaseNpm <versionNumber>
-```
+[`MAPI`](https://github.com/guardian/mobile-apps-api) uses `apps-rendering-api-models` to communicate with the Apps Rendering API. To render an article, MAPI sends a `RenderingRequest` to Apps Rendering. The `RenderingRequest` includes all the information Apps Rendering requires for rendering. `RenderingRequest` and other associated models are defined in `apps-rendering-api-models`.
