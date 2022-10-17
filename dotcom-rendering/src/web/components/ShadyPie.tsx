@@ -23,19 +23,25 @@ export const ShadyPie = ({
 	format?: ArticleFormat;
 	abTest?: boolean;
 }) => {
-	const queryString = abTest
-		? 'utm_source=shady-pie-variant'
-		: 'utm_source=shady-pie';
-	if (format?.theme == ArticlePillar.Lifestyle && editionId == 'UK') {
+	const queryString = 'utm_source=shady-pie-variant';
+	if (
+		format?.theme == ArticlePillar.Lifestyle &&
+		editionId == 'UK' &&
+		abTest
+	) {
 		return (
 			<LabsShadyPie
-				title="It’s all about the berries: meet one of the farmers growing blackcurrants for Ribena"
-				imageLink="https://i.guim.co.uk/img/media/f98f93c22a563b3107394d64e8410a062172de7d/0_37_2122_1273/master/2122.jpg?width=300&quality=85&auto=format&fit=max&s=d4b4dd6437b8fe07e9e3a1ac925caabc"
-				contentLink={`https://www.theguardian.com/growing-for-good/2022/aug/08/its-all-about-the-berries-meet-one-of-the-farmers-growing-blackcurrants-for-ribena?${queryString}`}
-				sponsorLogoLink="https://static.theguardian.com/commercial/sponsor/20/Jul/2022/0a826298-8684-420d-90ab-d6d2797fbf6a-Suntory%20Logo.png"
+				title="Can you feel it? How to use texture to give your home sensory appeal"
+				imageLink="https://i.guim.co.uk/img/media/ac01967e539da23e25c90a46b64e3d7ac878cf2a/0_333_5000_3000/master/5000.jpg?width=300&quality=45&dpr=2&s=none"
+				contentLink={`https://www.theguardian.com/in-my-element/2022/sep/28/can-you-feel-it-how-to-use-texture-to-give-your-home-sensory-appeal?${queryString}`}
+				sponsorLogoLink="https://static.theguardian.com/commercial/sponsor/15/Sep/2022/0cd11bda-eeb4-4bf6-a328-da8cbc0ffe45-ebay_logo.png"
 			/>
 		);
-	} else if (format?.theme == ArticlePillar.Lifestyle && editionId == 'US') {
+	} else if (
+		format?.theme == ArticlePillar.Lifestyle &&
+		editionId == 'US' &&
+		abTest
+	) {
 		return (
 			<LabsShadyPie
 				title="Taiwan’s wind power revolution: leading the way in Asia-Pacific"

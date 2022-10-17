@@ -33,7 +33,6 @@ export const mainStandaloneComment = () => {
 				signInUrl="https://profile.theguardian.com/"
 				dismissGate={() => {}}
 				ophanComponentId="test"
-				isComment={true}
 			/>
 		</Section>
 	);
@@ -64,7 +63,6 @@ export const mainStandaloneMandatoryComment = () => {
 				dismissGate={() => {}}
 				ophanComponentId="test"
 				isMandatory={true}
-				isComment={true}
 			/>
 		</Section>
 	);
