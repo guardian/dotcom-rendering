@@ -102,4 +102,5 @@ export const partialNewsletterItem: Partial<Standard> = {
 		theme: 'lifestyle',
 		successDescription: "We'll send you Fashion Statement every week",
 	}),
+	branding: none,
 };
