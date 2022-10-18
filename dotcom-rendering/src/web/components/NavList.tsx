@@ -10,6 +10,7 @@ import {
 } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
 import type { DCRContainerPalette } from 'src/types/front';
+import type { ContainerOverrides } from 'src/types/palette';
 import type { TrailType } from '../../types/trails';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 
@@ -31,9 +32,11 @@ const ulStyles = css`
 	column-gap: 10px;
 `;
 
-const liStyles = css`
-	color: ${palette.neutral[7]};
-	border-top: 1px solid ${palette.neutral[93]};
+const liStyles = (containerOverrides?: ContainerOverrides) => css`
+	border-top: 1px solid
+		${containerOverrides
+			? containerOverrides.topBar.card
+			: palette.neutral[93]};
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[3]}px;
 
@@ -50,7 +53,7 @@ export const NavList = ({ trails, containerPalette }: Props) => {
 	return (
 		<ul css={ulStyles}>
 			{trails.map((trail) => (
-				<li css={liStyles}>
+				<li css={liStyles(containerOverrides)}>
 					<Link
 						href={trail.url}
 						priority="secondary"
