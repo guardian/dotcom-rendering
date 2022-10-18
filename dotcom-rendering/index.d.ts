@@ -314,7 +314,7 @@ interface KeyEventsRequest {
 
 type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 
-type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
+type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'carousel';
 
 type CardImageType = 'mainMedia' | 'avatar';
 

@@ -13,7 +13,7 @@ type Props = {
 /**
  * **WIP – Some size may be unaccounted for**
  *
- * Currently, this only handles the four (4) image sizes of `ImageSizeType`.
+ * Currently, this only handles the five (5) image sizes of `ImageSizeType`.
  *
  * This method should cover all use cases with a lot more precision once
  * implemented thoroughly
@@ -27,6 +27,9 @@ const decideImageWidths = (imageSize: ImageSizeType): ImageWidthType[] => {
 		// 		{ breakpoint: breakpoints.tablet, width: 130 },
 		// 		{ breakpoint: breakpoints.desktop, width: 140 },
 		// 	];
+
+		case 'carousel':
+			return [{ breakpoint: breakpoints.mobile, width: 220 }];
 
 		case 'small':
 			return [
