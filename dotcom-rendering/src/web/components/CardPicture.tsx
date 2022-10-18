@@ -87,7 +87,7 @@ const aspectRatio = css`
 	}
 `;
 
-export const FrontPicture = ({ master, alt, imageSize }: Props) => {
+export const CardPicture = ({ master, alt, imageSize }: Props) => {
 	const sources = generateSources(master, decideImageWidths(imageSize));
 
 	/**
