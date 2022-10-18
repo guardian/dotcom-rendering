@@ -15,4 +15,4 @@ This is an optional process. If you own the code you're working on or feel confi
 However, if your change affects core platform code or is introducing a new concept or pattern, or if you're just looking for more eyes and input then this process is for you.
 
 **Who is responsible for completing this RFC process?**
-Once the RFC is raised, it is the responsibility of the _Dotcom team_ to provide feedback and help you get your change to the finish line.
+Once the RFC is raised, it is the responsibility of the _Dotcom team_ (@guardian/dotcom-platform) to provide feedback and help you get your change to the finish line.
