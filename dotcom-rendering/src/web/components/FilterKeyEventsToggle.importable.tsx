@@ -10,6 +10,11 @@ const cssOverrides = css`
 	${from.desktop} {
 		padding: ${remSpace[3]} 0;
 	}
+
+	/* This hides the generic ArticlePage focusHalo so we only see the ToggleSwitch halo*/
+	*:focus {
+		box-shadow: none !important;
+	}
 `;
 
 const toggleWrapperStyles = css`
