@@ -2,7 +2,7 @@
 
 import { Placeholder } from './Placeholder';
 
-type When = 'idle' | 'visible';
+type When = 'idle' | 'visible' | 'interaction';
 
 interface HydrateProps {
 	deferUntil?: When;
@@ -20,13 +20,21 @@ interface ClientOnlyProps {
 	expediteLoading?: boolean;
 }
 
+interface InteractionProps {
+	deferUntil: 'interaction';
+	clientOnly?: false;
+	placeholderHeight?: never;
+	children: JSX.Element;
+	expediteLoading?: false;
+}
+
 /**
  * Props
  *
  * We use a union type here to support conditional typing. This means you
  * can only supply placeholderHeight if clientOnly is true.
  */
-type Props = HydrateProps | ClientOnlyProps;
+type Props = HydrateProps | ClientOnlyProps | InteractionProps;
 
 const decideChildren = (
 	children: JSX.Element,
@@ -55,6 +63,7 @@ const decideChildren = (
  * @param {When} props.deferUntil - Delay when client code should execute
  * 		- idle - Execute when browser idle
  * 		- visible - Execute when component appears in viewport
+ *      - interaction - Execute when component is clicked on in the viewport
  * @param {boolean} props.clientOnly - Should the component be server side rendered
  * @param {number} props.placeholderHeight - The height for the placeholder element
  * @param {JSX.Element} props.children - The component being inserted. Must be a single JSX Element

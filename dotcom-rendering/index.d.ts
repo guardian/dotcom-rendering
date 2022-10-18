@@ -574,7 +574,7 @@ declare namespace JSX {
 	interface IntrinsicElements {
 		'gu-island': {
 			name: string;
-			deferUntil?: 'idle' | 'visible';
+			deferUntil?: 'idle' | 'visible' | 'interaction';
 			clientOnly?: boolean;
 			expediteLoading?: boolean;
 			props: any;
