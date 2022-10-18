@@ -6,7 +6,10 @@ import type { FC } from 'react';
 import GalleryMetadata from './GalleryMetadata';
 import ImmersiveMetadata from './ImmersiveMetadata';
 import LiveBlogMetadata from './LiveBlogMetadata';
-import { DefaultMetadata } from './Metadata.defaults';
+import DefaultMetadata, {
+	defaultStyles,
+	defaultTextStyles,
+} from './Metadata.defaults';
 
 // ----- Component ----- //
 
@@ -47,7 +50,14 @@ const Metadata: FC<Props> = (props: Props) => {
 		design === ArticleDesign.Editorial ||
 		design === ArticleDesign.Analysis
 	) {
-		return <DefaultMetadata withByline={false} {...props} />;
+		return (
+			<DefaultMetadata
+				css={defaultStyles}
+				textCss={defaultTextStyles(false)}
+				withByline={false}
+				{...props}
+			/>
+		);
 	} else if (
 		design === ArticleDesign.LiveBlog ||
 		design === ArticleDesign.DeadBlog
@@ -55,7 +65,14 @@ const Metadata: FC<Props> = (props: Props) => {
 		return <LiveBlogMetadata {...props} />;
 	}
 
-	return <DefaultMetadata withByline={true} {...props} />;
+	return (
+		<DefaultMetadata
+			css={defaultStyles}
+			textCss={defaultTextStyles(true)}
+			withByline={true}
+			{...props}
+		/>
+	);
 };
 
 // ----- Exports ----- //

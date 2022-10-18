@@ -25,7 +25,19 @@ import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { defaultStyles, defaultTextStyles } from './Metadata.defaults';
 
-const blogStyles = css`
+const blogStyles = (format: ArticleFormat) => css`
+	background-color: ${format.design === ArticleDesign.DeadBlog
+		? neutral[93]
+		: background.liveblogMetadata(format)};
+
+	${from.desktop} {
+		background-color: ${neutral[97]};
+	}
+
+	${darkModeCss`
+		background-color: ${background.articleContentDark(format)};
+	`}
+
 	display: block;
 	margin-bottom: 0;
 
@@ -43,37 +55,6 @@ const blogStyles = css`
 		width: 100%;
 	}
 `;
-
-// This styling function is only temprarily used and will be removed
-// after the liveblog header is completed and background colours
-// are added
-const tempraryBackgroundStyle = (format: ArticleFormat): SerializedStyles => {
-	switch (format.design) {
-		case ArticleDesign.DeadBlog:
-			return css`
-				background-color: ${neutral[93]};
-				${from.desktop} {
-					background-color: ${neutral[97]};
-				}
-
-				${darkModeCss`
-					background-color: ${background.articleContentDark(format)};
-				`}
-			`;
-		default:
-			return css`
-				background-color: ${background.liveblogMetadata(format)};
-
-				${from.desktop} {
-					background-color: ${neutral[97]};
-				}
-
-				${darkModeCss`
-					background-color: ${background.articleContentDark(format)};
-				`}
-			`;
-	}
-};
 
 const liveBlogPadding = css`
 	padding-left: ${remSpace[3]};
@@ -141,9 +122,7 @@ const LiveBlogMetadata: FC<Props> = ({ item }: Props) => {
 	const [checked, setChecked] = useState<boolean>(false);
 	const isLive = item.design === ArticleDesign.LiveBlog;
 	return (
-		<div
-			css={css(defaultStyles, blogStyles, tempraryBackgroundStyle(item))}
-		>
+		<div css={css(defaultStyles, blogStyles(getFormat(item)))}>
 			<LiveblogMetadataLines isLive={isLive} />
 			<Logo item={item} />
 			<Avatar {...item} />

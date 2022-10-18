@@ -23,12 +23,20 @@ export const defaultTextStyles = (withByline: boolean): SerializedStyles => css`
 type Props = {
 	item: Item;
 	withByline: boolean;
+	css?: SerializedStyles;
+	className?: string;
+	textCss?: SerializedStyles;
 };
 
-export const DefaultMetadata: FC<Props> = ({ item, withByline }: Props) => (
-	<div css={defaultStyles}>
+const DefaultMetadata: FC<Props> = ({
+	item,
+	withByline,
+	className,
+	textCss,
+}: Props) => (
+	<div className={className}>
 		{withByline && <Avatar {...item} />}
-		<div css={defaultTextStyles(withByline)}>
+		<div css={textCss}>
 			{withByline && <Byline {...item} />}
 			<Dateline
 				date={item.publishDate}
@@ -40,3 +48,4 @@ export const DefaultMetadata: FC<Props> = ({ item, withByline }: Props) => (
 		<CommentCount count={item.commentCount} {...item} />
 	</div>
 );
+export default DefaultMetadata;
