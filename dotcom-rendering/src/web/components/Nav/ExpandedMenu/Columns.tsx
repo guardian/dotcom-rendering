@@ -167,7 +167,7 @@ export const Columns: React.FC<{
 							column={column}
 							key={column.title.toLowerCase()}
 							index={i}
-							isLastColumn={i !== nav.pillars.length - 1}
+							showLineBelow={i !== nav.pillars.length - 1}
 						/>
 					)
 				),
