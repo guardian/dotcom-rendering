@@ -195,6 +195,32 @@ export const Columns: React.FC<{
 						</LinkButton>
 					</div>
 				</ThemeProvider>
+}> = ({ format, nav }) => (
+	<ul
+		css={columnsStyle(format.display)}
+		role="menubar"
+		data-cy="nav-menu-columns"
+	>
+		{nav.pillars.map(
+			(column, i) => (
+				column.children?.unshift({
+					title: column.title,
+					longTitle: `View all ${column.title}`,
+					url: column.url,
+					pillar: undefined,
+					children: [],
+					mobileOnly: true,
+				}),
+				(
+					<Column
+						column={column}
+						key={column.title.toLowerCase()}
+						index={i}
+						isLastColumn={i !== nav.pillars.length - 1}
+					/>
+				)
+			),
+		)}
 
 				<div css={lineStyle}></div>
 			</li>
@@ -224,6 +250,22 @@ export const Columns: React.FC<{
 					{nav.brandExtensions.map((brandExtension) => (
 						<li
 							css={brandExtensionListItem}
+			<div css={lineStyle}></div>
+		</li>
+		<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
+		<MoreColumn
+			column={nav.otherLinks}
+			brandExtensions={nav.brandExtensions}
+			key="more"
+		/>
+		<li css={desktopBrandExtensionColumn} role="none">
+			<ul css={brandExtensionList} role="menu">
+				{nav.brandExtensions.map((brandExtension) => (
+					<li css={brandExtensionListItem} key={brandExtension.title}>
+						<a
+							className="selectableMenuItem"
+							css={brandExtensionLink}
+							href={brandExtension.url}
 							key={brandExtension.title}
 						>
 							<a

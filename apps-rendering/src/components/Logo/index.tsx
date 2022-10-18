@@ -69,6 +69,15 @@ const blogStyles = css`
 	}
 `;
 
+const galleryStyles = (
+	lightModeImage: string,
+	darkModeImage?: string,
+): SerializedStyles => css`
+	img {
+		content: url('${darkModeImage ?? lightModeImage}');
+	}
+`;
+
 const getStyles = (
 	format: ArticleFormat,
 	lightModeImage: string,
@@ -80,6 +89,11 @@ const getStyles = (
 			return css(
 				styles(format, lightModeImage, darkModeImage),
 				blogStyles,
+			);
+		case ArticleDesign.Gallery:
+			return css(
+				styles(format, lightModeImage, darkModeImage),
+				galleryStyles(lightModeImage, darkModeImage),
 			);
 		default:
 			return styles(format, lightModeImage, darkModeImage);

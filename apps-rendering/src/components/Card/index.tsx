@@ -130,34 +130,18 @@ const imgStyles = css`
 	border-radius: ${remSpace[2]};
 `;
 
-const timeStyles = (
-	type: RelatedItemType,
-	format: ArticleFormat,
-): SerializedStyles => {
-	switch (type) {
-		case RelatedItemType.VIDEO:
-		case RelatedItemType.AUDIO:
-		case RelatedItemType.GALLERY: {
-			return css`
-				${textSans.small()};
-				color: ${text.relatedCardTimeAgo(format)};
-				text-align: right;
-				display: inline-block;
-				vertical-align: top;
-				font-weight: 700;
-			`;
-		}
-		default:
-			return css`
-				${textSans.small()};
-				color: ${text.relatedCardTimeAgo(format)};
-				text-align: right;
-				display: inline-block;
-				vertical-align: top;
-				font-weight: 700;
-			`;
-	}
-};
+const timeStyles = (format: ArticleFormat): SerializedStyles => css`
+	${textSans.small()};
+	color: ${text.relatedCardTimeAgo(format)};
+	text-align: right;
+	display: inline-block;
+	vertical-align: top;
+	font-weight: 700;
+
+	${darkModeCss`
+		color: ${text.relatedCardTimeAgoDark(format)};
+	`}
+`;
 
 const durationStyles = css`
 	margin-left: ${remSpace[3]};
@@ -229,13 +213,12 @@ const imageBackground = (format: ArticleFormat): SerializedStyles => css`
 
 const relativeFirstPublished = (
 	date: Option<Date>,
-	type: RelatedItemType,
 	format: ArticleFormat,
 ): JSX.Element | null =>
 	pipe(
 		date,
 		map((date) => (
-			<time css={[timeStyles(type, format), dateStyles]}>
+			<time css={[timeStyles(format), dateStyles]}>
 				{makeRelativeDate(date)}
 			</time>
 		)),
@@ -409,7 +392,6 @@ const bylineStyles = (format: ArticleFormat): SerializedStyles => css`
 
 const durationMedia = (
 	duration: Option<string>,
-	type: RelatedItemType,
 	format: ArticleFormat,
 ): ReactElement | null => {
 	return pipe(
@@ -418,7 +400,7 @@ const durationMedia = (
 			const seconds = formatSeconds(length);
 			if (seconds.kind === OptionKind.Some) {
 				return (
-					<time css={[timeStyles(type, format), durationStyles]}>
+					<time css={[timeStyles(format), durationStyles]}>
 						{seconds.value}
 					</time>
 				);
@@ -581,7 +563,6 @@ const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
 		webPublicationDate && type !== RelatedItemType.ADVERTISEMENT_FEATURE
 			? relativeFirstPublished(
 					fromNullable(new Date(webPublicationDate)),
-					type,
 					format,
 			  )
 			: null;
@@ -622,11 +603,7 @@ const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
 						<section css={parentIconStyles}>
 							{icon(type, format)}
 						</section>
-						{durationMedia(
-							fromNullable(mediaDuration),
-							type,
-							format,
-						)}
+						{durationMedia(fromNullable(mediaDuration), format)}
 						{date}
 					</div>
 					{img}

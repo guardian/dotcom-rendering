@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import { remSpace } from '@guardian/source-foundations';
 import { neutral } from '@guardian/source-foundations';
 import { textSans } from '@guardian/source-foundations';
-import { SvgCamera } from '@guardian/source-react-components';
+import { SvgCamera, SvgVideo } from '@guardian/source-react-components';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import type { Option } from '@guardian/types';
@@ -16,12 +16,18 @@ import { fill, text } from '@guardian/common-rendering/src/editorialPalette';
 
 // ----- Sub-Components ----- //
 
-interface CameraProps {
-	format: ArticleFormat;
-	supportsDarkMode: boolean;
+enum IconVariant {
+	Image,
+	Video,
 }
 
-const cameraStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+interface IconProps {
+	format: ArticleFormat;
+	supportsDarkMode: boolean;
+	variant: IconVariant;
+}
+
+const iconStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	display: inline-block;
 	width: 1.2rem;
 	margin-right: ${remSpace[1]};
@@ -46,7 +52,7 @@ const cameraStyles = (supportsDarkMode: boolean): SerializedStyles => css`
     `}
 `;
 
-const Camera: FC<CameraProps> = ({ format, supportsDarkMode }) => {
+const Icon: FC<IconProps> = ({ format, supportsDarkMode, variant }) => {
 	switch (format.design) {
 		case ArticleDesign.Gallery:
 		case ArticleDesign.Audio:
@@ -54,8 +60,12 @@ const Camera: FC<CameraProps> = ({ format, supportsDarkMode }) => {
 			return null;
 		default:
 			return (
-				<span css={cameraStyles(supportsDarkMode)}>
-					<SvgCamera />
+				<span css={iconStyles(supportsDarkMode)}>
+					{variant === IconVariant.Image ? (
+						<SvgCamera />
+					) : (
+						<SvgVideo />
+					)}
 				</span>
 			);
 	}
@@ -69,6 +79,7 @@ type Props = {
 	children: Option<ReactNode>;
 	className?: string;
 	css?: SerializedStyles;
+	variant?: IconVariant;
 };
 
 const styles = (format: ArticleFormat, supportsDarkMode: boolean) => css`
@@ -111,6 +122,7 @@ const FigCaption: FC<Props> = ({
 	supportsDarkMode,
 	children,
 	className,
+	variant = IconVariant.Image,
 }) => {
 	switch (children.kind) {
 		case OptionKind.Some:
@@ -119,9 +131,10 @@ const FigCaption: FC<Props> = ({
 					className={className}
 					css={getStyles(format, supportsDarkMode)}
 				>
-					<Camera
+					<Icon
 						format={format}
 						supportsDarkMode={supportsDarkMode}
+						variant={variant}
 					/>
 					{children.value}
 				</figcaption>
@@ -135,3 +148,5 @@ const FigCaption: FC<Props> = ({
 // ----- Exports ----- //
 
 export default FigCaption;
+
+export { IconVariant };

@@ -8,7 +8,7 @@ import {
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { NavType } from '../../model/extract-nav';
-import type { DCRFrontType } from '../../types/front';
+import type { DCRCollectionType, DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
@@ -54,6 +54,26 @@ const shouldInsertMerchHigh = (
 	}
 
 	return index === desiredPosition;
+};
+
+const isNavList = (collection: DCRCollectionType) => {
+	return (
+		collection.collectionType == 'nav/list' ||
+		collection.collectionType == 'nav/media-list'
+	);
+};
+
+const isToggleable = (
+	index: number,
+	collection: DCRCollectionType,
+	isNetworkFront: boolean,
+) => {
+	if (isNetworkFront) {
+		return (
+			collection.displayName.toLowerCase() != 'headlines' &&
+			!isNavList(collection)
+		);
+	} else return index != 0 && !isNavList(collection);
 };
 
 export const FrontLayout = ({ front, NAV }: Props) => {
@@ -251,7 +271,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								ophanComponentName={ophanName}
 								containerName={collection.collectionType}
 								containerPalette={collection.containerPalette}
-								toggleable={true}
+								toggleable={isToggleable(
+									index,
+									collection,
+									front.isNetworkFront,
+								)}
 								sectionId={collection.id}
 								showDateHeader={
 									collection.config.showDateHeader
@@ -274,7 +298,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							</Section>
 							{shouldInsertMerchHigh(
 								index,
-								front.pressedPage.isNetworkFront,
+								front.isNetworkFront,
 								front.pressedPage.collections.length,
 								front.pressedPage.frontProperties.isPaidContent,
 							) && (

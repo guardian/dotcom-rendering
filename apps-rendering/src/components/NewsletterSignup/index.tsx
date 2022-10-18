@@ -33,8 +33,8 @@ interface Props {
 
 const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 	clear: both;
-	border: ${border.signUpForm(format)} 0.1875rem dashed;
-	color: ${text.signUpForm(format)};
+	border: ${border.newsletterSignUpForm(format)} 0.1875rem dashed;
+	color: ${text.newsletterSignUpForm(format)};
 	border-radius: ${remSpace[3]};
 	margin-bottom: ${remSpace[3]};
 	padding: ${remSpace[2]};
@@ -44,9 +44,9 @@ const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 	}
 
 	${darkModeCss`
-		background-color: ${background.signUpFormDark(format)};
-		border-color: ${border.signUpFormDark(format)};
-		color: ${text.signUpFormDark(format)};
+		background-color: ${background.newsletterSignUpFormDark(format)};
+		border-color: ${border.newsletterSignUpFormDark(format)};
+		color: ${text.newsletterSignUpFormDark(format)};
 	`}
 `;
 
@@ -107,7 +107,14 @@ const noHeightFromTabletStyles = css`
  * NOTE: this component is non functional and is for demonstration only.
  */
 const NewsletterSignup: FC<Props> = ({ format, element }) => {
-	const { name, frequency, description, theme, identityName } = element;
+	const {
+		name,
+		frequency,
+		description,
+		theme,
+		identityName,
+		successDescription,
+	} = element;
 	return (
 		<aside css={containerStyles(format)}>
 			<div css={stackBelowTabletStyles}>
@@ -125,7 +132,12 @@ const NewsletterSignup: FC<Props> = ({ format, element }) => {
 
 			<p css={descriptionStyles}>{description}</p>
 
-			<EmailSignupForm newsletterId={identityName} format={format} />
+			<EmailSignupForm
+				identityName={identityName}
+				format={format}
+				successDescription={successDescription}
+			/>
+
 			<PrivacyWording useCaptcha={false} format={format} />
 		</aside>
 	);
