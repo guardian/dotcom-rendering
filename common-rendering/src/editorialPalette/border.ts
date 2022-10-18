@@ -238,11 +238,11 @@ const galleryImage = (_format: ArticleFormat): string => {
 	return neutral[20];
 };
 
-const newsletterSignUpForm = (_format: ArticleFormat): string => {
+const signUpForm = (_format: ArticleFormat): string => {
 	return neutral[0];
 };
 
-const newsletterSignUpFormDark = (_format: ArticleFormat): string => {
+const signUpFormDark = (_format: ArticleFormat): string => {
 	return neutral[86];
 };
 
@@ -275,8 +275,8 @@ const border = {
 	standfirstLinkDark,
 	pinnedPost,
 	galleryImage,
-	newsletterSignUpForm,
-	newsletterSignUpFormDark,
+	signUpForm,
+	signUpFormDark,
 };
 
 // ----- Exports ----- //

@@ -1321,19 +1321,6 @@ const fillQuoteIcon = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
-const backgroundPullQuote = (format: ArticleFormat): string => {
-	switch (format.design) {
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Comment:
-			return '#fbe6d5';
-		case ArticleDesign.Analysis:
-			return neutral[100];
-		default:
-			return neutral[97];
-	}
-};
-
 const textPullQuoteAttribution = (format: ArticleFormat): string =>
 	fillQuoteIcon(format);
 
@@ -1660,7 +1647,6 @@ export const decidePalette = (
 			filterButtonActive: backgroundFilterButtonActive(format),
 			treat: backgroundTreat(format),
 			designTag: backgroundDesignTag(format),
-			pullQuote: backgroundPullQuote(format),
 		},
 		fill: {
 			commentCount: fillCommentCount(format),

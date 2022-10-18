@@ -1,19 +1,11 @@
 // ----- Imports ----- //
 
 import type { Image as CardImage } from '@guardian/apps-rendering-api-models/image';
-import type { Asset } from '@guardian/content-api-models/v1/asset';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ArticleElementRole } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
-import {
-	andThen,
-	fromNullable,
-	map,
-	none,
-	OptionKind,
-	some,
-} from '@guardian/types';
+import { andThen, fromNullable, map, none, some } from '@guardian/types';
 import type { Image as ImageData } from 'image/image';
 import { Dpr, src, srcsets } from 'image/srcsets';
 import { pipe } from 'lib';
@@ -57,33 +49,17 @@ const parseRole = (role: string | undefined): ArticleElementRole => {
 	}
 };
 
-const sortAscendingWidth = (a: Asset, b: Asset): number =>
-	a.typeData?.width && b.typeData?.width
-		? a.typeData.width - b.typeData.width
-		: -1;
-
-const getHighestResAsset = (assets: Asset[]): Option<Asset> =>
-	fromNullable(assets.slice().sort(sortAscendingWidth).pop());
-
-const getBestAsset = (assets: Asset[]): Option<Asset> => {
-	const masterAsset = fromNullable(
-		assets.find((asset) => asset.typeData?.isMaster),
-	);
-	if (masterAsset.kind === OptionKind.Some) {
-		return masterAsset;
-	}
-
-	return getHighestResAsset(assets);
-};
-
 const parseImage =
 	({ docParser, salt }: Context) =>
 	(element: BlockElement): Option<Image> => {
+		const masterAsset = element.assets.find(
+			(asset) => asset.typeData?.isMaster,
+		);
 		const data = element.imageTypeData;
 
 		return pipe(
-			element.assets,
-			getBestAsset,
+			masterAsset,
+			fromNullable,
 			andThen((asset) => {
 				if (
 					asset.file === undefined ||

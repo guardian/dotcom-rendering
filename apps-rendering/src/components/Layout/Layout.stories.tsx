@@ -4,7 +4,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
-import { none, some, withDefault } from '@guardian/types';
+import { some, withDefault } from '@guardian/types';
 import AnalysisLayout from 'components/Layout/AnalysisLayout';
 import Comment from 'components/Layout/CommentLayout';
 import Standard from 'components/Layout/StandardLayout';
@@ -15,8 +15,6 @@ import {
 	editorial,
 	explainer,
 	feature,
-	gallery,
-	immersive,
 	interview,
 	letter,
 	matchReport,
@@ -31,8 +29,6 @@ import type { Item } from 'item';
 import type { ReactElement } from 'react';
 import { renderAll } from 'renderer';
 import { Result } from 'result';
-import GalleryLayout from './GalleryLayout';
-import ImmersiveLayout from './ImmersiveLayout';
 import Live from './LiveLayout';
 
 // ----- Functions ----- //
@@ -237,36 +233,6 @@ export const DeadBlog = (): ReactElement => (
 	/>
 );
 DeadBlog.story = { name: 'DeadBlog ' };
-
-export const Immersive = (): ReactElement => (
-	<ImmersiveLayout
-		item={{
-			...immersive,
-			edition: Edition.UK,
-		}}
-	>
-		{renderAll(
-			formatFromItem(immersive, none),
-			Result.partition(immersive.body).oks,
-		)}
-	</ImmersiveLayout>
-);
-Immersive.story = { name: 'Immersive ' };
-
-export const Gallery = (): ReactElement => (
-	<GalleryLayout
-		item={{
-			...gallery,
-			edition: Edition.UK,
-		}}
-	>
-		{renderAll(
-			formatFromItem(gallery, none),
-			Result.partition(gallery.body).oks,
-		)}
-	</GalleryLayout>
-);
-Gallery.story = { name: 'Gallery ' };
 
 export default {
 	title: 'AR/Layouts/Standard',

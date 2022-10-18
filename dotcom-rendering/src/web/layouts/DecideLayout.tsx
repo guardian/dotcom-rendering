@@ -118,8 +118,19 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					);
 				case ArticleDesign.NewsletterSignup:
-					return (
+					// eslint and prettier have an argument if I use the switch directly in the ternary operator
+					// This is a compromise where eslint gives me a warning over an error
+					const showSignupLayout =
+						CAPIArticle.config.switches.newsletterSignupLayout;
+
+					return showSignupLayout ? (
 						<NewsletterSignupLayout
+							CAPIArticle={CAPIArticle}
+							NAV={NAV}
+							format={format}
+						/>
+					) : (
+						<StandardLayout
 							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}

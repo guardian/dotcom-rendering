@@ -6,6 +6,7 @@ import {
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { headline, remSpace } from '@guardian/source-foundations';
 import { map, withDefault } from '@guardian/types';
 import type { Item } from 'item';
@@ -14,6 +15,10 @@ import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { renderStandfirstText } from 'renderer';
 import { darkModeCss } from 'styles';
+
+const isNotBlog = (format: ArticleFormat): boolean =>
+	format.design !== ArticleDesign.LiveBlog &&
+	format.design !== ArticleDesign.DeadBlog;
 
 const darkStyles = (format: ArticleFormat): SerializedStyles => darkModeCss`
     background-color: ${background.standfirstDark(format)};
@@ -48,7 +53,7 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 		border-bottom: 0.0625rem solid ${border.standfirstBlogLink(format)};
 	}
 
-	${darkStyles(format)}
+	${isNotBlog(format) && darkStyles(format)}
 `;
 
 interface Props {

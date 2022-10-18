@@ -247,11 +247,11 @@ const decideSignupLink = (edition: EditionId): string => {
 		case 'US':
 			return 'https://www.theguardian.com/info/2018/sep/17/guardian-us-morning-briefing-sign-up-to-stay-informed';
 		case 'AU':
-			return 'https://www.theguardian.com/australia-news/2022/sep/23/morning-mail-newsletter-best-daily-news-email-guardian-australia-free-sign-up-inbox-subscribe';
+			return 'https://www.theguardian.com/world/guardian-australia-morning-mail/2014/jun/24/-sp-guardian-australias-morning-mail-subscribe-by-email';
 		case 'UK':
 		case 'INT': // There's no international version so we default to UK
 		default:
-			return 'https://www.theguardian.com/global/2022/sep/20/sign-up-for-the-first-edition-newsletter-our-free-news-email';
+			return 'https://www.theguardian.com/global/ng-interactive/2022/apr/13/first-edition-sign-up-guardian';
 	}
 };
 

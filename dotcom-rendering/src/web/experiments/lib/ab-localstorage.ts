@@ -6,7 +6,7 @@ import { isObject, isString, storage } from '@guardian/libs';
  * https://github.com/guardian/frontend/blob/18f5d8aa4a4191f4efb58b37dc39685860369e04/static/src/javascripts/projects/common/modules/experiments/ab-local-storage.ts
  */
 
-const participationsKey = 'gu.ab._participations';
+const participationsKey = 'gu.ab.participations';
 
 export const isParticipations = (
 	participations: unknown,

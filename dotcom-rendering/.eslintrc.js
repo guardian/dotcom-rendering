@@ -118,7 +118,6 @@ module.exports = {
 			},
 		],
 
-		'@typescript-eslint/switch-exhaustiveness-check': 'error',
 		'array-callback-return': 'error',
 		'global-require': 'error',
 		'no-console': 'warn',

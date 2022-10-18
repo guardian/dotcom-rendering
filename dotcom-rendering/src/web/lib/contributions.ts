@@ -1,11 +1,9 @@
 import { onConsentChange } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { useState } from 'react';
 import type { CAPIArticleType } from '../../types/frontend';
 import type { IdApiUserData } from './getIdapiUserData';
 import { getIdApiUserData } from './getIdapiUserData';
-import { useOnce } from './useOnce';
 
 // User Atributes API cookies (dropped on sign-in)
 export const HIDE_SUPPORT_MESSAGING_COOKIE = 'gu_hide_support_messaging';
@@ -183,21 +181,6 @@ export const hasCmpConsentForArticleCount = (): Promise<boolean> => {
 export const hasOptedOutOfArticleCount = async (): Promise<boolean> => {
 	const hasCmpConsent = await hasCmpConsentForArticleCount();
 	return !hasCmpConsent || hasArticleCountOptOutCookie();
-};
-
-// A hook to find out if a user has opted out of article counting
-export const useHasOptedOutOfArticleCount = (): boolean | 'Pending' => {
-	const [hasOptedOut, setHasOptedOut] = useState<boolean | 'Pending'>(
-		'Pending',
-	);
-
-	useOnce(() => {
-		hasOptedOutOfArticleCount()
-			.then(setHasOptedOut)
-			.catch(() => setHasOptedOut(true));
-	}, []);
-
-	return hasOptedOut;
 };
 
 export const hasCmpConsentForBrowserId = (): Promise<boolean> =>

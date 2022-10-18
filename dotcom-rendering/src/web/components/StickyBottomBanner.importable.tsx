@@ -5,8 +5,8 @@ import type {
 import { cmp } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import type { ArticleCounts } from '../../lib/articleCount';
-import { getArticleCounts } from '../../lib/articleCount';
+import type { ArticleCounts } from '../../lib/article-count';
+import { getArticleCounts } from '../../lib/article-count';
 import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
 import { getLocaleCode } from '../lib/getCountryCode';
 import type {
@@ -47,7 +47,7 @@ type Props = {
 	idApiUrl: string;
 
 	pageId: string;
-	keywordIds: string;
+	keywordsId: string;
 };
 
 type RRBannerConfig = {
@@ -213,7 +213,7 @@ export const StickyBottomBanner = ({
 	contributionsServiceUrl,
 	idApiUrl,
 	pageId,
-	keywordIds,
+	keywordsId,
 	remoteBannerSwitch,
 	puzzleBannerSwitch,
 }: Props & {
@@ -238,8 +238,8 @@ export const StickyBottomBanner = ({
 	});
 
 	useEffect(() => {
-		setAsyncArticleCounts(getArticleCounts(pageId, keywordIds));
-	}, [pageId, keywordIds]);
+		setAsyncArticleCounts(getArticleCounts(pageId, keywordsId));
+	}, [pageId, keywordsId]);
 
 	useOnce(() => {
 		const CMP = buildCmpBannerConfig();

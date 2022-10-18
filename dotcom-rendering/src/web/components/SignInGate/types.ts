@@ -21,6 +21,7 @@ export interface SignInGateProps {
 	guUrl: string;
 	dismissGate: () => void;
 	ophanComponentId: string;
+	isComment?: boolean;
 	abTest?: CurrentSignInGateABTest;
 	isMandatory?: boolean;
 }

@@ -57,8 +57,9 @@ const getLoaders = (bundle) => {
 								'@babel/preset-env',
 								{
 									bugfixes: true,
-									targets:
-										'extends @guardian/browserslist-config',
+									targets: {
+										esmodules: true,
+									},
 								},
 							],
 						],

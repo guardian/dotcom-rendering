@@ -16,6 +16,7 @@ import {
 	renderFrontJson,
 	renderInteractive,
 	renderKeyEvents,
+	renderOnwards,
 } from '../web/server';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
@@ -58,6 +59,7 @@ export const prodServer = (): void => {
 	app.post('/AMPInteractive', logRenderTime, renderAMPArticle);
 	app.post('/Blocks', logRenderTime, renderBlocks);
 	app.post('/KeyEvents', logRenderTime, renderKeyEvents);
+	app.post('/Onwards', logRenderTime, renderOnwards);
 	app.post('/Front', logRenderTime, renderFront);
 	app.post('/FrontJSON', logRenderTime, renderFrontJson);
 

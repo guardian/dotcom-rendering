@@ -18,7 +18,7 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { andThen, fromNullable, map, none, some } from '@guardian/types';
+import { fromNullable, map, none } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
@@ -293,7 +293,6 @@ const itemFields = (
 		bylineHtml: pipe(
 			content.fields?.bylineHtml,
 			fromNullable,
-			andThen((html) => (html !== '' ? some(html) : none)),
 			map(context.docParser),
 		),
 		publishDate: maybeCapiDate(content.webPublicationDate),

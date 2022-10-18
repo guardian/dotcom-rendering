@@ -57,13 +57,8 @@ const mediaArticleBodyLinkDark = (format: ArticleFormat): Colour => {
 	}
 };
 
-const branding = (format: ArticleFormat): Colour => {
-	switch (format.design) {
-		case ArticleDesign.Gallery:
-			return neutral[86];
-		default:
-			return neutral[20];
-	}
+const branding = (_format: ArticleFormat): Colour => {
+	return neutral[20];
 };
 
 const brandingDark = (_format: ArticleFormat): Colour => {
@@ -536,8 +531,6 @@ const articleLink = (format: ArticleFormat): Colour => {
 				case ArticleSpecial.SpecialReport:
 					return specialReport[400];
 			}
-		case ArticleDesign.Gallery:
-			return neutral[86];
 		default:
 			switch (format.theme) {
 				case ArticlePillar.News:
@@ -921,8 +914,6 @@ const relatedCardTimeAgo = (format: ArticleFormat): Colour => {
 	return neutral[46];
 };
 
-const relatedCardTimeAgoDark = (_format: ArticleFormat): Colour => neutral[60];
-
 const richLink = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -1053,11 +1044,11 @@ const paragraph = (_format: ArticleFormat): Colour => neutral[7];
 
 const paragraphDark = (_format: ArticleFormat): Colour => neutral[86];
 
-const newsletterSignUpForm = (_format: ArticleFormat): string => {
+const signUpForm = (_format: ArticleFormat): string => {
 	return neutral[7];
 };
 
-const newsletterSignUpFormDark = (_format: ArticleFormat): string => {
+const signUpFormDark = (_format: ArticleFormat): string => {
 	return neutral[86];
 };
 
@@ -1069,11 +1060,11 @@ const privacyMessageDark = (_format: ArticleFormat): string => {
 	return neutral[46];
 };
 
-const newsletterSignUpFormButton = (_format: ArticleFormat): string => {
+const signUpFormButton = (_format: ArticleFormat): string => {
 	return neutral[100];
 };
 
-const newsletterSignUpFormButtonDark = (_format: ArticleFormat): string => {
+const signUpFormButtonDark = (_format: ArticleFormat): string => {
 	return neutral[0];
 };
 
@@ -1140,7 +1131,6 @@ const text = {
 	relatedCardLink,
 	relatedCardLinkDark,
 	relatedCardTimeAgo,
-	relatedCardTimeAgoDark,
 	richLink,
 	richLinkAnchor,
 	richLinkAnchorDark,
@@ -1156,12 +1146,12 @@ const text = {
 	pagination,
 	paragraph,
 	paragraphDark,
-	newsletterSignUpForm,
-	newsletterSignUpFormDark,
+	signUpForm,
+	signUpFormDark,
 	privacyMessage,
 	privacyMessageDark,
-	newsletterSignUpFormButton,
-	newsletterSignUpFormButtonDark,
+	signUpFormButton,
+	signUpFormButtonDark,
 	gallery,
 	galleryDark,
 	tableOfContentsTitle,

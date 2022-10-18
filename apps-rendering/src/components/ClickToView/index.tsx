@@ -3,7 +3,6 @@ import { ArticleElementRole } from '@guardian/libs';
 import {
 	background,
 	border,
-	neutral,
 	remSpace,
 	textSans,
 } from '@guardian/source-foundations';
@@ -13,7 +12,6 @@ import { OptionKind, withDefault } from '@guardian/types';
 import { fold } from 'lib';
 import type { FC } from 'react';
 import React, { useState } from 'react';
-import { darkModeCss } from 'styles';
 
 export type ClickToViewProps = {
 	children: React.ReactNode;
@@ -96,15 +94,6 @@ const roleButtonText = (role: ArticleElementRole): string => {
 	}
 };
 
-const buttonStyles = darkModeCss`
-	color: ${neutral[10]};
-	background-color: ${neutral[86]};
-
-	&:hover {
-		background-color: ${neutral[97]};
-	}
-`;
-
 const ClickToView: FC<ClickToViewProps> = ({
 	children,
 	role,
@@ -138,11 +127,6 @@ const ClickToView: FC<ClickToViewProps> = ({
 					padding: ${remSpace[1]} ${remSpace[6]} ${remSpace[3]};
 					margin-bottom: ${remSpace[3]};
 					box-sizing: border-box;
-
-					${darkModeCss`
-						background: ${neutral[20]};
-						border-color: ${neutral[46]};
-					`}
 				`}
 			>
 				<div
@@ -200,7 +184,6 @@ const ClickToView: FC<ClickToViewProps> = ({
 						icon={<SvgCheckmark />}
 						iconSide="left"
 						onClick={handleClick}
-						css={buttonStyles}
 					>
 						{roleButtonText(roleWithDefault)}
 					</Button>

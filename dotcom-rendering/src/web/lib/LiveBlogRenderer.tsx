@@ -26,7 +26,6 @@ type Props = {
 	shouldHideReaderRevenue: boolean;
 	tags: TagType[];
 	isPaidContent: boolean;
-	keywordIds: string;
 	contributionsServiceUrl: string;
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
@@ -52,7 +51,6 @@ export const LiveBlogRenderer = ({
 	shouldHideReaderRevenue,
 	tags,
 	isPaidContent,
-	keywordIds,
 	contributionsServiceUrl,
 	onFirstPage,
 	keyEvents,
@@ -111,7 +109,7 @@ export const LiveBlogRenderer = ({
 				<></>
 			)}
 
-			{switches.automaticFilters && !!availableTopics?.length && (
+			{switches.automaticFilters && availableTopics && (
 				<Hide above="desktop">
 					<Island>
 						<TopicFilterBank
@@ -154,8 +152,6 @@ export const LiveBlogRenderer = ({
 						tags={tags}
 						isPaidContent={isPaidContent}
 						contributionsServiceUrl={contributionsServiceUrl}
-						pageId={pageId}
-						keywordIds={keywordIds}
 					/>
 				</Island>
 			)}

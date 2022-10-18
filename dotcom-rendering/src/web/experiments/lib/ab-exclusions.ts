@@ -1,6 +1,4 @@
 import { Participations } from '@guardian/ab-core';
-import { OphanABEvent, OphanABPayload } from '@guardian/libs';
-import { getOphanRecordFunction } from '../../../web/browser/ophan/ophan';
 import {
 	getParticipationsFromLocalStorage,
 	setParticipationsInLocalStorage,
@@ -9,7 +7,7 @@ import {
 /**
  * Occasionally we may want to track long-running behavior of browsers in a certain test,
  * without adding new browsers to the test bucket. We cannot rely on the GU_mvt_id bucketing alone to do this.
- * You can use this method to show the gate based on local storage participation key ("gu.ab._participations") instead.
+ * You can use this method to show the gate based on local storage participation key ("gu.ab.participations") instead.
  *
  * After the cut off date users without the local storage participation key won't see the gate at all.
  *
@@ -21,23 +19,8 @@ import {
 export const setParticipations = (
 	currentTestParticipation: Participations,
 ): void => {
-	// sets participation under local storage key: 'gu.ab._participations'
+	// sets participation under local storage key: 'gu.ab.participations'
 	setParticipationsInLocalStorage(currentTestParticipation);
-};
-
-export const abTestPayload = (
-	testId: string,
-	variantName: string,
-): OphanABPayload => {
-	const records: { [key: string]: OphanABEvent } = {};
-	{
-		records[`ab${testId} - AbBucketed`] = {
-			variantName,
-			complete: false,
-		};
-	}
-
-	return { abTestRegister: records };
 };
 
 // Put this LAST in any row of canRun boolean functions so we don't set the flag unless all other criteria are true
@@ -47,7 +30,6 @@ export const setOrUseParticipations = (
 	variantId: string, // IMPORTANT: Can only be used for single variant AB Tests!
 ): boolean => {
 	const participations = getParticipationsFromLocalStorage();
-	const ophanRecord = getOphanRecordFunction();
 
 	if (setParticipationsFlag) {
 		// check if participation already exists
@@ -60,9 +42,6 @@ export const setOrUseParticipations = (
 				variant: variantId,
 			},
 		});
-
-		ophanRecord(abTestPayload(abTestId, variantId));
-
 		return true; // test will be run
 	} else {
 		// if the test participation exists in localstorage, run the test

@@ -9,8 +9,6 @@ import { DynamicPackage } from '../components/DynamicPackage';
 import { DynamicSlow } from '../components/DynamicSlow';
 import { DynamicSlowMPU } from '../components/DynamicSlowMPU';
 import { FixedLargeSlowXIV } from '../components/FixedLargeSlowXIV';
-import { FixedMediumFastXI } from '../components/FixedMediumFastXI';
-import { FixedMediumFastXII } from '../components/FixedMediumFastXII';
 import { FixedMediumSlowVI } from '../components/FixedMediumSlowVI';
 import { FixedMediumSlowVII } from '../components/FixedMediumSlowVII';
 import { FixedMediumSlowXIIMPU } from '../components/FixedMediumSlowXIIMPU';
@@ -19,6 +17,7 @@ import { FixedSmallSlowIII } from '../components/FixedSmallSlowIII';
 import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
 import { FixedSmallSlowVMPU } from '../components/FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from '../components/FixedSmallSlowVThird';
+import { FixedMediumFastXII } from '../components/FixedMediumFastXII';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -148,14 +147,6 @@ export const DecideContainer = ({
 		case 'fixed/medium/fast-XII':
 			return (
 				<FixedMediumFastXII
-					trails={trails}
-					containerPalette={containerPalette}
-					showAge={showAge}
-				/>
-			);
-		case 'fixed/medium/fast-XI':
-			return (
-				<FixedMediumFastXI
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
