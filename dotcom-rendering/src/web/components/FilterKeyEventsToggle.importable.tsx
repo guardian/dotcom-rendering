@@ -12,8 +12,8 @@ const cssOverrides = css`
 	}
 
 	/* This hides the generic ArticlePage focusHalo so we only see the ToggleSwitch halo*/
-	/* stylelint-disable-next-line declaration-no-important */
 	*:focus {
+		/* stylelint-disable-next-line declaration-no-important */
 		box-shadow: none !important;
 	}
 `;
