@@ -33,7 +33,7 @@ deployments:
   mobile-apps-rendering:
     type: autoscaling
     parameters:
-      bucket: mobile-dist
+      bucketSsmLookup: true
     dependencies: [mobile-apps-rendering-cfn, mobile-apps-rendering-preview-cfn]
   mobile-assets:
     type: aws-s3
