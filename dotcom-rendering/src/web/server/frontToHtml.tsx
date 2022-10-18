@@ -83,7 +83,9 @@ export const frontToHtml = ({ front }: Props): string => {
 			...getScriptArrayFromFile('sentryLoader.js'),
 			...getScriptArrayFromFile('dynamicImport.js'),
 			...getScriptArrayFromFile('islands.js'),
-		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
+		].map((script) =>
+			offerHttp3 && script ? getHttp3Url(script) : script,
+		),
 	);
 
 	/**
@@ -102,7 +104,9 @@ export const frontToHtml = ({ front }: Props): string => {
 		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
-	const gaChunk = getScriptArrayFromFile('ga.js');
+	const gaChunk = shouldServeVariantBundle
+		? []
+		: getScriptArrayFromFile('ga.js');
 	const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
 	const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
 	const variantScript = gaChunk.find((script) =>

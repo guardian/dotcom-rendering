@@ -1,6 +1,7 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 import { isObject, isString } from '@guardian/libs';
+import type { Bundle } from '../../scripts/webpack/webpack.config.browser';
 
 interface AssetHash {
 	[key: string]: string;
@@ -59,11 +60,9 @@ const getManifest = (path: string): AssetHash => {
 	}
 };
 
-const getManifestPaths = (
-	manifests: 'control' | 'variant',
-): [ManifestPath, ManifestPath] =>
+const getManifestPaths = (manifests: 'control' | 'variant'): ManifestPath[] =>
 	manifests === 'variant'
-		? ['./manifest.variant.json', './manifest.legacy.json']
+		? ['./manifest.modern.json']
 		: ['./manifest.modern.json', './manifest.legacy.json'];
 
 type ManifestPath = `./manifest.${string}.json`;
@@ -72,14 +71,12 @@ const getScripts = (
 	manifestPaths: Array<ManifestPath>,
 	file: `${string}.js`,
 ): string[] => {
-	if (!file.endsWith('.js'))
+	if (!file.endsWith('.js')) {
 		throw new Error('Invalid filename: extension must be .js');
+	}
 
 	if (isDev) {
-		return [
-			`${ASSET_ORIGIN}assets/${file.replace('.js', '.modern.js')}`,
-			`${ASSET_ORIGIN}assets/${file.replace('.js', '.legacy.js')}`,
-		];
+		return [`${ASSET_ORIGIN}assets/${file.replace('.js', '.modern.js')}`];
 	}
 
 	return manifestPaths.map((manifestPath) => {
@@ -126,7 +123,9 @@ export const generateScriptTags = (scripts: Array<string | false>): string[] =>
 			return `<script type="module" src="${script}"></script>`;
 		}
 		if (script.match(VARIANT_SCRIPT)) {
-			return `<script type="module" src="${script}"></script>`;
+			throw new Error(
+				'We do not serve any scripts for the variant bundle!',
+			);
 		}
 
 		return [

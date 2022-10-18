@@ -1,5 +1,6 @@
 import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
+import { ophanNomoduleScript } from '../../../scripts/webpack/bundles';
 import { ASSET_ORIGIN } from '../../lib/assets';
 import { getFontsCss } from '../../lib/fonts-css';
 import { getHttp3Url } from '../lib/getHttp3Url';
@@ -326,6 +327,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 					).toString()}" />
                 </noscript>
                 ${priorityScriptTags.join('\n')}
+				${ophanNomoduleScript}
                 <style class="webfont">${getFontsCss()}</style>
                 <style>${resets.resetCSS}</style>
 				${css}
