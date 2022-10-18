@@ -25,7 +25,7 @@ import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import { defaultStyles, defaultTextStyles } from './Metadata.defaults';
 
-const blogStyles = (format: ArticleFormat) => css`
+const blogStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${format.design === ArticleDesign.DeadBlog
 		? neutral[93]
 		: background.liveblogMetadata(format)};

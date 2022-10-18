@@ -48,4 +48,5 @@ const DefaultMetadata: FC<Props> = ({
 		<CommentCount count={item.commentCount} {...item} />
 	</div>
 );
+
 export default DefaultMetadata;
