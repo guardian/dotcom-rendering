@@ -4,6 +4,7 @@ import {
 	brandText,
 	from,
 	headline,
+	textSans,
 } from '@guardian/source-foundations';
 
 const hideDesktop = css`
@@ -65,6 +66,11 @@ const collapseColumnButton = css`
 		color: ${brandAlt[400]};
 	}
 `;
+
+const editionStyle = css`
+	text-transform: none;
+	${textSans.medium()};
+`;
 type Props = {
 	title: string;
 	columnInputId: string;
@@ -83,6 +89,7 @@ export const CollapseColumnButton = ({
 		className="selectableMenuItem"
 		css={[
 			collapseColumnButton,
+			title.includes('edition') && editionStyle,
 			showColumnLinksStyle(columnInputId),
 			hideDesktop,
 		]}
