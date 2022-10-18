@@ -18,6 +18,7 @@ import {
 	RecordTarget,
 	RecordType,
 } from 'aws-cdk-lib/aws-route53';
+import * as ssm from 'aws-cdk-lib/aws-ssm';
 
 interface AppsStackProps extends GuStackProps {
 	recordPrefix: string;
@@ -43,6 +44,10 @@ export class MobileAppsRendering extends GuStack {
 		);
 
 		const scalingTargetCpuUtilisation = props.targetCpuUtilisation;
+		const artifactBucketName = ssm.StringParameter.valueForStringParameter(
+			this,
+			'/account/services/artifact.bucket',
+		);
 
 		const appsRenderingApp = new GuEc2App(this, {
 			applicationPort: 3040,
@@ -79,7 +84,7 @@ export Stack=${this.stack}
 export Stage=${this.stage}
 export NODE_ENV=production
 
-aws s3 cp s3://mobile-dist/${this.stack}/${this.stage}/${appName}/${appName}.zip /tmp
+aws s3 cp s3://${artifactBucketName}/${this.stack}/${this.stage}/${appName}/${appName}.zip /tmp
 mkdir -p /opt/${appName}
 unzip /tmp/${appName}.zip -d /opt/${appName}
 chown -R ${appName}:mapi /opt/${appName}
