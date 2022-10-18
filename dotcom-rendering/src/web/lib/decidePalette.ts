@@ -85,6 +85,10 @@ const textSeriesTitle = (format: ArticleFormat): string => {
 	) {
 		return BLACK;
 	}
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 	switch (format.display) {
@@ -156,6 +160,10 @@ const textByline = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
 	switch (format.display) {
 		case ArticleDisplay.Immersive:
 			return WHITE;
@@ -230,6 +238,9 @@ const textTwitterHandle = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
 	return text.supporting;
 };
 
@@ -242,6 +253,9 @@ const textTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
 const textCaption = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return neutral[7];
+
 	if (format.theme === ArticleSpecial.Labs) return neutral[20];
 
 	switch (format.design) {
@@ -350,9 +364,12 @@ const textArticleLink = (format: ArticleFormat): string => {
 		}
 	}
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	if (format.theme === ArticleSpecial.SpecialReport) {
+	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
-	}
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[200];
+
 	switch (format.theme) {
 		case ArticlePillar.Opinion:
 		case ArticlePillar.Culture:
@@ -493,6 +510,10 @@ const textArticleLinkHover = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[200];
+
 	switch (format.theme) {
 		case ArticlePillar.Opinion:
 		case ArticlePillar.Culture:
@@ -641,6 +662,8 @@ const backgroundArticle = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.Analysis) return news[800];
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[800]; // Note, check theme rather than design here
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[800];
 	if (
 		format.theme === ArticleSpecial.Labs &&
 		format.display !== ArticleDisplay.Immersive
@@ -680,6 +703,8 @@ const backgroundAvatar = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[800];
+		case ArticleSpecial.SpecialReportAlt:
+			return palette.specialReportAlt[300];
 		case ArticlePillar.Opinion:
 			return pillarPalette[ArticlePillar.Opinion].main;
 		default:
@@ -919,6 +944,10 @@ const fillCommentCount = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
 			case ArticlePillar.News:
@@ -987,6 +1016,9 @@ const fillShareIcon = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
 	return pillarPalette[format.theme].main;
 };
 
@@ -1026,6 +1058,9 @@ const fillBlockquoteIcon = (format: ArticleFormat): string => {
 
 const fillTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
 
 	return neutral[46];
 };
@@ -1086,6 +1121,9 @@ const borderArticleLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[200];
 	return border.secondary;
 };
 
@@ -1209,6 +1247,10 @@ const borderArticleLinkHover = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[200];
+
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
 			case ArticlePillar.News:
@@ -1298,6 +1340,9 @@ const borderArticle: (format: ArticleFormat) => string = (format) => {
 		format.design === ArticleDesign.DeadBlog
 	)
 		return '#CDCDCD';
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[86];
+
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	return border.secondary;
 };
@@ -1430,6 +1475,12 @@ const textDropCap = (format: ArticleFormat): string => {
 const textBetaLabel = (): string => neutral[46];
 
 const textDesignTag = (): string => neutral[100];
+
+const textDateLine = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+	return neutral[46];
+};
 
 const textBlockquote = (format: ArticleFormat): string => {
 	switch (format.design) {
@@ -1705,6 +1756,7 @@ export const decidePalette = (
 			filterButtonActive: textFilterButtonActive(),
 			betaLabel: textBetaLabel(),
 			designTag: textDesignTag(),
+			dateLine: textDateLine(format),
 		},
 		background: {
 			article: backgroundArticle(format),
