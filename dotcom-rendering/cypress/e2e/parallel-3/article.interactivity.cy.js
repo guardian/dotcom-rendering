@@ -129,7 +129,7 @@ describe('Interactivity', function () {
 			});
 			// Assert first item is highlighted
 			cy.get('[data-cy="newsLinks"] > li')
-				.eq(1)
+				.first()
 				.within(() => {
 					cy.get('a').should('have.focus');
 				});
