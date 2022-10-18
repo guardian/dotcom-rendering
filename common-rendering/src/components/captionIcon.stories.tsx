@@ -18,11 +18,7 @@ const Image: FC = () => (
 		}}
 		supportsDarkMode={true}
 		variant={CaptionIconVariant.Image}
-	>
-		{some(
-			'Age of the train … a tourist train in Switzerland. Photograph: Kisa_Markiza/Getty Images',
-		)}
-	</CaptionIcon>
+	></CaptionIcon>
 );
 
 const Video: FC = () => (
@@ -34,11 +30,7 @@ const Video: FC = () => (
 		}}
 		supportsDarkMode={true}
 		variant={CaptionIconVariant.Video}
-	>
-		{some(
-			'Age of the train … a tourist train in Switzerland. Photograph: Kisa_Markiza/Getty Images',
-		)}
-	</CaptionIcon>
+	></CaptionIcon>
 );
 
 // ----- Exports ----- //
