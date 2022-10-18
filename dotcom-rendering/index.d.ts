@@ -20,7 +20,9 @@ type ThemePillar =
 	| 'SportPillar'
 	| 'CulturePillar'
 	| 'LifestylePillar';
-type ThemeSpecial = 'SpecialReportTheme' | 'Labs';
+
+// TODO: We don't know yet what CAPI will give for SpecialReportAlt so leaving this as placeholder
+type ThemeSpecial = 'SpecialReportTheme' | 'Labs' | 'SpecialReportAltTheme';
 type CAPITheme = ThemePillar | ThemeSpecial;
 
 // CAPIDesign is what CAPI gives us on the Format field
