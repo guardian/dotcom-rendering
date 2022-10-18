@@ -197,8 +197,9 @@ export const Columns: React.FC<{
 						children: remainingEditions,
 					}}
 					index={10}
-					showLineBelow={true}
+					showLineBelow={false}
 				/>
+				<div css={lineStyle}></div>
 			</section>
 
 			<MoreColumn

@@ -145,12 +145,14 @@ const hideWhenNotChecked = (columnInputId: string) => css`
 `;
 
 export const lineStyle = css`
+	${from.desktop} {
+		display: none;
+	}
 	background-color: ${brand[600]};
 	content: '';
 	display: block;
 	height: 1px;
-	left: 50px;
-	position: absolute;
+	margin-left: 50px;
 	right: 0;
 `;
 
