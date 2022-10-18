@@ -57,6 +57,7 @@ export type Palette = {
 		filterButtonActive: Colour;
 		betaLabel: Colour;
 		designTag: Colour;
+		dateLine: Colour;
 	};
 	background: {
 		article: Colour;

@@ -1,7 +1,7 @@
 import createCache from '@emotion/cache';
 import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
-import { ArticleDesign, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import {
 	BUILD_VARIANT,
@@ -54,6 +54,7 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 		createEmotionServer(cache);
 
 	const format: ArticleFormat = decideFormat(CAPIArticle.format);
+	format.theme = ArticleSpecial.SpecialReportAlt;
 
 	const html = renderToString(
 		<CacheProvider value={cache}>

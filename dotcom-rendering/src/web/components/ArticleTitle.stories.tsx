@@ -309,6 +309,29 @@ export const SpecialReportTitle = () => {
 };
 SpecialReportTitle.story = { name: 'Special report' };
 
+export const SpecialReportAlt = () => {
+	return (
+		<Wrapper>
+			<ArticleTitle
+				{...CAPIArticle}
+				format={{
+					display: ArticleDisplay.Standard,
+					theme: ArticleSpecial.SpecialReportAlt,
+					design: ArticleDesign.Standard,
+				}}
+				tags={[
+					{
+						id: '',
+						title: 'Special Report Alt',
+						type: 'Series',
+					},
+				]}
+			/>
+		</Wrapper>
+	);
+};
+SpecialReportAlt.story = { name: 'Special report Alt' };
+
 export const ArticleNoTags = () => {
 	return (
 		<Wrapper>
