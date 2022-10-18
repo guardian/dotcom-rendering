@@ -114,7 +114,10 @@ export const LEGACY_SCRIPT = getScriptRegex('legacy');
 export const MODERN_SCRIPT = getScriptRegex('modern');
 export const VARIANT_SCRIPT = getScriptRegex('variant');
 
-export const generateScriptTags = (scripts: Array<string | false>): string[] =>
+export const generateScriptTags = (
+	shouldServeVariantBundle: boolean,
+	scripts: Array<string | false>,
+): string[] =>
 	scripts.filter(isString).map((script) => {
 		if (script.match(LEGACY_SCRIPT)) {
 			return `<script defer nomodule src="${script}"></script>`;
@@ -128,8 +131,10 @@ export const generateScriptTags = (scripts: Array<string | false>): string[] =>
 			);
 		}
 
+		const mode = shouldServeVariantBundle ? 'type="module"' : 'defer';
+
 		return [
 			'<!-- The following script does not vary between modern & legacy browsers -->',
-			`<script defer src="${script}"></script>`,
+			`<script ${mode} src="${script}"></script>`,
 		].join('\n');
 	});

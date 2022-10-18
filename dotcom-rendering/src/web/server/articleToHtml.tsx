@@ -118,6 +118,7 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	 * Scripts will be executed in the order they appear in this array
 	 */
 	const priorityScriptTags = generateScriptTags(
+		shouldServeVariantBundle,
 		[
 			polyfillIO,
 			...getScriptArrayFromFile('bootCmp.js'),
@@ -145,6 +146,7 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	 * unlikely.
 	 */
 	const lowPriorityScriptTags = generateScriptTags(
+		shouldServeVariantBundle,
 		[
 			...getScriptArrayFromFile('atomIframe.js'),
 			...getScriptArrayFromFile('embedIframe.js'),
