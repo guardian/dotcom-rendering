@@ -9,7 +9,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import Byline from 'components/Byline';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
-import Logo from 'components/Logo';
 import MainMedia, { GalleryCaption } from 'components/MainMedia';
 import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
@@ -42,10 +41,6 @@ const wrapperStyles = (format: ArticleFormat): SerializedStyles => css`
 	`}
 `;
 
-const logoStyles = css`
-	${grid.column.centre}
-`;
-
 type Props = {
 	item: Item;
 };
@@ -68,9 +63,6 @@ const GalleryLayout: FC<Props> = ({ item, children }) => {
 							mainMedia={item.mainMedia}
 							format={format}
 						/>
-						<div css={logoStyles}>
-							<Logo item={item} />
-						</div>
 					</header>
 					{children}
 					<Tags item={item} />

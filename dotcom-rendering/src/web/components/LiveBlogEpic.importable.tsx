@@ -1,22 +1,22 @@
 import { css } from '@emotion/react';
+import { onConsentChange } from '@guardian/consent-management-platform';
+import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
 import type { CountryCode } from '@guardian/libs';
-import { getCookie, log, storage } from '@guardian/libs';
+import { getCookie, joinUrl, log, storage } from '@guardian/libs';
 import { space } from '@guardian/source-foundations';
-import { getEpicViewLog } from '@guardian/support-dotcom-components';
-import type { EpicPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
+import type { ModuleDataResponse } from '@guardian/support-dotcom-components';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useArticleCounts } from '../../lib/articleCount';
 import { submitComponentEvent } from '../browser/ophan/ophan';
 import {
 	getLastOneOffContributionTimestamp,
 	isRecurringContributor,
+	REQUIRED_CONSENTS_FOR_ARTICLE_COUNT,
 	shouldHideSupportMessaging,
-	useHasOptedOutOfArticleCount,
 } from '../lib/contributions';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
-import { useSDCLiveblogEpic } from '../lib/useSDC';
+import { useApi } from '../lib/useApi';
 
 type Props = {
 	section: string;
@@ -24,8 +24,20 @@ type Props = {
 	isPaidContent: boolean;
 	tags: TagType[];
 	contributionsServiceUrl: string;
-	pageId: string;
-	keywordIds: string;
+};
+
+const useConsent = () => {
+	const [consent, setConsent] = useState<ConsentState>();
+	const hasOptedOut = getCookie({ name: 'gu_article_count_opt_out' });
+
+	useEffect(() => {
+		if (hasOptedOut) return;
+		onConsentChange((state) => {
+			setConsent(state);
+		});
+	}, [hasOptedOut]);
+
+	return consent;
 };
 
 const useCountryCode = () => {
@@ -73,6 +85,29 @@ const useEpic = ({ url, name }: { url: string; name: string }) => {
 	return { Epic };
 };
 
+function consentGivenForArticleCounts(consent: ConsentState): boolean {
+	const { ccpa, tcfv2, aus } = consent;
+
+	if (ccpa || aus) {
+		return true;
+	}
+
+	if (tcfv2) {
+		const hasRequiredConsents = REQUIRED_CONSENTS_FOR_ARTICLE_COUNT.every(
+			(tcfConsent) => tcfv2.consents[tcfConsent],
+		);
+
+		if (!hasRequiredConsents) {
+			storage.local.remove('gu.history.dailyArticleCount');
+			storage.local.remove('gu.history.weeklyArticleCount');
+		}
+
+		return hasRequiredConsents;
+	}
+
+	return false;
+}
+
 /**
  * usePayload
  *
@@ -87,25 +122,18 @@ const usePayload = ({
 	section,
 	isPaidContent,
 	tags,
-	pageId,
-	keywordIds,
 }: {
 	shouldHideReaderRevenue: boolean;
 	section: string;
 	isPaidContent: boolean;
 	tags: TagType[];
-	pageId: string;
-	keywordIds: string;
-}): EpicPayload | undefined => {
-	const articleCounts = useArticleCounts(pageId, keywordIds);
-	const hasOptedOutOfArticleCount = useHasOptedOutOfArticleCount();
+}) => {
+	const consent = useConsent();
 	const countryCode = useCountryCode();
-	const mvtId =
-		Number(getCookie({ name: 'GU_mvt_id', shouldMemoize: true })) || 0;
+	const mvtId = getCookie({ name: 'GU_mvt_id', shouldMemoize: true }) || 0;
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 
-	if (articleCounts === 'Pending') return;
-	if (hasOptedOutOfArticleCount === 'Pending') return;
+	if (!consent) return;
 	log('dotcom', 'LiveBlogEpic has consent state');
 	if (!countryCode) return;
 	log('dotcom', 'LiveBlogEpic has countryCode');
@@ -130,9 +158,10 @@ const usePayload = ({
 				getLastOneOffContributionTimestamp() ?? undefined,
 			mvtId,
 			countryCode,
-			epicViewLog: getEpicViewLog(storage.local),
-			weeklyArticleHistory: articleCounts?.weeklyArticleHistory,
-			hasOptedOutOfArticleCount,
+			epicViewLog: storage.local.get('gu.contributions.views') || [],
+			weeklyArticleHistory:
+				storage.local.get('gu.history.weeklyArticleCount') || [],
+			hasOptedOutOfArticleCount: !consentGivenForArticleCounts(consent),
 			modulesVersion: 'v3',
 			url: window.location.origin + window.location.pathname,
 		},
@@ -186,10 +215,34 @@ const Fetch = ({
 	payload,
 	contributionsServiceUrl,
 }: {
-	payload: EpicPayload;
+	payload: unknown;
 	contributionsServiceUrl: string;
 }) => {
-	const response = useSDCLiveblogEpic(contributionsServiceUrl, payload);
+	let url = joinUrl(contributionsServiceUrl, 'liveblog-epic');
+
+	// Check if we've been asked to force this epic
+	const params = new URLSearchParams(window.location.search);
+	if (params.get('force-liveblog-epic')) {
+		url += '?force=true';
+	}
+
+	// Send the payload to Contributions to request a module
+	const { data: response } = useApi<ModuleDataResponse>(
+		url,
+		{
+			revalidateIfStale: false,
+			revalidateOnFocus: false,
+			revalidateOnReconnect: false,
+		},
+		{
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(payload),
+		},
+	);
 
 	// If we didn't get a module in response (or we're still waiting) do nothing. If
 	// no epic should be shown the response is equal to {}, hence the Object.keys
@@ -234,19 +287,14 @@ export const LiveBlogEpic = ({
 	isPaidContent,
 	tags,
 	contributionsServiceUrl,
-	pageId,
-	keywordIds,
 }: Props) => {
 	log('dotcom', 'LiveBlogEpic started');
-
 	// First construct the payload
 	const payload = usePayload({
 		shouldHideReaderRevenue,
 		section,
 		isPaidContent,
 		tags,
-		pageId,
-		keywordIds,
 	});
 	if (!payload) return null;
 

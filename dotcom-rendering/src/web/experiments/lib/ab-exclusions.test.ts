@@ -7,7 +7,7 @@ describe('canRun using participations', () => {
 		localStorage.clear();
 	});
 	const getParticipationsFromLocalStorage = () =>
-		storage.local.get('gu.ab._participations');
+		storage.local.get('gu.ab.participations');
 
 	const abTestId = 'test-id';
 	const variantId = 'variant-id';
@@ -25,17 +25,8 @@ describe('canRun using participations', () => {
 		);
 	});
 
-	test('canRun using participations returns true if setParticipationsFlag is true and participation already set', () => {
-		storage.local.set('gu.ab_participations', currentTestParticipation);
-
-		expect(setOrUseParticipations(true, abTestId, variantId)).toBe(true);
-		expect(getParticipationsFromLocalStorage()).toStrictEqual(
-			currentTestParticipation,
-		);
-	});
-
-	test('canRun using participations sets participation key and returns true if setParticipationsFlag is true, even if other participation is present', () => {
-		storage.local.set('gu.ab._participations', otherParticipation);
+	test('canRun using participations sets participation key and returns true if setParticipationsFlag is true, even if other participatio is present', () => {
+		storage.local.set('gu.ab.participations', otherParticipation);
 
 		expect(setOrUseParticipations(true, abTestId, variantId)).toBe(true);
 		expect(getParticipationsFromLocalStorage()).toStrictEqual({
@@ -50,7 +41,7 @@ describe('canRun using participations', () => {
 	});
 
 	test('canRun using participations returns correctly if setParticipationsFlag is false and correct localstorage participation is present', () => {
-		storage.local.set('gu.ab._participations', currentTestParticipation);
+		storage.local.set('gu.ab.participations', currentTestParticipation);
 
 		expect(setOrUseParticipations(false, abTestId, variantId)).toBe(true);
 		expect(getParticipationsFromLocalStorage()).toStrictEqual(
@@ -59,7 +50,7 @@ describe('canRun using participations', () => {
 	});
 
 	test('canRun using participations returns correctly if setParticipationsFlag is false and multiple localstorage participations present', () => {
-		storage.local.set('gu.ab._participations', {
+		storage.local.set('gu.ab.participations', {
 			...otherParticipation,
 			...currentTestParticipation,
 		});

@@ -287,6 +287,7 @@ export const SignInGateFakeSocial = ({
 	dismissGate,
 	abTest,
 	ophanComponentId,
+	isComment,
 }: SignInGateProps) => {
 	const verticalButtonStack =
 		abTest?.variant === 'fake-social-variant-vertical';
@@ -294,7 +295,7 @@ export const SignInGateFakeSocial = ({
 	return (
 		<div css={signInGateContainer} data-cy="sign-in-gate-fake-social">
 			<style>{hideElementsCss}</style>
-			<div css={firstParagraphOverlay} />
+			<div css={firstParagraphOverlay(!!isComment)} />
 			<h1 css={[heading, bodyPadding]}>
 				You need to register to keep reading
 			</h1>

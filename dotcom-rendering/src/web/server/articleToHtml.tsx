@@ -3,10 +3,7 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
-import {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-} from '../../../scripts/webpack/bundles';
+import { BUILD_VARIANT } from '../../../scripts/webpack/bundles';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -96,8 +93,7 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 
 	const shouldServeVariantBundle: boolean = [
 		BUILD_VARIANT,
-		CAPIArticle.config.abTests[dcrJavascriptBundle('Variant')] ===
-			'variant',
+		CAPIArticle.config.abTests.dcrJsBundleVariant === 'variant',
 	].every(Boolean);
 
 	/**

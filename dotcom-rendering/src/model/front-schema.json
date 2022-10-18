@@ -372,9 +372,6 @@
         },
         "isAdFreeUser": {
             "type": "boolean"
-        },
-        "isNetworkFront": {
-            "type": "boolean"
         }
     },
     "required": [
@@ -384,7 +381,6 @@
         "editionLongForm",
         "guardianBaseURL",
         "isAdFreeUser",
-        "isNetworkFront",
         "nav",
         "pageFooter",
         "pageId",
@@ -2584,6 +2580,9 @@
                             "uneditable"
                         ]
                     }
+                },
+                "isNetworkFront": {
+                    "type": "boolean"
                 }
             },
             "required": [

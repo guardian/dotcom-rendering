@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 
-import createCache from '@emotion/cache';
+import { cache } from '@emotion/css';
 import { CacheProvider } from '@emotion/react';
-import createEmotionServer from '@emotion/server/create-instance';
+import { extractCritical } from '@emotion/server';
 import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { ArticleTheme } from '@guardian/libs';
@@ -19,6 +19,7 @@ import type { Response } from 'express';
 import type { Item } from 'item';
 import { fromCapi } from 'item';
 import { JSDOM } from 'jsdom';
+import { compose } from 'lib';
 import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
@@ -47,8 +48,6 @@ enum EditionsEnv {
 // ----- Setup ----- //
 
 const docParser = JSDOM.fragment.bind(null);
-const emotionCache = createCache({ key: 'ar' });
-const emotionServer = createEmotionServer(emotionCache);
 
 // ----- Functions ----- //
 
@@ -129,12 +128,13 @@ function renderHead(
 }
 
 const renderBody = (item: Item): EmotionCritical =>
-	emotionServer.extractCritical(
-		renderToString(
-			<CacheProvider value={emotionCache}>
-				<Layout item={item} />
-			</CacheProvider>,
-		),
+	compose(
+		extractCritical,
+		renderToString,
+	)(
+		<CacheProvider value={cache}>
+			<Layout item={item} />
+		</CacheProvider>,
 	);
 
 const buildHtml = (

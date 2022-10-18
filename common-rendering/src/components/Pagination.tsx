@@ -1,6 +1,6 @@
 import { SerializedStyles, css } from '@emotion/react';
 
-import { neutral, space, textSans, until } from '@guardian/source-foundations';
+import { space, textSans, until } from '@guardian/source-foundations';
 import {
 	Hide,
 	LinkButton,
@@ -12,7 +12,6 @@ import {
 
 import { border, hover, text } from '../editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { darkModeCss } from '../lib';
 
 type Props = {
 	currentPage: number;
@@ -22,7 +21,6 @@ type Props = {
 	oldest?: string;
 	older?: string;
 	format: ArticleFormat;
-	supportsDarkMode: boolean;
 };
 
 const NavWrapper = ({ children }: { children: React.ReactNode }) => (
@@ -69,22 +67,12 @@ const Bold = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-const Position = ({
-	children,
-	supportsDarkMode,
-}: {
-	children: React.ReactNode;
-	supportsDarkMode: boolean;
-}) => (
+const Position = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
 			display: flex;
 			flex-direction: row;
 			${textSans.small()}
-
-			${darkModeCss(supportsDarkMode)`
-				color: ${neutral[60]};
-			`}
 		`}
 	>
 		{children}
@@ -104,13 +92,15 @@ const Space = () => (
 	/>
 );
 
-const decidePaginationCss = (format: ArticleFormat): SerializedStyles => css`
-	color: ${text.pagination(format)};
-	border: 1px solid ${border.pagination(format)};
-	:hover {
-		border: 1px solid ${hover.pagination(format)};
-	}
-`;
+const decidePaginationCss = (format: ArticleFormat): SerializedStyles => {
+	return css`
+		color: ${text.pagination(format)};
+		border: 1px solid ${border.pagination(format)};
+		:hover {
+			border: 1px solid ${hover.pagination(format)};
+		}
+	`;
+};
 
 const Pagination = ({
 	currentPage,
@@ -120,7 +110,6 @@ const Pagination = ({
 	newest,
 	newer,
 	format,
-	supportsDarkMode,
 }: Props) => {
 	return (
 		<NavWrapper>
@@ -163,7 +152,7 @@ const Pagination = ({
 				</LinkButton>
 			</FlexSection>
 			<FlexSection>
-				<Position supportsDarkMode={supportsDarkMode}>
+				<Position>
 					<Bold>{currentPage}</Bold>
 					<Of />
 					<Bold>{totalPages}</Bold>

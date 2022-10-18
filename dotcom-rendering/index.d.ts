@@ -300,7 +300,6 @@ interface BlocksRequest {
 	adUnit: string;
 	videoDuration?: number;
 	switches: { [key: string]: boolean };
-	keywordIds: string;
 }
 
 /**

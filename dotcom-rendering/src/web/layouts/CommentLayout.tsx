@@ -213,13 +213,11 @@ const minHeightWithAvatar = css`
 const avatarPositionStyles = css`
 	display: flex;
 	justify-content: flex-end;
+	overflow: hidden;
 	position: relative;
 	margin-bottom: -29px;
 	margin-top: -50px;
 	pointer-events: none;
-	${until.tablet} {
-		overflow: hidden;
-	}
 
 	/*  Why target img element?
 
@@ -587,9 +585,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										isPreview={CAPIArticle.config.isPreview}
 										idUrl={CAPIArticle.config.idUrl || ''}
 										isDev={!!CAPIArticle.config.isDev}
-										keywordIds={
-											CAPIArticle.config.keywordIds
-										}
+										abTests={CAPIArticle.config.abTests}
 									/>
 									{showBodyEndSlot && (
 										<Island clientOnly={true}>
@@ -611,7 +607,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													CAPIArticle.pageType
 														.isPaidContent
 												}
-												keywordIds={
+												keywordsId={
 													CAPIArticle.config
 														.keywordIds
 												}
@@ -885,7 +881,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						isPaidContent={CAPIArticle.pageType.isPaidContent}
 						isPreview={!!CAPIArticle.config.isPreview}
 						isSensitive={CAPIArticle.config.isSensitive}
-						keywordIds={CAPIArticle.config.keywordIds}
+						keywordsId={CAPIArticle.config.keywordIds}
 						pageId={CAPIArticle.pageId}
 						section={CAPIArticle.config.section}
 						sectionName={CAPIArticle.sectionName}

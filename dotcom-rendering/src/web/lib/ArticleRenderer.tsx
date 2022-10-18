@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import type { Switches } from '../../types/config';
+import type { ServerSideTests, Switches } from '../../types/config';
 import {
 	adCollapseStyles,
 	labelStyles as adLabelStyles,
@@ -43,6 +43,7 @@ export const ArticleRenderer: React.FC<{
 	isDev: boolean;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
+	abTests?: ServerSideTests;
 }> = ({
 	format,
 	elements,
@@ -61,6 +62,7 @@ export const ArticleRenderer: React.FC<{
 	isAdFreeUser,
 	isSensitive,
 	isDev,
+	abTests,
 }) => {
 	const renderedElements = elements.map((element, index) => {
 		return (
@@ -79,6 +81,7 @@ export const ArticleRenderer: React.FC<{
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
 				switches={switches}
+				abTests={abTests}
 			/>
 		);
 	});

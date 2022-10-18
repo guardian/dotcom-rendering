@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
-import { isObject, isString } from '@guardian/libs';
+import { isString } from '@guardian/libs';
 
 interface AssetHash {
 	[key: string]: string;
@@ -37,21 +37,16 @@ const isDev = process.env.NODE_ENV === 'development';
 
 export const ASSET_ORIGIN = decideAssetOrigin(process.env.GU_STAGE, isDev);
 
-const isAssetHash = (manifest: unknown): manifest is AssetHash =>
-	isObject(manifest) &&
-	Object.entries(manifest).every(
-		([key, value]) => isString(key) && isString(value),
-	);
-
 const getManifest = (path: string): AssetHash => {
 	try {
 		const assetHash: unknown = JSON.parse(
 			readFileSync(resolve(__dirname, path), { encoding: 'utf-8' }),
 		);
-		if (!isAssetHash(assetHash))
+		if (typeof assetHash != 'object' || assetHash === null)
 			throw new Error('Not a valid AssetHash type');
 
-		return assetHash;
+		/** @TODO validate the object */
+		return assetHash as AssetHash;
 	} catch (e) {
 		console.error('Could not load manifest in: ', path);
 		console.error('Some filename lookups will fail');

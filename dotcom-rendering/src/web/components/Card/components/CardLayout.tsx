@@ -9,7 +9,7 @@ type Props = {
 	minWidthInPixels?: number;
 };
 
-const decideDirection = (imagePosition: ImagePositionType) => {
+const decideDirection = (imagePosition?: ImagePositionType) => {
 	switch (imagePosition) {
 		case 'top':
 			return 'column';
@@ -20,7 +20,7 @@ const decideDirection = (imagePosition: ImagePositionType) => {
 		case 'right':
 			return 'row-reverse';
 		// If there's no image (so no imagePosition) default to top down
-		case 'none':
+		default:
 			return 'column';
 	}
 };

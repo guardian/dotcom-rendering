@@ -4,7 +4,6 @@ import {
 	incrementWeeklyArticleCount,
 } from '@guardian/support-dotcom-components';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
-import { useEffect, useState } from 'react';
 import { hasOptedOutOfArticleCount } from '../web/lib/contributions';
 import type { DailyArticleHistory } from '../web/lib/dailyArticleCount';
 import {
@@ -48,21 +47,4 @@ export const getArticleCounts = async (
 		weeklyArticleHistory: window.guardian.weeklyArticleCount || [],
 		dailyArticleHistory: window.guardian.dailyArticleCount || [],
 	};
-};
-
-export const useArticleCounts = (
-	pageId: string,
-	keywordIds: string,
-): ArticleCounts | undefined | 'Pending' => {
-	const [articleCounts, setArticleCounts] = useState<
-		ArticleCounts | undefined | 'Pending'
-	>('Pending');
-
-	useEffect(() => {
-		getArticleCounts(pageId, keywordIds)
-			.then(setArticleCounts)
-			.catch(() => setArticleCounts(undefined));
-	}, [pageId, keywordIds]);
-
-	return articleCounts;
 };

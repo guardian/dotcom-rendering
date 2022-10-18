@@ -232,9 +232,9 @@ const lines = (_format: ArticleFormat): Colour => neutral[86];
 
 const linesDark = (_format: ArticleFormat): Colour => neutral[20];
 
-const newsletterSignUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
+const signUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
 
-const newsletterSignUpFormButtonDark = (_format: ArticleFormat): Colour => neutral[86];
+const signUpFormButtonDark = (_format: ArticleFormat): Colour => neutral[86];
 
 // ----- API ----- //
 
@@ -255,8 +255,8 @@ const fill = {
 	richLinkDark,
 	richLinkSvgPreload,
 	richLinkSvgPreloadDark,
-	newsletterSignUpFormButton,
-	newsletterSignUpFormButtonDark,
+	signUpFormButton,
+	signUpFormButtonDark,
 };
 
 // ----- Exports ----- //

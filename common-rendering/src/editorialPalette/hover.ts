@@ -34,15 +34,15 @@ const pagination = (format: ArticleFormat): Colour => {
 	}
 };
 
-const newsletterSignUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
-const newsletterSignUpFormButtonDark = (_format: ArticleFormat): Colour => neutral[86];
+const signUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
+const signUpFormButtonDark = (_format: ArticleFormat): Colour => neutral[86];
 
 // ----- API ----- //
 
 const hover = {
 	pagination,
-	newsletterSignUpFormButton,
-	newsletterSignUpFormButtonDark,
+	signUpFormButton,
+	signUpFormButtonDark,
 };
 
 // ----- Exports ----- //

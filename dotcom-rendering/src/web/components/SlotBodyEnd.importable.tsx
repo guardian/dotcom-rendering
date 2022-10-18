@@ -5,7 +5,7 @@ import type {
 import { getCookie } from '@guardian/libs';
 import type { WeeklyArticleHistory } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import { getArticleCounts } from '../../lib/articleCount';
+import { getArticleCounts } from '../../lib/article-count';
 import { getLocaleCode } from '../lib/getCountryCode';
 import type {
 	CandidateConfig,
@@ -37,7 +37,7 @@ type Props = {
 	idApiUrl: string;
 	stage: string;
 	pageId: string;
-	keywordIds: string;
+	keywordsId: string;
 };
 
 const buildReaderRevenueEpicConfig = (
@@ -96,7 +96,7 @@ export const SlotBodyEnd = ({
 	idApiUrl,
 	stage,
 	pageId,
-	keywordIds,
+	keywordsId,
 }: Props) => {
 	const { brazeMessages } = useBraze(idApiUrl);
 
@@ -122,11 +122,11 @@ export const SlotBodyEnd = ({
 
 	useEffect(() => {
 		setAsyncArticleCount(
-			getArticleCounts(pageId, keywordIds).then(
+			getArticleCounts(pageId, keywordsId).then(
 				(counts) => counts?.weeklyArticleHistory,
 			),
 		);
-	}, [pageId, keywordIds]);
+	}, [pageId, keywordsId]);
 
 	useOnce(() => {
 		const readerRevenueEpic = buildReaderRevenueEpicConfig({

@@ -528,9 +528,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										isPreview={CAPIArticle.config.isPreview}
 										idUrl={CAPIArticle.config.idUrl || ''}
 										isDev={!!CAPIArticle.config.isDev}
-										keywordIds={
-											CAPIArticle.config.keywordIds
-										}
+										abTests={CAPIArticle.config.abTests}
 									/>
 								</ArticleContainer>
 							</GridItem>
@@ -563,7 +561,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								isPaidContent={
 									CAPIArticle.pageType.isPaidContent
 								}
-								keywordIds={CAPIArticle.config.keywordIds}
+								keywordsId={CAPIArticle.config.keywordIds}
 								pageId={CAPIArticle.pageId}
 								sectionId={CAPIArticle.config.section}
 								sectionName={CAPIArticle.sectionName}
@@ -796,7 +794,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						isPaidContent={CAPIArticle.pageType.isPaidContent}
 						isPreview={!!CAPIArticle.config.isPreview}
 						isSensitive={CAPIArticle.config.isSensitive}
-						keywordIds={CAPIArticle.config.keywordIds}
+						keywordsId={CAPIArticle.config.keywordIds}
 						pageId={CAPIArticle.pageId}
 						section={CAPIArticle.config.section}
 						sectionName={CAPIArticle.sectionName}

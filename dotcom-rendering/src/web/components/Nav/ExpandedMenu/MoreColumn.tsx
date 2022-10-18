@@ -3,7 +3,6 @@ import {
 	brand,
 	brandAlt,
 	brandText,
-	focusHalo,
 	from,
 	textSans,
 	until,
@@ -136,7 +135,6 @@ const columnLinks = css`
 `;
 
 const columnLinkTitle = css`
-	overflow: clip;
 	${textSans.medium({ lineHeight: 'tight' })};
 	background-color: transparent;
 	text-decoration: none;
@@ -159,10 +157,6 @@ const columnLinkTitle = css`
 	${from.desktop} {
 		font-size: 16px;
 		padding: 6px 0;
-		:hover,
-		:focus {
-			${focusHalo};
-		}
 	}
 
 	:hover,
@@ -178,6 +172,7 @@ const columnLinkTitle = css`
 
 const mainMenuLinkStyle = css`
 	box-sizing: border-box;
+	overflow: hidden;
 	position: relative;
 	width: 100%;
 	${from.desktop} {

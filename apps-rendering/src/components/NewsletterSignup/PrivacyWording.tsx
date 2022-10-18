@@ -21,15 +21,15 @@ const termsStyle = (format: ArticleFormat): SerializedStyles => css`
 	color: ${text.privacyMessage(format)};
 	a {
 		${textSans.xxsmall({ fontWeight: 'bold' })};
-		color: ${text.newsletterSignUpForm(format)};
+		color: ${text.signUpForm(format)};
 		text-decoration: underline;
 		:hover {
-			color: ${text.newsletterSignUpForm(format)};
+			color: ${text.signUpForm(format)};
 			text-decoration: underline;
 		}
 	}
 	strong {
-		color: ${text.newsletterSignUpForm(format)};
+		color: ${text.signUpForm(format)};
 		font-weight: bold;
 	}
 
@@ -37,13 +37,13 @@ const termsStyle = (format: ArticleFormat): SerializedStyles => css`
 		color: ${text.privacyMessageDark(format)};
 
 		a {
-			color: ${text.newsletterSignUpFormDark(format)};
+			color: ${text.signUpFormDark(format)};
 			:hover {
-				color: ${text.newsletterSignUpFormDark(format)};
+				color: ${text.signUpFormDark(format)};
 			}
 		}
 		strong {
-			color: ${text.newsletterSignUpFormDark(format)};
+			color: ${text.signUpFormDark(format)};
 		}
 	`}
 `;
