@@ -253,8 +253,7 @@ const textTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
 const textCaption = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return neutral[7];
+	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[7];
 
 	if (format.theme === ArticleSpecial.Labs) return neutral[20];
 
@@ -305,6 +304,8 @@ const textSubMetaLabel = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
 	return text.supporting;
 };
 
@@ -319,6 +320,10 @@ const textSyndicationButton = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[100];
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
 	return text.supporting;
 };
 
@@ -1022,13 +1027,16 @@ const fillShareIcon = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
-const fillShareCountIcon = (): string => {
+const fillShareCountIcon = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
 	return neutral[46];
 };
 
 const fillShareCountIconUntilDesktop = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
-	return fillShareCountIcon();
+	return fillShareCountIcon(format);
 };
 
 const fillShareIconGrayBackground = (format: ArticleFormat): string => {
@@ -1073,6 +1081,9 @@ const fillGuardianLogo = (format: ArticleFormat): string => {
 
 const borderSyndicationButton = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
 	return border.secondary;
 };
 
@@ -1556,12 +1567,18 @@ const backgroundMostViewedTab = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].dark;
 };
 
-const textShareCount = (): string => {
+const textShareCount = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
 	return text.supporting;
 };
 
 const textShareCountUntilDesktop = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
 
 	return text.supporting;
 };
@@ -1746,7 +1763,7 @@ export const decidePalette = (
 			numberedTitle: textNumberedTitle(format),
 			numberedPosition: textNumberedPosition(),
 			overlaidCaption: textOverlaid(),
-			shareCount: textShareCount(),
+			shareCount: textShareCount(format),
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			keyEvent: textKeyEvent(format),
@@ -1796,7 +1813,7 @@ export const decidePalette = (
 			commentCount: fillCommentCount(format),
 			commentCountUntilDesktop: fillCommentCountUntilDesktop(format),
 			shareIcon: fillShareIcon(format),
-			shareCountIcon: fillShareCountIcon(),
+			shareCountIcon: fillShareCountIcon(format),
 			shareCountIconUntilDesktop: fillShareCountIconUntilDesktop(format),
 			shareIconGrayBackground: fillShareIconGrayBackground(format),
 			cameraCaptionIcon: fillCaptionCamera(format),
