@@ -17,30 +17,28 @@ export const FixedSmallFastVIII = ({
 	showAge,
 }: Props) => {
 	if (!trails[0]) return null;
-	const primary = trails[0];
-	const secondary = trails[1];
+	const primaries = trails.slice(0, 2);
 	const remaining = trails.slice(2, 7);
 
 	return (
 		<UL direction="row" wrapCards={true}>
-			<LI percentage="25%" padSides={true} showDivider={false}>
-				<FrontCard
-					trail={primary}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					headlineSize="medium"
-					imageUrl={primary.image}
-				/>
-			</LI>
-			<LI percentage="25%" padSides={true} showDivider={true}>
-				<FrontCard
-					trail={secondary}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					headlineSize="medium"
-					imageUrl={secondary.image}
-				/>
-			</LI>
+			{primaries.map((card, cardIndex) => {
+				return (
+					<LI
+						percentage="25%"
+						padSides={true}
+						showDivider={cardIndex === 1}
+					>
+						<FrontCard
+							trail={card}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							headlineSize="medium"
+							imageUrl={card.image}
+						/>
+					</LI>
+				);
+			})}
 			<LI percentage="50%">
 				<UL direction="row" wrapCards={true} showDivider={true}>
 					{remaining.map((card, cardIndex) => {
