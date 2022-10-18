@@ -110,7 +110,7 @@ export const getScriptsFromManifest =
  * with an optional hash for local development
  * and stripped query parameters.
  */
-const getScriptRegex = (bundle: 'modern' | 'legacy' | 'variant') =>
+const getScriptRegex = (bundle: Bundle) =>
 	new RegExp(`assets\\/\\w+\\.${bundle}\\.(\\w{20}\\.)?js(\\?.*)?$`);
 
 export const LEGACY_SCRIPT = getScriptRegex('legacy');

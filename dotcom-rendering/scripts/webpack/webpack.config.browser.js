@@ -3,8 +3,10 @@ const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
 
+/** @typedef {'legacy' | 'modern' | 'variant'} Bundle */
+
 /**
- * @param {'legacy' | 'modern' | 'variant'} bundle
+ * @param {Bundle} bundle
  * @returns {string}
  */
 const generateName = (bundle) => {
@@ -13,7 +15,7 @@ const generateName = (bundle) => {
 };
 
 /**
- * @param {'legacy' | 'modern' | 'variant'} bundle
+ * @param {Bundle} bundle
  * @returns {string}
  */
 const getLoaders = (bundle) => {
@@ -105,7 +107,7 @@ const getLoaders = (bundle) => {
 };
 
 /**
- * @param {{ bundle: 'legacy' | 'modern'  | 'variant', sessionId: string }} options
+ * @param {{ bundle: Bundle, sessionId: string }} options
  * @returns {import('webpack').Configuration}
  */
 module.exports = ({ bundle, sessionId }) => ({
