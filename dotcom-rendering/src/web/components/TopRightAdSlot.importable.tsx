@@ -43,7 +43,7 @@ export const TopRightAdSlot = ({
 	const ABTestAPI = useAB();
 
 	const userInShadyPieTestVariant =
-		ABTestAPI?.isUserInVariant('shadyPieClickThrough', 'variant') &&
+		ABTestAPI?.isUserInVariant('ShadyPieClickThrough', 'variant') &&
 		format?.theme == ArticlePillar.Lifestyle;
 
 	useEffect(() => {

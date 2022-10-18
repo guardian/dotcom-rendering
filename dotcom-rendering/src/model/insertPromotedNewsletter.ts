@@ -219,6 +219,7 @@ export const insertPromotedNewsletter = (
 		case 'InterviewDesign':
 		case 'EditorialDesign':
 		case 'ObituaryDesign':
+		case 'ExplainerDesign':
 			return blocks.map((block: Block) => {
 				return {
 					...block,

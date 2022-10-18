@@ -245,7 +245,17 @@ const fields = {
 	commentable: true,
 	tags: tags,
 	shouldHideReaderRevenue: false,
-	branding: none,
+	branding: some({
+		aboutUri:
+			'x-gu://item/mobile.guardianapis.com/uk/items/info/2016/jan/25/content-funding',
+		altLogo:
+			'https://static.theguardian.com/commercial/sponsor/05/May/2020/ca7c95d2-6aef-4710-ac1b-ad539763ed9f-JNI_rgb_rev_180.png',
+		brandingType: 'sponsored',
+		label: 'Supported by',
+		logo: 'https://static.theguardian.com/commercial/sponsor/05/May/2020/2b724f07-add3-4abb-b7a3-b6bbb05a3bd0-JNI_rgb_180.png',
+		sponsorName: 'Judith Nielson Institute',
+		sponsorUri: 'https://jninstitute.org/',
+	}),
 	internalShortId: none,
 	commentCount: some(1223),
 	relatedContent: none,
