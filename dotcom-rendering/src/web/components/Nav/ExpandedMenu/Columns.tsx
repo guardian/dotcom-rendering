@@ -152,14 +152,26 @@ export const Columns: React.FC<{
 			role="menubar"
 			data-cy="nav-menu-columns"
 		>
-			{nav.pillars.map((column, i) => (
-				<Column
-					column={column}
-					key={column.title.toLowerCase()}
-					index={i}
-					showLineBelow={i !== nav.pillars.length - 1}
-				/>
-			))}
+			{nav.pillars.map(
+				(column, i) => (
+					column.children?.unshift({
+						title: column.title,
+						longTitle: `View all ${column.title}`,
+						url: column.url,
+						pillar: undefined,
+						children: [],
+						mobileOnly: true,
+					}),
+					(
+						<Column
+							column={column}
+							key={column.title.toLowerCase()}
+							index={i}
+							isLastColumn={i !== nav.pillars.length - 1}
+						/>
+					)
+				),
+			)}
 
 			<li role="none">
 				<ThemeProvider theme={{ ...buttonThemeBrand }}>
@@ -188,8 +200,8 @@ export const Columns: React.FC<{
 			</li>
 
 			<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
-			{/* This is where the edition dropdown is inserted					 */}
 
+			{/* This is where the edition dropdown is inserted					 */}
 			<section css={editionsSwitch}>
 				<Column
 					column={{
