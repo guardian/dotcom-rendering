@@ -2,7 +2,7 @@
 
 import { Placeholder } from './Placeholder';
 
-type When = 'idle' | 'visible' | 'interaction';
+type When = 'idle' | 'visible';
 
 interface HydrateProps {
 	deferUntil?: When;
@@ -22,10 +22,10 @@ interface ClientOnlyProps {
 
 interface InteractionProps {
 	deferUntil: 'interaction';
-	clientOnly?: false;
+	clientOnly?: never;
 	placeholderHeight?: never;
 	children: JSX.Element;
-	expediteLoading?: false;
+	expediteLoading?: never;
 }
 
 /**
@@ -60,7 +60,7 @@ const decideChildren = (
  * namimg convention
  *
  * @param {HydrateProps | ClientOnlyProps} props - JSX Props
- * @param {When} props.deferUntil - Delay when client code should execute
+ * @param {When | 'interaction'} props.deferUntil - Delay when client code should execute
  * 		- idle - Execute when browser idle
  * 		- visible - Execute when component appears in viewport
  *      - interaction - Execute when component is clicked on in the viewport
