@@ -2,10 +2,8 @@
 
 import { Placeholder } from './Placeholder';
 
-type When = 'idle' | 'visible';
-
 interface HydrateProps {
-	deferUntil?: When;
+	deferUntil?: 'idle' | 'visible';
 	clientOnly?: false;
 	placeholderHeight?: never;
 	children: JSX.Element;
@@ -13,7 +11,7 @@ interface HydrateProps {
 }
 
 interface ClientOnlyProps {
-	deferUntil?: When;
+	deferUntil?: 'idle' | 'visible';
 	clientOnly: true;
 	placeholderHeight?: number;
 	children: JSX.Element;
@@ -60,7 +58,7 @@ const decideChildren = (
  * namimg convention
  *
  * @param {HydrateProps | ClientOnlyProps} props - JSX Props
- * @param {When | 'interaction'} props.deferUntil - Delay when client code should execute
+ * @param {'idle' | 'visible' | 'interaction'} props.deferUntil - Delay when client code should execute
  * 		- idle - Execute when browser idle
  * 		- visible - Execute when component appears in viewport
  *      - interaction - Execute when component is clicked on in the viewport
