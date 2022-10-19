@@ -11,8 +11,11 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import {
-	LinkButton,
+	Button,
+	Label,
+	SvgArrowRightStraight,
 	SvgMagnifyingGlass,
+	TextInput,
 } from '@guardian/source-react-components';
 import type { NavType } from '../../../../model/extract-nav';
 import { Column, lineStyle } from './Column';
@@ -125,21 +128,80 @@ const searchBar = css`
 	${from.desktop} {
 		display: none;
 	}
-	margin-left: 12px;
+	box-sizing: border-box;
+	display: block;
+	margin-left: 13px;
+	max-width: 23.75rem;
+	position: relative;
 	margin-bottom: 24px;
 	margin-right: 41px;
 	padding-bottom: 15px;
 `;
 
-const searchButton = css`
-	max-width: 23.75rem;
+const searchInput = css`
 	${textSans.large()}
 	background-color: rgba(255,255,255, .1);
+	border: 0;
+	border-radius: 1000px;
+	box-sizing: border-box;
 	color: ${neutral[100]};
-	padding-left: 12px;
-	padding-top: 2px;
+	height: 36px;
+	padding-left: 38px;
+	vertical-align: middle;
 	width: 100%;
-	justify-content: flex-end;
+	&::placeholder {
+		color: ${neutral[100]};
+	}
+	&:focus {
+		outline: none;
+		padding-right: 40px;
+		&::placeholder {
+			opacity: 0;
+		}
+	}
+	&:focus ~ button {
+		opacity: 1;
+		outline: none;
+		pointer-events: all;
+	}
+`;
+
+const searchGlass = css`
+	position: absolute;
+	left: 7px;
+	top: 7px;
+	fill: ${neutral[100]};
+`;
+
+const searchSubmit = css`
+	background: transparent;
+	border: 0;
+	bottom: 0;
+	cursor: pointer;
+	display: block;
+	opacity: 0;
+	pointer-events: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 50px;
+	fill: ${neutral[100]};
+	&:focus,
+	&:active {
+		opacity: 1;
+		outline: none;
+		pointer-events: all;
+	}
+	&:before {
+		height: 12px;
+		top: 11px;
+		width: 12px;
+	}
+	&:after {
+		border-right: 0;
+		top: 17px;
+		width: 20px;
+	}
 `;
 
 export const Columns: React.FC<{
@@ -173,27 +235,42 @@ export const Columns: React.FC<{
 		)}
 
 		<li>
-			<div css={searchBar}>
-				<LinkButton
-					css={searchButton}
-					href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
-					tabIndex={-1}
-					className="selectableMenuItem"
-					priority="secondary"
-					size="small"
-					icon={
+			<form css={searchBar} action="https://www.google.co.uk/search">
+				<TextInput
+					hideLabel={true}
+					label="Search input"
+					cssOverrides={searchInput}
+					name="q"
+					placeholder="Search"
+					data-link-name="nav2 : search"
+				/>
+
+				<Label hideLabel={true} text="google-search">
+					<div css={searchGlass}>
 						<SvgMagnifyingGlass
+							isAnnouncedByScreenReader={true}
+							size="medium"
+						/>
+					</div>
+				</Label>
+				<Button
+					icon={
+						<SvgArrowRightStraight
 							isAnnouncedByScreenReader={true}
 							size="medium"
 						/>
 					}
 					aria-label="Search with google"
+					cssOverrides={searchSubmit}
 					data-link-name="nav2 : search : submit"
 					type="submit"
-				>
-					Search
-				</LinkButton>
-			</div>
+				></Button>
+				<input
+					type="hidden"
+					name="as_sitesearch"
+					value="www.theguardian.com"
+				/>
+			</form>
 			<div css={lineStyle}></div>
 		</li>
 
