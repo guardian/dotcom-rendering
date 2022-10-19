@@ -3,7 +3,6 @@
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { some } from '@guardian/types';
 import type { FC } from 'react';
 import CaptionIcon, { CaptionIconVariant } from './captionIcon';
 
