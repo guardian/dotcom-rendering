@@ -256,7 +256,7 @@ export const Columns: React.FC<{
 				<Button
 					icon={
 						<SvgArrowRightStraight
-							isAnnouncedByScreenReader={true}
+							isAnnouncedByScreenReader={false}
 							size="medium"
 						/>
 					}
