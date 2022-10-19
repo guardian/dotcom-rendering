@@ -681,9 +681,14 @@ const backgroundArticle = (format: ArticleFormat): string => {
 const backgroundSeriesTitle = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return brandAltBackground.primary;
+
 	switch (format.display) {
-		case ArticleDisplay.Immersive:
+		case ArticleDisplay.Immersive: {
+			if (format.theme === ArticleSpecial.SpecialReportAlt)
+				return palette.specialReportAlt[300];
+
 			return pillarPalette[format.theme].main;
+		}
 		case ArticleDisplay.Showcase:
 		case ArticleDisplay.NumberedList:
 		case ArticleDisplay.Standard:
