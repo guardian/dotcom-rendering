@@ -243,6 +243,7 @@ export const Columns: React.FC<{
 					name="q"
 					placeholder="Search"
 					data-link-name="nav2 : search"
+					tabIndex={-1}
 				/>
 
 				<Label hideLabel={true} text="google-search">
@@ -264,6 +265,7 @@ export const Columns: React.FC<{
 					cssOverrides={searchSubmit}
 					data-link-name="nav2 : search : submit"
 					type="submit"
+					tabIndex={-1}
 				></Button>
 				<input
 					type="hidden"
