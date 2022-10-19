@@ -39,8 +39,10 @@ export interface RichLinkImageData {
 	height: string;
 }
 
-const neutralBackground = css`
-	background-color: ${neutral[97]};
+const neutralBackground = (format: ArticleFormat) => css`
+	background-color: ${format.design === ArticleDesign.Analysis
+		? neutral[100]
+		: neutral[97]};
 	a {
 		color: inherit;
 	}
@@ -247,7 +249,7 @@ export const RichLink = ({
 			css={pillarBackground(palette)}
 			data-name={(isPlaceholder && 'placeholder') || ''}
 		>
-			<div css={neutralBackground}>
+			<div css={neutralBackground(format)}>
 				<a css={richLinkLink} href={url}>
 					<div css={richLinkTopBorder(palette)} />
 					{!!showImage && (
