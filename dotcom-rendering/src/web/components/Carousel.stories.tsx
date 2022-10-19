@@ -1,12 +1,6 @@
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticlePillar,
-	ArticleSpecial,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import type { TrailType } from '../../types/trails';
-import { consentlessAds } from '../experiments/tests/consentless-ads';
 import { Carousel } from './Carousel.importable';
 import { Section } from './Section';
 
@@ -267,32 +261,32 @@ export const Immersive = () => (
 
 Immersive.story = 'Immersive carousel';
 
-export const SpecialReportAlt = () => {
-	const specialReportTrails = trails.forEach(
-		(trail) =>
-			(trail.format = {
-				theme: ArticleSpecial.SpecialReportAlt,
-				design: ArticleDesign.Standard,
-				display: ArticleDisplay.Standard,
-			}),
-	);
-	console.log(specialReportTrails);
-	return (
-		<>
-			<Section fullWidth={true}>
-				<Carousel
-					heading="Cottonopolis"
-					trails={specialReportTrails}
-					onwardsSource="curated-content"
-					format={{
-						theme: ArticleSpecial.SpecialReportAlt,
-						design: ArticleDesign.Standard,
-						display: ArticleDisplay.Standard,
-					}}
-				/>
-			</Section>
-		</>
-	);
-};
+// export const SpecialReportAlt = () => {
+// 	const specialReportTrails = trails.map(
+// 		(trail) =>
+// 			(trail.format = {
+// 				theme: ArticleSpecial.SpecialReportAlt,
+// 				design: ArticleDesign.Standard,
+// 				display: ArticleDisplay.Standard,
+// 			}),
+// 	);
+// 	console.log(specialReportTrails);
+// 	return (
+// 		<>
+// 			<Section fullWidth={true}>
+// 				<Carousel
+// 					heading="Cottonopolis"
+// 					trails={specialReportTrails}
+// 					onwardsSource="curated-content"
+// 					format={{
+// 						theme: ArticleSpecial.SpecialReportAlt,
+// 						design: ArticleDesign.Standard,
+// 						display: ArticleDisplay.Standard,
+// 					}}
+// 				/>
+// 			</Section>
+// 		</>
+// 	);
+// };
 
-SpecialReportAlt.story = 'SpecialReportAlt';
+// SpecialReportAlt.story = 'SpecialReportAlt';
