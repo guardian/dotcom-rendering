@@ -20,6 +20,7 @@ const generateName = (bundle) => {
  */
 const getLoaders = (bundle) => {
 	switch (bundle) {
+		case 'variant':
 		case 'legacy':
 			return [
 				{
@@ -48,8 +49,6 @@ const getLoaders = (bundle) => {
 					},
 				},
 			];
-		case 'variant':
-			return [];
 		case 'modern':
 			return [
 				{
@@ -89,7 +88,9 @@ module.exports = ({ bundle, sessionId }) => ({
 	entry:
 		bundle === 'variant'
 			? {
-					/* We do not serve any bundled JS to the variant */
+					/* We only serve core web vitals to the variant */
+					coreWebVitalsLegacy:
+						'./src/web/browser/coreWebVitalsLegacy/init.ts',
 			  }
 			: {
 					sentryLoader: './src/web/browser/sentryLoader/init.ts',
