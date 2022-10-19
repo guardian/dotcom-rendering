@@ -637,7 +637,7 @@ const articleContent = (format: ArticleFormat): string => {
 	}
 };
 
-const signUpFormDark = (_format: ArticleFormat): Colour => neutral[10];
+const newsletterSignUpFormDark = (_format: ArticleFormat): Colour => neutral[10];
 
 const editionsCameraIcon = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
@@ -704,7 +704,7 @@ const background = {
 	tagDark,
 	pinnedPost,
 	articleContent,
-	signUpFormDark,
+	newsletterSignUpFormDark,
 	editionsCameraIcon,
 };
 
