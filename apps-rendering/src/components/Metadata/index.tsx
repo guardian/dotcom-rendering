@@ -3,13 +3,11 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
+import ExtendedMetadata from './ExtendedMetadata';
 import GalleryMetadata from './GalleryMetadata';
 import ImmersiveMetadata from './ImmersiveMetadata';
 import LiveBlogMetadata from './LiveBlogMetadata';
-import DefaultMetadata, {
-	defaultStyles,
-	defaultTextStyles,
-} from './Metadata.defaults';
+import ShortMetadata from './ShortMetadata';
 
 // ----- Component ----- //
 
@@ -17,18 +15,18 @@ interface Props {
 	item: Item;
 }
 
-const Metadata: FC<Props> = (props: Props) => {
-	const { display, design } = props.item;
+const Metadata: FC<Props> = ({ item }: Props) => {
+	const { display, design } = item;
 
 	if (display === ArticleDisplay.Immersive) {
 		return (
 			<ImmersiveMetadata
-				format={getFormat(props.item)}
-				publishDate={props.item.publishDate}
-				commentCount={props.item.commentCount}
-				contributors={props.item.contributors}
-				commentable={props.item.commentable}
-				edition={props.item.edition}
+				format={getFormat(item)}
+				publishDate={item.publishDate}
+				commentCount={item.commentCount}
+				contributors={item.contributors}
+				commentable={item.commentable}
+				edition={item.edition}
 			/>
 		);
 	}
@@ -36,12 +34,12 @@ const Metadata: FC<Props> = (props: Props) => {
 	if (design === ArticleDesign.Gallery) {
 		return (
 			<GalleryMetadata
-				format={getFormat(props.item)}
-				publishDate={props.item.publishDate}
-				commentCount={props.item.commentCount}
-				contributors={props.item.contributors}
-				commentable={props.item.commentable}
-				edition={props.item.edition}
+				format={getFormat(item)}
+				publishDate={item.publishDate}
+				commentCount={item.commentCount}
+				contributors={item.contributors}
+				commentable={item.commentable}
+				edition={item.edition}
 			/>
 		);
 	} else if (
@@ -50,29 +48,15 @@ const Metadata: FC<Props> = (props: Props) => {
 		design === ArticleDesign.Editorial ||
 		design === ArticleDesign.Analysis
 	) {
-		return (
-			<DefaultMetadata
-				css={defaultStyles}
-				textCss={defaultTextStyles(false)}
-				withByline={false}
-				{...props}
-			/>
-		);
+		return <ShortMetadata item={item} />;
 	} else if (
 		design === ArticleDesign.LiveBlog ||
 		design === ArticleDesign.DeadBlog
 	) {
-		return <LiveBlogMetadata {...props} />;
+		return <LiveBlogMetadata item={item} />;
 	}
 
-	return (
-		<DefaultMetadata
-			css={defaultStyles}
-			textCss={defaultTextStyles(true)}
-			withByline={true}
-			{...props}
-		/>
-	);
+	return <ExtendedMetadata item={item} />;
 };
 
 // ----- Exports ----- //

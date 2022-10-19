@@ -11,13 +11,8 @@ import type { Item } from 'item';
 import type { FC } from 'react';
 
 export const defaultStyles = css`
-	display: flex;
-	margin-bottom: ${remSpace[5]};
-`;
-
-export const defaultTextStyles = (withByline: boolean): SerializedStyles => css`
 	flex-grow: 1;
-	padding-top: ${withByline ? remSpace[1] : 0};
+	padding-top: ${remSpace[1]};
 `;
 
 type Props = {
@@ -25,18 +20,12 @@ type Props = {
 	withByline: boolean;
 	css?: SerializedStyles;
 	className?: string;
-	textCss?: SerializedStyles;
 };
 
-const DefaultMetadata: FC<Props> = ({
-	item,
-	withByline,
-	className,
-	textCss,
-}: Props) => (
-	<div className={className}>
+const DefaultMetadata: FC<Props> = ({ item, withByline, className }: Props) => (
+	<>
 		{withByline && <Avatar {...item} />}
-		<div css={textCss}>
+		<div className={className}>
 			{withByline && <Byline {...item} />}
 			<Dateline
 				date={item.publishDate}
@@ -46,7 +35,7 @@ const DefaultMetadata: FC<Props> = ({
 			<Follow format={getFormat(item)} contributors={item.contributors} />
 		</div>
 		<CommentCount count={item.commentCount} {...item} />
-	</div>
+	</>
 );
 
 export default DefaultMetadata;

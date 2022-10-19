@@ -23,7 +23,12 @@ import type { Item } from 'item';
 import { useState } from 'react';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
-import { defaultStyles, defaultTextStyles } from './Metadata.defaults';
+import { defaultStyles } from './Metadata.defaults';
+
+const wrapperStyles = css`
+	display: flex;
+	margin-bottom: ${remSpace[5]};
+`;
 
 const blogStyles = (format: ArticleFormat): SerializedStyles => css`
 	background-color: ${format.design === ArticleDesign.DeadBlog
@@ -121,12 +126,13 @@ type Props = {
 const LiveBlogMetadata: FC<Props> = ({ item }: Props) => {
 	const [checked, setChecked] = useState<boolean>(false);
 	const isLive = item.design === ArticleDesign.LiveBlog;
+
 	return (
-		<div css={css(defaultStyles, blogStyles(getFormat(item)))}>
+		<div css={css(wrapperStyles, blogStyles(getFormat(item)))}>
 			<LiveblogMetadataLines isLive={isLive} />
 			<Logo item={item} />
 			<Avatar {...item} />
-			<div css={css(defaultTextStyles(true), liveBlogPadding)}>
+			<div css={css(defaultStyles, liveBlogPadding)}>
 				<div css={liveBylineStyles}>
 					<Byline {...item} />
 				</div>
