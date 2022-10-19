@@ -26,7 +26,7 @@ export const doHydration = async (
 
 	const { start, end } = initPerf(`hydrate-${name}`);
 	start();
-	return import(
+	await import(
 		/* webpackInclude: /\.importable\.tsx$/ */
 		/* webpackChunkName: "[request]" */
 		`../../components/${name}.importable`
