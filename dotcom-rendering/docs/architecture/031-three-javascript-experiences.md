@@ -45,7 +45,7 @@ Define three distinct JS experiences that help us clarify use cases.
 - **Zero JavaScript**: readers on browsers without JavaScript get no interactivity.
 
 | Feature         | Default JavaScript | Essential JavaScript | Zero Javascript |
-|=================|====================|======================|=================|
+|-----------------|--------------------|----------------------|-----------------|
 | `atomIframe`    | Yes                | No                   | No              |
 | `bootCmp`       | Yes                | No                   | No              |
 | `debug`         | Yes                | No                   | No              |
