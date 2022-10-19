@@ -3,15 +3,13 @@
 // ----- Imports ----- //
 
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { some } from '@guardian/types';
 import type { FC } from 'react';
-import { CaptionIconVariant } from './captionIcon';
-import FigCaption from './figCaption';
+import CaptionIcon, { CaptionIconVariant } from './captionIcon';
 
 // ----- Stories ----- //
 
 const Image: FC = () => (
-	<FigCaption
+	<CaptionIcon
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
@@ -19,15 +17,11 @@ const Image: FC = () => (
 		}}
 		supportsDarkMode={true}
 		variant={CaptionIconVariant.Image}
-	>
-		{some(
-			'Age of the train … a tourist train in Switzerland. Photograph: Kisa_Markiza/Getty Images',
-		)}
-	</FigCaption>
+	></CaptionIcon>
 );
 
 const Video: FC = () => (
-	<FigCaption
+	<CaptionIcon
 		format={{
 			design: ArticleDesign.Standard,
 			display: ArticleDisplay.Standard,
@@ -35,18 +29,14 @@ const Video: FC = () => (
 		}}
 		supportsDarkMode={true}
 		variant={CaptionIconVariant.Video}
-	>
-		{some(
-			'Age of the train … a tourist train in Switzerland. Photograph: Kisa_Markiza/Getty Images',
-		)}
-	</FigCaption>
+	></CaptionIcon>
 );
 
 // ----- Exports ----- //
 
 export default {
-	component: FigCaption,
-	title: 'Common/Components/FigCaption',
+	component: CaptionIcon,
+	title: 'Common/Components/CaptionIcon',
 };
 
 export { Image, Video };
