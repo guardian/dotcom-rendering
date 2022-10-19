@@ -6,10 +6,8 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import {
-	border,
 	brand,
 	brandAlt,
-	brandAltBackground,
 	culture,
 	labs,
 	lifestyle,
@@ -630,7 +628,8 @@ const textCardKicker = (format: ArticleFormat): string => {
 			format.design === ArticleDesign.Letter)
 	)
 		return brandAlt[400];
-	if (format.theme === ArticleSpecial.SpecialReportAlt) return palette.specialReportAlt[300];
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[300];
 	if (format.theme === ArticleSpecial.SpecialReport) return brandAlt[400];
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -1424,8 +1423,7 @@ const borderArticleLinkHover = (format: ArticleFormat): string => {
 };
 
 const topBarCard = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return neutral[60];
+	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[60];
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return brandAltBackground.primary;
 	if (format.design === ArticleDesign.Analysis) {
