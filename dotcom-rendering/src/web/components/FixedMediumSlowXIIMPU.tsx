@@ -72,7 +72,12 @@ const Card50_Card50 = ({
 				imagePositionOnMobile="top"
 			/>
 		</LI>
-		<LI percentage="50%" padSides={true} showDivider={true}>
+		<LI
+			percentage="50%"
+			padSides={true}
+			showDivider={true}
+			containerPalette={containerPalette}
+		>
 			<FrontCard
 				trail={trails[1]}
 				containerPalette={containerPalette}
@@ -110,7 +115,12 @@ const Card33_Card33_Card33 = ({
 				imagePositionOnMobile="top"
 			/>
 		</LI>
-		<LI percentage="33.333%" padSides={true} showDivider={true}>
+		<LI
+			percentage="33.333%"
+			padSides={true}
+			showDivider={true}
+			containerPalette={containerPalette}
+		>
 			<FrontCard
 				trail={trails[1]}
 				containerPalette={containerPalette}
@@ -119,7 +129,12 @@ const Card33_Card33_Card33 = ({
 				imagePositionOnMobile="left"
 			/>
 		</LI>
-		<LI percentage="33.333%" padSides={true} showDivider={true}>
+		<LI
+			percentage="33.333%"
+			padSides={true}
+			showDivider={true}
+			containerPalette={containerPalette}
+		>
 			<FrontCard
 				trail={trails[2]}
 				containerPalette={containerPalette}
@@ -159,7 +174,11 @@ const Card66_Ad33 = ({
 				imagePositionOnMobile="top"
 			/>
 		</LI>
-		<LI percentage="33.333%" showDivider={true}>
+		<LI
+			percentage="33.333%"
+			showDivider={true}
+			containerPalette={containerPalette}
+		>
 			<Hide until="tablet">
 				<AdSlot position="inline" index={index} />
 			</Hide>
@@ -202,7 +221,12 @@ const Card33_Card33_Ad33 = ({
 				}
 			/>
 		</LI>
-		<LI percentage="33.333%" padSides={true} showDivider={true}>
+		<LI
+			percentage="33.333%"
+			padSides={true}
+			showDivider={true}
+			containerPalette={containerPalette}
+		>
 			<FrontCard
 				trail={trails[1]}
 				containerPalette={containerPalette}
@@ -220,7 +244,11 @@ const Card33_Card33_Ad33 = ({
 				}
 			/>
 		</LI>
-		<LI percentage="33.333%" showDivider={true}>
+		<LI
+			percentage="33.333%"
+			showDivider={true}
+			containerPalette={containerPalette}
+		>
 			<Hide until="tablet">
 				<AdSlot position="inline" index={index} />
 			</Hide>
@@ -368,7 +396,11 @@ export const FixedMediumSlowXIIMPU = ({
 								)}
 							</UL>
 						</LI>
-						<LI percentage="33.333%" showDivider={true}>
+						<LI
+							percentage="33.333%"
+							showDivider={true}
+							containerPalette={containerPalette}
+						>
 							<Hide until="tablet">
 								<AdSlot position="inline" index={index} />
 							</Hide>

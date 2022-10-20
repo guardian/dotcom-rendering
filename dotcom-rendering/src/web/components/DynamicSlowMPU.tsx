@@ -39,7 +39,11 @@ const Card33_ColumnOfThree33_Ad33 = ({
 				showAge={showAge}
 			/>
 		</LI>
-		<LI percentage="33.333%" showDivider={true}>
+		<LI
+			percentage="33.333%"
+			showDivider={true}
+			containerPalette={containerPalette}
+		>
 			<UL direction="column">
 				<LI padSides={true}>
 					<FrontCard
@@ -160,7 +164,12 @@ const Card50_Card25_Card25 = ({
 				supportingContent={cards[0].supportingContent}
 			/>
 		</LI>
-		<LI percentage="25%" padSides={true} showDivider={true}>
+		<LI
+			percentage="25%"
+			padSides={true}
+			showDivider={true}
+			containerPalette={containerPalette}
+		>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -176,7 +185,12 @@ const Card50_Card25_Card25 = ({
 				}
 			/>
 		</LI>
-		<LI percentage="25%" padSides={true} showDivider={true}>
+		<LI
+			percentage="25%"
+			padSides={true}
+			showDivider={true}
+			containerPalette={containerPalette}
+		>
 			<FrontCard
 				trail={cards[2]}
 				containerPalette={containerPalette}

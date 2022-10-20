@@ -28,7 +28,12 @@ export const FixedSmallSlowVMPU = ({
 					showAge={showAge}
 				/>
 			</LI>
-			<LI percentage="33.333%" padSides={true} showDivider={true}>
+			<LI
+				percentage="33.333%"
+				padSides={true}
+				showDivider={true}
+				containerPalette={containerPalette}
+			>
 				<UL direction="column">
 					<LI>
 						<FrontCard
@@ -59,7 +64,12 @@ export const FixedSmallSlowVMPU = ({
 					</LI>
 				</UL>
 			</LI>
-			<LI percentage="33.333%" padSides={true} showDivider={true}>
+			<LI
+				percentage="33.333%"
+				padSides={true}
+				showDivider={true}
+				containerPalette={containerPalette}
+			>
 				<Hide until="tablet">
 					<AdSlot position="inline" index={index} />
 				</Hide>

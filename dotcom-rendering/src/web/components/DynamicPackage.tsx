@@ -99,7 +99,12 @@ const Card75_Card25 = ({
 					trailText={cards[0].trailText}
 				/>
 			</LI>
-			<LI padSides={true} percentage="25%" showDivider={true}>
+			<LI
+				padSides={true}
+				percentage="25%"
+				showDivider={true}
+				containerPalette={containerPalette}
+			>
 				<FrontCard
 					trail={cards[1]}
 					containerPalette={containerPalette}
@@ -238,7 +243,11 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 					</LI>
 				);
 			})}
-			<LI showDivider={true} percentage="50%">
+			<LI
+				showDivider={true}
+				containerPalette={containerPalette}
+				percentage="50%"
+			>
 				<UL direction="row" wrapCards={true}>
 					{remaining.map((card, cardIndex) => {
 						return (
@@ -247,6 +256,7 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 								key={card.url}
 								padSides={true}
 								showDivider={true}
+								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
 									remaining.length,
@@ -297,7 +307,11 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 					</LI>
 				);
 			})}
-			<LI showDivider={true} percentage="75%">
+			<LI
+				showDivider={true}
+				containerPalette={containerPalette}
+				percentage="75%"
+			>
 				<UL direction="row" wrapCards={true}>
 					{remaining.map((card, cardIndex) => {
 						return (
@@ -306,6 +320,7 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 								key={card.url}
 								padSides={true}
 								showDivider={true}
+								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
 									remaining.length,
@@ -355,7 +370,11 @@ const Card75_ColumnOfCards25 = ({
 					isDynamo={true}
 				/>
 			</LI>
-			<LI showDivider={true} percentage="25%">
+			<LI
+				showDivider={true}
+				containerPalette={containerPalette}
+				percentage="25%"
+			>
 				<UL direction="column">
 					{remaining.map((card, cardIndex) => {
 						return (

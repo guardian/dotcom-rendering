@@ -34,7 +34,12 @@ const ColumnOfCards50_Card50 = ({
 
 	return (
 		<UL direction="row-reverse">
-			<LI percentage="50%" padSides={true} showDivider={true}>
+			<LI
+				percentage="50%"
+				padSides={true}
+				showDivider={true}
+				containerPalette={containerPalette}
+			>
 				<FrontCard
 					trail={big}
 					containerPalette={containerPalette}
@@ -87,7 +92,12 @@ const ColumnOfCards50_Card25_Card25 = ({
 		<UL direction="row-reverse">
 			{bigs.map((big) => {
 				return (
-					<LI percentage="25%" padSides={true} showDivider={true}>
+					<LI
+						percentage="25%"
+						padSides={true}
+						showDivider={true}
+						containerPalette={containerPalette}
+					>
 						<FrontCard
 							trail={big}
 							containerPalette={containerPalette}

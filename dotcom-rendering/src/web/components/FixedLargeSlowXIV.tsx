@@ -37,7 +37,12 @@ export const FixedLargeSlowXIV = ({
 						trailText={primary.trailText}
 					/>
 				</LI>
-				<LI padSides={true} showDivider={true} percentage="25%">
+				<LI
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+					percentage="25%"
+				>
 					<FrontCard
 						trail={secondary}
 						starRating={secondary.starRating}

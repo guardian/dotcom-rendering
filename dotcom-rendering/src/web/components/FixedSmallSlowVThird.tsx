@@ -38,7 +38,7 @@ export const FixedSmallSlowVThird = ({
 					</LI>
 				);
 			})}
-			<LI showDivider={true} percentage="50%">
+			<LI showDivider={true} containerPalette={containerPalette} percentage="50%">
 				<UL direction="column">
 					{secondaries.map((trail) => {
 						return (
