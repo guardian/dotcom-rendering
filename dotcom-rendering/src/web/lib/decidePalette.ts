@@ -1704,7 +1704,7 @@ const backgroundCarouselDot = (format: ArticleFormat): string => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
+			return palette.specialReportAlt[100];
 	}
 };
 
