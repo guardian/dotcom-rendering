@@ -1658,6 +1658,8 @@ const textSignInLink = (format: ArticleFormat): string => {
 };
 
 const textCarouselTitle = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[7];
+
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
 			case ArticlePillar.News:
