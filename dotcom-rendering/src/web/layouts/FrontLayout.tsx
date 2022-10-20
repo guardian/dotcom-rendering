@@ -19,6 +19,7 @@ import { MostViewedFooter } from '../components/MostViewedFooter';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
+import { ShowMore } from '../components/ShowMore.importable';
 import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { DecideContainer } from '../lib/DecideContainer';
@@ -403,6 +404,20 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										collection.displayName === 'Headlines'
 									}
 								/>
+								{collection.hasMore && (
+									<Island
+										deferUntil="visible"
+										clientOnly={false}
+									>
+										<ShowMore
+											containerTitle={
+												collection.displayName
+											}
+											containerId={collection.id}
+											path={front.pressedPage.id}
+										/>
+									</Island>
+								)}
 							</Section>
 							{decideAdSlot(
 								index,
