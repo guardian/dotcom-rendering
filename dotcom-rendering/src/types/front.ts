@@ -319,6 +319,7 @@ export type DCRCollectionType = {
 	config: {
 		showDateHeader: boolean;
 	};
+	hasMore?: boolean;
 };
 
 export type DCRGroupedTrails = {
