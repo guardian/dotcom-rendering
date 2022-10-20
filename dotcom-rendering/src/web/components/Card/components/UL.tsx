@@ -1,8 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source-foundations';
-import { container } from 'webpack';
 import type { DCRContainerPalette } from 'src/types/front';
-import type { ContainerOverrides } from 'src/types/palette';
 import { decideContainerOverrides } from 'src/web/lib/decideContainerOverrides';
 import { verticalDivider } from '../../../lib/verticalDivider';
 

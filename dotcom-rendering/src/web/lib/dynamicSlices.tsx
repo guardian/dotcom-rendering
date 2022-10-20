@@ -79,7 +79,12 @@ export const Card50_Card50 = ({
 				headlineSize="large"
 			/>
 		</LI>
-		<LI percentage="50%" padSides={true} showDivider={true} containerPalette={containerPalette}>
+		<LI
+			percentage="50%"
+			padSides={true}
+			showDivider={true}
+			containerPalette={containerPalette}
+		>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -121,7 +126,12 @@ export const Card75_Card25 = ({
 				headlineSize="large"
 			/>
 		</LI>
-		<LI percentage="25%" padSides={true} showDivider={true} containerPalette={containerPalette}>
+		<LI
+			percentage="25%"
+			padSides={true}
+			showDivider={true}
+			containerPalette={containerPalette}
+		>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -169,7 +179,12 @@ export const Card25_Card75 = ({
 				showAge={showAge}
 			/>
 		</LI>
-		<LI percentage="75%" padSides={true} showDivider={true} containerPalette={containerPalette}>
+		<LI
+			percentage="75%"
+			padSides={true}
+			showDivider={true}
+			containerPalette={containerPalette}
+		>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -212,7 +227,12 @@ export const Card66_Card33 = ({
 				imagePositionOnMobile="top"
 			/>
 		</LI>
-		<LI percentage="33.333%" padSides={true} showDivider={true} containerPalette={containerPalette}>
+		<LI
+			percentage="33.333%"
+			padSides={true}
+			showDivider={true}
+			containerPalette={containerPalette}
+		>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -254,7 +274,12 @@ export const Card50_Card25_Card25 = ({
 				supportingContent={cards[0].supportingContent}
 			/>
 		</LI>
-		<LI percentage="25%" padSides={true} showDivider={true} containerPalette={containerPalette}>
+		<LI
+			percentage="25%"
+			padSides={true}
+			showDivider={true}
+			containerPalette={containerPalette}
+		>
 			<FrontCard
 				trail={cards[1]}
 				containerPalette={containerPalette}
@@ -271,7 +296,12 @@ export const Card50_Card25_Card25 = ({
 				}
 			/>
 		</LI>
-		<LI percentage="25%" padSides={true} showDivider={true} containerPalette={containerPalette}>
+		<LI
+			percentage="25%"
+			padSides={true}
+			showDivider={true}
+			containerPalette={containerPalette}
+		>
 			<FrontCard
 				trail={cards[2]}
 				containerPalette={containerPalette}

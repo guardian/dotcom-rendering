@@ -69,7 +69,6 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 				percentage="25%"
 				showDivider={true}
 				containerPalette={containerPalette}
-				containerPalette={containerPalette}
 			>
 				<UL direction="column">
 					{columnOne.map((card, cardIndex) => {
