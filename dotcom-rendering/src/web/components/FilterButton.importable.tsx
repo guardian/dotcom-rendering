@@ -44,7 +44,7 @@ const buttonStyles = (palette: Palette) => css`
 	/* This hides the Source spacedFocusHalo so we only see the DCR halo.
 	*  Without the !important we see both styles simultaneously.
 	*/
-	*:focus {
+	&:focus {
 		/* stylelint-disable-next-line declaration-no-important */
 		outline: none !important;
 	}
