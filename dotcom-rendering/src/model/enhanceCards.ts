@@ -140,8 +140,12 @@ export const enhanceCards = (
 			? enhanceTags(faciaCard.properties.maybeContent.tags.tags)
 			: [];
 
-		// The URL parameter on a Snap header will be a link to the Snap itself, there is a second href
-		// property which contains what the snap is actually linking to.
+		/**
+		 * The URL parameter on a Snap header will be a link to the Snap itself, there is a second href
+		 * property which contains what the snap is actually linking to. This is commonly used in the
+		 * NavList container for linking to non-article pages.
+		 * @see NavList
+		 */
 		const url =
 			faciaCard.type === 'LinkSnap' && faciaCard.properties.href
 				? faciaCard.properties.href
