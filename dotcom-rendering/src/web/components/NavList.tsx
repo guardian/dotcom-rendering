@@ -19,7 +19,7 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 };
 
-const ulStyles = css`
+const ulStyles = (containerOverrides?: ContainerOverrides) => css`
 	${until.tablet} {
 		column-count: 1;
 	}
@@ -28,7 +28,8 @@ const ulStyles = css`
 	}
 	column-count: 4;
 
-	column-rule: 1px solid ${border.secondary};
+	column-rule: 1px solid
+		${containerOverrides ? containerOverrides.divider : border.secondary};
 	column-gap: 10px;
 `;
 
@@ -51,7 +52,7 @@ export const NavList = ({ trails, containerPalette }: Props) => {
 		containerPalette && decideContainerOverrides(containerPalette);
 
 	return (
-		<ul css={ulStyles}>
+		<ul css={ulStyles(containerOverrides)}>
 			{trails.map((trail) => (
 				<li css={liStyles(containerOverrides)}>
 					<Link
