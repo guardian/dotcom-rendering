@@ -18,7 +18,7 @@ export const FixedSmallFastVIII = ({
 }: Props) => {
 	if (!trails[0]) return null;
 	const primaries = trails.slice(0, 2);
-	const remaining = trails.slice(2, 7);
+	const remaining = trails.slice(2, 8);
 
 	return (
 		<UL direction="row" wrapCards={true}>
