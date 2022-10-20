@@ -58,6 +58,7 @@ export const NavList = ({ trails, containerPalette }: Props) => {
 						href={trail.url}
 						priority="secondary"
 						subdued={true}
+						data-link-name={trail.dataLinkName}
 						cssOverrides={css`
 							${body.medium()}
 							font-weight: bold;
