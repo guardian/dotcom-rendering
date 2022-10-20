@@ -6,8 +6,10 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import {
+	border,
 	brand,
 	brandAlt,
+	brandAltBackground,
 	culture,
 	labs,
 	lifestyle,
@@ -655,8 +657,6 @@ const textCardKicker = (format: ArticleFormat): string => {
 					return culture[500];
 				case ArticleSpecial.Labs:
 					return labs[400];
-				case ArticleSpecial.SpecialReportAlt:
-					return news[600];
 			}
 		default:
 			return pillarPalette[format.theme].main;
