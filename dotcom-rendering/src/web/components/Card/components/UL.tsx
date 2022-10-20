@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source-foundations';
 import type { DCRContainerPalette } from 'src/types/front';
-import { decideContainerOverrides } from 'src/web/lib/decideContainerOverrides';
 import { verticalDivider } from '../../../lib/verticalDivider';
 
 type Direction = 'row' | 'column' | 'row-reverse';
@@ -48,13 +47,11 @@ export const UL = ({
 	wrapCards = false,
 	containerPalette,
 }: Props) => {
-	const containerOverrides =
-		containerPalette && decideContainerOverrides(containerPalette);
 	return (
 		<ul
 			css={[
 				ulStyles(direction),
-				showDivider && verticalDivider(containerOverrides),
+				showDivider && verticalDivider(containerPalette),
 				padBottom && marginBottomStyles,
 				wrapCards && wrapStyles,
 			]}

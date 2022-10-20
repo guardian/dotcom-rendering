@@ -1,8 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source-foundations';
 import type { DCRContainerPalette } from 'src/types/front';
-import type { ContainerOverrides } from 'src/types/palette';
-import { decideContainerOverrides } from 'src/web/lib/decideContainerOverrides';
 import { verticalDivider } from '../../../lib/verticalDivider';
 import { verticalDividerWithBottomOffset } from '../../../lib/verticalDividerWithBottomOffset';
 
@@ -63,11 +61,11 @@ const decideSize = (percentage?: CardPercentageType, stretch?: boolean) => {
 const decideDivider = (
 	offsetBottomPaddingOnDivider: boolean,
 	paddingSize: string,
-	containerOverrides?: ContainerOverrides,
+	containerPalette?: DCRContainerPalette,
 ) =>
 	offsetBottomPaddingOnDivider
-		? verticalDividerWithBottomOffset(paddingSize, containerOverrides)
-		: verticalDivider(containerOverrides);
+		? verticalDividerWithBottomOffset(paddingSize, containerPalette)
+		: verticalDivider(containerPalette);
 
 type Props = {
 	children: React.ReactNode;
@@ -103,8 +101,6 @@ export const LI = ({
 }: Props) => {
 	// Decide sizing
 	const sizeStyles = decideSize(percentage, stretch);
-	const containerOverrides =
-		containerPalette && decideContainerOverrides(containerPalette);
 
 	return (
 		<li
@@ -115,7 +111,7 @@ export const LI = ({
 					decideDivider(
 						offsetBottomPaddingOnDivider,
 						GAP_SIZE,
-						containerOverrides,
+						containerPalette,
 					),
 				padSides && sidePaddingStyles(padSidesOnMobile),
 				snapAlignStart && snapAlignStartStyles,

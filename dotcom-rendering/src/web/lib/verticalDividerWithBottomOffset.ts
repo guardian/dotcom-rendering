@@ -1,12 +1,16 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { border, from } from '@guardian/source-foundations';
-import type { ContainerOverrides } from 'src/types/palette';
+import type { DCRContainerPalette } from 'src/types/front';
+import { decideContainerOverrides } from './decideContainerOverrides';
 
 export function verticalDividerWithBottomOffset(
 	bottomPaddingSize: string,
-	containerOverrides?: ContainerOverrides,
+	containerPalette?: DCRContainerPalette,
 ): SerializedStyles {
+	const containerOverrides =
+		containerPalette && decideContainerOverrides(containerPalette);
+
 	return css`
 		${from.tablet} {
 			:before {
