@@ -3,13 +3,15 @@ import {
 	brand,
 	brandAlt,
 	brandText,
-	focusHalo,
 	from,
 	textSans,
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import type { PillarType } from '../../../../model/extract-nav';
+import type {
+	EditionLinkType,
+	PillarType,
+} from '../../../../model/extract-nav';
 import { CollapseColumnButton } from './CollapseColumnButton';
 
 // CSS
@@ -36,7 +38,6 @@ const pillarDivider = css`
 `;
 
 const columnLinkTitle = css`
-	overflow: clip;
 	${textSans.medium({ lineHeight: 'tight' })};
 	background-color: transparent;
 	text-decoration: none;
@@ -59,10 +60,6 @@ const columnLinkTitle = css`
 	${from.desktop} {
 		font-size: 16px;
 		padding: 6px 0;
-		:hover,
-		:focus {
-			${focusHalo};
-		}
 	}
 
 	:hover,
@@ -76,8 +73,9 @@ const columnLinkTitle = css`
 	}
 `;
 
-const mainMenuLinkStyle = css`
+export const mainMenuLinkStyle = css`
 	box-sizing: border-box;
+	overflow: hidden;
 	position: relative;
 	width: 100%;
 	${from.desktop} {
@@ -85,7 +83,7 @@ const mainMenuLinkStyle = css`
 	}
 `;
 
-const columnLinks = css`
+export const columnLinks = css`
 	${textSans.medium()};
 	box-sizing: border-box;
 	display: flex;
@@ -202,15 +200,18 @@ const columnStyle = css`
 export const Column = ({
 	column,
 	index,
-	isLastColumn,
+	showLineBelow,
 }: {
-	column: PillarType;
+	column: PillarType | EditionLinkType;
 	index: number;
-	isLastColumn: boolean;
+	showLineBelow: boolean;
 }) => {
 	// As the elements are dynamic we need to specify the IDs here
-	const columnInputId = `${column.title}-checkbox-input`;
-	const collapseColumnInputId = `${column.title}-button`;
+	//Replace whitespace with hyphen https://stackoverflow.com/questions/3794919/replace-all-spaces-in-a-string-with/3795147#3795147
+	const columnId = column.title.split(' ').join('-');
+	const columnInputId = `${columnId}-checkbox-input`;
+	const collapseColumnInputId = `${columnId}-button`;
+	const ariaControls = `${columnId.toLowerCase()}Links`;
 
 	return (
 		<li css={[columnStyle, pillarDivider]} role="none">
@@ -260,7 +261,7 @@ export const Column = ({
 				collapseColumnInputId={collapseColumnInputId}
 				title={column.title}
 				columnInputId={columnInputId}
-				ariaControls={`${column.title.toLowerCase()}Links`}
+				ariaControls={ariaControls}
 			/>
 
 			{/* ColumnLinks */}
@@ -268,12 +269,12 @@ export const Column = ({
 				css={[
 					columnLinks,
 					index === 0 && firstColumnLinks,
-					!!column.pillar && pillarColumnLinks,
+					!!column.children && pillarColumnLinks,
 					hideWhenNotChecked(columnInputId),
 				]}
 				role="menu"
-				id={`${column.title.toLowerCase()}Links`}
-				data-cy={`${column.title.toLowerCase()}Links`}
+				id={ariaControls}
+				data-cy={ariaControls}
 			>
 				{(column.children || []).map((link) => (
 					<li
@@ -298,7 +299,7 @@ export const Column = ({
 					</li>
 				))}
 			</ul>
-			{isLastColumn && (
+			{showLineBelow && (
 				<div css={[hideWhenChecked(columnInputId), lineStyle]}></div>
 			)}
 		</li>

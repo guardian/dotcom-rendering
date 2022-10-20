@@ -108,7 +108,6 @@ export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
                         var firstColLabel = document.getElementById('News-button')
                         var firstColLink = document.querySelectorAll('#newsLinks > li:nth-of-type(2) > a')[0]
 
-
                         var focusOnFirstNavElement = function(){
                           // need to focus on first element in list, firstColLabel is not viewable on desktop
                           if(window.getComputedStyle(firstColLabel).display === 'none'){
@@ -230,7 +229,7 @@ export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
 					dataLinkName="nav2"
 					isTopNav={true}
 				/>
-				<ExpandedMenu nav={nav} format={format} />
+				<ExpandedMenu editionId={editionId} nav={nav} format={format} />
 			</div>
 			{displayRoundel && (
 				<PositionRoundel>
