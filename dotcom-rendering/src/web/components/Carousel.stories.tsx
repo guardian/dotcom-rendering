@@ -282,7 +282,7 @@ export const SpecialReportAlt = () => {
 		<>
 			<Section fullWidth={true}>
 				<Carousel
-					heading="Cottonopolis"
+					heading="SpecialReportAlt"
 					trails={specialReportTrails}
 					onwardsSource="curated-content"
 					format={{
