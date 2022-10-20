@@ -15,7 +15,6 @@ import {
 	labs,
 	specialReport,
 	neutral,
-	palette,
 } from '@guardian/source-foundations';
 import { Colour } from '.';
 
@@ -69,7 +68,7 @@ const commentCount = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
-			return palette.specialReportAlt[300];
+			return news[300];
 	}
 };
 const commentCountDark = (format: ArticleFormat): Colour => {

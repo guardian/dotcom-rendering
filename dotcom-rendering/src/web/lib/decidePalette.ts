@@ -16,7 +16,6 @@ import {
 	neutral,
 	news,
 	opinion,
-	palette,
 	specialReport,
 	sport,
 	text,
@@ -1621,7 +1620,7 @@ const hoverSummaryEventBullet = (format: ArticleFormat): string => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[200];
 		case ArticleSpecial.SpecialReportAlt:
-			return palette.specialReportAlt[200];
+			return news[200];
 	}
 };
 

@@ -17,9 +17,7 @@ import {
 	specialReport,
 	labs,
 	brandAlt,
-	palette,
 } from '@guardian/source-foundations';
-// import { specialReportAlt } from '@guardian/source-foundations/dist/cjs/colour/palette';
 import { Colour } from '.';
 
 // ----- Functions ----- //
@@ -142,7 +140,7 @@ const richLinkSvg = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return specialReport[300];
+			return news[400];
 	}
 };
 
@@ -163,7 +161,7 @@ const liveblogMetadata = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[200];
 		case ArticleSpecial.SpecialReportAlt:
-			return palette.specialReportAlt[200];
+			return news[200];
 	}
 };
 
