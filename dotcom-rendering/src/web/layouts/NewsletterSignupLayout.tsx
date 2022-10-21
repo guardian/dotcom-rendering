@@ -133,6 +133,7 @@ const previewCaptionStyle = css`
 	background-color: ${brandAlt[400]};
 	padding: ${space[1]}px ${space[3]}px;
 	${textSans.medium({ fontWeight: 'bold' })};
+	text-decoration: none;
 
 	:hover {
 		text-decoration: initial;
@@ -436,7 +437,6 @@ export const NewsletterSignupLayout: React.FC<Props> = ({
 											target="_blank"
 											icon={<SvgEye size="medium" />}
 											priority="secondary"
-											subdued={true}
 										>
 											Click here to see the latest version
 											of this newsletter
