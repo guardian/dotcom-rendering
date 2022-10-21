@@ -55,7 +55,6 @@ export const DecideContainer = ({
 				/>
 			);
 		case 'dynamic/slow-mpu':
-			// return null;
 			return (
 				<DynamicSlowMPU
 					groupedTrails={groupedTrails}
