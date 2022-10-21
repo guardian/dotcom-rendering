@@ -357,7 +357,7 @@ const relatedCardBylineImage = (format: ArticleFormat): string => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
+			return opinion[400];
 		case ArticlePillar.News:
 		default:
 			return opinion[400];

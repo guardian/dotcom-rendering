@@ -1162,7 +1162,7 @@ const borderCardSupporting = (format: ArticleFormat): string => {
 				case ArticleSpecial.SpecialReport:
 					return brandAlt[400];
 				case ArticleSpecial.SpecialReportAlt:
-					return news[400];
+					return news[600];
 				case ArticlePillar.News:
 					return news[600];
 				case ArticlePillar.Sport:

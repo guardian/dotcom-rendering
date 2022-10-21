@@ -68,7 +68,7 @@ const commentCount = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[300];
+			return news[400];
 	}
 };
 const commentCountDark = (format: ArticleFormat): Colour => {

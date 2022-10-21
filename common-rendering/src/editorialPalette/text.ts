@@ -999,7 +999,7 @@ const richLink = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[500];
+			return news[400];
 	}
 };
 
