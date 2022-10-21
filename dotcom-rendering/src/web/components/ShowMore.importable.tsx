@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { isUndefined } from '@guardian/libs';
 import { from, space } from '@guardian/source-foundations';
 import { Button, SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { useState } from 'react';
@@ -43,9 +44,13 @@ export const ShowMore = ({ containerTitle, path, containerId }: Props) => {
 		);
 	}
 
+	const [cardLinks, setCardLinks] = useState<string[]>([]);
+
 	useOnce(() => {
-		const cardLinks = findCardLinks();
-		console.log(cardLinks);
+		const linksArray: string[] = findCardLinks().filter(
+			(item): item is string => !!item,
+		);
+		setCardLinks(linksArray);
 	}, [containerId]);
 
 	const [isOpen, setIsOpen] = useState(false);
@@ -63,7 +68,9 @@ export const ShowMore = ({ containerTitle, path, containerId }: Props) => {
 		: undefined;
 	const { data, loading } = useApi<FEFrontCard[]>(url);
 
-	//data = data?.filter(cardLinks
+	const filteredData =
+		data &&
+		enhanceCards(data).filter((card) => !cardLinks.includes(card.url));
 
 	/**
 		@todo: Semantics for the button and the new container (sub-container?)
@@ -71,15 +78,14 @@ export const ShowMore = ({ containerTitle, path, containerId }: Props) => {
 		@todo: Appropriate semantics for indicating state (aria-live, aria-expanded etc.)?
 		@todo: can we avoid hard-coding the API URL?
 		@todo: handle errors
-		@todo: deduping
-			@todo: get visibleCardIds from DOM instead of as a prop
 		@todo: rename props to match Front type?
 		@todo: make sure that the new content doesn't shift the top of the viewport when it loads
+		@todo: make sure the new cards that get loaded are layed out properly (not just as a list)
 	*/
 
 	return (
 		<>
-			{data && (
+			{filteredData && (
 				<>
 					<div
 						css={css`
@@ -87,7 +93,7 @@ export const ShowMore = ({ containerTitle, path, containerId }: Props) => {
 						`}
 					/>
 					<UL>
-						{enhanceCards(data).map((trail) => (
+						{filteredData.map((trail) => (
 							<LI key={trail.url} padSides={true}>
 								<FrontCard trail={trail} imageUrl={undefined} />
 							</LI>
