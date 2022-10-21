@@ -5,6 +5,7 @@ import { useState } from 'react';
 import type { FEFrontCard } from 'src/types/front';
 import { enhanceCards } from '../../model/enhanceCards';
 import { useApi } from '../lib/useApi';
+import { useOnce } from '../lib/useOnce';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
 import { FrontCard } from './FrontCard';
@@ -30,6 +31,23 @@ type Props = {
 };
 
 export const ShowMore = ({ containerTitle, path, containerId }: Props) => {
+	function findCardLinks() {
+		const containerNode = document.getElementById(
+			'container-' + containerId,
+		);
+		const containerLinksArray = Array.from(
+			containerNode?.querySelectorAll('a') ?? [],
+		);
+		return containerLinksArray.map(
+			(Element) => Element.attributes.getNamedItem('href')?.value,
+		);
+	}
+
+	useOnce(() => {
+		const cardLinks = findCardLinks();
+		console.log(cardLinks);
+	}, [containerId]);
+
 	const [isOpen, setIsOpen] = useState(false);
 
 	function toggleOpen() {
@@ -44,6 +62,8 @@ export const ShowMore = ({ containerTitle, path, containerId }: Props) => {
 		? `https://api.nextgen.guardianapps.co.uk/${path}/show-more/${containerId}.json?dcr=true`
 		: undefined;
 	const { data, loading } = useApi<FEFrontCard[]>(url);
+
+	//data = data?.filter(cardLinks
 
 	/**
 		@todo: Semantics for the button and the new container (sub-container?)
