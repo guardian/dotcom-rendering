@@ -35,6 +35,7 @@ const TextTreat = ({
 			subdued={true}
 			cssOverrides={css`
 				${textSans.xsmall()}
+				text-decoration: none;
 			`}
 			href={linkTo}
 		>

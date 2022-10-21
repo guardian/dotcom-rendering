@@ -176,7 +176,6 @@ const WithLink = ({
 		return (
 			<Link
 				href={linkTo}
-				subdued={true}
 				cssOverrides={css`
 					/* See: https://css-tricks.com/nested-links/ */
 					${getZIndex('card-nested-link')}
