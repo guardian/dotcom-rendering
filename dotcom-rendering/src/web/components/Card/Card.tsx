@@ -260,7 +260,6 @@ export const Card = ({
 							data-ignore="global-link-styling"
 							data-link-name="Comment count"
 							href={`${linkTo}#comments`}
-							subdued={true}
 							cssOverrides={css`
 								/* See: https://css-tricks.com/nested-links/ */
 								${getZIndex('card-nested-link')}
@@ -270,6 +269,7 @@ export const Card = ({
 								font-family: inherit;
 								font-size: inherit;
 								line-height: inherit;
+								text-decoration: none;
 							`}
 						/>
 					) : undefined
