@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { isUndefined } from '@guardian/libs';
 import { from, space } from '@guardian/source-foundations';
 import { Button, SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { useState } from 'react';
