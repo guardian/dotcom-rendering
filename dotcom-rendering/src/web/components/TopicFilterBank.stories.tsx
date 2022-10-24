@@ -23,6 +23,10 @@ const availableTopicsWithLowerCount: Topic[] = [
 	{ type: 'PERSON', value: 'Cameron', count: 1 },
 ];
 
+const onlyAvailableTopicsWithLowCount: Topic[] = [
+	{ type: 'PERSON', value: 'Iain Duncan Smith', count: 2 },
+];
+
 const selectedTopics: Topic[] = [{ type: 'GPE', value: 'United Kingdom' }];
 
 const format = {
@@ -123,4 +127,22 @@ export const notShowingTopicsWithLowerCounts = () => {
 };
 notShowingTopicsWithLowerCounts.story = {
 	name: 'notShowingTopicsWithLowerCounts',
+};
+
+export const doesNotRenderWhenNoKeyEventsOrRelevantTopics = () => {
+	return (
+		<Wrapper>
+			<TopicFilterBank
+				id="key-events-carousel-desktop"
+				availableTopics={onlyAvailableTopicsWithLowCount}
+				selectedTopics={selectedTopics}
+				format={format}
+				keyEvents={[]}
+				filterKeyEvents={false}
+			/>
+		</Wrapper>
+	);
+};
+doesNotRenderWhenNoKeyEventsOrRelevantTopics.story = {
+	name: 'doesNotRenderWhenNoKeyEventsOrRelevantTopics',
 };
