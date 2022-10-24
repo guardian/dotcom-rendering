@@ -31,6 +31,8 @@ const pagination = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
