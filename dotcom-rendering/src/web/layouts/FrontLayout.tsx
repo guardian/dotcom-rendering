@@ -415,6 +415,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											}
 											containerId={collection.id}
 											path={front.pressedPage.id}
+											containerPalette={
+												collection.containerPalette
+											}
+											showAge={
+												collection.displayName ===
+												'Headlines'
+											}
 										/>
 									</Island>
 								)}

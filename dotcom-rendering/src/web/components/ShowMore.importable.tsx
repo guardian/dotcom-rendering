@@ -2,8 +2,9 @@ import { css } from '@emotion/react';
 import { from, space } from '@guardian/source-foundations';
 import { Button, SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { useState } from 'react';
-import type { FEFrontCard } from 'src/types/front';
+import type { DCRContainerPalette, FEFrontCard } from 'src/types/front';
 import { enhanceCards } from '../../model/enhanceCards';
+import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { useApi } from '../lib/useApi';
 import { useOnce } from '../lib/useOnce';
 import { LI } from './Card/components/LI';
@@ -28,9 +29,17 @@ type Props = {
 	containerTitle: string;
 	path: string;
 	containerId: string;
+	showAge: boolean;
+	containerPalette?: DCRContainerPalette;
 };
 
-export const ShowMore = ({ containerTitle, path, containerId }: Props) => {
+export const ShowMore = ({
+	containerTitle,
+	path,
+	containerId,
+	showAge,
+	containerPalette,
+}: Props) => {
 	function findCardLinks() {
 		const containerNode = document.getElementById(
 			'container-' + containerId,
@@ -79,31 +88,58 @@ export const ShowMore = ({ containerTitle, path, containerId }: Props) => {
 		@todo: handle errors
 		@todo: rename props to match Front type?
 		@todo: make sure that the new content doesn't shift the top of the viewport when it loads
-		@todo: make sure the new cards that get loaded are layed out properly (not just as a list)
 	*/
+
+	const showMoreContainerId = `show-more-${containerId}`;
 
 	return (
 		<>
-			{filteredData && (
-				<>
-					<div
-						css={css`
-							height: ${space[3]}px;
-						`}
-					/>
-					<UL>
-						{filteredData.map((trail) => (
-							<LI key={trail.url} padSides={true}>
-								<FrontCard trail={trail} imageUrl={undefined} />
-							</LI>
-						))}
-					</UL>
-				</>
-			)}
+			<div id={showMoreContainerId}>
+				{filteredData && (
+					<>
+						<div
+							css={css`
+								height: ${space[3]}px;
+							`}
+						/>
+						<UL direction="row" wrapCards={true}>
+							{filteredData.map((card, cardIndex) => {
+								const columns = 3;
+								return (
+									<LI
+										key={card.url}
+										percentage="33.333%"
+										stretch={
+											filteredData.length % columns !== 1
+										}
+										padSides={true}
+										showDivider={cardIndex % columns !== 0}
+										offsetBottomPaddingOnDivider={shouldPadWrappableRows(
+											cardIndex,
+											filteredData.length -
+												(filteredData.length % columns),
+											columns,
+										)}
+									>
+										<FrontCard
+											trail={card}
+											imageUrl={undefined}
+											containerPalette={containerPalette}
+											showAge={showAge}
+											headlineSize="small"
+										/>
+									</LI>
+								);
+							})}
+						</UL>
+					</>
+				)}
+			</div>
 			<Button
 				priority="tertiary"
 				size="xsmall"
-				icon={isOpen && !loading ? <SvgMinus /> : <SvgPlus />}
+				icon={isOpen ? <SvgMinus /> : <SvgPlus />}
+				isLoading={loading}
 				iconSide="left"
 				onClick={toggleOpen}
 				cssOverrides={css`
@@ -112,7 +148,9 @@ export const ShowMore = ({ containerTitle, path, containerId }: Props) => {
 						margin-left: 10px;
 					}
 				`}
-				disabled={loading}
+				// disabled={loading}
+				aria-controls={showMoreContainerId}
+				aria-expanded={isOpen && !loading}
 				data-cy={`show-more-button-${containerId}`}
 			>
 				{decideButtonText({ isOpen, loading, containerTitle })}
