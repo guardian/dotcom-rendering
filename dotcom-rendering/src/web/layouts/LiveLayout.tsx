@@ -1156,10 +1156,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													CAPIArticle.pageType
 														.isPaidContent
 												}
-												format={format}
-												editionId={
-													CAPIArticle.editionId
-												}
 											/>
 										)}
 									</RightColumn>

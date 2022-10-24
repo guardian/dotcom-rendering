@@ -496,10 +496,6 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 															CAPIArticle.pageType
 																.isPaidContent
 														}
-														format={format}
-														editionId={
-															CAPIArticle.editionId
-														}
 													/>
 												)}
 											</div>
