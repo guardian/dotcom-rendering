@@ -36,11 +36,11 @@ import {
 	withDefault,
 } from '@guardian/types';
 import type { Option } from '@guardian/types';
+import { getPillarOrElseNews } from 'articleFormat';
 import Img from 'components/ImgAlt';
 import Kicker from 'components/Kicker';
 import { stars } from 'components/StarRating';
 import { formatSeconds, makeRelativeDate } from 'date';
-import { getPillarOrElseNews } from 'articleFormat';
 import type { Image } from 'image';
 import { maybeRender, pipe } from 'lib';
 import type { FC, ReactElement } from 'react';

@@ -8,6 +8,7 @@ import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
 import { App } from '@guardian/discussion-rendering/build/App';
 import { andThen, fromNullable, OptionKind } from '@guardian/types';
+import { getPillarFromId } from 'articleFormat';
 import {
 	ads,
 	getAdSlots,
@@ -21,7 +22,6 @@ import { createEmbedComponentFromProps } from 'components/EmbedWrapper';
 import EpicContent from 'components/EpicContent';
 import FollowStatus from 'components/FollowStatus';
 import FooterContent from 'components/FooterContent';
-import { getPillarFromId } from 'articleFormat';
 import { handleErrors, isObject, pipe } from 'lib';
 import {
 	acquisitionsClient,

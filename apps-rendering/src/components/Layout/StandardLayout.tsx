@@ -11,6 +11,7 @@ import {
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
 import { map, none, withDefault } from '@guardian/types';
+import { pillarToId, themeToPillar } from 'articleFormat';
 import Body from 'components/ArticleBody';
 import Epic from 'components/Epic';
 import FootballScores from 'components/FootballScores';
@@ -24,7 +25,6 @@ import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
-import { pillarToId, themeToPillar } from 'articleFormat';
 import { getFormat } from 'item';
 import type {
 	Explainer as ExplainerItem,
