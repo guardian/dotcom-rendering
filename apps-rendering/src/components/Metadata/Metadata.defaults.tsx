@@ -8,8 +8,8 @@ import Dateline from 'components/Dateline';
 import Follow from 'components/Follow';
 import { getFormat } from 'item';
 import type { Item } from 'item';
+import type { Styleable } from 'lib';
 import type { FC } from 'react';
-import { Styleable } from 'lib';
 
 export const defaultStyles = css`
 	flex-grow: 1;
