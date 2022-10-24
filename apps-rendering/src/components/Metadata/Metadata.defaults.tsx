@@ -19,8 +19,6 @@ export const defaultStyles = css`
 type Props = Styleable<{
 	item: Item;
 	withByline: boolean;
-	css?: SerializedStyles;
-	className?: string;
 }>;
 
 const DefaultMetadata: FC<Props> = ({ item, withByline, className }: Props) => (
