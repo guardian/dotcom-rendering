@@ -24,7 +24,7 @@ import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
-import { pillarToId, themeToPillar } from 'format';
+import { pillarToId, themeToPillar } from 'articleFormat';
 import { getFormat } from 'item';
 import type {
 	Explainer as ExplainerItem,

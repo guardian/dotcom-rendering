@@ -43,7 +43,7 @@ import type { Contributor } from 'contributor';
 import { parseContributors } from 'contributor';
 import type { MatchScores } from 'football';
 import { parseMatchScores } from 'football';
-import { getPillarFromId } from 'format';
+import { getPillarFromId } from 'articleFormat';
 import type { Image } from 'image';
 import { parseCardImage } from 'image';
 import { pipe } from 'lib';

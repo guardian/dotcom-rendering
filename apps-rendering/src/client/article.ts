@@ -21,7 +21,7 @@ import { createEmbedComponentFromProps } from 'components/EmbedWrapper';
 import EpicContent from 'components/EpicContent';
 import FollowStatus from 'components/FollowStatus';
 import FooterContent from 'components/FooterContent';
-import { getPillarFromId } from 'format';
+import { getPillarFromId } from 'articleFormat';
 import { handleErrors, isObject, pipe } from 'lib';
 import {
 	acquisitionsClient,
