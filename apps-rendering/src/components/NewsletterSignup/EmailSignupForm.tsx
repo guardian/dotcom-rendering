@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 import {
 	background,
 	fill,
@@ -8,8 +9,24 @@ import {
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { pxToRem, remSpace, textSans } from '@guardian/source-foundations';
-import { Button, Label, TextInput } from '@guardian/source-react-components';
+import {
+	neutral,
+	pxToRem,
+	remSpace,
+	textSans,
+	until,
+} from '@guardian/source-foundations';
+import {
+	Button,
+	InlineError,
+	InlineSuccess,
+	Label,
+	Link,
+	SvgReload,
+	SvgSpinner,
+	TextInput,
+	userFeedbackThemeDefault,
+} from '@guardian/source-react-components';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 
@@ -17,13 +34,69 @@ import { darkModeCss } from 'styles';
 
 interface Props {
 	format: ArticleFormat;
-	newsletterId: string;
+	identityName: string;
+	successDescription: string;
 }
 
 const formStyle = css`
-	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
+	min-height: 2.75rem;
+
+	.js-signup-form__inputs {
+		display: flex;
+	}
+
+	.js-signup-form__feedback {
+		display: none;
+	}
+
+	&.js-signup-form--waiting {
+		.js-signup-form__feedback--waiting {
+			display: inline-flex;
+		}
+	}
+
+	&.js-signup-form--success {
+		.js-signup-form__inputs {
+			display: none;
+		}
+		.js-signup-form__feedback--success {
+			display: flex;
+			color: ${userFeedbackThemeDefault.userFeedback.textSuccess};
+		}
+	}
+
+	&.js-signup-form--failure {
+		.js-signup-form__inputs {
+			display: none;
+		}
+		.js-signup-form__feedback--failure {
+			display: flex;
+			color: ${userFeedbackThemeDefault.userFeedback.textError};
+		}
+	}
+`;
+
+const buttonStyle = (format: ArticleFormat): SerializedStyles => css`
+	background-color: ${fill.newsletterSignUpFormButton(format)};
+	color: ${text.newsletterSignUpFormButton(format)};
+	margin-bottom: ${remSpace[2]};
+	flex-basis: ${pxToRem(118)}rem;
+	justify-content: center;
+
+	:disabled {
+		background-color: ${neutral[46]};
+	}
+	&:hover {
+		background-color: ${hover.newsletterSignUpFormButton(format)};
+	}
+
+	${darkModeCss`
+		background-color: ${fill.newsletterSignUpFormButtonDark(format)};
+		color: ${text.newsletterSignUpFormButtonDark(format)};
+		&:hover {
+			background-color: ${hover.newsletterSignUpFormButtonDark(format)}
+		}
+`}
 `;
 
 /**
@@ -31,11 +104,11 @@ const formStyle = css`
  * The UI for the NewsletterSignup might not use an HTML form for apps
  * when implemented
  */
-const EmailSignupForm: FC<Props> = ({ newsletterId, format }) => {
-	const handleSubmit = (): void => {
-		console.log({ newsletterId });
-	};
-
+const EmailSignupForm: FC<Props> = ({
+	identityName,
+	successDescription,
+	format,
+}) => {
 	return (
 		<>
 			<Label
@@ -45,55 +118,97 @@ const EmailSignupForm: FC<Props> = ({ newsletterId, format }) => {
 						${textSans.xsmall({ fontWeight: 'bold' })};
 
 						${darkModeCss`
-							color: ${text.signUpFormDark(format)};
+							color: ${text.newsletterSignUpFormDark(format)};
 						`}
 					}
 				`}
 			/>
-			<form css={formStyle} action={undefined}>
-				<TextInput
-					type="email"
-					width={30}
-					hideLabel
-					label="Enter your email address"
-					cssOverrides={css`
-						height: 2.25rem;
-						margin-right: ${remSpace[3]};
-						margin-top: 0;
-						margin-bottom: ${remSpace[2]};
-						flex-basis: ${pxToRem(335)}rem;
-
-						${darkModeCss`
-							background-color: ${background.signUpFormDark(format)};
-							color: ${text.signUpFormDark(format)};
-						`}
-					`}
-				/>
-				<Button
-					onClick={handleSubmit}
-					size="small"
-					title="Sign up"
-					cssOverrides={css`
-						background-color: ${fill.signUpFormButton(format)};
-						color: ${text.signUpFormButton(format)};
-						margin-bottom: ${remSpace[2]};
-						flex-basis: ${pxToRem(118)}rem;
-						justify-content: center;
-						&:hover {
-							background-color: ${hover.signUpFormButton(format)};
-						}
-
-						${darkModeCss`
-							background-color: ${fill.signUpFormButtonDark(format)};
-							color: ${text.signUpFormButtonDark(format)};
-							&:hover {
-								background-color: ${hover.signUpFormButtonDark(format)}
-							}
-						`}
+			<form
+				className={'js-signup-form'}
+				data-newsletter-id={identityName}
+				css={formStyle}
+			>
+				<div
+					className={'js-signup-form__inputs'}
+					css={css`
+						align-items: center;
+						flex-wrap: wrap;
 					`}
 				>
-					Sign up
-				</Button>
+					<TextInput
+						type="email"
+						width={30}
+						hideLabel
+						label="Enter your email address"
+						cssOverrides={css`
+							height: ${remSpace[9]};
+							margin-right: ${remSpace[3]};
+							margin-top: 0;
+							margin-bottom: ${remSpace[2]};
+							flex-basis: ${pxToRem(335)}rem;
+
+							${darkModeCss`
+							background-color: ${background.newsletterSignUpFormDark(format)};
+							color: ${text.newsletterSignUpFormDark(format)};
+						`}
+						`}
+					/>
+					<Button
+						size="small"
+						title="Sign up"
+						type="submit"
+						cssOverrides={buttonStyle(format)}
+					>
+						Sign up
+						<span className="js-signup-form__feedback js-signup-form__feedback--waiting">
+							<SvgSpinner size="small" />
+						</span>
+					</Button>
+				</div>
+				<div className="js-signup-form__feedback js-signup-form__feedback--success">
+					<InlineSuccess>
+						<span>
+							<b>Subscription Confirmed. </b>
+							<span>{successDescription}</span>
+						</span>
+					</InlineSuccess>
+				</div>
+				<div
+					className="js-signup-form__feedback js-signup-form__feedback--failure"
+					css={css`
+						align-items: center;
+						justify-content: flex-start;
+						${until.tablet} {
+							flex-wrap: wrap;
+						}
+					`}
+				>
+					<InlineError
+						cssOverrides={css`
+							margin-right: ${remSpace[3]};
+						`}
+					>
+						<span>
+							Sign up failed. Please try again or contact{' '}
+							<Link
+								href="mailto:customer.help@theguardian.com"
+								target="_blank"
+							>
+								customer.help@theguardian.com
+							</Link>
+						</span>
+					</InlineError>
+					<Button
+						size="small"
+						icon={<SvgReload />}
+						iconSide={'right'}
+						title="Try signing up again"
+						type="reset"
+						cssOverrides={buttonStyle(format)}
+					>
+						Try again
+					</Button>
+				</div>
 			</form>
 		</>
 	);

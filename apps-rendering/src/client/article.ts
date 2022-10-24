@@ -35,6 +35,7 @@ import ReactDOM from 'react-dom';
 import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
+import { initSignupForms } from './signupForm';
 
 // ----- Run ----- //
 
@@ -474,6 +475,7 @@ initAudioAtoms();
 hydrateAtoms();
 richLinks();
 hydrateClickToView();
+initSignupForms();
 
 /*
  We run this last to help precisely position native elements over their placeholders in the webview.

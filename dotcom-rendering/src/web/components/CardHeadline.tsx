@@ -182,6 +182,7 @@ const WithLink = ({
 					${getZIndex('card-nested-link')}
 					/* The following styles turn off those provided by Link */
 					color: inherit;
+					text-decoration: none;
 					/* stylelint-disable-next-line property-disallowed-list */
 					font-family: inherit;
 					font-size: inherit;

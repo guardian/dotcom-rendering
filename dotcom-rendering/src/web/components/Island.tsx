@@ -79,3 +79,12 @@ export const Island = ({
 		{decideChildren(children, clientOnly, placeholderHeight)}
 	</gu-island>
 );
+
+/**
+ * If JavaScript is disabled, hide client-only islands
+ */
+export const islandNoscriptStyles = `
+<style>
+	gu-island[clientOnly=true] { display: none; }
+</style>
+`;

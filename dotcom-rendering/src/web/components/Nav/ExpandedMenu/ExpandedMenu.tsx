@@ -7,6 +7,7 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import type { NavType } from '../../../../model/extract-nav';
+import type { EditionId } from '../../../../types/edition';
 import { getZIndex } from '../../../lib/getZIndex';
 import { navInputCheckboxId } from '../config';
 import { Columns } from './Columns';
@@ -104,9 +105,10 @@ const mainMenuStyles = css`
 `;
 
 export const ExpandedMenu: React.FC<{
+	editionId: EditionId;
 	format: ArticleFormat;
 	nav: NavType;
-}> = ({ format, nav }) => {
+}> = ({ format, nav, editionId }) => {
 	return (
 		<div id="expanded-menu-root">
 			<ShowMoreMenu display={format.display} />
@@ -117,7 +119,7 @@ export const ExpandedMenu: React.FC<{
 					data-testid="expanded-menu"
 					data-cy="expanded-menu"
 				>
-					<Columns format={format} nav={nav} />
+					<Columns editionId={editionId} format={format} nav={nav} />
 				</div>
 			</div>
 		</div>
