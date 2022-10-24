@@ -437,14 +437,20 @@ const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
 const getImageUrl = (source: string | undefined) => {
 	if (!source) return undefined;
 	const url = new URL(source);
-	if (
-		url.hostname === 'i.guim.co.uk' &&
-		url.pathname.startsWith('/img/media/')
-	) {
-		return `https://media.guim.co.uk/${url.pathname.replace(
-			'/img/media/',
-			'',
-		)}`;
+
+	const buckets = ['/img/media/', '/img/static/', '/img/uploads/'] as const;
+	const prefix = buckets.find((bucket) => url.pathname.startsWith(bucket));
+
+	if (url.hostname === 'i.guim.co.uk' && prefix) {
+		const path = url.pathname.replace(prefix, '');
+		switch (prefix) {
+			case '/img/media/':
+				return `https://media.guim.co.uk/${path}`;
+			case '/img/static/':
+				return `https://static.guim.co.uk/${path}`;
+			case '/img/uploads/':
+				return `https://uploads.guim.co.uk/${path}`;
+		}
 	}
 
 	return source;
