@@ -10,7 +10,7 @@ import {
 	remSpace,
 	until,
 } from '@guardian/source-foundations';
-import { ToggleSwitch } from '@guardian/source-react-components-development-kitchen';
+import { ToggleSwitchApps } from '@guardian/source-react-components-development-kitchen';
 import Avatar from 'components/Avatar';
 import Byline from 'components/Byline';
 import CommentCount from 'components/CommentCount';
@@ -149,7 +149,7 @@ const LiveBlogMetadata: FC<Props> = ({ item }: Props) => {
 			<div css={metaBottomStyles(isLive)}>
 				{isLive && (
 					<div css={css(toggleStyles, liveBlogPadding)}>
-						<ToggleSwitch
+						<ToggleSwitchApps
 							platform="ios"
 							checked={checked}
 							label={'Get alerts on this story'}
@@ -158,7 +158,7 @@ const LiveBlogMetadata: FC<Props> = ({ item }: Props) => {
 								setChecked(!checked);
 								console.log('changed toggle');
 							}}
-						></ToggleSwitch>
+						/>
 					</div>
 				)}
 				<CommentCount count={item.commentCount} {...item} />
