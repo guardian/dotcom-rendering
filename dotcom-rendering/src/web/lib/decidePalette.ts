@@ -1424,6 +1424,8 @@ const textBlockquote = (format: ArticleFormat): string => {
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return BLACK;
+		case ArticleDesign.Analysis:
+			return neutral[7];
 		default:
 			return neutral[46];
 	}
