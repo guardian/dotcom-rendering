@@ -1,4 +1,3 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { remSpace } from '@guardian/source-foundations';
 import Avatar from 'components/Avatar';
