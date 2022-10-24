@@ -9,18 +9,19 @@ import Follow from 'components/Follow';
 import { getFormat } from 'item';
 import type { Item } from 'item';
 import type { FC } from 'react';
+import { Styleable } from 'lib';
 
 export const defaultStyles = css`
 	flex-grow: 1;
 	padding-top: ${remSpace[1]};
 `;
 
-type Props = {
+type Props = Styleable<{
 	item: Item;
 	withByline: boolean;
 	css?: SerializedStyles;
 	className?: string;
-};
+}>;
 
 const DefaultMetadata: FC<Props> = ({ item, withByline, className }: Props) => (
 	<>
