@@ -1595,6 +1595,9 @@ const fillQuoteIcon = (format: ArticleFormat): string => {
 };
 
 const backgroundPullQuote = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[800];
+
 	switch (format.design) {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
@@ -1602,6 +1605,7 @@ const backgroundPullQuote = (format: ArticleFormat): string => {
 			return '#fbe6d5';
 		case ArticleDesign.Analysis:
 			return neutral[100];
+
 		default:
 			return neutral[97];
 	}

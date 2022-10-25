@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { from, headline, text, until } from '@guardian/source-foundations';
 import { unescapeData } from '../../lib/escapeData';
 import type { Palette } from '../../types/palette';
@@ -98,6 +98,12 @@ function decidePosition(role: string, design: ArticleDesign) {
 	return role === 'supporting' ? partiallyLeft : partiallyInline;
 }
 
+const decideFontWeight = (theme: ArticleTheme) => {
+	if (theme === ArticleSpecial.SpecialReportAlt) return 'light';
+
+	return 'bold';
+};
+
 function decideFont(role: string) {
 	if (role === 'supporting') {
 		return css`
@@ -112,19 +118,19 @@ function decideFont(role: string) {
 export const PullQuoteBlockComponent: React.FC<{
 	html?: string;
 	palette: Palette;
-	design: ArticleDesign;
+	format: ArticleFormat;
 	role: string;
 	attribution?: string;
-}> = ({ html, palette, design, attribution, role }) => {
+}> = ({ html, palette, format, attribution, role }) => {
 	if (!html) return <></>;
-	switch (design) {
+	switch (format.design) {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return (
 				<aside
 					css={[
-						decidePosition(role, design),
+						decidePosition(role, format.design),
 						css`
 							${headline.xxsmall({ fontWeight: 'light' })};
 							line-height: 25px;
@@ -164,7 +170,7 @@ export const PullQuoteBlockComponent: React.FC<{
 			return (
 				<aside
 					css={[
-						decidePosition(role, design),
+						decidePosition(role, format.design),
 						decideFont(role),
 						css`
 							color: ${palette.text.pullQuote};
@@ -199,9 +205,11 @@ export const PullQuoteBlockComponent: React.FC<{
 			return (
 				<aside
 					css={[
-						decidePosition(role, design),
+						decidePosition(role, format.design),
 						css`
-							${headline.xxsmall({ fontWeight: 'bold' })};
+							${headline.xxsmall({
+								fontWeight: decideFontWeight(format.theme),
+							})};
 							line-height: 25px;
 							position: relative;
 							background-color: ${palette.background.pullQuote};
