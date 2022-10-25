@@ -1523,7 +1523,7 @@ const borderArticle: (format: ArticleFormat) => string = (format) => {
 	)
 		return '#CDCDCD';
 
-	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[86];
+	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[60];
 
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	return border.secondary;
