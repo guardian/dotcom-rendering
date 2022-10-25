@@ -10,6 +10,14 @@ const cssOverrides = css`
 	${from.desktop} {
 		padding: ${remSpace[3]} 0;
 	}
+
+	/* This hides the Source spacedFocusHalo so we only see the DCR halo.
+	*  Without the !important we see both styles simultaneously.
+	*/
+	*:focus {
+		/* stylelint-disable-next-line declaration-no-important */
+		outline: none !important;
+	}
 `;
 
 const toggleWrapperStyles = css`
@@ -47,7 +55,6 @@ export const FilterKeyEventsToggle = ({ filterKeyEvents, id }: Props) => {
 			<div css={toggleWrapperStyles}>
 				<ToggleSwitch
 					label="Show key events only"
-					tooltip={true}
 					checked={checked}
 					onClick={() => handleClick()}
 					cssOverrides={cssOverrides}

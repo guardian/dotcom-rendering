@@ -67,6 +67,8 @@ const commentCount = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 const commentCountDark = (format: ArticleFormat): Colour => {
@@ -92,6 +94,8 @@ const commentCountDark = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -118,6 +122,8 @@ const commentCountWide = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -175,6 +181,8 @@ const blockquoteIcon = (format: ArticleFormat): Colour => {
 					return labs[300];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[400];
 			}
 		default:
 			switch (format.theme) {
@@ -192,6 +200,8 @@ const blockquoteIcon = (format: ArticleFormat): Colour => {
 					return labs[400];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[400];
 			}
 	}
 };
@@ -232,9 +242,9 @@ const lines = (_format: ArticleFormat): Colour => neutral[86];
 
 const linesDark = (_format: ArticleFormat): Colour => neutral[20];
 
-const signUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
+const newsletterSignUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
 
-const signUpFormButtonDark = (_format: ArticleFormat): Colour => neutral[86];
+const newsletterSignUpFormButtonDark = (_format: ArticleFormat): Colour => neutral[86];
 
 // ----- API ----- //
 
@@ -255,8 +265,8 @@ const fill = {
 	richLinkDark,
 	richLinkSvgPreload,
 	richLinkSvgPreloadDark,
-	signUpFormButton,
-	signUpFormButtonDark,
+	newsletterSignUpFormButton,
+	newsletterSignUpFormButtonDark,
 };
 
 // ----- Exports ----- //

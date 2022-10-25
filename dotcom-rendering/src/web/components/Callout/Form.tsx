@@ -175,10 +175,12 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
 					`}
 				>
 					<Link
-						subdued={true}
 						priority="secondary"
 						target="_blank"
 						href="https://www.theguardian.com/help/terms-of-service"
+						cssOverrides={css`
+							text-decoration: none;
+						`}
 					>
 						Terms and conditions
 					</Link>

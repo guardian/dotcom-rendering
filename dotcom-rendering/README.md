@@ -6,25 +6,24 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Dotcom Rendering](#dotcom-rendering)
-	- [Quick start](#quick-start)
-		- [Install Node.js](#install-nodejs)
-		- [Running instructions](#running-instructions)
-		- [Environment Variables](#environment-variables)
-		- [Detailed Setup](#detailed-setup)
-		- [Technologies](#technologies)
-		- [Architecture Diagram](#architecture-diagram)
-		- [UI Design System](#ui-design-system)
-		- [Concepts](#concepts)
-		- [Visual Debugging](#visual-debugging)
-		- [Feedback](#feedback)
-	- [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
-	- [Code Quality](#code-quality)
-		- [Snyk Code Scanning](#snyk-code-scanning)
-	- [IDE setup](#ide-setup)
-		- [Extensions](#extensions)
-		- [Auto fix on save](#auto-fix-on-save)
-	- [Thanks](#thanks)
+- [Quick start](#quick-start)
+  - [Install Node.js](#install-nodejs)
+  - [Running instructions](#running-instructions)
+  - [Environment Variables](#environment-variables)
+  - [Detailed Setup](#detailed-setup)
+  - [Technologies](#technologies)
+  - [Architecture Diagram](#architecture-diagram)
+  - [UI Design System](#ui-design-system)
+  - [Concepts](#concepts)
+  - [Visual Debugging](#visual-debugging)
+  - [Feedback](#feedback)
+- [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
+- [Code Quality](#code-quality)
+  - [Snyk Code Scanning](#snyk-code-scanning)
+- [IDE setup](#ide-setup)
+  - [Extensions](#extensions)
+  - [Auto fix on save](#auto-fix-on-save)
+- [Thanks](#thanks)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -36,7 +35,12 @@ This guide will help you get the `dotcom-rendering` application running on your 
 
 The only thing you need to make sure you have installed before you get going is [Node.js](https://nodejs.org).
 
-We recommend using [nvm](https://github.com/creationix/nvm) (especially combined with [this handy gist](https://gist.github.com/sndrs/5940e9e8a3f506b287233ed65365befb)). It is great at managing multiple versions of Node.js on one machine.
+We recommend using a tool to help manage multiple versions of Node.js on on machine.
+[fnm](https://github.com/Schniz/fnm) is popular in the department at the moment, although
+[nvm](https://github.com/creationix/nvm) and [asdf](https://github.com/asdf-vm/asdf) are
+sometimes used instead.
+If you use nvm, you might find
+[this gist](https://gist.github.com/sndrs/5940e9e8a3f506b287233ed65365befb) helpful.
 
 ### Running instructions
 

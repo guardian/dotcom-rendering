@@ -82,10 +82,13 @@ const TagLink = ({
 			cssOverrides={css`
 				/* The following styles turn off those provided by LinkButton */
 				color: inherit;
+				text-decoration: none;
+				text-underline-offset: inherit;
 				/* stylelint-disable-next-line property-disallowed-list */
 				font-family: inherit;
 				font-size: inherit;
 				line-height: inherit;
+
 				:hover {
 					color: inherit;
 					text-decoration: underline;

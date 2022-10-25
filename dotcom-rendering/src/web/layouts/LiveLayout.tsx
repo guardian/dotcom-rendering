@@ -55,7 +55,10 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import { TopicFilterBank } from '../components/TopicFilterBank.importable';
+import {
+	hasRelevantTopics,
+	TopicFilterBank,
+} from '../components/TopicFilterBank.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
@@ -285,9 +288,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const cricketMatchUrl =
 		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
 
-	const showTopicFilterBank = !!CAPIArticle.config.switches.automaticFilters;
+	const showTopicFilterBank =
+		!!CAPIArticle.config.switches.automaticFilters &&
+		hasRelevantTopics(CAPIArticle.availableTopics);
 
-	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
+	const hasKeyEvents = !!CAPIArticle.keyEvents.length;
+	const showKeyEventsToggle = !showTopicFilterBank && hasKeyEvents;
 
 	/**
 	 * This property currently only applies to the header and merchandising slots
@@ -579,7 +585,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandFirstGrid>
 				</Section>
-				{CAPIArticle.keyEvents.length > 0 ? (
+				{hasKeyEvents ? (
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
@@ -749,33 +755,32 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</div>
 								</Hide>
 
-								{showTopicFilterBank &&
-									CAPIArticle.availableTopics && (
-										<Hide until="desktop">
-											<div css={sidePaddingDesktop}>
-												<Island>
-													<TopicFilterBank
-														availableTopics={
-															CAPIArticle.availableTopics
-														}
-														selectedTopics={
-															CAPIArticle.selectedTopics
-														}
-														format={format}
-														keyEvents={
-															CAPIArticle.keyEvents
-														}
-														filterKeyEvents={
-															CAPIArticle.filterKeyEvents
-														}
-														id={
-															'key-events-carousel-desktop'
-														}
-													/>
-												</Island>
-											</div>
-										</Hide>
-									)}
+								{showTopicFilterBank && (
+									<Hide until="desktop">
+										<div css={sidePaddingDesktop}>
+											<Island>
+												<TopicFilterBank
+													availableTopics={
+														CAPIArticle.availableTopics
+													}
+													selectedTopics={
+														CAPIArticle.selectedTopics
+													}
+													format={format}
+													keyEvents={
+														CAPIArticle.keyEvents
+													}
+													filterKeyEvents={
+														CAPIArticle.filterKeyEvents
+													}
+													id={
+														'key-events-carousel-desktop'
+													}
+												/>
+											</Island>
+										</div>
+									</Hide>
+								)}
 								{/* Match stats */}
 								{!!footballMatchUrl && (
 									<Island
@@ -792,8 +797,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
-									{CAPIArticle.keyEvents.length &&
-									showToggle ? (
+									{showKeyEventsToggle ? (
 										<Hide below="desktop">
 											<Island deferUntil="visible">
 												<FilterKeyEventsToggle
@@ -807,8 +811,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									) : (
 										<></>
 									)}
-									{showTopicFilterBank &&
-									CAPIArticle.availableTopics ? (
+									{showTopicFilterBank ? (
 										<div css={paddingBody}>
 											<ArticleContainer format={format}>
 												{pagination.currentPage !==
