@@ -217,10 +217,23 @@ const textHeadlineByline = (format: ArticleFormat): string => {
 		switch (format.theme) {
 			case ArticlePillar.News:
 				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Opinion:
+				return opinion[400];
+			case ArticlePillar.Culture:
+				return culture[400];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[400];
+			case ArticleSpecial.Labs:
+				return labs[400];
+			case ArticleSpecial.SpecialReport:
+				return specialReport[400];
+			case ArticleSpecial.SpecialReportAlt:
+				return palette.specialReportAlt[100];
 		}
 	}
+
 	if (
 		format.theme === ArticleSpecial.SpecialReport &&
 		format.design !== ArticleDesign.LiveBlog &&
@@ -411,7 +424,7 @@ const textArticleLink = (format: ArticleFormat): string => {
 			case ArticleSpecial.SpecialReport:
 				return specialReport[300];
 			case ArticleSpecial.SpecialReportAlt:
-				return news[300];
+				return palette.specialReportAlt[200];
 		}
 	}
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
@@ -722,11 +735,19 @@ const backgroundArticle = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.Letter) return opinion[800];
 	if (format.design === ArticleDesign.Comment) return opinion[800];
 	if (format.design === ArticleDesign.Editorial) return opinion[800];
-	if (format.design === ArticleDesign.Analysis) return news[800];
+
+	if (format.design === ArticleDesign.Analysis) {
+		if (format.theme === ArticleSpecial.SpecialReportAlt)
+			return palette.specialReportAlt[800];
+		else return news[800];
+	}
+
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[800]; // Note, check theme rather than design here
+
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return palette.specialReportAlt[800];
+
 	if (
 		format.theme === ArticleSpecial.Labs &&
 		format.display !== ArticleDisplay.Immersive
@@ -1079,7 +1100,7 @@ const fillShareIcon = (format: ArticleFormat): string => {
 			case ArticleSpecial.SpecialReport:
 				return specialReport[300];
 			case ArticleSpecial.SpecialReportAlt:
-				return news[300];
+				return palette.specialReportAlt[100];
 		}
 	}
 	if (
@@ -1632,7 +1653,12 @@ const textDropCap = (format: ArticleFormat): string => {
 
 const textBetaLabel = (): string => neutral[46];
 
-const textDesignTag = (): string => neutral[100];
+const textDesignTag = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[800];
+
+	return neutral[100];
+};
 
 const textDateLine = (format: ArticleFormat): string => {
 	if (
@@ -1819,7 +1845,7 @@ const backgroundDesignTag = (format: ArticleFormat): string => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[300];
+			return palette.specialReportAlt[100];
 	}
 };
 
@@ -1933,7 +1959,7 @@ export const decidePalette = (
 			filterButtonHover: textFilterButtonHover(),
 			filterButtonActive: textFilterButtonActive(),
 			betaLabel: textBetaLabel(),
-			designTag: textDesignTag(),
+			designTag: textDesignTag(format),
 			dateLine: textDateLine(format),
 		},
 		background: {
