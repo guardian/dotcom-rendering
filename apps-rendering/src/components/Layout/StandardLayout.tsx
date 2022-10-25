@@ -11,6 +11,7 @@ import {
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
 import { map, none, withDefault } from '@guardian/types';
+import { pillarToId, themeToPillar } from 'articleFormat';
 import Body from 'components/ArticleBody';
 import Epic from 'components/Epic';
 import FootballScores from 'components/FootballScores';
@@ -40,7 +41,6 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
-import { themeToPillarString } from 'themeStyles';
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -93,7 +93,11 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 						css={onwardStyles}
 						id="comments"
 						data-closed={false}
-						data-pillar={themeToPillarString(item.theme)}
+						data-pillar={pipe(
+							item.theme,
+							themeToPillar,
+							pillarToId,
+						)}
 						data-short-id={id}
 					></section>
 				)),

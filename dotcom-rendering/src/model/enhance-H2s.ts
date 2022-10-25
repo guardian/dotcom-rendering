@@ -1,10 +1,12 @@
 import { JSDOM } from 'jsdom';
+import { isLegacyTableOfContents } from './isLegacyTableOfContents';
 
-const hasInteractiveContentsElement = (elements: CAPIElement[]): boolean => {
+const shouldUseLegacyIDs = (elements: CAPIElement[]): boolean => {
 	return elements.some(
 		(element) =>
 			element._type ===
-			'model.dotcomrendering.pageElements.InteractiveContentsBlockElement',
+				'model.dotcomrendering.pageElements.InteractiveContentsBlockElement' ||
+			isLegacyTableOfContents(element),
 	);
 };
 
@@ -61,7 +63,7 @@ const generateId = (element: SubheadingBlockElement, existingIds: string[]) => {
 const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	const slugifiedIds: string[] = [];
 	const enhanced: CAPIElement[] = [];
-	const shouldUseElementId = hasInteractiveContentsElement(elements);
+	const shouldUseElementId = shouldUseLegacyIDs(elements);
 	elements.forEach((element) => {
 		if (
 			element._type ===
