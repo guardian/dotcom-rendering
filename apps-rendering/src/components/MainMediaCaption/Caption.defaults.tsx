@@ -13,76 +13,82 @@ import { darkModeCss } from 'styles';
 // ----- Component ----- //
 
 const captionElement =
-    (format: ArticleFormat) =>
-    (node: Node, key: number): ReactNode => {
-        const children = Array.from(node.childNodes).map(
+	(format: ArticleFormat) =>
+	(node: Node, key: number): ReactNode => {
+		const children = Array.from(node.childNodes).map(
 			captionElement(format),
 		);
 
-        switch (node.nodeName) {
-            case 'STRONG':
-                return (
-                    <strong css={css`
-                        ${textSans.xsmall({
-                            lineHeight: 'regular',
-                            fontWeight: 'bold',
-                        })}
-                    `} key={key}>
-                        {children}
-                    </strong>
-                );
-            case 'EM':
-                return (
-                    <em css={css`
-                        ${textSans.xsmall({
-                            lineHeight: 'regular',
-                            fontStyle: 'italic',
-                        })}
-                    `} key={key}>
-                        {children}
-                    </em>
-                );
-            case 'A': {
-                const href = getHref(node);
-                
-                if (href.kind === OptionKind.Some) {
-                    return (
-                        <a
-                            href={href.value}
-                            css={css`
-                                text-decoration: none;
-                                color: ${neutral[100]};
-                                border-bottom: 0.0625rem solid ${neutral[60]};
+		switch (node.nodeName) {
+			case 'STRONG':
+				return (
+					<strong
+						css={css`
+							${textSans.xsmall({
+								lineHeight: 'regular',
+								fontWeight: 'bold',
+							})}
+						`}
+						key={key}
+					>
+						{children}
+					</strong>
+				);
+			case 'EM':
+				return (
+					<em
+						css={css`
+							${textSans.xsmall({
+								lineHeight: 'regular',
+								fontStyle: 'italic',
+							})}
+						`}
+						key={key}
+					>
+						{children}
+					</em>
+				);
+			case 'A': {
+				const href = getHref(node);
 
-                                ${darkModeCss`
+				if (href.kind === OptionKind.Some) {
+					return (
+						<a
+							href={href.value}
+							css={css`
+								text-decoration: none;
+								color: ${neutral[100]};
+								border-bottom: 0.0625rem solid ${neutral[60]};
+
+								${darkModeCss`
                                     color: ${neutral[100]};
                                     border-color: ${neutral[60]};
                                 `}
-                            `}
-                            key={key}
-                        >
-                            {children}
-                        </a>
-                    )
-                }
+							`}
+							key={key}
+						>
+							{children}
+						</a>
+					);
+				}
 
-                return children;
-            }
-            case 'S':
-                return <s>{children}</s>;
-            case '#text':
-                return node.textContent;
-            case 'BR':
-                return <br />;
-            default:
-                return null;
-        }
-    }
+				return children;
+			}
+			case 'S':
+				return <s>{children}</s>;
+			case '#text':
+				return node.textContent;
+			case 'BR':
+				return <br />;
+			default:
+				return null;
+		}
+	};
 
 type Props = {
-    caption: Option<DocumentFragment>;
-    format: ArticleFormat;
-}
+	caption: Option<DocumentFragment>;
+	format: ArticleFormat;
+};
 
 const DefaultCaption: FC<Props> = ({ caption, format }) =>
 	maybeRender(caption, (cap) => (

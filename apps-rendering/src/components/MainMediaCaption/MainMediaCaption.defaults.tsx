@@ -1,18 +1,18 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
-import { ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
-    between,
-    brandAlt,
-    neutral,
-    remSpace,
-    textSans,
+	between,
+	brandAlt,
+	neutral,
+	remSpace,
+	textSans,
 } from '@guardian/source-foundations';
 import { SvgCamera } from '@guardian/source-react-components';
-import {Option, withDefault } from '@guardian/types';
-import { OptionKind } from '@guardian/types';
-import { Styleable } from 'lib';
+import type { Option } from '@guardian/types';
+import { OptionKind, withDefault } from '@guardian/types';
+import type { Styleable } from 'lib';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import DefaultCaption from './Caption.defaults';
@@ -96,16 +96,16 @@ type Props = Styleable<{
 	credit: Option<string>;
 	format: ArticleFormat;
 	id: string;
-}>
+}>;
 
 const DefaultMainMediaCaption: FC<Props> = ({
 	caption,
-    className,
+	className,
 	credit,
 	format,
-    id,
+	id,
 }) => {
-    if (caption.kind === OptionKind.None && credit.kind === OptionKind.None) {
+	if (caption.kind === OptionKind.None && credit.kind === OptionKind.None) {
 		return null;
 	}
 
@@ -119,12 +119,13 @@ const DefaultMainMediaCaption: FC<Props> = ({
 					</span>
 				</summary>
 				<span id={id} css={textStyles}>
-					<DefaultCaption caption={caption} format={format} /> {withDefault<string | null>(null)(credit)}
+					<DefaultCaption caption={caption} format={format} />{' '}
+					{withDefault<string | null>(null)(credit)}
 				</span>
 			</details>
-        </figcaption>
+		</figcaption>
 	);
-}
+};
 
 // ----- Exports ----- //
 

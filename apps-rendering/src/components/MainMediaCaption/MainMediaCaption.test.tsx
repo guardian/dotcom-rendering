@@ -1,11 +1,11 @@
 // ----- Imports ----- //
 
 import { matchers } from '@emotion/jest';
-import { some } from '@guardian/types';
-import MainMediaCaption from '.';
-import renderer from 'react-test-renderer';
-import { JSDOM } from 'jsdom';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { some } from '@guardian/types';
+import { JSDOM } from 'jsdom';
+import renderer from 'react-test-renderer';
+import MainMediaCaption from '.';
 
 // ----- Setup ----- //
 

@@ -8,25 +8,24 @@ import MainMediaCaption from '.';
 
 // ----- Stories ----- //
 
-const Default: FC = () =>
-    <MainMediaCaption
-        caption={parseHtml('A caption')}
-        credit={some('By a person')}
-        format={{
-            design: ArticleDesign.Standard,
-            display: ArticleDisplay.Standard,
-            theme: ArticlePillar.News,
-        }}
-        id="caption-id"
-    />
+const Default: FC = () => (
+	<MainMediaCaption
+		caption={parseHtml('A caption')}
+		credit={some('By a person')}
+		format={{
+			design: ArticleDesign.Standard,
+			display: ArticleDisplay.Standard,
+			theme: ArticlePillar.News,
+		}}
+		id="caption-id"
+	/>
+);
 
 // ----- Exports ----- //
 
 export default {
-    component: MainMediaCaption,
-    title: 'AR/MainMediaCaption',
-}
+	component: MainMediaCaption,
+	title: 'AR/MainMediaCaption',
+};
 
-export {
-    Default,
-}
+export { Default };
