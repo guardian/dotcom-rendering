@@ -152,17 +152,19 @@ function findInsertIndex(body: Body): Result<string, number> {
 	// possibleElementsToPlaceBefore[0] - which is actually out of range, but
 	// has to be include to test if possiblePoistions[1] is suitable.
 	const findLastSuitablePosition = (
-		idx: number,
+		indexInPossibleElementsList: number,
 	): Result<string, ElementCategoryAndIndex> => {
-		if (idx <= 0) {
+		if (indexInPossibleElementsList <= 0) {
 			return Result.err(
 				'Unable to find suitable place for NewsletterSignUp',
 			);
 		}
-		if (isSuitable(idx)) {
-			return Result.ok(possibleElementsToPlaceBefore[idx]);
+		if (isSuitable(indexInPossibleElementsList)) {
+			return Result.ok(
+				possibleElementsToPlaceBefore[indexInPossibleElementsList],
+			);
 		}
-		return findLastSuitablePosition(idx - 1);
+		return findLastSuitablePosition(indexInPossibleElementsList - 1);
 	};
 
 	// call the recursive function, starting at the last position in

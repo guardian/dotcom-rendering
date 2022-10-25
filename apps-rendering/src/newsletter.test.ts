@@ -79,6 +79,29 @@ const makeBodyWithNoPlacesToInsert = (): Body => [
 	makePullquoteResult(),
 ];
 
+const makeBodyWithNoPlacesToInsertInTheTargetZone = (): Body => [
+	makeParagraphResult('Another paragraph.'),
+	makeParagraphResult('Another paragraph.'),
+	makeParagraphResult('Another paragraph.'),
+	makePullquoteResult(),
+	makePullquoteResult(),
+	makePullquoteResult(),
+	makePullquoteResult(),
+	makePullquoteResult(),
+	makePullquoteResult(),
+	makePullquoteResult(),
+	makePullquoteResult(),
+	makePullquoteResult(),
+	makePullquoteResult(),
+	makePullquoteResult(),
+	makePullquoteResult(),
+	makePullquoteResult(),
+	makePullquoteResult(),
+	makeParagraphResult('Another paragraph.'),
+	makeParagraphResult('Another paragraph.'),
+	makeParagraphResult('Another paragraph.'),
+];
+
 describe('Insert Newsletter Signups', () => {
 	it('makes no change if there is no newsletter', () => {
 		const originalBody = makeBodyWithPlaceToInsert();
@@ -92,6 +115,16 @@ describe('Insert Newsletter Signups', () => {
 
 	it('makes no change if there are no suitable places in the body', () => {
 		const originalBody = makeBodyWithNoPlacesToInsert();
+		const newItem = insertNewsletterIntoItem({
+			...article,
+			body: originalBody,
+			promotedNewsletter: some(TEST_NEWSLETTER),
+		}) as Standard;
+		expect(newItem.body).toEqual(originalBody);
+	});
+
+	it('will not insert a NewsletterSignupBlockElement outside the target range', () => {
+		const originalBody = makeBodyWithNoPlacesToInsertInTheTargetZone();
 		const newItem = insertNewsletterIntoItem({
 			...article,
 			body: originalBody,
