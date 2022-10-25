@@ -10,7 +10,7 @@ import { Optional } from 'optional';
 import { Result } from 'result';
 import { quiz, article } from 'fixtures/item';
 import { deadBlog } from 'fixtures/live';
-import { insertNewsletterIntoItem } from './insertNewsletterIntoItem';
+import { insertNewsletterIntoItem } from './newsletter';
 
 const TEST_NEWSLETTER: Newsletter = {
 	identityName: 'patriarchy',
