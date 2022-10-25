@@ -1,13 +1,13 @@
 // ----- Imports ----- //
 import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
-import { ArticleDesign } from '@guardian/libs';
+import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { OptionKind } from '@guardian/types';
+import { getPillarFromId } from 'articleFormat';
 import type { Body, BodyElement, NewsletterSignUp } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
 import type { Item } from 'item';
 import { logger } from 'logger';
 import { Result } from 'result';
-import { stringToPillar } from 'themeStyles';
 
 // ----- Constants ----- //
 
@@ -115,7 +115,8 @@ function findInsertIndex(body: Body): Result<string, number> {
 	);
 
 	function isSuitable(index: number): boolean {
-		const elementBeforeInsertPoint = possibleElementsToPlaceBefore[index - 1];
+		const elementBeforeInsertPoint =
+			possibleElementsToPlaceBefore[index - 1];
 		const elementAfterInsertPoint = possibleElementsToPlaceBefore[index];
 
 		// NOTE - this is a type safety check. TypeScript will cast a value
@@ -141,9 +142,7 @@ function findInsertIndex(body: Body): Result<string, number> {
 	// positions until it finds one that is suitable or reaches
 	// possibleElementsToPlaceBefore[0] - which is actually out of range, but
 	// has to be include to test if possiblePoistions[1] is suitable.
-	const findLastSuitablePosition = (
-		idx: number,
-	): Result<string, number> => {
+	const findLastSuitablePosition = (idx: number): Result<string, number> => {
 		if (idx <= 0) {
 			return Result.err(
 				'Unable to find suitable place for NewsletterSignUp',
@@ -167,7 +166,7 @@ function findInsertIndex(body: Body): Result<string, number> {
 			const bestIndexInOriginalBody = body.indexOf(
 				possibleElementsToPlaceBefore[indexInPossibleElements],
 			);
-			return Result.ok(bestIndexInOriginalBody) as Result<string, number>;
+			return Result.ok(bestIndexInOriginalBody);
 		},
 	);
 }
@@ -175,10 +174,16 @@ function findInsertIndex(body: Body): Result<string, number> {
 // ----- Procedures ----- //
 
 function buildBodyElement(newsletter: Newsletter): NewsletterSignUp {
+	const maybeTheme = getPillarFromId(newsletter.theme);
+	const theme =
+		maybeTheme.kind === OptionKind.Some
+			? maybeTheme.value
+			: ArticlePillar.News;
+
 	return {
 		kind: ElementKind.NewsletterSignUp,
 		...newsletter,
-		theme: stringToPillar(newsletter.theme),
+		theme,
 	};
 }
 
