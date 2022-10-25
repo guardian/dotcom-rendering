@@ -48,6 +48,9 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
 	return {
 		...data,
+		webTitle: data.pressedPage.seoData.title
+			? `${data.pressedPage.seoData.title} | The Guardian`
+			: data.webTitle,
 		pressedPage: {
 			...data.pressedPage,
 			collections: enhanceCollections(
