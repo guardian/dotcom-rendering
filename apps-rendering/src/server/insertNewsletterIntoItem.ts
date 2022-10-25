@@ -21,6 +21,11 @@ enum ElementCategory {
 	Error,
 }
 
+type ElementCategoryAndIndex = {
+	category: ElementCategory;
+	index: number;
+};
+
 // ----- pure functions ---//
 
 function categoriseElement(
@@ -93,23 +98,25 @@ function getRange(numberOfElements: number): [number, number] {
  * @returns A Result with the insertIndex or an error
  */
 function findInsertIndex(body: Body): Result<string, number> {
-	// create a filtered copy of the body without:
-	//  - 'Error' Results
-	//  -  Text BodyElements representing whitespace between HTML elements
-	const contentOnlyBody = body.filter(
-		(result) =>
-			![ElementCategory.Error, ElementCategory.WhiteSpace].includes(
-				categoriseElement(result),
-			),
-	);
+	const positionsWithContent: ElementCategoryAndIndex[] = body
+		.map((element, index) => ({
+			index,
+			category: categoriseElement(element),
+		}))
+		.filter(
+			(item) =>
+				![ElementCategory.Error, ElementCategory.WhiteSpace].includes(
+					item.category,
+				),
+		);
 
-	// get the slice from contentOnlyBody that has the elements
+	// get the slice from positionsWithContent that has the elements
 	// with the target range.
 	// The slice starts are minIndex-1 as the isSuitable function
 	// needs to check the category of the element before the element
 	// it is testing.
-	const [minIndex, maxIndex] = getRange(contentOnlyBody.length);
-	const possibleElementsToPlaceBefore = contentOnlyBody.slice(
+	const [minIndex, maxIndex] = getRange(positionsWithContent.length);
+	const possibleElementsToPlaceBefore = positionsWithContent.slice(
 		minIndex - 1,
 		maxIndex,
 	);
@@ -128,13 +135,15 @@ function findInsertIndex(body: Body): Result<string, number> {
 		}
 
 		return (
+			// the element before must be regular text (not bold paragraph)
 			[ElementCategory.ParagraphText].includes(
-				categoriseElement(elementBeforeInsertPoint),
+				elementBeforeInsertPoint.category,
 			) &&
+			// the element after must be regular text, or a bold paragraph.
 			[
 				ElementCategory.ParagraphText,
 				ElementCategory.BoldParagraphText,
-			].includes(categoriseElement(elementAfterInsertPoint))
+			].includes(elementAfterInsertPoint.category)
 		);
 	}
 
@@ -142,31 +151,30 @@ function findInsertIndex(body: Body): Result<string, number> {
 	// positions until it finds one that is suitable or reaches
 	// possibleElementsToPlaceBefore[0] - which is actually out of range, but
 	// has to be include to test if possiblePoistions[1] is suitable.
-	const findLastSuitablePosition = (idx: number): Result<string, number> => {
+	const findLastSuitablePosition = (
+		idx: number,
+	): Result<string, ElementCategoryAndIndex> => {
 		if (idx <= 0) {
 			return Result.err(
 				'Unable to find suitable place for NewsletterSignUp',
 			);
 		}
 		if (isSuitable(idx)) {
-			return Result.ok(idx);
+			return Result.ok(possibleElementsToPlaceBefore[idx]);
 		}
 		return findLastSuitablePosition(idx - 1);
 	};
 
 	// call the recursive function, starting at the last position in
 	// possibleElementsToPlaceBefore
-	const positionInPossibleElements = findLastSuitablePosition(
+	const insertPosition = findLastSuitablePosition(
 		possibleElementsToPlaceBefore.length - 1,
 	);
 
-	return positionInPossibleElements.either(
+	return insertPosition.either(
 		(err) => Result.err(err),
-		(indexInPossibleElements) => {
-			const bestIndexInOriginalBody = body.indexOf(
-				possibleElementsToPlaceBefore[indexInPossibleElements],
-			);
-			return Result.ok(bestIndexInOriginalBody);
+		(categoryAndIndex) => {
+			return Result.ok(categoryAndIndex.index);
 		},
 	);
 }
