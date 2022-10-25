@@ -14,6 +14,7 @@ import { darkModeCss } from 'styles';
 
 const captionElement =
 	(format: ArticleFormat) =>
+	// eslint-disable-next-line react/display-name -- not a normal React component
 	(node: Node, key: number): ReactNode => {
 		const children = Array.from(node.childNodes).map(
 			captionElement(format),
