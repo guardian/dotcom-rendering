@@ -38,15 +38,6 @@ const headerStyles = (fontColour?: string) => css`
 	color: ${fontColour || text.primary};
 	padding-bottom: ${space[2]}px;
 	padding-top: ${space[1]}px;
-	margin-left: 0;
-
-	${from.tablet} {
-		margin-left: 10px;
-	}
-
-	${from.leftCol} {
-		margin-left: 0;
-	}
 `;
 
 const descriptionStyles = (fontColour?: string) => css`
@@ -60,12 +51,20 @@ const descriptionStyles = (fontColour?: string) => css`
 		color: ${text.primary};
 		text-decoration: none;
 	}
+
+	${until.leftCol} {
+		margin-bottom: ${space[4]}px;
+	}
+`;
+
+const leftMarginStyles = css`
+	margin-left: 0;
 	${between.tablet.and.leftCol} {
 		margin-left: 10px;
 	}
 
-	${until.leftCol} {
-		margin-bottom: ${space[4]}px;
+	${from.leftCol} {
+		margin-left: 0;
 	}
 `;
 
@@ -98,7 +97,7 @@ export const ContainerTitle = ({
 	const locale = editionId && getEditionFromId(editionId).locale;
 
 	return (
-		<div>
+		<div css={leftMarginStyles}>
 			{url ? (
 				<a css={linkStyles} href={url}>
 					<h2 css={headerStyles(fontColour)}>{title}</h2>
