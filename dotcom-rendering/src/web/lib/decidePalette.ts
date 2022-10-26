@@ -234,15 +234,25 @@ const textHeadlineByline = (format: ArticleFormat): string => {
 		}
 	}
 
-	if (
-		format.theme === ArticleSpecial.SpecialReport &&
-		format.design !== ArticleDesign.LiveBlog &&
-		format.design !== ArticleDesign.DeadBlog
-	)
+	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
-	return pillarPalette[format.theme].main;
+
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return palette.specialReportAlt[100];
+	}
 };
 
 const textStandfirst = (format: ArticleFormat): string => {
@@ -251,7 +261,7 @@ const textStandfirst = (format: ArticleFormat): string => {
 		format.theme === ArticleSpecial.SpecialReportAlt &&
 		format.design !== ArticleDesign.DeadBlog
 	)
-		return neutral[7];
+		return palette.specialReportAlt[100];
 
 	return BLACK;
 };
@@ -577,7 +587,7 @@ const textArticleLinkHover = (format: ArticleFormat): string => {
 			case ArticleSpecial.SpecialReport:
 				return specialReport[100];
 			case ArticleSpecial.SpecialReportAlt:
-				return news[300];
+				return palette.specialReportAlt[200];
 		}
 	}
 	if (format.theme === ArticleSpecial.Labs) return BLACK;
@@ -1293,11 +1303,11 @@ const borderArticleLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 
 	if (
-		format.theme === ArticleSpecial.SpecialReport &&
+		format.theme === ArticleSpecial.SpecialReportAlt &&
 		format.design !== ArticleDesign.DeadBlog &&
 		format.design !== ArticleDesign.LiveBlog
 	)
-		return specialReport[300];
+		return 'rgba(60, 60, 60, 0.3)';
 
 	return border.secondary;
 };
@@ -1325,6 +1335,10 @@ const borderStandfirstLink = (format: ArticleFormat): string => {
 	}
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[400];
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return 'rgba(60, 60, 60, 0.3)';
+
 	return border.secondary;
 };
 
@@ -1520,7 +1534,8 @@ const borderArticle: (format: ArticleFormat) => string = (format) => {
 	)
 		return '#CDCDCD';
 
-	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[60];
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return 'rgba(60, 60, 60, 0.3)';
 
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	return border.secondary;
