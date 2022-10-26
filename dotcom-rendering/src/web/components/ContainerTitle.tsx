@@ -35,7 +35,7 @@ const linkStyles = css`
 const headerStyles = (fontColour?: string) => css`
 	${headline.xsmall({ fontWeight: 'bold' })};
 	color: ${fontColour || text.primary};
-	padding-bottom: ${space[2]}px;
+	padding-bottom: ${space[1]}px;
 	padding-top: ${space[1]}px;
 `;
 
