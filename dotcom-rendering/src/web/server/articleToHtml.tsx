@@ -204,18 +204,14 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	const getAmpLink = (tags: TagType[]) => {
 		if (
 			!isAmpSupported(
+				CAPIArticle.format,
+				tags,
 				CAPIArticle.blocks.flatMap((block) => block.elements),
+				CAPIArticle.config.switches,
+				CAPIArticle.main,
 			)
 		) {
 			return undefined;
-		}
-
-		if (CAPIArticle.format.design === 'InteractiveDesign') {
-			const hasAmpInteractiveTag = tags.some(
-				(tag) =>
-					tag.id === 'tracking/platformfunctional/ampinteractive',
-			);
-			if (!hasAmpInteractiveTag) return undefined;
 		}
 
 		return `https://amp.theguardian.com/${CAPIArticle.pageId}`;

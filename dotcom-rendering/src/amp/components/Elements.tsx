@@ -1,3 +1,4 @@
+import type { Switches } from 'src/types/config';
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 import { enhance } from '../lib/enhance';
 import { AudioAtomBlockComponent } from './elements/AudioAtomBlockComponent';
@@ -57,7 +58,35 @@ const AMP_SUPPORTED_ELEMENTS = [
 	'model.dotcomrendering.pageElements.YoutubeBlockElement',
 ];
 
-export const isAmpSupported = (elements: CAPIElement[]): boolean => {
+export const isAmpSupported = (
+	format: CAPIFormat,
+	tags: TagType[],
+	elements: CAPIElement[],
+	switches: Switches,
+	main: string,
+): boolean => {
+	if (format.design === 'InteractiveDesign') {
+		const hasAmpInteractiveTag = tags.some(
+			(tag) => tag.id === 'tracking/platformfunctional/ampinteractive',
+		);
+		if (!hasAmpInteractiveTag) return false;
+	}
+
+	if (format.design === 'ArticleDesign') {
+		const isSwitchedOn = switches.ampArticleSwitch;
+		const hasQuizTag = tags.some((tag) => tag.id === 'tone/quizzes');
+		if (!isSwitchedOn || hasQuizTag || elements.length == 0) return false;
+	}
+
+	if (format.design === 'LiveBlogDesign') {
+		const isSwitchedOn = switches.ampLiveblogSwitch;
+		if (!isSwitchedOn) return false;
+	}
+
+	if (main.includes('guardiannewsandmedia.formstack.com')) {
+		return false;
+	}
+
 	return elements.every((element) => {
 		if ((element as { isMandatory?: boolean }).isMandatory) {
 			return AMP_SUPPORTED_ELEMENTS.includes(element._type);
