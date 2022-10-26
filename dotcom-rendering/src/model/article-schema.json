@@ -3807,6 +3807,7 @@
         "EditionId": {
             "enum": [
                 "AU",
+                "EUR",
                 "INT",
                 "UK",
                 "US"
@@ -4342,10 +4343,14 @@
                 },
                 "INT": {
                     "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "EUR": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
                 }
             },
             "required": [
                 "AU",
+                "EUR",
                 "INT",
                 "UK",
                 "US"
