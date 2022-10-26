@@ -45,6 +45,7 @@ export interface CAPITrailType extends BaseTrailType {
 	pillar: LegacyPillar;
 	carouselImages?: { [key: string]: string };
 	isLiveBlog?: boolean;
+	masterImage: string;
 }
 
 export interface TrailTabType {

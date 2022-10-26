@@ -8,6 +8,7 @@ export const decideTrail = (trail: CAPITrailType, index = 0): TrailType => {
 	return {
 		...trail,
 		format,
+		image: trail.masterImage,
 		dataLinkName: getDataLinkNameCard(format, '0', index + 1),
 	};
 };
