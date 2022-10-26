@@ -611,6 +611,10 @@ const textArticleLinkHover = (format: ArticleFormat): string => {
 
 const textCardHeadline = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport) return WHITE;
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
 	if (format.display === ArticleDisplay.Immersive) return BLACK;
 	switch (format.design) {
 		case ArticleDesign.Interview:
@@ -653,8 +657,8 @@ const textCardKicker = (format: ArticleFormat): string => {
 			format.design === ArticleDesign.Letter)
 	)
 		return brandAlt[400];
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return palette.specialReportAlt[300];
+	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[7];
+
 	if (format.theme === ArticleSpecial.SpecialReport) return brandAlt[400];
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -687,6 +691,9 @@ const textCardKicker = (format: ArticleFormat): string => {
 };
 
 const textCardFooter = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
 	switch (format.design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
