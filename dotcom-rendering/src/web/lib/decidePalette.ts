@@ -1316,7 +1316,7 @@ const borderArticleLink = (format: ArticleFormat): string => {
 		format.design !== ArticleDesign.DeadBlog &&
 		format.design !== ArticleDesign.LiveBlog
 	)
-		return 'rgba(60, 60, 60, 0.3)';
+		return transparentColour(neutral[60], 0.3);
 
 	return border.secondary;
 };
@@ -1346,7 +1346,7 @@ const borderStandfirstLink = (format: ArticleFormat): string => {
 		return specialReport[400];
 
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return 'rgba(60, 60, 60, 0.3)';
+		return transparentColour(neutral[60], 0.3);
 
 	return border.secondary;
 };
@@ -1545,7 +1545,7 @@ const borderArticle: (format: ArticleFormat) => string = (format) => {
 		return '#CDCDCD';
 
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return 'rgba(60, 60, 60, 0.3)';
+		return transparentColour(neutral[60], 0.3);
 
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	return border.secondary;
