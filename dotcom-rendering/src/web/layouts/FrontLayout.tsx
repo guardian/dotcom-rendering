@@ -81,6 +81,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 		config: { isPaidContent },
 	} = front;
 
+	const isInEuropeTest =
+		front.config.abTests.europeNetworkFrontVariant === 'variant';
+
 	const format = {
 		display: ArticleDisplay.Standard,
 		design: ArticleDesign.Standard,
@@ -134,6 +137,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							remoteHeader={!!front.config.switches.remoteHeader}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
+							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 					<Section
