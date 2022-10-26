@@ -35,7 +35,7 @@ const linkStyles = css`
 const headerStyles = (fontColour?: string) => css`
 	${headline.xsmall({ fontWeight: 'bold' })};
 	color: ${fontColour || text.primary};
-	padding-bottom: ${space[2]}px;
+	padding-bottom: ${space[1]}px;
 	padding-top: ${space[1]}px;
 `;
 
@@ -53,10 +53,10 @@ const descriptionStyles = (fontColour?: string) => css`
 `;
 
 const bottomMargin = css`
-	margin-bottom: ${space[4]}px;
+	margin-bottom: ${space[2]}px;
 `;
 
-const leftMarginStyles = css`
+const marginStyles = css`
 	margin-left: 0;
 	${between.tablet.and.leftCol} {
 		margin-left: 10px;
@@ -65,6 +65,7 @@ const leftMarginStyles = css`
 	${from.leftCol} {
 		margin-left: 0;
 	}
+	margin-bottom: ${space[4]}px;
 `;
 
 const dateTextStyles = (color: Colour) => css`
@@ -96,7 +97,7 @@ export const ContainerTitle = ({
 	const locale = editionId && getEditionFromId(editionId).locale;
 
 	return (
-		<div css={leftMarginStyles}>
+		<div css={[marginStyles]}>
 			{url ? (
 				<a css={[linkStyles, bottomMargin]} href={url}>
 					<h2 css={headerStyles(fontColour)}>{title}</h2>
