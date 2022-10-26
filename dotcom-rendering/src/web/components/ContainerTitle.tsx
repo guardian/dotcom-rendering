@@ -50,7 +50,9 @@ const descriptionStyles = (fontColour?: string) => css`
 		color: ${text.primary};
 		text-decoration: none;
 	}
+`;
 
+const bottomMargin = css`
 	margin-bottom: ${space[4]}px;
 `;
 
@@ -96,7 +98,7 @@ export const ContainerTitle = ({
 	return (
 		<div css={leftMarginStyles}>
 			{url ? (
-				<a css={linkStyles} href={url}>
+				<a css={[linkStyles, bottomMargin]} href={url}>
 					<h2 css={headerStyles(fontColour)}>{title}</h2>
 				</a>
 			) : (
@@ -104,7 +106,7 @@ export const ContainerTitle = ({
 			)}
 			{!!description && (
 				<p
-					css={descriptionStyles(fontColour)}
+					css={[descriptionStyles(fontColour), bottomMargin]}
 					dangerouslySetInnerHTML={{ __html: description }}
 				/>
 			)}
@@ -125,6 +127,7 @@ export const ContainerTitle = ({
 							dateTextStyles(
 								overrides?.text.containerDate || news[400],
 							),
+							bottomMargin,
 						]}
 					>
 						{now.toLocaleDateString(locale, {
