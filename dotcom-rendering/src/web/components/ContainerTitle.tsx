@@ -6,7 +6,6 @@ import {
 	news,
 	space,
 	text,
-	until,
 } from '@guardian/source-foundations';
 import type { EditionId } from '../../types/edition';
 import type { DCRContainerPalette } from '../../types/front';
@@ -52,9 +51,7 @@ const descriptionStyles = (fontColour?: string) => css`
 		text-decoration: none;
 	}
 
-	${until.leftCol} {
-		margin-bottom: ${space[4]}px;
-	}
+	margin-bottom: ${space[4]}px;
 `;
 
 const leftMarginStyles = css`
