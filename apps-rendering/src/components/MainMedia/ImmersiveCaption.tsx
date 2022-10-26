@@ -2,6 +2,9 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import CaptionIcon, {
+	CaptionIconVariant,
+} from '@guardian/common-rendering/src/components/captionIcon';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, remSpace, textSans } from '@guardian/source-foundations';
@@ -56,6 +59,11 @@ const ImmersiveCaption: FC<Props> = ({ mainMedia, format }) =>
 
 		return (
 			<p id={immersiveCaptionId} css={styles(format)}>
+				<CaptionIcon
+					variant={CaptionIconVariant.Image}
+					format={format}
+					supportsDarkMode={true}
+				/>
 				<Caption caption={caption} format={format} />{' '}
 				{maybeRender(credit, (cred) => (
 					<>{cred}</>

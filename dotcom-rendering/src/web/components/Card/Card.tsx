@@ -15,6 +15,7 @@ import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { Avatar } from '../Avatar';
 import { CardHeadline } from '../CardHeadline';
+import { CardPicture } from '../CardPicture';
 import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
 import { Snap } from '../Snap';
@@ -259,7 +260,6 @@ export const Card = ({
 							data-ignore="global-link-styling"
 							data-link-name="Comment count"
 							href={`${linkTo}#comments`}
-							subdued={true}
 							cssOverrides={css`
 								/* See: https://css-tricks.com/nested-links/ */
 								${getZIndex('card-nested-link')}
@@ -269,6 +269,7 @@ export const Card = ({
 								font-family: inherit;
 								font-size: inherit;
 								line-height: inherit;
+								text-decoration: none;
 							`}
 						/>
 					) : undefined
@@ -335,7 +336,11 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						) : (
-							<img src={image.src} alt="" role="presentation" />
+							<CardPicture
+								master={image.src}
+								imageSize={imageSize}
+								alt=""
+							/>
 						)}
 					</ImageWrapper>
 				)}

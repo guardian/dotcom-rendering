@@ -415,6 +415,7 @@ type FESeoDataType = {
 	id: string;
 	navSection: string;
 	webTitle: string;
+	title?: string;
 	description: string;
 };
 

@@ -36,6 +36,7 @@ import {
 	withDefault,
 } from '@guardian/types';
 import type { Option } from '@guardian/types';
+import { getPillarOrElseNews } from 'articleFormat';
 import Img from 'components/ImgAlt';
 import Kicker from 'components/Kicker';
 import { stars } from 'components/StarRating';
@@ -44,7 +45,6 @@ import type { Image } from 'image';
 import { maybeRender, pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
-import { themeFromString } from 'themeStyles';
 
 interface Props {
 	relatedItem: RelatedItem;
@@ -435,7 +435,7 @@ const cardImage = (
 	relatedItem: RelatedItem,
 ): ReactElement | null => {
 	const format = {
-		theme: themeFromString(relatedItem.pillar.id),
+		theme: getPillarOrElseNews(relatedItem.pillar.id),
 		design: ArticleDesign.Standard,
 		display: ArticleDisplay.Standard,
 	};
@@ -477,21 +477,21 @@ const formatFromRelatedItem = (
 		case RelatedItemType.ARTICLE:
 			return {
 				design: ArticleDesign.Standard,
-				theme: themeFromString(pillar),
+				theme: getPillarOrElseNews(pillar),
 				display: ArticleDisplay.Standard,
 			};
 
 		case RelatedItemType.FEATURE:
 			return {
 				design: ArticleDesign.Feature,
-				theme: themeFromString(pillar),
+				theme: getPillarOrElseNews(pillar),
 				display: ArticleDisplay.Standard,
 			};
 
 		case RelatedItemType.ANALYSIS:
 			return {
 				design: ArticleDesign.Analysis,
-				theme: themeFromString(pillar),
+				theme: getPillarOrElseNews(pillar),
 				display: ArticleDisplay.Standard,
 			};
 		case RelatedItemType.SPECIAL:
@@ -503,32 +503,32 @@ const formatFromRelatedItem = (
 		case RelatedItemType.LIVE:
 			return {
 				design: ArticleDesign.LiveBlog,
-				theme: themeFromString(pillar),
+				theme: getPillarOrElseNews(pillar),
 				display: ArticleDisplay.Standard,
 			};
 
 		case RelatedItemType.GALLERY:
 			return {
 				design: ArticleDesign.Gallery,
-				theme: themeFromString(pillar),
+				theme: getPillarOrElseNews(pillar),
 				display: ArticleDisplay.Standard,
 			};
 		case RelatedItemType.AUDIO:
 			return {
 				design: ArticleDesign.Audio,
-				theme: themeFromString(pillar),
+				theme: getPillarOrElseNews(pillar),
 				display: ArticleDisplay.Standard,
 			};
 		case RelatedItemType.VIDEO:
 			return {
 				design: ArticleDesign.Video,
-				theme: themeFromString(pillar),
+				theme: getPillarOrElseNews(pillar),
 				display: ArticleDisplay.Standard,
 			};
 		case RelatedItemType.REVIEW:
 			return {
 				design: ArticleDesign.Review,
-				theme: themeFromString(pillar),
+				theme: getPillarOrElseNews(pillar),
 				display: ArticleDisplay.Standard,
 			};
 		case RelatedItemType.ADVERTISEMENT_FEATURE:
@@ -543,7 +543,7 @@ const formatFromRelatedItem = (
 				theme:
 					pillar === 'pillar/news'
 						? ArticlePillar.Opinion
-						: themeFromString(pillar),
+						: getPillarOrElseNews(pillar),
 				display: ArticleDisplay.Standard,
 			};
 	}

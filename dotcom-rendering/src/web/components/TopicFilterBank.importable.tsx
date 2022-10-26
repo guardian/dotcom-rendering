@@ -5,7 +5,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { FilterButton } from './FilterButton.importable';
 
 type Props = {
-	availableTopics: Topic[];
+	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
 	format: ArticleFormat;
 	filterKeyEvents: boolean;
@@ -75,19 +75,27 @@ const isEqual = (selectedTopic: Topic, availableTopic: Topic) =>
 	availableTopic.type === selectedTopic.type &&
 	availableTopic.value === selectedTopic.value;
 
+const getTopFiveTopics = (availableTopics: Topic[]) =>
+	availableTopics
+		.slice(0, 5)
+		.filter((topic) => !!topic.count && topic.count > 2);
+
+export const hasRelevantTopics = (availableTopics?: Topic[]) => {
+	return !!(availableTopics && getTopFiveTopics(availableTopics).length);
+};
+
 export const TopicFilterBank = ({
-	availableTopics,
+	availableTopics = [],
 	selectedTopics,
 	format,
 	keyEvents,
 	filterKeyEvents = false,
 	id,
 }: Props) => {
+	if (!hasRelevantTopics(availableTopics) && !keyEvents?.length) return null;
 	const palette = decidePalette(format);
 	const selectedTopic = selectedTopics?.[0];
-	const topFiveTopics = availableTopics
-		.slice(0, 5)
-		.filter((topic) => !!topic.count && topic.count > 2);
+	const topFiveTopics = getTopFiveTopics(availableTopics);
 
 	if (selectedTopic) {
 		const selectedIndex = availableTopics.findIndex((availableTopic) =>
@@ -132,6 +140,7 @@ export const TopicFilterBank = ({
 							onClick={() =>
 								handleTopicClick(isActive, buttonParams, id)
 							}
+							key={`filter-${topic.value}`}
 						/>
 					);
 				})}

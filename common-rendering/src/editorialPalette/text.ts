@@ -54,6 +54,8 @@ const mediaArticleBodyLinkDark = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -89,6 +91,8 @@ const bylineAnchor = (format: ArticleFormat): Colour => {
 				return labs[300];
 			case ArticleSpecial.SpecialReport:
 				return brandAlt[300];
+			case ArticleSpecial.SpecialReportAlt:
+				return news[300];
 			case ArticlePillar.News:
 			default:
 				return news[300];
@@ -109,6 +113,8 @@ const bylineAnchor = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -144,6 +150,8 @@ const bylineAnchorDark = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -163,6 +171,8 @@ const calloutFormAnchor = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -194,6 +204,8 @@ const commentCount = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -220,6 +232,9 @@ const commentCountDark = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
+
 	}
 };
 
@@ -243,6 +258,8 @@ const dropCap = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[300];
 	}
 };
 
@@ -262,6 +279,8 @@ const dropCapDark = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -336,6 +355,8 @@ const bylineLeftColumn = (format: ArticleFormat): Colour => {
 					return labs[300];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[400];
 			}
 		case ArticleDesign.LiveBlog:
 			switch (format.theme) {
@@ -353,6 +374,8 @@ const bylineLeftColumn = (format: ArticleFormat): Colour => {
 					return labs[300];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[300];
 			}
 		default:
 			switch (format.theme) {
@@ -370,6 +393,8 @@ const bylineLeftColumn = (format: ArticleFormat): Colour => {
 					return labs[400];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[400];
 			}
 	}
 };
@@ -448,6 +473,8 @@ const follow = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -474,6 +501,8 @@ const followDark = (format: ArticleFormat): Colour => {
 					return specialReport[500];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[500];
 			}
 	}
 };
@@ -494,6 +523,8 @@ const bylineDark = (format: ArticleFormat): Colour => {
 			return specialReport[500];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -513,6 +544,8 @@ const linkDark = (format: ArticleFormat): Colour => {
 			return specialReport[500];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -535,6 +568,8 @@ const articleLink = (format: ArticleFormat): Colour => {
 					return specialReport[400];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[400];
 			}
 		case ArticleDesign.Gallery:
 			return neutral[86];
@@ -554,6 +589,8 @@ const articleLink = (format: ArticleFormat): Colour => {
 					return specialReport[300];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[300];
 			}
 	}
 };
@@ -574,6 +611,8 @@ const interactiveAtomLink = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+				return news[400];
 	}
 };
 
@@ -593,6 +632,8 @@ const keyEventsInline = ({ theme }: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -612,6 +653,8 @@ const keyEventsLeftColumn = ({ theme }: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -631,6 +674,8 @@ const mediaArticleSeries = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -679,6 +724,8 @@ const standfirstLink = (format: ArticleFormat): Colour => {
 					return labs[300];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+						return news[400];
 			}
 		case ArticleDesign.Gallery:
 			return neutral[86];
@@ -699,6 +746,8 @@ const standfirstLink = (format: ArticleFormat): Colour => {
 					return labs[300];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[500];
 			}
 		default: {
 			switch (format.theme) {
@@ -716,6 +765,8 @@ const standfirstLink = (format: ArticleFormat): Colour => {
 					return labs[300];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[400];
 			}
 		}
 	}
@@ -744,6 +795,8 @@ const standfirstLinkDark = (format: ArticleFormat): Colour => {
 					return labs[300];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[500];
 			}
 		default: {
 			return neutral[60];
@@ -861,6 +914,8 @@ const seriesTitle = (format: ArticleFormat): Colour => {
 					return labs[400];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[400];
 			}
 
 		case ArticleDesign.LiveBlog:
@@ -879,6 +934,8 @@ const seriesTitle = (format: ArticleFormat): Colour => {
 					return labs[400];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[500];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[600];
 			}
 	}
 	switch (format.theme) {
@@ -896,6 +953,8 @@ const seriesTitle = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -939,6 +998,8 @@ const richLink = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -974,6 +1035,8 @@ const seriesTitleDark = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -993,6 +1056,8 @@ const pagination = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+			case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -1012,6 +1077,8 @@ const pullquote = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -1031,6 +1098,8 @@ const pullquoteDark = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+			case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 

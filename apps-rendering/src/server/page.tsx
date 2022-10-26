@@ -45,23 +45,8 @@ const scriptName = ({ design, display }: ArticleFormat): Option<string> => {
 			return display !== ArticleDisplay.Immersive
 				? some('article.js')
 				: none;
-		case ArticleDesign.DeadBlog:
-		case ArticleDesign.LiveBlog:
-		case ArticleDesign.Editorial:
-		case ArticleDesign.Letter:
-		case ArticleDesign.Comment:
-		case ArticleDesign.Feature:
-		case ArticleDesign.Analysis:
-		case ArticleDesign.Review:
-		case ArticleDesign.Standard:
-		case ArticleDesign.Quiz:
-		case ArticleDesign.Gallery:
-		case ArticleDesign.Audio:
-		case ArticleDesign.Video:
-		case ArticleDesign.Interview:
-			return some('article.js');
 		default:
-			return none;
+			return some('article.js');
 	}
 };
 

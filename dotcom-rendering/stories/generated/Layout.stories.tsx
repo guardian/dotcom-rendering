@@ -108,6 +108,19 @@ StandardStandardLabs.story = {
 	name: 'StandardDisplay StandardDesign Labs'
 };
 
+export const StandardStandardSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Standard"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardStandardSpecialReportAltTheme.story = {
+	name: 'StandardDisplay StandardDesign SpecialReportAltTheme'
+};
+
 export const StandardGalleryNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -197,6 +210,19 @@ export const StandardGalleryLabs = () => {
 };
 StandardGalleryLabs.story = {
 	name: 'StandardDisplay GalleryDesign Labs'
+};
+
+export const StandardGallerySpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Gallery"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardGallerySpecialReportAltTheme.story = {
+	name: 'StandardDisplay GalleryDesign SpecialReportAltTheme'
 };
 
 export const StandardAudioNews = () => {
@@ -290,6 +316,19 @@ StandardAudioLabs.story = {
 	name: 'StandardDisplay AudioDesign Labs'
 };
 
+export const StandardAudioSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Audio"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardAudioSpecialReportAltTheme.story = {
+	name: 'StandardDisplay AudioDesign SpecialReportAltTheme'
+};
+
 export const StandardVideoNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -379,6 +418,19 @@ export const StandardVideoLabs = () => {
 };
 StandardVideoLabs.story = {
 	name: 'StandardDisplay VideoDesign Labs'
+};
+
+export const StandardVideoSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Video"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardVideoSpecialReportAltTheme.story = {
+	name: 'StandardDisplay VideoDesign SpecialReportAltTheme'
 };
 
 export const StandardReviewNews = () => {
@@ -472,6 +524,19 @@ StandardReviewLabs.story = {
 	name: 'StandardDisplay ReviewDesign Labs'
 };
 
+export const StandardReviewSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Review"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardReviewSpecialReportAltTheme.story = {
+	name: 'StandardDisplay ReviewDesign SpecialReportAltTheme'
+};
+
 export const StandardAnalysisNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -561,6 +626,19 @@ export const StandardAnalysisLabs = () => {
 };
 StandardAnalysisLabs.story = {
 	name: 'StandardDisplay AnalysisDesign Labs'
+};
+
+export const StandardAnalysisSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Analysis"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardAnalysisSpecialReportAltTheme.story = {
+	name: 'StandardDisplay AnalysisDesign SpecialReportAltTheme'
 };
 
 export const StandardExplainerNews = () => {
@@ -654,6 +732,19 @@ StandardExplainerLabs.story = {
 	name: 'StandardDisplay ExplainerDesign Labs'
 };
 
+export const StandardExplainerSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Explainer"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardExplainerSpecialReportAltTheme.story = {
+	name: 'StandardDisplay ExplainerDesign SpecialReportAltTheme'
+};
+
 export const StandardCommentNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -743,6 +834,19 @@ export const StandardCommentLabs = () => {
 };
 StandardCommentLabs.story = {
 	name: 'StandardDisplay CommentDesign Labs'
+};
+
+export const StandardCommentSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Comment"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardCommentSpecialReportAltTheme.story = {
+	name: 'StandardDisplay CommentDesign SpecialReportAltTheme'
 };
 
 export const StandardLetterNews = () => {
@@ -836,6 +940,19 @@ StandardLetterLabs.story = {
 	name: 'StandardDisplay LetterDesign Labs'
 };
 
+export const StandardLetterSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Letter"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardLetterSpecialReportAltTheme.story = {
+	name: 'StandardDisplay LetterDesign SpecialReportAltTheme'
+};
+
 export const StandardFeatureNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -925,6 +1042,19 @@ export const StandardFeatureLabs = () => {
 };
 StandardFeatureLabs.story = {
 	name: 'StandardDisplay FeatureDesign Labs'
+};
+
+export const StandardFeatureSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Feature"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardFeatureSpecialReportAltTheme.story = {
+	name: 'StandardDisplay FeatureDesign SpecialReportAltTheme'
 };
 
 export const StandardLiveBlogNews = () => {
@@ -1018,6 +1148,19 @@ StandardLiveBlogLabs.story = {
 	name: 'StandardDisplay LiveBlogDesign Labs'
 };
 
+export const StandardLiveBlogSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="LiveBlog"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardLiveBlogSpecialReportAltTheme.story = {
+	name: 'StandardDisplay LiveBlogDesign SpecialReportAltTheme'
+};
+
 export const StandardDeadBlogNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -1107,6 +1250,19 @@ export const StandardDeadBlogLabs = () => {
 };
 StandardDeadBlogLabs.story = {
 	name: 'StandardDisplay DeadBlogDesign Labs'
+};
+
+export const StandardDeadBlogSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="DeadBlog"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardDeadBlogSpecialReportAltTheme.story = {
+	name: 'StandardDisplay DeadBlogDesign SpecialReportAltTheme'
 };
 
 export const StandardRecipeNews = () => {
@@ -1200,6 +1356,19 @@ StandardRecipeLabs.story = {
 	name: 'StandardDisplay RecipeDesign Labs'
 };
 
+export const StandardRecipeSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Recipe"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardRecipeSpecialReportAltTheme.story = {
+	name: 'StandardDisplay RecipeDesign SpecialReportAltTheme'
+};
+
 export const StandardMatchReportNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -1289,6 +1458,19 @@ export const StandardMatchReportLabs = () => {
 };
 StandardMatchReportLabs.story = {
 	name: 'StandardDisplay MatchReportDesign Labs'
+};
+
+export const StandardMatchReportSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="MatchReport"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardMatchReportSpecialReportAltTheme.story = {
+	name: 'StandardDisplay MatchReportDesign SpecialReportAltTheme'
 };
 
 export const StandardInterviewNews = () => {
@@ -1382,6 +1564,19 @@ StandardInterviewLabs.story = {
 	name: 'StandardDisplay InterviewDesign Labs'
 };
 
+export const StandardInterviewSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Interview"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardInterviewSpecialReportAltTheme.story = {
+	name: 'StandardDisplay InterviewDesign SpecialReportAltTheme'
+};
+
 export const StandardEditorialNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -1471,6 +1666,19 @@ export const StandardEditorialLabs = () => {
 };
 StandardEditorialLabs.story = {
 	name: 'StandardDisplay EditorialDesign Labs'
+};
+
+export const StandardEditorialSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Editorial"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardEditorialSpecialReportAltTheme.story = {
+	name: 'StandardDisplay EditorialDesign SpecialReportAltTheme'
 };
 
 export const StandardQuizNews = () => {
@@ -1564,6 +1772,19 @@ StandardQuizLabs.story = {
 	name: 'StandardDisplay QuizDesign Labs'
 };
 
+export const StandardQuizSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Quiz"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardQuizSpecialReportAltTheme.story = {
+	name: 'StandardDisplay QuizDesign SpecialReportAltTheme'
+};
+
 export const StandardInteractiveNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -1653,6 +1874,19 @@ export const StandardInteractiveLabs = () => {
 };
 StandardInteractiveLabs.story = {
 	name: 'StandardDisplay InteractiveDesign Labs'
+};
+
+export const StandardInteractiveSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Interactive"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardInteractiveSpecialReportAltTheme.story = {
+	name: 'StandardDisplay InteractiveDesign SpecialReportAltTheme'
 };
 
 export const StandardPhotoEssayNews = () => {
@@ -1746,6 +1980,19 @@ StandardPhotoEssayLabs.story = {
 	name: 'StandardDisplay PhotoEssayDesign Labs'
 };
 
+export const StandardPhotoEssaySpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="PhotoEssay"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardPhotoEssaySpecialReportAltTheme.story = {
+	name: 'StandardDisplay PhotoEssayDesign SpecialReportAltTheme'
+};
+
 export const StandardPrintShopNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -1835,6 +2082,19 @@ export const StandardPrintShopLabs = () => {
 };
 StandardPrintShopLabs.story = {
 	name: 'StandardDisplay PrintShopDesign Labs'
+};
+
+export const StandardPrintShopSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="PrintShop"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardPrintShopSpecialReportAltTheme.story = {
+	name: 'StandardDisplay PrintShopDesign SpecialReportAltTheme'
 };
 
 export const StandardObituaryNews = () => {
@@ -1928,6 +2188,19 @@ StandardObituaryLabs.story = {
 	name: 'StandardDisplay ObituaryDesign Labs'
 };
 
+export const StandardObituarySpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Obituary"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardObituarySpecialReportAltTheme.story = {
+	name: 'StandardDisplay ObituaryDesign SpecialReportAltTheme'
+};
+
 export const StandardCorrectionNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -2017,6 +2290,19 @@ export const StandardCorrectionLabs = () => {
 };
 StandardCorrectionLabs.story = {
 	name: 'StandardDisplay CorrectionDesign Labs'
+};
+
+export const StandardCorrectionSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="Correction"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardCorrectionSpecialReportAltTheme.story = {
+	name: 'StandardDisplay CorrectionDesign SpecialReportAltTheme'
 };
 
 export const StandardFullPageInteractiveNews = () => {
@@ -2110,6 +2396,19 @@ StandardFullPageInteractiveLabs.story = {
 	name: 'StandardDisplay FullPageInteractiveDesign Labs'
 };
 
+export const StandardFullPageInteractiveSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="FullPageInteractive"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardFullPageInteractiveSpecialReportAltTheme.story = {
+	name: 'StandardDisplay FullPageInteractiveDesign SpecialReportAltTheme'
+};
+
 export const StandardNewsletterSignupNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -2199,6 +2498,19 @@ export const StandardNewsletterSignupLabs = () => {
 };
 StandardNewsletterSignupLabs.story = {
 	name: 'StandardDisplay NewsletterSignupDesign Labs'
+};
+
+export const StandardNewsletterSignupSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Standard"
+			designName="NewsletterSignup"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+StandardNewsletterSignupSpecialReportAltTheme.story = {
+	name: 'StandardDisplay NewsletterSignupDesign SpecialReportAltTheme'
 };
 
 export const ImmersiveStandardNews = () => {
@@ -2292,6 +2604,19 @@ ImmersiveStandardLabs.story = {
 	name: 'ImmersiveDisplay StandardDesign Labs'
 };
 
+export const ImmersiveStandardSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Standard"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveStandardSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay StandardDesign SpecialReportAltTheme'
+};
+
 export const ImmersiveGalleryNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -2381,6 +2706,19 @@ export const ImmersiveGalleryLabs = () => {
 };
 ImmersiveGalleryLabs.story = {
 	name: 'ImmersiveDisplay GalleryDesign Labs'
+};
+
+export const ImmersiveGallerySpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Gallery"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveGallerySpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay GalleryDesign SpecialReportAltTheme'
 };
 
 export const ImmersiveAudioNews = () => {
@@ -2474,6 +2812,19 @@ ImmersiveAudioLabs.story = {
 	name: 'ImmersiveDisplay AudioDesign Labs'
 };
 
+export const ImmersiveAudioSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Audio"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveAudioSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay AudioDesign SpecialReportAltTheme'
+};
+
 export const ImmersiveVideoNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -2563,6 +2914,19 @@ export const ImmersiveVideoLabs = () => {
 };
 ImmersiveVideoLabs.story = {
 	name: 'ImmersiveDisplay VideoDesign Labs'
+};
+
+export const ImmersiveVideoSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Video"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveVideoSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay VideoDesign SpecialReportAltTheme'
 };
 
 export const ImmersiveReviewNews = () => {
@@ -2656,6 +3020,19 @@ ImmersiveReviewLabs.story = {
 	name: 'ImmersiveDisplay ReviewDesign Labs'
 };
 
+export const ImmersiveReviewSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Review"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveReviewSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay ReviewDesign SpecialReportAltTheme'
+};
+
 export const ImmersiveAnalysisNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -2745,6 +3122,19 @@ export const ImmersiveAnalysisLabs = () => {
 };
 ImmersiveAnalysisLabs.story = {
 	name: 'ImmersiveDisplay AnalysisDesign Labs'
+};
+
+export const ImmersiveAnalysisSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Analysis"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveAnalysisSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay AnalysisDesign SpecialReportAltTheme'
 };
 
 export const ImmersiveExplainerNews = () => {
@@ -2838,6 +3228,19 @@ ImmersiveExplainerLabs.story = {
 	name: 'ImmersiveDisplay ExplainerDesign Labs'
 };
 
+export const ImmersiveExplainerSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Explainer"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveExplainerSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay ExplainerDesign SpecialReportAltTheme'
+};
+
 export const ImmersiveCommentNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -2927,6 +3330,19 @@ export const ImmersiveCommentLabs = () => {
 };
 ImmersiveCommentLabs.story = {
 	name: 'ImmersiveDisplay CommentDesign Labs'
+};
+
+export const ImmersiveCommentSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Comment"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveCommentSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay CommentDesign SpecialReportAltTheme'
 };
 
 export const ImmersiveLetterNews = () => {
@@ -3020,6 +3436,19 @@ ImmersiveLetterLabs.story = {
 	name: 'ImmersiveDisplay LetterDesign Labs'
 };
 
+export const ImmersiveLetterSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Letter"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveLetterSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay LetterDesign SpecialReportAltTheme'
+};
+
 export const ImmersiveFeatureNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -3109,6 +3538,19 @@ export const ImmersiveFeatureLabs = () => {
 };
 ImmersiveFeatureLabs.story = {
 	name: 'ImmersiveDisplay FeatureDesign Labs'
+};
+
+export const ImmersiveFeatureSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Feature"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveFeatureSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay FeatureDesign SpecialReportAltTheme'
 };
 
 export const ImmersiveLiveBlogNews = () => {
@@ -3202,6 +3644,19 @@ ImmersiveLiveBlogLabs.story = {
 	name: 'ImmersiveDisplay LiveBlogDesign Labs'
 };
 
+export const ImmersiveLiveBlogSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="LiveBlog"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveLiveBlogSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay LiveBlogDesign SpecialReportAltTheme'
+};
+
 export const ImmersiveDeadBlogNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -3291,6 +3746,19 @@ export const ImmersiveDeadBlogLabs = () => {
 };
 ImmersiveDeadBlogLabs.story = {
 	name: 'ImmersiveDisplay DeadBlogDesign Labs'
+};
+
+export const ImmersiveDeadBlogSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="DeadBlog"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveDeadBlogSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay DeadBlogDesign SpecialReportAltTheme'
 };
 
 export const ImmersiveRecipeNews = () => {
@@ -3384,6 +3852,19 @@ ImmersiveRecipeLabs.story = {
 	name: 'ImmersiveDisplay RecipeDesign Labs'
 };
 
+export const ImmersiveRecipeSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Recipe"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveRecipeSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay RecipeDesign SpecialReportAltTheme'
+};
+
 export const ImmersiveMatchReportNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -3473,6 +3954,19 @@ export const ImmersiveMatchReportLabs = () => {
 };
 ImmersiveMatchReportLabs.story = {
 	name: 'ImmersiveDisplay MatchReportDesign Labs'
+};
+
+export const ImmersiveMatchReportSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="MatchReport"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveMatchReportSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay MatchReportDesign SpecialReportAltTheme'
 };
 
 export const ImmersiveInterviewNews = () => {
@@ -3566,6 +4060,19 @@ ImmersiveInterviewLabs.story = {
 	name: 'ImmersiveDisplay InterviewDesign Labs'
 };
 
+export const ImmersiveInterviewSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Interview"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveInterviewSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay InterviewDesign SpecialReportAltTheme'
+};
+
 export const ImmersiveEditorialNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -3655,6 +4162,19 @@ export const ImmersiveEditorialLabs = () => {
 };
 ImmersiveEditorialLabs.story = {
 	name: 'ImmersiveDisplay EditorialDesign Labs'
+};
+
+export const ImmersiveEditorialSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Editorial"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveEditorialSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay EditorialDesign SpecialReportAltTheme'
 };
 
 export const ImmersiveQuizNews = () => {
@@ -3748,6 +4268,19 @@ ImmersiveQuizLabs.story = {
 	name: 'ImmersiveDisplay QuizDesign Labs'
 };
 
+export const ImmersiveQuizSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Quiz"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveQuizSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay QuizDesign SpecialReportAltTheme'
+};
+
 export const ImmersiveInteractiveNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -3837,6 +4370,19 @@ export const ImmersiveInteractiveLabs = () => {
 };
 ImmersiveInteractiveLabs.story = {
 	name: 'ImmersiveDisplay InteractiveDesign Labs'
+};
+
+export const ImmersiveInteractiveSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Interactive"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveInteractiveSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay InteractiveDesign SpecialReportAltTheme'
 };
 
 export const ImmersivePhotoEssayNews = () => {
@@ -3930,6 +4476,19 @@ ImmersivePhotoEssayLabs.story = {
 	name: 'ImmersiveDisplay PhotoEssayDesign Labs'
 };
 
+export const ImmersivePhotoEssaySpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="PhotoEssay"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersivePhotoEssaySpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay PhotoEssayDesign SpecialReportAltTheme'
+};
+
 export const ImmersivePrintShopNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -4019,6 +4578,19 @@ export const ImmersivePrintShopLabs = () => {
 };
 ImmersivePrintShopLabs.story = {
 	name: 'ImmersiveDisplay PrintShopDesign Labs'
+};
+
+export const ImmersivePrintShopSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="PrintShop"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersivePrintShopSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay PrintShopDesign SpecialReportAltTheme'
 };
 
 export const ImmersiveObituaryNews = () => {
@@ -4112,6 +4684,19 @@ ImmersiveObituaryLabs.story = {
 	name: 'ImmersiveDisplay ObituaryDesign Labs'
 };
 
+export const ImmersiveObituarySpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Obituary"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveObituarySpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay ObituaryDesign SpecialReportAltTheme'
+};
+
 export const ImmersiveCorrectionNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -4201,6 +4786,19 @@ export const ImmersiveCorrectionLabs = () => {
 };
 ImmersiveCorrectionLabs.story = {
 	name: 'ImmersiveDisplay CorrectionDesign Labs'
+};
+
+export const ImmersiveCorrectionSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="Correction"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveCorrectionSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay CorrectionDesign SpecialReportAltTheme'
 };
 
 export const ImmersiveFullPageInteractiveNews = () => {
@@ -4294,6 +4892,19 @@ ImmersiveFullPageInteractiveLabs.story = {
 	name: 'ImmersiveDisplay FullPageInteractiveDesign Labs'
 };
 
+export const ImmersiveFullPageInteractiveSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="FullPageInteractive"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveFullPageInteractiveSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay FullPageInteractiveDesign SpecialReportAltTheme'
+};
+
 export const ImmersiveNewsletterSignupNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -4383,6 +4994,19 @@ export const ImmersiveNewsletterSignupLabs = () => {
 };
 ImmersiveNewsletterSignupLabs.story = {
 	name: 'ImmersiveDisplay NewsletterSignupDesign Labs'
+};
+
+export const ImmersiveNewsletterSignupSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Immersive"
+			designName="NewsletterSignup"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ImmersiveNewsletterSignupSpecialReportAltTheme.story = {
+	name: 'ImmersiveDisplay NewsletterSignupDesign SpecialReportAltTheme'
 };
 
 export const ShowcaseStandardNews = () => {
@@ -4476,6 +5100,19 @@ ShowcaseStandardLabs.story = {
 	name: 'ShowcaseDisplay StandardDesign Labs'
 };
 
+export const ShowcaseStandardSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Standard"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseStandardSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay StandardDesign SpecialReportAltTheme'
+};
+
 export const ShowcaseGalleryNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -4565,6 +5202,19 @@ export const ShowcaseGalleryLabs = () => {
 };
 ShowcaseGalleryLabs.story = {
 	name: 'ShowcaseDisplay GalleryDesign Labs'
+};
+
+export const ShowcaseGallerySpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Gallery"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseGallerySpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay GalleryDesign SpecialReportAltTheme'
 };
 
 export const ShowcaseAudioNews = () => {
@@ -4658,6 +5308,19 @@ ShowcaseAudioLabs.story = {
 	name: 'ShowcaseDisplay AudioDesign Labs'
 };
 
+export const ShowcaseAudioSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Audio"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseAudioSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay AudioDesign SpecialReportAltTheme'
+};
+
 export const ShowcaseVideoNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -4747,6 +5410,19 @@ export const ShowcaseVideoLabs = () => {
 };
 ShowcaseVideoLabs.story = {
 	name: 'ShowcaseDisplay VideoDesign Labs'
+};
+
+export const ShowcaseVideoSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Video"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseVideoSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay VideoDesign SpecialReportAltTheme'
 };
 
 export const ShowcaseReviewNews = () => {
@@ -4840,6 +5516,19 @@ ShowcaseReviewLabs.story = {
 	name: 'ShowcaseDisplay ReviewDesign Labs'
 };
 
+export const ShowcaseReviewSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Review"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseReviewSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay ReviewDesign SpecialReportAltTheme'
+};
+
 export const ShowcaseAnalysisNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -4929,6 +5618,19 @@ export const ShowcaseAnalysisLabs = () => {
 };
 ShowcaseAnalysisLabs.story = {
 	name: 'ShowcaseDisplay AnalysisDesign Labs'
+};
+
+export const ShowcaseAnalysisSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Analysis"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseAnalysisSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay AnalysisDesign SpecialReportAltTheme'
 };
 
 export const ShowcaseExplainerNews = () => {
@@ -5022,6 +5724,19 @@ ShowcaseExplainerLabs.story = {
 	name: 'ShowcaseDisplay ExplainerDesign Labs'
 };
 
+export const ShowcaseExplainerSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Explainer"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseExplainerSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay ExplainerDesign SpecialReportAltTheme'
+};
+
 export const ShowcaseCommentNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -5111,6 +5826,19 @@ export const ShowcaseCommentLabs = () => {
 };
 ShowcaseCommentLabs.story = {
 	name: 'ShowcaseDisplay CommentDesign Labs'
+};
+
+export const ShowcaseCommentSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Comment"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseCommentSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay CommentDesign SpecialReportAltTheme'
 };
 
 export const ShowcaseLetterNews = () => {
@@ -5204,6 +5932,19 @@ ShowcaseLetterLabs.story = {
 	name: 'ShowcaseDisplay LetterDesign Labs'
 };
 
+export const ShowcaseLetterSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Letter"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseLetterSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay LetterDesign SpecialReportAltTheme'
+};
+
 export const ShowcaseFeatureNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -5293,6 +6034,19 @@ export const ShowcaseFeatureLabs = () => {
 };
 ShowcaseFeatureLabs.story = {
 	name: 'ShowcaseDisplay FeatureDesign Labs'
+};
+
+export const ShowcaseFeatureSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Feature"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseFeatureSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay FeatureDesign SpecialReportAltTheme'
 };
 
 export const ShowcaseLiveBlogNews = () => {
@@ -5386,6 +6140,19 @@ ShowcaseLiveBlogLabs.story = {
 	name: 'ShowcaseDisplay LiveBlogDesign Labs'
 };
 
+export const ShowcaseLiveBlogSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="LiveBlog"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseLiveBlogSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay LiveBlogDesign SpecialReportAltTheme'
+};
+
 export const ShowcaseDeadBlogNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -5475,6 +6242,19 @@ export const ShowcaseDeadBlogLabs = () => {
 };
 ShowcaseDeadBlogLabs.story = {
 	name: 'ShowcaseDisplay DeadBlogDesign Labs'
+};
+
+export const ShowcaseDeadBlogSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="DeadBlog"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseDeadBlogSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay DeadBlogDesign SpecialReportAltTheme'
 };
 
 export const ShowcaseRecipeNews = () => {
@@ -5568,6 +6348,19 @@ ShowcaseRecipeLabs.story = {
 	name: 'ShowcaseDisplay RecipeDesign Labs'
 };
 
+export const ShowcaseRecipeSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Recipe"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseRecipeSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay RecipeDesign SpecialReportAltTheme'
+};
+
 export const ShowcaseMatchReportNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -5657,6 +6450,19 @@ export const ShowcaseMatchReportLabs = () => {
 };
 ShowcaseMatchReportLabs.story = {
 	name: 'ShowcaseDisplay MatchReportDesign Labs'
+};
+
+export const ShowcaseMatchReportSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="MatchReport"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseMatchReportSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay MatchReportDesign SpecialReportAltTheme'
 };
 
 export const ShowcaseInterviewNews = () => {
@@ -5750,6 +6556,19 @@ ShowcaseInterviewLabs.story = {
 	name: 'ShowcaseDisplay InterviewDesign Labs'
 };
 
+export const ShowcaseInterviewSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Interview"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseInterviewSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay InterviewDesign SpecialReportAltTheme'
+};
+
 export const ShowcaseEditorialNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -5839,6 +6658,19 @@ export const ShowcaseEditorialLabs = () => {
 };
 ShowcaseEditorialLabs.story = {
 	name: 'ShowcaseDisplay EditorialDesign Labs'
+};
+
+export const ShowcaseEditorialSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Editorial"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseEditorialSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay EditorialDesign SpecialReportAltTheme'
 };
 
 export const ShowcaseQuizNews = () => {
@@ -5932,6 +6764,19 @@ ShowcaseQuizLabs.story = {
 	name: 'ShowcaseDisplay QuizDesign Labs'
 };
 
+export const ShowcaseQuizSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Quiz"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseQuizSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay QuizDesign SpecialReportAltTheme'
+};
+
 export const ShowcaseInteractiveNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -6021,6 +6866,19 @@ export const ShowcaseInteractiveLabs = () => {
 };
 ShowcaseInteractiveLabs.story = {
 	name: 'ShowcaseDisplay InteractiveDesign Labs'
+};
+
+export const ShowcaseInteractiveSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Interactive"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseInteractiveSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay InteractiveDesign SpecialReportAltTheme'
 };
 
 export const ShowcasePhotoEssayNews = () => {
@@ -6114,6 +6972,19 @@ ShowcasePhotoEssayLabs.story = {
 	name: 'ShowcaseDisplay PhotoEssayDesign Labs'
 };
 
+export const ShowcasePhotoEssaySpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="PhotoEssay"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcasePhotoEssaySpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay PhotoEssayDesign SpecialReportAltTheme'
+};
+
 export const ShowcasePrintShopNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -6203,6 +7074,19 @@ export const ShowcasePrintShopLabs = () => {
 };
 ShowcasePrintShopLabs.story = {
 	name: 'ShowcaseDisplay PrintShopDesign Labs'
+};
+
+export const ShowcasePrintShopSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="PrintShop"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcasePrintShopSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay PrintShopDesign SpecialReportAltTheme'
 };
 
 export const ShowcaseObituaryNews = () => {
@@ -6296,6 +7180,19 @@ ShowcaseObituaryLabs.story = {
 	name: 'ShowcaseDisplay ObituaryDesign Labs'
 };
 
+export const ShowcaseObituarySpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Obituary"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseObituarySpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay ObituaryDesign SpecialReportAltTheme'
+};
+
 export const ShowcaseCorrectionNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -6385,6 +7282,19 @@ export const ShowcaseCorrectionLabs = () => {
 };
 ShowcaseCorrectionLabs.story = {
 	name: 'ShowcaseDisplay CorrectionDesign Labs'
+};
+
+export const ShowcaseCorrectionSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="Correction"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseCorrectionSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay CorrectionDesign SpecialReportAltTheme'
 };
 
 export const ShowcaseFullPageInteractiveNews = () => {
@@ -6478,6 +7388,19 @@ ShowcaseFullPageInteractiveLabs.story = {
 	name: 'ShowcaseDisplay FullPageInteractiveDesign Labs'
 };
 
+export const ShowcaseFullPageInteractiveSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="FullPageInteractive"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseFullPageInteractiveSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay FullPageInteractiveDesign SpecialReportAltTheme'
+};
+
 export const ShowcaseNewsletterSignupNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -6567,6 +7490,19 @@ export const ShowcaseNewsletterSignupLabs = () => {
 };
 ShowcaseNewsletterSignupLabs.story = {
 	name: 'ShowcaseDisplay NewsletterSignupDesign Labs'
+};
+
+export const ShowcaseNewsletterSignupSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="Showcase"
+			designName="NewsletterSignup"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+ShowcaseNewsletterSignupSpecialReportAltTheme.story = {
+	name: 'ShowcaseDisplay NewsletterSignupDesign SpecialReportAltTheme'
 };
 
 export const NumberedListStandardNews = () => {
@@ -6660,6 +7596,19 @@ NumberedListStandardLabs.story = {
 	name: 'NumberedListDisplay StandardDesign Labs'
 };
 
+export const NumberedListStandardSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Standard"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListStandardSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay StandardDesign SpecialReportAltTheme'
+};
+
 export const NumberedListGalleryNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -6749,6 +7698,19 @@ export const NumberedListGalleryLabs = () => {
 };
 NumberedListGalleryLabs.story = {
 	name: 'NumberedListDisplay GalleryDesign Labs'
+};
+
+export const NumberedListGallerySpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Gallery"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListGallerySpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay GalleryDesign SpecialReportAltTheme'
 };
 
 export const NumberedListAudioNews = () => {
@@ -6842,6 +7804,19 @@ NumberedListAudioLabs.story = {
 	name: 'NumberedListDisplay AudioDesign Labs'
 };
 
+export const NumberedListAudioSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Audio"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListAudioSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay AudioDesign SpecialReportAltTheme'
+};
+
 export const NumberedListVideoNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -6931,6 +7906,19 @@ export const NumberedListVideoLabs = () => {
 };
 NumberedListVideoLabs.story = {
 	name: 'NumberedListDisplay VideoDesign Labs'
+};
+
+export const NumberedListVideoSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Video"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListVideoSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay VideoDesign SpecialReportAltTheme'
 };
 
 export const NumberedListReviewNews = () => {
@@ -7024,6 +8012,19 @@ NumberedListReviewLabs.story = {
 	name: 'NumberedListDisplay ReviewDesign Labs'
 };
 
+export const NumberedListReviewSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Review"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListReviewSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay ReviewDesign SpecialReportAltTheme'
+};
+
 export const NumberedListAnalysisNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -7113,6 +8114,19 @@ export const NumberedListAnalysisLabs = () => {
 };
 NumberedListAnalysisLabs.story = {
 	name: 'NumberedListDisplay AnalysisDesign Labs'
+};
+
+export const NumberedListAnalysisSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Analysis"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListAnalysisSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay AnalysisDesign SpecialReportAltTheme'
 };
 
 export const NumberedListExplainerNews = () => {
@@ -7206,6 +8220,19 @@ NumberedListExplainerLabs.story = {
 	name: 'NumberedListDisplay ExplainerDesign Labs'
 };
 
+export const NumberedListExplainerSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Explainer"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListExplainerSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay ExplainerDesign SpecialReportAltTheme'
+};
+
 export const NumberedListCommentNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -7295,6 +8322,19 @@ export const NumberedListCommentLabs = () => {
 };
 NumberedListCommentLabs.story = {
 	name: 'NumberedListDisplay CommentDesign Labs'
+};
+
+export const NumberedListCommentSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Comment"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListCommentSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay CommentDesign SpecialReportAltTheme'
 };
 
 export const NumberedListLetterNews = () => {
@@ -7388,6 +8428,19 @@ NumberedListLetterLabs.story = {
 	name: 'NumberedListDisplay LetterDesign Labs'
 };
 
+export const NumberedListLetterSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Letter"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListLetterSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay LetterDesign SpecialReportAltTheme'
+};
+
 export const NumberedListFeatureNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -7477,6 +8530,19 @@ export const NumberedListFeatureLabs = () => {
 };
 NumberedListFeatureLabs.story = {
 	name: 'NumberedListDisplay FeatureDesign Labs'
+};
+
+export const NumberedListFeatureSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Feature"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListFeatureSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay FeatureDesign SpecialReportAltTheme'
 };
 
 export const NumberedListLiveBlogNews = () => {
@@ -7570,6 +8636,19 @@ NumberedListLiveBlogLabs.story = {
 	name: 'NumberedListDisplay LiveBlogDesign Labs'
 };
 
+export const NumberedListLiveBlogSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="LiveBlog"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListLiveBlogSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay LiveBlogDesign SpecialReportAltTheme'
+};
+
 export const NumberedListDeadBlogNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -7659,6 +8738,19 @@ export const NumberedListDeadBlogLabs = () => {
 };
 NumberedListDeadBlogLabs.story = {
 	name: 'NumberedListDisplay DeadBlogDesign Labs'
+};
+
+export const NumberedListDeadBlogSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="DeadBlog"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListDeadBlogSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay DeadBlogDesign SpecialReportAltTheme'
 };
 
 export const NumberedListRecipeNews = () => {
@@ -7752,6 +8844,19 @@ NumberedListRecipeLabs.story = {
 	name: 'NumberedListDisplay RecipeDesign Labs'
 };
 
+export const NumberedListRecipeSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Recipe"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListRecipeSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay RecipeDesign SpecialReportAltTheme'
+};
+
 export const NumberedListMatchReportNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -7841,6 +8946,19 @@ export const NumberedListMatchReportLabs = () => {
 };
 NumberedListMatchReportLabs.story = {
 	name: 'NumberedListDisplay MatchReportDesign Labs'
+};
+
+export const NumberedListMatchReportSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="MatchReport"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListMatchReportSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay MatchReportDesign SpecialReportAltTheme'
 };
 
 export const NumberedListInterviewNews = () => {
@@ -7934,6 +9052,19 @@ NumberedListInterviewLabs.story = {
 	name: 'NumberedListDisplay InterviewDesign Labs'
 };
 
+export const NumberedListInterviewSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Interview"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListInterviewSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay InterviewDesign SpecialReportAltTheme'
+};
+
 export const NumberedListEditorialNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -8023,6 +9154,19 @@ export const NumberedListEditorialLabs = () => {
 };
 NumberedListEditorialLabs.story = {
 	name: 'NumberedListDisplay EditorialDesign Labs'
+};
+
+export const NumberedListEditorialSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Editorial"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListEditorialSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay EditorialDesign SpecialReportAltTheme'
 };
 
 export const NumberedListQuizNews = () => {
@@ -8116,6 +9260,19 @@ NumberedListQuizLabs.story = {
 	name: 'NumberedListDisplay QuizDesign Labs'
 };
 
+export const NumberedListQuizSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Quiz"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListQuizSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay QuizDesign SpecialReportAltTheme'
+};
+
 export const NumberedListInteractiveNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -8205,6 +9362,19 @@ export const NumberedListInteractiveLabs = () => {
 };
 NumberedListInteractiveLabs.story = {
 	name: 'NumberedListDisplay InteractiveDesign Labs'
+};
+
+export const NumberedListInteractiveSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Interactive"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListInteractiveSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay InteractiveDesign SpecialReportAltTheme'
 };
 
 export const NumberedListPhotoEssayNews = () => {
@@ -8298,6 +9468,19 @@ NumberedListPhotoEssayLabs.story = {
 	name: 'NumberedListDisplay PhotoEssayDesign Labs'
 };
 
+export const NumberedListPhotoEssaySpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="PhotoEssay"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListPhotoEssaySpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay PhotoEssayDesign SpecialReportAltTheme'
+};
+
 export const NumberedListPrintShopNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -8387,6 +9570,19 @@ export const NumberedListPrintShopLabs = () => {
 };
 NumberedListPrintShopLabs.story = {
 	name: 'NumberedListDisplay PrintShopDesign Labs'
+};
+
+export const NumberedListPrintShopSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="PrintShop"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListPrintShopSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay PrintShopDesign SpecialReportAltTheme'
 };
 
 export const NumberedListObituaryNews = () => {
@@ -8480,6 +9676,19 @@ NumberedListObituaryLabs.story = {
 	name: 'NumberedListDisplay ObituaryDesign Labs'
 };
 
+export const NumberedListObituarySpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Obituary"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListObituarySpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay ObituaryDesign SpecialReportAltTheme'
+};
+
 export const NumberedListCorrectionNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -8569,6 +9778,19 @@ export const NumberedListCorrectionLabs = () => {
 };
 NumberedListCorrectionLabs.story = {
 	name: 'NumberedListDisplay CorrectionDesign Labs'
+};
+
+export const NumberedListCorrectionSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="Correction"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListCorrectionSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay CorrectionDesign SpecialReportAltTheme'
 };
 
 export const NumberedListFullPageInteractiveNews = () => {
@@ -8662,6 +9884,19 @@ NumberedListFullPageInteractiveLabs.story = {
 	name: 'NumberedListDisplay FullPageInteractiveDesign Labs'
 };
 
+export const NumberedListFullPageInteractiveSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="FullPageInteractive"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListFullPageInteractiveSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay FullPageInteractiveDesign SpecialReportAltTheme'
+};
+
 export const NumberedListNewsletterSignupNews = () => {
 	return (
 		<HydratedLayoutWrapper
@@ -8751,4 +9986,17 @@ export const NumberedListNewsletterSignupLabs = () => {
 };
 NumberedListNewsletterSignupLabs.story = {
 	name: 'NumberedListDisplay NewsletterSignupDesign Labs'
+};
+
+export const NumberedListNewsletterSignupSpecialReportAltTheme = () => {
+	return (
+		<HydratedLayoutWrapper
+			displayName="NumberedList"
+			designName="NewsletterSignup"
+			theme="SpecialReportAltTheme"
+		/>
+	);
+};
+NumberedListNewsletterSignupSpecialReportAltTheme.story = {
+	name: 'NumberedListDisplay NewsletterSignupDesign SpecialReportAltTheme'
 };

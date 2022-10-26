@@ -1,55 +1,55 @@
 {
-	"name": "dotcom-rendering",
-	"version": "1.0.0",
-	"repository": "git@github.com:guardian/dotcom-rendering.git",
-	"license": "Apache-2.0",
-	"private": true,
-	"workspaces": [
-		"dotcom-rendering",
-		"common-rendering"
-	],
-	"scripts": {
-		"postinstall": "if [ \"$CI\" = true ]; then npm ci --prefix ./apps-rendering ; else npm install --prefix ./apps-rendering ; fi",
-		"storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook --static-dir ./dotcom-rendering/src/static -p 6006",
-		"build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ./dotcom-rendering/src/static",
-		"build:dcr": "cd ./dotcom-rendering && yarn makeBuild",
-		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
-		"prepare": "husky install"
-	},
-	"resolutions": {
-		"@types/webpack": "^5.28.0",
-		"type-fest": "^2.8.0"
-	},
-	"dependencies": {
-		"@babel/core": "^7.16.12",
-		"@emotion/cache": "^11.4.0",
-		"@emotion/react": "^11.4.1",
-		"@emotion/server": "^11.4.0",
-		"@guardian/eslint-config": "^1.0.0",
-		"@guardian/eslint-config-typescript": "^1.0.1",
-		"@guardian/eslint-plugin-source-react-components": "^4.1.0",
-		"@guardian/prettier": "^1.0.0",
-		"@guardian/source-foundations": "^4.0.3",
-		"@guardian/source-react-components": "^4.4.0",
-		"@guardian/source-react-components-development-kitchen": "1.0.1",
-		"@storybook/addon-essentials": "^6.3.7",
-		"@storybook/addon-knobs": "^6.3.1",
-		"@storybook/builder-webpack5": "^6.3.11",
-		"@storybook/manager-webpack5": "^6.3.7",
-		"@storybook/react": "^6.3.7",
-		"babel-loader": "^8.2.5",
-		"chromatic": "^6.5.1",
-		"desvg-loader": "^0.1.0",
-		"friendly-errors-webpack-plugin": "^1.7.0",
-		"husky": "^7.0.0",
-		"mockdate": "^3.0.5",
-		"preact": "^10.5.14",
-		"preact-render-to-string": "^5.1.19",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2",
-		"svg-loader": "^0.0.2",
-		"ts-loader": "^9.3.0",
-		"typescript": "^4.3.5",
-		"webpack": "^5.51.1"
-	}
+  "name": "dotcom-rendering",
+  "version": "1.0.0",
+  "repository": "git@github.com:guardian/dotcom-rendering.git",
+  "license": "Apache-2.0",
+  "private": true,
+  "workspaces": [
+    "dotcom-rendering",
+    "common-rendering"
+  ],
+  "scripts": {
+    "postinstall": "if [ \"$CI\" = true ]; then npm ci --prefix ./apps-rendering ; else npm install --prefix ./apps-rendering ; fi",
+    "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook --static-dir ./dotcom-rendering/src/static -p 6006",
+    "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ./dotcom-rendering/src/static",
+    "build:dcr": "cd ./dotcom-rendering && yarn makeBuild",
+    "chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
+    "prepare": "husky install"
+  },
+  "resolutions": {
+    "@types/webpack": "^5.28.0",
+    "type-fest": "^2.8.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.16.12",
+    "@emotion/cache": "^11.4.0",
+    "@emotion/react": "^11.4.1",
+    "@emotion/server": "^11.4.0",
+    "@guardian/eslint-config": "^1.0.0",
+    "@guardian/eslint-config-typescript": "^1.0.1",
+    "@guardian/eslint-plugin-source-react-components": "^9.0.0",
+    "@guardian/prettier": "^1.0.0",
+    "@guardian/source-foundations": "^7.0.1",
+    "@guardian/source-react-components": "^9.0.0",
+    "@guardian/source-react-components-development-kitchen": "6.0.2",
+    "@storybook/addon-essentials": "^6.3.7",
+    "@storybook/addon-knobs": "^6.3.1",
+    "@storybook/builder-webpack5": "^6.3.11",
+    "@storybook/manager-webpack5": "^6.3.7",
+    "@storybook/react": "^6.3.7",
+    "babel-loader": "^8.2.5",
+    "chromatic": "^6.5.1",
+    "desvg-loader": "^0.1.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "husky": "^7.0.0",
+    "mockdate": "^3.0.5",
+    "preact": "^10.5.14",
+    "preact-render-to-string": "^5.1.19",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "svg-loader": "^0.0.2",
+    "ts-loader": "^9.3.0",
+    "typescript": "^4.3.5",
+    "webpack": "^5.51.1"
+  }
 }
