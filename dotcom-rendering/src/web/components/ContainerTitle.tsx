@@ -113,7 +113,7 @@ export const ContainerTitle = ({
 				/>
 			)}
 			{showDateHeader && editionId && (
-				<div>
+				<>
 					<span
 						css={dateTextStyles(
 							overrides?.text.containerDate || news[400],
@@ -137,7 +137,7 @@ export const ContainerTitle = ({
 							year: 'numeric',
 						})}
 					</span>
-				</div>
+				</>
 			)}
 		</div>
 	);
