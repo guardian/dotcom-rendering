@@ -1,9 +1,16 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { from, headline, text, until } from '@guardian/source-foundations';
+import {
+	from,
+	headline,
+	neutral,
+	text,
+	until,
+} from '@guardian/source-foundations';
 import { unescapeData } from '../../lib/escapeData';
 import type { Palette } from '../../types/palette';
 import { QuoteIcon } from './QuoteIcon';
+import { transparentColour } from '../lib/transparentColour';
 
 const partiallyLeft = css`
 	width: 220px;
@@ -139,6 +146,22 @@ export const PullQuoteBlockComponent: React.FC<{
 							padding-top: 6px;
 							padding-bottom: 12px;
 							margin-bottom: 28px;
+							border: 1px solid
+								${transparentColour(neutral[60], 0.3)};
+
+							:after {
+								content: '';
+								width: 25px;
+								height: 25px;
+								bottom: -25px;
+								position: absolute;
+								background-color: ${palette.background
+									.pullQuote};
+								border: 1px solid
+									${transparentColour(neutral[60], 0.3)};
+								border-top: none;
+								left: -1px;
+							}
 						`,
 					]}
 				>

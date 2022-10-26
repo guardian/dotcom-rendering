@@ -21,7 +21,6 @@ type ThemePillar =
 	| 'CulturePillar'
 	| 'LifestylePillar';
 
-// TODO: We don't know yet what CAPI will give for SpecialReportAlt so leaving this as placeholder
 type ThemeSpecial = 'SpecialReportTheme' | 'Labs' | 'SpecialReportAltTheme';
 type CAPITheme = ThemePillar | ThemeSpecial;
 
