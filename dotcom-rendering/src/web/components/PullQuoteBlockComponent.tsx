@@ -139,16 +139,6 @@ export const PullQuoteBlockComponent: React.FC<{
 							padding-top: 6px;
 							padding-bottom: 12px;
 							margin-bottom: 28px;
-
-							:after {
-								content: '';
-								width: 25px;
-								height: 25px;
-								bottom: -25px;
-								position: absolute;
-								background-color: ${palette.background
-									.pullQuote};
-							}
 						`,
 					]}
 				>
