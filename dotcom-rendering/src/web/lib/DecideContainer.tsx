@@ -170,7 +170,7 @@ export const DecideContainer = ({
 					containerPalette={containerPalette}
 					showAge={showAge}
 				/>
-      );
+			);
 		case 'nav/list':
 			return (
 				<NavList trails={trails} containerPalette={containerPalette} />
