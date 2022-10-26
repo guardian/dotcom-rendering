@@ -49,6 +49,7 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getCurrentPillar } from '../lib/layoutHelpers';
+import { transparentColour } from '../lib/transparentColour';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
 
 const StandardGrid = ({
@@ -208,6 +209,12 @@ const avatarHeadlineWrapper = css`
 const minHeightWithAvatar = css`
 	min-height: 259px;
 `;
+
+const straightLinesColour = (format: ArticleFormat) => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return transparentColour(neutral[60], 0.3);
+	else return undefined;
+};
 
 // If in mobile increase the margin top and margin right deficit
 const avatarPositionStyles = css`
@@ -407,6 +414,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							cssOverrides={css`
 								display: block;
 							`}
+							color={straightLinesColour(format)}
 						/>
 					</Section>
 				</SendToBack>
@@ -473,6 +481,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											cssOverrides={css`
 												display: block;
 											`}
+											color={straightLinesColour(format)}
 										/>
 									</div>
 								</div>
@@ -486,6 +495,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										cssOverrides={css`
 											display: block;
 										`}
+										color={straightLinesColour(format)}
 									/>
 								</Hide>
 							</div>
@@ -635,6 +645,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										cssOverrides={css`
 											display: block;
 										`}
+										color={straightLinesColour(format)}
 									/>
 									<SubMeta
 										format={format}

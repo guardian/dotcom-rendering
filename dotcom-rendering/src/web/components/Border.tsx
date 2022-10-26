@@ -1,26 +1,23 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
-import { from } from '@guardian/source-foundations';
+import { from, neutral } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
+import { transparentColour } from '../lib/transparentColour';
 
-const borderStyles = (format: ArticleFormat) => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt) {
-		return css`
-			${from.leftCol} {
-				border-left: 1px solid rgba(60, 60, 60, 0.3);
-				height: 100%;
-			}
-		`;
-	}
+const decideBorderColour = (format: ArticleFormat) => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return transparentColour(neutral[60], 0.3);
 
-	return css`
-		${from.leftCol} {
-			border-left: 1px solid ${decidePalette(format).border.article};
-			height: 100%;
-		}
-	`;
+	return decidePalette(format).border.article;
 };
 
 export const Border = ({ format }: { format: ArticleFormat }) => (
-	<div css={borderStyles(format)} />
+	<div
+		css={css`
+			${from.leftCol} {
+				border-left: 1px solid ${decideBorderColour(format)};
+				height: 100%;
+			}
+		`}
+	/>
 );

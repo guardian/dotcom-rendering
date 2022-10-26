@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { border, until } from '@guardian/source-foundations';
+import { border, neutral, until } from '@guardian/source-foundations';
+import { transparentColour } from '../lib/transparentColour';
 
 type Props = {
 	children: React.ReactNode;
@@ -10,7 +11,7 @@ type Props = {
 
 const decideVerticalDividerColour = (format: ArticleFormat) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return 'rgba(60, 60, 60, 0.3)';
+		return transparentColour(neutral[60], 0.3);
 
 	return border.secondary;
 };
