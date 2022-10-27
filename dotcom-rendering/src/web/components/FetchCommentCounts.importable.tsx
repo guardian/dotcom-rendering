@@ -152,6 +152,8 @@ function insertCount({
 		`[data-discussion-id="${id}"]`,
 	);
 	countContainers.forEach((container) => {
+		container.removeAttribute('tabindex');
+		container.removeAttribute('aria-hidden');
 		container.setAttribute('aria-label', `${short} Comments`);
 		container.innerHTML = html;
 	});

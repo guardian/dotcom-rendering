@@ -259,6 +259,8 @@ export const Card = ({
 							data-container-palette={containerPalette}
 							data-ignore="global-link-styling"
 							data-link-name="Comment count"
+							tabIndex={-1}
+							aria-hidden={true}
 							href={`${linkTo}#comments`}
 							cssOverrides={css`
 								/* See: https://css-tricks.com/nested-links/ */
