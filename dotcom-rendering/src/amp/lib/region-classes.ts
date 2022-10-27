@@ -81,5 +81,6 @@ export const regionClasses = {
 	US: usRegionClass,
 	AU: auRegionClass,
 	INT: internationalRegionClass,
+	EUR: internationalRegionClass,
 	ROW: rowRegionClass,
 };

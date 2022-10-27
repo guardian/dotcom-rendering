@@ -13,6 +13,8 @@ describe('RegionalAd', () => {
 		'https://guardian-pbs.relevant-digital.com/openrtb2/amp?tag_id=6214cbe6a24103508faeef45_6214cb50aac9c1160daeef40&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING&tgt_pfx=rv&dummy_param=ATTR(data-amp-slot-index)';
 	const intRelevantYieldURL =
 		'https://guardian-pbs.relevant-digital.com/openrtb2/amp?tag_id=6214ca56243f4ff4f5aeef36_6214c723c70856442e4d79f2&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING&tgt_pfx=rv&dummy_param=ATTR(data-amp-slot-index)';
+	const eurRelevantYieldURL =
+		'https://guardian-pbs.relevant-digital.com/openrtb2/amp?tag_id=6214ca56243f4ff4f5aeef36_6214c723c70856442e4d79f2&w=ATTR(width)&h=ATTR(height)&ow=ATTR(data-override-width)&oh=ATTR(data-override-height)&ms=ATTR(data-multi-size)&slot=ATTR(data-slot)&targeting=TGT&curl=CANONICAL_URL&timeout=TIMEOUT&adcid=ADCID&purl=HREF&gdpr_consent=CONSENT_STRING&tgt_pfx=rv&dummy_param=ATTR(data-amp-slot-index)';
 
 	const apsVendorObj = {
 		aps: { PUB_ID: '3722', PARAMS: { amp: '1' } },
@@ -42,6 +44,12 @@ describe('RegionalAd', () => {
 			PUB_ID: '157207',
 		},
 	};
+	const eurPubmaticVendorObj = {
+		openwrap: {
+			PROFILE_ID: '6611',
+			PUB_ID: '157207',
+		},
+	};
 
 	it('with no ab test running rtc-config contains just a permutive URL when `usePermutive` and `usePrebid` flags are set to true', () => {
 		const { container } = render(
@@ -60,6 +68,7 @@ describe('RegionalAd', () => {
 						US: { adTargeting: [] },
 						AU: { adTargeting: [] },
 						INT: { adTargeting: [] },
+						EUR: { adTargeting: [] },
 					}}
 					adTargeting={{
 						customParams: { sens: 'f', urlkw: [] },
@@ -85,11 +94,15 @@ describe('RegionalAd', () => {
 		const intRtcAttribute: Record<string, unknown> = JSON.parse(
 			ampAdElement[3].getAttribute('rtc-config') || '{}',
 		);
+		const eurRtcAttribute: Record<string, unknown> = JSON.parse(
+			ampAdElement[3].getAttribute('rtc-config') || '{}',
+		);
 
 		expect(ukRtcAttribute.urls).toEqual([permutiveURL]);
 		expect(usRtcAttribute.urls).toEqual([permutiveURL]);
 		expect(auRtcAttribute.urls).toEqual([permutiveURL]);
 		expect(intRtcAttribute.urls).toEqual([permutiveURL]);
+		expect(eurRtcAttribute.urls).toEqual([permutiveURL]);
 	});
 
 	it('with no ab test running rtc-config contains just no prebid URL when `usePermutive` is false and `usePrebid` is true', () => {
@@ -109,6 +122,7 @@ describe('RegionalAd', () => {
 						US: { adTargeting: [] },
 						AU: { adTargeting: [] },
 						INT: { adTargeting: [] },
+						EUR: { adTargeting: [] },
 					}}
 					adTargeting={{
 						customParams: { sens: 'f', urlkw: [] },
@@ -134,11 +148,15 @@ describe('RegionalAd', () => {
 		const intRtcAttribute: Record<string, unknown> = JSON.parse(
 			ampAdElement[3].getAttribute('rtc-config') || '{}',
 		);
+		const eurRtcAttribute: Record<string, unknown> = JSON.parse(
+			ampAdElement[3].getAttribute('rtc-config') || '{}',
+		);
 
 		expect(ukRtcAttribute.urls).toEqual([]);
 		expect(usRtcAttribute.urls).toEqual([]);
 		expect(auRtcAttribute.urls).toEqual([]);
 		expect(intRtcAttribute.urls).toEqual([]);
+		expect(eurRtcAttribute.urls).toEqual([]);
 	});
 
 	it('with no ab test running rtc-config contains just the permutive URL when `usePermutive` is true and `usePrebid` is false', () => {
@@ -158,6 +176,7 @@ describe('RegionalAd', () => {
 						US: { adTargeting: [] },
 						AU: { adTargeting: [] },
 						INT: { adTargeting: [] },
+						EUR: { adTargeting: [] },
 					}}
 					adTargeting={{
 						customParams: { sens: 'f', urlkw: [] },
@@ -183,11 +202,15 @@ describe('RegionalAd', () => {
 		const intRtcAttribute: Record<string, unknown> = JSON.parse(
 			ampAdElement[3].getAttribute('rtc-config') || '{}',
 		);
+		const eurRtcAttribute: Record<string, unknown> = JSON.parse(
+			ampAdElement[3].getAttribute('rtc-config') || '{}',
+		);
 
 		expect(ukRtcAttribute.urls).toEqual([permutiveURL]);
 		expect(usRtcAttribute.urls).toEqual([permutiveURL]);
 		expect(auRtcAttribute.urls).toEqual([permutiveURL]);
 		expect(intRtcAttribute.urls).toEqual([permutiveURL]);
+		expect(eurRtcAttribute.urls).toEqual([permutiveURL]);
 	});
 
 	it('with no ab test running rtc-config contains no URLs when `usePermutive` and `usePrebid` flags are both set to false', () => {
@@ -207,6 +230,7 @@ describe('RegionalAd', () => {
 						US: { adTargeting: [] },
 						AU: { adTargeting: [] },
 						INT: { adTargeting: [] },
+						EUR: { adTargeting: [] },
 					}}
 					adTargeting={{
 						customParams: { sens: 'f', urlkw: [] },
@@ -232,11 +256,15 @@ describe('RegionalAd', () => {
 		const intRtcAttribute: Record<string, unknown> = JSON.parse(
 			ampAdElement[3].getAttribute('rtc-config') || '{}',
 		);
+		const eurRtcAttribute: Record<string, unknown> = JSON.parse(
+			ampAdElement[3].getAttribute('rtc-config') || '{}',
+		);
 
 		expect(ukRtcAttribute.urls).toHaveLength(0);
 		expect(usRtcAttribute.urls).toHaveLength(0);
 		expect(auRtcAttribute.urls).toHaveLength(0);
 		expect(intRtcAttribute.urls).toHaveLength(0);
+		expect(eurRtcAttribute.urls).toHaveLength(0);
 	});
 
 	it('with no ab test running rtc-config contains the correct vendor config when `useAmazon` is set to true', () => {
@@ -256,6 +284,7 @@ describe('RegionalAd', () => {
 						US: { adTargeting: [] },
 						AU: { adTargeting: [] },
 						INT: { adTargeting: [] },
+						EUR: { adTargeting: [] },
 					}}
 					adTargeting={{
 						customParams: { sens: 'f', urlkw: [] },
@@ -281,11 +310,15 @@ describe('RegionalAd', () => {
 		const intRtcAttribute: Record<string, unknown> = JSON.parse(
 			ampAdElement[3].getAttribute('rtc-config') || '{}',
 		);
+		const eurRtcAttribute: Record<string, unknown> = JSON.parse(
+			ampAdElement[3].getAttribute('rtc-config') || '{}',
+		);
 
 		expect(ukRtcAttribute.vendors).toEqual(apsVendorObj);
 		expect(usRtcAttribute.vendors).toEqual(apsVendorObj);
 		expect(auRtcAttribute.vendors).toEqual(apsVendorObj);
 		expect(intRtcAttribute.vendors).toEqual(apsVendorObj);
+		expect(eurRtcAttribute.vendors).toEqual(apsVendorObj);
 	});
 
 	it('with no ab test running rtc-config contains no vendor config when `useAmazon` is set to false', () => {
@@ -305,6 +338,7 @@ describe('RegionalAd', () => {
 						US: { adTargeting: [] },
 						AU: { adTargeting: [] },
 						INT: { adTargeting: [] },
+						EUR: { adTargeting: [] },
 					}}
 					adTargeting={{
 						customParams: { sens: 'f', urlkw: [] },
@@ -330,11 +364,15 @@ describe('RegionalAd', () => {
 		const intRtcAttribute: Record<string, unknown> = JSON.parse(
 			ampAdElement[3].getAttribute('rtc-config') || '{}',
 		);
+		const eurRtcAttribute: Record<string, unknown> = JSON.parse(
+			ampAdElement[3].getAttribute('rtc-config') || '{}',
+		);
 
 		expect(ukRtcAttribute.vendors).toEqual({});
 		expect(usRtcAttribute.vendors).toEqual({});
 		expect(auRtcAttribute.vendors).toEqual({});
 		expect(intRtcAttribute.vendors).toEqual({});
+		expect(eurRtcAttribute.vendors).toEqual({});
 	});
 
 	it('with ab test running and in relevant yield variant, rtc-config contains permutive and relevant yield URLs when `usePermutive` and `usePrebid` flags are set to true', () => {
@@ -357,6 +395,7 @@ describe('RegionalAd', () => {
 						US: { adTargeting: [] },
 						AU: { adTargeting: [] },
 						INT: { adTargeting: [] },
+						EUR: { adTargeting: [] },
 					}}
 					adTargeting={{
 						customParams: { sens: 'f', urlkw: [] },
@@ -382,6 +421,9 @@ describe('RegionalAd', () => {
 		const intRtcAttribute: Record<string, unknown> = JSON.parse(
 			ampAdElement[3].getAttribute('rtc-config') || '{}',
 		);
+		const eurRtcAttribute: Record<string, unknown> = JSON.parse(
+			ampAdElement[3].getAttribute('rtc-config') || '{}',
+		);
 
 		expect(ukRtcAttribute.urls).toEqual([ukRelevantYieldURL, permutiveURL]);
 		expect(usRtcAttribute.urls).toEqual([usRelevantYieldURL, permutiveURL]);
@@ -390,11 +432,16 @@ describe('RegionalAd', () => {
 			intRelevantYieldURL,
 			permutiveURL,
 		]);
+		expect(eurRtcAttribute.urls).toEqual([
+			eurRelevantYieldURL,
+			permutiveURL,
+		]);
 
 		expect(ukRtcAttribute.vendors).toEqual(apsVendorObj);
 		expect(usRtcAttribute.vendors).toEqual(apsVendorObj);
 		expect(auRtcAttribute.vendors).toEqual(apsVendorObj);
 		expect(intRtcAttribute.vendors).toEqual(apsVendorObj);
+		expect(eurRtcAttribute.vendors).toEqual(apsVendorObj);
 	});
 
 	it.skip('with ab test running and in Pubmatic variant, rtc-config contains Permutive UR and Pubmatic vendor when `usePermutive` and `usePrebid` flags are set to true', () => {
@@ -417,6 +464,7 @@ describe('RegionalAd', () => {
 						US: { adTargeting: [] },
 						AU: { adTargeting: [] },
 						INT: { adTargeting: [] },
+						EUR: { adTargeting: [] },
 					}}
 					adTargeting={{
 						customParams: { sens: 'f', urlkw: [] },
@@ -442,11 +490,15 @@ describe('RegionalAd', () => {
 		const intRtcAttribute: Record<string, unknown> = JSON.parse(
 			ampAdElement[3].getAttribute('rtc-config') || '{}',
 		);
+		const eurRtcAttribute: Record<string, unknown> = JSON.parse(
+			ampAdElement[3].getAttribute('rtc-config') || '{}',
+		);
 
 		expect(ukRtcAttribute.urls).toEqual([permutiveURL]);
 		expect(usRtcAttribute.urls).toEqual([permutiveURL]);
 		expect(auRtcAttribute.urls).toEqual([permutiveURL]);
 		expect(intRtcAttribute.urls).toEqual([permutiveURL]);
+		expect(eurRtcAttribute.urls).toEqual([permutiveURL]);
 
 		expect(ukRtcAttribute.vendors).toEqual({
 			...ukPubmaticVendorObj,
@@ -462,6 +514,10 @@ describe('RegionalAd', () => {
 		});
 		expect(intRtcAttribute.vendors).toEqual({
 			...intPubmaticVendorObj,
+			...apsVendorObj,
+		});
+		expect(eurRtcAttribute.vendors).toEqual({
+			...eurPubmaticVendorObj,
 			...apsVendorObj,
 		});
 	});
