@@ -1316,6 +1316,9 @@ const borderPinnedPost = (format: ArticleFormat): string => {
 const borderArticleLink = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 
+	if (format.theme === ArticleSpecial.SpecialReport)
+		return specialReport[300];
+
 	if (
 		format.theme === ArticleSpecial.SpecialReportAlt &&
 		format.design !== ArticleDesign.DeadBlog &&
