@@ -9,8 +9,8 @@ import {
 } from '@guardian/source-foundations';
 import { unescapeData } from '../../lib/escapeData';
 import type { Palette } from '../../types/palette';
-import { QuoteIcon } from './QuoteIcon';
 import { transparentColour } from '../lib/transparentColour';
+import { QuoteIcon } from './QuoteIcon';
 
 const partiallyLeft = css`
 	width: 220px;
@@ -130,6 +130,52 @@ export const PullQuoteBlockComponent: React.FC<{
 	attribution?: string;
 }> = ({ html, palette, format, attribution, role }) => {
 	if (!html) return <></>;
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return (
+			<aside
+				css={[
+					decidePosition(role, format.design),
+					css`
+						${headline.xxsmall({ fontWeight: 'light' })};
+						line-height: 25px;
+						position: relative;
+						background-color: ${palette.background.pullQuote};
+						padding-top: 6px;
+						padding-bottom: 12px;
+						margin-bottom: 28px;
+						border: 1px solid ${transparentColour(neutral[60], 0.3)};
+
+						:after {
+							content: '';
+							width: 25px;
+							height: 25px;
+							bottom: -25px;
+							position: absolute;
+							background-color: ${palette.background.pullQuote};
+							border: 1px solid
+								${transparentColour(neutral[60], 0.3)};
+							border-top: none;
+							left: -1px;
+						}
+					`,
+				]}
+			>
+				<QuoteIcon colour={palette.fill.quoteIcon} />
+				<blockquote
+					css={css`
+						display: inline;
+					`}
+					dangerouslySetInnerHTML={{
+						__html: unescapeData(html),
+					}}
+				/>
+				<footer>
+					<cite>{attribution}</cite>
+				</footer>
+			</aside>
+		);
+
 	switch (format.design) {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
@@ -146,8 +192,6 @@ export const PullQuoteBlockComponent: React.FC<{
 							padding-top: 6px;
 							padding-bottom: 12px;
 							margin-bottom: 28px;
-							border: 1px solid
-								${transparentColour(neutral[60], 0.3)};
 
 							:after {
 								content: '';
@@ -157,10 +201,6 @@ export const PullQuoteBlockComponent: React.FC<{
 								position: absolute;
 								background-color: ${palette.background
 									.pullQuote};
-								border: 1px solid
-									${transparentColour(neutral[60], 0.3)};
-								border-top: none;
-								left: -1px;
 							}
 						`,
 					]}

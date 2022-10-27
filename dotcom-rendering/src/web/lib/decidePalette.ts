@@ -750,7 +750,12 @@ const backgroundArticle = (format: ArticleFormat): string => {
 		return neutral[97];
 	// Order matters. We want comment special report pieces to have the opinion background
 	if (format.design === ArticleDesign.Letter) return opinion[800];
-	if (format.design === ArticleDesign.Comment) return opinion[800];
+	if (format.design === ArticleDesign.Comment) {
+		if (format.theme === ArticleSpecial.SpecialReportAlt)
+			return palette.specialReportAlt[800];
+
+		return opinion[800];
+	}
 	if (format.design === ArticleDesign.Editorial) return opinion[800];
 
 	if (format.design === ArticleDesign.Analysis) {
