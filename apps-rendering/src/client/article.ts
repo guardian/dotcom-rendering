@@ -30,13 +30,13 @@ import {
 	notificationsClient,
 	userClient,
 } from 'native/nativeApi';
+import { Optional } from 'optional';
 import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
 import { initSignupForms } from './signupForm';
-import { Optional } from 'optional';
 
 // ----- Run ----- //
 
@@ -152,9 +152,9 @@ function insertEpic(): void {
 
 function renderComments(): void {
 	const commentContainer = document.getElementById('comments');
-	const pillar = Optional
-		.fromNullable(commentContainer?.getAttribute('data-pillar'))
-		.flatMap(getPillarFromId);
+	const pillar = Optional.fromNullable(
+		commentContainer?.getAttribute('data-pillar'),
+	).flatMap(getPillarFromId);
 	const shortUrl = commentContainer?.getAttribute('data-short-id');
 	const isClosedForComments = !!commentContainer?.getAttribute('pillar');
 

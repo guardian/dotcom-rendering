@@ -18,13 +18,7 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import {
-	andThen,
-	fromNullable,
-	map,
-	none,
-	some,
-} from '@guardian/types';
+import { andThen, fromNullable, map, none, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { getPillarFromId } from 'articleFormat';
 import type { Body } from 'bodyElement';
@@ -287,8 +281,7 @@ const itemFields = (
 ): ItemFields => {
 	const { content, commentCount, relatedContent } = request;
 	return {
-		theme: Optional
-			.fromNullable(content.pillarId)
+		theme: Optional.fromNullable(content.pillarId)
 			.flatMap(getPillarFromId)
 			.withDefault(ArticlePillar.News),
 		display: getDisplay(content),
