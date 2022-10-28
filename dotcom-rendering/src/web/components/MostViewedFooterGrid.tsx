@@ -122,75 +122,119 @@ const TabHeading = ({ heading }: { heading: string }) => {
 	}
 };
 
-export const MostViewedFooterGrid = ({
+function TabbedContainer({
 	data,
-	sectionName = '',
-	selectedColour = neutral[0],
-}: Props) => {
+	sectionName,
+	selectedColour,
+}: {
+	data: TrailTabType[];
+	sectionName: string;
+	selectedColour: string;
+}) {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
 	return (
 		<>
-			{Array.isArray(data) && (
-				<ul css={tabsContainer} role="tablist">
-					{data.map((tab: TrailTabType, i: number) => {
-						if (!tab.heading) return null;
-						const isSelected = i === selectedTabIndex;
-						const isFirst = i === 0;
-						const selectedStyles =
-							selectedListTabStyles(selectedColour);
-						return (
-							<li
-								css={[
-									listTab,
-									isSelected
-										? selectedStyles
-										: unselectedStyles,
-									isFirst && firstTab,
-								]}
+			<ul css={tabsContainer} role="tablist">
+				{data.map((tab: TrailTabType, i: number) => {
+					if (!tab.heading) return null;
+					const isSelected = i === selectedTabIndex;
+					const isFirst = i === 0;
+					const selectedStyles =
+						selectedListTabStyles(selectedColour);
+					return (
+						<li
+							css={[
+								listTab,
+								isSelected ? selectedStyles : unselectedStyles,
+								isFirst && firstTab,
+							]}
+							role="presentation"
+							id={`tabs-popular-${i}-tab`}
+							data-cy={`tab-heading-${i}`}
+							key={`tabs-popular-${tab.heading}-tab`}
+							data-link-name={tab.heading}
+							data-chromatic="ignore"
+						>
+							<button
+								type="button"
 								role="tab"
 								aria-selected={isSelected}
 								aria-controls={`tabs-popular-${i}`}
-								id={`tabs-popular-${i}-tab`}
-								data-cy={`tab-heading-${i}`}
-								key={`tabs-popular-${i}-tab`}
-								data-link-name={tab.heading}
-								data-chromatic="ignore"
+								css={buttonStyles(isSelected)}
+								onClick={() => setSelectedTabIndex(i)}
 							>
-								<button
-									css={buttonStyles(isSelected)}
-									onClick={() => setSelectedTabIndex(i)}
+								<span
+									css={css`
+										${visuallyHidden};
+									`}
 								>
-									<span
-										css={css`
-											${visuallyHidden};
-										`}
-									>
-										Most viewed{' '}
-									</span>
+									Most viewed{' '}
+								</span>
 
-									<TabHeading heading={tab.heading} />
-								</button>
-							</li>
-						);
-					})}
-				</ul>
-			)}
-			{data.map((tab: TrailTabType, i: number) => (
+								<TabHeading heading={tab.heading} />
+							</button>
+						</li>
+					);
+				})}
+			</ul>
+			{data.map((tab: TrailTabType, i: number) => {
+				return (
+					<section
+						role="tabpanel"
+						aria-labelledby={`tabs-popular-${i}-tab`}
+						id={`tabs-popular-${i}`}
+					>
+						<ol
+							css={[
+								gridContainer,
+								i !== selectedTabIndex && hideList,
+							]}
+							data-cy={`tab-body-${i}`}
+							key={`tabs-popular-${i}`}
+							data-link-name={tab.heading}
+							data-testid={tab.heading}
+							data-link-context={`most-read/${sectionName}`}
+						>
+							{tab.trails.map((trail: TrailType, ii: number) => (
+								<MostViewedFooterItem
+									key={trail.url}
+									position={ii + 1}
+									url={trail.url}
+									format={trail.format}
+									headlineText={trail.headline}
+									ageWarning={trail.ageWarning}
+								/>
+							))}
+						</ol>
+					</section>
+				);
+			})}
+		</>
+	);
+}
+
+function SinglePanelContainer({
+	data,
+	sectionName,
+}: {
+	data: TrailTabType;
+	sectionName: string;
+}) {
+	{
+		return (
+			<section>
 				<ol
-					css={[gridContainer, i !== selectedTabIndex && hideList]}
-					id={`tabs-popular-${i}`}
-					data-cy={`tab-body-${i}`}
-					key={`tabs-popular-${i}`}
-					role="tabpanel"
-					aria-labelledby={`tabs-popular-${i}-tab`}
-					data-link-name={tab.heading}
-					data-testid={tab.heading}
+					css={[gridContainer]}
+					data-cy={`tab-body-${0}`}
+					key={`tabs-popular-${0}`}
+					data-link-name={data.heading}
+					data-testid={data.heading}
 					data-link-context={`most-read/${sectionName}`}
 				>
-					{(tab.trails || []).map((trail: TrailType, ii: number) => (
+					{data.trails.map((trail: TrailType, i: number) => (
 						<MostViewedFooterItem
 							key={trail.url}
-							position={ii + 1}
+							position={i + 1}
 							url={trail.url}
 							format={trail.format}
 							headlineText={trail.headline}
@@ -198,7 +242,22 @@ export const MostViewedFooterGrid = ({
 						/>
 					))}
 				</ol>
-			))}
-		</>
-	);
+			</section>
+		);
+	}
+}
+
+export const MostViewedFooterGrid = ({
+	data,
+	sectionName = '',
+	selectedColour = neutral[0],
+}: Props) => {
+	switch (data.length) {
+		case 0:
+			return null;
+		case 1:
+			return SinglePanelContainer({ data: data[0], sectionName });
+		default:
+			return TabbedContainer({ data, sectionName, selectedColour });
+	}
 };
