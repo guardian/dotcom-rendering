@@ -17,6 +17,7 @@ export interface FEFrontType {
 	commercialProperties: Record<string, unknown>;
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
+	isNetworkFront: boolean;
 }
 
 export interface DCRFrontType {
@@ -27,6 +28,7 @@ export interface DCRFrontType {
 	config: FEFrontConfigType;
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
+	isNetworkFront: boolean;
 }
 
 interface FEPressedPageType {
@@ -34,7 +36,6 @@ interface FEPressedPageType {
 	seoData: FESeoDataType;
 	frontProperties: FEFrontPropertiesType;
 	collections: FECollectionType[];
-	isNetworkFront?: boolean;
 }
 
 interface DCRPressedPageType {
@@ -42,7 +43,6 @@ interface DCRPressedPageType {
 	seoData: FESeoDataType;
 	frontProperties: FEFrontPropertiesType;
 	collections: DCRCollectionType[];
-	isNetworkFront?: boolean;
 }
 
 type FEContainerType =
@@ -415,6 +415,7 @@ type FESeoDataType = {
 	id: string;
 	navSection: string;
 	webTitle: string;
+	title?: string;
 	description: string;
 };
 

@@ -15,6 +15,8 @@ import {
 	SvgMagnifyingGlass,
 } from '@guardian/source-react-components';
 import type { NavType } from '../../../../model/extract-nav';
+import type { EditionId } from '../../../../types/edition';
+import { getEditionFromId, getRemainingEditions } from '../../../lib/edition';
 import { Column, lineStyle } from './Column';
 import { MoreColumn } from './MoreColumn';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks';
@@ -131,74 +133,114 @@ const searchBar = css`
 	padding-bottom: 15px;
 `;
 
+const editionsSwitch = css`
+	${from.desktop} {
+		display: none;
+	}
+`;
+
 export const Columns: React.FC<{
+	editionId: EditionId;
 	format: ArticleFormat;
 	nav: NavType;
-}> = ({ format, nav }) => (
-	<ul
-		css={columnsStyle(format.display)}
-		role="menubar"
-		data-cy="nav-menu-columns"
-	>
-		{nav.pillars.map((column, i) => (
-			<Column
-				column={column}
-				key={column.title.toLowerCase()}
-				index={i}
-				isLastColumn={i !== nav.pillars.length - 1}
-			/>
-		))}
+}> = ({ format, nav, editionId }) => {
+	const activeEdition = getEditionFromId(editionId);
+	const remainingEditions = getRemainingEditions(activeEdition.editionId);
+	return (
+		<ul
+			css={columnsStyle(format.display)}
+			role="menubar"
+			data-cy="nav-menu-columns"
+		>
+			{nav.pillars.map(
+				(column, i) => (
+					column.children?.unshift({
+						title: column.title,
+						longTitle: `View all ${column.title}`,
+						url: column.url,
+						pillar: undefined,
+						children: [],
+						mobileOnly: true,
+					}),
+					(
+						<Column
+							column={column}
+							key={column.title.toLowerCase()}
+							index={i}
+							showLineBelow={i !== nav.pillars.length - 1}
+						/>
+					)
+				),
+			)}
 
-		<li>
-			<ThemeProvider theme={{ ...buttonThemeBrand }}>
-				<div css={searchBar}>
-					<LinkButton
-						href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
-						tabIndex={-1}
-						className="selectableMenuItem"
-						priority="secondary"
-						icon={
-							<SvgMagnifyingGlass
-								isAnnouncedByScreenReader={true}
-								size="medium"
-							/>
-						}
-						aria-label="Search with google"
-						data-link-name="nav2 : search : submit"
-						type="submit"
-					>
-						Search
-					</LinkButton>
-				</div>
-			</ThemeProvider>
-
-			<div css={lineStyle}></div>
-		</li>
-
-		<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
-		<MoreColumn
-			column={nav.otherLinks}
-			brandExtensions={nav.brandExtensions}
-			key="more"
-		/>
-		<li css={desktopBrandExtensionColumn} role="none">
-			<ul css={brandExtensionList} role="menu">
-				{nav.brandExtensions.map((brandExtension) => (
-					<li css={brandExtensionListItem} key={brandExtension.title}>
-						<a
-							className="selectableMenuItem"
-							css={brandExtensionLink}
-							href={brandExtension.url}
-							key={brandExtension.title}
-							role="menuitem"
-							data-link-name={`nav2 : brand extension : ${brandExtension.longTitle}`}
+			<li role="none">
+				<ThemeProvider theme={{ ...buttonThemeBrand }}>
+					<div css={searchBar}>
+						<LinkButton
+							href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
 							tabIndex={-1}
+							className="selectableMenuItem"
+							priority="secondary"
+							icon={
+								<SvgMagnifyingGlass
+									isAnnouncedByScreenReader={true}
+									size="medium"
+								/>
+							}
+							aria-label="Search with google"
+							data-link-name="nav2 : search : submit"
+							type="submit"
 						>
-							{brandExtension.longTitle}
-						</a>
-					</li>
-				))}
-			</ul>
-		</li>
-	</ul>
-);
+							Search
+						</LinkButton>
+					</div>
+				</ThemeProvider>
+
+				<div css={lineStyle}></div>
+			</li>
+
+			<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
+
+			{/* This is where the edition dropdown is inserted					 */}
+			<section css={editionsSwitch}>
+				<Column
+					column={{
+						...activeEdition,
+						children: remainingEditions,
+					}}
+					index={10}
+					showLineBelow={false}
+				/>
+				<div css={lineStyle}></div>
+			</section>
+
+			<MoreColumn
+				column={nav.otherLinks}
+				brandExtensions={nav.brandExtensions}
+				key="more"
+			/>
+			<li css={desktopBrandExtensionColumn} role="none">
+				<ul css={brandExtensionList} role="menu">
+					{nav.brandExtensions.map((brandExtension) => (
+						<li
+							css={brandExtensionListItem}
+							key={brandExtension.title}
+						>
+							<a
+								className="selectableMenuItem"
+								css={brandExtensionLink}
+								href={brandExtension.url}
+								key={brandExtension.title}
+								role="menuitem"
+								data-link-name={`nav2 : brand extension : ${brandExtension.longTitle}`}
+								tabIndex={-1}
+							>
+								{brandExtension.longTitle}
+							</a>
+						</li>
+					))}
+				</ul>
+			</li>
+		</ul>
+	);
+};

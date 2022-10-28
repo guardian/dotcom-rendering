@@ -47,33 +47,6 @@ const getLoaders = (bundle) => {
 				},
 			];
 		case 'variant':
-			return [
-				{
-					loader: 'babel-loader',
-					options: {
-						presets: [
-							'@babel/preset-react',
-							[
-								'@babel/preset-env',
-								{
-									bugfixes: true,
-									targets: {
-										esmodules: true,
-									},
-								},
-							],
-						],
-						compact: true,
-					},
-				},
-				{
-					loader: 'ts-loader',
-					options: {
-						configFile: 'tsconfig.build.json',
-						transpileOnly: true,
-					},
-				},
-			];
 		case 'modern':
 			return [
 				{
@@ -85,9 +58,8 @@ const getLoaders = (bundle) => {
 								'@babel/preset-env',
 								{
 									bugfixes: true,
-									targets: {
-										esmodules: true,
-									},
+									targets:
+										'extends @guardian/browserslist-config',
 								},
 							],
 						],

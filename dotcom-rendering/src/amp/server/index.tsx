@@ -35,7 +35,6 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 		const analytics: AnalyticsModel = {
 			gaTracker: 'UA-78705427-1',
 			title: CAPIArticle.headline,
-			fbPixelaccount: '279880532344561',
 			comscoreID: '6035250',
 			section: sectionName,
 			contentType: CAPIArticle.contentType,

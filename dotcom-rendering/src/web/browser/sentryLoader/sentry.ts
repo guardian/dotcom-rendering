@@ -1,7 +1,10 @@
 import * as Sentry from '@sentry/browser';
 import type { BrowserOptions } from '@sentry/browser';
 import { CaptureConsole } from '@sentry/integrations';
-import { BUILD_VARIANT } from '../../../../scripts/webpack/bundles';
+import {
+	BUILD_VARIANT,
+	dcrJavascriptBundle,
+} from '../../../../scripts/webpack/bundles';
 
 const allowUrls: BrowserOptions['allowUrls'] = [
 	/webpack-internal/,
@@ -28,8 +31,6 @@ const ignoreErrors = [
 
 const { config } = window.guardian;
 const {
-	switches: { enableSentryReporting },
-	isDev,
 	page: { dcrSentryDsn },
 	stage,
 } = config;
@@ -42,22 +43,13 @@ Sentry.init({
 	integrations: [new CaptureConsole({ levels: ['error'] })],
 	maxBreadcrumbs: 50,
 	// sampleRate: // We use Math.random in init.ts to sample errors
-	beforeSend(event) {
-		// Skip sending events in certain situations
-		const dontSend = isDev || !enableSentryReporting;
-		if (dontSend) {
-			return null;
-		}
-		return event;
-	},
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- dcrJsBundleVariant could also be `undefined`
-if (BUILD_VARIANT && !!window.guardian.config.tests.dcrJsBundleVariant) {
-	Sentry.setTag(
-		'dcr.bundle',
-		window.guardian.config.tests.dcrJsBundleVariant,
-	);
+if (
+	BUILD_VARIANT &&
+	window.guardian.config.tests[dcrJavascriptBundle('Variant')] === 'variant'
+) {
+	Sentry.setTag('dcr.bundle', dcrJavascriptBundle('Variant'));
 }
 
 export const reportError = (error: Error, feature?: string): void => {

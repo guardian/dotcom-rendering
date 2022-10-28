@@ -2,6 +2,7 @@ import { brandBackground, resets } from '@guardian/source-foundations';
 import he from 'he';
 import { ASSET_ORIGIN } from '../../lib/assets';
 import { getFontsCss } from '../../lib/fonts-css';
+import { islandNoscriptStyles } from '../components/Island';
 import { getHttp3Url } from '../lib/getHttp3Url';
 
 export const pageTemplate = ({
@@ -324,6 +325,8 @@ https://workforus.theguardian.com/careers/product-engineering/
 							comscorekw: keywords,
 						},
 					).toString()}" />
+
+					${islandNoscriptStyles}
                 </noscript>
                 ${priorityScriptTags.join('\n')}
                 <style class="webfont">${getFontsCss()}</style>

@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { initPerf } from '../../../browser/initPerf';
 import { Lazy } from '../../Lazy';
-import { canShowMandatoryUs } from '../displayRule';
+import { canShowSignInGateMandatory } from '../displayRule';
 import type { SignInGateComponent } from '../types';
 
 const SignInGateMain = React.lazy(() => {
@@ -15,15 +15,8 @@ const SignInGateMain = React.lazy(() => {
 	});
 });
 
-export const signInGateComponent: SignInGateComponent = {
-	gate: ({
-		ophanComponentId,
-		dismissGate,
-		guUrl,
-		signInUrl,
-		abTest,
-		isComment,
-	}) => (
+export const signInGateMandatoryComponent: SignInGateComponent = {
+	gate: ({ ophanComponentId, dismissGate, guUrl, signInUrl, abTest }) => (
 		<Lazy margin={300}>
 			<Suspense fallback={<></>}>
 				<SignInGateMain
@@ -32,10 +25,10 @@ export const signInGateComponent: SignInGateComponent = {
 					guUrl={guUrl}
 					signInUrl={signInUrl}
 					abTest={abTest}
-					isComment={isComment}
+					isMandatory={true}
 				/>
 			</Suspense>
 		</Lazy>
 	),
-	canShow: canShowMandatoryUs,
+	canShow: canShowSignInGateMandatory,
 };

@@ -7,6 +7,8 @@ import { AudioAtom } from '@guardian/atoms-rendering';
 import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
 import { App } from '@guardian/discussion-rendering/build/App';
+import { andThen, fromNullable, OptionKind } from '@guardian/types';
+import { getPillarFromId } from 'articleFormat';
 import {
 	ads,
 	getAdSlots,
@@ -20,7 +22,7 @@ import { createEmbedComponentFromProps } from 'components/EmbedWrapper';
 import EpicContent from 'components/EpicContent';
 import FollowStatus from 'components/FollowStatus';
 import FooterContent from 'components/FooterContent';
-import { handleErrors, isObject } from 'lib';
+import { handleErrors, isObject, pipe } from 'lib';
 import {
 	acquisitionsClient,
 	commercialClient,
@@ -32,9 +34,9 @@ import {
 import type { ReactElement } from 'react';
 import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
-import { stringToPillar } from 'themeStyles';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
+import { initSignupForms } from './signupForm';
 
 // ----- Run ----- //
 
@@ -148,26 +150,17 @@ function insertEpic(): void {
 	}
 }
 
-declare type ArticlePillar =
-	| 'news'
-	| 'opinion'
-	| 'sport'
-	| 'culture'
-	| 'lifestyle';
-
-function isPillarString(pillar: string): boolean {
-	return ['news', 'opinion', 'sport', 'culture', 'lifestyle'].includes(
-		pillar.toLowerCase(),
-	);
-}
 function renderComments(): void {
 	const commentContainer = document.getElementById('comments');
-	const pillarString = commentContainer?.getAttribute('data-pillar');
+	const pillar = pipe(
+		commentContainer?.getAttribute('data-pillar'),
+		fromNullable,
+		andThen(getPillarFromId),
+	);
 	const shortUrl = commentContainer?.getAttribute('data-short-id');
 	const isClosedForComments = !!commentContainer?.getAttribute('pillar');
 
-	if (pillarString && isPillarString(pillarString) && shortUrl) {
-		const pillar = pillarString as ArticlePillar;
+	if (pillar.kind === OptionKind.Some && shortUrl) {
 		const user = {
 			userId: 'abc123',
 			displayName: 'Jane Smith',
@@ -183,7 +176,7 @@ function renderComments(): void {
 		const props = {
 			shortUrl,
 			baseUrl: 'https://discussion.theguardian.com/discussion-api',
-			pillar: stringToPillar(pillar),
+			pillar: pillar.value,
 			user,
 			isClosedForComments,
 			additionalHeaders,
@@ -474,6 +467,7 @@ initAudioAtoms();
 hydrateAtoms();
 richLinks();
 hydrateClickToView();
+initSignupForms();
 
 /*
  We run this last to help precisely position native elements over their placeholders in the webview.

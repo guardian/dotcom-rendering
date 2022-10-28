@@ -3,7 +3,6 @@ import {
 	brand,
 	brandAlt,
 	brandText,
-	focusHalo,
 	from,
 	textSans,
 	until,
@@ -40,17 +39,6 @@ const columnStyle = css`
 	margin: 0;
 	padding-bottom: 10px;
 	position: relative;
-
-	:after {
-		background-color: ${brand[600]};
-		top: 0;
-		content: '';
-		display: block;
-		height: 1px;
-		left: 50px;
-		position: absolute;
-		right: 0;
-	}
 
 	/* Remove the border from the top item on mobile */
 	:first-of-type:after {
@@ -147,7 +135,6 @@ const columnLinks = css`
 `;
 
 const columnLinkTitle = css`
-	overflow: clip;
 	${textSans.medium({ lineHeight: 'tight' })};
 	background-color: transparent;
 	text-decoration: none;
@@ -170,10 +157,6 @@ const columnLinkTitle = css`
 	${from.desktop} {
 		font-size: 16px;
 		padding: 6px 0;
-		:hover,
-		:focus {
-			${focusHalo};
-		}
 	}
 
 	:hover,
@@ -189,6 +172,7 @@ const columnLinkTitle = css`
 
 const mainMenuLinkStyle = css`
 	box-sizing: border-box;
+	overflow: hidden;
 	position: relative;
 	width: 100%;
 	${from.desktop} {

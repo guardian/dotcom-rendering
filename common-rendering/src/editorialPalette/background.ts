@@ -139,6 +139,8 @@ const richLinkSvg = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -158,6 +160,8 @@ const liveblogMetadata = (format: ArticleFormat): Colour => {
 			return labs[200];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[200];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[200];
 	}
 };
 
@@ -177,6 +181,8 @@ const richLinkSvgDark = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -255,6 +261,8 @@ const bullet = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -319,6 +327,8 @@ const avatar = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[800];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 		case ArticleSpecial.Labs:
 			return labs[400];
 		case ArticlePillar.Opinion:
@@ -346,6 +356,8 @@ const relatedCardBylineImage = (format: ArticleFormat): string => {
 			return lifestyle[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return opinion[400];
 		case ArticlePillar.News:
 		default:
 			return opinion[400];
@@ -383,6 +395,8 @@ const headlineTag = (format: ArticleFormat): Colour => {
 			return sport[300];
 		case ArticlePillar.News:
 			return news[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[300];
 	}
 };
 
@@ -402,6 +416,8 @@ const headlineTagDark = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -481,6 +497,8 @@ const relatedCardIcon = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -504,6 +522,8 @@ const calloutSpeechBubble = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -601,6 +621,8 @@ const pinnedPost = (format: ArticleFormat): string => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[300];
 	}
 };
 
@@ -637,7 +659,7 @@ const articleContent = (format: ArticleFormat): string => {
 	}
 };
 
-const signUpFormDark = (_format: ArticleFormat): Colour => neutral[10];
+const newsletterSignUpFormDark = (_format: ArticleFormat): Colour => neutral[10];
 
 const editionsCameraIcon = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
@@ -704,7 +726,7 @@ const background = {
 	tagDark,
 	pinnedPost,
 	articleContent,
-	signUpFormDark,
+	newsletterSignUpFormDark,
 	editionsCameraIcon,
 };
 

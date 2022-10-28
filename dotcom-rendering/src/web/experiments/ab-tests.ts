@@ -6,15 +6,18 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from './tests/newsletter-merch-unit-test';
-import { shadyPieClickThrough } from './tests/shady-pie-click-through';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 import {
-	signInGateMandatoryLongBucketingTestRun,
-	signInGateMandatoryLongBucketingTestRunEu,
-	signInGateMandatoryLongBucketingTestRunNa,
-	signInGateMandatoryLongBucketingTestRunUk,
-} from './tests/sign-in-gate-mandatory-long-testrun';
+	signInGateMandatoryLongTestControlAunz,
+	signInGateMandatoryLongTestControlEu,
+	signInGateMandatoryLongTestControlNa,
+	signInGateMandatoryLongTestControlUk,
+	signInGateMandatoryLongTestVariantAunz,
+	signInGateMandatoryLongTestVariantEu,
+	signInGateMandatoryLongTestVariantNa,
+	signInGateMandatoryLongTestVariantUk,
+} from './tests/sign-in-gate-mandatory-long-test';
 
 // keep in sync with ab-tests in frontend
 // https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts
@@ -26,9 +29,12 @@ export const tests: ABTest[] = [
 	newsletterMerchUnitLighthouseVariants,
 	consentlessAds,
 	integrateIMA,
-	shadyPieClickThrough,
-	signInGateMandatoryLongBucketingTestRun,
-	signInGateMandatoryLongBucketingTestRunEu,
-	signInGateMandatoryLongBucketingTestRunNa,
-	signInGateMandatoryLongBucketingTestRunUk,
+	signInGateMandatoryLongTestControlAunz,
+	signInGateMandatoryLongTestControlNa,
+	signInGateMandatoryLongTestControlEu,
+	signInGateMandatoryLongTestControlUk,
+	signInGateMandatoryLongTestVariantAunz,
+	signInGateMandatoryLongTestVariantNa,
+	signInGateMandatoryLongTestVariantEu,
+	signInGateMandatoryLongTestVariantUk,
 ];
