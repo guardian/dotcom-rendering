@@ -15,7 +15,7 @@ import { OptionKind, withDefault } from '@guardian/types';
 import type { Styleable } from 'lib';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
-import DefaultCaption from './Caption.defaults';
+import Caption from './Caption';
 
 // ----- Component ----- //
 
@@ -119,7 +119,7 @@ const DefaultMainMediaCaption: FC<Props> = ({
 					</span>
 				</summary>
 				<span id={id} css={textStyles}>
-					<DefaultCaption caption={caption} format={format} />{' '}
+					<Caption caption={caption} format={format} />{' '}
 					{withDefault<string | null>(null)(credit)}
 				</span>
 			</details>

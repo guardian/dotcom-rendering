@@ -91,11 +91,11 @@ type Props = {
 	format: ArticleFormat;
 };
 
-const DefaultCaption: FC<Props> = ({ caption, format }) =>
+const Caption: FC<Props> = ({ caption, format }) =>
 	maybeRender(caption, (cap) => (
 		<>{Array.from(cap.childNodes).map(captionElement(format))}</>
 	));
 
 // ----- Exports ----- //
 
-export default DefaultCaption;
+export default Caption;
