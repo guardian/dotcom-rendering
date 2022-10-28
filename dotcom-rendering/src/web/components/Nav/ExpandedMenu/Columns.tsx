@@ -8,6 +8,7 @@ import {
 	from,
 	headline,
 	neutral,
+	space,
 	textSans,
 } from '@guardian/source-foundations';
 import {
@@ -133,7 +134,7 @@ const searchBar = css`
 	box-sizing: border-box;
 	display: block;
 	margin-left: 13px;
-	max-width: 23.75rem;
+	max-width: 380px;
 	position: relative;
 	margin-bottom: 24px;
 	margin-right: 41px;
@@ -155,15 +156,14 @@ const searchInput = css`
 		color: ${neutral[100]};
 	}
 	&:focus {
-		outline: none;
 		padding-right: 40px;
 		&::placeholder {
 			opacity: 0;
 		}
 	}
 	&:focus ~ button {
+		background-color: transparent;
 		opacity: 1;
-		outline: none;
 		pointer-events: all;
 	}
 `;
@@ -190,13 +190,12 @@ const searchSubmit = css`
 	fill: ${neutral[100]};
 	&:focus,
 	&:active {
-		opacity: 1;
-		outline: none;
+		opacity: 0;
 		pointer-events: all;
 	}
 	&:before {
 		height: 12px;
-		top: 11px;
+		top: ${space[3]}px;
 		width: 12px;
 	}
 	&:after {
@@ -252,10 +251,10 @@ export const Columns: React.FC<{
 						hideLabel={true}
 						label="Search input"
 						cssOverrides={searchInput}
-						name="q"
+						name="q" // query param sent to google
 						placeholder="Search"
 						data-link-name="nav2 : search"
-						tabIndex={-1}
+						className="selectableMenuItem"
 					/>
 
 					<Label hideLabel={true} text="google-search">
@@ -273,11 +272,11 @@ export const Columns: React.FC<{
 								size="medium"
 							/>
 						}
-						aria-label="Search with google"
+						aria-label="Search with Google"
 						cssOverrides={searchSubmit}
 						data-link-name="nav2 : search : submit"
 						type="submit"
-						tabIndex={-1}
+						className="selectableMenuItem"
 					></Button>
 					<input
 						type="hidden"
