@@ -22,9 +22,9 @@
   },
   "dependencies": {
     "@babel/core": "^7.16.12",
-    "@emotion/cache": "^11.4.0",
-    "@emotion/react": "^11.4.1",
-    "@emotion/server": "^11.4.0",
+    "@emotion/cache": "^11.10.5",
+    "@emotion/react": "^11.10.5",
+    "@emotion/server": "^11.10.0",
     "@guardian/eslint-config": "^1.0.0",
     "@guardian/eslint-config-typescript": "^1.0.1",
     "@guardian/eslint-plugin-source-react-components": "^9.0.0",
