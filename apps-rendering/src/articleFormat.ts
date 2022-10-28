@@ -6,9 +6,7 @@
 
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
-import { none, some, withDefault } from '@guardian/types';
-import type { Option } from '@guardian/types';
-import { pipe } from 'lib';
+import { Optional } from 'optional';
 
 // ----- Functions ----- //
 
@@ -19,33 +17,33 @@ import { pipe } from 'lib';
  * the culture pillar.
  *
  * @param pillarId A pillar expressed as a `string`, e.g. `"pillar/news"`.
- * @returns An `Option`, with a `Some` corresponding to an
+ * @returns An `Optional`, with a `Some` corresponding to an
  * {@linkcode ArticlePillar} if the id is valid, otherwise `None`.
  *
  * @example
  * const maybePillar = getPillarFromId("pillar/arts") // Some<ArticlePillar.Culture>
  */
-const getPillarFromId = (pillarId: string): Option<ArticlePillar> => {
+const getPillarFromId = (pillarId: string): Optional<ArticlePillar> => {
 	switch (pillarId) {
 		case 'pillar/opinion':
-			return some(ArticlePillar.Opinion);
+			return Optional.some(ArticlePillar.Opinion);
 		case 'pillar/sport':
-			return some(ArticlePillar.Sport);
+			return Optional.some(ArticlePillar.Sport);
 		case 'pillar/arts':
-			return some(ArticlePillar.Culture);
+			return Optional.some(ArticlePillar.Culture);
 		case 'pillar/lifestyle':
-			return some(ArticlePillar.Lifestyle);
+			return Optional.some(ArticlePillar.Lifestyle);
 		case 'pillar/news':
-			return some(ArticlePillar.News);
+			return Optional.some(ArticlePillar.News);
 		default:
-			return none;
+			return Optional.none();
 	}
 };
 
 /**
  * Does the same as {@linkcode getPillarFromId}, but falls back to
  * {@linkcode ArticlePillar.News} if parsing fails, instead of returning an
- * `Option`.
+ * `Optional`.
  *
  * @param pillarId A pillar expressed as a `string`, e.g. `"pillar/news"`.
  * @returns An {@linkcode ArticlePillar} if the id is valid, otherwise
@@ -56,11 +54,7 @@ const getPillarFromId = (pillarId: string): Option<ArticlePillar> => {
  * const pillar = getPillarOrElseNews("invalid id") // ArticlePillar.News
  */
 const getPillarOrElseNews = (pillarId: string): ArticlePillar =>
-	pipe(
-		pillarId,
-		getPillarFromId,
-		withDefault<ArticlePillar>(ArticlePillar.News),
-	);
+	getPillarFromId(pillarId).withDefault(ArticlePillar.News);
 
 /**
  * Converts an {@linkcode ArticlePillar} into a `string`. The `string` will be

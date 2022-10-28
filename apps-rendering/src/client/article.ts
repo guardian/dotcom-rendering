@@ -7,7 +7,6 @@ import { AudioAtom } from '@guardian/atoms-rendering';
 import type { ICommentResponse as CommentResponse } from '@guardian/bridget';
 import { Topic } from '@guardian/bridget/Topic';
 import { App } from '@guardian/discussion-rendering/build/App';
-import { andThen, fromNullable, OptionKind } from '@guardian/types';
 import { getPillarFromId } from 'articleFormat';
 import {
 	ads,
@@ -22,7 +21,7 @@ import { createEmbedComponentFromProps } from 'components/EmbedWrapper';
 import EpicContent from 'components/EpicContent';
 import FollowStatus from 'components/FollowStatus';
 import FooterContent from 'components/FooterContent';
-import { handleErrors, isObject, pipe } from 'lib';
+import { handleErrors, isObject } from 'lib';
 import {
 	acquisitionsClient,
 	commercialClient,
@@ -37,6 +36,7 @@ import ReactDOM from 'react-dom';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
 import { initSignupForms } from './signupForm';
+import { Optional } from 'optional';
 
 // ----- Run ----- //
 
@@ -152,15 +152,13 @@ function insertEpic(): void {
 
 function renderComments(): void {
 	const commentContainer = document.getElementById('comments');
-	const pillar = pipe(
-		commentContainer?.getAttribute('data-pillar'),
-		fromNullable,
-		andThen(getPillarFromId),
-	);
+	const pillar = Optional
+		.fromNullable(commentContainer?.getAttribute('data-pillar'))
+		.flatMap(getPillarFromId);
 	const shortUrl = commentContainer?.getAttribute('data-short-id');
 	const isClosedForComments = !!commentContainer?.getAttribute('pillar');
 
-	if (pillar.kind === OptionKind.Some && shortUrl) {
+	if (pillar.isSome() && shortUrl) {
 		const user = {
 			userId: 'abc123',
 			displayName: 'Jane Smith',
