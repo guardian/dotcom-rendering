@@ -18,7 +18,11 @@ describe('MainMediaCaption component renders as expected', () => {
 	it('formats the caption correctly', () => {
 		const mainMediaCaption = renderer.create(
 			<MainMediaCaption
-				caption={some(JSDOM.fragment('Here is a caption with <em>emphasis</em>, a <strong>strong tag</strong>, and a <a href="https://www.theguardian.com">link</a>.'))}
+				caption={some(
+					JSDOM.fragment(
+						'Here is a caption with <em>emphasis</em>, a <strong>strong tag</strong>, and a <a href="https://www.theguardian.com">link</a>.',
+					),
+				)}
 				credit={some('Photograph: cameraman')}
 				format={{
 					design: ArticleDesign.Standard,
