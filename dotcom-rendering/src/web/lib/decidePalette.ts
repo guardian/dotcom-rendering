@@ -71,12 +71,16 @@ const textHeadline = (format: ArticleFormat): string => {
 			)
 				return specialReport[100];
 
-			if (
-				format.theme === ArticleSpecial.SpecialReportAlt &&
-				format.design !== ArticleDesign.LiveBlog &&
-				format.design !== ArticleDesign.DeadBlog
-			)
-				return neutral[7];
+			if (format.theme === ArticleSpecial.SpecialReportAlt) {
+				if (format.design === ArticleDesign.Interview)
+					return palette.specialReportAlt[800];
+
+				if (
+					format.design !== ArticleDesign.LiveBlog &&
+					format.design !== ArticleDesign.DeadBlog
+				)
+					return neutral[7];
+			}
 
 			switch (format.design) {
 				case ArticleDesign.Review:
@@ -1225,6 +1229,13 @@ const fillBlockquoteIcon = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
+const fillTwitterHandle = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
+	return neutral[46];
+};
+
 const fillTwitterHandleBelowDesktop = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
 
@@ -1620,11 +1631,41 @@ const fillQuoteIcon = (format: ArticleFormat): string => {
 		switch (format.theme) {
 			case ArticlePillar.News:
 				return news[300];
-			default:
-				return pillarPalette[format.theme].main;
+			case ArticlePillar.Opinion:
+				return opinion[400];
+			case ArticlePillar.Sport:
+				return sport[400];
+			case ArticlePillar.Culture:
+				return culture[400];
+			case ArticlePillar.Lifestyle:
+				return lifestyle[400];
+			case ArticleSpecial.SpecialReport:
+				return specialReport[400];
+			case ArticleSpecial.Labs:
+				return labs[400];
+			case ArticleSpecial.SpecialReportAlt:
+				return neutral[7];
 		}
 	}
-	return pillarPalette[format.theme].main;
+
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Opinion:
+			return opinion[400];
+		case ArticlePillar.Sport:
+			return sport[400];
+		case ArticlePillar.Culture:
+			return culture[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[400];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[400];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return neutral[7];
+	}
 };
 
 const backgroundPullQuote = (format: ArticleFormat): string => {
@@ -2046,6 +2087,7 @@ export const decidePalette = (
 			richLink: fillRichLink(format),
 			quoteIcon: fillQuoteIcon(format),
 			blockquoteIcon: fillBlockquoteIcon(format),
+			twitterHandle: fillTwitterHandle(format),
 			twitterHandleBelowDesktop: fillTwitterHandleBelowDesktop(format),
 			guardianLogo: fillGuardianLogo(format),
 		},

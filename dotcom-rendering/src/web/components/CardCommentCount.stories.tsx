@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 import { CardCommentCount } from './CardCommentCount';
 
 export default {
@@ -50,3 +55,20 @@ export const GalleryStory = () => {
 	);
 };
 GalleryStory.story = { name: 'Gallery' };
+
+export const SpecialReportAlt = () => {
+	return (
+		<Wrapper>
+			<CardCommentCount
+				format={{
+					design: ArticleDesign.Standard,
+					theme: ArticleSpecial.SpecialReportAlt,
+					display: ArticleDisplay.Standard,
+				}}
+				short="11k"
+				long="10,899"
+			/>
+		</Wrapper>
+	);
+};
+SpecialReportAlt.story = { name: 'Special report Alt' };

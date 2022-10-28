@@ -104,6 +104,7 @@ export type Palette = {
 		richLink: Colour;
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;
+		twitterHandle: Colour;
 		twitterHandleBelowDesktop: Colour;
 		guardianLogo: Colour;
 	};
