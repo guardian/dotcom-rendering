@@ -71,12 +71,16 @@ const textHeadline = (format: ArticleFormat): string => {
 			)
 				return specialReport[100];
 
-			if (
-				format.theme === ArticleSpecial.SpecialReportAlt &&
-				format.design !== ArticleDesign.LiveBlog &&
-				format.design !== ArticleDesign.DeadBlog
-			)
-				return neutral[7];
+			if (format.theme === ArticleSpecial.SpecialReportAlt) {
+				if (format.design === ArticleDesign.Interview)
+					return palette.specialReportAlt[800];
+
+				if (
+					format.design !== ArticleDesign.LiveBlog &&
+					format.design !== ArticleDesign.DeadBlog
+				)
+					return neutral[7];
+			}
 
 			switch (format.design) {
 				case ArticleDesign.Review:
