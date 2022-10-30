@@ -1573,6 +1573,14 @@ const borderLines = (format: ArticleFormat): string => {
 			format.design === ArticleDesign.Letter)
 	)
 		return neutral[46];
+
+	if (
+		format.theme === ArticleSpecial.SpecialReportAlt &&
+		(format.design === ArticleDesign.Comment ||
+			format.design === ArticleDesign.Letter)
+	)
+		return transparentColour(neutral[60], 0.3);
+
 	return neutral[86];
 };
 
