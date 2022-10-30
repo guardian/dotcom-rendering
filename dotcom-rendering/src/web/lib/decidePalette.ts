@@ -1234,6 +1234,13 @@ const fillGuardianLogo = (format: ArticleFormat): string => {
 	return WHITE;
 };
 
+const fillTwitterHandle = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
+	return neutral[46];
+};
+
 const borderSyndicationButton = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	if (
@@ -2035,6 +2042,7 @@ export const decidePalette = (
 			quoteIcon: fillQuoteIcon(format),
 			blockquoteIcon: fillBlockquoteIcon(format),
 			twitterHandleBelowDesktop: fillTwitterHandleBelowDesktop(format),
+			twitterHandle: fillTwitterHandle(format),
 			guardianLogo: fillGuardianLogo(format),
 		},
 		border: {

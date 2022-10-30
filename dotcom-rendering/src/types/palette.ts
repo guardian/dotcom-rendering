@@ -105,6 +105,7 @@ export type Palette = {
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;
 		twitterHandleBelowDesktop: Colour;
+		twitterHandle: Colour;
 		guardianLogo: Colour;
 	};
 	border: {
