@@ -1,9 +1,9 @@
-type Props = {
-	callout: CalloutBlockElement;
+type FormProps = {
+	formFields: CalloutBlockElement;
 };
 
-export const Form = ({ callout }: Props) => (
+export const Form = ({ formFields }: FormProps) => (
 	<>
-		<div> {callout.title} </div>
+		<div> {formFields.title} </div>
 	</>
 );

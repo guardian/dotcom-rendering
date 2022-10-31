@@ -9,8 +9,9 @@ export default {
 	title: 'Components/CalloutNew/Form',
 };
 
+// convention for getting something into storybook
 export const Default = () => {
-	return <Form callout={calloutCampaign} />;
+	return <Form formFields={calloutCampaign} />;
 };
 
 Default.story = { name: 'default' };
