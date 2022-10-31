@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { useState } from 'react';
-import { FileUpload } from '../Callout/FileUpload';
-import { MultiSelect } from '../Callout/MultiSelect';
-import { Select } from '../Callout/Select';
-import { TextArea } from '../Callout/TextArea';
-import { TextInput } from '../Callout/TextInput';
+import { FileUpload } from './FileUpload';
+import { MultiSelect } from './MultiSelect';
+import { Select } from './Select';
+import { TextArea } from './TextArea';
+import { TextInput } from './TextInput';
 
 const formStyles = css`
 	display: flex;
