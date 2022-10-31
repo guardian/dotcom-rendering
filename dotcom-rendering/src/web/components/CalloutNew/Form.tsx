@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
+import { Button, Link } from '@guardian/source-react-components';
 import { useState } from 'react';
+import { Disclaimer } from './Disclaimer';
 import { FileUpload } from './FileUpload';
 import { MultiSelect } from './MultiSelect';
 import { Select } from './Select';
@@ -17,6 +19,13 @@ const formStyles = css`
 const formFieldWrapperStyles = css`
 	display: flex;
 	flex-direction: column;
+`;
+
+const footerPaddingStyles = css`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-bottom: 15px;
 `;
 
 type FormDataType = { [key in string]: any };
@@ -100,31 +109,59 @@ export const Form = ({ onSubmit, formFields }: FormProps) => {
 	const [formData, setFormData] = useState<{ [key in string]: any }>({});
 
 	return (
-		<form
-			action="/formstack-campaign/submit"
-			method="post"
-			css={formStyles}
-			onSubmit={(e) => {
-				e.preventDefault();
-				onSubmit(formData);
-			}}
-		>
-			{formFields.map((formField, index) => (
-				<div
-					css={formFieldWrapperStyles}
-					// we use custom-guardian to find 1st field for accessibility
-					// ideally we should useRef but need to wait for Source to
-					// support React references
-					custom-guardian="callout-form-field"
-					key={index}
-				>
-					<FormField
-						formField={formField}
-						formData={formData}
-						setFormData={setFormData}
-					/>
+		<>
+			<Disclaimer />
+			<form
+				action="/formstack-campaign/submit"
+				method="post"
+				css={formStyles}
+				onSubmit={(e) => {
+					e.preventDefault();
+					onSubmit(formData);
+				}}
+			>
+				{formFields.map((formField, index) => (
+					<div
+						css={formFieldWrapperStyles}
+						// we use custom-guardian to find 1st field for accessibility
+						// ideally we should useRef but need to wait for Source to
+						// support React references
+						custom-guardian="callout-form-field"
+						key={index}
+					>
+						<FormField
+							formField={formField}
+							formData={formData}
+							setFormData={setFormData}
+						/>
+					</div>
+				))}
+				<div css={footerPaddingStyles}>
+					<Button priority="secondary" size="xsmall" type="submit">
+						Submit
+					</Button>
+					<div
+						css={css`
+							a,
+							a:hover {
+								border: 0;
+							}
+							text-align: right;
+						`}
+					>
+						<Link
+							priority="secondary"
+							target="_blank"
+							href="https://www.theguardian.com/help/terms-of-service"
+							cssOverrides={css`
+								text-decoration: none;
+							`}
+						>
+							Terms and conditions
+						</Link>
+					</div>
 				</div>
-			))}
-		</form>
+			</form>
+		</>
 	);
 };

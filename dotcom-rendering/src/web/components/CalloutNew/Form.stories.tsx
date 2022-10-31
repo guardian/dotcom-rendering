@@ -11,7 +11,12 @@ export default {
 
 // convention for getting something into storybook
 export const Default = () => {
-	return <Form formFields={calloutCampaign.formFields} onSubmit={() => {}} />;
+	return (
+		<>
+			<Form formFields={calloutCampaign.formFields} onSubmit={() => {}} />
+			;
+		</>
+	);
 };
 
 Default.story = { name: 'default' };

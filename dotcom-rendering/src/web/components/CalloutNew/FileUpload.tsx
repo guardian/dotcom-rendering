@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { Button, Link } from '@guardian/source-react-components';
 import { space, text, textSans } from '@guardian/source-foundations';
 import { useState } from 'react';
 import { stringifyFileBase64 } from '../../lib/stringifyFileBase64';
@@ -45,14 +46,17 @@ export const FileUpload = ({ formField, formData, setFormData }: Props) => {
 	return (
 		<>
 			<FieldLabel formField={formField} />
-			<input
-				data-testid={`form-field-${formField.id}`}
-				css={fileUploadInputStyles}
-				type="file"
-				accept="image/*, .pdf"
-				required={formField.required}
-				onChange={onSelectFile}
-			/>
+			<Button
+				css={css`
+					background-color: green;
+					width: fit-content;
+				`}
+				priority="secondary"
+				size="xsmall"
+				type="submit"
+			>
+				Submit
+			</Button>
 			<p>We accept images and pdfs. Maximum total file size: 6MB</p>
 			{!!error && <div css={errorMessagesStyles}>{error}</div>}
 		</>
