@@ -84,7 +84,7 @@ export const calloutCampaign: CalloutBlockElement = {
 			name: 'your_email_address',
 			description: 'Your email address',
 			hideLabel: false,
-			label: 'Your email address',
+			label: 'Helpful so we can contact you for more information. This will only be seen by The Guardian.',
 			id: '91884874',
 			type: 'text',
 			required: true,
