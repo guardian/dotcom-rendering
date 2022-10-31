@@ -1,26 +1,32 @@
 // ----- Imports ----- //
 
-import type { SerializedStyles } from "@emotion/react";
-import { css } from "@emotion/react";
-import { between, remSpace } from "@guardian/source-foundations";
-import { brandAlt, neutral } from "@guardian/source-foundations";
-import { textSans } from "@guardian/source-foundations";
-import { SvgCamera } from "@guardian/source-react-components";
-import { Option, OptionKind } from "@guardian/types";
-import { withDefault } from "@guardian/types";
-import { darkModeCss } from "@guardian/common-rendering/src/lib";
-import type { FC } from "react";
+import { css } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+import {
+	between,
+	brandAlt,
+	neutral,
+	remSpace,
+	textSans,
+} from '@guardian/source-foundations';
+import { SvgCamera } from '@guardian/source-react-components';
+import type { Option } from '@guardian/types';
+import { OptionKind, withDefault } from '@guardian/types';
+import type { Styleable } from 'lib';
+import type { FC } from 'react';
+import { darkModeCss } from 'styles';
+import Caption from './Caption';
 
 // ----- Component ----- //
 
-const styles = css`
+const defaultStyles = css`
 	position: absolute;
 	left: 0;
 	right: 0;
 	bottom: 0;
 `;
 
-const detailsStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+const detailsStyles = css`
 	&[open] {
 		min-height: 44px;
 		max-height: 999px;
@@ -29,17 +35,16 @@ const detailsStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 		overflow: hidden;
 		padding-right: ${remSpace[12]};
 		z-index: 1;
-		color: ${neutral[100]};
 		${textSans.small()};
 		box-sizing: border-box;
 
-		${darkModeCss(supportsDarkMode)`
+		${darkModeCss`
 			color: ${neutral[60]};
 		`}
 	}
 `;
 
-const iconStyles = (supportsDarkMode: boolean): SerializedStyles => css`
+const iconStyles = css`
 	display: block;
 	text-align: center;
 	background-color: ${brandAlt[400]};
@@ -55,7 +60,7 @@ const iconStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 		display: none;
 	}
 
-	${darkModeCss(supportsDarkMode)`
+	${darkModeCss`
 		background-color: ${neutral[93]};
 	`}
 
@@ -64,7 +69,7 @@ const iconStyles = (supportsDarkMode: boolean): SerializedStyles => css`
 	}
 `;
 
-const svgStyles: SerializedStyles = css`
+const svgStyles = css`
 	line-height: 32px;
 	font-size: 0;
 
@@ -79,34 +84,43 @@ const svgStyles: SerializedStyles = css`
 	}
 `;
 
-interface Props {
-	caption: Option<string>;
-	credit: Option<string>;
-	supportsDarkMode: boolean;
-	id: string;
-}
+const textStyles = css`
+	${textSans.xsmall({
+		lineHeight: 'regular',
+	})}
+	color: ${neutral[100]};
+`;
 
-const ImageDetails: FC<Props> = ({
+type Props = Styleable<{
+	caption: Option<DocumentFragment>;
+	credit: Option<string>;
+	format: ArticleFormat;
+	id: string;
+}>;
+
+const DefaultMainMediaCaption: FC<Props> = ({
 	caption,
+	className,
 	credit,
-	supportsDarkMode,
+	format,
 	id,
-}: Props) => {
+}) => {
 	if (caption.kind === OptionKind.None && credit.kind === OptionKind.None) {
 		return null;
 	}
 
 	return (
-		<figcaption css={styles}>
-			<details css={detailsStyles(supportsDarkMode)}>
-				<summary css={iconStyles(supportsDarkMode)}>
+		<figcaption css={className}>
+			<details css={detailsStyles}>
+				<summary css={iconStyles}>
 					<span css={svgStyles}>
 						<SvgCamera />
 						Click to see figure caption
 					</span>
 				</summary>
-				<span id={id}>
-					{withDefault("")(caption)} {withDefault("")(credit)}
+				<span id={id} css={textStyles}>
+					<Caption caption={caption} format={format} />{' '}
+					{withDefault<string | null>(null)(credit)}
 				</span>
 			</details>
 		</figcaption>
@@ -115,4 +129,6 @@ const ImageDetails: FC<Props> = ({
 
 // ----- Exports ----- //
 
-export default ImageDetails;
+export { defaultStyles };
+
+export default DefaultMainMediaCaption;
