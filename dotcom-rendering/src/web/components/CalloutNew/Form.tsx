@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { news } from '@guardian/source-foundations';
 import { Button, Link } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { Disclaimer } from './Disclaimer';
@@ -137,7 +138,13 @@ export const Form = ({ onSubmit, formFields }: FormProps) => {
 					</div>
 				))}
 				<div css={footerPaddingStyles}>
-					<Button priority="secondary" size="xsmall" type="submit">
+					<Button
+						priority="primary"
+						type="submit"
+						cssOverrides={css`
+							background-color: ${news[300]};
+						`}
+					>
 						Submit
 					</Button>
 					<div
@@ -148,18 +155,7 @@ export const Form = ({ onSubmit, formFields }: FormProps) => {
 							}
 							text-align: right;
 						`}
-					>
-						<Link
-							priority="secondary"
-							target="_blank"
-							href="https://www.theguardian.com/help/terms-of-service"
-							cssOverrides={css`
-								text-decoration: none;
-							`}
-						>
-							Terms and conditions
-						</Link>
-					</div>
+					></div>
 				</div>
 			</form>
 		</>
