@@ -91,8 +91,7 @@ export const calloutCampaign: CalloutBlockElement = {
 		},
 		{
 			name: 'where_do_you_live',
-			description:
-				'Helpful so we can contact you for more information. This will only be seen by The Guardian.',
+			description: 'Town or area is fine.',
 			hideLabel: false,
 			label: 'Where do you live?',
 			id: '91884874',
