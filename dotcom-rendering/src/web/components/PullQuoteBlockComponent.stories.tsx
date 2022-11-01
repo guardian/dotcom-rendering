@@ -154,6 +154,7 @@ NewsInline.story = {
 export const OpinionInline = () => {
 	const format = {
 		...defaultFormat,
+		design: ArticleDesign.Comment,
 		theme: ArticlePillar.Opinion,
 	};
 
@@ -332,6 +333,7 @@ NewsSupporting.story = {
 export const OpinionSupporting = () => {
 	const format = {
 		...defaultFormat,
+		design: ArticleDesign.Comment,
 		theme: ArticlePillar.Opinion,
 	};
 

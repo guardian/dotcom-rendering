@@ -98,18 +98,35 @@ const fullyInline = css`
 	display: block;
 `;
 
+const specialReportAltStyles = (palette: Palette) => css`
+	${headline.xxsmall({ fontWeight: 'light' })};
+	line-height: 25px;
+	position: relative;
+	background-color: ${palette.background.pullQuote};
+	padding-top: 6px;
+	padding-bottom: 12px;
+	margin-bottom: 28px;
+	border: 1px solid ${transparentColour(neutral[60], 0.3)};
+
+	:after {
+		content: '';
+		width: 25px;
+		height: 25px;
+		bottom: -25px;
+		position: absolute;
+		background-color: ${palette.background.pullQuote};
+		border: 1px solid ${transparentColour(neutral[60], 0.3)};
+		border-top: none;
+		left: -1px;
+	}
+`;
+
 function decidePosition(role: string, design: ArticleDesign) {
 	if (design === ArticleDesign.PhotoEssay) {
 		return role === 'supporting' ? fullyLeft : fullyInline;
 	}
 	return role === 'supporting' ? partiallyLeft : partiallyInline;
 }
-
-const decideFontWeight = (theme: ArticleTheme) => {
-	if (theme === ArticleSpecial.SpecialReportAlt) return 'light';
-
-	return 'bold';
-};
 
 function decideFont(role: string) {
 	if (role === 'supporting') {
@@ -136,29 +153,7 @@ export const PullQuoteBlockComponent: React.FC<{
 			<aside
 				css={[
 					decidePosition(role, format.design),
-					css`
-						${headline.xxsmall({ fontWeight: 'light' })};
-						line-height: 25px;
-						position: relative;
-						background-color: ${palette.background.pullQuote};
-						padding-top: 6px;
-						padding-bottom: 12px;
-						margin-bottom: 28px;
-						border: 1px solid ${transparentColour(neutral[60], 0.3)};
-
-						:after {
-							content: '';
-							width: 25px;
-							height: 25px;
-							bottom: -25px;
-							position: absolute;
-							background-color: ${palette.background.pullQuote};
-							border: 1px solid
-								${transparentColour(neutral[60], 0.3)};
-							border-top: none;
-							left: -1px;
-						}
-					`,
+					specialReportAltStyles(palette),
 				]}
 			>
 				<QuoteIcon colour={palette.fill.quoteIcon} />
@@ -260,9 +255,7 @@ export const PullQuoteBlockComponent: React.FC<{
 					css={[
 						decidePosition(role, format.design),
 						css`
-							${headline.xxsmall({
-								fontWeight: decideFontWeight(format.theme),
-							})};
+							${headline.xxsmall({ fontWeight: 'bold' })};
 							line-height: 25px;
 							position: relative;
 							background-color: ${palette.background.pullQuote};
