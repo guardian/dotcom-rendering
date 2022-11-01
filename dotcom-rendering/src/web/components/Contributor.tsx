@@ -12,23 +12,15 @@ const twitterHandleColour = (palette: Palette) => css`
 	color: ${palette.text.twitterHandleBelowDesktop};
 
 	svg {
-		fill: ${palette.fill.twitterHandleBelowDesktop};
+		fill: currentColor;
 	}
 
 	a {
-		color: ${palette.text.twitterHandleBelowDesktop};
+		color: inherit;
 	}
 
 	${from.desktop} {
 		color: ${palette.text.twitterHandle};
-
-		svg {
-			fill: ${palette.fill.twitterHandle};
-		}
-
-		a {
-			color: ${palette.text.twitterHandle};
-		}
 	}
 `;
 
