@@ -2,7 +2,8 @@ import { css } from '@emotion/react';
 import { neutral, textSans } from '@guardian/source-foundations';
 
 const fieldLabelStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })}
+	${textSans.small()}
+	color: ${neutral[46]};
 `;
 
 export const Disclaimer = () => (

@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { news } from '@guardian/source-foundations';
 import { Button, Link } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { Disclaimer } from './Disclaimer';
 import { FileUpload } from './FileUpload';
 import { MultiSelect } from './MultiSelect';
 import { Select } from './Select';
@@ -110,54 +109,51 @@ export const Form = ({ onSubmit, formFields }: FormProps) => {
 	const [formData, setFormData] = useState<{ [key in string]: any }>({});
 
 	return (
-		<>
-			<Disclaimer />
-			<form
-				action="/formstack-campaign/submit"
-				method="post"
-				css={formStyles}
-				onSubmit={(e) => {
-					e.preventDefault();
-					onSubmit(formData);
-				}}
-			>
-				{formFields.map((formField, index) => (
-					<div
-						css={formFieldWrapperStyles}
-						// we use custom-guardian to find 1st field for accessibility
-						// ideally we should useRef but need to wait for Source to
-						// support React references
-						custom-guardian="callout-form-field"
-						key={index}
-					>
-						<FormField
-							formField={formField}
-							formData={formData}
-							setFormData={setFormData}
-						/>
-					</div>
-				))}
-				<div css={footerPaddingStyles}>
-					<Button
-						priority="primary"
-						type="submit"
-						cssOverrides={css`
-							background-color: ${news[300]};
-						`}
-					>
-						Submit
-					</Button>
-					<div
-						css={css`
-							a,
-							a:hover {
-								border: 0;
-							}
-							text-align: right;
-						`}
-					></div>
+		<form
+			action="/formstack-campaign/submit"
+			method="post"
+			css={formStyles}
+			onSubmit={(e) => {
+				e.preventDefault();
+				onSubmit(formData);
+			}}
+		>
+			{formFields.map((formField, index) => (
+				<div
+					css={formFieldWrapperStyles}
+					// we use custom-guardian to find 1st field for accessibility
+					// ideally we should useRef but need to wait for Source to
+					// support React references
+					custom-guardian="callout-form-field"
+					key={index}
+				>
+					<FormField
+						formField={formField}
+						formData={formData}
+						setFormData={setFormData}
+					/>
 				</div>
-			</form>
-		</>
+			))}
+			<div css={footerPaddingStyles}>
+				<Button
+					priority="primary"
+					type="submit"
+					cssOverrides={css`
+						background-color: ${news[300]};
+					`}
+				>
+					Submit
+				</Button>
+				<div
+					css={css`
+						a,
+						a:hover {
+							border: 0;
+						}
+						text-align: right;
+					`}
+				></div>
+			</div>
+		</form>
 	);
 };
