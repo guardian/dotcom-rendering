@@ -74,7 +74,13 @@ module.exports = ({ sessionId }) => ({
 				},
 				use: {
 					loader: 'swc-loader',
-					options: swcConfig,
+					options: {
+						...swcConfig,
+						// TODO verify browserslist node target
+						// env: {
+						// 	targets: 'current node',
+						// },
+					},
 				},
 			},
 			// TODO: find a way to remove
