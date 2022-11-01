@@ -2835,10 +2835,10 @@
   dependencies:
     "@guardian/libs" "^7.1.4"
 
-"@guardian/discussion-rendering@^10.3.0":
-  version "10.3.0"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-10.3.0.tgz#aed59af1693ef3a2d3adf2ab822eed701b684055"
-  integrity sha512-Qmm6BxUhbPG2xGiDSQYlyjB0vm1z7o+YSwS+kdAsXYXfJg85LvrVWWQJ7shQ7tu0s6svcDRzAGyrW30XJY+JDg==
+"@guardian/discussion-rendering@^11.0.3":
+  version "11.0.3"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-11.0.3.tgz#4e18a9e28a0d12a4dc61739b3877478c780b36a9"
+  integrity sha512-2hsYGUzuXHKzyCIOGP42X3CVK11I32krP6fffyP5BuCFSQNgrpje4L9ngWIpOGvHi12T2anYnXI7HyouQDGo0A==
 
 "@guardian/eslint-config-typescript@^1.0.1":
   version "1.0.1"
