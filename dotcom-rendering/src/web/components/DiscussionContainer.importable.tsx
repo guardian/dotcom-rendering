@@ -14,7 +14,7 @@ import { DiscussionWhenSignedIn } from './DiscussionWhenSignedIn';
  *
  * If not, it simply renders Discussion
  *
- * We use component composition like this here because you cannot call react
+ * We use component composition like this here because you cannoy call react
  * hooks conditionally and we're using a hook to make the fetch request
  *
  * Note. We allow the ...props pattern here because it makes sense when we're
