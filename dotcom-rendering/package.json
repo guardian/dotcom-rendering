@@ -66,7 +66,7 @@
     "@guardian/browserslist-config": "^2.0.3",
     "@guardian/commercial-core": "^4.3.0",
     "@guardian/consent-management-platform": "10.11.1",
-    "@guardian/discussion-rendering": "^10.3.0",
+    "@guardian/discussion-rendering": "^11.0.2",
     "@guardian/libs": "^9.0.1",
     "@guardian/shimport": "^1.0.2",
     "@guardian/support-dotcom-components": "^1.0.6",
