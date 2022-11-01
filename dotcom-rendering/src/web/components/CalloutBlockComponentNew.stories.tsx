@@ -1,4 +1,6 @@
+import { calloutCampaign } from '../../../fixtures/manual/calloutCampaign';
 import { CalloutBlockComponent } from './CalloutBlockComponentNew';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 
 export default {
 	component: CalloutBlockComponent,
@@ -6,7 +8,18 @@ export default {
 };
 
 export const Default = () => {
-	return <div>Hello, world</div>;
+	return (
+		<>
+			<CalloutBlockComponent
+				callout={calloutCampaign}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+			/>
+		</>
+	);
 };
 
 Default.story = { name: 'default' };
