@@ -100,7 +100,7 @@ export const ShowMore = ({
 
 	return (
 		<>
-			<div id={showMoreContainerId}>
+			<div id={showMoreContainerId} aria-live="polite">
 				{filteredData && (
 					<>
 						<div
