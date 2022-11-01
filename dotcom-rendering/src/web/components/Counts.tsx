@@ -1,19 +1,12 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import { border, neutral, until } from '@guardian/source-foundations';
-import { transparentColour } from '../lib/transparentColour';
+import { ArticleDesign } from '@guardian/libs';
+import { until } from '@guardian/source-foundations';
+import { decidePalette } from '../lib/decidePalette';
 
 type Props = {
 	children: React.ReactNode;
 	format: ArticleFormat;
-};
-
-const decideVerticalDividerColour = (format: ArticleFormat) => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return transparentColour(neutral[60], 0.3);
-
-	return border.secondary;
 };
 
 const containerStyles = (format: ArticleFormat) => css`
@@ -24,7 +17,7 @@ const containerStyles = (format: ArticleFormat) => css`
 		/* This css to show a vertical divider  will only be applied to the second
            non empty meta-number element. (We only want the border to show when both share
            and comment counts are displayed) */
-		border-left: 1px solid ${decideVerticalDividerColour(format)};
+		border-left: 1px solid ${decidePalette(format).border.secondary};
 		margin-left: 4px;
 		padding-left: 4px;
 		height: 40px;

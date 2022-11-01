@@ -1547,28 +1547,23 @@ const borderNavPillar: (format: ArticleFormat) => string = (format) =>
 	pillarPalette[format.theme].bright;
 
 const borderArticle: (format: ArticleFormat) => string = (format) => {
-	if (
-		format.design === ArticleDesign.LiveBlog ||
-		format.design === ArticleDesign.DeadBlog
-	)
-		return '#CDCDCD';
-
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
 
 	if (format.theme === ArticleSpecial.Labs) return neutral[60];
-	return border.secondary;
+
+	return neutral[86];
 };
 
 const borderLines = (format: ArticleFormat): string => {
-	if (format.theme === ArticleSpecial.Labs) return border.primary;
+	if (format.theme === ArticleSpecial.Labs) return neutral[60];
 	if (
 		format.theme === ArticleSpecial.SpecialReport &&
 		(format.design === ArticleDesign.Comment ||
 			format.design === ArticleDesign.Letter)
 	)
 		return neutral[46];
-	return border.secondary;
+	return neutral[86];
 };
 
 const backgroundRichLink = (format: ArticleFormat): string => {
@@ -1594,6 +1589,13 @@ const borderCricketScoreboardDivider = (): string => {
 const borderKeyEvent = (): string => neutral[46];
 
 const borderFilterButton = (): string => neutral[60];
+
+const borderSecondary = (format: ArticleFormat) => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return transparentColour(neutral[60], 0.3);
+
+	return border.secondary;
+};
 
 const fillRichLink = (format: ArticleFormat): string => {
 	switch (format.theme) {
@@ -2070,6 +2072,7 @@ export const decidePalette = (
 			cardSupporting: borderCardSupporting(format),
 			keyEvent: borderKeyEvent(),
 			filterButton: borderFilterButton(),
+			secondary: borderSecondary(format),
 		},
 		topBar: {
 			card: overrides?.topBar.card ?? topBarCard(format),

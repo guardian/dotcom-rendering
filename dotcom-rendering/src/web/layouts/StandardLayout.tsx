@@ -57,7 +57,6 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getCurrentPillar } from '../lib/layoutHelpers';
-import { transparentColour } from '../lib/transparentColour';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const StandardGrid = ({
@@ -271,12 +270,6 @@ const stretchLines = css`
 	}
 `;
 
-const straightLinesColour = (format: ArticleFormat) => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return transparentColour(neutral[60], 0.3);
-	else return undefined;
-};
-
 const starWrapper = css`
 	margin-bottom: 18px;
 	margin-top: 6px;
@@ -448,7 +441,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									cssOverrides={css`
 										display: block;
 									`}
-									color={straightLinesColour(format)}
+									color={palette.border.article}
 								/>
 							</Section>
 						</>
@@ -601,7 +594,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									) : (
 										<DecideLines
 											format={format}
-											color={straightLinesColour(format)}
+											color={palette.border.article}
 										/>
 									)}
 								</div>
@@ -734,7 +727,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									cssOverrides={css`
 										display: block;
 									`}
-									color={straightLinesColour(format)}
+									color={palette.border.article}
 								/>
 								<SubMeta
 									format={format}

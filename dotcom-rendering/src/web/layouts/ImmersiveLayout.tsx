@@ -47,7 +47,6 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { ImmersiveHeader } from './headers/ImmersiveHeader';
 import { BannerWrapper } from './lib/stickiness';
-import { transparentColour } from '../lib/transparentColour';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -191,12 +190,6 @@ const decideCaption = (mainMedia: ImageBlockElement): string => {
 	}
 
 	return caption.join(' ');
-};
-
-const straightLinesColour = (format: ArticleFormat) => {
-	if (format.theme === ArticleSpecial.SpecialReportAlt)
-		return transparentColour(neutral[60], 0.3);
-	else return undefined;
 };
 
 export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
@@ -347,9 +340,10 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										) : (
 											<DecideLines
 												format={format}
-												color={straightLinesColour(
-													format,
-												)}
+												color={
+													decidePalette(format).border
+														.article
+												}
 											/>
 										)}
 									</div>
@@ -455,7 +449,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								)}
 								<StraightLines
 									count={4}
-									color={straightLinesColour(format)}
+									color={decidePalette(format).border.article}
 								/>
 								<SubMeta
 									format={format}

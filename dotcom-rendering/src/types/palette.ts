@@ -129,6 +129,7 @@ export type Palette = {
 		cardSupporting: Colour;
 		keyEvent: Colour;
 		filterButton: Colour;
+		secondary: Colour;
 	};
 	topBar: {
 		card: Colour;
