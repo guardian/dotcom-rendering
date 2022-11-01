@@ -13,47 +13,10 @@ export default {
 	title: 'Components/PullQuoteBlockComponent',
 };
 
-const format = {
-	news: {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: ArticlePillar.News,
-	},
-	opinion: {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Comment,
-		theme: ArticlePillar.Opinion,
-	},
-	sport: {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: ArticlePillar.Sport,
-	},
-	culture: {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: ArticlePillar.Culture,
-	},
-	lifestyle: {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: ArticlePillar.Lifestyle,
-	},
-	specialReport: {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: ArticleSpecial.SpecialReport,
-	},
-	specialReportAlt: {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: ArticleSpecial.SpecialReportAlt,
-	},
-	labs: {
-		display: ArticleDisplay.Standard,
-		design: ArticleDesign.Standard,
-		theme: ArticleSpecial.Labs,
-	},
+const defaultFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.News,
 };
 
 const photoEssayNews = {
@@ -64,6 +27,11 @@ const photoEssayNews = {
 
 // Inline
 export const SportInline = () => {
+	const format = {
+		...defaultFormat,
+		theme: ArticlePillar.Sport,
+	};
+
 	return (
 		<Section
 			showTopBorder={false}
@@ -71,8 +39,8 @@ export const SportInline = () => {
 			showSideBorders={false}
 		>
 			<PullQuoteBlockComponent
-				format={format.sport}
-				palette={decidePalette(format.sport)}
+				format={format}
+				palette={decidePalette(format)}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
@@ -85,6 +53,11 @@ SportInline.story = {
 };
 
 export const LabsInline = () => {
+	const format = {
+		...defaultFormat,
+		theme: ArticleSpecial.Labs,
+	};
+
 	return (
 		<Section
 			showTopBorder={false}
@@ -92,8 +65,8 @@ export const LabsInline = () => {
 			showSideBorders={false}
 		>
 			<PullQuoteBlockComponent
-				format={format.labs}
-				palette={decidePalette(format.labs)}
+				format={format}
+				palette={decidePalette(format)}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
@@ -106,6 +79,11 @@ LabsInline.story = {
 };
 
 export const LifestyleInline = () => {
+	const format = {
+		...defaultFormat,
+		theme: ArticlePillar.Lifestyle,
+	};
+
 	return (
 		<Section
 			showTopBorder={false}
@@ -113,8 +91,8 @@ export const LifestyleInline = () => {
 			showSideBorders={false}
 		>
 			<PullQuoteBlockComponent
-				format={format.lifestyle}
-				palette={decidePalette(format.lifestyle)}
+				format={format}
+				palette={decidePalette(format)}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
@@ -127,6 +105,11 @@ LifestyleInline.story = {
 };
 
 export const CultureInline = () => {
+	const format = {
+		...defaultFormat,
+		theme: ArticlePillar.Culture,
+	};
+
 	return (
 		<Section
 			showTopBorder={false}
@@ -134,8 +117,8 @@ export const CultureInline = () => {
 			showSideBorders={false}
 		>
 			<PullQuoteBlockComponent
-				format={format.culture}
-				palette={decidePalette(format.culture)}
+				format={format}
+				palette={decidePalette(format)}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
@@ -155,8 +138,8 @@ export const NewsInline = () => {
 			showSideBorders={false}
 		>
 			<PullQuoteBlockComponent
-				format={format.news}
-				palette={decidePalette(format.news)}
+				format={defaultFormat}
+				palette={decidePalette(defaultFormat)}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
@@ -169,6 +152,11 @@ NewsInline.story = {
 };
 
 export const OpinionInline = () => {
+	const format = {
+		...defaultFormat,
+		theme: ArticlePillar.Opinion,
+	};
+
 	return (
 		<Section
 			showTopBorder={false}
@@ -176,8 +164,8 @@ export const OpinionInline = () => {
 			showSideBorders={false}
 		>
 			<PullQuoteBlockComponent
-				format={format.opinion}
-				palette={decidePalette(format.opinion)}
+				format={format}
+				palette={decidePalette(format)}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
@@ -190,6 +178,11 @@ OpinionInline.story = {
 };
 
 export const SpecialReportInline = () => {
+	const format = {
+		...defaultFormat,
+		theme: ArticleSpecial.SpecialReport,
+	};
+
 	return (
 		<Section
 			showTopBorder={false}
@@ -197,8 +190,8 @@ export const SpecialReportInline = () => {
 			showSideBorders={false}
 		>
 			<PullQuoteBlockComponent
-				format={format.specialReport}
-				palette={decidePalette(format.specialReport)}
+				format={format}
+				palette={decidePalette(format)}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
@@ -212,6 +205,11 @@ SpecialReportInline.story = {
 
 // Supporting
 export const SportSupporting = () => {
+	const format = {
+		...defaultFormat,
+		theme: ArticlePillar.News,
+	};
+
 	return (
 		<Section
 			showTopBorder={false}
@@ -219,8 +217,8 @@ export const SportSupporting = () => {
 			showSideBorders={false}
 		>
 			<PullQuoteBlockComponent
-				format={format.sport}
-				palette={decidePalette(format.sport)}
+				format={format}
+				palette={decidePalette(format)}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
@@ -233,6 +231,11 @@ SportSupporting.story = {
 };
 
 export const LabsSupporting = () => {
+	const format = {
+		...defaultFormat,
+		theme: ArticleSpecial.Labs,
+	};
+
 	return (
 		<Section
 			showTopBorder={false}
@@ -240,8 +243,8 @@ export const LabsSupporting = () => {
 			showSideBorders={false}
 		>
 			<PullQuoteBlockComponent
-				format={format.labs}
-				palette={decidePalette(format.labs)}
+				format={format}
+				palette={decidePalette(format)}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
@@ -254,6 +257,11 @@ LabsSupporting.story = {
 };
 
 export const LifestyleSupporting = () => {
+	const format = {
+		...defaultFormat,
+		theme: ArticlePillar.Lifestyle,
+	};
+
 	return (
 		<Section
 			showTopBorder={false}
@@ -261,8 +269,8 @@ export const LifestyleSupporting = () => {
 			showSideBorders={false}
 		>
 			<PullQuoteBlockComponent
-				format={format.lifestyle}
-				palette={decidePalette(format.lifestyle)}
+				format={format}
+				palette={decidePalette(format)}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
@@ -275,6 +283,11 @@ LifestyleSupporting.story = {
 };
 
 export const CultureSupporting = () => {
+	const format = {
+		...defaultFormat,
+		theme: ArticlePillar.Culture,
+	};
+
 	return (
 		<Section
 			showTopBorder={false}
@@ -282,8 +295,8 @@ export const CultureSupporting = () => {
 			showSideBorders={false}
 		>
 			<PullQuoteBlockComponent
-				format={format.culture}
-				palette={decidePalette(format.culture)}
+				format={format}
+				palette={decidePalette(format)}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
@@ -303,8 +316,8 @@ export const NewsSupporting = () => {
 			showSideBorders={false}
 		>
 			<PullQuoteBlockComponent
-				format={format.news}
-				palette={decidePalette(format.news)}
+				format={defaultFormat}
+				palette={decidePalette(defaultFormat)}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
@@ -317,6 +330,11 @@ NewsSupporting.story = {
 };
 
 export const OpinionSupporting = () => {
+	const format = {
+		...defaultFormat,
+		theme: ArticlePillar.Opinion,
+	};
+
 	return (
 		<Section
 			showTopBorder={false}
@@ -324,8 +342,8 @@ export const OpinionSupporting = () => {
 			showSideBorders={false}
 		>
 			<PullQuoteBlockComponent
-				format={format.opinion}
-				palette={decidePalette(format.opinion)}
+				format={format}
+				palette={decidePalette(format)}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
@@ -338,6 +356,11 @@ OpinionSupporting.story = {
 };
 
 export const SpecialReportSupporting = () => {
+	const format = {
+		...defaultFormat,
+		theme: ArticleSpecial.SpecialReport,
+	};
+
 	return (
 		<Section
 			showTopBorder={false}
@@ -345,8 +368,8 @@ export const SpecialReportSupporting = () => {
 			showSideBorders={false}
 		>
 			<PullQuoteBlockComponent
-				format={format.specialReport}
-				palette={decidePalette(format.specialReport)}
+				format={format}
+				palette={decidePalette(format)}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
@@ -359,6 +382,11 @@ SpecialReportSupporting.story = {
 };
 
 export const SpecialReportAltInline = () => {
+	const format = {
+		...defaultFormat,
+		theme: ArticleSpecial.SpecialReportAlt,
+	};
+
 	return (
 		<Section
 			showTopBorder={false}
@@ -366,8 +394,8 @@ export const SpecialReportAltInline = () => {
 			showSideBorders={false}
 		>
 			<PullQuoteBlockComponent
-				format={format.specialReportAlt}
-				palette={decidePalette(format.specialReportAlt)}
+				format={format}
+				palette={decidePalette(format)}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="inline"
 				attribution="Julie-Lou Dubreuilh"
@@ -380,6 +408,11 @@ SpecialReportAltInline.story = {
 };
 
 export const SpecialReportAltSupporting = () => {
+	const format = {
+		...defaultFormat,
+		theme: ArticleSpecial.SpecialReportAlt,
+	};
+
 	return (
 		<Section
 			showTopBorder={false}
@@ -387,8 +420,8 @@ export const SpecialReportAltSupporting = () => {
 			showSideBorders={false}
 		>
 			<PullQuoteBlockComponent
-				format={format.specialReportAlt}
-				palette={decidePalette(format.specialReportAlt)}
+				format={format}
+				palette={decidePalette(format)}
 				html="Even if part of my job is filthy, I still love it – it’s my work"
 				role="supporting"
 				attribution="Julie-Lou Dubreuilh"
