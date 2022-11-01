@@ -32,6 +32,7 @@ export interface CalloutProps {
 	campaign: Campaign;
 	format: ArticleFormat;
 	description: DocumentFragment;
+	isNonCollapsible: boolean;
 }
 
 const calloutStyles = css`
@@ -188,7 +189,12 @@ const renderField = ({
 	}
 };
 
-const CalloutForm: FC<CalloutProps> = ({ campaign, format, description }) => (
+const CalloutForm: FC<CalloutProps> = ({
+	campaign,
+	format,
+	description,
+	isNonCollapsible,
+}) => (
 	<details className="js-callout" css={calloutStyles}>
 		<summary css={summaryStyles}>
 			<div css={kickerStyles}>

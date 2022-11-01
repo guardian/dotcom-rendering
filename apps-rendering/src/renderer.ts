@@ -648,8 +648,13 @@ const render =
 				return h(Tweet, { content: element.content, format, key });
 
 			case ElementKind.Callout: {
-				const { campaign, description } = element;
-				return h(CalloutForm, { campaign, format, description });
+				const { campaign, description, isNonCollapsible } = element;
+				return h(CalloutForm, {
+					campaign,
+					format,
+					description,
+					isNonCollapsible,
+				});
 			}
 
 			case ElementKind.Embed:

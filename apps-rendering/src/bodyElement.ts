@@ -151,7 +151,7 @@ type BodyElement =
 	| EmbedElement
 	| {
 			kind: ElementKind.Callout;
-			id: string;
+			isNonCollapsible: boolean;
 			campaign: Campaign;
 			description: DocumentFragment;
 	  }
@@ -335,6 +335,36 @@ const parse =
 				);
 			}
 
+			case ElementType.CALLOUT: {
+				const {
+					campaignId: campaignId,
+					isNonCollapsible: isNonCollapsible,
+				} = element.calloutTypeData ?? {};
+				if (!campaignId || !isNonCollapsible) {
+					return Result.err(
+						'No campaignId or isNonCollapsible field on calloutTypeData',
+					);
+				}
+
+				const campaign = campaigns?.find(
+					(campaign) => campaign.id === campaignId,
+				);
+
+				if (!campaign) {
+					return Result.err('No matching campaign');
+				}
+
+				const description = context.docParser(
+					campaign.fields.description ?? '',
+				);
+				return Result.ok({
+					kind: ElementKind.Callout,
+					isNonCollapsible,
+					campaign,
+					description,
+				});
+			}
+
 			case ElementType.EMBED: {
 				const { html: embedHtml } = element.embedTypeData ?? {};
 
@@ -342,34 +372,15 @@ const parse =
 					return Result.err('No html field on embedTypeData');
 				}
 
-				const id = context
+				const isCallout = context
 					.docParser(embedHtml)
 					.querySelector('[data-callout-tagname]')
 					?.getAttribute('data-callout-tagname');
 
-				if (id) {
-					if (!campaigns) {
-						return Result.err('No campaign data for this callout');
-					}
-
-					const campaign = campaigns.find(
-						(campaign) => campaign.fields.tagName === id,
+				if (isCallout)
+					return Result.err(
+						'Embed callouts are deprecated in Apps Rendering. Please use element type Callout',
 					);
-
-					if (!campaign) {
-						return Result.err('No matching campaign');
-					}
-
-					const description = context.docParser(
-						campaign.fields.description ?? '',
-					);
-					return Result.ok({
-						kind: ElementKind.Callout,
-						id,
-						campaign,
-						description,
-					});
-				}
 
 				return compose(
 					toEmbedElement,
