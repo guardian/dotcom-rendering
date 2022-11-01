@@ -1,6 +1,16 @@
 import { css } from '@emotion/react';
-import { from, space } from '@guardian/source-foundations';
-import { Button, SvgMinus, SvgPlus } from '@guardian/source-react-components';
+import {
+	from,
+	space,
+	text as textPalette,
+	visuallyHidden,
+} from '@guardian/source-foundations';
+import {
+	Button,
+	InlineError,
+	SvgMinus,
+	SvgPlus,
+} from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { DCRContainerPalette, FEFrontCard } from 'src/types/front';
 import { enhanceCards } from '../../model/enhanceCards';
@@ -72,18 +82,16 @@ export const ShowMore = ({
 	const url = isOpen
 		? `https://api.nextgen.guardianapps.co.uk/${path}/show-more/${containerId}.json?dcr=true`
 		: undefined;
-	const { data, loading } = useApi<FEFrontCard[]>(url);
+	const { data, error, loading } = useApi<FEFrontCard[]>(url);
 
 	const filteredData =
 		data &&
 		enhanceCards(data).filter((card) => !cardLinks.includes(card.url));
 
 	/**
-		@todo: Semantics for the button and the new container (sub-container?)
 		@todo: Desired focus behaviour on expand/collapse?
-		@todo: Appropriate semantics for indicating state (aria-live, aria-expanded etc.)?
+		@todo: Double check appropriate semantics for indicating state (aria-live, aria-expanded etc.)
 		@todo: can we avoid hard-coding the API URL?
-		@todo: handle errors
 		@todo: rename props to match Front type?
 		@todo: make sure that the new content doesn't shift the top of the viewport when it loads
 	*/
@@ -142,17 +150,39 @@ export const ShowMore = ({
 				onClick={toggleOpen}
 				cssOverrides={css`
 					margin-top: ${space[3]}px;
+					margin-right: 10px;
 					${from.tablet} {
 						margin-left: 10px;
 					}
 				`}
-				// disabled={loading}
 				aria-controls={showMoreContainerId}
 				aria-expanded={isOpen && !loading}
 				data-cy={`show-more-button-${containerId}`}
 			>
-				{decideButtonText({ isOpen, loading, containerTitle })}
+				{decideButtonText({
+					isOpen,
+					loading,
+					containerTitle,
+				})}
 			</Button>
+			{error && (
+				<InlineError>
+					<span
+						css={css`
+							font-size: 0.875rem;
+							line-height: 1.25rem;
+							transition: opacity 1.5s;
+							color: ${textPalette.error};
+							display: inline-block;
+							padding-top: 0.375rem;
+							opacity: 1;
+						`}
+					>
+						Sorry, failed to load more stories. Retrying in a few
+						seconds.
+					</span>
+				</InlineError>
+			)}
 		</>
 	);
 };
