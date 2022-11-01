@@ -18,6 +18,7 @@ export const TextArea = ({ formField, formData, setFormData }: Props) => (
 		<SourceTextArea
 			data-testid={`form-field-${formField.id}`}
 			label={formField.label}
+			supporting={formField.description}
 			css={textAreaStyles}
 			optional={!formField.required}
 			value={formField.id in formData ? formData[formField.id] : ''}
