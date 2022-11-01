@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import {
 	from,
+	neutral,
 	space,
 	text as textPalette,
 	visuallyHidden,
@@ -8,7 +9,7 @@ import {
 import {
 	Button,
 	InlineError,
-	SvgMinus,
+	SvgCross,
 	SvgPlus,
 } from '@guardian/source-react-components';
 import { useState } from 'react';
@@ -31,7 +32,7 @@ function decideButtonText({
 	containerTitle: string;
 }) {
 	if (isOpen && loading) return 'Loading';
-	if (isOpen) return 'Less';
+	if (isOpen) return `Less ${containerTitle}`;
 	return `More ${containerTitle}`;
 }
 
@@ -151,13 +152,15 @@ export const ShowMore = ({
 			<Button
 				priority="tertiary"
 				size="xsmall"
-				icon={isOpen ? <SvgMinus /> : <SvgPlus />}
+				icon={isOpen ? <SvgCross /> : <SvgPlus />}
 				isLoading={loading}
 				iconSide="left"
 				onClick={toggleOpen}
 				cssOverrides={css`
-					margin-top: ${space[3]}px;
+					margin-top: ${space[4]}px;
 					margin-right: 10px;
+					color: ${neutral[100]};
+					background-color: ${neutral[7]};
 					${from.tablet} {
 						margin-left: 10px;
 					}
