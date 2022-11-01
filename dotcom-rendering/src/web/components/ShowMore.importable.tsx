@@ -41,9 +41,7 @@ export const ShowMore = ({
 	containerPalette,
 }: Props) => {
 	function findCardLinks() {
-		const containerNode = document.getElementById(
-			'container-' + containerId,
-		);
+		const containerNode = document.getElementById(containerId);
 		const containerLinksArray = Array.from(
 			containerNode?.querySelectorAll('a') ?? [],
 		);
