@@ -6,11 +6,7 @@ export default {
 };
 
 export const Default = () => {
-	return (
-		<div>Hello, world</div>
-			{/* <CalloutBlockComponent />; */}
-
-	);
+	return <div>Hello, world</div>;
 };
 
 Default.story = { name: 'default' };
