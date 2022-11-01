@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { news } from '@guardian/source-foundations';
-import { Button, Link } from '@guardian/source-react-components';
+import { Button } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { FileUpload } from './FileUpload';
 import { MultiSelect } from './MultiSelect';
