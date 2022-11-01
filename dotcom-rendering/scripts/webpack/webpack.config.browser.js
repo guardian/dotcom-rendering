@@ -53,11 +53,11 @@ const getLoaders = (bundle) => {
 					loader: 'swc-loader',
 					options: {
 						...swcConfig,
-						// TODO investigate regression in browserlist support in 1.2.245
-						// env: {
+						// TODO verify browserslist support
 						// https://swc.rs/docs/configuration/supported-browsers#targets
 						// https://github.com/browserslist/browserslist
-						// 	targets: 'supports es6-module',
+						// env: {
+						// 	targets: 'extends @guardian/browserslist-config',
 						// },
 					},
 				},
@@ -65,7 +65,28 @@ const getLoaders = (bundle) => {
 		case 'modern':
 			return [
 				{
-					loader: 'swc-loader',
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							'@babel/preset-react',
+							[
+								'@babel/preset-env',
+								{
+									bugfixes: true,
+									targets:
+										'extends @guardian/browserslist-config',
+								},
+							],
+						],
+						compact: true,
+					},
+				},
+				{
+					loader: 'ts-loader',
+					options: {
+						configFile: 'tsconfig.build.json',
+						transpileOnly: true,
+					},
 				},
 			];
 	}
