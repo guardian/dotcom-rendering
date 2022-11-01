@@ -24,7 +24,7 @@ export const calloutCampaign: CalloutBlockElement = {
 		{
 			name: 'upload_image_video',
 			description:
-				'May not work on some mobile devices, or files may be too large',
+				'May not work on some mobile devices, or files may be too large.',
 			hideLabel: false,
 			label: 'Upload image/video',
 			id: '91884877',

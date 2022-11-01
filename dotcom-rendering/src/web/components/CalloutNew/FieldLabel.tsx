@@ -6,7 +6,8 @@ const fieldLabelStyles = css`
 `;
 
 const fieldDescription = css`
-	${textSans.medium()}
+	${textSans.small()}
+	color: ${neutral[46]};
 `;
 
 const optionalTextStyles = css`
@@ -23,9 +24,7 @@ export const FieldLabel = ({ formField }: { formField: CampaignField }) => (
 		)}
 		{!!formField.description && (
 			<div>
-				<span css={fieldDescription}>
-					{`(${formField.description})`}
-				</span>
+				<span css={fieldDescription}>{`${formField.description}`}</span>
 			</div>
 		)}
 	</label>

@@ -4,6 +4,7 @@ import { space, text, textSans } from '@guardian/source-foundations';
 import { useState } from 'react';
 import { stringifyFileBase64 } from '../../lib/stringifyFileBase64';
 import { FieldLabel } from './FieldLabel';
+import { news } from '@guardian/source-foundations';
 
 const fileUploadInputStyles = css`
 	padding-top: 10px;
@@ -48,16 +49,16 @@ export const FileUpload = ({ formField, formData, setFormData }: Props) => {
 			<FieldLabel formField={formField} />
 			<Button
 				css={css`
-					background-color: green;
 					width: fit-content;
+					border: ${news[300]} solid 1px;
+					color: ${news[300]};
 				`}
-				priority="secondary"
+				priority="tertiary"
 				size="xsmall"
 				type="submit"
 			>
 				Choose file
 			</Button>
-			{/* <p>We accept images and pdfs. Maximum total file size: 6MB</p> */}
 			{!!error && <div css={errorMessagesStyles}>{error}</div>}
 		</>
 	);
