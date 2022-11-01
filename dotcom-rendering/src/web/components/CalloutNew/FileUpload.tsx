@@ -55,9 +55,9 @@ export const FileUpload = ({ formField, formData, setFormData }: Props) => {
 				size="xsmall"
 				type="submit"
 			>
-				Submit
+				Choose file
 			</Button>
-			<p>We accept images and pdfs. Maximum total file size: 6MB</p>
+			{/* <p>We accept images and pdfs. Maximum total file size: 6MB</p> */}
 			{!!error && <div css={errorMessagesStyles}>{error}</div>}
 		</>
 	);
