@@ -58,13 +58,19 @@ const AMP_SUPPORTED_ELEMENTS = [
 	'model.dotcomrendering.pageElements.YoutubeBlockElement',
 ];
 
-export const isAmpSupported = (
-	format: CAPIFormat,
-	tags: TagType[],
-	elements: CAPIElement[],
-	switches: Switches,
-	main: string,
-): boolean => {
+export const isAmpSupported = ({
+	format,
+	tags,
+	elements,
+	switches,
+	main,
+}: {
+	format: CAPIFormat;
+	tags: TagType[];
+	elements: CAPIElement[];
+	switches: Switches;
+	main: string;
+}): boolean => {
 	if (format.design === 'InteractiveDesign') {
 		const hasAmpInteractiveTag = tags.some(
 			(tag) => tag.id === 'tracking/platformfunctional/ampinteractive',

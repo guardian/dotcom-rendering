@@ -207,13 +207,13 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 
 	const getAmpLink = (tags: TagType[]) => {
 		if (
-			!isAmpSupported(
-				CAPIArticle.format,
+			!isAmpSupported({
+				format: CAPIArticle.format,
 				tags,
-				CAPIArticle.blocks.flatMap((block) => block.elements),
-				CAPIArticle.config.switches,
-				CAPIArticle.main,
-			)
+				elements: CAPIArticle.blocks.flatMap((block) => block.elements),
+				switches: CAPIArticle.config.switches,
+				main: CAPIArticle.main,
+			})
 		) {
 			return undefined;
 		}
