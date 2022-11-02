@@ -3,7 +3,6 @@ import {
 	from,
 	neutral,
 	space,
-	text as textPalette,
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import {
