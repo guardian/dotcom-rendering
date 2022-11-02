@@ -2,9 +2,9 @@ import { css } from '@emotion/react';
 import {
 	body,
 	headline,
-	sans,
 	neutral,
 	news,
+	textSans,
 } from '@guardian/source-foundations';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
@@ -29,12 +29,22 @@ const calloutDetailsStyles = css`
 	}
 `;
 
+const shareCalloutStyles = css`
+	display: flex;
+	align-items: center;
+`;
+const shareCalloutTextStyles = css`
+	display: inline-block;
+	${textSans.xsmall()}
+`;
+
 const placeholderCircle = css`
 	height: 33px;
 	width: 35px;
 	border-radius: 50%;
 	background-color: yellow;
 	display: inline-block;
+	margin: 10px 10px 10px 0px;
 `;
 
 const backgroundColorStyle = css`
@@ -72,19 +82,6 @@ const summaryContentWrapper = css`
 	visibility: visible;
 `;
 
-const titleStyles = css`
-	${headline.xxsmall({ fontWeight: 'bold' })}
-	color: ${news[300]}
-`;
-
-const headingTextHeaderStyles = css`
-	${headline.xxsmall()}
-`;
-
-const descriptionStyles = css`
-	${body.medium()}
-`;
-
 const headingTextStyles = (palette: Palette) => css`
 	a {
 		color: ${palette.text.calloutHeading};
@@ -93,6 +90,18 @@ const headingTextStyles = (palette: Palette) => css`
 			text-decoration: underline;
 		}
 	}
+`;
+const titleStyles = css`
+	${headline.xxsmall({ fontWeight: 'bold' })}
+	color: ${news[300]}
+`;
+
+const subtitleTextHeaderStyles = css`
+	${headline.xxsmall()}
+`;
+
+const descriptionStyles = css`
+	${body.medium()}
 `;
 
 export const CalloutBlockComponent = ({
@@ -119,10 +128,18 @@ export const CalloutBlockComponent = ({
 								<div css={titleStyles}>
 									Share your experience
 								</div>
-								<h4 css={headingTextHeaderStyles}>{title}</h4>
+								<h4 css={subtitleTextHeaderStyles}>{title}</h4>
 								<div css={descriptionStyles}>{description}</div>
+								<div css={shareCalloutStyles}>
+									<span css={placeholderCircle}></span>{' '}
+									<div css={shareCalloutTextStyles}>
+										Know others who are affected?{' '}
+										<a href="https://www.theguardian.com/tone/callout">
+											Share this callout.
+										</a>
+									</div>
+								</div>
 							</div>
-							<span css={placeholderCircle}></span>
 						</div>
 					</summary>
 					<Form formFields={formFields} onSubmit={() => {}} />

@@ -7,7 +7,6 @@ import {
 } from '@guardian/libs';
 import {
 	border,
-	brand,
 	brandAlt,
 	brandAltBackground,
 	culture,
@@ -1391,7 +1390,7 @@ const textCarouselTitle = (format: ArticleFormat): string => {
 };
 
 const textCalloutHeading = (): string => {
-	return brand[500];
+	return news[300];
 };
 
 const textDropCap = (format: ArticleFormat): string => {
