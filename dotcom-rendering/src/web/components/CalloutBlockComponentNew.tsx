@@ -1,8 +1,13 @@
 import { css } from '@emotion/react';
-import { Form } from './CalloutNew/Form';
-import { decidePalette } from '../lib/decidePalette';
-import { neutral, textSans } from '@guardian/source-foundations';
+import {
+	body,
+	headline,
+	neutral,
+	textSans,
+} from '@guardian/source-foundations';
 import type { Palette } from '../../types/palette';
+import { decidePalette } from '../lib/decidePalette';
+import { Form } from './CalloutNew/Form';
 
 const wrapperStyles = css`
 	margin-bottom: 26px;
@@ -63,7 +68,7 @@ const headingTextHeaderStyles = css`
 `;
 
 const descriptionStyles = css`
-	${textSans.xxsmall({ fontWeight: 'bold' })}
+	${body.medium()}
 `;
 
 const headingTextStyles = (palette: Palette) => css`
@@ -98,12 +103,7 @@ export const CalloutBlockComponent = ({
 						<div css={summaryContentWrapper}>
 							<div css={headingTextStyles(palette)}>
 								<h4 css={headingTextHeaderStyles}>{title}</h4>
-								<div
-									css={descriptionStyles}
-									dangerouslySetInnerHTML={{
-										__html: description,
-									}}
-								/>
+								<div css={descriptionStyles}>{description}</div>
 							</div>
 						</div>
 					</summary>

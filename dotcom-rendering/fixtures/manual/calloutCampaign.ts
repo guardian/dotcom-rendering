@@ -10,7 +10,7 @@ export const calloutCampaign: CalloutBlockElement = {
 	formId: 3860296,
 	title: 'Were you infected at this time?',
 	description:
-		'<p>If you attended one of these events and believe you may have been infected by coronavirus, we\'d like to hear from you. You can get in touch by filling in the form below, or by contacting us&nbsp;<a href="https://www.theguardian.com/info/2015/aug/12/whatsapp-sharing-stories-with-the-guardian">via WhatsApp</a>&nbsp;by&nbsp;<a href="https://api.whatsapp.com/send?phone=447867825056">clicking here&nbsp;</a>or adding the contact +44(0)7867825056. Only the Guardian can see your contributions and one of our journalists may contact you to discuss further. </p>',
+		'We’re interested to hear from renters in the UK who live in homes that require urgent repairs. We’d like to hear whether tenants have had trouble getting repairs authorised by their landlords, whether they occupy council homes or rent privately.',
 	formFields: [
 		{
 			name: 'share_your_experiences',
