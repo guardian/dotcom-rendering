@@ -405,10 +405,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									}
 								/>
 								{collection.hasMore && (
-									<Island
-										deferUntil="visible"
-										clientOnly={false}
-									>
+									<Island deferUntil="interaction">
 										<ShowMore
 											containerTitle={
 												collection.displayName
