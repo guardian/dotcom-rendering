@@ -183,9 +183,7 @@ export const ShowMore = ({
 					<InlineError
 						cssOverrides={css`
 							font-size: 14px;
-							transition: opacity 1.5s;
 							padding-top: 18px;
-							opacity: 1;
 						`}
 					>
 						Sorry, failed to load more stories. Retrying in a few
