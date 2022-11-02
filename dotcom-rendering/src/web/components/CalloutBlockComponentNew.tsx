@@ -64,6 +64,11 @@ const summaryContentWrapper = css`
 	visibility: visible;
 `;
 
+const titleStyles = css`
+	${headline.xxsmall({ fontWeight: 'bold' })}
+	color: ${news[300]}
+`;
+
 const headingTextHeaderStyles = css`
 	${headline.xxsmall()}
 `;
@@ -103,6 +108,9 @@ export const CalloutBlockComponent = ({
 					<summary css={summaryStyles}>
 						<div css={summaryContentWrapper}>
 							<div css={headingTextStyles(palette)}>
+								<div css={titleStyles}>
+									Share your experience
+								</div>
 								<h4 css={headingTextHeaderStyles}>{title}</h4>
 								<div css={descriptionStyles}>{description}</div>
 							</div>
