@@ -4,6 +4,7 @@ import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Form } from './CalloutNew/Form';
 import { ShareCalloutComponent } from './ShareCalloutComponent';
+import { ExpandingWrapper } from './CalloutNew/ExpandingWrapper';
 
 const wrapperStyles = css`
 	margin-bottom: 26px;
@@ -94,27 +95,33 @@ export const CalloutBlockComponent = ({
 
 	return (
 		<>
-			<figure css={wrapperStyles}>
-				<details
-					css={[calloutDetailsStyles, backgroundColorStyle]}
-					aria-hidden={true}
-					open={true}
-				>
-					<summary css={summaryStyles}>
-						<div css={summaryContentWrapper}>
-							<div css={headingTextStyles(palette)}>
-								<div css={titleStyles}>
-									Share your experience
+			<ExpandingWrapper format={format}>
+				<figure css={wrapperStyles}>
+					<details
+						css={[calloutDetailsStyles, backgroundColorStyle]}
+						aria-hidden={true}
+						open={true}
+					>
+						<summary css={summaryStyles}>
+							<div css={summaryContentWrapper}>
+								<div css={headingTextStyles(palette)}>
+									<div css={titleStyles}>
+										Share your experience
+									</div>
+									<h4 css={subtitleTextHeaderStyles}>
+										{title}
+									</h4>
+									<div css={descriptionStyles}>
+										{description}
+									</div>
+									<ShareCalloutComponent />
 								</div>
-								<h4 css={subtitleTextHeaderStyles}>{title}</h4>
-								<div css={descriptionStyles}>{description}</div>
-								<ShareCalloutComponent />
 							</div>
-						</div>
-					</summary>
-					<Form formFields={formFields} onSubmit={() => {}} />
-				</details>
-			</figure>
+						</summary>
+						<Form formFields={formFields} onSubmit={() => {}} />
+					</details>
+				</figure>
+			</ExpandingWrapper>
 		</>
 	);
 };
