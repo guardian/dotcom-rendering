@@ -137,6 +137,7 @@ export const ShowMore = ({
 										<FrontCard
 											trail={card}
 											imageUrl={undefined}
+											avatarUrl={undefined}
 											containerPalette={containerPalette}
 											showAge={showAge}
 											headlineSize="small"
@@ -165,6 +166,9 @@ export const ShowMore = ({
 						margin-right: 10px;
 						color: ${neutral[100]};
 						background-color: ${neutral[7]};
+						&:hover {
+							color: ${neutral[7]};
+						}
 						${from.tablet} {
 							margin-left: 10px;
 						}

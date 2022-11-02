@@ -11,17 +11,6 @@ export default {
 	title: 'Components/ShowMore',
 };
 
-export const ShowMoreDefault = () => {
-	return ShowMore({
-		containerTitle,
-		path,
-		containerId,
-		showAge: false,
-	});
-};
-
-ShowMoreDefault.story = { name: 'ShowMore button, unclicked' };
-
 export const ShowMoreSuccess = () => {
 	fetchMock
 		.restore()
@@ -47,7 +36,7 @@ export const ShowMoreError = () => {
 	fetchMock
 		.restore()
 		.get(
-			`https://api.nextgen.guardianapps.co.uk/${path}/show-more/${containerId}.json`,
+			`https://api.nextgen.guardianapps.co.uk/${path}/show-more/${containerId}.json?dcr`,
 			{
 				status: 404,
 				body: null,
