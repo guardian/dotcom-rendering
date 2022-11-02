@@ -63,7 +63,6 @@ import InteractiveAtom, {
 import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LiveEventLink from 'components/LiveEventLink';
-import NewsletterSignup from 'components/NewsletterSignup';
 import OrderedList from 'components/OrderedList';
 import Paragraph from 'components/Paragraph';
 import Pullquote from 'components/Pullquote';
@@ -690,9 +689,6 @@ const render =
 			case ElementKind.KnowledgeQuizAtom:
 			case ElementKind.PersonalityQuizAtom:
 				return h(Quiz, { format, element });
-
-			case ElementKind.NewsletterSignUp:
-				return h(NewsletterSignup, { format, element });
 		}
 	};
 
