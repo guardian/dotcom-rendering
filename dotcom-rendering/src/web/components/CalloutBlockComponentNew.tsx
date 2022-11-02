@@ -43,6 +43,7 @@ const placeholderCircle = css`
 	width: 35px;
 	border-radius: 50%;
 	background-color: yellow;
+	border: black solid 2px;
 	display: inline-block;
 	margin: 10px 10px 10px 0px;
 `;
