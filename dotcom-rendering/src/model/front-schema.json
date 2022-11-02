@@ -2700,7 +2700,8 @@
                 "Podcast",
                 "SombreAltPalette",
                 "SombrePalette",
-                "Special"
+                "Special",
+                "SpecialReportAltPalette"
             ],
             "type": "string"
         },

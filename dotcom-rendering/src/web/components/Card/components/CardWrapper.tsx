@@ -67,6 +67,8 @@ const cardStyles = (
 				return `90%`;
 			case 'SombreAltPalette':
 				return `85%`;
+			case 'SpecialReportAltPalette':
+				return `95%`;
 			default:
 				return `90%`;
 		}
