@@ -88,6 +88,20 @@ const descriptionStyles = css`
 	${body.medium()}
 `;
 
+const overlayStyles = css`
+	background-image: linear-gradient(
+		0deg,
+		${neutral[97]},
+		${neutral[97]} 40%,
+		rgba(255, 255, 255, 0)
+	);
+	height: 80px;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	display: block;
+`;
+
 const buttonWrapperStyles = css`
 	position: absolute;
 	cursor: pointer;
@@ -228,33 +242,37 @@ export const CalloutBlockComponent = ({
 								<h4 css={subtitleTextHeaderStyles}>{title}</h4>
 								<div css={descriptionStyles}>{description}</div>
 							</div>
-						</div>
-						<ShareCalloutComponent />
-						{!isExpanded && (
-							<span css={buttonWrapperStyles} aria-hidden="true">
-								<Button
-									css={css`
-										/* TODO: need to find an nicer way of dynamically setting svg dimensions */
-										background-color: ${neutral[7]};
-										svg {
-											/* stylelint-disable-next-line declaration-no-important */
-											width: 15px !important;
-											/* stylelint-disable-next-line declaration-no-important */
-											height: 15px !important;
-										}
-									`}
-									iconSide="left"
-									size="small"
-									icon={<PlusIcon />}
-									onClick={() => setIsExpanded(true)}
-									custom-guardian="callout-form-open-button"
-									tabIndex={0}
+							<div css={overlayStyles} />
+							{!isExpanded && (
+								<span
+									css={buttonWrapperStyles}
+									aria-hidden="true"
 								>
-									Show more
-								</Button>
-							</span>
-						)}
+									<Button
+										css={css`
+											/* TODO: need to find an nicer way of dynamically setting svg dimensions */
+											background-color: ${neutral[7]};
+											svg {
+												/* stylelint-disable-next-line declaration-no-important */
+												width: 15px !important;
+												/* stylelint-disable-next-line declaration-no-important */
+												height: 15px !important;
+											}
+										`}
+										iconSide="left"
+										size="small"
+										icon={<PlusIcon />}
+										onClick={() => setIsExpanded(true)}
+										custom-guardian="callout-form-open-button"
+										tabIndex={0}
+									>
+										Show more
+									</Button>
+								</span>
+							)}
+						</div>
 					</summary>
+					<ShareCalloutComponent />
 					<CalloutTermsAndConditions />
 
 					<Form formFields={formFields} onSubmit={() => {}} />
