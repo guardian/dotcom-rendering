@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 
 // Array of possible ad regions
-export const adRegions = ['UK', 'US', 'AU', 'INT'] as const;
+export const adRegions = ['UK', 'US', 'AU', 'INT', 'EUR'] as const;
 
 export type AdRegion = typeof adRegions[number];
 
@@ -71,6 +71,16 @@ const internationalRegionClass = css`
 `;
 
 /**
+ * Class that *should* display an element if the user accesses the AMP page from
+ * the region denoted as "Europe"
+ *
+ * Currently we do not want to show any european ads and this will always fall back to international
+ */
+const europeRegionClass = css`
+	display: none;
+`;
+
+/**
  * Dictionary mapping region code to the associated AMP region style
  *
  * E.g. Applying `regionClasses["US"]` to an element will only display the
@@ -81,6 +91,6 @@ export const regionClasses = {
 	US: usRegionClass,
 	AU: auRegionClass,
 	INT: internationalRegionClass,
-	EUR: internationalRegionClass,
+	EUR: europeRegionClass,
 	ROW: rowRegionClass,
 };
