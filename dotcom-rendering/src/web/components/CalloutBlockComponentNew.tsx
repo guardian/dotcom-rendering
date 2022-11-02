@@ -1,14 +1,9 @@
 import { css } from '@emotion/react';
-import {
-	body,
-	headline,
-	neutral,
-	news,
-	textSans,
-} from '@guardian/source-foundations';
+import { body, headline, neutral, news } from '@guardian/source-foundations';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Form } from './CalloutNew/Form';
+import { ShareCalloutComponent } from './ShareCalloutComponent';
 
 const wrapperStyles = css`
 	margin-bottom: 26px;
@@ -29,32 +24,13 @@ const calloutDetailsStyles = css`
 	}
 `;
 
-const shareCalloutStyles = css`
-	display: flex;
-	align-items: center;
-`;
-const shareCalloutTextStyles = css`
-	display: inline-block;
-	${textSans.xsmall()}
-`;
-
-const placeholderCircle = css`
-	height: 33px;
-	width: 35px;
-	border-radius: 50%;
-	background-color: yellow;
-	border: black solid 2px;
-	display: inline-block;
-	margin: 10px 10px 10px 0px;
-`;
-
 const backgroundColorStyle = css`
 	background-color: ${neutral[97]};
 `;
 
 const summaryStyles = css`
 	/* Removing default styles from summery tag */
-	::-webkit-details-marker {
+	ft ::-webkit-details-marker {
 		display: none;
 	}
 	outline: none;
@@ -92,6 +68,7 @@ const headingTextStyles = (palette: Palette) => css`
 		}
 	}
 `;
+
 const titleStyles = css`
 	${headline.xxsmall({ fontWeight: 'bold' })}
 	color: ${news[300]}
@@ -131,15 +108,7 @@ export const CalloutBlockComponent = ({
 								</div>
 								<h4 css={subtitleTextHeaderStyles}>{title}</h4>
 								<div css={descriptionStyles}>{description}</div>
-								<div css={shareCalloutStyles}>
-									<span css={placeholderCircle}></span>{' '}
-									<div css={shareCalloutTextStyles}>
-										Know others who are affected?{' '}
-										<a href="https://www.theguardian.com/tone/callout">
-											Share this callout.
-										</a>
-									</div>
-								</div>
+								<ShareCalloutComponent />
 							</div>
 						</div>
 					</summary>
