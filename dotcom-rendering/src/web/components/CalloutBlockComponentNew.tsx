@@ -3,6 +3,7 @@ import {
 	body,
 	headline,
 	neutral,
+	news,
 	textSans,
 } from '@guardian/source-foundations';
 import type { Palette } from '../../types/palette';
@@ -64,7 +65,7 @@ const summaryContentWrapper = css`
 `;
 
 const headingTextHeaderStyles = css`
-	${textSans.medium({ fontWeight: 'bold' })}
+	${headline.xxsmall()}
 `;
 
 const descriptionStyles = css`
