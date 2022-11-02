@@ -14001,7 +14001,6 @@ export const trails = [
 			byline: 'Alaina Demopoulos',
 			webTitle: '‘Sadness is a trend’: why TikTok loves ‘crying makeup’',
 			linkText: '‘Sadness is a trend’: why TikTok loves ‘crying makeup’',
-			maybeFrontPublicationDate: 1667143073150,
 			webUrl: 'https://www.theguardian.com/lifeandstyle/2022/oct/30/sadness-is-a-trend-why-tiktok-loves-crying-makeup',
 			editionBrandings: [
 				{
