@@ -1,11 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	body,
-	headline,
-	neutral,
-	news,
-	textSans,
-} from '@guardian/source-foundations';
+import { body, headline, neutral, news } from '@guardian/source-foundations';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Form } from './CalloutNew/Form';
