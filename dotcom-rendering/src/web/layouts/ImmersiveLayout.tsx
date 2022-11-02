@@ -449,7 +449,9 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								)}
 								<StraightLines
 									count={4}
-									color={decidePalette(format).border.article}
+									color={
+										decidePalette(format).border.secondary
+									}
 								/>
 								<SubMeta
 									format={format}

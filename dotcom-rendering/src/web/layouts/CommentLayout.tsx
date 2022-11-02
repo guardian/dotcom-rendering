@@ -407,7 +407,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							cssOverrides={css`
 								display: block;
 							`}
-							color={palette.border.article}
+							color={palette.border.secondary}
 						/>
 					</Section>
 				</SendToBack>
@@ -474,7 +474,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											cssOverrides={css`
 												display: block;
 											`}
-											color={palette.border.article}
+											color={palette.border.secondary}
 										/>
 									</div>
 								</div>
@@ -488,7 +488,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										cssOverrides={css`
 											display: block;
 										`}
-										color={palette.border.article}
+										color={palette.border.secondary}
 									/>
 								</Hide>
 							</div>
@@ -638,7 +638,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										cssOverrides={css`
 											display: block;
 										`}
-										color={palette.border.article}
+										color={palette.border.secondary}
 									/>
 									<SubMeta
 										format={format}

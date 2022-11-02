@@ -441,7 +441,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									cssOverrides={css`
 										display: block;
 									`}
-									color={palette.border.article}
+									color={palette.border.secondary}
 								/>
 							</Section>
 						</>
@@ -727,7 +727,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									cssOverrides={css`
 										display: block;
 									`}
-									color={palette.border.article}
+									color={palette.border.secondary}
 								/>
 								<SubMeta
 									format={format}

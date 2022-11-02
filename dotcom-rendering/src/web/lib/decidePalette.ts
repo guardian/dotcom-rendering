@@ -1594,7 +1594,7 @@ const borderSecondary = (format: ArticleFormat) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
 
-	return border.secondary;
+	return neutral[86];
 };
 
 const fillRichLink = (format: ArticleFormat): string => {
