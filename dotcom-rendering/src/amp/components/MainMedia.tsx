@@ -5,7 +5,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import React from 'react';
-import InfoIcon from '../../static/icons/info.svg';
+import { ReactComponent as InfoIcon } from '../../static/icons/info.svg';
 import type {
 	CAPIElement,
 	ImageBlockElement,

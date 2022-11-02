@@ -23,7 +23,7 @@ import type { EditionId } from '../../../lib/edition';
 import { getEditionFromId, getRemainingEditions } from '../../../lib/edition';
 import { Column, lineStyle } from './Column';
 import { MoreColumn } from './MoreColumn';
-import { ReaderRevenueLinks } from './ReaderRevenueLinks';
+import { MobileNavReaderRevenueLinks } from './ReaderRevenueLinks';
 
 const columnsStyle = (display: ArticleDisplay) => css`
 	box-sizing: border-box;
@@ -289,7 +289,7 @@ export const Columns: React.FC<{
 				<div css={lineStyle}></div>
 			</li>
 
-			<ReaderRevenueLinks
+			<MobileNavReaderRevenueLinks
 				readerRevenueLinks={nav.readerRevenueLinks}
 				editionId={editionId}
 				headerTopBarSwitch={headerTopBarSwitch}

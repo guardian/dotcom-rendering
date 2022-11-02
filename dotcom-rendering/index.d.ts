@@ -546,13 +546,6 @@ declare namespace JSX {
 	}
 }
 
-// SVG handling
-declare module '*.svg' {
-	const content: any;
-	// eslint-disable-next-line import/no-default-export -- This is how we import SVGs
-	export default content;
-}
-
 // Extend PerformanceEntry from lib.dom.ts with current 'In Draft' properties (to allow access as use in browsers that support)
 // lib.dom.ts: https://microsoft.github.io/PowerBI-JavaScript/interfaces/_node_modules_typedoc_node_modules_typescript_lib_lib_dom_d_.performanceentry.html
 // Draft: https://wicg.github.io/element-timing/#sec-performance-element-timing

@@ -6,7 +6,7 @@ import {
 	textSans,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import ClockIcon from '../../static/icons/clock.svg';
+import { ReactComponent as ClockIcon } from '../../static/icons/clock.svg';
 
 type Props = {
 	age: string;

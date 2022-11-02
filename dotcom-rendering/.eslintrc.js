@@ -81,6 +81,7 @@ module.exports = {
 		ecmaVersion: 6,
 		project: 'tsconfig.json',
 		sourceType: 'module',
+		extraFileExtensions: ['.mjs'],
 	},
 	plugins: [
 		'@typescript-eslint',

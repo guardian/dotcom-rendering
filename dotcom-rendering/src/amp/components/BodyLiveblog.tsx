@@ -8,7 +8,7 @@ import {
 import React from 'react';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { getSharingUrls } from '../../lib/sharing-urls';
-import RefreshIcon from '../../static/icons/refresh.svg';
+import { ReactComponent as RefreshIcon } from '../../static/icons/refresh.svg';
 import type { ConfigType } from '../../types/config';
 import { decideTheme } from '../../web/lib/decideTheme';
 import type { ArticleModel } from '../types/ArticleModel';

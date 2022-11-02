@@ -1,4 +1,3 @@
-import '../webpackPublicPath';
 import { isAdBlockInUse } from '@guardian/commercial-core';
 import { startup } from '../startup';
 

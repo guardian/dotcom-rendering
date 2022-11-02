@@ -6,8 +6,8 @@ import {
 	pillarMap,
 	pillarPalette_DO_NOT_USE,
 } from '../../../lib/pillars';
-import ClockIcon from '../../../static/icons/clock.svg';
-import TwitterIcon from '../../../static/icons/twitter.svg';
+import { ReactComponent as ClockIcon } from '../../../static/icons/clock.svg';
+import { ReactComponent as TwitterIcon } from '../../../static/icons/twitter.svg';
 import { ShareIcons } from '../ShareIcons';
 
 const pillarColours = pillarMap(

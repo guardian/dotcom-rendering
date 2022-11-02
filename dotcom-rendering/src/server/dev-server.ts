@@ -1,5 +1,6 @@
+// @ts-no-check
 import type { NextFunction, Request, Response } from 'express';
-import { render as renderAMPArticle } from '../amp/server';
+import { serve as renderAMPArticle } from '../amp/server';
 import {
 	renderArticle,
 	renderArticleJson,

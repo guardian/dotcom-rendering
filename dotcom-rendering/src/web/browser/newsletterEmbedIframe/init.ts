@@ -1,4 +1,3 @@
-import '../webpackPublicPath';
 import { isObject } from '@guardian/libs';
 import { startup } from '../startup';
 

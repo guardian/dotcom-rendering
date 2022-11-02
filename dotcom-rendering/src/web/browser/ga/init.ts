@@ -1,4 +1,3 @@
-import '../webpackPublicPath';
 import { startup } from '../startup';
 import { init as initGa, sendPageView } from './ga';
 

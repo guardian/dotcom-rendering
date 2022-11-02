@@ -3,7 +3,7 @@ import type { Request, Response } from 'express';
 import express from 'express';
 import responseTime from 'response-time';
 import {
-	render as renderAMPArticle,
+	serve as renderAMPArticle,
 	renderPerfTest as renderAMPArticlePerfTest,
 } from '../amp/server';
 import type { FEArticleType } from '../types/frontend';

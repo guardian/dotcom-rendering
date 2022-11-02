@@ -29,7 +29,7 @@ export const doHydration = async (
 	await import(
 		/* webpackInclude: /\.importable\.tsx$/ */
 		/* webpackChunkName: "[request]" */
-		`../../components/${name}.importable`
+		`../../components/${name}.importable.tsx`
 	)
 		.then((module) => {
 			/** The duration of importing the module for this island */

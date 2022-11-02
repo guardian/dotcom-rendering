@@ -8,8 +8,8 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import CameraSvg from '../../static/icons/camera.svg';
-import VideoSvg from '../../static/icons/video-icon.svg';
+import { ReactComponent as CameraSvg } from '../../static/icons/camera.svg';
+import { ReactComponent as VideoSvg } from '../../static/icons/video-icon.svg';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 

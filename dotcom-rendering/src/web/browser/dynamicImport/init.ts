@@ -1,4 +1,3 @@
-import '../webpackPublicPath';
 import dynamicImportPolyfill from 'dynamic-import-polyfill';
 import { startup } from '../startup';
 
@@ -18,28 +17,13 @@ const initialiseDynamicImport = () => {
 	}
 };
 
-// Provides an import function to use for dynamic imports. **Designed for
-// legacy browsers. Dynamic loads a ~4k bundle.**
-const initialiseDynamicImportLegacy = () => {
-	return import(/* webpackChunkName: "shimport" */ '@guardian/shimport').then(
-		(shimport) => {
-			shimport.initialise(); // note this adds a __shimport__ global
-			window.guardianPolyfilledImport = shimport.load;
-		},
-	);
-};
-
 const init = (): Promise<void> => {
 	window.guardianPolyfilledImport = (url: string) =>
 		Promise.reject(
 			new Error(`import not polyfilled; attempted import(${url})`),
 		);
 
-	if (window.guardian.mustardCut) {
-		return Promise.resolve(initialiseDynamicImport());
-	}
-
-	return initialiseDynamicImportLegacy();
+	return Promise.resolve(initialiseDynamicImport());
 };
 
 startup('dynamicImport', null, init);

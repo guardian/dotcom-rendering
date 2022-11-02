@@ -7,7 +7,7 @@ import {
 } from '@guardian/source-foundations';
 import React from 'react';
 import type { NavType } from '../../model/extract-nav';
-import ArrowRight from '../../static/icons/arrow-right.svg';
+import { ReactComponent as ArrowRight } from '../../static/icons/arrow-right.svg';
 
 const supportStyles = css`
 	align-self: flex-start;

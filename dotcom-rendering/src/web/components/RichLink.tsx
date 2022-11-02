@@ -9,7 +9,7 @@ import {
 	text,
 	textSans,
 } from '@guardian/source-foundations';
-import ArrowInCircle from '../../static/icons/arrow-in-circle.svg';
+import { ReactComponent as ArrowInCircle } from '../../static/icons/arrow-in-circle.svg'
 import type { Palette } from '../../types/palette';
 import type { TagType } from '../../types/tag';
 import { decidePalette } from '../lib/decidePalette';

@@ -6,7 +6,7 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import React from 'react';
-import DownArrow from '../../static/icons/down-arrow.svg';
+import { ReactComponent as DownArrow } from '../../static/icons/down-arrow.svg';
 import { blockLink } from '../lib/block-link';
 
 const headingStyle = css`

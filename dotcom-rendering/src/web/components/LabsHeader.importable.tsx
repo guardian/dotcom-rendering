@@ -12,7 +12,7 @@ import {
 	LinkButton,
 	SvgArrowRightStraight,
 } from '@guardian/source-react-components';
-import LabsLogo from '../../static/logos/the-guardian-labs.svg';
+import { ReactComponent as LabsLogo } from '../../static/logos/the-guardian-labs.svg';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { Dropdown } from './Dropdown';
 

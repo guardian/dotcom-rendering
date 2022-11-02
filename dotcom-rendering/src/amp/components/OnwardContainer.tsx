@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import { headline, neutral, textSans } from '@guardian/source-foundations';
-import Camera from '../../static/icons/camera.svg';
-import Clock from '../../static/icons/clock.svg';
-import Quote from '../../static/icons/quote.svg';
-import VideoIcon from '../../static/icons/video-icon.svg';
-import VolumeHigh from '../../static/icons/volume-high.svg';
+import { ReactComponent as Camera } from '../../static/icons/camera.svg';
+import { ReactComponent as Clock } from '../../static/icons/clock.svg';
+import { ReactComponent as Quote } from '../../static/icons/quote.svg';
+import { ReactComponent as VideoIcon } from '../../static/icons/video-icon.svg';
+import { ReactComponent as VolumeHigh } from '../../static/icons/volume-high.svg';
 import {
 	MoustacheSection,
 	MoustacheTemplate,

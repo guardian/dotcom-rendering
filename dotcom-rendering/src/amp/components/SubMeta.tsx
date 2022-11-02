@@ -3,7 +3,7 @@ import { body, neutral, text, textSans } from '@guardian/source-foundations';
 import React from 'react';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import type { BaseLinkType } from '../../model/extract-nav';
-import CommentIcon from '../../static/icons/comment.svg';
+import { ReactComponent as CommentIcon } from '../../static/icons/comment.svg';
 import { ShareIcons } from './ShareIcons';
 
 const guardianLines = (pillar: ArticleTheme) => css`

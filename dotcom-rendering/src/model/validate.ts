@@ -20,7 +20,7 @@ addFormats(ajv);
 const validateArticle = ajv.compile<FEArticleType>(articleSchema);
 const validateFront = ajv.compile<FEFrontType>(frontSchema);
 
-export const validateAsCAPIType = (data: unknown): FEArticleType => {
+export const validateAsArticleType = (data: unknown): FEArticleType => {
 	if (validateArticle(data)) return data;
 
 	const url =

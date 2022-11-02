@@ -3,7 +3,7 @@ import { getCookie, joinUrl } from '@guardian/libs';
 import { brand, from, neutral, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
-import ProfileIcon from '../../static/icons/profile.svg';
+import { ReactComponent as ProfileIcon } from '../../static/icons/profile.svg';
 import { getZIndex } from '../lib/getZIndex';
 import {
 	addNotificationsToDropdownLinks,

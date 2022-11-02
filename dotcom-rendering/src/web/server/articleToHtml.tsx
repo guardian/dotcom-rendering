@@ -3,18 +3,11 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
-import {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-} from '../../../scripts/webpack/bundles';
 import { isAmpSupported } from '../../amp/components/Elements';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
 	getScriptsFromManifest,
-	LEGACY_SCRIPT,
-	MODERN_SCRIPT,
-	VARIANT_SCRIPT,
 } from '../../lib/assets';
 import { escapeData } from '../../lib/escapeData';
 import { extractGA } from '../../model/extract-ga';
@@ -60,7 +53,7 @@ export const articleToHtml = ({ article }: Props): string => {
 
 	const html = renderToString(
 		<CacheProvider value={cache}>
-			<ArticlePage format={format} CAPIArticle={article} NAV={NAV} />
+			<ArticlePage format={format} CAPIArticle={article} NAV={NAV} />,
 		</CacheProvider>,
 	);
 
@@ -97,20 +90,9 @@ export const articleToHtml = ({ article }: Props): string => {
 			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
-	const shouldServeVariantBundle: boolean = [
-		BUILD_VARIANT,
-		article.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
-	].every(Boolean);
+	const isDev = process.env.NODE_ENV !== 'production';
 
-	/**
-	 * This function returns an array of files found in the manifests
-	 * defined by `manifestPaths`.
-	 *
-	 * @see getScriptsFromManifest
-	 */
-	const getScriptArrayFromFile = getScriptsFromManifest(
-		shouldServeVariantBundle,
-	);
+	const getScript = getScriptsFromManifest(false, isDev);
 
 	/**
 	 * The highest priority scripts.
@@ -122,18 +104,16 @@ export const articleToHtml = ({ article }: Props): string => {
 	const priorityScriptTags = generateScriptTags(
 		[
 			polyfillIO,
-			...getScriptArrayFromFile('bootCmp.js'),
-			...getScriptArrayFromFile('ophan.js'),
+			getScript('bootCmp.js'),
+			getScript('ophan.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
 				article.config.commercialBundleUrl,
-			...getScriptArrayFromFile('sentryLoader.js'),
-			...getScriptArrayFromFile('dynamicImport.js'),
+			getScript('sentryLoader.js'),
+			getScript('dynamicImport.js'),
 			pageHasNonBootInteractiveElements &&
 				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
-			...getScriptArrayFromFile('islands.js'),
-			...expeditedIslands.flatMap((name) =>
-				getScriptArrayFromFile(`${name}.js`),
-			),
+			getScript('islands.js'),
+			...expeditedIslands.flatMap((name) => getScript(`${name}.js`)),
 		].map((script) =>
 			offerHttp3 && script ? getHttp3Url(script) : script,
 		),
@@ -148,23 +128,18 @@ export const articleToHtml = ({ article }: Props): string => {
 	 */
 	const lowPriorityScriptTags = generateScriptTags(
 		[
-			...getScriptArrayFromFile('atomIframe.js'),
-			...getScriptArrayFromFile('embedIframe.js'),
-			...getScriptArrayFromFile('newsletterEmbedIframe.js'),
-			...getScriptArrayFromFile('relativeTime.js'),
-			...getScriptArrayFromFile('initDiscussion.js'),
+			getScript('atomIframe.js'),
+			getScript('embedIframe.js'),
+			getScript('newsletterEmbedIframe.js'),
+			getScript('relativeTime.js'),
+			getScript('initDiscussion.js'),
 		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
 	);
 
-	const gaChunk = getScriptArrayFromFile('ga.js');
-	const modernScript = gaChunk.find((script) => script.match(MODERN_SCRIPT));
-	const legacyScript = gaChunk.find((script) => script.match(LEGACY_SCRIPT));
-	const variantScript = gaChunk.find((script) =>
-		script.match(VARIANT_SCRIPT),
-	);
+	const gaChunk = getScript('ga.js');
 	const gaPath = {
-		modern: (modernScript ?? variantScript) as string,
-		legacy: legacyScript as string,
+		modern: gaChunk,
+		legacy: gaChunk,
 	};
 
 	/**

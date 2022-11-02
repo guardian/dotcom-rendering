@@ -1,5 +1,5 @@
 import { css, Global } from '@emotion/react';
-import { TOP_ABOVE_NAV_HEIGHT } from '@guardian/commercial-core/dist/esm/constants';
+import { TOP_ABOVE_NAV_HEIGHT } from '@guardian/commercial-core/dist/cjs/constants/index';
 import type { ArticleDisplay } from '@guardian/libs';
 import { border, neutral, space } from '@guardian/source-foundations';
 import { AdSlot, labelHeight } from './AdSlot';

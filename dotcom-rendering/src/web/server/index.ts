@@ -1,73 +1,22 @@
 import type express from 'express';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
-import { isRecipe } from '../../model/enhance-recipes';
+import { enhanceArticle } from '../../model/enhanceArticle';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
-import { enhanceCollections } from '../../model/enhanceCollections';
-import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
-import { enhanceStandfirst } from '../../model/enhanceStandfirst';
-import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
-import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
-import type { DCRFrontType, FEFrontType } from '../../types/front';
-import type { FEArticleType } from '../../types/frontend';
+import { enhanceFront } from '../../model/enhanceFront';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
 
-function enhancePinnedPost(format: CAPIFormat, block?: Block) {
-	return block ? enhanceBlocks([block], format)[0] : block;
-}
-
-const enhanceCAPIType = (body: unknown): FEArticleType => {
-	const data = validateAsCAPIType(body);
-
-	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
-		promotedNewsletter: data.promotedNewsletter,
-		isRecipe: isRecipe(data.tags),
-	});
-
-	const CAPIArticle: FEArticleType = {
-		...data,
-		blocks: enhancedBlocks,
-		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
-		standfirst: enhanceStandfirst(data.standfirst),
-		commercialProperties: enhanceCommercialProperties(
-			data.commercialProperties,
-		),
-		tableOfContents: data.config.switches.tableOfContents
-			? enhanceTableOfContents(data.format, enhancedBlocks)
-			: undefined,
-	};
-	return CAPIArticle;
-};
-
 const getStack = (e: unknown): string =>
 	e instanceof Error ? e.stack ?? 'No error stack' : 'Unknown error';
-
-const enhanceFront = (body: unknown): DCRFrontType => {
-	const data: FEFrontType = validateAsFrontType(body);
-	return {
-		...data,
-		webTitle: `${
-			data.pressedPage.seoData.title ?? data.pressedPage.seoData.webTitle
-		} | The Guardian`,
-		pressedPage: {
-			...data.pressedPage,
-			collections: enhanceCollections(
-				data.pressedPage.collections,
-				data.editionId,
-				data.pageId,
-			),
-		},
-	};
-};
 
 export const renderArticle = (
 	{ body }: express.Request,
 	res: express.Response,
 ): void => {
 	try {
-		const article = enhanceCAPIType(body);
+		const article = enhanceArticle(body);
 		const resp = articleToHtml({
 			article,
 		});
@@ -83,7 +32,7 @@ export const renderArticleJson = (
 	res: express.Response,
 ): void => {
 	try {
-		const CAPIArticle = enhanceCAPIType(body);
+		const CAPIArticle = enhanceArticle(body);
 		const resp = {
 			data: {
 				CAPIArticle,
@@ -109,7 +58,7 @@ export const renderInteractive = (
 	res: express.Response,
 ): void => {
 	try {
-		const article = enhanceCAPIType(body);
+		const article = enhanceArticle(body);
 		const resp = articleToHtml({
 			article,
 		});

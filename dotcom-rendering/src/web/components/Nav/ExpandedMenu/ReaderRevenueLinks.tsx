@@ -8,9 +8,8 @@ import {
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import type { LinkType } from '../../../../model/extract-nav';
-
 import { addTrackingCodesToUrl } from '../../../lib/acquisitions';
-import { EditionId } from '../../../lib/edition';
+import type { EditionId } from '../../../lib/edition';
 
 const hideDesktop = css`
 	${from.desktop} {
@@ -70,7 +69,7 @@ const mainMenuLinkStyle = css`
 	}
 `;
 
-export const ReaderRevenueLinks: React.FC<{
+export const MobileNavReaderRevenueLinks: React.FC<{
 	readerRevenueLinks: ReaderRevenuePositions;
 	editionId: EditionId;
 	headerTopBarSwitch: boolean;

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { brand, from, neutral, textSans } from '@guardian/source-foundations';
-import SearchIcon from '../../static/icons/search.svg';
+import { ReactComponent as SearchIcon } from '../../static/icons/search.svg';
 import { getZIndex } from '../lib/getZIndex';
 
 interface SearchProps {

@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { validateAsCAPIType } from './validate';
+import { validateAsArticleType } from './validate';
 
 // TODO avoid fetch, write script to fetch new version in gen-schema.js and store as fixture files
 const urlsToTest = [
@@ -14,7 +14,7 @@ const urlsToTest = [
 describe('validate', () => {
 	it('throws on invalid data', () => {
 		const data = { foo: 'bar' };
-		expect(() => validateAsCAPIType(data)).toThrowError(TypeError);
+		expect(() => validateAsArticleType(data)).toThrowError(TypeError);
 	});
 
 	urlsToTest.forEach((url) => {
@@ -22,7 +22,7 @@ describe('validate', () => {
 			return fetch(`${url}&purge=${Date.now()}`)
 				.then((response) => response.json())
 				.then((myJson) => {
-					expect(validateAsCAPIType(myJson)).toBe(myJson);
+					expect(validateAsArticleType(myJson)).toBe(myJson);
 				});
 		});
 	});

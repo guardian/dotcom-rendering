@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { brand, brandAlt, from, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import NewspaperIcon from '../../static/icons/newspaper.svg';
-import type { EditionId } from '../lib/edition';
+import { ReactComponent as NewspaperIcon } from '../../static/icons/newspaper.svg';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
+import type { EditionId } from '../lib/edition';
 
 interface PrintSubscriptionsProps {
 	editionId: EditionId;

@@ -33,23 +33,19 @@ deploy:
 build: export NODE_ENV=production
 build: clean-dist install
 	$(call log, "building production bundles")
-	@webpack --config ./scripts/webpack/webpack.config.js --progress
-
-build-ci: export NODE_ENV=production
-build-ci: clean-dist install
-	$(call log, "building production bundles")
-	@SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
+	@vite build --outDir dist/client
+	@vite build --outDir dist/server --ssr src/server/entry-server.ts
 
 start-ci: export NODE_ENV=production
 start-ci: install
 	$(call log, "starting PROD server...")
-	@DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
+	@DISABLE_LOGGING_AND_METRICS=true node src/server/express.mjs
 
 start: export NODE_ENV=production
 start: install
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	pm2 start dist/frontend.server.js
+	pm2 start src/server/express.mjs
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 	@pm2 logs
@@ -61,7 +57,7 @@ start-prod: export NODE_ENV=production
 start-prod:
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
-	/usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
+	/usr/local/node/pm2 start --uid dotcom-rendering --gid frontend src/server/express.mjs
 	@echo '' # just a spacer
 	$(call log, "PROD server is running")
 
@@ -76,37 +72,30 @@ logs:
 
 run: stop build start
 
-run-ci: stop build-ci start-ci
-
 
 # dev #########################################
 
 dev: export NODE_ENV=development
 dev: clear clean-dist install
 	$(call log, "starting DEV server")
-	@SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
-
-dev-legacy: export NODE_ENV=development
-dev-legacy: clear clean-dist install
-	$(call log, "starting DEV server")
-	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
+	node src/server/express.mjs
 
 # tests #####################################
 
 cypress: export NODE_ENV=production
 cypress: clear clean-dist install build
 	$(call log, "starting frontend PROD server for Cypress")
-	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --browser chrome --spec "cypress/e2e/**/*"'
+	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node src/server/express.mjs' 9000 'cypress run --browser chrome --spec "cypress/e2e/**/*"'
 
 cypress-arm64: export NODE_ENV=production
 cypress-arm64: clear clean-dist install build
 	$(call log, "starting frontend PROD server for Cypress")
-	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
+	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node src/server/express.mjs' 9000 'cypress run --spec "cypress/e2e/**/*"'
 
 ampValidation: export NODE_ENV=production
 ampValidation: clean-dist install build
 	$(call log, "starting frontend PROD server for AMP Validation")
-	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'node scripts/test/amp-validation.js'
+	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node src/server/express.mjs' 9000 'node scripts/test/amp-validation.js'
 
 buildCheck:
 	$(call log, "checking build files")

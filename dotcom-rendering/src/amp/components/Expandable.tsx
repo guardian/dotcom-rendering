@@ -7,8 +7,8 @@ import {
 } from '@guardian/source-foundations';
 import React from 'react';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../lib/pillars';
-import InfoIcon from '../../static/icons/info.svg';
-import PlusIcon from '../../static/icons/plus.svg';
+import { ReactComponent as InfoIcon } from '../../static/icons/info.svg';
+import { ReactComponent as PlusIcon } from '../../static/icons/plus.svg';
 
 const ListStyle = (iconColour: string) => css`
 	li {

@@ -27,6 +27,13 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 		return false;
 	}
 
+	// don't break our tests when Ophan’s RequireJS syntax breaks
+	// @TODO: handle Ophan with modern syntax
+	if (/define is not defined/.test(err.stack)) {
+		console.warn(err);
+		return false;
+	}
+
 	// When we set the `GU_U` cookie this is causing the commercial bundle to try and do
 	// something with the url which is failing in Cypress with a malformed URI error
 	if (err.message.includes('URI malformed')) {

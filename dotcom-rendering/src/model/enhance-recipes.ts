@@ -1,4 +1,5 @@
 import { isString, isUndefined } from '@guardian/libs';
+import 'core-js/es/string/replace-all';
 import type { CAPIElement } from '../types/content';
 import type { TagType } from '../types/tag';
 

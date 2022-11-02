@@ -3,7 +3,7 @@ import { Standard as ExampleArticle } from '../../../fixtures/generated/articles
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 import { findBySubsection } from '../../model/article-sections';
 import { extractNAV } from '../../model/extract-nav';
-import { validateAsCAPIType } from '../../model/validate';
+import { validateAsArticleType } from '../../model/validate';
 import type { AnalyticsModel } from '../components/Analytics';
 import { isAmpSupported } from '../components/Elements';
 import type { PermutiveModel } from '../components/Permutive';
@@ -13,72 +13,78 @@ import { Article } from '../pages/Article';
 import { getAmpExperimentCache } from './ampExperimentCache';
 import { document } from './document';
 
-export const render = ({ body }: express.Request, res: express.Response) => {
+export const renderAmpArticle = (data: unknown) => {
+	const CAPIArticle = validateAsArticleType(data);
+	const { linkedData } = CAPIArticle;
+	const { config } = CAPIArticle;
+	const elements = CAPIArticle.blocks.flatMap((block) => block.elements);
+
+	if (
+		!isAmpSupported({
+			format: CAPIArticle.format,
+			tags: CAPIArticle.tags,
+			elements,
+			switches: CAPIArticle.config.switches,
+			main: CAPIArticle.main,
+		})
+	) {
+		throw new NotRenderableInDCR();
+	}
+
+	const scripts = [
+		...extractScripts(elements, CAPIArticle.mainMediaElements),
+	];
+
+	const sectionName = CAPIArticle.sectionName ?? '';
+	const neilsenAPIID = findBySubsection(sectionName).apiID;
+
+	const permutive: PermutiveModel = {
+		projectId: 'd6691a17-6fdb-4d26-85d6-b3dd27f55f08',
+		apiKey: '359ba275-5edd-4756-84f8-21a24369ce0b',
+		payload: generatePermutivePayload(config),
+	};
+
+	const analytics: AnalyticsModel = {
+		gaTracker: 'UA-78705427-1',
+		title: CAPIArticle.headline,
+		comscoreID: '6035250',
+		section: sectionName,
+		contentType: CAPIArticle.contentType,
+		id: CAPIArticle.pageId,
+		neilsenAPIID,
+		domain: 'amp.theguardian.com',
+		ipsosSectionName: config.ipsosTag ?? 'guardian',
+	};
+
+	const metadata = {
+		description: CAPIArticle.trailText,
+		canonicalURL: CAPIArticle.webURL,
+	};
+
+	return document({
+		linkedData,
+		scripts,
+		metadata,
+		title: `${CAPIArticle.headline} | ${CAPIArticle.sectionLabel} | The Guardian`,
+		body: (
+			<Article
+				experimentsData={getAmpExperimentCache()}
+				articleData={CAPIArticle}
+				nav={extractNAV(CAPIArticle.nav)}
+				analytics={analytics}
+				permutive={permutive}
+				config={config}
+			/>
+		),
+	});
+};
+
+export const serve = (
+	{ body }: express.Request,
+	res: express.Response,
+): void => {
 	try {
-		const CAPIArticle = validateAsCAPIType(body);
-		const { linkedData } = CAPIArticle;
-		const { config } = CAPIArticle;
-		const elements = CAPIArticle.blocks.flatMap((block) => block.elements);
-
-		if (
-			!isAmpSupported({
-				format: CAPIArticle.format,
-				tags: CAPIArticle.tags,
-				elements,
-				switches: CAPIArticle.config.switches,
-				main: CAPIArticle.main,
-			})
-		) {
-			throw new NotRenderableInDCR();
-		}
-
-		const scripts = [
-			...extractScripts(elements, CAPIArticle.mainMediaElements),
-		];
-
-		const sectionName = CAPIArticle.sectionName ?? '';
-		const neilsenAPIID = findBySubsection(sectionName).apiID;
-
-		const permutive: PermutiveModel = {
-			projectId: 'd6691a17-6fdb-4d26-85d6-b3dd27f55f08',
-			apiKey: '359ba275-5edd-4756-84f8-21a24369ce0b',
-			payload: generatePermutivePayload(config),
-		};
-
-		const analytics: AnalyticsModel = {
-			gaTracker: 'UA-78705427-1',
-			title: CAPIArticle.headline,
-			comscoreID: '6035250',
-			section: sectionName,
-			contentType: CAPIArticle.contentType,
-			id: CAPIArticle.pageId,
-			neilsenAPIID,
-			domain: 'amp.theguardian.com',
-			ipsosSectionName: config.ipsosTag ?? 'guardian',
-		};
-
-		const metadata = {
-			description: CAPIArticle.trailText,
-			canonicalURL: CAPIArticle.webURL,
-		};
-
-		const resp = document({
-			linkedData,
-			scripts,
-			metadata,
-			title: `${CAPIArticle.headline} | ${CAPIArticle.sectionLabel} | The Guardian`,
-			body: (
-				<Article
-					experimentsData={getAmpExperimentCache()}
-					articleData={CAPIArticle}
-					nav={extractNAV(CAPIArticle.nav)}
-					analytics={analytics}
-					permutive={permutive}
-					config={config}
-				/>
-			),
-		});
-
+		const resp = renderAmpArticle(body);
 		res.status(200).send(resp);
 	} catch (e) {
 		// a validation error
@@ -96,5 +102,5 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 
 export const renderPerfTest = (req: express.Request, res: express.Response) => {
 	req.body = ExampleArticle;
-	render(req, res);
+	serve(req, res);
 };

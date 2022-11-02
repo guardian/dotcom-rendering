@@ -8,8 +8,8 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import type { LinkType } from '../../../../model/extract-nav';
-import FacebookIcon from '../../../../static/icons/facebook.svg';
-import TwitterIconPadded from '../../../../static/icons/twitter-padded.svg';
+import { ReactComponent as FacebookIcon } from '../../../../static/icons/facebook.svg';
+import { ReactComponent as TwitterIconPadded } from '../../../../static/icons/twitter-padded.svg';
 
 const pillarHeight = 42;
 

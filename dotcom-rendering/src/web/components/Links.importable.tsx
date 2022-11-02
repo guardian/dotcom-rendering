@@ -9,8 +9,8 @@ import {
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
-import ProfileIcon from '../../static/icons/profile.svg';
-import SearchIcon from '../../static/icons/search.svg';
+import { ReactComponent as ProfileIcon } from '../../static/icons/profile.svg';
+import { ReactComponent as SearchIcon } from '../../static/icons/search.svg';
 import { getZIndex } from '../lib/getZIndex';
 import {
 	addNotificationsToDropdownLinks,

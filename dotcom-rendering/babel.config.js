@@ -8,7 +8,6 @@ module.exports = {
 		'babel-plugin-px-to-rem',
 		'@babel/plugin-transform-runtime',
 		'@emotion/babel-plugin',
-		["polyfill-corejs3", { "method": "usage-global", "version": "3.20" }]
 	],
 
 	env: {

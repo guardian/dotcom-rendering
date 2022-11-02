@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import { neutral, textSans } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import MinusIcon from '../../static/icons/minus.svg';
-import PlusIcon from '../../static/icons/plus.svg';
+import { ReactComponent as MinusIcon } from '../../static/icons/minus.svg';
+import { ReactComponent as PlusIcon } from '../../static/icons/plus.svg';
 import type {
 	CalloutBlockElement,
 	CalloutBlockElementV2,

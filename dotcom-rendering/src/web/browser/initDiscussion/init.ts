@@ -1,4 +1,3 @@
-import '../webpackPublicPath';
 import { doHydration } from '../islands/doHydration';
 import { getProps } from '../islands/getProps';
 import { startup } from '../startup';

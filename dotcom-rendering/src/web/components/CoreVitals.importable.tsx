@@ -4,7 +4,8 @@ import {
 	initCoreWebVitals,
 } from '@guardian/core-web-vitals';
 import { getCookie } from '@guardian/libs';
-import { dcrJavascriptBundle } from '../../../scripts/webpack/bundles';
+// eslint-disable-next-line import/extensions -- it’s MJS
+import { dcrJavascriptBundle } from '../../../scripts/webpack/bundles.js';
 import type { ServerSideTestNames } from '../../types/config';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { removePrebidA9Canada } from '../experiments/tests/remove-prebid-a9-canada';
@@ -16,7 +17,7 @@ export const CoreVitals = () => {
 
 	const isDev =
 		window.location.hostname === 'm.code.dev-theguardian.com' ||
-		window.location.hostname === (process.env.HOSTNAME || 'localhost') ||
+		window.location.hostname === 'localhost' ||
 		window.location.hostname === 'preview.gutools.co.uk';
 	const sampling = 1 / 100;
 
@@ -54,7 +55,7 @@ export const CoreVitals = () => {
 		team: 'dotcom',
 	});
 
-	if (window.location.hostname === (process.env.HOSTNAME || 'localhost')) {
+	if (window.location.hostname === 'localhost') {
 		void bypassCoreWebVitalsSampling('dotcom');
 	}
 	if (

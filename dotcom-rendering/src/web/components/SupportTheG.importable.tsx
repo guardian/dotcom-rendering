@@ -18,8 +18,7 @@ import type {
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import ArrowRightIcon from '../../static/icons/arrow-right.svg';
-import type { EditionId } from '../lib/edition';
+import { ReactComponent as ArrowRightIcon } from '../../static/icons/arrow-right.svg';
 import type { OphanRecordFunction } from '../browser/ophan/ophan';
 import {
 	getOphanRecordFunction,
@@ -33,6 +32,7 @@ import {
 	MODULES_VERSION,
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
+import type { EditionId } from '../lib/edition';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useIsInView } from '../lib/useIsInView';

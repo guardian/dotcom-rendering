@@ -2,8 +2,8 @@ name: DCR cypress
 on:
   push:
     paths-ignore:
-      - "apps-rendering/**"
-      - "dotcom-rendering/docs/**"
+      - 'apps-rendering/**'
+      - 'dotcom-rendering/docs/**'
 jobs:
   cypress:
     name: DCR Cypress
@@ -28,7 +28,7 @@ jobs:
         with:
           start: make start-ci
           working-directory: dotcom-rendering
-          wait-on: "http://localhost:9000"
+          wait-on: 'http://localhost:9000'
           wait-on-timeout: 30
           browser: chrome
           spec: cypress/e2e/parallel-${{ matrix.group }}/*.js

@@ -8,8 +8,8 @@ import {
 } from '@guardian/source-foundations';
 import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
-import ArrowRightIcon from '../../../static/icons/arrow-right.svg';
-import LabsLogo from '../../../static/logos/the-guardian-labs.svg';
+import { ReactComponent as ArrowRightIcon } from '../../../static/icons/arrow-right.svg';
+import { ReactComponent as LabsLogo } from '../../../static/logos/the-guardian-labs.svg';
 
 const headerStyle = css`
 	display: flex;

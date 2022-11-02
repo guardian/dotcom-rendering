@@ -8,7 +8,7 @@ import {
 
 const allowUrls: BrowserOptions['allowUrls'] = [
 	/webpack-internal/,
-	new RegExp(`/$(process.env.HOSTNAME || 'localhost')/`),
+	/localhost/,
 	/assets\.guim\.co\.uk/,
 	/ophan\.co\.uk/,
 ];

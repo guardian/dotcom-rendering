@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { joinUrl } from '@guardian/libs';
 import { between, textSans, until } from '@guardian/source-foundations';
-import ShareIcon from '../../static/icons/share.svg';
+import { ReactComponent as ShareIcon } from '../../static/icons/share.svg';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { formatCount } from '../lib/formatCount';

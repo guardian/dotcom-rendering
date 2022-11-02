@@ -7,7 +7,6 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const { merge } = require('webpack-merge');
 const WebpackMessages = require('webpack-messages');
-const { BUILD_VARIANT } = require('./bundles');
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
@@ -105,7 +104,6 @@ module.exports = [
 			platform: 'server',
 		}),
 		require(`./webpack.config.server`)({ sessionId }),
-		DEV ? require(`./webpack.config.dev-server`) : {},
 	),
 	// browser bundle configs
 	// TODO: ignore static files for legacy compilation
@@ -131,17 +129,4 @@ module.exports = [
 			sessionId,
 		}),
 	),
-	...(BUILD_VARIANT
-		? [
-				merge(
-					commonConfigs({
-						platform: 'browser.variant',
-					}),
-					require(`./webpack.config.browser`)({
-						bundle: 'variant',
-						sessionId,
-					}),
-				),
-		  ]
-		: []),
 ];
