@@ -46,12 +46,14 @@ describe('Paid content tests', function () {
 		cy.get('[data-cy=branding-logo]').click();
 
 		// Make sure the call to Google Analytics contains the info we want
-		cy.wait('@gaRequest').then((interception) => {
-			let requestURL = interception.request.url;
-			expect(requestURL).to.include('ec=click');
-			expect(requestURL).to.include('ea=sponsor%20logo');
-			expect(requestURL).to.include('el=charlie%20bigham%27s');
-		});
+		cy.wait('@gaRequest', { responseTimeout: 40000 }).then(
+			(interception) => {
+				let requestURL = interception.request.url;
+				expect(requestURL).to.include('ec=click');
+				expect(requestURL).to.include('ea=sponsor%20logo');
+				expect(requestURL).to.include('el=charlie%20bigham%27s');
+			},
+		);
 	});
 
 	it('should send Google Analytics message on click of sponsor logo in onwards section', function () {
@@ -87,11 +89,13 @@ describe('Paid content tests', function () {
 		cy.get('[data-cy=card-branding-logo]').first().click();
 
 		// Make sure the call to Google Analytics contains the info we want
-		cy.wait('@gaRequest').then((interception) => {
-			let requestURL = interception.request.url;
-			expect(requestURL).to.include('ec=click');
-			expect(requestURL).to.include('ea=sponsor%20logo');
-			expect(requestURL).to.include('el=charlie%20bigham%27s');
-		});
+		cy.wait('@gaRequest', { responseTimeout: 40000 }).then(
+			(interception) => {
+				let requestURL = interception.request.url;
+				expect(requestURL).to.include('ec=click');
+				expect(requestURL).to.include('ea=sponsor%20logo');
+				expect(requestURL).to.include('el=charlie%20bigham%27s');
+			},
+		);
 	});
 });
