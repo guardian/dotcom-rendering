@@ -208,7 +208,7 @@ SpecialReportInline.story = {
 export const SportSupporting = () => {
 	const format = {
 		...defaultFormat,
-		theme: ArticlePillar.News,
+		theme: ArticlePillar.Sport,
 	};
 
 	return (
