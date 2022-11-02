@@ -149,50 +149,51 @@ export const ShowMore = ({
 					</>
 				)}
 			</div>
-			<Button
-				priority="tertiary"
-				size="xsmall"
-				icon={isOpen ? <SvgCross /> : <SvgPlus />}
-				isLoading={loading}
-				iconSide="left"
-				onClick={toggleOpen}
-				cssOverrides={css`
-					margin-top: ${space[4]}px;
-					margin-right: 10px;
-					color: ${neutral[100]};
-					background-color: ${neutral[7]};
-					${from.tablet} {
-						margin-left: 10px;
-					}
+			<div
+				css={css`
+					display: flex;
 				`}
-				aria-controls={showMoreContainerId}
-				aria-expanded={isOpen && !loading}
-				data-cy={`show-more-button-${containerId}`}
 			>
-				{decideButtonText({
-					isOpen,
-					loading,
-					containerTitle,
-				})}
-			</Button>
-			{error && (
-				<InlineError>
-					<span
-						css={css`
-							font-size: 0.875rem;
-							line-height: 1.25rem;
+				<Button
+					priority="tertiary"
+					size="xsmall"
+					icon={isOpen ? <SvgCross /> : <SvgPlus />}
+					isLoading={loading}
+					iconSide="left"
+					onClick={toggleOpen}
+					cssOverrides={css`
+						margin-top: ${space[4]}px;
+						margin-right: 10px;
+						color: ${neutral[100]};
+						background-color: ${neutral[7]};
+						${from.tablet} {
+							margin-left: 10px;
+						}
+					`}
+					aria-controls={showMoreContainerId}
+					aria-expanded={isOpen && !loading}
+					data-cy={`show-more-button-${containerId}`}
+				>
+					{decideButtonText({
+						isOpen,
+						loading,
+						containerTitle,
+					})}
+				</Button>
+				{error && (
+					<InlineError
+						cssOverrides={css`
+							font-size: 14px;
 							transition: opacity 1.5s;
-							color: ${textPalette.error};
-							display: inline-block;
-							padding-top: 0.375rem;
+							padding-top: 18px;
 							opacity: 1;
 						`}
 					>
 						Sorry, failed to load more stories. Retrying in a few
 						seconds.
-					</span>
-				</InlineError>
-			)}
+					</InlineError>
+				)}
+			</div>
 		</>
 	);
 };
