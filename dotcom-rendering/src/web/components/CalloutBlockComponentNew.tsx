@@ -2,9 +2,10 @@ import { css } from '@emotion/react';
 import { body, headline, neutral, news } from '@guardian/source-foundations';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
-import { Form } from './CalloutNew/Form';
-import { ShareCalloutComponent } from './ShareCalloutComponent';
 import { ExpandingWrapper } from './CalloutNew/ExpandingWrapper';
+import { Form } from './CalloutNew/Form';
+import { CalloutTermsAndConditions } from './CalloutTermsAndConditions';
+import { ShareCalloutComponent } from './ShareCalloutComponent';
 
 const wrapperStyles = css`
 	margin-bottom: 26px;
@@ -118,6 +119,7 @@ export const CalloutBlockComponent = ({
 								</div>
 							</div>
 						</summary>
+						<CalloutTermsAndConditions />
 						<Form formFields={formFields} onSubmit={() => {}} />
 					</details>
 				</figure>
