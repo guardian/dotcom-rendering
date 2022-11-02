@@ -1,8 +1,11 @@
 import { css } from '@emotion/react';
 import { body, headline, neutral, news } from '@guardian/source-foundations';
+import { Button } from '@guardian/source-react-components';
+import { useEffect, useState } from 'react';
+import MinusIcon from '../../static/icons/minus.svg';
+import PlusIcon from '../../static/icons/plus.svg';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
-import { ExpandingWrapper } from './CalloutNew/ExpandingWrapper';
 import { Form } from './CalloutNew/Form';
 import { CalloutTermsAndConditions } from './CalloutTermsAndConditions';
 import { ShareCalloutComponent } from './ShareCalloutComponent';
@@ -78,11 +81,29 @@ const titleStyles = css`
 
 const subtitleTextHeaderStyles = css`
 	${headline.xxsmall()}
+	padding-bottom: 8px;
 `;
 
 const descriptionStyles = css`
 	${body.medium()}
 `;
+
+const buttonWrapperStyles = css`
+	position: absolute;
+	cursor: pointer;
+	margin-top: -5px;
+
+	visibility: visible;
+
+	/* We need to ensure our pointer-events are turned back on on the button */
+	/* 176da211-05aa-4280-859b-1e3157b3f19e */
+	pointer-events: all;
+`;
+
+// Normally forms are in Modals, but here they are embedded into the page
+// we therefore need to only focus on expandFormButtonRef if the form has been closed
+// after it was opened
+let hasFormBeenOpened = true;
 
 export const CalloutBlockComponent = ({
 	callout,
@@ -94,36 +115,169 @@ export const CalloutBlockComponent = ({
 	const palette = decidePalette(format);
 	const { title, description, formFields } = callout;
 
+	let expandFormButtonRef: HTMLButtonElement | null = null;
+	let firstFieldElementRef: HTMLElement | null = null;
+	let lastElementRef: HTMLButtonElement | null = null;
+
+	const [isExpanded, setIsExpanded] = useState(false);
+
+	// ***************************
+	// *     Accessibility       *
+	// ***************************
+	useEffect(() => {
+		// we have to use document.querySelector to find DOM elements
+		// as Source library does not yet support react ref
+		// TODO: use `useRef` once supported in Source
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		expandFormButtonRef = document.querySelector(
+			'button[custom-guardian="callout-form-open-button"]',
+		);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		firstFieldElementRef = document.querySelector(`
+            *[custom-guardian="callout-form-field"]:first-of-type input,
+            *[custom-guardian="callout-form-field"]:first-of-type select
+        `);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		lastElementRef = document.querySelector(
+			'button[custom-guardian="callout-form-close-button"]',
+		);
+
+		// lock shift to the form
+		const keyListener = (e: KeyboardEvent) => {
+			// keyCode 9 is tab key
+			if (e.keyCode === 9) {
+				// If firstElement or lastElement are not defined, do not continue
+				if (!firstFieldElementRef || !lastElementRef) return;
+
+				// we use `e.shiftKey` internally to determin the direction of the highlighting
+				// using document.activeElement and e.shiftKey we can check what should be the next element to be highlighted
+				if (!e.shiftKey && document.activeElement === lastElementRef) {
+					// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+					firstFieldElementRef && firstFieldElementRef.focus();
+					e.preventDefault();
+				}
+
+				if (
+					e.shiftKey &&
+					document.activeElement === firstFieldElementRef
+				) {
+					// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+					lastElementRef && lastElementRef.focus(); // The shift key is down so loop focus back to the last item
+					e.preventDefault();
+				}
+			}
+		};
+		document.addEventListener('keydown', keyListener);
+		return () => document.removeEventListener('keydown', keyListener);
+	}, [isExpanded]);
+
+	// on open form, focus on firstFieldElementRef
+	useEffect(() => {
+		if (isExpanded && firstFieldElementRef) {
+			// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+			firstFieldElementRef && firstFieldElementRef.focus();
+		}
+	}, [isExpanded, firstFieldElementRef]);
+
+	// on close form, focus on expandFormButtonRef
+	useEffect(() => {
+		if (!isExpanded && expandFormButtonRef && !hasFormBeenOpened) {
+			// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+			expandFormButtonRef && expandFormButtonRef.focus();
+		}
+	}, [isExpanded, expandFormButtonRef]);
+
+	// Normally forms are in Modals, but here they are embedded into the page
+	// we therefore need to only focus on expandFormButtonRef if the form has been closed
+	// after it was opened
+	useEffect(() => {
+		if (isExpanded) {
+			hasFormBeenOpened = false;
+		}
+	}, [isExpanded]);
+
+	// be able to close the form using the escape key for accessibility
+	useEffect(() => {
+		const keyListener = (e: KeyboardEvent) => {
+			// keyCode 27 is the escape key, we want to be able to close the form using it
+			if (e.keyCode === 27) {
+				setIsExpanded(false);
+			}
+		};
+		if (isExpanded) {
+			document.addEventListener('keydown', keyListener);
+		}
+		return () => document.removeEventListener('keydown', keyListener);
+	}, [isExpanded, setIsExpanded]);
+
 	return (
 		<>
-			<ExpandingWrapper format={format}>
-				<figure css={wrapperStyles}>
-					<details
-						css={[calloutDetailsStyles, backgroundColorStyle]}
-						aria-hidden={true}
-						open={true}
-					>
-						<summary css={summaryStyles}>
-							<div css={summaryContentWrapper}>
-								<div css={headingTextStyles(palette)}>
-									<div css={titleStyles}>
-										Share your experience
-									</div>
-									<h4 css={subtitleTextHeaderStyles}>
-										{title}
-									</h4>
-									<div css={descriptionStyles}>
-										{description}
-									</div>
-									<ShareCalloutComponent />
+			<figure data-print-layout="hide" css={wrapperStyles}>
+				<details
+					css={[calloutDetailsStyles, backgroundColorStyle]}
+					aria-hidden={true}
+					open={isExpanded}
+				>
+					<summary css={summaryStyles}>
+						<div css={summaryContentWrapper}>
+							<div css={headingTextStyles(palette)}>
+								<div css={titleStyles}>
+									Share your experience
 								</div>
+								<h4 css={subtitleTextHeaderStyles}>{title}</h4>
+								<div css={descriptionStyles}>{description}</div>
 							</div>
-						</summary>
-						<CalloutTermsAndConditions />
-						<Form formFields={formFields} onSubmit={() => {}} />
-					</details>
-				</figure>
-			</ExpandingWrapper>
+						</div>
+						<ShareCalloutComponent />
+						{!isExpanded && (
+							<span css={buttonWrapperStyles} aria-hidden="true">
+								<Button
+									css={css`
+										/* TODO: need to find an nicer way of dynamically setting svg dimensions */
+										background-color: ${neutral[7]};
+										svg {
+											/* stylelint-disable-next-line declaration-no-important */
+											width: 15px !important;
+											/* stylelint-disable-next-line declaration-no-important */
+											height: 15px !important;
+										}
+									`}
+									iconSide="left"
+									size="small"
+									icon={<PlusIcon />}
+									onClick={() => setIsExpanded(true)}
+									custom-guardian="callout-form-open-button"
+									tabIndex={0}
+								>
+									Show more
+								</Button>
+							</span>
+						)}
+					</summary>
+					<CalloutTermsAndConditions />
+
+					<Form formFields={formFields} onSubmit={() => {}} />
+					<span css={buttonWrapperStyles} aria-hidden="true">
+						{isExpanded && (
+							<Button
+								iconSide="left"
+								size="small"
+								icon={<MinusIcon />}
+								onClick={() => setIsExpanded(false)}
+								custom-guardian="callout-form-close-button"
+								css={css`
+									background-color: ${neutral[100]};
+									color: ${neutral[7]};
+									border: ${neutral[7]} solid 1px;
+								`}
+							>
+								Show less
+							</Button>
+						)}
+					</span>
+				</details>
+			</figure>
 		</>
 	);
 };
