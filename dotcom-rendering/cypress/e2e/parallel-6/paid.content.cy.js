@@ -89,7 +89,7 @@ describe('Paid content tests', function () {
 		cy.get('[data-cy=card-branding-logo]').first().click();
 
 		// Make sure the call to Google Analytics contains the info we want
-		cy.wait('@gaRequest', { responseTimeout: 40000 }).then(
+		cy.wait('@gaRequest', { responseTimeout: 40_000 }).then(
 			(interception) => {
 				let requestURL = interception.request.url;
 				expect(requestURL).to.include('ec=click');
