@@ -24,6 +24,8 @@ jobs:
                 node-version-file: '.nvmrc'
                 cache: 'yarn'
 
+            - run: yarn --frozen-lockfile
+
             - name: lint
               run: yarn lint
               working-directory: apps-rendering
