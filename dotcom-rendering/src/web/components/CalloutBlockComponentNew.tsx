@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { body, headline, neutral, news } from '@guardian/source-foundations';
+import {
+	body,
+	headline,
+	sans,
+	neutral,
+	news,
+} from '@guardian/source-foundations';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Form } from './CalloutNew/Form';
@@ -21,6 +27,14 @@ const calloutDetailsStyles = css`
 	:not([open]) > *:not(summary) {
 		display: none;
 	}
+`;
+
+const placeholderCircle = css`
+	height: 33px;
+	width: 35px;
+	border-radius: 50%;
+	background-color: yellow;
+	display: inline-block;
 `;
 
 const backgroundColorStyle = css`
@@ -108,6 +122,7 @@ export const CalloutBlockComponent = ({
 								<h4 css={headingTextHeaderStyles}>{title}</h4>
 								<div css={descriptionStyles}>{description}</div>
 							</div>
+							<span css={placeholderCircle}></span>
 						</div>
 					</summary>
 					<Form formFields={formFields} onSubmit={() => {}} />
