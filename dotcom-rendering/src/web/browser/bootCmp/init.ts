@@ -92,10 +92,11 @@ const init = async (): Promise<void> => {
 				05: CCPA Do not sell, boolean, with the serialization: true -> "true", false -> "false"
 			    06: AUS (Consent) UUID # Note that the cookie is called "ccpaUUID"
 				07: AUS consentStatus
+				08: AUS personalisedAdvertising, boolean, with the serialization: true -> "true", false -> "false"
 
 			For TCF.v2, an exmaple of array is ["01:TCF.v2", "02:<consent UUID>"", "03:<consent string>""]
 			For CCPA,   an exmaple of array is ["01:CCPA", "04:<consent UUID>", "05:true"]
-			For AUS,    an exmaple of array is ["01:AUS", "06:<consent UUID>", "07:consentedAll"]
+			For AUS,    an exmaple of array is ["01:AUS", "06:<consent UUID>", "07:consentedAll", "08:true"]
 
 			Note: it is possible to deprecate CODES, but they cannot the reused.
 		*/
@@ -119,7 +120,8 @@ const init = async (): Promise<void> => {
 				const ccpaUUID = getCookie({ name: 'ccpaUUID' }) || '';
 				const consentStatus =
 					getCookie({ name: 'consentStatus' }) || '';
-				return ['01:AUS', `06:${ccpaUUID}`, `07:${consentStatus}`];
+				const personalisedAdvertising = consentState.aus.personalisedAdvertising ? 'true' : 'false';
+				return ['01:AUS', `06:${ccpaUUID}`, `07:${consentStatus}`, `08:${personalisedAdvertising}`];
 			}
 			return [];
 		};
