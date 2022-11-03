@@ -183,7 +183,7 @@
     "snyk": "^1.639.0",
     "start-server-and-test": "^1.12.1",
     "storybook-addon-turbo-build": "^1.0.0-beta.0",
-    "stylelint": "^13.13.1",
+    "stylelint": "^14.14.1",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-config-styled-components": "^0.1.1",
     "stylelint-processor-styled-components": "^1.10.0",
