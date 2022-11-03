@@ -3,6 +3,7 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
+import { isAmpSupported } from '../../amp/components/Elements';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
@@ -205,12 +206,16 @@ export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
 	);
 
 	const getAmpLink = (tags: TagType[]) => {
-		if (CAPIArticle.format.design === 'InteractiveDesign') {
-			const hasAmpInteractiveTag = tags.some(
-				(tag) =>
-					tag.id === 'tracking/platformfunctional/ampinteractive',
-			);
-			if (!hasAmpInteractiveTag) return undefined;
+		if (
+			!isAmpSupported({
+				format: CAPIArticle.format,
+				tags,
+				elements: CAPIArticle.blocks.flatMap((block) => block.elements),
+				switches: CAPIArticle.config.switches,
+				main: CAPIArticle.main,
+			})
+		) {
+			return undefined;
 		}
 
 		return `https://amp.theguardian.com/${CAPIArticle.pageId}`;
