@@ -128,6 +128,14 @@ export const CalloutBlockComponent = ({
 }) => {
 	const palette = decidePalette(format);
 	const { title, description, formFields } = callout;
+	const [isBodyExpanded, setIsBodyExpanded] = useState(false);
+
+	const hideOverlay = () => {
+		setIsBodyExpanded(true);
+	};
+	const showOverlay = () => {
+		setIsBodyExpanded(false);
+	};
 
 	let expandFormButtonRef: HTMLButtonElement | null = null;
 	let firstFieldElementRef: HTMLElement | null = null;
@@ -242,9 +250,17 @@ export const CalloutBlockComponent = ({
 								<h4 css={subtitleTextHeaderStyles}>{title}</h4>
 								<div css={descriptionStyles}>{description}</div>
 							</div>
-							<div css={overlayStyles} />
+							<div
+								css={overlayStyles}
+								style={
+									isBodyExpanded
+										? { display: 'none' }
+										: { display: '' }
+								}
+							/>
 							{!isExpanded && (
 								<span
+									onClick={hideOverlay}
 									css={buttonWrapperStyles}
 									aria-hidden="true"
 								>
@@ -276,7 +292,11 @@ export const CalloutBlockComponent = ({
 					<CalloutTermsAndConditions />
 
 					<Form formFields={formFields} onSubmit={() => {}} />
-					<span css={buttonWrapperStyles} aria-hidden="true">
+					<span
+						css={buttonWrapperStyles}
+						aria-hidden="true"
+						onClick={showOverlay}
+					>
 						{isExpanded && (
 							<Button
 								iconSide="left"
