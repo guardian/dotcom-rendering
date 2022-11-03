@@ -35,6 +35,26 @@ const spaces = / /g;
 const ophanComponentId = (name: string) =>
 	name.toLowerCase().replace(spaces, '-');
 
+const isNavList = (collection: DCRCollectionType) => {
+	return (
+		collection.collectionType == 'nav/list' ||
+		collection.collectionType == 'nav/media-list'
+	);
+};
+
+const isToggleable = (
+	index: number,
+	collection: DCRCollectionType,
+	isNetworkFront: boolean,
+) => {
+	if (isNetworkFront) {
+		return (
+			collection.displayName.toLowerCase() != 'headlines' &&
+			!isNavList(collection)
+		);
+	} else return index != 0 && !isNavList(collection);
+};
+
 const getMerchHighPosition = (
 	collectionCount: number,
 	isNetworkFront: boolean | undefined,
@@ -127,26 +147,6 @@ const decideAdSlot = (
 		);
 	}
 	return null;
-};
-
-const isNavList = (collection: DCRCollectionType) => {
-	return (
-		collection.collectionType == 'nav/list' ||
-		collection.collectionType == 'nav/media-list'
-	);
-};
-
-const isToggleable = (
-	index: number,
-	collection: DCRCollectionType,
-	isNetworkFront: boolean,
-) => {
-	if (isNetworkFront) {
-		return (
-			collection.displayName.toLowerCase() != 'headlines' &&
-			!isNavList(collection)
-		);
-	} else return index != 0 && !isNavList(collection);
 };
 
 export const FrontLayout = ({ front, NAV }: Props) => {
