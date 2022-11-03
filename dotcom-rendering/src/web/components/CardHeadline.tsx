@@ -232,9 +232,12 @@ export const CardHeadline = ({
 						? labTextStyles(size)
 						: fontStyles({
 								size,
-								fontWeight: containerPalette
-									? 'bold'
-									: 'regular',
+								fontWeight:
+									containerPalette &&
+									containerPalette !=
+										'SpecialReportAltPalette'
+										? 'bold'
+										: 'regular',
 						  }),
 					format.theme !== ArticleSpecial.Labs &&
 						fontStylesOnMobile({

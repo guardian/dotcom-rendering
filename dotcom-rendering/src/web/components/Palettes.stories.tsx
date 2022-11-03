@@ -156,3 +156,20 @@ export const InvestigationPalette = () => (
 		/>
 	</Section>
 );
+
+export const SpecialReportAltPalette = () => (
+	<Section
+		title="SpecialReportAltPalette"
+		padContent={false}
+		centralBorder="partial"
+		containerPalette="SpecialReportAltPalette"
+		showDateHeader={true}
+		editionId={'UK'}
+	>
+		<DynamicFast
+			groupedTrails={groupedTrails}
+			containerPalette="SpecialReportAltPalette"
+			showAge={true}
+		/>
+	</Section>
+);

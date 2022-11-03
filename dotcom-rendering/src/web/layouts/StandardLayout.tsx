@@ -441,6 +441,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									cssOverrides={css`
 										display: block;
 									`}
+									color={palette.border.secondary}
 								/>
 							</Section>
 						</>
@@ -591,7 +592,10 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									{format.theme === ArticleSpecial.Labs ? (
 										<GuardianLabsLines />
 									) : (
-										<DecideLines format={format} />
+										<DecideLines
+											format={format}
+											color={palette.border.article}
+										/>
 									)}
 								</div>
 							</div>
@@ -723,6 +727,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									cssOverrides={css`
 										display: block;
 									`}
+									color={palette.border.secondary}
 								/>
 								<SubMeta
 									format={format}

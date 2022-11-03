@@ -162,6 +162,27 @@ export const Quoted = () => {
 				})}
 				quoted={true}
 			/>
+			<h1>SpecialReportAlt Standard</h1>
+			<BlockquoteBlockComponent
+				html={blockquoteHtml}
+				palette={decidePalette({
+					design: ArticleDesign.Standard,
+					display: ArticleDisplay.Standard,
+					theme: ArticleSpecial.SpecialReportAlt,
+				})}
+				quoted={true}
+			/>
+
+			<h1>SpecialReportAlt Comment</h1>
+			<BlockquoteBlockComponent
+				html={blockquoteHtml}
+				palette={decidePalette({
+					design: ArticleDesign.Comment,
+					display: ArticleDisplay.Standard,
+					theme: ArticleSpecial.SpecialReportAlt,
+				})}
+				quoted={true}
+			/>
 		</div>
 	);
 };

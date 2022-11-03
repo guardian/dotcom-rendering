@@ -2634,6 +2634,7 @@
                 "LifestylePillar",
                 "NewsPillar",
                 "OpinionPillar",
+                "SpecialReportAltTheme",
                 "SpecialReportTheme",
                 "SportPillar"
             ],
@@ -2700,7 +2701,8 @@
                 "Podcast",
                 "SombreAltPalette",
                 "SombrePalette",
-                "Special"
+                "Special",
+                "SpecialReportAltPalette"
             ],
             "type": "string"
         },
