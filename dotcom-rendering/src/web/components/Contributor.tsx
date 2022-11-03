@@ -1,12 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import {
-	from,
-	headline,
-	neutral,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
+import { from, headline, textSans, until } from '@guardian/source-foundations';
 import { getSoleContributor } from '../../lib/byline';
 import TwitterIcon from '../../static/icons/twitter.svg';
 import type { Palette } from '../../types/palette';
@@ -18,23 +12,15 @@ const twitterHandleColour = (palette: Palette) => css`
 	color: ${palette.text.twitterHandleBelowDesktop};
 
 	svg {
-		fill: ${palette.fill.twitterHandleBelowDesktop};
+		fill: currentColor;
 	}
 
 	a {
-		color: ${palette.text.twitterHandleBelowDesktop};
+		color: inherit;
 	}
 
 	${from.desktop} {
 		color: ${palette.text.twitterHandle};
-
-		svg {
-			fill: ${neutral[46]};
-		}
-
-		a {
-			color: ${palette.text.twitterHandle};
-		}
 	}
 `;
 
