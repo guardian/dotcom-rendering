@@ -50,6 +50,9 @@ export const ShowMore = ({
 	showAge,
 	containerPalette,
 }: Props) => {
+	const [cardLinks, setCardLinks] = useState<string[]>([]);
+	const [isOpen, setIsOpen] = useState(false);
+
 	function findCardLinks() {
 		const containerNode = document.getElementById(containerId);
 		const containerLinksArray = Array.from(
@@ -60,7 +63,9 @@ export const ShowMore = ({
 		);
 	}
 
-	const [cardLinks, setCardLinks] = useState<string[]>([]);
+	function toggleOpen() {
+		setIsOpen(!isOpen);
+	}
 
 	useOnce(() => {
 		const linksArray: string[] = findCardLinks().filter(
@@ -68,12 +73,6 @@ export const ShowMore = ({
 		);
 		setCardLinks(linksArray);
 	}, [containerId]);
-
-	const [isOpen, setIsOpen] = useState(false);
-
-	function toggleOpen() {
-		setIsOpen(!isOpen);
-	}
 
 	/** We only pass an actual URL to SWR when 'showMore' is true.
 	 * Toggling 'showMore' will trigger a re-render
