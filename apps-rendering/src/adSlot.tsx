@@ -30,7 +30,7 @@ const adLabelsStyles = (format: ArticleFormat): SerializedStyles => css`
 	// We need to account for padding on both sides
 	width: calc(100% - 2 * ${remSpace[3]});
 
-	h1 {
+	p > strong {
 		margin: 0;
 		float: left;
 		font-size: 16px;
@@ -46,7 +46,7 @@ const supportBannerStyles = (format: ArticleFormat): SerializedStyles => css`
 	padding: ${remSpace[3]};
 	background-color: ${background.supportBanner(format)};
 
-	h1 {
+	p > strong {
 		${headline.xxxsmall()};
 		margin-top: 0;
 	}
@@ -117,11 +117,15 @@ const AdSlot: FC<Props> = ({ className, paragraph, format }): ReactElement => (
 		key={`ad-after-${paragraph}-para`}
 	>
 		<div css={adLabelsStyles(format)} className="ad-labels">
-			<h1>Advertisement</h1>
+			<p>
+				<strong>Advertisement</strong>
+			</p>
 		</div>
 		<div css={adSlotStyles} className="ad-slot"></div>
 		<div css={supportBannerStyles(format)} className="support-banner">
-			<h1>Support the Guardian and enjoy the app ad-free.</h1>
+			<p>
+				<strong>Support the Guardian and enjoy the app ad-free.</strong>
+			</p>
 			<ThemeProvider theme={buttonThemeBrandAlt}>
 				<Button>Support the Guardian</Button>
 			</ThemeProvider>
