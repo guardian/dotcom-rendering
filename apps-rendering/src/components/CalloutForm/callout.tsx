@@ -1,19 +1,20 @@
-import type { FC } from 'react';
 import { css } from '@emotion/react';
-import { body, headline, neutral, news } from '@guardian/source-foundations';
-// import type { Palette } from '../../types/palette';
-// import { decidePalette } from '../lib/decidePalette';
-import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
-import type { ArticleFormat } from '@guardian/libs';
-// import { Form } from './CalloutNew/Form';
-import { plainTextElement } from 'renderer';
-import { parse } from 'client/parser';
+import {  renderStandfirstText} from 'renderer';
+import { maybeRender } from 'lib';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
+import { body, headline, neutral, remSpace } from '@guardian/source-foundations';
+import CalloutForm from './form';
+
+import type { FC } from 'react';
+import type { SerializedStyles } from '@emotion/react';
 import type { Option } from '@guardian/types';
+import type { ArticleFormat } from '@guardian/libs';
+import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 
 export interface CalloutProps {
 	campaign: Campaign;
 	format: ArticleFormat;
-	description?: DocumentFragment;
+	description: Option<DocumentFragment>;
 }
 
 const wrapperStyles = css`
@@ -26,6 +27,7 @@ const wrapperStyles = css`
 const calloutDetailsStyles = css`
 	border-top: 1px ${neutral[86]} solid;
 	border-bottom: 1px ${neutral[86]} solid;
+	background-color: ${neutral[97]};
 	position: relative;
 	padding-bottom: 10px;
 
@@ -33,10 +35,6 @@ const calloutDetailsStyles = css`
 	:not([open]) > *:not(summary) {
 		display: none;
 	}
-`;
-
-const backgroundColorStyle = css`
-	background-color: ${neutral[97]};
 `;
 
 const summaryStyles = css`
@@ -70,9 +68,9 @@ const summaryContentWrapper = css`
 	visibility: visible;
 `;
 
-const titleStyles = css`
+const titleStyles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.xxsmall({ fontWeight: 'bold' })}
-	color: ${news[300]}
+	color: ${text.interactiveAtomLink(format)};
 `;
 
 const headingTextHeaderStyles = css`
@@ -81,86 +79,38 @@ const headingTextHeaderStyles = css`
 
 const descriptionStyles = css`
 	${body.medium()}
+	padding: ${remSpace[3]} 0;
 `;
 
-// const headingTextStyles = (palette: Palette) => css`
-// 	a {
-// 		color: ${palette.text.calloutHeading};
-// 		text-decoration: none;
-// 		:hover {
-// 			text-decoration: underline;
-// 		}
-// 	}
-// `;
-
-// const Callout = ({
-// 	// callout,
-// 	// format,
-// }: {
-// 	// callout: CalloutBlockElement;
-// 	// format: ArticleFormat;
-// }) => {
-// 	// const palette = decidePalette(format);
-// 	// const { title, description, formFields } = callout;
-
-const renderDescription = (html: string) => {
-	if (!html) return;
-	const parser = new DOMParser();
-	const parseDescription = parse(parser);
-	const description: Option<DocumentFragment> = parseDescription(html).toOption();
-	return (
-		<div>
-			{{description}}
-		</div>
-	)
-}
-
 const Callout: FC<CalloutProps> = ({ campaign, format, description }) => {
-	// TODO: When we render this, how are priority & displayOnSensitive used?
 	const {name, fields} = campaign
 	const { callout} = fields;
 
-	// console.log('*** description', description);
-
-	// const parser = new DOMParser();
-	// const parseDescription = parse(parser);
-
-	// const standfirst: Option<DocumentFragment> = parseDescription(fields.description || "").toOption();
-
-
-
 	return (
-		<>
-			<figure css={wrapperStyles}>
-				<details
-					css={[calloutDetailsStyles, backgroundColorStyle]}
-					aria-hidden={true}
-					open={true}
-				>
-					<summary css={summaryStyles}>
-						<div css={summaryContentWrapper}>
-							<div>
-							{/* <div css={headingTextStyles(palette)}> */}
-								<div css={titleStyles}>
-									{callout}
-								</div>
-								<h4 css={headingTextHeaderStyles}>{name}</h4>
-								{ description &&
-								<div css={descriptionStyles}>
-									Test Description
-									{/* {description} */}
-									{/* {Array.from(description.childNodes).map(plainTextElement)} */}
-									{/* {renderDescription(description)} */}
-
-								</div>
-								}
-							</div>
+		<div css={wrapperStyles}>
+			<details
+				css={calloutDetailsStyles}
+				open={true}
+			>
+				<summary css={summaryStyles}>
+					<div css={summaryContentWrapper}>
+						<div css={titleStyles(format)}>
+							{callout}
 						</div>
-					</summary>
-					{/* <Form formFields={formFields} onSubmit={() => {}} /> */}
-				</details>
-			</figure>
-		</>
+						<h4 css={headingTextHeaderStyles}>{name}</h4>
+						{
+							maybeRender(description, (description) => (
+								<div css={descriptionStyles}>
+									{/* TODO: Check if we can use the standfirst renderer like this - the plaintext renderer doesn't give us links etc (which were included in the eg data) */}
+									{renderStandfirstText(description, format)}
+								</div>
+							))
+						}
+					</div>
+				</summary>
+				<CalloutForm campaign={campaign} format={format} />
+			</details>
+		</div>
 	);
 };
 

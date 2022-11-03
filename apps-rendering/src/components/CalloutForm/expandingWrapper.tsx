@@ -1,15 +1,10 @@
-import type { FC, ReactNode } from 'react';
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import { darkModeCss } from 'styles';
 import {
 	neutral,
-	brand,
 	remSpace,
-	transitions,
 	textSans,
 	visuallyHidden,
-	focusHalo,
 	from,
 	remHeight,
 } from '@guardian/source-foundations';
@@ -17,7 +12,12 @@ import {
 	SvgMinus,
 	SvgPlus,
 } from '@guardian/source-react-components';
-import { darkModeCss } from 'styles';
+
+import type { FC, ReactNode } from 'react';
+import type { SerializedStyles } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
+
+// To Do: Could this be exported to source?
 
 export interface ExpandingWrapperProps {
 	format: ArticleFormat;
@@ -25,50 +25,58 @@ export interface ExpandingWrapperProps {
 }
 
 
-const calloutContainerStyles = (
+const containerStyles = (
 	format: ArticleFormat,
 ): SerializedStyles => css`
 	border-top: 1px solid ${neutral[86]};
-	padding: ${remSpace[1]};
-	position: relative;
 	background: ${neutral[97]};
-	margin-bottom: 2.125rem;
+	box-shadow: none;
+	position: relative;
 
-	#callout-form-checkbox:checked ~ #collapsible-body {
-		max-height: fit-content;
-		margin-bottom: ${remSpace[1]};
-	}
-	#callout-form-checkbox:checked ~ #callout-form-overlay,
-	#callout-form-checkbox ~ label #svgminus,
-	#callout-form-checkbox:checked ~ label #svgplus {
-		display: none;
-	}
-
-	#callout-form-checkbox ~ label #svgplus,
-	#callout-form-checkbox:checked ~ label #svgminus {
-		display: block;
-	}
-	#callout-form-checkbox ~ label::after {
+	#expander-checkbox ~ label::after {
 		content: 'Show more';
 	}
-	#callout-form-checkbox:checked ~ label::after {
+	#expander-checkbox:checked ~ label::after {
 		content: 'Show less';
 	}
 
-	${darkModeCss`
-		background: ${neutral[7]}; // TODO: update this
-	`}
+	#expander-checkbox:checked ~ #expander-overlay,
+	#expander-checkbox ~ label #svgminus,
+	#expander-checkbox:checked ~ label #svgplus {
+		display: none;
+	}
+
+	#expander-checkbox:checked ~ label {
+		background: ${neutral[100]};
+		color: ${neutral[7]};
+
+		#svgminus {
+			fill: ${neutral[7]};
+		}
+	}
+	#expander-checkbox ~ label #svgplus {
+		fill: ${neutral[100]};
+	}
+
+
+	#expander-checkbox ~ label #svgplus,
+	#expander-checkbox:checked ~ label #svgminus {
+		display: block;
+	}
+
+	#expander-checkbox:checked ~ #collapsible-body {
+		max-height: fit-content;
+		margin-bottom: ${remSpace[6]};
+	}
 
 
 `;
 
-
-
 const overlayStyles = css`
 	background-image: linear-gradient(
 		0deg,
-		${neutral[100]},
-		${neutral[100]} 40%,
+		${neutral[97]},
+		${neutral[97]} 40%,
 		rgba(255, 255, 255, 0)
 	);
 	height: 5rem;
@@ -90,41 +98,37 @@ const overlayStyles = css`
 const fakeButtonStyles = (format: ArticleFormat): SerializedStyles => css`
 	display: inline-flex;
 	justify-content: space-between;
+	box-shadow: none !important; // ToDo: Where is this coming from?
 	align-items: center;
 	box-sizing: border-box;
-	border: none;
 	cursor: pointer;
-	transition: ${transitions.medium};
-	text-decoration: none;
-	white-space: nowrap;
-	&:focus {
-		${focusHalo};
-	}
-	background: ${brand[400]};
-	// margin-left: 0.625rem;
 	position: absolute;
-	bottom: -1.5rem;
-	${textSans.medium({ fontWeight: 'bold' })};
+	margin-left: ${remSpace[1]};
+	bottom: -${remSpace[6]};
+	border-radius: ${remHeight.ctaMedium}rem;
+	padding: 0 ${remSpace[5]};
+	border: 1px solid ${neutral[7]};
+	text-decoration: none;
+	background: ${neutral[7]};
+	color: ${neutral[100]};
 	height: ${remHeight.ctaMedium}rem;
 	min-height: ${remHeight.ctaMedium}rem;
-	padding: 0 ${remSpace[5]} 0.125rem;
-	border-radius: ${remHeight.ctaMedium}rem;
-	color: white;
+	${textSans.medium({ fontWeight: 'bold' })};
+
 	${from.tablet} {
 		margin-left: 3.75rem;
 	}
 `;
 
 const collapsibleBody = css`
-	width: 100%
-	max-height: 300vh;
+	margin: 0;
+	max-height: 25vh;
 	overflow: hidden;
 `;
 
 const buttonIcon = css`
 	svg {
 		display: block;
-		fill: white;
 		width: 1.5rem;
 		height: auto;
 		margin-left: -${remSpace[1]};
@@ -133,13 +137,11 @@ const buttonIcon = css`
 `;
 
 
-
 const ExpandingWrapper: FC<ExpandingWrapperProps> = ({ format, children }) => {
 	return (
 		<div
-			id="callout-form"
-			css={calloutContainerStyles(format)}
-			data-component="callout-form"
+			id="expander"
+			css={containerStyles(format)}
 		>
 			<input
 				type="checkbox"
@@ -147,8 +149,8 @@ const ExpandingWrapper: FC<ExpandingWrapperProps> = ({ format, children }) => {
 					visibility: hidden;
 					${visuallyHidden};
 				`}
-				id="callout-form-checkbox"
-				name="callout-form-checkbox"
+				id="expander-checkbox"
+				name="expander-checkbox"
 				tabIndex={-1}
 				key="PinnedPostCheckbox"
 			/>
@@ -156,11 +158,12 @@ const ExpandingWrapper: FC<ExpandingWrapperProps> = ({ format, children }) => {
 				{children}
 
 			</div>
-			<div id="callout-form-overlay" css={overlayStyles} />
+			<div id="expander-overlay" css={overlayStyles} />
 			<label
+				aria-hidden={true}
 				css={fakeButtonStyles(format)}
-				htmlFor="callout-form-checkbox"
-				id="callout-form-button"
+				htmlFor="expander-checkbox"
+				id="expander-button"
 			>
 				<>
 					<span id="svgminus" css={buttonIcon}>
