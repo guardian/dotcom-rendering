@@ -53,6 +53,10 @@ export const ShowMore = ({
 	const [existingCardLinks, setExistingCardLinks] = useState<string[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 
+	/**
+		@todo: Fix focus behaviour on expand/collapse: @see https://github.com/guardian/dotcom-rendering/issues/6343
+	*/
+
 	useOnce(() => {
 		const container = document.getElementById(containerId);
 		const containerLinks = Array.from(
@@ -79,14 +83,6 @@ export const ShowMore = ({
 		enhanceCards(data).filter(
 			(card) => !existingCardLinks.includes(card.url),
 		);
-
-	/**
-		@todo: Desired focus behaviour on expand/collapse?
-		@todo: Double check appropriate semantics for indicating state (aria-live, aria-expanded etc.)
-		@todo: can we avoid hard-coding the API URL?
-		@todo: rename props to match Front type?
-		@todo: make sure that the new content doesn't shift the top of the viewport when it loads
-	*/
 
 	const showMoreContainerId = `show-more-${containerId}`;
 
