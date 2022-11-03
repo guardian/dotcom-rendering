@@ -64,7 +64,7 @@ const getMobileAdPositions = (
 		isNetworkFront,
 	);
 
-	const positions = collections
+	const positions: (number | undefined)[] = collections
 		.map((collection, collectionIndex) => {
 			const isThrasher = collection.collectionType === 'fixed/thrasher';
 			const isFirst = collectionIndex === 0;
@@ -101,7 +101,7 @@ const decideAdSlot = (
 	collectionCount: number,
 	isPaidContent: boolean | undefined,
 	format: ArticleDisplay,
-	mobileAdPositions: number[],
+	mobileAdPositions: (number | undefined)[],
 ) => {
 	const minContainers = isPaidContent ? 1 : 2;
 	if (
