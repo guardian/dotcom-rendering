@@ -184,7 +184,7 @@ function findInsertIndex(body: Body): Result<string, number> {
 // ----- Procedures ----- //
 
 function buildBodyElement(newsletter: Newsletter): NewsletterSignUp {
-	const theme = getPillarOrElseNews(newsletter.theme)
+	const theme = getPillarOrElseNews(newsletter.theme);
 	return {
 		kind: ElementKind.NewsletterSignUp,
 		...newsletter,
