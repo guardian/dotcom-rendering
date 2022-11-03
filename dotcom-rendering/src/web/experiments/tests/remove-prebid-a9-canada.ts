@@ -3,7 +3,7 @@ import { getCountryCodeSync } from '../../lib/getCountryCode';
 
 export const removePrebidA9Canada: ABTest = {
 	id: 'RemovePrebidA9Canada',
-	author: '@commercial-dev',
+	author: '@guardian/commercial-dev',
 	start: '2022-11-01',
 	expiry: '2023-01-31',
 	audience: 10 / 100,
