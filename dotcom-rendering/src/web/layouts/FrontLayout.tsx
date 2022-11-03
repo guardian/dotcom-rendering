@@ -170,10 +170,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	 */
 	const renderAds = !front.isAdFreeUser;
 
-	const isFront = front.isNetworkFront;
-
 	const mobileAdPositions = front.isNetworkFront
-		? getMobileAdPositions(isFront, front.pressedPage.collections)
+		? getMobileAdPositions(
+				front.isNetworkFront,
+				front.pressedPage.collections,
+		  )
 		: [];
 
 	return (
@@ -297,7 +298,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								</Section>
 								{decideAdSlot(
 									index,
-									isFront,
+									front.isNetworkFront,
 									front.pressedPage.collections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
@@ -351,7 +352,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								</Section>
 								{decideAdSlot(
 									index,
-									isFront,
+									front.isNetworkFront,
 									front.pressedPage.collections.length,
 									front.pressedPage.frontProperties
 										.isPaidContent,
@@ -402,7 +403,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							</Section>
 							{decideAdSlot(
 								index,
-								isFront,
+								front.isNetworkFront,
 								front.pressedPage.collections.length,
 								front.pressedPage.frontProperties.isPaidContent,
 								format.display,
