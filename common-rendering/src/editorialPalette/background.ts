@@ -506,7 +506,7 @@ const relatedCardImage = (_format: ArticleFormat): Colour => {
 	return neutral[86];
 };
 
-const calloutSpeechBubble = (format: ArticleFormat): Colour => {
+const calloutColor = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[400];
@@ -690,7 +690,7 @@ const background = {
 	avatar,
 	bullet,
 	bulletDark,
-	calloutSpeechBubble,
+	calloutColor,
 	footer,
 	footerDark,
 	headline,
