@@ -50,29 +50,19 @@ export const ShowMore = ({
 	showAge,
 	containerPalette,
 }: Props) => {
-	const [cardLinks, setCardLinks] = useState<string[]>([]);
+	const [existingCardLinks, setExistingCardLinks] = useState<string[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 
-	function findCardLinks() {
-		const containerNode = document.getElementById(containerId);
-		const containerLinksArray = Array.from(
-			containerNode?.querySelectorAll('a') ?? [],
-		);
-		return containerLinksArray.map(
-			(Element) => Element.attributes.getNamedItem('href')?.value,
-		);
-	}
-
-	function toggleOpen() {
-		setIsOpen(!isOpen);
-	}
-
 	useOnce(() => {
-		const linksArray: string[] = findCardLinks().filter(
-			(item): item is string => !!item,
-		);
-		setCardLinks(linksArray);
-	}, [containerId]);
+		const container = document.getElementById(containerId);
+		const containerLinks = Array.from(
+			container?.querySelectorAll('a') ?? [],
+		)
+			.map((element) => element.attributes.getNamedItem('href')?.value)
+			.filter((item): item is string => !!item);
+
+		setExistingCardLinks(containerLinks);
+	}, []);
 
 	/** We only pass an actual URL to SWR when 'showMore' is true.
 	 * Toggling 'showMore' will trigger a re-render
@@ -85,7 +75,9 @@ export const ShowMore = ({
 
 	const filteredData =
 		data &&
-		enhanceCards(data).filter((card) => !cardLinks.includes(card.url));
+		enhanceCards(data).filter(
+			(card) => !existingCardLinks.includes(card.url),
+		);
 
 	/**
 		@todo: Desired focus behaviour on expand/collapse?
@@ -159,7 +151,7 @@ export const ShowMore = ({
 					icon={isOpen ? <SvgCross /> : <SvgPlus />}
 					isLoading={loading}
 					iconSide="left"
-					onClick={toggleOpen}
+					onClick={() => setIsOpen(!isOpen)}
 					cssOverrides={css`
 						margin-top: ${space[4]}px;
 						margin-right: 10px;
