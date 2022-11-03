@@ -91,7 +91,6 @@ const getMobileAdPositions = (
 		.filter((index) => typeof index === 'number')
 		// Should insert no more than 10 ads
 		.slice(0, 10);
-
 	return positions;
 };
 
