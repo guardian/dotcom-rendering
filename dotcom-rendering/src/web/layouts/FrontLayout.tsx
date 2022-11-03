@@ -48,43 +48,51 @@ const getMerchHighPosition = (
 	}
 };
 
-// On mobile, we remove the first container if it is a thrasher
-// and remove a container if it, or the next sibling, is a commercial container
-// we also exclude any containers that are directly before a thrasher
-// then we take every other container, up to a maximum of 10, for targeting MPU insertion
+/**
+ * On mobile, we remove the first container if it is a thrasher
+ * and remove a container if it, or the next sibling, is a commercial container
+ * we also exclude any containers that are directly before a thrasher
+ * then we take every other container, up to a maximum of 10, for targeting MPU insertion
+ */
 
 const getMobileAdPositions = (
 	isNetworkFront: boolean | undefined,
 	collections: DCRCollectionType[],
 ) => {
-	const positions: number[] = [];
 	const merchHighPosition = getMerchHighPosition(
 		collections.length,
 		isNetworkFront,
 	);
 
-	collections.forEach((collection, collectionIndex) => {
-		const isThrasher = collection.collectionType === 'fixed/thrasher';
-		const isFirst = collectionIndex === 0;
-		const isNearMerchandising =
-			collectionIndex === merchHighPosition ||
-			collectionIndex + 1 === merchHighPosition;
-		const isNearThrasher =
-			collections[collectionIndex + 1]?.collectionType ===
-			'fixed/thrasher';
-		if (isFirst && isThrasher) return false;
-		if (isNearMerchandising) return false;
-		if (isNearThrasher) return false;
-		else if (
-			collectionIndex % 2 === 0 &&
-			collectionIndex < collections.length - 1
-		) {
-			positions.push(collectionIndex);
-		}
-		return false;
-	});
-	//Should insert no more than 10 ads
-	return positions.slice(0, 10);
+	const positions = collections
+		.map((collection, collectionIndex) => {
+			const isThrasher = collection.collectionType === 'fixed/thrasher';
+			const isFirst = collectionIndex === 0;
+			const isNearMerchandising =
+				collectionIndex === merchHighPosition ||
+				collectionIndex + 1 === merchHighPosition;
+			const isNearThrasher =
+				collections[collectionIndex + 1]?.collectionType ===
+				'fixed/thrasher';
+			if (isFirst && isThrasher) return false;
+			if (isNearMerchandising) return false;
+			if (isNearThrasher) return false;
+			else if (
+				collectionIndex % 2 === 0 &&
+				collectionIndex < collections.length - 1
+			) {
+				return true;
+			}
+			return false;
+		})
+		.map((shouldDisplayAd, collectionIndex) =>
+			shouldDisplayAd ? collectionIndex : undefined,
+		)
+		.filter((index) => typeof index === 'number')
+		// Should insert no more than 10 ads
+		.slice(0, 10);
+
+	return positions;
 };
 
 const decideAdSlot = (
@@ -119,7 +127,7 @@ const decideAdSlot = (
 			</Hide>
 		);
 	}
-	return false;
+	return null;
 };
 
 const isNavList = (collection: DCRCollectionType) => {
