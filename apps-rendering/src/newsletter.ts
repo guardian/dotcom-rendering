@@ -1,8 +1,8 @@
 // ----- Imports ----- //
 import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
-import { ArticleDesign, ArticlePillar } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { OptionKind } from '@guardian/types';
-import { getPillarFromId } from 'articleFormat';
+import { getPillarOrElseNews } from 'articleFormat';
 import type { Body, BodyElement, NewsletterSignUp } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
 import type { Item } from 'item';
@@ -184,12 +184,7 @@ function findInsertIndex(body: Body): Result<string, number> {
 // ----- Procedures ----- //
 
 function buildBodyElement(newsletter: Newsletter): NewsletterSignUp {
-	const maybeTheme = getPillarFromId(newsletter.theme);
-	const theme =
-		maybeTheme.kind === OptionKind.Some
-			? maybeTheme.value
-			: ArticlePillar.News;
-
+	const theme = getPillarOrElseNews(newsletter.theme)
 	return {
 		kind: ElementKind.NewsletterSignUp,
 		...newsletter,
