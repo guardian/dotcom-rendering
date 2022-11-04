@@ -30,7 +30,7 @@ const adLabelsStyles = (format: ArticleFormat): SerializedStyles => css`
 	// We need to account for padding on both sides
 	width: calc(100% - 2 * ${remSpace[3]});
 
-	p > strong {
+	p {
 		margin: 0;
 		float: left;
 		font-size: 16px;
@@ -46,7 +46,7 @@ const supportBannerStyles = (format: ArticleFormat): SerializedStyles => css`
 	padding: ${remSpace[3]};
 	background-color: ${background.supportBanner(format)};
 
-	p > strong {
+	p {
 		${headline.xxxsmall()};
 		margin-top: 0;
 	}
