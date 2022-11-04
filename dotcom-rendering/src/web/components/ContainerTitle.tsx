@@ -65,7 +65,7 @@ const marginStyles = css`
 	${from.leftCol} {
 		margin-left: 0;
 	}
-	margin-bottom: ${space[4]}px;
+	margin-bottom: ${space[2]}px;
 `;
 
 const dateTextStyles = (color: Colour) => css`
