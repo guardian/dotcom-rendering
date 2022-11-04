@@ -48,7 +48,7 @@ export const Header = ({
 				/>
 			</Island>
 		</Hide>
-		<Logo />
+		<Logo editionId={editionId} />
 		<Island deferUntil="idle" clientOnly={true}>
 			<ReaderRevenueLinks
 				urls={urls}
