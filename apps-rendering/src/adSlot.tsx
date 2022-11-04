@@ -117,15 +117,11 @@ const AdSlot: FC<Props> = ({ className, paragraph, format }): ReactElement => (
 		key={`ad-after-${paragraph}-para`}
 	>
 		<div css={adLabelsStyles(format)} className="ad-labels">
-			<p>
-				<strong>Advertisement</strong>
-			</p>
+			<p>Advertisement</p>
 		</div>
 		<div css={adSlotStyles} className="ad-slot"></div>
 		<div css={supportBannerStyles(format)} className="support-banner">
-			<p>
-				<strong>Support the Guardian and enjoy the app ad-free.</strong>
-			</p>
+			<p>Support the Guardian and enjoy the app ad-free.</p>
 			<ThemeProvider theme={buttonThemeBrandAlt}>
 				<Button>Support the Guardian</Button>
 			</ThemeProvider>
