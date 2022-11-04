@@ -335,15 +335,11 @@ describe('RegionalAd', () => {
 		const intRtcAttribute: Record<string, unknown> = JSON.parse(
 			ampAdElement[3].getAttribute('rtc-config') || '{}',
 		);
-		const eurRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[4].getAttribute('rtc-config') || '{}',
-		);
 
 		expect(ukRtcAttribute.vendors).toEqual({});
 		expect(usRtcAttribute.vendors).toEqual({});
 		expect(auRtcAttribute.vendors).toEqual({});
 		expect(intRtcAttribute.vendors).toEqual({});
-		expect(eurRtcAttribute.vendors).toEqual({});
 	});
 
 	it('with ab test running and in relevant yield variant, rtc-config contains permutive and relevant yield URLs when `usePermutive` and `usePrebid` flags are set to true', () => {
