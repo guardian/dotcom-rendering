@@ -6,9 +6,9 @@ import MinusIcon from '../../static/icons/minus.svg';
 import PlusIcon from '../../static/icons/plus.svg';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
-import { Form } from './CalloutNew/Form';
-import { ShareCalloutComponent } from './ShareCalloutComponent';
 import { AgeWarning } from './AgeWarning';
+import { Form } from './CalloutNew/Form';
+import { CalloutShareComponent } from './CalloutShareComponent';
 
 const wrapperStyles = css`
 	margin-bottom: 26px;
@@ -200,7 +200,7 @@ export const CalloutBlockComponent = ({
 							)}
 						</div>
 					</summary>
-					<ShareCalloutComponent />
+					<CalloutShareComponent />
 
 					<Form formFields={formFields} onSubmit={() => {}} />
 					<span

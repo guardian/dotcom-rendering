@@ -22,7 +22,7 @@ const placeholderCircle = css`
 	margin: 10px 10px 10px 0px;
 `;
 
-export const ShareCalloutComponent = () => {
+export const CalloutShareComponent = () => {
 	return (
 		<>
 			<div css={shareCalloutStyles}>
