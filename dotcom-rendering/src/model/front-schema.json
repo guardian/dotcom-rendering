@@ -2652,6 +2652,7 @@
         "EditionId": {
             "enum": [
                 "AU",
+                "EUR",
                 "INT",
                 "UK",
                 "US"

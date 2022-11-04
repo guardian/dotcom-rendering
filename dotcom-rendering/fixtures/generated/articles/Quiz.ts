@@ -27,54 +27,6 @@ export const Quiz: CAPIArticleType = {
 		},
 	],
 	commercialProperties: {
-		UK: {
-			adTargeting: [
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/e3fga',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'bl',
-					value: ['that-1980s-sports-blog'],
-				},
-				{
-					name: 'tn',
-					value: ['quizzes'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'k',
-					value: ['sport', 'football'],
-				},
-				{
-					name: 'se',
-					value: ['guardian-sport-network'],
-				},
-				{
-					name: 'co',
-					value: ['steven-pye'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'url',
-					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-				},
-			],
-		},
 		US: {
 			adTargeting: [
 				{
@@ -171,6 +123,54 @@ export const Quiz: CAPIArticleType = {
 				},
 			],
 		},
+		UK: {
+			adTargeting: [
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'bl',
+					value: ['that-1980s-sports-blog'],
+				},
+				{
+					name: 'tn',
+					value: ['quizzes'],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'k',
+					value: ['sport', 'football'],
+				},
+				{
+					name: 'se',
+					value: ['guardian-sport-network'],
+				},
+				{
+					name: 'co',
+					value: ['steven-pye'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'url',
+					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				},
+			],
+		},
 		INT: {
 			adTargeting: [
 				{
@@ -212,6 +212,54 @@ export const Quiz: CAPIArticleType = {
 				{
 					name: 'edition',
 					value: 'int',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+			],
+		},
+		EUR: {
+			adTargeting: [
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'bl',
+					value: ['that-1980s-sports-blog'],
+				},
+				{
+					name: 'tn',
+					value: ['quizzes'],
+				},
+				{
+					name: 'url',
+					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'k',
+					value: ['sport', 'football'],
+				},
+				{
+					name: 'edition',
+					value: 'eur',
+				},
+				{
+					name: 'se',
+					value: ['guardian-sport-network'],
+				},
+				{
+					name: 'co',
+					value: ['steven-pye'],
 				},
 				{
 					name: 'p',
@@ -884,6 +932,10 @@ export const Quiz: CAPIArticleType = {
 						url: '/crosswords/series/azed',
 					},
 				],
+			},
+			{
+				title: 'Corrections',
+				url: '/theguardian/series/corrections-and-clarifications',
 			},
 		],
 		brandExtensions: [
@@ -1584,7 +1636,7 @@ export const Quiz: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '02ce0c63-ac40-444f-ab7e-6dd422aa07bc',
+			elementId: 'dfcd0226-3131-4202-a12a-a34dd02e8199',
 		},
 	],
 	canonicalUrl:
@@ -2200,7 +2252,7 @@ export const Quiz: CAPIArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: '70cdc388-8a0b-48ed-9a1f-ae86724d49f6',
+					elementId: 'd640e3b3-8977-4a76-9580-108476a5c3d6',
 				},
 			],
 			attributes: {
@@ -2224,7 +2276,7 @@ export const Quiz: CAPIArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://amp.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+			'@id': 'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',

@@ -23,53 +23,6 @@ export const PrintShop: CAPIArticleType = {
 		},
 	],
 	commercialProperties: {
-		UK: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'se',
-					value: ['guardian-print-shop'],
-				},
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'co',
-					value: ['guardian-sport'],
-				},
-				{
-					name: 'url',
-					value: '/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'k',
-					value: [
-						'photography',
-						'culture',
-						'sport',
-						'artanddesign',
-						'football',
-						'england',
-					],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/fmxze',
-				},
-			],
-		},
 		US: {
 			adTargeting: [
 				{
@@ -164,6 +117,53 @@ export const PrintShop: CAPIArticleType = {
 				},
 			],
 		},
+		UK: {
+			adTargeting: [
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'se',
+					value: ['guardian-print-shop'],
+				},
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'co',
+					value: ['guardian-sport'],
+				},
+				{
+					name: 'url',
+					value: '/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'k',
+					value: [
+						'photography',
+						'culture',
+						'sport',
+						'artanddesign',
+						'football',
+						'england',
+					],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/fmxze',
+				},
+			],
+		},
 		INT: {
 			adTargeting: [
 				{
@@ -185,6 +185,53 @@ export const PrintShop: CAPIArticleType = {
 				{
 					name: 'edition',
 					value: 'int',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'k',
+					value: [
+						'photography',
+						'culture',
+						'sport',
+						'artanddesign',
+						'football',
+						'england',
+					],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/fmxze',
+				},
+			],
+		},
+		EUR: {
+			adTargeting: [
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'se',
+					value: ['guardian-print-shop'],
+				},
+				{
+					name: 'co',
+					value: ['guardian-sport'],
+				},
+				{
+					name: 'edition',
+					value: 'eur',
+				},
+				{
+					name: 'url',
+					value: '/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 				},
 				{
 					name: 'p',
@@ -880,6 +927,10 @@ export const PrintShop: CAPIArticleType = {
 						url: '/crosswords/series/azed',
 					},
 				],
+			},
+			{
+				title: 'Corrections',
+				url: '/theguardian/series/corrections-and-clarifications',
 			},
 		],
 		brandExtensions: [
@@ -1618,47 +1669,47 @@ export const PrintShop: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '5087ec80-4fbd-49ca-8a90-1841db6418c2',
+					elementId: 'a9f0aa45-cfc4-4e36-b82a-529a6d563a5d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>This photograph captures Bobby Moore in 1973, standing statuesque in the twilight of his international career, just a few months after winning his 100th cap for England. It was shot prior to a 1-0 friendly win over Scotland which would prove to be Moore’s final victory in an England shirt at Wembley. It possesses a kind of majesty reminiscent of the bronze statue of him at the new Wembley, beneath which an inscription reads: <em>‘Immaculate footballer. Imperial <a href="https://en.wikipedia.org/wiki/Defender_(association_football)">defender</a>. Immortal hero of <a href="https://en.wikipedia.org/wiki/1966_FIFA_World_Cup_Final">1966</a>. First <a href="https://en.wikipedia.org/wiki/List_of_England_international_footballers">Englishman</a> to raise the <a href="https://en.wikipedia.org/wiki/FIFA_World_Cup_Trophy">World Cup</a> aloft. Favourite son of London’s <a href="https://en.wikipedia.org/wiki/East_End_of_London">East End</a>. Finest legend of <a href="https://en.wikipedia.org/wiki/West_Ham_United_F.C.">West Ham United</a>. National Treasure. Master of <a href="https://en.wikipedia.org/wiki/Wembley_Stadium_(1923)">Wembley</a>. Lord of the game. <a href="https://en.wikipedia.org/wiki/List_of_England_national_football_team_captains">Captain</a> extraordinary. Gentleman of all time.’</em></p>',
-					elementId: '1f237d63-e039-4dbb-b9a3-3816fcd28278',
+					elementId: '8e770d0d-712e-458d-9e69-0308f26e79d5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Photograph: Gerry Cranham / Offside</em></p>',
-					elementId: 'f03f91c0-4154-4ad7-9982-378c3964900a',
+					elementId: '24d28d2e-35b7-4882-a2d6-f9c8d294f1f8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><em>Words: Jonny Weeks</em></p>',
-					elementId: '7df11fb2-aca8-4b97-a75e-bb58fec1f920',
+					elementId: '6a2964be-3d70-4e13-9b1f-6fb3d37ce1c2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Buy your exclusive print <a href="https://guardianprintshop.com/collections/the-big-sport-picture">here</a></strong></p>',
-					elementId: '39d598fc-34a5-4ef4-a8e1-8ac81a93ee1b',
+					elementId: 'd6cee88f-8b0d-413b-a42a-d0c8535b5ea2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Price</strong> <br>£55 including free delivery (30x40cm print size).</p>',
-					elementId: '2960e7da-32c7-40e4-ac9e-cf29401f91af',
+					elementId: '579159fd-2ae2-488a-bd91-1ffe8fa9a3f1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Prints<br></strong>Photographs are presented on museum-grade, fine-art paper stocks, with archival standards guaranteeing quality for 100-plus years. All editions are printed and quality checked by experts at theprintspace, the UK’s leading photo and fine-art print provider.</p>',
-					elementId: '56228d3e-7a81-4b87-8b15-527400d4bd88',
+					elementId: '3e4f075c-8f96-4296-a3f4-5b9dda2b2d5e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Delivery<br></strong>Artworks are dispatched via Royal Mail and delivered within three to five working days. Theprintspace takes great care in packaging your artwork, with a no-quibble satisfaction guarantee should you be unhappy in any way. Global shipping is available.</p>',
-					elementId: 'c2fe33cd-6126-4808-abf3-440adfbc1bcd',
+					elementId: '6f47e066-fa96-44b3-9f7e-aff3468757c1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>Contact</strong><br>Email: <a href="mailto:guardianprintsales@theprintspace.co.uk">guardianprintsales@theprintspace.co.uk</a></p>',
-					elementId: '5fa9e6a6-eff7-43a0-b31d-2cbaac4cd1f3',
+					elementId: '243bc830-2769-4df1-81a0-44b21b8807a8',
 				},
 			],
 			attributes: {
@@ -1682,7 +1733,7 @@ export const PrintShop: CAPIArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://amp.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
+			'@id': 'https://www.theguardian.com/artanddesign/2020/dec/17/buy-a-classic-sport-photograph-the-immortal-bobby-moore',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',

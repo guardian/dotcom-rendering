@@ -27,60 +27,6 @@ export const Editorial: CAPIArticleType = {
 		},
 	],
 	commercialProperties: {
-		UK: {
-			adTargeting: [
-				{
-					name: 'k',
-					value: [
-						'health',
-						'society',
-						'infectiousdiseases',
-						'coronavirus-outbreak',
-						'politics',
-						'conservatives',
-						'vaccines',
-						'uk/uk',
-						'boris-johnson',
-					],
-				},
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'tn',
-					value: ['editorials', 'comment'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/gaj9m',
-				},
-				{
-					name: 'co',
-					value: ['editorial'],
-				},
-				{
-					name: 'bl',
-					value: ['commentisfree'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'url',
-					value: '/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
-				},
-			],
-		},
 		US: {
 			adTargeting: [
 				{
@@ -189,6 +135,60 @@ export const Editorial: CAPIArticleType = {
 				},
 			],
 		},
+		UK: {
+			adTargeting: [
+				{
+					name: 'k',
+					value: [
+						'health',
+						'society',
+						'infectiousdiseases',
+						'coronavirus-outbreak',
+						'politics',
+						'conservatives',
+						'vaccines',
+						'uk/uk',
+						'boris-johnson',
+					],
+				},
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'tn',
+					value: ['editorials', 'comment'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/gaj9m',
+				},
+				{
+					name: 'co',
+					value: ['editorial'],
+				},
+				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'url',
+					value: '/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+				},
+			],
+		},
 		INT: {
 			adTargeting: [
 				{
@@ -240,6 +240,60 @@ export const Editorial: CAPIArticleType = {
 				{
 					name: 'url',
 					value: '/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+				},
+			],
+		},
+		EUR: {
+			adTargeting: [
+				{
+					name: 'k',
+					value: [
+						'health',
+						'society',
+						'infectiousdiseases',
+						'coronavirus-outbreak',
+						'politics',
+						'conservatives',
+						'vaccines',
+						'uk/uk',
+						'boris-johnson',
+					],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'tn',
+					value: ['editorials', 'comment'],
+				},
+				{
+					name: 'co',
+					value: ['editorial'],
+				},
+				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'url',
+					value: '/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/gaj9m',
+				},
+				{
+					name: 'edition',
+					value: 'eur',
 				},
 			],
 		},
@@ -932,6 +986,10 @@ export const Editorial: CAPIArticleType = {
 						url: '/crosswords/series/azed',
 					},
 				],
+			},
+			{
+				title: 'Corrections',
+				url: '/theguardian/series/corrections-and-clarifications',
 			},
 		],
 		brandExtensions: [
@@ -1642,7 +1700,7 @@ export const Editorial: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '7c97a8c0-2ae1-4ed1-8ae2-e6ffd08a849c',
+			elementId: 'd036486d-115f-4cc4-b735-e65d5dae5923',
 		},
 	],
 	canonicalUrl:
@@ -1654,32 +1712,32 @@ export const Editorial: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The greatest advances in the battle against the coronavirus have been made by modern science, but before there were vaccines, countries had to rely on older techniques: stopping people mingling; preventing new cases of the disease arriving from overseas. Britain’s record with lockdowns is not great (late to implement, premature in lifting), but with quarantine at the border there is barely even a record to defend. For much of last year there was a notional obligation on travellers from various countries to self-isolate on arrival in the UK, but with a shifting roster of places that qualified for “safe” travel corridors.</p>',
-					elementId: '6de3fe28-5e03-45af-8922-bd9fde587ab8',
+					elementId: '876d2ddd-264b-409f-af2f-d4c72744c6be',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>There were many categories of exemption. The regulations were unclear and poorly implemented. <a href="https://www.theguardian.com/world/commentisfree/2021/jan/28/uk-covid-travel-quarantine-hotel" title="">Efforts at enforcement have been patchy</a>. Essentially, self-isolation has been self-policed. Only towards the end of last year, as it became clear that mutant strains of the virus were spreading – and that Britain’s approach was persistently failing – did the government start focusing on <a href="https://www.theguardian.com/world/2021/jan/27/how-quarantine-rules-work-and-what-uk-government-is-planning" title="">quarantine as part of the anti-virus arsenal</a>. More travellers are now required to show proof of a negative Covid test and there are tighter restrictions on arrivals from certain “hotspot” countries. That approach is still flawed. People, and the virus they might carry, do not always travel straight from the heart of an outbreak to the UK. Mutations are dispersed along multiple paths.</p>',
-					elementId: 'ebcb2e01-d618-4790-96aa-6a369875c96d',
+					elementId: 'e10b23cd-c977-4924-9ed2-3ab8bd2538c3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Ministers have said further border measures are required, but cannot say when they will be applied. The new regime is expected to involve diverting large numbers of arrivals to government-approved hotels for up to 10 days, with an option of getting out sooner with a negative test. The Department for Transport and the Treasury <a href="https://www.theguardian.com/world/2021/feb/03/grant-shapps-resists-blanket-border-controls-to-stem-covid-in-britain" title="">have been squeamish</a> about the cost of such a regime. Passengers would get a bill, but the whole system would still be expensive and inflict another wound on an already injured aviation sector.</p>',
-					elementId: 'f2751426-37b1-4e82-acbe-aef19c7bf060',
+					elementId: 'd0d28929-fe8f-4acf-bb50-439cb4ed1658',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>But, as has been demonstrated many times in the pandemic, resisting tighter restrictions to avoid an immediate financial burden is a false economy. Delay allows the disease to spread. The onerous measures are still required and have to be in place for longer. That remains true even as the vaccination programme is rolled out. Not enough is yet known about vaccine resilience in the face of recently discovered coronavirus variants, let alone any future mutations. <a href="https://www.theguardian.com/world/2021/jan/22/covid-vaccines-what-are-the-implications-of-new-variants-of-virus" title="">The risk is not negligible.</a></p>',
-					elementId: '5af48d17-3179-4258-9d32-5edc1de69207',
+					elementId: 'c7a4b4a9-84d7-4c56-9938-fc40fb644bea',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Countries with the strongest records against disease have applied the full range of containment measures quickly and thoroughly, including efficient testing, contact tracing, and a presumption that all new arrivals face quarantine (with some flexibility for humanitarian exceptions, naturally). That principle should be the basis for the UK’s regime. A speedy vaccination roll-out has given Boris Johnson <a href="https://www.theguardian.com/society/2021/jan/31/daily-record-as-600000-people-in-the-uk-receive-covid-jabs-on-saturday" title="">cause to celebrate</a> his government’s accomplishments relative to other countries. Ministerial relief at having something to cheer is palpable, but it must not lead to neglect of other fronts in the battle or feed the culture of impatience and denial that causes many Conservative MPs to demand unwarranted easing of restrictions.</p>',
-					elementId: 'b3e0993b-8e78-41db-8530-4f8679e13591',
+					elementId: '9388cf6c-bd43-4355-8ab4-743c485d8851',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>No one should belittle the social, economic and psychological cost of anti-Covid restrictions. Quarantine, like lockdown, is a harsh instrument to be used only as an emergency resort. But we are now a year into such an emergency. The government’s haphazard approach, justified by a pursuit of short-term economic relief, has only prolonged the ordeal. The vaccine programme illuminates a way out. It would be a tragic squandering of that success if overreliance on new technology were to breed complacency regarding older but no less vital methods of protecting the public.</p>',
-					elementId: '087bc657-1373-4425-87f9-62c99840612d',
+					elementId: '50c68e52-e382-4b34-aef2-6c23de2d9751',
 				},
 			],
 			attributes: {
@@ -1700,7 +1758,7 @@ export const Editorial: CAPIArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://amp.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
+			'@id': 'https://www.theguardian.com/commentisfree/2021/feb/03/the-guardian-view-on-quarantine-an-old-method-and-a-vital-one',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
