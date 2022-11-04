@@ -8,6 +8,7 @@ import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { AgeWarning } from './AgeWarning';
 import { Form } from './CalloutNew/Form';
+import { CalloutMessageUs } from './CalloutMessageUs';
 import { CalloutShareComponent } from './CalloutShareComponent';
 
 const wrapperStyles = css`
@@ -142,6 +143,17 @@ export const CalloutBlockComponent = ({
 
 	const [isExpanded, setIsExpanded] = useState(false);
 
+	const [activeTab, setActiveTab] = useState('tab1');
+
+	//  Functions to handle Tab Switching
+	const handleTab1 = () => {
+		// update the state to tab1
+		setActiveTab('tab1');
+	};
+	const handleTab2 = () => {
+		// update the state to tab2
+		setActiveTab('tab2');
+	};
 	return (
 		<>
 			<figure data-print-layout="hide" css={wrapperStyles}>
@@ -202,7 +214,36 @@ export const CalloutBlockComponent = ({
 					</summary>
 					<CalloutShareComponent />
 
-					<Form formFields={formFields} onSubmit={() => {}} />
+					<div className="Tabs">
+						{/* Tab Nav */}
+						<div className="nav">
+							<button
+								type="button"
+								onClick={handleTab1}
+								className={activeTab === 'tab1' ? 'active' : ''}
+							>
+								Tab 1
+							</button>
+							<button
+								type="button"
+								onClick={handleTab2}
+								className={activeTab === 'tab2' ? 'active' : ''}
+							>
+								Tab 2
+							</button>
+						</div>
+
+						<div className="outlet">
+							{activeTab === 'tab1' ? (
+								<Form
+									formFields={formFields}
+									onSubmit={() => {}}
+								/>
+							) : (
+								<CalloutMessageUs />
+							)}
+						</div>
+					</div>
 					<span
 						css={buttonWrapperStyles}
 						aria-hidden="true"
