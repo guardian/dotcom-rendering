@@ -247,7 +247,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									<MostViewedFooter
 										tabs={[
 											{
-												trails: trails.slice(10),
+												trails: trails.slice(0, 10),
 											},
 										]}
 										sectionName="Most viewed"
