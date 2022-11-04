@@ -414,6 +414,7 @@ export const Card = ({
 							<SupportingContent
 								supportingContent={supportingContent}
 								alignment="vertical"
+								containerPalette={containerPalette}
 							/>
 						) : (
 							<></>
@@ -424,6 +425,7 @@ export const Card = ({
 			{hasSublinks && noOfSublinks > 2 ? (
 				<SupportingContent
 					supportingContent={supportingContent}
+					containerPalette={containerPalette}
 					alignment={
 						imagePosition === 'top' ||
 						imagePosition === 'bottom' ||
