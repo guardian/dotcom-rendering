@@ -91,7 +91,18 @@ const promises = results.map(async ({ id, webTitle: title }) => {
 						value,
 					};
 				}
-				case 'srcDoc':
+
+				case 'srcDoc': {
+					return {
+						status: 'missing',
+						attr,
+						// `srcdoc` are too long for github issues!
+						value: value
+							.replace(/<head>.+<\/head>/i, '')
+							.slice(0, 420),
+					};
+				}
+
 				case 'src':
 					return {
 						status: 'missing',

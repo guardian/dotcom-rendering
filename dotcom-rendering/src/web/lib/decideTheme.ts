@@ -14,6 +14,8 @@ export const decideTheme = ({ theme }: Partial<CAPIFormat>): ArticleTheme => {
 			return ArticlePillar.Lifestyle;
 		case 'SpecialReportTheme':
 			return ArticleSpecial.SpecialReport;
+		case 'SpecialReportAltTheme':
+			return ArticleSpecial.SpecialReportAlt;
 		case 'Labs':
 			return ArticleSpecial.Labs;
 		default:

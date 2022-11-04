@@ -258,6 +258,51 @@ export const WithMediaType = () => {
 	);
 };
 
+export const WithMediaTypeSpecialReportAlt = () => {
+	return (
+		<CardGroup>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Video,
+						theme: ArticleSpecial.SpecialReportAlt,
+					}}
+					mediaType="Video"
+					mediaDuration={30}
+					headlineText="Video"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Audio,
+						theme: ArticleSpecial.SpecialReportAlt,
+					}}
+					mediaType="Audio"
+					mediaDuration={90}
+					headlineText="Audio"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Gallery,
+						theme: ArticleSpecial.SpecialReportAlt,
+					}}
+					mediaType="Gallery"
+					headlineText="Gallery"
+				/>
+			</CardWrapper>
+		</CardGroup>
+	);
+};
+
 export const WithDifferentImagePositions = () => {
 	return (
 		<>
@@ -334,6 +379,48 @@ export const WithPulsingDot = () => {
 				{...basicCardProps}
 				showPulsingDot={true}
 				kickerText="Pulsing Dot"
+			/>
+		</CardWrapper>
+	);
+};
+
+export const WithPulsingDotSpecialReportAlt = () => {
+	return (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: ArticleSpecial.SpecialReportAlt,
+				}}
+				showPulsingDot={true}
+				kickerText="Pulsing Dot"
+			/>
+		</CardWrapper>
+	);
+};
+
+export const WithQuotes = () => {
+	return (
+		<CardWrapper>
+			<Card {...basicCardProps} showQuotes={true} kickerText="Quotes" />
+		</CardWrapper>
+	);
+};
+
+export const WithQuotesSpecialReportAlt = () => {
+	return (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticleSpecial.SpecialReportAlt,
+				}}
+				showQuotes={true}
+				kickerText="Quotes"
 			/>
 		</CardWrapper>
 	);
