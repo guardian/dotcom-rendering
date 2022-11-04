@@ -120,8 +120,16 @@ const init = async (): Promise<void> => {
 				const ccpaUUID = getCookie({ name: 'ccpaUUID' }) || '';
 				const consentStatus =
 					getCookie({ name: 'consentStatus' }) || '';
-				const personalisedAdvertising = consentState.aus.personalisedAdvertising ? 'true' : 'false';
-				return ['01:AUS', `06:${ccpaUUID}`, `07:${consentStatus}`, `08:${personalisedAdvertising}`];
+				const personalisedAdvertising = consentState.aus
+					.personalisedAdvertising
+					? 'true'
+					: 'false';
+				return [
+					'01:AUS',
+					`06:${ccpaUUID}`,
+					`07:${consentStatus}`,
+					`08:${personalisedAdvertising}`,
+				];
 			}
 			return [];
 		};
