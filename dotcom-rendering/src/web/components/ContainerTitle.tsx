@@ -61,10 +61,6 @@ const marginStyles = css`
 	${between.tablet.and.leftCol} {
 		margin-left: 10px;
 	}
-
-	${from.leftCol} {
-		margin-left: 0;
-	}
 	margin-bottom: ${space[2]}px;
 `;
 
