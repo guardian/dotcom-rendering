@@ -140,7 +140,7 @@ export const CalloutBlockComponent = ({
 }) => {
 	const palette = decidePalette(format);
 	const { title, description, formFields } = callout;
-	const [isBodyExpanded, setIsBodyExpanded] = useState(false);
+	const [isBodyExpanded, setIsBodyExpanded] = useState(true);
 
 	const hideOverlay = () => {
 		setIsBodyExpanded(true);
@@ -150,6 +150,14 @@ export const CalloutBlockComponent = ({
 	};
 
 	const [activeTab, setActiveTab] = useState('tab1');
+
+	const activeTabStyling = css`
+		background-color: inherit;
+		border-top: 8px solid ${news[400]};
+		border-bottom: 0px;
+		${activeTab === 'tab1' ? { borderLeft: '0px' } : {}}
+		${activeTab === 'tab2' ? { borderRight: '0px' } : {}}
+	`;
 
 	//  Functions to handle Tab Switching
 	const handleTab1 = () => {
@@ -224,7 +232,19 @@ export const CalloutBlockComponent = ({
 								type="button"
 								onClick={handleTab1}
 								className={activeTab === 'tab1' ? 'active' : ''}
-								css={tabStyles}
+								css={
+									activeTab === 'tab1'
+										? [activeTabStyling, tabStyles]
+										: tabStyles
+								}
+								style={
+									activeTab === 'tab1'
+										? {
+												backgroundColor: 'inherit',
+												borderBottom: '0px',
+										  }
+										: { backgroundColor: neutral[93] }
+								}
 							>
 								Tell us here
 							</button>
@@ -232,7 +252,19 @@ export const CalloutBlockComponent = ({
 								type="button"
 								onClick={handleTab2}
 								className={activeTab === 'tab2' ? 'active' : ''}
-								css={tabStyles}
+								css={
+									activeTab === 'tab2'
+										? [activeTabStyling, tabStyles]
+										: tabStyles
+								}
+								style={
+									activeTab === 'tab2'
+										? {
+												backgroundColor: 'inherit',
+												borderBottom: '0px',
+										  }
+										: { backgroundColor: neutral[93] }
+								}
 							>
 								Message us
 							</button>
