@@ -7,8 +7,8 @@ import PlusIcon from '../../static/icons/plus.svg';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Form } from './CalloutNew/Form';
-import { CalloutTermsAndConditions } from './CalloutTermsAndConditions';
 import { ShareCalloutComponent } from './ShareCalloutComponent';
+import { AgeWarning } from './AgeWarning';
 
 const wrapperStyles = css`
 	margin-bottom: 26px;
@@ -34,6 +34,8 @@ const backgroundColorStyle = css`
 `;
 
 const summaryStyles = css`
+	padding-left: 10px;
+	padding-right: 10px;
 	/* Removing default styles from summery tag */
 	ft ::-webkit-details-marker {
 		display: none;
@@ -60,7 +62,6 @@ const summaryStyles = css`
 `;
 
 const summaryContentWrapper = css`
-	padding-left: 10px;
 	visibility: visible;
 `;
 
@@ -99,6 +100,13 @@ const overlayStyles = css`
 	position: absolute;
 	bottom: 0;
 	width: 100%;
+	display: block;
+`;
+
+const ageWarningStyles = css`
+	position: absolute;
+	bottom: 8px;
+	right: 8px;
 	display: block;
 `;
 
@@ -258,6 +266,9 @@ export const CalloutBlockComponent = ({
 										: { display: '' }
 								}
 							/>
+							<div css={ageWarningStyles}>
+								<AgeWarning age={'2 weeks'} />
+							</div>
 							{!isExpanded && (
 								<span
 									onClick={hideOverlay}
@@ -289,7 +300,6 @@ export const CalloutBlockComponent = ({
 						</div>
 					</summary>
 					<ShareCalloutComponent />
-					<CalloutTermsAndConditions />
 
 					<Form formFields={formFields} onSubmit={() => {}} />
 					<span

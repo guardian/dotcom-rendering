@@ -4,6 +4,8 @@ import { textSans } from '@guardian/source-foundations';
 const shareCalloutStyles = css`
 	display: flex;
 	align-items: center;
+	padding-left: 10px;
+	padding-right: 10px;
 `;
 const shareCalloutTextStyles = css`
 	display: inline-block;
