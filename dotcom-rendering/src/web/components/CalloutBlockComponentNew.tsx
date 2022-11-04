@@ -123,6 +123,14 @@ const buttonWrapperStyles = css`
 	pointer-events: all;
 `;
 
+const tabStyles = css`
+	width: 192px;
+	height: 49px;
+	background-color: ${neutral[97]};
+	${body.medium({ fontWeight: 'bold' })}
+	text-align: left;
+`;
+
 export const CalloutBlockComponent = ({
 	callout,
 	format,
@@ -141,17 +149,13 @@ export const CalloutBlockComponent = ({
 		setIsBodyExpanded(false);
 	};
 
-	const [isExpanded, setIsExpanded] = useState(false);
-
 	const [activeTab, setActiveTab] = useState('tab1');
 
 	//  Functions to handle Tab Switching
 	const handleTab1 = () => {
-		// update the state to tab1
 		setActiveTab('tab1');
 	};
 	const handleTab2 = () => {
-		// update the state to tab2
 		setActiveTab('tab2');
 	};
 	return (
@@ -160,7 +164,7 @@ export const CalloutBlockComponent = ({
 				<details
 					css={[calloutDetailsStyles, backgroundColorStyle]}
 					aria-hidden={true}
-					open={isExpanded}
+					open={isBodyExpanded}
 				>
 					<summary css={summaryStyles}>
 						<div css={summaryContentWrapper}>
@@ -182,7 +186,7 @@ export const CalloutBlockComponent = ({
 							<div css={ageWarningStyles}>
 								<AgeWarning age={'2 weeks'} />
 							</div>
-							{!isExpanded && (
+							{!isBodyExpanded && (
 								<span
 									onClick={hideOverlay}
 									css={buttonWrapperStyles}
@@ -202,7 +206,7 @@ export const CalloutBlockComponent = ({
 										iconSide="left"
 										size="small"
 										icon={<PlusIcon />}
-										onClick={() => setIsExpanded(true)}
+										onClick={() => setIsBodyExpanded(true)}
 										custom-guardian="callout-form-open-button"
 										tabIndex={0}
 									>
@@ -215,21 +219,22 @@ export const CalloutBlockComponent = ({
 					<CalloutShareComponent />
 
 					<div className="Tabs">
-						{/* Tab Nav */}
 						<div className="nav">
 							<button
 								type="button"
 								onClick={handleTab1}
 								className={activeTab === 'tab1' ? 'active' : ''}
+								css={tabStyles}
 							>
-								Tab 1
+								Tell us here
 							</button>
 							<button
 								type="button"
 								onClick={handleTab2}
 								className={activeTab === 'tab2' ? 'active' : ''}
+								css={tabStyles}
 							>
-								Tab 2
+								Message us
 							</button>
 						</div>
 
@@ -249,12 +254,12 @@ export const CalloutBlockComponent = ({
 						aria-hidden="true"
 						onClick={showOverlay}
 					>
-						{isExpanded && (
+						{isBodyExpanded && (
 							<Button
 								iconSide="left"
 								size="small"
 								icon={<MinusIcon />}
-								onClick={() => setIsExpanded(false)}
+								onClick={() => setIsBodyExpanded(false)}
 								custom-guardian="callout-form-close-button"
 								css={css`
 									background-color: ${neutral[100]};
