@@ -615,6 +615,10 @@ const textArticleLinkHover = (format: ArticleFormat): string => {
 
 const textCardHeadline = (format: ArticleFormat): string => {
 	if (format.theme === ArticleSpecial.SpecialReport) return WHITE;
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
 	if (format.display === ArticleDisplay.Immersive) return BLACK;
 	switch (format.design) {
 		case ArticleDesign.Interview:
@@ -657,6 +661,8 @@ const textCardKicker = (format: ArticleFormat): string => {
 			format.design === ArticleDesign.Letter)
 	)
 		return brandAlt[400];
+	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[7];
+
 	if (format.theme === ArticleSpecial.SpecialReport) return brandAlt[400];
 	switch (format.design) {
 		case ArticleDesign.LiveBlog:
@@ -682,8 +688,6 @@ const textCardKicker = (format: ArticleFormat): string => {
 					return culture[500];
 				case ArticleSpecial.Labs:
 					return labs[400];
-				case ArticleSpecial.SpecialReportAlt:
-					return news[600];
 			}
 		default:
 			return pillarPalette[format.theme].main;
@@ -691,6 +695,9 @@ const textCardKicker = (format: ArticleFormat): string => {
 };
 
 const textCardFooter = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[100];
+
 	switch (format.design) {
 		case ArticleDesign.Comment:
 		case ArticleDesign.Letter:
@@ -826,6 +833,8 @@ const backgroundAvatar = (format: ArticleFormat): string => {
 };
 
 const backgroundCard = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return palette.specialReportAlt[700];
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return specialReport[300];
 	switch (format.design) {
@@ -1475,6 +1484,7 @@ const borderArticleLinkHover = (format: ArticleFormat): string => {
 };
 
 const topBarCard = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[60];
 	if (format.theme === ArticleSpecial.SpecialReport)
 		return brandAltBackground.primary;
 	if (format.design === ArticleDesign.Analysis) {
@@ -1563,6 +1573,14 @@ const borderLines = (format: ArticleFormat): string => {
 			format.design === ArticleDesign.Letter)
 	)
 		return neutral[46];
+
+	if (
+		format.theme === ArticleSpecial.SpecialReportAlt &&
+		(format.design === ArticleDesign.Comment ||
+			format.design === ArticleDesign.Letter)
+	)
+		return transparentColour(neutral[60], 0.3);
+
 	return neutral[86];
 };
 
@@ -1655,6 +1673,8 @@ const textSignInLink = (format: ArticleFormat): string => {
 };
 
 const textCarouselTitle = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt) return neutral[7];
+
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
 			case ArticlePillar.News:
@@ -1767,7 +1787,7 @@ const backgroundCarouselDot = (format: ArticleFormat): string => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
+			return palette.specialReportAlt[100];
 	}
 };
 

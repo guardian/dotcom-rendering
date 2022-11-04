@@ -84,7 +84,10 @@ const cardStyles = (
 		`;
 	}
 
-	if (format.theme === ArticleSpecial.SpecialReport) {
+	if (
+		format.theme === ArticleSpecial.SpecialReport ||
+		format.theme === ArticleSpecial.SpecialReportAlt
+	) {
 		return css`
 			${baseCardStyles};
 			:hover {
