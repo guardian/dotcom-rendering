@@ -1,12 +1,20 @@
 import { css } from '@emotion/react';
+import { CalloutMessenger } from './CalloutMessenger';
+import { CalloutTermsAndConditions } from './CalloutTermsAndConditions';
+
+const formStyles = css`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding-left: 10px;
+	padding-right: 10px;
+`;
 
 export const CalloutMessageUs = () => {
-	const styles = css`
-		background-color: red;
-		display: inline-block;
-		width: 200px;
-		height: 200px;
-	`;
-
-	return <div css={styles}>Message us</div>;
+	return (
+		<div css={formStyles}>
+			<CalloutTermsAndConditions />
+			<CalloutMessenger />
+		</div>
+	);
 };

@@ -156,7 +156,6 @@ export const CalloutBlockComponent = ({
 		border-top: 8px solid ${news[400]};
 		border-bottom: 0px;
 		${activeTab === 'tab1' ? { borderLeft: '0px' } : {}}
-		${activeTab === 'tab2' ? { borderRight: '0px' } : {}}
 	`;
 
 	//  Functions to handle Tab Switching
