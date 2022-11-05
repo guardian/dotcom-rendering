@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { news } from '@guardian/source-foundations';
+import { news, space } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { CalloutTermsAndConditions } from '../CalloutTermsAndConditions';
@@ -13,8 +13,8 @@ const formStyles = css`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: ${space[2]}px;
+	padding-right: ${space[2]}px;
 `;
 
 const formFieldWrapperStyles = css`
@@ -26,7 +26,7 @@ const footerPaddingStyles = css`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	padding-bottom: 15px;
+	padding-bottom: ${space[4]}px;
 `;
 
 type FormDataType = { [key in string]: any };

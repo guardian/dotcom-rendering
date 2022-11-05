@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { body, headline, neutral, news } from '@guardian/source-foundations';
+import {
+	body,
+	headline,
+	neutral,
+	news,
+	space,
+} from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { useState } from 'react';
 import MinusIcon from '../../static/icons/minus.svg';
@@ -12,17 +18,17 @@ import { CalloutMessageUs } from './CalloutMessageUs';
 import { CalloutShareComponent } from './CalloutShareComponent';
 
 const wrapperStyles = css`
-	margin-bottom: 26px;
-	margin-top: 16px;
-	padding-left: 10px;
-	padding-right: 10px;
+	margin-bottom: ${space[6]}px;
+	margin-top: ${space[4]}px;
+	padding-left: ${space[2]}px;
+	padding-right: ${space[2]}px;
 `;
 
 const calloutDetailsStyles = css`
 	border-top: 1px ${neutral[86]} solid;
 	border-bottom: 1px ${neutral[86]} solid;
 	position: relative;
-	padding-bottom: 10px;
+	padding-bottom: ${space[2]}px;
 
 	/* IE does not support summary HTML elements, so we need to hide children ourself */
 	:not([open]) > *:not(summary) {
@@ -35,8 +41,8 @@ const backgroundColorStyle = css`
 `;
 
 const summaryStyles = css`
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: ${space[2]}px;
+	padding-right: ${space[2]}px;
 	/* Removing default styles from summery tag */
 	ft ::-webkit-details-marker {
 		display: none;
@@ -83,7 +89,7 @@ const titleStyles = css`
 
 const subtitleTextHeaderStyles = css`
 	${headline.xxsmall()}
-	padding-bottom: 8px;
+	padding-bottom: ${space[2]}px;
 `;
 
 const descriptionStyles = css`
@@ -106,8 +112,8 @@ const overlayStyles = css`
 
 const ageWarningStyles = css`
 	position: absolute;
-	bottom: 8px;
-	right: 8px;
+	bottom: ${space[2]}px;
+	right: ${space[2]}px;
 	display: block;
 `;
 
@@ -115,7 +121,6 @@ const buttonWrapperStyles = css`
 	position: absolute;
 	cursor: pointer;
 	margin-top: -5px;
-
 	visibility: visible;
 
 	/* We need to ensure our pointer-events are turned back on on the button */
@@ -149,11 +154,11 @@ export const CalloutBlockComponent = ({
 		setIsBodyExpanded(false);
 	};
 
-	const [activeTab, setActiveTab] = useState('tab1');
+	const [activeTab, setActiveTab] = useState('tab2');
 
 	const activeTabStyling = css`
 		background-color: inherit;
-		border-top: 8px solid ${news[400]};
+		border-top: ${space[2]}px solid ${news[400]};
 		border-bottom: 0px;
 		${activeTab === 'tab1' ? { borderLeft: '0px' } : {}}
 	`;

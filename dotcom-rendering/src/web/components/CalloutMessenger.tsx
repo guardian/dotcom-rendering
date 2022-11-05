@@ -3,6 +3,7 @@ import { Button } from '@guardian/source-react-components';
 import { textSans } from '@guardian/source-foundations';
 
 const rowStyles = css`
+	border-top: 1px solid grey;
 	display: flex;
 	/* display: inline-block; */
 `;
