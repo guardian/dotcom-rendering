@@ -4,7 +4,6 @@ import { neutral, textSans, space } from '@guardian/source-foundations';
 const fieldLabelStyles = css`
 	${textSans.small()}
 	color: ${neutral[46]};
-	padding-top: ${space[4]}px;
 	padding-bottom: ${space[4]}px;
 `;
 
