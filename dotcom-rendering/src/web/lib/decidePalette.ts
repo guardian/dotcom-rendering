@@ -1977,7 +1977,8 @@ export const decidePalette = (
 			syndicationButton: textSyndicationButton(format),
 			articleLink: textArticleLink(format),
 			articleLinkHover: textArticleLinkHover(format),
-			cardHeadline: textCardHeadline(format),
+			cardHeadline:
+				overrides?.text.cardHeadline ?? textCardHeadline(format),
 			dynamoHeadline:
 				overrides?.text.dynamoHeadline ?? textCardHeadline(format),
 			cardByline: overrides?.text.cardByline ?? textCardByline(format),
