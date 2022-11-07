@@ -84,7 +84,7 @@ const getMobileAdPositions = (
 		isNetworkFront,
 	);
 
-	const positions: (number | undefined)[] = collections
+	const positions: number[] = collections
 		.map((collection, collectionIndex) => {
 			const isThrasher = collection.collectionType === 'fixed/thrasher';
 			const isFirst = collectionIndex === 0;
