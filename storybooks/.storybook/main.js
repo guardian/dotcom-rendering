@@ -61,6 +61,9 @@ module.exports = {
 			new webpack.DefinePlugin({
 				process: '{}',
 			}),
+			new webpack.ProvidePlugin({
+				Buffer: ['buffer', 'Buffer'],
+			})
 		);
 
 		return config;

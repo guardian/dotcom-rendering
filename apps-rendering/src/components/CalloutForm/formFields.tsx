@@ -1,19 +1,19 @@
-import type { ReactElement } from 'react';
 import { css } from '@emotion/react';
-import { neutral, textSans, remSpace } from '@guardian/source-foundations';
 import type { SerializedStyles } from '@emotion/react';
-import {text } from '@guardian/common-rendering/src/editorialPalette';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { darkModeStyles } from 'styles';
+import { remSpace, textSans } from '@guardian/source-foundations';
 import {
+	Option,
+	Select,
 	TextArea,
 	TextInput,
-	Select,
-	Option,
 } from '@guardian/source-react-components';
 import FileInput from 'components/FileInput';
 import RadioInput from 'components/RadioInput';
+import type { ReactElement } from 'react';
+import { darkModeStyles } from 'styles';
 
 const disclaimerStyles = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.small()};
@@ -27,37 +27,41 @@ const disclaimerStyles = (format: ArticleFormat): SerializedStyles => css`
 	}
 `;
 
-const renderDisclaimer = (format: ArticleFormat) => (
+const renderDisclaimer = (format: ArticleFormat): ReactElement => (
 	<div css={disclaimerStyles(format)}>
-		You must be 18 or over to fill in this form. Only the Guardian
-		can see your contributions and one of our journalists may
-		contact you to discuss further. For more information please see
-		our <a href="https://www.theguardian.com/help/terms-of-service">terms of service</a> and <a href="https://www.theguardian.com/help/privacy-policy">privacy policy</a>.
+		You must be 18 or over to fill in this form. Only the Guardian can see
+		your contributions and one of our journalists may contact you to discuss
+		further. For more information please see our{' '}
+		<a href="https://www.theguardian.com/help/terms-of-service">
+			terms of service
+		</a>{' '}
+		and{' '}
+		<a href="https://www.theguardian.com/help/privacy-policy">
+			privacy policy
+		</a>
+		.
 	</div>
 );
 
-const renderField = ({
-	type,
-	description,
-	label,
-	mandatory,
-	options,
-	id,
-}: FormField, format: ArticleFormat): ReactElement | null => {
+const renderField = (
+	{ type, description, label, mandatory, options, id }: FormField,
+	format: ArticleFormat,
+): ReactElement | null => {
 	const name = `field_${id}`;
 	const input = css`
 		margin-bottom: ${remSpace[4]};
 	`;
+	// TODO: Get list of valid field types from formstack
 	switch (type) {
 		case 'text':
 			return (
-					<TextInput
-						cssOverrides={input}
-						supporting={description}
-						name={name}
-						label={label}
-						optional={!mandatory}
-					/>
+				<TextInput
+					cssOverrides={input}
+					supporting={description}
+					name={name}
+					label={label}
+					optional={!mandatory}
+				/>
 			);
 		case 'textarea':
 			return (
@@ -67,8 +71,8 @@ const renderField = ({
 					name={name}
 					label={label}
 					optional={!mandatory}
-					/>
-					);
+				/>
+			);
 		case 'file':
 			return (
 				<FileInput
@@ -97,23 +101,17 @@ const renderField = ({
 					cssOverrides={input}
 				>
 					{options.map(({ value, label }) => {
-				return (
-					<Option
-						key={value}
-						value={value}
-					>
-						{label}
-					</Option>
-				);
-			})}
-			</Select>
+						return (
+							<Option key={value} value={value}>
+								{label}
+							</Option>
+						);
+					})}
+				</Select>
 			);
 		default:
 			return null;
 	}
 };
 
-export {
-	renderField,
-	renderDisclaimer
-}
+export { renderField, renderDisclaimer };

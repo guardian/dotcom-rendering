@@ -1,13 +1,10 @@
-import type { FC } from 'react';
 import { css } from '@emotion/react';
-import { error, textSans, remSpace, until } from '@guardian/source-foundations';
-import type { ArticleFormat } from '@guardian/libs';
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
-
-import {
-	Button,
-} from '@guardian/source-react-components';
-import { renderDisclaimer, renderField } from './formFields'
+import type { ArticleFormat } from '@guardian/libs';
+import { error, remSpace, textSans, until } from '@guardian/source-foundations';
+import { Button } from '@guardian/source-react-components';
+import type { FC } from 'react';
+import { renderDisclaimer, renderField } from './formFields';
 
 export interface CalloutProps {
 	campaign: Campaign;
@@ -31,17 +28,14 @@ const buttonStyles = css`
 	}
 `;
 
-
 const CalloutForm: FC<CalloutProps> = ({ campaign, format }) => {
 	return (
 		<form css={formStyles} action="#" method="post">
 			{renderDisclaimer(format)}
-			<input
-				name="formId"
-				type="hidden"
-				value={campaign.fields.formId}
-			/>
-			{campaign.fields.formFields.map(field => renderField(field, format))}
+			<input name="formId" type="hidden" value={campaign.fields.formId} />
+			{campaign.fields.formFields.map((field) =>
+				renderField(field, format),
+			)}
 			<p css={errorStyles} className="js-error-message"></p>
 			<Button
 				// TODO: The button should be using the format Branding
@@ -52,9 +46,8 @@ const CalloutForm: FC<CalloutProps> = ({ campaign, format }) => {
 			>
 				Submit
 			</Button>
-
-	</form>
+		</form>
 	);
 };
 
-export default CalloutForm
+export default CalloutForm;
