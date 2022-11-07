@@ -153,7 +153,7 @@ type BodyElement =
 			kind: ElementKind.Callout;
 			id: string;
 			campaign: Campaign;
-			description: DocumentFragment;
+			description: Option<DocumentFragment>;
 	  }
 	| {
 			kind: ElementKind.LiveEvent;
@@ -367,7 +367,7 @@ const parse =
 						kind: ElementKind.Callout,
 						id,
 						campaign,
-						description,
+						description: fromNullable(description),
 					});
 				}
 

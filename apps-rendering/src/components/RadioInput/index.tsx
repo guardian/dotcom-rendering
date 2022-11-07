@@ -11,24 +11,24 @@ interface RadioInputProps {
 	cssOverrides?: SerializedStyles;
 }
 
-const RadioInput = ({label, name, options, supporting, cssOverrides}: RadioInputProps): ReactElement => (
-		<RadioGroup
-			label={label}
-			name={name}
-			orientation="horizontal"
-			supporting={supporting}
-			cssOverrides={cssOverrides}
-		>
-			{options.map(({ value, label }) => {
-				return (
-					<Radio
-						key={value}
-						value={value}
-						label={label}
-					/>
-				);
-			})}
-		</RadioGroup>
+const RadioInput = ({
+	label,
+	name,
+	options,
+	supporting,
+	cssOverrides,
+}: RadioInputProps): ReactElement => (
+	<RadioGroup
+		label={label}
+		name={name}
+		orientation="horizontal"
+		supporting={supporting}
+		cssOverrides={cssOverrides}
+	>
+		{options.map(({ value, label }) => {
+			return <Radio key={value} value={value} label={label} />;
+		})}
+	</RadioGroup>
 );
 
 export default RadioInput;
