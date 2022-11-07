@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
+import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
@@ -11,6 +12,7 @@ import type { Option } from '@guardian/types';
 import { fromNullable, map, withDefault } from '@guardian/types';
 import { parseAtom } from 'atoms';
 import { ElementKind } from 'bodyElementKind';
+import { getCallout } from 'campaign';
 import { formatDate } from 'date';
 import { parseAudio, parseGeneric, parseInstagram, parseVideo } from 'embed';
 import type { Embed } from 'embed';
@@ -21,8 +23,6 @@ import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
 import { Result } from 'result';
-import { FormField } from '@guardian/apps-rendering-api-models/formField';
-import { getCallout } from 'campaign';
 
 // ----- Types ----- //
 
@@ -132,7 +132,7 @@ type Callout = {
 	formId: number;
 	formFields: FormField[];
 	description: DocumentFragment;
-}
+};
 
 type BodyElement =
 	| Text
@@ -354,14 +354,22 @@ const parse =
 
 				if (id) {
 					return getCallout(id, campaigns)
-						.map(({ callout, formFields, description, formId }) => Result.ok<string, Callout>({
-							kind: ElementKind.Callout,
-							heading: callout,
-							formFields,
-							formId,
-							description: context.docParser(description ?? ''),
-						}))
-						.withDefault(Result.err<string, Callout>('This piece contains a callout but no matching campaign'));
+						.map(({ callout, formFields, description, formId }) =>
+							Result.ok<string, Callout>({
+								kind: ElementKind.Callout,
+								heading: callout,
+								formFields,
+								formId,
+								description: context.docParser(
+									description ?? '',
+								),
+							}),
+						)
+						.withDefault(
+							Result.err<string, Callout>(
+								'This piece contains a callout but no matching campaign',
+							),
+						);
 				}
 
 				return compose(

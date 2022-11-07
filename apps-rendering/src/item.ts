@@ -23,6 +23,7 @@ import type { Option } from '@guardian/types';
 import { getPillarFromId } from 'articleFormat';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
+import { getReport } from 'campaign';
 import type { Logo } from 'capi';
 import {
 	articleMainMedia,
@@ -50,7 +51,6 @@ import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
 import { Result } from 'result';
-import { getReport } from 'campaign';
 
 // ----- Item Type ----- //
 
@@ -284,8 +284,9 @@ const itemFields = (
 	return {
 		theme: getReport(campaigns ?? []).withDefault(
 			Optional.fromNullable(content.pillarId)
-			.flatMap(getPillarFromId)
-			.withDefault(ArticlePillar.News)),
+				.flatMap(getPillarFromId)
+				.withDefault(ArticlePillar.News),
+		),
 		display: getDisplay(content),
 		headline: content.fields?.headline ?? '',
 		standfirst: pipe(

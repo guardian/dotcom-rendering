@@ -189,7 +189,13 @@ const renderField = ({
 	}
 };
 
-const CalloutForm: FC<CalloutProps> = ({ heading, description, formId, formFields, format }) => (
+const CalloutForm: FC<CalloutProps> = ({
+	heading,
+	description,
+	formId,
+	formFields,
+	format,
+}) => (
 	<details className="js-callout" css={calloutStyles}>
 		<summary css={summaryStyles}>
 			<div css={kickerStyles}>
@@ -223,11 +229,7 @@ const CalloutForm: FC<CalloutProps> = ({ heading, description, formId, formField
 
 		<form css={formStyles} action="#" method="post">
 			<div>
-				<input
-					name="formId"
-					type="hidden"
-					value={formId}
-				/>
+				<input name="formId" type="hidden" value={formId} />
 				{formFields.map(renderField)}
 				<p css={errorStyles} className="js-error-message"></p>
 				<Button
