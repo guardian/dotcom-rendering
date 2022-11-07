@@ -262,6 +262,8 @@ export const CardHeadline = ({
 						css={css`
 							color: ${isDynamo
 								? palette.text.dynamoHeadline
+								: showLine
+								? palette.text.dynamoHeadline
 								: palette.text.cardHeadline};
 						`}
 						className="show-underline"
