@@ -16,6 +16,7 @@ import { AgeWarning } from './AgeWarning';
 import { Form } from './CalloutNew/Form';
 import { CalloutMessageUs } from './CalloutMessageUs';
 import { CalloutShareComponent } from './CalloutShareComponent';
+import { calloutCampaign } from 'fixtures/manual/calloutCampaign';
 
 const wrapperStyles = css`
 	margin-bottom: ${space[6]}px;
@@ -148,7 +149,7 @@ export const CalloutBlockComponent = ({
 	messageUs?: boolean;
 }) => {
 	const palette = decidePalette(format);
-	const { title, description, formFields } = callout;
+	const { title, description, formFields, activeUntil } = callout;
 	const [isBodyExpanded, setIsBodyExpanded] = useState(
 		isNonCollapsible ? true : false,
 	);
@@ -159,7 +160,6 @@ export const CalloutBlockComponent = ({
 	const showOverlay = () => {
 		setIsBodyExpanded(false);
 	};
-
 	const [activeTab, setActiveTab] = useState(messageUs ? 'tab2' : 'tab1');
 
 	const activeTabStyling = css`
