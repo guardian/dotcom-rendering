@@ -16,21 +16,19 @@ jobs:
 
         steps:
             - uses: actions/checkout@v3
-            - uses: guardian/actions-setup-node@main
-
-            - uses: actions/cache@v2
+            - uses: actions/setup-node@v3
               with:
-                  path: ~/.npm
-                  key: node-${{ hashFiles('**/package-lock.json') }}
-                  restore-keys: node-
+                node-version-file: '.nvmrc'
+                cache: 'yarn'
+
             - name: install
-              run: npm ci
+              run: yarn --frozen-lockfile
               working-directory: apps-rendering
             - name: run
               working-directory: apps-rendering
               run: |
                   npm install -g ngrok
-                  npm run watch & 
+                  npm run watch &
                   timeout 1h ngrok http 8080 -log=stdout -host-header=rewrite | \
                     grep --line-buffered -o 'https://.*' | \
                     xargs -L1 -I{} -t \

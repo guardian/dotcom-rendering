@@ -30,6 +30,13 @@ const editionList: EditionLinkType[] = [
 		title: 'International edition',
 		locale: 'en-gb',
 	},
+	{
+		url: '/preference/edition/eur',
+		editionId: 'EUR',
+		longTitle: 'Europe edition',
+		title: 'Europe edition',
+		locale: 'en-gb',
+	},
 ];
 
 export const getEditionFromId = (editionId: EditionId): EditionLinkType => {
