@@ -108,7 +108,7 @@ const getMobileAdPositions = (
 		.map((shouldDisplayAd, collectionIndex) =>
 			shouldDisplayAd ? collectionIndex : undefined,
 		)
-		.filter((index) => typeof index === 'number')
+		.filter((index): index is number => typeof index === 'number')
 		// Should insert no more than 10 ads
 		.slice(0, 10);
 	return positions;
