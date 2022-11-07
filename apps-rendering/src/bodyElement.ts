@@ -126,6 +126,14 @@ interface NewsletterSignUp extends Omit<Newsletter, 'theme'> {
 	theme: ArticleTheme;
 }
 
+type Callout = {
+	kind: ElementKind.Callout;
+	heading: string;
+	formId: number;
+	formFields: FormField[];
+	description: DocumentFragment;
+}
+
 type BodyElement =
 	| Text
 	| HeadingTwo
@@ -151,13 +159,7 @@ type BodyElement =
 			content: NodeList;
 	  }
 	| EmbedElement
-	| {
-			kind: ElementKind.Callout;
-			heading: string;
-			formId: number;
-			formFields: FormField[];
-			description: DocumentFragment;
-	  }
+	| Callout
 	| {
 			kind: ElementKind.LiveEvent;
 			linkText: string;
@@ -352,13 +354,14 @@ const parse =
 
 				if (id) {
 					return getCallout(id, campaigns)
-						.map(({ callout, formFields, description, formId }) => ({
+						.map(({ callout, formFields, description, formId }) => Result.ok<string, Callout>({
 							kind: ElementKind.Callout,
 							heading: callout,
 							formFields,
 							formId,
 							description: context.docParser(description ?? ''),
-						}));
+						}))
+						.withDefault(Result.err<string, Callout>('This piece contains a callout but no matching campaign'));
 				}
 
 				return compose(
