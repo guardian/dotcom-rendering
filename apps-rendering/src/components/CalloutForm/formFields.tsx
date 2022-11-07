@@ -51,7 +51,6 @@ const renderField = (
 	const input = css`
 		margin-bottom: ${remSpace[4]};
 	`;
-	// TODO: Get list of valid field types from formstack
 	switch (type) {
 		case 'text':
 			return (
