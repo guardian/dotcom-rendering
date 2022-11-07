@@ -1,25 +1,50 @@
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { calloutCampaign } from '../../../fixtures/manual/calloutCampaign';
 import { CalloutBlockComponent } from './CalloutBlockComponentNew';
-import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+
+const mockFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.News,
+};
+export const Collapsible = () => {
+	return (
+		<CalloutBlockComponent
+			isNonCollapsible={false}
+			callout={calloutCampaign}
+			format={mockFormat}
+		/>
+	);
+};
+
+Collapsible.story = { name: 'Collapsible' };
+
+export const NonCollapsible = () => {
+	return (
+		<CalloutBlockComponent
+			isNonCollapsible={true}
+			callout={calloutCampaign}
+			format={mockFormat}
+		/>
+	);
+};
+
+NonCollapsible.story = { name: 'NonCollapsible' };
+
+export const MessageUs = () => {
+	return (
+		<CalloutBlockComponent
+			isNonCollapsible={true}
+			callout={calloutCampaign}
+			format={mockFormat}
+			messageUs={true}
+		/>
+	);
+};
+
+MessageUs.story = { name: 'Message Us' };
 
 export default {
 	component: CalloutBlockComponent,
 	title: 'Components/CalloutBlockComponentNew',
 };
-
-export const Default = () => {
-	return (
-		<>
-			<CalloutBlockComponent
-				callout={calloutCampaign}
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-			/>
-		</>
-	);
-};
-
-Default.story = { name: 'default' };

@@ -139,13 +139,19 @@ const tabStyles = css`
 export const CalloutBlockComponent = ({
 	callout,
 	format,
+	isNonCollapsible,
+	messageUs,
 }: {
 	callout: CalloutBlockElement;
 	format: ArticleFormat;
+	isNonCollapsible: boolean;
+	messageUs?: boolean;
 }) => {
 	const palette = decidePalette(format);
 	const { title, description, formFields } = callout;
-	const [isBodyExpanded, setIsBodyExpanded] = useState(true);
+	const [isBodyExpanded, setIsBodyExpanded] = useState(
+		isNonCollapsible ? true : false,
+	);
 
 	const hideOverlay = () => {
 		setIsBodyExpanded(true);
@@ -154,7 +160,7 @@ export const CalloutBlockComponent = ({
 		setIsBodyExpanded(false);
 	};
 
-	const [activeTab, setActiveTab] = useState('tab2');
+	const [activeTab, setActiveTab] = useState(messageUs ? 'tab2' : 'tab1');
 
 	const activeTabStyling = css`
 		background-color: inherit;
