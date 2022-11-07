@@ -1296,10 +1296,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@guardian/apps-rendering-api-models@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@guardian/apps-rendering-api-models/-/apps-rendering-api-models-1.1.1.tgz#ae6411927534f20bf4f4e41d948c8d2a65346fa9"
-  integrity sha512-WR051+HS28SJUPd0iI7trkTFTh5hSt7sPoLuB6hzF4RHvwNKSxmPexstR35W53uiQ6UO4vUYjrCBjI/OhACcPg==
+"@guardian/apps-rendering-api-models@0.0.0-2022-11-03-SNAPSHOT":
+  version "0.0.0-2022-11-03-SNAPSHOT"
+  resolved "https://registry.yarnpkg.com/@guardian/apps-rendering-api-models/-/apps-rendering-api-models-0.0.0-2022-11-03-SNAPSHOT.tgz#c028b830d3eaab9e76b2cee5b9aacade92a76eac"
+  integrity sha512-0Mfzaunk65Mn+PLiSq3nxGBtjoRYNB+IAo+dT3HIDCj5lVqdR9rIpbbrh6Ws9OT5dk9/RX62iiJFSJxg/LT8Iw==
   dependencies:
     "@guardian/content-api-models" "^17.3.0"
     "@guardian/content-atom-model" "^3.4.0"
