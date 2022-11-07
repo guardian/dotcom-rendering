@@ -6,7 +6,7 @@ import { neutral } from '@guardian/source-foundations';
 const textCardHeadline = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return '#121212';
+			return '#ffffff';
 		case 'LongRunningAltPalette':
 			return '#121212';
 		case 'SombrePalette':
