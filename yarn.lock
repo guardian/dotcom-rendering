@@ -2806,10 +2806,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^23.7.2":
-  version "23.7.2"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-23.7.2.tgz#3ec66b9e7c5f029cd0024429fea2740c95bc5161"
-  integrity sha512-BgTfnecyWAZlyf3uqT/JwXyQegIv017DKbUlV0cjVjeHThkGhK+vDapxtelwqx2BClkbaCgAtngqSLOrnTMakA==
+"@guardian/atoms-rendering@^23.8.1":
+  version "23.8.1"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-23.8.1.tgz#cd738ef65b67c2d6555952a10ae132c0bcfe4955"
+  integrity sha512-Z+HAoFZB2SMilWs90OLOcqrnkOmY9Xot7Arl6KjvEB5Au4fjzSTQmIxO8iV9j3igNwpQdGm2qp/364A0WpTo8A==
   dependencies:
     is-mobile "^3.1.1"
 
@@ -2823,10 +2823,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/browserslist-config/-/browserslist-config-2.0.3.tgz#1c8b832ab564b257f8146ca1b3183b7683026ec9"
   integrity sha512-mALAjz+4Hb2zLxfVz11PSKp6410boWqf0FFYhgzMKOhby0bZjfEKsQIH//U15M5ELibIMG1ryHSP/SFV4C2ovg==
 
-"@guardian/commercial-core@^4.3.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-4.3.0.tgz#f04bc56d4eedef9feb2a4c844142a7b11082d9bd"
-  integrity sha512-T7aE9kqc0JCNaASh7iHof6+MMOTnoEwinYiIjbJSjMoNRfuMSKIfLpWjZfZ8w58uvOygIx6MJDFTRdyT5J5Fvw==
+"@guardian/commercial-core@^4.21.0":
+  version "4.21.0"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-4.21.0.tgz#d6ad678a563bd82c3ed738bc4f77a0c7494a5120"
+  integrity sha512-OpME2iB6Dosvdu7MF8npzgIeRFOPWwdeSVNaUI3aB1wqU+FQh47cozGk1BASgCXlsUwhhGvQbx5vTBkDiptsgQ==
 
 "@guardian/consent-management-platform@10.11.1":
   version "10.11.1"
