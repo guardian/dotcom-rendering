@@ -27,7 +27,6 @@ const fieldLabelStyles = css`
 	color: ${neutral[46]};
 `;
 
-// TODO: Can we use button styling rather than copying and pasting it?
 const customUpload = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.small()};
 	color: ${text.interactiveAtomLink(format)};
@@ -71,7 +70,6 @@ const FileInput = ({
 		<p css={fieldLabelStyles}>
 			May not work on some mobile devices, or files may be too large.
 		</p>
-		{/* TODO: Check this work on mobile? */}
 		<div css={customUpload(format)}>
 			Choose File
 			<input

@@ -91,9 +91,11 @@ const Callout: FC<CalloutProps> = ({ campaign, format, description }) => {
 						<h4 css={headingTextHeaderStyles}>{name}</h4>
 						{maybeRender(description, (description) => (
 							<div css={descriptionStyles}>
-								{/* TODO: Check if we can use the standfirst renderer like this
-								the plaintext renderer doesn't give us links etc
-								(which were included in the eg data) */}
+								{/* TODO: Should we rename the renderStandfirstText fn,
+								or create a new renderCalloutDescription fn? The standfirst allows
+								links and lists and bold/italics.
+								Callout descriptions support bold/italics/links only
+								*/}
 								{renderStandfirstText(description, format)}
 							</div>
 						))}

@@ -127,7 +127,7 @@ const buttonIcon = css`
 	}
 `;
 
-// TODO: Should there be a skip to end of content?
+// TODO: Split adding a skip to end of callout link into a new ticket
 const ExpandingWrapper: FC<ExpandingWrapperProps> = ({
 	format,
 	renderExtra,
