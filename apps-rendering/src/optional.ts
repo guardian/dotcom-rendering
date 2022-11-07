@@ -30,10 +30,10 @@ abstract class Optional<A> {
 	abstract flatMap<B>(f: (a: A) => Optional<B>): Optional<B>;
 
 	/**
-	 * Returns the value if `Some`, otherwise returns `a`. You can think of it
+	 * Returns the value if `Some`, otherwise returns `b`. You can think of it
 	 * as "unwrapping" the {@linkcode Optional}, getting you back a plain value.
-	 * @param a The value to fall back to if the `Optional` is `None`
-	 * @returns {A} The value for a `Some`, `a` for a `None`
+	 * @param b The value to fall back to if the `Optional` is `None`
+	 * @returns {A | B} The value for a `Some`, `b` for a `None`
 	 * @example
 	 * const bylineOne = Optional.some('CP Scott');
 	 * bylineOne.withDefault('Jane Smith'); // Returns 'CP Scott'
@@ -41,7 +41,7 @@ abstract class Optional<A> {
 	 * const bylineTwo = Optional.none();
 	 * bylineTwo.withDefault('Jane Smith'); // Returns 'Jane Smith'
 	 */
-	abstract withDefault(a: A): A;
+	abstract withDefault<B>(b: B): A | B;
 
 	/**
 	 * Temporary method to convert to the old `Option` type.
@@ -168,7 +168,7 @@ class Some<A> extends Optional<A> {
 		return f(this.value);
 	}
 
-	withDefault(_a: A): A {
+	withDefault<B>(_b: B): A | B {
 		return this.value;
 	}
 
@@ -195,8 +195,8 @@ class None<A> extends Optional<A> {
 		return Optional.none();
 	}
 
-	withDefault(a: A): A {
-		return a;
+	withDefault<B>(b: B): A | B {
+		return b;
 	}
 
 	toOption(): Option<A> {
