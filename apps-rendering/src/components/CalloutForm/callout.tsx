@@ -1,15 +1,19 @@
 import { css } from '@emotion/react';
-import {  renderStandfirstText} from 'renderer';
-import { maybeRender } from 'lib';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
-import { body, headline, neutral, remSpace } from '@guardian/source-foundations';
-import CalloutForm from './form';
-
-import type { FC } from 'react';
 import type { SerializedStyles } from '@emotion/react';
-import type { Option } from '@guardian/types';
-import type { ArticleFormat } from '@guardian/libs';
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
+import {
+	body,
+	headline,
+	neutral,
+	remSpace,
+} from '@guardian/source-foundations';
+import type { Option } from '@guardian/types';
+import { maybeRender } from 'lib';
+import type { FC } from 'react';
+import { renderCalloutDescriptionText } from 'renderer';
+import CalloutForm from './form';
 
 export interface CalloutProps {
 	campaign: Campaign;
@@ -17,19 +21,11 @@ export interface CalloutProps {
 	description: Option<DocumentFragment>;
 }
 
-const wrapperStyles = css`
-	margin-bottom: 26px;
-	margin-top: 16px;
-	padding-left: 10px;
-	padding-right: 10px;
-`;
-
 const calloutDetailsStyles = css`
 	border-top: 1px ${neutral[86]} solid;
-	border-bottom: 1px ${neutral[86]} solid;
 	background-color: ${neutral[97]};
 	position: relative;
-	padding-bottom: 10px;
+	padding-bottom: ${remSpace[6]};
 
 	/* IE does not support summary HTML elements, so we need to hide children ourself */
 	:not([open]) > *:not(summary) {
@@ -64,7 +60,7 @@ const summaryStyles = css`
 `;
 
 const summaryContentWrapper = css`
-	padding-left: 10px;
+	padding-left: ${remSpace[2]};
 	visibility: visible;
 `;
 
@@ -83,35 +79,33 @@ const descriptionStyles = css`
 `;
 
 const Callout: FC<CalloutProps> = ({ campaign, format, description }) => {
-	const {name, fields} = campaign
-	const { callout} = fields;
+	const { name, fields } = campaign;
+	const { callout } = fields;
 
 	return (
-		<div css={wrapperStyles}>
-			<details
-				css={calloutDetailsStyles}
-				open={true}
-			>
+		<>
+			<details css={calloutDetailsStyles} open={true}>
 				<summary css={summaryStyles}>
 					<div css={summaryContentWrapper}>
-						<div css={titleStyles(format)}>
-							{callout}
-						</div>
+						<div css={titleStyles(format)}>{callout}</div>
 						<h4 css={headingTextHeaderStyles}>{name}</h4>
-						{
-							maybeRender(description, (description) => (
+						{maybeRender(
+							description,
+							(description: DocumentFragment) => (
 								<div css={descriptionStyles}>
-									{/* TODO: Check if we can use the standfirst renderer like this - the plaintext renderer doesn't give us links etc (which were included in the eg data) */}
-									{renderStandfirstText(description, format)}
+									{renderCalloutDescriptionText(
+										description,
+										format,
+									)}
 								</div>
-							))
-						}
+							),
+						)}
 					</div>
 				</summary>
 				<CalloutForm campaign={campaign} format={format} />
 			</details>
-		</div>
+		</>
 	);
 };
 
-export default Callout
+export default Callout;

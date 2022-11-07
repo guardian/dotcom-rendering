@@ -1,33 +1,27 @@
 import { css } from '@emotion/react';
-import { darkModeCss } from 'styles';
+import type { SerializedStyles } from '@emotion/react';
+import type { ArticleFormat } from '@guardian/libs';
 import {
+	from,
 	neutral,
+	remHeight,
 	remSpace,
 	textSans,
 	visuallyHidden,
-	from,
-	remHeight,
 } from '@guardian/source-foundations';
-import {
-	SvgMinus,
-	SvgPlus,
-} from '@guardian/source-react-components';
-
+import { SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import type { FC, ReactNode } from 'react';
-import type { SerializedStyles } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import { darkModeCss } from 'styles';
 
 // To Do: Could this be exported to source?
 
 export interface ExpandingWrapperProps {
 	format: ArticleFormat;
 	children: ReactNode;
+	renderExtra?: () => ReactNode;
 }
 
-
-const containerStyles = (
-	format: ArticleFormat,
-): SerializedStyles => css`
+const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 	border-top: 1px solid ${neutral[86]};
 	background: ${neutral[97]};
 	box-shadow: none;
@@ -58,7 +52,6 @@ const containerStyles = (
 		fill: ${neutral[100]};
 	}
 
-
 	#expander-checkbox ~ label #svgplus,
 	#expander-checkbox:checked ~ label #svgminus {
 		display: block;
@@ -68,8 +61,6 @@ const containerStyles = (
 		max-height: fit-content;
 		margin-bottom: ${remSpace[6]};
 	}
-
-
 `;
 
 const overlayStyles = css`
@@ -98,7 +89,7 @@ const overlayStyles = css`
 const fakeButtonStyles = (format: ArticleFormat): SerializedStyles => css`
 	display: inline-flex;
 	justify-content: space-between;
-	box-shadow: none !important; // ToDo: Where is this coming from?
+	box-shadow: none;
 	align-items: center;
 	box-sizing: border-box;
 	cursor: pointer;
@@ -136,13 +127,14 @@ const buttonIcon = css`
 	}
 `;
 
-
-const ExpandingWrapper: FC<ExpandingWrapperProps> = ({ format, children }) => {
+// TODO: Use the expanding wrapper I've put in source-kitchen
+const ExpandingWrapper: FC<ExpandingWrapperProps> = ({
+	format,
+	renderExtra,
+	children,
+}) => {
 	return (
-		<div
-			id="expander"
-			css={containerStyles(format)}
-		>
+		<div id="expander" css={containerStyles(format)}>
 			<input
 				type="checkbox"
 				css={css`
@@ -156,7 +148,6 @@ const ExpandingWrapper: FC<ExpandingWrapperProps> = ({ format, children }) => {
 			/>
 			<div id="collapsible-body" css={collapsibleBody}>
 				{children}
-
 			</div>
 			<div id="expander-overlay" css={overlayStyles} />
 			<label
@@ -174,9 +165,9 @@ const ExpandingWrapper: FC<ExpandingWrapperProps> = ({ format, children }) => {
 					</span>
 				</>
 			</label>
+			{renderExtra?.()}
 		</div>
 	);
 };
-
 
 export default ExpandingWrapper;
