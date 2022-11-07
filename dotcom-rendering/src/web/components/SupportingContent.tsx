@@ -12,6 +12,7 @@ type Props = {
 	supportingContent: DCRSupportingContent[];
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
+	isDynamo?: true;
 };
 
 const wrapperStyles = css`
@@ -66,6 +67,7 @@ export const SupportingContent = ({
 	supportingContent,
 	alignment,
 	containerPalette,
+	isDynamo,
 }: Props) => {
 	return (
 		<ul css={[wrapperStyles, directionStyles(alignment)]}>
@@ -93,6 +95,7 @@ export const SupportingContent = ({
 							showLine={true}
 							linkTo={subLink.url}
 							containerPalette={containerPalette}
+							isDynamo={isDynamo}
 						/>
 					</li>
 				);

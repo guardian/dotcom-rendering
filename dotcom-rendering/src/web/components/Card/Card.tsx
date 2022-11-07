@@ -415,6 +415,7 @@ export const Card = ({
 								supportingContent={supportingContent}
 								alignment="vertical"
 								containerPalette={containerPalette}
+								isDynamo={isDynamo}
 							/>
 						) : (
 							<></>
@@ -426,6 +427,7 @@ export const Card = ({
 				<SupportingContent
 					supportingContent={supportingContent}
 					containerPalette={containerPalette}
+					isDynamo={isDynamo}
 					alignment={
 						imagePosition === 'top' ||
 						imagePosition === 'bottom' ||
