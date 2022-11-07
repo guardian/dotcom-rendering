@@ -49,14 +49,14 @@ const formatters = {
 		[Edition.UK]: dateTimeFormatter('Europe/London'),
 		[Edition.US]: dateTimeFormatter('America/New_York'),
 		[Edition.AU]: dateTimeFormatter('Australia/Sydney'),
-		[Edition.EUROPE]: dateTimeFormatter('Europe/Brussels'),
+		[Edition.EUROPE]: dateTimeFormatter('Europe/Paris'),
 		[Edition.INTERNATIONAL]: dateTimeFormatter('Europe/London'),
 	},
 	time: {
 		[Edition.UK]: timeFormatter('Europe/London', 'en-GB'),
 		[Edition.US]: timeFormatter('America/New_York', 'en-US'),
 		[Edition.AU]: timeFormatter('Australia/Sydney', 'en-AU'),
-		[Edition.EUROPE]: timeFormatter('Europe/Brussels', 'en-BE'),
+		[Edition.EUROPE]: timeFormatter('Europe/Paris', 'en-FR'),
 		[Edition.INTERNATIONAL]: timeFormatter('Europe/London', 'en-GB'),
 	},
 };
