@@ -12,9 +12,9 @@ import MinusIcon from '../../static/icons/minus.svg';
 import PlusIcon from '../../static/icons/plus.svg';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
-import { AgeWarning } from './AgeWarning';
 import { CalloutMessageUs } from './CalloutNew/CalloutMessageUs';
 import { CalloutShareComponent } from './CalloutNew/CalloutShareComponent';
+import { Deadline } from './CalloutNew/Deadline';
 import { Form } from './CalloutNew/Form';
 
 const wrapperStyles = css`
@@ -148,7 +148,7 @@ export const CalloutBlockComponent = ({
 	messageUs?: boolean;
 }) => {
 	const palette = decidePalette(format);
-	const { title, description, formFields, activeUntil } = callout;
+	const { title, description, formFields } = callout;
 	const [isBodyExpanded, setIsBodyExpanded] = useState(
 		isNonCollapsible ? true : false,
 	);
@@ -201,7 +201,7 @@ export const CalloutBlockComponent = ({
 								}
 							/>
 							<div css={ageWarningStyles}>
-								<AgeWarning age={'2 weeks'} />
+								<Deadline age={'2 weeks old'} />
 							</div>
 							{!isBodyExpanded && (
 								<span

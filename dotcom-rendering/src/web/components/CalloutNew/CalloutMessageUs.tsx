@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
+import { space } from '@guardian/source-foundations';
 import { CalloutMessenger } from './CalloutContactMethod';
 import { CalloutTermsAndConditions } from './CalloutTermsAndConditions';
-import { space } from '@guardian/source-foundations';
 
 const formStyles = css`
 	display: flex;
