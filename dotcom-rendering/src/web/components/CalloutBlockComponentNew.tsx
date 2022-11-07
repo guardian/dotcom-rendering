@@ -13,10 +13,9 @@ import PlusIcon from '../../static/icons/plus.svg';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { AgeWarning } from './AgeWarning';
+import { CalloutMessageUs } from './CalloutNew/CalloutMessageUs';
+import { CalloutShareComponent } from './CalloutNew/CalloutShareComponent';
 import { Form } from './CalloutNew/Form';
-import { CalloutMessageUs } from './CalloutMessageUs';
-import { CalloutShareComponent } from './CalloutShareComponent';
-import { calloutCampaign } from 'fixtures/manual/calloutCampaign';
 
 const wrapperStyles = css`
 	margin-bottom: ${space[6]}px;

@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import { news, space } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { useState } from 'react';
-import { CalloutTermsAndConditions } from '../CalloutTermsAndConditions';
-import { FileUpload } from './FileUpload';
-import { MultiSelect } from './MultiSelect';
-import { Select } from './Select';
-import { TextArea } from './TextArea';
-import { TextInput } from './TextInput';
+import { CalloutTermsAndConditions } from './CalloutTermsAndConditions';
+import { FileUpload } from './FormFields/FileUpload';
+import { MultiSelect } from './FormFields/MultiSelect';
+import { Select } from './FormFields/Select';
+import { TextArea } from './FormFields/TextArea';
+import { TextInput } from './FormFields/TextInput';
 
 const formStyles = css`
 	display: flex;

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { CalloutMessenger } from './CalloutMessenger';
+import { CalloutMessenger } from './CalloutContactMethod';
 import { CalloutTermsAndConditions } from './CalloutTermsAndConditions';
 import { space } from '@guardian/source-foundations';
 
