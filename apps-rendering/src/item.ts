@@ -50,6 +50,7 @@ import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
 import { Result } from 'result';
+import { getReport } from 'campaign';
 
 // ----- Item Type ----- //
 
@@ -279,11 +280,12 @@ const itemFields = (
 	context: Context,
 	request: RenderingRequest,
 ): ItemFields => {
-	const { content, commentCount, relatedContent } = request;
+	const { content, commentCount, relatedContent, campaigns } = request;
 	return {
-		theme: Optional.fromNullable(content.pillarId)
+		theme: getReport(campaigns ?? []).withDefault(
+			Optional.fromNullable(content.pillarId)
 			.flatMap(getPillarFromId)
-			.withDefault(ArticlePillar.News),
+			.withDefault(ArticlePillar.News)),
 		display: getDisplay(content),
 		headline: content.fields?.headline ?? '',
 		standfirst: pipe(
@@ -338,13 +340,13 @@ const itemFieldsWithBody = (
 	const { content } = request;
 	const body = content.blocks?.body ?? [];
 	const atoms = content.atoms;
-	const campaigns = request.campaigns;
+	const campaigns = request.campaigns ?? [];
 	const elements = [...body].shift()?.elements;
 
 	return {
 		...itemFields(context, request),
 		body: elements
-			? parseElements(context, atoms, campaigns)(elements)
+			? parseElements(context, campaigns, atoms)(elements)
 			: [],
 	};
 };

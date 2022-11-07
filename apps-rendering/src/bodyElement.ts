@@ -21,6 +21,8 @@ import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
 import { Result } from 'result';
+import { FormField } from '@guardian/apps-rendering-api-models/formField';
+import { getCallout } from 'campaign';
 
 // ----- Types ----- //
 
@@ -151,8 +153,9 @@ type BodyElement =
 	| EmbedElement
 	| {
 			kind: ElementKind.Callout;
-			id: string;
-			campaign: Campaign;
+			heading: string;
+			formId: number;
+			formFields: FormField[];
 			description: DocumentFragment;
 	  }
 	| {
@@ -242,7 +245,7 @@ const flattenTextElement = (doc: Node): BodyElement[] => {
 };
 
 const parse =
-	(context: Context, atoms?: Atoms, campaigns?: Campaign[]) =>
+	(context: Context, campaigns: Campaign[], atoms?: Atoms) =>
 	(
 		element: BlockElement,
 	): Result<string, BodyElement> | Array<Result<string, BodyElement>> => {
@@ -348,27 +351,14 @@ const parse =
 					?.getAttribute('data-callout-tagname');
 
 				if (id) {
-					if (!campaigns) {
-						return Result.err('No campaign data for this callout');
-					}
-
-					const campaign = campaigns.find(
-						(campaign) => campaign.fields.tagName === id,
-					);
-
-					if (!campaign) {
-						return Result.err('No matching campaign');
-					}
-
-					const description = context.docParser(
-						campaign.fields.description ?? '',
-					);
-					return Result.ok({
-						kind: ElementKind.Callout,
-						id,
-						campaign,
-						description,
-					});
+					return getCallout(id, campaigns)
+						.map(({ callout, formFields, description, formId }) => ({
+							kind: ElementKind.Callout,
+							heading: callout,
+							formFields,
+							formId,
+							description: context.docParser(description ?? ''),
+						}));
 				}
 
 				return compose(
@@ -435,12 +425,12 @@ const parse =
 	};
 
 const parseElements =
-	(context: Context, atoms?: Atoms, campaigns?: Campaign[]) =>
+	(context: Context, campaigns: Campaign[], atoms?: Atoms) =>
 	(elements: Elements): Array<Result<string, BodyElement>> => {
 		if (!elements) {
 			return [Result.err('No body elements available')];
 		}
-		return elements.flatMap(parse(context, atoms, campaigns));
+		return elements.flatMap(parse(context, campaigns, atoms));
 	};
 
 // ----- Exports ----- //
