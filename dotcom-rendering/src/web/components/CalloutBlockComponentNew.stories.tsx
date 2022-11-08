@@ -31,19 +31,6 @@ export const NonCollapsible = () => {
 
 NonCollapsible.story = { name: 'NonCollapsible' };
 
-export const MessageUs = () => {
-	return (
-		<CalloutBlockComponent
-			isNonCollapsible={true}
-			callout={calloutCampaign}
-			format={mockFormat}
-			messageUs={true}
-		/>
-	);
-};
-
-MessageUs.story = { name: 'Message Us' };
-
 export default {
 	component: CalloutBlockComponent,
 	title: 'Components/CalloutBlockComponentNew',

@@ -6,13 +6,6 @@ import {
 	news,
 	space,
 } from '@guardian/source-foundations';
-import { Button } from '@guardian/source-react-components';
-import { useState } from 'react';
-import MinusIcon from '../../static/icons/minus.svg';
-import PlusIcon from '../../static/icons/plus.svg';
-import type { Palette } from '../../types/palette';
-import { decidePalette } from '../lib/decidePalette';
-import { CalloutMessageUs } from './CalloutNew/CalloutMessageUs';
 import { CalloutShareComponent } from './CalloutNew/CalloutShareComponent';
 import { Deadline } from './CalloutNew/Deadline';
 import { Form } from './CalloutNew/Form';
@@ -91,48 +84,63 @@ const ageWarningStyles = css`
 	display: block;
 `;
 
-const tabStyles = css`
-	width: 192px;
-	height: 49px;
-	background-color: ${neutral[97]};
-	${body.medium({ fontWeight: 'bold' })}
-	text-align: left;
-`;
-
 export const CalloutBlockComponent = ({
 	callout,
 	format,
 	isNonCollapsible,
-	messageUs,
 }: {
 	callout: CalloutBlockElement;
 	format: ArticleFormat;
 	isNonCollapsible: boolean;
 	messageUs?: boolean;
 }) => {
-	const palette = decidePalette(format);
 	const { title, description, formFields } = callout;
 
 	return (
-		<ExpandingWrapper>
-			<details
-				css={[calloutDetailsStyles, wrapperStyles]}
-				aria-hidden={true}
-				open={true}
-			>
-				<summary css={summaryStyles}>
-					<div css={summaryContentWrapper}>
-						<div css={titleStyles}>Share your experience</div>
-						<h4 css={subtitleTextHeaderStyles}>{title}</h4>
-						<div css={descriptionStyles}>{description}</div>
-						<div css={ageWarningStyles}>
-							<Deadline age={'2 weeks old'} />
+		<aside>
+			{isNonCollapsible ? (
+				<details
+					css={[calloutDetailsStyles, wrapperStyles]}
+					aria-hidden={true}
+					open={true}
+				>
+					<summary css={summaryStyles}>
+						<div css={summaryContentWrapper}>
+							<div css={titleStyles}>Share your experience</div>
+							<h4 css={subtitleTextHeaderStyles}>{title}</h4>
+							<div css={descriptionStyles}>{description}</div>
+							<div css={ageWarningStyles}>
+								<Deadline age={'2 weeks old'} />
+							</div>
 						</div>
-					</div>
-				</summary>
-				<CalloutShareComponent />
-				<Form formFields={formFields} onSubmit={() => {}} />
-			</details>
-		</ExpandingWrapper>
+					</summary>
+					<CalloutShareComponent />
+					<Form formFields={formFields} onSubmit={() => {}} />
+				</details>
+			) : (
+				<ExpandingWrapper format={format}>
+					<details
+						css={[calloutDetailsStyles, wrapperStyles]}
+						aria-hidden={true}
+						open={true}
+					>
+						<summary css={summaryStyles}>
+							<div css={summaryContentWrapper}>
+								<div css={titleStyles}>
+									Share your experience
+								</div>
+								<h4 css={subtitleTextHeaderStyles}>{title}</h4>
+								<div css={descriptionStyles}>{description}</div>
+								<div css={ageWarningStyles}>
+									<Deadline age={'2 weeks old'} />
+								</div>
+							</div>
+						</summary>
+						<CalloutShareComponent />
+						<Form formFields={formFields} onSubmit={() => {}} />
+					</details>
+				</ExpandingWrapper>
+			)}
+		</aside>
 	);
 };
