@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
-import { news, space } from '@guardian/source-foundations';
+import { space } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { useState } from 'react';
+import { decidePalette } from '../../lib/decidePalette';
 import { CalloutTermsAndConditions } from './CalloutTermsAndConditions';
 import { FileUpload } from './FormFields/FileUpload';
 import { MultiSelect } from './FormFields/MultiSelect';
@@ -32,12 +33,18 @@ const footerPaddingStyles = css`
 type FormDataType = { [key in string]: any };
 
 type FormFieldProp = {
+	format: ArticleFormat;
 	formField: CampaignFieldType;
 	formData: FormDataType;
 	setFormData: React.Dispatch<React.SetStateAction<FormDataType>>;
 };
 
-const FormField = ({ formField, formData, setFormData }: FormFieldProp) => {
+const FormField = ({
+	format,
+	formField,
+	formData,
+	setFormData,
+}: FormFieldProp) => {
 	switch (formField.type) {
 		case 'textarea':
 			return (
@@ -57,6 +64,7 @@ const FormField = ({ formField, formData, setFormData }: FormFieldProp) => {
 						formField={formField}
 						formData={formData}
 						setFormData={setFormData}
+						format={format}
 					/>
 					<hr />
 				</>
@@ -103,9 +111,10 @@ const FormField = ({ formField, formData, setFormData }: FormFieldProp) => {
 type FormProps = {
 	onSubmit: (formData: FormDataType) => void;
 	formFields: CampaignFieldType[];
+	format: ArticleFormat;
 };
 
-export const Form = ({ onSubmit, formFields }: FormProps) => {
+export const Form = ({ onSubmit, formFields, format }: FormProps) => {
 	// const [twitterHandle, setTwitterHandle] = useState('');
 	const [formData, setFormData] = useState<{ [key in string]: any }>({});
 
@@ -119,8 +128,7 @@ export const Form = ({ onSubmit, formFields }: FormProps) => {
 				onSubmit(formData);
 			}}
 		>
-			<CalloutTermsAndConditions />
-
+			<CalloutTermsAndConditions format={format} />
 			{formFields.map((formField, index) => (
 				<div
 					css={formFieldWrapperStyles}
@@ -131,6 +139,7 @@ export const Form = ({ onSubmit, formFields }: FormProps) => {
 					key={index}
 				>
 					<FormField
+						format={format}
 						formField={formField}
 						formData={formData}
 						setFormData={setFormData}
@@ -142,7 +151,8 @@ export const Form = ({ onSubmit, formFields }: FormProps) => {
 					priority="primary"
 					type="submit"
 					cssOverrides={css`
-						background-color: ${news[300]};
+						background-color: ${decidePalette(format).text
+							.richLink};
 					`}
 				>
 					Submit

@@ -1,19 +1,26 @@
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { calloutCampaign } from '../../../../fixtures/manual/calloutCampaign';
 import { Form } from './Form';
 
-// import { css } from '@emotion/react';
+const mockFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.Opinion,
+};
 
-// storybook structure
 export default {
 	component: Form,
 	title: 'Components/CalloutNew/Form',
 };
 
-// convention for getting something into storybook
 export const Default = () => {
 	return (
 		<>
-			<Form formFields={calloutCampaign.formFields} onSubmit={() => {}} />
+			<Form
+				format={mockFormat}
+				formFields={calloutCampaign.formFields}
+				onSubmit={() => {}}
+			/>
 			;
 		</>
 	);

@@ -5,8 +5,9 @@ import { CalloutBlockComponent } from './CalloutBlockComponentNew';
 const mockFormat = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
-	theme: ArticlePillar.News,
+	theme: ArticlePillar.Opinion,
 };
+
 export const Collapsible = () => {
 	return (
 		<CalloutBlockComponent

@@ -1389,8 +1389,21 @@ const textCarouselTitle = (format: ArticleFormat): string => {
 	return pillarPalette[format.theme].main;
 };
 
-const textCalloutHeading = (): string => {
-	return news[300];
+const textCalloutHeading = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		default:
+			return news[300];
+	}
 };
 
 const textDropCap = (format: ArticleFormat): string => {
@@ -1676,7 +1689,7 @@ export const decidePalette = (
 			witnessAuthor: textWitnessAuthor(format),
 			witnessTitle: textWitnessTitle(format),
 			carouselTitle: textCarouselTitle(format),
-			calloutHeading: textCalloutHeading(),
+			calloutHeading: textCalloutHeading(format),
 			dropCap: textDropCap(format),
 			blockquote: textBlockquote(format),
 			numberedTitle: textNumberedTitle(format),

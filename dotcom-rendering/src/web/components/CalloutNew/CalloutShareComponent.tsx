@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
+import { decidePalette } from '../../lib/decidePalette';
 
 const shareCalloutStyles = css`
 	display: flex;
@@ -7,10 +8,14 @@ const shareCalloutStyles = css`
 	padding-left: 10px;
 	padding-right: 10px;
 `;
-const shareCalloutTextStyles = css`
-	display: inline-block;
-	${textSans.xsmall()}
-`;
+const shareCalloutTextStyles = (format: ArticleFormat) =>
+	css`
+		a {
+			color: ${decidePalette(format).text.richLink};
+		}
+		display: inline-block;
+		${textSans.xsmall()}
+	`;
 
 const placeholderCircle = css`
 	height: 33px;
@@ -22,12 +27,16 @@ const placeholderCircle = css`
 	margin: 10px 10px 10px 0px;
 `;
 
-export const CalloutShareComponent = () => {
+interface Props {
+	format: ArticleFormat;
+}
+
+export const CalloutShareComponent = ({ format }: Props) => {
 	return (
 		<>
 			<div css={shareCalloutStyles}>
 				<span css={placeholderCircle}></span>{' '}
-				<div css={shareCalloutTextStyles}>
+				<div css={shareCalloutTextStyles(format)}>
 					Know others who are affected?{' '}
 					<a href="https://www.theguardian.com/tone/callout">
 						Share this callout.

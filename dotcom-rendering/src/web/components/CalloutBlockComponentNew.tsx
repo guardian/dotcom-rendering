@@ -1,11 +1,6 @@
 import { css } from '@emotion/react';
-import {
-	body,
-	headline,
-	neutral,
-	news,
-	space,
-} from '@guardian/source-foundations';
+import { body, headline, neutral, space } from '@guardian/source-foundations';
+import { decidePalette } from '../lib/decidePalette';
 import { CalloutShareComponent } from './CalloutNew/CalloutShareComponent';
 import { Deadline } from './CalloutNew/Deadline';
 import { Form } from './CalloutNew/Form';
@@ -63,9 +58,9 @@ const summaryContentWrapper = css`
 	visibility: visible;
 `;
 
-const titleStyles = css`
+const titleStyles = (format: ArticleFormat) => css`
 	${headline.xxsmall({ fontWeight: 'bold' })}
-	color: ${news[300]}
+	color: ${decidePalette(format).text.calloutHeading}
 `;
 
 const subtitleTextHeaderStyles = css`
@@ -92,7 +87,6 @@ export const CalloutBlockComponent = ({
 	callout: CalloutBlockElement;
 	format: ArticleFormat;
 	isNonCollapsible: boolean;
-	messageUs?: boolean;
 }) => {
 	const { title, description, formFields } = callout;
 
@@ -106,7 +100,9 @@ export const CalloutBlockComponent = ({
 				>
 					<summary css={summaryStyles}>
 						<div css={summaryContentWrapper}>
-							<div css={titleStyles}>Share your experience</div>
+							<div css={titleStyles(format)}>
+								Share your experience
+							</div>
 							<h4 css={subtitleTextHeaderStyles}>{title}</h4>
 							<div css={descriptionStyles}>{description}</div>
 							<div css={ageWarningStyles}>
@@ -114,8 +110,12 @@ export const CalloutBlockComponent = ({
 							</div>
 						</div>
 					</summary>
-					<CalloutShareComponent />
-					<Form formFields={formFields} onSubmit={() => {}} />
+					<CalloutShareComponent format={format} />
+					<Form
+						formFields={formFields}
+						onSubmit={() => {}}
+						format={format}
+					/>
 				</details>
 			) : (
 				<ExpandingWrapper format={format}>
@@ -126,7 +126,7 @@ export const CalloutBlockComponent = ({
 					>
 						<summary css={summaryStyles}>
 							<div css={summaryContentWrapper}>
-								<div css={titleStyles}>
+								<div css={titleStyles(format)}>
 									Share your experience
 								</div>
 								<h4 css={subtitleTextHeaderStyles}>{title}</h4>
@@ -136,8 +136,12 @@ export const CalloutBlockComponent = ({
 								</div>
 							</div>
 						</summary>
-						<CalloutShareComponent />
-						<Form formFields={formFields} onSubmit={() => {}} />
+						<CalloutShareComponent format={format} />
+						<Form
+							formFields={formFields}
+							onSubmit={() => {}}
+							format={format}
+						/>
 					</details>
 				</ExpandingWrapper>
 			)}
