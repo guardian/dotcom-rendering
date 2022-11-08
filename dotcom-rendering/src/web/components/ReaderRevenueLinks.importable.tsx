@@ -335,13 +335,15 @@ const ReaderRevenueLinksNative: React.FC<{
 		<a
 			css={linkStyles}
 			href={getUrl('contribute')}
-			data-link-name={`${dataLinkNamePrefix}contribute-cta`}
+			data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
 		>
 			Support <ArrowRightIcon />
 		</a>
 	);
 	const PrimaryButton =
 		editionId === 'UK' ? SubscribeButton : ContributeButton;
+	const SecondaryButton =
+		editionId === 'UK' ? ContributeButton : SubscribeButton;
 
 	return (
 		<div ref={setNode} css={inHeader && headerStyles}>
@@ -352,7 +354,9 @@ const ReaderRevenueLinksNative: React.FC<{
 				<div css={subMessageStyles}>
 					<div>Available for everyone, funded by readers</div>
 				</div>
-				<SupportButton />
+				{!inHeader && <SupportButton />}
+				{inHeader && <PrimaryButton />}
+				{inHeader && <SecondaryButton />}
 			</div>
 
 			<div css={inHeader ? hiddenFromTablet : hidden}>
