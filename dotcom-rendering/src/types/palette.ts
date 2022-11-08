@@ -167,5 +167,4 @@ export type ContainerOverrides = {
 	topBar: {
 		card: Colour;
 	};
-	divider: Colour;
 };

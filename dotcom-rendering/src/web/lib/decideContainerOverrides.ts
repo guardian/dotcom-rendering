@@ -285,27 +285,6 @@ const backgroundCard = (containerPalette: DCRContainerPalette): string => {
 	}
 };
 
-const divider = (containerPalette: DCRContainerPalette): string => {
-	switch (containerPalette) {
-		case 'LongRunningPalette':
-			return '#dcdcdc';
-		case 'LongRunningAltPalette':
-			return '#dcdcdc';
-		case 'SombrePalette':
-			return '#dcdcdc';
-		case 'SombreAltPalette':
-			return '#dcdcdc';
-		case 'InvestigationPalette':
-			return '#dcdcdc';
-		case 'BreakingPalette':
-			return '#dcdcdc';
-		case 'EventPalette':
-			return '#dcdcdc';
-		case 'EventAltPalette':
-			return '#dcdcdc';
-	}
-};
-
 const topBarCard = textCardKicker;
 
 /**
@@ -346,6 +325,5 @@ export const decideContainerOverrides = (
 		topBar: {
 			card: topBarCard(containerPalette),
 		},
-		divider: divider(containerPalette),
 	};
 };

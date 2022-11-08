@@ -29,7 +29,9 @@ const ulStyles = (containerOverrides?: ContainerOverrides) => css`
 	column-count: 4;
 
 	column-rule: 1px solid
-		${containerOverrides ? containerOverrides.divider : border.secondary};
+		${containerOverrides
+			? containerOverrides.border.container
+			: border.secondary};
 	column-gap: 10px;
 `;
 

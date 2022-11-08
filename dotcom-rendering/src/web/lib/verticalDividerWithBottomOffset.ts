@@ -26,7 +26,7 @@ export function verticalDividerWithBottomOffset(
 				height: calc(100% + ${bottomPaddingSize});
 				border-left: 1px solid
 					${containerOverrides
-						? containerOverrides.divider
+						? containerOverrides.border.container
 						: border.secondary};
 			}
 		}
