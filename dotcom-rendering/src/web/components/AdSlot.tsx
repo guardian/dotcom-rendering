@@ -237,7 +237,6 @@ const AdSlotLabelToggled = () => (
 export const AdSlot = ({
 	position,
 	display,
-	shouldHideReaderRevenue = false,
 	isPaidContent = false,
 	index,
 }: Props) => {
