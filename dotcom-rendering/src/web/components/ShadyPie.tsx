@@ -10,17 +10,24 @@ params.set(
 );
 params.set('INTCMP', 'shady_pie_open_2019');
 
+// Hard coded to disable for new product launch
+const canShow = (): boolean => false;
+
 export const ShadyPie = () => {
-	return (
-		<a
-			href={`https://support.theguardian.com/uk/subscribe/digital?${params.toString()}`}
-			tabIndex={-1}
-		>
-			<img
-				src="https://uploads.guim.co.uk/2020/10/02/Digisubs_MPU_c1_my_opt.png"
-				width="300"
-				alt=""
-			/>
-		</a>
-	);
+	if (canShow()) {
+		return (
+			<a
+				href={`https://support.theguardian.com/uk/subscribe/digital?${params.toString()}`}
+				tabIndex={-1}
+			>
+				<img
+					src="https://uploads.guim.co.uk/2020/10/02/Digisubs_MPU_c1_my_opt.png"
+					width="300"
+					alt=""
+				/>
+			</a>
+		);
+	}
+
+	return <></>;
 };
