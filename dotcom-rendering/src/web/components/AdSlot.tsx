@@ -269,9 +269,6 @@ export const AdSlot = ({
 					return (
 						<Island>
 							<TopRightAdSlot
-								shouldHideReaderRevenue={
-									shouldHideReaderRevenue
-								}
 								isPaidContent={isPaidContent}
 								adStyles={adStyles}
 							/>
