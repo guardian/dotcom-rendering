@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
-	from,
 	neutral,
 	remHeight,
 	space,
@@ -10,8 +9,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { SvgMinus, SvgPlus } from '@guardian/source-react-components';
-import type { FC, ReactNode } from 'react';
-import { darkModeCss } from 'styles';
+import type { ReactNode } from 'react';
 
 // To Do: Could this be exported to source?
 
@@ -79,8 +77,8 @@ const fakeButtonStyles = (format: ArticleFormat): SerializedStyles => css`
 	box-sizing: border-box;
 	cursor: pointer;
 	position: absolute;
-	margin-left: ${space[1]};
 	margin-top: -25px;
+	margin-left: ${space[4]}px;
 	border-radius: ${remHeight.ctaMedium}rem;
 	padding: ${space[2]}px;
 	border: 1px solid ${neutral[7]};
