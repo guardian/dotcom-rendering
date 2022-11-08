@@ -1,5 +1,10 @@
 import { css } from '@emotion/react';
-import { neutral, space } from '@guardian/source-foundations';
+import {
+	neutral,
+	palette,
+	space,
+	textSans,
+} from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { decidePalette } from '../../lib/decidePalette';
@@ -9,6 +14,12 @@ import { MultiSelect } from './FormFields/MultiSelect';
 import { Select } from './FormFields/Select';
 import { TextArea } from './FormFields/TextArea';
 import { TextInput } from './FormFields/TextInput';
+
+const errorMessagesStyles = css`
+	padding-bottom: 10px;
+	color: ${palette.error};
+	${textSans.medium({ fontWeight: 'bold' })};
+`;
 
 const formStyles = css`
 	display: flex;
@@ -112,9 +123,10 @@ type FormProps = {
 	onSubmit: (formData: FormDataType) => void;
 	formFields: CampaignFieldType[];
 	format: ArticleFormat;
+	error?: string;
 };
 
-export const Form = ({ onSubmit, formFields, format }: FormProps) => {
+export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 	// const [twitterHandle, setTwitterHandle] = useState('');
 	const [formData, setFormData] = useState<{ [key in string]: any }>({});
 
@@ -146,6 +158,8 @@ export const Form = ({ onSubmit, formFields, format }: FormProps) => {
 					/>
 				</div>
 			))}
+			{!!error && <div css={errorMessagesStyles}>{error}</div>}
+
 			<div css={footerPaddingStyles}>
 				<Button
 					priority="primary"
