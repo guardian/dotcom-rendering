@@ -146,8 +146,10 @@ const footerList = css`
 const readerRevenueLinks = css`
 	border-left: ${footerBorders};
 	flex: 1;
-	padding: ${space[3]}px 10px ${space[9]}px 10px;
+	padding: ${space[3]}px 0 0 10px;
+	margin: 0 10px ${space[9]}px 0;
 	width: calc(50% - 10px);
+
 	${until.tablet} {
 		width: 50%;
 		border-top: ${footerBorders};
@@ -159,12 +161,12 @@ const acknowledgments = css`
 	align-self: end;
 	${textSans.xxsmall()};
 	padding-top: ${space[3]}px;
-	padding-right: ${space[3]}px;
 	padding-bottom: ${space[3]}px;
 	margin-bottom: ${space[6]}px;
-	max-width: 481px;
 
-	${until.desktop} {
+	${between.tablet.and.desktop} {
+		padding-right: ${space[3]}px;
+		max-width: 481px;
 		border-right: ${footerBorders};
 		position: relative;
 
@@ -236,17 +238,19 @@ const FooterLinks = ({
 	contributionsServiceUrl: string;
 }) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
-		const linkList = linkGroup.map((l, index) => (
-			<li key={`${l.url}${index}`}>
-				<a
-					css={[footerLink, l.extraClasses]}
-					href={l.url}
-					data-link-name={l.dataLinkName}
-				>
-					{l.text}
-				</a>
-			</li>
-		));
+		const linkList = linkGroup.map(
+			({ url, extraClasses, dataLinkName, text }) => (
+				<li key={`${url}`}>
+					<a
+						css={[footerLink, extraClasses]}
+						href={url}
+						data-link-name={dataLinkName}
+					>
+						{text}
+					</a>
+				</li>
+			),
+		);
 		const key = linkGroup.reduce((acc, { text }) => `${acc}-${text}`, '');
 		return <ul key={key}>{linkList}</ul>;
 	});
