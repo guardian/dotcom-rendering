@@ -205,9 +205,8 @@ export const Header: React.FC<{
 		<div css={row}>
 			<ReaderRevenueButton
 				nav={nav}
-				rrLink="ampFooter"
+				rrLink="ampHeader"
 				rrCategory="contribute"
-				rightAlignIcon={true}
 				linkLabel="Support us"
 			/>
 
