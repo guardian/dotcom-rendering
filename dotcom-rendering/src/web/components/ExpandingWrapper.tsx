@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	neutral,
@@ -19,7 +18,7 @@ export interface ExpandingWrapperProps {
 	renderExtra?: () => ReactNode;
 }
 
-const containerStyles = (format: ArticleFormat): SerializedStyles => css`
+const containerStyles = css`
 	border-top: 1px solid ${neutral[86]};
 	background: ${neutral[97]};
 	box-shadow: none;
@@ -69,7 +68,7 @@ const overlayStyles = css`
 	display: block;
 `;
 
-const fakeButtonStyles = (format: ArticleFormat): SerializedStyles => css`
+const fakeButtonStyles = css`
 	display: inline-flex;
 	justify-content: space-between;
 	box-shadow: none;
@@ -108,7 +107,6 @@ const buttonIcon = css`
 
 // TODO: Split adding a skip to end of callout link into a new ticket
 export const ExpandingWrapper = ({
-	format,
 	renderExtra,
 	children,
 }: {
@@ -117,7 +115,7 @@ export const ExpandingWrapper = ({
 	renderExtra?: () => ReactNode;
 }) => {
 	return (
-		<div id="expander" css={containerStyles(format)}>
+		<div id="expander" css={containerStyles}>
 			<input
 				type="checkbox"
 				css={css`
@@ -135,7 +133,7 @@ export const ExpandingWrapper = ({
 			<div id="expander-overlay" css={overlayStyles} />
 			<label
 				aria-hidden={true}
-				css={fakeButtonStyles(format)}
+				css={fakeButtonStyles}
 				htmlFor="expander-checkbox"
 				id="expander-button"
 			>

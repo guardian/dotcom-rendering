@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { body, headline, neutral, space } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
-import { CalloutShareComponent } from './CalloutNew/CalloutShareComponent';
 import { Deadline } from './CalloutNew/CalloutDeadline';
+import { CalloutShareComponent } from './CalloutNew/CalloutShareComponent';
 import { Form } from './CalloutNew/Form';
 import { ExpandingWrapper } from './ExpandingWrapper';
 
@@ -72,7 +72,7 @@ const descriptionStyles = css`
 	${body.medium()}
 `;
 
-const ageWarningStyles = css`
+const activeUntilStyles = css`
 	position: absolute;
 	bottom: ${space[2]}px;
 	right: ${space[2]}px;
@@ -88,7 +88,7 @@ export const CalloutBlockComponent = ({
 	format: ArticleFormat;
 	isNonCollapsible: boolean;
 }) => {
-	const { title, description, formFields } = callout;
+	const { title, description, formFields, activeUntil } = callout;
 
 	return (
 		<aside>
@@ -105,8 +105,8 @@ export const CalloutBlockComponent = ({
 							</div>
 							<h4 css={subtitleTextHeaderStyles}>{title}</h4>
 							<div css={descriptionStyles}>{description}</div>
-							<div css={ageWarningStyles}>
-								<Deadline until={callout.activeUntil} />
+							<div css={activeUntilStyles}>
+								<Deadline until={activeUntil} />
 							</div>
 						</div>
 					</summary>
@@ -131,8 +131,8 @@ export const CalloutBlockComponent = ({
 								</div>
 								<h4 css={subtitleTextHeaderStyles}>{title}</h4>
 								<div css={descriptionStyles}>{description}</div>
-								<div css={ageWarningStyles}>
-									<Deadline until={callout.activeUntil} />
+								<div css={activeUntilStyles}>
+									<Deadline until={activeUntil} />
 								</div>
 							</div>
 						</summary>
