@@ -355,7 +355,14 @@ const ReaderRevenueLinksNative: React.FC<{
 					<div>Available for everyone, funded by readers</div>
 				</div>
 				{/* When in the header, we can assume a remote header is being pulled in */}
-				{inHeader ? (<PrimaryButton /><SecondaryButton />) : (<SupportButton />)}
+				{inHeader ? (
+					<>
+						<PrimaryButton />
+						<SecondaryButton />
+					</>
+				) : (
+					<SupportButton />
+				)}
 			</div>
 
 			<div css={inHeader ? hiddenFromTablet : hidden}>
