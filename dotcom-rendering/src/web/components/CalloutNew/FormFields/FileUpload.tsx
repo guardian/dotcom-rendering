@@ -20,6 +20,7 @@ type Props = {
 
 const buttonStyles = (format: ArticleFormat) =>
 	css`
+		margin-top: ${space[2]}px;
 		width: fit-content;
 		border: ${decidePalette(format).text.richLink} solid 1px;
 		color: ${decidePalette(format).text.richLink};

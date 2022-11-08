@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { space } from '@guardian/source-foundations';
+import { neutral, space } from '@guardian/source-foundations';
 import { Button } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { decidePalette } from '../../lib/decidePalette';
@@ -153,6 +153,9 @@ export const Form = ({ onSubmit, formFields, format }: FormProps) => {
 					cssOverrides={css`
 						background-color: ${decidePalette(format).text
 							.richLink};
+						:hover {
+							background-color: ${neutral[0]};
+						}
 					`}
 				>
 					Submit

@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { body, headline, neutral, space } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { CalloutShareComponent } from './CalloutNew/CalloutShareComponent';
-import { Deadline } from './CalloutNew/Deadline';
+import { Deadline } from './CalloutNew/CalloutDeadline';
 import { Form } from './CalloutNew/Form';
 import { ExpandingWrapper } from './ExpandingWrapper';
 
@@ -106,7 +106,7 @@ export const CalloutBlockComponent = ({
 							<h4 css={subtitleTextHeaderStyles}>{title}</h4>
 							<div css={descriptionStyles}>{description}</div>
 							<div css={ageWarningStyles}>
-								<Deadline age={'2 weeks old'} />
+								<Deadline until={callout.activeUntil} />
 							</div>
 						</div>
 					</summary>
@@ -132,7 +132,7 @@ export const CalloutBlockComponent = ({
 								<h4 css={subtitleTextHeaderStyles}>{title}</h4>
 								<div css={descriptionStyles}>{description}</div>
 								<div css={ageWarningStyles}>
-									<Deadline age={'2 weeks old'} />
+									<Deadline until={callout.activeUntil} />
 								</div>
 							</div>
 						</summary>
