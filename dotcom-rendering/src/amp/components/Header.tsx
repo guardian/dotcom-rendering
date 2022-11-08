@@ -205,9 +205,10 @@ export const Header: React.FC<{
 		<div css={row}>
 			<ReaderRevenueButton
 				nav={nav}
-				rrLink="ampHeader"
-				rrCategory="subscribe"
-				linkLabel="Subscribe"
+				rrLink="ampFooter"
+				rrCategory="contribute"
+				rightAlignIcon={true}
+				linkLabel="Support us"
 			/>
 
 			<a css={logoStyles} href={guardianBaseURL}>
