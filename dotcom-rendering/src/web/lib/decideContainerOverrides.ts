@@ -1,3 +1,4 @@
+import { neutral } from '@guardian/source-foundations';
 import type { DCRContainerPalette } from '../../types/front';
 import type { ContainerOverrides } from '../../types/palette';
 
@@ -223,21 +224,23 @@ const textContainerToggle = (containerPalette: DCRContainerPalette): string => {
 const borderContainer = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return 'rgba(0,0,0, 0.2)';
+			// neutral.86 with 40% opacity
+			return 'rgba(153, 153, 153, 0.4)';
 		case 'LongRunningAltPalette':
-			return 'rgba(0,0,0, 0.2)';
+			// neutral.86 with 40% opacity
+			return 'rgba(153, 153, 153, 0.4)';
 		case 'SombrePalette':
-			return 'rgba(255,255,255, 0.2)';
+			return neutral[60];
 		case 'SombreAltPalette':
-			return 'rgba(255,255,255, 0.2)';
+			return neutral[46];
 		case 'InvestigationPalette':
-			return 'rgba(255,255,255, 0.2)';
+			return neutral[60];
 		case 'BreakingPalette':
-			return 'rgba(0,0,0, 0.2)';
+			return neutral[86];
 		case 'EventPalette':
-			return 'rgba(0,0,0, 0.2)';
+			return neutral[86];
 		case 'EventAltPalette':
-			return 'rgba(0,0,0, 0.2)';
+			return neutral[86];
 	}
 };
 

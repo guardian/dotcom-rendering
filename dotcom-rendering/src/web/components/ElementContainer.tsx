@@ -1,5 +1,5 @@
 import { ClassNames, css as emoCss } from '@emotion/react';
-import { border, from, neutral, space } from '@guardian/source-foundations';
+import { from, neutral, space } from '@guardian/source-foundations';
 // @ts-expect-error
 import { jsx as _jsx } from 'react/jsx-runtime';
 import { center } from '../lib/center';
