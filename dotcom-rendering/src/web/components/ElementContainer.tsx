@@ -18,10 +18,10 @@ const bottomPadding = emoCss`
 	padding-bottom: ${space[9]}px;
 `;
 
-const sideBorderStyles = (colour: string) => emoCss`
+const sideBorderStyles = emoCss`
 	${from.tablet} {
-		border-left: 1px solid ${colour};
-		border-right: 1px solid ${colour};
+		border-left: 1px solid ${border.secondary};
+		border-right: 1px solid ${border.secondary};
 	}
 `;
 
@@ -86,7 +86,7 @@ export const ElementContainer = ({
 					id={sectionId}
 					css={[
 						shouldCenter && center,
-						showSideBorders && sideBorderStyles(borderColour),
+						showSideBorders && sideBorderStyles,
 						showTopBorder && topBorderStyles(borderColour),
 						innerBackgroundColour &&
 							setBackgroundColour(innerBackgroundColour),
