@@ -1,5 +1,5 @@
 import { ClassNames, css as emoCss } from '@emotion/react';
-import { border, from, space } from '@guardian/source-foundations';
+import { border, from, neutral, space } from '@guardian/source-foundations';
 // @ts-expect-error
 import { jsx as _jsx } from 'react/jsx-runtime';
 import { center } from '../lib/center';
@@ -18,15 +18,15 @@ const bottomPadding = emoCss`
 	padding-bottom: ${space[9]}px;
 `;
 
-const sideBorderStyles = (colour: string) => emoCss`
+const sideBorderStyles = emoCss`
 	${from.tablet} {
-		border-left: 1px solid ${colour};
-		border-right: 1px solid ${colour};
+		border-left: 1px solid ${neutral[86]};
+		border-right: 1px solid ${neutral[86]};
 	}
 `;
 
-const topBorderStyles = (colour: string) => emoCss`
-	border-top: 1px solid ${colour};
+const topBorderStyles = emoCss`
+	border-top: 1px solid ${neutral[86]};
 `;
 
 const setBackgroundColour = (colour: string) => emoCss`
@@ -68,7 +68,6 @@ export const ElementContainer = ({
 	showTopBorder = true,
 	padSides = true,
 	padBottom = false,
-	borderColour = border.secondary,
 	backgroundColour,
 	innerBackgroundColour,
 	shouldCenter = true,
@@ -86,8 +85,8 @@ export const ElementContainer = ({
 					id={sectionId}
 					css={[
 						shouldCenter && center,
-						showSideBorders && sideBorderStyles(borderColour),
-						showTopBorder && topBorderStyles(borderColour),
+						showSideBorders && sideBorderStyles,
+						showTopBorder && topBorderStyles,
 						innerBackgroundColour &&
 							setBackgroundColour(innerBackgroundColour),
 						padSides && sidePadding,
