@@ -12,7 +12,7 @@ import {
 import type { Option } from '@guardian/types';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
-import { renderStandfirstText } from 'renderer';
+import { renderCalloutDescriptionText } from 'renderer';
 import CalloutForm from './form';
 
 export interface CalloutProps {
@@ -89,16 +89,17 @@ const Callout: FC<CalloutProps> = ({ campaign, format, description }) => {
 					<div css={summaryContentWrapper}>
 						<div css={titleStyles(format)}>{callout}</div>
 						<h4 css={headingTextHeaderStyles}>{name}</h4>
-						{maybeRender(description, (description) => (
-							<div css={descriptionStyles}>
-								{/* TODO: Should we rename the renderStandfirstText fn,
-								or create a new renderCalloutDescription fn? The standfirst allows
-								links and lists and bold/italics.
-								Callout descriptions support bold/italics/links only
-								*/}
-								{renderStandfirstText(description, format)}
-							</div>
-						))}
+						{maybeRender(
+							description,
+							(description: DocumentFragment) => (
+								<div css={descriptionStyles}>
+									{renderCalloutDescriptionText(
+										description,
+										format,
+									)}
+								</div>
+							),
+						)}
 					</div>
 				</summary>
 				<CalloutForm campaign={campaign} format={format} />
