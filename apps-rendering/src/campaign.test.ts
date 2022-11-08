@@ -6,7 +6,7 @@ import { ParticipationFields } from '@guardian/apps-rendering-api-models/partici
 import { ArticleSpecial } from '@guardian/libs';
 import { getCallout, getReport } from 'campaign';
 
-// ----- Functions ----- //
+// ----- Mocks ----- //
 
 const campaignFromFields = (fields: CampaignFields): Campaign => ({
     id: 'mockId',
