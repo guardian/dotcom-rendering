@@ -418,3 +418,39 @@ export const TwoSublinks = () => {
 		</div>
 	);
 };
+
+export const LiveSublink = () => {
+	return (
+		<div
+			css={css`
+				width: 700px;
+			`}
+		>
+			<Card
+				{...basicCardProps}
+				supportingContent={[
+					{
+						headline: 'Headline',
+						kickerText: 'Kicker',
+						url: 'https://www.theguardian.com',
+						format: {
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.LiveBlog,
+							theme: ArticlePillar.News,
+						},
+					},
+				]}
+				imagePosition="left"
+				imageSize="large"
+				trailText="When the image is positioned horizontally and there is only one sublink, it appears under the headline"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticlePillar.News,
+				}}
+				linkTo=""
+				headlineText="With one link to a liveblog"
+			/>
+		</div>
+	);
+};

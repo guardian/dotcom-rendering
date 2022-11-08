@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
 import { from, until } from '@guardian/source-foundations';
 import type {
 	DCRContainerPalette,
@@ -13,6 +14,7 @@ type Props = {
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: true;
+	showPulsingDot?: boolean;
 };
 
 const wrapperStyles = css`
@@ -68,6 +70,7 @@ export const SupportingContent = ({
 	alignment,
 	containerPalette,
 	isDynamo,
+	showPulsingDot,
 }: Props) => {
 	return (
 		<ul css={[wrapperStyles, directionStyles(alignment)]}>
@@ -87,8 +90,6 @@ export const SupportingContent = ({
 						]}
 					>
 						<CardHeadline
-							headlineText={subLink.headline}
-							kickerText={subLink.kickerText}
 							format={subLink.format}
 							size="tiny"
 							showSlash={false}
@@ -96,6 +97,16 @@ export const SupportingContent = ({
 							linkTo={subLink.url}
 							containerPalette={containerPalette}
 							isDynamo={isDynamo}
+							headlineText={subLink.headline}
+							kickerText={
+								subLink.format.design === ArticleDesign.LiveBlog
+									? 'Live'
+									: subLink.kickerText
+							}
+							showPulsingDot={
+								subLink.format.design ===
+									ArticleDesign.LiveBlog || showPulsingDot
+							}
 						/>
 					</li>
 				);
