@@ -416,6 +416,7 @@ export const Card = ({
 								alignment="vertical"
 								containerPalette={containerPalette}
 								isDynamo={isDynamo}
+								parentFormat={format}
 							/>
 						) : (
 							<></>
@@ -426,6 +427,7 @@ export const Card = ({
 			{hasSublinks && noOfSublinks > 2 ? (
 				<SupportingContent
 					supportingContent={supportingContent}
+					parentFormat={format}
 					containerPalette={containerPalette}
 					isDynamo={isDynamo}
 					alignment={

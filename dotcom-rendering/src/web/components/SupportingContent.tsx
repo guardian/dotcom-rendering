@@ -15,6 +15,7 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: true;
 	showPulsingDot?: boolean;
+	parentFormat?: ArticleFormat;
 };
 
 const wrapperStyles = css`
@@ -65,12 +66,27 @@ const bottomMargin = css`
 	}
 `;
 
+// If the sublink or parent container is a liveblog the sublink format should persist taking the parent format's design.
+const decideFormat = (
+	sublinkFormat: ArticleFormat,
+	parentFormat: ArticleFormat,
+) => {
+	if (
+		sublinkFormat.design === ArticleDesign.LiveBlog ||
+		parentFormat.design === ArticleDesign.LiveBlog
+	) {
+		return { ...sublinkFormat, design: parentFormat.design };
+	}
+	return sublinkFormat;
+};
+
 export const SupportingContent = ({
 	supportingContent,
 	alignment,
 	containerPalette,
 	isDynamo,
 	showPulsingDot,
+	parentFormat,
 }: Props) => {
 	return (
 		<ul css={[wrapperStyles, directionStyles(alignment)]}>
@@ -90,7 +106,11 @@ export const SupportingContent = ({
 						]}
 					>
 						<CardHeadline
-							format={subLink.format}
+							format={
+								parentFormat
+									? decideFormat(subLink.format, parentFormat)
+									: subLink.format
+							}
 							size="tiny"
 							showSlash={false}
 							showLine={true}
