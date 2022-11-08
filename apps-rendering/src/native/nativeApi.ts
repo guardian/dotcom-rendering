@@ -6,10 +6,10 @@ import * as Environment from '@guardian/bridget/Environment';
 import * as Gallery from '@guardian/bridget/Gallery';
 import * as Metrics from '@guardian/bridget/Metrics';
 import * as Navigation from '@guardian/bridget/Navigation';
+import * as Newsletters from '@guardian/bridget/Newsletters';
 import * as Notifications from '@guardian/bridget/Notifications';
 import * as User from '@guardian/bridget/User';
 import * as Video from '@guardian/bridget/Videos';
-import * as Newsletters from '@guardian/bridget/Newsletters';
 import { createAppClient } from './thrift/nativeConnection';
 
 const environmentClient: Environment.Client<void> = createAppClient<

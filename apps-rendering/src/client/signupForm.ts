@@ -31,7 +31,10 @@ async function handleSubmission(bundle: FormBundle): Promise<void> {
 	input.setAttribute('disabled', '');
 	submitButton.setAttribute('disabled', '');
 
-	const response = await newslettersClient.requestSignUp(input.value,identityName)
+	const response = await newslettersClient.requestSignUp(
+		input.value,
+		identityName,
+	);
 	form.classList.remove(MODIFIER_CLASSNAME.waiting);
 
 	if (response.success) {
