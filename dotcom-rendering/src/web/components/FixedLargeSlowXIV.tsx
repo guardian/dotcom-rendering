@@ -58,6 +58,7 @@ export const FixedLargeSlowXIV = ({
 							padSides={true}
 							percentage="25%"
 							showDivider={cardIndex > 0}
+							containerPalette={containerPalette}
 							key={card.url}
 						>
 							<FrontCard
@@ -79,6 +80,7 @@ export const FixedLargeSlowXIV = ({
 							padSides={true}
 							percentage="25%"
 							showDivider={cardIndex % columns !== 0}
+							containerPalette={containerPalette}
 							offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 								cardIndex,
 								length,

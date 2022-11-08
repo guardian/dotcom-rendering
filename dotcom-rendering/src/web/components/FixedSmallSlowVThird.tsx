@@ -26,6 +26,7 @@ export const FixedSmallSlowVThird = ({
 						key={trail.url}
 						padSides={true}
 						showDivider={index > 0}
+						containerPalette={containerPalette}
 						percentage="25%"
 					>
 						<FrontCard

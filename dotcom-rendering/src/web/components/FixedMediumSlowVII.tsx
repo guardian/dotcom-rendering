@@ -80,6 +80,7 @@ export const FixedMediumSlowVII = ({
 							key={trail.url}
 							padSides={true}
 							showDivider={index > 0}
+							containerPalette={containerPalette}
 						>
 							<FrontCard
 								trail={trail}

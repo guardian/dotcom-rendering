@@ -21,7 +21,12 @@ export const FixedSmallSlowIV = ({
 		<UL direction="row">
 			{slicedTrails.map((trail, index) => {
 				return (
-					<LI key={trail.url} padSides={true} showDivider={index > 0}>
+					<LI
+						key={trail.url}
+						padSides={true}
+						showDivider={index > 0}
+						containerPalette={containerPalette}
+					>
 						<FrontCard
 							trail={trail}
 							starRating={trail.starRating}

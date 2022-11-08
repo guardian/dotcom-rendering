@@ -379,6 +379,7 @@ export const FixedMediumSlowXIIMPU = ({
 												2,
 											)}
 											showDivider={trailIndex % 2 !== 0}
+											containerPalette={containerPalette}
 											percentage="50%"
 											stretch={true}
 										>

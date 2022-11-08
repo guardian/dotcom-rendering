@@ -159,6 +159,7 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 						percentage="50%"
 						padSides={true}
 						showDivider={index % 2 === 1}
+						containerPalette={containerPalette}
 						offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 							index,
 							length - (length % columns),

@@ -27,6 +27,7 @@ export const FixedMediumSlowVI = ({
 							key={trail.url}
 							padSides={true}
 							showDivider={index > 0}
+							containerPalette={containerPalette}
 							percentage={index === 0 ? '75%' : '25%'}
 						>
 							<FrontCard
