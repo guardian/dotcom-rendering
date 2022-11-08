@@ -127,7 +127,7 @@ const buttonIcon = css`
 	}
 `;
 
-// TODO: Split adding a skip to end of callout link into a new ticket
+// TODO: Use the expanding wrapper I've put in source-kitchen
 const ExpandingWrapper: FC<ExpandingWrapperProps> = ({
 	format,
 	renderExtra,

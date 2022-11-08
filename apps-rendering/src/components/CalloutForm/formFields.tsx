@@ -92,6 +92,7 @@ const renderField = (
 					label={label}
 				/>
 			);
+		// Need to support checkbox at the least
 		case 'select':
 			return (
 				<Select

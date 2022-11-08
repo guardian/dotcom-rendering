@@ -3,7 +3,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import type { FC, ReactElement } from 'react';
 import Callout from './callout';
-import DeadlineComponent from './deadlineComponent';
+import DeadlineDate from './deadlineDate';
 import ExpandingWrapper from './expandingWrapper';
 
 export interface CalloutProps {
@@ -28,14 +28,14 @@ const CalloutForm: FC<CalloutProps> = ({
 						campaign={campaign}
 						description={description}
 					/>
-					<DeadlineComponent until={campaign.activeUntil} />
+					<DeadlineDate until={campaign.activeUntil} />
 				</>
 			) : (
 				<>
 					<ExpandingWrapper
 						format={format}
 						renderExtra={(): ReactElement => (
-							<DeadlineComponent until={campaign.activeUntil} />
+							<DeadlineDate until={campaign.activeUntil} />
 						)}
 					>
 						<Callout

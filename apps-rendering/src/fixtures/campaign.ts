@@ -111,6 +111,32 @@ const mockCampaign = {
 				type: 'radio',
 				required: '1',
 			},
+			{
+				mandatory: true,
+				name: 'liked_colours',
+				options: [
+					{
+						label: 'Blue',
+						value: 'blue',
+					},
+					{
+						label: 'Red',
+						value: 'red',
+					},
+					{
+						label: 'Yellow',
+						value: 'yellow',
+					},
+				],
+				hide_label: '0',
+				label: 'What colours do you like?',
+				id: '121575463451',
+				type: 'checkbox',
+				required: '1',
+			},
+			// Basic fields supported by formstack that we need to support
+			// Need to add checkbox support
+			// and make sure we support - number, tel & email
 		],
 		formUrl:
 			'https://guardiannewsandmedia.formstack.com/forms/ghost_flights',
