@@ -337,7 +337,7 @@ const ReaderRevenueLinksNative: React.FC<{
 			href={getUrl('contribute')}
 			data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
 		>
-			Support <ArrowRightIcon />
+			Support us <ArrowRightIcon />
 		</a>
 	);
 	const PrimaryButton =
