@@ -410,13 +410,17 @@ const fromCapiLiveBlog =
 		request: RenderingRequest,
 		blockId: Option<string>,
 	): LiveBlog | DeadBlog => {
-		const { content } = request;
+		const { content, campaigns } = request;
 		const body = content.blocks?.body ?? [];
 		const pageSize = content.tags.map((c) => c.id).includes('sport/sport')
 			? 30
 			: 10;
 
-		const parsedBlocks = parseLiveBlocks(context)(body, content.tags);
+		const parsedBlocks = parseLiveBlocks(context)(
+			body,
+			content.tags,
+			campaigns ?? [],
+		);
 		const pagedBlocks = getPagedBlocks(pageSize, parsedBlocks, blockId);
 		return {
 			design:
