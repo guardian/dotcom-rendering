@@ -16,7 +16,7 @@ import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
 type InlineProps = {
 	display?: ArticleDisplay;
-	position: 'inline';
+	position: 'inline' | 'mobile-front';
 	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
@@ -24,7 +24,7 @@ type InlineProps = {
 
 type NonInlineProps = {
 	display?: ArticleDisplay;
-	position: Omit<SlotName, 'inline'>;
+	position: Omit<SlotName, 'inline' | 'mobile-front'>;
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
@@ -32,8 +32,8 @@ type NonInlineProps = {
 
 /**
  * This union type allows us to conditionally require the index property
- * based on position. If position = 'inline' then we expect the index
- * value. If not, then we explictly refuse this property
+ * based on position. If `position` is 'inline' or 'mobile-front' then we expect the index
+ * value. If not, then we explicitly refuse this property
  */
 type Props = InlineProps | NonInlineProps;
 
@@ -440,6 +440,36 @@ export const AdSlot = ({
 					css={[
 						css`
 							position: relative;
+						`,
+						adStyles,
+					]}
+					data-link-name={`ad slot ${advertId}`}
+					data-name={`${advertId}`}
+					aria-hidden="true"
+				/>
+			);
+		}
+		case 'mobile-front': {
+			const advertId = index ? `inline${index}` : 'inline-0';
+			return (
+				<div
+					id={`dfp-ad--${advertId}--mobile`}
+					className={[
+						'js-ad-slot',
+						'ad-slot',
+						`ad-slot--${advertId}`,
+						'ad-slot--container-inline',
+						'ad-slot--mobile',
+						'mobile-only',
+						'ad-slot--rendered',
+					].join(' ')}
+					css={[
+						css`
+							position: relative;
+							min-height: 274px;
+							min-width: 300px;
+							width: 300px;
+							margin: 12px auto;
 						`,
 						adStyles,
 					]}
