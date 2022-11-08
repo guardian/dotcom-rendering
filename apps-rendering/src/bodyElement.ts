@@ -335,6 +335,10 @@ const parse =
 				);
 			}
 
+			// TODO: Once merged with Anna's branch. If the callout is expired.
+			// We need some logic here to show nothing if the campaign isEmbedded (isCollabsible)
+			// And render some 'This campaign is expired' text if it is non collapsible
+
 			case ElementType.EMBED: {
 				const { html: embedHtml } = element.embedTypeData ?? {};
 

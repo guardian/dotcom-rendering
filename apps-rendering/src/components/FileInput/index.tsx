@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
@@ -12,6 +13,8 @@ import {
 } from '@guardian/source-foundations';
 import { Label } from '@guardian/source-react-components';
 import type { ReactElement } from 'react';
+
+import { stringifyFileBase64 } from './stringifyFileBase64';
 
 interface FileInputProps {
 	mandatory: boolean;
@@ -60,30 +63,32 @@ const FileInput = ({
 	supporting,
 	cssOverrides,
 	format,
-}: FileInputProps): ReactElement => (
-	<Label
-		text={label}
-		supporting={supporting}
-		optional={!mandatory}
-		cssOverrides={cssOverrides}
-	>
-		<p css={fieldLabelStyles}>
-			May not work on some mobile devices, or files may be too large.
-		</p>
-		<div css={customUpload(format)}>
-			Choose File
-			<input
-				id={name}
-				name={name}
-				type="file"
-				accept="image/*, .pdf"
-				required={mandatory}
-				css={css`
-					${visuallyHidden}
-				`}
-			/>
-		</div>
-	</Label>
-);
-
+}: FileInputProps): ReactElement => {
+	// TODO: Remove file button
+	return (
+		<Label
+			text={label}
+			supporting={supporting}
+			optional={!mandatory}
+			cssOverrides={cssOverrides}
+		>
+			<p css={fieldLabelStyles}>
+				May not work on some mobile devices, or files may be too large.
+			</p>
+			<div css={customUpload(format)}>
+				Choose File
+				<input
+					id={name}
+					name={name}
+					type="file"
+					accept="image/*, .pdf"
+					required={mandatory}
+					css={css`
+						${visuallyHidden}
+					`}
+				/>
+			</div>
+		</Label>
+	);
+};
 export default FileInput;

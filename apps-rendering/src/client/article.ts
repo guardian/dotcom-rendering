@@ -308,6 +308,7 @@ function callouts(): void {
 								if (checked) {
 									acc[name] = value;
 								}
+								// TODO: Check this is working still
 							} else if (type === 'file' && files?.length) {
 								acc[name] = await readFile(files[0]);
 							} else if (value) {
