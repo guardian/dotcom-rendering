@@ -12,6 +12,7 @@ import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
+import { buildStandAlonePage } from './stand-alone-pages';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
@@ -207,4 +208,23 @@ export const renderFrontJson = (
 	res: express.Response,
 ): void => {
 	res.json(enhanceFront(body));
+};
+
+export const renderStandAlonePage = (
+	req: express.Request,
+	res: express.Response,
+): void => {
+	try {
+		const content = buildStandAlonePage(req);
+
+		if (content) {
+			res.status(200).send(content);
+			return;
+		}
+
+		res.sendStatus(404);
+		return;
+	} catch (e) {
+		res.status(500).send(`<pre>${getStack(e)}</pre>`);
+	}
 };

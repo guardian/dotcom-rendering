@@ -8,6 +8,7 @@ import {
 	renderFrontJson,
 	renderInteractive,
 	renderKeyEvents,
+	renderStandAlonePage,
 } from '../web/server';
 
 // see https://www.npmjs.com/package/webpack-hot-server-middleware
@@ -33,6 +34,8 @@ export const devServer = () => {
 				return renderFront(req, res);
 			case '/FrontJSON':
 				return renderFrontJson(req, res);
+			case '/StandAlone':
+				return renderStandAlonePage(req, res);
 			default:
 				next();
 		}
