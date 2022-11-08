@@ -38,7 +38,7 @@
     "@emotion/jest": "^11.10.0",
     "@guardian/apps-rendering-api-models": "^1.1.1",
     "@guardian/atoms-rendering": "^23.7.2",
-    "@guardian/bridget": "^1.12.0",
+    "@guardian/bridget": "^1.13.0",
     "@guardian/cdk": "^47.3.3",
     "@guardian/content-api-models": "^17.3.0",
     "@guardian/content-atom-model": "^3.4.0",
