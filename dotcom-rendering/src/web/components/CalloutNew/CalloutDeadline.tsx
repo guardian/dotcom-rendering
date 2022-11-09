@@ -4,8 +4,11 @@ import {
 	palette,
 	textSans,
 	visuallyHidden,
+	space,
+	remSpace,
 } from '@guardian/source-foundations';
 import ClockIcon from '../../../static/icons/clock.svg';
+import { SvgClock } from '@guardian/source-react-components';
 
 type Props = {
 	isScreenReader?: boolean;
@@ -16,25 +19,16 @@ const deadlineStyles = css`
 	${textSans.xxsmall()};
 	color: ${palette.brand};
 	background-color: ${palette.brandAlt[400]};
-	display: inline-block;
-
-	> strong {
-		font-weight: bold;
-	}
-
-	padding: ${'3px 5px'};
-
-	${from.mobileLandscape} {
-		padding-left: ${'6px'};
-	}
+	position: absolute;
+	right: 0;
+	display: flex;
+	align-items: center;
+	margin-top: -${remSpace[6]};
+	padding: 0 ${remSpace[1]};
 
 	${from.leftCol} {
 		padding-left: ${'5px'};
 	}
-`;
-
-const deadlineScreenReader = css`
-	${visuallyHidden};
 `;
 
 function getDaysBetween(first: Date, second: Date): number {
@@ -46,12 +40,12 @@ export const getDeadlineText = (
 	date1: Date,
 	date2: Date,
 ): string | undefined => {
-	const maxDays = 7; // TODO: Check this
+	const maxDays = 7;
 	const daysBetween = getDaysBetween(date1, date2);
 	if (daysBetween <= 0 || daysBetween > maxDays) return;
-	if (daysBetween <= 1) return ' Closing today';
-	if (Math.round(daysBetween) === 1) return ' Open for 1 more day';
-	return ` Open for ${Math.round(daysBetween)} more days`;
+	if (daysBetween <= 1) return 'Closing today';
+	if (Math.round(daysBetween) === 1) return 'Open for 1 more day';
+	return `Open for ${Math.round(daysBetween)} more days`;
 };
 
 function formatOptionalDate(date: number | undefined): Date | undefined {
@@ -67,21 +61,9 @@ export const Deadline = ({ isScreenReader, until }: Props) => {
 	const deadlineText = getDeadlineText(now, untilDate);
 	if (!deadlineText) return null;
 
-	// TODO: Fix this
-	if (isScreenReader) {
-		return (
-			<div css={deadlineScreenReader}>
-				<span css={deadlineStyles}>
-					<ClockIcon />
-					{deadlineText}
-				</span>
-			</div>
-		);
-	}
-
 	return (
 		<span css={deadlineStyles}>
-			<ClockIcon />
+			<SvgClock size="xsmall" />
 			{deadlineText}
 		</span>
 	);

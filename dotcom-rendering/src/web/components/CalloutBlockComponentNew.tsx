@@ -118,7 +118,10 @@ export const CalloutBlockComponent = ({
 					/>
 				</details>
 			) : (
-				<ExpandingWrapper format={format}>
+				<ExpandingWrapper
+					format={format}
+					renderExtra={() => <Deadline until={activeUntil} />}
+				>
 					<details
 						css={[calloutDetailsStyles, wrapperStyles]}
 						aria-hidden={true}
@@ -131,9 +134,6 @@ export const CalloutBlockComponent = ({
 								</div>
 								<h4 css={subtitleTextHeaderStyles}>{title}</h4>
 								<div css={descriptionStyles}>{description}</div>
-								<div css={activeUntilStyles}>
-									<Deadline until={activeUntil} />
-								</div>
 							</div>
 						</summary>
 						<CalloutShareComponent format={format} />

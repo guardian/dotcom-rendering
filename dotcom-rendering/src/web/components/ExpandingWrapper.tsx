@@ -131,6 +131,7 @@ export const ExpandingWrapper = ({
 				{children}
 			</div>
 			<div id="expander-overlay" css={overlayStyles} />
+			{renderExtra?.()}
 			<label
 				aria-hidden={true}
 				css={fakeButtonStyles}
@@ -146,7 +147,6 @@ export const ExpandingWrapper = ({
 					</span>
 				</>
 			</label>
-			{renderExtra?.()}
 		</div>
 	);
 };
