@@ -16,7 +16,7 @@ const buildTestPageContent: StandAlonePageBuilder = (req, cache) => {
 
 	return renderToString(
 		<CacheProvider value={cache}>
-			<StandAlonePage>
+			<StandAlonePage subscribeLink="/" editionId="UK">
 				<TestContent {...props} />
 			</StandAlonePage>
 		</CacheProvider>,
@@ -28,8 +28,12 @@ const wrapContent = (content: string): string => `
 <body>
 	<style>
 		body {
-			background-color: skyblue;
-			font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+			margin: 0;
+		}
+
+		body > main {
+			background-color: antiquewhite;
+			border: 8px inset purple;
 		}
 	</style>
 	${content}
