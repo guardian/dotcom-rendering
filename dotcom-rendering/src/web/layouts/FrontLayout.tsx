@@ -199,6 +199,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					<Section
 						fullWidth={true}
+						shouldCenter={false}
 						showTopBorder={false}
 						showSideBorders={false}
 						padSides={false}
@@ -217,6 +218,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							remoteHeader={!!front.config.switches.remoteHeader}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
+							headerTopBarSwitch={
+								!!front.config.switches.headerTopNav
+							}
 							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
@@ -235,6 +239,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.nav.readerRevenueLinks.header.subscribe
 							}
 							editionId={front.editionId}
+							headerTopBarSwitch={
+								!!front.config.switches.headerTopNav
+							}
 						/>
 					</Section>
 					{NAV.subNavSections && (
