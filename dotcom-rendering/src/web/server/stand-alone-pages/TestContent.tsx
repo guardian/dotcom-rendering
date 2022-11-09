@@ -1,10 +1,14 @@
+import { Section } from '../../components/Section';
+
 export interface TestContentProps {
 	message: string;
 }
 
 export const TestContent = ({ message }: TestContentProps) => (
 	<main>
-		<h1>This is a test page Component</h1>
-		<p>Message: {message}</p>
+		<Section>
+			<h1>This is a test page Component</h1>
+			<p>Message: {message}</p>
+		</Section>
 	</main>
 );
