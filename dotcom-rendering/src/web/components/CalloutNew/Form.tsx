@@ -9,6 +9,7 @@ import { Button } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { decidePalette } from '../../lib/decidePalette';
 import { CalloutTermsAndConditions } from './CalloutTermsAndConditions';
+import { FileInput } from './FormFields/FileInput';
 import { FileUpload } from './FormFields/FileUpload';
 import { MultiSelect } from './FormFields/MultiSelect';
 import { Select } from './FormFields/Select';
@@ -71,6 +72,13 @@ const FormField = ({
 		case 'file':
 			return (
 				<>
+					{/* <FileInput
+						name={formField.id}
+						label={formField.label}
+						supporting={formField.description}
+						format={format}
+						mandatory={formField.required}
+					/> */}
 					<FileUpload
 						formField={formField}
 						formData={formData}

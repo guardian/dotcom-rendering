@@ -1,6 +1,12 @@
 import { css } from '@emotion/react';
-import { palette, space, text, textSans } from '@guardian/source-foundations';
-import { Button } from '@guardian/source-react-components';
+import type { SerializedStyles } from '@emotion/react';
+import {
+	palette,
+	space,
+	textSans,
+	remHeight,
+	visuallyHidden,
+} from '@guardian/source-foundations';
 import React, { useState } from 'react';
 import { decidePalette } from '../../../lib/decidePalette';
 import { stringifyFileBase64 } from '../../../lib/stringifyFileBase64';
@@ -19,15 +25,34 @@ type Props = {
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
 };
 
-const buttonStyles = (format: ArticleFormat) =>
-	css`
-		margin-top: ${space[2]}px;
-		width: fit-content;
-		border: ${decidePalette(format).text.richLink} solid 1px;
-		color: ${decidePalette(format).text.richLink};
-	`;
+const customUpload = (format: ArticleFormat): SerializedStyles => css`
+	${textSans.small()};
+	color: ${decidePalette(format).text.richLink};
+	border: 1px solid ${decidePalette(format).text.richLink};
+	display: inline-flex;
+	justify-content: space-between;
+	align-items: center;
+	box-sizing: border-box;
+	background: transparent;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out 0s;
+	text-decoration: none;
+	white-space: nowrap;
+	height: ${remHeight.ctaXsmall}rem;
+	min-height: ${remHeight.ctaXsmall}rem;
+	padding: ${space[3]};
+	margin: ${space[3]};
+	border-radius: ${remHeight.ctaMedium}rem;
+	${textSans.medium({ fontWeight: 'medium' })};
+	width: fit-content;
+`;
 
-export const FileUpload = ({ formField, format, setFormData }: Props) => {
+export const FileUpload = ({
+	formField,
+	format,
+	formData,
+	setFormData,
+}: Props) => {
 	const [error, setError] = useState('');
 	const onSelectFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files && event.target.files[0]) {
@@ -50,15 +75,19 @@ export const FileUpload = ({ formField, format, setFormData }: Props) => {
 	return (
 		<>
 			<FieldLabel formField={formField} />
-			<Button
-				css={buttonStyles(format)}
-				priority="tertiary"
-				size="xsmall"
-				type="submit"
-				onChange={onSelectFile}
-			>
+			<div css={customUpload(format)}>
 				Choose file
-			</Button>
+				<input
+					data-testid={`form-field-${formField.id}`}
+					type="file"
+					accept="image/*, .pdf"
+					required={formField.required}
+					onChange={onSelectFile}
+					css={css`
+						${visuallyHidden}
+					`}
+				/>
+			</div>
 			{!!error && <div css={errorMessagesStyles}>{error}</div>}
 		</>
 	);

@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { calloutCampaign } from '../../../fixtures/manual/calloutCampaign';
-import { CalloutBlockComponent } from './CalloutBlockComponentNew';
+import { CalloutBlockComponent } from './CalloutBlockComponentNew.importable';
 
 const mockFormat = {
 	display: ArticleDisplay.Standard,
