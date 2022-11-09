@@ -53,7 +53,10 @@ export const FileUpload = ({
 	formData,
 	setFormData,
 }: Props) => {
+	const [chosenFile, setChosenFile] = useState<null | string>();
 	const [error, setError] = useState('');
+	const getFileName = (filepath?: string): string =>
+		filepath?.split(/(\\|\/)/g).pop() ?? '';
 	const onSelectFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files && event.target.files[0]) {
 			setError('');
@@ -88,6 +91,22 @@ export const FileUpload = ({
 					`}
 				/>
 			</div>
+			{chosenFile != null && (
+				<>
+					{!formField.required && (
+						<button
+							type="button"
+							css={customUpload(format)}
+							onClick={(): void => {
+								setChosenFile(undefined);
+							}}
+						>
+							Remove File
+						</button>
+					)}
+					<span>{getFileName(chosenFile)}</span>
+				</>
+			)}
 			{!!error && <div css={errorMessagesStyles}>{error}</div>}
 		</>
 	);
