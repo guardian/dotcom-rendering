@@ -14,7 +14,6 @@ type Props = {
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: true;
-	showPulsingDot?: boolean;
 	parentFormat?: ArticleFormat;
 };
 
@@ -85,7 +84,6 @@ export const SupportingContent = ({
 	alignment,
 	containerPalette,
 	isDynamo,
-	showPulsingDot,
 	parentFormat,
 }: Props) => {
 	return (
@@ -122,10 +120,6 @@ export const SupportingContent = ({
 								subLink.format.design === ArticleDesign.LiveBlog
 									? 'Live'
 									: subLink.kickerText
-							}
-							showPulsingDot={
-								subLink.format.design ===
-									ArticleDesign.LiveBlog || showPulsingDot
 							}
 						/>
 					</li>
