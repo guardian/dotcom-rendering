@@ -20,8 +20,8 @@ import { darkModeCss } from 'styles';
 export interface ExpandingWrapperProps {
 	format: ArticleFormat;
 	children: ReactNode;
-	renderExtra?: () => ReactNode;
 	name: string;
+	renderExtra?: () => ReactNode;
 }
 
 const containerStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -91,7 +91,7 @@ const fakeButtonStyles = (format: ArticleFormat): SerializedStyles => css`
 	box-sizing: border-box;
 	cursor: pointer;
 	position: absolute;
-	margin-left: ${remSpace[1]};
+	// margin-left: ${remSpace[1]};
 	bottom: -${remSpace[6]};
 	border-radius: ${remHeight.ctaMedium}rem;
 	padding: 0 ${remSpace[5]};
@@ -140,7 +140,7 @@ const ExpandingWrapper: FC<ExpandingWrapperProps> = ({
 				`}
 				id="expander-checkbox"
 				name="expander-checkbox"
-				onChange={(e) => setIsExpanded(e.target.checked)}
+				onChange={(e): void => setIsExpanded(e.target.checked)}
 				aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${name}`}
 			/>
 			<div
@@ -151,8 +151,8 @@ const ExpandingWrapper: FC<ExpandingWrapperProps> = ({
 				{children}
 			</div>
 
-			<div id="expander-overlay" css={overlayStyles} />
-
+			{!isExpanded && <div id="expander-overlay" css={overlayStyles} />}
+			{renderExtra?.()}
 			<label
 				aria-hidden={true}
 				css={fakeButtonStyles(format)}
@@ -175,7 +175,6 @@ const ExpandingWrapper: FC<ExpandingWrapperProps> = ({
 					</>
 				)}
 			</label>
-			{renderExtra?.()}
 		</div>
 	);
 };

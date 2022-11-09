@@ -11,6 +11,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { Label } from '@guardian/source-react-components';
+import { useState } from 'react';
 import type { ReactElement } from 'react';
 
 interface FileInputProps {
@@ -43,7 +44,7 @@ const customUpload = (format: ArticleFormat): SerializedStyles => css`
 	height: ${remHeight.ctaXsmall}rem;
 	min-height: ${remHeight.ctaXsmall}rem;
 	padding: ${remSpace[3]};
-	margin: ${remSpace[3]};
+	margin: ${remSpace[3]} ${remSpace[1]};
 	border-radius: ${remHeight.ctaMedium}rem;
 	${textSans.medium({ fontWeight: 'medium' })};
 
@@ -61,31 +62,52 @@ const FileInput = ({
 	cssOverrides,
 	format,
 }: FileInputProps): ReactElement => {
-	// TODO: Remove file button
+	const [chosenFile, setChosenFile] = useState<null | string>();
+	const getFileName = (filepath?: string): string =>
+		filepath?.split(/(\\|\/)/g).pop() ?? '';
 	return (
-		<Label
-			text={label}
-			supporting={supporting}
-			optional={!mandatory}
-			cssOverrides={cssOverrides}
-		>
-			<p css={fieldLabelStyles}>
-				May not work on some mobile devices, or files may be too large.
-			</p>
-			<div css={customUpload(format)}>
-				Choose File
-				<input
-					id={name}
-					name={name}
-					type="file"
-					accept="image/*, .pdf"
-					required={mandatory}
-					css={css`
-						${visuallyHidden}
-					`}
-				/>
-			</div>
-		</Label>
+		<>
+			<Label
+				text={label}
+				supporting={supporting}
+				optional={!mandatory}
+				cssOverrides={cssOverrides}
+			>
+				<p css={fieldLabelStyles}>
+					May not work on some mobile devices, or files may be too
+					large.
+				</p>
+				<div css={customUpload(format)}>
+					{chosenFile ? 'Change File' : 'Choose File'}
+					<input
+						id={name}
+						name={name}
+						type="file"
+						accept="image/*, .pdf"
+						required={mandatory}
+						css={css`
+							${visuallyHidden}
+						`}
+						onChange={(e): void => setChosenFile(e.target.value)}
+					/>
+				</div>
+			</Label>
+			{chosenFile && (
+				<>
+					{!mandatory && (
+						<button
+							css={customUpload(format)}
+							onClick={(): void => {
+								setChosenFile(undefined);
+							}}
+						>
+							Remove File
+						</button>
+					)}
+					<span>{getFileName(chosenFile)}</span>
+				</>
+			)}
+		</>
 	);
 };
 export default FileInput;

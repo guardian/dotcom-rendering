@@ -92,7 +92,9 @@ const mockFormat: ArticleFormat = {
 
 const expandingWrapper = (): ReactElement => (
 	<div style={{ padding: '10px' }}>
-		<ExpandingWrapper format={mockFormat}>{lorem}</ExpandingWrapper>
+		<ExpandingWrapper name="lorem ipsum" format={mockFormat}>
+			{lorem}
+		</ExpandingWrapper>
 	</div>
 );
 
