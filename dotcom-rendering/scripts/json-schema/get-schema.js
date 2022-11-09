@@ -19,7 +19,7 @@ const settings = { rejectDateType: true, required: true };
 module.exports = {
 	getArticleSchema: () => {
 		return JSON.stringify(
-			TJS.generateSchema(program, 'CAPIArticleType', settings),
+			TJS.generateSchema(program, 'FEArticleType', settings),
 			null,
 			4,
 		);

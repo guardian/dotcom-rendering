@@ -11,9 +11,9 @@
  *    gen-fixtures.ts directly.
  */
 
-import type { CAPIArticleType } from '../../../src/types/frontend';
+import type { FEArticleType } from '../../../src/types/frontend';
 
-export const PrintShop: CAPIArticleType = {
+export const PrintShop: FEArticleType = {
 	slotMachineFlags: '',
 	main: '',
 	subMetaSectionLinks: [
