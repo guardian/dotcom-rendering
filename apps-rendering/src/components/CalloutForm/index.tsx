@@ -37,6 +37,7 @@ const CalloutForm: FC<CalloutProps> = ({
 						renderExtra={(): ReactElement => (
 							<DeadlineDate until={campaign.activeUntil} />
 						)}
+						name={`${campaign.name} form`}
 					>
 						<Callout
 							format={format}
