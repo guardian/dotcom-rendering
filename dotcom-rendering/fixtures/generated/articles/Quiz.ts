@@ -27,71 +27,11 @@ export const Quiz: CAPIArticleType = {
 		},
 	],
 	commercialProperties: {
-		UK: {
-			adTargeting: [
-				{
-					name: 'url',
-					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-				},
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/e3fga',
-				},
-				{
-					name: 'se',
-					value: ['guardian-sport-network'],
-				},
-				{
-					name: 'tn',
-					value: ['quizzes'],
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'bl',
-					value: ['that-1980s-sports-blog'],
-				},
-				{
-					name: 'co',
-					value: ['steven-pye'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'k',
-					value: ['sport', 'football'],
-				},
-			],
-		},
 		US: {
 			adTargeting: [
 				{
-					name: 'url',
-					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-				},
-				{
 					name: 'sh',
 					value: 'https://www.theguardian.com/p/e3fga',
-				},
-				{
-					name: 'se',
-					value: ['guardian-sport-network'],
-				},
-				{
-					name: 'tn',
-					value: ['quizzes'],
 				},
 				{
 					name: 'su',
@@ -102,44 +42,44 @@ export const Quiz: CAPIArticleType = {
 					value: ['that-1980s-sports-blog'],
 				},
 				{
-					name: 'co',
-					value: ['steven-pye'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'p',
-					value: 'ng',
+					name: 'tn',
+					value: ['quizzes'],
 				},
 				{
 					name: 'edition',
 					value: 'us',
 				},
 				{
+					name: 'url',
+					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
 					name: 'k',
 					value: ['sport', 'football'],
+				},
+				{
+					name: 'se',
+					value: ['guardian-sport-network'],
+				},
+				{
+					name: 'co',
+					value: ['steven-pye'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
 				},
 			],
 		},
 		AU: {
 			adTargeting: [
 				{
-					name: 'url',
-					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-				},
-				{
 					name: 'sh',
 					value: 'https://www.theguardian.com/p/e3fga',
-				},
-				{
-					name: 'se',
-					value: ['guardian-sport-network'],
-				},
-				{
-					name: 'tn',
-					value: ['quizzes'],
 				},
 				{
 					name: 'su',
@@ -150,48 +90,92 @@ export const Quiz: CAPIArticleType = {
 					value: ['that-1980s-sports-blog'],
 				},
 				{
-					name: 'co',
-					value: ['steven-pye'],
+					name: 'tn',
+					value: ['quizzes'],
+				},
+				{
+					name: 'edition',
+					value: 'au',
+				},
+				{
+					name: 'url',
+					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 				},
 				{
 					name: 'ct',
 					value: 'article',
 				},
 				{
+					name: 'k',
+					value: ['sport', 'football'],
+				},
+				{
+					name: 'se',
+					value: ['guardian-sport-network'],
+				},
+				{
+					name: 'co',
+					value: ['steven-pye'],
+				},
+				{
 					name: 'p',
 					value: 'ng',
+				},
+			],
+		},
+		UK: {
+			adTargeting: [
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'bl',
+					value: ['that-1980s-sports-blog'],
+				},
+				{
+					name: 'tn',
+					value: ['quizzes'],
+				},
+				{
+					name: 'ct',
+					value: 'article',
 				},
 				{
 					name: 'k',
 					value: ['sport', 'football'],
 				},
 				{
+					name: 'se',
+					value: ['guardian-sport-network'],
+				},
+				{
+					name: 'co',
+					value: ['steven-pye'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
 					name: 'edition',
-					value: 'au',
+					value: 'uk',
+				},
+				{
+					name: 'url',
+					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 				},
 			],
 		},
 		INT: {
 			adTargeting: [
 				{
-					name: 'url',
-					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
-				},
-				{
 					name: 'sh',
 					value: 'https://www.theguardian.com/p/e3fga',
-				},
-				{
-					name: 'se',
-					value: ['guardian-sport-network'],
-				},
-				{
-					name: 'tn',
-					value: ['quizzes'],
-				},
-				{
-					name: 'edition',
-					value: 'int',
 				},
 				{
 					name: 'su',
@@ -202,29 +186,93 @@ export const Quiz: CAPIArticleType = {
 					value: ['that-1980s-sports-blog'],
 				},
 				{
-					name: 'co',
-					value: ['steven-pye'],
+					name: 'tn',
+					value: ['quizzes'],
+				},
+				{
+					name: 'url',
+					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 				},
 				{
 					name: 'ct',
 					value: 'article',
 				},
 				{
+					name: 'k',
+					value: ['sport', 'football'],
+				},
+				{
+					name: 'se',
+					value: ['guardian-sport-network'],
+				},
+				{
+					name: 'co',
+					value: ['steven-pye'],
+				},
+				{
+					name: 'edition',
+					value: 'int',
+				},
+				{
 					name: 'p',
 					value: 'ng',
+				},
+			],
+		},
+		EUR: {
+			adTargeting: [
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/e3fga',
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'bl',
+					value: ['that-1980s-sports-blog'],
+				},
+				{
+					name: 'tn',
+					value: ['quizzes'],
+				},
+				{
+					name: 'url',
+					value: '/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+				},
+				{
+					name: 'ct',
+					value: 'article',
 				},
 				{
 					name: 'k',
 					value: ['sport', 'football'],
 				},
+				{
+					name: 'edition',
+					value: 'eur',
+				},
+				{
+					name: 'se',
+					value: ['guardian-sport-network'],
+				},
+				{
+					name: 'co',
+					value: ['steven-pye'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
 			],
 		},
 	},
 	beaconURL: '//phar.gu-web.net',
+	hasRelated: true,
 	webPublicationSecondaryDateDisplay:
 		'Last modified on Fri 12 Jun 2020 10.09 BST',
 	editionLongForm: 'UK edition',
-	hasRelated: true,
 	publication: 'theguardian.com',
 	trailText:
 		'Our Eighties expert revisits a time when Ipswich, Everton and Steaua Bucharest won in Europe',
@@ -517,7 +565,7 @@ export const Quiz: CAPIArticleType = {
 					},
 					{
 						title: 'Obituaries',
-						url: '/tone/obituaries',
+						url: '/obituaries',
 					},
 				],
 			},
@@ -793,7 +841,7 @@ export const Quiz: CAPIArticleType = {
 				children: [
 					{
 						title: 'Obituaries',
-						url: '/tone/obituaries',
+						url: '/obituaries',
 					},
 					{
 						title: 'G2',
@@ -884,6 +932,10 @@ export const Quiz: CAPIArticleType = {
 						url: '/crosswords/series/azed',
 					},
 				],
+			},
+			{
+				title: 'Corrections',
+				url: '/theguardian/series/corrections-and-clarifications',
 			},
 		],
 		brandExtensions: [
@@ -1063,32 +1115,32 @@ export const Quiz: CAPIArticleType = {
 		theme: 'SportPillar',
 		display: 'ShowcaseDisplay',
 	},
-	standfirst:
-		'<p>Our Eighties expert revisits a time when Ipswich, Everton and Steaua Bucharest won in Europe</p>\n<p>By <a href="https://twitter.com/1980ssportsblog">Steven Pye</a> for <a href="https://www.theguardian.com/sport/that-1980s-sports-blog">That 1980s Sports Blog</a></p>',
 	openGraphData: {
 		'og:url':
 			'http://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 		'article:author': 'https://www.theguardian.com/profile/steven-pye',
-		'og:image:height': '721',
-		'og:description':
-			'Our Eighties expert revisits a time when Ipswich, Everton and Steaua Bucharest won in Europe',
 		'og:image:width': '1200',
 		'og:image':
 			'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=b18e32822ec87edabf71cdb6b66b1762',
 		'al:ios:url':
 			'gnmguardian://football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
+		'og:title': 'Sports quiz: football in the 1980s',
+		'fb:app_id': '180444840287',
+		'article:modified_time': '2020-06-12T09:09:25.000Z',
+		'og:image:height': '721',
+		'og:description':
+			'Our Eighties expert revisits a time when Ipswich, Everton and Steaua Bucharest won in Europe',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
 		'article:section': 'Football',
 		'article:published_time': '2020-06-12T09:09:24.000Z',
-		'og:title': 'Sports quiz: football in the 1980s',
-		'fb:app_id': '180444840287',
 		'article:tag': 'Football,Sport',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2020-06-12T09:09:25.000Z',
 	},
+	standfirst:
+		'<p>Our Eighties expert revisits a time when Ipswich, Everton and Steaua Bucharest won in Europe</p>\n<p>By <a href="https://twitter.com/1980ssportsblog">Steven Pye</a> for <a href="https://www.theguardian.com/sport/that-1980s-sports-blog">That 1980s Sports Blog</a></p>',
 	sectionUrl: 'football/football',
 	pageId: 'football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 	version: 3,
@@ -1295,11 +1347,6 @@ export const Quiz: CAPIArticleType = {
 		'twitter:app:id:iphone': '409128287',
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
-		'twitter:image':
-			'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=e30bf592a12a02508c5604791448a0fe',
-		'twitter:site': '@guardian',
-		'twitter:app:url:ipad':
-			'gnmguardian://football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s?contenttype=Article&source=twitter',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
 		'twitter:app:id:ipad': '409128287',
@@ -1307,6 +1354,11 @@ export const Quiz: CAPIArticleType = {
 		'twitter:app:url:googleplay':
 			'guardian://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 		'twitter:app:url:iphone':
+			'gnmguardian://football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s?contenttype=Article&source=twitter',
+		'twitter:image':
+			'https://i.guim.co.uk/img/media/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/master/3020.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=e30bf592a12a02508c5604791448a0fe',
+		'twitter:site': '@guardian',
+		'twitter:app:url:ipad':
 			'gnmguardian://football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s?contenttype=Article&source=twitter',
 	},
 	sectionName: 'football',
@@ -1322,10 +1374,11 @@ export const Quiz: CAPIArticleType = {
 	},
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	headline: 'Sports quiz: football in the 1980s',
 	byline: 'Steven Pye',
-	isLegacyInteractive: false,
+	headline: 'Sports quiz: football in the 1980s',
 	guardianBaseURL: 'https://www.theguardian.com',
+	isLegacyInteractive: false,
+	webPublicationDate: '2020-06-12T09:09:24.000Z',
 	mainMediaElements: [
 		{
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -1583,10 +1636,11 @@ export const Quiz: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '532df0be-9259-4c42-8197-b0273aa512d1',
+			elementId: 'dfcd0226-3131-4202-a12a-a34dd02e8199',
 		},
 	],
-	webPublicationDate: '2020-06-12T09:09:24.000Z',
+	canonicalUrl:
+		'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 	blocks: [
 		{
 			id: '5ee1f3138f0875833522a23a',
@@ -1725,6 +1779,7 @@ export const Quiz: CAPIArticleType = {
 							],
 							imageUrl:
 								'https://i.guim.co.uk/img/media/9bd896505173dcf4adadd02e5f40a03414c50bdc/172_201_2329_1397/master/2329.jpg?width=620&quality=85&auto=format&fit=max&s=133b7c6ce78a0780e99e605bb3ae7479',
+							imageAlt: '',
 						},
 						{
 							id: 'ecbbd1cb-19a0-4d93-8f4a-878e2c43f977',
@@ -1919,6 +1974,7 @@ export const Quiz: CAPIArticleType = {
 							],
 							imageUrl:
 								'https://i.guim.co.uk/img/media/2b19ae8786af119cfbb8c92247b8c6ea6e0212be/0_0_2176_1440/master/2176.jpg?width=620&quality=85&auto=format&fit=max&s=3d51e6df23c7bb0b8032e74ff0483205',
+							imageAlt: '',
 						},
 						{
 							id: '15708aa9-4483-4b16-a32b-e5137bf5a832',
@@ -2196,7 +2252,7 @@ export const Quiz: CAPIArticleType = {
 							minScore: 2,
 						},
 					],
-					elementId: 'd9afe85f-c662-43d3-85d5-5b14d26be290',
+					elementId: 'd640e3b3-8977-4a76-9580-108476a5c3d6',
 				},
 			],
 			attributes: {
@@ -2220,7 +2276,7 @@ export const Quiz: CAPIArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://amp.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
+			'@id': 'https://www.theguardian.com/football/that-1980s-sports-blog/2020/jun/12/sports-quiz-football-in-the-1980s',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',

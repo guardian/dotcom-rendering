@@ -20,12 +20,7 @@ export default {
 		chromatic: {
 			viewports: [
 				breakpoints.mobile,
-				breakpoints.mobileMedium,
-				breakpoints.mobileLandscape,
-				breakpoints.phablet,
 				breakpoints.tablet,
-				breakpoints.desktop,
-				breakpoints.leftCol,
 				breakpoints.wide,
 			],
 		},
@@ -68,7 +63,12 @@ Avatar.story = { name: 'With avatars' };
 
 /* First Slice Variants */
 export const OneHugeTwoBigsFourStandards = () => (
-	<Section title="DynamicSlow" padContent={false} centralBorder="partial">
+	<Section
+		title="DynamicSlow"
+		padContent={false}
+		centralBorder="partial"
+		description={`first slice: oneHuge</br>second slice: twoBigs`}
+	>
 		<DynamicSlow
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -85,7 +85,12 @@ OneHugeTwoBigsFourStandards.story = {
 };
 
 export const OneVeryBigTwoBigsFourStandards = () => (
-	<Section title="DynamicSlow" padContent={false} centralBorder="partial">
+	<Section
+		title="DynamicSlow"
+		padContent={false}
+		centralBorder="partial"
+		description={`first slice: oneVeryBig</br>second slice: twoBigs`}
+	>
 		<DynamicSlow
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -102,7 +107,12 @@ OneVeryBigTwoBigsFourStandards.story = {
 };
 
 export const TwoVeryBigsTwoBigsFourStandards = () => (
-	<Section title="DynamicSlow" padContent={false} centralBorder="partial">
+	<Section
+		title="DynamicSlow"
+		padContent={false}
+		centralBorder="partial"
+		description={`first slice: twoVeryBigs</br>second slice: twoBigs`}
+	>
 		<DynamicSlow
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -119,7 +129,12 @@ TwoVeryBigsTwoBigsFourStandards.story = {
 };
 
 export const TwoVeryBigs1stBoostedTwoBigsFourStandards = () => (
-	<Section title="DynamicSlow" padContent={false} centralBorder="partial">
+	<Section
+		title="DynamicSlow"
+		padContent={false}
+		centralBorder="partial"
+		description={`first slice: twoVeryBigsFirstBoosted</br>second slice: twoBigs`}
+	>
 		<DynamicSlow
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -136,7 +151,12 @@ TwoVeryBigs1stBoostedTwoBigsFourStandards.story = {
 };
 
 export const TwoVeryBigs2ndBoostedTwoBigsFourStandards = () => (
-	<Section title="DynamicSlow" padContent={false} centralBorder="partial">
+	<Section
+		title="DynamicSlow"
+		padContent={false}
+		centralBorder="partial"
+		description={`first slice: twoVeryBigsSecondBoosted</br>second slice: twoBigs`}
+	>
 		<DynamicSlow
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -154,7 +174,12 @@ TwoVeryBigs2ndBoostedTwoBigsFourStandards.story = {
 
 /* Second Slice Variants */
 export const TwoVeryBigs8Standards = () => (
-	<Section title="DynamicSlow" padContent={false} centralBorder="partial">
+	<Section
+		title="DynamicSlow"
+		padContent={false}
+		centralBorder="partial"
+		description={`first slice: twoVeryBigs</br>second slice: noBigs`}
+	>
 		<DynamicSlow
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -170,7 +195,12 @@ TwoVeryBigs8Standards.story = {
 };
 
 export const TwoVeryBigsOneBig4Standards = () => (
-	<Section title="DynamicSlow" padContent={false} centralBorder="partial">
+	<Section
+		title="DynamicSlow"
+		padContent={false}
+		centralBorder="partial"
+		description={`first slice: twoVeryBigs</br>second slice: oneBig`}
+	>
 		<DynamicSlow
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -188,7 +218,12 @@ TwoVeryBigsOneBig4Standards.story = {
 };
 
 export const TwoVeryBigsTwoBigs4Standards = () => (
-	<Section title="DynamicSlow" padContent={false} centralBorder="partial">
+	<Section
+		title="DynamicSlow"
+		padContent={false}
+		centralBorder="partial"
+		description={`first slice: twoVeryBigs</br>second slice: twoBigs`}
+	>
 		<DynamicSlow
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -208,7 +243,12 @@ TwoVeryBigsTwoBigs4Standards.story = {
 
 // Uneven number of Standards with no bigs
 export const TwoVeryBigsFiveStandards = () => (
-	<Section title="DynamicSlow" padContent={false} centralBorder="partial">
+	<Section
+		title="DynamicSlow"
+		padContent={false}
+		centralBorder="partial"
+		description={`first slice: twoVeryBigs</br>second slice: noBigs`}
+	>
 		<DynamicSlow
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -225,7 +265,12 @@ TwoVeryBigsFiveStandards.story = {
 
 // Demote a very big to a big & fifth standard is not shown
 export const ThreeVeryBigsFiveStandards = () => (
-	<Section title="DynamicSlow" padContent={false} centralBorder="partial">
+	<Section
+		title="DynamicSlow"
+		padContent={false}
+		centralBorder="partial"
+		description={`first slice: twoVeryBigs</br>second slice: oneBig`}
+	>
 		<DynamicSlow
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -242,7 +287,12 @@ ThreeVeryBigsFiveStandards.story = {
 
 // No standards were provided
 export const TwoVeryBigsOneBig = () => (
-	<Section title="DynamicSlow" padContent={false} centralBorder="partial">
+	<Section
+		title="DynamicSlow"
+		padContent={false}
+		centralBorder="partial"
+		description={`first slice: twoVeryBigs</br>second slice: oneBig`}
+	>
 		<DynamicSlow
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -259,7 +309,12 @@ TwoVeryBigsOneBig.story = {
 
 // No first slice
 export const TwoBigsThreeStandards = () => (
-	<Section title="DynamicSlow" padContent={false} centralBorder="partial">
+	<Section
+		title="DynamicSlow"
+		padContent={false}
+		centralBorder="partial"
+		description={`first slice: undefined</br>second slice: twoBigs`}
+	>
 		<DynamicSlow
 			groupedTrails={{
 				...defaultGroupedTrails,
@@ -276,7 +331,12 @@ TwoBigsThreeStandards.story = {
 
 // Just 1 standard
 export const OneVeryBigTwoBigsOneStandard = () => (
-	<Section title="DynamicSlow" padContent={false} centralBorder="partial">
+	<Section
+		title="DynamicSlow"
+		padContent={false}
+		centralBorder="partial"
+		description={`first slice: twoVeryBigs</br>second slice: twoBigs`}
+	>
 		<DynamicSlow
 			groupedTrails={{
 				...defaultGroupedTrails,

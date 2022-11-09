@@ -38,6 +38,12 @@ const articleLink = (format: ArticleFormat): Colour => {
 
 const articleLinkDark = articleLink;
 
+const bylineLink = (_format: ArticleFormat): Colour => {
+	return neutral[46];
+};
+
+const bylineLinkDark = bylineLink;
+
 const commentCount = (_format: ArticleFormat): Colour => {
 	return 'rgba(255, 255, 255, 0.4)';
 };
@@ -73,6 +79,8 @@ const liveBlock = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -92,6 +100,8 @@ const liveBlockDark = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -104,6 +114,10 @@ const relatedCardDark = (_format: ArticleFormat): Colour => {
 };
 
 const standfirstLink = (format: ArticleFormat): Colour => {
+	if (format.design === ArticleDesign.Gallery) {
+		return neutral[46];
+	}
+
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[600];
@@ -119,6 +133,8 @@ const standfirstLink = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[600];
 	}
 };
 
@@ -148,6 +164,8 @@ const richLink = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -169,6 +187,8 @@ const richLinkSvgDark = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -221,6 +241,8 @@ const pinnedPost = (format: ArticleFormat): string => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[300];
 	}
 };
 
@@ -228,11 +250,11 @@ const galleryImage = (_format: ArticleFormat): string => {
 	return neutral[20];
 };
 
-const signUpForm = (_format: ArticleFormat): string => {
+const newsletterSignUpForm = (_format: ArticleFormat): string => {
 	return neutral[0];
 };
 
-const signUpFormDark = (_format: ArticleFormat): string => {
+const newsletterSignUpFormDark = (_format: ArticleFormat): string => {
 	return neutral[86];
 };
 
@@ -241,6 +263,8 @@ const signUpFormDark = (_format: ArticleFormat): string => {
 const border = {
 	articleLink,
 	articleLinkDark,
+	bylineLink,
+	bylineLinkDark,
 	commentCount,
 	commentCountDark,
 	commentCountWide,
@@ -263,8 +287,8 @@ const border = {
 	standfirstLinkDark,
 	pinnedPost,
 	galleryImage,
-	signUpForm,
-	signUpFormDark,
+	newsletterSignUpForm,
+	newsletterSignUpFormDark,
 };
 
 // ----- Exports ----- //

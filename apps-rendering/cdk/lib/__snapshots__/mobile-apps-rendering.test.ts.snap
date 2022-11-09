@@ -2,25 +2,30 @@
 
 exports[`The MobileAppsRendering stack matches the snapshot 1`] = `
 Object {
-  "Mappings": Object {
-    "mobileappsrendering": Object {
-      "CODE": Object {
-        "domain": "mobile-aws.code.dev-guardianapis.com",
-        "domainName": "mobile-rendering.mobile-aws.code.dev-guardianapis.com",
-        "hostedZoneId": "Z6PRU8YR6TQDK",
-        "maxInstances": 2,
-        "minInstances": 1,
-        "targetCpuUtilisation": 20,
-      },
-      "PROD": Object {
-        "domain": "mobile-aws.guardianapis.com",
-        "domainName": "mobile-rendering.mobile-aws.guardianapis.com",
-        "hostedZoneId": "Z1EYB4AREPXE3B",
-        "maxInstances": 12,
-        "minInstances": 3,
-        "targetCpuUtilisation": 20,
-      },
-    },
+  "Metadata": Object {
+    "gu:cdk:constructs": Array [
+      "GuAllowPolicy",
+      "GuVpcParameter",
+      "GuSubnetListParameter",
+      "GuCertificate",
+      "GuInstanceRole",
+      "GuSSMRunCommandPolicy",
+      "GuDescribeEC2Policy",
+      "GuLoggingStreamNameParameter",
+      "GuLogShippingPolicy",
+      "GuDistributionBucketParameter",
+      "GuGetDistributablePolicy",
+      "GuParameterStoreReadPolicy",
+      "GuAmiParameter",
+      "GuHttpsEgressSecurityGroup",
+      "GuAutoScalingGroup",
+      "GuWazuhAccess",
+      "GuApplicationLoadBalancer",
+      "GuApplicationTargetGroup",
+      "GuHttpsApplicationListener",
+      "GuSecurityGroup",
+    ],
+    "gu:cdk:version": "TEST",
   },
   "Outputs": Object {
     "LoadBalancerMobileappsrenderingDnsName": Object {
@@ -48,14 +53,9 @@ Object {
       "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "Stage": Object {
-      "AllowedValues": Array [
-        "CODE",
-        "PROD",
-      ],
-      "Default": "CODE",
-      "Description": "Stage name",
-      "Type": "String",
+    "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/account/services/artifact.bucket",
+      "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "VpcId": Object {
       "Default": "/account/vpc/primary/id",
@@ -76,24 +76,8 @@ Object {
         "LaunchConfigurationName": Object {
           "Ref": "AutoScalingGroupMobileappsrenderingLaunchConfig3CF3CAD9",
         },
-        "MaxSize": Object {
-          "Fn::FindInMap": Array [
-            "mobileappsrendering",
-            Object {
-              "Ref": "Stage",
-            },
-            "maxInstances",
-          ],
-        },
-        "MinSize": Object {
-          "Fn::FindInMap": Array [
-            "mobileappsrendering",
-            Object {
-              "Ref": "Stage",
-            },
-            "minInstances",
-          ],
-        },
+        "MaxSize": "2",
+        "MinSize": "1",
         "Tags": Array [
           Object {
             "Key": "App",
@@ -116,6 +100,13 @@ Object {
             "Value": "guardian/dotcom-rendering",
           },
           Object {
+            "Key": "LogKinesisStreamName",
+            "PropagateAtLaunch": true,
+            "Value": Object {
+              "Ref": "LoggingStreamName",
+            },
+          },
+          Object {
             "Key": "Name",
             "PropagateAtLaunch": true,
             "Value": "MobileAppsRendering/AutoScalingGroupMobileappsrendering",
@@ -128,9 +119,7 @@ Object {
           Object {
             "Key": "Stage",
             "PropagateAtLaunch": true,
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
         "TargetGroupARNs": Array [
@@ -165,7 +154,10 @@ Object {
         "ImageId": Object {
           "Ref": "AMIMobileappsrendering",
         },
-        "InstanceType": "t4g.micro",
+        "InstanceType": "t4g.small",
+        "MetadataOptions": Object {
+          "HttpTokens": "required",
+        },
         "SecurityGroups": Array [
           Object {
             "Fn::GetAtt": Array [
@@ -191,18 +183,14 @@ useradd -r -m -s /usr/bin/nologin -g mapi mobile-apps-rendering
 
 export App=mobile-apps-rendering
 export Stack=mobile
-export Stage=",
-                Object {
-                  "Ref": "Stage",
-                },
-                "
+export Stage=TEST
 export NODE_ENV=production
 
-aws s3 cp s3://mobile-dist/mobile/",
+aws s3 cp s3://",
                 Object {
-                  "Ref": "Stage",
+                  "Ref": "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter",
                 },
-                "/mobile-apps-rendering/mobile-apps-rendering.zip /tmp
+                "/mobile/TEST/mobile-apps-rendering/mobile-apps-rendering.zip /tmp
 mkdir -p /opt/mobile-apps-rendering
 unzip /tmp/mobile-apps-rendering.zip -d /opt/mobile-apps-rendering
 chown -R mobile-apps-rendering:mapi /opt/mobile-apps-rendering
@@ -220,11 +208,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
                 Object {
                   "Ref": "AWS::Region",
                 },
-                " mobile-log-aggregation-",
-                Object {
-                  "Ref": "Stage",
-                },
-                " '/var/log/mobile-apps-rendering/*'
+                " mobile-log-aggregation-TEST '/var/log/mobile-apps-rendering/*'
 /usr/local/node/pm2 logrotate -u mobile-apps-rendering",
               ],
             ],
@@ -243,15 +227,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           "PredefinedMetricSpecification": Object {
             "PredefinedMetricType": "ASGAverageCPUUtilization",
           },
-          "TargetValue": Object {
-            "Fn::FindInMap": Array [
-              "mobileappsrendering",
-              Object {
-                "Ref": "Stage",
-              },
-              "targetCpuUtilisation",
-            ],
-          },
+          "TargetValue": 10,
         },
       },
       "Type": "AWS::AutoScaling::ScalingPolicy",
@@ -259,35 +235,11 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
     "CertificateMobileappsrendering85649D08": Object {
       "DeletionPolicy": "Retain",
       "Properties": Object {
-        "DomainName": Object {
-          "Fn::FindInMap": Array [
-            "mobileappsrendering",
-            Object {
-              "Ref": "Stage",
-            },
-            "domainName",
-          ],
-        },
+        "DomainName": "mobile-rendering.mobile-aws.code.dev-guardianapis.com",
         "DomainValidationOptions": Array [
           Object {
-            "DomainName": Object {
-              "Fn::FindInMap": Array [
-                "mobileappsrendering",
-                Object {
-                  "Ref": "Stage",
-                },
-                "domainName",
-              ],
-            },
-            "HostedZoneId": Object {
-              "Fn::FindInMap": Array [
-                "mobileappsrendering",
-                Object {
-                  "Ref": "Stage",
-                },
-                "hostedZoneId",
-              ],
-            },
+            "DomainName": "mobile-rendering.mobile-aws.code.dev-guardianapis.com",
+            "HostedZoneId": "TEST-HOSTED-ZONE-ID",
           },
         ],
         "Tags": Array [
@@ -309,9 +261,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           },
           Object {
             "Key": "Stage",
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
         "ValidationMethod": "DNS",
@@ -347,33 +297,8 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
     },
     "DnsRecord": Object {
       "Properties": Object {
-        "HostedZoneId": Object {
-          "Fn::FindInMap": Array [
-            "mobileappsrendering",
-            Object {
-              "Ref": "Stage",
-            },
-            "hostedZoneId",
-          ],
-        },
-        "Name": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "mobile-rendering.",
-              Object {
-                "Fn::FindInMap": Array [
-                  "mobileappsrendering",
-                  Object {
-                    "Ref": "Stage",
-                  },
-                  "domain",
-                ],
-              },
-              ".",
-            ],
-          ],
-        },
+        "HostedZoneId": "TEST-HOSTED-ZONE-ID",
+        "Name": "mobile-rendering.mobile-aws.code.dev-guardianapis.com.",
         "ResourceRecords": Array [
           Object {
             "Fn::GetAtt": Array [
@@ -402,11 +327,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
                     Object {
                       "Ref": "DistributionBucketName",
                     },
-                    "/mobile/",
-                    Object {
-                      "Ref": "Stage",
-                    },
-                    "/mobile-apps-rendering/*",
+                    "/mobile/TEST/mobile-apps-rendering/*",
                   ],
                 ],
               },
@@ -475,9 +396,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           },
           Object {
             "Key": "Stage",
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
         "VpcId": Object {
@@ -614,9 +533,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           },
           Object {
             "Key": "Stage",
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
       },
@@ -653,9 +570,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           },
           Object {
             "Key": "Stage",
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
         "VpcId": Object {
@@ -755,9 +670,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           },
           Object {
             "Key": "Stage",
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
         "Type": "application",
@@ -786,9 +699,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           },
           Object {
             "Key": "Stage",
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
         "VpcId": Object {
@@ -837,11 +748,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
                     Object {
                       "Ref": "AWS::AccountId",
                     },
-                    ":parameter/",
-                    Object {
-                      "Ref": "Stage",
-                    },
-                    "/mobile/mobile-apps-rendering",
+                    ":parameter/TEST/mobile/mobile-apps-rendering",
                   ],
                 ],
               },
@@ -864,11 +771,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
                     Object {
                       "Ref": "AWS::AccountId",
                     },
-                    ":parameter/",
-                    Object {
-                      "Ref": "Stage",
-                    },
-                    "/mobile/mobile-apps-rendering/*",
+                    ":parameter/TEST/mobile/mobile-apps-rendering/*",
                   ],
                 ],
               },
@@ -949,9 +852,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           },
           Object {
             "Key": "Stage",
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
         "TargetGroupAttributes": Array [
@@ -1006,9 +907,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           },
           Object {
             "Key": "Stage",
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
         "VpcId": Object {
@@ -1023,25 +922,30 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
 
 exports[`The MobileAppsRenderingPreview stack matches the snapshot 1`] = `
 Object {
-  "Mappings": Object {
-    "mobileappsrendering": Object {
-      "CODE": Object {
-        "domain": "mobile-aws.code.dev-guardianapis.com",
-        "domainName": "mobile-preview-rendering.mobile-aws.code.dev-guardianapis.com",
-        "hostedZoneId": "Z6PRU8YR6TQDK",
-        "maxInstances": 2,
-        "minInstances": 1,
-        "targetCpuUtilisation": 20,
-      },
-      "PROD": Object {
-        "domain": "mobile-aws.guardianapis.com",
-        "domainName": "mobile-preview-rendering.mobile-aws.guardianapis.com",
-        "hostedZoneId": "Z1EYB4AREPXE3B",
-        "maxInstances": 2,
-        "minInstances": 1,
-        "targetCpuUtilisation": 20,
-      },
-    },
+  "Metadata": Object {
+    "gu:cdk:constructs": Array [
+      "GuAllowPolicy",
+      "GuVpcParameter",
+      "GuSubnetListParameter",
+      "GuCertificate",
+      "GuInstanceRole",
+      "GuSSMRunCommandPolicy",
+      "GuDescribeEC2Policy",
+      "GuLoggingStreamNameParameter",
+      "GuLogShippingPolicy",
+      "GuDistributionBucketParameter",
+      "GuGetDistributablePolicy",
+      "GuParameterStoreReadPolicy",
+      "GuAmiParameter",
+      "GuHttpsEgressSecurityGroup",
+      "GuAutoScalingGroup",
+      "GuWazuhAccess",
+      "GuApplicationLoadBalancer",
+      "GuApplicationTargetGroup",
+      "GuHttpsApplicationListener",
+      "GuSecurityGroup",
+    ],
+    "gu:cdk:version": "TEST",
   },
   "Outputs": Object {
     "LoadBalancerMobileappsrenderingDnsName": Object {
@@ -1069,14 +973,9 @@ Object {
       "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "Stage": Object {
-      "AllowedValues": Array [
-        "CODE",
-        "PROD",
-      ],
-      "Default": "CODE",
-      "Description": "Stage name",
-      "Type": "String",
+    "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/account/services/artifact.bucket",
+      "Type": "AWS::SSM::Parameter::Value<String>",
     },
     "VpcId": Object {
       "Default": "/account/vpc/primary/id",
@@ -1097,24 +996,8 @@ Object {
         "LaunchConfigurationName": Object {
           "Ref": "AutoScalingGroupMobileappsrenderingLaunchConfig3CF3CAD9",
         },
-        "MaxSize": Object {
-          "Fn::FindInMap": Array [
-            "mobileappsrendering",
-            Object {
-              "Ref": "Stage",
-            },
-            "maxInstances",
-          ],
-        },
-        "MinSize": Object {
-          "Fn::FindInMap": Array [
-            "mobileappsrendering",
-            Object {
-              "Ref": "Stage",
-            },
-            "minInstances",
-          ],
-        },
+        "MaxSize": "2",
+        "MinSize": "1",
         "Tags": Array [
           Object {
             "Key": "App",
@@ -1137,6 +1020,13 @@ Object {
             "Value": "guardian/dotcom-rendering",
           },
           Object {
+            "Key": "LogKinesisStreamName",
+            "PropagateAtLaunch": true,
+            "Value": Object {
+              "Ref": "LoggingStreamName",
+            },
+          },
+          Object {
             "Key": "Name",
             "PropagateAtLaunch": true,
             "Value": "MobileAppsRenderingPreview/AutoScalingGroupMobileappsrendering",
@@ -1149,9 +1039,7 @@ Object {
           Object {
             "Key": "Stage",
             "PropagateAtLaunch": true,
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
         "TargetGroupARNs": Array [
@@ -1186,7 +1074,10 @@ Object {
         "ImageId": Object {
           "Ref": "AMIMobileappsrendering",
         },
-        "InstanceType": "t4g.micro",
+        "InstanceType": "t4g.small",
+        "MetadataOptions": Object {
+          "HttpTokens": "required",
+        },
         "SecurityGroups": Array [
           Object {
             "Fn::GetAtt": Array [
@@ -1212,18 +1103,14 @@ useradd -r -m -s /usr/bin/nologin -g mapi mobile-apps-rendering
 
 export App=mobile-apps-rendering
 export Stack=mobile-preview
-export Stage=",
-                Object {
-                  "Ref": "Stage",
-                },
-                "
+export Stage=TEST
 export NODE_ENV=production
 
-aws s3 cp s3://mobile-dist/mobile-preview/",
+aws s3 cp s3://",
                 Object {
-                  "Ref": "Stage",
+                  "Ref": "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter",
                 },
-                "/mobile-apps-rendering/mobile-apps-rendering.zip /tmp
+                "/mobile-preview/TEST/mobile-apps-rendering/mobile-apps-rendering.zip /tmp
 mkdir -p /opt/mobile-apps-rendering
 unzip /tmp/mobile-apps-rendering.zip -d /opt/mobile-apps-rendering
 chown -R mobile-apps-rendering:mapi /opt/mobile-apps-rendering
@@ -1241,11 +1128,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
                 Object {
                   "Ref": "AWS::Region",
                 },
-                " mobile-log-aggregation-",
-                Object {
-                  "Ref": "Stage",
-                },
-                " '/var/log/mobile-apps-rendering/*'
+                " mobile-log-aggregation-TEST '/var/log/mobile-apps-rendering/*'
 /usr/local/node/pm2 logrotate -u mobile-apps-rendering",
               ],
             ],
@@ -1264,15 +1147,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           "PredefinedMetricSpecification": Object {
             "PredefinedMetricType": "ASGAverageCPUUtilization",
           },
-          "TargetValue": Object {
-            "Fn::FindInMap": Array [
-              "mobileappsrendering",
-              Object {
-                "Ref": "Stage",
-              },
-              "targetCpuUtilisation",
-            ],
-          },
+          "TargetValue": 10,
         },
       },
       "Type": "AWS::AutoScaling::ScalingPolicy",
@@ -1280,35 +1155,11 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
     "CertificateMobileappsrendering85649D08": Object {
       "DeletionPolicy": "Retain",
       "Properties": Object {
-        "DomainName": Object {
-          "Fn::FindInMap": Array [
-            "mobileappsrendering",
-            Object {
-              "Ref": "Stage",
-            },
-            "domainName",
-          ],
-        },
+        "DomainName": "mobile-preview-rendering.mobile-aws.code.dev-guardianapis.com",
         "DomainValidationOptions": Array [
           Object {
-            "DomainName": Object {
-              "Fn::FindInMap": Array [
-                "mobileappsrendering",
-                Object {
-                  "Ref": "Stage",
-                },
-                "domainName",
-              ],
-            },
-            "HostedZoneId": Object {
-              "Fn::FindInMap": Array [
-                "mobileappsrendering",
-                Object {
-                  "Ref": "Stage",
-                },
-                "hostedZoneId",
-              ],
-            },
+            "DomainName": "mobile-preview-rendering.mobile-aws.code.dev-guardianapis.com",
+            "HostedZoneId": "TEST-HOSTED-ZONE-ID",
           },
         ],
         "Tags": Array [
@@ -1330,9 +1181,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           },
           Object {
             "Key": "Stage",
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
         "ValidationMethod": "DNS",
@@ -1368,33 +1217,8 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
     },
     "DnsRecord": Object {
       "Properties": Object {
-        "HostedZoneId": Object {
-          "Fn::FindInMap": Array [
-            "mobileappsrendering",
-            Object {
-              "Ref": "Stage",
-            },
-            "hostedZoneId",
-          ],
-        },
-        "Name": Object {
-          "Fn::Join": Array [
-            "",
-            Array [
-              "mobile-preview-rendering.",
-              Object {
-                "Fn::FindInMap": Array [
-                  "mobileappsrendering",
-                  Object {
-                    "Ref": "Stage",
-                  },
-                  "domain",
-                ],
-              },
-              ".",
-            ],
-          ],
-        },
+        "HostedZoneId": "TEST-HOSTED-ZONE-ID",
+        "Name": "mobile-preview-rendering.mobile-aws.code.dev-guardianapis.com.",
         "ResourceRecords": Array [
           Object {
             "Fn::GetAtt": Array [
@@ -1423,11 +1247,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
                     Object {
                       "Ref": "DistributionBucketName",
                     },
-                    "/mobile-preview/",
-                    Object {
-                      "Ref": "Stage",
-                    },
-                    "/mobile-apps-rendering/*",
+                    "/mobile-preview/TEST/mobile-apps-rendering/*",
                   ],
                 ],
               },
@@ -1496,9 +1316,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           },
           Object {
             "Key": "Stage",
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
         "VpcId": Object {
@@ -1635,9 +1453,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           },
           Object {
             "Key": "Stage",
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
       },
@@ -1674,9 +1490,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           },
           Object {
             "Key": "Stage",
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
         "VpcId": Object {
@@ -1776,9 +1590,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           },
           Object {
             "Key": "Stage",
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
         "Type": "application",
@@ -1807,9 +1619,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           },
           Object {
             "Key": "Stage",
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
         "VpcId": Object {
@@ -1858,11 +1668,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
                     Object {
                       "Ref": "AWS::AccountId",
                     },
-                    ":parameter/",
-                    Object {
-                      "Ref": "Stage",
-                    },
-                    "/mobile-preview/mobile-apps-rendering",
+                    ":parameter/TEST/mobile-preview/mobile-apps-rendering",
                   ],
                 ],
               },
@@ -1885,11 +1691,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
                     Object {
                       "Ref": "AWS::AccountId",
                     },
-                    ":parameter/",
-                    Object {
-                      "Ref": "Stage",
-                    },
-                    "/mobile-preview/mobile-apps-rendering/*",
+                    ":parameter/TEST/mobile-preview/mobile-apps-rendering/*",
                   ],
                 ],
               },
@@ -1970,9 +1772,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           },
           Object {
             "Key": "Stage",
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
         "TargetGroupAttributes": Array [
@@ -2027,9 +1827,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           },
           Object {
             "Key": "Stage",
-            "Value": Object {
-              "Ref": "Stage",
-            },
+            "Value": "TEST",
           },
         ],
         "VpcId": Object {

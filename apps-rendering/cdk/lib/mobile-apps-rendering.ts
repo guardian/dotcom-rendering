@@ -1,33 +1,31 @@
+import { GuEc2App } from '@guardian/cdk';
+import { AccessScope } from '@guardian/cdk/lib/constants';
+import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
+import { GuStack } from '@guardian/cdk/lib/constructs/core';
+import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
+import type { GuAsgCapacity } from '@guardian/cdk/lib/types';
+import type { App, CfnElement } from 'aws-cdk-lib';
+import { Duration } from 'aws-cdk-lib';
 import {
 	InstanceClass,
 	InstanceSize,
 	InstanceType,
 	Peer,
-} from '@aws-cdk/aws-ec2';
+} from 'aws-cdk-lib/aws-ec2';
 import {
 	HostedZone,
 	RecordSet,
 	RecordTarget,
 	RecordType,
-} from '@aws-cdk/aws-route53';
-import type { App, CfnElement } from '@aws-cdk/core';
-import { Duration } from '@aws-cdk/core';
-import { GuEc2App } from '@guardian/cdk';
-import { AccessScope } from '@guardian/cdk/lib/constants/access';
-import type { GuStackProps } from '@guardian/cdk/lib/constructs/core';
-import { GuStack } from '@guardian/cdk/lib/constructs/core';
-import { GuAllowPolicy } from '@guardian/cdk/lib/constructs/iam';
+} from 'aws-cdk-lib/aws-route53';
+import * as ssm from 'aws-cdk-lib/aws-ssm';
 
 interface AppsStackProps extends GuStackProps {
 	recordPrefix: string;
-	asgMinSize: {
-		CODE: number;
-		PROD: number;
-	};
-	asgMaxSize: {
-		CODE: number;
-		PROD: number;
-	};
+	asgCapacity: GuAsgCapacity;
+	appsRenderingDomain: string;
+	hostedZoneId: string;
+	targetCpuUtilisation: number;
 }
 
 export class MobileAppsRendering extends GuStack {
@@ -35,45 +33,21 @@ export class MobileAppsRendering extends GuStack {
 		super(scope, id, props);
 
 		const appName = 'mobile-apps-rendering';
-
-		const appsRenderingDomain = this.withStageDependentValue({
-			variableName: 'domain',
-			app: appName,
-			stageValues: {
-				CODE: 'mobile-aws.code.dev-guardianapis.com',
-				PROD: 'mobile-aws.guardianapis.com',
-			},
-		});
-		const codeDomainName = `${props.recordPrefix}.mobile-aws.code.dev-guardianapis.com`;
-		const prodDomainName = `${props.recordPrefix}.mobile-aws.guardianapis.com`;
-
-		const hostedZoneIdCode = 'Z6PRU8YR6TQDK';
-		const hostedZoneIdProd = 'Z1EYB4AREPXE3B';
+		const domainName = `${props.recordPrefix}.${props.appsRenderingDomain}`;
 		const hostedZone = HostedZone.fromHostedZoneAttributes(
 			this,
 			'HostedZone',
 			{
-				zoneName: appsRenderingDomain,
-				hostedZoneId: this.withStageDependentValue({
-					variableName: 'hostedZoneId',
-					app: appName,
-					stageValues: {
-						CODE: hostedZoneIdCode,
-						PROD: hostedZoneIdProd,
-					},
-				}),
+				zoneName: props.appsRenderingDomain,
+				hostedZoneId: props.hostedZoneId,
 			},
 		);
 
-		const scalingTargetCpuUtilisation =
-			this.withStageDependentValue<number>({
-				variableName: 'targetCpuUtilisation',
-				app: appName,
-				stageValues: {
-					CODE: 20,
-					PROD: 20,
-				},
-			});
+		const scalingTargetCpuUtilisation = props.targetCpuUtilisation;
+		const artifactBucketName = ssm.StringParameter.valueForStringParameter(
+			this,
+			'/account/services/artifact.bucket',
+		);
 
 		const appsRenderingApp = new GuEc2App(this, {
 			applicationPort: 3040,
@@ -84,24 +58,17 @@ export class MobileAppsRendering extends GuStack {
 			},
 			instanceType: InstanceType.of(
 				InstanceClass.T4G,
-				InstanceSize.MICRO,
+				InstanceSize.SMALL,
 			),
 			certificateProps: {
-				CODE: {
-					domainName: codeDomainName,
-					hostedZoneId: hostedZoneIdCode,
-				},
-				PROD: {
-					domainName: prodDomainName,
-					hostedZoneId: hostedZoneIdProd,
-				},
+				domainName,
+				hostedZoneId: props.hostedZoneId,
 			},
 			monitoringConfiguration: {
 				noMonitoring: true,
 			},
 			roleConfiguration: {
 				additionalPolicies: [
-					// Get the list of regions.
 					new GuAllowPolicy(this, 'GetParametersByPath', {
 						resources: ['*'],
 						actions: ['ssm:GetParametersByPath'],
@@ -117,7 +84,7 @@ export Stack=${this.stack}
 export Stage=${this.stage}
 export NODE_ENV=production
 
-aws s3 cp s3://mobile-dist/${this.stack}/${this.stage}/${appName}/${appName}.zip /tmp
+aws s3 cp s3://${artifactBucketName}/${this.stack}/${this.stage}/${appName}/${appName}.zip /tmp
 mkdir -p /opt/${appName}
 unzip /tmp/${appName}.zip -d /opt/${appName}
 chown -R ${appName}:mapi /opt/${appName}
@@ -133,16 +100,7 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 /usr/local/node/pm2 start --name ${appName} --uid ${appName} --gid mapi /opt/${appName}/server.js
 /opt/aws-kinesis-agent/configure-aws-kinesis-agent ${this.region} mobile-log-aggregation-${this.stage} '/var/log/${appName}/*'
 /usr/local/node/pm2 logrotate -u ${appName}`,
-			scaling: {
-				CODE: {
-					minimumInstances: props.asgMinSize.CODE,
-					maximumInstances: props.asgMaxSize.CODE,
-				},
-				PROD: {
-					minimumInstances: props.asgMinSize.PROD,
-					maximumInstances: props.asgMaxSize.PROD,
-				},
-			},
+			scaling: props.asgCapacity,
 		});
 
 		const asg = appsRenderingApp.autoScalingGroup;
@@ -159,6 +117,7 @@ export ASSETS_MANIFEST="/opt/${appName}/manifest.json"
 			recordName: props.recordPrefix,
 			ttl: Duration.hours(1),
 		});
+
 		const defaultChild = recordSet.node.defaultChild as CfnElement;
 		defaultChild.overrideLogicalId('DnsRecord');
 	}

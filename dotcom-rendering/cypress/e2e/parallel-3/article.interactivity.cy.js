@@ -129,7 +129,7 @@ describe('Interactivity', function () {
 			});
 			// Assert first item is highlighted
 			cy.get('[data-cy="newsLinks"] > li')
-				.first()
+				.eq(1)
 				.within(() => {
 					cy.get('a').should('have.focus');
 				});
@@ -200,7 +200,7 @@ describe('Interactivity', function () {
 				cy.focused().should(
 					'have.attr',
 					'data-cy',
-					'column-collapse-sublink-The Guardian view',
+					'column-collapse-sublink-Opinion',
 				);
 			});
 

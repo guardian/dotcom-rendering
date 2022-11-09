@@ -1,3 +1,8 @@
+// ----- Imports ----- //
+
+import type { Option } from '@guardian/types';
+import { none, some } from '@guardian/types';
+
 // ----- Classes ----- //
 
 /**
@@ -37,6 +42,11 @@ abstract class Optional<A> {
 	 * bylineTwo.withDefault('Jane Smith'); // Returns 'Jane Smith'
 	 */
 	abstract withDefault(a: A): A;
+
+	/**
+	 * Temporary method to convert to the old `Option` type.
+	 */
+	abstract toOption(): Option<A>;
 
 	/**
 	 * Checks if an {@linkcode Optional} is a `Some`. Can be used in type
@@ -162,6 +172,10 @@ class Some<A> extends Optional<A> {
 		return this.value;
 	}
 
+	toOption(): Option<A> {
+		return some(this.value);
+	}
+
 	isSome(): this is Some<A> {
 		return true;
 	}
@@ -183,6 +197,10 @@ class None<A> extends Optional<A> {
 
 	withDefault(a: A): A {
 		return a;
+	}
+
+	toOption(): Option<A> {
+		return none;
 	}
 
 	isSome(): this is Some<A> {

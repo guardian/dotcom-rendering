@@ -10,6 +10,7 @@ import {
 	QandaAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
+import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
 import FigCaption from '@guardian/common-rendering/src/components/figCaption';
 import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
@@ -19,14 +20,14 @@ import { neutral, remSpace, until } from '@guardian/source-foundations';
 import {
 	andThen,
 	fromNullable,
-	fromUnsafe,
 	map,
 	none,
+	OptionKind,
 	some,
-	toOption,
 	withDefault,
 } from '@guardian/types';
-import type { Option, Result } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { themeToPillar } from 'articleFormat';
 import { ElementKind } from 'bodyElement';
 import type {
 	AudioAtom as AudioAtomElement,
@@ -62,6 +63,7 @@ import InteractiveAtom, {
 import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LiveEventLink from 'components/LiveEventLink';
+import NewsletterSignup from 'components/NewsletterSignup';
 import OrderedList from 'components/OrderedList';
 import Paragraph from 'components/Paragraph';
 import Pullquote from 'components/Pullquote';
@@ -69,12 +71,8 @@ import RichLink from 'components/RichLink';
 import { isElement, pipe } from 'lib';
 import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
+import { Result } from 'result';
 import { backgroundColor, darkModeCss } from 'styles';
-import {
-	themeFromString,
-	themeToPillar,
-	themeToPillarString,
-} from 'themeStyles';
 
 // ----- Renderer ----- //
 
@@ -86,14 +84,9 @@ const transformHref = (href: string): string => {
 		return `https://www.theguardian.com/${href}`;
 	}
 
-	const url: Result<string, URL> = fromUnsafe(
-		() => new URL(href),
-		'invalid url',
-	);
-
-	return pipe(
-		toOption(url),
-		map((url) => {
+	return Result.fromUnsafe(() => new URL(href), 'invalid url')
+		.toOptional()
+		.map((url) => {
 			const path = url.pathname.split('/');
 			const isLatest =
 				url.hostname === 'www.theguardian.com' &&
@@ -104,9 +97,8 @@ const transformHref = (href: string): string => {
 			}
 
 			return href;
-		}),
-		withDefault(href),
-	);
+		})
+		.withDefault(href);
 };
 
 const getHref = (node: Node): Option<string> =>
@@ -242,7 +234,12 @@ const textElement =
 		);
 		switch (node.nodeName) {
 			case 'P': {
+				if (text === '* * *') {
+					return children;
+				}
+
 				const showDropCap = shouldShowDropCap(text, format, isEditions);
+
 				return h(
 					Paragraph,
 					{ key, format, showDropCap, isEditions },
@@ -317,7 +314,9 @@ const borderFromFormat = (format: ArticleFormat): string => {
 		text-decoration: none;
 	`;
 
-	return isBlog(format) ? styles : 'none';
+	return isBlog(format) || format.design === ArticleDesign.Gallery
+		? styles
+		: 'none';
 };
 
 const standfirstTextElement =
@@ -402,12 +401,18 @@ const imageRenderer = (
 	key: number,
 ): ReactNode => {
 	const { caption, credit, nativeCaption } = element;
+
+	const maybeCaption =
+		caption.kind === OptionKind.Some || credit.kind === OptionKind.Some
+			? some([
+					h(Caption, { format, caption }),
+					h(Credit, { credit, format, key }),
+			  ])
+			: none;
+
 	return h(BodyImage, {
-		caption: some([
-			h(Caption, { format, caption }),
-			h(Credit, { credit, format, key }),
-		]),
-		format: format,
+		caption: maybeCaption,
+		format,
 		key,
 		supportsDarkMode: true,
 		lightbox: some({
@@ -558,16 +563,17 @@ const mediaAtomRenderer = (
 	};
 
 	const attributes = {
-		'data-posterUrl': posterUrl,
-		'data-videoId': videoId,
-		'data-duration': duration,
-		className: 'native-video',
+		'data-posterurl': posterUrl,
+		'data-videoid': videoId,
+		'data-duration': withDefault<number | null>(null)(duration),
+		className: 'js-native-video',
 		css: styles,
 	};
 	const figcaption = h(FigCaption, {
 		format: format,
 		supportsDarkMode: true,
 		children: some(h(Caption, { caption, format })),
+		variant: CaptionIconVariant.Video,
 	});
 	return styledH('figure', figureAttributes, [
 		isEditions
@@ -584,8 +590,7 @@ const audioAtomRenderer = (
 	format: ArticleFormat,
 	element: AudioAtomElement,
 ): ReactNode => {
-	const { theme } = format;
-	const pillar = themeFromString('pillar/' + themeToPillarString(theme));
+	const pillar = themeToPillar(format.theme);
 	const audioAtomStyles = css`
 		figure {
 			margin: 0;
@@ -685,6 +690,9 @@ const render =
 			case ElementKind.KnowledgeQuizAtom:
 			case ElementKind.PersonalityQuizAtom:
 				return h(Quiz, { format, element });
+
+			case ElementKind.NewsletterSignUp:
+				return h(NewsletterSignup, { format, element });
 		}
 	};
 

@@ -18,8 +18,9 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import { fromNullable, map, none, partition } from '@guardian/types';
+import { andThen, fromNullable, map, none, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
+import { getPillarFromId } from 'articleFormat';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
 import type { Logo } from 'capi';
@@ -48,7 +49,7 @@ import { fromBodyElements } from 'outline';
 import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
-import { themeFromString } from 'themeStyles';
+import { Result } from 'result';
 
 // ----- Item Type ----- //
 
@@ -280,7 +281,9 @@ const itemFields = (
 ): ItemFields => {
 	const { content, commentCount, relatedContent } = request;
 	return {
-		theme: themeFromString(content.pillarId),
+		theme: Optional.fromNullable(content.pillarId)
+			.flatMap(getPillarFromId)
+			.withDefault(ArticlePillar.News),
 		display: getDisplay(content),
 		headline: content.fields?.headline ?? '',
 		standfirst: pipe(
@@ -292,6 +295,7 @@ const itemFields = (
 		bylineHtml: pipe(
 			content.fields?.bylineHtml,
 			fromNullable,
+			andThen((html) => (html !== '' ? some(html) : none)),
 			map(context.docParser),
 		),
 		publishDate: maybeCapiDate(content.webPublicationDate),
@@ -323,7 +327,7 @@ const itemFields = (
 };
 
 const outlineFromItem = (item: ItemFieldsWithBody): Outline => {
-	const elements = partition(item.body).oks;
+	const elements = Result.partition(item.body).oks;
 	return fromBodyElements(elements);
 };
 

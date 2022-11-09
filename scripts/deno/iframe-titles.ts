@@ -91,7 +91,18 @@ const promises = results.map(async ({ id, webTitle: title }) => {
 						value,
 					};
 				}
-				case 'srcDoc':
+
+				case 'srcDoc': {
+					return {
+						status: 'missing',
+						attr,
+						// `srcdoc` are too long for github issues!
+						value: value
+							.replace(/<head>.+<\/head>/i, '')
+							.slice(0, 420),
+					};
+				}
+
 				case 'src':
 					return {
 						status: 'missing',
@@ -167,7 +178,7 @@ const issue_number = 5510;
 
 if (!octokit) {
 	console.log(body);
-	Deno.exit(0);
+	Deno.exit();
 }
 
 try {
@@ -185,8 +196,9 @@ try {
 } catch (error) {
 	// do_something
 	console.warn(`Failed to update issue #${issue_number}`);
+	console.error(error);
 
 	console.log(body);
 }
 
-Deno.exit(0);
+Deno.exit();

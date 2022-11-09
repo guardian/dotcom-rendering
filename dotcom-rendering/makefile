@@ -96,6 +96,11 @@ dev-legacy: clear clean-dist install gen-dotenv
 cypress: export NODE_ENV=production
 cypress: clear clean-dist install build
 	$(call log, "starting frontend PROD server for Cypress")
+	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --browser chrome --spec "cypress/e2e/**/*"'
+
+cypress-arm64: export NODE_ENV=production
+cypress-arm64: clear clean-dist install build
+	$(call log, "starting frontend PROD server for Cypress")
 	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
 
 ampValidation: export NODE_ENV=production

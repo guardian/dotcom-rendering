@@ -1,4 +1,4 @@
-const editions = ['UK', 'US', 'INT', 'AU'] as const;
+const editions = ['UK', 'US', 'INT', 'AU', 'EUR'] as const;
 export type EditionId = typeof editions[number];
 
 export type Edition = {

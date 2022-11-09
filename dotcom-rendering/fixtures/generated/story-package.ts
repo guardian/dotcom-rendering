@@ -20,12 +20,14 @@ export const storyPackage = {
 				'New images from Mars will guide search for evidence of ancient life, says study',
 			showByline: false,
 			byline: 'AFP in Paris',
+			masterImage:
+				'https://media.guim.co.uk/3b74149ceee335ce5e7693683b501feeaa73edfd/255_2_3263_1959/master/3263.jpg',
 			image: 'https://i.guim.co.uk/img/media/3b74149ceee335ce5e7693683b501feeaa73edfd/255_2_3263_1959/master/3263.jpg?width=300&quality=85&auto=format&fit=max&s=9a1e1dd54e647c8c36c80a65209ad8f1',
 			carouselImages: {
 				'300': 'https://i.guim.co.uk/img/media/3b74149ceee335ce5e7693683b501feeaa73edfd/255_2_3263_1959/master/3263.jpg?width=300&quality=85&auto=format&fit=max&s=9a1e1dd54e647c8c36c80a65209ad8f1',
 				'460': 'https://i.guim.co.uk/img/media/3b74149ceee335ce5e7693683b501feeaa73edfd/255_2_3263_1959/master/3263.jpg?width=460&quality=85&auto=format&fit=max&s=15769d52ba1216057e8665c06f6674da',
 			},
-			ageWarning: '10 months',
+			ageWarning: '1 year',
 			isLiveBlog: false,
 			pillar: 'news',
 			designType: 'Article',
@@ -45,6 +47,8 @@ export const storyPackage = {
 				'China’s Mars rover drives across planet a week after landing',
 			showByline: false,
 			byline: 'Associated Press in Beijing',
+			masterImage:
+				'https://media.guim.co.uk/f2914ed7b5cedbb4f4608e05fdf63f9751b0767f/0_137_2400_1440/master/2400.jpg',
 			image: 'https://i.guim.co.uk/img/media/f2914ed7b5cedbb4f4608e05fdf63f9751b0767f/0_137_2400_1440/master/2400.jpg?width=300&quality=85&auto=format&fit=max&s=1b29b43cc559dbbbd679015601ca275d',
 			carouselImages: {
 				'300': 'https://i.guim.co.uk/img/media/f2914ed7b5cedbb4f4608e05fdf63f9751b0767f/0_137_2400_1440/master/2400.jpg?width=300&quality=85&auto=format&fit=max&s=1b29b43cc559dbbbd679015601ca275d',
@@ -70,6 +74,8 @@ export const storyPackage = {
 				'Nasa’s Mars helicopter in first powered, controlled flight on another planet',
 			showByline: false,
 			byline: 'Ian Sample',
+			masterImage:
+				'https://media.guim.co.uk/905f7c8d468c0487a7b5f94ee5d0038bb9ca0616/0_81_2000_1200/master/2000.jpg',
 			image: 'https://i.guim.co.uk/img/media/905f7c8d468c0487a7b5f94ee5d0038bb9ca0616/0_81_2000_1200/master/2000.jpg?width=300&quality=85&auto=format&fit=max&s=f030cfdfa7715833b09bedbd046fe584',
 			carouselImages: {
 				'300': 'https://i.guim.co.uk/img/media/905f7c8d468c0487a7b5f94ee5d0038bb9ca0616/0_81_2000_1200/master/2000.jpg?width=300&quality=85&auto=format&fit=max&s=f030cfdfa7715833b09bedbd046fe584',
@@ -95,6 +101,8 @@ export const storyPackage = {
 				'Nasa preparing to attempt first controlled flight on another world',
 			showByline: false,
 			byline: 'Nadeem Badshah and agency',
+			masterImage:
+				'https://media.guim.co.uk/16287e459f2539308aa510f4d33719555388f2a2/1_0_3998_2398/master/3998.jpg',
 			image: 'https://i.guim.co.uk/img/media/16287e459f2539308aa510f4d33719555388f2a2/1_0_3998_2398/master/3998.jpg?width=300&quality=85&auto=format&fit=max&s=3a4e4fff69ced90a9b1d6c89dad9484e',
 			carouselImages: {
 				'300': 'https://i.guim.co.uk/img/media/16287e459f2539308aa510f4d33719555388f2a2/1_0_3998_2398/master/3998.jpg?width=300&quality=85&auto=format&fit=max&s=3a4e4fff69ced90a9b1d6c89dad9484e',
@@ -120,6 +128,8 @@ export const storyPackage = {
 				"'Dare mighty things': hidden message found on Nasa Mars rover parachute",
 			showByline: false,
 			byline: 'Martin Belam',
+			masterImage:
+				'https://media.guim.co.uk/16d5a2f2b7d8ff8f454b9cf34a21283941b3ae26/0_160_4000_2400/master/4000.jpg',
 			image: 'https://i.guim.co.uk/img/media/16d5a2f2b7d8ff8f454b9cf34a21283941b3ae26/0_160_4000_2400/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=abcf0b829c4186261eae82027442c3f3',
 			carouselImages: {
 				'300': 'https://i.guim.co.uk/img/media/16d5a2f2b7d8ff8f454b9cf34a21283941b3ae26/0_160_4000_2400/master/4000.jpg?width=300&quality=85&auto=format&fit=max&s=abcf0b829c4186261eae82027442c3f3',
@@ -145,6 +155,8 @@ export const storyPackage = {
 				'Nasa releases video of Perseverance rover landing on Mars',
 			showByline: false,
 			byline: 'Natalie Grover Science correspondent',
+			masterImage:
+				'https://media.guim.co.uk/9fd7f7041490dc6a7974c555b91e102bc1704e33/0_155_4150_2490/master/4150.jpg',
 			image: 'https://i.guim.co.uk/img/media/9fd7f7041490dc6a7974c555b91e102bc1704e33/0_155_4150_2490/master/4150.jpg?width=300&quality=85&auto=format&fit=max&s=fc8b403c03df3d9b24c8cdac635b5d6c',
 			carouselImages: {
 				'300': 'https://i.guim.co.uk/img/media/9fd7f7041490dc6a7974c555b91e102bc1704e33/0_155_4150_2490/master/4150.jpg?width=300&quality=85&auto=format&fit=max&s=fc8b403c03df3d9b24c8cdac635b5d6c',
@@ -170,6 +182,8 @@ export const storyPackage = {
 				'Nasa launches Mars mission in search of evidence of ancient life',
 			showByline: false,
 			byline: 'PA Media',
+			masterImage:
+				'https://media.guim.co.uk/5333924754eeb72e956aaa81a54d229f36b09b99/199_417_3159_1896/master/3159.jpg',
 			image: 'https://i.guim.co.uk/img/media/5333924754eeb72e956aaa81a54d229f36b09b99/199_417_3159_1896/master/3159.jpg?width=300&quality=85&auto=format&fit=max&s=6b8f88d5465238c1aa0ed42369c6f999',
 			carouselImages: {
 				'300': 'https://i.guim.co.uk/img/media/5333924754eeb72e956aaa81a54d229f36b09b99/199_417_3159_1896/master/3159.jpg?width=300&quality=85&auto=format&fit=max&s=6b8f88d5465238c1aa0ed42369c6f999',
@@ -195,6 +209,8 @@ export const storyPackage = {
 				'China launches space rocket in ambitious Mars landing mission',
 			showByline: false,
 			byline: 'Associated Press',
+			masterImage:
+				'https://media.guim.co.uk/df7b691328f658cdcd2f9153bd07344601ac895f/0_147_3500_2101/master/3500.jpg',
 			image: 'https://i.guim.co.uk/img/media/df7b691328f658cdcd2f9153bd07344601ac895f/0_147_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=c0de66e40bb9dd9ade0b3a36820d2cc2',
 			carouselImages: {
 				'300': 'https://i.guim.co.uk/img/media/df7b691328f658cdcd2f9153bd07344601ac895f/0_147_3500_2101/master/3500.jpg?width=300&quality=85&auto=format&fit=max&s=c0de66e40bb9dd9ade0b3a36820d2cc2',

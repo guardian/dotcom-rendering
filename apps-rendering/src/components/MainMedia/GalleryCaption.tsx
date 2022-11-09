@@ -21,14 +21,15 @@ import { darkModeCss } from 'styles';
 // ----- Component ----- //
 
 const styles = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.xxsmall()}
+	${textSans.xsmall()}
 	background-color: ${background.articleContent(format)};
-
 	${grid.column.centre}
-	padding-top: ${remSpace[9]};
+	padding-bottom: ${remSpace[9]};
 
 	${from.leftCol} {
 		${grid.column.left}
+		padding-top: ${remSpace[9]};
+		padding-bottom: 0;
 		grid-row: 4;
 		padding-top: ${remSpace[1]};
 	}
@@ -69,12 +70,12 @@ const GalleryCaption: FC<Props> = ({ mainMedia, format }) =>
 		}
 
 		return (
-			<p css={styles(format)}>
+			<div css={styles(format)}>
 				<Caption caption={caption} format={format} />{' '}
 				{maybeRender(credit, (cred) => (
 					<>{cred}</>
 				))}
-			</p>
+			</div>
 		);
 	});
 

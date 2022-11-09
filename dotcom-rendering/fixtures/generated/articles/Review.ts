@@ -27,136 +27,38 @@ export const Review: CAPIArticleType = {
 		},
 	],
 	commercialProperties: {
-		UK: {
+		US: {
 			adTargeting: [
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'k',
-					value: [
-						'tv-and-radio',
-						'asa-butterfield',
-						'culture',
-						'television',
-						'netflix',
-						'sex',
-						'youngpeople',
-						'sex-education',
-						'comedy',
-						'gillian-anderson',
-					],
-				},
-				{
-					name: 'se',
-					value: ['tv-review'],
-				},
-				{
-					name: 'url',
-					value: '/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d4zdy',
-				},
 				{
 					name: 'su',
 					value: ['0'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'co',
-					value: ['lucymangan'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
 				},
 				{
 					name: 'tn',
 					value: ['reviews'],
-				},
-			],
-		},
-		US: {
-			adTargeting: [
-				{
-					name: 'k',
-					value: [
-						'tv-and-radio',
-						'asa-butterfield',
-						'culture',
-						'television',
-						'netflix',
-						'sex',
-						'youngpeople',
-						'sex-education',
-						'comedy',
-						'gillian-anderson',
-					],
-				},
-				{
-					name: 'se',
-					value: ['tv-review'],
-				},
-				{
-					name: 'url',
-					value: '/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d4zdy',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'co',
-					value: ['lucymangan'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
 				},
 				{
 					name: 'edition',
 					value: 'us',
 				},
 				{
-					name: 'tn',
-					value: ['reviews'],
+					name: 'ct',
+					value: 'article',
 				},
-			],
-		},
-		AU: {
-			adTargeting: [
 				{
 					name: 'k',
 					value: [
 						'tv-and-radio',
 						'asa-butterfield',
-						'culture',
-						'television',
-						'netflix',
 						'sex',
 						'youngpeople',
 						'sex-education',
 						'comedy',
 						'gillian-anderson',
+						'netflix',
+						'culture',
+						'television',
 					],
-				},
-				{
-					name: 'se',
-					value: ['tv-review'],
 				},
 				{
 					name: 'url',
@@ -167,6 +69,22 @@ export const Review: CAPIArticleType = {
 					value: 'https://www.theguardian.com/p/d4zdy',
 				},
 				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'se',
+					value: ['tv-review'],
+				},
+				{
+					name: 'co',
+					value: ['lucymangan'],
+				},
+			],
+		},
+		AU: {
+			adTargeting: [
+				{
 					name: 'su',
 					value: ['0'],
 				},
@@ -175,12 +93,39 @@ export const Review: CAPIArticleType = {
 					value: 'article',
 				},
 				{
-					name: 'co',
-					value: ['lucymangan'],
+					name: 'k',
+					value: [
+						'tv-and-radio',
+						'asa-butterfield',
+						'sex',
+						'youngpeople',
+						'sex-education',
+						'comedy',
+						'gillian-anderson',
+						'netflix',
+						'culture',
+						'television',
+					],
+				},
+				{
+					name: 'url',
+					value: '/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d4zdy',
 				},
 				{
 					name: 'p',
 					value: 'ng',
+				},
+				{
+					name: 'se',
+					value: ['tv-review'],
+				},
+				{
+					name: 'co',
+					value: ['lucymangan'],
 				},
 				{
 					name: 'tn',
@@ -192,30 +137,38 @@ export const Review: CAPIArticleType = {
 				},
 			],
 		},
-		INT: {
+		UK: {
 			adTargeting: [
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'tn',
+					value: ['reviews'],
+				},
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
 				{
 					name: 'k',
 					value: [
 						'tv-and-radio',
 						'asa-butterfield',
-						'culture',
-						'television',
-						'netflix',
 						'sex',
 						'youngpeople',
 						'sex-education',
 						'comedy',
 						'gillian-anderson',
+						'netflix',
+						'culture',
+						'television',
 					],
-				},
-				{
-					name: 'se',
-					value: ['tv-review'],
-				},
-				{
-					name: 'edition',
-					value: 'int',
 				},
 				{
 					name: 'url',
@@ -226,33 +179,135 @@ export const Review: CAPIArticleType = {
 					value: 'https://www.theguardian.com/p/d4zdy',
 				},
 				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'se',
+					value: ['tv-review'],
+				},
+				{
+					name: 'co',
+					value: ['lucymangan'],
+				},
+			],
+		},
+		INT: {
+			adTargeting: [
+				{
 					name: 'su',
 					value: ['0'],
+				},
+				{
+					name: 'tn',
+					value: ['reviews'],
 				},
 				{
 					name: 'ct',
 					value: 'article',
 				},
 				{
-					name: 'co',
-					value: ['lucymangan'],
+					name: 'k',
+					value: [
+						'tv-and-radio',
+						'asa-butterfield',
+						'sex',
+						'youngpeople',
+						'sex-education',
+						'comedy',
+						'gillian-anderson',
+						'netflix',
+						'culture',
+						'television',
+					],
+				},
+				{
+					name: 'url',
+					value: '/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d4zdy',
+				},
+				{
+					name: 'edition',
+					value: 'int',
 				},
 				{
 					name: 'p',
 					value: 'ng',
 				},
 				{
+					name: 'se',
+					value: ['tv-review'],
+				},
+				{
+					name: 'co',
+					value: ['lucymangan'],
+				},
+			],
+		},
+		EUR: {
+			adTargeting: [
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
 					name: 'tn',
 					value: ['reviews'],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'k',
+					value: [
+						'tv-and-radio',
+						'asa-butterfield',
+						'sex',
+						'youngpeople',
+						'sex-education',
+						'comedy',
+						'gillian-anderson',
+						'netflix',
+						'culture',
+						'television',
+					],
+				},
+				{
+					name: 'url',
+					value: '/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d4zdy',
+				},
+				{
+					name: 'edition',
+					value: 'eur',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'se',
+					value: ['tv-review'],
+				},
+				{
+					name: 'co',
+					value: ['lucymangan'],
 				},
 			],
 		},
 	},
 	beaconURL: '//phar.gu-web.net',
+	hasRelated: true,
 	webPublicationSecondaryDateDisplay:
 		'Last modified on Tue 31 Mar 2020 11.40 BST',
 	editionLongForm: 'UK edition',
-	hasRelated: true,
 	publication: 'The Guardian',
 	trailText:
 		'The teenagers’ sexual escapades continue apace, bringing constant laughs in this rare, magnificent comedy that is good for both the heart and the soul',
@@ -569,7 +624,7 @@ export const Review: CAPIArticleType = {
 					},
 					{
 						title: 'Obituaries',
-						url: '/tone/obituaries',
+						url: '/obituaries',
 					},
 				],
 			},
@@ -845,7 +900,7 @@ export const Review: CAPIArticleType = {
 				children: [
 					{
 						title: 'Obituaries',
-						url: '/tone/obituaries',
+						url: '/obituaries',
 					},
 					{
 						title: 'G2',
@@ -936,6 +991,10 @@ export const Review: CAPIArticleType = {
 						url: '/crosswords/series/azed',
 					},
 				],
+			},
+			{
+				title: 'Corrections',
+				url: '/theguardian/series/corrections-and-clarifications',
 			},
 		],
 		brandExtensions: [
@@ -1082,34 +1141,34 @@ export const Review: CAPIArticleType = {
 		theme: 'CulturePillar',
 		display: 'ShowcaseDisplay',
 	},
-	standfirst:
-		'<p>The teenagers’ sexual escapades continue apace, bringing constant laughs in this rare, magnificent comedy that is good for both the heart and the soul</p>',
 	openGraphData: {
 		'og:url':
 			'http://www.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 		'article:author': 'https://www.theguardian.com/profile/lucymangan',
-		'og:image:height': '720',
-		'og:description':
-			'The teenagers’ sexual escapades continue apace, bringing constant laughs in this rare, magnificent comedy that is good for both the heart and the soul',
 		'og:image:width': '1200',
 		'og:image':
 			'https://i.guim.co.uk/img/media/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/master/6000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctcmV2aWV3LTUucG5n&enable=upscale&s=8ef58101b9f1c38520e35d9b2b1da2f4',
 		'al:ios:url':
 			'gnmguardian://tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
+		'og:title':
+			'Sex Education season two review – fast, funny and still not for the faint-hearted',
+		'fb:app_id': '180444840287',
+		'article:modified_time': '2020-03-31T10:40:19.000Z',
+		'og:image:height': '720',
+		'og:description':
+			'The teenagers’ sexual escapades continue apace, bringing constant laughs in this rare, magnificent comedy that is good for both the heart and the soul',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
 		'article:section': 'Television & radio',
 		'article:published_time': '2020-01-17T12:00:05.000Z',
-		'og:title':
-			'Sex Education season two review – fast, funny and still not for the faint-hearted',
-		'fb:app_id': '180444840287',
 		'article:tag':
 			'TV comedy,Television & radio,Culture,Television,Netflix,Gillian Anderson,Asa Butterfield,Young people,Sex,Comedy,Sex Education',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2020-03-31T10:40:19.000Z',
 	},
+	standfirst:
+		'<p>The teenagers’ sexual escapades continue apace, bringing constant laughs in this rare, magnificent comedy that is good for both the heart and the soul</p>',
 	sectionUrl: 'tv-and-radio/comedy',
 	pageId: 'tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 	version: 3,
@@ -1374,11 +1433,6 @@ export const Review: CAPIArticleType = {
 		'twitter:app:id:iphone': '409128287',
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
-		'twitter:image':
-			'https://i.guim.co.uk/img/media/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/master/6000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctcmV2aWV3LTUucG5n&s=d9beadf67892e3d4860195202a65b23d',
-		'twitter:site': '@guardian',
-		'twitter:app:url:ipad':
-			'gnmguardian://tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix?contenttype=Article&source=twitter',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
 		'twitter:creator': '@LucyMangan',
@@ -1387,6 +1441,11 @@ export const Review: CAPIArticleType = {
 		'twitter:app:url:googleplay':
 			'guardian://www.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 		'twitter:app:url:iphone':
+			'gnmguardian://tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix?contenttype=Article&source=twitter',
+		'twitter:image':
+			'https://i.guim.co.uk/img/media/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/master/6000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctcmV2aWV3LTUucG5n&s=d9beadf67892e3d4860195202a65b23d',
+		'twitter:site': '@guardian',
+		'twitter:app:url:ipad':
 			'gnmguardian://tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix?contenttype=Article&source=twitter',
 	},
 	sectionName: 'tv-and-radio',
@@ -1403,11 +1462,12 @@ export const Review: CAPIArticleType = {
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	starRating: 5,
+	byline: 'Lucy Mangan',
 	headline:
 		'Sex Education season two review – fast, funny and still not for the faint-hearted',
-	byline: 'Lucy Mangan',
-	isLegacyInteractive: false,
 	guardianBaseURL: 'https://www.theguardian.com',
+	isLegacyInteractive: false,
+	webPublicationDate: '2020-01-17T12:00:05.000Z',
 	mainMediaElements: [
 		{
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -1665,10 +1725,11 @@ export const Review: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '57f51b88-fbed-4543-81e9-a5c3ef6d016b',
+			elementId: '6c7b56d7-bf1d-4c87-a9b1-e0b7d1bd3a00',
 		},
 	],
-	webPublicationDate: '2020-01-17T12:00:05.000Z',
+	canonicalUrl:
+		'https://www.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 	blocks: [
 		{
 			id: '5e1df3f28f08d66fcfaa3e49',
@@ -1676,12 +1737,12 @@ export const Review: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The new season of <a href="https://www.theguardian.com/tv-and-radio/2019/jan/17/sex-education-asa-butterfield-gillian-anderson-netflix">Sex Education</a> (Netflix) opens with a bravura sequence that swiftly takes its place in the pantheon of peen-based comedy greats. Suffice to say that since we left Otis at the end of the <a href="https://www.theguardian.com/tv-and-radio/2019/jan/11/sex-education-review-netflix-asa-butterfield-gillian-anderson">glorious inaugural run</a> having successfully masturbated for the first time, he has taken gleefully to his new hobby and – I don’t know if you know the French expression to encourage reluctant diners, “the appetite comes with eating”? – but we need to come up with the carnal equivalent for his joyful daily pursuits of the big O.</p>',
-					elementId: '1b40f108-7213-4683-967c-e86fc44ea513',
+					elementId: 'f609b2ca-078d-4d31-96f7-d2f5b9bb1a6a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The scene establishes the tone of the new season – furiously fast, furiously funny, and not for the faint of heart any more than the first series was. And, just like the first series, it underpins the comedy arising from the sixth form students’ sexual escapades, experiments and baffled queries (“My cum tastes like kimchi! Why do I have a fermented dick?”) with deeper explorations of the main characters and the emotional pressures engendered by bigger problems.</p>',
-					elementId: 'f37ed266-fc78-46a6-b1ff-c9b8c7d02f82',
+					elementId: 'cfbe091e-534b-4a22-b739-880b16438430',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
@@ -1696,12 +1757,12 @@ export const Review: CAPIArticleType = {
 					isThirdPartyTracking: false,
 					source: 'YouTube',
 					sourceDomain: 'youtube-nocookie.com',
-					elementId: '67d1570b-7969-4173-905b-55476b8a6f24',
+					elementId: '4fdd5fdd-081e-4417-bbf5-2a99d10d2ddf',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>With the help of Miss Sands, Maeve (Emma Mackey) finagles her way back into school and the special ability programme. All she has to do thereafter is wrestle with her unwelcoming and far more privileged peers and the return of her errant mother Erin (Anne-Marie Duff), allegedly clean for a year and with a three-year-old half-sister in tow. Otis (<a href="https://www.theguardian.com/tv-and-radio/2019/dec/28/sex-education-asa-butterfield-feel-more-confident-talking-about-sex">Asa Butterfield</a>) must negotiate his new relationship with Ola (Patricia Allison) while his mother Jean (Gillian Anderson, given a whole heap more to do this time round and rightly relishing every moment) throws more spanners in to his sexual works by dating Ola’s dad. Adam – poor beleaguered Adam (Connor Swindells) – is unjustly expelled from military school and sent back home to a dead-end job and his ever more hateful father. Swindells gives an extraordinary performance with what amounts to barely a hundred lines in the entire eight episodes, and if your heart doesn’t break at at least three points for him then I have no use for you. I don’t want to spoil Eric’s storyline because it doesn’t get going until a few episodes in, but <a href="https://www.theguardian.com/culture/2020/jan/05/ncuti-gatwa-i-will-say-yes-to-anything-sex-education">Ncuti Gatwa</a> remains the find of the age and handles everything thrown at him with such deftness and authenticity that you can only boggle at the fact that Laurie Nunn’s creation is his first major role.</p>',
-					elementId: 'e4d4a005-3a01-43fd-89cb-c6e22a143060',
+					elementId: '41255593-188f-44b7-8fd9-dddcb2976e6b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2010,17 +2071,17 @@ export const Review: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '8661d8c4-1a62-4eb9-a836-e7fabffda0f0',
+					elementId: '9624fd45-fd48-48ef-9895-0be6e010ea6a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Every performer is wonderful, not least because the script is wonderful, playing the sex for laughs and the search for intimacy as something serious, good and noble. Not a single character is a cipher – even the smallest parts have a sketched backstory and some good gags. It’s all of a piece with the charm and generosity of spirit that suffuses the whole thing. <a href="https://www.theguardian.com/tv-and-radio/sex-education" data-component="auto-linked-tag">Sex Education</a> sets so many conventions cheerily but firmly aside that you feel like an entire forest of received wisdom is being clear-cut. Light floods in, new growth springs up. Such a sense of revelry and optimism abounds that you can feel it doing your heart and soul good as you watch. And all without missing a comic or emotional beat or deviating from its moral core, which urges us all to connect.</p>',
-					elementId: 'f59e0651-eb28-41f5-9a1c-907d559d1799',
+					elementId: '139877ab-b4ea-4b50-93f0-7008b3836033',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>So welcome once more, Otis (and your newly excitable penis), Maeve with her troubles to seek, Jackson (Kedar Williams-Stirling) whose mental health plummets to new lows as his swimming career reaches new heights, Aimee through whose experience on a local bus the issue of sexual assault is channelled, and all the magnificent rest of you. Nobody does it better. In fact, nobody does anything quite like it at all.</p>',
-					elementId: 'e955f568-1bf4-4fec-82e5-7e7bd31690b7',
+					elementId: '766e75d4-353d-47d4-80bf-2f4132f19eff',
 				},
 			],
 			attributes: {
@@ -2044,7 +2105,7 @@ export const Review: CAPIArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://amp.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
+			'@id': 'https://www.theguardian.com/tv-and-radio/2020/jan/17/sex-education-season-two-review-netflix',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',

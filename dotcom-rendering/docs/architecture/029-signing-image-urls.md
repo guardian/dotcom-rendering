@@ -1,3 +1,6 @@
+> **Warning**
+> We no longer sign picture URLs
+
 # DCR now signs image urls
 
 **Refactor Picture.tsx now that DCR can sign image urls itself**

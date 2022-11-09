@@ -27,82 +27,11 @@ export const SpecialReport: CAPIArticleType = {
 		},
 	],
 	commercialProperties: {
-		UK: {
-			adTargeting: [
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'url',
-					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
-				},
-				{
-					name: 'tn',
-					value: ['analysis'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/cekky',
-				},
-				{
-					name: 'co',
-					value: [
-						'patrick-greenfield',
-						'jonathanwatts',
-						'damiancarrington',
-						'fiona-harvey',
-					],
-				},
-				{
-					name: 'se',
-					value: ['the-polluters'],
-				},
-				{
-					name: 'k',
-					value: [
-						'climate-crisis',
-						'business',
-						'fossil-fuels',
-						'oilandgascompanies',
-						'energy',
-						'energy-industry',
-						'carbon-capture-and-storage',
-						'carbon-tax',
-						'environment',
-						'renewableenergy',
-						'coal',
-						'carbon-emissions',
-						'fossil-fuel-divestment',
-					],
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-			],
-		},
 		US: {
 			adTargeting: [
 				{
-					name: 'url',
-					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
-				},
-				{
-					name: 'tn',
-					value: ['analysis'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/cekky',
+					name: 'su',
+					value: ['0'],
 				},
 				{
 					name: 'co',
@@ -114,8 +43,28 @@ export const SpecialReport: CAPIArticleType = {
 					],
 				},
 				{
+					name: 'tn',
+					value: ['analysis'],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'url',
+					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+				},
+				{
 					name: 'se',
 					value: ['the-polluters'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/cekky',
 				},
 				{
 					name: 'k',
@@ -128,24 +77,12 @@ export const SpecialReport: CAPIArticleType = {
 						'energy-industry',
 						'carbon-capture-and-storage',
 						'carbon-tax',
+						'coal',
 						'environment',
 						'renewableenergy',
-						'coal',
 						'carbon-emissions',
 						'fossil-fuel-divestment',
 					],
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'p',
-					value: 'ng',
 				},
 				{
 					name: 'edition',
@@ -156,12 +93,46 @@ export const SpecialReport: CAPIArticleType = {
 		AU: {
 			adTargeting: [
 				{
-					name: 'url',
-					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'k',
+					value: [
+						'climate-crisis',
+						'business',
+						'fossil-fuels',
+						'oilandgascompanies',
+						'energy',
+						'energy-industry',
+						'carbon-capture-and-storage',
+						'carbon-tax',
+						'coal',
+						'environment',
+						'renewableenergy',
+						'carbon-emissions',
+						'fossil-fuel-divestment',
+					],
 				},
 				{
 					name: 'tn',
 					value: ['analysis'],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'url',
+					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+				},
+				{
+					name: 'se',
+					value: ['the-polluters'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
 				},
 				{
 					name: 'sh',
@@ -175,40 +146,6 @@ export const SpecialReport: CAPIArticleType = {
 						'damiancarrington',
 						'fiona-harvey',
 					],
-				},
-				{
-					name: 'se',
-					value: ['the-polluters'],
-				},
-				{
-					name: 'k',
-					value: [
-						'climate-crisis',
-						'business',
-						'fossil-fuels',
-						'oilandgascompanies',
-						'energy',
-						'energy-industry',
-						'carbon-capture-and-storage',
-						'carbon-tax',
-						'environment',
-						'renewableenergy',
-						'coal',
-						'carbon-emissions',
-						'fossil-fuel-divestment',
-					],
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'p',
-					value: 'ng',
 				},
 				{
 					name: 'edition',
@@ -216,19 +153,11 @@ export const SpecialReport: CAPIArticleType = {
 				},
 			],
 		},
-		INT: {
+		UK: {
 			adTargeting: [
 				{
-					name: 'url',
-					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
-				},
-				{
-					name: 'tn',
-					value: ['analysis'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/cekky',
+					name: 'su',
+					value: ['0'],
 				},
 				{
 					name: 'co',
@@ -238,10 +167,6 @@ export const SpecialReport: CAPIArticleType = {
 						'damiancarrington',
 						'fiona-harvey',
 					],
-				},
-				{
-					name: 'se',
-					value: ['the-polluters'],
 				},
 				{
 					name: 'k',
@@ -254,37 +179,175 @@ export const SpecialReport: CAPIArticleType = {
 						'energy-industry',
 						'carbon-capture-and-storage',
 						'carbon-tax',
+						'coal',
 						'environment',
 						'renewableenergy',
-						'coal',
 						'carbon-emissions',
 						'fossil-fuel-divestment',
 					],
 				},
 				{
 					name: 'edition',
-					value: 'int',
+					value: 'uk',
 				},
 				{
-					name: 'su',
-					value: ['0'],
+					name: 'tn',
+					value: ['analysis'],
 				},
 				{
 					name: 'ct',
 					value: 'article',
 				},
 				{
+					name: 'url',
+					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+				},
+				{
+					name: 'se',
+					value: ['the-polluters'],
+				},
+				{
 					name: 'p',
 					value: 'ng',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/cekky',
+				},
+			],
+		},
+		INT: {
+			adTargeting: [
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'co',
+					value: [
+						'patrick-greenfield',
+						'jonathanwatts',
+						'damiancarrington',
+						'fiona-harvey',
+					],
+				},
+				{
+					name: 'k',
+					value: [
+						'climate-crisis',
+						'business',
+						'fossil-fuels',
+						'oilandgascompanies',
+						'energy',
+						'energy-industry',
+						'carbon-capture-and-storage',
+						'carbon-tax',
+						'coal',
+						'environment',
+						'renewableenergy',
+						'carbon-emissions',
+						'fossil-fuel-divestment',
+					],
+				},
+				{
+					name: 'tn',
+					value: ['analysis'],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'url',
+					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+				},
+				{
+					name: 'se',
+					value: ['the-polluters'],
+				},
+				{
+					name: 'edition',
+					value: 'int',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/cekky',
+				},
+			],
+		},
+		EUR: {
+			adTargeting: [
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'co',
+					value: [
+						'patrick-greenfield',
+						'jonathanwatts',
+						'damiancarrington',
+						'fiona-harvey',
+					],
+				},
+				{
+					name: 'k',
+					value: [
+						'climate-crisis',
+						'business',
+						'fossil-fuels',
+						'oilandgascompanies',
+						'energy',
+						'energy-industry',
+						'carbon-capture-and-storage',
+						'carbon-tax',
+						'coal',
+						'environment',
+						'renewableenergy',
+						'carbon-emissions',
+						'fossil-fuel-divestment',
+					],
+				},
+				{
+					name: 'tn',
+					value: ['analysis'],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'url',
+					value: '/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/cekky',
+				},
+				{
+					name: 'se',
+					value: ['the-polluters'],
+				},
+				{
+					name: 'edition',
+					value: 'eur',
 				},
 			],
 		},
 	},
 	beaconURL: '//phar.gu-web.net',
+	hasRelated: true,
 	webPublicationSecondaryDateDisplay:
 		'Last modified on Wed 25 Aug 2021 14.48 BST',
 	editionLongForm: 'UK edition',
-	hasRelated: true,
 	publication: 'theguardian.com',
 	trailText:
 		'Individual action alone won’t solve the climate crisis. So what legal and policy changes might help?',
@@ -601,7 +664,7 @@ export const SpecialReport: CAPIArticleType = {
 					},
 					{
 						title: 'Obituaries',
-						url: '/tone/obituaries',
+						url: '/obituaries',
 					},
 				],
 			},
@@ -877,7 +940,7 @@ export const SpecialReport: CAPIArticleType = {
 				children: [
 					{
 						title: 'Obituaries',
-						url: '/tone/obituaries',
+						url: '/obituaries',
 					},
 					{
 						title: 'G2',
@@ -968,6 +1031,10 @@ export const SpecialReport: CAPIArticleType = {
 						url: '/crosswords/series/azed',
 					},
 				],
+			},
+			{
+				title: 'Corrections',
+				url: '/theguardian/series/corrections-and-clarifications',
 			},
 		],
 		brandExtensions: [
@@ -1289,7 +1356,7 @@ export const SpecialReport: CAPIArticleType = {
 				},
 				{
 					title: 'Obituaries',
-					url: '/tone/obituaries',
+					url: '/obituaries',
 				},
 			],
 		},
@@ -1356,35 +1423,35 @@ export const SpecialReport: CAPIArticleType = {
 		theme: 'SpecialReportTheme',
 		display: 'StandardDisplay',
 	},
-	standfirst:
-		'<p>Individual action alone won’t solve the climate crisis. So what political changes might help?</p>\n<ul>\n <li><a href="https://www.theguardian.com/environment/2019/oct/14/rise-renewables-oil-firms-decades-earlier-think">Renewables may see off oil firms decades earlier than they think</a></li>\n</ul>',
 	openGraphData: {
 		'og:url':
 			'http://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 		'article:author':
 			'https://www.theguardian.com/profile/fiona-harvey,https://www.theguardian.com/profile/damiancarrington,https://www.theguardian.com/profile/patrick-greenfield,https://www.theguardian.com/profile/jonathanwatts',
-		'og:image:height': '720',
-		'og:description':
-			'Individual action alone won’t solve the climate crisis. So what legal and policy changes might help?',
 		'og:image:width': '1200',
 		'og:image':
 			'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=ddc1915c083b39e79506d0683a0f0d66',
 		'al:ios:url':
 			'gnmguardian://environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
+		'og:title':
+			'How do we rein in the fossil fuel industry? Here are eight ideas',
+		'fb:app_id': '180444840287',
+		'article:modified_time': '2021-08-25T13:48:23.000Z',
+		'og:image:height': '720',
+		'og:description':
+			'Individual action alone won’t solve the climate crisis. So what legal and policy changes might help?',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
 		'article:section': 'Environment',
 		'article:published_time': '2019-10-14T15:23:44.000Z',
-		'og:title':
-			'How do we rein in the fossil fuel industry? Here are eight ideas',
-		'fb:app_id': '180444840287',
 		'article:tag':
 			'Environment,Climate crisis,Oil and gas companies,Business,Energy industry,Fossil fuels,Carbon capture and storage (CCS),Greenhouse gas emissions,Coal,Energy,Carbon tax,Fossil fuel divestment,Renewable energy',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2021-08-25T13:48:23.000Z',
 	},
+	standfirst:
+		'<p>Individual action alone won’t solve the climate crisis. So what political changes might help?</p>\n<ul>\n <li><a href="https://www.theguardian.com/environment/2019/oct/14/rise-renewables-oil-firms-decades-earlier-think">Renewables may see off oil firms decades earlier than they think</a></li>\n</ul>',
 	sectionUrl: 'environment/environment',
 	pageId: 'environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 	version: 3,
@@ -1493,6 +1560,10 @@ export const SpecialReport: CAPIArticleType = {
 			type: 'Contributor',
 			title: 'Patrick Greenfield',
 			twitterHandle: 'pgreenfielduk',
+			bylineImageUrl:
+				'https://i.guim.co.uk/img/uploads/2022/08/30/Patrick_Greenfield.jpg?width=300&quality=85&auto=format&fit=max&s=433fc08bf3dd5eb42b9298a314202d48',
+			bylineLargeImageUrl:
+				'https://i.guim.co.uk/img/uploads/2022/08/30/Patrick_Greenfield.png?width=300&quality=85&auto=format&fit=max&s=236f4854e03ae25b82931c7fabce1a73',
 		},
 		{
 			id: 'profile/jonathanwatts',
@@ -1672,11 +1743,6 @@ export const SpecialReport: CAPIArticleType = {
 		'twitter:app:id:iphone': '409128287',
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
-		'twitter:image':
-			'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=e9d0d42da8d00418e0640814442f5814',
-		'twitter:site': '@guardian',
-		'twitter:app:url:ipad':
-			'gnmguardian://environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas?contenttype=Article&source=twitter',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
 		'twitter:app:id:ipad': '409128287',
@@ -1684,6 +1750,11 @@ export const SpecialReport: CAPIArticleType = {
 		'twitter:app:url:googleplay':
 			'guardian://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 		'twitter:app:url:iphone':
+			'gnmguardian://environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas?contenttype=Article&source=twitter',
+		'twitter:image':
+			'https://i.guim.co.uk/img/media/d302a26f2229a71ab1dfa231208cefc9ae72e3e8/0_200_3000_1800/master/3000.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=e9d0d42da8d00418e0640814442f5814',
+		'twitter:site': '@guardian',
+		'twitter:app:url:ipad':
 			'gnmguardian://environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas?contenttype=Article&source=twitter',
 	},
 	sectionName: 'environment',
@@ -1699,11 +1770,12 @@ export const SpecialReport: CAPIArticleType = {
 	},
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
+	byline: 'Fiona Harvey, Damian Carrington, Jonathan Watts and Patrick Greenfield',
 	headline:
 		'How do we rein in the fossil fuel industry? Here are eight ideas',
-	byline: 'Fiona Harvey, Damian Carrington, Jonathan Watts and Patrick Greenfield',
-	isLegacyInteractive: false,
 	guardianBaseURL: 'https://www.theguardian.com',
+	isLegacyInteractive: false,
+	webPublicationDate: '2019-10-14T15:23:44.000Z',
 	mainMediaElements: [
 		{
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -1961,10 +2033,11 @@ export const SpecialReport: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: 'f45ebf5b-5fcb-446a-b281-385e76c40635',
+			elementId: 'c0b8e75c-475b-455e-a5cf-d9934b0d9a7d',
 		},
 	],
-	webPublicationDate: '2019-10-14T15:23:44.000Z',
+	canonicalUrl:
+		'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 	blocks: [
 		{
 			id: '5d97218b8f08fbb0c1720cfa',
@@ -1972,22 +2045,22 @@ export const SpecialReport: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Put climate on the ballot paper</strong></h2>',
-					elementId: '81106fed-7cb9-4f5e-82cf-f93c38d3681c',
+					elementId: '0acf3c78-26ff-4af6-9ed1-c6a23f762d03',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Individual actions, such as flying less or buying electric cars, are helpful, but they will be futile without collective political action to slash emissions on a corporate, national and global scale. Politicians need to feel this is a priority for the electorate. That means keeping the subject high on the agenda for MPs with questions, protests, emails, social media posts, lobbying by NGOs and most of all through voting choices. Politicians need to know the public is behind them if they are to take on the petrochemical industry.</p>',
-					elementId: 'c6e40ed8-f135-4dd0-ac4c-6b8a27c09435',
+					elementId: '68508d52-e481-4243-be1c-819daf908368',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>End</strong><strong> fossil fuel subsidies</strong></h2>',
-					elementId: '3f3dc2b5-3e55-442d-9eaf-1f857b395ed1',
+					elementId: '599d0925-833a-4677-8f5d-9ad3ed525a8a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The coal, oil and gas industries benefit from <a href="https://www.imf.org/en/Publications/WP/Issues/2019/05/02/Global-Fossil-Fuel-Subsidies-Remain-Large-An-Update-Based-on-Country-Level-Estimates-46509">$5tn dollars a year</a> – $10m a minute – according to the International Monetary Fund, which described its own estimate as “shocking”. Even <a href="https://www.iea.org/newsroom/news/2019/june/fossil-fuel-consumption-subsidies-bounced-back-strongly-in-2018.html">direct consumption subsidies for fossil fuels</a> are double those for renewables, which the International Energy Agency says “greatly complicates the task” of tackling the climate crisis. The biggest subsidisers, the G20 nations, pledged in 2009 to end the handouts, but progress has been very limited. The UN secretary general, António Guterres, <a href="https://uk.reuters.com/article/global-climatechange-energy/fossil-fuel-subsidies-are-wrecking-the-world-says-u-n-chief-idUKL8N2345F6">attacked</a> the incentives in May, saying: “What we are doing is using taxpayers’ money … to destroy the world.” Any change has to include provisions for social justice. Cuts in fuel subsidies should not be used as an austerity measure that hurts the poor most.</p>',
-					elementId: 'dc84bf2a-e86b-4bf9-8c76-3021bea3071a',
+					elementId: 'a2bcaa03-c680-4416-ac6d-954e632add9e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.QABlockElement',
@@ -1995,62 +2068,62 @@ export const SpecialReport: CAPIArticleType = {
 					title: 'What is the polluters project?',
 					html: '<p>The Guardian has collaborated with leading scientists and NGOs to expose, with exclusive data, investigations and analysis, the fossil fuel companies that are perpetuating the climate crisis – some of which have accelerated their extraction of coal, oil and gas even as the devastating impact on the planet and humanity was becoming clear.<br></p><p>The investigation has involved more than 20 Guardian journalists working across the world for the past six months.</p><p>The project focuses on what the companies have extracted from the ground, and the subsequent emissions they are responsible for, since 1965. The analysis, undertaken by Richard Heede at the <a href="http://climateaccountability.org/">Climate Accountability Institute</a>,&nbsp;calculates how much carbon is emitted throughout the supply chain, from extraction to use by consumers. Heede said: "The fact that consumers combust the fuels to carbon dioxide, water, heat and pollutants does not absolve the fossil fuel companies from responsibility for knowingly perpetuating the carbon era and accelerating the climate crisis toward the existential threat it has now become."</p><p>One aim of the project is to move the focus of debate from individual responsibilities to power structures – so our reporters also examined the financial and lobbying structures that let fossil fuel firms keep growing, and discovered which elected politicians were voting for change.&nbsp;</p><p>Another aim of the project is to press governments and corporations to close the gap between ambitious long-term promises and lacklustre short-term action. The UN says the coming decade is crucial if the world is to avoid the most catastrophic consequences of global heating. Reining in our dependence on fossil fuels and dramatically accelerating the transition to renewable energy has never been more urgent.</p>',
 					credit: '',
-					elementId: '6adb8c48-2c08-419e-8c3e-0ec36087ce78',
+					elementId: 'e5d567b4-c9a5-46b6-898f-4968553a4f15',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Put a price on carbon</strong></h2>',
-					elementId: '64c77f5f-f556-451b-91d5-c6889ae8fba5',
+					elementId: '9af089c0-0c3d-480f-94e7-12da806a9521',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The idea of putting a price on carbon has been around since the early 1990s and a cap-and-trade system was incorporated into the 1997 Kyoto protocol. Under cap-and-trade, a limit is set on emissions and businesses issued with permits to emit carbon. Those cutting their emissions fastest can sell spare permits to laggards, while the cap is ratcheted down over time. But success depends on a strict cap and a scarcity of permits, and <a href="https://www.carbonbrief.org/qa-will-reformed-eu-emissions-trading-system-raise-carbon-prices">the EU’s scheme</a> has been widely criticised. An alternative is a tax, which forces companies to factor the damage caused by climate change into their business decisions, and should encourage them to cut waste, cut emissions and use clean technology. The danger is of carbon leakage: that the extra cost in one country might encourage businesses to look elsewhere to site their factories. This can be dealt with by a border adjustment tax, as the <a href="https://uk.reuters.com/article/uk-eu-commission-timmermans-border-tax/incoming-top-eu-climate-official-pledges-to-tax-polluting-imports-idUKKBN1WN23F">EU’s new commissioner pledged</a> this week. Carbon taxes don’t have to create economic losers, either – <a href="https://www.theguardian.com/world/2018/dec/04/how-to-make-a-carbon-tax-popular-give-the-profits-to-the-people">revenue neutral taxes</a> redistribute the money to the people and are advocated by many.<strong>Scale back demand for fossil fuels</strong></p>',
-					elementId: '73d54d5a-667b-435b-a813-321d1484a294',
+					elementId: 'bae416d2-2551-4fad-b9e7-78571ed48087',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Oil companies will sell oil for as long as there are buyers. Public shaming and social and political pressure can work to force companies to own up to their activities but most oil and gas around the world is produced by <a href="https://www.theguardian.com/environment/2019/oct/09/secretive-national-oil-companies-climate">national oil companies</a>, and they need no social licence to operate beyond that granted by their governments, which are often autocratic or unresponsive to public opinion. All companies are responsive to economic pressure, however. The only way to cut emissions from oil in the long term is to stop using oil. Reducing demand is driven by government regulation and by technological development (also driven by regulation), such as cheaper solar panels, offshore windfarms, electric cars and improved public transport.</p>',
-					elementId: '43314a15-e52f-4663-ab97-6b580392d860',
+					elementId: '5d4fd90a-258a-4348-83e0-455e2cdc4cc4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Stop flaring</strong></h2>',
-					elementId: '2ffe2bf6-6cd0-4943-b251-3ed400f9951f',
+					elementId: '1480f900-64c3-4a44-8a97-67cefa15ca78',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>If oil and gas are to be extracted, the least oil companies can do is extract efficiently. The <a href="https://www.worldbank.org/en/programs/zero-routine-flaring-by-2030">World Bank has estimated</a> that the amount of gas wastefully flared globally each year, if used for power generation instead, could supply all of Africa’s electricity needs. <a href="https://www.ft.com/content/6f8f334e-0ebd-11e9-a3aa-118c761d2745">The FT</a> reported earlier this year that flaring in Texas was lighting up the night sky as producers let off the gas to get the oil to market quickly, to turn a faster buck regardless of the environmental consequences. The World Bank wants an end to routine flaring globally by 2030 – yet <a href="https://www.worldbank.org/en/programs/gasflaringreduction#7">in 2018 it increased</a>. </p>',
-					elementId: '3f4b117d-1350-4ab4-aad3-203df88be771',
+					elementId: '63922cc6-a719-4374-9dad-6db5debd4c26',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Roll out large scale carbon capture and storage</strong></h2>',
-					elementId: '966a06a9-4c57-4eea-a870-ab8b906012da',
+					elementId: '48dca554-6f3c-420c-873b-319dcce2dbb3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Trapping and burying the CO2 from fossil fuel burning is possible but not yet deployed at scale. Without this, the Intergovernmental Panel on Climate Change says tackling the climate crisis will be much more expensive. Oil companies have the expertise to roll out CCS but say that without a price on carbon emissions there is no commercial incentive. CCS could be used to actually remove CO2 from the atmosphere by growing trees and plants, burning them for electricity, then sequestering the emissions. But the IPCC has warned that doing this at large scale could conflict with growing food.</p>',
-					elementId: 'abe67f27-f97c-43a7-8521-470e53d277df',
+					elementId: '0d8de6ac-a747-491f-afa8-f8e77a29ac41',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Halt investment in fossil fuels</strong></h2>',
-					elementId: '1aabef93-dad7-4aa2-b0f7-27ae3e20ae11',
+					elementId: 'a42b09f6-f855-44b3-a5fc-3b1b8baa9f07',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The energy transition poses many risks and opportunities for investors, but it cannot be that well-intentioned savers seeking to use their money to support renewable energy businesses and divest from fossil fuels are still inadvertently investing in oil, gas and coal companies. Green investing must be regulated to ensure it really is green.</p>',
-					elementId: 'c5445de8-9a9d-451c-bb0d-b528e7b66252',
+					elementId: '54ec3e79-f40c-49d0-8e31-fdfa7736b534',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Establish market metrics on climate change</strong></h2>',
-					elementId: '60702847-a2d5-420c-92c1-56b7b01367c8',
+					elementId: '2be1d90c-b3c9-4097-9cfd-27228c987333',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Nearly three years after the Paris agreement, world markets still have no mandatory, comparable data to measure the risks posed by the climate crisis at a company level. Regulators must act urgently – slow-moving voluntary schemes are not enough. Last week, <a href="https://www.theguardian.com/business/2019/oct/08/corporations-told-to-draw-up-climate-rules-or-have-them-imposed">the governor of the Bank of England warned</a> major corporations that they had two years to agree rules for reporting climate risks before global regulators devised their own and made them compulsory. If markets do not understand what climate change really means for car manufacturers, fossil fuel companies and energy firms, a climate-induced financial crisis is just a matter of time. Investment in fossil fuels must end. The <a href="https://gofossilfree.org/divestment/commitments/">fossil fuel divestment movement</a> now has $11.5tn of assets under management committed to divestment.</p>',
-					elementId: '7494a64a-5ec4-469e-abd1-3fbdff2f3485',
+					elementId: '663667c2-c184-449f-b443-7da8d6450afa',
 				},
 			],
 			attributes: {
@@ -2074,7 +2147,7 @@ export const SpecialReport: CAPIArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://amp.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
+			'@id': 'https://www.theguardian.com/environment/2019/oct/14/how-rein-in-fossil-fuel-industry-eight-ideas',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',

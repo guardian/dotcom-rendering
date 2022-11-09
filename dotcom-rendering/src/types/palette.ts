@@ -57,6 +57,7 @@ export type Palette = {
 		filterButtonActive: Colour;
 		betaLabel: Colour;
 		designTag: Colour;
+		dateLine: Colour;
 	};
 	background: {
 		article: Colour;
@@ -90,6 +91,7 @@ export type Palette = {
 		filterButtonActive: Colour;
 		treat: Colour;
 		designTag: Colour;
+		pullQuote: Colour;
 	};
 	fill: {
 		commentCount: Colour;
@@ -103,6 +105,7 @@ export type Palette = {
 		quoteIcon: Colour;
 		blockquoteIcon: Colour;
 		twitterHandleBelowDesktop: Colour;
+		twitterHandle: Colour;
 		guardianLogo: Colour;
 	};
 	border: {
@@ -126,6 +129,7 @@ export type Palette = {
 		cardSupporting: Colour;
 		keyEvent: Colour;
 		filterButton: Colour;
+		secondary: Colour;
 	};
 	topBar: {
 		card: Colour;

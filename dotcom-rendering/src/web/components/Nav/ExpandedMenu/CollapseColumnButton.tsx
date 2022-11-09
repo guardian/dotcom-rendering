@@ -4,6 +4,7 @@ import {
 	brandText,
 	from,
 	headline,
+	textSans,
 } from '@guardian/source-foundations';
 
 const hideDesktop = css`
@@ -66,17 +67,29 @@ const collapseColumnButton = css`
 	}
 `;
 
-export const CollapseColumnButton: React.FC<{
+const editionStyle = css`
+	text-transform: none;
+	${textSans.medium()};
+`;
+type Props = {
 	title: string;
 	columnInputId: string;
 	collapseColumnInputId: string;
 	ariaControls: string;
-}> = ({ title, columnInputId, collapseColumnInputId, ariaControls }) => (
+};
+
+export const CollapseColumnButton = ({
+	title,
+	columnInputId,
+	collapseColumnInputId,
+	ariaControls,
+}: Props) => (
 	<label
 		id={collapseColumnInputId}
 		className="selectableMenuItem"
 		css={[
 			collapseColumnButton,
+			title.includes('edition') && editionStyle,
 			showColumnLinksStyle(columnInputId),
 			hideDesktop,
 		]}
@@ -85,6 +98,7 @@ export const CollapseColumnButton: React.FC<{
 		aria-haspopup="true"
 		aria-controls={ariaControls}
 		tabIndex={-1}
+		// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- we’re using this label for a CSS-only toggle
 		role="menuitem"
 		data-cy={`column-collapse-${title}`}
 		data-link-name={`nav2 : column-toggle-${title}: show`}

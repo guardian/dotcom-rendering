@@ -26,6 +26,7 @@ type Props = {
 	remoteHeader: boolean;
 	contributionsServiceUrl: string;
 	idApiUrl: string;
+	isInEuropeTest: boolean;
 };
 
 export const Header = ({
@@ -38,6 +39,7 @@ export const Header = ({
 	remoteHeader,
 	contributionsServiceUrl,
 	idApiUrl,
+	isInEuropeTest,
 }: Props) => (
 	<div css={headerStyles}>
 		<Hide when="below" breakpoint="desktop">
@@ -45,10 +47,11 @@ export const Header = ({
 				<EditionDropdown
 					editionId={editionId}
 					dataLinkName="nav2 : topbar : edition-picker: toggle"
+					isInEuropeTest={isInEuropeTest}
 				/>
 			</Island>
 		</Hide>
-		<Logo />
+		<Logo editionId={editionId} />
 		<Island deferUntil="idle" clientOnly={true}>
 			<ReaderRevenueLinks
 				urls={urls}

@@ -1,14 +1,14 @@
 import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
-import { err, fromNullable, ok } from '@guardian/types';
-import type { Result } from '@guardian/types';
+import { fromNullable } from '@guardian/types';
 import type { BodyElement } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import { atomScript } from 'components/InteractiveAtom';
 import { isValidDate } from 'date';
 import type Int64 from 'node-int64';
 import type { DocParser } from 'parserContext';
+import { Result } from 'result';
 
 function formatOptionalDate(date: Int64 | undefined): string | undefined {
 	if (date === undefined) return undefined;
@@ -23,7 +23,7 @@ function parseAtom(
 	docParser: DocParser,
 ): Result<string, BodyElement> {
 	if (element.contentAtomTypeData === undefined) {
-		return err('The atom has no data');
+		return Result.err('The atom has no data');
 	}
 
 	const id = element.contentAtomTypeData.atomId;
@@ -35,16 +35,16 @@ function parseAtom(
 			);
 
 			if (atom?.data.kind !== 'interactive') {
-				return err(`No atom matched this id: ${id}`);
+				return Result.err(`No atom matched this id: ${id}`);
 			}
 
 			const { html, css, mainJS: js } = atom.data.interactive;
 
 			if (!html && !css && !js) {
-				return err(`No content for atom: ${id}`);
+				return Result.err(`No content for atom: ${id}`);
 			}
 
-			return ok({
+			return Result.ok({
 				kind: ElementKind.InteractiveAtom,
 				html,
 				css,
@@ -56,7 +56,7 @@ function parseAtom(
 			const atom = atoms.guides?.find((guide) => guide.id === id);
 
 			if (atom?.data.kind !== 'guide' || !id) {
-				return err(`No atom matched this id: ${id}`);
+				return Result.err(`No atom matched this id: ${id}`);
 			}
 
 			const { title } = atom;
@@ -65,10 +65,10 @@ function parseAtom(
 			const { body } = atom.data.guide.items[0];
 
 			if (!title || !body) {
-				return err(`No title or body for atom: ${id}`);
+				return Result.err(`No title or body for atom: ${id}`);
 			}
 
-			return ok({
+			return Result.ok({
 				kind: ElementKind.GuideAtom,
 				html: body,
 				title,
@@ -82,7 +82,7 @@ function parseAtom(
 			const atom = atoms.qandas?.find((qanda) => qanda.id === id);
 
 			if (atom?.data.kind !== 'qanda' || !id) {
-				return err(`No atom matched this id: ${id}`);
+				return Result.err(`No atom matched this id: ${id}`);
 			}
 
 			const { title } = atom;
@@ -91,10 +91,10 @@ function parseAtom(
 			const credit = atom.data.qanda.eventImage?.master?.credit;
 
 			if (!title || !body) {
-				return err(`No title or body for atom: ${id}`);
+				return Result.err(`No title or body for atom: ${id}`);
 			}
 
-			return ok({
+			return Result.ok({
 				kind: ElementKind.QandaAtom,
 				html: body,
 				title,
@@ -108,7 +108,7 @@ function parseAtom(
 			const atom = atoms.profiles?.find((profile) => profile.id === id);
 
 			if (atom?.data.kind !== 'profile' || !id) {
-				return err(`No atom matched this id: ${id}`);
+				return Result.err(`No atom matched this id: ${id}`);
 			}
 
 			const { title } = atom;
@@ -117,10 +117,10 @@ function parseAtom(
 			const credit = atom.data.profile.headshot?.master?.credit;
 
 			if (!title || !body) {
-				return err(`No title or body for atom: ${id}`);
+				return Result.err(`No title or body for atom: ${id}`);
 			}
 
-			return ok({
+			return Result.ok({
 				kind: ElementKind.ProfileAtom,
 				html: body,
 				title,
@@ -134,13 +134,13 @@ function parseAtom(
 			const atom = atoms.charts?.find((chart) => chart.id === id);
 
 			if (atom?.data.kind !== 'chart' || !id) {
-				return err(`No atom matched this id: ${id}`);
+				return Result.err(`No atom matched this id: ${id}`);
 			}
 
 			const { title, defaultHtml } = atom;
 
 			if (!title || !defaultHtml) {
-				return err(`No title or defaultHtml for atom: ${id}`);
+				return Result.err(`No title or defaultHtml for atom: ${id}`);
 			}
 
 			const doc = docParser(defaultHtml);
@@ -156,7 +156,7 @@ function parseAtom(
 				(script) => script.innerHTML,
 			);
 
-			return ok({
+			return Result.ok({
 				kind: ElementKind.ChartAtom,
 				title,
 				id,
@@ -172,7 +172,7 @@ function parseAtom(
 			);
 
 			if (atom?.data.kind !== 'timeline' || !id) {
-				return err(`No atom matched this id: ${id}`);
+				return Result.err(`No atom matched this id: ${id}`);
 			}
 
 			const { title } = atom;
@@ -190,14 +190,14 @@ function parseAtom(
 			const description = atom.data.timeline.description;
 
 			if (!title) {
-				return err(`No title for atom: ${id}`);
+				return Result.err(`No title for atom: ${id}`);
 			}
 
 			if (events.some((event) => event.date === '')) {
-				return err('Invalid date in timeline atom');
+				return Result.err('Invalid date in timeline atom');
 			}
 
-			return ok({
+			return Result.ok({
 				kind: ElementKind.TimelineAtom,
 				title,
 				id,
@@ -212,16 +212,16 @@ function parseAtom(
 			);
 
 			if (atom?.data.kind !== 'explainer' || !id) {
-				return err(`No atom matched this id: ${id}`);
+				return Result.err(`No atom matched this id: ${id}`);
 			}
 
 			const { title, body } = atom.data.explainer;
 
 			if (!title || !body) {
-				return err(`No title or body for atom: ${id}`);
+				return Result.err(`No title or body for atom: ${id}`);
 			}
 
-			return ok({
+			return Result.ok({
 				kind: ElementKind.ExplainerAtom,
 				html: body,
 				title,
@@ -233,7 +233,7 @@ function parseAtom(
 			const atom = atoms.media?.find((media) => media.id === id);
 
 			if (atom?.data.kind !== 'media') {
-				return err(`No atom matched this id: ${id}`);
+				return Result.err(`No atom matched this id: ${id}`);
 			}
 
 			const { posterUrl, duration, assets, activeVersion, title } =
@@ -244,14 +244,14 @@ function parseAtom(
 			)?.id;
 			const caption = docParser(title);
 			if (!posterUrl) {
-				return err(`No posterUrl for atom: ${id}`);
+				return Result.err(`No posterUrl for atom: ${id}`);
 			}
 
 			if (!videoId) {
-				return err(`No videoId for atom: ${id}`);
+				return Result.err(`No videoId for atom: ${id}`);
 			}
 
-			return ok({
+			return Result.ok({
 				kind: ElementKind.MediaAtom,
 				id,
 				posterUrl,
@@ -266,16 +266,18 @@ function parseAtom(
 			const atom = atoms.audios?.find((audio) => audio.id === id);
 
 			if (atom?.data.kind !== 'audio') {
-				return err(`No atom matched this id: ${id}`);
+				return Result.err(`No atom matched this id: ${id}`);
 			}
 			const { id: audioId, title } = atom;
 			const { kicker, trackUrl } = atom.data.audio;
 
 			if (!title) {
-				return err(`No title for audio atom with id: ${audioId}`);
+				return Result.err(
+					`No title for audio atom with id: ${audioId}`,
+				);
 			}
 
-			return ok({
+			return Result.ok({
 				kind: ElementKind.AudioAtom,
 				id: audioId,
 				trackUrl,
@@ -287,19 +289,21 @@ function parseAtom(
 		case 'quiz': {
 			const atom = atoms.quizzes?.find((quiz) => quiz.id === id);
 			if (atom?.data.kind !== 'quiz' || !id) {
-				return err(`No atom matched this id: ${id}`);
+				return Result.err(`No atom matched this id: ${id}`);
 			}
 
 			const { content } = atom.data.quiz;
 
 			if (content.questions.length === 0) {
-				return err(`No content for atom: ${id}`);
+				return Result.err(`No content for atom: ${id}`);
 			}
 
 			const questions = content.questions.map((question) => {
 				return {
 					text: question.questionText,
 					...question,
+					/* TODO: imageUrl & imageAlt should be set here,
+						by parsing question.assets[x].data */
 					answers: question.answers.map((answer) => {
 						return {
 							id: answer.id,
@@ -312,7 +316,7 @@ function parseAtom(
 			});
 
 			if (atom.data.quiz.quizType === 'knowledge') {
-				return ok({
+				return Result.ok({
 					kind: ElementKind.KnowledgeQuizAtom,
 					id,
 					questions,
@@ -327,7 +331,7 @@ function parseAtom(
 			}
 
 			if (atom.data.quiz.quizType === 'personality') {
-				return ok({
+				return Result.ok({
 					kind: ElementKind.PersonalityQuizAtom,
 					id,
 					questions,
@@ -336,13 +340,13 @@ function parseAtom(
 				});
 			}
 
-			return err(
+			return Result.err(
 				`Atom quizType '${atom.data.quiz.quizType}' is not supported.`,
 			);
 		}
 
 		default: {
-			return err(
+			return Result.err(
 				`Atom type not supported: ${element.contentAtomTypeData.atomType}`,
 			);
 		}

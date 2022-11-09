@@ -17,6 +17,7 @@ export interface FEFrontType {
 	commercialProperties: Record<string, unknown>;
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
+	isNetworkFront: boolean;
 }
 
 export interface DCRFrontType {
@@ -27,6 +28,7 @@ export interface DCRFrontType {
 	config: FEFrontConfigType;
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
+	isNetworkFront: boolean;
 }
 
 interface FEPressedPageType {
@@ -79,11 +81,11 @@ export type FEContainerPalette =
 	| 'Dynamo'
 	| 'Special'
 	| 'DynamoLike'
-	| 'Special'
 	| 'Breaking'
 	| 'Podcast'
 	| 'Branded'
-	| 'BreakingPalette';
+	| 'BreakingPalette'
+	| 'SpecialReportAltPalette';
 
 export type DCRContainerPalette =
 	| 'EventPalette'
@@ -93,7 +95,8 @@ export type DCRContainerPalette =
 	| 'LongRunningAltPalette'
 	| 'LongRunningPalette'
 	| 'SombrePalette'
-	| 'BreakingPalette';
+	| 'BreakingPalette'
+	| 'SpecialReportAltPalette';
 
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
@@ -382,7 +385,7 @@ type FEFrontConfigType = {
 	discussionFrontendUrl: string;
 	ipsosTag: string;
 	ophanJsUrl: string;
-	isPaidContent: boolean;
+	isPaidContent?: boolean;
 	mobileAppsAdUnitRoot: string;
 	plistaPublicApiKey: string;
 	frontendAssetsFullURL: string;
@@ -413,12 +416,14 @@ type FESeoDataType = {
 	id: string;
 	navSection: string;
 	webTitle: string;
+	title?: string;
 	description: string;
 };
 
 type FEFrontPropertiesType = {
 	isImageDisplayed: boolean;
 	commercial: Record<string, unknown>;
+	isPaidContent?: boolean;
 };
 
 export type FESupportingContent = {

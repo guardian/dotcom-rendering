@@ -23,6 +23,26 @@ import { Colour } from '.';
 const cameraCaptionIcon = (): Colour => neutral[46];
 const cameraCaptionIconDark = (): Colour => neutral[60];
 
+const editionsCameraIcon = (format: ArticleFormat): Colour => {
+	switch (format.theme) {
+		case ArticlePillar.Opinion:
+			return opinion[800];
+		case ArticlePillar.Sport:
+			return sport[800];
+		case ArticlePillar.Culture:
+			return culture[800];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[800];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[800];
+		case ArticleSpecial.Labs:
+			return specialReport[800];
+		case ArticlePillar.News:
+		default:
+			return news[800];
+	}
+};
+
 const commentCount = (format: ArticleFormat): Colour => {
 	if (format.design === ArticleDesign.LiveBlog) {
 		return neutral[86];
@@ -47,6 +67,8 @@ const commentCount = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 const commentCountDark = (format: ArticleFormat): Colour => {
@@ -72,6 +94,8 @@ const commentCountDark = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -98,6 +122,8 @@ const commentCountWide = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -155,6 +181,8 @@ const blockquoteIcon = (format: ArticleFormat): Colour => {
 					return labs[300];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[300];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[400];
 			}
 		default:
 			switch (format.theme) {
@@ -172,6 +200,8 @@ const blockquoteIcon = (format: ArticleFormat): Colour => {
 					return labs[400];
 				case ArticleSpecial.SpecialReport:
 					return specialReport[400];
+				case ArticleSpecial.SpecialReportAlt:
+					return news[400];
 			}
 	}
 };
@@ -212,15 +242,16 @@ const lines = (_format: ArticleFormat): Colour => neutral[86];
 
 const linesDark = (_format: ArticleFormat): Colour => neutral[20];
 
-const signUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
+const newsletterSignUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
 
-const signUpFormButtonDark = (_format: ArticleFormat): Colour => neutral[86];
+const newsletterSignUpFormButtonDark = (_format: ArticleFormat): Colour => neutral[86];
 
 // ----- API ----- //
 
 const fill = {
 	cameraCaptionIcon,
 	cameraCaptionIconDark,
+	editionsCameraIcon,
 	commentCount,
 	commentCountDark,
 	commentCountWide,
@@ -234,8 +265,8 @@ const fill = {
 	richLinkDark,
 	richLinkSvgPreload,
 	richLinkSvgPreloadDark,
-	signUpFormButton,
-	signUpFormButtonDark,
+	newsletterSignUpFormButton,
+	newsletterSignUpFormButtonDark,
 };
 
 // ----- Exports ----- //

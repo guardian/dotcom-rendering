@@ -23,87 +23,29 @@ export const PhotoEssay: CAPIArticleType = {
 		},
 	],
 	commercialProperties: {
-		UK: {
-			adTargeting: [
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'url',
-					value: '/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
-				},
-				{
-					name: 'tn',
-					value: ['features'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/fj28j',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'se',
-					value: ['guardian-picture-essay'],
-				},
-				{
-					name: 'k',
-					value: [
-						'uk',
-						'photography',
-						'travel',
-						'cornwall',
-						'england',
-					],
-				},
-			],
-		},
 		US: {
 			adTargeting: [
 				{
-					name: 'url',
-					value: '/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
-				},
-				{
-					name: 'tn',
-					value: ['features'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/fj28j',
-				},
-				{
 					name: 'su',
 					value: ['0'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'se',
-					value: ['guardian-picture-essay'],
 				},
 				{
 					name: 'edition',
 					value: 'us',
 				},
 				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'tn',
+					value: ['features'],
+				},
+				{
+					name: 'url',
+					value: '/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
+				},
+				{
 					name: 'k',
 					value: [
 						'uk',
@@ -112,38 +54,42 @@ export const PhotoEssay: CAPIArticleType = {
 						'cornwall',
 						'england',
 					],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/fj28j',
+				},
+				{
+					name: 'se',
+					value: ['guardian-picture-essay'],
 				},
 			],
 		},
 		AU: {
 			adTargeting: [
 				{
-					name: 'url',
-					value: '/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
-				},
-				{
-					name: 'tn',
-					value: ['features'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/fj28j',
-				},
-				{
 					name: 'su',
 					value: ['0'],
+				},
+				{
+					name: 'edition',
+					value: 'au',
 				},
 				{
 					name: 'ct',
 					value: 'article',
 				},
 				{
-					name: 'p',
-					value: 'ng',
+					name: 'tn',
+					value: ['features'],
 				},
 				{
-					name: 'se',
-					value: ['guardian-picture-essay'],
+					name: 'url',
+					value: '/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 				},
 				{
 					name: 'k',
@@ -156,30 +102,68 @@ export const PhotoEssay: CAPIArticleType = {
 					],
 				},
 				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/fj28j',
+				},
+				{
+					name: 'se',
+					value: ['guardian-picture-essay'],
+				},
+			],
+		},
+		UK: {
+			adTargeting: [
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
 					name: 'edition',
-					value: 'au',
+					value: 'uk',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'tn',
+					value: ['features'],
+				},
+				{
+					name: 'url',
+					value: '/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
+				},
+				{
+					name: 'k',
+					value: [
+						'uk',
+						'photography',
+						'travel',
+						'cornwall',
+						'england',
+					],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/fj28j',
+				},
+				{
+					name: 'se',
+					value: ['guardian-picture-essay'],
 				},
 			],
 		},
 		INT: {
 			adTargeting: [
 				{
-					name: 'url',
-					value: '/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
-				},
-				{
-					name: 'tn',
-					value: ['features'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/fj28j',
-				},
-				{
-					name: 'edition',
-					value: 'int',
-				},
-				{
 					name: 'su',
 					value: ['0'],
 				},
@@ -188,12 +172,12 @@ export const PhotoEssay: CAPIArticleType = {
 					value: 'article',
 				},
 				{
-					name: 'p',
-					value: 'ng',
+					name: 'tn',
+					value: ['features'],
 				},
 				{
-					name: 'se',
-					value: ['guardian-picture-essay'],
+					name: 'url',
+					value: '/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 				},
 				{
 					name: 'k',
@@ -205,14 +189,76 @@ export const PhotoEssay: CAPIArticleType = {
 						'england',
 					],
 				},
+				{
+					name: 'edition',
+					value: 'int',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/fj28j',
+				},
+				{
+					name: 'se',
+					value: ['guardian-picture-essay'],
+				},
+			],
+		},
+		EUR: {
+			adTargeting: [
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'tn',
+					value: ['features'],
+				},
+				{
+					name: 'url',
+					value: '/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
+				},
+				{
+					name: 'k',
+					value: [
+						'uk',
+						'photography',
+						'travel',
+						'cornwall',
+						'england',
+					],
+				},
+				{
+					name: 'edition',
+					value: 'eur',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/fj28j',
+				},
+				{
+					name: 'se',
+					value: ['guardian-picture-essay'],
+				},
 			],
 		},
 	},
 	beaconURL: '//phar.gu-web.net',
+	hasRelated: true,
 	webPublicationSecondaryDateDisplay:
 		'Last modified on Wed 9 Dec 2020 13.40 GMT',
 	editionLongForm: 'UK edition',
-	hasRelated: true,
 	publication: 'theguardian.com',
 	trailText:
 		'Photographer Cat Vinton’s work follows nomadic people in the natural world, but the pandemic meant being closer to home – living out of her vehicle and exploring the Cornish way of life ',
@@ -525,7 +571,7 @@ export const PhotoEssay: CAPIArticleType = {
 					},
 					{
 						title: 'Obituaries',
-						url: '/tone/obituaries',
+						url: '/obituaries',
 					},
 				],
 			},
@@ -801,7 +847,7 @@ export const PhotoEssay: CAPIArticleType = {
 				children: [
 					{
 						title: 'Obituaries',
-						url: '/tone/obituaries',
+						url: '/obituaries',
 					},
 					{
 						title: 'G2',
@@ -892,6 +938,10 @@ export const PhotoEssay: CAPIArticleType = {
 						url: '/crosswords/series/azed',
 					},
 				],
+			},
+			{
+				title: 'Corrections',
+				url: '/theguardian/series/corrections-and-clarifications',
 			},
 		],
 		brandExtensions: [
@@ -1035,33 +1085,33 @@ export const PhotoEssay: CAPIArticleType = {
 		theme: 'LifestylePillar',
 		display: 'ImmersiveDisplay',
 	},
-	standfirst:
-		'<p>Photographer Cat Vinton’s work follows nomadic people in the natural world, but the pandemic meant being closer to home – living out of her vehicle and exploring the Cornish way of life </p>',
 	openGraphData: {
 		'og:url':
 			'http://www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 		'article:author': 'Cat Vinton',
-		'og:image:height': '721',
-		'og:description':
-			'Photographer Cat Vinton’s work follows nomadic people in the natural world, but the pandemic meant being closer to home – living out of her vehicle and exploring the Cornish way of life',
 		'og:image:width': '1200',
 		'og:image':
 			'https://i.guim.co.uk/img/media/00ddc088d562eef31c3dd50729182c4289d06a49/705_684_1797_1079/master/1797.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=d0781dadcadbce5fbf08389d2fbf0040',
 		'al:ios:url':
 			'gnmguardian://travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
+		'og:title': 'My year of roaming free in Cornwall – a photo essay',
+		'fb:app_id': '180444840287',
+		'article:modified_time': '2020-12-09T13:40:07.000Z',
+		'og:image:height': '721',
+		'og:description':
+			'Photographer Cat Vinton’s work follows nomadic people in the natural world, but the pandemic meant being closer to home – living out of her vehicle and exploring the Cornish way of life',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
 		'article:section': 'Travel',
 		'article:published_time': '2020-12-09T06:30:30.000Z',
-		'og:title': 'My year of roaming free in Cornwall – a photo essay',
-		'fb:app_id': '180444840287',
 		'article:tag':
 			'Travel photography,Cornwall holidays,England holidays,United Kingdom holidays,Travel,Photography',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2020-12-09T13:40:07.000Z',
 	},
+	standfirst:
+		'<p>Photographer Cat Vinton’s work follows nomadic people in the natural world, but the pandemic meant being closer to home – living out of her vehicle and exploring the Cornish way of life </p>',
 	sectionUrl: 'travel/photography',
 	pageId: 'travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 	version: 3,
@@ -1276,11 +1326,6 @@ export const PhotoEssay: CAPIArticleType = {
 		'twitter:app:id:iphone': '409128287',
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
-		'twitter:image':
-			'https://i.guim.co.uk/img/media/00ddc088d562eef31c3dd50729182c4289d06a49/705_684_1797_1079/master/1797.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=d5ed75a241fcc6e9b4a56601d07d3b11',
-		'twitter:site': '@guardian',
-		'twitter:app:url:ipad':
-			'gnmguardian://travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton?contenttype=Article&source=twitter',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
 		'twitter:app:id:ipad': '409128287',
@@ -1288,6 +1333,11 @@ export const PhotoEssay: CAPIArticleType = {
 		'twitter:app:url:googleplay':
 			'guardian://www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 		'twitter:app:url:iphone':
+			'gnmguardian://travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton?contenttype=Article&source=twitter',
+		'twitter:image':
+			'https://i.guim.co.uk/img/media/00ddc088d562eef31c3dd50729182c4289d06a49/705_684_1797_1079/master/1797.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&s=d5ed75a241fcc6e9b4a56601d07d3b11',
+		'twitter:site': '@guardian',
+		'twitter:app:url:ipad':
 			'gnmguardian://travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton?contenttype=Article&source=twitter',
 	},
 	sectionName: 'travel',
@@ -1303,10 +1353,11 @@ export const PhotoEssay: CAPIArticleType = {
 	},
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	headline: 'My year of roaming free in Cornwall',
 	byline: 'Cat Vinton',
-	isLegacyInteractive: false,
+	headline: 'My year of roaming free in Cornwall',
 	guardianBaseURL: 'https://www.theguardian.com',
+	isLegacyInteractive: false,
+	webPublicationDate: '2020-12-09T06:30:30.000Z',
 	mainMediaElements: [
 		{
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -1564,10 +1615,11 @@ export const PhotoEssay: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '78c26f9a-1945-4485-ba2f-56ac2ad735ba',
+			elementId: '6bdb700c-c735-43c1-bdb6-e19bcd43ce6b',
 		},
 	],
-	webPublicationDate: '2020-12-09T06:30:30.000Z',
+	canonicalUrl:
+		'https://www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 	blocks: [
 		{
 			id: '5fc4ed128f08959b167732bd',
@@ -1575,17 +1627,17 @@ export const PhotoEssay: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The last embers of my fire flicker orange and red in the dark. It has warmed me after my evening swim shared with a grey seal, a curious female at the water’s edge, under the soft pink hues of the setting sun.</p>',
-					elementId: 'af806932-e218-4af8-9d51-f4ef3461a8de',
+					elementId: '37c76c25-1cf7-4971-95a4-52db8db6c0df',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The nights are beginning to draw in and the temperature is dropping. Tonight’s home is a magical one: a hidden spot somewhere on the Roseland Heritage coast.</p>',
-					elementId: 'ba74b055-d82c-4bc4-948a-d65d0ae10bf6',
+					elementId: '240c726d-d9df-4c7f-bbe7-55463ca18af6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I am curled up in my tiny space with only a canvas shell between me and the elements. Tonight is calm: a beautiful moon path marks the ocean and is my view through the open back of my family’s Land Rover. I drift off to sleep to the sound of waves lapping the shore and the call of tawny owls across the night sky.</p>',
-					elementId: '905c6cc7-5b94-477e-93dc-d1abb1888900',
+					elementId: '5980ad53-577d-426c-af54-8c1f79e787ee',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -1900,32 +1952,32 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: 'a12a7166-4495-47a0-94dd-6e0d5bb9bc2e',
+					elementId: '1f96cbb6-6ed0-4d41-a6b6-864283ea10fe',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p>Cat Vinton’s home for the past eight months has been her Land Rover</p></li> \n</ul>',
-					elementId: '65f8c215-65f1-4be9-8fda-adcb690217ce',
+					elementId: 'add62051-7b64-4910-9aee-4c5f60caf877',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For the last few years I’ve not called one place home. Instead, I’ve roamed across the globe – from the High Himalaya to the Arctic Circle, the Gobi Desert to the Andaman Sea<strong> </strong>– weaving my life and work as a photographer, more in tune with a wilder spirit and those who still live connected to nature.</p>',
-					elementId: '8a269e15-367a-40e3-a395-f2d73dfa6662',
+					elementId: 'c5df101e-f5cf-4cad-a1a6-12152c0cfce3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>As the world locked down in March, not only my work but my entire way of life ground to a quiet halt, forcing me to look inward and to grapple with the meaning<em> </em>of “home”.</p>',
-					elementId: '1f33f872-c744-4cda-851a-95cf853e6c0a',
+					elementId: '07ed4fab-5eaa-4e30-8087-0058e9d3cf04',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>My pull was to the ocean of the south-west of England. Thanks to my friend Louise Middleton, for those three months of lockdown I watched over a wild pocket of the north Cornish coast – an old slate quarry that overlooks the sea at Trebarwith Strand. It is a beautifully curated space, totally off-grid, that Louise has named <a href="https://kudhva.com/">Kudhva</a> (meaning hideout in Cornish). Kudhva is a visionary architectural hideout that draws creative people who thrive on a life connected to the outdoors.</p>',
-					elementId: '3f199664-61ec-42e2-ba7e-eda815e85657',
+					elementId: 'd8318a96-6132-493c-b48c-b6c987d65e10',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I became part of a community at Kudhva and my days were spent in fascinating conversation, working on the land with the locals. This is what I do on my projects – immerse myself in a way of life, documenting people who are connected to their land and community around the world. I fell into a way of doing the same on home shores.</p>',
-					elementId: 'd150f4ae-b7b7-407d-8484-b8744fb4615c',
+					elementId: 'cfd88263-3b4c-4b40-af9a-aaa10b7ec46d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2240,7 +2292,7 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '8ba1fa13-fc11-4c28-8483-19a6a20556af',
+					elementId: 'a0b281b7-1635-4c5e-873f-50d327702cf1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2555,17 +2607,17 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '6a9aed57-f6ba-4700-b351-15647748b1d6',
+					elementId: '2d6c95f4-7176-40ab-9193-e0338426294e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p>Louise Middleton bought a 45-acre abandoned quarry in 2015 that she named Kudhva, meaning hideout in Cornish</p></li> \n</ul>',
-					elementId: 'f270d322-0c14-4cb3-986f-484cd66d7346',
+					elementId: '0ad4331b-7d3d-4a90-beee-ebba33a1e833',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Sidetracked, an adventure journal which has shared my stories from the remotest corners of the world, joined us as lockdown lifted for some backyard adventures – climbing, biking, cold-water swimming and surfing – with the people who know this land best.</p>',
-					elementId: '64b51587-6c5c-42a7-ad54-45aef21ea366',
+					elementId: '75d24dd2-f068-449e-8570-b683a8be2763',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2880,7 +2932,7 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '24dddaeb-faa8-4b35-8c94-00a5749f5ec9',
+					elementId: '49ec49b2-a570-425f-a009-62623ea599c9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3195,7 +3247,7 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '3193b1bc-40f4-42a6-a787-626e5817d606',
+					elementId: 'bd5e1bac-92cc-4aa6-9be0-f1c0bda52c28',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3510,7 +3562,7 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '34d5c98b-7dde-4ff5-9568-5f39658e1e9d',
+					elementId: 'cc6307d0-b752-46f9-8c19-ade3e1860d45',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -3825,12 +3877,12 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '40951265-4565-4161-83a8-ed1f8476d430',
+					elementId: '5dcb6b27-a5f8-4487-96b0-7897905dc2a9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p>Backyard adventures in Cornwall with the locals included cold-water swimming, biking and surfing. Shot for Sidetracked magazine at Kudhva and Trebarwith Strand</p></li> \n</ul>',
-					elementId: 'a78baf98-fba9-4271-a529-f05f07f07bf0',
+					elementId: 'd74f2e7a-530d-494f-892d-9be9edb2ccd1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4135,29 +4187,29 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: 'b7800058-686a-4913-a004-a24958666c31',
+					elementId: '0ff4eebd-17e4-4d3b-b321-ede638c8adb2',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Then, as the country began to open up again, and Kudhva began to welcome back guests, it was time to move on. I decided this was a gift of time I may never get again. Usually, I’m moving with my work. I had my cameras and a Land Rover that could take me off the beaten track – the perfect companion to explore the Cornish coast and its way of life, and to see if I could still find pockets of solitude, as the tourist floodgates opened.</p>',
-					elementId: 'f23e4ccf-e931-4f35-a93b-e50a8af4312d',
+					elementId: '50b9003c-2ee5-43f3-b05f-5801678e3194',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement',
 					html: 'It’s a simple set-up – I’m free, independent and I am happy',
 					role: 'supporting',
 					isThirdPartyTracking: false,
-					elementId: '718509d6-cf0f-4a7e-bcde-dcbc4ebd1474',
+					elementId: '5130eba7-4af1-413e-83b6-b719ca92adef',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>A small pile of books is stacked between the seats of the Land Rover; a head torch, tide tables, bikini and my knife are at hand. Everything else I need is packed neatly in the open back, covered with a piece of wood that doubles as a table and my bed. It’s simple – I’m free, independent and happy. With no real plan, I set off west along the north coast.</p>',
-					elementId: 'd752c70e-c307-467d-ac0a-3f156bf91384',
+					elementId: '55a8d1bf-5aad-4c0d-9877-dbc6f1794001',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Cornwall has always felt like a haven to me, but even more so now with its gift of space, fresh air, ocean and local produce far from the hustle of city life. Slate and granite cliffs, small rocky coves and headlands, sand dunes, reefs, sandy beaches, green pathways and water shape Cornwall’s 400 miles of coastline.</p>',
-					elementId: 'cc1f4a8d-bf77-4128-94a2-9c90536a914d',
+					elementId: '2a6e0275-d746-4e2c-a276-3be90e9a0355',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4472,7 +4524,7 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: 'aa772744-4126-4ada-b020-b0046d8da5cc',
+					elementId: '898c5fd1-091e-4998-bb86-398877fb300d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -4787,7 +4839,7 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: 'e311a296-6c63-4d21-85d4-29c20d40d4d8',
+					elementId: '04ba4ebc-1d09-471f-b48c-149c43b012f7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5102,17 +5154,17 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: 'a6ec091a-76a4-4b7e-9a8c-09923112d789',
+					elementId: 'a9168311-4394-486b-8a12-0ddc6a1bce93',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p>Turquoise waters, green pathways and rocky pools shape Cornwall’s 400 miles of coastline</p></li> \n</ul>',
-					elementId: '0f1df4bb-fa95-45b0-a9b9-fe6853a8e0ab',
+					elementId: '3845c3d2-36e6-462e-9a40-792c28068c37',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>As my days slowed, I noticed every detail in the shifting light, the sounds, smells and colours, and tuned into the tidal rhythm, mesmerised by the waves that roll in perfect lines.</p>',
-					elementId: '0c8a2f00-877f-43dc-a53c-ee102c9ced4b',
+					elementId: 'b26a7c14-d7ce-4507-9677-c36b0350b95d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5427,17 +5479,17 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '437fa66f-ef65-454b-b5fb-1e3a95549c2b',
+					elementId: '90a6bb92-0e84-45a3-9a74-e9d843f5be26',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I weaved my way along the north coast from Trebarwith Strand to the lighthouse on Pendeen Point, almost 100 miles of coast flanked by the Atlantic Ocean. This part of the coast is punctuated with derelict buildings and still-noble chimneys of tin and copper mines that once thrived in a harsh industrial past. Climbers are drawn to the granite cliffs and crags of the Penwith peninsula, and I spent some epic days here, with friends, climbing and exploring the Penwith heritage coast.</p>',
-					elementId: '99c39647-1507-4ab9-b695-f3bd50a4f110',
+					elementId: 'ae0de552-e2d7-43ed-ba7d-ebd5e1e5832f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The weather had been mostly kind until late August, but the rumblings of thunder carried a wild energy that stirred up the ocean and I lay awake as lightning lit up the night sky, and wind and driving rain whipped the canvas covering of the Land Rover. For 10 days storms Ellen and Francis raged across the ocean, swirled around the end of land and made me appreciate everything – especially how privileged I am to be able to make the choice to live like this. It’s not the easiest way to live and not what most people would choose – but it’s stripped back, simple and connected. Being immersed in the elements is where I find my energy and my balance, giving me a sense of purpose.</p>',
-					elementId: 'b6f8e237-3a26-4e62-8c0a-b9796399f74c',
+					elementId: 'e48a6f7a-5c7c-4250-9e51-19acbffeb8e6',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -5752,24 +5804,24 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: 'adea7311-b367-416e-a077-4116e1a99bf2',
+					elementId: '107d9864-909d-4911-bd81-b34cacc49712',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p>Storm Francis raging across the ocean in August</p></li> \n</ul>',
-					elementId: 'ead3a287-c30f-45b0-8e5f-980e98dc7953',
+					elementId: '71ec6d7b-6a47-4d5c-a4ea-c77a1ba56935',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Every day is different as I move slowly along this stunning coast. I’ve seen pilot whales, dolphins, seals, barn owls, kestrels, peregrines and choughs, met old Cornish fishermen and made new local friends. I have, of course, also seen the hordes of people who’ve flocked here – but I’ve also found so many empty pockets of Kernow magic. The sea mist comes and goes, as do the sun and the clouds. The sea changes every day, every hour, every minute, as do we – our emotions, our energy and our perspectives. It feels like a lesson – a constant reminder that we are part of nature, not separated from it.</p>',
-					elementId: '72e34231-0b22-4aac-837b-b9f44f2a1527',
+					elementId: '58aa7bee-2d49-48f4-b568-ecbc60ebdd61',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement',
 					html: 'I’ve seen pilot whales, dolphins, seals, met old Cornish fishermen and made new local friends',
 					role: 'supporting',
 					isThirdPartyTracking: false,
-					elementId: 'dab418f4-f2a5-4bc5-b322-9699af438e1e',
+					elementId: 'd76bcd03-40f1-4350-8582-8560dd6050f8',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6084,7 +6136,7 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '654cbab8-b034-4781-a3cb-40c8ba3963f0',
+					elementId: '119391fb-67a5-48ef-b26c-a777da265b6a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6399,7 +6451,7 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '8a4fe1c6-d875-4552-8654-70902deba771',
+					elementId: '2b168e35-f250-462e-8899-4b9944d54fd5',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -6715,22 +6767,22 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: 'c0d5bc9f-9648-4f46-8785-d4bd2c8ca269',
+					elementId: '2cc71c66-4881-4c4f-a666-e46850fd2408',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p>Clockwise from top: White horses carried on the on-shore wind at Dollar Cove, on the Lizard; two different views of Logan Rock</p></li> \n</ul>',
-					elementId: '45808358-4b02-421d-b0fb-dcd484db7b25',
+					elementId: '224e5efe-6b5c-4b1b-92db-4bdbf8800784',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Friends have joined me, I’ve swum every day, I’ve climbed, explored and watched the days turn to night by a fire on the beach most evenings. I’ve witnessed the change in the coastal palette of the native wildflowers and fallen into the pace of life here. I navigated the coast around the Lizard, up to Falmouth and on to the Roseland Heritage coast; the south coast is gentler, with sheltered beaches, woodland valleys, tree-lined estuaries, tiny winding roads, and picturesque fishing villages scattered along its shores.</p>',
-					elementId: '39866338-436c-4860-b077-88d68049a277',
+					elementId: '0ce03a10-f12a-4966-a9f8-7bd529e6d16e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I’ve been drawn to like-minded people, who share the same values, who’ve made a home on this coast and who are passionately driven to protect the ocean and the land. Conversations, ideas and projects are the beginnings of collaborations, now and in the future.</p>',
-					elementId: '23cf3d14-a0ce-44fb-8161-242e078ae164',
+					elementId: '2d5ebe5f-713e-4961-9ad5-9965ece86c0f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -7045,17 +7097,17 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: 'dc202abd-70f9-4471-a9ba-93602b9ed002',
+					elementId: 'd6dc649d-7dbd-4cc2-9376-07604d7091f7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p>Joya Burrow, <a href="https://www.therighttoroam.com/">The Right to Roam Films</a> shot for Finisterre, at Kudhva and Trebarwith Strand</p></li> \n</ul>',
-					elementId: '2a28bbe0-0597-4c89-b690-804501f6952d',
+					elementId: '2329bdd2-773c-4690-9ef8-2189903f91a4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I made it to Mevagissey on the south coast by the beginning of October, with warnings of another storm. I had a commitment to be on Cornwall’s highest point, Brown Willy on Bodmin Moor, by 3 October to photograph an amazing man, explorer <a href="https://www.theguardian.com/travel/2020/oct/14/nature-has-healing-power-britains-covid-heroes-share-their-favourite-outdoor-spaces">Robin Hanbury-Tenison</a> and his family. His story is one of a remarkable recovery from Covid-19, having spent five weeks in an induced coma with little chance of survival. The key moment in his recovery was when he was wheeled into the healing garden of Derriford hospital. Now raising funds for healing gardens across Cornwall, Robin braved the 60mph winds of Storm Alex to reach the summit and fly the Cornish flag of Saint Piran. Another story of the power of nature.</p>',
-					elementId: 'ffab586d-6db3-4116-91b3-28cf717e2126',
+					elementId: '29338ead-8415-41d1-a97b-030d37434a8f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -7370,7 +7422,7 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '0ead734a-bcd0-4038-9531-d5b203f25a37',
+					elementId: '47448f1a-666f-4e85-b7e6-472aa7615864',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -7685,34 +7737,34 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: 'ff5d48c1-5ef7-4a56-b931-0510943e4172',
+					elementId: '6c5f7b34-5002-4f22-8591-dcfbc128b8b9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p>Explorer and Covid-19 survivor Robin Hanbury-Tenison climbs Brown Willy on Bodmin Moor in October to raise funds for healing gardens across Cornwall</p></li> \n</ul>',
-					elementId: '6aeb96ec-29f2-4005-91b6-6a54b5d3b08f',
+					elementId: 'a92ab57f-1936-4355-a5e1-228986c172db',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I’ve been in Cornwall for eight months now. That’s the longest I’ve been in one place for a long time. Cornwall has had my heart for many years, but to have lived through the seasons, entirely off-grid, has connected me more deeply.</p>',
-					elementId: '9e641306-11a7-452f-8114-856107ecec90',
+					elementId: '131b341e-c38f-46a9-93dd-8d10cc057c94',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement',
 					html: 'There is something incredibly powerful about living so close to nature, in the elements',
 					role: 'supporting',
 					isThirdPartyTracking: false,
-					elementId: 'af23854b-fd49-4e1f-9532-2ecd2baa1363',
+					elementId: '7f7499b5-3ecc-4574-9075-f03db1b30e62',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>There is something incredibly powerful about living so close to nature, in the elements. I think it’s something we miss living inside closed walls – we are disconnected.</p>',
-					elementId: '4a1d1b8b-00ca-49ce-ac4e-762120caf1f8',
+					elementId: '2aba71eb-1cac-424e-befb-73691d544b3c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>As the world of free movent has new rules and the future is unknown and precarious, I think it has forced many of us to rethink our pace of life, our relationship to nature, what we really need to be happy and fulfilled, and how we will live our lives on the other side of this.</p>',
-					elementId: '618bf429-cdfa-48c9-8162-7665e9670ba2',
+					elementId: '200ef0e9-48bc-486d-9ef0-64f1b0c63bce',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -8027,7 +8079,7 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: 'c4722b1b-96e5-4c46-8af0-de479c7fcd80',
+					elementId: '70f2a33d-e5c6-489c-be47-7119dc99bfcb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -8342,7 +8394,7 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '7fdcb843-b116-4fdf-b113-cf35e45974ea',
+					elementId: '815ad3bd-c204-4584-a80e-4708a36ca3e7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -8657,17 +8709,17 @@ export const PhotoEssay: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: 'd3421bfc-85fd-4665-83ee-d091951e7975',
+					elementId: '9ac21d89-03b2-4625-b7a1-059d44b4f395',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p>Clockwise from top left: Sunrise at Towan Beach, full corn moon on the Penwith Heritage coast and Cat Vinton’s Land Rover parked up on the Cornish coast</p></li> \n</ul>',
-					elementId: '078838f2-7e3b-4c94-8fa0-80a1df52c68b',
+					elementId: '44be779e-7364-4fc1-9b0c-c716ba09ff8d',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I have learned so much about the importance and the purpose of life – a moral and ethical code – from the nomadic people of the world’s most remote corners. About the fragile connection between people and nature, and that wealth and success are not measured in belongings and status, but in the strength of our human spirit. I feel, more than ever, that we have so much to learn from these people who have never lost those visceral connections.</p>',
-					elementId: '99e8cff7-7600-4d7d-83c2-67201edd4dd6',
+					elementId: 'd16fc0eb-9170-419f-b1a7-a6ad32ddd890',
 				},
 			],
 			attributes: {
@@ -8691,7 +8743,7 @@ export const PhotoEssay: CAPIArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://amp.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
+			'@id': 'https://www.theguardian.com/travel/2020/dec/09/my-year-of-roaming-free-in-cornwall-photo-essay-cat-vinton',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',

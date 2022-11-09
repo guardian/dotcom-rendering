@@ -2,9 +2,12 @@
 import type { TrailType } from 'src/types/trails';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import {
+	Card100PictureRight,
+	Card100PictureTop,
 	Card25_Card75,
 	Card50_Card50,
 	Card75_Card25,
+	filterGroupedTrails,
 	shouldPadWrappableRows,
 } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
@@ -15,64 +18,6 @@ type Props = {
 	groupedTrails: DCRGroupedTrails;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-};
-
-const Card100PictureTop = ({
-	cards,
-	showAge,
-	containerPalette,
-}: {
-	cards: TrailType[];
-	showAge?: boolean;
-	containerPalette?: DCRContainerPalette;
-}) => {
-	if (!cards[0]) return null;
-	return (
-		<UL>
-			<LI percentage="100%" padSides={true} padBottom={true}>
-				<FrontCard
-					trail={cards[0]}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					headlineSize="huge"
-					headlineSizeOnMobile="large"
-					imageUrl={cards[0].image}
-					imagePosition={'top'}
-					imagePositionOnMobile={'top'}
-				/>
-			</LI>
-		</UL>
-	);
-};
-
-const Card100PictureRight = ({
-	cards,
-	showAge,
-	containerPalette,
-}: {
-	cards: TrailType[];
-	showAge?: boolean;
-	containerPalette?: DCRContainerPalette;
-}) => {
-	if (!cards[0]) return null;
-	return (
-		<UL>
-			<LI percentage="100%" padSides={true} padBottom={true}>
-				<FrontCard
-					trail={cards[0]}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					headlineSize="huge"
-					headlineSizeOnMobile="large"
-					imageUrl={cards[0].image}
-					imageSize={'jumbo'}
-					imagePosition={'right'}
-					imagePositionOnMobile={'top'}
-					trailText={cards[0].trailText}
-				/>
-			</LI>
-		</UL>
-	);
 };
 
 const ColumnOfCards50_Card50 = ({
@@ -89,12 +34,7 @@ const ColumnOfCards50_Card50 = ({
 
 	return (
 		<UL direction="row-reverse">
-			<LI
-				percentage="50%"
-				padSides={true}
-				showDivider={true}
-				padBottomOnMobile={true}
-			>
+			<LI percentage="50%" padSides={true} showDivider={true}>
 				<FrontCard
 					trail={big}
 					containerPalette={containerPalette}
@@ -107,17 +47,12 @@ const ColumnOfCards50_Card50 = ({
 			</LI>
 			<LI percentage="50%">
 				<UL direction="row" wrapCards={true}>
-					{remaining.map((card, cardIndex) => {
+					{remaining.map((card) => {
 						return (
 							<LI
 								percentage="100%"
 								key={card.url}
 								padSides={true}
-								showTopMarginWhenStacked={false}
-								padBottom={cardIndex < remaining.length - 1}
-								padBottomOnMobile={
-									cardIndex < remaining.length - 1
-								}
 							>
 								<FrontCard
 									trail={card}
@@ -152,12 +87,7 @@ const ColumnOfCards50_Card25_Card25 = ({
 		<UL direction="row-reverse">
 			{bigs.map((big) => {
 				return (
-					<LI
-						percentage="25%"
-						padSides={true}
-						padBottomOnMobile={true}
-						showDivider={true}
-					>
+					<LI percentage="25%" padSides={true} showDivider={true}>
 						<FrontCard
 							trail={big}
 							containerPalette={containerPalette}
@@ -177,17 +107,12 @@ const ColumnOfCards50_Card25_Card25 = ({
 			})}
 			<LI percentage="50%">
 				<UL direction="row" wrapCards={true}>
-					{remaining.map((card, cardIndex) => {
+					{remaining.map((card) => {
 						return (
 							<LI
 								percentage="100%"
 								key={card.url}
 								padSides={true}
-								showTopMarginWhenStacked={false}
-								padBottom={cardIndex < remaining.length - 1}
-								padBottomOnMobile={
-									cardIndex < remaining.length - 1
-								}
 							>
 								<FrontCard
 									trail={card}
@@ -217,16 +142,17 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 }) => {
 	return (
 		<UL direction="row" wrapCards={true}>
-			{cards.map((card, index) => {
+			{cards.map((card, index, { length }) => {
+				const columns = 2;
 				return (
 					<LI
 						percentage="50%"
 						padSides={true}
 						showDivider={index % 2 === 1}
-						padBottom={shouldPadWrappableRows(
+						offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 							index,
-							cards.length,
-							2,
+							length - (length % columns),
+							columns,
 						)}
 					>
 						<FrontCard
@@ -262,24 +188,14 @@ export const DynamicSlow = ({
 		| 'TwoVeryBigsSecondBoosted';
 
 	let firstSliceCards: TrailType[] = [];
-	// Any trails not used in the first slice are demoted to here
-	let secondSliceGroupedTrails: DCRGroupedTrails = { ...groupedTrails };
 
 	// Decide the layout and contents for the first slice, demoting any remaining cards to the second slice
 	if (groupedTrails.huge.length > 0) {
 		firstSliceLayout = 'oneHuge';
 		firstSliceCards = groupedTrails.huge.slice(0, 1);
-		secondSliceGroupedTrails = {
-			...groupedTrails,
-			huge: groupedTrails.huge.slice(1),
-		};
 	} else if (groupedTrails.veryBig.length === 1) {
 		firstSliceLayout = 'oneVeryBig';
 		firstSliceCards = groupedTrails.veryBig.slice(0, 1);
-		secondSliceGroupedTrails = {
-			...groupedTrails,
-			veryBig: groupedTrails.veryBig.slice(1),
-		};
 	} else if (groupedTrails.veryBig.length > 1) {
 		if (groupedTrails.veryBig[0].isBoosted) {
 			firstSliceLayout = 'TwoVeryBigsFirstBoosted';
@@ -289,11 +205,14 @@ export const DynamicSlow = ({
 			firstSliceLayout = 'twoVeryBigs';
 		}
 		firstSliceCards = groupedTrails.veryBig.slice(0, 2);
-		secondSliceGroupedTrails = {
-			...groupedTrails,
-			veryBig: groupedTrails.veryBig.slice(2),
-		};
 	}
+
+	// Create our object of grouped trails that doesn't include any
+	// cards used by the first slice
+	const secondSliceGroupedTrails = filterGroupedTrails({
+		groupedTrails,
+		filter: firstSliceCards,
+	});
 
 	let secondSliceLayout: 'twoBigs' | 'oneBig' | 'noBigs';
 	let secondSliceCards: TrailType[] = [];
@@ -377,7 +296,7 @@ export const DynamicSlow = ({
 					/>
 				);
 			default:
-				return <></>;
+				return null;
 		}
 	};
 

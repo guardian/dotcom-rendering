@@ -20,7 +20,7 @@ function forceHydration() {
 		props.expanded = true;
 
 		// Force hydration
-		doHydration(name, props, guElement);
+		void doHydration(name, props, guElement);
 	} catch (err) {
 		// Do nothing
 	}

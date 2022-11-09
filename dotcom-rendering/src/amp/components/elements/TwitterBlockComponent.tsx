@@ -4,7 +4,7 @@ import { JSDOM } from 'jsdom';
 import React from 'react';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 
-export const ListStyle = (iconColour: string) => css`
+const ListStyle = (iconColour: string) => css`
 	li {
 		margin-bottom: 6px;
 		padding-left: 20px;

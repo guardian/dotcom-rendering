@@ -39,6 +39,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader.importable';
 import { MainMedia } from '../components/MainMedia';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { MostViewedRightWrapper } from '../components/MostViewedRightWrapper.importable';
 import { Nav } from '../components/Nav/Nav';
@@ -51,6 +52,7 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
+import { TableOfContents } from '../components/TableOfContents';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
@@ -298,6 +300,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		config: { isPaidContent, host },
 	} = CAPIArticle;
 
+	const isInEuropeTest =
+		CAPIArticle.config.abTests.europeNetworkFrontVariant === 'variant';
+
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: CAPIArticle.isAdFreeUser,
 		isSensitive: CAPIArticle.config.isSensitive,
@@ -344,6 +349,8 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	 */
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
+	const isLabs = format.theme === ArticleSpecial.Labs;
+
 	return (
 		<>
 			<div data-print-layout="hide" id="bannerandheader">
@@ -361,7 +368,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</Section>
 						</Stuck>
 					)}
-					{format.theme !== ArticleSpecial.Labs && (
+					{!isLabs && (
 						<Section
 							fullWidth={true}
 							showTopBorder={false}
@@ -389,6 +396,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
+								isInEuropeTest={isInEuropeTest}
 							/>
 						</Section>
 					)}
@@ -410,42 +418,38 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							editionId={CAPIArticle.editionId}
 						/>
 					</Section>
-					{NAV.subNavSections &&
-						format.theme !== ArticleSpecial.Labs && (
-							<>
-								<Section
-									fullWidth={true}
-									backgroundColour={
-										palette.background.article
-									}
-									padSides={false}
-									element="aside"
-								>
-									<Island deferUntil="idle">
-										<SubNav
-											subNavSections={NAV.subNavSections}
-											currentNavLink={NAV.currentNavLink}
-											format={format}
-										/>
-									</Island>
-								</Section>
-								<Section
-									fullWidth={true}
-									backgroundColour={
-										palette.background.article
-									}
-									padSides={false}
-									showTopBorder={false}
-								>
-									<StraightLines
-										count={4}
-										cssOverrides={css`
-											display: block;
-										`}
+					{NAV.subNavSections && !isLabs && (
+						<>
+							<Section
+								fullWidth={true}
+								backgroundColour={palette.background.article}
+								padSides={false}
+								element="aside"
+							>
+								<Island deferUntil="idle">
+									<SubNav
+										subNavSections={NAV.subNavSections}
+										currentNavLink={NAV.currentNavLink}
+										format={format}
 									/>
-								</Section>
-							</>
-						)}
+								</Island>
+							</Section>
+							<Section
+								fullWidth={true}
+								backgroundColour={palette.background.article}
+								padSides={false}
+								showTopBorder={false}
+							>
+								<StraightLines
+									count={4}
+									cssOverrides={css`
+										display: block;
+									`}
+									color={palette.border.secondary}
+								/>
+							</Section>
+						</>
+					)}
 				</>
 			</div>
 
@@ -592,7 +596,10 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									{format.theme === ArticleSpecial.Labs ? (
 										<GuardianLabsLines />
 									) : (
-										<DecideLines format={format} />
+										<DecideLines
+											format={format}
+											color={palette.border.article}
+										/>
 									)}
 								</div>
 							</div>
@@ -627,6 +634,15 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 						<GridItem area="body">
 							<ArticleContainer format={format}>
+								{CAPIArticle.tableOfContents && (
+									<div>
+										<TableOfContents
+											tableOfContents={
+												CAPIArticle.tableOfContents
+											}
+										></TableOfContents>
+									</div>
+								)}
 								<ArticleBody
 									format={format}
 									blocks={CAPIArticle.blocks}
@@ -655,7 +671,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									isPreview={CAPIArticle.config.isPreview}
 									idUrl={CAPIArticle.config.idUrl || ''}
 									isDev={!!CAPIArticle.config.isDev}
-									abTests={CAPIArticle.config.abTests}
+									keywordIds={CAPIArticle.config.keywordIds}
 								/>
 								{format.design === ArticleDesign.MatchReport &&
 									!!footballMatchUrl && (
@@ -691,7 +707,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.pageType
 													.isPaidContent
 											}
-											keywordsId={
+											keywordIds={
 												CAPIArticle.config.keywordIds
 											}
 											pageId={CAPIArticle.pageId}
@@ -715,6 +731,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									cssOverrides={css`
 										display: block;
 									`}
+									color={palette.border.secondary}
 								/>
 								<SubMeta
 									format={format}
@@ -785,7 +802,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					</StandardGrid>
 				</Section>
 
-				{renderAds && (
+				{renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"
@@ -885,19 +902,27 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 				{!isPaidContent && (
 					<Section
-						fullWidth={true}
-						data-print-layout="hide"
+						title="Most viewed"
+						padContent={false}
+						verticalMargins={false}
 						element="aside"
+						data-print-layout="hide"
+						data-link-name="most-popular"
+						data-component="most-popular"
 					>
-						<MostViewedFooterLayout
-							format={format}
-							sectionName={CAPIArticle.sectionName}
-							ajaxUrl={CAPIArticle.config.ajaxUrl}
-						/>
+						<MostViewedFooterLayout>
+							<Island clientOnly={true} deferUntil="visible">
+								<MostViewedFooterData
+									sectionName={CAPIArticle.sectionName}
+									format={format}
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
+								/>
+							</Island>
+						</MostViewedFooterLayout>
 					</Section>
 				)}
 
-				{renderAds && (
+				{renderAds && !isLabs && (
 					<Section
 						fullWidth={true}
 						data-print-layout="hide"
@@ -963,7 +988,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						isPaidContent={CAPIArticle.pageType.isPaidContent}
 						isPreview={!!CAPIArticle.config.isPreview}
 						isSensitive={CAPIArticle.config.isSensitive}
-						keywordsId={CAPIArticle.config.keywordIds}
+						keywordIds={CAPIArticle.config.keywordIds}
 						pageId={CAPIArticle.pageId}
 						section={CAPIArticle.config.section}
 						sectionName={CAPIArticle.sectionName}

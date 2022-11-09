@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access -- necessary for calling our async loaded modules */
 import { log } from '@guardian/libs';
-import type { Attributes } from 'preact';
 import { h, hydrate, render } from 'preact';
 import { initPerf } from '../initPerf';
 
@@ -15,11 +14,11 @@ import { initPerf } from '../initPerf';
  * @param data The deserialised props we want to use for hydration
  * @param element The location on the DOM where the component to hydrate exists
  */
-export const doHydration = (
+export const doHydration = async (
 	name: string,
-	data: Attributes | null,
+	data: { [key: string]: unknown } | null,
 	element: HTMLElement,
-): void => {
+): Promise<void> => {
 	// If this function has already been run for an element then don't try to
 	// run it a second time
 	const alreadyHydrated = element.dataset.guReady;
@@ -27,7 +26,7 @@ export const doHydration = (
 
 	const { start, end } = initPerf(`hydrate-${name}`);
 	start();
-	import(
+	await import(
 		/* webpackInclude: /\.importable\.tsx$/ */
 		/* webpackChunkName: "[request]" */
 		`../../components/${name}.importable`

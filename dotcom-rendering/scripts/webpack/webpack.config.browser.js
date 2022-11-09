@@ -4,20 +4,84 @@ const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 const DEV = process.env.NODE_ENV === 'development';
 
 /**
- * @param {boolean} isLegacyJS
+ * @param {'legacy' | 'modern' | 'variant'} bundle
  * @returns {string}
  */
-const generateName = (isLegacyJS) => {
-	const legacyString = isLegacyJS ? '.legacy' : '';
+const generateName = (bundle) => {
 	const chunkhashString = DEV ? '' : '.[chunkhash]';
-	return `[name]${legacyString}${chunkhashString}.js`;
+	return `[name].${bundle}${chunkhashString}.js`;
 };
 
 /**
- * @param {{ isLegacyJS: boolean, sessionId: string }} options
+ * @param {'legacy' | 'modern' | 'variant'} bundle
+ * @returns {string}
+ */
+const getLoaders = (bundle) => {
+	switch (bundle) {
+		case 'legacy':
+			return [
+				{
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							'@babel/preset-react',
+							[
+								'@babel/preset-env',
+								{
+									targets: {
+										ie: '11',
+									},
+									modules: false,
+								},
+							],
+						],
+						compact: true,
+					},
+				},
+				{
+					loader: 'ts-loader',
+					options: {
+						configFile: 'tsconfig.build.json',
+						transpileOnly: true,
+					},
+				},
+			];
+		case 'variant':
+		case 'modern':
+			return [
+				{
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							'@babel/preset-react',
+							[
+								'@babel/preset-env',
+								{
+									bugfixes: true,
+									targets:
+										'extends @guardian/browserslist-config',
+								},
+							],
+						],
+						compact: true,
+					},
+				},
+				{
+					loader: 'ts-loader',
+					options: {
+						configFile: 'tsconfig.build.json',
+						transpileOnly: true,
+					},
+				},
+			];
+	}
+};
+
+/**
+ * @param {{ bundle: 'legacy' | 'modern'  | 'variant', sessionId: string }} options
  * @returns {import('webpack').Configuration}
  */
-module.exports = ({ isLegacyJS, sessionId }) => ({
+module.exports = ({ bundle, sessionId }) => ({
 	entry: {
 		sentryLoader: './src/web/browser/sentryLoader/init.ts',
 		bootCmp: './src/web/browser/bootCmp/init.ts',
@@ -37,19 +101,19 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 		filename: (data) => {
 			// We don't want to hash the debug script so it can be used in bookmarklets
 			if (data.chunk.name === 'debug') return `[name].js`;
-			return generateName(isLegacyJS);
+			return generateName(bundle);
 		},
-		chunkFilename: generateName(isLegacyJS),
+		chunkFilename: generateName(bundle),
 		publicPath: '',
 	},
 	plugins: [
 		new WebpackManifestPlugin({
-			fileName: isLegacyJS ? 'manifest.legacy.json' : 'manifest.json',
+			fileName: `manifest.${bundle}.json`,
 		}),
 		...(DEV
 			? [
 					new GuStatsReportPlugin({
-						buildName: isLegacyJS ? 'legacy-client' : 'client',
+						buildName: `${bundle}-client`,
 						project: 'dotcom-rendering',
 						team: 'dotcom',
 						sessionId,
@@ -62,44 +126,7 @@ module.exports = ({ isLegacyJS, sessionId }) => ({
 			{
 				test: /\.[jt]sx?|mjs$/,
 				exclude: module.exports.babelExclude,
-
-				use: [
-					{
-						loader: 'babel-loader',
-						options: {
-							presets: [
-								'@babel/preset-react',
-								isLegacyJS
-									? [
-											'@babel/preset-env',
-											{
-												targets: {
-													ie: '11',
-												},
-												modules: false,
-											},
-									  ]
-									: [
-											'@babel/preset-env',
-											{
-												bugfixes: true,
-												targets: {
-													esmodules: true,
-												},
-											},
-									  ],
-							],
-							compact: true,
-						},
-					},
-					{
-						loader: 'ts-loader',
-						options: {
-							configFile: 'tsconfig.build.json',
-							transpileOnly: true,
-						},
-					},
-				],
+				use: getLoaders(bundle),
 			},
 			{
 				test: /\.css$/,

@@ -328,7 +328,6 @@
                 "ipsosTag",
                 "isDev",
                 "isFront",
-                "isPaidContent",
                 "isPreview",
                 "isProd",
                 "isSensitive",
@@ -373,6 +372,9 @@
         },
         "isAdFreeUser": {
             "type": "boolean"
+        },
+        "isNetworkFront": {
+            "type": "boolean"
         }
     },
     "required": [
@@ -382,6 +384,7 @@
         "editionLongForm",
         "guardianBaseURL",
         "isAdFreeUser",
+        "isNetworkFront",
         "nav",
         "pageFooter",
         "pageId",
@@ -408,6 +411,9 @@
                         "webTitle": {
                             "type": "string"
                         },
+                        "title": {
+                            "type": "string"
+                        },
                         "description": {
                             "type": "string"
                         }
@@ -427,6 +433,9 @@
                         },
                         "commercial": {
                             "$ref": "#/definitions/Record<string,unknown>"
+                        },
+                        "isPaidContent": {
+                            "type": "boolean"
                         }
                     },
                     "required": [
@@ -2625,6 +2634,7 @@
                 "LifestylePillar",
                 "NewsPillar",
                 "OpinionPillar",
+                "SpecialReportAltTheme",
                 "SpecialReportTheme",
                 "SportPillar"
             ],
@@ -2642,6 +2652,7 @@
         "EditionId": {
             "enum": [
                 "AU",
+                "EUR",
                 "INT",
                 "UK",
                 "US"
@@ -2691,7 +2702,8 @@
                 "Podcast",
                 "SombreAltPalette",
                 "SombrePalette",
-                "Special"
+                "Special",
+                "SpecialReportAltPalette"
             ],
             "type": "string"
         },

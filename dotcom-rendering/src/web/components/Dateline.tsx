@@ -1,12 +1,12 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { text, textSans, until } from '@guardian/source-foundations';
+import { textSans, until } from '@guardian/source-foundations';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 
-const captionFont = css`
+const captionFont = (palette: Palette) => css`
 	${textSans.xxsmall()};
-	color: ${text.supporting};
+	color: ${palette.text.dateLine};
 `;
 
 const datelineStyles = css`
@@ -51,7 +51,7 @@ export const Dateline: React.FC<{
 			<details
 				css={[
 					datelineStyles,
-					captionFont,
+					captionFont(palette),
 					format.design === ArticleDesign.LiveBlog &&
 						standfirstColouring(palette),
 				]}
@@ -67,7 +67,7 @@ export const Dateline: React.FC<{
 		<div
 			css={[
 				datelineStyles,
-				captionFont,
+				captionFont(palette),
 				format.design === ArticleDesign.LiveBlog &&
 					standfirstColouring(palette),
 			]}

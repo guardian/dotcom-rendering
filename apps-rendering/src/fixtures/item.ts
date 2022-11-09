@@ -10,14 +10,7 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import {
-	none,
-	OptionKind,
-	partition,
-	ResultKind,
-	some,
-	toOption,
-} from '@guardian/types';
+import { none, OptionKind, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import type { Body } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
@@ -42,46 +35,41 @@ import type {
 	Review,
 	Standard,
 } from 'item';
-import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
 import { Optional } from 'optional';
 import type { Outline } from 'outline';
 import { fromBodyElements } from 'outline';
+import { Result } from 'result';
 import { galleryBody } from './galleryBody';
 import { relatedContent } from './relatedContent';
 
 // ----- Fixture ----- //
 
 const parser = new DOMParser();
-const parseHtml = parse(parser);
+const parseHtml = (html: string): Option<DocumentFragment> =>
+	parse(parser)(html).either<Option<DocumentFragment>>(
+		(_err) => none,
+		(doc) => some(doc),
+	);
 
 const headline =
 	'Reclaimed lakes and giant airports: how Mexico City might have looked';
 
-const standfirst: Option<DocumentFragment> = pipe(
+const standfirst = parseHtml(
 	'<p>The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects</p>',
-	parseHtml,
-	toOption,
 );
 
-const standfirstWithLink: Option<DocumentFragment> = pipe(
+const standfirstWithLink = parseHtml(
 	'<p>Boris Johnson’s spokesperson says ‘it’s deeply regrettable that this took place at a time of national mourning’</p><ul><li><a href="https://www.theguardian.com/world/series/coronavirus-live/latest">Coronavirus – latest updates</a></li><li><a href="https://www.theguardian.com/world/coronavirus-outbreak">See all our coronavirus coverage</a></li></ul>',
-	parseHtml,
-	toOption,
-);
-const bylineHtml: Option<DocumentFragment> = pipe(
-	'<a href="https://theguardian.com">Jane Smith</a> Editor of things',
-	parseHtml,
-	toOption,
 );
 
-const captionDocFragment: Option<DocumentFragment> = pipe(
-	'<em>Jane Smith</em> Editor of things',
-	parseHtml,
-	toOption,
+const bylineHtml = parseHtml(
+	'<a href="https://theguardian.com">Jane Smith</a> Editor of things',
 );
+
+const captionDocFragment = parseHtml('<em>Jane Smith</em> Editor of things');
 
 const docFixture = (): Node => {
 	const doc = new DocumentFragment();
@@ -183,124 +171,85 @@ const mainMedia: Option<MainMedia> = {
 const doc = docFixture();
 
 const body: Body = [
-	{
-		kind: ResultKind.Ok,
-		value: {
-			kind: ElementKind.Text,
-			doc,
+	Result.ok({
+		kind: ElementKind.Text,
+		doc,
+	}),
+	Result.ok({
+		kind: ElementKind.HeadingTwo,
+		id: Optional.some('who-qualifies-for-student-loan-forgiveness'),
+		doc: h2ElementWithSub(),
+	}),
+	Result.ok({
+		kind: ElementKind.Image,
+		src: 'https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d',
+		srcset: 'https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=85&fit=bounds&s=978ea68731deea77a6ec549b36f5e32b 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=85&fit=bounds&s=8d92ccc42745c327145fa3bcd7aea0c1 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=85&fit=bounds&s=f677266ce93d0c51eb6a7a5c0162ed89 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=85&fit=bounds&s=90415465f0f60ef29d5067933e7df697 2000w',
+		dpr2Srcset:
+			'https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=45&fit=bounds&s=498eae817a853dc03b77fc3fb3508d67 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=45&fit=bounds&s=005b16c339d71fe13ef0946afbc6923d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=45&fit=bounds&s=d49f1edee81d825f0d5402b45f228314 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=45&fit=bounds&s=ed564fd8a52304188fdc419a0838ed0f 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=45&fit=bounds&s=53c0fa1df2ec23b439c488d3801778e3 2000w',
+		alt: {
+			kind: OptionKind.Some,
+			value: 'Jane Giddins outside her home in Newton St Loe',
 		},
-	},
-	{
-		kind: ResultKind.Ok,
-		value: {
-			kind: ElementKind.HeadingTwo,
-			id: Optional.some('who-qualifies-for-student-loan-forgiveness'),
-			doc: h2ElementWithSub(),
+		width: 2000,
+		height: 2500,
+		caption: none,
+		credit: {
+			kind: OptionKind.Some,
+			value: 'Photograph: Sam Frost/The Guardian',
 		},
-	},
-	{
-		kind: ResultKind.Ok,
-		value: {
-			kind: ElementKind.Image,
-			src: 'https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d',
-			srcset: 'https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=85&fit=bounds&s=978ea68731deea77a6ec549b36f5e32b 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=85&fit=bounds&s=8c34202360927c9ececb6f241c57859d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=85&fit=bounds&s=8d92ccc42745c327145fa3bcd7aea0c1 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=85&fit=bounds&s=f677266ce93d0c51eb6a7a5c0162ed89 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=85&fit=bounds&s=90415465f0f60ef29d5067933e7df697 2000w',
-			dpr2Srcset:
-				'https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=140&quality=45&fit=bounds&s=498eae817a853dc03b77fc3fb3508d67 140w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=500&quality=45&fit=bounds&s=005b16c339d71fe13ef0946afbc6923d 500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1000&quality=45&fit=bounds&s=d49f1edee81d825f0d5402b45f228314 1000w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=1500&quality=45&fit=bounds&s=ed564fd8a52304188fdc419a0838ed0f 1500w, https://i.guim.co.uk/img/media/8cbb56d2c2df876a9f3255bf99da6034eaac9fa8/0_307_2000_2500/master/2000.jpg?width=2000&quality=45&fit=bounds&s=53c0fa1df2ec23b439c488d3801778e3 2000w',
-			alt: {
-				kind: OptionKind.Some,
-				value: 'Jane Giddins outside her home in Newton St Loe',
-			},
-			width: 2000,
-			height: 2500,
-			caption: none,
-			credit: {
-				kind: OptionKind.Some,
-				value: 'Photograph: Sam Frost/The Guardian',
-			},
-			nativeCaption: {
-				kind: OptionKind.Some,
-				value: 'Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles.',
-			},
-			role: ArticleElementRole.Standard,
+		nativeCaption: {
+			kind: OptionKind.Some,
+			value: 'Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles.',
 		},
-	},
-	{
-		kind: ResultKind.Ok,
-		value: {
-			kind: ElementKind.Text,
-			doc,
-		},
-	},
-	{
-		kind: ResultKind.Ok,
-		value: {
-			kind: ElementKind.HeadingTwo,
-			id: Optional.some('how-the-student-debt-crisis-started'),
-			doc: elementFixture('h2', 'How the student debt crisis started?'),
-		},
-	},
-	{
-		kind: ResultKind.Ok,
-		value: {
-			kind: ElementKind.Text,
-			doc,
-		},
-	},
-	{
-		kind: ResultKind.Ok,
-		value: {
-			kind: ElementKind.GuideAtom,
-			html: "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
-			title: "What is Queen's consent?",
-			id: '575888ee-9973-4256-9a96-bad4b9c65d81',
-			image: undefined,
-			credit: undefined,
-		},
-	},
-	{
-		kind: ResultKind.Ok,
-		value: {
-			kind: ElementKind.Text,
-			doc,
-		},
-	},
-	{
-		kind: ResultKind.Ok,
-		value: {
-			kind: ElementKind.HeadingTwo,
-			id: Optional.some('what-student-debt-looks-like-today'),
-			doc: elementFixture('h2', 'What student debt looks like today?'),
-		},
-	},
-	{
-		kind: ResultKind.Ok,
-		value: {
-			kind: ElementKind.Text,
-			doc,
-		},
-	},
-	{
-		kind: ResultKind.Ok,
-		value: {
-			kind: ElementKind.Pullquote,
-			quote: 'Why should the crown be allowed to carry on with a feudal system just because they want to?',
-			attribution: { kind: 0, value: 'Jane Giddins' },
-		},
-	},
-	{
-		kind: ResultKind.Ok,
-		value: {
-			kind: ElementKind.Text,
-			doc,
-		},
-	},
-	{
-		kind: ResultKind.Ok,
-		value: {
-			kind: ElementKind.Text,
-			doc,
-		},
-	},
+		role: ArticleElementRole.Standard,
+	}),
+	Result.ok({
+		kind: ElementKind.Text,
+		doc,
+	}),
+	Result.ok({
+		kind: ElementKind.HeadingTwo,
+		id: Optional.some('how-the-student-debt-crisis-started'),
+		doc: elementFixture('h2', 'How the student debt crisis started?'),
+	}),
+	Result.ok({
+		kind: ElementKind.Text,
+		doc,
+	}),
+	Result.ok({
+		kind: ElementKind.GuideAtom,
+		html: "<p>Queen's consent is a little-known procedure whereby the government asks the monarch's permission for parliament to be able to debate laws that affect her. Unlike royal assent, which is a formality that takes place at the end of the process of drafting a bill, Queen's consent takes place before parliament is permitted to debate the legislation.</p><p>Consent has to be sought for any legislation affecting either the royal prerogative – fundamental powers of state, such as the ability to declare war – or the assets of the crown, such as the royal palaces. Buckingham Palace says the procedure also covers assets that the monarch owns privately, such as the estates of Sandringham and Balmoral.</p><p>If parliamentary lawyers decide that a bill requires consent, a government minister writes to the Queen formally requesting her permission for parliament to debate it. A copy of the bill is sent to the Queen's private lawyers, who have 14 days to consider it and to advise her.</p><p>If the Queen grants her consent, parliament can debate the legislation and the process is formally signified in Hansard, the record of parliamentary debates. If the Queen withholds consent, the bill cannot proceed and parliament is in effect banned from debating it.&nbsp,</p><p>The royal household claims consent has only ever been withheld on the advice of government ministers.</p>",
+		title: "What is Queen's consent?",
+		id: '575888ee-9973-4256-9a96-bad4b9c65d81',
+		image: undefined,
+		credit: undefined,
+	}),
+	Result.ok({
+		kind: ElementKind.Text,
+		doc,
+	}),
+	Result.ok({
+		kind: ElementKind.HeadingTwo,
+		id: Optional.some('what-student-debt-looks-like-today'),
+		doc: elementFixture('h2', 'What student debt looks like today?'),
+	}),
+	Result.ok({
+		kind: ElementKind.Text,
+		doc,
+	}),
+	Result.ok({
+		kind: ElementKind.Pullquote,
+		quote: 'Why should the crown be allowed to carry on with a feudal system just because they want to?',
+		attribution: { kind: 0, value: 'Jane Giddins' },
+	}),
+	Result.ok({
+		kind: ElementKind.Text,
+		doc,
+	}),
+	Result.ok({
+		kind: ElementKind.Text,
+		doc,
+	}),
 ];
 
 const pinnedBlock: LiveBlock = {
@@ -310,13 +259,10 @@ const pinnedBlock: LiveBlock = {
 	firstPublished: new Date('2021-11-02T10:20:20Z'),
 	lastModified: new Date('2021-11-02T11:13:13Z'),
 	body: [
-		{
-			kind: ResultKind.Ok,
-			value: {
-				kind: ElementKind.Text,
-				doc,
-			},
-		},
+		Result.ok({
+			kind: ElementKind.Text,
+			doc,
+		}),
 	],
 	contributors: [],
 	isPinned: true,
@@ -430,7 +376,17 @@ const fields = {
 	commentable: false,
 	tags: tags,
 	shouldHideReaderRevenue: false,
-	branding: none,
+	branding: some({
+		aboutUri:
+			'x-gu://item/mobile.guardianapis.com/uk/items/info/2016/jan/25/content-funding',
+		altLogo:
+			'https://static.theguardian.com/commercial/sponsor/05/May/2020/ca7c95d2-6aef-4710-ac1b-ad539763ed9f-JNI_rgb_rev_180.png',
+		brandingType: 'sponsored',
+		label: 'Supported by',
+		logo: 'https://static.theguardian.com/commercial/sponsor/05/May/2020/2b724f07-add3-4abb-b7a3-b6bbb05a3bd0-JNI_rgb_180.png',
+		sponsorName: 'Judith Nielson Institute',
+		sponsorUri: 'https://jninstitute.org/',
+	}),
 	internalShortId: none,
 	commentCount: none,
 	relatedContent: relatedContent,
@@ -453,7 +409,7 @@ const articleWithStandfirstLink: Item = {
 };
 
 const outlineFromItem = (body: Body): Outline => {
-	const elements = partition(body).oks;
+	const elements = Result.partition(body).oks;
 	return fromBodyElements(elements);
 };
 const analysis: Analysis = {
@@ -556,6 +512,22 @@ const explainer: Explainer = {
 	outline: outlineFromItem(fields.body),
 };
 
+const immersive: Standard = {
+	design: ArticleDesign.Standard,
+	...fields,
+	display: ArticleDisplay.Immersive,
+};
+
+const gallery: Standard = {
+	design: ArticleDesign.Gallery,
+	...fields,
+	body: body.filter(
+		(element) =>
+			element.isErr() ||
+			(element.isOk() && element.value.kind === ElementKind.Image),
+	),
+};
+
 // ----- Exports ----- //
 
 export {
@@ -579,4 +551,7 @@ export {
 	quiz,
 	pinnedBlock,
 	explainer,
+	immersive,
+	gallery,
+	parseHtml,
 };

@@ -10,10 +10,11 @@ import type {
 	ModuleDataResponse,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useState } from 'react';
-import type { ArticleCounts } from '../../../lib/article-count';
+import type { ArticleCounts } from '../../../lib/articleCount';
 import { trackNonClickInteraction } from '../../browser/ga/ga';
 import { submitComponentEvent } from '../../browser/ophan/ophan';
 import {
+	getLastOneOffContributionDate,
 	getPurchaseInfo,
 	hasCmpConsentForBrowserId,
 	hasOptedOutOfArticleCount,
@@ -136,6 +137,7 @@ const buildPayload = async ({
 				: undefined,
 			purchaseInfo: getPurchaseInfo(),
 			isSignedIn,
+			lastOneOffContributionDate: getLastOneOffContributionDate(),
 		},
 	};
 };

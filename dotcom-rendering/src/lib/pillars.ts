@@ -7,20 +7,12 @@ import {
 	lifestyle,
 	news,
 	opinion,
+	palette,
 	specialReport,
 	sport,
 } from '@guardian/source-foundations';
 
 type ColourType = string;
-
-export const pillarNames: ArticleTheme[] = [
-	ArticlePillar.News,
-	ArticlePillar.Opinion,
-	ArticlePillar.Sport,
-	ArticlePillar.Culture,
-	ArticlePillar.Lifestyle,
-	ArticleSpecial.Labs,
-];
 
 type PillarPalette = {
 	dark: ColourType;
@@ -57,11 +49,24 @@ type LabsPalette = {
 	800: ColourType;
 };
 
+type SpecialAltPalette = {
+	dark: ColourType;
+	main: ColourType;
+	bright: ColourType;
+	pastel: ColourType;
+	faded: ColourType;
+	100: ColourType;
+	200: ColourType;
+	300: ColourType;
+	700: ColourType;
+	800: ColourType;
+};
+
 // pillarPalette_DO_NOT_USE should no longer be used. Use palette from  decidePalette instead
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const pillarPalette_DO_NOT_USE: Record<
 	ArticleTheme,
-	PillarPalette | SpecialPalette | LabsPalette
+	PillarPalette | SpecialPalette | LabsPalette | SpecialAltPalette
 > = {
 	[ArticlePillar.News]: {
 		dark: news[300],
@@ -143,6 +148,18 @@ export const pillarPalette_DO_NOT_USE: Record<
 		500: specialReport[500],
 		800: specialReport[800],
 	},
+	[ArticleSpecial.SpecialReportAlt]: {
+		dark: palette.specialReportAlt[100],
+		main: palette.specialReportAlt[200],
+		bright: palette.specialReportAlt[300],
+		pastel: palette.specialReportAlt[700],
+		faded: palette.specialReportAlt[800],
+		100: palette.specialReportAlt[100],
+		200: palette.specialReportAlt[200],
+		300: palette.specialReportAlt[300],
+		700: palette.specialReportAlt[700],
+		800: palette.specialReportAlt[800],
+	},
 };
 
 /*
@@ -159,6 +176,7 @@ export const pillarMap: <T>(f: (name: ArticleTheme) => T) => {
 	[ArticlePillar.Lifestyle]: f(ArticlePillar.Lifestyle),
 	[ArticleSpecial.Labs]: f(ArticleSpecial.Labs),
 	[ArticleSpecial.SpecialReport]: f(ArticleSpecial.SpecialReport),
+	[ArticleSpecial.SpecialReportAlt]: f(ArticleSpecial.SpecialReportAlt),
 });
 /*
 Further notes on this function:

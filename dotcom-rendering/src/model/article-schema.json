@@ -516,6 +516,9 @@
                 },
                 "group": {
                     "type": "string"
+                },
+                "regionFocus": {
+                    "type": "string"
                 }
             },
             "required": [
@@ -528,11 +531,21 @@
                 "successDescription",
                 "theme"
             ]
+        },
+        "tableOfContents": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/TableOfContentsItem"
+            }
+        },
+        "canonicalUrl": {
+            "type": "string"
         }
     },
     "required": [
         "beaconURL",
         "blocks",
+        "canonicalUrl",
         "commercialProperties",
         "config",
         "contentType",
@@ -1199,6 +1212,9 @@
                                 }
                             },
                             "imageUrl": {
+                                "type": "string"
+                            },
+                            "imageAlt": {
                                 "type": "string"
                             }
                         },
@@ -2230,6 +2246,9 @@
                         },
                         "group": {
                             "type": "string"
+                        },
+                        "regionFocus": {
+                            "type": "string"
                         }
                     },
                     "required": [
@@ -2333,6 +2352,7 @@
                 "LifestylePillar",
                 "NewsPillar",
                 "OpinionPillar",
+                "SpecialReportAltTheme",
                 "SpecialReportTheme",
                 "SportPillar"
             ],
@@ -3788,6 +3808,7 @@
         "EditionId": {
             "enum": [
                 "AU",
+                "EUR",
                 "INT",
                 "UK",
                 "US"
@@ -4323,10 +4344,14 @@
                 },
                 "INT": {
                     "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "EUR": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
                 }
             },
             "required": [
                 "AU",
+                "EUR",
                 "INT",
                 "UK",
                 "US"
@@ -4578,6 +4603,21 @@
                 "WORK_OF_ART"
             ],
             "type": "string"
+        },
+        "TableOfContentsItem": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "title"
+            ]
         }
     },
     "$schema": "http://json-schema.org/draft-07/schema#"

@@ -1,21 +1,14 @@
 import React from 'react';
-import type { PermutivePayload } from '../lib/permutive';
 
 export interface AnalyticsModel {
 	gaTracker: string;
 	title: string;
-	fbPixelaccount: string;
 	comscoreID: string;
 	section?: string;
 	contentType: string;
 	id: string;
 	neilsenAPIID: string;
 	domain: string;
-	permutive: {
-		namespace: string;
-		apiKey: string;
-		payload: PermutivePayload;
-	};
 	ipsosSectionName: string;
 }
 
@@ -24,7 +17,6 @@ export const Analytics: React.FC<{
 }> = ({
 	analytics: {
 		gaTracker,
-		fbPixelaccount,
 		comscoreID,
 		title,
 		section = '',
@@ -32,12 +24,10 @@ export const Analytics: React.FC<{
 		id,
 		neilsenAPIID,
 		domain,
-		permutive,
 		ipsosSectionName,
 	},
 }) => {
 	const scripts: string[] = [
-		`<amp-pixel data-block-on-consent src="//www.facebook.com/tr?id=${fbPixelaccount}&ev=PageView&noscript=1"></amp-pixel>`,
 		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
 		`<amp-analytics data-block-on-consent type="googleanalytics" id="google-analytics">
              <script type="application/json">
@@ -85,17 +75,6 @@ export const Analytics: React.FC<{
                         "section": "${section}",
                         "segC": "Guardian - Google AMP"
                     }
-                }
-            </script>
-        </amp-analytics>`,
-		`<amp-analytics data-block-on-consent type="permutive">
-            <script type="application/json">
-                {
-                    "vars": {
-                        "namespace": "${permutive.namespace}",
-                        "key": "${permutive.apiKey}"
-                    },
-                    "extraUrlParams": ${JSON.stringify(permutive.payload)}
                 }
             </script>
         </amp-analytics>`,

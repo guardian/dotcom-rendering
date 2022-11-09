@@ -5,6 +5,8 @@ import { findBySubsection } from '../../model/article-sections';
 import { extractNAV } from '../../model/extract-nav';
 import { validateAsCAPIType } from '../../model/validate';
 import type { AnalyticsModel } from '../components/Analytics';
+import { isAmpSupported } from '../components/Elements';
+import type { PermutiveModel } from '../components/Permutive';
 import { generatePermutivePayload } from '../lib/permutive';
 import { extractScripts } from '../lib/scripts';
 import { Article } from '../pages/Article';
@@ -18,29 +20,41 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 		const { config } = CAPIArticle;
 		const elements = CAPIArticle.blocks.flatMap((block) => block.elements);
 
+		if (
+			!isAmpSupported({
+				format: CAPIArticle.format,
+				tags: CAPIArticle.tags,
+				elements,
+				switches: CAPIArticle.config.switches,
+				main: CAPIArticle.main,
+			})
+		) {
+			throw new NotRenderableInDCR();
+		}
+
 		const scripts = [
 			...extractScripts(elements, CAPIArticle.mainMediaElements),
 		];
 
-		const sectionName = CAPIArticle.sectionName || '';
+		const sectionName = CAPIArticle.sectionName ?? '';
 		const neilsenAPIID = findBySubsection(sectionName).apiID;
+
+		const permutive: PermutiveModel = {
+			projectId: 'd6691a17-6fdb-4d26-85d6-b3dd27f55f08',
+			apiKey: '359ba275-5edd-4756-84f8-21a24369ce0b',
+			payload: generatePermutivePayload(config),
+		};
 
 		const analytics: AnalyticsModel = {
 			gaTracker: 'UA-78705427-1',
 			title: CAPIArticle.headline,
-			fbPixelaccount: '279880532344561',
 			comscoreID: '6035250',
 			section: sectionName,
 			contentType: CAPIArticle.contentType,
 			id: CAPIArticle.pageId,
 			neilsenAPIID,
 			domain: 'amp.theguardian.com',
-			permutive: {
-				namespace: 'guardian',
-				apiKey: '359ba275-5edd-4756-84f8-21a24369ce0b',
-				payload: generatePermutivePayload(config),
-			},
-			ipsosSectionName: config.ipsosTag || 'guardian',
+			ipsosSectionName: config.ipsosTag ?? 'guardian',
 		};
 
 		const metadata = {
@@ -59,6 +73,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 					articleData={CAPIArticle}
 					nav={extractNAV(CAPIArticle.nav)}
 					analytics={analytics}
+					permutive={permutive}
 					config={config}
 				/>
 			),

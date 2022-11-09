@@ -19,11 +19,15 @@ import { darkModeCss } from 'styles';
 
 const styles = css`
 	grid-row: 2;
-	${grid.span('viewport-start', 4)}
+	${grid.between('viewport-start', 'centre-column-end')}
 
 	${from.tablet} {
-		${grid.span('centre-column-start', 4)}
+		${grid.span('centre-column-start', 12)}
 		margin-left: calc(${grid.columnGap} * -1/2);
+	}
+
+	${from.desktop} {
+		${grid.span('centre-column-start', 8)}
 	}
 `;
 

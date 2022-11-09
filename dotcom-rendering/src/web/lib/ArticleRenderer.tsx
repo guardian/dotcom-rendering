@@ -1,8 +1,7 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { from } from '@guardian/source-foundations';
-import type { ServerSideTests, Switches } from '../../types/config';
+import type { Switches } from '../../types/config';
 import {
 	adCollapseStyles,
 	labelStyles as adLabelStyles,
@@ -24,27 +23,6 @@ const commercialPosition = css`
 const adStylesDynamic = css`
 	${adLabelStyles}
 	${adCollapseStyles}
-
-	.ad-slot--im {
-		float: left;
-		width: 130px;
-		${from.mobileLandscape} {
-			width: 220px;
-		}
-
-		&:not(.ad-slot--rendered) {
-			width: 0;
-			height: 0;
-		}
-
-		&.ad-slot--rendered {
-			margin: 5px 10px 6px 0;
-			${from.mobileLandscape} {
-				margin-bottom: 12px;
-				margin-right: 20px;
-			}
-		}
-	}
 `;
 
 export const ArticleRenderer: React.FC<{
@@ -65,7 +43,6 @@ export const ArticleRenderer: React.FC<{
 	isDev: boolean;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-	abTests?: ServerSideTests;
 }> = ({
 	format,
 	elements,
@@ -84,7 +61,6 @@ export const ArticleRenderer: React.FC<{
 	isAdFreeUser,
 	isSensitive,
 	isDev,
-	abTests,
 }) => {
 	const renderedElements = elements.map((element, index) => {
 		return (
@@ -103,7 +79,6 @@ export const ArticleRenderer: React.FC<{
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
 				switches={switches}
-				abTests={abTests}
 			/>
 		);
 	});

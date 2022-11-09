@@ -44,6 +44,7 @@ import { Island } from '../components/Island';
 import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
 import { Liveness } from '../components/Liveness.importable';
 import { MainMedia } from '../components/MainMedia';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
@@ -54,7 +55,10 @@ import { StarRating } from '../components/StarRating/StarRating';
 import { StickyBottomBanner } from '../components/StickyBottomBanner.importable';
 import { SubMeta } from '../components/SubMeta';
 import { SubNav } from '../components/SubNav.importable';
-import { TopicFilterBank } from '../components/TopicFilterBank.importable';
+import {
+	hasRelevantTopics,
+	TopicFilterBank,
+} from '../components/TopicFilterBank.importable';
 import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
@@ -251,6 +255,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		config: { isPaidContent, host },
 	} = CAPIArticle;
 
+	const isInEuropeTest =
+		CAPIArticle.config.abTests.europeNetworkFrontVariant === 'variant';
+
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: CAPIArticle.isAdFreeUser,
 		isSensitive: CAPIArticle.config.isSensitive,
@@ -284,16 +291,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const cricketMatchUrl =
 		CAPIArticle.matchType === 'CricketMatchType' && CAPIArticle.matchUrl;
 
-	const showKeyEventsCarousel = CAPIArticle.config.switches.keyEventsCarousel;
+	const showTopicFilterBank =
+		!!CAPIArticle.config.switches.automaticFilters &&
+		hasRelevantTopics(CAPIArticle.availableTopics);
 
-	const isInFilteringBeta = !!(
-		CAPIArticle.config.switches.automaticFilters &&
-		CAPIArticle.availableTopics
-	);
-
-	const showTopicFilterBank = !!CAPIArticle.config.switches.automaticFilters;
-
-	const showToggle = !showTopicFilterBank || !CAPIArticle.availableTopics;
+	const hasKeyEvents = !!CAPIArticle.keyEvents.length;
+	const showKeyEventsToggle = !showTopicFilterBank && hasKeyEvents;
 
 	/**
 	 * This property currently only applies to the header and merchandising slots
@@ -343,6 +346,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							}
 							contributionsServiceUrl={contributionsServiceUrl}
 							idApiUrl={CAPIArticle.config.idApiUrl}
+							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 
@@ -585,7 +589,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 					</StandFirstGrid>
 				</Section>
-				{showKeyEventsCarousel && CAPIArticle.keyEvents.length > 0 ? (
+				{hasKeyEvents ? (
 					<Section
 						fullWidth={true}
 						showTopBorder={false}
@@ -755,33 +759,32 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</div>
 								</Hide>
 
-								{showTopicFilterBank &&
-									CAPIArticle.availableTopics && (
-										<Hide until="desktop">
-											<div css={sidePaddingDesktop}>
-												<Island>
-													<TopicFilterBank
-														availableTopics={
-															CAPIArticle.availableTopics
-														}
-														selectedTopics={
-															CAPIArticle.selectedTopics
-														}
-														format={format}
-														keyEvents={
-															CAPIArticle.keyEvents
-														}
-														filterKeyEvents={
-															CAPIArticle.filterKeyEvents
-														}
-														id={
-															'key-events-carousel-desktop'
-														}
-													/>
-												</Island>
-											</div>
-										</Hide>
-									)}
+								{showTopicFilterBank && (
+									<Hide until="desktop">
+										<div css={sidePaddingDesktop}>
+											<Island>
+												<TopicFilterBank
+													availableTopics={
+														CAPIArticle.availableTopics
+													}
+													selectedTopics={
+														CAPIArticle.selectedTopics
+													}
+													format={format}
+													keyEvents={
+														CAPIArticle.keyEvents
+													}
+													filterKeyEvents={
+														CAPIArticle.filterKeyEvents
+													}
+													id={
+														'key-events-carousel-desktop'
+													}
+												/>
+											</Island>
+										</div>
+									</Hide>
+								)}
 								{/* Match stats */}
 								{!!footballMatchUrl && (
 									<Island
@@ -798,8 +801,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</GridItem>
 							<GridItem area="body">
 								<div id="maincontent" css={bodyWrapper}>
-									{CAPIArticle.keyEvents.length &&
-									showToggle ? (
+									{showKeyEventsToggle ? (
 										<Hide below="desktop">
 											<Island deferUntil="visible">
 												<FilterKeyEventsToggle
@@ -813,7 +815,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									) : (
 										<></>
 									)}
-									{isInFilteringBeta ? (
+									{showTopicFilterBank ? (
 										<div css={paddingBody}>
 											<ArticleContainer format={format}>
 												{pagination.currentPage !==
@@ -834,6 +836,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
+														supportsDarkMode={false}
 													/>
 												)}
 												<ArticleBody
@@ -913,9 +916,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													selectedTopics={
 														CAPIArticle.selectedTopics
 													}
-													abTests={
+													keywordIds={
 														CAPIArticle.config
-															.abTests
+															.keywordIds
 													}
 												/>
 												{pagination.totalPages > 1 && (
@@ -935,6 +938,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
+														supportsDarkMode={false}
 													/>
 												)}
 												<StraightLines
@@ -989,6 +993,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
+														supportsDarkMode={false}
 													/>
 												)}
 												<ArticleBody
@@ -1068,9 +1073,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													selectedTopics={
 														CAPIArticle.selectedTopics
 													}
-													abTests={
+													keywordIds={
 														CAPIArticle.config
-															.abTests
+															.keywordIds
 													}
 												/>
 												{pagination.totalPages > 1 && (
@@ -1090,6 +1095,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
+														supportsDarkMode={false}
 													/>
 												)}
 												<StraightLines
@@ -1268,15 +1274,24 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 					{!isPaidContent && (
 						<Section
-							fullWidth={true}
-							data-print-layout="hide"
+							title="Most viewed"
+							padContent={false}
+							verticalMargins={false}
 							element="aside"
+							data-print-layout="hide"
+							data-link-name="most-popular"
+							data-component="most-popular"
+							leftColSize="wide"
 						>
-							<MostViewedFooterLayout
-								format={format}
-								sectionName={CAPIArticle.sectionName}
-								ajaxUrl={CAPIArticle.config.ajaxUrl}
-							/>
+							<MostViewedFooterLayout>
+								<Island clientOnly={true} deferUntil="visible">
+									<MostViewedFooterData
+										sectionName={CAPIArticle.sectionName}
+										format={format}
+										ajaxUrl={CAPIArticle.config.ajaxUrl}
+									/>
+								</Island>
+							</MostViewedFooterLayout>
 						</Section>
 					)}
 
@@ -1347,7 +1362,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						isPaidContent={CAPIArticle.pageType.isPaidContent}
 						isPreview={!!CAPIArticle.config.isPreview}
 						isSensitive={CAPIArticle.config.isSensitive}
-						keywordsId={CAPIArticle.config.keywordIds}
+						keywordIds={CAPIArticle.config.keywordIds}
 						pageId={CAPIArticle.pageId}
 						section={CAPIArticle.config.section}
 						sectionName={CAPIArticle.sectionName}

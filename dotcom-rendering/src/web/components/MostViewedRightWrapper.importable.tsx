@@ -24,7 +24,7 @@ export const MostViewedRightWrapper = ({ limitItems, isAdFreeUser }: Props) => {
 	// Requires us to subtract the height of its sibling in the container (StickyAd).
 	const stretchWrapperHeight = css`
 		height: ${adBlockerDetected
-			? `calc(100% - 300px)`
+			? `calc(100% - 400px)`
 			: `calc(100% - ${MOSTVIEWED_STICKY_HEIGHT}px)`};
 	`;
 

@@ -7,11 +7,10 @@ import {
 	ArticleElementRole,
 	ArticlePillar,
 } from '@guardian/libs';
-import { none, OptionKind, some, toOption } from '@guardian/types';
+import { none, OptionKind, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { parse } from 'client/parser';
 import type { DeadBlog, LiveBlog } from 'item';
-import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
@@ -23,22 +22,17 @@ const parseHtml = parse(parser);
 const headline =
 	'Covid live: Brazil health minister who shook hands with maskless Boris Johnson at UN tests positive';
 
-const standfirst: Option<DocumentFragment> = pipe(
+const standfirst: Option<DocumentFragment> = parseHtml(
 	'<p><a href="x-gu://item/mobile.guardianapis.com/uk/items/world/live/2021/sep/22/coronavirus-live-news-brazil-health-minister-tests-positive-at-un-india-urges-uk-to-resolve-quarantine-dispute?page=with:block-614ae7e58f08b228c9498279#block-614ae7e58f08b228c9498279">Marcelo Quiroga tests positive</a> at UN general assembly in New York; <a href="x-gu://item/mobile.guardianapis.com/uk/items/world/live/2021/sep/22/coronavirus-live-news-brazil-health-minister-tests-positive-at-un-india-urges-uk-to-resolve-quarantine-dispute?page=with:block-614ad64b8f087b5c6fb4a8dc#block-614ad64b8f087b5c6fb4a8dc">Australia tourism minister says</a> on track to reopen borders ‘by Christmas’</p>\n<ul>\n <li><a href="x-gu://item/mobile.guardianapis.com/uk/items/world/2021/sep/22/calculated-risk-ardern-gambles-as-new-zealand-covid-restrictions-eased">Ardern gambles as New Zealand Covid restrictions eased</a></li>\n <li><a href="x-gu://item/mobile.guardianapis.com/uk/items/australia-news/2021/sep/22/riot-police-on-melbourne-streets-to-prevent-third-day-of-protests">Riot police on Melbourne streets to prevent third day of protests</a></li>\n <li><a href="x-gu://item/mobile.guardianapis.com/uk/items/global-development/2021/sep/21/argentina-to-lift-almost-all-covid-restrictions-as-cases-and-deaths-fall">Argentina to lift almost all Covid restrictions as cases and deaths fall</a></li>\n <li><a href="x-gu://item/mobile.guardianapis.com/uk/items/education/2021/sep/21/more-than-100000-pupils-off-school-in-england-last-week-amid-covid-surge">‘High alert’ warning as more than 100,000 pupils in England miss school</a></li>\n</ul>',
-	parseHtml,
-	toOption,
-);
+).toOption();
 
-const bylineHtml: Option<DocumentFragment> = pipe(
+const bylineHtml: Option<DocumentFragment> = parseHtml(
 	'<a href="https://theguardian.com">Tom Ambrose</a> (now); <a href="https://theguardian.com">Miranda Bryant</a> and <a href="https://theguardian.com">Helen Sullivan</a> (earlier)',
-	parseHtml,
-	toOption,
-);
-const captionDocFragment: Option<DocumentFragment> = pipe(
+).toOption();
+
+const captionDocFragment: Option<DocumentFragment> = parseHtml(
 	'<em>Jane Smith</em> Editor of things',
-	parseHtml,
-	toOption,
-);
+).toOption();
 
 const mainMedia: Option<MainMedia> = {
 	kind: OptionKind.Some,
@@ -251,7 +245,17 @@ const fields = {
 	commentable: true,
 	tags: tags,
 	shouldHideReaderRevenue: false,
-	branding: none,
+	branding: some({
+		aboutUri:
+			'x-gu://item/mobile.guardianapis.com/uk/items/info/2016/jan/25/content-funding',
+		altLogo:
+			'https://static.theguardian.com/commercial/sponsor/05/May/2020/ca7c95d2-6aef-4710-ac1b-ad539763ed9f-JNI_rgb_rev_180.png',
+		brandingType: 'sponsored',
+		label: 'Supported by',
+		logo: 'https://static.theguardian.com/commercial/sponsor/05/May/2020/2b724f07-add3-4abb-b7a3-b6bbb05a3bd0-JNI_rgb_180.png',
+		sponsorName: 'Judith Nielson Institute',
+		sponsorUri: 'https://jninstitute.org/',
+	}),
 	internalShortId: none,
 	commentCount: some(1223),
 	relatedContent: none,

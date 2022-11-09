@@ -35,6 +35,7 @@ import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
 import { LabsHeader } from '../components/LabsHeader.importable';
 import { MainMedia } from '../components/MainMedia';
+import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
@@ -211,6 +212,9 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		config: { isPaidContent, host },
 	} = CAPIArticle;
 
+	const isInEuropeTest =
+		CAPIArticle.config.abTests.europeNetworkFrontVariant === 'variant';
+
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: CAPIArticle.isAdFreeUser,
 		isSensitive: CAPIArticle.config.isSensitive,
@@ -287,6 +291,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
+								isInEuropeTest={isInEuropeTest}
 							/>
 						</Section>
 					</div>
@@ -527,7 +532,9 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										isPreview={CAPIArticle.config.isPreview}
 										idUrl={CAPIArticle.config.idUrl || ''}
 										isDev={!!CAPIArticle.config.isDev}
-										abTests={CAPIArticle.config.abTests}
+										keywordIds={
+											CAPIArticle.config.keywordIds
+										}
 									/>
 								</ArticleContainer>
 							</GridItem>
@@ -560,7 +567,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								isPaidContent={
 									CAPIArticle.pageType.isPaidContent
 								}
-								keywordsId={CAPIArticle.config.keywordIds}
+								keywordIds={CAPIArticle.config.keywordIds}
 								pageId={CAPIArticle.pageId}
 								sectionId={CAPIArticle.config.section}
 								sectionName={CAPIArticle.sectionName}
@@ -707,17 +714,26 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 				{!isPaidContent && (
 					<Section
-						fullWidth={true}
-						data-print-layout="hide"
+						title="Most viewed"
+						padContent={false}
+						verticalMargins={false}
 						element="aside"
+						data-print-layout="hide"
+						data-link-name="most-popular"
+						data-component="most-popular"
 					>
-						<MostViewedFooterLayout
-							format={format}
-							sectionName={CAPIArticle.sectionName}
-							ajaxUrl={CAPIArticle.config.ajaxUrl}
-						/>
+						<MostViewedFooterLayout>
+							<Island clientOnly={true} deferUntil="visible">
+								<MostViewedFooterData
+									sectionName={CAPIArticle.sectionName}
+									format={format}
+									ajaxUrl={CAPIArticle.config.ajaxUrl}
+								/>
+							</Island>
+						</MostViewedFooterLayout>
 					</Section>
 				)}
+
 				{renderAds && (
 					<Section
 						fullWidth={true}
@@ -784,7 +800,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						isPaidContent={CAPIArticle.pageType.isPaidContent}
 						isPreview={!!CAPIArticle.config.isPreview}
 						isSensitive={CAPIArticle.config.isSensitive}
-						keywordsId={CAPIArticle.config.keywordIds}
+						keywordIds={CAPIArticle.config.keywordIds}
 						pageId={CAPIArticle.pageId}
 						section={CAPIArticle.config.section}
 						sectionName={CAPIArticle.sectionName}

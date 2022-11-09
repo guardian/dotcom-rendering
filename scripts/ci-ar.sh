@@ -33,15 +33,14 @@ else
     nvm use
 
     npm i -g yarn@1.x
-    yarn --silent
+    yarn --silent --frozen-lockfile
 
     cd apps-rendering
-    npm ci
-    npm run test
-    npm run build:client:prod
-    npm run build:server:prod
-    npm run copy-manifest
-    npm run copy-fonts
-	npm run synth
-    npm run upload
+    yarn test
+    yarn build:client:prod
+    yarn build:server:prod
+    yarn copy-manifest
+    yarn copy-fonts
+	yarn synth
+    yarn upload
 fi

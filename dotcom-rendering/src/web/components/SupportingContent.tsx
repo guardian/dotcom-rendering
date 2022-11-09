@@ -1,6 +1,9 @@
 import { css } from '@emotion/react';
 import { from, until } from '@guardian/source-foundations';
-import type { DCRSupportingContent } from '../../types/front';
+import type {
+	DCRContainerPalette,
+	DCRSupportingContent,
+} from '../../types/front';
 import { CardHeadline } from './CardHeadline';
 
 type Alignment = 'vertical' | 'horizontal';
@@ -8,6 +11,8 @@ type Alignment = 'vertical' | 'horizontal';
 type Props = {
 	supportingContent: DCRSupportingContent[];
 	alignment: Alignment;
+	containerPalette?: DCRContainerPalette;
+	isDynamo?: true;
 };
 
 const wrapperStyles = css`
@@ -58,7 +63,12 @@ const bottomMargin = css`
 	}
 `;
 
-export const SupportingContent = ({ supportingContent, alignment }: Props) => {
+export const SupportingContent = ({
+	supportingContent,
+	alignment,
+	containerPalette,
+	isDynamo,
+}: Props) => {
 	return (
 		<ul css={[wrapperStyles, directionStyles(alignment)]}>
 			{supportingContent.map((subLink: DCRSupportingContent, index) => {
@@ -84,6 +94,8 @@ export const SupportingContent = ({ supportingContent, alignment }: Props) => {
 							showSlash={false}
 							showLine={true}
 							linkTo={subLink.url}
+							containerPalette={containerPalette}
+							isDynamo={isDynamo}
 						/>
 					</li>
 				);

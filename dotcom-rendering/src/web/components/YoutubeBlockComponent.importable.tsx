@@ -6,6 +6,7 @@ import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import { trackVideoInteraction } from '../browser/ga/ga';
 import { record } from '../browser/ophan/ophan';
+import { useAB } from '../lib/useAB';
 import { Caption } from './Caption';
 
 type Props = {
@@ -92,6 +93,8 @@ export const YoutubeBlockComponent = ({
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
 	);
+
+	const imaEnabled = !!useAB()?.isUserInVariant('IntegrateIMA', 'variant');
 
 	useEffect(() => {
 		const defineConsentState = async () => {
@@ -217,6 +220,7 @@ export const YoutubeBlockComponent = ({
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 				shouldStick={stickyVideos}
 				isMainMedia={isMainMedia}
+				imaEnabled={imaEnabled}
 			/>
 			{!hideCaption && (
 				<Caption

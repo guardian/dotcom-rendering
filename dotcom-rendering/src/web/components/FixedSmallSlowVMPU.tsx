@@ -19,49 +19,30 @@ export const FixedSmallSlowVMPU = ({
 	showAge,
 	index,
 }: Props) => {
+	if (!trails[0]) return null;
+
 	return (
 		<UL direction="row">
-			<LI percentage="33.333%" padSides={true} padBottomOnMobile={true}>
+			<LI percentage="33.333%" padSides={true}>
 				<FrontCard
 					trail={trails[0]}
 					containerPalette={containerPalette}
 					showAge={showAge}
 				/>
 			</LI>
-			<LI
-				percentage="33.333%"
-				padSides={true}
-				showDivider={true}
-				padBottomOnMobile={true}
-			>
+			<LI percentage="33.333%" padSides={true} showDivider={true}>
 				<UL direction="column">
-					<LI padBottom={true}>
-						<FrontCard
-							trail={trails[1]}
-							containerPalette={containerPalette}
-							showAge={showAge}
-							imageUrl={undefined}
-							headlineSize="small"
-						/>
-					</LI>
-					<LI padBottom={true}>
-						<FrontCard
-							trail={trails[2]}
-							containerPalette={containerPalette}
-							showAge={showAge}
-							imageUrl={undefined}
-							headlineSize="small"
-						/>
-					</LI>
-					<LI>
-						<FrontCard
-							trail={trails[3]}
-							containerPalette={containerPalette}
-							showAge={showAge}
-							imageUrl={undefined}
-							headlineSize="small"
-						/>
-					</LI>
+					{trails.slice(1, 4).map((trail) => (
+						<LI>
+							<FrontCard
+								trail={trail}
+								containerPalette={containerPalette}
+								showAge={showAge}
+								imageUrl={undefined}
+								headlineSize="small"
+							/>
+						</LI>
+					))}
 				</UL>
 			</LI>
 			<LI percentage="33.333%" padSides={true} showDivider={true}>

@@ -141,6 +141,9 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 	 */
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
+	const isInEuropeTest =
+		CAPIArticle.config.abTests.europeNetworkFrontVariant === 'variant';
+
 	if (isSlimNav) {
 		return (
 			<div
@@ -228,6 +231,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 								CAPIArticle.contributionsServiceUrl
 							}
 							idApiUrl={CAPIArticle.config.idApiUrl}
+							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 				</div>
@@ -329,7 +333,7 @@ export const FullPageInteractiveLayout = ({
 				backgroundColour={palette.background.article}
 				element="main"
 			>
-				<article id="maincontent" tabIndex={-1}>
+				<article id="maincontent">
 					<Renderer
 						format={format}
 						elements={
@@ -397,7 +401,7 @@ export const FullPageInteractiveLayout = ({
 						isPaidContent={CAPIArticle.pageType.isPaidContent}
 						isPreview={!!CAPIArticle.config.isPreview}
 						isSensitive={CAPIArticle.config.isSensitive}
-						keywordsId={CAPIArticle.config.keywordIds}
+						keywordIds={CAPIArticle.config.keywordIds}
 						pageId={CAPIArticle.pageId}
 						section={CAPIArticle.config.section}
 						sectionName={CAPIArticle.sectionName}

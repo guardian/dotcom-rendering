@@ -11,3 +11,9 @@ deno run \
 	--allow-net \
 	--allow-env="GITHUB_TOKEN" \
 	scripts/deno/thrasher-tracker.ts
+
+deno run \
+	--no-check=remote \
+	--allow-net \
+	--allow-env="GITHUB_TOKEN" \
+	scripts/deno/iframe-titles.ts

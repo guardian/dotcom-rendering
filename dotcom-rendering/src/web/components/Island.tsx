@@ -2,10 +2,8 @@
 
 import { Placeholder } from './Placeholder';
 
-type When = 'idle' | 'visible';
-
 interface HydrateProps {
-	deferUntil?: When;
+	deferUntil?: 'idle' | 'visible';
 	clientOnly?: false;
 	placeholderHeight?: never;
 	children: JSX.Element;
@@ -13,11 +11,19 @@ interface HydrateProps {
 }
 
 interface ClientOnlyProps {
-	deferUntil?: When;
+	deferUntil?: 'idle' | 'visible';
 	clientOnly: true;
 	placeholderHeight?: number;
 	children: JSX.Element;
 	expediteLoading?: boolean;
+}
+
+interface InteractionProps {
+	deferUntil: 'interaction';
+	clientOnly?: never;
+	placeholderHeight?: never;
+	children: JSX.Element;
+	expediteLoading?: never;
 }
 
 /**
@@ -26,7 +32,7 @@ interface ClientOnlyProps {
  * We use a union type here to support conditional typing. This means you
  * can only supply placeholderHeight if clientOnly is true.
  */
-type Props = HydrateProps | ClientOnlyProps;
+type Props = HydrateProps | ClientOnlyProps | InteractionProps;
 
 const decideChildren = (
 	children: JSX.Element,
@@ -52,9 +58,10 @@ const decideChildren = (
  * namimg convention
  *
  * @param {HydrateProps | ClientOnlyProps} props - JSX Props
- * @param {When} props.deferUntil - Delay when client code should execute
+ * @param {'idle' | 'visible' | 'interaction'} props.deferUntil - Delay when client code should execute
  * 		- idle - Execute when browser idle
  * 		- visible - Execute when component appears in viewport
+ *      - interaction - Execute when component is clicked on in the viewport
  * @param {boolean} props.clientOnly - Should the component be server side rendered
  * @param {number} props.placeholderHeight - The height for the placeholder element
  * @param {JSX.Element} props.children - The component being inserted. Must be a single JSX Element
@@ -79,3 +86,12 @@ export const Island = ({
 		{decideChildren(children, clientOnly, placeholderHeight)}
 	</gu-island>
 );
+
+/**
+ * If JavaScript is disabled, hide client-only islands
+ */
+export const islandNoscriptStyles = `
+<style>
+	gu-island[clientOnly=true] { display: none; }
+</style>
+`;

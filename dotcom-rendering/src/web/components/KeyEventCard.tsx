@@ -45,7 +45,7 @@ const linkStyles = (palette: Palette) => css`
 		}
 		div {
 			text-decoration: underline ${palette.text.keyEvent};
-			text-underline-offset: 3px;
+			text-underline-offset: 1px;
 		}
 	}
 `;

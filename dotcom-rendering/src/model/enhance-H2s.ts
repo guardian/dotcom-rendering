@@ -1,4 +1,14 @@
 import { JSDOM } from 'jsdom';
+import { isLegacyTableOfContents } from './isLegacyTableOfContents';
+
+const shouldUseLegacyIDs = (elements: CAPIElement[]): boolean => {
+	return elements.some(
+		(element) =>
+			element._type ===
+				'model.dotcomrendering.pageElements.InteractiveContentsBlockElement' ||
+			isLegacyTableOfContents(element),
+	);
+};
 
 const extractText = (element: SubheadingBlockElement): string => {
 	const frag = JSDOM.fragment(element.html);
@@ -11,13 +21,10 @@ const extractText = (element: SubheadingBlockElement): string => {
  * This function checks if the slug already exists and if it does it adds the count to the end of the slug.
  */
 const getUnique = (slug: string, array: string[]): string => {
-	if (array.includes(slug)) {
-		const occurenceCount = array.filter(
-			(currentItem) => currentItem === slug,
-		).length;
-		return `${slug}-${occurenceCount}`;
-	}
-	return slug;
+	const occurenceCount = array.filter(
+		(currentItem) => currentItem === slug,
+	).length;
+	return occurenceCount > 0 ? `${slug}-${occurenceCount}` : slug;
 };
 
 /**
@@ -37,11 +44,16 @@ const slugify = (text: string) => {
 };
 
 /**
- * This function creates a sluggified string if we have test available. If not, then it retuns the element id so that we always have an id.
+ * This function attempts to create a slugified string to use as the id. It fails over to elementId.
  */
-const generateId = (text: string, elementId: string) => {
-	if (!text) return elementId;
-	return slugify(text) || elementId;
+const generateId = (element: SubheadingBlockElement, existingIds: string[]) => {
+	const text = extractText(element);
+	if (!text) return element.elementId;
+	const slug = slugify(text);
+	if (!slug) return element.elementId;
+	const unique = getUnique(slug, existingIds);
+	existingIds.push(slug);
+	return unique;
 };
 
 /**
@@ -51,20 +63,20 @@ const generateId = (text: string, elementId: string) => {
 const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	const slugifiedIds: string[] = [];
 	const enhanced: CAPIElement[] = [];
+	const shouldUseElementId = shouldUseLegacyIDs(elements);
 	elements.forEach((element) => {
 		if (
 			element._type ===
 			'model.dotcomrendering.pageElements.SubheadingBlockElement'
 		) {
-			const text = extractText(element);
-			const id = generateId(text, element.elementId);
-			const uniqueId = getUnique(id, slugifiedIds);
+			const id = shouldUseElementId
+				? element.elementId
+				: generateId(element, slugifiedIds);
 
-			slugifiedIds.push(id);
 			const withId = element.html.replace(
 				'<h2>',
 				// add ID to H2 element
-				`<h2 id='${uniqueId}'>`,
+				`<h2 id='${id}'>`,
 			);
 			enhanced.push({
 				...element,
@@ -78,10 +90,11 @@ const enhance = (elements: CAPIElement[]): CAPIElement[] => {
 	return enhanced;
 };
 
-export const enhanceH2s = (blocks: Block[]): Block[] =>
-	blocks.map((block: Block) => {
+export const enhanceH2s = (blocks: Block[]): Block[] => {
+	return blocks.map((block: Block) => {
 		return {
 			...block,
 			elements: enhance(block.elements),
 		};
 	});
+};

@@ -27,15 +27,151 @@ export const Comment: CAPIArticleType = {
 		},
 	],
 	commercialProperties: {
-		UK: {
+		US: {
 			adTargeting: [
+				{
+					name: 'edition',
+					value: 'us',
+				},
+				{
+					name: 'url',
+					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
 				{
 					name: 'co',
 					value: ['johnharris'],
 				},
 				{
+					name: 'k',
+					value: [
+						'uk/uk',
+						'austerity',
+						'conservativehome',
+						'economics',
+						'politics',
+						'business',
+						'conservatives',
+					],
+				},
+				{
+					name: 'tn',
+					value: ['comment'],
+				},
+				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
 					name: 'sh',
 					value: 'https://www.theguardian.com/p/d8n8j',
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+			],
+		},
+		AU: {
+			adTargeting: [
+				{
+					name: 'edition',
+					value: 'au',
+				},
+				{
+					name: 'url',
+					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'co',
+					value: ['johnharris'],
+				},
+				{
+					name: 'k',
+					value: [
+						'uk/uk',
+						'austerity',
+						'conservativehome',
+						'economics',
+						'politics',
+						'business',
+						'conservatives',
+					],
+				},
+				{
+					name: 'tn',
+					value: ['comment'],
+				},
+				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d8n8j',
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+			],
+		},
+		UK: {
+			adTargeting: [
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'co',
+					value: ['johnharris'],
+				},
+				{
+					name: 'k',
+					value: [
+						'uk/uk',
+						'austerity',
+						'conservativehome',
+						'economics',
+						'politics',
+						'business',
+						'conservatives',
+					],
+				},
+				{
+					name: 'tn',
+					value: ['comment'],
+				},
+				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d8n8j',
+				},
+				{
+					name: 'su',
+					value: ['0'],
 				},
 				{
 					name: 'edition',
@@ -45,181 +181,89 @@ export const Comment: CAPIArticleType = {
 					name: 'url',
 					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 				},
-				{
-					name: 'k',
-					value: [
-						'politics',
-						'business',
-						'conservatives',
-						'uk/uk',
-						'austerity',
-						'conservativehome',
-						'economics',
-					],
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'tn',
-					value: ['comment'],
-				},
-				{
-					name: 'bl',
-					value: ['commentisfree'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-			],
-		},
-		US: {
-			adTargeting: [
-				{
-					name: 'co',
-					value: ['johnharris'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d8n8j',
-				},
-				{
-					name: 'url',
-					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
-				},
-				{
-					name: 'k',
-					value: [
-						'politics',
-						'business',
-						'conservatives',
-						'uk/uk',
-						'austerity',
-						'conservativehome',
-						'economics',
-					],
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'tn',
-					value: ['comment'],
-				},
-				{
-					name: 'bl',
-					value: ['commentisfree'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'edition',
-					value: 'us',
-				},
-			],
-		},
-		AU: {
-			adTargeting: [
-				{
-					name: 'co',
-					value: ['johnharris'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d8n8j',
-				},
-				{
-					name: 'url',
-					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
-				},
-				{
-					name: 'k',
-					value: [
-						'politics',
-						'business',
-						'conservatives',
-						'uk/uk',
-						'austerity',
-						'conservativehome',
-						'economics',
-					],
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'tn',
-					value: ['comment'],
-				},
-				{
-					name: 'bl',
-					value: ['commentisfree'],
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'edition',
-					value: 'au',
-				},
 			],
 		},
 		INT: {
 			adTargeting: [
 				{
-					name: 'co',
-					value: ['johnharris'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d8n8j',
-				},
-				{
 					name: 'url',
 					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 				},
 				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'co',
+					value: ['johnharris'],
+				},
+				{
 					name: 'k',
 					value: [
-						'politics',
-						'business',
-						'conservatives',
 						'uk/uk',
 						'austerity',
 						'conservativehome',
 						'economics',
+						'politics',
+						'business',
+						'conservatives',
 					],
+				},
+				{
+					name: 'tn',
+					value: ['comment'],
 				},
 				{
 					name: 'edition',
 					value: 'int',
 				},
 				{
+					name: 'bl',
+					value: ['commentisfree'],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d8n8j',
+				},
+				{
 					name: 'su',
 					value: ['0'],
+				},
+			],
+		},
+		EUR: {
+			adTargeting: [
+				{
+					name: 'url',
+					value: '/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 				},
 				{
 					name: 'ct',
 					value: 'article',
+				},
+				{
+					name: 'co',
+					value: ['johnharris'],
+				},
+				{
+					name: 'edition',
+					value: 'eur',
+				},
+				{
+					name: 'k',
+					value: [
+						'uk/uk',
+						'austerity',
+						'conservativehome',
+						'economics',
+						'politics',
+						'business',
+						'conservatives',
+					],
 				},
 				{
 					name: 'tn',
@@ -233,14 +277,22 @@ export const Comment: CAPIArticleType = {
 					name: 'p',
 					value: 'ng',
 				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d8n8j',
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
 			],
 		},
 	},
 	beaconURL: '//phar.gu-web.net',
+	hasRelated: true,
 	webPublicationSecondaryDateDisplay:
 		'Last modified on Mon 10 Feb 2020 11.19 GMT',
 	editionLongForm: 'UK edition',
-	hasRelated: true,
 	publication: 'The Guardian',
 	trailText:
 		'In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back, says Guardian columnist John Harris',
@@ -545,7 +597,7 @@ export const Comment: CAPIArticleType = {
 					},
 					{
 						title: 'Obituaries',
-						url: '/tone/obituaries',
+						url: '/obituaries',
 					},
 				],
 			},
@@ -821,7 +873,7 @@ export const Comment: CAPIArticleType = {
 				children: [
 					{
 						title: 'Obituaries',
-						url: '/tone/obituaries',
+						url: '/obituaries',
 					},
 					{
 						title: 'G2',
@@ -912,6 +964,10 @@ export const Comment: CAPIArticleType = {
 						url: '/crosswords/series/azed',
 					},
 				],
+			},
+			{
+				title: 'Corrections',
+				url: '/theguardian/series/corrections-and-clarifications',
 			},
 		],
 		brandExtensions: [
@@ -1132,34 +1188,34 @@ export const Comment: CAPIArticleType = {
 		theme: 'OpinionPillar',
 		display: 'StandardDisplay',
 	},
-	standfirst:
-		'<p>In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back</p>',
 	openGraphData: {
 		'og:url':
 			'http://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 		'article:author': 'https://www.theguardian.com/profile/johnharris',
-		'og:image:height': '720',
-		'og:description':
-			'In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back, says Guardian columnist John Harris',
 		'og:image:width': '1200',
 		'og:image':
 			'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&enable=upscale&s=220bc73e986db58d7c73050443296212',
 		'al:ios:url':
 			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
+		'og:title':
+			'Austerity is grinding on – it has cut too deep to ‘level up’ | John Harris',
+		'fb:app_id': '180444840287',
+		'article:modified_time': '2020-02-10T11:19:50.000Z',
+		'og:image:height': '720',
+		'og:description':
+			'In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back, says Guardian columnist John Harris',
 		'og:type': 'article',
 		'al:ios:app_store_id': '409128287',
 		'article:section': 'Opinion',
 		'article:published_time': '2020-02-10T06:00:27.000Z',
-		'og:title':
-			'Austerity is grinding on – it has cut too deep to ‘level up’ | John Harris',
-		'fb:app_id': '180444840287',
 		'article:tag':
 			'Austerity,UK news,Economics,Business,Politics,Conservatives,ConservativeHome',
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
-		'article:modified_time': '2020-02-10T11:19:50.000Z',
 	},
+	standfirst:
+		'<p>In places such as Newcastle, budget cuts have taken a heavy toll. Much of what has closed is not coming back</p>',
 	sectionUrl: 'business/austerity',
 	pageId: 'commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 	version: 3,
@@ -1404,11 +1460,6 @@ export const Comment: CAPIArticleType = {
 		'twitter:app:id:iphone': '409128287',
 		'twitter:app:name:googleplay': 'The Guardian',
 		'twitter:app:name:ipad': 'The Guardian',
-		'twitter:image':
-			'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&s=77ef16f3e784adf8d32f1f5724d0559f',
-		'twitter:site': '@guardian',
-		'twitter:app:url:ipad':
-			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=twitter',
 		'twitter:card': 'summary_large_image',
 		'twitter:app:name:iphone': 'The Guardian',
 		'twitter:creator': '@johnharris1969',
@@ -1417,6 +1468,11 @@ export const Comment: CAPIArticleType = {
 		'twitter:app:url:googleplay':
 			'guardian://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 		'twitter:app:url:iphone':
+			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=twitter',
+		'twitter:image':
+			'https://i.guim.co.uk/img/media/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/master/3240.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctb3BpbmlvbnMtYWdlLTIwMjAucG5n&s=77ef16f3e784adf8d32f1f5724d0559f',
+		'twitter:site': '@guardian',
+		'twitter:app:url:ipad':
 			'gnmguardian://commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts?contenttype=Article&source=twitter',
 	},
 	sectionName: 'commentisfree',
@@ -1432,10 +1488,11 @@ export const Comment: CAPIArticleType = {
 	},
 	hasStoryPackage: false,
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
-	headline: 'Austerity is grinding on – it has cut too deep to ‘level up’',
 	byline: 'John Harris',
-	isLegacyInteractive: false,
+	headline: 'Austerity is grinding on – it has cut too deep to ‘level up’',
 	guardianBaseURL: 'https://www.theguardian.com',
+	isLegacyInteractive: false,
+	webPublicationDate: '2020-02-10T06:00:27.000Z',
 	mainMediaElements: [
 		{
 			_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -1694,10 +1751,11 @@ export const Comment: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: 'e8245961-6d1e-4966-b83e-c649f47db73e',
+			elementId: 'e68617df-682b-4e90-aeb4-9e449ce11535',
 		},
 	],
-	webPublicationDate: '2020-02-10T06:00:27.000Z',
+	canonicalUrl:
+		'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 	blocks: [
 		{
 			id: '6bc6fa8c-a504-4e81-9828-3a7a0a78b052',
@@ -1705,44 +1763,44 @@ export const Comment: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Seven years ago, pretty much to the week, I paid my <a href="https://www.theguardian.com/commentisfree/2013/feb/04/newcastle-cold-fear-little-sense-of-hope" title="">first visit as a journalist</a> to Newcastle upon Tyne. The ostensible reason was a fuss about the city council’s proposal to cut its arts budget to zero, and a <a href="https://www.theguardian.com/uk/2012/dec/16/newcastle-arts-cuts-disastrous-stars" title="">campaign of opposition</a> endorsed by such alumni of the city as Bryan Ferry and Gordon “Sting” Sumner. But that controversy was only a small, distracting aspect of a much bigger story: the fact that the coalition government’s austerity was now threatening some of the most basic parts of Newcastle’s social fabric, as councillors faced cuts of around £100m, spread over three years. Then as now, they were led by Nick Forbes, the imaginative, engaging politician who remains in post, and is these days also the leader of the Local Government Association’s Labour group, which represents councillors from across England and Wales, and had its annual conference at the weekend.</p>',
-					elementId: 'a8b70b2f-078d-4d06-899d-3e35c7a8eb5a',
+					elementId: 'b304bbf3-b927-430a-ae30-5ea799ba6ece',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.PullquoteBlockElement',
 					html: '£37m was cut in 2013-14, followed by £38m, then £40m and so on, until the council had lost £300m by the end of 2019',
 					role: 'supporting',
 					isThirdPartyTracking: false,
-					elementId: '5ce6d146-7986-4d94-be9a-a09c50c4ebf4',
+					elementId: 'ebfa66d2-b0fb-4b06-9cce-c8cf5921780e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>As the government hacked back the money that went from Whitehall to councils and the need for child and adult social care services continued to rise, <a href="https://www.chroniclelive.co.uk/news/north-east-news/tax-freeze-cuts-newcastle-city-6464052" title="">£37m</a> was cut from Newcastle’s budgets in 2013-14, followed by <a href="https://www.chroniclelive.co.uk/news/north-east-news/newcastle-city-council-reveals-40m-7276999" title="">£38m, then £40m</a> and <a href="https://www.bbc.co.uk/news/uk-england-tyne-38145319" title="">£30m</a> – and so on, until the council had lost <a href="https://www.chroniclelive.co.uk/news/north-east-news/20m-cuts-newcastle-council-mean-17414937" title="">an estimated £300m</a> by the end of 2019. Each time I have gone back, I have heard about what has happened to libraries, seen closed youth clubs that were among the first things to be axed, and talked to people about cuts to early-years provision leading to four in 10 of the north-east’s children’s centres being shut. There is an awful symbolism in the fall in the <a href="https://www.bbc.co.uk/news/uk-politics-46514670" title="">number of lollipop men and women</a> from 64 to seven; on one trip, I was struck by the quiet poignancy of parks smattered with broken slides and swings.</p>',
-					elementId: 'd29bdb3c-2be5-4668-bfeb-cc0575f7319a',
+					elementId: 'cc0c4e40-08d0-49c2-b09e-5f016430ecde',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>But despite cliches about places in “the north” being social deserts, Newcastle is full of initiative and innovation – and as austerity hit, there was plenty of <a href="https://www.theguardian.com/business/2015/nov/23/newcastle-cuts-save-library-lose-pool-john-harris" title="">grassroots work</a> aimed at parrying the cuts, bringing in new approaches and making parts of the city more resilient. But hacked-back spending has taken an inevitable toll, and reflects something happening all over the country: the government using local and city government to administer policies that reflect ideological prejudices coursing through Westminster and Whitehall.</p>',
-					elementId: '4f46e7fc-1ea0-4ccd-b1f3-48f7a4f4f658',
+					elementId: '69b7db8a-3493-411d-98bf-af5c241424d4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Of late, by contrast, we have heard a lot of talk about Boris Johnson and his allies turning on the fiscal taps, and somehow marking the “end of austerity”. When he moved into Downing Street, <a href="https://www.bbc.co.uk/news/uk-politics-49102495" title="">the prime minister said</a> he would be “answering at last the plea of the forgotten people and left-behind towns, by physically and literally renewing the ties that bind us together, so that with safer streets and better education, and fantastic new road and rail infrastructure and full-fibre broadband, we level up across Britain”. Some of this is likely to happen, but all over the country austerity is nonetheless grinding on.</p>',
-					elementId: '70e6545f-526e-4c36-a548-243369a1421f',
+					elementId: '130c4b9d-cabc-4f8c-8754-97f8725f5846',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Whatever paltry financial extras the government may now be granting councils, rising costs and increased need far outstrip them. Leeds <a href="https://www.yorkshireeveningpost.co.uk/news/politics/leeds-council-reveals-ps28m-cuts-coming-year-1385168" title="">faces cuts</a> in the next financial year of £28m. On the Wirral, the <a href="https://www.wirralglobe.co.uk/news/18213040.council-budget-clash/" title="">figure is £30m</a>; across the water in Liverpool, where <a href="https://www.liverpoolecho.co.uk/news/liverpool-news/joe-anderson-refuse-carry-out-17659928" title="">the mayor, Joe Anderson</a>, now says he will refuse to put through any further cuts beyond April 2021, there is a funding gap of £30m, only £7.2m of which will come from putting up council tax. In Doncaster, <a href="https://www.doncasterfreepress.co.uk/news/politics/council-tax-rise-and-job-cuts-way-doncaster-council-announces-its-budget-1384199" title="">new cuts</a> must total £18m; in Blackpool, to meet its obligations in children’s services, the council must somehow <a href="https://www.blackpoolgazette.co.uk/news/politics/ps20m-savings-plus-more-job-losses-blackpool-council-unveils-budget-proposals-1380603" title="">save £20m</a> from its other work. In Newcastle, the council will have to <a href="https://www.chroniclelive.co.uk/news/north-east-news/20m-cuts-newcastle-council-mean-17414937" title="">cut £20m</a> across its budgets in 2020-21 – and, on current projections, another £17-18m the year after that.</p>',
-					elementId: '90b50b09-e309-401a-83cd-b4d7d257b035',
+					elementId: '9ff13d4c-72a2-49f8-8d81-d413320b718b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>I spoke to Forbes last week. “We’ve cut every other service that the council provides to the absolute minimum, to try to protect social care,” he told me. “This is the first year we haven’t been able to do anything other than take money out of social care budgets … in some cases, we’re going to have to take away support that people have previously had.”</p>',
-					elementId: '5dd6aada-d238-4724-bff4-9d8abdb02708',
+					elementId: 'b9dec0dd-2e57-4c01-b11b-e7aa6046b214',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>By way of cold comfort, last year’s autumn statement meant an injection by the government of £11m into the city’s finances, but it will be largely eaten up by the recent increase in the minimum wage. Embracing the Conservatives’ proposal that councils can raise council tax by up to 2% to cover rising pressures on adult social care, Forbes says, will bring a paltry £2m. Next year “looks even more scary, because it looks like we’re going to have to start dismantling various aspects of our social work teams”. This seems set to affect children’s services, which up to now have been protected.</p>',
-					elementId: '54125f6c-4d8b-4502-bd0f-f5264071e053',
+					elementId: '14a5b3c0-596e-4a3b-b050-c4ae8ecbdbf1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
@@ -1750,32 +1808,32 @@ export const Comment: CAPIArticleType = {
 					text: 'Tory plans to ‘level up’ the north are laughably inadequate | Polly Toynbee',
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: '2c43aeaa-439c-4fbe-a6ab-a88c0bf57cbe',
+					elementId: '4e31124a-7327-42b9-86db-dde849d822a7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>The politics of continuing austerity are often maddeningly contradictory. I have been to plenty of places where cuts have intensified people’s conviction that they have been neglected by Westminster and Whitehall. That impulse was one of the reasons behind the Brexit vote. In turn, the frustrations of three years of post-referendum politics and Johnson’s cynical approximation of optimism convinced people in lots of these areas to vote Conservative. And so it is that austerity continues, while the government tries to escape the blame by cosmetically positioning itself against its own policies.</p>',
-					elementId: 'cb582ccb-225d-4e0c-87b7-fe0e461c0f43',
+					elementId: 'cf724ce4-d9f9-4579-b0bf-13da12ef1e6b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>For the people involved in councils, other aspects of the picture are equally confounding. Rather than being able to plan for the long term, they have to wait every year for news of what the government will give them; thanks partly to the December election, even with the start of the next financial year looming, the next set of figures was confirmed only last week. In the spring, the government will reveal its new system of so-called “fair funding”. Recent reports have suggested that allocations for social care in some of England’s most deprived areas (including many places that were until recently part of the “red wall” of Labour constituencies) will <a href="https://www.theguardian.com/society/2020/jan/25/former-red-wall-areas-could-lose-millions-in-council-funding-review" title="">fall by £320m</a>, while those in more affluent places will rise by around the same amount.</p>',
-					elementId: 'd163f2bc-0811-41dc-9254-5d78e4d142a3',
+					elementId: 'eeb45796-abaf-457f-98b0-bc37583b8a64',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Possibly in response to the anxiety these projections sparked, subsequent predictions have suggested that other changes could balance these unfairnesses out – although many injustices would seemingly get worse. <a href="https://www.countycouncilsnetwork.org.uk/lgc-article-on-fair-funding-review-modelling-ccn-response/" title="">One report</a> suggests that inner London boroughs could lose as much as a quarter of their funding. The consequences of that would be unimaginable. To cap it all, there is the mess of uncertainty surrounding Brexit, and what it may mean for the public finances.</p>',
-					elementId: 'fe24d807-67cf-46fc-bb35-c5e0ed9db53b',
+					elementId: '7817d604-6a2b-4c9d-899e-b65bcbc6cc44',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>We know that the chancellor has already told departments to come up with <a href="https://www.theguardian.com/society/2020/jan/29/ministers-told-to-find-5-savings-to-refocus-on-pms-priorities" title="">savings of 5%</a>. Some people say that if the government has any intention of easing the predicament of councils and the people who need their services, the last chance for a rethink will come with the autumn statement. But whatever happens, most of the people I have spoken to are worried and angry for one incurable reason: the fact that after 10 years of cuts, so much damage has been done. Most of what has been closed will not come back; countless instances of need and hardship now feel like they are locked in. Brexit flags and banners, and some of those overhyped infrastructure projects, are hardly going to make up for the pain.</p>',
-					elementId: '59138de4-20f1-46c3-ba87-a00ab89fde56',
+					elementId: '2e9f17b8-d5ed-4a3a-9b28-8a30938129fb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>• John Harris is a Guardian columnist</p>',
-					elementId: '64ccb7e6-3650-4577-970e-33612b692e31',
+					elementId: '4fb0b32a-2fc1-4f12-94ea-9aa77f4d5452',
 				},
 			],
 			attributes: {
@@ -1796,7 +1854,7 @@ export const Comment: CAPIArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://amp.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
+			'@id': 'https://www.theguardian.com/commentisfree/2020/feb/10/austerity-level-up-newcastle-budget-cuts',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',

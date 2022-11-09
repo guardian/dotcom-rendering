@@ -4,10 +4,10 @@ import {
 	onConsentChange,
 } from '@guardian/consent-management-platform';
 import type { ConsentState } from '@guardian/consent-management-platform/dist/types';
+import type { OphanAction, OphanComponentType } from '@guardian/libs';
 import { getCookie, loadScript, log } from '@guardian/libs';
 import { getLocaleCode } from '../../lib/getCountryCode';
 import { injectPrivacySettingsLink } from '../../lib/injectPrivacySettingsLink';
-import type { OphanAction, OphanComponentType } from '../ophan/ophan';
 import { submitComponentEvent } from '../ophan/ophan';
 import { startup } from '../startup';
 
@@ -74,30 +74,7 @@ const init = async (): Promise<void> => {
 
 			### Encoding Conventions
 
-			At the moment, the payload is essentially contained in the `labels` attribute (an array of strings) of the
-			component object. We are going to encode consent data for more than one jusridiction. To make this unambiguous
-			we are going to use a specific convention.
-
-			Each element of the array represents a particular attribute. Note that the collection of attributes is different
-			from one jurisdiction to another. To have an unambiguous reading we prefix each attribute value with a code
-			that helps identify the attribute type.
-
-			An element of the array is then always of the form "<code>:<value>"
-
-			Codes:
-				01: Specify the jurisdiction. Accepted values: "TCF.v2", "CCPA" and "AUS"
-				02: TCF.v2 Consent UUID
-				03: TCF.v2 Consent string
-				04: CCPA (Consent) UUID
-				05: CCPA Do not sell, boolean, with the serialization: true -> "true", false -> "false"
-			    06: AUS (Consent) UUID # Note that the cookie is called "ccpaUUID"
-				07: AUS consentStatus
-
-			For TCF.v2, an exmaple of array is ["01:TCF.v2", "02:<consent UUID>"", "03:<consent string>""]
-			For CCPA,   an exmaple of array is ["01:CCPA", "04:<consent UUID>", "05:true"]
-			For AUS,    an exmaple of array is ["01:AUS", "06:<consent UUID>", "07:consentedAll"]
-
-			Note: it is possible to deprecate CODES, but they cannot the reused.
+			https://github.com/guardian/transparency-consent-docs/blob/main/docs/capturing-consent-from-client-side.md#era-2-encoding-conventions
 		*/
 
 		const decideConsentCarrierLabels = () => {
@@ -119,7 +96,16 @@ const init = async (): Promise<void> => {
 				const ccpaUUID = getCookie({ name: 'ccpaUUID' }) || '';
 				const consentStatus =
 					getCookie({ name: 'consentStatus' }) || '';
-				return ['01:AUS', `06:${ccpaUUID}`, `07:${consentStatus}`];
+				const personalisedAdvertising = consentState.aus
+					.personalisedAdvertising
+					? 'true'
+					: 'false';
+				return [
+					'01:AUS',
+					`06:${ccpaUUID}`,
+					`07:${consentStatus}`,
+					`08:${personalisedAdvertising}`,
+				];
 			}
 			return [];
 		};

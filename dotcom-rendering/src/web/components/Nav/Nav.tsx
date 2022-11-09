@@ -1,4 +1,4 @@
-import { css, ThemeProvider } from '@emotion/react';
+import { css, Global, ThemeProvider } from '@emotion/react';
 import { ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import { space, until, visuallyHidden } from '@guardian/source-foundations';
 import {
@@ -71,6 +71,17 @@ export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
 
 	return (
 		<div css={rowStyles}>
+			<Global
+				styles={css`
+					/* We apply this style when the side navigation is open the prevent the document body from scrolling */
+					/* See Nav.tsx */
+					.nav-is-open {
+						${until.desktop} {
+							overflow: hidden;
+						}
+					}
+				`}
+			/>
 			{/*
                 IMPORTANT NOTE: Supporting NoJS and accessibility is hard.
 
@@ -95,7 +106,7 @@ export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
 
                         // We assume News is the 1st column
                         var firstColLabel = document.getElementById('News-button')
-                        var firstColLink = document.querySelectorAll('#newsLinks > li:first-of-type > a')[0]
+                        var firstColLink = document.querySelectorAll('#newsLinks > li:nth-of-type(2) > a')[0]
 
                         var focusOnFirstNavElement = function(){
                           // need to focus on first element in list, firstColLabel is not viewable on desktop
@@ -109,6 +120,8 @@ export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
 						if (!navInputCheckbox) return; // Sticky nav replaces the nav so element no longer exists for users in test.
 
                         navInputCheckbox.addEventListener('click',function(){
+                          document.body.classList.toggle('nav-is-open')
+
                           if(!navInputCheckbox.checked) {
 							firstColLabel.setAttribute('aria-expanded', 'false')
                             showMoreButton.setAttribute('data-link-name','nav2 : veggie-burger: show')
@@ -216,7 +229,7 @@ export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
 					dataLinkName="nav2"
 					isTopNav={true}
 				/>
-				<ExpandedMenu nav={nav} format={format} />
+				<ExpandedMenu editionId={editionId} nav={nav} format={format} />
 			</div>
 			{displayRoundel && (
 				<PositionRoundel>

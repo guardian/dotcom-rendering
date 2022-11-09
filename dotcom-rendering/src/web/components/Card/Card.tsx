@@ -15,6 +15,7 @@ import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { Avatar } from '../Avatar';
 import { CardHeadline } from '../CardHeadline';
+import { CardPicture } from '../CardPicture';
 import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
 import { Snap } from '../Snap';
@@ -166,6 +167,18 @@ const CommentFooter = ({
 	);
 };
 
+const getImage = ({
+	imageUrl,
+	avatarUrl,
+}: {
+	imageUrl?: string;
+	avatarUrl?: string;
+}): { type: CardImageType; src: string } | undefined => {
+	if (avatarUrl) return { type: 'avatar', src: avatarUrl };
+	if (imageUrl) return { type: 'mainMedia', src: imageUrl };
+	return undefined;
+};
+
 export const Card = ({
 	linkTo,
 	format,
@@ -247,7 +260,6 @@ export const Card = ({
 							data-ignore="global-link-styling"
 							data-link-name="Comment count"
 							href={`${linkTo}#comments`}
-							subdued={true}
 							cssOverrides={css`
 								/* See: https://css-tricks.com/nested-links/ */
 								${getZIndex('card-nested-link')}
@@ -257,6 +269,7 @@ export const Card = ({
 								font-family: inherit;
 								font-size: inherit;
 								line-height: inherit;
+								text-decoration: none;
 							`}
 						/>
 					) : undefined
@@ -280,13 +293,10 @@ export const Card = ({
 		return <Snap snapData={snapData} />;
 	}
 
-	// Decide what type of image to show, main media, avatar or none
-	let imageType: CardImageType | undefined;
-	if (imageUrl && avatarUrl) {
-		imageType = 'avatar';
-	} else if (imageUrl) {
-		imageType = 'mainMedia';
-	}
+	const image = getImage({
+		imageUrl,
+		avatarUrl,
+	});
 
 	return (
 		<CardWrapper
@@ -301,41 +311,41 @@ export const Card = ({
 				dataLinkName={dataLinkName}
 			/>
 			<CardLayout
-				imagePosition={imageUrl !== undefined ? imagePosition : 'top'}
-				imagePositionOnMobile={
-					imageUrl !== undefined ? imagePositionOnMobile : 'top'
-				}
+				imagePosition={imagePosition}
+				imagePositionOnMobile={imagePositionOnMobile}
 				minWidthInPixels={minWidthInPixels}
-				imageType={imageType}
+				imageType={image?.type}
 			>
-				<ImageWrapper
-					imageSize={imageSize}
-					imageType={imageType}
-					imagePosition={
-						imageUrl !== undefined ? imagePosition : 'top'
-					}
-					imagePositionOnMobile={
-						imageUrl !== undefined ? imagePositionOnMobile : 'top'
-					}
-				>
-					{imageType === 'avatar' && !!avatarUrl ? (
-						<AvatarContainer
-							imageSize={imageSize}
-							imagePosition={imagePosition}
-						>
-							<Avatar
-								imageSrc={avatarUrl}
-								imageAlt={byline ?? ''}
-								containerPalette={containerPalette}
-								format={format}
+				{image && (
+					<ImageWrapper
+						imageSize={imageSize}
+						imageType={image.type}
+						imagePosition={imagePosition}
+						imagePositionOnMobile={imagePositionOnMobile}
+					>
+						{image.type === 'avatar' ? (
+							<AvatarContainer
+								imageSize={imageSize}
+								imagePosition={imagePosition}
+							>
+								<Avatar
+									imageSrc={image.src}
+									imageAlt={byline ?? ''}
+									containerPalette={containerPalette}
+									format={format}
+								/>
+							</AvatarContainer>
+						) : (
+							<CardPicture
+								master={image.src}
+								imageSize={imageSize}
+								alt=""
 							/>
-						</AvatarContainer>
-					) : (
-						<img src={imageUrl} alt="" role="presentation" />
-					)}
-				</ImageWrapper>
+						)}
+					</ImageWrapper>
+				)}
 				<ContentWrapper
-					imageType={imageType}
+					imageType={image?.type}
 					imageSize={imageSize}
 					imagePosition={imagePosition}
 				>
@@ -404,6 +414,8 @@ export const Card = ({
 							<SupportingContent
 								supportingContent={supportingContent}
 								alignment="vertical"
+								containerPalette={containerPalette}
+								isDynamo={isDynamo}
 							/>
 						) : (
 							<></>
@@ -414,6 +426,8 @@ export const Card = ({
 			{hasSublinks && noOfSublinks > 2 ? (
 				<SupportingContent
 					supportingContent={supportingContent}
+					containerPalette={containerPalette}
+					isDynamo={isDynamo}
 					alignment={
 						imagePosition === 'top' ||
 						imagePosition === 'bottom' ||

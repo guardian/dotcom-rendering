@@ -13,7 +13,7 @@ import TwitterIconPadded from '../../../../static/icons/twitter-padded.svg';
 
 const pillarHeight = 42;
 
-export const hideDesktop = css`
+const hideDesktop = css`
 	${from.desktop} {
 		display: none;
 	}
@@ -39,17 +39,6 @@ const columnStyle = css`
 	margin: 0;
 	padding-bottom: 10px;
 	position: relative;
-
-	:after {
-		background-color: ${brand[600]};
-		top: 0;
-		content: '';
-		display: block;
-		height: 1px;
-		left: 50px;
-		position: absolute;
-		right: 0;
-	}
 
 	/* Remove the border from the top item on mobile */
 	:first-of-type:after {
