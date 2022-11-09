@@ -10,6 +10,7 @@ import {
 	TextArea,
 	TextInput,
 } from '@guardian/source-react-components';
+import CheckboxInput from 'components/CheckboxInput';
 import FileInput from 'components/FileInput';
 import RadioInput from 'components/RadioInput';
 import type { ReactElement } from 'react';
@@ -44,61 +45,75 @@ const renderDisclaimer = (format: ArticleFormat): ReactElement => (
 );
 
 const renderField = (
-	{ type, description, label, mandatory, options, id }: FormField,
+	{ type, label, description, mandatory, options, id }: FormField,
 	format: ArticleFormat,
 ): ReactElement | null => {
 	const name = `field_${id}`;
-	const input = css`
+	const inputStyles = css`
 		margin-bottom: ${remSpace[4]};
 	`;
+
 	switch (type) {
 		case 'text':
+		case 'number':
+		case 'phone':
+		case 'email':
 			return (
 				<TextInput
-					cssOverrides={input}
-					supporting={description}
 					name={name}
+					type={type === 'phone' ? 'tel' : type}
 					label={label}
+					supporting={description}
 					optional={!mandatory}
+					cssOverrides={inputStyles}
 				/>
 			);
 		case 'textarea':
 			return (
 				<TextArea
-					cssOverrides={input}
-					supporting={description}
 					name={name}
 					label={label}
+					supporting={description}
 					optional={!mandatory}
+					cssOverrides={inputStyles}
 				/>
 			);
 		case 'file':
 			return (
 				<FileInput
-					cssOverrides={input}
-					supporting={description}
-					mandatory={mandatory}
 					name={name}
 					label={label}
+					supporting={description}
+					mandatory={mandatory}
 					format={format}
+					cssOverrides={inputStyles}
 				/>
 			);
 		case 'radio':
 			return (
 				<RadioInput
-					options={options}
 					name={name}
-					supporting={description}
 					label={label}
+					supporting={description}
+					options={options}
 				/>
 			);
-		// Need to support checkbox at the least
+		case 'checkbox':
+			return (
+				<CheckboxInput
+					name={name}
+					label={label}
+					supporting={description}
+					options={options}
+					cssOverrides={inputStyles}
+				/>
+			);
 		case 'select':
 			return (
 				<Select
 					label={label}
 					supporting={description}
-					cssOverrides={input}
+					cssOverrides={inputStyles}
 				>
 					{options.map(({ value, label }) => {
 						return (

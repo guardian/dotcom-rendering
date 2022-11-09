@@ -25,7 +25,7 @@ export const getDeadlineText = (
 	date1: Date,
 	date2: Date,
 ): string | undefined => {
-	const maxDays = 7; // TODO: Check this
+	const maxDays = 7;
 	const daysBetween = getDaysBetween(date1, date2);
 	if (daysBetween <= 0 || daysBetween > maxDays) return;
 	if (daysBetween <= 1) return 'Closing today';

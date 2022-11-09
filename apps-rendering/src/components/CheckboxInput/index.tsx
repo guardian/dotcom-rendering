@@ -1,9 +1,9 @@
 import type { SerializedStyles } from '@emotion/react';
 import type { FormOption } from '@guardian/apps-rendering-api-models/formOption';
-import { Radio, RadioGroup } from '@guardian/source-react-components';
+import { Checkbox, CheckboxGroup } from '@guardian/source-react-components';
 import type { ReactElement } from 'react';
 
-interface RadioInputProps {
+interface CheckboxInputProps {
 	name: string;
 	label: string;
 	supporting?: string;
@@ -11,24 +11,23 @@ interface RadioInputProps {
 	cssOverrides?: SerializedStyles;
 }
 
-const RadioInput = ({
+const CheckboxInput = ({
 	label,
 	name,
 	options,
 	supporting,
 	cssOverrides,
-}: RadioInputProps): ReactElement => (
-	<RadioGroup
+}: CheckboxInputProps): ReactElement => (
+	<CheckboxGroup
 		label={label}
 		name={name}
-		orientation="horizontal"
 		supporting={supporting}
 		cssOverrides={cssOverrides}
 	>
-		{options.map(({ value, label }) => (
-			<Radio key={value} value={value} label={label} />
+		{options.map(({ label, value }) => (
+			<Checkbox label={label} value={value} key={value} />
 		))}
-	</RadioGroup>
+	</CheckboxGroup>
 );
 
-export default RadioInput;
+export default CheckboxInput;
