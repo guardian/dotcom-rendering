@@ -9,7 +9,6 @@ import { Button } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { decidePalette } from '../../lib/decidePalette';
 import { CalloutTermsAndConditions } from './CalloutTermsAndConditions';
-import { FileInput } from './FormFields/FileInput';
 import { FileUpload } from './FormFields/FileUpload';
 import { MultiSelect } from './FormFields/MultiSelect';
 import { Select } from './FormFields/Select';

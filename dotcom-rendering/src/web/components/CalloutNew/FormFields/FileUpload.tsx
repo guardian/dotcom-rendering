@@ -40,8 +40,8 @@ const customUpload = (format: ArticleFormat): SerializedStyles => css`
 	white-space: nowrap;
 	height: ${remHeight.ctaXsmall}rem;
 	min-height: ${remHeight.ctaXsmall}rem;
-	padding: ${space[3]};
-	margin: ${space[3]};
+	padding: ${space[3]}px;
+	margin: ${space[3]}px ${space[3]}px 0px 0px;
 	border-radius: ${remHeight.ctaMedium}rem;
 	${textSans.medium({ fontWeight: 'medium' })};
 	width: fit-content;
