@@ -1,17 +1,8 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	palette,
-	textSans,
-	visuallyHidden,
-	space,
-	remSpace,
-} from '@guardian/source-foundations';
-import ClockIcon from '../../../static/icons/clock.svg';
+import { from, palette, textSans, space } from '@guardian/source-foundations';
 import { SvgClock } from '@guardian/source-react-components';
 
 type Props = {
-	isScreenReader?: boolean;
 	until?: number | undefined;
 };
 
@@ -23,8 +14,8 @@ const deadlineStyles = css`
 	right: 0;
 	display: flex;
 	align-items: center;
-	margin-top: -${remSpace[6]};
-	padding: 0 ${remSpace[1]};
+	margin-top: -${space[6]};
+	padding: 0 ${space[1]};
 
 	${from.leftCol} {
 		padding-left: ${'5px'};
@@ -54,7 +45,7 @@ function formatOptionalDate(date: number | undefined): Date | undefined {
 	return d;
 }
 
-export const Deadline = ({ isScreenReader, until }: Props) => {
+export const Deadline = ({ until }: Props) => {
 	const untilDate = formatOptionalDate(until);
 	if (!untilDate) return null;
 	const now = new Date();
