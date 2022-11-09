@@ -40,6 +40,7 @@ type Props = {
 	path: string;
 	containerId: string;
 	showAge: boolean;
+	baseUrl: string;
 	containerPalette?: DCRContainerPalette;
 };
 
@@ -48,13 +49,11 @@ export const ShowMore = ({
 	path,
 	containerId,
 	showAge,
+	baseUrl,
 	containerPalette,
 }: Props) => {
 	const [existingCardLinks, setExistingCardLinks] = useState<string[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
-	const [baseUrl, setBaseUrl] = useState(
-		'https://api.nextgen.guardianapps.co.uk',
-	);
 
 	/**
 		@todo: Fix focus behaviour on expand/collapse: @see https://github.com/guardian/dotcom-rendering/issues/6343
@@ -70,8 +69,6 @@ export const ShowMore = ({
 			.filter((item): item is string => !!item);
 
 		setExistingCardLinks(containerLinks);
-
-		setBaseUrl(window.guardian.config.page.ajaxUrl);
 	}, []);
 
 	/** We only pass an actual URL to SWR when 'showMore' is true.

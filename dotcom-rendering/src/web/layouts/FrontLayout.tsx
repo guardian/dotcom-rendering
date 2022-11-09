@@ -412,6 +412,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 											}
 											containerId={collection.id}
 											path={front.pressedPage.id}
+											baseUrl={front.config.ajaxUrl}
 											containerPalette={
 												collection.containerPalette
 											}
