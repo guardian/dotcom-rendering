@@ -340,9 +340,13 @@ const parse =
 					campaignId: campaignId,
 					isNonCollapsible: isNonCollapsible,
 				} = element.calloutTypeData ?? {};
-				if (!campaignId || !isNonCollapsible) {
+				if (
+					campaignId === undefined ||
+					campaignId === '' ||
+					isNonCollapsible === undefined
+				) {
 					return Result.err(
-						'No campaignId or isNonCollapsible field on calloutTypeData',
+						'No valid campaignId or isNonCollapsible field on calloutTypeData',
 					);
 				}
 
@@ -377,10 +381,11 @@ const parse =
 					.querySelector('[data-callout-tagname]')
 					?.getAttribute('data-callout-tagname');
 
-				if (isCallout)
+				if (isCallout) {
 					return Result.err(
 						'Embed callouts are deprecated in Apps Rendering. Please use element type Callout',
 					);
+				}
 
 				return compose(
 					toEmbedElement,
