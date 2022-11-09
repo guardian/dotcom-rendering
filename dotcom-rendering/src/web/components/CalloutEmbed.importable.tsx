@@ -125,7 +125,7 @@ let hasFormBeenOpened = true;
 
 type FormDataType = { [key in string]: any };
 
-export const CalloutBlockComponent = ({
+export const CalloutEmbed = ({
 	callout,
 	format,
 }: {
