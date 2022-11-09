@@ -5,6 +5,7 @@ import { ShowMore } from './ShowMore.importable';
 const containerTitle = 'Opinion';
 const path = 'uk/lifestyle';
 const containerId = '5011-3940-8793-33a9';
+const baseUrl = 'https://api.nextgen.guardianapps.co.uk';
 
 export default {
 	component: ShowMore,
@@ -14,19 +15,17 @@ export default {
 export const ShowMoreSuccess = () => {
 	fetchMock
 		.restore()
-		.get(
-			`https://api.nextgen.guardianapps.co.uk/${path}/show-more/${containerId}.json?dcr=true`,
-			{
-				status: 200,
-				body: trails.slice(0, 6),
-			},
-		);
+		.get(`${baseUrl}/${path}/show-more/${containerId}.json?dcr=true`, {
+			status: 200,
+			body: trails.slice(0, 6),
+		});
 
 	return ShowMore({
 		containerTitle,
 		path,
 		containerId,
 		showAge: false,
+		baseUrl,
 	});
 };
 
@@ -35,19 +34,17 @@ ShowMoreSuccess.story = { name: 'ShowMore button, success' };
 export const ShowMoreError = () => {
 	fetchMock
 		.restore()
-		.get(
-			`https://api.nextgen.guardianapps.co.uk/${path}/show-more/${containerId}.json?dcr`,
-			{
-				status: 404,
-				body: null,
-			},
-		);
+		.get(`${baseUrl}/${path}/show-more/${containerId}.json?dcr`, {
+			status: 404,
+			body: null,
+		});
 
 	return ShowMore({
 		containerTitle,
 		path,
 		containerId,
 		showAge: false,
+		baseUrl,
 	});
 };
 
