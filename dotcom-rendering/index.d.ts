@@ -20,7 +20,8 @@ type ThemePillar =
 	| 'SportPillar'
 	| 'CulturePillar'
 	| 'LifestylePillar';
-type ThemeSpecial = 'SpecialReportTheme' | 'Labs';
+
+type ThemeSpecial = 'SpecialReportTheme' | 'Labs' | 'SpecialReportAltTheme';
 type CAPITheme = ThemePillar | ThemeSpecial;
 
 // CAPIDesign is what CAPI gives us on the Format field
@@ -574,7 +575,7 @@ declare namespace JSX {
 	interface IntrinsicElements {
 		'gu-island': {
 			name: string;
-			deferUntil?: 'idle' | 'visible';
+			deferUntil?: 'idle' | 'visible' | 'interaction';
 			clientOnly?: boolean;
 			expediteLoading?: boolean;
 			props: any;

@@ -141,6 +141,9 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 	 */
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
+	const isInEuropeTest =
+		CAPIArticle.config.abTests.europeNetworkFrontVariant === 'variant';
+
 	if (isSlimNav) {
 		return (
 			<div
@@ -228,6 +231,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 								CAPIArticle.contributionsServiceUrl
 							}
 							idApiUrl={CAPIArticle.config.idApiUrl}
+							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 				</div>

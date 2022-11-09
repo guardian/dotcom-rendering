@@ -270,6 +270,9 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		config: { isPaidContent, host },
 	} = CAPIArticle;
 
+	const isInEuropeTest =
+		CAPIArticle.config.abTests.europeNetworkFrontVariant === 'variant';
+
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: CAPIArticle.isAdFreeUser,
 		isSensitive: CAPIArticle.config.isSensitive,
@@ -353,6 +356,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
+								isInEuropeTest={isInEuropeTest}
 							/>
 						</Section>
 					)}
@@ -407,6 +411,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							cssOverrides={css`
 								display: block;
 							`}
+							color={palette.border.secondary}
 						/>
 					</Section>
 				</SendToBack>
@@ -473,6 +478,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											cssOverrides={css`
 												display: block;
 											`}
+											color={palette.border.secondary}
 										/>
 									</div>
 								</div>
@@ -486,6 +492,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										cssOverrides={css`
 											display: block;
 										`}
+										color={palette.border.secondary}
 									/>
 								</Hide>
 							</div>
@@ -635,6 +642,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										cssOverrides={css`
 											display: block;
 										`}
+										color={palette.border.secondary}
 									/>
 									<SubMeta
 										format={format}
@@ -684,8 +692,6 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.pageType
 													.isPaidContent
 											}
-											format={format}
-											editionId={CAPIArticle.editionId}
 										/>
 									)}
 

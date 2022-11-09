@@ -1,10 +1,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { ArticlePillar, getCookie } from '@guardian/libs';
+import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
-import type { EditionId } from '../../types/edition';
 import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
-import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { ShadyPie } from './ShadyPie';
 
@@ -28,38 +26,23 @@ export const TopRightAdSlot = ({
 	adStyles,
 	shouldHideReaderRevenue,
 	isPaidContent,
-	editionId,
-	format,
 }: {
 	adStyles: SerializedStyles[];
 	shouldHideReaderRevenue: boolean;
 	isPaidContent: boolean;
-	editionId?: EditionId;
-	format?: ArticleFormat;
 }) => {
 	const adBlockerDetected = useAdBlockInUse();
 	const [isShady, setIsShady] = useState(false);
 
-	const ABTestAPI = useAB();
-
-	const userInShadyPieTestVariant =
-		ABTestAPI?.isUserInVariant('ShadyPieClickThrough', 'variant') &&
-		format?.theme == ArticlePillar.Lifestyle;
-
 	useEffect(() => {
 		const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 		setIsShady(
-			(adBlockerDetected || !!userInShadyPieTestVariant) &&
+			!!adBlockerDetected &&
 				!isSignedIn &&
 				!shouldHideReaderRevenue &&
 				!isPaidContent,
 		);
-	}, [
-		shouldHideReaderRevenue,
-		isPaidContent,
-		adBlockerDetected,
-		userInShadyPieTestVariant,
-	]);
+	}, [shouldHideReaderRevenue, isPaidContent, adBlockerDetected]);
 
 	if (!isShady) {
 		return (
@@ -97,12 +80,6 @@ export const TopRightAdSlot = ({
 			</div>
 		);
 	} else {
-		return (
-			<ShadyPie
-				format={format}
-				editionId={editionId}
-				abTest={userInShadyPieTestVariant}
-			/>
-		);
+		return <ShadyPie />;
 	}
 };

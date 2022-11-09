@@ -27,6 +27,7 @@ import {
 	withDefault,
 } from '@guardian/types';
 import type { Option } from '@guardian/types';
+import { themeToPillar } from 'articleFormat';
 import { ElementKind } from 'bodyElement';
 import type {
 	AudioAtom as AudioAtomElement,
@@ -62,6 +63,7 @@ import InteractiveAtom, {
 import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LiveEventLink from 'components/LiveEventLink';
+import NewsletterSignup from 'components/NewsletterSignup';
 import OrderedList from 'components/OrderedList';
 import Paragraph from 'components/Paragraph';
 import Pullquote from 'components/Pullquote';
@@ -71,11 +73,6 @@ import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { Result } from 'result';
 import { backgroundColor, darkModeCss } from 'styles';
-import {
-	themeFromString,
-	themeToPillar,
-	themeToPillarString,
-} from 'themeStyles';
 
 // ----- Renderer ----- //
 
@@ -593,8 +590,7 @@ const audioAtomRenderer = (
 	format: ArticleFormat,
 	element: AudioAtomElement,
 ): ReactNode => {
-	const { theme } = format;
-	const pillar = themeFromString('pillar/' + themeToPillarString(theme));
+	const pillar = themeToPillar(format.theme);
 	const audioAtomStyles = css`
 		figure {
 			margin: 0;
@@ -694,6 +690,9 @@ const render =
 			case ElementKind.KnowledgeQuizAtom:
 			case ElementKind.PersonalityQuizAtom:
 				return h(Quiz, { format, element });
+
+			case ElementKind.NewsletterSignUp:
+				return h(NewsletterSignup, { format, element });
 		}
 	};
 

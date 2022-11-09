@@ -496,7 +496,7 @@ export const renderElement = ({
 					key={index}
 					html={element.html}
 					palette={palette}
-					design={format.design}
+					format={format}
 					attribution={element.attribution}
 					role={element.role}
 				/>,

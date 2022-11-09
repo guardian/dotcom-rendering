@@ -1,12 +1,11 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import ImageDetails from '@guardian/common-rendering/src/components/imageDetails';
 import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDisplay } from '@guardian/libs';
 import { from, remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { some } from '@guardian/types';
 import Img from 'components/ImgAlt';
+import MainMediaCaption from 'components/MainMediaCaption';
 import type { Image } from 'image';
 import type { Sizes } from 'image/sizes';
 import type { FC } from 'react';
@@ -15,29 +14,6 @@ import { wideContentWidth } from 'styles';
 // ----- Setup ----- //
 
 const captionId = 'header-image-caption';
-
-// ----- Subcomponents ----- //
-
-interface CaptionProps {
-	format: ArticleFormat;
-	image: Image;
-}
-
-export const Caption: FC<CaptionProps> = ({ format, image }: CaptionProps) => {
-	switch (format.display) {
-		case ArticleDisplay.Immersive:
-			return null;
-		default:
-			return (
-				<ImageDetails
-					caption={image.nativeCaption}
-					credit={image.credit}
-					supportsDarkMode
-					id={captionId}
-				/>
-			);
-	}
-};
 
 // ----- Component ----- //
 
@@ -100,7 +76,12 @@ const DefaultMainMediaImage: FC<DefaultProps> = ({
 				credit: image.credit,
 			})}
 		/>
-		<Caption format={format} image={image} />
+		<MainMediaCaption
+			caption={image.caption}
+			credit={image.credit}
+			format={format}
+			id={captionId}
+		/>
 	</figure>
 );
 

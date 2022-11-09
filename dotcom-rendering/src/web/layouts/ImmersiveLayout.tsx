@@ -338,7 +338,13 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										ArticleSpecial.Labs ? (
 											<GuardianLabsLines />
 										) : (
-											<DecideLines format={format} />
+											<DecideLines
+												format={format}
+												color={
+													decidePalette(format).border
+														.article
+												}
+											/>
 										)}
 									</div>
 								</div>
@@ -441,7 +447,12 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										/>
 									</Island>
 								)}
-								<StraightLines count={4} />
+								<StraightLines
+									count={4}
+									color={
+										decidePalette(format).border.secondary
+									}
+								/>
 								<SubMeta
 									format={format}
 									subMetaKeywordLinks={
@@ -495,10 +506,6 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														isPaidContent={
 															CAPIArticle.pageType
 																.isPaidContent
-														}
-														format={format}
-														editionId={
-															CAPIArticle.editionId
 														}
 													/>
 												)}

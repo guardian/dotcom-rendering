@@ -26,7 +26,7 @@ describe('canRun using participations', () => {
 	});
 
 	test('canRun using participations returns true if setParticipationsFlag is true and participation already set', () => {
-		storage.local.set('gu.ab_participations', currentTestParticipation);
+		storage.local.set('gu.ab._participations', currentTestParticipation);
 
 		expect(setOrUseParticipations(true, abTestId, variantId)).toBe(true);
 		expect(getParticipationsFromLocalStorage()).toStrictEqual(

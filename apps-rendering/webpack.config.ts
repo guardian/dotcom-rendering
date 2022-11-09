@@ -109,6 +109,26 @@ const serverConfig = (
 						},
 					],
 				},
+				{
+					// @guardian packages must be transpiled
+					// https://github.com/guardian/recommendations/blob/main/npm-packages.md#using-guardian-npm-packages
+					test: /@guardian\/.+\.js$/,
+					use: [
+						{
+							loader: 'babel-loader',
+							options: {
+								presets: [
+									[
+										'@babel/preset-env',
+										{
+											targets: { node: '14' },
+										},
+									],
+								],
+							},
+						},
+					],
+				},
 			],
 		},
 		optimization: {

@@ -81,11 +81,11 @@ export type FEContainerPalette =
 	| 'Dynamo'
 	| 'Special'
 	| 'DynamoLike'
-	| 'Special'
 	| 'Breaking'
 	| 'Podcast'
 	| 'Branded'
-	| 'BreakingPalette';
+	| 'BreakingPalette'
+	| 'SpecialReportAltPalette';
 
 export type DCRContainerPalette =
 	| 'EventPalette'
@@ -95,7 +95,8 @@ export type DCRContainerPalette =
 	| 'LongRunningAltPalette'
 	| 'LongRunningPalette'
 	| 'SombrePalette'
-	| 'BreakingPalette';
+	| 'BreakingPalette'
+	| 'SpecialReportAltPalette';
 
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
@@ -415,6 +416,7 @@ type FESeoDataType = {
 	id: string;
 	navSection: string;
 	webTitle: string;
+	title?: string;
 	description: string;
 };
 

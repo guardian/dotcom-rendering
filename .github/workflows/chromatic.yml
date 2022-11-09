@@ -33,7 +33,7 @@ jobs:
 
       - name: Chromatic - Non Dependency PR / main
         uses: chromaui/action@v1
-        if: ${{ github.event_name == 'push' || !contains(github.event.pull_request.labels.*.name, 'dependencies') }}
+        if: ${{ github.event_name == 'push' || (!contains(github.event.pull_request.labels.*.name, 'dependencies') && github.event.pull_request.user.login != 'dependabot')}}
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -43,7 +43,7 @@ jobs:
 
       - name: Chromatic - Dependency PR
         uses: chromaui/action@v1
-        if: ${{ github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'dependencies') }}
+        if: ${{ github.event_name == 'pull_request' && (contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event.pull_request.user.login == 'dependabot') }}
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}

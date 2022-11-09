@@ -1,6 +1,7 @@
-import { neutral } from '@guardian/source-foundations';
 import type { DCRContainerPalette } from '../../types/front';
 import type { ContainerOverrides } from '../../types/palette';
+import { transparentColour } from './transparentColour';
+import { neutral } from '@guardian/source-foundations';
 
 const textCardHeadline = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
@@ -20,6 +21,8 @@ const textCardHeadline = (containerPalette: DCRContainerPalette): string => {
 			return '#041F4A';
 		case 'EventAltPalette':
 			return '#041F4A';
+		case 'SpecialReportAltPalette':
+			return '#2b2b2a';
 	}
 };
 
@@ -44,6 +47,8 @@ const textCardKicker = (containerPalette: DCRContainerPalette): string => {
 			return '#c70000';
 		case 'EventAltPalette':
 			return '#e2352d';
+		case 'SpecialReportAltPalette':
+			return '#2b2b2a';
 	}
 };
 
@@ -67,6 +72,8 @@ const textContainerDate = (containerPalette: DCRContainerPalette): string => {
 			return '#c70000';
 		case 'EventAltPalette':
 			return '#c70000';
+		case 'SpecialReportAltPalette':
+			return '#2b2b2a';
 	}
 };
 
@@ -90,6 +97,8 @@ const textCardCommentCount = (
 			return '#707070';
 		case 'EventAltPalette':
 			return '#333333';
+		case 'SpecialReportAltPalette':
+			return '#2b2b2a';
 	}
 };
 
@@ -111,6 +120,8 @@ const textDynamoHeadline = (containerPalette: DCRContainerPalette): string => {
 			return '#041F4A';
 		case 'EventAltPalette':
 			return '#041F4A';
+		case 'SpecialReportAltPalette':
+			return '#2b2b2a';
 	}
 };
 
@@ -132,6 +143,8 @@ const textDynamoKicker = (containerPalette: DCRContainerPalette): string => {
 			return '#c70000';
 		case 'EventAltPalette':
 			return '#c70000';
+		case 'SpecialReportAltPalette':
+			return '#121212';
 	}
 };
 
@@ -155,6 +168,8 @@ const textDynamoSublinkKicker = (
 			return '#c70000';
 		case 'EventAltPalette':
 			return '#c70000';
+		case 'SpecialReportAltPalette':
+			return '#121212';
 	}
 };
 
@@ -176,6 +191,8 @@ const textDynamoMeta = (containerPalette: DCRContainerPalette): string => {
 			return '#ededed';
 		case 'EventAltPalette':
 			return '#ededed';
+		case 'SpecialReportAltPalette':
+			return '#f5f0eb';
 	}
 };
 
@@ -197,6 +214,8 @@ const textContainer = (containerPalette: DCRContainerPalette): string => {
 			return '#041F4A';
 		case 'EventAltPalette':
 			return '#041f4a';
+		case 'SpecialReportAltPalette':
+			return '#2b2b2a';
 	}
 };
 
@@ -218,17 +237,17 @@ const textContainerToggle = (containerPalette: DCRContainerPalette): string => {
 			return '#707070';
 		case 'EventAltPalette':
 			return '#707070';
+		case 'SpecialReportAltPalette':
+			return '#999999';
 	}
 };
 
 const borderContainer = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			// neutral.86 with 40% opacity
-			return 'rgba(153, 153, 153, 0.4)';
+			return transparentColour(neutral[86], 0.4);
 		case 'LongRunningAltPalette':
-			// neutral.86 with 40% opacity
-			return 'rgba(153, 153, 153, 0.4)';
+			return transparentColour(neutral[86], 0.4);
 		case 'SombrePalette':
 			return neutral[60];
 		case 'SombreAltPalette':
@@ -241,6 +260,8 @@ const borderContainer = (containerPalette: DCRContainerPalette): string => {
 			return neutral[86];
 		case 'EventAltPalette':
 			return neutral[86];
+		case 'SpecialReportAltPalette':
+			return transparentColour(neutral[60], 0.3);
 	}
 };
 
@@ -264,6 +285,8 @@ const backgroundContainer = (containerPalette: DCRContainerPalette): string => {
 			return '#f1f8fc';
 		case 'EventAltPalette':
 			return '#fbf6ef';
+		case 'SpecialReportAltPalette':
+			return '#f5f0eb';
 	}
 };
 
@@ -285,6 +308,8 @@ const backgroundCard = (containerPalette: DCRContainerPalette): string => {
 			return '#ededed';
 		case 'EventAltPalette':
 			return '#efe8dd';
+		case 'SpecialReportAltPalette':
+			return '#ebe6e1';
 	}
 };
 

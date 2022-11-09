@@ -53,6 +53,10 @@ Object {
       "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
+    "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/account/services/artifact.bucket",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
     "VpcId": Object {
       "Default": "/account/vpc/primary/id",
       "Description": "Virtual Private Cloud to run EC2 instances within. Should NOT be the account default VPC.",
@@ -182,7 +186,11 @@ export Stack=mobile
 export Stage=TEST
 export NODE_ENV=production
 
-aws s3 cp s3://mobile-dist/mobile/TEST/mobile-apps-rendering/mobile-apps-rendering.zip /tmp
+aws s3 cp s3://",
+                Object {
+                  "Ref": "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter",
+                },
+                "/mobile/TEST/mobile-apps-rendering/mobile-apps-rendering.zip /tmp
 mkdir -p /opt/mobile-apps-rendering
 unzip /tmp/mobile-apps-rendering.zip -d /opt/mobile-apps-rendering
 chown -R mobile-apps-rendering:mapi /opt/mobile-apps-rendering
@@ -965,6 +973,10 @@ Object {
       "Description": "SSM parameter containing the Name (not ARN) on the kinesis stream",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
+    "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/account/services/artifact.bucket",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
     "VpcId": Object {
       "Default": "/account/vpc/primary/id",
       "Description": "Virtual Private Cloud to run EC2 instances within. Should NOT be the account default VPC.",
@@ -1094,7 +1106,11 @@ export Stack=mobile-preview
 export Stage=TEST
 export NODE_ENV=production
 
-aws s3 cp s3://mobile-dist/mobile-preview/TEST/mobile-apps-rendering/mobile-apps-rendering.zip /tmp
+aws s3 cp s3://",
+                Object {
+                  "Ref": "SsmParameterValueaccountservicesartifactbucketC96584B6F00A464EAD1953AFF4B05118Parameter",
+                },
+                "/mobile-preview/TEST/mobile-apps-rendering/mobile-apps-rendering.zip /tmp
 mkdir -p /opt/mobile-apps-rendering
 unzip /tmp/mobile-apps-rendering.zip -d /opt/mobile-apps-rendering
 chown -R mobile-apps-rendering:mapi /opt/mobile-apps-rendering

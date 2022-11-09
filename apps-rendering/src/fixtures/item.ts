@@ -553,4 +553,5 @@ export {
 	explainer,
 	immersive,
 	gallery,
+	parseHtml,
 };

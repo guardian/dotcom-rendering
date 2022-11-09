@@ -20,6 +20,7 @@ import {
 } from '@guardian/libs';
 import { andThen, fromNullable, map, none, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
+import { getPillarFromId } from 'articleFormat';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
 import type { Logo } from 'capi';
@@ -49,7 +50,6 @@ import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
 import { Result } from 'result';
-import { themeFromString } from 'themeStyles';
 
 // ----- Item Type ----- //
 
@@ -281,7 +281,9 @@ const itemFields = (
 ): ItemFields => {
 	const { content, commentCount, relatedContent } = request;
 	return {
-		theme: themeFromString(content.pillarId),
+		theme: Optional.fromNullable(content.pillarId)
+			.flatMap(getPillarFromId)
+			.withDefault(ArticlePillar.News),
 		display: getDisplay(content),
 		headline: content.fields?.headline ?? '',
 		standfirst: pipe(
