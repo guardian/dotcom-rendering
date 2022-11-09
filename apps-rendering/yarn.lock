@@ -1296,12 +1296,12 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@guardian/apps-rendering-api-models@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@guardian/apps-rendering-api-models/-/apps-rendering-api-models-1.1.1.tgz#ae6411927534f20bf4f4e41d948c8d2a65346fa9"
-  integrity sha512-WR051+HS28SJUPd0iI7trkTFTh5hSt7sPoLuB6hzF4RHvwNKSxmPexstR35W53uiQ6UO4vUYjrCBjI/OhACcPg==
+"@guardian/apps-rendering-api-models@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/apps-rendering-api-models/-/apps-rendering-api-models-2.0.0.tgz#343fd91d0b524b8f389c3cd46c61eef34e3745b9"
+  integrity sha512-0Ib5QFePkNaQmjsIjPf8d/6EakgErdNT6Ui9neFTWwsBc3jPqgZ+2Lr0O5oYErgv/7c7QwHLAQLZOqoQi9Qnhw==
   dependencies:
-    "@guardian/content-api-models" "^17.3.0"
+    "@guardian/content-api-models" "^17.4.0"
     "@guardian/content-atom-model" "^3.4.0"
     "@guardian/content-entity-model" "^2.2.1"
     "@guardian/story-packages-model" "^2.2.0"
@@ -1341,10 +1341,10 @@
     read-pkg-up "7.0.1"
     yargs "^17.5.1"
 
-"@guardian/content-api-models@^17.3.0":
-  version "17.3.0"
-  resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.3.0.tgz#01db5eee92165c0df4182486da3d0a3d644e69b0"
-  integrity sha512-xT3k1VHjfOlt3SbaQ9PWsm2WOxwhISxgKA6BghBSAzsaQhz4pH2uwcgJBpa45WYX4pu3pVYnYDdCR04g5GgI2g==
+"@guardian/content-api-models@^17.4.0":
+  version "17.4.0"
+  resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.4.0.tgz#c8ab4000b7761a65018481bddadde950c76358b4"
+  integrity sha512-5Hvl7az1Epg9/yWzqRusdcgg5hG8AuJMAXvRkTztvvNIgGCI5Txps8q4hH1lZ13lIUkEitAQDOXp0zOxfm28Aw==
   dependencies:
     "@guardian/content-atom-model" "^3.4.0"
     "@guardian/content-entity-model" "^2.2.1"
