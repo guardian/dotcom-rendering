@@ -342,6 +342,7 @@ export const Picture = ({
 					isLazy && !Picture.disableLazyLoading ? 'lazy' : undefined
 				}
 				css={block}
+				fetchpriority={isMainMedia ? 'high' : undefined}
 			/>
 		</picture>
 	);

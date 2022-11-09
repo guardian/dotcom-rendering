@@ -617,3 +617,12 @@ declare namespace JSX {
 		'data-link-name'?: string;
 	}
 }
+
+declare namespace React {
+	// We should be able to remove this once this is merged:
+	// https://github.com/DefinitelyTyped/DefinitelyTyped/pull/63178
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- avoids "must have identical type parameters" error
+	interface ImgHTMLAttributes<T> {
+		fetchpriority?: 'high' | 'low' | 'auto'
+	}
+}
