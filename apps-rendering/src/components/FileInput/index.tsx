@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { text } from '@guardian/common-rendering/src/editorialPalette';
@@ -13,8 +12,6 @@ import {
 } from '@guardian/source-foundations';
 import { Label } from '@guardian/source-react-components';
 import type { ReactElement } from 'react';
-
-import { stringifyFileBase64 } from './stringifyFileBase64';
 
 interface FileInputProps {
 	mandatory: boolean;
