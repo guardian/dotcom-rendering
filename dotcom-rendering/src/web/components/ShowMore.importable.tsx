@@ -52,6 +52,9 @@ export const ShowMore = ({
 }: Props) => {
 	const [existingCardLinks, setExistingCardLinks] = useState<string[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
+	const [baseUrl, setBaseUrl] = useState(
+		'https://api.nextgen.guardianapps.co.uk',
+	);
 
 	/**
 		@todo: Fix focus behaviour on expand/collapse: @see https://github.com/guardian/dotcom-rendering/issues/6343
@@ -67,6 +70,8 @@ export const ShowMore = ({
 			.filter((item): item is string => !!item);
 
 		setExistingCardLinks(containerLinks);
+
+		setBaseUrl(window.guardian.config.page.ajaxUrl);
 	}, []);
 
 	/** We only pass an actual URL to SWR when 'showMore' is true.
@@ -74,7 +79,7 @@ export const ShowMore = ({
 	 *   @see https://swr.vercel.app/docs/conditional-fetching#conditional
 	 */
 	const url = isOpen
-		? `https://api.nextgen.guardianapps.co.uk/${path}/show-more/${containerId}.json?dcr=true`
+		? `${baseUrl}/${path}/show-more/${containerId}.json?dcr=true`
 		: undefined;
 	const { data, error, loading } = useApi<FEFrontCard[]>(url);
 
