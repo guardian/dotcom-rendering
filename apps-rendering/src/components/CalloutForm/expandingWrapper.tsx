@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
+	focusHalo,
 	from,
 	neutral,
 	remHeight,
@@ -10,35 +11,32 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { SvgMinus, SvgPlus } from '@guardian/source-react-components';
+import { useState } from 'react';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss } from 'styles';
 
-// To Do: Could this be exported to source?
+// TODO: Could this be exported to source? Or should we put this all in atoms-rendering?
 
 export interface ExpandingWrapperProps {
 	format: ArticleFormat;
 	children: ReactNode;
 	renderExtra?: () => ReactNode;
+	name: string;
 }
 
 const containerStyles = (format: ArticleFormat): SerializedStyles => css`
-	border-top: 1px solid ${neutral[86]};
+	border-image: repeating-linear-gradient(
+			to bottom,
+			${neutral[86]},
+			${neutral[86]} 1px,
+			transparent 1px,
+			transparent 4px
+		)
+		13;
+	border-top: 13px solid ${neutral[86]};
 	background: ${neutral[97]};
 	box-shadow: none;
 	position: relative;
-
-	#expander-checkbox ~ label::after {
-		content: 'Show more';
-	}
-	#expander-checkbox:checked ~ label::after {
-		content: 'Show less';
-	}
-
-	#expander-checkbox:checked ~ #expander-overlay,
-	#expander-checkbox ~ label #svgminus,
-	#expander-checkbox:checked ~ label #svgplus {
-		display: none;
-	}
 
 	#expander-checkbox:checked ~ label {
 		background: ${neutral[100]};
@@ -52,14 +50,13 @@ const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 		fill: ${neutral[100]};
 	}
 
-	#expander-checkbox ~ label #svgplus,
-	#expander-checkbox:checked ~ label #svgminus {
-		display: block;
-	}
-
 	#expander-checkbox:checked ~ #collapsible-body {
 		max-height: fit-content;
 		margin-bottom: ${remSpace[6]};
+	}
+
+	#expander-checkbox:focus ~ #collapsible-body {
+		${focusHalo};
 	}
 `;
 
@@ -127,43 +124,56 @@ const buttonIcon = css`
 	}
 `;
 
-// TODO: Use the expanding wrapper I've put in source-kitchen
 const ExpandingWrapper: FC<ExpandingWrapperProps> = ({
 	format,
 	renderExtra,
 	children,
+	name,
 }) => {
+	const [isExpanded, setIsExpanded] = useState(false);
 	return (
 		<div id="expander" css={containerStyles(format)}>
 			<input
 				type="checkbox"
 				css={css`
-					visibility: hidden;
 					${visuallyHidden};
 				`}
 				id="expander-checkbox"
 				name="expander-checkbox"
-				tabIndex={-1}
-				key="PinnedPostCheckbox"
+				onChange={(e) => setIsExpanded(e.target.checked)}
+				aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${name}`}
 			/>
-			<div id="collapsible-body" css={collapsibleBody}>
+			<div
+				id="collapsible-body"
+				css={collapsibleBody}
+				aria-hidden={!isExpanded}
+			>
 				{children}
 			</div>
+
 			<div id="expander-overlay" css={overlayStyles} />
+
 			<label
 				aria-hidden={true}
 				css={fakeButtonStyles(format)}
 				htmlFor="expander-checkbox"
 				id="expander-button"
 			>
-				<>
-					<span id="svgminus" css={buttonIcon}>
-						<SvgMinus />
-					</span>
-					<span id="svgplus" css={buttonIcon}>
-						<SvgPlus />
-					</span>
-				</>
+				{isExpanded ? (
+					<>
+						<span id="svgminus" css={buttonIcon}>
+							<SvgMinus />
+						</span>
+						Show Less
+					</>
+				) : (
+					<>
+						<span id="svgplus" css={buttonIcon}>
+							<SvgPlus />
+						</span>
+						Show More
+					</>
+				)}
 			</label>
 			{renderExtra?.()}
 		</div>
