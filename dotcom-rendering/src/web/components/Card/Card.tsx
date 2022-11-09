@@ -409,20 +409,19 @@ export const Card = ({
 							displayAge={displayAge}
 							renderFooter={renderFooter}
 						/>
-
-						{hasSublinks && noOfSublinks <= 2 ? (
-							<SupportingContent
-								supportingContent={supportingContent}
-								alignment="vertical"
-								containerPalette={containerPalette}
-								isDynamo={isDynamo}
-							/>
-						) : (
-							<></>
-						)}
 					</div>
 				</ContentWrapper>
 			</CardLayout>
+			{hasSublinks && noOfSublinks <= 2 ? (
+				<SupportingContent
+					supportingContent={supportingContent}
+					alignment="vertical"
+					containerPalette={containerPalette}
+					isDynamo={isDynamo}
+				/>
+			) : (
+				<></>
+			)}
 			{hasSublinks && noOfSublinks > 2 ? (
 				<SupportingContent
 					supportingContent={supportingContent}
