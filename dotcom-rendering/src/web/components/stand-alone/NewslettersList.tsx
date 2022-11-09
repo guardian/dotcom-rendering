@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations/dist/cjs/typography/api';
+import { EmailSignup } from '../EmailSignup';
 import { Section } from '../Section';
 
 export interface NewslettersListProps {
@@ -19,11 +20,10 @@ export const NewslettersList = ({ newsletters }: NewslettersListProps) => (
 		</Section>
 		<Section>
 			<p>We have {newsletters.length} of them </p>
-			<ul>
-				{newsletters.map((newsletter) => (
-					<li>{newsletter.name}</li>
-				))}
-			</ul>
+
+			{newsletters.map((newsletter) => (
+				<EmailSignup {...newsletter} />
+			))}
 		</Section>
 	</main>
 );

@@ -13,6 +13,12 @@ import {
 export const buildStandAlonePage = (req: Request): string | undefined => {
 	const query = req.query as Record<string, string | undefined>;
 	const { page: pageName } = query;
+
+	// TO DO - parsing a model and view type object from req
+	// maybe use middleware to provide default static data on the dev server
+	// copy pattern from  getContentFromURLMiddleware?
+	// for live, will need to parse posted data sent by frontend out of req.body
+
 	const key = 'dcr';
 	const cache = createCache({ key });
 

@@ -1,4 +1,5 @@
 import { css, Global } from '@emotion/react';
+import { ArticlePillar } from '@guardian/libs';
 import {
 	brandAlt,
 	brandBackground,
@@ -89,7 +90,20 @@ const STATIC_NAV: NavType = {
 			supporter: 'contribute',
 		},
 	},
-	pillars: [],
+	pillars: [
+		{
+			url: '/',
+			title: 'News',
+			longTitle: 'News',
+			pillar: ArticlePillar.News,
+		},
+		{
+			url: '/commentisfree',
+			title: 'Opinion',
+			longTitle: 'Opinion',
+			pillar: ArticlePillar.Opinion,
+		},
+	],
 };
 
 /**
