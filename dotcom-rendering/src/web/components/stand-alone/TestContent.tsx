@@ -1,4 +1,4 @@
-import { Section } from '../../components/Section';
+import { Section } from '../Section';
 
 export interface TestContentProps {
 	message: string;
