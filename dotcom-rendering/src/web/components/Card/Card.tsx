@@ -186,10 +186,10 @@ const decideSublinkPosition = (
 	if (!supportingContent || supportingContent.length === 0) {
 		return 'none';
 	}
-	if (imagePosition === 'top') {
+	if (imagePosition === 'top' || supportingContent.length > 2) {
 		return 'outer';
 	}
-	return supportingContent.length > 2 ? 'outer' : 'inner';
+	return 'inner';
 };
 
 export const Card = ({
