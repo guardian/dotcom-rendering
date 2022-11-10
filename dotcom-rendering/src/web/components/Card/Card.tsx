@@ -179,6 +179,19 @@ const getImage = ({
 	return undefined;
 };
 
+const decideSublinkPosition = (
+	supportingContent?: DCRSupportingContent[],
+	imagePosition?: ImagePositionType,
+): 'inner' | 'outer' | 'none' => {
+	if (!supportingContent || supportingContent.length === 0) {
+		return 'none';
+	}
+	if (imagePosition === 'top' || supportingContent.length > 2) {
+		return 'outer';
+	}
+	return 'inner';
+};
+
 export const Card = ({
 	linkTo,
 	format,
@@ -216,7 +229,10 @@ export const Card = ({
 	const palette = decidePalette(format, containerPalette);
 
 	const hasSublinks = supportingContent && supportingContent.length > 0;
-	const noOfSublinks = supportingContent?.length ?? 0;
+	const sublinkPosition = decideSublinkPosition(
+		supportingContent,
+		imagePosition,
+	);
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||
@@ -409,8 +425,7 @@ export const Card = ({
 							displayAge={displayAge}
 							renderFooter={renderFooter}
 						/>
-
-						{hasSublinks && noOfSublinks <= 2 ? (
+						{hasSublinks && sublinkPosition === 'inner' ? (
 							<SupportingContent
 								supportingContent={supportingContent}
 								alignment="vertical"
@@ -424,7 +439,8 @@ export const Card = ({
 					</div>
 				</ContentWrapper>
 			</CardLayout>
-			{hasSublinks && noOfSublinks > 2 ? (
+
+			{hasSublinks && sublinkPosition === 'outer' ? (
 				<SupportingContent
 					supportingContent={supportingContent}
 					parentFormat={format}
