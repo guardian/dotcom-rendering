@@ -31,28 +31,28 @@ export const HeaderTopBarEditionDropdown = ({
 			url: '/preference/edition/uk',
 			isActive: editionId === 'UK',
 			title: 'UK edition',
-			dataLinkName: 'nav2 : topbar : edition-picker: UK',
+			dataLinkName: 'nav3 : topbar : edition-picker: UK',
 		},
 		{
 			id: 'us',
 			url: '/preference/edition/us',
 			isActive: editionId === 'US',
 			title: 'US edition',
-			dataLinkName: 'nav2 : topbar : edition-picker: US',
+			dataLinkName: 'nav3 : topbar : edition-picker: US',
 		},
 		{
 			id: 'au',
 			url: '/preference/edition/au',
 			isActive: editionId === 'AU',
 			title: 'Australia edition',
-			dataLinkName: 'nav2 : topbar : edition-picker: AU',
+			dataLinkName: 'nav3 : topbar : edition-picker: AU',
 		},
 		{
 			id: 'int',
 			url: '/preference/edition/int',
 			isActive: editionId === 'INT',
 			title: 'International edition',
-			dataLinkName: 'nav2 : topbar : edition-picker: INT',
+			dataLinkName: 'nav3 : topbar : edition-picker: INT',
 		},
 	];
 

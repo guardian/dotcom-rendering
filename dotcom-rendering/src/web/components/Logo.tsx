@@ -52,7 +52,7 @@ export const Logo = ({ editionId }: Props) => {
 	switch (editionId) {
 		case 'UK':
 			return (
-				<a css={linkStyles} href="/" data-link-name="nav2 : logo">
+				<a css={linkStyles} href="/" data-link-name="nav3 : logo">
 					<span
 						css={css`
 							${visuallyHidden};
@@ -69,7 +69,7 @@ export const Logo = ({ editionId }: Props) => {
 
 		default:
 			return (
-				<a css={linkStyles} href="/" data-link-name="nav2 : logo">
+				<a css={linkStyles} href="/" data-link-name="nav3 : logo">
 					<span
 						css={css`
 							${visuallyHidden};

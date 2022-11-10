@@ -36,7 +36,7 @@ export const HeaderSingleFrontDoor = ({
 		<Island deferUntil="idle">
 			<HeaderTopBar
 				editionId={editionId}
-				dataLinkName="nav2 : topbar : edition-picker: toggle"
+				dataLinkName="nav3 : topbar : edition-picker: toggle"
 				idUrl={idUrl}
 				mmaUrl={mmaUrl}
 				discussionApiUrl={discussionApiUrl}
@@ -51,12 +51,12 @@ export const HeaderSingleFrontDoor = ({
 				`,
 			]}
 		>
-			<Logo />
+			<Logo editionId={editionId} />
 			<Island deferUntil="idle" clientOnly={true}>
 				<SupportTheG
 					urls={urls}
 					editionId={editionId}
-					dataLinkNamePrefix="nav2 : "
+					dataLinkNamePrefix="nav3 : "
 					inHeader={true}
 					remoteHeader={remoteHeader}
 					contributionsServiceUrl={contributionsServiceUrl}

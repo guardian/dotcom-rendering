@@ -60,7 +60,7 @@ const myAccountLinkStyles = css`
 		width: 18px;
 		margin: 3px 4px 0 0;
 	}
-	${getZIndex('myAccountDropdown')}
+	${getZIndex('dropdown')}
 `;
 
 export const buildIdentityLinks = (
@@ -77,43 +77,43 @@ export const buildIdentityLinks = (
 			id: 'account_overview',
 			url: `${mmaUrl}/`,
 			title: 'Account overview',
-			dataLinkName: 'nav2 : topbar : account overview',
+			dataLinkName: 'nav3 : topbar : account overview',
 		},
 		{
 			id: 'edit_profile',
 			url: `${mmaUrl}/public-settings`,
 			title: 'Profile',
-			dataLinkName: 'nav2 : topbar : edit profile',
+			dataLinkName: 'nav3 : topbar : edit profile',
 		},
 		{
 			id: 'email_prefs',
 			url: `${mmaUrl}/email-prefs`,
 			title: 'Emails & marketing',
-			dataLinkName: 'nav2 : topbar : email prefs',
+			dataLinkName: 'nav3 : topbar : email prefs',
 		},
 		{
 			id: 'settings',
 			url: `${mmaUrl}/account-settings`,
 			title: 'Settings',
-			dataLinkName: 'nav2 : topbar : settings',
+			dataLinkName: 'nav3 : topbar : settings',
 		},
 		{
 			id: 'help',
 			url: `${mmaUrl}/help`,
 			title: 'Help',
-			dataLinkName: 'nav2 : topbar : help',
+			dataLinkName: 'nav3 : topbar : help',
 		},
 		{
 			id: 'comment_activity',
 			url: `${idUrl}/user/id/${userId}`,
 			title: 'Comments & replies',
-			dataLinkName: 'nav2 : topbar : comment activity',
+			dataLinkName: 'nav3 : topbar : comment activity',
 		},
 		{
 			id: 'sign_out',
 			url: `${idUrl}/signout`,
 			title: 'Sign out',
-			dataLinkName: 'nav2 : topbar : sign out',
+			dataLinkName: 'nav3 : topbar : sign out',
 		},
 	];
 
@@ -126,7 +126,7 @@ const SignIn = ({ idUrl }: { idUrl: string }) => (
 		href={`${idUrl}/signin?INTCMP=DOTCOM_NEWHEADER_SIGNIN&ABCMP=ab-sign-in&${createAuthenticationEventParams(
 			'guardian_signin_header',
 		)}`}
-		data-link-name="nav2 : topbar : signin"
+		data-link-name="nav3 : topbar : signin"
 	>
 		<ProfileIcon /> Sign in
 	</a>
@@ -190,7 +190,7 @@ const SignedInWithNotifications = ({
 				label="My account"
 				links={identityLinksWithNotifications}
 				id="my-account"
-				dataLinkName="nav2 : topbar: my account"
+				dataLinkName="nav3 : topbar: my account"
 				cssOverrides={dropDownOverrides}
 			/>
 		</div>

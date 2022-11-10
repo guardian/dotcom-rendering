@@ -66,7 +66,7 @@ export const HeaderTopBar = ({
 
 				<Search
 					href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
-					dataLinkName="nav2 : search"
+					dataLinkName="nav3 : search"
 				/>
 				<Hide when="below" breakpoint="desktop">
 					<HeaderTopBarEditionDropdown

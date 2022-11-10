@@ -38,7 +38,7 @@ export const SearchJobs = () => {
 			<a
 				href="https://jobs.theguardian.com/?INTCMP=jobs_uk_web_newheader"
 				css={searchLinkStyles}
-				data-link-name="nav2 : job-cta"
+				data-link-name="nav3 : job-cta"
 			>
 				Search jobs
 			</a>
