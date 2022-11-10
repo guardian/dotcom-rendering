@@ -3,6 +3,7 @@ name: AR Snyk
 on:
     schedule:
         - cron: "0 9 * * 1-5"
+    pull_request:
 
 jobs:
     snyk:
