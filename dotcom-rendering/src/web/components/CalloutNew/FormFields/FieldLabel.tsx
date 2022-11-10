@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { neutral, textSans } from '@guardian/source-foundations';
+import { ReactElement } from 'react';
 
 const fieldLabelStyles = css`
 	${textSans.medium({ fontWeight: 'bold' })}
@@ -16,7 +17,13 @@ const optionalTextStyles = css`
 	padding-left: 5px;
 `;
 
-export const FieldLabel = ({ formField }: { formField: CampaignField }) => (
+export const FieldLabel = ({
+	formField,
+	children,
+}: {
+	formField: CampaignField;
+	children?: ReactElement;
+}) => (
 	<label css={fieldLabelStyles} htmlFor={formField.name}>
 		{formField.label}
 		{!formField.required && (
@@ -27,5 +34,6 @@ export const FieldLabel = ({ formField }: { formField: CampaignField }) => (
 				<span css={fieldDescription}>{`${formField.description}`}</span>
 			</div>
 		)}
+		{children && children}
 	</label>
 );

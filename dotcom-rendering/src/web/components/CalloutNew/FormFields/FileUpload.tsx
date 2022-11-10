@@ -77,20 +77,23 @@ export const FileUpload = ({
 	};
 	return (
 		<>
-			<FieldLabel formField={formField} />
-			<div css={customUpload(format)}>
-				Choose file
-				<input
-					data-testid={`form-field-${formField.id}`}
-					type="file"
-					accept="image/*, .pdf"
-					required={formField.required}
-					onChange={onSelectFile}
-					css={css`
-						${visuallyHidden}
-					`}
-				/>
-			</div>
+			<FieldLabel formField={formField}>
+				<div css={customUpload(format)}>
+					Choose file
+					<input
+						id={formField.name}
+						data-testid={`form-field-${formField.id}`}
+						type="file"
+						accept="image/*, .pdf"
+						required={formField.required}
+						onChange={onSelectFile}
+						css={css`
+							${visuallyHidden}
+						`}
+					/>
+				</div>
+			</FieldLabel>
+
 			{chosenFile != null && (
 				<>
 					{!formField.required && (
