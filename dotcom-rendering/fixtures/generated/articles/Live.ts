@@ -11,9 +11,9 @@
  *    gen-fixtures.ts directly.
  */
 
-import type { CAPIArticleType } from '../../../src/types/frontend';
+import type { FEArticleType } from '../../../src/types/frontend';
 
-export const Live: CAPIArticleType = {
+export const Live: FEArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="2dbb8d5200a0c46420d3d9145194d7bcb9311d44"> \n <img src="https://media.guim.co.uk/2dbb8d5200a0c46420d3d9145194d7bcb9311d44/0_178_2048_1229/1000.jpg" alt="Perseverance rover as it touched down in the area known as Jezero crater." width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">Perseverance rover as it touched down in the area known as Jezero crater.</span> \n  <span class="element-image__credit">Photograph: NASA/Getty Images</span> \n </figcaption> \n</figure>',
 	subMetaSectionLinks: [

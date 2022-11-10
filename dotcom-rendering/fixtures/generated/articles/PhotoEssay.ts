@@ -11,9 +11,9 @@
  *    gen-fixtures.ts directly.
  */
 
-import type { CAPIArticleType } from '../../../src/types/frontend';
+import type { FEArticleType } from '../../../src/types/frontend';
 
-export const PhotoEssay: CAPIArticleType = {
+export const PhotoEssay: FEArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="00ddc088d562eef31c3dd50729182c4289d06a49"> <img src="https://media.guim.co.uk/00ddc088d562eef31c3dd50729182c4289d06a49/391_441_2719_1632/1000.jpg" alt="Joe Bracegirdle Lanterdan Quarry above Vean Hole Beach, North Coast Shot for Sidetracked Equipped" width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">Joe Bracegirdle at Lanterdan Quarry, above Vean Hole beach, north Cornwall. All photographs: Cat Vinton/The Guardian</span> <span class="element-image__credit">Photograph: The Guardian</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
