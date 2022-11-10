@@ -148,16 +148,16 @@ export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 			}}
 		>
 			<CalloutTermsAndConditions format={format} />
-			{formFields.map((formField, index) => (
+			{formFields.map((formField) => (
 				<div
 					css={formFieldWrapperStyles}
 					// we use custom-guardian to find 1st field for accessibility
 					// ideally we should useRef but need to wait for Source to
 					// support React references
 					custom-guardian="callout-form-field"
-					key={index}
 				>
 					<FormField
+						key={formField.id}
 						format={format}
 						formField={formField}
 						formData={formData}
