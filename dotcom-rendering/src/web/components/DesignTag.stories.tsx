@@ -5,6 +5,7 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
+import { tags } from 'fixtures/manual/tags';
 import { DesignTag } from './DesignTag';
 
 export default {
@@ -20,6 +21,7 @@ export const Analysis = () => {
 				display: ArticleDisplay.Standard,
 				theme: ArticlePillar.News,
 			}}
+			tags={tags}
 		/>
 	);
 };
@@ -38,6 +40,7 @@ export const Interview = () => {
 					display: ArticleDisplay.Standard,
 					theme: ArticlePillar.Sport,
 				}}
+				tags={tags}
 			/>
 		</div>
 	);
@@ -52,6 +55,7 @@ export const SpecialReport = () => {
 				display: ArticleDisplay.Standard,
 				theme: ArticleSpecial.SpecialReport,
 			}}
+			tags={tags}
 		/>
 	);
 };
