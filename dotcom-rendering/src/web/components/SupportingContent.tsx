@@ -35,6 +35,9 @@ const directionStyles = (alignment: Alignment) => {
 		case 'vertical':
 			return css`
 				flex-direction: column;
+				${from.phablet} {
+					flex-direction: row;
+				}
 			`;
 	}
 };
