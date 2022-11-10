@@ -146,7 +146,7 @@ export const ShowMore = ({
 			>
 				<Button
 					priority="tertiary"
-					size="xsmall"
+					size="small"
 					icon={isOpen ? <SvgCross /> : <SvgPlus />}
 					isLoading={loading}
 					iconSide="left"
