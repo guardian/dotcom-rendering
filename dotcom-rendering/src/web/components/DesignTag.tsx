@@ -120,11 +120,27 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 					</Tag>
 				</Margins>
 			);
-		case ArticleDesign.Interview:
+		case ArticleDesign.Review:
 			return (
 				<Margins format={format}>
 					<Tag format={format}>
-						<TagLink href="/tone/interview">Interview</TagLink>
+						<TagLink href="/tone/reviews">Review</TagLink>
+					</Tag>
+				</Margins>
+			);
+		case ArticleDesign.Letter:
+			return (
+				<Margins format={format}>
+					<Tag format={format}>
+						<TagLink href="/tone/letters">Letter</TagLink>
+					</Tag>
+				</Margins>
+			);
+		case ArticleDesign.Obituary:
+			return (
+				<Margins format={format}>
+					<Tag format={format}>
+						<TagLink href="/tone/obituarys">Obituary</TagLink>
 					</Tag>
 				</Margins>
 			);
