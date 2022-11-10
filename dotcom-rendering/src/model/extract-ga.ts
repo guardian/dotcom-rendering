@@ -2,6 +2,7 @@
 
 import type { EditionId } from 'src/types/edition';
 import type { FEArticleType } from '../types/frontend';
+import type { TagType } from '../types/tag';
 
 const filterTags = (
 	tags: FEArticleType['tags'],
