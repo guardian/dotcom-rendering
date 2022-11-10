@@ -102,7 +102,13 @@ const TagLink = ({
 	);
 };
 
-export const DesignTag = ({ format }: { format: ArticleFormat }) => {
+export const DesignTag = ({
+	format,
+	tags,
+}: {
+	format: ArticleFormat;
+	tags: TagType[];
+}) => {
 	switch (format.design) {
 		case ArticleDesign.Analysis:
 			return (
@@ -144,6 +150,25 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 					</Tag>
 				</Margins>
 			);
+		case ArticleDesign.Feature:
+			if (tags.find((tag) => tag.title === 'tone/profiles')) {
+				return (
+					<Margins format={format}>
+						<Tag format={format}>
+							<TagLink href="tone/profiles">Profile</TagLink>
+						</Tag>
+					</Margins>
+				);
+			} else if (tags.find((tag) => tag.title === 'tone/timeline')) {
+				return (
+					<Margins format={format}>
+						<Tag format={format}>
+							<TagLink href="tone/timeline">Timeline</TagLink>
+						</Tag>
+					</Margins>
+				);
+			} else return null;
+
 		default:
 			return null;
 	}

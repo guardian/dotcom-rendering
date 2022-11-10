@@ -516,7 +516,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
-								<DesignTag format={format} />
+								<DesignTag format={format} tags={tags} />
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
@@ -550,7 +550,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
-								<DesignTag format={format} />
+								<DesignTag format={format} tags={tags} />
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
@@ -591,7 +591,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
-								<DesignTag format={format} />
+								<DesignTag format={format} tags={tags} />
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
@@ -631,7 +631,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
-								<DesignTag format={format} />
+								<DesignTag format={format} tags={tags} />
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
@@ -680,7 +680,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
-								<DesignTag format={format} />
+								<DesignTag format={format} tags={tags} />
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
@@ -721,7 +721,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
-								<DesignTag format={format} />
+								<DesignTag format={format} tags={tags} />
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
@@ -761,7 +761,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
-								<DesignTag format={format} />
+								<DesignTag format={format} tags={tags} />
 								<h1
 									className={
 										interactiveLegacyClasses.headline
@@ -797,7 +797,7 @@ export const ArticleHeadline = ({
 								}
 								format={format}
 							>
-								<DesignTag format={format} />
+								<DesignTag format={format} tags={tags} />
 								<h1
 									css={[
 										format.theme === ArticleSpecial.Labs
