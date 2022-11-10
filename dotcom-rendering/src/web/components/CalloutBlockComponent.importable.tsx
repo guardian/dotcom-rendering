@@ -103,6 +103,7 @@ export const CalloutBlockComponent = ({
 			setError('Sorry we think you are a robot.');
 			return;
 		}
+
 		// need to add prefix `field_` to all keys in form
 		const formDataWithFieldPrefix = Object.keys(formData).reduce(
 			(acc, cur) => ({
@@ -111,7 +112,6 @@ export const CalloutBlockComponent = ({
 			}),
 			{},
 		);
-
 		return fetch(callout.calloutsUrl, {
 			method: 'POST',
 			body: JSON.stringify({
@@ -129,7 +129,7 @@ export const CalloutBlockComponent = ({
 					setSubmissionSuccess(true);
 				} else {
 					setError(
-						'Sorry, there was a xblem submitting your form. Please try again later.',
+						'Sorry, there was a problem submitting your form. Please try again later.',
 					);
 				}
 			})
@@ -138,6 +138,7 @@ export const CalloutBlockComponent = ({
 					respError,
 					'callout-embed-submission',
 				);
+
 				setError(
 					'Sorry, there was a problem submitting your form. Please try again later.',
 				);
@@ -170,7 +171,7 @@ export const CalloutBlockComponent = ({
 					<CalloutShareComponent format={format} />
 					<Form
 						formFields={formFields}
-						onSubmit={() => {}}
+						onSubmit={onSubmit}
 						format={format}
 					/>
 				</details>

@@ -1,4 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import fetchMock from 'fetch-mock';
 import { calloutCampaign } from '../../../fixtures/manual/calloutCampaign';
 import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
 
@@ -9,6 +10,15 @@ const mockFormat = {
 };
 
 export const Collapsible = () => {
+	fetchMock
+		.restore()
+		.post(
+			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
+			{
+				status: 201,
+				body: null,
+			},
+		);
 	return (
 		<CalloutBlockComponent
 			isNonCollapsible={false}
@@ -21,6 +31,15 @@ export const Collapsible = () => {
 Collapsible.story = { name: 'Collapsible' };
 
 export const NonCollapsible = () => {
+	fetchMock
+		.restore()
+		.post(
+			'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
+			{
+				status: 201,
+				body: null,
+			},
+		);
 	return (
 		<CalloutBlockComponent
 			isNonCollapsible={true}
