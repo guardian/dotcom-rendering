@@ -5,6 +5,7 @@ import { Deadline } from './CalloutNew/CalloutDeadline';
 import { CalloutShareComponent } from './CalloutNew/CalloutShareComponent';
 import { Form } from './CalloutNew/Form';
 import { ExpandingWrapper } from './ExpandingWrapper';
+import { useState } from 'react';
 
 const wrapperStyles = css`
 	margin-bottom: ${space[6]}px;
@@ -79,6 +80,8 @@ const activeUntilStyles = css`
 	display: block;
 `;
 
+type FormDataType = { [key in string]: any };
+
 export const CalloutBlockComponent = ({
 	callout,
 	format,
@@ -88,8 +91,62 @@ export const CalloutBlockComponent = ({
 	format: ArticleFormat;
 	isNonCollapsible: boolean;
 }) => {
+	const [error, setError] = useState('');
+	const [submissionSuccess, setSubmissionSuccess] = useState(false);
 	const { title, description, formFields, activeUntil } = callout;
 
+	const onSubmit = async (formData: FormDataType) => {
+		// Reset error for new submission attempt
+		setError('');
+
+		if (formData.twitterHandle) {
+			setError('Sorry we think you are a robot.');
+			return;
+		}
+		// need to add prefix `field_` to all keys in form
+		const formDataWithFieldPrefix = Object.keys(formData).reduce(
+			(acc, cur) => ({
+				...acc,
+				[`field_${cur}`]: formData[cur],
+			}),
+			{},
+		);
+
+		return fetch(callout.calloutsUrl, {
+			method: 'POST',
+			body: JSON.stringify({
+				formId: callout.formId,
+				// TODO: check if we need to send this
+				'twitter-handle': '',
+				...formDataWithFieldPrefix,
+			}),
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+		})
+			.then((resp) => {
+				if (resp.status === 201) {
+					setSubmissionSuccess(true);
+				} else {
+					setError(
+						'Sorry, there was a xblem submitting your form. Please try again later.',
+					);
+				}
+			})
+			.catch((respError) => {
+				window.guardian.modules.sentry.reportError(
+					respError,
+					'callout-embed-submission',
+				);
+				setError(
+					'Sorry, there was a problem submitting your form. Please try again later.',
+				);
+			});
+	};
+
+	if (submissionSuccess) {
+		return <>Thanks! </>;
+	}
 	return (
 		<aside>
 			{isNonCollapsible ? (
@@ -139,7 +196,8 @@ export const CalloutBlockComponent = ({
 						<CalloutShareComponent format={format} />
 						<Form
 							formFields={formFields}
-							onSubmit={() => {}}
+							onSubmit={onSubmit}
+							error={error}
 							format={format}
 						/>
 					</details>

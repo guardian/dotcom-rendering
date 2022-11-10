@@ -1,6 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { calloutCampaign } from '../../../fixtures/manual/calloutCampaign';
-import { CalloutBlockComponent } from './CalloutBlockComponentNew.importable';
+import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
 
 const mockFormat = {
 	display: ArticleDisplay.Standard,
@@ -34,5 +34,5 @@ NonCollapsible.story = { name: 'NonCollapsible' };
 
 export default {
 	component: CalloutBlockComponent,
-	title: 'Components/CalloutBlockComponentNew',
+	title: 'Components/CalloutBlockComponent',
 };
