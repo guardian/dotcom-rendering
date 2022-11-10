@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source-foundations';
+import React from 'react';
 import { verticalDivider } from '../../../lib/verticalDivider';
 import { verticalDividerWithBottomOffset } from '../../../lib/verticalDividerWithBottomOffset';
 
@@ -34,6 +35,13 @@ const snapAlignStartStyles = css`
 	/* Snap start of card */
 	scroll-snap-align: start;
 `;
+
+const combinePercentages = (
+	perc1: CardPercentageType,
+	perc2: CardPercentageType,
+): CardPercentageType => {
+	return 'combined';
+};
 
 const decideSize = (percentage?: CardPercentageType, stretch?: boolean) => {
 	let sizeStyle;
@@ -82,6 +90,7 @@ type Props = {
 	/** Prevent the divider from spanning the LI's bottom padding. To be used when you know that the
 	LI will have bottom padding, but won't have another card in the same container directly below it. */
 	offsetBottomPaddingOnDivider?: boolean;
+	parentPercentage?: CardPercentageType;
 };
 
 export const LI = ({
@@ -93,9 +102,30 @@ export const LI = ({
 	padSidesOnMobile = false,
 	snapAlignStart = false,
 	offsetBottomPaddingOnDivider = false,
+	parentPercentage,
 }: Props) => {
 	// Decide sizing
 	const sizeStyles = decideSize(percentage, stretch);
+
+	const getPercentage = () => {
+		if (parentPercentage && percentage)
+			return combinePercentages(parentPercentage, percentage);
+
+		if (parentPercentage && !percentage) return parentPercentage;
+
+		return percentage;
+	};
+
+	const childrenWithProps = React.Children.map(children, (child) => {
+		// Checking isValidElement is the safe way and avoids a
+		// typescript error too.
+		if (React.isValidElement(child)) {
+			return React.cloneElement(child, {
+				parentPercentage: getPercentage(),
+			} as Partial<unknown>);
+		}
+		return child;
+	});
 
 	return (
 		<li
@@ -108,7 +138,7 @@ export const LI = ({
 				snapAlignStart && snapAlignStartStyles,
 			]}
 		>
-			{children}
+			{childrenWithProps}
 		</li>
 	);
 };

@@ -42,7 +42,8 @@ const ColumnOfCards50_Card50 = ({
 					headlineSizeOnMobile="large"
 					imagePositionOnMobile="top"
 					showAge={showAge}
-					supportingContent={big.supportingContent}
+					supportingContent={big.supportingContent?.slice(0, 3)}
+					supportingContentAlignmentHint="horizontal"
 				/>
 			</LI>
 			<LI percentage="50%">

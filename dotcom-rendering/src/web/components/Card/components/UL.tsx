@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source-foundations';
+import React from 'react';
 import { verticalDivider } from '../../../lib/verticalDivider';
 
 type Direction = 'row' | 'column' | 'row-reverse';
@@ -35,6 +36,7 @@ type Props = {
 	padBottom?: boolean;
 	/** Used to keep cards aligned in adjacent columns */
 	wrapCards?: boolean;
+	parentPercentage?: CardPercentageType;
 };
 
 export const UL = ({
@@ -43,7 +45,19 @@ export const UL = ({
 	showDivider = false,
 	padBottom = false,
 	wrapCards = false,
+	parentPercentage,
 }: Props) => {
+	const childrenWithProps = React.Children.map(children, (child) => {
+		// Checking isValidElement is the safe way and avoids a
+		// typescript error too.
+		if (React.isValidElement(child)) {
+			return React.cloneElement(child, {
+				parentPercentage,
+			} as Partial<unknown>);
+		}
+		return child;
+	});
+
 	return (
 		<ul
 			css={[
@@ -53,7 +67,7 @@ export const UL = ({
 				wrapCards && wrapStyles,
 			]}
 		>
-			{children}
+			{childrenWithProps}
 		</ul>
 	);
 };

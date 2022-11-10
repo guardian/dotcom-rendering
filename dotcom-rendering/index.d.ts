@@ -334,6 +334,7 @@ type LineEffectType = 'labs' | 'dotted' | 'straight';
 type LeftColSize = 'compact' | 'wide';
 
 type CardPercentageType =
+	| 'combined'
 	| '25%'
 	| '33.333%'
 	| '50%'

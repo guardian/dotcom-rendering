@@ -20,6 +20,7 @@ import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
 import { Snap } from '../Snap';
 import { StarRating } from '../StarRating/StarRating';
+import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
 import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
@@ -65,6 +66,7 @@ export type Props = {
 	/** Only used on Labs cards */
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
+	supportingContentAlignmentHint: Alignment;
 	snapData?: DCRSnapType;
 	containerPalette?: DCRContainerPalette;
 	containerType?: DCRContainerType;
@@ -72,6 +74,7 @@ export type Props = {
 	discussionId?: string;
 	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
 	isDynamo?: true;
+	parentPercentage?: CardPercentageType;
 };
 
 const StarRatingComponent = ({ rating }: { rating: number }) => (
@@ -182,10 +185,19 @@ const getImage = ({
 const decideSublinkPosition = (
 	supportingContent?: DCRSupportingContent[],
 	imagePosition?: ImagePositionType,
+	imageSize?: ImageSizeType,
 ): 'inner' | 'outer' | 'none' => {
 	if (!supportingContent || supportingContent.length === 0) {
 		return 'none';
 	}
+
+	if (
+		imageSize === 'jumbo' &&
+		(imagePosition === 'left' || imagePosition === 'right')
+	) {
+		return supportingContent.length > 3 ? 'outer' : 'inner';
+	}
+
 	if (imagePosition === 'top' || supportingContent.length > 2) {
 		return 'outer';
 	}
@@ -219,19 +231,23 @@ export const Card = ({
 	dataLinkName,
 	branding,
 	supportingContent,
+	supportingContentAlignmentHint = 'vertical',
 	snapData,
 	containerPalette,
 	containerType,
 	showAge = false,
 	discussionId,
 	isDynamo,
+	parentPercentage,
 }: Props) => {
+	console.log(parentPercentage, linkTo);
 	const palette = decidePalette(format, containerPalette);
 
 	const hasSublinks = supportingContent && supportingContent.length > 0;
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
 		imagePosition,
+		imageSize,
 	);
 
 	const isOpinion =
@@ -446,13 +462,7 @@ export const Card = ({
 					parentFormat={format}
 					containerPalette={containerPalette}
 					isDynamo={isDynamo}
-					alignment={
-						imagePosition === 'top' ||
-						imagePosition === 'bottom' ||
-						imageUrl === undefined
-							? 'vertical'
-							: 'horizontal'
-					}
+					alignment={supportingContentAlignmentHint}
 				/>
 			) : (
 				<></>

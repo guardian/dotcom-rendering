@@ -7,7 +7,7 @@ import type {
 } from '../../types/front';
 import { CardHeadline } from './CardHeadline';
 
-type Alignment = 'vertical' | 'horizontal';
+export type Alignment = 'vertical' | 'horizontal';
 
 type Props = {
 	supportingContent: DCRSupportingContent[];
@@ -30,7 +30,7 @@ const directionStyles = (alignment: Alignment) => {
 		case 'horizontal':
 			return css`
 				flex-direction: column;
-				${from.phablet} {
+				${from.tablet} {
 					flex-direction: row;
 				}
 			`;

@@ -74,7 +74,8 @@ export const Card50_Card50 = ({
 				containerPalette={containerPalette}
 				showAge={showAge}
 				trailText={cards[0].trailText}
-				supportingContent={cards[0].supportingContent}
+				supportingContent={cards[0].supportingContent?.slice(0, 3)}
+				supportingContentAlignmentHint="horizontal"
 				imagePositionOnMobile="top"
 				headlineSize="large"
 			/>
@@ -85,7 +86,8 @@ export const Card50_Card50 = ({
 				containerPalette={containerPalette}
 				showAge={showAge}
 				trailText={cards[1].trailText}
-				supportingContent={cards[1].supportingContent}
+				supportingContent={cards[1].supportingContent?.slice(0, 3)}
+				supportingContentAlignmentHint="horizontal"
 				imagePositionOnMobile="top"
 				headlineSize="large"
 			/>
@@ -114,7 +116,13 @@ export const Card75_Card25 = ({
 				containerPalette={containerPalette}
 				showAge={showAge}
 				trailText={cards[0].trailText}
-				supportingContent={cards[0].supportingContent}
+				supportingContent={cards[0].supportingContent?.slice(0, 3)}
+				supportingContentAlignmentHint={
+					cards[0].supportingContent &&
+					cards[0].supportingContent.length > 2
+						? 'horizontal'
+						: 'vertical'
+				}
 				imagePosition="right"
 				imageSize="large"
 				imagePositionOnMobile="top"
@@ -132,7 +140,7 @@ export const Card75_Card25 = ({
 						? cards[1].trailText
 						: undefined
 				}
-				supportingContent={cards[1].supportingContent}
+				supportingContent={cards[1].supportingContent?.slice(0, 2)}
 				showAge={showAge}
 			/>
 		</LI>
@@ -164,7 +172,7 @@ export const Card25_Card75 = ({
 						? cards[0].trailText
 						: undefined
 				}
-				supportingContent={cards[0].supportingContent}
+				supportingContent={cards[0].supportingContent?.slice(0, 2)}
 				containerPalette={containerPalette}
 				showAge={showAge}
 			/>
@@ -175,7 +183,13 @@ export const Card25_Card75 = ({
 				containerPalette={containerPalette}
 				showAge={showAge}
 				trailText={cards[1].trailText}
-				supportingContent={cards[1].supportingContent}
+				supportingContent={cards[1].supportingContent?.slice(0, 3)}
+				supportingContentAlignmentHint={
+					cards[1].supportingContent &&
+					cards[1].supportingContent.length > 2
+						? 'horizontal'
+						: 'vertical'
+				}
 				headlineSize="large"
 				imagePosition="left"
 				imageSize="large"
@@ -319,7 +333,8 @@ export const Card100PictureTop = ({
 					imageUrl={cards[0].image}
 					imagePosition={'top'}
 					imagePositionOnMobile={'top'}
-					supportingContent={cards[0].supportingContent}
+					supportingContent={cards[0].supportingContent?.slice(0, 4)}
+					supportingContentAlignmentHint="horizontal"
 				/>
 			</LI>
 		</UL>
@@ -362,7 +377,13 @@ export const Card100PictureRight = ({
 							? cards[0].trailText
 							: undefined
 					}
-					supportingContent={cards[0].supportingContent}
+					supportingContent={cards[0].supportingContent?.slice(0, 4)}
+					supportingContentAlignmentHint={
+						cards[0].supportingContent &&
+						cards[0].supportingContent.length > 3
+							? 'horizontal'
+							: 'vertical'
+					}
 				/>
 			</LI>
 		</UL>

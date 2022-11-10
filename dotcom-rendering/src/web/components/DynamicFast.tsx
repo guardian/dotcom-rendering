@@ -57,7 +57,8 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					supportingContent={big.supportingContent}
+					supportingContent={big.supportingContent?.slice(0, 3)}
+					supportingContentAlignmentHint="horizontal"
 					headlineSize="large"
 					trailText={big.trailText}
 					imageUrl={big.image}
@@ -80,9 +81,10 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 										trail={card}
 										containerPalette={containerPalette}
 										showAge={showAge}
-										supportingContent={
-											card.supportingContent
-										}
+										supportingContent={card.supportingContent?.slice(
+											0,
+											2,
+										)}
 										headlineSize="medium"
 										imageUrl={card.image}
 										imagePosition="top"
@@ -147,7 +149,8 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					supportingContent={big.supportingContent}
+					supportingContent={big.supportingContent?.slice(0, 3)}
+					supportingContentAlignmentHint="horizontal"
 					headlineSize="large"
 					trailText={big.trailText}
 					imageUrl={big.image}
