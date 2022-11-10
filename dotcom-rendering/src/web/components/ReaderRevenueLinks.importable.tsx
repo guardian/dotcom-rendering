@@ -156,18 +156,11 @@ const subMessageStyles = css`
 `;
 
 const ReaderRevenueLinksRemote: React.FC<{
-	editionId: EditionId;
 	countryCode: string;
 	pageViewId: string;
 	contributionsServiceUrl: string;
 	ophanRecord: OphanRecordFunction;
-}> = ({
-	editionId,
-	countryCode,
-	pageViewId,
-	contributionsServiceUrl,
-	ophanRecord,
-}) => {
+}> = ({ countryCode, pageViewId, contributionsServiceUrl, ophanRecord }) => {
 	const [supportHeaderResponse, setSupportHeaderResponse] =
 		useState<ModuleData | null>(null);
 	const [SupportHeader, setSupportHeader] = useState<React.FC | null>(null);
@@ -185,7 +178,6 @@ const ReaderRevenueLinksRemote: React.FC<{
 			},
 			targeting: {
 				showSupportMessaging: !shouldHideSupportMessaging(),
-				edition: editionId,
 				countryCode,
 				modulesVersion: MODULES_VERSION,
 				mvtId: Number(
@@ -339,6 +331,15 @@ const ReaderRevenueLinksNative: React.FC<{
 			Subscribe <ArrowRightIcon />
 		</a>
 	);
+	const SupportButton = () => (
+		<a
+			css={linkStyles}
+			href={getUrl('contribute')}
+			data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
+		>
+			Support us <ArrowRightIcon />
+		</a>
+	);
 	const PrimaryButton =
 		editionId === 'UK' ? SubscribeButton : ContributeButton;
 	const SecondaryButton =
@@ -353,8 +354,15 @@ const ReaderRevenueLinksNative: React.FC<{
 				<div css={subMessageStyles}>
 					<div>Available for everyone, funded by readers</div>
 				</div>
-				<PrimaryButton />
-				<SecondaryButton />
+				{/* When in the header, we can assume a remote header is being pulled in */}
+				{inHeader ? (
+					<>
+						<PrimaryButton />
+						<SecondaryButton />
+					</>
+				) : (
+					<SupportButton />
+				)}
 			</div>
 
 			<div css={inHeader ? hiddenFromTablet : hidden}>
@@ -393,7 +401,6 @@ export const ReaderRevenueLinks = ({
 		if (inHeader && remoteHeader) {
 			return (
 				<ReaderRevenueLinksRemote
-					editionId={editionId}
 					countryCode={countryCode}
 					pageViewId={pageViewId}
 					contributionsServiceUrl={contributionsServiceUrl}

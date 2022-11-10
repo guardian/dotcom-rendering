@@ -1,11 +1,15 @@
 import { css } from '@emotion/react';
 import {
 	brandAlt,
-	brandText,
 	from,
+	neutral,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import { SvgGuardianBestWebsiteLogo } from '@guardian/source-react-components';
+import {
+	SvgGuardianBestWebsiteLogo,
+	SvgGuardianLogo,
+} from '@guardian/source-react-components';
+import { EditionId } from '../../types/edition';
 import { getZIndex } from '../lib/getZIndex';
 
 const linkStyles = css`
@@ -39,20 +43,41 @@ const linkStyles = css`
 	${getZIndex('TheGuardian')}
 `;
 
-export const Logo: React.FC = () => {
-	return (
-		<a css={linkStyles} href="/" data-link-name="nav2 : logo">
-			<span
-				css={css`
-					${visuallyHidden};
-				`}
-			>
-				The Guardian - Back to home
-			</span>
-			<SvgGuardianBestWebsiteLogo
-				textColor={brandText.primary}
-				textAccentColor={brandAlt[400]}
-			/>
-		</a>
-	);
+type Props = {
+	editionId: EditionId;
+};
+
+export const Logo = ({ editionId }: Props) => {
+	switch (editionId) {
+		case 'UK':
+			return (
+				<a css={linkStyles} href="/" data-link-name="nav2 : logo">
+					<span
+						css={css`
+							${visuallyHidden};
+						`}
+					>
+						The Guardian - Back to home
+					</span>
+					<SvgGuardianBestWebsiteLogo
+						textColor={neutral[100]}
+						textAccentColor={brandAlt[400]}
+					/>
+				</a>
+			);
+
+		default:
+			return (
+				<a css={linkStyles} href="/" data-link-name="nav2 : logo">
+					<span
+						css={css`
+							${visuallyHidden};
+						`}
+					>
+						The Guardian - Back to home
+					</span>
+					<SvgGuardianLogo textColor={neutral[100]} />
+				</a>
+			);
+	}
 };

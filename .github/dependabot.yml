@@ -23,6 +23,7 @@ updates:
         - dependency-name: 'aws-cdk'
         - dependency-name: 'aws-cdk-lib'
         - dependency-name: 'constructs'
+      open-pull-requests-limit: 7
     - package-ecosystem: "npm"
       directory: "/dotcom-rendering"
       schedule:

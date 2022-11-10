@@ -11,9 +11,9 @@
  *    gen-fixtures.ts directly.
  */
 
-import type { CAPIArticleType } from '../../../src/types/frontend';
+import type { FEArticleType } from '../../../src/types/frontend';
 
-export const Letter: CAPIArticleType = {
+export const Letter: FEArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0"> <img src="https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/1000.jpg" alt="Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975." width="1000" height="797" class="gu-image" /> <figcaption> <span class="element-image__caption">Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.</span> <span class="element-image__credit">Photograph: taken from picture library</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
@@ -23,42 +23,6 @@ export const Letter: CAPIArticleType = {
 		},
 	],
 	commercialProperties: {
-		UK: {
-			adTargeting: [
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'url',
-					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'k',
-					value: ['women', 'family', 'gender'],
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/hx6ty',
-				},
-				{
-					name: 'tn',
-					value: ['letters'],
-				},
-			],
-		},
 		US: {
 			adTargeting: [
 				{
@@ -131,6 +95,42 @@ export const Letter: CAPIArticleType = {
 				},
 			],
 		},
+		UK: {
+			adTargeting: [
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'url',
+					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'k',
+					value: ['women', 'family', 'gender'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/hx6ty',
+				},
+				{
+					name: 'tn',
+					value: ['letters'],
+				},
+			],
+		},
 		INT: {
 			adTargeting: [
 				{
@@ -144,6 +144,42 @@ export const Letter: CAPIArticleType = {
 				{
 					name: 'edition',
 					value: 'int',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'k',
+					value: ['women', 'family', 'gender'],
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/hx6ty',
+				},
+				{
+					name: 'tn',
+					value: ['letters'],
+				},
+			],
+		},
+		EUR: {
+			adTargeting: [
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'url',
+					value: '/world/2021/apr/05/why-is-a-womans-work-never-done',
+				},
+				{
+					name: 'edition',
+					value: 'eur',
 				},
 				{
 					name: 'p',
@@ -840,6 +876,10 @@ export const Letter: CAPIArticleType = {
 						url: '/crosswords/series/azed',
 					},
 				],
+			},
+			{
+				title: 'Corrections',
+				url: '/theguardian/series/corrections-and-clarifications',
 			},
 		],
 		brandExtensions: [
@@ -1539,7 +1579,7 @@ export const Letter: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: 'b661537e-4ec9-47fe-b73b-7feecd193196',
+			elementId: '31e18cc5-f89b-49ff-ac87-39306c622662',
 		},
 	],
 	canonicalUrl:
@@ -1551,17 +1591,17 @@ export const Letter: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Your article (<a href="https://www.theguardian.com/society/2021/mar/30/bob-pape-was-a-beloved-father-and-foster-carer-did-eat-out-to-help-out-cost-him-his-life">Lost to the virus</a>, 30 March) and the <a href="https://www.theguardian.com/uk-news/2021/apr/01/peace-camp-support-for-swiss-army-underwear-move">subsequent letter</a> about women at home “not working” (1 April) reminded me of the 1971-72 television series Budgie,&nbsp;written by Keith Waterhouse and Willis Hall. In one episode, the Soho&nbsp;gangster Charlie&nbsp;Endell (played by Iain Cuthbertson) declared proudly: “Mrs Endell, since the day&nbsp;I married her, has not done a stroke of work – except cooking, cleaning, and bringing up the kids.”<br><strong>Rosemary </strong><strong>Johnson<br></strong><em>Byfield, Northamptonshire</em></p>',
-					elementId: 'd2fe904c-ce13-4aaa-86d9-209cb46e908b',
+					elementId: 'e12cf77f-ad77-4e71-b4c2-9bae6fd460ab',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>• In the 1970s, when feminism was&nbsp;working well, before it lost its way, we referred to women who stay at home as “women who&nbsp;don’t work outside the home”. In other words they had one job, unlike women who “work outside the home”, having two jobs. Then&nbsp;along came Thatcher.<br><strong>Margaret Davis<br></strong><em>Loanhead, Midlothian</em></p>',
-					elementId: '78ab9f81-13a6-4c55-8d57-0b5ce8b21780',
+					elementId: '02e7ec53-a499-43fc-84ca-93c09ad50e9c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>• Maybe the hurried “census” carried out in 1939 got it right by defining wives as undertaking “<a href="https://www.theguardian.com/news/datablog/2015/nov/02/the-1939-register-a-tale-of-a-country-ravaged-by-war">unpaid domestic duties</a>”.<br><strong>Brian Saperia<br></strong><em>Harrow, London</em></p>',
-					elementId: '5a7eae93-1f06-435f-a8bb-5a497e550685',
+					elementId: '51d6a74c-4ecd-451a-ba76-b0f622f0e1ef',
 				},
 			],
 			attributes: {
@@ -1585,7 +1625,7 @@ export const Letter: CAPIArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://amp.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
+			'@id': 'https://www.theguardian.com/world/2021/apr/05/why-is-a-womans-work-never-done',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',

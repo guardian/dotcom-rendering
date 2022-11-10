@@ -2806,10 +2806,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
   integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
 
-"@guardian/atoms-rendering@^23.7.1":
-  version "23.7.1"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-23.7.1.tgz#c696e1a028c9cd2aa20b1baa014726335d1be1ee"
-  integrity sha512-ebf7w7S5IeDQH7SyfhQ6WSXrpBTLsCT4YXtHUUjHGHlV08wbGr+63X9QOWGTIbG6OIfQud0YlfTAUNNFkyk06g==
+"@guardian/atoms-rendering@^23.8.1":
+  version "23.8.1"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-23.8.1.tgz#cd738ef65b67c2d6555952a10ae132c0bcfe4955"
+  integrity sha512-Z+HAoFZB2SMilWs90OLOcqrnkOmY9Xot7Arl6KjvEB5Au4fjzSTQmIxO8iV9j3igNwpQdGm2qp/364A0WpTo8A==
   dependencies:
     is-mobile "^3.1.1"
 
@@ -2823,10 +2823,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/browserslist-config/-/browserslist-config-2.0.3.tgz#1c8b832ab564b257f8146ca1b3183b7683026ec9"
   integrity sha512-mALAjz+4Hb2zLxfVz11PSKp6410boWqf0FFYhgzMKOhby0bZjfEKsQIH//U15M5ELibIMG1ryHSP/SFV4C2ovg==
 
-"@guardian/commercial-core@^4.3.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-4.3.0.tgz#f04bc56d4eedef9feb2a4c844142a7b11082d9bd"
-  integrity sha512-T7aE9kqc0JCNaASh7iHof6+MMOTnoEwinYiIjbJSjMoNRfuMSKIfLpWjZfZ8w58uvOygIx6MJDFTRdyT5J5Fvw==
+"@guardian/commercial-core@^4.21.0":
+  version "4.21.0"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-4.21.0.tgz#d6ad678a563bd82c3ed738bc4f77a0c7494a5120"
+  integrity sha512-OpME2iB6Dosvdu7MF8npzgIeRFOPWwdeSVNaUI3aB1wqU+FQh47cozGk1BASgCXlsUwhhGvQbx5vTBkDiptsgQ==
 
 "@guardian/consent-management-platform@10.11.1":
   version "10.11.1"
@@ -2835,10 +2835,10 @@
   dependencies:
     "@guardian/libs" "^7.1.4"
 
-"@guardian/discussion-rendering@^10.3.0":
-  version "10.3.0"
-  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-10.3.0.tgz#aed59af1693ef3a2d3adf2ab822eed701b684055"
-  integrity sha512-Qmm6BxUhbPG2xGiDSQYlyjB0vm1z7o+YSwS+kdAsXYXfJg85LvrVWWQJ7shQ7tu0s6svcDRzAGyrW30XJY+JDg==
+"@guardian/discussion-rendering@^11.0.3":
+  version "11.0.3"
+  resolved "https://registry.yarnpkg.com/@guardian/discussion-rendering/-/discussion-rendering-11.0.3.tgz#4e18a9e28a0d12a4dc61739b3877478c780b36a9"
+  integrity sha512-2hsYGUzuXHKzyCIOGP42X3CVK11I32krP6fffyP5BuCFSQNgrpje4L9ngWIpOGvHi12T2anYnXI7HyouQDGo0A==
 
 "@guardian/eslint-config-typescript@^1.0.1":
   version "1.0.1"
@@ -2908,10 +2908,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-9.0.0.tgz#9a91775dd6405d9461f7d18b836d8df688143204"
   integrity sha512-A0d0QrqJ+LN+zb8vBLtHqB+aT9gk056tsi2S5oOc0v+pLifZ/y0tOK1htX5EKtjdIjlbsXj0UZc3s+bZtmkHzg==
 
-"@guardian/support-dotcom-components@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.5.tgz#659720c332c62b211efab9a45350c042184a5082"
-  integrity sha512-BVvGeyS5dAD9Qu7NwFUsDou9LN5o9LZH5I4BnVf2Tg7Rj/mxdnO5qPygwI0dKFEbNHql4BEhJqSBdWI9MUSPWw==
+"@guardian/support-dotcom-components@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.6.tgz#47c1c110ba94e29617b9cd0eca6ced87f622cff6"
+  integrity sha512-4VmpVrZ/QOIr1r7nFXI839tavmc7PpXGQ0tJajy/d0YBwYFRswa4Yf+xM2vmM+x5tOZWFnJIlsZifkz10MpbBw==
 
 "@guardian/tsconfig@^0.1.4":
   version "0.1.4"
@@ -7893,9 +7893,9 @@ camelcase@^6.2.0:
   integrity sha512-tVI4q5jjFV5CavAU8DXfza/TJcZutVKo/5Foskmsqcm0MsL91moHvwiGNnqaa2o6PF/7yT5ikDRcVcl8Rj6LCA==
 
 caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001125, caniuse-lite@^1.0.30001286:
-  version "1.0.30001291"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001291.tgz#08a8d2cfea0b2cf2e1d94dd795942d0daef6108c"
-  integrity sha512-roMV5V0HNGgJ88s42eE70sstqGW/gwFndosYrikHthw98N5tLnOTxFqMLQjZVRxTWFlJ4rn+MsgXrR7MDPY4jA==
+  version "1.0.30001429"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001429.tgz"
+  integrity sha512-511ThLu1hF+5RRRt0zYCf2U2yRr9GPF6m5y90SBCWsvSoYoW7yAGlv/elyPaNfvGCkp6kj/KFZWU0BMA69Prsg==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -14682,9 +14682,9 @@ loader-utils@2.0.0:
     json5 "^2.1.2"
 
 loader-utils@^1.0.0, loader-utils@^1.2.3:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-1.4.0.tgz#c579b5e34cb34b1a74edc6c1fb36bfa371d5a613"
-  integrity sha512-qH0WSMBtn/oHuwjy/NucEgbx5dbxxnxup9s4PVXJUDHZBQY+s0NWA9rJf53RBnQZxfch7euUui7hpoAPvALZdA==
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-1.4.1.tgz#278ad7006660bccc4d2c0c1578e17c5c78d5c0e0"
+  integrity sha512-1Qo97Y2oKaU+Ro2xnDMR26g1BwMT29jNbem1EvcujW2jqt+j5COXyscjM7bLQkM9HaxI7pkWeW7gnI072yMI9Q==
   dependencies:
     big.js "^5.2.2"
     emojis-list "^3.0.0"
@@ -15492,10 +15492,15 @@ minimist-options@4.1.0:
     is-plain-obj "^1.1.0"
     kind-of "^6.0.3"
 
-minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.3, minimist@^1.2.5, minimist@^1.2.6, minimist@~1.2.5:
+minimist@^1.1.1, minimist@^1.2.3, minimist@^1.2.5, minimist@^1.2.6, minimist@~1.2.5:
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.6.tgz#8637a5b759ea0d6e98702cfb3a9283323c93af44"
   integrity sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==
+
+minimist@^1.2.0:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.7.tgz#daa1c4d91f507390437c6a8bc01078e7000c4d18"
+  integrity sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==
 
 minipass-collect@^1.0.2:
   version "1.0.2"

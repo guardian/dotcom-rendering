@@ -1,5 +1,5 @@
 {
-    "description": "WARNING: run `gen-schema` task if changing this to update the associated JSON\nschema definition.",
+    "description": "This type is what we receive from `frontend`,\nhence the FE prefix.\n\nWARNING: run `gen-schema` task if changing this to update the associated JSON\nschema definition.",
     "type": "object",
     "properties": {
         "headline": {
@@ -2352,6 +2352,7 @@
                 "LifestylePillar",
                 "NewsPillar",
                 "OpinionPillar",
+                "SpecialReportAltTheme",
                 "SpecialReportTheme",
                 "SportPillar"
             ],
@@ -3807,6 +3808,7 @@
         "EditionId": {
             "enum": [
                 "AU",
+                "EUR",
                 "INT",
                 "UK",
                 "US"
@@ -4342,10 +4344,14 @@
                 },
                 "INT": {
                     "$ref": "#/definitions/EditionCommercialProperties"
+                },
+                "EUR": {
+                    "$ref": "#/definitions/EditionCommercialProperties"
                 }
             },
             "required": [
                 "AU",
+                "EUR",
                 "INT",
                 "UK",
                 "US"

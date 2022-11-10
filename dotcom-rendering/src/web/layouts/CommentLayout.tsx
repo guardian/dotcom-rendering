@@ -14,7 +14,7 @@ import { buildAdTargeting } from '../../lib/ad-targeting';
 import { getSoleContributor } from '../../lib/byline';
 import { parse } from '../../lib/slot-machine-flags';
 import type { NavType } from '../../model/extract-nav';
-import type { CAPIArticleType } from '../../types/frontend';
+import type { FEArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -260,7 +260,7 @@ const mainMediaWrapper = css`
 `;
 
 interface Props {
-	CAPIArticle: CAPIArticleType;
+	CAPIArticle: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }
@@ -269,6 +269,9 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPIArticle;
+
+	const isInEuropeTest =
+		CAPIArticle.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: CAPIArticle.isAdFreeUser,
@@ -353,6 +356,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
+								isInEuropeTest={isInEuropeTest}
 							/>
 						</Section>
 					)}
@@ -407,6 +411,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							cssOverrides={css`
 								display: block;
 							`}
+							color={palette.border.secondary}
 						/>
 					</Section>
 				</SendToBack>
@@ -473,6 +478,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											cssOverrides={css`
 												display: block;
 											`}
+											color={palette.border.secondary}
 										/>
 									</div>
 								</div>
@@ -486,6 +492,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										cssOverrides={css`
 											display: block;
 										`}
+										color={palette.border.secondary}
 									/>
 								</Hide>
 							</div>
@@ -635,6 +642,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										cssOverrides={css`
 											display: block;
 										`}
+										color={palette.border.secondary}
 									/>
 									<SubMeta
 										format={format}

@@ -9,7 +9,7 @@
     "common-rendering"
   ],
   "scripts": {
-    "postinstall": "if [ \"$CI\" = true ]; then npm ci --prefix ./apps-rendering ; else npm install --prefix ./apps-rendering ; fi",
+    "postinstall": "cd apps-rendering && if [ \"$CI\" = true ]; then yarn --frozen-lockfile ; else yarn ; fi",
     "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook --static-dir ./dotcom-rendering/src/static -p 6006",
     "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ./dotcom-rendering/src/static",
     "build:dcr": "cd ./dotcom-rendering && yarn makeBuild",

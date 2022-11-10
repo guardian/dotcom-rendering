@@ -11,21 +11,14 @@ import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Element } from '@guardian/content-api-models/v1/element';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	ArticleDesign,
 	ArticleDisplay,
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import {
-	andThen,
-	fromNullable,
-	map,
-	none,
-	some,
-	withDefault,
-} from '@guardian/types';
+import { andThen, fromNullable, map, none, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { getPillarFromId } from 'articleFormat';
 import type { Body } from 'bodyElement';
@@ -288,12 +281,9 @@ const itemFields = (
 ): ItemFields => {
 	const { content, commentCount, relatedContent } = request;
 	return {
-		theme: pipe(
-			content.pillarId,
-			fromNullable,
-			andThen(getPillarFromId),
-			withDefault<ArticleTheme>(ArticlePillar.News),
-		),
+		theme: Optional.fromNullable(content.pillarId)
+			.flatMap(getPillarFromId)
+			.withDefault(ArticlePillar.News),
 		display: getDisplay(content),
 		headline: content.fields?.headline ?? '',
 		standfirst: pipe(

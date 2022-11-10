@@ -13,7 +13,7 @@ import {
 } from '@guardian/source-foundations';
 import type { NavType } from '../../model/extract-nav';
 import type { Switches } from '../../types/config';
-import type { CAPIArticleType } from '../../types/frontend';
+import type { FEArticleType } from '../../types/frontend';
 import {
 	adCollapseStyles,
 	labelStyles as adLabelStyles,
@@ -36,7 +36,7 @@ import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
-	CAPIArticle: CAPIArticleType;
+	CAPIArticle: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }
@@ -141,6 +141,9 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 	 */
 	const renderAds = !CAPIArticle.isAdFreeUser && !CAPIArticle.shouldHideAds;
 
+	const isInEuropeTest =
+		CAPIArticle.config.abTests.europeNetworkFrontVariant === 'variant';
+
 	if (isSlimNav) {
 		return (
 			<div
@@ -228,6 +231,7 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 								CAPIArticle.contributionsServiceUrl
 							}
 							idApiUrl={CAPIArticle.config.idApiUrl}
+							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 				</div>

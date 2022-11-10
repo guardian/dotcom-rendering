@@ -2634,6 +2634,7 @@
                 "LifestylePillar",
                 "NewsPillar",
                 "OpinionPillar",
+                "SpecialReportAltTheme",
                 "SpecialReportTheme",
                 "SportPillar"
             ],
@@ -2651,6 +2652,7 @@
         "EditionId": {
             "enum": [
                 "AU",
+                "EUR",
                 "INT",
                 "UK",
                 "US"
@@ -2700,7 +2702,8 @@
                 "Podcast",
                 "SombreAltPalette",
                 "SombrePalette",
-                "Special"
+                "Special",
+                "SpecialReportAltPalette"
             ],
             "type": "string"
         },

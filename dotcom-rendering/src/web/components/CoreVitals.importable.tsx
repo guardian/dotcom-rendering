@@ -34,6 +34,7 @@ export const CoreVitals = () => {
 		/* linter, please keep this array multi-line */
 		dcrJavascriptBundle('Variant'),
 		dcrJavascriptBundle('Control'),
+		'dcrFrontsVariant',
 	];
 
 	const userInServerSideTestToForceMetrics =

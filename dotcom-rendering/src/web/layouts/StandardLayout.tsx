@@ -16,7 +16,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
 import type { NavType } from '../../model/extract-nav';
-import type { CAPIArticleType } from '../../types/frontend';
+import type { FEArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -290,7 +290,7 @@ const starWrapper = css`
 `;
 
 interface Props {
-	CAPIArticle: CAPIArticleType;
+	CAPIArticle: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }
@@ -299,6 +299,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPIArticle;
+
+	const isInEuropeTest =
+		CAPIArticle.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: CAPIArticle.isAdFreeUser,
@@ -393,6 +396,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
+								isInEuropeTest={isInEuropeTest}
 							/>
 						</Section>
 					)}
@@ -441,6 +445,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									cssOverrides={css`
 										display: block;
 									`}
+									color={palette.border.secondary}
 								/>
 							</Section>
 						</>
@@ -591,7 +596,10 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									{format.theme === ArticleSpecial.Labs ? (
 										<GuardianLabsLines />
 									) : (
-										<DecideLines format={format} />
+										<DecideLines
+											format={format}
+											color={palette.border.article}
+										/>
 									)}
 								</div>
 							</div>
@@ -723,6 +731,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									cssOverrides={css`
 										display: block;
 									`}
+									color={palette.border.secondary}
 								/>
 								<SubMeta
 									format={format}

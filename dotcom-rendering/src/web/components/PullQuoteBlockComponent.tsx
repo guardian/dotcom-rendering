@@ -1,8 +1,15 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
-import { from, headline, text, until } from '@guardian/source-foundations';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import {
+	from,
+	headline,
+	neutral,
+	text,
+	until,
+} from '@guardian/source-foundations';
 import { unescapeData } from '../../lib/escapeData';
 import type { Palette } from '../../types/palette';
+import { transparentColour } from '../lib/transparentColour';
 import { QuoteIcon } from './QuoteIcon';
 
 const partiallyLeft = css`
@@ -91,6 +98,29 @@ const fullyInline = css`
 	display: block;
 `;
 
+const specialReportAltStyles = (palette: Palette) => css`
+	${headline.xxsmall({ fontWeight: 'light' })};
+	line-height: 25px;
+	position: relative;
+	background-color: ${palette.background.pullQuote};
+	padding-top: 6px;
+	padding-bottom: 12px;
+	margin-bottom: 28px;
+	border: 1px solid ${transparentColour(neutral[60], 0.3)};
+
+	:after {
+		content: '';
+		width: 25px;
+		height: 25px;
+		bottom: -25px;
+		position: absolute;
+		background-color: ${palette.background.pullQuote};
+		border: 1px solid ${transparentColour(neutral[60], 0.3)};
+		border-top: none;
+		left: -1px;
+	}
+`;
+
 function decidePosition(role: string, design: ArticleDesign) {
 	if (design === ArticleDesign.PhotoEssay) {
 		return role === 'supporting' ? fullyLeft : fullyInline;
@@ -112,19 +142,43 @@ function decideFont(role: string) {
 export const PullQuoteBlockComponent: React.FC<{
 	html?: string;
 	palette: Palette;
-	design: ArticleDesign;
+	format: ArticleFormat;
 	role: string;
 	attribution?: string;
-}> = ({ html, palette, design, attribution, role }) => {
+}> = ({ html, palette, format, attribution, role }) => {
 	if (!html) return <></>;
-	switch (design) {
+
+	if (format.theme === ArticleSpecial.SpecialReportAlt)
+		return (
+			<aside
+				css={[
+					decidePosition(role, format.design),
+					specialReportAltStyles(palette),
+				]}
+			>
+				<QuoteIcon colour={palette.fill.quoteIcon} />
+				<blockquote
+					css={css`
+						display: inline;
+					`}
+					dangerouslySetInnerHTML={{
+						__html: unescapeData(html),
+					}}
+				/>
+				<footer>
+					<cite>{attribution}</cite>
+				</footer>
+			</aside>
+		);
+
+	switch (format.design) {
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return (
 				<aside
 					css={[
-						decidePosition(role, design),
+						decidePosition(role, format.design),
 						css`
 							${headline.xxsmall({ fontWeight: 'light' })};
 							line-height: 25px;
@@ -164,7 +218,7 @@ export const PullQuoteBlockComponent: React.FC<{
 			return (
 				<aside
 					css={[
-						decidePosition(role, design),
+						decidePosition(role, format.design),
 						decideFont(role),
 						css`
 							color: ${palette.text.pullQuote};
@@ -199,7 +253,7 @@ export const PullQuoteBlockComponent: React.FC<{
 			return (
 				<aside
 					css={[
-						decidePosition(role, design),
+						decidePosition(role, format.design),
 						css`
 							${headline.xxsmall({ fontWeight: 'bold' })};
 							line-height: 25px;

@@ -67,6 +67,8 @@ const cardStyles = (
 				return `90%`;
 			case 'SombreAltPalette':
 				return `85%`;
+			case 'SpecialReportAltPalette':
+				return `95%`;
 			default:
 				return `90%`;
 		}
@@ -82,7 +84,10 @@ const cardStyles = (
 		`;
 	}
 
-	if (format.theme === ArticleSpecial.SpecialReport) {
+	if (
+		format.theme === ArticleSpecial.SpecialReport ||
+		format.theme === ArticleSpecial.SpecialReportAlt
+	) {
 		return css`
 			${baseCardStyles};
 			:hover {

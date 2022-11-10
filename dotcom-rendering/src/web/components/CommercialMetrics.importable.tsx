@@ -38,6 +38,7 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 
 		const serverSideTestsToForceMetrics: Array<ServerSideTestNames> = [
 			/* keep array multi-line */
+			'dcrFrontsVariant',
 		];
 
 		const userInServerSideTestToForceMetrics =
