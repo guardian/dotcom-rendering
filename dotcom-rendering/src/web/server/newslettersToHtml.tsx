@@ -6,7 +6,7 @@ import type { NewslettersPageModel } from '../../model/pageModel';
 import type { NewslettersListProps } from '../components/stand-alone/NewslettersList';
 import { NewslettersList } from '../components/stand-alone/NewslettersList';
 import { StandAlonePage } from '../components/StandAlonePage';
-import { populatePageTemplate } from './stand-alone-pages/populatePageTemplate';
+import { populatePageTemplate } from './populatePageTemplate';
 
 const buildNewslettersPage = (
 	model: NewslettersPageModel,

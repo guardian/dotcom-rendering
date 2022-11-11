@@ -5,7 +5,7 @@ import {
 	MODERN_SCRIPT,
 	VARIANT_SCRIPT,
 } from '../../../lib/assets';
-import { getHttp3Url } from '../../../web/lib/getHttp3Url';
+import { getHttp3Url } from '../../lib/getHttp3Url';
 
 export const getPriorityScriptTags = (
 	expeditedIslands: string[],

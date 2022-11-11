@@ -3,12 +3,12 @@ import createEmotionServer from '@emotion/server/create-instance';
 import type { BasePageModel } from '../../../model/pageModel';
 import { extractExpeditedIslands } from '../extractIslands';
 import { pageTemplate } from '../pageTemplate';
-import { buildWindowGuardian } from '../stand-alone-pages/makeWindowGuardian';
+import { buildWindowGuardian } from './makeWindowGuardian';
 import {
 	getGaPath,
 	getLowPriorityScriptTags,
 	getPriorityScriptTags,
-} from '../stand-alone-pages/scriptTags';
+} from './scriptTags';
 
 export const populatePageTemplate = (
 	model: BasePageModel,

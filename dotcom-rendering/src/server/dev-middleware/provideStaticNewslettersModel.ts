@@ -1,10 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
 import type { NewslettersPageModel } from '../../model/pageModel';
-import {
-	STATIC_CONFIG,
-	STATIC_FOOTER,
-	STATIC_NAV,
-} from '../../web/server/stand-alone-pages/defaultData';
+import { STATIC_CONFIG, STATIC_FOOTER, STATIC_NAV } from './defaultData';
 
 const TEST_NEWSLETTERS: Newsletter[] = [
 	{
