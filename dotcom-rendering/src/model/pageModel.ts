@@ -15,6 +15,12 @@ export type BasePageModel = {
 	subscribeUrl: string;
 	contributionsServiceUrl: string;
 	beaconURL: string;
+	twitterData?: {
+		[key: string]: string;
+	};
+	openGraphData?: {
+		[key: string]: string;
+	};
 	config: ConfigType;
 	nav: NavType;
 	footer: FooterType;

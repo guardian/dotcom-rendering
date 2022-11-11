@@ -19,7 +19,14 @@ export const populatePageTemplate = (
 	html: string,
 	cache: EmotionCache,
 ): string => {
-	const { canonicalUrl, description, webTitle, config } = model;
+	const {
+		canonicalUrl,
+		description,
+		webTitle,
+		config,
+		openGraphData,
+		twitterData,
+	} = model;
 	const { offerHttp3 = false } = config.switches;
 	const shouldServeVariantBundle: boolean = [
 		BUILD_VARIANT,
@@ -57,8 +64,8 @@ export const populatePageTemplate = (
 		windowGuardian,
 		gaPath,
 		ampLink: undefined,
-		openGraphData: undefined,
-		twitterData: undefined,
+		openGraphData,
+		twitterData,
 		initTwitter: undefined,
 		keywords: config.keywords ?? '',
 		offerHttp3,
