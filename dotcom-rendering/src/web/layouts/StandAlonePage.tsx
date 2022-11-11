@@ -168,7 +168,9 @@ export const StandAlonePage = ({
 				</>
 			</div>
 
-			{children}
+			<main data-layout="StandAlonePage" id="maincontent">
+				{children}
+			</main>
 
 			<Section
 				fullWidth={true}

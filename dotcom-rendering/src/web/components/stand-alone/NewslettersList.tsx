@@ -45,7 +45,7 @@ export const NewslettersList = ({
 	const groupedNewsletters = putNewslettersInGroups(newsletters);
 
 	return (
-		<main>
+		<>
 			<Section fullWidth={true} element="header" padBottom={true}>
 				<h1
 					css={css`
@@ -103,6 +103,6 @@ export const NewslettersList = ({
 					))}
 				</Section>
 			))}
-		</main>
+		</>
 	);
 };
