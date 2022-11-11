@@ -38,6 +38,16 @@ const TEST_NEWSLETTERS: Newsletter[] = [
 		theme: 'opinion',
 		group: 'Opinion',
 	},
+	{
+		listId: 124,
+		identityName: 'according-to',
+		description: 'A newsletter made up for testing the component',
+		name: 'According to us',
+		frequency: 'Montly',
+		successDescription: 'You have signed up, but the newsletter is fake',
+		theme: 'opinion',
+		group: 'Opinion',
+	},
 ];
 
 const STATIC_NEWSLETTERS_MODEL: NewslettersPageModel = {
@@ -49,7 +59,7 @@ const STATIC_NEWSLETTERS_MODEL: NewslettersPageModel = {
 		pageId: 'static-email-newsletters',
 	},
 	editionId: 'UK',
-	webTitle: 'email newsletters',
+	webTitle: 'Guardian newsletters: sign up',
 	description:
 		"Scroll less and understand more about the subjects you care about with the Guardian's brilliant email newsletters, free to your inbox.",
 	beaconURL: '//phar.gu-web.net',

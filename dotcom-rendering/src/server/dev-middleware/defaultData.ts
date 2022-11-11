@@ -188,4 +188,5 @@ export const STATIC_CONFIG: ConfigType = {
 	frontendAssetsFullURL: 'https://assets.guim.co.uk/',
 	webPublicationDate: Date.now(),
 	discussionD2Uid: 'zHoBy6HNKsk',
+	mmaUrl: 'https://manage.theguardian.com',
 };

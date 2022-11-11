@@ -12,7 +12,11 @@ export const newslettersToHtml = (model: NewslettersPageModel): string => {
 	const html = renderToString(
 		<CacheProvider value={cache}>
 			<StandAlonePage {...model}>
-				<NewslettersList newsletters={model.newsletters} />
+				<NewslettersList
+					newsletters={model.newsletters}
+					headingText={model.webTitle}
+					mmaUrl={model.config.mmaUrl}
+				/>
 			</StandAlonePage>
 		</CacheProvider>,
 	);
