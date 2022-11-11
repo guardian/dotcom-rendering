@@ -65,7 +65,7 @@
     "@guardian/atoms-rendering": "^23.9.0",
     "@guardian/braze-components": "^8.1.1",
     "@guardian/browserslist-config": "^2.0.3",
-    "@guardian/commercial-core": "^4.21.0",
+    "@guardian/commercial-core": "^4.23.0",
     "@guardian/consent-management-platform": "10.11.1",
     "@guardian/discussion-rendering": "^11.0.3",
     "@guardian/libs": "^9.0.1",
