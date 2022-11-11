@@ -138,7 +138,7 @@ export const dropDownOverrides = css`
 
 	font-weight: bold;
 
-	&:hover {
+	&:not(ul):hover {
 		color: ${neutral[100]};
 		text-decoration: underline;
 	}
