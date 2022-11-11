@@ -48,14 +48,14 @@ const STATIC_NEWSLETTERS_MODEL: NewslettersPageModel = {
 	newsletters: TEST_NEWSLETTERS,
 	footer: STATIC_FOOTER,
 	nav: STATIC_NAV,
-	config: STATIC_CONFIG,
+	config: {
+		...STATIC_CONFIG,
+		pageId: 'static-email-newsletters',
+	},
 	editionId: 'UK',
-
 	webTitle: 'email newsletters',
 	description:
 		"Scroll less and understand more about the subjects you care about with the Guardian's brilliant email newsletters, free to your inbox.",
-	contentType: 'static',
-	pageId: 'static-email-newsletters',
 	beaconURL: '//phar.gu-web.net',
 	subscribeUrl: '/',
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',

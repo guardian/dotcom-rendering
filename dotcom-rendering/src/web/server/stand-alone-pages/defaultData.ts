@@ -65,4 +65,38 @@ export const STATIC_NAV: NavType = {
 	],
 };
 
-export const STATIC_CONFIG = {} as ConfigType;
+export const STATIC_CONFIG: ConfigType = {
+	isPaidContent: false,
+	pageId: 'unknown-page',
+	contentType: 'static',
+	ampIframeUrl:
+		'https://assets.guim.co.uk/data/vendor/b242a49b1588bb36bdaacefe001ca77a/amp-iframe.html',
+	ajaxUrl: 'https://api.nextgen.guardianapps.co.uk',
+	shortUrlId: '/p/d8ex5',
+	switches: {},
+	keywordIds: '',
+	sharedAdTargeting: {},
+	dcrSentryDsn: 'https://1937ab71c8804b2b8438178dfdd6468f@sentry.io/1377847',
+	discussionApiUrl: 'https://discussion.theguardian.com/discussion-api',
+	sentryPublicApiKey: '344003a8d11c41d8800fbad8383fdc50',
+	commercialBundleUrl:
+		'https://assets.guim.co.uk/javascripts/bc58c17d75809551440f/graun.commercial.dcr.js',
+	discussionApiClientHeader: 'nextgen',
+	shouldHideReaderRevenue: false,
+	sentryHost: 'app.getsentry.com/35463',
+	idApiUrl: 'https://idapi.theguardian.com',
+	showRelatedContent: true,
+	adUnit: '/59666047/theguardian.com/environment/article/ng',
+	stage: 'DEV',
+	isSensitive: false,
+	revisionNumber: 'DEV',
+	section: 'environment',
+	brazeApiKey: '7f28c639-8bda-48ff-a3f6-24345abfc07c',
+	dfpAccountId: '59666047',
+	googletagUrl: '//securepubads.g.doubleclick.net/tag/js/gpt.js',
+	abTests: {},
+	edition: 'UK',
+	frontendAssetsFullURL: 'https://assets.guim.co.uk/',
+	webPublicationDate: Date.now(),
+	discussionD2Uid: 'zHoBy6HNKsk',
+};

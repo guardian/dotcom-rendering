@@ -1,4 +1,5 @@
 import type { NavType } from 'src/model/extract-nav';
+import type { EditionId } from 'src/types/edition';
 import type { ConfigType } from '../types/config';
 import type { FooterType } from '../types/footer';
 
@@ -6,10 +7,8 @@ export type BasePageModel = {
 	config: ConfigType;
 	nav: NavType;
 	footer: FooterType;
-	editionId: 'UK' | 'US' | 'INT' | 'AU' | 'EUR';
+	editionId: EditionId;
 
-	isPaidContent?: boolean;
-	shouldHideReaderRevenue?: boolean;
 	renderAds?: boolean;
 	subscribeUrl: string;
 	contributionsServiceUrl: string;
@@ -18,9 +17,8 @@ export type BasePageModel = {
 	description?: string;
 	format?: CAPIFormat;
 	sectionName?: string;
-	contentType: string;
 	tags?: TagType[];
-	pageId: string;
+
 	beaconURL: string;
 };
 
