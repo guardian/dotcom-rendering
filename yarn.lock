@@ -2908,10 +2908,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/source-react-components/-/source-react-components-9.0.0.tgz#9a91775dd6405d9461f7d18b836d8df688143204"
   integrity sha512-A0d0QrqJ+LN+zb8vBLtHqB+aT9gk056tsi2S5oOc0v+pLifZ/y0tOK1htX5EKtjdIjlbsXj0UZc3s+bZtmkHzg==
 
-"@guardian/support-dotcom-components@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.6.tgz#47c1c110ba94e29617b9cd0eca6ced87f622cff6"
-  integrity sha512-4VmpVrZ/QOIr1r7nFXI839tavmc7PpXGQ0tJajy/d0YBwYFRswa4Yf+xM2vmM+x5tOZWFnJIlsZifkz10MpbBw==
+"@guardian/support-dotcom-components@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@guardian/support-dotcom-components/-/support-dotcom-components-1.0.7.tgz#b3aadcca5f6ee35b2c541121144be237d72bd3e0"
+  integrity sha512-MhaO+rC+ujXMcaMd1TL5D0t0eEuHWGh3OrFkM8BhPwhMkjela/dCOPeVPvGJDJ0a37o4PeMszqy+dSuiR4BvvQ==
 
 "@guardian/tsconfig@^0.1.4":
   version "0.1.4"
