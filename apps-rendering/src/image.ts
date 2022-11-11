@@ -11,7 +11,6 @@ import {
 	fromNullable,
 	map,
 	none,
-	OptionKind,
 	some,
 } from '@guardian/types';
 import type { Image as ImageData } from 'image/image';
@@ -19,6 +18,7 @@ import { Dpr, src, srcsets } from 'image/srcsets';
 import { pipe } from 'lib';
 import type { Context } from 'parserContext';
 import type { ReactNode } from 'react';
+import { Optional } from 'optional';
 
 // ----- Types ----- //
 
@@ -62,14 +62,14 @@ const sortAscendingWidth = (a: Asset, b: Asset): number =>
 		? a.typeData.width - b.typeData.width
 		: -1;
 
-const getHighestResAsset = (assets: Asset[]): Option<Asset> =>
-	fromNullable(assets.slice().sort(sortAscendingWidth).pop());
+const getHighestResAsset = (assets: Asset[]): Optional<Asset> =>
+	Optional.fromNullable(assets.slice().sort(sortAscendingWidth).pop());
 
-const getBestAsset = (assets: Asset[]): Option<Asset> => {
-	const masterAsset = fromNullable(
+const getBestAsset = (assets: Asset[]): Optional<Asset> => {
+	const masterAsset = Optional.fromNullable(
 		assets.find((asset) => asset.typeData?.isMaster),
 	);
-	if (masterAsset.kind === OptionKind.Some) {
+	if (masterAsset.isSome()) {
 		return masterAsset;
 	}
 
@@ -78,23 +78,21 @@ const getBestAsset = (assets: Asset[]): Option<Asset> => {
 
 const parseImage =
 	({ docParser, salt }: Context) =>
-	(element: BlockElement): Option<Image> => {
+	(element: BlockElement): Optional<Image> => {
 		const data = element.imageTypeData;
 
-		return pipe(
-			element.assets,
-			getBestAsset,
-			andThen((asset) => {
+		return getBestAsset(element.assets)
+			.flatMap((asset) => {
 				if (
 					asset.file === undefined ||
 					asset.file === '' ||
 					asset.typeData?.width === undefined ||
 					asset.typeData.height === undefined
 				) {
-					return none;
+					return Optional.none();
 				}
 
-				return some({
+				return Optional.some({
 					src: src(
 						salt,
 						asset.typeData.secureFile ?? asset.file,
@@ -110,8 +108,7 @@ const parseImage =
 					nativeCaption: fromNullable(data?.caption),
 					role: parseRole(data?.role),
 				});
-			}),
-		);
+			});
 	};
 
 const parseCardImage = (
