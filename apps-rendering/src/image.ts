@@ -6,19 +6,13 @@ import type { BlockElement } from '@guardian/content-api-models/v1/blockElement'
 import { ArticleElementRole } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
-import {
-	andThen,
-	fromNullable,
-	map,
-	none,
-	some,
-} from '@guardian/types';
+import { andThen, fromNullable, map, none, some } from '@guardian/types';
 import type { Image as ImageData } from 'image/image';
 import { Dpr, src, srcsets } from 'image/srcsets';
 import { pipe } from 'lib';
+import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import type { ReactNode } from 'react';
-import { Optional } from 'optional';
 
 // ----- Types ----- //
 
@@ -81,34 +75,33 @@ const parseImage =
 	(element: BlockElement): Optional<Image> => {
 		const data = element.imageTypeData;
 
-		return getBestAsset(element.assets)
-			.flatMap((asset) => {
-				if (
-					asset.file === undefined ||
-					asset.file === '' ||
-					asset.typeData?.width === undefined ||
-					asset.typeData.height === undefined
-				) {
-					return Optional.none();
-				}
+		return getBestAsset(element.assets).flatMap((asset) => {
+			if (
+				asset.file === undefined ||
+				asset.file === '' ||
+				asset.typeData?.width === undefined ||
+				asset.typeData.height === undefined
+			) {
+				return Optional.none();
+			}
 
-				return Optional.some({
-					src: src(
-						salt,
-						asset.typeData.secureFile ?? asset.file,
-						500,
-						Dpr.One,
-					),
-					...srcsets(asset.typeData.secureFile ?? asset.file, salt),
-					alt: fromNullable(data?.alt),
-					width: asset.typeData.width,
-					height: asset.typeData.height,
-					caption: pipe(data?.caption, fromNullable, map(docParser)),
-					credit: parseCredit(data?.displayCredit, data?.credit),
-					nativeCaption: fromNullable(data?.caption),
-					role: parseRole(data?.role),
-				});
+			return Optional.some({
+				src: src(
+					salt,
+					asset.typeData.secureFile ?? asset.file,
+					500,
+					Dpr.One,
+				),
+				...srcsets(asset.typeData.secureFile ?? asset.file, salt),
+				alt: fromNullable(data?.alt),
+				width: asset.typeData.width,
+				height: asset.typeData.height,
+				caption: pipe(data?.caption, fromNullable, map(docParser)),
+				credit: parseCredit(data?.displayCredit, data?.credit),
+				nativeCaption: fromNullable(data?.caption),
+				role: parseRole(data?.role),
 			});
+		});
 	};
 
 const parseCardImage = (

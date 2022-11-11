@@ -15,9 +15,9 @@ import { isLabs } from 'item';
 import { pipe } from 'lib';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
+import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import { parseVideo } from 'video';
-import { Optional } from 'optional';
 
 // ----- Lookups ----- //
 
@@ -68,10 +68,14 @@ const isVideo = (elem: BlockElement): boolean =>
 	elem.contentAtomTypeData?.atomType === 'media';
 
 const articleMainImage = (content: Content): Optional<BlockElement> =>
-	Optional.fromNullable((content.blocks?.main?.elements.filter(isImage) ?? [])[0]);
+	Optional.fromNullable(
+		(content.blocks?.main?.elements.filter(isImage) ?? [])[0],
+	);
 
 const articleMainVideo = (content: Content): Optional<BlockElement> =>
-	Optional.fromNullable((content.blocks?.main?.elements.filter(isVideo) ?? [])[0]);
+	Optional.fromNullable(
+		(content.blocks?.main?.elements.filter(isVideo) ?? [])[0],
+	);
 
 const articleMainMedia = (
 	content: Content,
@@ -79,17 +83,17 @@ const articleMainMedia = (
 ): Optional<MainMedia> => {
 	return (content.blocks?.main?.elements.filter(isImage) ?? [])[0]
 		? articleMainImage(content)
-			.flatMap(parseImage(context))
-			.map<MainMedia>((image) => ({
-				kind: MainMediaKind.Image,
-				image,
-			}))
+				.flatMap(parseImage(context))
+				.map<MainMedia>((image) => ({
+					kind: MainMediaKind.Image,
+					image,
+				}))
 		: articleMainVideo(content)
-			.flatMap(parseVideo(content.atoms))
-			.map<MainMedia>((video) => ({
-				kind: MainMediaKind.Video,
-				video,
-		}));
+				.flatMap(parseVideo(content.atoms))
+				.map<MainMedia>((video) => ({
+					kind: MainMediaKind.Video,
+					video,
+				}));
 };
 
 type ThirdPartyEmbeds = {

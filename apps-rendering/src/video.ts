@@ -10,35 +10,37 @@ interface Video {
 	title: string;
 }
 
-const parseVideo = (atoms?: Atoms) => (element: BlockElement): Optional<Video> => {
-	if (!atoms) {
-		return Optional.none();
-	}
+const parseVideo =
+	(atoms?: Atoms) =>
+	(element: BlockElement): Optional<Video> => {
+		if (!atoms) {
+			return Optional.none();
+		}
 
-	const atomId = element.contentAtomTypeData?.atomId;
-	const atom = atoms.media?.find((media) => media.id === atomId);
+		const atomId = element.contentAtomTypeData?.atomId;
+		const atom = atoms.media?.find((media) => media.id === atomId);
 
-	if (atom?.data.kind !== 'media') {
-		return Optional.none();
-	}
+		if (atom?.data.kind !== 'media') {
+			return Optional.none();
+		}
 
-	const { posterUrl, duration, assets, activeVersion, title } =
-		atom.data.media;
-	const videoId = assets.find(
-		(asset) => asset.version.toNumber() === activeVersion?.toNumber(),
-	)?.id;
+		const { posterUrl, duration, assets, activeVersion, title } =
+			atom.data.media;
+		const videoId = assets.find(
+			(asset) => asset.version.toNumber() === activeVersion?.toNumber(),
+		)?.id;
 
-	if (!posterUrl || !videoId || !atomId) {
-		return Optional.none();
-	}
+		if (!posterUrl || !videoId || !atomId) {
+			return Optional.none();
+		}
 
-	return Optional.some({
-		posterUrl,
-		videoId,
-		duration: duration?.toNumber(),
-		atomId,
-		title,
-	});
-};
+		return Optional.some({
+			posterUrl,
+			videoId,
+			duration: duration?.toNumber(),
+			atomId,
+			title,
+		});
+	};
 
 export { Video, parseVideo };

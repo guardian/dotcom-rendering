@@ -266,9 +266,8 @@ const parse =
 							kind: ElementKind.Image,
 							...image,
 						}),
-					).withDefault(
-						Result.err("I couldn't find a master asset"),
-					);
+					)
+					.withDefault(Result.err("I couldn't find a master asset"));
 
 			case ElementType.PULLQUOTE: {
 				const { html: quote, attribution } =
