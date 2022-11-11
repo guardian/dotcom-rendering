@@ -16,7 +16,26 @@ export const STATIC_NAV: NavType = {
 	},
 	brandExtensions: [],
 	currentNavLink: '/',
-	subNavSections: { links: [] },
+	subNavSections: {
+		links: [
+			{
+				url: '/world',
+				title: 'World',
+				longTitle: 'World news',
+				children: [],
+				mobileOnly: false,
+				more: false,
+			},
+			{
+				url: '/email-newsletters',
+				title: 'Newsletters',
+				longTitle: 'Newsletters',
+				children: [],
+				mobileOnly: false,
+				more: false,
+			},
+		],
+	},
 	readerRevenueLinks: {
 		header: {
 			contribute: 'contribute',
@@ -55,12 +74,82 @@ export const STATIC_NAV: NavType = {
 			title: 'News',
 			longTitle: 'News',
 			pillar: ArticlePillar.News,
+			children: [
+				{
+					title: 'World',
+					url: '/world',
+					longTitle: 'World news',
+					more: true,
+					children: [
+						{
+							title: 'Europe',
+							longTitle: 'Europe',
+							url: '/world/europe-news',
+							children: [],
+						},
+						{
+							title: 'US',
+							url: '/us-news',
+							longTitle: 'US news',
+							children: [],
+						},
+						{
+							title: 'Americas',
+							longTitle: 'Americas',
+							url: '/world/americas',
+							children: [],
+						},
+						{
+							title: 'Asia',
+							longTitle: 'Asia',
+							url: '/world/asia',
+							children: [],
+						},
+						{
+							title: 'Australia',
+							url: '/australia-news',
+							longTitle: 'Australia news',
+							children: [],
+						},
+						{
+							title: 'Middle East',
+							longTitle: 'Middle East',
+							url: '/world/middleeast',
+							children: [],
+						},
+						{
+							title: 'Africa',
+							longTitle: 'Africa',
+							url: '/world/africa',
+							children: [],
+						},
+						{
+							title: 'Inequality',
+							longTitle: 'Inequality',
+							url: '/inequality',
+							children: [],
+						},
+						{
+							title: 'Global development',
+							longTitle: 'Global development',
+							url: '/global-development',
+							children: [],
+						},
+					],
+				},
+			],
 		},
 		{
 			url: '/commentisfree',
 			title: 'Opinion',
 			longTitle: 'Opinion',
 			pillar: ArticlePillar.Opinion,
+		},
+		{
+			url: '/uk/sport',
+			title: 'Sport',
+			longTitle: 'Sport',
+			pillar: ArticlePillar.Sport,
 		},
 	],
 };
