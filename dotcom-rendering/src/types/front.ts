@@ -2,6 +2,7 @@ import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import type { ServerSideTests, Switches } from './config';
 import type { EditionId } from './edition';
 import type { FooterType } from './footer';
+import type { FETagType } from './tag';
 import type { TrailType } from './trails';
 
 export interface FEFrontType {
@@ -101,21 +102,6 @@ export type DCRContainerPalette =
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
 
-export type FETagType = {
-	id: string;
-	url: string;
-	tagType: string;
-	sectionId: string;
-	sectionName: string;
-	webTitle: string;
-	webUrl: string;
-	twitterHandle?: string;
-	/* bio is html */
-	bio?: string;
-	bylineImageUrl?: string;
-	contributorLargeImagePath?: string;
-};
-
 export type FEFrontCard = {
 	properties: {
 		isBreaking: boolean;
@@ -161,7 +147,7 @@ export type FEFrontCard = {
 				standfirst?: string;
 			};
 			elements: Record<string, unknown>;
-			tags: { tags: { properties: FETagType }[] };
+			tags: { tags: FETagType[] };
 		};
 		maybeContentId?: string;
 		isLiveBlog: boolean;

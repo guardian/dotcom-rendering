@@ -4,6 +4,7 @@ import type { ConfigType } from './config';
 import type { EditionId } from './edition';
 import type { FooterType } from './footer';
 import type { CAPIOnwards } from './onwards';
+import type { TagType } from './tag';
 import type { CAPITrailType } from './trails';
 
 /**

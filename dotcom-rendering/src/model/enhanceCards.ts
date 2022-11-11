@@ -6,8 +6,8 @@ import type {
 	DCRSupportingContent,
 	FEFrontCard,
 	FESupportingContent,
-	FETagType,
 } from '../types/front';
+import type { FETagType, TagType } from '../types/tag';
 import { decideFormat } from '../web/lib/decideFormat';
 import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
 import { enhanceSnaps } from './enhanceSnaps';
@@ -96,8 +96,8 @@ const decideAvatarUrl = (
 	return soleContributor?.bylineLargeImageUrl ?? undefined;
 };
 
-const enhanceTags = (tags: { properties: FETagType }[]): TagType[] => {
-	return tags.map((tag) => {
+const enhanceTags = (tags: FETagType[]): TagType[] => {
+	return tags.map(({ properties }) => {
 		const {
 			id,
 			tagType,
@@ -105,7 +105,7 @@ const enhanceTags = (tags: { properties: FETagType }[]): TagType[] => {
 			twitterHandle,
 			bylineImageUrl,
 			contributorLargeImagePath,
-		} = tag.properties;
+		} = properties;
 
 		return {
 			id,
