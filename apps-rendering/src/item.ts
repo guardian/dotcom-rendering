@@ -78,7 +78,7 @@ interface Fields extends ArticleFormat {
 interface MatchReport extends Fields {
 	design: ArticleDesign.MatchReport;
 	body: Body;
-	football: Option<MatchScores>;
+	football: Optional<MatchScores>;
 }
 
 interface ResizedRelatedContent extends RelatedContent {
@@ -539,9 +539,7 @@ const fromCapi =
 		} else if (isMatchReport(tags)) {
 			return {
 				design: ArticleDesign.MatchReport,
-				football: parseMatchScores(
-					fromNullable(request.footballContent),
-				),
+				football: Optional.fromNullable(request.footballContent).flatMap(parseMatchScores),
 				...itemFieldsWithBody(context, request),
 			};
 		}

@@ -10,7 +10,7 @@ import {
 	DottedLines,
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
-import { map, none, withDefault } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import { pillarToId, themeToPillar } from 'articleFormat';
 import Body from 'components/ArticleBody';
 import Epic from 'components/Epic';
@@ -41,6 +41,8 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
+import { Optional } from 'optional';
+import type { MatchScores } from 'football';
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -105,11 +107,11 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 		  )
 		: null;
 
-	const matchScores = 'football' in item ? item.football : none;
+	const matchScores: Optional<MatchScores> = 'football' in item ? item.football : Optional.none();
 	return (
 		<main css={backgroundStyles(format)}>
 			<article className="js-article" css={BorderStyles}>
-				{maybeRender(matchScores, (scores) => (
+				{maybeRender(matchScores.toOption(), (scores) => (
 					<div id="js-football-scores">
 						<FootballScores
 							league={scores.league}
