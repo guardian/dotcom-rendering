@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source-foundations';
 import React from 'react';
+import { injectProps } from 'src/web/lib/injectProps';
 import { verticalDivider } from '../../../lib/verticalDivider';
 import { verticalDividerWithBottomOffset } from '../../../lib/verticalDividerWithBottomOffset';
 
@@ -110,22 +111,10 @@ export const LI = ({
 	const getPercentage = () => {
 		if (parentPercentage && percentage)
 			return combinePercentages(parentPercentage, percentage);
-
 		if (parentPercentage && !percentage) return parentPercentage;
 
 		return percentage;
 	};
-
-	const childrenWithProps = React.Children.map(children, (child) => {
-		// Checking isValidElement is the safe way and avoids a
-		// typescript error too.
-		if (React.isValidElement(child)) {
-			return React.cloneElement(child, {
-				parentPercentage: getPercentage(),
-			} as Partial<unknown>);
-		}
-		return child;
-	});
 
 	return (
 		<li
@@ -138,7 +127,7 @@ export const LI = ({
 				snapAlignStart && snapAlignStartStyles,
 			]}
 		>
-			{childrenWithProps}
+			{injectProps(children, { parentPercentage: getPercentage() })}
 		</li>
 	);
 };

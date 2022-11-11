@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source-foundations';
 import React from 'react';
+import { injectProps } from 'src/web/lib/injectProps';
 import { verticalDivider } from '../../../lib/verticalDivider';
 
 type Direction = 'row' | 'column' | 'row-reverse';
@@ -47,17 +48,6 @@ export const UL = ({
 	wrapCards = false,
 	parentPercentage,
 }: Props) => {
-	const childrenWithProps = React.Children.map(children, (child) => {
-		// Checking isValidElement is the safe way and avoids a
-		// typescript error too.
-		if (React.isValidElement(child)) {
-			return React.cloneElement(child, {
-				parentPercentage,
-			} as Partial<unknown>);
-		}
-		return child;
-	});
-
 	return (
 		<ul
 			css={[
@@ -67,7 +57,7 @@ export const UL = ({
 				wrapCards && wrapStyles,
 			]}
 		>
-			{childrenWithProps}
+			{injectProps(children, { parentPercentage })}
 		</ul>
 	);
 };
