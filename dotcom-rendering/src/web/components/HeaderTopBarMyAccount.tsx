@@ -60,7 +60,7 @@ const myAccountLinkStyles = css`
 		width: 18px;
 		margin: 3px 4px 0 0;
 	}
-	${getZIndex('dropdown')}
+	${getZIndex('myAccountDropdown')}
 `;
 
 export const buildIdentityLinks = (
