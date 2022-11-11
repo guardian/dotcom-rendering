@@ -303,7 +303,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									idApiUrl={CAPIArticle.config.idApiUrl}
 									headerTopBarSwitch={
 										!!CAPIArticle.config.switches
-											.headerTopBar
+											.headerTopNav
 									}
 									isInEuropeTest={isInEuropeTest}
 								/>
@@ -329,7 +329,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									editionId={CAPIArticle.editionId}
 									headerTopBarSwitch={
 										!!CAPIArticle.config.switches
-											.headerTopBar
+											.headerTopNav
 									}
 								/>
 							</Section>
@@ -407,7 +407,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									editionId={CAPIArticle.editionId}
 									headerTopBarSwitch={
 										!!CAPIArticle.config.switches
-											.headerTopBar
+											.headerTopNav
 									}
 								/>
 							</Section>
