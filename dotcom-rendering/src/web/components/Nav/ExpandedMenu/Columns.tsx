@@ -215,7 +215,8 @@ export const Columns: React.FC<{
 	editionId: EditionId;
 	format: ArticleFormat;
 	nav: NavType;
-}> = ({ format, nav, editionId }) => {
+	headerTopBarSwitch: boolean;
+}> = ({ format, nav, editionId, headerTopBarSwitch }) => {
 	const activeEdition = getEditionFromId(editionId);
 	const remainingEditions = getRemainingEditions(activeEdition.editionId);
 	return (
@@ -288,7 +289,11 @@ export const Columns: React.FC<{
 				<div css={lineStyle}></div>
 			</li>
 
-			<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
+			<ReaderRevenueLinks
+				readerRevenueLinks={nav.readerRevenueLinks}
+				editionId={editionId}
+				headerTopBarSwitch={headerTopBarSwitch}
+			/>
 
 			{/* This is where the edition dropdown is inserted					 */}
 			<section css={editionsSwitch}>

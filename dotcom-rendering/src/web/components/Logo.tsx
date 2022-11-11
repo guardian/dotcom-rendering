@@ -3,20 +3,21 @@ import {
 	brandAlt,
 	from,
 	neutral,
+	space,
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import {
 	SvgGuardianBestWebsiteLogo,
 	SvgGuardianLogo,
 } from '@guardian/source-react-components';
-import { EditionId } from '../../types/edition';
+import type { EditionId } from '../../types/edition';
 import { getZIndex } from '../lib/getZIndex';
 
 const linkStyles = css`
 	float: right;
 	margin-top: 10px;
 	margin-right: 54px;
-	margin-bottom: 21px;
+	margin-bottom: 10px;
 	width: 146px;
 
 	${from.mobileMedium} {
@@ -32,7 +33,7 @@ const linkStyles = css`
 	}
 	${from.desktop} {
 		margin-top: 5px;
-		margin-bottom: 15px;
+		margin-bottom: ${space[3]}px;
 		position: relative;
 		width: 295px;
 	}
@@ -51,7 +52,7 @@ export const Logo = ({ editionId }: Props) => {
 	switch (editionId) {
 		case 'UK':
 			return (
-				<a css={linkStyles} href="/" data-link-name="nav2 : logo">
+				<a css={linkStyles} href="/" data-link-name="nav3 : logo">
 					<span
 						css={css`
 							${visuallyHidden};
@@ -68,7 +69,7 @@ export const Logo = ({ editionId }: Props) => {
 
 		default:
 			return (
-				<a css={linkStyles} href="/" data-link-name="nav2 : logo">
+				<a css={linkStyles} href="/" data-link-name="nav3 : logo">
 					<span
 						css={css`
 							${visuallyHidden};

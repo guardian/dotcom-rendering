@@ -271,6 +271,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<SendToBack>
 							<Section
 								fullWidth={true}
+								shouldCenter={false}
 								showTopBorder={false}
 								showSideBorders={false}
 								padSides={false}
@@ -300,6 +301,10 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										contributionsServiceUrl
 									}
 									idApiUrl={CAPIArticle.config.idApiUrl}
+									headerTopBarSwitch={
+										!!CAPIArticle.config.switches
+											.headerTopBar
+									}
 									isInEuropeTest={isInEuropeTest}
 								/>
 							</Section>
@@ -322,6 +327,10 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											.header.subscribe
 									}
 									editionId={CAPIArticle.editionId}
+									headerTopBarSwitch={
+										!!CAPIArticle.config.switches
+											.headerTopBar
+									}
 								/>
 							</Section>
 
@@ -396,6 +405,10 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											.header.subscribe
 									}
 									editionId={CAPIArticle.editionId}
+									headerTopBarSwitch={
+										!!CAPIArticle.config.switches
+											.headerTopBar
+									}
 								/>
 							</Section>
 						</Stuck>
