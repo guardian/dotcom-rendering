@@ -26,12 +26,7 @@ const buildNewslettersPage = (
 
 	return renderToString(
 		<CacheProvider value={cache}>
-			<StandAlonePage
-				subscribeUrl={model.nav.readerRevenueLinks.header.subscribe}
-				editionId={model.editionId}
-				nav={model.nav}
-				footer={model.footer}
-			>
+			<StandAlonePage {...model}>
 				<NewslettersList {...props} />
 			</StandAlonePage>
 		</CacheProvider>,

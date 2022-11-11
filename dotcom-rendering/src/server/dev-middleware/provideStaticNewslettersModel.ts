@@ -56,7 +56,9 @@ const STATIC_NEWSLETTERS_MODEL: NewslettersPageModel = {
 		"Scroll less and understand more about the subjects you care about with the Guardian's brilliant email newsletters, free to your inbox.",
 	contentType: 'static',
 	pageId: 'static-email-newsletters',
-	beaconURL: '/',
+	beaconURL: '//phar.gu-web.net',
+	subscribeUrl: '/',
+	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 };
 
 export const provideStaticDataMiddleware = (

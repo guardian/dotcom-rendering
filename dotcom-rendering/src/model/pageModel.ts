@@ -10,6 +10,9 @@ export type BasePageModel = {
 
 	isPaidContent?: boolean;
 	shouldHideReaderRevenue?: boolean;
+	renderAds?: boolean;
+	subscribeUrl: string;
+	contributionsServiceUrl: string;
 
 	webTitle: string;
 	description?: string;

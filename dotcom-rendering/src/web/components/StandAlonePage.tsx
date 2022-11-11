@@ -11,10 +11,10 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { ReactNode } from 'react';
 import { StrictMode } from 'react';
-import type { NavType } from '../../model/extract-nav';
-import type { FooterType } from '../../types/footer';
+import type { BasePageModel } from 'src/model/pageModel';
 import { Footer } from '../components/Footer';
 import { Stuck } from '../layouts/lib/stickiness';
+import { decideFormat } from '../lib/decideFormat';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { CoreVitals } from './CoreVitals.importable';
 import { FocusStyles } from './FocusStyles.importable';
@@ -27,13 +27,8 @@ import { Section } from './Section';
 import { SkipTo } from './SkipTo';
 import { SubNav } from './SubNav.importable';
 
-type Props = {
+type Props = BasePageModel & {
 	children: ReactNode;
-	renderAds?: boolean;
-	subscribeUrl: string;
-	editionId: 'UK' | 'US' | 'INT' | 'AU' | 'EUR';
-	nav: NavType;
-	footer: FooterType;
 };
 
 /**
@@ -43,12 +38,16 @@ type Props = {
  * */
 export const StandAlonePage = ({
 	children,
-	renderAds = false,
-	subscribeUrl = '/',
-	editionId = 'UK',
+	renderAds,
+	subscribeUrl,
+	editionId,
 	nav,
 	footer,
+	format,
+	contributionsServiceUrl,
 }: Props) => {
+	const articleFormat: ArticleFormat = decideFormat(format ?? {});
+
 	return (
 		<StrictMode>
 			<Global
@@ -92,7 +91,7 @@ export const StandAlonePage = ({
 								padSides={false}
 								shouldCenter={false}
 							>
-								<HeaderAdSlot display={0} />
+								<HeaderAdSlot display={articleFormat.display} />
 							</Section>
 						</Stuck>
 					)}
@@ -129,11 +128,7 @@ export const StandAlonePage = ({
 					>
 						<Nav
 							nav={nav}
-							format={{
-								theme: 0,
-								design: 0,
-								display: 0,
-							}}
+							format={articleFormat}
 							subscribeUrl={subscribeUrl}
 							editionId={editionId}
 						/>
@@ -150,11 +145,7 @@ export const StandAlonePage = ({
 									<SubNav
 										subNavSections={nav.subNavSections}
 										currentNavLink={nav.currentNavLink}
-										format={{
-											theme: 0,
-											design: 0,
-											display: 0,
-										}}
+										format={articleFormat}
 									/>
 								</Island>
 							</Section>
@@ -190,13 +181,11 @@ export const StandAlonePage = ({
 			>
 				<Footer
 					pageFooter={footer}
-					pillar={0}
+					pillar={articleFormat.theme}
 					pillars={nav.pillars}
 					urls={nav.readerRevenueLinks.header}
 					editionId={editionId}
-					contributionsServiceUrl={
-						'CAPIArticle.contributionsServiceUrl'
-					}
+					contributionsServiceUrl={contributionsServiceUrl}
 				/>
 			</Section>
 		</StrictMode>
