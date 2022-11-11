@@ -4,22 +4,20 @@ import type { ConfigType } from '../types/config';
 import type { FooterType } from '../types/footer';
 
 export type BasePageModel = {
-	config: ConfigType;
-	nav: NavType;
-	footer: FooterType;
+	webTitle: string;
+	description?: string;
+	canonicalUrl?: string;
+	sectionName?: string;
+	format?: CAPIFormat;
 	editionId: EditionId;
-
+	tags?: TagType[];
 	renderAds?: boolean;
 	subscribeUrl: string;
 	contributionsServiceUrl: string;
-
-	webTitle: string;
-	description?: string;
-	format?: CAPIFormat;
-	sectionName?: string;
-	tags?: TagType[];
-
 	beaconURL: string;
+	config: ConfigType;
+	nav: NavType;
+	footer: FooterType;
 };
 
 export type NewslettersPageModel = BasePageModel & {
