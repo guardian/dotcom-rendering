@@ -1,5 +1,9 @@
 import type { EmotionCache } from '@emotion/cache';
 import createEmotionServer from '@emotion/server/create-instance';
+import {
+	BUILD_VARIANT,
+	dcrJavascriptBundle,
+} from '../../../../scripts/webpack/bundles';
 import type { BasePageModel } from '../../../model/pageModel';
 import { extractExpeditedIslands } from '../extractIslands';
 import { pageTemplate } from '../pageTemplate';
@@ -15,8 +19,12 @@ export const populatePageTemplate = (
 	html: string,
 	cache: EmotionCache,
 ): string => {
-	const { offerHttp3 = false } = model.config.switches;
-	const { canonicalUrl, description, webTitle } = model;
+	const { canonicalUrl, description, webTitle, config } = model;
+	const { offerHttp3 = false } = config.switches;
+	const shouldServeVariantBundle: boolean = [
+		BUILD_VARIANT,
+		config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
+	].every(Boolean);
 
 	// eslint-disable-next-line @typescript-eslint/unbound-method -- because
 	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
@@ -28,10 +36,13 @@ export const populatePageTemplate = (
 	const priorityScriptTags = getPriorityScriptTags(
 		expeditedIslands,
 		offerHttp3,
-		false,
+		shouldServeVariantBundle,
 	);
-	const lowPriorityScriptTags = getLowPriorityScriptTags(offerHttp3, false);
-	const gaPath = getGaPath(false);
+	const lowPriorityScriptTags = getLowPriorityScriptTags(
+		offerHttp3,
+		shouldServeVariantBundle,
+	);
+	const gaPath = getGaPath(shouldServeVariantBundle);
 
 	const windowGuardian = buildWindowGuardian(model);
 
@@ -49,7 +60,7 @@ export const populatePageTemplate = (
 		openGraphData: undefined,
 		twitterData: undefined,
 		initTwitter: undefined,
-		keywords: model.config.keywords ?? '',
+		keywords: config.keywords ?? '',
 		offerHttp3,
 		canonicalUrl,
 	});
