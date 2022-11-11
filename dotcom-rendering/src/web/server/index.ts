@@ -1,4 +1,5 @@
 import type express from 'express';
+import type { NewslettersPageModel } from 'src/model/pageModel';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
@@ -12,7 +13,7 @@ import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
 import { keyEventsToHtml } from './keyEventsToHtml';
-import { buildStandAlonePage } from './stand-alone-pages';
+import { newslettersToHtml } from './newslettersToHtml';
 
 function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
@@ -210,12 +211,16 @@ export const renderFrontJson = (
 	res.json(enhanceFront(body));
 };
 
-export const renderStandAlonePage = (
-	req: express.Request,
+export const renderNewslettersPage = (
+	{ body }: express.Request,
 	res: express.Response,
 ): void => {
 	try {
-		const content = buildStandAlonePage(req);
+		// TO DO - data validation function
+		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- in progress
+		const model = body.model as NewslettersPageModel;
+
+		const content = newslettersToHtml(model);
 
 		if (content) {
 			res.status(200).send(content);

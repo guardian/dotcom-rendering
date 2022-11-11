@@ -17,7 +17,7 @@ const buildTestPageContent: StandAlonePageBuilder = (req, cache) => {
 
 	return renderToString(
 		<CacheProvider value={cache}>
-			<StandAlonePage subscribeLink="/" editionId="UK">
+			<StandAlonePage subscribeUrl="/" editionId="UK">
 				<TestContent {...props} />
 			</StandAlonePage>
 		</CacheProvider>,
@@ -69,7 +69,7 @@ const buildNewslettersPage: StandAlonePageBuilder = (req, cache) => {
 
 	return renderToString(
 		<CacheProvider value={cache}>
-			<StandAlonePage subscribeLink="/" editionId="UK">
+			<StandAlonePage subscribeUrl="/" editionId="UK">
 				<NewslettersList {...props} />
 			</StandAlonePage>
 		</CacheProvider>,

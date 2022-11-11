@@ -8,8 +8,9 @@ import {
 	renderFrontJson,
 	renderInteractive,
 	renderKeyEvents,
-	renderStandAlonePage,
+	renderNewslettersPage,
 } from '../web/server';
+import { provideStaticDataMiddleware } from './dev-middleware/provideStaticNewslettersModel';
 
 // see https://www.npmjs.com/package/webpack-hot-server-middleware
 // for more info
@@ -34,8 +35,10 @@ export const devServer = () => {
 				return renderFront(req, res);
 			case '/FrontJSON':
 				return renderFrontJson(req, res);
-			case '/StandAlone':
-				return renderStandAlonePage(req, res);
+			case '/email-newsletters':
+				return provideStaticDataMiddleware(req, res, () => {
+					renderNewslettersPage(req, res);
+				});
 			default:
 				next();
 		}

@@ -1,5 +1,4 @@
 import { css, Global } from '@emotion/react';
-import { ArticlePillar } from '@guardian/libs';
 import {
 	brandAlt,
 	brandBackground,
@@ -31,93 +30,24 @@ import { SubNav } from './SubNav.importable';
 type Props = {
 	children: ReactNode;
 	renderAds?: boolean;
-	subscribeLink: string;
+	subscribeUrl: string;
 	editionId: 'UK' | 'US' | 'INT' | 'AU' | 'EUR';
-};
-
-// type NAV = {
-// 	otherLinks: MoreType;
-// 	brandExtensions: LinkType[];
-// 	currentNavLink: string;
-// 	subNavSections?: SubNavType;
-// 	readerRevenueLinks: ReaderRevenuePositions;
-// 	pillars: PillarType[];
-// }
-
-const STATIC_FOOTER: FooterType = { footerLinks: [[]] };
-
-const STATIC_NAV: NavType = {
-	otherLinks: {
-		url: '/uk',
-		title: 'nav link',
-		longTitle: 'this is a nav link',
-		children: [],
-		mobileOnly: false,
-		more: true,
-	},
-	brandExtensions: [],
-	currentNavLink: '/',
-	subNavSections: { links: [] },
-	readerRevenueLinks: {
-		header: {
-			contribute: 'contribute',
-			subscribe: 'contribute',
-			support: 'contribute',
-			supporter: 'contribute',
-		},
-		footer: {
-			contribute: 'contribute',
-			subscribe: 'contribute',
-			support: 'contribute',
-			supporter: 'contribute',
-		},
-		sideMenu: {
-			contribute: 'contribute',
-			subscribe: 'contribute',
-			support: 'contribute',
-			supporter: 'contribute',
-		},
-		ampHeader: {
-			contribute: 'contribute',
-			subscribe: 'contribute',
-			support: 'contribute',
-			supporter: 'contribute',
-		},
-		ampFooter: {
-			contribute: 'contribute',
-			subscribe: 'contribute',
-			support: 'contribute',
-			supporter: 'contribute',
-		},
-	},
-	pillars: [
-		{
-			url: '/',
-			title: 'News',
-			longTitle: 'News',
-			pillar: ArticlePillar.News,
-		},
-		{
-			url: '/commentisfree',
-			title: 'Opinion',
-			longTitle: 'Opinion',
-			pillar: ArticlePillar.Opinion,
-		},
-	],
+	nav: NavType;
+	footer: FooterType;
 };
 
 /**
  * @description
  * Article is a high level wrapper for stand alone pages on Dotcom. Sets strict mode and some globals
  *
- * @param {Props} props
- * @param {ReactChild} props.children
  * */
 export const StandAlonePage = ({
 	children,
 	renderAds = false,
-	subscribeLink = '/',
+	subscribeUrl = '/',
 	editionId = 'UK',
+	nav,
+	footer,
 }: Props) => {
 	return (
 		<StrictMode>
@@ -177,12 +107,12 @@ export const StandAlonePage = ({
 						<Header
 							editionId={editionId}
 							supporterCTA={
-								STATIC_NAV.readerRevenueLinks.header.supporter
+								nav.readerRevenueLinks.header.supporter
 							}
 							discussionApiUrl={
 								'CAPIArticle.config.discussionApiUrl'
 							}
-							urls={STATIC_NAV.readerRevenueLinks.header}
+							urls={nav.readerRevenueLinks.header}
 							remoteHeader={false}
 							contributionsServiceUrl={'contributionsServiceUrl'}
 							idApiUrl={'CAPIArticle.config.idApiUrl'}
@@ -198,17 +128,17 @@ export const StandAlonePage = ({
 						element="nav"
 					>
 						<Nav
-							nav={STATIC_NAV}
+							nav={nav}
 							format={{
 								theme: 0,
 								design: 0,
 								display: 0,
 							}}
-							subscribeUrl={subscribeLink}
+							subscribeUrl={subscribeUrl}
 							editionId={editionId}
 						/>
 					</Section>
-					{STATIC_NAV.subNavSections && (
+					{nav.subNavSections && (
 						<>
 							<Section
 								fullWidth={true}
@@ -218,12 +148,8 @@ export const StandAlonePage = ({
 							>
 								<Island deferUntil="idle">
 									<SubNav
-										subNavSections={
-											STATIC_NAV.subNavSections
-										}
-										currentNavLink={
-											STATIC_NAV.currentNavLink
-										}
+										subNavSections={nav.subNavSections}
+										currentNavLink={nav.currentNavLink}
 										format={{
 											theme: 0,
 											design: 0,
@@ -263,10 +189,10 @@ export const StandAlonePage = ({
 				element="footer"
 			>
 				<Footer
-					pageFooter={STATIC_FOOTER}
+					pageFooter={footer}
 					pillar={0}
-					pillars={STATIC_NAV.pillars}
-					urls={STATIC_NAV.readerRevenueLinks.header}
+					pillars={nav.pillars}
+					urls={nav.readerRevenueLinks.header}
 					editionId={editionId}
 					contributionsServiceUrl={
 						'CAPIArticle.contributionsServiceUrl'
