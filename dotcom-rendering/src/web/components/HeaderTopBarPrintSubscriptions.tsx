@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { getCookie } from '@guardian/libs';
 import { brand, brandAlt, from, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import NewspaperIcon from '../../static/icons/newspaper.svg';
@@ -49,32 +48,15 @@ const linkStyles = css`
 	}
 `;
 
-const isServer = typeof window === 'undefined';
-
 export const HeaderTopBarPrintSubscriptions = ({
 	editionId,
 }: PrintSubscriptionsProps) => {
 	const [pageViewId, setPageViewId] = useState('');
 	const [referrerUrl, setReferrerUrl] = useState('');
-	const [hide, setHide] = useState(false);
 	useEffect(() => {
 		setPageViewId(window.guardian.config.ophan.pageViewId);
 		setReferrerUrl(window.location.origin + window.location.pathname);
-
-		if (
-			!isServer &&
-			getCookie({
-				name: 'gu_hide_support_messaging',
-				shouldMemoize: true,
-			}) === 'true'
-		) {
-			setHide(true);
-		}
 	}, []);
-
-	if (hide) {
-		return null;
-	}
 
 	const href = addTrackingCodesToUrl({
 		base: `https://support.theguardian.com/subscribe${
