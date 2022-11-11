@@ -12,20 +12,20 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import type { ReactNode } from 'react';
 import { StrictMode } from 'react';
 import type { BasePageModel } from 'src/model/pageModel';
+import { AlreadyVisited } from '../components//AlreadyVisited.importable';
+import { CoreVitals } from '../components//CoreVitals.importable';
+import { FocusStyles } from '../components//FocusStyles.importable';
 import { Footer } from '../components/Footer';
+import { Header } from '../components/Header';
+import { HeaderAdSlot } from '../components/HeaderAdSlot';
+import { Island } from '../components/Island';
+import { Nav } from '../components/Nav/Nav';
+import { ReaderRevenueDev } from '../components/ReaderRevenueDev.importable';
+import { Section } from '../components/Section';
+import { SkipTo } from '../components/SkipTo';
+import { SubNav } from '../components/SubNav.importable';
 import { Stuck } from '../layouts/lib/stickiness';
 import { decideFormat } from '../lib/decideFormat';
-import { AlreadyVisited } from './AlreadyVisited.importable';
-import { CoreVitals } from './CoreVitals.importable';
-import { FocusStyles } from './FocusStyles.importable';
-import { Header } from './Header';
-import { HeaderAdSlot } from './HeaderAdSlot';
-import { Island } from './Island';
-import { Nav } from './Nav/Nav';
-import { ReaderRevenueDev } from './ReaderRevenueDev.importable';
-import { Section } from './Section';
-import { SkipTo } from './SkipTo';
-import { SubNav } from './SubNav.importable';
 
 type Props = BasePageModel & {
 	children: ReactNode;

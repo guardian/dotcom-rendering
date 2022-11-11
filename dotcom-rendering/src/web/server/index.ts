@@ -219,16 +219,8 @@ export const renderNewslettersPage = (
 		// TO DO - data validation function
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- in progress
 		const model = body.model as NewslettersPageModel;
-
 		const content = newslettersToHtml(model);
-
-		if (content) {
-			res.status(200).send(content);
-			return;
-		}
-
-		res.sendStatus(404);
-		return;
+		res.status(200).send(content);
 	} catch (e) {
 		res.status(500).send(`<pre>${getStack(e)}</pre>`);
 	}
