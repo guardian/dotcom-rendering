@@ -9,7 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { buildAdTargeting } from '../../../lib/ad-targeting';
 import type { NavType } from '../../../model/extract-nav';
-import type { CAPIArticleType } from '../../../types/frontend';
+import type { FEArticleType } from '../../../types/frontend';
 import type { Palette } from '../../../types/palette';
 import { ArticleHeadline } from '../../components/ArticleHeadline';
 import { ArticleTitle } from '../../components/ArticleTitle';
@@ -41,7 +41,7 @@ const hasMainMediaStyles = css`
 `;
 
 interface Props {
-	CAPIArticle: CAPIArticleType;
+	CAPIArticle: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }

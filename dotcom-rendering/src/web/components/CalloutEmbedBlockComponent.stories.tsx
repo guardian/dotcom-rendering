@@ -2,11 +2,11 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
 import { calloutCampaign } from '../../../fixtures/manual/calloutCampaign';
-import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
+import { CalloutEmbedBlockComponent } from './CalloutEmbedBlockComponent.importable';
 
 export default {
-	component: CalloutBlockComponent,
-	title: 'Components/CalloutBlockComponent',
+	component: CalloutEmbedBlockComponent,
+	title: 'Components/CalloutEmbedBlockComponent',
 };
 
 export const Default = () => {
@@ -26,7 +26,7 @@ export const Default = () => {
 				padding: 15px;
 			`}
 		>
-			<CalloutBlockComponent
+			<CalloutEmbedBlockComponent
 				callout={calloutCampaign}
 				format={{
 					display: ArticleDisplay.Standard,

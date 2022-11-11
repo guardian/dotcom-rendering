@@ -7,10 +7,13 @@ import type { CAPIOnwards } from './onwards';
 import type { CAPITrailType } from './trails';
 
 /**
+ * This type is what we receive from `frontend`,
+ * hence the FE prefix.
+ *
  * WARNING: run `gen-schema` task if changing this to update the associated JSON
  * schema definition.
  */
-export interface CAPIArticleType {
+export interface FEArticleType {
 	headline: string;
 	standfirst: string;
 	webTitle: string;

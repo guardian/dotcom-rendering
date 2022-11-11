@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
 import { from, until } from '@guardian/source-foundations';
 import type {
 	DCRContainerPalette,
@@ -13,6 +14,7 @@ type Props = {
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: true;
+	parentFormat?: ArticleFormat;
 };
 
 const wrapperStyles = css`
@@ -63,11 +65,26 @@ const bottomMargin = css`
 	}
 `;
 
+// If the sublink or parent container is a liveblog the sublink format should persist taking the parent format's design.
+const decideFormat = (
+	sublinkFormat: ArticleFormat,
+	parentFormat: ArticleFormat,
+) => {
+	if (
+		sublinkFormat.design === ArticleDesign.LiveBlog ||
+		parentFormat.design === ArticleDesign.LiveBlog
+	) {
+		return { ...sublinkFormat, design: parentFormat.design };
+	}
+	return sublinkFormat;
+};
+
 export const SupportingContent = ({
 	supportingContent,
 	alignment,
 	containerPalette,
 	isDynamo,
+	parentFormat,
 }: Props) => {
 	return (
 		<ul css={[wrapperStyles, directionStyles(alignment)]}>
@@ -87,15 +104,23 @@ export const SupportingContent = ({
 						]}
 					>
 						<CardHeadline
-							headlineText={subLink.headline}
-							kickerText={subLink.kickerText}
-							format={subLink.format}
+							format={
+								parentFormat
+									? decideFormat(subLink.format, parentFormat)
+									: subLink.format
+							}
 							size="tiny"
 							showSlash={false}
 							showLine={true}
 							linkTo={subLink.url}
 							containerPalette={containerPalette}
 							isDynamo={isDynamo}
+							headlineText={subLink.headline}
+							kickerText={
+								subLink.format.design === ArticleDesign.LiveBlog
+									? 'Live'
+									: subLink.kickerText
+							}
 						/>
 					</li>
 				);

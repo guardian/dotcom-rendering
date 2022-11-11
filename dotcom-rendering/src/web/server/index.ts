@@ -8,7 +8,7 @@ import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
-import type { CAPIArticleType } from '../../types/frontend';
+import type { FEArticleType } from '../../types/frontend';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
@@ -19,7 +19,7 @@ function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
 }
 
-const enhanceCAPIType = (body: unknown): CAPIArticleType => {
+const enhanceCAPIType = (body: unknown): FEArticleType => {
 	const data = validateAsCAPIType(body);
 
 	const enhancedBlocks = enhanceBlocks(
@@ -28,7 +28,7 @@ const enhanceCAPIType = (body: unknown): CAPIArticleType => {
 		data.promotedNewsletter,
 	);
 
-	const CAPIArticle: CAPIArticleType = {
+	const CAPIArticle: FEArticleType = {
 		...data,
 		blocks: enhancedBlocks,
 		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
