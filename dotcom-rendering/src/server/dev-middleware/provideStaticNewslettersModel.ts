@@ -113,6 +113,13 @@ const STATIC_NEWSLETTERS_MODEL: NewslettersPageModel = {
 	nav: STATIC_NAV,
 	config: STATIC_CONFIG,
 	editionId: 'UK',
+
+	webTitle: 'email newsletters',
+	description:
+		"Scroll less and understand more about the subjects you care about with the Guardian's brilliant email newsletters, free to your inbox.",
+	contentType: 'static',
+	pageId: 'static-email-newsletters',
+	beaconURL: '/',
 };
 
 export const provideStaticDataMiddleware = (

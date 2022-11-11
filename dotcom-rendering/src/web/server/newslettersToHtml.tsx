@@ -9,6 +9,7 @@ import { NewslettersList } from '../components/stand-alone/NewslettersList';
 import { StandAlonePage } from '../components/StandAlonePage';
 import { extractExpeditedIslands } from './extractIslands';
 import { pageTemplate } from './pageTemplate';
+import { buildWindowGuardian } from './stand-alone-pages/makeWindowGuardian';
 import {
 	getGaPath,
 	getLowPriorityScriptTags,
@@ -67,15 +68,17 @@ export const newslettersToHtml = (
 	const lowPriorityScriptTags = getLowPriorityScriptTags(offerHttp3, false);
 	const gaPath = getGaPath(false);
 
+	const windowGuardian = buildWindowGuardian(model);
+
 	return pageTemplate({
 		linkedData: {},
 		priorityScriptTags,
 		lowPriorityScriptTags,
 		css: extractedCss,
 		html,
-		title: 'email newsletters',
-		description: 'page description for page',
-		windowGuardian: '',
+		title: model.webTitle,
+		description: model.description,
+		windowGuardian,
 		gaPath,
 		ampLink: undefined,
 		openGraphData: undefined,
