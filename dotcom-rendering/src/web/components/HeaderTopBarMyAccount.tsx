@@ -139,7 +139,8 @@ export const dropDownOverrides = css`
 	font-weight: bold;
 
 	&:hover {
-		color: inherit;
+		color: ${neutral[100]};
+		text-decoration: underline;
 	}
 
 	${from.tablet} {
