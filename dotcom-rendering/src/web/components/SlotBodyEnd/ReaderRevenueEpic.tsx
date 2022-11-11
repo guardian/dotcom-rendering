@@ -93,6 +93,7 @@ const buildPayload = async (data: CanShowData): Promise<EpicPayload> => ({
 		browserId: (await hasCmpConsentForBrowserId())
 			? data.browserId
 			: undefined,
+		isSignedIn: data.isSignedIn,
 	},
 });
 
