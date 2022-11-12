@@ -1,5 +1,11 @@
 import { css } from '@emotion/react';
-import { body, headline, neutral, space } from '@guardian/source-foundations';
+import {
+	body,
+	headline,
+	neutral,
+	space,
+	textSans,
+} from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { Deadline } from './CalloutNew/CalloutDeadline';
 import { CalloutShareComponent } from './CalloutNew/CalloutShareComponent';
@@ -80,6 +86,15 @@ const activeUntilStyles = css`
 	display: block;
 `;
 
+const linkTextStyles = (format: ArticleFormat) =>
+	css`
+		a {
+			color: ${decidePalette(format).text.richLink};
+		}
+		display: inline-block;
+		${textSans.xsmall()}
+	`;
+
 type FormDataType = { [key in string]: any };
 
 export const CalloutBlockComponent = ({
@@ -146,7 +161,34 @@ export const CalloutBlockComponent = ({
 	};
 
 	if (submissionSuccess) {
-		return <>Thanks! </>;
+		return (
+			<details
+				css={[calloutDetailsStyles, wrapperStyles]}
+				aria-hidden={true}
+				open={true}
+			>
+				<summary css={summaryStyles}>
+					<div css={summaryContentWrapper}>
+						<div css={titleStyles(format)}>
+							Thank you for your contribution.
+						</div>
+						<h4 css={subtitleTextHeaderStyles}>
+							We may get in touch for further information.
+						</h4>
+						<div css={[descriptionStyles, linkTextStyles(format)]}>
+							You should receive a confirmation email with your
+							response. To learn more about our community
+							journalism please visit our{' '}
+							<a href="www.theguardian.com">callouts page</a>.
+						</div>
+						<div css={activeUntilStyles}>
+							<Deadline until={activeUntil} />
+						</div>
+					</div>
+				</summary>
+				<CalloutShareComponent format={format} />
+			</details>
+		);
 	}
 	return (
 		<aside>
