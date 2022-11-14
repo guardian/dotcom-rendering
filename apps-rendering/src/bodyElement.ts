@@ -266,13 +266,17 @@ const parse =
 
 			case ElementType.IMAGE:
 				return parseImage(context)(element)
-					.map<Result<string, BodyElement>>((image) =>
-						Result.ok({
+					.map((image) =>
+						Result.ok<string, BodyElement>({
 							kind: ElementKind.Image,
 							...image,
 						}),
 					)
-					.withDefault(Result.err("I couldn't find a master asset"));
+					.withDefault(
+						Result.err<string, BodyElement>(
+							"I couldn't find a master asset",
+						),
+					);
 
 			case ElementType.PULLQUOTE: {
 				const { html: quote, attribution } =
