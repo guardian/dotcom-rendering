@@ -31,13 +31,13 @@ async function handleSubmission(bundle: FormBundle): Promise<void> {
 	input.setAttribute('disabled', '');
 	submitButton.setAttribute('disabled', '');
 
-	const response = await newslettersClient.requestSignUp(
+	const success = await newslettersClient.requestSignUp(
 		input.value,
 		identityName,
 	);
 	form.classList.remove(MODIFIER_CLASSNAME.waiting);
 
-	if (response.success) {
+	if (success) {
 		form.classList.add(MODIFIER_CLASSNAME.success);
 	} else {
 		form.classList.add(MODIFIER_CLASSNAME.failure);
