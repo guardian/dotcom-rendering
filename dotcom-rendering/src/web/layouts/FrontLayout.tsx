@@ -404,7 +404,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										collection.displayName === 'Headlines'
 									}
 								/>
-								{collection.hasMore && (
+								{collection.canShowMore && (
 									<Island deferUntil="interaction">
 										<ShowMore
 											containerTitle={
