@@ -1,5 +1,7 @@
 // ----- Imports ----- //
 import { newslettersClient } from 'native/nativeApi';
+import { getBridgetVersion } from './bridgetVersion';
+import { isSameOrLaterVersion } from './versionNumbers';
 
 // ----- Types ----- //
 interface FormBundle {
@@ -11,6 +13,7 @@ interface FormBundle {
 }
 
 // ----- Constants ----- //
+const COMPONENT_CONTAINER_CLASSNAME = 'js-signup-form-container' as const
 const COMPONENT_BASE_CLASSNAME = 'js-signup-form' as const;
 const MODIFIER_CLASSNAME = {
 	waiting: `${COMPONENT_BASE_CLASSNAME}--waiting`,
@@ -106,11 +109,25 @@ function setup(form: Element): void {
 	});
 }
 
-function initSignupForms(): void {
-	const signupForms = Array.from(
-		document.querySelectorAll(`form.${COMPONENT_BASE_CLASSNAME}`),
-	);
-	signupForms.forEach(setup);
+function removeContainer(container: Element): void {
+	container.parentElement?.removeChild(container);
+}
+
+async function initSignupForms(): Promise<void> {
+
+	const version = await getBridgetVersion() || '';
+
+	if (isSameOrLaterVersion(version, '2.0.0')) {
+		const signupForms = Array.from(
+			document.querySelectorAll(`form.${COMPONENT_BASE_CLASSNAME}`),
+		);
+		signupForms.forEach(setup);
+	} else {
+		const signupContainers = Array.from(
+			document.querySelectorAll(`.${COMPONENT_CONTAINER_CLASSNAME}`),
+		);
+		signupContainers.forEach(removeContainer);
+	}
 }
 
 // ----- Exports ----- //

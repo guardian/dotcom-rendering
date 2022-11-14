@@ -116,7 +116,10 @@ const NewsletterSignup: FC<Props> = ({ format, element }) => {
 		successDescription,
 	} = element;
 	return (
-		<aside css={containerStyles(format)}>
+		<aside
+			css={containerStyles(format)}
+			className={'js-signup-form-container'}
+		>
 			<div css={stackBelowTabletStyles}>
 				<p css={titleStyles(theme)}>
 					Sign up to <span>{name}</span>
