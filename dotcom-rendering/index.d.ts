@@ -273,16 +273,6 @@ interface CAPINavType {
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
 
-interface TagType {
-	id: string;
-	type: string;
-	title: string;
-	twitterHandle?: string;
-	paidContentType?: string;
-	bylineImageUrl?: string;
-	bylineLargeImageUrl?: string;
-}
-
 /**
  * BlocksRequest is the expected body format for POST requests made to /Blocks
  */

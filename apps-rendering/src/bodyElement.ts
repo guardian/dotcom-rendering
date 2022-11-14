@@ -9,7 +9,7 @@ import type { BlockElement } from '@guardian/content-api-models/v1/blockElement'
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { ArticleTheme } from '@guardian/libs';
 import type { Option } from '@guardian/types';
-import { fromNullable, map, withDefault } from '@guardian/types';
+import { fromNullable } from '@guardian/types';
 import { parseAtom } from 'atoms';
 import { ElementKind } from 'bodyElementKind';
 import { getCallout } from 'campaign';
@@ -18,7 +18,7 @@ import { parseAudio, parseGeneric, parseInstagram, parseVideo } from 'embed';
 import type { Embed } from 'embed';
 import type { Image as ImageData } from 'image';
 import { parseImage } from 'image';
-import { compose, pipe } from 'lib';
+import { compose } from 'lib';
 import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
@@ -265,18 +265,14 @@ const parse =
 			}
 
 			case ElementType.IMAGE:
-				return pipe(
-					parseImage(context)(element),
-					map<ImageData, Result<string, Image>>((image) =>
+				return parseImage(context)(element)
+					.map<Result<string, BodyElement>>((image) =>
 						Result.ok({
 							kind: ElementKind.Image,
 							...image,
 						}),
-					),
-					withDefault<Result<string, Image>>(
-						Result.err("I couldn't find a master asset"),
-					),
-				);
+					)
+					.withDefault(Result.err("I couldn't find a master asset"));
 
 			case ElementType.PULLQUOTE: {
 				const { html: quote, attribution } =

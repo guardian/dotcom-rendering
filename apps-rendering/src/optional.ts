@@ -2,6 +2,7 @@
 
 import type { Option } from '@guardian/types';
 import { none, some } from '@guardian/types';
+import { Result } from 'result';
 
 // ----- Classes ----- //
 
@@ -42,6 +43,21 @@ abstract class Optional<A> {
 	 * bylineTwo.withDefault('Jane Smith'); // Returns 'Jane Smith'
 	 */
 	abstract withDefault<B>(b: B): A | B;
+
+	/**
+	 * Converts an {@linkcode Optional} into a {@linkcode Result}. If the
+	 * optional is a `Some` this will be an `Ok`; if the optional is a `None`
+	 * this will take the supplied error and produce an `Err`.
+	 * @param e The error to use when creating an `Err` from a `None`
+	 * @example
+	 * const opt = Optional.some('CP Scott');
+	 * const result = opt.toResult('Missing name'); // Ok('CP Scott')
+	 *
+	 * const opt2 = Optional.none();
+	 * const result2 = opt2.toResult('Missing name'); // Err('Missing name')
+	 * @returns {Result<E, A>} A {@linkcode Result}
+	 */
+	abstract toResult<E>(e: E): Result<E, A>;
 
 	/**
 	 * Temporary method to convert to the old `Option` type.
@@ -172,6 +188,10 @@ class Some<A> extends Optional<A> {
 		return this.value;
 	}
 
+	toResult<E>(_e: E): Result<E, A> {
+		return Result.ok(this.value);
+	}
+
 	toOption(): Option<A> {
 		return some(this.value);
 	}
@@ -197,6 +217,10 @@ class None<A> extends Optional<A> {
 
 	withDefault<B>(b: B): A | B {
 		return b;
+	}
+
+	toResult<E>(e: E): Result<E, A> {
+		return Result.err(e);
 	}
 
 	toOption(): Option<A> {

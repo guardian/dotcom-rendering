@@ -2,7 +2,7 @@ import type { ABTest } from '@guardian/ab-core';
 
 export const consentlessAds: ABTest = {
 	id: 'ConsentlessAds',
-	author: '@commercial-dev',
+	author: '@guardian/commercial-dev',
 	start: '2022-08-11',
 	expiry: '2023-06-01',
 	audience: 0 / 100,

@@ -20,6 +20,7 @@ type Props = {
 	nav: NavType;
 	subscribeUrl: string;
 	editionId: EditionId;
+	headerTopBarSwitch: boolean;
 };
 
 const clearFixStyle = css`
@@ -64,7 +65,13 @@ const PositionButton = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
+export const Nav = ({
+	format,
+	nav,
+	subscribeUrl,
+	editionId,
+	headerTopBarSwitch,
+}: Props) => {
 	const displayRoundel =
 		format.display === ArticleDisplay.Immersive ||
 		format.theme === ArticleSpecial.Labs;
@@ -229,7 +236,12 @@ export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
 					dataLinkName="nav2"
 					isTopNav={true}
 				/>
-				<ExpandedMenu editionId={editionId} nav={nav} format={format} />
+				<ExpandedMenu
+					editionId={editionId}
+					nav={nav}
+					format={format}
+					headerTopBarSwitch={headerTopBarSwitch}
+				/>
 			</div>
 			{displayRoundel && (
 				<PositionRoundel>

@@ -1,5 +1,6 @@
 import { Hide } from '@guardian/source-react-components';
 import type { Switches } from '../../types/config';
+import type { TagType } from '../../types/tag';
 import { EnhancePinnedPost } from '../components/EnhancePinnedPost.importable';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
 import { Island } from '../components/Island';
