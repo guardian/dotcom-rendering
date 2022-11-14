@@ -111,7 +111,7 @@ function removeContainer(container: Element): void {
 }
 
 async function initSignupForms(): Promise<void> {
-	const version = (await getBridgetVersion()) || '';
+	const version = (await getBridgetVersion()) ?? '';
 
 	if (isSameOrLaterVersion(version, '2.0.0')) {
 		const signupForms = Array.from(
