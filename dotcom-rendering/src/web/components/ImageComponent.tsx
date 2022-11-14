@@ -222,6 +222,12 @@ export const ImageComponent = ({
 	title,
 	isAvatar,
 }: Props) => {
+	// Its possible the tools wont send us any images urls
+	// if so, don't try to render
+	if (element.media.allImages.length === 0) {
+		return null;
+	}
+
 	const shouldLimitWidth =
 		!isMainMedia &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');
@@ -256,12 +262,6 @@ export const ImageComponent = ({
 		};
 		return images.slice().sort(descendingByWidth)[0].url;
 	};
-
-	// Its possible the tools wont send us any images urls
-	// if so, don't try to render
-	if (element.media.allImages.length === 0) {
-		return null;
-	}
 
 	// Legacy images do not have a master so we fallback to the largest available
 	const image =
