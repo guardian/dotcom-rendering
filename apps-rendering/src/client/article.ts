@@ -36,7 +36,7 @@ import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
-import { initSignupForms } from './signupForm';
+import { initSignupForms } from './newsletterSignupForm';
 
 // ----- Run ----- //
 
