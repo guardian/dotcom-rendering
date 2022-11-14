@@ -22,6 +22,7 @@ export const BrazeBannerComponent = (
 	useEffect(() => {
 		import('@guardian/braze-components')
 			.then((module) => {
+				console.log(module);
 				setBrazeMessage(() => module.BrazeBannerComponent);
 			})
 			.catch((e) =>
