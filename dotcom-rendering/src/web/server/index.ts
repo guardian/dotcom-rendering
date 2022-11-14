@@ -60,7 +60,7 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 				data.pageId,
 			),
 		},
-		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
+		mostViewed: data.mostViewed?.map((trail) => decideTrail(trail)) ?? [],
 		mostCommented: data.mostCommented
 			? decideTrail(data.mostCommented)
 			: undefined,
