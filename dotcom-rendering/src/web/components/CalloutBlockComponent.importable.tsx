@@ -22,8 +22,6 @@ const wrapperStyles = css`
 `;
 
 const calloutDetailsStyles = css`
-	border-top: 1px ${neutral[86]} solid;
-	border-bottom: 1px ${neutral[86]} solid;
 	position: relative;
 	padding-bottom: ${space[2]}px;
 
