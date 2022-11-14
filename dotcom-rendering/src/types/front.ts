@@ -305,6 +305,13 @@ export type DCRCollectionType = {
 	config: {
 		showDateHeader: boolean;
 	};
+	/**
+	 * @property {?boolean} canShowMore - Whether the 'show more' button should be shown.
+	 * nb. the value of this will typically reflect the `FECollectionType.hasMore` value we get from Frontend,
+	 * except when `FECollectionType.config.hideShowMore` is set to `true`, in which case `DCRCollectionType.canShowMore`
+	 * will always be `false`.
+	 **/
+	canShowMore?: boolean;
 };
 
 export type DCRGroupedTrails = {
