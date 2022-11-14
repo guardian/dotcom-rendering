@@ -319,6 +319,12 @@ export type DCRCollectionType = {
 	config: {
 		showDateHeader: boolean;
 	};
+	/**
+	 * @property {?boolean} hasMore - Whether the 'show more' button should be shown.
+	 * nb. the value might differ from the `hasMore` value we get from Frontend, because occasionally
+	 * `FECollectionType.hasMore` and `FECollectionType.config.hideShowMore` are `true`, in which case we
+	 * set `DCRCollectionType.hasMore` to `false`
+	 **/
 	hasMore?: boolean;
 };
 

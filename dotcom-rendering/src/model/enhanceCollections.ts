@@ -45,7 +45,7 @@ export const enhanceCollections = (
 			config: {
 				showDateHeader: collection.config.showDateHeader,
 			},
-			hasMore,
+			hasMore: hasMore && !collection.config.hideShowMore,
 		};
 	});
 };
