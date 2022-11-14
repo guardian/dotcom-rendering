@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import { css } from '@emotion/react';
+import { ArticleDesign } from '@guardian/libs';
 import {
 	background,
 	breakpoints,
@@ -15,6 +16,7 @@ import Byline from 'components/Byline';
 import Cutout from 'components/Cutout';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
+import HeadlineTag from 'components/HeadlineTag';
 import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
@@ -79,6 +81,11 @@ const CommentLayout: FC<Props> = ({ item, children }) => (
 		<article css={BorderStyles}>
 			<header>
 				<Series item={item} />
+
+				{item.design === ArticleDesign.Letter && (
+					<HeadlineTag format={item} tagText="Letters" />
+				)}
+
 				<Headline item={item} />
 				<div css={articleWidthStyles}>
 					<Byline {...item} />
