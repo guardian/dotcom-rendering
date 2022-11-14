@@ -8,6 +8,7 @@ import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import type { FEArticleType } from '../../types/frontend';
+import { decideTrail } from '../lib/decideTrail';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
@@ -59,6 +60,11 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 				data.pageId,
 			),
 		},
+		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
+		mostCommented: data.mostCommented
+			? decideTrail(data.mostCommented)
+			: undefined,
+		mostShared: data.mostShared ? decideTrail(data.mostShared) : undefined,
 	};
 };
 
