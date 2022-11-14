@@ -4,11 +4,20 @@ function isOnLocal() {
 	return window?.location?.host.startsWith('localhost:');
 }
 
-const LOCAL_FALLBACK_VERSION = '1.0.0' as const;
 
+/**
+ * Calls the environment native API to check which version
+ * or Bridget the client is running.
+ *
+ * @returns The version of Briget the client is running, or
+ * undefined when running locally or if the native API does
+ * not return a value.
+ */
 export const getBridgetVersion = async () => {
+	// Calls to the API will hang and timeout when running
+	// AR locally.
 	if (isOnLocal()) {
-		return LOCAL_FALLBACK_VERSION;
+		return undefined;
 	} else {
 		try {
 			return await environmentClient.nativeThriftPackageVersion();
