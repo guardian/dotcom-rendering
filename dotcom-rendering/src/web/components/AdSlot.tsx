@@ -39,6 +39,18 @@ type Props = InlineProps | NonInlineProps;
 
 export const labelHeight = 24;
 
+const adSlotLabelStyles = css`
+	${textSans.xxsmall()};
+	height: ${labelHeight}px;
+	max-height: ${labelHeight}px;
+	background-color: ${neutral[97]};
+	padding: 0 8px;
+	border-top: 1px solid ${border.secondary};
+	color: ${text.supporting};
+	text-align: left;
+	box-sizing: border-box;
+`;
+
 const outOfPageStyles = css`
 	height: 0;
 `;
@@ -52,6 +64,7 @@ export const labelStyles = css`
 		position: fixed;
 		bottom: 0;
 		width: 100%;
+		${adSlotLabelStyles}
 	}
 
 	.ad-slot:not[data-label-show='true']::before {
@@ -61,19 +74,11 @@ export const labelStyles = css`
 		visibility: hidden;
 	}
 
-	.ad-slot[data-label-show='true']::before {
+	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller)::before {
 		content: 'Advertisement';
-		${textSans.xxsmall()};
-		position: relative;
-		height: ${labelHeight}px;
-		max-height: ${labelHeight}px;
-		background-color: ${neutral[97]};
-		padding: 0 8px;
-		border-top: 1px solid ${border.secondary};
-		color: ${text.supporting};
-		text-align: left;
-		box-sizing: border-box;
 		display: block;
+		position: relative;
+		${adSlotLabelStyles}
 	}
 `;
 
