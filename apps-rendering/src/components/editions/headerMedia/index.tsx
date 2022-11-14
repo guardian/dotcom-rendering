@@ -173,7 +173,8 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 	const isPicture = checkIfPicture(item.tags);
 	const iconColour = fill.editionsCameraIcon(format);
 	const iconBackgroundColour = background.editionsCameraIcon(format);
-	const matchScores: Optional<MatchScores> = 'football' in item ? item.football : Optional.none();
+	const matchScores: Optional<MatchScores> =
+		'football' in item ? item.football : Optional.none();
 
 	return maybeRender(item.mainMedia, (media) => {
 		if (media.kind === MainMediaKind.Image) {

@@ -100,26 +100,33 @@ const parseTime = (time: unknown): Optional<string> => {
 	return Optional.some(`${date.getUTCHours()}:${date.getUTCMinutes()}`);
 };
 
-const parseMatchStatus = (status: string, time: string): Optional<MatchStatus> =>
+const parseMatchStatus = (
+	status: string,
+	time: string,
+): Optional<MatchStatus> =>
 	parseStatus(status).flatMap<MatchStatus>((s) => {
-			if (s === MatchStatusKind.KickOff) {
-				return parseTime(time).map((t) => ({ kind: s, time: t }));
-			}
+		if (s === MatchStatusKind.KickOff) {
+			return parseTime(time).map((t) => ({ kind: s, time: t }));
+		}
 
-			return Optional.some({ kind: s });
-		});
+		return Optional.some({ kind: s });
+	});
 
 const parseMatchScores = (football: FootballContent): Optional<MatchScores> => {
 	const maybeStadium = Optional.fromNullable(football.venue);
 	const maybeStatus = parseMatchStatus(football.status, football.kickOff);
 
-	return Optional.map2(maybeStadium, maybeStatus, (stadium: string, status: MatchStatus) => ({
-		league: football.competitionDisplayName,
-		stadium,
-		status,
-		homeTeam: football.homeTeam,
-		awayTeam: football.awayTeam,
-	}));
+	return Optional.map2(
+		maybeStadium,
+		maybeStatus,
+		(stadium: string, status: MatchStatus) => ({
+			league: football.competitionDisplayName,
+			stadium,
+			status,
+			homeTeam: football.homeTeam,
+			awayTeam: football.awayTeam,
+		}),
+	);
 };
 
 // ----- Exports ----- //

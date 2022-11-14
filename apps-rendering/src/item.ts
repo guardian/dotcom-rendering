@@ -539,7 +539,9 @@ const fromCapi =
 		} else if (isMatchReport(tags)) {
 			return {
 				design: ArticleDesign.MatchReport,
-				football: Optional.fromNullable(request.footballContent).flatMap(parseMatchScores),
+				football: Optional.fromNullable(
+					request.footballContent,
+				).flatMap(parseMatchScores),
 				...itemFieldsWithBody(context, request),
 			};
 		}
