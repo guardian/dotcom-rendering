@@ -1296,12 +1296,12 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@guardian/apps-rendering-api-models@0.0.0-2022-11-07-SNAPSHOT":
-  version "0.0.0-2022-11-07-SNAPSHOT"
-  resolved "https://registry.yarnpkg.com/@guardian/apps-rendering-api-models/-/apps-rendering-api-models-0.0.0-2022-11-07-SNAPSHOT.tgz#c8fa5238e942e01b7fe0f21f58d472d39cffbaf9"
-  integrity sha512-pukvCcFdNYPDEPGSJlU0DnAvqX5aUicEuSuOhloX4pLhHqdGVI6KNC4GNeUibHbO5sUyK2G2onNmM7LfuSvAIw==
+"@guardian/apps-rendering-api-models@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/apps-rendering-api-models/-/apps-rendering-api-models-3.0.0.tgz#4f48c8e1cce9f6e6c0b9e6257f2ea97aac009a27"
+  integrity sha512-12VWBwqb/qTm657gDAHIVegBhJzrIKqa32V9J8kvzI/JxIXV1qXRJ2N0db7KfSe4PhCdZNbcnlW2gsqquYxA9w==
   dependencies:
-    "@guardian/content-api-models" "^17.3.0"
+    "@guardian/content-api-models" "^17.4.0"
     "@guardian/content-atom-model" "^3.4.0"
     "@guardian/content-entity-model" "^2.2.1"
     "@guardian/story-packages-model" "^2.2.0"
@@ -1345,6 +1345,19 @@
   version "17.3.0"
   resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.3.0.tgz#01db5eee92165c0df4182486da3d0a3d644e69b0"
   integrity sha512-xT3k1VHjfOlt3SbaQ9PWsm2WOxwhISxgKA6BghBSAzsaQhz4pH2uwcgJBpa45WYX4pu3pVYnYDdCR04g5GgI2g==
+  dependencies:
+    "@guardian/content-atom-model" "^3.4.0"
+    "@guardian/content-entity-model" "^2.2.1"
+    "@guardian/story-packages-model" "^2.2.0"
+    "@types/node-int64" "^0.4.29"
+    "@types/thrift" "^0.10.11"
+    node-int64 "^0.4.0"
+    thrift "^0.15.0"
+
+"@guardian/content-api-models@^17.4.0":
+  version "17.4.0"
+  resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.4.0.tgz#c8ab4000b7761a65018481bddadde950c76358b4"
+  integrity sha512-5Hvl7az1Epg9/yWzqRusdcgg5hG8AuJMAXvRkTztvvNIgGCI5Txps8q4hH1lZ13lIUkEitAQDOXp0zOxfm28Aw==
   dependencies:
     "@guardian/content-atom-model" "^3.4.0"
     "@guardian/content-entity-model" "^2.2.1"
