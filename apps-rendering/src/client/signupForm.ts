@@ -31,10 +31,19 @@ async function handleSubmission(bundle: FormBundle): Promise<void> {
 	input.setAttribute('disabled', '');
 	submitButton.setAttribute('disabled', '');
 
-	const success = await newslettersClient.requestSignUp(
-		input.value,
-		identityName,
-	);
+	let success: boolean | undefined = undefined;
+	// newslettersClient.requestSignUp can throw errors
+	// user feedback about the type of error (eg Network Error,
+	// Service unavailable) will be handled by the native layer
+	// The component only need to know success or failure.
+	try {
+		success = await newslettersClient.requestSignUp(
+			input.value,
+			identityName,
+		);
+	} catch (error) {
+		success = false;
+	}
 	form.classList.remove(MODIFIER_CLASSNAME.waiting);
 
 	if (success) {
