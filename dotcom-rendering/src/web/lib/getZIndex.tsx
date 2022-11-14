@@ -48,6 +48,7 @@ const indices = [
 	'onwardsCarousel',
 
 	// Search link should be above The Guardian svg
+	'myAccountDropdown',
 	'searchHeaderLink',
 	'TheGuardian',
 

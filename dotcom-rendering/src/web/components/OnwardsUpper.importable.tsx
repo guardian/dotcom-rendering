@@ -3,6 +3,7 @@ import { ArticlePillar } from '@guardian/libs';
 import { joinUrl } from '../../lib/joinUrl';
 import type { EditionId } from '../../types/edition';
 import type { OnwardsSource } from '../../types/onwards';
+import type { TagType } from '../../types/tag';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
 import { Section } from './Section';
 

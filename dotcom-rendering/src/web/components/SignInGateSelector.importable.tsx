@@ -1,6 +1,7 @@
 import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import { constructQuery } from '../../lib/querystring';
+import type { TagType } from '../../types/tag';
 import { useOnce } from '../lib/useOnce';
 import { useSignInGateSelector } from '../lib/useSignInGateSelector';
 import type { ComponentEventParams } from './SignInGate/componentEventTracking';

@@ -237,7 +237,6 @@ const AdSlotLabelToggled = () => (
 export const AdSlot = ({
 	position,
 	display,
-	shouldHideReaderRevenue = false,
 	isPaidContent = false,
 	index,
 }: Props) => {
@@ -269,9 +268,6 @@ export const AdSlot = ({
 					return (
 						<Island>
 							<TopRightAdSlot
-								shouldHideReaderRevenue={
-									shouldHideReaderRevenue
-								}
 								isPaidContent={isPaidContent}
 								adStyles={adStyles}
 							/>

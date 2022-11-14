@@ -54,7 +54,7 @@ export const Default = () => {
 export const WithKicker = () => {
 	return (
 		<SupportingContent
-			supportingContent={[{ ...aBasicLink, kickerText: 'Kicket text' }]}
+			supportingContent={[{ ...aBasicLink, kickerText: 'Kicker text' }]}
 			alignment="horizontal"
 		/>
 	);
@@ -415,6 +415,124 @@ export const TwoSublinks = () => {
 				linkTo=""
 				headlineText="With two links"
 			/>
+		</div>
+	);
+};
+
+export const LiveSublink = () => {
+	return (
+		<div
+			css={css`
+				width: 700px;
+			`}
+		>
+			<Card
+				{...basicCardProps}
+				supportingContent={[
+					{
+						headline: 'Headline',
+						kickerText: 'Kicker',
+						url: 'https://www.theguardian.com',
+						format: {
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.LiveBlog,
+							theme: ArticlePillar.News,
+						},
+					},
+				]}
+				imagePosition="left"
+				imageSize="large"
+				trailText="When the image is positioned horizontally and there is only one sublink, it appears under the headline"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: ArticlePillar.News,
+				}}
+				linkTo=""
+				headlineText="With one link to a liveblog"
+			/>
+			<div
+				css={css`
+					width: 300px;
+				`}
+			>
+				<Card
+					{...basicCardProps}
+					supportingContent={[
+						{
+							...aBasicLink,
+							kickerText: 'News',
+							format: {
+								...aBasicLink.format,
+								theme: ArticlePillar.News,
+								design: ArticleDesign.LiveBlog,
+							},
+						},
+						{
+							...aBasicLink,
+							kickerText: 'Sport',
+							format: {
+								...aBasicLink.format,
+								theme: ArticlePillar.Sport,
+								design: ArticleDesign.LiveBlog,
+							},
+						},
+						{
+							...aBasicLink,
+							kickerText: 'Lifestyle',
+							format: {
+								...aBasicLink.format,
+								theme: ArticlePillar.Lifestyle,
+								design: ArticleDesign.LiveBlog,
+							},
+						},
+						{
+							...aBasicLink,
+							kickerText: 'Opinion',
+							format: {
+								...aBasicLink.format,
+								theme: ArticlePillar.Opinion,
+								design: ArticleDesign.LiveBlog,
+							},
+						},
+						{
+							...aBasicLink,
+							kickerText: 'Culture',
+							format: {
+								...aBasicLink.format,
+								theme: ArticlePillar.Culture,
+								design: ArticleDesign.LiveBlog,
+							},
+						},
+						{
+							...aBasicLink,
+							kickerText: 'SpecialReport',
+							format: {
+								...aBasicLink.format,
+								theme: ArticleSpecial.SpecialReport,
+								design: ArticleDesign.LiveBlog,
+							},
+						},
+						{
+							...aBasicLink,
+							kickerText: 'Labs',
+							format: {
+								...aBasicLink.format,
+								theme: ArticleSpecial.Labs,
+								design: ArticleDesign.LiveBlog,
+							},
+						},
+					]}
+					imagePosition="top"
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Standard,
+						theme: ArticlePillar.News,
+					}}
+					linkTo=""
+					headlineText="Different themes"
+				/>
+			</div>
 		</div>
 	);
 };

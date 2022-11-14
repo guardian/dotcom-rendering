@@ -299,7 +299,7 @@ const itemFields = (
 			map(context.docParser),
 		),
 		publishDate: maybeCapiDate(content.webPublicationDate),
-		mainMedia: articleMainMedia(content, context),
+		mainMedia: articleMainMedia(content, context).toOption(),
 		contributors: parseContributors(context.salt, content),
 		series: articleSeries(content),
 		commentable: content.fields?.commentable ?? false,

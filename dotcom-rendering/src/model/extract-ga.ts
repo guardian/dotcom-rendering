@@ -1,10 +1,11 @@
 // All GA fields should  fall back to default values -
 
 import type { EditionId } from 'src/types/edition';
-import type { CAPIArticleType } from '../types/frontend';
+import type { FEArticleType } from '../types/frontend';
+import type { TagType } from '../types/tag';
 
 const filterTags = (
-	tags: CAPIArticleType['tags'],
+	tags: FEArticleType['tags'],
 	tagType: 'Contributor' | 'Keyword' | 'Tone' | 'Series', // Let’s make a decision to keep this tag getter small and well defined, we don't really want to use tags
 ): TagType['id'] | '' => {
 	const tagArr = tags.filter((tag) => tag.type === tagType);
@@ -20,7 +21,7 @@ const filterTags = (
 
 // Annoyingly we ping GA with commissioningdesk as the title of the tag, not the id so handle that separately
 const getCommissioningDesk = (
-	tags: CAPIArticleType['tags'],
+	tags: FEArticleType['tags'],
 ): TagType['title'] | '' => {
 	const tag = tags.find((thisTag) =>
 		thisTag.id.includes('tracking/commissioningdesk'),
