@@ -1341,19 +1341,6 @@
     read-pkg-up "7.0.1"
     yargs "^17.5.1"
 
-"@guardian/content-api-models@^17.3.0":
-  version "17.3.0"
-  resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.3.0.tgz#01db5eee92165c0df4182486da3d0a3d644e69b0"
-  integrity sha512-xT3k1VHjfOlt3SbaQ9PWsm2WOxwhISxgKA6BghBSAzsaQhz4pH2uwcgJBpa45WYX4pu3pVYnYDdCR04g5GgI2g==
-  dependencies:
-    "@guardian/content-atom-model" "^3.4.0"
-    "@guardian/content-entity-model" "^2.2.1"
-    "@guardian/story-packages-model" "^2.2.0"
-    "@types/node-int64" "^0.4.29"
-    "@types/thrift" "^0.10.11"
-    node-int64 "^0.4.0"
-    thrift "^0.15.0"
-
 "@guardian/content-api-models@^17.4.0":
   version "17.4.0"
   resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.4.0.tgz#c8ab4000b7761a65018481bddadde950c76358b4"
