@@ -1,9 +1,8 @@
 import { environmentClient } from 'native/nativeApi';
 
-function isOnLocal() {
-	return window?.location?.host.startsWith('localhost:');
+function isOnLocal(): boolean {
+	return window.location.host.startsWith('localhost:');
 }
-
 
 /**
  * Calls the environment native API to check which version
@@ -13,7 +12,7 @@ function isOnLocal() {
  * undefined when running locally or if the native API does
  * not return a value.
  */
-export const getBridgetVersion = async () => {
+export const getBridgetVersion = async (): Promise<string | undefined> => {
 	// Calls to the API will hang and timeout when running
 	// AR locally.
 	if (isOnLocal()) {

@@ -13,7 +13,7 @@ interface FormBundle {
 }
 
 // ----- Constants ----- //
-const COMPONENT_CONTAINER_CLASSNAME = 'js-signup-form-container' as const
+const COMPONENT_CONTAINER_CLASSNAME = 'js-signup-form-container' as const;
 const COMPONENT_BASE_CLASSNAME = 'js-signup-form' as const;
 const MODIFIER_CLASSNAME = {
 	waiting: `${COMPONENT_BASE_CLASSNAME}--waiting`,
@@ -114,8 +114,7 @@ function removeContainer(container: Element): void {
 }
 
 async function initSignupForms(): Promise<void> {
-
-	const version = await getBridgetVersion() || '';
+	const version = (await getBridgetVersion()) || '';
 
 	if (isSameOrLaterVersion(version, '2.0.0')) {
 		const signupForms = Array.from(

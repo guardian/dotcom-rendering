@@ -45,5 +45,3 @@ export const isSameOrLaterVersion = (
 	}
 	return true;
 };
-
-
