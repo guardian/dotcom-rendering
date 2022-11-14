@@ -9,7 +9,6 @@ import {
 	space,
 	text,
 	textSans,
-	until,
 } from '@guardian/source-foundations';
 import { getZIndex } from '../lib/getZIndex';
 import { Island } from './Island';
@@ -40,41 +39,11 @@ type Props = InlineProps | NonInlineProps;
 
 export const labelHeight = 24;
 
-const adSlotLabelStyles = css`
-	${textSans.xxsmall()};
-	position: relative;
-	height: ${labelHeight}px;
-	max-height: ${labelHeight}px;
-	background-color: ${neutral[97]};
-	padding: 0 8px;
-	border-top: 1px solid ${border.secondary};
-	color: ${text.supporting};
-	text-align: left;
-	box-sizing: border-box;
-	&.visible {
-		visibility: initial;
-	}
-	&.hidden {
-		visibility: hidden;
-	}
-	&.ad-slot__label--toggle {
-		margin: 0 auto;
-		${until.tablet} {
-			display: none;
-		}
-	}
-`;
-
 const outOfPageStyles = css`
 	height: 0;
 `;
 
 export const labelStyles = css`
-	.ad-slot__label,
-	.ad-slot__scroll {
-		${adSlotLabelStyles}
-	}
-
 	.ad-slot__close-button {
 		display: none;
 	}
@@ -83,6 +52,28 @@ export const labelStyles = css`
 		position: fixed;
 		bottom: 0;
 		width: 100%;
+	}
+
+	.ad-slot:not[data-label-show='true']::before {
+		content: '';
+		display: block;
+		height: ${labelHeight}px;
+		visibility: hidden;
+	}
+
+	.ad-slot[data-label-show='true']::before {
+		content: 'Advertisement';
+		${textSans.xxsmall()};
+		position: relative;
+		height: ${labelHeight}px;
+		max-height: ${labelHeight}px;
+		background-color: ${neutral[97]};
+		padding: 0 8px;
+		border-top: 1px solid ${border.secondary};
+		color: ${text.supporting};
+		text-align: left;
+		box-sizing: border-box;
+		display: block;
 	}
 `;
 
@@ -224,17 +215,6 @@ const mobileStickyAdStyles = css`
 
 const adStyles = [labelStyles, fluidAdStyles];
 
-const AdSlotLabelToggled = () => (
-	<div
-		className={['ad-slot__label', 'ad-slot__label--toggle', 'hidden'].join(
-			' ',
-		)}
-		css={adSlotLabelStyles}
-	>
-		Advertisement
-	</div>
-);
-
 export const AdSlot = ({
 	position,
 	display,
@@ -248,21 +228,23 @@ export const AdSlot = ({
 				case ArticleDisplay.Showcase:
 				case ArticleDisplay.NumberedList: {
 					return (
-						<div
-							id="dfp-ad--right"
-							className={[
-								'js-ad-slot',
-								'ad-slot',
-								'ad-slot--right',
-								'ad-slot--mpu-banner-ad',
-								'ad-slot--rendered',
-								'js-sticky-mpu',
-							].join(' ')}
-							css={adStyles}
-							data-link-name="ad slot right"
-							data-name="right"
-							aria-hidden="true"
-						/>
+						<div css={[adStyles]}>
+							<div
+								id="dfp-ad--right"
+								className={[
+									'js-ad-slot',
+									'ad-slot',
+									'ad-slot--right',
+									'ad-slot--mpu-banner-ad',
+									'ad-slot--rendered',
+									'js-sticky-mpu',
+								].join(' ')}
+								css={adStyles}
+								data-link-name="ad slot right"
+								data-name="right"
+								aria-hidden="true"
+							/>
+						</div>
 					);
 				}
 				case ArticleDisplay.Standard: {
@@ -281,10 +263,13 @@ export const AdSlot = ({
 		case 'comments': {
 			return (
 				<div
-					css={css`
-						position: static;
-						height: 100%;
-					`}
+					css={[
+						css`
+							position: static;
+							height: 100%;
+						`,
+						adStyles,
+					]}
 				>
 					<div
 						id="dfp-ad--comments"
@@ -321,42 +306,40 @@ export const AdSlot = ({
 				min-width: 728px;
 			`;
 			return (
-				<>
-					<div
-						id="dfp-ad--top-above-nav"
-						className={[
-							'js-ad-slot',
-							'ad-slot',
-							'ad-slot--top-above-nav',
-							'ad-slot--mpu-banner-ad',
-							'ad-slot--rendered',
-						].join(' ')}
-						css={[adStyles, fluidFullWidthAdStyles, adSlotAboveNav]}
-						data-link-name="ad slot top-above-nav"
-						data-name="top-above-nav"
-						aria-hidden="true"
-					>
-						<AdSlotLabelToggled />
-					</div>
-				</>
+				<div
+					id="dfp-ad--top-above-nav"
+					className={[
+						'js-ad-slot',
+						'ad-slot',
+						'ad-slot--top-above-nav',
+						'ad-slot--mpu-banner-ad',
+						'ad-slot--rendered',
+					].join(' ')}
+					css={[adStyles, fluidFullWidthAdStyles, adSlotAboveNav]}
+					data-link-name="ad slot top-above-nav"
+					data-name="top-above-nav"
+					aria-hidden="true"
+				></div>
 			);
 		}
 		case 'mostpop': {
 			return (
-				<div
-					id="dfp-ad--mostpop"
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						'ad-slot--mostpop',
-						'ad-slot--mpu-banner-ad',
-						'ad-slot--rendered',
-					].join(' ')}
-					css={[adStyles, mostPopAdStyles]}
-					data-link-name="ad slot mostpop"
-					data-name="mostpop"
-					aria-hidden="true"
-				/>
+				<div css={[adStyles]}>
+					<div
+						id="dfp-ad--mostpop"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--mostpop',
+							'ad-slot--mpu-banner-ad',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[adStyles, mostPopAdStyles]}
+						data-link-name="ad slot mostpop"
+						data-name="mostpop"
+						aria-hidden="true"
+					/>
+				</div>
 			);
 		}
 		case 'merchandising-high': {
