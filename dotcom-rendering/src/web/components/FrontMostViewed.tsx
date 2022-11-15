@@ -10,6 +10,7 @@ type Props = {
 	mostCommented?: TrailType;
 	mostShared?: TrailType;
 	displayName: string;
+	isNetworkFront: boolean;
 };
 
 export const FrontMostViewed = ({
@@ -18,18 +19,19 @@ export const FrontMostViewed = ({
 	mostCommented,
 	mostShared,
 	displayName,
+	isNetworkFront,
 }: Props) => {
-	const hasMostViewed = !!mostViewed.length;
+	const showMostViewedTab = !isNetworkFront && !!mostViewed.length;
 	const sectionName = displayName.replace('most viewed ', '');
 
 	const tabs: TrailTabType[] = [
 		{
-			heading: hasMostViewed ? sectionName : undefined,
+			heading: showMostViewedTab ? sectionName : undefined,
 			trails: trails.slice(0, 10),
 		},
 	];
 
-	if (hasMostViewed) {
+	if (showMostViewedTab) {
 		tabs.push({
 			heading: 'Across the guardian',
 			trails: mostViewed,

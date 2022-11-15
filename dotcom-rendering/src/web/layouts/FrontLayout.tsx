@@ -353,6 +353,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										mostViewed={front.mostViewed}
 										mostCommented={front.mostCommented}
 										mostShared={front.mostShared}
+										isNetworkFront={front.isNetworkFront}
 									/>
 								</Section>
 								{decideAdSlot(
