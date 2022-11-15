@@ -14,8 +14,16 @@ import { ExpandingWrapper } from './ExpandingWrapper';
 import { useState } from 'react';
 
 const wrapperStyles = css`
+	border-image: repeating-linear-gradient(
+			to bottom,
+			${neutral[86]},
+			${neutral[86]} 1px,
+			transparent 1px,
+			transparent 4px
+		)
+		13;
+	border-top: 13px solid ${neutral[86]};
 	margin-bottom: ${space[6]}px;
-	margin-top: ${space[4]}px;
 	padding-left: ${space[2]}px;
 	padding-right: ${space[2]}px;
 	background-color: ${neutral[97]};
@@ -84,14 +92,11 @@ const activeUntilStyles = css`
 	display: block;
 `;
 
-const linkTextStyles = (format: ArticleFormat) =>
-	css`
-		a {
-			color: ${decidePalette(format).text.richLink};
-		}
-		display: inline-block;
-		${textSans.xsmall()}
-	`;
+const submissionSucessStyles = css`
+	padding-left: ${space[2]}px;
+	padding-right: ${space[2]}px;
+	${textSans.small()}
+`;
 
 type FormDataType = { [key in string]: any };
 
@@ -168,23 +173,21 @@ export const CalloutBlockComponent = ({
 				<summary css={summaryStyles}>
 					<div css={summaryContentWrapper}>
 						<div css={titleStyles(format)}>
-							Thank you for your contribution.
+							Share your experience
 						</div>
-						<h4 css={subtitleTextHeaderStyles}>
-							We may get in touch for further information.
-						</h4>
-						<div css={[descriptionStyles, linkTextStyles(format)]}>
-							You should receive a confirmation email with your
-							response. To learn more about our community
-							journalism please visit our{' '}
-							<a href="www.theguardian.com">callouts page</a>.
-						</div>
+						<h4 css={subtitleTextHeaderStyles}>{title}</h4>
+						<div css={descriptionStyles}>{description}</div>
 						<div css={activeUntilStyles}>
 							<Deadline until={activeUntil} />
 						</div>
 					</div>
 				</summary>
 				<CalloutShareComponent format={format} />
+				<div css={submissionSucessStyles}>
+					Thank you, your story has been submitted successfully. One
+					of our journalists will be in touch if we wish to take your
+					submission further.
+				</div>
 			</details>
 		);
 	}
