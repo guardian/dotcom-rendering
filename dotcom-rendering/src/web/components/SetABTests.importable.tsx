@@ -28,7 +28,6 @@ export const SetABTests = ({
 	);
 	if (!mvtId) {
 		// 0 is default and falsy here
-
 		console.log('There is no MVT ID set, see SetABTests.importable.tsx');
 	}
 	const ophanRecord = getOphanRecordFunction();
@@ -52,13 +51,14 @@ export const SetABTests = ({
 		},
 	});
 
+	const allRunnableTests = ab.allRunnableTests(tests);
+
 	setABTests({
 		api: ab,
 		participations: {},
-		allRunnableTests: [],
+		allRunnableTests,
 	});
 
-	const allRunnableTests = ab.allRunnableTests(tests);
 	ab.trackABTests(allRunnableTests);
 	ab.registerImpressionEvents(allRunnableTests);
 	ab.registerCompleteEvents(allRunnableTests);
