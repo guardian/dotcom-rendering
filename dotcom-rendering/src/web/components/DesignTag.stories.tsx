@@ -80,7 +80,7 @@ export const Letter = () => {
 		</div>
 	);
 };
-Interview.story = { name: 'with design Letter' };
+Letter.story = { name: 'with design Letter' };
 
 export const SpecialReport = () => {
 	return (
