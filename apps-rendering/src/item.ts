@@ -23,6 +23,7 @@ import type { Option } from '@guardian/types';
 import { getPillarFromId } from 'articleFormat';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
+import { getReport } from 'campaign';
 import type { Logo } from 'capi';
 import {
 	articleMainMedia,
@@ -279,11 +280,13 @@ const itemFields = (
 	context: Context,
 	request: RenderingRequest,
 ): ItemFields => {
-	const { content, commentCount, relatedContent } = request;
+	const { content, commentCount, relatedContent, campaigns } = request;
 	return {
-		theme: Optional.fromNullable(content.pillarId)
-			.flatMap(getPillarFromId)
-			.withDefault(ArticlePillar.News),
+		theme: getReport(campaigns ?? []).withDefault(
+			Optional.fromNullable(content.pillarId)
+				.flatMap(getPillarFromId)
+				.withDefault(ArticlePillar.News),
+		),
 		display: getDisplay(content),
 		headline: content.fields?.headline ?? '',
 		standfirst: pipe(
@@ -338,13 +341,13 @@ const itemFieldsWithBody = (
 	const { content } = request;
 	const body = content.blocks?.body ?? [];
 	const atoms = content.atoms;
-	const campaigns = request.campaigns;
+	const campaigns = request.campaigns ?? [];
 	const elements = [...body].shift()?.elements;
 
 	return {
 		...itemFields(context, request),
 		body: elements
-			? parseElements(context, atoms, campaigns)(elements)
+			? parseElements(context, campaigns, atoms)(elements)
 			: [],
 	};
 };
@@ -407,13 +410,17 @@ const fromCapiLiveBlog =
 		request: RenderingRequest,
 		blockId: Option<string>,
 	): LiveBlog | DeadBlog => {
-		const { content } = request;
+		const { content, campaigns } = request;
 		const body = content.blocks?.body ?? [];
 		const pageSize = content.tags.map((c) => c.id).includes('sport/sport')
 			? 30
 			: 10;
 
-		const parsedBlocks = parseLiveBlocks(context)(body, content.tags);
+		const parsedBlocks = parseLiveBlocks(context)(
+			body,
+			content.tags,
+			campaigns ?? [],
+		);
 		const pagedBlocks = getPagedBlocks(pageSize, parsedBlocks, blockId);
 		return {
 			design:
