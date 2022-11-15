@@ -1,9 +1,15 @@
-import type { ABTestAPI } from '@guardian/ab-core';
+import type { ABTestAPI, Participations, Runnable } from '@guardian/ab-core';
 import { mutate } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
-const apiPromise = new Promise<ABTestAPI>(() => {});
-const key = 'ab-test-api';
+type ABTests = {
+	api: ABTestAPI;
+	participations: Participations;
+	allRunnableTests: [] | readonly Runnable[];
+};
+
+const apiPromise = new Promise<ABTests>(() => {});
+const key = 'ab-tests';
 
 /**
  * A hook which returns the AB Test Api when available,
@@ -13,13 +19,15 @@ const key = 'ab-test-api';
  * AB Core. As soon as the tests are available, all instances of
  * the useAB hook will render.
  */
-export const useAB = (): ABTestAPI | undefined => {
+export const useAB = (): ABTests | undefined => {
 	const { data } = useSWRImmutable(key, () => apiPromise);
-
 	return data;
 };
 
-export const setABTests = (api: ABTestAPI): void => {
-	// eslint-disable-next-line @typescript-eslint/no-floating-promises
-	mutate(key, api, false);
+export const setABTests = ({
+	api,
+	participations,
+	allRunnableTests,
+}: ABTests): void => {
+	void mutate(key, { api, participations, allRunnableTests }, false);
 };

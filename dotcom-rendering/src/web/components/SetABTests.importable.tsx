@@ -51,7 +51,12 @@ export const SetABTests = ({
 			...getForcedParticipationsFromUrl(windowHash),
 		},
 	});
-	setABTests(ab);
+
+	setABTests({
+		api: ab,
+		participations: {},
+		allRunnableTests: [],
+	});
 
 	const allRunnableTests = ab.allRunnableTests(tests);
 	ab.trackABTests(allRunnableTests);
