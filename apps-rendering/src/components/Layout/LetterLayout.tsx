@@ -7,7 +7,6 @@ import {
 	neutral,
 	opinion,
 	palette,
-	remSpace,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import ArticleBody from 'components/ArticleBody';
@@ -15,6 +14,7 @@ import Byline from 'components/Byline';
 import Cutout from 'components/Cutout';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
+import HeadlineTag from 'components/HeadlineTag';
 import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
@@ -23,7 +23,7 @@ import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
 import { getFormat } from 'item';
-import type { Comment as CommentItem, Editorial } from 'item';
+import type { Letter as LetterItem } from 'item';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,
@@ -39,7 +39,7 @@ const Styles = css`
 `;
 
 const DarkStyles = darkModeCss`
-    background: ${palette.neutral[10]};
+	background: ${palette.neutral[10]}
 `;
 
 const BorderStyles = css`
@@ -52,37 +52,24 @@ const BorderStyles = css`
 	}
 `;
 
-const topBorder = css`
-	border-top: solid 1px ${neutral[86]};
-	margin-top: ${remSpace[3]};
-
-	${from.wide} {
-		margin-top: ${remSpace[3]};
-	}
-
-	${darkModeCss`
-        border-top: solid 1px ${neutral[20]};
-    `}
-`;
-
-const commentLineStylePosition = css`
+const linePosition = css`
 	margin-top: 83px;
 `;
 
 interface Props {
-	item: CommentItem | Editorial;
+	item: LetterItem;
 	children: ReactNode[];
 }
 
-const CommentLayout: FC<Props> = ({ item, children }) => (
+const LetterLayout: FC<Props> = ({ item, children }) => (
 	<main css={[Styles, DarkStyles]}>
 		<article css={BorderStyles}>
 			<header>
 				<Series item={item} />
+
+				<HeadlineTag format={item} tagText="Letters" />
+
 				<Headline item={item} />
-				<div css={articleWidthStyles}>
-					<Byline {...item} />
-				</div>
 
 				<Cutout
 					contributors={item.contributors}
@@ -90,17 +77,14 @@ const CommentLayout: FC<Props> = ({ item, children }) => (
 					format={item}
 				/>
 				<StraightLines
-					cssOverrides={[commentLineStylePosition, lineStyles]}
+					cssOverrides={[linePosition, lineStyles]}
 					count={8}
 				/>
 				<div css={articleWidthStyles}>
 					<Standfirst item={item} />
-				</div>
-
-				<section css={[articleWidthStyles, topBorder]}>
+					<Byline {...item} />
 					<Metadata item={item} />
-				</section>
-
+				</div>
 				<MainMedia
 					format={getFormat(item)}
 					mainMedia={item.mainMedia}
@@ -125,4 +109,4 @@ const CommentLayout: FC<Props> = ({ item, children }) => (
 
 // ----- Exports ----- //
 
-export default CommentLayout;
+export default LetterLayout;

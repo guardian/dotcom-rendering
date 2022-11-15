@@ -20,6 +20,7 @@ import { renderAll, renderAllWithoutStyles } from 'renderer';
 import { Result } from 'result';
 import AnalysisLayout from './AnalysisLayout';
 import ImmersiveLayout from './ImmersiveLayout';
+import LetterLayout from './LetterLayout';
 
 // ----- Functions ----- //
 
@@ -76,12 +77,14 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 
 	if (
 		item.design === ArticleDesign.Comment ||
-		item.design === ArticleDesign.Letter ||
 		item.design === ArticleDesign.Editorial
 	) {
 		return <CommentLayout item={item}>{render(item, body)}</CommentLayout>;
 	}
 
+	if (item.design === ArticleDesign.Letter) {
+		return <LetterLayout item={item}>{render(item, body)}</LetterLayout>;
+	}
 	if (item.design === ArticleDesign.Analysis) {
 		return (
 			<AnalysisLayout item={item}>{render(item, body)}</AnalysisLayout>
