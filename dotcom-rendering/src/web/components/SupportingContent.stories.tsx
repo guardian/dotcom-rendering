@@ -465,7 +465,7 @@ export const LiveSublink = () => {
 							format: {
 								...aBasicLink.format,
 								theme: ArticlePillar.News,
-								design: ArticleDesign.LiveBlog,
+								design: ArticleDesign.Standard,
 							},
 						},
 						{
@@ -474,7 +474,7 @@ export const LiveSublink = () => {
 							format: {
 								...aBasicLink.format,
 								theme: ArticlePillar.Sport,
-								design: ArticleDesign.LiveBlog,
+								design: ArticleDesign.Standard,
 							},
 						},
 						{
@@ -483,7 +483,7 @@ export const LiveSublink = () => {
 							format: {
 								...aBasicLink.format,
 								theme: ArticlePillar.Lifestyle,
-								design: ArticleDesign.LiveBlog,
+								design: ArticleDesign.Standard,
 							},
 						},
 						{
@@ -492,7 +492,7 @@ export const LiveSublink = () => {
 							format: {
 								...aBasicLink.format,
 								theme: ArticlePillar.Opinion,
-								design: ArticleDesign.LiveBlog,
+								design: ArticleDesign.Standard,
 							},
 						},
 						{
@@ -501,16 +501,7 @@ export const LiveSublink = () => {
 							format: {
 								...aBasicLink.format,
 								theme: ArticlePillar.Culture,
-								design: ArticleDesign.LiveBlog,
-							},
-						},
-						{
-							...aBasicLink,
-							kickerText: 'SpecialReport',
-							format: {
-								...aBasicLink.format,
-								theme: ArticleSpecial.SpecialReport,
-								design: ArticleDesign.LiveBlog,
+								design: ArticleDesign.Standard,
 							},
 						},
 						{
@@ -519,7 +510,7 @@ export const LiveSublink = () => {
 							format: {
 								...aBasicLink.format,
 								theme: ArticleSpecial.Labs,
-								design: ArticleDesign.LiveBlog,
+								design: ArticleDesign.Standard,
 							},
 						},
 					]}
