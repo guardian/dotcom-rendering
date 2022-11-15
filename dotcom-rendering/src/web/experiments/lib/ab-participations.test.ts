@@ -1,4 +1,4 @@
-import { isParticipations } from './ab-localstorage';
+import { isParticipations } from './ab-participations';
 
 describe('isParticipations validation', () => {
 	test('Localstorage Participation data is validated correctly,', () => {
