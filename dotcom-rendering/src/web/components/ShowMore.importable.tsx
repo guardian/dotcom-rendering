@@ -71,11 +71,14 @@ export const ShowMore = ({
 		setExistingCardLinks(containerLinks);
 	}, []);
 
-	const moreCardsHeadingReference = useCallback((node: HTMLElement | null) => {
-		if (node !== null) {
-		  node.focus();
-		}
-	  }, []);
+	const moreCardsHeadingReference = useCallback(
+		(node: HTMLElement | null) => {
+			if (node !== null) {
+				node.focus();
+			}
+		},
+		[],
+	);
 
 	/** We only pass an actual URL to SWR when 'showMore' is true.
 	 * Toggling 'showMore' will trigger a re-render
