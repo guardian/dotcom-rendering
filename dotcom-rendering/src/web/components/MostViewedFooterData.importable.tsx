@@ -46,7 +46,7 @@ export const MostViewedFooterData = ({
 	const palette = decidePalette(format);
 	// Example usage of AB Tests
 	// Used in the Cypress tests as smoke test of the AB tests framework integration
-	const ABTestAPI = useAB();
+	const ABTestAPI = useAB()?.api;
 
 	const abTestCypressDataAttr =
 		(ABTestAPI?.isUserInVariant('AbTestTest', 'control') &&

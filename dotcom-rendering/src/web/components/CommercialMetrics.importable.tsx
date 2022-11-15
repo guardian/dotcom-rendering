@@ -16,7 +16,7 @@ type Props = {
 };
 
 export const CommercialMetrics = ({ enabled }: Props) => {
-	const ABTestAPI = useAB();
+	const ABTestAPI = useAB()?.api;
 	const adBlockerInUse = useAdBlockInUse();
 
 	useOnce(() => {
