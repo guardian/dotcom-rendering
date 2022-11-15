@@ -11,7 +11,7 @@ import {
 	SvgCross,
 	SvgPlus,
 } from '@guardian/source-react-components';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import type { DCRContainerPalette, FEFrontCard } from 'src/types/front';
 import { enhanceCards } from '../../model/enhanceCards';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
@@ -71,6 +71,12 @@ export const ShowMore = ({
 		setExistingCardLinks(containerLinks);
 	}, []);
 
+	const moreCardsHeadingReference = useCallback((node: HTMLElement | null) => {
+		if (node !== null) {
+		  node.focus();
+		}
+	  }, []);
+
 	/** We only pass an actual URL to SWR when 'showMore' is true.
 	 * Toggling 'showMore' will trigger a re-render
 	 *   @see https://swr.vercel.app/docs/conditional-fetching#conditional
@@ -99,9 +105,11 @@ export const ShowMore = ({
 							`}
 						/>
 						<h4
+							ref={moreCardsHeadingReference}
 							css={css`
 								${visuallyHidden}
 							`}
+							tabIndex={-1}
 						>
 							More {containerTitle}
 						</h4>
