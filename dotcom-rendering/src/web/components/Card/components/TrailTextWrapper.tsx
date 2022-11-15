@@ -7,32 +7,56 @@ type Props = {
 	children: string | React.ReactNode;
 	format: ArticleFormat;
 	containerPalette?: DCRContainerPalette;
+	imagePosition?: ImagePositionType;
+	imageSize?: ImageSizeType;
+};
+
+const showTrailText = (
+	imagePosition?: ImagePositionType,
+	imageSize?: ImageSizeType,
+) => {
+	if (
+		// imagePosition === 'top' ||
+		// imagePosition === 'bottom' ||
+		imageSize === 'jumbo'
+	)
+		return css`
+			${until.tablet} {
+				display: none;
+			}
+		`;
+	return css`
+		${until.desktop} {
+			display: none;
+		}
+	`;
 };
 
 export const TrailTextWrapper = ({
 	children,
 	format,
 	containerPalette,
+	imagePosition,
+	imageSize,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	return (
 		<div
-			css={css`
-				display: flex;
-				flex-direction: column;
-				color: ${palette.text.cardStandfirst};
+			css={[
+				css`
+					display: flex;
+					flex-direction: column;
+					color: ${palette.text.cardStandfirst};
 
-				${body.small({ lineHeight: 'regular' })};
-				font-size: 14px;
+					${body.small({ lineHeight: 'regular' })};
+					font-size: 14px;
 
-				padding-left: 5px;
-				padding-right: 5px;
-				padding-bottom: 8px;
-
-				${until.desktop} {
-					display: none;
-				}
-			`}
+					padding-left: 5px;
+					padding-right: 5px;
+					padding-bottom: 8px;
+				`,
+				showTrailText(imagePosition, imageSize),
+			]}
 		>
 			{children}
 		</div>
