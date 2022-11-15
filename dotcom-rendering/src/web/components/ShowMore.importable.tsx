@@ -163,6 +163,7 @@ export const ShowMore = ({
 						margin-right: 10px;
 						color: ${neutral[100]};
 						background-color: ${neutral[7]};
+						border-color: ${neutral[7]};
 						&:hover {
 							color: ${neutral[7]};
 						}
