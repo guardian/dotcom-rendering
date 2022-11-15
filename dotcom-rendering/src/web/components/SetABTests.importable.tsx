@@ -5,6 +5,7 @@ import type { ABTestSwitches } from '../../model/enhance-switches';
 import { getOphanRecordFunction } from '../browser/ophan/ophan';
 import { tests } from '../experiments/ab-tests';
 import { getCypressSwitches } from '../experiments/cypress-switches';
+import { runnableTestsToParticipations } from '../experiments/lib/ab-participations';
 import { getForcedParticipationsFromUrl } from '../lib/getAbUrlHash';
 import { setABTests } from '../lib/useAB';
 
@@ -30,11 +31,17 @@ export const SetABTests = ({
 		// 0 is default and falsy here
 		console.log('There is no MVT ID set, see SetABTests.importable.tsx');
 	}
+
 	const ophanRecord = getOphanRecordFunction();
-	const windowHash = window.location.hash;
+
 	// Get the forced switches to use for when running within cypress
 	// Is empty object if not in cypress
 	const cypressAbSwitches = getCypressSwitches();
+
+	const allForcedTestVariants = {
+		...forcedTestVariants,
+		...getForcedParticipationsFromUrl(window.location.hash),
+	};
 
 	const ab = new AB({
 		mvtId,
@@ -45,17 +52,15 @@ export const SetABTests = ({
 		},
 		arrayOfTestObjects: tests,
 		ophanRecord,
-		forcedTestVariants: {
-			...forcedTestVariants,
-			...getForcedParticipationsFromUrl(windowHash),
-		},
+		forcedTestVariants: allForcedTestVariants,
 	});
 
 	const allRunnableTests = ab.allRunnableTests(tests);
+	const participations = runnableTestsToParticipations(allRunnableTests);
 
 	setABTests({
 		api: ab,
-		participations: {},
+		participations,
 		allRunnableTests,
 	});
 
