@@ -22,6 +22,9 @@
     "chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
     "prepare": "husky install"
   },
+  "resolutions": {
+    "type-fest": "^2.8.0"
+  },
   "dependencies": {
     "@guardian/prettier": "^1.0.0",
     "chromatic": "^6.5.1",
