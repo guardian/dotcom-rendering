@@ -122,18 +122,23 @@ function removeContainer(container: Element): void {
 	container.parentElement?.removeChild(container);
 }
 
+function revealContainer(container: HTMLElement): void {
+	container.style.display = 'block';
+}
+
 async function initSignupForms(): Promise<void> {
 	const version = await getBridgetVersion();
+	const signupContainers = Array.from(
+		document.querySelectorAll(`.${COMPONENT_CONTAINER_CLASSNAME}`),
+	) as HTMLElement[];
 
 	if (isBridgetCompatible(version.withDefault('1.0.0'))) {
+		signupContainers.forEach(revealContainer);
 		const signupForms = Array.from(
 			document.querySelectorAll(`form.${COMPONENT_BASE_CLASSNAME}`),
 		);
 		signupForms.forEach(setup);
 	} else {
-		const signupContainers = Array.from(
-			document.querySelectorAll(`.${COMPONENT_CONTAINER_CLASSNAME}`),
-		);
 		signupContainers.forEach(removeContainer);
 	}
 }
