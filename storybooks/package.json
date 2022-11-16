@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
-    "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook --static-dir ../dotcom-rendering/src/static -p 6006",
+    "storybook": "start-storybook -p 4000",
     "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ../dotcom-rendering/src/static"
   },
   "dependencies": {

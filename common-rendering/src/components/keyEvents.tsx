@@ -247,7 +247,7 @@ const KeyEvents = ({ keyEvents, format, supportsDarkMode }: KeyEventsProps) => {
 				context="keyEvents"
 			>
 				<ul css={listStyles(format, supportsDarkMode)}>
-					{keyEvents.slice(0, 7).map((event, index) => (
+					{keyEvents.slice(0, 4).map((event, index) => (
 						<ListItem
 							key={`${event.url}${index}`}
 							keyEvent={event}

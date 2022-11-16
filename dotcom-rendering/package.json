@@ -31,7 +31,7 @@
     "cypress:run:percy": "percy exec -- cypress run --browser chrome --config specPattern='cypress/snapshot/**/*'",
     "unused-exports": "yarn ts-unused-exports ./tsconfig.json --ignoreFiles='(/(fixtures|__mocks__)/|.+\\.(stories|mocks))' --exitWithCount",
     "makeBuild": "NODE_ENV=production CI_ENV=github webpack --config ./scripts/webpack/webpack.config.js",
-    "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook --static-dir ./src/static -p 6006",
+    "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook --static-dir ./src/static -p 4002",
     "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ./src/static"
   },
   "bundlesize": [

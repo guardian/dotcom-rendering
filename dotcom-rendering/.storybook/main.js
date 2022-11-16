@@ -6,6 +6,10 @@ require('../scripts/gen-stories/gen-stories');
 
 /** @type {import("@storybook/react/types").StorybookConfig} */
 module.exports = {
+	features: {
+		// used in composition
+		buildStoriesJson: true,
+	},
 	core: {
 		builder: 'webpack5',
 	},
