@@ -2972,7 +2972,7 @@
                     "type": "string"
                 },
                 "pillar": {
-                    "$ref": "#/definitions/LegacyPillar"
+                    "type": "string"
                 },
                 "carouselImages": {
                     "type": "object",
