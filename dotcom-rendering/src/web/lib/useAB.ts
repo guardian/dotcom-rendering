@@ -1,11 +1,10 @@
-import type { ABTestAPI, Participations, Runnable } from '@guardian/ab-core';
+import type { ABTestAPI, Participations } from '@guardian/ab-core';
 import { mutate } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
 type ABTests = {
 	api: ABTestAPI;
 	participations: Participations;
-	allRunnableTests: [] | readonly Runnable[];
 };
 
 const apiPromise = new Promise<ABTests>(() => {});
@@ -24,10 +23,6 @@ export const useAB = (): ABTests | undefined => {
 	return data;
 };
 
-export const setABTests = ({
-	api,
-	participations,
-	allRunnableTests,
-}: ABTests): void => {
-	void mutate(key, { api, participations, allRunnableTests }, false);
+export const setABTests = ({ api, participations }: ABTests): void => {
+	void mutate(key, { api, participations }, false);
 };

@@ -33,7 +33,6 @@ setABTests({
 		arrayOfTestObjects: [],
 	}),
 	participations: {},
-	allRunnableTests: [],
 });
 
 // Add base css for the site
