@@ -16,35 +16,40 @@ export const FixedLargeSlowXIV = ({
 	containerPalette,
 	showAge,
 }: Props) => {
-	const primary = trails[0];
-	const secondary = trails[1];
+	const primary = trails.slice(0, 1);
+	const secondary = trails.slice(1, 2);
 	const secondSlice = trails.slice(2, 6);
 	const thirdSlice = trails.slice(6, 14);
 
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
-				<LI padSides={true} percentage="75%">
-					<FrontCard
-						trail={primary}
-						starRating={primary.starRating}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						headlineSize="large"
-						imagePosition="right"
-						imagePositionOnMobile="top"
-						imageSize="large"
-						trailText={primary.trailText}
-					/>
-				</LI>
-				<LI padSides={true} showDivider={true} percentage="25%">
-					<FrontCard
-						trail={secondary}
-						starRating={secondary.starRating}
-						containerPalette={containerPalette}
-						showAge={showAge}
-					/>
-				</LI>
+				{primary.map((card) => (
+					<LI padSides={true} percentage="75%">
+						<FrontCard
+							trail={card}
+							starRating={card.starRating}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							headlineSize="large"
+							imagePosition="right"
+							imagePositionOnMobile="top"
+							imageSize="large"
+							trailText={card.trailText}
+						/>
+					</LI>
+				))}
+
+				{secondary.map((card) => (
+					<LI padSides={true} showDivider={true} percentage="25%">
+						<FrontCard
+							trail={card}
+							starRating={card.starRating}
+							containerPalette={containerPalette}
+							showAge={showAge}
+						/>
+					</LI>
+				))}
 			</UL>
 			<UL direction="row" padBottom={true}>
 				{secondSlice.map((card, cardIndex) => {

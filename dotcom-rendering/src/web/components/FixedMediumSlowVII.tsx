@@ -15,30 +15,33 @@ export const FixedMediumSlowVII = ({
 	containerPalette,
 	showAge,
 }: Props) => {
-	const primary = trails[0];
+	const primary = trails.slice(0, 1);
 	const firstSlice = trails.slice(1, 3);
 	const secondSlice = trails.slice(3, 7);
 
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
-				<LI
-					key={primary.url}
-					padSides={true}
-					showDivider={false}
-					percentage="50%"
-				>
-					<FrontCard
-						trail={primary}
-						format={primary.format}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						headlineSize="large"
-						imagePositionOnMobile="top"
-						imageSize="large"
-						supportingContent={primary.supportingContent}
-					/>
-				</LI>
+				{primary.map((trail) => (
+					<LI
+						key={trail.url}
+						padSides={true}
+						showDivider={false}
+						percentage="50%"
+					>
+						<FrontCard
+							trail={trail}
+							format={trail.format}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							headlineSize="large"
+							imagePositionOnMobile="top"
+							imageSize="large"
+							supportingContent={trail.supportingContent}
+						/>
+					</LI>
+				))}
+
 				{firstSlice.map((trail) => {
 					return (
 						<LI
