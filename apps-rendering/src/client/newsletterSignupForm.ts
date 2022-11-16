@@ -1,7 +1,6 @@
 // ----- Imports ----- //
 import { newslettersClient } from 'native/nativeApi';
 import { getBridgetVersion } from './bridgetVersion';
-import { isSameOrLaterVersion } from './versionNumbers';
 
 // ----- Types ----- //
 interface FormBundle {
@@ -20,6 +19,19 @@ const MODIFIER_CLASSNAME = {
 	success: `${COMPONENT_BASE_CLASSNAME}--success`,
 	failure: `${COMPONENT_BASE_CLASSNAME}--failure`,
 } as const;
+
+// ----- Pure functions ----- //
+
+/**
+ * Parse a version number string and check if it is a version
+ * that supports the newslettersClient API.
+ *
+ * @param version a string representing a version number
+ * @returns whether string represents a version number with a
+ * major version of 2 or higher
+ */
+const isBridgetCompatible = (version: string): boolean =>
+	parseInt(version.split('.')[0]) >= 2;
 
 // ----- Procedures ----- //
 
@@ -111,9 +123,9 @@ function removeContainer(container: Element): void {
 }
 
 async function initSignupForms(): Promise<void> {
-	const version = (await getBridgetVersion());
+	const version = await getBridgetVersion();
 
-	if (version.isSome() && isSameOrLaterVersion(version.value, '2.0.0')) {
+	if (isBridgetCompatible(version.withDefault('1.0.0'))) {
 		const signupForms = Array.from(
 			document.querySelectorAll(`form.${COMPONENT_BASE_CLASSNAME}`),
 		);
