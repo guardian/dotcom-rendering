@@ -11,6 +11,7 @@ import { between, from, remSpace } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
+import HeadlineTag from 'components/HeadlineTag';
 import Logo from 'components/Logo';
 import MainMedia, { ImmersiveCaption } from 'components/MainMedia';
 import Metadata from 'components/Metadata';
@@ -94,6 +95,7 @@ const ImmersiveLayout: FC<Props> = ({ item, children }) => {
 				<article>
 					<header css={headerStyles(format)}>
 						<MainMedia mainMedia={item.mainMedia} format={format} />
+
 						<Series item={item} />
 						<Headline item={item} />
 						<Standfirst item={item} />

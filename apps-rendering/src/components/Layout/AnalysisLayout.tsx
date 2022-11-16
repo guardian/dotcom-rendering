@@ -60,7 +60,7 @@ const AnalysisLayout: FC<Props> = ({ item, children }) => (
 						mainMedia={item.mainMedia}
 					/>
 					<Series item={item} />
-					<HeadlineTag tagText={'Analysis'} format={item} />
+					<HeadlineTag format={item} />
 					<Headline item={item} />
 					<section css={[articleWidthStyles]}>
 						<Byline {...item} />

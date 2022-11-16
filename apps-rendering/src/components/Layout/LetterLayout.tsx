@@ -67,7 +67,7 @@ const LetterLayout: FC<Props> = ({ item, children }) => (
 			<header>
 				<Series item={item} />
 
-				<HeadlineTag format={item} tagText="Letters" />
+				<HeadlineTag format={item} />
 
 				<Headline item={item} />
 

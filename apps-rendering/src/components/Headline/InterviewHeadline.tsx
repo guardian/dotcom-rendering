@@ -30,7 +30,7 @@ const InterviewHeadline: React.FC<Props> = ({ item }) => {
 	const interviewToneTag = fromNullable(
 		item.tags.find((tag) => tag.id === 'tone/interview'),
 	);
-	const headlineTag = <HeadlineTag tagText="Interview" format={format} />;
+	const headlineTag = <HeadlineTag format={format} />;
 
 	return (
 		<div

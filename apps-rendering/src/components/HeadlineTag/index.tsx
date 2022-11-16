@@ -30,22 +30,33 @@ const headlineTagStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 type Props = {
-	tagText: string;
 	format: ArticleFormat;
 };
 
-const HeadlineTag: FC<Props> = ({ tagText, format }) => {
+const HeadlineTag: FC<Props> = ({ format }) => {
 	switch (format.design) {
 		case ArticleDesign.Analysis:
+			return (
+				<div css={headlineTagWrapper}>
+					<span css={headlineTagStyles(format)}>Analysis</span>
+				</div>
+			);
 		case ArticleDesign.Explainer:
+			return (
+				<div css={headlineTagWrapper}>
+					<span css={headlineTagStyles(format)}>Explainer</span>
+				</div>
+			);
 		case ArticleDesign.Letter:
 			return (
 				<div css={headlineTagWrapper}>
-					<span css={headlineTagStyles(format)}>{tagText}</span>
+					<span css={headlineTagStyles(format)}>Letters</span>
 				</div>
 			);
+		case ArticleDesign.Interview:
+			return <span css={headlineTagStyles(format)}>Interview</span>;
 		default:
-			return <span css={headlineTagStyles(format)}>{tagText}</span>;
+			return null;
 	}
 };
 
