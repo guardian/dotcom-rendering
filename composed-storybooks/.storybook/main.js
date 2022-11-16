@@ -2,7 +2,7 @@ module.exports = {
 	core: {
 		builder: 'webpack5',
 	},
-	stories: ['../test.stories.tsx'],
+	stories: ['../Readme.stories.jsx'],
 	features: {
 		buildStoriesJson: true,
 	},
@@ -14,6 +14,10 @@ module.exports = {
 		'dotcom-rendering': {
 			title: 'dotcom-rendering',
 			url: 'http://localhost:4002',
+		},
+		'apps-rendering': {
+			title: 'apps-rendering',
+			url: 'http://localhost:4003',
 		},
 	}),
 };

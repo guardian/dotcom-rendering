@@ -31,7 +31,7 @@
     "cypress:run:percy": "percy exec -- cypress run --browser chrome --config specPattern='cypress/snapshot/**/*'",
     "unused-exports": "yarn ts-unused-exports ./tsconfig.json --ignoreFiles='(/(fixtures|__mocks__)/|.+\\.(stories|mocks))' --exitWithCount",
     "makeBuild": "NODE_ENV=production CI_ENV=github webpack --config ./scripts/webpack/webpack.config.js",
-    "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook --static-dir ./src/static -p 4002",
+    "storybook": "start-storybook --static-dir ./src/static -p 4002",
     "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ./src/static"
   },
   "bundlesize": [
@@ -73,6 +73,7 @@
     "@guardian/commercial-core": "^4.21.0",
     "@guardian/consent-management-platform": "10.11.1",
     "@guardian/discussion-rendering": "^11.0.3",
+    "@guardian/eslint-config-typescript": "^1.0.1",
     "@guardian/eslint-plugin-source-react-components": "^9.0.0",
     "@guardian/libs": "^9.0.1",
     "@guardian/shimport": "^1.0.2",

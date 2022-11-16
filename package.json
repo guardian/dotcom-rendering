@@ -7,15 +7,16 @@
   "workspaces": [
     "common-rendering",
     "dotcom-rendering",
-    "storybooks"
+    "composed-storybooks"
   ],
   "scripts": {
     "postinstall": "cd apps-rendering && if [ \"$CI\" = true ]; then yarn --frozen-lockfile ; else yarn ; fi",
-    "storybook": "npm-run-all --parallel storybook:*",
-    "sb-test": "yarn workspace storybooks storybook",
+    "storybook": "npm-run-all --parallel -l storybook:*",
+    "storybook:composed": "sleep 5 && yarn workspace composed-storybooks storybook --quiet",
     "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ./dotcom-rendering/src/static",
-    "storybook:cr": "yarn workspace @guardian/common-rendering storybook",
-    "storybook:dcr": "yarn workspace @guardian/dotcom-rendering storybook",
+    "storybook:ar": "cd apps-rendering && yarn storybook --no-open --quiet",
+    "storybook:cr": "yarn workspace @guardian/common-rendering storybook --no-open --quiet",
+    "storybook:dcr": "yarn workspace @guardian/dotcom-rendering storybook --no-open --quiet",
     "build:dcr": "cd ./dotcom-rendering && yarn makeBuild",
     "chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
     "prepare": "husky install"
