@@ -40,14 +40,24 @@ export const FrontMostViewed = ({
 
 	return (
 		<MostViewedFooterLayout>
-			<Island deferUntil="visible">
+			{/* We only need hydration if there are multiple tabs */}
+			{showMostViewedTab ? (
+				<Island deferUntil="visible">
+					<MostViewedFooter
+						tabs={tabs}
+						sectionName="Most viewed"
+						mostCommented={mostCommented}
+						mostShared={mostShared}
+					/>
+				</Island>
+			) : (
 				<MostViewedFooter
 					tabs={tabs}
 					sectionName="Most viewed"
 					mostCommented={mostCommented}
 					mostShared={mostShared}
 				/>
-			</Island>
+			)}
 		</MostViewedFooterLayout>
 	);
 };
