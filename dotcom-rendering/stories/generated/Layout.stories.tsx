@@ -5,7 +5,7 @@
  */
 import { HydratedLayoutWrapper } from '../../src/web/layouts/Layout.stories';
 
-
+// eslint-disable-next-line import/no-default-export
 export default {
 	title: 'Components/Layout/Format Variations',
 	component: HydratedLayoutWrapper,
