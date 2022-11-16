@@ -9,13 +9,19 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 	imagePosition?: ImagePositionType;
 	imageSize?: ImageSizeType;
+	imageType?: CardImageType | undefined;
 };
 
 const showTrailText = (
 	imagePosition?: ImagePositionType,
 	imageSize?: ImageSizeType,
+	imageType?: CardImageType | undefined,
 ) => {
-	if (imageSize === 'large' && imagePosition === 'right')
+	if (
+		imageSize === 'large' &&
+		imagePosition === 'right' &&
+		imageType !== 'avatar'
+	)
 		return css`
 			${until.desktop} {
 				display: none;
@@ -34,6 +40,7 @@ export const TrailTextWrapper = ({
 	containerPalette,
 	imagePosition,
 	imageSize,
+	imageType,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	return (
@@ -51,7 +58,7 @@ export const TrailTextWrapper = ({
 					padding-right: 5px;
 					padding-bottom: 8px;
 				`,
-				showTrailText(imagePosition, imageSize),
+				showTrailText(imagePosition, imageSize, imageType),
 			]}
 		>
 			{children}

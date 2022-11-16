@@ -413,6 +413,7 @@ export const Card = ({
 								format={format}
 								imagePosition={imagePosition}
 								imageSize={imageSize}
+								imageType={image?.type}
 							>
 								<div
 									dangerouslySetInnerHTML={{
