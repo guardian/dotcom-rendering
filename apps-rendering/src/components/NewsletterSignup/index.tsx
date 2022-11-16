@@ -124,7 +124,7 @@ const NewsletterSignup: FC<Props> = ({ format, element, showByDefault = false })
 	return (
 		<aside
 			css={containerStyles(format, showByDefault)}
-			className={'js-signup-form-container'}
+			className="js-signup-form-container"
 		>
 			<div css={stackBelowTabletStyles}>
 				<p css={titleStyles(theme)}>

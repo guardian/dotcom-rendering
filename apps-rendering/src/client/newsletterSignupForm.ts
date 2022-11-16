@@ -126,11 +126,14 @@ function revealContainer(container: HTMLElement): void {
 	container.style.display = 'block';
 }
 
+const isHTMLElement = (element: Element): element is HTMLElement =>
+	element instanceof HTMLElement;
+
 async function initSignupForms(): Promise<void> {
 	const version = await getBridgetVersion();
 	const signupContainers = Array.from(
 		document.querySelectorAll(`.${COMPONENT_CONTAINER_CLASSNAME}`),
-	) as HTMLElement[];
+	).filter(isHTMLElement);
 
 	if (isBridgetCompatible(version.withDefault('1.0.0'))) {
 		signupContainers.forEach(revealContainer);
