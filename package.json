@@ -15,7 +15,7 @@
     "sb-test": "yarn workspace storybooks storybook",
     "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ./dotcom-rendering/src/static",
     "storybook:cr": "yarn workspace @guardian/common-rendering storybook",
-    "story:dcr": "yarn workspace @guardian/dotcom-rendering storybook",
+    "storybook:dcr": "yarn workspace @guardian/dotcom-rendering storybook",
     "build:dcr": "cd ./dotcom-rendering && yarn makeBuild",
     "chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
     "prepare": "husky install"
