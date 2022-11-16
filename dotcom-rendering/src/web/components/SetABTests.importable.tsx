@@ -61,7 +61,6 @@ export const SetABTests = ({
 	setABTests({
 		api: ab,
 		participations,
-		allRunnableTests,
 	});
 
 	ab.trackABTests(allRunnableTests);
