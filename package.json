@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "private": true,
   "workspaces": [
+		"apps-rendering",
     "common-rendering",
     "dotcom-rendering",
     "composed-storybooks"
@@ -14,7 +15,7 @@
     "storybook": "npm-run-all --parallel -l storybook:*",
     "storybook:composed": "sleep 5 && yarn workspace composed-storybooks storybook --quiet",
     "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ./dotcom-rendering/src/static",
-    "storybook:ar": "cd apps-rendering && yarn storybook --no-open --quiet",
+    "storybook:ar": "yarn workspace apps-rendering storybook --no-open --quiet",
     "storybook:cr": "yarn workspace @guardian/common-rendering storybook --no-open --quiet",
     "storybook:dcr": "yarn workspace @guardian/dotcom-rendering storybook --no-open --quiet",
     "build:dcr": "cd ./dotcom-rendering && yarn makeBuild",
@@ -22,7 +23,6 @@
     "prepare": "husky install"
   },
   "resolutions": {
-    "@types/webpack": "^5.28.0",
     "type-fest": "^2.8.0"
   },
   "dependencies": {
