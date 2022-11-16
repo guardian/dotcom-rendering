@@ -15,18 +15,14 @@ const showTrailText = (
 	imagePosition?: ImagePositionType,
 	imageSize?: ImageSizeType,
 ) => {
-	if (
-		// imagePosition === 'top' ||
-		// imagePosition === 'bottom' ||
-		imageSize === 'jumbo'
-	)
+	if (imageSize === 'large' && imagePosition === 'right')
 		return css`
-			${until.tablet} {
+			${until.desktop} {
 				display: none;
 			}
 		`;
 	return css`
-		${until.desktop} {
+		${until.tablet} {
 			display: none;
 		}
 	`;
