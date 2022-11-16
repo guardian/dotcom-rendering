@@ -11,7 +11,6 @@ import { between, from, remSpace } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
-import HeadlineTag from 'components/HeadlineTag';
 import Logo from 'components/Logo';
 import MainMedia, { ImmersiveCaption } from 'components/MainMedia';
 import Metadata from 'components/Metadata';

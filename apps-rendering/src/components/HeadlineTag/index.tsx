@@ -53,6 +53,12 @@ const HeadlineTag: FC<Props> = ({ format }) => {
 					<span css={headlineTagStyles(format)}>Letters</span>
 				</div>
 			);
+		case ArticleDesign.Obituary:
+			return (
+				<div css={headlineTagWrapper}>
+					<span css={headlineTagStyles(format)}>Obituary</span>
+				</div>
+			);
 		case ArticleDesign.Interview:
 			return <span css={headlineTagStyles(format)}>Interview</span>;
 		default:
