@@ -2813,10 +2813,10 @@
   dependencies:
     is-mobile "^3.1.1"
 
-"@guardian/braze-components@^8.0.0":
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-8.0.0.tgz#b90f07746faafe2e587bb112c78dd2411f3a2998"
-  integrity sha512-hAJsfjio4VJ/qPGR+NTbgiLR+7mJetJZDExZ560XUUzMKpqVICsIL4S/l9HRqjAZ4G7r2SE6M4ONMfnPZUTwBQ==
+"@guardian/braze-components@^8.1.0":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/braze-components/-/braze-components-8.1.0.tgz#25804cc2fbdb3ce31689f4a12b2c7b864b946db6"
+  integrity sha512-UMU62666vSE5Dlrd7BjZlOBYxmwyoLqomkzoWiUkC3GGUM2kCY/Phq81m+QfHpNgPT8rrHiO/LrfQI9DNNjGhw==
 
 "@guardian/browserslist-config@^2.0.3":
   version "2.0.3"
