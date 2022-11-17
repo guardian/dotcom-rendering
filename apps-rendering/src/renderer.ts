@@ -647,10 +647,8 @@ const render =
 			case ElementKind.Tweet:
 				return h(Tweet, { content: element.content, format, key });
 
-			case ElementKind.Callout: {
-				const { campaign, description } = element;
-				return h(CalloutForm, { campaign, format, description });
-			}
+			case ElementKind.Callout:
+				return h(CalloutForm, { format, ...element });
 
 			case ElementKind.Embed:
 				return h(EmbedComponentWrapper, {

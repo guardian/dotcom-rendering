@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import { getSoleContributor } from '../lib/byline';
 import type {
 	DCRContainerPalette,
@@ -54,9 +54,13 @@ const decidePresentationFormat = ({
 		linkFormat.design === ArticleDesign.LiveBlog ||
 		linkFormat.design === ArticleDesign.Gallery ||
 		linkFormat.design === ArticleDesign.Audio ||
+		linkFormat.theme === ArticleSpecial.SpecialReport ||
 		linkFormat.design === ArticleDesign.Video
 	)
-		return containerFormat;
+		return {
+			...containerFormat,
+			theme: ArticlePillar.News,
+		};
 
 	// Otherwise, we can allow the sublink to express its own styling
 	return linkFormat;
