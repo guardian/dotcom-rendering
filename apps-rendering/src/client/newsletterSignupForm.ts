@@ -1,4 +1,5 @@
 // ----- Imports ----- //
+import { parseIntOpt } from 'lib';
 import { newslettersClient } from 'native/nativeApi';
 import { getBridgetVersion } from './bridgetVersion';
 
@@ -31,7 +32,9 @@ const MODIFIER_CLASSNAME = {
  * major version of 2 or higher
  */
 const isBridgetCompatible = (version: string): boolean =>
-	parseInt(version.split('.')[0]) >= 2;
+	parseIntOpt(version.split('.')[0])
+		.map((v) => v >= 2)
+		.withDefault(false);
 
 // ----- Procedures ----- //
 
