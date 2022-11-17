@@ -193,7 +193,7 @@ const mobileStickyAdStyles = css`
 		stroke-width: 0;
 		text-align: center;
 	}
-	.ad-slot--mobile-sticky .ad-slot__label .ad-slot__close-button {
+	.ad-slot--mobile-sticky .ad-slot__close-button {
 		display: block;
 	}
 	.ad-slot__close-button__x {
