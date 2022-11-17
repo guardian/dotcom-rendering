@@ -203,18 +203,17 @@ const mobileStickyAdStyles = css`
 		stroke-width: 2;
 		text-align: center;
 	}
-	.ad-slot__label {
-		font-size: 0.75rem;
-		line-height: 1.25rem;
+	.ad-slot:not[data-label-show='true']::before {
+		content: '';
+		display: block;
+		height: ${labelHeight}px;
+		visibility: hidden;
+	}
+	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller)::before {
+		content: 'Advertisement';
+		display: block;
 		position: relative;
-		height: 1.5rem;
-		background-color: ${neutral[97]};
-		padding: 0 0.5rem;
-		border-top: 0.0625rem solid ${border.secondary};
-		color: ${neutral[60]};
-		text-align: left;
-		box-sizing: border-box;
-		${textSans.xxsmall()};
+		${adSlotLabelStyles}
 	}
 `;
 
