@@ -1,6 +1,16 @@
+import { userEvent, within } from '@storybook/testing-library';
 import fetchMock from 'fetch-mock';
 import { trails } from '../../../fixtures/manual/show-more-trails';
 import { ShowMore } from './ShowMore.importable';
+
+/**
+ * Clicks the 'show more' button so that Chromatic can capture it the component
+ * in its 'open' state.
+ */
+const play = ({ canvasElement }: { canvasElement: HTMLElement }) => {
+	const canvas = within(canvasElement);
+	userEvent.click(canvas.getByRole('button'));
+};
 
 const containerTitle = 'Opinion';
 const path = 'uk/lifestyle';
@@ -29,6 +39,7 @@ export const ShowMoreSuccess = () => {
 	});
 };
 
+ShowMoreSuccess.play = play;
 ShowMoreSuccess.story = { name: 'ShowMore button, success' };
 
 export const ShowMoreError = () => {
@@ -48,4 +59,5 @@ export const ShowMoreError = () => {
 	});
 };
 
+ShowMoreError.play = play;
 ShowMoreError.story = { name: 'ShowMore button, error' };
