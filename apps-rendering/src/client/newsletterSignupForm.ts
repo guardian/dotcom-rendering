@@ -1,5 +1,5 @@
 // ----- Imports ----- //
-import { fakeRequestToEmailSignupService } from './requestEmailSignUp';
+import { newslettersClient } from 'native/nativeApi';
 
 // ----- Types ----- //
 interface FormBundle {
@@ -20,7 +20,7 @@ const MODIFIER_CLASSNAME = {
 
 // ----- Procedures ----- //
 
-async function handleSubmission(bundle: FormBundle): Promise<void> {
+function handleSubmission(bundle: FormBundle): void {
 	const { input, identityName, submitButton, form } = bundle;
 
 	if (!input.value) {
@@ -31,17 +31,25 @@ async function handleSubmission(bundle: FormBundle): Promise<void> {
 	input.setAttribute('disabled', '');
 	submitButton.setAttribute('disabled', '');
 
-	const response = await fakeRequestToEmailSignupService(
-		input.value,
-		identityName,
-	);
-	form.classList.remove(MODIFIER_CLASSNAME.waiting);
-
-	if (response.status === 200) {
-		form.classList.add(MODIFIER_CLASSNAME.success);
-	} else {
-		form.classList.add(MODIFIER_CLASSNAME.failure);
-	}
+	// newslettersClient.requestSignUp can throw errors
+	// user feedback about the type of error (eg Network Error,
+	// Service unavailable) will be handled by the native layer
+	// The component only need to know success or failure.
+	newslettersClient
+		.requestSignUp(input.value, identityName)
+		.then((success) => {
+			if (success) {
+				form.classList.add(MODIFIER_CLASSNAME.success);
+			} else {
+				form.classList.add(MODIFIER_CLASSNAME.failure);
+			}
+		})
+		.catch(() => {
+			form.classList.add(MODIFIER_CLASSNAME.failure);
+		})
+		.finally(() => {
+			form.classList.remove(MODIFIER_CLASSNAME.waiting);
+		});
 }
 
 function handleReset(bundle: FormBundle): void {
@@ -86,9 +94,7 @@ function setup(form: Element): void {
 
 	form.addEventListener('submit', (event) => {
 		event.preventDefault();
-		handleSubmission(bundle).catch((err: unknown) => {
-			console.error(err);
-		});
+		handleSubmission(bundle);
 	});
 
 	resetButton.addEventListener('click', (event) => {
