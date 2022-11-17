@@ -17,12 +17,12 @@ import {
 	neutral,
 } from '@guardian/source-foundations';
 
-const disclaimerStyles = css`
+const infoStyles = css`
 	${textSans.small()};
 	margin-bottom: ${remSpace[3]};
 `;
 
-export const Disclaimer = () => (<div css={disclaimerStyles}>
+export const Disclaimer = () => (<div css={infoStyles}>
 		You must be 18 or over to fill in this form. Only the Guardian can see
 		your contributions and one of our journalists may contact you to discuss
 		further. For more information please see our{' '}
@@ -34,6 +34,10 @@ export const Disclaimer = () => (<div css={disclaimerStyles}>
 			privacy policy
 		</a>
 		.
+	</div>);
+
+export const ContactText = () => (<div css={infoStyles}>
+		One of our journalists will be in contact before we publish your information, so please do leave contact details.
 	</div>);
 
 export const renderField = (
