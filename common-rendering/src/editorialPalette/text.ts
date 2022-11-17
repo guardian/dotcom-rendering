@@ -188,7 +188,7 @@ const calloutPrimaryDark = (format: ArticleFormat): Colour => {
 		case ArticlePillar.Opinion:
 			return opinion[500];
 		case ArticleSpecial.Labs:
-			return labs[500];
+			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
