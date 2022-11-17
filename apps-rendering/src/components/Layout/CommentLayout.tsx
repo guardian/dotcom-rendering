@@ -7,8 +7,6 @@ import {
 	breakpoints,
 	from,
 	neutral,
-	opinion,
-	palette,
 	remSpace,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
