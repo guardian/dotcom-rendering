@@ -1,5 +1,7 @@
 // ----- Imports ----- //
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
+import type { Tag } from '@guardian/content-api-models/v1/tag';
+import { TagType } from '@guardian/content-api-models/v1/tagType';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
@@ -59,6 +61,21 @@ export const Article = (): React.ReactNode => {
 	);
 };
 Article.story = { name: 'Article' };
+
+export const ArticleSRA = (): React.ReactNode => {
+	return (
+		<Standard item={{ ...article, theme: 7 }}>
+			{renderAll(
+				formatFromItem(
+					{ ...article, theme: 7 },
+					some(ArticleDisplay.Standard),
+				),
+				Result.partition(article.body).oks,
+			)}
+		</Standard>
+	);
+};
+ArticleSRA.story = { name: 'Article - SRA' };
 
 export const Review = (): React.ReactNode => {
 	return (
@@ -168,6 +185,34 @@ export const CommentItem = (): React.ReactNode => {
 };
 CommentItem.story = { name: 'Comment' };
 
+export const CommentItemSRA = (): React.ReactNode => {
+	return (
+		<Comment
+			item={{
+				...comment,
+				theme: 7,
+				series: some<Tag>({
+					id: '',
+					type: TagType.SERIES,
+					webTitle: 'Cottonopolis',
+					webUrl: '',
+					apiUrl: '',
+					references: [],
+				}),
+			}}
+		>
+			{renderAll(
+				formatFromItem(
+					{ ...comment, theme: 7 },
+					some(ArticleDisplay.Standard),
+				),
+				Result.partition(comment.body).oks,
+			)}
+		</Comment>
+	);
+};
+CommentItemSRA.story = { name: 'Comment - SRA' };
+
 export const Letter = (): React.ReactNode => {
 	return (
 		<Comment item={letter}>
@@ -203,6 +248,21 @@ export const Analysis = (): React.ReactNode => {
 	);
 };
 Analysis.story = { name: 'Analysis' };
+
+export const AnalysisSRA = (): React.ReactNode => {
+	return (
+		<AnalysisLayout item={{ ...analysis, theme: 7 }}>
+			{renderAll(
+				formatFromItem(
+					{ ...analysis, theme: 7 },
+					some(ArticleDisplay.Standard),
+				),
+				Result.partition(analysis.body).oks,
+			)}
+		</AnalysisLayout>
+	);
+};
+AnalysisSRA.story = { name: 'Analysis - SRA' };
 
 export const Explainer = (): React.ReactNode => {
 	return (
@@ -251,7 +311,31 @@ export const Immersive = (): ReactElement => (
 		)}
 	</ImmersiveLayout>
 );
-Immersive.story = { name: 'Immersive ' };
+Immersive.story = { name: 'Immersive' };
+
+export const ImmersiveSRA = (): ReactElement => (
+	<ImmersiveLayout
+		item={{
+			...immersive,
+			edition: Edition.UK,
+			theme: 7,
+			series: some<Tag>({
+				id: '',
+				type: TagType.SERIES,
+				webTitle: 'Cottonopolis',
+				webUrl: '',
+				apiUrl: '',
+				references: [],
+			}),
+		}}
+	>
+		{renderAll(
+			{ ...formatFromItem(immersive, none), theme: 7 },
+			Result.partition(immersive.body).oks,
+		)}
+	</ImmersiveLayout>
+);
+ImmersiveSRA.story = { name: 'Immersive - SRA' };
 
 export const Gallery = (): ReactElement => (
 	<GalleryLayout

@@ -15,6 +15,7 @@ import {
 	labs,
 	specialReport,
 	neutral,
+	palette,
 } from '@guardian/source-foundations';
 import { Colour } from '.';
 
@@ -80,7 +81,7 @@ const liveBlock = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
+			return palette.specialReportAlt[100];
 	}
 };
 
@@ -101,7 +102,7 @@ const liveBlockDark = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[500];
+			return palette.specialReportAlt[100];
 	}
 };
 
@@ -134,7 +135,7 @@ const standfirstLink = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[600];
+			return palette.specialReportAlt[100];
 	}
 };
 
@@ -165,7 +166,7 @@ const richLink = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
+			return palette.specialReportAlt[100];
 	}
 };
 
@@ -188,7 +189,7 @@ const richLinkSvgDark = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[500];
+			return palette.specialReportAlt[100];
 	}
 };
 
@@ -242,7 +243,7 @@ const pinnedPost = (format: ArticleFormat): string => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[300];
+			return palette.specialReportAlt[100];
 	}
 };
 

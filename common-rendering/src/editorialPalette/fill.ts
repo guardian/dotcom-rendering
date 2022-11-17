@@ -15,6 +15,7 @@ import {
 	labs,
 	specialReport,
 	neutral,
+	palette,
 } from '@guardian/source-foundations';
 import { Colour } from '.';
 
@@ -68,7 +69,7 @@ const commentCount = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
+			return palette.specialReportAlt[100];
 	}
 };
 const commentCountDark = (format: ArticleFormat): Colour => {
@@ -95,7 +96,7 @@ const commentCountDark = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[500];
+			return palette.specialReportAlt[100];
 	}
 };
 
@@ -123,7 +124,7 @@ const commentCountWide = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
+			return palette.specialReportAlt[100];
 	}
 };
 
@@ -139,6 +140,8 @@ const icon = (format: ArticleFormat): Colour => {
 			return lifestyle[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return palette.specialReportAlt[300];
 		case ArticlePillar.News:
 		default:
 			return news[400];
@@ -157,6 +160,8 @@ const iconDark = (format: ArticleFormat): Colour => {
 			return lifestyle[500];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return palette.specialReportAlt[200];
 		case ArticlePillar.News:
 		default:
 			return news[500];
@@ -182,7 +187,7 @@ const blockquoteIcon = (format: ArticleFormat): Colour => {
 				case ArticleSpecial.SpecialReport:
 					return specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
-					return news[400];
+					return palette.specialReportAlt[100];
 			}
 		default:
 			switch (format.theme) {
@@ -201,7 +206,7 @@ const blockquoteIcon = (format: ArticleFormat): Colour => {
 				case ArticleSpecial.SpecialReport:
 					return specialReport[400];
 				case ArticleSpecial.SpecialReportAlt:
-					return news[400];
+					return palette.specialReportAlt[100];
 			}
 	}
 };
@@ -242,9 +247,11 @@ const lines = (_format: ArticleFormat): Colour => neutral[86];
 
 const linesDark = (_format: ArticleFormat): Colour => neutral[20];
 
-const newsletterSignUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
+const newsletterSignUpFormButton = (_format: ArticleFormat): Colour =>
+	neutral[7];
 
-const newsletterSignUpFormButtonDark = (_format: ArticleFormat): Colour => neutral[86];
+const newsletterSignUpFormButtonDark = (_format: ArticleFormat): Colour =>
+	neutral[86];
 
 // ----- API ----- //
 

@@ -1,5 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { background, neutral, remSpace } from '@guardian/source-foundations';
 import type { FC, ReactNode } from 'react';
@@ -14,6 +15,7 @@ interface ArticleBodyProps {
 const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
 	position: relative;
 	clear: both;
+	color: ${text.body(format)};
 
 	iframe {
 		width: 100%;
@@ -27,9 +29,11 @@ const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
 		display: inline-block;
 	}
 `;
-const ArticleBodyDarkStyles: SerializedStyles = darkModeCss`
-    background: ${background.inverse};
-    color: ${neutral[86]};
+const ArticleBodyDarkStyles = (
+	format: ArticleFormat,
+): SerializedStyles => darkModeCss`
+
+	color: ${text.bodyDark(format)};
 
     figcaption {
         color: ${neutral[60]};
@@ -47,7 +51,7 @@ const ArticleBody: FC<ArticleBodyProps> = ({ className, children, format }) => {
 		<div
 			css={[
 				ArticleBodyStyles(format),
-				ArticleBodyDarkStyles,
+				ArticleBodyDarkStyles(format),
 				...classNames,
 			]}
 		>

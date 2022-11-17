@@ -17,6 +17,7 @@ import {
 	specialReport,
 	labs,
 	brandAlt,
+	palette,
 } from '@guardian/source-foundations';
 import { Colour } from '.';
 
@@ -40,7 +41,11 @@ const mediaArticleBody = (_format: ArticleFormat) => {
 };
 
 const headline = (format: ArticleFormat): Colour => {
-	if (format.display === ArticleDisplay.Immersive) {
+	if (format.theme === ArticleSpecial.SpecialReportAlt) {
+		return format.display === ArticleDisplay.Immersive
+			? palette.specialReportAlt[100]
+			: palette.specialReportAlt[700];
+	} else if (format.display === ArticleDisplay.Immersive) {
 		return neutral[7];
 	} else if (format.design === ArticleDesign.DeadBlog) {
 		return neutral[97];
@@ -111,11 +116,16 @@ const headlineDark = (format: ArticleFormat): Colour => {
 		case ArticleDesign.Interview:
 			return neutral[20];
 		default:
-			return neutral[10];
+			return format.theme === ArticleSpecial.SpecialReportAlt
+				? palette.specialReportAlt[100]
+				: neutral[10];
 	}
 };
 
-const richLink = (_format: ArticleFormat): Colour => {
+const richLink = (format: ArticleFormat): Colour => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt) {
+		return palette.specialReportAlt[700];
+	}
 	return neutral[97];
 };
 
@@ -140,7 +150,7 @@ const richLinkSvg = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
+			return palette.specialReportAlt[100];
 	}
 };
 
@@ -161,7 +171,7 @@ const liveblogMetadata = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[200];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[200];
+			return palette.specialReportAlt[100];
 	}
 };
 
@@ -182,11 +192,15 @@ const richLinkSvgDark = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[500];
+			return palette.specialReportAlt[100];
 	}
 };
 
 const standfirst = ({ design, theme }: ArticleFormat): Colour => {
+	if (theme === ArticleSpecial.SpecialReportAlt) {
+		return palette.specialReportAlt[700];
+	}
+
 	if (design === ArticleDesign.DeadBlog) {
 		return neutral[93];
 	}
@@ -241,7 +255,9 @@ const standfirstDark = ({ design, theme }: ArticleFormat): Colour => {
 					return news[100];
 			}
 		default:
-			return neutral[10];
+			return theme === ArticleSpecial.SpecialReportAlt
+				? palette.specialReportAlt[100]
+				: neutral[10];
 	}
 };
 
@@ -262,7 +278,7 @@ const bullet = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
+			return palette.specialReportAlt[100];
 	}
 };
 
@@ -312,7 +328,11 @@ const bulletDark = (
 	return neutral[46];
 };
 
-const articleContentDark = ({ design }: ArticleFormat): Colour => {
+const articleContentDark = ({ design, theme }: ArticleFormat): Colour => {
+	if (theme === ArticleSpecial.SpecialReportAlt) {
+		return palette.specialReportAlt[100];
+	}
+
 	switch (design) {
 		case ArticleDesign.DeadBlog:
 			return neutral[7];
@@ -328,7 +348,7 @@ const avatar = (format: ArticleFormat): string => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[800];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[500];
+			return palette.specialReportAlt[100];
 		case ArticleSpecial.Labs:
 			return labs[400];
 		case ArticlePillar.Opinion:
@@ -357,7 +377,7 @@ const relatedCardBylineImage = (format: ArticleFormat): string => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
-			return opinion[400];
+			return palette.specialReportAlt[100];
 		case ArticlePillar.News:
 		default:
 			return opinion[400];
@@ -396,7 +416,7 @@ const headlineTag = (format: ArticleFormat): Colour => {
 		case ArticlePillar.News:
 			return news[300];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[300];
+			return palette.specialReportAlt[100];
 	}
 };
 
@@ -417,7 +437,7 @@ const headlineTagDark = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[500];
+			return palette.specialReportAlt[800];
 	}
 };
 
@@ -498,7 +518,7 @@ const relatedCardIcon = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[500];
+			return palette.specialReportAlt[100];
 	}
 };
 
@@ -523,7 +543,7 @@ const calloutSpeechBubble = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
+			return palette.specialReportAlt[100];
 	}
 };
 
@@ -553,6 +573,8 @@ const series = (format: ArticleFormat): Colour => {
 				return labs[400];
 			case ArticleSpecial.SpecialReport:
 				return brandAlt[400];
+			case ArticleSpecial.SpecialReportAlt:
+				return palette.specialReportAlt[300];
 			case ArticlePillar.News:
 			default:
 				return news[400];
@@ -577,6 +599,8 @@ const seriesDark = (format: ArticleFormat): Colour => {
 				return labs[400];
 			case ArticleSpecial.SpecialReport:
 				return brandAlt[400];
+			case ArticleSpecial.SpecialReportAlt:
+				return palette.specialReportAlt[200];
 			case ArticlePillar.News:
 			default:
 				return news[400];
@@ -622,7 +646,7 @@ const pinnedPost = (format: ArticleFormat): string => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[300];
+			return palette.specialReportAlt[100];
 	}
 };
 
@@ -649,7 +673,13 @@ const footerDark = (format: ArticleFormat): Colour => {
 };
 
 const articleContent = (format: ArticleFormat): string => {
+	if (format.theme === ArticleSpecial.SpecialReportAlt) {
+		return palette.specialReportAlt[700];
+	}
+
 	switch (format.design) {
+		case ArticleDesign.Comment:
+			return opinion[800];
 		case ArticleDesign.Analysis:
 			return news[800];
 		case ArticleDesign.Gallery:
@@ -659,7 +689,8 @@ const articleContent = (format: ArticleFormat): string => {
 	}
 };
 
-const newsletterSignUpFormDark = (_format: ArticleFormat): Colour => neutral[10];
+const newsletterSignUpFormDark = (_format: ArticleFormat): Colour =>
+	neutral[10];
 
 const editionsCameraIcon = (format: ArticleFormat): Colour => {
 	switch (format.theme) {

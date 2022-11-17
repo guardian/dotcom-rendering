@@ -29,6 +29,7 @@ import { darkModeCss } from 'styles';
 
 const headerStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.container}
+	background-color: ${background.articleContent(format)};
 
 	${darkModeCss`
 		background-color: ${background.articleContentDark(format)}
@@ -37,6 +38,7 @@ const headerStyles = (format: ArticleFormat): SerializedStyles => css`
 
 const mainContentStyles = (format: ArticleFormat): SerializedStyles => css`
 	${grid.container}
+	background-color: ${background.articleContent(format)};
 
 	${darkModeCss`
 		background-color: ${background.articleContentDark(format)}

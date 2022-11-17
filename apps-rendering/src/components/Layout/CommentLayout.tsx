@@ -1,8 +1,9 @@
 // ----- Imports ----- //
-
+import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
 import {
-	background,
 	breakpoints,
 	from,
 	neutral,
@@ -34,17 +35,18 @@ import {
 
 // ----- Styles ----- //
 
-const Styles = css`
-	background: ${neutral[97]};
+const Styles = (format: ArticleFormat): SerializedStyles => css`
+	background-color: ${background.articleContent(format)};
 `;
 
-const DarkStyles = darkModeCss`
-    background: ${background.inverse};
+const DarkStyles = (format: ArticleFormat): SerializedStyles => darkModeCss`
+    background-color: ${background.articleContentDark(format)};
 `;
 
-const BorderStyles = css`
-	background: ${opinion[800]};
-	${darkModeCss`background: ${background.inverse};`}
+const BorderStyles = (format: ArticleFormat): SerializedStyles => css`
+	background-color: ${background.articleContent(format)};
+
+	${darkModeCss`background-color: ${background.articleContentDark(format)}`}
 
 	${from.wide} {
 		width: ${breakpoints.wide}px;
@@ -74,53 +76,53 @@ interface Props {
 	children: ReactNode[];
 }
 
-const CommentLayout: FC<Props> = ({ item, children }) => (
-	<main css={[Styles, DarkStyles]}>
-		<article css={BorderStyles}>
-			<header>
-				<Series item={item} />
-				<Headline item={item} />
-				<div css={articleWidthStyles}>
-					<Byline {...item} />
-				</div>
-				<Cutout
-					contributors={item.contributors}
-					className={articleWidthStyles}
-					format={item}
-				/>
-				<StraightLines
-					cssOverrides={[commentLineStylePosition, lineStyles]}
-					count={8}
-				/>
-				<div css={articleWidthStyles}>
-					<Standfirst item={item} />
-				</div>
+const CommentLayout: FC<Props> = ({ item, children }) => {
+	const format = getFormat(item);
+	return (
+		<main css={[Styles(format), DarkStyles(format)]}>
+			<article css={BorderStyles(format)}>
+				<header>
+					<Series item={item} />
+					<Headline item={item} />
+					<div css={articleWidthStyles}>
+						<Byline {...item} />
+					</div>
+					<Cutout
+						contributors={item.contributors}
+						className={articleWidthStyles}
+						format={item}
+					/>
+					<StraightLines
+						cssOverrides={[commentLineStylePosition, lineStyles]}
+						count={8}
+					/>
+					<div css={articleWidthStyles}>
+						<Standfirst item={item} />
+					</div>
 
-				<section css={[articleWidthStyles, topBorder]}>
-					<Metadata item={item} />
-				</section>
+					<section css={[articleWidthStyles, topBorder]}>
+						<Metadata item={item} />
+					</section>
 
-				<MainMedia
-					format={getFormat(item)}
-					mainMedia={item.mainMedia}
-				/>
+					<MainMedia format={format} mainMedia={item.mainMedia} />
+					<section css={articleWidthStyles}>
+						<Logo item={item} />
+					</section>
+				</header>
+				<ArticleBody className={[articleWidthStyles]} format={item}>
+					{children}
+				</ArticleBody>
 				<section css={articleWidthStyles}>
-					<Logo item={item} />
+					<Tags item={item} />
 				</section>
-			</header>
-			<ArticleBody className={[articleWidthStyles]} format={item}>
-				{children}
-			</ArticleBody>
-			<section css={articleWidthStyles}>
-				<Tags item={item} />
+			</article>
+			<section css={onwardStyles}>
+				<RelatedContent item={item} />
 			</section>
-		</article>
-		<section css={onwardStyles}>
-			<RelatedContent item={item} />
-		</section>
-		<Footer isCcpa={false} format={item} />
-	</main>
-);
+			<Footer isCcpa={false} format={item} />
+		</main>
+	);
+};
 
 // ----- Exports ----- //
 

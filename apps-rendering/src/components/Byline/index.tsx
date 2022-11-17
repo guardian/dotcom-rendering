@@ -46,7 +46,7 @@ const Byline: FC<Props> = ({ bylineHtml, ...format }) => {
 			return (
 				<DefaultByline
 					bylineHtml={bylineHtml}
-					styles={defaultStyles(text.bylineLeftColumn(format))}
+					styles={defaultStyles(format)}
 					anchorStyles={defaultAnchorStyles(format)}
 					format={format}
 				/>

@@ -15,6 +15,10 @@ const commentStyles = (format: ArticleFormat): SerializedStyles => css`
 	${between.mobile.and.phablet} {
 		width: 68%;
 	}
+
+	${darkModeCss`
+        color: ${text.bylineLeftColumnDark(format)};
+    `}
 `;
 
 const commentAnchorStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -22,7 +26,7 @@ const commentAnchorStyles = (format: ArticleFormat): SerializedStyles => css`
 	text-decoration: none;
 
 	${darkModeCss`
-        color: ${text.bylineDark(format)};
+        color: ${text.bylineLeftColumnDark(format)};
     `}
 `;
 

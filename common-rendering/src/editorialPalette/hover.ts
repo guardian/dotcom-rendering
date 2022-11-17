@@ -10,6 +10,7 @@ import {
 	opinion,
 	labs,
 	specialReport,
+	palette,
 } from '@guardian/source-foundations';
 import { Colour } from '.';
 
@@ -32,12 +33,14 @@ const pagination = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
 		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
+			return palette.specialReportAlt[100];
 	}
 };
 
-const newsletterSignUpFormButton = (_format: ArticleFormat): Colour => neutral[7];
-const newsletterSignUpFormButtonDark = (_format: ArticleFormat): Colour => neutral[86];
+const newsletterSignUpFormButton = (_format: ArticleFormat): Colour =>
+	neutral[7];
+const newsletterSignUpFormButtonDark = (_format: ArticleFormat): Colour =>
+	neutral[86];
 
 // ----- API ----- //
 

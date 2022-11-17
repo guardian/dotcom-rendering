@@ -10,12 +10,12 @@ import type { ReactNode } from 'react';
 import { getHref } from 'renderer';
 import { darkModeCss } from 'styles';
 
-export const defaultStyles = (kicker: string): SerializedStyles => css`
+export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.xxxsmall({ fontStyle: 'italic' })}
-	color: ${kicker};
+	color: ${text.byline(format)};
 
 	${darkModeCss`
-        color: ${neutral[60]};
+        color: ${text.bylineDark(format)};
     `}
 `;
 
