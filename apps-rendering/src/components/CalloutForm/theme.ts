@@ -17,9 +17,14 @@ const calloutLightTheme = (format: ArticleFormat) => ({
 	text: neutral[7],
 	error: error[400],
 	supporting: neutral[60],
-	border: neutral[86],
 
-
+	expander: {
+		border: neutral[86],
+		expandButtonBackground: neutral[100],
+		expandButtonText: neutral[7],
+		collapseButtonBackground: neutral[7],
+		collapseButtonText: neutral[100],
+	},
 })
 const calloutDarkTheme = (format: ArticleFormat) => ({
 	background: neutral[7],
@@ -30,9 +35,11 @@ const calloutDarkTheme = (format: ArticleFormat) => ({
 	border: neutral[20],
 
 	expander: {
-		expandButton: neutral[0],
-		collapseButton: neutral[0],
-		overlayBackground: neutral[7],
+		border: neutral[60],
+		expandButtonBackground: neutral[0],
+		expandButtonText: neutral[97],
+		collapseButtonBackground: neutral[97],
+		collapseButtonText: neutral[0],
 	},
 
 	// Can we move these dark themes to source?
