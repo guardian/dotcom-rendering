@@ -11,7 +11,7 @@ import {
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 
-const useDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+const getPrefersDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches
 
 const calloutLightTheme = (format: ArticleFormat) => ({
 	background: neutral[97],
@@ -100,4 +100,4 @@ const calloutDarkTheme = (format: ArticleFormat) => ({
 	},
 })
 
-export const getTheme = (format: ArticleFormat) => useDark ? calloutDarkTheme(format) : calloutLightTheme(format)
+export const getTheme = (format: ArticleFormat) => getPrefersDark() ? calloutDarkTheme(format) : calloutLightTheme(format)
