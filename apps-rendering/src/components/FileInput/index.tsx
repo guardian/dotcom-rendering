@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	focusHalo,
@@ -31,10 +30,10 @@ const fieldLabelStyles = (theme: any): SerializedStyles => css`
 	color: ${theme.text};
 `;
 
-const customUpload = (format: ArticleFormat): SerializedStyles => css`
+const customUpload = (theme: any): SerializedStyles => css`
 	${textSans.small()};
-	color: ${text.interactiveAtomLink(format)};
-	border: 1px solid ${text.interactiveAtomLink(format)};
+	color: ${theme.fileInputButton};
+	border: 1px solid ${theme.fileInputButton};
 	display: inline-flex;
 	justify-content: space-between;
 	align-items: center;
@@ -82,7 +81,7 @@ const FileInput = ({
 					May not work on some mobile devices, or files may be too
 					large.
 				</p>
-				<div css={customUpload(format)}>
+				<div css={customUpload}>
 					{chosenFile ? 'Change File' : 'Choose File'}
 					<input
 						id={name}
@@ -101,7 +100,7 @@ const FileInput = ({
 				<>
 					{!mandatory && (
 						<button
-							css={customUpload(format)}
+							css={customUpload}
 							onClick={(): void => {
 								setChosenFile(undefined);
 							}}

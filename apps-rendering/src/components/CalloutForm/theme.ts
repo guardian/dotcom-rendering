@@ -1,4 +1,6 @@
 import {
+	brand,
+	brandAlt,
 	neutral,
 	error,
 	success,
@@ -9,7 +11,7 @@ import {
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 
-const useDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+const getPrefersDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches
 
 const calloutLightTheme = (format: ArticleFormat) => ({
 	background: neutral[97],
@@ -17,29 +19,34 @@ const calloutLightTheme = (format: ArticleFormat) => ({
 	text: neutral[7],
 	error: error[400],
 	supporting: neutral[60],
+	shareLinkColor: brand[400],
+	deadlineColor: brandAlt[400],
+	fileInputButton: text.calloutPrimary(format),
 
 	expander: {
 		border: neutral[86],
-		expandButtonBackground: neutral[100],
-		expandButtonText: neutral[7],
-		collapseButtonBackground: neutral[7],
-		collapseButtonText: neutral[100],
+		expandBackground: neutral[7],
+		expandText: neutral[100],
+		collapseBackground: neutral[100],
+		collapseText: neutral[7],
 	},
 })
 const calloutDarkTheme = (format: ArticleFormat) => ({
-	background: neutral[7],
+	background: neutral[20],
 	primary: text.calloutPrimaryDark(format),
 	text: neutral[86],
 	error: error[500],
 	supporting: neutral[60],
-	border: neutral[20],
+	shareLinkColor: brand[600],
+	deadlineColor: brandAlt[200],
+	fileInputButton: neutral[86],
 
 	expander: {
 		border: neutral[60],
-		expandButtonBackground: neutral[0],
-		expandButtonText: neutral[97],
-		collapseButtonBackground: neutral[97],
-		collapseButtonText: neutral[0],
+		expandBackground: neutral[46],
+		expandText: neutral[100],
+		collapseBackground: neutral[10],
+		collapseText: neutral[86],
 	},
 
 	// Can we move these dark themes to source?
@@ -93,4 +100,4 @@ const calloutDarkTheme = (format: ArticleFormat) => ({
 	},
 })
 
-export const getTheme = (format: ArticleFormat) => useDark ? calloutDarkTheme(format) : calloutLightTheme(format)
+export const getTheme = (format: ArticleFormat) => getPrefersDark() ? calloutDarkTheme(format) : calloutLightTheme(format)

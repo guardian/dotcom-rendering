@@ -17,12 +17,12 @@ import {
 	neutral,
 } from '@guardian/source-foundations';
 
-const disclaimerStyles = css`
+const infoStyles = css`
 	${textSans.small()};
 	margin-bottom: ${remSpace[3]};
 `;
 
-export const Disclaimer = () => (<div css={disclaimerStyles}>
+export const Disclaimer = () => (<div css={infoStyles}>
 		You must be 18 or over to fill in this form. Only the Guardian can see
 		your contributions and one of our journalists may contact you to discuss
 		further. For more information please see our{' '}
@@ -36,11 +36,15 @@ export const Disclaimer = () => (<div css={disclaimerStyles}>
 		.
 	</div>);
 
+export const ContactText = () => (<div css={infoStyles}>
+		One of our journalists will be in contact before we publish your information, so please do leave contact details.
+	</div>);
+
 export const renderField = (
 	{ type, label, description, mandatory, options, id }: FormField,
 	format: ArticleFormat,
 ): ReactElement | null => {
-	const name = `field_${id}`;
+	const name = `field_${type}_${id}`;
 	const inputStyles = css`
 		margin-bottom: ${remSpace[4]};
 	`;
@@ -66,6 +70,7 @@ export const renderField = (
 					supporting={description}
 					optional={!mandatory}
 					cssOverrides={inputStyles}
+					key={name}
 				/>
 			);
 		case 'textarea':
@@ -76,6 +81,7 @@ export const renderField = (
 					supporting={description}
 					optional={!mandatory}
 					cssOverrides={textareaStyles}
+					key={name}
 				/>
 			);
 		case 'file':
@@ -87,6 +93,7 @@ export const renderField = (
 					mandatory={mandatory}
 					format={format}
 					cssOverrides={inputStyles}
+					key={name}
 				/>
 			);
 		case 'radio':
@@ -96,6 +103,7 @@ export const renderField = (
 					label={label}
 					supporting={description}
 					options={options}
+					key={name}
 				/>
 			);
 		case 'checkbox':
@@ -106,6 +114,7 @@ export const renderField = (
 					supporting={description}
 					options={options}
 					cssOverrides={inputStyles}
+					key={name}
 				/>
 			);
 		case 'select':
@@ -114,6 +123,7 @@ export const renderField = (
 					label={label}
 					supporting={description}
 					cssOverrides={inputStyles}
+					key={name}
 				>
 					{options.map(({ value, label }) => {
 						return (
