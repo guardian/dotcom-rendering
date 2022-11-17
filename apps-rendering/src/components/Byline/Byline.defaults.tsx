@@ -12,10 +12,10 @@ import { darkModeCss } from 'styles';
 
 export const defaultStyles = (format: ArticleFormat): SerializedStyles => css`
 	${headline.xxxsmall({ fontStyle: 'italic' })}
-	color: ${text.byline(format)};
+	color: ${text.bylineLeftColumn(format)};
 
 	${darkModeCss`
-        color: ${text.bylineDark(format)};
+        color: ${text.bylineLeftColumnDark(format)};
     `}
 `;
 
