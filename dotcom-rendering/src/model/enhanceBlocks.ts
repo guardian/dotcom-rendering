@@ -7,7 +7,7 @@ import { enhanceH3s } from './enhance-H3s';
 import { enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
-import { enhanceText } from './enhance-text';
+import { enhanceRecipes } from './enhance-recipes';
 import { enhanceTweets } from './enhance-tweets';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
 
@@ -87,8 +87,8 @@ class BlockEnhancer {
 		return this;
 	}
 
-	enhanceText() {
-		this.blocks = enhanceText(this.blocks);
+	enhanceRecipes() {
+		this.blocks = enhanceRecipes(this.blocks);
 		return this;
 	}
 }
@@ -112,6 +112,6 @@ export const enhanceBlocks = (
 		.enhanceNumberedLists()
 		.enhanceEmbeds()
 		.enhanceTweets()
-		.enhanceText()
+		.enhanceRecipes()
 		.enhanceNewsletterSignup().blocks;
 };

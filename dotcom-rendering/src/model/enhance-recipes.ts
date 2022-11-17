@@ -1,4 +1,4 @@
-const makeEmpty = (elements: CAPIElement[]): CAPIElement[] => {
+const applyArithmetic = (elements: CAPIElement[]): CAPIElement[] => {
 	// Loop over elements and check if a dot is in the TextBlockElement
 	const enhanced: CAPIElement[] = [];
 	elements.forEach((element) => {
@@ -13,10 +13,10 @@ const makeEmpty = (elements: CAPIElement[]): CAPIElement[] => {
 	return enhanced;
 };
 
-export const enhanceText = (blocks: Block[]): Block[] =>
+export const enhanceRecipes = (blocks: Block[]): Block[] =>
 	blocks.map((block: Block) => {
 		return {
 			...block,
-			elements: makeEmpty(block.elements),
+			elements: applyArithmetic(block.elements),
 		};
 	});
