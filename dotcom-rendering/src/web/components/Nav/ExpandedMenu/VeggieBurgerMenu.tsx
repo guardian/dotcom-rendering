@@ -115,7 +115,6 @@ export const VeggieBurgerMenu = ({ display }: Props) => {
 			css={veggieBurgerStyles(display)}
 			aria-label="Toggle main menu"
 			key="OpenExpandedMenuButton"
-			htmlFor={navInputCheckboxId}
 			data-link-name="nav2 : veggie-burger: show"
 			tabIndex={0}
 			// eslint-disable-next-line jsx-a11y/no-noninteractive-element-to-interactive-role -- we’re using this label for a CSS-only toggle

@@ -228,6 +228,7 @@ export const Nav = ({
 					role="button"
 					aria-expanded="false"
 					aria-haspopup="true"
+					aria-label="Toggle main menu"
 				/>
 				<Pillars
 					display={format.display}
