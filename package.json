@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "private": true,
   "workspaces": [
+    "apps-rendering",
     "dotcom-rendering",
     "common-rendering"
   ],
@@ -14,9 +15,6 @@
     "build:dcr": "cd ./dotcom-rendering && yarn makeBuild",
     "chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
     "prepare": "husky install"
-  },
-  "resolutions": {
-    "@types/webpack": "^5.28.0"
   },
   "dependencies": {
     "@babel/core": "^7.16.12",
