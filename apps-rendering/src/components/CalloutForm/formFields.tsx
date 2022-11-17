@@ -40,7 +40,7 @@ export const renderField = (
 	{ type, label, description, mandatory, options, id }: FormField,
 	format: ArticleFormat,
 ): ReactElement | null => {
-	const name = `field_${id}`;
+	const name = `field_${type}_${id}`;
 	const inputStyles = css`
 		margin-bottom: ${remSpace[4]};
 	`;
@@ -66,6 +66,7 @@ export const renderField = (
 					supporting={description}
 					optional={!mandatory}
 					cssOverrides={inputStyles}
+					key={name}
 				/>
 			);
 		case 'textarea':
@@ -76,6 +77,7 @@ export const renderField = (
 					supporting={description}
 					optional={!mandatory}
 					cssOverrides={textareaStyles}
+					key={name}
 				/>
 			);
 		case 'file':
@@ -87,6 +89,7 @@ export const renderField = (
 					mandatory={mandatory}
 					format={format}
 					cssOverrides={inputStyles}
+					key={name}
 				/>
 			);
 		case 'radio':
@@ -96,6 +99,7 @@ export const renderField = (
 					label={label}
 					supporting={description}
 					options={options}
+					key={name}
 				/>
 			);
 		case 'checkbox':
@@ -106,6 +110,7 @@ export const renderField = (
 					supporting={description}
 					options={options}
 					cssOverrides={inputStyles}
+					key={name}
 				/>
 			);
 		case 'select':
@@ -114,6 +119,7 @@ export const renderField = (
 					label={label}
 					supporting={description}
 					cssOverrides={inputStyles}
+					key={name}
 				>
 					{options.map(({ value, label }) => {
 						return (

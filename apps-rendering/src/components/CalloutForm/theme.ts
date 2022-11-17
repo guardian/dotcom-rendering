@@ -1,4 +1,5 @@
 import {
+	brand,
 	neutral,
 	error,
 	success,
@@ -17,6 +18,7 @@ const calloutLightTheme = (format: ArticleFormat) => ({
 	text: neutral[7],
 	error: error[400],
 	supporting: neutral[60],
+	shareLinkColor: brand[400],
 
 	expander: {
 		border: neutral[86],
@@ -32,7 +34,7 @@ const calloutDarkTheme = (format: ArticleFormat) => ({
 	text: neutral[86],
 	error: error[500],
 	supporting: neutral[60],
-	border: neutral[20],
+	shareLinkColor: brand[600],
 
 	expander: {
 		border: neutral[60],
