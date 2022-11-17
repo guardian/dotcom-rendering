@@ -90,8 +90,8 @@
     "@types/google.analytics": "^0.0.42",
     "@types/he": "^1.1.1",
     "@types/html-minifier": "^4.0.2",
-    "@types/jest": "^27.4.0",
-    "@types/jsdom": "^16.2.10",
+    "@types/jest": "^24.9.1",
+    "@types/jsdom": "^20.0.1",
     "@types/lodash.debounce": "^4.0.7",
     "@types/lodash.get": "^4.4.7",
     "@types/node": "^14.18.3",
@@ -106,8 +106,6 @@
     "@types/twitter-for-web": "^0.0.2",
     "@types/uuid": "^8.3.4",
     "@types/webpack-bundle-analyzer": "^4.4.1",
-    "@types/webpack-env": "^1.18.0",
-    "@types/webpack-node-externals": "^2.5.3",
     "@types/youtube": "^0.0.46",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/eslint-plugin-tslint": "^5.20.0",
@@ -115,6 +113,7 @@
     "ajv": "^8.1.0",
     "ajv-formats": "^2.0.2",
     "amphtml-validator": "^1.0.34",
+    "babel-loader": "^8.0.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^27.5.1",
     "babel-plugin-module-resolver": "^4.1.0",
@@ -160,7 +159,7 @@
     "jest": "^24.9.0",
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "jest-teamcity-reporter": "^0.9.0",
-    "jsdom": "^20.0.0",
+    "jsdom": "^20.0.2",
     "lighthouse": "^7.3.0",
     "lint-staged": "^12.3.4",
     "load-json-file": "^6.2.0",
@@ -213,7 +212,8 @@
     "webpack-merge": "^5.7.3",
     "webpack-messages": "^2.0.4",
     "webpack-node-externals": "^3.0.0",
-    "webpack-sources": "^3.2.3"
+    "webpack-sources": "^3.2.3",
+    "browserslist": "^4.16.5"
   },
   "resolutions": {
     "@types/serve-static": "^1.13.9"
