@@ -4,7 +4,6 @@ import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	focusHalo,
-	neutral,
 	remHeight,
 	remSpace,
 	textSans,
@@ -23,9 +22,13 @@ interface FileInputProps {
 	format: ArticleFormat;
 }
 
-const fieldLabelStyles = css`
+const fieldSupportingStyles = (theme: any): SerializedStyles => css`
 	${textSans.small()};
-	color: ${neutral[46]};
+	color: ${theme.supporting};
+`;
+const fieldLabelStyles = (theme: any): SerializedStyles => css`
+	${textSans.small()};
+	color: ${theme.text};
 `;
 
 const customUpload = (format: ArticleFormat): SerializedStyles => css`
@@ -72,8 +75,10 @@ const FileInput = ({
 				supporting={supporting}
 				optional={!mandatory}
 				cssOverrides={cssOverrides}
+				css={fieldLabelStyles}
+
 			>
-				<p css={fieldLabelStyles}>
+				<p css={fieldSupportingStyles}>
 					May not work on some mobile devices, or files may be too
 					large.
 				</p>

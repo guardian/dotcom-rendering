@@ -1,12 +1,10 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
-import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	body,
 	headline,
-	neutral,
 	remSpace,
 } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
@@ -21,10 +19,19 @@ export interface CalloutProps {
 	description: Option<DocumentFragment>;
 }
 
+
+
+const containerStyles = (theme: any): SerializedStyles => css`
+	background: ${theme.background};
+	color: ${theme.text};
+
+	a {
+		color: ${theme.primary}
+	}
+`;
+
+
 const calloutDetailsStyles = css`
-	border-top: 1px ${neutral[86]} solid;
-	background-color: ${neutral[97]};
-	position: relative;
 	padding-bottom: ${remSpace[6]};
 
 	/* IE does not support summary HTML elements, so we need to hide children ourself */
@@ -34,23 +41,20 @@ const calloutDetailsStyles = css`
 `;
 
 const summaryStyles = css`
-	/* Removing default styles from summery tag */
+	/* Remove default styles from summery tag */
 	::-webkit-details-marker {
 		display: none;
 	}
 	outline: none;
 
 	/* We don't want the summary to open when we click anything but the button, so we pointer-event: none the summary */
-	/* 176da211-05aa-4280-859b-1e3157b3f19e */
 	pointer-events: none;
 
-	/*
-        why hide visibility?
-        because we want to prevent the user for tabbing to the summery HTML element
+	/*  why hide visibility?
+        We want to prevent the user for tabbing to the summery HTML element
         without using tabIndex={-1} which would disable focus on all child DOM elements
 
-        NOTE: requires "visibility: visible;" on child elements to display and enable focus
-    */
+        NOTE: requires "visibility: visible;" on child elements to display and enable focus */
 	visibility: hidden;
 
 	a {
@@ -64,16 +68,16 @@ const summaryContentWrapper = css`
 	visibility: visible;
 `;
 
-const titleStyles = (format: ArticleFormat): SerializedStyles => css`
-	${headline.xxsmall({ fontWeight: 'bold' })}
-	color: ${text.interactiveAtomLink(format)};
+const titleStyles = (theme: any): SerializedStyles => css`
+	${headline.xxsmall({ fontWeight: 'bold' })};
+	color: ${theme.primary};
 `;
 
 const headingTextHeaderStyles = css`
 	${headline.xxsmall()}
 `;
 
-const descriptionStyles = css`
+const descriptionStyles = (theme: any): SerializedStyles => css`
 	${body.medium()}
 	padding: ${remSpace[3]} 0;
 `;
@@ -83,11 +87,11 @@ const Callout: FC<CalloutProps> = ({ campaign, format, description }) => {
 	const { callout } = fields;
 
 	return (
-		<>
+		<div css={theme => containerStyles(theme)}>
 			<details css={calloutDetailsStyles} open={true}>
 				<summary css={summaryStyles}>
 					<div css={summaryContentWrapper}>
-						<div css={titleStyles(format)}>{callout}</div>
+						<div css={titleStyles}>{callout}</div>
 						<h4 css={headingTextHeaderStyles}>{name}</h4>
 						{maybeRender(
 							description,
@@ -104,7 +108,7 @@ const Callout: FC<CalloutProps> = ({ campaign, format, description }) => {
 				</summary>
 				<CalloutForm campaign={campaign} format={format} />
 			</details>
-		</>
+		</div>
 	);
 };
 
