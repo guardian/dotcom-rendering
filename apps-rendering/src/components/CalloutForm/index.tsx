@@ -31,7 +31,7 @@ const CalloutForm: FC<CalloutProps> = ({
 						description={description}
 					/>
 					<DeadlineDate until={campaign.activeUntil} />
-					</ThemeProvider>
+				</ThemeProvider>
 			) : (
 				<ThemeProvider theme={getTheme(format)}>
 					<ExpandingWrapper
@@ -47,7 +47,7 @@ const CalloutForm: FC<CalloutProps> = ({
 							description={description}
 						/>
 					</ExpandingWrapper>
-					</ThemeProvider>
+				</ThemeProvider>
 			)}
 		</aside>
 	);

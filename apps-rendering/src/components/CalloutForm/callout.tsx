@@ -2,14 +2,10 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	body,
-	headline,
-	remSpace,
-} from '@guardian/source-foundations';
+import { body, headline, remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { maybeRender } from 'lib';
-import type { FC } from 'react';
+import type { FC, ReactElement } from 'react';
 import { renderCalloutDescriptionText } from 'renderer';
 import CalloutForm from './form';
 
@@ -19,17 +15,15 @@ export interface CalloutProps {
 	description: Option<DocumentFragment>;
 }
 
-
-
 const containerStyles = (theme: any): SerializedStyles => css`
 	background: ${theme.background};
 	color: ${theme.text};
+	padding-bottom: ${remSpace[12]};
 
 	a {
-		color: ${theme.primary}
+		color: ${theme.linkColor};
 	}
 `;
-
 
 const calloutDetailsStyles = css`
 	padding-bottom: ${remSpace[6]};
@@ -77,17 +71,21 @@ const headingTextHeaderStyles = css`
 	${headline.xxsmall()}
 `;
 
-const descriptionStyles = (theme: any): SerializedStyles => css`
+const descriptionStyles = css`
 	${body.medium()}
 	padding: ${remSpace[3]} 0;
 `;
 
-const Callout: FC<CalloutProps> = ({ campaign, format, description }) => {
+const Callout: FC<CalloutProps> = ({
+	campaign,
+	format,
+	description,
+}): ReactElement => {
 	const { name, fields } = campaign;
 	const { callout } = fields;
 
 	return (
-		<div css={theme => containerStyles(theme)}>
+		<div css={(theme) => containerStyles(theme)}>
 			<details css={calloutDetailsStyles} open={true}>
 				<summary css={summaryStyles}>
 					<div css={summaryContentWrapper}>
@@ -97,16 +95,21 @@ const Callout: FC<CalloutProps> = ({ campaign, format, description }) => {
 							description,
 							(description: DocumentFragment) => (
 								<div css={descriptionStyles}>
+									<>
 									{renderCalloutDescriptionText(
 										description,
 										format,
-									)}
+										)}
+									</>
 								</div>
 							),
 						)}
 					</div>
 				</summary>
-				<CalloutForm campaign={campaign} format={format} />
+				<CalloutForm
+					campaign={campaign}
+					format={format}
+				/>
 			</details>
 		</div>
 	);

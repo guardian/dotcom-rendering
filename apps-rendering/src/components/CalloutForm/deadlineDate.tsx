@@ -1,13 +1,14 @@
 import { css } from '@emotion/react';
-import { brandAlt, neutral, remSpace } from '@guardian/source-foundations';
+import type { SerializedStyles } from '@emotion/react';
+import { neutral, remSpace } from '@guardian/source-foundations';
 import { SvgClock } from '@guardian/source-react-components';
 import { isValidDate } from 'date';
 import type Int64 from 'node-int64';
 import type { FC } from 'react';
 
-const deadlineStyles = css`
+const deadlineStyles = (theme: any): SerializedStyles => css`
 	color: ${neutral[7]};
-	background: ${brandAlt[400]};
+	background: ${theme.deadlineColor};
 	display: flex;
 	align-items: center;
 	padding: 0 ${remSpace[1]};

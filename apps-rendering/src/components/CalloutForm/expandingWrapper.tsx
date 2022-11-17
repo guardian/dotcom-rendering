@@ -3,7 +3,6 @@ import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	focusHalo,
-	from,
 	remHeight,
 	remSpace,
 	textSans,
@@ -37,15 +36,15 @@ const containerStyles = (theme: any): SerializedStyles => css`
 	position: relative;
 
 	#expander-checkbox:checked ~ label {
-		background: ${theme.expander.expandButtonBackground};
-		color: ${theme.expander.expandButtonText};
+		background: ${theme.expander.collapseBackground};
+		color: ${theme.expander.collapseText};
 
 		#svgminus {
-			fill: ${theme.expander.expandButtonText};
+			fill: ${theme.expander.collapseText};
 		}
 	}
 	#expander-checkbox ~ label #svgplus {
-		fill: ${theme.expander.expandButtonBackground};
+		fill: ${theme.expander.expandText};
 	}
 
 	#expander-checkbox:checked ~ #collapsible-body {
@@ -83,17 +82,14 @@ const fakeButtonStyles = (theme: any): SerializedStyles => css`
 	bottom: -${remSpace[6]};
 	border-radius: ${remHeight.ctaMedium}rem;
 	padding: 0 ${remSpace[5]};
-	border: 1px solid ${theme.expander.collapseButtonBackground};
+	border: 1px solid ${theme.expander.expandBackground};
 	text-decoration: none;
-	background: ${theme.expander.collapseButtonBackground};
-	color: ${theme.expander.collapseButtonText};
+	background: ${theme.expander.expandBackground};
+	color: ${theme.expander.expandText};
 	height: ${remHeight.ctaMedium}rem;
 	min-height: ${remHeight.ctaMedium}rem;
 	${textSans.medium({ fontWeight: 'bold' })};
-
-	${from.tablet} {
-		margin-left: 3.75rem;
-	}
+	margin-left: ${remSpace[2]};
 `;
 
 const collapsibleBody = css`

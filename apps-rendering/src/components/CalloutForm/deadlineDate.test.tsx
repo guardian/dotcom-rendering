@@ -5,7 +5,7 @@ describe('getCloseText', () => {
 		const date1 = new Date(2022, 11, 1, 0, 0, 0);
 		const date2 = new Date(2022, 12, 24, 0, 0, 0);
 
-		expect(getDeadlineText(date1, date2)).toBeNull();
+		expect(getDeadlineText(date1, date2)).toBeUndefined();
 	});
 	test('Rounds days if deadline date is < 30 days away', () => {
 		const date1 = new Date(2022, 11, 1, 0, 0, 0);
