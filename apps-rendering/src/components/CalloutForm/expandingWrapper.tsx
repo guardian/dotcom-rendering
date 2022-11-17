@@ -4,7 +4,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import {
 	focusHalo,
 	from,
-	neutral,
 	remHeight,
 	remSpace,
 	textSans,
@@ -13,7 +12,6 @@ import {
 import { SvgMinus, SvgPlus } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { FC, ReactNode } from 'react';
-import { darkModeCss } from 'styles';
 
 // TODO: Could this be exported to source? Or should we put this all in atoms-rendering?
 
@@ -24,30 +22,30 @@ export interface ExpandingWrapperProps {
 	renderExtra?: () => ReactNode;
 }
 
-const containerStyles = (format: ArticleFormat): SerializedStyles => css`
+const containerStyles = (theme: any): SerializedStyles => css`
 	border-image: repeating-linear-gradient(
 			to bottom,
-			${neutral[86]},
-			${neutral[86]} 1px,
+			${theme.expander.border},
+			${theme.expander.border} 1px,
 			transparent 1px,
 			transparent 4px
 		)
 		13;
-	border-top: 13px solid ${neutral[86]};
-	background: ${neutral[97]};
+	border-top: 13px solid ${theme.expander.border};
+	background: ${theme.background};
 	box-shadow: none;
 	position: relative;
 
 	#expander-checkbox:checked ~ label {
-		background: ${neutral[100]};
-		color: ${neutral[7]};
+		background: ${theme.expander.expandButtonBackground};
+		color: ${theme.expander.expandButtonText};
 
 		#svgminus {
-			fill: ${neutral[7]};
+			fill: ${theme.expander.expandButtonText};
 		}
 	}
 	#expander-checkbox ~ label #svgplus {
-		fill: ${neutral[100]};
+		fill: ${theme.expander.expandButtonBackground};
 	}
 
 	#expander-checkbox:checked ~ #collapsible-body {
@@ -60,11 +58,11 @@ const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 	}
 `;
 
-const overlayStyles = css`
+const overlayStyles = (theme: any): SerializedStyles => css`
 	background-image: linear-gradient(
 		0deg,
-		${neutral[97]},
-		${neutral[97]} 40%,
+		${theme.background} 0%,
+		${theme.background} 40%,
 		rgba(255, 255, 255, 0)
 	);
 	height: 5rem;
@@ -72,18 +70,9 @@ const overlayStyles = css`
 	bottom: 0;
 	width: 100%;
 	display: block;
-
-	${darkModeCss`
-		background-image: linear-gradient(
-			0deg,
-			${neutral[10]},
-			${neutral[10]} 40%,
-			rgba(255, 255, 255, 0)
-		);
-	`}
 `;
 
-const fakeButtonStyles = (format: ArticleFormat): SerializedStyles => css`
+const fakeButtonStyles = (theme: any): SerializedStyles => css`
 	display: inline-flex;
 	justify-content: space-between;
 	box-shadow: none;
@@ -91,14 +80,13 @@ const fakeButtonStyles = (format: ArticleFormat): SerializedStyles => css`
 	box-sizing: border-box;
 	cursor: pointer;
 	position: absolute;
-	// margin-left: ${remSpace[1]};
 	bottom: -${remSpace[6]};
 	border-radius: ${remHeight.ctaMedium}rem;
 	padding: 0 ${remSpace[5]};
-	border: 1px solid ${neutral[7]};
+	border: 1px solid ${theme.expander.collapseButtonBackground};
 	text-decoration: none;
-	background: ${neutral[7]};
-	color: ${neutral[100]};
+	background: ${theme.expander.collapseButtonBackground};
+	color: ${theme.expander.collapseButtonText};
 	height: ${remHeight.ctaMedium}rem;
 	min-height: ${remHeight.ctaMedium}rem;
 	${textSans.medium({ fontWeight: 'bold' })};
@@ -132,7 +120,7 @@ const ExpandingWrapper: FC<ExpandingWrapperProps> = ({
 }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 	return (
-		<div id="expander" css={containerStyles(format)}>
+		<div id="expander" css={containerStyles}>
 			<input
 				type="checkbox"
 				css={css`
@@ -155,7 +143,7 @@ const ExpandingWrapper: FC<ExpandingWrapperProps> = ({
 			{renderExtra?.()}
 			<label
 				aria-hidden={true}
-				css={fakeButtonStyles(format)}
+				css={fakeButtonStyles}
 				htmlFor="expander-checkbox"
 				id="expander-button"
 			>
