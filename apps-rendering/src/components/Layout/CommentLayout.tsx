@@ -8,6 +8,7 @@ import {
 	from,
 	neutral,
 	opinion,
+	palette,
 	remSpace,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
@@ -24,7 +25,7 @@ import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
 import { getFormat } from 'item';
-import type { Comment as CommentItem, Editorial, Letter } from 'item';
+import type { Comment as CommentItem, Editorial } from 'item';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,
@@ -72,7 +73,7 @@ const commentLineStylePosition = css`
 `;
 
 interface Props {
-	item: CommentItem | Letter | Editorial;
+	item: CommentItem | Editorial;
 	children: ReactNode[];
 }
 
