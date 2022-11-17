@@ -94,7 +94,10 @@ export const YoutubeBlockComponent = ({
 		undefined,
 	);
 
-	const imaEnabled = !!useAB()?.isUserInVariant('IntegrateIMA', 'variant');
+	const imaEnabled = !!useAB()?.api.isUserInVariant(
+		'IntegrateIMA',
+		'variant',
+	);
 
 	useEffect(() => {
 		const defineConsentState = async () => {

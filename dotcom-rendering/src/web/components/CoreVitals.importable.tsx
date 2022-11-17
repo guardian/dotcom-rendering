@@ -19,7 +19,7 @@ export const CoreVitals = () => {
 		window.location.hostname === 'preview.gutools.co.uk';
 	const sampling = 1 / 100;
 
-	const ABTestAPI = useAB();
+	const ABTestAPI = useAB()?.api;
 
 	// For these tests switch off sampling and collect metrics for 100% of views
 	const clientSideTestsToForceMetrics: ABTest[] = [
