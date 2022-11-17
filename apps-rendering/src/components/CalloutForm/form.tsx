@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { ArticleFormat } from '@guardian/libs';
-import { error, remSpace, textSans, until } from '@guardian/source-foundations';
-import { EditorialButton } from '@guardian/source-react-components-development-kitchen';
+import { remSpace, textSans, until } from '@guardian/source-foundations';
 import type { FC } from 'react';
-import { renderDisclaimer, renderField } from './formFields';
+import type { SerializedStyles } from '@emotion/react';
+import { Disclaimer, renderField } from './formFields';
+import { Button } from '@guardian/source-react-components';
 
 export interface CalloutProps {
 	campaign: Campaign;
@@ -16,12 +17,13 @@ const formStyles = css`
 	margin: ${remSpace[3]};
 `;
 
-const errorStyles = css`
-	color: ${error[400]};
+const errorStyles = (theme: any): SerializedStyles => css`
+	color: ${theme.error};
 	${textSans.small()};
 `;
 
-const buttonStyles = css`
+const buttonStyles = (theme: any): SerializedStyles => css`
+	background: ${theme.primary};
 	${until.mobileLandscape} {
 		button {
 			width: 100%;
@@ -32,14 +34,12 @@ const buttonStyles = css`
 
 const CalloutForm: FC<CalloutProps> = ({ campaign, format }) => (
 	<form css={formStyles} action="#" method="post">
-		{renderDisclaimer(format)}
+		<Disclaimer />
 		<input name="formId" type="hidden" value={campaign.fields.formId} />
 		{campaign.fields.formFields.map((field) => renderField(field, format))}
 		<p css={errorStyles} className="js-error-message"></p>
-		<div css={buttonStyles}>
-			<EditorialButton format={format} type="submit" priority="primary">
-				Submit
-			</EditorialButton>
+		<div >
+			<Button css={buttonStyles} type="submit" priority='primary'>Submit</Button>
 		</div>
 	</form>
 );

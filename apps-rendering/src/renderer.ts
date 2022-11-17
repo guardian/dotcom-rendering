@@ -336,19 +336,11 @@ const calloutDescriptionTextElement =
 					children,
 				);
 			case 'A': {
-				const styles = css`
-					color: ${text.standfirstLink(format)};
-					${borderFromFormat(format)};
-
-					${darkModeCss`
-						color: ${text.standfirstLinkDark(format)};
-					`}
-				`;
 				const url = withDefault('')(getHref(node));
 				const href = url.startsWith('profile/')
 					? `https://www.theguardian.com/${url}`
 					: url;
-				return styledH('a', { key, href, css: styles }, children);
+				return styledH('a', { key, href }, children);
 			}
 			default:
 				return textElement(format)(node, key);

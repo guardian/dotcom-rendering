@@ -107,6 +107,7 @@ const mockCampaign = {
 				],
 				hide_label: '0',
 				label: 'Do you like the guardian?',
+				description: 'say yes',
 				id: '121575463451',
 				type: 'radio',
 				required: '1',
