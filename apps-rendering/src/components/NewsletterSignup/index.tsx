@@ -112,7 +112,11 @@ const noHeightFromTabletStyles = css`
 /**
  * NOTE: this component is non functional and is for demonstration only.
  */
-const NewsletterSignup: FC<Props> = ({ format, element, showByDefault = false }) => {
+const NewsletterSignup: FC<Props> = ({
+	format,
+	element,
+	showByDefault = false,
+}) => {
 	const {
 		name,
 		frequency,
