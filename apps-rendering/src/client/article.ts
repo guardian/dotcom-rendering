@@ -465,7 +465,7 @@ initAudioAtoms();
 hydrateAtoms();
 richLinks();
 hydrateClickToView();
-initSignupForms();
+void initSignupForms();
 
 /*
  We run this last to help precisely position native elements over their placeholders in the webview.
