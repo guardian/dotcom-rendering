@@ -25,11 +25,6 @@ type Props = {
  */
 export const FrontCard = (props: Props) => {
 	const { trail, ...cardProps } = props;
-
-	if (trail === undefined) {
-		return <></>;
-	}
-
 	const defaultProps: CardProps = {
 		linkTo: trail.url,
 		format: trail.format,
