@@ -97,11 +97,7 @@ export const SupportingContent = ({
 							containerPalette={containerPalette}
 							isDynamo={isDynamo}
 							headlineText={subLink.headline}
-							kickerText={
-								subLink.format.design === ArticleDesign.LiveBlog
-									? 'Live'
-									: subLink.kickerText
-							}
+							kickerText={subLink.kickerText}
 						/>
 					</li>
 				);
