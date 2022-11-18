@@ -25,9 +25,10 @@ export interface CalloutProps {
 const containerStyles = (theme: any): SerializedStyles => css`
 	background: ${theme.background};
 	color: ${theme.text};
+	padding-bottom: ${remSpace[12]};
 
 	a {
-		color: ${theme.primary}
+		color: ${theme.linkColor}
 	}
 `;
 
@@ -78,7 +79,7 @@ const headingTextHeaderStyles = css`
 	${headline.xxsmall()}
 `;
 
-const descriptionStyles = (theme: any): SerializedStyles => css`
+const descriptionStyles = css`
 	${body.medium()}
 	padding: ${remSpace[3]} 0;
 `;

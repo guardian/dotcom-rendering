@@ -19,7 +19,7 @@ import {
 
 const infoStyles = css`
 	${textSans.small()};
-	margin-bottom: ${remSpace[3]};
+	margin-bottom: ${remSpace[4]};
 `;
 
 export const Disclaimer = () => (<div css={infoStyles}>
@@ -52,8 +52,10 @@ export const renderField = (
 		${inputStyles};
 
 		background-color: ${neutral[100]};
+		color: ${neutral[7]};
 		${darkModeCss`
 			background-color: ${neutral[7]};
+			color: ${neutral[97]};
 	`}
 	`;
 

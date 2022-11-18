@@ -90,10 +90,7 @@ const fakeButtonStyles = (theme: any): SerializedStyles => css`
 	height: ${remHeight.ctaMedium}rem;
 	min-height: ${remHeight.ctaMedium}rem;
 	${textSans.medium({ fontWeight: 'bold' })};
-
-	${from.tablet} {
-		margin-left: 3.75rem;
-	}
+	margin-left: ${remSpace[2]};
 `;
 
 const collapsibleBody = css`

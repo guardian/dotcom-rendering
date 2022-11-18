@@ -31,9 +31,14 @@ const formStyles = (theme: any): SerializedStyles => css`
 		}
 	}
 
-	.js-callout-success {
+	.js-callout--success {
 		.js-callout__success-message {
 			display: inline-flex;
+			color: ${theme.text};
+
+			svg {
+				color: ${theme.success};
+			}
 		}
 		.js-callout__inputs {
 			display: none !important;
@@ -43,12 +48,12 @@ const formStyles = (theme: any): SerializedStyles => css`
 
 
 const buttonStyles = (theme: any): SerializedStyles => css`
-	background: ${theme.primary};
+	background: ${theme.submitBackground};
+	color: ${theme.submitText};
+
 	${until.mobileLandscape} {
-		button {
-			width: 100%;
-			justify-content: center;
-		}
+		width: 100%;
+		justify-content: center;
 	}
 `;
 

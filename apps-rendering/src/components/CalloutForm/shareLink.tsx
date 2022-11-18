@@ -12,7 +12,7 @@ const shareStyles = (theme: any): SerializedStyles => css`
 	padding-bottom: ${remSpace[2]};
 `;
 const linkStyles = (theme: any): SerializedStyles => css`
-	color: ${theme.primary};
+	color: ${theme.linkColor};
 	padding: 0 ${remSpace[2]};
 	font-weight: normal;
 `;
