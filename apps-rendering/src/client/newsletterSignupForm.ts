@@ -1,7 +1,7 @@
 // ----- Imports ----- //
 import { parseIntOpt } from 'lib';
 import { newslettersClient } from 'native/nativeApi';
-import { Optional } from 'optional';
+import type { Optional } from 'optional';
 import { getBridgetVersion } from './bridgetVersion';
 
 // ----- Types ----- //
@@ -32,12 +32,12 @@ const MODIFIER_CLASSNAME = {
  * @returns whether string represents a version number with a
  * major version of 2 or higher
  */
- const isBridgetCompatible = (version: Optional<string>): boolean =>
- version
-	 .map((versionString) => versionString.split('.')[0])
-	 .flatMap(parseIntOpt)
-	 .map((versionInt) => versionInt >= 2)
-	 .withDefault(false);
+const isBridgetCompatible = (version: Optional<string>): boolean =>
+	version
+		.map((versionString) => versionString.split('.')[0])
+		.flatMap(parseIntOpt)
+		.map((versionInt) => versionInt >= 2)
+		.withDefault(false);
 
 // ----- Procedures ----- //
 
