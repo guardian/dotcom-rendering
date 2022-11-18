@@ -449,7 +449,7 @@ export const LiveSublink = () => {
 					theme: ArticlePillar.News,
 				}}
 				linkTo=""
-				headlineText="With one link to a liveblog"
+				headlineText="With one link"
 			/>
 		</div>
 	);
