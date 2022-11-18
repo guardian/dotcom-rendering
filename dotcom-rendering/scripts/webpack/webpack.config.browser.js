@@ -1,8 +1,24 @@
+const getTargets = require('@babel/helper-compilation-targets').default;
+const browserslist = require('browserslist');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const swcConfig = require('./.swcrc.json');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
+
+const browsers = browserslist('extends @guardian/browserslist-config');
+const targets = getTargets({ browsers });
+
+// current browserslist target
+// {
+// 	chrome: '67.0.0',
+// 	edge: '91.0.0',
+// 	firefox: '78.0.0',
+// 	ios: '10.3.0',
+// 	opera: '64.0.0',
+// 	safari: '10.1.0',
+// 	samsung: '11.1.0'
+// }
 
 /**
  * @param {'legacy' | 'modern' | 'variant'} bundle
@@ -47,48 +63,58 @@ const getLoaders = (bundle) => {
 					},
 				},
 			];
+		case 'modern':
 		case 'variant':
 			return [
 				{
 					loader: 'swc-loader',
 					options: {
 						...swcConfig,
-						// TODO verify browserslist support
-						// https://swc.rs/docs/configuration/supported-browsers#targets
-						// https://github.com/browserslist/browserslist
-						// env: {
-						// 	targets: 'extends @guardian/browserslist-config',
-						// },
+						env: {
+							// debug: true,
+							dynamicImport: true,
+							targets: {
+								chrome: '67.0.0',
+								edge: '91.0.0',
+								firefox: '78.0.0',
+								ios: '10.3.0',
+								opera: '64.0.0',
+								safari: '10.1.0',
+								samsung: '11.1.0',
+								// dynamic imports work for these versions
+								// ios: '11',
+								// safari: '11.1.0',
+							},
+						},
 					},
 				},
 			];
-		case 'modern':
-			return [
-				{
-					loader: 'babel-loader',
-					options: {
-						presets: [
-							'@babel/preset-react',
-							[
-								'@babel/preset-env',
-								{
-									bugfixes: true,
-									targets:
-										'extends @guardian/browserslist-config',
-								},
-							],
-						],
-						compact: true,
-					},
-				},
-				{
-					loader: 'ts-loader',
-					options: {
-						configFile: 'tsconfig.build.json',
-						transpileOnly: true,
-					},
-				},
-			];
+		// return [
+		// 	{
+		// 		loader: 'babel-loader',
+		// 		options: {
+		// 			presets: [
+		// 				'@babel/preset-react',
+		// 				[
+		// 					'@babel/preset-env',
+		// 					{
+		// 						bugfixes: true,
+		// 						targets:
+		// 							'extends @guardian/browserslist-config',
+		// 					},
+		// 				],
+		// 			],
+		// 			compact: true,
+		// 		},
+		// 	},
+		// 	{
+		// 		loader: 'ts-loader',
+		// 		options: {
+		// 			configFile: 'tsconfig.build.json',
+		// 			transpileOnly: true,
+		// 		},
+		// 	},
+		// ];
 	}
 };
 
