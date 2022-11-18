@@ -209,7 +209,7 @@ const mobileStickyAdStyles = css`
 		height: ${labelHeight}px;
 		visibility: hidden;
 	}
-	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller)::before {
+	.ad-slot[data-label-show='true']::before {
 		content: 'Advertisement';
 		display: block;
 		position: relative;
