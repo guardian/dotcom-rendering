@@ -110,13 +110,6 @@ export const ShowMore = ({
 								height: ${space[3]}px;
 							`}
 						/>
-						<h4
-							css={css`
-								${visuallyHidden}
-							`}
-						>
-							More {containerTitle}
-						</h4>
 						<UL direction="row" wrapCards={true}>
 							{filteredData.map((card, cardIndex) => {
 								const columns = 3;
