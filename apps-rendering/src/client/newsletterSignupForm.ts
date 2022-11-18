@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 import { parseIntOpt } from 'lib';
 import { newslettersClient } from 'native/nativeApi';
+import { Optional } from 'optional';
 import { getBridgetVersion } from './bridgetVersion';
 
 // ----- Types ----- //
@@ -27,14 +28,16 @@ const MODIFIER_CLASSNAME = {
  * Parse a version number string and check if it is a version
  * that supports the newslettersClient API.
  *
- * @param version a string representing a version number
+ * @param version an optional string representing a version number
  * @returns whether string represents a version number with a
  * major version of 2 or higher
  */
-const isBridgetCompatible = (version: string): boolean =>
-	parseIntOpt(version.split('.')[0])
-		.map((v) => v >= 2)
-		.withDefault(false);
+ const isBridgetCompatible = (version: Optional<string>): boolean =>
+ version
+	 .map((versionString) => versionString.split('.')[0])
+	 .flatMap(parseIntOpt)
+	 .map((versionInt) => versionInt >= 2)
+	 .withDefault(false);
 
 // ----- Procedures ----- //
 
@@ -138,7 +141,7 @@ async function initSignupForms(): Promise<void> {
 		document.querySelectorAll(`.${COMPONENT_CONTAINER_CLASSNAME}`),
 	).filter(isHTMLElement);
 
-	if (isBridgetCompatible(version.withDefault('1.0.0'))) {
+	if (isBridgetCompatible(version)) {
 		signupContainers.forEach(revealContainer);
 		const signupForms = Array.from(
 			document.querySelectorAll(`form.${COMPONENT_BASE_CLASSNAME}`),
