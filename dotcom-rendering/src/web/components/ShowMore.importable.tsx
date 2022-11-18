@@ -68,7 +68,7 @@ export const ShowMore = ({
 	}, []);
 
 	/** We only pass an actual URL to SWR when 'showMore' is true.
-	 * Toggling 'showMore' will trigger a re-render
+	 * Toggling 'isOpen' will trigger a re-render
 	 *   @see https://swr.vercel.app/docs/conditional-fetching#conditional
 	 */
 	const url = isOpen
