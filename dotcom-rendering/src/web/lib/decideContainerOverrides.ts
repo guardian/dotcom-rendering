@@ -245,9 +245,9 @@ const textContainerToggle = (containerPalette: DCRContainerPalette): string => {
 const borderContainer = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return transparentColour(neutral[86], 0.4);
+			return transparentColour(neutral[60], 0.4);
 		case 'LongRunningAltPalette':
-			return transparentColour(neutral[86], 0.4);
+			return transparentColour(neutral[60], 0.4);
 		case 'SombrePalette':
 			return neutral[60];
 		case 'SombreAltPalette':
