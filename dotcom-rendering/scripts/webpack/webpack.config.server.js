@@ -4,7 +4,6 @@ const swcConfig = require('./.swcrc.json');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
-const nodeVersion = process.versions.node;
 
 /** @type {(options: { sessionId: string } ) => import('webpack').Configuration} */
 module.exports = ({ sessionId }) => ({
@@ -77,9 +76,6 @@ module.exports = ({ sessionId }) => ({
 					loader: 'swc-loader',
 					options: {
 						...swcConfig,
-						env: {
-							targets: `node ${nodeVersion}`,
-						},
 					},
 				},
 			},
