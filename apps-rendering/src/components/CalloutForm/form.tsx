@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace, textSans, until } from '@guardian/source-foundations';
+import { remSpace, until } from '@guardian/source-foundations';
 import type { FC } from 'react';
 import type { SerializedStyles } from '@emotion/react';
 import { Disclaimer, renderField, ContactText } from './formFields';
