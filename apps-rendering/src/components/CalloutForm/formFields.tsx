@@ -124,6 +124,7 @@ export const renderField = (
 					supporting={description}
 					cssOverrides={inputStyles}
 					key={name}
+					name={name}
 				>
 					{options.map(({ value, label }) => {
 						return (

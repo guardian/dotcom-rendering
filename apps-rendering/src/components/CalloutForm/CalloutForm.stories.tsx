@@ -3,6 +3,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { campaignDescription, mockCampaign } from 'fixtures/campaign';
 import type { ReactElement } from 'react';
 import Callout from '.';
+import { handleSubmission } from '../../client/callouts';
 
 const mockFormat: ArticleFormat = {
 	theme: ArticlePillar.News,
@@ -21,6 +22,8 @@ const callout = (): ReactElement => (
 
 const nonCollapsableCallout = (): ReactElement => (
 	<Callout
+		// Temporary fix to avoid the storybook error as storybook doesn't like the submit in an iframe
+		onSubmit={(e) => {e.preventDefault(); handleSubmission()}}
 		isNonCollapsable={true}
 		format={mockFormat}
 		campaign={mockCampaign}

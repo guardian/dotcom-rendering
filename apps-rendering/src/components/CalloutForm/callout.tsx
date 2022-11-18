@@ -17,6 +17,7 @@ export interface CalloutProps {
 	campaign: Campaign;
 	format: ArticleFormat;
 	description: Option<DocumentFragment>;
+	onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 
@@ -82,7 +83,7 @@ const descriptionStyles = (theme: any): SerializedStyles => css`
 	padding: ${remSpace[3]} 0;
 `;
 
-const Callout: FC<CalloutProps> = ({ campaign, format, description }) => {
+const Callout: FC<CalloutProps> = ({ campaign, format, description, onSubmit }) => {
 	const { name, fields } = campaign;
 	const { callout } = fields;
 
@@ -106,7 +107,7 @@ const Callout: FC<CalloutProps> = ({ campaign, format, description }) => {
 						)}
 					</div>
 				</summary>
-				<CalloutForm campaign={campaign} format={format} />
+				<CalloutForm onSubmit={onSubmit} campaign={campaign} format={format} />
 			</details>
 		</div>
 	);

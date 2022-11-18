@@ -5,23 +5,42 @@ import { remSpace, textSans, until } from '@guardian/source-foundations';
 import type { FC } from 'react';
 import type { SerializedStyles } from '@emotion/react';
 import { Disclaimer, renderField, ContactText } from './formFields';
-import { Button } from '@guardian/source-react-components';
+import { Button, InlineError, InlineSuccess, Link } from '@guardian/source-react-components';
 import {ShareLink}	from './shareLink';
 
 export interface CalloutProps {
 	campaign: Campaign;
 	format: ArticleFormat;
 	description?: DocumentFragment;
+	onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const formStyles = css`
-	margin: ${remSpace[3]};
+const formStyles = (theme: any): SerializedStyles => css`
+	margin: ${remSpace[2]};
+
+	.js-callout__success-message,
+	.js-callout__error-message {
+		display: none;
+	}
+
+	.js-callout--failure {
+		.js-callout__error-message {
+			display: inline-flex;
+			margin-bottom: ${remSpace[3]};
+			color: ${theme.error};
+		}
+	}
+
+	.js-callout-success {
+		.js-callout__success-message {
+			display: inline-flex;
+		}
+		.js-callout__inputs {
+			display: none !important;
+		}
+	}
 `;
 
-const errorStyles = (theme: any): SerializedStyles => css`
-	color: ${theme.error};
-	${textSans.small()};
-`;
 
 const buttonStyles = (theme: any): SerializedStyles => css`
 	background: ${theme.primary};
@@ -33,18 +52,36 @@ const buttonStyles = (theme: any): SerializedStyles => css`
 	}
 `;
 
-const CalloutForm: FC<CalloutProps> = ({ campaign, format }) => (
-	<form css={formStyles} action="#" method="post">
+const Form: FC<CalloutProps> = ({ campaign, format, onSubmit }) => {
+	return (
+	<div className="js-callout" css={formStyles}>
+	 <form css={formStyles} action="#" method="post" onSubmit={(e) => {onSubmit?.(e)}}>
 		<ShareLink />
 		<Disclaimer />
 		<input name="formId" type="hidden" value={campaign.fields.formId} />
-		{campaign.fields.formFields.map((field) => renderField(field, format))}
-		<p css={errorStyles} className="js-error-message"></p>
-		<div >
-			<ContactText />
+		<div className="js-callout__inputs">
+			{campaign.fields.formFields.map((field) => renderField(field, format))}
+			<div >
+				<ContactText />
+				<InlineError className="js-callout__error-message" >
+					<div>
+						Something went wrong. Please try again or contact{' '}
+						<Link
+							href="mailto:customer.help@theguardian.com"
+							target="_blank"
+						>
+							customer.help@theguardian.com
+						</Link>
+					</div>
+				</InlineError>
+			</div>
 			<Button css={buttonStyles} type="submit" priority='primary'>Submit</Button>
 		</div>
-	</form>
-);
+		<InlineSuccess className="js-callout__success-message">
+			Thank you, your story has been submitted successfully. One of our journalists will be in touch if we wish to take your submission further.
+		</InlineSuccess>
+	 </form>
+	 </div>
+)};
 
-export default CalloutForm;
+export default Form;
