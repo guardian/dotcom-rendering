@@ -180,8 +180,11 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	const showSignInPrompt =
 		purchaseInfo && !isSignedIn && !signInBannerLastClosedAt;
 
+	const hasForceBannerParam = window.location.search.includes('force-banner');
+
 	if (
 		!showSignInPrompt &&
+		!hasForceBannerParam &&
 		engagementBannerLastClosedAt &&
 		subscriptionBannerLastClosedAt &&
 		withinLocalNoBannerCachePeriod()
