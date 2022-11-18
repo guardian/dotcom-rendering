@@ -7,7 +7,8 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import type { NavType } from '../../../../model/extract-nav';
-import type { EditionId } from '../../../../types/edition';
+import { EditionId } from '../../../lib/edition';
+
 import { getZIndex } from '../../../lib/getZIndex';
 import { navInputCheckboxId } from '../config';
 import { Columns } from './Columns';

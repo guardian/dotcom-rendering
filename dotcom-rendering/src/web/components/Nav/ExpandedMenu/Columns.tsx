@@ -19,7 +19,7 @@ import {
 	TextInput,
 } from '@guardian/source-react-components';
 import type { NavType } from '../../../../model/extract-nav';
-import type { EditionId } from '../../../../types/edition';
+import type { EditionId } from '../../../lib/edition';
 import { getEditionFromId, getRemainingEditions } from '../../../lib/edition';
 import { Column, lineStyle } from './Column';
 import { MoreColumn } from './MoreColumn';
