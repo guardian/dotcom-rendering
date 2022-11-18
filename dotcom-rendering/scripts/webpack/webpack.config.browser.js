@@ -1,8 +1,13 @@
+const getTargets = require('@babel/helper-compilation-targets').default;
+const browserslist = require('browserslist');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const swcConfig = require('./.swcrc.json');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
+
+const browsers = browserslist('extends @guardian/browserslist-config');
+const targets = getTargets({ browsers });
 
 /**
  * @param {'legacy' | 'modern' | 'variant'} bundle
@@ -53,12 +58,11 @@ const getLoaders = (bundle) => {
 					loader: 'swc-loader',
 					options: {
 						...swcConfig,
-						// TODO verify browserslist support
-						// https://swc.rs/docs/configuration/supported-browsers#targets
-						// https://github.com/browserslist/browserslist
-						// env: {
-						// 	targets: 'extends @guardian/browserslist-config',
-						// },
+						env: {
+							// debug: true,
+							dynamicImport: true,
+							targets,
+						},
 					},
 				},
 			];
