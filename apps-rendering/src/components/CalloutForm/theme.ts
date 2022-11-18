@@ -1,17 +1,16 @@
+import { text } from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	brand,
 	brandAlt,
-	neutral,
 	error,
-	success,
 	focus,
+	neutral,
+	success,
 } from '@guardian/source-foundations';
-import {
-	text,
-} from '@guardian/common-rendering/src/editorialPalette';
-import type { ArticleFormat } from '@guardian/libs';
 
-const getPrefersDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches
+const getPrefersDark = () =>
+	window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 const calloutLightTheme = (format: ArticleFormat) => ({
 	background: neutral[97],
@@ -33,7 +32,7 @@ const calloutLightTheme = (format: ArticleFormat) => ({
 		collapseBackground: neutral[100],
 		collapseText: neutral[7],
 	},
-})
+});
 const calloutDarkTheme = (format: ArticleFormat) => ({
 	background: neutral[20],
 	primary: text.calloutPrimaryDark(format),
@@ -107,6 +106,8 @@ const calloutDarkTheme = (format: ArticleFormat) => ({
 		textLabelSupporting: neutral[60],
 		borderError: error[500],
 	},
-})
+});
 
-export const getTheme = (format: ArticleFormat) => getPrefersDark() ? calloutDarkTheme(format) : calloutLightTheme(format)
+export const getTheme = (format: ArticleFormat) =>
+	getPrefersDark() ? calloutDarkTheme(format) : calloutLightTheme(format);
+

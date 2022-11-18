@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace, textSans } from '@guardian/source-foundations';
+import { neutral, remSpace, textSans } from '@guardian/source-foundations';
 import {
 	Option,
 	Select,
@@ -13,16 +13,14 @@ import FileInput from 'components/FileInput';
 import RadioInput from 'components/RadioInput';
 import type { ReactElement } from 'react';
 import { darkModeCss } from 'styles';
-import {
-	neutral,
-} from '@guardian/source-foundations';
 
 const infoStyles = css`
 	${textSans.small()};
 	margin-bottom: ${remSpace[4]};
 `;
 
-export const Disclaimer = () => (<div css={infoStyles}>
+export const Disclaimer = () => (
+	<div css={infoStyles}>
 		You must be 18 or over to fill in this form. Only the Guardian can see
 		your contributions and one of our journalists may contact you to discuss
 		further. For more information please see our{' '}
@@ -34,11 +32,15 @@ export const Disclaimer = () => (<div css={infoStyles}>
 			privacy policy
 		</a>
 		.
-	</div>);
+	</div>
+);
 
-export const ContactText = () => (<div css={infoStyles}>
-		One of our journalists will be in contact before we publish your information, so please do leave contact details.
-	</div>);
+export const ContactText = () => (
+	<div css={infoStyles}>
+		One of our journalists will be in contact before we publish your
+		information, so please do leave contact details.
+	</div>
+);
 
 export const renderField = (
 	{ type, label, description, mandatory, options, id }: FormField,
@@ -48,7 +50,8 @@ export const renderField = (
 	const inputStyles = css`
 		margin-bottom: ${remSpace[4]};
 	`;
-	const textareaStyles = css` //source doesn't support themes
+	const textareaStyles = css`
+		//source doesn't support themes for textarea (yet)
 		${inputStyles};
 
 		background-color: ${neutral[100]};

@@ -41,7 +41,6 @@ const getValueFromElement = async (element: any, acc: any) => {
 	return Promise.resolve(acc);
 };
 
-
 function submitCallout(body: FormData, form: Element): void {
 	// TODO: Check this is working still
 	fetch(
@@ -52,10 +51,10 @@ function submitCallout(body: FormData, form: Element): void {
 		},
 	)
 		.then(() => {
-			form.classList.add("js-callout-success");
+			form.classList.add('js-callout-success');
 		})
 		.catch(() => {
-			form.classList.add("js-callout--failure");
+			form.classList.add('js-callout--failure');
 		});
 }
 
@@ -83,7 +82,7 @@ export async function handleSubmission(): Promise<void> {
 
 		submitCallout(await data, form);
 	} catch (e) {
-		form.classList.add("js-callout--failure");
+		form.classList.add('js-callout--failure');
 	}
 }
 

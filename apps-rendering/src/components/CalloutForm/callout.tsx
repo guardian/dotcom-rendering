@@ -2,11 +2,7 @@ import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	body,
-	headline,
-	remSpace,
-} from '@guardian/source-foundations';
+import { body, headline, remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
@@ -20,18 +16,15 @@ export interface CalloutProps {
 	onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-
-
 const containerStyles = (theme: any): SerializedStyles => css`
 	background: ${theme.background};
 	color: ${theme.text};
 	padding-bottom: ${remSpace[12]};
 
 	a {
-		color: ${theme.linkColor}
+		color: ${theme.linkColor};
 	}
 `;
-
 
 const calloutDetailsStyles = css`
 	padding-bottom: ${remSpace[6]};
@@ -84,12 +77,17 @@ const descriptionStyles = css`
 	padding: ${remSpace[3]} 0;
 `;
 
-const Callout: FC<CalloutProps> = ({ campaign, format, description, onSubmit }) => {
+const Callout: FC<CalloutProps> = ({
+	campaign,
+	format,
+	description,
+	onSubmit,
+}) => {
 	const { name, fields } = campaign;
 	const { callout } = fields;
 
 	return (
-		<div css={theme => containerStyles(theme)}>
+		<div css={(theme) => containerStyles(theme)}>
 			<details css={calloutDetailsStyles} open={true}>
 				<summary css={summaryStyles}>
 					<div css={summaryContentWrapper}>
@@ -108,7 +106,11 @@ const Callout: FC<CalloutProps> = ({ campaign, format, description, onSubmit }) 
 						)}
 					</div>
 				</summary>
-				<CalloutForm onSubmit={onSubmit} campaign={campaign} format={format} />
+				<CalloutForm
+					onSubmit={onSubmit}
+					campaign={campaign}
+					format={format}
+				/>
 			</details>
 		</div>
 	);

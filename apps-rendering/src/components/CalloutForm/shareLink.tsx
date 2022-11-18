@@ -1,8 +1,9 @@
-import {FC, useState} from 'react';
-import { Button, SvgShareCallout } from '@guardian/source-react-components';
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
 import { remSpace } from '@guardian/source-foundations';
+import { Button, SvgShareCallout } from '@guardian/source-react-components';
+import { useState } from 'react';
+import type { FC } from 'react';
 
 const shareStyles = (theme: any): SerializedStyles => css`
 	display: inline-flex;
@@ -23,26 +24,31 @@ export const ShareLink: FC = () => {
 	const onShare = () => {
 		const url = window.location.href;
 		if ('share' in navigator) {
-		  navigator
-			.share({
-			  title: 'Share this callout',
-			  url,
-			})
-			.catch(console.error);
+			navigator
+				.share({
+					title: 'Share this callout',
+					url,
+				})
+				.catch(console.error);
 		} else {
-			navigator?.clipboard.writeText(url)
+			navigator.clipboard.writeText(url);
 			setIsCopied(true);
-			setTimeout(() => setIsCopied(false), 2000)
+			setTimeout(() => setIsCopied(false), 2000);
 		}
-	}
+	};
 	return (
-	<span css={shareStyles}>
-		<SvgShareCallout size='medium' />
-		Know others that are affected?
-		<Button size="xsmall" priority="subdued" onClick={onShare} css={linkStyles}>
-			Please share this callout
+		<span css={shareStyles}>
+			<SvgShareCallout size="medium" />
+			Know others that are affected?
+			<Button
+				size="xsmall"
+				priority="subdued"
+				onClick={onShare}
+				css={linkStyles}
+			>
+				Please share this callout
 			</Button>
-		{isCopied && (<em> Link copied to clipboard</em>)}
-	</span>
+			{isCopied && <em> Link copied to clipboard</em>}
+		</span>
 	);
 };
