@@ -3,7 +3,6 @@ import type { SerializedStyles } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	focusHalo,
-	from,
 	remHeight,
 	remSpace,
 	textSans,
