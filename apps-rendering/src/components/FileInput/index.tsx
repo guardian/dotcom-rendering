@@ -75,7 +75,6 @@ const FileInput = ({
 				optional={!mandatory}
 				cssOverrides={cssOverrides}
 				css={fieldLabelStyles}
-
 			>
 				<p css={fieldSupportingStyles}>
 					May not work on some mobile devices, or files may be too

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { neutral, remSpace } from '@guardian/source-foundations';
 import type { SerializedStyles } from '@emotion/react';
+import { neutral, remSpace } from '@guardian/source-foundations';
 import { SvgClock } from '@guardian/source-react-components';
 import { isValidDate } from 'date';
 import type Int64 from 'node-int64';
