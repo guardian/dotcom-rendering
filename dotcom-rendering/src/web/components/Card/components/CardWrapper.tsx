@@ -25,8 +25,8 @@ const cardStyles = (
 	containerPalette?: DCRContainerPalette,
 ) => {
 	const baseCardStyles = css`
-		display: flex;
-		flex-direction: column;
+		display: block;
+		height: 100%;
 		justify-content: space-between;
 		width: 100%;
 		/* We absolutely position the faux link

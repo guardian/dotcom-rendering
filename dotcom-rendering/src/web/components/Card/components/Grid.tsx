@@ -9,7 +9,7 @@ const splitGridAreas = (grid: GridElement[]): string[] => {
 			let index = 4;
 
 			while (index > 0) {
-				slice = slice.concat(grid[i].cardAreaValue);
+				slice = slice.concat('card-' + grid[i].cardAreaValue);
 				if (index !== 1) slice = slice.concat(' ');
 
 				i++;
@@ -21,7 +21,7 @@ const splitGridAreas = (grid: GridElement[]): string[] => {
 			let index = 3;
 
 			while (index > 0) {
-				slice = slice.concat(grid[i].cardAreaValue);
+				slice = slice.concat('card-' + grid[i].cardAreaValue);
 				if (index !== 1) slice = slice.concat(' ');
 				i++;
 				index--;
