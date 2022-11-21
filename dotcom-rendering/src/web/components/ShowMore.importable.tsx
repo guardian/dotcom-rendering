@@ -11,7 +11,7 @@ import {
 	SvgCross,
 	SvgPlus,
 } from '@guardian/source-react-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { DCRContainerPalette, FEFrontCard } from 'src/types/front';
 import { enhanceCards } from '../../model/enhanceCards';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
@@ -55,10 +55,6 @@ export const ShowMore = ({
 	const [existingCardLinks, setExistingCardLinks] = useState<string[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 
-	/**
-		@todo: Fix focus behaviour on expand/collapse: @see https://github.com/guardian/dotcom-rendering/issues/6343
-	*/
-
 	useOnce(() => {
 		const container = document.getElementById(containerId);
 		const containerLinks = Array.from(
@@ -72,7 +68,7 @@ export const ShowMore = ({
 	}, []);
 
 	/** We only pass an actual URL to SWR when 'showMore' is true.
-	 * Toggling 'showMore' will trigger a re-render
+	 * Toggling 'isOpen' will trigger a re-render
 	 *   @see https://swr.vercel.app/docs/conditional-fetching#conditional
 	 */
 	const url = isOpen
@@ -88,6 +84,22 @@ export const ShowMore = ({
 
 	const showMoreContainerId = `show-more-${containerId}`;
 
+	useEffect(() => {
+		/**
+		 * Focus the first of the new cards when they're loaded in.
+		 * There's no need to check `isOpen` here because if `isOpen` is
+		 * `false` then `filteredData` will be `undefined`.
+		 * */
+		if (filteredData?.length) {
+			const maybeFirstCard = document.querySelector(
+				`#${showMoreContainerId} [data-link-name="${filteredData[0].dataLinkName}"]`,
+			);
+			if (maybeFirstCard instanceof HTMLElement) {
+				maybeFirstCard.focus();
+			}
+		}
+	}, [filteredData, showMoreContainerId]);
+
 	return (
 		<>
 			<div id={showMoreContainerId} aria-live="polite">
@@ -98,13 +110,6 @@ export const ShowMore = ({
 								height: ${space[3]}px;
 							`}
 						/>
-						<h4
-							css={css`
-								${visuallyHidden}
-							`}
-						>
-							More {containerTitle}
-						</h4>
 						<UL direction="row" wrapCards={true}>
 							{filteredData.map((card, cardIndex) => {
 								const columns = 3;
@@ -165,6 +170,7 @@ export const ShowMore = ({
 					`}
 					aria-controls={showMoreContainerId}
 					aria-expanded={isOpen && !loading}
+					aria-describedby={`show-more-button-${containerId}-description`}
 					data-cy={`show-more-button-${containerId}`}
 				>
 					{decideButtonText({
@@ -173,6 +179,14 @@ export const ShowMore = ({
 						containerTitle,
 					})}
 				</Button>
+				<span
+					id={`show-more-button-${containerId}-description`}
+					css={css`
+						${visuallyHidden}
+					`}
+				>
+					Loads more stories and moves focus to first new story.
+				</span>
 				{error && (
 					<InlineError
 						cssOverrides={css`

@@ -33,6 +33,9 @@ const indices = [
 	'expanded-veggie-menu-wrapper',
 	'expanded-veggie-menu',
 
+	// Mobile sticky appears below banners
+	'mobileSticky',
+
 	// Headers with sticky ads
 	'stickyAdWrapperLabsHeader',
 	'stickyAdWrapper',

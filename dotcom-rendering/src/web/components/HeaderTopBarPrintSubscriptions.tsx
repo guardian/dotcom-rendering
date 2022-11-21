@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { brand, brandAlt, from, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import NewspaperIcon from '../../static/icons/newspaper.svg';
-import type { EditionId } from '../../types/edition';
+import type { EditionId } from '../lib/edition';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
 
 interface PrintSubscriptionsProps {

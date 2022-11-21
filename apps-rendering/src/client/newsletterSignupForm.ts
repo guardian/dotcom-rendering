@@ -1,5 +1,8 @@
 // ----- Imports ----- //
+import { parseIntOpt } from 'lib';
 import { newslettersClient } from 'native/nativeApi';
+import type { Optional } from 'optional';
+import { getBridgetVersion } from './bridgetVersion';
 
 // ----- Types ----- //
 interface FormBundle {
@@ -11,12 +14,30 @@ interface FormBundle {
 }
 
 // ----- Constants ----- //
+const COMPONENT_CONTAINER_CLASSNAME = 'js-signup-form-container' as const;
 const COMPONENT_BASE_CLASSNAME = 'js-signup-form' as const;
 const MODIFIER_CLASSNAME = {
 	waiting: `${COMPONENT_BASE_CLASSNAME}--waiting`,
 	success: `${COMPONENT_BASE_CLASSNAME}--success`,
 	failure: `${COMPONENT_BASE_CLASSNAME}--failure`,
 } as const;
+
+// ----- Pure functions ----- //
+
+/**
+ * Parse a version number string and check if it is a version
+ * that supports the newslettersClient API.
+ *
+ * @param version an optional string representing a version number
+ * @returns whether string represents a version number with a
+ * major version of 2 or higher
+ */
+const isBridgetCompatible = (version: Optional<string>): boolean =>
+	version
+		.map((versionString) => versionString.split('.')[0])
+		.flatMap(parseIntOpt)
+		.map((versionInt) => versionInt >= 2)
+		.withDefault(false);
 
 // ----- Procedures ----- //
 
@@ -103,11 +124,32 @@ function setup(form: Element): void {
 	});
 }
 
-function initSignupForms(): void {
-	const signupForms = Array.from(
-		document.querySelectorAll(`form.${COMPONENT_BASE_CLASSNAME}`),
-	);
-	signupForms.forEach(setup);
+function removeContainer(container: Element): void {
+	container.parentElement?.removeChild(container);
+}
+
+function revealContainer(container: HTMLElement): void {
+	container.style.display = 'block';
+}
+
+const isHTMLElement = (element: Element): element is HTMLElement =>
+	element instanceof HTMLElement;
+
+async function initSignupForms(): Promise<void> {
+	const version = await getBridgetVersion();
+	const signupContainers = Array.from(
+		document.querySelectorAll(`.${COMPONENT_CONTAINER_CLASSNAME}`),
+	).filter(isHTMLElement);
+
+	if (isBridgetCompatible(version)) {
+		signupContainers.forEach(revealContainer);
+		const signupForms = Array.from(
+			document.querySelectorAll(`form.${COMPONENT_BASE_CLASSNAME}`),
+		);
+		signupForms.forEach(setup);
+	} else {
+		signupContainers.forEach(removeContainer);
+	}
 }
 
 // ----- Exports ----- //
