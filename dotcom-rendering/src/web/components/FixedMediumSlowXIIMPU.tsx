@@ -72,12 +72,12 @@ export const FixedMediumSlowXIIMPU = ({
 	showAge,
 	index,
 }: Props) => {
-	const topThree = trails.slice(0, 3);
-	const remainingCards = trails.slice(3, 9);
+	const firstSlice = trails.slice(0, 3);
+	const remaining = trails.slice(3, 9);
 	return (
 		<>
 			<Card33_Card33_Card33
-				trails={topThree}
+				trails={firstSlice}
 				containerPalette={containerPalette}
 				showAge={showAge}
 				padBottom={true}
@@ -97,7 +97,7 @@ export const FixedMediumSlowXIIMPU = ({
 					 * |_______________________|
 					 */}
 					<UL direction="row" wrapCards={true}>
-						{remainingCards.map((trail, trailIndex, { length }) => (
+						{remaining.map((trail, trailIndex, { length }) => (
 							<LI
 								padSides={true}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(

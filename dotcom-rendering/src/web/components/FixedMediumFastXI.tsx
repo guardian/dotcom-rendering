@@ -43,12 +43,12 @@ export const FixedMediumFastXI = ({
 	containerPalette,
 	showAge,
 }: Props) => {
-	const topThree = trails.slice(0, 3);
-	const remainingCards = trails.slice(3, 11);
+	const firstSlice = trails.slice(0, 3);
+	const remaining = trails.slice(3, 11);
 	return (
 		<>
 			<Card50_Card25_Card25
-				cards={topThree}
+				cards={firstSlice}
 				containerPalette={containerPalette}
 				showAge={showAge}
 			/>
@@ -63,11 +63,11 @@ export const FixedMediumFastXI = ({
 			 * |___________|___________|
 			 */}
 			<UL direction="row" wrapCards={true}>
-				{remainingCards.map((trail, trailIndex) => (
+				{remaining.map((trail, trailIndex) => (
 					<LI
 						padSides={true}
 						offsetBottomPaddingOnDivider={decideOffset({
-							length: remainingCards.length,
+							length: remaining.length,
 							position: trailIndex,
 						})}
 						showDivider={trailIndex % 4 !== 0}

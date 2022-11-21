@@ -16,15 +16,15 @@ export const FixedLargeSlowXIV = ({
 	containerPalette,
 	showAge,
 }: Props) => {
-	const primary = trails.slice(0, 1);
-	const secondary = trails.slice(1, 2);
-	const secondSlice = trails.slice(2, 6);
-	const thirdSlice = trails.slice(6, 14);
+	const firstSlice75 = trails.slice(0, 1);
+	const firstSlice25 = trails.slice(1, 2);
+	const secondSlice25 = trails.slice(2, 6);
+	const thirdSlice25 = trails.slice(6, 14);
 
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
-				{primary.map((card) => (
+				{firstSlice75.map((card) => (
 					<LI padSides={true} percentage="75%">
 						<FrontCard
 							trail={card}
@@ -40,7 +40,7 @@ export const FixedLargeSlowXIV = ({
 					</LI>
 				))}
 
-				{secondary.map((card) => (
+				{firstSlice25.map((card) => (
 					<LI padSides={true} showDivider={true} percentage="25%">
 						<FrontCard
 							trail={card}
@@ -52,7 +52,7 @@ export const FixedLargeSlowXIV = ({
 				))}
 			</UL>
 			<UL direction="row" padBottom={true}>
-				{secondSlice.map((card, cardIndex) => {
+				{secondSlice25.map((card, cardIndex) => {
 					return (
 						<LI
 							padSides={true}
@@ -72,7 +72,7 @@ export const FixedLargeSlowXIV = ({
 				})}
 			</UL>
 			<UL direction="row" wrapCards={true}>
-				{thirdSlice.map((card, cardIndex, { length }) => {
+				{thirdSlice25.map((card, cardIndex, { length }) => {
 					const columns = 4;
 					return (
 						<LI
