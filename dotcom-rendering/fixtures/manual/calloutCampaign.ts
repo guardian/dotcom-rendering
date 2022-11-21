@@ -11,7 +11,7 @@ export const calloutCampaign: CalloutBlockElement = {
 	formId: 3860296,
 	title: 'Are you affected by the issues in this article?',
 	description:
-		'We’re interested to hear from renters in the UK who live in homes that require urgent repairs. We’d like to hear whether tenants have had trouble getting repairs authorised by their landlords, whether they occupy council homes or rent privately.',
+		'<p>We’d like to hear how people are being affected, whether they’re applying for a mortgage or refixing an existing one. Are you on a variable rate mortgage, or a fixed rate that is about to expire? How will it impact you financially? </p> <br> <p> We’re also interested in how people, particularly first-time buyers, have been affected by disappearing mortgage deals. </p> ',
 	formFields: [
 		{
 			name: 'share_your_experiences',

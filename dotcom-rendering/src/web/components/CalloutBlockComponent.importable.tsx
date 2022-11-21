@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import {
-	body,
 	headline,
 	neutral,
 	space,
@@ -8,6 +7,7 @@ import {
 } from '@guardian/source-foundations';
 import { decidePalette } from '../lib/decidePalette';
 import { Deadline } from './CalloutNew/CalloutDeadline';
+import { CalloutDescription } from './CalloutNew/CalloutDescription';
 import { CalloutShareComponent } from './CalloutNew/CalloutShareComponent';
 import { Form } from './CalloutNew/Form';
 import { ExpandingWrapper } from './ExpandingWrapper';
@@ -79,10 +79,6 @@ const titleStyles = (format: ArticleFormat) => css`
 const subtitleTextHeaderStyles = css`
 	${headline.xxsmall()}
 	padding-bottom: ${space[2]}px;
-`;
-
-const descriptionStyles = css`
-	${body.medium()}
 `;
 
 const activeUntilStyles = css`
@@ -176,7 +172,10 @@ export const CalloutBlockComponent = ({
 							Share your experience
 						</div>
 						<h4 css={subtitleTextHeaderStyles}>{title}</h4>
-						<div css={descriptionStyles}>{description}</div>
+						<CalloutDescription
+							format={format}
+							description={description}
+						/>
 						<div css={activeUntilStyles}>
 							<Deadline until={activeUntil} />
 						</div>
@@ -201,11 +200,12 @@ export const CalloutBlockComponent = ({
 				>
 					<summary css={summaryStyles}>
 						<div css={summaryContentWrapper}>
-							<div css={titleStyles(format)}>
-								Share your experience
-							</div>
+							<div css={titleStyles(format)}>Tell us</div>
 							<h4 css={subtitleTextHeaderStyles}>{title}</h4>
-							<div css={descriptionStyles}>{description}</div>
+							<CalloutDescription
+								format={format}
+								description={description}
+							/>
 							<div css={activeUntilStyles}>
 								<Deadline until={activeUntil} />
 							</div>
@@ -234,7 +234,10 @@ export const CalloutBlockComponent = ({
 									Share your experience
 								</div>
 								<h4 css={subtitleTextHeaderStyles}>{title}</h4>
-								<div css={descriptionStyles}>{description}</div>
+								<CalloutDescription
+									format={format}
+									description={description}
+								/>
 							</div>
 						</summary>
 						<CalloutShareComponent format={format} />
