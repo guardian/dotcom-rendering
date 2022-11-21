@@ -1341,9 +1341,6 @@
     read-pkg-up "7.0.1"
     yargs "^17.5.1"
 
-"@guardian/common-rendering@file:../common-rendering":
-  version "1.0.0"
-
 "@guardian/content-api-models@^17.4.0":
   version "17.4.0"
   resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.4.0.tgz#c8ab4000b7761a65018481bddadde950c76358b4"
