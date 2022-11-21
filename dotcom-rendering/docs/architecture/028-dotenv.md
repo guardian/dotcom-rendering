@@ -1,5 +1,6 @@
-> **Warning**
-> We no longer generate a `.env` file
+> **Warning**  
+> We no longer generate a `.env` file  
+> _See [dotcom-rendering#6468](https://github.com/guardian/dotcom-rendering/pull/6468)_
 
 # `.env` File
 
