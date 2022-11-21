@@ -1,3 +1,6 @@
+> **Warning**
+> We no longer generate a `.env` file
+
 # `.env` File
 
 Any values in the `.env` file [shouldn't be required to run the application locally](../values/README.md#env-shouldnt-be-required) - to keep it as approachable as possible.
@@ -47,18 +50,19 @@ e.g
 ```jsx
 return (
     <Island>
-	    <!-- Bad :((( -->
-	    <Image imageSalt={process.env.IMAGE_SALT} />
+        {/* Bad :((( */}
+        <Image imageSalt={process.env.IMAGE_SALT} />
     </Island>
-)
+);
 
-const url = getSaltedUrl(process.env.IMAGE_SALT)
+const url = getSaltedUrl(process.env.IMAGE_SALT);
 return (
     <Island>
-	    <!-- Good :))) -->
-	    <Image url={url} />
+        {/* Good :))) */}
+        <Image url={url} />
     </Island>
-)
+);
+```
 
 This has considerable security implications as this variable would then be available to any consumer of the site.
 
