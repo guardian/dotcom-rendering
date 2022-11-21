@@ -41,6 +41,10 @@ const footerPaddingStyles = css`
 	padding-bottom: ${space[4]}px;
 `;
 
+const textStyles = css`
+	${textSans.medium()};
+`;
+
 type FormDataType = { [key in string]: any };
 
 type FormFieldProp = {
@@ -165,13 +169,19 @@ export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 					/>
 				</div>
 			))}
+			<div css={textStyles}>
+				One of our journalists will be in contact before we publish your
+				information, so please do leave contact details.
+			</div>
 			{!!error && <div css={errorMessagesStyles}>{error}</div>}
-
 			<div css={footerPaddingStyles}>
 				<Button
 					priority="primary"
 					type="submit"
 					cssOverrides={css`
+						margin: 20px 0px;
+						width: 50%;
+						display: block;
 						background-color: ${decidePalette(format).text
 							.richLink};
 						:hover {
