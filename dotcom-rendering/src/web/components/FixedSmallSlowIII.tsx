@@ -19,7 +19,7 @@ export const FixedSmallSlowIII = ({
 
 	return (
 		<UL direction="row">
-			{primary.map((trail, index) => {
+			{trails.slice(0, 3).map((trail, index) => {
 				return (
 					<LI
 						padSides={true}
