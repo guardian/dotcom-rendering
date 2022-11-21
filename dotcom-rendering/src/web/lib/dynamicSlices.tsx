@@ -73,11 +73,11 @@ export const Card50_Card50 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
-	const card50 = cards.slice(0, 2);
+	const cards50 = cards.slice(0, 2);
 
 	return (
 		<UL direction="row" padBottom={true}>
-			{card50.map((trail, index) => (
+			{cards50.map((trail, index) => (
 				<LI percentage="50%" padSides={true} showDivider={index !== 0}>
 					<FrontCard
 						trail={trail}
@@ -256,7 +256,7 @@ export const Card50_Card25_Card25 = ({
 	showAge?: boolean;
 }) => {
 	const card50 = cards.slice(0, 1);
-	const card25 = cards.slice(1, 3);
+	const cards25 = cards.slice(1, 3);
 
 	return (
 		<UL direction="row" padBottom={true}>
@@ -275,7 +275,7 @@ export const Card50_Card25_Card25 = ({
 				</LI>
 			))}
 
-			{card25.map((trail) => (
+			{cards25.map((trail) => (
 				<LI percentage="25%" padSides={true} showDivider={true}>
 					<FrontCard
 						trail={trail}
