@@ -14,9 +14,8 @@ const deadlineStyles = css`
 	right: 0;
 	display: flex;
 	align-items: center;
-	margin-top: -${space[5]}px;
-	padding: 0px ${space[1]}px;
-
+	margin: -28px ${space[2]}px;
+	padding-right: ${space[1]}px;
 	${from.leftCol} {
 		padding-left: ${'5px'};
 	}
