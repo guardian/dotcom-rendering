@@ -157,7 +157,7 @@ const grid = {
 	 * breakpoint.
 	 */
 	mobileColumnGap,
-};
+} as const;
 
 // ----- Exports ----- //
 
