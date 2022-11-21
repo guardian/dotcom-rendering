@@ -15,11 +15,11 @@ export const FixedSmallSlowIII = ({
 	containerPalette,
 	showAge,
 }: Props) => {
-	const smallTrails = trails.slice(0, 3);
+	const primary = trails.slice(0, 3);
 
 	return (
 		<UL direction="row">
-			{smallTrails.map((trail, index) => {
+			{primary.map((trail, index) => {
 				return (
 					<LI
 						padSides={true}

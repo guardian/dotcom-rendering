@@ -27,7 +27,7 @@ export const FixedSmallSlowVMPU = ({
 			{primary.map((trail) => (
 				<LI percentage="33.333%" padSides={true}>
 					<FrontCard
-						trail={trails[0]}
+						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
 					/>

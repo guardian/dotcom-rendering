@@ -44,7 +44,7 @@ export const OneBig = () => (
 				snap: [],
 				huge: [],
 				veryBig: [],
-				big: [bigs[0]],
+				big: bigs.slice(0, 1),
 				standard: standards,
 			}}
 			showAge={true}
@@ -61,7 +61,7 @@ export const TwoBigs = () => (
 				snap: [],
 				huge: [],
 				veryBig: [],
-				big: [bigs[0], bigs[1]],
+				big: bigs.slice(0, 2),
 				standard: standards,
 			}}
 			showAge={true}
@@ -78,13 +78,11 @@ export const FirstBigBoosted = () => (
 				snap: [],
 				huge: [],
 				veryBig: [],
-				big: [
-					{
-						...bigs[0],
-						isBoosted: true,
-					},
-					bigs[1],
-				],
+				big: bigs
+					.slice(0, 2)
+					.map((card, index) =>
+						index === 0 ? { ...card, isBoosted: true } : card,
+					),
 				standard: standards,
 			}}
 			showAge={true}
@@ -101,7 +99,7 @@ export const ThreeBigs = () => (
 				snap: [],
 				huge: [],
 				veryBig: [],
-				big: [bigs[0], bigs[1], bigs[2]],
+				big: bigs.slice(0, 3),
 				standard: standards,
 			}}
 			showAge={true}

@@ -82,31 +82,37 @@ const Card75_Card25 = ({
 	showAge?: boolean;
 }) => {
 	if (cards.length < 2) return null;
+	const primary = cards.slice(0, 1);
+	const secondary = cards.slice(1, 2);
 
 	return (
 		<UL direction="row">
-			<LI padSides={true} percentage="75%">
-				<FrontCard
-					trail={cards[0]}
-					containerPalette={containerPalette}
-					containerType="dynamic/package"
-					showAge={showAge}
-					headlineSize="large"
-					headlineSizeOnMobile="huge"
-					imagePosition="right"
-					imagePositionOnMobile="bottom"
-					imageSize="medium"
-					trailText={cards[0].trailText}
-				/>
-			</LI>
-			<LI padSides={true} percentage="25%" showDivider={true}>
-				<FrontCard
-					trail={cards[1]}
-					containerPalette={containerPalette}
-					containerType="dynamic/package"
-					showAge={showAge}
-				/>
-			</LI>
+			{primary.map((card) => (
+				<LI padSides={true} percentage="75%">
+					<FrontCard
+						trail={card}
+						containerPalette={containerPalette}
+						containerType="dynamic/package"
+						showAge={showAge}
+						headlineSize="large"
+						headlineSizeOnMobile="huge"
+						imagePosition="right"
+						imagePositionOnMobile="bottom"
+						imageSize="medium"
+						trailText={card.trailText}
+					/>
+				</LI>
+			))}
+			{secondary.map((card) => (
+				<LI padSides={true} percentage="25%" showDivider={true}>
+					<FrontCard
+						trail={card}
+						containerPalette={containerPalette}
+						containerType="dynamic/package"
+						showAge={showAge}
+					/>
+				</LI>
+			))}
 		</UL>
 	);
 };
@@ -338,23 +344,27 @@ const Card75_ColumnOfCards25 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
-	const [primary, ...remaining] = cards;
+	const primary = cards.slice(0, 1);
+	const remaining = cards.slice(1);
+
 	return (
 		<UL direction="row" padBottom={true}>
-			<LI padSides={true} percentage="75%">
-				<FrontCard
-					trail={primary}
-					containerPalette={containerPalette}
-					containerType="dynamic/package"
-					showAge={showAge}
-					headlineSize="huge"
-					imagePosition="bottom"
-					imagePositionOnMobile="bottom"
-					imageSize="large"
-					supportingContent={primary.supportingContent}
-					isDynamo={true}
-				/>
-			</LI>
+			{primary.map((card) => (
+				<LI padSides={true} percentage="75%">
+					<FrontCard
+						trail={card}
+						containerPalette={containerPalette}
+						containerType="dynamic/package"
+						showAge={showAge}
+						headlineSize="huge"
+						imagePosition="bottom"
+						imagePositionOnMobile="bottom"
+						imageSize="large"
+						supportingContent={card.supportingContent}
+						isDynamo={true}
+					/>
+				</LI>
+			))}
 			<LI showDivider={true} percentage="25%">
 				<UL direction="column">
 					{remaining.map((card, cardIndex) => {
@@ -456,7 +466,7 @@ export const DynamicPackage = ({
 			secondSlice = cards.slice(0, 1);
 			break;
 		default:
-			if (cards[0].isBoosted) {
+			if (cards[0]?.isBoosted) {
 				layout = 'threeOrFourStandardsBoosted';
 				firstSlice = snaps;
 				secondSlice = cards.slice(0, 1);
