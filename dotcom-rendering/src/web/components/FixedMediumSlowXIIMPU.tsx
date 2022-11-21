@@ -80,7 +80,7 @@ export const FixedMediumSlowXIIMPU = ({
 				trails={topThree}
 				containerPalette={containerPalette}
 				showAge={showAge}
-				padBottom={remainingCards.length >= 2}
+				padBottom={true}
 			/>
 			<UL direction="row">
 				<LI percentage="66.666%">
