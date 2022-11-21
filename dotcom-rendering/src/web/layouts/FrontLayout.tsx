@@ -19,6 +19,7 @@ import { MostViewedFooter } from '../components/MostViewedFooter';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
+import { ShowMore } from '../components/ShowMore.importable';
 import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { DecideContainer } from '../lib/DecideContainer';
@@ -199,6 +200,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					<Section
 						fullWidth={true}
+						shouldCenter={false}
 						showTopBorder={false}
 						showSideBorders={false}
 						padSides={false}
@@ -217,6 +219,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							remoteHeader={!!front.config.switches.remoteHeader}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
+							headerTopBarSwitch={
+								!!front.config.switches.headerTopNav
+							}
 							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
@@ -235,6 +240,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.nav.readerRevenueLinks.header.subscribe
 							}
 							editionId={front.editionId}
+							headerTopBarSwitch={
+								!!front.config.switches.headerTopNav
+							}
 						/>
 					</Section>
 					{NAV.subNavSections && (
@@ -272,7 +280,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				</>
 			</div>
 
-			<main data-layout="FrontLayout">
+			<main data-layout="FrontLayout" id="maincontent">
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
@@ -403,6 +411,25 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										collection.displayName === 'Headlines'
 									}
 								/>
+								{collection.canShowMore && (
+									<Island deferUntil="interaction">
+										<ShowMore
+											containerTitle={
+												collection.displayName
+											}
+											containerId={collection.id}
+											path={front.pressedPage.id}
+											baseUrl={front.config.ajaxUrl}
+											containerPalette={
+												collection.containerPalette
+											}
+											showAge={
+												collection.displayName ===
+												'Headlines'
+											}
+										/>
+									</Island>
+								)}
 							</Section>
 							{decideAdSlot(
 								index,

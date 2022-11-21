@@ -19,7 +19,7 @@ export const enhanceCollections = (
 	pageId: string,
 ): DCRCollectionType[] => {
 	return collections.filter(isSupported).map((collection) => {
-		const { id, displayName, collectionType } = collection;
+		const { id, displayName, collectionType, hasMore } = collection;
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
 		);
@@ -45,6 +45,7 @@ export const enhanceCollections = (
 			config: {
 				showDateHeader: collection.config.showDateHeader,
 			},
+			canShowMore: hasMore && !collection.config.hideShowMore,
 		};
 	});
 };

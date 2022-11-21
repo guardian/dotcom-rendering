@@ -1,6 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import {
 	background,
@@ -29,7 +28,9 @@ import { plainTextElement } from 'renderer';
 import { darkModeCss } from 'styles';
 
 export interface CalloutProps {
-	campaign: Campaign;
+	heading: string;
+	formId: number;
+	formFields: FormField[];
 	format: ArticleFormat;
 	description: DocumentFragment;
 	isNonCollapsible: boolean;
@@ -190,9 +191,11 @@ const renderField = ({
 };
 
 const CalloutForm: FC<CalloutProps> = ({
-	campaign,
-	format,
+	heading,
 	description,
+	formId,
+	formFields,
+	format,
 	isNonCollapsible,
 }) => (
 	<details className="js-callout" css={calloutStyles}>
@@ -204,7 +207,7 @@ const CalloutForm: FC<CalloutProps> = ({
 					</div>
 				</div>
 				<div css={descriptionStyles}>
-					<h4 css={headlineStyles}>{campaign.fields.callout}</h4>
+					<h4 css={headlineStyles}>{heading}</h4>
 					{Array.from(description.childNodes).map(plainTextElement)}
 				</div>
 			</div>
@@ -228,12 +231,8 @@ const CalloutForm: FC<CalloutProps> = ({
 
 		<form css={formStyles} action="#" method="post">
 			<div>
-				<input
-					name="formId"
-					type="hidden"
-					value={campaign.fields.formId}
-				/>
-				{campaign.fields.formFields.map(renderField)}
+				<input name="formId" type="hidden" value={formId} />
+				{formFields.map(renderField)}
 				<p css={errorStyles} className="js-error-message"></p>
 				<Button
 					cssOverrides={css`

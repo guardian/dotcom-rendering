@@ -1,5 +1,6 @@
 import type { Participations } from '@guardian/ab-core';
-import { isObject, isString, storage } from '@guardian/libs';
+import { storage } from '@guardian/libs';
+import { isParticipations } from './ab-participations';
 
 /**
  * These utils have been lifted from the equivalent Frontend file
@@ -7,17 +8,6 @@ import { isObject, isString, storage } from '@guardian/libs';
  */
 
 const participationsKey = 'gu.ab._participations';
-
-export const isParticipations = (
-	participations: unknown,
-): participations is Participations => {
-	if (!isObject(participations)) return false;
-	return Object.values(participations).some((participation) => {
-		if (!isObject(participation)) return false;
-		if (!isString(participation.variant)) return false;
-		return true;
-	});
-};
 
 // -------
 // Reading

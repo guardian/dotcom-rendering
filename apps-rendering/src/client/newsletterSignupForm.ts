@@ -1,5 +1,8 @@
 // ----- Imports ----- //
-import { fakeRequestToEmailSignupService } from './requestEmailSignUp';
+import { parseIntOpt } from 'lib';
+import { newslettersClient } from 'native/nativeApi';
+import type { Optional } from 'optional';
+import { getBridgetVersion } from './bridgetVersion';
 
 // ----- Types ----- //
 interface FormBundle {
@@ -11,6 +14,7 @@ interface FormBundle {
 }
 
 // ----- Constants ----- //
+const COMPONENT_CONTAINER_CLASSNAME = 'js-signup-form-container' as const;
 const COMPONENT_BASE_CLASSNAME = 'js-signup-form' as const;
 const MODIFIER_CLASSNAME = {
 	waiting: `${COMPONENT_BASE_CLASSNAME}--waiting`,
@@ -18,9 +22,26 @@ const MODIFIER_CLASSNAME = {
 	failure: `${COMPONENT_BASE_CLASSNAME}--failure`,
 } as const;
 
+// ----- Pure functions ----- //
+
+/**
+ * Parse a version number string and check if it is a version
+ * that supports the newslettersClient API.
+ *
+ * @param version an optional string representing a version number
+ * @returns whether string represents a version number with a
+ * major version of 2 or higher
+ */
+const isBridgetCompatible = (version: Optional<string>): boolean =>
+	version
+		.map((versionString) => versionString.split('.')[0])
+		.flatMap(parseIntOpt)
+		.map((versionInt) => versionInt >= 2)
+		.withDefault(false);
+
 // ----- Procedures ----- //
 
-async function handleSubmission(bundle: FormBundle): Promise<void> {
+function handleSubmission(bundle: FormBundle): void {
 	const { input, identityName, submitButton, form } = bundle;
 
 	if (!input.value) {
@@ -31,17 +52,25 @@ async function handleSubmission(bundle: FormBundle): Promise<void> {
 	input.setAttribute('disabled', '');
 	submitButton.setAttribute('disabled', '');
 
-	const response = await fakeRequestToEmailSignupService(
-		input.value,
-		identityName,
-	);
-	form.classList.remove(MODIFIER_CLASSNAME.waiting);
-
-	if (response.status === 200) {
-		form.classList.add(MODIFIER_CLASSNAME.success);
-	} else {
-		form.classList.add(MODIFIER_CLASSNAME.failure);
-	}
+	// newslettersClient.requestSignUp can throw errors
+	// user feedback about the type of error (eg Network Error,
+	// Service unavailable) will be handled by the native layer
+	// The component only need to know success or failure.
+	newslettersClient
+		.requestSignUp(input.value, identityName)
+		.then((success) => {
+			if (success) {
+				form.classList.add(MODIFIER_CLASSNAME.success);
+			} else {
+				form.classList.add(MODIFIER_CLASSNAME.failure);
+			}
+		})
+		.catch(() => {
+			form.classList.add(MODIFIER_CLASSNAME.failure);
+		})
+		.finally(() => {
+			form.classList.remove(MODIFIER_CLASSNAME.waiting);
+		});
 }
 
 function handleReset(bundle: FormBundle): void {
@@ -86,9 +115,7 @@ function setup(form: Element): void {
 
 	form.addEventListener('submit', (event) => {
 		event.preventDefault();
-		handleSubmission(bundle).catch((err: unknown) => {
-			console.error(err);
-		});
+		handleSubmission(bundle);
 	});
 
 	resetButton.addEventListener('click', (event) => {
@@ -97,11 +124,32 @@ function setup(form: Element): void {
 	});
 }
 
-function initSignupForms(): void {
-	const signupForms = Array.from(
-		document.querySelectorAll(`form.${COMPONENT_BASE_CLASSNAME}`),
-	);
-	signupForms.forEach(setup);
+function removeContainer(container: Element): void {
+	container.parentElement?.removeChild(container);
+}
+
+function revealContainer(container: HTMLElement): void {
+	container.style.display = 'block';
+}
+
+const isHTMLElement = (element: Element): element is HTMLElement =>
+	element instanceof HTMLElement;
+
+async function initSignupForms(): Promise<void> {
+	const version = await getBridgetVersion();
+	const signupContainers = Array.from(
+		document.querySelectorAll(`.${COMPONENT_CONTAINER_CLASSNAME}`),
+	).filter(isHTMLElement);
+
+	if (isBridgetCompatible(version)) {
+		signupContainers.forEach(revealContainer);
+		const signupForms = Array.from(
+			document.querySelectorAll(`form.${COMPONENT_BASE_CLASSNAME}`),
+		);
+		signupForms.forEach(setup);
+	} else {
+		signupContainers.forEach(removeContainer);
+	}
 }
 
 // ----- Exports ----- //

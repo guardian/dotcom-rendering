@@ -11,9 +11,9 @@
  *    gen-fixtures.ts directly.
  */
 
-import type { CAPIArticleType } from '../../../src/types/frontend';
+import type { FEArticleType } from '../../../src/types/frontend';
 
-export const Letter: CAPIArticleType = {
+export const Letter: FEArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0"> <img src="https://media.guim.co.uk/0c2ce442da04f953c3e7a67d419f8c2f8caa9cc0/0_0_1969_1569/1000.jpg" alt="Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras a week before making her challenge for the Conservative party leadership in 1975." width="1000" height="797" class="gu-image" /> <figcaption> <span class="element-image__caption">Margaret Thatcher cooking in the kitchen of her Chelsea flat for the benefit of the cameras, a week before making her challenge for the Conservative party leadership in 1975.</span> <span class="element-image__credit">Photograph: taken from picture library</span> </figcaption> </figure>',
 	subMetaSectionLinks: [

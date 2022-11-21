@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
+import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
@@ -8,7 +9,7 @@ import type { BlockElement } from '@guardian/content-api-models/v1/blockElement'
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { ArticleTheme } from '@guardian/libs';
 import type { Option } from '@guardian/types';
-import { fromNullable, map, withDefault } from '@guardian/types';
+import { fromNullable } from '@guardian/types';
 import { parseAtom } from 'atoms';
 import { ElementKind } from 'bodyElementKind';
 import { formatDate } from 'date';
@@ -16,11 +17,12 @@ import { parseAudio, parseGeneric, parseInstagram, parseVideo } from 'embed';
 import type { Embed } from 'embed';
 import type { Image as ImageData } from 'image';
 import { parseImage } from 'image';
-import { compose, pipe } from 'lib';
+import { compose } from 'lib';
 import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
 import { Result } from 'result';
+import { getCallout } from 'campaign';
 
 // ----- Types ----- //
 
@@ -124,6 +126,15 @@ interface NewsletterSignUp extends Omit<Newsletter, 'theme'> {
 	theme: ArticleTheme;
 }
 
+type Callout = {
+	kind: ElementKind.Callout;
+	isNonCollapsible: boolean;
+	heading: string;
+	formId: number;
+	formFields: FormField[];
+	description: DocumentFragment;
+};
+
 type BodyElement =
 	| Text
 	| HeadingTwo
@@ -149,12 +160,7 @@ type BodyElement =
 			content: NodeList;
 	  }
 	| EmbedElement
-	| {
-			kind: ElementKind.Callout;
-			isNonCollapsible: boolean;
-			campaign: Campaign;
-			description: DocumentFragment;
-	  }
+	| Callout
 	| {
 			kind: ElementKind.LiveEvent;
 			linkText: string;
@@ -242,7 +248,7 @@ const flattenTextElement = (doc: Node): BodyElement[] => {
 };
 
 const parse =
-	(context: Context, atoms?: Atoms, campaigns?: Campaign[]) =>
+	(context: Context, campaigns: Campaign[], atoms?: Atoms) =>
 	(
 		element: BlockElement,
 	): Result<string, BodyElement> | Array<Result<string, BodyElement>> => {
@@ -260,18 +266,18 @@ const parse =
 			}
 
 			case ElementType.IMAGE:
-				return pipe(
-					parseImage(context)(element),
-					map<ImageData, Result<string, Image>>((image) =>
-						Result.ok({
+				return parseImage(context)(element)
+					.map((image) =>
+						Result.ok<string, BodyElement>({
 							kind: ElementKind.Image,
 							...image,
 						}),
-					),
-					withDefault<Result<string, Image>>(
-						Result.err("I couldn't find a master asset"),
-					),
-				);
+					)
+					.withDefault(
+						Result.err<string, BodyElement>(
+							"I couldn't find a master asset",
+						),
+					);
 
 			case ElementType.PULLQUOTE: {
 				const { html: quote, attribution } =
@@ -350,23 +356,22 @@ const parse =
 					);
 				}
 
-				const campaign = campaigns?.find(
-					(campaign) => campaign.id === campaignId,
-				);
-
-				if (!campaign) {
-					return Result.err('No matching campaign');
-				}
-
-				const description = context.docParser(
-					campaign.fields.description ?? '',
-				);
-				return Result.ok({
-					kind: ElementKind.Callout,
-					isNonCollapsible,
-					campaign,
-					description,
-				});
+				return getCallout(campaignId, campaigns)
+					.map(({ callout, formFields, description, formId }) =>
+						Result.ok<string, Callout>({
+							kind: ElementKind.Callout,
+							isNonCollapsible,
+							heading: callout,
+							formFields,
+							formId,
+							description: context.docParser(description ?? ''),
+						}),
+					)
+					.withDefault(
+						Result.err<string, Callout>(
+							'This piece contains a callout but no matching campaign',
+						),
+					);
 			}
 
 			case ElementType.EMBED: {
@@ -451,12 +456,12 @@ const parse =
 	};
 
 const parseElements =
-	(context: Context, atoms?: Atoms, campaigns?: Campaign[]) =>
+	(context: Context, campaigns: Campaign[], atoms?: Atoms) =>
 	(elements: Elements): Array<Result<string, BodyElement>> => {
 		if (!elements) {
 			return [Result.err('No body elements available')];
 		}
-		return elements.flatMap(parse(context, atoms, campaigns));
+		return elements.flatMap(parse(context, campaigns, atoms));
 	};
 
 // ----- Exports ----- //
