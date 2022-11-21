@@ -39,7 +39,7 @@ export const CalloutShareComponent = ({ format }: Props) => {
 				<div css={shareCalloutTextStyles(format)}>
 					Know others who are affected?{' '}
 					<a href="https://www.theguardian.com/tone/callout">
-						Share this callout.
+						Please share this callout.
 					</a>
 				</div>
 			</div>

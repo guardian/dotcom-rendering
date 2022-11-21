@@ -168,9 +168,7 @@ export const CalloutBlockComponent = ({
 			>
 				<summary css={summaryStyles}>
 					<div css={summaryContentWrapper}>
-						<div css={titleStyles(format)}>
-							Share your experience
-						</div>
+						<div css={titleStyles(format)}>Tell us</div>
 						<h4 css={subtitleTextHeaderStyles}>{title}</h4>
 						<CalloutDescription
 							format={format}
@@ -206,9 +204,6 @@ export const CalloutBlockComponent = ({
 								format={format}
 								description={description}
 							/>
-							<div css={activeUntilStyles}>
-								<Deadline until={activeUntil} />
-							</div>
 						</div>
 					</summary>
 					<CalloutShareComponent format={format} />
@@ -230,14 +225,15 @@ export const CalloutBlockComponent = ({
 					>
 						<summary css={summaryStyles}>
 							<div css={summaryContentWrapper}>
-								<div css={titleStyles(format)}>
-									Share your experience
-								</div>
+								<div css={titleStyles(format)}>Tell us</div>
 								<h4 css={subtitleTextHeaderStyles}>{title}</h4>
 								<CalloutDescription
 									format={format}
 									description={description}
 								/>
+							</div>
+							<div css={activeUntilStyles}>
+								<Deadline until={activeUntil} />
 							</div>
 						</summary>
 						<CalloutShareComponent format={format} />

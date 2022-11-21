@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { neutral, textSans, space } from '@guardian/source-foundations';
+import { textSans, space } from '@guardian/source-foundations';
 import { decidePalette } from '../../lib/decidePalette';
 
 const termsAndConditionsStyles = (format: ArticleFormat) =>
@@ -8,7 +8,6 @@ const termsAndConditionsStyles = (format: ArticleFormat) =>
 			color: ${decidePalette(format).text.richLink};
 		}
 		${textSans.small()}
-		color: ${neutral[46]};
 		padding-bottom: ${space[4]}px;
 	`;
 
@@ -18,16 +17,12 @@ interface Props {
 
 export const CalloutTermsAndConditions = ({ format }: Props) => (
 	<div css={termsAndConditionsStyles(format)}>
-		You must be 18 or over to fill in this form. Only the Guardian can see
-		your contributions and one of our journalists may contact you to discuss
-		further. For more information please see our{' '}
-		<a href="https://www.theguardian.com/help/terms-of-service">
-			terms of service
-		</a>{' '}
-		and{' '}
-		<a href="https://www.theguardian.com/help/privacy-policy">
-			privacy policy
-		</a>
-		.
+		Your responses, which can be anonymous, are secure as the form is
+		encrypted and only the Guardian has access to your contributions. We
+		will only use the data you provide us for the purpose of the feature and
+		we will delete any personal data when we no longer require it for this
+		purpose. For true anonymity please use our{' '}
+		<a href="https://www.theguardian.com/securedrop">SecureDrop</a> service
+		instead.
 	</div>
 );

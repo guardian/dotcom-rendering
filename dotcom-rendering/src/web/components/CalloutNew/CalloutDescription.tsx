@@ -18,8 +18,19 @@ interface Props {
 }
 
 export const CalloutDescription = ({ description, format }: Props) => (
-	<div
-		dangerouslySetInnerHTML={{ __html: description }}
-		css={descriptionStyles(format)}
-	></div>
+	<div css={descriptionStyles(format)}>
+		<div dangerouslySetInnerHTML={{ __html: description }}></div>
+		<div>
+			<br />
+			Please share your story if you are 18 or over, anonymously if you
+			wish. For more information please see our{' '}
+			<a href="https://www.theguardian.com/help/terms-of-service">
+				terms of service
+			</a>{' '}
+			and{' '}
+			<a href="https://www.theguardian.com/help/privacy-policy">
+				privacy policy
+			</a>
+		</div>
+	</div>
 );
