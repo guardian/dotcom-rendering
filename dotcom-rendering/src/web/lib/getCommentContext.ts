@@ -1,4 +1,4 @@
-import { joinUrl } from '../../lib/joinUrl';
+import { joinUrl } from '@guardian/libs';
 
 // GET http://discussion.guardianapis.com/discussion-api/comment/3519111/context
 // {
@@ -90,7 +90,7 @@ export const getCommentContext = async (
 	ajaxUrl: string,
 	commentId: number,
 ): Promise<CommentContextType> => {
-	const url = joinUrl([ajaxUrl, 'comment', commentId.toString(), 'context']);
+	const url = joinUrl(ajaxUrl, 'comment', commentId.toString(), 'context');
 	const filters = initFiltersFromLocalStorage();
 	const params = new URLSearchParams(buildParams(filters));
 
