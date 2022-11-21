@@ -152,7 +152,6 @@ export const ShowMore = ({
 				`}
 			>
 				<Button
-					priority="tertiary"
 					size="small"
 					icon={isOpen ? <SvgCross /> : <SvgPlus />}
 					isLoading={loading}
@@ -165,7 +164,8 @@ export const ShowMore = ({
 						background-color: ${neutral[7]};
 						border-color: ${neutral[7]};
 						&:hover {
-							color: ${neutral[7]};
+							background-color: ${neutral[46]};
+							border-color: ${neutral[46]};
 						}
 						${from.tablet} {
 							margin-left: 10px;
