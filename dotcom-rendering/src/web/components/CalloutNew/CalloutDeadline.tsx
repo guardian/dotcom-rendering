@@ -16,9 +16,6 @@ const deadlineStyles = css`
 	align-items: center;
 	margin: -28px ${space[2]}px;
 	padding-right: ${space[1]}px;
-	${from.leftCol} {
-		padding-left: ${'5px'};
-	}
 `;
 
 function getDaysBetween(first: Date, second: Date): number {
