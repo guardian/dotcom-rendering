@@ -15,12 +15,12 @@ export const FixedSmallSlowVThird = ({
 	containerPalette,
 	showAge,
 }: Props) => {
-	const primaries = trails.slice(0, 2);
-	const secondaries = trails.slice(2, 5);
+	const primary = trails.slice(0, 2);
+	const secondary = trails.slice(2, 5);
 
 	return (
 		<UL direction="row">
-			{primaries.map((trail, index) => {
+			{primary.map((trail, index) => {
 				return (
 					<LI
 						key={trail.url}
@@ -40,7 +40,7 @@ export const FixedSmallSlowVThird = ({
 			})}
 			<LI showDivider={true} percentage="50%">
 				<UL direction="column">
-					{secondaries.map((trail) => {
+					{secondary.map((trail) => {
 						return (
 							<LI key={trail.url} padSides={true}>
 								<FrontCard

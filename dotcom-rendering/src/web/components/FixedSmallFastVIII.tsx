@@ -17,12 +17,12 @@ export const FixedSmallFastVIII = ({
 	showAge,
 }: Props) => {
 	if (!trails[0]) return null;
-	const primaries = trails.slice(0, 2);
+	const primary = trails.slice(0, 2);
 	const remaining = trails.slice(2, 8);
 
 	return (
 		<UL direction="row" wrapCards={true}>
-			{primaries.map((card, cardIndex) => {
+			{primary.map((card, cardIndex) => {
 				return (
 					<LI
 						percentage="25%"

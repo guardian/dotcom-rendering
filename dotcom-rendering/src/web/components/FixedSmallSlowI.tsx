@@ -15,11 +15,11 @@ export const FixedSmallSlowI = ({
 	containerPalette,
 	showAge,
 }: Props) => {
-	const trail = trails.slice(0, 1);
+	const primary = trails.slice(0, 1);
 
 	return (
 		<UL>
-			{trail.map((card) => (
+			{primary.map((card) => (
 				<LI padSides={true}>
 					<FrontCard
 						trail={card}
