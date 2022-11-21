@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { brand } from '@guardian/source-foundations';
-import type { EditionId } from '../../types/edition';
+import type { EditionId } from '../lib/edition';
 import { center } from '../lib/center';
 import { EditionDropdown } from './EditionDropdown.importable';
 import { HeaderSingleFrontDoor } from './HeaderSingleFrontDoor';
