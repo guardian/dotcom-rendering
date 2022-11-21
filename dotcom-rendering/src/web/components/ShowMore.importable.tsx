@@ -90,7 +90,7 @@ export const ShowMore = ({
 		 * There's no need to check `isOpen` here because if `isOpen` is
 		 * `false` then `filteredData` will be `undefined`.
 		 * */
-		if (filteredData && filteredData.length > 0) {
+		if (filteredData?.length) {
 			const maybeFirstCard = document.querySelector(
 				`#${showMoreContainerId} [data-link-name="${filteredData[0].dataLinkName}"]`,
 			);
