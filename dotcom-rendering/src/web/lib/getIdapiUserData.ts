@@ -1,4 +1,4 @@
-import { joinUrl } from '../../lib/joinUrl';
+import { joinUrl } from '@guardian/libs';
 
 export interface IdApiUserData {
 	user?: {
@@ -41,7 +41,7 @@ const cache: {
 
 export const getIdApiUserData = (ajaxUrl: string): Promise<IdApiUserData> => {
 	if (!cache.idapiUserMeResponse) {
-		const url = joinUrl([ajaxUrl, 'user/me']);
+		const url = joinUrl(ajaxUrl, 'user/me');
 		cache.idapiUserMeResponse = callApi(url);
 	}
 	return cache.idapiUserMeResponse;
@@ -51,7 +51,7 @@ export const getIdapiUserIdentifiers = (
 	ajaxUrl: string,
 ): Promise<IdApiUserIdentifiers> => {
 	if (!cache.idapiUserIdentifiersResponse) {
-		const url = joinUrl([ajaxUrl, 'user/me/identifiers']);
+		const url = joinUrl(ajaxUrl, 'user/me/identifiers');
 		cache.idapiUserIdentifiersResponse = callApi(url);
 	}
 	return cache.idapiUserIdentifiersResponse;
