@@ -1,4 +1,8 @@
-import { getBrowserTargets, rawTargets, upgradeTargets } from './browser-targets';
+import {
+	getBrowserTargets,
+	rawTargets,
+	upgradeTargets,
+} from './browser-targets';
 
 describe('Browser targets are as expected', () => {
 	test('raw targets from browserslist', () => {
@@ -17,9 +21,9 @@ describe('Browser targets are as expected', () => {
 			chrome: '67.0.0',
 			edge: '91.0.0',
 			firefox: '78.0.0',
-			ios: '11',  // upgraded
+			ios: '11', // upgraded
 			opera: '64.0.0',
-			safari: '11.1.0',  // upgraded
+			safari: '11.1.0', // upgraded
 			samsung: '11.1.0',
 		});
 	});
@@ -33,11 +37,19 @@ describe('Upgrade browser targets', () => {
 		expect(upgradeTargets({ ios: '10.3' })).toEqual({ ios: '11' });
 		expect(upgradeTargets({ ios: '10.9.9' })).toEqual({ ios: '11' });
 		// safari < 11.1
-		expect(upgradeTargets({ safari: '10.11' })).toEqual({ safari: '11.1.0' });
+		expect(upgradeTargets({ safari: '10.11' })).toEqual({
+			safari: '11.1.0',
+		});
 		expect(upgradeTargets({ safari: '11' })).toEqual({ safari: '11.1.0' });
-		expect(upgradeTargets({ safari: '11.0' })).toEqual({ safari: '11.1.0' });
-		expect(upgradeTargets({ safari: '11.0.11' })).toEqual({ safari: '11.1.0' });
-		expect(upgradeTargets({ safari: '11.0.11' })).toEqual({ safari: '11.1.0' });
+		expect(upgradeTargets({ safari: '11.0' })).toEqual({
+			safari: '11.1.0',
+		});
+		expect(upgradeTargets({ safari: '11.0.11' })).toEqual({
+			safari: '11.1.0',
+		});
+		expect(upgradeTargets({ safari: '11.0.11' })).toEqual({
+			safari: '11.1.0',
+		});
 	});
 	test('do not modify targets for supported later versions', () => {
 		// ios >= 11
@@ -48,7 +60,11 @@ describe('Upgrade browser targets', () => {
 		expect(upgradeTargets({ ios: '14.10.1' })).toEqual({ ios: '14.10.1' });
 		// safari >= 11.1
 		expect(upgradeTargets({ safari: '11.1' })).toEqual({ safari: '11.1' });
-		expect(upgradeTargets({ safari: '11.1.0' })).toEqual({ safari: '11.1.0' });
-		expect(upgradeTargets({ safari: '12.10.0' })).toEqual({ safari: '12.10.0' });
+		expect(upgradeTargets({ safari: '11.1.0' })).toEqual({
+			safari: '11.1.0',
+		});
+		expect(upgradeTargets({ safari: '12.10.0' })).toEqual({
+			safari: '12.10.0',
+		});
 	});
 });

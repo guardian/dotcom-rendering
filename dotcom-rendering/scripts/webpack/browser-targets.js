@@ -1,5 +1,6 @@
 const browserslist = require('browserslist');
-const getTargetsFromBrowsersList = require('@babel/helper-compilation-targets').default;
+const getTargetsFromBrowsersList =
+	require('@babel/helper-compilation-targets').default;
 
 const browsers = browserslist('extends @guardian/browserslist-config');
 const rawTargets = getTargetsFromBrowsersList({ browsers });
