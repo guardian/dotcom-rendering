@@ -411,6 +411,9 @@ export const Card = ({
 							<TrailTextWrapper
 								containerPalette={containerPalette}
 								format={format}
+								imagePosition={imagePosition}
+								imageSize={imageSize}
+								imageType={image?.type}
 							>
 								<div
 									dangerouslySetInnerHTML={{
