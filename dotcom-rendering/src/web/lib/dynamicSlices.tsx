@@ -35,11 +35,11 @@ export const Card100 = ({
 	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => {
-	const primaries = cards.slice(0, 1);
+	const card100 = cards.slice(0, 1);
 
 	return (
 		<UL>
-			{primaries.map((trail) => (
+			{card100.map((trail) => (
 				<LI padSides={true}>
 					<FrontCard
 						trail={trail}
@@ -73,11 +73,11 @@ export const Card50_Card50 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
-	const primaries = cards.slice(0, 2);
+	const card50 = cards.slice(0, 2);
 
 	return (
 		<UL direction="row" padBottom={true}>
-			{primaries.map((trail, index) => (
+			{card50.map((trail, index) => (
 				<LI percentage="50%" padSides={true} showDivider={index !== 0}>
 					<FrontCard
 						trail={trail}
@@ -108,12 +108,12 @@ export const Card75_Card25 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
-	const primaries = cards.slice(0, 1);
-	const secondaries = cards.slice(1, 2);
+	const card75 = cards.slice(0, 1);
+	const card25 = cards.slice(1, 2);
 
 	return (
 		<UL direction="row" padBottom={true}>
-			{primaries.map((trail) => (
+			{card75.map((trail) => (
 				<LI percentage="75%" padSides={true}>
 					<FrontCard
 						trail={trail}
@@ -128,7 +128,7 @@ export const Card75_Card25 = ({
 					/>
 				</LI>
 			))}
-			{secondaries.map((trail) => (
+			{card25.map((trail) => (
 				<LI percentage="25%" padSides={true} showDivider={true}>
 					<FrontCard
 						trail={trail}
@@ -156,12 +156,12 @@ export const Card25_Card75 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
-	const primaries = cards.slice(0, 1);
-	const secondaries = cards.slice(1, 2);
+	const card25 = cards.slice(0, 1);
+	const card75 = cards.slice(1, 2);
 
 	return (
 		<UL direction="row" padBottom={true}>
-			{primaries.map((trail) => (
+			{card25.map((trail) => (
 				<LI percentage="25%" padSides={true}>
 					<FrontCard
 						trail={trail}
@@ -171,7 +171,7 @@ export const Card25_Card75 = ({
 					/>
 				</LI>
 			))}
-			{secondaries.map((trail) => (
+			{card75.map((trail) => (
 				<LI percentage="75%" padSides={true} showDivider={true}>
 					<FrontCard
 						trail={trail}
@@ -206,12 +206,12 @@ export const Card66_Card33 = ({
 	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => {
-	const primaries = cards.slice(0, 1);
-	const secondaries = cards.slice(1, 2);
+	const card66 = cards.slice(0, 1);
+	const card33 = cards.slice(1, 2);
 
 	return (
 		<UL direction="row">
-			{primaries.map((trail) => (
+			{card66.map((trail) => (
 				<LI percentage="66.666%" padSides={true}>
 					<FrontCard
 						trail={trail}
@@ -223,7 +223,7 @@ export const Card66_Card33 = ({
 					/>
 				</LI>
 			))}
-			{secondaries.map((trail) => (
+			{card33.map((trail) => (
 				<LI percentage="33.333%" padSides={true} showDivider={true}>
 					<FrontCard
 						trail={trail}
@@ -255,12 +255,12 @@ export const Card50_Card25_Card25 = ({
 	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => {
-	const primaries = cards.slice(0, 1);
-	const secondaries = cards.slice(1, 3);
+	const card50 = cards.slice(0, 1);
+	const card25 = cards.slice(1, 3);
 
 	return (
 		<UL direction="row" padBottom={true}>
-			{primaries.map((trail) => (
+			{card50.map((trail) => (
 				<LI percentage="50%" padSides={true}>
 					<FrontCard
 						trail={trail}
@@ -275,7 +275,7 @@ export const Card50_Card25_Card25 = ({
 				</LI>
 			))}
 
-			{secondaries.map((trail) => (
+			{card25.map((trail) => (
 				<LI percentage="25%" padSides={true} showDivider={true}>
 					<FrontCard
 						trail={trail}
@@ -315,11 +315,11 @@ export const Card100PictureTop = ({
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
-	const primaries = cards.slice(0, 1);
+	const card100 = cards.slice(0, 1);
 
 	return (
 		<UL padBottom={true}>
-			{primaries.map((card) => (
+			{card100.map((card) => (
 				<LI percentage="100%" padSides={true}>
 					<FrontCard
 						trail={card}
@@ -353,11 +353,11 @@ export const Card100PictureRight = ({
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
-	const primaries = cards.slice(0, 1);
+	const card100 = cards.slice(0, 1);
 
 	return (
 		<UL padBottom={true}>
-			{primaries.map((card) => (
+			{card100.map((card) => (
 				<LI percentage="100%" padSides={true}>
 					<FrontCard
 						trail={card}
