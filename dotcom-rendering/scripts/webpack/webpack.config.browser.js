@@ -1,13 +1,9 @@
-const getTargets = require('@babel/helper-compilation-targets').default;
-const browserslist = require('browserslist');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const swcConfig = require('./.swcrc.json');
+const { getBrowserTargets } = require('./browser-targets');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
 const DEV = process.env.NODE_ENV === 'development';
-
-const browsers = browserslist('extends @guardian/browserslist-config');
-const targets = getTargets({ browsers });
 
 /**
  * @param {'legacy' | 'modern' | 'variant'} bundle
@@ -61,7 +57,7 @@ const getLoaders = (bundle) => {
 						env: {
 							// debug: true,
 							dynamicImport: true,
-							targets,
+							targets: getBrowserTargets(),
 						},
 					},
 				},
