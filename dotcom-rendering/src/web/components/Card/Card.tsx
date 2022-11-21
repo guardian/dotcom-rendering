@@ -268,7 +268,6 @@ export const Card = ({
 							// This a tag is initially rendered empty. It gets populated later
 							// after a fetch call is made to get all the counts for each Card
 							// on the page with a discussion (see FetchCommentCounts.tsx)
-							data-name="comment-count-marker"
 							data-discussion-id={discussionId}
 							data-format={JSON.stringify(format)}
 							data-is-dynamo={isDynamo ? 'true' : undefined}
