@@ -15,9 +15,7 @@ const getCallout = (
 		return Optional.none();
 	}
 
-	const campaign = campaigns.find((campaign) => {
-		campaign.id === id;
-	});
+	const campaign = campaigns.find((campaign) => campaign.id === id);
 
 	if (campaign?.fields.kind === 'callout') {
 		return Optional.some(campaign.fields.callout);

@@ -12,6 +12,7 @@ import type { Option } from '@guardian/types';
 import { fromNullable } from '@guardian/types';
 import { parseAtom } from 'atoms';
 import { ElementKind } from 'bodyElementKind';
+import { getCallout } from 'campaign';
 import { formatDate } from 'date';
 import { parseAudio, parseGeneric, parseInstagram, parseVideo } from 'embed';
 import type { Embed } from 'embed';
@@ -22,7 +23,6 @@ import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
 import { Result } from 'result';
-import { getCallout } from 'campaign';
 
 // ----- Types ----- //
 
