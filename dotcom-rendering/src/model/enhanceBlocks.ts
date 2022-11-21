@@ -88,7 +88,7 @@ class BlockEnhancer {
 	}
 
 	enhanceRecipes() {
-		this.blocks = enhanceRecipes(this.blocks);
+		this.blocks = enhanceRecipes(this.blocks, this.format);
 		return this;
 	}
 }
