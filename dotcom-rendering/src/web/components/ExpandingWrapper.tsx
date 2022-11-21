@@ -79,7 +79,7 @@ const fakeButtonStyles = css`
 	margin-top: -25px;
 	margin-left: ${space[4]}px;
 	border-radius: ${remHeight.ctaMedium}rem;
-	padding: ${space[2]}px;
+	padding: ${space[4]}px;
 	border: 1px solid ${neutral[7]};
 	text-decoration: none;
 	background: ${neutral[7]};

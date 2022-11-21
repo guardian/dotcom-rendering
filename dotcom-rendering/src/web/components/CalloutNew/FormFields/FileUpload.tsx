@@ -28,7 +28,7 @@ type Props = {
 const customUpload = (format: ArticleFormat): SerializedStyles => css`
 	${textSans.small()};
 	color: ${decidePalette(format).text.richLink};
-	border: 1px solid ${decidePalette(format).text.richLink};
+	border: 1.5px solid ${decidePalette(format).text.richLink};
 	display: inline-flex;
 	justify-content: space-between;
 	align-items: center;
@@ -43,7 +43,7 @@ const customUpload = (format: ArticleFormat): SerializedStyles => css`
 	padding: ${space[3]}px;
 	margin: ${space[3]}px ${space[3]}px 0px 0px;
 	border-radius: ${remHeight.ctaMedium}rem;
-	${textSans.medium({ fontWeight: 'medium' })};
+	${textSans.medium({ fontWeight: 'bold' })};
 	width: fit-content;
 `;
 
