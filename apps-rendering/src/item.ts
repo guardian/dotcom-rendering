@@ -51,6 +51,7 @@ import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
 import { Result } from 'result';
+import { NewRelatedContent } from '@guardian/apps-rendering-api-models/newRelatedContent';
 
 // ----- Item Type ----- //
 
@@ -74,6 +75,18 @@ interface Fields extends ArticleFormat {
 	webUrl: string;
 	edition: Edition;
 	promotedNewsletter: Option<Newsletter>;
+}
+
+interface RelatedItem extends ArticleFormat {
+	headline: string;
+	publishDate: Optional<Date>;
+	mainMedia: Optional<Image>;
+	webUrl: string;
+	mediaDuration: Optional<string>;
+	starRating: Optional<number>;
+	byline: string;
+	bylineImage: string;
+	lastModified: Optional<Date>;
 }
 
 interface MatchReport extends Fields {
@@ -276,11 +289,37 @@ const getBranding = ({
 		? none
 		: fromNullable(branding);
 
+type Foo = {
+	title: string;
+	relatedItems: RelatedItem[];
+}
+
+const getRelatedContent = (relatedContent: RelatedContent, newRelatedContent: NewRelatedContent): Foo => {
+	return {
+		title: newRelatedContent.title,
+		relatedItems: newRelatedContent.relatedItems.map(item => {
+			return {
+				headline: item.fields?.headline ?? item.webTitle,
+				starRating: Optional<number>;
+	byline: string;
+	bylineImage: string;
+	lastModified: Optional<Date>; {}
+
+		type Foo = {}
+
+titele: stringstring;
+	relatedItems: RlelatedItem[]F[]];
+				publishDate: Optional.fromNullable(item.webPublicationDate)
+			}
+		})
+	}
+}
+
 const itemFields = (
 	context: Context,
 	request: RenderingRequest,
 ): ItemFields => {
-	const { content, commentCount, relatedContent, campaigns } = request;
+	const { content, commentCount, relatedContent, newRelatedContent, campaigns } = request;
 	return {
 		theme: getReport(campaigns ?? []).withDefault(
 			Optional.fromNullable(content.pillarId)
@@ -312,16 +351,17 @@ const itemFields = (
 		branding: getBranding(request),
 		internalShortId: fromNullable(content.fields?.internalShortId),
 		commentCount: fromNullable(commentCount),
-		relatedContent: pipe(
-			relatedContent,
-			fromNullable,
-			map((relatedContent) => ({
-				...relatedContent,
-				resizedImages: relatedContent.relatedItems.map((item) =>
-					parseCardImage(item.headerImage, context.salt),
-				),
-			})),
-		),
+		relatedContent: getRelatedContent(relatedContent, newRelatedContent),
+		// relatedContent: pipe(
+		// 	relatedContent,
+		// 	fromNullable,
+		// 	map((relatedContent) => ({
+		// 		...relatedContent,
+		// 		resizedImages: relatedContent.relatedItems.map((item) =>
+		// 			parseCardImage(item.headerImage, context.salt),
+		// 		),
+		// 	})),
+		// ),
 		logo: paidContentLogo(content.tags),
 		webUrl: content.webUrl,
 		edition: Optional.fromNullable(request.edition).withDefault(Edition.UK),
