@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
-import { from, until } from '@guardian/source-foundations';
+import { from, neutral, until } from '@guardian/source-foundations';
 import type {
 	DCRContainerPalette,
 	DCRSupportingContent,
 } from '../../types/front';
+import { decidePalette } from '../lib/decidePalette';
+import { transparentColour } from '../lib/transparentColour';
 import { CardHeadline } from './CardHeadline';
 
 type Alignment = 'vertical' | 'horizontal';
@@ -13,7 +15,7 @@ type Props = {
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: true;
-	parentFormat?: ArticleFormat;
+	parentFormat: ArticleFormat;
 };
 
 const wrapperStyles = css`
@@ -40,6 +42,20 @@ const directionStyles = (alignment: Alignment) => {
 	}
 };
 
+const dynamoStyles = css`
+	flex-direction: column;
+	column-gap: 5px;
+	width: 100%;
+	margin: 0;
+
+	${from.phablet} {
+		padding: 0 5px 5px;
+		flex-direction: row;
+		position: absolute;
+		bottom: 0;
+	}
+`;
+
 const liStyles = css`
 	display: flex;
 	flex-direction: column;
@@ -50,6 +66,13 @@ const liStyles = css`
 	${from.phablet} {
 		margin-bottom: 4px;
 	}
+`;
+
+const dynamoLiStyles = css`
+	background-color: ${transparentColour(neutral[97], 0.875)};
+	border-top: 1px solid;
+	flex-grow: 1;
+	margin: 0;
 `;
 
 const leftMargin = css`
@@ -69,10 +92,16 @@ export const SupportingContent = ({
 	alignment,
 	containerPalette,
 	isDynamo,
+	parentFormat,
 }: Props) => {
 	return (
-		<ul css={[wrapperStyles, directionStyles(alignment)]}>
-			{supportingContent.map((subLink: DCRSupportingContent, index) => {
+		<ul
+			css={[
+				wrapperStyles,
+				isDynamo ? dynamoStyles : directionStyles(alignment),
+			]}
+		>
+			{supportingContent.map((subLink, index) => {
 				// The model has this property as optional but it is very likely
 				// to exist
 				if (!subLink.headline) return null;
@@ -81,7 +110,17 @@ export const SupportingContent = ({
 					<li
 						key={subLink.url}
 						css={[
-							liStyles,
+							isDynamo
+								? [
+										dynamoLiStyles,
+										css`
+											border-color: ${decidePalette(
+												parentFormat,
+												containerPalette,
+											).topBar.card};
+										`,
+								  ]
+								: liStyles,
 							shouldPadLeft && leftMargin,
 							index === supportingContent.length - 1 &&
 								bottomMargin,

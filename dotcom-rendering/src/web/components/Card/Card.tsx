@@ -459,7 +459,7 @@ export const Card = ({
 			) : (
 				<></>
 			)}
-			{isOpinion && (
+			{isOpinion && !isDynamo && (
 				<CommentFooter
 					hasSublinks={hasSublinks}
 					displayAge={displayAge}
