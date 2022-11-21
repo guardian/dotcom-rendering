@@ -94,10 +94,10 @@ export const YoutubeBlockComponent = ({
 		undefined,
 	);
 
-	const imaEnabled = !!useAB()?.api.isUserInVariant(
-		'IntegrateIMA',
-		'variant',
-	);
+	const abTests = useAB();
+	const imaEnabled =
+		abTests?.api.isUserInVariant('IntegrateIMA', 'variant') ?? false;
+	const abTestParticipations = abTests?.participations ?? {};
 
 	useEffect(() => {
 		const defineConsentState = async () => {
@@ -224,6 +224,7 @@ export const YoutubeBlockComponent = ({
 				shouldStick={stickyVideos}
 				isMainMedia={isMainMedia}
 				imaEnabled={imaEnabled}
+				abTestParticipations={abTestParticipations}
 			/>
 			{!hideCaption && (
 				<Caption
