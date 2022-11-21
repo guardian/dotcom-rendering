@@ -17,5 +17,6 @@
         "importSource": "@emotion/react"
       }
     }
-  }
+  },
+  "sourceMaps": true
 }
