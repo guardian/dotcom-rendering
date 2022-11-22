@@ -6,6 +6,7 @@ import {
 import { getCookie } from '@guardian/libs';
 import { dcrJavascriptBundle } from '../../../scripts/webpack/bundles';
 import type { ServerSideTestNames } from '../../types/config';
+import { integrateIMA } from '../experiments/tests/integrate-ima';
 import { removePrebidA9Canada } from '../experiments/tests/remove-prebid-a9-canada';
 import { useAB } from '../lib/useAB';
 
@@ -24,6 +25,7 @@ export const CoreVitals = () => {
 	// For these tests switch off sampling and collect metrics for 100% of views
 	const clientSideTestsToForceMetrics: ABTest[] = [
 		/* keep array multi-line */
+		integrateIMA,
 		removePrebidA9Canada,
 	];
 
