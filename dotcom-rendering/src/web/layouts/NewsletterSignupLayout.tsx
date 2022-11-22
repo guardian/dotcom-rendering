@@ -115,7 +115,17 @@ const previewButtonWrapperStyle = css`
 const mainGraphicWrapperStyle = css`
 	border-radius: ${space[2]}px;
 	overflow: hidden;
-	margin: ${space[4]}px 0;
+	margin-bottom: ${space[4]}px;
+
+	margin-top: ${space[4]}px;
+
+	${from.desktop} {
+		margin-top: ${space[9]}px;
+	}
+
+	${from.leftCol} {
+		margin-top: ${space[2]}px;
+	}
 `;
 
 const previewCaptionStyle = css`
@@ -166,6 +176,10 @@ const shareDivStyle = css`
 
 const frequencyDivStyle = css`
 	margin-top: ${space[2]}px;
+	margin-bottom: ${space[2]}px;
+`;
+
+const regionalFocusDivStyle = css`
 	margin-bottom: ${space[2]}px;
 `;
 
@@ -376,9 +390,11 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<Column width={[1, 1, 5 / 8, 1 / 2, 1 / 2]}>
 							{showRegionalFocus && (
 								<Hide from="leftCol">
-									<NewsletterDetail
-										text={regionalFocusText}
-									/>
+									<div css={regionalFocusDivStyle}>
+										<NewsletterDetail
+											text={regionalFocusText}
+										/>
+									</div>
 								</Hide>
 							)}
 							<ArticleHeadline
