@@ -1,5 +1,5 @@
-import type { EditionId } from '../types/edition';
 import type { DCRCollectionType, FECollectionType } from '../types/front';
+import { EditionId } from '../web/lib/edition';
 import { decideContainerPalette } from './decideContainerPalette';
 import { enhanceCards } from './enhanceCards';
 import { enhanceTreats } from './enhanceTreats';

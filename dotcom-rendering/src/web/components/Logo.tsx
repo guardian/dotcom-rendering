@@ -10,7 +10,7 @@ import {
 	SvgGuardianBestWebsiteLogo,
 	SvgGuardianLogo,
 } from '@guardian/source-react-components';
-import type { EditionId } from '../../types/edition';
+import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 
 const linkStyles = css`

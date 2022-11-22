@@ -1,5 +1,6 @@
 import { ArticlePillar } from '@guardian/libs';
-import type { EditionId } from '../types/edition';
+import { EditionId } from '../web/lib/edition';
+
 import { findPillar } from './find-pillar';
 
 export interface BaseLinkType {

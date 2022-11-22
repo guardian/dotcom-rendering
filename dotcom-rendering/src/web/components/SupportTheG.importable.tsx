@@ -19,7 +19,7 @@ import type {
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import ArrowRightIcon from '../../static/icons/arrow-right.svg';
-import type { EditionId } from '../../types/edition';
+import type { EditionId } from '../lib/edition';
 import type { OphanRecordFunction } from '../browser/ophan/ophan';
 import {
 	getOphanRecordFunction,
