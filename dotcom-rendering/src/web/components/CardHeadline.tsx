@@ -168,34 +168,45 @@ const lineStyles = (palette: Palette) => css`
 const WithLink = ({
 	linkTo,
 	children,
+	isDynamo,
 }: {
 	linkTo?: string;
 	children: React.ReactNode;
+	isDynamo?: true;
 }) => {
 	if (linkTo) {
 		return (
 			<Link
 				href={linkTo}
-				cssOverrides={css`
-					/* See: https://css-tricks.com/nested-links/ */
-					${getZIndex('card-nested-link')}
-					/* The following styles turn off those provided by Link */
-					color: inherit;
-					text-decoration: none;
-					/* stylelint-disable-next-line property-disallowed-list */
-					font-family: inherit;
-					font-size: inherit;
-					line-height: inherit;
-					/* This css is used to remove any underline from the kicker but still
-					   have it applied to the headline when the kicker is hovered */
-					:hover {
+				cssOverrides={[
+					css`
+						/* See: https://css-tricks.com/nested-links/ */
+						${getZIndex('card-nested-link')}
+						/* The following styles turn off those provided by Link */
 						color: inherit;
 						text-decoration: none;
-						.show-underline {
-							text-decoration: underline;
+						/* stylelint-disable-next-line property-disallowed-list */
+						font-family: inherit;
+						font-size: inherit;
+						line-height: inherit;
+						/* This css is used to remove any underline from the kicker but still
+					   have it applied to the headline when the kicker is hovered */
+						:hover {
+							color: inherit;
+							text-decoration: none;
+							.show-underline {
+								text-decoration: underline;
+							}
 						}
-					}
-				`}
+					`,
+					isDynamo
+						? css`
+								font-weight: 800;
+						  `
+						: css`
+								font-weight: inherit;
+						  `,
+				]}
 			>
 				{children}
 			</Link>
