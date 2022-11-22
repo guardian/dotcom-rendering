@@ -1,8 +1,9 @@
 import { ThemeProvider } from '@emotion/react';
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { ArticleFormat } from '@guardian/libs';
-// import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
+import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
 import type { Option } from '@guardian/types';
+import { useState } from 'react';
 import type { FC, ReactElement } from 'react';
 import CalloutBlock from './calloutBlock';
 import DeadlineDate from './deadlineDate';
@@ -21,6 +22,7 @@ const Callout: FC<CalloutProps> = ({
 	description,
 	isNonCollapsable,
 }): ReactElement => {
+	const [isExpanded, setIsExpanded] = useState(false);
 	return (
 		<aside>
 			{isNonCollapsable ? (
@@ -34,18 +36,22 @@ const Callout: FC<CalloutProps> = ({
 				</ThemeProvider>
 			) : (
 				<ThemeProvider theme={getTheme(format)}>
-					{/* <ExpandingWrapper
-						renderExtra={(): ReactElement => (
+					<ExpandingWrapper
+						renderExtra={() => (
 							<DeadlineDate until={campaign.activeUntil} />
 						)}
 						name={`${campaign.name} form`}
-					> */}
-					<CalloutBlock
-						format={format}
-						campaign={campaign}
-						description={description}
-					/>
-					{/* </ExpandingWrapper> */}
+						expandCallback={setIsExpanded}
+					>
+						<CalloutBlock
+							format={format}
+							campaign={campaign}
+							description={description}
+							// TODO: This is pretty heavy (and not futureproof), would it be better to
+							// set the tabIndex on all children with js?
+							isTabbable={isExpanded}
+						/>
+					</ExpandingWrapper>
 				</ThemeProvider>
 			)}
 		</aside>

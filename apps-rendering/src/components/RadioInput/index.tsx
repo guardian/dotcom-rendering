@@ -9,6 +9,7 @@ interface RadioInputProps {
 	supporting?: string;
 	options: FormOption[];
 	cssOverrides?: SerializedStyles;
+	disabled: boolean;
 }
 
 const RadioInput = ({
@@ -17,6 +18,7 @@ const RadioInput = ({
 	options,
 	supporting,
 	cssOverrides,
+	disabled,
 }: RadioInputProps): ReactElement => (
 	<RadioGroup
 		label={label}
@@ -24,6 +26,7 @@ const RadioInput = ({
 		orientation="horizontal"
 		supporting={supporting}
 		cssOverrides={cssOverrides}
+		disabled={disabled}
 	>
 		{options.map(({ value, label }) => (
 			<Radio key={value} value={value} label={label} />

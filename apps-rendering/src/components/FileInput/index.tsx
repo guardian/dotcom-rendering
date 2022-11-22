@@ -19,6 +19,7 @@ interface FileInputProps {
 	label: string;
 	cssOverrides?: SerializedStyles;
 	format: ArticleFormat;
+	disabled: boolean;
 }
 
 const fieldSupportingStyles = (theme: any): SerializedStyles => css`
@@ -62,6 +63,7 @@ const FileInput = ({
 	mandatory,
 	supporting,
 	cssOverrides,
+	disabled,
 	format,
 }: FileInputProps): ReactElement => {
 	const [chosenFile, setChosenFile] = useState<null | string>();
@@ -92,6 +94,7 @@ const FileInput = ({
 							${visuallyHidden}
 						`}
 						onChange={(e): void => setChosenFile(e.target.value)}
+						disabled={disabled}
 					/>
 				</div>
 			</Label>
