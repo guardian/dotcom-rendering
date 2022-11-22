@@ -25,7 +25,7 @@ export const FixedSmallSlowVMPU = ({
 	return (
 		<UL direction="row">
 			{firstSlice33.map((trail) => (
-				<LI percentage="33.333%" padSides={true}>
+				<LI percentage="33.333%" padSides={true} key={trail.url}>
 					<FrontCard
 						trail={trail}
 						containerPalette={containerPalette}
@@ -36,7 +36,7 @@ export const FixedSmallSlowVMPU = ({
 			<LI percentage="33.333%" padSides={true} showDivider={true}>
 				<UL direction="column">
 					{remaining.map((trail) => (
-						<LI>
+						<LI key={trail.url}>
 							<FrontCard
 								trail={trail}
 								containerPalette={containerPalette}

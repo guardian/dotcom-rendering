@@ -20,7 +20,7 @@ export const FixedSmallSlowI = ({
 	return (
 		<UL>
 			{firstSlice100.map((card) => (
-				<LI padSides={true}>
+				<LI padSides={true} key={card.url}>
 					<FrontCard
 						trail={card}
 						containerPalette={containerPalette}

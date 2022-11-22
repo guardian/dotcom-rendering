@@ -28,6 +28,7 @@ export const FixedSmallFastVIII = ({
 						percentage="25%"
 						padSides={true}
 						showDivider={cardIndex === 1}
+						key={card.url}
 					>
 						<FrontCard
 							trail={card}

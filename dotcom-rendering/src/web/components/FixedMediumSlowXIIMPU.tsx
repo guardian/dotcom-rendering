@@ -37,7 +37,7 @@ const Card33_Card33_Card33 = ({
 	return (
 		<UL direction="row" padBottom={padBottom}>
 			{primary.map((trail) => (
-				<LI percentage="33.333%" padSides={true}>
+				<LI percentage="33.333%" padSides={true} key={trail.url}>
 					<FrontCard
 						trail={trail}
 						containerPalette={containerPalette}
@@ -48,7 +48,12 @@ const Card33_Card33_Card33 = ({
 				</LI>
 			))}
 			{secondary.map((trail) => (
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
+				<LI
+					percentage="33.333%"
+					padSides={true}
+					showDivider={true}
+					key={trail.url}
+				>
 					<FrontCard
 						trail={trail}
 						containerPalette={containerPalette}
@@ -108,6 +113,7 @@ export const FixedMediumSlowXIIMPU = ({
 								showDivider={trailIndex % 2 !== 0}
 								percentage="50%"
 								stretch={true}
+								key={trail.url}
 							>
 								<FrontCard
 									trail={trail}

@@ -37,7 +37,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 	return (
 		<UL direction="row">
 			{primary.map((card) => (
-				<LI percentage="33.333%" padSides={true}>
+				<LI percentage="33.333%" padSides={true} key={card.url}>
 					<FrontCard
 						trail={card}
 						containerPalette={containerPalette}
@@ -49,7 +49,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 			<LI percentage="33.333%" showDivider={true}>
 				<UL direction="column">
 					{secondary.map((card) => (
-						<LI padSides={true}>
+						<LI padSides={true} key={card.url}>
 							<FrontCard
 								trail={card}
 								containerPalette={containerPalette}
@@ -93,7 +93,7 @@ const ColumnOfThree50_Ad50 = ({
 			<LI percentage="50%">
 				<UL direction="column">
 					{primary.map((card) => (
-						<LI padSides={true}>
+						<LI padSides={true} key={card.url}>
 							<FrontCard
 								trail={card}
 								containerPalette={containerPalette}
@@ -134,7 +134,7 @@ const Card50_Card25_Card25 = ({
 	return (
 		<UL direction="row" padBottom={true}>
 			{primary.map((card) => (
-				<LI percentage="50%" padSides={true}>
+				<LI percentage="50%" padSides={true} key={card.url}>
 					<FrontCard
 						trail={card}
 						containerPalette={containerPalette}
@@ -147,7 +147,12 @@ const Card50_Card25_Card25 = ({
 				</LI>
 			))}
 			{secondary.map((card) => (
-				<LI percentage="25%" padSides={true} showDivider={true}>
+				<LI
+					percentage="25%"
+					padSides={true}
+					showDivider={true}
+					key={card.url}
+				>
 					<FrontCard
 						trail={card}
 						containerPalette={containerPalette}

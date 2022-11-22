@@ -25,7 +25,7 @@ export const FixedLargeSlowXIV = ({
 		<>
 			<UL direction="row" padBottom={true}>
 				{firstSlice75.map((card) => (
-					<LI padSides={true} percentage="75%">
+					<LI padSides={true} percentage="75%" key={card.url}>
 						<FrontCard
 							trail={card}
 							starRating={card.starRating}
@@ -41,7 +41,12 @@ export const FixedLargeSlowXIV = ({
 				))}
 
 				{firstSlice25.map((card) => (
-					<LI padSides={true} showDivider={true} percentage="25%">
+					<LI
+						padSides={true}
+						showDivider={true}
+						percentage="25%"
+						key={card.url}
+					>
 						<FrontCard
 							trail={card}
 							starRating={card.starRating}

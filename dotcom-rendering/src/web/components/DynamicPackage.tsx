@@ -88,7 +88,7 @@ const Card75_Card25 = ({
 	return (
 		<UL direction="row">
 			{primary.map((card) => (
-				<LI padSides={true} percentage="75%">
+				<LI padSides={true} percentage="75%" key={card.url}>
 					<FrontCard
 						trail={card}
 						containerPalette={containerPalette}
@@ -104,7 +104,12 @@ const Card75_Card25 = ({
 				</LI>
 			))}
 			{secondary.map((card) => (
-				<LI padSides={true} percentage="25%" showDivider={true}>
+				<LI
+					padSides={true}
+					percentage="25%"
+					showDivider={true}
+					key={card.url}
+				>
 					<FrontCard
 						trail={card}
 						containerPalette={containerPalette}
@@ -350,7 +355,7 @@ const Card75_ColumnOfCards25 = ({
 	return (
 		<UL direction="row" padBottom={true}>
 			{primary.map((card) => (
-				<LI padSides={true} percentage="75%">
+				<LI padSides={true} percentage="75%" key={card.url}>
 					<FrontCard
 						trail={card}
 						containerPalette={containerPalette}

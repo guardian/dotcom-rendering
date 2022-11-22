@@ -73,6 +73,7 @@ export const FixedMediumFastXI = ({
 						showDivider={trailIndex % 4 !== 0}
 						percentage="25%"
 						stretch={true}
+						key={trail.url}
 					>
 						<FrontCard
 							trail={trail}
