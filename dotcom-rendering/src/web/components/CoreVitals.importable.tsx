@@ -6,6 +6,7 @@ import {
 } from '@guardian/libs';
 import { dcrJavascriptBundle } from '../../../scripts/webpack/bundles';
 import type { ServerSideTestNames } from '../../types/config';
+import { removePrebidA9Canada } from '../experiments/tests/remove-prebid-a9-canada';
 import { useAB } from '../lib/useAB';
 
 export const CoreVitals = () => {
@@ -18,11 +19,12 @@ export const CoreVitals = () => {
 		window.location.hostname === 'preview.gutools.co.uk';
 	const sampling = 1 / 100;
 
-	const ABTestAPI = useAB();
+	const ABTestAPI = useAB()?.api;
 
 	// For these tests switch off sampling and collect metrics for 100% of views
 	const clientSideTestsToForceMetrics: ABTest[] = [
 		/* keep array multi-line */
+		removePrebidA9Canada,
 	];
 
 	const userInClientSideTestToForceMetrics =

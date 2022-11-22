@@ -91,9 +91,8 @@ describe('parseImage', () => {
 	});
 
 	test('returns image', () => {
-		let actual: Image = withDefault(defaultImage)(
-			parseImage(context)(imageBlock),
-		);
+		let actual: Image =
+			parseImage(context)(imageBlock).withDefault(defaultImage);
 
 		expect(actual.src).toBe(expectedSrc);
 		expect(actual.srcset).toBe(expectedSrcset);
@@ -109,29 +108,29 @@ describe('parseImage', () => {
 
 	test('returns none given no assets in element', () => {
 		imageBlock.assets = [];
-		expect(parseImage(context)(imageBlock)).toEqual(none);
+		expect(parseImage(context)(imageBlock).isNone()).toBe(true);
 	});
 
 	test('returns none given an asset with no typeData', () => {
 		asset.typeData = undefined;
-		expect(parseImage(context)(imageBlock)).toEqual(none);
+		expect(parseImage(context)(imageBlock).isNone()).toBe(true);
 	});
 
 	test('returns none given an asset typedata with falsey isMaster', () => {
 		asset.typeData = {
 			isMaster: false,
 		};
-		expect(parseImage(context)(imageBlock)).toEqual(none);
+		expect(parseImage(context)(imageBlock).isNone()).toBe(true);
 	});
 
 	test('returns none given an asset file is undefined', () => {
 		asset.file = undefined;
-		expect(parseImage(context)(imageBlock)).toEqual(none);
+		expect(parseImage(context)(imageBlock).isNone()).toBe(true);
 	});
 
 	test('returns none given an asset file is empty', () => {
 		asset.file = '';
-		expect(parseImage(context)(imageBlock)).toEqual(none);
+		expect(parseImage(context)(imageBlock).isNone()).toBe(true);
 	});
 
 	test('returns none given an asset typedata width is undefined', () => {
@@ -139,7 +138,7 @@ describe('parseImage', () => {
 			isMaster: true,
 			height: assetHeight,
 		};
-		expect(parseImage(context)(imageBlock)).toEqual(none);
+		expect(parseImage(context)(imageBlock).isNone()).toBe(true);
 	});
 
 	test('returns none given an asset typedata height is undefined', () => {
@@ -147,7 +146,7 @@ describe('parseImage', () => {
 			isMaster: true,
 			width: assetWidth,
 		};
-		expect(parseImage(context)(imageBlock)).toEqual(none);
+		expect(parseImage(context)(imageBlock).isNone()).toBe(true);
 	});
 
 	test('uses secureFile rather than asset file for srcsets if it exists', () => {
@@ -157,9 +156,8 @@ describe('parseImage', () => {
 		const expectedSecureSrcset =
 			'https://i.guim.co.uk/img/secure-theguardian/?width=140&quality=85&fit=bounds&s=ac6b008b5309f7949d1087af108c1d03 140w, https://i.guim.co.uk/img/secure-theguardian/?width=500&quality=85&fit=bounds&s=4b9b01008452c65efcb547bd5f8ae12b 500w, https://i.guim.co.uk/img/secure-theguardian/?width=1000&quality=85&fit=bounds&s=9b5034dd81e916d352709a20f6635448 1000w, https://i.guim.co.uk/img/secure-theguardian/?width=1500&quality=85&fit=bounds&s=2c439ea2daa935d4a2a268ef7a2a9146 1500w, https://i.guim.co.uk/img/secure-theguardian/?width=2000&quality=85&fit=bounds&s=3877ef3c2ed016cccf1ab7b6e6001841 2000w, https://i.guim.co.uk/img/secure-theguardian/?width=2500&quality=85&fit=bounds&s=81d2b2f5b95615f1d47d61f64f5e61a6 2500w, https://i.guim.co.uk/img/secure-theguardian/?width=3000&quality=85&fit=bounds&s=b362f368e5f123ce2c7b45dedee361db 3000w';
 
-		const parsedImage = withDefault(defaultImage)(
-			parseImage(context)(imageBlock),
-		);
+		const parsedImage =
+			parseImage(context)(imageBlock).withDefault(defaultImage);
 
 		expect(parsedImage.srcset).toEqual(expectedSecureSrcset);
 		expect(parsedImage.dpr2Srcset).toEqual(expectedSecureDpr2Srcset);
@@ -168,9 +166,8 @@ describe('parseImage', () => {
 	test('returns image with no credit given displayCredit is false', () => {
 		imageData.displayCredit = false;
 
-		const parsedImage = withDefault(defaultImage)(
-			parseImage(context)(imageBlock),
-		);
+		const parsedImage =
+			parseImage(context)(imageBlock).withDefault(defaultImage);
 
 		expect(parsedImage.credit).toEqual(none);
 	});
@@ -178,9 +175,8 @@ describe('parseImage', () => {
 	test('returns image with no caption given imageData caption is undefined', () => {
 		imageData.caption = undefined;
 
-		const parsedImage = withDefault(defaultImage)(
-			parseImage(context)(imageBlock),
-		);
+		const parsedImage =
+			parseImage(context)(imageBlock).withDefault(defaultImage);
 
 		expect(parsedImage.caption).toEqual(none);
 		expect(parsedImage.nativeCaption).toEqual(none);
@@ -189,9 +185,8 @@ describe('parseImage', () => {
 	test('returns image with no alt given imageData alt is undefined', () => {
 		imageData.alt = undefined;
 
-		const parsedImage = withDefault(defaultImage)(
-			parseImage(context)(imageBlock),
-		);
+		const parsedImage =
+			parseImage(context)(imageBlock).withDefault(defaultImage);
 
 		expect(parsedImage.alt).toEqual(none);
 	});
@@ -200,9 +195,8 @@ describe('parseImage', () => {
 		test('returns correct role given image data role', () => {
 			imageData.role = roleTestCase.role;
 
-			const parsedImage = withDefault(defaultImage)(
-				parseImage(context)(imageBlock),
-			);
+			const parsedImage =
+				parseImage(context)(imageBlock).withDefault(defaultImage);
 
 			expect(parsedImage.role).toEqual(roleTestCase.roleEnum);
 		});

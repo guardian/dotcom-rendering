@@ -1,5 +1,5 @@
 {
-    "description": "WARNING: run `gen-schema` task if changing this to update the associated JSON\nschema definition.",
+    "description": "This type is what we receive from `frontend`,\nhence the FE prefix.\n\nWARNING: run `gen-schema` task if changing this to update the associated JSON\nschema definition.",
     "type": "object",
     "properties": {
         "headline": {
@@ -218,7 +218,35 @@
         "tags": {
             "type": "array",
             "items": {
-                "$ref": "#/definitions/TagType"
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "twitterHandle": {
+                        "type": "string"
+                    },
+                    "paidContentType": {
+                        "type": "string"
+                    },
+                    "bylineImageUrl": {
+                        "type": "string"
+                    },
+                    "bylineLargeImageUrl": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "title",
+                    "type"
+                ]
             }
         },
         "format": {
@@ -3814,37 +3842,6 @@
                 "US"
             ],
             "type": "string"
-        },
-        "TagType": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "title": {
-                    "type": "string"
-                },
-                "twitterHandle": {
-                    "type": "string"
-                },
-                "paidContentType": {
-                    "type": "string"
-                },
-                "bylineImageUrl": {
-                    "type": "string"
-                },
-                "bylineLargeImageUrl": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id",
-                "title",
-                "type"
-            ]
         },
         "LegacyPillar": {
             "enum": [

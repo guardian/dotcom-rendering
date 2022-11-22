@@ -15,12 +15,14 @@ import HeaderImageCaption, {
 } from 'components/editions/headerImageCaption';
 import StarRating from 'components/editions/starRating';
 import Img from 'components/ImgAlt';
+import type { MatchScores } from 'football';
 import type { Image } from 'image';
 import type { Sizes } from 'image/sizes';
 import type { Item } from 'item';
 import { isPicture as checkIfPicture, getFormat } from 'item';
 import { maybeRender } from 'lib';
 import { MainMediaKind } from 'mainMedia';
+import { Optional } from 'optional';
 import type { FC } from 'react';
 import FootballScores from '../footballScores';
 import { wideImageWidth } from '../styles';
@@ -171,7 +173,8 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 	const isPicture = checkIfPicture(item.tags);
 	const iconColour = fill.editionsCameraIcon(format);
 	const iconBackgroundColour = background.editionsCameraIcon(format);
-	const matchScores = 'football' in item ? item.football : none;
+	const matchScores: Optional<MatchScores> =
+		'football' in item ? item.football : Optional.none();
 
 	return maybeRender(item.mainMedia, (media) => {
 		if (media.kind === MainMediaKind.Image) {
@@ -185,7 +188,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 					css={[getStyles(format, isPicture)]}
 					aria-labelledby={captionId}
 				>
-					{maybeRender(matchScores, (scores) => {
+					{maybeRender(matchScores.toOption(), (scores) => {
 						return (
 							<div css={footballWrapperStyles(false)}>
 								<FootballScores
@@ -229,7 +232,7 @@ const HeaderMedia: FC<Props> = ({ item }) => {
 
 			return (
 				<>
-					{maybeRender(matchScores, (scores) => {
+					{maybeRender(matchScores.toOption(), (scores) => {
 						return (
 							<div css={footballWrapperStyles(true)}>
 								<FootballScores
