@@ -1,9 +1,9 @@
 import type { ABTest } from '@guardian/ab-core';
 import {
 	bypassCoreWebVitalsSampling,
-	getCookie,
 	initCoreWebVitals,
-} from '@guardian/libs';
+} from '@guardian/core-web-vitals';
+import { getCookie } from '@guardian/libs';
 import { dcrJavascriptBundle } from '../../../scripts/webpack/bundles';
 import type { ServerSideTestNames } from '../../types/config';
 import { removePrebidA9Canada } from '../experiments/tests/remove-prebid-a9-canada';
