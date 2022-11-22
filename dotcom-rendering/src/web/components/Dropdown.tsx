@@ -69,6 +69,11 @@ const ulStyles = css`
 	}
 `;
 
+const liStyles = css`
+	position: relative;
+	display: flex;
+`;
+
 const displayBlock = css`
 	display: block;
 `;
@@ -177,57 +182,49 @@ const buttonExpanded = css`
 	}
 `;
 
-const badgeDiameter = 20;
 const notificationColor = palette.error[400];
 
-const notificationBadgeStyles = css`
+const notificationBadgeStyles = (diameter: number) => css`
 	background-color: ${notificationColor};
 	color: ${palette.neutral[100]};
-	position: absolute;
-	top: 0;
-	left: 0;
-	min-width: ${badgeDiameter}px;
-	height: ${badgeDiameter}px;
-	border-radius: ${badgeDiameter / 2}px;
+	margin-top: 12px;
 	text-align: center;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 0 5px;
+	${textSans.xsmall()};
+	line-height: 1;
+
+	min-width: ${diameter}px;
+	height: ${diameter}px;
+	border-radius: ${diameter / 2}px;
+`;
+
+const dropdownButtonNotificationBadgeStyles = css`
+	position: absolute;
+	top: 0;
+	left: 0;
 	margin-left: -10px;
 	margin-top: -3px;
 `;
 
-const notificationStyles = css`
+const notificationTextStyles = css`
 	${textSans.xxsmall()};
-	color: ${notificationColor};
 `;
 
-const redDotDiameter = 16;
-const redDotStyles = css`
-	background-color: ${notificationColor};
-	width: ${redDotDiameter}px;
-	height: ${redDotDiameter}px;
-	border-radius: ${redDotDiameter / 2}px;
-	position: absolute;
-	left: 5px;
-	top: 12px;
-`;
-
-const notificationCountStyles = css`
-	${textSans.xsmall()};
-	line-height: ${badgeDiameter}px;
-`;
-
-const NotificationBadge = ({ count }: { count: number }) => {
+const NotificationBadge = ({
+	cssOverrides,
+	diameter,
+}: {
+	cssOverrides?: SerializedStyles;
+	diameter: number;
+}) => {
 	return (
-		<div css={notificationBadgeStyles}>
-			<span css={notificationCountStyles}>{count + 0}</span>
+		<div css={[notificationBadgeStyles(diameter), cssOverrides]}>
+			<span>!</span>
 		</div>
 	);
 };
-
-const RedDot = () => <div css={redDotStyles} />;
 
 export const Dropdown = ({
 	id,
@@ -346,7 +343,12 @@ export const Dropdown = ({
 					>
 						{label}
 						{notificationCount > 0 && (
-							<NotificationBadge count={notificationCount} />
+							<NotificationBadge
+								cssOverrides={
+									dropdownButtonNotificationBadgeStyles
+								}
+								diameter={18}
+							/>
 						)}
 					</button>
 					<div css={isExpanded ? displayBlock : displayNone}>
@@ -358,12 +360,7 @@ export const Dropdown = ({
 								data-cy="dropdown-options"
 							>
 								{links.map((l, index) => (
-									<li
-										css={css`
-											position: relative;
-										`}
-										key={l.title}
-									>
+									<li css={liStyles} key={l.title}>
 										<a
 											href={l.url}
 											css={[
@@ -377,7 +374,9 @@ export const Dropdown = ({
 											{l.notifications?.map(
 												(notification) => (
 													<div
-														css={notificationStyles}
+														css={
+															notificationTextStyles
+														}
 													>
 														{notification}
 													</div>
@@ -386,7 +385,7 @@ export const Dropdown = ({
 										</a>
 
 										{!!l.notifications?.length && (
-											<RedDot />
+											<NotificationBadge diameter={22} />
 										)}
 									</li>
 								))}
