@@ -1,5 +1,5 @@
+import type { EditionId } from '../web/lib/edition';
 import type { Branding } from './branding';
-import type { EditionId } from './edition';
 
 export interface EditionCommercialProperties {
 	adTargeting: AdTargetParam[];

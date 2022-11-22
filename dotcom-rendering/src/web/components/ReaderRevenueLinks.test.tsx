@@ -1,5 +1,5 @@
 import { render, waitFor } from '@testing-library/react';
-import type { EditionId } from '../../types/edition';
+import type { EditionId } from '../lib/edition';
 import { shouldHideSupportMessaging as shouldHideSupportMessaging_ } from '../lib/contributions';
 import { ReaderRevenueLinks } from './ReaderRevenueLinks.importable';
 
