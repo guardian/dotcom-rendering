@@ -654,31 +654,40 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.WitnessBlockElement': {
 			const witnessType = element.witnessTypeData._type;
 			switch (witnessType) {
-				case 'model.dotcomrendering.pageElements.WitnessTypeDataImage':
-					const witnessTypeDataImage = element.witnessTypeData;
+				case 'model.dotcomrendering.pageElements.WitnessTypeDataImage': {
+					const { caption, title, authorName, dateCreated, alt } =
+						element.witnessTypeData;
 					return (
 						<WitnessImageBlockComponent
 							assets={element.assets}
-							caption={witnessTypeDataImage.caption}
-							title={witnessTypeDataImage.title}
-							authorName={witnessTypeDataImage.authorName}
-							dateCreated={witnessTypeDataImage.dateCreated}
-							alt={witnessTypeDataImage.alt}
+							caption={caption}
+							title={title}
+							authorName={authorName}
+							dateCreated={dateCreated}
+							alt={alt}
 							palette={palette}
 						/>
 					);
-				case 'model.dotcomrendering.pageElements.WitnessTypeDataVideo':
-					const witnessTypeDataVideo = element.witnessTypeData;
+				}
+				case 'model.dotcomrendering.pageElements.WitnessTypeDataVideo': {
+					const {
+						title,
+						description,
+						authorName,
+						youtubeHtml,
+						dateCreated,
+					} = element.witnessTypeData;
 					return (
 						<WitnessVideoBlockComponent
-							title={witnessTypeDataVideo.title}
-							description={witnessTypeDataVideo.description}
-							authorName={witnessTypeDataVideo.authorName}
-							youtubeHtml={witnessTypeDataVideo.youtubeHtml}
-							dateCreated={witnessTypeDataVideo.dateCreated}
+							title={title}
+							description={description}
+							authorName={authorName}
+							youtubeHtml={youtubeHtml}
+							dateCreated={dateCreated}
 							palette={palette}
 						/>
 					);
+				}
 				case 'model.dotcomrendering.pageElements.WitnessTypeDataText': {
 					const witnessTypeDataText = element.witnessTypeData;
 					return (
