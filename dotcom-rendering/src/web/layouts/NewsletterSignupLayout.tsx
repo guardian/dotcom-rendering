@@ -160,7 +160,13 @@ const shareSpanStyle = css`
 const shareDivStyle = css`
 	display: flex;
 	align-items: center;
-	margin-top: ${space[3]}px;
+	margin-top: ${space[4]}px;
+	margin-bottom: ${space[4]}px;
+`;
+
+const frequencyDivStyle = css`
+	margin-top: ${space[2]}px;
+	margin-bottom: ${space[2]}px;
 `;
 
 const getMainMediaCaptions = (
@@ -402,30 +408,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</LinkButton>
 								</div>
 							)}
-							{!!promotedNewsletter && (
-								<>
-									<SecureSignup
-										name={promotedNewsletter.name}
-										newsletterId={
-											promotedNewsletter.identityName
-										}
-										successDescription={
-											promotedNewsletter.successDescription
-										}
-										hidePrivacyMessage={true}
-									/>
 
-									<NewsletterFrequency
-										frequency={promotedNewsletter.frequency}
-									/>
-
-									<Hide from="desktop">
-										<div css={topMarginStyle()}>
-											<NewsletterPrivacyMessage />
-										</div>
-									</Hide>
-								</>
-							)}
 							<div css={shareDivStyle}>
 								<span css={shareSpanStyle}>
 									Tell your friends
@@ -443,6 +426,33 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									context="ArticleMeta"
 								/>
 							</div>
+
+							{!!promotedNewsletter && (
+								<>
+									<div css={frequencyDivStyle}>
+										<NewsletterFrequency
+											frequency={
+												promotedNewsletter.frequency
+											}
+										/>
+									</div>
+
+									<SecureSignup
+										name={promotedNewsletter.name}
+										newsletterId={
+											promotedNewsletter.identityName
+										}
+										successDescription={
+											promotedNewsletter.successDescription
+										}
+										hidePrivacyMessage={true}
+									/>
+
+									<Hide from="desktop">
+										<NewsletterPrivacyMessage />
+									</Hide>
+								</>
+							)}
 						</Column>
 
 						<Column width={[1, 1, 3 / 8, 1 / 2, 1 / 2]}>
