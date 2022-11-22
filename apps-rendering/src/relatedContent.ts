@@ -1,17 +1,10 @@
 import type { Image } from '@guardian/apps-rendering-api-models/image';
 import type { NewRelatedContent } from '@guardian/apps-rendering-api-models/newRelatedContent';
-import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import { fromNullable, none, OptionKind, some } from '@guardian/types';
-import {
-	articleContributors,
-	articleMainImage,
-	isAnalysis,
-	isFeature,
-	maybeCapiDate,
-} from 'capi';
+import { articleMainImage, isAnalysis, isFeature, maybeCapiDate } from 'capi';
 import type { Contributor } from 'contributor';
 import { parseContributors } from 'contributor';
 import {
@@ -24,7 +17,7 @@ import {
 	isReview,
 	isVideo,
 } from 'item';
-import { compose, index, pipe } from 'lib';
+import { index, pipe } from 'lib';
 import { Optional } from 'optional';
 
 interface RelatedItemFields {
@@ -103,32 +96,8 @@ type RelatedItem =
 	| AudioRelatedItem
 	| VideoRelatedItem
 	| GalleryRelatedItem
-	| StandardRelatedItem;
-
-const parseRelatedItemType = (content: Content): RelatedItemType => {
-	const { tags } = content;
-	if (isFeature(content)) {
-		return RelatedItemType.FEATURE;
-	} else if (isLive(tags) && content.fields?.liveBloggingNow) {
-		return RelatedItemType.LIVE;
-	} else if (isReview(tags)) {
-		return RelatedItemType.REVIEW;
-	} else if (isAnalysis(content)) {
-		return RelatedItemType.ANALYSIS;
-	} else if (isComment(tags) || isLetter(tags)) {
-		return RelatedItemType.COMMENT;
-	} else if (isAudio(tags)) {
-		return RelatedItemType.AUDIO;
-	} else if (isVideo(tags)) {
-		return RelatedItemType.VIDEO;
-	} else if (isGallery(tags)) {
-		return RelatedItemType.GALLERY;
-	} else if (isLabs(tags)) {
-		return RelatedItemType.ADVERTISEMENT_FEATURE;
-	} else {
-		return RelatedItemType.ARTICLE;
-	}
-};
+	| StandardRelatedItem
+	| LabsRelatedItem;
 
 const parseHeaderImage = (content: Content): Image | undefined => {
 	const optionalImage = articleMainImage(content).flatMap((element) => {
@@ -151,9 +120,7 @@ const parseHeaderImage = (content: Content): Image | undefined => {
 	}
 };
 
-const getContributor = compose(index(0), articleContributors);
-
-type Foo = {
+type RelatedContent = {
 	title: string;
 	relatedItems: RelatedItem[];
 };
@@ -170,7 +137,7 @@ const relatedContentFields = (content: Content): RelatedItemFieldsNoDesign => ({
 
 const parseMapiRelatedContent = (
 	maybeRelatedContent: Option<NewRelatedContent>,
-): Option<Foo> => {
+): Option<RelatedContent> => {
 	if (maybeRelatedContent.kind === OptionKind.None) {
 		return none;
 	}
@@ -246,4 +213,4 @@ const parseRelatedContent = (relatedContent: Content[]): NewRelatedContent => {
 };
 
 export { parseRelatedContent, parseHeaderImage, parseMapiRelatedContent };
-export type { Foo };
+export type { RelatedContent };

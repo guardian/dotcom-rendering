@@ -3,7 +3,6 @@
 import type { Branding } from '@guardian/apps-rendering-api-models/branding';
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
-import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Asset } from '@guardian/content-api-models/v1/asset';
 import { AssetType } from '@guardian/content-api-models/v1/assetType';
@@ -38,7 +37,6 @@ import type { Contributor } from 'contributor';
 import { parseContributors } from 'contributor';
 import type { MatchScores } from 'football';
 import { parseMatchScores } from 'football';
-import type { Image } from 'image';
 import { pipe } from 'lib';
 import type { LiveBlock } from 'liveBlock';
 import { parseMany as parseLiveBlocks } from 'liveBlock';
@@ -49,7 +47,7 @@ import { fromBodyElements } from 'outline';
 import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
-import type { Foo } from 'relatedContent';
+import type { RelatedContent } from 'relatedContent';
 import { parseMapiRelatedContent } from 'relatedContent';
 import { Result } from 'result';
 
@@ -70,7 +68,7 @@ interface Fields extends ArticleFormat {
 	branding: Option<Branding>;
 	internalShortId: Option<string>;
 	commentCount: Option<number>;
-	relatedContent: Option<Foo>;
+	relatedContent: Option<RelatedContent>;
 	logo: Option<Logo>;
 	webUrl: string;
 	edition: Edition;
@@ -81,10 +79,6 @@ interface MatchReport extends Fields {
 	design: ArticleDesign.MatchReport;
 	body: Body;
 	football: Optional<MatchScores>;
-}
-
-interface ResizedRelatedContent extends RelatedContent {
-	resizedImages: Array<Option<Image>>;
 }
 
 interface LiveBlog extends Fields {
@@ -566,7 +560,6 @@ export {
 	Review,
 	Standard,
 	MatchReport,
-	ResizedRelatedContent,
 	Letter,
 	Editorial,
 	Interview,
