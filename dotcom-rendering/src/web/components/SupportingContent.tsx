@@ -15,7 +15,7 @@ type Props = {
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: true;
-	parentFormat: ArticleFormat;
+	parentFormat?: ArticleFormat;
 };
 
 const wrapperStyles = css`
