@@ -418,6 +418,12 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									<NewsletterFrequency
 										frequency={promotedNewsletter.frequency}
 									/>
+
+									<Hide from="desktop">
+										<div css={topMarginStyle()}>
+											<NewsletterPrivacyMessage />
+										</div>
+									</Hide>
 								</>
 							)}
 							<div css={shareDivStyle}>
@@ -473,9 +479,11 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</Column>
 					</Columns>
 
-					<div css={topMarginStyle()}>
-						<NewsletterPrivacyMessage />
-					</div>
+					<Hide until="desktop">
+						<div css={topMarginStyle()}>
+							<NewsletterPrivacyMessage />
+						</div>
+					</Hide>
 				</Section>
 
 				{CAPIArticle.onwards ? (
