@@ -42,6 +42,7 @@ Sentry.init({
 	environment: stage || 'DEV',
 	integrations: [new CaptureConsole({ levels: ['error'] })],
 	maxBreadcrumbs: 50,
+	release: `dotcom-rendering@${process.env.GIT_COMMIT_HASH}`,
 	// sampleRate: // We use Math.random in init.ts to sample errors
 });
 

@@ -8,6 +8,10 @@ const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const { merge } = require('webpack-merge');
 const WebpackMessages = require('webpack-messages');
 const { BUILD_VARIANT } = require('./bundles');
+const commitHash = require('child_process')
+	.execSync('git rev-parse HEAD')
+	.toString()
+	.trim();
 
 const PROD = process.env.NODE_ENV === 'production';
 const DEV = process.env.NODE_ENV === 'development';
@@ -46,6 +50,7 @@ const commonConfigs = ({ platform }) => ({
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 			'process.env.HOSTNAME': JSON.stringify(process.env.HOSTNAME),
+			'process.env.GIT_COMMIT_HASH': commitHash,
 		}),
 		// @ts-expect-error -- somehow the type declaration isn’t playing nice
 		new FilterWarningsPlugin({
