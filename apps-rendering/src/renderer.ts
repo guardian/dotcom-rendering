@@ -321,10 +321,10 @@ const borderFromFormat = (format: ArticleFormat): string => {
 };
 
 const calloutDescriptionTextElement =
-	(format: ArticleFormat) =>
+	(format: ArticleFormat, isInteractive: boolean) =>
 	(node: Node, key: number): ReactNode => {
 		const children = Array.from(node.childNodes).map(
-			standfirstTextElement(format),
+			calloutDescriptionTextElement(format, isInteractive),
 		);
 		switch (node.nodeName) {
 			case 'P':
@@ -340,7 +340,8 @@ const calloutDescriptionTextElement =
 				const href = url.startsWith('profile/')
 					? `https://www.theguardian.com/${url}`
 					: url;
-				return styledH('a', { key, href }, children);
+				const tabIndex = isInteractive ? 0 : -1;
+				return styledH('a', { key, href, tabIndex }, children);
 			}
 			default:
 				return textElement(format)(node, key);
@@ -413,13 +414,16 @@ const standfirstText = (
 
 const calloutDescriptionText = (
 	doc: DocumentFragment,
+	isInteractive: boolean,
 	format: ArticleFormat,
 ): ReactNode[] => {
 	const nodes = Array.from(doc.childNodes);
 	const filteredNodes = nodes.filter(
 		(node) => !['A'].includes(node.nodeName),
 	);
-	return filteredNodes.map(calloutDescriptionTextElement(format));
+	return filteredNodes.map(
+		calloutDescriptionTextElement(format, isInteractive),
+	);
 };
 
 const Tweet = (props: {

@@ -14,7 +14,7 @@ const mockCampaign = {
 		formId: 4711223,
 		tagName: 'callout-ghost-flights',
 		description:
-			'<p>If you have been affected or have any information, we\'d like to hear from you. You can get in touch by filling in the form below or by contacting us&nbsp;<a href="https://www.theguardian.com/info/2015/aug/12/whatsapp-sharing-stories-with-the-guardian">via WhatsApp</a>&nbsp;by&nbsp;<a href="https://api.whatsapp.com/send?phone=447766780300">clicking here&nbsp;</a>or\n adding the contact +44(0)7766780300. Only the Guardian can see your \ncontributions and one of our journalists may contact you to discuss \nfurther.&nbsp;<em>If you’re having trouble using the form, click&nbsp;<a href="https://guardiannewsandmedia.formstack.com/forms/facebook_whatsapp_and_instagram_outage">here</a>.<br></em></p>',
+			'<p>If you have been affected or have any information, we\'d like to hear from you. You can get in touch by filling in the form below or by contacting us&nbsp;<a href="https://www.theguardian.com/info/2015/aug/12/whatsapp-sharing-stories-with-the-guardian">via WhatsApp</a>&nbsp;by&nbsp;<a href="https://api.whatsapp.com/send?phone=447766780300">clicking here&nbsp;</a>or\n adding the contact +44(0)7766780300. Only the Guardian can see your \ncontributions and one of our journalists may contact you to discuss \nfurther.&nbsp;If you’re having trouble using the form, click&nbsp;<a href="https://guardiannewsandmedia.formstack.com/forms/facebook_whatsapp_and_instagram_outage">here</a>.<br></p>',
 		formFields: [
 			{
 				mandatory: true,
