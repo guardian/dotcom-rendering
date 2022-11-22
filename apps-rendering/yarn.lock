@@ -1497,6 +1497,8 @@
 
 "@guardian/common-rendering@file:../common-rendering":
   version "1.0.0"
+  dependencies:
+    "@guardian/types" "^9.0.1"
 
 "@guardian/content-api-models@^17.4.0":
   version "17.4.0"
