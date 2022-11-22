@@ -3,7 +3,7 @@ import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import type { FC, ReactElement } from 'react';
-import Callout from './callout';
+import CalloutBlock from './calloutBlock';
 import DeadlineDate from './deadlineDate';
 import ExpandingWrapper from './expandingWrapper';
 import { getTheme } from './theme';
@@ -15,7 +15,7 @@ export interface CalloutProps {
 	isNonCollapsable?: boolean;
 }
 
-const CalloutForm: FC<CalloutProps> = ({
+const Callout: FC<CalloutProps> = ({
 	campaign,
 	format,
 	description,
@@ -25,7 +25,7 @@ const CalloutForm: FC<CalloutProps> = ({
 		<aside>
 			{isNonCollapsable ? (
 				<ThemeProvider theme={getTheme(format)}>
-					<Callout
+					<CalloutBlock
 						format={format}
 						campaign={campaign}
 						description={description}
@@ -41,7 +41,7 @@ const CalloutForm: FC<CalloutProps> = ({
 						)}
 						name={`${campaign.name} form`}
 					>
-						<Callout
+						<CalloutBlock
 							format={format}
 							campaign={campaign}
 							description={description}
@@ -53,4 +53,4 @@ const CalloutForm: FC<CalloutProps> = ({
 	);
 };
 
-export default CalloutForm;
+export default Callout;

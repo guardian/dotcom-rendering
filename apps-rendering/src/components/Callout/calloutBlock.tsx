@@ -7,9 +7,9 @@ import type { Option } from '@guardian/types';
 import { maybeRender } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { renderCalloutDescriptionText } from 'renderer';
-import CalloutForm from './form';
+import CalloutForm from './calloutForm';
 
-export interface CalloutProps {
+export interface CalloutBlockProps {
 	campaign: Campaign;
 	format: ArticleFormat;
 	description: Option<DocumentFragment>;
@@ -76,7 +76,7 @@ const descriptionStyles = css`
 	padding: ${remSpace[3]} 0;
 `;
 
-const Callout: FC<CalloutProps> = ({
+const CalloutBlock: FC<CalloutBlockProps> = ({
 	campaign,
 	format,
 	description,
@@ -115,4 +115,4 @@ const Callout: FC<CalloutProps> = ({
 	);
 };
 
-export default Callout;
+export default CalloutBlock;

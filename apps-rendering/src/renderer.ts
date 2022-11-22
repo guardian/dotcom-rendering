@@ -46,7 +46,7 @@ import Quiz from 'components/atoms/quiz';
 import Blockquote from 'components/Blockquote';
 import BodyImage from 'components/BodyImage';
 import Bullet from 'components/Bullet';
-import CalloutForm from 'components/CalloutForm';
+import Callout from 'components/Callout';
 import Caption from 'components/caption';
 import Credit from 'components/Credit';
 import GalleryImage from 'components/editions/galleryImage';
@@ -687,7 +687,7 @@ const render =
 
 			case ElementKind.Callout: {
 				const { campaign, description } = element;
-				return h(CalloutForm, { campaign, format, description });
+				return h(Callout, { campaign, format, description });
 			}
 
 			case ElementKind.Embed:
