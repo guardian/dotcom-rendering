@@ -110,4 +110,3 @@ const calloutDarkTheme = (format: ArticleFormat) => ({
 
 export const getTheme = (format: ArticleFormat) =>
 	getPrefersDark() ? calloutDarkTheme(format) : calloutLightTheme(format);
-

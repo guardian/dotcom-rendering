@@ -13,7 +13,7 @@ import type { FC } from 'react';
 import { ContactText, Disclaimer, renderField } from './formFields';
 import { ShareLink } from './shareLink';
 
-export interface CalloutProps {
+export interface CalloutFormProps {
 	campaign: Campaign;
 	format: ArticleFormat;
 	description?: DocumentFragment;
@@ -60,14 +60,10 @@ const buttonStyles = (theme: any): SerializedStyles => css`
 	}
 `;
 
-const Form: FC<CalloutProps> = ({ campaign, format }) => {
+const CalloutForm: FC<CalloutFormProps> = ({ campaign, format }) => {
 	return (
 		<div className="js-callout" css={formStyles}>
-			<form
-				css={formStyles}
-				action="#"
-				method="post"
-			>
+			<form css={formStyles} action="#" method="post">
 				<ShareLink />
 				<Disclaimer />
 				<input
@@ -77,8 +73,8 @@ const Form: FC<CalloutProps> = ({ campaign, format }) => {
 				/>
 				<div className="js-callout__inputs">
 					<>
-					{campaign.fields.formFields.map((field) =>
-						renderField(field, format),
+						{campaign.fields.formFields.map((field) =>
+							renderField(field, format),
 						)}
 					</>
 					<div>
@@ -110,4 +106,4 @@ const Form: FC<CalloutProps> = ({ campaign, format }) => {
 	);
 };
 
-export default Form;
+export default CalloutForm;

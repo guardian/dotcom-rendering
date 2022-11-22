@@ -47,7 +47,7 @@ import Quiz from 'components/atoms/quiz';
 import Blockquote from 'components/Blockquote';
 import BodyImage from 'components/BodyImage';
 import Bullet from 'components/Bullet';
-import CalloutForm from 'components/CalloutForm';
+import Callout from 'components/Callout';
 import Caption from 'components/caption';
 import Credit from 'components/Credit';
 import GalleryImage from 'components/editions/galleryImage';
@@ -687,7 +687,7 @@ const renderElement =
 				return h(Tweet, { content: element.content, format, key });
 
 			case ElementKind.Callout:
-				return h(CalloutForm, { format, ...element });
+				return h(Callout, { format, ...element });
 
 			case ElementKind.Embed:
 				return h(EmbedComponentWrapper, {
