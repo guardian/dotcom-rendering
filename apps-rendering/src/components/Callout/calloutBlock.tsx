@@ -7,9 +7,9 @@ import type { Option } from '@guardian/types';
 import { maybeRender } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { renderCalloutDescriptionText } from 'renderer';
-import CalloutForm from './form';
+import CalloutForm from './calloutForm';
 
-export interface CalloutProps {
+export interface CalloutBlockProps {
 	campaign: Campaign;
 	format: ArticleFormat;
 	description: Option<DocumentFragment>;
@@ -76,7 +76,7 @@ const descriptionStyles = css`
 	padding: ${remSpace[3]} 0;
 `;
 
-const Callout: FC<CalloutProps> = ({
+const CalloutBlock: FC<CalloutBlockProps> = ({
 	campaign,
 	format,
 	description,
@@ -85,7 +85,7 @@ const Callout: FC<CalloutProps> = ({
 	const { callout } = fields;
 
 	return (
-		<div css={(theme) => containerStyles(theme)}>
+		<div css={containerStyles}>
 			<details css={calloutDetailsStyles} open={true}>
 				<summary css={summaryStyles}>
 					<div css={summaryContentWrapper}>
@@ -96,9 +96,9 @@ const Callout: FC<CalloutProps> = ({
 							(description: DocumentFragment) => (
 								<div css={descriptionStyles}>
 									<>
-									{renderCalloutDescriptionText(
-										description,
-										format,
+										{renderCalloutDescriptionText(
+											description,
+											format,
 										)}
 									</>
 								</div>
@@ -106,13 +106,10 @@ const Callout: FC<CalloutProps> = ({
 						)}
 					</div>
 				</summary>
-				<CalloutForm
-					campaign={campaign}
-					format={format}
-				/>
+				<CalloutForm campaign={campaign} format={format} />
 			</details>
 		</div>
 	);
 };
 
-export default Callout;
+export default CalloutBlock;

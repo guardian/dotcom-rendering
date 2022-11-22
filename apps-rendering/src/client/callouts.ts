@@ -1,4 +1,4 @@
-type FormData = Record<string, string>;
+type FormData = Record<string, string | string[]>;
 
 function readFile(file: Blob): Promise<string> {
 	return new Promise((resolve, reject) => {
@@ -22,19 +22,30 @@ function readFile(file: Blob): Promise<string> {
 	});
 }
 
-// TODO: types
-const getValueFromElement = async (element: any, acc: any) => {
-	const { type, checked, name, value, files } = element;
+type FormElementType =
+	| HTMLInputElement
+	| HTMLTextAreaElement
+	| HTMLSelectElement;
+const getValueFromElement = async (
+	element: FormElementType,
+	acc: FormData,
+): Promise<FormData> => {
+	const { type, name, value } = element;
 	if (type === 'radio') {
-		if (checked) {
+		const radioElement = element as HTMLInputElement;
+		if (radioElement.checked) {
 			acc[name] = value;
 		}
-	} else if (type === 'checkbox') {
-		if (checked) {
-			acc[name] ? acc[name].push(value) : (acc[name] = [value]);
+		// TODO: How do we handle checkboxes in formstack?
+		// } else if (type === 'checkbox') {
+		// 	if (checked) {
+		// 		acc[name] ? acc[name].push(value) : (acc[name] = [value]);
+		// 	}
+	} else if (type === 'file') {
+		const fileElement = element as HTMLInputElement;
+		if (fileElement.files?.length) {
+			acc[name] = await readFile(fileElement.files[0]);
 		}
-	} else if (type === 'file' && files?.length) {
-		acc[name] = await readFile(files[0]);
 	} else if (value) {
 		acc[name] = value;
 	}
@@ -74,7 +85,7 @@ export async function handleSubmission(): Promise<void> {
 		const data = Array.from(elements).reduce(
 			async (o: Promise<FormData>, elem) => {
 				const acc = await o;
-				getValueFromElement(elem, acc);
+				await getValueFromElement(elem, acc);
 				return Promise.resolve(acc);
 			},
 			Promise.resolve({}),

@@ -21,7 +21,7 @@ const linkStyles = (theme: any): SerializedStyles => css`
 export const ShareLink: FC = () => {
 	const [isCopied, setIsCopied] = useState(false);
 
-	const onShare = () => {
+	const onShare = async () => {
 		const url = window.location.href;
 		if ('share' in navigator) {
 			navigator
@@ -31,7 +31,7 @@ export const ShareLink: FC = () => {
 				})
 				.catch(console.error);
 		} else {
-			navigator.clipboard.writeText(url);
+			await navigator.clipboard.writeText(url);
 			setIsCopied(true);
 			setTimeout(() => setIsCopied(false), 2000);
 		}
