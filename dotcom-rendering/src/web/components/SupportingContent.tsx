@@ -65,27 +65,43 @@ const bottomMargin = css`
 `;
 
 const dynamoLiStyles = css`
-	margin-left: 10px;
-	margin-bottom: 12px;
-	padding-top: 5px;
-	background-color: rgba(237, 237, 237, 0.9);
-	&:first-of-type {
-		margin-left: 0px;
+	${from.phablet} {
+		margin-left: 10px;
+		margin-bottom: 12px;
+		padding-top: 5px;
+		background-color: rgba(237, 237, 237, 0.9);
+		&:first-of-type {
+			margin-left: 0px;
+		}
+		padding: 0.3125rem 0.3125rem 0.625rem;
+		max-width: 33%;
 	}
-	padding: 0.3125rem 0.3125rem 0.625rem;
 `;
 
 const dynamoWrapperStyles = css`
-	display: flex;
-	position: absolute;
-	justify-content: space-between;
-	bottom: 0;
-	right: 0;
-	margin-left: 5px;
-	margin-right: 5px;
-	flex-direction: column;
 	${from.phablet} {
+		display: flex;
+		position: absolute;
+		justify-content: space-between;
+		bottom: 0;
+		right: 0;
+		margin-left: 5px;
+		margin-right: 5px;
 		flex-direction: row;
+	}
+`;
+
+const dynamoLiStylesMobile = css`
+	${until.phablet} {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		padding-top: 2px;
+		position: relative;
+		&:first-of-type {
+			margin-top: 0px;
+		}
+		margin-top: 8px;
 	}
 `;
 
@@ -97,12 +113,22 @@ export const SupportingContent = ({
 }: Props) => {
 	return isDynamo ? (
 		<ul css={[dynamoWrapperStyles]}>
-			{supportingContent.map((subLink: DCRSupportingContent) => {
+			{supportingContent.map((subLink: DCRSupportingContent, index) => {
 				// The model has this property as optional but it is very likely
 				// to exist
 				if (!subLink.headline) return null;
+				const shouldPadLeft = index > 0 && alignment === 'horizontal';
 				return (
-					<li key={subLink.url} css={[dynamoLiStyles]}>
+					<li
+						key={subLink.url}
+						css={[
+							dynamoLiStyles,
+							dynamoLiStylesMobile,
+							shouldPadLeft && leftMargin,
+							index === supportingContent.length - 1 &&
+								bottomMargin,
+						]}
+					>
 						<CardHeadline
 							format={subLink.format}
 							size="tiny"
