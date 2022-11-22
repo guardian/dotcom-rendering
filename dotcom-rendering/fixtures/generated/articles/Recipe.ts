@@ -11,9 +11,9 @@
  *    gen-fixtures.ts directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { CAPIArticleType } from '../../../src/types/frontend';
 
-export const Recipe: FEArticleType = {
+export const Recipe: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="e5a2cb2a63b788eae68ff654f739eff53a0cee28"> <img src="https://media.guim.co.uk/e5a2cb2a63b788eae68ff654f739eff53a0cee28/0_0_3731_4384/851.jpg" alt="Meera Sodha’s spring onion pancakes with sesame sauce" width="851" height="1000" class="gu-image" /> <figcaption> <span class="element-image__caption">Meera Sodha’s spring onion pancakes with sesame sauce.</span> <span class="element-image__credit">Photograph: Louise Hagger/The Guardian. Food styling: Emily Kydd. Prop styling: Jennifer Kay. Food assistant: Susanna Unsworth.</span> </figcaption> </figure>',
 	subMetaSectionLinks: [

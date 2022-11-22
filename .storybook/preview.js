@@ -24,16 +24,15 @@ if (isChromatic()) {
 
 mockRESTCalls();
 
-setABTests({
-	api: new AB({
+setABTests(
+	new AB({
 		mvtMaxValue: 1_000_000,
 		mvtId: 1234,
 		pageIsSensitive: false,
 		abTestSwitches: {},
 		arrayOfTestObjects: [],
 	}),
-	participations: {},
-});
+);
 
 // Add base css for the site
 let css = `${getFontsCss()}${resets.resetCSS}`;

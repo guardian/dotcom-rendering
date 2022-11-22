@@ -1,6 +1,11 @@
 import type { OphanComponent, OphanComponentEvent } from '@guardian/libs';
 import type { CurrentSignInGateABTest } from './types';
 
+type ABTestVariant = {
+	name: string;
+	variant: string;
+};
+
 const isServer = typeof window === 'undefined';
 
 export type ComponentEventParams = {
@@ -13,6 +18,13 @@ export type ComponentEventParams = {
 	visitId?: string;
 };
 
+type ComponentEventWithoutAction = {
+	component: OphanComponent;
+	value?: string;
+	id?: string;
+	abTest?: ABTestVariant;
+};
+
 const ophan = isServer ? undefined : window.guardian.ophan;
 
 // ophan helper methods
@@ -21,7 +33,7 @@ const submitComponentEventTracking = (componentEvent: OphanComponentEvent) => {
 };
 
 export const submitViewEventTracking = (
-	componentEvent: Omit<OphanComponentEvent, 'action'>,
+	componentEvent: ComponentEventWithoutAction,
 ) =>
 	submitComponentEventTracking({
 		...componentEvent,
@@ -29,7 +41,7 @@ export const submitViewEventTracking = (
 	});
 
 const submitClickEventTracking = (
-	componentEvent: Omit<OphanComponentEvent, 'action'>,
+	componentEvent: ComponentEventWithoutAction,
 ) =>
 	submitComponentEventTracking({
 		...componentEvent,

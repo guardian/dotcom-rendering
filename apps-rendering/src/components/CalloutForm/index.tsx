@@ -8,7 +8,6 @@ import DeadlineDate from './deadlineDate';
 import ExpandingWrapper from './expandingWrapper';
 import { getTheme } from './theme';
 
-
 export interface CalloutProps {
 	campaign: Campaign;
 	format: ArticleFormat;

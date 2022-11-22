@@ -1,6 +1,5 @@
 import type { Switches } from 'src/types/config';
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
-import type { TagType } from '../../types/tag';
 import { enhance } from '../lib/enhance';
 import { AudioAtomBlockComponent } from './elements/AudioAtomBlockComponent';
 import { CommentBlockComponent } from './elements/CommentBlockComponent';

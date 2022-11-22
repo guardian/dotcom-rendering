@@ -19,7 +19,7 @@ import type {
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import ArrowRightIcon from '../../static/icons/arrow-right.svg';
-import type { EditionId } from '../lib/edition';
+import type { EditionId } from '../../types/edition';
 import type { OphanRecordFunction } from '../browser/ophan/ophan';
 import {
 	getOphanRecordFunction,
@@ -331,15 +331,6 @@ const ReaderRevenueLinksNative: React.FC<{
 			Subscribe <ArrowRightIcon />
 		</a>
 	);
-	const SupportButton = () => (
-		<a
-			css={linkStyles}
-			href={getUrl('contribute')}
-			data-link-name={`${dataLinkNamePrefix}subscribe-cta`}
-		>
-			Support us <ArrowRightIcon />
-		</a>
-	);
 	const PrimaryButton =
 		editionId === 'UK' ? SubscribeButton : ContributeButton;
 	const SecondaryButton =
@@ -354,15 +345,8 @@ const ReaderRevenueLinksNative: React.FC<{
 				<div css={subMessageStyles}>
 					<div>Available for everyone, funded by readers</div>
 				</div>
-				{/* When in the header, we can assume a remote header is being pulled in */}
-				{inHeader ? (
-					<>
-						<PrimaryButton />
-						<SecondaryButton />
-					</>
-				) : (
-					<SupportButton />
-				)}
+				<PrimaryButton />
+				<SecondaryButton />
 			</div>
 
 			<div css={inHeader ? hiddenFromTablet : hidden}>

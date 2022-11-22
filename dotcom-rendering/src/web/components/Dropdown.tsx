@@ -1,4 +1,3 @@
-import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import {
 	border,
@@ -31,7 +30,7 @@ interface Props {
 	label: string;
 	links: DropdownLinkType[];
 	dataLinkName: string;
-	cssOverrides?: SerializedStyles;
+	overrideColor?: string;
 	children?: React.ReactNode;
 }
 
@@ -63,7 +62,7 @@ const ulStyles = css`
 
 	${from.tablet} {
 		position: absolute;
-		top: 100%;
+		right: 0;
 		width: 200px;
 		border-radius: 3px;
 	}
@@ -130,7 +129,7 @@ const linkFirst = css`
 	}
 `;
 
-const buttonStyles = css`
+const buttonStyles = (overrideColor?: string) => css`
 	${textSans.medium()};
 	display: block;
 	cursor: pointer;
@@ -138,7 +137,7 @@ const buttonStyles = css`
 	border: none;
 	/* Design System: The buttons should be components that handle their own layout using primitives  */
 	line-height: 1.2;
-	color: ${brandText.primary};
+	color: ${overrideColor || brandText.primary};
 	transition: color 80ms ease-out;
 	padding: 0px 10px 6px 5px;
 	margin: 1px 0 0;
@@ -234,7 +233,7 @@ export const Dropdown = ({
 	label,
 	links,
 	dataLinkName,
-	cssOverrides,
+	overrideColor,
 	children,
 }: Props) => {
 	const [isExpanded, setIsExpanded] = useState(false);
@@ -302,7 +301,7 @@ export const Dropdown = ({
 				>
 					<label
 						htmlFor={checkboxID}
-						css={[buttonStyles, cssOverrides]}
+						css={buttonStyles(overrideColor)}
 					>
 						{label}
 					</label>
@@ -312,7 +311,7 @@ export const Dropdown = ({
 						aria-checked="false"
 						tabIndex={-1}
 					/>
-					<ul id={dropdownID} css={[ulStyles, cssOverrides]}>
+					<ul id={dropdownID} css={ulStyles}>
 						{links.map((l, index) => (
 							<li key={l.title}>
 								<a
@@ -335,8 +334,7 @@ export const Dropdown = ({
 					<button
 						onClick={handleToggle}
 						css={[
-							buttonStyles,
-							cssOverrides,
+							buttonStyles(overrideColor),
 							isExpanded && buttonExpanded,
 						]}
 						aria-expanded={isExpanded ? 'true' : 'false'}
@@ -353,10 +351,7 @@ export const Dropdown = ({
 						{children ? (
 							<>{children}</>
 						) : (
-							<ul
-								css={[ulStyles, cssOverrides]}
-								data-cy="dropdown-options"
-							>
+							<ul css={ulStyles} data-cy="dropdown-options">
 								{links.map((l, index) => (
 									<li
 										css={css`

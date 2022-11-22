@@ -9,16 +9,16 @@ import {
 } from '@guardian/source-foundations';
 import { buildAdTargeting } from '../../../lib/ad-targeting';
 import type { NavType } from '../../../model/extract-nav';
-import type { FEArticleType } from '../../../types/frontend';
+import type { CAPIArticleType } from '../../../types/frontend';
 import type { Palette } from '../../../types/palette';
 import { ArticleHeadline } from '../../components/ArticleHeadline';
 import { ArticleTitle } from '../../components/ArticleTitle';
 import { Caption } from '../../components/Caption';
+import { Section } from '../../components/Section';
 import { Island } from '../../components/Island';
 import { LabsHeader } from '../../components/LabsHeader.importable';
 import { MainMedia } from '../../components/MainMedia';
 import { Nav } from '../../components/Nav/Nav';
-import { Section } from '../../components/Section';
 import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { getCurrentPillar } from '../../lib/layoutHelpers';
@@ -41,7 +41,7 @@ const hasMainMediaStyles = css`
 `;
 
 interface Props {
-	CAPIArticle: FEArticleType;
+	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }
@@ -181,9 +181,6 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 										.subscribe
 								}
 								editionId={CAPIArticle.editionId}
-								headerTopBarSwitch={
-									!!CAPIArticle.config.switches.headerTopNav
-								}
 							/>
 						</Section>
 					</div>

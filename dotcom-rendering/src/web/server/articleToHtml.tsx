@@ -3,11 +3,11 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
+import { isAmpSupported } from '../../amp/components/Elements';
 import {
 	BUILD_VARIANT,
 	dcrJavascriptBundle,
 } from '../../../scripts/webpack/bundles';
-import { isAmpSupported } from '../../amp/components/Elements';
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
@@ -20,8 +20,7 @@ import { escapeData } from '../../lib/escapeData';
 import { extractGA } from '../../model/extract-ga';
 import { extractNAV } from '../../model/extract-nav';
 import { makeWindowGuardian } from '../../model/window-guardian';
-import type { FEArticleType } from '../../types/frontend';
-import type { TagType } from '../../types/tag';
+import type { CAPIArticleType } from '../../types/frontend';
 import { ArticlePage } from '../components/ArticlePage';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
@@ -31,35 +30,35 @@ import { pageTemplate } from './pageTemplate';
 import { recipeSchema } from './temporaryRecipeStructuredData';
 
 interface Props {
-	article: FEArticleType;
+	article: CAPIArticleType;
 }
 
-const decideTitle = (article: FEArticleType): string => {
+const decideTitle = (CAPIArticle: CAPIArticleType): string => {
 	if (
-		decideTheme(article.format) === ArticlePillar.Opinion &&
-		article.byline
+		decideTheme(CAPIArticle.format) === ArticlePillar.Opinion &&
+		CAPIArticle.byline
 	) {
-		return `${article.headline} | ${article.byline} | The Guardian`;
+		return `${CAPIArticle.headline} | ${CAPIArticle.byline} | The Guardian`;
 	}
-	return `${article.headline} | ${article.sectionLabel} | The Guardian`;
+	return `${CAPIArticle.headline} | ${CAPIArticle.sectionLabel} | The Guardian`;
 };
 
-export const articleToHtml = ({ article }: Props): string => {
-	const NAV = extractNAV(article.nav);
-	const title = decideTitle(article);
+export const articleToHtml = ({ article: CAPIArticle }: Props): string => {
+	const NAV = extractNAV(CAPIArticle.nav);
+	const title = decideTitle(CAPIArticle);
 	const key = 'dcr';
 	const cache = createCache({ key });
-	const linkedData = article.linkedData;
+	const linkedData = CAPIArticle.linkedData;
 
 	// eslint-disable-next-line @typescript-eslint/unbound-method
 	const { extractCriticalToChunks, constructStyleTagsFromChunks } =
 		createEmotionServer(cache);
 
-	const format: ArticleFormat = decideFormat(article.format);
+	const format: ArticleFormat = decideFormat(CAPIArticle.format);
 
 	const html = renderToString(
 		<CacheProvider value={cache}>
-			<ArticlePage format={format} CAPIArticle={article} NAV={NAV} />
+			<ArticlePage format={format} CAPIArticle={CAPIArticle} NAV={NAV} />
 		</CacheProvider>,
 	);
 
@@ -71,13 +70,13 @@ export const articleToHtml = ({ article }: Props): string => {
 
 	// We want to only insert script tags for the elements or main media elements on this page view
 	// so we need to check what elements we have and use the mapping to the the chunk name
-	const CAPIElements: CAPIElement[] = article.blocks
+	const CAPIElements: CAPIElement[] = CAPIArticle.blocks
 		.map((block) => block.elements)
 		.flat();
 
 	// Evaluating the performance of HTTP3 over HTTP2
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
-	const { offerHttp3 = false } = article.config.switches;
+	const { offerHttp3 = false } = CAPIArticle.config.switches;
 
 	const polyfillIO =
 		'https://assets.guim.co.uk/polyfill.io/v3/polyfill.min.js?rum=0&features=es6,es7,es2017,es2018,es2019,default-3.6,HTMLPictureElement,IntersectionObserver,IntersectionObserverEntry,URLSearchParams,fetch,NodeList.prototype.forEach,navigator.sendBeacon,performance.now,Promise.allSettled&flags=gated&callback=guardianPolyfilled&unknown=polyfill&cacheClear=1';
@@ -98,7 +97,8 @@ export const articleToHtml = ({ article }: Props): string => {
 
 	const shouldServeVariantBundle: boolean = [
 		BUILD_VARIANT,
-		article.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
+		CAPIArticle.config.abTests[dcrJavascriptBundle('Variant')] ===
+			'variant',
 	].every(Boolean);
 
 	/**
@@ -124,7 +124,7 @@ export const articleToHtml = ({ article }: Props): string => {
 			...getScriptArrayFromFile('bootCmp.js'),
 			...getScriptArrayFromFile('ophan.js'),
 			process.env.COMMERCIAL_BUNDLE_URL ??
-				article.config.commercialBundleUrl,
+				CAPIArticle.config.commercialBundleUrl,
 			...getScriptArrayFromFile('sentryLoader.js'),
 			...getScriptArrayFromFile('dynamicImport.js'),
 			pageHasNonBootInteractiveElements &&
@@ -173,34 +173,34 @@ export const articleToHtml = ({ article }: Props): string => {
 	const windowGuardian = escapeData(
 		JSON.stringify(
 			makeWindowGuardian({
-				editionId: article.editionId,
-				stage: article.config.stage,
-				frontendAssetsFullURL: article.config.frontendAssetsFullURL,
-				revisionNumber: article.config.revisionNumber,
-				sentryPublicApiKey: article.config.sentryPublicApiKey,
-				sentryHost: article.config.sentryHost,
-				keywordIds: article.config.keywordIds,
-				dfpAccountId: article.config.dfpAccountId,
-				adUnit: article.config.adUnit,
-				ajaxUrl: article.config.ajaxUrl,
-				googletagUrl: article.config.googletagUrl,
-				switches: article.config.switches,
-				abTests: article.config.abTests,
-				brazeApiKey: article.config.brazeApiKey,
-				isPaidContent: article.pageType.isPaidContent,
-				contentType: article.contentType,
-				shouldHideReaderRevenue: article.shouldHideReaderRevenue,
+				editionId: CAPIArticle.editionId,
+				stage: CAPIArticle.config.stage,
+				frontendAssetsFullURL: CAPIArticle.config.frontendAssetsFullURL,
+				revisionNumber: CAPIArticle.config.revisionNumber,
+				sentryPublicApiKey: CAPIArticle.config.sentryPublicApiKey,
+				sentryHost: CAPIArticle.config.sentryHost,
+				keywordIds: CAPIArticle.config.keywordIds,
+				dfpAccountId: CAPIArticle.config.dfpAccountId,
+				adUnit: CAPIArticle.config.adUnit,
+				ajaxUrl: CAPIArticle.config.ajaxUrl,
+				googletagUrl: CAPIArticle.config.googletagUrl,
+				switches: CAPIArticle.config.switches,
+				abTests: CAPIArticle.config.abTests,
+				brazeApiKey: CAPIArticle.config.brazeApiKey,
+				isPaidContent: CAPIArticle.pageType.isPaidContent,
+				contentType: CAPIArticle.contentType,
+				shouldHideReaderRevenue: CAPIArticle.shouldHideReaderRevenue,
 				GAData: extractGA({
-					webTitle: article.webTitle,
-					format: article.format,
-					sectionName: article.sectionName,
-					contentType: article.contentType,
-					tags: article.tags,
-					pageId: article.pageId,
-					editionId: article.editionId,
-					beaconURL: article.beaconURL,
+					webTitle: CAPIArticle.webTitle,
+					format: CAPIArticle.format,
+					sectionName: CAPIArticle.sectionName,
+					contentType: CAPIArticle.contentType,
+					tags: CAPIArticle.tags,
+					pageId: CAPIArticle.pageId,
+					editionId: CAPIArticle.editionId,
+					beaconURL: CAPIArticle.beaconURL,
 				}),
-				unknownConfig: article.config,
+				unknownConfig: CAPIArticle.config,
 			}),
 		),
 	);
@@ -208,29 +208,29 @@ export const articleToHtml = ({ article }: Props): string => {
 	const getAmpLink = (tags: TagType[]) => {
 		if (
 			!isAmpSupported({
-				format: article.format,
+				format: CAPIArticle.format,
 				tags,
-				elements: article.blocks.flatMap((block) => block.elements),
-				switches: article.config.switches,
-				main: article.main,
+				elements: CAPIArticle.blocks.flatMap((block) => block.elements),
+				switches: CAPIArticle.config.switches,
+				main: CAPIArticle.main,
 			})
 		) {
 			return undefined;
 		}
 
-		return `https://amp.theguardian.com/${article.pageId}`;
+		return `https://amp.theguardian.com/${CAPIArticle.pageId}`;
 	};
 
 	// Only include AMP link for interactives which have the 'ampinteractive' tag
-	const ampLink = getAmpLink(article.tags);
+	const ampLink = getAmpLink(CAPIArticle.tags);
 
-	const { openGraphData } = article;
-	const { twitterData } = article;
+	const { openGraphData } = CAPIArticle;
+	const { twitterData } = CAPIArticle;
 	const keywords =
-		typeof article.config.keywords === 'undefined' ||
-		article.config.keywords === 'Network Front'
+		typeof CAPIArticle.config.keywords === 'undefined' ||
+		CAPIArticle.config.keywords === 'Network Front'
 			? ''
-			: article.config.keywords;
+			: CAPIArticle.config.keywords;
 
 	const initTwitter = `
 <script>
@@ -253,7 +253,7 @@ window.twttr = (function(d, s, id) {
 }(document, "script", "twitter-wjs"));
 </script>`;
 
-	const { webURL, canonicalUrl } = article;
+	const { webURL, canonicalUrl } = CAPIArticle;
 
 	const recipeMarkup =
 		webURL in recipeSchema ? recipeSchema[webURL] : undefined;
@@ -265,7 +265,7 @@ window.twttr = (function(d, s, id) {
 		css: extractedCss,
 		html,
 		title,
-		description: article.trailText,
+		description: CAPIArticle.trailText,
 		windowGuardian,
 		gaPath,
 		ampLink,

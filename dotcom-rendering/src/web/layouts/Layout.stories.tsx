@@ -22,7 +22,7 @@ import { SpecialReport } from '../../../fixtures/generated/articles/SpecialRepor
 import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { Video } from '../../../fixtures/generated/articles/Video';
 import { extractNAV } from '../../model/extract-nav';
-import type { FEArticleType } from '../../types/frontend';
+import type { CAPIArticleType } from '../../types/frontend';
 import { embedIframe } from '../browser/embedIframe/embedIframe';
 import { doStorybookHydration } from '../browser/islands/doStorybookHydration';
 import { decideFormat } from '../lib/decideFormat';
@@ -30,7 +30,7 @@ import { injectPrivacySettingsLink } from '../lib/injectPrivacySettingsLink';
 import { mockRESTCalls } from '../lib/mockRESTCalls';
 import { DecideLayout } from './DecideLayout';
 
-const Fixtures: { [key: string]: FEArticleType } = {
+const Fixtures: { [key: string]: CAPIArticleType } = {
 	Standard,
 	Gallery,
 	Audio,
@@ -58,7 +58,7 @@ const Fixtures: { [key: string]: FEArticleType } = {
 
 mockRESTCalls();
 
-const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: FEArticleType }) => {
+const HydratedLayout = ({ ServerCAPI }: { ServerCAPI: CAPIArticleType }) => {
 	const NAV = extractNAV(ServerCAPI.nav);
 	const format: ArticleFormat = decideFormat(ServerCAPI.format);
 	useEffect(() => {

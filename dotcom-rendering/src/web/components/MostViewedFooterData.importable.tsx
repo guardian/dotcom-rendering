@@ -1,4 +1,4 @@
-import { joinUrl } from '@guardian/libs';
+import { joinUrl } from '../../lib/joinUrl';
 import type {
 	CAPITrailTabType,
 	CAPITrailType,
@@ -22,7 +22,7 @@ function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
 	const hasSection =
 		sectionName && !sectionsWithoutPopular.includes(sectionName);
 	const endpoint = `/most-read${hasSection ? `/${sectionName}` : ''}.json`;
-	return joinUrl(ajaxUrl, `${endpoint}?dcr=true`);
+	return joinUrl([ajaxUrl, `${endpoint}?dcr=true`]);
 }
 
 function transformTabs(tabs: CAPITrailTabType[]): TrailTabType[] {
@@ -46,7 +46,7 @@ export const MostViewedFooterData = ({
 	const palette = decidePalette(format);
 	// Example usage of AB Tests
 	// Used in the Cypress tests as smoke test of the AB tests framework integration
-	const ABTestAPI = useAB()?.api;
+	const ABTestAPI = useAB();
 
 	const abTestCypressDataAttr =
 		(ABTestAPI?.isUserInVariant('AbTestTest', 'control') &&

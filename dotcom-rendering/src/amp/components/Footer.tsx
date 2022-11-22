@@ -164,13 +164,20 @@ const FooterLinks: React.FC<{
 		<div css={footerList}>
 			{linkGroups}
 			<div key="rrblock" css={footerListBlock}>
-				<div css={supportLink}>Support the&nbsp;Guardian</div>
+				<div css={supportLink}>Support The&nbsp;Guardian</div>
 				<ReaderRevenueButton
 					nav={nav}
 					rrLink="ampFooter"
 					rrCategory="contribute"
 					rightAlignIcon={true}
-					linkLabel="Support us"
+					linkLabel="Contribute"
+				/>
+				<ReaderRevenueButton
+					nav={nav}
+					rrLink="ampFooter"
+					rrCategory="subscribe"
+					rightAlignIcon={true}
+					linkLabel="Subscribe"
 				/>
 			</div>
 		</div>

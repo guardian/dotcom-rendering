@@ -10,7 +10,7 @@ import { getSharingUrls } from '../../lib/sharing-urls';
 import type { Switches } from '../../types/config';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
-import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
+import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
 import { ChartAtomWrapper } from '../components/ChartAtomWrapper.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
@@ -175,10 +175,7 @@ export const renderElement = ({
 			return [
 				true,
 				<Island deferUntil="visible">
-					<CalloutEmbedBlockComponent
-						callout={element}
-						format={format}
-					/>
+					<CalloutBlockComponent callout={element} format={format} />
 				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':

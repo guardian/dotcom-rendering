@@ -6,7 +6,6 @@ import * as Environment from '@guardian/bridget/Environment';
 import * as Gallery from '@guardian/bridget/Gallery';
 import * as Metrics from '@guardian/bridget/Metrics';
 import * as Navigation from '@guardian/bridget/Navigation';
-import * as Newsletters from '@guardian/bridget/Newsletters';
 import * as Notifications from '@guardian/bridget/Notifications';
 import * as User from '@guardian/bridget/User';
 import * as Video from '@guardian/bridget/Videos';
@@ -52,10 +51,6 @@ const navigationClient: Navigation.Client<void> = createAppClient<
 	Navigation.Client<void>
 >(Navigation.Client, 'buffered', 'compact');
 
-const newslettersClient: Newsletters.Client<void> = createAppClient<
-	Newsletters.Client<void>
->(Newsletters.Client, 'buffered', 'compact');
-
 export {
 	environmentClient,
 	commercialClient,
@@ -68,5 +63,4 @@ export {
 	discussionClient,
 	analyticsClient,
 	navigationClient,
-	newslettersClient,
 };

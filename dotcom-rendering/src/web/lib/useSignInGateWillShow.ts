@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import type { TagType } from '../../types/tag';
 import type {
 	CurrentSignInGateABTest,
 	SignInGateComponent,

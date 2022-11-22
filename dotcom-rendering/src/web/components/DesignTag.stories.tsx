@@ -44,44 +44,6 @@ export const Interview = () => {
 };
 Interview.story = { name: 'with design Interview' };
 
-export const Explainer = () => {
-	return (
-		<div
-			css={css`
-				max-width: 400px;
-			`}
-		>
-			<DesignTag
-				format={{
-					design: ArticleDesign.Explainer,
-					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
-				}}
-			/>
-		</div>
-	);
-};
-Explainer.story = { name: 'with design Explainer' };
-
-export const Letter = () => {
-	return (
-		<div
-			css={css`
-				max-width: 400px;
-			`}
-		>
-			<DesignTag
-				format={{
-					design: ArticleDesign.Letter,
-					display: ArticleDisplay.Standard,
-					theme: ArticlePillar.Sport,
-				}}
-			/>
-		</div>
-	);
-};
-Letter.story = { name: 'with design Letter' };
-
 export const SpecialReport = () => {
 	return (
 		<DesignTag

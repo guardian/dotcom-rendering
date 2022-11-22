@@ -23,7 +23,7 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import type { NavType } from '../../model/extract-nav';
-import type { FEArticleType } from '../../types/frontend';
+import type { CAPIArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
@@ -52,7 +52,7 @@ import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 type Props = {
-	CAPIArticle: FEArticleType;
+	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 };
@@ -164,7 +164,7 @@ const shareDivStyle = css`
 `;
 
 const getMainMediaCaptions = (
-	CAPIArticle: FEArticleType,
+	CAPIArticle: CAPIArticleType,
 ): (string | undefined)[] =>
 	CAPIArticle.mainMediaElements.map((el) =>
 		el._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
@@ -230,7 +230,6 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 				<Section
 					fullWidth={true}
-					shouldCenter={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					padSides={false}
@@ -251,9 +250,6 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						}
 						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPIArticle.config.idApiUrl}
-						headerTopBarSwitch={
-							!!CAPIArticle.config.switches.headerTopNav
-						}
 						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
@@ -276,9 +272,6 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							CAPIArticle.nav.readerRevenueLinks.header.subscribe
 						}
 						editionId={CAPIArticle.editionId}
-						headerTopBarSwitch={
-							!!CAPIArticle.config.switches.headerTopNav
-						}
 					/>
 				</Section>
 

@@ -4,7 +4,7 @@ import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 import { filterABTestSwitches } from '../../model/enhance-switches';
 import type { NavType } from '../../model/extract-nav';
-import type { FEArticleType } from '../../types/frontend';
+import type { CAPIArticleType } from '../../types/frontend';
 import { DecideLayout } from '../layouts/DecideLayout';
 import { AlreadyVisited } from './AlreadyVisited.importable';
 import { BrazeMessaging } from './BrazeMessaging.importable';
@@ -18,7 +18,7 @@ import { SetABTests } from './SetABTests.importable';
 import { SkipTo } from './SkipTo';
 
 type Props = {
-	CAPIArticle: FEArticleType;
+	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 };
@@ -28,7 +28,7 @@ type Props = {
  * Article is a high level wrapper for article pages on Dotcom. Sets strict mode and some globals
  *
  * @param {Props} props
- * @param {FEArticleType} props.CAPIArticle - The article JSON data
+ * @param {CAPIArticleType} props.CAPIArticle - The article JSON data
  * @param {NAVType} props.NAV - The article JSON data
  * @param {ArticleFormat} props.format - The format model for the article
  * */

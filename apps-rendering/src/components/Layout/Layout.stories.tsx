@@ -33,7 +33,6 @@ import { renderAll } from 'renderer';
 import { Result } from 'result';
 import GalleryLayout from './GalleryLayout';
 import ImmersiveLayout from './ImmersiveLayout';
-import LetterLayout from './LetterLayout';
 import Live from './LiveLayout';
 
 // ----- Functions ----- //
@@ -171,12 +170,12 @@ CommentItem.story = { name: 'Comment' };
 
 export const Letter = (): React.ReactNode => {
 	return (
-		<LetterLayout item={letter}>
+		<Comment item={letter}>
 			{renderAll(
 				formatFromItem(letter, some(ArticleDisplay.Standard)),
 				Result.partition(letter.body).oks,
 			)}
-		</LetterLayout>
+		</Comment>
 	);
 };
 Letter.story = { name: 'Letter' };

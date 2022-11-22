@@ -11,7 +11,6 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { getZIndex } from '../lib/getZIndex';
 import { Island } from './Island';
 import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
@@ -173,7 +172,7 @@ const mobileStickyAdStyles = css`
 	margin: 0 auto;
 	right: 0;
 	left: 0;
-	${getZIndex('mobileSticky')}
+	z-index: 1010;
 	${from.phablet} {
 		display: none;
 	}
@@ -238,6 +237,7 @@ const AdSlotLabelToggled = () => (
 export const AdSlot = ({
 	position,
 	display,
+	shouldHideReaderRevenue = false,
 	isPaidContent = false,
 	index,
 }: Props) => {
@@ -269,6 +269,9 @@ export const AdSlot = ({
 					return (
 						<Island>
 							<TopRightAdSlot
+								shouldHideReaderRevenue={
+									shouldHideReaderRevenue
+								}
 								isPaidContent={isPaidContent}
 								adStyles={adStyles}
 							/>

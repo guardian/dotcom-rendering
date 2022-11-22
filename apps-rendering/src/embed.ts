@@ -2,10 +2,9 @@
 
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType';
-import { fromNullable, withDefault } from '@guardian/types';
+import { andThen, fromNullable, withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { parseIntOpt, pipe, resultFromNullable } from 'lib';
-import { Optional } from 'optional';
 import type { DocParser } from 'parserContext';
 import { Result } from 'result';
 
@@ -101,9 +100,7 @@ const youtubeUrl = (id: string): string => {
 const getNumericAttribute =
 	(attr: string) =>
 	(elem: Element): Option<number> =>
-		Optional.fromNullable(elem.getAttribute(attr))
-			.flatMap(parseIntOpt)
-			.toOption();
+		pipe(elem.getAttribute(attr), fromNullable, andThen(parseIntOpt));
 
 const getAttribute =
 	(attr: string) =>

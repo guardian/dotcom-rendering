@@ -1,5 +1,3 @@
-import type { TagType } from '../../types/tag';
-
 export const filterForTagsOfType = (
 	tags: TagType[],
 	tagType: string,

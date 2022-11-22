@@ -1,5 +1,4 @@
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import type { TagType } from '../../types/tag';
 import { decideFormat } from '../lib/decideFormat';
 import { useApi } from '../lib/useApi';
 import type { RichLinkImageData } from './RichLink';

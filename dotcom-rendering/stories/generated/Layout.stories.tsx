@@ -17,69 +17,69 @@ export default {
 	},
 };
 
-export const StandardStandardNewsPillar = () => {
+export const StandardStandardNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Standard"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardStandardNewsPillar.story = {
-	name: 'StandardDisplay StandardDesign NewsPillar'
+StandardStandardNews.story = {
+	name: 'StandardDisplay StandardDesign News'
 };
 
-export const StandardStandardOpinionPillar = () => {
+export const StandardStandardOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Standard"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardStandardOpinionPillar.story = {
-	name: 'StandardDisplay StandardDesign OpinionPillar'
+StandardStandardOpinion.story = {
+	name: 'StandardDisplay StandardDesign Opinion'
 };
 
-export const StandardStandardSportPillar = () => {
+export const StandardStandardSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Standard"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardStandardSportPillar.story = {
-	name: 'StandardDisplay StandardDesign SportPillar'
+StandardStandardSport.story = {
+	name: 'StandardDisplay StandardDesign Sport'
 };
 
-export const StandardStandardCulturePillar = () => {
+export const StandardStandardCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Standard"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardStandardCulturePillar.story = {
-	name: 'StandardDisplay StandardDesign CulturePillar'
+StandardStandardCulture.story = {
+	name: 'StandardDisplay StandardDesign Culture'
 };
 
-export const StandardStandardLifestylePillar = () => {
+export const StandardStandardLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Standard"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardStandardLifestylePillar.story = {
-	name: 'StandardDisplay StandardDesign LifestylePillar'
+StandardStandardLifestyle.story = {
+	name: 'StandardDisplay StandardDesign Lifestyle'
 };
 
 export const StandardStandardSpecialReportTheme = () => {
@@ -121,69 +121,69 @@ StandardStandardSpecialReportAltTheme.story = {
 	name: 'StandardDisplay StandardDesign SpecialReportAltTheme'
 };
 
-export const StandardGalleryNewsPillar = () => {
+export const StandardGalleryNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Gallery"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardGalleryNewsPillar.story = {
-	name: 'StandardDisplay GalleryDesign NewsPillar'
+StandardGalleryNews.story = {
+	name: 'StandardDisplay GalleryDesign News'
 };
 
-export const StandardGalleryOpinionPillar = () => {
+export const StandardGalleryOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Gallery"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardGalleryOpinionPillar.story = {
-	name: 'StandardDisplay GalleryDesign OpinionPillar'
+StandardGalleryOpinion.story = {
+	name: 'StandardDisplay GalleryDesign Opinion'
 };
 
-export const StandardGallerySportPillar = () => {
+export const StandardGallerySport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Gallery"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardGallerySportPillar.story = {
-	name: 'StandardDisplay GalleryDesign SportPillar'
+StandardGallerySport.story = {
+	name: 'StandardDisplay GalleryDesign Sport'
 };
 
-export const StandardGalleryCulturePillar = () => {
+export const StandardGalleryCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Gallery"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardGalleryCulturePillar.story = {
-	name: 'StandardDisplay GalleryDesign CulturePillar'
+StandardGalleryCulture.story = {
+	name: 'StandardDisplay GalleryDesign Culture'
 };
 
-export const StandardGalleryLifestylePillar = () => {
+export const StandardGalleryLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Gallery"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardGalleryLifestylePillar.story = {
-	name: 'StandardDisplay GalleryDesign LifestylePillar'
+StandardGalleryLifestyle.story = {
+	name: 'StandardDisplay GalleryDesign Lifestyle'
 };
 
 export const StandardGallerySpecialReportTheme = () => {
@@ -225,69 +225,69 @@ StandardGallerySpecialReportAltTheme.story = {
 	name: 'StandardDisplay GalleryDesign SpecialReportAltTheme'
 };
 
-export const StandardAudioNewsPillar = () => {
+export const StandardAudioNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Audio"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardAudioNewsPillar.story = {
-	name: 'StandardDisplay AudioDesign NewsPillar'
+StandardAudioNews.story = {
+	name: 'StandardDisplay AudioDesign News'
 };
 
-export const StandardAudioOpinionPillar = () => {
+export const StandardAudioOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Audio"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardAudioOpinionPillar.story = {
-	name: 'StandardDisplay AudioDesign OpinionPillar'
+StandardAudioOpinion.story = {
+	name: 'StandardDisplay AudioDesign Opinion'
 };
 
-export const StandardAudioSportPillar = () => {
+export const StandardAudioSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Audio"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardAudioSportPillar.story = {
-	name: 'StandardDisplay AudioDesign SportPillar'
+StandardAudioSport.story = {
+	name: 'StandardDisplay AudioDesign Sport'
 };
 
-export const StandardAudioCulturePillar = () => {
+export const StandardAudioCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Audio"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardAudioCulturePillar.story = {
-	name: 'StandardDisplay AudioDesign CulturePillar'
+StandardAudioCulture.story = {
+	name: 'StandardDisplay AudioDesign Culture'
 };
 
-export const StandardAudioLifestylePillar = () => {
+export const StandardAudioLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Audio"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardAudioLifestylePillar.story = {
-	name: 'StandardDisplay AudioDesign LifestylePillar'
+StandardAudioLifestyle.story = {
+	name: 'StandardDisplay AudioDesign Lifestyle'
 };
 
 export const StandardAudioSpecialReportTheme = () => {
@@ -329,69 +329,69 @@ StandardAudioSpecialReportAltTheme.story = {
 	name: 'StandardDisplay AudioDesign SpecialReportAltTheme'
 };
 
-export const StandardVideoNewsPillar = () => {
+export const StandardVideoNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Video"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardVideoNewsPillar.story = {
-	name: 'StandardDisplay VideoDesign NewsPillar'
+StandardVideoNews.story = {
+	name: 'StandardDisplay VideoDesign News'
 };
 
-export const StandardVideoOpinionPillar = () => {
+export const StandardVideoOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Video"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardVideoOpinionPillar.story = {
-	name: 'StandardDisplay VideoDesign OpinionPillar'
+StandardVideoOpinion.story = {
+	name: 'StandardDisplay VideoDesign Opinion'
 };
 
-export const StandardVideoSportPillar = () => {
+export const StandardVideoSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Video"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardVideoSportPillar.story = {
-	name: 'StandardDisplay VideoDesign SportPillar'
+StandardVideoSport.story = {
+	name: 'StandardDisplay VideoDesign Sport'
 };
 
-export const StandardVideoCulturePillar = () => {
+export const StandardVideoCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Video"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardVideoCulturePillar.story = {
-	name: 'StandardDisplay VideoDesign CulturePillar'
+StandardVideoCulture.story = {
+	name: 'StandardDisplay VideoDesign Culture'
 };
 
-export const StandardVideoLifestylePillar = () => {
+export const StandardVideoLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Video"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardVideoLifestylePillar.story = {
-	name: 'StandardDisplay VideoDesign LifestylePillar'
+StandardVideoLifestyle.story = {
+	name: 'StandardDisplay VideoDesign Lifestyle'
 };
 
 export const StandardVideoSpecialReportTheme = () => {
@@ -433,69 +433,69 @@ StandardVideoSpecialReportAltTheme.story = {
 	name: 'StandardDisplay VideoDesign SpecialReportAltTheme'
 };
 
-export const StandardReviewNewsPillar = () => {
+export const StandardReviewNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Review"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardReviewNewsPillar.story = {
-	name: 'StandardDisplay ReviewDesign NewsPillar'
+StandardReviewNews.story = {
+	name: 'StandardDisplay ReviewDesign News'
 };
 
-export const StandardReviewOpinionPillar = () => {
+export const StandardReviewOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Review"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardReviewOpinionPillar.story = {
-	name: 'StandardDisplay ReviewDesign OpinionPillar'
+StandardReviewOpinion.story = {
+	name: 'StandardDisplay ReviewDesign Opinion'
 };
 
-export const StandardReviewSportPillar = () => {
+export const StandardReviewSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Review"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardReviewSportPillar.story = {
-	name: 'StandardDisplay ReviewDesign SportPillar'
+StandardReviewSport.story = {
+	name: 'StandardDisplay ReviewDesign Sport'
 };
 
-export const StandardReviewCulturePillar = () => {
+export const StandardReviewCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Review"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardReviewCulturePillar.story = {
-	name: 'StandardDisplay ReviewDesign CulturePillar'
+StandardReviewCulture.story = {
+	name: 'StandardDisplay ReviewDesign Culture'
 };
 
-export const StandardReviewLifestylePillar = () => {
+export const StandardReviewLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Review"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardReviewLifestylePillar.story = {
-	name: 'StandardDisplay ReviewDesign LifestylePillar'
+StandardReviewLifestyle.story = {
+	name: 'StandardDisplay ReviewDesign Lifestyle'
 };
 
 export const StandardReviewSpecialReportTheme = () => {
@@ -537,69 +537,69 @@ StandardReviewSpecialReportAltTheme.story = {
 	name: 'StandardDisplay ReviewDesign SpecialReportAltTheme'
 };
 
-export const StandardAnalysisNewsPillar = () => {
+export const StandardAnalysisNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Analysis"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardAnalysisNewsPillar.story = {
-	name: 'StandardDisplay AnalysisDesign NewsPillar'
+StandardAnalysisNews.story = {
+	name: 'StandardDisplay AnalysisDesign News'
 };
 
-export const StandardAnalysisOpinionPillar = () => {
+export const StandardAnalysisOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Analysis"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardAnalysisOpinionPillar.story = {
-	name: 'StandardDisplay AnalysisDesign OpinionPillar'
+StandardAnalysisOpinion.story = {
+	name: 'StandardDisplay AnalysisDesign Opinion'
 };
 
-export const StandardAnalysisSportPillar = () => {
+export const StandardAnalysisSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Analysis"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardAnalysisSportPillar.story = {
-	name: 'StandardDisplay AnalysisDesign SportPillar'
+StandardAnalysisSport.story = {
+	name: 'StandardDisplay AnalysisDesign Sport'
 };
 
-export const StandardAnalysisCulturePillar = () => {
+export const StandardAnalysisCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Analysis"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardAnalysisCulturePillar.story = {
-	name: 'StandardDisplay AnalysisDesign CulturePillar'
+StandardAnalysisCulture.story = {
+	name: 'StandardDisplay AnalysisDesign Culture'
 };
 
-export const StandardAnalysisLifestylePillar = () => {
+export const StandardAnalysisLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Analysis"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardAnalysisLifestylePillar.story = {
-	name: 'StandardDisplay AnalysisDesign LifestylePillar'
+StandardAnalysisLifestyle.story = {
+	name: 'StandardDisplay AnalysisDesign Lifestyle'
 };
 
 export const StandardAnalysisSpecialReportTheme = () => {
@@ -641,69 +641,69 @@ StandardAnalysisSpecialReportAltTheme.story = {
 	name: 'StandardDisplay AnalysisDesign SpecialReportAltTheme'
 };
 
-export const StandardExplainerNewsPillar = () => {
+export const StandardExplainerNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Explainer"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardExplainerNewsPillar.story = {
-	name: 'StandardDisplay ExplainerDesign NewsPillar'
+StandardExplainerNews.story = {
+	name: 'StandardDisplay ExplainerDesign News'
 };
 
-export const StandardExplainerOpinionPillar = () => {
+export const StandardExplainerOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Explainer"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardExplainerOpinionPillar.story = {
-	name: 'StandardDisplay ExplainerDesign OpinionPillar'
+StandardExplainerOpinion.story = {
+	name: 'StandardDisplay ExplainerDesign Opinion'
 };
 
-export const StandardExplainerSportPillar = () => {
+export const StandardExplainerSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Explainer"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardExplainerSportPillar.story = {
-	name: 'StandardDisplay ExplainerDesign SportPillar'
+StandardExplainerSport.story = {
+	name: 'StandardDisplay ExplainerDesign Sport'
 };
 
-export const StandardExplainerCulturePillar = () => {
+export const StandardExplainerCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Explainer"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardExplainerCulturePillar.story = {
-	name: 'StandardDisplay ExplainerDesign CulturePillar'
+StandardExplainerCulture.story = {
+	name: 'StandardDisplay ExplainerDesign Culture'
 };
 
-export const StandardExplainerLifestylePillar = () => {
+export const StandardExplainerLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Explainer"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardExplainerLifestylePillar.story = {
-	name: 'StandardDisplay ExplainerDesign LifestylePillar'
+StandardExplainerLifestyle.story = {
+	name: 'StandardDisplay ExplainerDesign Lifestyle'
 };
 
 export const StandardExplainerSpecialReportTheme = () => {
@@ -745,69 +745,69 @@ StandardExplainerSpecialReportAltTheme.story = {
 	name: 'StandardDisplay ExplainerDesign SpecialReportAltTheme'
 };
 
-export const StandardCommentNewsPillar = () => {
+export const StandardCommentNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Comment"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardCommentNewsPillar.story = {
-	name: 'StandardDisplay CommentDesign NewsPillar'
+StandardCommentNews.story = {
+	name: 'StandardDisplay CommentDesign News'
 };
 
-export const StandardCommentOpinionPillar = () => {
+export const StandardCommentOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Comment"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardCommentOpinionPillar.story = {
-	name: 'StandardDisplay CommentDesign OpinionPillar'
+StandardCommentOpinion.story = {
+	name: 'StandardDisplay CommentDesign Opinion'
 };
 
-export const StandardCommentSportPillar = () => {
+export const StandardCommentSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Comment"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardCommentSportPillar.story = {
-	name: 'StandardDisplay CommentDesign SportPillar'
+StandardCommentSport.story = {
+	name: 'StandardDisplay CommentDesign Sport'
 };
 
-export const StandardCommentCulturePillar = () => {
+export const StandardCommentCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Comment"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardCommentCulturePillar.story = {
-	name: 'StandardDisplay CommentDesign CulturePillar'
+StandardCommentCulture.story = {
+	name: 'StandardDisplay CommentDesign Culture'
 };
 
-export const StandardCommentLifestylePillar = () => {
+export const StandardCommentLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Comment"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardCommentLifestylePillar.story = {
-	name: 'StandardDisplay CommentDesign LifestylePillar'
+StandardCommentLifestyle.story = {
+	name: 'StandardDisplay CommentDesign Lifestyle'
 };
 
 export const StandardCommentSpecialReportTheme = () => {
@@ -849,69 +849,69 @@ StandardCommentSpecialReportAltTheme.story = {
 	name: 'StandardDisplay CommentDesign SpecialReportAltTheme'
 };
 
-export const StandardLetterNewsPillar = () => {
+export const StandardLetterNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Letter"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardLetterNewsPillar.story = {
-	name: 'StandardDisplay LetterDesign NewsPillar'
+StandardLetterNews.story = {
+	name: 'StandardDisplay LetterDesign News'
 };
 
-export const StandardLetterOpinionPillar = () => {
+export const StandardLetterOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Letter"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardLetterOpinionPillar.story = {
-	name: 'StandardDisplay LetterDesign OpinionPillar'
+StandardLetterOpinion.story = {
+	name: 'StandardDisplay LetterDesign Opinion'
 };
 
-export const StandardLetterSportPillar = () => {
+export const StandardLetterSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Letter"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardLetterSportPillar.story = {
-	name: 'StandardDisplay LetterDesign SportPillar'
+StandardLetterSport.story = {
+	name: 'StandardDisplay LetterDesign Sport'
 };
 
-export const StandardLetterCulturePillar = () => {
+export const StandardLetterCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Letter"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardLetterCulturePillar.story = {
-	name: 'StandardDisplay LetterDesign CulturePillar'
+StandardLetterCulture.story = {
+	name: 'StandardDisplay LetterDesign Culture'
 };
 
-export const StandardLetterLifestylePillar = () => {
+export const StandardLetterLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Letter"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardLetterLifestylePillar.story = {
-	name: 'StandardDisplay LetterDesign LifestylePillar'
+StandardLetterLifestyle.story = {
+	name: 'StandardDisplay LetterDesign Lifestyle'
 };
 
 export const StandardLetterSpecialReportTheme = () => {
@@ -953,69 +953,69 @@ StandardLetterSpecialReportAltTheme.story = {
 	name: 'StandardDisplay LetterDesign SpecialReportAltTheme'
 };
 
-export const StandardFeatureNewsPillar = () => {
+export const StandardFeatureNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Feature"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardFeatureNewsPillar.story = {
-	name: 'StandardDisplay FeatureDesign NewsPillar'
+StandardFeatureNews.story = {
+	name: 'StandardDisplay FeatureDesign News'
 };
 
-export const StandardFeatureOpinionPillar = () => {
+export const StandardFeatureOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Feature"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardFeatureOpinionPillar.story = {
-	name: 'StandardDisplay FeatureDesign OpinionPillar'
+StandardFeatureOpinion.story = {
+	name: 'StandardDisplay FeatureDesign Opinion'
 };
 
-export const StandardFeatureSportPillar = () => {
+export const StandardFeatureSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Feature"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardFeatureSportPillar.story = {
-	name: 'StandardDisplay FeatureDesign SportPillar'
+StandardFeatureSport.story = {
+	name: 'StandardDisplay FeatureDesign Sport'
 };
 
-export const StandardFeatureCulturePillar = () => {
+export const StandardFeatureCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Feature"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardFeatureCulturePillar.story = {
-	name: 'StandardDisplay FeatureDesign CulturePillar'
+StandardFeatureCulture.story = {
+	name: 'StandardDisplay FeatureDesign Culture'
 };
 
-export const StandardFeatureLifestylePillar = () => {
+export const StandardFeatureLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Feature"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardFeatureLifestylePillar.story = {
-	name: 'StandardDisplay FeatureDesign LifestylePillar'
+StandardFeatureLifestyle.story = {
+	name: 'StandardDisplay FeatureDesign Lifestyle'
 };
 
 export const StandardFeatureSpecialReportTheme = () => {
@@ -1057,69 +1057,69 @@ StandardFeatureSpecialReportAltTheme.story = {
 	name: 'StandardDisplay FeatureDesign SpecialReportAltTheme'
 };
 
-export const StandardLiveBlogNewsPillar = () => {
+export const StandardLiveBlogNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="LiveBlog"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardLiveBlogNewsPillar.story = {
-	name: 'StandardDisplay LiveBlogDesign NewsPillar'
+StandardLiveBlogNews.story = {
+	name: 'StandardDisplay LiveBlogDesign News'
 };
 
-export const StandardLiveBlogOpinionPillar = () => {
+export const StandardLiveBlogOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="LiveBlog"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardLiveBlogOpinionPillar.story = {
-	name: 'StandardDisplay LiveBlogDesign OpinionPillar'
+StandardLiveBlogOpinion.story = {
+	name: 'StandardDisplay LiveBlogDesign Opinion'
 };
 
-export const StandardLiveBlogSportPillar = () => {
+export const StandardLiveBlogSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="LiveBlog"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardLiveBlogSportPillar.story = {
-	name: 'StandardDisplay LiveBlogDesign SportPillar'
+StandardLiveBlogSport.story = {
+	name: 'StandardDisplay LiveBlogDesign Sport'
 };
 
-export const StandardLiveBlogCulturePillar = () => {
+export const StandardLiveBlogCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="LiveBlog"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardLiveBlogCulturePillar.story = {
-	name: 'StandardDisplay LiveBlogDesign CulturePillar'
+StandardLiveBlogCulture.story = {
+	name: 'StandardDisplay LiveBlogDesign Culture'
 };
 
-export const StandardLiveBlogLifestylePillar = () => {
+export const StandardLiveBlogLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="LiveBlog"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardLiveBlogLifestylePillar.story = {
-	name: 'StandardDisplay LiveBlogDesign LifestylePillar'
+StandardLiveBlogLifestyle.story = {
+	name: 'StandardDisplay LiveBlogDesign Lifestyle'
 };
 
 export const StandardLiveBlogSpecialReportTheme = () => {
@@ -1161,69 +1161,69 @@ StandardLiveBlogSpecialReportAltTheme.story = {
 	name: 'StandardDisplay LiveBlogDesign SpecialReportAltTheme'
 };
 
-export const StandardDeadBlogNewsPillar = () => {
+export const StandardDeadBlogNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="DeadBlog"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardDeadBlogNewsPillar.story = {
-	name: 'StandardDisplay DeadBlogDesign NewsPillar'
+StandardDeadBlogNews.story = {
+	name: 'StandardDisplay DeadBlogDesign News'
 };
 
-export const StandardDeadBlogOpinionPillar = () => {
+export const StandardDeadBlogOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="DeadBlog"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardDeadBlogOpinionPillar.story = {
-	name: 'StandardDisplay DeadBlogDesign OpinionPillar'
+StandardDeadBlogOpinion.story = {
+	name: 'StandardDisplay DeadBlogDesign Opinion'
 };
 
-export const StandardDeadBlogSportPillar = () => {
+export const StandardDeadBlogSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="DeadBlog"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardDeadBlogSportPillar.story = {
-	name: 'StandardDisplay DeadBlogDesign SportPillar'
+StandardDeadBlogSport.story = {
+	name: 'StandardDisplay DeadBlogDesign Sport'
 };
 
-export const StandardDeadBlogCulturePillar = () => {
+export const StandardDeadBlogCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="DeadBlog"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardDeadBlogCulturePillar.story = {
-	name: 'StandardDisplay DeadBlogDesign CulturePillar'
+StandardDeadBlogCulture.story = {
+	name: 'StandardDisplay DeadBlogDesign Culture'
 };
 
-export const StandardDeadBlogLifestylePillar = () => {
+export const StandardDeadBlogLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="DeadBlog"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardDeadBlogLifestylePillar.story = {
-	name: 'StandardDisplay DeadBlogDesign LifestylePillar'
+StandardDeadBlogLifestyle.story = {
+	name: 'StandardDisplay DeadBlogDesign Lifestyle'
 };
 
 export const StandardDeadBlogSpecialReportTheme = () => {
@@ -1265,69 +1265,69 @@ StandardDeadBlogSpecialReportAltTheme.story = {
 	name: 'StandardDisplay DeadBlogDesign SpecialReportAltTheme'
 };
 
-export const StandardRecipeNewsPillar = () => {
+export const StandardRecipeNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Recipe"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardRecipeNewsPillar.story = {
-	name: 'StandardDisplay RecipeDesign NewsPillar'
+StandardRecipeNews.story = {
+	name: 'StandardDisplay RecipeDesign News'
 };
 
-export const StandardRecipeOpinionPillar = () => {
+export const StandardRecipeOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Recipe"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardRecipeOpinionPillar.story = {
-	name: 'StandardDisplay RecipeDesign OpinionPillar'
+StandardRecipeOpinion.story = {
+	name: 'StandardDisplay RecipeDesign Opinion'
 };
 
-export const StandardRecipeSportPillar = () => {
+export const StandardRecipeSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Recipe"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardRecipeSportPillar.story = {
-	name: 'StandardDisplay RecipeDesign SportPillar'
+StandardRecipeSport.story = {
+	name: 'StandardDisplay RecipeDesign Sport'
 };
 
-export const StandardRecipeCulturePillar = () => {
+export const StandardRecipeCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Recipe"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardRecipeCulturePillar.story = {
-	name: 'StandardDisplay RecipeDesign CulturePillar'
+StandardRecipeCulture.story = {
+	name: 'StandardDisplay RecipeDesign Culture'
 };
 
-export const StandardRecipeLifestylePillar = () => {
+export const StandardRecipeLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Recipe"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardRecipeLifestylePillar.story = {
-	name: 'StandardDisplay RecipeDesign LifestylePillar'
+StandardRecipeLifestyle.story = {
+	name: 'StandardDisplay RecipeDesign Lifestyle'
 };
 
 export const StandardRecipeSpecialReportTheme = () => {
@@ -1369,69 +1369,69 @@ StandardRecipeSpecialReportAltTheme.story = {
 	name: 'StandardDisplay RecipeDesign SpecialReportAltTheme'
 };
 
-export const StandardMatchReportNewsPillar = () => {
+export const StandardMatchReportNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="MatchReport"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardMatchReportNewsPillar.story = {
-	name: 'StandardDisplay MatchReportDesign NewsPillar'
+StandardMatchReportNews.story = {
+	name: 'StandardDisplay MatchReportDesign News'
 };
 
-export const StandardMatchReportOpinionPillar = () => {
+export const StandardMatchReportOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="MatchReport"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardMatchReportOpinionPillar.story = {
-	name: 'StandardDisplay MatchReportDesign OpinionPillar'
+StandardMatchReportOpinion.story = {
+	name: 'StandardDisplay MatchReportDesign Opinion'
 };
 
-export const StandardMatchReportSportPillar = () => {
+export const StandardMatchReportSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="MatchReport"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardMatchReportSportPillar.story = {
-	name: 'StandardDisplay MatchReportDesign SportPillar'
+StandardMatchReportSport.story = {
+	name: 'StandardDisplay MatchReportDesign Sport'
 };
 
-export const StandardMatchReportCulturePillar = () => {
+export const StandardMatchReportCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="MatchReport"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardMatchReportCulturePillar.story = {
-	name: 'StandardDisplay MatchReportDesign CulturePillar'
+StandardMatchReportCulture.story = {
+	name: 'StandardDisplay MatchReportDesign Culture'
 };
 
-export const StandardMatchReportLifestylePillar = () => {
+export const StandardMatchReportLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="MatchReport"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardMatchReportLifestylePillar.story = {
-	name: 'StandardDisplay MatchReportDesign LifestylePillar'
+StandardMatchReportLifestyle.story = {
+	name: 'StandardDisplay MatchReportDesign Lifestyle'
 };
 
 export const StandardMatchReportSpecialReportTheme = () => {
@@ -1473,69 +1473,69 @@ StandardMatchReportSpecialReportAltTheme.story = {
 	name: 'StandardDisplay MatchReportDesign SpecialReportAltTheme'
 };
 
-export const StandardInterviewNewsPillar = () => {
+export const StandardInterviewNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Interview"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardInterviewNewsPillar.story = {
-	name: 'StandardDisplay InterviewDesign NewsPillar'
+StandardInterviewNews.story = {
+	name: 'StandardDisplay InterviewDesign News'
 };
 
-export const StandardInterviewOpinionPillar = () => {
+export const StandardInterviewOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Interview"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardInterviewOpinionPillar.story = {
-	name: 'StandardDisplay InterviewDesign OpinionPillar'
+StandardInterviewOpinion.story = {
+	name: 'StandardDisplay InterviewDesign Opinion'
 };
 
-export const StandardInterviewSportPillar = () => {
+export const StandardInterviewSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Interview"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardInterviewSportPillar.story = {
-	name: 'StandardDisplay InterviewDesign SportPillar'
+StandardInterviewSport.story = {
+	name: 'StandardDisplay InterviewDesign Sport'
 };
 
-export const StandardInterviewCulturePillar = () => {
+export const StandardInterviewCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Interview"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardInterviewCulturePillar.story = {
-	name: 'StandardDisplay InterviewDesign CulturePillar'
+StandardInterviewCulture.story = {
+	name: 'StandardDisplay InterviewDesign Culture'
 };
 
-export const StandardInterviewLifestylePillar = () => {
+export const StandardInterviewLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Interview"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardInterviewLifestylePillar.story = {
-	name: 'StandardDisplay InterviewDesign LifestylePillar'
+StandardInterviewLifestyle.story = {
+	name: 'StandardDisplay InterviewDesign Lifestyle'
 };
 
 export const StandardInterviewSpecialReportTheme = () => {
@@ -1577,69 +1577,69 @@ StandardInterviewSpecialReportAltTheme.story = {
 	name: 'StandardDisplay InterviewDesign SpecialReportAltTheme'
 };
 
-export const StandardEditorialNewsPillar = () => {
+export const StandardEditorialNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Editorial"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardEditorialNewsPillar.story = {
-	name: 'StandardDisplay EditorialDesign NewsPillar'
+StandardEditorialNews.story = {
+	name: 'StandardDisplay EditorialDesign News'
 };
 
-export const StandardEditorialOpinionPillar = () => {
+export const StandardEditorialOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Editorial"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardEditorialOpinionPillar.story = {
-	name: 'StandardDisplay EditorialDesign OpinionPillar'
+StandardEditorialOpinion.story = {
+	name: 'StandardDisplay EditorialDesign Opinion'
 };
 
-export const StandardEditorialSportPillar = () => {
+export const StandardEditorialSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Editorial"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardEditorialSportPillar.story = {
-	name: 'StandardDisplay EditorialDesign SportPillar'
+StandardEditorialSport.story = {
+	name: 'StandardDisplay EditorialDesign Sport'
 };
 
-export const StandardEditorialCulturePillar = () => {
+export const StandardEditorialCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Editorial"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardEditorialCulturePillar.story = {
-	name: 'StandardDisplay EditorialDesign CulturePillar'
+StandardEditorialCulture.story = {
+	name: 'StandardDisplay EditorialDesign Culture'
 };
 
-export const StandardEditorialLifestylePillar = () => {
+export const StandardEditorialLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Editorial"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardEditorialLifestylePillar.story = {
-	name: 'StandardDisplay EditorialDesign LifestylePillar'
+StandardEditorialLifestyle.story = {
+	name: 'StandardDisplay EditorialDesign Lifestyle'
 };
 
 export const StandardEditorialSpecialReportTheme = () => {
@@ -1681,69 +1681,69 @@ StandardEditorialSpecialReportAltTheme.story = {
 	name: 'StandardDisplay EditorialDesign SpecialReportAltTheme'
 };
 
-export const StandardQuizNewsPillar = () => {
+export const StandardQuizNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Quiz"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardQuizNewsPillar.story = {
-	name: 'StandardDisplay QuizDesign NewsPillar'
+StandardQuizNews.story = {
+	name: 'StandardDisplay QuizDesign News'
 };
 
-export const StandardQuizOpinionPillar = () => {
+export const StandardQuizOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Quiz"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardQuizOpinionPillar.story = {
-	name: 'StandardDisplay QuizDesign OpinionPillar'
+StandardQuizOpinion.story = {
+	name: 'StandardDisplay QuizDesign Opinion'
 };
 
-export const StandardQuizSportPillar = () => {
+export const StandardQuizSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Quiz"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardQuizSportPillar.story = {
-	name: 'StandardDisplay QuizDesign SportPillar'
+StandardQuizSport.story = {
+	name: 'StandardDisplay QuizDesign Sport'
 };
 
-export const StandardQuizCulturePillar = () => {
+export const StandardQuizCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Quiz"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardQuizCulturePillar.story = {
-	name: 'StandardDisplay QuizDesign CulturePillar'
+StandardQuizCulture.story = {
+	name: 'StandardDisplay QuizDesign Culture'
 };
 
-export const StandardQuizLifestylePillar = () => {
+export const StandardQuizLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Quiz"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardQuizLifestylePillar.story = {
-	name: 'StandardDisplay QuizDesign LifestylePillar'
+StandardQuizLifestyle.story = {
+	name: 'StandardDisplay QuizDesign Lifestyle'
 };
 
 export const StandardQuizSpecialReportTheme = () => {
@@ -1785,69 +1785,69 @@ StandardQuizSpecialReportAltTheme.story = {
 	name: 'StandardDisplay QuizDesign SpecialReportAltTheme'
 };
 
-export const StandardInteractiveNewsPillar = () => {
+export const StandardInteractiveNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Interactive"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardInteractiveNewsPillar.story = {
-	name: 'StandardDisplay InteractiveDesign NewsPillar'
+StandardInteractiveNews.story = {
+	name: 'StandardDisplay InteractiveDesign News'
 };
 
-export const StandardInteractiveOpinionPillar = () => {
+export const StandardInteractiveOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Interactive"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardInteractiveOpinionPillar.story = {
-	name: 'StandardDisplay InteractiveDesign OpinionPillar'
+StandardInteractiveOpinion.story = {
+	name: 'StandardDisplay InteractiveDesign Opinion'
 };
 
-export const StandardInteractiveSportPillar = () => {
+export const StandardInteractiveSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Interactive"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardInteractiveSportPillar.story = {
-	name: 'StandardDisplay InteractiveDesign SportPillar'
+StandardInteractiveSport.story = {
+	name: 'StandardDisplay InteractiveDesign Sport'
 };
 
-export const StandardInteractiveCulturePillar = () => {
+export const StandardInteractiveCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Interactive"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardInteractiveCulturePillar.story = {
-	name: 'StandardDisplay InteractiveDesign CulturePillar'
+StandardInteractiveCulture.story = {
+	name: 'StandardDisplay InteractiveDesign Culture'
 };
 
-export const StandardInteractiveLifestylePillar = () => {
+export const StandardInteractiveLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Interactive"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardInteractiveLifestylePillar.story = {
-	name: 'StandardDisplay InteractiveDesign LifestylePillar'
+StandardInteractiveLifestyle.story = {
+	name: 'StandardDisplay InteractiveDesign Lifestyle'
 };
 
 export const StandardInteractiveSpecialReportTheme = () => {
@@ -1889,69 +1889,69 @@ StandardInteractiveSpecialReportAltTheme.story = {
 	name: 'StandardDisplay InteractiveDesign SpecialReportAltTheme'
 };
 
-export const StandardPhotoEssayNewsPillar = () => {
+export const StandardPhotoEssayNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="PhotoEssay"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardPhotoEssayNewsPillar.story = {
-	name: 'StandardDisplay PhotoEssayDesign NewsPillar'
+StandardPhotoEssayNews.story = {
+	name: 'StandardDisplay PhotoEssayDesign News'
 };
 
-export const StandardPhotoEssayOpinionPillar = () => {
+export const StandardPhotoEssayOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="PhotoEssay"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardPhotoEssayOpinionPillar.story = {
-	name: 'StandardDisplay PhotoEssayDesign OpinionPillar'
+StandardPhotoEssayOpinion.story = {
+	name: 'StandardDisplay PhotoEssayDesign Opinion'
 };
 
-export const StandardPhotoEssaySportPillar = () => {
+export const StandardPhotoEssaySport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="PhotoEssay"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardPhotoEssaySportPillar.story = {
-	name: 'StandardDisplay PhotoEssayDesign SportPillar'
+StandardPhotoEssaySport.story = {
+	name: 'StandardDisplay PhotoEssayDesign Sport'
 };
 
-export const StandardPhotoEssayCulturePillar = () => {
+export const StandardPhotoEssayCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="PhotoEssay"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardPhotoEssayCulturePillar.story = {
-	name: 'StandardDisplay PhotoEssayDesign CulturePillar'
+StandardPhotoEssayCulture.story = {
+	name: 'StandardDisplay PhotoEssayDesign Culture'
 };
 
-export const StandardPhotoEssayLifestylePillar = () => {
+export const StandardPhotoEssayLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="PhotoEssay"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardPhotoEssayLifestylePillar.story = {
-	name: 'StandardDisplay PhotoEssayDesign LifestylePillar'
+StandardPhotoEssayLifestyle.story = {
+	name: 'StandardDisplay PhotoEssayDesign Lifestyle'
 };
 
 export const StandardPhotoEssaySpecialReportTheme = () => {
@@ -1993,69 +1993,69 @@ StandardPhotoEssaySpecialReportAltTheme.story = {
 	name: 'StandardDisplay PhotoEssayDesign SpecialReportAltTheme'
 };
 
-export const StandardPrintShopNewsPillar = () => {
+export const StandardPrintShopNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="PrintShop"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardPrintShopNewsPillar.story = {
-	name: 'StandardDisplay PrintShopDesign NewsPillar'
+StandardPrintShopNews.story = {
+	name: 'StandardDisplay PrintShopDesign News'
 };
 
-export const StandardPrintShopOpinionPillar = () => {
+export const StandardPrintShopOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="PrintShop"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardPrintShopOpinionPillar.story = {
-	name: 'StandardDisplay PrintShopDesign OpinionPillar'
+StandardPrintShopOpinion.story = {
+	name: 'StandardDisplay PrintShopDesign Opinion'
 };
 
-export const StandardPrintShopSportPillar = () => {
+export const StandardPrintShopSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="PrintShop"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardPrintShopSportPillar.story = {
-	name: 'StandardDisplay PrintShopDesign SportPillar'
+StandardPrintShopSport.story = {
+	name: 'StandardDisplay PrintShopDesign Sport'
 };
 
-export const StandardPrintShopCulturePillar = () => {
+export const StandardPrintShopCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="PrintShop"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardPrintShopCulturePillar.story = {
-	name: 'StandardDisplay PrintShopDesign CulturePillar'
+StandardPrintShopCulture.story = {
+	name: 'StandardDisplay PrintShopDesign Culture'
 };
 
-export const StandardPrintShopLifestylePillar = () => {
+export const StandardPrintShopLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="PrintShop"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardPrintShopLifestylePillar.story = {
-	name: 'StandardDisplay PrintShopDesign LifestylePillar'
+StandardPrintShopLifestyle.story = {
+	name: 'StandardDisplay PrintShopDesign Lifestyle'
 };
 
 export const StandardPrintShopSpecialReportTheme = () => {
@@ -2097,69 +2097,69 @@ StandardPrintShopSpecialReportAltTheme.story = {
 	name: 'StandardDisplay PrintShopDesign SpecialReportAltTheme'
 };
 
-export const StandardObituaryNewsPillar = () => {
+export const StandardObituaryNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Obituary"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardObituaryNewsPillar.story = {
-	name: 'StandardDisplay ObituaryDesign NewsPillar'
+StandardObituaryNews.story = {
+	name: 'StandardDisplay ObituaryDesign News'
 };
 
-export const StandardObituaryOpinionPillar = () => {
+export const StandardObituaryOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Obituary"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardObituaryOpinionPillar.story = {
-	name: 'StandardDisplay ObituaryDesign OpinionPillar'
+StandardObituaryOpinion.story = {
+	name: 'StandardDisplay ObituaryDesign Opinion'
 };
 
-export const StandardObituarySportPillar = () => {
+export const StandardObituarySport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Obituary"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardObituarySportPillar.story = {
-	name: 'StandardDisplay ObituaryDesign SportPillar'
+StandardObituarySport.story = {
+	name: 'StandardDisplay ObituaryDesign Sport'
 };
 
-export const StandardObituaryCulturePillar = () => {
+export const StandardObituaryCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Obituary"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardObituaryCulturePillar.story = {
-	name: 'StandardDisplay ObituaryDesign CulturePillar'
+StandardObituaryCulture.story = {
+	name: 'StandardDisplay ObituaryDesign Culture'
 };
 
-export const StandardObituaryLifestylePillar = () => {
+export const StandardObituaryLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Obituary"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardObituaryLifestylePillar.story = {
-	name: 'StandardDisplay ObituaryDesign LifestylePillar'
+StandardObituaryLifestyle.story = {
+	name: 'StandardDisplay ObituaryDesign Lifestyle'
 };
 
 export const StandardObituarySpecialReportTheme = () => {
@@ -2201,69 +2201,69 @@ StandardObituarySpecialReportAltTheme.story = {
 	name: 'StandardDisplay ObituaryDesign SpecialReportAltTheme'
 };
 
-export const StandardCorrectionNewsPillar = () => {
+export const StandardCorrectionNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Correction"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardCorrectionNewsPillar.story = {
-	name: 'StandardDisplay CorrectionDesign NewsPillar'
+StandardCorrectionNews.story = {
+	name: 'StandardDisplay CorrectionDesign News'
 };
 
-export const StandardCorrectionOpinionPillar = () => {
+export const StandardCorrectionOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Correction"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardCorrectionOpinionPillar.story = {
-	name: 'StandardDisplay CorrectionDesign OpinionPillar'
+StandardCorrectionOpinion.story = {
+	name: 'StandardDisplay CorrectionDesign Opinion'
 };
 
-export const StandardCorrectionSportPillar = () => {
+export const StandardCorrectionSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Correction"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardCorrectionSportPillar.story = {
-	name: 'StandardDisplay CorrectionDesign SportPillar'
+StandardCorrectionSport.story = {
+	name: 'StandardDisplay CorrectionDesign Sport'
 };
 
-export const StandardCorrectionCulturePillar = () => {
+export const StandardCorrectionCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Correction"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardCorrectionCulturePillar.story = {
-	name: 'StandardDisplay CorrectionDesign CulturePillar'
+StandardCorrectionCulture.story = {
+	name: 'StandardDisplay CorrectionDesign Culture'
 };
 
-export const StandardCorrectionLifestylePillar = () => {
+export const StandardCorrectionLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="Correction"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardCorrectionLifestylePillar.story = {
-	name: 'StandardDisplay CorrectionDesign LifestylePillar'
+StandardCorrectionLifestyle.story = {
+	name: 'StandardDisplay CorrectionDesign Lifestyle'
 };
 
 export const StandardCorrectionSpecialReportTheme = () => {
@@ -2305,69 +2305,69 @@ StandardCorrectionSpecialReportAltTheme.story = {
 	name: 'StandardDisplay CorrectionDesign SpecialReportAltTheme'
 };
 
-export const StandardFullPageInteractiveNewsPillar = () => {
+export const StandardFullPageInteractiveNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="FullPageInteractive"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardFullPageInteractiveNewsPillar.story = {
-	name: 'StandardDisplay FullPageInteractiveDesign NewsPillar'
+StandardFullPageInteractiveNews.story = {
+	name: 'StandardDisplay FullPageInteractiveDesign News'
 };
 
-export const StandardFullPageInteractiveOpinionPillar = () => {
+export const StandardFullPageInteractiveOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="FullPageInteractive"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardFullPageInteractiveOpinionPillar.story = {
-	name: 'StandardDisplay FullPageInteractiveDesign OpinionPillar'
+StandardFullPageInteractiveOpinion.story = {
+	name: 'StandardDisplay FullPageInteractiveDesign Opinion'
 };
 
-export const StandardFullPageInteractiveSportPillar = () => {
+export const StandardFullPageInteractiveSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="FullPageInteractive"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardFullPageInteractiveSportPillar.story = {
-	name: 'StandardDisplay FullPageInteractiveDesign SportPillar'
+StandardFullPageInteractiveSport.story = {
+	name: 'StandardDisplay FullPageInteractiveDesign Sport'
 };
 
-export const StandardFullPageInteractiveCulturePillar = () => {
+export const StandardFullPageInteractiveCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="FullPageInteractive"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardFullPageInteractiveCulturePillar.story = {
-	name: 'StandardDisplay FullPageInteractiveDesign CulturePillar'
+StandardFullPageInteractiveCulture.story = {
+	name: 'StandardDisplay FullPageInteractiveDesign Culture'
 };
 
-export const StandardFullPageInteractiveLifestylePillar = () => {
+export const StandardFullPageInteractiveLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="FullPageInteractive"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardFullPageInteractiveLifestylePillar.story = {
-	name: 'StandardDisplay FullPageInteractiveDesign LifestylePillar'
+StandardFullPageInteractiveLifestyle.story = {
+	name: 'StandardDisplay FullPageInteractiveDesign Lifestyle'
 };
 
 export const StandardFullPageInteractiveSpecialReportTheme = () => {
@@ -2409,69 +2409,69 @@ StandardFullPageInteractiveSpecialReportAltTheme.story = {
 	name: 'StandardDisplay FullPageInteractiveDesign SpecialReportAltTheme'
 };
 
-export const StandardNewsletterSignupNewsPillar = () => {
+export const StandardNewsletterSignupNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="NewsletterSignup"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-StandardNewsletterSignupNewsPillar.story = {
-	name: 'StandardDisplay NewsletterSignupDesign NewsPillar'
+StandardNewsletterSignupNews.story = {
+	name: 'StandardDisplay NewsletterSignupDesign News'
 };
 
-export const StandardNewsletterSignupOpinionPillar = () => {
+export const StandardNewsletterSignupOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="NewsletterSignup"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-StandardNewsletterSignupOpinionPillar.story = {
-	name: 'StandardDisplay NewsletterSignupDesign OpinionPillar'
+StandardNewsletterSignupOpinion.story = {
+	name: 'StandardDisplay NewsletterSignupDesign Opinion'
 };
 
-export const StandardNewsletterSignupSportPillar = () => {
+export const StandardNewsletterSignupSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="NewsletterSignup"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-StandardNewsletterSignupSportPillar.story = {
-	name: 'StandardDisplay NewsletterSignupDesign SportPillar'
+StandardNewsletterSignupSport.story = {
+	name: 'StandardDisplay NewsletterSignupDesign Sport'
 };
 
-export const StandardNewsletterSignupCulturePillar = () => {
+export const StandardNewsletterSignupCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="NewsletterSignup"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-StandardNewsletterSignupCulturePillar.story = {
-	name: 'StandardDisplay NewsletterSignupDesign CulturePillar'
+StandardNewsletterSignupCulture.story = {
+	name: 'StandardDisplay NewsletterSignupDesign Culture'
 };
 
-export const StandardNewsletterSignupLifestylePillar = () => {
+export const StandardNewsletterSignupLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Standard"
 			designName="NewsletterSignup"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-StandardNewsletterSignupLifestylePillar.story = {
-	name: 'StandardDisplay NewsletterSignupDesign LifestylePillar'
+StandardNewsletterSignupLifestyle.story = {
+	name: 'StandardDisplay NewsletterSignupDesign Lifestyle'
 };
 
 export const StandardNewsletterSignupSpecialReportTheme = () => {
@@ -2513,69 +2513,69 @@ StandardNewsletterSignupSpecialReportAltTheme.story = {
 	name: 'StandardDisplay NewsletterSignupDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveStandardNewsPillar = () => {
+export const ImmersiveStandardNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Standard"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveStandardNewsPillar.story = {
-	name: 'ImmersiveDisplay StandardDesign NewsPillar'
+ImmersiveStandardNews.story = {
+	name: 'ImmersiveDisplay StandardDesign News'
 };
 
-export const ImmersiveStandardOpinionPillar = () => {
+export const ImmersiveStandardOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Standard"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveStandardOpinionPillar.story = {
-	name: 'ImmersiveDisplay StandardDesign OpinionPillar'
+ImmersiveStandardOpinion.story = {
+	name: 'ImmersiveDisplay StandardDesign Opinion'
 };
 
-export const ImmersiveStandardSportPillar = () => {
+export const ImmersiveStandardSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Standard"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveStandardSportPillar.story = {
-	name: 'ImmersiveDisplay StandardDesign SportPillar'
+ImmersiveStandardSport.story = {
+	name: 'ImmersiveDisplay StandardDesign Sport'
 };
 
-export const ImmersiveStandardCulturePillar = () => {
+export const ImmersiveStandardCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Standard"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveStandardCulturePillar.story = {
-	name: 'ImmersiveDisplay StandardDesign CulturePillar'
+ImmersiveStandardCulture.story = {
+	name: 'ImmersiveDisplay StandardDesign Culture'
 };
 
-export const ImmersiveStandardLifestylePillar = () => {
+export const ImmersiveStandardLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Standard"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveStandardLifestylePillar.story = {
-	name: 'ImmersiveDisplay StandardDesign LifestylePillar'
+ImmersiveStandardLifestyle.story = {
+	name: 'ImmersiveDisplay StandardDesign Lifestyle'
 };
 
 export const ImmersiveStandardSpecialReportTheme = () => {
@@ -2617,69 +2617,69 @@ ImmersiveStandardSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay StandardDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveGalleryNewsPillar = () => {
+export const ImmersiveGalleryNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Gallery"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveGalleryNewsPillar.story = {
-	name: 'ImmersiveDisplay GalleryDesign NewsPillar'
+ImmersiveGalleryNews.story = {
+	name: 'ImmersiveDisplay GalleryDesign News'
 };
 
-export const ImmersiveGalleryOpinionPillar = () => {
+export const ImmersiveGalleryOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Gallery"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveGalleryOpinionPillar.story = {
-	name: 'ImmersiveDisplay GalleryDesign OpinionPillar'
+ImmersiveGalleryOpinion.story = {
+	name: 'ImmersiveDisplay GalleryDesign Opinion'
 };
 
-export const ImmersiveGallerySportPillar = () => {
+export const ImmersiveGallerySport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Gallery"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveGallerySportPillar.story = {
-	name: 'ImmersiveDisplay GalleryDesign SportPillar'
+ImmersiveGallerySport.story = {
+	name: 'ImmersiveDisplay GalleryDesign Sport'
 };
 
-export const ImmersiveGalleryCulturePillar = () => {
+export const ImmersiveGalleryCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Gallery"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveGalleryCulturePillar.story = {
-	name: 'ImmersiveDisplay GalleryDesign CulturePillar'
+ImmersiveGalleryCulture.story = {
+	name: 'ImmersiveDisplay GalleryDesign Culture'
 };
 
-export const ImmersiveGalleryLifestylePillar = () => {
+export const ImmersiveGalleryLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Gallery"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveGalleryLifestylePillar.story = {
-	name: 'ImmersiveDisplay GalleryDesign LifestylePillar'
+ImmersiveGalleryLifestyle.story = {
+	name: 'ImmersiveDisplay GalleryDesign Lifestyle'
 };
 
 export const ImmersiveGallerySpecialReportTheme = () => {
@@ -2721,69 +2721,69 @@ ImmersiveGallerySpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay GalleryDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveAudioNewsPillar = () => {
+export const ImmersiveAudioNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Audio"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveAudioNewsPillar.story = {
-	name: 'ImmersiveDisplay AudioDesign NewsPillar'
+ImmersiveAudioNews.story = {
+	name: 'ImmersiveDisplay AudioDesign News'
 };
 
-export const ImmersiveAudioOpinionPillar = () => {
+export const ImmersiveAudioOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Audio"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveAudioOpinionPillar.story = {
-	name: 'ImmersiveDisplay AudioDesign OpinionPillar'
+ImmersiveAudioOpinion.story = {
+	name: 'ImmersiveDisplay AudioDesign Opinion'
 };
 
-export const ImmersiveAudioSportPillar = () => {
+export const ImmersiveAudioSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Audio"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveAudioSportPillar.story = {
-	name: 'ImmersiveDisplay AudioDesign SportPillar'
+ImmersiveAudioSport.story = {
+	name: 'ImmersiveDisplay AudioDesign Sport'
 };
 
-export const ImmersiveAudioCulturePillar = () => {
+export const ImmersiveAudioCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Audio"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveAudioCulturePillar.story = {
-	name: 'ImmersiveDisplay AudioDesign CulturePillar'
+ImmersiveAudioCulture.story = {
+	name: 'ImmersiveDisplay AudioDesign Culture'
 };
 
-export const ImmersiveAudioLifestylePillar = () => {
+export const ImmersiveAudioLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Audio"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveAudioLifestylePillar.story = {
-	name: 'ImmersiveDisplay AudioDesign LifestylePillar'
+ImmersiveAudioLifestyle.story = {
+	name: 'ImmersiveDisplay AudioDesign Lifestyle'
 };
 
 export const ImmersiveAudioSpecialReportTheme = () => {
@@ -2825,69 +2825,69 @@ ImmersiveAudioSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay AudioDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveVideoNewsPillar = () => {
+export const ImmersiveVideoNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Video"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveVideoNewsPillar.story = {
-	name: 'ImmersiveDisplay VideoDesign NewsPillar'
+ImmersiveVideoNews.story = {
+	name: 'ImmersiveDisplay VideoDesign News'
 };
 
-export const ImmersiveVideoOpinionPillar = () => {
+export const ImmersiveVideoOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Video"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveVideoOpinionPillar.story = {
-	name: 'ImmersiveDisplay VideoDesign OpinionPillar'
+ImmersiveVideoOpinion.story = {
+	name: 'ImmersiveDisplay VideoDesign Opinion'
 };
 
-export const ImmersiveVideoSportPillar = () => {
+export const ImmersiveVideoSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Video"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveVideoSportPillar.story = {
-	name: 'ImmersiveDisplay VideoDesign SportPillar'
+ImmersiveVideoSport.story = {
+	name: 'ImmersiveDisplay VideoDesign Sport'
 };
 
-export const ImmersiveVideoCulturePillar = () => {
+export const ImmersiveVideoCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Video"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveVideoCulturePillar.story = {
-	name: 'ImmersiveDisplay VideoDesign CulturePillar'
+ImmersiveVideoCulture.story = {
+	name: 'ImmersiveDisplay VideoDesign Culture'
 };
 
-export const ImmersiveVideoLifestylePillar = () => {
+export const ImmersiveVideoLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Video"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveVideoLifestylePillar.story = {
-	name: 'ImmersiveDisplay VideoDesign LifestylePillar'
+ImmersiveVideoLifestyle.story = {
+	name: 'ImmersiveDisplay VideoDesign Lifestyle'
 };
 
 export const ImmersiveVideoSpecialReportTheme = () => {
@@ -2929,69 +2929,69 @@ ImmersiveVideoSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay VideoDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveReviewNewsPillar = () => {
+export const ImmersiveReviewNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Review"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveReviewNewsPillar.story = {
-	name: 'ImmersiveDisplay ReviewDesign NewsPillar'
+ImmersiveReviewNews.story = {
+	name: 'ImmersiveDisplay ReviewDesign News'
 };
 
-export const ImmersiveReviewOpinionPillar = () => {
+export const ImmersiveReviewOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Review"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveReviewOpinionPillar.story = {
-	name: 'ImmersiveDisplay ReviewDesign OpinionPillar'
+ImmersiveReviewOpinion.story = {
+	name: 'ImmersiveDisplay ReviewDesign Opinion'
 };
 
-export const ImmersiveReviewSportPillar = () => {
+export const ImmersiveReviewSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Review"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveReviewSportPillar.story = {
-	name: 'ImmersiveDisplay ReviewDesign SportPillar'
+ImmersiveReviewSport.story = {
+	name: 'ImmersiveDisplay ReviewDesign Sport'
 };
 
-export const ImmersiveReviewCulturePillar = () => {
+export const ImmersiveReviewCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Review"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveReviewCulturePillar.story = {
-	name: 'ImmersiveDisplay ReviewDesign CulturePillar'
+ImmersiveReviewCulture.story = {
+	name: 'ImmersiveDisplay ReviewDesign Culture'
 };
 
-export const ImmersiveReviewLifestylePillar = () => {
+export const ImmersiveReviewLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Review"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveReviewLifestylePillar.story = {
-	name: 'ImmersiveDisplay ReviewDesign LifestylePillar'
+ImmersiveReviewLifestyle.story = {
+	name: 'ImmersiveDisplay ReviewDesign Lifestyle'
 };
 
 export const ImmersiveReviewSpecialReportTheme = () => {
@@ -3033,69 +3033,69 @@ ImmersiveReviewSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay ReviewDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveAnalysisNewsPillar = () => {
+export const ImmersiveAnalysisNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Analysis"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveAnalysisNewsPillar.story = {
-	name: 'ImmersiveDisplay AnalysisDesign NewsPillar'
+ImmersiveAnalysisNews.story = {
+	name: 'ImmersiveDisplay AnalysisDesign News'
 };
 
-export const ImmersiveAnalysisOpinionPillar = () => {
+export const ImmersiveAnalysisOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Analysis"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveAnalysisOpinionPillar.story = {
-	name: 'ImmersiveDisplay AnalysisDesign OpinionPillar'
+ImmersiveAnalysisOpinion.story = {
+	name: 'ImmersiveDisplay AnalysisDesign Opinion'
 };
 
-export const ImmersiveAnalysisSportPillar = () => {
+export const ImmersiveAnalysisSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Analysis"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveAnalysisSportPillar.story = {
-	name: 'ImmersiveDisplay AnalysisDesign SportPillar'
+ImmersiveAnalysisSport.story = {
+	name: 'ImmersiveDisplay AnalysisDesign Sport'
 };
 
-export const ImmersiveAnalysisCulturePillar = () => {
+export const ImmersiveAnalysisCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Analysis"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveAnalysisCulturePillar.story = {
-	name: 'ImmersiveDisplay AnalysisDesign CulturePillar'
+ImmersiveAnalysisCulture.story = {
+	name: 'ImmersiveDisplay AnalysisDesign Culture'
 };
 
-export const ImmersiveAnalysisLifestylePillar = () => {
+export const ImmersiveAnalysisLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Analysis"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveAnalysisLifestylePillar.story = {
-	name: 'ImmersiveDisplay AnalysisDesign LifestylePillar'
+ImmersiveAnalysisLifestyle.story = {
+	name: 'ImmersiveDisplay AnalysisDesign Lifestyle'
 };
 
 export const ImmersiveAnalysisSpecialReportTheme = () => {
@@ -3137,69 +3137,69 @@ ImmersiveAnalysisSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay AnalysisDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveExplainerNewsPillar = () => {
+export const ImmersiveExplainerNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Explainer"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveExplainerNewsPillar.story = {
-	name: 'ImmersiveDisplay ExplainerDesign NewsPillar'
+ImmersiveExplainerNews.story = {
+	name: 'ImmersiveDisplay ExplainerDesign News'
 };
 
-export const ImmersiveExplainerOpinionPillar = () => {
+export const ImmersiveExplainerOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Explainer"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveExplainerOpinionPillar.story = {
-	name: 'ImmersiveDisplay ExplainerDesign OpinionPillar'
+ImmersiveExplainerOpinion.story = {
+	name: 'ImmersiveDisplay ExplainerDesign Opinion'
 };
 
-export const ImmersiveExplainerSportPillar = () => {
+export const ImmersiveExplainerSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Explainer"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveExplainerSportPillar.story = {
-	name: 'ImmersiveDisplay ExplainerDesign SportPillar'
+ImmersiveExplainerSport.story = {
+	name: 'ImmersiveDisplay ExplainerDesign Sport'
 };
 
-export const ImmersiveExplainerCulturePillar = () => {
+export const ImmersiveExplainerCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Explainer"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveExplainerCulturePillar.story = {
-	name: 'ImmersiveDisplay ExplainerDesign CulturePillar'
+ImmersiveExplainerCulture.story = {
+	name: 'ImmersiveDisplay ExplainerDesign Culture'
 };
 
-export const ImmersiveExplainerLifestylePillar = () => {
+export const ImmersiveExplainerLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Explainer"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveExplainerLifestylePillar.story = {
-	name: 'ImmersiveDisplay ExplainerDesign LifestylePillar'
+ImmersiveExplainerLifestyle.story = {
+	name: 'ImmersiveDisplay ExplainerDesign Lifestyle'
 };
 
 export const ImmersiveExplainerSpecialReportTheme = () => {
@@ -3241,69 +3241,69 @@ ImmersiveExplainerSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay ExplainerDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveCommentNewsPillar = () => {
+export const ImmersiveCommentNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Comment"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveCommentNewsPillar.story = {
-	name: 'ImmersiveDisplay CommentDesign NewsPillar'
+ImmersiveCommentNews.story = {
+	name: 'ImmersiveDisplay CommentDesign News'
 };
 
-export const ImmersiveCommentOpinionPillar = () => {
+export const ImmersiveCommentOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Comment"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveCommentOpinionPillar.story = {
-	name: 'ImmersiveDisplay CommentDesign OpinionPillar'
+ImmersiveCommentOpinion.story = {
+	name: 'ImmersiveDisplay CommentDesign Opinion'
 };
 
-export const ImmersiveCommentSportPillar = () => {
+export const ImmersiveCommentSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Comment"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveCommentSportPillar.story = {
-	name: 'ImmersiveDisplay CommentDesign SportPillar'
+ImmersiveCommentSport.story = {
+	name: 'ImmersiveDisplay CommentDesign Sport'
 };
 
-export const ImmersiveCommentCulturePillar = () => {
+export const ImmersiveCommentCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Comment"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveCommentCulturePillar.story = {
-	name: 'ImmersiveDisplay CommentDesign CulturePillar'
+ImmersiveCommentCulture.story = {
+	name: 'ImmersiveDisplay CommentDesign Culture'
 };
 
-export const ImmersiveCommentLifestylePillar = () => {
+export const ImmersiveCommentLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Comment"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveCommentLifestylePillar.story = {
-	name: 'ImmersiveDisplay CommentDesign LifestylePillar'
+ImmersiveCommentLifestyle.story = {
+	name: 'ImmersiveDisplay CommentDesign Lifestyle'
 };
 
 export const ImmersiveCommentSpecialReportTheme = () => {
@@ -3345,69 +3345,69 @@ ImmersiveCommentSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay CommentDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveLetterNewsPillar = () => {
+export const ImmersiveLetterNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Letter"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveLetterNewsPillar.story = {
-	name: 'ImmersiveDisplay LetterDesign NewsPillar'
+ImmersiveLetterNews.story = {
+	name: 'ImmersiveDisplay LetterDesign News'
 };
 
-export const ImmersiveLetterOpinionPillar = () => {
+export const ImmersiveLetterOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Letter"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveLetterOpinionPillar.story = {
-	name: 'ImmersiveDisplay LetterDesign OpinionPillar'
+ImmersiveLetterOpinion.story = {
+	name: 'ImmersiveDisplay LetterDesign Opinion'
 };
 
-export const ImmersiveLetterSportPillar = () => {
+export const ImmersiveLetterSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Letter"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveLetterSportPillar.story = {
-	name: 'ImmersiveDisplay LetterDesign SportPillar'
+ImmersiveLetterSport.story = {
+	name: 'ImmersiveDisplay LetterDesign Sport'
 };
 
-export const ImmersiveLetterCulturePillar = () => {
+export const ImmersiveLetterCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Letter"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveLetterCulturePillar.story = {
-	name: 'ImmersiveDisplay LetterDesign CulturePillar'
+ImmersiveLetterCulture.story = {
+	name: 'ImmersiveDisplay LetterDesign Culture'
 };
 
-export const ImmersiveLetterLifestylePillar = () => {
+export const ImmersiveLetterLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Letter"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveLetterLifestylePillar.story = {
-	name: 'ImmersiveDisplay LetterDesign LifestylePillar'
+ImmersiveLetterLifestyle.story = {
+	name: 'ImmersiveDisplay LetterDesign Lifestyle'
 };
 
 export const ImmersiveLetterSpecialReportTheme = () => {
@@ -3449,69 +3449,69 @@ ImmersiveLetterSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay LetterDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveFeatureNewsPillar = () => {
+export const ImmersiveFeatureNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Feature"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveFeatureNewsPillar.story = {
-	name: 'ImmersiveDisplay FeatureDesign NewsPillar'
+ImmersiveFeatureNews.story = {
+	name: 'ImmersiveDisplay FeatureDesign News'
 };
 
-export const ImmersiveFeatureOpinionPillar = () => {
+export const ImmersiveFeatureOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Feature"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveFeatureOpinionPillar.story = {
-	name: 'ImmersiveDisplay FeatureDesign OpinionPillar'
+ImmersiveFeatureOpinion.story = {
+	name: 'ImmersiveDisplay FeatureDesign Opinion'
 };
 
-export const ImmersiveFeatureSportPillar = () => {
+export const ImmersiveFeatureSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Feature"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveFeatureSportPillar.story = {
-	name: 'ImmersiveDisplay FeatureDesign SportPillar'
+ImmersiveFeatureSport.story = {
+	name: 'ImmersiveDisplay FeatureDesign Sport'
 };
 
-export const ImmersiveFeatureCulturePillar = () => {
+export const ImmersiveFeatureCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Feature"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveFeatureCulturePillar.story = {
-	name: 'ImmersiveDisplay FeatureDesign CulturePillar'
+ImmersiveFeatureCulture.story = {
+	name: 'ImmersiveDisplay FeatureDesign Culture'
 };
 
-export const ImmersiveFeatureLifestylePillar = () => {
+export const ImmersiveFeatureLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Feature"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveFeatureLifestylePillar.story = {
-	name: 'ImmersiveDisplay FeatureDesign LifestylePillar'
+ImmersiveFeatureLifestyle.story = {
+	name: 'ImmersiveDisplay FeatureDesign Lifestyle'
 };
 
 export const ImmersiveFeatureSpecialReportTheme = () => {
@@ -3553,69 +3553,69 @@ ImmersiveFeatureSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay FeatureDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveLiveBlogNewsPillar = () => {
+export const ImmersiveLiveBlogNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="LiveBlog"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveLiveBlogNewsPillar.story = {
-	name: 'ImmersiveDisplay LiveBlogDesign NewsPillar'
+ImmersiveLiveBlogNews.story = {
+	name: 'ImmersiveDisplay LiveBlogDesign News'
 };
 
-export const ImmersiveLiveBlogOpinionPillar = () => {
+export const ImmersiveLiveBlogOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="LiveBlog"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveLiveBlogOpinionPillar.story = {
-	name: 'ImmersiveDisplay LiveBlogDesign OpinionPillar'
+ImmersiveLiveBlogOpinion.story = {
+	name: 'ImmersiveDisplay LiveBlogDesign Opinion'
 };
 
-export const ImmersiveLiveBlogSportPillar = () => {
+export const ImmersiveLiveBlogSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="LiveBlog"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveLiveBlogSportPillar.story = {
-	name: 'ImmersiveDisplay LiveBlogDesign SportPillar'
+ImmersiveLiveBlogSport.story = {
+	name: 'ImmersiveDisplay LiveBlogDesign Sport'
 };
 
-export const ImmersiveLiveBlogCulturePillar = () => {
+export const ImmersiveLiveBlogCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="LiveBlog"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveLiveBlogCulturePillar.story = {
-	name: 'ImmersiveDisplay LiveBlogDesign CulturePillar'
+ImmersiveLiveBlogCulture.story = {
+	name: 'ImmersiveDisplay LiveBlogDesign Culture'
 };
 
-export const ImmersiveLiveBlogLifestylePillar = () => {
+export const ImmersiveLiveBlogLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="LiveBlog"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveLiveBlogLifestylePillar.story = {
-	name: 'ImmersiveDisplay LiveBlogDesign LifestylePillar'
+ImmersiveLiveBlogLifestyle.story = {
+	name: 'ImmersiveDisplay LiveBlogDesign Lifestyle'
 };
 
 export const ImmersiveLiveBlogSpecialReportTheme = () => {
@@ -3657,69 +3657,69 @@ ImmersiveLiveBlogSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay LiveBlogDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveDeadBlogNewsPillar = () => {
+export const ImmersiveDeadBlogNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="DeadBlog"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveDeadBlogNewsPillar.story = {
-	name: 'ImmersiveDisplay DeadBlogDesign NewsPillar'
+ImmersiveDeadBlogNews.story = {
+	name: 'ImmersiveDisplay DeadBlogDesign News'
 };
 
-export const ImmersiveDeadBlogOpinionPillar = () => {
+export const ImmersiveDeadBlogOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="DeadBlog"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveDeadBlogOpinionPillar.story = {
-	name: 'ImmersiveDisplay DeadBlogDesign OpinionPillar'
+ImmersiveDeadBlogOpinion.story = {
+	name: 'ImmersiveDisplay DeadBlogDesign Opinion'
 };
 
-export const ImmersiveDeadBlogSportPillar = () => {
+export const ImmersiveDeadBlogSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="DeadBlog"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveDeadBlogSportPillar.story = {
-	name: 'ImmersiveDisplay DeadBlogDesign SportPillar'
+ImmersiveDeadBlogSport.story = {
+	name: 'ImmersiveDisplay DeadBlogDesign Sport'
 };
 
-export const ImmersiveDeadBlogCulturePillar = () => {
+export const ImmersiveDeadBlogCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="DeadBlog"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveDeadBlogCulturePillar.story = {
-	name: 'ImmersiveDisplay DeadBlogDesign CulturePillar'
+ImmersiveDeadBlogCulture.story = {
+	name: 'ImmersiveDisplay DeadBlogDesign Culture'
 };
 
-export const ImmersiveDeadBlogLifestylePillar = () => {
+export const ImmersiveDeadBlogLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="DeadBlog"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveDeadBlogLifestylePillar.story = {
-	name: 'ImmersiveDisplay DeadBlogDesign LifestylePillar'
+ImmersiveDeadBlogLifestyle.story = {
+	name: 'ImmersiveDisplay DeadBlogDesign Lifestyle'
 };
 
 export const ImmersiveDeadBlogSpecialReportTheme = () => {
@@ -3761,69 +3761,69 @@ ImmersiveDeadBlogSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay DeadBlogDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveRecipeNewsPillar = () => {
+export const ImmersiveRecipeNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Recipe"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveRecipeNewsPillar.story = {
-	name: 'ImmersiveDisplay RecipeDesign NewsPillar'
+ImmersiveRecipeNews.story = {
+	name: 'ImmersiveDisplay RecipeDesign News'
 };
 
-export const ImmersiveRecipeOpinionPillar = () => {
+export const ImmersiveRecipeOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Recipe"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveRecipeOpinionPillar.story = {
-	name: 'ImmersiveDisplay RecipeDesign OpinionPillar'
+ImmersiveRecipeOpinion.story = {
+	name: 'ImmersiveDisplay RecipeDesign Opinion'
 };
 
-export const ImmersiveRecipeSportPillar = () => {
+export const ImmersiveRecipeSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Recipe"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveRecipeSportPillar.story = {
-	name: 'ImmersiveDisplay RecipeDesign SportPillar'
+ImmersiveRecipeSport.story = {
+	name: 'ImmersiveDisplay RecipeDesign Sport'
 };
 
-export const ImmersiveRecipeCulturePillar = () => {
+export const ImmersiveRecipeCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Recipe"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveRecipeCulturePillar.story = {
-	name: 'ImmersiveDisplay RecipeDesign CulturePillar'
+ImmersiveRecipeCulture.story = {
+	name: 'ImmersiveDisplay RecipeDesign Culture'
 };
 
-export const ImmersiveRecipeLifestylePillar = () => {
+export const ImmersiveRecipeLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Recipe"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveRecipeLifestylePillar.story = {
-	name: 'ImmersiveDisplay RecipeDesign LifestylePillar'
+ImmersiveRecipeLifestyle.story = {
+	name: 'ImmersiveDisplay RecipeDesign Lifestyle'
 };
 
 export const ImmersiveRecipeSpecialReportTheme = () => {
@@ -3865,69 +3865,69 @@ ImmersiveRecipeSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay RecipeDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveMatchReportNewsPillar = () => {
+export const ImmersiveMatchReportNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="MatchReport"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveMatchReportNewsPillar.story = {
-	name: 'ImmersiveDisplay MatchReportDesign NewsPillar'
+ImmersiveMatchReportNews.story = {
+	name: 'ImmersiveDisplay MatchReportDesign News'
 };
 
-export const ImmersiveMatchReportOpinionPillar = () => {
+export const ImmersiveMatchReportOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="MatchReport"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveMatchReportOpinionPillar.story = {
-	name: 'ImmersiveDisplay MatchReportDesign OpinionPillar'
+ImmersiveMatchReportOpinion.story = {
+	name: 'ImmersiveDisplay MatchReportDesign Opinion'
 };
 
-export const ImmersiveMatchReportSportPillar = () => {
+export const ImmersiveMatchReportSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="MatchReport"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveMatchReportSportPillar.story = {
-	name: 'ImmersiveDisplay MatchReportDesign SportPillar'
+ImmersiveMatchReportSport.story = {
+	name: 'ImmersiveDisplay MatchReportDesign Sport'
 };
 
-export const ImmersiveMatchReportCulturePillar = () => {
+export const ImmersiveMatchReportCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="MatchReport"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveMatchReportCulturePillar.story = {
-	name: 'ImmersiveDisplay MatchReportDesign CulturePillar'
+ImmersiveMatchReportCulture.story = {
+	name: 'ImmersiveDisplay MatchReportDesign Culture'
 };
 
-export const ImmersiveMatchReportLifestylePillar = () => {
+export const ImmersiveMatchReportLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="MatchReport"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveMatchReportLifestylePillar.story = {
-	name: 'ImmersiveDisplay MatchReportDesign LifestylePillar'
+ImmersiveMatchReportLifestyle.story = {
+	name: 'ImmersiveDisplay MatchReportDesign Lifestyle'
 };
 
 export const ImmersiveMatchReportSpecialReportTheme = () => {
@@ -3969,69 +3969,69 @@ ImmersiveMatchReportSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay MatchReportDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveInterviewNewsPillar = () => {
+export const ImmersiveInterviewNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Interview"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveInterviewNewsPillar.story = {
-	name: 'ImmersiveDisplay InterviewDesign NewsPillar'
+ImmersiveInterviewNews.story = {
+	name: 'ImmersiveDisplay InterviewDesign News'
 };
 
-export const ImmersiveInterviewOpinionPillar = () => {
+export const ImmersiveInterviewOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Interview"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveInterviewOpinionPillar.story = {
-	name: 'ImmersiveDisplay InterviewDesign OpinionPillar'
+ImmersiveInterviewOpinion.story = {
+	name: 'ImmersiveDisplay InterviewDesign Opinion'
 };
 
-export const ImmersiveInterviewSportPillar = () => {
+export const ImmersiveInterviewSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Interview"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveInterviewSportPillar.story = {
-	name: 'ImmersiveDisplay InterviewDesign SportPillar'
+ImmersiveInterviewSport.story = {
+	name: 'ImmersiveDisplay InterviewDesign Sport'
 };
 
-export const ImmersiveInterviewCulturePillar = () => {
+export const ImmersiveInterviewCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Interview"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveInterviewCulturePillar.story = {
-	name: 'ImmersiveDisplay InterviewDesign CulturePillar'
+ImmersiveInterviewCulture.story = {
+	name: 'ImmersiveDisplay InterviewDesign Culture'
 };
 
-export const ImmersiveInterviewLifestylePillar = () => {
+export const ImmersiveInterviewLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Interview"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveInterviewLifestylePillar.story = {
-	name: 'ImmersiveDisplay InterviewDesign LifestylePillar'
+ImmersiveInterviewLifestyle.story = {
+	name: 'ImmersiveDisplay InterviewDesign Lifestyle'
 };
 
 export const ImmersiveInterviewSpecialReportTheme = () => {
@@ -4073,69 +4073,69 @@ ImmersiveInterviewSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay InterviewDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveEditorialNewsPillar = () => {
+export const ImmersiveEditorialNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Editorial"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveEditorialNewsPillar.story = {
-	name: 'ImmersiveDisplay EditorialDesign NewsPillar'
+ImmersiveEditorialNews.story = {
+	name: 'ImmersiveDisplay EditorialDesign News'
 };
 
-export const ImmersiveEditorialOpinionPillar = () => {
+export const ImmersiveEditorialOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Editorial"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveEditorialOpinionPillar.story = {
-	name: 'ImmersiveDisplay EditorialDesign OpinionPillar'
+ImmersiveEditorialOpinion.story = {
+	name: 'ImmersiveDisplay EditorialDesign Opinion'
 };
 
-export const ImmersiveEditorialSportPillar = () => {
+export const ImmersiveEditorialSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Editorial"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveEditorialSportPillar.story = {
-	name: 'ImmersiveDisplay EditorialDesign SportPillar'
+ImmersiveEditorialSport.story = {
+	name: 'ImmersiveDisplay EditorialDesign Sport'
 };
 
-export const ImmersiveEditorialCulturePillar = () => {
+export const ImmersiveEditorialCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Editorial"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveEditorialCulturePillar.story = {
-	name: 'ImmersiveDisplay EditorialDesign CulturePillar'
+ImmersiveEditorialCulture.story = {
+	name: 'ImmersiveDisplay EditorialDesign Culture'
 };
 
-export const ImmersiveEditorialLifestylePillar = () => {
+export const ImmersiveEditorialLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Editorial"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveEditorialLifestylePillar.story = {
-	name: 'ImmersiveDisplay EditorialDesign LifestylePillar'
+ImmersiveEditorialLifestyle.story = {
+	name: 'ImmersiveDisplay EditorialDesign Lifestyle'
 };
 
 export const ImmersiveEditorialSpecialReportTheme = () => {
@@ -4177,69 +4177,69 @@ ImmersiveEditorialSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay EditorialDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveQuizNewsPillar = () => {
+export const ImmersiveQuizNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Quiz"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveQuizNewsPillar.story = {
-	name: 'ImmersiveDisplay QuizDesign NewsPillar'
+ImmersiveQuizNews.story = {
+	name: 'ImmersiveDisplay QuizDesign News'
 };
 
-export const ImmersiveQuizOpinionPillar = () => {
+export const ImmersiveQuizOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Quiz"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveQuizOpinionPillar.story = {
-	name: 'ImmersiveDisplay QuizDesign OpinionPillar'
+ImmersiveQuizOpinion.story = {
+	name: 'ImmersiveDisplay QuizDesign Opinion'
 };
 
-export const ImmersiveQuizSportPillar = () => {
+export const ImmersiveQuizSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Quiz"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveQuizSportPillar.story = {
-	name: 'ImmersiveDisplay QuizDesign SportPillar'
+ImmersiveQuizSport.story = {
+	name: 'ImmersiveDisplay QuizDesign Sport'
 };
 
-export const ImmersiveQuizCulturePillar = () => {
+export const ImmersiveQuizCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Quiz"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveQuizCulturePillar.story = {
-	name: 'ImmersiveDisplay QuizDesign CulturePillar'
+ImmersiveQuizCulture.story = {
+	name: 'ImmersiveDisplay QuizDesign Culture'
 };
 
-export const ImmersiveQuizLifestylePillar = () => {
+export const ImmersiveQuizLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Quiz"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveQuizLifestylePillar.story = {
-	name: 'ImmersiveDisplay QuizDesign LifestylePillar'
+ImmersiveQuizLifestyle.story = {
+	name: 'ImmersiveDisplay QuizDesign Lifestyle'
 };
 
 export const ImmersiveQuizSpecialReportTheme = () => {
@@ -4281,69 +4281,69 @@ ImmersiveQuizSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay QuizDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveInteractiveNewsPillar = () => {
+export const ImmersiveInteractiveNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Interactive"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveInteractiveNewsPillar.story = {
-	name: 'ImmersiveDisplay InteractiveDesign NewsPillar'
+ImmersiveInteractiveNews.story = {
+	name: 'ImmersiveDisplay InteractiveDesign News'
 };
 
-export const ImmersiveInteractiveOpinionPillar = () => {
+export const ImmersiveInteractiveOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Interactive"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveInteractiveOpinionPillar.story = {
-	name: 'ImmersiveDisplay InteractiveDesign OpinionPillar'
+ImmersiveInteractiveOpinion.story = {
+	name: 'ImmersiveDisplay InteractiveDesign Opinion'
 };
 
-export const ImmersiveInteractiveSportPillar = () => {
+export const ImmersiveInteractiveSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Interactive"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveInteractiveSportPillar.story = {
-	name: 'ImmersiveDisplay InteractiveDesign SportPillar'
+ImmersiveInteractiveSport.story = {
+	name: 'ImmersiveDisplay InteractiveDesign Sport'
 };
 
-export const ImmersiveInteractiveCulturePillar = () => {
+export const ImmersiveInteractiveCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Interactive"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveInteractiveCulturePillar.story = {
-	name: 'ImmersiveDisplay InteractiveDesign CulturePillar'
+ImmersiveInteractiveCulture.story = {
+	name: 'ImmersiveDisplay InteractiveDesign Culture'
 };
 
-export const ImmersiveInteractiveLifestylePillar = () => {
+export const ImmersiveInteractiveLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Interactive"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveInteractiveLifestylePillar.story = {
-	name: 'ImmersiveDisplay InteractiveDesign LifestylePillar'
+ImmersiveInteractiveLifestyle.story = {
+	name: 'ImmersiveDisplay InteractiveDesign Lifestyle'
 };
 
 export const ImmersiveInteractiveSpecialReportTheme = () => {
@@ -4385,69 +4385,69 @@ ImmersiveInteractiveSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay InteractiveDesign SpecialReportAltTheme'
 };
 
-export const ImmersivePhotoEssayNewsPillar = () => {
+export const ImmersivePhotoEssayNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="PhotoEssay"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersivePhotoEssayNewsPillar.story = {
-	name: 'ImmersiveDisplay PhotoEssayDesign NewsPillar'
+ImmersivePhotoEssayNews.story = {
+	name: 'ImmersiveDisplay PhotoEssayDesign News'
 };
 
-export const ImmersivePhotoEssayOpinionPillar = () => {
+export const ImmersivePhotoEssayOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="PhotoEssay"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersivePhotoEssayOpinionPillar.story = {
-	name: 'ImmersiveDisplay PhotoEssayDesign OpinionPillar'
+ImmersivePhotoEssayOpinion.story = {
+	name: 'ImmersiveDisplay PhotoEssayDesign Opinion'
 };
 
-export const ImmersivePhotoEssaySportPillar = () => {
+export const ImmersivePhotoEssaySport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="PhotoEssay"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersivePhotoEssaySportPillar.story = {
-	name: 'ImmersiveDisplay PhotoEssayDesign SportPillar'
+ImmersivePhotoEssaySport.story = {
+	name: 'ImmersiveDisplay PhotoEssayDesign Sport'
 };
 
-export const ImmersivePhotoEssayCulturePillar = () => {
+export const ImmersivePhotoEssayCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="PhotoEssay"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersivePhotoEssayCulturePillar.story = {
-	name: 'ImmersiveDisplay PhotoEssayDesign CulturePillar'
+ImmersivePhotoEssayCulture.story = {
+	name: 'ImmersiveDisplay PhotoEssayDesign Culture'
 };
 
-export const ImmersivePhotoEssayLifestylePillar = () => {
+export const ImmersivePhotoEssayLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="PhotoEssay"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersivePhotoEssayLifestylePillar.story = {
-	name: 'ImmersiveDisplay PhotoEssayDesign LifestylePillar'
+ImmersivePhotoEssayLifestyle.story = {
+	name: 'ImmersiveDisplay PhotoEssayDesign Lifestyle'
 };
 
 export const ImmersivePhotoEssaySpecialReportTheme = () => {
@@ -4489,69 +4489,69 @@ ImmersivePhotoEssaySpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay PhotoEssayDesign SpecialReportAltTheme'
 };
 
-export const ImmersivePrintShopNewsPillar = () => {
+export const ImmersivePrintShopNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="PrintShop"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersivePrintShopNewsPillar.story = {
-	name: 'ImmersiveDisplay PrintShopDesign NewsPillar'
+ImmersivePrintShopNews.story = {
+	name: 'ImmersiveDisplay PrintShopDesign News'
 };
 
-export const ImmersivePrintShopOpinionPillar = () => {
+export const ImmersivePrintShopOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="PrintShop"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersivePrintShopOpinionPillar.story = {
-	name: 'ImmersiveDisplay PrintShopDesign OpinionPillar'
+ImmersivePrintShopOpinion.story = {
+	name: 'ImmersiveDisplay PrintShopDesign Opinion'
 };
 
-export const ImmersivePrintShopSportPillar = () => {
+export const ImmersivePrintShopSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="PrintShop"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersivePrintShopSportPillar.story = {
-	name: 'ImmersiveDisplay PrintShopDesign SportPillar'
+ImmersivePrintShopSport.story = {
+	name: 'ImmersiveDisplay PrintShopDesign Sport'
 };
 
-export const ImmersivePrintShopCulturePillar = () => {
+export const ImmersivePrintShopCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="PrintShop"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersivePrintShopCulturePillar.story = {
-	name: 'ImmersiveDisplay PrintShopDesign CulturePillar'
+ImmersivePrintShopCulture.story = {
+	name: 'ImmersiveDisplay PrintShopDesign Culture'
 };
 
-export const ImmersivePrintShopLifestylePillar = () => {
+export const ImmersivePrintShopLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="PrintShop"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersivePrintShopLifestylePillar.story = {
-	name: 'ImmersiveDisplay PrintShopDesign LifestylePillar'
+ImmersivePrintShopLifestyle.story = {
+	name: 'ImmersiveDisplay PrintShopDesign Lifestyle'
 };
 
 export const ImmersivePrintShopSpecialReportTheme = () => {
@@ -4593,69 +4593,69 @@ ImmersivePrintShopSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay PrintShopDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveObituaryNewsPillar = () => {
+export const ImmersiveObituaryNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Obituary"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveObituaryNewsPillar.story = {
-	name: 'ImmersiveDisplay ObituaryDesign NewsPillar'
+ImmersiveObituaryNews.story = {
+	name: 'ImmersiveDisplay ObituaryDesign News'
 };
 
-export const ImmersiveObituaryOpinionPillar = () => {
+export const ImmersiveObituaryOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Obituary"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveObituaryOpinionPillar.story = {
-	name: 'ImmersiveDisplay ObituaryDesign OpinionPillar'
+ImmersiveObituaryOpinion.story = {
+	name: 'ImmersiveDisplay ObituaryDesign Opinion'
 };
 
-export const ImmersiveObituarySportPillar = () => {
+export const ImmersiveObituarySport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Obituary"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveObituarySportPillar.story = {
-	name: 'ImmersiveDisplay ObituaryDesign SportPillar'
+ImmersiveObituarySport.story = {
+	name: 'ImmersiveDisplay ObituaryDesign Sport'
 };
 
-export const ImmersiveObituaryCulturePillar = () => {
+export const ImmersiveObituaryCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Obituary"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveObituaryCulturePillar.story = {
-	name: 'ImmersiveDisplay ObituaryDesign CulturePillar'
+ImmersiveObituaryCulture.story = {
+	name: 'ImmersiveDisplay ObituaryDesign Culture'
 };
 
-export const ImmersiveObituaryLifestylePillar = () => {
+export const ImmersiveObituaryLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Obituary"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveObituaryLifestylePillar.story = {
-	name: 'ImmersiveDisplay ObituaryDesign LifestylePillar'
+ImmersiveObituaryLifestyle.story = {
+	name: 'ImmersiveDisplay ObituaryDesign Lifestyle'
 };
 
 export const ImmersiveObituarySpecialReportTheme = () => {
@@ -4697,69 +4697,69 @@ ImmersiveObituarySpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay ObituaryDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveCorrectionNewsPillar = () => {
+export const ImmersiveCorrectionNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Correction"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveCorrectionNewsPillar.story = {
-	name: 'ImmersiveDisplay CorrectionDesign NewsPillar'
+ImmersiveCorrectionNews.story = {
+	name: 'ImmersiveDisplay CorrectionDesign News'
 };
 
-export const ImmersiveCorrectionOpinionPillar = () => {
+export const ImmersiveCorrectionOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Correction"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveCorrectionOpinionPillar.story = {
-	name: 'ImmersiveDisplay CorrectionDesign OpinionPillar'
+ImmersiveCorrectionOpinion.story = {
+	name: 'ImmersiveDisplay CorrectionDesign Opinion'
 };
 
-export const ImmersiveCorrectionSportPillar = () => {
+export const ImmersiveCorrectionSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Correction"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveCorrectionSportPillar.story = {
-	name: 'ImmersiveDisplay CorrectionDesign SportPillar'
+ImmersiveCorrectionSport.story = {
+	name: 'ImmersiveDisplay CorrectionDesign Sport'
 };
 
-export const ImmersiveCorrectionCulturePillar = () => {
+export const ImmersiveCorrectionCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Correction"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveCorrectionCulturePillar.story = {
-	name: 'ImmersiveDisplay CorrectionDesign CulturePillar'
+ImmersiveCorrectionCulture.story = {
+	name: 'ImmersiveDisplay CorrectionDesign Culture'
 };
 
-export const ImmersiveCorrectionLifestylePillar = () => {
+export const ImmersiveCorrectionLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="Correction"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveCorrectionLifestylePillar.story = {
-	name: 'ImmersiveDisplay CorrectionDesign LifestylePillar'
+ImmersiveCorrectionLifestyle.story = {
+	name: 'ImmersiveDisplay CorrectionDesign Lifestyle'
 };
 
 export const ImmersiveCorrectionSpecialReportTheme = () => {
@@ -4801,69 +4801,69 @@ ImmersiveCorrectionSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay CorrectionDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveFullPageInteractiveNewsPillar = () => {
+export const ImmersiveFullPageInteractiveNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="FullPageInteractive"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveFullPageInteractiveNewsPillar.story = {
-	name: 'ImmersiveDisplay FullPageInteractiveDesign NewsPillar'
+ImmersiveFullPageInteractiveNews.story = {
+	name: 'ImmersiveDisplay FullPageInteractiveDesign News'
 };
 
-export const ImmersiveFullPageInteractiveOpinionPillar = () => {
+export const ImmersiveFullPageInteractiveOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="FullPageInteractive"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveFullPageInteractiveOpinionPillar.story = {
-	name: 'ImmersiveDisplay FullPageInteractiveDesign OpinionPillar'
+ImmersiveFullPageInteractiveOpinion.story = {
+	name: 'ImmersiveDisplay FullPageInteractiveDesign Opinion'
 };
 
-export const ImmersiveFullPageInteractiveSportPillar = () => {
+export const ImmersiveFullPageInteractiveSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="FullPageInteractive"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveFullPageInteractiveSportPillar.story = {
-	name: 'ImmersiveDisplay FullPageInteractiveDesign SportPillar'
+ImmersiveFullPageInteractiveSport.story = {
+	name: 'ImmersiveDisplay FullPageInteractiveDesign Sport'
 };
 
-export const ImmersiveFullPageInteractiveCulturePillar = () => {
+export const ImmersiveFullPageInteractiveCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="FullPageInteractive"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveFullPageInteractiveCulturePillar.story = {
-	name: 'ImmersiveDisplay FullPageInteractiveDesign CulturePillar'
+ImmersiveFullPageInteractiveCulture.story = {
+	name: 'ImmersiveDisplay FullPageInteractiveDesign Culture'
 };
 
-export const ImmersiveFullPageInteractiveLifestylePillar = () => {
+export const ImmersiveFullPageInteractiveLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="FullPageInteractive"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveFullPageInteractiveLifestylePillar.story = {
-	name: 'ImmersiveDisplay FullPageInteractiveDesign LifestylePillar'
+ImmersiveFullPageInteractiveLifestyle.story = {
+	name: 'ImmersiveDisplay FullPageInteractiveDesign Lifestyle'
 };
 
 export const ImmersiveFullPageInteractiveSpecialReportTheme = () => {
@@ -4905,69 +4905,69 @@ ImmersiveFullPageInteractiveSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay FullPageInteractiveDesign SpecialReportAltTheme'
 };
 
-export const ImmersiveNewsletterSignupNewsPillar = () => {
+export const ImmersiveNewsletterSignupNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="NewsletterSignup"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ImmersiveNewsletterSignupNewsPillar.story = {
-	name: 'ImmersiveDisplay NewsletterSignupDesign NewsPillar'
+ImmersiveNewsletterSignupNews.story = {
+	name: 'ImmersiveDisplay NewsletterSignupDesign News'
 };
 
-export const ImmersiveNewsletterSignupOpinionPillar = () => {
+export const ImmersiveNewsletterSignupOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="NewsletterSignup"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ImmersiveNewsletterSignupOpinionPillar.story = {
-	name: 'ImmersiveDisplay NewsletterSignupDesign OpinionPillar'
+ImmersiveNewsletterSignupOpinion.story = {
+	name: 'ImmersiveDisplay NewsletterSignupDesign Opinion'
 };
 
-export const ImmersiveNewsletterSignupSportPillar = () => {
+export const ImmersiveNewsletterSignupSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="NewsletterSignup"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ImmersiveNewsletterSignupSportPillar.story = {
-	name: 'ImmersiveDisplay NewsletterSignupDesign SportPillar'
+ImmersiveNewsletterSignupSport.story = {
+	name: 'ImmersiveDisplay NewsletterSignupDesign Sport'
 };
 
-export const ImmersiveNewsletterSignupCulturePillar = () => {
+export const ImmersiveNewsletterSignupCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="NewsletterSignup"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ImmersiveNewsletterSignupCulturePillar.story = {
-	name: 'ImmersiveDisplay NewsletterSignupDesign CulturePillar'
+ImmersiveNewsletterSignupCulture.story = {
+	name: 'ImmersiveDisplay NewsletterSignupDesign Culture'
 };
 
-export const ImmersiveNewsletterSignupLifestylePillar = () => {
+export const ImmersiveNewsletterSignupLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Immersive"
 			designName="NewsletterSignup"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ImmersiveNewsletterSignupLifestylePillar.story = {
-	name: 'ImmersiveDisplay NewsletterSignupDesign LifestylePillar'
+ImmersiveNewsletterSignupLifestyle.story = {
+	name: 'ImmersiveDisplay NewsletterSignupDesign Lifestyle'
 };
 
 export const ImmersiveNewsletterSignupSpecialReportTheme = () => {
@@ -5009,69 +5009,69 @@ ImmersiveNewsletterSignupSpecialReportAltTheme.story = {
 	name: 'ImmersiveDisplay NewsletterSignupDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseStandardNewsPillar = () => {
+export const ShowcaseStandardNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Standard"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseStandardNewsPillar.story = {
-	name: 'ShowcaseDisplay StandardDesign NewsPillar'
+ShowcaseStandardNews.story = {
+	name: 'ShowcaseDisplay StandardDesign News'
 };
 
-export const ShowcaseStandardOpinionPillar = () => {
+export const ShowcaseStandardOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Standard"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseStandardOpinionPillar.story = {
-	name: 'ShowcaseDisplay StandardDesign OpinionPillar'
+ShowcaseStandardOpinion.story = {
+	name: 'ShowcaseDisplay StandardDesign Opinion'
 };
 
-export const ShowcaseStandardSportPillar = () => {
+export const ShowcaseStandardSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Standard"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseStandardSportPillar.story = {
-	name: 'ShowcaseDisplay StandardDesign SportPillar'
+ShowcaseStandardSport.story = {
+	name: 'ShowcaseDisplay StandardDesign Sport'
 };
 
-export const ShowcaseStandardCulturePillar = () => {
+export const ShowcaseStandardCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Standard"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseStandardCulturePillar.story = {
-	name: 'ShowcaseDisplay StandardDesign CulturePillar'
+ShowcaseStandardCulture.story = {
+	name: 'ShowcaseDisplay StandardDesign Culture'
 };
 
-export const ShowcaseStandardLifestylePillar = () => {
+export const ShowcaseStandardLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Standard"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseStandardLifestylePillar.story = {
-	name: 'ShowcaseDisplay StandardDesign LifestylePillar'
+ShowcaseStandardLifestyle.story = {
+	name: 'ShowcaseDisplay StandardDesign Lifestyle'
 };
 
 export const ShowcaseStandardSpecialReportTheme = () => {
@@ -5113,69 +5113,69 @@ ShowcaseStandardSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay StandardDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseGalleryNewsPillar = () => {
+export const ShowcaseGalleryNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Gallery"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseGalleryNewsPillar.story = {
-	name: 'ShowcaseDisplay GalleryDesign NewsPillar'
+ShowcaseGalleryNews.story = {
+	name: 'ShowcaseDisplay GalleryDesign News'
 };
 
-export const ShowcaseGalleryOpinionPillar = () => {
+export const ShowcaseGalleryOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Gallery"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseGalleryOpinionPillar.story = {
-	name: 'ShowcaseDisplay GalleryDesign OpinionPillar'
+ShowcaseGalleryOpinion.story = {
+	name: 'ShowcaseDisplay GalleryDesign Opinion'
 };
 
-export const ShowcaseGallerySportPillar = () => {
+export const ShowcaseGallerySport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Gallery"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseGallerySportPillar.story = {
-	name: 'ShowcaseDisplay GalleryDesign SportPillar'
+ShowcaseGallerySport.story = {
+	name: 'ShowcaseDisplay GalleryDesign Sport'
 };
 
-export const ShowcaseGalleryCulturePillar = () => {
+export const ShowcaseGalleryCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Gallery"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseGalleryCulturePillar.story = {
-	name: 'ShowcaseDisplay GalleryDesign CulturePillar'
+ShowcaseGalleryCulture.story = {
+	name: 'ShowcaseDisplay GalleryDesign Culture'
 };
 
-export const ShowcaseGalleryLifestylePillar = () => {
+export const ShowcaseGalleryLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Gallery"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseGalleryLifestylePillar.story = {
-	name: 'ShowcaseDisplay GalleryDesign LifestylePillar'
+ShowcaseGalleryLifestyle.story = {
+	name: 'ShowcaseDisplay GalleryDesign Lifestyle'
 };
 
 export const ShowcaseGallerySpecialReportTheme = () => {
@@ -5217,69 +5217,69 @@ ShowcaseGallerySpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay GalleryDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseAudioNewsPillar = () => {
+export const ShowcaseAudioNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Audio"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseAudioNewsPillar.story = {
-	name: 'ShowcaseDisplay AudioDesign NewsPillar'
+ShowcaseAudioNews.story = {
+	name: 'ShowcaseDisplay AudioDesign News'
 };
 
-export const ShowcaseAudioOpinionPillar = () => {
+export const ShowcaseAudioOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Audio"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseAudioOpinionPillar.story = {
-	name: 'ShowcaseDisplay AudioDesign OpinionPillar'
+ShowcaseAudioOpinion.story = {
+	name: 'ShowcaseDisplay AudioDesign Opinion'
 };
 
-export const ShowcaseAudioSportPillar = () => {
+export const ShowcaseAudioSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Audio"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseAudioSportPillar.story = {
-	name: 'ShowcaseDisplay AudioDesign SportPillar'
+ShowcaseAudioSport.story = {
+	name: 'ShowcaseDisplay AudioDesign Sport'
 };
 
-export const ShowcaseAudioCulturePillar = () => {
+export const ShowcaseAudioCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Audio"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseAudioCulturePillar.story = {
-	name: 'ShowcaseDisplay AudioDesign CulturePillar'
+ShowcaseAudioCulture.story = {
+	name: 'ShowcaseDisplay AudioDesign Culture'
 };
 
-export const ShowcaseAudioLifestylePillar = () => {
+export const ShowcaseAudioLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Audio"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseAudioLifestylePillar.story = {
-	name: 'ShowcaseDisplay AudioDesign LifestylePillar'
+ShowcaseAudioLifestyle.story = {
+	name: 'ShowcaseDisplay AudioDesign Lifestyle'
 };
 
 export const ShowcaseAudioSpecialReportTheme = () => {
@@ -5321,69 +5321,69 @@ ShowcaseAudioSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay AudioDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseVideoNewsPillar = () => {
+export const ShowcaseVideoNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Video"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseVideoNewsPillar.story = {
-	name: 'ShowcaseDisplay VideoDesign NewsPillar'
+ShowcaseVideoNews.story = {
+	name: 'ShowcaseDisplay VideoDesign News'
 };
 
-export const ShowcaseVideoOpinionPillar = () => {
+export const ShowcaseVideoOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Video"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseVideoOpinionPillar.story = {
-	name: 'ShowcaseDisplay VideoDesign OpinionPillar'
+ShowcaseVideoOpinion.story = {
+	name: 'ShowcaseDisplay VideoDesign Opinion'
 };
 
-export const ShowcaseVideoSportPillar = () => {
+export const ShowcaseVideoSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Video"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseVideoSportPillar.story = {
-	name: 'ShowcaseDisplay VideoDesign SportPillar'
+ShowcaseVideoSport.story = {
+	name: 'ShowcaseDisplay VideoDesign Sport'
 };
 
-export const ShowcaseVideoCulturePillar = () => {
+export const ShowcaseVideoCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Video"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseVideoCulturePillar.story = {
-	name: 'ShowcaseDisplay VideoDesign CulturePillar'
+ShowcaseVideoCulture.story = {
+	name: 'ShowcaseDisplay VideoDesign Culture'
 };
 
-export const ShowcaseVideoLifestylePillar = () => {
+export const ShowcaseVideoLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Video"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseVideoLifestylePillar.story = {
-	name: 'ShowcaseDisplay VideoDesign LifestylePillar'
+ShowcaseVideoLifestyle.story = {
+	name: 'ShowcaseDisplay VideoDesign Lifestyle'
 };
 
 export const ShowcaseVideoSpecialReportTheme = () => {
@@ -5425,69 +5425,69 @@ ShowcaseVideoSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay VideoDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseReviewNewsPillar = () => {
+export const ShowcaseReviewNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Review"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseReviewNewsPillar.story = {
-	name: 'ShowcaseDisplay ReviewDesign NewsPillar'
+ShowcaseReviewNews.story = {
+	name: 'ShowcaseDisplay ReviewDesign News'
 };
 
-export const ShowcaseReviewOpinionPillar = () => {
+export const ShowcaseReviewOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Review"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseReviewOpinionPillar.story = {
-	name: 'ShowcaseDisplay ReviewDesign OpinionPillar'
+ShowcaseReviewOpinion.story = {
+	name: 'ShowcaseDisplay ReviewDesign Opinion'
 };
 
-export const ShowcaseReviewSportPillar = () => {
+export const ShowcaseReviewSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Review"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseReviewSportPillar.story = {
-	name: 'ShowcaseDisplay ReviewDesign SportPillar'
+ShowcaseReviewSport.story = {
+	name: 'ShowcaseDisplay ReviewDesign Sport'
 };
 
-export const ShowcaseReviewCulturePillar = () => {
+export const ShowcaseReviewCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Review"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseReviewCulturePillar.story = {
-	name: 'ShowcaseDisplay ReviewDesign CulturePillar'
+ShowcaseReviewCulture.story = {
+	name: 'ShowcaseDisplay ReviewDesign Culture'
 };
 
-export const ShowcaseReviewLifestylePillar = () => {
+export const ShowcaseReviewLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Review"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseReviewLifestylePillar.story = {
-	name: 'ShowcaseDisplay ReviewDesign LifestylePillar'
+ShowcaseReviewLifestyle.story = {
+	name: 'ShowcaseDisplay ReviewDesign Lifestyle'
 };
 
 export const ShowcaseReviewSpecialReportTheme = () => {
@@ -5529,69 +5529,69 @@ ShowcaseReviewSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay ReviewDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseAnalysisNewsPillar = () => {
+export const ShowcaseAnalysisNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Analysis"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseAnalysisNewsPillar.story = {
-	name: 'ShowcaseDisplay AnalysisDesign NewsPillar'
+ShowcaseAnalysisNews.story = {
+	name: 'ShowcaseDisplay AnalysisDesign News'
 };
 
-export const ShowcaseAnalysisOpinionPillar = () => {
+export const ShowcaseAnalysisOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Analysis"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseAnalysisOpinionPillar.story = {
-	name: 'ShowcaseDisplay AnalysisDesign OpinionPillar'
+ShowcaseAnalysisOpinion.story = {
+	name: 'ShowcaseDisplay AnalysisDesign Opinion'
 };
 
-export const ShowcaseAnalysisSportPillar = () => {
+export const ShowcaseAnalysisSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Analysis"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseAnalysisSportPillar.story = {
-	name: 'ShowcaseDisplay AnalysisDesign SportPillar'
+ShowcaseAnalysisSport.story = {
+	name: 'ShowcaseDisplay AnalysisDesign Sport'
 };
 
-export const ShowcaseAnalysisCulturePillar = () => {
+export const ShowcaseAnalysisCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Analysis"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseAnalysisCulturePillar.story = {
-	name: 'ShowcaseDisplay AnalysisDesign CulturePillar'
+ShowcaseAnalysisCulture.story = {
+	name: 'ShowcaseDisplay AnalysisDesign Culture'
 };
 
-export const ShowcaseAnalysisLifestylePillar = () => {
+export const ShowcaseAnalysisLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Analysis"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseAnalysisLifestylePillar.story = {
-	name: 'ShowcaseDisplay AnalysisDesign LifestylePillar'
+ShowcaseAnalysisLifestyle.story = {
+	name: 'ShowcaseDisplay AnalysisDesign Lifestyle'
 };
 
 export const ShowcaseAnalysisSpecialReportTheme = () => {
@@ -5633,69 +5633,69 @@ ShowcaseAnalysisSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay AnalysisDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseExplainerNewsPillar = () => {
+export const ShowcaseExplainerNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Explainer"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseExplainerNewsPillar.story = {
-	name: 'ShowcaseDisplay ExplainerDesign NewsPillar'
+ShowcaseExplainerNews.story = {
+	name: 'ShowcaseDisplay ExplainerDesign News'
 };
 
-export const ShowcaseExplainerOpinionPillar = () => {
+export const ShowcaseExplainerOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Explainer"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseExplainerOpinionPillar.story = {
-	name: 'ShowcaseDisplay ExplainerDesign OpinionPillar'
+ShowcaseExplainerOpinion.story = {
+	name: 'ShowcaseDisplay ExplainerDesign Opinion'
 };
 
-export const ShowcaseExplainerSportPillar = () => {
+export const ShowcaseExplainerSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Explainer"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseExplainerSportPillar.story = {
-	name: 'ShowcaseDisplay ExplainerDesign SportPillar'
+ShowcaseExplainerSport.story = {
+	name: 'ShowcaseDisplay ExplainerDesign Sport'
 };
 
-export const ShowcaseExplainerCulturePillar = () => {
+export const ShowcaseExplainerCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Explainer"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseExplainerCulturePillar.story = {
-	name: 'ShowcaseDisplay ExplainerDesign CulturePillar'
+ShowcaseExplainerCulture.story = {
+	name: 'ShowcaseDisplay ExplainerDesign Culture'
 };
 
-export const ShowcaseExplainerLifestylePillar = () => {
+export const ShowcaseExplainerLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Explainer"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseExplainerLifestylePillar.story = {
-	name: 'ShowcaseDisplay ExplainerDesign LifestylePillar'
+ShowcaseExplainerLifestyle.story = {
+	name: 'ShowcaseDisplay ExplainerDesign Lifestyle'
 };
 
 export const ShowcaseExplainerSpecialReportTheme = () => {
@@ -5737,69 +5737,69 @@ ShowcaseExplainerSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay ExplainerDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseCommentNewsPillar = () => {
+export const ShowcaseCommentNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Comment"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseCommentNewsPillar.story = {
-	name: 'ShowcaseDisplay CommentDesign NewsPillar'
+ShowcaseCommentNews.story = {
+	name: 'ShowcaseDisplay CommentDesign News'
 };
 
-export const ShowcaseCommentOpinionPillar = () => {
+export const ShowcaseCommentOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Comment"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseCommentOpinionPillar.story = {
-	name: 'ShowcaseDisplay CommentDesign OpinionPillar'
+ShowcaseCommentOpinion.story = {
+	name: 'ShowcaseDisplay CommentDesign Opinion'
 };
 
-export const ShowcaseCommentSportPillar = () => {
+export const ShowcaseCommentSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Comment"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseCommentSportPillar.story = {
-	name: 'ShowcaseDisplay CommentDesign SportPillar'
+ShowcaseCommentSport.story = {
+	name: 'ShowcaseDisplay CommentDesign Sport'
 };
 
-export const ShowcaseCommentCulturePillar = () => {
+export const ShowcaseCommentCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Comment"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseCommentCulturePillar.story = {
-	name: 'ShowcaseDisplay CommentDesign CulturePillar'
+ShowcaseCommentCulture.story = {
+	name: 'ShowcaseDisplay CommentDesign Culture'
 };
 
-export const ShowcaseCommentLifestylePillar = () => {
+export const ShowcaseCommentLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Comment"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseCommentLifestylePillar.story = {
-	name: 'ShowcaseDisplay CommentDesign LifestylePillar'
+ShowcaseCommentLifestyle.story = {
+	name: 'ShowcaseDisplay CommentDesign Lifestyle'
 };
 
 export const ShowcaseCommentSpecialReportTheme = () => {
@@ -5841,69 +5841,69 @@ ShowcaseCommentSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay CommentDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseLetterNewsPillar = () => {
+export const ShowcaseLetterNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Letter"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseLetterNewsPillar.story = {
-	name: 'ShowcaseDisplay LetterDesign NewsPillar'
+ShowcaseLetterNews.story = {
+	name: 'ShowcaseDisplay LetterDesign News'
 };
 
-export const ShowcaseLetterOpinionPillar = () => {
+export const ShowcaseLetterOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Letter"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseLetterOpinionPillar.story = {
-	name: 'ShowcaseDisplay LetterDesign OpinionPillar'
+ShowcaseLetterOpinion.story = {
+	name: 'ShowcaseDisplay LetterDesign Opinion'
 };
 
-export const ShowcaseLetterSportPillar = () => {
+export const ShowcaseLetterSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Letter"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseLetterSportPillar.story = {
-	name: 'ShowcaseDisplay LetterDesign SportPillar'
+ShowcaseLetterSport.story = {
+	name: 'ShowcaseDisplay LetterDesign Sport'
 };
 
-export const ShowcaseLetterCulturePillar = () => {
+export const ShowcaseLetterCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Letter"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseLetterCulturePillar.story = {
-	name: 'ShowcaseDisplay LetterDesign CulturePillar'
+ShowcaseLetterCulture.story = {
+	name: 'ShowcaseDisplay LetterDesign Culture'
 };
 
-export const ShowcaseLetterLifestylePillar = () => {
+export const ShowcaseLetterLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Letter"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseLetterLifestylePillar.story = {
-	name: 'ShowcaseDisplay LetterDesign LifestylePillar'
+ShowcaseLetterLifestyle.story = {
+	name: 'ShowcaseDisplay LetterDesign Lifestyle'
 };
 
 export const ShowcaseLetterSpecialReportTheme = () => {
@@ -5945,69 +5945,69 @@ ShowcaseLetterSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay LetterDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseFeatureNewsPillar = () => {
+export const ShowcaseFeatureNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Feature"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseFeatureNewsPillar.story = {
-	name: 'ShowcaseDisplay FeatureDesign NewsPillar'
+ShowcaseFeatureNews.story = {
+	name: 'ShowcaseDisplay FeatureDesign News'
 };
 
-export const ShowcaseFeatureOpinionPillar = () => {
+export const ShowcaseFeatureOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Feature"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseFeatureOpinionPillar.story = {
-	name: 'ShowcaseDisplay FeatureDesign OpinionPillar'
+ShowcaseFeatureOpinion.story = {
+	name: 'ShowcaseDisplay FeatureDesign Opinion'
 };
 
-export const ShowcaseFeatureSportPillar = () => {
+export const ShowcaseFeatureSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Feature"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseFeatureSportPillar.story = {
-	name: 'ShowcaseDisplay FeatureDesign SportPillar'
+ShowcaseFeatureSport.story = {
+	name: 'ShowcaseDisplay FeatureDesign Sport'
 };
 
-export const ShowcaseFeatureCulturePillar = () => {
+export const ShowcaseFeatureCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Feature"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseFeatureCulturePillar.story = {
-	name: 'ShowcaseDisplay FeatureDesign CulturePillar'
+ShowcaseFeatureCulture.story = {
+	name: 'ShowcaseDisplay FeatureDesign Culture'
 };
 
-export const ShowcaseFeatureLifestylePillar = () => {
+export const ShowcaseFeatureLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Feature"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseFeatureLifestylePillar.story = {
-	name: 'ShowcaseDisplay FeatureDesign LifestylePillar'
+ShowcaseFeatureLifestyle.story = {
+	name: 'ShowcaseDisplay FeatureDesign Lifestyle'
 };
 
 export const ShowcaseFeatureSpecialReportTheme = () => {
@@ -6049,69 +6049,69 @@ ShowcaseFeatureSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay FeatureDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseLiveBlogNewsPillar = () => {
+export const ShowcaseLiveBlogNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="LiveBlog"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseLiveBlogNewsPillar.story = {
-	name: 'ShowcaseDisplay LiveBlogDesign NewsPillar'
+ShowcaseLiveBlogNews.story = {
+	name: 'ShowcaseDisplay LiveBlogDesign News'
 };
 
-export const ShowcaseLiveBlogOpinionPillar = () => {
+export const ShowcaseLiveBlogOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="LiveBlog"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseLiveBlogOpinionPillar.story = {
-	name: 'ShowcaseDisplay LiveBlogDesign OpinionPillar'
+ShowcaseLiveBlogOpinion.story = {
+	name: 'ShowcaseDisplay LiveBlogDesign Opinion'
 };
 
-export const ShowcaseLiveBlogSportPillar = () => {
+export const ShowcaseLiveBlogSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="LiveBlog"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseLiveBlogSportPillar.story = {
-	name: 'ShowcaseDisplay LiveBlogDesign SportPillar'
+ShowcaseLiveBlogSport.story = {
+	name: 'ShowcaseDisplay LiveBlogDesign Sport'
 };
 
-export const ShowcaseLiveBlogCulturePillar = () => {
+export const ShowcaseLiveBlogCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="LiveBlog"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseLiveBlogCulturePillar.story = {
-	name: 'ShowcaseDisplay LiveBlogDesign CulturePillar'
+ShowcaseLiveBlogCulture.story = {
+	name: 'ShowcaseDisplay LiveBlogDesign Culture'
 };
 
-export const ShowcaseLiveBlogLifestylePillar = () => {
+export const ShowcaseLiveBlogLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="LiveBlog"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseLiveBlogLifestylePillar.story = {
-	name: 'ShowcaseDisplay LiveBlogDesign LifestylePillar'
+ShowcaseLiveBlogLifestyle.story = {
+	name: 'ShowcaseDisplay LiveBlogDesign Lifestyle'
 };
 
 export const ShowcaseLiveBlogSpecialReportTheme = () => {
@@ -6153,69 +6153,69 @@ ShowcaseLiveBlogSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay LiveBlogDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseDeadBlogNewsPillar = () => {
+export const ShowcaseDeadBlogNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="DeadBlog"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseDeadBlogNewsPillar.story = {
-	name: 'ShowcaseDisplay DeadBlogDesign NewsPillar'
+ShowcaseDeadBlogNews.story = {
+	name: 'ShowcaseDisplay DeadBlogDesign News'
 };
 
-export const ShowcaseDeadBlogOpinionPillar = () => {
+export const ShowcaseDeadBlogOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="DeadBlog"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseDeadBlogOpinionPillar.story = {
-	name: 'ShowcaseDisplay DeadBlogDesign OpinionPillar'
+ShowcaseDeadBlogOpinion.story = {
+	name: 'ShowcaseDisplay DeadBlogDesign Opinion'
 };
 
-export const ShowcaseDeadBlogSportPillar = () => {
+export const ShowcaseDeadBlogSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="DeadBlog"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseDeadBlogSportPillar.story = {
-	name: 'ShowcaseDisplay DeadBlogDesign SportPillar'
+ShowcaseDeadBlogSport.story = {
+	name: 'ShowcaseDisplay DeadBlogDesign Sport'
 };
 
-export const ShowcaseDeadBlogCulturePillar = () => {
+export const ShowcaseDeadBlogCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="DeadBlog"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseDeadBlogCulturePillar.story = {
-	name: 'ShowcaseDisplay DeadBlogDesign CulturePillar'
+ShowcaseDeadBlogCulture.story = {
+	name: 'ShowcaseDisplay DeadBlogDesign Culture'
 };
 
-export const ShowcaseDeadBlogLifestylePillar = () => {
+export const ShowcaseDeadBlogLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="DeadBlog"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseDeadBlogLifestylePillar.story = {
-	name: 'ShowcaseDisplay DeadBlogDesign LifestylePillar'
+ShowcaseDeadBlogLifestyle.story = {
+	name: 'ShowcaseDisplay DeadBlogDesign Lifestyle'
 };
 
 export const ShowcaseDeadBlogSpecialReportTheme = () => {
@@ -6257,69 +6257,69 @@ ShowcaseDeadBlogSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay DeadBlogDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseRecipeNewsPillar = () => {
+export const ShowcaseRecipeNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Recipe"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseRecipeNewsPillar.story = {
-	name: 'ShowcaseDisplay RecipeDesign NewsPillar'
+ShowcaseRecipeNews.story = {
+	name: 'ShowcaseDisplay RecipeDesign News'
 };
 
-export const ShowcaseRecipeOpinionPillar = () => {
+export const ShowcaseRecipeOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Recipe"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseRecipeOpinionPillar.story = {
-	name: 'ShowcaseDisplay RecipeDesign OpinionPillar'
+ShowcaseRecipeOpinion.story = {
+	name: 'ShowcaseDisplay RecipeDesign Opinion'
 };
 
-export const ShowcaseRecipeSportPillar = () => {
+export const ShowcaseRecipeSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Recipe"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseRecipeSportPillar.story = {
-	name: 'ShowcaseDisplay RecipeDesign SportPillar'
+ShowcaseRecipeSport.story = {
+	name: 'ShowcaseDisplay RecipeDesign Sport'
 };
 
-export const ShowcaseRecipeCulturePillar = () => {
+export const ShowcaseRecipeCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Recipe"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseRecipeCulturePillar.story = {
-	name: 'ShowcaseDisplay RecipeDesign CulturePillar'
+ShowcaseRecipeCulture.story = {
+	name: 'ShowcaseDisplay RecipeDesign Culture'
 };
 
-export const ShowcaseRecipeLifestylePillar = () => {
+export const ShowcaseRecipeLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Recipe"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseRecipeLifestylePillar.story = {
-	name: 'ShowcaseDisplay RecipeDesign LifestylePillar'
+ShowcaseRecipeLifestyle.story = {
+	name: 'ShowcaseDisplay RecipeDesign Lifestyle'
 };
 
 export const ShowcaseRecipeSpecialReportTheme = () => {
@@ -6361,69 +6361,69 @@ ShowcaseRecipeSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay RecipeDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseMatchReportNewsPillar = () => {
+export const ShowcaseMatchReportNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="MatchReport"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseMatchReportNewsPillar.story = {
-	name: 'ShowcaseDisplay MatchReportDesign NewsPillar'
+ShowcaseMatchReportNews.story = {
+	name: 'ShowcaseDisplay MatchReportDesign News'
 };
 
-export const ShowcaseMatchReportOpinionPillar = () => {
+export const ShowcaseMatchReportOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="MatchReport"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseMatchReportOpinionPillar.story = {
-	name: 'ShowcaseDisplay MatchReportDesign OpinionPillar'
+ShowcaseMatchReportOpinion.story = {
+	name: 'ShowcaseDisplay MatchReportDesign Opinion'
 };
 
-export const ShowcaseMatchReportSportPillar = () => {
+export const ShowcaseMatchReportSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="MatchReport"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseMatchReportSportPillar.story = {
-	name: 'ShowcaseDisplay MatchReportDesign SportPillar'
+ShowcaseMatchReportSport.story = {
+	name: 'ShowcaseDisplay MatchReportDesign Sport'
 };
 
-export const ShowcaseMatchReportCulturePillar = () => {
+export const ShowcaseMatchReportCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="MatchReport"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseMatchReportCulturePillar.story = {
-	name: 'ShowcaseDisplay MatchReportDesign CulturePillar'
+ShowcaseMatchReportCulture.story = {
+	name: 'ShowcaseDisplay MatchReportDesign Culture'
 };
 
-export const ShowcaseMatchReportLifestylePillar = () => {
+export const ShowcaseMatchReportLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="MatchReport"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseMatchReportLifestylePillar.story = {
-	name: 'ShowcaseDisplay MatchReportDesign LifestylePillar'
+ShowcaseMatchReportLifestyle.story = {
+	name: 'ShowcaseDisplay MatchReportDesign Lifestyle'
 };
 
 export const ShowcaseMatchReportSpecialReportTheme = () => {
@@ -6465,69 +6465,69 @@ ShowcaseMatchReportSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay MatchReportDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseInterviewNewsPillar = () => {
+export const ShowcaseInterviewNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Interview"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseInterviewNewsPillar.story = {
-	name: 'ShowcaseDisplay InterviewDesign NewsPillar'
+ShowcaseInterviewNews.story = {
+	name: 'ShowcaseDisplay InterviewDesign News'
 };
 
-export const ShowcaseInterviewOpinionPillar = () => {
+export const ShowcaseInterviewOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Interview"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseInterviewOpinionPillar.story = {
-	name: 'ShowcaseDisplay InterviewDesign OpinionPillar'
+ShowcaseInterviewOpinion.story = {
+	name: 'ShowcaseDisplay InterviewDesign Opinion'
 };
 
-export const ShowcaseInterviewSportPillar = () => {
+export const ShowcaseInterviewSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Interview"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseInterviewSportPillar.story = {
-	name: 'ShowcaseDisplay InterviewDesign SportPillar'
+ShowcaseInterviewSport.story = {
+	name: 'ShowcaseDisplay InterviewDesign Sport'
 };
 
-export const ShowcaseInterviewCulturePillar = () => {
+export const ShowcaseInterviewCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Interview"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseInterviewCulturePillar.story = {
-	name: 'ShowcaseDisplay InterviewDesign CulturePillar'
+ShowcaseInterviewCulture.story = {
+	name: 'ShowcaseDisplay InterviewDesign Culture'
 };
 
-export const ShowcaseInterviewLifestylePillar = () => {
+export const ShowcaseInterviewLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Interview"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseInterviewLifestylePillar.story = {
-	name: 'ShowcaseDisplay InterviewDesign LifestylePillar'
+ShowcaseInterviewLifestyle.story = {
+	name: 'ShowcaseDisplay InterviewDesign Lifestyle'
 };
 
 export const ShowcaseInterviewSpecialReportTheme = () => {
@@ -6569,69 +6569,69 @@ ShowcaseInterviewSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay InterviewDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseEditorialNewsPillar = () => {
+export const ShowcaseEditorialNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Editorial"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseEditorialNewsPillar.story = {
-	name: 'ShowcaseDisplay EditorialDesign NewsPillar'
+ShowcaseEditorialNews.story = {
+	name: 'ShowcaseDisplay EditorialDesign News'
 };
 
-export const ShowcaseEditorialOpinionPillar = () => {
+export const ShowcaseEditorialOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Editorial"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseEditorialOpinionPillar.story = {
-	name: 'ShowcaseDisplay EditorialDesign OpinionPillar'
+ShowcaseEditorialOpinion.story = {
+	name: 'ShowcaseDisplay EditorialDesign Opinion'
 };
 
-export const ShowcaseEditorialSportPillar = () => {
+export const ShowcaseEditorialSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Editorial"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseEditorialSportPillar.story = {
-	name: 'ShowcaseDisplay EditorialDesign SportPillar'
+ShowcaseEditorialSport.story = {
+	name: 'ShowcaseDisplay EditorialDesign Sport'
 };
 
-export const ShowcaseEditorialCulturePillar = () => {
+export const ShowcaseEditorialCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Editorial"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseEditorialCulturePillar.story = {
-	name: 'ShowcaseDisplay EditorialDesign CulturePillar'
+ShowcaseEditorialCulture.story = {
+	name: 'ShowcaseDisplay EditorialDesign Culture'
 };
 
-export const ShowcaseEditorialLifestylePillar = () => {
+export const ShowcaseEditorialLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Editorial"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseEditorialLifestylePillar.story = {
-	name: 'ShowcaseDisplay EditorialDesign LifestylePillar'
+ShowcaseEditorialLifestyle.story = {
+	name: 'ShowcaseDisplay EditorialDesign Lifestyle'
 };
 
 export const ShowcaseEditorialSpecialReportTheme = () => {
@@ -6673,69 +6673,69 @@ ShowcaseEditorialSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay EditorialDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseQuizNewsPillar = () => {
+export const ShowcaseQuizNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Quiz"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseQuizNewsPillar.story = {
-	name: 'ShowcaseDisplay QuizDesign NewsPillar'
+ShowcaseQuizNews.story = {
+	name: 'ShowcaseDisplay QuizDesign News'
 };
 
-export const ShowcaseQuizOpinionPillar = () => {
+export const ShowcaseQuizOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Quiz"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseQuizOpinionPillar.story = {
-	name: 'ShowcaseDisplay QuizDesign OpinionPillar'
+ShowcaseQuizOpinion.story = {
+	name: 'ShowcaseDisplay QuizDesign Opinion'
 };
 
-export const ShowcaseQuizSportPillar = () => {
+export const ShowcaseQuizSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Quiz"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseQuizSportPillar.story = {
-	name: 'ShowcaseDisplay QuizDesign SportPillar'
+ShowcaseQuizSport.story = {
+	name: 'ShowcaseDisplay QuizDesign Sport'
 };
 
-export const ShowcaseQuizCulturePillar = () => {
+export const ShowcaseQuizCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Quiz"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseQuizCulturePillar.story = {
-	name: 'ShowcaseDisplay QuizDesign CulturePillar'
+ShowcaseQuizCulture.story = {
+	name: 'ShowcaseDisplay QuizDesign Culture'
 };
 
-export const ShowcaseQuizLifestylePillar = () => {
+export const ShowcaseQuizLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Quiz"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseQuizLifestylePillar.story = {
-	name: 'ShowcaseDisplay QuizDesign LifestylePillar'
+ShowcaseQuizLifestyle.story = {
+	name: 'ShowcaseDisplay QuizDesign Lifestyle'
 };
 
 export const ShowcaseQuizSpecialReportTheme = () => {
@@ -6777,69 +6777,69 @@ ShowcaseQuizSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay QuizDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseInteractiveNewsPillar = () => {
+export const ShowcaseInteractiveNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Interactive"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseInteractiveNewsPillar.story = {
-	name: 'ShowcaseDisplay InteractiveDesign NewsPillar'
+ShowcaseInteractiveNews.story = {
+	name: 'ShowcaseDisplay InteractiveDesign News'
 };
 
-export const ShowcaseInteractiveOpinionPillar = () => {
+export const ShowcaseInteractiveOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Interactive"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseInteractiveOpinionPillar.story = {
-	name: 'ShowcaseDisplay InteractiveDesign OpinionPillar'
+ShowcaseInteractiveOpinion.story = {
+	name: 'ShowcaseDisplay InteractiveDesign Opinion'
 };
 
-export const ShowcaseInteractiveSportPillar = () => {
+export const ShowcaseInteractiveSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Interactive"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseInteractiveSportPillar.story = {
-	name: 'ShowcaseDisplay InteractiveDesign SportPillar'
+ShowcaseInteractiveSport.story = {
+	name: 'ShowcaseDisplay InteractiveDesign Sport'
 };
 
-export const ShowcaseInteractiveCulturePillar = () => {
+export const ShowcaseInteractiveCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Interactive"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseInteractiveCulturePillar.story = {
-	name: 'ShowcaseDisplay InteractiveDesign CulturePillar'
+ShowcaseInteractiveCulture.story = {
+	name: 'ShowcaseDisplay InteractiveDesign Culture'
 };
 
-export const ShowcaseInteractiveLifestylePillar = () => {
+export const ShowcaseInteractiveLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Interactive"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseInteractiveLifestylePillar.story = {
-	name: 'ShowcaseDisplay InteractiveDesign LifestylePillar'
+ShowcaseInteractiveLifestyle.story = {
+	name: 'ShowcaseDisplay InteractiveDesign Lifestyle'
 };
 
 export const ShowcaseInteractiveSpecialReportTheme = () => {
@@ -6881,69 +6881,69 @@ ShowcaseInteractiveSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay InteractiveDesign SpecialReportAltTheme'
 };
 
-export const ShowcasePhotoEssayNewsPillar = () => {
+export const ShowcasePhotoEssayNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="PhotoEssay"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcasePhotoEssayNewsPillar.story = {
-	name: 'ShowcaseDisplay PhotoEssayDesign NewsPillar'
+ShowcasePhotoEssayNews.story = {
+	name: 'ShowcaseDisplay PhotoEssayDesign News'
 };
 
-export const ShowcasePhotoEssayOpinionPillar = () => {
+export const ShowcasePhotoEssayOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="PhotoEssay"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcasePhotoEssayOpinionPillar.story = {
-	name: 'ShowcaseDisplay PhotoEssayDesign OpinionPillar'
+ShowcasePhotoEssayOpinion.story = {
+	name: 'ShowcaseDisplay PhotoEssayDesign Opinion'
 };
 
-export const ShowcasePhotoEssaySportPillar = () => {
+export const ShowcasePhotoEssaySport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="PhotoEssay"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcasePhotoEssaySportPillar.story = {
-	name: 'ShowcaseDisplay PhotoEssayDesign SportPillar'
+ShowcasePhotoEssaySport.story = {
+	name: 'ShowcaseDisplay PhotoEssayDesign Sport'
 };
 
-export const ShowcasePhotoEssayCulturePillar = () => {
+export const ShowcasePhotoEssayCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="PhotoEssay"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcasePhotoEssayCulturePillar.story = {
-	name: 'ShowcaseDisplay PhotoEssayDesign CulturePillar'
+ShowcasePhotoEssayCulture.story = {
+	name: 'ShowcaseDisplay PhotoEssayDesign Culture'
 };
 
-export const ShowcasePhotoEssayLifestylePillar = () => {
+export const ShowcasePhotoEssayLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="PhotoEssay"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcasePhotoEssayLifestylePillar.story = {
-	name: 'ShowcaseDisplay PhotoEssayDesign LifestylePillar'
+ShowcasePhotoEssayLifestyle.story = {
+	name: 'ShowcaseDisplay PhotoEssayDesign Lifestyle'
 };
 
 export const ShowcasePhotoEssaySpecialReportTheme = () => {
@@ -6985,69 +6985,69 @@ ShowcasePhotoEssaySpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay PhotoEssayDesign SpecialReportAltTheme'
 };
 
-export const ShowcasePrintShopNewsPillar = () => {
+export const ShowcasePrintShopNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="PrintShop"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcasePrintShopNewsPillar.story = {
-	name: 'ShowcaseDisplay PrintShopDesign NewsPillar'
+ShowcasePrintShopNews.story = {
+	name: 'ShowcaseDisplay PrintShopDesign News'
 };
 
-export const ShowcasePrintShopOpinionPillar = () => {
+export const ShowcasePrintShopOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="PrintShop"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcasePrintShopOpinionPillar.story = {
-	name: 'ShowcaseDisplay PrintShopDesign OpinionPillar'
+ShowcasePrintShopOpinion.story = {
+	name: 'ShowcaseDisplay PrintShopDesign Opinion'
 };
 
-export const ShowcasePrintShopSportPillar = () => {
+export const ShowcasePrintShopSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="PrintShop"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcasePrintShopSportPillar.story = {
-	name: 'ShowcaseDisplay PrintShopDesign SportPillar'
+ShowcasePrintShopSport.story = {
+	name: 'ShowcaseDisplay PrintShopDesign Sport'
 };
 
-export const ShowcasePrintShopCulturePillar = () => {
+export const ShowcasePrintShopCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="PrintShop"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcasePrintShopCulturePillar.story = {
-	name: 'ShowcaseDisplay PrintShopDesign CulturePillar'
+ShowcasePrintShopCulture.story = {
+	name: 'ShowcaseDisplay PrintShopDesign Culture'
 };
 
-export const ShowcasePrintShopLifestylePillar = () => {
+export const ShowcasePrintShopLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="PrintShop"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcasePrintShopLifestylePillar.story = {
-	name: 'ShowcaseDisplay PrintShopDesign LifestylePillar'
+ShowcasePrintShopLifestyle.story = {
+	name: 'ShowcaseDisplay PrintShopDesign Lifestyle'
 };
 
 export const ShowcasePrintShopSpecialReportTheme = () => {
@@ -7089,69 +7089,69 @@ ShowcasePrintShopSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay PrintShopDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseObituaryNewsPillar = () => {
+export const ShowcaseObituaryNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Obituary"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseObituaryNewsPillar.story = {
-	name: 'ShowcaseDisplay ObituaryDesign NewsPillar'
+ShowcaseObituaryNews.story = {
+	name: 'ShowcaseDisplay ObituaryDesign News'
 };
 
-export const ShowcaseObituaryOpinionPillar = () => {
+export const ShowcaseObituaryOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Obituary"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseObituaryOpinionPillar.story = {
-	name: 'ShowcaseDisplay ObituaryDesign OpinionPillar'
+ShowcaseObituaryOpinion.story = {
+	name: 'ShowcaseDisplay ObituaryDesign Opinion'
 };
 
-export const ShowcaseObituarySportPillar = () => {
+export const ShowcaseObituarySport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Obituary"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseObituarySportPillar.story = {
-	name: 'ShowcaseDisplay ObituaryDesign SportPillar'
+ShowcaseObituarySport.story = {
+	name: 'ShowcaseDisplay ObituaryDesign Sport'
 };
 
-export const ShowcaseObituaryCulturePillar = () => {
+export const ShowcaseObituaryCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Obituary"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseObituaryCulturePillar.story = {
-	name: 'ShowcaseDisplay ObituaryDesign CulturePillar'
+ShowcaseObituaryCulture.story = {
+	name: 'ShowcaseDisplay ObituaryDesign Culture'
 };
 
-export const ShowcaseObituaryLifestylePillar = () => {
+export const ShowcaseObituaryLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Obituary"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseObituaryLifestylePillar.story = {
-	name: 'ShowcaseDisplay ObituaryDesign LifestylePillar'
+ShowcaseObituaryLifestyle.story = {
+	name: 'ShowcaseDisplay ObituaryDesign Lifestyle'
 };
 
 export const ShowcaseObituarySpecialReportTheme = () => {
@@ -7193,69 +7193,69 @@ ShowcaseObituarySpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay ObituaryDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseCorrectionNewsPillar = () => {
+export const ShowcaseCorrectionNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Correction"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseCorrectionNewsPillar.story = {
-	name: 'ShowcaseDisplay CorrectionDesign NewsPillar'
+ShowcaseCorrectionNews.story = {
+	name: 'ShowcaseDisplay CorrectionDesign News'
 };
 
-export const ShowcaseCorrectionOpinionPillar = () => {
+export const ShowcaseCorrectionOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Correction"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseCorrectionOpinionPillar.story = {
-	name: 'ShowcaseDisplay CorrectionDesign OpinionPillar'
+ShowcaseCorrectionOpinion.story = {
+	name: 'ShowcaseDisplay CorrectionDesign Opinion'
 };
 
-export const ShowcaseCorrectionSportPillar = () => {
+export const ShowcaseCorrectionSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Correction"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseCorrectionSportPillar.story = {
-	name: 'ShowcaseDisplay CorrectionDesign SportPillar'
+ShowcaseCorrectionSport.story = {
+	name: 'ShowcaseDisplay CorrectionDesign Sport'
 };
 
-export const ShowcaseCorrectionCulturePillar = () => {
+export const ShowcaseCorrectionCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Correction"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseCorrectionCulturePillar.story = {
-	name: 'ShowcaseDisplay CorrectionDesign CulturePillar'
+ShowcaseCorrectionCulture.story = {
+	name: 'ShowcaseDisplay CorrectionDesign Culture'
 };
 
-export const ShowcaseCorrectionLifestylePillar = () => {
+export const ShowcaseCorrectionLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="Correction"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseCorrectionLifestylePillar.story = {
-	name: 'ShowcaseDisplay CorrectionDesign LifestylePillar'
+ShowcaseCorrectionLifestyle.story = {
+	name: 'ShowcaseDisplay CorrectionDesign Lifestyle'
 };
 
 export const ShowcaseCorrectionSpecialReportTheme = () => {
@@ -7297,69 +7297,69 @@ ShowcaseCorrectionSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay CorrectionDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseFullPageInteractiveNewsPillar = () => {
+export const ShowcaseFullPageInteractiveNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="FullPageInteractive"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseFullPageInteractiveNewsPillar.story = {
-	name: 'ShowcaseDisplay FullPageInteractiveDesign NewsPillar'
+ShowcaseFullPageInteractiveNews.story = {
+	name: 'ShowcaseDisplay FullPageInteractiveDesign News'
 };
 
-export const ShowcaseFullPageInteractiveOpinionPillar = () => {
+export const ShowcaseFullPageInteractiveOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="FullPageInteractive"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseFullPageInteractiveOpinionPillar.story = {
-	name: 'ShowcaseDisplay FullPageInteractiveDesign OpinionPillar'
+ShowcaseFullPageInteractiveOpinion.story = {
+	name: 'ShowcaseDisplay FullPageInteractiveDesign Opinion'
 };
 
-export const ShowcaseFullPageInteractiveSportPillar = () => {
+export const ShowcaseFullPageInteractiveSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="FullPageInteractive"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseFullPageInteractiveSportPillar.story = {
-	name: 'ShowcaseDisplay FullPageInteractiveDesign SportPillar'
+ShowcaseFullPageInteractiveSport.story = {
+	name: 'ShowcaseDisplay FullPageInteractiveDesign Sport'
 };
 
-export const ShowcaseFullPageInteractiveCulturePillar = () => {
+export const ShowcaseFullPageInteractiveCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="FullPageInteractive"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseFullPageInteractiveCulturePillar.story = {
-	name: 'ShowcaseDisplay FullPageInteractiveDesign CulturePillar'
+ShowcaseFullPageInteractiveCulture.story = {
+	name: 'ShowcaseDisplay FullPageInteractiveDesign Culture'
 };
 
-export const ShowcaseFullPageInteractiveLifestylePillar = () => {
+export const ShowcaseFullPageInteractiveLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="FullPageInteractive"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseFullPageInteractiveLifestylePillar.story = {
-	name: 'ShowcaseDisplay FullPageInteractiveDesign LifestylePillar'
+ShowcaseFullPageInteractiveLifestyle.story = {
+	name: 'ShowcaseDisplay FullPageInteractiveDesign Lifestyle'
 };
 
 export const ShowcaseFullPageInteractiveSpecialReportTheme = () => {
@@ -7401,69 +7401,69 @@ ShowcaseFullPageInteractiveSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay FullPageInteractiveDesign SpecialReportAltTheme'
 };
 
-export const ShowcaseNewsletterSignupNewsPillar = () => {
+export const ShowcaseNewsletterSignupNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="NewsletterSignup"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-ShowcaseNewsletterSignupNewsPillar.story = {
-	name: 'ShowcaseDisplay NewsletterSignupDesign NewsPillar'
+ShowcaseNewsletterSignupNews.story = {
+	name: 'ShowcaseDisplay NewsletterSignupDesign News'
 };
 
-export const ShowcaseNewsletterSignupOpinionPillar = () => {
+export const ShowcaseNewsletterSignupOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="NewsletterSignup"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-ShowcaseNewsletterSignupOpinionPillar.story = {
-	name: 'ShowcaseDisplay NewsletterSignupDesign OpinionPillar'
+ShowcaseNewsletterSignupOpinion.story = {
+	name: 'ShowcaseDisplay NewsletterSignupDesign Opinion'
 };
 
-export const ShowcaseNewsletterSignupSportPillar = () => {
+export const ShowcaseNewsletterSignupSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="NewsletterSignup"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-ShowcaseNewsletterSignupSportPillar.story = {
-	name: 'ShowcaseDisplay NewsletterSignupDesign SportPillar'
+ShowcaseNewsletterSignupSport.story = {
+	name: 'ShowcaseDisplay NewsletterSignupDesign Sport'
 };
 
-export const ShowcaseNewsletterSignupCulturePillar = () => {
+export const ShowcaseNewsletterSignupCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="NewsletterSignup"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-ShowcaseNewsletterSignupCulturePillar.story = {
-	name: 'ShowcaseDisplay NewsletterSignupDesign CulturePillar'
+ShowcaseNewsletterSignupCulture.story = {
+	name: 'ShowcaseDisplay NewsletterSignupDesign Culture'
 };
 
-export const ShowcaseNewsletterSignupLifestylePillar = () => {
+export const ShowcaseNewsletterSignupLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="Showcase"
 			designName="NewsletterSignup"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-ShowcaseNewsletterSignupLifestylePillar.story = {
-	name: 'ShowcaseDisplay NewsletterSignupDesign LifestylePillar'
+ShowcaseNewsletterSignupLifestyle.story = {
+	name: 'ShowcaseDisplay NewsletterSignupDesign Lifestyle'
 };
 
 export const ShowcaseNewsletterSignupSpecialReportTheme = () => {
@@ -7505,69 +7505,69 @@ ShowcaseNewsletterSignupSpecialReportAltTheme.story = {
 	name: 'ShowcaseDisplay NewsletterSignupDesign SpecialReportAltTheme'
 };
 
-export const NumberedListStandardNewsPillar = () => {
+export const NumberedListStandardNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Standard"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListStandardNewsPillar.story = {
-	name: 'NumberedListDisplay StandardDesign NewsPillar'
+NumberedListStandardNews.story = {
+	name: 'NumberedListDisplay StandardDesign News'
 };
 
-export const NumberedListStandardOpinionPillar = () => {
+export const NumberedListStandardOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Standard"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListStandardOpinionPillar.story = {
-	name: 'NumberedListDisplay StandardDesign OpinionPillar'
+NumberedListStandardOpinion.story = {
+	name: 'NumberedListDisplay StandardDesign Opinion'
 };
 
-export const NumberedListStandardSportPillar = () => {
+export const NumberedListStandardSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Standard"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListStandardSportPillar.story = {
-	name: 'NumberedListDisplay StandardDesign SportPillar'
+NumberedListStandardSport.story = {
+	name: 'NumberedListDisplay StandardDesign Sport'
 };
 
-export const NumberedListStandardCulturePillar = () => {
+export const NumberedListStandardCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Standard"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListStandardCulturePillar.story = {
-	name: 'NumberedListDisplay StandardDesign CulturePillar'
+NumberedListStandardCulture.story = {
+	name: 'NumberedListDisplay StandardDesign Culture'
 };
 
-export const NumberedListStandardLifestylePillar = () => {
+export const NumberedListStandardLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Standard"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListStandardLifestylePillar.story = {
-	name: 'NumberedListDisplay StandardDesign LifestylePillar'
+NumberedListStandardLifestyle.story = {
+	name: 'NumberedListDisplay StandardDesign Lifestyle'
 };
 
 export const NumberedListStandardSpecialReportTheme = () => {
@@ -7609,69 +7609,69 @@ NumberedListStandardSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay StandardDesign SpecialReportAltTheme'
 };
 
-export const NumberedListGalleryNewsPillar = () => {
+export const NumberedListGalleryNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Gallery"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListGalleryNewsPillar.story = {
-	name: 'NumberedListDisplay GalleryDesign NewsPillar'
+NumberedListGalleryNews.story = {
+	name: 'NumberedListDisplay GalleryDesign News'
 };
 
-export const NumberedListGalleryOpinionPillar = () => {
+export const NumberedListGalleryOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Gallery"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListGalleryOpinionPillar.story = {
-	name: 'NumberedListDisplay GalleryDesign OpinionPillar'
+NumberedListGalleryOpinion.story = {
+	name: 'NumberedListDisplay GalleryDesign Opinion'
 };
 
-export const NumberedListGallerySportPillar = () => {
+export const NumberedListGallerySport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Gallery"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListGallerySportPillar.story = {
-	name: 'NumberedListDisplay GalleryDesign SportPillar'
+NumberedListGallerySport.story = {
+	name: 'NumberedListDisplay GalleryDesign Sport'
 };
 
-export const NumberedListGalleryCulturePillar = () => {
+export const NumberedListGalleryCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Gallery"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListGalleryCulturePillar.story = {
-	name: 'NumberedListDisplay GalleryDesign CulturePillar'
+NumberedListGalleryCulture.story = {
+	name: 'NumberedListDisplay GalleryDesign Culture'
 };
 
-export const NumberedListGalleryLifestylePillar = () => {
+export const NumberedListGalleryLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Gallery"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListGalleryLifestylePillar.story = {
-	name: 'NumberedListDisplay GalleryDesign LifestylePillar'
+NumberedListGalleryLifestyle.story = {
+	name: 'NumberedListDisplay GalleryDesign Lifestyle'
 };
 
 export const NumberedListGallerySpecialReportTheme = () => {
@@ -7713,69 +7713,69 @@ NumberedListGallerySpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay GalleryDesign SpecialReportAltTheme'
 };
 
-export const NumberedListAudioNewsPillar = () => {
+export const NumberedListAudioNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Audio"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListAudioNewsPillar.story = {
-	name: 'NumberedListDisplay AudioDesign NewsPillar'
+NumberedListAudioNews.story = {
+	name: 'NumberedListDisplay AudioDesign News'
 };
 
-export const NumberedListAudioOpinionPillar = () => {
+export const NumberedListAudioOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Audio"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListAudioOpinionPillar.story = {
-	name: 'NumberedListDisplay AudioDesign OpinionPillar'
+NumberedListAudioOpinion.story = {
+	name: 'NumberedListDisplay AudioDesign Opinion'
 };
 
-export const NumberedListAudioSportPillar = () => {
+export const NumberedListAudioSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Audio"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListAudioSportPillar.story = {
-	name: 'NumberedListDisplay AudioDesign SportPillar'
+NumberedListAudioSport.story = {
+	name: 'NumberedListDisplay AudioDesign Sport'
 };
 
-export const NumberedListAudioCulturePillar = () => {
+export const NumberedListAudioCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Audio"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListAudioCulturePillar.story = {
-	name: 'NumberedListDisplay AudioDesign CulturePillar'
+NumberedListAudioCulture.story = {
+	name: 'NumberedListDisplay AudioDesign Culture'
 };
 
-export const NumberedListAudioLifestylePillar = () => {
+export const NumberedListAudioLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Audio"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListAudioLifestylePillar.story = {
-	name: 'NumberedListDisplay AudioDesign LifestylePillar'
+NumberedListAudioLifestyle.story = {
+	name: 'NumberedListDisplay AudioDesign Lifestyle'
 };
 
 export const NumberedListAudioSpecialReportTheme = () => {
@@ -7817,69 +7817,69 @@ NumberedListAudioSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay AudioDesign SpecialReportAltTheme'
 };
 
-export const NumberedListVideoNewsPillar = () => {
+export const NumberedListVideoNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Video"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListVideoNewsPillar.story = {
-	name: 'NumberedListDisplay VideoDesign NewsPillar'
+NumberedListVideoNews.story = {
+	name: 'NumberedListDisplay VideoDesign News'
 };
 
-export const NumberedListVideoOpinionPillar = () => {
+export const NumberedListVideoOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Video"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListVideoOpinionPillar.story = {
-	name: 'NumberedListDisplay VideoDesign OpinionPillar'
+NumberedListVideoOpinion.story = {
+	name: 'NumberedListDisplay VideoDesign Opinion'
 };
 
-export const NumberedListVideoSportPillar = () => {
+export const NumberedListVideoSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Video"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListVideoSportPillar.story = {
-	name: 'NumberedListDisplay VideoDesign SportPillar'
+NumberedListVideoSport.story = {
+	name: 'NumberedListDisplay VideoDesign Sport'
 };
 
-export const NumberedListVideoCulturePillar = () => {
+export const NumberedListVideoCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Video"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListVideoCulturePillar.story = {
-	name: 'NumberedListDisplay VideoDesign CulturePillar'
+NumberedListVideoCulture.story = {
+	name: 'NumberedListDisplay VideoDesign Culture'
 };
 
-export const NumberedListVideoLifestylePillar = () => {
+export const NumberedListVideoLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Video"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListVideoLifestylePillar.story = {
-	name: 'NumberedListDisplay VideoDesign LifestylePillar'
+NumberedListVideoLifestyle.story = {
+	name: 'NumberedListDisplay VideoDesign Lifestyle'
 };
 
 export const NumberedListVideoSpecialReportTheme = () => {
@@ -7921,69 +7921,69 @@ NumberedListVideoSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay VideoDesign SpecialReportAltTheme'
 };
 
-export const NumberedListReviewNewsPillar = () => {
+export const NumberedListReviewNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Review"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListReviewNewsPillar.story = {
-	name: 'NumberedListDisplay ReviewDesign NewsPillar'
+NumberedListReviewNews.story = {
+	name: 'NumberedListDisplay ReviewDesign News'
 };
 
-export const NumberedListReviewOpinionPillar = () => {
+export const NumberedListReviewOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Review"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListReviewOpinionPillar.story = {
-	name: 'NumberedListDisplay ReviewDesign OpinionPillar'
+NumberedListReviewOpinion.story = {
+	name: 'NumberedListDisplay ReviewDesign Opinion'
 };
 
-export const NumberedListReviewSportPillar = () => {
+export const NumberedListReviewSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Review"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListReviewSportPillar.story = {
-	name: 'NumberedListDisplay ReviewDesign SportPillar'
+NumberedListReviewSport.story = {
+	name: 'NumberedListDisplay ReviewDesign Sport'
 };
 
-export const NumberedListReviewCulturePillar = () => {
+export const NumberedListReviewCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Review"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListReviewCulturePillar.story = {
-	name: 'NumberedListDisplay ReviewDesign CulturePillar'
+NumberedListReviewCulture.story = {
+	name: 'NumberedListDisplay ReviewDesign Culture'
 };
 
-export const NumberedListReviewLifestylePillar = () => {
+export const NumberedListReviewLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Review"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListReviewLifestylePillar.story = {
-	name: 'NumberedListDisplay ReviewDesign LifestylePillar'
+NumberedListReviewLifestyle.story = {
+	name: 'NumberedListDisplay ReviewDesign Lifestyle'
 };
 
 export const NumberedListReviewSpecialReportTheme = () => {
@@ -8025,69 +8025,69 @@ NumberedListReviewSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay ReviewDesign SpecialReportAltTheme'
 };
 
-export const NumberedListAnalysisNewsPillar = () => {
+export const NumberedListAnalysisNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Analysis"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListAnalysisNewsPillar.story = {
-	name: 'NumberedListDisplay AnalysisDesign NewsPillar'
+NumberedListAnalysisNews.story = {
+	name: 'NumberedListDisplay AnalysisDesign News'
 };
 
-export const NumberedListAnalysisOpinionPillar = () => {
+export const NumberedListAnalysisOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Analysis"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListAnalysisOpinionPillar.story = {
-	name: 'NumberedListDisplay AnalysisDesign OpinionPillar'
+NumberedListAnalysisOpinion.story = {
+	name: 'NumberedListDisplay AnalysisDesign Opinion'
 };
 
-export const NumberedListAnalysisSportPillar = () => {
+export const NumberedListAnalysisSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Analysis"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListAnalysisSportPillar.story = {
-	name: 'NumberedListDisplay AnalysisDesign SportPillar'
+NumberedListAnalysisSport.story = {
+	name: 'NumberedListDisplay AnalysisDesign Sport'
 };
 
-export const NumberedListAnalysisCulturePillar = () => {
+export const NumberedListAnalysisCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Analysis"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListAnalysisCulturePillar.story = {
-	name: 'NumberedListDisplay AnalysisDesign CulturePillar'
+NumberedListAnalysisCulture.story = {
+	name: 'NumberedListDisplay AnalysisDesign Culture'
 };
 
-export const NumberedListAnalysisLifestylePillar = () => {
+export const NumberedListAnalysisLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Analysis"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListAnalysisLifestylePillar.story = {
-	name: 'NumberedListDisplay AnalysisDesign LifestylePillar'
+NumberedListAnalysisLifestyle.story = {
+	name: 'NumberedListDisplay AnalysisDesign Lifestyle'
 };
 
 export const NumberedListAnalysisSpecialReportTheme = () => {
@@ -8129,69 +8129,69 @@ NumberedListAnalysisSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay AnalysisDesign SpecialReportAltTheme'
 };
 
-export const NumberedListExplainerNewsPillar = () => {
+export const NumberedListExplainerNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Explainer"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListExplainerNewsPillar.story = {
-	name: 'NumberedListDisplay ExplainerDesign NewsPillar'
+NumberedListExplainerNews.story = {
+	name: 'NumberedListDisplay ExplainerDesign News'
 };
 
-export const NumberedListExplainerOpinionPillar = () => {
+export const NumberedListExplainerOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Explainer"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListExplainerOpinionPillar.story = {
-	name: 'NumberedListDisplay ExplainerDesign OpinionPillar'
+NumberedListExplainerOpinion.story = {
+	name: 'NumberedListDisplay ExplainerDesign Opinion'
 };
 
-export const NumberedListExplainerSportPillar = () => {
+export const NumberedListExplainerSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Explainer"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListExplainerSportPillar.story = {
-	name: 'NumberedListDisplay ExplainerDesign SportPillar'
+NumberedListExplainerSport.story = {
+	name: 'NumberedListDisplay ExplainerDesign Sport'
 };
 
-export const NumberedListExplainerCulturePillar = () => {
+export const NumberedListExplainerCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Explainer"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListExplainerCulturePillar.story = {
-	name: 'NumberedListDisplay ExplainerDesign CulturePillar'
+NumberedListExplainerCulture.story = {
+	name: 'NumberedListDisplay ExplainerDesign Culture'
 };
 
-export const NumberedListExplainerLifestylePillar = () => {
+export const NumberedListExplainerLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Explainer"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListExplainerLifestylePillar.story = {
-	name: 'NumberedListDisplay ExplainerDesign LifestylePillar'
+NumberedListExplainerLifestyle.story = {
+	name: 'NumberedListDisplay ExplainerDesign Lifestyle'
 };
 
 export const NumberedListExplainerSpecialReportTheme = () => {
@@ -8233,69 +8233,69 @@ NumberedListExplainerSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay ExplainerDesign SpecialReportAltTheme'
 };
 
-export const NumberedListCommentNewsPillar = () => {
+export const NumberedListCommentNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Comment"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListCommentNewsPillar.story = {
-	name: 'NumberedListDisplay CommentDesign NewsPillar'
+NumberedListCommentNews.story = {
+	name: 'NumberedListDisplay CommentDesign News'
 };
 
-export const NumberedListCommentOpinionPillar = () => {
+export const NumberedListCommentOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Comment"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListCommentOpinionPillar.story = {
-	name: 'NumberedListDisplay CommentDesign OpinionPillar'
+NumberedListCommentOpinion.story = {
+	name: 'NumberedListDisplay CommentDesign Opinion'
 };
 
-export const NumberedListCommentSportPillar = () => {
+export const NumberedListCommentSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Comment"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListCommentSportPillar.story = {
-	name: 'NumberedListDisplay CommentDesign SportPillar'
+NumberedListCommentSport.story = {
+	name: 'NumberedListDisplay CommentDesign Sport'
 };
 
-export const NumberedListCommentCulturePillar = () => {
+export const NumberedListCommentCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Comment"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListCommentCulturePillar.story = {
-	name: 'NumberedListDisplay CommentDesign CulturePillar'
+NumberedListCommentCulture.story = {
+	name: 'NumberedListDisplay CommentDesign Culture'
 };
 
-export const NumberedListCommentLifestylePillar = () => {
+export const NumberedListCommentLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Comment"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListCommentLifestylePillar.story = {
-	name: 'NumberedListDisplay CommentDesign LifestylePillar'
+NumberedListCommentLifestyle.story = {
+	name: 'NumberedListDisplay CommentDesign Lifestyle'
 };
 
 export const NumberedListCommentSpecialReportTheme = () => {
@@ -8337,69 +8337,69 @@ NumberedListCommentSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay CommentDesign SpecialReportAltTheme'
 };
 
-export const NumberedListLetterNewsPillar = () => {
+export const NumberedListLetterNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Letter"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListLetterNewsPillar.story = {
-	name: 'NumberedListDisplay LetterDesign NewsPillar'
+NumberedListLetterNews.story = {
+	name: 'NumberedListDisplay LetterDesign News'
 };
 
-export const NumberedListLetterOpinionPillar = () => {
+export const NumberedListLetterOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Letter"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListLetterOpinionPillar.story = {
-	name: 'NumberedListDisplay LetterDesign OpinionPillar'
+NumberedListLetterOpinion.story = {
+	name: 'NumberedListDisplay LetterDesign Opinion'
 };
 
-export const NumberedListLetterSportPillar = () => {
+export const NumberedListLetterSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Letter"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListLetterSportPillar.story = {
-	name: 'NumberedListDisplay LetterDesign SportPillar'
+NumberedListLetterSport.story = {
+	name: 'NumberedListDisplay LetterDesign Sport'
 };
 
-export const NumberedListLetterCulturePillar = () => {
+export const NumberedListLetterCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Letter"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListLetterCulturePillar.story = {
-	name: 'NumberedListDisplay LetterDesign CulturePillar'
+NumberedListLetterCulture.story = {
+	name: 'NumberedListDisplay LetterDesign Culture'
 };
 
-export const NumberedListLetterLifestylePillar = () => {
+export const NumberedListLetterLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Letter"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListLetterLifestylePillar.story = {
-	name: 'NumberedListDisplay LetterDesign LifestylePillar'
+NumberedListLetterLifestyle.story = {
+	name: 'NumberedListDisplay LetterDesign Lifestyle'
 };
 
 export const NumberedListLetterSpecialReportTheme = () => {
@@ -8441,69 +8441,69 @@ NumberedListLetterSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay LetterDesign SpecialReportAltTheme'
 };
 
-export const NumberedListFeatureNewsPillar = () => {
+export const NumberedListFeatureNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Feature"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListFeatureNewsPillar.story = {
-	name: 'NumberedListDisplay FeatureDesign NewsPillar'
+NumberedListFeatureNews.story = {
+	name: 'NumberedListDisplay FeatureDesign News'
 };
 
-export const NumberedListFeatureOpinionPillar = () => {
+export const NumberedListFeatureOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Feature"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListFeatureOpinionPillar.story = {
-	name: 'NumberedListDisplay FeatureDesign OpinionPillar'
+NumberedListFeatureOpinion.story = {
+	name: 'NumberedListDisplay FeatureDesign Opinion'
 };
 
-export const NumberedListFeatureSportPillar = () => {
+export const NumberedListFeatureSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Feature"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListFeatureSportPillar.story = {
-	name: 'NumberedListDisplay FeatureDesign SportPillar'
+NumberedListFeatureSport.story = {
+	name: 'NumberedListDisplay FeatureDesign Sport'
 };
 
-export const NumberedListFeatureCulturePillar = () => {
+export const NumberedListFeatureCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Feature"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListFeatureCulturePillar.story = {
-	name: 'NumberedListDisplay FeatureDesign CulturePillar'
+NumberedListFeatureCulture.story = {
+	name: 'NumberedListDisplay FeatureDesign Culture'
 };
 
-export const NumberedListFeatureLifestylePillar = () => {
+export const NumberedListFeatureLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Feature"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListFeatureLifestylePillar.story = {
-	name: 'NumberedListDisplay FeatureDesign LifestylePillar'
+NumberedListFeatureLifestyle.story = {
+	name: 'NumberedListDisplay FeatureDesign Lifestyle'
 };
 
 export const NumberedListFeatureSpecialReportTheme = () => {
@@ -8545,69 +8545,69 @@ NumberedListFeatureSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay FeatureDesign SpecialReportAltTheme'
 };
 
-export const NumberedListLiveBlogNewsPillar = () => {
+export const NumberedListLiveBlogNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="LiveBlog"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListLiveBlogNewsPillar.story = {
-	name: 'NumberedListDisplay LiveBlogDesign NewsPillar'
+NumberedListLiveBlogNews.story = {
+	name: 'NumberedListDisplay LiveBlogDesign News'
 };
 
-export const NumberedListLiveBlogOpinionPillar = () => {
+export const NumberedListLiveBlogOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="LiveBlog"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListLiveBlogOpinionPillar.story = {
-	name: 'NumberedListDisplay LiveBlogDesign OpinionPillar'
+NumberedListLiveBlogOpinion.story = {
+	name: 'NumberedListDisplay LiveBlogDesign Opinion'
 };
 
-export const NumberedListLiveBlogSportPillar = () => {
+export const NumberedListLiveBlogSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="LiveBlog"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListLiveBlogSportPillar.story = {
-	name: 'NumberedListDisplay LiveBlogDesign SportPillar'
+NumberedListLiveBlogSport.story = {
+	name: 'NumberedListDisplay LiveBlogDesign Sport'
 };
 
-export const NumberedListLiveBlogCulturePillar = () => {
+export const NumberedListLiveBlogCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="LiveBlog"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListLiveBlogCulturePillar.story = {
-	name: 'NumberedListDisplay LiveBlogDesign CulturePillar'
+NumberedListLiveBlogCulture.story = {
+	name: 'NumberedListDisplay LiveBlogDesign Culture'
 };
 
-export const NumberedListLiveBlogLifestylePillar = () => {
+export const NumberedListLiveBlogLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="LiveBlog"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListLiveBlogLifestylePillar.story = {
-	name: 'NumberedListDisplay LiveBlogDesign LifestylePillar'
+NumberedListLiveBlogLifestyle.story = {
+	name: 'NumberedListDisplay LiveBlogDesign Lifestyle'
 };
 
 export const NumberedListLiveBlogSpecialReportTheme = () => {
@@ -8649,69 +8649,69 @@ NumberedListLiveBlogSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay LiveBlogDesign SpecialReportAltTheme'
 };
 
-export const NumberedListDeadBlogNewsPillar = () => {
+export const NumberedListDeadBlogNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="DeadBlog"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListDeadBlogNewsPillar.story = {
-	name: 'NumberedListDisplay DeadBlogDesign NewsPillar'
+NumberedListDeadBlogNews.story = {
+	name: 'NumberedListDisplay DeadBlogDesign News'
 };
 
-export const NumberedListDeadBlogOpinionPillar = () => {
+export const NumberedListDeadBlogOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="DeadBlog"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListDeadBlogOpinionPillar.story = {
-	name: 'NumberedListDisplay DeadBlogDesign OpinionPillar'
+NumberedListDeadBlogOpinion.story = {
+	name: 'NumberedListDisplay DeadBlogDesign Opinion'
 };
 
-export const NumberedListDeadBlogSportPillar = () => {
+export const NumberedListDeadBlogSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="DeadBlog"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListDeadBlogSportPillar.story = {
-	name: 'NumberedListDisplay DeadBlogDesign SportPillar'
+NumberedListDeadBlogSport.story = {
+	name: 'NumberedListDisplay DeadBlogDesign Sport'
 };
 
-export const NumberedListDeadBlogCulturePillar = () => {
+export const NumberedListDeadBlogCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="DeadBlog"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListDeadBlogCulturePillar.story = {
-	name: 'NumberedListDisplay DeadBlogDesign CulturePillar'
+NumberedListDeadBlogCulture.story = {
+	name: 'NumberedListDisplay DeadBlogDesign Culture'
 };
 
-export const NumberedListDeadBlogLifestylePillar = () => {
+export const NumberedListDeadBlogLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="DeadBlog"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListDeadBlogLifestylePillar.story = {
-	name: 'NumberedListDisplay DeadBlogDesign LifestylePillar'
+NumberedListDeadBlogLifestyle.story = {
+	name: 'NumberedListDisplay DeadBlogDesign Lifestyle'
 };
 
 export const NumberedListDeadBlogSpecialReportTheme = () => {
@@ -8753,69 +8753,69 @@ NumberedListDeadBlogSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay DeadBlogDesign SpecialReportAltTheme'
 };
 
-export const NumberedListRecipeNewsPillar = () => {
+export const NumberedListRecipeNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Recipe"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListRecipeNewsPillar.story = {
-	name: 'NumberedListDisplay RecipeDesign NewsPillar'
+NumberedListRecipeNews.story = {
+	name: 'NumberedListDisplay RecipeDesign News'
 };
 
-export const NumberedListRecipeOpinionPillar = () => {
+export const NumberedListRecipeOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Recipe"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListRecipeOpinionPillar.story = {
-	name: 'NumberedListDisplay RecipeDesign OpinionPillar'
+NumberedListRecipeOpinion.story = {
+	name: 'NumberedListDisplay RecipeDesign Opinion'
 };
 
-export const NumberedListRecipeSportPillar = () => {
+export const NumberedListRecipeSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Recipe"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListRecipeSportPillar.story = {
-	name: 'NumberedListDisplay RecipeDesign SportPillar'
+NumberedListRecipeSport.story = {
+	name: 'NumberedListDisplay RecipeDesign Sport'
 };
 
-export const NumberedListRecipeCulturePillar = () => {
+export const NumberedListRecipeCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Recipe"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListRecipeCulturePillar.story = {
-	name: 'NumberedListDisplay RecipeDesign CulturePillar'
+NumberedListRecipeCulture.story = {
+	name: 'NumberedListDisplay RecipeDesign Culture'
 };
 
-export const NumberedListRecipeLifestylePillar = () => {
+export const NumberedListRecipeLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Recipe"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListRecipeLifestylePillar.story = {
-	name: 'NumberedListDisplay RecipeDesign LifestylePillar'
+NumberedListRecipeLifestyle.story = {
+	name: 'NumberedListDisplay RecipeDesign Lifestyle'
 };
 
 export const NumberedListRecipeSpecialReportTheme = () => {
@@ -8857,69 +8857,69 @@ NumberedListRecipeSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay RecipeDesign SpecialReportAltTheme'
 };
 
-export const NumberedListMatchReportNewsPillar = () => {
+export const NumberedListMatchReportNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="MatchReport"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListMatchReportNewsPillar.story = {
-	name: 'NumberedListDisplay MatchReportDesign NewsPillar'
+NumberedListMatchReportNews.story = {
+	name: 'NumberedListDisplay MatchReportDesign News'
 };
 
-export const NumberedListMatchReportOpinionPillar = () => {
+export const NumberedListMatchReportOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="MatchReport"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListMatchReportOpinionPillar.story = {
-	name: 'NumberedListDisplay MatchReportDesign OpinionPillar'
+NumberedListMatchReportOpinion.story = {
+	name: 'NumberedListDisplay MatchReportDesign Opinion'
 };
 
-export const NumberedListMatchReportSportPillar = () => {
+export const NumberedListMatchReportSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="MatchReport"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListMatchReportSportPillar.story = {
-	name: 'NumberedListDisplay MatchReportDesign SportPillar'
+NumberedListMatchReportSport.story = {
+	name: 'NumberedListDisplay MatchReportDesign Sport'
 };
 
-export const NumberedListMatchReportCulturePillar = () => {
+export const NumberedListMatchReportCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="MatchReport"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListMatchReportCulturePillar.story = {
-	name: 'NumberedListDisplay MatchReportDesign CulturePillar'
+NumberedListMatchReportCulture.story = {
+	name: 'NumberedListDisplay MatchReportDesign Culture'
 };
 
-export const NumberedListMatchReportLifestylePillar = () => {
+export const NumberedListMatchReportLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="MatchReport"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListMatchReportLifestylePillar.story = {
-	name: 'NumberedListDisplay MatchReportDesign LifestylePillar'
+NumberedListMatchReportLifestyle.story = {
+	name: 'NumberedListDisplay MatchReportDesign Lifestyle'
 };
 
 export const NumberedListMatchReportSpecialReportTheme = () => {
@@ -8961,69 +8961,69 @@ NumberedListMatchReportSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay MatchReportDesign SpecialReportAltTheme'
 };
 
-export const NumberedListInterviewNewsPillar = () => {
+export const NumberedListInterviewNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Interview"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListInterviewNewsPillar.story = {
-	name: 'NumberedListDisplay InterviewDesign NewsPillar'
+NumberedListInterviewNews.story = {
+	name: 'NumberedListDisplay InterviewDesign News'
 };
 
-export const NumberedListInterviewOpinionPillar = () => {
+export const NumberedListInterviewOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Interview"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListInterviewOpinionPillar.story = {
-	name: 'NumberedListDisplay InterviewDesign OpinionPillar'
+NumberedListInterviewOpinion.story = {
+	name: 'NumberedListDisplay InterviewDesign Opinion'
 };
 
-export const NumberedListInterviewSportPillar = () => {
+export const NumberedListInterviewSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Interview"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListInterviewSportPillar.story = {
-	name: 'NumberedListDisplay InterviewDesign SportPillar'
+NumberedListInterviewSport.story = {
+	name: 'NumberedListDisplay InterviewDesign Sport'
 };
 
-export const NumberedListInterviewCulturePillar = () => {
+export const NumberedListInterviewCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Interview"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListInterviewCulturePillar.story = {
-	name: 'NumberedListDisplay InterviewDesign CulturePillar'
+NumberedListInterviewCulture.story = {
+	name: 'NumberedListDisplay InterviewDesign Culture'
 };
 
-export const NumberedListInterviewLifestylePillar = () => {
+export const NumberedListInterviewLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Interview"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListInterviewLifestylePillar.story = {
-	name: 'NumberedListDisplay InterviewDesign LifestylePillar'
+NumberedListInterviewLifestyle.story = {
+	name: 'NumberedListDisplay InterviewDesign Lifestyle'
 };
 
 export const NumberedListInterviewSpecialReportTheme = () => {
@@ -9065,69 +9065,69 @@ NumberedListInterviewSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay InterviewDesign SpecialReportAltTheme'
 };
 
-export const NumberedListEditorialNewsPillar = () => {
+export const NumberedListEditorialNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Editorial"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListEditorialNewsPillar.story = {
-	name: 'NumberedListDisplay EditorialDesign NewsPillar'
+NumberedListEditorialNews.story = {
+	name: 'NumberedListDisplay EditorialDesign News'
 };
 
-export const NumberedListEditorialOpinionPillar = () => {
+export const NumberedListEditorialOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Editorial"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListEditorialOpinionPillar.story = {
-	name: 'NumberedListDisplay EditorialDesign OpinionPillar'
+NumberedListEditorialOpinion.story = {
+	name: 'NumberedListDisplay EditorialDesign Opinion'
 };
 
-export const NumberedListEditorialSportPillar = () => {
+export const NumberedListEditorialSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Editorial"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListEditorialSportPillar.story = {
-	name: 'NumberedListDisplay EditorialDesign SportPillar'
+NumberedListEditorialSport.story = {
+	name: 'NumberedListDisplay EditorialDesign Sport'
 };
 
-export const NumberedListEditorialCulturePillar = () => {
+export const NumberedListEditorialCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Editorial"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListEditorialCulturePillar.story = {
-	name: 'NumberedListDisplay EditorialDesign CulturePillar'
+NumberedListEditorialCulture.story = {
+	name: 'NumberedListDisplay EditorialDesign Culture'
 };
 
-export const NumberedListEditorialLifestylePillar = () => {
+export const NumberedListEditorialLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Editorial"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListEditorialLifestylePillar.story = {
-	name: 'NumberedListDisplay EditorialDesign LifestylePillar'
+NumberedListEditorialLifestyle.story = {
+	name: 'NumberedListDisplay EditorialDesign Lifestyle'
 };
 
 export const NumberedListEditorialSpecialReportTheme = () => {
@@ -9169,69 +9169,69 @@ NumberedListEditorialSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay EditorialDesign SpecialReportAltTheme'
 };
 
-export const NumberedListQuizNewsPillar = () => {
+export const NumberedListQuizNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Quiz"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListQuizNewsPillar.story = {
-	name: 'NumberedListDisplay QuizDesign NewsPillar'
+NumberedListQuizNews.story = {
+	name: 'NumberedListDisplay QuizDesign News'
 };
 
-export const NumberedListQuizOpinionPillar = () => {
+export const NumberedListQuizOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Quiz"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListQuizOpinionPillar.story = {
-	name: 'NumberedListDisplay QuizDesign OpinionPillar'
+NumberedListQuizOpinion.story = {
+	name: 'NumberedListDisplay QuizDesign Opinion'
 };
 
-export const NumberedListQuizSportPillar = () => {
+export const NumberedListQuizSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Quiz"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListQuizSportPillar.story = {
-	name: 'NumberedListDisplay QuizDesign SportPillar'
+NumberedListQuizSport.story = {
+	name: 'NumberedListDisplay QuizDesign Sport'
 };
 
-export const NumberedListQuizCulturePillar = () => {
+export const NumberedListQuizCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Quiz"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListQuizCulturePillar.story = {
-	name: 'NumberedListDisplay QuizDesign CulturePillar'
+NumberedListQuizCulture.story = {
+	name: 'NumberedListDisplay QuizDesign Culture'
 };
 
-export const NumberedListQuizLifestylePillar = () => {
+export const NumberedListQuizLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Quiz"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListQuizLifestylePillar.story = {
-	name: 'NumberedListDisplay QuizDesign LifestylePillar'
+NumberedListQuizLifestyle.story = {
+	name: 'NumberedListDisplay QuizDesign Lifestyle'
 };
 
 export const NumberedListQuizSpecialReportTheme = () => {
@@ -9273,69 +9273,69 @@ NumberedListQuizSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay QuizDesign SpecialReportAltTheme'
 };
 
-export const NumberedListInteractiveNewsPillar = () => {
+export const NumberedListInteractiveNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Interactive"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListInteractiveNewsPillar.story = {
-	name: 'NumberedListDisplay InteractiveDesign NewsPillar'
+NumberedListInteractiveNews.story = {
+	name: 'NumberedListDisplay InteractiveDesign News'
 };
 
-export const NumberedListInteractiveOpinionPillar = () => {
+export const NumberedListInteractiveOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Interactive"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListInteractiveOpinionPillar.story = {
-	name: 'NumberedListDisplay InteractiveDesign OpinionPillar'
+NumberedListInteractiveOpinion.story = {
+	name: 'NumberedListDisplay InteractiveDesign Opinion'
 };
 
-export const NumberedListInteractiveSportPillar = () => {
+export const NumberedListInteractiveSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Interactive"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListInteractiveSportPillar.story = {
-	name: 'NumberedListDisplay InteractiveDesign SportPillar'
+NumberedListInteractiveSport.story = {
+	name: 'NumberedListDisplay InteractiveDesign Sport'
 };
 
-export const NumberedListInteractiveCulturePillar = () => {
+export const NumberedListInteractiveCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Interactive"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListInteractiveCulturePillar.story = {
-	name: 'NumberedListDisplay InteractiveDesign CulturePillar'
+NumberedListInteractiveCulture.story = {
+	name: 'NumberedListDisplay InteractiveDesign Culture'
 };
 
-export const NumberedListInteractiveLifestylePillar = () => {
+export const NumberedListInteractiveLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Interactive"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListInteractiveLifestylePillar.story = {
-	name: 'NumberedListDisplay InteractiveDesign LifestylePillar'
+NumberedListInteractiveLifestyle.story = {
+	name: 'NumberedListDisplay InteractiveDesign Lifestyle'
 };
 
 export const NumberedListInteractiveSpecialReportTheme = () => {
@@ -9377,69 +9377,69 @@ NumberedListInteractiveSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay InteractiveDesign SpecialReportAltTheme'
 };
 
-export const NumberedListPhotoEssayNewsPillar = () => {
+export const NumberedListPhotoEssayNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="PhotoEssay"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListPhotoEssayNewsPillar.story = {
-	name: 'NumberedListDisplay PhotoEssayDesign NewsPillar'
+NumberedListPhotoEssayNews.story = {
+	name: 'NumberedListDisplay PhotoEssayDesign News'
 };
 
-export const NumberedListPhotoEssayOpinionPillar = () => {
+export const NumberedListPhotoEssayOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="PhotoEssay"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListPhotoEssayOpinionPillar.story = {
-	name: 'NumberedListDisplay PhotoEssayDesign OpinionPillar'
+NumberedListPhotoEssayOpinion.story = {
+	name: 'NumberedListDisplay PhotoEssayDesign Opinion'
 };
 
-export const NumberedListPhotoEssaySportPillar = () => {
+export const NumberedListPhotoEssaySport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="PhotoEssay"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListPhotoEssaySportPillar.story = {
-	name: 'NumberedListDisplay PhotoEssayDesign SportPillar'
+NumberedListPhotoEssaySport.story = {
+	name: 'NumberedListDisplay PhotoEssayDesign Sport'
 };
 
-export const NumberedListPhotoEssayCulturePillar = () => {
+export const NumberedListPhotoEssayCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="PhotoEssay"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListPhotoEssayCulturePillar.story = {
-	name: 'NumberedListDisplay PhotoEssayDesign CulturePillar'
+NumberedListPhotoEssayCulture.story = {
+	name: 'NumberedListDisplay PhotoEssayDesign Culture'
 };
 
-export const NumberedListPhotoEssayLifestylePillar = () => {
+export const NumberedListPhotoEssayLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="PhotoEssay"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListPhotoEssayLifestylePillar.story = {
-	name: 'NumberedListDisplay PhotoEssayDesign LifestylePillar'
+NumberedListPhotoEssayLifestyle.story = {
+	name: 'NumberedListDisplay PhotoEssayDesign Lifestyle'
 };
 
 export const NumberedListPhotoEssaySpecialReportTheme = () => {
@@ -9481,69 +9481,69 @@ NumberedListPhotoEssaySpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay PhotoEssayDesign SpecialReportAltTheme'
 };
 
-export const NumberedListPrintShopNewsPillar = () => {
+export const NumberedListPrintShopNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="PrintShop"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListPrintShopNewsPillar.story = {
-	name: 'NumberedListDisplay PrintShopDesign NewsPillar'
+NumberedListPrintShopNews.story = {
+	name: 'NumberedListDisplay PrintShopDesign News'
 };
 
-export const NumberedListPrintShopOpinionPillar = () => {
+export const NumberedListPrintShopOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="PrintShop"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListPrintShopOpinionPillar.story = {
-	name: 'NumberedListDisplay PrintShopDesign OpinionPillar'
+NumberedListPrintShopOpinion.story = {
+	name: 'NumberedListDisplay PrintShopDesign Opinion'
 };
 
-export const NumberedListPrintShopSportPillar = () => {
+export const NumberedListPrintShopSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="PrintShop"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListPrintShopSportPillar.story = {
-	name: 'NumberedListDisplay PrintShopDesign SportPillar'
+NumberedListPrintShopSport.story = {
+	name: 'NumberedListDisplay PrintShopDesign Sport'
 };
 
-export const NumberedListPrintShopCulturePillar = () => {
+export const NumberedListPrintShopCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="PrintShop"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListPrintShopCulturePillar.story = {
-	name: 'NumberedListDisplay PrintShopDesign CulturePillar'
+NumberedListPrintShopCulture.story = {
+	name: 'NumberedListDisplay PrintShopDesign Culture'
 };
 
-export const NumberedListPrintShopLifestylePillar = () => {
+export const NumberedListPrintShopLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="PrintShop"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListPrintShopLifestylePillar.story = {
-	name: 'NumberedListDisplay PrintShopDesign LifestylePillar'
+NumberedListPrintShopLifestyle.story = {
+	name: 'NumberedListDisplay PrintShopDesign Lifestyle'
 };
 
 export const NumberedListPrintShopSpecialReportTheme = () => {
@@ -9585,69 +9585,69 @@ NumberedListPrintShopSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay PrintShopDesign SpecialReportAltTheme'
 };
 
-export const NumberedListObituaryNewsPillar = () => {
+export const NumberedListObituaryNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Obituary"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListObituaryNewsPillar.story = {
-	name: 'NumberedListDisplay ObituaryDesign NewsPillar'
+NumberedListObituaryNews.story = {
+	name: 'NumberedListDisplay ObituaryDesign News'
 };
 
-export const NumberedListObituaryOpinionPillar = () => {
+export const NumberedListObituaryOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Obituary"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListObituaryOpinionPillar.story = {
-	name: 'NumberedListDisplay ObituaryDesign OpinionPillar'
+NumberedListObituaryOpinion.story = {
+	name: 'NumberedListDisplay ObituaryDesign Opinion'
 };
 
-export const NumberedListObituarySportPillar = () => {
+export const NumberedListObituarySport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Obituary"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListObituarySportPillar.story = {
-	name: 'NumberedListDisplay ObituaryDesign SportPillar'
+NumberedListObituarySport.story = {
+	name: 'NumberedListDisplay ObituaryDesign Sport'
 };
 
-export const NumberedListObituaryCulturePillar = () => {
+export const NumberedListObituaryCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Obituary"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListObituaryCulturePillar.story = {
-	name: 'NumberedListDisplay ObituaryDesign CulturePillar'
+NumberedListObituaryCulture.story = {
+	name: 'NumberedListDisplay ObituaryDesign Culture'
 };
 
-export const NumberedListObituaryLifestylePillar = () => {
+export const NumberedListObituaryLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Obituary"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListObituaryLifestylePillar.story = {
-	name: 'NumberedListDisplay ObituaryDesign LifestylePillar'
+NumberedListObituaryLifestyle.story = {
+	name: 'NumberedListDisplay ObituaryDesign Lifestyle'
 };
 
 export const NumberedListObituarySpecialReportTheme = () => {
@@ -9689,69 +9689,69 @@ NumberedListObituarySpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay ObituaryDesign SpecialReportAltTheme'
 };
 
-export const NumberedListCorrectionNewsPillar = () => {
+export const NumberedListCorrectionNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Correction"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListCorrectionNewsPillar.story = {
-	name: 'NumberedListDisplay CorrectionDesign NewsPillar'
+NumberedListCorrectionNews.story = {
+	name: 'NumberedListDisplay CorrectionDesign News'
 };
 
-export const NumberedListCorrectionOpinionPillar = () => {
+export const NumberedListCorrectionOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Correction"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListCorrectionOpinionPillar.story = {
-	name: 'NumberedListDisplay CorrectionDesign OpinionPillar'
+NumberedListCorrectionOpinion.story = {
+	name: 'NumberedListDisplay CorrectionDesign Opinion'
 };
 
-export const NumberedListCorrectionSportPillar = () => {
+export const NumberedListCorrectionSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Correction"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListCorrectionSportPillar.story = {
-	name: 'NumberedListDisplay CorrectionDesign SportPillar'
+NumberedListCorrectionSport.story = {
+	name: 'NumberedListDisplay CorrectionDesign Sport'
 };
 
-export const NumberedListCorrectionCulturePillar = () => {
+export const NumberedListCorrectionCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Correction"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListCorrectionCulturePillar.story = {
-	name: 'NumberedListDisplay CorrectionDesign CulturePillar'
+NumberedListCorrectionCulture.story = {
+	name: 'NumberedListDisplay CorrectionDesign Culture'
 };
 
-export const NumberedListCorrectionLifestylePillar = () => {
+export const NumberedListCorrectionLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="Correction"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListCorrectionLifestylePillar.story = {
-	name: 'NumberedListDisplay CorrectionDesign LifestylePillar'
+NumberedListCorrectionLifestyle.story = {
+	name: 'NumberedListDisplay CorrectionDesign Lifestyle'
 };
 
 export const NumberedListCorrectionSpecialReportTheme = () => {
@@ -9793,69 +9793,69 @@ NumberedListCorrectionSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay CorrectionDesign SpecialReportAltTheme'
 };
 
-export const NumberedListFullPageInteractiveNewsPillar = () => {
+export const NumberedListFullPageInteractiveNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="FullPageInteractive"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListFullPageInteractiveNewsPillar.story = {
-	name: 'NumberedListDisplay FullPageInteractiveDesign NewsPillar'
+NumberedListFullPageInteractiveNews.story = {
+	name: 'NumberedListDisplay FullPageInteractiveDesign News'
 };
 
-export const NumberedListFullPageInteractiveOpinionPillar = () => {
+export const NumberedListFullPageInteractiveOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="FullPageInteractive"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListFullPageInteractiveOpinionPillar.story = {
-	name: 'NumberedListDisplay FullPageInteractiveDesign OpinionPillar'
+NumberedListFullPageInteractiveOpinion.story = {
+	name: 'NumberedListDisplay FullPageInteractiveDesign Opinion'
 };
 
-export const NumberedListFullPageInteractiveSportPillar = () => {
+export const NumberedListFullPageInteractiveSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="FullPageInteractive"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListFullPageInteractiveSportPillar.story = {
-	name: 'NumberedListDisplay FullPageInteractiveDesign SportPillar'
+NumberedListFullPageInteractiveSport.story = {
+	name: 'NumberedListDisplay FullPageInteractiveDesign Sport'
 };
 
-export const NumberedListFullPageInteractiveCulturePillar = () => {
+export const NumberedListFullPageInteractiveCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="FullPageInteractive"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListFullPageInteractiveCulturePillar.story = {
-	name: 'NumberedListDisplay FullPageInteractiveDesign CulturePillar'
+NumberedListFullPageInteractiveCulture.story = {
+	name: 'NumberedListDisplay FullPageInteractiveDesign Culture'
 };
 
-export const NumberedListFullPageInteractiveLifestylePillar = () => {
+export const NumberedListFullPageInteractiveLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="FullPageInteractive"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListFullPageInteractiveLifestylePillar.story = {
-	name: 'NumberedListDisplay FullPageInteractiveDesign LifestylePillar'
+NumberedListFullPageInteractiveLifestyle.story = {
+	name: 'NumberedListDisplay FullPageInteractiveDesign Lifestyle'
 };
 
 export const NumberedListFullPageInteractiveSpecialReportTheme = () => {
@@ -9897,69 +9897,69 @@ NumberedListFullPageInteractiveSpecialReportAltTheme.story = {
 	name: 'NumberedListDisplay FullPageInteractiveDesign SpecialReportAltTheme'
 };
 
-export const NumberedListNewsletterSignupNewsPillar = () => {
+export const NumberedListNewsletterSignupNews = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="NewsletterSignup"
-			theme="NewsPillar"
+			theme="News"
 		/>
 	);
 };
-NumberedListNewsletterSignupNewsPillar.story = {
-	name: 'NumberedListDisplay NewsletterSignupDesign NewsPillar'
+NumberedListNewsletterSignupNews.story = {
+	name: 'NumberedListDisplay NewsletterSignupDesign News'
 };
 
-export const NumberedListNewsletterSignupOpinionPillar = () => {
+export const NumberedListNewsletterSignupOpinion = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="NewsletterSignup"
-			theme="OpinionPillar"
+			theme="Opinion"
 		/>
 	);
 };
-NumberedListNewsletterSignupOpinionPillar.story = {
-	name: 'NumberedListDisplay NewsletterSignupDesign OpinionPillar'
+NumberedListNewsletterSignupOpinion.story = {
+	name: 'NumberedListDisplay NewsletterSignupDesign Opinion'
 };
 
-export const NumberedListNewsletterSignupSportPillar = () => {
+export const NumberedListNewsletterSignupSport = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="NewsletterSignup"
-			theme="SportPillar"
+			theme="Sport"
 		/>
 	);
 };
-NumberedListNewsletterSignupSportPillar.story = {
-	name: 'NumberedListDisplay NewsletterSignupDesign SportPillar'
+NumberedListNewsletterSignupSport.story = {
+	name: 'NumberedListDisplay NewsletterSignupDesign Sport'
 };
 
-export const NumberedListNewsletterSignupCulturePillar = () => {
+export const NumberedListNewsletterSignupCulture = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="NewsletterSignup"
-			theme="CulturePillar"
+			theme="Culture"
 		/>
 	);
 };
-NumberedListNewsletterSignupCulturePillar.story = {
-	name: 'NumberedListDisplay NewsletterSignupDesign CulturePillar'
+NumberedListNewsletterSignupCulture.story = {
+	name: 'NumberedListDisplay NewsletterSignupDesign Culture'
 };
 
-export const NumberedListNewsletterSignupLifestylePillar = () => {
+export const NumberedListNewsletterSignupLifestyle = () => {
 	return (
 		<HydratedLayoutWrapper
 			displayName="NumberedList"
 			designName="NewsletterSignup"
-			theme="LifestylePillar"
+			theme="Lifestyle"
 		/>
 	);
 };
-NumberedListNewsletterSignupLifestylePillar.story = {
-	name: 'NumberedListDisplay NewsletterSignupDesign LifestylePillar'
+NumberedListNewsletterSignupLifestyle.story = {
+	name: 'NumberedListDisplay NewsletterSignupDesign Lifestyle'
 };
 
 export const NumberedListNewsletterSignupSpecialReportTheme = () => {

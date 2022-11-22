@@ -1,12 +1,14 @@
 import { css } from '@emotion/react';
 import {
 	between,
+	from,
 	headline,
 	news,
 	space,
 	text,
+	until,
 } from '@guardian/source-foundations';
-import type { EditionId } from '../lib/edition';
+import type { EditionId } from '../../types/edition';
 import type { DCRContainerPalette } from '../../types/front';
 import type { Colour } from '../../types/palette';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
@@ -34,8 +36,17 @@ const linkStyles = css`
 const headerStyles = (fontColour?: string) => css`
 	${headline.xsmall({ fontWeight: 'bold' })};
 	color: ${fontColour || text.primary};
-	padding-bottom: ${space[1]}px;
+	padding-bottom: ${space[2]}px;
 	padding-top: ${space[1]}px;
+	margin-left: 0;
+
+	${from.tablet} {
+		margin-left: 10px;
+	}
+
+	${from.leftCol} {
+		margin-left: 0;
+	}
 `;
 
 const descriptionStyles = (fontColour?: string) => css`
@@ -49,18 +60,13 @@ const descriptionStyles = (fontColour?: string) => css`
 		color: ${text.primary};
 		text-decoration: none;
 	}
-`;
-
-const bottomMargin = css`
-	margin-bottom: ${space[2]}px;
-`;
-
-const marginStyles = css`
-	margin-left: 0;
 	${between.tablet.and.leftCol} {
 		margin-left: 10px;
 	}
-	margin-bottom: ${space[2]}px;
+
+	${until.leftCol} {
+		margin-bottom: ${space[4]}px;
+	}
 `;
 
 const dateTextStyles = (color: Colour) => css`
@@ -92,9 +98,9 @@ export const ContainerTitle = ({
 	const locale = editionId && getEditionFromId(editionId).locale;
 
 	return (
-		<div css={[marginStyles]}>
+		<div>
 			{url ? (
-				<a css={[linkStyles, bottomMargin]} href={url}>
+				<a css={linkStyles} href={url}>
 					<h2 css={headerStyles(fontColour)}>{title}</h2>
 				</a>
 			) : (
@@ -102,12 +108,12 @@ export const ContainerTitle = ({
 			)}
 			{!!description && (
 				<p
-					css={[descriptionStyles(fontColour), bottomMargin]}
+					css={descriptionStyles(fontColour)}
 					dangerouslySetInnerHTML={{ __html: description }}
 				/>
 			)}
 			{showDateHeader && editionId && (
-				<>
+				<div>
 					<span
 						css={dateTextStyles(
 							overrides?.text.containerDate || news[400],
@@ -123,7 +129,6 @@ export const ContainerTitle = ({
 							dateTextStyles(
 								overrides?.text.containerDate || news[400],
 							),
-							bottomMargin,
 						]}
 					>
 						{now.toLocaleDateString(locale, {
@@ -132,7 +137,7 @@ export const ContainerTitle = ({
 							year: 'numeric',
 						})}
 					</span>
-				</>
+				</div>
 			)}
 		</div>
 	);

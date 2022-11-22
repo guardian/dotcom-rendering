@@ -1,5 +1,3 @@
-import type { TagType } from '../../../types/tag';
-
 export type CanShowGateProps = {
 	isSignedIn: boolean;
 	currentTest: CurrentSignInGateABTest;

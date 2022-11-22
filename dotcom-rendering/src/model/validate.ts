@@ -3,7 +3,7 @@ import type { Options } from 'ajv';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import type { FEFrontType } from '../../src/types/front';
-import type { FEArticleType } from '../types/frontend';
+import type { CAPIArticleType } from '../types/frontend';
 import articleSchema from './article-schema.json';
 import frontSchema from './front-schema.json';
 
@@ -17,10 +17,10 @@ const options: Options = {
 const ajv = new Ajv(options);
 addFormats(ajv);
 
-const validateArticle = ajv.compile<FEArticleType>(articleSchema);
+const validateArticle = ajv.compile<CAPIArticleType>(articleSchema);
 const validateFront = ajv.compile<FEFrontType>(frontSchema);
 
-export const validateAsCAPIType = (data: unknown): FEArticleType => {
+export const validateAsCAPIType = (data: unknown): CAPIArticleType => {
 	if (validateArticle(data)) return data;
 
 	const url =

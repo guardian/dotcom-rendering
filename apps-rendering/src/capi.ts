@@ -8,14 +8,13 @@ import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
 import type { Option } from '@guardian/types';
-import { andThen, fromNullable, none, some } from '@guardian/types';
+import { andThen, fromNullable, map, none, some } from '@guardian/types';
 import { fromString as dateFromString } from 'date';
 import { parseImage } from 'image';
 import { isLabs } from 'item';
 import { pipe } from 'lib';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
-import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import { parseVideo } from 'video';
 
@@ -67,33 +66,35 @@ const isVideo = (elem: BlockElement): boolean =>
 	elem.type === ElementType.CONTENTATOM &&
 	elem.contentAtomTypeData?.atomType === 'media';
 
-const articleMainImage = (content: Content): Optional<BlockElement> =>
-	Optional.fromNullable(
-		(content.blocks?.main?.elements.filter(isImage) ?? [])[0],
-	);
+const articleMainImage = (content: Content): Option<BlockElement> =>
+	fromNullable((content.blocks?.main?.elements.filter(isImage) ?? [])[0]);
 
-const articleMainVideo = (content: Content): Optional<BlockElement> =>
-	Optional.fromNullable(
-		(content.blocks?.main?.elements.filter(isVideo) ?? [])[0],
-	);
+const articleMainVideo = (content: Content): Option<BlockElement> =>
+	fromNullable((content.blocks?.main?.elements.filter(isVideo) ?? [])[0]);
 
 const articleMainMedia = (
 	content: Content,
 	context: Context,
-): Optional<MainMedia> => {
+): Option<MainMedia> => {
 	return (content.blocks?.main?.elements.filter(isImage) ?? [])[0]
-		? articleMainImage(content)
-				.flatMap(parseImage(context))
-				.map<MainMedia>((image) => ({
+		? pipe(
+				articleMainImage(content),
+				andThen(parseImage(context)),
+				map((image) => ({
 					kind: MainMediaKind.Image,
 					image,
-				}))
-		: articleMainVideo(content)
-				.flatMap(parseVideo(content.atoms))
-				.map<MainMedia>((video) => ({
+				})),
+		  )
+		: pipe(
+				articleMainVideo(content),
+				andThen((blockElement) =>
+					parseVideo(blockElement, content.atoms),
+				),
+				map((video) => ({
 					kind: MainMediaKind.Video,
 					video,
-				}));
+				})),
+		  );
 };
 
 type ThirdPartyEmbeds = {

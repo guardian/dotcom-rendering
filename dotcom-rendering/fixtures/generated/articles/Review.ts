@@ -11,9 +11,9 @@
  *    gen-fixtures.ts directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { CAPIArticleType } from '../../../src/types/frontend';
 
-export const Review: FEArticleType = {
+export const Review: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image element--showcase" data-media-id="39892d930be2203c5ea452d130772c0279f7dc0c"> <img src="https://media.guim.co.uk/39892d930be2203c5ea452d130772c0279f7dc0c/0_400_6000_3600/1000.jpg" alt="Sex Education." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">So brilliant you can only boggle ... Ncuti Gatwa as Eric in Sex Education.</span> <span class="element-image__credit">Photograph: Sam Taylor/Netflix</span> </figcaption> </figure>',
 	subMetaSectionLinks: [

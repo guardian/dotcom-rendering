@@ -647,7 +647,6 @@
                                                                 "tags": {
                                                                     "type": "array",
                                                                     "items": {
-                                                                        "description": "This type comes from `frontend`, hence the FE prefix.",
                                                                         "type": "object",
                                                                         "properties": {
                                                                             "properties": {
@@ -656,25 +655,10 @@
                                                                                     "id": {
                                                                                         "type": "string"
                                                                                     },
+                                                                                    "url": {
+                                                                                        "type": "string"
+                                                                                    },
                                                                                     "tagType": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "webTitle": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "bio": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "bylineImageUrl": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "bylineLargeImageUrl": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "contributorLargeImagePath": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "paidContentType": {
                                                                                         "type": "string"
                                                                                     },
                                                                                     "sectionId": {
@@ -683,20 +667,33 @@
                                                                                     "sectionName": {
                                                                                         "type": "string"
                                                                                     },
-                                                                                    "twitterHandle": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "url": {
+                                                                                    "webTitle": {
                                                                                         "type": "string"
                                                                                     },
                                                                                     "webUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "twitterHandle": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bio": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bylineImageUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "contributorLargeImagePath": {
                                                                                         "type": "string"
                                                                                     }
                                                                                 },
                                                                                 "required": [
                                                                                     "id",
+                                                                                    "sectionId",
+                                                                                    "sectionName",
                                                                                     "tagType",
-                                                                                    "webTitle"
+                                                                                    "url",
+                                                                                    "webTitle",
+                                                                                    "webUrl"
                                                                                 ]
                                                                             }
                                                                         },
@@ -1317,7 +1314,6 @@
                                                                 "tags": {
                                                                     "type": "array",
                                                                     "items": {
-                                                                        "description": "This type comes from `frontend`, hence the FE prefix.",
                                                                         "type": "object",
                                                                         "properties": {
                                                                             "properties": {
@@ -1326,25 +1322,10 @@
                                                                                     "id": {
                                                                                         "type": "string"
                                                                                     },
+                                                                                    "url": {
+                                                                                        "type": "string"
+                                                                                    },
                                                                                     "tagType": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "webTitle": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "bio": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "bylineImageUrl": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "bylineLargeImageUrl": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "contributorLargeImagePath": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "paidContentType": {
                                                                                         "type": "string"
                                                                                     },
                                                                                     "sectionId": {
@@ -1353,20 +1334,33 @@
                                                                                     "sectionName": {
                                                                                         "type": "string"
                                                                                     },
-                                                                                    "twitterHandle": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "url": {
+                                                                                    "webTitle": {
                                                                                         "type": "string"
                                                                                     },
                                                                                     "webUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "twitterHandle": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bio": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bylineImageUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "contributorLargeImagePath": {
                                                                                         "type": "string"
                                                                                     }
                                                                                 },
                                                                                 "required": [
                                                                                     "id",
+                                                                                    "sectionId",
+                                                                                    "sectionName",
                                                                                     "tagType",
-                                                                                    "webTitle"
+                                                                                    "url",
+                                                                                    "webTitle",
+                                                                                    "webUrl"
                                                                                 ]
                                                                             }
                                                                         },
@@ -1987,7 +1981,6 @@
                                                                 "tags": {
                                                                     "type": "array",
                                                                     "items": {
-                                                                        "description": "This type comes from `frontend`, hence the FE prefix.",
                                                                         "type": "object",
                                                                         "properties": {
                                                                             "properties": {
@@ -1996,25 +1989,10 @@
                                                                                     "id": {
                                                                                         "type": "string"
                                                                                     },
+                                                                                    "url": {
+                                                                                        "type": "string"
+                                                                                    },
                                                                                     "tagType": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "webTitle": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "bio": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "bylineImageUrl": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "bylineLargeImageUrl": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "contributorLargeImagePath": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "paidContentType": {
                                                                                         "type": "string"
                                                                                     },
                                                                                     "sectionId": {
@@ -2023,20 +2001,33 @@
                                                                                     "sectionName": {
                                                                                         "type": "string"
                                                                                     },
-                                                                                    "twitterHandle": {
-                                                                                        "type": "string"
-                                                                                    },
-                                                                                    "url": {
+                                                                                    "webTitle": {
                                                                                         "type": "string"
                                                                                     },
                                                                                     "webUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "twitterHandle": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bio": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "bylineImageUrl": {
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "contributorLargeImagePath": {
                                                                                         "type": "string"
                                                                                     }
                                                                                 },
                                                                                 "required": [
                                                                                     "id",
+                                                                                    "sectionId",
+                                                                                    "sectionName",
                                                                                     "tagType",
-                                                                                    "webTitle"
+                                                                                    "url",
+                                                                                    "webTitle",
+                                                                                    "webUrl"
                                                                                 ]
                                                                             }
                                                                         },

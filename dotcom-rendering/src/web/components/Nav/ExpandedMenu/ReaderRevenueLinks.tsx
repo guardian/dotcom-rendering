@@ -6,11 +6,7 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import { useEffect, useState } from 'react';
 import type { LinkType } from '../../../../model/extract-nav';
-
-import { addTrackingCodesToUrl } from '../../../lib/acquisitions';
-import { EditionId } from '../../../lib/edition';
 
 const hideDesktop = css`
 	${from.desktop} {
@@ -72,55 +68,21 @@ const mainMenuLinkStyle = css`
 
 export const ReaderRevenueLinks: React.FC<{
 	readerRevenueLinks: ReaderRevenuePositions;
-	editionId: EditionId;
-	headerTopBarSwitch: boolean;
-}> = ({ readerRevenueLinks, editionId, headerTopBarSwitch }) => {
-	const [pageViewId, setPageViewId] = useState('');
-	const [referrerUrl, setReferrerUrl] = useState('');
-	useEffect(() => {
-		setPageViewId(window.guardian.config.ophan.pageViewId);
-		setReferrerUrl(window.location.origin + window.location.pathname);
-	}, []);
-
-	const printSubUrl = addTrackingCodesToUrl({
-		base: `https://support.theguardian.com/subscribe${
-			editionId === 'UK' ? '' : '/weekly'
-		}`,
-		componentType: 'ACQUISITIONS_HEADER',
-		componentId: 'PrintSubscriptionsHeaderLink',
-		pageViewId,
-		referrerUrl,
-	});
-
-	const links: LinkType[] = headerTopBarSwitch
-		? [
-				{
-					longTitle: 'Support us',
-					title: 'Support us',
-					mobileOnly: true,
-					url: readerRevenueLinks.sideMenu.support,
-				},
-				{
-					longTitle: 'Print subscriptions',
-					title: 'Print subscriptions',
-					mobileOnly: true,
-					url: printSubUrl,
-				},
-		  ]
-		: [
-				{
-					longTitle: 'Make a contribution',
-					title: 'Make a contribution',
-					mobileOnly: true,
-					url: readerRevenueLinks.sideMenu.contribute,
-				},
-				{
-					longTitle: 'Subscribe',
-					title: 'Subscribe',
-					mobileOnly: true,
-					url: readerRevenueLinks.sideMenu.subscribe,
-				},
-		  ];
+}> = ({ readerRevenueLinks }) => {
+	const links: LinkType[] = [
+		{
+			longTitle: 'Make a contribution',
+			title: 'Make a contribution',
+			mobileOnly: true,
+			url: readerRevenueLinks.sideMenu.contribute,
+		},
+		{
+			longTitle: 'Subscribe',
+			title: 'Subscribe',
+			mobileOnly: true,
+			url: readerRevenueLinks.sideMenu.subscribe,
+		},
+	];
 
 	return (
 		<ul css={hideDesktop} role="menu">

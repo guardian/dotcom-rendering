@@ -27,37 +27,11 @@ export const StandardStory = () => {
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
-				headerTopBarSwitch={false}
 			/>
 		</Section>
 	);
 };
 StandardStory.story = { name: 'News Highlighted' };
-
-export const StandardStoryTopBarHeader = () => {
-	return (
-		<Section
-			fullWidth={true}
-			borderColour={brandBorder.primary}
-			showTopBorder={false}
-			padSides={false}
-			backgroundColour={brandBackground.primary}
-		>
-			<Nav
-				format={{
-					theme: ArticlePillar.News,
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-				}}
-				nav={nav}
-				subscribeUrl=""
-				editionId="UK"
-				headerTopBarSwitch={true}
-			/>
-		</Section>
-	);
-};
-StandardStoryTopBarHeader.story = { name: 'News Highlighted' };
 
 export const OpinionStory = () => {
 	return (
@@ -77,7 +51,6 @@ export const OpinionStory = () => {
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
-				headerTopBarSwitch={false}
 			/>
 		</Section>
 	);
@@ -103,7 +76,6 @@ export const ImmersiveStory = () => {
 				nav={nav}
 				subscribeUrl=""
 				editionId="UK"
-				headerTopBarSwitch={false}
 			/>
 		</Section>
 	);

@@ -10,7 +10,7 @@ import { AssetType } from '@guardian/content-atom-model/media/assetType';
 import { Category } from '@guardian/content-atom-model/media/category';
 import { MediaAtom } from '@guardian/content-atom-model/media/mediaAtom';
 import { Platform } from '@guardian/content-atom-model/media/platform';
-import { Optional } from 'optional';
+import { none, some } from '@guardian/types';
 import { Int64 } from 'thrift';
 import { parseVideo } from 'video';
 
@@ -76,23 +76,23 @@ describe('parseVideo', () => {
 	});
 
 	test('returns video', () => {
-		const expected = Optional.some({
+		const expected = some({
 			posterUrl: posterUrl,
 			videoId: assetId,
 			duration: undefined,
 			atomId: atomId,
 			title: mediaAtomTitle,
 		});
-		expect(parseVideo(atoms)(blockElement)).toEqual(expected);
+		expect(parseVideo(blockElement, atoms)).toEqual(expected);
 	});
 
 	test('returns none given no atoms', () => {
-		expect(parseVideo(undefined)(blockElement).isNone()).toBe(true);
+		expect(parseVideo(blockElement)).toEqual(none);
 	});
 
 	test('returns none given no media in atoms', () => {
 		atoms = {};
-		expect(parseVideo(atoms)(blockElement).isNone()).toBe(true);
+		expect(parseVideo(blockElement, atoms)).toEqual(none);
 	});
 
 	test('returns none given none of the media atoms matches the element atom type id', () => {
@@ -100,7 +100,7 @@ describe('parseVideo', () => {
 			atomId: 'atomId1',
 			atomType: 'someAtomType',
 		};
-		expect(parseVideo(atoms)(blockElement).isNone()).toBe(true);
+		expect(parseVideo(blockElement, atoms)).toEqual(none);
 	});
 
 	test("returns none given the atom data of the matched media atom does does not have 'media' kind", () => {
@@ -113,21 +113,21 @@ describe('parseVideo', () => {
 			},
 		};
 		atom.data = differentAtomData;
-		expect(parseVideo(atoms)(blockElement).isNone()).toBe(true);
+		expect(parseVideo(blockElement, atoms)).toEqual(none);
 	});
 
 	test('returns none given matched atom does not have posterUrl', () => {
 		mediaAtom.posterUrl = undefined;
-		expect(parseVideo(atoms)(blockElement).isNone()).toBe(true);
+		expect(parseVideo(blockElement, atoms)).toEqual(none);
 	});
 
 	test('returns none given media atom does not have any assets', () => {
 		mediaAtom.assets = [];
-		expect(parseVideo(atoms)(blockElement).isNone()).toBe(true);
+		expect(parseVideo(blockElement, atoms)).toEqual(none);
 	});
 
 	test('returns none given media atom asset version does not match media atom activeVersion', () => {
 		mediaAtom.activeVersion = new Int64(3);
-		expect(parseVideo(atoms)(blockElement).isNone()).toBe(true);
+		expect(parseVideo(blockElement, atoms)).toEqual(none);
 	});
 });

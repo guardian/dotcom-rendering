@@ -1,9 +1,9 @@
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
-import type { FEArticleType } from '../types/frontend';
+import type { CAPIArticleType } from '../types/frontend';
 import { enhanceBlockquotes } from './enhance-blockquotes';
 
-const example: FEArticleType = ExampleArticle;
+const example: CAPIArticleType = ExampleArticle;
 
 const formatIsPhotoEssay: CAPIFormat = {
 	...example.format,

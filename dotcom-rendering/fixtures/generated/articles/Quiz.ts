@@ -11,9 +11,9 @@
  *    gen-fixtures.ts directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { CAPIArticleType } from '../../../src/types/frontend';
 
-export const Quiz: FEArticleType = {
+export const Quiz: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image element--showcase" data-media-id="0584dd0a4813e6002e11ff67c28aff9b32da7abf"> \n <img src="https://media.guim.co.uk/0584dd0a4813e6002e11ff67c28aff9b32da7abf/2_0_3020_1814/1000.jpg" alt="Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s." width="1000" height="600" class="gu-image"> \n <figcaption> \n  <span class="element-image__caption">Steaua Bucharest, astroturf, Ipswich Town, Italy and Diamond Lights were all big in the 1980s.</span> \n  <span class="element-image__credit">Composite: Allsport/Getty Images; Offside/Getty Images; dpa picture alliance/Alamy</span> \n </figcaption> \n</figure>',
 	subMetaSectionLinks: [

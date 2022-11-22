@@ -23,7 +23,6 @@ import type { Option } from '@guardian/types';
 import { getPillarFromId } from 'articleFormat';
 import type { Body } from 'bodyElement';
 import { parseElements } from 'bodyElement';
-import { getReport } from 'campaign';
 import type { Logo } from 'capi';
 import {
 	articleMainMedia,
@@ -79,7 +78,7 @@ interface Fields extends ArticleFormat {
 interface MatchReport extends Fields {
 	design: ArticleDesign.MatchReport;
 	body: Body;
-	football: Optional<MatchScores>;
+	football: Option<MatchScores>;
 }
 
 interface ResizedRelatedContent extends RelatedContent {
@@ -280,13 +279,11 @@ const itemFields = (
 	context: Context,
 	request: RenderingRequest,
 ): ItemFields => {
-	const { content, commentCount, relatedContent, campaigns } = request;
+	const { content, commentCount, relatedContent } = request;
 	return {
-		theme: getReport(campaigns ?? []).withDefault(
-			Optional.fromNullable(content.pillarId)
-				.flatMap(getPillarFromId)
-				.withDefault(ArticlePillar.News),
-		),
+		theme: Optional.fromNullable(content.pillarId)
+			.flatMap(getPillarFromId)
+			.withDefault(ArticlePillar.News),
 		display: getDisplay(content),
 		headline: content.fields?.headline ?? '',
 		standfirst: pipe(
@@ -302,7 +299,7 @@ const itemFields = (
 			map(context.docParser),
 		),
 		publishDate: maybeCapiDate(content.webPublicationDate),
-		mainMedia: articleMainMedia(content, context).toOption(),
+		mainMedia: articleMainMedia(content, context),
 		contributors: parseContributors(context.salt, content),
 		series: articleSeries(content),
 		commentable: content.fields?.commentable ?? false,
@@ -341,13 +338,13 @@ const itemFieldsWithBody = (
 	const { content } = request;
 	const body = content.blocks?.body ?? [];
 	const atoms = content.atoms;
-	const campaigns = request.campaigns ?? [];
+	const campaigns = request.campaigns;
 	const elements = [...body].shift()?.elements;
 
 	return {
 		...itemFields(context, request),
 		body: elements
-			? parseElements(context, campaigns, atoms)(elements)
+			? parseElements(context, atoms, campaigns)(elements)
 			: [],
 	};
 };
@@ -410,17 +407,13 @@ const fromCapiLiveBlog =
 		request: RenderingRequest,
 		blockId: Option<string>,
 	): LiveBlog | DeadBlog => {
-		const { content, campaigns } = request;
+		const { content } = request;
 		const body = content.blocks?.body ?? [];
 		const pageSize = content.tags.map((c) => c.id).includes('sport/sport')
 			? 30
 			: 10;
 
-		const parsedBlocks = parseLiveBlocks(context)(
-			body,
-			content.tags,
-			campaigns ?? [],
-		);
+		const parsedBlocks = parseLiveBlocks(context)(body, content.tags);
 		const pagedBlocks = getPagedBlocks(pageSize, parsedBlocks, blockId);
 		return {
 			design:
@@ -546,9 +539,9 @@ const fromCapi =
 		} else if (isMatchReport(tags)) {
 			return {
 				design: ArticleDesign.MatchReport,
-				football: Optional.fromNullable(
-					request.footballContent,
-				).flatMap(parseMatchScores),
+				football: parseMatchScores(
+					fromNullable(request.footballContent),
+				),
 				...itemFieldsWithBody(context, request),
 			};
 		}

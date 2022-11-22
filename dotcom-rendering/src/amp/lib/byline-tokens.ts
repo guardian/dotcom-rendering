@@ -1,5 +1,3 @@
-import type { TagType } from '../../types/tag';
-
 export const bylineTokens = (
 	byline: string,
 	contributorTags: TagType[],

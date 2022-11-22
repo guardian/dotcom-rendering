@@ -27,9 +27,17 @@ const groupNotificationsByTarget = (
 ): { [k: string]: Notification[] } => {
 	return notifications.reduce<{ [k: string]: Notification[] }>(
 		(groupings, notification) => {
-			groupings[notification.target] = (
-				groupings[notification.target] ?? []
-			).concat(notification);
+			const alreadyGotNotificationsForTarget =
+				Object.prototype.hasOwnProperty.call(
+					groupings,
+					notification.target,
+				);
+
+			if (!alreadyGotNotificationsForTarget) {
+				groupings[notification.target] = [];
+			}
+
+			groupings[notification.target].push(notification);
 
 			return groupings;
 		},
@@ -44,20 +52,31 @@ export const addNotificationsToDropdownLinks = (
 	const notificationsByTarget = groupNotificationsByTarget(notifications);
 
 	const linksWithNotifications = links.map((link) => {
-		const newNotifications = (link.notifications ?? []).concat(
-			(notificationsByTarget[link.id] ?? []).map(
-				({ message }) => message,
-			),
+		const targetHasNewNotifications = Object.prototype.hasOwnProperty.call(
+			notificationsByTarget,
+			link.id,
 		);
 
-		if (newNotifications.length === 0) {
+		if (targetHasNewNotifications) {
+			const newMessages = notificationsByTarget[link.id].map(
+				(n) => n.message,
+			);
+
+			const existingNotifications = link.notifications;
+			if (existingNotifications) {
+				return {
+					...link,
+					notifications: [...existingNotifications, ...newMessages],
+				};
+			} else {
+				return {
+					...link,
+					notifications: newMessages,
+				};
+			}
+		} else {
 			return link;
 		}
-
-		return {
-			...link,
-			notifications: newNotifications,
-		};
 	});
 
 	return linksWithNotifications;

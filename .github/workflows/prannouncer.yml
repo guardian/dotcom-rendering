@@ -1,0 +1,14 @@
+name: "Google Chats PR Announcer"
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * MON-FRI"
+
+jobs:
+  prnouncer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: guardian/actions-prnouncer@main
+        with:
+          google-webhook-url: ${{ secrets.GOOGLE_WEBHOOK_URL }}

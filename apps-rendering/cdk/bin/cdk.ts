@@ -24,8 +24,8 @@ new MobileAppsRendering(app, 'MobileAppsRendering-PROD', {
 	stage: 'PROD',
 	recordPrefix: 'mobile-rendering',
 	asgCapacity: {
-		minimumInstances: 6,
-		maximumInstances: 24,
+		minimumInstances: 3,
+		maximumInstances: 12,
 	},
 	appsRenderingDomain: 'mobile-aws.guardianapis.com',
 	hostedZoneId: 'Z1EYB4AREPXE3B',

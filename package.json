@@ -37,7 +37,6 @@
     "@storybook/builder-webpack5": "^6.3.11",
     "@storybook/manager-webpack5": "^6.3.7",
     "@storybook/react": "^6.3.7",
-    "@storybook/testing-library": "^0.0.13",
     "babel-loader": "^8.2.5",
     "chromatic": "^6.5.1",
     "desvg-loader": "^0.1.0",

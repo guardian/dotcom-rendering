@@ -29,13 +29,9 @@ import SvgNewsletter from './SvgNewsletter';
 interface Props {
 	format: ArticleFormat;
 	element: NewsletterSignUp;
-	showByDefault?: boolean;
 }
 
-const containerStyles = (
-	format: ArticleFormat,
-	showByDefault: boolean,
-): SerializedStyles => css`
+const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 	clear: both;
 	border: ${border.newsletterSignUpForm(format)} 0.1875rem dashed;
 	color: ${text.newsletterSignUpForm(format)};
@@ -52,8 +48,6 @@ const containerStyles = (
 		border-color: ${border.newsletterSignUpFormDark(format)};
 		color: ${text.newsletterSignUpFormDark(format)};
 	`}
-
-	display: ${showByDefault ? 'block' : 'none'};
 `;
 
 const stackBelowTabletStyles = css`
@@ -112,11 +106,7 @@ const noHeightFromTabletStyles = css`
 /**
  * NOTE: this component is non functional and is for demonstration only.
  */
-const NewsletterSignup: FC<Props> = ({
-	format,
-	element,
-	showByDefault = false,
-}) => {
+const NewsletterSignup: FC<Props> = ({ format, element }) => {
 	const {
 		name,
 		frequency,
@@ -126,10 +116,7 @@ const NewsletterSignup: FC<Props> = ({
 		successDescription,
 	} = element;
 	return (
-		<aside
-			css={containerStyles(format, showByDefault)}
-			className="js-signup-form-container"
-		>
+		<aside css={containerStyles(format)}>
 			<div css={stackBelowTabletStyles}>
 				<p css={titleStyles(theme)}>
 					Sign up to <span>{name}</span>

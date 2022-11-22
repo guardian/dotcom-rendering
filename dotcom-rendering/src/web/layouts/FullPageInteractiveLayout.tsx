@@ -13,7 +13,7 @@ import {
 } from '@guardian/source-foundations';
 import type { NavType } from '../../model/extract-nav';
 import type { Switches } from '../../types/config';
-import type { FEArticleType } from '../../types/frontend';
+import type { CAPIArticleType } from '../../types/frontend';
 import {
 	adCollapseStyles,
 	labelStyles as adLabelStyles,
@@ -36,7 +36,7 @@ import { interactiveGlobalStyles } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 interface Props {
-	CAPIArticle: FEArticleType;
+	CAPIArticle: CAPIArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }
@@ -171,9 +171,6 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 							CAPIArticle.nav.readerRevenueLinks.header.subscribe
 						}
 						editionId={CAPIArticle.editionId}
-						headerTopBarSwitch={
-							!!CAPIArticle.config.switches.headerTopNav
-						}
 					/>
 				</Section>
 			</div>
@@ -209,7 +206,6 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 				<div data-print-layout="hide">
 					<Section
 						fullWidth={true}
-						shouldCenter={false}
 						showTopBorder={false}
 						showSideBorders={false}
 						padSides={false}
@@ -235,9 +231,6 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 								CAPIArticle.contributionsServiceUrl
 							}
 							idApiUrl={CAPIArticle.config.idApiUrl}
-							headerTopBarSwitch={
-								!!CAPIArticle.config.switches.headerTopNav
-							}
 							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
@@ -263,9 +256,6 @@ const NavHeader = ({ CAPIArticle, NAV, format }: Props) => {
 						CAPIArticle.nav.readerRevenueLinks.header.subscribe
 					}
 					editionId={CAPIArticle.editionId}
-					headerTopBarSwitch={
-						!!CAPIArticle.config.switches.headerTopNav
-					}
 				/>
 			</Section>
 

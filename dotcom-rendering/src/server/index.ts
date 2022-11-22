@@ -1,3 +1,5 @@
+import 'dotenv/config';
+
 import { devServer } from './dev-server';
 import { prodServer } from './prod-server';
 

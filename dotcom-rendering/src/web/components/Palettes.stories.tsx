@@ -1,4 +1,3 @@
-import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
 import { DynamicFast } from './DynamicFast';
 import { Section } from './Section';
@@ -38,17 +37,6 @@ export const EventPalette = () => (
 		/>
 	</Section>
 );
-EventPalette.story = {
-	parameters: {
-		chromatic: {
-			viewports: [
-				breakpoints.mobile,
-				breakpoints.tablet,
-				breakpoints.wide,
-			],
-		},
-	},
-};
 
 export const EventAltPalette = () => (
 	<Section

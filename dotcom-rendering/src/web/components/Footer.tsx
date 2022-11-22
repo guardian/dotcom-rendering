@@ -18,7 +18,7 @@ import {
 } from '@guardian/source-react-components';
 import { clearFix } from '../../lib/mixins';
 import type { PillarType } from '../../model/extract-nav';
-import type { EditionId } from '../lib/edition';
+import type { EditionId } from '../../types/edition';
 import type { FooterType } from '../../types/footer';
 import { BackToTop } from './BackToTop';
 import { Island } from './Island';
@@ -54,21 +54,19 @@ const pillarWrap = css`
 `;
 
 const emailSignup = css`
-	grid-area: signup;
-
 	padding-top: ${space[2]}px;
+	margin-right: 10px;
 	margin-bottom: ${space[3]}px;
 
-	${from.desktop} {
+	${between.desktop.and.leftCol} {
+		float: left;
 		width: 247px;
 	}
-
-	${from.leftCol} {
-		width: 298px;
+	${between.leftCol.and.wide} {
+		width: 325px;
 	}
-
 	${from.wide} {
-		width: 458px;
+		width: 498px;
 	}
 `;
 
@@ -95,7 +93,6 @@ const footerLink = css`
 `;
 
 const footerList = css`
-	grid-area: links;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
@@ -131,7 +128,7 @@ const footerList = css`
 		}
 
 		${from.tablet} {
-			margin: 0 10px ${space[9]}px 0;
+			margin: 0 10px 36px 0;
 			width: 150px;
 		}
 
@@ -146,65 +143,30 @@ const footerList = css`
 const readerRevenueLinks = css`
 	border-left: ${footerBorders};
 	flex: 1;
-	padding: ${space[3]}px 0 0 10px;
-	margin: 0 10px ${space[9]}px 0;
+	padding: 12px 0 0 10px;
+	margin: 0 10px 36px 0;
 	width: calc(50% - 10px);
-
 	${until.tablet} {
 		width: 50%;
 		border-top: ${footerBorders};
 	}
 `;
 
-const acknowledgments = css`
-	grid-area: acknowledgment;
-	align-self: end;
-	${textSans.xxsmall()};
-	padding-top: ${space[3]}px;
-	padding-bottom: ${space[3]}px;
-	margin-bottom: ${space[6]}px;
-
-	${between.tablet.and.desktop} {
-		padding-right: ${space[3]}px;
-		max-width: 481px;
-		border-right: ${footerBorders};
-		position: relative;
-
-		&::after {
-			content: '';
-			position: absolute;
-			height: ${space[9]}px;
-			top: -${space[9]}px;
-			right: -1px;
-			border-right: ${footerBorders};
-		}
-	}
-`;
-
 const copyright = css`
 	${textSans.xxsmall()};
-	padding: ${space[3]}px;
 	padding-left: 20px;
+	padding-right: 12px;
+	padding-top: 12px;
+	padding-bottom: 12px;
 
 	${until.tablet} {
 		margin-top: 11px;
 	}
 `;
 
-const footerGrid = css`
-	display: grid;
-	column-gap: ${space[3]}px;
-
-	grid-template-areas:
-		'signup'
-		'links'
-		'acknowledgment';
-
-	${from.desktop} {
-		grid-template-columns: min-content;
-		grid-template-areas:
-			'signup          links'
-			'acknowledgment  links';
+const footerItemContainers = css`
+	${from.leftCol} {
+		display: flex;
 	}
 
 	clear: both;
@@ -219,7 +181,7 @@ const footerGrid = css`
 `;
 
 const bttPosition = css`
-	background-color: ${brand[400]};
+	background-color: ${brandBackground.primary};
 	padding: 0 5px;
 	position: absolute;
 	bottom: -21px;
@@ -238,20 +200,18 @@ const FooterLinks = ({
 	contributionsServiceUrl: string;
 }) => {
 	const linkGroups = pageFooter.footerLinks.map((linkGroup) => {
-		const linkList = linkGroup.map(
-			({ url, extraClasses, dataLinkName, text }) => (
-				<li key={`${url}`}>
-					<a
-						css={[footerLink, extraClasses]}
-						href={url}
-						data-link-name={dataLinkName}
-					>
-						{text}
-					</a>
-				</li>
-			),
-		);
-		const key = linkGroup.reduce((acc, { text }) => `${acc}-${text}`, '');
+		const linkList = linkGroup.map((l, index) => (
+			<li key={`${l.url}${index}`}>
+				<a
+					css={[footerLink, l.extraClasses]}
+					href={l.url}
+					data-link-name={l.dataLinkName}
+				>
+					{l.text}
+				</a>
+			</li>
+		));
+		const key = linkGroup.reduce((acc, { text }) => `acc-${text}`, '');
 		return <ul key={key}>{linkList}</ul>;
 	});
 
@@ -338,7 +298,7 @@ export const Footer = ({
 				dataLinkName="footer"
 			/>
 		</div>
-		<div css={footerGrid}>
+		<div css={footerItemContainers}>
 			<div css={emailSignup}>
 				<div>
 					Original reporting and incisive analysis, direct from the
@@ -364,17 +324,6 @@ export const Footer = ({
 				editionId={editionId}
 				contributionsServiceUrl={contributionsServiceUrl}
 			/>
-
-			{editionId === 'AU' && (
-				<div css={acknowledgments}>
-					Guardian Australia acknowledges the traditional owners and
-					custodians of Country throughout Australia and their
-					connections to land, waters and community. We pay respect by
-					giving voice to social justice, acknowledging our shared
-					history and valuing the cultures of First Nations.
-				</div>
-			)}
-
 			<div css={bttPosition}>
 				<BackToTop />
 			</div>

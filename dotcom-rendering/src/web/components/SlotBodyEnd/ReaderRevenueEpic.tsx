@@ -10,7 +10,6 @@ import type {
 	WeeklyArticleHistory,
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
-import type { TagType } from '../../../types/tag';
 import { initPerf } from '../../browser/initPerf';
 import { submitComponentEvent } from '../../browser/ophan/ophan';
 import {
@@ -94,7 +93,6 @@ const buildPayload = async (data: CanShowData): Promise<EpicPayload> => ({
 		browserId: (await hasCmpConsentForBrowserId())
 			? data.browserId
 			: undefined,
-		isSignedIn: data.isSignedIn,
 	},
 });
 

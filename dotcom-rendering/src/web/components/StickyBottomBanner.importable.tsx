@@ -7,7 +7,6 @@ import { getCookie } from '@guardian/libs';
 import { useEffect, useState } from 'react';
 import type { ArticleCounts } from '../../lib/articleCount';
 import { getArticleCounts } from '../../lib/articleCount';
-import type { TagType } from '../../types/tag';
 import { getAlreadyVisitedCount } from '../lib/alreadyVisited';
 import { getLocaleCode } from '../lib/getCountryCode';
 import type {

@@ -2,7 +2,13 @@ import type { Image } from '@guardian/apps-rendering-api-models/image';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import type { Content } from '@guardian/content-api-models/v1/content';
-import { map, withDefault } from '@guardian/types';
+import {
+	andThen,
+	fromNullable,
+	map,
+	OptionKind,
+	withDefault,
+} from '@guardian/types';
 import {
 	articleContributors,
 	articleMainImage,
@@ -20,7 +26,6 @@ import {
 	isVideo,
 } from 'item';
 import { compose, index, pipe } from 'lib';
-import { Optional } from 'optional';
 
 const parseRelatedItemType = (content: Content): RelatedItemType => {
 	const { tags } = content;
@@ -48,20 +53,27 @@ const parseRelatedItemType = (content: Content): RelatedItemType => {
 };
 
 const parseHeaderImage = (content: Content): Image | undefined => {
-	const optionalImage = articleMainImage(content).flatMap((element) => {
-		const masterAsset = element.assets.find(
-			(asset) => asset.typeData?.isMaster,
-		);
+	const optionalImage = pipe(
+		articleMainImage(content),
+		andThen((element) => {
+			const masterAsset = element.assets.find(
+				(asset) => asset.typeData?.isMaster,
+			);
+			const data = element.imageTypeData;
+			return pipe(
+				masterAsset,
+				fromNullable,
+				map((asset) => ({
+					url: asset.file ?? '',
+					height: asset.typeData?.height ?? 360,
+					width: asset.typeData?.width ?? 600,
+					altText: data?.alt,
+				})),
+			);
+		}),
+	);
 
-		return Optional.fromNullable(masterAsset).map((asset) => ({
-			url: asset.file ?? '',
-			height: asset.typeData?.height ?? 360,
-			width: asset.typeData?.width ?? 600,
-			altText: element.imageTypeData?.alt,
-		}));
-	});
-
-	if (optionalImage.isSome()) {
+	if (optionalImage.kind === OptionKind.Some) {
 		return optionalImage.value;
 	} else {
 		return undefined;

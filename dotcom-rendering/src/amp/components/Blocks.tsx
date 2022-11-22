@@ -4,8 +4,7 @@ import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import type { CommercialProperties } from '../../types/commercial';
 import type { Switches } from '../../types/config';
-import { EditionId } from '../../web/lib/edition';
-
+import type { EditionId } from '../../types/edition';
 import { blockLink } from '../lib/block-link';
 import { findBlockAdSlots } from '../lib/find-adslots';
 import { Elements } from './Elements';

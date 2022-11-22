@@ -125,7 +125,7 @@ const generateLayoutStories = () => {
 							template += generateLayoutStory(
 								displayName,
 								designName,
-								`${pillarName}Pillar`,
+								pillarName,
 							);
 
 							stories++;

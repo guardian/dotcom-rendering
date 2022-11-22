@@ -19,7 +19,7 @@ import {
 	TextInput,
 } from '@guardian/source-react-components';
 import type { NavType } from '../../../../model/extract-nav';
-import type { EditionId } from '../../../lib/edition';
+import type { EditionId } from '../../../../types/edition';
 import { getEditionFromId, getRemainingEditions } from '../../../lib/edition';
 import { Column, lineStyle } from './Column';
 import { MoreColumn } from './MoreColumn';
@@ -215,8 +215,7 @@ export const Columns: React.FC<{
 	editionId: EditionId;
 	format: ArticleFormat;
 	nav: NavType;
-	headerTopBarSwitch: boolean;
-}> = ({ format, nav, editionId, headerTopBarSwitch }) => {
+}> = ({ format, nav, editionId }) => {
 	const activeEdition = getEditionFromId(editionId);
 	const remainingEditions = getRemainingEditions(activeEdition.editionId);
 	return (
@@ -289,11 +288,7 @@ export const Columns: React.FC<{
 				<div css={lineStyle}></div>
 			</li>
 
-			<ReaderRevenueLinks
-				readerRevenueLinks={nav.readerRevenueLinks}
-				editionId={editionId}
-				headerTopBarSwitch={headerTopBarSwitch}
-			/>
+			<ReaderRevenueLinks readerRevenueLinks={nav.readerRevenueLinks} />
 
 			{/* This is where the edition dropdown is inserted					 */}
 			<section css={editionsSwitch}>

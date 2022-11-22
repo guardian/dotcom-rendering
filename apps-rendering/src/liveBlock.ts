@@ -1,6 +1,5 @@
 // ----- Imports ----- //
 
-import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { Block } from '@guardian/content-api-models/v1/block';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { OptionKind } from '@guardian/types';
@@ -40,7 +39,7 @@ const tagsToContributors = (tags: Tag[], context: Context): Contributor[] =>
 	tags.map(tagToContributor(context.salt));
 
 const parse =
-	(context: Context, tags: Tag[], campaigns: Campaign[]) =>
+	(context: Context, tags: Tag[]) =>
 	(block: Block): Result<string, LiveBlock> => {
 		const firstPublishedDate = maybeCapiDate(block.firstPublishedDate);
 		const lastModifiedDate = maybeCapiDate(block.lastModifiedDate);
@@ -63,7 +62,7 @@ const parse =
 			title: block.title ?? '',
 			firstPublished: firstPublishedDate.value,
 			lastModified: lastModifiedDate.value,
-			body: parseElements(context, campaigns)(block.elements),
+			body: parseElements(context)(block.elements),
 			contributors: tagsToContributors(
 				contributorTags(block.contributors, tags),
 				context,
@@ -74,8 +73,8 @@ const parse =
 
 const parseMany =
 	(context: Context) =>
-	(blocks: Block[], tags: Tag[], campaigns: Campaign[]): LiveBlock[] =>
-		Result.partition(blocks.map(parse(context, tags, campaigns))).oks;
+	(blocks: Block[], tags: Tag[]): LiveBlock[] =>
+		Result.partition(blocks.map(parse(context, tags))).oks;
 
 // ----- Exports ----- //
 

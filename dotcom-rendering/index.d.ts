@@ -273,6 +273,16 @@ interface CAPINavType {
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
 
+interface TagType {
+	id: string;
+	type: string;
+	title: string;
+	twitterHandle?: string;
+	paidContentType?: string;
+	bylineImageUrl?: string;
+	bylineLargeImageUrl?: string;
+}
+
 /**
  * BlocksRequest is the expected body format for POST requests made to /Blocks
  */
@@ -605,13 +615,5 @@ declare namespace JSX {
 		 * link is clicked.
 		 */
 		'data-link-name'?: string;
-
-		/**
-		 * Elements with this attribute will fetch their comment count on
-		 * the client-side.
-		 *
-		 * @see {@link ../src/web/components/FetchCommentCounts.importable.tsx}
-		 */
-		'data-discussion-id'?: string;
 	}
 }

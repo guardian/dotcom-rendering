@@ -473,7 +473,7 @@ const cartoon: Item = {
 
 const matchReport: MatchReport = {
 	design: ArticleDesign.MatchReport,
-	football: Optional.some(matchScores),
+	football: some(matchScores),
 	...fields,
 	theme: ArticlePillar.Sport,
 	body: galleryBody,

@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from } from '@guardian/source-foundations';
 import type { SWRConfiguration } from 'swr';
-import type { TagType } from '../../types/tag';
 import { useApi } from '../lib/useApi';
 import { ArticleHeadline } from './ArticleHeadline';
 import { MatchNav } from './MatchNav';

@@ -373,12 +373,6 @@ const Card75_ColumnOfCards25 = ({
 											? card.image
 											: undefined
 									}
-									headlineSize={
-										cardIndex === 0 ||
-										remaining.length === 2
-											? 'medium'
-											: 'small'
-									}
 									supportingContent={card.supportingContent}
 								/>
 							</LI>

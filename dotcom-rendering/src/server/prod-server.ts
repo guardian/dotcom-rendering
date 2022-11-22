@@ -6,7 +6,7 @@ import {
 	render as renderAMPArticle,
 	renderPerfTest as renderAMPArticlePerfTest,
 } from '../amp/server';
-import type { FEArticleType } from '../types/frontend';
+import type { CAPIArticleType } from '../types/frontend';
 import {
 	renderArticle,
 	renderArticleJson,
@@ -25,7 +25,7 @@ import { logger } from './lib/logging';
 // Usage: app.post('/Article', logRenderTime, renderArticle);
 const logRenderTime = responseTime(
 	(req: Request, _: Response, time: number) => {
-		const body: FEArticleType = req.body;
+		const body: CAPIArticleType = req.body;
 		logger.info({
 			pageId: body.pageId,
 			renderTime: time,

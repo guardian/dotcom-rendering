@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
-import { ArticlePillar, joinUrl } from '@guardian/libs';
+import { ArticlePillar } from '@guardian/libs';
+import { joinUrl } from '../../lib/joinUrl';
+import type { EditionId } from '../../types/edition';
 import type { OnwardsSource } from '../../types/onwards';
-import type { TagType } from '../../types/tag';
-import type { EditionId } from '../lib/edition';
 import { FetchOnwardsData } from './FetchOnwardsData.importable';
 import { Section } from './Section';
 
@@ -128,41 +128,41 @@ const getContainerDataUrl = (
 ) => {
 	switch (pillar) {
 		case ArticlePillar.Sport:
-			return joinUrl(
+			return joinUrl([
 				ajaxUrl,
 				'container/data',
 				`${getContainer('sport', editionId)}.json`,
-			);
+			]);
 		case ArticlePillar.News:
-			return joinUrl(
+			return joinUrl([
 				ajaxUrl,
 				'container/data',
 				`${getContainer('headlines', editionId)}.json`,
-			);
+			]);
 		case ArticlePillar.Culture:
-			return joinUrl(
+			return joinUrl([
 				ajaxUrl,
 				'container/data',
 				`${getContainer('culture', editionId)}.json`,
-			);
+			]);
 		case ArticlePillar.Lifestyle:
-			return joinUrl(
+			return joinUrl([
 				ajaxUrl,
 				'container/data',
 				`${getContainer('lifestyle', editionId)}.json`,
-			);
+			]);
 		case ArticlePillar.Opinion:
-			return joinUrl(
+			return joinUrl([
 				ajaxUrl,
 				'container/data',
 				`${getContainer('opinion', editionId)}.json`,
-			);
+			]);
 		default:
-			return joinUrl(
+			return joinUrl([
 				ajaxUrl,
 				'container/data',
 				`${getContainer('headlines', editionId)}.json`,
-			);
+			]);
 	}
 };
 
@@ -227,11 +227,11 @@ export const OnwardsUpper = ({
 		//              type: "Series",
 		//          }
 		//
-		url = joinUrl(
+		url = joinUrl([
 			ajaxUrl,
 			'series',
 			`${seriesTag.id}.json?dcr&shortUrl=${shortUrlId}`,
-		);
+		]);
 		onwardsSource = 'series';
 	} else if (!hasRelated) {
 		// There is no related content to show
@@ -261,13 +261,13 @@ export const OnwardsUpper = ({
 			popularInTagUrl += `&${queryParams.join('&')}`;
 		}
 
-		url = joinUrl(ajaxUrl, popularInTagUrl);
+		url = joinUrl([ajaxUrl, popularInTagUrl]);
 		onwardsSource = 'related-content';
 	} else {
 		// Default to generic related endpoint
 		const relatedUrl = `/related/${pageId}.json?dcr=true`;
 
-		url = joinUrl(ajaxUrl, relatedUrl);
+		url = joinUrl([ajaxUrl, relatedUrl]);
 		onwardsSource = 'related-stories';
 	}
 

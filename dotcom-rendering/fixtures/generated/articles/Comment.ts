@@ -11,9 +11,9 @@
  *    gen-fixtures.ts directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { CAPIArticleType } from '../../../src/types/frontend';
 
-export const Comment: FEArticleType = {
+export const Comment: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="90f6640a4b3a916602353d2158a042b6a7e63726"> <img src="https://media.guim.co.uk/90f6640a4b3a916602353d2158a042b6a7e63726/0_86_3240_1944/1000.jpg" alt="A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’" width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">A protest in Newcastle against cuts to library services in 2012. ‘Hacked-back spending has taken an inevitable toll, and reflects something happening all over the country.’</span> <span class="element-image__credit">Photograph: Mark Pinder/The Guardian</span> </figcaption> </figure>',
 	subMetaSectionLinks: [

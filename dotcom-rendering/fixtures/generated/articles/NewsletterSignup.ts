@@ -11,9 +11,9 @@
  *    gen-fixtures.ts directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { CAPIArticleType } from '../../../src/types/frontend';
 
-export const NewsletterSignup: FEArticleType = {
+export const NewsletterSignup: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="6c3d4ac41a205fed233624415dd05e684ee661b2"> <img src="https://media.guim.co.uk/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/1000.png" alt="Our new women’s football newsletter will arrive in your inbox every Wednesday." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">Our new women’s football newsletter will arrive in your inbox every Wednesday.</span> <span class="element-image__credit">Illustration: Guardian Design</span> </figcaption> </figure>',
 	subMetaSectionLinks: [

@@ -10,7 +10,6 @@ import {
 } from '@guardian/source-foundations';
 import { getAgeWarning } from '../../lib/age-warning';
 import type { Palette } from '../../types/palette';
-import type { TagType } from '../../types/tag';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
 import { getZIndex } from '../lib/getZIndex';

@@ -7,16 +7,15 @@ function hexToRgb(hex: string): {
 	// Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
 	const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
 	const fullHex = hex.replace(shorthandRegex, ([, r, g, b]) => {
-		return [r, r, g, g, b, b].join('');
+		return r + r + g + g + b + b;
 	});
 
-	const [, r, g, b] =
-		/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(fullHex) ?? [];
-	return r && g && b
+	const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(fullHex);
+	return result
 		? {
-				r: parseInt(r, 16),
-				g: parseInt(g, 16),
-				b: parseInt(b, 16),
+				r: parseInt(result[1], 16),
+				g: parseInt(result[2], 16),
+				b: parseInt(result[3], 16),
 		  }
 		: null;
 }

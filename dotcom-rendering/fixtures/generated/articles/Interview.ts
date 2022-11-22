@@ -11,9 +11,9 @@
  *    gen-fixtures.ts directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { CAPIArticleType } from '../../../src/types/frontend';
 
-export const Interview: FEArticleType = {
+export const Interview: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image element--showcase" data-media-id="e193f0cc579ba041293d4616fd9929db9e2b62e8"> <img src="https://media.guim.co.uk/e193f0cc579ba041293d4616fd9929db9e2b62e8/0_889_5480_3288/1000.jpg" alt="‘The hijab is part of my identity’: Halima Aden wears dress by yufash.com; headscarf by Halima x Modanisa, modanisa.com; and bracelet by togetherband.org. " width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">‘The hijab is part of my identity’: Halima Aden wears dress by <a href="http://yufash.com">yufash.com</a>; headscarf by Halima x Modanisa, <a href="http://modanisa.com">modanisa.com</a>; and bracelet by <a href="http://togetherband.org">togetherband.org</a>. </span> <span class="element-image__credit">Photograph: Jean-Paul Pietrus/The Observer</span> </figcaption> </figure>',
 	subMetaSectionLinks: [

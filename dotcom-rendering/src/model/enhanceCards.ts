@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { getSoleContributor } from '../lib/byline';
 import type {
 	DCRContainerPalette,
@@ -6,8 +6,8 @@ import type {
 	DCRSupportingContent,
 	FEFrontCard,
 	FESupportingContent,
+	FETagType,
 } from '../types/front';
-import type { FETagType, TagType } from '../types/tag';
 import { decideFormat } from '../web/lib/decideFormat';
 import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
 import { enhanceSnaps } from './enhanceSnaps';
@@ -54,10 +54,9 @@ const decidePresentationFormat = ({
 		linkFormat.design === ArticleDesign.LiveBlog ||
 		linkFormat.design === ArticleDesign.Gallery ||
 		linkFormat.design === ArticleDesign.Audio ||
-		linkFormat.theme === ArticleSpecial.SpecialReport ||
 		linkFormat.design === ArticleDesign.Video
 	)
-		return { ...containerFormat, theme: ArticlePillar.News };
+		return containerFormat;
 
 	// Otherwise, we can allow the sublink to express its own styling
 	return linkFormat;
@@ -80,17 +79,11 @@ const enhanceSupportingContent = (
 			containerFormat: format,
 			containerPalette,
 		});
-
-		const supportingContentIsLive =
-			subLink.format?.design === 'LiveBlogDesign';
-
 		return {
 			format: presentationFormat,
 			headline: subLink.header?.headline || '',
 			url: subLink.properties.href || subLink.header?.url,
-			kickerText: supportingContentIsLive
-				? 'Live'
-				: subLink.header?.kicker?.item?.properties.kickerText,
+			kickerText: subLink.header?.kicker?.item?.properties.kickerText,
 		};
 	});
 };
@@ -103,8 +96,8 @@ const decideAvatarUrl = (
 	return soleContributor?.bylineLargeImageUrl ?? undefined;
 };
 
-const enhanceTags = (tags: FETagType[]): TagType[] => {
-	return tags.map(({ properties }) => {
+const enhanceTags = (tags: { properties: FETagType }[]): TagType[] => {
+	return tags.map((tag) => {
 		const {
 			id,
 			tagType,
@@ -112,7 +105,7 @@ const enhanceTags = (tags: FETagType[]): TagType[] => {
 			twitterHandle,
 			bylineImageUrl,
 			contributorLargeImagePath,
-		} = properties;
+		} = tag.properties;
 
 		return {
 			id,

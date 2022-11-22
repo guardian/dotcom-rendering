@@ -2,7 +2,9 @@
 
 import type { FootballContent } from '@guardian/apps-rendering-api-models/footballContent';
 import type { FootballTeam } from '@guardian/apps-rendering-api-models/footballTeam';
-import { Optional } from 'optional';
+import { andThen, fromNullable, map, map2, none, some } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { pipe } from 'lib';
 
 // ----- Types ----- //
 
@@ -59,75 +61,77 @@ interface MatchScores {
 
 // ----- Functions ----- //
 
-const parseStatus = (status: unknown): Optional<MatchStatusKind> => {
+const parseStatus = (status: unknown): Option<MatchStatusKind> => {
 	if (typeof status !== 'string') {
-		return Optional.none();
+		return none;
 	}
 
 	switch (status) {
 		case 'F':
-			return Optional.some(MatchStatusKind.KickOff);
+			return some(MatchStatusKind.KickOff);
 		case '1st':
-			return Optional.some(MatchStatusKind.FirstHalf);
+			return some(MatchStatusKind.FirstHalf);
 		case 'HT':
-			return Optional.some(MatchStatusKind.HalfTime);
+			return some(MatchStatusKind.HalfTime);
 		case '2nd':
-			return Optional.some(MatchStatusKind.SecondHalf);
+			return some(MatchStatusKind.SecondHalf);
 		case 'FT':
-			return Optional.some(MatchStatusKind.FullTime);
+			return some(MatchStatusKind.FullTime);
 		case 'ET':
-			return Optional.some(MatchStatusKind.ExtraTime);
+			return some(MatchStatusKind.ExtraTime);
 		case 'PT':
-			return Optional.some(MatchStatusKind.Penalties);
+			return some(MatchStatusKind.Penalties);
 		case 'S':
-			return Optional.some(MatchStatusKind.Suspended);
+			return some(MatchStatusKind.Suspended);
 		default:
-			return Optional.none();
+			return none;
 	}
 };
 
-const parseTime = (time: unknown): Optional<string> => {
+const parseTime = (time: unknown): Option<string> => {
 	if (typeof time !== 'string') {
-		return Optional.none();
+		return none;
 	}
 
 	const date = new Date(time);
 
 	if (isNaN(date.getUTCMinutes())) {
-		return Optional.none();
+		return none;
 	}
 
-	return Optional.some(`${date.getUTCHours()}:${date.getUTCMinutes()}`);
+	return some(`${date.getUTCHours()}:${date.getUTCMinutes()}`);
 };
 
-const parseMatchStatus = (
-	status: string,
-	time: string,
-): Optional<MatchStatus> =>
-	parseStatus(status).flatMap<MatchStatus>((s) => {
-		if (s === MatchStatusKind.KickOff) {
-			return parseTime(time).map((t) => ({ kind: s, time: t }));
-		}
+const parseMatchStatus = (status: string, time: string): Option<MatchStatus> =>
+	pipe(
+		status,
+		parseStatus,
+		andThen<MatchStatusKind, MatchStatus>((s) => {
+			if (s === MatchStatusKind.KickOff) {
+				return pipe(
+					time,
+					parseTime,
+					map((t) => ({ kind: s, time: t })),
+				);
+			}
 
-		return Optional.some({ kind: s });
-	});
-
-const parseMatchScores = (football: FootballContent): Optional<MatchScores> => {
-	const maybeStadium = Optional.fromNullable(football.venue);
-	const maybeStatus = parseMatchStatus(football.status, football.kickOff);
-
-	return Optional.map2(
-		maybeStadium,
-		maybeStatus,
-		(stadium: string, status: MatchStatus) => ({
-			league: football.competitionDisplayName,
-			stadium,
-			status,
-			homeTeam: football.homeTeam,
-			awayTeam: football.awayTeam,
+			return some({ kind: s });
 		}),
 	);
-};
+
+const parseMatchScores: (
+	footballContent: Option<FootballContent>,
+) => Option<MatchScores> = andThen((football: FootballContent) => {
+	const maybeStadium = fromNullable(football.venue);
+	const maybeStatus = parseMatchStatus(football.status, football.kickOff);
+	return map2((stadium: string, status: MatchStatus) => ({
+		league: football.competitionDisplayName,
+		stadium,
+		status,
+		homeTeam: football.homeTeam,
+		awayTeam: football.awayTeam,
+	}))(maybeStadium)(maybeStatus);
+});
 
 // ----- Exports ----- //
 

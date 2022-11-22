@@ -4,11 +4,11 @@ import type { Content } from '@guardian/content-api-models/v1/content';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { ArticleElementRole } from '@guardian/libs';
 import type { Option } from '@guardian/types';
-import { none } from '@guardian/types';
+import { fromNullable, map, none } from '@guardian/types';
 import { articleContributors } from 'capi';
 import type { Image } from 'image';
 import { Dpr, src, srcsetWithWidths } from 'image/srcsets';
-import { Optional } from 'optional';
+import { pipe } from 'lib';
 
 // ------ Types ----- //
 
@@ -31,8 +31,10 @@ const tagToContributor =
 		id: contributorTag.id,
 		apiUrl: contributorTag.apiUrl,
 		name: contributorTag.webTitle,
-		image: Optional.fromNullable(contributorTag.bylineLargeImageUrl)
-			.map((url) => ({
+		image: pipe(
+			contributorTag.bylineLargeImageUrl,
+			fromNullable,
+			map((url) => ({
 				srcset: contributorSrcset(url, salt, Dpr.One),
 				src: src(salt, url, 140, Dpr.One),
 				dpr2Srcset: contributorSrcset(url, salt, Dpr.Two),
@@ -43,8 +45,8 @@ const tagToContributor =
 				alt: none,
 				role: ArticleElementRole.Standard,
 				nativeCaption: none,
-			}))
-			.toOption(),
+			})),
+		),
 	});
 
 const parseContributors = (salt: string, content: Content): Contributor[] =>

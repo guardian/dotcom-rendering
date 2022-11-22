@@ -11,9 +11,9 @@
  *    gen-fixtures.ts directly.
  */
 
-import type { FEArticleType } from '../../../src/types/frontend';
+import type { CAPIArticleType } from '../../../src/types/frontend';
 
-export const Standard: FEArticleType = {
+export const Standard: CAPIArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="gu-image-410269952"> <img src="http://static.guim.co.uk/sys-images/Guardian/Pix/audio/video/2013/6/5/1370461050798/Phone-records-data-010.jpg" alt="Phone records data" width="460" height="276" class="gu-image" /> <figcaption> <span class="element-image__caption">Under the terms of the order, the numbers of both parties on a call are handed over, as is location data and the time and duration of all calls. Photograph: Matt Rourke/AP</span> <span class="element-image__credit">Photograph: Matt Rourke/AP</span> </figcaption> </figure>',
 	subMetaSectionLinks: [

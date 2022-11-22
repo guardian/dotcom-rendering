@@ -179,19 +179,6 @@ const getImage = ({
 	return undefined;
 };
 
-const decideSublinkPosition = (
-	supportingContent?: DCRSupportingContent[],
-	imagePosition?: ImagePositionType,
-): 'inner' | 'outer' | 'none' => {
-	if (!supportingContent || supportingContent.length === 0) {
-		return 'none';
-	}
-	if (imagePosition === 'top' || supportingContent.length > 2) {
-		return 'outer';
-	}
-	return 'inner';
-};
-
 export const Card = ({
 	linkTo,
 	format,
@@ -229,10 +216,7 @@ export const Card = ({
 	const palette = decidePalette(format, containerPalette);
 
 	const hasSublinks = supportingContent && supportingContent.length > 0;
-	const sublinkPosition = decideSublinkPosition(
-		supportingContent,
-		imagePosition,
-	);
+	const noOfSublinks = supportingContent?.length ?? 0;
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||
@@ -268,6 +252,7 @@ export const Card = ({
 							// This a tag is initially rendered empty. It gets populated later
 							// after a fetch call is made to get all the counts for each Card
 							// on the page with a discussion (see FetchCommentCounts.tsx)
+							data-name="comment-count-marker"
 							data-discussion-id={discussionId}
 							data-format={JSON.stringify(format)}
 							data-is-dynamo={isDynamo ? 'true' : undefined}
@@ -410,9 +395,6 @@ export const Card = ({
 							<TrailTextWrapper
 								containerPalette={containerPalette}
 								format={format}
-								imagePosition={imagePosition}
-								imageSize={imageSize}
-								imageType={image?.type}
 							>
 								<div
 									dangerouslySetInnerHTML={{
@@ -427,13 +409,13 @@ export const Card = ({
 							displayAge={displayAge}
 							renderFooter={renderFooter}
 						/>
-						{hasSublinks && sublinkPosition === 'inner' ? (
+
+						{hasSublinks && noOfSublinks <= 2 ? (
 							<SupportingContent
 								supportingContent={supportingContent}
 								alignment="vertical"
 								containerPalette={containerPalette}
 								isDynamo={isDynamo}
-								parentFormat={format}
 							/>
 						) : (
 							<></>
@@ -441,11 +423,9 @@ export const Card = ({
 					</div>
 				</ContentWrapper>
 			</CardLayout>
-
-			{hasSublinks && sublinkPosition === 'outer' ? (
+			{hasSublinks && noOfSublinks > 2 ? (
 				<SupportingContent
 					supportingContent={supportingContent}
-					parentFormat={format}
 					containerPalette={containerPalette}
 					isDynamo={isDynamo}
 					alignment={

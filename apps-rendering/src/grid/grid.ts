@@ -59,6 +59,24 @@ const container = `
     }
 `;
 
+// ----- Grid Item Styles ----- //
+
+const centreColumn = `
+    grid-column: centre-column-start / centre-column-end;
+`;
+
+const leftColumn = `
+    grid-column: left-column-start / left-column-end;
+`;
+
+const rightColumn = `
+    grid-column: right-column-start / right-column-end;
+`;
+
+const allColumns = `
+    grid-column: viewport-start / viewport-end;
+`;
+
 // ----- API ----- //
 
 /**
@@ -129,22 +147,22 @@ const grid = {
 		 * Place the element into the centre column. Available for all
 		 * breakpoints.
 		 */
-		centre: between('centre-column-start', 'centre-column-end'),
+		centre: centreColumn,
 		/**
 		 * Place the element into the left column. Available for `leftCol`
 		 * and above breakpoints.
 		 */
-		left: between('left-column-start', 'left-column-end'),
+		left: leftColumn,
 		/**
 		 * Place the element into the right column. Available for `desktop`
 		 * and above breakpoints.
 		 */
-		right: between('right-column-start', 'right-column-end'),
+		right: rightColumn,
 		/**
 		 * Ask the element to take up the entire width of the viewport.
 		 * Available for all breakpoints.
 		 */
-		all: between('viewport-start', 'viewport-end'),
+		all: allColumns,
 	},
 	between,
 	span,
@@ -157,7 +175,7 @@ const grid = {
 	 * breakpoint.
 	 */
 	mobileColumnGap,
-} as const;
+};
 
 // ----- Exports ----- //
 

@@ -13,7 +13,6 @@ type Props = {
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: true;
-	parentFormat?: ArticleFormat;
 };
 
 const wrapperStyles = css`
@@ -88,6 +87,8 @@ export const SupportingContent = ({
 						]}
 					>
 						<CardHeadline
+							headlineText={subLink.headline}
+							kickerText={subLink.kickerText}
 							format={subLink.format}
 							size="tiny"
 							showSlash={false}
@@ -95,8 +96,6 @@ export const SupportingContent = ({
 							linkTo={subLink.url}
 							containerPalette={containerPalette}
 							isDynamo={isDynamo}
-							headlineText={subLink.headline}
-							kickerText={subLink.kickerText}
 						/>
 					</li>
 				);

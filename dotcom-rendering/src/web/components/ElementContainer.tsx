@@ -83,10 +83,6 @@ export const ElementContainer = ({
 		{({ css }) => {
 			const child = (
 				<div
-					/**
-					 * id is being used to set the containerId in @see {ShowMore.importable.tsx}
-					 * this id pre-existed showMore so is probably also being used for something else.
-					 */
 					id={sectionId}
 					css={[
 						shouldCenter && center,

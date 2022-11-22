@@ -83,18 +83,10 @@ const resultFromNullable =
 	<A>(a: A | null | undefined): Result<E, A> =>
 		a === null || a === undefined ? Result.err(e) : Result.ok(a);
 
-/**
- * Attempts to parse a `string` into an integer (`number`). Returns an
- * {@linkcode Optional} `Some` if a valid number, and a `None` if not.
- * Note: `NaN`s are considered invalid.
- *
- * @param str A `string` to be parsed
- * @returns {Optional<number>} A valid number in a `Some`, or a `None`
- */
-const parseIntOpt = (str: string): Optional<number> => {
-	const parsed = parseInt(str);
+const parseIntOpt = (int: string): Option<number> => {
+	const parsed = parseInt(int);
 
-	return isNaN(parsed) ? Optional.none() : Optional.some(parsed);
+	return isNaN(parsed) ? none : some(parsed);
 };
 
 const resultMap3 =

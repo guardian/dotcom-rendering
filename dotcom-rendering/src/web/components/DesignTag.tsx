@@ -128,14 +128,6 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 					</Tag>
 				</Margins>
 			);
-		case ArticleDesign.Letter:
-			return (
-				<Margins format={format}>
-					<Tag format={format}>
-						<TagLink href="/tone/letters">Letters</TagLink>
-					</Tag>
-				</Margins>
-			);
 		default:
 			return null;
 	}

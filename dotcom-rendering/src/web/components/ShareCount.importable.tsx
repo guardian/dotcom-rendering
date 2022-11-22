@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { joinUrl } from '@guardian/libs';
 import { between, textSans, until } from '@guardian/source-foundations';
+import { joinUrl } from '../../lib/joinUrl';
 import ShareIcon from '../../static/icons/share.svg';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
@@ -63,7 +63,7 @@ const shortStyles = css`
 `;
 
 export const ShareCount = ({ ajaxUrl, pageId, format }: Props) => {
-	const shareUrl = joinUrl(ajaxUrl, 'sharecount', `${pageId}.json`);
+	const shareUrl = joinUrl([ajaxUrl, 'sharecount', `${pageId}.json`]);
 	const palette = decidePalette(format);
 	const { data: shareData, error: shareError } =
 		useApi<ShareCountType>(shareUrl);

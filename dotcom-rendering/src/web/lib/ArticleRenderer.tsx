@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import type { Switches } from '../../types/config';
-import type { TagType } from '../../types/tag';
 import {
 	adCollapseStyles,
 	labelStyles as adLabelStyles,

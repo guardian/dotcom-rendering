@@ -1,6 +1,7 @@
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
-import { Optional } from 'optional';
+import type { Option } from '@guardian/types';
+import { none, some } from '@guardian/types';
 
 interface Video {
 	posterUrl: string;
@@ -10,37 +11,35 @@ interface Video {
 	title: string;
 }
 
-const parseVideo =
-	(atoms?: Atoms) =>
-	(element: BlockElement): Optional<Video> => {
-		if (!atoms) {
-			return Optional.none();
-		}
+const parseVideo = (element: BlockElement, atoms?: Atoms): Option<Video> => {
+	if (!atoms) {
+		return none;
+	}
 
-		const atomId = element.contentAtomTypeData?.atomId;
-		const atom = atoms.media?.find((media) => media.id === atomId);
+	const atomId = element.contentAtomTypeData?.atomId;
+	const atom = atoms.media?.find((media) => media.id === atomId);
 
-		if (atom?.data.kind !== 'media') {
-			return Optional.none();
-		}
+	if (atom?.data.kind !== 'media') {
+		return none;
+	}
 
-		const { posterUrl, duration, assets, activeVersion, title } =
-			atom.data.media;
-		const videoId = assets.find(
-			(asset) => asset.version.toNumber() === activeVersion?.toNumber(),
-		)?.id;
+	const { posterUrl, duration, assets, activeVersion, title } =
+		atom.data.media;
+	const videoId = assets.find(
+		(asset) => asset.version.toNumber() === activeVersion?.toNumber(),
+	)?.id;
 
-		if (!posterUrl || !videoId || !atomId) {
-			return Optional.none();
-		}
+	if (!posterUrl || !videoId || !atomId) {
+		return none;
+	}
 
-		return Optional.some({
-			posterUrl,
-			videoId,
-			duration: duration?.toNumber(),
-			atomId,
-			title,
-		});
-	};
+	return some({
+		posterUrl,
+		videoId,
+		duration: duration?.toNumber(),
+		atomId,
+		title,
+	});
+};
 
 export { Video, parseVideo };

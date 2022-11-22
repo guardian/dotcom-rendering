@@ -1,4 +1,4 @@
-import type { EditionId } from '../web/lib/edition';
+import type { EditionId } from './edition';
 
 export interface CommercialConfigType {
 	isPaidContent?: boolean;
