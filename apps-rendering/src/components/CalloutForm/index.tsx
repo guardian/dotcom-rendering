@@ -13,7 +13,6 @@ export interface CalloutProps {
 	format: ArticleFormat;
 	description: Option<DocumentFragment>;
 	isNonCollapsable?: boolean;
-	onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const CalloutForm: FC<CalloutProps> = ({
@@ -21,14 +20,12 @@ const CalloutForm: FC<CalloutProps> = ({
 	format,
 	description,
 	isNonCollapsable,
-	onSubmit,
 }): ReactElement => {
 	return (
 		<aside>
 			{isNonCollapsable ? (
 				<ThemeProvider theme={getTheme(format)}>
 					<Callout
-						onSubmit={onSubmit}
 						format={format}
 						campaign={campaign}
 						description={description}
@@ -45,7 +42,6 @@ const CalloutForm: FC<CalloutProps> = ({
 						name={`${campaign.name} form`}
 					>
 						<Callout
-							onSubmit={onSubmit}
 							format={format}
 							campaign={campaign}
 							description={description}

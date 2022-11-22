@@ -5,7 +5,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { body, headline, remSpace } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { maybeRender } from 'lib';
-import type { FC } from 'react';
+import type { FC, ReactElement } from 'react';
 import { renderCalloutDescriptionText } from 'renderer';
 import CalloutForm from './form';
 
@@ -13,7 +13,6 @@ export interface CalloutProps {
 	campaign: Campaign;
 	format: ArticleFormat;
 	description: Option<DocumentFragment>;
-	onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const containerStyles = (theme: any): SerializedStyles => css`
@@ -81,8 +80,7 @@ const Callout: FC<CalloutProps> = ({
 	campaign,
 	format,
 	description,
-	onSubmit,
-}) => {
+}): ReactElement => {
 	const { name, fields } = campaign;
 	const { callout } = fields;
 
@@ -97,17 +95,18 @@ const Callout: FC<CalloutProps> = ({
 							description,
 							(description: DocumentFragment) => (
 								<div css={descriptionStyles}>
+									<>
 									{renderCalloutDescriptionText(
 										description,
 										format,
-									)}
+										)}
+									</>
 								</div>
 							),
 						)}
 					</div>
 				</summary>
 				<CalloutForm
-					onSubmit={onSubmit}
 					campaign={campaign}
 					format={format}
 				/>

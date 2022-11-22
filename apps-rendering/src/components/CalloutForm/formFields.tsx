@@ -19,7 +19,7 @@ const infoStyles = css`
 	margin-bottom: ${remSpace[4]};
 `;
 
-export const Disclaimer = () => (
+export const Disclaimer = (): ReactElement => (
 	<div css={infoStyles}>
 		You must be 18 or over to fill in this form. Only the Guardian can see
 		your contributions and one of our journalists may contact you to discuss
@@ -35,7 +35,7 @@ export const Disclaimer = () => (
 	</div>
 );
 
-export const ContactText = () => (
+export const ContactText = (): ReactElement => (
 	<div css={infoStyles}>
 		One of our journalists will be in contact before we publish your
 		information, so please do leave contact details.

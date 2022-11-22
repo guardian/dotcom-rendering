@@ -17,7 +17,6 @@ export interface CalloutProps {
 	campaign: Campaign;
 	format: ArticleFormat;
 	description?: DocumentFragment;
-	onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const formStyles = (theme: any): SerializedStyles => css`
@@ -61,16 +60,13 @@ const buttonStyles = (theme: any): SerializedStyles => css`
 	}
 `;
 
-const Form: FC<CalloutProps> = ({ campaign, format, onSubmit }) => {
+const Form: FC<CalloutProps> = ({ campaign, format }) => {
 	return (
 		<div className="js-callout" css={formStyles}>
 			<form
 				css={formStyles}
 				action="#"
 				method="post"
-				onSubmit={(e) => {
-					onSubmit?.(e);
-				}}
 			>
 				<ShareLink />
 				<Disclaimer />
@@ -80,9 +76,11 @@ const Form: FC<CalloutProps> = ({ campaign, format, onSubmit }) => {
 					value={campaign.fields.formId}
 				/>
 				<div className="js-callout__inputs">
+					<>
 					{campaign.fields.formFields.map((field) =>
 						renderField(field, format),
-					)}
+						)}
+					</>
 					<div>
 						<ContactText />
 						<InlineError className="js-callout__error-message">
