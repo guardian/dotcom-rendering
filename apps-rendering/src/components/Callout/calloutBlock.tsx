@@ -13,6 +13,7 @@ export interface CalloutBlockProps {
 	campaign: Campaign;
 	format: ArticleFormat;
 	description: Option<DocumentFragment>;
+	isTabbable?: boolean;
 }
 
 const containerStyles = (theme: any): SerializedStyles => css`
@@ -80,6 +81,7 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	campaign,
 	format,
 	description,
+	isTabbable = true,
 }): ReactElement => {
 	const { name, fields } = campaign;
 	const { callout } = fields;
@@ -98,6 +100,7 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 									<>
 										{renderCalloutDescriptionText(
 											description,
+											isTabbable,
 											format,
 										)}
 									</>
@@ -106,7 +109,7 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 						)}
 					</div>
 				</summary>
-				<CalloutForm campaign={campaign} format={format} />
+				<CalloutForm campaign={campaign} format={format} disableInputs={!isTabbable} />
 			</details>
 		</div>
 	);

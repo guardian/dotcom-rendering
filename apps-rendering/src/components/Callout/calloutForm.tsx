@@ -17,6 +17,7 @@ export interface CalloutFormProps {
 	campaign: Campaign;
 	format: ArticleFormat;
 	description?: DocumentFragment;
+	disableInputs?: boolean;
 }
 
 const formStyles = (theme: any): SerializedStyles => css`
@@ -60,12 +61,12 @@ const buttonStyles = (theme: any): SerializedStyles => css`
 	}
 `;
 
-const CalloutForm: FC<CalloutFormProps> = ({ campaign, format }) => {
+const CalloutForm: FC<CalloutFormProps> = ({ campaign, format, disableInputs = false }) => {
 	return (
 		<div className="js-callout" css={formStyles}>
 			<form css={formStyles} action="#" method="post">
-				<ShareLink />
-				<Disclaimer />
+				<ShareLink disabled={disableInputs} />
+				<Disclaimer disabled={disableInputs}/>
 				<input
 					name="formId"
 					type="hidden"
@@ -74,7 +75,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ campaign, format }) => {
 				<div className="js-callout__inputs">
 					<>
 						{campaign.fields.formFields.map((field) =>
-							renderField(field, format),
+							renderField(field, disableInputs, format),
 						)}
 					</>
 					<div>
@@ -92,7 +93,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ campaign, format }) => {
 							</div>
 						</InlineError>
 					</div>
-					<Button css={buttonStyles} type="submit" priority="primary">
+					<Button css={buttonStyles} type="submit" priority="primary" disabled={disableInputs}>
 						Submit
 					</Button>
 				</div>

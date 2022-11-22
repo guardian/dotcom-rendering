@@ -18,7 +18,7 @@ const linkStyles = (theme: any): SerializedStyles => css`
 	font-weight: normal;
 `;
 
-export const ShareLink: FC = () => {
+export const ShareLink: FC<{disabled: boolean}> = ({disabled}) => {
 	const [isCopied, setIsCopied] = useState(false);
 
 	const onShare = async () => {
@@ -41,6 +41,7 @@ export const ShareLink: FC = () => {
 			<SvgShareCallout size="medium" />
 			Know others that are affected?
 			<Button
+				disabled={disabled}
 				size="xsmall"
 				priority="subdued"
 				onClick={onShare}

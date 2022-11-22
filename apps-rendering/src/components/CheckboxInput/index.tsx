@@ -9,6 +9,7 @@ interface CheckboxInputProps {
 	supporting?: string;
 	options: FormOption[];
 	cssOverrides?: SerializedStyles;
+	disabled: boolean;
 }
 
 const CheckboxInput = ({
@@ -17,6 +18,7 @@ const CheckboxInput = ({
 	options,
 	supporting,
 	cssOverrides,
+	disabled,
 }: CheckboxInputProps): ReactElement => (
 	<CheckboxGroup
 		label={label}
@@ -25,7 +27,7 @@ const CheckboxInput = ({
 		cssOverrides={cssOverrides}
 	>
 		{options.map(({ label, value }) => (
-			<Checkbox label={label} value={value} key={value} />
+			<Checkbox label={label} value={value} key={value} disabled={disabled}/>
 		))}
 	</CheckboxGroup>
 );
