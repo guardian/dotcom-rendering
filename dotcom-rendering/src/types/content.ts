@@ -1,5 +1,10 @@
 // -------------------------------------
 // Elements
+
+import type { PersonalityQuizAtom } from '@guardian/atoms-rendering';
+
+export type QuizAtomType = Parameters<typeof PersonalityQuizAtom>[0];
+
 // -------------------------------------
 interface ThirdPartyEmbeddedContent {
 	isThirdPartyTracking: boolean;
@@ -7,7 +12,7 @@ interface ThirdPartyEmbeddedContent {
 	sourceDomain?: string;
 }
 
-interface AudioAtomBlockElement {
+export interface AudioAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.AudioAtomBlockElement';
 	elementId: string;
 	id: string;
@@ -24,7 +29,7 @@ interface AudioBlockElement {
 	elementId: string;
 }
 
-interface BlockquoteBlockElement {
+export interface BlockquoteBlockElement {
 	_type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement';
 	elementId: string;
 	html: string;
@@ -42,7 +47,7 @@ interface CaptionBlockElement {
 	isOverlaid?: boolean;
 }
 
-interface CalloutBlockElement {
+export interface CalloutBlockElement {
 	_type: 'model.dotcomrendering.pageElements.CalloutBlockElement';
 	elementId: string;
 	id: string;
@@ -75,7 +80,7 @@ interface QuizAtomBlockElement {
 	quizType: 'personality' | 'knowledge';
 	id: string;
 	questions: QuestionType[];
-	resultBuckets: ResultBucketsType[];
+	resultBuckets: QuizAtomType['resultBuckets'];
 	resultGroups: {
 		id: string;
 		title: string;
@@ -92,7 +97,7 @@ interface CodeBlockElement {
 	language?: string;
 }
 
-interface CommentBlockElement {
+export interface CommentBlockElement {
 	_type: 'model.dotcomrendering.pageElements.CommentBlockElement';
 	elementId: string;
 	body: string;
@@ -104,7 +109,7 @@ interface CommentBlockElement {
 	role?: RoleType;
 }
 
-interface ContentAtomBlockElement {
+export interface ContentAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ContentAtomBlockElement';
 	elementId: string;
 	atomId: string;
@@ -117,13 +122,13 @@ interface DisclaimerBlockElement {
 	role?: RoleType;
 }
 
-interface DividerBlockElement {
+export interface DividerBlockElement {
 	_type: 'model.dotcomrendering.pageElements.DividerBlockElement';
 	size?: 'full' | 'partial';
 	spaceAbove?: 'tight' | 'loose';
 }
 
-interface DocumentBlockElement extends ThirdPartyEmbeddedContent {
+export interface DocumentBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.DocumentBlockElement';
 	elementId: string;
 	embedUrl: string;
@@ -133,7 +138,7 @@ interface DocumentBlockElement extends ThirdPartyEmbeddedContent {
 	role?: RoleType;
 }
 
-interface EmbedBlockElement extends ThirdPartyEmbeddedContent {
+export interface EmbedBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.EmbedBlockElement';
 	elementId: string;
 	safe?: boolean;
@@ -178,7 +183,7 @@ interface GuideAtomBlockElement {
 	role?: RoleType;
 }
 
-interface GuVideoBlockElement {
+export interface GuVideoBlockElement {
 	_type: 'model.dotcomrendering.pageElements.GuVideoBlockElement';
 	elementId: string;
 	assets: VideoAssets[];
@@ -197,7 +202,7 @@ interface HighlightBlockElement {
 	html: string;
 }
 
-interface ImageBlockElement {
+export interface ImageBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ImageBlockElement';
 	elementId: string;
 	media: { allImages: Image[] };
@@ -215,7 +220,7 @@ interface ImageBlockElement {
 	isAvatar?: boolean;
 }
 
-interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
+export interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.InstagramBlockElement';
 	elementId: string;
 	html: string;
@@ -224,7 +229,7 @@ interface InstagramBlockElement extends ThirdPartyEmbeddedContent {
 	role?: RoleType;
 }
 
-interface InteractiveAtomBlockElement {
+export interface InteractiveAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.InteractiveAtomBlockElement';
 	elementId: string;
 	url: string;
@@ -254,7 +259,7 @@ interface ItemLinkBlockElement {
 	html: string;
 }
 
-interface MapBlockElement extends ThirdPartyEmbeddedContent {
+export interface MapBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.MapBlockElement';
 	elementId: string;
 	embedUrl: string;
@@ -279,7 +284,7 @@ interface MediaAtomBlockElement {
 	duration?: number;
 }
 
-interface MultiImageBlockElement {
+export interface MultiImageBlockElement {
 	_type: 'model.dotcomrendering.pageElements.MultiImageBlockElement';
 	elementId: string;
 	images: ImageBlockElement[];
@@ -287,7 +292,7 @@ interface MultiImageBlockElement {
 	role?: RoleType;
 }
 
-interface NewsletterSignupBlockElement {
+export interface NewsletterSignupBlockElement {
 	_type: 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement';
 	newsletter: Newsletter;
 	elementId?: string;
@@ -301,7 +306,7 @@ interface NumberedTitleBlockElement {
 	format: CAPIFormat;
 }
 
-interface InteractiveContentsBlockElement {
+export interface InteractiveContentsBlockElement {
 	_type: 'model.dotcomrendering.pageElements.InteractiveContentsBlockElement';
 	elementId: string;
 	subheadingLinks: SubheadingBlockElement[];
@@ -340,16 +345,16 @@ interface QABlockElement {
 	role?: RoleType;
 }
 
-interface RichLinkBlockElement {
+export interface RichLinkBlockElement {
 	_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement';
 	elementId: string;
 	url: string;
 	text: string;
 	prefix: string;
-	role?: Weighting;
+	role?: RoleType | 'richLink';
 }
 
-interface SoundcloudBlockElement extends ThirdPartyEmbeddedContent {
+export interface SoundcloudBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.SoundcloudBlockElement';
 	elementId: string;
 	html: string;
@@ -359,7 +364,7 @@ interface SoundcloudBlockElement extends ThirdPartyEmbeddedContent {
 	role?: RoleType;
 }
 
-interface SpotifyBlockElement extends ThirdPartyEmbeddedContent {
+export interface SpotifyBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.SpotifyBlockElement';
 	elementId: string;
 	embedUrl?: string;
@@ -377,13 +382,13 @@ interface StarRatingBlockElement {
 	size: RatingSizeType;
 }
 
-interface SubheadingBlockElement {
+export interface SubheadingBlockElement {
 	_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement';
 	elementId: string;
 	html: string;
 }
 
-interface TableBlockElement {
+export interface TableBlockElement {
 	_type: 'model.dotcomrendering.pageElements.TableBlockElement';
 	elementId: string;
 	isMandatory: boolean;
@@ -391,14 +396,14 @@ interface TableBlockElement {
 	role?: RoleType;
 }
 
-interface TextBlockElement {
+export interface TextBlockElement {
 	_type: 'model.dotcomrendering.pageElements.TextBlockElement';
 	elementId: string;
 	dropCap?: boolean;
 	html: string;
 }
 
-interface TimelineBlockElement {
+export interface TimelineBlockElement {
 	_type: 'model.dotcomrendering.pageElements.TimelineBlockElement';
 	elementId: string;
 	id: string;
@@ -408,7 +413,7 @@ interface TimelineBlockElement {
 	role?: RoleType;
 }
 
-interface TweetBlockElement extends ThirdPartyEmbeddedContent {
+export interface TweetBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.TweetBlockElement';
 	elementId: string;
 	html: string;
@@ -418,7 +423,7 @@ interface TweetBlockElement extends ThirdPartyEmbeddedContent {
 	role?: RoleType;
 }
 
-interface VineBlockElement extends ThirdPartyEmbeddedContent {
+export interface VineBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.VineBlockElement';
 	elementId: string;
 	url: string;
@@ -428,13 +433,13 @@ interface VineBlockElement extends ThirdPartyEmbeddedContent {
 	title: string;
 }
 
-interface VideoBlockElement extends ThirdPartyEmbeddedContent {
+export interface VideoBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.VideoBlockElement';
 	elementId: string;
 	role?: RoleType;
 }
 
-interface VideoFacebookBlockElement extends ThirdPartyEmbeddedContent {
+export interface VideoFacebookBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.VideoFacebookBlockElement';
 	elementId: string;
 	url: string;
@@ -445,7 +450,7 @@ interface VideoFacebookBlockElement extends ThirdPartyEmbeddedContent {
 	role?: RoleType;
 }
 
-interface VideoVimeoBlockElement extends ThirdPartyEmbeddedContent {
+export interface VideoVimeoBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.VideoVimeoBlockElement';
 	elementId: string;
 	embedUrl?: string;
@@ -459,7 +464,7 @@ interface VideoVimeoBlockElement extends ThirdPartyEmbeddedContent {
 	role?: RoleType;
 }
 
-interface VideoYoutubeBlockElement extends ThirdPartyEmbeddedContent {
+export interface VideoYoutubeBlockElement extends ThirdPartyEmbeddedContent {
 	_type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement';
 	elementId: string;
 	embedUrl?: string;
@@ -473,7 +478,7 @@ interface VideoYoutubeBlockElement extends ThirdPartyEmbeddedContent {
 	role?: RoleType;
 }
 
-interface YoutubeBlockElement {
+export interface YoutubeBlockElement {
 	_type: 'model.dotcomrendering.pageElements.YoutubeBlockElement';
 	elementId: string;
 	assetId: string;
@@ -544,7 +549,7 @@ interface WitnessTypeDataText extends WitnessTypeDataBase {
 	authorWitnessProfileUrl: string;
 }
 
-interface WitnessAssetType {
+export interface WitnessAssetType {
 	type: 'Image';
 	mimeType: 'image/jpeg';
 	file: string;
@@ -563,7 +568,7 @@ interface WitnessTypeBlockElement extends ThirdPartyEmbeddedContent {
 		| WitnessTypeDataText;
 }
 
-type CAPIElement =
+export type CAPIElement =
 	| AudioAtomBlockElement
 	| AudioBlockElement
 	| BlockquoteBlockElement
@@ -618,19 +623,20 @@ type CAPIElement =
 // Misc
 // -------------------------------------
 
-type Weighting =
-	| 'inline'
-	| 'thumbnail'
-	| 'supporting'
-	| 'showcase'
-	| 'halfwidth'
-	| 'immersive'
-	| 'richLink'; // Note, 'richLink' is used internally but does not exist upstream.
+/**
+ * This duplicate type is unfortunate, but the image sources come lowercase
+ * Note, 'richLink' is used internally but does not exist upstream.
+ */
+type Weighting = Exclude<RoleType, 'halfWidth' | 'richLink'> | 'halfwidth';
 
-// aka weighting. RoleType affects how an image is placed. It is called weighting
-// in Composer but role in CAPI. We respect CAPI so we maintain this nomenclature
-// in DCR
-type RoleType =
+/**
+ * Affects how an image is placed.
+ *
+ * Also known as “weighting” in Composer, but we respect the CAPI naming.
+ *
+ * @see https://github.com/guardian/frontend/blob/0a32dba0/common/app/model/dotcomrendering/pageElements/Role.scala
+ */
+export type RoleType =
 	| 'immersive'
 	| 'supporting'
 	| 'showcase'
@@ -638,17 +644,17 @@ type RoleType =
 	| 'thumbnail'
 	| 'halfWidth';
 
-interface ImageSource {
+export interface ImageSource {
 	weighting: Weighting;
 	srcSet: SrcSetItem[];
 }
 
-interface SrcSetItem {
+export interface SrcSetItem {
 	src: string;
 	width: number;
 }
 
-interface Image {
+export interface Image {
 	index: number;
 	fields: {
 		height: string;
@@ -683,13 +689,13 @@ interface TimelineEvent {
 	toUnixDate?: number;
 }
 
-type RatingSizeType = 'large' | 'medium' | 'small';
+export type RatingSizeType = 'large' | 'medium' | 'small';
 
 // -------------------------------------
 // Callout Campaign
 // -------------------------------------
 
-type CampaignFieldType =
+export type CampaignFieldType =
 	| CampaignFieldText
 	| CampaignFieldTextArea
 	| CampaignFieldFile
@@ -707,19 +713,19 @@ interface CampaignField {
 	label: string;
 }
 
-interface CampaignFieldText extends CampaignField {
+export interface CampaignFieldText extends CampaignField {
 	type: 'text';
 }
 
-interface CampaignFieldTextArea extends CampaignField {
+export interface CampaignFieldTextArea extends CampaignField {
 	type: 'textarea';
 }
 
-interface CampaignFieldFile extends CampaignField {
+export interface CampaignFieldFile extends CampaignField {
 	type: 'file';
 }
 
-interface CampaignFieldRadio extends CampaignField {
+export interface CampaignFieldRadio extends CampaignField {
 	type: 'radio';
 	options: {
 		label: string;
@@ -727,7 +733,7 @@ interface CampaignFieldRadio extends CampaignField {
 	}[];
 }
 
-interface CampaignFieldCheckbox extends CampaignField {
+export interface CampaignFieldCheckbox extends CampaignField {
 	type: 'checkbox';
 	options: {
 		label: string;
@@ -735,7 +741,7 @@ interface CampaignFieldCheckbox extends CampaignField {
 	}[];
 }
 
-interface CampaignFieldSelect extends CampaignField {
+export interface CampaignFieldSelect extends CampaignField {
 	type: 'select';
 	options: {
 		label: string;
@@ -755,12 +761,6 @@ type AnswerType = {
 	answerBuckets: string[];
 };
 
-type QuizAtomResultBucketType = {
-	id: string;
-	title: string;
-	description: string;
-};
-
 type QuestionType = {
 	id: string;
 	text: string;
@@ -769,17 +769,11 @@ type QuestionType = {
 	imageAlt?: string;
 };
 
-type ResultBucketsType = {
-	id: string;
-	title: string;
-	description: string;
-};
-
 // -------------------------------------
 // Newsletter
 // -------------------------------------
 
-type Newsletter = {
+export type Newsletter = {
 	listId: number;
 	identityName: string;
 	name: string;

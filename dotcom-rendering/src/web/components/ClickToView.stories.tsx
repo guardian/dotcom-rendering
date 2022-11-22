@@ -1,6 +1,18 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { textSans } from '@guardian/source-foundations';
+import type {
+	DocumentBlockElement,
+	EmbedBlockElement,
+	InstagramBlockElement,
+	MapBlockElement,
+	RoleType,
+	SoundcloudBlockElement,
+	SpotifyBlockElement,
+	TweetBlockElement,
+	VideoVimeoBlockElement,
+	VineBlockElement,
+} from '../../types/content';
 import { ClickToView } from './ClickToView';
 import { DocumentBlockComponent } from './DocumentBlockComponent.importable';
 import { EmbedBlockComponent } from './EmbedBlockComponent.importable';

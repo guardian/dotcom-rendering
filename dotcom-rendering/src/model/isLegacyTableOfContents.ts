@@ -1,3 +1,5 @@
+import { CAPIElement } from '../types/content';
+
 const scriptUrls = [
 	'https://interactive.guim.co.uk/page-enhancers/nav/boot.js',
 	'https://uploads.guim.co.uk/2019/03/20/boot.js',

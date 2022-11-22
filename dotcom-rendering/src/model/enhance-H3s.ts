@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+import type { CAPIElement, TextBlockElement } from '../types/content';
 import { sanitiseHTML } from './sanitise';
 
 /**

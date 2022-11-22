@@ -9,6 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { buildAdTargeting } from '../../../lib/ad-targeting';
 import type { NavType } from '../../../model/extract-nav';
+import type { ImageBlockElement } from '../../../types/content';
 import type { FEArticleType } from '../../../types/frontend';
 import type { Palette } from '../../../types/palette';
 import { ArticleHeadline } from '../../components/ArticleHeadline';
@@ -115,7 +116,6 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 	// TODO:
 	// 1) Read 'forceEpic' value from URL parameter and use it to force the slot to render
 	// 2) Otherwise, ensure slot only renders if `CAPIArticle.config.shouldHideReaderRevenue` equals false.
-
 	const mainMedia = CAPIArticle.mainMediaElements[0] as ImageBlockElement;
 	const captionText = decideCaption(mainMedia);
 
