@@ -16,7 +16,7 @@ const styles = (format: ArticleFormat): SerializedStyles => {
 		margin: 0;
 		${headline.xsmall({ fontWeight: 'light' })};
 		${darkModeCss`color: ${text.pullquoteDark(format)};`}
-		margin-bottom: ${remSpace[4]};
+		margin-bottom: ${remSpace[5]};
 	`;
 };
 
