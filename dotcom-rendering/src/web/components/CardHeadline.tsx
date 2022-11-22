@@ -166,15 +166,17 @@ const lineStyles = (palette: Palette) => css`
 `;
 
 const dynamoLineStyles = (palette: Palette) => css`
-	padding-top: 1px;
-	:before {
-		display: block;
-		position: absolute;
-		top: 0;
-		left: 0;
-		content: '';
-		width: 100%;
-		border-top: 1px solid ${palette.border.cardSupporting};
+	${until.phablet} {
+		padding-top: 1px;
+		:before {
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 0;
+			content: '';
+			width: 100%;
+			border-top: 1px solid ${palette.border.cardSupporting};
+		}
 	}
 `;
 
