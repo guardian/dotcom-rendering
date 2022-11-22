@@ -82,12 +82,12 @@ const Card75_Card25 = ({
 	showAge?: boolean;
 }) => {
 	if (cards.length < 2) return null;
-	const primary = cards.slice(0, 1);
-	const secondary = cards.slice(1, 2);
+	const card75 = cards.slice(0, 1);
+	const card25 = cards.slice(1, 2);
 
 	return (
 		<UL direction="row">
-			{primary.map((card) => (
+			{card75.map((card) => (
 				<LI padSides={true} percentage="75%" key={card.url}>
 					<FrontCard
 						trail={card}
@@ -103,7 +103,7 @@ const Card75_Card25 = ({
 					/>
 				</LI>
 			))}
-			{secondary.map((card) => (
+			{card25.map((card) => (
 				<LI
 					padSides={true}
 					percentage="25%"

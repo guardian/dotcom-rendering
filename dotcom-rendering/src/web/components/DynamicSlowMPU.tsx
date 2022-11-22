@@ -31,12 +31,12 @@ const Card33_ColumnOfThree33_Ad33 = ({
 	showAge?: boolean;
 	index: number;
 }) => {
-	const primary = cards.slice(0, 1);
-	const secondary = cards.slice(1, 4);
+	const card33 = cards.slice(0, 1);
+	const cards33 = cards.slice(1, 4);
 
 	return (
 		<UL direction="row">
-			{primary.map((card) => (
+			{card33.map((card) => (
 				<LI percentage="33.333%" padSides={true} key={card.url}>
 					<FrontCard
 						trail={card}
@@ -48,7 +48,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 
 			<LI percentage="33.333%" showDivider={true}>
 				<UL direction="column">
-					{secondary.map((card) => (
+					{cards33.map((card) => (
 						<LI padSides={true} key={card.url}>
 							<FrontCard
 								trail={card}
@@ -86,13 +86,13 @@ const ColumnOfThree50_Ad50 = ({
 	showAge?: boolean;
 	index: number;
 }) => {
-	const primary = cards.slice(0, 3);
+	const cards50 = cards.slice(0, 3);
 
 	return (
 		<UL direction="row">
 			<LI percentage="50%">
 				<UL direction="column">
-					{primary.map((card) => (
+					{cards50.map((card) => (
 						<LI padSides={true} key={card.url}>
 							<FrontCard
 								trail={card}
@@ -128,12 +128,12 @@ const Card50_Card25_Card25 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
-	const primary = cards.slice(0, 1);
-	const secondary = cards.slice(1, 3);
+	const card50 = cards.slice(0, 1);
+	const cards25 = cards.slice(1, 3);
 
 	return (
 		<UL direction="row" padBottom={true}>
-			{primary.map((card) => (
+			{card50.map((card) => (
 				<LI percentage="50%" padSides={true} key={card.url}>
 					<FrontCard
 						trail={card}
@@ -146,7 +146,7 @@ const Card50_Card25_Card25 = ({
 					/>
 				</LI>
 			))}
-			{secondary.map((card) => (
+			{cards25.map((card) => (
 				<LI
 					percentage="25%"
 					padSides={true}
