@@ -18,7 +18,7 @@
     "prettier:check": "prettier . --check",
     "prettier:fix": "prettier . --write",
     "lintstats": "yarn lint --format node_modules/eslint-stats/byError.js",
-    "tsc": "tsc",
+    "tsc": "tsc --incremental",
     "test": "jest --maxWorkers=50%",
     "test:watch": "jest --watch --maxWorkers=25%",
     "test:ci": "jest --runInBand",
