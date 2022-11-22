@@ -85,7 +85,7 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	const { callout } = fields;
 
 	return (
-		<div css={(theme) => containerStyles(theme)}>
+		<div css={containerStyles}>
 			<details css={calloutDetailsStyles} open={true}>
 				<summary css={summaryStyles}>
 					<div css={summaryContentWrapper}>
@@ -96,9 +96,9 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 							(description: DocumentFragment) => (
 								<div css={descriptionStyles}>
 									<>
-									{renderCalloutDescriptionText(
-										description,
-										format,
+										{renderCalloutDescriptionText(
+											description,
+											format,
 										)}
 									</>
 								</div>
@@ -106,10 +106,7 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 						)}
 					</div>
 				</summary>
-				<CalloutForm
-					campaign={campaign}
-					format={format}
-				/>
+				<CalloutForm campaign={campaign} format={format} />
 			</details>
 		</div>
 	);

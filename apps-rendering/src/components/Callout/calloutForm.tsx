@@ -63,11 +63,7 @@ const buttonStyles = (theme: any): SerializedStyles => css`
 const CalloutForm: FC<CalloutFormProps> = ({ campaign, format }) => {
 	return (
 		<div className="js-callout" css={formStyles}>
-			<form
-				css={formStyles}
-				action="#"
-				method="post"
-			>
+			<form css={formStyles} action="#" method="post">
 				<ShareLink />
 				<Disclaimer />
 				<input
@@ -77,8 +73,8 @@ const CalloutForm: FC<CalloutFormProps> = ({ campaign, format }) => {
 				/>
 				<div className="js-callout__inputs">
 					<>
-					{campaign.fields.formFields.map((field) =>
-						renderField(field, format),
+						{campaign.fields.formFields.map((field) =>
+							renderField(field, format),
 						)}
 					</>
 					<div>
