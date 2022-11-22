@@ -22,7 +22,20 @@ This is the simplest way to get started, but will intermingle all the logs toget
 yarn watch
 ```
 
-View in a browser at http://localhost:8080 (standard port for [webpack-dev-server](https://webpack.js.org/configuration/dev-server/#devserverport))
+View in a browser at http://localhost:8080 (standard port for [webpack-dev-server](https://webpack.js.org/configuration/dev-server/#devserverport)).
+
+The Apps Rendering development server supports the following routes for testing articles:
+
+- `/path/to/content`
+  - e.g [http://localhost:8080/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:8080/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+- `/(uk|us|au|international)/path/to/content`
+  - e.g [http://localhost:8080/au/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:8080/au/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+- `/rendered-items/path/to/content`
+  - e.g [http://localhost:8080/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:8080/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+- `/(uk|us|au|international)/rendered-items/path/to/content`
+  - e.g [http://localhost:8080/au/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:8080/au/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+
+Additionally, each route above can take a `?editions` query parameter to render the article as for the Editions app.
 
 _**Note**: You will need to refresh the page to see any changes you make to the server code. Any changes to client code should reload automatically._
 

@@ -1,7 +1,8 @@
 import type { EditionLinkType } from '../../model/extract-nav';
-import type { EditionId } from '../../types/edition';
 
-const editionList: EditionLinkType[] = [
+export type EditionId = typeof editionList[number]['editionId'];
+
+export const editionList = [
 	{
 		url: '/preference/edition/au',
 		editionId: 'UK',
@@ -37,7 +38,7 @@ const editionList: EditionLinkType[] = [
 		title: 'Europe edition',
 		locale: 'en-gb',
 	},
-];
+] as const;
 
 export const getEditionFromId = (editionId: EditionId): EditionLinkType => {
 	return (
@@ -51,3 +52,11 @@ export const getRemainingEditions = (
 ): EditionLinkType[] => {
 	return editionList.filter((edition) => edition.editionId !== editionId);
 };
+
+/**
+ * Determine if a string is one of the permitted edition strings
+ *
+ * @param s The string to test
+ */
+export const isEditionId = (s: string): s is EditionId =>
+	editionList.map(({ editionId }) => String(editionId)).includes(s);

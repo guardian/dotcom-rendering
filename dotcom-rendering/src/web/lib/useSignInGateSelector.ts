@@ -17,7 +17,7 @@ import { useAB } from './useAB';
 export const useSignInGateSelector = ():
 	| undefined
 	| [SignInGateComponent | null, CurrentSignInGateABTest | null] => {
-	const ab = useAB();
+	const ab = useAB()?.api;
 	if (!ab) return undefined;
 
 	const test: Runnable | null = ab.firstRunnableTest(signInGateTests);

@@ -1,16 +1,20 @@
+import type { EditionId } from '../web/lib/edition';
 import type { BadgeType } from './badge';
 import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
-import type { EditionId } from './edition';
 import type { FooterType } from './footer';
 import type { CAPIOnwards } from './onwards';
+import type { TagType } from './tag';
 import type { CAPITrailType } from './trails';
 
 /**
+ * This type is what we receive from `frontend`,
+ * hence the FE prefix.
+ *
  * WARNING: run `gen-schema` task if changing this to update the associated JSON
  * schema definition.
  */
-export interface CAPIArticleType {
+export interface FEArticleType {
 	headline: string;
 	standfirst: string;
 	webTitle: string;

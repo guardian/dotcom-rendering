@@ -226,7 +226,7 @@ export const CardHeadline = ({
 		: palette.text.cardKicker;
 	return (
 		<>
-			<h4
+			<h3
 				css={[
 					format.theme === ArticleSpecial.Labs
 						? labTextStyles(size)
@@ -269,7 +269,7 @@ export const CardHeadline = ({
 						{headlineText}
 					</span>
 				</WithLink>
-			</h4>
+			</h3>
 			{!!byline && showByline && (
 				<Byline
 					text={byline}

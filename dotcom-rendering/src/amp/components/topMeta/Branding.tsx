@@ -4,7 +4,7 @@ import React from 'react';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 import type { Branding as BrandingType } from '../../../types/branding';
 import type { CommercialProperties } from '../../../types/commercial';
-import { isEditionId } from '../../../types/edition';
+import { isEditionId } from '../../../web/lib/edition';
 import { regionClasses } from '../../lib/region-classes';
 
 const LinkStyle = (pillar: ArticleTheme) => css`

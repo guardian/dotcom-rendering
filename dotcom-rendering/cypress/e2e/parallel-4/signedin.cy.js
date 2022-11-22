@@ -38,7 +38,8 @@ describe('Signed in readers', function () {
 		cy.contains('My account');
 	});
 
-	it('should have the correct urls for the header links', function () {
+	// eslint-disable-next-line mocha/no-skipped-tests -- to reinstate after the  top bar header nav is no long behind a feature switch
+	it.skip('should have the correct urls for the header links', function () {
 		cy.setCookie('GU_U', 'true', {
 			log: true,
 		});
