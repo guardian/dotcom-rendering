@@ -4,6 +4,8 @@ import type {
 	DCRContainerPalette,
 	DCRSupportingContent,
 } from '../../types/front';
+import type { Palette } from '../../types/palette';
+import { decidePalette } from '../lib/decidePalette';
 import { CardHeadline } from './CardHeadline';
 
 type Alignment = 'vertical' | 'horizontal';
@@ -13,7 +15,7 @@ type Props = {
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: true;
-	parentFormat?: ArticleFormat;
+	parentFormat: ArticleFormat;
 };
 
 const wrapperStyles = css`
@@ -64,16 +66,17 @@ const bottomMargin = css`
 	}
 `;
 
-const dynamoLiStyles = css`
+const dynamoLiStyles = (palette: Palette) => css`
 	${from.phablet} {
 		margin-left: 10px;
 		margin-bottom: 12px;
 		padding-top: 5px;
-		background-color: rgba(237, 237, 237, 0.9);
+		background-color: ${palette.background.article};
+		opacity: 0.9;
 		&:first-of-type {
 			margin-left: 0px;
 		}
-		padding: 0.3125rem 0.3125rem 0.625rem;
+		padding: 5px 5px 10px;
 		max-width: 33%;
 	}
 `;
@@ -110,7 +113,9 @@ export const SupportingContent = ({
 	alignment,
 	containerPalette,
 	isDynamo,
+	parentFormat,
 }: Props) => {
+	const palette = decidePalette(parentFormat, containerPalette);
 	return isDynamo ? (
 		<ul css={[dynamoWrapperStyles]}>
 			{supportingContent.map((subLink: DCRSupportingContent, index) => {
@@ -122,7 +127,7 @@ export const SupportingContent = ({
 					<li
 						key={subLink.url}
 						css={[
-							dynamoLiStyles,
+							dynamoLiStyles(palette),
 							dynamoLiStylesMobile,
 							shouldPadLeft && leftMargin,
 							index === supportingContent.length - 1 &&

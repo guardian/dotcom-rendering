@@ -165,6 +165,19 @@ const lineStyles = (palette: Palette) => css`
 	}
 `;
 
+const dynamoLineStyles = (palette: Palette) => css`
+	padding-top: 1px;
+	:before {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		content: '';
+		width: 100%;
+		border-top: 1px solid ${palette.border.cardSupporting};
+	}
+`;
+
 const WithLink = ({
 	linkTo,
 	children,
@@ -255,7 +268,9 @@ export const CardHeadline = ({
 							size: sizeOnMobile ?? size,
 							fontWeight: containerPalette ? 'bold' : 'regular',
 						}),
-					showLine && lineStyles(palette),
+					showLine && isDynamo
+						? dynamoLineStyles(palette)
+						: lineStyles(palette),
 				]}
 			>
 				<WithLink linkTo={linkTo}>
