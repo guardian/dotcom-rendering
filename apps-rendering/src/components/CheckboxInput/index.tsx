@@ -27,7 +27,12 @@ const CheckboxInput = ({
 		cssOverrides={cssOverrides}
 	>
 		{options.map(({ label, value }) => (
-			<Checkbox label={label} value={value} key={value} disabled={disabled}/>
+			<Checkbox
+				label={label}
+				value={value}
+				key={value}
+				disabled={disabled}
+			/>
 		))}
 	</CheckboxGroup>
 );

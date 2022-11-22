@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import type { FC } from 'react';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
 import { neutral, remSpace, textSans } from '@guardian/source-foundations';
@@ -12,7 +11,7 @@ import {
 import CheckboxInput from 'components/CheckboxInput';
 import FileInput from 'components/FileInput';
 import RadioInput from 'components/RadioInput';
-import type { ReactElement } from 'react';
+import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 
 const infoStyles = css`
@@ -20,23 +19,29 @@ const infoStyles = css`
 	margin-bottom: ${remSpace[4]};
 `;
 
-export const Disclaimer: FC<{disabled: boolean}> = ({disabled}) => {
+export const Disclaimer: FC<{ disabled: boolean }> = ({ disabled }) => {
 	const tabIndex = disabled ? -1 : 0;
 	return (
 		<div css={infoStyles}>
-			You must be 18 or over to fill in this form. Only the Guardian can see
-			your contributions and one of our journalists may contact you to discuss
-			further. For more information please see our{' '}
-			<a tabIndex={tabIndex} href="https://www.theguardian.com/help/terms-of-service">
+			You must be 18 or over to fill in this form. Only the Guardian can
+			see your contributions and one of our journalists may contact you to
+			discuss further. For more information please see our{' '}
+			<a
+				tabIndex={tabIndex}
+				href="https://www.theguardian.com/help/terms-of-service"
+			>
 				terms of service
 			</a>{' '}
 			and{' '}
-			<a tabIndex={tabIndex} href="https://www.theguardian.com/help/privacy-policy">
+			<a
+				tabIndex={tabIndex}
+				href="https://www.theguardian.com/help/privacy-policy"
+			>
 				privacy policy
 			</a>
 			.
 		</div>
-	)
+	);
 };
 
 export const ContactText = (): ReactElement => (

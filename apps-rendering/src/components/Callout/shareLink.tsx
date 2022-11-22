@@ -18,7 +18,7 @@ const linkStyles = (theme: any): SerializedStyles => css`
 	font-weight: normal;
 `;
 
-export const ShareLink: FC<{disabled: boolean}> = ({disabled}) => {
+export const ShareLink: FC<{ disabled: boolean }> = ({ disabled }) => {
 	const [isCopied, setIsCopied] = useState(false);
 
 	const onShare = async () => {

@@ -25,7 +25,6 @@ const containerStyles = (theme: any): SerializedStyles => css`
 		color: ${theme.linkColor};
 	}
 `;
-
 const calloutDetailsStyles = css`
 	padding-bottom: ${remSpace[6]};
 
@@ -109,7 +108,11 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 						)}
 					</div>
 				</summary>
-				<CalloutForm campaign={campaign} format={format} disableInputs={!isTabbable} />
+				<CalloutForm
+					campaign={campaign}
+					format={format}
+					disableInputs={!isTabbable}
+				/>
 			</details>
 		</div>
 	);

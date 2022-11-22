@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import { ThemeProvider } from '@emotion/react';
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { ArticleFormat } from '@guardian/libs';
 import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
 import type { Option } from '@guardian/types';
+import { useState } from 'react';
 import type { FC, ReactElement } from 'react';
 import CalloutBlock from './calloutBlock';
 import DeadlineDate from './deadlineDate';
@@ -43,14 +43,14 @@ const Callout: FC<CalloutProps> = ({
 						name={`${campaign.name} form`}
 						expandCallback={setIsExpanded}
 					>
-					<CalloutBlock
-						format={format}
-						campaign={campaign}
-						description={description}
-						// TODO: This is pretty heavy (and not futureproof), would it be better to
-						// set the tabIndex on all children with js?
-						isTabbable={isExpanded}
-					/>
+						<CalloutBlock
+							format={format}
+							campaign={campaign}
+							description={description}
+							// TODO: This is pretty heavy (and not futureproof), would it be better to
+							// set the tabIndex on all children with js?
+							isTabbable={isExpanded}
+						/>
 					</ExpandingWrapper>
 				</ThemeProvider>
 			)}

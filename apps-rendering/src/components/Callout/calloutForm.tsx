@@ -61,12 +61,16 @@ const buttonStyles = (theme: any): SerializedStyles => css`
 	}
 `;
 
-const CalloutForm: FC<CalloutFormProps> = ({ campaign, format, disableInputs = false }) => {
+const CalloutForm: FC<CalloutFormProps> = ({
+	campaign,
+	format,
+	disableInputs = false,
+}) => {
 	return (
 		<div className="js-callout" css={formStyles}>
 			<form css={formStyles} action="#" method="post">
 				<ShareLink disabled={disableInputs} />
-				<Disclaimer disabled={disableInputs}/>
+				<Disclaimer disabled={disableInputs} />
 				<input
 					name="formId"
 					type="hidden"
@@ -93,7 +97,12 @@ const CalloutForm: FC<CalloutFormProps> = ({ campaign, format, disableInputs = f
 							</div>
 						</InlineError>
 					</div>
-					<Button css={buttonStyles} type="submit" priority="primary" disabled={disableInputs}>
+					<Button
+						css={buttonStyles}
+						type="submit"
+						priority="primary"
+						disabled={disableInputs}
+					>
 						Submit
 					</Button>
 				</div>
