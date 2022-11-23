@@ -87,7 +87,7 @@ const main = async () => {
 	};
 
 	// Obtain the metrics
-	const metrics = await loadMetrics('metrics.json');
+	const metrics = await loadMetrics('./dotcom-rendering/metrics.json');
 
 	const metricsComment = buildMetricsComment(metrics);
 
