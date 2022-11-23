@@ -54,7 +54,7 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__COMMON_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          storybookBuildDir: 'dist/storybook/libs/@guardian/source-react-components-development-kitchen'
+          storybookBuildDir: 'dist/storybook/common-rendering'
           exitOnceUploaded: true
           onlyChanged: '!(main)' # only turbosnap on non-main branches
 
