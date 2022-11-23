@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "license": "Apache-2.0",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "storybook": "start-storybook -p 4001 --static-dir ../dotcom-rendering/src/static",
+    "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook"
   },
   "dependencies": {
     "@guardian/types": "^9.0.1"
