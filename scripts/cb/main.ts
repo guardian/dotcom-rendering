@@ -29,6 +29,14 @@ const postGithubComment = async (
 	});
 };
 
+const buildMetricsComment = (metrics: MetricsLogFile) => {
+	return [
+		`## Benchmarking results are in!`,
+		`**Retrieved ${metrics.length} performance metrics**`,
+		metrics.toString(),
+	].join('\n\n');
+};
+
 const main = async () => {
 	/** Path for workflow event */
 	const path = Deno.env.get('GITHUB_EVENT_PATH');
@@ -60,13 +68,15 @@ const main = async () => {
 	// Obtain the metrics
 	const metrics = await loadMetrics('metrics.log');
 
+	const metricsComment = buildMetricsComment(metrics);
+
 	// Post the comment
-	await postGithubComment(GITHUB_PARAMS, 'Hello from Deno!');
+	await postGithubComment(GITHUB_PARAMS, metricsComment);
 
 	// TODO send the metrics to the remote server for aggregation!
 
-	// Present the metrics!
-	console.log(metrics);
+	// Make sure we exit gracefully
+	Deno.exit();
 };
 
 await main();
