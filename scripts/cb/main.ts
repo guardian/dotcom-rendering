@@ -90,7 +90,7 @@ const main = async () => {
 	};
 
 	// Obtain the metrics
-	const metrics = await loadMetrics('metrics.log');
+	const metrics = await loadMetrics('metrics.json');
 
 	const metricsComment = buildMetricsComment(metrics);
 
