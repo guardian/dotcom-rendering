@@ -16,6 +16,9 @@ const sendMetrics = async (metrics: MetricsLogFile) => {
 		const metricsUrl = 'https://03f4-77-91-250-234.eu.ngrok.io/api/metrics';
 		const res = await fetch(metricsUrl, {
 			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
 			body: JSON.stringify(metrics),
 		});
 
@@ -113,35 +116,33 @@ const main = async () => {
 
 	const metricsComment = buildMetricsComment(allMetrics);
 
-	/** Path for workflow event */
+	// Only run this in Github this way...
 	const path = Deno.env.get('GITHUB_EVENT_PATH');
-	if (!path) {
-		throw new Error('Missing GITHUB_EVENT_PATH');
+	if (path) {
+		/**
+		 * https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads
+		 */
+		const payload: EventPayloadMap['push' | 'pull_request'] = JSON.parse(
+			Deno.readTextFileSync(path),
+		);
+
+		const issue_number = isPullRequestEvent(payload)
+			? payload.pull_request.number
+			: undefined;
+
+		if (!issue_number) {
+			return;
+		}
+
+		const GITHUB_PARAMS = {
+			owner: 'guardian',
+			repo: 'dotcom-rendering',
+			issue_number,
+		};
+
+		// Post the comment
+		await postGithubComment(GITHUB_PARAMS, metricsComment);
 	}
-
-	/**
-	 * https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads
-	 */
-	const payload: EventPayloadMap['push' | 'pull_request'] = JSON.parse(
-		Deno.readTextFileSync(path),
-	);
-
-	const issue_number = isPullRequestEvent(payload)
-		? payload.pull_request.number
-		: undefined;
-
-	if (!issue_number) {
-		return;
-	}
-
-	const GITHUB_PARAMS = {
-		owner: 'guardian',
-		repo: 'dotcom-rendering',
-		issue_number,
-	};
-
-	// Post the comment
-	await postGithubComment(GITHUB_PARAMS, metricsComment);
 
 	// TODO send the metrics to the remote server for aggregation!
 	console.log('About to send metrics', JSON.stringify(allMetrics));
