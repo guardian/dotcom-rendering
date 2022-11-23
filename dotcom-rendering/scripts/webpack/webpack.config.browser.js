@@ -110,16 +110,14 @@ module.exports = ({ bundle, sessionId }) => ({
 		new WebpackManifestPlugin({
 			fileName: `manifest.${bundle}.json`,
 		}),
-		...(DEV
-			? [
-					new GuStatsReportPlugin({
-						buildName: `${bundle}-client`,
-						project: 'dotcom-rendering',
-						team: 'dotcom',
-						sessionId,
-					}),
-			  ]
-			: []),
+		[
+			new GuStatsReportPlugin({
+				buildName: `${bundle}-client`,
+				project: 'dotcom-rendering',
+				team: 'dotcom',
+				sessionId,
+			}),
+		],
 	],
 	module: {
 		rules: [

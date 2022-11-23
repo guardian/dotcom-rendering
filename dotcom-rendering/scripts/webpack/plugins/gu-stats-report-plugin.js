@@ -1,8 +1,9 @@
 // @ts-check
-const fetch = require('node-fetch');
-const os = require('os');
 const { exec } = require('child_process');
+const fs = require('fs');
+const os = require('os');
 const chalk = require('chalk');
+const fetch = require('node-fetch');
 
 const PLUGIN_NAME = 'GuStatsReportPlugin';
 
@@ -14,10 +15,10 @@ const PLUGIN_NAME = 'GuStatsReportPlugin';
 class GuStatsReportPlugin {
 	/** @param {Config} config */
 	constructor(config) {
-		this.buildName = config?.buildName;
-		this.project = config?.project;
-		this.team = config?.team;
-		this.sessionId = config?.sessionId;
+		this.buildName = config.buildName;
+		this.project = config.project;
+		this.team = config.team;
+		this.sessionId = config.sessionId;
 		this.buildCount = 0;
 		/** @type {Record<'log' | 'warn' | 'error', (...args: unknown[]) => void>} */
 		this.logger = console;
@@ -30,7 +31,7 @@ class GuStatsReportPlugin {
 		this.fetchGitBranch();
 		this.fetchGitHash();
 
-		if (config?.displayDisclaimer)
+		if (config.displayDisclaimer)
 			console.log(
 				chalk.yellow.dim(
 					'This project reports compilation and machine stats to improve the development experience.',
@@ -71,87 +72,30 @@ class GuStatsReportPlugin {
 					'Unable to report stats - invalid config',
 				);
 
-			const URL = 'https://logs.guardianapis.com/log';
-			// @ts-ignore -- the type declaration isn’t playing nice
-			fetch(URL, {
-				method: 'POST',
-				body: JSON.stringify({
-					label: 'buildstats',
-					/** @type {Array<{ name: string, value: string}>} */
-					properties: [
-						{
-							name: 'project',
-							value: 'dotcom-rendering',
-						},
-						{
-							name: 'team',
-							value: 'dotcom',
-						},
-						{
-							name: 'buildName',
-							value: this.buildName,
-						},
-						{
-							name: 'buildCount',
-							value: String(this.buildCount),
-						},
-						{
-							name: 'gitHash',
-							value: this.gitHash || 'unknown',
-						},
-						{
-							name: 'gitBranch',
-							value: this.gitBranch || 'unknown',
-						},
-						{
-							name: 'sessionId',
-							value: this.sessionId,
-						},
-						{
-							name: 'cpus',
-							value: String(os.cpus().length),
-						},
-						{
-							name: 'memoryKb',
-							value: String(Math.round(os.totalmem() / 1024)),
-						},
-					],
-					/** @type {Array<{ name: string, value: number}>} */
-					metrics: [
-						{
-							name: 'buildTime',
-							value:
-								stats.compilation.endTime -
-									stats.compilation.startTime || 0,
-						},
-						{
-							name: 'memoryUsageKb',
-							// Memory usage in kb to 2dp
-							// Why use RSS? https://stackoverflow.com/questions/12023359/what-do-the-return-values-of-node-js-process-memoryusage-stand-for
-							value:
-								Math.round(
-									(process.memoryUsage().rss / 1024) * 100,
-								) / 100,
-						},
-					],
-				}),
-			})
-				.then(
-					/** @param {import('node-fetch').Response} resp */
-					({ ok, status }) =>
-						ok
-							? this.logger.log(
-									`Stats reported for '${this.buildName}' build. (Session build count - ${this.buildCount})`,
-							  )
-							: this.logger.error(
-									`${this.buildName} (${this.buildCount}): Failed to report stats (${status})`,
-							  ),
-				)
-				.catch(() =>
-					this.logger.error(
-						`${this.buildName} (${this.buildCount}): Failed to report stats`,
-					),
-				);
+			// E.g. ...
+
+			// [
+			// 	{ "key": "server_build_time", "name": "DCR server build time", "value": 32000, "max": 50000 },
+			// 	{ "key": "client_build_time", "name": "DCR client build time", "value": 45000, "max": 50000 }
+			// ]
+
+			const metricsFile = JSON.stringify([
+				{
+					key: 'build_time',
+					name: 'DCR build time',
+					value:
+						stats.compilation.endTime -
+							stats.compilation.startTime || 0,
+					max: 50000,
+				},
+			]);
+
+			fs.writeFile('./metrics.json', metricsFile, function (err) {
+				if (err) {
+					return console.log(err);
+				}
+				console.log('The file was saved!');
+			});
 		};
 
 		if (compiler.hooks) {

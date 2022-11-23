@@ -1,0 +1,28 @@
+name: DCR Build Check
+on:
+  push:
+    paths-ignore:
+      - 'apps-rendering/**'
+      - 'dotcom-rendering/docs/**'
+
+jobs:
+  build_check:
+    name: DCR Build Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: guardian/actions-setup-node@main
+
+      # Cache npm dependencies using https://github.com/bahmutov/npm-install
+      - uses: bahmutov/npm-install@v1
+
+      - name: Generate production build
+        run: make build
+        working-directory: dotcom-rendering
+
+      - name: Validate Build
+        run: make buildCheck
+        working-directory: dotcom-rendering

@@ -2,7 +2,7 @@
 const nodeExternals = require('webpack-node-externals');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
-const DEV = process.env.NODE_ENV === 'development';
+// const DEV = process.env.NODE_ENV === 'development';
 
 /** @type {(options: { sessionId: string } ) => import('webpack').Configuration} */
 module.exports = ({ sessionId }) => ({
@@ -52,17 +52,15 @@ module.exports = ({ sessionId }) => ({
 				: callback();
 		},
 	],
-	plugins: DEV
-		? [
-				new GuStatsReportPlugin({
-					displayDisclaimer: true,
-					buildName: 'server',
-					project: 'dotcom-rendering',
-					team: 'dotcom',
-					sessionId,
-				}),
-		  ]
-		: undefined,
+	plugins: [
+		new GuStatsReportPlugin({
+			displayDisclaimer: true,
+			buildName: 'server',
+			project: 'dotcom-rendering',
+			team: 'dotcom',
+			sessionId,
+		}),
+	],
 	module: {
 		rules: [
 			{
