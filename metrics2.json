@@ -1,4 +1,0 @@
-[
-	{ "key": "server_build_time", "name": "DCR server build time", "value": 32000, "max": 50000 },
-	{ "key": "client_build_time", "name": "DCR client build time", "value": 45000, "max": 50000 }
-]

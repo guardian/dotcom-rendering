@@ -1,0 +1,14 @@
+[
+  {
+    "key": "test",
+    "name": "A fake passing test metric!",
+    "value": 32000,
+    "max": 50000
+  },
+  {
+    "key": "test",
+    "name": "A fake failing test metric!",
+    "value": 50010,
+    "max": 50000
+  }
+]
