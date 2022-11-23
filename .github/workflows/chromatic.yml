@@ -49,7 +49,7 @@ jobs:
           autoAcceptChanges: main
           onlyChanged: true
           untraced: '**/(package**.json|yarn.lock)'
-          workingDir: dotcom-rendering
+          workingDir: storybooks
 
       - name: Chromatic - Dependency PR
         uses: chromaui/action@v1
@@ -58,4 +58,4 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
-          workingDir: dotcom-rendering
+          workingDir: storybooks
