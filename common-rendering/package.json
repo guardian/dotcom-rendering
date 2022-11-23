@@ -7,21 +7,18 @@
     "storybook": "start-storybook -p 4001 --static-dir ../dotcom-rendering/src/static",
     "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook -o ../dist/storybook/common-rendering"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@emotion/react": "^11.4.1",
     "@guardian/libs": "^9.0.1",
-    "@guardian/types": "^9.0.1",
-    "babel-loader": "^8.2.5",
-    "react": "^17.0.2"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.16.12",
-    "@babel/preset-env": "^7.14.1",
-    "@babel/preset-react": "^7.13.13",
-    "@emotion/jest": "^11.3.0",
     "@guardian/source-foundations": "^7.0.1",
     "@guardian/source-react-components": "^9.0.0",
-    "@guardian/source-react-components-development-kitchen": "6.0.2",
+    "@guardian/types": "^9.0.1",
+    "babel-loader": "^8.2.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@emotion/jest": "^11.3.0",
     "@storybook/addon-essentials": "^6.4.0",
     "@storybook/addon-knobs": "^6.4.0",
     "@storybook/addons": "^6.4.0",
@@ -34,20 +31,10 @@
     "@storybook/theming": "^6.4.0",
     "@types/jest": "^27.4.0",
     "@types/react-test-renderer": "^17.0.1",
-    "chromatic": "^6.11.4",
-    "desvg-loader": "^0.1.0",
     "jest": "^26.6.3",
-    "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.1",
-    "require-from-string": "^2.0.2",
-    "svg-loader": "^0.0.2",
     "ts-jest": "^26.5.3",
-    "tslib": "^2.4.0",
-    "typescript": "^4.3.5",
-    "web-vitals": "^2.0.0"
-  },
-  "peerDependencies": {
-    "@guardian/libs": "^9.0.1"
+    "tslib": "^2.4.0"
   },
   "jest": {
     "preset": "ts-jest/presets/js-with-ts",
