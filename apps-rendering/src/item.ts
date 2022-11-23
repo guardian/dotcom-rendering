@@ -520,6 +520,11 @@ const fromCapi =
 				design: ArticleDesign.Interview,
 				...itemFieldsWithBody(context, request),
 			};
+		} else if (isRecipe(tags)) {
+			return {
+				design: ArticleDesign.Recipe,
+				...itemFieldsWithBody(context, request),
+			};
 		} else if (isFeature(tags)) {
 			return {
 				design: ArticleDesign.Feature,

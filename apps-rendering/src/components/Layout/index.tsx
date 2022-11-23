@@ -19,6 +19,7 @@ import { Result } from 'result';
 import AnalysisLayout from './AnalysisLayout';
 import ImmersiveLayout from './ImmersiveLayout';
 import LetterLayout from './LetterLayout';
+import RecipeLayout from './RecipeLayout';
 
 // ----- Functions ----- //
 
@@ -94,6 +95,16 @@ const Layout: FC<Props> = ({ item, shouldHideAds, isCookMode }) => {
 		return <GalleryLayout item={item}>{render(item, body)}</GalleryLayout>;
 	}
 
+	console.log(item.design);
+
+	if (item.design === ArticleDesign.Recipe) {
+		return (
+			<RecipeLayout item={item} isCookMode={isCookMode}>
+				{render(item, body)}
+			</RecipeLayout>
+		);
+	}
+
 	if (
 		item.design === ArticleDesign.Feature ||
 		item.design === ArticleDesign.Explainer ||
@@ -104,8 +115,7 @@ const Layout: FC<Props> = ({ item, shouldHideAds, isCookMode }) => {
 		item.design === ArticleDesign.MatchReport ||
 		item.design === ArticleDesign.Obituary ||
 		item.design === ArticleDesign.Correction ||
-		item.design === ArticleDesign.Interview ||
-		item.design === ArticleDesign.Recipe
+		item.design === ArticleDesign.Interview
 	) {
 		if (item.display === ArticleDisplay.Immersive) {
 			return (
