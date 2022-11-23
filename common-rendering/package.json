@@ -8,6 +8,7 @@
     "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook -o ../dist/storybook/common-rendering"
   },
   "dependencies": {
+    "@babel/core": "^7.0.0",
     "@emotion/react": "^11.4.1",
     "@guardian/libs": "^9.0.1",
     "@guardian/source-foundations": "^7.0.1",
@@ -33,6 +34,7 @@
     "@types/react-test-renderer": "^17.0.1",
     "jest": "^26.6.3",
     "react-test-renderer": "^17.0.1",
+    "require-from-string": "^2.0.2",
     "ts-jest": "^26.5.3",
     "tslib": "^2.4.0"
   },
