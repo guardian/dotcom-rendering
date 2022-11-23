@@ -6,7 +6,7 @@ import {
 import { from, headline, remSpace } from '@guardian/source-foundations';
 import { fromNullable, OptionKind } from '@guardian/types';
 import HeadlineByline from 'components/HeadlineByline';
-import HeadlineTag from 'components/HeadlineTag';
+import DesignTag from 'components/DesignTag';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { darkModeCss } from 'styles';
@@ -30,7 +30,7 @@ const InterviewHeadline: React.FC<Props> = ({ item }) => {
 	const interviewToneTag = fromNullable(
 		item.tags.find((tag) => tag.id === 'tone/interview'),
 	);
-	const headlineTag = <HeadlineTag format={format} />;
+	const designTag = <DesignTag format={format} />;
 
 	return (
 		<div
@@ -46,10 +46,10 @@ const InterviewHeadline: React.FC<Props> = ({ item }) => {
 		>
 			{interviewToneTag.kind === OptionKind.Some ? (
 				<nav>
-					<a href={interviewToneTag.value.webUrl}>{headlineTag}</a>
+					<a href={interviewToneTag.value.webUrl}>{designTag}</a>
 				</nav>
 			) : (
-				headlineTag
+				designTag
 			)}
 			<h1 css={css(defaultStyles(item), interviewStyles)}>
 				<span

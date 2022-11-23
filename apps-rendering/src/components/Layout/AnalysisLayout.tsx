@@ -26,7 +26,7 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
-import HeadlineTag from '../HeadlineTag';
+import DesignTag from 'components/DesignTag';
 
 // ----- Styles ----- //
 
@@ -60,7 +60,7 @@ const AnalysisLayout: FC<Props> = ({ item, children }) => (
 						mainMedia={item.mainMedia}
 					/>
 					<Series item={item} />
-					<HeadlineTag format={item} />
+					<DesignTag format={item} />
 					<Headline item={item} />
 					<section css={[articleWidthStyles]}>
 						<Byline {...item} />

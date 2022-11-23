@@ -14,7 +14,7 @@ import Byline from 'components/Byline';
 import Cutout from 'components/Cutout';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
-import HeadlineTag from 'components/HeadlineTag';
+import DesignTag from 'components/DesignTag';
 import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
@@ -67,7 +67,7 @@ const LetterLayout: FC<Props> = ({ item, children }) => (
 			<header>
 				<Series item={item} />
 
-				<HeadlineTag format={item} />
+				<DesignTag format={item} />
 
 				<Headline item={item} />
 

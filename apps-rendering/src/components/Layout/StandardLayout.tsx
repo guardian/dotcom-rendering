@@ -17,7 +17,7 @@ import Epic from 'components/Epic';
 import FootballScores from 'components/FootballScores';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
-import HeadlineTag from 'components/HeadlineTag';
+import DesignTag from 'components/DesignTag';
 import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
@@ -129,7 +129,7 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 						mainMedia={item.mainMedia}
 					/>
 					<Series item={item} />
-					<HeadlineTag format={item} />
+					<DesignTag format={item} />
 
 					<Headline item={item} />
 					<div css={articleWidthStyles}>
