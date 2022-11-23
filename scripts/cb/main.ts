@@ -10,6 +10,19 @@ type Metric = {
 
 type MetricsLogFile = Metric[];
 
+const getCommentID = async (
+	GIHUB_PARAMS: Record<string, unknown>,
+): Promise<number | null> => {
+	if (!octokit) return null;
+	const { data: comments } = await octokit.rest.issues.listComments({
+		...GIHUB_PARAMS,
+	});
+
+	const comment = comments.find((comment) => comment.body?.includes('Bench'));
+
+	return comment?.id ?? null;
+};
+
 const isPullRequestEvent = (
 	payload: EventPayloadMap[keyof EventPayloadMap],
 ): payload is EventPayloadMap['pull_request'] =>
@@ -25,10 +38,18 @@ const postGithubComment = async (
 	GITHUB_PARAMS: Record<string, unknown>,
 	body: unknown,
 ) => {
-	await octokit.rest.issues.createComment({
-		...GITHUB_PARAMS,
-		body,
-	});
+	const comment_id = await getCommentID(GITHUB_PARAMS);
+
+	comment_id
+		? await octokit.rest.issues.updateComment({
+				...GITHUB_PARAMS,
+				comment_id,
+				body,
+		  })
+		: await octokit.rest.issues.createComment({
+				...GITHUB_PARAMS,
+				body,
+		  });
 };
 
 const buildMetricsComment = (metrics: MetricsLogFile) => {
@@ -89,6 +110,7 @@ const main = async () => {
 	// Obtain the metrics
 	const allMetrics: MetricsLogFile = [];
 	for await (const dirEntry of Deno.readDir('./dotcom-rendering/metrics')) {
+		console.log('Found metrics: ', JSON.stringify(dirEntry));
 		if (dirEntry.isFile) {
 			const metrics = await loadMetrics(
 				`./dotcom-rendering/metrics/${dirEntry.name}`,
