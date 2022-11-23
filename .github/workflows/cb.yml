@@ -7,8 +7,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: my-step
-        run: echo "Hello World!"
+      - name: Setup deno
+        uses: denolib/setup-deno@v2
+        with:
+          deno-version: v1.21.0
+
+      - name: Aggregate
+        run: deno run --no-check --allow-net=api.github.com --allow-env="GITHUB_TOKEN","GITHUB_EVENT_PATH" --allow-read scripts/cb/main.ts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Comment a pull_request
         uses: mb2dev/github-action-comment-pull-request@1.0.0
