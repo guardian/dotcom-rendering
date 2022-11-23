@@ -71,6 +71,7 @@ const dynamoLiStyles = (palette: Palette) => css`
 		display: flex;
 		flex-direction: column;
 		flex: 1;
+		padding-left: 5px;
 		padding-top: 8px;
 		padding-bottom: 8px;
 		background-color: ${palette.background.card};
