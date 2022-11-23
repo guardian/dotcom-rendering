@@ -20,18 +20,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Node
-        uses: guardian/actions-setup-node@main
+      # TODO Re-enable this for demo!
 
-      # Cache npm dependencies using https://github.com/bahmutov/npm-install
-      - uses: bahmutov/npm-install@v1
+      # - name: Install Node
+      #   uses: guardian/actions-setup-node@main
 
-      - name: Generate production build
-        run: make build
-        working-directory: dotcom-rendering
+      # # Cache npm dependencies using https://github.com/bahmutov/npm-install
+      # - uses: bahmutov/npm-install@v1
 
-      # - name: Validate Build
-      #   run: make buildCheck
+      # - name: Generate production build
+      #   run: make build
       #   working-directory: dotcom-rendering
 
       - name: Setup deno

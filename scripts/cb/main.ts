@@ -10,6 +10,15 @@ type Metric = {
 
 type MetricsLogFile = Metric[];
 
+const sendMetrics = async (metrics: MetricsLogFile) => {
+	// Reverse-proxy to local instance
+	const metricsUrl = 'https://03f4-77-91-250-234.eu.ngrok.io/api/metrics';
+	await fetch(metricsUrl, {
+		method: 'POST',
+		body: JSON.stringify(metrics),
+	});
+};
+
 const getCommentID = async (
 	GIHUB_PARAMS: Record<string, unknown>,
 ): Promise<number | null> => {
@@ -127,6 +136,7 @@ const main = async () => {
 	await postGithubComment(GITHUB_PARAMS, metricsComment);
 
 	// TODO send the metrics to the remote server for aggregation!
+	await sendMetrics(allMetrics);
 
 	// Make sure we exit gracefully
 	Deno.exit();
