@@ -46,8 +46,7 @@ const buildMetricsComment = (metrics: MetricsLogFile) => {
 			' | ' +
 			max +
 			' | ' +
-			(value <= max ? '✅' : '❌') +
-			' |\n'
+			(value <= max ? '✅' : '❌')
 		);
 	});
 
@@ -56,7 +55,7 @@ const buildMetricsComment = (metrics: MetricsLogFile) => {
 		`**Retrieved ${metrics.length} performance metrics**`,
 		...tableHeader,
 		...table,
-	].join('\n\n');
+	].join('\n');
 };
 
 const main = async () => {
