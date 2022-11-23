@@ -96,7 +96,7 @@ export const YoutubeBlockComponent = ({
 
 	const abTests = useAB();
 	const imaEnabled =
-		abTests?.api.isUserInVariant('IntegrateIMA', 'variant') ?? false;
+		abTests?.api.isUserInVariant('IntegrateIma', 'variant') ?? false;
 	const abTestParticipations = abTests?.participations ?? {};
 
 	useEffect(() => {
