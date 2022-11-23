@@ -37,21 +37,19 @@ const buildMetricsComment = (metrics: MetricsLogFile) => {
 		'| --- | --- | --- | --- |',
 	];
 
-	const table = metrics
-		.map(({ key, name, max, value }) => {
-			return (
-				'| ' +
-				name +
-				' | ' +
-				value +
-				' | ' +
-				max +
-				' | ' +
-				(value <= max ? '✅' : '❌') +
-				' |\n'
-			);
-		})
-		.join('\n');
+	const table: string[] = metrics.map(({ key, name, max, value }) => {
+		return (
+			'| ' +
+			name +
+			' | ' +
+			value +
+			' | ' +
+			max +
+			' | ' +
+			(value <= max ? '✅' : '❌') +
+			' |\n'
+		);
+	});
 
 	return [
 		`## Benchmarking results are in!`,

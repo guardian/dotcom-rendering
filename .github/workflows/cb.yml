@@ -1,5 +1,18 @@
 name: Continuous Benchmarking
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'apps-rendering/**'
+      - 'dotcom-rendering/docs/**'
+  # We need to run on "pull_request" to get the PR number in the event.
+  # When running on "push", we cannot add a comment to a specific PR.
+  pull_request:
+    #  If/when we compare results to `main`, we should also run on 'reopened'
+    types: [opened, synchronize]
+    paths:
+      - 'dotcom-rendering/**'
 jobs:
   echo:
     runs-on: ubuntu-latest
