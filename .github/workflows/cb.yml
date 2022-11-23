@@ -14,6 +14,26 @@ on:
     # paths:
     #   - 'dotcom-rendering/**'
 jobs:
+  build_check:
+    name: DCR Build Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Node
+        uses: guardian/actions-setup-node@main
+
+      # Cache npm dependencies using https://github.com/bahmutov/npm-install
+      - uses: bahmutov/npm-install@v1
+
+      - name: Generate production build
+        run: make build
+        working-directory: dotcom-rendering
+
+      - name: Validate Build
+        run: make buildCheck
+        working-directory: dotcom-rendering
   echo:
     runs-on: ubuntu-latest
     steps:
@@ -24,14 +44,6 @@ jobs:
         uses: denolib/setup-deno@v2
         with:
           deno-version: v1.21.0
-
-      - name: Wait for tests to succeed
-        uses: lewagon/wait-on-check-action@v1.2.0
-        with:
-          ref: ${{ github.ref }}
-          check-name: 'DCR Build Check'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
 
       - name: Aggregate
         run: deno run --no-check --allow-net=api.github.com --allow-env="GITHUB_TOKEN","GITHUB_EVENT_PATH" --allow-read scripts/cb/main.ts
