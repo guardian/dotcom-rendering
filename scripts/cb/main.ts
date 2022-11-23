@@ -80,6 +80,22 @@ const buildMetricsComment = (metrics: MetricsLogFile) => {
 };
 
 const main = async () => {
+	// Obtain the metrics
+	let allMetrics: MetricsLogFile = [];
+	for await (const dirEntry of Deno.readDir('./dotcom-rendering/metrics')) {
+		console.log('Found metrics: ', JSON.stringify(dirEntry));
+		if (dirEntry.isFile) {
+			const metrics = await loadMetrics(
+				`./dotcom-rendering/metrics/${dirEntry.name}`,
+			);
+			allMetrics = allMetrics.concat(metrics);
+		}
+	}
+
+	console.log('All metrics', JSON.stringify(allMetrics));
+
+	const metricsComment = buildMetricsComment(allMetrics);
+
 	/** Path for workflow event */
 	const path = Deno.env.get('GITHUB_EVENT_PATH');
 	if (!path) {
@@ -106,20 +122,6 @@ const main = async () => {
 		repo: 'dotcom-rendering',
 		issue_number,
 	};
-
-	// Obtain the metrics
-	const allMetrics: MetricsLogFile = [];
-	for await (const dirEntry of Deno.readDir('./dotcom-rendering/metrics')) {
-		console.log('Found metrics: ', JSON.stringify(dirEntry));
-		if (dirEntry.isFile) {
-			const metrics = await loadMetrics(
-				`./dotcom-rendering/metrics/${dirEntry.name}`,
-			);
-			allMetrics.concat(metrics);
-		}
-	}
-
-	const metricsComment = buildMetricsComment(allMetrics);
 
 	// Post the comment
 	await postGithubComment(GITHUB_PARAMS, metricsComment);
