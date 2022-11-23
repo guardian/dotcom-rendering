@@ -80,7 +80,6 @@ const dynamoLiStyles = (palette: Palette) => css`
 	${from.phablet} {
 		margin-left: 10px;
 		margin-bottom: 12px;
-		padding-top: 5px;
 		background-color: ${palette.background.card};
 		opacity: 0.9;
 		&:first-of-type {
