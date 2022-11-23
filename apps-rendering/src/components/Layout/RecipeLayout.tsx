@@ -111,7 +111,87 @@ const RecipeLayout: FC<Props> = ({ item, children, isCookMode }) => {
 	return (
 		<main css={backgroundStyles(format)}>
 			{isCookMode ? (
-				<></>
+				<article>
+					<div className="ingredients">
+						<p className="ar-jx47ik-Paragraph">
+							<strong className="ar-in3yi3">
+								Extra-virgin olive oil
+								<br />
+								45g brined capers
+							</strong>
+							, drained
+							<br />
+							<strong className="ar-in3yi3">
+								40g sun-dried tomato paste
+							</strong>
+							<strong className="ar-in3yi3">
+								<br />
+								30g pine nuts
+							</strong>
+							<strong className="ar-in3yi3">
+								<br />
+								20g raisins
+							</strong>
+							<strong className="ar-in3yi3">
+								<br />½ tsp red chilli flakes
+								<br />
+								Fine sea salt and black pepper
+								<br />1 tsp white-wine vinegar
+							</strong>
+							, or to taste
+							<br />
+							<strong className="ar-in3yi3">
+								40g dried breadcrumbs
+							</strong>
+							<strong className="ar-in3yi3">
+								<br />1 tbsp nutritional yeast
+								<br />
+								200g spaghetti
+							</strong>
+						</p>
+						<div className="closeButton">x</div>
+					</div>
+					<div className="method">
+						<p>
+							First make the sauce. Put four tablespoons of oil in
+							a blender, add the capers, sun-dried tomato paste,
+							pine nuts, raisins, chilli flakes and half a
+							teaspoon of salt. Blend to a chunky sauce, then
+							taste: it should be salty, sweet and sour. If you
+							need to, add up to a teaspoon of vinegar to balance
+							things out.
+						</p>
+						<p>
+							Bring a large pan of water to a rolling boil, and
+							add a teaspoon of salt for every litre of water.
+						</p>
+						<p>
+							In the meantime, heat a tablespoon of oil in a small
+							frying pan on a medium heat. Once it’s hot, add the
+							breadcrumbs and fry, stirring, until the they are an
+							autumn-leaf brown. Take off the heat, stir in the
+							nutritional yeast, then transfer to a small bowl.
+						</p>
+						<p>
+							Once the water pot is boiling, cook the spaghetti
+							according to the packet instructions and, when it’s
+							nearly done, carefully lower a mug into the cooking
+							water and take some of it out. Drain the spaghetti
+							well, then return it to the empty pan and add the
+							blended sauce and three tablespoons of the pasta
+							cooking water. Mix well to loosen up the pasta,
+							adding another tablespoon of the cooking water, if
+							need be, then taste a strand and adjust the
+							seasoning as necessary.
+						</p>
+						<p>
+							Distribute the spaghetti between two plates and
+							sprinkle each portion with a tablespoon of the
+							breadcrumb mix. Serve with the remaining breadcrumbs
+							on the side, so you can help yourselves.
+						</p>
+					</div>
+				</article>
 			) : (
 				<>
 					<article className="js-article" css={BorderStyles}>
