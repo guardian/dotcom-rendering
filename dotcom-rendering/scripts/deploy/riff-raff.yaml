@@ -23,14 +23,14 @@ deployments:
   rendering:
     type: autoscaling
     parameters:
-      bucket: aws-frontend-artifacts
+      bucketSsmKey: /account/services/dotcom-artifact.bucket
     dependencies:
       - frontend-static
       - frontend-cfn
   frontend-static:
     type: aws-s3
     parameters:
-      bucket: aws-frontend-static
+      bucketSsmKey: /account/services/dotcom-static.bucket
       cacheControl: public, max-age=315360000
       prefixStack: false
       publicReadAcl: false
