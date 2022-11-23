@@ -17,12 +17,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Comment a pull_request
-        uses: mb2dev/github-action-comment-pull-request@1.0.0
-        with:
-          message: "Hello, It's my first comment with Github action !"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          reactions: '+1 | -1 | laugh | hooray | confused | heart | rocket | eyes'
+      # - name: Comment a pull_request
+      #   uses: mb2dev/github-action-comment-pull-request@1.0.0
+      #   with:
+      #     message: "Hello, It's my first comment with Github action !"
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     reactions: '+1 | -1 | laugh | hooray | confused | heart | rocket | eyes'
 
   # create_comment:
   #   uses: peter-evans/create-or-update-comment@v2
