@@ -4,6 +4,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { between, body, headline, space } from '@guardian/source-foundations';
 import type { Switches } from '../../types/config';
 import type { Palette } from '../../types/palette';
+import type { TagType } from '../../types/tag';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { decidePalette } from '../lib/decidePalette';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';

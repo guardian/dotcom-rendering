@@ -1,0 +1,2 @@
+# this file helps speed up local builds https://www.typescriptlang.org/tsconfig#incremental
+tsconfig.tsbuildinfo

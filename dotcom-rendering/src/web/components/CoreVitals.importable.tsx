@@ -1,11 +1,12 @@
 import type { ABTest } from '@guardian/ab-core';
 import {
 	bypassCoreWebVitalsSampling,
-	getCookie,
 	initCoreWebVitals,
-} from '@guardian/libs';
+} from '@guardian/core-web-vitals';
+import { getCookie } from '@guardian/libs';
 import { dcrJavascriptBundle } from '../../../scripts/webpack/bundles';
 import type { ServerSideTestNames } from '../../types/config';
+import { integrateIMA } from '../experiments/tests/integrate-ima';
 import { removePrebidA9Canada } from '../experiments/tests/remove-prebid-a9-canada';
 import { useAB } from '../lib/useAB';
 
@@ -19,11 +20,12 @@ export const CoreVitals = () => {
 		window.location.hostname === 'preview.gutools.co.uk';
 	const sampling = 1 / 100;
 
-	const ABTestAPI = useAB();
+	const ABTestAPI = useAB()?.api;
 
 	// For these tests switch off sampling and collect metrics for 100% of views
 	const clientSideTestsToForceMetrics: ABTest[] = [
 		/* keep array multi-line */
+		integrateIMA,
 		removePrebidA9Canada,
 	];
 

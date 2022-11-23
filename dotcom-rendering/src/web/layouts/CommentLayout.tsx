@@ -331,6 +331,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					{format.theme !== ArticleSpecial.Labs && (
 						<Section
 							fullWidth={true}
+							shouldCenter={false}
 							showTopBorder={false}
 							showSideBorders={false}
 							padSides={false}
@@ -356,6 +357,9 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
+								headerTopBarSwitch={
+									!!CAPIArticle.config.switches.headerTopNav
+								}
 								isInEuropeTest={isInEuropeTest}
 							/>
 						</Section>
@@ -380,6 +384,9 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									.subscribe
 							}
 							editionId={CAPIArticle.editionId}
+							headerTopBarSwitch={
+								!!CAPIArticle.config.switches.headerTopNav
+							}
 						/>
 					</Section>
 

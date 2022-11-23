@@ -25,6 +25,7 @@ const Default: FC = () => (
 			display: ArticleDisplay.Standard,
 			theme: selectPillar(ArticlePillar.News),
 		}}
+		showByDefault={true}
 	/>
 );
 
@@ -45,6 +46,7 @@ const NewsTheme: FC = () => (
 			display: ArticleDisplay.Standard,
 			theme: selectPillar(ArticlePillar.News),
 		}}
+		showByDefault={true}
 	/>
 );
 

@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import { brand, neutral } from '@guardian/source-foundations';
 
+const title = 'Back to homepage';
+
 export const GuardianRoundel = () => {
 	return (
 		<div
@@ -9,8 +11,13 @@ export const GuardianRoundel = () => {
 				width: 42px;
 			`}
 		>
-			<a href="https://www.theguardian.com" data-link-name="nav2 : logo">
+			<a
+				href="https://www.theguardian.com"
+				data-link-name="nav2 : logo"
+				aria-label={title}
+			>
 				<svg viewBox="0 0 56 56">
+					<title>{title}</title>
 					<path
 						d="M28 0a28 28 0 1 0 28 28A28 28 0 0 0 28 0"
 						fill={neutral[100]}

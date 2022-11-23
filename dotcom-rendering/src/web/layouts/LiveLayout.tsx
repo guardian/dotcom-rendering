@@ -323,6 +323,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 				<SendToBack>
 					<Section
 						fullWidth={true}
+						shouldCenter={false}
 						showTopBorder={false}
 						showSideBorders={false}
 						padSides={false}
@@ -346,6 +347,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							}
 							contributionsServiceUrl={contributionsServiceUrl}
 							idApiUrl={CAPIArticle.config.idApiUrl}
+							headerTopBarSwitch={
+								!!CAPIArticle.config.switches.headerTopNav
+							}
 							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
@@ -369,6 +373,9 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									.subscribe
 							}
 							editionId={CAPIArticle.editionId}
+							headerTopBarSwitch={
+								!!CAPIArticle.config.switches.headerTopNav
+							}
 						/>
 					</Section>
 

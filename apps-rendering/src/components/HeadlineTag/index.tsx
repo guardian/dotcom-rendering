@@ -38,6 +38,7 @@ const HeadlineTag: FC<Props> = ({ tagText, format }) => {
 	switch (format.design) {
 		case ArticleDesign.Analysis:
 		case ArticleDesign.Explainer:
+		case ArticleDesign.Letter:
 			return (
 				<div css={headlineTagWrapper}>
 					<span css={headlineTagStyles(format)}>{tagText}</span>

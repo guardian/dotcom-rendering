@@ -14,11 +14,11 @@ import type { Palette } from '../../../types/palette';
 import { ArticleHeadline } from '../../components/ArticleHeadline';
 import { ArticleTitle } from '../../components/ArticleTitle';
 import { Caption } from '../../components/Caption';
-import { Section } from '../../components/Section';
 import { Island } from '../../components/Island';
 import { LabsHeader } from '../../components/LabsHeader.importable';
 import { MainMedia } from '../../components/MainMedia';
 import { Nav } from '../../components/Nav/Nav';
+import { Section } from '../../components/Section';
 import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { getCurrentPillar } from '../../lib/layoutHelpers';
@@ -181,6 +181,9 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 										.subscribe
 								}
 								editionId={CAPIArticle.editionId}
+								headerTopBarSwitch={
+									!!CAPIArticle.config.switches.headerTopNav
+								}
 							/>
 						</Section>
 					</div>

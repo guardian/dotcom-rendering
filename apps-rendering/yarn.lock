@@ -1296,12 +1296,12 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@guardian/apps-rendering-api-models@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@guardian/apps-rendering-api-models/-/apps-rendering-api-models-1.1.1.tgz#ae6411927534f20bf4f4e41d948c8d2a65346fa9"
-  integrity sha512-WR051+HS28SJUPd0iI7trkTFTh5hSt7sPoLuB6hzF4RHvwNKSxmPexstR35W53uiQ6UO4vUYjrCBjI/OhACcPg==
+"@guardian/apps-rendering-api-models@3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/apps-rendering-api-models/-/apps-rendering-api-models-3.0.0.tgz#4f48c8e1cce9f6e6c0b9e6257f2ea97aac009a27"
+  integrity sha512-12VWBwqb/qTm657gDAHIVegBhJzrIKqa32V9J8kvzI/JxIXV1qXRJ2N0db7KfSe4PhCdZNbcnlW2gsqquYxA9w==
   dependencies:
-    "@guardian/content-api-models" "^17.3.0"
+    "@guardian/content-api-models" "^17.4.0"
     "@guardian/content-atom-model" "^3.4.0"
     "@guardian/content-entity-model" "^2.2.1"
     "@guardian/story-packages-model" "^2.2.0"
@@ -1317,10 +1317,10 @@
   dependencies:
     is-mobile "^3.1.1"
 
-"@guardian/bridget@^1.12.0":
-  version "1.12.0"
-  resolved "https://registry.npmjs.org/@guardian/bridget/-/bridget-1.12.0.tgz#5c1a7a69f4f8176a2ca2607c245d719e7ee93e67"
-  integrity sha512-gWvwCg0ss0keItbsiq4YBxJPOoi8fugz7xAITSe6dLvfbR/nhcuFugJK+gCLSGb26qA4+COhZ7KY6yb4we3I5A==
+"@guardian/bridget@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/bridget/-/bridget-2.0.0.tgz#9be79e1f8c0c4a9ee3829390b9bcb828d78cb4d7"
+  integrity sha512-bCNIQuPe74AwR0eZWHgN/at3vumPOB0NxozciTujGUblhun23f+Fagtkkf1zyIqQ2VjaYmSVy5zVug+E5v9auw==
 
 "@guardian/cdk@^47.3.3":
   version "47.3.3"
@@ -1341,10 +1341,13 @@
     read-pkg-up "7.0.1"
     yargs "^17.5.1"
 
-"@guardian/content-api-models@^17.3.0":
-  version "17.3.0"
-  resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.3.0.tgz#01db5eee92165c0df4182486da3d0a3d644e69b0"
-  integrity sha512-xT3k1VHjfOlt3SbaQ9PWsm2WOxwhISxgKA6BghBSAzsaQhz4pH2uwcgJBpa45WYX4pu3pVYnYDdCR04g5GgI2g==
+"@guardian/common-rendering@file:../common-rendering":
+  version "1.0.0"
+
+"@guardian/content-api-models@^17.4.0":
+  version "17.4.0"
+  resolved "https://registry.yarnpkg.com/@guardian/content-api-models/-/content-api-models-17.4.0.tgz#c8ab4000b7761a65018481bddadde950c76358b4"
+  integrity sha512-5Hvl7az1Epg9/yWzqRusdcgg5hG8AuJMAXvRkTztvvNIgGCI5Txps8q4hH1lZ13lIUkEitAQDOXp0zOxfm28Aw==
   dependencies:
     "@guardian/content-atom-model" "^3.4.0"
     "@guardian/content-entity-model" "^2.2.1"

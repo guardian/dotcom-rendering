@@ -266,6 +266,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					<div data-print-layout="hide">
 						<Section
 							fullWidth={true}
+							shouldCenter={false}
 							showTopBorder={false}
 							showSideBorders={false}
 							padSides={false}
@@ -291,6 +292,9 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
+								headerTopBarSwitch={
+									!!CAPIArticle.config.switches.headerTopNav
+								}
 								isInEuropeTest={isInEuropeTest}
 							/>
 						</Section>
@@ -315,6 +319,9 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							CAPIArticle.nav.readerRevenueLinks.header.subscribe
 						}
 						editionId={CAPIArticle.editionId}
+						headerTopBarSwitch={
+							!!CAPIArticle.config.switches.headerTopNav
+						}
 					/>
 				</Section>
 
