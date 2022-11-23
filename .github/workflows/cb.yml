@@ -14,8 +14,7 @@ on:
     # paths:
     #   - 'dotcom-rendering/**'
 jobs:
-  build_check:
-    name: DCR Build Check
+  continuous_benchmarking:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -31,14 +30,9 @@ jobs:
         run: make build
         working-directory: dotcom-rendering
 
-      - name: Validate Build
-        run: make buildCheck
-        working-directory: dotcom-rendering
-  echo:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      # - name: Validate Build
+      #   run: make buildCheck
+      #   working-directory: dotcom-rendering
 
       - name: Setup deno
         uses: denolib/setup-deno@v2
