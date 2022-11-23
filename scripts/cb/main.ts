@@ -11,12 +11,20 @@ type Metric = {
 type MetricsLogFile = Metric[];
 
 const sendMetrics = async (metrics: MetricsLogFile) => {
-	// Reverse-proxy to local instance
-	const metricsUrl = 'https://03f4-77-91-250-234.eu.ngrok.io/api/metrics';
-	await fetch(metricsUrl, {
-		method: 'POST',
-		body: JSON.stringify(metrics),
-	});
+	try {
+		// Reverse-proxy to local instance
+		const metricsUrl = 'https://03f4-77-91-250-234.eu.ngrok.io/api/metrics';
+		const res = await fetch(metricsUrl, {
+			method: 'POST',
+			body: JSON.stringify(metrics),
+		});
+
+		if (res.ok) {
+			console.log('Successfully posted metrics to server');
+		}
+	} catch (err) {
+		console.log('Error sending metrics', err);
+	}
 };
 
 const getCommentID = async (
@@ -136,6 +144,7 @@ const main = async () => {
 	await postGithubComment(GITHUB_PARAMS, metricsComment);
 
 	// TODO send the metrics to the remote server for aggregation!
+	console.log('About to send metrics', JSON.stringify(allMetrics));
 	await sendMetrics(allMetrics);
 
 	// Make sure we exit gracefully
