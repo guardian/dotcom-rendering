@@ -160,17 +160,19 @@ function serveArticleSwitch(
 	isEditions: boolean,
 	themeOverride: Option<ArticleTheme>,
 	page: Option<string>,
+	isCookMode: boolean,
 ): Promise<void> {
 	if (isEditions) {
 		return serveEditionsArticle(renderingRequest, res, themeOverride);
 	}
-	return serveArticle(renderingRequest, res, page);
+	return serveArticle(renderingRequest, res, page, isCookMode);
 }
 
 async function serveArticle(
 	request: RenderingRequest,
 	res: ExpressResponse,
 	page: Option<string>,
+	isCookMode: boolean,
 ): Promise<void> {
 	const imageSalt = await getConfigValue('apis.img.salt');
 
@@ -183,6 +185,7 @@ async function serveArticle(
 		request,
 		getAssetLocation,
 		page,
+		isCookMode,
 	);
 
 	res.set('Link', getPrefetchHeader(resourceList(clientScript)));
@@ -279,6 +282,7 @@ async function serveArticlePost(
 				isEditions,
 				themeOverride,
 				page,
+				false,
 			);
 		}
 	} catch (e) {
@@ -334,6 +338,9 @@ async function serveArticleGet(
 		const capiContent = await askCapiFor(articleId);
 		const edition = editionFromString(req.params.edition);
 
+		const isCookMode = req.query['isCookMode'] === '';
+		console.log(`ServeArticleGet`, isCookMode);
+
 		await capiContent.either(
 			(errorStatus: number) => {
 				res.sendStatus(errorStatus);
@@ -367,6 +374,7 @@ async function serveArticleGet(
 						isEditions,
 						themeOverride,
 						page,
+						isCookMode,
 					);
 				}
 			},

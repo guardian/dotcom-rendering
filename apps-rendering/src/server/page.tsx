@@ -113,11 +113,19 @@ function renderHead(
     `;
 }
 
-const renderBody = (item: Item, request: RenderingRequest): EmotionCritical =>
+const renderBody = (
+	item: Item,
+	request: RenderingRequest,
+	isCookMode: boolean,
+): EmotionCritical =>
 	emotionServer.extractCritical(
 		renderToString(
 			<CacheProvider value={emotionCache}>
-				<Layout item={item} shouldHideAds={shouldHideAds(request)} />
+				<Layout
+					item={item}
+					shouldHideAds={shouldHideAds(request)}
+					isCookMode={isCookMode}
+				/>
 			</CacheProvider>,
 		),
 	);
@@ -150,11 +158,13 @@ function render(
 	request: RenderingRequest,
 	getAssetLocation: (assetName: string) => string,
 	page: Option<string>,
+	isCookMode: boolean,
 ): Page {
+	console.log(`HERE: ${isCookMode}`);
 	const item = fromCapi({ docParser, salt: imageSalt })(request, page);
 	const clientScript = map(getAssetLocation)(scriptName(item));
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
-	const body = renderBody(item, request);
+	const body = renderBody(item, request, isCookMode);
 	const inlineStyles = requiresInlineStyles(request.content);
 	const head = renderHead(
 		item,

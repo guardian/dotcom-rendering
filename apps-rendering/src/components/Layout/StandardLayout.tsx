@@ -76,9 +76,10 @@ const decideLines = (
 interface Props {
 	item: StandardItem | ReviewItem | MatchReportItem | ExplainerItem;
 	children: ReactNode[];
+	isCookMode: boolean;
 }
 
-const StandardLayout: FC<Props> = ({ item, children }) => {
+const StandardLayout: FC<Props> = ({ item, children, isCookMode }) => {
 	const format = getFormat(item);
 	// client side code won't render an Epic if there's an element with this id
 	const epicContainer = item.shouldHideReaderRevenue ? null : (

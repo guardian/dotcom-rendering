@@ -35,6 +35,7 @@ const renderWithAds =
 interface Props {
 	item: Item;
 	shouldHideAds: boolean;
+	isCookMode: boolean;
 }
 
 const notImplemented = (
@@ -47,7 +48,7 @@ const notImplemented = (
 	</p>
 );
 
-const Layout: FC<Props> = ({ item, shouldHideAds }) => {
+const Layout: FC<Props> = ({ item, shouldHideAds, isCookMode }) => {
 	if (
 		item.design === ArticleDesign.LiveBlog ||
 		item.design === ArticleDesign.DeadBlog
@@ -115,7 +116,9 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		}
 
 		return (
-			<StandardLayout item={item}>{render(item, body)}</StandardLayout>
+			<StandardLayout item={item} isCookMode={isCookMode}>
+				{render(item, body)}
+			</StandardLayout>
 		);
 	}
 
