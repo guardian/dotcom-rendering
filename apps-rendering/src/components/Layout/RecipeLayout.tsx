@@ -108,54 +108,50 @@ const RecipeLayout: FC<Props> = ({ item, children, isCookMode }) => {
 		  )
 		: null;
 
-	const matchScores: Optional<MatchScores> =
-		'football' in item ? item.football : Optional.none();
 	return (
 		<main css={backgroundStyles(format)}>
-			<article className="js-article" css={BorderStyles}>
-				{maybeRender(matchScores.toOption(), (scores) => (
-					<div id="js-football-scores">
-						<FootballScores
-							league={scores.league}
-							stadium={scores.stadium}
-							homeTeam={scores.homeTeam}
-							awayTeam={scores.awayTeam}
-							status={scores.status}
-						/>
-					</div>
-				))}
-				<header>
-					<MainMedia
-						format={getFormat(item)}
-						mainMedia={item.mainMedia}
-					/>
-					<Series item={item} />
-					{item.design === ArticleDesign.Explainer && (
-						<HeadlineTag tagText={'Explainer'} format={item} />
-					)}
-					<Headline item={item} />
-					<div css={articleWidthStyles}>
-						<Standfirst item={item} />
-					</div>
-					{decideLines(item, lineStyles)}
-					<section css={articleWidthStyles}>
-						<Metadata item={item} />
-						<Logo item={item} />
+			{isCookMode ? (
+				<></>
+			) : (
+				<>
+					<article className="js-article" css={BorderStyles}>
+						<header>
+							<MainMedia
+								format={getFormat(item)}
+								mainMedia={item.mainMedia}
+							/>
+							<Series item={item} />
+							{item.design === ArticleDesign.Explainer && (
+								<HeadlineTag
+									tagText={'Explainer'}
+									format={item}
+								/>
+							)}
+							<Headline item={item} />
+							<div css={articleWidthStyles}>
+								<Standfirst item={item} />
+							</div>
+							{decideLines(item, lineStyles)}
+							<section css={articleWidthStyles}>
+								<Metadata item={item} />
+								<Logo item={item} />
+							</section>
+						</header>
+						<Body className={[articleWidthStyles]} format={item}>
+							{children}
+						</Body>
+						{epicContainer}
+						<section className="js-tags" css={articleWidthStyles}>
+							<Tags item={item} />
+						</section>
+					</article>
+					<section css={onwardStyles}>
+						<RelatedContent item={item} />
 					</section>
-				</header>
-				<Body className={[articleWidthStyles]} format={item}>
-					{children}
-				</Body>
-				{epicContainer}
-				<section className="js-tags" css={articleWidthStyles}>
-					<Tags item={item} />
-				</section>
-			</article>
-			<section css={onwardStyles}>
-				<RelatedContent item={item} />
-			</section>
-			{commentContainer}
-			<Footer isCcpa={false} format={item} />
+					{commentContainer}
+					<Footer isCcpa={false} format={item} />
+				</>
+			)}
 		</main>
 	);
 };
