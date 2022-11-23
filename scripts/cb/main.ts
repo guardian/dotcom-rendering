@@ -3,7 +3,9 @@ import type { EventPayloadMap } from 'https://cdn.skypack.dev/@octokit/webhooks-
 
 type Metric = {
 	key: string;
-	value: string;
+	name: string;
+	max: number;
+	value: number;
 };
 
 type MetricsLogFile = Metric[];
@@ -30,10 +32,32 @@ const postGithubComment = async (
 };
 
 const buildMetricsComment = (metrics: MetricsLogFile) => {
+	const tableHeader = [
+		'| Name | Value | Max | Pass |',
+		'| --- | --- | --- | --- |',
+	];
+
+	const table = metrics
+		.map(({ key, name, max, value }) => {
+			return (
+				'| ' +
+				name +
+				' | ' +
+				value +
+				' | ' +
+				max +
+				' | ' +
+				(value <= max ? '✅' : '❌') +
+				' |\n'
+			);
+		})
+		.join('\n');
+
 	return [
 		`## Benchmarking results are in!`,
 		`**Retrieved ${metrics.length} performance metrics**`,
-		JSON.stringify(metrics),
+		...tableHeader,
+		...table,
 	].join('\n\n');
 };
 
