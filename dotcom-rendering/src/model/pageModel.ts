@@ -1,5 +1,6 @@
 import type { NavType } from 'src/model/extract-nav';
-import type { EditionId } from 'src/types/edition';
+import type { TagType } from 'src/types/tag';
+import type { EditionId } from 'src/web/lib/edition';
 import type { ConfigType } from '../types/config';
 import type { FooterType } from '../types/footer';
 

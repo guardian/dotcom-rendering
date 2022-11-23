@@ -104,6 +104,7 @@ export const StandAlonePage = ({
 						element="header"
 					>
 						<Header
+							headerTopBarSwitch={false}
 							editionId={editionId}
 							supporterCTA={
 								nav.readerRevenueLinks.header.supporter
@@ -127,6 +128,7 @@ export const StandAlonePage = ({
 						element="nav"
 					>
 						<Nav
+							headerTopBarSwitch={false}
 							nav={nav}
 							format={articleFormat}
 							subscribeUrl={subscribeUrl}
