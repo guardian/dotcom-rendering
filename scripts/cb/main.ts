@@ -87,9 +87,17 @@ const main = async () => {
 	};
 
 	// Obtain the metrics
-	const metrics = await loadMetrics('./dotcom-rendering/metrics.json');
+	const allMetrics: MetricsLogFile = [];
+	for await (const dirEntry of Deno.readDir('./dotcom-rendering/metrics')) {
+		if (dirEntry.isFile) {
+			const metrics = await loadMetrics(
+				`./dotcom-rendering/metrics/${dirEntry.name}`,
+			);
+			allMetrics.concat(metrics);
+		}
+	}
 
-	const metricsComment = buildMetricsComment(metrics);
+	const metricsComment = buildMetricsComment(allMetrics);
 
 	// Post the comment
 	await postGithubComment(GITHUB_PARAMS, metricsComment);

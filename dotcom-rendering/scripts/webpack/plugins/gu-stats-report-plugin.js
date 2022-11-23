@@ -81,20 +81,22 @@ class GuStatsReportPlugin {
 
 			const metricsFile = JSON.stringify([
 				{
-					key: 'build_time',
-					name: 'DCR build time',
+					key: `${this.buildName}`,
+					name: `DCR build time ${this.buildName}`,
 					value:
 						stats.compilation.endTime -
 							stats.compilation.startTime || 0,
-					max: 50000,
+					max: 150000,
 				},
 			]);
 
-			fs.writeFile('./metrics.json', metricsFile, function (err) {
+			const fname = `./metrics/${this.buildName}.json`;
+
+			fs.writeFile(fname, metricsFile, function (err) {
 				if (err) {
 					return console.log(err);
 				}
-				console.log('The file was saved!');
+				console.log(`${fname} was saved!`);
 			});
 		};
 
