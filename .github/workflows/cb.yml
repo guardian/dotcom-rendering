@@ -38,7 +38,7 @@ jobs:
           deno-version: v1.21.0
 
       - name: Aggregate
-        run: deno run --no-check --allow-net=api.github.com --allow-env="GITHUB_TOKEN","GITHUB_EVENT_PATH" --allow-read scripts/cb/main.ts
+        run: deno run --no-check --allow-net=api.github.com,03f4-77-91-250-234.eu.ngrok.io --allow-env="GITHUB_TOKEN","GITHUB_EVENT_PATH" --allow-read scripts/cb/main.ts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
