@@ -1,11 +1,32 @@
-name: hello-world
-on: push
+name: Continuous Benchmarking
+on: [push, pull_request]
 jobs:
-  my-job:
+  echo:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: my-step
         run: echo "Hello World!"
+
+      - name: Comment a pull_request
+        uses: mb2dev/github-action-comment-pull-request@1.0.0
+        with:
+          message: "Hello, It's my first comment with Github action !"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          reactions: '+1 | -1 | laugh | hooray | confused | heart | rocket | eyes'
+
+  # create_comment:
+  #   uses: peter-evans/create-or-update-comment@v2
+  #   with:
+  #     issue-number: ${{ github.event.pull_request.number }}
+  #     body: |
+  #       This is a multi-line test comment
+  #       - With GitHub **Markdown** :sparkles:
+  #       - Created by [create-or-update-comment][1]
+  #       [1]: https://github.com/peter-evans/create-or-update-comment
+  #     reactions: '+1'
 # name: Continuous Benchmarking
 # on:
 #   push:
