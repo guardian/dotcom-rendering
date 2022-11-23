@@ -61,7 +61,7 @@ const main = async () => {
 	const metrics = await loadMetrics('metrics.log');
 
 	// Post the comment
-	postGithubComment(GITHUB_PARAMS, 'Hello from Deno!');
+	await postGithubComment(GITHUB_PARAMS, 'Hello from Deno!');
 
 	// TODO send the metrics to the remote server for aggregation!
 
