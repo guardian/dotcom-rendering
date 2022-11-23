@@ -71,19 +71,16 @@ const dynamoLiStyles = (palette: Palette) => css`
 		display: flex;
 		flex-direction: column;
 		flex: 1;
-		padding-top: 2px;
-		background-color: ${palette.background.article};
+		padding-top: 8px;
+		padding-bottom: 8px;
+		background-color: ${palette.background.card};
 		position: relative;
-		&:first-of-type {
-			margin-top: 0px;
-		}
-		margin-top: 8px;
 	}
 	${from.phablet} {
 		margin-left: 10px;
 		margin-bottom: 12px;
 		padding-top: 5px;
-		background-color: ${palette.background.article};
+		background-color: ${palette.background.card};
 		opacity: 0.9;
 		&:first-of-type {
 			margin-left: 0px;
