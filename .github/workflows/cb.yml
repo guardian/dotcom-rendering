@@ -11,8 +11,8 @@ on:
   pull_request:
     #  If/when we compare results to `main`, we should also run on 'reopened'
     types: [opened, synchronize]
-    paths:
-      - 'dotcom-rendering/**'
+    # paths:
+    #   - 'dotcom-rendering/**'
 jobs:
   echo:
     runs-on: ubuntu-latest
