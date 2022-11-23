@@ -175,7 +175,7 @@ const dynamoLineStyles = (palette: Palette) => css`
 			left: 0;
 			content: '';
 			width: 100%;
-			border-top: 1px solid ${palette.border.cardSupporting};
+			border-top: 1px solid ${palette.topBar.card};
 		}
 	}
 `;

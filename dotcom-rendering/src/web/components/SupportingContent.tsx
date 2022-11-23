@@ -67,6 +67,18 @@ const bottomMargin = css`
 `;
 
 const dynamoLiStyles = (palette: Palette) => css`
+	${until.phablet} {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		padding-top: 2px;
+		background-color: ${palette.background.article};
+		position: relative;
+		&:first-of-type {
+			margin-top: 0px;
+		}
+		margin-top: 8px;
+	}
 	${from.phablet} {
 		margin-left: 10px;
 		margin-bottom: 12px;
@@ -78,6 +90,7 @@ const dynamoLiStyles = (palette: Palette) => css`
 		}
 		padding: 5px 5px 10px;
 		max-width: 33%;
+		border-top: 1px solid ${palette.topBar.card};
 	}
 `;
 
@@ -91,20 +104,6 @@ const dynamoWrapperStyles = css`
 		margin-left: 5px;
 		margin-right: 5px;
 		flex-direction: row;
-	}
-`;
-
-const dynamoLiStylesMobile = css`
-	${until.phablet} {
-		display: flex;
-		flex-direction: column;
-		flex: 1;
-		padding-top: 2px;
-		position: relative;
-		&:first-of-type {
-			margin-top: 0px;
-		}
-		margin-top: 8px;
 	}
 `;
 
@@ -128,7 +127,6 @@ export const SupportingContent = ({
 						key={subLink.url}
 						css={[
 							dynamoLiStyles(palette),
-							dynamoLiStylesMobile,
 							shouldPadLeft && leftMargin,
 							index === supportingContent.length - 1 &&
 								bottomMargin,
