@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest",
     "storybook": "start-storybook -p 4001 --static-dir ../dotcom-rendering/src/static",
-    "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook -o dist/storybook/common-rendering"
+    "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook"
   },
   "dependencies": {
     "@babel/core": "^7.0.0",
