@@ -33,7 +33,7 @@ const buildMetricsComment = (metrics: MetricsLogFile) => {
 	return [
 		`## Benchmarking results are in!`,
 		`**Retrieved ${metrics.length} performance metrics**`,
-		metrics.toString(),
+		JSON.stringify(metrics),
 	].join('\n\n');
 };
 
