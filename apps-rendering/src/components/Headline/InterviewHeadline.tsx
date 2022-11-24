@@ -5,8 +5,8 @@ import {
 } from '@guardian/common-rendering/src/editorialPalette';
 import { from, headline, remSpace } from '@guardian/source-foundations';
 import { fromNullable, OptionKind } from '@guardian/types';
-import HeadlineByline from 'components/HeadlineByline';
 import DesignTag from 'components/DesignTag';
+import HeadlineByline from 'components/HeadlineByline';
 import type { Item } from 'item';
 import { getFormat } from 'item';
 import { darkModeCss } from 'styles';
