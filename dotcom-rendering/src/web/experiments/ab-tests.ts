@@ -9,16 +9,6 @@ import {
 import { removePrebidA9Canada } from './tests/remove-prebid-a9-canada';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
-import {
-	signInGateMandatoryLongTestControlAunz,
-	signInGateMandatoryLongTestControlEu,
-	signInGateMandatoryLongTestControlNa,
-	signInGateMandatoryLongTestControlUk,
-	signInGateMandatoryLongTestVariantAunz,
-	signInGateMandatoryLongTestVariantEu,
-	signInGateMandatoryLongTestVariantNa,
-	signInGateMandatoryLongTestVariantUk,
-} from './tests/sign-in-gate-mandatory-long-test';
 
 // keep in sync with ab-tests in frontend
 // https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts
@@ -30,13 +20,5 @@ export const tests: ABTest[] = [
 	newsletterMerchUnitLighthouseVariants,
 	consentlessAds,
 	integrateIma,
-	signInGateMandatoryLongTestControlAunz,
-	signInGateMandatoryLongTestControlNa,
-	signInGateMandatoryLongTestControlEu,
-	signInGateMandatoryLongTestControlUk,
-	signInGateMandatoryLongTestVariantAunz,
-	signInGateMandatoryLongTestVariantNa,
-	signInGateMandatoryLongTestVariantEu,
-	signInGateMandatoryLongTestVariantUk,
 	removePrebidA9Canada,
 ];
