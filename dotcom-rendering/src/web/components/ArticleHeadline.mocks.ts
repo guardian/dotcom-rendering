@@ -1,3 +1,5 @@
+import { CAPIElement } from '../../types/content';
+
 export const mainMediaElements: CAPIElement[] = [
 	{
 		role: 'showcase',

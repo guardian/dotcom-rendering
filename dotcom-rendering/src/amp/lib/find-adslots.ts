@@ -17,6 +17,8 @@
  * around the ad and it can be placed.
  */
 
+import type { CAPIElement } from '../../types/content';
+
 interface ElementWithLength {
 	element: CAPIElement;
 	length: number;

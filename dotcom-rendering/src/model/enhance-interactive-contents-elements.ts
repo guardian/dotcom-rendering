@@ -1,3 +1,4 @@
+import type { CAPIElement, SubheadingBlockElement } from '../types/content';
 import { isLegacyTableOfContents } from './isLegacyTableOfContents';
 import { stripHTML } from './sanitise';
 

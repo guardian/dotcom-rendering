@@ -1,3 +1,8 @@
+import type {
+	CAPIElement,
+	ImageBlockElement,
+	TextBlockElement,
+} from '../../types/content';
 import {
 	AD_LIMIT,
 	findAdSlots,

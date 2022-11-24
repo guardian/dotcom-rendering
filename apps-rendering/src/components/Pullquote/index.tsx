@@ -13,7 +13,7 @@ import { darkModeCss } from 'styles';
 const styles = (format: ArticleFormat): SerializedStyles => {
 	return css`
 		color: ${text.pullquote(format)};
-		margin: 0;
+		margin: 0 0 ${remSpace[5]};
 		${headline.xsmall({ fontWeight: 'light' })};
 		${darkModeCss`color: ${text.pullquoteDark(format)};`}
 	`;

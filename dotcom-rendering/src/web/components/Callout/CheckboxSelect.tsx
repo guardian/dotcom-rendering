@@ -1,4 +1,5 @@
 import { Checkbox, CheckboxGroup } from '@guardian/source-react-components';
+import { CampaignFieldCheckbox } from '../../../types/content';
 import { FieldLabel } from './FieldLabel';
 
 type Props = {

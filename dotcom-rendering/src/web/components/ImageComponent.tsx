@@ -8,6 +8,7 @@ import {
 	neutral,
 	until,
 } from '@guardian/source-foundations';
+import type { Image, ImageBlockElement, RoleType } from '../../types/content';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Caption } from './Caption';
