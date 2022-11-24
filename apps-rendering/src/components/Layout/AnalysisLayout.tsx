@@ -8,6 +8,7 @@ import { breakpoints, from } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import ArticleBody from 'components/ArticleBody';
 import Byline from 'components/Byline';
+import DesignTag from 'components/DesignTag';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import Logo from 'components/Logo';
@@ -26,7 +27,6 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
-import HeadlineTag from '../HeadlineTag';
 
 // ----- Styles ----- //
 
@@ -60,7 +60,7 @@ const AnalysisLayout: FC<Props> = ({ item, children }) => (
 						mainMedia={item.mainMedia}
 					/>
 					<Series item={item} />
-					<HeadlineTag tagText={'Analysis'} format={item} />
+					<DesignTag format={item} />
 					<Headline item={item} />
 					<section css={[articleWidthStyles]}>
 						<Byline {...item} />

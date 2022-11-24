@@ -234,7 +234,6 @@ const commentCountDark = (format: ArticleFormat): Colour => {
 			return specialReport[500];
 		case ArticleSpecial.SpecialReportAlt:
 			return news[500];
-
 	}
 };
 
@@ -444,9 +443,9 @@ const bylineInlineDark = (format: ArticleFormat): Colour => {
 	}
 };
 
-const headlineTag = (_format: ArticleFormat): Colour => neutral[100];
+const designTag = (_format: ArticleFormat): Colour => neutral[100];
 
-const headlineTagDark = (_format: ArticleFormat): Colour => neutral[10];
+const designTagDark = (_format: ArticleFormat): Colour => neutral[10];
 
 const follow = (format: ArticleFormat): Colour => {
 	if (format.design === ArticleDesign.Gallery) {
@@ -612,7 +611,7 @@ const interactiveAtomLink = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
 		case ArticleSpecial.SpecialReportAlt:
-				return news[400];
+			return news[400];
 	}
 };
 
@@ -725,7 +724,7 @@ const standfirstLink = (format: ArticleFormat): Colour => {
 				case ArticleSpecial.SpecialReport:
 					return specialReport[300];
 				case ArticleSpecial.SpecialReportAlt:
-						return news[400];
+					return news[400];
 			}
 		case ArticleDesign.Gallery:
 			return neutral[86];
@@ -1056,7 +1055,7 @@ const pagination = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
-			case ArticleSpecial.SpecialReportAlt:
+		case ArticleSpecial.SpecialReportAlt:
 			return news[400];
 	}
 };
@@ -1098,7 +1097,7 @@ const pullquoteDark = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
-			case ArticleSpecial.SpecialReportAlt:
+		case ArticleSpecial.SpecialReportAlt:
 			return news[500];
 	}
 };
@@ -1192,8 +1191,8 @@ const text = {
 	followDark,
 	headline,
 	headlineDark,
-	headlineTag,
-	headlineTagDark,
+	designTag,
+	designTagDark,
 	interactiveAtomLink,
 	keyEventsInline,
 	keyEventsLeftColumn,
