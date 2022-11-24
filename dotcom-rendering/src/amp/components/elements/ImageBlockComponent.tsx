@@ -3,6 +3,7 @@ import { text, textSans } from '@guardian/source-foundations';
 import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 import TriangleIcon from '../../../static/icons/triangle.svg';
+import type { ImageBlockElement, SrcSetItem } from '../../../types/content';
 import { bestFitImage, heightEstimate } from '../../lib/image-fit';
 
 const figureStyle = css`

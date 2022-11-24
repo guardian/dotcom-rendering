@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+import type { CAPIElement } from '../types/content';
 
 const addTitleToIframe = (elements: CAPIElement[]): CAPIElement[] => {
 	const enhanced: CAPIElement[] = [];

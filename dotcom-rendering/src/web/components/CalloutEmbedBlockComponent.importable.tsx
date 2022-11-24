@@ -4,6 +4,7 @@ import { Button } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import MinusIcon from '../../static/icons/minus.svg';
 import PlusIcon from '../../static/icons/plus.svg';
+import { CalloutBlockElement } from '../../types/content';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Form } from './Callout/Form';

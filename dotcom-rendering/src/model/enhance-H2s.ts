@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+import type { CAPIElement, SubheadingBlockElement } from '../types/content';
 import { isLegacyTableOfContents } from './isLegacyTableOfContents';
 
 const shouldUseLegacyIDs = (elements: CAPIElement[]): boolean => {

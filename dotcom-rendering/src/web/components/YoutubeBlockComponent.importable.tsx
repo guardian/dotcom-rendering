@@ -4,6 +4,7 @@ import type { ConsentState } from '@guardian/consent-management-platform/dist/ty
 import { body, neutral, space } from '@guardian/source-foundations';
 import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
+import type { RoleType } from '../../types/content';
 import { trackVideoInteraction } from '../browser/ga/ga';
 import { record } from '../browser/ophan/ophan';
 import { useAB } from '../lib/useAB';
@@ -93,11 +94,11 @@ export const YoutubeBlockComponent = ({
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
 	);
-
-	const abTests = useAB();
+	const ab = useAB();
+	const abApi = ab?.api;
 	const imaEnabled =
-		abTests?.api.isUserInVariant('IntegrateIma', 'variant') ?? false;
-	const abTestParticipations = abTests?.participations ?? {};
+		abApi?.isUserInVariant('IntegrateIma', 'variant') ?? false;
+	const abTestParticipations = ab?.participations ?? {};
 
 	useEffect(() => {
 		const defineConsentState = async () => {
