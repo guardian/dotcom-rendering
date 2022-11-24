@@ -14,7 +14,8 @@
     "storybook": "npm-run-all --parallel storybook:*",
     "storybook:composed": "sleep 5 && yarn workspace storybooks storybook --quiet",
     "storybook:cr": "yarn workspace @guardian/common-rendering storybook --no-open --quiet",
-    "build-storybook": "yarn workspace storybooks build-storybook && yarn workspace @guardian/common-rendering build-storybook",
+    "storybook:dcr": "yarn workspace @guardian/dotcom-rendering storybook --no-open --quiet",
+    "build-storybook": "yarn workspace storybooks build-storybook && yarn workspace @guardian/common-rendering build-storybook && yarn workspace @guardian/dotcom-rendering build-storybook",
     "build:dcr": "cd ./dotcom-rendering && yarn makeBuild",
     "chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
     "prepare": "husky install"
