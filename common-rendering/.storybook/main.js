@@ -11,7 +11,7 @@ module.exports = {
 		builder: 'webpack5',
 	},
 	stories: ['../src/**/*.stories.@(tsx)'],
-	addons: ['@storybook/addon-essentials', '@storybook/addon-knobs'],
+	addons: ['@storybook/addon-essentials'],
 	webpackFinal: async (config) => {
 		// Get project specific webpack options
 		config = webpackConfig(config);
