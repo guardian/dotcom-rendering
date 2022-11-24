@@ -14,7 +14,6 @@ import { map, withDefault } from '@guardian/types';
 import { pillarToId, themeToPillar } from 'articleFormat';
 import Body from 'components/ArticleBody';
 import Epic from 'components/Epic';
-import FootballScores from 'components/FootballScores';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import HeadlineTag from 'components/HeadlineTag';
@@ -25,7 +24,6 @@ import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
-import type { MatchScores } from 'football';
 import { getFormat } from 'item';
 import type {
 	Explainer as ExplainerItem,
@@ -34,8 +32,7 @@ import type {
 	Review as ReviewItem,
 	Standard as StandardItem,
 } from 'item';
-import { maybeRender, pipe } from 'lib';
-import { Optional } from 'optional';
+import { pipe } from 'lib';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,
@@ -43,6 +40,7 @@ import {
 	lineStyles,
 	onwardStyles,
 } from 'styles';
+import { SvgMenu } from '@guardian/source-react-components';
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -79,6 +77,20 @@ interface Props {
 	isCookMode: boolean;
 }
 
+const H2Styles = css`
+	color: #bb3b80;
+	font-weight: bold;
+	font-size: 18px;
+	margin-bottom: 15px;
+`;
+
+const methodStyles = css`
+	margin: 10px;
+	p {
+		margin: 10px 0;
+	}
+`;
+
 const RecipeLayout: FC<Props> = ({ item, children, isCookMode }) => {
 	const format = getFormat(item);
 	// client side code won't render an Epic if there's an element with this id
@@ -111,9 +123,35 @@ const RecipeLayout: FC<Props> = ({ item, children, isCookMode }) => {
 	return (
 		<main css={backgroundStyles(format)}>
 			{isCookMode ? (
-				<article>
-					<div className="ingredients">
-						<p className="ar-jx47ik-Paragraph">
+				<article
+					css={css`
+						height: 100vh;
+						#closeButton:checked ~ #collapsible-body {
+							display: none;
+						}
+					`}
+				>
+					<div
+						className="ingredients"
+						css={css`
+							position: sticky;
+							top: 0;
+							background: #eff1f2;
+							padding: 10px 10px 0 10px;
+							-webkit-box-shadow: 0px 7px 8px -5px rgba(0, 0, 0, 0.5);
+							-moz-box-shadow: 0px 7px 8px -5px rgba(0, 0, 0, 0.5);
+							box-shadow: 0px 7px 8px -5px rgba(0, 0, 0, 0.5);
+						`}
+					>
+						<input
+							type="checkbox"
+							css={css`
+								display: none;
+							`}
+							id="closeButton"
+						/>
+						<h2 css={H2Styles}>Ingredients</h2>
+						<p id="collapsible-body">
 							<strong className="ar-in3yi3">
 								Extra-virgin olive oil
 								<br />
@@ -149,9 +187,29 @@ const RecipeLayout: FC<Props> = ({ item, children, isCookMode }) => {
 								200g spaghetti
 							</strong>
 						</p>
-						<div className="closeButton">x</div>
+						<div className="closeButton">
+							<label
+								htmlFor="closeButton"
+								css={css`
+									width: 40px;
+									margin: 0 auto;
+									display: block;
+								`}
+							>
+								<span
+									css={css`
+										width: 40px;
+										height: 40px;
+										display: inline-block;
+									`}
+								>
+									<SvgMenu />
+								</span>
+							</label>
+						</div>
 					</div>
-					<div className="method">
+					<div className="method" css={methodStyles}>
+						<h2 css={H2Styles}>Method</h2>
 						<p>
 							First make the sauce. Put four tablespoons of oil in
 							a blender, add the capers, sun-dried tomato paste,
