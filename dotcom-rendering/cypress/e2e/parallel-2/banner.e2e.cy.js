@@ -22,23 +22,4 @@ describe('The banner', function () {
 		cy.visit(`/Article?url=${articleUrl}`);
 		cy.wait('@rrBannerRequest');
 	});
-
-	// eslint-disable-next-line mocha/no-skipped-tests -- this banner has been turned off, @i-hardy to raise a PR to remove
-	it.skip('requests the puzzles banner on puzzles pages', function () {
-		disableCMP();
-		optOutOfArticleCountConsent();
-		const articleUrl =
-			'https://www.theguardian.com/crosswords/crossword-blog/2021/mar/29/crossword-blog-is-it-ok-to-when-solving-puzzles';
-		const rrBannerUrl = 'https://contributions.guardianapis.com/puzzles';
-
-		cy.intercept(rrBannerUrl, (req) => {
-			expect(req.body).to.have.property('targeting');
-			expect(req.body).to.have.property('tracking');
-
-			req.reply({});
-		}).as('puzzlesBannerRequest');
-
-		cy.visit(`/Article?url=${articleUrl}`);
-		cy.wait('@puzzlesBannerRequest');
-	});
 });
