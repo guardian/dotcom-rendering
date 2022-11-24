@@ -177,7 +177,7 @@ const mobileStickyAdStyles = css`
 		display: none;
 		position: absolute;
 		right: 3px;
-		top: 3px;
+		top: -21px;
 		padding: 0;
 		border: 0;
 		height: 21px;
