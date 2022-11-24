@@ -26,13 +26,21 @@ interface InteractionProps {
 	expediteLoading?: never;
 }
 
+interface HashProps {
+	deferUntil: 'hash';
+	clientOnly: true;
+	placeholderHeight?: never;
+	children: JSX.Element;
+	expediteLoading?: never;
+}
+
 /**
  * Props
  *
  * We use a union type here to support conditional typing. This means you
  * can only supply placeholderHeight if clientOnly is true.
  */
-type Props = HydrateProps | ClientOnlyProps | InteractionProps;
+type Props = HydrateProps | ClientOnlyProps | InteractionProps | HashProps;
 
 const decideChildren = (
 	children: JSX.Element,
@@ -58,7 +66,7 @@ const decideChildren = (
  * namimg convention
  *
  * @param {HydrateProps | ClientOnlyProps} props - JSX Props
- * @param {'idle' | 'visible' | 'interaction'} props.deferUntil - Delay when client code should execute
+ * @param {JSX.IntrinsicElements["gu-island"]} props.deferUntil - Delay when client code should execute
  * 		- idle - Execute when browser idle
  * 		- visible - Execute when component appears in viewport
  *      - interaction - Execute when component is clicked on in the viewport

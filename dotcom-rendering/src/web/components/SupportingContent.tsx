@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
 import { from, until } from '@guardian/source-foundations';
 import type {
 	DCRContainerPalette,
@@ -97,11 +96,7 @@ export const SupportingContent = ({
 							containerPalette={containerPalette}
 							isDynamo={isDynamo}
 							headlineText={subLink.headline}
-							kickerText={
-								subLink.format.design === ArticleDesign.LiveBlog
-									? 'Live'
-									: subLink.kickerText
-							}
+							kickerText={subLink.kickerText}
 						/>
 					</li>
 				);

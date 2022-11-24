@@ -199,12 +199,8 @@ const tryToInsert = (
 export const insertPromotedNewsletter = (
 	blocks: Block[],
 	format: CAPIFormat,
-	promotedNewsletter?: Newsletter,
+	promotedNewsletter: Newsletter,
 ): Block[] => {
-	if (!promotedNewsletter) {
-		return blocks;
-	}
-
 	switch (format.design) {
 		case 'ArticleDesign':
 		case 'GalleryDesign':

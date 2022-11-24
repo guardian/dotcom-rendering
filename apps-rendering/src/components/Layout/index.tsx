@@ -103,7 +103,8 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === ArticleDesign.MatchReport ||
 		item.design === ArticleDesign.Obituary ||
 		item.design === ArticleDesign.Correction ||
-		item.design === ArticleDesign.Interview
+		item.design === ArticleDesign.Interview ||
+		item.design === ArticleDesign.Recipe
 	) {
 		if (item.display === ArticleDisplay.Immersive) {
 			return (

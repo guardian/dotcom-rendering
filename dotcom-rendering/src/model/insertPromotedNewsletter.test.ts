@@ -15,26 +15,7 @@ const NEWSLETTER: Newsletter = {
 	group: 'Opinion',
 };
 
-const toElementTypeLists = (blocks: Block[]): string[][] =>
-	blocks.map((block) => block.elements.map((element) => element._type));
-
 describe('Insert Newsletter Signups', () => {
-	it('makes no change if there is no newsletter', () => {
-		const elementTypesBeforeEnhancement = toElementTypeLists(
-			exampleStandard.blocks,
-		);
-
-		const elementTypesAfterEnhance = toElementTypeLists(
-			insertPromotedNewsletter(
-				exampleStandard.blocks,
-				exampleStandard.format,
-				undefined,
-			),
-		);
-
-		expect(elementTypesAfterEnhance).toEqual(elementTypesBeforeEnhancement);
-	});
-
 	it('inserts a NewsletterSignupBlockElement to a standard article if there is a newsletter', () => {
 		const insertedBlock = insertPromotedNewsletter(
 			exampleStandard.blocks,

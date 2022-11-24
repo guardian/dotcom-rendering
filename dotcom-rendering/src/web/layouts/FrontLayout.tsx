@@ -280,7 +280,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				</>
 			</div>
 
-			<main data-layout="FrontLayout">
+			<main data-layout="FrontLayout" id="maincontent">
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
