@@ -262,9 +262,7 @@ const textElement =
 					children,
 				);
 			case 'BLOCKQUOTE':
-				return isEditions
-					? h('blockquote', { key }, children)
-					: h(Blockquote, { key, format }, children);
+				return h(Blockquote, { key, format }, children);
 			case 'STRONG':
 				return styledH(
 					'strong',
