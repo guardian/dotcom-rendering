@@ -94,11 +94,11 @@ export const YoutubeBlockComponent = ({
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
 	);
-
-	const abTests = useAB();
+	const ab = useAB();
+	const abApi = ab?.api;
 	const imaEnabled =
-		abTests?.api.isUserInVariant('IntegrateIma', 'variant') ?? false;
-	const abTestParticipations = abTests?.participations ?? {};
+		abApi?.isUserInVariant('IntegrateIma', 'variant') ?? false;
+	const abTestParticipations = ab?.participations ?? {};
 
 	useEffect(() => {
 		const defineConsentState = async () => {
