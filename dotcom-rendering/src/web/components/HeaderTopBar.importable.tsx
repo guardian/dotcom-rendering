@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { getCookie } from '@guardian/libs';
 import { brand, from, space } from '@guardian/source-foundations';
 import type { EditionId } from '../../types/edition';
 import { center } from '../lib/center';
@@ -16,6 +17,7 @@ interface HeaderTopBarProps {
 	mmaUrl?: string;
 	discussionApiUrl: string;
 	idApiUrl: string;
+	isSignedIn?: boolean;
 }
 
 const topBarStyles = css`
@@ -48,6 +50,9 @@ export const HeaderTopBar = ({
 	discussionApiUrl,
 	idApiUrl,
 }: HeaderTopBarProps) => {
+	const isServer = typeof window === 'undefined';
+	const isSignedIn =
+		!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	return (
 		<div
 			css={css`
@@ -61,6 +66,7 @@ export const HeaderTopBar = ({
 					idUrl={idUrl ?? 'https://profile.theguardian.com'}
 					discussionApiUrl={discussionApiUrl}
 					idApiUrl={idApiUrl}
+					isSignedIn={isSignedIn}
 				/>
 				<SearchJobs />
 
