@@ -129,7 +129,9 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 						mainMedia={item.mainMedia}
 					/>
 					<Series item={item} />
-					<DesignTag format={item} />
+					{item.design !== ArticleDesign.Interview && (
+						<DesignTag format={item} />
+					)}
 
 					<Headline item={item} />
 					<div css={articleWidthStyles}>
