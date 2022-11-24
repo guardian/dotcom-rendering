@@ -1,4 +1,5 @@
 import { isString, isUndefined } from '@guardian/libs';
+import type { CAPIElement } from '../types/content';
 import type { TagType } from '../types/tag';
 
 /** Pick any numeric value or range, followed by its unit */

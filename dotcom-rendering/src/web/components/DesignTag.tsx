@@ -140,7 +140,7 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 			return (
 				<Margins format={format}>
 					<Tag format={format}>
-						<TagLink href="/tone/obituaries">Obituaries</TagLink>
+						<TagLink href="/tone/obituaries">Obituary</TagLink>
 					</Tag>
 				</Margins>
 			);
