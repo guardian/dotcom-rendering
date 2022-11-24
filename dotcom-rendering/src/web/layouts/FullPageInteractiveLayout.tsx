@@ -13,6 +13,7 @@ import {
 } from '@guardian/source-foundations';
 import type { NavType } from '../../model/extract-nav';
 import type { Switches } from '../../types/config';
+import type { CAPIElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
 import {
 	adCollapseStyles,

@@ -1,3 +1,4 @@
+import type { ImageSource, SrcSetItem } from '../../types/content';
 import { bestFitImage } from './image-fit';
 
 const containerWidths: number[] = [600, 800, 1000, 1200, 1600];

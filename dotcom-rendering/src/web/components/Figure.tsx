@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { from, space, until } from '@guardian/source-foundations';
+import type { CAPIElement, RoleType } from '../../types/content';
 
 type Props = {
 	children: React.ReactNode;

@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { border, neutral, text, textSans } from '@guardian/source-foundations';
 import { unescapeData } from '../../lib/escapeData';
+import type { TableBlockElement } from '../../types/content';
 
 const tableEmbed = css`
 	.table--football {

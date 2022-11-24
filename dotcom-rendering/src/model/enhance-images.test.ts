@@ -3,6 +3,7 @@ import { PhotoEssay } from '../../fixtures/generated/articles/PhotoEssay';
 import { Standard as ExampleArticle } from '../../fixtures/generated/articles/Standard';
 import { images } from '../../fixtures/generated/images';
 import { blockMetaData } from '../../fixtures/manual/block-meta-data';
+import type { TextBlockElement } from '../types/content';
 import { enhanceImages } from './enhance-images';
 
 const image = {
@@ -518,14 +519,13 @@ describe('Enhance Images', () => {
 			);
 		});
 
-		// Need to ignore TS to check test works for other element types
 		it('will pass through other element types', () => {
 			const input: Block[] = [
 				{
 					...blockMetaData,
 					elements: [
 						{
-							// @ts-expect-error
+							// @ts-expect-error -- Need to ignore TS to check test works for other element types
 							_type: 'model.dotcomrendering.pageElements.model.dotcomrendering.pageElements.PullquoteBlockElement',
 							elementId: 'mockId',
 							html: '<p>A Pullquote</p>',

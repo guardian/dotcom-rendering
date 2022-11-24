@@ -1,9 +1,10 @@
+import type { Image, ImageSource } from '../../types/content';
 import { bestFitImage, heightEstimate } from './image-fit';
 
 test('chooses smallest image that is still greater than column width', () => {
-	const images = [
+	const images: ImageSource[] = [
 		{
-			weighting: 'inline' as Weighting,
+			weighting: 'inline',
 			srcSet: [
 				{
 					src: 'https://i.guim.co.uk/img/media/d78248012632672db90b7cbd766e6a8383542fc0/0_316_4366_2619/master/4366.jpg?width=620&quality=85&auto=format&fit=max&s=dedab549648a105a71696cadab62715f',
@@ -20,7 +21,7 @@ test('chooses smallest image that is still greater than column width', () => {
 			],
 		},
 		{
-			weighting: 'thumbnail' as Weighting,
+			weighting: 'thumbnail',
 			srcSet: [
 				{
 					src: 'https://i.guim.co.uk/img/media/d78248012632672db90b7cbd766e6a8383542fc0/0_316_4366_2619/master/4366.jpg?width=140&quality=85&auto=format&fit=max&s=92dec489a4ea25b8ba80f8b260ca0bb9',
@@ -42,9 +43,9 @@ test('chooses smallest image that is still greater than column width', () => {
 });
 
 test('if no image is greater than column width, just return the biggest available', async () => {
-	const images = [
+	const images: ImageSource[] = [
 		{
-			weighting: 'thumbnail' as Weighting,
+			weighting: 'thumbnail',
 			srcSet: [
 				{
 					src: 'https://i.guim.co.uk/img/media/d78248012632672db90b7cbd766e6a8383542fc0/0_316_4366_2619/master/4366.jpg?width=140&quality=85&auto=format&fit=max&s=92dec489a4ea25b8ba80f8b260ca0bb9',

@@ -1,4 +1,5 @@
 import { logger } from '../server/lib/logging';
+import type { CAPIElement, Newsletter } from '../types/content';
 
 type PlaceInArticle = {
 	position: number;

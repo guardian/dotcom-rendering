@@ -1,4 +1,5 @@
 import React from 'react';
+import type { SoundcloudBlockElement } from '../../../types/content';
 
 export const SoundcloudBlockComponent: React.FC<{
 	element: SoundcloudBlockElement;
