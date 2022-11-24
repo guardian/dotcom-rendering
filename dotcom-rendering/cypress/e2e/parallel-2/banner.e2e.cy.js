@@ -23,7 +23,8 @@ describe('The banner', function () {
 		cy.wait('@rrBannerRequest');
 	});
 
-	it('requests the puzzles banner on puzzles pages', function () {
+	// eslint-disable-next-line mocha/no-skipped-tests -- this banner has been turned off, @i-hardy to raise a PR to remove
+	it.skip('requests the puzzles banner on puzzles pages', function () {
 		disableCMP();
 		optOutOfArticleCountConsent();
 		const articleUrl =
