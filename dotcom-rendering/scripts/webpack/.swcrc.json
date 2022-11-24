@@ -1,9 +1,6 @@
 {
   "jsc": {
     "baseUrl": ".",
-    "minify": {
-      "compress": true
-    },
     "parser": {
       "syntax": "typescript",
       "tsx": true,
