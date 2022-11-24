@@ -7,6 +7,7 @@ import { enhanceH3s } from './enhance-H3s';
 import { enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
+import { enhanceRecipes } from './enhance-recipes';
 import { enhanceTweets } from './enhance-tweets';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
 
@@ -15,24 +16,22 @@ class BlockEnhancer {
 
 	format: CAPIFormat;
 
-	promotedNewsletter?: Newsletter;
+	options: Options;
 
-	constructor(
-		blocks: Block[],
-		format: CAPIFormat,
-		promotedNewsletter?: Newsletter,
-	) {
+	constructor(blocks: Block[], format: CAPIFormat, options: Options) {
 		this.blocks = blocks;
 		this.format = format;
-		this.promotedNewsletter = promotedNewsletter;
+		this.options = options;
 	}
 
 	enhanceNewsletterSignup() {
-		this.blocks = insertPromotedNewsletter(
-			this.blocks,
-			this.format,
-			this.promotedNewsletter,
-		);
+		if (this.options.promotedNewsletter) {
+			this.blocks = insertPromotedNewsletter(
+				this.blocks,
+				this.format,
+				this.options.promotedNewsletter,
+			);
+		}
 		return this;
 	}
 
@@ -85,7 +84,17 @@ class BlockEnhancer {
 		this.blocks = enhanceTweets(this.blocks);
 		return this;
 	}
+
+	enhanceRecipes(isRecipe: boolean) {
+		if (isRecipe) this.blocks = enhanceRecipes(this.blocks);
+		return this;
+	}
 }
+
+type Options = {
+	isRecipe: boolean;
+	promotedNewsletter: Newsletter | undefined;
+};
 
 // IMPORTANT: the ordering of the enhancer is IMPORTANT to keep in mind
 // example: enhanceInteractiveContentElements needs to be before enhanceNumberedLists
@@ -93,9 +102,11 @@ class BlockEnhancer {
 export const enhanceBlocks = (
 	blocks: Block[],
 	format: CAPIFormat,
-	promotedNewsletter?: Newsletter,
+	options?: Options,
 ): Block[] => {
-	return new BlockEnhancer(blocks, format, promotedNewsletter)
+	const { isRecipe = false, promotedNewsletter } = options ?? {};
+
+	return new BlockEnhancer(blocks, format, { isRecipe, promotedNewsletter })
 		.enhanceDividers()
 		.enhanceH3s()
 		.enhanceH2s()
@@ -106,5 +117,6 @@ export const enhanceBlocks = (
 		.enhanceNumberedLists()
 		.enhanceEmbeds()
 		.enhanceTweets()
+		.enhanceRecipes(isRecipe)
 		.enhanceNewsletterSignup().blocks;
 };

@@ -12,9 +12,9 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import ArticleBody from 'components/ArticleBody';
 import Byline from 'components/Byline';
 import Cutout from 'components/Cutout';
+import DesignTag from 'components/DesignTag';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
-import HeadlineTag from 'components/HeadlineTag';
 import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
@@ -67,7 +67,7 @@ const LetterLayout: FC<Props> = ({ item, children }) => (
 			<header>
 				<Series item={item} />
 
-				<HeadlineTag format={item} tagText="Letters" />
+				<DesignTag format={item} />
 
 				<Headline item={item} />
 
