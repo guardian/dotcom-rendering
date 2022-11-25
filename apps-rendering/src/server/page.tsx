@@ -23,6 +23,7 @@ import type { ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
 import { pageFonts } from 'styles';
+import { insertNewsletterIntoItem } from 'newsletter';
 
 // ----- Types ----- //
 
@@ -145,15 +146,34 @@ const buildHtml = (
 `;
 };
 
+const FORCE_A_SIGNUP_IN_EVERY_ARTICLE = false;
+
 function render(
 	imageSalt: string,
 	request: RenderingRequest,
 	getAssetLocation: (assetName: string) => string,
 	page: Option<string>,
 ): Page {
-	const item = fromCapi({ docParser, salt: imageSalt })(request, page);
+	const itemWithoutNewsletter = fromCapi({ docParser, salt: imageSalt })(request, page);
+
+	if (FORCE_A_SIGNUP_IN_EVERY_ARTICLE) {
+		itemWithoutNewsletter.promotedNewsletter = some({
+			identityName: 'patriarchy',
+			description:
+			'Reviewing the most important stories on feminism and sexism and those fighting for equality',
+			name: 'The Week in Patriarchy',
+			frequency: 'Weekly',
+			theme: 'opinion',
+			successDescription: 'signed up',
+		})
+	}
+
+	const item = insertNewsletterIntoItem(itemWithoutNewsletter)
+
 	const clientScript = map(getAssetLocation)(scriptName(item));
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
+
+
 	const body = renderBody(item, request);
 	const inlineStyles = requiresInlineStyles(request.content);
 	const head = renderHead(
