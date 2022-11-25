@@ -124,11 +124,6 @@ const webpackConfig = (config) => {
 		use: ['desvg-loader/react', 'svg-loader'],
 	});
 
-	config.resolve.modules = [
-		...((config && config.resolve && config.resolve.modules) || []),
-		path.resolve(__dirname, '../../common-rendering/src'),
-	];
-
 	config.resolve.alias = {
 		...config.resolve.alias,
 	};
