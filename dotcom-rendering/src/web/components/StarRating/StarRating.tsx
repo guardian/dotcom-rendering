@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { Star } from '../../../static/icons/Star';
+import type { RatingSizeType } from '../../../types/content';
 
 const starWrapper = css`
 	display: inline-block;

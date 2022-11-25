@@ -9,7 +9,8 @@ import {
 } from '@guardian/source-foundations';
 import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { extractNAV } from '../../model/extract-nav';
-import { editions } from '../../types/edition';
+import { editionList } from '../lib/edition';
+
 import { Footer } from './Footer';
 import { Section } from './Section';
 
@@ -28,7 +29,7 @@ const Wrapper = ({ children }: { children: JSX.Element }) => (
 
 export const Footers = () => (
 	<ul>
-		{editions.map((editionId) => (
+		{editionList.map(({ editionId }) => (
 			<li
 				css={css`
 					position: relative;

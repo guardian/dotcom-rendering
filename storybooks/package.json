@@ -1,0 +1,38 @@
+{
+  "name": "storybooks",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Global storybook that composes the repo's individual project storybooks",
+  "scripts": {
+    "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ../dotcom-rendering/src/static -o ../storybook-static",
+    "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook --static-dir ../dotcom-rendering/src/static -p 6006"
+  },
+  "dependencies": {
+    "@babel/core": "^7.16.12",
+    "@emotion/cache": "^11.4.0",
+    "@emotion/react": "^11.4.1",
+    "@emotion/server": "^11.4.0",
+    "@guardian/source-foundations": "^7.0.1",
+    "@guardian/source-react-components": "^9.0.0",
+    "@guardian/source-react-components-development-kitchen": "6.0.2",
+    "@storybook/addon-essentials": "^6.3.7",
+    "@storybook/addon-knobs": "^6.3.1",
+    "@storybook/addons": "^6.3.1",
+    "@storybook/api": "^6.3.1",
+    "@storybook/builder-webpack5": "^6.3.11",
+    "@storybook/components": "^6.3.1",
+    "@storybook/core-events": "^6.3.1",
+    "@storybook/manager-webpack5": "^6.3.7",
+    "@storybook/react": "^6.3.7",
+    "@storybook/testing-library": "^0.0.13",
+    "@storybook/theming": "^6.3.1",
+    "babel-loader": "^8.2.5",
+    "desvg-loader": "^0.1.0",
+    "mockdate": "^3.0.5",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "svg-loader": "^0.0.2",
+    "ts-loader": "^9.3.0",
+    "webpack": "^5.51.1"
+  }
+}

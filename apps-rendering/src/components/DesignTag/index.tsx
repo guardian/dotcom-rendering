@@ -8,15 +8,15 @@ import { from, headline, remSpace } from '@guardian/source-foundations';
 import type { FC } from 'react';
 import { articleWidthStyles, darkModeCss } from '../../styles';
 
-const headlineTagWrapper = css`
+const designTagWrapper = css`
 	${articleWidthStyles};
 	margin-bottom: ${remSpace[1]};
 `;
 
-const headlineTagStyles = (format: ArticleFormat): SerializedStyles => css`
-	background-color: ${background.headlineTag(format)};
+const designTagStyles = (format: ArticleFormat): SerializedStyles => css`
+	background-color: ${background.designTag(format)};
 	${headline.xxxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
-	color: ${text.headlineTag(format)};
+	color: ${text.designTag(format)};
 	display: inline-block;
 	box-decoration-break: clone;
 	padding: 0 0.375rem 0.125rem;
@@ -24,30 +24,48 @@ const headlineTagStyles = (format: ArticleFormat): SerializedStyles => css`
 		${headline.xxsmall({ fontWeight: 'bold', lineHeight: 'loose' })}
 	}
 	${darkModeCss`
-		background-color: ${background.headlineTagDark(format)};
-		color: ${text.headlineTagDark(format)};
+		background-color: ${background.designTagDark(format)};
+		color: ${text.designTagDark(format)};
 	`}
 `;
 
 type Props = {
-	tagText: string;
 	format: ArticleFormat;
 };
 
-const HeadlineTag: FC<Props> = ({ tagText, format }) => {
+const DesignTag: FC<Props> = ({ format }) => {
 	switch (format.design) {
 		case ArticleDesign.Analysis:
-		case ArticleDesign.Explainer:
 			return (
-				<div css={headlineTagWrapper}>
-					<span css={headlineTagStyles(format)}>{tagText}</span>
+				<div css={designTagWrapper}>
+					<span css={designTagStyles(format)}>Analysis</span>
 				</div>
 			);
+		case ArticleDesign.Explainer:
+			return (
+				<div css={designTagWrapper}>
+					<span css={designTagStyles(format)}>Explainer</span>
+				</div>
+			);
+		case ArticleDesign.Letter:
+			return (
+				<div css={designTagWrapper}>
+					<span css={designTagStyles(format)}>Letters</span>
+				</div>
+			);
+		case ArticleDesign.Obituary:
+			return (
+				<div css={designTagWrapper}>
+					<span css={designTagStyles(format)}>Obituary</span>
+				</div>
+			);
+		case ArticleDesign.Interview:
+			return <span css={designTagStyles(format)}>Interview</span>;
 		default:
-			return <span css={headlineTagStyles(format)}>{tagText}</span>;
+			return null;
 	}
 };
 
 // ----- Exports ----- //
 
-export default HeadlineTag;
+export default DesignTag;

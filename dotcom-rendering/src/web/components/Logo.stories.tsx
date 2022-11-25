@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { brand, neutral, space, textSans } from '@guardian/source-foundations';
-import { editions } from '../../types/edition';
+import { editionList } from '../lib/edition';
 import { Logo } from './Logo';
 
 export const Logos = () => (
@@ -11,7 +11,7 @@ export const Logos = () => (
 			list-style-type: none;
 		`}
 	>
-		{editions.map((editionId) => (
+		{editionList.map(({ editionId }) => (
 			<li
 				css={css`
 					position: relative;

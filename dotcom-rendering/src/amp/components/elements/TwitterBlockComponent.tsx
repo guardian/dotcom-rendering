@@ -3,6 +3,7 @@ import { body, neutral } from '@guardian/source-foundations';
 import { JSDOM } from 'jsdom';
 import React from 'react';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
+import type { TweetBlockElement } from '../../../types/content';
 
 const ListStyle = (iconColour: string) => css`
 	li {
