@@ -194,7 +194,7 @@ const notificationBadgeStyles = (diameter: number) => css`
 	${textSans.xsmall()};
 	line-height: 1;
 
-	min-width: ${diameter}px;
+	width: ${diameter}px;
 	height: ${diameter}px;
 	border-radius: ${diameter}px;
 `;
