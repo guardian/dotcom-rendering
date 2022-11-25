@@ -1,5 +1,6 @@
 import React from 'react';
 import { constructQuery } from '../../../lib/querystring';
+import { YoutubeBlockElement } from '../../../types/content';
 import { Caption } from '../Caption';
 
 type EmbedConfig = {

@@ -379,7 +379,7 @@ const keyEventsDark = (_format: ArticleFormat): Colour => neutral[10];
 
 const keyEventsWideDark = articleContentDark;
 
-const headlineTag = (format: ArticleFormat): Colour => {
+const designTag = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
@@ -400,7 +400,7 @@ const headlineTag = (format: ArticleFormat): Colour => {
 	}
 };
 
-const headlineTagDark = (format: ArticleFormat): Colour => {
+const designTagDark = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[500];
@@ -659,7 +659,8 @@ const articleContent = (format: ArticleFormat): string => {
 	}
 };
 
-const newsletterSignUpFormDark = (_format: ArticleFormat): Colour => neutral[10];
+const newsletterSignUpFormDark = (_format: ArticleFormat): Colour =>
+	neutral[10];
 
 const editionsCameraIcon = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
@@ -697,8 +698,8 @@ const background = {
 	headlineByline,
 	headlineBylineDark,
 	headlineDark,
-	headlineTag,
-	headlineTagDark,
+	designTag,
+	designTagDark,
 	keyEvents,
 	keyEventsWide,
 	keyEventsDark,

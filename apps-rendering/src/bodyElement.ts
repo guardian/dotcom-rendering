@@ -128,6 +128,7 @@ interface NewsletterSignUp extends Omit<Newsletter, 'theme'> {
 
 type Callout = {
 	kind: ElementKind.Callout;
+	isNonCollapsible: boolean;
 	heading: string;
 	formId: number;
 	formFields: FormField[];
@@ -340,6 +341,39 @@ const parse =
 				);
 			}
 
+			case ElementType.CALLOUT: {
+				const {
+					campaignId: campaignId,
+					isNonCollapsible: isNonCollapsible,
+				} = element.calloutTypeData ?? {};
+				if (
+					campaignId === undefined ||
+					campaignId === '' ||
+					isNonCollapsible === undefined
+				) {
+					return Result.err(
+						'No valid campaignId or isNonCollapsible field on calloutTypeData',
+					);
+				}
+
+				return getCallout(campaignId, campaigns)
+					.map(({ callout, formFields, description, formId }) =>
+						Result.ok<string, Callout>({
+							kind: ElementKind.Callout,
+							isNonCollapsible,
+							heading: callout,
+							formFields,
+							formId,
+							description: context.docParser(description ?? ''),
+						}),
+					)
+					.withDefault(
+						Result.err<string, Callout>(
+							'This piece contains a callout but no matching campaign',
+						),
+					);
+			}
+
 			case ElementType.EMBED: {
 				const { html: embedHtml } = element.embedTypeData ?? {};
 
@@ -347,29 +381,15 @@ const parse =
 					return Result.err('No html field on embedTypeData');
 				}
 
-				const id = context
+				const isCallout = context
 					.docParser(embedHtml)
 					.querySelector('[data-callout-tagname]')
 					?.getAttribute('data-callout-tagname');
 
-				if (id) {
-					return getCallout(id, campaigns)
-						.map(({ callout, formFields, description, formId }) =>
-							Result.ok<string, Callout>({
-								kind: ElementKind.Callout,
-								heading: callout,
-								formFields,
-								formId,
-								description: context.docParser(
-									description ?? '',
-								),
-							}),
-						)
-						.withDefault(
-							Result.err<string, Callout>(
-								'This piece contains a callout but no matching campaign',
-							),
-						);
+				if (isCallout) {
+					return Result.err(
+						'Embed callouts are deprecated in Apps Rendering. Please use element type Callout',
+					);
 				}
 
 				return compose(

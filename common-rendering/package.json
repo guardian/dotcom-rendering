@@ -11,14 +11,18 @@
   "peerDependencies": {
     "@emotion/react": "^11.4.1",
     "@guardian/libs": "^9.0.1",
+    "babel-loader": "^8.2.5",
     "react": "^17.0.2"
   },
   "devDependencies": {
-    "@emotion/react": "11.4.1",
+    "@emotion/cache": "^11.4.0",
+    "@emotion/react": "^11.4.1",
+    "@emotion/server": "^11.4.0",
     "@emotion/jest": "^11.3.0",
     "@guardian/libs": "9.0.1",
     "@types/jest": "^27.4.0",
     "@types/react-test-renderer": "^17.0.1",
+    "babel-loader": "8.2.5",
     "jest": "^26.6.3",
     "react": "17.0.2",
     "react-test-renderer": "^17.0.1",
