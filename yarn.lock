@@ -3026,19 +3026,6 @@
   resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-4.25.0.tgz#cbc1ab2aaff456a3dc20836b1520a4a29b3a75ec"
   integrity sha512-EDFSiCtTAlXdu/WK8dCp+BO5TLIYeyZ4QGkYv2lNXJ7y2U3zFkyTipPHq2Ld9iOSyy2+TtcF3OPnXS4j1pJ7vA==
 
-"@guardian/common-rendering@file:common-rendering":
-  version "1.0.0"
-  dependencies:
-    "@babel/core" "^7.0.0"
-    "@emotion/react" "^11.4.1"
-    "@guardian/libs" "^9.0.1"
-    "@guardian/source-foundations" "^7.0.1"
-    "@guardian/source-react-components" "^9.0.0"
-    "@guardian/types" "^9.0.1"
-    babel-loader "^8.2.5"
-    react "^17.0.2"
-    react-dom "^17.0.2"
-
 "@guardian/consent-management-platform@10.11.1":
   version "10.11.1"
   resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-10.11.1.tgz#fa01a9262963ac07df9476e591d14601efbc4588"
