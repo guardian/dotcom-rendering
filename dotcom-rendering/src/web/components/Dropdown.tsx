@@ -187,7 +187,6 @@ const notificationColor = palette.error[400];
 const notificationBadgeStyles = (diameter: number) => css`
 	background-color: ${notificationColor};
 	color: ${palette.neutral[100]};
-	margin-top: 12px;
 	text-align: center;
 	display: flex;
 	justify-content: center;
@@ -197,7 +196,7 @@ const notificationBadgeStyles = (diameter: number) => css`
 
 	min-width: ${diameter}px;
 	height: ${diameter}px;
-	border-radius: ${diameter / 2}px;
+	border-radius: ${diameter}px;
 `;
 
 const dropdownButtonNotificationBadgeStyles = css`
@@ -212,15 +211,9 @@ const notificationTextStyles = css`
 	${textSans.xxsmall()};
 `;
 
-const NotificationBadge = ({
-	cssOverrides,
-	diameter,
-}: {
-	cssOverrides?: SerializedStyles;
-	diameter: number;
-}) => {
+const NotificationBadge = ({ diameter }: { diameter: number }) => {
 	return (
-		<div css={[notificationBadgeStyles(diameter), cssOverrides]}>
+		<div css={notificationBadgeStyles(diameter)}>
 			<span>!</span>
 		</div>
 	);
@@ -343,12 +336,9 @@ export const Dropdown = ({
 					>
 						{label}
 						{notificationCount > 0 && (
-							<NotificationBadge
-								cssOverrides={
-									dropdownButtonNotificationBadgeStyles
-								}
-								diameter={18}
-							/>
+							<div css={dropdownButtonNotificationBadgeStyles}>
+								<NotificationBadge diameter={18} />
+							</div>
 						)}
 					</button>
 					<div css={isExpanded ? displayBlock : displayNone}>
@@ -385,7 +375,15 @@ export const Dropdown = ({
 										</a>
 
 										{!!l.notifications?.length && (
-											<NotificationBadge diameter={22} />
+											<div
+												css={css`
+													margin-top: 12px;
+												`}
+											>
+												<NotificationBadge
+													diameter={22}
+												/>
+											</div>
 										)}
 									</li>
 								))}
