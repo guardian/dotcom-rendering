@@ -350,7 +350,7 @@ const Card75_ColumnOfCards25 = ({
 	showAge?: boolean;
 }) => {
 	const card75 = cards.slice(0, 1);
-	const remaining = cards.slice(1);
+	const remaining = cards.slice(1, 4);
 
 	return (
 		<UL direction="row" padBottom={true}>
