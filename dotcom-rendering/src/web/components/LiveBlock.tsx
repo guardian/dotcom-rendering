@@ -38,6 +38,7 @@ export const LiveBlock = ({
 	pinnedPostId,
 }: Props) => {
 	if (block.elements.length === 0) return null;
+
 	// Decide if the block has been updated or not
 	const showLastUpdated: boolean =
 		!!block.blockLastUpdatedDisplay &&
