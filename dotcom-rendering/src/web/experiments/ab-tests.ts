@@ -7,6 +7,7 @@ import {
 	newsletterMerchUnitLighthouseVariants,
 } from './tests/newsletter-merch-unit-test';
 import { removePrebidA9Canada } from './tests/remove-prebid-a9-canada';
+import { serverSideLiveblogInlineAds } from './tests/server-side-liveblog-inline-ads';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 
@@ -21,4 +22,5 @@ export const tests: ABTest[] = [
 	consentlessAds,
 	integrateIma,
 	removePrebidA9Canada,
+	serverSideLiveblogInlineAds,
 ];

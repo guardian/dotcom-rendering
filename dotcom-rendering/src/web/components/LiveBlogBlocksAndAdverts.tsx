@@ -1,5 +1,9 @@
-import { calculateBlockSize, shouldDisplayAd } from '@guardian/commercial-core';
+import {
+	calculateLiveblogBlockSize as calculateBlockSize,
+	shouldDisplayAd,
+} from '@guardian/commercial-core';
 import type { Switches } from '../../types/config';
+import { useAB } from '../lib/useAB';
 import { AdSlot } from './AdSlot';
 import { LiveBlock } from './LiveBlock';
 
@@ -32,6 +36,41 @@ export const LiveBlogBlocksAndAdverts = ({
 	isSensitive,
 	isLiveUpdate,
 }: Props) => {
+	//
+	// If the user is not in the liveblog server-side ads AB test, provide the
+	// same experience as before and DO NOT insert ads into the page.
+	//
+	const abTests = useAB();
+	const userInAbTestVariant =
+		abTests?.api.isUserInVariant(
+			'ServerSideLiveblogInlineAds',
+			'variant',
+		) ?? false;
+	if (!userInAbTestVariant) {
+		return (
+			<>
+				{blocks.map((block) => (
+					<LiveBlock
+						key={block.id}
+						format={format}
+						block={block}
+						pageId={pageId}
+						webTitle={webTitle}
+						adTargeting={adTargeting}
+						host={host}
+						ajaxUrl={ajaxUrl}
+						isLiveUpdate={isLiveUpdate}
+						switches={switches}
+						isAdFreeUser={isAdFreeUser}
+						isSensitive={isSensitive}
+						isPinnedPost={false}
+						pinnedPostId={pinnedPost?.id}
+					/>
+				))}
+			</>
+		);
+	}
+
 	let numPixelsOfContentWithoutAdvert = 0;
 	let numAdvertsInserted = 0;
 
