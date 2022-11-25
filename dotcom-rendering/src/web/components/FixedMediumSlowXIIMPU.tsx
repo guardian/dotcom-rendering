@@ -31,12 +31,12 @@ const Card33_Card33_Card33 = ({
 	showAge?: boolean;
 	padBottom?: boolean;
 }) => {
-	const primary = trails.slice(0, 1);
-	const secondary = trails.slice(1, 3);
+	const card33 = trails.slice(0, 1);
+	const cards33 = trails.slice(1, 3);
 
 	return (
 		<UL direction="row" padBottom={padBottom}>
-			{primary.map((trail) => (
+			{card33.map((trail) => (
 				<LI percentage="33.333%" padSides={true} key={trail.url}>
 					<FrontCard
 						trail={trail}
@@ -47,7 +47,7 @@ const Card33_Card33_Card33 = ({
 					/>
 				</LI>
 			))}
-			{secondary.map((trail) => (
+			{cards33.map((trail) => (
 				<LI
 					percentage="33.333%"
 					padSides={true}

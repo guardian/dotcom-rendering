@@ -349,12 +349,12 @@ const Card75_ColumnOfCards25 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
-	const primary = cards.slice(0, 1);
+	const card75 = cards.slice(0, 1);
 	const remaining = cards.slice(1);
 
 	return (
 		<UL direction="row" padBottom={true}>
-			{primary.map((card) => (
+			{card75.map((card) => (
 				<LI padSides={true} percentage="75%" key={card.url}>
 					<FrontCard
 						trail={card}
