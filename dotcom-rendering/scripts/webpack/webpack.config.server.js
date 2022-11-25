@@ -77,7 +77,7 @@ module.exports = ({ sessionId }) => ({
 					loader: 'swc-loader',
 					options: {
 						...swcConfig,
-						minify: true,
+						minify: DEV ? false : true,
 						env: {
 							// debug: true,
 							targets: {
