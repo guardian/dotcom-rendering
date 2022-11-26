@@ -41,6 +41,7 @@ module.exports = {
 	webpackFinal: async (config) => {
 		// Get project specific webpack options
 		config = webpackConfig(config);
+		config = arWebpack(config);
 
 		// Global options for webpack
 		config.resolve.extensions.push('.ts', '.tsx');
@@ -84,7 +85,10 @@ const webpackConfig = (config) => {
 	// https://storybook.js.org/docs/configurations/typescript-config/
 	rules.push({
 		test: /\.[jt]sx?|mjs$/,
-		include: path.resolve(__dirname, '../'),
+		include: [
+			path.resolve(__dirname, '../'),
+			path.resolve(__dirname, '../../common-rendering'),
+		],
 		exclude: require('../scripts/webpack/webpack.config.browser')
 			.babelExclude,
 		use: [
