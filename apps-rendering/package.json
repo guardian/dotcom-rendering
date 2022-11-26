@@ -26,7 +26,9 @@
     "build:server:prod": "webpack --config webpack.config.ts --config-name server --env production",
     "build:client:prod": "webpack --config webpack.config.ts --config-name clientProduction",
     "synth": "cdk synth --path-metadata false --version-reporting false",
-    "diff": "cdk diff --path-metadata false --version-reporting false"
+    "diff": "cdk diff --path-metadata false --version-reporting false",
+    "storybook": "start-storybook -p 4003",
+    "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook"
   },
   "author": "",
   "license": "ISC",
