@@ -7,6 +7,8 @@ Object {
       "GuAllowPolicy",
       "GuVpcParameter",
       "GuSubnetListParameter",
+      "GuSubnetListParameter",
+      "GuEc2App",
       "GuCertificate",
       "GuInstanceRole",
       "GuSSMRunCommandPolicy",
@@ -67,6 +69,11 @@ Object {
       "Description": "A list of private subnets",
       "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
     },
+    "mobileappsrenderingPublicSubnets": Object {
+      "Default": "/account/vpc/primary/subnets/public",
+      "Description": "A list of public subnets",
+      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
+    },
   },
   "Resources": Object {
     "AutoScalingGroupMobileappsrenderingASG42891F00": Object {
@@ -83,11 +90,6 @@ Object {
             "Key": "App",
             "PropagateAtLaunch": true,
             "Value": "mobile-apps-rendering",
-          },
-          Object {
-            "Key": "gu:cdk:pattern-name",
-            "PropagateAtLaunch": true,
-            "Value": "GuEc2App",
           },
           Object {
             "Key": "gu:cdk:version",
@@ -254,6 +256,10 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "MobileAppsRendering/CertificateMobileappsrendering",
           },
           Object {
             "Key": "Stack",
@@ -497,17 +503,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
               "Principal": Object {
-                "Service": Object {
-                  "Fn::Join": Array [
-                    "",
-                    Array [
-                      "ec2.",
-                      Object {
-                        "Ref": "AWS::URLSuffix",
-                      },
-                    ],
-                  ],
-                },
+                "Service": "ec2.amazonaws.com",
               },
             },
           ],
@@ -927,6 +923,8 @@ Object {
       "GuAllowPolicy",
       "GuVpcParameter",
       "GuSubnetListParameter",
+      "GuSubnetListParameter",
+      "GuEc2App",
       "GuCertificate",
       "GuInstanceRole",
       "GuSSMRunCommandPolicy",
@@ -987,6 +985,11 @@ Object {
       "Description": "A list of private subnets",
       "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
     },
+    "mobileappsrenderingPublicSubnets": Object {
+      "Default": "/account/vpc/primary/subnets/public",
+      "Description": "A list of public subnets",
+      "Type": "AWS::SSM::Parameter::Value<List<AWS::EC2::Subnet::Id>>",
+    },
   },
   "Resources": Object {
     "AutoScalingGroupMobileappsrenderingASG42891F00": Object {
@@ -1003,11 +1006,6 @@ Object {
             "Key": "App",
             "PropagateAtLaunch": true,
             "Value": "mobile-apps-rendering",
-          },
-          Object {
-            "Key": "gu:cdk:pattern-name",
-            "PropagateAtLaunch": true,
-            "Value": "GuEc2App",
           },
           Object {
             "Key": "gu:cdk:version",
@@ -1174,6 +1172,10 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
           Object {
             "Key": "gu:repo",
             "Value": "guardian/dotcom-rendering",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "MobileAppsRenderingPreview/CertificateMobileappsrendering",
           },
           Object {
             "Key": "Stack",
@@ -1417,17 +1419,7 @@ export ASSETS_MANIFEST=\\"/opt/mobile-apps-rendering/manifest.json\\"
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
               "Principal": Object {
-                "Service": Object {
-                  "Fn::Join": Array [
-                    "",
-                    Array [
-                      "ec2.",
-                      Object {
-                        "Ref": "AWS::URLSuffix",
-                      },
-                    ],
-                  ],
-                },
+                "Service": "ec2.amazonaws.com",
               },
             },
           ],
