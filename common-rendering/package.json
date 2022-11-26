@@ -20,6 +20,10 @@
   },
   "devDependencies": {
     "@emotion/jest": "^11.3.0",
+		"@guardian/eslint-config": "^1.0.0",
+    "@guardian/eslint-config-typescript": "^1.0.1",
+    "@guardian/eslint-plugin-source-react-components": "^9.0.0",
+    "@guardian/prettier": "^1.0.0",
     "@storybook/addon-essentials": "^6.4.0",
     "@storybook/addon-knobs": "^6.4.0",
     "@storybook/addons": "^6.4.0",
