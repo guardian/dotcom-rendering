@@ -41,7 +41,6 @@ module.exports = {
 	webpackFinal: async (config) => {
 		// Get project specific webpack options
 		config = webpackConfig(config);
-		config = arWebpack(config);
 
 		// Global options for webpack
 		config.resolve.extensions.push('.ts', '.tsx');
