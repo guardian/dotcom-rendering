@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
+import { SvgShareCallout } from '@guardian/source-react-components';
 import { decidePalette } from '../../lib/decidePalette';
 
 const shareCalloutStyles = css`
@@ -18,13 +19,8 @@ const shareCalloutTextStyles = (format: ArticleFormat) =>
 	`;
 
 const placeholderCircle = css`
-	height: 33px;
-	width: 35px;
-	border-radius: 50%;
-	background-color: yellow;
-	border: black solid 2px;
+	width: 45px;
 	display: inline-block;
-	margin: 10px 10px 10px 0px;
 `;
 
 interface Props {
@@ -35,7 +31,9 @@ export const CalloutShareComponent = ({ format }: Props) => {
 	return (
 		<>
 			<div css={shareCalloutStyles}>
-				<span css={placeholderCircle}></span>{' '}
+				<div css={placeholderCircle}>
+					<SvgShareCallout />
+				</div>
 				<div css={shareCalloutTextStyles(format)}>
 					Know others who are affected?{' '}
 					<a href="https://www.theguardian.com/tone/callout">

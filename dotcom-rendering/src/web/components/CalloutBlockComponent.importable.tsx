@@ -5,15 +5,16 @@ import {
 	space,
 	textSans,
 } from '@guardian/source-foundations';
+import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import { Deadline } from './CalloutNew/CalloutDeadline';
 import { CalloutDescription } from './CalloutNew/CalloutDescription';
 import { CalloutShareComponent } from './CalloutNew/CalloutShareComponent';
 import { Form } from './CalloutNew/Form';
-import { ExpandingWrapper } from './ExpandingWrapper';
+// import { ExpandingWrapper } from './ExpandingWrapper';
 
-const wrapperStyles = css`
+const ruleStyles = css`
 	border-image: repeating-linear-gradient(
 			to bottom,
 			${neutral[86]},
@@ -23,6 +24,9 @@ const wrapperStyles = css`
 		)
 		13;
 	border-top: 13px solid ${neutral[86]};
+`;
+
+const wrapperStyles = css`
 	margin-bottom: ${space[6]}px;
 	padding-left: ${space[2]}px;
 	padding-right: ${space[2]}px;
@@ -108,6 +112,7 @@ export const CalloutBlockComponent = ({
 	const [error, setError] = useState('');
 	const [submissionSuccess, setSubmissionSuccess] = useState(false);
 	const { title, description, formFields, activeUntil } = callout;
+	const [isExpanded, setIsExpanded] = useState(false);
 
 	const onSubmit = async (formData: FormDataType) => {
 		// Reset error for new submission attempt
@@ -162,7 +167,7 @@ export const CalloutBlockComponent = ({
 	if (submissionSuccess) {
 		return (
 			<details
-				css={[calloutDetailsStyles, wrapperStyles]}
+				css={[calloutDetailsStyles, wrapperStyles, ruleStyles]}
 				aria-hidden={true}
 				open={true}
 			>
@@ -192,7 +197,7 @@ export const CalloutBlockComponent = ({
 		<aside>
 			{isNonCollapsible ? (
 				<details
-					css={[calloutDetailsStyles, wrapperStyles]}
+					css={[calloutDetailsStyles, wrapperStyles, ruleStyles]}
 					aria-hidden={true}
 					open={true}
 				>
@@ -215,8 +220,9 @@ export const CalloutBlockComponent = ({
 				</details>
 			) : (
 				<ExpandingWrapper
-					format={format}
+					name={`${callout.formId} form`}
 					renderExtra={() => <Deadline until={activeUntil} />}
+					expandCallback={setIsExpanded}
 				>
 					<details
 						css={[calloutDetailsStyles, wrapperStyles]}
