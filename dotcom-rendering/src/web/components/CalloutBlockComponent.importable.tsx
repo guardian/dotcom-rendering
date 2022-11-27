@@ -5,13 +5,13 @@ import {
 	space,
 	textSans,
 } from '@guardian/source-foundations';
+import { useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import { Deadline } from './CalloutNew/CalloutDeadline';
 import { CalloutDescription } from './CalloutNew/CalloutDescription';
 import { CalloutShareComponent } from './CalloutNew/CalloutShareComponent';
 import { Form } from './CalloutNew/Form';
 import { ExpandingWrapper } from './ExpandingWrapper';
-import { useState } from 'react';
 
 const wrapperStyles = css`
 	border-image: repeating-linear-gradient(

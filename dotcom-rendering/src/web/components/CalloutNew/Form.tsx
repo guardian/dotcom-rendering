@@ -75,13 +75,6 @@ const FormField = ({
 		case 'file':
 			return (
 				<>
-					{/* <FileInput
-						name={formField.id}
-						label={formField.label}
-						supporting={formField.description}
-						format={format}
-						mandatory={formField.required}
-					/> */}
 					<FileUpload
 						formField={formField}
 						formData={formData}
