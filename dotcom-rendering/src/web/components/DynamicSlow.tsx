@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import type { TrailType } from 'src/types/trails';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
+import { Card25Media25Tall, Card50Media50 } from '../lib/cardWrappers';
 import {
 	Card100PictureRight,
 	Card100PictureTop,
@@ -35,14 +36,10 @@ const ColumnOfCards50_Card50 = ({
 	return (
 		<UL direction="row-reverse">
 			<LI percentage="50%" padSides={true} showDivider={true}>
-				<FrontCard
+				<Card50Media50
 					trail={big}
-					containerPalette={containerPalette}
-					headlineSize="large"
-					headlineSizeOnMobile="large"
-					imagePositionOnMobile="top"
 					showAge={showAge}
-					supportingContent={big.supportingContent}
+					containerPalette={containerPalette}
 				/>
 			</LI>
 			<LI percentage="50%">
@@ -85,22 +82,13 @@ const ColumnOfCards50_Card25_Card25 = ({
 
 	return (
 		<UL direction="row-reverse">
-			{bigs.map((big) => {
+			{bigs.reverse().map((big) => {
 				return (
 					<LI percentage="25%" padSides={true} showDivider={true}>
-						<FrontCard
+						<Card25Media25Tall
 							trail={big}
-							containerPalette={containerPalette}
-							imagePositionOnMobile="left"
 							showAge={showAge}
-							trailText={
-								// Only show trail text if there is no supportContent
-								big.supportingContent === undefined ||
-								big.supportingContent.length === 0
-									? big.trailText
-									: undefined
-							}
-							supportingContent={big.supportingContent}
+							containerPalette={containerPalette}
 						/>
 					</LI>
 				);

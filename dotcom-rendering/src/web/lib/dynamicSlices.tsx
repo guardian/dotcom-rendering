@@ -8,6 +8,14 @@ import type { TrailType } from '../../types/trails';
 import { LI } from '../components/Card/components/LI';
 import { UL } from '../components/Card/components/UL';
 import { FrontCard } from '../components/FrontCard';
+import {
+	Card100Media100,
+	Card100Media75,
+	Card25Media25,
+	Card50Media50Tall,
+	Card75Media50Left,
+	Card75Media50Right,
+} from './cardWrappers';
 
 /**
  * A place for shared slices which are used across multiple dynamic/ containers
@@ -69,25 +77,17 @@ export const Card50_Card50 = ({
 }) => (
 	<UL direction="row" padBottom={true}>
 		<LI percentage="50%" padSides={true}>
-			<FrontCard
+			<Card50Media50Tall
 				trail={cards[0]}
 				containerPalette={containerPalette}
 				showAge={showAge}
-				trailText={cards[0].trailText}
-				supportingContent={cards[0].supportingContent}
-				imagePositionOnMobile="top"
-				headlineSize="large"
 			/>
 		</LI>
 		<LI percentage="50%" padSides={true} showDivider={true}>
-			<FrontCard
+			<Card50Media50Tall
 				trail={cards[1]}
 				containerPalette={containerPalette}
 				showAge={showAge}
-				trailText={cards[1].trailText}
-				supportingContent={cards[1].supportingContent}
-				imagePositionOnMobile="top"
-				headlineSize="large"
 			/>
 		</LI>
 	</UL>
@@ -109,24 +109,17 @@ export const Card75_Card25 = ({
 }) => (
 	<UL direction="row" padBottom={true}>
 		<LI percentage="75%" padSides={true}>
-			<FrontCard
+			<Card75Media50Right
 				trail={cards[0]}
-				containerPalette={containerPalette}
 				showAge={showAge}
-				trailText={cards[0].trailText}
-				supportingContent={cards[0].supportingContent}
-				imagePosition="right"
-				imageSize="large"
-				imagePositionOnMobile="top"
-				headlineSize="large"
+				containerPalette={containerPalette}
 			/>
 		</LI>
 		<LI percentage="25%" padSides={true} showDivider={true}>
-			<FrontCard
+			<Card25Media25
 				trail={cards[1]}
-				containerPalette={containerPalette}
-				supportingContent={cards[1].supportingContent}
 				showAge={showAge}
+				containerPalette={containerPalette}
 			/>
 		</LI>
 	</UL>
@@ -148,24 +141,17 @@ export const Card25_Card75 = ({
 }) => (
 	<UL direction="row" padBottom={true}>
 		<LI percentage="25%" padSides={true}>
-			<FrontCard
+			<Card25Media25
 				trail={cards[0]}
-				supportingContent={cards[0].supportingContent}
-				containerPalette={containerPalette}
 				showAge={showAge}
+				containerPalette={containerPalette}
 			/>
 		</LI>
 		<LI percentage="75%" padSides={true} showDivider={true}>
-			<FrontCard
+			<Card75Media50Left
 				trail={cards[1]}
-				containerPalette={containerPalette}
 				showAge={showAge}
-				trailText={cards[1].trailText}
-				supportingContent={cards[1].supportingContent}
-				headlineSize="large"
-				imagePosition="left"
-				imageSize="large"
-				imagePositionOnMobile="top"
+				containerPalette={containerPalette}
 			/>
 		</LI>
 	</UL>
@@ -229,7 +215,7 @@ export const Card50_Card25_Card25 = ({
 }) => (
 	<UL direction="row" padBottom={true}>
 		<LI percentage="50%" padSides={true}>
-			<FrontCard
+			<FrontCard // Card50Media50
 				trail={cards[0]}
 				containerPalette={containerPalette}
 				containerType={containerType}
@@ -241,7 +227,7 @@ export const Card50_Card25_Card25 = ({
 			/>
 		</LI>
 		<LI percentage="25%" padSides={true} showDivider={true}>
-			<FrontCard
+			<FrontCard // Card25Media25
 				trail={cards[1]}
 				containerPalette={containerPalette}
 				containerType={containerType}
@@ -258,7 +244,7 @@ export const Card50_Card25_Card25 = ({
 			/>
 		</LI>
 		<LI percentage="25%" padSides={true} showDivider={true}>
-			<FrontCard
+			<FrontCard // Card25Media25
 				trail={cards[2]}
 				containerPalette={containerPalette}
 				containerType={containerType}
@@ -284,6 +270,7 @@ export const Card50_Card25_Card25 = ({
  * |_________________|
  */
 export const Card100PictureTop = ({
+	// Card100Media100
 	cards,
 	showAge,
 	containerPalette,
@@ -296,16 +283,10 @@ export const Card100PictureTop = ({
 	return (
 		<UL padBottom={true}>
 			<LI percentage="100%" padSides={true}>
-				<FrontCard
+				<Card100Media100
 					trail={cards[0]}
-					containerPalette={containerPalette}
 					showAge={showAge}
-					headlineSize="huge"
-					headlineSizeOnMobile="large"
-					imageUrl={cards[0].image}
-					imagePosition={'top'}
-					imagePositionOnMobile={'top'}
-					supportingContent={cards[0].supportingContent}
+					containerPalette={containerPalette}
 				/>
 			</LI>
 		</UL>
@@ -319,6 +300,7 @@ export const Card100PictureTop = ({
  * |_______############################|
  */
 export const Card100PictureRight = ({
+	// Card100Media75
 	cards,
 	showAge,
 	containerPalette,
@@ -331,24 +313,10 @@ export const Card100PictureRight = ({
 	return (
 		<UL padBottom={true}>
 			<LI percentage="100%" padSides={true}>
-				<FrontCard
+				<Card100Media75
 					trail={cards[0]}
-					containerPalette={containerPalette}
 					showAge={showAge}
-					headlineSize="huge"
-					headlineSizeOnMobile="large"
-					imageUrl={cards[0].image}
-					imageSize={'jumbo'}
-					imagePosition={'right'}
-					imagePositionOnMobile={'top'}
-					trailText={
-						// Only show trail text if there is no supportContent
-						cards[0].supportingContent === undefined ||
-						cards[0].supportingContent.length === 0
-							? cards[0].trailText
-							: undefined
-					}
-					supportingContent={cards[0].supportingContent}
+					containerPalette={containerPalette}
 				/>
 			</LI>
 		</UL>

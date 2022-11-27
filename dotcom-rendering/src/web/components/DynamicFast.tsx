@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import { Card25Media25, Card50Media50Tall } from '../lib/cardWrappers';
 import {
 	Card100PictureRight,
 	Card100PictureTop,
@@ -53,16 +54,10 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 	return (
 		<UL direction="row">
 			<LI percentage="50%" padSides={true}>
-				<FrontCard
+				<Card50Media50Tall
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					supportingContent={big.supportingContent}
-					headlineSize="large"
-					trailText={big.trailText}
-					imageUrl={big.image}
-					imagePosition="top"
-					imagePositionOnMobile="top"
 				/>
 			</LI>
 			<LI percentage="25%" showDivider={true}>
@@ -76,17 +71,10 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 							>
 								{/* The first card shows an image */}
 								{cardIndex === 0 ? (
-									<FrontCard
+									<Card25Media25
 										trail={card}
 										containerPalette={containerPalette}
 										showAge={showAge}
-										supportingContent={
-											card.supportingContent
-										}
-										headlineSize="medium"
-										imageUrl={card.image}
-										imagePosition="top"
-										imagePositionOnMobile="left"
 									/>
 								) : (
 									<FrontCard
@@ -143,16 +131,10 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	return (
 		<UL direction="row" wrapCards={true}>
 			<LI percentage="50%" padSides={true} showDivider={false}>
-				<FrontCard
+				<Card50Media50Tall
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					supportingContent={big.supportingContent}
-					headlineSize="large"
-					trailText={big.trailText}
-					imageUrl={big.image}
-					imagePosition="top"
-					imagePositionOnMobile="top"
 				/>
 			</LI>
 			<LI percentage="50%">
