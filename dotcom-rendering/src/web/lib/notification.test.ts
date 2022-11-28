@@ -34,7 +34,12 @@ describe('addNotificationsToDropdownLinks', () => {
 				url: `https://example.com/account_overview`,
 				title: 'Account overview',
 				dataLinkName: 'nav2 : topbar : account overview',
-				notifications: ['Some notification message'],
+				notifications: [
+					{
+						message: 'Some notification message',
+						target: 'account_overview',
+					},
+				],
 			},
 			{
 				id: 'edit_profile',
@@ -77,8 +82,14 @@ describe('addNotificationsToDropdownLinks', () => {
 				title: 'Account overview',
 				dataLinkName: 'nav2 : topbar : account overview',
 				notifications: [
-					'Some notification message',
-					'Another notification message',
+					{
+						message: 'Some notification message',
+						target: 'account_overview',
+					},
+					{
+						message: 'Another notification message',
+						target: 'account_overview',
+					},
 				],
 			},
 		]);
@@ -91,7 +102,12 @@ describe('addNotificationsToDropdownLinks', () => {
 				url: `https://example.com/account_overview`,
 				title: 'Account overview',
 				dataLinkName: 'nav2 : topbar : account overview',
-				notifications: ['Existing notification message'],
+				notifications: [
+					{
+						message: 'Existing notification message',
+						target: 'account_overview',
+					},
+				],
 			},
 		];
 		const notifications = [
@@ -113,8 +129,14 @@ describe('addNotificationsToDropdownLinks', () => {
 				title: 'Account overview',
 				dataLinkName: 'nav2 : topbar : account overview',
 				notifications: [
-					'Existing notification message',
-					'New notification message',
+					{
+						message: 'Existing notification message',
+						target: 'account_overview',
+					},
+					{
+						message: 'New notification message',
+						target: 'account_overview',
+					},
 				],
 			},
 		]);

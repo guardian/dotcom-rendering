@@ -9,7 +9,12 @@ describe('linksNotificationCount', () => {
 				url: 'https://example.com/1',
 				title: 'One',
 				dataLinkName: 'One',
-				notifications: ['Notification here!'],
+				notifications: [
+					{
+						message: 'Notification here!',
+						target: 'one',
+					},
+				],
 			},
 			{
 				id: 'two',
@@ -17,8 +22,14 @@ describe('linksNotificationCount', () => {
 				title: 'Two',
 				dataLinkName: 'Two',
 				notifications: [
-					'Another notification here!',
-					'And another one.',
+					{
+						message: 'Another notification here!',
+						target: 'two',
+					},
+					{
+						message: 'And another one.',
+						target: 'two',
+					},
 				],
 			},
 		];
