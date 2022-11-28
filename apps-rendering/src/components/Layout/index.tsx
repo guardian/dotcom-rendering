@@ -18,8 +18,8 @@ import { renderAll, renderAllWithoutStyles } from 'renderer';
 import { Result } from 'result';
 import AnalysisLayout from './AnalysisLayout';
 import ImmersiveLayout from './ImmersiveLayout';
-import NewsletterSignUpLayout from './NewsletterSignUpLayout';
 import LetterLayout from './LetterLayout';
+import NewsletterSignUpLayout from './NewsletterSignUpLayout';
 
 // ----- Functions ----- //
 
@@ -94,7 +94,6 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		return <GalleryLayout item={item}>{render(item, body)}</GalleryLayout>;
 	}
 
-
 	if (item.design === ArticleDesign.NewsletterSignup) {
 		return (
 			<NewsletterSignUpLayout item={item}>
@@ -128,7 +127,6 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 			<StandardLayout item={item}>{render(item, body)}</StandardLayout>
 		);
 	}
-
 
 	return notImplemented;
 };

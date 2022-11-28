@@ -11,7 +11,8 @@ import Headline from 'components/Headline';
 import MainMedia from 'components/MainMedia';
 import RelatedContent from 'components/RelatedContent';
 import Standfirst from 'components/Standfirst';
-import { getFormat, Item } from 'item';
+import { getFormat } from 'item';
+import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import {
 	darkModeCss,
