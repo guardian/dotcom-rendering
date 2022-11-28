@@ -1,16 +1,13 @@
 import { css } from '@emotion/react';
 import { adSizes } from '@guardian/commercial-core';
 import { ArticleDesign } from '@guardian/libs';
+import { from, neutral, space, until } from '@guardian/source-foundations';
 import {
-	border,
-	from,
-	neutral,
-	space,
-	text,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
-import { carrotAdStyles, labelHeight, labelStyles } from './AdSlot';
+	adSlotLabelStyles,
+	carrotAdStyles,
+	labelHeight,
+	labelStyles,
+} from './AdSlot';
 
 type Props = {
 	format: ArticleFormat;
@@ -124,17 +121,9 @@ const adStyles = css`
 			top: 0px;
 			left: 0px;
 			right: 0px;
-			${textSans.xxsmall()};
-			height: ${labelHeight}px;
-			max-height: ${labelHeight}px;
-			background-color: ${neutral[97]};
-			padding: 0 8px;
 			border: 0;
-			border-top: 1px solid ${border.secondary};
-			color: ${text.supporting};
-			text-align: left;
-			box-sizing: border-box;
 			display: block;
+			${adSlotLabelStyles}
 		}
 
 		/* liveblogs ads have different background colours due the darker page background */

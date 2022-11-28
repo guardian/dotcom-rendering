@@ -39,7 +39,7 @@ type Props = InlineProps | NonInlineProps;
 
 export const labelHeight = 24;
 
-const adSlotLabelStyles = css`
+export const adSlotLabelStyles = css`
 	${textSans.xxsmall()};
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
