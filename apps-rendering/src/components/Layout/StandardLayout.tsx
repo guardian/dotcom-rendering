@@ -13,11 +13,11 @@ import {
 import { map, withDefault } from '@guardian/types';
 import { pillarToId, themeToPillar } from 'articleFormat';
 import Body from 'components/ArticleBody';
+import DesignTag from 'components/DesignTag';
 import Epic from 'components/Epic';
 import FootballScores from 'components/FootballScores';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
-import HeadlineTag from 'components/HeadlineTag';
 import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
@@ -129,9 +129,10 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 						mainMedia={item.mainMedia}
 					/>
 					<Series item={item} />
-					{item.design === ArticleDesign.Explainer && (
-						<HeadlineTag tagText={'Explainer'} format={item} />
+					{item.design !== ArticleDesign.Interview && (
+						<DesignTag format={item} />
 					)}
+
 					<Headline item={item} />
 					<div css={articleWidthStyles}>
 						<Standfirst item={item} />

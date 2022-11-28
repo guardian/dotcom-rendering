@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { from, space, text, textSans } from '@guardian/source-foundations';
 import { unescapeData } from '../../lib/escapeData';
+import type { RoleType } from '../../types/content';
 import { ClickToView } from './ClickToView';
 
 type Props = {

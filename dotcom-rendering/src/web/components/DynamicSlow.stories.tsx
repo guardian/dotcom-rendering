@@ -47,10 +47,11 @@ export const Avatar = () => {
 			<DynamicSlow
 				groupedTrails={{
 					...defaultGroupedTrails,
-					veryBig: [
-						{ ...avatarTrails[0], isBoosted: true },
-						avatarTrails[1],
-					],
+					veryBig: avatarTrails
+						.slice(0, 2)
+						.map((card, index) =>
+							index === 0 ? { ...card, isBoosted: true } : card,
+						),
 					big: avatarTrails.slice(2, 4),
 					standard: avatarTrails.slice(4, 8),
 				}}

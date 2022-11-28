@@ -48,6 +48,12 @@ export const initHydration = (elements: NodeListOf<Element>): void => {
 					});
 					break;
 				}
+				case 'hash': {
+					if (window.location.hash.includes(name)) {
+						void doHydration(name, props, element);
+					}
+					break;
+				}
 				default: {
 					void doHydration(name, props, element);
 				}
