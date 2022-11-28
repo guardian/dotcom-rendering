@@ -4,22 +4,18 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { breakpoints, from } from '@guardian/source-foundations';
+import { until } from '@guardian/source-foundations';
 import Body from 'components/ArticleBody';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import MainMedia from 'components/MainMedia';
 import RelatedContent from 'components/RelatedContent';
 import Standfirst from 'components/Standfirst';
+import { grid } from 'grid/grid';
 import { getFormat } from 'item';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
-import {
-	darkModeCss,
-	onwardStyles,
-	sidePadding,
-	wideContentWidth,
-} from 'styles';
+import { darkModeCss, onwardStyles } from 'styles';
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -30,26 +26,19 @@ const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
     `}
 `;
 
-const articleWidthStyles: SerializedStyles = css`
-	margin: 0 auto;
-	position: relative;
-
-	${from.phablet} {
-		max-width: ${breakpoints.phablet - 24}px;
-	}
-
-	${from.desktop} {
-		max-width: ${wideContentWidth}px;
-	}
-
-	${sidePadding.styles}
+const gridContainerStyles = css`
+	${grid.container}
 `;
 
-const borderStyles = css`
-	${from.wide} {
-		width: ${breakpoints.wide}px;
-		margin: 0 auto;
+const imageRow = css`
+	${until.tablet} {
+		${grid.column.all};
 	}
+	${grid.column.centre};
+`;
+
+const contentRow = css`
+	${grid.column.centre};
 `;
 
 // ----- Component ----- //
@@ -63,23 +52,20 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 
 	return (
 		<main css={backgroundStyles(format)}>
-			<article className="js-article" css={borderStyles}>
-				<header>
+			<article className="js-article" css={gridContainerStyles}>
+				<header css={imageRow}>
 					<MainMedia
 						format={getFormat(item)}
 						mainMedia={item.mainMedia}
 					/>
-
-					<div css={articleWidthStyles}>
-						<Headline item={item} />
-						<Standfirst item={item} />
-					</div>
 				</header>
-
-				<section css={articleWidthStyles}>
+				<section css={contentRow}>
+					<Headline item={item} />
+					<Standfirst item={item} />
 					<Body format={item}>{children}</Body>
 				</section>
 			</article>
+
 			<section css={onwardStyles}>
 				<RelatedContent item={item} />
 			</section>

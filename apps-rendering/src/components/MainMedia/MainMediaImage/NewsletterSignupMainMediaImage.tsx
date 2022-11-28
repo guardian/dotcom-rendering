@@ -22,7 +22,7 @@ const styles = css`
 `;
 
 const sizes: Sizes = {
-	mediaQueries: [{ breakpoint: 'wide', size: '620px' }],
+	mediaQueries: [],
 	default: '100%',
 };
 
