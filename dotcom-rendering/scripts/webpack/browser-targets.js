@@ -1,12 +1,37 @@
+const path = require('path');
 const browserslist = require('browserslist');
 const getTargetsFromBrowsersList =
 	require('@babel/helper-compilation-targets').default;
 
+/**
+ * We use the Browserslists extends syntax e.g.:
+ *
+ * `extends @guardian/browserslist-config`
+ *
+ * Browserslist tries to resolve the stats file relative to the working directory.
+ *
+ * https://github.com/browserslist/browserslist/blob/74dbf959874e3c05adec93adab98832db35cb66b/node.js#L197-L200
+ *
+ * However when run from Storybook this working directory will be the root storybooks/ folder.
+ *
+ * @guardian/browserslist-config is not hoisted so Browserslist cannot resolve the stats file
+ *
+ * So we temporarily force the working directory to be the local workspace:
+ * 'dotcom-rendering/dotcom-rendering'
+ * and then restore the old working directory once Browserslist has loaded
+ */
+const prevWorkingDirectory = process.cwd();
+process.chdir(path.resolve(__dirname, '../..'));
 const browsers = browserslist('extends @guardian/browserslist-config');
+process.chdir(prevWorkingDirectory);
+
+/**
+ * Transform a list of browsers to targets
+ */
 const rawTargets = getTargetsFromBrowsersList({ browsers });
 
 /**
- * The current browserslist query is:
+ * The current browserslist query via @guardian/browserslist-config is:
  *
  * "supports es6-module and >= 0.01% in @guardian/browserslist-config stats"
  *
