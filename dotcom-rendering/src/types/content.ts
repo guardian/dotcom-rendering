@@ -68,7 +68,7 @@ export interface CalloutBlockElementV2 {
 	id: string;
 	calloutsUrl: string;
 	activeFrom: number;
-	activeTo?: number;
+	activeUntil?: number;
 	displayOnSensitive: boolean;
 	formId: number;
 	title: string;

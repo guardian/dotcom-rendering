@@ -1157,7 +1157,7 @@
                 "activeFrom": {
                     "type": "number"
                 },
-                "activeTo": {
+                "activeUntil": {
                     "type": "number"
                 },
                 "displayOnSensitive": {
