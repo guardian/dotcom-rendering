@@ -132,10 +132,10 @@ type Callout = {
 	isNonCollapsible: boolean;
 	heading: string;
 	formId: number;
-	name: string;
-	activeUntil?: Int64,
 	formFields: FormField[];
 	description?: DocumentFragment;
+	name: string;
+	activeUntil?: Int64,
 };
 
 type BodyElement =
@@ -343,9 +343,7 @@ const parse =
 					}),
 				);
 			}
-			// TODO: Once merged with Anna's branch. If the callout is expired.
-			// We need some logic here to show nothing if the campaign isEmbedded (isCollabsible)
-			// And render some 'This campaign is expired' text if it is non collapsible
+
 			case ElementType.CALLOUT: {
 				const {
 					campaignId: campaignId,
