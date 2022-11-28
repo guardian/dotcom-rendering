@@ -4,15 +4,10 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	breakpoints,
-	from,
-} from '@guardian/source-foundations';
+import { breakpoints, from } from '@guardian/source-foundations';
 import Body from 'components/ArticleBody';
-import { tabletContentWidth } from 'components/editions/styles';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
-import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import RelatedContent from 'components/RelatedContent';
 import Standfirst from 'components/Standfirst';
@@ -39,7 +34,7 @@ const articleWidthStyles: SerializedStyles = css`
 	position: relative;
 
 	${from.phablet} {
-		max-width: ${tabletContentWidth}px;
+		max-width: ${breakpoints.phablet - 24}px;
 	}
 
 	${from.desktop} {
@@ -77,7 +72,6 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 					<div css={articleWidthStyles}>
 						<Headline item={item} />
 						<Standfirst item={item} />
-						<Logo item={item} />
 					</div>
 				</header>
 
