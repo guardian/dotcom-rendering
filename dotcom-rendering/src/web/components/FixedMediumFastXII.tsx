@@ -15,14 +15,14 @@ export const FixedMediumFastXII = ({
 	containerPalette,
 	showAge,
 }: Props) => {
-	const firstSlice = trails.slice(0, 4);
-	const secondSlice = trails.slice(4, 8);
-	const thirdSlice = trails.slice(8, 12);
+	const firstSlice25 = trails.slice(0, 4);
+	const secondSlice25 = trails.slice(4, 8);
+	const thirdSlice25 = trails.slice(8, 12);
 
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
-				{firstSlice.map((trail) => {
+				{firstSlice25.map((trail) => {
 					return (
 						<LI key={trail.url} padSides={true} percentage="25%">
 							<FrontCard
@@ -35,7 +35,7 @@ export const FixedMediumFastXII = ({
 				})}
 			</UL>
 			<UL direction="row" padBottom={true}>
-				{secondSlice.map((trail) => {
+				{secondSlice25.map((trail) => {
 					return (
 						<LI key={trail.url} padSides={true} percentage="25%">
 							<FrontCard
@@ -49,7 +49,7 @@ export const FixedMediumFastXII = ({
 				})}
 			</UL>
 			<UL direction="row" padBottom={true}>
-				{thirdSlice.map((trail) => {
+				{thirdSlice25.map((trail) => {
 					return (
 						<LI key={trail.url} padSides={true} percentage="25%">
 							<FrontCard
