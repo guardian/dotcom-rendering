@@ -2,17 +2,14 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { NewsletterBadge } from '@guardian/common-rendering/src/components/NewsletterBadge';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	brand,
 	breakpoints,
 	from,
-	neutral,
 	remSpace,
 } from '@guardian/source-foundations';
-import { SvgGuardianLogo } from '@guardian/source-react-components';
 import Body from 'components/ArticleBody';
 import { tabletContentWidth } from 'components/editions/styles';
 import Footer from 'components/Footer';
@@ -62,29 +59,6 @@ const borderStyles = css`
 	}
 `;
 
-const bannerStyle: SerializedStyles = css`
-	background-color: ${brand[400]};
-	padding: ${remSpace[2]} 0 ${remSpace[9]};
-`;
-
-const figureStyle: SerializedStyles = css`
-	display: block;
-	width: 11rem;
-	position: relative;
-`;
-
-const logoWrapper: SerializedStyles = css`
-	display: flex;
-	width: 65%;
-	margin-bottom: ${remSpace[1]};
-`;
-
-const badgeWrapper: SerializedStyles = css`
-	font-size: 1rem;
-	display: flex;
-	width: 100%;
-`;
-
 // ----- Component ----- //
 interface Props {
 	item: StandardItem;
@@ -98,25 +72,10 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 		<main css={backgroundStyles(format)}>
 			<article className="js-article" css={borderStyles}>
 				<header>
-					<div css={bannerStyle}>
-						<div css={sectionStyles}>
-							<figure
-								css={figureStyle}
-								role="figure"
-								aria-label="The Guardian Newsletters"
-							>
-								<span css={logoWrapper}>
-									<SvgGuardianLogo
-										textColor={neutral[100]}
-										width={200}
-									/>
-								</span>
-								<span css={badgeWrapper}>
-									<NewsletterBadge />
-								</span>
-							</figure>
-						</div>
-					</div>
+					<MainMedia
+						format={getFormat(item)}
+						mainMedia={item.mainMedia}
+					/>
 
 					<div css={sectionStyles}>
 						<Headline item={item} />
@@ -127,10 +86,6 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 
 				<section css={sectionStyles}>
 					<Body format={item}>{children}</Body>
-					<MainMedia
-						format={getFormat(item)}
-						mainMedia={item.mainMedia}
-					/>
 				</section>
 			</article>
 			<section css={onwardStyles}>

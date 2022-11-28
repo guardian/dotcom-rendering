@@ -11,7 +11,7 @@ import { wideContentWidth } from 'styles';
 // ----- Component ----- //
 
 const styles = css`
-	margin: ${remSpace[4]} 0;
+	margin-bottom: ${remSpace[2]};
 	position: relative;
 
 	${from.wide} {
@@ -19,9 +19,6 @@ const styles = css`
 		margin-left: auto;
 		margin-right: auto;
 	}
-
-	border-radius: ${remSpace[2]};
-	overflow: hidden;
 `;
 
 const sizes: Sizes = {
