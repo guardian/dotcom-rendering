@@ -16,6 +16,7 @@ import {
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { linkNotificationCount } from '../lib/linkNotificationCount';
+import { useIsInView } from '../lib/useIsInView';
 
 export interface DropdownLinkType {
 	id: string;
@@ -224,33 +225,47 @@ type DropdownLinkProps = {
 	index: number;
 };
 const DropdownLink = ({ link, index }: DropdownLinkProps) => {
-	return <li css={liStyles} key={link.title}>
-		<a
-			href={link.url}
-			css={[
-				linkStyles,
-				!!link.isActive && linkActive,
-				index === 0 && linkFirst,
-			]}
-			data-link-name={link.dataLinkName}
-		>
-			{link.title}
-			{link.notifications?.map((notification) => (
-				<div css={notificationTextStyles}>{notification}</div>
-			))}
-		</a>
+	const [hasBeenSeen, setNode] = useIsInView({
+		debounce: true,
+	});
 
-		{!!link.notifications?.length && (
-			<div
-				css={css`
-					margin-top: 12px;
-					margin-right: 8px;
-				`}
+	useEffect(() => {
+		if (hasBeenSeen) {
+			// For each notification:
+			// TODO: send impression event to Braze
+			// TODO: send impression event to Ophan
+		}
+	}, [hasBeenSeen]);
+
+	return (
+		<li css={liStyles} key={link.title} ref={setNode}>
+			<a
+				href={link.url}
+				css={[
+					linkStyles,
+					!!link.isActive && linkActive,
+					index === 0 && linkFirst,
+				]}
+				data-link-name={link.dataLinkName}
 			>
-				<NotificationBadge diameter={22} />
-			</div>
-		)}
-	</li>;
+				{link.title}
+				{link.notifications?.map((notification) => (
+					<div css={notificationTextStyles}>{notification}</div>
+				))}
+			</a>
+
+			{!!link.notifications?.length && (
+				<div
+					css={css`
+						margin-top: 12px;
+						margin-right: 8px;
+					`}
+				>
+					<NotificationBadge diameter={22} />
+				</div>
+			)}
+		</li>
+	);
 };
 
 export const Dropdown = ({
