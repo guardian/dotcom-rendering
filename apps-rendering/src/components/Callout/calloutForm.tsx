@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace, until } from '@guardian/source-foundations';
 import {
@@ -12,11 +11,12 @@ import {
 import type { FC } from 'react';
 import { ContactText, Disclaimer, renderField } from './formFields';
 import { ShareLink } from './shareLink';
+import { FormField } from '@guardian/apps-rendering-api-models/formField';
 
 export interface CalloutFormProps {
-	campaign: Campaign;
 	format: ArticleFormat;
-	description?: DocumentFragment;
+	id: number;
+	fields: FormField[];
 	disableInputs?: boolean;
 }
 
@@ -62,7 +62,8 @@ const buttonStyles = (theme: any): SerializedStyles => css`
 `;
 
 const CalloutForm: FC<CalloutFormProps> = ({
-	campaign,
+	id,
+	fields,
 	format,
 	disableInputs = false,
 }) => {
@@ -74,11 +75,11 @@ const CalloutForm: FC<CalloutFormProps> = ({
 				<input
 					name="formId"
 					type="hidden"
-					value={campaign.fields.formId}
+					value={id}
 				/>
 				<div className="js-callout__inputs">
 					<>
-						{campaign.fields.formFields.map((field) =>
+						{fields.map((field) =>
 							renderField(field, disableInputs, format),
 						)}
 					</>

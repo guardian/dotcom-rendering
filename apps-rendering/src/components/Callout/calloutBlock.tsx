@@ -1,18 +1,19 @@
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
-import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { ArticleFormat } from '@guardian/libs';
 import { body, headline, remSpace } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
-import { maybeRender } from 'lib';
+import { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { FC, ReactElement } from 'react';
 import { renderCalloutDescriptionText } from 'renderer';
 import CalloutForm from './calloutForm';
 
 export interface CalloutBlockProps {
-	campaign: Campaign;
+	formId: number;
+	heading: string;
+	name: string;
+	formFields: FormField[];
 	format: ArticleFormat;
-	description: Option<DocumentFragment>;
+	description?: DocumentFragment;
 	isTabbable?: boolean;
 }
 
@@ -77,39 +78,36 @@ const descriptionStyles = css`
 `;
 
 const CalloutBlock: FC<CalloutBlockProps> = ({
-	campaign,
+	formId,
+	heading,
+	name,
+	formFields,
 	format,
 	description,
 	isTabbable = true,
 }): ReactElement => {
-	const { name, fields } = campaign;
-	const { callout } = fields;
 
 	return (
 		<div css={containerStyles}>
 			<details css={calloutDetailsStyles} open={true}>
 				<summary css={summaryStyles}>
 					<div css={summaryContentWrapper}>
-						<div css={titleStyles}>{callout}</div>
+						<div css={titleStyles}>{heading}</div>
 						<h4 css={headingTextHeaderStyles}>{name}</h4>
-						{maybeRender(
-							description,
-							(description: DocumentFragment) => (
-								<div css={descriptionStyles}>
-									<>
-										{renderCalloutDescriptionText(
-											description,
-											isTabbable,
-											format,
-										)}
-									</>
-								</div>
-							),
-						)}
+							<div css={descriptionStyles}>
+								<>
+									{renderCalloutDescriptionText(
+										isTabbable,
+										format,
+										description,
+									)}
+								</>
+							</div>
 					</div>
 				</summary>
 				<CalloutForm
-					campaign={campaign}
+					id={formId}
+					fields={formFields}
 					format={format}
 					disableInputs={!isTabbable}
 				/>

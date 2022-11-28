@@ -3,14 +3,20 @@
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { ParticipationFields } from '@guardian/apps-rendering-api-models/participationFields';
 import { ArticleSpecial } from '@guardian/libs';
+import type Int64 from 'node-int64';
 import { Optional } from 'optional';
 
-// ----- Functions ----- //
+type CalloutFields = {
+	callout: ParticipationFields;
+	name: string;
+	activeUntil?: Int64;
+}
 
+// ----- Functions ----- //
 const getCallout = (
 	id: string,
 	campaigns: Campaign[],
-): Optional<ParticipationFields> => {
+): Optional<CalloutFields> => {
 	if (campaigns.length === 0) {
 		return Optional.none();
 	}
@@ -18,7 +24,10 @@ const getCallout = (
 	const campaign = campaigns.find((campaign) => campaign.id === id);
 
 	if (campaign?.fields.kind === 'callout') {
-		return Optional.some(campaign.fields.callout);
+		return Optional.some({
+			callout: campaign.fields.callout,
+			name: campaign.name,
+			activeUntil: campaign.activeUntil});
 	}
 
 	return Optional.none();

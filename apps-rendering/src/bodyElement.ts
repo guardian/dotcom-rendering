@@ -2,6 +2,7 @@
 
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
+import Int64 from 'node-int64';
 import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
@@ -131,8 +132,10 @@ type Callout = {
 	isNonCollapsible: boolean;
 	heading: string;
 	formId: number;
+	name: string;
+	activeUntil?: Int64,
 	formFields: FormField[];
-	description: DocumentFragment;
+	description?: DocumentFragment;
 };
 
 type BodyElement =
@@ -359,14 +362,16 @@ const parse =
 				}
 
 				return getCallout(campaignId, campaigns)
-					.map(({ callout, formFields, description, formId }) =>
+					.map(({ callout, name, activeUntil }) =>
 						Result.ok<string, Callout>({
 							kind: ElementKind.Callout,
 							isNonCollapsible,
-							heading: callout,
-							formFields,
-							formId,
-							description: context.docParser(description ?? ''),
+							heading: callout.callout,
+							formFields: callout.formFields,
+							formId: callout.formId,
+							description: context.docParser(callout.description ?? ''),
+							name: name,
+							activeUntil: activeUntil,
 						}),
 					)
 					.withDefault(
