@@ -24,15 +24,22 @@ export const doHydration = async (
 	const alreadyHydrated = element.dataset.guReady;
 	if (alreadyHydrated) return;
 
-	const { start, end } = initPerf(`hydrate-${name}`);
-	start();
+	const { start: importStart, end: importEnd } = initPerf(`import-${name}`);
+	importStart();
 	await import(
 		/* webpackInclude: /\.importable\.tsx$/ */
 		/* webpackChunkName: "[request]" */
 		`../../components/${name}.importable`
 	)
 		.then((module) => {
+			/** The duration of importing the module for this island */
+			const importDuration = importEnd();
 			const clientOnly = element.getAttribute('clientOnly') === 'true';
+
+			const { start: islandStart, end: islandEnd } = initPerf(
+				`island-${name}`,
+			);
+			islandStart();
 
 			if (clientOnly) {
 				element.querySelector('[data-name="placeholder"]')?.remove();
@@ -42,24 +49,19 @@ export const doHydration = async (
 			}
 
 			element.setAttribute('data-gu-ready', 'true');
-			const timeTaken = end();
+			/** The duration of rendering or hydrating this island */
+			const islandDuration = islandEnd();
 
-			return { clientOnly, timeTaken };
+			return { clientOnly, importDuration, islandDuration };
 		})
-		.then(({ clientOnly, timeTaken }) => {
+		.then(({ clientOnly, importDuration, islandDuration }) => {
 			if (!('getEntriesByType' in window.performance)) return;
-
-			// Log performance info
-			const { duration: download = -1 } =
-				window.performance
-					.getEntriesByType('resource')
-					.find((p) => p.name.includes(`/${name}-importable.`)) ?? {};
 
 			const action = clientOnly ? 'Rendering' : 'Hydrating';
 
 			log(
 				'dotcom',
-				`🏝 ${action} island <${name} /> took ${timeTaken}ms (downloaded in ${download}ms)`,
+				`🏝 ${action} island <${name} /> took ${islandDuration}ms (imported in ${importDuration}ms)`,
 			);
 		})
 		.catch((error) => {

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import React from 'react';
+import type { TagType } from '../../types/tag';
 import { OnwardContainer } from './OnwardContainer';
 
 const wrapper = css`

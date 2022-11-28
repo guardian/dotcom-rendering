@@ -412,10 +412,11 @@ const standfirstText = (
 };
 
 const calloutDescriptionText = (
-	doc: DocumentFragment,
 	isInteractive: boolean,
 	format: ArticleFormat,
+	doc?: DocumentFragment,
 ): ReactNode[] => {
+	if (!doc) return [];
 	const nodes = Array.from(doc.childNodes);
 	const filteredNodes = nodes.filter(
 		(node) => !['A'].includes(node.nodeName),
@@ -689,10 +690,8 @@ const render =
 			case ElementKind.Tweet:
 				return h(Tweet, { content: element.content, format, key });
 
-			case ElementKind.Callout: {
-				const { campaign, description } = element;
-				return h(Callout, { campaign, format, description });
-			}
+			case ElementKind.Callout:
+				return h(Callout, { format, ...element });
 
 			case ElementKind.Embed:
 				return h(EmbedComponentWrapper, {

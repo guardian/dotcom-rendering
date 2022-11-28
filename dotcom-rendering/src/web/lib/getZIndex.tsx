@@ -33,6 +33,9 @@ const indices = [
 	'expanded-veggie-menu-wrapper',
 	'expanded-veggie-menu',
 
+	// Mobile sticky appears below banners
+	'mobileSticky',
+
 	// Headers with sticky ads
 	'stickyAdWrapperLabsHeader',
 	'stickyAdWrapper',
@@ -48,6 +51,7 @@ const indices = [
 	'onwardsCarousel',
 
 	// Search link should be above The Guardian svg
+	'myAccountDropdown',
 	'searchHeaderLink',
 	'TheGuardian',
 

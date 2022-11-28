@@ -11,6 +11,7 @@ import {
 } from '@guardian/source-foundations';
 import { getSoleContributor } from '../../lib/byline';
 import type { Palette } from '../../types/palette';
+import type { TagType } from '../../types/tag';
 import { decidePalette } from '../lib/decidePalette';
 import { BylineLink } from './BylineLink';
 

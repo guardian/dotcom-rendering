@@ -1,4 +1,5 @@
 import { logger } from '../server/lib/logging';
+import type { CAPIElement, Newsletter } from '../types/content';
 
 type PlaceInArticle = {
 	position: number;
@@ -199,12 +200,8 @@ const tryToInsert = (
 export const insertPromotedNewsletter = (
 	blocks: Block[],
 	format: CAPIFormat,
-	promotedNewsletter?: Newsletter,
+	promotedNewsletter: Newsletter,
 ): Block[] => {
-	if (!promotedNewsletter) {
-		return blocks;
-	}
-
 	switch (format.design) {
 		case 'ArticleDesign':
 		case 'GalleryDesign':

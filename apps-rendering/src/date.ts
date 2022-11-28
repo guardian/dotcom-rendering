@@ -1,22 +1,11 @@
 // ----- Imports ----- //
 
 import type { Option } from '@guardian/types';
-import { map, none, some, withDefault } from '@guardian/types';
-import { pipe } from 'lib';
+import { none, some } from '@guardian/types';
 
 // ----- Setup ----- //
 
 const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-const fullDays = [
-	'Sunday',
-	'Monday',
-	'Tuesday',
-	'Wednesday',
-	'Thursday',
-	'Friday',
-	'Saturday',
-];
 
 const months = [
 	'Jan',
@@ -31,21 +20,6 @@ const months = [
 	'Oct',
 	'Nov',
 	'Dec',
-];
-
-const fullMonths = [
-	'January',
-	'February',
-	'March',
-	'April',
-	'May',
-	'June',
-	'July',
-	'August',
-	'September',
-	'October',
-	'November',
-	'December',
 ];
 
 // ----- Functions ----- //
@@ -119,11 +93,7 @@ function makeRelativeDate(date: Date): string | null {
 
 const day = (date: Date): string => days[date.getUTCDay()];
 
-const fullDay = (date: Date): string => fullDays[date.getUTCDay()];
-
 const month = (date: Date): string => months[date.getUTCMonth()];
-
-const fullMonth = (date: Date): string => fullMonths[date.getUTCMonth()];
 
 const padStart = (n: number): string => String(n).padStart(2, '0');
 
@@ -131,18 +101,6 @@ const time = (date: Date, separator: string): string =>
 	`${padStart(date.getUTCHours())}${separator}${padStart(
 		date.getUTCMinutes(),
 	)}`;
-
-const time12hr = (date: Date, separator: string): string => {
-	const utcHours = date.getUTCHours();
-	return `${padStart(
-		utcHours > 12 ? utcHours - 12 : utcHours,
-	)}${separator}${padStart(date.getUTCMinutes())}${
-		utcHours > 12 ? 'pm' : 'am'
-	}`;
-};
-
-const localTime = (date: Date): string =>
-	`${padStart(date.getHours())}.${padStart(date.getMinutes())}`;
 
 const localTime12Hr = (date: Date): string =>
 	date
@@ -155,9 +113,6 @@ const localTime12Hr = (date: Date): string =>
 		.replace(':', '.')
 		.toLowerCase();
 
-const localTimeZone = (date: Date): string =>
-	/\(.*?\)$/.exec(date.toTimeString())?.pop() ?? '';
-
 const localTimeZoneAbbr = (date: Date): string =>
 	/([^\s]+)$/
 		.exec(date.toLocaleString([], { timeZoneName: 'short' }))
@@ -168,27 +123,10 @@ const format = (date: Date): string =>
 		date,
 	)} ${date.getUTCFullYear()} ${time(date, '.')} UTC`;
 
-const fullyFormat = (date: Date): string =>
-	`${time(date, ':')} ${fullDay(date)}, ${date.getDate()} ${fullMonth(
-		date,
-	)} ${date.getUTCFullYear()}`;
-
-const formatLocal = (date: Date): string =>
-	`${localDay(date)} ${date.getDate()} ${localMonth(
-		date,
-	)} ${date.getFullYear()} ${localTime(date)} ${localTimeZone(date)}`;
-
 const formatLocalTimeDateTz = (date: Date): string =>
 	`${localTime12Hr(date)} ${date.getDate()} ${localMonth(
 		date,
 	)} ${date.getFullYear()} ${localTimeZoneAbbr(date)}`;
-
-const formatUTCTimeDateTz = (date: Date): string =>
-	`${time12hr(date, '.')} ${date.getUTCDate()} ${month(
-		date,
-	)} ${date.getFullYear()} UTC`;
-
-const localDay = (date: Date): string => days[date.getDay()];
 
 const localMonth = (date: Date): string => months[date.getMonth()];
 
@@ -224,25 +162,14 @@ function formatSeconds(seconds: string): Option<string> {
 	return some(ret);
 }
 
-const dateToString = (date: Option<Date>): string =>
-	pipe(
-		date,
-		map((d) => d.toISOString()),
-		withDefault(''),
-	);
-
 // ----- Exports ----- //
 
 export {
 	makeRelativeDate,
 	format as formatDate,
-	fullyFormat as fullyFormatDate,
 	isValidDate,
 	fromString,
 	formatSeconds,
-	formatLocal,
 	formatLocalTimeDateTz,
-	formatUTCTimeDateTz,
-	dateToString,
 	padStart,
 };

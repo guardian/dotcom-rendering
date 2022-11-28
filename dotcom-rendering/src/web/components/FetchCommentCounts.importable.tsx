@@ -44,7 +44,7 @@ type RenderedCountType = {
 function extractMarkers() {
 	const markers: MarkerType[] = [];
 	document
-		.querySelectorAll('[data-name="comment-count-marker"]')
+		.querySelectorAll('[data-discussion-id]')
 		.forEach((element: Element) => {
 			if (element instanceof HTMLElement) {
 				try {

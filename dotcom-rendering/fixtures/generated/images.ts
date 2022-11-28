@@ -11,6 +11,8 @@
  *    gen-fixtures.ts directly.
  */
 
+import type { ImageBlockElement } from '../../src/types/content';
+
 export const images: [
 	ImageBlockElement,
 	ImageBlockElement,

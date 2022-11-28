@@ -10,14 +10,14 @@ import {
 	DottedLines,
 	StraightLines,
 } from '@guardian/source-react-components-development-kitchen';
-import { map, none, withDefault } from '@guardian/types';
+import { map, withDefault } from '@guardian/types';
 import { pillarToId, themeToPillar } from 'articleFormat';
 import Body from 'components/ArticleBody';
+import DesignTag from 'components/DesignTag';
 import Epic from 'components/Epic';
 import FootballScores from 'components/FootballScores';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
-import HeadlineTag from 'components/HeadlineTag';
 import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
@@ -25,6 +25,7 @@ import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
+import type { MatchScores } from 'football';
 import { getFormat } from 'item';
 import type {
 	Explainer as ExplainerItem,
@@ -34,6 +35,7 @@ import type {
 	Standard as StandardItem,
 } from 'item';
 import { maybeRender, pipe } from 'lib';
+import { Optional } from 'optional';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,
@@ -105,11 +107,12 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 		  )
 		: null;
 
-	const matchScores = 'football' in item ? item.football : none;
+	const matchScores: Optional<MatchScores> =
+		'football' in item ? item.football : Optional.none();
 	return (
 		<main css={backgroundStyles(format)}>
 			<article className="js-article" css={BorderStyles}>
-				{maybeRender(matchScores, (scores) => (
+				{maybeRender(matchScores.toOption(), (scores) => (
 					<div id="js-football-scores">
 						<FootballScores
 							league={scores.league}
@@ -126,9 +129,10 @@ const StandardLayout: FC<Props> = ({ item, children }) => {
 						mainMedia={item.mainMedia}
 					/>
 					<Series item={item} />
-					{item.design === ArticleDesign.Explainer && (
-						<HeadlineTag tagText={'Explainer'} format={item} />
+					{item.design !== ArticleDesign.Interview && (
+						<DesignTag format={item} />
 					)}
+
 					<Headline item={item} />
 					<div css={articleWidthStyles}>
 						<Standfirst item={item} />
