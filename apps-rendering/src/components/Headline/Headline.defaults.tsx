@@ -66,7 +66,7 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 					background-color: ${background.headlineDark(format)};
 				`}
 				${boldFontStyles}
-				padding: 0 0 ${remSpace[6]} 0;
+				padding: 0 0 ${remSpace[5]} 0;
 				max-width: 100%;
 			`;
 		default:
@@ -74,7 +74,7 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 				${baseStyles}
 				${articleWidthStyles}
 				background-color: ${background.headline(format)};
-				padding-bottom: ${remSpace[5]};
+				padding-bottom: ${remSpace[6]};
 
 				${darkModeCss`
 					background-color: ${background.headlineDark(format)};
