@@ -4,6 +4,7 @@ import type { DropdownLinkType } from '../components/Dropdown';
 export interface Notification {
 	target: string;
 	message: string;
+	logImpression?: () => void;
 }
 
 const hasTargetAndMessage = (
@@ -45,9 +46,7 @@ export const addNotificationsToDropdownLinks = (
 
 	const linksWithNotifications = links.map((link) => {
 		const newNotifications = (link.notifications ?? []).concat(
-			(notificationsByTarget[link.id] ?? []).map(
-				({ message }) => message,
-			),
+			notificationsByTarget[link.id] ?? [],
 		);
 
 		if (newNotifications.length === 0) {

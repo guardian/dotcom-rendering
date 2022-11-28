@@ -16,6 +16,7 @@ import {
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { linkNotificationCount } from '../lib/linkNotificationCount';
+import type { Notification } from '../lib/notification';
 import { useIsInView } from '../lib/useIsInView';
 
 export interface DropdownLinkType {
@@ -24,7 +25,7 @@ export interface DropdownLinkType {
 	title: string;
 	isActive?: boolean;
 	dataLinkName: string;
-	notifications?: string[];
+	notifications?: Notification[];
 }
 
 interface Props {
@@ -231,11 +232,11 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 
 	useEffect(() => {
 		if (hasBeenSeen) {
-			// For each notification:
-			// TODO: send impression event to Braze
-			// TODO: send impression event to Ophan
+			link.notifications?.forEach((notification) => {
+				notification.logImpression?.();
+			});
 		}
-	}, [hasBeenSeen]);
+	}, [hasBeenSeen, link]);
 
 	return (
 		<li css={liStyles} key={link.title} ref={setNode}>
@@ -250,7 +251,9 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 			>
 				{link.title}
 				{link.notifications?.map((notification) => (
-					<div css={notificationTextStyles}>{notification}</div>
+					<div css={notificationTextStyles}>
+						{notification.message}
+					</div>
 				))}
 			</a>
 
