@@ -2429,7 +2429,7 @@
     read-pkg-up "7.0.1"
     yargs "^17.5.1"
 
-"@guardian/common-rendering@file:../common-rendering":
+"@guardian/common-rendering@./../common-rendering":
   version "1.0.0"
   dependencies:
     "@babel/core" "^7.0.0"

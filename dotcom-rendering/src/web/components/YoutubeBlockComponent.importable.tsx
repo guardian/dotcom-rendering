@@ -94,6 +94,7 @@ export const YoutubeBlockComponent = ({
 	const [consentState, setConsentState] = useState<ConsentState | undefined>(
 		undefined,
 	);
+
 	const abTests = useAB();
 	const abTestsApi = abTests?.api;
 	const imaEnabled =
