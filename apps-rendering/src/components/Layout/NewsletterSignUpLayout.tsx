@@ -16,8 +16,7 @@ import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import RelatedContent from 'components/RelatedContent';
 import Standfirst from 'components/Standfirst';
-import { getFormat } from 'item';
-import type { Standard as StandardItem } from 'item';
+import { getFormat, Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import {
 	darkModeCss,
@@ -59,7 +58,7 @@ const borderStyles = css`
 
 // ----- Component ----- //
 interface Props {
-	item: StandardItem;
+	item: Item;
 	children: ReactNode[];
 }
 
