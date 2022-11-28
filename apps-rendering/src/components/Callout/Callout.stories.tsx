@@ -1,6 +1,7 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { campaignDescription, mockCampaign } from 'fixtures/campaign';
+import Int64 from 'node-int64';
 import type { ReactElement } from 'react';
 import Callout from '.';
 
@@ -10,20 +11,46 @@ const mockFormat: ArticleFormat = {
 	display: ArticleDisplay.Standard,
 };
 
+const futureDate = new Date();
+futureDate.setDate(futureDate.getDate() + 2);
+const pastDate = new Date();
+pastDate.setDate(pastDate.getDate() - 1);
+
 const callout = (): ReactElement => (
 	<Callout
-		isNonCollapsable={false}
+		name={mockCampaign.name}
+		heading={mockCampaign.fields.callout}
+		formId={mockCampaign.fields.formId}
+		formFields={mockCampaign.fields.formFields}
 		format={mockFormat}
-		campaign={mockCampaign}
+		isNonCollapsible={false}
+		activeUntil={new Int64(futureDate.getTime())}
+		description={campaignDescription}
+	/>
+);
+
+const closedCallout = (): ReactElement => (
+	<Callout
+		name={mockCampaign.name}
+		heading={mockCampaign.fields.callout}
+		formId={mockCampaign.fields.formId}
+		formFields={mockCampaign.fields.formFields}
+		format={mockFormat}
+		isNonCollapsible={true}
+		activeUntil={new Int64(pastDate.getTime())}
 		description={campaignDescription}
 	/>
 );
 
 const nonCollapsableCallout = (): ReactElement => (
 	<Callout
-		isNonCollapsable={true}
+		isNonCollapsible={true}
+		name={mockCampaign.name}
+		heading={mockCampaign.fields.callout}
+		formId={mockCampaign.fields.formId}
+		formFields={mockCampaign.fields.formFields}
 		format={mockFormat}
-		campaign={mockCampaign}
+		activeUntil={new Int64(futureDate.getTime())}
 		description={campaignDescription}
 	/>
 );
@@ -33,4 +60,4 @@ export default {
 	title: 'AR/Callout',
 };
 
-export { callout, nonCollapsableCallout };
+export { callout, closedCallout, nonCollapsableCallout };

@@ -413,10 +413,11 @@ const standfirstText = (
 };
 
 const calloutDescriptionText = (
-	doc: DocumentFragment,
 	isInteractive: boolean,
 	format: ArticleFormat,
+	doc?: DocumentFragment,
 ): ReactNode[] => {
+	if (!doc) return [];
 	const nodes = Array.from(doc.childNodes);
 	const filteredNodes = nodes.filter(
 		(node) => !['A'].includes(node.nodeName),

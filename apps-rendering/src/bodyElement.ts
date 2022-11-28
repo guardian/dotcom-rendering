@@ -19,6 +19,7 @@ import type { Embed } from 'embed';
 import type { Image as ImageData } from 'image';
 import { parseImage } from 'image';
 import { compose } from 'lib';
+import type Int64 from 'node-int64';
 import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
@@ -132,7 +133,9 @@ type Callout = {
 	heading: string;
 	formId: number;
 	formFields: FormField[];
-	description: DocumentFragment;
+	description?: DocumentFragment;
+	name: string;
+	activeUntil?: Int64;
 };
 
 type BodyElement =
@@ -357,14 +360,18 @@ const parse =
 				}
 
 				return getCallout(campaignId, campaigns)
-					.map(({ callout, formFields, description, formId }) =>
+					.map(({ callout, name, activeUntil }) =>
 						Result.ok<string, Callout>({
 							kind: ElementKind.Callout,
 							isNonCollapsible,
-							heading: callout,
-							formFields,
-							formId,
-							description: context.docParser(description ?? ''),
+							heading: callout.callout,
+							formFields: callout.formFields,
+							formId: callout.formId,
+							description: context.docParser(
+								callout.description ?? '',
+							),
+							name: name,
+							activeUntil: activeUntil,
 						}),
 					)
 					.withDefault(

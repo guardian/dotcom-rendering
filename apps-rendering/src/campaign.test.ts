@@ -4,6 +4,7 @@ import { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import { CampaignFields } from '@guardian/apps-rendering-api-models/campaignFields';
 import { ParticipationFields } from '@guardian/apps-rendering-api-models/participationFields';
 import { ArticleSpecial } from '@guardian/libs';
+import Int64 from 'node-int64';
 import { getCallout, getReport } from 'campaign';
 
 // ----- Mocks ----- //
@@ -13,6 +14,7 @@ const campaignFromFields = (fields: CampaignFields): Campaign => ({
 	name: 'mockName',
 	priority: 1,
 	displayOnSensitive: true,
+	activeUntil: new Int64(1730542820000),
 	fields,
 });
 
@@ -46,7 +48,16 @@ describe('getCallout', () => {
 		const campaigns: Campaign[] = [mockCallout];
 
 		const callout = getCallout('mockId', campaigns).withDefault('none');
-		expect(callout).toBe(mockCalloutFields);
+		expect(callout).toEqual({
+			callout: {
+				callout: 'mockCallout',
+				formId: 1,
+				tagName: 'mockTagName',
+				formFields: [],
+			},
+			name: 'mockName',
+			activeUntil: new Int64(1730542820000)
+		});
 	});
 
 	it('does not retrieve a callout if not present', () => {

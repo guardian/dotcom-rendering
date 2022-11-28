@@ -1,18 +1,21 @@
 import { css } from '@emotion/react';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
-import { neutral, remSpace, textSans } from '@guardian/source-foundations';
+import { remSpace, error, textSans } from '@guardian/source-foundations';
 import {
 	Option,
 	Select,
 	TextArea,
 	TextInput,
+	Label,
+	InlineError,
 } from '@guardian/source-react-components';
 import CheckboxInput from 'components/CheckboxInput';
 import FileInput from 'components/FileInput';
 import RadioInput from 'components/RadioInput';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
+import { fieldLabel, fieldInput, textareaStyles } from './styles';
 
 const infoStyles = css`
 	${textSans.small()};
@@ -51,26 +54,42 @@ export const ContactText = (): ReactElement => (
 	</div>
 );
 
+const FieldError = (): ReactElement => (
+	<InlineError
+		cssOverrides={css`
+			${textSans.small()};
+			color: ${error[400]};
+			${darkModeCss`
+				color: ${error[500]};
+			`}
+		`}
+		className='field__feedback'
+	>
+		Please complete all required fields
+	</InlineError>
+	);
+
 export const renderField = (
 	{ type, label, description, mandatory, options, id }: FormField,
 	disableInput: boolean,
 	format: ArticleFormat,
 ): ReactElement | null => {
 	const name = `field_${type}_${id}`;
-	const inputStyles = css`
-		margin-bottom: ${remSpace[4]};
-	`;
-	const textareaStyles = css`
-		//source doesn't support themes for textarea (yet)
-		${inputStyles};
 
-		background-color: ${neutral[100]};
-		color: ${neutral[7]};
-		${darkModeCss`
-			background-color: ${neutral[7]};
-			color: ${neutral[97]};
-	`}
-	`;
+	const FormField: FC<{children: ReactElement}> =  ({children}): ReactElement => (
+		<Label
+			id={name}
+			key={name}
+			text={label}
+			supporting={description}
+			optional={!mandatory}
+			cssOverrides={fieldLabel}
+		>
+			<FieldError />
+			{children}
+		</Label>
+	);
+
 
 	switch (type) {
 		case 'text':
@@ -78,75 +97,79 @@ export const renderField = (
 		case 'phone':
 		case 'email':
 			return (
-				<TextInput
-					name={name}
-					type={type === 'phone' ? 'tel' : type}
-					label={label}
-					supporting={description}
-					optional={!mandatory}
-					cssOverrides={inputStyles}
-					key={name}
-					disabled={disableInput}
-				/>
+				<FormField>
+					<TextInput
+						name={name}
+						type={type === 'phone' ? 'tel' : type}
+						label={label}
+						hideLabel
+						optional={!mandatory}
+						cssOverrides={fieldInput}
+						disabled={disableInput}
+					/>
+				</FormField>
 			);
 		case 'textarea':
 			return (
-				<TextArea
-					name={name}
-					label={label}
-					supporting={description}
-					optional={!mandatory}
-					cssOverrides={textareaStyles}
-					disabled={disableInput}
-					key={name}
-				/>
+				<FormField>
+					<TextArea
+						name={name}
+						label={label}
+						hideLabel
+						cssOverrides={textareaStyles}
+						disabled={disableInput}
+					/>
+				</FormField>
 			);
 		case 'file':
 			return (
-				<FileInput
-					name={name}
-					label={label}
-					supporting={description}
-					mandatory={mandatory}
-					format={format}
-					cssOverrides={inputStyles}
-					disabled={disableInput}
-					key={name}
-				/>
+				<FormField>
+					<FileInput
+						name={name}
+						format={format}
+						disabled={disableInput}
+						mandatory={mandatory}
+					/>
+			</FormField>
 			);
 		case 'radio':
 			return (
-				<RadioInput
-					name={name}
-					label={label}
-					supporting={description}
-					options={options}
-					disabled={disableInput}
-					key={name}
-				/>
+				<FormField>
+					<RadioInput
+						name={name}
+						mandatory={mandatory}
+						options={options}
+						disabled={disableInput}
+					/>
+				</FormField>
 			);
 		case 'checkbox':
 			return (
-				<CheckboxInput
-					name={name}
-					label={label}
-					supporting={description}
-					options={options}
-					cssOverrides={inputStyles}
-					disabled={disableInput}
-					key={name}
-				/>
+				<FormField>
+					<CheckboxInput
+						name={name}
+						label={label}
+						hideLabel
+						options={options}
+						cssOverrides={fieldInput}
+						disabled={disableInput}
+						mandatory={mandatory}
+					/>
+				</FormField>
+
 			);
 		case 'select':
 			return (
-				<Select
-					label={label}
-					supporting={description}
-					cssOverrides={inputStyles}
-					key={name}
-					name={name}
-					disabled={disableInput}
-				>
+				<FormField>
+					<Select
+						label={label}
+						hideLabel
+						id={name}
+						cssOverrides={fieldInput}
+						key={name}
+						name={name}
+						disabled={disableInput}
+					>
 					{options.map(({ value, label }) => {
 						return (
 							<Option key={value} value={value}>
@@ -155,8 +178,10 @@ export const renderField = (
 						);
 					})}
 				</Select>
+			</FormField>
 			);
 		default:
+			// TODO: Log an error here
 			return null;
 	}
 };

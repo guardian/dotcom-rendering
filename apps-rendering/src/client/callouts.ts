@@ -1,5 +1,10 @@
 type FormData = Record<string, string | string[]>;
 
+type FormElementType =
+	| HTMLInputElement
+	| HTMLTextAreaElement
+	| HTMLSelectElement;
+
 function readFile(file: Blob): Promise<string> {
 	return new Promise((resolve, reject) => {
 		const reader = new FileReader();
@@ -21,39 +26,7 @@ function readFile(file: Blob): Promise<string> {
 		reader.readAsDataURL(file);
 	});
 }
-
-type FormElementType =
-	| HTMLInputElement
-	| HTMLTextAreaElement
-	| HTMLSelectElement;
-const getValueFromElement = async (
-	element: FormElementType,
-	acc: FormData,
-): Promise<FormData> => {
-	const { type, name, value } = element;
-	if (type === 'radio') {
-		const radioElement = element as HTMLInputElement;
-		if (radioElement.checked) {
-			acc[name] = value;
-		}
-		// TODO: How do we handle checkboxes in formstack?
-		// } else if (type === 'checkbox') {
-		// 	if (checked) {
-		// 		acc[name] ? acc[name].push(value) : (acc[name] = [value]);
-		// 	}
-	} else if (type === 'file') {
-		const fileElement = element as HTMLInputElement;
-		if (fileElement.files?.length) {
-			acc[name] = await readFile(fileElement.files[0]);
-		}
-	} else if (value) {
-		acc[name] = value;
-	}
-	return Promise.resolve(acc);
-};
-
 function submitCallout(body: FormData, form: Element): void {
-	// TODO: Check this is working still
 	fetch(
 		'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
 		{
@@ -69,19 +42,69 @@ function submitCallout(body: FormData, form: Element): void {
 		});
 }
 
+const getValueFromElement = async (
+	element: FormElementType,
+	acc: FormData,
+): Promise<FormData> => {
+	const { type, name, value } = element;
+	if (type === 'radio') {
+		const radioElement = element as HTMLInputElement;
+		if (radioElement.checked) {
+			acc[name] = value;
+		}
+	} else if (type === 'checkbox') {
+		const checkboxElement = element as HTMLInputElement;
+		if (checkboxElement.checked) {
+			acc[name]
+				? (acc[name] = [...acc[name], value])
+				: (acc[name] = [value]);
+		}
+	} else if (type === 'file') {
+		const fileElement = element as HTMLInputElement;
+		if (fileElement.files?.length) {
+			acc[name] = await readFile(fileElement.files[0]);
+		}
+	} else if (value) {
+		acc[name] = value;
+	}
+	return Promise.resolve(acc);
+};
+
+const validate = (elements: FormElementType[]): boolean => {
+	let hasError = false;
+	elements.forEach(element => {
+		if (element.type === 'checkbox') {
+			const checkboxGroup = document.getElementById(`checkbox-group-${element.name}--mandatory`);
+			const checkedCheckboxes = checkboxGroup?.querySelectorAll(':checked');
+			if (!checkedCheckboxes?.length) {
+				document.getElementById(element.name)?.classList.add('callout-field--failure')
+				hasError = true;
+			} else { document.getElementById(element.name)?.classList.remove('callout-field--failure')};
+		}
+		else if (element.required && !element.value) {
+			document.getElementById(element.name)?.classList.add('callout-field--failure');
+			hasError = true;
+		} else { document.getElementById(element.name)?.classList.remove('callout-field--failure'); }
+	});
+	return hasError;
+}
+
+
 export async function handleSubmission(): Promise<void> {
 	const form = document.querySelector('form');
 	if (!form) return;
 	try {
-		const inputElements = form.getElementsByTagName('input');
-		const textAreaElements = form.getElementsByTagName('textarea');
-		const selectElements = form.getElementsByTagName('select');
 		const elements = [
-			...inputElements,
-			...textAreaElements,
-			...selectElements,
+			...form.getElementsByTagName('input'),
+			...form.getElementsByTagName('textarea'),
+			...form.getElementsByTagName('select'),
 		];
 
+		// Validate the form
+		const hasError = validate(elements);
+		if(hasError) return;
+
+		// Get Values
 		const data = Array.from(elements).reduce(
 			async (o: Promise<FormData>, elem) => {
 				const acc = await o;

@@ -1,21 +1,12 @@
-import { css } from '@emotion/react';
-import type { SerializedStyles } from '@emotion/react';
-import { neutral, remSpace } from '@guardian/source-foundations';
 import { SvgClock } from '@guardian/source-react-components';
 import { isValidDate } from 'date';
 import type Int64 from 'node-int64';
 import type { FC } from 'react';
+import { highlightStyles } from './styles';
 
-const deadlineStyles = (theme: any): SerializedStyles => css`
-	color: ${neutral[7]};
-	background: ${theme.deadlineColor};
-	display: flex;
-	align-items: center;
-	padding: 0 ${remSpace[1]};
-	position: absolute;
-	right: 0;
-	margin-top: -${remSpace[6]};
-`;
+const Highlight: FC = ({ children }) => {
+	return <span css={highlightStyles}>{children}</span>;
+};
 
 function getDaysBetween(first: Date, second: Date): number {
 	const ONE_DAY = 1000 * 3600 * 24;
@@ -41,6 +32,13 @@ function formatOptionalDate(date: Int64 | undefined): Date | undefined {
 	return d;
 }
 
+function isCalloutActive(until?: Int64): boolean {
+	const untilDate = formatOptionalDate(until);
+	const now = new Date();
+
+	return untilDate === undefined || untilDate > now;
+}
+
 const DeadlineDate: FC<{ until?: Int64 }> = ({ until }) => {
 	const untilDate = formatOptionalDate(until);
 	if (!untilDate) return null;
@@ -48,11 +46,11 @@ const DeadlineDate: FC<{ until?: Int64 }> = ({ until }) => {
 	const deadlineText = getDeadlineText(now, untilDate);
 	if (!deadlineText) return null;
 	return (
-		<span css={deadlineStyles}>
+		<Highlight>
 			<SvgClock size="xsmall" />
 			{deadlineText}
-		</span>
+		</Highlight>
 	);
 };
 
-export default DeadlineDate;
+export { Highlight, DeadlineDate, isCalloutActive };
