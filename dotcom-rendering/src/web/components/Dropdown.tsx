@@ -219,6 +219,40 @@ const NotificationBadge = ({ diameter }: { diameter: number }) => {
 	);
 };
 
+type DropdownLinkProps = {
+	link: DropdownLinkType;
+	index: number;
+};
+const DropdownLink = ({ link, index }: DropdownLinkProps) => {
+	return <li css={liStyles} key={link.title}>
+		<a
+			href={link.url}
+			css={[
+				linkStyles,
+				!!link.isActive && linkActive,
+				index === 0 && linkFirst,
+			]}
+			data-link-name={link.dataLinkName}
+		>
+			{link.title}
+			{link.notifications?.map((notification) => (
+				<div css={notificationTextStyles}>{notification}</div>
+			))}
+		</a>
+
+		{!!link.notifications?.length && (
+			<div
+				css={css`
+					margin-top: 12px;
+					margin-right: 8px;
+				`}
+			>
+				<NotificationBadge diameter={22} />
+			</div>
+		)}
+	</li>;
+};
+
 export const Dropdown = ({
 	id,
 	label,
@@ -350,43 +384,7 @@ export const Dropdown = ({
 								data-cy="dropdown-options"
 							>
 								{links.map((l, index) => (
-									<li css={liStyles} key={l.title}>
-										<a
-											href={l.url}
-											css={[
-												linkStyles,
-												!!l.isActive && linkActive,
-												index === 0 && linkFirst,
-											]}
-											data-link-name={l.dataLinkName}
-										>
-											{l.title}
-											{l.notifications?.map(
-												(notification) => (
-													<div
-														css={
-															notificationTextStyles
-														}
-													>
-														{notification}
-													</div>
-												),
-											)}
-										</a>
-
-										{!!l.notifications?.length && (
-											<div
-												css={css`
-													margin-top: 12px;
-													margin-right: 8px;
-												`}
-											>
-												<NotificationBadge
-													diameter={22}
-												/>
-											</div>
-										)}
-									</li>
+									<DropdownLink link={l} index={index} />
 								))}
 							</ul>
 						)}
