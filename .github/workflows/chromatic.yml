@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout - On Pull Request
         uses: actions/checkout@v3
-        if:  ${{ github.event_name == 'pull_request'}}
+        if: ${{ github.event_name == 'pull_request'}}
         with:
           fetch-depth: 0
           # By default the pull_request event will run on a ephermeral merge commit which simulates a merge between the pull request
@@ -21,7 +21,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Checkout - On Push Event
         uses: actions/checkout@v3
-        if:  ${{ github.event_name == 'push'}}
+        if: ${{ github.event_name == 'push'}}
         with:
           fetch-depth: 0
 
@@ -30,6 +30,15 @@ jobs:
       # Cache npm dependencies using https://github.com/bahmutov/npm-install
       # Root yarn installs all workspaces (root, common, dotcom)
       - uses: bahmutov/npm-install@v1
+
+      - name: Chromatic - Common Rendering
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__COMMON_RENDERING }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          workingDir: common-rendering
+          exitOnceUploaded: true
+          onlyChanged: '!(main)' # only turbosnap on non-main branches
 
       - name: Chromatic - Non Dependency PR / main
         uses: chromaui/action@v1
@@ -40,6 +49,7 @@ jobs:
           autoAcceptChanges: main
           onlyChanged: true
           untraced: '**/(package**.json|yarn.lock)'
+          workingDir: storybooks
 
       - name: Chromatic - Dependency PR
         uses: chromaui/action@v1
@@ -48,3 +58,4 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
+          workingDir: storybooks

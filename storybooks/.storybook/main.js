@@ -9,11 +9,19 @@ module.exports = {
 	core: {
 		builder: 'webpack5',
 	},
+	features: {
+		buildStoriesJson: true,
+	},
+	refs: () => ({
+		'common-rendering': {
+			title: 'common-rendering',
+			url: 'http://localhost:4001',
+		},
+	}),
 	stories: [
 		'../../apps-rendering/src/**/*.stories.@(js|mdx|ts|tsx)',
 		'../../dotcom-rendering/src/**/*.stories.@(tsx)',
 		'../../dotcom-rendering/stories/**/*.stories.@(tsx)',
-		'../../common-rendering/src/**/*.stories.@(tsx)',
 	],
 	addons: [
 		'@storybook/addon-essentials',
