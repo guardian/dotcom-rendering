@@ -80,6 +80,16 @@ export const labelStyles = css`
 		position: relative;
 		${adSlotLabelStyles}
 	}
+
+	.ad-slot__adtest-cookie-clear-link {
+		${textSans.xxsmall()};
+		text-align: left;
+		position: absolute;
+		right: 3px;
+		top: -22px;
+		padding: 0;
+		border: 0;
+	}
 `;
 
 export const adCollapseStyles = css`
