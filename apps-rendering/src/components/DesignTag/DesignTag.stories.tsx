@@ -6,7 +6,7 @@ import {
 } from '@guardian/common-rendering/src/fixtures/article';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { FC } from 'react';
-import HeadlineTag from './';
+import DesignTag from './';
 
 // ----- Stories ----- //
 
@@ -18,7 +18,7 @@ const Default: FC = () => (
 		}).map((format) => (
 			<div key={format.theme}>
 				<p>{getThemeNameAsString(format)}</p>
-				<HeadlineTag tagText={'Interview'} format={format} />
+				<DesignTag format={format} />
 				<br />
 			</div>
 		))}
@@ -28,8 +28,8 @@ const Default: FC = () => (
 // ----- Exports ----- //
 
 export default {
-	component: HeadlineTag,
-	title: 'AR/HeadlineTag',
+	component: DesignTag,
+	title: 'AR/DesignTag',
 };
 
 export { Default };

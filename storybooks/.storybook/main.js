@@ -2,18 +2,26 @@ const path = require('path');
 const webpack = require('webpack');
 
 // Generate dynamic Card and Layout stories
-require('../dotcom-rendering/scripts/gen-stories/gen-stories');
+require('../../dotcom-rendering/scripts/gen-stories/gen-stories');
 
 /** @type {import("@storybook/react/types").StorybookConfig} */
 module.exports = {
 	core: {
 		builder: 'webpack5',
 	},
+	features: {
+		buildStoriesJson: true,
+	},
+	refs: () => ({
+		'common-rendering': {
+			title: 'common-rendering',
+			url: 'http://localhost:4001',
+		},
+	}),
 	stories: [
-		'../apps-rendering/src/**/*.stories.@(js|mdx|ts|tsx)',
-		'../dotcom-rendering/src/**/*.stories.@(tsx)',
-		'../dotcom-rendering/stories/**/*.stories.@(tsx)',
-		'../common-rendering/src/**/*.stories.@(tsx)',
+		'../../apps-rendering/src/**/*.stories.@(js|mdx|ts|tsx)',
+		'../../dotcom-rendering/src/**/*.stories.@(tsx)',
+		'../../dotcom-rendering/stories/**/*.stories.@(tsx)',
 	],
 	addons: [
 		'@storybook/addon-essentials',
@@ -74,21 +82,30 @@ const dcrWebpack = (config) => {
 
 	// log4js tries to call "fs" in storybook -- we can ignore it
 	config.resolve.alias[
-		path.resolve(__dirname, '../dotcom-rendering/src/server/lib/logging.ts')
+		path.resolve(
+			__dirname,
+			'../../dotcom-rendering/src/server/lib/logging.ts',
+		)
 	] = path.resolve(__dirname, './mocks/log4js.js');
 
 	// SecureSignup uses @emotion/cache and @emotion/server - can't be used in storybook
 	config.resolve.alias[
-		path.resolve(__dirname, '../dotcom-rendering/src/web/components/SecureSignup.tsx')
-	] = path.resolve(__dirname, '../dotcom-rendering/__mocks__/SecureSignupMock.tsx');
+		path.resolve(
+			__dirname,
+			'../../dotcom-rendering/src/web/components/SecureSignup.tsx',
+		)
+	] = path.resolve(
+		__dirname,
+		'../../dotcom-rendering/__mocks__/SecureSignupMock.tsx',
+	);
 
 	// Support typescript in Storybook
 	// https://storybook.js.org/docs/configurations/typescript-config/
 	rules.push({
 		test: /\.[jt]sx?|mjs$/,
-		include: path.resolve(__dirname, '../dotcom-rendering'),
+		include: path.resolve(__dirname, '../../dotcom-rendering'),
 		exclude:
-			require('../dotcom-rendering/scripts/webpack/webpack.config.browser')
+			require('../../dotcom-rendering/scripts/webpack/webpack.config.browser')
 				.babelExclude,
 		use: [
 			{
@@ -140,8 +157,8 @@ const arWebpack = (config) => {
 	rules.push({
 		test: /\.tsx?$/,
 		include: [
-			path.resolve(__dirname, '../apps-rendering'),
-			path.resolve(__dirname, '../common-rendering'),
+			path.resolve(__dirname, '../../apps-rendering'),
+			path.resolve(__dirname, '../../common-rendering'),
 		],
 		use: [
 			{
@@ -176,15 +193,15 @@ const arWebpack = (config) => {
 
 	config.resolve.modules = [
 		...((config && config.resolve && config.resolve.modules) || []),
-		path.resolve(__dirname, '../apps-rendering/src'),
-		path.resolve(__dirname, '../common-rendering/src'),
+		path.resolve(__dirname, '../../apps-rendering/src'),
+		path.resolve(__dirname, '../../common-rendering/src'),
 	];
 
 	config.resolve.alias = {
 		...config.resolve.alias,
 		logger: path.resolve(
 			__dirname,
-			`../apps-rendering/src/logger/clientDev`,
+			`../../apps-rendering/src/logger/clientDev`,
 		),
 		Buffer: 'buffer',
 	};

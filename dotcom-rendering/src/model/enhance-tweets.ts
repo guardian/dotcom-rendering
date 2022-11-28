@@ -1,3 +1,5 @@
+import { CAPIElement } from '../types/content';
+
 const removeTweetClass = (elements: CAPIElement[]): CAPIElement[] => {
 	const enhanced: CAPIElement[] = [];
 	elements.forEach((element) => {

@@ -153,7 +153,7 @@ interface BlockContributor {
 
 interface Block {
 	id: string;
-	elements: CAPIElement[];
+	elements: import('./src/types/content').CAPIElement[];
 	attributes: Attributes;
 	blockCreatedOn?: number;
 	blockCreatedOnDisplay?: string;
@@ -565,7 +565,7 @@ declare namespace JSX {
 	interface IntrinsicElements {
 		'gu-island': {
 			name: string;
-			deferUntil?: 'idle' | 'visible' | 'interaction';
+			deferUntil?: 'idle' | 'visible' | 'interaction' | 'hash';
 			clientOnly?: boolean;
 			expediteLoading?: boolean;
 			props: any;

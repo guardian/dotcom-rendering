@@ -1,7 +1,7 @@
 import type { ABTest } from '@guardian/ab-core';
 
-export const integrateIMA: ABTest = {
-	id: 'IntegrateIMA',
+export const integrateIma: ABTest = {
+	id: 'IntegrateIma',
 	start: '2022-07-14',
 	expiry: '2022-12-31',
 	author: 'Zeke Hunter-Green',
@@ -14,9 +14,7 @@ export const integrateIMA: ABTest = {
 		'IMA integration works as expected without adversely affecting pages with videos',
 	canRun: () => true,
 	variants: [
-		{
-			id: 'variant',
-			test: (): void => {},
-		},
+		{ id: 'control', test: (): void => {} },
+		{ id: 'variant', test: (): void => {} },
 	],
 };

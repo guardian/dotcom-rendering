@@ -1,6 +1,7 @@
 import type express from 'express';
 import type { NewslettersPageModel } from 'src/model/pageModel';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
+import { isRecipe } from '../../model/enhance-recipes';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
@@ -22,11 +23,10 @@ function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 const enhanceCAPIType = (body: unknown): FEArticleType => {
 	const data = validateAsCAPIType(body);
 
-	const enhancedBlocks = enhanceBlocks(
-		data.blocks,
-		data.format,
-		data.promotedNewsletter,
-	);
+	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
+		promotedNewsletter: data.promotedNewsletter,
+		isRecipe: isRecipe(data.tags),
+	});
 
 	const CAPIArticle: FEArticleType = {
 		...data,

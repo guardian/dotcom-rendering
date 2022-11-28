@@ -136,6 +136,14 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 					</Tag>
 				</Margins>
 			);
+		case ArticleDesign.Obituary:
+			return (
+				<Margins format={format}>
+					<Tag format={format}>
+						<TagLink href="/tone/obituaries">Obituary</TagLink>
+					</Tag>
+				</Margins>
+			);
 		default:
 			return null;
 	}
