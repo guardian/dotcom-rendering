@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { brandAlt, space } from '@guardian/source-foundations';
 import { headline } from '@guardian/source-foundations/dist/cjs/typography/api';
 import { LinkButton } from '@guardian/source-react-components';
+import type { Newsletter } from '../../../../src/types/content';
 import { EmailSignup } from '../EmailSignup';
 import { Hide } from '../Hide';
 import { NewsletterPrivacyMessage } from '../NewsletterPrivacyMessage';

@@ -1,4 +1,5 @@
 import type { NavType } from 'src/model/extract-nav';
+import type { Newsletter } from 'src/types/content';
 import type { TagType } from 'src/types/tag';
 import type { EditionId } from 'src/web/lib/edition';
 import type { ConfigType } from '../types/config';

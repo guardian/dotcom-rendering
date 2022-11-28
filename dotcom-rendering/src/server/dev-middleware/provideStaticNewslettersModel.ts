@@ -1,4 +1,5 @@
 import type { NextFunction, Request, Response } from 'express';
+import type { Newsletter } from '../../../src/types/content';
 import type { NewslettersPageModel } from '../../model/pageModel';
 import { STATIC_CONFIG, STATIC_FOOTER, STATIC_NAV } from './defaultData';
 
