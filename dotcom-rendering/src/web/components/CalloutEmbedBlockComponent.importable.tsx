@@ -136,7 +136,6 @@ export const CalloutEmbedBlockComponent = ({
 	callout: CalloutBlockElement | CalloutBlockElementV2;
 	format: ArticleFormat;
 }) => {
-	console.log("I'm hit at CalloutEmbedBlockComponent");
 	let expandFormButtonRef: HTMLButtonElement | null = null;
 	let firstFieldElementRef: HTMLElement | null = null;
 	let lastElementRef: HTMLButtonElement | null = null;
