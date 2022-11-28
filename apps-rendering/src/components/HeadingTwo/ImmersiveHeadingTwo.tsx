@@ -12,16 +12,24 @@ import DefaultHeadingTwo from './HeadingTwo.defaults';
 
 // ----- Component ----- //
 
-const styles = (format: ArticleFormat): SerializedStyles => css`
+const styles = (
+	format: ArticleFormat,
+	isEditions: boolean,
+): SerializedStyles => css`
 	${headline.medium({ fontWeight: 'light' })}
 
-	${darkModeCss`
+	${isEditions
+		? null
+		: darkModeCss`
 		color: ${text.headingTwoDark(format)};
 	`}
 `;
 
 const ImmersiveHeadingTwo: FC<DefaultProps> = (props) => (
-	<DefaultHeadingTwo {...props} css={styles(props.format)} />
+	<DefaultHeadingTwo
+		{...props}
+		css={styles(props.format, props.isEditions)}
+	/>
 );
 
 // ----- Exports ----- //
