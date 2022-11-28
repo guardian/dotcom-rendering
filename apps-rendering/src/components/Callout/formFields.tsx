@@ -37,7 +37,7 @@ export const Disclaimer: FC<{ disabled: boolean }> = ({ disabled }) => {
 				tabIndex={tabIndex}
 				href="https://www.theguardian.com/help/privacy-policy"
 			>
-				privacy policy
+			privacy policy
 			</a>
 			.
 		</div>

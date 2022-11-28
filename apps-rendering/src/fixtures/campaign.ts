@@ -1,14 +1,10 @@
-import type { Option } from '@guardian/types';
-import { none, some } from '@guardian/types';
 import { parse } from 'client/parser';
-import Int64 from 'node-int64';
 
 const mockCampaign = {
 	id: '1fc53dab-1c76-4258-8194-b4b3d8399052',
 	name: 'CALLOUT: ghost flights',
 	priority: 0,
 	displayOnSensitive: false,
-	activeUntil: new Int64(1730542820000),
 	fields: {
 		callout: 'Share your experiences',
 		formId: 4711223,
@@ -135,9 +131,6 @@ const mockCampaign = {
 				type: 'checkbox',
 				required: '1',
 			},
-			// Basic fields supported by formstack that we need to support
-			// Need to add checkbox support
-			// and make sure we support - number, tel & email
 		],
 		formUrl:
 			'https://guardiannewsandmedia.formstack.com/forms/ghost_flights',
@@ -145,10 +138,9 @@ const mockCampaign = {
 };
 
 const parser = new DOMParser();
-const parseHtml = (html: string): Option<DocumentFragment> =>
-	parse(parser)(html).either<Option<DocumentFragment>>(
-		(_err) => none,
-		(doc) => some(doc),
+const parseHtml = (html: string): DocumentFragment | undefined => parse(parser)(html).either<DocumentFragment | undefined>(
+		(_err) => undefined,
+		(doc) => doc,
 	);
 const campaignDescription = parseHtml(mockCampaign.fields.description);
 

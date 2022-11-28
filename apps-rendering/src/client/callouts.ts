@@ -53,7 +53,7 @@ const getValueFromElement = async (
 };
 
 function submitCallout(body: FormData, form: Element): void {
-	// TODO: Check this is working still
+	// TODO: Check this is still the correct endpoint
 	fetch(
 		'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
 		{
