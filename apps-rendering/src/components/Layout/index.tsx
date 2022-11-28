@@ -6,13 +6,11 @@ import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import { getAdPlaceholderInserter } from 'ads';
 import type { BodyElement } from 'bodyElement';
-import { ElementKind } from 'bodyElement';
 import CommentLayout from 'components/Layout/CommentLayout';
 import GalleryLayout from 'components/Layout/GalleryLayout';
 import InteractiveLayout from 'components/Layout/InteractiveLayout';
 import LabsLayout from 'components/Layout/LabsLayout';
 import LiveLayout from 'components/Layout/LiveLayout';
-import MediaLayout from 'components/Layout/MediaLayout';
 import StandardLayout from 'components/Layout/StandardLayout';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
@@ -21,6 +19,7 @@ import { Result } from 'result';
 import AnalysisLayout from './AnalysisLayout';
 import ImmersiveLayout from './ImmersiveLayout';
 import NewsletterSignUpLayout from './NewsletterSignUpLayout';
+import LetterLayout from './LetterLayout';
 
 // ----- Functions ----- //
 
@@ -77,12 +76,14 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 
 	if (
 		item.design === ArticleDesign.Comment ||
-		item.design === ArticleDesign.Letter ||
 		item.design === ArticleDesign.Editorial
 	) {
 		return <CommentLayout item={item}>{render(item, body)}</CommentLayout>;
 	}
 
+	if (item.design === ArticleDesign.Letter) {
+		return <LetterLayout item={item}>{render(item, body)}</LetterLayout>;
+	}
 	if (item.design === ArticleDesign.Analysis) {
 		return (
 			<AnalysisLayout item={item}>{render(item, body)}</AnalysisLayout>
@@ -93,17 +94,12 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		return <GalleryLayout item={item}>{render(item, body)}</GalleryLayout>;
 	}
 
-	if (
-		item.design === ArticleDesign.Audio ||
-		item.design === ArticleDesign.Video
-	) {
+
+	if (item.design === ArticleDesign.NewsletterSignup) {
 		return (
-			<MediaLayout item={item}>
-				{render(
-					item,
-					body.filter((elem) => elem.kind === ElementKind.Image),
-				)}
-			</MediaLayout>
+			<NewsletterSignUpLayout item={item}>
+				{render(item, body)}
+			</NewsletterSignUpLayout>
 		);
 	}
 
@@ -117,7 +113,8 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === ArticleDesign.MatchReport ||
 		item.design === ArticleDesign.Obituary ||
 		item.design === ArticleDesign.Correction ||
-		item.design === ArticleDesign.Interview
+		item.design === ArticleDesign.Interview ||
+		item.design === ArticleDesign.Recipe
 	) {
 		if (item.display === ArticleDisplay.Immersive) {
 			return (
@@ -132,13 +129,6 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		);
 	}
 
-	if (item.design === ArticleDesign.NewsletterSignup) {
-		return (
-			<NewsletterSignUpLayout item={item}>
-				{render(item, body)}
-			</NewsletterSignUpLayout>
-		);
-	}
 
 	return notImplemented;
 };

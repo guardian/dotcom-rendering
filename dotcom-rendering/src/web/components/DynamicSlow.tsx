@@ -2,9 +2,12 @@
 import type { TrailType } from 'src/types/trails';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import {
+	Card100PictureRight,
+	Card100PictureTop,
 	Card25_Card75,
 	Card50_Card50,
 	Card75_Card25,
+	filterGroupedTrails,
 	shouldPadWrappableRows,
 } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
@@ -17,64 +20,6 @@ type Props = {
 	showAge?: boolean;
 };
 
-const Card100PictureTop = ({
-	cards,
-	showAge,
-	containerPalette,
-}: {
-	cards: TrailType[];
-	showAge?: boolean;
-	containerPalette?: DCRContainerPalette;
-}) => {
-	if (!cards[0]) return null;
-	return (
-		<UL padBottom={true}>
-			<LI percentage="100%" padSides={true}>
-				<FrontCard
-					trail={cards[0]}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					headlineSize="huge"
-					headlineSizeOnMobile="large"
-					imageUrl={cards[0].image}
-					imagePosition={'top'}
-					imagePositionOnMobile={'top'}
-				/>
-			</LI>
-		</UL>
-	);
-};
-
-const Card100PictureRight = ({
-	cards,
-	showAge,
-	containerPalette,
-}: {
-	cards: TrailType[];
-	showAge?: boolean;
-	containerPalette?: DCRContainerPalette;
-}) => {
-	if (!cards[0]) return null;
-	return (
-		<UL padBottom={true}>
-			<LI percentage="100%" padSides={true}>
-				<FrontCard
-					trail={cards[0]}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					headlineSize="huge"
-					headlineSizeOnMobile="large"
-					imageUrl={cards[0].image}
-					imageSize={'jumbo'}
-					imagePosition={'right'}
-					imagePositionOnMobile={'top'}
-					trailText={cards[0].trailText}
-				/>
-			</LI>
-		</UL>
-	);
-};
-
 const ColumnOfCards50_Card50 = ({
 	cards,
 	showAge,
@@ -84,22 +29,29 @@ const ColumnOfCards50_Card50 = ({
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
-	const big = cards[0];
+	const big = cards.slice(0, 1);
 	const remaining = cards.slice(1);
 
 	return (
 		<UL direction="row-reverse">
-			<LI percentage="50%" padSides={true} showDivider={true}>
-				<FrontCard
-					trail={big}
-					containerPalette={containerPalette}
-					headlineSize="large"
-					headlineSizeOnMobile="large"
-					imagePositionOnMobile="top"
-					showAge={showAge}
-					supportingContent={big.supportingContent}
-				/>
-			</LI>
+			{big.map((card) => (
+				<LI
+					percentage="50%"
+					padSides={true}
+					showDivider={true}
+					key={card.url}
+				>
+					<FrontCard
+						trail={card}
+						containerPalette={containerPalette}
+						headlineSize="large"
+						headlineSizeOnMobile="large"
+						imagePositionOnMobile="top"
+						showAge={showAge}
+						supportingContent={card.supportingContent}
+					/>
+				</LI>
+			))}
 			<LI percentage="50%">
 				<UL direction="row" wrapCards={true}>
 					{remaining.map((card) => {
@@ -142,7 +94,12 @@ const ColumnOfCards50_Card25_Card25 = ({
 		<UL direction="row-reverse">
 			{bigs.map((big) => {
 				return (
-					<LI percentage="25%" padSides={true} showDivider={true}>
+					<LI
+						percentage="25%"
+						padSides={true}
+						showDivider={true}
+						key={big.url}
+					>
 						<FrontCard
 							trail={big}
 							containerPalette={containerPalette}
@@ -209,6 +166,7 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 							length - (length % columns),
 							columns,
 						)}
+						key={card.url}
 					>
 						<FrontCard
 							trail={card}
@@ -243,38 +201,31 @@ export const DynamicSlow = ({
 		| 'TwoVeryBigsSecondBoosted';
 
 	let firstSliceCards: TrailType[] = [];
-	// Any trails not used in the first slice are demoted to here
-	let secondSliceGroupedTrails: DCRGroupedTrails = { ...groupedTrails };
 
 	// Decide the layout and contents for the first slice, demoting any remaining cards to the second slice
 	if (groupedTrails.huge.length > 0) {
 		firstSliceLayout = 'oneHuge';
 		firstSliceCards = groupedTrails.huge.slice(0, 1);
-		secondSliceGroupedTrails = {
-			...groupedTrails,
-			huge: groupedTrails.huge.slice(1),
-		};
 	} else if (groupedTrails.veryBig.length === 1) {
 		firstSliceLayout = 'oneVeryBig';
 		firstSliceCards = groupedTrails.veryBig.slice(0, 1);
-		secondSliceGroupedTrails = {
-			...groupedTrails,
-			veryBig: groupedTrails.veryBig.slice(1),
-		};
 	} else if (groupedTrails.veryBig.length > 1) {
-		if (groupedTrails.veryBig[0].isBoosted) {
+		if (groupedTrails.veryBig[0]?.isBoosted) {
 			firstSliceLayout = 'TwoVeryBigsFirstBoosted';
-		} else if (groupedTrails.veryBig[1].isBoosted) {
+		} else if (groupedTrails.veryBig[1]?.isBoosted) {
 			firstSliceLayout = 'TwoVeryBigsSecondBoosted';
 		} else {
 			firstSliceLayout = 'twoVeryBigs';
 		}
 		firstSliceCards = groupedTrails.veryBig.slice(0, 2);
-		secondSliceGroupedTrails = {
-			...groupedTrails,
-			veryBig: groupedTrails.veryBig.slice(2),
-		};
 	}
+
+	// Create our object of grouped trails that doesn't include any
+	// cards used by the first slice
+	const secondSliceGroupedTrails = filterGroupedTrails({
+		groupedTrails,
+		filter: firstSliceCards,
+	});
 
 	let secondSliceLayout: 'twoBigs' | 'oneBig' | 'noBigs';
 	let secondSliceCards: TrailType[] = [];

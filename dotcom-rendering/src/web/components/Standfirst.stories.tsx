@@ -314,6 +314,22 @@ export const SpecialReport = () => {
 };
 SpecialReport.story = { name: 'SpecialReport' };
 
+export const SpecialReportAlt = () => {
+	return (
+		<Section fullWidth={true}>
+			<Standfirst
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticleSpecial.SpecialReportAlt,
+				}}
+				standfirst="This is how SpecialReportAlt standfirst text looks. Aut explicabo officia delectus omnis repellendus voluptas <ul><li><a href=\'https://www.theguardian.com/uk'>Bullet 1</a></li><li><a href=\'https://www.theguardian.com/uk'>Bullet 2</a></li></ul>"
+			/>
+		</Section>
+	);
+};
+SpecialReportAlt.story = { name: 'SpecialReportAlt' };
+
 export const Editorial = () => {
 	return (
 		<Section fullWidth={true}>

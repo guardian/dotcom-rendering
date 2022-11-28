@@ -39,7 +39,6 @@ test('produces valid AMP doc', async () => {
 	const analytics: AnalyticsModel = {
 		gaTracker: 'UA-XXXXXXX-X',
 		title: 'Foo',
-		fbPixelaccount: 'XXXXXXXXXX',
 		comscoreID: 'XXXXXXX',
 		section: ExampleArticle.sectionName,
 		contentType: ExampleArticle.contentType,

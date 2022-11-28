@@ -10,9 +10,8 @@ import {
 	QandaAtom,
 	TimelineAtom,
 } from '@guardian/atoms-rendering';
-import FigCaption, {
-	IconVariant as FigCaptionIconVariant,
-} from '@guardian/common-rendering/src/components/figCaption';
+import { CaptionIconVariant } from '@guardian/common-rendering/src/components/captionIcon';
+import FigCaption from '@guardian/common-rendering/src/components/figCaption';
 import { border, text } from '@guardian/common-rendering/src/editorialPalette';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
@@ -28,6 +27,7 @@ import {
 	withDefault,
 } from '@guardian/types';
 import type { Option } from '@guardian/types';
+import { themeToPillar } from 'articleFormat';
 import { ElementKind } from 'bodyElement';
 import type {
 	AudioAtom as AudioAtomElement,
@@ -63,6 +63,7 @@ import InteractiveAtom, {
 import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LiveEventLink from 'components/LiveEventLink';
+import NewsletterSignup from 'components/NewsletterSignup';
 import OrderedList from 'components/OrderedList';
 import Paragraph from 'components/Paragraph';
 import Pullquote from 'components/Pullquote';
@@ -72,11 +73,6 @@ import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { Result } from 'result';
 import { backgroundColor, darkModeCss } from 'styles';
-import {
-	themeFromString,
-	themeToPillar,
-	themeToPillarString,
-} from 'themeStyles';
 
 // ----- Renderer ----- //
 
@@ -577,7 +573,7 @@ const mediaAtomRenderer = (
 		format: format,
 		supportsDarkMode: true,
 		children: some(h(Caption, { caption, format })),
-		variant: FigCaptionIconVariant.Video,
+		variant: CaptionIconVariant.Video,
 	});
 	return styledH('figure', figureAttributes, [
 		isEditions
@@ -594,8 +590,7 @@ const audioAtomRenderer = (
 	format: ArticleFormat,
 	element: AudioAtomElement,
 ): ReactNode => {
-	const { theme } = format;
-	const pillar = themeFromString('pillar/' + themeToPillarString(theme));
+	const pillar = themeToPillar(format.theme);
 	const audioAtomStyles = css`
 		figure {
 			margin: 0;
@@ -652,10 +647,8 @@ const render =
 			case ElementKind.Tweet:
 				return h(Tweet, { content: element.content, format, key });
 
-			case ElementKind.Callout: {
-				const { campaign, description } = element;
-				return h(CalloutForm, { campaign, format, description });
-			}
+			case ElementKind.Callout:
+				return h(CalloutForm, { format, ...element });
 
 			case ElementKind.Embed:
 				return h(EmbedComponentWrapper, {
@@ -695,6 +688,9 @@ const render =
 			case ElementKind.KnowledgeQuizAtom:
 			case ElementKind.PersonalityQuizAtom:
 				return h(Quiz, { format, element });
+
+			case ElementKind.NewsletterSignUp:
+				return h(NewsletterSignup, { format, element });
 		}
 	};
 

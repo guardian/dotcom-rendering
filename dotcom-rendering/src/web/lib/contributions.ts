@@ -2,7 +2,7 @@ import { onConsentChange } from '@guardian/consent-management-platform';
 import { getCookie } from '@guardian/libs';
 import type { HeaderPayload } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useState } from 'react';
-import type { CAPIArticleType } from '../../types/frontend';
+import type { FEArticleType } from '../../types/frontend';
 import type { IdApiUserData } from './getIdapiUserData';
 import { getIdApiUserData } from './getIdapiUserData';
 import { useOnce } from './useOnce';
@@ -261,7 +261,7 @@ export const lazyFetchEmailWithTimeout =
 	};
 
 export const getContributionsServiceUrl = (
-	CAPIArticle: CAPIArticleType,
+	CAPIArticle: FEArticleType,
 ): string => process.env.SDC_URL ?? CAPIArticle.contributionsServiceUrl;
 
 type PurchaseInfo = HeaderPayload['targeting']['purchaseInfo'];

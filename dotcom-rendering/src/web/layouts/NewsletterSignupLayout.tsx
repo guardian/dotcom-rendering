@@ -23,7 +23,7 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import type { NavType } from '../../model/extract-nav';
-import type { CAPIArticleType } from '../../types/frontend';
+import type { FEArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
@@ -52,7 +52,7 @@ import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 type Props = {
-	CAPIArticle: CAPIArticleType;
+	CAPIArticle: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 };
@@ -124,6 +124,7 @@ const previewCaptionStyle = css`
 	background-color: ${brandAlt[400]};
 	padding: ${space[1]}px ${space[3]}px;
 	${textSans.medium({ fontWeight: 'bold' })};
+	text-decoration: none;
 
 	:hover {
 		text-decoration: initial;
@@ -163,7 +164,7 @@ const shareDivStyle = css`
 `;
 
 const getMainMediaCaptions = (
-	CAPIArticle: CAPIArticleType,
+	CAPIArticle: FEArticleType,
 ): (string | undefined)[] =>
 	CAPIArticle.mainMediaElements.map((el) =>
 		el._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
@@ -176,6 +177,9 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		promotedNewsletter,
 		config: { host },
 	} = CAPIArticle;
+
+	const isInEuropeTest =
+		CAPIArticle.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: CAPIArticle.isAdFreeUser,
@@ -226,6 +230,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 				<Section
 					fullWidth={true}
+					shouldCenter={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					padSides={false}
@@ -246,6 +251,10 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						}
 						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPIArticle.config.idApiUrl}
+						headerTopBarSwitch={
+							!!CAPIArticle.config.switches.headerTopNav
+						}
+						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 
@@ -267,6 +276,9 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							CAPIArticle.nav.readerRevenueLinks.header.subscribe
 						}
 						editionId={CAPIArticle.editionId}
+						headerTopBarSwitch={
+							!!CAPIArticle.config.switches.headerTopNav
+						}
 					/>
 				</Section>
 
@@ -437,7 +449,6 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											target="_blank"
 											icon={<SvgEye size="medium" />}
 											priority="secondary"
-											subdued={true}
 										>
 											Click here to see the latest version
 											of this newsletter

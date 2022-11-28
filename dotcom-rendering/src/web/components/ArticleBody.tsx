@@ -2,12 +2,16 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { between, body, headline, space } from '@guardian/source-foundations';
+import { isRecipe } from '../../model/enhance-recipes';
 import type { Switches } from '../../types/config';
 import type { Palette } from '../../types/palette';
+import type { TagType } from '../../types/tag';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { decidePalette } from '../lib/decidePalette';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { revealStyles } from '../lib/revealStyles';
+import { Island } from './Island';
+import { RecipeMultiplier } from './RecipeMultiplier.importable';
 
 type Props = {
 	format: ArticleFormat;
@@ -195,6 +199,11 @@ export const ArticleBody = ({
 				globalLinkStyles(palette),
 			]}
 		>
+			{isRecipe(tags) && (
+				<Island deferUntil="hash" clientOnly={true}>
+					<RecipeMultiplier />
+				</Island>
+			)}
 			<ArticleRenderer
 				format={format}
 				elements={blocks[0] ? blocks[0].elements : []}

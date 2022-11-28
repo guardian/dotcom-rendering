@@ -13,7 +13,8 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
 import type { NavType } from '../../model/extract-nav';
-import type { CAPIArticleType } from '../../types/frontend';
+import type { ImageBlockElement } from '../../types/content';
+import type { FEArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -172,7 +173,7 @@ const stretchLines = css`
 	}
 `;
 interface Props {
-	CAPIArticle: CAPIArticleType;
+	CAPIArticle: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }
@@ -338,7 +339,13 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										ArticleSpecial.Labs ? (
 											<GuardianLabsLines />
 										) : (
-											<DecideLines format={format} />
+											<DecideLines
+												format={format}
+												color={
+													decidePalette(format).border
+														.article
+												}
+											/>
 										)}
 									</div>
 								</div>
@@ -441,7 +448,12 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										/>
 									</Island>
 								)}
-								<StraightLines count={4} />
+								<StraightLines
+									count={4}
+									color={
+										decidePalette(format).border.secondary
+									}
+								/>
 								<SubMeta
 									format={format}
 									subMetaKeywordLinks={
@@ -495,10 +507,6 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														isPaidContent={
 															CAPIArticle.pageType
 																.isPaidContent
-														}
-														format={format}
-														editionId={
-															CAPIArticle.editionId
 														}
 													/>
 												)}

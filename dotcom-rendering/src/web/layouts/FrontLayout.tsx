@@ -6,6 +6,7 @@ import {
 	brandLine,
 	neutral,
 } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { NavType } from '../../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../../types/front';
@@ -18,6 +19,7 @@ import { MostViewedFooter } from '../components/MostViewedFooter';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
+import { ShowMore } from '../components/ShowMore.importable';
 import { Snap } from '../components/Snap';
 import { SubNav } from '../components/SubNav.importable';
 import { DecideContainer } from '../lib/DecideContainer';
@@ -33,28 +35,6 @@ const spaces = / /g;
 /** TODO: Confirm with is a valid way to generate component IDs. */
 const ophanComponentId = (name: string) =>
 	name.toLowerCase().replace(spaces, '-');
-
-const shouldInsertMerchHigh = (
-	index: number,
-	isNetworkFront: boolean | undefined,
-	collectionCount: number,
-	isPaidContent: boolean | undefined,
-) => {
-	const minContainers = isPaidContent ? 1 : 2;
-	if (collectionCount < minContainers) {
-		return false;
-	}
-	let desiredPosition;
-	if (collectionCount < 4) {
-		desiredPosition = 2;
-	} else if (isNetworkFront) {
-		desiredPosition = 5;
-	} else {
-		desiredPosition = 4;
-	}
-
-	return index === desiredPosition;
-};
 
 const isNavList = (collection: DCRCollectionType) => {
 	return (
@@ -76,10 +56,107 @@ const isToggleable = (
 	} else return index != 0 && !isNavList(collection);
 };
 
+const getMerchHighPosition = (
+	collectionCount: number,
+	isNetworkFront: boolean | undefined,
+) => {
+	if (collectionCount < 4) {
+		return 2;
+	} else if (isNetworkFront) {
+		return 5;
+	} else {
+		return 4;
+	}
+};
+
+/**
+ * On mobile, we remove the first container if it is a thrasher
+ * and remove a container if it, or the next sibling, is a commercial container
+ * we also exclude any containers that are directly before a thrasher
+ * then we take every other container, up to a maximum of 10, for targeting MPU insertion
+ */
+
+const getMobileAdPositions = (
+	isNetworkFront: boolean | undefined,
+	collections: DCRCollectionType[],
+) => {
+	const merchHighPosition = getMerchHighPosition(
+		collections.length,
+		isNetworkFront,
+	);
+
+	const positions: number[] = collections
+		.map((collection, collectionIndex) => {
+			const isThrasher = collection.collectionType === 'fixed/thrasher';
+			const isFirst = collectionIndex === 0;
+			const isNearMerchandising =
+				collectionIndex === merchHighPosition ||
+				collectionIndex + 1 === merchHighPosition;
+			const isNearThrasher =
+				collections[collectionIndex + 1]?.collectionType ===
+				'fixed/thrasher';
+			if (isFirst && isThrasher) return false;
+			if (isNearMerchandising) return false;
+			if (isNearThrasher) return false;
+			else if (
+				collectionIndex % 2 === 0 &&
+				collectionIndex < collections.length - 1
+			) {
+				return true;
+			}
+			return false;
+		})
+		.map((shouldDisplayAd, collectionIndex) =>
+			shouldDisplayAd ? collectionIndex : undefined,
+		)
+		.filter((index): index is number => typeof index === 'number')
+		// Should insert no more than 10 ads
+		.slice(0, 10);
+	return positions;
+};
+
+const decideAdSlot = (
+	index: number,
+	isNetworkFront: boolean | undefined,
+	collectionCount: number,
+	isPaidContent: boolean | undefined,
+	format: ArticleDisplay,
+	mobileAdPositions: (number | undefined)[],
+) => {
+	const minContainers = isPaidContent ? 1 : 2;
+	if (
+		collectionCount > minContainers &&
+		index === getMerchHighPosition(collectionCount, isNetworkFront)
+	) {
+		return (
+			<AdSlot
+				data-print-layout="hide"
+				position="merchandising-high"
+				display={format}
+			/>
+		);
+	} else if (mobileAdPositions.includes(index)) {
+		return (
+			<Hide from="tablet">
+				<AdSlot
+					index={index}
+					data-print-layout="hide"
+					position="mobile-front"
+					display={format}
+				/>
+			</Hide>
+		);
+	}
+	return null;
+};
+
 export const FrontLayout = ({ front, NAV }: Props) => {
 	const {
 		config: { isPaidContent },
 	} = front;
+
+	const isInEuropeTest =
+		front.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	const format = {
 		display: ArticleDisplay.Standard,
@@ -95,6 +172,13 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 	 * This property currently only applies to the header and merchandising slots
 	 */
 	const renderAds = !front.isAdFreeUser;
+
+	const mobileAdPositions = front.isNetworkFront
+		? getMobileAdPositions(
+				front.isNetworkFront,
+				front.pressedPage.collections,
+		  )
+		: [];
 
 	return (
 		<>
@@ -116,6 +200,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					<Section
 						fullWidth={true}
+						shouldCenter={false}
 						showTopBorder={false}
 						showSideBorders={false}
 						padSides={false}
@@ -134,6 +219,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							remoteHeader={!!front.config.switches.remoteHeader}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
+							headerTopBarSwitch={
+								!!front.config.switches.headerTopNav
+							}
+							isInEuropeTest={isInEuropeTest}
 						/>
 					</Section>
 					<Section
@@ -151,6 +240,9 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.nav.readerRevenueLinks.header.subscribe
 							}
 							editionId={front.editionId}
+							headerTopBarSwitch={
+								!!front.config.switches.headerTopNav
+							}
 						/>
 					</Section>
 					{NAV.subNavSections && (
@@ -188,7 +280,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				</>
 			</div>
 
-			<main data-layout="FrontLayout">
+			<main data-layout="FrontLayout" id="maincontent">
 				{front.pressedPage.collections.map((collection, index) => {
 					// Backfills should be added to the end of any curated content
 					const trails = collection.curated.concat(
@@ -202,18 +294,29 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 
 					if (collection.collectionType === 'fixed/thrasher') {
 						return (
-							<Section
-								fullWidth={true}
-								padSides={false}
-								padBottom={true}
-								showTopBorder={false}
-								showSideBorders={true}
-								ophanComponentLink={ophanComponentLink}
-								ophanComponentName={ophanName}
-								containerName={collection.collectionType}
-							>
-								<Snap snapData={trails[0].snapData} />
-							</Section>
+							<>
+								<Section
+									fullWidth={true}
+									padSides={false}
+									padBottom={true}
+									showTopBorder={false}
+									showSideBorders={true}
+									ophanComponentLink={ophanComponentLink}
+									ophanComponentName={ophanName}
+									containerName={collection.collectionType}
+								>
+									<Snap snapData={trails[0].snapData} />
+								</Section>
+								{decideAdSlot(
+									index,
+									front.isNetworkFront,
+									front.pressedPage.collections.length,
+									front.pressedPage.frontProperties
+										.isPaidContent,
+									format.display,
+									mobileAdPositions,
+								)}
+							</>
 						);
 					}
 
@@ -223,38 +326,51 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 						front.config.switches.mostViewedFronts
 					) {
 						return (
-							<Section
-								key={collection.id}
-								title="Most viewed"
-								showTopBorder={index > 0}
-								padContent={false}
-								verticalMargins={false}
-								url={collection.href}
-								ophanComponentLink={ophanComponentLink}
-								ophanComponentName={ophanName}
-								containerName={collection.collectionType}
-								containerPalette={collection.containerPalette}
-								sectionId={collection.id}
-								showDateHeader={
-									collection.config.showDateHeader
-								}
-								editionId={front.editionId}
-								treats={collection.treats}
-								data-print-layout="hide"
-								element="aside"
-							>
-								<MostViewedFooterLayout>
-									<MostViewedFooter
-										tabs={[
-											{
-												trails: trails.slice(10),
-											},
-										]}
-										sectionName="Most viewed"
-										// TODO: Include mostCommented & mostShared once we have this data in the FE response
-									/>
-								</MostViewedFooterLayout>
-							</Section>
+							<>
+								<Section
+									key={collection.id}
+									title="Most viewed"
+									showTopBorder={index > 0}
+									padContent={false}
+									verticalMargins={false}
+									url={collection.href}
+									ophanComponentLink={ophanComponentLink}
+									ophanComponentName={ophanName}
+									containerName={collection.collectionType}
+									containerPalette={
+										collection.containerPalette
+									}
+									sectionId={collection.id}
+									showDateHeader={
+										collection.config.showDateHeader
+									}
+									editionId={front.editionId}
+									treats={collection.treats}
+									data-print-layout="hide"
+									element="aside"
+								>
+									<MostViewedFooterLayout>
+										<MostViewedFooter
+											tabs={[
+												{
+													trails: trails.slice(10),
+												},
+											]}
+											sectionName="Most viewed"
+											// TODO: Include mostCommented & mostShared once we have this data in the FE response
+										/>
+									</MostViewedFooterLayout>
+								</Section>
+								{decideAdSlot(
+									index,
+									front.isNetworkFront,
+									front.pressedPage.collections.length,
+									front.pressedPage.frontProperties
+										.isPaidContent,
+									format.display,
+									mobileAdPositions,
+								)}
+							</>
 						);
 					}
 
@@ -295,18 +411,33 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										collection.displayName === 'Headlines'
 									}
 								/>
+								{collection.canShowMore && (
+									<Island deferUntil="interaction">
+										<ShowMore
+											containerTitle={
+												collection.displayName
+											}
+											containerId={collection.id}
+											path={front.pressedPage.id}
+											baseUrl={front.config.ajaxUrl}
+											containerPalette={
+												collection.containerPalette
+											}
+											showAge={
+												collection.displayName ===
+												'Headlines'
+											}
+										/>
+									</Island>
+								)}
 							</Section>
-							{shouldInsertMerchHigh(
+							{decideAdSlot(
 								index,
 								front.isNetworkFront,
 								front.pressedPage.collections.length,
 								front.pressedPage.frontProperties.isPaidContent,
-							) && (
-								<AdSlot
-									data-print-layout="hide"
-									position="merchandising-high"
-									display={format.display}
-								/>
+								format.display,
+								mobileAdPositions,
 							)}
 						</>
 					);

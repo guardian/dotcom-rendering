@@ -16,7 +16,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
 import type { NavType } from '../../model/extract-nav';
-import type { CAPIArticleType } from '../../types/frontend';
+import type { FEArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -290,7 +290,7 @@ const starWrapper = css`
 `;
 
 interface Props {
-	CAPIArticle: CAPIArticleType;
+	CAPIArticle: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }
@@ -299,6 +299,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPIArticle;
+
+	const isInEuropeTest =
+		CAPIArticle.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: CAPIArticle.isAdFreeUser,
@@ -371,6 +374,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							showTopBorder={false}
 							showSideBorders={false}
 							padSides={false}
+							shouldCenter={false}
 							backgroundColour={brandBackground.primary}
 							element="header"
 						>
@@ -393,6 +397,10 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
+								isInEuropeTest={isInEuropeTest}
+								headerTopBarSwitch={
+									!!CAPIArticle.config.switches.headerTopNav
+								}
 							/>
 						</Section>
 					)}
@@ -412,6 +420,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									.subscribe
 							}
 							editionId={CAPIArticle.editionId}
+							headerTopBarSwitch={
+								!!CAPIArticle.config.switches.headerTopNav
+							}
 						/>
 					</Section>
 					{NAV.subNavSections && !isLabs && (
@@ -441,6 +452,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									cssOverrides={css`
 										display: block;
 									`}
+									color={palette.border.secondary}
 								/>
 							</Section>
 						</>
@@ -591,7 +603,10 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									{format.theme === ArticleSpecial.Labs ? (
 										<GuardianLabsLines />
 									) : (
-										<DecideLines format={format} />
+										<DecideLines
+											format={format}
+											color={palette.border.article}
+										/>
 									)}
 								</div>
 							</div>
@@ -723,6 +738,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									cssOverrides={css`
 										display: block;
 									`}
+									color={palette.border.secondary}
 								/>
 								<SubMeta
 									format={format}
@@ -771,8 +787,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.pageType
 													.isPaidContent
 											}
-											format={format}
-											editionId={CAPIArticle.editionId}
 										/>
 									)}
 									{!isPaidContent ? (

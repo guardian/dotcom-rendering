@@ -34,6 +34,7 @@ import { renderAll } from 'renderer';
 import { Result } from 'result';
 import GalleryLayout from './GalleryLayout';
 import ImmersiveLayout from './ImmersiveLayout';
+import LetterLayout from './LetterLayout';
 import Live from './LiveLayout';
 import NewsletterSignUpLayout from './NewsletterSignUpLayout';
 
@@ -172,12 +173,12 @@ CommentItem.story = { name: 'Comment' };
 
 export const Letter = (): React.ReactNode => {
 	return (
-		<Comment item={letter}>
+		<LetterLayout item={letter}>
 			{renderAll(
 				formatFromItem(letter, some(ArticleDisplay.Standard)),
 				Result.partition(letter.body).oks,
 			)}
-		</Comment>
+		</LetterLayout>
 	);
 };
 Letter.story = { name: 'Letter' };

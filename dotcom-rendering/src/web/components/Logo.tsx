@@ -1,18 +1,23 @@
 import { css } from '@emotion/react';
 import {
 	brandAlt,
-	brandText,
 	from,
+	neutral,
+	space,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import { SvgGuardianBestWebsiteLogo } from '@guardian/source-react-components';
+import {
+	SvgGuardianBestWebsiteLogo,
+	SvgGuardianLogo,
+} from '@guardian/source-react-components';
+import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 
 const linkStyles = css`
 	float: right;
 	margin-top: 10px;
 	margin-right: 54px;
-	margin-bottom: 21px;
+	margin-bottom: 10px;
 	width: 146px;
 
 	${from.mobileMedium} {
@@ -28,7 +33,7 @@ const linkStyles = css`
 	}
 	${from.desktop} {
 		margin-top: 5px;
-		margin-bottom: 15px;
+		margin-bottom: ${space[3]}px;
 		position: relative;
 		width: 295px;
 	}
@@ -39,20 +44,41 @@ const linkStyles = css`
 	${getZIndex('TheGuardian')}
 `;
 
-export const Logo: React.FC = () => {
-	return (
-		<a css={linkStyles} href="/" data-link-name="nav2 : logo">
-			<span
-				css={css`
-					${visuallyHidden};
-				`}
-			>
-				The Guardian - Back to home
-			</span>
-			<SvgGuardianBestWebsiteLogo
-				textColor={brandText.primary}
-				textAccentColor={brandAlt[400]}
-			/>
-		</a>
-	);
+type Props = {
+	editionId: EditionId;
+};
+
+export const Logo = ({ editionId }: Props) => {
+	switch (editionId) {
+		case 'UK':
+			return (
+				<a css={linkStyles} href="/" data-link-name="nav3 : logo">
+					<span
+						css={css`
+							${visuallyHidden};
+						`}
+					>
+						The Guardian - Back to home
+					</span>
+					<SvgGuardianBestWebsiteLogo
+						textColor={neutral[100]}
+						textAccentColor={brandAlt[400]}
+					/>
+				</a>
+			);
+
+		default:
+			return (
+				<a css={linkStyles} href="/" data-link-name="nav3 : logo">
+					<span
+						css={css`
+							${visuallyHidden};
+						`}
+					>
+						The Guardian - Back to home
+					</span>
+					<SvgGuardianLogo textColor={neutral[100]} />
+				</a>
+			);
+	}
 };

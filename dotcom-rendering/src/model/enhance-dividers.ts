@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+import type { CAPIElement } from '../types/content';
 
 const isDinkus = (element: CAPIElement): boolean => {
 	// Classic dinkus do not trigger dropcaps

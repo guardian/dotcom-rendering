@@ -5,6 +5,7 @@ import { findBySubsection } from '../../model/article-sections';
 import { extractNAV } from '../../model/extract-nav';
 import { validateAsCAPIType } from '../../model/validate';
 import type { AnalyticsModel } from '../components/Analytics';
+import { isAmpSupported } from '../components/Elements';
 import type { PermutiveModel } from '../components/Permutive';
 import { generatePermutivePayload } from '../lib/permutive';
 import { extractScripts } from '../lib/scripts';
@@ -18,6 +19,18 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 		const { linkedData } = CAPIArticle;
 		const { config } = CAPIArticle;
 		const elements = CAPIArticle.blocks.flatMap((block) => block.elements);
+
+		if (
+			!isAmpSupported({
+				format: CAPIArticle.format,
+				tags: CAPIArticle.tags,
+				elements,
+				switches: CAPIArticle.config.switches,
+				main: CAPIArticle.main,
+			})
+		) {
+			throw new NotRenderableInDCR();
+		}
 
 		const scripts = [
 			...extractScripts(elements, CAPIArticle.mainMediaElements),
@@ -35,7 +48,6 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 		const analytics: AnalyticsModel = {
 			gaTracker: 'UA-78705427-1',
 			title: CAPIArticle.headline,
-			fbPixelaccount: '279880532344561',
 			comscoreID: '6035250',
 			section: sectionName,
 			contentType: CAPIArticle.contentType,

@@ -176,12 +176,12 @@ const WithLink = ({
 		return (
 			<Link
 				href={linkTo}
-				subdued={true}
 				cssOverrides={css`
 					/* See: https://css-tricks.com/nested-links/ */
 					${getZIndex('card-nested-link')}
 					/* The following styles turn off those provided by Link */
 					color: inherit;
+					text-decoration: none;
 					/* stylelint-disable-next-line property-disallowed-list */
 					font-family: inherit;
 					font-size: inherit;
@@ -226,15 +226,18 @@ export const CardHeadline = ({
 		: palette.text.cardKicker;
 	return (
 		<>
-			<h4
+			<h3
 				css={[
 					format.theme === ArticleSpecial.Labs
 						? labTextStyles(size)
 						: fontStyles({
 								size,
-								fontWeight: containerPalette
-									? 'bold'
-									: 'regular',
+								fontWeight:
+									containerPalette &&
+									containerPalette !=
+										'SpecialReportAltPalette'
+										? 'bold'
+										: 'regular',
 						  }),
 					format.theme !== ArticleSpecial.Labs &&
 						fontStylesOnMobile({
@@ -266,7 +269,7 @@ export const CardHeadline = ({
 						{headlineText}
 					</span>
 				</WithLink>
-			</h4>
+			</h3>
 			{!!byline && showByline && (
 				<Byline
 					text={byline}

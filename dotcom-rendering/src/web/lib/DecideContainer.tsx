@@ -3,21 +3,25 @@ import type {
 	DCRContainerType,
 	DCRFrontCard,
 	DCRGroupedTrails,
+	DCRSupportingContent,
 } from '../../types/front';
 import { DynamicFast } from '../components/DynamicFast';
 import { DynamicPackage } from '../components/DynamicPackage';
 import { DynamicSlow } from '../components/DynamicSlow';
 import { DynamicSlowMPU } from '../components/DynamicSlowMPU';
 import { FixedLargeSlowXIV } from '../components/FixedLargeSlowXIV';
+import { FixedMediumFastXI } from '../components/FixedMediumFastXI';
+import { FixedMediumFastXII } from '../components/FixedMediumFastXII';
 import { FixedMediumSlowVI } from '../components/FixedMediumSlowVI';
 import { FixedMediumSlowVII } from '../components/FixedMediumSlowVII';
 import { FixedMediumSlowXIIMPU } from '../components/FixedMediumSlowXIIMPU';
+import { FixedSmallFastVIII } from '../components/FixedSmallFastVIII';
 import { FixedSmallSlowI } from '../components/FixedSmallSlowI';
 import { FixedSmallSlowIII } from '../components/FixedSmallSlowIII';
 import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
 import { FixedSmallSlowVMPU } from '../components/FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from '../components/FixedSmallSlowVThird';
-import { FixedMediumFastXII } from '../components/FixedMediumFastXII';
+import { NavList } from '../components/NavList';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -26,6 +30,7 @@ type Props = {
 	containerType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
+	supportingContent?: DCRSupportingContent[] | undefined;
 };
 
 export const DecideContainer = ({
@@ -35,6 +40,7 @@ export const DecideContainer = ({
 	containerType,
 	containerPalette,
 	showAge,
+	supportingContent,
 }: Props) => {
 	switch (containerType) {
 		case 'dynamic/fast':
@@ -84,6 +90,7 @@ export const DecideContainer = ({
 					trails={trails}
 					containerPalette={containerPalette}
 					showAge={showAge}
+					supportingContent={supportingContent}
 				/>
 			);
 		case 'fixed/small/slow-V-mpu':
@@ -151,6 +158,26 @@ export const DecideContainer = ({
 					containerPalette={containerPalette}
 					showAge={showAge}
 				/>
+			);
+		case 'fixed/medium/fast-XI':
+			return (
+				<FixedMediumFastXI
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			);
+		case 'fixed/small/fast-VIII':
+			return (
+				<FixedSmallFastVIII
+					trails={trails}
+					containerPalette={containerPalette}
+					showAge={showAge}
+				/>
+			);
+		case 'nav/list':
+			return (
+				<NavList trails={trails} containerPalette={containerPalette} />
 			);
 		default:
 			return <p>{containerType} is not yet supported</p>;

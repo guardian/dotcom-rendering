@@ -82,10 +82,13 @@ const TagLink = ({
 			cssOverrides={css`
 				/* The following styles turn off those provided by LinkButton */
 				color: inherit;
+				text-decoration: none;
+				text-underline-offset: inherit;
 				/* stylelint-disable-next-line property-disallowed-list */
 				font-family: inherit;
 				font-size: inherit;
 				line-height: inherit;
+
 				:hover {
 					color: inherit;
 					text-decoration: underline;
@@ -122,6 +125,22 @@ export const DesignTag = ({ format }: { format: ArticleFormat }) => {
 				<Margins format={format}>
 					<Tag format={format}>
 						<TagLink href="/tone/interview">Interview</TagLink>
+					</Tag>
+				</Margins>
+			);
+		case ArticleDesign.Letter:
+			return (
+				<Margins format={format}>
+					<Tag format={format}>
+						<TagLink href="/tone/letters">Letters</TagLink>
+					</Tag>
+				</Margins>
+			);
+		case ArticleDesign.Obituary:
+			return (
+				<Margins format={format}>
+					<Tag format={format}>
+						<TagLink href="/tone/obituaries">Obituary</TagLink>
 					</Tag>
 				</Margins>
 			);

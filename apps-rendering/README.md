@@ -7,7 +7,7 @@
 3. Install dependencies:
 
 ```sh
-npm install
+yarn
 ```
 
 ### Run (Development)
@@ -19,10 +19,23 @@ npm install
 This is the simplest way to get started, but will intermingle all the logs together in one shell. If you're doing development work it might be easier to run the client and server in separate shells as described in the next subsection.
 
 ```sh
-npm run watch
+yarn watch
 ```
 
-View in a browser at http://localhost:8080 (standard port for [webpack-dev-server](https://webpack.js.org/configuration/dev-server/#devserverport))
+View in a browser at http://localhost:8080 (standard port for [webpack-dev-server](https://webpack.js.org/configuration/dev-server/#devserverport)).
+
+The Apps Rendering development server supports the following routes for testing articles:
+
+- `/path/to/content`
+  - e.g [http://localhost:8080/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:8080/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+- `/(uk|us|au|international)/path/to/content`
+  - e.g [http://localhost:8080/au/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:8080/au/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+- `/rendered-items/path/to/content`
+  - e.g [http://localhost:8080/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:8080/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+- `/(uk|us|au|international)/rendered-items/path/to/content`
+  - e.g [http://localhost:8080/au/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth](http://localhost:8080/au/rendered-items/food/2020/mar/15/easter-taste-test-dan-lepard-hot-cross-bun-milk-dark-chocolate-mini-eggs-bunny-sloth)
+
+Additionally, each route above can take a `?editions` query parameter to render the article as for the Editions app.
 
 _**Note**: You will need to refresh the page to see any changes you make to the server code. Any changes to client code should reload automatically._
 
@@ -33,13 +46,13 @@ This will output each command's logs to different shells, which can make develop
 To start the server:
 
 ```sh
-npm run watch:server
+yarn watch:server
 ```
 
 To start the client:
 
 ```sh
-npm run watch:client
+yarn watch:client
 ```
 
 View in a browser at http://localhost:8080 (standard port for [webpack-dev-server](https://webpack.js.org/configuration/dev-server/#devserverport))
@@ -51,13 +64,13 @@ _**Note**: You will need to refresh the page to see any changes you make to the 
 You may need to build the client-side code first with:
 
 ```sh
-npm run build:client
+yarn build:client
 ```
 
 Then start the server with:
 
 ```sh
-npm run watch:server
+yarn watch:server
 ```
 
 View in a browser at http://localhost:3040
@@ -69,7 +82,7 @@ _**Note**: You will need to refresh the page to see any changes you make to the 
 The unit tests are built using Jest. They can be run with the following command:
 
 ```sh
-npm run test
+yarn test
 ```
 
 ### Lint
@@ -77,13 +90,13 @@ npm run test
 ESLint is used to validate the code. It can be run like this:
 
 ```sh
-npm run lint
+yarn lint
 ```
 
 It can automatically fix problems for you:
 
 ```sh
-npm run lint:fix
+yarn lint:fix
 ```
 
 ### Storybook
@@ -91,7 +104,7 @@ npm run lint:fix
 A good way to see components and test them in isolation is to run storybook:
 
 ```sh
-npm run storybook
+yarn storybook
 ```
 
 Stories are deployed on [GitHub pages](https://guardian.github.io/apps-rendering)

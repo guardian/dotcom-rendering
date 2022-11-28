@@ -1,4 +1,9 @@
 import { JSDOM } from 'jsdom';
+import type {
+	CAPIElement,
+	ImageBlockElement,
+	TextBlockElement,
+} from '../types/content';
 
 const isFalseH3 = (element: CAPIElement): boolean => {
 	if (!element) return false;

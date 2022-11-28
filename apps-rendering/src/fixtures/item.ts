@@ -474,7 +474,7 @@ const cartoon: Item = {
 
 const matchReport: MatchReport = {
 	design: ArticleDesign.MatchReport,
-	football: some(matchScores),
+	football: Optional.some(matchScores),
 	...fields,
 	theme: ArticlePillar.Sport,
 	body: galleryBody,
@@ -561,4 +561,5 @@ export {
 	newsletterSignUp,
 	immersive,
 	gallery,
+	parseHtml,
 };

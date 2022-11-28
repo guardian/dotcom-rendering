@@ -11,9 +11,9 @@
  *    gen-fixtures.ts directly.
  */
 
-import type { CAPIArticleType } from '../../../src/types/frontend';
+import type { FEArticleType } from '../../../src/types/frontend';
 
-export const Feature: CAPIArticleType = {
+export const Feature: FEArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-atom"> \n <gu-atom data-atom-id="d904f65f-f5c1-4786-8d7a-54fc2a4abe72" data-atom-type="media"> \n  <div>\n   <iframe frameborder="0" allowfullscreen="true" src="https://www.youtube-nocookie.com/embed/7z3iv-HkI7o?showinfo=0&amp;rel=0"></iframe>\n  </div>\n </gu-atom> \n</figure>',
 	subMetaSectionLinks: [
@@ -23,57 +23,6 @@ export const Feature: CAPIArticleType = {
 		},
 	],
 	commercialProperties: {
-		UK: {
-			adTargeting: [
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'edition',
-					value: 'uk',
-				},
-				{
-					name: 'k',
-					value: [
-						'chris-rock',
-						'taika-waititi',
-						'oscars-2020',
-						'sigourney-weaver',
-						'bradpitt',
-						'laura-dern',
-						'culture',
-						'bong-joon-ho',
-						'film',
-						'joaquin-phoenix',
-					],
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/d8qaf',
-				},
-				{
-					name: 'url',
-					value: '/film/2020/feb/10/quotes-of-the-oscars-2020',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'co',
-					value: ['lanre-bakare'],
-				},
-				{
-					name: 'tn',
-					value: ['features'],
-				},
-			],
-		},
 		US: {
 			adTargeting: [
 				{
@@ -176,6 +125,57 @@ export const Feature: CAPIArticleType = {
 				},
 			],
 		},
+		UK: {
+			adTargeting: [
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'edition',
+					value: 'uk',
+				},
+				{
+					name: 'k',
+					value: [
+						'chris-rock',
+						'taika-waititi',
+						'oscars-2020',
+						'sigourney-weaver',
+						'bradpitt',
+						'laura-dern',
+						'culture',
+						'bong-joon-ho',
+						'film',
+						'joaquin-phoenix',
+					],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d8qaf',
+				},
+				{
+					name: 'url',
+					value: '/film/2020/feb/10/quotes-of-the-oscars-2020',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'co',
+					value: ['lanre-bakare'],
+				},
+				{
+					name: 'tn',
+					value: ['features'],
+				},
+			],
+		},
 		INT: {
 			adTargeting: [
 				{
@@ -212,6 +212,57 @@ export const Feature: CAPIArticleType = {
 				{
 					name: 'edition',
 					value: 'int',
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+				{
+					name: 'co',
+					value: ['lanre-bakare'],
+				},
+				{
+					name: 'tn',
+					value: ['features'],
+				},
+			],
+		},
+		EUR: {
+			adTargeting: [
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'k',
+					value: [
+						'chris-rock',
+						'taika-waititi',
+						'oscars-2020',
+						'sigourney-weaver',
+						'bradpitt',
+						'laura-dern',
+						'culture',
+						'bong-joon-ho',
+						'film',
+						'joaquin-phoenix',
+					],
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/d8qaf',
+				},
+				{
+					name: 'url',
+					value: '/film/2020/feb/10/quotes-of-the-oscars-2020',
+				},
+				{
+					name: 'edition',
+					value: 'eur',
 				},
 				{
 					name: 'p',
@@ -917,6 +968,10 @@ export const Feature: CAPIArticleType = {
 					},
 				],
 			},
+			{
+				title: 'Corrections',
+				url: '/theguardian/series/corrections-and-clarifications',
+			},
 		],
 		brandExtensions: [
 			{
@@ -1398,7 +1453,7 @@ export const Feature: CAPIArticleType = {
 			duration: 207,
 			altText:
 				"Press Room - 92nd Academy Awards<br>epa08208148 Joaquin Phoenix poses in the press room with the Oscar for Best Actor for his performance in 'Joker' during the 92nd annual Academy Awards ceremony at the Dolby Theatre in Hollywood, California, USA, 09 February 2020. The Oscars are presented for outstanding individual or collective efforts in filmmaking in 24 categories.  EPA/DAVID SWANSON",
-			elementId: 'c0e1cdb2-1373-4d36-bafe-8bbf177622bb',
+			elementId: '64a26697-c0ea-4541-bfe2-743ff3862670',
 		},
 	],
 	canonicalUrl:
@@ -1410,22 +1465,22 @@ export const Feature: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Chris Rock on Jeff Bezos and Marriage Story</h2>',
-					elementId: 'e103aad0-e46d-4ae8-b8ed-c106a566ab55',
+					elementId: 'bcd7acf7-c72e-4da6-ac9b-0813324cbea3',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“Bezos is so rich, he got divorced and he is still the richest man in the world. He saw <a href="https://www.theguardian.com/film/2019/nov/15/marriage-story-review-noah-baumbach-adam-driver-scarlett-johansson">Marriage Story</a> and thought it was a comedy.”</p>',
-					elementId: '1e0534f5-1dca-48e6-bd01-45937cb3ffbd',
+					elementId: '924a5377-04c3-48f6-b7fc-68ae5505e630',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong><a href="https://www.theguardian.com/film/2020/feb/10/joaquin-phoenixs-oscars-speech-in-full">Joaquin Phoenix</a> …</strong></h2>',
-					elementId: '423ce7c6-1fe2-4784-9349-6474be432169',
+					elementId: '74d9c8b3-88f3-400c-b9bb-06cae67c64b4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>… on veganism</strong><strong> and social justice<br></strong>“I think at times we feel or are made to feel that we champion different causes. But for me I see commonality. I think whether we’re talking about gender inequality or racism or queer rights or indigenous rights, or animal rights – we’re talking about the fight against injustice.”</p>',
-					elementId: '7f0e994c-70d7-4b54-a6bb-72b9deae8f9a',
+					elementId: 'bd456d11-648d-420c-961d-45107b7d9268',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
@@ -1433,22 +1488,22 @@ export const Feature: CAPIArticleType = {
 					text: "Joaquin Phoenix's Oscars speech in full: 'We feel entitled to artificially inseminate a cow and steal her baby'",
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: '17ce9f37-e215-4918-ba29-e576e26d6484',
+					elementId: 'ba3bb503-3d6e-4bb4-bb0e-4dc2c83e32fe',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“We’re talking about the fight against the belief that one nation, one people, one race, one gender, one species has the right to dominate, use and control another with impunity.”</p>',
-					elementId: '9dda36d4-4e76-42c0-b0c6-f15f12e05c2b',
+					elementId: 'e24143e8-3cc5-4a5d-9742-ff8760183b38',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>… on dairy products<br></strong>“I think we’ve become very disconnected from the natural world, many of us are guilty of an egocentric worldview and we believe that we’re the centre of the universe. We go into the natural world and we plunder it for its resources, we feel entitled to artificially inseminate a cow and steal her baby even though her cries of anguish are unmistakeable. Then we take her milk intended for her calf and we put it in our coffee and our cereal.”</p>',
-					elementId: 'cdf4991f-27d6-4a20-a031-8341b658413e',
+					elementId: 'a9c5020b-271f-42d7-92ef-e86498a85561',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong>… on forgiveness<br></strong>“I have been a scoundrel all my life, I’ve been selfish. I’ve been cruel at times, hard to work with and I’m grateful that so many of you in this room have given me a second chance. I think that’s when we’re at our best: when we support each other. Not when we cancel each other out for our past mistakes, but when we help each other to grow. When we educate each other. When we guide each other to redemption.”</p>',
-					elementId: 'e891d5bb-9f57-448f-be22-8f26018feec0',
+					elementId: '2c0eb9e6-8148-49a7-a6c9-906a33f1ed52',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
@@ -1456,17 +1511,17 @@ export const Feature: CAPIArticleType = {
 					text: "Parasite's best picture triumph could begin a new era for the Oscars",
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: 'ce3bef56-8c69-4b0e-9617-00241dcb57d7',
+					elementId: 'f162de81-b758-4bbe-a4cb-aa7d423bdcc4',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Laura Dern on meeting your heroes</strong></h2>',
-					elementId: '8ef7551a-40ea-49a0-98f9-9263a9ffabff',
+					elementId: 'a688a57e-aed0-475e-91b5-7a4cd96289c1',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“Noah [Baumbach] wrote a movie about love and breaching divisions in the name and the honour of family and home and hopefully for our planet. Some say never meet your heroes. I say if you’re really blessed you get them as your parents. I share this with my acting legends Diane Ladd and Bruce Dern. You got game, I love you. Thank you all for this gift. This is the best birthday present ever.”</p>',
-					elementId: '3c7c7b9e-9eec-4a79-bda8-09eb2c76eb8b',
+					elementId: '8b54f90b-34b8-408c-9638-70b2feba1487',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -1775,32 +1830,32 @@ export const Feature: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '5d6dcda6-c032-4e26-b1f2-b8d58cc7858d',
+					elementId: 'db761aff-82da-4f58-b3c3-f29bd3451b6c',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Taika Waititi on far-right extremism and indigenous kids</strong></h2>',
-					elementId: '96b07f8d-179f-4c30-88c3-fa7b3e5e8c99',
+					elementId: '2651b34b-256b-47dd-8583-27f4a76d7940',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Backstage: “If you were a Nazi, you would go to jail. Now you’re a Nazi, feel free to have a rally down in the square with your mates.”</p>',
-					elementId: 'e5e0824a-d8c1-42b2-b433-7bbe625898ff',
+					elementId: '4928e38e-d2ab-41a7-97e3-dac44c5825ad',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>On stage he said: “I want to dedicate this to all the indigenous kids in the world who want to do art, we are the original storytellers and we can make it here as well.”</p>',
-					elementId: 'f6771831-f7c2-4ede-ae98-e1d24a9411aa',
+					elementId: '3a25a9d7-0f95-4f65-aec9-837a60af79db',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Brad Pitt on Trump’s impeachment, John Bolton and the Republican party</strong></h2>',
-					elementId: '6d7480f9-714b-4c2d-9338-9313661505d9',
+					elementId: 'f5c8ab2b-751b-47cc-ab94-9fec0ca9c739',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“Thank you to the Academy for this honour of honours. They told me I only have 45 seconds up here which is 45 more than the Senate gave John Bolton.”</p>',
-					elementId: '96a7d76e-b1ad-4a65-9873-d9a9f6226063',
+					elementId: '6996d238-c9d7-4077-868c-ccfe68e77552',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
@@ -1808,32 +1863,32 @@ export const Feature: CAPIArticleType = {
 					text: "Parasite's best picture triumph could begin a new era for the Oscars",
 					prefix: 'Related: ',
 					role: 'thumbnail',
-					elementId: '78056976-5a61-4727-b9ec-d45e6aa937d1',
+					elementId: 'b36a3669-364e-4e16-af49-63ce706533b9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Bong Joon-Ho on booze and Scorsese and Tarantino</h2>',
-					elementId: '2f6cafaa-d3f5-4385-aefb-da7c709ff672',
+					elementId: '048cdc6a-ba61-4f82-94fc-d76c8e349a1e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“The [international feature film] category has a new name and I’m so happy to be its first recipient under its new name. I applaud and support the new direction that this change symbolises. I’m ready to drink tonight.</p>',
-					elementId: '49df0b22-bbbc-4dec-9e1e-801b3621dccf',
+					elementId: 'fddb71f8-6ffd-4906-a816-8da2b5062b0b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“When I was young and starting in cinema there was a saying that I carved deep into my heart, which is, ‘The most personal is the most creative.’ That quote was from our great Martin Scorsese. When I was in school I studied Scorsese’s films. Just to be nominated was a huge honour, I never felt I would win. When people in the US were not familiar with my films Quentin [Tarantino] would always put my films on his list – Quentin, I love you.”</p>',
-					elementId: 'bb54e9e5-bb39-4c87-b1a8-cc71226bda2e',
+					elementId: 'ec8ac2dd-f213-44d4-ac26-00d21dfb2516',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Hildur Guðnadóttir on female composers</strong></h2>',
-					elementId: '486b48f6-47f0-4fd1-ac8e-ebf6acd1bda7',
+					elementId: '008574a5-dbc3-4910-851a-a7d66191058b',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“To the girls to the women, to the mothers to the daughters who hear the music bubbling within please speak up – we need to hear your voices.”</p>',
-					elementId: '0002c5d6-6421-4cb1-bf48-5eeb66bf71d7',
+					elementId: 'abb19bfd-eda8-4217-b0d1-5c18b0cee7cb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.ImageBlockElement',
@@ -2143,42 +2198,42 @@ export const Feature: CAPIArticleType = {
 							],
 						},
 					],
-					elementId: '80ea2c63-9f0e-448b-aefc-66f0e99ed145',
+					elementId: 'f5477ac6-0953-4ac6-8655-b8cc0fe1947a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2>Sigourney Weaver, Gal Gadot and Brie Larson’s Fight Club</h2>',
-					elementId: 'b9c28d87-46ea-453c-8506-348eeb977c7d',
+					elementId: 'caeff03a-ac4a-495a-a2f4-78ec31e052d7',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“We decided that after the show we’re going to start a fight club. Men are invited but no shirts allowed. The winner will get a lifetime’s supply of deodorant, sushi, and tequila. The loser gets a lifetime of questions about what it’s like as a woman in Hollywood.</p>',
-					elementId: '503473ed-99b5-432b-b200-b09d44ec604e',
+					elementId: '2997c165-404e-45eb-8275-c2f1349a411a',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Ford v Ferrari</strong><strong> sound editor Donald Sylvester</strong><strong> on sharing</strong></h2>',
-					elementId: '47eb55f8-156a-4e64-ae94-253f8c36f206',
+					elementId: '66f1fbb6-5238-4279-8f2c-a400432e2e77',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“If I could I would break this off [statuette] and give James [Mangold] the head so he could put it in a jar.”</p>',
-					elementId: 'e4c4be15-b268-44b9-aa77-6662ca343f41',
+					elementId: '1927c961-1a0f-4341-ad31-ccef60516d4f',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.SubheadingBlockElement',
 					html: '<h2><strong>Hair Love’s directors on … hair</strong></h2>',
-					elementId: 'ddcc3204-9772-48ef-9d86-dba57ba3087e',
+					elementId: '0cf78c65-4eea-458a-804d-75b45b4b3232',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Matthew A Cherry and Karen Rupert Toliver said their film Hair Love, which won for best animated short, was made because they “wanted to normalise black hair” and make cartoons more diverse. The directors invited black teenager <a href="https://www.theguardian.com/us-news/2020/jan/23/deandre-arnold-texas-school-district-student-dreadlocks">Deandre Arnold</a>, who was told he wouldn’t be able to take part in his graduation if he didn’t cut his dreadlocks, as their guest.</p>',
-					elementId: 'ccb5eb74-dd0f-46da-880c-c70b01db0b52',
+					elementId: '319eaa64-8231-41ca-9094-8ebe19d798f9',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>“We have a firm belief that representation matters deeply, especially in cartoons because in cartoons that’s how we first see our movies and think about how we shape the world,” said Karen Rupert Toliver.</p>',
-					elementId: '78cac094-323d-4234-bbc5-93d75329bd0f',
+					elementId: '5d263b5e-0a06-4eaa-bb73-befca3da325d',
 				},
 			],
 			attributes: {
@@ -2202,7 +2257,7 @@ export const Feature: CAPIArticleType = {
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://amp.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
+			'@id': 'https://www.theguardian.com/film/2020/feb/10/quotes-of-the-oscars-2020',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',

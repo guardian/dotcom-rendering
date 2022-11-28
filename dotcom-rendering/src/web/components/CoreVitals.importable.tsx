@@ -1,11 +1,13 @@
 import type { ABTest } from '@guardian/ab-core';
 import {
 	bypassCoreWebVitalsSampling,
-	getCookie,
 	initCoreWebVitals,
-} from '@guardian/libs';
+} from '@guardian/core-web-vitals';
+import { getCookie } from '@guardian/libs';
 import { dcrJavascriptBundle } from '../../../scripts/webpack/bundles';
 import type { ServerSideTestNames } from '../../types/config';
+import { integrateIma } from '../experiments/tests/integrate-ima';
+import { removePrebidA9Canada } from '../experiments/tests/remove-prebid-a9-canada';
 import { useAB } from '../lib/useAB';
 
 export const CoreVitals = () => {
@@ -18,11 +20,13 @@ export const CoreVitals = () => {
 		window.location.hostname === 'preview.gutools.co.uk';
 	const sampling = 1 / 100;
 
-	const ABTestAPI = useAB();
+	const ABTestAPI = useAB()?.api;
 
 	// For these tests switch off sampling and collect metrics for 100% of views
 	const clientSideTestsToForceMetrics: ABTest[] = [
 		/* keep array multi-line */
+		integrateIma,
+		removePrebidA9Canada,
 	];
 
 	const userInClientSideTestToForceMetrics =
@@ -34,6 +38,7 @@ export const CoreVitals = () => {
 		/* linter, please keep this array multi-line */
 		dcrJavascriptBundle('Variant'),
 		dcrJavascriptBundle('Control'),
+		'dcrFrontsVariant',
 	];
 
 	const userInServerSideTestToForceMetrics =
@@ -41,9 +46,7 @@ export const CoreVitals = () => {
 			Object.keys(window.guardian.config.tests).includes(test),
 		);
 
-	/* eslint-disable @typescript-eslint/no-floating-promises -- they’re async methods */
-
-	initCoreWebVitals({
+	void initCoreWebVitals({
 		browserId,
 		pageViewId,
 		isDev,
@@ -52,16 +55,14 @@ export const CoreVitals = () => {
 	});
 
 	if (window.location.hostname === (process.env.HOSTNAME || 'localhost')) {
-		bypassCoreWebVitalsSampling('dotcom');
+		void bypassCoreWebVitalsSampling('dotcom');
 	}
 	if (
 		userInClientSideTestToForceMetrics ||
 		userInServerSideTestToForceMetrics
 	) {
-		bypassCoreWebVitalsSampling('commercial');
+		void bypassCoreWebVitalsSampling('commercial');
 	}
-
-	/* eslint-enable @typescript-eslint/no-floating-promises */
 
 	// don’t render anything
 	return null;

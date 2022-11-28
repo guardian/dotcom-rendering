@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { body, headline, neutral, space } from '@guardian/source-foundations';
+import type { WitnessAssetType } from '../../types/content';
 import type { Palette } from '../../types/palette';
 
 // Wrapper Styles

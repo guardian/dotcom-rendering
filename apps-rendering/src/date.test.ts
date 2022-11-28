@@ -3,12 +3,9 @@
 import { none, some } from '@guardian/types';
 import {
 	formatDate,
-	formatLocal,
 	formatSeconds,
 	formatLocalTimeDateTz,
-	formatUTCTimeDateTz,
 	fromString,
-	fullyFormatDate,
 	isValidDate,
 	makeRelativeDate,
 } from './date';
@@ -25,14 +22,6 @@ describe('formatDate', () => {
 	it('formats zeroes correctly', () => {
 		expect(formatDate(new Date('2005-01-02T02:01:23'))).toBe(
 			'Sun 2 Jan 2005 02.01 UTC',
-		);
-	});
-});
-
-describe('fullyFormatDate', () => {
-	it('formats a given date in UTC correctly', () => {
-		expect(fullyFormatDate(new Date('2020-03-11T17:25:00'))).toBe(
-			'17:25 Wednesday, 11 March 2020',
 		);
 	});
 });
@@ -79,20 +68,6 @@ describe('fromString', () => {
 	});
 });
 
-describe('formatLocal', () => {
-	test('returns correct local time zone (local timezone is Europe/London set in TZ global variable)', () => {
-		expect(formatLocal(new Date('2020-03-11T17:25:00'))).toBe(
-			'Wed 11 Mar 2020 17.25 (Greenwich Mean Time)',
-		);
-	});
-
-	test('returns Europe/London local time for non UTC time', () => {
-		expect(formatLocal(new Date('2012/02/10 10:10:30 +0180'))).toBe(
-			'Fri 10 Feb 2012 07.50 (Greenwich Mean Time)',
-		);
-	});
-});
-
 describe('formatLocalTimeDateTz', () => {
 	test('returns correct local time zone (local timezone is Europe/London set in TZ global variable)', () => {
 		expect(formatLocalTimeDateTz(new Date('2020-03-11T17:25:00'))).toBe(
@@ -103,20 +78,6 @@ describe('formatLocalTimeDateTz', () => {
 	test('returns Europe/London local time for non UTC time', () => {
 		expect(formatLocalTimeDateTz(new Date('2012/02/10 10:10:30 +0180'))).toBe(
 			'07.50am 10 Feb 2012 GMT',
-		);
-	});
-});
-
-describe('formatUTCTimeDateTz', () => {
-	test('returns correct UTC time (local timezone is Europe/London set in TZ global variable)', () => {
-		expect(formatUTCTimeDateTz(new Date('2020-03-11T17:25:00'))).toBe(
-			'05.25pm 11 Mar 2020 UTC',
-		);
-	});
-
-	test('returns UTC time for non UTC time', () => {
-		expect(formatUTCTimeDateTz(new Date('2012/02/10 10:10:30 +0180'))).toBe(
-			'07.50am 10 Feb 2012 UTC',
 		);
 	});
 });

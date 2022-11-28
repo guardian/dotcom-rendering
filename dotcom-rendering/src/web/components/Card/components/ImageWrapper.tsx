@@ -21,6 +21,7 @@ const flexBasisStyles = ({
 	imageSize: ImageSizeType;
 }): SerializedStyles => {
 	switch (imageSize) {
+		default:
 		case 'small':
 			return css`
 				flex-basis: 25%;

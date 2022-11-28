@@ -4,6 +4,7 @@ import type { ConsentState } from '@guardian/consent-management-platform/dist/ty
 import { body, neutral, space } from '@guardian/source-foundations';
 import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
+import type { RoleType } from '../../types/content';
 import { trackVideoInteraction } from '../browser/ga/ga';
 import { record } from '../browser/ophan/ophan';
 import { useAB } from '../lib/useAB';
@@ -94,16 +95,10 @@ export const YoutubeBlockComponent = ({
 		undefined,
 	);
 
-	const ABTestAPI = useAB();
-	const userInImaTestVariant = ABTestAPI?.isUserInVariant(
-		'IntegrateIMA',
-		'variant',
-	);
-	const imaAdTagUrl = userInImaTestVariant
-		? 'https://pubads.g.doubleclick.net/gampad/live/ads?iu=/59666047/theguardian.com&' +
-		  'description_url=[placeholder]&tfcd=0&npa=0&sz=400x300&gdfp_req=1&output=vast&' +
-		  'unviewed_position_start=1&env=vp&impl=s&correlator=&vad_type=linear&cust_params=at%3Dfixed-puppies'
-		: undefined;
+	const abTests = useAB();
+	const imaEnabled =
+		abTests?.api.isUserInVariant('IntegrateIma', 'variant') ?? false;
+	const abTestParticipations = abTests?.participations ?? {};
 
 	useEffect(() => {
 		const defineConsentState = async () => {
@@ -229,7 +224,8 @@ export const YoutubeBlockComponent = ({
 				origin={process.env.NODE_ENV === 'development' ? '' : origin}
 				shouldStick={stickyVideos}
 				isMainMedia={isMainMedia}
-				imaAdTagUrl={imaAdTagUrl}
+				imaEnabled={imaEnabled}
+				abTestParticipations={abTestParticipations}
 			/>
 			{!hideCaption && (
 				<Caption

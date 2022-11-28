@@ -15,6 +15,7 @@ import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { Avatar } from '../Avatar';
 import { CardHeadline } from '../CardHeadline';
+import { CardPicture } from '../CardPicture';
 import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
 import { Snap } from '../Snap';
@@ -178,6 +179,19 @@ const getImage = ({
 	return undefined;
 };
 
+const decideSublinkPosition = (
+	supportingContent?: DCRSupportingContent[],
+	imagePosition?: ImagePositionType,
+): 'inner' | 'outer' | 'none' => {
+	if (!supportingContent || supportingContent.length === 0) {
+		return 'none';
+	}
+	if (imagePosition === 'top' || supportingContent.length > 2) {
+		return 'outer';
+	}
+	return 'inner';
+};
+
 export const Card = ({
 	linkTo,
 	format,
@@ -215,7 +229,10 @@ export const Card = ({
 	const palette = decidePalette(format, containerPalette);
 
 	const hasSublinks = supportingContent && supportingContent.length > 0;
-	const noOfSublinks = supportingContent?.length ?? 0;
+	const sublinkPosition = decideSublinkPosition(
+		supportingContent,
+		imagePosition,
+	);
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||
@@ -251,7 +268,6 @@ export const Card = ({
 							// This a tag is initially rendered empty. It gets populated later
 							// after a fetch call is made to get all the counts for each Card
 							// on the page with a discussion (see FetchCommentCounts.tsx)
-							data-name="comment-count-marker"
 							data-discussion-id={discussionId}
 							data-format={JSON.stringify(format)}
 							data-is-dynamo={isDynamo ? 'true' : undefined}
@@ -259,7 +275,6 @@ export const Card = ({
 							data-ignore="global-link-styling"
 							data-link-name="Comment count"
 							href={`${linkTo}#comments`}
-							subdued={true}
 							cssOverrides={css`
 								/* See: https://css-tricks.com/nested-links/ */
 								${getZIndex('card-nested-link')}
@@ -269,6 +284,7 @@ export const Card = ({
 								font-family: inherit;
 								font-size: inherit;
 								line-height: inherit;
+								text-decoration: none;
 							`}
 						/>
 					) : undefined
@@ -335,7 +351,11 @@ export const Card = ({
 								/>
 							</AvatarContainer>
 						) : (
-							<img src={image.src} alt="" role="presentation" />
+							<CardPicture
+								master={image.src}
+								imageSize={imageSize}
+								alt=""
+							/>
 						)}
 					</ImageWrapper>
 				)}
@@ -390,6 +410,9 @@ export const Card = ({
 							<TrailTextWrapper
 								containerPalette={containerPalette}
 								format={format}
+								imagePosition={imagePosition}
+								imageSize={imageSize}
+								imageType={image?.type}
 							>
 								<div
 									dangerouslySetInnerHTML={{
@@ -404,11 +427,13 @@ export const Card = ({
 							displayAge={displayAge}
 							renderFooter={renderFooter}
 						/>
-
-						{hasSublinks && noOfSublinks <= 2 ? (
+						{hasSublinks && sublinkPosition === 'inner' ? (
 							<SupportingContent
 								supportingContent={supportingContent}
 								alignment="vertical"
+								containerPalette={containerPalette}
+								isDynamo={isDynamo}
+								parentFormat={format}
 							/>
 						) : (
 							<></>
@@ -416,9 +441,13 @@ export const Card = ({
 					</div>
 				</ContentWrapper>
 			</CardLayout>
-			{hasSublinks && noOfSublinks > 2 ? (
+
+			{hasSublinks && sublinkPosition === 'outer' ? (
 				<SupportingContent
 					supportingContent={supportingContent}
+					parentFormat={format}
+					containerPalette={containerPalette}
+					isDynamo={isDynamo}
 					alignment={
 						imagePosition === 'top' ||
 						imagePosition === 'bottom' ||

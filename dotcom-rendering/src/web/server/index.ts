@@ -1,5 +1,6 @@
 import type express from 'express';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
+import { isRecipe } from '../../model/enhance-recipes';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
@@ -7,7 +8,7 @@ import { enhanceStandfirst } from '../../model/enhanceStandfirst';
 import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
-import type { CAPIArticleType } from '../../types/frontend';
+import type { FEArticleType } from '../../types/frontend';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
@@ -17,16 +18,15 @@ function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 	return block ? enhanceBlocks([block], format)[0] : block;
 }
 
-const enhanceCAPIType = (body: unknown): CAPIArticleType => {
+const enhanceCAPIType = (body: unknown): FEArticleType => {
 	const data = validateAsCAPIType(body);
 
-	const enhancedBlocks = enhanceBlocks(
-		data.blocks,
-		data.format,
-		data.promotedNewsletter,
-	);
+	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
+		promotedNewsletter: data.promotedNewsletter,
+		isRecipe: isRecipe(data.tags),
+	});
 
-	const CAPIArticle: CAPIArticleType = {
+	const CAPIArticle: FEArticleType = {
 		...data,
 		blocks: enhancedBlocks,
 		pinnedPost: enhancePinnedPost(data.format, data.pinnedPost),
@@ -48,6 +48,9 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 	const data: FEFrontType = validateAsFrontType(body);
 	return {
 		...data,
+		webTitle: `${
+			data.pressedPage.seoData.title ?? data.pressedPage.seoData.webTitle
+		} | The Guardian`,
 		pressedPage: {
 			...data.pressedPage,
 			collections: enhanceCollections(
