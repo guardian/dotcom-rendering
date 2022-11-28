@@ -378,6 +378,7 @@ export const Dropdown = ({
 											<div
 												css={css`
 													margin-top: 12px;
+													margin-right: 8px;
 												`}
 											>
 												<NotificationBadge
