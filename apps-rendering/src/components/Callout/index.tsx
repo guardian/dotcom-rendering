@@ -8,7 +8,7 @@ import type Int64 from 'node-int64';
 import { remSpace } from '@guardian/source-foundations';
 import type { FC, ReactElement } from 'react';
 import CalloutBlock from './calloutBlock';
-import {isCalloutActive, DeadlineDate} from './deadlineDate';
+import {Highlight, isCalloutActive, DeadlineDate} from './deadlineDate';
 import { getTheme } from './theme';
 
 export interface CalloutProps {
@@ -35,7 +35,11 @@ const Callout: FC<CalloutProps> = ({
 	const isActive = isCalloutActive(activeUntil);
 
 	if (!isActive && isNonCollapsible) {
-		return <p>This callout has now expired</p>
+		return (
+			<ThemeProvider theme={getTheme(format)}>
+				<Highlight>This form has been deactivated and is closed to any further submissions.</Highlight>
+			</ThemeProvider>
+		)
 	} else if (!isActive && !isNonCollapsible) { return <></>}
 
 	const [isExpanded, setIsExpanded] = useState(false);

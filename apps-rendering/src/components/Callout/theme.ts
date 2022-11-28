@@ -22,7 +22,7 @@ const calloutLightTheme = (format: ArticleFormat) => ({
 	linkColor: text.calloutPrimary(format),
 	submitBackground: text.calloutPrimary(format),
 	submitText: neutral[100],
-	deadlineColor: brandAlt[400],
+	highlightColor: brandAlt[400],
 	fileInputButton: text.calloutPrimary(format),
 
 	expander: {
@@ -43,7 +43,7 @@ const calloutDarkTheme = (format: ArticleFormat) => ({
 	linkColor: neutral[86],
 	submitBackground: neutral[86],
 	submitText: neutral[7],
-	deadlineColor: brandAlt[200],
+	highlightColor: brandAlt[200],
 	fileInputButton: neutral[86],
 
 	expander: {
