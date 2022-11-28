@@ -6,7 +6,7 @@ import { ArticleSpecial } from '@guardian/libs';
 import type Int64 from 'node-int64';
 import { Optional } from 'optional';
 
-type CalloutFields = {
+export type CalloutFields = {
 	callout: ParticipationFields;
 	name: string;
 	activeUntil?: Int64;
@@ -27,7 +27,8 @@ const getCallout = (
 		return Optional.some({
 			callout: campaign.fields.callout,
 			name: campaign.name,
-			activeUntil: campaign.activeUntil});
+			activeUntil: campaign.activeUntil
+		});
 	}
 
 	return Optional.none();

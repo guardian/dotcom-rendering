@@ -1,12 +1,10 @@
 import { parse } from 'client/parser';
-import Int64 from 'node-int64';
 
 const mockCampaign = {
 	id: '1fc53dab-1c76-4258-8194-b4b3d8399052',
 	name: 'CALLOUT: ghost flights',
 	priority: 0,
 	displayOnSensitive: false,
-	activeUntil: new Int64(1730542820000),
 	fields: {
 		callout: 'Share your experiences',
 		formId: 4711223,
