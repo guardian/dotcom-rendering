@@ -5,10 +5,8 @@ import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
-	brand,
 	breakpoints,
 	from,
-	remSpace,
 } from '@guardian/source-foundations';
 import Body from 'components/ArticleBody';
 import { tabletContentWidth } from 'components/editions/styles';
@@ -37,7 +35,7 @@ const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
     `}
 `;
 
-const sectionStyles: SerializedStyles = css`
+const articleWidthStyles: SerializedStyles = css`
 	margin: 0 auto;
 	position: relative;
 
@@ -77,14 +75,14 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 						mainMedia={item.mainMedia}
 					/>
 
-					<div css={sectionStyles}>
+					<div css={articleWidthStyles}>
 						<Headline item={item} />
 						<Standfirst item={item} />
 						<Logo item={item} />
 					</div>
 				</header>
 
-				<section css={sectionStyles}>
+				<section css={articleWidthStyles}>
 					<Body format={item}>{children}</Body>
 				</section>
 			</article>
