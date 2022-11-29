@@ -3,10 +3,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import { campaignDescription, mockCampaign } from 'fixtures/campaign';
 import Int64 from 'node-int64';
 import type { ReactElement } from 'react';
-import { css } from '@emotion/react';
-import {
-	neutral,
-} from '@guardian/source-foundations';
 import Callout from '.';
 
 const mockFormat: ArticleFormat = {
@@ -34,12 +30,6 @@ const callout = (): ReactElement => (
 );
 
 const closedCallout = (): ReactElement => (
-	<>
-	<p css={css`
-		margin-bottom: 10px;
-		padding: 15px;
-		background: ${neutral[97]};
-	`}>Only nonCollapsible callouts will render if they are expired</p>
 	<Callout
 		name={mockCampaign.name}
 		heading={mockCampaign.fields.callout}
@@ -50,7 +40,6 @@ const closedCallout = (): ReactElement => (
 		activeUntil={new Int64(pastDate.getTime())}
 		description={campaignDescription}
 		/>
-	</>
 );
 
 const nonCollapsableCallout = (): ReactElement => (
