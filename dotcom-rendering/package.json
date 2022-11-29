@@ -86,7 +86,7 @@
 		"@guardian/tsconfig": "^0.1.4",
 		"@percy/cli": "^1.4.0",
 		"@percy/cypress": "^3.1.2",
-		"@sentry/browser": "^6.19.7",
+		"@sentry/browser": "^7.22.0",
 		"@sentry/integrations": "^6.19.7",
 		"@storybook/addon-knobs": "^6.4.0",
 		"@storybook/addons": "^6.3.1",
