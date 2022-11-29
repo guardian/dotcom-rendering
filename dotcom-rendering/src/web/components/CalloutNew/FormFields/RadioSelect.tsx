@@ -3,12 +3,14 @@ import { Radio, RadioGroup } from '@guardian/source-react-components';
 import { FieldLabel } from './FieldLabel';
 
 type FieldProp = {
+	error: string | undefined;
 	formField: CampaignFieldRadio;
 	formData: { [key in string]: any };
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
 };
 
 export const RadioSelect = ({
+	error,
 	formField,
 	formData,
 	setFormData,
@@ -24,6 +26,7 @@ export const RadioSelect = ({
 	>
 		<FieldLabel formField={formField} />
 		<RadioGroup
+			error={error}
 			name={formField.name}
 			orientation={
 				formField.options.length > 2 ? 'vertical' : 'horizontal'

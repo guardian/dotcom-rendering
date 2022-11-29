@@ -48,6 +48,7 @@ const textStyles = css`
 type FormDataType = { [key in string]: any };
 
 type FormFieldProp = {
+	validationErrors: string[];
 	format: ArticleFormat;
 	formField: CampaignFieldType;
 	formData: FormDataType;
@@ -55,6 +56,7 @@ type FormFieldProp = {
 };
 
 const FormField = ({
+	validationErrors,
 	format,
 	formField,
 	formData,
@@ -68,6 +70,7 @@ const FormField = ({
 						formField={formField}
 						formData={formData}
 						setFormData={setFormData}
+						validationErrors={validationErrors}
 					/>
 					<hr />
 				</>
@@ -80,6 +83,7 @@ const FormField = ({
 						formData={formData}
 						setFormData={setFormData}
 						format={format}
+						validationErrors={validationErrors}
 					/>
 					<hr />
 				</>
@@ -91,6 +95,7 @@ const FormField = ({
 						formField={formField}
 						formData={formData}
 						setFormData={setFormData}
+						validationErrors={validationErrors}
 					/>
 					<hr />
 				</>
@@ -104,6 +109,7 @@ const FormField = ({
 						formData={formData}
 						setFormData={setFormData}
 						multiple={formField.type === 'checkbox'}
+						validationErrors={validationErrors}
 					/>
 					<hr />
 				</>
@@ -115,6 +121,7 @@ const FormField = ({
 						formField={formField}
 						formData={formData}
 						setFormData={setFormData}
+						validationErrors={validationErrors}
 					/>
 					<hr />
 				</>
@@ -127,20 +134,39 @@ type FormProps = {
 	onSubmit: (formData: FormDataType) => void;
 	formFields: CampaignFieldType[];
 	format: ArticleFormat;
+	fieldError?: string;
 	error?: string;
 };
 
 export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 	// const [twitterHandle, setTwitterHandle] = useState('');
 	const [formData, setFormData] = useState<{ [key in string]: any }>({});
+	const [validationErrors, setValidationErrors] = useState<string[]>([]);
 
 	return (
 		<form
 			action="/formstack-campaign/submit"
 			method="post"
 			css={formStyles}
+			noValidate={true}
 			onSubmit={(e) => {
 				e.preventDefault();
+
+				const errors: string[] = [];
+
+				// replace with map ideally
+				formFields.forEach((field: CampaignFieldType) => {
+					if (field.required) {
+						if (formData[field.id] == undefined) {
+							errors.push(field.id);
+						}
+					}
+				});
+
+				if (errors.length) {
+					setValidationErrors(errors);
+					return;
+				}
 				onSubmit(formData);
 			}}
 		>
@@ -153,12 +179,14 @@ export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 					// support React references
 					custom-guardian="callout-form-field"
 				>
+					{!!error && <div css={errorMessagesStyles}>{error}</div>}
 					<FormField
 						key={formField.id}
 						format={format}
 						formField={formField}
 						formData={formData}
 						setFormData={setFormData}
+						validationErrors={validationErrors}
 					/>
 				</div>
 			))}
@@ -166,7 +194,6 @@ export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 				One of our journalists will be in contact before we publish your
 				information, so please do leave contact details.
 			</div>
-			{!!error && <div css={errorMessagesStyles}>{error}</div>}
 			<div css={footerPaddingStyles}>
 				<Button
 					priority="primary"

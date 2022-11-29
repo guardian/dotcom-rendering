@@ -122,7 +122,6 @@ export const CalloutBlockComponent = ({
 			setError('Sorry we think you are a robot.');
 			return;
 		}
-
 		// need to add prefix `field_` to all keys in form
 		const formDataWithFieldPrefix = Object.keys(formData).reduce(
 			(acc, cur) => ({
@@ -131,6 +130,7 @@ export const CalloutBlockComponent = ({
 			}),
 			{},
 		);
+
 		return fetch(callout.calloutsUrl, {
 			method: 'POST',
 			body: JSON.stringify({
@@ -216,6 +216,7 @@ export const CalloutBlockComponent = ({
 						formFields={formFields}
 						onSubmit={onSubmit}
 						format={format}
+						error={error}
 					/>
 				</details>
 			) : (
@@ -246,8 +247,8 @@ export const CalloutBlockComponent = ({
 						<Form
 							formFields={formFields}
 							onSubmit={onSubmit}
-							error={error}
 							format={format}
+							error={error}
 						/>
 					</details>
 				</ExpandingWrapper>

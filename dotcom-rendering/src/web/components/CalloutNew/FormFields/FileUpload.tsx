@@ -23,6 +23,7 @@ type Props = {
 	formField: CampaignFieldFile;
 	formData: { [key in string]: any };
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
+	validationErrors: string[];
 };
 
 const customUpload = (format: ArticleFormat): SerializedStyles => css`
@@ -52,6 +53,7 @@ export const FileUpload = ({
 	format,
 	formData,
 	setFormData,
+	validationErrors,
 }: Props) => {
 	const [chosenFile, setChosenFile] = useState<null | string>();
 	const [error, setError] = useState('');

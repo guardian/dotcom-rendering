@@ -7,13 +7,25 @@ const textInputStyles = css`
 `;
 
 type Props = {
+	validationErrors: string[];
 	formField: CampaignFieldText;
 	formData: { [key in string]: any };
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
 };
 
-export const TextInput = ({ formField, formData, setFormData }: Props) => (
+export const TextInput = ({
+	validationErrors,
+	formField,
+	formData,
+	setFormData,
+}: Props) => (
 	<SourceTextInput
+		// similar to line 31, check if the id is present in the fielderror array
+		error={
+			validationErrors.includes(formField.id)
+				? 'Please complete all required fields'
+				: ''
+		}
 		css={textInputStyles}
 		data-testid={`form-field-${formField.id}`}
 		type={formField.type}
