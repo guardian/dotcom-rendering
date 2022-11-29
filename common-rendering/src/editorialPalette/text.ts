@@ -1181,6 +1181,10 @@ const tableOfContentsTitleDark = (_format: ArticleFormat): string => {
 	return neutral[86];
 };
 
+const headingTwoDark = (_format: ArticleFormat): string => {
+	return neutral[86];
+};
+
 // ----- API ----- //
 
 const text = {
@@ -1255,6 +1259,7 @@ const text = {
 	galleryDark,
 	tableOfContentsTitle,
 	tableOfContentsTitleDark,
+	headingTwoDark,
 };
 
 // ----- Exports ----- //

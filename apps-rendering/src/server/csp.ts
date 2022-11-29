@@ -106,7 +106,7 @@ const buildCsp = (
 			? 'https://platform.twitter.com https://cdn.syndication.twimg.com'
 			: ''
 	};
-    frame-src https://www.theguardian.com https://www.scribd.com https://www.google.com https://webstories.theguardian.com ${
+    frame-src https://www.theguardian.com https://www.scribd.com https://www.google.com https://webstories.theguardian.com https://www.linkedin.com ${
 		thirdPartyEmbed.instagram ? 'https://www.instagram.com' : ''
 	} https://www.facebook.com https://www.tiktok.com https://interactive.guim.co.uk ${
 		thirdPartyEmbed.spotify ? 'https://open.spotify.com' : ''

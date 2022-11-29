@@ -41,6 +41,7 @@ coverage
 
 # Storybook static folder (used if taking snapshots locally)
 /storybook-static
+**/storybook-static
 
 # Architecture Diagram
 webArchitecture.svg
