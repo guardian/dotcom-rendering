@@ -10,7 +10,7 @@ export type CalloutFields = {
 	callout: ParticipationFields;
 	name: string;
 	activeUntil?: Int64;
-}
+};
 
 // ----- Functions ----- //
 const getCallout = (
@@ -27,7 +27,7 @@ const getCallout = (
 		return Optional.some({
 			callout: campaign.fields.callout,
 			name: campaign.name,
-			activeUntil: campaign.activeUntil
+			activeUntil: campaign.activeUntil,
 		});
 	}
 

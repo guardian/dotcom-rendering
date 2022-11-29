@@ -1,14 +1,13 @@
-import { css } from '@emotion/react';
-import { ThemeProvider } from '@emotion/react';
-import type { ArticleFormat } from '@guardian/libs';
+import { css, ThemeProvider } from '@emotion/react';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
-import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
-import { useState } from 'react';
-import type Int64 from 'node-int64';
+import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
+import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
+import type Int64 from 'node-int64';
+import { useState } from 'react';
 import type { FC, ReactElement } from 'react';
 import CalloutBlock from './calloutBlock';
-import {Highlight, isCalloutActive, DeadlineDate} from './deadlineDate';
+import { DeadlineDate, Highlight, isCalloutActive } from './deadlineDate';
 import { getTheme } from './theme';
 
 export interface CalloutProps {
@@ -36,17 +35,20 @@ const Callout: FC<CalloutProps> = ({
 
 	if (!isActive && isNonCollapsible) {
 		return (
-			<ThemeProvider theme={getTheme(format)}>
-				<Highlight>This form has been deactivated and is closed to any further submissions.</Highlight>
-			</ThemeProvider>
-		)
-	} else if (!isActive && !isNonCollapsible) { return <></>}
+			<Highlight>
+				This form has been deactivated and is closed to any further
+				submissions.
+			</Highlight>
+		);
+	} else if (!isActive && !isNonCollapsible) {
+		return <></>;
+	}
 
 	const [isExpanded, setIsExpanded] = useState(false);
 	return (
 		<aside>
 			{isNonCollapsible ? (
-				<ThemeProvider theme={getTheme(format)}>
+				<ThemeProvider theme={getTheme()}>
 					<CalloutBlock
 						formId={formId}
 						heading={heading}
@@ -55,18 +57,20 @@ const Callout: FC<CalloutProps> = ({
 						format={format}
 						description={description}
 					/>
-					<span css={css`
-						position: absolute;
-						right: 0;
-						margin-top: -${remSpace[6]};
-					`}>
+					<span
+						css={css`
+							position: absolute;
+							right: 0;
+							margin-top: -${remSpace[6]};
+						`}
+					>
 						<DeadlineDate until={activeUntil} />
 					</span>
 				</ThemeProvider>
 			) : (
-				<ThemeProvider theme={getTheme(format)}>
+				<ThemeProvider theme={getTheme()}>
 					<ExpandingWrapper
-						renderExtra={() => (
+						renderExtra={(): ReactElement => (
 							<DeadlineDate until={activeUntil} />
 						)}
 						name={`${name} form`}
@@ -79,7 +83,7 @@ const Callout: FC<CalloutProps> = ({
 							formFields={formFields}
 							format={format}
 							description={description}
-							// TODO: This is pretty heavy (and not futureproof), would it be better to
+							// TODO: This potentially not futureproof, would it be better to
 							// set the tabIndex on all children with js?
 							isTabbable={isExpanded}
 						/>

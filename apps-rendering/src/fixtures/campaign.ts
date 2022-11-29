@@ -138,7 +138,8 @@ const mockCampaign = {
 };
 
 const parser = new DOMParser();
-const parseHtml = (html: string): DocumentFragment | undefined => parse(parser)(html).either<DocumentFragment | undefined>(
+const parseHtml = (html: string): DocumentFragment | undefined =>
+	parse(parser)(html).either<DocumentFragment | undefined>(
 		(_err) => undefined,
 		(doc) => doc,
 	);

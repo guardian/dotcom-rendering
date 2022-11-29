@@ -1,112 +1,79 @@
-import { text } from '@guardian/common-rendering/src/editorialPalette';
-import type { ArticleFormat } from '@guardian/libs';
+import type { Theme } from '@emotion/react';
 import {
 	brand,
-	brandAlt,
 	error,
 	focus,
 	neutral,
 	success,
 } from '@guardian/source-foundations';
 
-const getPrefersDark = () =>
+// Themes for source components in dark mode
+// These could be exported from source
+const labelDarkTheme = {
+	textLabel: neutral[97],
+	textOptional: neutral[60],
+	textSupporting: neutral[60],
+	textError: error[500],
+	textSuccess: success[500],
+};
+
+const checkboxDarkTheme = {
+	border: neutral[60],
+	borderHover: brand[500],
+	borderChecked: brand[500],
+	borderError: error[500],
+	backgroundChecked: brand[500],
+	textLabel: neutral[97],
+	textLabelSupporting: neutral[60],
+	textIndeterminate: neutral[60],
+};
+
+const textInputDarkTheme = {
+	textUserInput: neutral[97],
+	textLabel: neutral[97],
+	textLabelOptional: neutral[46],
+	textLabelSupporting: neutral[46],
+	textError: neutral[97],
+	textSuccess: success[400],
+	backgroundInput: neutral[7],
+	border: neutral[46],
+	borderActive: focus[400],
+	borderError: error[500],
+	borderSuccess: success[500],
+};
+
+const selectDarkTheme = {
+	textUserInput: neutral[97],
+	textLabel: neutral[97],
+	textLabelOptional: neutral[46],
+	textLabelSupporting: neutral[46],
+	textError: neutral[97],
+	textSuccess: success[500],
+	backgroundInput: neutral[7],
+	border: neutral[46],
+	borderActive: focus[400],
+	borderError: error[500],
+	borderSuccess: success[500],
+};
+
+const radioDarkTheme = {
+	borderHover: focus[400],
+	border: neutral[46],
+	backgroundChecked: focus[400],
+	textLabel: neutral[97],
+	textLabelSupporting: neutral[60],
+	borderError: error[500],
+};
+
+export const darkTheme = {
+	label: labelDarkTheme,
+	checkbox: checkboxDarkTheme,
+	textInput: textInputDarkTheme,
+	select: selectDarkTheme,
+	radio: radioDarkTheme,
+};
+
+const getPrefersDark = (): boolean =>
 	window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-const calloutLightTheme = (format: ArticleFormat) => ({
-	background: neutral[97],
-	primary: text.calloutPrimary(format),
-	text: neutral[7],
-	error: error[400],
-	success: success[400],
-	supporting: neutral[60],
-	linkColor: text.calloutPrimary(format),
-	submitBackground: text.calloutPrimary(format),
-	submitText: neutral[100],
-	highlightColor: brandAlt[400],
-	fileInputButton: text.calloutPrimary(format),
-
-	expander: {
-		border: neutral[86],
-		expandBackground: neutral[7],
-		expandText: neutral[100],
-		collapseBackground: neutral[100],
-		collapseText: neutral[7],
-	},
-});
-const calloutDarkTheme = (format: ArticleFormat) => ({
-	background: neutral[20],
-	primary: text.calloutPrimaryDark(format),
-	text: neutral[86],
-	error: error[500],
-	success: success[500],
-	supporting: neutral[60],
-	linkColor: neutral[86],
-	submitBackground: neutral[86],
-	submitText: neutral[7],
-	highlightColor: brandAlt[200],
-	fileInputButton: neutral[86],
-
-	expander: {
-		border: neutral[60],
-		expandBackground: neutral[86],
-		expandText: neutral[20],
-		collapseBackground: neutral[10],
-		collapseText: neutral[86],
-	},
-
-	// Can we move these dark themes to source?
-	label: {
-		textLabel: neutral[97],
-		textOptional: neutral[60],
-		textSupporting: neutral[60],
-		textError: error[500],
-		textSuccess: success[500],
-	},
-	checkbox: {
-		border: neutral[60],
-		borderHover: brand[500],
-		borderChecked: brand[500],
-		borderError: error[500],
-		backgroundChecked: brand[500],
-		textLabel: neutral[97],
-		textLabelSupporting: neutral[60],
-		textIndeterminate: neutral[60],
-	},
-	textInput: {
-		textUserInput: neutral[97],
-		textLabel: neutral[97],
-		textLabelOptional: neutral[46],
-		textLabelSupporting: neutral[46],
-		textError: neutral[97],
-		textSuccess: success[400],
-		backgroundInput: neutral[7],
-		border: neutral[46],
-		borderActive: focus[400],
-		borderError: error[500],
-		borderSuccess: success[500],
-	},
-	select: {
-		textUserInput: neutral[97],
-		textLabel: neutral[97],
-		textLabelOptional: neutral[46],
-		textLabelSupporting: neutral[46],
-		textError: neutral[97],
-		textSuccess: success[500],
-		backgroundInput: neutral[7],
-		border: neutral[46],
-		borderActive: focus[400],
-		borderError: error[500],
-		borderSuccess: success[500],
-	},
-	radio: {
-		borderHover: focus[400],
-		border: neutral[46],
-		backgroundChecked: focus[400],
-		textLabel: neutral[97],
-		textLabelSupporting: neutral[60],
-		borderError: error[500],
-	},
-});
-
-export const getTheme = (format: ArticleFormat) =>
-	getPrefersDark() ? calloutDarkTheme(format) : calloutLightTheme(format);
+export const getTheme = (): Theme => getPrefersDark() && darkTheme;

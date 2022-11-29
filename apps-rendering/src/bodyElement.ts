@@ -2,7 +2,6 @@
 
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
-import Int64 from 'node-int64';
 import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types/types';
 import type { Atoms } from '@guardian/content-api-models/v1/atoms';
@@ -20,6 +19,7 @@ import type { Embed } from 'embed';
 import type { Image as ImageData } from 'image';
 import { parseImage } from 'image';
 import { compose } from 'lib';
+import type Int64 from 'node-int64';
 import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
@@ -135,7 +135,7 @@ type Callout = {
 	formFields: FormField[];
 	description?: DocumentFragment;
 	name: string;
-	activeUntil?: Int64,
+	activeUntil?: Int64;
 };
 
 type BodyElement =
@@ -367,7 +367,9 @@ const parse =
 							heading: callout.callout,
 							formFields: callout.formFields,
 							formId: callout.formId,
-							description: context.docParser(callout.description ?? ''),
+							description: context.docParser(
+								callout.description ?? '',
+							),
 							name: name,
 							activeUntil: activeUntil,
 						}),
