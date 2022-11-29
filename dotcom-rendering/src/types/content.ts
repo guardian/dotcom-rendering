@@ -62,6 +62,23 @@ export interface CalloutBlockElement {
 	role?: RoleType;
 }
 
+export interface CalloutBlockElementV2 {
+	_type: 'model.dotcomrendering.pageElements.CalloutBlockElementV2';
+	elementId: string;
+	id: string;
+	calloutsUrl: string;
+	activeFrom: number;
+	activeUntil?: number;
+	displayOnSensitive: boolean;
+	formId: number;
+	title: string;
+	description: string;
+	tagName: string;
+	formFields: CampaignFieldType[];
+	role?: RoleType;
+	isNonCollapsible: boolean;
+}
+
 interface ChartAtomBlockElement {
 	_type: 'model.dotcomrendering.pageElements.ChartAtomBlockElement';
 	elementId: string;
@@ -574,6 +591,7 @@ export type CAPIElement =
 	| BlockquoteBlockElement
 	| CaptionBlockElement
 	| CalloutBlockElement
+	| CalloutBlockElementV2
 	| ChartAtomBlockElement
 	| CodeBlockElement
 	| CommentBlockElement
