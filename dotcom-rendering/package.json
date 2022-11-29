@@ -31,7 +31,7 @@
     "cypress:run:percy": "percy exec -- cypress run --browser chrome --config specPattern='cypress/snapshot/**/*'",
     "unused-exports": "yarn ts-unused-exports ./tsconfig.json --ignoreFiles='(/(fixtures|__mocks__)/|.+\\.(stories|mocks))' --exitWithCount",
     "storybook": "start-storybook -p 4002 --static-dir ./src/static",
-    "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook",
+    "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ./src/static",
     "makeBuild": "NODE_ENV=production CI_ENV=github webpack --config ./scripts/webpack/webpack.config.js"
   },
   "bundlesize": [
@@ -222,7 +222,6 @@
     "ts-jest": "^24.3.0",
     "ts-loader": "^9.3.0",
     "ts-unused-exports": "^8.0.0",
-    "tslib": "^2.4.1",
     "tslint": "^6.1.3",
     "tslint-config-airbnb": "^5.11.2",
     "tslint-config-prettier": "^1.18.0",
