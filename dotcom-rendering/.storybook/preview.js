@@ -71,6 +71,13 @@ setCookie({ name: 'bwid', value: 'mockBrowserId' });
 
 const guardianViewports = {
 	mobileMedium: {
+		name: 'mobile',
+		styles: {
+			width: '320px',
+			height: '800px',
+		},
+	},
+	mobileMedium: {
 		name: 'mobileMedium',
 		styles: {
 			width: '375px',
@@ -121,7 +128,7 @@ const guardianViewports = {
 	},
 };
 
-export const viewports = [375, 480, 660, 740, 980, 1140, 1300];
+export const viewports = [320, 375, 480, 660, 740, 980, 1140, 1300];
 
 export const parameters = {
 	viewport: {
