@@ -32,7 +32,7 @@ const topBarStyles = css`
 		padding-left: 15px;
 	}
 	${from.desktop} {
-		height: 2.5rem;
+		height: 2.1875rem;
 		justify-content: flex-end;
 		padding-right: ${space[5]}px;
 	}

@@ -40,17 +40,23 @@ const myAccountStyles = css`
 
 const myAccountLinkStyles = css`
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	height: fit-content;
 	position: relative;
-	${textSans.medium({ fontWeight: 'bold' })};
+	${textSans.medium()};
+	font-size: 1rem;
+	line-height: 1;
 	color: ${neutral[100]};
 	transition: color 80ms ease-out;
 	text-decoration: none;
 	padding: 0;
 
 	${from.tablet} {
-		padding: 7px 10px 0 5px;
+		padding: 7px 10px 7px 6px;
+	}
+
+	${from.desktop} {
+		font-weight: bold;
 	}
 
 	:hover,
@@ -63,7 +69,7 @@ const myAccountLinkStyles = css`
 		float: left;
 		height: 18px;
 		width: 18px;
-		margin: 3px 4px 0 0;
+		margin: 0 4px 0 0;
 	}
 	${getZIndex('myAccountDropdown')}
 `;
@@ -141,7 +147,7 @@ export const dropDownOverrides = css`
 	color: ${neutral[100]};
 	padding-right: 0;
 
-	font-weight: bold;
+	font-size: 1rem;
 
 	&:not(ul):hover {
 		color: ${neutral[100]};
@@ -150,6 +156,10 @@ export const dropDownOverrides = css`
 
 	${from.tablet} {
 		right: 0;
+	}
+
+	${from.desktop} {
+		font-weight: bold;
 	}
 `;
 
