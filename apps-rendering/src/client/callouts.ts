@@ -36,11 +36,13 @@ const getValueFromElement = async (
 		if (radioElement.checked) {
 			acc[name] = value;
 		}
-		// TODO: How do we handle checkboxes in formstack?
-		// } else if (type === 'checkbox') {
-		// 	if (checked) {
-		// 		acc[name] ? acc[name].push(value) : (acc[name] = [value]);
-		// 	}
+	} else if (type === 'checkbox') {
+		const checkboxElement = element as HTMLInputElement;
+		if (checkboxElement.checked) {
+			acc[name]
+				? (acc[name] = [...acc[name], value])
+				: (acc[name] = [value]);
+		}
 	} else if (type === 'file') {
 		const fileElement = element as HTMLInputElement;
 		if (fileElement.files?.length) {
@@ -53,7 +55,6 @@ const getValueFromElement = async (
 };
 
 function submitCallout(body: FormData, form: Element): void {
-	// TODO: Check this is still the correct endpoint
 	fetch(
 		'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
 		{
