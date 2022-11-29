@@ -16,6 +16,7 @@ import { getFormat } from 'item';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss, onwardStyles } from 'styles';
+import InPageNewsletterSignup from 'components/InPageNewsletterSignup';
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -62,7 +63,21 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 				<section css={contentRow}>
 					<Headline item={item} />
 					<Standfirst item={item} />
-					<Body format={item}>{children}</Body>
+
+					<InPageNewsletterSignup
+						newsletter={{
+							identityName: 'patriarchy',
+							description:
+								'Reviewing the most important stories on feminism and sexism and those fighting for equality',
+							name: 'The Week in Patriarchy',
+							frequency: 'Weekly',
+							theme: 'opinion',
+							successDescription: 'signed up',
+						}}
+						format={getFormat(item)}
+						defaultTo={'form'}
+						fallbackContent={<Body format={item}>{children}</Body>}
+					/>
 				</section>
 			</article>
 
