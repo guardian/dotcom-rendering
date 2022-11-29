@@ -56,6 +56,7 @@ const rulesToReview = {
 
 /** @TODO Enforce and fix these */
 const rulesToEnforce = {
+	'@typescript-eslint/no-empty-function': 'warn',
 	'@typescript-eslint/no-unsafe-call': 'warn',
 	'@typescript-eslint/no-unsafe-assignment': 'warn',
 	'@typescript-eslint/no-unsafe-return': 'warn',
@@ -71,7 +72,6 @@ module.exports = {
 	extends: [
 		'eslint:recommended',
 		'@guardian/eslint-config-typescript',
-		'airbnb-typescript',
 		'prettier',
 		'plugin:@guardian/source-react-components/recommended',
 		'plugin:jsx-a11y/recommended',
@@ -84,7 +84,6 @@ module.exports = {
 	},
 	plugins: [
 		'@typescript-eslint',
-		'@typescript-eslint/tslint',
 		'react',
 		'react-hooks',
 		'import',
