@@ -8,13 +8,13 @@ import {
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import { from, remSpace, textSans } from '@guardian/source-foundations';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import EmailSignupForm from '../EmailSignupForm';
 import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import { SvgSpinner } from '@guardian/source-react-components';
 import PrivacyWording from 'components/NewsletterSignup/PrivacyWording';
+import { brandAlt, remSpace, textSans } from '@guardian/source-foundations';
 
 // ----- Component ----- //
 
@@ -58,11 +58,11 @@ const loadingContainerStyles = (
 
 const InPageNewsletterSignup: FC<Props> = ({
 	format,
-	newsletter: element,
+	newsletter,
 	defaultTo,
 	fallbackContent,
 }) => {
-	const { identityName, successDescription } = element;
+	const { identityName, successDescription } = newsletter;
 	return (
 		<>
 			<section
