@@ -70,7 +70,7 @@ window.guardian = {
 setCookie({ name: 'bwid', value: 'mockBrowserId' });
 
 const guardianViewports = {
-	mobileMedium: {
+	mobile: {
 		name: 'mobile',
 		styles: {
 			width: '320px',
