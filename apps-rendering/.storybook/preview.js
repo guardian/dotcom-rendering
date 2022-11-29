@@ -4,6 +4,7 @@ import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
 
 import { getFontsCss } from './fonts-css';
+import { resets } from '@guardian/source-foundations';
 
 if (isChromatic()) {
 	// Fix the date to prevent false negatives
@@ -13,7 +14,7 @@ if (isChromatic()) {
 setCookie({ name: 'bwid', value: 'mockBrowserId' });
 
 // Add base css for the site
-let css = `${getFontsCss()}`;
+let css = `${getFontsCss()}${resets.resetCSS}`;
 let head = document.getElementsByTagName('head')[0];
 let style = document.createElement('style');
 head.appendChild(style);
