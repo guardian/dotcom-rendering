@@ -109,17 +109,17 @@ export const CalloutBlockComponent = ({
 	format: ArticleFormat;
 	isNonCollapsible: boolean;
 }) => {
-	const [error, setError] = useState('');
+	const [errorSummary, setErrorSummary] = useState('');
 	const [submissionSuccess, setSubmissionSuccess] = useState(false);
 	const { title, description, formFields, activeUntil } = callout;
 	const [isExpanded, setIsExpanded] = useState(false);
 
 	const onSubmit = async (formData: FormDataType) => {
 		// Reset error for new submission attempt
-		setError('');
+		setErrorSummary('');
 
 		if (formData.twitterHandle) {
-			setError('Sorry we think you are a robot.');
+			setErrorSummary('Sorry we think you are a robot.');
 			return;
 		}
 		// need to add prefix `field_` to all keys in form
@@ -147,7 +147,7 @@ export const CalloutBlockComponent = ({
 				if (resp.status === 201) {
 					setSubmissionSuccess(true);
 				} else {
-					setError(
+					setErrorSummary(
 						'Sorry, there was a problem submitting your form. Please try again later.',
 					);
 				}
@@ -158,7 +158,7 @@ export const CalloutBlockComponent = ({
 					'callout-embed-submission',
 				);
 
-				setError(
+				setErrorSummary(
 					'Sorry, there was a problem submitting your form. Please try again later.',
 				);
 			});
@@ -216,7 +216,7 @@ export const CalloutBlockComponent = ({
 						formFields={formFields}
 						onSubmit={onSubmit}
 						format={format}
-						error={error}
+						errorSummary={errorSummary}
 					/>
 				</details>
 			) : (
@@ -248,7 +248,7 @@ export const CalloutBlockComponent = ({
 							formFields={formFields}
 							onSubmit={onSubmit}
 							format={format}
-							error={error}
+							errorSummary={errorSummary}
 						/>
 					</details>
 				</ExpandingWrapper>
