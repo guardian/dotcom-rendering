@@ -3,14 +3,14 @@ import { Radio, RadioGroup } from '@guardian/source-react-components';
 import { FieldLabel } from './FieldLabel';
 
 type FieldProp = {
-	error: string | undefined;
+	validationErrors: string[];
 	formField: CampaignFieldRadio;
 	formData: { [key in string]: any };
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
 };
 
 export const RadioSelect = ({
-	error,
+	validationErrors,
 	formField,
 	formData,
 	setFormData,
@@ -26,7 +26,11 @@ export const RadioSelect = ({
 	>
 		<FieldLabel formField={formField} />
 		<RadioGroup
-			error={error}
+			error={
+				validationErrors.includes(formField.id)
+					? 'Please complete all required fields'
+					: ''
+			}
 			name={formField.name}
 			orientation={
 				formField.options.length > 2 ? 'vertical' : 'horizontal'

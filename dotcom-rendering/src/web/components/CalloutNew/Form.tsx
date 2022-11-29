@@ -134,11 +134,15 @@ type FormProps = {
 	onSubmit: (formData: FormDataType) => void;
 	formFields: CampaignFieldType[];
 	format: ArticleFormat;
-	fieldError?: string;
-	error?: string;
+	errorSummary?: string;
 };
 
-export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
+export const Form = ({
+	onSubmit,
+	formFields,
+	format,
+	errorSummary,
+}: FormProps) => {
 	// const [twitterHandle, setTwitterHandle] = useState('');
 	const [formData, setFormData] = useState<{ [key in string]: any }>({});
 	const [validationErrors, setValidationErrors] = useState<string[]>([]);
@@ -179,7 +183,9 @@ export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 					// support React references
 					custom-guardian="callout-form-field"
 				>
-					{!!error && <div css={errorMessagesStyles}>{error}</div>}
+					{!!errorSummary && (
+						<div css={errorMessagesStyles}>{errorSummary}</div>
+					)}
 					<FormField
 						key={formField.id}
 						format={format}
