@@ -76,4 +76,4 @@ export const darkTheme = {
 const getPrefersDark = (): boolean =>
 	window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-export const getTheme = (): Theme => getPrefersDark() && darkTheme;
+export const getTheme = (): Theme => getPrefersDark() ? darkTheme : {};
