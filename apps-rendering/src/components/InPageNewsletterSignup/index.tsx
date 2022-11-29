@@ -14,7 +14,7 @@ import EmailSignupForm from '../EmailSignupForm';
 import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import { SvgSpinner } from '@guardian/source-react-components';
 import PrivacyWording from 'components/NewsletterSignup/PrivacyWording';
-import { brandAlt, remSpace, textSans } from '@guardian/source-foundations';
+import { remSpace } from '@guardian/source-foundations';
 
 // ----- Component ----- //
 
@@ -23,6 +23,7 @@ interface Props {
 	newsletter: Newsletter;
 	defaultTo?: 'form' | 'fallback' | undefined;
 	fallbackContent: JSX.Element;
+	loadingContent: JSX.Element;
 }
 
 const containerStyles = (
@@ -35,6 +36,7 @@ const containerStyles = (
 		color: ${text.newsletterSignUpFormDark(format)};
 	`}
 
+	margin-bottom: ${remSpace[4]};
 	display: ${defaultTo === 'form' ? 'block' : 'none'};
 `;
 
@@ -61,6 +63,7 @@ const InPageNewsletterSignup: FC<Props> = ({
 	newsletter,
 	defaultTo,
 	fallbackContent,
+	loadingContent,
 }) => {
 	const { identityName, successDescription } = newsletter;
 	return (
@@ -88,8 +91,7 @@ const InPageNewsletterSignup: FC<Props> = ({
 				css={loadingContainerStyles(format, defaultTo)}
 				className="js-signup-form-loading-content"
 			>
-				<span>loading...</span>
-				<SvgSpinner size="medium" />
+				{loadingContent}
 			</aside>
 		</>
 	);

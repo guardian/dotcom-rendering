@@ -23,7 +23,11 @@ import type { FC, ReactNode } from 'react';
 import { darkModeCss, onwardStyles } from 'styles';
 import InPageNewsletterSignup from 'components/InPageNewsletterSignup';
 import { OptionKind } from '@guardian/types/dist/option';
-import { SvgClock, SvgNewsletter } from '@guardian/source-react-components';
+import {
+	SvgClock,
+	SvgNewsletter,
+	SvgSpinner,
+} from '@guardian/source-react-components';
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -132,6 +136,12 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 							defaultTo={'form'} // TO DO - remove for production
 							fallbackContent={
 								<Body format={item}>{children}</Body>
+							}
+							loadingContent={
+								<>
+									<p>loading...</p>
+									<SvgSpinner size="medium" />
+								</>
 							}
 						/>
 					) : (
