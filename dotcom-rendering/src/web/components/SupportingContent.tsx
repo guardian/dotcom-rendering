@@ -31,7 +31,7 @@ const directionStyles = (alignment: Alignment) => {
 		case 'horizontal':
 			return css`
 				flex-direction: column;
-				${from.phablet} {
+				${from.tablet} {
 					flex-direction: row;
 				}
 			`;
@@ -48,7 +48,7 @@ const dynamoStyles = css`
 	width: 100%;
 	margin: 0;
 
-	${from.phablet} {
+	${from.tablet} {
 		padding: 0 5px 5px;
 		flex-direction: row;
 		position: absolute;
@@ -63,7 +63,7 @@ const liStyles = css`
 	padding-top: 2px;
 	position: relative;
 	margin-top: 8px;
-	${from.phablet} {
+	${from.tablet} {
 		margin-bottom: 4px;
 	}
 `;
@@ -82,7 +82,7 @@ const leftMargin = css`
 `;
 
 const bottomMargin = css`
-	${until.phablet} {
+	${until.tablet} {
 		margin-bottom: 8px;
 	}
 `;
