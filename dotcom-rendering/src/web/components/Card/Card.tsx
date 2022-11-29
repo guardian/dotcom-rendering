@@ -139,7 +139,7 @@ const DecideFooter = ({
 		displayAge,
 		displayLines: false,
 	});
-	// Note. Opinion cards always show the lines at the botom of the card (in CommentFooter)
+	// Note. Opinion cards always show the lines at the bottom of the card (in CommentFooter)
 };
 
 const CommentFooter = ({
