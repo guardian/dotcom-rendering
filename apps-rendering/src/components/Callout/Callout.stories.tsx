@@ -12,9 +12,9 @@ const mockFormat: ArticleFormat = {
 };
 
 const futureDate = new Date();
-futureDate.setDate(futureDate.getDate() + 2)
+futureDate.setDate(futureDate.getDate() + 2);
 const pastDate = new Date();
-pastDate.setDate(pastDate.getDate() - 1)
+pastDate.setDate(pastDate.getDate() - 1);
 
 const callout = (): ReactElement => (
 	<Callout
@@ -39,19 +39,19 @@ const closedCallout = (): ReactElement => (
 		isNonCollapsible={true}
 		activeUntil={new Int64(pastDate.getTime())}
 		description={campaignDescription}
-		/>
+	/>
 );
 
 const nonCollapsableCallout = (): ReactElement => (
 	<Callout
-	isNonCollapsible={true}
-	name={mockCampaign.name}
-	heading={mockCampaign.fields.callout}
-	formId={mockCampaign.fields.formId}
-	formFields={mockCampaign.fields.formFields}
-	format={mockFormat}
-	activeUntil={new Int64(futureDate.getTime())}
-	description={campaignDescription}
+		isNonCollapsible={true}
+		name={mockCampaign.name}
+		heading={mockCampaign.fields.callout}
+		formId={mockCampaign.fields.formId}
+		formFields={mockCampaign.fields.formFields}
+		format={mockFormat}
+		activeUntil={new Int64(futureDate.getTime())}
+		description={campaignDescription}
 	/>
 );
 

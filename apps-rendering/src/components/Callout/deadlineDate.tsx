@@ -1,26 +1,11 @@
-import { css } from '@emotion/react';
-import type { SerializedStyles } from '@emotion/react';
-import { neutral, remSpace } from '@guardian/source-foundations';
 import { SvgClock } from '@guardian/source-react-components';
 import { isValidDate } from 'date';
 import type Int64 from 'node-int64';
 import type { FC } from 'react';
-
-const highlightStyles = (theme: any): SerializedStyles => css`
-	color: ${neutral[7]};
-	background: ${theme.highlightColor};
-	display: flex;
-	align-items: center;
-	padding: 0 ${remSpace[1]};
-	font-family: GuardianTextSans;
-`;
+import { highlightStyles } from './styles';
 
 const Highlight: FC = ({ children }) => {
-	return (
-		<span css={highlightStyles}>
-			{children}
-		</span>
-	);
+	return <span css={highlightStyles}>{children}</span>;
 };
 
 function getDaysBetween(first: Date, second: Date): number {
@@ -68,4 +53,4 @@ const DeadlineDate: FC<{ until?: Int64 }> = ({ until }) => {
 	);
 };
 
-export { Highlight, DeadlineDate, isCalloutActive}
+export { Highlight, DeadlineDate, isCalloutActive };

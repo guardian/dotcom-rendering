@@ -1,27 +1,16 @@
-import { css } from '@emotion/react';
-import type { SerializedStyles } from '@emotion/react';
-import { remSpace } from '@guardian/source-foundations';
+import type { ArticleFormat } from '@guardian/libs';
 import { Button, SvgShareCallout } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { FC } from 'react';
+import { calloutShare, calloutSharelink } from './styles';
 
-const shareStyles = (theme: any): SerializedStyles => css`
-	display: inline-flex;
-	align-items: center;
-	color: ${theme.text};
-	padding-right: ${remSpace[2]};
-	padding-bottom: ${remSpace[2]};
-`;
-const linkStyles = (theme: any): SerializedStyles => css`
-	color: ${theme.linkColor};
-	padding: 0 ${remSpace[2]};
-	font-weight: normal;
-`;
-
-export const ShareLink: FC<{ disabled: boolean }> = ({ disabled }) => {
+export const ShareLink: FC<{ disabled: boolean; format: ArticleFormat }> = ({
+	disabled,
+	format,
+}) => {
 	const [isCopied, setIsCopied] = useState(false);
 
-	const onShare = async () => {
+	const onShare = async (): Promise<void> => {
 		const url = window.location.href;
 		if ('share' in navigator) {
 			navigator
@@ -37,7 +26,7 @@ export const ShareLink: FC<{ disabled: boolean }> = ({ disabled }) => {
 		}
 	};
 	return (
-		<span css={shareStyles}>
+		<span css={calloutShare}>
 			<SvgShareCallout size="medium" />
 			Know others that are affected?
 			<Button
@@ -45,7 +34,7 @@ export const ShareLink: FC<{ disabled: boolean }> = ({ disabled }) => {
 				size="xsmall"
 				priority="subdued"
 				onClick={onShare}
-				css={linkStyles}
+				css={calloutSharelink(format)}
 			>
 				Please share this callout
 			</Button>

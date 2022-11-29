@@ -37,7 +37,7 @@ export const Disclaimer: FC<{ disabled: boolean }> = ({ disabled }) => {
 				tabIndex={tabIndex}
 				href="https://www.theguardian.com/help/privacy-policy"
 			>
-			privacy policy
+				privacy policy
 			</a>
 			.
 		</div>
@@ -62,14 +62,14 @@ export const renderField = (
 	`;
 	const textareaStyles = css`
 		//source doesn't support themes for textarea (yet)
-		${inputStyles};
+		${inputStyles}
 
 		background-color: ${neutral[100]};
 		color: ${neutral[7]};
 		${darkModeCss`
 			background-color: ${neutral[7]};
 			color: ${neutral[97]};
-	`}
+		`}
 	`;
 
 	switch (type) {

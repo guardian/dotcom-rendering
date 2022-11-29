@@ -1,7 +1,5 @@
-import { css } from '@emotion/react';
-import type { SerializedStyles } from '@emotion/react';
+import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace, until } from '@guardian/source-foundations';
 import {
 	Button,
 	InlineError,
@@ -11,7 +9,7 @@ import {
 import type { FC } from 'react';
 import { ContactText, Disclaimer, renderField } from './formFields';
 import { ShareLink } from './shareLink';
-import { FormField } from '@guardian/apps-rendering-api-models/formField';
+import { calloutForm, calloutSubmitButton } from './styles';
 
 export interface CalloutFormProps {
 	format: ArticleFormat;
@@ -20,47 +18,6 @@ export interface CalloutFormProps {
 	disableInputs?: boolean;
 }
 
-const formStyles = (theme: any): SerializedStyles => css`
-	margin: ${remSpace[2]};
-
-	.js-callout__success-message,
-	.js-callout__error-message {
-		display: none;
-	}
-
-	.js-callout--failure {
-		.js-callout__error-message {
-			display: inline-flex;
-			margin-bottom: ${remSpace[3]};
-			color: ${theme.error};
-		}
-	}
-
-	.js-callout--success {
-		.js-callout__success-message {
-			display: inline-flex;
-			color: ${theme.text};
-
-			svg {
-				color: ${theme.success};
-			}
-		}
-		.js-callout__inputs {
-			display: none !important;
-		}
-	}
-`;
-
-const buttonStyles = (theme: any): SerializedStyles => css`
-	background: ${theme.submitBackground};
-	color: ${theme.submitText};
-
-	${until.mobileLandscape} {
-		width: 100%;
-		justify-content: center;
-	}
-`;
-
 const CalloutForm: FC<CalloutFormProps> = ({
 	id,
 	fields,
@@ -68,15 +25,11 @@ const CalloutForm: FC<CalloutFormProps> = ({
 	disableInputs = false,
 }) => {
 	return (
-		<div className="js-callout" css={formStyles}>
-			<form css={formStyles} action="#" method="post">
-				<ShareLink disabled={disableInputs} />
+		<div className="js-callout" css={calloutForm}>
+			<form css={calloutForm} action="#" method="post">
+				<ShareLink disabled={disableInputs} format={format} />
 				<Disclaimer disabled={disableInputs} />
-				<input
-					name="formId"
-					type="hidden"
-					value={id}
-				/>
+				<input name="formId" type="hidden" value={id} />
 				<div className="js-callout__inputs">
 					<>
 						{fields.map((field) =>
@@ -99,7 +52,7 @@ const CalloutForm: FC<CalloutFormProps> = ({
 						</InlineError>
 					</div>
 					<Button
-						css={buttonStyles}
+						css={calloutSubmitButton(format)}
 						type="submit"
 						priority="primary"
 						disabled={disableInputs}
