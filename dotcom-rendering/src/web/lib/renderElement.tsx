@@ -173,6 +173,7 @@ export const renderElement = ({
 			];
 
 		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
+		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
 			return [
 				true,
 				<Island deferUntil="visible">
