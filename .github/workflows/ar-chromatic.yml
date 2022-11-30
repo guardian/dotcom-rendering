@@ -52,3 +52,17 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
           workingDir: dotcom-rendering
+
+name: Chromatic AR
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    paths-ignore:
+      - 'apps-rendering/*'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "No AR Chromatic required"'
