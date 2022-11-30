@@ -104,7 +104,7 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 					/>
 				</header>
 				<section css={contentRow}>
-					{newsletter && (
+					{!!newsletter && (
 						<div css={detailBlockStyles}>
 							<SvgNewsletter size="xsmall" />
 							<b>{newsletter.frequency}</b>
@@ -114,7 +114,7 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 					<Headline item={item} />
 					<Standfirst item={item} />
 
-					{newsletter && (
+					{!!newsletter && (
 						<div css={frequencyBlockStyles}>
 							<SvgClock size="xsmall" />
 
