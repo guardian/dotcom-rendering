@@ -14,15 +14,23 @@ import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import EmailSignupForm from '../EmailSignupForm';
 import PrivacyWording from '../NewsletterSignup/PrivacyWording';
+import NotSupportedMessage from './NotSupportedMessage';
 
 // ----- Component ----- //
 
 interface Props {
 	format: ArticleFormat;
 	newsletter: Newsletter;
+	/** Whether to initialy the form or the fallback content. */
 	defaultTo?: 'form' | 'fallback' | undefined;
-	fallbackContent: JSX.Element;
-	loadingContent: JSX.Element;
+	/** Content to render if the cliet app does not support the sign-up feature.
+	 * If not set, an inline error is rendered by default.
+	 */
+	fallbackContent?: JSX.Element;
+	/** Content to render while the article script is checking the bridget version.
+	 * If not set, nothing is rendered while waiting for the version check.
+	 */
+	waitingContent?: JSX.Element;
 }
 
 const containerStyles = (
@@ -39,19 +47,13 @@ const containerStyles = (
 	display: ${defaultTo === 'form' ? 'block' : 'none'};
 `;
 
-// TO DO - update initSignupForms function to display fallback content
-// if the Bridget version is not compatible with the sign-up forms
 const fallbackContainerStyles = (
-	format: ArticleFormat,
 	defaultTo: 'form' | 'fallback' | undefined,
 ): SerializedStyles => css`
 	display: ${defaultTo === 'fallback' ? 'block' : 'none'};
 `;
 
-// TO DO - update initSignupForms function to hide loading content
-// when showing displaying the fallback content or the form
 const loadingContainerStyles = (
-	format: ArticleFormat,
 	defaultTo: 'form' | 'fallback' | undefined,
 ): SerializedStyles => css`
 	display: ${defaultTo === undefined ? 'block' : 'none'};
@@ -61,8 +63,8 @@ const InPageNewsletterSignup: FC<Props> = ({
 	format,
 	newsletter,
 	defaultTo,
+	waitingContent: loadingContent,
 	fallbackContent,
-	loadingContent,
 }) => {
 	const { identityName, successDescription } = newsletter;
 	return (
@@ -80,18 +82,20 @@ const InPageNewsletterSignup: FC<Props> = ({
 			</section>
 
 			<section
-				css={fallbackContainerStyles(format, defaultTo)}
+				css={fallbackContainerStyles(defaultTo)}
 				className="js-signup-form-fallback-container"
 			>
-				{fallbackContent}
+				{!!fallbackContent ? fallbackContent : <NotSupportedMessage />}
 			</section>
 
-			<aside
-				css={loadingContainerStyles(format, defaultTo)}
-				className="js-signup-form-loading-content"
-			>
-				{loadingContent}
-			</aside>
+			{!!loadingContent && (
+				<aside
+					css={loadingContainerStyles(defaultTo)}
+					className="js-signup-form-loading-content"
+				>
+					{loadingContent}
+				</aside>
+			)}
 		</>
 	);
 };
