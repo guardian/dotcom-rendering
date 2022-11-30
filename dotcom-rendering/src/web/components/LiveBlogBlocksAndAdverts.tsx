@@ -1,8 +1,5 @@
-import {
-	calculateLiveblogBlockSize as calculateBlockSize,
-	shouldDisplayAd,
-} from '@guardian/commercial-core';
 import type { Switches } from '../../types/config';
+import { calculateBlockSize, shouldDisplayAd } from '../lib/liveblogAdSlots';
 import { useAB } from '../lib/useAB';
 import { AdSlot } from './AdSlot';
 import { LiveBlock } from './LiveBlock';
@@ -77,14 +74,18 @@ export const LiveBlogBlocksAndAdverts = ({
 	return (
 		<>
 			{blocks.map((block, i) => {
-				numPixelsOfContentWithoutAdvert += calculateBlockSize(block);
-
-				const willDisplayAdAfterBlock = shouldDisplayAd(
-					i + 1,
-					blocks.length,
-					numAdvertsInserted,
-					numPixelsOfContentWithoutAdvert,
+				numPixelsOfContentWithoutAdvert += calculateBlockSize(
+					block.elements,
 				);
+
+				const willDisplayAdAfterBlock =
+					!isAdFreeUser &&
+					shouldDisplayAd(
+						i + 1,
+						blocks.length,
+						numAdvertsInserted,
+						numPixelsOfContentWithoutAdvert,
+					);
 
 				if (willDisplayAdAfterBlock) {
 					numAdvertsInserted++;
