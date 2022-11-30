@@ -25,7 +25,7 @@ const Default: FC = () => (
 			display: ArticleDisplay.Standard,
 			theme: selectPillar(ArticlePillar.News),
 		}}
-		defaultTo={'form'}
+		initiallyRender={'form'}
 	/>
 );
 
@@ -37,7 +37,7 @@ const Unsupported: FC = () => (
 			display: ArticleDisplay.Standard,
 			theme: selectPillar(ArticlePillar.News),
 		}}
-		defaultTo={'fallback'}
+		initiallyRender={'fallback'}
 	/>
 );
 

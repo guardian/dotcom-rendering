@@ -21,13 +21,22 @@ import NotSupportedMessage from './NotSupportedMessage';
 interface Props {
 	format: ArticleFormat;
 	newsletter: Newsletter;
-	/** Whether to initialy the form or the fallback content. */
-	defaultTo?: 'form' | 'fallback' | undefined;
-	/** Content to render if the cliet app does not support the sign-up feature.
-	 * If not set, an inline error is rendered by default.
+	/**
+	 * Whether to initialy render the form or the fallback content.
+	 * If not set, the "waitingContent" is rendered.
+	 *
+	 * If the fallback content is initially rendered, it will not be
+	 * replaced with the form if the client app supports the sign-up
+	 * feature.
+	 */
+	initiallyRender?: 'form' | 'fallback' | undefined;
+	/**
+	 * Content to render if the cliet app does not support the sign-up feature.
+	 * If not set, a default inline error is rendered.
 	 */
 	fallbackContent?: JSX.Element;
-	/** Content to render while the article script is checking the bridget version.
+	/**
+	 * Content to render while the article script is checking the bridget version.
 	 * If not set, nothing is rendered while waiting for the version check.
 	 */
 	waitingContent?: JSX.Element;
@@ -35,7 +44,7 @@ interface Props {
 
 const containerStyles = (
 	format: ArticleFormat,
-	defaultTo: 'form' | 'fallback' | undefined,
+	initiallyRender: 'form' | 'fallback' | undefined,
 ): SerializedStyles => css`
 	${darkModeCss`
 		background-color: ${background.newsletterSignUpFormDark(format)};
@@ -44,53 +53,67 @@ const containerStyles = (
 	`}
 
 	margin-bottom: ${remSpace[4]};
-	display: ${defaultTo === 'form' ? 'block' : 'none'};
+	display: ${initiallyRender === 'form' ? 'block' : 'none'};
 `;
 
 const fallbackContainerStyles = (
-	defaultTo: 'form' | 'fallback' | undefined,
+	initiallyRender: 'form' | 'fallback' | undefined,
 ): SerializedStyles => css`
-	display: ${defaultTo === 'fallback' ? 'block' : 'none'};
+	display: ${initiallyRender === 'fallback' ? 'block' : 'none'};
 `;
 
 const loadingContainerStyles = (
-	defaultTo: 'form' | 'fallback' | undefined,
+	initiallyRender: 'form' | 'fallback' | undefined,
 ): SerializedStyles => css`
-	display: ${defaultTo === undefined ? 'block' : 'none'};
+	display: ${initiallyRender === undefined ? 'block' : 'none'};
 `;
 
 const InPageNewsletterSignup: FC<Props> = ({
 	format,
 	newsletter,
-	defaultTo,
+	initiallyRender,
 	waitingContent: loadingContent,
 	fallbackContent,
 }) => {
 	const { identityName, successDescription } = newsletter;
 	return (
 		<>
-			<section
-				css={containerStyles(format, defaultTo)}
-				className="js-signup-form-container"
-			>
-				<EmailSignupForm
-					identityName={identityName}
-					format={format}
-					successDescription={successDescription}
-				/>
-				<PrivacyWording format={format} useCaptcha={false} />
-			</section>
+			{initiallyRender !== 'fallback' && (
+				<section
+					css={containerStyles(format, initiallyRender)}
+					className="js-signup-form-container"
+				>
+					<EmailSignupForm
+						identityName={identityName}
+						format={format}
+						successDescription={successDescription}
+					/>
+					<PrivacyWording format={format} useCaptcha={false} />
+				</section>
+			)}
 
-			<section
-				css={fallbackContainerStyles(defaultTo)}
-				className="js-signup-form-fallback-container"
-			>
-				{!!fallbackContent ? fallbackContent : <NotSupportedMessage />}
-			</section>
+			{initiallyRender !== 'form' && (
+				<section
+					css={fallbackContainerStyles(initiallyRender)}
+					// if initially rendering the fallback content,
+					// do not switch to the form
+					className={
+						initiallyRender === 'fallback'
+							? undefined
+							: 'js-signup-form-fallback-container'
+					}
+				>
+					{!!fallbackContent ? (
+						fallbackContent
+					) : (
+						<NotSupportedMessage />
+					)}
+				</section>
+			)}
 
-			{!!loadingContent && (
+			{!!loadingContent && initiallyRender === undefined && (
 				<aside
-					css={loadingContainerStyles(defaultTo)}
+					css={loadingContainerStyles(initiallyRender)}
 					className="js-signup-form-loading-content"
 				>
 					{loadingContent}
