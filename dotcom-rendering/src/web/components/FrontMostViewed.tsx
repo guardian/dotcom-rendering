@@ -22,7 +22,7 @@ export const FrontMostViewed = ({
 	isNetworkFront,
 }: Props) => {
 	const showMostViewedTab = !isNetworkFront && !!mostViewed.length;
-	const sectionName = displayName.replace('most viewed ', '');
+	const sectionName = displayName.replace('Most viewed ', '');
 
 	const tabs: TrailTabType[] = [
 		{
