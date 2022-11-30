@@ -103,7 +103,7 @@ const InPageNewsletterSignup: FC<Props> = ({
 							: 'js-signup-form-fallback-container'
 					}
 				>
-					{!!fallbackContent ? (
+					{fallbackContent ? (
 						fallbackContent
 					) : (
 						<NotSupportedMessage />
