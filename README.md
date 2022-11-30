@@ -25,7 +25,7 @@ Go to [common rendering](common-rendering/README.md) for more details.
 
 Most commands are run from within each project but the following are managed from the monorepo root:
 
-### Storybook / Chromatic
+### Storybook/Chromatic
 
 `yarn storybook` - Runs Storybook for all projects
 `yarn build-storybook` - Builds Storybook for all projects
