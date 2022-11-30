@@ -33,16 +33,12 @@ export const LiveBlogBlocksAndAdverts = ({
 	isSensitive,
 	isLiveUpdate,
 }: Props) => {
-	//
 	// If the user is not in the liveblog server-side ads AB test, provide the
 	// same experience as before and DO NOT insert ads into the page.
-	//
-	const abTests = useAB();
+	const aBTestAPI = useAB()?.api;
 	const userInAbTestVariant =
-		abTests?.api.isUserInVariant(
-			'ServerSideLiveblogInlineAds',
-			'variant',
-		) ?? false;
+		aBTestAPI?.isUserInVariant('ServerSideLiveblogInlineAds', 'variant') ??
+		false;
 	if (!userInAbTestVariant) {
 		return (
 			<>
