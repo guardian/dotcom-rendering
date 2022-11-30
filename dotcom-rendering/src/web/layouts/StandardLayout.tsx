@@ -823,6 +823,10 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							data-print-layout="hide"
 							position="merchandising-high"
 							display={format.display}
+							shouldIncludeBillboard={
+								CAPIArticle.config.abTests
+									.billboardsInMerchSlots === 'variant'
+							}
 						/>
 					</Section>
 				)}
@@ -942,6 +946,10 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<AdSlot
 							position="merchandising"
 							display={format.display}
+							shouldIncludeBillboard={
+								CAPIArticle.config.abTests
+									.billboardsInMerchSlots === 'variant'
+							}
 						/>
 					</Section>
 				)}

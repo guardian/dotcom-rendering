@@ -530,6 +530,10 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<AdSlot
 							position="merchandising-high"
 							display={format.display}
+							shouldIncludeBillboard={
+								CAPIArticle.config.abTests
+									.billboardsInMerchSlots === 'variant'
+							}
 						/>
 					</Section>
 				)}
@@ -643,6 +647,10 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<AdSlot
 							position="merchandising"
 							display={format.display}
+							shouldIncludeBillboard={
+								CAPIArticle.config.abTests
+									.billboardsInMerchSlots === 'variant'
+							}
 						/>
 					</Section>
 				)}

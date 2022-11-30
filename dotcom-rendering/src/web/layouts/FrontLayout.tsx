@@ -8,6 +8,7 @@ import {
 } from '@guardian/source-foundations';
 import { Hide } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
+import type { ServerSideTests } from 'src/types/config';
 import type { NavType } from '../../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
@@ -122,6 +123,7 @@ const decideAdSlot = (
 	isPaidContent: boolean | undefined,
 	format: ArticleDisplay,
 	mobileAdPositions: (number | undefined)[],
+	abTests: ServerSideTests,
 ) => {
 	const minContainers = isPaidContent ? 1 : 2;
 	if (
@@ -133,6 +135,9 @@ const decideAdSlot = (
 				data-print-layout="hide"
 				position="merchandising-high"
 				display={format}
+				shouldIncludeBillboard={
+					abTests.billboardsInMerchSlots === 'variant'
+				}
 			/>
 		);
 	} else if (mobileAdPositions.includes(index)) {
@@ -315,6 +320,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									format.display,
 									mobileAdPositions,
+									front.config.abTests,
 								)}
 							</>
 						);
@@ -369,6 +375,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 										.isPaidContent,
 									format.display,
 									mobileAdPositions,
+									front.config.abTests,
 								)}
 							</>
 						);
@@ -438,6 +445,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								front.pressedPage.frontProperties.isPaidContent,
 								format.display,
 								mobileAdPositions,
+								front.config.abTests,
 							)}
 						</>
 					);
@@ -453,7 +461,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 				backgroundColour={neutral[93]}
 				element="aside"
 			>
-				<AdSlot position="merchandising" display={format.display} />
+				<AdSlot
+					position="merchandising"
+					display={format.display}
+					shouldIncludeBillboard={
+						front.config.abTests.billboardsInMerchSlots ===
+						'variant'
+					}
+				/>
 			</Section>
 
 			{NAV.subNavSections && (
