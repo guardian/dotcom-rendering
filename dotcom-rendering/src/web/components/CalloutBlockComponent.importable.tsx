@@ -10,9 +10,9 @@ import { useState } from 'react';
 import { decidePalette } from '../lib/decidePalette';
 import { Deadline } from './CalloutNew/CalloutDeadline';
 import { CalloutDescription } from './CalloutNew/CalloutDescription';
+import { CalloutExpired } from './CalloutNew/CalloutExpired';
 import { CalloutShareComponent } from './CalloutNew/CalloutShareComponent';
 import { Form } from './CalloutNew/Form';
-// import { ExpandingWrapper } from './ExpandingWrapper';
 
 const ruleStyles = css`
 	border-image: repeating-linear-gradient(
@@ -114,6 +114,13 @@ export const CalloutBlockComponent = ({
 	const { title, description, formFields, activeUntil } = callout;
 	const [isExpanded, setIsExpanded] = useState(false);
 
+	const isExpired = (date: number | undefined): boolean => {
+		if (date) {
+			return Math.floor(new Date().getTime() / 1000) > date;
+		}
+		return false;
+	};
+
 	const onSubmit = async (formData: FormDataType) => {
 		// Reset error for new submission attempt
 		setNetworkError('');
@@ -164,6 +171,10 @@ export const CalloutBlockComponent = ({
 			});
 	};
 
+	if (!isNonCollapsible && !isExpired(activeUntil)) {
+		return null;
+	}
+
 	if (submissionSuccess) {
 		return (
 			<details
@@ -212,12 +223,16 @@ export const CalloutBlockComponent = ({
 						</div>
 					</summary>
 					<CalloutShareComponent format={format} />
-					<Form
-						formFields={formFields}
-						onSubmit={onSubmit}
-						format={format}
-						networkError={networkError}
-					/>
+					{isExpired(activeUntil) ? (
+						<CalloutExpired />
+					) : (
+						<Form
+							formFields={formFields}
+							onSubmit={onSubmit}
+							format={format}
+							networkError={networkError}
+						/>
+					)}
 				</details>
 			) : (
 				<ExpandingWrapper
