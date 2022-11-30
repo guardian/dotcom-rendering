@@ -19,7 +19,7 @@ export interface FEFrontType {
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
 	isNetworkFront: boolean;
-	mostViewed?: CAPITrailType[]; // TODO: This doesn't need to be optional
+	mostViewed: CAPITrailType[];
 	mostCommented?: CAPITrailType;
 	mostShared?: CAPITrailType;
 }
