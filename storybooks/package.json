@@ -6,7 +6,7 @@
   "description": "Global storybook that composes the repo's individual project storybooks",
   "scripts": {
     "storybook": "start-storybook -p 4000",
-    "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ../dotcom-rendering/src/static"
+    "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook"
   },
   "dependencies": {
     "@babel/core": "^7.16.12",
