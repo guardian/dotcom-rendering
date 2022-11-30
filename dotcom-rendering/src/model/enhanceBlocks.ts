@@ -8,7 +8,10 @@ import { enhanceH3s } from './enhance-H3s';
 import { enhanceImages } from './enhance-images';
 import { enhanceInteractiveContentsElements } from './enhance-interactive-contents-elements';
 import { enhanceNumberedLists } from './enhance-numbered-lists';
-import { enhanceRecipes } from './enhance-recipes';
+/**
+ * Removing this enhancer temporarily because it's causing a bug in production
+ */
+// import { enhanceRecipes } from './enhance-recipes';
 import { enhanceTweets } from './enhance-tweets';
 import { insertPromotedNewsletter } from './insertPromotedNewsletter';
 
@@ -86,10 +89,13 @@ class BlockEnhancer {
 		return this;
 	}
 
-	enhanceRecipes(isRecipe: boolean) {
-		if (isRecipe) this.blocks = enhanceRecipes(this.blocks);
-		return this;
-	}
+	/**
+	 * Removing this enhancer temporarily because it's causing a bug in production
+	 */
+	// enhanceRecipes(isRecipe: boolean) {
+	// 	if (isRecipe) this.blocks = enhanceRecipes(this.blocks);
+	// 	return this;
+	// }
 }
 
 type Options = {
@@ -107,17 +113,22 @@ export const enhanceBlocks = (
 ): Block[] => {
 	const { isRecipe = false, promotedNewsletter } = options ?? {};
 
-	return new BlockEnhancer(blocks, format, { isRecipe, promotedNewsletter })
-		.enhanceDividers()
-		.enhanceH3s()
-		.enhanceH2s()
-		.enhanceInteractiveContentsElements()
-		.enhanceBlockquotes()
-		.enhanceDots()
-		.enhanceImages()
-		.enhanceNumberedLists()
-		.enhanceEmbeds()
-		.enhanceTweets()
-		.enhanceRecipes(isRecipe)
-		.enhanceNewsletterSignup().blocks;
+	return (
+		new BlockEnhancer(blocks, format, { isRecipe, promotedNewsletter })
+			.enhanceDividers()
+			.enhanceH3s()
+			.enhanceH2s()
+			.enhanceInteractiveContentsElements()
+			.enhanceBlockquotes()
+			.enhanceDots()
+			.enhanceImages()
+			.enhanceNumberedLists()
+			.enhanceEmbeds()
+			.enhanceTweets()
+			/**
+			 * Removing this enhancer temporarily because it's causing a bug in production
+			 */
+			// .enhanceRecipes(isRecipe)
+			.enhanceNewsletterSignup().blocks
+	);
 };
