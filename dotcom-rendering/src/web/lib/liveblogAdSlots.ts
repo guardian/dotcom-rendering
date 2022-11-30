@@ -12,8 +12,6 @@ const MIN_SPACE_BEFORE_FIRST_AD = 1_000;
 
 /**
  * Minimum allowed space between inline ads in pixels.
- *
- * Cypress testing in commercial-tools repo will tell us whether this number is too small or too big.
  */
 const MIN_SPACE_BETWEEN_ADS = 1_400;
 
