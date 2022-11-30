@@ -39,10 +39,10 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__APPS_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          workingDir: apps-rendering
           untraced: '**/(package**.json|yarn.lock)'
           exitOnceUploaded: true
           onlyChanged: '!(main)' # only turbosnap on non-main branches
+          workingDir: apps-rendering
 
       - name: Chromatic - Apps Rendering Dependency PR
         uses: chromaui/action@v1
@@ -51,4 +51,4 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__APPS_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
-          workingDir: dotcom-rendering
+          workingDir: apps-rendering
