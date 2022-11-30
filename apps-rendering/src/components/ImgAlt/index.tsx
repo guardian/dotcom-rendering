@@ -8,13 +8,14 @@ import type { ArticleFormat } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
 import { withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
-import { Image, ImageSubtype } from 'image/image';
+import type { Image } from 'image/image';
+import { ImageSubtype } from 'image/image';
 import type { Lightbox } from 'image/lightbox';
 import { getCaption, getClassName, getCredit } from 'image/lightbox';
 import { sizesAttribute, styles as sizeStyles } from 'image/sizes';
 import type { Sizes } from 'image/sizes';
+import type { Optional } from 'optional';
 import type { FC } from 'react';
-import { Optional } from 'optional';
 
 // ----- Functions ----- //
 
@@ -46,7 +47,7 @@ type Props = {
 /**
  * We provide placeholder background colours for images, to show that they
  * haven't loaded yet. This is particularly important for offline usage.
- * 
+ *
  * However, some kinds of images can contain transparency (PNGs, SVGs), so we
  * don't set a background for these.
  */
@@ -57,10 +58,9 @@ const placeholderBackground = (
 ): SerializedStyles => {
 	if (
 		imageSubtype.isSome() &&
-		(
-			imageSubtype.value === ImageSubtype.Png ||
-			imageSubtype.value === ImageSubtype.Svg
-		)) {
+		(imageSubtype.value === ImageSubtype.Png ||
+			imageSubtype.value === ImageSubtype.Svg)
+	) {
 		return css();
 	}
 
@@ -70,7 +70,7 @@ const placeholderBackground = (
 			background-color: ${neutral[20]};
 		`}
 	`;
-}
+};
 
 const styles = (
 	format: ArticleFormat,

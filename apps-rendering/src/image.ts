@@ -7,7 +7,8 @@ import { ArticleElementRole } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import { andThen, fromNullable, map, none, some } from '@guardian/types';
-import { Image as ImageData, ImageSubtype } from 'image/image';
+import type { Image as ImageData } from 'image/image';
+import { ImageSubtype } from 'image/image';
 import { Dpr, src, srcsets } from 'image/srcsets';
 import { pipe } from 'lib';
 import { Optional } from 'optional';
@@ -62,7 +63,7 @@ const parseImageSubtype = (asset: Asset): Optional<ImageSubtype> => {
 		default:
 			return Optional.none();
 	}
-}
+};
 
 const sortAscendingWidth = (a: Asset, b: Asset): number =>
 	a.typeData?.width && b.typeData?.width

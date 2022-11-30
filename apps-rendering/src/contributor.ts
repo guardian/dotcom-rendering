@@ -7,7 +7,7 @@ import type { Option } from '@guardian/types';
 import { none } from '@guardian/types';
 import { articleContributors } from 'capi';
 import type { Image } from 'image';
-import { ImageSubtype } from 'image/image';
+import type { ImageSubtype } from 'image/image';
 import { Dpr, src, srcsetWithWidths } from 'image/srcsets';
 import { Optional } from 'optional';
 
