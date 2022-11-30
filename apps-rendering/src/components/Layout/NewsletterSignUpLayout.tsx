@@ -10,7 +10,6 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import Body from 'components/ArticleBody';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import MainMedia from 'components/MainMedia';
@@ -129,23 +128,28 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 						</div>
 					)}
 
-					{newsletter ? (
+					{!!newsletter && (
 						<InPageNewsletterSignup
 							newsletter={newsletter}
 							format={getFormat(item)}
-							defaultTo={'form'} // TO DO - remove for production
+							// defaultTo={'form'} // TO DO - remove for production
 							fallbackContent={
-								<Body format={item}>{children}</Body>
+								<>
+									<p>
+										app version does not support sign up
+										feature
+									</p>
+									{/* placeholder content */}
+								</>
 							}
 							loadingContent={
 								<>
 									<p>loading...</p>
 									<SvgSpinner size="medium" />
+									{/* placeholder content */}
 								</>
 							}
 						/>
-					) : (
-						<Body format={item}>{children}</Body>
 					)}
 				</section>
 			</article>
