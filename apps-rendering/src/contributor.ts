@@ -7,6 +7,7 @@ import type { Option } from '@guardian/types';
 import { none } from '@guardian/types';
 import { articleContributors } from 'capi';
 import type { Image } from 'image';
+import { ImageSubtype } from 'image/image';
 import { Dpr, src, srcsetWithWidths } from 'image/srcsets';
 import { Optional } from 'optional';
 
@@ -43,6 +44,7 @@ const tagToContributor =
 				alt: none,
 				role: ArticleElementRole.Standard,
 				nativeCaption: none,
+				imageSubtype: Optional.none<ImageSubtype>(),
 			}))
 			.toOption(),
 	});

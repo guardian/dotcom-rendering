@@ -8,12 +8,13 @@ import type { ArticleFormat } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
 import { withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
-import type { Image } from 'image/image';
+import { Image, ImageSubtype } from 'image/image';
 import type { Lightbox } from 'image/lightbox';
 import { getCaption, getClassName, getCredit } from 'image/lightbox';
 import { sizesAttribute, styles as sizeStyles } from 'image/sizes';
 import type { Sizes } from 'image/sizes';
 import type { FC } from 'react';
+import { Optional } from 'optional';
 
 // ----- Functions ----- //
 
@@ -42,17 +43,43 @@ type Props = {
 	lightbox: Option<Lightbox>;
 };
 
+/**
+ * We provide placeholder background colours for images, to show that they
+ * haven't loaded yet. This is particularly important for offline usage.
+ * 
+ * However, some kinds of images can contain transparency (PNGs, SVGs), so we
+ * don't set a background for these.
+ */
+const placeholderBackground = (
+	format: ArticleFormat,
+	supportsDarkMode: boolean,
+	imageSubtype: Optional<ImageSubtype>,
+): SerializedStyles => {
+	if (
+		imageSubtype.isSome() &&
+		(
+			imageSubtype.value === ImageSubtype.Png ||
+			imageSubtype.value === ImageSubtype.Svg
+		)) {
+		return css();
+	}
+
+	return css`
+		background-color: ${backgroundColour(format)};
+		${darkModeCss(supportsDarkMode)`
+			background-color: ${neutral[20]};
+		`}
+	`;
+}
+
 const styles = (
 	format: ArticleFormat,
 	supportsDarkMode: boolean,
+	imageSubtype: Optional<ImageSubtype>,
 ): SerializedStyles => css`
-	background-color: ${backgroundColour(format)};
+	${placeholderBackground(format, supportsDarkMode, imageSubtype)}
 	color: ${neutral[60]};
 	display: block;
-
-	${darkModeCss(supportsDarkMode)`
-        background-color: ${neutral[20]};
-    `}
 `;
 
 const Img: FC<Props> = ({
@@ -76,7 +103,7 @@ const Img: FC<Props> = ({
 			className={getClassName(image.width, lightbox)}
 			css={[
 				sizeStyles(sizes, image.width, image.height),
-				styles(format, supportsDarkMode),
+				styles(format, supportsDarkMode, image.imageSubtype),
 				withDefault<SerializedStyles | undefined>(undefined)(className),
 			]}
 			data-ratio={image.height / image.width}
