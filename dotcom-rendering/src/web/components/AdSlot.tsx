@@ -75,7 +75,7 @@ export const labelStyles = css`
 	}
 
 	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller)::before {
-		content: 'Advertisement';
+		content: attr(ad-label-text);
 		display: block;
 		position: relative;
 		${adSlotLabelStyles}
