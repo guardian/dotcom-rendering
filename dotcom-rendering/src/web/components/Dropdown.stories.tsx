@@ -117,6 +117,7 @@ const linksWithNotifications = [
 		dataLinkName: 'billing',
 		notifications: [
 			{
+				id: 'example-id',
 				message: 'Billing attempt failed',
 				target: 'billing',
 			},

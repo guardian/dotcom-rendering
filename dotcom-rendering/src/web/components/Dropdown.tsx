@@ -221,25 +221,41 @@ const NotificationBadge = ({ diameter }: { diameter: number }) => {
 	);
 };
 
+type NotificationMessageProps = {
+	notification: Notification;
+};
+const NotificationMessage = ({ notification }: NotificationMessageProps) => {
+	const [hasBeenSeen, setNode] = useIsInView({
+		debounce: true,
+	});
+
+	const { message, logImpression } = notification;
+	useEffect(() => {
+		if (hasBeenSeen) {
+			logImpression?.();
+		}
+		// I want this useEffect to fire exactly once when hasBeenSeen becomes
+		// true. Ommitting logImpression from the dependency array so I don't
+		// have to worry about whether logImpression is stable (if it isn't we'd
+		// be in danger of logging multiple impressions of the same
+		// notification)
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- See above comment
+	}, [hasBeenSeen]);
+
+	return (
+		<div css={notificationTextStyles} ref={setNode}>
+			{message}
+		</div>
+	);
+};
+
 type DropdownLinkProps = {
 	link: DropdownLinkType;
 	index: number;
 };
 const DropdownLink = ({ link, index }: DropdownLinkProps) => {
-	const [hasBeenSeen, setNode] = useIsInView({
-		debounce: true,
-	});
-
-	useEffect(() => {
-		if (hasBeenSeen) {
-			link.notifications?.forEach((notification) => {
-				notification.logImpression?.();
-			});
-		}
-	}, [hasBeenSeen, link]);
-
 	return (
-		<li css={liStyles} key={link.title} ref={setNode}>
+		<li css={liStyles} key={link.title}>
 			<a
 				href={link.url}
 				css={[
@@ -251,9 +267,10 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 			>
 				{link.title}
 				{link.notifications?.map((notification) => (
-					<div css={notificationTextStyles}>
-						{notification.message}
-					</div>
+					<NotificationMessage
+						notification={notification}
+						key={notification.id}
+					/>
 				))}
 			</a>
 

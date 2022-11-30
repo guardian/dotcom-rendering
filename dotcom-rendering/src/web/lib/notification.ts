@@ -2,6 +2,7 @@ import type { BrazeCard } from '@guardian/braze-components';
 import type { DropdownLinkType } from '../components/Dropdown';
 
 export interface Notification {
+	id: string;
 	target: string;
 	message: string;
 	logImpression?: () => void;
@@ -17,8 +18,13 @@ export const mapBrazeCardsToNotifications = (
 ): Notification[] => {
 	return cards.filter(hasTargetAndMessage).map((card) => {
 		return {
+			id: card.id,
 			target: card.extras.target,
 			message: card.extras.message,
+			logImpression: () => {
+				card.logImpression();
+				console.log('logged impression');
+			},
 		};
 	});
 };

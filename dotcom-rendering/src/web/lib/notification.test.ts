@@ -18,6 +18,7 @@ describe('addNotificationsToDropdownLinks', () => {
 		];
 		const notifications = [
 			{
+				id: 'example-id',
 				message: 'Some notification message',
 				target: 'account_overview',
 			},
@@ -36,6 +37,7 @@ describe('addNotificationsToDropdownLinks', () => {
 				dataLinkName: 'nav2 : topbar : account overview',
 				notifications: [
 					{
+						id: 'example-id',
 						message: 'Some notification message',
 						target: 'account_overview',
 					},
@@ -61,10 +63,12 @@ describe('addNotificationsToDropdownLinks', () => {
 		];
 		const notifications = [
 			{
+				id: 'example-id-1',
 				message: 'Some notification message',
 				target: 'account_overview',
 			},
 			{
+				id: 'example-id-2',
 				message: 'Another notification message',
 				target: 'account_overview',
 			},
@@ -83,10 +87,12 @@ describe('addNotificationsToDropdownLinks', () => {
 				dataLinkName: 'nav2 : topbar : account overview',
 				notifications: [
 					{
+						id: 'example-id-1',
 						message: 'Some notification message',
 						target: 'account_overview',
 					},
 					{
+						id: 'example-id-2',
 						message: 'Another notification message',
 						target: 'account_overview',
 					},
@@ -104,6 +110,7 @@ describe('addNotificationsToDropdownLinks', () => {
 				dataLinkName: 'nav2 : topbar : account overview',
 				notifications: [
 					{
+						id: 'existing',
 						message: 'Existing notification message',
 						target: 'account_overview',
 					},
@@ -112,6 +119,7 @@ describe('addNotificationsToDropdownLinks', () => {
 		];
 		const notifications = [
 			{
+				id: 'new',
 				message: 'New notification message',
 				target: 'account_overview',
 			},
@@ -130,10 +138,12 @@ describe('addNotificationsToDropdownLinks', () => {
 				dataLinkName: 'nav2 : topbar : account overview',
 				notifications: [
 					{
+						id: 'existing',
 						message: 'Existing notification message',
 						target: 'account_overview',
 					},
 					{
+						id: 'new',
 						message: 'New notification message',
 						target: 'account_overview',
 					},

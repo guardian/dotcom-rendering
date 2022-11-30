@@ -215,19 +215,25 @@ const SignedInWithNotifications = ({
 
 const SignedIn = ({ idApiUrl, ...props }: MyAccountProps) => {
 	const { brazeCards } = useBraze(idApiUrl);
-	const [notifications, setNotifications] = useState<Notification[]>([]);
+	const [brazeNotifications, setBrazeNotifications] = useState<
+		Notification[]
+	>([]);
+
 	useEffect(() => {
 		if (brazeCards) {
 			const cards = brazeCards.getCardsForProfileBadge();
 			const cardsToNotifications = mapBrazeCardsToNotifications(cards);
 			if (cardsToNotifications.length) {
-				setNotifications(cardsToNotifications);
+				setBrazeNotifications(cardsToNotifications);
 			}
 		}
 	}, [brazeCards]);
 
 	return (
-		<SignedInWithNotifications {...props} notifications={notifications} />
+		<SignedInWithNotifications
+			{...props}
+			notifications={brazeNotifications}
+		/>
 	);
 };
 
