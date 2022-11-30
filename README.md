@@ -25,13 +25,14 @@ Go to [common rendering](common-rendering/README.md) for more details.
 
 Most commands are run from within each project but the following are managed from the monorepo root:
 
-### Storybook/Chromatic
+### Storybook
 
 `yarn storybook` - Runs Storybook for all projects
 `yarn build-storybook` - Builds Storybook for all projects
-`yarn chromatic` - Builds and uploads Chromatic snapshots for all projects\*
 
--   You need the `CHROMATIC_PROJECT_TOKEN` environment variable set. You can find the token (here)[https://www.chromatic.com/manage?appId=5dfcbf3012392c0020e7140b&view=configure]
+Chromatic now runs at project level. `cd` into the project dir and run `yarn chromatic -t [CHROMATIC PROJECT TOKEN]`
+
+You can find the token in the project Chromatic instance.
 
 ### Install Node.js
 
