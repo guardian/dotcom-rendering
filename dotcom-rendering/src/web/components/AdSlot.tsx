@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
-import { adSizes } from '@guardian/commercial-core';
 import type { SlotName } from '@guardian/commercial-core';
+import { adSizes } from '@guardian/commercial-core';
 import { ArticleDisplay } from '@guardian/libs';
 import {
 	border,
@@ -21,6 +21,7 @@ type InlineProps = {
 	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
+	shouldIncludeBillboard?: never;
 };
 
 type NonInlineProps = {
@@ -29,6 +30,7 @@ type NonInlineProps = {
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
+	shouldIncludeBillboard?: boolean;
 };
 
 /**
@@ -240,6 +242,7 @@ export const AdSlot = ({
 	display,
 	isPaidContent = false,
 	index,
+	shouldIncludeBillboard,
 }: Props) => {
 	switch (position) {
 		case 'right':
@@ -376,7 +379,9 @@ export const AdSlot = ({
 					data-link-name="ad slot merchandising-high"
 					data-name="merchandising-high"
 					aria-hidden="true"
-					data-label="false"
+					data-desktop={
+						shouldIncludeBillboard ? '970,250' : undefined
+					}
 				/>
 			);
 		}
@@ -397,7 +402,9 @@ export const AdSlot = ({
 					data-link-name="ad slot merchandising"
 					data-name="merchandising"
 					aria-hidden="true"
-					data-label="false"
+					data-desktop={
+						shouldIncludeBillboard ? '970,250' : undefined
+					}
 				/>
 			);
 		}
