@@ -22,7 +22,7 @@ style.type = 'text/css';
 style.appendChild(document.createTextNode(css));
 
 const guardianViewports = {
-	mobileMedium: {
+	mobile: {
 		name: 'mobile',
 		styles: {
 			width: '320px',
