@@ -13,9 +13,9 @@ import {
 import {
 	SvgClock,
 	SvgNewsletter,
-	SvgSpinner,
 } from '@guardian/source-react-components';
 import { OptionKind } from '@guardian/types/dist/option';
+import ArticleBody from 'components/ArticleBody';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import MainMedia from 'components/MainMedia';
@@ -132,22 +132,11 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 						<InPageNewsletterSignup
 							newsletter={newsletter}
 							format={getFormat(item)}
-							// defaultTo={'form'} // TO DO - remove for production
+							defaultTo={'fallback'}
 							fallbackContent={
-								<>
-									<p>
-										app version does not support sign up
-										feature
-									</p>
-									{/* placeholder content */}
-								</>
-							}
-							loadingContent={
-								<>
-									<p>loading...</p>
-									<SvgSpinner size="medium" />
-									{/* placeholder content */}
-								</>
+								<ArticleBody format={item}>
+									{children}
+								</ArticleBody>
 							}
 						/>
 					)}
