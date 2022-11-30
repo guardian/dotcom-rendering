@@ -60,7 +60,7 @@ jobs:
           autoAcceptChanges: main
           workingDir: dotcom-rendering
 
-      - name: Chromatic - All
+      - name: Chromatic - DCR Repo All
         uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
