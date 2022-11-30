@@ -68,12 +68,3 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
           workingDir: dotcom-rendering
-
-      - name: Chromatic - DCR Repo All
-        uses: chromaui/action@v1
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          workingDir: storybooks
-          exitOnceUploaded: true
-          onlyChanged: '!(main)' # only turbosnap on non-main branches
