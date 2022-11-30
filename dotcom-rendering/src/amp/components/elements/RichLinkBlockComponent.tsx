@@ -7,6 +7,7 @@ import {
 } from '@guardian/source-foundations';
 import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
+import { RichLinkBlockElement } from '../../../types/content';
 
 const richLinkContainer = css`
 	float: left;

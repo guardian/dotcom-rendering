@@ -43,6 +43,7 @@ import type { Outline } from 'outline';
 import { fromBodyElements } from 'outline';
 import { Result } from 'result';
 import { galleryBody } from './galleryBody';
+import { partialNewsletterItem } from './newsletterSignUpContent';
 import { relatedContent } from './relatedContent';
 
 // ----- Fixture ----- //
@@ -473,7 +474,7 @@ const cartoon: Item = {
 
 const matchReport: MatchReport = {
 	design: ArticleDesign.MatchReport,
-	football: some(matchScores),
+	football: Optional.some(matchScores),
 	...fields,
 	theme: ArticlePillar.Sport,
 	body: galleryBody,
@@ -510,6 +511,12 @@ const explainer: Explainer = {
 	design: ArticleDesign.Explainer,
 	...fields,
 	outline: outlineFromItem(fields.body),
+};
+
+const newsletterSignUp: Standard = {
+	...fields,
+	design: ArticleDesign.NewsletterSignup,
+	...partialNewsletterItem,
 };
 
 const immersive: Standard = {
@@ -551,6 +558,7 @@ export {
 	quiz,
 	pinnedBlock,
 	explainer,
+	newsletterSignUp,
 	immersive,
 	gallery,
 	parseHtml,

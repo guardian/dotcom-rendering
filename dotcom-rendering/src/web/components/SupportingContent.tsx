@@ -1,10 +1,11 @@
 import { css } from '@emotion/react';
-import { ArticleDesign } from '@guardian/libs';
-import { from, until } from '@guardian/source-foundations';
+import { from, neutral, until } from '@guardian/source-foundations';
 import type {
 	DCRContainerPalette,
 	DCRSupportingContent,
 } from '../../types/front';
+import { decidePalette } from '../lib/decidePalette';
+import { transparentColour } from '../lib/transparentColour';
 import { CardHeadline } from './CardHeadline';
 
 type Alignment = 'vertical' | 'horizontal';
@@ -14,7 +15,7 @@ type Props = {
 	alignment: Alignment;
 	containerPalette?: DCRContainerPalette;
 	isDynamo?: true;
-	parentFormat?: ArticleFormat;
+	parentFormat: ArticleFormat;
 };
 
 const wrapperStyles = css`
@@ -30,7 +31,7 @@ const directionStyles = (alignment: Alignment) => {
 		case 'horizontal':
 			return css`
 				flex-direction: column;
-				${from.phablet} {
+				${from.tablet} {
 					flex-direction: row;
 				}
 			`;
@@ -41,6 +42,20 @@ const directionStyles = (alignment: Alignment) => {
 	}
 };
 
+const dynamoStyles = css`
+	flex-direction: column;
+	column-gap: 5px;
+	width: 100%;
+	margin: 0;
+
+	${from.tablet} {
+		padding: 0 5px 5px;
+		flex-direction: row;
+		position: absolute;
+		bottom: 0;
+	}
+`;
+
 const liStyles = css`
 	display: flex;
 	flex-direction: column;
@@ -48,9 +63,16 @@ const liStyles = css`
 	padding-top: 2px;
 	position: relative;
 	margin-top: 8px;
-	${from.phablet} {
+	${from.tablet} {
 		margin-bottom: 4px;
 	}
+`;
+
+const dynamoLiStyles = css`
+	background-color: ${transparentColour(neutral[97], 0.875)};
+	border-top: 1px solid;
+	flex-grow: 1;
+	margin: 0;
 `;
 
 const leftMargin = css`
@@ -60,24 +82,10 @@ const leftMargin = css`
 `;
 
 const bottomMargin = css`
-	${until.phablet} {
+	${until.tablet} {
 		margin-bottom: 8px;
 	}
 `;
-
-// If the sublink or parent container is a liveblog the sublink format should persist taking the parent format's design.
-const decideFormat = (
-	sublinkFormat: ArticleFormat,
-	parentFormat: ArticleFormat,
-) => {
-	if (
-		sublinkFormat.design === ArticleDesign.LiveBlog ||
-		parentFormat.design === ArticleDesign.LiveBlog
-	) {
-		return { ...sublinkFormat, design: parentFormat.design };
-	}
-	return sublinkFormat;
-};
 
 export const SupportingContent = ({
 	supportingContent,
@@ -87,8 +95,13 @@ export const SupportingContent = ({
 	parentFormat,
 }: Props) => {
 	return (
-		<ul css={[wrapperStyles, directionStyles(alignment)]}>
-			{supportingContent.map((subLink: DCRSupportingContent, index) => {
+		<ul
+			css={[
+				wrapperStyles,
+				isDynamo ? dynamoStyles : directionStyles(alignment),
+			]}
+		>
+			{supportingContent.map((subLink, index) => {
 				// The model has this property as optional but it is very likely
 				// to exist
 				if (!subLink.headline) return null;
@@ -97,18 +110,24 @@ export const SupportingContent = ({
 					<li
 						key={subLink.url}
 						css={[
-							liStyles,
+							isDynamo
+								? [
+										dynamoLiStyles,
+										css`
+											border-color: ${decidePalette(
+												parentFormat,
+												containerPalette,
+											).topBar.card};
+										`,
+								  ]
+								: liStyles,
 							shouldPadLeft && leftMargin,
 							index === supportingContent.length - 1 &&
 								bottomMargin,
 						]}
 					>
 						<CardHeadline
-							format={
-								parentFormat
-									? decideFormat(subLink.format, parentFormat)
-									: subLink.format
-							}
+							format={subLink.format}
 							size="tiny"
 							showSlash={false}
 							showLine={true}
@@ -116,11 +135,7 @@ export const SupportingContent = ({
 							containerPalette={containerPalette}
 							isDynamo={isDynamo}
 							headlineText={subLink.headline}
-							kickerText={
-								subLink.format.design === ArticleDesign.LiveBlog
-									? 'Live'
-									: subLink.kickerText
-							}
+							kickerText={subLink.kickerText}
 						/>
 					</li>
 				);

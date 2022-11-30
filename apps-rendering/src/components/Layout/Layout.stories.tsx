@@ -20,6 +20,7 @@ import {
 	interview,
 	letter,
 	matchReport,
+	newsletterSignUp,
 	photoEssay,
 	printShop,
 	quiz,
@@ -33,7 +34,9 @@ import { renderAll } from 'renderer';
 import { Result } from 'result';
 import GalleryLayout from './GalleryLayout';
 import ImmersiveLayout from './ImmersiveLayout';
+import LetterLayout from './LetterLayout';
 import Live from './LiveLayout';
+import NewsletterSignUpLayout from './NewsletterSignUpLayout';
 
 // ----- Functions ----- //
 
@@ -170,12 +173,12 @@ CommentItem.story = { name: 'Comment' };
 
 export const Letter = (): React.ReactNode => {
 	return (
-		<Comment item={letter}>
+		<LetterLayout item={letter}>
 			{renderAll(
 				formatFromItem(letter, some(ArticleDisplay.Standard)),
 				Result.partition(letter.body).oks,
 			)}
-		</Comment>
+		</LetterLayout>
 	);
 };
 Letter.story = { name: 'Letter' };
@@ -238,6 +241,15 @@ export const DeadBlog = (): ReactElement => (
 );
 DeadBlog.story = { name: 'DeadBlog ' };
 
+export const NewsletterSignup = (): ReactElement => (
+	<NewsletterSignUpLayout item={newsletterSignUp}>
+		{renderAll(
+			formatFromItem(newsletterSignUp, some(ArticleDisplay.Standard)),
+			Result.partition(newsletterSignUp.body).oks,
+		)}
+	</NewsletterSignUpLayout>
+);
+NewsletterSignup.story = { name: 'NewsletterSignup' };
 export const Immersive = (): ReactElement => (
 	<ImmersiveLayout
 		item={{

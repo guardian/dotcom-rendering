@@ -153,7 +153,7 @@ interface BlockContributor {
 
 interface Block {
 	id: string;
-	elements: CAPIElement[];
+	elements: import('./src/types/content').CAPIElement[];
 	attributes: Attributes;
 	blockCreatedOn?: number;
 	blockCreatedOnDisplay?: string;
@@ -565,7 +565,7 @@ declare namespace JSX {
 	interface IntrinsicElements {
 		'gu-island': {
 			name: string;
-			deferUntil?: 'idle' | 'visible' | 'interaction';
+			deferUntil?: 'idle' | 'visible' | 'interaction' | 'hash';
 			clientOnly?: boolean;
 			expediteLoading?: boolean;
 			props: any;
@@ -605,5 +605,13 @@ declare namespace JSX {
 		 * link is clicked.
 		 */
 		'data-link-name'?: string;
+
+		/**
+		 * Elements with this attribute will fetch their comment count on
+		 * the client-side.
+		 *
+		 * @see {@link ../src/web/components/FetchCommentCounts.importable.tsx}
+		 */
+		'data-discussion-id'?: string;
 	}
 }

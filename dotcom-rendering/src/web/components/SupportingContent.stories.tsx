@@ -47,6 +47,7 @@ export const Default = () => {
 		<SupportingContent
 			supportingContent={[aBasicLink]}
 			alignment="horizontal"
+			parentFormat={aBasicLink.format}
 		/>
 	);
 };
@@ -56,6 +57,7 @@ export const WithKicker = () => {
 		<SupportingContent
 			supportingContent={[{ ...aBasicLink, kickerText: 'Kicker text' }]}
 			alignment="horizontal"
+			parentFormat={aBasicLink.format}
 		/>
 	);
 };
@@ -449,90 +451,8 @@ export const LiveSublink = () => {
 					theme: ArticlePillar.News,
 				}}
 				linkTo=""
-				headlineText="With one link to a liveblog"
+				headlineText="With one link"
 			/>
-			<div
-				css={css`
-					width: 300px;
-				`}
-			>
-				<Card
-					{...basicCardProps}
-					supportingContent={[
-						{
-							...aBasicLink,
-							kickerText: 'News',
-							format: {
-								...aBasicLink.format,
-								theme: ArticlePillar.News,
-								design: ArticleDesign.LiveBlog,
-							},
-						},
-						{
-							...aBasicLink,
-							kickerText: 'Sport',
-							format: {
-								...aBasicLink.format,
-								theme: ArticlePillar.Sport,
-								design: ArticleDesign.LiveBlog,
-							},
-						},
-						{
-							...aBasicLink,
-							kickerText: 'Lifestyle',
-							format: {
-								...aBasicLink.format,
-								theme: ArticlePillar.Lifestyle,
-								design: ArticleDesign.LiveBlog,
-							},
-						},
-						{
-							...aBasicLink,
-							kickerText: 'Opinion',
-							format: {
-								...aBasicLink.format,
-								theme: ArticlePillar.Opinion,
-								design: ArticleDesign.LiveBlog,
-							},
-						},
-						{
-							...aBasicLink,
-							kickerText: 'Culture',
-							format: {
-								...aBasicLink.format,
-								theme: ArticlePillar.Culture,
-								design: ArticleDesign.LiveBlog,
-							},
-						},
-						{
-							...aBasicLink,
-							kickerText: 'SpecialReport',
-							format: {
-								...aBasicLink.format,
-								theme: ArticleSpecial.SpecialReport,
-								design: ArticleDesign.LiveBlog,
-							},
-						},
-						{
-							...aBasicLink,
-							kickerText: 'Labs',
-							format: {
-								...aBasicLink.format,
-								theme: ArticleSpecial.Labs,
-								design: ArticleDesign.LiveBlog,
-							},
-						},
-					]}
-					imagePosition="top"
-					format={{
-						display: ArticleDisplay.Standard,
-						design: ArticleDesign.Standard,
-						theme: ArticlePillar.News,
-					}}
-					linkTo=""
-					headlineText="Different themes"
-				/>
-			</div>
 		</div>
 	);
 };

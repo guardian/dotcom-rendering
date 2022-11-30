@@ -53,7 +53,7 @@ export const NavList = ({ trails, containerPalette }: Props) => {
 	return (
 		<ul css={ulStyles}>
 			{trails.map((trail) => (
-				<li css={liStyles(containerOverrides)}>
+				<li css={liStyles(containerOverrides)} key={trail.url}>
 					<Link
 						href={trail.url}
 						priority="secondary"

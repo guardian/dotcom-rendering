@@ -6,12 +6,21 @@
   "private": true,
   "workspaces": [
     "dotcom-rendering",
-    "common-rendering"
+    "common-rendering",
+    "storybooks"
   ],
   "scripts": {
     "postinstall": "cd apps-rendering && if [ \"$CI\" = true ]; then yarn --frozen-lockfile ; else yarn ; fi",
-    "storybook": "node --max-old-space-size=4096 $(yarn bin)/start-storybook --static-dir ./dotcom-rendering/src/static -p 6006",
-    "build-storybook": "node --max-old-space-size=4096 $(yarn bin)/build-storybook --static-dir ./dotcom-rendering/src/static",
+    "storybook": "npm-run-all --parallel storybook:*",
+    "storybook:composed": "sleep 5 && yarn workspace storybooks storybook --quiet",
+    "storybook:cr": "yarn workspace @guardian/common-rendering storybook --no-open --quiet",
+    "storybook:dcr": "yarn workspace @guardian/dotcom-rendering storybook --no-open --quiet",
+    "storybook:ar": "cd apps-rendering && yarn storybook --no-open --quiet",
+    "build-storybook": "npm-run-all --parallel build-storybook:*",
+    "build-storybook:ar": "cd apps-rendering && yarn build-storybook",
+    "build-storybook:cr": "yarn workspace @guardian/common-rendering build-storybook",
+    "build-storybook:dcr": "yarn workspace @guardian/dotcom-rendering build-storybook",
+    "build-storybook:composed": "yarn workspace storybooks build-storybook",
     "build:dcr": "cd ./dotcom-rendering && yarn makeBuild",
     "chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
     "prepare": "husky install"
@@ -21,35 +30,11 @@
     "type-fest": "^2.8.0"
   },
   "dependencies": {
-    "@babel/core": "^7.16.12",
-    "@emotion/cache": "^11.4.0",
-    "@emotion/react": "^11.4.1",
-    "@emotion/server": "^11.4.0",
-    "@guardian/eslint-config": "^1.0.0",
-    "@guardian/eslint-config-typescript": "^1.0.1",
-    "@guardian/eslint-plugin-source-react-components": "^9.0.0",
-    "@guardian/prettier": "^1.0.0",
-    "@guardian/source-foundations": "^7.0.1",
-    "@guardian/source-react-components": "^9.0.0",
-    "@guardian/source-react-components-development-kitchen": "6.0.2",
-    "@storybook/addon-essentials": "^6.3.7",
-    "@storybook/addon-knobs": "^6.3.1",
-    "@storybook/builder-webpack5": "^6.3.11",
-    "@storybook/manager-webpack5": "^6.3.7",
-    "@storybook/react": "^6.3.7",
-    "babel-loader": "^8.2.5",
-    "chromatic": "^6.5.1",
-    "desvg-loader": "^0.1.0",
-    "friendly-errors-webpack-plugin": "^1.7.0",
+    "@guardian/prettier": "^2.0.0",
+    "chromatic": "^6.11.4",
     "husky": "^7.0.0",
-    "mockdate": "^3.0.5",
-    "preact": "^10.5.14",
-    "preact-render-to-string": "^5.1.19",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "svg-loader": "^0.0.2",
-    "ts-loader": "^9.3.0",
-    "typescript": "^4.3.5",
-    "webpack": "^5.51.1"
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.8.0",
+    "typescript": "^4.3.5"
   }
 }

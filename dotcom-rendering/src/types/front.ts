@@ -1,6 +1,6 @@
 import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import type { EditionId } from '../web/lib/edition';
 import type { ServerSideTests, Switches } from './config';
-import type { EditionId } from './edition';
 import type { FooterType } from './footer';
 import type { FETagType } from './tag';
 import type { CAPITrailType, TrailType } from './trails';
@@ -311,6 +311,13 @@ export type DCRCollectionType = {
 	config: {
 		showDateHeader: boolean;
 	};
+	/**
+	 * @property {?boolean} canShowMore - Whether the 'show more' button should be shown.
+	 * nb. the value of this will typically reflect the `FECollectionType.hasMore` value we get from Frontend,
+	 * except when `FECollectionType.config.hideShowMore` is set to `true`, in which case `DCRCollectionType.canShowMore`
+	 * will always be `false`.
+	 **/
+	canShowMore?: boolean;
 };
 
 export type DCRGroupedTrails = {

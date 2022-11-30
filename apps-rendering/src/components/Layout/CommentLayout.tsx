@@ -2,11 +2,11 @@
 
 import { css } from '@emotion/react';
 import {
-	background,
 	breakpoints,
 	from,
 	neutral,
 	opinion,
+	palette,
 	remSpace,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
@@ -23,7 +23,7 @@ import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
 import { getFormat } from 'item';
-import type { Comment as CommentItem, Editorial, Letter } from 'item';
+import type { Comment as CommentItem, Editorial } from 'item';
 import type { FC, ReactNode } from 'react';
 import {
 	articleWidthStyles,
@@ -39,12 +39,12 @@ const Styles = css`
 `;
 
 const DarkStyles = darkModeCss`
-    background: ${background.inverse};
+    background: ${palette.neutral[10]};
 `;
 
 const BorderStyles = css`
 	background: ${opinion[800]};
-	${darkModeCss`background: ${background.inverse};`}
+	${darkModeCss`background: ${palette.neutral[10]};`}
 
 	${from.wide} {
 		width: ${breakpoints.wide}px;
@@ -70,7 +70,7 @@ const commentLineStylePosition = css`
 `;
 
 interface Props {
-	item: CommentItem | Letter | Editorial;
+	item: CommentItem | Editorial;
 	children: ReactNode[];
 }
 
@@ -83,6 +83,7 @@ const CommentLayout: FC<Props> = ({ item, children }) => (
 				<div css={articleWidthStyles}>
 					<Byline {...item} />
 				</div>
+
 				<Cutout
 					contributors={item.contributors}
 					className={articleWidthStyles}
