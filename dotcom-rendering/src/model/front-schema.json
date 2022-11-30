@@ -397,6 +397,7 @@
         "guardianBaseURL",
         "isAdFreeUser",
         "isNetworkFront",
+        "mostViewed",
         "nav",
         "pageFooter",
         "pageId",
