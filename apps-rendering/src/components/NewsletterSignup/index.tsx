@@ -24,7 +24,6 @@ import { darkModeCss } from 'styles';
 import EmailSignupForm from '../EmailSignupForm';
 import PrivacyWording from './PrivacyWording';
 
-
 // ----- Component ----- //
 
 interface Props {

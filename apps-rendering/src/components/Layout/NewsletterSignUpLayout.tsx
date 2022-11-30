@@ -10,6 +10,12 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
+import {
+	SvgClock,
+	SvgNewsletter,
+	SvgSpinner,
+} from '@guardian/source-react-components';
+import { OptionKind } from '@guardian/types/dist/option';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import MainMedia from 'components/MainMedia';
@@ -20,13 +26,7 @@ import { getFormat } from 'item';
 import type { Item } from 'item';
 import type { FC, ReactNode } from 'react';
 import { darkModeCss, onwardStyles } from 'styles';
-import InPageNewsletterSignup from 'components/InPageNewsletterSignup';
-import { OptionKind } from '@guardian/types/dist/option';
-import {
-	SvgClock,
-	SvgNewsletter,
-	SvgSpinner,
-} from '@guardian/source-react-components';
+import InPageNewsletterSignup from '../InPageNewsletterSignup';
 
 // ----- Styles ----- //
 const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -111,7 +111,7 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 						<div css={detailBlockStyles}>
 							<SvgNewsletter size="xsmall" />
 							<b>{newsletter.frequency}</b>
-							{/* TO DO - this should be the regional focus, but property is not on the MAPI type */}
+							{/* TO DO - use regional focus, when on the MAPI type */}
 						</div>
 					)}
 					<Headline item={item} />
@@ -122,8 +122,8 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 							<SvgClock size="xsmall" />
 
 							<span>
-								You'll receive this newsletter{' '}
-								<b>{newsletter.frequency}</b>
+								You&apos;ll receive this newsletter
+								<b> {newsletter.frequency}</b>
 							</span>
 						</div>
 					)}

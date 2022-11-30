@@ -2,18 +2,18 @@
 
 import { css } from '@emotion/react';
 import type { SerializedStyles } from '@emotion/react';
+import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import {
 	background,
 	border,
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
+import { remSpace } from '@guardian/source-foundations';
 import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import EmailSignupForm from '../EmailSignupForm';
-import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
-import PrivacyWording from 'components/NewsletterSignup/PrivacyWording';
-import { remSpace } from '@guardian/source-foundations';
+import PrivacyWording from '../NewsletterSignup/PrivacyWording';
 
 // ----- Component ----- //
 

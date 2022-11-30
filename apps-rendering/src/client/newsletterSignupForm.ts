@@ -138,9 +138,9 @@ const isHTMLElement = (element: Element): element is HTMLElement =>
 	element instanceof HTMLElement;
 
 const getElementArray = (className: string): HTMLElement[] =>
-	Array.from(
-		document.querySelectorAll(`.${className}`),
-	).filter(isHTMLElement);
+	Array.from(document.querySelectorAll(`.${className}`)).filter(
+		isHTMLElement,
+	);
 
 async function initSignupForms(): Promise<void> {
 	const version = await getBridgetVersion();
