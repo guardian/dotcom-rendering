@@ -11,6 +11,8 @@ const shareCalloutTextStyles = (format: ArticleFormat) =>
 	css`
 		a {
 			color: ${decidePalette(format).text.richLink};
+			border-bottom: 1px solid ${decidePalette(format).text.richLink};
+			text-decoration: none;
 		}
 		display: inline-block;
 		${textSans.xsmall()}

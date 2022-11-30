@@ -6,6 +6,8 @@ const descriptionStyles = (format: ArticleFormat) =>
 	css`
 		a {
 			color: ${decidePalette(format).text.richLink};
+			border-bottom: 1px solid ${decidePalette(format).text.richLink};
+			text-decoration: none;
 		}
 		${textSans.small()}
 		padding-bottom: ${space[4]}px;

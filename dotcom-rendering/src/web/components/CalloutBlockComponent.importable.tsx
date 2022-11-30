@@ -171,7 +171,7 @@ export const CalloutBlockComponent = ({
 			});
 	};
 
-	if (!isNonCollapsible && !isExpired(activeUntil)) {
+	if (isNonCollapsible && isExpired(activeUntil)) {
 		return null;
 	}
 
