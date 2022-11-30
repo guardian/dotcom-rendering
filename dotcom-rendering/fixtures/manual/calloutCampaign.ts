@@ -11,7 +11,7 @@ export const calloutCampaign: CalloutBlockElement = {
 	formId: 3860296,
 	title: 'Are you affected by the issues in this article?',
 	description:
-		'<p>We’d like to hear how people are being affected, whether they’re applying for a mortgage or refixing an existing one. Are you on a variable rate mortgage, or a fixed rate that is about to expire? How will it impact you financially? </p> <br> <p> We’re also interested in how people, particularly first-time buyers, have been affected by disappearing mortgage deals. </p> ',
+		'<p>We’d like to hear how people are being affected, whether they’re applying for a mortgage or refixing an existing one. Are you on a variable rate mortgage, or a fixed rate that is about to expire? How will it impact you financially? </p> <p> We’re also interested in how people, particularly first-time buyers, have been affected by disappearing mortgage deals. </p> ',
 	formFields: [
 		{
 			name: 'your_name',

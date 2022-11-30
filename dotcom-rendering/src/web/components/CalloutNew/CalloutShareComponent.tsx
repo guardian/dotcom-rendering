@@ -6,8 +6,6 @@ import { decidePalette } from '../../lib/decidePalette';
 const shareCalloutStyles = css`
 	display: flex;
 	align-items: center;
-	padding-left: 10px;
-	padding-right: 10px;
 `;
 const shareCalloutTextStyles = (format: ArticleFormat) =>
 	css`

@@ -10,6 +10,10 @@ const descriptionStyles = (format: ArticleFormat) =>
 		${textSans.small()}
 		padding-bottom: ${space[4]}px;
 		${body.medium()}
+
+		p {
+			margin-bottom: ${space[3]}px;
+		}
 	`;
 
 interface Props {
@@ -21,7 +25,6 @@ export const CalloutDescription = ({ description, format }: Props) => (
 	<div css={descriptionStyles(format)}>
 		<div dangerouslySetInnerHTML={{ __html: description }}></div>
 		<div>
-			<br />
 			Please share your story if you are 18 or over, anonymously if you
 			wish. For more information please see our{' '}
 			<a href="https://www.theguardian.com/help/terms-of-service">

@@ -14,11 +14,28 @@ import { MultiSelect } from './FormFields/MultiSelect';
 import { Select } from './FormFields/Select';
 import { TextArea } from './FormFields/TextArea';
 import { TextInput } from './FormFields/TextInput';
+import { SvgAlertTriangle } from '@guardian/source-react-components';
 
-const errorMessagesStyles = css`
-	padding-bottom: 10px;
-	color: ${palette.error};
+const errorBoxStyles = css`
+	padding: 10px;
+	margin-bottom: ${space[2]}px;
+	color: ${palette.error[400]};
+	width: fit-content;
+	border: ${space[1]}px solid ${palette.error[400]};
+
+	svg {
+		fill: ${palette.error[400]};
+	}
+`;
+
+const errorHeaderStyles = css`
 	${textSans.medium({ fontWeight: 'bold' })};
+	display: flex;
+`;
+
+const errorBodyStyles = css`
+	color: black;
+	${textSans.medium()};
 `;
 
 const formStyles = css`
@@ -134,14 +151,14 @@ type FormProps = {
 	onSubmit: (formData: FormDataType) => void;
 	formFields: CampaignFieldType[];
 	format: ArticleFormat;
-	errorSummary?: string;
+	networkError?: string;
 };
 
 export const Form = ({
 	onSubmit,
 	formFields,
 	format,
-	errorSummary,
+	networkError,
 }: FormProps) => {
 	// const [twitterHandle, setTwitterHandle] = useState('');
 	const [formData, setFormData] = useState<{ [key in string]: any }>({});
@@ -155,10 +172,8 @@ export const Form = ({
 			noValidate={true}
 			onSubmit={(e) => {
 				e.preventDefault();
-
 				const errors: string[] = [];
 
-				// replace with map ideally
 				formFields.forEach((field: CampaignFieldType) => {
 					if (field.required) {
 						if (formData[field.id] == undefined) {
@@ -166,7 +181,6 @@ export const Form = ({
 						}
 					}
 				});
-
 				if (errors.length) {
 					setValidationErrors(errors);
 					return;
@@ -175,6 +189,23 @@ export const Form = ({
 			}}
 		>
 			<CalloutTermsAndConditions format={format} />
+			{!!networkError && (
+				<div css={[errorBoxStyles, errorHeaderStyles]}>
+					<SvgAlertTriangle size="medium" />
+					{networkError}
+				</div>
+			)}
+			{validationErrors.length > 0 && (
+				<div css={errorBoxStyles}>
+					<div css={errorHeaderStyles}>
+						<SvgAlertTriangle size="medium" />
+						Some information is missing
+					</div>
+					<div css={errorBodyStyles}>
+						Please complete all required fields
+					</div>
+				</div>
+			)}
 			{formFields.map((formField) => (
 				<div
 					css={formFieldWrapperStyles}
@@ -183,9 +214,6 @@ export const Form = ({
 					// support React references
 					custom-guardian="callout-form-field"
 				>
-					{!!errorSummary && (
-						<div css={errorMessagesStyles}>{errorSummary}</div>
-					)}
 					<FormField
 						key={formField.id}
 						format={format}

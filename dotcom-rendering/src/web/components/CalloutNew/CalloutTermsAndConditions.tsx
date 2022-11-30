@@ -8,7 +8,7 @@ const termsAndConditionsStyles = (format: ArticleFormat) =>
 			color: ${decidePalette(format).text.richLink};
 		}
 		${textSans.small()}
-		padding-bottom: ${space[4]}px;
+		padding: ${space[4]}px 0px;
 	`;
 
 interface Props {

@@ -82,7 +82,7 @@ const titleStyles = (format: ArticleFormat) => css`
 
 const subtitleTextHeaderStyles = css`
 	${headline.xxsmall()}
-	padding-bottom: ${space[2]}px;
+	padding-bottom: ${space[3]}px;
 `;
 
 const activeUntilStyles = css`
@@ -92,7 +92,7 @@ const activeUntilStyles = css`
 	display: block;
 `;
 
-const submissionSucessStyles = css`
+const submissionSuccessStyles = css`
 	padding-left: ${space[2]}px;
 	padding-right: ${space[2]}px;
 	${textSans.small()}
@@ -109,17 +109,17 @@ export const CalloutBlockComponent = ({
 	format: ArticleFormat;
 	isNonCollapsible: boolean;
 }) => {
-	const [errorSummary, setErrorSummary] = useState('');
+	const [networkError, setNetworkError] = useState('');
 	const [submissionSuccess, setSubmissionSuccess] = useState(false);
 	const { title, description, formFields, activeUntil } = callout;
 	const [isExpanded, setIsExpanded] = useState(false);
 
 	const onSubmit = async (formData: FormDataType) => {
 		// Reset error for new submission attempt
-		setErrorSummary('');
+		setNetworkError('');
 
 		if (formData.twitterHandle) {
-			setErrorSummary('Sorry we think you are a robot.');
+			setNetworkError('Sorry we think you are a robot.');
 			return;
 		}
 		// need to add prefix `field_` to all keys in form
@@ -147,7 +147,7 @@ export const CalloutBlockComponent = ({
 				if (resp.status === 201) {
 					setSubmissionSuccess(true);
 				} else {
-					setErrorSummary(
+					setNetworkError(
 						'Sorry, there was a problem submitting your form. Please try again later.',
 					);
 				}
@@ -158,7 +158,7 @@ export const CalloutBlockComponent = ({
 					'callout-embed-submission',
 				);
 
-				setErrorSummary(
+				setNetworkError(
 					'Sorry, there was a problem submitting your form. Please try again later.',
 				);
 			});
@@ -185,7 +185,7 @@ export const CalloutBlockComponent = ({
 					</div>
 				</summary>
 				<CalloutShareComponent format={format} />
-				<div css={submissionSucessStyles}>
+				<div css={submissionSuccessStyles}>
 					Thank you, your story has been submitted successfully. One
 					of our journalists will be in touch if we wish to take your
 					submission further.
@@ -216,7 +216,7 @@ export const CalloutBlockComponent = ({
 						formFields={formFields}
 						onSubmit={onSubmit}
 						format={format}
-						errorSummary={errorSummary}
+						networkError={networkError}
 					/>
 				</details>
 			) : (
@@ -248,7 +248,7 @@ export const CalloutBlockComponent = ({
 							formFields={formFields}
 							onSubmit={onSubmit}
 							format={format}
-							errorSummary={errorSummary}
+							networkError={networkError}
 						/>
 					</details>
 				</ExpandingWrapper>
