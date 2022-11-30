@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   pull_request:
+    paths:
+      - 'apps-rendering/*'
 
 jobs:
   chromatic:
@@ -31,31 +33,22 @@ jobs:
       # Root yarn installs all workspaces (root, common, dotcom)
       - uses: bahmutov/npm-install@v1
 
-      - name: Chromatic - Common Rendering
-        uses: chromaui/action@v1
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__COMMON_RENDERING }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          workingDir: common-rendering
-          exitOnceUploaded: true
-          onlyChanged: '!(main)' # only turbosnap on non-main branches
-
-      - name: Chromatic - DCR Non Dependency PR / main
+      - name: Chromatic - Apps Rendering Non Dependency PR / main
         uses: chromaui/action@v1
         if: ${{ github.event_name == 'push' || (!contains(github.event.pull_request.labels.*.name, 'dependencies') && github.event.pull_request.user.login != 'dependabot')}}
         with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__DOTCOM_RENDERING }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__APPS_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          autoAcceptChanges: main
-          onlyChanged: true
+          workingDir: apps-rendering
           untraced: '**/(package**.json|yarn.lock)'
-          workingDir: dotcom-rendering
+          exitOnceUploaded: true
+          onlyChanged: '!(main)' # only turbosnap on non-main branches
 
-      - name: Chromatic - DCR Dependency PR
+      - name: Chromatic - Apps Rendering Dependency PR
         uses: chromaui/action@v1
         if: ${{ github.event_name == 'pull_request' && (contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event.pull_request.user.login == 'dependabot') }}
         with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__DOTCOM_RENDERING }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__APPS_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
           workingDir: dotcom-rendering
