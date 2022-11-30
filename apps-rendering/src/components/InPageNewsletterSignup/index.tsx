@@ -12,7 +12,6 @@ import type { FC } from 'react';
 import { darkModeCss } from 'styles';
 import EmailSignupForm from '../EmailSignupForm';
 import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
-import { SvgSpinner } from '@guardian/source-react-components';
 import PrivacyWording from 'components/NewsletterSignup/PrivacyWording';
 import { remSpace } from '@guardian/source-foundations';
 
