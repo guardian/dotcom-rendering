@@ -30,57 +30,49 @@ const Card33_ColumnOfThree33_Ad33 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
-}) => (
-	<UL direction="row">
-		<LI percentage="33.333%" padSides={true}>
-			<FrontCard
-				trail={cards[0]}
+}) => {
+	const card33 = cards.slice(0, 1);
+	const cards33 = cards.slice(1, 4);
+
+	return (
+		<UL direction="row">
+			{card33.map((card) => (
+				<LI percentage="33.333%" padSides={true} key={card.url}>
+					<FrontCard
+						trail={card}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</LI>
+			))}
+
+			<LI
+				percentage="33.333%"
+				showDivider={true}
 				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-		</LI>
-		<LI
-			percentage="33.333%"
-			showDivider={true}
-			containerPalette={containerPalette}
-		>
-			<UL direction="column">
-				<LI padSides={true}>
-					<FrontCard
-						trail={cards[1]}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						imageUrl={undefined}
-						headlineSize="small"
-					/>
-				</LI>
-				<LI padSides={true}>
-					<FrontCard
-						trail={cards[2]}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						imageUrl={undefined}
-						headlineSize="small"
-					/>
-				</LI>
-				<LI padSides={true}>
-					<FrontCard
-						trail={cards[3]}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						imageUrl={undefined}
-						headlineSize="small"
-					/>
-				</LI>
-			</UL>
-		</LI>
-		<LI percentage="33.333%">
-			<Hide until="tablet">
-				<AdSlot position="inline" index={index} />
-			</Hide>
-		</LI>
-	</UL>
-);
+			>
+				<UL direction="column">
+					{cards33.map((card) => (
+						<LI padSides={true} key={card.url}>
+							<FrontCard
+								trail={card}
+								containerPalette={containerPalette}
+								showAge={showAge}
+								imageUrl={undefined}
+								headlineSize="small"
+							/>
+						</LI>
+					))}
+				</UL>
+			</LI>
+			<LI percentage="33.333%">
+				<Hide until="tablet">
+					<AdSlot position="inline" index={index} />
+				</Hide>
+			</LI>
+		</UL>
+	);
+};
 
 /* ._________________._________________.
  * |_###_____________|                 |
@@ -97,46 +89,34 @@ const ColumnOfThree50_Ad50 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 	index: number;
-}) => (
-	<UL direction="row">
-		<LI percentage="50%">
-			<UL direction="column">
-				<LI padSides={true}>
-					<FrontCard
-						trail={cards[0]}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						imagePosition="left"
-						headlineSize="small"
-					/>
-				</LI>
-				<LI padSides={true}>
-					<FrontCard
-						trail={cards[1]}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						imagePosition="left"
-						headlineSize="small"
-					/>
-				</LI>
-				<LI padSides={true}>
-					<FrontCard
-						trail={cards[2]}
-						containerPalette={containerPalette}
-						showAge={showAge}
-						imagePosition="left"
-						headlineSize="small"
-					/>
-				</LI>
-			</UL>
-		</LI>
-		<LI percentage="50%">
-			<Hide until="tablet">
-				<AdSlot position="inline" index={index} />
-			</Hide>
-		</LI>
-	</UL>
-);
+}) => {
+	const cards50 = cards.slice(0, 3);
+
+	return (
+		<UL direction="row">
+			<LI percentage="50%">
+				<UL direction="column">
+					{cards50.map((card) => (
+						<LI padSides={true} key={card.url}>
+							<FrontCard
+								trail={card}
+								containerPalette={containerPalette}
+								showAge={showAge}
+								imagePosition="left"
+								headlineSize="small"
+							/>
+						</LI>
+					))}
+				</UL>
+			</LI>
+			<LI percentage="50%">
+				<Hide until="tablet">
+					<AdSlot position="inline" index={index} />
+				</Hide>
+			</LI>
+		</UL>
+	);
+};
 
 /* ._________________.________.________.
  * |#################|########|########|
@@ -151,63 +131,52 @@ const Card50_Card25_Card25 = ({
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="50%" padSides={true}>
-			<FrontCard
-				trail={cards[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				headlineSize="large"
-				imagePosition="top"
-				imagePositionOnMobile="top"
-				supportingContent={cards[0].supportingContent}
-			/>
-		</LI>
-		<LI
-			percentage="25%"
-			padSides={true}
-			showDivider={true}
-			containerPalette={containerPalette}
-		>
-			<FrontCard
-				trail={cards[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={
-					cards[1]?.supportingContent &&
-					cards[1].supportingContent.length > 0
-						? undefined
-						: cards[1].trailText
-				}
-				supportingContent={
-					cards[1].trailText ? undefined : cards[1].supportingContent
-				}
-			/>
-		</LI>
-		<LI
-			percentage="25%"
-			padSides={true}
-			showDivider={true}
-			containerPalette={containerPalette}
-		>
-			<FrontCard
-				trail={cards[2]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={
-					cards[2]?.supportingContent &&
-					cards[2].supportingContent.length > 0
-						? undefined
-						: cards[2].trailText
-				}
-				supportingContent={
-					cards[2].trailText ? undefined : cards[2].supportingContent
-				}
-			/>
-		</LI>
-	</UL>
-);
+}) => {
+	const card50 = cards.slice(0, 1);
+	const cards25 = cards.slice(1, 3);
+
+	return (
+		<UL direction="row" padBottom={true}>
+			{card50.map((card) => (
+				<LI percentage="50%" padSides={true} key={card.url}>
+					<FrontCard
+						trail={card}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						headlineSize="large"
+						imagePosition="top"
+						imagePositionOnMobile="top"
+						supportingContent={card.supportingContent}
+					/>
+				</LI>
+			))}
+			{cards25.map((card) => (
+				<LI
+					percentage="25%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+					key={card.url}
+				>
+					<FrontCard
+						trail={card}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						trailText={
+							card?.supportingContent &&
+							card.supportingContent.length > 0
+								? undefined
+								: card.trailText
+						}
+						supportingContent={
+							card.trailText ? undefined : card.supportingContent
+						}
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
 
 /**
  * DynamicSlowMPU
@@ -250,7 +219,7 @@ export const DynamicSlowMPU = ({
 		case 2: {
 			bigCards = groupedTrails.big;
 			standardCards = groupedTrails.standard;
-			if (groupedTrails.big[0].isBoosted) {
+			if (groupedTrails.big[0]?.isBoosted) {
 				layout = 'twoBigsBoosted';
 			} else {
 				layout = 'twoBigs';

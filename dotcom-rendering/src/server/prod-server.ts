@@ -1,21 +1,21 @@
 import compression from 'compression';
-import type { Request, Response } from 'express';
+import type { ErrorRequestHandler, Request, Response } from 'express';
 import express from 'express';
 import responseTime from 'response-time';
 import {
-	render as renderAMPArticle,
-	renderPerfTest as renderAMPArticlePerfTest,
+	handleAMPArticle,
+	handlePerfTest as handleAMPArticlePerfTest,
 } from '../amp/server';
-import type { CAPIArticleType } from '../types/frontend';
+import type { FEArticleType } from '../types/frontend';
 import {
-	renderArticle,
-	renderArticleJson,
-	renderPerfTest as renderArticlePerfTest,
-	renderBlocks,
-	renderFront,
-	renderFrontJson,
-	renderInteractive,
-	renderKeyEvents,
+	handleArticle,
+	handleArticleJson,
+	handlePerfTest as handleArticlePerfTest,
+	handleBlocks,
+	handleFront,
+	handleFrontJson,
+	handleInteractive,
+	handleKeyEvents,
 } from '../web/server';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
@@ -24,10 +24,10 @@ import { logger } from './lib/logging';
 // Middleware to track route performance using 'response-time' lib
 // Usage: app.post('/Article', logRenderTime, renderArticle);
 const logRenderTime = responseTime(
-	(req: Request, _: Response, time: number) => {
-		const body: CAPIArticleType = req.body;
+	({ body }: Request, _: Response, time: number) => {
+		const { pageId = 'no-page-id-found' } = body as FEArticleType;
 		logger.info({
-			pageId: body.pageId,
+			pageId,
 			renderTime: time,
 		});
 	},
@@ -52,79 +52,43 @@ export const prodServer = (): void => {
 		app.use('/assets', express.static(__dirname));
 	}
 
-	app.post('/Article', logRenderTime, renderArticle);
-	app.post('/AMPArticle', logRenderTime, renderAMPArticle);
-	app.post('/Interactive', logRenderTime, renderInteractive);
-	app.post('/AMPInteractive', logRenderTime, renderAMPArticle);
-	app.post('/Blocks', logRenderTime, renderBlocks);
-	app.post('/KeyEvents', logRenderTime, renderKeyEvents);
-	app.post('/Front', logRenderTime, renderFront);
-	app.post('/FrontJSON', logRenderTime, renderFrontJson);
+	app.post('/Article', logRenderTime, handleArticle);
+	app.post('/AMPArticle', logRenderTime, handleAMPArticle);
+	app.post('/Interactive', logRenderTime, handleInteractive);
+	app.post('/AMPInteractive', logRenderTime, handleAMPArticle);
+	app.post('/Blocks', logRenderTime, handleBlocks);
+	app.post('/KeyEvents', logRenderTime, handleKeyEvents);
+	app.post('/Front', logRenderTime, handleFront);
+	app.post('/FrontJSON', logRenderTime, handleFrontJson);
 
 	// These GET's are for checking any given URL directly from PROD
 	app.get(
 		'/Article',
 		logRenderTime,
 		getContentFromURLMiddleware,
-		async (req: Request, res: Response) => {
-			// Eg. http://localhost:9000/Article?url=https://www.theguardian.com/commentisfree/...
-			try {
-				return renderArticle(req, res);
-			} catch (error) {
-				console.error(error);
-			}
-		},
+		handleArticle,
 	);
+	app.use('/ArticleJson', handleArticleJson);
 
 	app.get(
 		'/AMPArticle',
 		logRenderTime,
 		getContentFromURLMiddleware,
-		async (req: Request, res: Response) => {
-			// Eg. http://localhost:9000/AMPArticle?url=https://www.theguardian.com/commentisfree/...
-			try {
-				return renderAMPArticle(req, res);
-			} catch (error) {
-				console.error(error);
-			}
-		},
+		handleAMPArticle,
 	);
 
-	app.get(
-		'/Front',
-		logRenderTime,
-		// TODO: ensure getContentFromURLMiddleware supports fronts
-		getContentFromURLMiddleware,
-		async (req: Request, res: Response) => {
-			// Eg. http://localhost:9000/Front?url=https://www.theguardian.com/uk/sport
-			try {
-				return renderFront(req, res);
-			} catch (error) {
-				console.error(error);
-			}
-		},
-	);
-
+	app.get('/Front', logRenderTime, getContentFromURLMiddleware, handleFront);
 	app.get(
 		'/FrontJSON',
 		logRenderTime,
-		// TODO: ensure getContentFromURLMiddleware supports fronts
 		getContentFromURLMiddleware,
-		async (req: Request, res: Response) => {
-			// Eg. http://localhost:9000/FrontJSON?url=https://www.theguardian.com/uk/sport
-			try {
-				return renderFrontJson(req, res);
-			} catch (error) {
-				console.error(error);
-			}
-		},
+		handleFrontJson,
 	);
 
-	app.use('/ArticlePerfTest', renderArticlePerfTest);
-	app.use('/AMPArticlePerfTest', renderAMPArticlePerfTest);
-	app.use('/ArticleJson', renderArticleJson);
+	app.use('/ArticlePerfTest', handleArticlePerfTest);
+	app.use('/AMPArticlePerfTest', handleAMPArticlePerfTest);
 
-	app.get('/', (req: Request, res: Response) => {
+	app.get('/', (req, res) => {
 		try {
 			res.send(`
                 <!DOCTYPE html>
@@ -152,13 +116,13 @@ export const prodServer = (): void => {
 		}
 	});
 
-	// express requires all 4 args here:
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	app.use((e: any, req: any, res: Response, next: any) => {
+	const handleError: ErrorRequestHandler = (e, _, res) => {
 		const message =
 			e instanceof Error ? e.stack ?? 'Unknown stack' : 'Unknown error';
 		res.status(500).send(`<pre>${message}</pre>`);
-	});
+	};
+
+	app.use(handleError);
 
 	if (process.env.DISABLE_LOGGING_AND_METRICS !== 'true') {
 		setInterval(() => {

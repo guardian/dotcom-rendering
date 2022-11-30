@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import type { WitnessAssetType } from '../../types/content';
 import { decidePalette } from '../lib/decidePalette';
 import {
 	WitnessImageBlockComponent,

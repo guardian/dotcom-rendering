@@ -5,7 +5,6 @@ const root = path.resolve(__dirname, '..', '..');
 
 const program = TJS.getProgramFromFiles(
 	[
-		path.resolve(`${root}/src/lib/content.d.ts`),
 		path.resolve(`${root}/index.d.ts`),
 		path.resolve(`${root}/src/types/frontend.ts`),
 	],
@@ -19,7 +18,7 @@ const settings = { rejectDateType: true, required: true };
 module.exports = {
 	getArticleSchema: () => {
 		return JSON.stringify(
-			TJS.generateSchema(program, 'CAPIArticleType', settings),
+			TJS.generateSchema(program, 'FEArticleType', settings),
 			null,
 			4,
 		);

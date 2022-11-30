@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { brandAltBackground } from '@guardian/source-foundations';
+import type { RatingSizeType } from '../../types/content';
 import { StarRating } from './StarRating/StarRating';
 
 type Props = {

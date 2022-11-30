@@ -1,4 +1,5 @@
 import { JSDOM } from 'jsdom';
+import type { BlockquoteBlockElement, CAPIElement } from '../types/content';
 
 const isQuoted = (element: BlockquoteBlockElement): boolean => {
 	// A quoted blockquote: <blockquote class="quoted"><p>I think therefore I am</p></blockquote>

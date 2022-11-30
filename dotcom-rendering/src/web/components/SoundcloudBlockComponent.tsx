@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { unescapeData } from '../../lib/escapeData';
+import { SoundcloudBlockElement } from '../../types/content';
 
 const widthOverride = css`
 	iframe {
@@ -8,9 +9,11 @@ const widthOverride = css`
 	}
 `;
 
-export const SoundcloudBlockComponent: React.FC<{
+type Props = {
 	element: SoundcloudBlockElement;
-}> = ({ element }) => {
+};
+
+export const SoundcloudBlockComponent = ({ element }: Props) => {
 	return (
 		<div css={widthOverride}>
 			<div

@@ -152,6 +152,27 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 	}
 };
 
+const cssOverrides = css`
+	/* See: https://css-tricks.com/nested-links/ */
+	${getZIndex('card-nested-link')}
+	/* The following styles turn off those provided by Link */
+	color: inherit;
+	text-decoration: none;
+	/* stylelint-disable-next-line property-disallowed-list */
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	/* This css is used to remove any underline from the kicker but still
+have it applied to the headline when the kicker is hovered */
+	:hover {
+		color: inherit;
+		text-decoration: none;
+		.show-underline {
+			text-decoration: underline;
+		}
+	}
+`;
+
 const lineStyles = (palette: Palette) => css`
 	padding-top: 1px;
 	:before {
@@ -165,37 +186,28 @@ const lineStyles = (palette: Palette) => css`
 	}
 `;
 
+const dynamoStyles = css`
+	display: block;
+	font-weight: 800;
+	padding: 5px;
+`;
+
 const WithLink = ({
 	linkTo,
 	children,
+	isDynamo,
 }: {
 	linkTo?: string;
 	children: React.ReactNode;
+	isDynamo?: true;
 }) => {
 	if (linkTo) {
 		return (
 			<Link
 				href={linkTo}
-				cssOverrides={css`
-					/* See: https://css-tricks.com/nested-links/ */
-					${getZIndex('card-nested-link')}
-					/* The following styles turn off those provided by Link */
-					color: inherit;
-					text-decoration: none;
-					/* stylelint-disable-next-line property-disallowed-list */
-					font-family: inherit;
-					font-size: inherit;
-					line-height: inherit;
-					/* This css is used to remove any underline from the kicker but still
-					   have it applied to the headline when the kicker is hovered */
-					:hover {
-						color: inherit;
-						text-decoration: none;
-						.show-underline {
-							text-decoration: underline;
-						}
-					}
-				`}
+				cssOverrides={
+					isDynamo ? [cssOverrides, dynamoStyles] : cssOverrides
+				}
 			>
 				{children}
 			</Link>
@@ -226,7 +238,7 @@ export const CardHeadline = ({
 		: palette.text.cardKicker;
 	return (
 		<>
-			<h4
+			<h3
 				css={[
 					format.theme === ArticleSpecial.Labs
 						? labTextStyles(size)
@@ -244,10 +256,10 @@ export const CardHeadline = ({
 							size: sizeOnMobile ?? size,
 							fontWeight: containerPalette ? 'bold' : 'regular',
 						}),
-					showLine && lineStyles(palette),
+					showLine && !isDynamo && lineStyles(palette),
 				]}
 			>
-				<WithLink linkTo={linkTo}>
+				<WithLink linkTo={linkTo} isDynamo={isDynamo}>
 					{!!kickerText && (
 						<Kicker
 							text={kickerText}
@@ -269,7 +281,7 @@ export const CardHeadline = ({
 						{headlineText}
 					</span>
 				</WithLink>
-			</h4>
+			</h3>
 			{!!byline && showByline && (
 				<Byline
 					text={byline}

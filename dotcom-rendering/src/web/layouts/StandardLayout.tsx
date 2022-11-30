@@ -16,7 +16,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
 import type { NavType } from '../../model/extract-nav';
-import type { CAPIArticleType } from '../../types/frontend';
+import type { FEArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -290,7 +290,7 @@ const starWrapper = css`
 `;
 
 interface Props {
-	CAPIArticle: CAPIArticleType;
+	CAPIArticle: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }
@@ -374,6 +374,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							showTopBorder={false}
 							showSideBorders={false}
 							padSides={false}
+							shouldCenter={false}
 							backgroundColour={brandBackground.primary}
 							element="header"
 						>
@@ -397,6 +398,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
 								isInEuropeTest={isInEuropeTest}
+								headerTopBarSwitch={
+									!!CAPIArticle.config.switches.headerTopNav
+								}
 							/>
 						</Section>
 					)}
@@ -416,6 +420,9 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									.subscribe
 							}
 							editionId={CAPIArticle.editionId}
+							headerTopBarSwitch={
+								!!CAPIArticle.config.switches.headerTopNav
+							}
 						/>
 					</Section>
 					{NAV.subNavSections && !isLabs && (

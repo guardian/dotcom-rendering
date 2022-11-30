@@ -3,7 +3,7 @@ import type { ABTest } from '@guardian/ab-core';
 export const signInGateMainControl: ABTest = {
 	id: 'SignInGateMainControl',
 	start: '2020-05-20',
-	expiry: '2022-12-01',
+	expiry: '2025-12-01',
 	author: 'Mahesh Makani',
 	description:
 		'Show sign in gate to 100% of users on 3rd article view of simple article templates, and show a further 5 times after the first dismissal, with higher priority over banners and epic. Control Audience.',

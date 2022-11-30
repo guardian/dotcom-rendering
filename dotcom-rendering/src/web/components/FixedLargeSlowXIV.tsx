@@ -16,43 +16,49 @@ export const FixedLargeSlowXIV = ({
 	containerPalette,
 	showAge,
 }: Props) => {
-	const primary = trails[0];
-	const secondary = trails[1];
-	const secondSlice = trails.slice(2, 6);
-	const thirdSlice = trails.slice(6, 14);
+	const firstSlice75 = trails.slice(0, 1);
+	const firstSlice25 = trails.slice(1, 2);
+	const secondSlice25 = trails.slice(2, 6);
+	const thirdSlice25 = trails.slice(6, 14);
 
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
-				<LI padSides={true} percentage="75%">
-					<FrontCard
-						trail={primary}
-						starRating={primary.starRating}
+				{firstSlice75.map((card) => (
+					<LI padSides={true} percentage="75%" key={card.url}>
+						<FrontCard
+							trail={card}
+							starRating={card.starRating}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							headlineSize="large"
+							imagePosition="right"
+							imagePositionOnMobile="top"
+							imageSize="large"
+							trailText={card.trailText}
+						/>
+					</LI>
+				))}
+
+				{firstSlice25.map((card) => (
+					<LI
+						padSides={true}
+						showDivider={true}
 						containerPalette={containerPalette}
-						showAge={showAge}
-						headlineSize="large"
-						imagePosition="right"
-						imagePositionOnMobile="top"
-						imageSize="large"
-						trailText={primary.trailText}
-					/>
-				</LI>
-				<LI
-					padSides={true}
-					showDivider={true}
-					containerPalette={containerPalette}
-					percentage="25%"
-				>
-					<FrontCard
-						trail={secondary}
-						starRating={secondary.starRating}
-						containerPalette={containerPalette}
-						showAge={showAge}
-					/>
-				</LI>
+						percentage="25%"
+						key={card.url}
+					>
+						<FrontCard
+							trail={card}
+							starRating={card.starRating}
+							containerPalette={containerPalette}
+							showAge={showAge}
+						/>
+					</LI>
+				))}
 			</UL>
 			<UL direction="row" padBottom={true}>
-				{secondSlice.map((card, cardIndex) => {
+				{secondSlice25.map((card, cardIndex) => {
 					return (
 						<LI
 							padSides={true}
@@ -73,7 +79,7 @@ export const FixedLargeSlowXIV = ({
 				})}
 			</UL>
 			<UL direction="row" wrapCards={true}>
-				{thirdSlice.map((card, cardIndex, { length }) => {
+				{thirdSlice25.map((card, cardIndex, { length }) => {
 					const columns = 4;
 					return (
 						<LI

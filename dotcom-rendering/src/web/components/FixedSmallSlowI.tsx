@@ -15,23 +15,25 @@ export const FixedSmallSlowI = ({
 	containerPalette,
 	showAge,
 }: Props) => {
-	const trail = trails[0];
+	const firstSlice100 = trails.slice(0, 1);
 
 	return (
 		<UL>
-			<LI padSides={true}>
-				<FrontCard
-					trail={trail}
-					containerPalette={containerPalette}
-					showAge={showAge}
-					imagePosition="right"
-					imagePositionOnMobile="top"
-					imageSize="jumbo"
-					headlineSize="huge"
-					headlineSizeOnMobile="large"
-					trailText={trail.trailText}
-				/>
-			</LI>
+			{firstSlice100.map((card) => (
+				<LI padSides={true} key={card.url}>
+					<FrontCard
+						trail={card}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						imagePosition="right"
+						imagePositionOnMobile="top"
+						imageSize="jumbo"
+						headlineSize="huge"
+						headlineSizeOnMobile="large"
+						trailText={card.trailText}
+					/>
+				</LI>
+			))}
 		</UL>
 	);
 };

@@ -11,6 +11,7 @@ import {
 } from '@guardian/source-foundations';
 import ArrowInCircle from '../../static/icons/arrow-in-circle.svg';
 import type { Palette } from '../../types/palette';
+import type { TagType } from '../../types/tag';
 import { decidePalette } from '../lib/decidePalette';
 import { Avatar } from './Avatar';
 import { Hide } from './Hide';

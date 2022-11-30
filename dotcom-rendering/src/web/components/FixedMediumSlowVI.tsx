@@ -15,56 +15,64 @@ export const FixedMediumSlowVI = ({
 	containerPalette,
 	showAge,
 }: Props) => {
-	const topTrails = trails.slice(0, 2);
-	const bottomTrails = trails.slice(2, 6);
+	const firstSlice75 = trails.slice(0, 1);
+	const firstSlice25 = trails.slice(1, 2);
+	const secondSlice25 = trails.slice(2, 6);
 
 	return (
 		<>
 			<UL direction="row" padBottom={true}>
-				{topTrails.map((trail, index) => {
-					return (
-						<LI
-							key={trail.url}
-							padSides={true}
-							showDivider={index > 0}
+				{firstSlice75.map((trail) => (
+					<LI key={trail.url} padSides={true} percentage={'75%'}>
+						<FrontCard
+							trail={trail}
 							containerPalette={containerPalette}
-							percentage={index === 0 ? '75%' : '25%'}
-						>
-							<FrontCard
-								trail={trail}
-								containerPalette={containerPalette}
-								showAge={showAge}
-								headlineSize={index === 0 ? 'large' : 'medium'}
-								imagePosition={index === 0 ? 'right' : 'top'}
-								imagePositionOnMobile={
-									index === 0 ? 'top' : 'left'
-								}
-								imageSize={index === 0 ? 'large' : 'medium'}
-								trailText={
-									index === 0 ? trail.trailText : undefined
-								}
-							/>
-						</LI>
-					);
-				})}
+							showAge={showAge}
+							headlineSize={'large'}
+							imagePosition={'right'}
+							imagePositionOnMobile={'top'}
+							imageSize={'large'}
+							trailText={trail.trailText}
+						/>
+					</LI>
+				))}
+				{firstSlice25.map((trail, index) => (
+					<LI
+						key={trail.url}
+						padSides={true}
+						showDivider={index > 0}
+						containerPalette={containerPalette}
+						percentage={'25%'}
+					>
+						<FrontCard
+							trail={trail}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							headlineSize={'medium'}
+							imagePosition={'top'}
+							imagePositionOnMobile={'left'}
+							imageSize={'medium'}
+							trailText={undefined}
+						/>
+					</LI>
+				))}
 			</UL>
 			<UL direction="row">
-				{bottomTrails.map((trail, index) => {
-					return (
-						<LI
-							key={trail.url}
-							padSides={true}
-							showDivider={index > 0}
-						>
-							<FrontCard
-								trail={trail}
-								containerPalette={containerPalette}
-								showAge={showAge}
-								headlineSize="small"
-							/>
-						</LI>
-					);
-				})}
+				{secondSlice25.map((trail, index) => (
+					<LI
+						key={trail.url}
+						padSides={true}
+						showDivider={index > 0}
+						containerPalette={containerPalette}
+					>
+						<FrontCard
+							trail={trail}
+							containerPalette={containerPalette}
+							showAge={showAge}
+							headlineSize="small"
+						/>
+					</LI>
+				))}
 			</UL>
 		</>
 	);

@@ -1,3 +1,4 @@
+import { ImageBlockElement } from '../../types/content';
 import { ImageComponent } from './ImageComponent';
 
 type Props = {

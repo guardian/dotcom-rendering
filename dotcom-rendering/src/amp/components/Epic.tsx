@@ -494,6 +494,7 @@ export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
 										<a
 											id="primaryCta"
 											data-amp-bind-href="epicState.choiceCards ? epicState.ctaUrl + '&selected-contribution-type=' + epicState.choiceCards.choiceCardSelection.frequency + '&selected-amount=' + epicState.choiceCards.choiceCardSelection.amount : epicState.ctaUrl"
+											target="_blank"
 											css={yellowButtonStyle}
 										>
 											<MoustacheVariable name="text" />
