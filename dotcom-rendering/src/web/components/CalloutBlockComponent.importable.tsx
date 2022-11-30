@@ -112,7 +112,6 @@ export const CalloutBlockComponent = ({
 	const [networkError, setNetworkError] = useState('');
 	const [submissionSuccess, setSubmissionSuccess] = useState(false);
 	const { title, description, formFields, activeUntil } = callout;
-	const [isExpanded, setIsExpanded] = useState(false);
 
 	const isExpired = (date: number | undefined): boolean => {
 		if (date) {
@@ -238,7 +237,6 @@ export const CalloutBlockComponent = ({
 				<ExpandingWrapper
 					name={`${callout.formId} form`}
 					renderExtra={() => <Deadline until={activeUntil} />}
-					expandCallback={setIsExpanded}
 				>
 					<details
 						css={[calloutDetailsStyles, wrapperStyles]}
