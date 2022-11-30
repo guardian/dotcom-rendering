@@ -81,12 +81,12 @@ run-ci: stop build-ci start-ci
 
 # dev #########################################
 
-dev: export NODE_ENV=development
+dev: export NODE_ENV=development NODE_OPTIONS='--max-old-space-size=8192'
 dev: clear clean-dist install
 	$(call log, "starting DEV server")
 	@SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
 
-dev-legacy: export NODE_ENV=development
+dev-legacy: export NODE_ENV=development NODE_OPTIONS='--max-old-space-size=8192'
 dev-legacy: clear clean-dist install
 	$(call log, "starting DEV server")
 	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
