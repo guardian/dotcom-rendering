@@ -152,7 +152,7 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 	}
 };
 
-const cssOverrides = css`
+const sublinkStyles = css`
 	/* See: https://css-tricks.com/nested-links/ */
 	${getZIndex('card-nested-link')}
 	/* The following styles turn off those provided by Link */
@@ -163,7 +163,7 @@ const cssOverrides = css`
 	font-size: inherit;
 	line-height: inherit;
 	/* This css is used to remove any underline from the kicker but still
-have it applied to the headline when the kicker is hovered */
+	 * have it applied to the headline when the kicker is hovered */
 	:hover {
 		color: inherit;
 		text-decoration: none;
@@ -206,7 +206,7 @@ const WithLink = ({
 			<Link
 				href={linkTo}
 				cssOverrides={
-					isDynamo ? [cssOverrides, dynamoStyles] : cssOverrides
+					isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
 				}
 			>
 				{children}
