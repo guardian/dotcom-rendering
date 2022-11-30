@@ -1,4 +1,4 @@
-import type express from 'express';
+import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 import { findBySubsection } from '../../model/article-sections';
@@ -13,7 +13,7 @@ import { Article } from '../pages/Article';
 import { getAmpExperimentCache } from './ampExperimentCache';
 import { document } from './document';
 
-export const render = ({ body }: express.Request, res: express.Response) => {
+export const handleAMPArticle: RequestHandler = ({ body }, res) => {
 	try {
 		const CAPIArticle = validateAsCAPIType(body);
 		const { linkedData } = CAPIArticle;
@@ -94,7 +94,7 @@ export const render = ({ body }: express.Request, res: express.Response) => {
 	}
 };
 
-export const renderPerfTest = (req: express.Request, res: express.Response) => {
+export const handlePerfTest: RequestHandler = (req, res, next) => {
 	req.body = ExampleArticle;
-	render(req, res);
+	handleAMPArticle(req, res, next);
 };

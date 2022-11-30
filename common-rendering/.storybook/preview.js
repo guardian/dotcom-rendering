@@ -4,6 +4,7 @@ import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
 
 import { resets } from '@guardian/source-foundations';
+import { getFontsCss } from './fonts-css';
 
 if (isChromatic()) {
 	// Fix the date to prevent false negatives
@@ -11,7 +12,7 @@ if (isChromatic()) {
 }
 
 // Add base css for the site
-let css = `${resets.resetCSS}`;
+let css = `${getFontsCss()}${resets.resetCSS}`;
 let head = document.getElementsByTagName('head')[0];
 let style = document.createElement('style');
 head.appendChild(style);
@@ -46,6 +47,13 @@ window.guardian = {
 setCookie({ name: 'bwid', value: 'mockBrowserId' });
 
 const guardianViewports = {
+	mobile: {
+		name: 'mobile',
+		styles: {
+			width: '320px',
+			height: '800px',
+		},
+	},
 	mobileMedium: {
 		name: 'mobileMedium',
 		styles: {
@@ -97,7 +105,7 @@ const guardianViewports = {
 	},
 };
 
-export const viewports = [375, 480, 660, 740, 980, 1140, 1300];
+export const viewports = [320, 375, 480, 660, 740, 980, 1140, 1300];
 
 export const parameters = {
 	viewport: {
