@@ -31,6 +31,15 @@ jobs:
       # Root yarn installs all workspaces (root, common, dotcom)
       - uses: bahmutov/npm-install@v1
 
+      - name: Chromatic - Apps Rendering
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__APPS_RENDERING }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          workingDir: apps-rendering
+          exitOnceUploaded: true
+          onlyChanged: '!(main)' # only turbosnap on non-main branches
+
       - name: Chromatic - Common Rendering
         uses: chromaui/action@v1
         with:
