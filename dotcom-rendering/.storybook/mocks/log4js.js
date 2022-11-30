@@ -2,7 +2,7 @@
 
 /** This is a mock logger to replace [logging.ts][]
  *
- * [logging.ts]: ../../dotcom-rendering/src/server/lib/logging.ts
+ * [logging.ts]: ../../src/server/lib/logging.ts
  *
  * @type {Partial<import("log4js").Logger>}
  */

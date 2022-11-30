@@ -5,6 +5,7 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import type { EmotionCritical } from '@emotion/server/create-instance';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
+import { pipe } from '@guardian/common-rendering/src/lib';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import { background, resets } from '@guardian/source-foundations';
@@ -23,6 +24,7 @@ import type { ReactElement } from 'react';
 import { renderToString } from 'react-dom/server';
 import { csp } from 'server/csp';
 import { pageFonts } from 'styles';
+import { insertNewsletterIntoItem } from '../newsletter';
 
 // ----- Types ----- //
 
@@ -151,7 +153,11 @@ function render(
 	getAssetLocation: (assetName: string) => string,
 	page: Option<string>,
 ): Page {
-	const item = fromCapi({ docParser, salt: imageSalt })(request, page);
+	const item = pipe(
+		fromCapi({ docParser, salt: imageSalt })(request, page),
+		insertNewsletterIntoItem,
+	);
+
 	const clientScript = map(getAssetLocation)(scriptName(item));
 	const thirdPartyEmbeds = getThirdPartyEmbeds(request.content);
 	const body = renderBody(item, request);
