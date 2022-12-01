@@ -9,6 +9,7 @@ import {
 	space,
 	text,
 	textSans,
+	until,
 } from '@guardian/source-foundations';
 import { getZIndex } from '../lib/getZIndex';
 import { Island } from './Island';
@@ -56,6 +57,23 @@ const outOfPageStyles = css`
 `;
 
 export const labelStyles = css`
+	.ad-slot__label,
+	.ad-slot__scroll {
+		${adSlotLabelStyles}
+		position: relative;
+		&.visible {
+			visibility: initial;
+		}
+		&.hidden {
+			visibility: hidden;
+		}
+		&.ad-slot__label--toggle {
+			margin: 0 auto;
+			${until.tablet} {
+				display: none;
+			}
+		}
+	}
 	.ad-slot__close-button {
 		display: none;
 	}
@@ -203,7 +221,7 @@ const mobileStickyAdStyles = css`
 		stroke-width: 0;
 		text-align: center;
 	}
-	.ad-slot--mobile-sticky .ad-slot__close-button {
+	.ad-slot--mobile-sticky .ad-slot__label .ad-slot__close-button {
 		display: block;
 	}
 	.ad-slot__close-button__x {
@@ -213,6 +231,21 @@ const mobileStickyAdStyles = css`
 		stroke-width: 2;
 		text-align: center;
 	}
+
+	.ad-slot__label {
+		font-size: 0.75rem;
+		line-height: 1.25rem;
+		position: relative;
+		height: 1.5rem;
+		background-color: ${neutral[97]};
+		padding: 0 0.5rem;
+		border-top: 0.0625rem solid ${border.secondary};
+		color: ${neutral[60]};
+		text-align: left;
+		box-sizing: border-box;
+		${textSans.xxsmall()};
+	}
+
 	.ad-slot:not[data-label-show='true']::before {
 		content: '';
 		display: block;
