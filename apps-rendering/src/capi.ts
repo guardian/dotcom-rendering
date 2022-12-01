@@ -224,16 +224,16 @@ const getMockPromotedNewsletter = (
 	content: Content,
 ): Newsletter | undefined => {
 	const newsletterTagPrefix = 'campaign/email/';
-	const hasNewsletterTag = tagsOfType(TagType.CAMPAIGN)(content.tags).some(
+	const newsletterTag = tagsOfType(TagType.CAMPAIGN)(content.tags).find(
 		(campaignTag) => campaignTag.id.startsWith(newsletterTagPrefix),
 	);
 
-	if (hasNewsletterTag) {
+	if (newsletterTag) {
 		return {
 			description: 'Test newsletter',
 			frequency: 'test',
 			identityName: 'invalid',
-			name: 'Test newsletter',
+			name: `Test: ${newsletterTag.id}`,
 			successDescription: 'test',
 			theme: 'news',
 		};
