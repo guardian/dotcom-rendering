@@ -72,10 +72,6 @@ export const calloutSummaryStyles = css`
         NOTE: requires "visibility: visible;" on child elements to display and enable focus */
 	visibility: hidden;
 
-	a {
-		/* but we do want to allow click on links */
-		pointer-events: all;
-	}
 `;
 
 export const calloutSummaryContentWrapper = css`
@@ -178,4 +174,39 @@ export const calloutSharelink = (
 	${darkModeCss`
 		color: ${neutral[86]};
 	`}
+`;
+
+
+// Form fields
+export const fieldInput = css`
+	margin-bottom: ${remSpace[4]};
+`;
+
+export const textareaStyles = css`
+// Source textarea doesn't have theming
+	${fieldInput}
+
+	background-color: ${neutral[100]};
+	color: ${neutral[7]};
+	${darkModeCss`
+		background-color: ${neutral[7]};
+		color: ${neutral[97]};
+	`}
+`;
+
+export const fieldLabel = css`
+	.field__feedback {
+		display: none;
+	}
+	&.callout-field--failure {
+		input { // TODO: Does this do something
+			border: 2px solid ${error[400]};
+			${darkModeCss`
+				border: 2px solid ${error[500]};
+		`}
+		}
+		.field__feedback {
+			display: flex;
+		}
+	}
 `;

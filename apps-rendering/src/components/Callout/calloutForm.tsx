@@ -26,16 +26,13 @@ const CalloutForm: FC<CalloutFormProps> = ({
 }) => {
 	return (
 		<div className="js-callout" css={calloutForm}>
-			<form css={calloutForm} action="#" method="post">
+			{/* We manually validate this form in client/callouts.ts */}
+			<form action="#" method="post" noValidate >
 				<ShareLink disabled={disableInputs} format={format} />
 				<Disclaimer disabled={disableInputs} />
 				<input name="formId" type="hidden" value={id} />
 				<div className="js-callout__inputs">
-					<>
-						{fields.map((field) =>
-							renderField(field, disableInputs, format),
-						)}
-					</>
+					{fields.map((field) => renderField(field, disableInputs, format))}
 					<div>
 						<ContactText />
 						<InlineError className="js-callout__error-message">

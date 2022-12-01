@@ -5,31 +5,28 @@ import type { ReactElement } from 'react';
 
 interface RadioInputProps {
 	name: string;
-	label: string;
-	supporting?: string;
+	disabled: boolean;
+	mandatory: boolean;
 	options: FormOption[];
 	cssOverrides?: SerializedStyles;
-	disabled: boolean;
 }
 
 const RadioInput = ({
-	label,
 	name,
 	options,
-	supporting,
 	cssOverrides,
 	disabled,
+	mandatory,
 }: RadioInputProps): ReactElement => (
 	<RadioGroup
-		label={label}
+		defaultChecked
 		name={name}
 		orientation="horizontal"
-		supporting={supporting}
 		cssOverrides={cssOverrides}
 		disabled={disabled}
 	>
-		{options.map(({ value, label }) => (
-			<Radio key={value} value={value} label={label} />
+		{options.map(({ value, label }, i) => (
+			<Radio key={value} value={value} label={label} defaultChecked={mandatory && i===0}/>
 		))}
 	</RadioGroup>
 );
