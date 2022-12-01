@@ -72,6 +72,11 @@ export const calloutSummaryStyles = css`
         NOTE: requires "visibility: visible;" on child elements to display and enable focus */
 	visibility: hidden;
 
+	a {
+		/* but we do want to allow click on links */
+		pointer-events: all;
+	}
+
 `;
 
 export const calloutSummaryContentWrapper = css`

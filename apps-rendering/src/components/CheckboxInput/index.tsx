@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import type { SerializedStyles } from '@emotion/react';
 import type { FormOption } from '@guardian/apps-rendering-api-models/formOption';
 import { Checkbox, CheckboxGroup } from '@guardian/source-react-components';
