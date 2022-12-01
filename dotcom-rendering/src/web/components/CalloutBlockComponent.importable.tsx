@@ -87,8 +87,8 @@ const subtitleTextHeaderStyles = css`
 
 const activeUntilStyles = css`
 	position: absolute;
-	bottom: ${space[2]}px;
-	right: ${space[2]}px;
+	bottom: ${space[1]}px;
+	right: ${space[1]}px;
 	display: block;
 `;
 
@@ -221,6 +221,9 @@ export const CalloutBlockComponent = ({
 							/>
 						</div>
 					</summary>
+					<div css={activeUntilStyles}>
+						<Deadline until={activeUntil} />
+					</div>
 					<CalloutShareComponent format={format} />
 					{isExpired(activeUntil) ? (
 						<CalloutExpired />
@@ -251,9 +254,6 @@ export const CalloutBlockComponent = ({
 									format={format}
 									description={description}
 								/>
-							</div>
-							<div css={activeUntilStyles}>
-								<Deadline until={activeUntil} />
 							</div>
 						</summary>
 						<CalloutShareComponent format={format} />

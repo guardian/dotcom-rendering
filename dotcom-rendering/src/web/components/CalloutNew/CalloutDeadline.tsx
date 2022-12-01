@@ -6,16 +6,15 @@ type Props = {
 	until?: number | undefined;
 };
 
+// work
 const deadlineStyles = css`
 	${textSans.xxsmall()};
 	color: ${palette.brand};
 	background-color: ${palette.brandAlt[400]};
-	position: absolute;
 	right: 0;
 	display: flex;
 	align-items: center;
-	margin: -28px ${space[2]}px;
-	padding-right: ${space[1]}px;
+	padding-right: 0 ${space[1]}px;
 `;
 
 function getDaysBetween(first: Date, second: Date): number {
