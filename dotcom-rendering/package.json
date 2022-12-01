@@ -63,7 +63,6 @@
 		"@cypress/skip-test": "^2.6.0",
 		"@emotion/babel-plugin": "^11.3.0",
 		"@emotion/cache": "^11.4.0",
-		"@guardian/prettier": "^2.0.0",
 		"@emotion/react": "^11.4.1",
 		"@emotion/server": "^11.4.0",
 		"@guardian/ab-core": "^2.0.0",
