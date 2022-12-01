@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import type { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime';
 import type { Content } from '@guardian/content-api-models/v1/content';
@@ -18,7 +19,6 @@ import type { MainMedia } from 'mainMedia';
 import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import { parseVideo } from 'video';
-import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 
 // ----- Lookups ----- //
 
