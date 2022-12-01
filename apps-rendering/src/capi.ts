@@ -18,6 +18,7 @@ import type { MainMedia } from 'mainMedia';
 import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import { parseVideo } from 'video';
+import { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 
 // ----- Lookups ----- //
 
@@ -214,6 +215,26 @@ const capiDateTimeToDate = (date: CapiDateTime): Option<Date> =>
 const maybeCapiDate = (date: CapiDateTime | undefined): Option<Date> =>
 	pipe(date, fromNullable, andThen(capiDateTimeToDate));
 
+const getMockPromotedNewsletter = (
+	content: Content,
+): Newsletter | undefined => {
+	const newsletterTagPrefix = 'campaign/email/';
+	const hasNewsletterTag = tagsOfType(TagType.CAMPAIGN)(content.tags).some(
+		(campaignTag) => campaignTag.id.startsWith(newsletterTagPrefix),
+	);
+
+	if (hasNewsletterTag) {
+		return {
+			description: 'Test newsletter',
+			frequency: 'test',
+			identityName: 'invalid',
+			name: 'Test newsletter',
+			successDescription: 'test',
+			theme: 'news',
+		};
+	}
+};
+
 // ----- Exports ----- //
 
 export {
@@ -235,4 +256,5 @@ export {
 	articleMainImage,
 	checkForThirdPartyEmbed,
 	requiresInlineStyles,
+	getMockPromotedNewsletter,
 };
