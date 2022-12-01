@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
 import { brand, from, space } from '@guardian/source-foundations';
-import type { EditionId } from '../lib/edition';
 import { center } from '../lib/center';
+import type { EditionId } from '../lib/edition';
 import { HeaderTopBarEditionDropdown } from './HeaderTopBarEditionDropdown';
 import { MyAccount } from './HeaderTopBarMyAccount';
 import { HeaderTopBarPrintSubscriptions } from './HeaderTopBarPrintSubscriptions';
 import { Search } from './HeaderTopBarSearch';
+import { HeaderTopBarSearchCapi } from './HeaderTopBarSearchCapi';
 import { SearchJobs } from './HeaderTopBarSearchJobs';
 import { Hide } from './Hide';
 
@@ -16,6 +17,7 @@ interface HeaderTopBarProps {
 	mmaUrl?: string;
 	discussionApiUrl: string;
 	idApiUrl: string;
+	headerTopBarSearchCapiSwitch: boolean;
 }
 
 const topBarStyles = css`
@@ -47,6 +49,7 @@ export const HeaderTopBar = ({
 	mmaUrl,
 	discussionApiUrl,
 	idApiUrl,
+	headerTopBarSearchCapiSwitch,
 }: HeaderTopBarProps) => {
 	return (
 		<div
@@ -64,10 +67,13 @@ export const HeaderTopBar = ({
 				/>
 				<SearchJobs />
 
-				<Search
-					href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
-					dataLinkName="nav3 : search"
-				/>
+				{!headerTopBarSearchCapiSwitch && (
+					<Search
+						href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
+						dataLinkName="nav3 : search"
+					/>
+				)}
+				{headerTopBarSearchCapiSwitch && <HeaderTopBarSearchCapi />}
 				<Hide when="below" breakpoint="desktop">
 					<HeaderTopBarEditionDropdown
 						editionId={editionId}

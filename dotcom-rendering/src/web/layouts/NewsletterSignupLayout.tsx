@@ -255,6 +255,10 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							!!CAPIArticle.config.switches.headerTopNav
 						}
 						isInEuropeTest={isInEuropeTest}
+						headerTopBarSearchCapiSwitch={
+							!!CAPIArticle.config.switches
+								.headerTopBarSearchCapiSwitch
+						}
 					/>
 				</Section>
 

@@ -27,6 +27,7 @@ export const defaultStory = () => {
 			remoteHeader={false}
 			contributionsServiceUrl="https://contributions.guardianapis.com"
 			idApiUrl="https://idapi.theguardian.com"
+			headerTopBarSearchCapiSwitch={false}
 		/>
 
 		/*

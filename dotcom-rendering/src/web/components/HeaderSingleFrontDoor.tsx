@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { brand } from '@guardian/source-foundations';
-import type { EditionId } from '../lib/edition';
 import { center } from '../lib/center';
+import type { EditionId } from '../lib/edition';
 import { HeaderTopBar } from './HeaderTopBar.importable';
 import { Island } from './Island';
 import { Logo } from './Logo';
@@ -20,6 +20,7 @@ type Props = {
 	remoteHeader: boolean;
 	contributionsServiceUrl: string;
 	idApiUrl: string;
+	headerTopBarSearchCapiSwitch: boolean;
 };
 
 export const HeaderSingleFrontDoor = ({
@@ -31,6 +32,7 @@ export const HeaderSingleFrontDoor = ({
 	remoteHeader,
 	contributionsServiceUrl,
 	idApiUrl,
+	headerTopBarSearchCapiSwitch,
 }: Props) => (
 	<div css={headerStyles}>
 		<Island deferUntil="idle">
@@ -41,6 +43,7 @@ export const HeaderSingleFrontDoor = ({
 				mmaUrl={mmaUrl}
 				discussionApiUrl={discussionApiUrl}
 				idApiUrl={idApiUrl}
+				headerTopBarSearchCapiSwitch={headerTopBarSearchCapiSwitch}
 			/>
 		</Island>
 		<div
