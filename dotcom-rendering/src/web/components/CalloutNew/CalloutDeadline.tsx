@@ -14,7 +14,7 @@ const deadlineStyles = css`
 	right: 0;
 	display: flex;
 	align-items: center;
-	padding-right: 0 ${space[1]}px;
+	padding-right: ${space[1]}px;
 `;
 
 function getDaysBetween(first: Date, second: Date): number {
