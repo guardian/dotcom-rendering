@@ -209,6 +209,7 @@ export const Card66Media66 = ({
 		/>
 	);
 };
+
 export const Card33Media33 = ({
 	trail,
 	showAge,
@@ -221,6 +222,22 @@ export const Card33Media33 = ({
 			showAge={showAge}
 			trailText={trail.trailText}
 			imagePositionOnMobile="left"
+		/>
+	);
+};
+
+export const CardDefault = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			imageUrl={undefined}
+			headlineSize="small"
 		/>
 	);
 };

@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
-import { Card25Media25, Card50Media50Tall } from '../lib/cardWrappers';
+import {
+	Card25Media25,
+	Card50Media50Tall,
+	CardDefault,
+} from '../lib/cardWrappers';
 import {
 	Card100PictureRight,
 	Card100PictureTop,
@@ -77,12 +81,10 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 										showAge={showAge}
 									/>
 								) : (
-									<FrontCard // CardDefault
+									<CardDefault
 										trail={card}
 										containerPalette={containerPalette}
 										showAge={showAge}
-										imageUrl={undefined}
-										headlineSize="small"
 									/>
 								)}
 							</LI>
@@ -99,12 +101,10 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 								showDivider={false}
 								padSides={true}
 							>
-								<FrontCard // CardDefault
+								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -155,12 +155,10 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								)}
 								padSides={true}
 							>
-								<FrontCard // CardDefault
+								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -200,12 +198,10 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 								columns,
 							)}
 						>
-							<FrontCard // CardDefault
+							<CardDefault
 								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								imageUrl={undefined}
-								headlineSize="small"
 							/>
 						</LI>
 					);
@@ -230,13 +226,10 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	return (
 		<UL direction="row" wrapCards={true}>
 			<LI percentage="25%" padSides={true} showDivider={false}>
-				<FrontCard // Card25Media25
+				<Card25Media25
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					supportingContent={big.supportingContent}
-					headlineSize="medium"
-					imageUrl={big.image}
 				/>
 			</LI>
 			<LI percentage="75%">
@@ -257,12 +250,10 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 									columns,
 								)}
 							>
-								<FrontCard // CardDefault
+								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -297,13 +288,10 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 						padSides={true}
 						showDivider={cardIndex > 0}
 					>
-						<FrontCard // Card25Media25
+						<Card25Media25
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							supportingContent={card.supportingContent}
-							headlineSize="medium"
-							imageUrl={card.image}
 						/>
 					</LI>
 				);
@@ -327,12 +315,10 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 									columns,
 								)}
 							>
-								<FrontCard // CardDefault
+								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -367,13 +353,10 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 						padSides={true}
 						showDivider={cardIndex !== 0}
 					>
-						<FrontCard // Card25Media25
+						<Card25Media25
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							supportingContent={card.supportingContent}
-							headlineSize="medium"
-							imageUrl={card.image}
 						/>
 					</LI>
 				);
@@ -390,12 +373,10 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 								showDivider={false}
 								padSides={true}
 							>
-								<FrontCard // CardDefault
+								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -429,13 +410,10 @@ const Card25_Card25_Card25_Card25 = ({
 						padSides={true}
 						showDivider={cardIndex !== 0}
 					>
-						<FrontCard // CardDefault
+						<Card25Media25
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							supportingContent={card.supportingContent}
-							headlineSize="medium"
-							imageUrl={card.image}
 						/>
 					</LI>
 				);
