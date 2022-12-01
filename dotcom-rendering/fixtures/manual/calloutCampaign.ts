@@ -63,10 +63,6 @@ export const calloutCampaign: CalloutBlockElement = {
 			name: 'can_we_publish_your_response',
 			options: [
 				{
-					label: 'Choose an option ...',
-					value: 'Choose an option ...',
-				},
-				{
 					label: 'Yes, entirely',
 					value: 'Yes, entirely',
 				},

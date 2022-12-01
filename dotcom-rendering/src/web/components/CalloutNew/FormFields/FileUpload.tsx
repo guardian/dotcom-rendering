@@ -20,14 +20,13 @@ const errorMessagesStyles = css`
 `;
 
 const uploadStyles = css`
-	margin-top: ${space[2]}px;
-	display: flex;
-	align-items: center;
+	display: block;
 `;
 
 const textStyles = css`
 	${textSans.small()};
 	color: ${neutral[46]};
+	display: inline-block;
 `;
 
 type Props = {
@@ -54,7 +53,7 @@ const customUpload = (format: ArticleFormat): SerializedStyles => css`
 	height: ${remHeight.ctaXsmall}rem;
 	min-height: ${remHeight.ctaXsmall}rem;
 	padding: ${space[3]}px;
-	margin: 0px ${space[3]}px 0px 0px;
+	margin: ${space[3]}px ${space[3]}px ${space[3]}px 0px;
 	border-radius: ${remHeight.ctaMedium}rem;
 	${textSans.medium({ fontWeight: 'bold' })};
 	width: fit-content;
@@ -94,8 +93,8 @@ export const FileUpload = ({
 	};
 	return (
 		<>
-			<FieldLabel formField={formField}>
-				<div css={uploadStyles}>
+			<div css={uploadStyles}>
+				<FieldLabel formField={formField}>
 					<div css={customUpload(format)}>
 						Choose file
 						<input
@@ -110,26 +109,28 @@ export const FileUpload = ({
 							`}
 						/>
 					</div>
-					{chosenFile == null ? (
-						<div css={textStyles}>No file chosen</div>
-					) : (
-						<>
-							<button
-								type="button"
-								css={customUpload(format)}
-								onClick={(): void => {
-									setChosenFile(undefined);
-								}}
-							>
-								Remove File
-							</button>
-
-							<span>{getFileName(chosenFile)}</span>
-						</>
+				</FieldLabel>
+				{chosenFile == null ? (
+					<div css={textStyles}> No file chosen </div>
+				) : null}
+				<>
+					{chosenFile == null ? null : (
+						<button
+							type="button"
+							css={customUpload(format)}
+							onClick={(): void => {
+								setChosenFile(undefined);
+							}}
+						>
+							Remove File
+						</button>
 					)}
-				</div>
-			</FieldLabel>
-			{!!error && <div css={errorMessagesStyles}>{error}</div>}
+					{chosenFile == null ? null : (
+						<span css={textStyles}>{getFileName(chosenFile)}</span>
+					)}
+				</>
+				{!!error && <div css={errorMessagesStyles}>{error}</div>}
+			</div>
 		</>
 	);
 };
