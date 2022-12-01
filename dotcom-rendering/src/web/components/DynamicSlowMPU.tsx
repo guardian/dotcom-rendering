@@ -13,7 +13,6 @@ import { Card50_Card50, Card75_Card25 } from '../lib/dynamicSlices';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
 
 type Props = {
 	groupedTrails: DCRGroupedTrails;

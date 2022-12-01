@@ -17,7 +17,6 @@ import {
 } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
 
 type Props = {
 	groupedTrails: DCRGroupedTrails;

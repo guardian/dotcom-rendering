@@ -17,7 +17,6 @@ import {
 } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
 
 /**
  * Not sure where to start? This PR documents a lot of the key features
