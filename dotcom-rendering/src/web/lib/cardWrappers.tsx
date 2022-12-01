@@ -241,3 +241,20 @@ export const CardDefault = ({
 		/>
 	);
 };
+
+export const CardDefaultMedia = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			imagePosition="left"
+			imagePositionOnMobile="left"
+			headlineSize="small"
+		/>
+	);
+};

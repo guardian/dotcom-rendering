@@ -1,7 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import type { TrailType } from 'src/types/trails';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
-import { Card25Media25Tall, Card50Media50 } from '../lib/cardWrappers';
+import {
+	Card25Media25Tall,
+	Card50Media50,
+	CardDefaultMedia,
+} from '../lib/cardWrappers';
 import {
 	Card100PictureRight,
 	Card100PictureTop,
@@ -51,13 +55,10 @@ const ColumnOfCards50_Card50 = ({
 								key={card.url}
 								padSides={true}
 							>
-								<FrontCard // CardDefaultMedia
+								<CardDefaultMedia
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imagePosition="left"
-									imagePositionOnMobile="left"
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -102,13 +103,10 @@ const ColumnOfCards50_Card25_Card25 = ({
 								key={card.url}
 								padSides={true}
 							>
-								<FrontCard // CardDefaultMedia
+								<CardDefaultMedia
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imagePosition="left"
-									imagePositionOnMobile="none"
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -143,12 +141,10 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 							columns,
 						)}
 					>
-						<FrontCard // CardDefaultMedia (check headline size)
+						<CardDefaultMedia // (check headline size)
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							imagePosition="left"
-							imagePositionOnMobile="none"
 						/>
 					</LI>
 				);
