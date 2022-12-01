@@ -31,6 +31,26 @@ jobs:
       # Root yarn installs all workspaces (root, common, dotcom)
       - uses: bahmutov/npm-install@v1
 
+      - name: Chromatic - Apps Rendering Non Dependency PR / main
+        uses: chromaui/action@v1
+        if: ${{ github.event_name == 'push' || (!contains(github.event.pull_request.labels.*.name, 'dependencies') && github.event.pull_request.user.login != 'dependabot')}}
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__APPS_RENDERING }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          untraced: '**/(package**.json|yarn.lock)'
+          exitOnceUploaded: true
+          onlyChanged: '!(main)' # only turbosnap on non-main branches
+          workingDir: apps-rendering
+
+      - name: Chromatic - Apps Rendering Dependency PR
+        uses: chromaui/action@v1
+        if: ${{ github.event_name == 'pull_request' && (contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event.pull_request.user.login == 'dependabot') }}
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__APPS_RENDERING }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          autoAcceptChanges: main
+          workingDir: apps-rendering
+
       - name: Chromatic - DCR Non Dependency PR / main
         uses: chromaui/action@v1
         if: ${{ github.event_name == 'push' || (!contains(github.event.pull_request.labels.*.name, 'dependencies') && github.event.pull_request.user.login != 'dependabot')}}
