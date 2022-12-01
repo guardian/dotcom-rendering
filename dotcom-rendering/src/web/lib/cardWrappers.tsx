@@ -167,6 +167,15 @@ export const Card50Media50 = ({
 		/>
 	);
 };
+
+/**
+ * Card designed to take up 50% of a container, with media taking up the full card
+ *
+ * Card Properties:
+ * - Has trail text
+ * - Large Headline
+ * - Up to 3 sublinks
+ */
 export const Card50Media50Tall = ({
 	trail,
 	showAge,

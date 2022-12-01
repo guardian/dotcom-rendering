@@ -175,7 +175,7 @@ export const Card66_Card33 = ({
 }) => (
 	<UL direction="row">
 		<LI percentage="66.666%" padSides={true}>
-			<FrontCard
+			<FrontCard // Card66Media66
 				trail={cards[0]}
 				containerPalette={containerPalette}
 				containerType={containerType}
@@ -185,7 +185,7 @@ export const Card66_Card33 = ({
 			/>
 		</LI>
 		<LI percentage="33.333%" padSides={true} showDivider={true}>
-			<FrontCard
+			<FrontCard // Card33Media33
 				trail={cards[1]}
 				containerPalette={containerPalette}
 				containerType={containerType}
@@ -270,7 +270,6 @@ export const Card50_Card25_Card25 = ({
  * |_________________|
  */
 export const Card100PictureTop = ({
-	// Card100Media100
 	cards,
 	showAge,
 	containerPalette,

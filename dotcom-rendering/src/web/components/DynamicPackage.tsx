@@ -12,6 +12,13 @@ type Props = {
 	showAge?: boolean;
 };
 
+/*
+ * Note:
+ * dynamic/package does not use cardWrappers as
+ * most of the card configurations are custom and not used
+ * in other front containers
+ */
+
 const Snap100 = ({
 	snaps,
 	containerPalette,

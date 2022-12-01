@@ -77,7 +77,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 										showAge={showAge}
 									/>
 								) : (
-									<FrontCard
+									<FrontCard // CardDefault
 										trail={card}
 										containerPalette={containerPalette}
 										showAge={showAge}
@@ -99,7 +99,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 								showDivider={false}
 								padSides={true}
 							>
-								<FrontCard
+								<FrontCard // CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
@@ -155,7 +155,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								)}
 								padSides={true}
 							>
-								<FrontCard
+								<FrontCard // CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
@@ -200,7 +200,7 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 								columns,
 							)}
 						>
-							<FrontCard
+							<FrontCard // CardDefault
 								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
@@ -230,7 +230,7 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	return (
 		<UL direction="row" wrapCards={true}>
 			<LI percentage="25%" padSides={true} showDivider={false}>
-				<FrontCard
+				<FrontCard // Card25Media25
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
@@ -257,7 +257,7 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 									columns,
 								)}
 							>
-								<FrontCard
+								<FrontCard // CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
@@ -297,7 +297,7 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 						padSides={true}
 						showDivider={cardIndex > 0}
 					>
-						<FrontCard
+						<FrontCard // Card25Media25
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
@@ -327,7 +327,7 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 									columns,
 								)}
 							>
-								<FrontCard
+								<FrontCard // CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
@@ -367,7 +367,7 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 						padSides={true}
 						showDivider={cardIndex !== 0}
 					>
-						<FrontCard
+						<FrontCard // Card25Media25
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
@@ -390,7 +390,7 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 								showDivider={false}
 								padSides={true}
 							>
-								<FrontCard
+								<FrontCard // CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
@@ -429,7 +429,7 @@ const Card25_Card25_Card25_Card25 = ({
 						padSides={true}
 						showDivider={cardIndex !== 0}
 					>
-						<FrontCard
+						<FrontCard // CardDefault
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}

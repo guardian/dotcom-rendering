@@ -51,7 +51,7 @@ const ColumnOfCards50_Card50 = ({
 								key={card.url}
 								padSides={true}
 							>
-								<FrontCard
+								<FrontCard // CardDefaultMedia
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
@@ -102,7 +102,7 @@ const ColumnOfCards50_Card25_Card25 = ({
 								key={card.url}
 								padSides={true}
 							>
-								<FrontCard
+								<FrontCard // CardDefaultMedia
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
@@ -143,7 +143,7 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 							columns,
 						)}
 					>
-						<FrontCard
+						<FrontCard // CardDefaultMedia (check headline size)
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}

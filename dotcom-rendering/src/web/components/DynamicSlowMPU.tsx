@@ -33,7 +33,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 }) => (
 	<UL direction="row">
 		<LI percentage="33.333%" padSides={true}>
-			<FrontCard
+			<FrontCard // Card33Media33
 				trail={cards[0]}
 				containerPalette={containerPalette}
 				showAge={showAge}
@@ -42,7 +42,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 		<LI percentage="33.333%" showDivider={true}>
 			<UL direction="column">
 				<LI padSides={true}>
-					<FrontCard
+					<FrontCard // DefaultCard
 						trail={cards[1]}
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -51,7 +51,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 					/>
 				</LI>
 				<LI padSides={true}>
-					<FrontCard
+					<FrontCard // DefaultCard
 						trail={cards[2]}
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -60,7 +60,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 					/>
 				</LI>
 				<LI padSides={true}>
-					<FrontCard
+					<FrontCard // DefaultCard
 						trail={cards[3]}
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -98,7 +98,7 @@ const ColumnOfThree50_Ad50 = ({
 		<LI percentage="50%">
 			<UL direction="column">
 				<LI padSides={true}>
-					<FrontCard
+					<FrontCard // CardDefaultMedia
 						trail={cards[0]}
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -107,7 +107,7 @@ const ColumnOfThree50_Ad50 = ({
 					/>
 				</LI>
 				<LI padSides={true}>
-					<FrontCard
+					<FrontCard // CardDefaultMedia
 						trail={cards[1]}
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -116,7 +116,7 @@ const ColumnOfThree50_Ad50 = ({
 					/>
 				</LI>
 				<LI padSides={true}>
-					<FrontCard
+					<FrontCard // CardDefaultMedia
 						trail={cards[2]}
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -150,7 +150,7 @@ const Card50_Card25_Card25 = ({
 }) => (
 	<UL direction="row" padBottom={true}>
 		<LI percentage="50%" padSides={true}>
-			<FrontCard
+			<FrontCard // Card50Media50
 				trail={cards[0]}
 				containerPalette={containerPalette}
 				showAge={showAge}
@@ -161,7 +161,7 @@ const Card50_Card25_Card25 = ({
 			/>
 		</LI>
 		<LI percentage="25%" padSides={true} showDivider={true}>
-			<FrontCard
+			<FrontCard // Card25Media25Tall (check trail text & sublinks)
 				trail={cards[1]}
 				containerPalette={containerPalette}
 				showAge={showAge}
@@ -177,7 +177,7 @@ const Card50_Card25_Card25 = ({
 			/>
 		</LI>
 		<LI percentage="25%" padSides={true} showDivider={true}>
-			<FrontCard
+			<FrontCard // Card25Media25Tall (check trail text & sublinks)
 				trail={cards[2]}
 				containerPalette={containerPalette}
 				showAge={showAge}
