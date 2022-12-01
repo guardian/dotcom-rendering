@@ -8,6 +8,20 @@ type TrailProps = {
 	containerPalette?: DCRContainerPalette;
 };
 
+/**
+ * .___________________________________.
+ * |       ############################|
+ * |       ############################|
+ * |       ############################|
+ * |_______############################|
+ * Card designed to take up 100% of the container, with media that takes up 75%
+ *
+ * Options:
+ *  - Huge headline (large on mobile)
+ *  - Jumbo image on the right (top on mobile)
+ *  - Trail text when there is no supporting content
+ *  - Up to 4 supporting content items, 1-3 aligned vertical, 4 aligned horizontal
+ */
 export const Card100Media75 = ({
 	trail,
 	showAge,
@@ -41,6 +55,20 @@ export const Card100Media75 = ({
 	);
 };
 
+/**
+ * .___________________________________.
+ * |###################################|
+ * |###################################|
+ * |###################################|
+ * |___________________________________|
+ * Card designed to take up 100% of the container, with media that takes up 75%
+ *
+ * Options:
+ *  - Huge headline (large on mobile)
+ *  - Jumbo image on the top (top on mobile)
+ *  - No trail text
+ *  - Up to 4 supporting content items, always aligned horizontal
+ */
 export const Card100Media100 = ({
 	trail,
 	showAge,
@@ -62,6 +90,19 @@ export const Card100Media100 = ({
 	);
 };
 
+/**
+ * ._________________________.
+ * |          ###############|
+ * |          ###############|
+ * |__________###############|
+ * Card designed to take up 75% of the container, with media that takes up 50%
+ *
+ * Options:
+ *  - Large headline (large on mobile)
+ *  - Large image on the right (top on mobile)
+ *  - Trail text
+ *  - Up to 3 supporting content items, 1-2 aligned vertical, 3 aligned horizontal
+ */
 export const Card75Media50Right = ({
 	trail,
 	showAge,
@@ -87,6 +128,19 @@ export const Card75Media50Right = ({
 	);
 };
 
+/**
+ * ._________________________.
+ * |###############          |
+ * |###############          |
+ * |###############__________|
+ * Card designed to take up 75% of the container, with media that takes up 50%
+ *
+ * Options:
+ *  - Large headline (large on mobile)
+ *  - Large image on the left (top on mobile)
+ *  - Trail text
+ *  - Up to 3 supporting content items, 1-2 aligned vertical, 3 aligned horizontal
+ */
 export const Card75Media50Left = ({
 	trail,
 	showAge,
@@ -112,6 +166,19 @@ export const Card75Media50Left = ({
 	);
 };
 
+/**
+ * ._________.
+ * |#########|
+ * |#########|
+ * |_________|
+ * Card designed to take up 25% of the container, with media that takes up 25%
+ *
+ * Options:
+ *  - Medium headline (medium on mobile)
+ *  - Small image on the top (left on mobile)
+ *  - No trail text
+ *  - Up to 2 supporting content items, always aligned vertical
+ */
 export const Card25Media25 = ({
 	trail,
 	showAge,
@@ -126,7 +193,20 @@ export const Card25Media25 = ({
 		/>
 	);
 };
-
+/**
+ * ._________.
+ * |#########|
+ * |#########|
+ * |         |
+ * |_________|
+ * Card designed to take up 25% of the container, with media that takes up 25%
+ *
+ * Options:
+ *  - Medium headline (medium on mobile)
+ *  - Small image on the top (left on mobile)
+ *  - Trail text when there is no supporting content
+ *  - Up to 2 supporting content items, always aligned vertical
+ */
 export const Card25Media25Tall = ({
 	trail,
 	showAge,
@@ -136,10 +216,8 @@ export const Card25Media25Tall = ({
 		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
-			imagePositionOnMobile="left"
 			showAge={showAge}
 			trailText={
-				// Only show trail text if there is no supportContent
 				trail.supportingContent === undefined ||
 				trail.supportingContent.length === 0
 					? trail.trailText
@@ -149,6 +227,20 @@ export const Card25Media25Tall = ({
 		/>
 	);
 };
+
+/**
+ * .__________________.
+ * |##################|
+ * |##################|
+ * |__________________|
+ * Card designed to take up 50% of the container, with media that takes up 50%
+ *
+ * Options:
+ *  - Large headline (large on mobile)
+ *  - Small image on the top (top on mobile)
+ *  - No trail text
+ *  - Up to 3 supporting content items, always aligned horizontal
+ */
 export const Card50Media50 = ({
 	trail,
 	showAge,
@@ -169,12 +261,18 @@ export const Card50Media50 = ({
 };
 
 /**
- * Card designed to take up 50% of a container, with media taking up the full card
+ * .__________________.
+ * |##################|
+ * |##################|
+ * |                  |
+ * |__________________|
+ * Card designed to take up 50% of the container, with media that takes up 50%
  *
- * Card Properties:
- * - Has trail text
- * - Large Headline
- * - Up to 3 sublinks
+ * Options:
+ *  - Large headline (large on mobile)
+ *  - Small image on the top (top on mobile)
+ *  - Trail text
+ *  - Up to 3 supporting content items, always aligned horizontal
  */
 export const Card50Media50Tall = ({
 	trail,
@@ -191,16 +289,32 @@ export const Card50Media50Tall = ({
 			supportingContentAlignment={'horizontal'}
 			imagePositionOnMobile="top"
 			headlineSize="large"
+			headlineSizeOnMobile="large"
 		/>
 	);
 };
+
+/**
+ * ._______________________.
+ * |#######################|
+ * |#######################|
+ * |#######################|
+ * |_______________________|
+ * Card designed to take up 66% of the container, with media that takes up 66%
+ *
+ * Options:
+ *  - Medium headline (medium on mobile)
+ *  - Small image on the top (top on mobile)
+ *  - Trail text
+ *  - No supporting content
+ */
 export const Card66Media66 = ({
 	trail,
 	showAge,
 	containerPalette,
 }: TrailProps) => {
 	return (
-		<FrontCard // Card66Media66
+		<FrontCard
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
@@ -210,6 +324,20 @@ export const Card66Media66 = ({
 	);
 };
 
+/**
+ * .___________.
+ * |###########|
+ * |###########|
+ * |###########|
+ * |___________|
+ * Card designed to take up 33% of the container, with media that takes up 33%
+ *
+ * Options:
+ *  - Medium headline (medium on mobile)
+ *  - Small image on the top (left on mobile)
+ *  - Trail text
+ *  - No supporting content
+ */
 export const Card33Media33 = ({
 	trail,
 	showAge,
@@ -226,6 +354,17 @@ export const Card33Media33 = ({
 	);
 };
 
+/**
+ * .__________________.
+ * |__________________|
+ * Card designed to take up any width of container, with no media
+ *
+ * Options:
+ *  - Small headline (small on mobile)
+ *  - No image / media
+ *  - No trail text
+ *  - No supporting content
+ */
 export const CardDefault = ({
 	trail,
 	showAge,
@@ -242,6 +381,17 @@ export const CardDefault = ({
 	);
 };
 
+/**
+ * .__________________.
+ * |#####_____________|
+ * Card designed to take up any width of container, with small left media
+ *
+ * Options:
+ *  - Small headline (small on mobile)
+ *  - Small image on the left (left on mobile)
+ *  - No trail text
+ *  - No supporting content
+ */
 export const CardDefaultMedia = ({
 	trail,
 	showAge,
