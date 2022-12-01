@@ -2,6 +2,13 @@
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import {
+	Card25Media25Tall,
+	Card33Media33,
+	Card50Media50,
+	CardDefault,
+	CardDefaultMedia,
+} from '../lib/cardWrappers';
 import { Card50_Card50, Card75_Card25 } from '../lib/dynamicSlices';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
@@ -33,7 +40,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 }) => (
 	<UL direction="row">
 		<LI percentage="33.333%" padSides={true}>
-			<FrontCard // Card33Media33
+			<Card33Media33
 				trail={cards[0]}
 				containerPalette={containerPalette}
 				showAge={showAge}
@@ -42,30 +49,24 @@ const Card33_ColumnOfThree33_Ad33 = ({
 		<LI percentage="33.333%" showDivider={true}>
 			<UL direction="column">
 				<LI padSides={true}>
-					<FrontCard // DefaultCard
+					<CardDefault
 						trail={cards[1]}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						imageUrl={undefined}
-						headlineSize="small"
 					/>
 				</LI>
 				<LI padSides={true}>
-					<FrontCard // DefaultCard
+					<CardDefault
 						trail={cards[2]}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						imageUrl={undefined}
-						headlineSize="small"
 					/>
 				</LI>
 				<LI padSides={true}>
-					<FrontCard // DefaultCard
+					<CardDefault
 						trail={cards[3]}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						imageUrl={undefined}
-						headlineSize="small"
 					/>
 				</LI>
 			</UL>
@@ -98,30 +99,24 @@ const ColumnOfThree50_Ad50 = ({
 		<LI percentage="50%">
 			<UL direction="column">
 				<LI padSides={true}>
-					<FrontCard // CardDefaultMedia
+					<CardDefaultMedia
 						trail={cards[0]}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						imagePosition="left"
-						headlineSize="small"
 					/>
 				</LI>
 				<LI padSides={true}>
-					<FrontCard // CardDefaultMedia
+					<CardDefaultMedia
 						trail={cards[1]}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						imagePosition="left"
-						headlineSize="small"
 					/>
 				</LI>
 				<LI padSides={true}>
-					<FrontCard // CardDefaultMedia
+					<CardDefaultMedia
 						trail={cards[2]}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						imagePosition="left"
-						headlineSize="small"
 					/>
 				</LI>
 			</UL>
@@ -150,46 +145,24 @@ const Card50_Card25_Card25 = ({
 }) => (
 	<UL direction="row" padBottom={true}>
 		<LI percentage="50%" padSides={true}>
-			<FrontCard // Card50Media50
+			<Card50Media50
 				trail={cards[0]}
 				containerPalette={containerPalette}
 				showAge={showAge}
-				headlineSize="large"
-				imagePosition="top"
-				imagePositionOnMobile="top"
-				supportingContent={cards[0].supportingContent}
 			/>
 		</LI>
 		<LI percentage="25%" padSides={true} showDivider={true}>
-			<FrontCard // Card25Media25Tall (check trail text & sublinks)
+			<Card25Media25Tall
 				trail={cards[1]}
 				containerPalette={containerPalette}
 				showAge={showAge}
-				trailText={
-					cards[1]?.supportingContent &&
-					cards[1].supportingContent.length > 0
-						? undefined
-						: cards[1].trailText
-				}
-				supportingContent={
-					cards[1].trailText ? undefined : cards[1].supportingContent
-				}
 			/>
 		</LI>
 		<LI percentage="25%" padSides={true} showDivider={true}>
-			<FrontCard // Card25Media25Tall (check trail text & sublinks)
+			<Card25Media25Tall
 				trail={cards[2]}
 				containerPalette={containerPalette}
 				showAge={showAge}
-				trailText={
-					cards[2]?.supportingContent &&
-					cards[2].supportingContent.length > 0
-						? undefined
-						: cards[2].trailText
-				}
-				supportingContent={
-					cards[2].trailText ? undefined : cards[2].supportingContent
-				}
 			/>
 		</LI>
 	</UL>
