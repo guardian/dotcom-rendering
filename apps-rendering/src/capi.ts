@@ -215,6 +215,11 @@ const capiDateTimeToDate = (date: CapiDateTime): Option<Date> =>
 const maybeCapiDate = (date: CapiDateTime | undefined): Option<Date> =>
 	pipe(date, fromNullable, andThen(capiDateTimeToDate));
 
+/**
+ * Return a mock `Newsletter` if `content` contains a newsletter tag
+ * @param content the content to check for presence of a newsletter tag
+ * @returns a mock `Newsletter`, or `undefined` if `content` does not include a newsletter tag
+ */
 const getMockPromotedNewsletter = (
 	content: Content,
 ): Newsletter | undefined => {
