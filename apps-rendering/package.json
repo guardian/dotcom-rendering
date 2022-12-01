@@ -116,5 +116,8 @@
     "whatwg-fetch": "^3.6.2",
     "winston": "^3.8.2",
     "winston-daily-rotate-file": "^4.5.5"
+  },
+  "devDependencies": {
+    "fetch-mock": "^9.11.0"
   }
 }

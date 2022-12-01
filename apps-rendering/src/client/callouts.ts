@@ -33,9 +33,12 @@ function submitCallout(body: FormData, form: Element): void {
 			method: 'POST',
 			body: JSON.stringify(body),
 		},
-	)
-		.then(() => {
-			form.classList.add('js-callout-success');
+		).then((res) => {
+			if (res.ok) {
+				form.classList.add('js-callout--success');
+			} else {
+				form.classList.add('js-callout--failure');
+			}
 		})
 		.catch(() => {
 			form.classList.add('js-callout--failure');
@@ -74,9 +77,9 @@ const validate = (elements: FormElementType[]): boolean => {
 	let hasError = false;
 	elements.forEach(element => {
 		if (element.type === 'checkbox') {
-			const checkboxGroup = document.getElementById(`checkbox-group-${element.name}--mandatory`);
-			const checkedCheckboxes = checkboxGroup?.querySelectorAll(':checked');
-			if (!checkedCheckboxes?.length) {
+			const mandatoryCheckboxGroup = document.getElementById(`checkbox-group-${element.name}--mandatory`);
+			const checkedCheckboxes = mandatoryCheckboxGroup?.querySelectorAll(':checked');
+			if (mandatoryCheckboxGroup && !checkedCheckboxes?.length) {
 				document.getElementById(element.name)?.classList.add('callout-field--failure')
 				hasError = true;
 			} else { document.getElementById(element.name)?.classList.remove('callout-field--failure')};

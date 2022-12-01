@@ -166,6 +166,7 @@ export const calloutShare = css`
 	padding-right: ${remSpace[2]};
 	padding-bottom: ${remSpace[2]};
 	color: ${neutral[7]};
+	font-family: GuardianTextSans;
 	${darkModeCss`
 		color: ${neutral[86]};
 	`}
@@ -204,7 +205,9 @@ export const fieldLabel = css`
 		display: none;
 	}
 	&.callout-field--failure {
-		input { // TODO: Does this do something
+		select,
+		textarea,
+		input {
 			border: 2px solid ${error[400]};
 			${darkModeCss`
 				border: 2px solid ${error[500]};
