@@ -1,3 +1,5 @@
+import type { CalloutBlockElement } from '../../src/types/content';
+
 export const calloutCampaign: CalloutBlockElement = {
 	_type: 'model.dotcomrendering.pageElements.CalloutBlockElement',
 	elementId: 'mockId',

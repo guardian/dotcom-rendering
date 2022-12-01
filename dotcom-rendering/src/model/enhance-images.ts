@@ -1,4 +1,11 @@
 import { JSDOM } from 'jsdom';
+import type {
+	CAPIElement,
+	ImageBlockElement,
+	MultiImageBlockElement,
+	SubheadingBlockElement,
+	TextBlockElement,
+} from '../types/content';
 
 interface HalfWidthImageBlockElement extends ImageBlockElement {
 	role: 'halfWidth';

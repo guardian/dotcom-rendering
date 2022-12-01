@@ -33,18 +33,25 @@ const ColumnOfCards50_Card50 = ({
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
-	const big = cards[0];
+	const big = cards.slice(0, 1);
 	const remaining = cards.slice(1);
 
 	return (
 		<UL direction="row-reverse">
-			<LI percentage="50%" padSides={true} showDivider={true}>
-				<Card50Media50
-					trail={big}
-					showAge={showAge}
-					containerPalette={containerPalette}
-				/>
-			</LI>
+			{big.map((card) => (
+				<LI
+					percentage="50%"
+					padSides={true}
+					showDivider={true}
+					key={card.url}
+				>
+					<Card50Media50
+						trail={card}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				</LI>
+			))}
 			<LI percentage="50%">
 				<UL direction="row" wrapCards={true}>
 					{remaining.map((card) => {
@@ -84,7 +91,12 @@ const ColumnOfCards50_Card25_Card25 = ({
 		<UL direction="row-reverse">
 			{bigs.reverse().map((big) => {
 				return (
-					<LI percentage="25%" padSides={true} showDivider={true}>
+					<LI
+						percentage="25%"
+						padSides={true}
+						showDivider={true}
+						key={big.url}
+					>
 						<Card25Media25Tall
 							trail={big}
 							showAge={showAge}
@@ -139,6 +151,7 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 							length - (length % columns),
 							columns,
 						)}
+						key={card.url}
 					>
 						<CardDefaultMedia // (check headline size)
 							trail={card}
@@ -180,9 +193,9 @@ export const DynamicSlow = ({
 		firstSliceLayout = 'oneVeryBig';
 		firstSliceCards = groupedTrails.veryBig.slice(0, 1);
 	} else if (groupedTrails.veryBig.length > 1) {
-		if (groupedTrails.veryBig[0].isBoosted) {
+		if (groupedTrails.veryBig[0]?.isBoosted) {
 			firstSliceLayout = 'TwoVeryBigsFirstBoosted';
-		} else if (groupedTrails.veryBig[1].isBoosted) {
+		} else if (groupedTrails.veryBig[1]?.isBoosted) {
 			firstSliceLayout = 'TwoVeryBigsSecondBoosted';
 		} else {
 			firstSliceLayout = 'twoVeryBigs';

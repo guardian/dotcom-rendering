@@ -201,11 +201,10 @@ try {
 					: 'unknown';
 
 				// Write the new fixture data
-				const contents = `${HEADER}export const images: ${type} = ${JSON.stringify(
-					images,
-					null,
-					4,
-				)}`;
+				const contents = `${HEADER}
+				import type { ImageBlockElement } from '../../src/types/content';
+
+				export const images: ${type} = ${JSON.stringify(images, null, 4)}`;
 				fs.writeFileSync(
 					`${root}/fixtures/generated/images.ts`,
 					contents,

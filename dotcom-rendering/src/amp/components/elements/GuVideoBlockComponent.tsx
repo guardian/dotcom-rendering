@@ -1,4 +1,5 @@
 import React from 'react';
+import type { GuVideoBlockElement } from '../../../types/content';
 import { Caption } from '../Caption';
 
 export const GuVideoBlockComponent: React.FC<{

@@ -31,6 +31,9 @@
                         "$ref": "#/definitions/CalloutBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/CalloutBlockElementV2"
+                    },
+                    {
                         "$ref": "#/definitions/ChartAtomBlockElement"
                     },
                     {
@@ -667,6 +670,7 @@
             ]
         },
         "RoleType": {
+            "description": "Affects how an image is placed.\n\nAlso known as “weighting” in Composer, but we respect the CAPI naming.",
             "enum": [
                 "halfWidth",
                 "immersive",
@@ -1130,6 +1134,92 @@
                 "options",
                 "required",
                 "type"
+            ]
+        },
+        "CalloutBlockElementV2": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.CalloutBlockElementV2"
+                    ]
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "calloutsUrl": {
+                    "type": "string"
+                },
+                "activeFrom": {
+                    "type": "number"
+                },
+                "activeUntil": {
+                    "type": "number"
+                },
+                "displayOnSensitive": {
+                    "type": "boolean"
+                },
+                "formId": {
+                    "type": "number"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "tagName": {
+                    "type": "string"
+                },
+                "formFields": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/CampaignFieldText"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldTextArea"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldFile"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldRadio"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldCheckbox"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldSelect"
+                            }
+                        ]
+                    }
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                },
+                "isNonCollapsible": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "_type",
+                "activeFrom",
+                "calloutsUrl",
+                "description",
+                "displayOnSensitive",
+                "elementId",
+                "formFields",
+                "formId",
+                "id",
+                "isNonCollapsible",
+                "tagName",
+                "title"
             ]
         },
         "ChartAtomBlockElement": {
@@ -1933,11 +2023,11 @@
             ]
         },
         "Weighting": {
+            "description": "This duplicate type is unfortunate, but the image sources come lowercase\nNote, 'richLink' is used internally but does not exist upstream.",
             "enum": [
                 "halfwidth",
                 "immersive",
                 "inline",
-                "richLink",
                 "showcase",
                 "supporting",
                 "thumbnail"
@@ -2582,7 +2672,16 @@
                     "type": "string"
                 },
                 "role": {
-                    "$ref": "#/definitions/Weighting"
+                    "enum": [
+                        "halfWidth",
+                        "immersive",
+                        "inline",
+                        "richLink",
+                        "showcase",
+                        "supporting",
+                        "thumbnail"
+                    ],
+                    "type": "string"
                 }
             },
             "required": [
@@ -3557,6 +3656,9 @@
                             },
                             {
                                 "$ref": "#/definitions/CalloutBlockElement"
+                            },
+                            {
+                                "$ref": "#/definitions/CalloutBlockElementV2"
                             },
                             {
                                 "$ref": "#/definitions/ChartAtomBlockElement"

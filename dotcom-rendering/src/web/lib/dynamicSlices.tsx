@@ -38,17 +38,23 @@ export const Card100 = ({
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-}) => (
-	<UL>
-		<LI padSides={true}>
-			<Card100Media75
-				trail={cards[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-		</LI>
-	</UL>
-);
+}) => {
+	const card100 = cards.slice(0, 1);
+
+	return (
+		<UL>
+			{card100.map((trail) => (
+				<LI padSides={true}>
+					<Card100Media75
+						trail={trail}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
 
 /* ._________________._________________.
  * |#################|#################|
@@ -63,24 +69,23 @@ export const Card50_Card50 = ({
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="50%" padSides={true}>
-			<Card50Media50Tall
-				trail={cards[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-		</LI>
-		<LI percentage="50%" padSides={true} showDivider={true}>
-			<Card50Media50Tall
-				trail={cards[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-		</LI>
-	</UL>
-);
+}) => {
+	const cards50 = cards.slice(0, 2);
+
+	return (
+		<UL direction="row" padBottom={true}>
+			{cards50.map((trail, index) => (
+				<LI percentage="50%" padSides={true} showDivider={index !== 0}>
+					<Card50Media50Tall
+						trail={trail}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
 
 /* ._________________________._________.
  * |         ################|#########|
@@ -95,24 +100,33 @@ export const Card75_Card25 = ({
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="75%" padSides={true}>
-			<Card75Media50Right
-				trail={cards[0]}
-				showAge={showAge}
-				containerPalette={containerPalette}
-			/>
-		</LI>
-		<LI percentage="25%" padSides={true} showDivider={true}>
-			<Card25Media25
-				trail={cards[1]}
-				showAge={showAge}
-				containerPalette={containerPalette}
-			/>
-		</LI>
-	</UL>
-);
+}) => {
+	const card75 = cards.slice(0, 1);
+	const card25 = cards.slice(1, 2);
+
+	return (
+		<UL direction="row" padBottom={true}>
+			{card75.map((trail) => (
+				<LI percentage="75%" padSides={true}>
+					<Card75Media50Right
+						trail={trail}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				</LI>
+			))}
+			{card25.map((trail) => (
+				<LI percentage="25%" padSides={true} showDivider={true}>
+					<Card25Media25
+						trail={trail}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
 
 /* ._________________________._________.
  * |#########|###############          |
@@ -127,24 +141,33 @@ export const Card25_Card75 = ({
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="25%" padSides={true}>
-			<Card25Media25
-				trail={cards[0]}
-				showAge={showAge}
-				containerPalette={containerPalette}
-			/>
-		</LI>
-		<LI percentage="75%" padSides={true} showDivider={true}>
-			<Card75Media50Left
-				trail={cards[1]}
-				showAge={showAge}
-				containerPalette={containerPalette}
-			/>
-		</LI>
-	</UL>
-);
+}) => {
+	const card25 = cards.slice(0, 1);
+	const card75 = cards.slice(1, 2);
+
+	return (
+		<UL direction="row" padBottom={true}>
+			{card25.map((trail) => (
+				<LI percentage="25%" padSides={true}>
+					<Card25Media25
+						trail={trail}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				</LI>
+			))}
+			{card75.map((trail) => (
+				<LI percentage="75%" padSides={true} showDivider={true}>
+					<Card75Media50Left
+						trail={trail}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
 
 /* ._______________________.___________.
  * |#######################|###########|
@@ -159,24 +182,33 @@ export const Card66_Card33 = ({
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-}) => (
-	<UL direction="row">
-		<LI percentage="66.666%" padSides={true}>
-			<Card66Media66
-				trail={cards[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-		</LI>
-		<LI percentage="33.333%" padSides={true} showDivider={true}>
-			<Card33Media33
-				trail={cards[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-		</LI>
-	</UL>
-);
+}) => {
+	const card66 = cards.slice(0, 1);
+	const card33 = cards.slice(1, 2);
+
+	return (
+		<UL direction="row">
+			{card66.map((trail) => (
+				<LI percentage="66.666%" padSides={true}>
+					<Card66Media66
+						trail={trail}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</LI>
+			))}
+			{card33.map((trail) => (
+				<LI percentage="33.333%" padSides={true} showDivider={true}>
+					<Card33Media33
+						trail={trail}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
 
 /* ._________________.________.________.
  * |#################|########|########|
@@ -191,31 +223,34 @@ export const Card50_Card25_Card25 = ({
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="50%" padSides={true}>
-			<Card50Media50
-				trail={cards[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-		</LI>
-		<LI percentage="25%" padSides={true} showDivider={true}>
-			<Card25Media25
-				trail={cards[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-		</LI>
-		<LI percentage="25%" padSides={true} showDivider={true}>
-			<Card25Media25
-				trail={cards[2]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-		</LI>
-	</UL>
-);
+}) => {
+	const card50 = cards.slice(0, 1);
+	const cards25 = cards.slice(1, 3);
+
+	return (
+		<UL direction="row" padBottom={true}>
+			{card50.map((trail) => (
+				<LI percentage="50%" padSides={true}>
+					<Card50Media50
+						trail={trail}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</LI>
+			))}
+
+			{cards25.map((trail) => (
+				<LI percentage="25%" padSides={true} showDivider={true}>
+					<Card25Media25
+						trail={trail}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
 
 /* ._________________.
  * |#################|
@@ -232,16 +267,19 @@ export const Card100PictureTop = ({
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
-	if (!cards[0]) return null;
+	const card100 = cards.slice(0, 1);
+
 	return (
 		<UL padBottom={true}>
-			<LI percentage="100%" padSides={true}>
-				<Card100Media100
-					trail={cards[0]}
-					showAge={showAge}
-					containerPalette={containerPalette}
-				/>
-			</LI>
+			{card100.map((card) => (
+				<LI percentage="100%" padSides={true}>
+					<Card100Media100
+						trail={cards[0]}
+						showAge={showAge}
+						containerPalette={containerPalette}
+					/>
+				</LI>
+			))}
 		</UL>
 	);
 };
@@ -253,7 +291,6 @@ export const Card100PictureTop = ({
  * |_______############################|
  */
 export const Card100PictureRight = ({
-	// Card100Media75
 	cards,
 	showAge,
 	containerPalette,
@@ -262,16 +299,19 @@ export const Card100PictureRight = ({
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
-	if (!cards[0]) return null;
+	const card100 = cards.slice(0, 1);
+
 	return (
 		<UL padBottom={true}>
-			<LI percentage="100%" padSides={true}>
-				<Card100Media75
-					trail={cards[0]}
-					showAge={showAge}
-					containerPalette={containerPalette}
-				/>
-			</LI>
+			{card100.map((card) => (
+				<LI percentage="100%" padSides={true}>
+					<Card100Media75
+						trail={card}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</LI>
+			))}
 		</UL>
 	);
 };

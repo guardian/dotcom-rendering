@@ -444,9 +444,9 @@ export const DynamicFast = ({
 		firstSliceLayout = 'oneVeryBig';
 		firstSliceCards = groupedTrails.veryBig.slice(0, 1);
 	} else if (groupedTrails.veryBig.length > 1) {
-		if (groupedTrails.veryBig[0].isBoosted) {
+		if (groupedTrails.veryBig[0]?.isBoosted) {
 			firstSliceLayout = 'TwoVeryBigsFirstBoosted';
-		} else if (groupedTrails.veryBig[1].isBoosted) {
+		} else if (groupedTrails.veryBig[1]?.isBoosted) {
 			firstSliceLayout = 'TwoVeryBigsSecondBoosted';
 		} else {
 			firstSliceLayout = 'twoVeryBigs';
@@ -487,7 +487,7 @@ export const DynamicFast = ({
 			break;
 		}
 		case 1: {
-			if (bigs[0].isBoosted) {
+			if (bigs[0]?.isBoosted) {
 				secondSliceLayout = 'oneBigBoosted';
 				secondSliceCards = [
 					...bigs.slice(0, 1),
@@ -503,7 +503,7 @@ export const DynamicFast = ({
 			break;
 		}
 		case 2: {
-			if (bigs[0].isBoosted) {
+			if (bigs[0]?.isBoosted) {
 				secondSliceLayout = 'twoOrMoreBigsFirstBoosted';
 				secondSliceCards = [
 					...bigs,
@@ -519,7 +519,7 @@ export const DynamicFast = ({
 			break;
 		}
 		case 3: {
-			if (bigs[0].isBoosted) {
+			if (bigs[0]?.isBoosted) {
 				secondSliceLayout = 'twoOrMoreBigsFirstBoosted';
 				secondSliceCards = [
 					...bigs,
@@ -535,7 +535,7 @@ export const DynamicFast = ({
 			break;
 		}
 		default: {
-			if (bigs[0].isBoosted) {
+			if (bigs[0]?.isBoosted) {
 				secondSliceLayout = 'twoOrMoreBigsFirstBoosted';
 				secondSliceCards = [
 					...bigs,

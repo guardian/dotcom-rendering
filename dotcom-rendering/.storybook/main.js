@@ -2,19 +2,18 @@ const path = require('path');
 const webpack = require('webpack');
 
 // Generate dynamic Card and Layout stories
-require('../dotcom-rendering/scripts/gen-stories/gen-stories');
+require('../scripts/gen-stories/gen-stories');
 
 /** @type {import("@storybook/react/types").StorybookConfig} */
 module.exports = {
+	features: {
+		// used in composition
+		buildStoriesJson: true,
+	},
 	core: {
 		builder: 'webpack5',
 	},
-	stories: [
-		'../apps-rendering/src/**/*.stories.@(js|mdx|ts|tsx)',
-		'../dotcom-rendering/src/**/*.stories.@(tsx)',
-		'../dotcom-rendering/stories/**/*.stories.@(tsx)',
-		'../common-rendering/src/**/*.stories.@(tsx)',
-	],
+	stories: ['../src/**/*.stories.@(tsx)', '../stories/**/*.stories.@(tsx)'],
 	addons: [
 		'@storybook/addon-essentials',
 		'storybook-addon-turbo-build',
@@ -41,8 +40,7 @@ module.exports = {
 	],
 	webpackFinal: async (config) => {
 		// Get project specific webpack options
-		config = dcrWebpack(config);
-		config = arWebpack(config);
+		config = webpackConfig(config);
 
 		// Global options for webpack
 		config.resolve.extensions.push('.ts', '.tsx');
@@ -65,7 +63,7 @@ module.exports = {
 	}),
 };
 
-const dcrWebpack = (config) => {
+const webpackConfig = (config) => {
 	const rules = config.module.rules;
 
 	// Mock JSDOM for storybook - it relies on native node.js packages
@@ -74,22 +72,24 @@ const dcrWebpack = (config) => {
 
 	// log4js tries to call "fs" in storybook -- we can ignore it
 	config.resolve.alias[
-		path.resolve(__dirname, '../dotcom-rendering/src/server/lib/logging.ts')
+		path.resolve(__dirname, '../src/server/lib/logging.ts')
 	] = path.resolve(__dirname, './mocks/log4js.js');
 
 	// SecureSignup uses @emotion/cache and @emotion/server - can't be used in storybook
 	config.resolve.alias[
-		path.resolve(__dirname, '../dotcom-rendering/src/web/components/SecureSignup.tsx')
-	] = path.resolve(__dirname, '../dotcom-rendering/__mocks__/SecureSignupMock.tsx');
+		path.resolve(__dirname, '../src/web/components/SecureSignup.tsx')
+	] = path.resolve(__dirname, '../__mocks__/SecureSignupMock.tsx');
 
 	// Support typescript in Storybook
 	// https://storybook.js.org/docs/configurations/typescript-config/
 	rules.push({
 		test: /\.[jt]sx?|mjs$/,
-		include: path.resolve(__dirname, '../dotcom-rendering'),
-		exclude:
-			require('../dotcom-rendering/scripts/webpack/webpack.config.browser')
-				.babelExclude,
+		include: [
+			path.resolve(__dirname, '../'),
+			path.resolve(__dirname, '../../common-rendering'),
+		],
+		exclude: require('../scripts/webpack/webpack.config.browser')
+			.babelExclude,
 		use: [
 			{
 				loader: 'babel-loader',
@@ -127,66 +127,13 @@ const dcrWebpack = (config) => {
 		use: ['desvg-loader/react', 'svg-loader'],
 	});
 
-	config.resolve.alias = {
-		...config.resolve.alias,
-	};
-
-	return config;
-};
-
-const arWebpack = (config) => {
-	const rules = config.module.rules;
-
-	rules.push({
-		test: /\.tsx?$/,
-		include: [
-			path.resolve(__dirname, '../apps-rendering'),
-			path.resolve(__dirname, '../common-rendering'),
-		],
-		use: [
-			{
-				loader: 'babel-loader',
-				options: {
-					presets: [
-						[
-							'@babel/preset-env',
-							{
-								// Babel recommends installing corejs as a peer dependency
-								// and specifying the version used here
-								// https://babeljs.io/docs/en/babel-preset-env#usebuiltins
-								// This should automatically inject polyfills as needed,
-								// based on our code and the browserslist in package.json
-								useBuiltIns: 'usage',
-								corejs: 3,
-								modules: false,
-								targets: { esmodules: true },
-							},
-						],
-					],
-				},
-			},
-			{
-				loader: 'ts-loader',
-				options: {
-					configFile: 'apps-rendering/config/tsconfig.client.json',
-				},
-			},
-		],
-	});
-
 	config.resolve.modules = [
 		...((config && config.resolve && config.resolve.modules) || []),
-		path.resolve(__dirname, '../apps-rendering/src'),
-		path.resolve(__dirname, '../common-rendering/src'),
+		path.resolve(__dirname, '../../common-rendering/src'),
 	];
 
 	config.resolve.alias = {
 		...config.resolve.alias,
-		logger: path.resolve(
-			__dirname,
-			`../apps-rendering/src/logger/clientDev`,
-		),
-		Buffer: 'buffer',
 	};
 
 	return config;

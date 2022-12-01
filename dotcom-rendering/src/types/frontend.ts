@@ -2,6 +2,7 @@ import type { EditionId } from '../web/lib/edition';
 import type { BadgeType } from './badge';
 import type { CommercialProperties } from './commercial';
 import type { ConfigType } from './config';
+import { CAPIElement, Newsletter } from './content';
 import type { FooterType } from './footer';
 import type { CAPIOnwards } from './onwards';
 import type { TagType } from './tag';
