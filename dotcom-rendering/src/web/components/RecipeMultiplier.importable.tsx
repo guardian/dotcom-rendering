@@ -36,10 +36,6 @@ const isUnit = (unit: string): unit is typeof units[number] =>
 
 const isServer = typeof document === 'undefined';
 
-/** Pick any numeric value or range, followed by its unit */
-const RECIPE_ELEMENTS =
-	/\b(?<value>(?:\d+|\d+-\d+|¼|½|\d+\/\d+))(?:(?<separator> ?)(?<unit>[a-z]+?\b)|(?=<))/i;
-
 /** These values should not update based on servings  */
 const constants = [
 	's',
@@ -63,8 +59,44 @@ const isConstant = (time?: string): time is typeof constants[number] =>
 
 const fractions = new Map([
 	['½', 0.5],
+	['⅓', 0.3333],
+	['⅔', 0.6667],
 	['¼', 0.25],
+	['¾', 0.75],
+	['⅕', 0.2],
+	['⅖', 0.4],
+	['⅗', 0.6],
+	['⅘', 0.8],
+	['⅙', 0.1667],
+	['⅚', 0.8333],
+	['⅐', 0.1429],
+	['⅛', 0.125],
+	['⅜', 0.375],
+	['⅝', 0.625],
+	['⅞', 0.875],
+	['⅑', 0.1111],
+	['⅒', 0.1],
 ]);
+
+/** Pick any numeric value or range, followed by its unit */
+const RECIPE_ELEMENTS = new RegExp(
+	[
+		// Start after a word is broken, or Makes / Serves
+		`(?:${['', 'Serves ', 'Makes '].join('|')})`,
+		// `value` capturing group
+		`(?<value>${[
+			'\\d+',
+			'\\d+-\\d+',
+			'\\d+/\\d+',
+			...fractions.keys(),
+		].join('|')})`,
+		// `separator` capturing group
+		'(?:(?<separator> ?)',
+		// `unit` capturing group
+		'(?<unit>[a-z]+?\\b)|(?=<))',
+	].join(''),
+	'i',
+);
 
 const serves = isServer
 	? 1
