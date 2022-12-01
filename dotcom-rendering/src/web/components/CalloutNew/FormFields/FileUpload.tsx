@@ -53,7 +53,7 @@ const customUpload = (format: ArticleFormat): SerializedStyles => css`
 	height: ${remHeight.ctaXsmall}rem;
 	min-height: ${remHeight.ctaXsmall}rem;
 	padding: ${space[3]}px;
-	margin: ${space[3]}px ${space[3]}px ${space[3]}px 0px;
+	margin: ${space[3]}px ${space[3]}px 0px 0px;
 	border-radius: ${remHeight.ctaMedium}rem;
 	${textSans.medium({ fontWeight: 'bold' })};
 	width: fit-content;

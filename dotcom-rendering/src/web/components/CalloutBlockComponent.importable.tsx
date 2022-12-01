@@ -46,6 +46,7 @@ const calloutDetailsStyles = css`
 const summaryStyles = css`
 	padding-left: ${space[2]}px;
 	padding-right: ${space[2]}px;
+	display: block;
 	/* Removing default styles from summery tag */
 	ft ::-webkit-details-marker {
 		display: none;
