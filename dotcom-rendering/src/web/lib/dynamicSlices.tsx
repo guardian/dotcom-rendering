@@ -1,18 +1,16 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
-import type {
-	DCRContainerPalette,
-	DCRContainerType,
-	DCRGroupedTrails,
-} from '../../types/front';
+import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import { LI } from '../components/Card/components/LI';
 import { UL } from '../components/Card/components/UL';
-import { FrontCard } from '../components/FrontCard';
 import {
 	Card100Media100,
 	Card100Media75,
 	Card25Media25,
+	Card33Media33,
+	Card50Media50,
 	Card50Media50Tall,
+	Card66Media66,
 	Card75Media50Left,
 	Card75Media50Right,
 } from './cardWrappers';
@@ -35,27 +33,18 @@ import {
 export const Card100 = ({
 	cards,
 	containerPalette,
-	containerType,
 	showAge,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
-	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => (
 	<UL>
 		<LI padSides={true}>
-			<FrontCard
+			<Card100Media75
 				trail={cards[0]}
 				containerPalette={containerPalette}
-				containerType={containerType}
 				showAge={showAge}
-				imagePosition="right"
-				imagePositionOnMobile="top"
-				imageSize="jumbo"
-				headlineSize="huge"
-				headlineSizeOnMobile="large"
-				trailText={cards[0].trailText}
 			/>
 		</LI>
 	</UL>
@@ -165,33 +154,25 @@ export const Card25_Card75 = ({
 export const Card66_Card33 = ({
 	cards,
 	containerPalette,
-	containerType,
 	showAge,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
-	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => (
 	<UL direction="row">
 		<LI percentage="66.666%" padSides={true}>
-			<FrontCard // Card66Media66
+			<Card66Media66
 				trail={cards[0]}
 				containerPalette={containerPalette}
-				containerType={containerType}
 				showAge={showAge}
-				trailText={cards[0].trailText}
-				imagePositionOnMobile="top"
 			/>
 		</LI>
 		<LI percentage="33.333%" padSides={true} showDivider={true}>
-			<FrontCard // Card33Media33
+			<Card33Media33
 				trail={cards[1]}
 				containerPalette={containerPalette}
-				containerType={containerType}
 				showAge={showAge}
-				trailText={cards[1].trailText}
-				imagePositionOnMobile="left"
 			/>
 		</LI>
 	</UL>
@@ -205,59 +186,32 @@ export const Card66_Card33 = ({
 export const Card50_Card25_Card25 = ({
 	cards,
 	containerPalette,
-	containerType,
 	showAge,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
-	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => (
 	<UL direction="row" padBottom={true}>
 		<LI percentage="50%" padSides={true}>
-			<FrontCard // Card50Media50
+			<Card50Media50
 				trail={cards[0]}
 				containerPalette={containerPalette}
-				containerType={containerType}
 				showAge={showAge}
-				headlineSize="large"
-				imagePosition="top"
-				imagePositionOnMobile="top"
-				supportingContent={cards[0].supportingContent}
 			/>
 		</LI>
 		<LI percentage="25%" padSides={true} showDivider={true}>
-			<FrontCard // Card25Media25
+			<Card25Media25
 				trail={cards[1]}
 				containerPalette={containerPalette}
-				containerType={containerType}
 				showAge={showAge}
-				trailText={
-					cards[1]?.supportingContent &&
-					cards[1].supportingContent.length > 0
-						? undefined
-						: cards[1].trailText
-				}
-				supportingContent={
-					cards[1].trailText ? undefined : cards[1].supportingContent
-				}
 			/>
 		</LI>
 		<LI percentage="25%" padSides={true} showDivider={true}>
-			<FrontCard // Card25Media25
+			<Card25Media25
 				trail={cards[2]}
 				containerPalette={containerPalette}
-				containerType={containerType}
 				showAge={showAge}
-				trailText={
-					cards[2]?.supportingContent &&
-					cards[2].supportingContent.length > 0
-						? undefined
-						: cards[2].trailText
-				}
-				supportingContent={
-					cards[2].trailText ? undefined : cards[2].supportingContent
-				}
 			/>
 		</LI>
 	</UL>

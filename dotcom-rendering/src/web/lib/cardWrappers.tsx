@@ -194,3 +194,33 @@ export const Card50Media50Tall = ({
 		/>
 	);
 };
+export const Card66Media66 = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard // Card66Media66
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			trailText={trail.trailText}
+			imagePositionOnMobile="top"
+		/>
+	);
+};
+export const Card33Media33 = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			trailText={trail.trailText}
+			imagePositionOnMobile="left"
+		/>
+	);
+};
