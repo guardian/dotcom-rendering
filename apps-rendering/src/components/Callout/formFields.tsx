@@ -10,6 +10,7 @@ import {
 	Label,
 	InlineError,
 } from '@guardian/source-react-components';
+import { logger } from '../../logger';
 import CheckboxInput from 'components/CheckboxInput';
 import FileInput from 'components/FileInput';
 import RadioInput from 'components/RadioInput';
@@ -70,6 +71,7 @@ const FieldError = (): ReactElement => (
 	);
 
 export const renderField = (
+	formId: number,
 	{ type, label, description, mandatory, options, id }: FormField,
 	disableInput: boolean,
 	format: ArticleFormat,
@@ -118,6 +120,7 @@ export const renderField = (
 						hideLabel
 						cssOverrides={textareaStyles}
 						disabled={disableInput}
+						optional={!mandatory}
 					/>
 				</FormField>
 			);
@@ -181,7 +184,7 @@ export const renderField = (
 			</FormField>
 			);
 		default:
-			// TODO: Log an error here
+			logger.error(`Invalid field ${type} provided for callout ${formId}`);
 			return null;
 	}
 };

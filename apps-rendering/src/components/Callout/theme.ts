@@ -73,7 +73,9 @@ export const darkTheme = {
 	radio: radioDarkTheme,
 };
 
-const getPrefersDark = (): boolean =>
-	window.matchMedia('(prefers-color-scheme: dark)').matches;
+const getPrefersDark = (): boolean => {
+	if (typeof window === "undefined") return false;
+	return window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
 
 export const getTheme = (): Theme => (getPrefersDark() ? darkTheme : {});
