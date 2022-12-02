@@ -94,6 +94,11 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 			? item.promotedNewsletter.value
 			: undefined;
 
+	const regionalFocusText = newsletter?.regionFocus
+		? `${newsletter.regionFocus} Focused`
+		: '';
+	const showRegionalFocus = Boolean(regionalFocusText);
+
 	return (
 		<main css={backgroundStyles(format)}>
 			<article className="js-article" css={gridContainerStyles}>
@@ -104,11 +109,10 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 					/>
 				</header>
 				<section css={contentRow}>
-					{!!newsletter && (
+					{showRegionalFocus && (
 						<div css={detailBlockStyles}>
 							<SvgNewsletter size="xsmall" />
-							<b>{newsletter.frequency}</b>
-							{/* TO DO - use regional focus, when on the MAPI type */}
+							<b>{regionalFocusText}</b>
 						</div>
 					)}
 					<Headline item={item} />

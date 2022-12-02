@@ -101,6 +101,8 @@ export const partialNewsletterItem: Partial<Standard> = {
 		frequency: 'Weekly',
 		theme: 'lifestyle',
 		successDescription: "We'll send you Fashion Statement every week",
+		regionFocus:'UK',
+		paused: false,
 	}),
 	branding: none,
 };
