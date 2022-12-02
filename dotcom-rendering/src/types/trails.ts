@@ -39,7 +39,7 @@ export interface CAPITrailType extends BaseTrailType {
 	format: CAPIFormat;
 	/**
 	 * @deprecated This type must exist as it's passed by frontend, but we shouldn't use it.
-	 * We should remove this properties upstream in the future
+	 * We should remove this property upstream in the future
 	 */
 	designType: string;
 	/**
