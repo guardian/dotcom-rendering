@@ -83,7 +83,15 @@ const interceptYouTubeEmbed = ({
 	);
 };
 
-const muteVideo = (iframeSelector) => {
+/**
+ * Mutes the YouTube player at the given iframe
+ *
+ * YouTube will mute all players on the page so it is sufficient to
+ * mute for one video on a page with multiple videos.
+ *
+ * @param {string} iframeSelector
+ */
+const muteYouTube = (iframeSelector) => {
 	const getIframeBody = () => {
 		return cy
 			.get(iframeSelector, { timeout: 30000 })
@@ -91,12 +99,15 @@ const muteVideo = (iframeSelector) => {
 			.should('not.be.empty')
 			.then(cy.wrap);
 	};
-	getIframeBody().find('.ytp-mute-button', { timeout: 10000 }).then((muteButton) => {
-		if (muteButton.attr('data-title-no-tooltip').startsWith('Mute')) {
-			muteButton.trigger('click');
-		}
-	});
-}
+	getIframeBody()
+		.find('.ytp-mute-button', { timeout: 10000 })
+		.then((muteButton) => {
+			// the mute button is a toggle so check if muting is possible
+			if (muteButton.attr('data-title-no-tooltip').startsWith('Mute')) {
+				muteButton.trigger('click');
+			}
+		});
+};
 
 describe('YouTube Atom', function () {
 	beforeEach(function () {
@@ -143,6 +154,8 @@ describe('YouTube Atom', function () {
 		// Play video
 		cy.get(overlaySelector).click();
 
+		muteYouTube(`iframe[id^="youtube-video-S0CE1n-R3OY"]`);
+
 		cy.wait('@ophanCall', { timeout: 30000 });
 
 		cy.wait('@youtubeEmbed', { timeout: 30000 });
@@ -187,6 +200,8 @@ describe('YouTube Atom', function () {
 
 		// Play video
 		cy.get(overlaySelector).click();
+
+		muteYouTube(`iframe[id^="youtube-video-NtN-a6inr1E"]`);
 
 		cy.wait('@ophanCall', { timeout: 30000 });
 
@@ -257,6 +272,8 @@ describe('YouTube Atom', function () {
 		cy.get(mediaDiv).within(() => {
 			cy.get(overlaySelectorforMultipleVideos).click();
 		});
+
+		muteYouTube(`${mediaDiv} iframe[id^="youtube-video-qkC9z-dSAOE"]`);
 
 		// check if the main media video overplay is gone
 		cy.get(mediaDiv).within(() => {
@@ -337,6 +354,8 @@ describe('YouTube Atom', function () {
 		// Play video
 		cy.get(overlaySelector).click();
 
+		muteYouTube(`iframe[id^="youtube-video-NtN-a6inr1E"]`);
+
 		cy.wait('@ophanCall', { timeout: 30000 });
 
 		cy.wait('@youtubeEmbed', { timeout: 30000 });
@@ -382,6 +401,8 @@ describe('YouTube Atom', function () {
 		cy.get(mediaDiv).within(() => {
 			cy.get(overlaySelectorforMultipleVideos).click();
 		});
+
+		muteYouTube(`${mediaDiv} iframe[id^="youtube-video-qkC9z-dSAOE"]`);
 
 		// Scroll past the main media video to the third block
 		cy.get('.block')
