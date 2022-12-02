@@ -96,17 +96,12 @@ dev-legacy: clear clean-dist install
 cypress: export NODE_ENV=production
 cypress: clear clean-dist install build
 	$(call log, "starting frontend PROD server for Cypress")
-	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --browser chrome --spec "cypress/e2e/**/*"'
+	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
 
 cypress-open: export NODE_ENV=production
 cypress-open: clear clean-dist install build
-	$(call log, "starting frontend PROD server for Cypress")
-	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress open --browser chrome'
-
-cypress-arm64: export NODE_ENV=production
-cypress-arm64: clear clean-dist install build
-	$(call log, "starting frontend PROD server for Cypress")
-	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --spec "cypress/e2e/**/*"'
+	$(call log, "starting frontend PROD server and opening Cypress")
+	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress open --e2e --browser electron'
 
 ampValidation: export NODE_ENV=production
 ampValidation: clean-dist install build
