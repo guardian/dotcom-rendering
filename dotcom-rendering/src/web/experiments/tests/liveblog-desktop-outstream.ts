@@ -1,7 +1,7 @@
 import type { ABTest } from '@guardian/ab-core';
 
 export const liveblogDesktopOutstream: ABTest = {
-	id: 'IntegrateIma',
+	id: 'LiveblogDesktopOutstream',
 	start: '2022-12-02',
 	expiry: '2023-01-31',
 	author: 'Jake Lee Kennedy',
