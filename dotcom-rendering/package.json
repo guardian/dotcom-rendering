@@ -5,12 +5,6 @@
 	"license": "Apache-2.0",
 	"tocList": "README.md docs/contributing/**",
 	"private": true,
-	"workspaces": {
-		"nohoist": [
-			"html-minifier",
-			"html-minifier/**"
-		]
-	},
 	"scripts": {
 		"lint": "eslint . --ext .ts,.tsx --quiet && yarn lint-cypress",
 		"lint-cypress": "eslint ./cypress",
