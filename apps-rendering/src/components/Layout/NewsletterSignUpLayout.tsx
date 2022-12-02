@@ -3,6 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
+import { maybeRender } from '@guardian/common-rendering/src/lib';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	brandAlt,
@@ -89,10 +90,6 @@ interface Props {
 
 const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 	const format = getFormat(item);
-	const newsletter =
-		item.promotedNewsletter.kind === OptionKind.Some
-			? item.promotedNewsletter.value
-			: undefined;
 
 	return (
 		<main css={backgroundStyles(format)}>
@@ -104,17 +101,18 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 					/>
 				</header>
 				<section css={contentRow}>
-					{!!newsletter && (
+					{maybeRender(item.promotedNewsletter, (newsletter) => (
 						<div css={detailBlockStyles}>
 							<SvgNewsletter size="xsmall" />
 							<b>{newsletter.frequency}</b>
 							{/* TO DO - use regional focus, when on the MAPI type */}
 						</div>
-					)}
+					))}
+
 					<Headline item={item} />
 					<Standfirst item={item} />
 
-					{!!newsletter && (
+					{maybeRender(item.promotedNewsletter, (newsletter) => (
 						<div css={frequencyBlockStyles}>
 							<SvgClock size="xsmall" />
 
@@ -123,9 +121,9 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 								<b> {newsletter.frequency}</b>
 							</span>
 						</div>
-					)}
+					))}
 
-					{!!newsletter && (
+					{maybeRender(item.promotedNewsletter, (newsletter) => (
 						<InPageNewsletterSignup
 							newsletter={newsletter}
 							format={getFormat(item)}
@@ -135,6 +133,9 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 								</ArticleBody>
 							}
 						/>
+					))}
+					{item.promotedNewsletter.kind === OptionKind.None && (
+						<ArticleBody format={item}>{children}</ArticleBody>
 					)}
 				</section>
 			</article>
