@@ -4304,10 +4304,8 @@
                 }
             },
             "required": [
-                "designType",
                 "format",
                 "headline",
-                "pillar",
                 "url"
             ]
         },

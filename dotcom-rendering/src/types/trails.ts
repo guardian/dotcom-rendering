@@ -41,12 +41,12 @@ export interface CAPITrailType extends BaseTrailType {
 	 * @deprecated This type must exist as it's passed by frontend, but we shouldn't use it.
 	 * We should remove this property upstream in the future
 	 */
-	designType: string;
+	designType?: string;
 	/**
 	 * @deprecated This type must exist as it's passed by frontend, but we shouldn't use it.
-	 * We should remove this properties upstream in the future
+	 * We should remove this property upstream in the future
 	 */
-	pillar: string;
+	pillar?: string;
 	carouselImages?: { [key: string]: string };
 	isLiveBlog?: boolean;
 }
