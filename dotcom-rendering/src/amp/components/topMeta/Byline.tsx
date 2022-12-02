@@ -1,4 +1,5 @@
 import { getBylineComponentsFromTokens } from '../../../lib/byline';
+import type { TagType } from '../../../types/tag';
 import { bylineTokens } from '../../lib/byline-tokens';
 
 type Props = {

@@ -30,18 +30,18 @@ import { useAB } from '../lib/useAB';
 
 // Example usage of AB Tests
 // Used in the Cypress tests as smoke test of the AB tests framework integration
-const ABTestAPI = useAB();
+const ABTestAPI = useAB()?.api;
 
 // We can check if a user is in a variant, returns a boolean
 // ABTestTest being an ab test that was passed in via the ab test array
 const abTestDataAttr =
-    (ABTestAPI.isUserInVariant('AbTestTest', 'control') && 'ab-test-control') ||
-    (ABTestAPI.isUserInVariant('AbTestTest', 'variant') && 'ab-test-variant') ||
+    (ABTestAPI?.isUserInVariant('AbTestTest', 'control') && 'ab-test-control') ||
+    (ABTestAPI?.isUserInVariant('AbTestTest', 'variant') && 'ab-test-variant') ||
     'ab-test-not-in-test';
 
 // We can get the variant straight from a check for
 // whether the test is runnable
-const runnableTest = ABTestAPI.runnableTest(abTestTest);
+const runnableTest = ABTestAPI?.runnableTest(abTestTest);
 const variantFromRunnable =
     (runnableTest && runnableTest.variantToRun.id) || 'not-runnable';
 

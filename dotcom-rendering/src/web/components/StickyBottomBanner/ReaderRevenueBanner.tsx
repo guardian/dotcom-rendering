@@ -11,6 +11,7 @@ import type {
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useState } from 'react';
 import type { ArticleCounts } from '../../../lib/articleCount';
+import type { TagType } from '../../../types/tag';
 import { trackNonClickInteraction } from '../../browser/ga/ga';
 import { submitComponentEvent } from '../../browser/ophan/ophan';
 import {
@@ -179,8 +180,11 @@ export const canShowRRBanner: CanShowFunctionType<BannerProps> = async ({
 	const showSignInPrompt =
 		purchaseInfo && !isSignedIn && !signInBannerLastClosedAt;
 
+	const hasForceBannerParam = window.location.search.includes('force-banner');
+
 	if (
 		!showSignInPrompt &&
+		!hasForceBannerParam &&
 		engagementBannerLastClosedAt &&
 		subscriptionBannerLastClosedAt &&
 		withinLocalNoBannerCachePeriod()

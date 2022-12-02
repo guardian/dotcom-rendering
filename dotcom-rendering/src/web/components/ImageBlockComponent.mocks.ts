@@ -1,3 +1,5 @@
+import type { ImageBlockElement } from '../../types/content';
+
 export const image: ImageBlockElement = {
 	role: 'inline',
 	elementId: 'mockId',

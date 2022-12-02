@@ -37,7 +37,7 @@ export const One = () => (
 			groupedTrails={{
 				...defaultGroupedTrails,
 				snap: [],
-				standard: [...trails].slice(0, 1),
+				standard: trails.slice(0, 1),
 			}}
 			containerPalette="LongRunningPalette"
 		/>
@@ -58,7 +58,7 @@ export const Two = () => (
 			groupedTrails={{
 				...defaultGroupedTrails,
 				snap: [],
-				standard: [...trails].slice(0, 2),
+				standard: trails.slice(0, 2),
 			}}
 			containerPalette="LongRunningPalette"
 		/>
@@ -74,7 +74,7 @@ export const Three = () => (
 			groupedTrails={{
 				...defaultGroupedTrails,
 				snap: [],
-				standard: [...trails].slice(0, 3),
+				standard: trails.slice(0, 3),
 			}}
 			containerPalette="LongRunningPalette"
 		/>
@@ -90,7 +90,7 @@ export const Four = () => (
 			groupedTrails={{
 				...defaultGroupedTrails,
 				snap: [],
-				standard: [...trails].slice(0, 4),
+				standard: trails.slice(0, 4),
 			}}
 			containerPalette="LongRunningPalette"
 		/>
@@ -106,7 +106,7 @@ export const Five = () => (
 			groupedTrails={{
 				...defaultGroupedTrails,
 				snap: [],
-				standard: [...trails].slice(0, 5),
+				standard: trails.slice(0, 5),
 			}}
 			containerPalette="LongRunningPalette"
 		/>
@@ -127,7 +127,7 @@ export const Six = () => (
 			groupedTrails={{
 				...defaultGroupedTrails,
 				snap: [],
-				standard: [...trails].slice(0, 6),
+				standard: trails.slice(0, 6),
 			}}
 			containerPalette="LongRunningPalette"
 		/>
@@ -148,7 +148,7 @@ export const Seven = () => (
 			groupedTrails={{
 				...defaultGroupedTrails,
 				snap: [],
-				standard: [...trails].slice(0, 7),
+				standard: trails.slice(0, 7),
 			}}
 			containerPalette="LongRunningPalette"
 		/>
@@ -169,7 +169,7 @@ export const Eight = () => (
 			groupedTrails={{
 				...defaultGroupedTrails,
 				snap: [],
-				standard: [...trails].slice(0, 8),
+				standard: trails.slice(0, 8),
 			}}
 			containerPalette="LongRunningPalette"
 		/>
@@ -191,7 +191,7 @@ export const Nine = () => (
 			groupedTrails={{
 				...defaultGroupedTrails,
 				snap: [],
-				standard: [...trails].slice(0, 9),
+				standard: trails.slice(0, 9),
 			}}
 			containerPalette="LongRunningPalette"
 		/>
@@ -202,7 +202,7 @@ Nine.story = {
 };
 
 export const Boosted1 = () => {
-	const primary = [...trails].slice(0)[0];
+	const primary = trails[0];
 
 	return (
 		<Section
@@ -228,8 +228,8 @@ Boosted1.story = {
 };
 
 export const Boosted2 = () => {
-	const primary = [...trails].slice(0)[0];
-	const remaining = [...trails].slice(1, 2);
+	const primary = trails[0];
+	const remaining = trails.slice(1, 2);
 
 	return (
 		<Section
@@ -255,8 +255,8 @@ Boosted2.story = {
 };
 
 export const Boosted3 = () => {
-	const primary = [...trails].slice(0)[0];
-	const remaining = [...trails].slice(1, 3);
+	const primary = trails[0];
+	const remaining = trails.slice(1, 3);
 
 	return (
 		<Section
@@ -281,8 +281,8 @@ Boosted3.story = {
 };
 
 export const Boosted4 = () => {
-	const primary = [...trails].slice(0)[0];
-	const remaining = [...trails].slice(1, 4);
+	const primary = trails[0];
+	const remaining = trails.slice(1, 4);
 
 	return (
 		<Section
@@ -307,8 +307,8 @@ Boosted4.story = {
 };
 
 export const Boosted5 = () => {
-	const primary = [...trails].slice(0)[0];
-	const remaining = [...trails].slice(1, 5);
+	const primary = trails[0];
+	const remaining = trails.slice(1, 5);
 
 	return (
 		<Section
@@ -333,8 +333,8 @@ Boosted5.story = {
 };
 
 export const Boosted8 = () => {
-	const primary = [...trails].slice(0)[0];
-	const remaining = [...trails].slice(1, 8);
+	const primary = trails[0];
+	const remaining = trails.slice(1, 8);
 
 	return (
 		<Section
@@ -360,8 +360,8 @@ Boosted8.story = {
 };
 
 export const Boosted9 = () => {
-	const primary = [...trails].slice(0)[0];
-	const remaining = [...trails].slice(1, 9);
+	const primary = trails[0];
+	const remaining = trails.slice(1, 9);
 
 	return (
 		<Section
@@ -392,7 +392,7 @@ export const OneSnapThreeStandard = () => (
 			groupedTrails={{
 				...defaultGroupedTrails,
 				snap: [trails[0]],
-				standard: [...trails].slice(1, 4),
+				standard: trails.slice(1, 4),
 			}}
 			containerPalette="LongRunningPalette"
 		/>
@@ -407,8 +407,8 @@ export const ThreeSnapTwoStandard = () => (
 		<DynamicPackage
 			groupedTrails={{
 				...defaultGroupedTrails,
-				snap: [...trails].slice(0, 3),
-				standard: [...trails].slice(3, 5),
+				snap: trails.slice(0, 3),
+				standard: trails.slice(3, 5),
 			}}
 			containerPalette="LongRunningPalette"
 		/>
@@ -424,7 +424,7 @@ export const ThreeSnapTwoStandard2ndBoosted = () => (
 			groupedTrails={{
 				...defaultGroupedTrails,
 				snap: [trails[0], { ...trails[1], isBoosted: true }, trails[2]],
-				standard: [...trails].slice(3, 5),
+				standard: trails.slice(3, 5),
 			}}
 			containerPalette="LongRunningPalette"
 		/>

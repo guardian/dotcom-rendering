@@ -1,3 +1,4 @@
+import type { CAPIElement } from '../types/content';
 import { transformDots } from './transformDots';
 
 const checkForDots = (elements: CAPIElement[]): CAPIElement[] => {

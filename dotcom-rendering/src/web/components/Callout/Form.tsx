@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { text, textSans } from '@guardian/source-foundations';
 import { Button, Link } from '@guardian/source-react-components';
 import { useState } from 'react';
+import { CampaignFieldType } from '../../../types/content';
 import { FileUpload } from './FileUpload';
 import { MultiSelect } from './MultiSelect';
 import { Select } from './Select';

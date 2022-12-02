@@ -16,7 +16,7 @@ const Default: FC = () => (
 
 export default {
 	component: LastUpdated,
-	title: 'Common/Components/LastUpdated',
+	title: 'AR/LastUpdated',
 };
 
 export { Default };

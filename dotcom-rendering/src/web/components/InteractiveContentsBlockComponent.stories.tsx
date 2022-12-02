@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { NumberedList } from '../../../fixtures/generated/articles/NumberedList';
 import { enhanceInteractiveContentsElements } from '../../model/enhance-interactive-contents-elements';
+import { InteractiveContentsBlockElement } from '../../types/content';
 import { InteractiveContentsBlockComponent } from './InteractiveContentsBlockComponent';
 
 const interactiveContentsBlock = enhanceInteractiveContentsElements(

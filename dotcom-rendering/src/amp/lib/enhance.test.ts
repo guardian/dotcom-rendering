@@ -1,3 +1,4 @@
+import type { InteractiveAtomBlockElement } from '../../types/content';
 import { enhance } from './enhance';
 
 const getData = (): InteractiveAtomBlockElement => ({

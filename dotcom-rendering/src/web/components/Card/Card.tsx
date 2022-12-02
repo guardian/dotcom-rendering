@@ -117,6 +117,15 @@ const decideIfAgeShouldShow = ({
 	return false;
 };
 
+type RenderFooter = ({
+	displayAge,
+	displayLines,
+}: {
+	displayAge: boolean;
+	displayLines: boolean;
+	// eslint-disable-next-line @typescript-eslint/ban-types -- this signature is adequate
+}) => JSX.Element;
+
 const DecideFooter = ({
 	isOpinion,
 	hasSublinks,
@@ -126,7 +135,7 @@ const DecideFooter = ({
 	isOpinion: boolean;
 	hasSublinks?: boolean;
 	displayAge: boolean;
-	renderFooter: Function;
+	renderFooter: RenderFooter;
 }) => {
 	if (isOpinion && !hasSublinks) {
 		// Opinion cards without sublinks render the entire footer, including lines,
@@ -139,7 +148,7 @@ const DecideFooter = ({
 		displayAge,
 		displayLines: false,
 	});
-	// Note. Opinion cards always show the lines at the botom of the card (in CommentFooter)
+	// Note. Opinion cards always show the lines at the bottom of the card (in CommentFooter)
 };
 
 const CommentFooter = ({
@@ -151,7 +160,7 @@ const CommentFooter = ({
 	hasSublinks?: boolean;
 	palette: Palette;
 	displayAge: boolean;
-	renderFooter: Function;
+	renderFooter: RenderFooter;
 }) => {
 	return hasSublinks ? (
 		// For opinion cards with sublinks there is already a footer rendered inside that
@@ -177,6 +186,19 @@ const getImage = ({
 	if (avatarUrl) return { type: 'avatar', src: avatarUrl };
 	if (imageUrl) return { type: 'mainMedia', src: imageUrl };
 	return undefined;
+};
+
+const decideSublinkPosition = (
+	supportingContent?: DCRSupportingContent[],
+	imagePosition?: ImagePositionType,
+): 'inner' | 'outer' | 'none' => {
+	if (!supportingContent || supportingContent.length === 0) {
+		return 'none';
+	}
+	if (imagePosition === 'top' || supportingContent.length > 2) {
+		return 'outer';
+	}
+	return 'inner';
 };
 
 export const Card = ({
@@ -216,7 +238,10 @@ export const Card = ({
 	const palette = decidePalette(format, containerPalette);
 
 	const hasSublinks = supportingContent && supportingContent.length > 0;
-	const noOfSublinks = supportingContent?.length ?? 0;
+	const sublinkPosition = decideSublinkPosition(
+		supportingContent,
+		imagePosition,
+	);
 
 	const isOpinion =
 		format.design === ArticleDesign.Comment ||
@@ -252,7 +277,6 @@ export const Card = ({
 							// This a tag is initially rendered empty. It gets populated later
 							// after a fetch call is made to get all the counts for each Card
 							// on the page with a discussion (see FetchCommentCounts.tsx)
-							data-name="comment-count-marker"
 							data-discussion-id={discussionId}
 							data-format={JSON.stringify(format)}
 							data-is-dynamo={isDynamo ? 'true' : undefined}
@@ -395,6 +419,9 @@ export const Card = ({
 							<TrailTextWrapper
 								containerPalette={containerPalette}
 								format={format}
+								imagePosition={imagePosition}
+								imageSize={imageSize}
+								imageType={image?.type}
 							>
 								<div
 									dangerouslySetInnerHTML={{
@@ -409,13 +436,13 @@ export const Card = ({
 							displayAge={displayAge}
 							renderFooter={renderFooter}
 						/>
-
-						{hasSublinks && noOfSublinks <= 2 ? (
+						{hasSublinks && sublinkPosition === 'inner' ? (
 							<SupportingContent
 								supportingContent={supportingContent}
 								alignment="vertical"
 								containerPalette={containerPalette}
 								isDynamo={isDynamo}
+								parentFormat={format}
 							/>
 						) : (
 							<></>
@@ -423,9 +450,11 @@ export const Card = ({
 					</div>
 				</ContentWrapper>
 			</CardLayout>
-			{hasSublinks && noOfSublinks > 2 ? (
+
+			{hasSublinks && sublinkPosition === 'outer' ? (
 				<SupportingContent
 					supportingContent={supportingContent}
+					parentFormat={format}
 					containerPalette={containerPalette}
 					isDynamo={isDynamo}
 					alignment={
@@ -439,7 +468,7 @@ export const Card = ({
 			) : (
 				<></>
 			)}
-			{isOpinion && (
+			{isOpinion && !isDynamo && (
 				<CommentFooter
 					hasSublinks={hasSublinks}
 					displayAge={displayAge}

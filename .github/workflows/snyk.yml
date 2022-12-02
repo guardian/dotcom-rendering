@@ -37,7 +37,7 @@ jobs:
               env:
                   SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
               with:
-                  args: --org=the-guardian --project-name=${{ github.repository }} --file=yarn.lock --dev=true --prune-repeated-subdependencies --sarif-file-output=snyk-node.sarif
+                  args: --org=guardian-dotcom-n2y --project-name=${{ github.repository }} --file=yarn.lock --dev=true --prune-repeated-subdependencies --sarif-file-output=snyk-node.sarif
                   command: test
 
             - name: Upload result to GitHub Code Scanning
@@ -53,5 +53,5 @@ jobs:
               env:
                   SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
               with:
-                  args: --org=the-guardian --project-name=${{ github.repository }} --file=dotcom-rendering/yarn.lock --dev=true --prune-repeated-subdependencies
+                  args: --org=guardian-dotcom-n2y --project-name=${{ github.repository }} --file=dotcom-rendering/yarn.lock --dev=true --prune-repeated-subdependencies
                   command: monitor

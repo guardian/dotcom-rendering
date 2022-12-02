@@ -36,7 +36,7 @@ import { createElement as h } from 'react';
 import ReactDOM from 'react-dom';
 import { logger } from '../logger';
 import { hydrate as hydrateAtoms } from './atoms';
-import { initSignupForms } from './signupForm';
+import { initSignupForms } from './newsletterSignupForm';
 
 // ----- Run ----- //
 
@@ -465,7 +465,7 @@ initAudioAtoms();
 hydrateAtoms();
 richLinks();
 hydrateClickToView();
-initSignupForms();
+void initSignupForms();
 
 /*
  We run this last to help precisely position native elements over their placeholders in the webview.

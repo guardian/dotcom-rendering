@@ -3,6 +3,7 @@ import {
 	border,
 	from,
 	labs,
+	neutral,
 	space,
 	textSans,
 } from '@guardian/source-foundations';
@@ -167,7 +168,9 @@ export const LabsHeader = () => (
 						label="About"
 						links={[]}
 						id="paidfor"
-						overrideColor="black"
+						cssOverrides={css`
+							color: ${neutral[0]};
+						`}
 						dataLinkName=""
 					>
 						<About />

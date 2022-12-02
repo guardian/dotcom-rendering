@@ -4,6 +4,10 @@ import { Button } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
 import MinusIcon from '../../static/icons/minus.svg';
 import PlusIcon from '../../static/icons/plus.svg';
+import type {
+	CalloutBlockElement,
+	CalloutBlockElementV2,
+} from '../../types/content';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Form } from './Callout/Form';
@@ -129,7 +133,7 @@ export const CalloutEmbedBlockComponent = ({
 	callout,
 	format,
 }: {
-	callout: CalloutBlockElement;
+	callout: CalloutBlockElement | CalloutBlockElementV2;
 	format: ArticleFormat;
 }) => {
 	let expandFormButtonRef: HTMLButtonElement | null = null;

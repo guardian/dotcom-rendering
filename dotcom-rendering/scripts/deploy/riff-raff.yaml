@@ -23,7 +23,7 @@ deployments:
   rendering:
     type: autoscaling
     parameters:
-      bucket: aws-frontend-artifacts
+      bucketSsmKey: /account/services/dotcom-artifact.bucket
     dependencies:
       - frontend-static
       - frontend-cfn

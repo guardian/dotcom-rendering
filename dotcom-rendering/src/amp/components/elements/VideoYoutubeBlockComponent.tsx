@@ -1,4 +1,5 @@
 import React from 'react';
+import type { VideoYoutubeBlockElement } from '../../../types/content';
 import { getIdFromUrl } from '../../lib/get-video-id';
 import { Caption } from '../Caption';
 

@@ -35,7 +35,6 @@ const Byline: FC<Props> = ({ bylineHtml, ...format }) => {
 		case ArticleDesign.DeadBlog:
 			return <DeadBlogByline bylineHtml={bylineHtml} format={format} />;
 		case ArticleDesign.Editorial:
-		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return <CommentByline bylineHtml={bylineHtml} format={format} />;
 		case ArticleDesign.Analysis:

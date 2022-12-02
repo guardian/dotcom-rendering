@@ -80,7 +80,7 @@ export const LinkHeadline = ({
 	const palette = decidePalette(format);
 
 	return (
-		<h4 css={fontStyles(size)}>
+		<h3 css={fontStyles(size)}>
 			{!!kickerText && (
 				<Kicker
 					text={kickerText}
@@ -122,6 +122,6 @@ export const LinkHeadline = ({
 					)}
 				</>
 			)}
-		</h4>
+		</h3>
 	);
 };
