@@ -23,3 +23,4 @@ jobs:
         run: scripts/ci-deno.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CAPI_KEY: ${{ secrets.CAPI_KEY }}
