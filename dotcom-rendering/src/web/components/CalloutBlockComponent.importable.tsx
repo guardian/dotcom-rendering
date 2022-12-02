@@ -7,6 +7,7 @@ import {
 } from '@guardian/source-foundations';
 import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
+import type { CalloutBlockElement } from 'src/types/content';
 import { decidePalette } from '../lib/decidePalette';
 import { Deadline } from './CalloutNew/CalloutDeadline';
 import { CalloutDescription } from './CalloutNew/CalloutDescription';
