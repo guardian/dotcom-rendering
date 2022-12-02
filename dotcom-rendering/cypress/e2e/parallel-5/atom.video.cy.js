@@ -83,6 +83,21 @@ const interceptYouTubeEmbed = ({
 	);
 };
 
+const muteVideo = (iframeSelector) => {
+	const getIframeBody = () => {
+		return cy
+			.get(iframeSelector, { timeout: 30000 })
+			.its('0.contentDocument.body')
+			.should('not.be.empty')
+			.then(cy.wrap);
+	};
+	getIframeBody().find('.ytp-mute-button', { timeout: 10000 }).then((muteButton) => {
+		if (muteButton.attr('data-title-no-tooltip').startsWith('Mute')) {
+			muteButton.trigger('click');
+		}
+	});
+}
+
 describe('YouTube Atom', function () {
 	beforeEach(function () {
 		storage.local.set('gu.geo.override', 'GB');
