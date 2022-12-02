@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
+import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
@@ -242,14 +243,40 @@ export const DeadBlog = (): ReactElement => (
 DeadBlog.story = { name: 'DeadBlog ' };
 
 export const NewsletterSignup = (): ReactElement => (
-	<NewsletterSignUpLayout item={newsletterSignUp}>
-		{renderAll(
-			formatFromItem(newsletterSignUp, some(ArticleDisplay.Standard)),
-			Result.partition(newsletterSignUp.body).oks,
-		)}
-	</NewsletterSignUpLayout>
+	<>
+		<style>
+			{`.js-signup-form-container {
+			display:block !important;
+		}`}
+		</style>
+		<NewsletterSignUpLayout item={newsletterSignUp}>
+			{renderAll(
+				formatFromItem(newsletterSignUp, some(ArticleDisplay.Standard)),
+				Result.partition(newsletterSignUp.body).oks,
+			)}
+		</NewsletterSignUpLayout>
+	</>
 );
 NewsletterSignup.story = { name: 'NewsletterSignup' };
+
+export const NewsletterSignupFallback = (): ReactElement => (
+	<>
+		<style>
+			{`.js-signup-form-fallback-container {
+			display:block !important;
+		}`}
+		</style>
+		<NewsletterSignUpLayout item={newsletterSignUp}>
+			{renderAll(
+				formatFromItem(newsletterSignUp, some(ArticleDisplay.Standard)),
+				Result.partition(newsletterSignUp.body).oks,
+			)}
+		</NewsletterSignUpLayout>
+	</>
+);
+NewsletterSignupFallback.story = { name: 'NewsletterSignup (Form component not supported)' };
+
+
 export const Immersive = (): ReactElement => (
 	<ImmersiveLayout
 		item={{

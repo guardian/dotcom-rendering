@@ -129,9 +129,7 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 						<InPageNewsletterSignup
 							newsletter={newsletter}
 							format={getFormat(item)}
-							// show the fallback content by default until the signup feature
-							// is widely supported
-							initiallyRender={'fallback'}
+
 							fallbackContent={
 								<ArticleBody format={item}>
 									{children}
