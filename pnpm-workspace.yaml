@@ -1,0 +1,6 @@
+packages:
+  - "dotcom-rendering"
+  - "common-rendering"
+  - "apps-rendering"
+  - "storybooks"
+
