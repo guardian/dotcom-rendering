@@ -22,15 +22,6 @@ interface Props {
 	format: ArticleFormat;
 	newsletter: Newsletter;
 	/**
-	 * Whether to initialy render the form or the fallback content.
-	 * If not set, the "waitingContent" is rendered.
-	 *
-	 * If the fallback content is initially rendered, it will not be
-	 * replaced with the form if the client app supports the sign-up
-	 * feature.
-	 */
-	initiallyRender?: 'form' | 'fallback' | undefined;
-	/**
 	 * Content to render if the cliet app does not support the sign-up feature.
 	 * If not set, a default inline error is rendered.
 	 */
@@ -42,80 +33,49 @@ interface Props {
 	waitingContent?: JSX.Element;
 }
 
-const containerStyles = (
-	format: ArticleFormat,
-	initiallyRender: 'form' | 'fallback' | undefined,
-): SerializedStyles => css`
+const containerStyles = (format: ArticleFormat): SerializedStyles => css`
 	${darkModeCss`
 		background-color: ${background.newsletterSignUpFormDark(format)};
 		border-color: ${border.newsletterSignUpFormDark(format)};
 		color: ${text.newsletterSignUpFormDark(format)};
 	`}
-
 	margin-bottom: ${remSpace[4]};
-	display: ${initiallyRender === 'form' ? 'block' : 'none'};
 `;
 
-const fallbackContainerStyles = (
-	initiallyRender: 'form' | 'fallback' | undefined,
-): SerializedStyles => css`
-	display: ${initiallyRender === 'fallback' ? 'block' : 'none'};
-`;
-
-const loadingContainerStyles = (
-	initiallyRender: 'form' | 'fallback' | undefined,
-): SerializedStyles => css`
-	display: ${initiallyRender === undefined ? 'block' : 'none'};
+const initiallyHidden = css`
+	display: none;
 `;
 
 const InPageNewsletterSignup: FC<Props> = ({
 	format,
 	newsletter,
-	initiallyRender,
 	waitingContent: loadingContent,
 	fallbackContent,
 }) => {
 	const { identityName, successDescription } = newsletter;
 	return (
 		<>
-			{initiallyRender !== 'fallback' && (
-				<section
-					css={containerStyles(format, initiallyRender)}
-					className="js-signup-form-container"
-				>
-					<EmailSignupForm
-						identityName={identityName}
-						format={format}
-						successDescription={successDescription}
-					/>
-					<PrivacyWording format={format} useCaptcha={false} />
-				</section>
-			)}
+			<section
+				css={[containerStyles(format), initiallyHidden]}
+				className="js-signup-form-container"
+			>
+				<EmailSignupForm
+					identityName={identityName}
+					format={format}
+					successDescription={successDescription}
+				/>
+				<PrivacyWording format={format} useCaptcha={false} />
+			</section>
 
-			{initiallyRender !== 'form' && (
-				<section
-					css={fallbackContainerStyles(initiallyRender)}
-					// if initially rendering the fallback content,
-					// do not switch to the form
-					className={
-						initiallyRender === 'fallback'
-							? undefined
-							: 'js-signup-form-fallback-container'
-					}
-				>
-					{fallbackContent ? (
-						fallbackContent
-					) : (
-						<NotSupportedMessage />
-					)}
-				</section>
-			)}
+			<section
+				css={initiallyHidden}
+				className="js-signup-form-fallback-container"
+			>
+				{fallbackContent ? fallbackContent : <NotSupportedMessage />}
+			</section>
 
-			{!!loadingContent && initiallyRender === undefined && (
-				<aside
-					css={loadingContainerStyles(initiallyRender)}
-					className="js-signup-form-loading-content"
-				>
+			{!!loadingContent && (
+				<aside className="js-signup-form-loading-content">
 					{loadingContent}
 				</aside>
 			)}
