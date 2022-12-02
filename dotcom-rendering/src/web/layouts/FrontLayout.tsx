@@ -350,7 +350,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								>
 									<FrontMostViewed
 										displayName={collection.displayName}
-										trails={trails.slice(0, 10)}
+										trails={trails}
 										mostViewed={front.mostViewed}
 										mostCommented={front.mostCommented}
 										mostShared={front.mostShared}
