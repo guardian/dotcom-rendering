@@ -13,7 +13,6 @@ fs.writeFile(
 	'utf8',
 	(err) => {
 		if (err) {
-			// eslint-disable-next-line @typescript-eslint/tslint/config
 			console.log(err);
 		}
 	},
@@ -25,7 +24,6 @@ fs.writeFile(
 	'utf8',
 	(err) => {
 		if (err) {
-			// eslint-disable-next-line @typescript-eslint/tslint/config
 			console.log(err);
 		}
 	},
