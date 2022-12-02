@@ -120,16 +120,16 @@ tsc: clean-dist install
 
 fix: clear clean-dist install
 	$(call log, "attempting to fix lint errors")
-	@yarn lint --fix
-	@yarn prettier:fix
+	@pnpm lint --fix
+	@pnpm prettier:fix
 
 snapshot: clear clean-dist install
 	$(call log, "taking snapshots")
-	yarn chromatic
+	@pnpm chromatic
 
 lint: clean-dist install
 	$(call log, "checking for lint errors")
-	@yarn lint
+	@pnpm lint
 
 stylelint: clean-dist install
 	$(call log, "checking for style lint errors")
@@ -137,12 +137,12 @@ stylelint: clean-dist install
 
 test: clean-dist install
 	$(call log, "running tests")
-	@yarn test:ci --verbose
+	@pnpm test:ci --verbose
 	$(call log, "everything seems 👌")
 
 test-ci: clear clean-dist install
 	$(call log, "running tests")
-	@yarn test:ci --verbose --collectCoverage --coverageReporters=lcov
+	@pnpm test:ci --verbose --collectCoverage --coverageReporters=lcov
 
 bundlesize: clear clean-dist install build
 	@bundlesize
@@ -168,7 +168,7 @@ clean-deps:
 
 install: check-env
 	$(call log, "refreshing dependencies")
-	@yarn --silent
+	@pnpm --silent
 
 reinstall: clear clean-deps install
 	$(call log, "dependencies have been reinstalled ♻️")

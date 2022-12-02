@@ -6,24 +6,24 @@ Frontend rendering framework for theguardian.com. It uses [React](https://reactj
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <!-- Automatically created with yarn run createtoc and on push hook -->
 
-- [Quick start](#quick-start)
-  - [Install Node.js](#install-nodejs)
-  - [Running instructions](#running-instructions)
-  - [Environment Variables](#environment-variables)
-  - [Detailed Setup](#detailed-setup)
-  - [Technologies](#technologies)
-  - [Architecture Diagram](#architecture-diagram)
-  - [UI Design System](#ui-design-system)
-  - [Concepts](#concepts)
-  - [Visual Debugging](#visual-debugging)
-  - [Feedback](#feedback)
-- [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
-- [Code Quality](#code-quality)
-  - [Snyk Code Scanning](#snyk-code-scanning)
-- [IDE setup](#ide-setup)
-  - [Extensions](#extensions)
-  - [Auto fix on save](#auto-fix-on-save)
-- [Thanks](#thanks)
+-   [Quick start](#quick-start)
+    -   [Install Node.js](#install-nodejs)
+    -   [Running instructions](#running-instructions)
+    -   [Environment Variables](#environment-variables)
+    -   [Detailed Setup](#detailed-setup)
+    -   [Technologies](#technologies)
+    -   [Architecture Diagram](#architecture-diagram)
+    -   [UI Design System](#ui-design-system)
+    -   [Concepts](#concepts)
+    -   [Visual Debugging](#visual-debugging)
+    -   [Feedback](#feedback)
+-   [Where can I see Dotcom Rendering in Production?](#where-can-i-see-dotcom-rendering-in-production)
+-   [Code Quality](#code-quality)
+    -   [Snyk Code Scanning](#snyk-code-scanning)
+-   [IDE setup](#ide-setup)
+    -   [Extensions](#extensions)
+    -   [Auto fix on save](#auto-fix-on-save)
+-   [Thanks](#thanks)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -48,7 +48,7 @@ Clone the repo, run `yarn` in the root, then CD into the `dotcom-rendering` subd
 
 ```
 $ git clone git@github.com:guardian/dotcom-rendering.git
-$ yarn install
+$ pnpm install
 $ cd dotcom-rendering/dotcom-rendering
 $ make dev
 ```
@@ -193,10 +193,10 @@ We recommend you update your workspace settings to automatically fix formatting 
 
 If you prefer not to use an editor like VSCode then you can use the following commands to manage formatting:
 
--   `yarn prettier:check` &rarr; Checks for prettier issues
--   `yarn prettier:fix` &rarr; Checks and fixes prettier issues
--   `yarn lint` &rarr; Checks for linting issues
--   `yarn lint --fix` &rarr; Checks and fixes linting issues
+-   `pnpm prettier:check` &rarr; Checks for prettier issues
+-   `pnpm prettier:fix` &rarr; Checks and fixes prettier issues
+-   `pnpm lint` &rarr; Checks for linting issues
+-   `pnpm lint --fix` &rarr; Checks and fixes linting issues
 
 ## Thanks
 
