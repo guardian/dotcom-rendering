@@ -8,21 +8,38 @@ type Props = {
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
 };
 
-export const Select = ({ validationErrors, formField }: Props) => (
+export const Select = ({
+	validationErrors,
+	formField,
+	formData,
+	setFormData,
+}: Props) => (
 	<>
 		<FieldLabel formField={formField} />
 		<SourceSelect
 			error={
-				formField.id in validationErrors
+				validationErrors.includes(formField.id)
 					? 'Please complete all required fields'
 					: ''
 			}
 			label={''}
-			children={formField.options.map((option, index) => (
-				<option key={index} value={option.value}>
-					{option.value}
-				</option>
-			))}
+			value={formField.id in formData ? formData[formField.id] : ''}
+			onChange={(e) =>
+				setFormData({
+					...formData,
+					[formField.id]: e.target.value,
+				})
+			}
+			optional={!formField.required}
+			children={[
+				{ label: 'default', value: 'Please choose an option ...' },
+			]
+				.concat(formField.options)
+				.map((option, index) => (
+					<option key={index} value={option.value}>
+						{option.value}
+					</option>
+				))}
 		/>
 	</>
 );

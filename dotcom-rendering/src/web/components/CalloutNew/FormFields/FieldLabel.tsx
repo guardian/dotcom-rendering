@@ -26,9 +26,7 @@ export const FieldLabel = ({
 }) => (
 	<label css={fieldLabelStyles} htmlFor={formField.name}>
 		{formField.label}
-		{!formField.required && (
-			<span css={optionalTextStyles}>(Optional)</span>
-		)}
+		{!formField.required && <span css={optionalTextStyles}>Optional</span>}
 		{!!formField.description && (
 			<div>
 				<span css={fieldDescription}>{`${formField.description}`}</span>
