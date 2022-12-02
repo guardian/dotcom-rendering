@@ -129,7 +129,6 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 						<InPageNewsletterSignup
 							newsletter={newsletter}
 							format={getFormat(item)}
-
 							fallbackContent={
 								<ArticleBody format={item}>
 									{children}

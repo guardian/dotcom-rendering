@@ -1,6 +1,5 @@
 // ----- Imports ----- //
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
@@ -274,8 +273,9 @@ export const NewsletterSignupFallback = (): ReactElement => (
 		</NewsletterSignUpLayout>
 	</>
 );
-NewsletterSignupFallback.story = { name: 'NewsletterSignup (Form component not supported)' };
-
+NewsletterSignupFallback.story = {
+	name: 'NewsletterSignup (Form component not supported)',
+};
 
 export const Immersive = (): ReactElement => (
 	<ImmersiveLayout
