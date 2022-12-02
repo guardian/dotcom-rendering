@@ -1,5 +1,4 @@
 import type { KeyEvent } from '@guardian/common-rendering/src/components/keyEvents';
-// eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
 import KeyEvents from '@guardian/common-rendering/src/components/keyEvents';
 
 type Props = {

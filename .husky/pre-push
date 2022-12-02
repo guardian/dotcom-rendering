@@ -9,5 +9,5 @@ then
 	exit 1
 fi
 
-yarn workspace @guardian/dotcom-rendering prettier:check
-yarn workspace @guardian/dotcom-rendering tsc
+pnpm -F @guardian/dotcom-rendering prettier:check
+pnpm -F @guardian/dotcom-rendering tsc

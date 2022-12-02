@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-// eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
 import type { Switches } from '../../types/config';
 import { RenderArticleElement } from '../lib/renderElement';

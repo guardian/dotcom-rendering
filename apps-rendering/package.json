@@ -1,5 +1,5 @@
 {
-	"name": "apps-rendering",
+	"name": "@guardian/apps-rendering",
 	"version": "0.0.1",
 	"description": "Article rendering for The Guardian iOS and Android apps",
 	"main": "server/server.ts",
