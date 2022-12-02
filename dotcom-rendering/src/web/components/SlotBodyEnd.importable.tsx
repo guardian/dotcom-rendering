@@ -104,7 +104,9 @@ export const SlotBodyEnd = ({
 	const [countryCode, setCountryCode] = useState<string>();
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
 	const browserId = getCookie({ name: 'bwid', shouldMemoize: true });
-	const [SelectedEpic, setSelectedEpic] = useState<React.FC | null>(null);
+	const [SelectedEpic, setSelectedEpic] = useState<React.ElementType | null>(
+		null,
+	);
 	const [asyncArticleCount, setAsyncArticleCount] =
 		useState<Promise<WeeklyArticleHistory | undefined>>();
 

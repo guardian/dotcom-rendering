@@ -7,7 +7,7 @@ type Props = {
 	html: string;
 };
 
-export const HighlightBlockComponent: React.FC<Props> = ({ html }: Props) => (
+export const HighlightBlockComponent = ({ html }: Props) => (
 	<ClassNames>
 		{({ css }) => {
 			const {

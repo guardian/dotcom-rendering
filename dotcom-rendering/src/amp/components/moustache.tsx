@@ -21,7 +21,9 @@ export const MoustacheSection = ({
 	</>
 );
 
-export const MoustacheVariable: React.FC<{ name: string }> = ({ name }) => (
+type Props = { name: string };
+
+export const MoustacheVariable = ({ name }: Props) => (
 	<>{moustacheVariable(name)}</>
 );
 

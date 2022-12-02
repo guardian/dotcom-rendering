@@ -1,12 +1,13 @@
-import React from 'react';
-import { VideoVimeoBlockElement } from '../../../types/content';
+import type { VideoVimeoBlockElement } from '../../../types/content';
 import { getIdFromUrl } from '../../lib/get-video-id';
 import { Caption } from '../Caption';
 
-export const VideoVimeoBlockComponent: React.FC<{
+type Props = {
 	element: VideoVimeoBlockElement;
 	pillar: ArticleTheme;
-}> = ({ element, pillar }) => {
+};
+
+export const VideoVimeoBlockComponent = ({ element, pillar }: Props) => {
 	// This is a hack as `url` is coming through as `""` from the embed.ly oembed endpoint
 	// which is used in composer.
 	// see: https://github.com/guardian/dotcom-rendering/issues/4057

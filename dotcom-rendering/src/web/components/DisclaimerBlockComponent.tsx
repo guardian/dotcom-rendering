@@ -11,9 +11,11 @@ const disclaimerStyles = css`
 	margin-bottom: 16px;
 `;
 
-export const DisclaimerBlockComponent: React.FC<{
+type Props = {
 	html: string;
-}> = ({ html }) => (
+};
+
+export const DisclaimerBlockComponent = ({ html }: Props) => (
 	<footer
 		css={disclaimerStyles}
 		data-cy="affiliate-disclaimer"

@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { body, neutral } from '@guardian/source-foundations';
-import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 import Quote from '../../../static/icons/quote.svg';
 
@@ -17,10 +16,12 @@ const styles = (pillar: ArticleTheme) => css`
 	}
 `;
 
-export const PullquoteBlockComponent: React.FC<{
+type Props = {
 	html?: string;
 	pillar: ArticleTheme;
-}> = ({ html, pillar }) => {
+};
+
+export const PullquoteBlockComponent = ({ html, pillar }: Props) => {
 	if (!html) return <></>;
 	return (
 		<aside css={styles(pillar)}>

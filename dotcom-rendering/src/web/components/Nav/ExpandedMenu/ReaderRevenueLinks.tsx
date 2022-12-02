@@ -8,9 +8,8 @@ import {
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import type { LinkType } from '../../../../model/extract-nav';
-
 import { addTrackingCodesToUrl } from '../../../lib/acquisitions';
-import { EditionId } from '../../../lib/edition';
+import type { EditionId } from '../../../lib/edition';
 
 const hideDesktop = css`
 	${from.desktop} {
@@ -70,11 +69,17 @@ const mainMenuLinkStyle = css`
 	}
 `;
 
-export const ReaderRevenueLinks: React.FC<{
+type Props = {
 	readerRevenueLinks: ReaderRevenuePositions;
 	editionId: EditionId;
 	headerTopBarSwitch: boolean;
-}> = ({ readerRevenueLinks, editionId, headerTopBarSwitch }) => {
+};
+
+export const ReaderRevenueLinks = ({
+	readerRevenueLinks,
+	editionId,
+	headerTopBarSwitch,
+}: Props) => {
 	const [pageViewId, setPageViewId] = useState('');
 	const [referrerUrl, setReferrerUrl] = useState('');
 	useEffect(() => {

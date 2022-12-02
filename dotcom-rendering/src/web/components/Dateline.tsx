@@ -39,11 +39,17 @@ const standfirstColouring = (palette: Palette) => css`
 // At the moment the 'First published on' / 'Last modified on' is passed through on
 // the secondaryDateline (this will be refactored). The current logic checks if the primary
 // date is in the secondary to avoid duplicate dates being shown
-export const Dateline: React.FC<{
+type Props = {
 	primaryDateline: string;
 	secondaryDateline: string;
 	format: ArticleFormat;
-}> = ({ primaryDateline, secondaryDateline, format }) => {
+};
+
+export const Dateline = ({
+	primaryDateline,
+	secondaryDateline,
+	format,
+}: Props) => {
 	const palette = decidePalette(format);
 
 	if (secondaryDateline && !secondaryDateline.includes(primaryDateline)) {

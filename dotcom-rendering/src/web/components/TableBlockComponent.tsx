@@ -38,9 +38,11 @@ const tableEmbed = css`
 	margin-bottom: 16px;
 `;
 
-export const TableBlockComponent: React.FC<{
+type Props = {
 	element: TableBlockElement;
-}> = ({ element }) => {
+};
+
+export const TableBlockComponent = ({ element }: Props) => {
 	return (
 		<div
 			css={tableEmbed}
