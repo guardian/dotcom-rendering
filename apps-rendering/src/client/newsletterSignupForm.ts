@@ -14,12 +14,14 @@ interface FormBundle {
 }
 
 // ----- Constants ----- //
-const COMPONENT_CONTAINER_CLASSNAME = 'js-signup-form-container' as const;
-const COMPONENT_BASE_CLASSNAME = 'js-signup-form' as const;
+const SIGNUP_CONTAINER_CLASSNAME = 'js-signup-form-container' as const;
+const FALLBACK_CONTENT_CLASSNAME = 'js-signup-form-fallback-container' as const;
+const LOADING_CONTENT_CLASSNAME = 'js-signup-form-loading-content' as const;
+const SIGNUP_COMPONENT_BASE_CLASSNAME = 'js-signup-form' as const;
 const MODIFIER_CLASSNAME = {
-	waiting: `${COMPONENT_BASE_CLASSNAME}--waiting`,
-	success: `${COMPONENT_BASE_CLASSNAME}--success`,
-	failure: `${COMPONENT_BASE_CLASSNAME}--failure`,
+	waiting: `${SIGNUP_COMPONENT_BASE_CLASSNAME}--waiting`,
+	success: `${SIGNUP_COMPONENT_BASE_CLASSNAME}--success`,
+	failure: `${SIGNUP_COMPONENT_BASE_CLASSNAME}--failure`,
 } as const;
 
 // ----- Pure functions ----- //
@@ -135,20 +137,25 @@ function revealContainer(container: HTMLElement): void {
 const isHTMLElement = (element: Element): element is HTMLElement =>
 	element instanceof HTMLElement;
 
+const getElementArray = (className: string): HTMLElement[] =>
+	Array.from(document.querySelectorAll(`.${className}`)).filter(
+		isHTMLElement,
+	);
+
 async function initSignupForms(): Promise<void> {
 	const version = await getBridgetVersion();
-	const signupContainers = Array.from(
-		document.querySelectorAll(`.${COMPONENT_CONTAINER_CLASSNAME}`),
-	).filter(isHTMLElement);
+	const signupContainers = getElementArray(SIGNUP_CONTAINER_CLASSNAME);
+	const loadingContainers = getElementArray(LOADING_CONTENT_CLASSNAME);
+	const fallbackContainers = getElementArray(FALLBACK_CONTENT_CLASSNAME);
 
+	loadingContainers.forEach(removeContainer);
 	if (isBridgetCompatible(version)) {
 		signupContainers.forEach(revealContainer);
-		const signupForms = Array.from(
-			document.querySelectorAll(`form.${COMPONENT_BASE_CLASSNAME}`),
-		);
+		const signupForms = getElementArray(SIGNUP_COMPONENT_BASE_CLASSNAME);
 		signupForms.forEach(setup);
 	} else {
 		signupContainers.forEach(removeContainer);
+		fallbackContainers.forEach(revealContainer);
 	}
 }
 
