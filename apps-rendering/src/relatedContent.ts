@@ -1,5 +1,6 @@
 import type { Image } from '@guardian/apps-rendering-api-models/image';
-import type { NewRelatedContent } from '@guardian/apps-rendering-api-models/newRelatedContent';
+import type { OnwardsContent as ARModelsOnwardsContent } from '@guardian/apps-rendering-api-models/onwardsContent';
+import { OnwardsContentCategory } from '@guardian/apps-rendering-api-models/onwardsContentCategory';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { Option } from '@guardian/types';
@@ -120,9 +121,9 @@ const parseHeaderImage = (content: Content): Image | undefined => {
 	}
 };
 
-type RelatedContent = {
-	title: string;
-	relatedItems: RelatedItem[];
+type OnwardsContent = {
+	category: OnwardsContentCategory;
+	content: RelatedItem[];
 };
 
 type RelatedItemFieldsNoDesign = Omit<RelatedItemFields, 'design'>;
@@ -136,8 +137,8 @@ const relatedContentFields = (content: Content): RelatedItemFieldsNoDesign => ({
 });
 
 const parseMapiRelatedContent = (
-	maybeRelatedContent: Option<NewRelatedContent>,
-): Option<RelatedContent> => {
+	maybeRelatedContent: Option<ARModelsOnwardsContent>,
+): Option<OnwardsContent> => {
 	if (maybeRelatedContent.kind === OptionKind.None) {
 		return none;
 	}
@@ -145,8 +146,8 @@ const parseMapiRelatedContent = (
 	const relatedContent = maybeRelatedContent.value;
 
 	return some({
-		title: relatedContent.title,
-		relatedItems: relatedContent.relatedItems.map((content) => {
+		category: relatedContent.category,
+		content: relatedContent.content.map((content) => {
 			const { tags } = content;
 			if (isFeature(content)) {
 				return {
@@ -205,12 +206,12 @@ const parseMapiRelatedContent = (
 	});
 };
 
-const parseRelatedContent = (relatedContent: Content[]): NewRelatedContent => {
+const parseRelatedContent = (content: Content[]): ARModelsOnwardsContent => {
 	return {
-		title: 'Related stories',
-		relatedItems: relatedContent.slice(0, 4),
+		category: OnwardsContentCategory.RELATED,
+		content: content.slice(0, 4),
 	};
 };
 
 export { parseRelatedContent, parseHeaderImage, parseMapiRelatedContent };
-export type { RelatedContent };
+export type { OnwardsContent as RelatedContent };
