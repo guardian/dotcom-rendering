@@ -136,6 +136,13 @@ const relatedContentFields = (content: Content): RelatedItemFieldsNoDesign => ({
 	contributor: index(0)(parseContributors('', content)),
 });
 
+const getContributorImage = (relatedItem: RelatedItem): Option<Image> => {
+	return pipe(
+		relatedItem.contributor,
+		andThen((contributor) => contributor.image),
+	);
+};
+
 const parseMapiRelatedContent = (
 	maybeRelatedContent: Option<ARModelsOnwardsContent>,
 ): Option<OnwardsContent> => {
@@ -213,5 +220,10 @@ const parseRelatedContent = (content: Content[]): ARModelsOnwardsContent => {
 	};
 };
 
-export { parseRelatedContent, parseHeaderImage, parseMapiRelatedContent };
+export {
+	parseRelatedContent,
+	parseHeaderImage,
+	parseMapiRelatedContent,
+	getContributorImage,
+};
 export type { OnwardsContent as RelatedContent };

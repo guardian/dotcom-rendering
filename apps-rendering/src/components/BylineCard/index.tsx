@@ -1,6 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
 import {
 	background,
 	border,
@@ -15,12 +14,13 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
-import type { Option } from '@guardian/types';
+import { Option, OptionKind } from '@guardian/types';
 import { fromNullable, map, withDefault } from '@guardian/types';
 import { formatFromRelatedItem } from 'components/Card';
 import { makeRelativeDate } from 'date';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
+import { getContributorImage, RelatedItem } from 'relatedContent';
 import { darkModeCss } from 'styles';
 
 interface Props {
@@ -153,9 +153,9 @@ const byline = (
 	format: ArticleFormat,
 ): ReactElement | null => {
 	return pipe(
-		fromNullable(relatedItem.byline),
+		relatedItem.contributor,
 		map((byline) => {
-			return <div css={bylineStyles(format)}>{byline}</div>;
+			return <div css={bylineStyles(format)}>{byline.name}</div>;
 		}),
 		withDefault<ReactElement | null>(null),
 	);
@@ -165,16 +165,20 @@ const cardImage = (
 	relatedItem: RelatedItem,
 	format: ArticleFormat,
 ): ReactElement | null => {
-	if (!relatedItem.bylineImage) {
+	const contributorImage = getContributorImage(relatedItem);
+	if (contributorImage.kind === OptionKind.None) {
 		return null;
 	}
 
+	const byline = pipe(
+		relatedItem.contributor,
+		map((contributor) => contributor.name),
+		withDefault('Byline image'),
+	);
+
 	return (
 		<div css={bylineImage(format)}>
-			<img
-				alt={relatedItem.byline ?? 'Byline image'}
-				src={relatedItem.bylineImage}
-			/>
+			<img alt={byline} src={contributorImage.value.url} />
 		</div>
 	);
 };
@@ -228,7 +232,7 @@ const BylineCard: FC<Props> = ({ relatedItem }) => {
 		>
 			<a
 				css={anchorStyles(format)}
-				href={`https://theguardian.com/${link}`}
+				href={`https://www.theguardian.com/${link}`}
 			>
 				<section css={headingWrapperStyles}>
 					<h3 css={headingStyles}>
