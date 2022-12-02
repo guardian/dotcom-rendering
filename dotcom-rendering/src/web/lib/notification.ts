@@ -6,12 +6,17 @@ export interface Notification {
 	target: string;
 	message: string;
 	logImpression?: () => void;
+	logInsert?: () => void;
 }
 
 const hasTargetAndMessage = (
 	card: BrazeCard,
 ): card is BrazeCard & { extras: Notification } =>
-	Boolean(card.extras.message) && Boolean(card.extras.target);
+	Boolean(card.extras.message) &&
+	Boolean(card.extras.target) &&
+	Boolean(card.extras.ophanComponentId);
+
+const NOTIFICATION_COMPONENT_TYPE = 'RETENTION_HEADER';
 
 export const mapBrazeCardsToNotifications = (
 	cards: BrazeCard[],
@@ -23,6 +28,26 @@ export const mapBrazeCardsToNotifications = (
 			message: card.extras.message,
 			logImpression: () => {
 				card.logImpression();
+				console.log('Logged impression to Braze');
+
+				// submitComponentEvent({
+				// 	component: {
+				// 		componentType: NOTIFICATION_COMPONENT_TYPE, // <-- Doesn't exist yet
+				// 		id: card.extras.ophanComponentId, // <-- Should this be required?
+				// 	},
+				// 	action: 'VIEW',
+				// });
+				console.log('Logged impression to Ophan');
+			},
+			logInsert: () => {
+				// submitComponentEvent({
+				// 	component: {
+				// 		componentType: NOTIFICATION_COMPONENT_TYPE, // <-- Doesn't exist yet
+				// 		id: card.extras.ophanComponentId, // <-- Should this be required?
+				// 	},
+				// 	action: 'INSERT',
+				// });
+				console.log('Logged insert to Ophan');
 			},
 		};
 	});

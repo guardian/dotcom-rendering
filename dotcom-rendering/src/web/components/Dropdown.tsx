@@ -18,6 +18,7 @@ import { getZIndex } from '../lib/getZIndex';
 import { linkNotificationCount } from '../lib/linkNotificationCount';
 import type { Notification } from '../lib/notification';
 import { useIsInView } from '../lib/useIsInView';
+import { useOnce } from '../lib/useOnce';
 
 export interface DropdownLinkType {
 	id: string;
@@ -229,7 +230,12 @@ const NotificationMessage = ({ notification }: NotificationMessageProps) => {
 		debounce: true,
 	});
 
-	const { message, logImpression } = notification;
+	const { message, logImpression, logInsert } = notification;
+
+	useOnce(() => {
+		logInsert?.();
+	}, []);
+
 	useEffect(() => {
 		if (hasBeenSeen) {
 			logImpression?.();
