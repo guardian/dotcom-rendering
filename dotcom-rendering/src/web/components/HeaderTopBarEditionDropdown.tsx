@@ -65,19 +65,16 @@ export const HeaderTopBarEditionDropdown = ({
 
 	return (
 		<div css={editionDropdownStyles}>
-			<div
-				css={css`
-					padding-top: 7px;
+			<Dropdown
+				label={activeLink.title}
+				links={linksToDisplay}
+				id="edition"
+				dataLinkName={dataLinkName}
+				cssOverrides={css`
+					${dropDownOverrides};
+					padding-top: 6px;
 				`}
-			>
-				<Dropdown
-					label={activeLink.title}
-					links={linksToDisplay}
-					id="edition"
-					dataLinkName={dataLinkName}
-					cssOverrides={dropDownOverrides}
-				/>
-			</div>
+			/>
 		</div>
 	);
 };
