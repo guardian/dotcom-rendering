@@ -5,6 +5,7 @@ import { ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { none, some, withDefault } from '@guardian/types';
+import { formatToString } from 'articleFormat';
 import AnalysisLayout from 'components/Layout/AnalysisLayout';
 import Comment from 'components/Layout/CommentLayout';
 import Standard from 'components/Layout/StandardLayout';
@@ -61,7 +62,7 @@ export const Article = (): React.ReactNode => {
 		</Standard>
 	);
 };
-Article.story = { name: 'Article' };
+Article.story = { name: formatToString(article) };
 
 export const Review = (): React.ReactNode => {
 	return (
@@ -73,7 +74,7 @@ export const Review = (): React.ReactNode => {
 		</Standard>
 	);
 };
-Review.story = { name: 'Review' };
+Review.story = { name: formatToString(review) };
 
 export const MatchReport = (): React.ReactNode => {
 	return (
@@ -85,7 +86,7 @@ export const MatchReport = (): React.ReactNode => {
 		</Standard>
 	);
 };
-MatchReport.story = { name: 'Match Report' };
+MatchReport.story = { name: formatToString(matchReport) };
 
 export const PrintShop = (): React.ReactNode => {
 	return (
@@ -97,7 +98,7 @@ export const PrintShop = (): React.ReactNode => {
 		</Standard>
 	);
 };
-PrintShop.story = { name: 'PrintShop' };
+PrintShop.story = { name: formatToString(printShop) };
 
 export const PhotoEssay = (): React.ReactNode => {
 	return (
@@ -109,7 +110,7 @@ export const PhotoEssay = (): React.ReactNode => {
 		</Standard>
 	);
 };
-PhotoEssay.story = { name: 'Photo Essay' };
+PhotoEssay.story = { name: formatToString(photoEssay) };
 
 export const Feature = (): React.ReactNode => {
 	return (
@@ -121,7 +122,7 @@ export const Feature = (): React.ReactNode => {
 		</Standard>
 	);
 };
-Feature.story = { name: 'Feature' };
+Feature.story = { name: formatToString(feature) };
 
 export const Interview = (): React.ReactNode => {
 	return (
@@ -133,7 +134,7 @@ export const Interview = (): React.ReactNode => {
 		</Standard>
 	);
 };
-Interview.story = { name: 'Interview' };
+Interview.story = { name: formatToString(interview) };
 
 export const Quiz = (): React.ReactNode => {
 	return (
@@ -145,7 +146,7 @@ export const Quiz = (): React.ReactNode => {
 		</Standard>
 	);
 };
-Quiz.story = { name: 'Quiz' };
+Quiz.story = { name: formatToString(quiz) };
 
 export const Recipe = (): React.ReactNode => {
 	return (
@@ -157,7 +158,7 @@ export const Recipe = (): React.ReactNode => {
 		</Standard>
 	);
 };
-Recipe.story = { name: 'Recipe' };
+Recipe.story = { name: formatToString(recipe) };
 
 export const CommentItem = (): React.ReactNode => {
 	return (
@@ -169,7 +170,7 @@ export const CommentItem = (): React.ReactNode => {
 		</Comment>
 	);
 };
-CommentItem.story = { name: 'Comment' };
+CommentItem.story = { name: formatToString(comment) };
 
 export const Letter = (): React.ReactNode => {
 	return (
@@ -181,7 +182,7 @@ export const Letter = (): React.ReactNode => {
 		</LetterLayout>
 	);
 };
-Letter.story = { name: 'Letter' };
+Letter.story = { name: formatToString(letter) };
 
 export const Editorial = (): React.ReactNode => {
 	return (
@@ -193,7 +194,7 @@ export const Editorial = (): React.ReactNode => {
 		</Comment>
 	);
 };
-Editorial.story = { name: 'Editorial' };
+Editorial.story = { name: formatToString(editorial) };
 
 export const Analysis = (): React.ReactNode => {
 	return (
@@ -205,7 +206,7 @@ export const Analysis = (): React.ReactNode => {
 		</AnalysisLayout>
 	);
 };
-Analysis.story = { name: 'Analysis' };
+Analysis.story = { name: formatToString(analysis) };
 
 export const Explainer = (): React.ReactNode => {
 	return (
@@ -217,18 +218,17 @@ export const Explainer = (): React.ReactNode => {
 		</Standard>
 	);
 };
-Explainer.story = { name: 'Explainer' };
+Explainer.story = { name: formatToString(explainer) };
 
 export const LiveBlog = (): ReactElement => (
 	<Live
 		item={{
 			...live,
-			display: ArticleDisplay.Standard,
 			edition: Edition.US,
 		}}
 	/>
 );
-LiveBlog.story = { name: 'LiveBlog ' };
+LiveBlog.story = { name: formatToString(live) };
 
 export const DeadBlog = (): ReactElement => (
 	<Live
@@ -239,7 +239,7 @@ export const DeadBlog = (): ReactElement => (
 		}}
 	/>
 );
-DeadBlog.story = { name: 'DeadBlog ' };
+DeadBlog.story = { name: formatToString(deadBlog) };
 
 export const NewsletterSignup = (): ReactElement => (
 	<NewsletterSignUpLayout item={newsletterSignUp}>
@@ -249,21 +249,7 @@ export const NewsletterSignup = (): ReactElement => (
 		)}
 	</NewsletterSignUpLayout>
 );
-NewsletterSignup.story = { name: 'NewsletterSignup' };
-export const Immersive = (): ReactElement => (
-	<ImmersiveLayout
-		item={{
-			...immersive,
-			edition: Edition.UK,
-		}}
-	>
-		{renderAll(
-			formatFromItem(immersive, none),
-			Result.partition(immersive.body).oks,
-		)}
-	</ImmersiveLayout>
-);
-Immersive.story = { name: 'Immersive ' };
+NewsletterSignup.story = { name: formatToString(newsletterSignUp) };
 
 export const Gallery = (): ReactElement => (
 	<GalleryLayout
@@ -278,10 +264,25 @@ export const Gallery = (): ReactElement => (
 		)}
 	</GalleryLayout>
 );
-Gallery.story = { name: 'Gallery ' };
+Gallery.story = { name: formatToString(gallery) };
+
+export const Immersive = (): ReactElement => (
+	<ImmersiveLayout
+		item={{
+			...immersive,
+			edition: Edition.UK,
+		}}
+	>
+		{renderAll(
+			formatFromItem(immersive, none),
+			Result.partition(immersive.body).oks,
+		)}
+	</ImmersiveLayout>
+);
+Immersive.story = { name: formatToString(immersive) };
 
 export default {
-	title: 'AR/Layouts/Standard',
+	title: 'AR/Layout',
 	parameters: {
 		layout: 'fullscreen',
 		chromatic: {
