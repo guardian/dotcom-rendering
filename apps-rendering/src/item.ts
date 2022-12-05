@@ -572,6 +572,7 @@ export {
 	fromCapi,
 	fromCapiLiveBlog,
 	getFormat,
+	getDisplay,
 	isLabs,
 	isLive,
 	isComment,

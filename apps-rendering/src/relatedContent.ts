@@ -1,7 +1,12 @@
 import type { OnwardsContent as ARModelsOnwardsContent } from '@guardian/apps-rendering-api-models/onwardsContent';
 import { OnwardsContentCategory } from '@guardian/apps-rendering-api-models/onwardsContentCategory';
 import type { Content } from '@guardian/content-api-models/v1/content';
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleFormat,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import { none, OptionKind, some } from '@guardian/types';
 import { articleMainImage, isAnalysis, isFeature, maybeCapiDate } from 'capi';
@@ -10,6 +15,7 @@ import { parseContributors } from 'contributor';
 import type { Image } from 'image';
 import { parseImage } from 'image';
 import {
+	getDisplay,
 	isAudio,
 	isComment,
 	isGallery,
@@ -23,13 +29,12 @@ import { index, pipe } from 'lib';
 import type { Optional } from 'optional';
 import type { Context } from 'parserContext';
 
-interface RelatedItemFields {
+interface RelatedItemFields extends ArticleFormat {
 	headline: string;
 	publishDate: Option<Date>;
 	mainMedia: Option<Image>;
 	webUrl: string;
 	contributor: Option<Contributor>;
-	design: ArticleDesign;
 }
 
 interface FeatureRelatedItem extends RelatedItemFields {
@@ -125,6 +130,8 @@ const relatedContentFields = (
 	mainMedia: parseHeaderImage(context, content).toOption(),
 	webUrl: content.id,
 	contributor: index(0)(parseContributors(context.salt, content)),
+	display: getDisplay(content),
+	theme: ArticlePillar.News,
 });
 
 const parseMapiRelatedContent =
@@ -207,5 +214,11 @@ const parseRelatedContent = (content: Content[]): ARModelsOnwardsContent => {
 	};
 };
 
-export { parseRelatedContent, parseMapiRelatedContent };
-export type { OnwardsContentSection as RelatedContent };
+const getFormat = (onwardsArticle: OnwardsContentArticle): ArticleFormat => ({
+	design: onwardsArticle.design,
+	display: onwardsArticle.display,
+	theme: onwardsArticle.theme,
+});
+
+export { parseRelatedContent, parseMapiRelatedContent, getFormat };
+export type { OnwardsContentSection as RelatedContent, OnwardsContentArticle };

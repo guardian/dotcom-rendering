@@ -14,17 +14,15 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
-import { Option, OptionKind } from '@guardian/types';
-import { fromNullable, map, withDefault } from '@guardian/types';
-import { formatFromRelatedItem } from 'components/Card';
+import { withDefault, Option, OptionKind, map, andThen } from '@guardian/types';
 import { makeRelativeDate } from 'date';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
-import { getContributorImage, RelatedItem } from 'relatedContent';
+import { OnwardsContentArticle, getFormat } from 'relatedContent';
 import { darkModeCss } from 'styles';
 
 interface Props {
-	relatedItem: RelatedItem;
+	relatedItem: OnwardsContentArticle;
 }
 
 const listStyles = (format: ArticleFormat): SerializedStyles => {
@@ -149,7 +147,7 @@ const bylineStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const byline = (
-	relatedItem: RelatedItem,
+	relatedItem: OnwardsContentArticle,
 	format: ArticleFormat,
 ): ReactElement | null => {
 	return pipe(
@@ -162,10 +160,14 @@ const byline = (
 };
 
 const cardImage = (
-	relatedItem: RelatedItem,
+	relatedItem: OnwardsContentArticle,
 	format: ArticleFormat,
 ): ReactElement | null => {
-	const contributorImage = getContributorImage(relatedItem);
+	const contributorImage = pipe(
+		relatedItem.contributor,
+		andThen((contributor) => contributor.image),
+	);
+
 	if (contributorImage.kind === OptionKind.None) {
 		return null;
 	}
@@ -178,7 +180,7 @@ const cardImage = (
 
 	return (
 		<div css={bylineImage(format)}>
-			<img alt={byline} src={contributorImage.value.url} />
+			<img alt={byline} src={contributorImage.value.src} />
 		</div>
 	);
 };
@@ -215,31 +217,27 @@ const footerStyles = css`
 `;
 
 const BylineCard: FC<Props> = ({ relatedItem }) => {
-	const { title, link, pillar, webPublicationDate, type } = relatedItem;
-	const format = formatFromRelatedItem(type, pillar.id);
+	const { headline, webUrl, publishDate } = relatedItem;
+	const format = getFormat(relatedItem);
 	const img = cardImage(relatedItem, format);
-	const date = webPublicationDate
-		? relativeFirstPublished(
-				fromNullable(new Date(webPublicationDate.iso8601)),
-				format,
-		  )
-		: null;
+
+	const date = relativeFirstPublished(publishDate, format);
 	return (
 		<li
 			className="js-card"
-			data-article-id={link}
+			data-article-id={webUrl}
 			css={[listStyles(format), cardStyles]}
 		>
 			<a
 				css={anchorStyles(format)}
-				href={`https://www.theguardian.com/${link}`}
+				href={`https://www.theguardian.com/${webUrl}`}
 			>
 				<section css={headingWrapperStyles}>
 					<h3 css={headingStyles}>
 						<span css={commentIconStyle(format)}>
 							<SvgQuote />
 						</span>
-						{title}
+						{headline}
 						{byline(relatedItem, format)}
 					</h3>
 				</section>
