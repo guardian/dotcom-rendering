@@ -83,7 +83,7 @@ const containerUrls = {
 	headlines: {
 		UK: 'uk-alpha/news/regular-stories',
 		US: 'c5cad9ee-584d-4e85-85cd-bf8ee481b026',
-		AU: 'au-alpha/news/regular-stories',
+		AU: '36b9cf13-bf8b-4cf0-b882-5c5d4feac0a2',
 		INT: '10f21d96-18f6-426f-821b-19df55dfb831',
 		EUR: '10f21d96-18f6-426f-821b-19df55dfb831',
 	},
