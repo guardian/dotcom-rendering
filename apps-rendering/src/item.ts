@@ -275,7 +275,7 @@ const itemFields = (
 	context: Context,
 	request: RenderingRequest,
 ): ItemFields => {
-	const { content, commentCount, newRelatedContent, campaigns } = request;
+	const { content, commentCount, onwardsContent, campaigns } = request;
 	return {
 		theme: getReport(campaigns ?? []).withDefault(
 			Optional.fromNullable(content.pillarId)
@@ -308,9 +308,9 @@ const itemFields = (
 		internalShortId: fromNullable(content.fields?.internalShortId),
 		commentCount: fromNullable(commentCount),
 		relatedContent: pipe(
-			newRelatedContent,
+			onwardsContent,
 			fromNullable,
-			parseMapiRelatedContent,
+			parseMapiRelatedContent(context),
 		),
 		logo: paidContentLogo(content.tags),
 		webUrl: content.webUrl,

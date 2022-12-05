@@ -1,13 +1,14 @@
-import type { Image } from '@guardian/apps-rendering-api-models/image';
 import type { OnwardsContent as ARModelsOnwardsContent } from '@guardian/apps-rendering-api-models/onwardsContent';
 import { OnwardsContentCategory } from '@guardian/apps-rendering-api-models/onwardsContentCategory';
 import type { Content } from '@guardian/content-api-models/v1/content';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { Option } from '@guardian/types';
-import { fromNullable, none, OptionKind, some } from '@guardian/types';
+import { andThen, none, OptionKind, some } from '@guardian/types';
 import { articleMainImage, isAnalysis, isFeature, maybeCapiDate } from 'capi';
 import type { Contributor } from 'contributor';
 import { parseContributors } from 'contributor';
+import type { Context } from 'parserContext';
+import { Image, parseImage } from 'image';
 import {
 	isAudio,
 	isComment,
@@ -87,7 +88,7 @@ interface StandardRelatedItem extends RelatedItemFields {
 	>;
 }
 
-type RelatedItem =
+type OnwardsContentArticle =
 	| FeatureRelatedItem
 	| LiveBlogRelatedItem
 	| DeadBlogRelatedItem
@@ -100,118 +101,110 @@ type RelatedItem =
 	| StandardRelatedItem
 	| LabsRelatedItem;
 
-const parseHeaderImage = (content: Content): Image | undefined => {
-	const optionalImage = articleMainImage(content).flatMap((element) => {
-		const masterAsset = element.assets.find(
-			(asset) => asset.typeData?.isMaster,
-		);
-
-		return Optional.fromNullable(masterAsset).map((asset) => ({
-			url: asset.file ?? '',
-			height: asset.typeData?.height ?? 360,
-			width: asset.typeData?.width ?? 600,
-			altText: element.imageTypeData?.alt,
-		}));
-	});
-
-	if (optionalImage.isSome()) {
-		return optionalImage.value;
-	} else {
-		return undefined;
-	}
+const parseHeaderImage = (
+	context: Context,
+	content: Content,
+): Optional<Image> => {
+	return articleMainImage(content).flatMap(parseImage(context));
 };
 
-type OnwardsContent = {
+type OnwardsContentSection = {
 	category: OnwardsContentCategory;
-	content: RelatedItem[];
+	content: OnwardsContentArticle[];
 };
 
 type RelatedItemFieldsNoDesign = Omit<RelatedItemFields, 'design'>;
 
-const relatedContentFields = (content: Content): RelatedItemFieldsNoDesign => ({
+const relatedContentFields = (
+	context: Context,
+	content: Content,
+): RelatedItemFieldsNoDesign => ({
 	headline: content.fields?.headline ?? content.webTitle,
 	publishDate: maybeCapiDate(content.webPublicationDate),
-	mainMedia: pipe(parseHeaderImage(content), fromNullable),
+	mainMedia: parseHeaderImage(context, content).toOption(),
 	webUrl: content.id,
-	contributor: index(0)(parseContributors('', content)),
+	contributor: index(0)(parseContributors(context.salt, content)),
 });
 
-const getContributorImage = (relatedItem: RelatedItem): Option<Image> => {
+const getContributorImage = (article: OnwardsContentArticle): Option<Image> => {
 	return pipe(
-		relatedItem.contributor,
+		article.contributor,
 		andThen((contributor) => contributor.image),
 	);
 };
 
-const parseMapiRelatedContent = (
-	maybeRelatedContent: Option<ARModelsOnwardsContent>,
-): Option<OnwardsContent> => {
-	if (maybeRelatedContent.kind === OptionKind.None) {
-		return none;
-	}
+const parseMapiRelatedContent =
+	(context: Context) =>
+	(
+		maybeRelatedContent: Option<ARModelsOnwardsContent>,
+	): Option<OnwardsContentSection> => {
+		if (maybeRelatedContent.kind === OptionKind.None) {
+			return none;
+		}
 
-	const relatedContent = maybeRelatedContent.value;
+		const relatedContent = maybeRelatedContent.value;
 
-	return some({
-		category: relatedContent.category,
-		content: relatedContent.content.map((content) => {
-			const { tags } = content;
-			if (isFeature(content)) {
-				return {
-					...relatedContentFields(content),
-					design: ArticleDesign.Feature,
-				};
-			} else if (isLive(tags) && content.fields?.liveBloggingNow) {
-				return {
-					...relatedContentFields(content),
-					design: ArticleDesign.LiveBlog,
-				};
-			} else if (isReview(tags)) {
-				return {
-					...relatedContentFields(content),
-					design: ArticleDesign.Review,
-					starRating: content.fields?.starRating?.toString() ?? '',
-				};
-			} else if (isAnalysis(content)) {
-				return {
-					...relatedContentFields(content),
-					design: ArticleDesign.Analysis,
-				};
-			} else if (isComment(tags) || isLetter(tags)) {
-				return {
-					...relatedContentFields(content),
-					design: ArticleDesign.Comment,
-				};
-			} else if (isAudio(tags)) {
-				return {
-					...relatedContentFields(content),
-					design: ArticleDesign.Audio,
-				};
-			} else if (isVideo(tags)) {
-				return {
-					...relatedContentFields(content),
-					design: ArticleDesign.Video,
-				};
-			} else if (isGallery(tags)) {
-				return {
-					...relatedContentFields(content),
-					design: ArticleDesign.Gallery,
-				};
-			} else if (isLabs(tags)) {
-				return {
-					...relatedContentFields(content),
-					design: ArticleDesign.Standard,
-					theme: ArticleSpecial.Labs,
-				};
-			} else {
-				return {
-					...relatedContentFields(content),
-					design: ArticleDesign.Standard,
-				};
-			}
-		}),
-	});
-};
+		return some({
+			category: relatedContent.category,
+			content: relatedContent.content.map((content) => {
+				const { tags } = content;
+				if (isFeature(content)) {
+					return {
+						...relatedContentFields(context, content),
+						design: ArticleDesign.Feature,
+					};
+				} else if (isLive(tags) && content.fields?.liveBloggingNow) {
+					return {
+						...relatedContentFields(context, content),
+						design: ArticleDesign.LiveBlog,
+					};
+				} else if (isReview(tags)) {
+					return {
+						...relatedContentFields(context, content),
+						design: ArticleDesign.Review,
+						starRating:
+							content.fields?.starRating?.toString() ?? '',
+					};
+				} else if (isAnalysis(content)) {
+					return {
+						...relatedContentFields(context, content),
+						design: ArticleDesign.Analysis,
+					};
+				} else if (isComment(tags) || isLetter(tags)) {
+					return {
+						...relatedContentFields(context, content),
+						design: ArticleDesign.Comment,
+					};
+				} else if (isAudio(tags)) {
+					return {
+						...relatedContentFields(context, content),
+						design: ArticleDesign.Audio,
+					};
+				} else if (isVideo(tags)) {
+					return {
+						...relatedContentFields(context, content),
+						design: ArticleDesign.Video,
+					};
+				} else if (isGallery(tags)) {
+					return {
+						...relatedContentFields(context, content),
+						design: ArticleDesign.Gallery,
+					};
+				} else if (isLabs(tags)) {
+					return {
+						...relatedContentFields(context, content),
+						design: ArticleDesign.Standard,
+						theme: ArticleSpecial.Labs,
+					};
+				} else {
+					return {
+						...relatedContentFields(context, content),
+						design: ArticleDesign.Standard,
+					};
+				}
+			}),
+		});
+	};
 
 const parseRelatedContent = (content: Content[]): ARModelsOnwardsContent => {
 	return {
@@ -220,10 +213,5 @@ const parseRelatedContent = (content: Content[]): ARModelsOnwardsContent => {
 	};
 };
 
-export {
-	parseRelatedContent,
-	parseHeaderImage,
-	parseMapiRelatedContent,
-	getContributorImage,
-};
-export type { OnwardsContent as RelatedContent };
+export { parseRelatedContent, parseMapiRelatedContent, getContributorImage };
+export type { OnwardsContentSection as RelatedContent };
