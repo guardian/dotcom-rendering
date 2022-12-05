@@ -76,7 +76,7 @@ const dynamoLiStyles = css`
 `;
 
 const leftMargin = css`
-	${from.desktop} {
+	${from.tablet} {
 		margin-left: 10px;
 	}
 `;

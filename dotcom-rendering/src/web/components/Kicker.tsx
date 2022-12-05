@@ -13,6 +13,7 @@ const kickerStyles = (colour: string) => css`
 	color: ${colour};
 	font-weight: 700;
 	margin-right: 4px;
+	display: inline-block;
 `;
 
 const slashStyles = css`
