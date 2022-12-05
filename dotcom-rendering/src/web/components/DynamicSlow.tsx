@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import type { TrailType } from 'src/types/trails';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import {
 	Card25Media25Tall,
 	Card50Media50,
 	CardDefaultMedia,
+	CardDefaultMediaMobile,
 } from '../lib/cardWrappers';
 import {
 	Card100PictureRight,
@@ -61,7 +61,7 @@ const ColumnOfCards50_Card50 = ({
 								key={card.url}
 								padSides={true}
 							>
-								<CardDefaultMedia
+								<CardDefaultMediaMobile
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}

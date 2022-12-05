@@ -388,7 +388,7 @@ export const CardDefault = ({
  *
  * Options:
  *  - Small headline (small on mobile)
- *  - Small image on the left (left on mobile)
+ *  - Small image on the left (none on mobile)
  *  - No trail text
  *  - No supporting content
  */
@@ -404,6 +404,34 @@ export const CardDefaultMedia = ({
 			showAge={showAge}
 			imagePosition="left"
 			imagePositionOnMobile="none"
+			headlineSize="small"
+		/>
+	);
+};
+
+/**
+ * .__________________.
+ * |#####_____________|
+ * Card designed to take up any width of container, with small left media
+ *
+ * Options:
+ *  - Small headline (small on mobile)
+ *  - Small image on the left (left on mobile)
+ *  - No trail text
+ *  - No supporting content
+ */
+export const CardDefaultMediaMobile = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			imagePosition="left"
+			imagePositionOnMobile="left"
 			headlineSize="small"
 		/>
 	);
