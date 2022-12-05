@@ -256,21 +256,21 @@ const textContainerToggle = (containerPalette: DCRContainerPalette): string => {
 const borderContainer = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return 'rgba(0,0,0, 0.2)';
+			return transparentColour(neutral[60], 0.4);
 		case 'LongRunningAltPalette':
-			return 'rgba(0,0,0, 0.2)';
+			return transparentColour(neutral[60], 0.4);
 		case 'SombrePalette':
-			return 'rgba(255,255,255, 0.2)';
+			return neutral[60];
 		case 'SombreAltPalette':
-			return 'rgba(255,255,255, 0.2)';
+			return neutral[46];
 		case 'InvestigationPalette':
-			return 'rgba(255,255,255, 0.2)';
+			return neutral[60];
 		case 'BreakingPalette':
-			return 'rgba(0,0,0, 0.2)';
+			return neutral[86];
 		case 'EventPalette':
-			return 'rgba(0,0,0, 0.2)';
+			return neutral[86];
 		case 'EventAltPalette':
-			return 'rgba(0,0,0, 0.2)';
+			return neutral[86];
 		case 'SpecialReportAltPalette':
 			return transparentColour(neutral[60], 0.3);
 	}

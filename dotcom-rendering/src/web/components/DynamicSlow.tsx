@@ -39,6 +39,7 @@ const ColumnOfCards50_Card50 = ({
 					percentage="50%"
 					padSides={true}
 					showDivider={true}
+					containerPalette={containerPalette}
 					key={card.url}
 				>
 					<FrontCard
@@ -98,6 +99,7 @@ const ColumnOfCards50_Card25_Card25 = ({
 						percentage="25%"
 						padSides={true}
 						showDivider={true}
+						containerPalette={containerPalette}
 						key={big.url}
 					>
 						<FrontCard
@@ -161,6 +163,7 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 						percentage="50%"
 						padSides={true}
 						showDivider={index % 2 === 1}
+						containerPalette={containerPalette}
 						offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 							index,
 							length - (length % columns),
