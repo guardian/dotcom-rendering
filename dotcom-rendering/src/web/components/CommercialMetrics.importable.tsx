@@ -8,7 +8,6 @@ import type { ServerSideTestNames } from '../../types/config';
 import { tests } from '../experiments/ab-tests';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { removePrebidA9Canada } from '../experiments/tests/remove-prebid-a9-canada';
-import { serverSideLiveblogInlineAds } from '../experiments/tests/server-side-liveblog-inline-ads';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useOnce } from '../lib/useOnce';
@@ -33,7 +32,6 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 			/* keep array multi-line */
 			integrateIma,
 			removePrebidA9Canada,
-			serverSideLiveblogInlineAds,
 		];
 
 		const userInClientSideTestToForceMetrics = ABTestAPI?.allRunnableTests(

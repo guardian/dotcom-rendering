@@ -8,7 +8,6 @@ import { dcrJavascriptBundle } from '../../../scripts/webpack/bundles';
 import type { ServerSideTestNames } from '../../types/config';
 import { integrateIma } from '../experiments/tests/integrate-ima';
 import { removePrebidA9Canada } from '../experiments/tests/remove-prebid-a9-canada';
-import { serverSideLiveblogInlineAds } from '../experiments/tests/server-side-liveblog-inline-ads';
 import { useAB } from '../lib/useAB';
 
 export const CoreVitals = () => {
@@ -28,7 +27,6 @@ export const CoreVitals = () => {
 		/* keep array multi-line */
 		integrateIma,
 		removePrebidA9Canada,
-		serverSideLiveblogInlineAds,
 	];
 
 	const userInClientSideTestToForceMetrics =

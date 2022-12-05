@@ -1,6 +1,5 @@
 import type { Switches } from '../../types/config';
 import { calculateBlockSize, shouldDisplayAd } from '../lib/liveblogAdSlots';
-import { useAB } from '../lib/useAB';
 import { AdSlot } from './AdSlot';
 import { LiveBlock } from './LiveBlock';
 
@@ -17,6 +16,7 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	isLiveUpdate?: boolean;
+	isInLiveblogAdSlotTest?: boolean;
 };
 
 export const LiveBlogBlocksAndAdverts = ({
@@ -32,14 +32,9 @@ export const LiveBlogBlocksAndAdverts = ({
 	isAdFreeUser,
 	isSensitive,
 	isLiveUpdate,
+	isInLiveblogAdSlotTest = false,
 }: Props) => {
-	// If the user is not in the liveblog server-side ads AB test, provide the
-	// same experience as before and DO NOT insert ads into the page.
-	const aBTestAPI = useAB()?.api;
-	const userInAbTestVariant =
-		aBTestAPI?.isUserInVariant('ServerSideLiveblogInlineAds', 'variant') ??
-		false;
-	if (!userInAbTestVariant) {
+	if (!isInLiveblogAdSlotTest) {
 		return (
 			<>
 				{blocks.map((block) => (

@@ -38,6 +38,7 @@ type Props = {
 	filterKeyEvents?: boolean;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
+	isInLiveblogAdSlotTest?: boolean;
 };
 
 export const LiveBlogRenderer = ({
@@ -64,6 +65,7 @@ export const LiveBlogRenderer = ({
 	filterKeyEvents = false,
 	availableTopics,
 	selectedTopics,
+	isInLiveblogAdSlotTest = false,
 }: Props) => {
 	const filtered =
 		(selectedTopics && selectedTopics.length > 0) || filterKeyEvents;
@@ -145,6 +147,7 @@ export const LiveBlogRenderer = ({
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
 				pinnedPost={pinnedPost}
+				isInLiveblogAdSlotTest={isInLiveblogAdSlotTest}
 			/>
 			{blocks.length > 4 && (
 				<Island clientOnly={true}>

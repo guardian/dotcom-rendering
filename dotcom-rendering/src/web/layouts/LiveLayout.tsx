@@ -927,6 +927,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														CAPIArticle.config
 															.keywordIds
 													}
+													isInLiveblogAdSlotTest={
+														CAPIArticle.config
+															.abTests
+															.serverSideLiveblogInlineAdsVariant ===
+														'variant'
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1083,6 +1089,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													keywordIds={
 														CAPIArticle.config
 															.keywordIds
+													}
+													isInLiveblogAdSlotTest={
+														CAPIArticle.config
+															.abTests
+															.serverSideLiveblogInlineAdsVariant ===
+														'variant'
 													}
 												/>
 												{pagination.totalPages > 1 && (
