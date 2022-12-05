@@ -231,7 +231,7 @@ export const Card = ({
 	dataLinkName,
 	branding,
 	supportingContent,
-	supportingContentAlignment,
+	supportingContentAlignment = 'vertical',
 	snapData,
 	containerPalette,
 	containerType,
@@ -462,7 +462,7 @@ export const Card = ({
 					parentFormat={format}
 					containerPalette={containerPalette}
 					isDynamo={isDynamo}
-					alignment={supportingContentAlignment ?? 'vertical'}
+					alignment={supportingContentAlignment}
 				/>
 			) : (
 				<></>
