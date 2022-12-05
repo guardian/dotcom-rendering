@@ -1,6 +1,7 @@
 import { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
 import { none } from '@guardian/types';
+import { Optional } from 'optional';
 import {
 	Contributor,
 	isSingleContributor,
@@ -73,6 +74,7 @@ describe('tagToContributor', () => {
 				"src": "someBylineUrl",
 				"srcset": "someBylineUrl 32w, someBylineUrl 64w, someBylineUrl 128w, someBylineUrl 192w, someBylineUrl 256w, someBylineUrl 400w, someBylineUrl 600w",
 				"width": 192,
+				imageSubtype: Optional.none(),
 			  },
 			},
 			"name": "someTitle",

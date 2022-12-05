@@ -44,6 +44,7 @@ import { fromBodyElements } from 'outline';
 import { Result } from 'result';
 import { galleryBody } from './galleryBody';
 import { relatedContent } from './relatedContent';
+import { ImageSubtype } from 'image/image';
 
 // ----- Fixture ----- //
 
@@ -131,6 +132,7 @@ const image: Image = {
 	caption: none,
 	nativeCaption: none,
 	credit: none,
+	imageSubtype: Optional.some(ImageSubtype.Png),
 };
 
 const contributors: Contributor[] = [
@@ -164,6 +166,7 @@ const mainMedia: Option<MainMedia> = {
 				value: '‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.',
 			},
 			role: ArticleElementRole.Standard,
+			imageSubtype: Optional.some(ImageSubtype.Jpeg),
 		},
 	},
 };
@@ -202,6 +205,7 @@ const body: Body = [
 			value: 'Jane Giddins outside her home in Newton St Loe, Somerset. She is denied the legal right to buy the freehold because of an exemption granted to Prince Charles.',
 		},
 		role: ArticleElementRole.Standard,
+		imageSubtype: Optional.some(ImageSubtype.Jpeg),
 	}),
 	Result.ok({
 		kind: ElementKind.Text,
