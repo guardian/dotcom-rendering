@@ -269,7 +269,7 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 								percentage="50%"
 								key={card.url}
 								padSides={true}
-								showDivider={true}
+								showDivider={cardIndex % 2 === 1}
 								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
