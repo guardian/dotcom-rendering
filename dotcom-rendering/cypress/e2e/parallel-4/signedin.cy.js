@@ -9,6 +9,8 @@ const articleUrl =
 const profileResponse =
 	'{"status":"ok","userProfile":{"userId":"102309223","displayName":"Guardian User","webUrl":"https://profile.theguardian.com/user/id/102309223","apiUrl":"https://discussion.guardianapis.com/discussion-api/profile/102309223","avatar":"https://avatar.guim.co.uk/user/102309223","secureAvatarUrl":"https://avatar.guim.co.uk/user/102309223","badge":[],"privateFields":{"canPostComment":true,"isPremoderated":false,"hasCommented":false}}}';
 
+const idapiIdentifiersResponse = `{ "id": "000000000", "brazeUuid": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa", "puzzleUuid": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "googleTagId": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }`;
+
 describe('Signed in readers', function () {
 	beforeEach(function () {
 		disableCMP();
@@ -27,13 +29,15 @@ describe('Signed in readers', function () {
 			// this commercial error from failing this test
 			return false;
 		});
+		cy.intercept('GET', '**/user/me/identifiers', idapiIdentifiersResponse);
 		// Mock call to 'profile/me'
 		cy.intercept(
 			'GET',
 			'**/profile/me?strict_sanctions_check=false',
 			profileResponse,
-		);
+		).as('profileMe');
 		cy.visit(`Article?url=${articleUrl}`);
+		cy.wait('@profileMe');
 		// This text is shown in the header for signed in users
 		cy.contains('My account');
 	});

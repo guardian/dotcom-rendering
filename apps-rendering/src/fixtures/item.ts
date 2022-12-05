@@ -44,6 +44,7 @@ import type { Outline } from 'outline';
 import { fromBodyElements } from 'outline';
 import { Result } from 'result';
 import { galleryBody } from './galleryBody';
+import { partialNewsletterItem } from './newsletterSignUpContent';
 import { relatedContent } from './relatedContent';
 
 // ----- Fixture ----- //
@@ -516,6 +517,12 @@ const explainer: Explainer = {
 	outline: outlineFromItem(fields.body),
 };
 
+const newsletterSignUp: Standard = {
+	...fields,
+	design: ArticleDesign.NewsletterSignup,
+	...partialNewsletterItem,
+};
+
 const immersive: Standard = {
 	design: ArticleDesign.Standard,
 	...fields,
@@ -555,6 +562,7 @@ export {
 	quiz,
 	pinnedBlock,
 	explainer,
+	newsletterSignUp,
 	immersive,
 	gallery,
 	parseHtml,
