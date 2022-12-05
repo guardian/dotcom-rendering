@@ -22,7 +22,6 @@ import { FixedSmallSlowIV } from '../components/FixedSmallSlowIV';
 import { FixedSmallSlowVMPU } from '../components/FixedSmallSlowVMPU';
 import { FixedSmallSlowVThird } from '../components/FixedSmallSlowVThird';
 import { NavList } from '../components/NavList';
-import { NavMediaList } from '../components/NavMediaList';
 
 type Props = {
 	trails: DCRFrontCard[];
@@ -178,13 +177,18 @@ export const DecideContainer = ({
 			);
 		case 'nav/list':
 			return (
-				<NavList trails={trails} containerPalette={containerPalette} />
+				<NavList
+					trails={trails}
+					containerPalette={containerPalette}
+					showImage={false}
+				/>
 			);
 		case 'nav/media-list':
 			return (
-				<NavMediaList
+				<NavList
 					trails={trails}
 					containerPalette={containerPalette}
+					showImage={true}
 				/>
 			);
 		default:
