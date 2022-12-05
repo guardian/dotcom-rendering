@@ -476,6 +476,17 @@ export const AdSlot = ({
 				/>
 			);
 		}
+		case 'exclusion': {
+			return (
+				<div
+					id={'dfp-ad--exclusion'}
+					className={['js-ad-slot', 'ad-slot'].join(' ')}
+					data-name="exclusion"
+					aria-hidden="true"
+					data-label="false"
+				/>
+			);
+		}
 		default:
 			return null;
 	}

@@ -375,6 +375,18 @@
         },
         "isNetworkFront": {
             "type": "boolean"
+        },
+        "mostViewed": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/CAPITrailType"
+            }
+        },
+        "mostCommented": {
+            "$ref": "#/definitions/CAPITrailType"
+        },
+        "mostShared": {
+            "$ref": "#/definitions/CAPITrailType"
         }
     },
     "required": [
@@ -385,6 +397,7 @@
         "guardianBaseURL",
         "isAdFreeUser",
         "isNetworkFront",
+        "mostViewed",
         "nav",
         "pageFooter",
         "pageId",
@@ -2932,6 +2945,217 @@
                 "dataLinkName",
                 "text",
                 "url"
+            ]
+        },
+        "CAPITrailType": {
+            "type": "object",
+            "properties": {
+                "format": {
+                    "type": "object",
+                    "properties": {
+                        "design": {
+                            "$ref": "#/definitions/CAPIDesign"
+                        },
+                        "theme": {
+                            "$ref": "#/definitions/CAPITheme"
+                        },
+                        "display": {
+                            "$ref": "#/definitions/CAPIDisplay"
+                        }
+                    },
+                    "required": [
+                        "design",
+                        "display",
+                        "theme"
+                    ]
+                },
+                "designType": {
+                    "type": "string"
+                },
+                "pillar": {
+                    "type": "string"
+                },
+                "carouselImages": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
+                "isLiveBlog": {
+                    "type": "boolean"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "headline": {
+                    "type": "string"
+                },
+                "webPublicationDate": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "avatarUrl": {
+                    "type": "string"
+                },
+                "mediaType": {
+                    "$ref": "#/definitions/MediaType"
+                },
+                "mediaDuration": {
+                    "type": "number"
+                },
+                "ageWarning": {
+                    "type": "string"
+                },
+                "byline": {
+                    "type": "string"
+                },
+                "showByline": {
+                    "type": "boolean"
+                },
+                "kickerText": {
+                    "type": "string"
+                },
+                "shortUrl": {
+                    "type": "string"
+                },
+                "commentCount": {
+                    "type": "number"
+                },
+                "starRating": {
+                    "type": "number"
+                },
+                "linkText": {
+                    "type": "string"
+                },
+                "branding": {
+                    "$ref": "#/definitions/Branding"
+                },
+                "isSnap": {
+                    "type": "boolean"
+                },
+                "snapData": {
+                    "type": "object",
+                    "properties": {
+                        "embedHtml": {
+                            "type": "string"
+                        },
+                        "embedCss": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "required": [
+                "format",
+                "headline",
+                "url"
+            ]
+        },
+        "MediaType": {
+            "enum": [
+                "Audio",
+                "Gallery",
+                "Video"
+            ],
+            "type": "string"
+        },
+        "Branding": {
+            "type": "object",
+            "properties": {
+                "brandingType": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name"
+                    ]
+                },
+                "sponsorName": {
+                    "type": "string"
+                },
+                "logo": {
+                    "type": "object",
+                    "properties": {
+                        "src": {
+                            "type": "string"
+                        },
+                        "link": {
+                            "type": "string"
+                        },
+                        "label": {
+                            "type": "string"
+                        },
+                        "dimensions": {
+                            "type": "object",
+                            "properties": {
+                                "width": {
+                                    "type": "number"
+                                },
+                                "height": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "height",
+                                "width"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "dimensions",
+                        "label",
+                        "link",
+                        "src"
+                    ]
+                },
+                "aboutThisLink": {
+                    "type": "string"
+                },
+                "logoForDarkBackground": {
+                    "type": "object",
+                    "properties": {
+                        "src": {
+                            "type": "string"
+                        },
+                        "link": {
+                            "type": "string"
+                        },
+                        "label": {
+                            "type": "string"
+                        },
+                        "dimensions": {
+                            "type": "object",
+                            "properties": {
+                                "width": {
+                                    "type": "number"
+                                },
+                                "height": {
+                                    "type": "number"
+                                }
+                            },
+                            "required": [
+                                "height",
+                                "width"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "dimensions",
+                        "label",
+                        "link",
+                        "src"
+                    ]
+                }
+            },
+            "required": [
+                "aboutThisLink",
+                "logo",
+                "sponsorName"
             ]
         }
     },

@@ -98,6 +98,11 @@ cypress: clear clean-dist install build
 	$(call log, "starting frontend PROD server for Cypress")
 	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --browser chrome --spec "cypress/e2e/**/*"'
 
+cypress-open: export NODE_ENV=production
+cypress-open: clear clean-dist install build
+	$(call log, "starting frontend PROD server for Cypress")
+	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress open --browser chrome'
+
 cypress-arm64: export NODE_ENV=production
 cypress-arm64: clear clean-dist install build
 	$(call log, "starting frontend PROD server for Cypress")

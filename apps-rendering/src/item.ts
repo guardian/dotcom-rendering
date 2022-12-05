@@ -520,6 +520,11 @@ const fromCapi =
 				design: ArticleDesign.Interview,
 				...itemFieldsWithBody(context, request),
 			};
+		} else if (isRecipe(tags)) {
+			return {
+				design: ArticleDesign.Recipe,
+				...itemFieldsWithBody(context, request),
+			};
 		} else if (isFeature(tags)) {
 			return {
 				design: ArticleDesign.Feature,
@@ -527,11 +532,6 @@ const fromCapi =
 			};
 		} else if (isLive(tags)) {
 			return fromCapiLiveBlog(context)(request, page);
-		} else if (isRecipe(tags)) {
-			return {
-				design: ArticleDesign.Recipe,
-				...itemFieldsWithBody(context, request),
-			};
 		} else if (isQuiz(tags)) {
 			return {
 				design: ArticleDesign.Quiz,

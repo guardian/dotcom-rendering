@@ -1,4 +1,4 @@
-name: Chromatic 👓
+name: DCR Chromatic 👓
 
 on:
   push:
@@ -31,31 +31,22 @@ jobs:
       # Root yarn installs all workspaces (root, common, dotcom)
       - uses: bahmutov/npm-install@v1
 
-      - name: Chromatic - Common Rendering
-        uses: chromaui/action@v1
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__COMMON_RENDERING }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          workingDir: common-rendering
-          exitOnceUploaded: true
-          onlyChanged: '!(main)' # only turbosnap on non-main branches
-
-      - name: Chromatic - Non Dependency PR / main
+      - name: Chromatic - DCR Non Dependency PR / main
         uses: chromaui/action@v1
         if: ${{ github.event_name == 'push' || (!contains(github.event.pull_request.labels.*.name, 'dependencies') && github.event.pull_request.user.login != 'dependabot')}}
         with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__DOTCOM_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
           onlyChanged: true
           untraced: '**/(package**.json|yarn.lock)'
-          workingDir: storybooks
+          workingDir: dotcom-rendering
 
-      - name: Chromatic - Dependency PR
+      - name: Chromatic - DCR Dependency PR
         uses: chromaui/action@v1
         if: ${{ github.event_name == 'pull_request' && (contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event.pull_request.user.login == 'dependabot') }}
         with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN__DOTCOM_RENDERING }}
           token: ${{ secrets.GITHUB_TOKEN }}
           autoAcceptChanges: main
-          workingDir: storybooks
+          workingDir: dotcom-rendering
