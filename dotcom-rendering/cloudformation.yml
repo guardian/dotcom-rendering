@@ -36,7 +36,7 @@ Parameters:
     # This will allow this service to scale up first and be ready for if ArticleStack needs to get larger.
     # This might actually alleviate the pressure on ArticleStack avoiding it needing to scale up.
     # ArticleStack LatencyAlarmThreshold: https://github.com/guardian/platform/blob/main/provisioning/cloudformation/frontend.yaml#L118
-    Default: '0.4'
+    Default: '0.2'
   LatencyAlarmPeriod:
     Type: String
     Description: (Optional) Duration in seconds over which the latency is applied
