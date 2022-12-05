@@ -15,7 +15,7 @@
 		"build-storybook:cr": "pnpm -F @guardian/common-rendering build-storybook",
 		"build-storybook:dcr": "pnpm -F @guardian/dotcom-rendering build-storybook",
 		"build-storybook:composed": "pnpm -F storybooks build-storybook",
-		"build:dcr": "pnpm @guardian/dotcom-rendering makeBuild",
+		"build:dcr": "pnpm -F @guardian/dotcom-rendering makeBuild",
 		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
 		"prepare": "husky install"
 	},
