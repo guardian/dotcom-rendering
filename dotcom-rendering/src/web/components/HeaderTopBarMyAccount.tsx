@@ -146,6 +146,8 @@ const SignIn = ({ idUrl }: { idUrl: string }) => (
 export const dropDownOverrides = css`
 	color: ${neutral[100]};
 	padding-right: 0;
+	padding-bottom: 0;
+	margin-top: 0;
 
 	font-size: 1rem;
 
