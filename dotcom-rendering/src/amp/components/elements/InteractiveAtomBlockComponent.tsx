@@ -1,5 +1,4 @@
 import { ClassNames } from '@emotion/react';
-import React from 'react';
 import { ShowMoreButton } from '../ShowMoreButton';
 
 // We look in the html field of the atom for a hint for the height of the atom
@@ -45,11 +44,17 @@ const getHeight = (html?: string): number => {
 	return defaultInteractiveAtomHeight;
 };
 
-export const InteractiveAtomBlockComponent: React.FunctionComponent<{
+type Props = {
 	url: string;
 	html?: string;
 	placeholderUrl?: string;
-}> = ({ url, placeholderUrl, html }) => {
+};
+
+export const InteractiveAtomBlockComponent = ({
+	url,
+	placeholderUrl,
+	html,
+}: Props) => {
 	// On Dot Com, Interactive Atoms are sometimes used to modify the page
 	// around them. CSS, JS but no HTML can exist in an atom, and because we just
 	// add it to the page, it can modify the world around it.

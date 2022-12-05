@@ -1,10 +1,11 @@
 import { ClassNames } from '@emotion/react';
-import React from 'react';
 
 const prebidImg =
 	'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==';
 
-export const AnalyticsIframe: React.FC<{ url: string }> = ({ url }) => {
+type Props = { url: string };
+
+export const AnalyticsIframe = ({ url }: Props) => {
 	return (
 		<ClassNames>
 			{({ css }) => {

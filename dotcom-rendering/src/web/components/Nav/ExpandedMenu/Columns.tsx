@@ -211,12 +211,19 @@ const editionsSwitch = css`
 	}
 `;
 
-export const Columns: React.FC<{
+type Props = {
 	editionId: EditionId;
 	format: ArticleFormat;
 	nav: NavType;
 	headerTopBarSwitch: boolean;
-}> = ({ format, nav, editionId, headerTopBarSwitch }) => {
+};
+
+export const Columns = ({
+	format,
+	nav,
+	editionId,
+	headerTopBarSwitch,
+}: Props) => {
 	const activeEdition = getEditionFromId(editionId);
 	const remainingEditions = getRemainingEditions(activeEdition.editionId);
 	return (

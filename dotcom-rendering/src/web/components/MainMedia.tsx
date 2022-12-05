@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { until } from '@guardian/source-foundations';
 import type { Switches } from '../../types/config';
-import { CAPIElement } from '../../types/content';
+import type { CAPIElement } from '../../types/content';
 import { getZIndex } from '../lib/getZIndex';
 import { RenderArticleElement } from '../lib/renderElement';
 
@@ -68,7 +68,7 @@ const chooseWrapper = (format: ArticleFormat) => {
 	}
 };
 
-export const MainMedia: React.FC<{
+type Props = {
 	format: ArticleFormat;
 	elements: CAPIElement[];
 	hideCaption?: boolean;
@@ -81,7 +81,9 @@ export const MainMedia: React.FC<{
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	switches: Switches;
-}> = ({
+};
+
+export const MainMedia = ({
 	elements,
 	format,
 	hideCaption,
@@ -94,7 +96,7 @@ export const MainMedia: React.FC<{
 	isAdFreeUser,
 	isSensitive,
 	switches,
-}) => {
+}: Props) => {
 	return (
 		<div css={[mainMedia, chooseWrapper(format)]}>
 			{elements.map((element, index) => (

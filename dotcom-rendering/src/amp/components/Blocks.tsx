@@ -1,11 +1,9 @@
 import { css } from '@emotion/react';
 import { neutral, text, textSans } from '@guardian/source-foundations';
-import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import type { CommercialProperties } from '../../types/commercial';
 import type { Switches } from '../../types/config';
-import { EditionId } from '../../web/lib/edition';
-
+import type { EditionId } from '../../web/lib/edition';
 import { blockLink } from '../lib/block-link';
 import { findBlockAdSlots } from '../lib/find-adslots';
 import { Elements } from './Elements';
@@ -61,9 +59,7 @@ const clearBoth = css`
 	clear: both;
 `;
 
-// TODO ad handling (currently done in elements, which is wrong, so let's lift
-// that out and have an Ad element type we match against
-export const Blocks: React.FunctionComponent<{
+type Props = {
 	blocks: Block[];
 	pillar: ArticleTheme;
 	editionId: EditionId;
@@ -74,7 +70,11 @@ export const Blocks: React.FunctionComponent<{
 	url: string;
 	shouldHideAds: boolean;
 	adTargeting: AdTargeting;
-}> = ({
+};
+
+// TODO ad handling (currently done in elements, which is wrong, so let's lift
+// that out and have an Ad element type we match against
+export const Blocks = ({
 	blocks,
 	pillar,
 	editionId,
@@ -85,7 +85,7 @@ export const Blocks: React.FunctionComponent<{
 	url,
 	shouldHideAds,
 	adTargeting,
-}) => {
+}: Props) => {
 	// TODO add last updated for blocks to show here
 	const liveBlogBlocks = blocks.map((block) => {
 		return (

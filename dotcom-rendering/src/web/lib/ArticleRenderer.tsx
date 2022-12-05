@@ -27,7 +27,7 @@ const adStylesDynamic = css`
 	${adCollapseStyles}
 `;
 
-export const ArticleRenderer: React.FC<{
+type Props = {
 	format: ArticleFormat;
 	elements: CAPIElement[];
 	adTargeting?: AdTargeting;
@@ -45,7 +45,9 @@ export const ArticleRenderer: React.FC<{
 	isDev: boolean;
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
-}> = ({
+};
+
+export const ArticleRenderer = ({
 	format,
 	elements,
 	adTargeting,
@@ -63,7 +65,7 @@ export const ArticleRenderer: React.FC<{
 	isAdFreeUser,
 	isSensitive,
 	isDev,
-}) => {
+}: Props) => {
 	const renderedElements = elements.map((element, index) => {
 		return (
 			<RenderArticleElement
