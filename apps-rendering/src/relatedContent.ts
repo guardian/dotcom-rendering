@@ -3,12 +3,12 @@ import { OnwardsContentCategory } from '@guardian/apps-rendering-api-models/onwa
 import type { Content } from '@guardian/content-api-models/v1/content';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { Option } from '@guardian/types';
-import { andThen, none, OptionKind, some } from '@guardian/types';
+import { none, OptionKind, some } from '@guardian/types';
 import { articleMainImage, isAnalysis, isFeature, maybeCapiDate } from 'capi';
 import type { Contributor } from 'contributor';
 import { parseContributors } from 'contributor';
-import type { Context } from 'parserContext';
-import { Image, parseImage } from 'image';
+import type { Image } from 'image';
+import { parseImage } from 'image';
 import {
 	isAudio,
 	isComment,
@@ -20,7 +20,8 @@ import {
 	isVideo,
 } from 'item';
 import { index, pipe } from 'lib';
-import { Optional } from 'optional';
+import type { Optional } from 'optional';
+import type { Context } from 'parserContext';
 
 interface RelatedItemFields {
 	headline: string;
@@ -126,13 +127,6 @@ const relatedContentFields = (
 	contributor: index(0)(parseContributors(context.salt, content)),
 });
 
-const getContributorImage = (article: OnwardsContentArticle): Option<Image> => {
-	return pipe(
-		article.contributor,
-		andThen((contributor) => contributor.image),
-	);
-};
-
 const parseMapiRelatedContent =
 	(context: Context) =>
 	(
@@ -213,5 +207,5 @@ const parseRelatedContent = (content: Content[]): ARModelsOnwardsContent => {
 	};
 };
 
-export { parseRelatedContent, parseMapiRelatedContent, getContributorImage };
+export { parseRelatedContent, parseMapiRelatedContent };
 export type { OnwardsContentSection as RelatedContent };
