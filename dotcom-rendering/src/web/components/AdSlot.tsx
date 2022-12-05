@@ -483,6 +483,7 @@ export const AdSlot = ({
 					className={['js-ad-slot', 'ad-slot'].join(' ')}
 					data-name="exclusion"
 					aria-hidden="true"
+					data-label="false"
 				/>
 			);
 		}
