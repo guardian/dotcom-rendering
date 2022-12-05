@@ -108,8 +108,6 @@ const defaultStyles = css`
 	`}
 `;
 
-export const COMMENT = RelatedItemType.COMMENT;
-
 const DefaultRelatedContent: FC<Props> = ({ content, className }) => {
 	return pipe(
 		content,

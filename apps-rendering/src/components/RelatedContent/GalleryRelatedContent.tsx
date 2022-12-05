@@ -6,16 +6,20 @@ import {
 	background,
 	border,
 } from '@guardian/common-rendering/src/editorialPalette';
-import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleFormat } from '@guardian/libs';
 import { from, neutral, remSpace, until } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
+import { Option, OptionKind } from '@guardian/types';
 import { none } from '@guardian/types';
 import BylineCard from 'components/BylineCard';
 import Card from 'components/Card';
 import { grid } from 'grid/grid';
-import type { ResizedRelatedContent } from 'item';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
+import {
+	getFormat,
+	OnwardsContentArticle,
+	RelatedContent,
+} from 'relatedContent';
 import { darkModeCss } from 'styles';
 import {
 	COMMENT,
@@ -93,35 +97,35 @@ const headingStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 type Props = {
-	content: Option<ResizedRelatedContent>;
+	onwardsContent: Option<RelatedContent>;
 	format: ArticleFormat;
 };
 
-const GalleryRelatedContent: FC<Props> = ({ content, format }) =>
-	maybeRender(content, ({ title, relatedItems, resizedImages }) => {
-		if (relatedItems.length === 0) {
+const GalleryRelatedContent: FC<Props> = ({ onwardsContent, format }) =>
+	maybeRender(onwardsContent, ({ category, content }) => {
+		if (content.length === 0) {
 			return null;
 		}
 
 		return (
 			<aside css={styles(format)}>
 				<h2 css={css(defaultHeadingStyles, headingStyles(format))}>
-					{title}
+					{category.toString()}
 				</h2>
 
 				<ul
 					css={css(defaultListStyles, relatedContentStyles)}
 					role="list"
 				>
-					{relatedItems.map((relatedItem, key) => {
-						return relatedItem.type === COMMENT &&
-							relatedItem.bylineImage ? (
+					{content.map((relatedItem, key) => {
+						const format = getFormat(relatedItem);
+						return format.design === ArticleDesign.Comment &&
+							relatedItem.contributor.kind === OptionKind.Some ? (
 							<BylineCard key={key} relatedItem={relatedItem} />
 						) : (
 							<Card
 								key={key}
 								relatedItem={relatedItem}
-								image={resizedImages[key]}
 								kickerText={none}
 							/>
 						);

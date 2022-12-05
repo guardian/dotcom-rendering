@@ -32,7 +32,7 @@ const RelatedContent: FC<Props> = ({ item }) => {
 		case ArticleDesign.Gallery:
 			return (
 				<GalleryRelatedContent
-					content={item.relatedContent}
+					onwardsContent={item.relatedContent}
 					format={format}
 				/>
 			);
