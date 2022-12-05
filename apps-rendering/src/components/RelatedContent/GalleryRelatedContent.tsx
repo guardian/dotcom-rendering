@@ -22,7 +22,6 @@ import {
 } from 'relatedContent';
 import { darkModeCss } from 'styles';
 import {
-	COMMENT,
 	defaultHeadingStyles,
 	defaultListStyles,
 } from './RelatedContent.defaults';
