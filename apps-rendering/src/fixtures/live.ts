@@ -10,13 +10,13 @@ import {
 import { none, OptionKind, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { parse } from 'client/parser';
+import { ImageSubtype } from 'image/image';
 import type { DeadBlog, LiveBlog } from 'item';
 import type { LiveBlock } from 'liveBlock';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
-import type { LiveBlogPagedBlocks } from 'pagination';
-import { ImageSubtype } from 'image/image';
 import { Optional } from 'optional';
+import type { LiveBlogPagedBlocks } from 'pagination';
 
 const parser = new DOMParser();
 const parseHtml = parse(parser);
@@ -58,7 +58,7 @@ const mainMedia: Option<MainMedia> = {
 				value: '‘They could kill me any day; that’s all right with me. I am going down swinging, brother’ … West.',
 			},
 			role: ArticleElementRole.Standard,
-			imageSubtype: Optional.some(ImageSubtype.Jpeg)
+			imageSubtype: Optional.some(ImageSubtype.Jpeg),
 		},
 	},
 };

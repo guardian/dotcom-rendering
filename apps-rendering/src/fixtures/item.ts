@@ -18,6 +18,7 @@ import { parse } from 'client/parser';
 import type { Contributor } from 'contributor';
 import type { MatchScores } from 'football';
 import type { Image } from 'image';
+import { ImageSubtype } from 'image/image';
 import type {
 	Analysis,
 	Comment,
@@ -44,7 +45,6 @@ import { fromBodyElements } from 'outline';
 import { Result } from 'result';
 import { galleryBody } from './galleryBody';
 import { relatedContent } from './relatedContent';
-import { ImageSubtype } from 'image/image';
 
 // ----- Fixture ----- //
 
