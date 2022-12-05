@@ -4,7 +4,7 @@
 
 // ----- Imports ----- //
 
-import type { ArticleTheme } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticleFormat, ArticleTheme } from '@guardian/libs';
 import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import { Optional } from 'optional';
 
@@ -109,6 +109,124 @@ const themeToPillar = (theme: ArticleTheme): ArticlePillar => {
 	}
 };
 
+/**
+ * Creates a string representation of {@linkcode ArticleDesign}. Useful for
+ * logging, storybook UI etc.
+ * 
+ * @param design An {@linkcode ArticleDesign}
+ * @returns A string representation of `ArticleDesign`
+ */
+const designToString = (design: ArticleDesign): string => {
+	switch (design) {
+		case ArticleDesign.Standard:
+			return 'Standard';
+		case ArticleDesign.Gallery:
+			return 'Gallery';
+		case ArticleDesign.Audio:
+			return 'Audio';
+		case ArticleDesign.Video:
+			return 'Video';
+		case ArticleDesign.Review:
+			return 'Review';
+		case ArticleDesign.Analysis:
+			return 'Analysis';
+		case ArticleDesign.Explainer:
+			return 'Explainer';
+		case ArticleDesign.Comment:
+			return 'Comment';
+		case ArticleDesign.Letter:
+			return 'Letter';
+		case ArticleDesign.Feature:
+			return 'Feature';
+		case ArticleDesign.LiveBlog:
+			return 'Liveblog';
+		case ArticleDesign.DeadBlog:
+			return 'Deadblog';
+		case ArticleDesign.Recipe:
+			return 'Recipe';
+		case ArticleDesign.MatchReport:
+			return 'Match Report';
+		case ArticleDesign.Interview:
+			return 'Interview';
+		case ArticleDesign.Editorial:
+			return 'Editorial';
+		case ArticleDesign.Quiz:
+			return 'Quiz';
+		case ArticleDesign.Interactive:
+			return 'Interactive';
+		case ArticleDesign.PhotoEssay:
+			return 'Photo Essay';
+		case ArticleDesign.PrintShop:
+			return 'Print Shop';
+		case ArticleDesign.Obituary:
+			return 'Obituary';
+		case ArticleDesign.Correction:
+			return 'Correction';
+		case ArticleDesign.FullPageInteractive:
+			return 'Full Page Interactive';
+		case ArticleDesign.NewsletterSignup:
+			return 'Newsletter Signup';
+	}
+}
+
+/**
+ * Creates a string representation of {@linkcode ArticleDisplay}. Useful for
+ * logging, storybook UI etc.
+ * 
+ * @param display An {@linkcode ArticleDisplay}
+ * @returns A string representation of `ArticleDisplay`
+ */
+const displayToString = (display: ArticleDisplay): string => {
+	switch (display) {
+		case ArticleDisplay.Standard:
+			return 'Standard';
+		case ArticleDisplay.Immersive:
+			return 'Immersive';
+		case ArticleDisplay.Showcase:
+			return 'Showcase';
+		case ArticleDisplay.NumberedList:
+			return 'Numbered List';
+	}
+}
+
+/**
+ * Creates a string representation of {@linkcode ArticleTheme}. Useful for
+ * logging, storybook UI etc.
+ * 
+ * @param theme An {@linkcode ArticleTheme}
+ * @returns A string representation of `ArticleTheme`
+ */
+const themeToString = (theme: ArticleTheme): string => {
+	switch (theme) {
+		case ArticlePillar.News:
+			return 'News';
+		case ArticlePillar.Opinion:
+			return 'Opinion';
+		case ArticlePillar.Sport:
+			return 'Sport';
+		case ArticlePillar.Culture:
+			return 'Culture';
+		case ArticlePillar.Lifestyle:
+			return 'Lifestyle';
+		case ArticleSpecial.Labs:
+			return 'Labs';
+		case ArticleSpecial.SpecialReport:
+			return 'Special Report';
+		case ArticleSpecial.SpecialReportAlt:
+			return 'Special Report Alt';
+	}
+}
+
+/**
+ * Creates a string representation of {@linkcode ArticleFormat}. Useful for
+ * logging, storybook UI etc.
+ * 
+ * @param format An {@linkcode ArticleFormat}
+ * @returns A string representation of `ArticleFormat`
+ */
+const formatToString = (format: ArticleFormat): string =>
+	`Design: ${designToString(format.design)}, Display: ${displayToString(format.display)}, Theme: ${themeToString(format.theme)}`;
+
 // ----- Exports ----- //
 
-export { getPillarFromId, getPillarOrElseNews, pillarToId, themeToPillar };
+export { formatToString, getPillarFromId, getPillarOrElseNews, pillarToId, themeToPillar };
