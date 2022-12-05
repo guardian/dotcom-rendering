@@ -115,20 +115,21 @@ export const LiveBlogRenderer = ({
 				<></>
 			)}
 
-			{switches.automaticFilters && hasRelevantTopics(availableTopics) && (
-				<Hide above="desktop">
-					<Island>
-						<TopicFilterBank
-							availableTopics={availableTopics}
-							selectedTopics={selectedTopics}
-							format={format}
-							keyEvents={keyEvents}
-							filterKeyEvents={filterKeyEvents}
-							id={'key-events-carousel-mobile'}
-						/>
-					</Island>
-				</Hide>
-			)}
+			{switches.automaticFilters &&
+				hasRelevantTopics(availableTopics) && (
+					<Hide above="desktop">
+						<Island>
+							<TopicFilterBank
+								availableTopics={availableTopics}
+								selectedTopics={selectedTopics}
+								format={format}
+								keyEvents={keyEvents}
+								filterKeyEvents={filterKeyEvents}
+								id={'key-events-carousel-mobile'}
+							/>
+						</Island>
+					</Hide>
+				)}
 			<div id="top-of-blog" />
 			{blocks.map((block) => {
 				return (
