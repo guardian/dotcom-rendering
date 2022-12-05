@@ -229,10 +229,12 @@ const themeToString = (theme: ArticleTheme): string => {
  * @param format An {@linkcode ArticleFormat}
  * @returns A string representation of `ArticleFormat`
  */
-const formatToString = (format: ArticleFormat): string =>
-	`Design: ${designToString(format.design)}, Display: ${displayToString(
-		format.display,
-	)}, Theme: ${themeToString(format.theme)}`;
+const formatToString = ({ design, display, theme }: ArticleFormat): string =>
+	[
+		`Design: ${designToString(design)}`,
+		`Display: ${displayToString(display)}`,
+		`Theme: ${themeToString(theme)}`,
+	].join(', ');
 
 // ----- Exports ----- //
 
