@@ -15,7 +15,7 @@ jobs:
         run: make build
         working-directory: dotcom-rendering
       - name: Install cypress
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v5
         with:
           runTests: false
           start: make start-ci
