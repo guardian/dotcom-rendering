@@ -1738,6 +1738,7 @@ export const NumberedList: FEArticleType = {
 				headline:
 					'EU deal will force iPhones to use USB-C charger by 2024',
 				shortUrl: 'https://www.theguardian.com/p/ytt7j',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/world/2022/oct/04/eu-votes-to-force-all-phones-to-use-same-charger-by-2024',
@@ -1762,6 +1763,7 @@ export const NumberedList: FEArticleType = {
 				headline:
 					'EU votes to force all phones to use same charger by 2024',
 				shortUrl: 'https://www.theguardian.com/p/mcnx4',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/uk-news/2021/aug/09/vodaphone-to-reintroduce-roaming-fees-for-uk-customers-in-europe',
@@ -1787,6 +1789,7 @@ export const NumberedList: FEArticleType = {
 				headline:
 					'Vodafone to reintroduce roaming fees for UK customers in Europe',
 				shortUrl: 'https://www.theguardian.com/p/teezg',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/technology/2020/apr/23/bug-leaves-iphones-vulnerable-hackers-stealing-email-contents',
@@ -1812,6 +1815,7 @@ export const NumberedList: FEArticleType = {
 				headline:
 					'Bug leaves iPhones vulnerable to hackers stealing email contents',
 				shortUrl: 'https://www.theguardian.com/p/dyyea',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/technology/2020/feb/24/mate-xs-huawei-launches-latest-version-of-folding-smartphone',
@@ -1837,6 +1841,7 @@ export const NumberedList: FEArticleType = {
 				headline:
 					'Mate Xs: Huawei launches latest version of folding smartphone',
 				shortUrl: 'https://www.theguardian.com/p/dap9k',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/technology/2020/feb/11/samsung-launches-galaxy-s20-range-with-up-to-100x-zoom-camera',
@@ -1862,6 +1867,7 @@ export const NumberedList: FEArticleType = {
 				headline:
 					'Samsung launches Galaxy S20 range with up to 100x zoom camera',
 				shortUrl: 'https://www.theguardian.com/p/d9ve7',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/technology/2020/feb/11/samsung-galaxy-z-flip-folding-screen-flip-phone-launches',
@@ -1887,6 +1893,7 @@ export const NumberedList: FEArticleType = {
 				headline:
 					'Samsung Galaxy Z Flip: folding-screen flip-phone launches',
 				shortUrl: 'https://www.theguardian.com/p/d9xdb',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/technology/2019/oct/21/google-eye-detection-pixel-4-smartphone-unlock',
@@ -1912,6 +1919,7 @@ export const NumberedList: FEArticleType = {
 				headline:
 					'Google to add eye detection to Pixel 4 after privacy concerns',
 				shortUrl: 'https://www.theguardian.com/p/chhfd',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/technology/2019/oct/02/microsoft-launches-surface-pro-x-and-previews-folding-phone',
@@ -1937,6 +1945,7 @@ export const NumberedList: FEArticleType = {
 				headline:
 					'Microsoft launches Surface Pro X and previews folding phone',
 				shortUrl: 'https://www.theguardian.com/p/cechh',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/technology/2019/aug/07/samsung-galaxy-note-10-launch-big-screens-and-stylus-air-gestures',
@@ -1962,6 +1971,7 @@ export const NumberedList: FEArticleType = {
 				headline:
 					'Samsung Galaxy Note 10 launch: big screens and stylus air gestures',
 				shortUrl: 'https://www.theguardian.com/p/c4chq',
+				showQuotedHeadline: false,
 			},
 		],
 	},

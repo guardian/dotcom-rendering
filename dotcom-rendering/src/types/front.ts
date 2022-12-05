@@ -235,6 +235,7 @@ export type DCRFrontCard = {
 	format: ArticleFormat;
 	url: string;
 	headline: string;
+	showQuotedHeadline: boolean;
 	trailText?: string;
 	starRating?: number;
 	webPublicationDate?: string;
