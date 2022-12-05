@@ -41,6 +41,7 @@ export const FixedMediumSlowVI = ({
 						key={trail.url}
 						padSides={true}
 						showDivider={index > 0}
+						containerPalette={containerPalette}
 						percentage={'25%'}
 					>
 						<FrontCard
@@ -58,7 +59,12 @@ export const FixedMediumSlowVI = ({
 			</UL>
 			<UL direction="row">
 				{secondSlice25.map((trail, index) => (
-					<LI key={trail.url} padSides={true} showDivider={index > 0}>
+					<LI
+						key={trail.url}
+						padSides={true}
+						showDivider={index > 0}
+						containerPalette={containerPalette}
+					>
 						<FrontCard
 							trail={trail}
 							containerPalette={containerPalette}

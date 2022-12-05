@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
-import { brand, brandAlt, from, textSans } from '@guardian/source-foundations';
+import { brandAlt, from, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import NewspaperIcon from '../../static/icons/newspaper.svg';
-import type { EditionId } from '../lib/edition';
 import { addTrackingCodesToUrl } from '../lib/acquisitions';
+import type { EditionId } from '../lib/edition';
 
 interface PrintSubscriptionsProps {
 	editionId: EditionId;
@@ -12,26 +12,25 @@ interface PrintSubscriptionsProps {
 const printSubscriptionStyles = css`
 	display: none;
 
-	:before {
-		content: '';
-		border-left: 1px solid ${brand[600]};
-		height: 24px;
-	}
-
 	${from.desktop} {
 		display: flex;
 	}
 `;
 
 const linkStyles = css`
+	display: flex;
+	align-items: center;
 	${textSans.medium({ fontWeight: 'bold' })};
+	font-size: 1rem;
+	height: fit-content;
+	line-height: 1;
 	color: ${brandAlt[400]};
 	transition: color 80ms ease-out;
 	text-decoration: none;
 	padding: 7px 0;
 
 	${from.tablet} {
-		padding: 7px 10px 7px 5px;
+		padding: 7px 10px 7px 6px;
 	}
 
 	:hover,
@@ -44,7 +43,7 @@ const linkStyles = css`
 		float: left;
 		height: 18px;
 		width: 18px;
-		margin: 3px 4px 0 0;
+		margin: 0 4px 0 0;
 	}
 `;
 

@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { neutral, news, textSans } from '@guardian/source-foundations';
-import React from 'react';
 import type { CommentBlockElement } from '../../../types/content';
 
 const wrapper = css`
@@ -38,9 +37,11 @@ const bodyCSS = css`
 	}
 `;
 
-export const CommentBlockComponent: React.FC<{
+type Props = {
 	element: CommentBlockElement;
-}> = ({ element }) => (
+};
+
+export const CommentBlockComponent = ({ element }: Props) => (
 	<div css={wrapper}>
 		<amp-img
 			class={avatar}

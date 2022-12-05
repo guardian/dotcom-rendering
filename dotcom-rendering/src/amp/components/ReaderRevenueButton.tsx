@@ -5,7 +5,6 @@ import {
 	textSans,
 	until,
 } from '@guardian/source-foundations';
-import React from 'react';
 import type { NavType } from '../../model/extract-nav';
 import ArrowRight from '../../static/icons/arrow-right.svg';
 
@@ -72,13 +71,21 @@ const rightAlignedIcon = css`
 	top: 0;
 `;
 
-export const ReaderRevenueButton: React.FunctionComponent<{
+type Props = {
 	nav: NavType;
 	linkLabel: string;
 	rrLink: ReaderRevenuePosition;
 	rrCategory: ReaderRevenueCategory;
 	rightAlignIcon?: boolean;
-}> = ({ nav, linkLabel, rrLink, rrCategory, rightAlignIcon }) => {
+};
+
+export const ReaderRevenueButton = ({
+	nav,
+	linkLabel,
+	rrLink,
+	rrCategory,
+	rightAlignIcon,
+}: Props) => {
 	const url = nav.readerRevenueLinks[rrLink][rrCategory];
 
 	if (url === '') {

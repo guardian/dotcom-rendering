@@ -42,7 +42,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-const Renderer: React.FC<{
+type RendererProps = {
 	format: ArticleFormat;
 	elements: CAPIElement[];
 	host?: string;
@@ -52,7 +52,9 @@ const Renderer: React.FC<{
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	switches: Switches;
-}> = ({
+};
+
+const Renderer = ({
 	format,
 	elements,
 	host,
@@ -62,7 +64,7 @@ const Renderer: React.FC<{
 	isAdFreeUser,
 	isSensitive,
 	switches,
-}) => {
+}: RendererProps) => {
 	// const cleanedElements = elements.map(element =>
 	//     'html' in element ? { ...element, html: clean(element.html) } : element,
 	// );

@@ -12,11 +12,7 @@ type Props = {
 	quoted?: boolean;
 };
 
-export const BlockquoteBlockComponent: React.FC<Props> = ({
-	html,
-	palette,
-	quoted,
-}: Props) => (
+export const BlockquoteBlockComponent = ({ html, palette, quoted }: Props) => (
 	<ClassNames>
 		{({ css }) => {
 			const baseBlockquoteStyles = css`

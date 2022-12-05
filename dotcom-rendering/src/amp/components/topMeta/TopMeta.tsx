@@ -1,17 +1,17 @@
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
-import React from 'react';
 import type { ArticleModel } from '../../types/ArticleModel';
 import { TopMetaAnalysis } from './TopMetaAnalysis';
 import { TopMetaNews } from './TopMetaNews';
 import { TopMetaOpinion } from './TopMetaOpinion';
 import { TopMetaPaidContent } from './TopMetaPaidContent';
 
-export const TopMeta: React.FunctionComponent<{
+type Props = {
 	data: ArticleModel;
 	design: ArticleDesign;
 	pillar: ArticleTheme;
 	adTargeting?: AdTargeting;
-}> = ({ data, design, pillar, adTargeting }) => {
+};
+export const TopMeta = ({ data, design, pillar, adTargeting }: Props) => {
 	if (pillar === ArticleSpecial.Labs)
 		return <TopMetaPaidContent articleData={data} pillar={pillar} />;
 	switch (design) {

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source-foundations';
+import type { DCRContainerPalette } from 'src/types/front';
 import { verticalDivider } from '../../../lib/verticalDivider';
 
 type Direction = 'row' | 'column' | 'row-reverse';
@@ -35,6 +36,7 @@ type Props = {
 	padBottom?: boolean;
 	/** Used to keep cards aligned in adjacent columns */
 	wrapCards?: boolean;
+	containerPalette?: DCRContainerPalette;
 };
 
 export const UL = ({
@@ -43,12 +45,13 @@ export const UL = ({
 	showDivider = false,
 	padBottom = false,
 	wrapCards = false,
+	containerPalette,
 }: Props) => {
 	return (
 		<ul
 			css={[
 				ulStyles(direction),
-				showDivider && verticalDivider,
+				showDivider && verticalDivider(containerPalette),
 				padBottom && marginBottomStyles,
 				wrapCards && wrapStyles,
 			]}

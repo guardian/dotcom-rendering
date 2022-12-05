@@ -1,4 +1,3 @@
-import React from 'react';
 import { JsonScript } from './JsonScript';
 
 const sourcepointDomain = 'sourcepoint.theguardian.com';
@@ -56,7 +55,7 @@ const clientConfigAus = {
 	},
 };
 
-export const AdConsent: React.FC = () => {
+export const AdConsent = () => {
 	// To debug geolocation in dev, make sure you're on the experimental channel of AMP:
 	// https://cdn.ampproject.org/experiments.html
 	// Then you can load the url with #amp-geo=XX, where XX is the country code

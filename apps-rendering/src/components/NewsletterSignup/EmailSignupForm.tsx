@@ -178,14 +178,20 @@ const EmailSignupForm: FC<Props> = ({
 					css={css`
 						align-items: center;
 						justify-content: flex-start;
-						${until.tablet} {
+						margin-bottom: ${remSpace[2]};
+						${until.phablet} {
 							flex-wrap: wrap;
+							margin-bottom: 0;
 						}
 					`}
 				>
 					<InlineError
 						cssOverrides={css`
 							margin-right: ${remSpace[3]};
+							${until.phablet} {
+								margin-bottom: ${remSpace[4]};
+								margin-right: 0;
+							}
 						`}
 					>
 						<span>
@@ -204,7 +210,12 @@ const EmailSignupForm: FC<Props> = ({
 						iconSide={'right'}
 						title="Try signing up again"
 						type="reset"
-						cssOverrides={buttonStyle(format)}
+						cssOverrides={[
+							buttonStyle(format),
+							css`
+								margin-left: auto;
+							`,
+						]}
 					>
 						Try again
 					</Button>

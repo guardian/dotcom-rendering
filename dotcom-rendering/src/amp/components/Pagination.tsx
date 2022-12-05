@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { neutral, textSans } from '@guardian/source-foundations';
-import React from 'react';
 import ChevronLeftDouble from '../../static/icons/chevron-left-double.svg';
 import ChevronLeftSingle from '../../static/icons/chevron-left-single.svg';
 import ChevronRightDouble from '../../static/icons/chevron-right-double.svg';
@@ -45,10 +44,12 @@ const marginRightStyle = css`
 	margin-right: 5px;
 `;
 
-export const Pagination: React.FunctionComponent<{
+type Props = {
 	pagination?: Pagination;
 	guardianURL: string;
-}> = ({ pagination, guardianURL }) => {
+};
+
+export const Pagination = ({ pagination, guardianURL }: Props) => {
 	if (!pagination) {
 		return null;
 	}

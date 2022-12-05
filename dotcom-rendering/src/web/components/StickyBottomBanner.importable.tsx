@@ -53,7 +53,7 @@ type Props = {
 
 type RRBannerConfig = {
 	id: string;
-	BannerComponent: React.FC<BannerProps>;
+	BannerComponent: typeof ReaderRevenueBanner;
 	canShowFn: CanShowFunctionType<BannerProps>;
 	isEnabled: boolean;
 };
@@ -226,7 +226,7 @@ export const StickyBottomBanner = ({
 
 	const asyncCountryCode = getLocaleCode();
 	const isSignedIn = !!getCookie({ name: 'GU_U', shouldMemoize: true });
-	const [SelectedBanner, setSelectedBanner] = useState<React.FC | null>(null);
+	const [SelectedBanner, setSelectedBanner] = useState<MaybeFC | null>(null);
 	const [asyncArticleCounts, setAsyncArticleCounts] =
 		useState<Promise<ArticleCounts | undefined>>();
 	const signInGateWillShow = useSignInGateWillShow({

@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { headline, neutral } from '@guardian/source-foundations';
 import { string as curly } from 'curlyquotes';
-import React from 'react';
 import { getAgeWarning } from '../../../lib/age-warning';
 import { getSoleContributor } from '../../../lib/byline';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
@@ -80,11 +79,13 @@ const fullWidth = css`
 	margin: 0 -10px;
 `;
 
-const Headline: React.FC<{
+type HeadlineProps = {
 	headlineText: string;
 	standfirst: string;
 	pillar: ArticleTheme;
-}> = ({ headlineText, pillar, standfirst }) => {
+};
+
+const Headline = ({ headlineText, pillar, standfirst }: HeadlineProps) => {
 	return (
 		<div css={fullWidth}>
 			<h1 css={headerStyle(pillar)}>{curly(headlineText)}</h1>
@@ -98,10 +99,15 @@ const Headline: React.FC<{
 	);
 };
 
-export const TopMetaLiveblog: React.FC<{
+type TopMetaLiveblogProps = {
 	articleData: ArticleModel;
 	pillar: ArticleTheme;
-}> = ({ articleData, pillar }) => (
+};
+
+export const TopMetaLiveblog = ({
+	articleData,
+	pillar,
+}: TopMetaLiveblogProps) => (
 	<header>
 		<Headline
 			headlineText={articleData.headline}

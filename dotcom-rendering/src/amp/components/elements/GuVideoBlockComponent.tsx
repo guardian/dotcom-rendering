@@ -1,11 +1,12 @@
-import React from 'react';
 import type { GuVideoBlockElement } from '../../../types/content';
 import { Caption } from '../Caption';
 
-export const GuVideoBlockComponent: React.FC<{
+type Props = {
 	element: GuVideoBlockElement;
 	pillar: ArticleTheme;
-}> = ({ element, pillar }) => {
+};
+
+export const GuVideoBlockComponent = ({ element, pillar }: Props) => {
 	return (
 		<Caption captionText={element.caption} pillar={pillar}>
 			<amp-video controls="" width="16" height="9" layout="responsive">

@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { body, neutral } from '@guardian/source-foundations';
 import { JSDOM } from 'jsdom';
-import React from 'react';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 import type { TweetBlockElement } from '../../../types/content';
 
@@ -72,10 +71,12 @@ const makeFallback = (html: string): string | null => {
 	return q.innerHTML;
 };
 
-export const TwitterBlockComponent: React.FC<{
+type Props = {
 	element: TweetBlockElement;
 	pillar: ArticleTheme;
-}> = ({ element, pillar }) => {
+};
+
+export const TwitterBlockComponent = ({ element, pillar }: Props) => {
 	const fallbackHTML = makeFallback(element.html);
 
 	return (

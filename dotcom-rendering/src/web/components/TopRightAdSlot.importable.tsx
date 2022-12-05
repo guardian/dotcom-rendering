@@ -19,10 +19,13 @@ export const TopRightAdSlot = ({
 	return (
 		<div
 			id="top-right-ad-slot"
-			css={css`
-				position: static;
-				height: ${MOSTVIEWED_STICKY_HEIGHT}px;
-			`}
+			css={[
+				css`
+					position: static;
+					height: ${MOSTVIEWED_STICKY_HEIGHT}px;
+				`,
+				adStyles,
+			]}
 		>
 			<div
 				id="dfp-ad--right"

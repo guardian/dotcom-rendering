@@ -101,10 +101,12 @@ const adStyle = css`
 	}
 `;
 
-export const Body: React.FC<{
+type Props = {
 	data: ArticleModel;
 	config: ConfigType;
-}> = ({ data, config }) => {
+};
+
+export const Body = ({ data, config }: Props) => {
 	const capiElements = data.blocks[0] ? data.blocks[0].elements : [];
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: data.isAdFreeUser,

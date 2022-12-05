@@ -54,7 +54,7 @@
 		"@guardian/discussion-rendering": "^10.1.1",
 		"@guardian/eslint-config-typescript": "^0.7.0",
 		"@guardian/eslint-plugin-source-react-components": "^9.0.0",
-		"@guardian/libs": "^9.0.1",
+		"@guardian/libs": "^10.0.0",
 		"@guardian/node-riffraff-artifact": "^0.3.2",
 		"@guardian/renditions": "^0.2.0",
 		"@guardian/source-foundations": "^7.0.1",

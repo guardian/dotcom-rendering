@@ -10,7 +10,7 @@
 	"dependencies": {
 		"@babel/core": "^7.0.0",
 		"@emotion/react": "^11.4.1",
-		"@guardian/libs": "^9.0.1",
+		"@guardian/libs": "^10.0.0",
 		"@guardian/source-foundations": "^7.0.1",
 		"@guardian/source-react-components": "^9.0.0",
 		"@guardian/types": "^9.0.1",

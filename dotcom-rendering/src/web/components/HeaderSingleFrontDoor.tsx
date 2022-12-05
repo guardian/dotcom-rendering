@@ -33,7 +33,7 @@ export const HeaderSingleFrontDoor = ({
 	idApiUrl,
 }: Props) => (
 	<div css={headerStyles}>
-		<Island deferUntil="idle">
+		<Island>
 			<HeaderTopBar
 				editionId={editionId}
 				dataLinkName="nav3 : topbar : edition-picker: toggle"

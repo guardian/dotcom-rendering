@@ -1,10 +1,11 @@
-import type React from 'react';
 import { NotRenderableInDCR } from '../../../lib/errors/not-renderable-in-dcr';
 import type { EmbedBlockElement } from '../../../types/content';
 
-export const EmbedBlockComponentAMP: React.FC<{
+type Props = {
 	element: EmbedBlockElement;
-}> = ({ element }) => {
+};
+
+export const EmbedBlockComponentAMP = ({ element }: Props) => {
 	if (element.isMandatory) {
 		throw new NotRenderableInDCR();
 	}

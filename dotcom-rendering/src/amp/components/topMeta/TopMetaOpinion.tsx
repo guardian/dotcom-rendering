@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { headline, neutral } from '@guardian/source-foundations';
-import React from 'react';
 import { getAgeWarning } from '../../../lib/age-warning';
 import { getSoleContributor } from '../../../lib/byline';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
@@ -61,10 +60,12 @@ const bottomPadding = css`
 	padding-bottom: 72px;
 `;
 
-const BylineMeta: React.FunctionComponent<{
+type BylineMetaProps = {
 	articleData: ArticleModel;
 	pillar: ArticleTheme;
-}> = ({ articleData, pillar }) => {
+};
+
+const BylineMeta = ({ articleData, pillar }: BylineMetaProps) => {
 	const contributorTag = articleData.tags.find(
 		(t) => t.type === 'Contributor',
 	);
@@ -106,10 +107,15 @@ const BylineMeta: React.FunctionComponent<{
 	);
 };
 
-export const TopMetaOpinion: React.FC<{
+type TopMetaOpinionProps = {
 	articleData: ArticleModel;
 	pillar: ArticleTheme;
-}> = ({ articleData, pillar }) => {
+};
+
+export const TopMetaOpinion = ({
+	articleData,
+	pillar,
+}: TopMetaOpinionProps) => {
 	return (
 		<header>
 			{articleData.mainMediaElements.map((element, i) => (
