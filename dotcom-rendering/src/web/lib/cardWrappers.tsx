@@ -403,7 +403,7 @@ export const CardDefaultMedia = ({
 			containerPalette={containerPalette}
 			showAge={showAge}
 			imagePosition="left"
-			imagePositionOnMobile="left"
+			imagePositionOnMobile="none"
 			headlineSize="small"
 		/>
 	);
