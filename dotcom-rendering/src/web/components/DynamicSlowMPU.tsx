@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
@@ -8,6 +7,7 @@ import {
 	Card50Media50,
 	CardDefault,
 	CardDefaultMedia,
+	CardDefaultMediaMobile,
 } from '../lib/cardWrappers';
 import { Card50_Card50, Card75_Card25 } from '../lib/dynamicSlices';
 import { AdSlot } from './AdSlot';
@@ -98,7 +98,7 @@ const ColumnOfThree50_Ad50 = ({
 				<UL direction="column">
 					{cards50.map((card) => (
 						<LI padSides={true} key={card.url}>
-							<CardDefaultMedia
+							<CardDefaultMediaMobile
 								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
