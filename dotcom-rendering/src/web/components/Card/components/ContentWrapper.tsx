@@ -26,6 +26,7 @@ const flexBasisStyles = ({
 		`;
 	}
 	switch (imageSize) {
+		default:
 		case 'small':
 			return css`
 				flex-basis: 75%;

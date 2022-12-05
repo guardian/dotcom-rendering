@@ -7,7 +7,7 @@ Ever thought about joining us?
 
 This repository contains the rendering logic for articles on theguardian.com. It is a monorepo with 3 projects, `apps-rendering`, `common-rendering` and `dotcom-rendering`.
 
-You should always `cd` into the correct subdirectory before running commands (e.g `make dev` for dotcom-rendering, or `npm run watch` for apps-rendering) except for storybook. Linting, imports, builds and github actions should work as before.
+You should always `cd` into the correct subdirectory before running commands (e.g `make dev` for dotcom-rendering, or `yarn watch` for apps-rendering) except for storybook. Linting, imports, builds and github actions should work as before.
 
 ## `apps rendering`
 
@@ -29,9 +29,10 @@ Most commands are run from within each project but the following are managed fro
 
 `yarn storybook` - Runs Storybook for all projects
 `yarn build-storybook` - Builds Storybook for all projects
-`yarn chromatic` - Builds and uploads Chromatic snapshots for all projects\*
 
--   You need the `CHROMATIC_PROJECT_TOKEN` environment variable set. You can find the token (here)[https://www.chromatic.com/manage?appId=5dfcbf3012392c0020e7140b&view=configure]
+Chromatic now runs at project level. `cd` into the project dir and run `yarn chromatic -t [CHROMATIC PROJECT TOKEN]`
+
+You can find the token in the project Chromatic instance.
 
 ### Install Node.js
 

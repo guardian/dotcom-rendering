@@ -44,9 +44,11 @@ export const enhanceCommercialProperties = ({
 	US,
 	AU,
 	INT,
+	EUR,
 }: CommercialProperties): CommercialProperties => ({
 	UK: enhanceEditionCommercialProperties(UK),
 	US: enhanceEditionCommercialProperties(US),
 	AU: enhanceEditionCommercialProperties(AU),
 	INT: enhanceEditionCommercialProperties(INT),
+	EUR: enhanceEditionCommercialProperties(EUR),
 });

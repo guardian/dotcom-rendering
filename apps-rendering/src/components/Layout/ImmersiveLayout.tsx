@@ -11,6 +11,7 @@ import { between, from, remSpace } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
+import Logo from 'components/Logo';
 import MainMedia, { ImmersiveCaption } from 'components/MainMedia';
 import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
@@ -50,7 +51,7 @@ const bodyStyles = css`
 	}
 
 	${from.leftCol} {
-		grid-row: 1 / 4;
+		grid-row: 1 / 6;
 	}
 `;
 
@@ -72,6 +73,14 @@ const linesStyles = (format: ArticleFormat): SerializedStyles => css`
 	`}
 `;
 
+const logoStyles = css`
+	${grid.column.centre}
+
+	${from.leftCol} {
+		${grid.column.left}
+	}
+`;
+
 type Props = {
 	item: Item;
 };
@@ -85,6 +94,7 @@ const ImmersiveLayout: FC<Props> = ({ item, children }) => {
 				<article>
 					<header css={headerStyles(format)}>
 						<MainMedia mainMedia={item.mainMedia} format={format} />
+
 						<Series item={item} />
 						<Headline item={item} />
 						<Standfirst item={item} />
@@ -97,6 +107,9 @@ const ImmersiveLayout: FC<Props> = ({ item, children }) => {
 					<div css={mainContentStyles(format)}>
 						<LeftCentreBorder rows={[1, 5]} />
 						<StraightLines cssOverrides={linesStyles(format)} />
+						<div css={logoStyles}>
+							<Logo item={item} />
+						</div>
 						<Metadata item={item} />
 						<div css={bodyStyles}>{children}</div>
 						<Tags item={item} />

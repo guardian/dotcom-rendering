@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
-import type { DCRContainerPalette } from '../../types/front';
+import type {
+	DCRContainerPalette,
+	DCRContainerType,
+	DCRGroupedTrails,
+} from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import { LI } from '../components/Card/components/LI';
 import { UL } from '../components/Card/components/UL';
@@ -12,6 +16,48 @@ import { FrontCard } from '../components/FrontCard';
  * '#'            => Image
  * ' ' | '_'      => text / trail / supporting content
  */
+
+/* .___________________________________.
+ * |         ##########################|
+ * |         ###########(^)>###########|
+ * |         ###########(_)############|
+ * |         ##########################|
+ * |_________##########################|
+ */
+export const Card100 = ({
+	cards,
+	containerPalette,
+	containerType,
+	showAge,
+}: {
+	cards: TrailType[];
+	containerPalette?: DCRContainerPalette;
+	containerType?: DCRContainerType;
+	showAge?: boolean;
+}) => {
+	const card100 = cards.slice(0, 1);
+
+	return (
+		<UL>
+			{card100.map((trail) => (
+				<LI padSides={true}>
+					<FrontCard
+						trail={trail}
+						containerPalette={containerPalette}
+						containerType={containerType}
+						showAge={showAge}
+						imagePosition="right"
+						imagePositionOnMobile="top"
+						imageSize="jumbo"
+						headlineSize="huge"
+						headlineSizeOnMobile="large"
+						trailText={trail.trailText}
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
 
 /* ._________________._________________.
  * |#################|#################|
@@ -26,28 +72,32 @@ export const Card50_Card50 = ({
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="50%" padSides={true}>
-			<FrontCard
-				trail={cards[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={cards[0].trailText}
-				imagePositionOnMobile="top"
-			/>
-		</LI>
-		<LI percentage="50%" padSides={true} showDivider={true}>
-			<FrontCard
-				trail={cards[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={cards[1].trailText}
-				imagePositionOnMobile="top"
-			/>
-		</LI>
-	</UL>
-);
+}) => {
+	const cards50 = cards.slice(0, 2);
+
+	return (
+		<UL direction="row" padBottom={true}>
+			{cards50.map((trail, index) => (
+				<LI
+					percentage="50%"
+					padSides={true}
+					showDivider={index !== 0}
+					containerPalette={containerPalette}
+				>
+					<FrontCard
+						trail={trail}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						trailText={trail.trailText}
+						supportingContent={trail.supportingContent}
+						imagePositionOnMobile="top"
+						headlineSize="large"
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
 
 /* ._________________________._________.
  * |         ################|#########|
@@ -62,28 +112,45 @@ export const Card75_Card25 = ({
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="75%" padSides={true}>
-			<FrontCard
-				trail={cards[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={cards[0].trailText}
-				imagePosition="right"
-				imageSize="large"
-				imagePositionOnMobile="top"
-			/>
-		</LI>
-		<LI percentage="25%" padSides={true} showDivider={true}>
-			<FrontCard
-				trail={cards[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-		</LI>
-	</UL>
-);
+}) => {
+	const card75 = cards.slice(0, 1);
+	const card25 = cards.slice(1, 2);
+
+	return (
+		<UL direction="row" padBottom={true}>
+			{card75.map((trail) => (
+				<LI percentage="75%" padSides={true}>
+					<FrontCard
+						trail={trail}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						trailText={trail.trailText}
+						supportingContent={trail.supportingContent}
+						imagePosition="right"
+						imageSize="large"
+						imagePositionOnMobile="top"
+						headlineSize="large"
+					/>
+				</LI>
+			))}
+			{card25.map((trail) => (
+				<LI
+					percentage="25%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
+					<FrontCard
+						trail={trail}
+						containerPalette={containerPalette}
+						supportingContent={trail.supportingContent}
+						showAge={showAge}
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
 
 /* ._________________________._________.
  * |#########|###############          |
@@ -98,28 +165,249 @@ export const Card25_Card75 = ({
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
-}) => (
-	<UL direction="row" padBottom={true}>
-		<LI percentage="25%" padSides={true}>
-			<FrontCard
-				trail={cards[1]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-			/>
-		</LI>
-		<LI percentage="75%" padSides={true} showDivider={true}>
-			<FrontCard
-				trail={cards[0]}
-				containerPalette={containerPalette}
-				showAge={showAge}
-				trailText={cards[0].trailText}
-				imagePosition="right"
-				imageSize="large"
-				imagePositionOnMobile="top"
-			/>
-		</LI>
-	</UL>
-);
+}) => {
+	const card25 = cards.slice(0, 1);
+	const card75 = cards.slice(1, 2);
+
+	return (
+		<UL direction="row" padBottom={true}>
+			{card25.map((trail) => (
+				<LI percentage="25%" padSides={true}>
+					<FrontCard
+						trail={trail}
+						supportingContent={trail.supportingContent}
+						containerPalette={containerPalette}
+						showAge={showAge}
+					/>
+				</LI>
+			))}
+			{card75.map((trail) => (
+				<LI
+					percentage="75%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
+					<FrontCard
+						trail={trail}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						trailText={trail.trailText}
+						supportingContent={trail.supportingContent}
+						headlineSize="large"
+						imagePosition="left"
+						imageSize="large"
+						imagePositionOnMobile="top"
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
+
+/* ._______________________.___________.
+ * |#######################|###########|
+ * |                       |           |
+ * |_______________________|___________|
+ */
+export const Card66_Card33 = ({
+	cards,
+	containerPalette,
+	containerType,
+	showAge,
+}: {
+	cards: TrailType[];
+	containerPalette?: DCRContainerPalette;
+	containerType?: DCRContainerType;
+	showAge?: boolean;
+}) => {
+	const card66 = cards.slice(0, 1);
+	const card33 = cards.slice(1, 2);
+
+	return (
+		<UL direction="row">
+			{card66.map((trail) => (
+				<LI percentage="66.666%" padSides={true}>
+					<FrontCard
+						trail={trail}
+						containerPalette={containerPalette}
+						containerType={containerType}
+						showAge={showAge}
+						trailText={trail.trailText}
+						imagePositionOnMobile="top"
+					/>
+				</LI>
+			))}
+			{card33.map((trail) => (
+				<LI
+					percentage="33.333%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
+					<FrontCard
+						trail={trail}
+						containerPalette={containerPalette}
+						containerType={containerType}
+						showAge={showAge}
+						trailText={trail.trailText}
+						imagePositionOnMobile="left"
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
+
+/* ._________________.________.________.
+ * |#################|########|########|
+ * |                 |        |        |
+ * |_________________|________|________|
+ */
+export const Card50_Card25_Card25 = ({
+	cards,
+	containerPalette,
+	containerType,
+	showAge,
+}: {
+	cards: TrailType[];
+	containerPalette?: DCRContainerPalette;
+	containerType?: DCRContainerType;
+	showAge?: boolean;
+}) => {
+	const card50 = cards.slice(0, 1);
+	const cards25 = cards.slice(1, 3);
+
+	return (
+		<UL direction="row" padBottom={true}>
+			{card50.map((trail) => (
+				<LI percentage="50%" padSides={true}>
+					<FrontCard
+						trail={trail}
+						containerPalette={containerPalette}
+						containerType={containerType}
+						showAge={showAge}
+						headlineSize="large"
+						imagePosition="top"
+						imagePositionOnMobile="top"
+						supportingContent={trail.supportingContent}
+					/>
+				</LI>
+			))}
+
+			{cards25.map((trail) => (
+				<LI
+					percentage="25%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
+					<FrontCard
+						trail={trail}
+						containerPalette={containerPalette}
+						containerType={containerType}
+						showAge={showAge}
+						trailText={
+							trail?.supportingContent &&
+							trail.supportingContent.length > 0
+								? undefined
+								: trail.trailText
+						}
+						supportingContent={
+							trail.trailText
+								? undefined
+								: trail.supportingContent
+						}
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
+
+/* ._________________.
+ * |#################|
+ * |#################|
+ * |#################|
+ * |_________________|
+ */
+export const Card100PictureTop = ({
+	cards,
+	showAge,
+	containerPalette,
+}: {
+	cards: TrailType[];
+	showAge?: boolean;
+	containerPalette?: DCRContainerPalette;
+}) => {
+	const card100 = cards.slice(0, 1);
+
+	return (
+		<UL padBottom={true}>
+			{card100.map((card) => (
+				<LI percentage="100%" padSides={true}>
+					<FrontCard
+						trail={card}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						headlineSize="huge"
+						headlineSizeOnMobile="large"
+						imageUrl={card.image}
+						imagePosition={'top'}
+						imagePositionOnMobile={'top'}
+						supportingContent={card.supportingContent}
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
+
+/* .___________________________________.
+ * |       ############################|
+ * |       ############################|
+ * |       ############################|
+ * |_______############################|
+ */
+export const Card100PictureRight = ({
+	cards,
+	showAge,
+	containerPalette,
+}: {
+	cards: TrailType[];
+	showAge?: boolean;
+	containerPalette?: DCRContainerPalette;
+}) => {
+	const card100 = cards.slice(0, 1);
+
+	return (
+		<UL padBottom={true}>
+			{card100.map((card) => (
+				<LI percentage="100%" padSides={true}>
+					<FrontCard
+						trail={card}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						headlineSize="huge"
+						headlineSizeOnMobile="large"
+						imageUrl={card.image}
+						imageSize={'jumbo'}
+						imagePosition={'right'}
+						imagePositionOnMobile={'top'}
+						trailText={
+							// Only show trail text if there is no supportContent
+							card.supportingContent === undefined ||
+							card.supportingContent.length === 0
+								? card.trailText
+								: undefined
+						}
+						supportingContent={card.supportingContent}
+					/>
+				</LI>
+			))}
+		</UL>
+	);
+};
 
 /**
  * Abstraction to decide whether to show padding on wrapped rows of cards.
@@ -157,3 +445,29 @@ export const shouldPadWrappableRows = (
 	totalCards: number,
 	cardsPerRow: number,
 ): boolean => index < totalCards - (totalCards % cardsPerRow || cardsPerRow);
+
+/**
+ * Filter trails an object of grouped trails, removing any trails included in the
+ * 'filter' array
+ *
+ * @param opts.groupedTrails Object of grouped trails we want to filter cards from
+ * @param opts.filter Array of cards we want to filter against
+ * @returns grouped trails object filtered against the 'filter' array
+ */
+export const filterGroupedTrails = ({
+	groupedTrails,
+	filter,
+}: {
+	groupedTrails: DCRGroupedTrails;
+	filter: TrailType[];
+}): DCRGroupedTrails => {
+	const shouldFilterCard = (card: TrailType) =>
+		filter.findIndex((filterCard) => filterCard.url === card.url) === -1;
+	return {
+		snap: groupedTrails.snap.filter(shouldFilterCard),
+		huge: groupedTrails.huge.filter(shouldFilterCard),
+		veryBig: groupedTrails.veryBig.filter(shouldFilterCard),
+		big: groupedTrails.big.filter(shouldFilterCard),
+		standard: groupedTrails.standard.filter(shouldFilterCard),
+	};
+};

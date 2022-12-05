@@ -24,7 +24,7 @@ const basicCardProps: CardProps = {
 	kickerText: '',
 	webPublicationDate: '2019-11-11T09:45:30.000Z',
 	imageUrl:
-		'https://i.guim.co.uk/img/media/6537e163c9164d25ec6102641f6a04fa5ba76560/0_0_5472_3648/master/5472.jpg?width=1140&quality=85&s=15053eb16d6829d670fb348d8d26aabd',
+		'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_210_5472_3283/master/5472.jpg',
 	imagePosition: 'top',
 	showAge: true,
 };
@@ -258,6 +258,51 @@ export const WithMediaType = () => {
 	);
 };
 
+export const WithMediaTypeSpecialReportAlt = () => {
+	return (
+		<CardGroup>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Video,
+						theme: ArticleSpecial.SpecialReportAlt,
+					}}
+					mediaType="Video"
+					mediaDuration={30}
+					headlineText="Video"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Audio,
+						theme: ArticleSpecial.SpecialReportAlt,
+					}}
+					mediaType="Audio"
+					mediaDuration={90}
+					headlineText="Audio"
+				/>
+			</CardWrapper>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Gallery,
+						theme: ArticleSpecial.SpecialReportAlt,
+					}}
+					mediaType="Gallery"
+					headlineText="Gallery"
+				/>
+			</CardWrapper>
+		</CardGroup>
+	);
+};
+
 export const WithDifferentImagePositions = () => {
 	return (
 		<>
@@ -334,6 +379,48 @@ export const WithPulsingDot = () => {
 				{...basicCardProps}
 				showPulsingDot={true}
 				kickerText="Pulsing Dot"
+			/>
+		</CardWrapper>
+	);
+};
+
+export const WithPulsingDotSpecialReportAlt = () => {
+	return (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: ArticleSpecial.SpecialReportAlt,
+				}}
+				showPulsingDot={true}
+				kickerText="Pulsing Dot"
+			/>
+		</CardWrapper>
+	);
+};
+
+export const WithQuotes = () => {
+	return (
+		<CardWrapper>
+			<Card {...basicCardProps} showQuotes={true} kickerText="Quotes" />
+		</CardWrapper>
+	);
+};
+
+export const WithQuotesSpecialReportAlt = () => {
+	return (
+		<CardWrapper>
+			<Card
+				{...basicCardProps}
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.Standard,
+					theme: ArticleSpecial.SpecialReportAlt,
+				}}
+				showQuotes={true}
+				kickerText="Quotes"
 			/>
 		</CardWrapper>
 	);

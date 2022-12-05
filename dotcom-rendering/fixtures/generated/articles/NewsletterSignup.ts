@@ -11,9 +11,9 @@
  *    gen-fixtures.ts directly.
  */
 
-import type { CAPIArticleType } from '../../../src/types/frontend';
+import type { FEArticleType } from '../../../src/types/frontend';
 
-export const NewsletterSignup: CAPIArticleType = {
+export const NewsletterSignup: FEArticleType = {
 	slotMachineFlags: '',
 	main: '<figure class="element element-image" data-media-id="6c3d4ac41a205fed233624415dd05e684ee661b2"> <img src="https://media.guim.co.uk/6c3d4ac41a205fed233624415dd05e684ee661b2/0_0_1508_905/1000.png" alt="Our new women’s football newsletter will arrive in your inbox every Wednesday." width="1000" height="600" class="gu-image" /> <figcaption> <span class="element-image__caption">Our new women’s football newsletter will arrive in your inbox every Wednesday.</span> <span class="element-image__credit">Illustration: Guardian Design</span> </figcaption> </figure>',
 	subMetaSectionLinks: [
@@ -27,6 +27,96 @@ export const NewsletterSignup: CAPIArticleType = {
 		},
 	],
 	commercialProperties: {
+		US: {
+			adTargeting: [
+				{
+					name: 'co',
+					value: ['suzanne-wrack'],
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'se',
+					value: ['moving-the-goalposts'],
+				},
+				{
+					name: 'edition',
+					value: 'us',
+				},
+				{
+					name: 'url',
+					value: '/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/y5xnj',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'k',
+					value: [
+						'newsletter-sign-up',
+						'sport',
+						'football',
+						'womensfootball',
+					],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+			],
+		},
+		AU: {
+			adTargeting: [
+				{
+					name: 'co',
+					value: ['suzanne-wrack'],
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'se',
+					value: ['moving-the-goalposts'],
+				},
+				{
+					name: 'edition',
+					value: 'au',
+				},
+				{
+					name: 'url',
+					value: '/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
+				},
+				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/y5xnj',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'k',
+					value: [
+						'newsletter-sign-up',
+						'sport',
+						'football',
+						'womensfootball',
+					],
+				},
+				{
+					name: 'p',
+					value: 'ng',
+				},
+			],
+		},
 		UK: {
 			adTargeting: [
 				{
@@ -50,6 +140,15 @@ export const NewsletterSignup: CAPIArticleType = {
 					value: 'article',
 				},
 				{
+					name: 'k',
+					value: [
+						'newsletter-sign-up',
+						'sport',
+						'football',
+						'womensfootball',
+					],
+				},
+				{
 					name: 'p',
 					value: 'ng',
 				},
@@ -60,90 +159,6 @@ export const NewsletterSignup: CAPIArticleType = {
 				{
 					name: 'url',
 					value: '/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
-				},
-				{
-					name: 'k',
-					value: ['sport', 'football', 'womensfootball'],
-				},
-			],
-		},
-		US: {
-			adTargeting: [
-				{
-					name: 'co',
-					value: ['suzanne-wrack'],
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'se',
-					value: ['moving-the-goalposts'],
-				},
-				{
-					name: 'edition',
-					value: 'us',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/y5xnj',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'url',
-					value: '/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
-				},
-				{
-					name: 'k',
-					value: ['sport', 'football', 'womensfootball'],
-				},
-			],
-		},
-		AU: {
-			adTargeting: [
-				{
-					name: 'co',
-					value: ['suzanne-wrack'],
-				},
-				{
-					name: 'su',
-					value: ['0'],
-				},
-				{
-					name: 'se',
-					value: ['moving-the-goalposts'],
-				},
-				{
-					name: 'edition',
-					value: 'au',
-				},
-				{
-					name: 'sh',
-					value: 'https://www.theguardian.com/p/y5xnj',
-				},
-				{
-					name: 'ct',
-					value: 'article',
-				},
-				{
-					name: 'p',
-					value: 'ng',
-				},
-				{
-					name: 'url',
-					value: '/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
-				},
-				{
-					name: 'k',
-					value: ['sport', 'football', 'womensfootball'],
 				},
 			],
 		},
@@ -162,12 +177,25 @@ export const NewsletterSignup: CAPIArticleType = {
 					value: ['moving-the-goalposts'],
 				},
 				{
+					name: 'url',
+					value: '/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
+				},
+				{
 					name: 'sh',
 					value: 'https://www.theguardian.com/p/y5xnj',
 				},
 				{
 					name: 'ct',
 					value: 'article',
+				},
+				{
+					name: 'k',
+					value: [
+						'newsletter-sign-up',
+						'sport',
+						'football',
+						'womensfootball',
+					],
 				},
 				{
 					name: 'edition',
@@ -177,13 +205,50 @@ export const NewsletterSignup: CAPIArticleType = {
 					name: 'p',
 					value: 'ng',
 				},
+			],
+		},
+		EUR: {
+			adTargeting: [
+				{
+					name: 'co',
+					value: ['suzanne-wrack'],
+				},
+				{
+					name: 'su',
+					value: ['0'],
+				},
+				{
+					name: 'se',
+					value: ['moving-the-goalposts'],
+				},
 				{
 					name: 'url',
 					value: '/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 				},
 				{
+					name: 'sh',
+					value: 'https://www.theguardian.com/p/y5xnj',
+				},
+				{
+					name: 'ct',
+					value: 'article',
+				},
+				{
+					name: 'edition',
+					value: 'eur',
+				},
+				{
 					name: 'k',
-					value: ['sport', 'football', 'womensfootball'],
+					value: [
+						'newsletter-sign-up',
+						'sport',
+						'football',
+						'womensfootball',
+					],
+				},
+				{
+					name: 'p',
+					value: 'ng',
 				},
 			],
 		},
@@ -191,7 +256,7 @@ export const NewsletterSignup: CAPIArticleType = {
 	beaconURL: '//phar.gu-web.net',
 	hasRelated: true,
 	webPublicationSecondaryDateDisplay:
-		'Last modified on Thu 4 Aug 2022 09.52 BST',
+		'Last modified on Tue 18 Oct 2022 08.57 BST',
 	editionLongForm: 'UK edition',
 	publication: 'theguardian.com',
 	trailText:
@@ -200,6 +265,10 @@ export const NewsletterSignup: CAPIArticleType = {
 		{
 			url: '/football/womensfootball',
 			title: "Women's football",
+		},
+		{
+			url: '/info/newsletter-sign-up',
+			title: 'Newsletter sign-up',
 		},
 	],
 	contentType: 'Article',
@@ -853,6 +922,10 @@ export const NewsletterSignup: CAPIArticleType = {
 					},
 				],
 			},
+			{
+				title: 'Corrections',
+				url: '/theguardian/series/corrections-and-clarifications',
+			},
 		],
 		brandExtensions: [
 			{
@@ -1028,7 +1101,7 @@ export const NewsletterSignup: CAPIArticleType = {
 	designType: 'Article',
 	editionId: 'UK',
 	format: {
-		design: 'ArticleDesign',
+		design: 'NewsletterSignupDesign',
 		theme: 'SportPillar',
 		display: 'StandardDisplay',
 	},
@@ -1043,9 +1116,9 @@ export const NewsletterSignup: CAPIArticleType = {
 			'gnmguardian://football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts?contenttype=Article&source=applinks',
 		'article:publisher': 'https://www.facebook.com/theguardian',
 		'og:title':
-			'Sign up for our women’s football newsletter – Moving the Goalposts',
+			'Sign up for the Moving the Goalposts newsletter: our free women’s football email',
 		'fb:app_id': '180444840287',
-		'article:modified_time': '2022-08-04T08:52:53.000Z',
+		'article:modified_time': '2022-10-18T07:57:21.000Z',
 		'og:image:height': '720',
 		'og:description':
 			'No topic is too small or too big for us to cover as we deliver a weekly roundup of the wonderful world of women’s football',
@@ -1053,7 +1126,7 @@ export const NewsletterSignup: CAPIArticleType = {
 		'al:ios:app_store_id': '409128287',
 		'article:section': 'Football',
 		'article:published_time': '2022-03-22T16:57:35.000Z',
-		'article:tag': "Football,Women's football,Sport",
+		'article:tag': "Football,Women's football,Sport,Newsletter sign-up",
 		'al:ios:app_name': 'The Guardian',
 		'og:site_name': 'the Guardian',
 	},
@@ -1082,6 +1155,16 @@ export const NewsletterSignup: CAPIArticleType = {
 			id: 'sport/sport',
 			type: 'Keyword',
 			title: 'Sport',
+		},
+		{
+			id: 'info/newsletter-sign-up',
+			type: 'Keyword',
+			title: 'Newsletter sign-up',
+		},
+		{
+			id: 'campaign/email/moving-the-goalposts',
+			type: 'Campaign',
+			title: 'Moving the Goalposts (newsletter signup)',
 		},
 		{
 			id: 'type/article',
@@ -1293,7 +1376,18 @@ export const NewsletterSignup: CAPIArticleType = {
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 	byline: 'Suzanne Wrack',
 	headline:
-		'Sign up for our women’s football newsletter – Moving the Goalposts',
+		'Sign up for the Moving the Goalposts newsletter: our free women’s football email',
+	promotedNewsletter: {
+		identityName: 'moving-the-goalposts',
+		name: 'Moving the Goalposts',
+		theme: 'sport',
+		description:
+			'Informative, passionate, entertaining. Sign up to our weekly round-up of women’s football now.',
+		frequency: 'Weekly',
+		listId: 6020,
+		group: 'Sport',
+		successDescription: "We'll send you Moving the Goalposts every week",
+	},
 	guardianBaseURL: 'https://www.theguardian.com',
 	isLegacyInteractive: false,
 	webPublicationDate: '2022-03-22T16:57:35.000Z',
@@ -1544,7 +1638,7 @@ export const NewsletterSignup: CAPIArticleType = {
 					],
 				},
 			],
-			elementId: '2fb486c6-e120-48b6-8b4b-229053ad0bc2',
+			elementId: 'e691e970-fe7f-472e-aad1-297b98cd8f6c',
 		},
 	],
 	canonicalUrl:
@@ -1556,7 +1650,7 @@ export const NewsletterSignup: CAPIArticleType = {
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>Join us as we delve deeper into the wonderful world of women’s football in our weekly newsletter. It is informative, entertaining, global, critical – when needed – and, above all, passionate. Written mainly by <a href="https://www.theguardian.com/profile/julia-belas-trindade">Júlia Belas Trindade</a> and <a href="https://www.theguardian.com/profile/sophie-downey">Sophie Downey</a>, expect guest appearances from stars such as Anita Asante, Ada Hegerberg and many more.</p>',
-					elementId: 'b2c71466-f03d-46ef-91f1-5e86082a8b35',
+					elementId: '7359a4e9-8741-40e4-a99f-748c4b0c237e',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
@@ -1567,22 +1661,22 @@ export const NewsletterSignup: CAPIArticleType = {
 					isThirdPartyTracking: false,
 					source: 'The Guardian',
 					sourceDomain: 'theguardian.com',
-					elementId: 'ddf56c5b-205c-42c4-b9de-3cc1eae1c503',
+					elementId: 'b758a1e9-c9fa-41cf-a8b0-2d41d966ad82',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<ul> \n <li><p>Try our other sports emails: as well as the occasionally funny football email <a href="https://www.theguardian.com/info/2016/jan/05/the-fiver-email-sign-up">The Fiver </a>from Monday to Friday, there are weekly catch-ups for cricket in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-spin">The Spin</a> and rugby union in <a href="https://www.theguardian.com/sport/2016/aug/18/sign-up-to-the-breakdown">The Breakdown</a>, and our seven-day roundup of the best of our sports journalism in <a href="https://www.theguardian.com/sport/2017/may/15/the-recap-sign-up-for-the-best-of-the-guardians-sport-coverage">The Recap</a>.</p></li> \n <li><p>Living in Australia? Try the <a href="https://www.theguardian.com/info/2015/jun/05/guardian-australia-sport-newsletter-subscribe-by-email">Guardian Australia’s daily sports newsletter</a></p></li> \n</ul>',
-					elementId: 'd249b73e-7690-462a-a91a-db0b2486abc1',
+					elementId: '3dcb307f-340e-4774-8bf0-6ec0825bc776',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p>***</p>',
-					elementId: 'ab6ca3a4-3a0c-4349-aef3-2d7ac3c86a9e',
+					elementId: '4cb7598b-efcc-417d-a97a-e191edc96dfb',
 				},
 				{
 					_type: 'model.dotcomrendering.pageElements.TextBlockElement',
 					html: '<p><strong><a href="https://www.theguardian.com/email-newsletters">Explore all our newsletters:</a></strong><a href="https://www.theguardian.com/email-newsletters"> whether you love film, football, fashion or food, we’ve got something for you</a></p>',
-					elementId: '168c8e5a-6a21-4b00-aca3-eb1d6dea7451',
+					elementId: 'b55487c6-5457-47b7-a5a1-4912d6008909',
 				},
 			],
 			attributes: {
@@ -1599,14 +1693,14 @@ export const NewsletterSignup: CAPIArticleType = {
 			blockFirstPublishedDisplayNoTimezone: '16.57',
 			contributors: [],
 			primaryDateLine: 'Tue 22 Mar 2022 16.57 GMT',
-			secondaryDateLine: 'Last modified on Thu 4 Aug 2022 09.52 BST',
+			secondaryDateLine: 'Last modified on Tue 18 Oct 2022 08.57 BST',
 		},
 	],
 	linkedData: [
 		{
 			'@type': 'NewsArticle',
 			'@context': 'https://schema.org',
-			'@id': 'https://amp.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
+			'@id': 'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 			publisher: {
 				'@type': 'Organization',
 				'@context': 'https://schema.org',
@@ -1646,8 +1740,8 @@ export const NewsletterSignup: CAPIArticleType = {
 			],
 			datePublished: '2022-03-22T16:57:35.000Z',
 			headline:
-				'Sign up for our women’s football newsletter – Moving the Goalposts',
-			dateModified: '2022-08-04T08:52:53.000Z',
+				'Sign up for the Moving the Goalposts newsletter: our free women’s football email',
+			dateModified: '2022-10-18T07:57:21.000Z',
 			mainEntityOfPage:
 				'https://www.theguardian.com/football/2022/mar/22/sign-up-for-our-new-womens-football-newsletter-moving-the-goalposts',
 		},
@@ -1664,7 +1758,7 @@ export const NewsletterSignup: CAPIArticleType = {
 	webPublicationDateDisplay: 'Tue 22 Mar 2022 16.57 GMT',
 	shouldHideAds: false,
 	webTitle:
-		'Sign up for our women’s football newsletter – Moving the Goalposts',
+		'Sign up for the Moving the Goalposts newsletter: our free women’s football email',
 	isSpecialReport: false,
 	isCommentable: false,
 	keyEvents: [],

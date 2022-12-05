@@ -3,6 +3,7 @@ import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import React from 'react';
 import { generateImageURL } from '../../lib/generateImageURL';
+import type { RoleType } from '../../types/content';
 
 /**
  * Working on this file? Checkout out 027-pictures.md & 029-signing-image-urls.md for background information & context
@@ -19,7 +20,7 @@ type Props = {
 	isLazy?: boolean;
 };
 
-type ImageWidthType = { breakpoint: number; width: number };
+export type ImageWidthType = { breakpoint: number; width: number };
 
 /**
  * All business logic for image sizing is contained in this one function. This
@@ -178,18 +179,24 @@ const block = css`
 	display: block;
 `;
 
-export const Picture = ({
-	role,
-	format,
-	master,
-	alt,
-	height,
-	width,
-	isMainMedia = false,
-	isLazy = true,
-}: Props) => {
-	const imageWidths = decideImageWidths({ role, format, isMainMedia });
-	const sources = imageWidths
+type ImageSource = {
+	breakpoint: number;
+	width: number;
+	hiResUrl: string;
+	lowResUrl: string;
+};
+
+/**
+ * Generate image sources for an image.
+ *
+ * @param master source image URL
+ * @param imageWidths list of image widths
+ */
+export const generateSources = (
+	master: string,
+	imageWidths: ImageWidthType[],
+): ImageSource[] =>
+	imageWidths
 		.slice()
 		.sort(descendingByBreakpoint)
 		.map(({ width: imageWidth, breakpoint }) => {
@@ -208,6 +215,21 @@ export const Picture = ({
 				}),
 			};
 		});
+
+export const Picture = ({
+	role,
+	format,
+	master,
+	alt,
+	height,
+	width,
+	isMainMedia = false,
+	isLazy = true,
+}: Props) => {
+	const sources = generateSources(
+		master,
+		decideImageWidths({ role, format, isMainMedia }),
+	);
 
 	const ratio = parseInt(height, 10) / parseInt(width, 10);
 	/**

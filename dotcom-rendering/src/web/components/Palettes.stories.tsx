@@ -1,3 +1,4 @@
+import { breakpoints } from '@guardian/source-foundations';
 import { trails } from '../../../fixtures/manual/trails';
 import { DynamicFast } from './DynamicFast';
 import { Section } from './Section';
@@ -37,6 +38,17 @@ export const EventPalette = () => (
 		/>
 	</Section>
 );
+EventPalette.story = {
+	parameters: {
+		chromatic: {
+			viewports: [
+				breakpoints.mobile,
+				breakpoints.tablet,
+				breakpoints.wide,
+			],
+		},
+	},
+};
 
 export const EventAltPalette = () => (
 	<Section
@@ -152,6 +164,23 @@ export const InvestigationPalette = () => (
 		<DynamicFast
 			groupedTrails={groupedTrails}
 			containerPalette="InvestigationPalette"
+			showAge={true}
+		/>
+	</Section>
+);
+
+export const SpecialReportAltPalette = () => (
+	<Section
+		title="SpecialReportAltPalette"
+		padContent={false}
+		centralBorder="partial"
+		containerPalette="SpecialReportAltPalette"
+		showDateHeader={true}
+		editionId={'UK'}
+	>
+		<DynamicFast
+			groupedTrails={groupedTrails}
+			containerPalette="SpecialReportAltPalette"
 			showAge={true}
 		/>
 	</Section>

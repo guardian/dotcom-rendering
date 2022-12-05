@@ -1,3 +1,5 @@
+import { ImageBlockElement } from '../../types/content';
+
 export const fourImages: ImageBlockElement[] = [
 	{
 		role: 'halfWidth',

@@ -1,3 +1,5 @@
+import type { Image, ImageSource, SrcSetItem } from '../../types/content';
+
 export const bestFitImage = (
 	images: ImageSource[],
 	containerWidth: number,

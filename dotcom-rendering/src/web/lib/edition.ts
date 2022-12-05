@@ -1,38 +1,62 @@
-import type { Edition, EditionId } from '../../types/edition';
+import type { EditionLinkType } from '../../model/extract-nav';
 
-const UkEdition: Edition = {
-	id: 'UK',
-	displayName: 'UK Edition',
-	locale: 'en-gb',
+export type EditionId = typeof editionList[number]['editionId'];
+
+export const editionList = [
+	{
+		url: '/preference/edition/au',
+		editionId: 'UK',
+		longTitle: 'UK edition',
+		title: 'UK edition',
+		locale: 'en-gb',
+	},
+	{
+		url: '/preference/edition/us',
+		editionId: 'US',
+		longTitle: 'US edition',
+		title: 'US edition',
+		locale: 'en-us',
+	},
+	{
+		url: '/preference/edition/au',
+		editionId: 'AU',
+		longTitle: 'Australia edition',
+		title: 'AU edition',
+		locale: 'en-au',
+	},
+	{
+		url: '/preference/edition/int',
+		editionId: 'INT',
+		longTitle: 'International edition',
+		title: 'International edition',
+		locale: 'en-gb',
+	},
+	{
+		url: '/preference/edition/eur',
+		editionId: 'EUR',
+		longTitle: 'Europe edition',
+		title: 'Europe edition',
+		locale: 'en-gb',
+	},
+] as const;
+
+export const getEditionFromId = (editionId: EditionId): EditionLinkType => {
+	return (
+		editionList.find((edition) => edition.editionId === editionId) ??
+		editionList[0]
+	);
 };
 
-const UsEdition: Edition = {
-	id: 'US',
-	displayName: 'US Edition',
-	locale: 'en-us',
+export const getRemainingEditions = (
+	editionId: EditionId,
+): EditionLinkType[] => {
+	return editionList.filter((edition) => edition.editionId !== editionId);
 };
 
-const AuEdition: Edition = {
-	id: 'AU',
-	displayName: 'Australia edition',
-	locale: 'en-au',
-};
-
-const InternationalEdition: Edition = {
-	id: 'INT',
-	displayName: 'International edition',
-	locale: 'en-gb',
-};
-
-export const getEditionFromId = (id: EditionId): Edition => {
-	switch (id) {
-		case 'UK':
-			return UkEdition;
-		case 'US':
-			return UsEdition;
-		case 'AU':
-			return AuEdition;
-		case 'INT':
-			return InternationalEdition;
-	}
-};
+/**
+ * Determine if a string is one of the permitted edition strings
+ *
+ * @param s The string to test
+ */
+export const isEditionId = (s: string): s is EditionId =>
+	editionList.map(({ editionId }) => String(editionId)).includes(s);

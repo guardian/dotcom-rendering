@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import type { NavType } from '../../model/extract-nav';
-import type { CAPIArticleType } from '../../types/frontend';
+import type { FEArticleType } from '../../types/frontend';
 import { CommentLayout } from './CommentLayout';
 import { FullPageInteractiveLayout } from './FullPageInteractiveLayout';
 import { ImmersiveLayout } from './ImmersiveLayout';
@@ -12,7 +12,7 @@ import { ShowcaseLayout } from './ShowcaseLayout';
 import { StandardLayout } from './StandardLayout';
 
 type Props = {
-	CAPIArticle: CAPIArticleType;
+	CAPIArticle: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 };
@@ -118,19 +118,8 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						/>
 					);
 				case ArticleDesign.NewsletterSignup:
-					// eslint and prettier have an argument if I use the switch directly in the ternary operator
-					// This is a compromise where eslint gives me a warning over an error
-					const showSignupLayout =
-						CAPIArticle.config.switches.newsletterSignupLayout;
-
-					return showSignupLayout ? (
+					return (
 						<NewsletterSignupLayout
-							CAPIArticle={CAPIArticle}
-							NAV={NAV}
-							format={format}
-						/>
-					) : (
-						<StandardLayout
 							CAPIArticle={CAPIArticle}
 							NAV={NAV}
 							format={format}

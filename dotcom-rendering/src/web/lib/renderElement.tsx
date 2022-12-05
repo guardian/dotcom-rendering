@@ -8,9 +8,10 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { getSharingUrls } from '../../lib/sharing-urls';
 import type { Switches } from '../../types/config';
+import type { CAPIElement, RoleType } from '../../types/content';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
-import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
+import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
 import { ChartAtomWrapper } from '../components/ChartAtomWrapper.importable';
 import { CodeBlockComponent } from '../components/CodeBlockComponent';
@@ -172,10 +173,14 @@ export const renderElement = ({
 			];
 
 		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
+		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
 			return [
 				true,
 				<Island deferUntil="visible">
-					<CalloutBlockComponent callout={element} format={format} />
+					<CalloutEmbedBlockComponent
+						callout={element}
+						format={format}
+					/>
 				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
@@ -496,7 +501,7 @@ export const renderElement = ({
 					key={index}
 					html={element.html}
 					palette={palette}
-					design={format.design}
+					format={format}
 					attribution={element.attribution}
 					role={element.role}
 				/>,
@@ -774,7 +779,7 @@ export const renderElement = ({
 // bareElements is the set of element types that don't get wrapped in a Figure
 // for most article types, either because they don't need it or because they
 // add the figure themselves.
-const bareElements = new Set([
+const bareElements = new Set<CAPIElement['_type']>([
 	'model.dotcomrendering.pageElements.BlockquoteBlockElement',
 	'model.dotcomrendering.pageElements.CaptionBlockElement',
 	'model.dotcomrendering.pageElements.CodeBlockElement',

@@ -1,4 +1,4 @@
-import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import { getSoleContributor } from '../lib/byline';
 import type {
 	DCRContainerPalette,
@@ -6,8 +6,8 @@ import type {
 	DCRSupportingContent,
 	FEFrontCard,
 	FESupportingContent,
-	FETagType,
 } from '../types/front';
+import type { FETagType, TagType } from '../types/tag';
 import { decideFormat } from '../web/lib/decideFormat';
 import { getDataLinkNameCard } from '../web/lib/getDataLinkName';
 import { enhanceSnaps } from './enhanceSnaps';
@@ -54,9 +54,10 @@ const decidePresentationFormat = ({
 		linkFormat.design === ArticleDesign.LiveBlog ||
 		linkFormat.design === ArticleDesign.Gallery ||
 		linkFormat.design === ArticleDesign.Audio ||
+		linkFormat.theme === ArticleSpecial.SpecialReport ||
 		linkFormat.design === ArticleDesign.Video
 	)
-		return containerFormat;
+		return { ...containerFormat, theme: ArticlePillar.News };
 
 	// Otherwise, we can allow the sublink to express its own styling
 	return linkFormat;
@@ -79,11 +80,17 @@ const enhanceSupportingContent = (
 			containerFormat: format,
 			containerPalette,
 		});
+
+		const supportingContentIsLive =
+			subLink.format?.design === 'LiveBlogDesign';
+
 		return {
 			format: presentationFormat,
 			headline: subLink.header?.headline || '',
 			url: subLink.properties.href || subLink.header?.url,
-			kickerText: subLink.header?.kicker?.item?.properties.kickerText,
+			kickerText: supportingContentIsLive
+				? 'Live'
+				: subLink.header?.kicker?.item?.properties.kickerText,
 		};
 	});
 };
@@ -106,8 +113,8 @@ const decideImage = (trail: FEFrontCard): string | undefined => {
 	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0].url;
 };
 
-const enhanceTags = (tags: { properties: FETagType }[]): TagType[] => {
-	return tags.map((tag) => {
+const enhanceTags = (tags: FETagType[]): TagType[] => {
+	return tags.map(({ properties }) => {
 		const {
 			id,
 			tagType,
@@ -115,7 +122,7 @@ const enhanceTags = (tags: { properties: FETagType }[]): TagType[] => {
 			twitterHandle,
 			bylineImageUrl,
 			contributorLargeImagePath,
-		} = tag.properties;
+		} = properties;
 
 		return {
 			id,
@@ -150,8 +157,12 @@ export const enhanceCards = (
 			? enhanceTags(faciaCard.properties.maybeContent.tags.tags)
 			: [];
 
-		// The URL parameter on a Snap header will be a link to the Snap itself, there is a second href
-		// property which contains what the snap is actually linking to.
+		/**
+		 * The URL parameter on a Snap header will be a link to the Snap itself, there is a second href
+		 * property which contains what the snap is actually linking to. This is commonly used in the
+		 * NavList container for linking to non-article pages.
+		 * @see NavList
+		 */
 		const url =
 			faciaCard.type === 'LinkSnap' && faciaCard.properties.href
 				? faciaCard.properties.href

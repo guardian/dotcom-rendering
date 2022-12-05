@@ -79,6 +79,8 @@ const liveBlock = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -98,6 +100,8 @@ const liveBlockDark = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -129,6 +133,8 @@ const standfirstLink = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[400];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[600];
 	}
 };
 
@@ -158,6 +164,8 @@ const richLink = (format: ArticleFormat): Colour => {
 			return labs[400];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
 	}
 };
 
@@ -179,6 +187,8 @@ const richLinkSvgDark = (format: ArticleFormat): Colour => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[500];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[500];
 	}
 };
 
@@ -231,6 +241,8 @@ const pinnedPost = (format: ArticleFormat): string => {
 			return labs[300];
 		case ArticleSpecial.SpecialReport:
 			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[300];
 	}
 };
 
@@ -238,11 +250,11 @@ const galleryImage = (_format: ArticleFormat): string => {
 	return neutral[20];
 };
 
-const signUpForm = (_format: ArticleFormat): string => {
+const newsletterSignUpForm = (_format: ArticleFormat): string => {
 	return neutral[0];
 };
 
-const signUpFormDark = (_format: ArticleFormat): string => {
+const newsletterSignUpFormDark = (_format: ArticleFormat): string => {
 	return neutral[86];
 };
 
@@ -275,8 +287,8 @@ const border = {
 	standfirstLinkDark,
 	pinnedPost,
 	galleryImage,
-	signUpForm,
-	signUpFormDark,
+	newsletterSignUpForm,
+	newsletterSignUpFormDark,
 };
 
 // ----- Exports ----- //

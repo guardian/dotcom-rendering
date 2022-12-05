@@ -82,31 +82,43 @@ const Card75_Card25 = ({
 	showAge?: boolean;
 }) => {
 	if (cards.length < 2) return null;
+	const card75 = cards.slice(0, 1);
+	const card25 = cards.slice(1, 2);
 
 	return (
 		<UL direction="row">
-			<LI padSides={true} percentage="75%">
-				<FrontCard
-					trail={cards[0]}
+			{card75.map((card) => (
+				<LI padSides={true} percentage="75%" key={card.url}>
+					<FrontCard
+						trail={card}
+						containerPalette={containerPalette}
+						containerType="dynamic/package"
+						showAge={showAge}
+						headlineSize="large"
+						headlineSizeOnMobile="huge"
+						imagePosition="right"
+						imagePositionOnMobile="bottom"
+						imageSize="medium"
+						trailText={card.trailText}
+					/>
+				</LI>
+			))}
+			{card25.map((card) => (
+				<LI
+					padSides={true}
+					percentage="25%"
+					showDivider={true}
 					containerPalette={containerPalette}
-					containerType="dynamic/package"
-					showAge={showAge}
-					headlineSize="large"
-					headlineSizeOnMobile="huge"
-					imagePosition="right"
-					imagePositionOnMobile="bottom"
-					imageSize="medium"
-					trailText={cards[0].trailText}
-				/>
-			</LI>
-			<LI padSides={true} percentage="25%" showDivider={true}>
-				<FrontCard
-					trail={cards[1]}
-					containerPalette={containerPalette}
-					containerType="dynamic/package"
-					showAge={showAge}
-				/>
-			</LI>
+					key={card.url}
+				>
+					<FrontCard
+						trail={card}
+						containerPalette={containerPalette}
+						containerType="dynamic/package"
+						showAge={showAge}
+					/>
+				</LI>
+			))}
 		</UL>
 	);
 };
@@ -132,6 +144,7 @@ const Card25_Card25_Card25_Card25 = ({
 						key={card.url}
 						padSides={true}
 						showDivider={cardIndex > 0}
+						containerPalette={containerPalette}
 					>
 						<FrontCard
 							trail={card}
@@ -168,6 +181,7 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 						key={card.url}
 						padSides={true}
 						showDivider={cardIndex > 0}
+						containerPalette={containerPalette}
 						percentage="25%"
 					>
 						<FrontCard
@@ -180,7 +194,11 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 					</LI>
 				);
 			})}
-			<LI showDivider={bigs.length > 0} percentage="25%">
+			<LI
+				showDivider={bigs.length > 0}
+				containerPalette={containerPalette}
+				percentage="25%"
+			>
 				<UL direction="row" wrapCards={true}>
 					{remaining.map((card) => {
 						return (
@@ -227,6 +245,7 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 						padSides={true}
 						percentage="25%"
 						showDivider={cardIndex > 0}
+						containerPalette={containerPalette}
 					>
 						<FrontCard
 							trail={card}
@@ -238,7 +257,11 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 					</LI>
 				);
 			})}
-			<LI showDivider={true} percentage="50%">
+			<LI
+				showDivider={true}
+				containerPalette={containerPalette}
+				percentage="50%"
+			>
 				<UL direction="row" wrapCards={true}>
 					{remaining.map((card, cardIndex) => {
 						return (
@@ -246,7 +269,8 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 								percentage="50%"
 								key={card.url}
 								padSides={true}
-								showDivider={true}
+								showDivider={cardIndex % 2 !== 0}
+								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
 									remaining.length,
@@ -297,7 +321,11 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 					</LI>
 				);
 			})}
-			<LI showDivider={true} percentage="75%">
+			<LI
+				showDivider={true}
+				containerPalette={containerPalette}
+				percentage="75%"
+			>
 				<UL direction="row" wrapCards={true}>
 					{remaining.map((card, cardIndex) => {
 						return (
@@ -305,7 +333,8 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 								percentage="33.333%"
 								key={card.url}
 								padSides={true}
-								showDivider={true}
+								showDivider={cardIndex % 3 !== 0}
+								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
 									remaining.length,
@@ -338,24 +367,32 @@ const Card75_ColumnOfCards25 = ({
 	containerPalette?: DCRContainerPalette;
 	showAge?: boolean;
 }) => {
-	const [primary, ...remaining] = cards;
+	const card75 = cards.slice(0, 1);
+	const remaining = cards.slice(1, 4);
+
 	return (
 		<UL direction="row" padBottom={true}>
-			<LI padSides={true} percentage="75%">
-				<FrontCard
-					trail={primary}
-					containerPalette={containerPalette}
-					containerType="dynamic/package"
-					showAge={showAge}
-					headlineSize="huge"
-					imagePosition="bottom"
-					imagePositionOnMobile="bottom"
-					imageSize="large"
-					supportingContent={primary.supportingContent}
-					isDynamo={true}
-				/>
-			</LI>
-			<LI showDivider={true} percentage="25%">
+			{card75.map((card) => (
+				<LI padSides={true} percentage="75%" key={card.url}>
+					<FrontCard
+						trail={card}
+						containerPalette={containerPalette}
+						containerType="dynamic/package"
+						showAge={showAge}
+						headlineSize="huge"
+						imagePosition="bottom"
+						imagePositionOnMobile="bottom"
+						imageSize="large"
+						supportingContent={card.supportingContent}
+						isDynamo={true}
+					/>
+				</LI>
+			))}
+			<LI
+				showDivider={true}
+				containerPalette={containerPalette}
+				percentage="25%"
+			>
 				<UL direction="column">
 					{remaining.map((card, cardIndex) => {
 						return (
@@ -372,6 +409,12 @@ const Card75_ColumnOfCards25 = ({
 										remaining.length === 2
 											? card.image
 											: undefined
+									}
+									headlineSize={
+										cardIndex === 0 ||
+										remaining.length === 2
+											? 'medium'
+											: 'small'
 									}
 									supportingContent={card.supportingContent}
 								/>
@@ -456,7 +499,7 @@ export const DynamicPackage = ({
 			secondSlice = cards.slice(0, 1);
 			break;
 		default:
-			if (cards[0].isBoosted) {
+			if (cards[0]?.isBoosted) {
 				layout = 'threeOrFourStandardsBoosted';
 				firstSlice = snaps;
 				secondSlice = cards.slice(0, 1);

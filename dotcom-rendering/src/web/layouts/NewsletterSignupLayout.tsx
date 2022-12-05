@@ -23,7 +23,7 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import type { NavType } from '../../model/extract-nav';
-import type { CAPIArticleType } from '../../types/frontend';
+import type { FEArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
@@ -52,7 +52,7 @@ import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
 type Props = {
-	CAPIArticle: CAPIArticleType;
+	CAPIArticle: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 };
@@ -115,7 +115,17 @@ const previewButtonWrapperStyle = css`
 const mainGraphicWrapperStyle = css`
 	border-radius: ${space[2]}px;
 	overflow: hidden;
-	margin: ${space[4]}px 0;
+	margin-bottom: ${space[4]}px;
+
+	margin-top: ${space[4]}px;
+
+	${from.desktop} {
+		margin-top: ${space[9]}px;
+	}
+
+	${from.leftCol} {
+		margin-top: ${space[2]}px;
+	}
 `;
 
 const previewCaptionStyle = css`
@@ -124,6 +134,7 @@ const previewCaptionStyle = css`
 	background-color: ${brandAlt[400]};
 	padding: ${space[1]}px ${space[3]}px;
 	${textSans.medium({ fontWeight: 'bold' })};
+	text-decoration: none;
 
 	:hover {
 		text-decoration: initial;
@@ -159,11 +170,21 @@ const shareSpanStyle = css`
 const shareDivStyle = css`
 	display: flex;
 	align-items: center;
-	margin-top: ${space[3]}px;
+	margin-top: ${space[4]}px;
+	margin-bottom: ${space[4]}px;
+`;
+
+const frequencyDivStyle = css`
+	margin-top: ${space[2]}px;
+	margin-bottom: ${space[2]}px;
+`;
+
+const regionalFocusDivStyle = css`
+	margin-bottom: ${space[2]}px;
 `;
 
 const getMainMediaCaptions = (
-	CAPIArticle: CAPIArticleType,
+	CAPIArticle: FEArticleType,
 ): (string | undefined)[] =>
 	CAPIArticle.mainMediaElements.map((el) =>
 		el._type === 'model.dotcomrendering.pageElements.ImageBlockElement'
@@ -176,6 +197,9 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 		promotedNewsletter,
 		config: { host },
 	} = CAPIArticle;
+
+	const isInEuropeTest =
+		CAPIArticle.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: CAPIArticle.isAdFreeUser,
@@ -226,6 +250,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 				<Section
 					fullWidth={true}
+					shouldCenter={false}
 					showTopBorder={false}
 					showSideBorders={false}
 					padSides={false}
@@ -246,6 +271,10 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						}
 						contributionsServiceUrl={contributionsServiceUrl}
 						idApiUrl={CAPIArticle.config.idApiUrl}
+						headerTopBarSwitch={
+							!!CAPIArticle.config.switches.headerTopNav
+						}
+						isInEuropeTest={isInEuropeTest}
 					/>
 				</Section>
 
@@ -267,6 +296,9 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							CAPIArticle.nav.readerRevenueLinks.header.subscribe
 						}
 						editionId={CAPIArticle.editionId}
+						headerTopBarSwitch={
+							!!CAPIArticle.config.switches.headerTopNav
+						}
 					/>
 				</Section>
 
@@ -358,9 +390,11 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<Column width={[1, 1, 5 / 8, 1 / 2, 1 / 2]}>
 							{showRegionalFocus && (
 								<Hide from="leftCol">
-									<NewsletterDetail
-										text={regionalFocusText}
-									/>
+									<div css={regionalFocusDivStyle}>
+										<NewsletterDetail
+											text={regionalFocusText}
+										/>
+									</div>
 								</Hide>
 							)}
 							<ArticleHeadline
@@ -390,24 +424,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</LinkButton>
 								</div>
 							)}
-							{!!promotedNewsletter && (
-								<>
-									<SecureSignup
-										name={promotedNewsletter.name}
-										newsletterId={
-											promotedNewsletter.identityName
-										}
-										successDescription={
-											promotedNewsletter.successDescription
-										}
-										hidePrivacyMessage={true}
-									/>
 
-									<NewsletterFrequency
-										frequency={promotedNewsletter.frequency}
-									/>
-								</>
-							)}
 							<div css={shareDivStyle}>
 								<span css={shareSpanStyle}>
 									Tell your friends
@@ -425,6 +442,33 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									context="ArticleMeta"
 								/>
 							</div>
+
+							{!!promotedNewsletter && (
+								<>
+									<div css={frequencyDivStyle}>
+										<NewsletterFrequency
+											frequency={
+												promotedNewsletter.frequency
+											}
+										/>
+									</div>
+
+									<SecureSignup
+										name={promotedNewsletter.name}
+										newsletterId={
+											promotedNewsletter.identityName
+										}
+										successDescription={
+											promotedNewsletter.successDescription
+										}
+										hidePrivacyMessage={true}
+									/>
+
+									<Hide from="desktop">
+										<NewsletterPrivacyMessage />
+									</Hide>
+								</>
+							)}
 						</Column>
 
 						<Column width={[1, 1, 3 / 8, 1 / 2, 1 / 2]}>
@@ -437,7 +481,6 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											target="_blank"
 											icon={<SvgEye size="medium" />}
 											priority="secondary"
-											subdued={true}
 										>
 											Click here to see the latest version
 											of this newsletter
@@ -462,9 +505,11 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</Column>
 					</Columns>
 
-					<div css={topMarginStyle()}>
-						<NewsletterPrivacyMessage />
-					</div>
+					<Hide until="desktop">
+						<div css={topMarginStyle()}>
+							<NewsletterPrivacyMessage />
+						</div>
+					</Hide>
 				</Section>
 
 				{CAPIArticle.onwards ? (

@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import type { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime';
 import type { Content } from '@guardian/content-api-models/v1/content';
@@ -8,13 +9,14 @@ import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { TagType } from '@guardian/content-api-models/v1/tagType';
 import type { Option } from '@guardian/types';
-import { andThen, fromNullable, map, none, some } from '@guardian/types';
+import { andThen, fromNullable, none, some } from '@guardian/types';
 import { fromString as dateFromString } from 'date';
 import { parseImage } from 'image';
 import { isLabs } from 'item';
 import { pipe } from 'lib';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
+import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import { parseVideo } from 'video';
 
@@ -66,35 +68,33 @@ const isVideo = (elem: BlockElement): boolean =>
 	elem.type === ElementType.CONTENTATOM &&
 	elem.contentAtomTypeData?.atomType === 'media';
 
-const articleMainImage = (content: Content): Option<BlockElement> =>
-	fromNullable((content.blocks?.main?.elements.filter(isImage) ?? [])[0]);
+const articleMainImage = (content: Content): Optional<BlockElement> =>
+	Optional.fromNullable(
+		(content.blocks?.main?.elements.filter(isImage) ?? [])[0],
+	);
 
-const articleMainVideo = (content: Content): Option<BlockElement> =>
-	fromNullable((content.blocks?.main?.elements.filter(isVideo) ?? [])[0]);
+const articleMainVideo = (content: Content): Optional<BlockElement> =>
+	Optional.fromNullable(
+		(content.blocks?.main?.elements.filter(isVideo) ?? [])[0],
+	);
 
 const articleMainMedia = (
 	content: Content,
 	context: Context,
-): Option<MainMedia> => {
+): Optional<MainMedia> => {
 	return (content.blocks?.main?.elements.filter(isImage) ?? [])[0]
-		? pipe(
-				articleMainImage(content),
-				andThen(parseImage(context)),
-				map((image) => ({
+		? articleMainImage(content)
+				.flatMap(parseImage(context))
+				.map<MainMedia>((image) => ({
 					kind: MainMediaKind.Image,
 					image,
-				})),
-		  )
-		: pipe(
-				articleMainVideo(content),
-				andThen((blockElement) =>
-					parseVideo(blockElement, content.atoms),
-				),
-				map((video) => ({
+				}))
+		: articleMainVideo(content)
+				.flatMap(parseVideo(content.atoms))
+				.map<MainMedia>((video) => ({
 					kind: MainMediaKind.Video,
 					video,
-				})),
-		  );
+				}));
 };
 
 type ThirdPartyEmbeds = {
@@ -215,6 +215,31 @@ const capiDateTimeToDate = (date: CapiDateTime): Option<Date> =>
 const maybeCapiDate = (date: CapiDateTime | undefined): Option<Date> =>
 	pipe(date, fromNullable, andThen(capiDateTimeToDate));
 
+/**
+ * Return a mock `Newsletter` if `content` contains a newsletter tag
+ * @param content the content to check for presence of a newsletter tag
+ * @returns a mock `Newsletter`, or `undefined` if `content` does not include a newsletter tag
+ */
+const getMockPromotedNewsletter = (
+	content: Content,
+): Newsletter | undefined => {
+	const newsletterTagPrefix = 'campaign/email/';
+	const newsletterTag = tagsOfType(TagType.CAMPAIGN)(content.tags).find(
+		(campaignTag) => campaignTag.id.startsWith(newsletterTagPrefix),
+	);
+
+	if (newsletterTag) {
+		return {
+			description: 'Test newsletter',
+			frequency: 'test',
+			identityName: 'invalid',
+			name: `Test: ${newsletterTag.id}`,
+			successDescription: 'test',
+			theme: 'news',
+		};
+	}
+};
+
 // ----- Exports ----- //
 
 export {
@@ -236,4 +261,5 @@ export {
 	articleMainImage,
 	checkForThirdPartyEmbed,
 	requiresInlineStyles,
+	getMockPromotedNewsletter,
 };

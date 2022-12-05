@@ -4,6 +4,7 @@ import {
 	getSoleContributor,
 	isContributor,
 } from '../../lib/byline';
+import type { TagType } from '../../types/tag';
 
 type Props = {
 	byline: string;

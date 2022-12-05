@@ -19,6 +19,8 @@ const showHideButtonCss = (
 	position: relative;
 	align-items: bottom;
 
+	text-decoration: none;
+
 	${from.wide} {
 		position: absolute;
 		top: 0;
@@ -37,7 +39,6 @@ export const ShowHideButton = ({
 	return (
 		<ButtonLink
 			priority="secondary"
-			subdued={true}
 			cssOverrides={showHideButtonCss(overrideContainerToggleColour)}
 			data-link-name="Hide"
 			data-show-hide-button={sectionId}

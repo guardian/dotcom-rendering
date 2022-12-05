@@ -8,7 +8,8 @@ import {
 } from '@guardian/source-react-components';
 import { clearFix } from '../../../lib/mixins';
 import type { NavType } from '../../../model/extract-nav';
-import type { EditionId } from '../../../types/edition';
+import { EditionId } from '../../lib/edition';
+
 import { GuardianRoundel } from '../GuardianRoundel';
 import { Hide } from '../Hide';
 import { Pillars } from '../Pillars';
@@ -20,6 +21,7 @@ type Props = {
 	nav: NavType;
 	subscribeUrl: string;
 	editionId: EditionId;
+	headerTopBarSwitch: boolean;
 };
 
 const clearFixStyle = css`
@@ -64,7 +66,13 @@ const PositionButton = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
+export const Nav = ({
+	format,
+	nav,
+	subscribeUrl,
+	editionId,
+	headerTopBarSwitch,
+}: Props) => {
 	const displayRoundel =
 		format.display === ArticleDisplay.Immersive ||
 		format.theme === ArticleSpecial.Labs;
@@ -107,7 +115,6 @@ export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
                         // We assume News is the 1st column
                         var firstColLabel = document.getElementById('News-button')
                         var firstColLink = document.querySelectorAll('#newsLinks > li:nth-of-type(2) > a')[0]
-
 
                         var focusOnFirstNavElement = function(){
                           // need to focus on first element in list, firstColLabel is not viewable on desktop
@@ -230,7 +237,12 @@ export const Nav = ({ format, nav, subscribeUrl, editionId }: Props) => {
 					dataLinkName="nav2"
 					isTopNav={true}
 				/>
-				<ExpandedMenu nav={nav} format={format} />
+				<ExpandedMenu
+					editionId={editionId}
+					nav={nav}
+					format={format}
+					headerTopBarSwitch={headerTopBarSwitch}
+				/>
 			</div>
 			{displayRoundel && (
 				<PositionRoundel>

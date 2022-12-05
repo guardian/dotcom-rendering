@@ -156,10 +156,6 @@ const textStyles = (
 	supportsDarkMode: boolean,
 ): SerializedStyles => css`
 	${textSans.small({ fontWeight: 'regular', lineHeight: 'regular' })};
-	/* TODO update with Source value when it's added */
-	${from.desktop} {
-		font-size: 15px;
-	}
 	color: ${text.keyEventsInline(format)};
 	display: block;
 	text-decoration: none;

@@ -43,6 +43,7 @@ import type { Outline } from 'outline';
 import { fromBodyElements } from 'outline';
 import { Result } from 'result';
 import { galleryBody } from './galleryBody';
+import { partialNewsletterItem } from './newsletterSignUpContent';
 import { relatedContent } from './relatedContent';
 
 // ----- Fixture ----- //
@@ -376,7 +377,17 @@ const fields = {
 	commentable: false,
 	tags: tags,
 	shouldHideReaderRevenue: false,
-	branding: none,
+	branding: some({
+		aboutUri:
+			'x-gu://item/mobile.guardianapis.com/uk/items/info/2016/jan/25/content-funding',
+		altLogo:
+			'https://static.theguardian.com/commercial/sponsor/05/May/2020/ca7c95d2-6aef-4710-ac1b-ad539763ed9f-JNI_rgb_rev_180.png',
+		brandingType: 'sponsored',
+		label: 'Supported by',
+		logo: 'https://static.theguardian.com/commercial/sponsor/05/May/2020/2b724f07-add3-4abb-b7a3-b6bbb05a3bd0-JNI_rgb_180.png',
+		sponsorName: 'Judith Nielson Institute',
+		sponsorUri: 'https://jninstitute.org/',
+	}),
 	internalShortId: none,
 	commentCount: none,
 	relatedContent: relatedContent,
@@ -463,7 +474,7 @@ const cartoon: Item = {
 
 const matchReport: MatchReport = {
 	design: ArticleDesign.MatchReport,
-	football: some(matchScores),
+	football: Optional.some(matchScores),
 	...fields,
 	theme: ArticlePillar.Sport,
 	body: galleryBody,
@@ -502,6 +513,28 @@ const explainer: Explainer = {
 	outline: outlineFromItem(fields.body),
 };
 
+const newsletterSignUp: Standard = {
+	...fields,
+	design: ArticleDesign.NewsletterSignup,
+	...partialNewsletterItem,
+};
+
+const immersive: Standard = {
+	design: ArticleDesign.Standard,
+	...fields,
+	display: ArticleDisplay.Immersive,
+};
+
+const gallery: Standard = {
+	design: ArticleDesign.Gallery,
+	...fields,
+	body: body.filter(
+		(element) =>
+			element.isErr() ||
+			(element.isOk() && element.value.kind === ElementKind.Image),
+	),
+};
+
 // ----- Exports ----- //
 
 export {
@@ -525,4 +558,8 @@ export {
 	quiz,
 	pinnedBlock,
 	explainer,
+	newsletterSignUp,
+	immersive,
+	gallery,
+	parseHtml,
 };

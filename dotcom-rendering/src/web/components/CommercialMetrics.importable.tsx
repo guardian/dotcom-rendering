@@ -6,6 +6,8 @@ import {
 import { getCookie } from '@guardian/libs';
 import type { ServerSideTestNames } from '../../types/config';
 import { tests } from '../experiments/ab-tests';
+import { integrateIma } from '../experiments/tests/integrate-ima';
+import { removePrebidA9Canada } from '../experiments/tests/remove-prebid-a9-canada';
 import { useAB } from '../lib/useAB';
 import { useAdBlockInUse } from '../lib/useAdBlockInUse';
 import { useOnce } from '../lib/useOnce';
@@ -15,7 +17,7 @@ type Props = {
 };
 
 export const CommercialMetrics = ({ enabled }: Props) => {
-	const ABTestAPI = useAB();
+	const ABTestAPI = useAB()?.api;
 	const adBlockerInUse = useAdBlockInUse();
 
 	useOnce(() => {
@@ -28,6 +30,8 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 		// For these tests switch off sampling and collect metrics for 100% of views
 		const clientSideTestsToForceMetrics: ABTest[] = [
 			/* keep array multi-line */
+			integrateIma,
+			removePrebidA9Canada,
 		];
 
 		const userInClientSideTestToForceMetrics = ABTestAPI?.allRunnableTests(
@@ -38,6 +42,7 @@ export const CommercialMetrics = ({ enabled }: Props) => {
 
 		const serverSideTestsToForceMetrics: Array<ServerSideTestNames> = [
 			/* keep array multi-line */
+			'dcrFrontsVariant',
 		];
 
 		const userInServerSideTestToForceMetrics =

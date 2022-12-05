@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access -- necessary for calling our async loaded modules */
 import { log } from '@guardian/libs';
-import type { Attributes } from 'preact';
 import { h, hydrate, render } from 'preact';
 import { initPerf } from '../initPerf';
 
@@ -15,25 +14,32 @@ import { initPerf } from '../initPerf';
  * @param data The deserialised props we want to use for hydration
  * @param element The location on the DOM where the component to hydrate exists
  */
-export const doHydration = (
+export const doHydration = async (
 	name: string,
-	data: Attributes | null,
+	data: { [key: string]: unknown } | null,
 	element: HTMLElement,
-): void => {
+): Promise<void> => {
 	// If this function has already been run for an element then don't try to
 	// run it a second time
 	const alreadyHydrated = element.dataset.guReady;
 	if (alreadyHydrated) return;
 
-	const { start, end } = initPerf(`hydrate-${name}`);
-	start();
-	import(
+	const { start: importStart, end: importEnd } = initPerf(`import-${name}`);
+	importStart();
+	await import(
 		/* webpackInclude: /\.importable\.tsx$/ */
 		/* webpackChunkName: "[request]" */
 		`../../components/${name}.importable`
 	)
 		.then((module) => {
+			/** The duration of importing the module for this island */
+			const importDuration = importEnd();
 			const clientOnly = element.getAttribute('clientOnly') === 'true';
+
+			const { start: islandStart, end: islandEnd } = initPerf(
+				`island-${name}`,
+			);
+			islandStart();
 
 			if (clientOnly) {
 				element.querySelector('[data-name="placeholder"]')?.remove();
@@ -43,24 +49,19 @@ export const doHydration = (
 			}
 
 			element.setAttribute('data-gu-ready', 'true');
-			const timeTaken = end();
+			/** The duration of rendering or hydrating this island */
+			const islandDuration = islandEnd();
 
-			return { clientOnly, timeTaken };
+			return { clientOnly, importDuration, islandDuration };
 		})
-		.then(({ clientOnly, timeTaken }) => {
+		.then(({ clientOnly, importDuration, islandDuration }) => {
 			if (!('getEntriesByType' in window.performance)) return;
-
-			// Log performance info
-			const { duration: download = -1 } =
-				window.performance
-					.getEntriesByType('resource')
-					.find((p) => p.name.includes(`/${name}-importable.`)) ?? {};
 
 			const action = clientOnly ? 'Rendering' : 'Hydrating';
 
 			log(
 				'dotcom',
-				`🏝 ${action} island <${name} /> took ${timeTaken}ms (downloaded in ${download}ms)`,
+				`🏝 ${action} island <${name} /> took ${islandDuration}ms (imported in ${importDuration}ms)`,
 			);
 		})
 		.catch((error) => {

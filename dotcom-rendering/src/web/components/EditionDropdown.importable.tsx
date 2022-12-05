@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { brand, from } from '@guardian/source-foundations';
-import type { EditionId } from '../../types/edition';
+import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { Dropdown } from './Dropdown';
 
@@ -32,7 +32,8 @@ const editionDropdown = css`
 export const EditionDropdown: React.FC<{
 	editionId: EditionId;
 	dataLinkName: string;
-}> = ({ editionId, dataLinkName }) => {
+	isInEuropeTest: boolean;
+}> = ({ editionId, dataLinkName, isInEuropeTest }) => {
 	const links = [
 		{
 			id: 'uk',
@@ -63,6 +64,14 @@ export const EditionDropdown: React.FC<{
 			dataLinkName: 'nav2 : topbar : edition-picker: INT',
 		},
 	];
+	if (isInEuropeTest)
+		links.push({
+			id: 'eur',
+			url: '/preference/edition/eur',
+			isActive: editionId === 'EUR',
+			title: 'Europe edition',
+			dataLinkName: 'nav2 : topbar : edition-picker: EUR',
+		});
 
 	// Find active link, default to UK
 	const activeLink = links.find((link) => link.isActive) || links[0];

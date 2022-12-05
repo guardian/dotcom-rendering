@@ -3,7 +3,6 @@ import React from 'react';
 export interface AnalyticsModel {
 	gaTracker: string;
 	title: string;
-	fbPixelaccount: string;
 	comscoreID: string;
 	section?: string;
 	contentType: string;
@@ -18,7 +17,6 @@ export const Analytics: React.FC<{
 }> = ({
 	analytics: {
 		gaTracker,
-		fbPixelaccount,
 		comscoreID,
 		title,
 		section = '',
@@ -30,7 +28,6 @@ export const Analytics: React.FC<{
 	},
 }) => {
 	const scripts: string[] = [
-		`<amp-pixel data-block-on-consent src="//www.facebook.com/tr?id=${fbPixelaccount}&ev=PageView&noscript=1"></amp-pixel>`,
 		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
 		`<amp-analytics data-block-on-consent type="googleanalytics" id="google-analytics">
              <script type="application/json">

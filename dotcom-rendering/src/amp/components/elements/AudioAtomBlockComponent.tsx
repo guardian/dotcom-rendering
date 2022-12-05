@@ -1,4 +1,5 @@
 import React from 'react';
+import type { AudioAtomBlockElement } from '../../../types/content';
 
 export const AudioAtomBlockComponent: React.FC<{
 	element: AudioAtomBlockElement;

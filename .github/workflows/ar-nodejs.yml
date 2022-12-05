@@ -19,30 +19,25 @@ jobs:
 
         steps:
             - uses: actions/checkout@v3
-            - uses: guardian/actions-setup-node@main
-
-            # Cache npm dependencies using https://github.com/bahmutov/npm-install
-            # Root dependencies
-            - uses: bahmutov/npm-install@v1
-
-            - uses: actions/cache@v2
+            - uses: actions/setup-node@v3
               with:
-                  path: ~/.npm
-                  key: node-${{ hashFiles('**/package-lock.json') }}
-                  restore-keys: node-
+                node-version-file: '.nvmrc'
+                cache: 'yarn'
+
+            - run: yarn --frozen-lockfile
 
             - name: lint
-              run: npm run lint
+              run: yarn lint
               working-directory: apps-rendering
 
             - name: test
-              run: npm run test
+              run: yarn test
               working-directory: apps-rendering
 
             - name: compile client
-              run: npm run build:client:prod
+              run: yarn build:client:prod
               working-directory: apps-rendering
 
             - name: compile server
-              run: npm run build:server:prod
+              run: yarn build:server:prod
               working-directory: apps-rendering

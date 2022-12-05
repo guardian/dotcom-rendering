@@ -33,6 +33,15 @@ const headerAdWrapper = css`
 
 export const HeaderAdSlot = ({ display }: Props) => (
 	<div css={headerWrapper}>
+		{/*
+			This is a special type of ad which, when filled, blocks
+			all other ads on the page. This allows us to run "exclusion
+			campaigns" against certain breaking news pages. Exclusion
+			ads are used for consentless advertising only. They are
+			ignored by GAM, which has a different mechanism to achieve
+			the same thing.
+		 */}
+		<AdSlot position="exclusion" />
 		<Global
 			styles={css`
 				/**

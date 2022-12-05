@@ -7,14 +7,23 @@ import {
 	space,
 	until,
 } from '@guardian/source-foundations';
-import type { DCRContainerPalette } from 'src/types/front';
-import type { TrailType } from '../../types/trails';
+import { DCRContainerPalette } from '../../types/front';
+import { ContainerOverrides } from '../../types/palette';
+import { TrailType } from '../../types/trails';
+import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { MiniCard } from './MiniCard';
 
 type Props = {
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
 };
+
+const columnRuleColour = (containerOverrides?: ContainerOverrides) => css`
+	column-rule: 1px solid
+		${containerOverrides
+			? containerOverrides.border.container
+			: border.secondary};
+`;
 
 const ulStyles = css`
 	${until.tablet} {
@@ -25,13 +34,14 @@ const ulStyles = css`
 	}
 	column-count: 4;
 
-	column-rule: 1px solid ${border.secondary};
 	column-gap: 10px;
 `;
 
-const liStyles = css`
-	color: ${palette.neutral[7]};
-	border-top: 1px solid ${palette.neutral[93]};
+const liStyles = (containerOverrides?: ContainerOverrides) => css`
+	border-top: 1px solid
+		${containerOverrides
+			? containerOverrides.topBar.card
+			: palette.neutral[93]};
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[3]}px;
 
@@ -42,10 +52,13 @@ const liStyles = css`
 `;
 
 export const NavList = ({ trails, containerPalette }: Props) => {
+	const containerOverrides =
+		containerPalette && decideContainerOverrides(containerPalette);
+
 	return (
-		<ul css={ulStyles}>
+		<ul css={[ulStyles, columnRuleColour(containerOverrides)]}>
 			{trails.map((trail) => (
-				<li css={liStyles}>
+				<li css={liStyles(containerOverrides)}>
 					<MiniCard
 						trail={trail}
 						showImage={false}

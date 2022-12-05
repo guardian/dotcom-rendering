@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { text, textSans } from '@guardian/source-foundations';
 import { Button, Link } from '@guardian/source-react-components';
 import { useState } from 'react';
+import { CampaignFieldType } from '../../../types/content';
 import { FileUpload } from './FileUpload';
 import { MultiSelect } from './MultiSelect';
 import { Select } from './Select';
@@ -175,10 +176,12 @@ export const Form = ({ onSubmit, formFields, error }: FormProps) => {
 					`}
 				>
 					<Link
-						subdued={true}
 						priority="secondary"
 						target="_blank"
 						href="https://www.theguardian.com/help/terms-of-service"
+						cssOverrides={css`
+							text-decoration: none;
+						`}
 					>
 						Terms and conditions
 					</Link>

@@ -5,7 +5,7 @@ import { getAllThemes } from '../fixtures/article';
 
 export default {
 	component: Pagination,
-	title: 'Components/Pagination',
+	title: 'Common/Components/Pagination',
 	parameters: {
 		layout: 'padded',
 		chromatic: { viewports: [breakpoints.mobile, breakpoints.wide] },

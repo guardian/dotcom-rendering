@@ -1,3 +1,5 @@
+import type { TagType } from '../types/tag';
+
 interface ContributorTag extends TagType {
 	type: 'Contributor';
 }

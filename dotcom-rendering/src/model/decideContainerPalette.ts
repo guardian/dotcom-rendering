@@ -18,5 +18,7 @@ export const decideContainerPalette = (
 	if (palettes?.includes('LongRunningPalette')) return 'LongRunningPalette';
 	if (palettes?.includes('SombrePalette')) return 'SombrePalette';
 	if (palettes?.includes('BreakingPalette')) return 'BreakingPalette';
+	if (palettes?.includes('SpecialReportAltPalette'))
+		return 'SpecialReportAltPalette';
 	return undefined;
 };

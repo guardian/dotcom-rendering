@@ -20,7 +20,8 @@ type ThemePillar =
 	| 'SportPillar'
 	| 'CulturePillar'
 	| 'LifestylePillar';
-type ThemeSpecial = 'SpecialReportTheme' | 'Labs';
+
+type ThemeSpecial = 'SpecialReportTheme' | 'Labs' | 'SpecialReportAltTheme';
 type CAPITheme = ThemePillar | ThemeSpecial;
 
 // CAPIDesign is what CAPI gives us on the Format field
@@ -152,7 +153,7 @@ interface BlockContributor {
 
 interface Block {
 	id: string;
-	elements: CAPIElement[];
+	elements: import('./src/types/content').CAPIElement[];
 	attributes: Attributes;
 	blockCreatedOn?: number;
 	blockCreatedOnDisplay?: string;
@@ -272,16 +273,6 @@ interface CAPINavType {
 
 type StageType = 'DEV' | 'CODE' | 'PROD';
 
-interface TagType {
-	id: string;
-	type: string;
-	title: string;
-	twitterHandle?: string;
-	paidContentType?: string;
-	bylineImageUrl?: string;
-	bylineLargeImageUrl?: string;
-}
-
 /**
  * BlocksRequest is the expected body format for POST requests made to /Blocks
  */
@@ -314,7 +305,7 @@ interface KeyEventsRequest {
 
 type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 
-type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo';
+type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'carousel';
 
 type CardImageType = 'mainMedia' | 'avatar';
 
@@ -574,7 +565,7 @@ declare namespace JSX {
 	interface IntrinsicElements {
 		'gu-island': {
 			name: string;
-			deferUntil?: 'idle' | 'visible';
+			deferUntil?: 'idle' | 'visible' | 'interaction' | 'hash';
 			clientOnly?: boolean;
 			expediteLoading?: boolean;
 			props: any;
@@ -614,5 +605,13 @@ declare namespace JSX {
 		 * link is clicked.
 		 */
 		'data-link-name'?: string;
+
+		/**
+		 * Elements with this attribute will fetch their comment count on
+		 * the client-side.
+		 *
+		 * @see {@link ../src/web/components/FetchCommentCounts.importable.tsx}
+		 */
+		'data-discussion-id'?: string;
 	}
 }

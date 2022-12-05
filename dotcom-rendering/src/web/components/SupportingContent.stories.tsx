@@ -28,7 +28,7 @@ const basicCardProps: CardProps = {
 	headlineSize: 'medium',
 	kickerText: '',
 	imageUrl:
-		'https://i.guim.co.uk/img/media/6537e163c9164d25ec6102641f6a04fa5ba76560/0_0_5472_3648/master/5472.jpg?width=1140&quality=85&s=15053eb16d6829d670fb348d8d26aabd',
+		'https://media.guim.co.uk/6537e163c9164d25ec6102641f6a04fa5ba76560/0_0_5472_3648/master/5472.jpg',
 	imagePosition: 'top',
 };
 
@@ -47,6 +47,7 @@ export const Default = () => {
 		<SupportingContent
 			supportingContent={[aBasicLink]}
 			alignment="horizontal"
+			parentFormat={aBasicLink.format}
 		/>
 	);
 };
@@ -54,8 +55,9 @@ export const Default = () => {
 export const WithKicker = () => {
 	return (
 		<SupportingContent
-			supportingContent={[{ ...aBasicLink, kickerText: 'Kicket text' }]}
+			supportingContent={[{ ...aBasicLink, kickerText: 'Kicker text' }]}
 			alignment="horizontal"
+			parentFormat={aBasicLink.format}
 		/>
 	);
 };
@@ -414,6 +416,42 @@ export const TwoSublinks = () => {
 				}}
 				linkTo=""
 				headlineText="With two links"
+			/>
+		</div>
+	);
+};
+
+export const LiveSublink = () => {
+	return (
+		<div
+			css={css`
+				width: 700px;
+			`}
+		>
+			<Card
+				{...basicCardProps}
+				supportingContent={[
+					{
+						headline: 'Headline',
+						kickerText: 'Kicker',
+						url: 'https://www.theguardian.com',
+						format: {
+							display: ArticleDisplay.Standard,
+							design: ArticleDesign.LiveBlog,
+							theme: ArticlePillar.News,
+						},
+					},
+				]}
+				imagePosition="left"
+				imageSize="large"
+				trailText="When the image is positioned horizontally and there is only one sublink, it appears under the headline"
+				format={{
+					display: ArticleDisplay.Standard,
+					design: ArticleDesign.LiveBlog,
+					theme: ArticlePillar.News,
+				}}
+				linkTo=""
+				headlineText="With one link"
 			/>
 		</div>
 	);

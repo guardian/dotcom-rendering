@@ -14,7 +14,7 @@ import { buildAdTargeting } from '../../lib/ad-targeting';
 import { getSoleContributor } from '../../lib/byline';
 import { parse } from '../../lib/slot-machine-flags';
 import type { NavType } from '../../model/extract-nav';
-import type { CAPIArticleType } from '../../types/frontend';
+import type { FEArticleType } from '../../types/frontend';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -213,11 +213,13 @@ const minHeightWithAvatar = css`
 const avatarPositionStyles = css`
 	display: flex;
 	justify-content: flex-end;
-	overflow: hidden;
 	position: relative;
 	margin-bottom: -29px;
 	margin-top: -50px;
 	pointer-events: none;
+	${until.tablet} {
+		overflow: hidden;
+	}
 
 	/*  Why target img element?
 
@@ -258,7 +260,7 @@ const mainMediaWrapper = css`
 `;
 
 interface Props {
-	CAPIArticle: CAPIArticleType;
+	CAPIArticle: FEArticleType;
 	NAV: NavType;
 	format: ArticleFormat;
 }
@@ -267,6 +269,9 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPIArticle;
+
+	const isInEuropeTest =
+		CAPIArticle.config.abTests.europeNetworkFrontVariant === 'variant';
 
 	const adTargeting: AdTargeting = buildAdTargeting({
 		isAdFreeUser: CAPIArticle.isAdFreeUser,
@@ -326,6 +331,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					{format.theme !== ArticleSpecial.Labs && (
 						<Section
 							fullWidth={true}
+							shouldCenter={false}
 							showTopBorder={false}
 							showSideBorders={false}
 							padSides={false}
@@ -351,6 +357,10 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
+								headerTopBarSwitch={
+									!!CAPIArticle.config.switches.headerTopNav
+								}
+								isInEuropeTest={isInEuropeTest}
 							/>
 						</Section>
 					)}
@@ -374,6 +384,9 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									.subscribe
 							}
 							editionId={CAPIArticle.editionId}
+							headerTopBarSwitch={
+								!!CAPIArticle.config.switches.headerTopNav
+							}
 						/>
 					</Section>
 
@@ -405,6 +418,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							cssOverrides={css`
 								display: block;
 							`}
+							color={palette.border.secondary}
 						/>
 					</Section>
 				</SendToBack>
@@ -471,6 +485,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											cssOverrides={css`
 												display: block;
 											`}
+											color={palette.border.secondary}
 										/>
 									</div>
 								</div>
@@ -484,6 +499,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										cssOverrides={css`
 											display: block;
 										`}
+										color={palette.border.secondary}
 									/>
 								</Hide>
 							</div>
@@ -633,6 +649,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										cssOverrides={css`
 											display: block;
 										`}
+										color={palette.border.secondary}
 									/>
 									<SubMeta
 										format={format}
@@ -682,8 +699,6 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 												CAPIArticle.pageType
 													.isPaidContent
 											}
-											format={format}
-											editionId={CAPIArticle.editionId}
 										/>
 									)}
 

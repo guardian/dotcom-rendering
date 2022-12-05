@@ -4,7 +4,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
-import { some, withDefault } from '@guardian/types';
+import { none, some, withDefault } from '@guardian/types';
 import AnalysisLayout from 'components/Layout/AnalysisLayout';
 import Comment from 'components/Layout/CommentLayout';
 import Standard from 'components/Layout/StandardLayout';
@@ -15,9 +15,12 @@ import {
 	editorial,
 	explainer,
 	feature,
+	gallery,
+	immersive,
 	interview,
 	letter,
 	matchReport,
+	newsletterSignUp,
 	photoEssay,
 	printShop,
 	quiz,
@@ -29,7 +32,11 @@ import type { Item } from 'item';
 import type { ReactElement } from 'react';
 import { renderAll } from 'renderer';
 import { Result } from 'result';
+import GalleryLayout from './GalleryLayout';
+import ImmersiveLayout from './ImmersiveLayout';
+import LetterLayout from './LetterLayout';
 import Live from './LiveLayout';
+import NewsletterSignUpLayout from './NewsletterSignUpLayout';
 
 // ----- Functions ----- //
 
@@ -166,12 +173,12 @@ CommentItem.story = { name: 'Comment' };
 
 export const Letter = (): React.ReactNode => {
 	return (
-		<Comment item={letter}>
+		<LetterLayout item={letter}>
 			{renderAll(
 				formatFromItem(letter, some(ArticleDisplay.Standard)),
 				Result.partition(letter.body).oks,
 			)}
-		</Comment>
+		</LetterLayout>
 	);
 };
 Letter.story = { name: 'Letter' };
@@ -233,6 +240,45 @@ export const DeadBlog = (): ReactElement => (
 	/>
 );
 DeadBlog.story = { name: 'DeadBlog ' };
+
+export const NewsletterSignup = (): ReactElement => (
+	<NewsletterSignUpLayout item={newsletterSignUp}>
+		{renderAll(
+			formatFromItem(newsletterSignUp, some(ArticleDisplay.Standard)),
+			Result.partition(newsletterSignUp.body).oks,
+		)}
+	</NewsletterSignUpLayout>
+);
+NewsletterSignup.story = { name: 'NewsletterSignup' };
+export const Immersive = (): ReactElement => (
+	<ImmersiveLayout
+		item={{
+			...immersive,
+			edition: Edition.UK,
+		}}
+	>
+		{renderAll(
+			formatFromItem(immersive, none),
+			Result.partition(immersive.body).oks,
+		)}
+	</ImmersiveLayout>
+);
+Immersive.story = { name: 'Immersive ' };
+
+export const Gallery = (): ReactElement => (
+	<GalleryLayout
+		item={{
+			...gallery,
+			edition: Edition.UK,
+		}}
+	>
+		{renderAll(
+			formatFromItem(gallery, none),
+			Result.partition(gallery.body).oks,
+		)}
+	</GalleryLayout>
+);
+Gallery.story = { name: 'Gallery ' };
 
 export default {
 	title: 'AR/Layouts/Standard',

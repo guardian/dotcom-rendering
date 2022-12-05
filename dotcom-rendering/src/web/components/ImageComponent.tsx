@@ -8,6 +8,7 @@ import {
 	neutral,
 	until,
 } from '@guardian/source-foundations';
+import type { Image, ImageBlockElement, RoleType } from '../../types/content';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Caption } from './Caption';
@@ -222,6 +223,12 @@ export const ImageComponent = ({
 	title,
 	isAvatar,
 }: Props) => {
+	// Its possible the tools wont send us any images urls
+	// if so, don't try to render
+	if (element.media.allImages.length === 0) {
+		return null;
+	}
+
 	const shouldLimitWidth =
 		!isMainMedia &&
 		(role === 'showcase' || role === 'supporting' || role === 'immersive');
@@ -256,6 +263,7 @@ export const ImageComponent = ({
 		};
 		return images.slice().sort(descendingByWidth)[0].url;
 	};
+
 	// Legacy images do not have a master so we fallback to the largest available
 	const image =
 		getMaster(element.media.allImages) ??

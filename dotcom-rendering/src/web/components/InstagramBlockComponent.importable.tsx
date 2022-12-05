@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { InstagramBlockElement } from '../../types/content';
 import { updateIframeHeight } from '../browser/updateIframeHeight';
 import { ClickToView } from './ClickToView';
 

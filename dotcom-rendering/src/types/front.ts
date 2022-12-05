@@ -1,8 +1,9 @@
 import type { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import type { EditionId } from '../web/lib/edition';
 import type { ServerSideTests, Switches } from './config';
-import type { EditionId } from './edition';
 import type { FooterType } from './footer';
-import type { TrailType } from './trails';
+import type { FETagType } from './tag';
+import type { CAPITrailType, TrailType } from './trails';
 
 export interface FEFrontType {
 	pressedPage: FEPressedPageType;
@@ -18,6 +19,9 @@ export interface FEFrontType {
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
 	isNetworkFront: boolean;
+	mostViewed: CAPITrailType[];
+	mostCommented?: CAPITrailType;
+	mostShared?: CAPITrailType;
 }
 
 export interface DCRFrontType {
@@ -29,6 +33,9 @@ export interface DCRFrontType {
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
 	isNetworkFront: boolean;
+	mostViewed: TrailType[];
+	mostCommented?: TrailType;
+	mostShared?: TrailType;
 }
 
 interface FEPressedPageType {
@@ -81,11 +88,11 @@ export type FEContainerPalette =
 	| 'Dynamo'
 	| 'Special'
 	| 'DynamoLike'
-	| 'Special'
 	| 'Breaking'
 	| 'Podcast'
 	| 'Branded'
-	| 'BreakingPalette';
+	| 'BreakingPalette'
+	| 'SpecialReportAltPalette';
 
 export type DCRContainerPalette =
 	| 'EventPalette'
@@ -95,25 +102,11 @@ export type DCRContainerPalette =
 	| 'LongRunningAltPalette'
 	| 'LongRunningPalette'
 	| 'SombrePalette'
-	| 'BreakingPalette';
+	| 'BreakingPalette'
+	| 'SpecialReportAltPalette';
 
 // TODO: These may need to be declared differently than the front types in the future
 export type DCRContainerType = FEContainerType;
-
-export type FETagType = {
-	id: string;
-	url: string;
-	tagType: string;
-	sectionId: string;
-	sectionName: string;
-	webTitle: string;
-	webUrl: string;
-	twitterHandle?: string;
-	/* bio is html */
-	bio?: string;
-	bylineImageUrl?: string;
-	contributorLargeImagePath?: string;
-};
 
 export type FEFrontCard = {
 	properties: {
@@ -160,7 +153,7 @@ export type FEFrontCard = {
 				standfirst?: string;
 			};
 			elements: Record<string, unknown>;
-			tags: { tags: { properties: FETagType }[] };
+			tags: { tags: FETagType[] };
 		};
 		maybeContentId?: string;
 		isLiveBlog: boolean;
@@ -318,6 +311,13 @@ export type DCRCollectionType = {
 	config: {
 		showDateHeader: boolean;
 	};
+	/**
+	 * @property {?boolean} canShowMore - Whether the 'show more' button should be shown.
+	 * nb. the value of this will typically reflect the `FECollectionType.hasMore` value we get from Frontend,
+	 * except when `FECollectionType.config.hideShowMore` is set to `true`, in which case `DCRCollectionType.canShowMore`
+	 * will always be `false`.
+	 **/
+	canShowMore?: boolean;
 };
 
 export type DCRGroupedTrails = {
@@ -415,6 +415,7 @@ type FESeoDataType = {
 	id: string;
 	navSection: string;
 	webTitle: string;
+	title?: string;
 	description: string;
 };
 

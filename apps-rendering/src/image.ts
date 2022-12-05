@@ -1,6 +1,7 @@
 // ----- Imports ----- //
 
 import type { Image as CardImage } from '@guardian/apps-rendering-api-models/image';
+import type { Asset } from '@guardian/content-api-models/v1/asset';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ArticleElementRole } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
@@ -9,6 +10,7 @@ import { andThen, fromNullable, map, none, some } from '@guardian/types';
 import type { Image as ImageData } from 'image/image';
 import { Dpr, src, srcsets } from 'image/srcsets';
 import { pipe } from 'lib';
+import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import type { ReactNode } from 'react';
 
@@ -49,45 +51,57 @@ const parseRole = (role: string | undefined): ArticleElementRole => {
 	}
 };
 
+const sortAscendingWidth = (a: Asset, b: Asset): number =>
+	a.typeData?.width && b.typeData?.width
+		? a.typeData.width - b.typeData.width
+		: -1;
+
+const getHighestResAsset = (assets: Asset[]): Optional<Asset> =>
+	Optional.fromNullable(assets.slice().sort(sortAscendingWidth).pop());
+
+const getBestAsset = (assets: Asset[]): Optional<Asset> => {
+	const masterAsset = Optional.fromNullable(
+		assets.find((asset) => asset.typeData?.isMaster),
+	);
+	if (masterAsset.isSome()) {
+		return masterAsset;
+	}
+
+	return getHighestResAsset(assets);
+};
+
 const parseImage =
 	({ docParser, salt }: Context) =>
-	(element: BlockElement): Option<Image> => {
-		const masterAsset = element.assets.find(
-			(asset) => asset.typeData?.isMaster,
-		);
+	(element: BlockElement): Optional<Image> => {
 		const data = element.imageTypeData;
 
-		return pipe(
-			masterAsset,
-			fromNullable,
-			andThen((asset) => {
-				if (
-					asset.file === undefined ||
-					asset.file === '' ||
-					asset.typeData?.width === undefined ||
-					asset.typeData.height === undefined
-				) {
-					return none;
-				}
+		return getBestAsset(element.assets).flatMap((asset) => {
+			if (
+				asset.file === undefined ||
+				asset.file === '' ||
+				asset.typeData?.width === undefined ||
+				asset.typeData.height === undefined
+			) {
+				return Optional.none();
+			}
 
-				return some({
-					src: src(
-						salt,
-						asset.typeData.secureFile ?? asset.file,
-						500,
-						Dpr.One,
-					),
-					...srcsets(asset.typeData.secureFile ?? asset.file, salt),
-					alt: fromNullable(data?.alt),
-					width: asset.typeData.width,
-					height: asset.typeData.height,
-					caption: pipe(data?.caption, fromNullable, map(docParser)),
-					credit: parseCredit(data?.displayCredit, data?.credit),
-					nativeCaption: fromNullable(data?.caption),
-					role: parseRole(data?.role),
-				});
-			}),
-		);
+			return Optional.some({
+				src: src(
+					salt,
+					asset.typeData.secureFile ?? asset.file,
+					500,
+					Dpr.One,
+				),
+				...srcsets(asset.typeData.secureFile ?? asset.file, salt),
+				alt: fromNullable(data?.alt),
+				width: asset.typeData.width,
+				height: asset.typeData.height,
+				caption: pipe(data?.caption, fromNullable, map(docParser)),
+				credit: parseCredit(data?.displayCredit, data?.credit),
+				nativeCaption: fromNullable(data?.caption),
+				role: parseRole(data?.role),
+			});
+		});
 	};
 
 const parseCardImage = (

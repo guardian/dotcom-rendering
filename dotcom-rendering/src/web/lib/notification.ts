@@ -2,8 +2,10 @@ import type { BrazeCard } from '@guardian/braze-components';
 import type { DropdownLinkType } from '../components/Dropdown';
 
 export interface Notification {
+	id: string;
 	target: string;
 	message: string;
+	logImpression?: () => void;
 }
 
 const hasTargetAndMessage = (
@@ -16,8 +18,12 @@ export const mapBrazeCardsToNotifications = (
 ): Notification[] => {
 	return cards.filter(hasTargetAndMessage).map((card) => {
 		return {
+			id: card.id,
 			target: card.extras.target,
 			message: card.extras.message,
+			logImpression: () => {
+				card.logImpression();
+			},
 		};
 	});
 };
@@ -27,17 +33,9 @@ const groupNotificationsByTarget = (
 ): { [k: string]: Notification[] } => {
 	return notifications.reduce<{ [k: string]: Notification[] }>(
 		(groupings, notification) => {
-			const alreadyGotNotificationsForTarget =
-				Object.prototype.hasOwnProperty.call(
-					groupings,
-					notification.target,
-				);
-
-			if (!alreadyGotNotificationsForTarget) {
-				groupings[notification.target] = [];
-			}
-
-			groupings[notification.target].push(notification);
+			groupings[notification.target] = (
+				groupings[notification.target] ?? []
+			).concat(notification);
 
 			return groupings;
 		},
@@ -52,31 +50,18 @@ export const addNotificationsToDropdownLinks = (
 	const notificationsByTarget = groupNotificationsByTarget(notifications);
 
 	const linksWithNotifications = links.map((link) => {
-		const targetHasNewNotifications = Object.prototype.hasOwnProperty.call(
-			notificationsByTarget,
-			link.id,
+		const newNotifications = (link.notifications ?? []).concat(
+			notificationsByTarget[link.id] ?? [],
 		);
 
-		if (targetHasNewNotifications) {
-			const newMessages = notificationsByTarget[link.id].map(
-				(n) => n.message,
-			);
-
-			const existingNotifications = link.notifications;
-			if (existingNotifications) {
-				return {
-					...link,
-					notifications: [...existingNotifications, ...newMessages],
-				};
-			} else {
-				return {
-					...link,
-					notifications: newMessages,
-				};
-			}
-		} else {
+		if (newNotifications.length === 0) {
 			return link;
 		}
+
+		return {
+			...link,
+			notifications: newNotifications,
+		};
 	});
 
 	return linksWithNotifications;

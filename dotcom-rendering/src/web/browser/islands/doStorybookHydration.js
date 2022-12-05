@@ -22,6 +22,7 @@ export const doStorybookHydration = () => {
 			const props = getProps(element);
 
 			if (!name) return;
+			if (element.getAttribute('deferuntil') === 'hash') return;
 
 			// eslint-disable-next-line @typescript-eslint/no-floating-promises
 			import(
