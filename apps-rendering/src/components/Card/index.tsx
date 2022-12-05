@@ -41,7 +41,6 @@ import { getFormat, OnwardsContentArticle } from 'relatedContent';
 
 interface Props {
 	relatedItem: OnwardsContentArticle;
-	image: Option<Image>;
 	kickerText: Option<string>;
 }
 
@@ -410,15 +409,13 @@ const cardByline = (
 	);
 };
 
-const cardImage = (
-	image: Option<Image>,
-	relatedItem: OnwardsContentArticle,
-): ReactElement | null => {
+const cardImage = (relatedItem: OnwardsContentArticle): ReactElement | null => {
 	const format = getFormat(relatedItem);
 
 	return pipe(
-		image,
+		relatedItem.mainMedia,
 		map((img) => {
+			console.log(`in comp`, img);
 			return (
 				<div css={[fullWidthImage, imageWrapperStyles]}>
 					<Img
@@ -443,10 +440,10 @@ const cardImage = (
 	);
 };
 
-const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
+const Card: FC<Props> = ({ relatedItem, kickerText }) => {
 	const format = getFormat(relatedItem);
 
-	const img = cardImage(image, relatedItem);
+	const img = cardImage(relatedItem);
 	const { /*type, */ headline, webUrl, contributor, publishDate } =
 		relatedItem;
 
