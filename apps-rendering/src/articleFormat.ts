@@ -4,8 +4,13 @@
 
 // ----- Imports ----- //
 
-import { ArticleDesign, ArticleDisplay, ArticleFormat, ArticleTheme } from '@guardian/libs';
-import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
+import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
+import {
+	ArticleDesign,
+	ArticleDisplay,
+	ArticlePillar,
+	ArticleSpecial,
+} from '@guardian/libs';
 import { Optional } from 'optional';
 
 // ----- Functions ----- //
@@ -112,7 +117,7 @@ const themeToPillar = (theme: ArticleTheme): ArticlePillar => {
 /**
  * Creates a string representation of {@linkcode ArticleDesign}. Useful for
  * logging, storybook UI etc.
- * 
+ *
  * @param design An {@linkcode ArticleDesign}
  * @returns A string representation of `ArticleDesign`
  */
@@ -167,12 +172,12 @@ const designToString = (design: ArticleDesign): string => {
 		case ArticleDesign.NewsletterSignup:
 			return 'Newsletter Signup';
 	}
-}
+};
 
 /**
  * Creates a string representation of {@linkcode ArticleDisplay}. Useful for
  * logging, storybook UI etc.
- * 
+ *
  * @param display An {@linkcode ArticleDisplay}
  * @returns A string representation of `ArticleDisplay`
  */
@@ -187,12 +192,12 @@ const displayToString = (display: ArticleDisplay): string => {
 		case ArticleDisplay.NumberedList:
 			return 'Numbered List';
 	}
-}
+};
 
 /**
  * Creates a string representation of {@linkcode ArticleTheme}. Useful for
  * logging, storybook UI etc.
- * 
+ *
  * @param theme An {@linkcode ArticleTheme}
  * @returns A string representation of `ArticleTheme`
  */
@@ -215,18 +220,26 @@ const themeToString = (theme: ArticleTheme): string => {
 		case ArticleSpecial.SpecialReportAlt:
 			return 'Special Report Alt';
 	}
-}
+};
 
 /**
  * Creates a string representation of {@linkcode ArticleFormat}. Useful for
  * logging, storybook UI etc.
- * 
+ *
  * @param format An {@linkcode ArticleFormat}
  * @returns A string representation of `ArticleFormat`
  */
 const formatToString = (format: ArticleFormat): string =>
-	`Design: ${designToString(format.design)}, Display: ${displayToString(format.display)}, Theme: ${themeToString(format.theme)}`;
+	`Design: ${designToString(format.design)}, Display: ${displayToString(
+		format.display,
+	)}, Theme: ${themeToString(format.theme)}`;
 
 // ----- Exports ----- //
 
-export { formatToString, getPillarFromId, getPillarOrElseNews, pillarToId, themeToPillar };
+export {
+	formatToString,
+	getPillarFromId,
+	getPillarOrElseNews,
+	pillarToId,
+	themeToPillar,
+};
