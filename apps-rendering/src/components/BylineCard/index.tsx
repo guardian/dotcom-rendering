@@ -18,7 +18,11 @@ import { withDefault, Option, OptionKind, map, andThen } from '@guardian/types';
 import { makeRelativeDate } from 'date';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
-import { OnwardsContentArticle, getFormat } from 'relatedContent';
+import {
+	OnwardsContentArticle,
+	getFormat,
+	getContributorImage,
+} from 'relatedContent';
 import { darkModeCss } from 'styles';
 
 interface Props {
@@ -163,10 +167,7 @@ const cardImage = (
 	relatedItem: OnwardsContentArticle,
 	format: ArticleFormat,
 ): ReactElement | null => {
-	const contributorImage = pipe(
-		relatedItem.contributor,
-		andThen((contributor) => contributor.image),
-	);
+	const contributorImage = getContributorImage(relatedItem.contributor);
 
 	if (contributorImage.kind === OptionKind.None) {
 		return null;

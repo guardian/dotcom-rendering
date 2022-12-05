@@ -8,7 +8,7 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import type { Option } from '@guardian/types';
-import { none, OptionKind, some } from '@guardian/types';
+import { none, OptionKind, some, andThen } from '@guardian/types';
 import { articleMainImage, isAnalysis, isFeature, maybeCapiDate } from 'capi';
 import type { Contributor } from 'contributor';
 import { parseContributors } from 'contributor';
@@ -134,6 +134,14 @@ const relatedContentFields = (
 	theme: ArticlePillar.News,
 });
 
+const getContributorImage = (
+	maybeContributor: Option<Contributor>,
+): Option<Image> =>
+	pipe(
+		maybeContributor,
+		andThen((contributor) => contributor.image),
+	);
+
 const parseMapiRelatedContent =
 	(context: Context) =>
 	(
@@ -220,5 +228,10 @@ const getFormat = (onwardsArticle: OnwardsContentArticle): ArticleFormat => ({
 	theme: onwardsArticle.theme,
 });
 
-export { parseRelatedContent, parseMapiRelatedContent, getFormat };
+export {
+	parseRelatedContent,
+	parseMapiRelatedContent,
+	getFormat,
+	getContributorImage,
+};
 export type { OnwardsContentSection as RelatedContent, OnwardsContentArticle };

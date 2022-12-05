@@ -118,18 +118,19 @@ export const COMMENT = RelatedItemType.COMMENT;
 const DefaultRelatedContent: FC<Props> = ({ content, className }) => {
 	return pipe(
 		content,
-		map(({ title, relatedItems }) => {
-			if (relatedItems.length === 0) {
+		map(({ category, content }) => {
+			if (content.length === 0) {
 				return null;
 			}
 
 			return (
 				<section css={className}>
-					<h2 css={defaultHeadingStyles}>{title}</h2>
+					<h2 css={defaultHeadingStyles}>{category.toString()}</h2>
 					<ul css={defaultListStyles} role="list">
-						{relatedItems.map((relatedItem, key) => {
-							const contributorImage =
-								getContributorImage(relatedItem);
+						{content.map((relatedItem, key) => {
+							const contributorImage = getContributorImage(
+								relatedItem.contributor,
+							);
 
 							return relatedItem.design ===
 								ArticleDesign.Comment &&
