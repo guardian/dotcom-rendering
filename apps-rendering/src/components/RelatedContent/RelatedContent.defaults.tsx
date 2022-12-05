@@ -138,7 +138,6 @@ const DefaultRelatedContent: FC<Props> = ({ content, className }) => {
 								<Card
 									key={key}
 									relatedItem={relatedItem}
-									image={none}
 									kickerText={none}
 								/>
 							);
