@@ -1,7 +1,5 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import type { RelatedItem } from '@guardian/apps-rendering-api-models/relatedItem';
-import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import {
 	background,
 	border,
@@ -9,12 +7,7 @@ import {
 	text,
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticlePillar,
-	ArticleSpecial,
-} from '@guardian/libs';
+import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import {
 	from,
 	headline,
@@ -36,7 +29,6 @@ import {
 	withDefault,
 } from '@guardian/types';
 import type { Option } from '@guardian/types';
-import { getPillarOrElseNews } from 'articleFormat';
 import Img from 'components/ImgAlt';
 import Kicker from 'components/Kicker';
 import { stars } from 'components/StarRating';
@@ -45,9 +37,10 @@ import type { Image } from 'image';
 import { maybeRender, pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
+import { getFormat, OnwardsContentArticle } from 'relatedContent';
 
 interface Props {
-	relatedItem: RelatedItem;
+	relatedItem: OnwardsContentArticle;
 	image: Option<Image>;
 	kickerText: Option<string>;
 }
@@ -77,14 +70,11 @@ const listBaseStyles = css`
 	}
 `;
 
-const listStyles = (
-	type: RelatedItemType,
-	format: ArticleFormat,
-): SerializedStyles => {
-	switch (type) {
-		case RelatedItemType.VIDEO:
-		case RelatedItemType.AUDIO:
-		case RelatedItemType.GALLERY: {
+const listStyles = (format: ArticleFormat): SerializedStyles => {
+	switch (format.design) {
+		case ArticleDesign.Video:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Gallery: {
 			return css`
 				${listBaseStyles}
 				border-radius: ${remSpace[2]};
@@ -92,7 +82,7 @@ const listStyles = (
 			`;
 		}
 
-		case RelatedItemType.LIVE: {
+		case ArticleDesign.LiveBlog: {
 			return css`
 				${listBaseStyles}
 				border-radius: ${remSpace[2]};
@@ -162,15 +152,12 @@ const anchorStyles = (format: ArticleFormat): SerializedStyles => css`
 	height: 100%;
 `;
 
-const headingWrapperStyles = (
-	type: RelatedItemType,
-	format: ArticleFormat,
-): SerializedStyles => {
-	switch (type) {
-		case RelatedItemType.VIDEO:
-		case RelatedItemType.AUDIO:
-		case RelatedItemType.GALLERY:
-		case RelatedItemType.LIVE: {
+const headingWrapperStyles = (format: ArticleFormat): SerializedStyles => {
+	switch (format.design) {
+		case ArticleDesign.Video:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Gallery:
+		case ArticleDesign.LiveBlog: {
 			return css`
 				padding: 0.125rem ${remSpace[2]} ${remSpace[4]};
 				flex-grow: 1;
@@ -185,8 +172,8 @@ const headingWrapperStyles = (
 	}
 };
 
-const headingStyles = (type: RelatedItemType): SerializedStyles => {
-	if (type === RelatedItemType.ADVERTISEMENT_FEATURE) {
+const headingStyles = (format: ArticleFormat): SerializedStyles => {
+	if (format.theme === ArticleSpecial.Labs) {
 		return css`
 			${textSans.medium({ lineHeight: 'regular' })}
 			margin: 0;
@@ -225,14 +212,25 @@ const relativeFirstPublished = (
 		withDefault<JSX.Element | null>(null),
 	);
 
-const cardStyles = (
-	type: RelatedItemType,
-	format: ArticleFormat,
-): SerializedStyles => {
-	switch (type) {
-		case RelatedItemType.VIDEO:
-		case RelatedItemType.AUDIO:
-		case RelatedItemType.GALLERY: {
+const cardStyles = (format: ArticleFormat): SerializedStyles => {
+	if (
+		format.theme === ArticleSpecial.SpecialReport ||
+		format.theme === ArticleSpecial.SpecialReportAlt
+	) {
+		return css();
+	}
+
+	if (format.theme === ArticleSpecial.Labs) {
+		return css`
+			background-color: ${background.relatedCard(format)};
+			${textSans.large()}
+		`;
+	}
+
+	switch (format.design) {
+		case ArticleDesign.Video:
+		case ArticleDesign.Audio:
+		case ArticleDesign.Gallery: {
 			return css`
 				background: ${background.relatedCard(format)};
 				h3 {
@@ -244,11 +242,7 @@ const cardStyles = (
 			`;
 		}
 
-		case RelatedItemType.SPECIAL: {
-			return css``;
-		}
-
-		case RelatedItemType.LIVE: {
+		case ArticleDesign.LiveBlog: {
 			return css`
 				background: ${background.relatedCard(format)};
 				h3,
@@ -261,14 +255,7 @@ const cardStyles = (
 			`;
 		}
 
-		case RelatedItemType.ADVERTISEMENT_FEATURE: {
-			return css`
-				background-color: ${background.relatedCard(format)};
-				${textSans.large()}
-			`;
-		}
-
-		case RelatedItemType.COMMENT: {
+		case ArticleDesign.Comment: {
 			return css`
 				background-color: ${background.relatedCard(format)};
 				${headline.xxsmall()}
@@ -334,24 +321,21 @@ const commentIconStyle = (format: ArticleFormat): SerializedStyles => css`
 	}
 `;
 
-const icon = (
-	type: RelatedItemType,
-	format: ArticleFormat,
-): ReactElement | null => {
-	switch (type) {
-		case RelatedItemType.GALLERY:
+const icon = (format: ArticleFormat): ReactElement | null => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
 			return (
 				<span css={iconStyles(format)}>
 					<SvgCamera />
 				</span>
 			);
-		case RelatedItemType.AUDIO:
+		case ArticleDesign.Audio:
 			return (
 				<span css={iconStyles(format)}>
 					<SvgAudio />
 				</span>
 			);
-		case RelatedItemType.VIDEO:
+		case ArticleDesign.Video:
 			return (
 				<span css={iconStyles(format)}>
 					<SvgVideo />
@@ -362,11 +346,8 @@ const icon = (
 	}
 };
 
-const quotationComment = (
-	type: RelatedItemType,
-	format: ArticleFormat,
-): ReactElement | null => {
-	if (type === RelatedItemType.COMMENT) {
+const quotationComment = (format: ArticleFormat): ReactElement | null => {
+	if (format.design === ArticleDesign.Comment) {
 		return (
 			<span css={commentIconStyle(format)}>
 				<SvgQuote />
@@ -413,11 +394,10 @@ const durationMedia = (
 };
 
 const cardByline = (
-	type: RelatedItemType,
 	format: ArticleFormat,
 	byline?: string,
 ): ReactElement | null => {
-	if (type !== RelatedItemType.COMMENT) {
+	if (format.design !== ArticleDesign.Comment) {
 		return null;
 	}
 
@@ -432,13 +412,9 @@ const cardByline = (
 
 const cardImage = (
 	image: Option<Image>,
-	relatedItem: RelatedItem,
+	relatedItem: OnwardsContentArticle,
 ): ReactElement | null => {
-	const format = {
-		theme: getPillarOrElseNews(relatedItem.pillar.id),
-		design: ArticleDesign.Standard,
-		display: ArticleDisplay.Standard,
-	};
+	const format = getFormat(relatedItem);
 
 	return pipe(
 		image,
@@ -467,143 +443,55 @@ const cardImage = (
 	);
 };
 
-/** This function is needed because RelatedItemType only exists in the Apps Rendering
- * API model, so we need a way to convert it to ArticleFormat */
-const formatFromRelatedItem = (
-	relatedItem: RelatedItemType,
-	pillar: string,
-): ArticleFormat => {
-	switch (relatedItem) {
-		case RelatedItemType.ARTICLE:
-			return {
-				design: ArticleDesign.Standard,
-				theme: getPillarOrElseNews(pillar),
-				display: ArticleDisplay.Standard,
-			};
-
-		case RelatedItemType.FEATURE:
-			return {
-				design: ArticleDesign.Feature,
-				theme: getPillarOrElseNews(pillar),
-				display: ArticleDisplay.Standard,
-			};
-
-		case RelatedItemType.ANALYSIS:
-			return {
-				design: ArticleDesign.Analysis,
-				theme: getPillarOrElseNews(pillar),
-				display: ArticleDisplay.Standard,
-			};
-		case RelatedItemType.SPECIAL:
-			return {
-				design: ArticleDesign.Standard,
-				theme: ArticleSpecial.SpecialReport,
-				display: ArticleDisplay.Standard,
-			};
-		case RelatedItemType.LIVE:
-			return {
-				design: ArticleDesign.LiveBlog,
-				theme: getPillarOrElseNews(pillar),
-				display: ArticleDisplay.Standard,
-			};
-
-		case RelatedItemType.GALLERY:
-			return {
-				design: ArticleDesign.Gallery,
-				theme: getPillarOrElseNews(pillar),
-				display: ArticleDisplay.Standard,
-			};
-		case RelatedItemType.AUDIO:
-			return {
-				design: ArticleDesign.Audio,
-				theme: getPillarOrElseNews(pillar),
-				display: ArticleDisplay.Standard,
-			};
-		case RelatedItemType.VIDEO:
-			return {
-				design: ArticleDesign.Video,
-				theme: getPillarOrElseNews(pillar),
-				display: ArticleDisplay.Standard,
-			};
-		case RelatedItemType.REVIEW:
-			return {
-				design: ArticleDesign.Review,
-				theme: getPillarOrElseNews(pillar),
-				display: ArticleDisplay.Standard,
-			};
-		case RelatedItemType.ADVERTISEMENT_FEATURE:
-			return {
-				design: ArticleDesign.Standard,
-				theme: ArticleSpecial.Labs,
-				display: ArticleDisplay.Standard,
-			};
-		case RelatedItemType.COMMENT:
-			return {
-				design: ArticleDesign.Comment,
-				theme:
-					pillar === 'pillar/news'
-						? ArticlePillar.Opinion
-						: getPillarOrElseNews(pillar),
-				display: ArticleDisplay.Standard,
-			};
-	}
-};
-
 const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
-	const format = formatFromRelatedItem(
-		relatedItem.type,
-		relatedItem.pillar.id,
-	);
+	const format = getFormat(relatedItem);
 
 	const img = cardImage(image, relatedItem);
-	const { type, title, mediaDuration, link, byline } = relatedItem;
+	const { /*type, */ headline, webUrl, contributor, publishDate } =
+		relatedItem;
 
-	const webPublicationDate = relatedItem.webPublicationDate?.iso8601;
 	const date =
-		webPublicationDate && type !== RelatedItemType.ADVERTISEMENT_FEATURE
-			? relativeFirstPublished(
-					fromNullable(new Date(webPublicationDate)),
-					format,
-			  )
+		publishDate.kind === OptionKind.Some &&
+		format.theme !== ArticleSpecial.Labs
+			? relativeFirstPublished(publishDate, format)
 			: null;
+
 	const starRating =
-		relatedItem.starRating &&
+		relatedItem.design === ArticleDesign.Review &&
 		!Number.isNaN(parseInt(relatedItem.starRating))
 			? stars(parseInt(relatedItem.starRating))
 			: null;
 
-	const isLive = relatedItem.type === RelatedItemType.LIVE;
+	const isLive = format.design === ArticleDesign.LiveBlog;
 
 	return (
 		<li
 			className="js-card"
-			data-article-id={link}
-			css={[listStyles(type, format), cardStyles(type, format)]}
+			data-article-id={webUrl}
+			css={[listStyles(format), cardStyles(format)]}
 		>
 			<a
 				css={anchorStyles(format)}
-				href={`https://theguardian.com/${link}`}
+				href={`https://theguardian.com/${webUrl}`}
 			>
-				<section css={headingWrapperStyles(type, format)}>
-					<h3 css={headingStyles(type)}>
-						{quotationComment(type, format)}
+				<section css={headingWrapperStyles(format)}>
+					<h3 css={headingStyles(format)}>
+						{quotationComment(format)}
 						{maybeRender(
 							isLive ? some('Live') : kickerText,
 							(t) => (
 								<Kicker format={format} text={some(t)} />
 							),
 						)}
-						{title}
-						{cardByline(type, format, byline)}
+						{headline}
+						{/* {cardByline(format, byline)} */}
 					</h3>
 					{starRating}
 				</section>
 				<section>
 					<div css={metadataStyles}>
-						<section css={parentIconStyles}>
-							{icon(type, format)}
-						</section>
-						{durationMedia(fromNullable(mediaDuration), format)}
+						<section css={parentIconStyles}>{icon(format)}</section>
+						{/* {durationMedia(fromNullable(mediaDuration), format)} */}
 						{date}
 					</div>
 					{img}
@@ -614,4 +502,3 @@ const Card: FC<Props> = ({ relatedItem, image, kickerText }) => {
 };
 
 export default Card;
-export { formatFromRelatedItem };

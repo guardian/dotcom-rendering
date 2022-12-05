@@ -15,15 +15,10 @@ import { Option, OptionKind } from '@guardian/types';
 import { map, none, withDefault, andThen } from '@guardian/types';
 import BylineCard from 'components/BylineCard';
 import Card from 'components/Card';
-import { Image } from 'image';
 // import type { ResizedRelatedContent } from 'item';
 import { pipe } from 'lib';
 import type { FC } from 'react';
-import {
-	getContributorImage,
-	RelatedContent,
-	RelatedItem,
-} from 'relatedContent';
+import { getContributorImage, RelatedContent } from 'relatedContent';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -143,7 +138,7 @@ const DefaultRelatedContent: FC<Props> = ({ content, className }) => {
 								<Card
 									key={key}
 									relatedItem={relatedItem}
-									image={resizedImages[key]}
+									image={none}
 									kickerText={none}
 								/>
 							);
