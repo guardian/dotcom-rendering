@@ -269,7 +269,7 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 								percentage="50%"
 								key={card.url}
 								padSides={true}
-								showDivider={cardIndex % 2 === 1}
+								showDivider={cardIndex % 2 !== 0}
 								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
@@ -333,7 +333,7 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 								percentage="33.333%"
 								key={card.url}
 								padSides={true}
-								showDivider={true}
+								showDivider={cardIndex % 3 !== 0}
 								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
