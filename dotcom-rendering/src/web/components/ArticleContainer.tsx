@@ -3,8 +3,8 @@ import { adSizes } from '@guardian/commercial-core';
 import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, space, until } from '@guardian/source-foundations';
 import {
-	adSlotLabelStyles,
 	carrotAdStyles,
+	individualLabelCSS,
 	labelHeight,
 	labelStyles,
 } from './AdSlot';
@@ -123,7 +123,7 @@ const adStyles = css`
 			right: 0px;
 			border: 0;
 			display: block;
-			${adSlotLabelStyles}
+			${individualLabelCSS}
 		}
 
 		/* liveblogs ads have different background colours due the darker page background */

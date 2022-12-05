@@ -40,7 +40,7 @@ type Props = InlineProps | NonInlineProps;
 
 export const labelHeight = 24;
 
-export const adSlotLabelStyles = css`
+export const individualLabelCSS = css`
 	${textSans.xxsmall()};
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
@@ -59,7 +59,7 @@ const outOfPageStyles = css`
 export const labelStyles = css`
 	.ad-slot__label,
 	.ad-slot__scroll {
-		${adSlotLabelStyles}
+		${individualLabelCSS}
 		position: relative;
 		&.visible {
 			visibility: initial;
@@ -82,7 +82,7 @@ export const labelStyles = css`
 		position: fixed;
 		bottom: 0;
 		width: 100%;
-		${adSlotLabelStyles}
+		${individualLabelCSS}
 	}
 
 	.ad-slot:not[data-label-show='true']::before {
@@ -96,7 +96,7 @@ export const labelStyles = css`
 		content: attr(ad-label-text);
 		display: block;
 		position: relative;
-		${adSlotLabelStyles}
+		${individualLabelCSS}
 	}
 
 	.ad-slot__adtest-cookie-clear-link {
@@ -256,7 +256,7 @@ const mobileStickyAdStyles = css`
 		content: 'Advertisement';
 		display: block;
 		position: relative;
-		${adSlotLabelStyles}
+		${individualLabelCSS}
 	}
 `;
 
