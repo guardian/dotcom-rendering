@@ -6,11 +6,13 @@ import {
 } from '@guardian/atoms-rendering';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
+import { calloutCampaign } from 'fixtures/manual/calloutCampaign';
 import { getSharingUrls } from '../../lib/sharing-urls';
 import type { Switches } from '../../types/config';
 import type { CAPIElement, RoleType } from '../../types/content';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
+import { CalloutBlockComponent } from '../components/CalloutBlockComponent.importable';
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
 import { CaptionBlockComponent } from '../components/CaptionBlockComponent';
 import { ChartAtomWrapper } from '../components/ChartAtomWrapper.importable';
@@ -173,7 +175,6 @@ export const renderElement = ({
 			];
 
 		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
-		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
 			return [
 				true,
 				<Island deferUntil="visible">
@@ -181,6 +182,13 @@ export const renderElement = ({
 						callout={element}
 						format={format}
 					/>
+				</Island>,
+			];
+		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
+			return [
+				true,
+				<Island deferUntil="visible">
+					<CalloutBlockComponent callout={element} format={format} />
 				</Island>,
 			];
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':

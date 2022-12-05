@@ -7,7 +7,7 @@ import {
 } from '@guardian/source-foundations';
 import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
-import type { CalloutBlockElement } from 'src/types/content';
+import type { CalloutBlockElementV2 } from 'src/types/content';
 import { decidePalette } from '../lib/decidePalette';
 import { Deadline } from './CalloutNew/CalloutDeadline';
 import { CalloutDescription } from './CalloutNew/CalloutDescription';
@@ -105,11 +105,9 @@ type FormDataType = { [key in string]: any };
 export const CalloutBlockComponent = ({
 	callout,
 	format,
-	isNonCollapsible,
 }: {
-	callout: CalloutBlockElement;
+	callout: CalloutBlockElementV2;
 	format: ArticleFormat;
-	isNonCollapsible: boolean;
 }) => {
 	const [networkError, setNetworkError] = useState('');
 	const [submissionSuccess, setSubmissionSuccess] = useState(false);
@@ -172,7 +170,7 @@ export const CalloutBlockComponent = ({
 			});
 	};
 
-	if (isNonCollapsible && isExpired(activeUntil)) {
+	if (callout.isNonCollapsible && isExpired(activeUntil)) {
 		return null;
 	}
 
@@ -207,7 +205,7 @@ export const CalloutBlockComponent = ({
 	}
 	return (
 		<aside>
-			{isNonCollapsible ? (
+			{callout.isNonCollapsible ? (
 				<details
 					css={[calloutDetailsStyles, wrapperStyles, ruleStyles]}
 					aria-hidden={true}

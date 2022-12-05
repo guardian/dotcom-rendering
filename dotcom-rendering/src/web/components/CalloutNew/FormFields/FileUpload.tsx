@@ -12,6 +12,7 @@ import React, { useState } from 'react';
 import { decidePalette } from '../../../lib/decidePalette';
 import { stringifyFileBase64 } from '../../../lib/stringifyFileBase64';
 import { FieldLabel } from './FieldLabel';
+import { CampaignFieldType } from 'src/types/content';
 
 const errorMessagesStyles = css`
 	padding-top: ${space[2]}px;
@@ -31,7 +32,7 @@ const textStyles = css`
 
 type Props = {
 	format: ArticleFormat;
-	formField: CampaignFieldFile;
+	formField: CampaignFieldType;
 	formData: { [key in string]: any };
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
 	validationErrors: string[];
@@ -95,20 +96,23 @@ export const FileUpload = ({
 		<>
 			<div css={uploadStyles}>
 				<FieldLabel formField={formField}>
-					<div css={customUpload(format)}>
-						Choose file
-						<input
-							id={formField.name}
-							data-testid={`form-field-${formField.id}`}
-							type="file"
-							accept="image/*, .pdf"
-							required={formField.required}
-							onChange={onSelectFile}
-							css={css`
-								${visuallyHidden};
-							`}
-						/>
-					</div>
+					<>
+						<br />
+						<div css={customUpload(format)}>
+							Choose file
+							<input
+								id={formField.name}
+								data-testid={`form-field-${formField.id}`}
+								type="file"
+								accept="image/*, .pdf"
+								required={formField.required}
+								onChange={onSelectFile}
+								css={css`
+									${visuallyHidden};
+								`}
+							/>
+						</div>
+					</>
 				</FieldLabel>
 				{chosenFile == null ? (
 					<div css={textStyles}> No file chosen </div>
