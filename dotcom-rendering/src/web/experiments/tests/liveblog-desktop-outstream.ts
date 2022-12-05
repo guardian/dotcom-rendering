@@ -7,7 +7,7 @@ export const liveblogDesktopOutstream: ABTest = {
 	author: 'Jake Lee Kennedy',
 	description:
 		'Test the impact of enabling outstream on inline2+ on liveblogs on desktop',
-	audience: 95 / 100,
+	audience: 5 / 100,
 	audienceOffset: 0 / 100,
 	audienceCriteria: 'Opt in',
 	successMeasure: 'No significant impact to CWV',
