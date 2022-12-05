@@ -23,7 +23,7 @@ const variant: Variant = {
 
 const fixture1: CartoonType = {
 	type: 'cartoon',
-	caption: "Cartoon data model spike demo",
+	caption: 'Cartoon data model spike demo',
 	displayCredit: true,
 	alt: 'This is alt text',
 	credit: 'Artist name, 2022',
@@ -48,7 +48,7 @@ export const Default = () => (
 				list-style-type: disc;
 			}
 			& strong {
-				font-weight: ${fontWeights["bold"]};
+				font-weight: ${fontWeights['bold']};
 			}
 		`}
 	>
