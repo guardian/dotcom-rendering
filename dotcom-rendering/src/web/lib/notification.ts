@@ -23,7 +23,6 @@ export const mapBrazeCardsToNotifications = (
 			message: card.extras.message,
 			logImpression: () => {
 				card.logImpression();
-				console.log('logged impression');
 			},
 		};
 	});
