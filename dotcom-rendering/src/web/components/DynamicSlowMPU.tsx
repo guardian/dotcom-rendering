@@ -6,7 +6,6 @@ import {
 	Card33Media33,
 	Card50Media50,
 	CardDefault,
-	CardDefaultMedia,
 	CardDefaultMediaMobile,
 } from '../lib/cardWrappers';
 import { Card50_Card50, Card75_Card25 } from '../lib/dynamicSlices';
