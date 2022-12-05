@@ -5,6 +5,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import type { Contributor } from 'contributor';
 import { article } from 'fixtures/item';
 import type { Image } from 'image';
+import { Optional } from 'optional';
 import type { ReactElement } from 'react';
 import Avatar from './index';
 
@@ -24,6 +25,7 @@ const image: Image = {
 	caption: none,
 	nativeCaption: none,
 	credit: none,
+	imageSubtype: Optional.none(),
 };
 
 const contributors: Contributor[] = [
