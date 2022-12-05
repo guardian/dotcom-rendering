@@ -15,6 +15,7 @@ import {
 	review,
 } from 'fixtures/item';
 import type { Image } from 'image';
+import { Optional } from 'optional';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Byline from './index';
@@ -35,6 +36,7 @@ const image: Image = {
 	caption: none,
 	nativeCaption: none,
 	credit: none,
+	imageSubtype: Optional.none(),
 };
 
 const contributors: Contributor[] = [

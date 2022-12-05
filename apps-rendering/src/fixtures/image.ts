@@ -3,6 +3,8 @@
 import { ArticleElementRole } from '@guardian/libs';
 import { some } from '@guardian/types';
 import type { Image } from 'image/image';
+import { ImageSubtype } from 'image/image';
+import { Optional } from 'optional';
 
 // ----- Fixtures ----- //
 
@@ -15,6 +17,7 @@ const image: Image = {
 	width: 5644,
 	height: 3387,
 	role: ArticleElementRole.Standard,
+	imageSubtype: Optional.some(ImageSubtype.Jpeg),
 };
 
 // ----- Exports ----- //
