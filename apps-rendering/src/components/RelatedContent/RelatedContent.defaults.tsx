@@ -2,7 +2,6 @@
 
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
 import { ArticleDesign } from '@guardian/libs';
 import {
 	from,
@@ -11,14 +10,14 @@ import {
 	remSpace,
 	until,
 } from '@guardian/source-foundations';
-import { Option, OptionKind } from '@guardian/types';
-import { map, none, withDefault, andThen } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { map, none, OptionKind, withDefault } from '@guardian/types';
 import BylineCard from 'components/BylineCard';
 import Card from 'components/Card';
-// import type { ResizedRelatedContent } from 'item';
 import { pipe } from 'lib';
 import type { FC } from 'react';
-import { getContributorImage, RelatedContent } from 'relatedContent';
+import type { RelatedContent } from 'relatedContent';
+import { getContributorImage } from 'relatedContent';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

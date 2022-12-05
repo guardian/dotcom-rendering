@@ -6,20 +6,18 @@ import {
 	background,
 	border,
 } from '@guardian/common-rendering/src/editorialPalette';
-import { ArticleDesign, ArticleFormat } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, remSpace, until } from '@guardian/source-foundations';
-import { Option, OptionKind } from '@guardian/types';
-import { none } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { none, OptionKind } from '@guardian/types';
 import BylineCard from 'components/BylineCard';
 import Card from 'components/Card';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
-import {
-	getFormat,
-	OnwardsContentArticle,
-	RelatedContent,
-} from 'relatedContent';
+import type { RelatedContent } from 'relatedContent';
+import { getFormat } from 'relatedContent';
 import { darkModeCss } from 'styles';
 import {
 	defaultHeadingStyles,

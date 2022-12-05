@@ -14,15 +14,13 @@ import {
 	textSans,
 } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
-import { withDefault, Option, OptionKind, map, andThen } from '@guardian/types';
+import type { Option } from '@guardian/types';
+import { andThen, map, OptionKind, withDefault } from '@guardian/types';
 import { makeRelativeDate } from 'date';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
-import {
-	OnwardsContentArticle,
-	getFormat,
-	getContributorImage,
-} from 'relatedContent';
+import type { OnwardsContentArticle } from 'relatedContent';
+import { getContributorImage, getFormat } from 'relatedContent';
 import { darkModeCss } from 'styles';
 
 interface Props {

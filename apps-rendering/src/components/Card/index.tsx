@@ -36,8 +36,9 @@ import { formatSeconds, makeRelativeDate } from 'date';
 import type { Image } from 'image';
 import { maybeRender, pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
+import type { OnwardsContentArticle } from 'relatedContent';
+import { getFormat } from 'relatedContent';
 import { darkModeCss } from 'styles';
-import { getFormat, OnwardsContentArticle } from 'relatedContent';
 
 interface Props {
 	relatedItem: OnwardsContentArticle;

@@ -3,6 +3,7 @@
 import 'source-map-support/register'; // activating the source map support
 import path from 'path';
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
+import type { OnwardsContent } from '@guardian/apps-rendering-api-models/onwardsContent';
 import type { RelatedContent } from '@guardian/apps-rendering-api-models/relatedContent';
 import type { RenderingRequest } from '@guardian/apps-rendering-api-models/renderingRequest';
 import type { Content } from '@guardian/content-api-models/v1/content';
@@ -46,7 +47,6 @@ import { getConfigValue } from 'server/ssmConfig';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
 import { getFootballContent } from './footballContent';
-import { OnwardsContent } from '@guardian/apps-rendering-api-models/onwardsContent';
 
 // ----- Setup ----- //
 

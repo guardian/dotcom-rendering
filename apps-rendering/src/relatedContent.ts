@@ -1,14 +1,10 @@
 import type { OnwardsContent as ARModelsOnwardsContent } from '@guardian/apps-rendering-api-models/onwardsContent';
 import { OnwardsContentCategory } from '@guardian/apps-rendering-api-models/onwardsContentCategory';
 import type { Content } from '@guardian/content-api-models/v1/content';
-import {
-	ArticleDesign,
-	ArticleFormat,
-	ArticlePillar,
-	ArticleSpecial,
-} from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import type { Option } from '@guardian/types';
-import { none, OptionKind, some, andThen } from '@guardian/types';
+import { andThen, none, OptionKind, some } from '@guardian/types';
 import { articleMainImage, isAnalysis, isFeature, maybeCapiDate } from 'capi';
 import type { Contributor } from 'contributor';
 import { parseContributors } from 'contributor';
