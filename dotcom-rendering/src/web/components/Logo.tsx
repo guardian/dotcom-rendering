@@ -10,12 +10,12 @@ import {
 	SvgGuardianBestWebsiteLogo,
 	SvgGuardianLogo,
 } from '@guardian/source-react-components';
-import type { EditionId } from '../../types/edition';
+import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 
 const linkStyles = css`
 	float: right;
-	margin-top: 10px;
+	margin-top: 6px;
 	margin-right: 54px;
 	margin-bottom: 10px;
 	width: 146px;
@@ -28,7 +28,6 @@ const linkStyles = css`
 		margin-right: 20px;
 	}
 	${from.tablet} {
-		margin-top: 8px;
 		width: 224px;
 	}
 	${from.desktop} {

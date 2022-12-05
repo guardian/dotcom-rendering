@@ -94,6 +94,7 @@ const ImmersiveLayout: FC<Props> = ({ item, children }) => {
 				<article>
 					<header css={headerStyles(format)}>
 						<MainMedia mainMedia={item.mainMedia} format={format} />
+
 						<Series item={item} />
 						<Headline item={item} />
 						<Standfirst item={item} />

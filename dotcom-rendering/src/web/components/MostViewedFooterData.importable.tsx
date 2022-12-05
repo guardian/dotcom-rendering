@@ -1,4 +1,4 @@
-import { joinUrl } from '../../lib/joinUrl';
+import { joinUrl } from '@guardian/libs';
 import type {
 	CAPITrailTabType,
 	CAPITrailType,
@@ -9,7 +9,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
-import { MostViewedFooter } from './MostViewedFooter';
+import { MostViewedFooter } from './MostViewedFooter.importable';
 
 interface Props {
 	sectionName?: string;
@@ -22,7 +22,7 @@ function buildSectionUrl(ajaxUrl: string, sectionName?: string) {
 	const hasSection =
 		sectionName && !sectionsWithoutPopular.includes(sectionName);
 	const endpoint = `/most-read${hasSection ? `/${sectionName}` : ''}.json`;
-	return joinUrl([ajaxUrl, `${endpoint}?dcr=true`]);
+	return joinUrl(ajaxUrl, `${endpoint}?dcr=true`);
 }
 
 function transformTabs(tabs: CAPITrailTabType[]): TrailTabType[] {

@@ -20,11 +20,11 @@ export const FixedSmallSlowIV = ({
 	showAge,
 	supportingContent,
 }: Props) => {
-	const slicedTrails = trails.slice(0, 4);
+	const firstSlice25 = trails.slice(0, 4);
 
 	return (
 		<UL direction="row">
-			{slicedTrails.map((trail, index) => {
+			{firstSlice25.map((trail, index) => {
 				return (
 					<LI key={trail.url} padSides={true} showDivider={index > 0}>
 						<FrontCard

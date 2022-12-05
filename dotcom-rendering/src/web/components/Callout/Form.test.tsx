@@ -1,8 +1,16 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import user from '@testing-library/user-event';
+import type {
+	CampaignFieldCheckbox,
+	CampaignFieldFile,
+	CampaignFieldRadio,
+	CampaignFieldSelect,
+	CampaignFieldText,
+	CampaignFieldTextArea,
+} from '../../../types/content';
 import { Form } from './Form';
 
-const textField = {
+const textField: CampaignFieldText = {
 	textSize: 50,
 	name: 'which_event_did_you_attend_and_when',
 	hideLabel: false,
@@ -10,9 +18,9 @@ const textField = {
 	id: '91884886',
 	type: 'text',
 	required: true,
-} as CampaignFieldText;
+};
 
-const textAreaField = {
+const textAreaField: CampaignFieldTextArea = {
 	name: 'share_your_experiences_here',
 	description: 'Please include as much detail as possible',
 	hideLabel: false,
@@ -20,18 +28,18 @@ const textAreaField = {
 	id: '91884874',
 	type: 'textarea',
 	required: true,
-} as CampaignFieldTextArea;
+};
 
-const fileField = {
+const fileField: CampaignFieldFile = {
 	name: 'you_can_upload_a_photo_here_if_you_think_it_will_add_to_your_story',
 	hideLabel: false,
 	label: 'You can upload a photo here if you think it will add to your story',
 	id: '91884877',
 	type: 'file',
 	required: false,
-} as CampaignFieldFile;
+};
 
-const radioField = {
+const radioField: CampaignFieldRadio = {
 	name: 'can_we_publish_your_response',
 	options: [
 		{
@@ -52,9 +60,9 @@ const radioField = {
 	id: '91884878',
 	type: 'radio',
 	required: true,
-} as CampaignFieldRadio;
+};
 
-const checkboxField = {
+const checkboxField: CampaignFieldCheckbox = {
 	name: 'can_we_publish_your_response',
 	options: [
 		{
@@ -75,9 +83,9 @@ const checkboxField = {
 	id: '91884871',
 	type: 'checkbox',
 	required: true,
-} as CampaignFieldCheckbox;
+};
 
-const selectField = {
+const selectField: CampaignFieldSelect = {
 	name: 'do_you_have_anything_else_to_add',
 	hideLabel: false,
 	label: 'Do you have anything else to add?',
@@ -94,7 +102,7 @@ const selectField = {
 		},
 	],
 	required: false,
-} as CampaignFieldSelect;
+};
 
 describe('Callout from', () => {
 	it('should submit text input', () => {

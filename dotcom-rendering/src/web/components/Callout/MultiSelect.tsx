@@ -1,3 +1,7 @@
+import type {
+	CampaignFieldCheckbox,
+	CampaignFieldRadio,
+} from '../../../types/content';
 import { CheckboxSelect } from './CheckboxSelect';
 import { RadioSelect } from './RadioSelect';
 

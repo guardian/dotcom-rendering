@@ -28,7 +28,7 @@ import 'cypress-wait-until';
 
 Cypress.Commands.add('hydrate', () => {
 	return cy
-		.get('gu-island')
+		.get('gu-island[deferUntil=visible]')
 		.each((el) => {
 			cy.wrap(el)
 				.log(`Scrolling to ${el.attr('name')}`)

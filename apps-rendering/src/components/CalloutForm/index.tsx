@@ -33,6 +33,7 @@ export interface CalloutProps {
 	formFields: FormField[];
 	format: ArticleFormat;
 	description: DocumentFragment;
+	isNonCollapsible: boolean;
 }
 
 const calloutStyles = css`
@@ -195,6 +196,7 @@ const CalloutForm: FC<CalloutProps> = ({
 	formId,
 	formFields,
 	format,
+	isNonCollapsible,
 }) => (
 	<details className="js-callout" css={calloutStyles}>
 		<summary css={summaryStyles}>

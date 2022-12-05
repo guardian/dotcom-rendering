@@ -6,6 +6,11 @@ import {
 } from '@guardian/source-foundations';
 import React from 'react';
 import InfoIcon from '../../static/icons/info.svg';
+import type {
+	CAPIElement,
+	ImageBlockElement,
+	SrcSetItem,
+} from '../../types/content';
 import { bestFitImage, heightEstimate } from '../lib/image-fit';
 import { scrsetStringFromImagesSources } from '../lib/srcset-utils';
 import { YoutubeBlockComponentAMP } from './elements/YoutubeBlockComponentAMP';

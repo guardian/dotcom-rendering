@@ -4,6 +4,7 @@ import type { ConsentState } from '@guardian/consent-management-platform/dist/ty
 import { body, neutral, space } from '@guardian/source-foundations';
 import { SvgAlertRound } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
+import type { RoleType } from '../../types/content';
 import { trackVideoInteraction } from '../browser/ga/ga';
 import { record } from '../browser/ophan/ophan';
 import { useAB } from '../lib/useAB';
@@ -94,10 +95,11 @@ export const YoutubeBlockComponent = ({
 		undefined,
 	);
 
-	const imaEnabled = !!useAB()?.api.isUserInVariant(
-		'IntegrateIMA',
-		'variant',
-	);
+	const abTests = useAB();
+	const abTestsApi = abTests?.api;
+	const imaEnabled =
+		abTestsApi?.isUserInVariant('IntegrateIma', 'variant') ?? false;
+	const abTestParticipations = abTests?.participations ?? {};
 
 	useEffect(() => {
 		const defineConsentState = async () => {
@@ -224,6 +226,7 @@ export const YoutubeBlockComponent = ({
 				shouldStick={stickyVideos}
 				isMainMedia={isMainMedia}
 				imaEnabled={imaEnabled}
+				abTestParticipations={abTestParticipations}
 			/>
 			{!hideCaption && (
 				<Caption

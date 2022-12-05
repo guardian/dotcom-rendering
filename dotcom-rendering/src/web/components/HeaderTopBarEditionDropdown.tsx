@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { brand } from '@guardian/source-foundations';
-import type { EditionId } from '../../types/edition';
+import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { Dropdown } from './Dropdown';
 import { dropDownOverrides } from './HeaderTopBarMyAccount';
@@ -65,19 +65,16 @@ export const HeaderTopBarEditionDropdown = ({
 
 	return (
 		<div css={editionDropdownStyles}>
-			<div
-				css={css`
-					padding-top: 7px;
+			<Dropdown
+				label={activeLink.title}
+				links={linksToDisplay}
+				id="edition"
+				dataLinkName={dataLinkName}
+				cssOverrides={css`
+					${dropDownOverrides};
+					padding-top: 6px;
 				`}
-			>
-				<Dropdown
-					label={activeLink.title}
-					links={linksToDisplay}
-					id="edition"
-					dataLinkName={dataLinkName}
-					cssOverrides={dropDownOverrides}
-				/>
-			</div>
+			/>
 		</div>
 	);
 };

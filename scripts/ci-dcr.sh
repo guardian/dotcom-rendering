@@ -45,9 +45,6 @@ else
 		#Code Validation
 		make validate-ci
 
-		# Generate .env file
-		make gen-dotenv-ci
-
 		# Cypress Tests
 		# see https://docs.cypress.io/guides/guides/continuous-integration.html#Advanced-setup
 		# apt-get install xvfb libgtk-3-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { brand } from '@guardian/source-foundations';
-import type { EditionId } from '../../types/edition';
+import type { EditionId } from '../lib/edition';
 import { center } from '../lib/center';
 import { HeaderTopBar } from './HeaderTopBar.importable';
 import { Island } from './Island';
@@ -33,7 +33,7 @@ export const HeaderSingleFrontDoor = ({
 	idApiUrl,
 }: Props) => (
 	<div css={headerStyles}>
-		<Island deferUntil="idle">
+		<Island>
 			<HeaderTopBar
 				editionId={editionId}
 				dataLinkName="nav3 : topbar : edition-picker: toggle"

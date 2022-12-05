@@ -57,6 +57,18 @@ export const defaultStyles = (format: ArticleFormat): SerializedStyles => {
 				`}
 				${boldFontStyles}
 			`;
+		case ArticleDesign.NewsletterSignup:
+			return css`
+				${baseStyles}
+				${articleWidthStyles}
+				background-color: ${background.headline(format)};
+				${darkModeCss`
+					background-color: ${background.headlineDark(format)};
+				`}
+				${boldFontStyles}
+				padding: 0 0 ${remSpace[5]} 0;
+				max-width: 100%;
+			`;
 		default:
 			return css`
 				${baseStyles}

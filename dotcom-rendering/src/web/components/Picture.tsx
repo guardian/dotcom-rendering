@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
 import React from 'react';
+import type { RoleType } from '../../types/content';
 
 /**
  * Working on this file? Checkout out 027-pictures.md & 029-signing-image-urls.md for background information & context

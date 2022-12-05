@@ -12,11 +12,10 @@ import type { NavType } from '../../model/extract-nav';
 import type { DCRCollectionType, DCRFrontType } from '../../types/front';
 import { AdSlot } from '../components/AdSlot';
 import { Footer } from '../components/Footer';
+import { FrontMostViewed } from '../components/FrontMostViewed';
 import { Header } from '../components/Header';
 import { HeaderAdSlot } from '../components/HeaderAdSlot';
 import { Island } from '../components/Island';
-import { MostViewedFooter } from '../components/MostViewedFooter';
-import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { Section } from '../components/Section';
 import { ShowMore } from '../components/ShowMore.importable';
@@ -349,17 +348,14 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									data-print-layout="hide"
 									element="aside"
 								>
-									<MostViewedFooterLayout>
-										<MostViewedFooter
-											tabs={[
-												{
-													trails: trails.slice(10),
-												},
-											]}
-											sectionName="Most viewed"
-											// TODO: Include mostCommented & mostShared once we have this data in the FE response
-										/>
-									</MostViewedFooterLayout>
+									<FrontMostViewed
+										displayName={collection.displayName}
+										trails={trails}
+										mostViewed={front.mostViewed}
+										mostCommented={front.mostCommented}
+										mostShared={front.mostShared}
+										isNetworkFront={front.isNetworkFront}
+									/>
 								</Section>
 								{decideAdSlot(
 									index,

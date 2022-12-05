@@ -19,6 +19,7 @@ import { Result } from 'result';
 import AnalysisLayout from './AnalysisLayout';
 import ImmersiveLayout from './ImmersiveLayout';
 import LetterLayout from './LetterLayout';
+import NewsletterSignUpLayout from './NewsletterSignUpLayout';
 
 // ----- Functions ----- //
 
@@ -93,6 +94,14 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		return <GalleryLayout item={item}>{render(item, body)}</GalleryLayout>;
 	}
 
+	if (item.design === ArticleDesign.NewsletterSignup) {
+		return (
+			<NewsletterSignUpLayout item={item}>
+				{render(item, body)}
+			</NewsletterSignUpLayout>
+		);
+	}
+
 	if (
 		item.design === ArticleDesign.Feature ||
 		item.design === ArticleDesign.Explainer ||
@@ -103,7 +112,8 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === ArticleDesign.MatchReport ||
 		item.design === ArticleDesign.Obituary ||
 		item.design === ArticleDesign.Correction ||
-		item.design === ArticleDesign.Interview
+		item.design === ArticleDesign.Interview ||
+		item.design === ArticleDesign.Recipe
 	) {
 		if (item.display === ArticleDisplay.Immersive) {
 			return (

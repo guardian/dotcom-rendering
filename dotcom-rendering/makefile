@@ -41,12 +41,12 @@ build-ci: clean-dist install
 	@SKIP_LEGACY=true webpack --config ./scripts/webpack/webpack.config.js
 
 start-ci: export NODE_ENV=production
-start-ci: install gen-dotenv-ci
+start-ci: install
 	$(call log, "starting PROD server...")
 	@DISABLE_LOGGING_AND_METRICS=true node dist/frontend.server.js
 
 start: export NODE_ENV=production
-start: install gen-dotenv
+start: install
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
 	pm2 start dist/frontend.server.js
@@ -58,7 +58,7 @@ start: install gen-dotenv
 # - Launches pm2 from /usr/local/node rather than /node_modules
 # - Does not run 'install' task as its not needed & adds time to startup
 start-prod: export NODE_ENV=production
-start-prod: gen-dotenv
+start-prod:
 	$(call log, "starting PROD server...")
 	@echo '' # just a spacer
 	/usr/local/node/pm2 start --uid dotcom-rendering --gid frontend dist/frontend.server.js
@@ -82,12 +82,12 @@ run-ci: stop build-ci start-ci
 # dev #########################################
 
 dev: export NODE_ENV=development
-dev: clear clean-dist install gen-dotenv
+dev: clear clean-dist install
 	$(call log, "starting DEV server")
 	@SKIP_LEGACY=true webpack serve --config ./scripts/webpack/webpack.config.js
 
 dev-legacy: export NODE_ENV=development
-dev-legacy: clear clean-dist install gen-dotenv
+dev-legacy: clear clean-dist install
 	$(call log, "starting DEV server")
 	@NODE_ENV=development webpack serve --config ./scripts/webpack/webpack.config.js
 
@@ -97,6 +97,11 @@ cypress: export NODE_ENV=production
 cypress: clear clean-dist install build
 	$(call log, "starting frontend PROD server for Cypress")
 	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress run --browser chrome --spec "cypress/e2e/**/*"'
+
+cypress-open: export NODE_ENV=production
+cypress-open: clear clean-dist install build
+	$(call log, "starting frontend PROD server for Cypress")
+	@DISABLE_LOGGING_AND_METRICS=true start-server-and-test 'node dist/frontend.server.js' 9000 'cypress open --browser chrome'
 
 cypress-arm64: export NODE_ENV=production
 cypress-arm64: clear clean-dist install build
@@ -209,14 +214,6 @@ gen-stories:
 gen-fixtures:
 	$(call log, "Generating new article fixture data")
 	@node scripts/test-data/gen-fixtures.js
-
-gen-dotenv:
-	$(call log, "Generating .env file")
-	@node scripts/dotenv/gen-dotenv.js
-gen-dotenv-ci:
-	$(call log, "Generating .env file")
-	@CI_ENV=true node scripts/dotenv/gen-dotenv.js
-
 
 perf-test:
 	@node scripts/perf/perf-test.js

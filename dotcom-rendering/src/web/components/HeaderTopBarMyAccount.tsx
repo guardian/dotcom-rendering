@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { getCookie, joinUrl } from '@guardian/libs';
+import { joinUrl } from '@guardian/libs';
 import { brand, from, neutral, textSans } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
 import { createAuthenticationEventParams } from '../../lib/identity-component-event';
@@ -20,10 +20,15 @@ interface MyAccountProps {
 	idUrl: string;
 	discussionApiUrl: string;
 	idApiUrl: string;
+	isSignedIn?: boolean;
 }
 
 const myAccountStyles = css`
 	display: flex;
+	align-items: center;
+	${from.tablet} {
+		align-items: stretch;
+	}
 	${from.desktop} {
 		:before {
 			content: '';
@@ -35,17 +40,23 @@ const myAccountStyles = css`
 
 const myAccountLinkStyles = css`
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
 	height: fit-content;
 	position: relative;
-	${textSans.medium({ fontWeight: 'bold' })};
+	${textSans.medium()};
+	font-size: 1rem;
+	line-height: 1;
 	color: ${neutral[100]};
 	transition: color 80ms ease-out;
 	text-decoration: none;
-	padding: 7px 0;
+	padding: 0;
 
 	${from.tablet} {
-		padding: 7px 10px 0 5px;
+		padding: 7px 10px 7px 6px;
+	}
+
+	${from.desktop} {
+		font-weight: bold;
 	}
 
 	:hover,
@@ -58,7 +69,7 @@ const myAccountLinkStyles = css`
 		float: left;
 		height: 18px;
 		width: 18px;
-		margin: 3px 4px 0 0;
+		margin: 0 4px 0 0;
 	}
 	${getZIndex('myAccountDropdown')}
 `;
@@ -136,7 +147,7 @@ export const dropDownOverrides = css`
 	color: ${neutral[100]};
 	padding-right: 0;
 
-	font-weight: bold;
+	font-size: 1rem;
 
 	&:not(ul):hover {
 		color: ${neutral[100]};
@@ -145,6 +156,10 @@ export const dropDownOverrides = css`
 
 	${from.tablet} {
 		right: 0;
+	}
+
+	${from.desktop} {
+		font-weight: bold;
 	}
 `;
 
@@ -201,11 +216,13 @@ const SignedInWithNotifications = ({
 const SignedIn = ({ idApiUrl, ...props }: MyAccountProps) => {
 	const { brazeCards } = useBraze(idApiUrl);
 	const [notifications, setNotifications] = useState<Notification[]>([]);
-
 	useEffect(() => {
 		if (brazeCards) {
 			const cards = brazeCards.getCardsForProfileBadge();
-			setNotifications(mapBrazeCardsToNotifications(cards));
+			const cardsToNotifications = mapBrazeCardsToNotifications(cards);
+			if (cardsToNotifications.length) {
+				setNotifications(cardsToNotifications);
+			}
 		}
 	}, [brazeCards]);
 
@@ -219,23 +236,18 @@ export const MyAccount = ({
 	idUrl,
 	discussionApiUrl,
 	idApiUrl,
-}: MyAccountProps) => {
-	const isServer = typeof window === 'undefined';
-	const isSignedIn =
-		!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
-
-	return (
-		<div css={myAccountStyles}>
-			{isSignedIn ? (
-				<SignedIn
-					mmaUrl={mmaUrl}
-					idUrl={idUrl}
-					discussionApiUrl={discussionApiUrl}
-					idApiUrl={idApiUrl}
-				/>
-			) : (
-				<SignIn idUrl={idUrl} />
-			)}
-		</div>
-	);
-};
+	isSignedIn,
+}: MyAccountProps) => (
+	<div css={myAccountStyles}>
+		{isSignedIn ? (
+			<SignedIn
+				mmaUrl={mmaUrl}
+				idUrl={idUrl}
+				discussionApiUrl={discussionApiUrl}
+				idApiUrl={idApiUrl}
+			/>
+		) : (
+			<SignIn idUrl={idUrl} />
+		)}
+	</div>
+);

@@ -15,32 +15,42 @@ export const FixedSmallSlowIII = ({
 	containerPalette,
 	showAge,
 }: Props) => {
-	const smallTrails = trails.slice(0, 3);
+	const firstSlice50 = trails.slice(0, 1);
+	const firstSlice25 = trails.slice(1, 3);
 
 	return (
 		<UL direction="row">
-			{smallTrails.map((trail, index) => {
-				return (
-					<LI
-						padSides={true}
-						showDivider={index > 0}
-						percentage={index === 0 ? '50%' : '25%'}
-						key={trail.url}
-					>
-						<FrontCard
-							trail={trail}
-							starRating={trail.starRating}
-							containerPalette={containerPalette}
-							showAge={showAge}
-							headlineSize={index === 0 ? 'large' : 'medium'}
-							imagePositionOnMobile={index === 0 ? 'top' : 'left'}
-							trailText={
-								index === 0 ? undefined : trail.trailText
-							}
-						/>
-					</LI>
-				);
-			})}
+			{firstSlice50.map((trail) => (
+				<LI padSides={true} percentage={'50%'} key={trail.url}>
+					<FrontCard
+						trail={trail}
+						starRating={trail.starRating}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						headlineSize={'large'}
+						imagePositionOnMobile={'top'}
+						trailText={undefined}
+					/>
+				</LI>
+			))}
+			{firstSlice25.map((trail) => (
+				<LI
+					padSides={true}
+					showDivider={true}
+					percentage={'25%'}
+					key={trail.url}
+				>
+					<FrontCard
+						trail={trail}
+						starRating={trail.starRating}
+						containerPalette={containerPalette}
+						showAge={showAge}
+						headlineSize={'medium'}
+						imagePositionOnMobile={'left'}
+						trailText={trail.trailText}
+					/>
+				</LI>
+			))}
 		</UL>
 	);
 };

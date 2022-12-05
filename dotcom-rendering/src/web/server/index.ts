@@ -1,5 +1,6 @@
-import type express from 'express';
+import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
+import { isRecipe } from '../../model/enhance-recipes';
 import { enhanceBlocks } from '../../model/enhanceBlocks';
 import { enhanceCollections } from '../../model/enhanceCollections';
 import { enhanceCommercialProperties } from '../../model/enhanceCommercialProperties';
@@ -8,6 +9,7 @@ import { enhanceTableOfContents } from '../../model/enhanceTableOfContents';
 import { validateAsCAPIType, validateAsFrontType } from '../../model/validate';
 import type { DCRFrontType, FEFrontType } from '../../types/front';
 import type { FEArticleType } from '../../types/frontend';
+import { decideTrail } from '../lib/decideTrail';
 import { articleToHtml } from './articleToHtml';
 import { blocksToHtml } from './blocksToHtml';
 import { frontToHtml } from './frontToHtml';
@@ -20,11 +22,10 @@ function enhancePinnedPost(format: CAPIFormat, block?: Block) {
 const enhanceCAPIType = (body: unknown): FEArticleType => {
 	const data = validateAsCAPIType(body);
 
-	const enhancedBlocks = enhanceBlocks(
-		data.blocks,
-		data.format,
-		data.promotedNewsletter,
-	);
+	const enhancedBlocks = enhanceBlocks(data.blocks, data.format, {
+		promotedNewsletter: data.promotedNewsletter,
+		isRecipe: isRecipe(data.tags),
+	});
 
 	const CAPIArticle: FEArticleType = {
 		...data,
@@ -59,13 +60,15 @@ const enhanceFront = (body: unknown): DCRFrontType => {
 				data.pageId,
 			),
 		},
+		mostViewed: data.mostViewed.map((trail) => decideTrail(trail)),
+		mostCommented: data.mostCommented
+			? decideTrail(data.mostCommented)
+			: undefined,
+		mostShared: data.mostShared ? decideTrail(data.mostShared) : undefined,
 	};
 };
 
-export const renderArticle = (
-	{ body }: express.Request,
-	res: express.Response,
-): void => {
+export const handleArticle: RequestHandler = ({ body }, res) => {
 	try {
 		const article = enhanceCAPIType(body);
 		const resp = articleToHtml({
@@ -78,10 +81,7 @@ export const renderArticle = (
 	}
 };
 
-export const renderArticleJson = (
-	{ body }: express.Request,
-	res: express.Response,
-): void => {
+export const handleArticleJson: RequestHandler = ({ body }, res) => {
 	try {
 		const CAPIArticle = enhanceCAPIType(body);
 		const resp = {
@@ -96,18 +96,12 @@ export const renderArticleJson = (
 	}
 };
 
-export const renderPerfTest = (
-	req: express.Request,
-	res: express.Response,
-): void => {
+export const handlePerfTest: RequestHandler = (req, res, next) => {
 	req.body = ExampleArticle;
-	renderArticle(req, res);
+	handleArticle(req, res, next);
 };
 
-export const renderInteractive = (
-	{ body }: express.Request,
-	res: express.Response,
-): void => {
+export const handleInteractive: RequestHandler = ({ body }, res) => {
 	try {
 		const article = enhanceCAPIType(body);
 		const resp = articleToHtml({
@@ -120,10 +114,7 @@ export const renderInteractive = (
 	}
 };
 
-export const renderBlocks = (
-	{ body }: { body: BlocksRequest },
-	res: express.Response,
-): void => {
+export const handleBlocks: RequestHandler = ({ body }, res) => {
 	try {
 		const {
 			blocks,
@@ -141,7 +132,9 @@ export const renderBlocks = (
 			adUnit,
 			switches,
 			keywordIds,
-		} = body;
+		} =
+			// The content if body is not checked
+			body as BlocksRequest;
 
 		const enhancedBlocks = enhanceBlocks(blocks, format);
 		const html = blocksToHtml({
@@ -168,12 +161,11 @@ export const renderBlocks = (
 	}
 };
 
-export const renderKeyEvents = (
-	{ body }: { body: KeyEventsRequest },
-	res: express.Response,
-): void => {
+export const handleKeyEvents: RequestHandler = ({ body }, res) => {
 	try {
-		const { keyEvents, format, filterKeyEvents } = body;
+		const { keyEvents, format, filterKeyEvents } =
+			// The content if body is not checked
+			body as KeyEventsRequest;
 
 		const html = keyEventsToHtml({
 			keyEvents,
@@ -187,10 +179,7 @@ export const renderKeyEvents = (
 	}
 };
 
-export const renderFront = (
-	{ body }: express.Request,
-	res: express.Response,
-): void => {
+export const handleFront: RequestHandler = ({ body }, res) => {
 	try {
 		const front = enhanceFront(body);
 		const html = frontToHtml({
@@ -202,9 +191,6 @@ export const renderFront = (
 	}
 };
 
-export const renderFrontJson = (
-	{ body }: express.Request,
-	res: express.Response,
-): void => {
+export const handleFrontJson: RequestHandler = ({ body }, res) => {
 	res.json(enhanceFront(body));
 };
