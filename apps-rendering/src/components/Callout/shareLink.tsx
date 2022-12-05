@@ -25,6 +25,8 @@ export const ShareLink: FC<{ disabled: boolean; format: ArticleFormat }> = ({
 			setTimeout(() => setIsCopied(false), 2000);
 		}
 	};
+	if (typeof window === "undefined" || typeof navigator) return <></>;
+
 	return (
 		<span css={calloutShare}>
 			<SvgShareCallout size="medium" />
