@@ -222,4 +222,4 @@ const MyLink = ({ isActive }) => (
 );
 ```
 
-### Don't use React.FC or equivalent
+### Do not use React.FC or equivalent
