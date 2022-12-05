@@ -1,4 +1,5 @@
 import type { ABTest } from '@guardian/ab-core';
+import { bypassMetricsSampling } from '../utils';
 
 export const liveblogDesktopOutstream: ABTest = {
 	id: 'LiveblogDesktopOutstream',
@@ -13,7 +14,7 @@ export const liveblogDesktopOutstream: ABTest = {
 	successMeasure: 'No significant impact to CWV',
 	canRun: () => true,
 	variants: [
-		{ id: 'control', test: (): void => {} },
-		{ id: 'variant', test: (): void => {} },
+		{ id: 'control', test: bypassMetricsSampling },
+		{ id: 'variant', test: bypassMetricsSampling },
 	],
 };
