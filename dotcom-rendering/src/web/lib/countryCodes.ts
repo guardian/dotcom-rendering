@@ -1,6 +1,5 @@
 export const countries = [
 	'AD',
-	'AD',
 	'AE',
 	'AF',
 	'AG',
@@ -238,6 +237,7 @@ export const countries = [
 	'VA',
 	'VC',
 	'VE',
+	'VG',
 	'VI',
 	'VN',
 	'VU',
