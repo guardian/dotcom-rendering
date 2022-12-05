@@ -46,6 +46,7 @@ import { getConfigValue } from 'server/ssmConfig';
 import { App, Stack, Stage } from './appIdentity';
 import { getMappedAssetLocation } from './assets';
 import { getFootballContent } from './footballContent';
+import { OnwardsContent } from '@guardian/apps-rendering-api-models/onwardsContent';
 
 // ----- Setup ----- //
 
@@ -54,7 +55,7 @@ const getAssetLocation: (assetName: string) => string =
 const defaultId =
 	'cities/2019/sep/13/reclaimed-lakes-and-giant-airports-how-mexico-city-might-have-looked';
 const port = 3040;
-type CapiReturn = Promise<Result<number, [Content, RelatedContent]>>;
+type CapiReturn = Promise<Result<number, [Content, OnwardsContent]>>;
 
 // ----- Functions ----- //
 
@@ -339,7 +340,7 @@ async function serveArticleGet(
 				res.sendStatus(errorStatus);
 				return Promise.resolve();
 			},
-			async ([content, relatedContent]: [Content, RelatedContent]) => {
+			async ([content, onwardsContent]: [Content, OnwardsContent]) => {
 				const footballContent = await getFootballContent(content);
 
 				const mockedRenderingRequest: RenderingRequest = {
@@ -349,7 +350,7 @@ async function serveArticleGet(
 						k: 'potato,tomato,avocado',
 					},
 					commentCount: 30,
-					relatedContent,
+					onwardsContent,
 					footballContent: resultToNullable(footballContent),
 					edition,
 					promotedNewsletter: getMockPromotedNewsletter(content),
