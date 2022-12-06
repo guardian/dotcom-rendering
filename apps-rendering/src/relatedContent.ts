@@ -1,6 +1,7 @@
 import type { OnwardsContent as ARModelsOnwardsContent } from '@guardian/apps-rendering-api-models/onwardsContent';
 import { OnwardsContentCategory } from '@guardian/apps-rendering-api-models/onwardsContentCategory';
 import type { Content } from '@guardian/content-api-models/v1/content';
+import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import { Option } from '@guardian/types';
@@ -149,12 +150,11 @@ const getContributorImage = (
 
 const getMediaDuration = (content: Content): Optional<number> => {
 	if (isAudio(content.tags)) {
-		return Optional.none();
-		// return fromNullable(
-		// 	content.elements?.find(
-		// 		(element) => element.type === ElementType.AUDIO,
-		// 	)?.assets[0],
-		// );
+		return Optional.fromNullable(
+			content.elements?.find(
+				(element) => element.type === ElementType.AUDIO,
+			)?.assets[0].typeData?.durationSeconds,
+		);
 	} else if (isVideo(content.tags)) {
 		return articleMainVideo(content)
 			.flatMap(parseVideo(content.atoms))
