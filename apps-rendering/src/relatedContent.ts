@@ -32,6 +32,7 @@ import { index, pipe } from 'lib';
 import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import { parseVideo } from 'video';
+import { Asset } from '@guardian/content-api-models/v1/asset';
 
 interface RelatedItemFields extends ArticleFormat {
 	headline: string;
@@ -148,13 +149,24 @@ const getContributorImage = (
 		andThen((contributor) => contributor.image),
 	);
 
+const durationInSeconds = (asset: Asset): number => {
+	const seconds = Optional.fromNullable(
+		asset.typeData?.durationSeconds,
+	).withDefault(0);
+	const minutes = Optional.fromNullable(
+		asset.typeData?.durationMinutes,
+	).withDefault(0);
+
+	return minutes * 60 + seconds;
+};
+
 const getMediaDuration = (content: Content): Optional<number> => {
 	if (isAudio(content.tags)) {
 		return Optional.fromNullable(
 			content.elements?.find(
 				(element) => element.type === ElementType.AUDIO,
-			)?.assets[0].typeData?.durationSeconds,
-		);
+			)?.assets[0],
+		).map((asset) => durationInSeconds(asset));
 	} else if (isVideo(content.tags)) {
 		articleMainVideo(content)
 			.flatMap(parseVideo(content.atoms))
