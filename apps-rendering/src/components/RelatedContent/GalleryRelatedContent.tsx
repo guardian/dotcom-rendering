@@ -16,7 +16,7 @@ import Card from 'components/Card';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
-import type { RelatedContent } from 'relatedContent';
+import { getCategoryTitle, RelatedContent } from 'relatedContent';
 import { getFormat } from 'relatedContent';
 import { darkModeCss } from 'styles';
 import {
@@ -107,7 +107,7 @@ const GalleryRelatedContent: FC<Props> = ({ onwardsContent, format }) =>
 		return (
 			<aside css={styles(format)}>
 				<h2 css={css(defaultHeadingStyles, headingStyles(format))}>
-					{category.toString()}
+					{getCategoryTitle(category)}
 				</h2>
 
 				<ul

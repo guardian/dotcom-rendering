@@ -16,7 +16,7 @@ import BylineCard from 'components/BylineCard';
 import Card from 'components/Card';
 import { pipe } from 'lib';
 import type { FC } from 'react';
-import type { RelatedContent } from 'relatedContent';
+import { getCategoryTitle, RelatedContent } from 'relatedContent';
 import { getContributorImage } from 'relatedContent';
 import { darkModeCss } from 'styles';
 
@@ -117,7 +117,9 @@ const DefaultRelatedContent: FC<Props> = ({ content, className }) => {
 
 			return (
 				<section css={className}>
-					<h2 css={defaultHeadingStyles}>{category.toString()}</h2>
+					<h2 css={defaultHeadingStyles}>
+						{getCategoryTitle(category)}
+					</h2>
 					<ul css={defaultListStyles} role="list">
 						{content.map((relatedItem, key) => {
 							const contributorImage = getContributorImage(
