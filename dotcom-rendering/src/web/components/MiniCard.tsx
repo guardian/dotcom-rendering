@@ -7,11 +7,6 @@ import { ContainerOverrides } from '../../types/palette';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { generateSources } from './Picture';
 
-const imageStyles = css`
-	width: 120px;
-	padding-right: 10px;
-`;
-
 const linkStyles = css`
 	${body.medium()}
 	font-weight: bold;
@@ -42,7 +37,7 @@ const MiniCardPicture = ({ image, alt }: MiniCardPictureProps) => {
 	const [source] = sources.slice(-1);
 
 	return (
-		<picture css={[imageStyles]}>
+		<picture>
 			{/* High resolution (HDPI) sources*/}
 			<source
 				srcSet={source.hiResUrl}
