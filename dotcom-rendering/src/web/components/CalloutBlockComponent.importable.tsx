@@ -49,7 +49,7 @@ const summaryStyles = css`
 	padding-right: ${space[2]}px;
 	display: block;
 	/* Removing default styles from summery tag */
-	ft ::-webkit-details-marker {
+	::-webkit-details-marker {
 		display: none;
 	}
 	outline: none;
