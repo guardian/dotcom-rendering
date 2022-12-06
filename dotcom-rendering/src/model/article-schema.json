@@ -781,6 +781,9 @@
                 "activeFrom": {
                     "type": "number"
                 },
+                "activeUntil": {
+                    "type": "number"
+                },
                 "displayOnSensitive": {
                     "type": "boolean"
                 },
