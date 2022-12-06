@@ -1,12 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	between,
-	border,
-	from,
-	palette,
-	space,
-	until,
-} from '@guardian/source-foundations';
+import { border, from, palette, space } from '@guardian/source-foundations';
 import { DCRContainerPalette } from '../../types/front';
 import { ContainerOverrides } from '../../types/palette';
 import { TrailType } from '../../types/trails';
@@ -48,20 +41,20 @@ const liStyles = css`
 `;
 
 const textColumns = css`
-	${until.tablet} {
-		column-count: 1;
-	}
-	${between.tablet.and.desktop} {
+	column-count: 1;
+	${from.tablet} {
 		column-count: 3;
 	}
-	column-count: 4;
+	${from.desktop} {
+		column-count: 4;
+	}
 `;
 
 const mediaColumns = css`
-	${until.tablet} {
-		column-count: 1;
+	column-count: 1;
+	${from.tablet} {
+		column-count: 3;
 	}
-	column-count: 3;
 `;
 
 export const NavList = ({ trails, containerPalette, showImage }: Props) => {
