@@ -6,7 +6,6 @@ import {
 } from '@guardian/atoms-rendering';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
-import { calloutCampaign } from 'fixtures/manual/calloutCampaign';
 import { getSharingUrls } from '../../lib/sharing-urls';
 import type { Switches } from '../../types/config';
 import type { CAPIElement, RoleType } from '../../types/content';
