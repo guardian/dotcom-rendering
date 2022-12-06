@@ -59,7 +59,7 @@ const MiniCardPicture = ({ image, alt }: MiniCardPictureProps) => {
 /**
  * A simpler form of card that does not have any of the complexities of a normal card such as sublinks, kickers, format, etc.
  *
- * Primarily used for rendering Snaps in containers such as @see NavList
+ * Primarily used for rendering Snaps in containers such as {@linkcode NavList}
  */
 export const MiniCard = ({ trail, showImage, containerPalette }: Props) => {
 	const containerOverrides =
