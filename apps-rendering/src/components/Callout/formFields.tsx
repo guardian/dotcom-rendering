@@ -23,22 +23,19 @@ const infoStyles = css`
 	margin-bottom: ${remSpace[4]};
 `;
 
-export const Disclaimer: FC<{ disabled: boolean }> = ({ disabled }) => {
-	const tabIndex = disabled ? -1 : 0;
+export const Disclaimer: FC = () => {
 	return (
 		<div css={infoStyles}>
 			You must be 18 or over to fill in this form. Only the Guardian can
 			see your contributions and one of our journalists may contact you to
 			discuss further. For more information please see our{' '}
 			<a
-				tabIndex={tabIndex}
 				href="https://www.theguardian.com/help/terms-of-service"
 			>
 				terms of service
 			</a>{' '}
 			and{' '}
 			<a
-				tabIndex={tabIndex}
 				href="https://www.theguardian.com/help/privacy-policy"
 			>
 				privacy policy
@@ -73,7 +70,6 @@ const FieldError = (): ReactElement => (
 export const renderField = (
 	formId: number,
 	{ type, label, description, mandatory, options, id }: FormField,
-	disableInput: boolean,
 	format: ArticleFormat,
 ): ReactElement | null => {
 	const name = `field_${type}_${id}`;
@@ -107,7 +103,6 @@ export const renderField = (
 						hideLabel
 						optional={!mandatory}
 						cssOverrides={fieldInput}
-						disabled={disableInput}
 					/>
 				</FormField>
 			);
@@ -119,7 +114,6 @@ export const renderField = (
 						label={label}
 						hideLabel
 						cssOverrides={textareaStyles}
-						disabled={disableInput}
 						optional={!mandatory}
 					/>
 				</FormField>
@@ -130,7 +124,6 @@ export const renderField = (
 					<FileInput
 						name={name}
 						format={format}
-						disabled={disableInput}
 						mandatory={mandatory}
 					/>
 			</FormField>
@@ -142,7 +135,6 @@ export const renderField = (
 						name={name}
 						mandatory={mandatory}
 						options={options}
-						disabled={disableInput}
 					/>
 				</FormField>
 			);
@@ -155,7 +147,6 @@ export const renderField = (
 						hideLabel
 						options={options}
 						cssOverrides={fieldInput}
-						disabled={disableInput}
 						mandatory={mandatory}
 					/>
 				</FormField>
@@ -171,7 +162,6 @@ export const renderField = (
 						cssOverrides={fieldInput}
 						key={name}
 						name={name}
-						disabled={disableInput}
 					>
 					{options.map(({ value, label }) => {
 						return (

@@ -65,12 +65,21 @@ const radioDarkTheme = {
 	borderError: error[500],
 };
 
+const expandingWrapperDarkTheme = {
+	border: neutral[60],
+	expandBackground: neutral[86],
+	expandText: neutral[7],
+	collapseBackground: neutral[10],
+	collapseText: neutral[86],
+}
+
 export const darkTheme = {
 	label: labelDarkTheme,
 	checkbox: checkboxDarkTheme,
 	textInput: textInputDarkTheme,
 	select: selectDarkTheme,
 	radio: radioDarkTheme,
+	expander: expandingWrapperDarkTheme,
 };
 
 const getPrefersDark = (): boolean => {

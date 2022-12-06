@@ -4,7 +4,6 @@ import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
 import type Int64 from 'node-int64';
-import { useState } from 'react';
 import type { FC, ReactElement } from 'react';
 import CalloutBlock from './calloutBlock';
 import { DeadlineDate, Highlight, isCalloutActive } from './deadlineDate';
@@ -44,7 +43,6 @@ const Callout: FC<CalloutProps> = ({
 		return <></>;
 	}
 
-	const [isExpanded, setIsExpanded] = useState(false);
 	return (
 		<aside>
 			{isNonCollapsible ? (
@@ -74,7 +72,6 @@ const Callout: FC<CalloutProps> = ({
 							<DeadlineDate until={activeUntil} />
 						)}
 						name={`${name} form`}
-						expandCallback={setIsExpanded}
 					>
 						<CalloutBlock
 							formId={formId}
@@ -83,9 +80,6 @@ const Callout: FC<CalloutProps> = ({
 							formFields={formFields}
 							format={format}
 							description={description}
-							// TODO: This potentially not futureproof, would it be better to
-							// set the tabIndex on all children with js?
-							isTabbable={isExpanded}
 						/>
 					</ExpandingWrapper>
 				</ThemeProvider>

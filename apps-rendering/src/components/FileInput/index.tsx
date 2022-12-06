@@ -11,13 +11,11 @@ import {
 interface FileInputProps {
 	name: string;
 	format: ArticleFormat;
-	disabled: boolean;
 	mandatory: boolean;
 }
 
 const FileInput = ({
 	name,
-	disabled,
 	format,
 	mandatory = false,
 }: FileInputProps): ReactElement => {
@@ -40,7 +38,6 @@ const FileInput = ({
 						${visuallyHidden}
 					`}
 					onChange={(e): void => setChosenFile(e.target.value)}
-					disabled={disabled}
 					required={mandatory}
 				/>
 				</div>

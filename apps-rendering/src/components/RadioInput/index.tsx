@@ -5,7 +5,6 @@ import type { ReactElement } from 'react';
 
 interface RadioInputProps {
 	name: string;
-	disabled: boolean;
 	mandatory: boolean;
 	options: FormOption[];
 	cssOverrides?: SerializedStyles;
@@ -15,7 +14,6 @@ const RadioInput = ({
 	name,
 	options,
 	cssOverrides,
-	disabled,
 	mandatory,
 }: RadioInputProps): ReactElement => (
 	<RadioGroup
@@ -23,7 +21,6 @@ const RadioInput = ({
 		name={name}
 		orientation="horizontal"
 		cssOverrides={cssOverrides}
-		disabled={disabled}
 	>
 		{options.map(({ value, label }, i) => (
 			<Radio key={value} value={value} label={label} defaultChecked={mandatory && i===0}/>
