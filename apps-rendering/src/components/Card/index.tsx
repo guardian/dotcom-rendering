@@ -40,6 +40,7 @@ import type { OnwardsContentArticle } from 'relatedContent';
 import { getFormat } from 'relatedContent';
 import { darkModeCss } from 'styles';
 import { Optional } from 'optional';
+import { Contributor } from 'contributor';
 
 interface Props {
 	relatedItem: OnwardsContentArticle;
@@ -403,16 +404,16 @@ const durationMedia = (
 
 const cardByline = (
 	format: ArticleFormat,
-	byline?: string,
+	maybeContributor: Option<Contributor>,
 ): ReactElement | null => {
 	if (format.design !== ArticleDesign.Comment) {
 		return null;
 	}
 
 	return pipe(
-		fromNullable(byline),
-		map((byline) => {
-			return <div css={bylineStyles(format)}>{byline}</div>;
+		maybeContributor,
+		map((contributor) => {
+			return <div css={bylineStyles(format)}>{contributor.name}</div>;
 		}),
 		withDefault<ReactElement | null>(null),
 	);
@@ -453,8 +454,7 @@ const Card: FC<Props> = ({ relatedItem, kickerText }) => {
 	const format = getFormat(relatedItem);
 
 	const img = cardImage(relatedItem);
-	const { /*type, */ headline, webUrl, contributor, publishDate } =
-		relatedItem;
+	const { headline, webUrl, contributor, publishDate } = relatedItem;
 
 	const date =
 		publishDate.kind === OptionKind.Some &&
@@ -490,7 +490,7 @@ const Card: FC<Props> = ({ relatedItem, kickerText }) => {
 							),
 						)}
 						{headline}
-						{/* {cardByline(format, byline)} */}
+						{cardByline(format, contributor)}
 					</h3>
 					{starRating}
 				</section>
