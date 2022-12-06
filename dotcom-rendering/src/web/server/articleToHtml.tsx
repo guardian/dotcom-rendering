@@ -24,6 +24,10 @@ import type { CAPIElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
 import type { TagType } from '../../types/tag';
 import { ArticlePage } from '../components/ArticlePage';
+import {
+	initRecordIslands,
+	IslandRecordProvider,
+} from '../components/record-islands';
 import { decideFormat } from '../lib/decideFormat';
 import { decideTheme } from '../lib/decideTheme';
 import { getHttp3Url } from '../lib/getHttp3Url';
@@ -58,11 +62,19 @@ export const articleToHtml = ({ article }: Props): string => {
 
 	const format: ArticleFormat = decideFormat(article.format);
 
+	const { getIds, recordId } = initRecordIslands();
+
 	const html = renderToString(
-		<CacheProvider value={cache}>
-			<ArticlePage format={format} CAPIArticle={article} NAV={NAV} />
-		</CacheProvider>,
+		<IslandRecordProvider recordId={recordId}>
+			<CacheProvider value={cache}>
+				<ArticlePage format={format} CAPIArticle={article} NAV={NAV} />
+			</CacheProvider>
+		</IslandRecordProvider>,
 	);
+
+	// After render retrieve via getIds
+	// This value will be wiped away and replaced on the next render
+	console.log('Islands with expedited property on this render:', getIds());
 
 	const chunks = extractCriticalToChunks(html);
 	const extractedCss = constructStyleTagsFromChunks(chunks);

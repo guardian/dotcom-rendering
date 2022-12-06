@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
+import { useRecordIsland } from './record-islands';
 import { Placeholder } from './Placeholder';
 
 interface HydrateProps {
@@ -83,17 +84,25 @@ export const Island = ({
 	placeholderHeight,
 	children,
 	expediteLoading,
-}: Props) => (
-	<gu-island
-		name={children.type.name}
-		deferUntil={deferUntil}
-		props={JSON.stringify(children.props)}
-		clientOnly={clientOnly}
-		expediteLoading={expediteLoading}
-	>
-		{decideChildren(children, clientOnly, placeholderHeight)}
-	</gu-island>
-);
+}: Props) => {
+	const name = children.type.name;
+	if (expediteLoading) {
+		// Not sure if the rule of hooks applies here
+		// So I'm putting it in the if statement
+		useRecordIsland(name);
+	}
+	return (
+		<gu-island
+			name={name}
+			deferUntil={deferUntil}
+			props={JSON.stringify(children.props)}
+			clientOnly={clientOnly}
+			expediteLoading={expediteLoading}
+		>
+			{decideChildren(children, clientOnly, placeholderHeight)}
+		</gu-island>
+	);
+};
 
 /**
  * If JavaScript is disabled, hide client-only islands
