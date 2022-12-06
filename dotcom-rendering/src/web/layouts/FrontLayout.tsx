@@ -222,6 +222,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 								!!front.config.switches.headerTopNav
 							}
 							isInEuropeTest={isInEuropeTest}
+							headerTopBarSearchCapiSwitch={
+								!!front.config.switches
+									.headerTopBarSearchCapiSwitch
+							}
 						/>
 					</Section>
 					<Section
