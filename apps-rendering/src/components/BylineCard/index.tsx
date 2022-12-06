@@ -154,8 +154,8 @@ const byline = (
 ): ReactElement | null => {
 	return pipe(
 		relatedItem.contributor,
-		map((byline) => {
-			return <div css={bylineStyles(format)}>{byline.name}</div>;
+		map((contributor) => {
+			return <div css={bylineStyles(format)}>{contributor.name}</div>;
 		}),
 		withDefault<ReactElement | null>(null),
 	);
