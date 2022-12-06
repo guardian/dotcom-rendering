@@ -1,9 +1,9 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
 import {
-	calloutCampaign,
-	calloutCampaignOnlyTwoRadio,
-} from '../../../fixtures/manual/calloutCampaign';
+	calloutCampaignOnlyTwoRadio as calloutCampaignOnlyTwoRadioV2,
+	calloutCampaign as calloutCampaignV2,
+} from '../../../fixtures/manual/calloutCampaignV2';
 import { CalloutBlockComponent } from './CalloutBlockComponent.importable';
 
 const mockFormat = {
@@ -24,8 +24,7 @@ export const Collapsible = () => {
 		);
 	return (
 		<CalloutBlockComponent
-			isNonCollapsible={false}
-			callout={calloutCampaign}
+			callout={calloutCampaignV2}
 			format={mockFormat}
 		/>
 	);
@@ -45,8 +44,7 @@ export const NonCollapsible = () => {
 		);
 	return (
 		<CalloutBlockComponent
-			isNonCollapsible={true}
-			callout={calloutCampaign}
+			callout={calloutCampaignV2}
 			format={mockFormat}
 		/>
 	);
@@ -71,8 +69,7 @@ export const Radio = () => {
 		);
 	return (
 		<CalloutBlockComponent
-			isNonCollapsible={true}
-			callout={calloutCampaignOnlyTwoRadio}
+			callout={calloutCampaignOnlyTwoRadioV2}
 			format={mockFormat}
 		/>
 	);
