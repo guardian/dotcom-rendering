@@ -10,11 +10,10 @@ import {
 	remSpace,
 	until,
 } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
-import { map, none, OptionKind, withDefault } from '@guardian/types';
+import { none, OptionKind } from '@guardian/types';
 import BylineCard from 'components/BylineCard';
 import Card from 'components/Card';
-import { pipe } from 'lib';
+import { Optional } from 'optional';
 import type { FC } from 'react';
 import type { OnwardsContent } from 'relatedContent';
 import { getCategoryTitle, getContributorImage } from 'relatedContent';
@@ -23,7 +22,7 @@ import { darkModeCss } from 'styles';
 // ----- Component ----- //
 
 interface Props {
-	content: Option<OnwardsContent>;
+	content: Optional<OnwardsContent>;
 	css: SerializedStyles;
 	className?: string;
 }
@@ -108,9 +107,8 @@ const defaultStyles = css`
 `;
 
 const DefaultRelatedContent: FC<Props> = ({ content, className }) => {
-	return pipe(
-		content,
-		map(({ category, content }) => {
+	return content
+		.map(({ category, content }) => {
 			if (content.length === 0) {
 				return null;
 			}
@@ -144,9 +142,8 @@ const DefaultRelatedContent: FC<Props> = ({ content, className }) => {
 					</ul>
 				</section>
 			);
-		}),
-		withDefault<JSX.Element | null>(null),
-	);
+		})
+		.withDefault<JSX.Element | null>(null);
 };
 
 // ----- Exports ----- //

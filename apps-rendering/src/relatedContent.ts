@@ -4,7 +4,7 @@ import type { Content } from '@guardian/content-api-models/v1/content';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
-import { andThen, none, OptionKind, some } from '@guardian/types';
+import { andThen } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import {
 	articleMainImage,
@@ -33,6 +33,7 @@ import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import { parseVideo } from 'video';
 import { Asset } from '@guardian/content-api-models/v1/asset';
+import { getPillarFromId } from 'articleFormat';
 
 interface OnwardsArticleFields extends ArticleFormat {
 	headline: string;
@@ -138,7 +139,9 @@ const onwardsArticleFields = (
 	webUrl: content.id,
 	contributor: index(0)(parseContributors(context.salt, content)),
 	display: getDisplay(content),
-	theme: ArticlePillar.News,
+	theme: Optional.fromNullable(content.pillarId)
+		.flatMap(getPillarFromId)
+		.withDefault(ArticlePillar.News),
 });
 
 const getContributorImage = (
@@ -177,16 +180,8 @@ const getMediaDuration = (content: Content): Optional<number> => {
 
 const parseMapiOnwardsContent =
 	(context: Context) =>
-	(
-		maybeOnwardsContent: Option<ARModelsOnwardsContent>,
-	): Option<OnwardsContent> => {
-		if (maybeOnwardsContent.kind === OptionKind.None) {
-			return none;
-		}
-
-		const onwardsContent = maybeOnwardsContent.value;
-
-		return some({
+	(onwardsContent: ARModelsOnwardsContent): Optional<OnwardsContent> => {
+		return Optional.some({
 			category: onwardsContent.category,
 			content: onwardsContent.content.map((content) => {
 				const { tags } = content;

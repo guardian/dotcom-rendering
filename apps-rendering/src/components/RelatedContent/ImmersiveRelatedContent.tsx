@@ -5,9 +5,9 @@ import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { from, neutral, until } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
 import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
+import { Optional } from 'optional';
 import type { FC } from 'react';
 import type { OnwardsContent } from 'relatedContent';
 import { darkModeCss } from 'styles';
@@ -51,7 +51,7 @@ const relatedContentStyles = css`
 `;
 
 type Props = {
-	content: Option<OnwardsContent>;
+	content: Optional<OnwardsContent>;
 	format: ArticleFormat;
 };
 

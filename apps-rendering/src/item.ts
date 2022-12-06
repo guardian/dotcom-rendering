@@ -68,7 +68,7 @@ interface Fields extends ArticleFormat {
 	branding: Option<Branding>;
 	internalShortId: Option<string>;
 	commentCount: Option<number>;
-	relatedContent: Option<OnwardsContent>;
+	relatedContent: Optional<OnwardsContent>;
 	logo: Option<Logo>;
 	webUrl: string;
 	edition: Edition;
@@ -307,9 +307,7 @@ const itemFields = (
 		branding: getBranding(request),
 		internalShortId: fromNullable(content.fields?.internalShortId),
 		commentCount: fromNullable(commentCount),
-		relatedContent: pipe(
-			onwardsContent,
-			fromNullable,
+		relatedContent: Optional.fromNullable(onwardsContent).flatMap(
 			parseMapiOnwardsContent(context),
 		),
 		logo: paidContentLogo(content.tags),

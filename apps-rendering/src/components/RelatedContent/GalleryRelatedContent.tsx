@@ -9,12 +9,12 @@ import {
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, remSpace, until } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
 import { none, OptionKind } from '@guardian/types';
 import BylineCard from 'components/BylineCard';
 import Card from 'components/Card';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
+import { Optional } from 'optional';
 import type { FC } from 'react';
 import type { OnwardsContent } from 'relatedContent';
 import { getCategoryTitle, getFormat } from 'relatedContent';
@@ -94,12 +94,12 @@ const headingStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 type Props = {
-	onwardsContent: Option<OnwardsContent>;
+	onwardsContent: Optional<OnwardsContent>;
 	format: ArticleFormat;
 };
 
 const GalleryRelatedContent: FC<Props> = ({ onwardsContent, format }) =>
-	maybeRender(onwardsContent, ({ category, content }) => {
+	maybeRender(onwardsContent.toOption(), ({ category, content }) => {
 		if (content.length === 0) {
 			return null;
 		}
