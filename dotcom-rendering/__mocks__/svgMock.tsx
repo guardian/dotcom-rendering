@@ -1,3 +1,3 @@
-const SVG: React.FC = () => null;
+const SVG = () => null;
 
 module.exports = SVG;

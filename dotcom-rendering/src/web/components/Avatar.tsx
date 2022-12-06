@@ -15,12 +15,19 @@ const backgroundStyles = (palette: Palette) =>
 		background-color: ${palette.background.avatar};
 	`;
 
-export const Avatar: React.FC<{
+type Props = {
 	imageSrc: string;
 	imageAlt: string;
 	format: ArticleFormat;
 	containerPalette?: DCRContainerPalette;
-}> = ({ imageSrc, imageAlt, format, containerPalette }) => {
+};
+
+export const Avatar = ({
+	imageSrc,
+	imageAlt,
+	format,
+	containerPalette,
+}: Props) => {
 	const palette = decidePalette(format, containerPalette);
 	return (
 		<img

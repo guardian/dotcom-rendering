@@ -37,12 +37,16 @@ export interface TrailType extends BaseTrailType {
 
 export interface CAPITrailType extends BaseTrailType {
 	format: CAPIFormat;
-	// Include pillar and designType until we remove them upstream
-	// We type designType as `string` for now so that the field is present,
-	// but we don't care what's in it. Pillar we have a type for so we use it
-	// but it shouldn't be important.
-	designType: string;
-	pillar: LegacyPillar;
+	/**
+	 * @deprecated This type must exist as it's passed by frontend, but we shouldn't use it.
+	 * We should remove this property upstream in the future
+	 */
+	designType?: string;
+	/**
+	 * @deprecated This type must exist as it's passed by frontend, but we shouldn't use it.
+	 * We should remove this property upstream in the future
+	 */
+	pillar?: string;
 	carouselImages?: { [key: string]: string };
 	isLiveBlog?: boolean;
 }

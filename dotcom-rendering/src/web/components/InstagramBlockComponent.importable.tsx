@@ -12,11 +12,16 @@ const fullWidthStyles = css`
  * called to be size correctly.
  * src/web/browser/embedIframe/embedIframe.ts
  */
-export const InstagramBlockComponent: React.FC<{
+type Props = {
 	element: InstagramBlockElement;
 	index: number;
 	isMainMedia: boolean;
-}> = ({ element, index, isMainMedia }) => {
+};
+export const InstagramBlockComponent = ({
+	element,
+	index,
+	isMainMedia,
+}: Props) => {
 	return (
 		<ClickToView
 			role={element.role}

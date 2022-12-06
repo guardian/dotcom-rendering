@@ -108,7 +108,6 @@ export const Elements = (
 	pillar: ArticleTheme,
 	isImmersive: boolean,
 	adTargeting?: AdTargeting,
-	// eslint-disable-next-line @typescript-eslint/ban-types -- the type signature is helpful
 ): JSX.Element[] => {
 	const cleanedElements = enhance(elements);
 	const output = cleanedElements.map((element) => {
@@ -149,12 +148,7 @@ export const Elements = (
 					/>
 				);
 			case 'model.dotcomrendering.pageElements.ContentAtomBlockElement':
-				return (
-					<ContentAtomBlockComponent
-						key={element.elementId}
-						element={element}
-					/>
-				);
+				return <ContentAtomBlockComponent key={element.elementId} />;
 			case 'model.dotcomrendering.pageElements.DisclaimerBlockElement':
 				return (
 					<DisclaimerBlockComponent
@@ -358,7 +352,6 @@ export const Elements = (
 	});
 
 	return output.filter(
-		// eslint-disable-next-line @typescript-eslint/ban-types -- it’s a type predicate
 		(el: JSX.Element | null): el is JSX.Element => el !== null,
 	);
 };

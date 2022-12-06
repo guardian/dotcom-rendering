@@ -168,7 +168,7 @@ const imageStyle = css`
 	}
 `;
 
-export const Expandable: React.FC<{
+type Props = {
 	id: string;
 	type: string;
 	title: string;
@@ -176,7 +176,17 @@ export const Expandable: React.FC<{
 	credit?: string;
 	pillar: ArticleTheme;
 	children: React.ReactNode;
-}> = ({ id, type, title, img, children, credit, pillar }) => (
+};
+
+export const Expandable = ({
+	id,
+	type,
+	title,
+	img,
+	children,
+	credit,
+	pillar,
+}: Props) => (
 	<aside css={wrapper(pillar)}>
 		<div css={headers}>
 			<span css={[headerStyle, pillarColour(pillar)]}>{type}</span>

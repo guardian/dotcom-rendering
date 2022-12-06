@@ -221,3 +221,5 @@ const MyLink = ({ isActive }) => (
     <a className={cx({ [activeLink]: isActive }, link)}>Click Me</a>
 );
 ```
+
+### Do not use React.FC or equivalent

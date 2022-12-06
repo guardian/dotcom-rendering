@@ -1,6 +1,5 @@
-import React from 'react';
 import { constructQuery } from '../../../lib/querystring';
-import { YoutubeBlockElement } from '../../../types/content';
+import type { YoutubeBlockElement } from '../../../types/content';
 import { Caption } from '../Caption';
 
 type EmbedConfig = {
@@ -40,11 +39,17 @@ const buildEmbedConfig = (adTargeting: AdTargeting): EmbedConfig => {
 	}
 };
 
-export const YoutubeBlockComponentAMP: React.FC<{
+type Props = {
 	element: YoutubeBlockElement;
 	pillar: ArticleTheme;
 	adTargeting?: AdTargeting;
-}> = ({ element, pillar, adTargeting }) => {
+};
+
+export const YoutubeBlockComponentAMP = ({
+	element,
+	pillar,
+	adTargeting,
+}: Props) => {
 	// https://www.ampproject.org/docs/reference/components/amp-youtube
 	// https://developers.google.com/youtube/player_parameters
 	const attributes: { [key: string]: any } = {

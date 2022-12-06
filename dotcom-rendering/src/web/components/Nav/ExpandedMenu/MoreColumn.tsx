@@ -189,10 +189,12 @@ const shareIconStyles = css`
 	width: 28px;
 `;
 
-export const MoreColumn: React.FC<{
+type Props = {
 	column: LinkType;
 	brandExtensions: LinkType[];
-}> = ({ column, brandExtensions }) => {
+};
+
+export const MoreColumn = ({ column, brandExtensions }: Props) => {
 	const subNavId = `${column.title.toLowerCase()}Links`;
 	// Add the brand extensions to 'more' on mobile.
 	const moreColumn = {

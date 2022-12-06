@@ -40,9 +40,8 @@ type Props = InlineProps | NonInlineProps;
 
 export const labelHeight = 24;
 
-const adSlotLabelStyles = css`
+export const individualLabelCSS = css`
 	${textSans.xxsmall()};
-	position: relative;
 	height: ${labelHeight}px;
 	max-height: ${labelHeight}px;
 	background-color: ${neutral[97]};
@@ -51,18 +50,6 @@ const adSlotLabelStyles = css`
 	color: ${text.supporting};
 	text-align: left;
 	box-sizing: border-box;
-	&.visible {
-		visibility: initial;
-	}
-	&.hidden {
-		visibility: hidden;
-	}
-	&.ad-slot__label--toggle {
-		margin: 0 auto;
-		${until.tablet} {
-			display: none;
-		}
-	}
 `;
 
 const outOfPageStyles = css`
@@ -72,9 +59,21 @@ const outOfPageStyles = css`
 export const labelStyles = css`
 	.ad-slot__label,
 	.ad-slot__scroll {
-		${adSlotLabelStyles}
+		${individualLabelCSS}
+		position: relative;
+		&.visible {
+			visibility: initial;
+		}
+		&.hidden {
+			visibility: hidden;
+		}
+		&.ad-slot__label--toggle {
+			margin: 0 auto;
+			${until.tablet} {
+				display: none;
+			}
+		}
 	}
-
 	.ad-slot__close-button {
 		display: none;
 	}
@@ -83,6 +82,31 @@ export const labelStyles = css`
 		position: fixed;
 		bottom: 0;
 		width: 100%;
+		${individualLabelCSS}
+	}
+
+	.ad-slot:not[data-label-show='true']::before {
+		content: '';
+		display: block;
+		height: ${labelHeight}px;
+		visibility: hidden;
+	}
+
+	.ad-slot[data-label-show='true']:not(.ad-slot--interscroller)::before {
+		content: attr(ad-label-text);
+		display: block;
+		position: relative;
+		${individualLabelCSS}
+	}
+
+	.ad-slot__adtest-cookie-clear-link {
+		${textSans.xxsmall()};
+		text-align: left;
+		position: absolute;
+		right: 3px;
+		top: -22px;
+		padding: 0;
+		border: 0;
 	}
 `;
 
@@ -181,7 +205,7 @@ const mobileStickyAdStyles = css`
 		display: none;
 		position: absolute;
 		right: 3px;
-		top: 3px;
+		top: -21px;
 		padding: 0;
 		border: 0;
 		height: 21px;
@@ -207,6 +231,7 @@ const mobileStickyAdStyles = css`
 		stroke-width: 2;
 		text-align: center;
 	}
+
 	.ad-slot__label {
 		font-size: 0.75rem;
 		line-height: 1.25rem;
@@ -220,20 +245,22 @@ const mobileStickyAdStyles = css`
 		box-sizing: border-box;
 		${textSans.xxsmall()};
 	}
+
+	.ad-slot:not[data-label-show='true']::before {
+		content: '';
+		display: block;
+		height: ${labelHeight}px;
+		visibility: hidden;
+	}
+	.ad-slot[data-label-show='true']::before {
+		content: 'Advertisement';
+		display: block;
+		position: relative;
+		${individualLabelCSS}
+	}
 `;
 
 const adStyles = [labelStyles, fluidAdStyles];
-
-const AdSlotLabelToggled = () => (
-	<div
-		className={['ad-slot__label', 'ad-slot__label--toggle', 'hidden'].join(
-			' ',
-		)}
-		css={adSlotLabelStyles}
-	>
-		Advertisement
-	</div>
-);
 
 export const AdSlot = ({
 	position,
@@ -248,21 +275,23 @@ export const AdSlot = ({
 				case ArticleDisplay.Showcase:
 				case ArticleDisplay.NumberedList: {
 					return (
-						<div
-							id="dfp-ad--right"
-							className={[
-								'js-ad-slot',
-								'ad-slot',
-								'ad-slot--right',
-								'ad-slot--mpu-banner-ad',
-								'ad-slot--rendered',
-								'js-sticky-mpu',
-							].join(' ')}
-							css={adStyles}
-							data-link-name="ad slot right"
-							data-name="right"
-							aria-hidden="true"
-						/>
+						<div css={[adStyles]}>
+							<div
+								id="dfp-ad--right"
+								className={[
+									'js-ad-slot',
+									'ad-slot',
+									'ad-slot--right',
+									'ad-slot--mpu-banner-ad',
+									'ad-slot--rendered',
+									'js-sticky-mpu',
+								].join(' ')}
+								css={adStyles}
+								data-link-name="ad slot right"
+								data-name="right"
+								aria-hidden="true"
+							/>
+						</div>
 					);
 				}
 				case ArticleDisplay.Standard: {
@@ -281,10 +310,13 @@ export const AdSlot = ({
 		case 'comments': {
 			return (
 				<div
-					css={css`
-						position: static;
-						height: 100%;
-					`}
+					css={[
+						css`
+							position: static;
+							height: 100%;
+						`,
+						adStyles,
+					]}
 				>
 					<div
 						id="dfp-ad--comments"
@@ -321,42 +353,40 @@ export const AdSlot = ({
 				min-width: 728px;
 			`;
 			return (
-				<>
-					<div
-						id="dfp-ad--top-above-nav"
-						className={[
-							'js-ad-slot',
-							'ad-slot',
-							'ad-slot--top-above-nav',
-							'ad-slot--mpu-banner-ad',
-							'ad-slot--rendered',
-						].join(' ')}
-						css={[adStyles, fluidFullWidthAdStyles, adSlotAboveNav]}
-						data-link-name="ad slot top-above-nav"
-						data-name="top-above-nav"
-						aria-hidden="true"
-					>
-						<AdSlotLabelToggled />
-					</div>
-				</>
+				<div
+					id="dfp-ad--top-above-nav"
+					className={[
+						'js-ad-slot',
+						'ad-slot',
+						'ad-slot--top-above-nav',
+						'ad-slot--mpu-banner-ad',
+						'ad-slot--rendered',
+					].join(' ')}
+					css={[adStyles, fluidFullWidthAdStyles, adSlotAboveNav]}
+					data-link-name="ad slot top-above-nav"
+					data-name="top-above-nav"
+					aria-hidden="true"
+				></div>
 			);
 		}
 		case 'mostpop': {
 			return (
-				<div
-					id="dfp-ad--mostpop"
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						'ad-slot--mostpop',
-						'ad-slot--mpu-banner-ad',
-						'ad-slot--rendered',
-					].join(' ')}
-					css={[adStyles, mostPopAdStyles]}
-					data-link-name="ad slot mostpop"
-					data-name="mostpop"
-					aria-hidden="true"
-				/>
+				<div css={[adStyles]}>
+					<div
+						id="dfp-ad--mostpop"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--mostpop',
+							'ad-slot--mpu-banner-ad',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[adStyles, mostPopAdStyles]}
+						data-link-name="ad slot mostpop"
+						data-name="mostpop"
+						aria-hidden="true"
+					/>
+				</div>
 			);
 		}
 		case 'merchandising-high': {
@@ -473,6 +503,17 @@ export const AdSlot = ({
 					data-link-name={`ad slot ${advertId}`}
 					data-name={`${advertId}`}
 					aria-hidden="true"
+				/>
+			);
+		}
+		case 'exclusion': {
+			return (
+				<div
+					id={'dfp-ad--exclusion'}
+					className={['js-ad-slot', 'ad-slot'].join(' ')}
+					data-name="exclusion"
+					aria-hidden="true"
+					data-label="false"
 				/>
 			);
 		}
