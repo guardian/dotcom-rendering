@@ -211,7 +211,9 @@ const parseMapiRelatedContent =
 		});
 	};
 
-const parseRelatedContent = (content: Content[]): ARModelsOnwardsContent => {
+const parseCapiRelatedContent = (
+	content: Content[],
+): ARModelsOnwardsContent => {
 	return {
 		category: OnwardsContentCategory.RELATED,
 		content: content.slice(0, 4),
@@ -242,7 +244,7 @@ const getCategoryTitle = (
 };
 
 export {
-	parseRelatedContent,
+	parseCapiRelatedContent,
 	parseMapiRelatedContent,
 	getFormat,
 	getContributorImage,
