@@ -22,15 +22,15 @@ const Headline: React.FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 
 	if (format.display === ArticleDisplay.Immersive) {
-
-			return (
+		return (
 			<WithAgeWarning
 				tags={item.tags}
 				publishDate={item.publishDate}
 				format={getFormat(item)}
 			>
 				<ImmersiveHeadline headline={item.headline} format={format} />
-			</WithAgeWarning>);
+			</WithAgeWarning>
+		);
 	}
 
 	if (format.theme === ArticleSpecial.Labs) {
@@ -40,19 +40,22 @@ const Headline: React.FC<Props> = ({ item }) => {
 				publishDate={item.publishDate}
 				format={getFormat(item)}
 			>
-			<LabsHeadline item={item} />
-			</WithAgeWarning>);
+				<LabsHeadline item={item} />
+			</WithAgeWarning>
+		);
 	}
 
 	switch (format.design) {
 		case ArticleDesign.Feature:
-			return(<WithAgeWarning
+			return (
+				<WithAgeWarning
 					tags={item.tags}
 					publishDate={item.publishDate}
 					format={getFormat(item)}
 				>
 					<FeatureHeadline item={item} />
-				</WithAgeWarning>);
+				</WithAgeWarning>
+			);
 		case ArticleDesign.Editorial:
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
@@ -63,7 +66,8 @@ const Headline: React.FC<Props> = ({ item }) => {
 					format={getFormat(item)}
 				>
 					<CommentHeadline item={item} />
-				</WithAgeWarning>);
+				</WithAgeWarning>
+			);
 
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
@@ -74,7 +78,8 @@ const Headline: React.FC<Props> = ({ item }) => {
 					format={getFormat(item)}
 				>
 					<MediaHeadline item={item} />
-				</WithAgeWarning>);
+				</WithAgeWarning>
+			);
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return (
@@ -84,16 +89,18 @@ const Headline: React.FC<Props> = ({ item }) => {
 					format={getFormat(item)}
 				>
 					<BlogHeadline item={item} />
-				</WithAgeWarning>);
+				</WithAgeWarning>
+			);
 		case ArticleDesign.Interview:
 			return (
 				<WithAgeWarning
-				tags={item.tags}
-				publishDate={item.publishDate}
-				format={getFormat(item)}
+					tags={item.tags}
+					publishDate={item.publishDate}
+					format={getFormat(item)}
 				>
 					<InterviewHeadline item={item} />
-				</WithAgeWarning>);
+				</WithAgeWarning>
+			);
 		case ArticleDesign.Review:
 			return (
 				<WithAgeWarning
@@ -102,7 +109,8 @@ const Headline: React.FC<Props> = ({ item }) => {
 					format={getFormat(item)}
 				>
 					<ReviewHeadline item={item} />
-				</WithAgeWarning>);
+				</WithAgeWarning>
+			);
 		case ArticleDesign.Gallery:
 			return (
 				<WithAgeWarning
@@ -111,7 +119,8 @@ const Headline: React.FC<Props> = ({ item }) => {
 					format={getFormat(item)}
 				>
 					<GalleryHeadline headline={item.headline} format={format} />
-				</WithAgeWarning>);
+				</WithAgeWarning>
+			);
 		default:
 			return (
 				<WithAgeWarning
