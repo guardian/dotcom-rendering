@@ -1,6 +1,6 @@
-import React from 'react';
+type Props = { o: any };
 
-export const JsonScript: React.FC<{ o: any }> = ({ o }) => {
+export const JsonScript = ({ o }: Props) => {
 	const JSONString: string = JSON.stringify(o);
 	return (
 		<script

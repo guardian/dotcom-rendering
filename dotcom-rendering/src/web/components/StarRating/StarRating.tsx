@@ -36,10 +36,12 @@ const determineSize = (size: RatingSizeType) => {
 	}
 };
 
-export const StarRating: React.FC<{
+type Props = {
 	rating: number;
 	size: RatingSizeType;
-}> = ({ rating, size }) => (
+};
+
+export const StarRating = ({ rating, size }: Props) => (
 	<div css={determineSize(size)}>
 		<div css={starWrapper}>
 			<Star starId={`${size}1`} isEmpty={rating < 1} />

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { CommonEndOfArticleComponentProps } from '@guardian/braze-components/end-of-article';
+import type { BrazeEndOfArticleComponent } from '@guardian/braze-components/end-of-article';
 import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
@@ -75,7 +75,7 @@ export const canShowBrazeEpic = async (
 type InnerProps = {
 	meta: Meta;
 	countryCode: string;
-	BrazeComponent: React.FC<CommonEndOfArticleComponentProps>;
+	BrazeComponent: typeof BrazeEndOfArticleComponent;
 	idApiUrl: string;
 };
 
@@ -145,7 +145,7 @@ const BrazeEpicWithSatisfiedDependencies = ({
 
 export const MaybeBrazeEpic = ({ meta, countryCode, idApiUrl }: EpicConfig) => {
 	const [BrazeComponent, setBrazeComponent] =
-		useState<React.FC<CommonEndOfArticleComponentProps>>();
+		useState<typeof BrazeEndOfArticleComponent>();
 
 	useEffect(() => {
 		import(

@@ -10,7 +10,6 @@ import {
 import { Standard } from '../../../fixtures/generated/articles/Standard';
 import { extractNAV } from '../../model/extract-nav';
 import { editionList } from '../lib/edition';
-
 import { Footer } from './Footer';
 import { Section } from './Section';
 

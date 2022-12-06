@@ -1,4 +1,4 @@
-import type { CommonEndOfArticleComponentProps as BrazeEpicProps } from '@guardian/braze-components';
+import type { BrazeEndOfArticleComponent } from '@guardian/braze-components';
 import type { ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 
@@ -17,7 +17,7 @@ export const BrazeEpicComponent = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
-		useState<React.FC<BrazeEpicProps>>();
+		useState<typeof BrazeEndOfArticleComponent>();
 
 	useEffect(() => {
 		import('@guardian/braze-components')
@@ -95,7 +95,7 @@ export const BrazeEpicWithReminderComponent = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
-		useState<React.FC<BrazeEpicProps>>();
+		useState<typeof BrazeEndOfArticleComponent>();
 
 	useEffect(() => {
 		import('@guardian/braze-components')
@@ -173,7 +173,7 @@ export const BrazeEpicSpecialHeaderComponent = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
-		useState<React.FC<BrazeEpicProps>>();
+		useState<typeof BrazeEndOfArticleComponent>();
 
 	useEffect(() => {
 		import('@guardian/braze-components')
@@ -249,7 +249,7 @@ export const BrazeUKNewsletterEpicComponent = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
-		useState<React.FC<BrazeEpicProps>>();
+		useState<typeof BrazeEndOfArticleComponent>();
 
 	useEffect(() => {
 		import('@guardian/braze-components')
@@ -314,7 +314,7 @@ export const BrazeUSNewsletterEpicComponent = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
-		useState<React.FC<BrazeEpicProps>>();
+		useState<typeof BrazeEndOfArticleComponent>();
 
 	useEffect(() => {
 		import('@guardian/braze-components')
@@ -379,7 +379,7 @@ export const BrazeAUNewsletterEpicComponent = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
-		useState<React.FC<BrazeEpicProps>>();
+		useState<typeof BrazeEndOfArticleComponent>();
 
 	useEffect(() => {
 		import('@guardian/braze-components')
@@ -444,7 +444,7 @@ export const BrazeDownToEarthNewsletterEpicComponent = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
-		useState<React.FC<BrazeEpicProps>>();
+		useState<typeof BrazeEndOfArticleComponent>();
 
 	useEffect(() => {
 		import('@guardian/braze-components')

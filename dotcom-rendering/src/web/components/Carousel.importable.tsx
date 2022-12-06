@@ -343,7 +343,7 @@ type CarouselCardProps = {
 	branding?: Branding;
 };
 
-const CarouselCard: React.FC<CarouselCardProps> = ({
+const CarouselCard = ({
 	format,
 	linkTo,
 	imageUrl,
@@ -394,14 +394,14 @@ type HeaderAndNavProps = {
 	goToIndex: (newIndex: number) => void;
 };
 
-const HeaderAndNav: React.FC<HeaderAndNavProps> = ({
+const HeaderAndNav = ({
 	heading,
 	trails,
 	palette,
 	index,
 	isCuratedContent,
 	goToIndex,
-}) => (
+}: HeaderAndNavProps) => (
 	<div>
 		<Title
 			title={heading}

@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { brandAlt } from '@guardian/source-foundations';
-import React from 'react';
 import { Star } from '../../static/icons/Star';
 
 const ratingsWrapper = css`
@@ -24,10 +23,12 @@ const smallSize = css`
 	}
 `;
 
-export const StarRating: React.FC<{
+type Props = {
 	rating: number;
 	size: string;
-}> = ({ rating, size }) => {
+};
+
+export const StarRating = ({ rating, size }: Props) => {
 	const sizeClass = size === 'large' ? largeSize : smallSize;
 	const stars = (n: number) => {
 		return Array(5)

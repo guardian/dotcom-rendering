@@ -37,10 +37,12 @@ const brandingLogoStyle = css`
 	padding: 10px 0;
 `;
 
-export const Branding: React.FC<{
+type BrandingProps = {
 	branding: BrandingType;
 	pillar: ArticleTheme;
-}> = ({ branding, pillar }) => {
+};
+
+export const Branding = ({ branding, pillar }: BrandingProps) => {
 	const { logo, sponsorName } = branding;
 
 	return (
@@ -65,10 +67,15 @@ export const Branding: React.FC<{
 	);
 };
 
-export const BrandingRegionContainer: React.FC<{
+type BrandingRegionContainerProps = {
 	children: (branding: BrandingType) => React.ReactNode;
 	commercialProperties: CommercialProperties;
-}> = ({ children, commercialProperties }) => (
+};
+
+export const BrandingRegionContainer = ({
+	children,
+	commercialProperties,
+}: BrandingRegionContainerProps) => (
 	<>
 		{Object.keys(commercialProperties)
 			.filter(isEditionId)

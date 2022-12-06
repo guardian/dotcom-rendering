@@ -8,9 +8,11 @@ import type { Body } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
 import { parse } from 'client/parser';
 import { EmbedKind } from 'embed';
+import { ImageSubtype } from 'image/image';
 import type { Standard } from 'item';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
+import { Optional } from 'optional';
 import { Result } from 'result';
 
 const parser = new DOMParser();
@@ -42,6 +44,7 @@ const newsletterMainMedia: Option<MainMedia> = {
 				kind: OptionKind.None,
 			},
 			role: ArticleElementRole.Standard,
+			imageSubtype: Optional.some(ImageSubtype.Jpeg),
 		},
 	},
 };

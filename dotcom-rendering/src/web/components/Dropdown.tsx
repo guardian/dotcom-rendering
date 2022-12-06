@@ -16,6 +16,8 @@ import {
 import { useEffect, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { linkNotificationCount } from '../lib/linkNotificationCount';
+import type { Notification } from '../lib/notification';
+import { useIsInView } from '../lib/useIsInView';
 
 export interface DropdownLinkType {
 	id: string;
@@ -23,7 +25,7 @@ export interface DropdownLinkType {
 	title: string;
 	isActive?: boolean;
 	dataLinkName: string;
-	notifications?: string[];
+	notifications?: Notification[];
 }
 
 interface Props {
@@ -219,6 +221,73 @@ const NotificationBadge = ({ diameter }: { diameter: number }) => {
 	);
 };
 
+type NotificationMessageProps = {
+	notification: Notification;
+};
+const NotificationMessage = ({ notification }: NotificationMessageProps) => {
+	const [hasBeenSeen, setNode] = useIsInView({
+		debounce: true,
+	});
+
+	const { message, logImpression } = notification;
+	useEffect(() => {
+		if (hasBeenSeen) {
+			logImpression?.();
+		}
+		// I want this useEffect to fire exactly once when hasBeenSeen becomes
+		// true. Ommitting logImpression from the dependency array so I don't
+		// have to worry about whether logImpression is stable (if it isn't we'd
+		// be in danger of logging multiple impressions of the same
+		// notification)
+		// eslint-disable-next-line react-hooks/exhaustive-deps -- See above comment
+	}, [hasBeenSeen]);
+
+	return (
+		<div css={notificationTextStyles} ref={setNode}>
+			{message}
+		</div>
+	);
+};
+
+type DropdownLinkProps = {
+	link: DropdownLinkType;
+	index: number;
+};
+const DropdownLink = ({ link, index }: DropdownLinkProps) => {
+	return (
+		<li css={liStyles} key={link.title}>
+			<a
+				href={link.url}
+				css={[
+					linkStyles,
+					!!link.isActive && linkActive,
+					index === 0 && linkFirst,
+				]}
+				data-link-name={link.dataLinkName}
+			>
+				{link.title}
+				{link.notifications?.map((notification) => (
+					<NotificationMessage
+						notification={notification}
+						key={notification.id}
+					/>
+				))}
+			</a>
+
+			{!!link.notifications?.length && (
+				<div
+					css={css`
+						margin-top: 12px;
+						margin-right: 8px;
+					`}
+				>
+					<NotificationBadge diameter={22} />
+				</div>
+			)}
+		</li>
+	);
+};
+
 export const Dropdown = ({
 	id,
 	label,
@@ -350,43 +419,7 @@ export const Dropdown = ({
 								data-cy="dropdown-options"
 							>
 								{links.map((l, index) => (
-									<li css={liStyles} key={l.title}>
-										<a
-											href={l.url}
-											css={[
-												linkStyles,
-												!!l.isActive && linkActive,
-												index === 0 && linkFirst,
-											]}
-											data-link-name={l.dataLinkName}
-										>
-											{l.title}
-											{l.notifications?.map(
-												(notification) => (
-													<div
-														css={
-															notificationTextStyles
-														}
-													>
-														{notification}
-													</div>
-												),
-											)}
-										</a>
-
-										{!!l.notifications?.length && (
-											<div
-												css={css`
-													margin-top: 12px;
-													margin-right: 8px;
-												`}
-											>
-												<NotificationBadge
-													diameter={22}
-												/>
-											</div>
-										)}
-									</li>
+									<DropdownLink link={l} index={index} />
 								))}
 							</ul>
 						)}

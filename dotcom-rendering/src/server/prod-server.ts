@@ -116,7 +116,10 @@ export const prodServer = (): void => {
 		}
 	});
 
-	const handleError: ErrorRequestHandler = (e, _, res) => {
+	// All params to error handlers must be declared for express to identify them as error middleware
+	// https://expressjs.com/en/api.html#:~:text=Error%2Dhandling%20middleware%20always,see%3A%20Error%20handling
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars -- all params to error handlers must be declared
+	const handleError: ErrorRequestHandler = (e, _req, res, _next) => {
 		const message =
 			e instanceof Error ? e.stack ?? 'Unknown stack' : 'Unknown error';
 		res.status(500).send(`<pre>${message}</pre>`);

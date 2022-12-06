@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { neutral, text, textSans } from '@guardian/source-foundations';
-import React from 'react';
 import {
 	neutralBorder,
 	pillarMap,
@@ -67,14 +66,20 @@ const twitterIcon = css`
 	width: 12px;
 `;
 
-const WebPublicationDate: React.FC<{
+type WebPublicationDateProps = {
 	date: string;
-}> = ({ date }) => <div css={metaStyle}>{date}</div>;
+};
 
-const AgeWarning: React.FC<{
+const WebPublicationDate = ({ date }: WebPublicationDateProps) => (
+	<div css={metaStyle}>{date}</div>
+);
+
+type AgeWarningProps = {
 	warning?: string;
 	pillar: ArticleTheme;
-}> = ({ warning, pillar }) => {
+};
+
+const AgeWarning = ({ warning, pillar }: AgeWarningProps) => {
 	if (!warning) {
 		return null;
 	}
@@ -86,9 +91,11 @@ const AgeWarning: React.FC<{
 	);
 };
 
-const TwitterHandle: React.FC<{
+type TwitterHandleProps = {
 	handle?: string;
-}> = ({ handle }) => {
+};
+
+const TwitterHandle = ({ handle }: TwitterHandleProps) => {
 	if (!handle) {
 		return null;
 	}
@@ -100,19 +107,21 @@ const TwitterHandle: React.FC<{
 	);
 };
 
-export const TopMetaExtras: React.FC<{
+type TopMetaExtrasProps = {
 	sharingUrls: SharingURLs;
 	pillar: ArticleTheme;
 	webPublicationDate: string;
 	ageWarning?: string;
 	twitterHandle?: string;
-}> = ({
+};
+
+export const TopMetaExtras = ({
 	sharingUrls,
 	pillar,
 	webPublicationDate,
 	ageWarning,
 	twitterHandle,
-}) => (
+}: TopMetaExtrasProps) => (
 	<div css={metaExtras}>
 		<TwitterHandle handle={twitterHandle} />
 		<WebPublicationDate date={webPublicationDate} />

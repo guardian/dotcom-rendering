@@ -1,4 +1,6 @@
 import type { Body } from 'bodyElement';
+import { ImageSubtype } from 'image/image';
+import { Optional } from 'optional';
 import { Result } from 'result';
 
 const captionFragment = (headline: string, body: string): DocumentFragment => {
@@ -37,6 +39,7 @@ export const galleryBody: Body = [
 			value: '<strong>Washington DC, US</strong> <br><br>Sheila Jackson Lee shows a photograph from the 6 January attack on the US Capitol during a House judiciary subcommittee hearing',
 		},
 		role: 0,
+		imageSubtype: Optional.some(ImageSubtype.Jpeg),
 	}),
 	Result.ok({
 		kind: 1,
@@ -63,6 +66,7 @@ export const galleryBody: Body = [
 			value: '<strong>Prayagraj, India</strong> <br><br>A Hindu holy man lies in front of an image of the goddess of learning at Sangam, the sacred confluence of the Ganga, Yamuna and Saraswati rivers',
 		},
 		role: 0,
+		imageSubtype: Optional.some(ImageSubtype.Jpeg),
 	}),
 	Result.ok({
 		kind: 1,
@@ -92,6 +96,7 @@ export const galleryBody: Body = [
 			value: '<strong>Hua Hin, Thailand <br><br></strong>A bird flies over the abandoned sculpture of a Buddhist monk south of Bangkok',
 		},
 		role: 0,
+		imageSubtype: Optional.some(ImageSubtype.Jpeg),
 	}),
 	Result.ok({
 		kind: 1,
@@ -121,5 +126,6 @@ export const galleryBody: Body = [
 			value: '<strong>Mulhouse, France</strong> <br><br>A polar bear cub takes its first steps outside in an enclosure at the zoological and botanical park',
 		},
 		role: 0,
+		imageSubtype: Optional.some(ImageSubtype.Jpeg),
 	}),
 ];
