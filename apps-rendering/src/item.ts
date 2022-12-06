@@ -307,7 +307,7 @@ const itemFields = (
 		branding: getBranding(request),
 		internalShortId: fromNullable(content.fields?.internalShortId),
 		commentCount: fromNullable(commentCount),
-		relatedContent: Optional.fromNullable(onwardsContent).flatMap(
+		relatedContent: Optional.fromNullable(onwardsContent).map(
 			parseMapiOnwardsContent(context),
 		),
 		logo: paidContentLogo(content.tags),

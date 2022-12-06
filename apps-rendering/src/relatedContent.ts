@@ -180,70 +180,67 @@ const getMediaDuration = (content: Content): Optional<number> => {
 
 const parseMapiOnwardsContent =
 	(context: Context) =>
-	(onwardsContent: ARModelsOnwardsContent): Optional<OnwardsContent> => {
-		return Optional.some({
-			category: onwardsContent.category,
-			content: onwardsContent.content.map((content) => {
-				const { tags } = content;
-				if (isFeature(content)) {
-					return {
-						...onwardsArticleFields(context, content),
-						design: ArticleDesign.Feature,
-					};
-				} else if (isLive(tags) && content.fields?.liveBloggingNow) {
-					return {
-						...onwardsArticleFields(context, content),
-						design: ArticleDesign.LiveBlog,
-					};
-				} else if (isReview(tags)) {
-					return {
-						...onwardsArticleFields(context, content),
-						design: ArticleDesign.Review,
-						starRating:
-							content.fields?.starRating?.toString() ?? '',
-					};
-				} else if (isAnalysis(content)) {
-					return {
-						...onwardsArticleFields(context, content),
-						design: ArticleDesign.Analysis,
-					};
-				} else if (isComment(tags) || isLetter(tags)) {
-					return {
-						...onwardsArticleFields(context, content),
-						design: ArticleDesign.Comment,
-					};
-				} else if (isAudio(tags)) {
-					return {
-						...onwardsArticleFields(context, content),
-						design: ArticleDesign.Audio,
-						mediaDuration: getMediaDuration(content),
-					};
-				} else if (isVideo(tags)) {
-					return {
-						...onwardsArticleFields(context, content),
-						design: ArticleDesign.Video,
-						mediaDuration: getMediaDuration(content),
-					};
-				} else if (isGallery(tags)) {
-					return {
-						...onwardsArticleFields(context, content),
-						design: ArticleDesign.Gallery,
-					};
-				} else if (isLabs(tags)) {
-					return {
-						...onwardsArticleFields(context, content),
-						design: ArticleDesign.Standard,
-						theme: ArticleSpecial.Labs,
-					};
-				} else {
-					return {
-						...onwardsArticleFields(context, content),
-						design: ArticleDesign.Standard,
-					};
-				}
-			}),
-		});
-	};
+	(onwardsContent: ARModelsOnwardsContent): OnwardsContent => ({
+		category: onwardsContent.category,
+		content: onwardsContent.content.map((content) => {
+			const { tags } = content;
+			if (isFeature(content)) {
+				return {
+					...onwardsArticleFields(context, content),
+					design: ArticleDesign.Feature,
+				};
+			} else if (isLive(tags) && content.fields?.liveBloggingNow) {
+				return {
+					...onwardsArticleFields(context, content),
+					design: ArticleDesign.LiveBlog,
+				};
+			} else if (isReview(tags)) {
+				return {
+					...onwardsArticleFields(context, content),
+					design: ArticleDesign.Review,
+					starRating: content.fields?.starRating?.toString() ?? '',
+				};
+			} else if (isAnalysis(content)) {
+				return {
+					...onwardsArticleFields(context, content),
+					design: ArticleDesign.Analysis,
+				};
+			} else if (isComment(tags) || isLetter(tags)) {
+				return {
+					...onwardsArticleFields(context, content),
+					design: ArticleDesign.Comment,
+				};
+			} else if (isAudio(tags)) {
+				return {
+					...onwardsArticleFields(context, content),
+					design: ArticleDesign.Audio,
+					mediaDuration: getMediaDuration(content),
+				};
+			} else if (isVideo(tags)) {
+				return {
+					...onwardsArticleFields(context, content),
+					design: ArticleDesign.Video,
+					mediaDuration: getMediaDuration(content),
+				};
+			} else if (isGallery(tags)) {
+				return {
+					...onwardsArticleFields(context, content),
+					design: ArticleDesign.Gallery,
+				};
+			} else if (isLabs(tags)) {
+				return {
+					...onwardsArticleFields(context, content),
+					design: ArticleDesign.Standard,
+					theme: ArticleSpecial.Labs,
+				};
+			} else {
+				return {
+					...onwardsArticleFields(context, content),
+					design: ArticleDesign.Standard,
+				};
+			}
+		}),
+	});
 
 const parseCapiOnwardsContent = (
 	content: Content[],
