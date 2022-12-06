@@ -32,7 +32,7 @@ import { logger } from 'logger';
 import { MainMediaKind } from 'mainMedia';
 import type { Response } from 'node-fetch';
 import fetch from 'node-fetch';
-import { parseCapiOnwardsContent } from 'relatedContent';
+import { parseCapiOnwardsContent } from 'onwardsContent';
 import { Result } from 'result';
 import {
 	capiContentDecoder,

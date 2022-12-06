@@ -29,8 +29,8 @@ import type { Contributor } from 'contributor';
 import { formatSeconds, makeRelativeDate } from 'date';
 import { maybeRender, pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
-import type { OnwardsArticle } from 'relatedContent';
-import { getFormat } from 'relatedContent';
+import type { OnwardsArticle } from 'onwardsContent';
+import { getFormat } from 'onwardsContent';
 import { darkModeCss } from 'styles';
 
 interface Props {

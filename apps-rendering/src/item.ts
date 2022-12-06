@@ -47,8 +47,8 @@ import { fromBodyElements } from 'outline';
 import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
-import type { OnwardsContent } from 'relatedContent';
-import { parseMapiOnwardsContent } from 'relatedContent';
+import type { OnwardsContent } from 'onwardsContent';
+import { parseMapiOnwardsContent } from 'onwardsContent';
 import { Result } from 'result';
 
 // ----- Item Type ----- //

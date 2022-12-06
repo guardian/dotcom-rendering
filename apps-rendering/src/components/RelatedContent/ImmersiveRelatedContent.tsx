@@ -9,7 +9,7 @@ import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
 import { Optional } from 'optional';
 import type { FC } from 'react';
-import type { OnwardsContent } from 'relatedContent';
+import type { OnwardsContent } from 'onwardsContent';
 import { darkModeCss } from 'styles';
 import DefaultRelatedContent, {
 	defaultStyles,

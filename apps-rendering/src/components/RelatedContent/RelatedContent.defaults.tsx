@@ -15,8 +15,8 @@ import BylineCard from 'components/BylineCard';
 import Card from 'components/Card';
 import { Optional } from 'optional';
 import type { FC } from 'react';
-import type { OnwardsContent } from 'relatedContent';
-import { getCategoryTitle, getContributorImage } from 'relatedContent';
+import type { OnwardsContent } from 'onwardsContent';
+import { getCategoryTitle, getContributorImage } from 'onwardsContent';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

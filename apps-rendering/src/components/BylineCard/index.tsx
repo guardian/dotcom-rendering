@@ -19,8 +19,8 @@ import { map, OptionKind, withDefault } from '@guardian/types';
 import { makeRelativeDate } from 'date';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
-import type { OnwardsArticle } from 'relatedContent';
-import { getContributorImage, getFormat } from 'relatedContent';
+import type { OnwardsArticle } from 'onwardsContent';
+import { getContributorImage, getFormat } from 'onwardsContent';
 import { darkModeCss } from 'styles';
 
 interface Props {

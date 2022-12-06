@@ -5,19 +5,9 @@ import {
 	getCategoryTitle,
 	OnwardsContent,
 	parseMapiOnwardsContent,
-} from 'relatedContent';
+} from 'onwardsContent';
 import { OnwardsContent as ARModelsOnwardsContent } from '@guardian/apps-rendering-api-models/onwardsContent';
 import { Int64 } from 'thrift';
-// import { ElementType } from '@guardian/content-api-models/v1/elementType';
-// import { AssetType } from '@guardian/content-api-models/v1/assetType';
-// import { Block } from '@guardian/content-api-models/v1/block';
-// import { Blocks } from '@guardian/content-api-models/v1/blocks';
-// import { Asset } from '@guardian/content-api-models/v1/asset';
-// import { ImageElementFields } from '@guardian/content-api-models/v1/imageElementFields';
-// import { AssetFields } from '@guardian/content-api-models/v1/assetFields';
-// import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItemType';
-// import { TagType } from '@guardian/content-api-models/v1/tagType';
-// import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { OnwardsContentCategory } from '@guardian/apps-rendering-api-models/onwardsContentCategory';
 import { none, some } from '@guardian/types';
 import {
@@ -29,13 +19,7 @@ import {
 import { Context } from 'parserContext';
 import { JSDOM } from 'jsdom';
 
-// let defaultBlock: Block;
-// let defaultBlocks: Blocks;
-// let imageAsset: Asset;
-// let elementImageTypeData: ImageElementFields;
-// let imageAssetTypeData: AssetFields;
 let defaultContent: Content;
-// let imageElement: BlockElement;
 
 const createDefaultContent = (contentId: string = 'contentId') => {
 	return {

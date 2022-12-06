@@ -16,8 +16,8 @@ import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import { Optional } from 'optional';
 import type { FC } from 'react';
-import type { OnwardsContent } from 'relatedContent';
-import { getCategoryTitle, getFormat } from 'relatedContent';
+import type { OnwardsContent } from 'onwardsContent';
+import { getCategoryTitle, getFormat } from 'onwardsContent';
 import { darkModeCss } from 'styles';
 import {
 	defaultHeadingStyles,
