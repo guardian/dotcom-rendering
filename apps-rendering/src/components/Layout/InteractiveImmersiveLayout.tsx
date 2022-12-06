@@ -94,7 +94,7 @@ const InteractiveImmersiveLayout: FC<Props> = ({ item, children }) => {
 				</section>
 			</article>
 			<section css={onwardStyles}>
-				<RelatedContent content={item.relatedContent} />
+				<RelatedContent content={item.onwardsContent} />
 			</section>
 			<Footer isCcpa={false} format={item} />
 		</main>

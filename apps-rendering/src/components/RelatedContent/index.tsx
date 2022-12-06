@@ -22,7 +22,7 @@ const RelatedContent: FC<Props> = ({ item }) => {
 	if (format.display === ArticleDisplay.Immersive) {
 		return (
 			<ImmersiveRelatedContent
-				content={item.relatedContent}
+				content={item.onwardsContent}
 				format={format}
 			/>
 		);
@@ -32,14 +32,14 @@ const RelatedContent: FC<Props> = ({ item }) => {
 		case ArticleDesign.Gallery:
 			return (
 				<GalleryRelatedContent
-					onwardsContent={item.relatedContent}
+					onwardsContent={item.onwardsContent}
 					format={format}
 				/>
 			);
 		default:
 			return (
 				<DefaultRelatedContent
-					content={item.relatedContent}
+					content={item.onwardsContent}
 					css={defaultStyles}
 				/>
 			);
