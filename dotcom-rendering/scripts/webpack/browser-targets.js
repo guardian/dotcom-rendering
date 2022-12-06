@@ -1,10 +1,19 @@
+/**
+ * This is a helper file for SWC to
+ * 1) derive browser targets from @guardian/browserslist-config
+ * 2) upgrade any unsupported browsers as described below.
+ */
 const path = require('path');
 const browserslist = require('browserslist');
 const getTargetsFromBrowsersList =
 	require('@babel/helper-compilation-targets').default;
 
 /**
- * We use the Browserslists extends syntax e.g.:
+ * An explanation in case you see the following build error:
+ *
+ * Error: Cannot find module '@guardian/browserslist-config'
+ *
+ * We use the Browserslists extends syntax:
  *
  * `extends @guardian/browserslist-config`
  *
@@ -12,18 +21,15 @@ const getTargetsFromBrowsersList =
  *
  * https://github.com/browserslist/browserslist/blob/74dbf959874e3c05adec93adab98832db35cb66b/node.js#L197-L200
  *
- * However when run from Storybook this working directory will be the root storybooks/ folder.
+ * @guardian/browserslist-config is not hoisted so when webpack runs the working directory must be the local workspace:
  *
- * @guardian/browserslist-config is not hoisted so Browserslist cannot resolve the stats file
- *
- * So we temporarily force the working directory to be the local workspace:
  * 'dotcom-rendering/dotcom-rendering'
- * and then restore the old working directory once Browserslist has loaded
+ *
+ * This is primarily a concern for tools like Storybook that may run webpack from a different directory.
+ *
+ * Such tools should set the working directory to the local workspace - as is currently the case.
  */
-const prevWorkingDirectory = process.cwd();
-process.chdir(path.resolve(__dirname, '../..'));
 const browsers = browserslist('extends @guardian/browserslist-config');
-process.chdir(prevWorkingDirectory);
 
 /**
  * Transform a list of browsers to targets
@@ -58,7 +64,8 @@ const rawTargets = getTargetsFromBrowsersList({ browsers });
  *
  * https://caniuse.com/es6-module-dynamic-import
  *
- * So we upgrade to the next versions that do support dynamic imports:
+ * So if unsuported versions are encountered we upgrade to the next versions that
+ * do support dynamic imports i.e.:
  *
  * ios 11 and safari 11.1.0
  *
