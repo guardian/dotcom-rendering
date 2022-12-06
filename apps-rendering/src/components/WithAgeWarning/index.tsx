@@ -1,18 +1,13 @@
-import type { SerializedStyles } from '@emotion/react';
-import { css } from '@emotion/react';
-import { background } from '@guardian/common-rendering/src/editorialPalette';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
-import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import { AgeWarning } from 'components/AgeWarning';
 import { isComment, isNews } from 'item';
-import { articleWidthStyles, darkModeCss } from 'styles';
+import { articleWidthStyles } from 'styles';
 
 interface WithAgeWarningProps {
 	tags: Tag[];
 	publishDate: Option<Date>;
-	format: ArticleFormat;
 	children: React.ReactNode;
 }
 
@@ -26,7 +21,7 @@ const getAgeWarning = (
 
 	// Only show an age warning for news or opinion pieces
 	if (isNewsArticle || isOpinion) {
-		const warnLimitDays = 1;
+		const warnLimitDays = 30;
 		const currentDate = new Date();
 		const dateThreshold = new Date();
 
@@ -54,21 +49,13 @@ const getAgeWarning = (
 			}
 		}
 	}
-	return message;
+
+	return message; //'1 year old';
 };
 
-const backgroundStyles = (format: ArticleFormat): SerializedStyles => css`
-	background-color: ${background.articleContent(format)};
-
-	${darkModeCss`
-        background-color: ${background.articleContentDark(format)}
-    `}
-`;
-
-export const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
+const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
 	tags,
 	publishDate,
-	format,
 	children,
 }: WithAgeWarningProps) => {
 	if (publishDate.kind === OptionKind.Some) {
@@ -77,7 +64,7 @@ export const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
 		if (age) {
 			return (
 				<>
-					<div css={[backgroundStyles(format), articleWidthStyles]}>
+					<div css={articleWidthStyles}>
 						<AgeWarning age={age} />
 					</div>
 					{children}
@@ -91,3 +78,5 @@ export const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
 
 	return <>{children}</>;
 };
+
+export { WithAgeWarning, getAgeWarning };
