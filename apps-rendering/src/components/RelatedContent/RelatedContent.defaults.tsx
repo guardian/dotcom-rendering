@@ -16,8 +16,8 @@ import BylineCard from 'components/BylineCard';
 import Card from 'components/Card';
 import { pipe } from 'lib';
 import type { FC } from 'react';
-import { getCategoryTitle, RelatedContent } from 'relatedContent';
-import { getContributorImage } from 'relatedContent';
+import type { RelatedContent } from 'relatedContent';
+import { getCategoryTitle, getContributorImage } from 'relatedContent';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //

@@ -16,8 +16,8 @@ import Card from 'components/Card';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
-import { getCategoryTitle, RelatedContent } from 'relatedContent';
-import { getFormat } from 'relatedContent';
+import type { RelatedContent } from 'relatedContent';
+import { getCategoryTitle, getFormat } from 'relatedContent';
 import { darkModeCss } from 'styles';
 import {
 	defaultHeadingStyles,

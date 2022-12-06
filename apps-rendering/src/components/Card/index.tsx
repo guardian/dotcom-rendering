@@ -32,15 +32,15 @@ import type { Option } from '@guardian/types';
 import Img from 'components/ImgAlt';
 import Kicker from 'components/Kicker';
 import { stars } from 'components/StarRating';
+import type { Contributor } from 'contributor';
 import { formatSeconds, makeRelativeDate } from 'date';
 import type { Image } from 'image';
 import { maybeRender, pipe } from 'lib';
+import { Optional } from 'optional';
 import type { FC, ReactElement } from 'react';
 import type { OnwardsContentArticle } from 'relatedContent';
 import { getFormat } from 'relatedContent';
 import { darkModeCss } from 'styles';
-import { Optional } from 'optional';
-import { Contributor } from 'contributor';
 
 interface Props {
 	relatedItem: OnwardsContentArticle;

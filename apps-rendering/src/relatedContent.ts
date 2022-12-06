@@ -4,8 +4,8 @@ import type { Content } from '@guardian/content-api-models/v1/content';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
-import { Option } from '@guardian/types';
 import { andThen, none, OptionKind, some } from '@guardian/types';
+import type { Option } from '@guardian/types';
 import {
 	articleMainImage,
 	articleMainVideo,
