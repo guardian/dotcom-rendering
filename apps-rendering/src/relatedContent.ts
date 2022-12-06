@@ -156,10 +156,9 @@ const getMediaDuration = (content: Content): Optional<number> => {
 			)?.assets[0].typeData?.durationSeconds,
 		);
 	} else if (isVideo(content.tags)) {
-		return articleMainVideo(content)
+		articleMainVideo(content)
 			.flatMap(parseVideo(content.atoms))
-			.map((video) => video.duration)
-			.flatMap(Optional.fromNullable);
+			.map((video) => video.duration);
 	}
 	return Optional.none();
 };
