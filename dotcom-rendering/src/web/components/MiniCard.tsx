@@ -30,11 +30,12 @@ type MiniCardPictureProps = {
 };
 
 const MiniCardPicture = ({ image, alt }: MiniCardPictureProps) => {
-	const sources = generateSources(image, [
+	// Having sizes smaller than 120px is getting to the point of diminishing returns when resizing.
+	// Since this image will always be in a 120px wide container theres also not much reason to have sizes larger than 120px
+	// The different DPI sources generated are still useful to us however.
+	const [source] = generateSources(image, [
 		{ breakpoint: breakpoints.desktop, width: 120 },
 	]);
-
-	const [source] = sources.slice(-1);
 
 	return (
 		<picture>
