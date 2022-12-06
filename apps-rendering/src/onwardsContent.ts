@@ -38,7 +38,7 @@ import { getPillarFromId } from 'articleFormat';
 interface OnwardsArticleFields extends ArticleFormat {
 	headline: string;
 	publishDate: Option<Date>;
-	mainMedia: Option<Image>;
+	mainMedia: Optional<Image>;
 	webUrl: string;
 	contributor: Option<Contributor>;
 }
@@ -135,7 +135,7 @@ const onwardsArticleFields = (
 ): OnwardsArticleFieldsNoDesign => ({
 	headline: content.fields?.headline ?? content.webTitle,
 	publishDate: maybeCapiDate(content.webPublicationDate),
-	mainMedia: parseHeaderImage(context, content).toOption(),
+	mainMedia: parseHeaderImage(context, content),
 	webUrl: content.id,
 	contributor: index(0)(parseContributors(context.salt, content)),
 	display: getDisplay(content),

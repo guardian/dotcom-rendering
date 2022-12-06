@@ -413,9 +413,8 @@ const cardByline = (
 const cardImage = (relatedItem: OnwardsArticle): ReactElement | null => {
 	const format = getFormat(relatedItem);
 
-	return pipe(
-		relatedItem.mainMedia,
-		map((img) => {
+	return relatedItem.mainMedia
+		.map((img) => {
 			return (
 				<div css={[fullWidthImage, imageWrapperStyles]}>
 					<Img
@@ -433,11 +432,10 @@ const cardImage = (relatedItem: OnwardsArticle): ReactElement | null => {
 					/>
 				</div>
 			);
-		}),
-		withDefault<ReactElement | null>(
+		})
+		.withDefault<ReactElement | null>(
 			<div css={[imageWrapperStyles, imageBackground(format)]}></div>,
-		),
-	);
+		);
 };
 
 const Card: FC<Props> = ({ relatedItem, kickerText }) => {

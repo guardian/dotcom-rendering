@@ -18,6 +18,7 @@ import {
 } from '@guardian/libs';
 import { Context } from 'parserContext';
 import { JSDOM } from 'jsdom';
+import { Optional } from 'optional';
 
 let defaultContent: Content;
 
@@ -72,7 +73,7 @@ describe('parseMapiRelatedContent', () => {
 				{
 					headline: 'contentTitle',
 					publishDate: none,
-					mainMedia: none,
+					mainMedia: Optional.none(),
 					webUrl: 'contentId',
 					contributor: none,
 					design: ArticleDesign.Standard,
