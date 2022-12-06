@@ -22,6 +22,7 @@ interface BaseTrailType {
 	branding?: Branding;
 	isSnap?: boolean;
 	snapData?: DCRSnapType;
+	showQuotedHeadline?: boolean;
 }
 
 export interface TrailType extends BaseTrailType {
