@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import { from, until } from '@guardian/source-foundations';
+// this import is just for the decideBreakpointStyles function which is currently a WIP
+// import { from, until } from '@guardian/source-foundations';
 
 type ViewportSize = 'small' | 'medium' | 'large';
 
@@ -20,7 +21,7 @@ type Image = {
  * (e.g. one large image for desktop, or a set of 5 crops for mobile, etc.)
  */
 export type Variant = {
-	viewportSize: 'small' | 'medium' | 'large';
+	viewportSize: ViewportSize;
 	images: Image[];
 };
 
@@ -44,35 +45,36 @@ type Props = {
  * it's necessary).
  * The exact implementation is tbc, but the logic sketched in this function is accounting for the
  * possibility that e.g. variants haven't been provided for all of the possible ViewportSizes.
+ * Not fully fleshed out so commenting it out for now.
  */
-function decideBreakpointStyles(
-	viewportSize: ViewportSize,
-	viewports: ViewportSize[],
-) {
-	switch (viewportSize) {
-		case 'small':
-			if (viewports.includes('medium')) {
-				return `
-					${from['tablet']} {
-						display: none;
-					}
-				`;
-			}
-			if (viewports.includes('large')) {
-				return `
-					${from['desktop']} {
-						display: none;
-					}
-				`;
-			} else {
-				return '';
-			}
-		case 'medium':
-			return 'TODO';
-		case 'large':
-			return 'TODO';
-	}
-}
+// function decideBreakpointStyles(
+// 	viewportSize: ViewportSize,
+// 	viewports: ViewportSize[],
+// ) {
+// 	switch (viewportSize) {
+// 		case 'small':
+// 			if (viewports.includes('medium')) {
+// 				return `
+// 					${from['tablet']} {
+// 						display: none;
+// 					}
+// 				`;
+// 			}
+// 			if (viewports.includes('large')) {
+// 				return `
+// 					${from['desktop']} {
+// 						display: none;
+// 					}
+// 				`;
+// 			} else {
+// 				return '';
+// 			}
+// 		case 'medium':
+// 			return 'TODO';
+// 		case 'large':
+// 			return 'TODO';
+// 	}
+// }
 
 export const Cartoon = ({ cartoon }: Props) => {
 	return (
