@@ -15,7 +15,7 @@ import {
 } from '@guardian/source-foundations';
 import { SvgQuote } from '@guardian/source-react-components';
 import type { Option } from '@guardian/types';
-import { andThen, map, OptionKind, withDefault } from '@guardian/types';
+import { map, OptionKind, withDefault } from '@guardian/types';
 import { makeRelativeDate } from 'date';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
