@@ -8,8 +8,8 @@ import { from, neutral, until } from '@guardian/source-foundations';
 import type { Option } from '@guardian/types';
 import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
-import type { ResizedRelatedContent } from 'item';
 import type { FC } from 'react';
+import { RelatedContent } from 'relatedContent';
 import { darkModeCss } from 'styles';
 import DefaultRelatedContent, {
 	defaultStyles,
@@ -51,7 +51,7 @@ const relatedContentStyles = css`
 `;
 
 type Props = {
-	content: Option<ResizedRelatedContent>;
+	content: Option<RelatedContent>;
 	format: ArticleFormat;
 };
 
