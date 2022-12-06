@@ -277,21 +277,6 @@ NewsletterSignupFallback.story = {
 	name: `${formatToString(newsletterSignUp)} (form component not supported)`,
 };
 
-export const Immersive = (): ReactElement => (
-	<ImmersiveLayout
-		item={{
-			...immersive,
-			edition: Edition.UK,
-		}}
-	>
-		{renderAll(
-			formatFromItem(immersive, none),
-			Result.partition(immersive.body).oks,
-		)}
-	</ImmersiveLayout>
-);
-Immersive.story = { name: formatToString(immersive) };
-
 export const Gallery = (): ReactElement => (
 	<GalleryLayout
 		item={{
