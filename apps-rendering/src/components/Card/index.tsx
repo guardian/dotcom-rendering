@@ -20,23 +20,14 @@ import {
 	SvgQuote,
 	SvgVideo,
 } from '@guardian/source-react-components';
-import {
-	fromNullable,
-	map,
-	none,
-	OptionKind,
-	some,
-	withDefault,
-} from '@guardian/types';
+import { map, none, OptionKind, some, withDefault } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import Img from 'components/ImgAlt';
 import Kicker from 'components/Kicker';
 import { stars } from 'components/StarRating';
 import type { Contributor } from 'contributor';
 import { formatSeconds, makeRelativeDate } from 'date';
-import type { Image } from 'image';
 import { maybeRender, pipe } from 'lib';
-import { Optional } from 'optional';
 import type { FC, ReactElement } from 'react';
 import type { OnwardsArticle } from 'relatedContent';
 import { getFormat } from 'relatedContent';
