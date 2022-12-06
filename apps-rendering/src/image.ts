@@ -119,28 +119,6 @@ const parseImage =
 		});
 	};
 
-const parseCardImage = (
-	image: CardImage | undefined,
-	salt: string,
-): Option<Image> => {
-	if (image === undefined) {
-		return none;
-	}
-
-	return some({
-		src: src(salt, image.url, 500, Dpr.One),
-		...srcsets(image.url, salt),
-		alt: fromNullable(image.altText),
-		width: image.width,
-		height: image.height,
-		caption: none,
-		credit: none,
-		nativeCaption: none,
-		role: ArticleElementRole.Standard,
-		imageSubtype: Optional.none(),
-	});
-};
-
 // ----- Exports ----- //
 
-export { Image, parseImage, parseCardImage, BodyImageProps };
+export { Image, parseImage, BodyImageProps };

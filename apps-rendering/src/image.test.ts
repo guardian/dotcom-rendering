@@ -2,7 +2,7 @@
 
 import { JSDOM } from 'jsdom';
 import type { Image as CardImage } from '@guardian/apps-rendering-api-models/image';
-import { parseCardImage, parseImage, Image } from 'image';
+import { parseImage, Image } from 'image';
 import { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import { ElementType } from '@guardian/content-api-models/v1/elementType';
 import { AssetType } from '@guardian/content-api-models/v1/assetType';
@@ -202,47 +202,5 @@ describe('parseImage', () => {
 
 			expect(parsedImage.role).toEqual(roleTestCase.roleEnum);
 		});
-	});
-});
-
-describe('parseCardImage', () => {
-	beforeEach(() => {
-		context = {
-			docParser: JSDOM.fragment,
-			salt: 'mockSalt',
-		};
-		cardImage = {
-			url: 'https://theguardian.com',
-			height: 20,
-			width: 10,
-			altText: 'someAltText',
-		};
-	});
-
-	test('returns card image', () => {
-		const expected = {
-			src: expectedSrc,
-			srcset: expectedSrcset,
-			dpr2Srcset: expectedDpr2Srcset,
-			alt: some(cardImage.altText),
-			width: cardImage.width,
-			height: cardImage.height,
-			caption: none,
-			credit: none,
-			nativeCaption: none,
-			role: ArticleElementRole.Standard,
-			imageSubtype: Optional.none(),
-		};
-
-		const parsed = withDefault(defaultImage)(
-			parseCardImage(cardImage, context.salt),
-		);
-
-		expect(parsed).toEqual(expected);
-	});
-
-	test('returns none given image is undefined', () => {
-		const parsed = parseCardImage(undefined, context.salt);
-		expect(parsed).toEqual(none);
 	});
 });
