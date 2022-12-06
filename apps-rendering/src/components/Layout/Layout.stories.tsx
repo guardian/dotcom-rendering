@@ -242,14 +242,40 @@ export const DeadBlog = (): ReactElement => (
 DeadBlog.story = { name: formatToString(deadBlog) };
 
 export const NewsletterSignup = (): ReactElement => (
-	<NewsletterSignUpLayout item={newsletterSignUp}>
-		{renderAll(
-			formatFromItem(newsletterSignUp, some(ArticleDisplay.Standard)),
-			Result.partition(newsletterSignUp.body).oks,
-		)}
-	</NewsletterSignUpLayout>
+	<>
+		<style>
+			{`.js-signup-form-container {
+			display:block !important;
+		}`}
+		</style>
+		<NewsletterSignUpLayout item={newsletterSignUp}>
+			{renderAll(
+				formatFromItem(newsletterSignUp, some(ArticleDisplay.Standard)),
+				Result.partition(newsletterSignUp.body).oks,
+			)}
+		</NewsletterSignUpLayout>
+	</>
 );
 NewsletterSignup.story = { name: formatToString(newsletterSignUp) };
+
+export const NewsletterSignupFallback = (): ReactElement => (
+	<>
+		<style>
+			{`.js-signup-form-fallback-container {
+			display:block !important;
+		}`}
+		</style>
+		<NewsletterSignUpLayout item={newsletterSignUp}>
+			{renderAll(
+				formatFromItem(newsletterSignUp, some(ArticleDisplay.Standard)),
+				Result.partition(newsletterSignUp.body).oks,
+			)}
+		</NewsletterSignUpLayout>
+	</>
+);
+NewsletterSignupFallback.story = {
+	name: `${formatToString(newsletterSignUp)} (form component not supported)`,
+};
 
 export const Gallery = (): ReactElement => (
 	<GalleryLayout
