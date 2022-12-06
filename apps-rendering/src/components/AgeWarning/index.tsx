@@ -35,7 +35,7 @@ const ageWarningStyles = (isSmall: boolean): SerializedStyles => css`
 	}
 
 	${darkModeCss`
-		background-color: ${palette.brandAlt[400]};
+		background-color: ${palette.brandAlt[200]};
     `}
 `;
 
