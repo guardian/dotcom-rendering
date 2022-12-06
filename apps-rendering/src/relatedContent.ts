@@ -34,7 +34,7 @@ import type { Context } from 'parserContext';
 import { parseVideo } from 'video';
 import { Asset } from '@guardian/content-api-models/v1/asset';
 
-interface RelatedItemFields extends ArticleFormat {
+interface OnwardsArticleFields extends ArticleFormat {
 	headline: string;
 	publishDate: Option<Date>;
 	mainMedia: Option<Image>;
@@ -42,51 +42,51 @@ interface RelatedItemFields extends ArticleFormat {
 	contributor: Option<Contributor>;
 }
 
-interface FeatureRelatedItem extends RelatedItemFields {
+interface FeatureOnwardsArticle extends OnwardsArticleFields {
 	design: ArticleDesign.Feature;
 }
 
-interface LiveBlogRelatedItem extends RelatedItemFields {
+interface LiveBlogOnwardsArticle extends OnwardsArticleFields {
 	design: ArticleDesign.LiveBlog;
 }
 
-interface DeadBlogRelatedItem extends RelatedItemFields {
+interface DeadBlogOnwardsArticle extends OnwardsArticleFields {
 	design: ArticleDesign.DeadBlog;
 }
 
-interface ReviewRelatedItem extends RelatedItemFields {
+interface ReviewOnwardsArticle extends OnwardsArticleFields {
 	design: ArticleDesign.Review;
 	starRating: string;
 }
 
-interface AnalysisRelatedItem extends RelatedItemFields {
+interface AnalysisOnwardsArticle extends OnwardsArticleFields {
 	design: ArticleDesign.Analysis;
 }
 
-interface CommentRelatedItem extends RelatedItemFields {
+interface CommentOnwardsArticle extends OnwardsArticleFields {
 	design: ArticleDesign.Comment;
 }
 
-interface AudioRelatedItem extends RelatedItemFields {
+interface AudioOnwardsArticle extends OnwardsArticleFields {
 	design: ArticleDesign.Audio;
 	mediaDuration: Optional<number>;
 }
 
-interface VideoRelatedItem extends RelatedItemFields {
+interface VideoOnwardsArticle extends OnwardsArticleFields {
 	design: ArticleDesign.Video;
 	mediaDuration: Optional<number>;
 }
 
-interface GalleryRelatedItem extends RelatedItemFields {
+interface GalleryOnwardsArticle extends OnwardsArticleFields {
 	design: ArticleDesign.Gallery;
 }
 
-interface LabsRelatedItem extends RelatedItemFields {
+interface LabsOnwardsArticle extends OnwardsArticleFields {
 	design: ArticleDesign.Standard;
 	theme: ArticleSpecial.Labs;
 }
 
-interface StandardRelatedItem extends RelatedItemFields {
+interface StandardOnwardsArticle extends OnwardsArticleFields {
 	design: Exclude<
 		ArticleDesign,
 		| ArticleDesign.Feature
@@ -101,18 +101,18 @@ interface StandardRelatedItem extends RelatedItemFields {
 	>;
 }
 
-type OnwardsContentArticle =
-	| FeatureRelatedItem
-	| LiveBlogRelatedItem
-	| DeadBlogRelatedItem
-	| ReviewRelatedItem
-	| AnalysisRelatedItem
-	| CommentRelatedItem
-	| AudioRelatedItem
-	| VideoRelatedItem
-	| GalleryRelatedItem
-	| StandardRelatedItem
-	| LabsRelatedItem;
+type OnwardsArticle =
+	| FeatureOnwardsArticle
+	| LiveBlogOnwardsArticle
+	| DeadBlogOnwardsArticle
+	| ReviewOnwardsArticle
+	| AnalysisOnwardsArticle
+	| CommentOnwardsArticle
+	| AudioOnwardsArticle
+	| VideoOnwardsArticle
+	| GalleryOnwardsArticle
+	| StandardOnwardsArticle
+	| LabsOnwardsArticle;
 
 const parseHeaderImage = (
 	context: Context,
@@ -121,17 +121,17 @@ const parseHeaderImage = (
 	return articleMainImage(content).flatMap(parseImage(context));
 };
 
-type OnwardsContentSection = {
+type OnwardsContent = {
 	category: OnwardsContentCategory;
-	content: OnwardsContentArticle[];
+	content: OnwardsArticle[];
 };
 
-type RelatedItemFieldsNoDesign = Omit<RelatedItemFields, 'design'>;
+type OnwardsArticleFieldsNoDesign = Omit<OnwardsArticleFields, 'design'>;
 
-const relatedContentFields = (
+const onwardsArticleFields = (
 	context: Context,
 	content: Content,
-): RelatedItemFieldsNoDesign => ({
+): OnwardsArticleFieldsNoDesign => ({
 	headline: content.fields?.headline ?? content.webTitle,
 	publishDate: maybeCapiDate(content.webPublicationDate),
 	mainMedia: parseHeaderImage(context, content).toOption(),
@@ -175,74 +175,74 @@ const getMediaDuration = (content: Content): Optional<number> => {
 	return Optional.none();
 };
 
-const parseMapiRelatedContent =
+const parseMapiOnwardsContent =
 	(context: Context) =>
 	(
-		maybeRelatedContent: Option<ARModelsOnwardsContent>,
-	): Option<OnwardsContentSection> => {
-		if (maybeRelatedContent.kind === OptionKind.None) {
+		maybeOnwardsContent: Option<ARModelsOnwardsContent>,
+	): Option<OnwardsContent> => {
+		if (maybeOnwardsContent.kind === OptionKind.None) {
 			return none;
 		}
 
-		const relatedContent = maybeRelatedContent.value;
+		const onwardsContent = maybeOnwardsContent.value;
 
 		return some({
-			category: relatedContent.category,
-			content: relatedContent.content.map((content) => {
+			category: onwardsContent.category,
+			content: onwardsContent.content.map((content) => {
 				const { tags } = content;
 				if (isFeature(content)) {
 					return {
-						...relatedContentFields(context, content),
+						...onwardsArticleFields(context, content),
 						design: ArticleDesign.Feature,
 					};
 				} else if (isLive(tags) && content.fields?.liveBloggingNow) {
 					return {
-						...relatedContentFields(context, content),
+						...onwardsArticleFields(context, content),
 						design: ArticleDesign.LiveBlog,
 					};
 				} else if (isReview(tags)) {
 					return {
-						...relatedContentFields(context, content),
+						...onwardsArticleFields(context, content),
 						design: ArticleDesign.Review,
 						starRating:
 							content.fields?.starRating?.toString() ?? '',
 					};
 				} else if (isAnalysis(content)) {
 					return {
-						...relatedContentFields(context, content),
+						...onwardsArticleFields(context, content),
 						design: ArticleDesign.Analysis,
 					};
 				} else if (isComment(tags) || isLetter(tags)) {
 					return {
-						...relatedContentFields(context, content),
+						...onwardsArticleFields(context, content),
 						design: ArticleDesign.Comment,
 					};
 				} else if (isAudio(tags)) {
 					return {
-						...relatedContentFields(context, content),
+						...onwardsArticleFields(context, content),
 						design: ArticleDesign.Audio,
 						mediaDuration: getMediaDuration(content),
 					};
 				} else if (isVideo(tags)) {
 					return {
-						...relatedContentFields(context, content),
+						...onwardsArticleFields(context, content),
 						design: ArticleDesign.Video,
 						mediaDuration: getMediaDuration(content),
 					};
 				} else if (isGallery(tags)) {
 					return {
-						...relatedContentFields(context, content),
+						...onwardsArticleFields(context, content),
 						design: ArticleDesign.Gallery,
 					};
 				} else if (isLabs(tags)) {
 					return {
-						...relatedContentFields(context, content),
+						...onwardsArticleFields(context, content),
 						design: ArticleDesign.Standard,
 						theme: ArticleSpecial.Labs,
 					};
 				} else {
 					return {
-						...relatedContentFields(context, content),
+						...onwardsArticleFields(context, content),
 						design: ArticleDesign.Standard,
 					};
 				}
@@ -250,7 +250,7 @@ const parseMapiRelatedContent =
 		});
 	};
 
-const parseCapiRelatedContent = (
+const parseCapiOnwardsContent = (
 	content: Content[],
 ): ARModelsOnwardsContent => {
 	return {
@@ -259,7 +259,7 @@ const parseCapiRelatedContent = (
 	};
 };
 
-const getFormat = (onwardsArticle: OnwardsContentArticle): ArticleFormat => ({
+const getFormat = (onwardsArticle: OnwardsArticle): ArticleFormat => ({
 	design: onwardsArticle.design,
 	display: onwardsArticle.display,
 	theme: onwardsArticle.theme,
@@ -283,11 +283,11 @@ const getCategoryTitle = (
 };
 
 export {
-	parseCapiRelatedContent,
-	parseMapiRelatedContent,
+	parseCapiOnwardsContent,
+	parseMapiOnwardsContent,
 	getFormat,
 	getContributorImage,
 	getCategoryTitle,
 };
 
-export type { OnwardsContentSection as RelatedContent, OnwardsContentArticle };
+export type { OnwardsContent, OnwardsArticle };

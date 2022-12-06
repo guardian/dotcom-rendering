@@ -16,7 +16,7 @@ import Card from 'components/Card';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
 import type { FC } from 'react';
-import type { RelatedContent } from 'relatedContent';
+import type { OnwardsContent } from 'relatedContent';
 import { getCategoryTitle, getFormat } from 'relatedContent';
 import { darkModeCss } from 'styles';
 import {
@@ -94,7 +94,7 @@ const headingStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 type Props = {
-	onwardsContent: Option<RelatedContent>;
+	onwardsContent: Option<OnwardsContent>;
 	format: ArticleFormat;
 };
 

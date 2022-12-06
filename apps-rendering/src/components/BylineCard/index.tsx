@@ -19,12 +19,12 @@ import { map, OptionKind, withDefault } from '@guardian/types';
 import { makeRelativeDate } from 'date';
 import { pipe } from 'lib';
 import type { FC, ReactElement } from 'react';
-import type { OnwardsContentArticle } from 'relatedContent';
+import type { OnwardsArticle } from 'relatedContent';
 import { getContributorImage, getFormat } from 'relatedContent';
 import { darkModeCss } from 'styles';
 
 interface Props {
-	relatedItem: OnwardsContentArticle;
+	relatedItem: OnwardsArticle;
 }
 
 const listStyles = (format: ArticleFormat): SerializedStyles => {
@@ -149,7 +149,7 @@ const bylineStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const byline = (
-	relatedItem: OnwardsContentArticle,
+	relatedItem: OnwardsArticle,
 	format: ArticleFormat,
 ): ReactElement | null => {
 	return pipe(
@@ -162,7 +162,7 @@ const byline = (
 };
 
 const cardImage = (
-	relatedItem: OnwardsContentArticle,
+	relatedItem: OnwardsArticle,
 	format: ArticleFormat,
 ): ReactElement | null => {
 	const contributorImage = getContributorImage(relatedItem.contributor);

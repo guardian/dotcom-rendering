@@ -47,8 +47,8 @@ import { fromBodyElements } from 'outline';
 import type { LiveBlogPagedBlocks } from 'pagination';
 import { getPagedBlocks } from 'pagination';
 import type { Context } from 'parserContext';
-import type { RelatedContent } from 'relatedContent';
-import { parseMapiRelatedContent } from 'relatedContent';
+import type { OnwardsContent } from 'relatedContent';
+import { parseMapiOnwardsContent } from 'relatedContent';
 import { Result } from 'result';
 
 // ----- Item Type ----- //
@@ -68,7 +68,7 @@ interface Fields extends ArticleFormat {
 	branding: Option<Branding>;
 	internalShortId: Option<string>;
 	commentCount: Option<number>;
-	relatedContent: Option<RelatedContent>;
+	relatedContent: Option<OnwardsContent>;
 	logo: Option<Logo>;
 	webUrl: string;
 	edition: Edition;
@@ -310,7 +310,7 @@ const itemFields = (
 		relatedContent: pipe(
 			onwardsContent,
 			fromNullable,
-			parseMapiRelatedContent(context),
+			parseMapiOnwardsContent(context),
 		),
 		logo: paidContentLogo(content.tags),
 		webUrl: content.webUrl,

@@ -9,7 +9,7 @@ import type { Option } from '@guardian/types';
 import { grid } from 'grid/grid';
 import LeftCentreBorder from 'grid/LeftCentreBorder';
 import type { FC } from 'react';
-import type { RelatedContent } from 'relatedContent';
+import type { OnwardsContent } from 'relatedContent';
 import { darkModeCss } from 'styles';
 import DefaultRelatedContent, {
 	defaultStyles,
@@ -51,7 +51,7 @@ const relatedContentStyles = css`
 `;
 
 type Props = {
-	content: Option<RelatedContent>;
+	content: Option<OnwardsContent>;
 	format: ArticleFormat;
 };
 

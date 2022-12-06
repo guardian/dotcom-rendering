@@ -38,12 +38,12 @@ import type { Image } from 'image';
 import { maybeRender, pipe } from 'lib';
 import { Optional } from 'optional';
 import type { FC, ReactElement } from 'react';
-import type { OnwardsContentArticle } from 'relatedContent';
+import type { OnwardsArticle } from 'relatedContent';
 import { getFormat } from 'relatedContent';
 import { darkModeCss } from 'styles';
 
 interface Props {
-	relatedItem: OnwardsContentArticle;
+	relatedItem: OnwardsArticle;
 	kickerText: Option<string>;
 }
 
@@ -374,7 +374,7 @@ const bylineStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const durationMedia = (
-	content: OnwardsContentArticle,
+	content: OnwardsArticle,
 	format: ArticleFormat,
 ): ReactElement | null => {
 	if (
@@ -419,7 +419,7 @@ const cardByline = (
 	);
 };
 
-const cardImage = (relatedItem: OnwardsContentArticle): ReactElement | null => {
+const cardImage = (relatedItem: OnwardsArticle): ReactElement | null => {
 	const format = getFormat(relatedItem);
 
 	return pipe(

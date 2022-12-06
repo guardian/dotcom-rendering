@@ -33,7 +33,7 @@ import { logger } from 'logger';
 import { MainMediaKind } from 'mainMedia';
 import type { Response } from 'node-fetch';
 import fetch from 'node-fetch';
-import { parseCapiRelatedContent } from 'relatedContent';
+import { parseCapiOnwardsContent } from 'relatedContent';
 import { Result } from 'result';
 import {
 	capiContentDecoder,
@@ -115,7 +115,7 @@ const parseCapiResponse =
 					return Result.err(500);
 				}
 
-				const relatedContent = parseCapiRelatedContent(
+				const relatedContent = parseCapiOnwardsContent(
 					response.relatedContent,
 				);
 				return Result.ok([response.content, relatedContent]);

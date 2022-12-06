@@ -16,14 +16,14 @@ import BylineCard from 'components/BylineCard';
 import Card from 'components/Card';
 import { pipe } from 'lib';
 import type { FC } from 'react';
-import type { RelatedContent } from 'relatedContent';
+import type { OnwardsContent } from 'relatedContent';
 import { getCategoryTitle, getContributorImage } from 'relatedContent';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
 
 interface Props {
-	content: Option<RelatedContent>;
+	content: Option<OnwardsContent>;
 	css: SerializedStyles;
 	className?: string;
 }
