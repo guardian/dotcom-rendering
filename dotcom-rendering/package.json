@@ -8,7 +8,8 @@
 	"workspaces": {
 		"nohoist": [
 			"html-minifier",
-			"html-minifier/**"
+			"html-minifier/**",
+			"@guardian/braze-components"
 		]
 	},
 	"scripts": {
