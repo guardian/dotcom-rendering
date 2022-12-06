@@ -224,10 +224,29 @@ const getFormat = (onwardsArticle: OnwardsContentArticle): ArticleFormat => ({
 	theme: onwardsArticle.theme,
 });
 
+const getCategoryTitle = (
+	onwardsContentCategory: OnwardsContentCategory,
+): string => {
+	switch (onwardsContentCategory) {
+		case OnwardsContentCategory.GALLERY:
+			return 'More galleries';
+		case OnwardsContentCategory.STORY_PACKAGE:
+			return 'More on this story';
+		case OnwardsContentCategory.PAID:
+		case OnwardsContentCategory.SPORT:
+		case OnwardsContentCategory.RELATED:
+		case OnwardsContentCategory.SERIES:
+		default:
+			return 'Related stories';
+	}
+};
+
 export {
 	parseRelatedContent,
 	parseMapiRelatedContent,
 	getFormat,
 	getContributorImage,
+	getCategoryTitle,
 };
+
 export type { OnwardsContentSection as RelatedContent, OnwardsContentArticle };
