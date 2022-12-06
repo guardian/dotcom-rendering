@@ -416,7 +416,6 @@ const cardImage = (relatedItem: OnwardsArticle): ReactElement | null => {
 	return pipe(
 		relatedItem.mainMedia,
 		map((img) => {
-			console.log(`in comp`, img);
 			return (
 				<div css={[fullWidthImage, imageWrapperStyles]}>
 					<Img
