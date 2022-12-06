@@ -9,10 +9,10 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import React, { useState } from 'react';
+import type { CampaignFieldType } from 'src/types/content';
 import { decidePalette } from '../../../lib/decidePalette';
 import { stringifyFileBase64 } from '../../../lib/stringifyFileBase64';
 import { FieldLabel } from './FieldLabel';
-import { CampaignFieldType } from 'src/types/content';
 
 const errorMessagesStyles = css`
 	padding-top: ${space[2]}px;
@@ -73,7 +73,6 @@ export const FileUpload = ({
 		filepath?.split(/(\\|\/)/g).pop() ?? '';
 
 	const onSelectFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
-		console.log(event.target.files?.[0]);
 		if (event.target.files?.[0]) {
 			setError('');
 			try {
