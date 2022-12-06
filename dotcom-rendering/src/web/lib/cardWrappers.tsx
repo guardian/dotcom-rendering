@@ -124,6 +124,7 @@ export const Card75Media50Right = ({
 			imageSize="large"
 			imagePositionOnMobile="top"
 			headlineSize="large"
+			headlineSizeOnMobile="large"
 		/>
 	);
 };
@@ -158,10 +159,11 @@ export const Card75Media50Left = ({
 					? 'horizontal'
 					: 'vertical'
 			}
-			imagePosition="right"
-			imageSize="large"
+			imagePosition="left"
 			imagePositionOnMobile="top"
+			imageSize="large"
 			headlineSize="large"
+			headlineSizeOnMobile="large"
 		/>
 	);
 };
@@ -188,8 +190,14 @@ export const Card25Media25 = ({
 		<FrontCard
 			trail={trail}
 			supportingContent={trail.supportingContent?.slice(0, 2)}
+			supportingContentAlignment="vertical"
 			containerPalette={containerPalette}
 			showAge={showAge}
+			imagePosition="top"
+			imagePositionOnMobile="left"
+			imageSize="small"
+			headlineSize="medium"
+			headlineSizeOnMobile="medium"
 		/>
 	);
 };
@@ -217,6 +225,11 @@ export const Card25Media25Tall = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			imagePosition="top"
+			imagePositionOnMobile="left"
+			imageSize="small"
+			headlineSize="medium"
+			headlineSizeOnMobile="medium"
 			trailText={
 				trail.supportingContent === undefined ||
 				trail.supportingContent.length === 0
@@ -252,6 +265,8 @@ export const Card50Media50 = ({
 			containerPalette={containerPalette}
 			headlineSize="large"
 			headlineSizeOnMobile="large"
+			imageSize="small"
+			imagePosition="top"
 			imagePositionOnMobile="top"
 			showAge={showAge}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
@@ -287,7 +302,9 @@ export const Card50Media50Tall = ({
 			trailText={trail.trailText}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
 			supportingContentAlignment={'horizontal'}
+			imagePosition="top"
 			imagePositionOnMobile="top"
+			imageSize="small"
 			headlineSize="large"
 			headlineSizeOnMobile="large"
 		/>
@@ -319,7 +336,11 @@ export const Card66Media66 = ({
 			containerPalette={containerPalette}
 			showAge={showAge}
 			trailText={trail.trailText}
+			headlineSize="medium"
+			headlineSizeOnMobile="medium"
+			imagePosition="top"
 			imagePositionOnMobile="top"
+			imageSize="small"
 		/>
 	);
 };
@@ -349,7 +370,11 @@ export const Card33Media33 = ({
 			containerPalette={containerPalette}
 			showAge={showAge}
 			trailText={trail.trailText}
+			imageSize="small"
+			imagePosition="top"
 			imagePositionOnMobile="left"
+			headlineSize="medium"
+			headlineSizeOnMobile="medium"
 		/>
 	);
 };
@@ -377,6 +402,7 @@ export const CardDefault = ({
 			showAge={showAge}
 			imageUrl={undefined}
 			headlineSize="small"
+			headlineSizeOnMobile="small"
 		/>
 	);
 };
@@ -402,9 +428,11 @@ export const CardDefaultMedia = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			imageSize="small"
 			imagePosition="left"
 			imagePositionOnMobile="none"
 			headlineSize="small"
+			headlineSizeOnMobile="small"
 		/>
 	);
 };
@@ -430,9 +458,11 @@ export const CardDefaultMediaMobile = ({
 			trail={trail}
 			containerPalette={containerPalette}
 			showAge={showAge}
+			imageSize="small"
 			imagePosition="left"
 			imagePositionOnMobile="left"
 			headlineSize="small"
+			headlineSizeOnMobile="small"
 		/>
 	);
 };
