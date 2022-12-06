@@ -4,8 +4,7 @@ import { useState } from 'react';
 import type { FC } from 'react';
 import { calloutShare, calloutSharelink } from './styles';
 
-export const ShareLink: FC<{ disabled: boolean; format: ArticleFormat }> = ({
-	disabled,
+export const ShareLink: FC<{format: ArticleFormat }> = ({
 	format,
 }) => {
 	const [isCopied, setIsCopied] = useState(false);
@@ -32,7 +31,6 @@ export const ShareLink: FC<{ disabled: boolean; format: ArticleFormat }> = ({
 			<SvgShareCallout size="medium" />
 			Know others that are affected?
 			<Button
-				disabled={disabled}
 				size="xsmall"
 				priority="subdued"
 				onClick={onShare}

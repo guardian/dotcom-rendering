@@ -6,7 +6,6 @@ import type { ReactElement } from 'react';
 interface CheckboxInputProps {
 	name: string;
 	label: string;
-	disabled: boolean;
 	hideLabel: boolean;
 	mandatory: boolean;
 	options: FormOption[];
@@ -21,7 +20,6 @@ const CheckboxInput = ({
 	hideLabel,
 	supporting,
 	cssOverrides,
-	disabled,
 	mandatory,
 }: CheckboxInputProps): ReactElement =>  (
 	<CheckboxGroup
@@ -38,7 +36,6 @@ const CheckboxInput = ({
 				label={label}
 				value={value}
 				key={value}
-				disabled={disabled}
 			/>
 		)})}
 	</CheckboxGroup>

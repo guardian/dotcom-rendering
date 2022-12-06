@@ -30,7 +30,6 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	formFields,
 	format,
 	description,
-	isTabbable = true,
 }): ReactElement => {
 	return (
 		<div css={calloutContainerStyles(format)}>
@@ -42,7 +41,6 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 						<div css={calloutDescription}>
 							<>
 								{renderCalloutDescriptionText(
-									isTabbable,
 									format,
 									description,
 								)}
@@ -54,7 +52,6 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 					id={formId}
 					fields={formFields}
 					format={format}
-					disableInputs={!isTabbable}
 				/>
 			</details>
 		</div>
