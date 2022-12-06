@@ -254,6 +254,7 @@ export {
 	articleSeries,
 	articleContributors,
 	articleMainMedia,
+	articleMainVideo,
 	capiEndpoint,
 	getThirdPartyEmbeds,
 	maybeCapiDate,

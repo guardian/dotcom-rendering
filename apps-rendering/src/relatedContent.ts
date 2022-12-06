@@ -3,9 +3,15 @@ import { OnwardsContentCategory } from '@guardian/apps-rendering-api-models/onwa
 import type { Content } from '@guardian/content-api-models/v1/content';
 import type { ArticleFormat } from '@guardian/libs';
 import { ArticleDesign, ArticlePillar, ArticleSpecial } from '@guardian/libs';
-import type { Option } from '@guardian/types';
+import { Option } from '@guardian/types';
 import { andThen, none, OptionKind, some } from '@guardian/types';
-import { articleMainImage, isAnalysis, isFeature, maybeCapiDate } from 'capi';
+import {
+	articleMainImage,
+	articleMainVideo,
+	isAnalysis,
+	isFeature,
+	maybeCapiDate,
+} from 'capi';
 import type { Contributor } from 'contributor';
 import { parseContributors } from 'contributor';
 import type { Image } from 'image';
@@ -22,8 +28,9 @@ import {
 	isVideo,
 } from 'item';
 import { index, pipe } from 'lib';
-import type { Optional } from 'optional';
+import { Optional } from 'optional';
 import type { Context } from 'parserContext';
+import { parseVideo } from 'video';
 
 interface RelatedItemFields extends ArticleFormat {
 	headline: string;
@@ -60,10 +67,12 @@ interface CommentRelatedItem extends RelatedItemFields {
 
 interface AudioRelatedItem extends RelatedItemFields {
 	design: ArticleDesign.Audio;
+	mediaDuration: Optional<number>;
 }
 
 interface VideoRelatedItem extends RelatedItemFields {
 	design: ArticleDesign.Video;
+	mediaDuration: Optional<number>;
 }
 
 interface GalleryRelatedItem extends RelatedItemFields {
@@ -138,6 +147,23 @@ const getContributorImage = (
 		andThen((contributor) => contributor.image),
 	);
 
+const getMediaDuration = (content: Content): Optional<number> => {
+	if (isAudio(content.tags)) {
+		return Optional.none();
+		// return fromNullable(
+		// 	content.elements?.find(
+		// 		(element) => element.type === ElementType.AUDIO,
+		// 	)?.assets[0],
+		// );
+	} else if (isVideo(content.tags)) {
+		return articleMainVideo(content)
+			.flatMap(parseVideo(content.atoms))
+			.map((video) => video.duration)
+			.flatMap(Optional.fromNullable);
+	}
+	return Optional.none();
+};
+
 const parseMapiRelatedContent =
 	(context: Context) =>
 	(
@@ -184,11 +210,13 @@ const parseMapiRelatedContent =
 					return {
 						...relatedContentFields(context, content),
 						design: ArticleDesign.Audio,
+						mediaDuration: getMediaDuration(content),
 					};
 				} else if (isVideo(tags)) {
 					return {
 						...relatedContentFields(context, content),
 						design: ArticleDesign.Video,
+						mediaDuration: getMediaDuration(content),
 					};
 				} else if (isGallery(tags)) {
 					return {
