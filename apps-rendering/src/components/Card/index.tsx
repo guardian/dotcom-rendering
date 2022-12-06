@@ -39,6 +39,7 @@ import type { FC, ReactElement } from 'react';
 import type { OnwardsContentArticle } from 'relatedContent';
 import { getFormat } from 'relatedContent';
 import { darkModeCss } from 'styles';
+import { Optional } from 'optional';
 
 interface Props {
 	relatedItem: OnwardsContentArticle;
@@ -372,11 +373,18 @@ const bylineStyles = (format: ArticleFormat): SerializedStyles => css`
 `;
 
 const durationMedia = (
-	duration: Option<string>,
+	content: OnwardsContentArticle,
 	format: ArticleFormat,
 ): ReactElement | null => {
+	if (
+		content.design !== ArticleDesign.Audio &&
+		content.design !== ArticleDesign.Video
+	)
+		return null;
+
 	return pipe(
-		duration,
+		content.mediaDuration.toOption(),
+		map((dur) => dur.toString()),
 		map((length) => {
 			const seconds = formatSeconds(length);
 			if (seconds.kind === OptionKind.Some) {
@@ -489,7 +497,7 @@ const Card: FC<Props> = ({ relatedItem, kickerText }) => {
 				<section>
 					<div css={metadataStyles}>
 						<section css={parentIconStyles}>{icon(format)}</section>
-						{/* {durationMedia(fromNullable(mediaDuration), format)} */}
+						{durationMedia(relatedItem, format)}
 						{date}
 					</div>
 					{img}
