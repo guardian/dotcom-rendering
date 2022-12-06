@@ -6,6 +6,7 @@ import {
 	textSans,
 	visuallyHidden,
 } from '@guardian/source-foundations';
+import { darkModeCss } from 'styles';
 
 type AgeWarningProps = {
 	age: string;
@@ -32,6 +33,10 @@ const ageWarningStyles = (isSmall: boolean): SerializedStyles => css`
 	${from.leftCol} {
 		padding-left: ${isSmall ? '5px' : '10px'};
 	}
+
+	${darkModeCss`
+		background-color: ${palette.brandAlt[400]};
+    `}
 `;
 
 const ageWarningScreenReader = css`
