@@ -5,8 +5,9 @@ import {
 	space,
 	textSans,
 } from '@guardian/source-foundations';
-import { Button } from '@guardian/source-react-components';
+import { Button, SvgAlertTriangle } from '@guardian/source-react-components';
 import { useState } from 'react';
+import type { CampaignFieldType } from 'src/types/content';
 import { decidePalette } from '../../lib/decidePalette';
 import { CalloutTermsAndConditions } from './CalloutTermsAndConditions';
 import { FileUpload } from './FormFields/FileUpload';
@@ -14,7 +15,6 @@ import { MultiSelect } from './FormFields/MultiSelect';
 import { Select } from './FormFields/Select';
 import { TextArea } from './FormFields/TextArea';
 import { TextInput } from './FormFields/TextInput';
-import { SvgAlertTriangle } from '@guardian/source-react-components';
 
 const errorBoxStyles = css`
 	padding: 10px;

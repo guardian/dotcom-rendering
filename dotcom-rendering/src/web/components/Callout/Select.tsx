@@ -1,4 +1,4 @@
-import { CampaignFieldSelect } from '../../../types/content';
+import type { CampaignFieldSelect } from '../../../types/content';
 import { FieldLabel } from './FieldLabel';
 
 type Props = {
