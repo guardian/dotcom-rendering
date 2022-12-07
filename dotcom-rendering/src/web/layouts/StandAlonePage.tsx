@@ -44,9 +44,16 @@ export const StandAlonePage = ({
 	nav,
 	footer,
 	format,
-	contributionsServiceUrl,
+	contributionsServiceUrl: pageContributionsServiceUrl,
+	config,
 }: Props) => {
 	const articleFormat: ArticleFormat = decideFormat(format ?? {});
+
+	const isInEuropeTest =
+		config.abTests.europeNetworkFrontVariant === 'variant';
+
+	const contributionsServiceUrl =
+		process.env.SDC_URL ?? pageContributionsServiceUrl;
 
 	return (
 		<StrictMode>
@@ -104,19 +111,22 @@ export const StandAlonePage = ({
 						element="header"
 					>
 						<Header
-							headerTopBarSwitch={false}
 							editionId={editionId}
+							idUrl={config.idUrl}
+							mmaUrl={config.mmaUrl}
 							supporterCTA={
 								nav.readerRevenueLinks.header.supporter
 							}
-							discussionApiUrl={
-								'CAPIArticle.config.discussionApiUrl'
-							}
+							discussionApiUrl={config.discussionApiUrl}
 							urls={nav.readerRevenueLinks.header}
-							remoteHeader={false}
-							contributionsServiceUrl={'contributionsServiceUrl'}
-							idApiUrl={'CAPIArticle.config.idApiUrl'}
-							isInEuropeTest={false}
+							remoteHeader={!!config.switches.remoteHeader}
+							contributionsServiceUrl={contributionsServiceUrl}
+							idApiUrl={config.idApiUrl}
+							headerTopBarSwitch={!!config.switches.headerTopNav}
+							isInEuropeTest={isInEuropeTest}
+							headerTopBarSearchCapiSwitch={
+								!!config.switches.headerTopBarSearchCapiSwitch
+							}
 						/>
 					</Section>
 					<Section
