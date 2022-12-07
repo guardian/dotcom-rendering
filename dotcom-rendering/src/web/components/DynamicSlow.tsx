@@ -153,7 +153,7 @@ const ColumnOfCards50_ColumnOfCards50 = ({
 						)}
 						key={card.url}
 					>
-						<CardDefaultMedia // (check headline size)
+						<CardDefaultMedia
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
