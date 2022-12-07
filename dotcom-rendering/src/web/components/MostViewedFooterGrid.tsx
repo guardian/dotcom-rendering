@@ -197,7 +197,7 @@ export const MostViewedFooterGrid = ({
 						data-testid={tab.heading}
 						data-link-context={`most-read/${sectionName}`}
 					>
-						{(tab.trails || []).map(
+						{tab.trails.map(
 							(trail: TrailType, ii: number) => (
 								<MostViewedFooterItem
 									key={trail.url}
