@@ -38,6 +38,11 @@ const putNewslettersInGroups = (
 	return groupedList;
 };
 
+/**
+ * @description
+ * This is a placeholder component to test the handleNewslettersPage method
+ * on the dev server - not an approved / final design.
+ */
 export const NewslettersList = ({
 	newsletters,
 	headingText,
