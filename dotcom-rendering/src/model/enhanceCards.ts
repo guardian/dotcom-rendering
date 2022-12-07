@@ -103,7 +103,7 @@ const decideAvatarUrl = (
 	return soleContributor?.bylineLargeImageUrl ?? undefined;
 };
 
-const decideImage = (trail: FEFrontCard): string | undefined => {
+const decideImage = (trail: FEFrontCard) => {
 	if (trail.type === 'LinkSnap') {
 		return trail.properties.image?.item.imageSrc;
 	}
