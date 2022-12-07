@@ -23,7 +23,11 @@ const Headline: React.FC<Props> = ({ item }) => {
 
 	if (format.display === ArticleDisplay.Immersive) {
 		return (
-			<WithAgeWarning tags={item.tags} publishDate={item.publishDate}>
+			<WithAgeWarning
+				tags={item.tags}
+				publishDate={item.publishDate}
+				format={format}
+			>
 				<ImmersiveHeadline headline={item.headline} format={format} />
 			</WithAgeWarning>
 		);
@@ -31,7 +35,11 @@ const Headline: React.FC<Props> = ({ item }) => {
 
 	if (format.theme === ArticleSpecial.Labs) {
 		return (
-			<WithAgeWarning tags={item.tags} publishDate={item.publishDate}>
+			<WithAgeWarning
+				tags={item.tags}
+				publishDate={item.publishDate}
+				format={format}
+			>
 				<LabsHeadline item={item} />
 			</WithAgeWarning>
 		);
@@ -40,7 +48,11 @@ const Headline: React.FC<Props> = ({ item }) => {
 	switch (format.design) {
 		case ArticleDesign.Feature:
 			return (
-				<WithAgeWarning tags={item.tags} publishDate={item.publishDate}>
+				<WithAgeWarning
+					tags={item.tags}
+					publishDate={item.publishDate}
+					format={format}
+				>
 					<FeatureHeadline item={item} />
 				</WithAgeWarning>
 			);
@@ -48,7 +60,11 @@ const Headline: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 			return (
-				<WithAgeWarning tags={item.tags} publishDate={item.publishDate}>
+				<WithAgeWarning
+					tags={item.tags}
+					publishDate={item.publishDate}
+					format={format}
+				>
 					<CommentHeadline item={item} />
 				</WithAgeWarning>
 			);
@@ -56,38 +72,62 @@ const Headline: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Audio:
 		case ArticleDesign.Video:
 			return (
-				<WithAgeWarning tags={item.tags} publishDate={item.publishDate}>
+				<WithAgeWarning
+					tags={item.tags}
+					publishDate={item.publishDate}
+					format={format}
+				>
 					<MediaHeadline item={item} />
 				</WithAgeWarning>
 			);
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return (
-				<WithAgeWarning tags={item.tags} publishDate={item.publishDate}>
+				<WithAgeWarning
+					tags={item.tags}
+					publishDate={item.publishDate}
+					format={format}
+				>
 					<BlogHeadline item={item} />
 				</WithAgeWarning>
 			);
 		case ArticleDesign.Interview:
 			return (
-				<WithAgeWarning tags={item.tags} publishDate={item.publishDate}>
+				<WithAgeWarning
+					tags={item.tags}
+					publishDate={item.publishDate}
+					format={format}
+				>
 					<InterviewHeadline item={item} />
 				</WithAgeWarning>
 			);
 		case ArticleDesign.Review:
 			return (
-				<WithAgeWarning tags={item.tags} publishDate={item.publishDate}>
+				<WithAgeWarning
+					tags={item.tags}
+					publishDate={item.publishDate}
+					format={format}
+				>
 					<ReviewHeadline item={item} />
 				</WithAgeWarning>
 			);
 		case ArticleDesign.Gallery:
 			return (
-				<WithAgeWarning tags={item.tags} publishDate={item.publishDate}>
+				<WithAgeWarning
+					tags={item.tags}
+					publishDate={item.publishDate}
+					format={format}
+				>
 					<GalleryHeadline headline={item.headline} format={format} />
 				</WithAgeWarning>
 			);
 		default:
 			return (
-				<WithAgeWarning tags={item.tags} publishDate={item.publishDate}>
+				<WithAgeWarning
+					tags={item.tags}
+					publishDate={item.publishDate}
+					format={format}
+				>
 					<DefaultHeadline
 						item={item}
 						styles={css(defaultStyles(item))}

@@ -324,6 +324,15 @@ const matchScores: MatchScores = {
 
 const tags: Tag[] = [
 	{
+		id: 'tone/news',
+		type: 6,
+		webTitle: 'News',
+		webUrl: 'https://www.theguardian.com/tone/news',
+		apiUrl: 'https://content.guardianapis.com/tone/news',
+		references: [],
+		internalName: 'News (Tone)',
+	},
+	{
 		id: 'world/refugees',
 		type: TagType.SERIES,
 		webTitle: 'Refugees',
@@ -389,7 +398,7 @@ const fields = {
 	standfirst: standfirst,
 	byline: '',
 	bylineHtml: bylineHtml,
-	publishDate: none,
+	publishDate: some(new Date('2021-10-17T03:24:00')),
 	contributors: contributors,
 	mainMedia: mainMedia,
 	series: Optional.some({

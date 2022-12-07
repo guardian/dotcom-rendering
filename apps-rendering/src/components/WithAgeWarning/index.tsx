@@ -1,13 +1,22 @@
+import type { SerializedStyles } from '@emotion/react';
+import { css } from '@emotion/react';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
 import { AgeWarning } from '@guardian/source-react-components-development-kitchen';
 import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import { isComment, isNews } from 'item';
-import { articleWidthStyles } from 'styles';
+import { from } from '@guardian/source-foundations';
+import { articleWidthStyles, wideContentWidth } from 'styles';
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import { remSpace } from '@guardian/source-foundations';
+
+import { grid } from 'grid/grid';
 
 interface WithAgeWarningProps {
 	tags: Tag[];
 	publishDate: Option<Date>;
+	format: ArticleFormat;
 	children: React.ReactNode;
 }
 
@@ -53,9 +62,64 @@ const getAgeWarning = (
 	return message;
 };
 
+export const defaultWidthStyles: SerializedStyles = css`
+	${from.wide} {
+		margin: 0 auto;
+	}
+
+	${from.phablet} {
+		width: ${wideContentWidth}px;
+	}
+`;
+
+export const warningStyles = (format: ArticleFormat): SerializedStyles => {
+	switch (format.design) {
+		case ArticleDesign.Interview:
+		case ArticleDesign.LiveBlog:
+		case ArticleDesign.DeadBlog:
+			return css`
+				${defaultWidthStyles}
+			`;
+		case ArticleDesign.Analysis:
+		case ArticleDesign.Explainer:
+			return css`
+				${articleWidthStyles}
+			`;
+		case ArticleDesign.NewsletterSignup:
+			return css`
+				${articleWidthStyles}
+				padding: 0 0 ${remSpace[5]} 0;
+				max-width: 100%;
+			`;
+		default:
+			if (format.display === ArticleDisplay.Immersive) {
+				return css`
+					${immersiveStyle}
+				`;
+			}
+			return css`
+				${articleWidthStyles}
+			`;
+	}
+};
+
+const immersiveStyle: SerializedStyles = css`
+	grid-row: 2;
+	${grid.between('viewport-start', 'centre-column-end')}
+	${from.mobileLandscape} {
+		${grid.between('viewport-start', 'viewport-end')}
+	}
+
+	${from.tablet} {
+		${grid.between('centre-column-start', 'viewport-end')}
+		margin-left: calc(${grid.columnGap} * -1/2);
+	}
+`;
+
 const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
 	tags,
 	publishDate,
+	format,
 	children,
 }: WithAgeWarningProps) => {
 	if (publishDate.kind === OptionKind.Some) {
@@ -64,7 +128,7 @@ const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
 		if (age) {
 			return (
 				<>
-					<div css={articleWidthStyles}>
+					<div css={[warningStyles(format)]}>
 						<AgeWarning age={age} supportsDarkMode={true} />
 					</div>
 					{children}
