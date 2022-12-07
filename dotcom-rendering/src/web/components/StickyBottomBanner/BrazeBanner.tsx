@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { CommonBannerComponentProps } from '@guardian/braze-components/banner';
+import type { BrazeBannerComponent } from '@guardian/braze-components/banner';
 import type {
 	BrazeArticleContext,
 	BrazeMessagesInterface,
@@ -82,7 +82,7 @@ export const canShowBrazeBanner = async (
 
 type InnerProps = {
 	meta: Meta;
-	BrazeComponent: React.FC<CommonBannerComponentProps>;
+	BrazeComponent: typeof BrazeBannerComponent;
 };
 
 const BrazeBannerWithSatisfiedDependencies = ({
@@ -120,7 +120,7 @@ const BrazeBannerWithSatisfiedDependencies = ({
 
 export const BrazeBanner = ({ meta }: Props) => {
 	const [BrazeComponent, setBrazeComponent] =
-		useState<React.FC<CommonBannerComponentProps>>();
+		useState<typeof BrazeBannerComponent>();
 
 	useEffect(() => {
 		import(

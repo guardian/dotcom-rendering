@@ -313,7 +313,7 @@ const RemoteBanner = ({
 	module,
 	fetchEmail,
 }: RemoteBannerProps) => {
-	const [Banner, setBanner] = useState<React.FC>();
+	const [Banner, setBanner] = useState<React.ElementType>();
 
 	const [hasBeenSeen, setNode] = useIsInView({
 		threshold: 0,
@@ -365,7 +365,6 @@ const RemoteBanner = ({
 				{}
 				<Banner
 					{...module.props}
-					// @ts-expect-error
 					submitComponentEvent={submitComponentEvent}
 					fetchEmail={fetchEmail}
 				/>

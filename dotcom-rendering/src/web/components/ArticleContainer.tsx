@@ -2,7 +2,12 @@ import { css } from '@emotion/react';
 import { adSizes } from '@guardian/commercial-core';
 import { ArticleDesign } from '@guardian/libs';
 import { from, neutral, space, until } from '@guardian/source-foundations';
-import { carrotAdStyles, labelHeight, labelStyles } from './AdSlot';
+import {
+	carrotAdStyles,
+	individualLabelCSS,
+	labelHeight,
+	labelStyles,
+} from './AdSlot';
 
 type Props = {
 	format: ArticleFormat;
@@ -110,6 +115,17 @@ const adStyles = css`
 			}
 		}
 
+		.ad-slot--interscroller[data-label-show='true']::before {
+			content: 'Advertisement';
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			border: 0;
+			display: block;
+			${individualLabelCSS}
+		}
+
 		/* liveblogs ads have different background colours due the darker page background */
 		.ad-slot--liveblog-inline {
 			/* outstreamMobile is the ad with the smallest height that we serve for mobile
@@ -120,10 +136,6 @@ const adStyles = css`
 			}
 
 			background-color: ${neutral[93]};
-			.ad-slot__label {
-				color: ${neutral[46]};
-				border-top-color: ${neutral[86]};
-			}
 		}
 	}
 

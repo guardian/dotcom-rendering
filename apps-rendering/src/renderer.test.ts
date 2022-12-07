@@ -29,6 +29,8 @@ import {
 	renderWithoutStyles,
 	textElements,
 } from 'testsHelper';
+import { Optional } from 'optional';
+import { ImageSubtype } from 'image/image';
 
 beforeEach(() => {
 	console.error = jest.fn();
@@ -46,6 +48,7 @@ const imageElement = (): BodyElement => ({
 	width: 500,
 	height: 500,
 	role: ArticleElementRole.Standard,
+	imageSubtype: Optional.some(ImageSubtype.Jpeg),
 });
 
 const imageElementWithRole = () => ({

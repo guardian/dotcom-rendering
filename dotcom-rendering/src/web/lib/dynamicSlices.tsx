@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import { LI } from '../components/Card/components/LI';
@@ -75,7 +74,12 @@ export const Card50_Card50 = ({
 	return (
 		<UL direction="row" padBottom={true}>
 			{cards50.map((trail, index) => (
-				<LI percentage="50%" padSides={true} showDivider={index !== 0}>
+				<LI
+					percentage="50%"
+					padSides={true}
+					showDivider={index !== 0}
+					containerPalette={containerPalette}
+				>
 					<Card50Media50Tall
 						trail={trail}
 						containerPalette={containerPalette}
@@ -116,7 +120,12 @@ export const Card75_Card25 = ({
 				</LI>
 			))}
 			{card25.map((trail) => (
-				<LI percentage="25%" padSides={true} showDivider={true}>
+				<LI
+					percentage="25%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
 					<Card25Media25
 						trail={trail}
 						showAge={showAge}
@@ -157,7 +166,12 @@ export const Card25_Card75 = ({
 				</LI>
 			))}
 			{card75.map((trail) => (
-				<LI percentage="75%" padSides={true} showDivider={true}>
+				<LI
+					percentage="75%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
 					<Card75Media50Left
 						trail={trail}
 						showAge={showAge}
@@ -198,7 +212,12 @@ export const Card66_Card33 = ({
 				</LI>
 			))}
 			{card33.map((trail) => (
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
+				<LI
+					percentage="33.333%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
 					<Card33Media33
 						trail={trail}
 						containerPalette={containerPalette}
@@ -240,7 +259,12 @@ export const Card50_Card25_Card25 = ({
 			))}
 
 			{cards25.map((trail) => (
-				<LI percentage="25%" padSides={true} showDivider={true}>
+				<LI
+					percentage="25%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
 					<Card25Media25
 						trail={trail}
 						containerPalette={containerPalette}

@@ -19,7 +19,6 @@ import type {
 } from '@guardian/support-dotcom-components/dist/dotcom/src/types';
 import { useEffect, useState } from 'react';
 import ArrowRightIcon from '../../static/icons/arrow-right.svg';
-import type { EditionId } from '../lib/edition';
 import type { OphanRecordFunction } from '../browser/ophan/ophan';
 import {
 	getOphanRecordFunction,
@@ -33,6 +32,7 @@ import {
 	MODULES_VERSION,
 	shouldHideSupportMessaging,
 } from '../lib/contributions';
+import type { EditionId } from '../lib/edition';
 import { getLocaleCode } from '../lib/getCountryCode';
 import { setAutomat } from '../lib/setAutomat';
 import { useIsInView } from '../lib/useIsInView';
@@ -155,15 +155,23 @@ const subMessageStyles = css`
 	margin: 5px 0;
 `;
 
-const ReaderRevenueLinksRemote: React.FC<{
+type ReaderRevenueLinksRemoteProps = {
 	countryCode: string;
 	pageViewId: string;
 	contributionsServiceUrl: string;
 	ophanRecord: OphanRecordFunction;
-}> = ({ countryCode, pageViewId, contributionsServiceUrl, ophanRecord }) => {
+};
+
+const ReaderRevenueLinksRemote = ({
+	countryCode,
+	pageViewId,
+	contributionsServiceUrl,
+	ophanRecord,
+}: ReaderRevenueLinksRemoteProps) => {
 	const [supportHeaderResponse, setSupportHeaderResponse] =
 		useState<ModuleData | null>(null);
-	const [SupportHeader, setSupportHeader] = useState<React.FC | null>(null);
+	const [SupportHeader, setSupportHeader] =
+		useState<React.ElementType | null>(null);
 
 	useOnce((): void => {
 		setAutomat();
@@ -199,9 +207,13 @@ const ReaderRevenueLinksRemote: React.FC<{
 
 				return window
 					.guardianPolyfilledImport(module.url)
-					.then((headerModule: { [key: string]: JSX.Element }) => {
-						setSupportHeader(() => headerModule[module.name]);
-					});
+					.then(
+						(headerModule: {
+							[key: string]: React.ElementType;
+						}) => {
+							setSupportHeader(() => headerModule[module.name]);
+						},
+					);
 			})
 			.catch((error) => {
 				const msg = `Error importing RR header links: ${String(error)}`;
@@ -219,7 +231,6 @@ const ReaderRevenueLinksRemote: React.FC<{
 			<div css={headerStyles}>
 				{}
 				<SupportHeader
-					// @ts-expect-error
 					submitComponentEvent={(
 						componentEvent: OphanComponentEvent,
 					) => submitComponentEvent(componentEvent, ophanRecord)}
@@ -232,7 +243,7 @@ const ReaderRevenueLinksRemote: React.FC<{
 	return null;
 };
 
-const ReaderRevenueLinksNative: React.FC<{
+type ReaderRevenueLinksNativeProps = {
 	editionId: EditionId;
 	dataLinkNamePrefix: string;
 	inHeader: boolean;
@@ -243,14 +254,16 @@ const ReaderRevenueLinksNative: React.FC<{
 	};
 	ophanRecord: OphanRecordFunction;
 	pageViewId: string;
-}> = ({
+};
+
+const ReaderRevenueLinksNative = ({
 	editionId,
 	dataLinkNamePrefix,
 	inHeader,
 	urls,
 	ophanRecord,
 	pageViewId,
-}) => {
+}: ReaderRevenueLinksNativeProps) => {
 	const hideSupportMessaging = shouldHideSupportMessaging();
 
 	// Only the header component is in the AB test

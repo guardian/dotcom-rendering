@@ -51,7 +51,11 @@ const Card33_ColumnOfThree33_Ad33 = ({
 				</LI>
 			))}
 
-			<LI percentage="33.333%" showDivider={true}>
+			<LI
+				percentage="33.333%"
+				showDivider={true}
+				containerPalette={containerPalette}
+			>
 				<UL direction="column">
 					{cards33.map((card) => (
 						<LI padSides={true} key={card.url}>
@@ -148,6 +152,7 @@ const Card50_Card25_Card25 = ({
 					percentage="25%"
 					padSides={true}
 					showDivider={true}
+					containerPalette={containerPalette}
 					key={card.url}
 				>
 					<Card25Media25Tall

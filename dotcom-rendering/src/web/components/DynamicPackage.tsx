@@ -115,6 +115,7 @@ const Card75_Card25 = ({
 					padSides={true}
 					percentage="25%"
 					showDivider={true}
+					containerPalette={containerPalette}
 					key={card.url}
 				>
 					<FrontCard
@@ -150,6 +151,7 @@ const Card25_Card25_Card25_Card25 = ({
 						key={card.url}
 						padSides={true}
 						showDivider={cardIndex > 0}
+						containerPalette={containerPalette}
 					>
 						<FrontCard
 							trail={card}
@@ -186,6 +188,7 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 						key={card.url}
 						padSides={true}
 						showDivider={cardIndex > 0}
+						containerPalette={containerPalette}
 						percentage="25%"
 					>
 						<FrontCard
@@ -198,7 +201,11 @@ const Card25_Card25_Card25_ColumnOfTwo25 = ({
 					</LI>
 				);
 			})}
-			<LI showDivider={bigs.length > 0} percentage="25%">
+			<LI
+				showDivider={bigs.length > 0}
+				containerPalette={containerPalette}
+				percentage="25%"
+			>
 				<UL direction="row" wrapCards={true}>
 					{remaining.map((card) => {
 						return (
@@ -245,6 +252,7 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 						padSides={true}
 						percentage="25%"
 						showDivider={cardIndex > 0}
+						containerPalette={containerPalette}
 					>
 						<FrontCard
 							trail={card}
@@ -256,7 +264,11 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 					</LI>
 				);
 			})}
-			<LI showDivider={true} percentage="50%">
+			<LI
+				showDivider={true}
+				containerPalette={containerPalette}
+				percentage="50%"
+			>
 				<UL direction="row" wrapCards={true}>
 					{remaining.map((card, cardIndex) => {
 						return (
@@ -264,7 +276,8 @@ const Card25_Card25_ColumnOfTwo25_ColumnOfTwo25 = ({
 								percentage="50%"
 								key={card.url}
 								padSides={true}
-								showDivider={true}
+								showDivider={cardIndex % 2 !== 0}
+								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
 									remaining.length,
@@ -315,7 +328,11 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 					</LI>
 				);
 			})}
-			<LI showDivider={true} percentage="75%">
+			<LI
+				showDivider={true}
+				containerPalette={containerPalette}
+				percentage="75%"
+			>
 				<UL direction="row" wrapCards={true}>
 					{remaining.map((card, cardIndex) => {
 						return (
@@ -323,7 +340,8 @@ const Card25_ColumnOfTwo25_ColumnOfTwo25_ColumnOfTwo25 = ({
 								percentage="33.333%"
 								key={card.url}
 								padSides={true}
-								showDivider={true}
+								showDivider={cardIndex % 3 !== 0}
+								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
 									remaining.length,
@@ -377,7 +395,11 @@ const Card75_ColumnOfCards25 = ({
 					/>
 				</LI>
 			))}
-			<LI showDivider={true} percentage="25%">
+			<LI
+				showDivider={true}
+				containerPalette={containerPalette}
+				percentage="25%"
+			>
 				<UL direction="column">
 					{remaining.map((card, cardIndex) => {
 						return (

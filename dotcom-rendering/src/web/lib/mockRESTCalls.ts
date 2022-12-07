@@ -262,5 +262,32 @@ export const mockRESTCalls = (): void => {
 				body: matchReport,
 			},
 			{ overwriteRoutes: false },
+		)
+
+		// Get user discussion api (used for myAccount dropdown)
+		.get(
+			/discussionApiUrl\/profile\/me\?strict_sanctions_check=false/,
+			{
+				status: 200,
+				body: {
+					status: 'ok',
+					userProfile: {
+						userId: '123',
+						displayName: 'Guardian User',
+						webUrl: 'https://profile.test-theguardian.com/user/id/123',
+						apiUrl: 'http://discussion.test-guardianapis.com/discussion-api/profile/123',
+						avatar: 'https://avatar.test-guimcode.co.uk/user/123',
+						secureAvatarUrl:
+							'https://avatar.test-guimcode.co.uk/user/123',
+						badge: [],
+						privateFields: {
+							canPostComment: true,
+							isPremoderated: false,
+							hasCommented: false,
+						},
+					},
+				},
+			},
+			{ overwriteRoutes: false },
 		);
 };

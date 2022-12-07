@@ -11,7 +11,6 @@ import {
 	neutral,
 	textSans,
 } from '@guardian/source-foundations';
-import React from 'react';
 import {
 	MoustacheSection,
 	MoustacheTemplate,
@@ -347,7 +346,11 @@ const reminderWrapperStyle = css`
 	}
 `;
 
-export const Epic: React.FC<{ webURL: string }> = ({ webURL }) => {
+type Props = {
+	webURL: string;
+};
+
+export const Epic = ({ webURL }: Props) => {
 	const supportDotcomComponentsUrl =
 		process.env.GU_STAGE === 'PROD'
 			? 'https://contributions.guardianapis.com'

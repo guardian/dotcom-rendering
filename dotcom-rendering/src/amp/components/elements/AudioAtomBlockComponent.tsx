@@ -1,9 +1,10 @@
-import React from 'react';
 import type { AudioAtomBlockElement } from '../../../types/content';
 
-export const AudioAtomBlockComponent: React.FC<{
+type Props = {
 	element: AudioAtomBlockElement;
-}> = ({ element }) => {
+};
+
+export const AudioAtomBlockComponent = ({ element }: Props) => {
 	return (
 		<amp-audio src={element.trackUrl} title={element.kicker}>
 			<div fallback="">

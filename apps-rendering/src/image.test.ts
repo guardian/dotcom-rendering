@@ -12,6 +12,7 @@ import { ImageElementFields } from '@guardian/content-api-models/v1/imageElement
 import { Context } from 'parserContext';
 import { Asset } from '@guardian/content-api-models/v1/asset';
 import { AssetFields } from '@guardian/content-api-models/v1/assetFields';
+import { Optional } from 'optional';
 
 // ----- Mocks ----- //
 let imageBlock: BlockElement;
@@ -34,6 +35,7 @@ const defaultImage: Image = {
 	credit: none,
 	nativeCaption: none,
 	role: ArticleElementRole.Standard,
+	imageSubtype: Optional.none(),
 };
 const roleTestCases = [
 	{
@@ -229,6 +231,7 @@ describe('parseCardImage', () => {
 			credit: none,
 			nativeCaption: none,
 			role: ArticleElementRole.Standard,
+			imageSubtype: Optional.none(),
 		};
 
 		const parsed = withDefault(defaultImage)(

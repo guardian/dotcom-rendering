@@ -1,9 +1,9 @@
-import React from 'react';
 import type { AmpExperiments } from '../server/ampExperimentCache';
 
-export const AmpExperimentComponent: React.FC<{
+type Props = {
 	experimentsData?: AmpExperiments;
-}> = ({ experimentsData }) => {
+};
+export const AmpExperimentComponent = ({ experimentsData }: Props) => {
 	return (
 		<amp-experiment>
 			<script

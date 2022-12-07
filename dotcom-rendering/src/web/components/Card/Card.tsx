@@ -125,7 +125,6 @@ type RenderFooter = ({
 }: {
 	displayAge: boolean;
 	displayLines: boolean;
-	// eslint-disable-next-line @typescript-eslint/ban-types -- this signature is adequate
 }) => JSX.Element;
 
 const DecideFooter = ({

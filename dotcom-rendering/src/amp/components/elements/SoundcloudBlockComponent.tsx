@@ -1,9 +1,10 @@
-import React from 'react';
 import type { SoundcloudBlockElement } from '../../../types/content';
 
-export const SoundcloudBlockComponent: React.FC<{
+type Props = {
 	element: SoundcloudBlockElement;
-}> = ({ element }) => {
+};
+
+export const SoundcloudBlockComponent = ({ element }: Props) => {
 	return element.isTrack ? (
 		<amp-soundcloud
 			height="300"

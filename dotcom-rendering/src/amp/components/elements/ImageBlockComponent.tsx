@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { text, textSans } from '@guardian/source-foundations';
-import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 import TriangleIcon from '../../../static/icons/triangle.svg';
 import type { ImageBlockElement, SrcSetItem } from '../../../types/content';
@@ -17,10 +16,12 @@ const captionStyle = css`
 	color: ${text.supporting};
 `;
 
-export const ImageBlockComponent: React.FC<{
+type Props = {
 	element: ImageBlockElement;
 	pillar: ArticleTheme;
-}> = ({ element, pillar }) => {
+};
+
+export const ImageBlockComponent = ({ element, pillar }: Props) => {
 	const containerWidth = 600;
 	const image: SrcSetItem = bestFitImage(
 		element.imageSources,
