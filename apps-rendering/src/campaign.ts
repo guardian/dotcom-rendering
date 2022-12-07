@@ -3,13 +3,12 @@
 import type { Campaign } from '@guardian/apps-rendering-api-models/campaign';
 import type { ParticipationFields } from '@guardian/apps-rendering-api-models/participationFields';
 import { ArticleSpecial } from '@guardian/libs';
-import type Int64 from 'node-int64';
 import { Optional } from 'optional';
 
 export type CalloutFields = {
 	callout: ParticipationFields;
 	name: string;
-	activeUntil?: Int64;
+	activeUntil?: number;
 };
 
 // ----- Functions ----- //
@@ -27,7 +26,9 @@ const getCallout = (
 		return Optional.some({
 			callout: campaign.fields.callout,
 			name: campaign.name,
-			activeUntil: campaign.activeUntil,
+			...(campaign.activeUntil && {
+				activeUntil: campaign.activeUntil.toNumber(),
+			}),
 		});
 	}
 

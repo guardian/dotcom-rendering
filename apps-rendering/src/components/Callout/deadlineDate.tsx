@@ -1,6 +1,5 @@
 import { SvgClock } from '@guardian/source-react-components';
 import { isValidDate } from 'date';
-import type Int64 from 'node-int64';
 import type { FC } from 'react';
 import { highlightStyles } from './styles';
 
@@ -25,21 +24,21 @@ export const getDeadlineText = (
 	return `Open for ${Math.round(daysBetween)} more days`;
 };
 
-function formatOptionalDate(date: Int64 | undefined): Date | undefined {
+function formatOptionalDate(date: number | undefined): Date | undefined {
 	if (date === undefined) return undefined;
-	const d = new Date(date.toNumber());
+	const d = new Date(date);
 	if (!isValidDate(d)) return undefined;
 	return d;
 }
 
-function isCalloutActive(until?: Int64): boolean {
+function isCalloutActive(until?: number): boolean {
 	const untilDate = formatOptionalDate(until);
 	const now = new Date();
 
 	return untilDate === undefined || untilDate > now;
 }
 
-const DeadlineDate: FC<{ until?: Int64 }> = ({ until }) => {
+const DeadlineDate: FC<{ until?: number }> = ({ until }) => {
 	const untilDate = formatOptionalDate(until);
 	if (!untilDate) return null;
 	const now = new Date();

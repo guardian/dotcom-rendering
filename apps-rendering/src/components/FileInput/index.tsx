@@ -3,10 +3,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { visuallyHidden } from '@guardian/source-foundations';
 import { useState } from 'react';
 import type { ReactElement } from 'react';
-import {
-	customUpload,
-	fieldSupportingStyles,
-} from './styles';
+import { customUpload, fieldSupportingStyles } from './styles';
 
 interface FileInputProps {
 	name: string;
@@ -25,8 +22,7 @@ const FileInput = ({
 	return (
 		<>
 			<p css={fieldSupportingStyles}>
-				May not work on some mobile devices, or files may be too
-				large.
+				May not work on some mobile devices, or files may be too large.
 			</p>
 			<div css={customUpload(format)}>
 				{chosenFile ? 'Change File' : 'Choose File'}
@@ -40,7 +36,7 @@ const FileInput = ({
 					onChange={(e): void => setChosenFile(e.target.value)}
 					required={mandatory}
 				/>
-				</div>
+			</div>
 			{chosenFile && (
 				<>
 					{!mandatory && (

@@ -1,3 +1,4 @@
+// import {renderToString, renderToStaticMarkup} from 'react-dom/server';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
 import type { FC, ReactElement } from 'react';
@@ -30,32 +31,23 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	formFields,
 	format,
 	description,
-}): ReactElement => {
-	return (
-		<div css={calloutContainerStyles(format)}>
-			<details css={calloutDetailsStyles} open={true}>
-				<summary css={calloutSummaryStyles}>
-					<div css={calloutSummaryContentWrapper}>
-						<div css={calloutTitle(format)}>{heading}</div>
-						<h4 css={calloutHeadingText}>{name}</h4>
+}): ReactElement => (
+	<div css={calloutContainerStyles(format)}>
+		<details css={calloutDetailsStyles} open={true}>
+			<summary css={calloutSummaryStyles}>
+				<div css={calloutSummaryContentWrapper}>
+					<div css={calloutTitle(format)}>{heading}</div>
+					<h4 css={calloutHeadingText}>{name}</h4>
+					{description && (
 						<div css={calloutDescription}>
-							<>
-								{renderCalloutDescriptionText(
-									format,
-									description,
-								)}
-							</>
+							{renderCalloutDescriptionText(format, description)}
 						</div>
-					</div>
-				</summary>
-				<CalloutForm
-					id={formId}
-					fields={formFields}
-					format={format}
-				/>
-			</details>
-		</div>
-	);
-};
+					)}
+				</div>
+			</summary>
+			<CalloutForm id={formId} fields={formFields} format={format} />
+		</details>
+	</div>
+);
 
 export default CalloutBlock;

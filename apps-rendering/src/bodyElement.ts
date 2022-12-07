@@ -19,7 +19,6 @@ import type { Embed } from 'embed';
 import type { Image as ImageData } from 'image';
 import { parseImage } from 'image';
 import { compose } from 'lib';
-import type Int64 from 'node-int64';
 import { Optional } from 'optional';
 import type { Context } from 'parserContext';
 import type { KnowledgeQuizAtom, PersonalityQuizAtom } from 'quizAtom';
@@ -133,9 +132,9 @@ type Callout = {
 	heading: string;
 	formId: number;
 	formFields: FormField[];
-	description?: DocumentFragment;
 	name: string;
-	activeUntil?: Int64;
+	description?: DocumentFragment;
+	activeUntil?: number;
 };
 
 type BodyElement =
@@ -480,6 +479,7 @@ export {
 	HeadingThree,
 	Body,
 	Image,
+	Callout,
 	Text,
 	Embed,
 	GuideAtom,

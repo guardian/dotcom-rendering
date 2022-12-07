@@ -7,6 +7,7 @@ import {
 	success,
 } from '@guardian/source-foundations';
 
+// This doesn't work in vanilla JS.
 // Themes for source components in dark mode
 // These could be exported from source
 const labelDarkTheme = {
@@ -71,7 +72,7 @@ const expandingWrapperDarkTheme = {
 	expandText: neutral[7],
 	collapseBackground: neutral[10],
 	collapseText: neutral[86],
-}
+};
 
 export const darkTheme = {
 	label: labelDarkTheme,
@@ -83,8 +84,8 @@ export const darkTheme = {
 };
 
 const getPrefersDark = (): boolean => {
-	if (typeof window === "undefined") return false;
+	if (typeof window === 'undefined') return false;
 	return window.matchMedia('(prefers-color-scheme: dark)').matches;
-}
+};
 
 export const getTheme = (): Theme => (getPrefersDark() ? darkTheme : {});

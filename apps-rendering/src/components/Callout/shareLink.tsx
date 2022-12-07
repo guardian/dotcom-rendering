@@ -4,9 +4,7 @@ import { useState } from 'react';
 import type { FC } from 'react';
 import { calloutShare, calloutSharelink } from './styles';
 
-export const ShareLink: FC<{format: ArticleFormat }> = ({
-	format,
-}) => {
+export const ShareLink: FC<{ format: ArticleFormat }> = ({ format }) => {
 	const [isCopied, setIsCopied] = useState(false);
 
 	const onShare = async (): Promise<void> => {
@@ -19,12 +17,14 @@ export const ShareLink: FC<{format: ArticleFormat }> = ({
 				})
 				.catch(console.error);
 		} else {
-			await navigator.clipboard.writeText(url);
+			const nav: Navigator = navigator;
+			await nav.clipboard.writeText(url);
 			setIsCopied(true);
 			setTimeout(() => setIsCopied(false), 2000);
 		}
 	};
-	if (typeof window === "undefined" || typeof navigator) return <></>;
+	if (typeof window === 'undefined' || typeof navigator === 'undefined')
+		return <></>;
 
 	return (
 		<span css={calloutShare}>

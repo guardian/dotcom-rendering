@@ -3,8 +3,9 @@ import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
-import type Int64 from 'node-int64';
+import { isElement } from 'lib';
 import type { FC, ReactElement } from 'react';
+import { createElement as h } from 'react';
 import CalloutBlock from './calloutBlock';
 import { DeadlineDate, Highlight, isCalloutActive } from './deadlineDate';
 import { getTheme } from './theme';
@@ -16,7 +17,7 @@ export interface CalloutProps {
 	format: ArticleFormat;
 	description?: DocumentFragment;
 	isNonCollapsible: boolean;
-	activeUntil?: Int64;
+	activeUntil?: number;
 	name: string;
 }
 
@@ -42,9 +43,8 @@ const Callout: FC<CalloutProps> = ({
 	} else if (!isActive && !isNonCollapsible) {
 		return <></>;
 	}
-
 	return (
-		<aside>
+		<aside className="js-callout">
 			{isNonCollapsible ? (
 				<ThemeProvider theme={getTheme()}>
 					<CalloutBlock
@@ -88,4 +88,41 @@ const Callout: FC<CalloutProps> = ({
 	);
 };
 
-export default Callout;
+const CalloutWithHydrationProps: FC<CalloutProps> = ({
+	format,
+	...calloutProps
+}): ReactElement => {
+	const getStringFromNodes = (nodes: NodeListOf<ChildNode>): string =>
+		Array.from(nodes)
+			.map((node) => {
+				return isElement(node) ? node.outerHTML : node.textContent;
+			})
+			.join('');
+
+	const description = calloutProps.description;
+	const stringDescription = description
+		? getStringFromNodes(description.childNodes)
+		: '';
+
+	const serverSideProps = JSON.stringify({
+		callout: {
+			...calloutProps,
+			description: stringDescription,
+		},
+		format,
+	});
+
+	return h(
+		'div',
+		{
+			hydrationprops: serverSideProps,
+			className: 'js-callout-props',
+		},
+		Callout({
+			...calloutProps,
+			format,
+		}),
+	);
+};
+
+export default CalloutWithHydrationProps;

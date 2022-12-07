@@ -76,7 +76,6 @@ export const calloutSummaryStyles = css`
 		/* but we do want to allow click on links */
 		pointer-events: all;
 	}
-
 `;
 
 export const calloutSummaryContentWrapper = css`
@@ -182,14 +181,13 @@ export const calloutSharelink = (
 	`}
 `;
 
-
 // Form fields
 export const fieldInput = css`
 	margin-bottom: ${remSpace[4]};
 `;
 
 export const textareaStyles = css`
-// Source textarea doesn't have theming
+	// Source textarea doesn't have theming
 	${fieldInput}
 
 	background-color: ${neutral[100]};
