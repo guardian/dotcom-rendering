@@ -128,12 +128,19 @@ export const MostViewedFooterGrid = ({
 	selectedColour = neutral[0],
 }: Props) => {
 	const [selectedTabIndex, setSelectedTabIndex] = useState<number>(0);
+	/**
+	 * If there is only one 'tab' of content, then we don't want to render this as
+	 * a tabbed interface at all, preferring a simple list of links. This should improve
+	 * accessibility because otherwise screen readers will announce it as a 'tablist' of
+	 * one tab, adding extra friction to screen reader navigation.
+	 */
+	const renderAsTabs = data.length > 1;
+
 	return (
 		<>
-			{Array.isArray(data) && (
+			{renderAsTabs && (
 				<ul css={tabsContainer} role="tablist">
 					{data.map((tab: TrailTabType, i: number) => {
-						if (!tab.heading) return null;
 						const isSelected = i === selectedTabIndex;
 						const isFirst = i === 0;
 						const selectedStyles =
@@ -147,18 +154,23 @@ export const MostViewedFooterGrid = ({
 										: unselectedStyles,
 									isFirst && firstTab,
 								]}
-								role="tab"
-								aria-selected={isSelected}
-								aria-controls={`tabs-popular-${i}`}
+								role="none"
 								id={`tabs-popular-${i}-tab`}
 								data-cy={`tab-heading-${i}`}
 								key={`tabs-popular-${tab.heading}-tab`}
 								data-link-name={tab.heading}
 								data-chromatic="ignore"
 							>
-								<button
+								<a
+									href={`tabs-popular-${i}`}
 									css={buttonStyles(isSelected)}
-									onClick={() => setSelectedTabIndex(i)}
+									onClick={(e) => {
+										e.preventDefault();
+										setSelectedTabIndex(i);
+									}}
+									aria-selected={isSelected}
+									aria-controls={`tabs-popular-${i}`}
+									role="tab"
 								>
 									<span
 										css={css`
@@ -169,14 +181,18 @@ export const MostViewedFooterGrid = ({
 									</span>
 
 									<TabHeading heading={tab.heading} />
-								</button>
+								</a>
 							</li>
 						);
 					})}
 				</ul>
 			)}
 			{data.map((tab: TrailTabType, i: number) => (
-				<section role="tabpanel">
+				<section
+					role={renderAsTabs ? 'tabpanel' : undefined}
+					id={`tabs-popular-${i}`}
+					key={`tabs-popular-${tab.heading}`}
+				>
 					{/*TODO: Decide whether it's h2 or h3*/}
 					<h3
 						css={css`
@@ -190,9 +206,7 @@ export const MostViewedFooterGrid = ({
 							gridContainer,
 							i !== selectedTabIndex && hideList,
 						]}
-						id={`tabs-popular-${i}`}
 						data-cy={`tab-body-${i}`}
-						key={`tabs-popular-${tab.heading}`}
 						data-link-name={tab.heading}
 						data-testid={tab.heading}
 						data-link-context={`most-read/${sectionName}`}
