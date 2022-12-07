@@ -8,7 +8,7 @@ export const calloutCampaign: CalloutBlockElementV2 = {
 		'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit',
 	tagName: 'callout-early-coronavirus-events',
 	activeFrom: 1588118400000,
-	activeUntil: 1670150561,
+	activeUntil: 1670680841,
 	displayOnSensitive: false,
 	formId: 3860296,
 	title: 'Are you affected by the issues in this article?',

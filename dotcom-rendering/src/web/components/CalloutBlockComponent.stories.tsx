@@ -24,7 +24,7 @@ export const Collapsible = () => {
 		);
 	return (
 		<CalloutBlockComponent
-			callout={calloutCampaignV2}
+			callout={{ ...calloutCampaignV2, isNonCollapsible: false }}
 			format={mockFormat}
 		/>
 	);

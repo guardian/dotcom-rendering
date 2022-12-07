@@ -6,7 +6,7 @@ type Props = {
 	formField: CampaignFieldCheckbox;
 	formData: { [key in string]: string[] };
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
-	validationErrors: string[];
+	validationErrors?: string[];
 };
 
 export const CheckboxSelect = ({
@@ -46,7 +46,7 @@ export const CheckboxSelect = ({
 						value={option.value}
 						checked={isCheckboxChecked}
 						error={
-							validationErrors.includes(formField.id)
+							validationErrors?.includes(formField.id)
 								? true
 								: undefined
 						}

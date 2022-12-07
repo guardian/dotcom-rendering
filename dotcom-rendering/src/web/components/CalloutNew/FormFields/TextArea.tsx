@@ -9,7 +9,7 @@ const textAreaStyles = css`
 `;
 
 type Props = {
-	validationErrors: string[];
+	validationErrors?: string[];
 	formField: CampaignFieldTextArea;
 	formData: { [key in string]: any };
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
@@ -30,7 +30,7 @@ export const TextArea = ({
 			optional={!formField.required}
 			value={formField.id in formData ? formData[formField.id] : ''}
 			error={
-				validationErrors.includes(formField.id)
+				validationErrors?.includes(formField.id)
 					? 'Please complete all required fields'
 					: ''
 			}

@@ -3,7 +3,7 @@ import type { CampaignFieldSelect } from 'src/types/content';
 import { FieldLabel } from './FieldLabel';
 
 type Props = {
-	validationErrors: string[];
+	validationErrors?: string[];
 	formField: CampaignFieldSelect;
 	formData: { [key in string]: any };
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
@@ -19,7 +19,7 @@ export const Select = ({
 		<FieldLabel formField={formField} />
 		<SourceSelect
 			error={
-				validationErrors.includes(formField.id)
+				validationErrors?.includes(formField.id)
 					? 'Please complete all required fields'
 					: ''
 			}
