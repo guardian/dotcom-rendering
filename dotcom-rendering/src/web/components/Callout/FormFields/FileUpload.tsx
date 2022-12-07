@@ -94,41 +94,42 @@ export const FileUpload = ({
 	return (
 		<>
 			<div css={uploadStyles}>
-				<FieldLabel formField={formField}>
-					<>
-						<div css={customUpload(format)}>
-							Choose file
-							<input
-								id={formField.name}
-								data-testid={`form-field-${formField.id}`}
-								type="file"
-								accept="image/*, .pdf"
-								required={formField.required}
-								onChange={onSelectFile}
-								css={css`
-									${visuallyHidden};
-								`}
-							/>
-						</div>
-					</>
-				</FieldLabel>
-				{chosenFile ? (
-					<>
-						<button
-							type="button"
-							css={customUpload(format)}
-							onClick={(): void => {
-								setChosenFile(undefined);
-							}}
-						>
-							Remove File
-						</button>
-						<span css={textStyles}>{getFileName(chosenFile)}</span>
-					</>
-				) : (
-					<div css={textStyles}> No file chosen </div>
-				)}
-				{!!error && <div css={errorMessagesStyles}>{error}</div>}
+				<FieldLabel formField={formField} />
+				<div>
+					<label css={customUpload(format)} htmlFor={formField.id}>
+						Choose file
+						<input
+							id={formField.id}
+							data-testid={`form-field-${formField.id}`}
+							type="file"
+							accept="image/*, .pdf"
+							required={formField.required}
+							onChange={onSelectFile}
+							css={css`
+								${visuallyHidden};
+							`}
+						/>
+					</label>
+					{chosenFile ? (
+						<>
+							<button
+								type="button"
+								css={customUpload(format)}
+								onClick={(): void => {
+									setChosenFile(undefined);
+								}}
+							>
+								Remove File
+							</button>
+							<span css={textStyles}>
+								{getFileName(chosenFile)}
+							</span>
+						</>
+					) : (
+						<div css={textStyles}> No file chosen </div>
+					)}
+					{!!error && <div css={errorMessagesStyles}>{error}</div>}
+				</div>
 			</div>
 		</>
 	);
