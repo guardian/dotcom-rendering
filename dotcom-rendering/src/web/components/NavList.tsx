@@ -14,16 +14,12 @@ type Props = {
 
 const columnRuleColour = (containerOverrides?: ContainerOverrides) => css`
 	column-rule: 1px solid
-		${containerOverrides
-			? containerOverrides.border.container
-			: border.secondary};
+		${containerOverrides?.border.container ?? border.secondary};
 `;
 
 const topBorderColour = (containerOverrides?: ContainerOverrides) => css`
 	border-top: 1px solid
-		${containerOverrides
-			? containerOverrides.topBar.card
-			: palette.neutral[93]};
+		${containerOverrides?.topBar.card ?? palette.neutral[93]};
 `;
 
 const ulStyles = css`
