@@ -1,7 +1,7 @@
 import type { Tag } from '@guardian/content-api-models/v1/tag';
+import { AgeWarning } from '@guardian/source-react-components-development-kitchen';
 import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
-import { AgeWarning } from 'components/AgeWarning';
 import { isComment, isNews } from 'item';
 import { articleWidthStyles } from 'styles';
 
@@ -50,7 +50,7 @@ const getAgeWarning = (
 		}
 	}
 
-	return message; //'1 year old';
+	return message;
 };
 
 const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
@@ -65,10 +65,14 @@ const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
 			return (
 				<>
 					<div css={articleWidthStyles}>
-						<AgeWarning age={age} />
+						<AgeWarning age={age} supportsDarkMode={true} />
 					</div>
 					{children}
-					<AgeWarning age={age} isScreenReader={true} />
+					<AgeWarning
+						age={age}
+						isScreenReader={true}
+						supportsDarkMode={true}
+					/>
 				</>
 			);
 		}

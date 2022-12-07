@@ -1,5 +1,5 @@
-import { TagType } from '@guardian/content-api-models/v1/tagType';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
+import { TagType } from '@guardian/content-api-models/v1/tagType';
 import { getAgeWarning } from '.';
 
 describe('WithAgeWarning test', () => {
