@@ -197,10 +197,7 @@ export const handleFrontJson: RequestHandler = ({ body }, res) => {
 	res.json(enhanceFront(body));
 };
 
-export const handleNewslettersPage: RequestHandler = (
-	{ body },
-	res,
-) => {
+export const handleNewslettersPage: RequestHandler = ({ body }, res) => {
 	try {
 		// TO DO - data validation function
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- in progress
