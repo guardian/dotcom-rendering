@@ -211,18 +211,16 @@ export const MostViewedFooterGrid = ({
 						data-testid={tab.heading}
 						data-link-context={`most-read/${sectionName}`}
 					>
-						{tab.trails.map(
-							(trail: TrailType, ii: number) => (
-								<MostViewedFooterItem
-									key={trail.url}
-									position={ii + 1}
-									url={trail.url}
-									format={trail.format}
-									headlineText={trail.headline}
-									ageWarning={trail.ageWarning}
-								/>
-							),
-						)}
+						{tab.trails.map((trail: TrailType, ii: number) => (
+							<MostViewedFooterItem
+								key={trail.url}
+								position={ii + 1}
+								url={trail.url}
+								format={trail.format}
+								headlineText={trail.headline}
+								ageWarning={trail.ageWarning}
+							/>
+						))}
 					</ol>
 				</section>
 			))}
