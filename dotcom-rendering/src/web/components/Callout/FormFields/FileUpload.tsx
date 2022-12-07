@@ -96,7 +96,6 @@ export const FileUpload = ({
 			<div css={uploadStyles}>
 				<FieldLabel formField={formField}>
 					<>
-						<br />
 						<div css={customUpload(format)}>
 							Choose file
 							<input
@@ -113,11 +112,8 @@ export const FileUpload = ({
 						</div>
 					</>
 				</FieldLabel>
-				{chosenFile == null ? (
-					<div css={textStyles}> No file chosen </div>
-				) : null}
-				<>
-					{chosenFile == null ? null : (
+				{chosenFile ? (
+					<>
 						<button
 							type="button"
 							css={customUpload(format)}
@@ -127,11 +123,11 @@ export const FileUpload = ({
 						>
 							Remove File
 						</button>
-					)}
-					{chosenFile == null ? null : (
 						<span css={textStyles}>{getFileName(chosenFile)}</span>
-					)}
-				</>
+					</>
+				) : (
+					<div css={textStyles}> No file chosen </div>
+				)}
 				{!!error && <div css={errorMessagesStyles}>{error}</div>}
 			</div>
 		</>
