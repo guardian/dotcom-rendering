@@ -35,9 +35,9 @@ export const Card100Media75 = ({
 			headlineSize="huge"
 			headlineSizeOnMobile="large"
 			imageUrl={trail.image}
-			imageSize={'jumbo'}
-			imagePosition={'right'}
-			imagePositionOnMobile={'top'}
+			imageSize="jumbo"
+			imagePosition="right"
+			imagePositionOnMobile="top"
 			trailText={
 				// Only show trail text if there is no supportContent
 				trail.supportingContent === undefined ||
@@ -82,10 +82,10 @@ export const Card100Media100 = ({
 			headlineSize="huge"
 			headlineSizeOnMobile="large"
 			imageUrl={trail.image}
-			imagePosition={'top'}
-			imagePositionOnMobile={'top'}
+			imagePosition="top"
+			imagePositionOnMobile="top"
 			supportingContent={trail.supportingContent?.slice(0, 4)}
-			supportingContentAlignment={'horizontal'}
+			supportingContentAlignment="horizontal"
 		/>
 	);
 };
@@ -270,7 +270,7 @@ export const Card50Media50 = ({
 			imagePositionOnMobile="top"
 			showAge={showAge}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
-			supportingContentAlignment={'horizontal'}
+			supportingContentAlignment="horizontal"
 		/>
 	);
 };
@@ -301,7 +301,7 @@ export const Card50Media50Tall = ({
 			showAge={showAge}
 			trailText={trail.trailText}
 			supportingContent={trail.supportingContent?.slice(0, 3)}
-			supportingContentAlignment={'horizontal'}
+			supportingContentAlignment="horizontal"
 			imagePosition="top"
 			imagePositionOnMobile="top"
 			imageSize="small"
