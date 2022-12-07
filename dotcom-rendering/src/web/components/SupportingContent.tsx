@@ -8,7 +8,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { transparentColour } from '../lib/transparentColour';
 import { CardHeadline } from './CardHeadline';
 
-type Alignment = 'vertical' | 'horizontal';
+export type Alignment = 'vertical' | 'horizontal';
 
 type Props = {
 	supportingContent: DCRSupportingContent[];
@@ -76,7 +76,7 @@ const dynamoLiStyles = css`
 `;
 
 const leftMargin = css`
-	${from.desktop} {
+	${from.tablet} {
 		margin-left: 10px;
 	}
 `;
