@@ -1,14 +1,20 @@
 import { Checkbox, CheckboxGroup } from '@guardian/source-react-components';
-import { CampaignFieldCheckbox } from '../../../../types/content';
+import type { CampaignFieldCheckbox } from 'src/types/content';
 import { FieldLabel } from './FieldLabel';
 
 type Props = {
 	formField: CampaignFieldCheckbox;
 	formData: { [key in string]: string[] };
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
+	validationErrors?: string[];
 };
 
-export const CheckboxSelect = ({ formField, formData, setFormData }: Props) => (
+export const CheckboxSelect = ({
+	formField,
+	formData,
+	setFormData,
+	validationErrors,
+}: Props) => (
 	<>
 		<FieldLabel formField={formField} />
 		<CheckboxGroup name={formField.name}>
@@ -39,6 +45,11 @@ export const CheckboxSelect = ({ formField, formData, setFormData }: Props) => (
 						label={option.label}
 						value={option.value}
 						checked={isCheckboxChecked}
+						error={
+							validationErrors?.includes(formField.id)
+								? true
+								: undefined
+						}
 						onChange={() => {
 							setFormData({
 								...formData,
