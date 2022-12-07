@@ -1,4 +1,5 @@
 import type { BrazeCard } from '@guardian/braze-components';
+import { submitComponentEvent } from '../browser/ophan/ophan';
 import type { DropdownLinkType } from '../components/Dropdown';
 
 export interface Notification {
@@ -28,26 +29,23 @@ export const mapBrazeCardsToNotifications = (
 			message: card.extras.message,
 			logImpression: () => {
 				card.logImpression();
-				console.log('Logged impression to Braze');
 
-				// submitComponentEvent({
-				// 	component: {
-				// 		componentType: NOTIFICATION_COMPONENT_TYPE, // <-- Doesn't exist yet
-				// 		id: card.extras.ophanComponentId, // <-- Should this be required?
-				// 	},
-				// 	action: 'VIEW',
-				// });
-				console.log('Logged impression to Ophan');
+				submitComponentEvent({
+					component: {
+						componentType: NOTIFICATION_COMPONENT_TYPE,
+						id: card.extras.ophanComponentId,
+					},
+					action: 'VIEW',
+				});
 			},
 			logInsert: () => {
-				// submitComponentEvent({
-				// 	component: {
-				// 		componentType: NOTIFICATION_COMPONENT_TYPE, // <-- Doesn't exist yet
-				// 		id: card.extras.ophanComponentId, // <-- Should this be required?
-				// 	},
-				// 	action: 'INSERT',
-				// });
-				console.log('Logged insert to Ophan');
+				submitComponentEvent({
+					component: {
+						componentType: NOTIFICATION_COMPONENT_TYPE,
+						id: card.extras.ophanComponentId,
+					},
+					action: 'INSERT',
+				});
 			},
 		};
 	});
