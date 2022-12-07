@@ -298,7 +298,7 @@ export const Card100PictureTop = ({
 			{card100.map((card) => (
 				<LI percentage="100%" padSides={true}>
 					<Card100Media100
-						trail={cards[0]}
+						trail={card}
 						showAge={showAge}
 						containerPalette={containerPalette}
 					/>
