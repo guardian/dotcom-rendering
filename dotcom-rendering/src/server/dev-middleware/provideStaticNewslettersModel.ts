@@ -1,4 +1,4 @@
-import type { NextFunction, Request, Response } from 'express';
+import type { RequestHandler } from 'express';
 import type { Newsletter } from '../../../src/types/content';
 import type { NewslettersPageModel } from '../../model/pageModel';
 import { STATIC_CONFIG, STATIC_FOOTER, STATIC_NAV } from './defaultData';
@@ -68,12 +68,11 @@ const STATIC_NEWSLETTERS_MODEL: NewslettersPageModel = {
 	contributionsServiceUrl: 'https://contributions.guardianapis.com',
 };
 
-export const provideStaticDataMiddleware = (
-	req: Request,
-	res: Response,
-	next: NextFunction,
+export const provideStaticDataMiddleware: RequestHandler = (
+	{ body },
+	res,
+	next,
 ): void => {
-	const body = req.body as Record<string, unknown>;
-	body.model = STATIC_NEWSLETTERS_MODEL;
+	(body as Record<string, unknown>).model = STATIC_NEWSLETTERS_MODEL;
 	next();
 };
