@@ -176,28 +176,41 @@ export const MostViewedFooterGrid = ({
 				</ul>
 			)}
 			{data.map((tab: TrailTabType, i: number) => (
-				<ol
-					css={[gridContainer, i !== selectedTabIndex && hideList]}
-					id={`tabs-popular-${i}`}
-					data-cy={`tab-body-${i}`}
-					key={`tabs-popular-${i}`}
-					role="tabpanel"
-					aria-labelledby={`tabs-popular-${i}-tab`}
-					data-link-name={tab.heading}
-					data-testid={tab.heading}
-					data-link-context={`most-read/${sectionName}`}
-				>
-					{(tab.trails || []).map((trail: TrailType, ii: number) => (
-						<MostViewedFooterItem
-							key={trail.url}
-							position={ii + 1}
-							url={trail.url}
-							format={trail.format}
-							headlineText={trail.headline}
-							ageWarning={trail.ageWarning}
-						/>
-					))}
-				</ol>
+				<section role="tabpanel">
+					{/*TODO: Decide whether it's h2 or h3*/}
+					<h3
+						css={css`
+							${visuallyHidden}
+						`}
+					>
+						Most viewed {tab.heading}
+					</h3>
+					<ol
+						css={[
+							gridContainer,
+							i !== selectedTabIndex && hideList,
+						]}
+						id={`tabs-popular-${i}`}
+						data-cy={`tab-body-${i}`}
+						key={`tabs-popular-${i}`}
+						data-link-name={tab.heading}
+						data-testid={tab.heading}
+						data-link-context={`most-read/${sectionName}`}
+					>
+						{(tab.trails || []).map(
+							(trail: TrailType, ii: number) => (
+								<MostViewedFooterItem
+									key={trail.url}
+									position={ii + 1}
+									url={trail.url}
+									format={trail.format}
+									headlineText={trail.headline}
+									ageWarning={trail.ageWarning}
+								/>
+							),
+						)}
+					</ol>
+				</section>
 			))}
 		</>
 	);
