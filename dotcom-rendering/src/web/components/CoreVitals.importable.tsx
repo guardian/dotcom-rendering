@@ -16,7 +16,7 @@ export const CoreVitals = () => {
 
 	const isDev =
 		window.location.hostname === 'm.code.dev-theguardian.com' ||
-		window.location.hostname === (process.env.HOSTNAME || 'localhost') ||
+		window.location.hostname === (process.env.HOSTNAME ?? 'localhost') ||
 		window.location.hostname === 'preview.gutools.co.uk';
 	const sampling = 1 / 100;
 

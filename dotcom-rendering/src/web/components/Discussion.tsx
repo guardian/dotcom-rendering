@@ -168,7 +168,7 @@ export const Discussion = ({
 						initialPage={commentPage}
 						pageSizeOverride={commentPageSize}
 						isClosedForComments={
-							isClosedForComments || !enableDiscussionSwitch
+							!!isClosedForComments || !enableDiscussionSwitch
 						}
 						orderByOverride={commentOrderBy}
 						shortUrl={shortUrlId}

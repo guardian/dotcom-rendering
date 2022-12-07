@@ -20,7 +20,7 @@ export const Select = ({
 		error={validationErrors?.[formField.id]}
 		label={formField.label}
 		supporting={formField.description}
-		value={formField.id in formData ? formData[formField.id] : ''}
+		value={formData[formField.id] ?? ''}
 		onChange={(e) =>
 			setFormData({
 				...formData,

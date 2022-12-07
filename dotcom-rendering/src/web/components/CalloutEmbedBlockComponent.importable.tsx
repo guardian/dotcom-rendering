@@ -230,8 +230,8 @@ export const CalloutEmbedBlockComponent = ({
 				// we use `e.shiftKey` internally to determin the direction of the highlighting
 				// using document.activeElement and e.shiftKey we can check what should be the next element to be highlighted
 				if (!e.shiftKey && document.activeElement === lastElementRef) {
-					// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-					firstFieldElementRef && firstFieldElementRef.focus();
+					// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- it may be missing
+					firstFieldElementRef?.focus();
 					e.preventDefault();
 				}
 
@@ -239,8 +239,7 @@ export const CalloutEmbedBlockComponent = ({
 					e.shiftKey &&
 					document.activeElement === firstFieldElementRef
 				) {
-					// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-					lastElementRef && lastElementRef.focus(); // The shift key is down so loop focus back to the last item
+					lastElementRef.focus(); // The shift key is down so loop focus back to the last item
 					e.preventDefault();
 				}
 			}
@@ -252,16 +251,14 @@ export const CalloutEmbedBlockComponent = ({
 	// on open form, focus on firstFieldElementRef
 	useEffect(() => {
 		if (isExpanded && firstFieldElementRef) {
-			// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-			firstFieldElementRef && firstFieldElementRef.focus();
+			firstFieldElementRef.focus();
 		}
 	}, [isExpanded, firstFieldElementRef]);
 
 	// on close form, focus on expandFormButtonRef
 	useEffect(() => {
 		if (!isExpanded && expandFormButtonRef && !hasFormBeenOpened) {
-			// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-			expandFormButtonRef && expandFormButtonRef.focus();
+			expandFormButtonRef.focus();
 		}
 	}, [isExpanded, expandFormButtonRef]);
 

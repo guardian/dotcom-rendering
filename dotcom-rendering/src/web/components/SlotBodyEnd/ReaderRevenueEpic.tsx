@@ -80,10 +80,10 @@ const buildPayload = async (data: CanShowData): Promise<EpicPayload> => ({
 		isPaidContent: data.isPaidContent,
 		tags: data.tags,
 		showSupportMessaging: !shouldHideSupportMessaging(
-			data.isSignedIn || false,
+			data.isSignedIn ?? false,
 		),
 		isRecurringContributor: isRecurringContributor(
-			data.isSignedIn || false,
+			data.isSignedIn ?? false,
 		),
 		lastOneOffContributionDate: getLastOneOffContributionTimestamp(),
 		epicViewLog: getEpicViewLog(storage.local),

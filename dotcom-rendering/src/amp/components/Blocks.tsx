@@ -152,7 +152,7 @@ export const Blocks = ({
 							>
 								<RegionalAd
 									editionId={editionId}
-									section={section || ''}
+									section={section ?? ''}
 									contentType={contentType}
 									config={adConfig}
 									commercialProperties={commercialProperties}
