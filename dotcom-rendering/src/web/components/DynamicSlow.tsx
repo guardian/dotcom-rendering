@@ -85,12 +85,12 @@ const ColumnOfCards50_Card25_Card25 = ({
 	showAge?: boolean;
 	containerPalette?: DCRContainerPalette;
 }) => {
-	const bigs = cards.slice(0, 2);
+	const bigs = cards.slice(0, 2).reverse();
 	const remaining = cards.slice(2);
 
 	return (
 		<UL direction="row-reverse">
-			{bigs.reverse().map((big) => {
+			{bigs.map((big) => {
 				return (
 					<LI
 						percentage="25%"
