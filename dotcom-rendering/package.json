@@ -79,7 +79,7 @@
 		"@guardian/eslint-config": "^2.0.3",
 		"@guardian/eslint-config-typescript": "^2.0.0",
 		"@guardian/eslint-plugin-source-react-components": "^10.0.0",
-		"@guardian/libs": "^10.0.0",
+		"@guardian/libs": "^10.1.0",
 		"@guardian/prettier": "^2.1.5",
 		"@guardian/shimport": "^1.0.2",
 		"@guardian/source-foundations": "^7.0.1",
