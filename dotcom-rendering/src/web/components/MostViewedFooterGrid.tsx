@@ -192,7 +192,7 @@ export const MostViewedFooterGrid = ({
 						]}
 						id={`tabs-popular-${i}`}
 						data-cy={`tab-body-${i}`}
-						key={`tabs-popular-${i}`}
+						key={`tabs-popular-${tab.heading}`}
 						data-link-name={tab.heading}
 						data-testid={tab.heading}
 						data-link-context={`most-read/${sectionName}`}
