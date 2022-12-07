@@ -8,7 +8,7 @@ import {
 	handleFrontJson,
 	handleInteractive,
 	handleKeyEvents,
-	renderNewslettersPage,
+	handleNewslettersPage,
 } from '../web/server';
 import { provideStaticDataMiddleware } from './dev-middleware/provideStaticNewslettersModel';
 
@@ -42,7 +42,7 @@ export const devServer = (): Handler => {
 				return handleFrontJson(req, res, next);
 			case '/email-newsletters':
 				return provideStaticDataMiddleware(req, res, () => {
-					renderNewslettersPage(req, res);
+					handleNewslettersPage(req, res, next);
 				});
 			default: {
 				if (req.url.match(ARTICLE_URL)) {
