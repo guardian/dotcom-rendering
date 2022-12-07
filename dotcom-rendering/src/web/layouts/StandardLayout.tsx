@@ -382,10 +382,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								editionId={CAPIArticle.editionId}
 								idUrl={CAPIArticle.config.idUrl}
 								mmaUrl={CAPIArticle.config.mmaUrl}
-								supporterCTA={
-									CAPIArticle.nav.readerRevenueLinks.header
-										.supporter
-								}
 								discussionApiUrl={
 									CAPIArticle.config.discussionApiUrl
 								}
@@ -398,9 +394,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
 								isInEuropeTest={isInEuropeTest}
-								headerTopBarSwitch={
-									!!CAPIArticle.config.switches.headerTopNav
-								}
 								headerTopBarSearchCapiSwitch={
 									!!CAPIArticle.config.switches
 										.headerTopBarSearchCapiSwitch

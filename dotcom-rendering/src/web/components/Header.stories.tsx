@@ -1,8 +1,8 @@
-import { HeaderSingleFrontDoor } from './HeaderSingleFrontDoor';
+import { Header } from './Header';
 
 export default {
-	component: HeaderSingleFrontDoor,
-	title: 'Components/HeaderSingleFrontDoor',
+	component: Header,
+	title: 'Components/Header',
 };
 
 const readerRevenueLinks = {
@@ -18,7 +18,7 @@ const readerRevenueLinks = {
 
 export const defaultStory = () => {
 	return (
-		<HeaderSingleFrontDoor
+		<Header
 			editionId="UK"
 			idUrl="https://profile.theguardian.com"
 			mmaUrl="https://manage.theguardian.com"
@@ -28,6 +28,7 @@ export const defaultStory = () => {
 			contributionsServiceUrl="https://contributions.guardianapis.com"
 			idApiUrl="https://idapi.theguardian.com"
 			headerTopBarSearchCapiSwitch={false}
+			isInEuropeTest={false}
 		/>
 	);
 };
