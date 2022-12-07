@@ -3,6 +3,7 @@ import { Fragment } from 'react';
 import type { DCRContainerPalette } from '../../types/front';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
+import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
 import { generateSources } from './Picture';
 
 const picture = css`
@@ -40,31 +41,9 @@ type Props = {
 	containerPalette?: DCRContainerPalette;
 };
 
-/**
- * # TEMPORARY MEASURE
- *
- * We can handle generating the image URL ourselves,
- * so we’re turning signed “i.guim.co.uk” URLs into
- * their source ones
- *
- * @deprecated we should update frontend to send sources directly
- */
-const getSourceImage = (src: string) => {
-	const url = new URL(src);
-	if (url.hostname !== 'i.guim.co.uk') return src;
-
-	const [, , domain] = url.pathname.split('/');
-	if (!['uploads', 'media'].includes(domain)) return src;
-
-	return new URL(
-		url.pathname.replace(`/img/${domain}/`, ''),
-		`https://${domain}.guim.co.uk`,
-	).toString();
-};
-
 export const Avatar = ({ src, alt, format, containerPalette }: Props) => {
 	const palette = decidePalette(format, containerPalette);
-	const sources = generateSources(getSourceImage(src), [
+	const sources = generateSources(getSourceImageUrl(src), [
 		{ breakpoint: 320, width: 75 },
 		{ breakpoint: 740, width: 140 },
 	]);
