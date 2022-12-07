@@ -152,7 +152,7 @@ export const MostViewedFooterGrid = ({
 								aria-controls={`tabs-popular-${i}`}
 								id={`tabs-popular-${i}-tab`}
 								data-cy={`tab-heading-${i}`}
-								key={`tabs-popular-${i}-tab`}
+								key={`tabs-popular-${tab.heading}-tab`}
 								data-link-name={tab.heading}
 								data-chromatic="ignore"
 							>
