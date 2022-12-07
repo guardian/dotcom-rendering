@@ -419,9 +419,7 @@ const calloutDescriptionText = (
 	const filteredNodes = nodes.filter(
 		(node) => !['A'].includes(node.nodeName),
 	);
-	return filteredNodes.map(
-		calloutDescriptionTextElement(format),
-	);
+	return filteredNodes.map(calloutDescriptionTextElement(format));
 };
 
 const Tweet = (props: {

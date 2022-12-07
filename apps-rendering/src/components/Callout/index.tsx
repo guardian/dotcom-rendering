@@ -3,7 +3,7 @@ import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
 import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
-import type Int64 from 'node-int64';
+import { isElement } from 'lib';
 import type { FC, ReactElement } from 'react';
 import CalloutBlock from './calloutBlock';
 import { DeadlineDate, Highlight, isCalloutActive } from './deadlineDate';
@@ -16,7 +16,7 @@ export interface CalloutProps {
 	format: ArticleFormat;
 	description?: DocumentFragment;
 	isNonCollapsible: boolean;
-	activeUntil?: Int64;
+	activeUntil?: number;
 	name: string;
 }
 
@@ -30,6 +30,30 @@ const Callout: FC<CalloutProps> = ({
 	activeUntil,
 	name,
 }): ReactElement => {
+	const hydrationParams = (
+		<script className="js-callout-params" type="application/json">
+			{JSON.stringify({
+				callout: {
+					isNonCollapsible,
+					heading,
+					formId,
+					formFields,
+					description: description
+						? Array.from(description.childNodes)
+								.map((node) =>
+									isElement(node)
+										? node.outerHTML
+										: node.textContent,
+								)
+								.join('')
+						: [],
+					name,
+					activeUntil,
+				},
+				format,
+			})}
+		</script>
+	);
 	const isActive = isCalloutActive(activeUntil);
 
 	if (!isActive && isNonCollapsible) {
@@ -42,9 +66,9 @@ const Callout: FC<CalloutProps> = ({
 	} else if (!isActive && !isNonCollapsible) {
 		return <></>;
 	}
-
 	return (
-		<aside>
+		<aside className="js-callout">
+			{hydrationParams}
 			{isNonCollapsible ? (
 				<ThemeProvider theme={getTheme()}>
 					<CalloutBlock

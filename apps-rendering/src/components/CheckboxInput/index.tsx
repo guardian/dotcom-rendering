@@ -21,7 +21,7 @@ const CheckboxInput = ({
 	supporting,
 	cssOverrides,
 	mandatory,
-}: CheckboxInputProps): ReactElement =>  (
+}: CheckboxInputProps): ReactElement => (
 	<CheckboxGroup
 		id={`checkbox-group-${name}--${mandatory ? 'mandatory' : 'optional'}`}
 		label={label}
@@ -31,13 +31,8 @@ const CheckboxInput = ({
 		cssOverrides={cssOverrides}
 	>
 		{options.map(({ label, value }) => {
-			return (
-			<Checkbox
-				label={label}
-				value={value}
-				key={value}
-			/>
-		)})}
+			return <Checkbox label={label} value={value} key={value} />;
+		})}
 	</CheckboxGroup>
 );
 

@@ -1,22 +1,22 @@
 import { css } from '@emotion/react';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
-import { remSpace, error, textSans } from '@guardian/source-foundations';
+import { error, remSpace, textSans } from '@guardian/source-foundations';
 import {
+	InlineError,
+	Label,
 	Option,
 	Select,
 	TextArea,
 	TextInput,
-	Label,
-	InlineError,
 } from '@guardian/source-react-components';
-import { logger } from '../../logger';
 import CheckboxInput from 'components/CheckboxInput';
 import FileInput from 'components/FileInput';
 import RadioInput from 'components/RadioInput';
 import type { FC, ReactElement } from 'react';
 import { darkModeCss } from 'styles';
-import { fieldLabel, fieldInput, textareaStyles } from './styles';
+import { logger } from '../../logger';
+import { fieldInput, fieldLabel, textareaStyles } from './styles';
 
 const infoStyles = css`
 	${textSans.small()};
@@ -29,15 +29,11 @@ export const Disclaimer: FC = () => {
 			You must be 18 or over to fill in this form. Only the Guardian can
 			see your contributions and one of our journalists may contact you to
 			discuss further. For more information please see our{' '}
-			<a
-				href="https://www.theguardian.com/help/terms-of-service"
-			>
+			<a href="https://www.theguardian.com/help/terms-of-service">
 				terms of service
 			</a>{' '}
 			and{' '}
-			<a
-				href="https://www.theguardian.com/help/privacy-policy"
-			>
+			<a href="https://www.theguardian.com/help/privacy-policy">
 				privacy policy
 			</a>
 			.
@@ -61,11 +57,11 @@ const FieldError = (): ReactElement => (
 				color: ${error[500]};
 			`}
 		`}
-		className='field__feedback'
+		className="field__feedback"
 	>
 		Please complete all required fields
 	</InlineError>
-	);
+);
 
 export const renderField = (
 	formId: number,
@@ -74,7 +70,9 @@ export const renderField = (
 ): ReactElement | null => {
 	const name = `field_${type}_${id}`;
 
-	const FormField: FC<{children: ReactElement}> =  ({children}): ReactElement => (
+	const FormField: FC<{ children: ReactElement }> = ({
+		children,
+	}): ReactElement => (
 		<Label
 			id={name}
 			key={name}
@@ -87,7 +85,6 @@ export const renderField = (
 			{children}
 		</Label>
 	);
-
 
 	switch (type) {
 		case 'text':
@@ -126,7 +123,7 @@ export const renderField = (
 						format={format}
 						mandatory={mandatory}
 					/>
-			</FormField>
+				</FormField>
 			);
 		case 'radio':
 			return (
@@ -150,7 +147,6 @@ export const renderField = (
 						mandatory={mandatory}
 					/>
 				</FormField>
-
 			);
 		case 'select':
 			return (
@@ -163,18 +159,20 @@ export const renderField = (
 						key={name}
 						name={name}
 					>
-					{options.map(({ value, label }) => {
-						return (
-							<Option key={value} value={value}>
-								{label}
-							</Option>
-						);
-					})}
-				</Select>
-			</FormField>
+						{options.map(({ value, label }) => {
+							return (
+								<Option key={value} value={value}>
+									{label}
+								</Option>
+							);
+						})}
+					</Select>
+				</FormField>
 			);
 		default:
-			logger.error(`Invalid field ${type} provided for callout ${formId}`);
+			logger.error(
+				`Invalid field ${type} provided for callout ${formId}`,
+			);
 			return null;
 	}
 };

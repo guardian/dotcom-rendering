@@ -1,6 +1,7 @@
 import { parse } from 'client/parser';
 
-// Changed the way we're handling dateUntil, so we can probably remove the buffer from storybook webpack config
+// Changed the way we're handling dateUntil,
+// so we can probably remove the buffer from storybook webpack config
 const mockCampaign = {
 	id: '1fc53dab-1c76-4258-8194-b4b3d8399052',
 	name: 'CALLOUT: ghost flights',
@@ -115,6 +116,8 @@ const parseHtml = (html: string): DocumentFragment | undefined =>
 		(_err) => undefined,
 		(doc) => doc,
 	);
-const campaignDescription: DocumentFragment | undefined = parseHtml(mockCampaign.fields.description);
+const campaignDescription: DocumentFragment | undefined = parseHtml(
+	mockCampaign.fields.description,
+);
 
 export { mockCampaign, campaignDescription };

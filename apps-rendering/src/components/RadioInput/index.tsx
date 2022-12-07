@@ -23,7 +23,12 @@ const RadioInput = ({
 		cssOverrides={cssOverrides}
 	>
 		{options.map(({ value, label }, i) => (
-			<Radio key={value} value={value} label={label} defaultChecked={mandatory && i===0}/>
+			<Radio
+				key={value}
+				value={value}
+				label={label}
+				defaultChecked={mandatory && i === 0}
+			/>
 		))}
 	</RadioGroup>
 );

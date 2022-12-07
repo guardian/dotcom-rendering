@@ -18,15 +18,11 @@ export interface CalloutFormProps {
 	disableInputs?: boolean;
 }
 
-const CalloutForm: FC<CalloutFormProps> = ({
-	id,
-	fields,
-	format,
-}) => {
+const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 	return (
 		<div className="js-callout" css={calloutForm}>
 			{/* We manually validate this form in client/callouts.ts */}
-			<form action="#" method="post" noValidate >
+			<form action="#" method="post" noValidate>
 				<ShareLink format={format} />
 				<Disclaimer />
 				<input name="formId" type="hidden" value={id} />
