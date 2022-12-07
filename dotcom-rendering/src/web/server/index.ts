@@ -1,4 +1,3 @@
-import type express from 'express';
 import type { RequestHandler } from 'express';
 import { Standard as ExampleArticle } from '../../../fixtures/generated/articles/Standard';
 import { isRecipe } from '../../model/enhance-recipes';
