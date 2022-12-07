@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { fireEvent, render } from '@testing-library/react';
 import { useApi as useApi_ } from '../lib/useApi';
-import { responseWithOneTab, responseWithTwoTabs } from './MostViewed.mocks';
+import { responseWithTwoTabs } from './MostViewed.mocks';
 import { MostViewedFooterData } from './MostViewedFooterData.importable';
 
 const useApi: { [key: string]: any } = useApi_;
@@ -85,26 +85,6 @@ describe('MostViewedFooterData', () => {
 
 		expect(getByTestId(firstHeading)).toHaveStyle(VISIBLE);
 		expect(getByTestId(secondHeading)).toHaveStyle(HIDDEN);
-	});
-
-	it('should still show the tab menu when there is only one group of tabs', async () => {
-		useApi.mockReturnValue({ data: responseWithOneTab });
-
-		const { queryByText } = render(
-			<MostViewedFooterData
-				sectionName="Section Name"
-				format={{
-					display: ArticleDisplay.Standard,
-					design: ArticleDesign.Standard,
-					theme: ArticlePillar.News,
-				}}
-				ajaxUrl="https://api.nextgen.guardianapps.co.uk"
-			/>,
-		);
-
-		expect(
-			queryByText(responseWithOneTab.tabs[0].heading),
-		).toBeInTheDocument();
 	});
 
 	it("should display the text 'Live' for live blogs", () => {
