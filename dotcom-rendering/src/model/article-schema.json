@@ -31,6 +31,9 @@
                         "$ref": "#/definitions/CalloutBlockElement"
                     },
                     {
+                        "$ref": "#/definitions/CalloutBlockElementV2"
+                    },
+                    {
                         "$ref": "#/definitions/ChartAtomBlockElement"
                     },
                     {
@@ -1131,6 +1134,92 @@
                 "options",
                 "required",
                 "type"
+            ]
+        },
+        "CalloutBlockElementV2": {
+            "type": "object",
+            "properties": {
+                "_type": {
+                    "type": "string",
+                    "enum": [
+                        "model.dotcomrendering.pageElements.CalloutBlockElementV2"
+                    ]
+                },
+                "elementId": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "calloutsUrl": {
+                    "type": "string"
+                },
+                "activeFrom": {
+                    "type": "number"
+                },
+                "activeUntil": {
+                    "type": "number"
+                },
+                "displayOnSensitive": {
+                    "type": "boolean"
+                },
+                "formId": {
+                    "type": "number"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "tagName": {
+                    "type": "string"
+                },
+                "formFields": {
+                    "type": "array",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/CampaignFieldText"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldTextArea"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldFile"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldRadio"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldCheckbox"
+                            },
+                            {
+                                "$ref": "#/definitions/CampaignFieldSelect"
+                            }
+                        ]
+                    }
+                },
+                "role": {
+                    "$ref": "#/definitions/RoleType"
+                },
+                "isNonCollapsible": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "_type",
+                "activeFrom",
+                "calloutsUrl",
+                "description",
+                "displayOnSensitive",
+                "elementId",
+                "formFields",
+                "formId",
+                "id",
+                "isNonCollapsible",
+                "tagName",
+                "title"
             ]
         },
         "ChartAtomBlockElement": {
@@ -3569,6 +3658,9 @@
                                 "$ref": "#/definitions/CalloutBlockElement"
                             },
                             {
+                                "$ref": "#/definitions/CalloutBlockElementV2"
+                            },
+                            {
                                 "$ref": "#/definitions/ChartAtomBlockElement"
                             },
                             {
@@ -4137,7 +4229,7 @@
                     "type": "string"
                 },
                 "pillar": {
-                    "$ref": "#/definitions/LegacyPillar"
+                    "type": "string"
                 },
                 "carouselImages": {
                     "type": "object",
@@ -4209,13 +4301,14 @@
                             "type": "string"
                         }
                     }
+                },
+                "showQuotedHeadline": {
+                    "type": "boolean"
                 }
             },
             "required": [
-                "designType",
                 "format",
                 "headline",
-                "pillar",
                 "url"
             ]
         },

@@ -117,6 +117,14 @@ const decideIfAgeShouldShow = ({
 	return false;
 };
 
+type RenderFooter = ({
+	displayAge,
+	displayLines,
+}: {
+	displayAge: boolean;
+	displayLines: boolean;
+}) => JSX.Element;
+
 const DecideFooter = ({
 	isOpinion,
 	hasSublinks,
@@ -126,7 +134,7 @@ const DecideFooter = ({
 	isOpinion: boolean;
 	hasSublinks?: boolean;
 	displayAge: boolean;
-	renderFooter: Function;
+	renderFooter: RenderFooter;
 }) => {
 	if (isOpinion && !hasSublinks) {
 		// Opinion cards without sublinks render the entire footer, including lines,
@@ -139,7 +147,7 @@ const DecideFooter = ({
 		displayAge,
 		displayLines: false,
 	});
-	// Note. Opinion cards always show the lines at the botom of the card (in CommentFooter)
+	// Note. Opinion cards always show the lines at the bottom of the card (in CommentFooter)
 };
 
 const CommentFooter = ({
@@ -151,7 +159,7 @@ const CommentFooter = ({
 	hasSublinks?: boolean;
 	palette: Palette;
 	displayAge: boolean;
-	renderFooter: Function;
+	renderFooter: RenderFooter;
 }) => {
 	return hasSublinks ? (
 		// For opinion cards with sublinks there is already a footer rendered inside that
@@ -459,7 +467,7 @@ export const Card = ({
 			) : (
 				<></>
 			)}
-			{isOpinion && (
+			{isOpinion && !isDynamo && (
 				<CommentFooter
 					hasSublinks={hasSublinks}
 					displayAge={displayAge}

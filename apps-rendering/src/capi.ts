@@ -1,5 +1,6 @@
 // ----- Imports ----- //
 
+import type { Newsletter } from '@guardian/apps-rendering-api-models/newsletter';
 import type { BlockElement } from '@guardian/content-api-models/v1/blockElement';
 import type { CapiDateTime } from '@guardian/content-api-models/v1/capiDateTime';
 import type { Content } from '@guardian/content-api-models/v1/content';
@@ -214,6 +215,31 @@ const capiDateTimeToDate = (date: CapiDateTime): Option<Date> =>
 const maybeCapiDate = (date: CapiDateTime | undefined): Option<Date> =>
 	pipe(date, fromNullable, andThen(capiDateTimeToDate));
 
+/**
+ * Return a mock `Newsletter` if `content` contains a newsletter tag
+ * @param content the content to check for presence of a newsletter tag
+ * @returns a mock `Newsletter`, or `undefined` if `content` does not include a newsletter tag
+ */
+const getMockPromotedNewsletter = (
+	content: Content,
+): Newsletter | undefined => {
+	const newsletterTagPrefix = 'campaign/email/';
+	const newsletterTag = tagsOfType(TagType.CAMPAIGN)(content.tags).find(
+		(campaignTag) => campaignTag.id.startsWith(newsletterTagPrefix),
+	);
+
+	if (newsletterTag) {
+		return {
+			description: 'Test newsletter',
+			frequency: 'test',
+			identityName: 'invalid',
+			name: `Test: ${newsletterTag.id}`,
+			successDescription: 'test',
+			theme: 'news',
+		};
+	}
+};
+
 // ----- Exports ----- //
 
 export {
@@ -235,4 +261,5 @@ export {
 	articleMainImage,
 	checkForThirdPartyEmbed,
 	requiresInlineStyles,
+	getMockPromotedNewsletter,
 };

@@ -139,13 +139,21 @@ function decideFont(role: string) {
 	`;
 }
 
-export const PullQuoteBlockComponent: React.FC<{
+type Props = {
 	html?: string;
 	palette: Palette;
 	format: ArticleFormat;
 	role: string;
 	attribution?: string;
-}> = ({ html, palette, format, attribution, role }) => {
+};
+
+export const PullQuoteBlockComponent = ({
+	html,
+	palette,
+	format,
+	attribution,
+	role,
+}: Props) => {
 	if (!html) return <></>;
 
 	if (format.theme === ArticleSpecial.SpecialReportAlt)

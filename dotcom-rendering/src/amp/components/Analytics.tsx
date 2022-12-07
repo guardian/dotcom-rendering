@@ -1,5 +1,3 @@
-import React from 'react';
-
 export interface AnalyticsModel {
 	gaTracker: string;
 	title: string;
@@ -12,9 +10,11 @@ export interface AnalyticsModel {
 	ipsosSectionName: string;
 }
 
-export const Analytics: React.FC<{
+type Props = {
 	analytics: AnalyticsModel;
-}> = ({
+};
+
+export const Analytics = ({
 	analytics: {
 		gaTracker,
 		comscoreID,
@@ -26,7 +26,7 @@ export const Analytics: React.FC<{
 		domain,
 		ipsosSectionName,
 	},
-}) => {
+}: Props) => {
 	const scripts: string[] = [
 		`<amp-analytics config="https://ophan.theguardian.com/amp.json" data-credentials="include" ></amp-analytics>`,
 		`<amp-analytics data-block-on-consent type="googleanalytics" id="google-analytics">

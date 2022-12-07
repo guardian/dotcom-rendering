@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { neutral } from '@guardian/source-foundations';
-import React from 'react';
 import type { NavType } from '../../model/extract-nav';
 import type { ConfigType } from '../../types/config';
 import { AdConsent } from '../components/AdConsent';
@@ -30,10 +29,12 @@ const backgroundColour = css`
 	background-color: ${neutral[97]};
 `;
 
-const Body: React.FunctionComponent<{
+type BodyProps = {
 	data: ArticleModel;
 	config: ConfigType;
-}> = ({ data, config }) => {
+};
+
+const Body = ({ data, config }: BodyProps) => {
 	const { format } = data;
 
 	if (
@@ -45,21 +46,23 @@ const Body: React.FunctionComponent<{
 	return <BodyArticle data={data} config={config} />;
 };
 
-export const Article: React.FC<{
+type ArticleProps = {
 	experimentsData?: AmpExperiments;
 	nav: NavType;
 	articleData: ArticleModel;
 	config: ConfigType;
 	analytics: AnalyticsModel;
 	permutive: PermutiveModel;
-}> = ({
+};
+
+export const Article = ({
 	nav,
 	articleData,
 	config,
 	analytics,
 	experimentsData,
 	permutive: { projectId, apiKey, payload },
-}) => {
+}: ArticleProps) => {
 	return (
 		<ContentABTestProvider
 			switches={config.switches}
@@ -97,7 +100,7 @@ export const Article: React.FC<{
 
 			{/* The sidebar has to live here unfortunately to be valid AMP
             but note the click handler lives in the Header. */}
-			<Sidebar key="sidebar" nav={nav} />
+			<Sidebar key="sidebar" />
 		</ContentABTestProvider>
 	);
 };

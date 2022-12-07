@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { neutral, textSans } from '@guardian/source-foundations';
-import React from 'react';
 import PlusIcon from '../../static/icons/plus.svg';
 
 const showMore = css`
@@ -37,7 +36,7 @@ const showMore = css`
 	}
 `;
 
-export const ShowMoreButton: React.FC = () => (
+export const ShowMoreButton = () => (
 	<div css={showMore} aria-label="Show more">
 		<PlusIcon />
 		Show more

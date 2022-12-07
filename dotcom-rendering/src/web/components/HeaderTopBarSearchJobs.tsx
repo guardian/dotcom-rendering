@@ -3,13 +3,15 @@ import { brand, from, neutral, textSans } from '@guardian/source-foundations';
 
 const searchLinkStyles = css`
 	${textSans.medium({ fontWeight: 'bold' })};
+	font-size: 1rem;
+	line-height: 1;
 	color: ${neutral[100]};
 	transition: color 80ms ease-out;
 	text-decoration: none;
 	padding: 7px 0;
 
 	${from.tablet} {
-		padding: 7px 10px 7px 5px;
+		padding: 8px 10px 7px 6px;
 	}
 
 	:hover,

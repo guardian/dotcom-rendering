@@ -1,28 +1,39 @@
+import { palette } from '@guardian/source-foundations';
 import type { DCRContainerPalette } from '../../types/front';
 import type { ContainerOverrides } from '../../types/palette';
 import { transparentColour } from './transparentColour';
-import { neutral } from '@guardian/source-foundations';
+
+const {
+	brand,
+	brandAlt,
+	culture,
+	news,
+	neutral,
+	specialReport,
+	specialReportAlt,
+	sport,
+} = palette;
 
 const textCardHeadline = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return '#ffffff';
+			return neutral[100];
 		case 'LongRunningAltPalette':
-			return '#121212';
+			return neutral[7];
 		case 'SombrePalette':
-			return '#ffffff';
+			return neutral[100];
 		case 'SombreAltPalette':
-			return '#ffffff';
+			return neutral[100];
 		case 'InvestigationPalette':
-			return '#ffffff';
+			return neutral[100];
 		case 'BreakingPalette':
-			return '#ffffff';
+			return neutral[100];
 		case 'EventPalette':
-			return '#041F4A';
+			return brand[300];
 		case 'EventAltPalette':
-			return '#041F4A';
+			return brand[300];
 		case 'SpecialReportAltPalette':
-			return '#2b2b2a';
+			return specialReportAlt[100];
 	}
 };
 
@@ -32,23 +43,23 @@ const textCardFooter = textCardHeadline;
 const textCardKicker = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return '#ff9081';
+			return news[550];
 		case 'LongRunningAltPalette':
-			return '#8b0000';
+			return news[200];
 		case 'SombrePalette':
-			return '#c1d8fc';
+			return brand[800];
 		case 'SombreAltPalette':
-			return '#ff5943';
+			return news[500];
 		case 'InvestigationPalette':
-			return '#ffe500';
+			return brandAlt[400];
 		case 'BreakingPalette':
-			return '#ffbac8';
+			return news[600];
 		case 'EventPalette':
-			return '#c70000';
+			return news[400];
 		case 'EventAltPalette':
 			return '#e2352d';
 		case 'SpecialReportAltPalette':
-			return '#2b2b2a';
+			return specialReportAlt[100];
 	}
 };
 
@@ -57,23 +68,23 @@ const textCardByline = textCardKicker;
 const textContainerDate = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return '#c70000';
+			return news[400];
 		case 'LongRunningAltPalette':
-			return '#8b0000';
+			return news[200];
 		case 'SombrePalette':
-			return '#c1d8fc';
+			return brand[800];
 		case 'SombreAltPalette':
-			return '#ff5943';
+			return news[500];
 		case 'InvestigationPalette':
-			return '#ffe500';
+			return brandAlt[400];
 		case 'BreakingPalette':
-			return '#8b0000';
+			return news[200];
 		case 'EventPalette':
-			return '#c70000';
+			return news[400];
 		case 'EventAltPalette':
-			return '#c70000';
+			return news[400];
 		case 'SpecialReportAltPalette':
-			return '#2b2b2a';
+			return specialReportAlt[100];
 	}
 };
 
@@ -82,69 +93,69 @@ const textCardCommentCount = (
 ): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return '#DCDCDC';
+			return neutral[86];
 		case 'LongRunningAltPalette':
-			return '#707070';
+			return neutral[46];
 		case 'SombrePalette':
-			return '#dcdcdc';
+			return neutral[86];
 		case 'SombreAltPalette':
-			return '#999999';
+			return neutral[60];
 		case 'InvestigationPalette':
-			return '#dcdcdc';
+			return neutral[86];
 		case 'BreakingPalette':
-			return '#dcdcdc';
+			return neutral[86];
 		case 'EventPalette':
-			return '#707070';
+			return neutral[46];
 		case 'EventAltPalette':
-			return '#333333';
+			return neutral[20];
 		case 'SpecialReportAltPalette':
-			return '#2b2b2a';
+			return specialReportAlt[100];
 	}
 };
 
 const textDynamoHeadline = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return '#052962';
+			return brand[400];
 		case 'LongRunningAltPalette':
-			return '#121212';
+			return neutral[7];
 		case 'SombrePalette':
-			return '#ffffff';
+			return neutral[100];
 		case 'SombreAltPalette':
-			return '#ffffff';
+			return neutral[100];
 		case 'InvestigationPalette':
-			return '#ffffff';
+			return neutral[100];
 		case 'BreakingPalette':
-			return '#121212';
+			return neutral[7];
 		case 'EventPalette':
-			return '#041F4A';
+			return brand[300];
 		case 'EventAltPalette':
-			return '#041F4A';
+			return brand[300];
 		case 'SpecialReportAltPalette':
-			return '#2b2b2a';
+			return specialReportAlt[100];
 	}
 };
 
 const textDynamoKicker = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return '#c70000';
+			return news[400];
 		case 'LongRunningAltPalette':
-			return '#8b0000';
+			return news[200];
 		case 'SombrePalette':
-			return '#c1d8fc';
+			return brand[800];
 		case 'SombreAltPalette':
-			return '#ff5943';
+			return news[500];
 		case 'InvestigationPalette':
-			return '#ffe500';
+			return brandAlt[400];
 		case 'BreakingPalette':
-			return '#8b0000';
+			return news[200];
 		case 'EventPalette':
-			return '#c70000';
+			return news[400];
 		case 'EventAltPalette':
-			return '#c70000';
+			return news[400];
 		case 'SpecialReportAltPalette':
-			return '#121212';
+			return neutral[7];
 	}
 };
 
@@ -153,113 +164,113 @@ const textDynamoSublinkKicker = (
 ): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return '#ff9081';
+			return news[550];
 		case 'LongRunningAltPalette':
-			return '#8b0000';
+			return news[200];
 		case 'SombrePalette':
-			return '#c1d8fc';
+			return brand[800];
 		case 'SombreAltPalette':
-			return '#ff5943';
+			return news[500];
 		case 'InvestigationPalette':
-			return '#ffe500';
+			return brandAlt[400];
 		case 'BreakingPalette':
-			return '#8b0000';
+			return news[200];
 		case 'EventPalette':
-			return '#c70000';
+			return news[400];
 		case 'EventAltPalette':
-			return '#c70000';
+			return news[400];
 		case 'SpecialReportAltPalette':
-			return '#121212';
+			return neutral[7];
 	}
 };
 
 const textDynamoMeta = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return '#052962';
+			return brand[400];
 		case 'LongRunningAltPalette':
-			return '#dcdcdc';
+			return neutral[86];
 		case 'SombrePalette':
-			return '#3f464a';
+			return specialReport[300];
 		case 'SombreAltPalette':
-			return '#222527';
+			return specialReport[100];
 		case 'InvestigationPalette':
-			return '#3f464a';
+			return specialReport[300];
 		case 'BreakingPalette':
-			return '#8b0000';
+			return news[200];
 		case 'EventPalette':
-			return '#ededed';
+			return neutral[93];
 		case 'EventAltPalette':
-			return '#ededed';
+			return neutral[93];
 		case 'SpecialReportAltPalette':
-			return '#f5f0eb';
+			return specialReportAlt[800];
 	}
 };
 
 const textContainer = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return '#052962';
+			return brand[400];
 		case 'LongRunningAltPalette':
-			return '#121212';
+			return neutral[7];
 		case 'SombrePalette':
-			return '#ffffff';
+			return neutral[100];
 		case 'SombreAltPalette':
-			return '#ffffff';
+			return neutral[100];
 		case 'InvestigationPalette':
-			return '#ffffff';
+			return neutral[100];
 		case 'BreakingPalette':
-			return '#121212';
+			return neutral[7];
 		case 'EventPalette':
-			return '#041F4A';
+			return brand[300];
 		case 'EventAltPalette':
-			return '#041f4a';
+			return brand[300];
 		case 'SpecialReportAltPalette':
-			return '#2b2b2a';
+			return specialReportAlt[100];
 	}
 };
 
 const textContainerToggle = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return '#333333';
+			return neutral[20];
 		case 'LongRunningAltPalette':
-			return '#333333';
+			return neutral[20];
 		case 'SombrePalette':
-			return '#dcdcdc';
+			return neutral[86];
 		case 'SombreAltPalette':
-			return '#dcdcdc';
+			return neutral[86];
 		case 'InvestigationPalette':
-			return '#f6f6f6';
+			return neutral[97];
 		case 'BreakingPalette':
-			return '#707070';
+			return neutral[46];
 		case 'EventPalette':
-			return '#707070';
+			return neutral[46];
 		case 'EventAltPalette':
-			return '#707070';
+			return neutral[46];
 		case 'SpecialReportAltPalette':
-			return '#999999';
+			return neutral[60];
 	}
 };
 
 const borderContainer = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return 'rgba(0,0,0, 0.2)';
+			return transparentColour(neutral[60], 0.4);
 		case 'LongRunningAltPalette':
-			return 'rgba(0,0,0, 0.2)';
+			return transparentColour(neutral[60], 0.4);
 		case 'SombrePalette':
-			return 'rgba(255,255,255, 0.2)';
+			return neutral[60];
 		case 'SombreAltPalette':
-			return 'rgba(255,255,255, 0.2)';
+			return neutral[46];
 		case 'InvestigationPalette':
-			return 'rgba(255,255,255, 0.2)';
+			return neutral[60];
 		case 'BreakingPalette':
-			return 'rgba(0,0,0, 0.2)';
+			return neutral[86];
 		case 'EventPalette':
-			return 'rgba(0,0,0, 0.2)';
+			return neutral[86];
 		case 'EventAltPalette':
-			return 'rgba(0,0,0, 0.2)';
+			return neutral[86];
 		case 'SpecialReportAltPalette':
 			return transparentColour(neutral[60], 0.3);
 	}
@@ -270,46 +281,46 @@ const borderLines = textCardHeadline;
 const backgroundContainer = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return '#e4e5e8';
+			return specialReport[700];
 		case 'LongRunningAltPalette':
 			return '#f2f2f2';
 		case 'SombrePalette':
-			return '#595c5f';
+			return specialReport[400];
 		case 'SombreAltPalette':
-			return '#3f464a';
+			return specialReport[300];
 		case 'InvestigationPalette':
-			return '#595c5f';
+			return specialReport[400];
 		case 'BreakingPalette':
-			return '#ffffff';
+			return neutral[100];
 		case 'EventPalette':
-			return '#f1f8fc';
+			return sport[800];
 		case 'EventAltPalette':
-			return '#fbf6ef';
+			return culture[800];
 		case 'SpecialReportAltPalette':
-			return '#f5f0eb';
+			return specialReportAlt[800];
 	}
 };
 
 const backgroundCard = (containerPalette: DCRContainerPalette): string => {
 	switch (containerPalette) {
 		case 'LongRunningPalette':
-			return '#052962';
+			return brand[400];
 		case 'LongRunningAltPalette':
-			return '#dcdcdc';
+			return neutral[86];
 		case 'SombrePalette':
-			return '#3f464a';
+			return specialReport[300];
 		case 'SombreAltPalette':
-			return '#222527';
+			return specialReport[100];
 		case 'InvestigationPalette':
-			return '#3f464a';
+			return specialReport[300];
 		case 'BreakingPalette':
-			return '#8b0000';
+			return news[200];
 		case 'EventPalette':
-			return '#ededed';
+			return neutral[93];
 		case 'EventAltPalette':
-			return '#efe8dd';
+			return culture[700];
 		case 'SpecialReportAltPalette':
-			return '#ebe6e1';
+			return specialReportAlt[700];
 	}
 };
 

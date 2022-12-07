@@ -237,21 +237,23 @@ const forceUnderline = css`
 const isNotLastPillar = (i: number, noOfPillars: number): boolean =>
 	i !== noOfPillars - 1;
 
-export const Pillars: React.FC<{
+type Props = {
 	display: ArticleDisplay;
 	isTopNav?: boolean;
 	pillars: PillarType[];
 	pillar: ArticleTheme;
 	showLastPillarDivider?: boolean;
 	dataLinkName: string;
-}> = ({
+};
+
+export const Pillars = ({
 	display,
 	isTopNav,
 	pillars,
 	pillar,
 	showLastPillarDivider = true,
 	dataLinkName,
-}) => (
+}: Props) => (
 	<ul data-testid="pillar-list" css={pillarsStyles(display)}>
 		{pillars.map((p, i) => {
 			const isSelected = p.pillar === pillar;

@@ -78,7 +78,12 @@ export const Card50_Card50 = ({
 	return (
 		<UL direction="row" padBottom={true}>
 			{cards50.map((trail, index) => (
-				<LI percentage="50%" padSides={true} showDivider={index !== 0}>
+				<LI
+					percentage="50%"
+					padSides={true}
+					showDivider={index !== 0}
+					containerPalette={containerPalette}
+				>
 					<FrontCard
 						trail={trail}
 						containerPalette={containerPalette}
@@ -129,7 +134,12 @@ export const Card75_Card25 = ({
 				</LI>
 			))}
 			{card25.map((trail) => (
-				<LI percentage="25%" padSides={true} showDivider={true}>
+				<LI
+					percentage="25%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
 					<FrontCard
 						trail={trail}
 						containerPalette={containerPalette}
@@ -172,7 +182,12 @@ export const Card25_Card75 = ({
 				</LI>
 			))}
 			{card75.map((trail) => (
-				<LI percentage="75%" padSides={true} showDivider={true}>
+				<LI
+					percentage="75%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
 					<FrontCard
 						trail={trail}
 						containerPalette={containerPalette}
@@ -224,7 +239,12 @@ export const Card66_Card33 = ({
 				</LI>
 			))}
 			{card33.map((trail) => (
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
+				<LI
+					percentage="33.333%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
 					<FrontCard
 						trail={trail}
 						containerPalette={containerPalette}
@@ -276,7 +296,12 @@ export const Card50_Card25_Card25 = ({
 			))}
 
 			{cards25.map((trail) => (
-				<LI percentage="25%" padSides={true} showDivider={true}>
+				<LI
+					percentage="25%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
 					<FrontCard
 						trail={trail}
 						containerPalette={containerPalette}

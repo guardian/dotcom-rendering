@@ -1,6 +1,8 @@
 import { none, some } from '@guardian/types';
 import type { Image } from 'bodyElement';
 import { ElementKind } from 'bodyElement';
+import { ImageSubtype } from 'image/image';
+import { Optional } from 'optional';
 
 const captionDoc = (): DocumentFragment => {
 	const doc = new DocumentFragment();
@@ -32,6 +34,7 @@ const galleryImage: Image = {
 	caption: some(captionDoc()),
 	credit: none,
 	nativeCaption: some('Native caption'),
+	imageSubtype: Optional.some(ImageSubtype.Jpeg),
 };
 
 export default galleryImage;

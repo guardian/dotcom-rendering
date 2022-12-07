@@ -56,6 +56,7 @@ const rulesToReview = {
 
 /** @TODO Enforce and fix these */
 const rulesToEnforce = {
+	'@typescript-eslint/no-empty-function': 'warn',
 	'@typescript-eslint/no-unsafe-call': 'warn',
 	'@typescript-eslint/no-unsafe-assignment': 'warn',
 	'@typescript-eslint/no-unsafe-return': 'warn',
@@ -71,7 +72,6 @@ module.exports = {
 	extends: [
 		'eslint:recommended',
 		'@guardian/eslint-config-typescript',
-		'airbnb-typescript',
 		'prettier',
 		'plugin:@guardian/source-react-components/recommended',
 		'plugin:jsx-a11y/recommended',
@@ -84,7 +84,6 @@ module.exports = {
 	},
 	plugins: [
 		'@typescript-eslint',
-		'@typescript-eslint/tslint',
 		'react',
 		'react-hooks',
 		'import',
@@ -170,11 +169,25 @@ module.exports = {
 					'warn',
 					{
 						types: {
+							// Why? Using explicit return types for React results in types that are often too wide,
+							// as expressed in Kent C Dodd’s article How to write a React Component in TypeScript.
+							// We don't include `JSX.Element` here as that is
+							// see: https://kentcdodds.com/blog/how-to-write-a-react-component-in-typescript
+							// pr: https://github.com/guardian/dotcom-rendering/pull/5192
 							'JSX.Element': 'Prefer type inference',
 							'EmotionJSX.Element': 'Prefer type inference',
+						},
+					},
+				],
+				'@typescript-eslint/ban-types': [
+					'error',
+					{
+						types: {
+							// Why? See this: https://github.com/facebook/create-react-app/pull/8177
+							// pr: https://github.com/guardian/dotcom-rendering/pull/5622
 							'React.StatelessComponent':
 								'Please use const MyThing = ({foo, bar}: Props) instead',
-							'React.FunctionalComponent':
+							'React.FunctionComponent':
 								'Please use const MyThing = ({foo, bar}: Props) instead',
 							'React.SC':
 								'Please use const MyThing = ({foo, bar}: Props) instead',

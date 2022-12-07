@@ -67,7 +67,7 @@ interface ShareListItemType {
 	mobileOnly: boolean;
 }
 
-export const ShareIcons: React.FC<{
+type Props = {
 	sharingUrls: {
 		[K in SharePlatform]?: {
 			url: string;
@@ -76,7 +76,9 @@ export const ShareIcons: React.FC<{
 	};
 	displayIcons: SharePlatform[];
 	pillar: ArticleTheme;
-}> = ({ sharingUrls, displayIcons, pillar }) => {
+};
+
+export const ShareIcons = ({ sharingUrls, displayIcons, pillar }: Props) => {
 	const icons: { [K in SharePlatform]?: React.ComponentType } = {
 		facebook: FacebookIcon,
 		twitter: TwitterIconPadded,

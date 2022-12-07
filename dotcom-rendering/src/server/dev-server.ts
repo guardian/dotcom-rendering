@@ -1,13 +1,13 @@
-import type { NextFunction, Request, Response } from 'express';
-import { render as renderAMPArticle } from '../amp/server';
+import type { Handler } from 'express';
+import { handleAMPArticle } from '../amp/server';
 import {
-	renderArticle,
-	renderArticleJson,
-	renderBlocks,
-	renderFront,
-	renderFrontJson,
-	renderInteractive,
-	renderKeyEvents,
+	handleArticle,
+	handleArticleJson,
+	handleBlocks,
+	handleFront,
+	handleFrontJson,
+	handleInteractive,
+	handleKeyEvents,
 	renderNewslettersPage,
 } from '../web/server';
 import { provideStaticDataMiddleware } from './dev-middleware/provideStaticNewslettersModel';
@@ -19,27 +19,27 @@ const FRONT_URL = /^\/[a-z-/]+/;
 
 // see https://www.npmjs.com/package/webpack-hot-server-middleware
 // for more info
-export const devServer = () => {
-	return (req: Request, res: Response, next: NextFunction): void => {
+export const devServer = (): Handler => {
+	return (req, res, next) => {
 		switch (req.path) {
 			case '/Article':
-				return renderArticle(req, res);
+				return handleArticle(req, res, next);
 			case '/ArticleJson':
-				return renderArticleJson(req, res);
+				return handleArticleJson(req, res, next);
 			case '/AMPArticle':
-				return renderAMPArticle(req, res);
+				return handleAMPArticle(req, res, next);
 			case '/Interactive':
-				return renderInteractive(req, res);
+				return handleInteractive(req, res, next);
 			case '/AMPInteractive':
-				return renderAMPArticle(req, res);
+				return handleAMPArticle(req, res, next);
 			case '/Blocks':
-				return renderBlocks(req, res);
+				return handleBlocks(req, res, next);
 			case '/KeyEvents':
-				return renderKeyEvents(req, res);
+				return handleKeyEvents(req, res, next);
 			case '/Front':
-				return renderFront(req, res);
+				return handleFront(req, res, next);
 			case '/FrontJSON':
-				return renderFrontJson(req, res);
+				return handleFrontJson(req, res, next);
 			case '/email-newsletters':
 				return provideStaticDataMiddleware(req, res, () => {
 					renderNewslettersPage(req, res);

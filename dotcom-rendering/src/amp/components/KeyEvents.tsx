@@ -5,7 +5,6 @@ import {
 	sport,
 	textSans,
 } from '@guardian/source-foundations';
-import React from 'react';
 import DownArrow from '../../static/icons/down-arrow.svg';
 import { blockLink } from '../lib/block-link';
 
@@ -65,10 +64,12 @@ const listStyle = css`
 	padding: 0.375rem 0.625rem;
 `;
 
-export const KeyEvents: React.FunctionComponent<{
+type Props = {
 	events: Block[];
 	url: string;
-}> = ({ events, url }) => {
+};
+
+export const KeyEvents = ({ events, url }: Props) => {
 	if (!events || events.length < 1) {
 		return null;
 	}

@@ -2,7 +2,7 @@ import { css, Global } from '@emotion/react';
 import { TOP_ABOVE_NAV_HEIGHT } from '@guardian/commercial-core/dist/esm/constants';
 import type { ArticleDisplay } from '@guardian/libs';
 import { border, neutral, space } from '@guardian/source-foundations';
-import { AdSlot, labelHeight } from './AdSlot';
+import { AdSlot, labelHeight, labelStyles } from './AdSlot';
 import { Hide } from './Hide';
 
 type Props = {
@@ -33,6 +33,15 @@ const headerAdWrapper = css`
 
 export const HeaderAdSlot = ({ display }: Props) => (
 	<div css={headerWrapper}>
+		{/*
+			This is a special type of ad which, when filled, blocks
+			all other ads on the page. This allows us to run "exclusion
+			campaigns" against certain breaking news pages. Exclusion
+			ads are used for consentless advertising only. They are
+			ignored by GAM, which has a different mechanism to achieve
+			the same thing.
+		 */}
+		<AdSlot position="exclusion" />
 		<Global
 			styles={css`
 				/**
@@ -48,7 +57,10 @@ export const HeaderAdSlot = ({ display }: Props) => (
 			`}
 		/>
 		<Hide when="below" breakpoint="tablet">
-			<div css={[headerAdWrapper]} className="top-banner-ad-container">
+			<div
+				css={[headerAdWrapper, labelStyles]}
+				className="top-banner-ad-container"
+			>
 				<AdSlot position="top-above-nav" display={display} />
 			</div>
 		</Hide>
