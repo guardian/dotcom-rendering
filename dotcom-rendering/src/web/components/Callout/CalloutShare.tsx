@@ -27,7 +27,7 @@ interface Props {
 	format: ArticleFormat;
 }
 
-export const CalloutShareComponent = ({ format }: Props) => {
+export const CalloutShare = ({ format }: Props) => {
 	return (
 		<>
 			<div css={shareCalloutStyles}>

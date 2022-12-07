@@ -1,9 +1,12 @@
-import { css } from '@emotion/react';
-import {
-	calloutCampaign,
-	calloutCampaignOnlyTwoRadio,
-} from '../../../../fixtures/manual/calloutCampaign';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { calloutCampaign } from '../../../../fixtures/manual/calloutCampaign';
 import { Form } from './Form';
+
+const mockFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.Opinion,
+};
 
 export default {
 	component: Form,
@@ -12,49 +15,15 @@ export default {
 
 export const Default = () => {
 	return (
-		<div
-			css={css`
-				width: 630px;
-				padding: 15px;
-			`}
-		>
-			<Form formFields={calloutCampaign.formFields} onSubmit={() => {}} />
-		</div>
-	);
-};
-Default.story = { name: 'default' };
-
-export const WithOnlyTwoRadio = () => {
-	return (
-		<div
-			css={css`
-				width: 630px;
-				padding: 15px;
-			`}
-		>
+		<>
 			<Form
-				formFields={calloutCampaignOnlyTwoRadio.formFields}
-				onSubmit={() => {}}
-			/>
-		</div>
-	);
-};
-WithOnlyTwoRadio.story = { name: 'with only two radio' };
-
-export const WithError = () => {
-	return (
-		<div
-			css={css`
-				width: 630px;
-				padding: 15px;
-			`}
-		>
-			<Form
+				format={mockFormat}
 				formFields={calloutCampaign.formFields}
 				onSubmit={() => {}}
-				error="I am a form error"
 			/>
-		</div>
+			;
+		</>
 	);
 };
-WithError.story = { name: 'with errors' };
+
+Default.story = { name: 'default' };

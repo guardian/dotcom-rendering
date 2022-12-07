@@ -6,7 +6,7 @@ import { CalloutEmbedBlockComponent } from './CalloutEmbedBlockComponent.importa
 
 export default {
 	component: CalloutEmbedBlockComponent,
-	title: 'Components/CalloutEmbedBlockComponent',
+	title: 'Components/CalloutEmbedBlockComponenttt',
 };
 
 export const Default = () => {

@@ -9,11 +9,11 @@ import { ExpandingWrapper } from '@guardian/source-react-components-development-
 import { useState } from 'react';
 import type { CalloutBlockElementV2 } from 'src/types/content';
 import { decidePalette } from '../lib/decidePalette';
-import { Deadline } from './CalloutNew/CalloutDeadline';
-import { CalloutDescription } from './CalloutNew/CalloutDescription';
-import { CalloutExpired } from './CalloutNew/CalloutExpired';
-import { CalloutShareComponent } from './CalloutNew/CalloutShareComponent';
-import { Form } from './CalloutNew/Form';
+import { Deadline } from './Callout/CalloutDeadline';
+import { CalloutDescription } from './Callout/CalloutDescription';
+import { CalloutExpired } from './Callout/CalloutExpired';
+import { CalloutShare } from './Callout/CalloutShare';
+import { Form } from './Callout/Form';
 
 const ruleStyles = css`
 	border-image: repeating-linear-gradient(
@@ -194,7 +194,7 @@ export const CalloutBlockComponent = ({
 						</div>
 					</div>
 				</summary>
-				<CalloutShareComponent format={format} />
+				<CalloutShare format={format} />
 				<div css={submissionSuccessStyles}>
 					Thank you, your story has been submitted successfully. One
 					of our journalists will be in touch if we wish to take your
@@ -224,7 +224,7 @@ export const CalloutBlockComponent = ({
 					<div css={activeUntilStyles}>
 						<Deadline until={activeUntil} />
 					</div>
-					<CalloutShareComponent format={format} />
+					<CalloutShare format={format} />
 					{isExpired(activeUntil) ? (
 						<CalloutExpired />
 					) : (
@@ -256,7 +256,7 @@ export const CalloutBlockComponent = ({
 								/>
 							</div>
 						</summary>
-						<CalloutShareComponent format={format} />
+						<CalloutShare format={format} />
 						<Form
 							formFields={formFields}
 							onSubmit={onSubmit}
