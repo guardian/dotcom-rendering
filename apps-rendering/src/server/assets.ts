@@ -43,9 +43,10 @@ export function getMappedAssetLocation(): (assetName: string) => string {
 	if (scriptMappings) {
 		return (assetName: string): string => {
 			const mappedAsset = scriptMappings[assetName] ?? assetName;
-			return `/assets/${mappedAsset}`;
+			return `http://localhost:8081/assets/${mappedAsset}`;
 		};
 	} else {
-		return (assetName: string): string => `/assets/${assetName}`;
+		return (assetName: string): string =>
+			`http://localhost:8081/assets/${assetName}`;
 	}
 }
