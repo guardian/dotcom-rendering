@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { border, headline, text } from '@guardian/source-foundations';
+import { border, headline, neutral, text } from '@guardian/source-foundations';
 import type { TrailType } from '../../types/trails';
 import { useHover } from '../lib/useHover';
 import { AgeWarning } from './AgeWarning';
@@ -35,6 +35,14 @@ const linkTagStyles = css`
 	&:link,
 	&:active {
 		color: ${text.anchorSecondary};
+	}
+
+	&:visited h3 {
+		color: ${neutral[46]}
+	}
+
+	&:hover h3 {
+		text-decoration: underline;
 	}
 `;
 
