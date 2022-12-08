@@ -73,6 +73,7 @@ import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { Result } from 'result';
 import { backgroundColor, darkModeCss } from 'styles';
+import { getAdPlaceholderInserter } from 'ads';
 
 // ----- Renderer ----- //
 
@@ -608,7 +609,7 @@ const audioAtomRenderer = (
 	);
 };
 
-const render =
+const renderElement =
 	(format: ArticleFormat, excludeStyles = false) =>
 	(element: BodyElement, key: number): ReactNode => {
 		switch (element.kind) {
@@ -745,27 +746,37 @@ const renderEditions =
 		}
 	};
 
-const renderAll = (
+const renderElements = (
 	format: ArticleFormat,
 	elements: BodyElement[],
-): ReactNode[] => elements.map(render(format));
+): ReactNode[] => elements.map(renderElement(format));
 
-const renderEditionsAll = (
+const renderEditionsElements = (
 	format: ArticleFormat,
 	elements: BodyElement[],
 ): ReactNode[] => elements.map(renderEditions(format));
 
-const renderAllWithoutStyles = (
+const renderWithoutStyles = (
 	format: ArticleFormat,
 	elements: BodyElement[],
-): ReactNode[] => elements.map(render(format, true));
+): ReactNode[] => elements.map(renderElement(format, true));
+
+const render = (
+	shouldHideAdverts: boolean,
+	format: ArticleFormat,
+	elements: BodyElement[],
+): ReactNode[] =>
+	getAdPlaceholderInserter(shouldHideAdverts)(
+		renderElements(format, elements),
+		format,
+	);
 
 // ----- Exports ----- //
 
 export {
-	renderAll,
-	renderEditionsAll,
-	renderAllWithoutStyles,
+	renderElements,
+	renderEditionsElements,
+	renderWithoutStyles,
 	renderText,
 	textElement as renderTextElement,
 	standfirstText as renderStandfirstText,
@@ -773,4 +784,5 @@ export {
 	transformHref,
 	plainTextElement,
 	shouldShowDropCap,
+	render,
 };

@@ -9,7 +9,7 @@ import {
 } from '@guardian/source-foundations';
 import { DottedLines } from '@guardian/source-react-components-development-kitchen';
 import { map, withDefault } from '@guardian/types';
-import Body from 'components/ArticleBody';
+import ArticleBody from 'components/ArticleBody';
 import Footer from 'components/Footer';
 import Headline from 'components/Headline';
 import Logo from 'components/LabsLogo';
@@ -18,10 +18,10 @@ import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
-import { getFormat } from 'item';
+import { DeadBlog, getFormat, LiveBlog } from 'item';
 import type { Item } from 'item';
 import { pipe } from 'lib';
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -52,11 +52,10 @@ const BorderStyles = css`
 // ----- Component ----- //
 
 interface Props {
-	item: Item;
-	children: ReactNode[];
+	item: Exclude<Item, LiveBlog | DeadBlog>;
 }
 
-const LabsLayout: FC<Props> = ({ item, children }) => {
+const LabsLayout: FC<Props> = ({ item }) => {
 	return (
 		<main css={[Styles, DarkStyles]}>
 			<article css={BorderStyles}>
@@ -82,9 +81,12 @@ const LabsLayout: FC<Props> = ({ item, children }) => {
 						)}
 					</section>
 				</header>
-				<Body className={[articleWidthStyles]} format={item}>
-					{children}
-				</Body>
+				<ArticleBody
+					className={[articleWidthStyles]}
+					format={item}
+					body={item.body}
+					shouldHideAdverts={item.shouldHideAdverts}
+				/>
 			</article>
 			<section css={onwardStyles}>
 				<RelatedContent item={item} />

@@ -24,7 +24,7 @@ import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
 import { getFormat } from 'item';
 import type { Letter as LetterItem } from 'item';
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -58,10 +58,9 @@ const linePosition = css`
 
 interface Props {
 	item: LetterItem;
-	children: ReactNode[];
 }
 
-const LetterLayout: FC<Props> = ({ item, children }) => (
+const LetterLayout: FC<Props> = ({ item }) => (
 	<main css={[Styles, DarkStyles]}>
 		<article css={BorderStyles}>
 			<header>
@@ -93,9 +92,12 @@ const LetterLayout: FC<Props> = ({ item, children }) => (
 					<Logo item={item} />
 				</section>
 			</header>
-			<ArticleBody className={[articleWidthStyles]} format={item}>
-				{children}
-			</ArticleBody>
+			<ArticleBody
+					className={[articleWidthStyles]}
+					format={item}
+					body={item.body}
+					shouldHideAdverts={item.shouldHideAdverts}
+				/>
 			<section css={articleWidthStyles}>
 				<Tags item={item} />
 			</section>

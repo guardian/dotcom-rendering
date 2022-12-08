@@ -24,7 +24,7 @@ import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
 import { getFormat } from 'item';
 import type { Comment as CommentItem, Editorial } from 'item';
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -71,10 +71,9 @@ const commentLineStylePosition = css`
 
 interface Props {
 	item: CommentItem | Editorial;
-	children: ReactNode[];
 }
 
-const CommentLayout: FC<Props> = ({ item, children }) => (
+const CommentLayout: FC<Props> = ({ item }) => (
 	<main css={[Styles, DarkStyles]}>
 		<article css={BorderStyles}>
 			<header>
@@ -109,9 +108,12 @@ const CommentLayout: FC<Props> = ({ item, children }) => (
 					<Logo item={item} />
 				</section>
 			</header>
-			<ArticleBody className={[articleWidthStyles]} format={item}>
-				{children}
-			</ArticleBody>
+			<ArticleBody
+					className={[articleWidthStyles]}
+					format={item}
+					body={item.body}
+					shouldHideAdverts={item.shouldHideAdverts}
+				/>
 			<section css={articleWidthStyles}>
 				<Tags item={item} />
 			</section>

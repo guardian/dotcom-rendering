@@ -5,7 +5,7 @@ import { flattenTextElement } from 'bodyElement';
 import { JSDOM } from 'jsdom';
 import { compose } from 'lib';
 import type { ReactNode } from 'react';
-import { renderAll, renderAllWithoutStyles, renderEditionsAll } from 'renderer';
+import { renderEditionsElements, renderElements, renderWithoutStyles } from 'renderer';
 
 const mockFormat: ArticleFormat = {
 	theme: ArticlePillar.News,
@@ -23,30 +23,30 @@ const textElements = (nodes: string[]): BodyElement[] => {
 	return flattenTextElement(frag);
 };
 
-const renderElement = (element: BodyElement): ReactNode[] =>
-	renderAll(mockFormat, [element]);
+const mockRenderElement = (element: BodyElement): ReactNode[] =>
+	renderElements(mockFormat, [element]);
 
-const renderElements = (elements: BodyElement[]): ReactNode[] =>
-	renderAll(mockFormat, elements);
+const mockRenderElements = (elements: BodyElement[]): ReactNode[] =>
+	renderElements(mockFormat, elements);
 
-const renderWithoutStyles = (elements: BodyElement[]): ReactNode[] =>
-	renderAllWithoutStyles(mockFormat, elements);
+const mockRenderWithoutStyles = (elements: BodyElement[]): ReactNode[] =>
+	renderWithoutStyles(mockFormat, elements);
 
-const renderEditions = (element: BodyElement): ReactNode[] =>
-	renderEditionsAll(mockFormat, [element]);
+const mockRenderEditions = (element: BodyElement): ReactNode[] =>
+	renderEditionsElements(mockFormat, [element]);
 
-const renderParagraphs = compose(renderElements, generateParas);
+const renderParagraphs = compose(mockRenderElements, generateParas);
 
-const renderTextElement = compose(renderElements, textElements);
+const renderTextElement = compose(mockRenderElements, textElements);
 
 export {
 	mockFormat,
 	generateParas,
 	textElements,
-	renderElement,
-	renderElements,
-	renderWithoutStyles,
-	renderEditions,
+	mockRenderElement,
+	mockRenderElements,
+	mockRenderWithoutStyles,
+	mockRenderEditions,
 	renderParagraphs,
 	renderTextElement,
 };
