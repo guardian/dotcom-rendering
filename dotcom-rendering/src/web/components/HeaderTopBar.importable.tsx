@@ -55,6 +55,7 @@ export const HeaderTopBar = ({
 	const isServer = typeof window === 'undefined';
 	const isSignedIn =
 		!isServer && !!getCookie({ name: 'GU_U', shouldMemoize: true });
+
 	return (
 		<div
 			css={css`
