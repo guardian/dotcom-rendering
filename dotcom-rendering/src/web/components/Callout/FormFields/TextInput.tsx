@@ -8,7 +8,7 @@ const textInputStyles = css`
 `;
 
 type Props = {
-	validationErrors: { [key in string]: string };
+	validationErrors?: { [key in string]: string };
 	formField: CampaignFieldText;
 	formData: { [key in string]: any };
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
@@ -22,7 +22,7 @@ export const TextInput = ({
 }: Props) => (
 	<SourceTextInput
 		// similar to line 31, check if the id is present in the fielderror array
-		error={validationErrors[formField.id]}
+		error={validationErrors?.[formField.id]}
 		css={textInputStyles}
 		data-testid={`form-field-${formField.id}`}
 		type={formField.type}
