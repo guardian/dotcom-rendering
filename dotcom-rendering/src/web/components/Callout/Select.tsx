@@ -1,6 +1,5 @@
 import { Select as SourceSelect } from '@guardian/source-react-components';
 import type { CampaignFieldSelect } from 'src/types/content';
-import { FieldLabel } from './FieldLabel';
 
 type Props = {
 	validationErrors?: { [key in string]: string };
