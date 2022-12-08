@@ -21,7 +21,7 @@ export const TextInput = ({
 	setFormData,
 }: Props) => (
 	<SourceTextInput
-		// similar to line 31, check if the id is present in the fielderror array
+		hideLabel={formField.hideLabel}
 		error={validationErrors?.[formField.id]}
 		css={textInputStyles}
 		data-testid={`form-field-${formField.id}`}

@@ -16,8 +16,12 @@ export const CheckboxSelect = ({
 	validationErrors,
 }: Props) => (
 	<>
-		<FieldLabel formField={formField} />
-		<CheckboxGroup name={formField.name}>
+		<CheckboxGroup
+			hideLabel={formField.hideLabel}
+			name={formField.name}
+			label={formField.label}
+			supporting={formField.description}
+		>
 			{formField.options.map((option, index) => {
 				// data related to this field is mapped to `formData` using `formField.id`
 				// We cannot assume that the data exists, so we need to check if `formField.id` key exists in `formData`

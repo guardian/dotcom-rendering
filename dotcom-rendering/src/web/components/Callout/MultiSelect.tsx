@@ -23,14 +23,14 @@ export const MultiSelect = ({
 	<div data-testid={`form-field-${formField.id}`}>
 		{multiple ? (
 			<CheckboxSelect
-				validationErrors={validationErrors && validationErrors}
+				validationErrors={validationErrors ?? undefined}
 				formField={formField as CampaignFieldCheckbox}
 				formData={formData}
 				setFormData={setFormData}
 			/>
 		) : (
 			<RadioSelect
-				validationErrors={validationErrors && validationErrors}
+				validationErrors={validationErrors ?? undefined}
 				formField={formField as CampaignFieldRadio}
 				formData={formData}
 				setFormData={setFormData}

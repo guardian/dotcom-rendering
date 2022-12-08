@@ -23,6 +23,7 @@ export const TextArea = ({
 }: Props) => (
 	<>
 		<SourceTextArea
+			hideLabel={formField.hideLabel}
 			data-testid={`form-field-${formField.id}`}
 			label={formField.label}
 			supporting={formField.description}
