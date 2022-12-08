@@ -28,12 +28,10 @@ export const Select = ({
 			})
 		}
 		optional={!formField.required}
-		children={[{ label: 'default', value: 'Please choose an option ...' }]
-			.concat(formField.options)
-			.map((option, index) => (
-				<option key={index} value={option.value}>
-					{option.value}
-				</option>
-			))}
+		children={formField.options.map((option, index) => (
+			<option key={index} value={option.value}>
+				{option.value}
+			</option>
+		))}
 	/>
 );
