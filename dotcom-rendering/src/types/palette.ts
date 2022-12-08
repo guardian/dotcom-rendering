@@ -107,6 +107,7 @@ export type Palette = {
 		twitterHandleBelowDesktop: Colour;
 		twitterHandle: Colour;
 		guardianLogo: Colour;
+		cardFooterIconBackground: Colour;
 	};
 	border: {
 		syndicationButton: Colour;
