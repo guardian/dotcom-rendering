@@ -2,9 +2,6 @@
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
 import { breakpoints } from '@guardian/source-foundations';
 import { formatToString } from 'articleFormat';
-import AnalysisLayout from './AnalysisLayout';
-import CommentLayout from './CommentLayout';
-import StandardLayout from './StandardLayout';
 import {
 	analysis,
 	article,
@@ -26,11 +23,14 @@ import {
 } from 'fixtures/item';
 import { deadBlog, live } from 'fixtures/live';
 import type { ReactElement } from 'react';
+import AnalysisLayout from './AnalysisLayout';
+import CommentLayout from './CommentLayout';
 import GalleryLayout from './GalleryLayout';
 import ImmersiveLayout from './ImmersiveLayout';
 import LetterLayout from './LetterLayout';
 import LiveLayout from './LiveLayout';
 import NewsletterSignUpLayout from './NewsletterSignUpLayout';
+import StandardLayout from './StandardLayout';
 
 // ----- Stories ----- //
 
@@ -40,19 +40,27 @@ Standard.story = { name: formatToString(article) };
 export const Review = (): ReactElement => <StandardLayout item={review} />;
 Review.story = { name: formatToString(review) };
 
-export const MatchReport = (): ReactElement => <StandardLayout item={matchReport} />;
+export const MatchReport = (): ReactElement => (
+	<StandardLayout item={matchReport} />
+);
 MatchReport.story = { name: formatToString(matchReport) };
 
-export const PrintShop = (): ReactElement => <StandardLayout item={printShop} />;
+export const PrintShop = (): ReactElement => (
+	<StandardLayout item={printShop} />
+);
 PrintShop.story = { name: formatToString(printShop) };
 
-export const PhotoEssay = (): ReactElement => <StandardLayout item={photoEssay} />;
+export const PhotoEssay = (): ReactElement => (
+	<StandardLayout item={photoEssay} />
+);
 PhotoEssay.story = { name: formatToString(photoEssay) };
 
 export const Feature = (): ReactElement => <StandardLayout item={feature} />;
 Feature.story = { name: formatToString(feature) };
 
-export const Interview = (): ReactElement => <StandardLayout item={interview} />;
+export const Interview = (): ReactElement => (
+	<StandardLayout item={interview} />
+);
 Interview.story = { name: formatToString(interview) };
 
 export const Quiz = (): ReactElement => <StandardLayout item={quiz} />;
@@ -73,7 +81,9 @@ Editorial.story = { name: formatToString(editorial) };
 export const Analysis = (): ReactElement => <AnalysisLayout item={analysis} />;
 Analysis.story = { name: formatToString(analysis) };
 
-export const Explainer = (): ReactElement => <StandardLayout item={explainer} />;
+export const Explainer = (): ReactElement => (
+	<StandardLayout item={explainer} />
+);
 Explainer.story = { name: formatToString(explainer) };
 
 export const LiveBlog = (): ReactElement => (
@@ -125,7 +135,9 @@ NewsletterSignupFallback.story = {
 export const Gallery = (): ReactElement => <GalleryLayout item={gallery} />;
 Gallery.story = { name: formatToString(gallery) };
 
-export const Immersive = (): ReactElement => <ImmersiveLayout item={immersive} />;
+export const Immersive = (): ReactElement => (
+	<ImmersiveLayout item={immersive} />
+);
 Immersive.story = { name: formatToString(immersive) };
 
 export default {

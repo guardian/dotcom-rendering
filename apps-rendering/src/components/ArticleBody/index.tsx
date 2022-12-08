@@ -2,16 +2,16 @@ import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
 import { background, neutral, remSpace } from '@guardian/source-foundations';
-import { BodyElement } from 'bodyElement';
+import type { BodyElement } from 'bodyElement';
 import type { FC } from 'react';
 import { render } from 'renderer';
 import { darkModeCss } from 'styles';
 
 interface ArticleBodyProps {
 	className?: SerializedStyles[];
-	shouldHideAdverts: boolean,
-	format: ArticleFormat,
-	body: BodyElement[],
+	shouldHideAdverts: boolean;
+	format: ArticleFormat;
+	body: BodyElement[];
 }
 
 const ArticleBodyStyles = (format: ArticleFormat): SerializedStyles => css`
@@ -44,7 +44,12 @@ const ArticleBodyDarkStyles: SerializedStyles = darkModeCss`
     }
 `;
 
-const ArticleBody: FC<ArticleBodyProps> = ({ className, format, body, shouldHideAdverts }) => {
+const ArticleBody: FC<ArticleBodyProps> = ({
+	className,
+	format,
+	body,
+	shouldHideAdverts,
+}) => {
 	const classNames = className ? className : [];
 	return (
 		<div

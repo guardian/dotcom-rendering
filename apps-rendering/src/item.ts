@@ -21,7 +21,8 @@ import {
 import { andThen, fromNullable, map, none, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { getPillarFromId } from 'articleFormat';
-import { BodyElement, parseElements } from 'bodyElement';
+import type { BodyElement } from 'bodyElement';
+import { parseElements } from 'bodyElement';
 import { getReport } from 'campaign';
 import type { Logo } from 'capi';
 import {
@@ -373,7 +374,8 @@ const parseBody = (
 	const elements = [...body].shift()?.elements;
 
 	return elements !== undefined
-		? Result.partition(parseElements(context, campaigns, atoms)(elements)).oks
+		? Result.partition(parseElements(context, campaigns, atoms)(elements))
+				.oks
 		: [];
 };
 

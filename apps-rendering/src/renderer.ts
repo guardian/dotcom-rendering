@@ -27,6 +27,7 @@ import {
 	withDefault,
 } from '@guardian/types';
 import type { Option } from '@guardian/types';
+import { getAdPlaceholderInserter } from 'ads';
 import { themeToPillar } from 'articleFormat';
 import { ElementKind } from 'bodyElement';
 import type {
@@ -73,7 +74,6 @@ import { createElement as h } from 'react';
 import type { ReactElement, ReactNode } from 'react';
 import { Result } from 'result';
 import { backgroundColor, darkModeCss } from 'styles';
-import { getAdPlaceholderInserter } from 'ads';
 
 // ----- Renderer ----- //
 

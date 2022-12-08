@@ -18,8 +18,8 @@ import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
 import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
-import { DeadBlog, getFormat, LiveBlog } from 'item';
-import type { Item } from 'item';
+import { getFormat } from 'item';
+import type { DeadBlog, Item, LiveBlog } from 'item';
 import { pipe } from 'lib';
 import type { FC } from 'react';
 import {

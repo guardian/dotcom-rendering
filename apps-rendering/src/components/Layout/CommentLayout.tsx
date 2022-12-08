@@ -109,11 +109,11 @@ const CommentLayout: FC<Props> = ({ item }) => (
 				</section>
 			</header>
 			<ArticleBody
-					className={[articleWidthStyles]}
-					format={item}
-					body={item.body}
-					shouldHideAdverts={item.shouldHideAdverts}
-				/>
+				className={[articleWidthStyles]}
+				format={item}
+				body={item.body}
+				shouldHideAdverts={item.shouldHideAdverts}
+			/>
 			<section css={articleWidthStyles}>
 				<Tags item={item} />
 			</section>

@@ -5,7 +5,11 @@ import { flattenTextElement } from 'bodyElement';
 import { JSDOM } from 'jsdom';
 import { compose } from 'lib';
 import type { ReactNode } from 'react';
-import { renderEditionsElements, renderElements, renderWithoutStyles } from 'renderer';
+import {
+	renderEditionsElements,
+	renderElements,
+	renderWithoutStyles,
+} from 'renderer';
 
 const mockFormat: ArticleFormat = {
 	theme: ArticlePillar.News,

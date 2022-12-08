@@ -113,11 +113,7 @@ const ImmersiveLayout: FC<Props> = ({ item }) => {
 						</div>
 						<Metadata item={item} />
 						<div css={bodyStyles}>
-							{render(
-								item.shouldHideAdverts,
-								format,
-								item.body,
-							)}
+							{render(item.shouldHideAdverts, format, item.body)}
 						</div>
 						<Tags item={item} />
 					</div>

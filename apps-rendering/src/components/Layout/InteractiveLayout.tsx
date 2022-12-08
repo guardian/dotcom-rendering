@@ -1,7 +1,8 @@
 // ----- Imports ----- //
 
 import Footer from 'components/Footer';
-import { getFormat, Interactive } from 'item';
+import type { Interactive } from 'item';
+import { getFormat } from 'item';
 import type { FC } from 'react';
 import { renderWithoutStyles } from 'renderer';
 
@@ -13,9 +14,7 @@ interface Props {
 
 const InteractiveLayout: FC<Props> = ({ item }) => (
 	<main>
-		<article>
-			{renderWithoutStyles(getFormat(item), item.body)}
-		</article>
+		<article>{renderWithoutStyles(getFormat(item), item.body)}</article>
 		<Footer isCcpa={false} format={item} />
 	</main>
 );

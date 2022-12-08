@@ -26,8 +26,23 @@ import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
 import type { MatchScores } from 'football';
-import { getFormat, PhotoEssay, PrintShop } from 'item';
-import type { Correction, Explainer, Feature, Interactive, Interview, Item, MatchReport, Obituary, Quiz, Recipe, Review, Standard } from 'item';
+import { getFormat } from 'item';
+import type {
+	Correction,
+	Explainer,
+	Feature,
+	Interactive,
+	Interview,
+	Item,
+	MatchReport,
+	Obituary,
+	PhotoEssay,
+	PrintShop,
+	Quiz,
+	Recipe,
+	Review,
+	Standard,
+} from 'item';
 import { maybeRender, pipe } from 'lib';
 import { Optional } from 'optional';
 import type { FC } from 'react';
@@ -69,19 +84,19 @@ const decideLines = (
 
 interface Props {
 	item:
-		Feature |
-		Explainer |
-		Review |
-		Standard |
-		Interactive |
-		Quiz |
-		MatchReport |
-		Obituary |
-		Correction |
-		Interview |
-		Recipe |
-		PrintShop |
-		PhotoEssay;
+		| Feature
+		| Explainer
+		| Review
+		| Standard
+		| Interactive
+		| Quiz
+		| MatchReport
+		| Obituary
+		| Correction
+		| Interview
+		| Recipe
+		| PrintShop
+		| PhotoEssay;
 }
 
 const StandardLayout: FC<Props> = ({ item }) => {
