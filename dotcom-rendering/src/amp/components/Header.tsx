@@ -10,7 +10,6 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { SvgGuardianBestWebsiteLogo } from '@guardian/source-react-components';
-import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import type { NavType, PillarType } from '../../model/extract-nav';
 import { ReaderRevenueButton } from './ReaderRevenueButton';
@@ -197,10 +196,12 @@ const pillarLinks = (pillars: PillarType[], guardianBaseURL: string) => (
 	</nav>
 );
 
-export const Header: React.FC<{
+type Props = {
 	nav: NavType;
 	guardianBaseURL: string;
-}> = ({ nav, guardianBaseURL }) => (
+};
+
+export const Header = ({ nav, guardianBaseURL }: Props) => (
 	<header css={headerStyles}>
 		<div css={row}>
 			<ReaderRevenueButton

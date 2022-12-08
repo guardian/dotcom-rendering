@@ -3,7 +3,7 @@ import type { EditionId } from '../web/lib/edition';
 import type { ServerSideTests, Switches } from './config';
 import type { FooterType } from './footer';
 import type { FETagType } from './tag';
-import type { TrailType } from './trails';
+import type { CAPITrailType, TrailType } from './trails';
 
 export interface FEFrontType {
 	pressedPage: FEPressedPageType;
@@ -19,6 +19,9 @@ export interface FEFrontType {
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
 	isNetworkFront: boolean;
+	mostViewed: CAPITrailType[];
+	mostCommented?: CAPITrailType;
+	mostShared?: CAPITrailType;
 }
 
 export interface DCRFrontType {
@@ -30,6 +33,9 @@ export interface DCRFrontType {
 	pageFooter: FooterType;
 	isAdFreeUser: boolean;
 	isNetworkFront: boolean;
+	mostViewed: TrailType[];
+	mostCommented?: TrailType;
+	mostShared?: TrailType;
 }
 
 interface FEPressedPageType {
@@ -156,7 +162,7 @@ export type FEFrontCard = {
 		image?: {
 			type: string;
 			item: {
-				imgSource?: string;
+				imageSrc?: string;
 			};
 		};
 		webTitle: string;
@@ -229,6 +235,7 @@ export type DCRFrontCard = {
 	format: ArticleFormat;
 	url: string;
 	headline: string;
+	showQuotedHeadline: boolean;
 	trailText?: string;
 	starRating?: number;
 	webPublicationDate?: string;

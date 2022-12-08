@@ -1,12 +1,17 @@
-/* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import {
+	Card25Media25Tall,
+	Card33Media33,
+	Card50Media50,
+	CardDefault,
+	CardDefaultMediaMobile,
+} from '../lib/cardWrappers';
 import { Card50_Card50, Card75_Card25 } from '../lib/dynamicSlices';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
 
 type Props = {
 	groupedTrails: DCRGroupedTrails;
@@ -38,7 +43,7 @@ const Card33_ColumnOfThree33_Ad33 = ({
 		<UL direction="row">
 			{card33.map((card) => (
 				<LI percentage="33.333%" padSides={true} key={card.url}>
-					<FrontCard
+					<Card33Media33
 						trail={card}
 						containerPalette={containerPalette}
 						showAge={showAge}
@@ -46,16 +51,18 @@ const Card33_ColumnOfThree33_Ad33 = ({
 				</LI>
 			))}
 
-			<LI percentage="33.333%" showDivider={true}>
+			<LI
+				percentage="33.333%"
+				showDivider={true}
+				containerPalette={containerPalette}
+			>
 				<UL direction="column">
 					{cards33.map((card) => (
 						<LI padSides={true} key={card.url}>
-							<FrontCard
+							<CardDefault
 								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								imageUrl={undefined}
-								headlineSize="small"
 							/>
 						</LI>
 					))}
@@ -94,12 +101,10 @@ const ColumnOfThree50_Ad50 = ({
 				<UL direction="column">
 					{cards50.map((card) => (
 						<LI padSides={true} key={card.url}>
-							<FrontCard
+							<CardDefaultMediaMobile
 								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								imagePosition="left"
-								headlineSize="small"
 							/>
 						</LI>
 					))}
@@ -135,14 +140,10 @@ const Card50_Card25_Card25 = ({
 		<UL direction="row" padBottom={true}>
 			{card50.map((card) => (
 				<LI percentage="50%" padSides={true} key={card.url}>
-					<FrontCard
+					<Card50Media50
 						trail={card}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						headlineSize="large"
-						imagePosition="top"
-						imagePositionOnMobile="top"
-						supportingContent={card.supportingContent}
 					/>
 				</LI>
 			))}
@@ -151,21 +152,13 @@ const Card50_Card25_Card25 = ({
 					percentage="25%"
 					padSides={true}
 					showDivider={true}
+					containerPalette={containerPalette}
 					key={card.url}
 				>
-					<FrontCard
+					<Card25Media25Tall
 						trail={card}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						trailText={
-							card?.supportingContent &&
-							card.supportingContent.length > 0
-								? undefined
-								: card.trailText
-						}
-						supportingContent={
-							card.trailText ? undefined : card.supportingContent
-						}
 					/>
 				</LI>
 			))}

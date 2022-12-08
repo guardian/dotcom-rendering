@@ -152,7 +152,7 @@ const labTextStyles = (size: SmallHeadlineSize) => {
 	}
 };
 
-const cssOverrides = css`
+const sublinkStyles = css`
 	/* See: https://css-tricks.com/nested-links/ */
 	${getZIndex('card-nested-link')}
 	/* The following styles turn off those provided by Link */
@@ -163,7 +163,7 @@ const cssOverrides = css`
 	font-size: inherit;
 	line-height: inherit;
 	/* This css is used to remove any underline from the kicker but still
-have it applied to the headline when the kicker is hovered */
+	 * have it applied to the headline when the kicker is hovered */
 	:hover {
 		color: inherit;
 		text-decoration: none;
@@ -181,8 +181,12 @@ const lineStyles = (palette: Palette) => css`
 		top: 0;
 		left: 0;
 		content: '';
-		width: 120px;
 		border-top: 1px solid ${palette.border.cardSupporting};
+
+		width: 120px;
+		${between.tablet.and.desktop} {
+			width: 100px;
+		}
 	}
 `;
 
@@ -206,7 +210,7 @@ const WithLink = ({
 			<Link
 				href={linkTo}
 				cssOverrides={
-					isDynamo ? [cssOverrides, dynamoStyles] : cssOverrides
+					isDynamo ? [sublinkStyles, dynamoStyles] : sublinkStyles
 				}
 			>
 				{children}
@@ -215,6 +219,9 @@ const WithLink = ({
 	}
 	return <>{children}</>;
 };
+
+/** Matches headlines starting with short words of 1 to 3 letters followed by a space */
+const isFirstWordShort = /^(\w{1,3}) \b/;
 
 export const CardHeadline = ({
 	headlineText,
@@ -236,6 +243,9 @@ export const CardHeadline = ({
 	const kickerColour = isDynamo
 		? palette.text.dynamoKicker
 		: palette.text.cardKicker;
+	const cleanHeadLineText = headlineText.match(isFirstWordShort)
+		? headlineText.replace(' ', ' ') // from regular to non-breaking space
+		: headlineText;
 	return (
 		<>
 			<h3
@@ -278,7 +288,7 @@ export const CardHeadline = ({
 						`}
 						className="show-underline"
 					>
-						{headlineText}
+						{cleanHeadLineText}
 					</span>
 				</WithLink>
 			</h3>

@@ -187,6 +187,7 @@ export const Horizontal = () => {
 		>
 			<Card
 				{...basicCardProps}
+				supportingContentAlignment="horizontal"
 				supportingContent={[
 					{
 						...aBasicLink,
@@ -224,6 +225,7 @@ export const HorizontalOnMobile = () => {
 		>
 			<Card
 				{...basicCardProps}
+				supportingContentAlignment="horizontal"
 				supportingContent={[
 					{
 						...aBasicLink,
@@ -270,6 +272,7 @@ export const LongText = () => {
 		>
 			<Card
 				{...basicCardProps}
+				supportingContentAlignment="horizontal"
 				supportingContent={[
 					{
 						...aBasicLink,
@@ -313,6 +316,7 @@ export const MoreThanThree = () => {
 		>
 			<Card
 				{...basicCardProps}
+				supportingContentAlignment="horizontal"
 				supportingContent={[
 					{
 						...aBasicLink,

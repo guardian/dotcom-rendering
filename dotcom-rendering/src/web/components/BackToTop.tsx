@@ -56,7 +56,7 @@ const textStyles = css`
 	padding-right: 5px;
 `;
 
-export const BackToTop: React.FC = () => (
+export const BackToTop = () => (
 	<a css={link} href="#top">
 		<span css={textStyles}>Back to top</span>
 		<span css={iconContainer} className="icon-container">

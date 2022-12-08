@@ -2,6 +2,11 @@
 import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import {
+	Card25Media25,
+	Card50Media50Tall,
+	CardDefault,
+} from '../lib/cardWrappers';
+import {
 	Card100PictureRight,
 	Card100PictureTop,
 	Card25_Card75,
@@ -12,7 +17,6 @@ import {
 } from '../lib/dynamicSlices';
 import { LI } from './Card/components/LI';
 import { UL } from './Card/components/UL';
-import { FrontCard } from './FrontCard';
 
 /**
  * Not sure where to start? This PR documents a lot of the key features
@@ -53,19 +57,17 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 	return (
 		<UL direction="row">
 			<LI percentage="50%" padSides={true}>
-				<FrontCard
+				<Card50Media50Tall
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					supportingContent={big.supportingContent}
-					headlineSize="large"
-					trailText={big.trailText}
-					imageUrl={big.image}
-					imagePosition="top"
-					imagePositionOnMobile="top"
 				/>
 			</LI>
-			<LI percentage="25%" showDivider={true}>
+			<LI
+				percentage="25%"
+				showDivider={true}
+				containerPalette={containerPalette}
+			>
 				<UL direction="column">
 					{columnOne.map((card, cardIndex) => {
 						return (
@@ -76,25 +78,16 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 							>
 								{/* The first card shows an image */}
 								{cardIndex === 0 ? (
-									<FrontCard
+									<Card25Media25
 										trail={card}
 										containerPalette={containerPalette}
 										showAge={showAge}
-										supportingContent={
-											card.supportingContent
-										}
-										headlineSize="medium"
-										imageUrl={card.image}
-										imagePosition="top"
-										imagePositionOnMobile="left"
 									/>
 								) : (
-									<FrontCard
+									<CardDefault
 										trail={card}
 										containerPalette={containerPalette}
 										showAge={showAge}
-										imageUrl={undefined}
-										headlineSize="small"
 									/>
 								)}
 							</LI>
@@ -102,7 +95,11 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 					})}
 				</UL>
 			</LI>
-			<LI percentage="25%" showDivider={columnTwo.length > 0}>
+			<LI
+				percentage="25%"
+				showDivider={columnTwo.length > 0}
+				containerPalette={containerPalette}
+			>
 				<UL direction="column">
 					{columnTwo.map((card) => {
 						return (
@@ -111,12 +108,10 @@ const Card50_ColumnOfThreeCards25_ColumnOfFiveCards = ({
 								showDivider={false}
 								padSides={true}
 							>
-								<FrontCard
+								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -143,20 +138,19 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	return (
 		<UL direction="row" wrapCards={true}>
 			<LI percentage="50%" padSides={true} showDivider={false}>
-				<FrontCard
+				<Card50Media50Tall
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					supportingContent={big.supportingContent}
-					headlineSize="large"
-					trailText={big.trailText}
-					imageUrl={big.image}
-					imagePosition="top"
-					imagePositionOnMobile="top"
 				/>
 			</LI>
 			<LI percentage="50%">
-				<UL direction="row" wrapCards={true} showDivider={true}>
+				<UL
+					direction="row"
+					wrapCards={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
 					{remaining.map((card, cardIndex) => {
 						const columns = 2;
 						return (
@@ -165,6 +159,7 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								percentage="50%"
 								stretch={true}
 								showDivider={cardIndex > 0}
+								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
 									remaining.length -
@@ -173,12 +168,10 @@ const Card50_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								)}
 								padSides={true}
 							>
-								<FrontCard
+								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -212,18 +205,17 @@ const ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThreeCards25_ColumnOfThr
 							stretch={true}
 							padSides={true}
 							showDivider={cardIndex % columns !== 0}
+							containerPalette={containerPalette}
 							offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 								cardIndex,
 								cards.length,
 								columns,
 							)}
 						>
-							<FrontCard
+							<CardDefault
 								trail={card}
 								containerPalette={containerPalette}
 								showAge={showAge}
-								imageUrl={undefined}
-								headlineSize="small"
 							/>
 						</LI>
 					);
@@ -248,17 +240,19 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 	return (
 		<UL direction="row" wrapCards={true}>
 			<LI percentage="25%" padSides={true} showDivider={false}>
-				<FrontCard
+				<Card25Media25
 					trail={big}
 					containerPalette={containerPalette}
 					showAge={showAge}
-					supportingContent={big.supportingContent}
-					headlineSize="medium"
-					imageUrl={big.image}
 				/>
 			</LI>
 			<LI percentage="75%">
-				<UL direction="row" wrapCards={true} showDivider={true}>
+				<UL
+					direction="row"
+					wrapCards={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
 					{remaining.map((card, cardIndex) => {
 						const columns = 3;
 						return (
@@ -268,6 +262,7 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								stretch={true}
 								padSides={true}
 								showDivider={cardIndex % columns !== 0}
+								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
 									remaining.length -
@@ -275,12 +270,10 @@ const Card25_ColumnOfCards25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 									columns,
 								)}
 							>
-								<FrontCard
+								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -314,21 +307,24 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 						percentage={`25%`}
 						padSides={true}
 						showDivider={cardIndex > 0}
+						containerPalette={containerPalette}
 					>
-						<FrontCard
+						<Card25Media25
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							supportingContent={card.supportingContent}
-							headlineSize="medium"
-							imageUrl={card.image}
 						/>
 					</LI>
 				);
 			})}
 
 			<LI percentage="50%">
-				<UL direction="row" wrapCards={true} showDivider={true}>
+				<UL
+					direction="row"
+					wrapCards={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
 					{remaining.map((card, cardIndex) => {
 						const columns = 2;
 						return (
@@ -338,6 +334,7 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 								stretch={true}
 								padSides={true}
 								showDivider={cardIndex % columns !== 0}
+								containerPalette={containerPalette}
 								offsetBottomPaddingOnDivider={shouldPadWrappableRows(
 									cardIndex,
 									remaining.length -
@@ -345,12 +342,10 @@ const Card25_Card25_ColumnOfThreeCards25_ColumnOfThreeCards25 = ({
 									columns,
 								)}
 							>
-								<FrontCard
+								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -384,21 +379,24 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 						percentage={`25%`}
 						padSides={true}
 						showDivider={cardIndex !== 0}
+						containerPalette={containerPalette}
 					>
-						<FrontCard
+						<Card25Media25
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							supportingContent={card.supportingContent}
-							headlineSize="medium"
-							imageUrl={card.image}
 						/>
 					</LI>
 				);
 			})}
 
 			<LI percentage="25%">
-				<UL direction="row" wrapCards={true} showDivider={true}>
+				<UL
+					direction="row"
+					wrapCards={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
 					{remaining.map((card) => {
 						return (
 							<LI
@@ -408,12 +406,10 @@ const Card25_Card25_Card25_ColumnOfThreeCards25 = ({
 								showDivider={false}
 								padSides={true}
 							>
-								<FrontCard
+								<CardDefault
 									trail={card}
 									containerPalette={containerPalette}
 									showAge={showAge}
-									imageUrl={undefined}
-									headlineSize="small"
 								/>
 							</LI>
 						);
@@ -446,14 +442,12 @@ const Card25_Card25_Card25_Card25 = ({
 						percentage={`25%`}
 						padSides={true}
 						showDivider={cardIndex !== 0}
+						containerPalette={containerPalette}
 					>
-						<FrontCard
+						<Card25Media25
 							trail={card}
 							containerPalette={containerPalette}
 							showAge={showAge}
-							supportingContent={card.supportingContent}
-							headlineSize="medium"
-							imageUrl={card.image}
 						/>
 					</LI>
 				);

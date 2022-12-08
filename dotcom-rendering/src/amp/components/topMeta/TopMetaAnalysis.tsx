@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { headline, neutral, until } from '@guardian/source-foundations';
 import { string as curly } from 'curlyquotes';
-import React from 'react';
 import { getAgeWarning } from '../../../lib/age-warning';
 import { getSoleContributor } from '../../../lib/byline';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
@@ -66,10 +65,12 @@ const starRatingWrapper = css`
 	margin: 0 0 6px -10px;
 `;
 
-const Headline: React.FC<{
+type HeadlineProps = {
 	headlineText: string;
 	starRating?: number;
-}> = ({ headlineText, starRating }) => {
+};
+
+const Headline = ({ headlineText, starRating }: HeadlineProps) => {
 	return (
 		<div>
 			<h1 css={[headerStyle, underlinedStyles]}>{curly(headlineText)}</h1>
@@ -83,11 +84,17 @@ const Headline: React.FC<{
 	);
 };
 
-export const TopMetaAnalysis: React.FC<{
+type Props = {
 	articleData: ArticleModel;
 	adTargeting?: AdTargeting;
 	pillar: ArticleTheme;
-}> = ({ articleData, adTargeting, pillar }) => {
+};
+
+export const TopMetaAnalysis = ({
+	articleData,
+	adTargeting,
+	pillar,
+}: Props) => {
 	return (
 		<header>
 			{articleData.mainMediaElements.map((element, i) => (

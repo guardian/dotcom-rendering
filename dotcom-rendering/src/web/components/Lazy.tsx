@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { useIsInView } from '../lib/useIsInView';
 
 type Props = {
-	// eslint-disable-next-line @typescript-eslint/ban-types -- we want to coerce children
 	children: JSX.Element;
 	margin: number;
 	disableFlexStyles?: boolean;

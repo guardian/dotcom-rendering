@@ -1,4 +1,4 @@
-import type { CommonBannerComponentProps as BrazeBannerProps } from '@guardian/braze-components';
+import type { BrazeBannerComponent as BrazeBannerComponentType } from '@guardian/braze-components';
 import type { ReactElement } from 'react';
 import { useEffect, useState } from 'react';
 
@@ -17,7 +17,7 @@ export const BrazeBannerComponent = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
-		useState<React.FC<BrazeBannerProps>>();
+		useState<typeof BrazeBannerComponentType>();
 
 	useEffect(() => {
 		import('@guardian/braze-components')
@@ -87,7 +87,7 @@ export const BrazeAppBannerComponent = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
-		useState<React.FC<BrazeBannerProps>>();
+		useState<typeof BrazeBannerComponentType>();
 
 	useEffect(() => {
 		import('@guardian/braze-components')
@@ -148,7 +148,7 @@ export const BrazeDigitalSubscriberAppBannerComponent = (
 	args: BrazeMessageProps & { componentName: string },
 ): ReactElement => {
 	const [BrazeMessage, setBrazeMessage] =
-		useState<React.FC<BrazeBannerProps>>();
+		useState<typeof BrazeBannerComponentType>();
 
 	useEffect(() => {
 		import('@guardian/braze-components')

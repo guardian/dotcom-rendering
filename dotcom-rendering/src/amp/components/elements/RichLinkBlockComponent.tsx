@@ -5,9 +5,8 @@ import {
 	text,
 	textSans,
 } from '@guardian/source-foundations';
-import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
-import { RichLinkBlockElement } from '../../../types/content';
+import type { RichLinkBlockElement } from '../../../types/content';
 
 const richLinkContainer = css`
 	float: left;
@@ -42,10 +41,12 @@ const richLink = css`
 	}
 `;
 
-export const RichLinkBlockComponent: React.FC<{
+type Props = {
 	element: RichLinkBlockElement;
 	pillar: ArticleTheme;
-}> = ({ element, pillar }) => (
+};
+
+export const RichLinkBlockComponent = ({ element, pillar }: Props) => (
 	<aside css={richLinkContainer}>
 		<a css={[richLink, pillarColour(pillar)]} href={element.url}>
 			{element.text}

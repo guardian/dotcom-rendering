@@ -9,14 +9,19 @@ interface SearchProps {
 }
 
 const searchLinkStyles = css`
+	display: flex;
+	align-items: center;
 	${textSans.medium({ fontWeight: 'bold' })};
+	line-height: 1;
+	font-size: 1rem;
+	height: fit-content;
 	color: ${neutral[100]};
 	transition: color 80ms ease-out;
 	text-decoration: none;
 	padding: 7px 0;
 
 	${from.tablet} {
-		padding: 7px 10px 7px 5px;
+		padding: 7px 10px 7px 6px;
 	}
 
 	:hover,
@@ -29,7 +34,7 @@ const searchLinkStyles = css`
 		float: left;
 		height: 18px;
 		width: 18px;
-		margin: 3px 4px 0 0;
+		margin: 0 4px 0 0;
 	}
 	${getZIndex('searchHeaderLink')}
 `;

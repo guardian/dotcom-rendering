@@ -32,6 +32,7 @@ export const FrontCard = (props: Props) => {
 		byline: trail.byline,
 		showByline: trail.showByline,
 		showQuotes:
+			!!trail.showQuotedHeadline ||
 			trail.format.design === ArticleDesign.Comment ||
 			trail.format.design === ArticleDesign.Letter,
 		webPublicationDate: trail.webPublicationDate,

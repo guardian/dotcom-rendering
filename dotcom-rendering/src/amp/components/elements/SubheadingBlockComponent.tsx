@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial as Special } from '@guardian/libs';
 import { headline, neutral, textSans } from '@guardian/source-foundations';
-import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 
 const style = (pillar: ArticleTheme) => css`
@@ -38,11 +37,17 @@ const subHeadingStyleLabs = css`
 	}
 `;
 
-export const SubheadingBlockComponent: React.FC<{
+type Props = {
 	html: string;
 	pillar: ArticleTheme;
 	isImmersive: boolean;
-}> = ({ html, pillar, isImmersive }) => (
+};
+
+export const SubheadingBlockComponent = ({
+	html,
+	pillar,
+	isImmersive,
+}: Props) => (
 	<span
 		css={
 			pillar === Special.Labs

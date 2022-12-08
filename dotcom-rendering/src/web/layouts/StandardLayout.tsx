@@ -401,6 +401,10 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								headerTopBarSwitch={
 									!!CAPIArticle.config.switches.headerTopNav
 								}
+								headerTopBarSearchCapiSwitch={
+									!!CAPIArticle.config.switches
+										.headerTopBarSearchCapiSwitch
+								}
 							/>
 						</Section>
 					)}
