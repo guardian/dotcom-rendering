@@ -729,22 +729,7 @@ const textCardFooter = (format: ArticleFormat): string => {
 };
 
 const textCardFooterDuration = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return news[500];
-		case ArticlePillar.Sport:
-			return sport[500];
-		case ArticlePillar.Opinion:
-			return opinion[500];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[500];
-		case ArticlePillar.Culture:
-			return culture[500];
-		case ArticleSpecial.Labs:
-			return labs[400];
-		default:
-			return pillarPalette[format.theme].main;
-	}
+	return textCardKicker(format);
 };
 
 const textLinkKicker = (format: ArticleFormat): string => {
@@ -1183,22 +1168,7 @@ const fillShareIcon = (format: ArticleFormat): string => {
 };
 
 const fillCardFooterIconBackground = (format: ArticleFormat): string => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return news[500];
-		case ArticlePillar.Sport:
-			return sport[500];
-		case ArticlePillar.Opinion:
-			return opinion[500];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[500];
-		case ArticlePillar.Culture:
-			return culture[500];
-		case ArticleSpecial.Labs:
-			return labs[400];
-		default:
-			return pillarPalette[format.theme].main;
-	}
+	return textCardKicker(format);
 };
 
 const fillShareCountIcon = (format: ArticleFormat): string => {
