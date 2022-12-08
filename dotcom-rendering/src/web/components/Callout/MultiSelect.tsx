@@ -6,7 +6,7 @@ import { CheckboxSelect } from './CheckboxSelect';
 import { RadioSelect } from './RadioSelect';
 
 type Props = {
-	validationErrors?: string[];
+	validationErrors?: { [key in string]: string };
 	formField: CampaignFieldCheckbox | CampaignFieldRadio;
 	formData: { [key in string]: any };
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
@@ -23,14 +23,14 @@ export const MultiSelect = ({
 	<div data-testid={`form-field-${formField.id}`}>
 		{multiple ? (
 			<CheckboxSelect
-				validationErrors={validationErrors}
+				validationErrors={validationErrors && validationErrors}
 				formField={formField as CampaignFieldCheckbox}
 				formData={formData}
 				setFormData={setFormData}
 			/>
 		) : (
 			<RadioSelect
-				validationErrors={validationErrors}
+				validationErrors={validationErrors && validationErrors}
 				formField={formField as CampaignFieldRadio}
 				formData={formData}
 				setFormData={setFormData}
