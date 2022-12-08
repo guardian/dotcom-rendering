@@ -1511,7 +1511,7 @@
     eslint-plugin-import "2.24.0"
     eslint-plugin-prettier "3.4.0"
 
-"@guardian/eslint-plugin-source-react-components@^9.0.1":
+"@guardian/eslint-plugin-source-react-components@^9.0.0":
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/@guardian/eslint-plugin-source-react-components/-/eslint-plugin-source-react-components-9.0.0.tgz#a0236cfadcc34a8547d62573ee62775702228d1c"
   integrity sha512-hnwUcuvQ041l+XYNdvPtqe0rXIcbCtoElyDcTKPqRDjvBRSGazH1CJrolLCLkD/34YbvwVUH6y+jpvcD3jWKYw==
