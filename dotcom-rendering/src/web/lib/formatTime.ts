@@ -13,7 +13,9 @@ export const formatTime = (videoDurationInSeconds: number): string => {
 			? hoursString.length
 				? enforceTwoDigitString(minutes)
 				: minutes
-			: '00';
+			: hoursString.length
+			? '00'
+			: '0';
 	const secondsString = seconds > 0 ? enforceTwoDigitString(seconds) : '00';
 	return `${hoursString}${minutesString}:${secondsString}`;
 };

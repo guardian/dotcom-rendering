@@ -125,6 +125,19 @@ const enhanceTags = (tags: FETagType[]): TagType[] => {
 	});
 };
 
+const getMediaType = (format: ArticleFormat): MediaType | undefined => {
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return 'Gallery';
+		case ArticleDesign.Video:
+			return 'Video';
+		case ArticleDesign.Audio:
+			return 'Audio';
+		default:
+			return undefined;
+	}
+};
+
 export const enhanceCards = (
 	collections: FEFrontCard[],
 	containerPalette?: DCRContainerPalette,
@@ -205,5 +218,6 @@ export const enhanceCards = (
 				faciaCard.properties.maybeContent?.elements.mediaAtoms.find(
 					(atom) => !!atom.duration,
 				)?.duration,
+			mediaType: getMediaType(format),
 		};
 	});

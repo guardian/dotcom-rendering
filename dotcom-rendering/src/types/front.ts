@@ -256,6 +256,7 @@ export type DCRFrontCard = {
 	byline?: string;
 	showByline?: boolean;
 	avatarUrl?: string;
+	mediaType?: MediaType;
 };
 
 export type FESnapType = {

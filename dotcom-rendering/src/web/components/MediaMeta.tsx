@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans } from '@guardian/source-foundations';
+import { space, textSans } from '@guardian/source-foundations';
 import {
 	SvgAudio,
 	SvgCamera,
@@ -8,6 +8,7 @@ import {
 import type { DCRContainerPalette } from '../../types/front';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
+import { formatTime } from '../lib/formatTime';
 
 type Props = {
 	mediaType: MediaType;
@@ -20,7 +21,7 @@ const iconWrapperStyles = (palette: Palette) => css`
 	width: 24px;
 	height: 24px;
 	/* We’re using the text colour for the icon badge */
-	background-color: ${palette.text.cardFooter};
+	background-color: ${palette.fill.cardFooterIconBackground};
 	border-radius: 50%;
 	display: inline-block;
 
@@ -36,38 +37,15 @@ const iconWrapperStyles = (palette: Palette) => css`
 `;
 
 const durationStyles = (palette: Palette) => css`
-	color: ${palette.text.cardFooter};
+	color: ${palette.text.cardFooterDuration};
 	${textSans.xxsmall({ fontWeight: `bold` })}
 `;
 
 const wrapperStyles = css`
 	display: flex;
 	align-items: center;
-	margin-top: 4px;
+	margin-left: ${space[1]}px;
 `;
-
-export function secondsToDuration(secs?: number): string {
-	if (typeof secs === `undefined` || secs === 0) {
-		return ``;
-	}
-	const seconds = Number(secs);
-	const h = Math.floor(seconds / 3600);
-	const m = Math.floor((seconds % 3600) / 60);
-	const s = Math.floor((seconds % 3600) % 60);
-
-	const duration = [];
-	if (h > 0) {
-		duration.push(h);
-	}
-	if (m > 0 || h === 0) {
-		// supports 0:59
-		duration.push(m);
-	}
-	if (s > 0) {
-		duration.push(s);
-	}
-	return duration.join(':');
-}
 
 const Icon = ({ mediaType }: { mediaType: MediaType }) => {
 	switch (mediaType) {
@@ -98,7 +76,7 @@ const MediaDuration = ({
 }: {
 	mediaDuration: number;
 	palette: Palette;
-}) => <p css={durationStyles(palette)}>{secondsToDuration(mediaDuration)}</p>;
+}) => <p css={durationStyles(palette)}>{formatTime(mediaDuration)}</p>;
 
 export const MediaMeta = ({
 	mediaType,

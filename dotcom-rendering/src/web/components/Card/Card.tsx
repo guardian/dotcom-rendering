@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground, space } from '@guardian/source-foundations';
-import { Link } from '@guardian/source-react-components';
+import { Link, SvgMediaControlsPlay } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { Branding } from '../../../types/branding';
 import type {
@@ -308,6 +308,7 @@ export const Card = ({
 					) : undefined
 				}
 				mediaDuration={mediaDuration}
+				mediaType={mediaType}
 			/>
 		);
 	};
@@ -406,17 +407,6 @@ export const Card = ({
 						{starRating !== undefined ? (
 							<StarRatingComponent rating={starRating} />
 						) : null}
-						{(format.design === ArticleDesign.Gallery ||
-							format.design === ArticleDesign.Audio ||
-							format.design === ArticleDesign.Video) &&
-						mediaType ? (
-							<MediaMeta
-								containerPalette={containerPalette}
-								format={format}
-								mediaType={mediaType}
-								mediaDuration={mediaDuration}
-							/>
-						) : undefined}
 					</HeadlineWrapper>
 					{/* This div is needed to push this content to the bottom of the card */}
 					<div>
