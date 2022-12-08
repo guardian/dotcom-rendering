@@ -728,6 +728,25 @@ const textCardFooter = (format: ArticleFormat): string => {
 	}
 };
 
+const textCardMediaFooter = (format: ArticleFormat): string => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[500];
+		case ArticlePillar.Sport:
+			return sport[500];
+		case ArticlePillar.Opinion:
+			return opinion[500];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[500];
+		case ArticlePillar.Culture:
+			return culture[500];
+		case ArticleSpecial.Labs:
+			return labs[400];
+		default:
+			return pillarPalette[format.theme].main;
+	}
+};
+
 const textLinkKicker = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
@@ -2008,6 +2027,7 @@ export const decidePalette = (
 			cardStandfirst:
 				overrides?.text.cardStandfirst ?? textCardStandfirst(format),
 			cardFooter: overrides?.text.cardFooter ?? textCardFooter(format),
+			cardMediaFooter: textCardMediaFooter(format),
 			dynamoMeta: overrides?.text.dynamoMeta ?? textCardFooter(format),
 			headlineByline: textHeadlineByline(format),
 			standfirst: textStandfirst(format),
