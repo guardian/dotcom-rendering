@@ -96,7 +96,7 @@
 		"eslint-plugin-import": "^2.26.0",
 		"eslint-plugin-jsx-a11y": "^6.6.1",
 		"eslint-plugin-prettier": "^4.0.0",
-		"eslint-plugin-react": "^7.31.7",
+		"eslint-plugin-react": "^7.31.11",
 		"express": "^4.18.1",
 		"html-webpack-plugin": "^5.5.0",
 		"jest": "^28.1.3",
