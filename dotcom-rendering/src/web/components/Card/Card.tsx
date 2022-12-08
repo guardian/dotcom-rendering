@@ -355,6 +355,7 @@ export const Card = ({
 						imageType={image.type}
 						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
+						format={format}
 					>
 						{image.type === 'avatar' ? (
 							<AvatarContainer

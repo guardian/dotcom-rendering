@@ -1,6 +1,8 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
-import { between, from, until } from '@guardian/source-foundations';
+import { ArticleDesign } from '@guardian/libs';
+import { between, brandAlt, from, until } from '@guardian/source-foundations';
+import { SvgMediaControlsPlay } from '@guardian/source-react-components';
 
 type Props = {
 	children: React.ReactNode;
@@ -8,6 +10,7 @@ type Props = {
 	imageType?: CardImageType;
 	imagePosition: ImagePositionType;
 	imagePositionOnMobile: ImagePositionType;
+	format: ArticleFormat;
 };
 
 /**
@@ -47,16 +50,52 @@ const flexBasisStyles = ({
 	}
 };
 
+const iconWrapperStyles = css`
+	position: absolute;
+	bottom: 2px;
+	left: 4px;
+`;
+
+const iconStyles = (imageSize: ImageSizeType) => css`
+	background-color: ${brandAlt[400]};
+	border-radius: 50%;
+	display: inline-block;
+
+	width: 40px;
+	height: 40px;
+	${from.tablet} {
+		width: ${imageSize === 'jumbo' ? 60 : 40}px;
+		width: ${imageSize === 'jumbo' ? 60 : 40}px;
+	}
+
+	svg {
+		/* Visual centering */
+		transform: translateX(1px);
+	}
+`;
+
+const PlayIcon = ({ imageSize }: { imageSize: ImageSizeType }) => {
+	return (
+		<div css={iconWrapperStyles}>
+			<span css={iconStyles(imageSize)}>
+				<SvgMediaControlsPlay />
+			</span>
+		</div>
+	);
+};
+
 export const ImageWrapper = ({
 	children,
 	imageSize,
 	imageType,
 	imagePosition,
 	imagePositionOnMobile,
+	format,
 }: Props) => {
 	const isHorizontal = imagePosition === 'left' || imagePosition === 'right';
 	const isHorizontalOnMobile =
 		imagePositionOnMobile === 'left' || imagePositionOnMobile === 'right';
+
 	return (
 		<div
 			css={[
@@ -105,6 +144,9 @@ export const ImageWrapper = ({
 				{children}
 				{/* This image overlay is styled when the CardLink is hovered */}
 				{imageType === 'mainMedia' && <div className="image-overlay" />}
+				{format.design === ArticleDesign.Video && (
+					<PlayIcon imageSize={imageSize} />
+				)}
 			</>
 		</div>
 	);
