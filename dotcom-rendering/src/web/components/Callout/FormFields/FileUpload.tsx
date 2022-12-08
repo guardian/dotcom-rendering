@@ -35,7 +35,7 @@ type Props = {
 	formField: CampaignFieldType;
 	formData: { [key in string]: any };
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
-	validationErrors: string[];
+	validationErrors: { [key in string]: string };
 };
 
 const customUpload = (format: ArticleFormat): SerializedStyles => css`

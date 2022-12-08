@@ -65,7 +65,7 @@ const textStyles = css`
 type FormDataType = { [key in string]: any };
 
 type FormFieldProp = {
-	validationErrors: string[];
+	validationErrors: { [key in string]: string };
 	format: ArticleFormat;
 	formField: CampaignFieldType;
 	formData: FormDataType;
@@ -162,7 +162,9 @@ export const Form = ({
 }: FormProps) => {
 	// const [twitterHandle, setTwitterHandle] = useState('');
 	const [formData, setFormData] = useState<{ [key in string]: any }>({});
-	const [validationErrors, setValidationErrors] = useState<string[]>([]);
+	const [validationErrors, setValidationErrors] = useState<{
+		[key in string]: string;
+	}>({});
 
 	return (
 		<form
@@ -172,16 +174,17 @@ export const Form = ({
 			noValidate={true}
 			onSubmit={(e) => {
 				e.preventDefault();
-				const errors: string[] = [];
+				const errors: { [key in string]: string } = {};
 
 				formFields.forEach((field: CampaignFieldType) => {
 					if (field.required) {
 						if (formData[field.id] == undefined) {
-							errors.push(field.id);
+							errors[field.id] =
+								'Please complete all required fields';
 						}
 					}
 				});
-				if (errors.length) {
+				if (Object.keys(errors).length) {
 					setValidationErrors(errors);
 					return;
 				}
@@ -195,7 +198,7 @@ export const Form = ({
 					{networkError}
 				</div>
 			)}
-			{validationErrors.length > 0 && (
+			{Object.keys(validationErrors).length > 0 && (
 				<div css={errorBoxStyles}>
 					<div css={errorHeaderStyles}>
 						<SvgAlertTriangle size="medium" />

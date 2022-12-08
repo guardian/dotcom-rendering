@@ -4,7 +4,7 @@ import type { CampaignFieldRadio } from 'src/types/content';
 import { FieldLabel } from './FieldLabel';
 
 type FieldProp = {
-	validationErrors?: string[];
+	validationErrors: { [key in string]: string };
 	formField: CampaignFieldRadio;
 	formData: { [key in string]: any };
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
@@ -27,11 +27,7 @@ export const RadioSelect = ({
 	>
 		<FieldLabel formField={formField} />
 		<RadioGroup
-			error={
-				validationErrors?.includes(formField.id)
-					? 'Please complete all required fields'
-					: ''
-			}
+			error={validationErrors[formField.id]}
 			name={formField.name}
 			orientation={
 				formField.options.length > 2 ? 'vertical' : 'horizontal'
