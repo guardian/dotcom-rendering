@@ -19,7 +19,6 @@ type Props = {
 };
 
 const fontStyles = (size: SmallHeadlineSize) => {
-	// eslint-disable-next-line default-case -- because a default case here makes no sense
 	switch (size) {
 		case 'ginormous':
 		case 'huge':
