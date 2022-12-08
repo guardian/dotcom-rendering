@@ -27,7 +27,7 @@ export type Palette = {
 		linkKicker: Colour;
 		cardStandfirst: Colour;
 		cardFooter: Colour;
-		cardMediaFooter: Colour;
+		cardFooterDuration: Colour;
 		headlineByline: Colour;
 		standfirst: Colour;
 		standfirstLink: Colour;

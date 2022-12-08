@@ -60,7 +60,7 @@ const iconStyles = (palette: Palette) => {
 const durationStyles = (palette: Palette) => {
 	return css`
 		${textSans.xxsmall({ fontWeight: 'bold' })}
-		color: ${palette.text.cardMediaFooter};
+		color: ${palette.text.cardFooterDuration};
 		margin-left: 3px;
 	`;
 };

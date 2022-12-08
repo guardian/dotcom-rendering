@@ -728,7 +728,7 @@ const textCardFooter = (format: ArticleFormat): string => {
 	}
 };
 
-const textCardMediaFooter = (format: ArticleFormat): string => {
+const textCardFooterDuration = (format: ArticleFormat): string => {
 	switch (format.theme) {
 		case ArticlePillar.News:
 			return news[500];
@@ -2027,7 +2027,7 @@ export const decidePalette = (
 			cardStandfirst:
 				overrides?.text.cardStandfirst ?? textCardStandfirst(format),
 			cardFooter: overrides?.text.cardFooter ?? textCardFooter(format),
-			cardMediaFooter: textCardMediaFooter(format),
+			cardFooterDuration: textCardFooterDuration(format),
 			dynamoMeta: overrides?.text.dynamoMeta ?? textCardFooter(format),
 			headlineByline: textHeadlineByline(format),
 			standfirst: textStandfirst(format),
