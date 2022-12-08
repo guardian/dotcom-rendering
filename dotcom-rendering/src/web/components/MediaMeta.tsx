@@ -38,13 +38,13 @@ const iconWrapperStyles = (palette: Palette) => css`
 
 const durationStyles = (palette: Palette) => css`
 	color: ${palette.text.cardFooterDuration};
-	${textSans.xxsmall({ fontWeight: `bold` })}
+	${textSans.xxsmall()}
 `;
 
 const wrapperStyles = css`
 	display: flex;
 	align-items: center;
-	margin-left: ${space[1]}px;
+	margin-top: ${space[1]}px;
 `;
 
 const Icon = ({ mediaType }: { mediaType: MediaType }) => {

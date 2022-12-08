@@ -3,7 +3,6 @@ import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { DCRContainerPalette } from '../../../../types/front';
 import { decidePalette } from '../../../lib/decidePalette';
-import { MediaMeta } from '../../MediaMeta';
 
 type Props = {
 	format: ArticleFormat;
@@ -13,8 +12,6 @@ type Props = {
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
 	supportingContent?: JSX.Element;
-	mediaDuration?: number;
-	mediaType?: MediaType;
 };
 
 const spaceBetween = css`
@@ -41,19 +38,12 @@ export const CardFooter = ({
 	commentCount,
 	cardBranding,
 	supportingContent,
-	mediaType,
-	mediaDuration,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
 	if (format.theme === ArticleSpecial.Labs && cardBranding) {
 		return <footer css={margins}>{cardBranding}</footer>;
 	}
-
-	const isMedia =
-		format.design === ArticleDesign.Gallery ||
-		format.design === ArticleDesign.Audio ||
-		format.design === ArticleDesign.Video;
 
 	if (
 		format.design === ArticleDesign.Comment ||
@@ -97,15 +87,7 @@ export const CardFooter = ({
 	return (
 		<footer css={margins}>
 			{supportingContent}
-			<div css={isMedia ? spaceBetween : flexEnd}>
-				{isMedia && mediaType && (
-					<MediaMeta
-						containerPalette={containerPalette}
-						format={format}
-						mediaType={mediaType}
-						mediaDuration={mediaDuration}
-					/>
-				)}
+			<div css={flexEnd}>
 				<>{commentCount}</>
 			</div>
 		</footer>

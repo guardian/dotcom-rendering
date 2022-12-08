@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
 import { brandAltBackground, space } from '@guardian/source-foundations';
-import { Link, SvgMediaControlsPlay } from '@guardian/source-react-components';
+import { Link } from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { Branding } from '../../../types/branding';
 import type {
@@ -307,8 +307,6 @@ export const Card = ({
 						<CardBranding branding={branding} format={format} />
 					) : undefined
 				}
-				mediaDuration={mediaDuration}
-				mediaType={mediaType}
 			/>
 		);
 	};
@@ -318,6 +316,11 @@ export const Card = ({
 		format,
 		showAge,
 	});
+
+	const isMedia =
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.Audio ||
+		format.design === ArticleDesign.Video;
 
 	if (snapData?.embedHtml) {
 		return <Snap snapData={snapData} />;
@@ -407,6 +410,14 @@ export const Card = ({
 						{starRating !== undefined ? (
 							<StarRatingComponent rating={starRating} />
 						) : null}
+						{isMedia && mediaType && (
+							<MediaMeta
+								containerPalette={containerPalette}
+								format={format}
+								mediaType={mediaType}
+								mediaDuration={mediaDuration}
+							/>
+						)}
 					</HeadlineWrapper>
 					{/* This div is needed to push this content to the bottom of the card */}
 					<div>
