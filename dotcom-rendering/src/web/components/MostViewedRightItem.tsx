@@ -38,7 +38,7 @@ const linkTagStyles = css`
 	}
 
 	&:visited h3 {
-		color: ${neutral[46]}
+		color: ${neutral[46]};
 	}
 
 	&:hover h3 {
