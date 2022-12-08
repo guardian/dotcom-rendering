@@ -307,6 +307,7 @@ export const Card = ({
 						<CardBranding branding={branding} format={format} />
 					) : undefined
 				}
+				mediaDuration={mediaDuration}
 			/>
 		);
 	};

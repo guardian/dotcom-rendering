@@ -1,8 +1,16 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
+import { space, textSans } from '@guardian/source-foundations';
+import {
+	SvgAudio,
+	SvgCamera,
+	SvgVideo,
+} from '@guardian/source-react-components';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { DCRContainerPalette } from '../../../../types/front';
+import type { Palette } from '../../../../types/palette';
 import { decidePalette } from '../../../lib/decidePalette';
+import { formatTime } from '../../../lib/formatTime';
 
 type Props = {
 	format: ArticleFormat;
@@ -12,6 +20,7 @@ type Props = {
 	commentCount?: JSX.Element;
 	cardBranding?: JSX.Element;
 	supportingContent?: JSX.Element;
+	mediaDuration?: number;
 };
 
 const spaceBetween = css`
@@ -30,6 +39,78 @@ const flexEnd = css`
 	justify-content: flex-end;
 `;
 
+const mediaStyles = css`
+	margin-left: ${space[1]}px;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+`;
+
+const iconStyles = (palette: Palette) => {
+	return css`
+		width: 1.5rem;
+		height: 1.5rem;
+		display: inline-block;
+		background-color: ${palette.fill.cardFooterIconBackground};
+		border-radius: 50%;
+	`;
+};
+
+const durationStyles = (palette: Palette) => {
+	return css`
+		${textSans.xxsmall({ fontWeight: 'bold' })}
+		color: ${palette.fill.cardFooterIconBackground};
+		margin-left: 3px;
+	`;
+};
+
+const MediaMeta = ({
+	format,
+	containerPalette,
+	mediaDuration,
+}: {
+	format: ArticleFormat;
+	containerPalette?: DCRContainerPalette;
+	mediaDuration?: number;
+}) => {
+	const palette = decidePalette(format, containerPalette);
+
+	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return (
+				<div css={mediaStyles}>
+					<span css={iconStyles(palette)}>
+						<SvgCamera />
+					</span>
+				</div>
+			);
+		case ArticleDesign.Audio:
+			return (
+				<div css={mediaStyles}>
+					<span css={iconStyles(palette)}>
+						<SvgAudio />
+					</span>
+				</div>
+			);
+		case ArticleDesign.Video:
+			return (
+				<div css={mediaStyles}>
+					<span css={iconStyles(palette)}>
+						<SvgVideo />
+					</span>
+					{!!mediaDuration && (
+						<span css={durationStyles(palette)}>
+							{formatTime(mediaDuration)}
+						</span>
+					)}
+				</div>
+			);
+		default:
+			return null;
+	}
+};
+
 export const CardFooter = ({
 	format,
 	containerPalette,
@@ -38,12 +119,18 @@ export const CardFooter = ({
 	commentCount,
 	cardBranding,
 	supportingContent,
+	mediaDuration,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
 	if (format.theme === ArticleSpecial.Labs && cardBranding) {
 		return <footer css={margins}>{cardBranding}</footer>;
 	}
+
+	const isMedia =
+		format.design === ArticleDesign.Gallery ||
+		format.design === ArticleDesign.Audio ||
+		format.design === ArticleDesign.Video;
 
 	if (
 		format.design === ArticleDesign.Comment ||
@@ -87,7 +174,10 @@ export const CardFooter = ({
 	return (
 		<footer css={margins}>
 			{supportingContent}
-			<div css={flexEnd}>
+			<div css={isMedia ? spaceBetween : flexEnd}>
+				{isMedia && (
+					<MediaMeta format={format} mediaDuration={mediaDuration} />
+				)}
 				<>{commentCount}</>
 			</div>
 		</footer>
