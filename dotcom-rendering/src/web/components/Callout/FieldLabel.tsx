@@ -7,8 +7,7 @@ const fieldLabelStyles = css`
 `;
 
 const fieldDescription = css`
-	${textSans.small()}
-	color: ${neutral[46]};
+	${textSans.medium()}
 `;
 
 const optionalTextStyles = css`
