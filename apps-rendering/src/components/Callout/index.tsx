@@ -5,6 +5,7 @@ import { remSpace } from '@guardian/source-foundations';
 import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
 import { isElement } from 'lib';
 import type { FC, ReactElement } from 'react';
+import { createElement as h } from 'react';
 import CalloutBlock from './calloutBlock';
 import { DeadlineDate, Highlight, isCalloutActive } from './deadlineDate';
 import { getTheme } from './theme';
@@ -30,30 +31,6 @@ const Callout: FC<CalloutProps> = ({
 	activeUntil,
 	name,
 }): ReactElement => {
-	const hydrationParams = (
-		<script className="js-callout-params" type="application/json">
-			{JSON.stringify({
-				callout: {
-					isNonCollapsible,
-					heading,
-					formId,
-					formFields,
-					description: description
-						? Array.from(description.childNodes)
-								.map((node) =>
-									isElement(node)
-										? node.outerHTML
-										: node.textContent,
-								)
-								.join('')
-						: [],
-					name,
-					activeUntil,
-				},
-				format,
-			})}
-		</script>
-	);
 	const isActive = isCalloutActive(activeUntil);
 
 	if (!isActive && isNonCollapsible) {
@@ -68,7 +45,6 @@ const Callout: FC<CalloutProps> = ({
 	}
 	return (
 		<aside className="js-callout">
-			{hydrationParams}
 			{isNonCollapsible ? (
 				<ThemeProvider theme={getTheme()}>
 					<CalloutBlock
@@ -112,4 +88,41 @@ const Callout: FC<CalloutProps> = ({
 	);
 };
 
-export default Callout;
+const CalloutWithHydrationProps: FC<CalloutProps> = ({
+	format,
+	...calloutProps
+}): ReactElement => {
+	const getStringFromNodes = (nodes: NodeListOf<ChildNode>): string =>
+		Array.from(nodes)
+			.map((node) => {
+				return isElement(node) ? node.outerHTML : node.textContent;
+			})
+			.join('');
+
+	const description = calloutProps.description;
+	const stringDescription = description
+		? getStringFromNodes(description.childNodes)
+		: '';
+
+	const serverSideProps = JSON.stringify({
+		callout: {
+			...calloutProps,
+			description: stringDescription,
+		},
+		format,
+	});
+
+	return h(
+		'div',
+		{
+			hydrationprops: serverSideProps,
+			className: 'js-callout-props',
+		},
+		Callout({
+			...calloutProps,
+			format,
+		}),
+	);
+};
+
+export default CalloutWithHydrationProps;

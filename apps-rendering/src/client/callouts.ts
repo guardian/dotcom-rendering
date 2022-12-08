@@ -1,16 +1,10 @@
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { FormOption } from '@guardian/apps-rendering-api-models/formOption';
-import {
-	ArticleDesign,
-	ArticleDisplay,
-	ArticlePillar,
-	ArticleSpecial,
-} from '@guardian/libs';
+import { ArticlePillar, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat, ArticleTheme } from '@guardian/libs';
 import { withDefault } from '@guardian/types';
 import type { Callout } from 'bodyElement';
 import { ElementKind } from 'bodyElementKind';
-import { parse as clientParse } from 'client/parser';
 import { pipe, resultFromNullable } from 'lib';
 import {
 	andThen,
@@ -295,7 +289,7 @@ const calloutPropsParser: Parser<CalloutProps> = map2(makeCalloutProps)(
 );
 
 const parseCalloutProps = (
-	rawProps: string | undefined,
+	rawProps: string | undefined | null,
 ): Result<string, CalloutProps> =>
 	pipe(
 		rawProps,
@@ -312,35 +306,18 @@ const parseCalloutProps = (
 		.flatMap(parse(calloutPropsParser));
 
 function hydrateCallout(callout: Element): void {
-	const rawProps = callout.querySelector('.js-callout-params')?.innerHTML;
+	const rawProps = document
+		.querySelector('.js-callout-props')
+		?.getAttribute('hydrationprops');
 	const parsedProps = parseCalloutProps(rawProps);
-
-	const parser = new DOMParser();
-	const parseHtml = (html: string): DocumentFragment | undefined =>
-		clientParse(parser)(html).either<DocumentFragment | undefined>(
-			(_err) => undefined,
-			(doc) => doc,
-		);
-
-	// Hack because I can't get the parser to work for the description fragment
-	const descriptionFrag: DocumentFragment | undefined = rawProps
-		? parseHtml(JSON.parse(rawProps).callout.description)
-		: undefined;
 
 	if (parsedProps.isOk()) {
 		const calloutProps = parsedProps.value;
 
-		const mockFormat: ArticleFormat = {
-			theme: ArticlePillar.News,
-			design: ArticleDesign.Standard,
-			display: ArticleDisplay.Standard,
-		};
-
-		ReactDOM.hydrate(
+		ReactDOM.render(
 			h(CalloutComponent, {
 				...calloutProps.callout,
-				description: descriptionFrag,
-				format: mockFormat,
+				format: calloutProps.format as ArticleFormat,
 			}),
 			callout,
 		);

@@ -38,9 +38,11 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 				<div css={calloutSummaryContentWrapper}>
 					<div css={calloutTitle(format)}>{heading}</div>
 					<h4 css={calloutHeadingText}>{name}</h4>
-					<div css={calloutDescription}>
-						<>{renderCalloutDescriptionText(format, description)}</>
-					</div>
+					{description && (
+						<div css={calloutDescription}>
+							{renderCalloutDescriptionText(format, description)}
+						</div>
+					)}
 				</div>
 			</summary>
 			<CalloutForm id={formId} fields={formFields} format={format} />

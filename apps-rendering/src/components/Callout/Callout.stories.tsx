@@ -1,7 +1,7 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import fetchMock from 'fetch-mock';
-import { mockCampaign, campaignDescription } from 'fixtures/campaign';
+import { campaignDescription, mockCampaign } from 'fixtures/campaign';
 // import Int64 from 'node-int64';
 import type { ReactElement } from 'react';
 import { callouts } from '../../client/callouts';
