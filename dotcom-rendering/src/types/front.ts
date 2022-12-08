@@ -52,6 +52,10 @@ interface DCRPressedPageType {
 	collections: DCRCollectionType[];
 }
 
+interface FEMediaAtoms {
+	duration?: number;
+}
+
 type FEContainerType =
 	| 'dynamic/fast'
 	| 'dynamic/package'
@@ -152,7 +156,10 @@ export type FEFrontCard = {
 				body: string;
 				standfirst?: string;
 			};
-			elements: Record<string, unknown>;
+			elements: {
+				mainVideo?: unknown;
+				mediaAtoms: FEMediaAtoms[];
+			};
 			tags: { tags: FETagType[] };
 		};
 		maybeContentId?: string;
@@ -242,6 +249,7 @@ export type DCRFrontCard = {
 	image?: string;
 	kickerText?: string;
 	snapData?: DCRSnapType;
+	mediaDuration?: number;
 	/** @see JSX.IntrinsicAttributes["data-link-name"] */
 	dataLinkName: string;
 	discussionId?: string;

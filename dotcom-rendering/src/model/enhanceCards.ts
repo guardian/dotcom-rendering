@@ -201,5 +201,9 @@ export const enhanceCards = (
 							faciaCard.properties.maybeContent.trail.byline,
 					  )
 					: undefined,
+			mediaDuration:
+				faciaCard.properties.maybeContent?.elements.mediaAtoms.find(
+					(atom) => !!atom.duration,
+				)?.duration,
 		};
 	});
