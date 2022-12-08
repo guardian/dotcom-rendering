@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { neutral, textSans } from '@guardian/source-foundations';
-import type { ReactElement } from 'react';
 import type { CampaignFieldType } from 'src/types/content';
 
 const fieldLabelStyles = css`
@@ -18,16 +17,8 @@ const optionalTextStyles = css`
 	padding-left: 5px;
 `;
 
-export const FieldLabel = ({
-	formField,
-	children,
-}: {
-	formField: CampaignFieldType;
-	children?: ReactElement;
-}) =>
-	formField.hideLabel ? (
-		<>{children && children}</>
-	) : (
+export const FieldLabel = ({ formField }: { formField: CampaignFieldType }) =>
+	formField.hideLabel ? null : (
 		<label css={fieldLabelStyles} htmlFor={formField.name}>
 			{formField.label}
 			{!formField.required && (
@@ -40,6 +31,5 @@ export const FieldLabel = ({
 					>{`${formField.description}`}</span>
 				</div>
 			)}
-			{children && children}
 		</label>
 	);
