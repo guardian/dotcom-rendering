@@ -181,8 +181,12 @@ const lineStyles = (palette: Palette) => css`
 		top: 0;
 		left: 0;
 		content: '';
-		width: 120px;
 		border-top: 1px solid ${palette.border.cardSupporting};
+
+		width: 120px;
+		${between.tablet.and.desktop} {
+			width: 100px;
+		}
 	}
 `;
 

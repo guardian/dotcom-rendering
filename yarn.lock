@@ -2968,17 +2968,17 @@
   resolved "https://registry.yarnpkg.com/@guardian/browserslist-config/-/browserslist-config-2.0.3.tgz#1c8b832ab564b257f8146ca1b3183b7683026ec9"
   integrity sha512-mALAjz+4Hb2zLxfVz11PSKp6410boWqf0FFYhgzMKOhby0bZjfEKsQIH//U15M5ELibIMG1ryHSP/SFV4C2ovg==
 
-"@guardian/commercial-core@^4.25.0":
-  version "4.25.0"
-  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-4.25.0.tgz#cbc1ab2aaff456a3dc20836b1520a4a29b3a75ec"
-  integrity sha512-EDFSiCtTAlXdu/WK8dCp+BO5TLIYeyZ4QGkYv2lNXJ7y2U3zFkyTipPHq2Ld9iOSyy2+TtcF3OPnXS4j1pJ7vA==
-
-"@guardian/consent-management-platform@10.11.1":
-  version "10.11.1"
-  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-10.11.1.tgz#fa01a9262963ac07df9476e591d14601efbc4588"
-  integrity sha512-7dKcKZ3L/Y/hG9MB6i1invZmTVL6EepIv1ioGCW7uR9MVhWcuIGR1MJqKWMIzQgtZ2p0CXtSzKQOvbRtfX5fxQ==
+"@guardian/commercial-core@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/commercial-core/-/commercial-core-5.0.0.tgz#644198cf8143abc8ceca8f075011c9ee5ed2e9a9"
+  integrity sha512-PLSgWvf1oDIvGstwmTrKqpIFnI/G0hU04wJMSr8CGOqk9Apx9HUCvYF1uDdcD9oLCAck3Fz8oveXrBaXLmwsWQ==
   dependencies:
-    "@guardian/libs" "^7.1.4"
+    type-fest "2.12.2"
+
+"@guardian/consent-management-platform@11.0.0":
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-11.0.0.tgz#240083bbe4e8c4c22410cfa4c867b608e7c0e92f"
+  integrity sha512-j97gI5NbhVLXy1s8465lyT/w/nU3K+HewkfHIQ/NLOvzBS2mmcgB6A6sRXsKCOYRt4W8eNoTX5xgAdemFgvLAw==
 
 "@guardian/core-web-vitals@^1.0.0":
   version "1.0.0"
@@ -3023,10 +3023,10 @@
   resolved "https://registry.npmjs.org/@guardian/libs/-/libs-10.0.0.tgz#3624e5ead3a9f4ffb6244327d3ee5c3d55d688fa"
   integrity sha512-N6+5e0DrusWryaZCH6/cppJlLEksuZWFyYnQjHbe/HXM2cLe2i3GAU5kRhIh98pOlPTPer5GennBAYQ6gzQofg==
 
-"@guardian/libs@^7.1.4":
-  version "7.1.4"
-  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-7.1.4.tgz#f5de14f52a32cb677361d49157c94eb046a2b9a8"
-  integrity sha512-r2AJk+4EakNLCLXHhUEqdYSjFhuq19k7tsQO5+53YZc6x6ADEXFNRVE/7EzbODgu5pVwk5SQ/rMuWsE7+5qdVQ==
+"@guardian/libs@^10.1.0":
+  version "10.1.1"
+  resolved "https://registry.yarnpkg.com/@guardian/libs/-/libs-10.1.1.tgz#7048c365a68dda068f707d46c78979f430221963"
+  integrity sha512-OdWReBHRWhdbErVmS15hihVzlkdU8DkKrjDsUIN0P8QZiF4twuzcU3qsPwto2UfibAwPkWqKkNwH1k8b6xNclA==
 
 "@guardian/prettier@^2.0.0", "@guardian/prettier@^2.1.5":
   version "2.1.5"
@@ -17604,9 +17604,9 @@ qs@^6.10.0:
     side-channel "^1.0.4"
 
 qs@~6.5.2:
-  version "6.5.2"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
-  integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.3.tgz#3aeeffc91967ef6e35c0e488ef46fb296ab76aad"
+  integrity sha512-qxXIEh4pCGfHICj1mAJQ2/2XVZkjCDTcEgfoSQxc/fYivUZxTkk7L3bDBJSoNrEzXI17oUO5Dp07ktqE5KzczA==
 
 querystring-es3@^0.2.0:
   version "0.2.1"
@@ -20465,7 +20465,7 @@ type-detect@4.0.8:
   resolved "https://registry.yarnpkg.com/type-detect/-/type-detect-4.0.8.tgz#7646fb5f18871cfbb7749e69bd39a6388eb7450c"
   integrity sha512-0fr/mIH1dlO+x7TlcMy+bIDqKPsw/70tVyeHW787goQjhmqaZe10uwLujubK9q9Lg6Fiho1KUKDYz0Z7k7g5/g==
 
-type-fest@^0.18.0, type-fest@^0.20.2, type-fest@^0.21.3, type-fest@^0.6.0, type-fest@^0.8.1, type-fest@^1.4.0, type-fest@^2.8.0:
+type-fest@2.12.2, type-fest@^0.18.0, type-fest@^0.20.2, type-fest@^0.21.3, type-fest@^0.6.0, type-fest@^0.8.1, type-fest@^1.4.0, type-fest@^2.8.0:
   version "2.19.0"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.19.0.tgz#88068015bb33036a598b952e55e9311a60fd3a9b"
   integrity sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==
