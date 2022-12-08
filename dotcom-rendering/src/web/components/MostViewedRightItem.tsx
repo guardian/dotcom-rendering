@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign } from '@guardian/libs';
-import { border, headline, neutral, text } from '@guardian/source-foundations';
+import { border, headline, text } from '@guardian/source-foundations';
 import type { TrailType } from '../../types/trails';
 import { useHover } from '../lib/useHover';
 import { AgeWarning } from './AgeWarning';
@@ -67,12 +67,6 @@ type Props = {
 export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 	const [hoverRef, isHovered] = useHover<HTMLAnchorElement>();
 
-	const linkProps = {
-		to: trail.url,
-		visitedColour: neutral[46],
-		preventFocus: true,
-	};
-
 	return (
 		<li
 			css={listItemStyles}
@@ -96,7 +90,6 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 								format={trail.format}
 								size="small"
 								showUnderline={isHovered}
-								link={linkProps}
 								kickerText="Live"
 								showSlash={false}
 								byline={
@@ -109,7 +102,6 @@ export const MostViewedRightItem = ({ trail, mostViewedItemIndex }: Props) => {
 								format={trail.format}
 								size="small"
 								showUnderline={isHovered}
-								link={linkProps}
 								byline={
 									trail.showByline ? trail.byline : undefined
 								}
