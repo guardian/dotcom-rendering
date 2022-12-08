@@ -20,6 +20,7 @@ import { Hide } from '../Hide';
 import { MediaMeta } from '../MediaMeta';
 import { Snap } from '../Snap';
 import { StarRating } from '../StarRating/StarRating';
+import type { Alignment } from '../SupportingContent';
 import { SupportingContent } from '../SupportingContent';
 import { AvatarContainer } from './components/AvatarContainer';
 import { CardAge } from './components/CardAge';
@@ -65,6 +66,7 @@ export type Props = {
 	/** Only used on Labs cards */
 	branding?: Branding;
 	supportingContent?: DCRSupportingContent[];
+	supportingContentAlignment?: Alignment;
 	snapData?: DCRSnapType;
 	containerPalette?: DCRContainerPalette;
 	containerType?: DCRContainerType;
@@ -190,14 +192,15 @@ const getImage = ({
 const decideSublinkPosition = (
 	supportingContent?: DCRSupportingContent[],
 	imagePosition?: ImagePositionType,
+	alignment?: Alignment,
 ): 'inner' | 'outer' | 'none' => {
 	if (!supportingContent || supportingContent.length === 0) {
 		return 'none';
 	}
-	if (imagePosition === 'top' || supportingContent.length > 2) {
+	if (imagePosition === 'top' || imagePosition === 'bottom') {
 		return 'outer';
 	}
-	return 'inner';
+	return alignment === 'vertical' ? 'inner' : 'outer';
 };
 
 export const Card = ({
@@ -227,6 +230,7 @@ export const Card = ({
 	dataLinkName,
 	branding,
 	supportingContent,
+	supportingContentAlignment = 'vertical',
 	snapData,
 	containerPalette,
 	containerType,
@@ -240,6 +244,7 @@ export const Card = ({
 	const sublinkPosition = decideSublinkPosition(
 		supportingContent,
 		imagePosition,
+		supportingContentAlignment,
 	);
 
 	const isOpinion =
@@ -456,13 +461,7 @@ export const Card = ({
 					parentFormat={format}
 					containerPalette={containerPalette}
 					isDynamo={isDynamo}
-					alignment={
-						imagePosition === 'top' ||
-						imagePosition === 'bottom' ||
-						imageUrl === undefined
-							? 'vertical'
-							: 'horizontal'
-					}
+					alignment={supportingContentAlignment}
 				/>
 			) : (
 				<></>

@@ -150,3 +150,5 @@ module.exports.babelExclude = {
 		/dynamic-import-polyfill/,
 	],
 };
+
+module.exports.getLoaders = getLoaders;
