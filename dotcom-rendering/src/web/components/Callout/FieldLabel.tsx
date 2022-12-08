@@ -27,7 +27,7 @@ type Props = {
 
 export const FieldLabel = ({ formField, hideLabel }: Props) => (
 	<label
-		css={[fieldLabelStyles, visuallyHidden]}
+		css={[fieldLabelStyles, hideLabel && visuallyHidden]}
 		htmlFor={formField.name}
 		hidden={formField.hideLabel}
 	>
