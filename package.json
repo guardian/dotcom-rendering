@@ -1,40 +1,40 @@
 {
-  "name": "dotcom-rendering",
-  "version": "1.0.0",
-  "repository": "git@github.com:guardian/dotcom-rendering.git",
-  "license": "Apache-2.0",
-  "private": true,
-  "workspaces": [
-    "dotcom-rendering",
-    "common-rendering",
-    "storybooks"
-  ],
-  "scripts": {
-    "postinstall": "cd apps-rendering && if [ \"$CI\" = true ]; then yarn --frozen-lockfile ; else yarn ; fi",
-    "storybook": "npm-run-all --parallel storybook:*",
-    "storybook:composed": "sleep 5 && yarn workspace storybooks storybook --quiet",
-    "storybook:cr": "yarn workspace @guardian/common-rendering storybook --no-open --quiet",
-    "storybook:dcr": "yarn workspace @guardian/dotcom-rendering storybook --no-open --quiet",
-    "storybook:ar": "cd apps-rendering && yarn storybook --no-open --quiet",
-    "build-storybook": "npm-run-all --parallel build-storybook:*",
-    "build-storybook:ar": "cd apps-rendering && yarn build-storybook",
-    "build-storybook:cr": "yarn workspace @guardian/common-rendering build-storybook",
-    "build-storybook:dcr": "yarn workspace @guardian/dotcom-rendering build-storybook",
-    "build-storybook:composed": "yarn workspace storybooks build-storybook",
-    "build:dcr": "cd ./dotcom-rendering && yarn makeBuild",
-    "chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
-    "prepare": "husky install"
-  },
-  "resolutions": {
-    "@types/webpack": "^5.28.0",
-    "type-fest": "^2.8.0"
-  },
-  "dependencies": {
-    "@guardian/prettier": "^2.0.0",
-    "chromatic": "^6.11.4",
-    "husky": "^7.0.0",
-    "npm-run-all": "^4.1.5",
-    "prettier": "^2.8.0",
-    "typescript": "^4.3.5"
-  }
+	"name": "dotcom-rendering",
+	"version": "1.0.0",
+	"repository": "git@github.com:guardian/dotcom-rendering.git",
+	"license": "Apache-2.0",
+	"private": true,
+	"workspaces": [
+		"apps-rendering",
+		"dotcom-rendering",
+		"common-rendering",
+		"storybooks"
+	],
+	"scripts": {
+		"storybook": "npm-run-all --parallel storybook:*",
+		"storybook:composed": "sleep 5 && yarn workspace storybooks storybook --quiet",
+		"storybook:cr": "yarn workspace @guardian/common-rendering storybook --no-open --quiet",
+		"storybook:dcr": "yarn workspace @guardian/dotcom-rendering storybook --no-open --quiet",
+		"storybook:ar": "cd apps-rendering && yarn storybook --no-open --quiet",
+		"build-storybook": "npm-run-all --parallel build-storybook:*",
+		"build-storybook:ar": "cd apps-rendering && yarn build-storybook",
+		"build-storybook:cr": "yarn workspace @guardian/common-rendering build-storybook",
+		"build-storybook:dcr": "yarn workspace @guardian/dotcom-rendering build-storybook",
+		"build-storybook:composed": "yarn workspace storybooks build-storybook",
+		"build:dcr": "cd ./dotcom-rendering && yarn makeBuild",
+		"chromatic": "chromatic --build-script-name=build-storybook --exit-zero-on-changes",
+		"prepare": "husky install"
+	},
+	"resolutions": {
+		"@types/webpack": "^5.28.0",
+		"type-fest": "^2.8.0"
+	},
+	"dependencies": {
+		"@guardian/prettier": "^2.0.0",
+		"chromatic": "^6.11.4",
+		"husky": "^7.0.0",
+		"npm-run-all": "^4.1.5",
+		"prettier": "^2.8.0",
+		"typescript": "^4.3.5"
+	}
 }

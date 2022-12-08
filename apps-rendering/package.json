@@ -45,7 +45,6 @@
 		"@guardian/atoms-rendering": "^23.7.2",
 		"@guardian/bridget": "^2.0.0",
 		"@guardian/cdk": "^47.3.3",
-		"@guardian/common-rendering": "./../common-rendering",
 		"@guardian/content-api-models": "^17.4.0",
 		"@guardian/content-atom-model": "^3.4.0",
 		"@guardian/discussion-rendering": "^10.1.1",
