@@ -233,7 +233,7 @@ const fields = {
 	publishDate: some(new Date('2021-10-17T03:24:00')),
 	contributors: [],
 	mainMedia: mainMedia,
-	series: some({
+	series: Optional.some({
 		id: 'world/series/coronavirus-live',
 		type: 2,
 		sectionId: 'world',

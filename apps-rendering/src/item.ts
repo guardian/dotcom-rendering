@@ -62,7 +62,7 @@ interface Fields extends ArticleFormat {
 	publishDate: Option<Date>;
 	mainMedia: Option<MainMedia>;
 	contributors: Contributor[];
-	series: Option<Tag>;
+	series: Optional<Tag>;
 	commentable: boolean;
 	tags: Tag[];
 	shouldHideReaderRevenue: boolean;
