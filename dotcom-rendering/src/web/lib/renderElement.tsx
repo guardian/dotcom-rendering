@@ -172,13 +172,18 @@ export const renderElement = ({
 			);
 
 		case 'model.dotcomrendering.pageElements.CalloutBlockElement':
-		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
 			return (
 				<Island deferUntil="visible">
 					<CalloutEmbedBlockComponent
 						callout={element}
 						format={format}
 					/>
+				</Island>
+			);
+		case 'model.dotcomrendering.pageElements.CalloutBlockElementV2':
+			return (
+				<Island deferUntil="visible">
+					<CalloutBlockComponent callout={element} format={format} />
 				</Island>
 			);
 		case 'model.dotcomrendering.pageElements.CaptionBlockElement':
