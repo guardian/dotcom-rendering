@@ -4,10 +4,10 @@ import { Button, Link } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { CampaignFieldType } from '../../../types/content';
 import { FileUpload } from './FileUpload';
-import { MultiSelect } from './MultiSelect';
-import { Select } from './Select';
-import { TextArea } from './TextArea';
-import { TextInput } from './TextInput';
+import { MultiSelect } from '../Callout/MultiSelect';
+import { Select } from '../Callout/Select';
+import { TextArea } from '../Callout/TextArea';
+import { TextInput } from '../Callout/TextInput';
 
 const formStyles = css`
 	display: flex;
