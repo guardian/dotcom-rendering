@@ -16,6 +16,7 @@ export const CheckboxSelect = ({
 }: Props) => (
 	<>
 		<CheckboxGroup
+			error={validationErrors?.[formField.id]}
 			hideLabel={formField.hideLabel}
 			name={formField.name}
 			label={formField.label}
