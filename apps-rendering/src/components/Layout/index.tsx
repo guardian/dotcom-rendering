@@ -2,10 +2,7 @@
 
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import type { ArticleFormat } from '@guardian/libs';
 import { remSpace } from '@guardian/source-foundations';
-import { getAdPlaceholderInserter } from 'ads';
-import type { BodyElement } from 'bodyElement';
 import CommentLayout from 'components/Layout/CommentLayout';
 import GalleryLayout from 'components/Layout/GalleryLayout';
 import InteractiveLayout from 'components/Layout/InteractiveLayout';
@@ -13,29 +10,16 @@ import LabsLayout from 'components/Layout/LabsLayout';
 import LiveLayout from 'components/Layout/LiveLayout';
 import StandardLayout from 'components/Layout/StandardLayout';
 import type { Item } from 'item';
-import type { FC, ReactNode } from 'react';
-import { renderAll, renderAllWithoutStyles } from 'renderer';
-import { Result } from 'result';
+import type { FC } from 'react';
 import AnalysisLayout from './AnalysisLayout';
 import ImmersiveLayout from './ImmersiveLayout';
 import LetterLayout from './LetterLayout';
 import NewsletterSignUpLayout from './NewsletterSignUpLayout';
 
-// ----- Functions ----- //
-
-const renderWithAds =
-	(shouldHide: boolean) =>
-	(format: ArticleFormat, elements: BodyElement[]): ReactNode[] =>
-		getAdPlaceholderInserter(shouldHide)(
-			renderAll(format, elements),
-			format,
-		);
-
 // ----- Component ----- //
 
 interface Props {
 	item: Item;
-	shouldHideAds: boolean;
 }
 
 const notImplemented = (
@@ -48,7 +32,7 @@ const notImplemented = (
 	</p>
 );
 
-const Layout: FC<Props> = ({ item, shouldHideAds }) => {
+const Layout: FC<Props> = ({ item }) => {
 	if (
 		item.design === ArticleDesign.LiveBlog ||
 		item.design === ArticleDesign.DeadBlog
@@ -56,50 +40,37 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		return <LiveLayout item={item} />;
 	}
 
-	const body = Result.partition(item.body).oks;
-	const render = renderWithAds(shouldHideAds);
-
 	if (item.theme === ArticleSpecial.Labs) {
-		return <LabsLayout item={item}>{render(item, body)}</LabsLayout>;
+		return <LabsLayout item={item} />;
 	}
 
 	if (
 		item.design === ArticleDesign.Interactive &&
 		item.display === ArticleDisplay.Immersive
 	) {
-		return (
-			<InteractiveLayout item={item}>
-				{renderAllWithoutStyles(item, body)}
-			</InteractiveLayout>
-		);
+		return <InteractiveLayout item={item} />;
 	}
 
 	if (
 		item.design === ArticleDesign.Comment ||
 		item.design === ArticleDesign.Editorial
 	) {
-		return <CommentLayout item={item}>{render(item, body)}</CommentLayout>;
+		return <CommentLayout item={item} />;
 	}
 
 	if (item.design === ArticleDesign.Letter) {
-		return <LetterLayout item={item}>{render(item, body)}</LetterLayout>;
+		return <LetterLayout item={item} />;
 	}
 	if (item.design === ArticleDesign.Analysis) {
-		return (
-			<AnalysisLayout item={item}>{render(item, body)}</AnalysisLayout>
-		);
+		return <AnalysisLayout item={item} />;
 	}
 
 	if (item.design === ArticleDesign.Gallery) {
-		return <GalleryLayout item={item}>{render(item, body)}</GalleryLayout>;
+		return <GalleryLayout item={item} />;
 	}
 
 	if (item.design === ArticleDesign.NewsletterSignup) {
-		return (
-			<NewsletterSignUpLayout item={item}>
-				{render(item, body)}
-			</NewsletterSignUpLayout>
-		);
+		return <NewsletterSignUpLayout item={item} />;
 	}
 
 	if (
@@ -116,16 +87,10 @@ const Layout: FC<Props> = ({ item, shouldHideAds }) => {
 		item.design === ArticleDesign.Recipe
 	) {
 		if (item.display === ArticleDisplay.Immersive) {
-			return (
-				<ImmersiveLayout item={item}>
-					{render(item, body)}
-				</ImmersiveLayout>
-			);
+			return <ImmersiveLayout item={item} />;
 		}
 
-		return (
-			<StandardLayout item={item}>{render(item, body)}</StandardLayout>
-		);
+		return <StandardLayout item={item} />;
 	}
 
 	return notImplemented;

@@ -52,9 +52,6 @@ const scriptName = ({ design, display }: ArticleFormat): Option<string> => {
 	}
 };
 
-const shouldHideAds = (request: RenderingRequest): boolean =>
-	request.content.fields?.shouldHideAdverts ?? false;
-
 const styles = (format: ArticleFormat): string => `
     ${pageFonts}
 	${resets.resetCSS}
@@ -119,7 +116,7 @@ const renderBody = (item: Item, request: RenderingRequest): EmotionCritical =>
 	emotionServer.extractCritical(
 		renderToString(
 			<CacheProvider value={emotionCache}>
-				<Layout item={item} shouldHideAds={shouldHideAds(request)} />
+				<Layout item={item} />
 			</CacheProvider>,
 		),
 	);

@@ -10,8 +10,7 @@ import { datetimeFormat, timestampFormat } from 'datetime';
 import { pipe } from 'lib';
 import type { LiveBlock as LiveBlockType } from 'liveBlock';
 import type { FC } from 'react';
-import { renderAll } from 'renderer';
-import { Result } from 'result';
+import { renderElements } from 'renderer';
 
 // ----- Functions ----- //
 
@@ -58,7 +57,7 @@ const LiveBlock: FC<LiveBlockProps> = ({
 			supportsDarkMode={true}
 			contributors={block.contributors.map(contributorToBlockContributor)}
 		>
-			{renderAll(format, Result.partition(block.body).oks)}
+			{renderElements(format, block.body)}
 
 			<footer
 				css={css`

@@ -14,8 +14,7 @@ import {
 import type { Item } from 'item';
 import { isPicture } from 'item';
 import type { FC } from 'react';
-import { renderEditionsAll } from 'renderer';
-import { Result } from 'result';
+import { renderEditionsElements } from 'renderer';
 import Header from '../header';
 import {
 	articleMarginStyles,
@@ -214,10 +213,7 @@ const Layout: FC<Props> = ({ item }) => {
 							className={'body-content'}
 							css={bodyStyles(item)}
 						>
-							{renderEditionsAll(
-								item,
-								Result.partition(item.body).oks,
-							)}
+							{renderEditionsElements(item, item.body)}
 						</section>
 					</div>
 				</article>

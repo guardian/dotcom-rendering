@@ -184,7 +184,7 @@ type BodyElement =
 
 type Elements = BlockElement[] | undefined;
 
-type Body = Array<Result<string, BodyElement>>;
+type Body = BodyElement[];
 
 // ----- Functions ----- //
 
