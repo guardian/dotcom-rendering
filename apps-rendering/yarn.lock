@@ -2398,10 +2398,10 @@
     node-int64 "^0.4.0"
     thrift "^0.15.0"
 
-"@guardian/atoms-rendering@^23.7.2":
-  version "23.8.0"
-  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-23.8.0.tgz#232eee050de29956d78357f92f3817f3300c5c53"
-  integrity sha512-zsbTWimqz2Ivm6GROUrUSgsc1XFEYUlVlyTOlHo1aBO2ZqN1MnZN3O4XhHnE1FivrDZhQmykRUZVO0a3kUoHYA==
+"@guardian/atoms-rendering@^25.0.1":
+  version "25.0.1"
+  resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-25.0.1.tgz#1841f3de6e1be5059e1c911e0d5bc24a99d2af09"
+  integrity sha512-W5rXTl4iwO5+dnw9l3UB7b+t5CZp7LEzhQeM9sIK9Bh+Aq7b5iziIEUHBHUENkGZ2piMerQZIZyqfcp92OVa/w==
   dependencies:
     is-mobile "^3.1.1"
 
@@ -2429,7 +2429,7 @@
     read-pkg-up "7.0.1"
     yargs "^17.5.1"
 
-"@guardian/common-rendering@./../common-rendering":
+"@guardian/common-rendering@file:../common-rendering":
   version "1.0.0"
   dependencies:
     "@babel/core" "^7.0.0"
