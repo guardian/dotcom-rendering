@@ -7,10 +7,7 @@ import CalloutForm from './calloutForm';
 import {
 	calloutContainerStyles,
 	calloutDescription,
-	calloutDetailsStyles,
 	calloutHeadingText,
-	calloutSummaryContentWrapper,
-	calloutSummaryStyles,
 	calloutTitle,
 } from './styles';
 
@@ -33,20 +30,14 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	description,
 }): ReactElement => (
 	<div css={calloutContainerStyles(format)}>
-		<details css={calloutDetailsStyles} open={true}>
-			<summary css={calloutSummaryStyles}>
-				<div css={calloutSummaryContentWrapper}>
-					<div css={calloutTitle(format)}>{heading}</div>
-					<h4 css={calloutHeadingText}>{name}</h4>
-					{description && (
-						<div css={calloutDescription}>
-							{renderCalloutDescriptionText(format, description)}
-						</div>
-					)}
-				</div>
-			</summary>
-			<CalloutForm id={formId} fields={formFields} format={format} />
-		</details>
+		<div css={calloutTitle(format)}>{heading}</div>
+		<h4 css={calloutHeadingText}>{name}</h4>
+		{description && (
+			<div css={calloutDescription}>
+				{renderCalloutDescriptionText(format, description)}
+			</div>
+		)}
+		<CalloutForm id={formId} fields={formFields} format={format} />
 	</div>
 );
 

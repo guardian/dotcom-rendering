@@ -32,7 +32,8 @@ export const highlightStyles = css`
 export const calloutContainerStyles = (
 	format: ArticleFormat,
 ): SerializedStyles => css`
-	padding-bottom: ${remSpace[12]};
+	padding: ${remSpace[2]};
+	padding-bottom: ${remSpace[9]};
 	background: ${neutral[97]};
 	color: ${neutral[7]};
 	a {
@@ -45,42 +46,6 @@ export const calloutContainerStyles = (
 		a {
 			color: ${neutral[86]};
 	`}
-`;
-export const calloutDetailsStyles = css`
-	padding-bottom: ${remSpace[6]};
-
-	/* IE does not support summary HTML elements, so we need to hide children ourself */
-	:not([open]) > *:not(summary) {
-		display: none;
-	}
-`;
-
-export const calloutSummaryStyles = css`
-	/* Remove default styles from summery tag */
-	::-webkit-details-marker {
-		display: none;
-	}
-	outline: none;
-
-	/* We don't want the summary to open when we click anything but the button, so we pointer-event: none the summary */
-	pointer-events: none;
-
-	/*  why hide visibility?
-        We want to prevent the user for tabbing to the summery HTML element
-        without using tabIndex={-1} which would disable focus on all child DOM elements
-
-        NOTE: requires "visibility: visible;" on child elements to display and enable focus */
-	visibility: hidden;
-
-	a {
-		/* but we do want to allow click on links */
-		pointer-events: all;
-	}
-`;
-
-export const calloutSummaryContentWrapper = css`
-	padding-left: ${remSpace[2]};
-	visibility: visible;
 `;
 
 export const calloutTitle = (format: ArticleFormat): SerializedStyles => css`
@@ -103,8 +68,6 @@ export const calloutDescription = css`
 
 // Callout Form Styles
 export const calloutForm = css`
-	margin: ${remSpace[2]};
-
 	.js-callout__success-message,
 	.js-callout__error-message {
 		display: none;
