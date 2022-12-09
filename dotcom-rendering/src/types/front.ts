@@ -162,7 +162,7 @@ export type FEFrontCard = {
 		image?: {
 			type: string;
 			item: {
-				imageSrc?: string;
+				imgSource?: string;
 			};
 		};
 		webTitle: string;

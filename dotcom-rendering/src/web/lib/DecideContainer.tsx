@@ -177,19 +177,7 @@ export const DecideContainer = ({
 			);
 		case 'nav/list':
 			return (
-				<NavList
-					trails={trails}
-					containerPalette={containerPalette}
-					showImage={false}
-				/>
-			);
-		case 'nav/media-list':
-			return (
-				<NavList
-					trails={trails}
-					containerPalette={containerPalette}
-					showImage={true}
-				/>
+				<NavList trails={trails} containerPalette={containerPalette} />
 			);
 		default:
 			return <p>{containerType} is not yet supported</p>;
