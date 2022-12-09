@@ -4,7 +4,7 @@ import { space, text, textSans } from '@guardian/source-foundations';
 import { useState } from 'react';
 import type { CampaignFieldFile } from '../../../types/content';
 import { stringifyFileBase64 } from '../../lib/stringifyFileBase64';
-import { FieldLabel } from '../CalloutBlock/FieldLabel';
+import { FieldLabel } from '../Callout/FieldLabel';
 
 const fileUploadInputStyles = css`
 	padding-top: 10px;
