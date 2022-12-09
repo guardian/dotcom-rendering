@@ -215,9 +215,9 @@ export const enhanceCards = (
 					  )
 					: undefined,
 			mediaDuration:
-				faciaCard.properties.maybeContent?.elements.mediaAtoms.find(
-					(atom) => !!atom.duration,
-				)?.duration,
+				faciaCard.properties.maybeContent?.elements.mediaAtoms[0]
+					?.duration,
 			mediaType: getMediaType(format),
+			showMainVideo: faciaCard.properties.showMainVideo,
 		};
 	});

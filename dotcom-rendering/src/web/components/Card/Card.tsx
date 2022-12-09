@@ -74,6 +74,7 @@ export type Props = {
 	discussionId?: string;
 	/** The first card in a dynamic package is ”Dynamo” and gets special styling */
 	isDynamo?: true;
+	showMainVideo?: boolean;
 };
 
 const StarRatingComponent = ({ rating }: { rating: number }) => (
@@ -237,6 +238,7 @@ export const Card = ({
 	showAge = false,
 	discussionId,
 	isDynamo,
+	showMainVideo,
 }: Props) => {
 	const palette = decidePalette(format, containerPalette);
 
@@ -355,7 +357,7 @@ export const Card = ({
 						imageType={image.type}
 						imagePosition={imagePosition}
 						imagePositionOnMobile={imagePositionOnMobile}
-						format={format}
+						showPlayIcon={showMainVideo}
 					>
 						{image.type === 'avatar' ? (
 							<AvatarContainer

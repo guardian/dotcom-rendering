@@ -49,6 +49,7 @@ export const FrontCard = (props: Props) => {
 		snapData: trail.snapData,
 		discussionId: trail.discussionId,
 		avatarUrl: trail.avatarUrl,
+		showMainVideo: trail.showMainVideo,
 	};
 
 	return Card({ ...defaultProps, ...cardProps });

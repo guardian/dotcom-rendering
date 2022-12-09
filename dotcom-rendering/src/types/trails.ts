@@ -34,6 +34,7 @@ export interface TrailType extends BaseTrailType {
 	dataLinkName: string;
 	discussionId?: string;
 	isBoosted?: boolean;
+	showMainVideo?: boolean;
 }
 
 export interface CAPITrailType extends BaseTrailType {
