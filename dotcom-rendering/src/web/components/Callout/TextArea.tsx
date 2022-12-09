@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source-foundations';
 import { TextArea as SourceTextArea } from '@guardian/source-react-components';
-import { CampaignFieldTextArea } from '../../../types/content';
+import type { CampaignFieldTextArea } from 'src/types/content';
 
 const textAreaStyles = css`
 	width: 100%;
@@ -9,19 +9,28 @@ const textAreaStyles = css`
 `;
 
 type Props = {
+	validationErrors?: { [key in string]: string };
 	formField: CampaignFieldTextArea;
 	formData: { [key in string]: any };
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
 };
 
-export const TextArea = ({ formField, formData, setFormData }: Props) => (
+export const TextArea = ({
+	validationErrors,
+	formField,
+	formData,
+	setFormData,
+}: Props) => (
 	<>
 		<SourceTextArea
+			hideLabel={formField.hideLabel}
 			data-testid={`form-field-${formField.id}`}
 			label={formField.label}
+			supporting={formField.description}
 			css={textAreaStyles}
 			optional={!formField.required}
 			value={formField.id in formData ? formData[formField.id] : ''}
+			error={validationErrors?.[formField.id]}
 			onChange={(e) =>
 				setFormData({
 					...formData,
