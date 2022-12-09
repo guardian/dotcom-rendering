@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-import { body, from, neutral, textSans } from '@guardian/source-foundations';
+import { body, neutral } from '@guardian/source-foundations';
 import { Link, SvgChevronDownSingle } from '@guardian/source-react-components';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { center } from '../lib/center';
-import { navInputCheckboxId } from './Nav/config';
 
 type Flake = {
 	x: number;
@@ -29,64 +28,18 @@ const Snowflake = ({ name, radius }: { name: string; radius: number }) => {
 	);
 };
 
-const linkStyle = (open = false) => css`
-	display: flex;
-	align-items: center;
-	height: fit-content;
-	position: relative;
-	${textSans.medium()};
-	font-size: 1rem;
-	line-height: 1;
-	color: ${neutral[100]};
-	padding: 0;
-
-	${from.tablet} {
-		padding: 7px 10px 7px 6px;
-	}
-
-	${from.desktop} {
-		font-weight: bold;
-	}
-
-	:hover,
-	:focus {
-		color: ${neutral[100]};
-		text-decoration: underline;
-	}
-
-	svg {
-		fill: currentColor;
-		float: left;
-		height: 18px;
-		width: 18px;
-		margin: 0 4px 0 0;
-		transform: ${open ? undefined : 'translateY(-2px) rotate(-180deg)'};
-	}
-`;
-
-const showMoreTextStyles = css`
+const showMoreTextStyles = (open = false) => css`
 	display: block;
 	height: 100%;
-
-	/* stylelint-disable selector-type-no-unknown */
-	${`#${navInputCheckboxId}`}:checked ~ div label & svg {
-		transform: translateY(-2px) rotate(-180deg);
-	}
-
-	${`#${navInputCheckboxId}`}:checked ~ div label:hover & svg,
-	${`#${navInputCheckboxId}`}:checked ~ div label:focus & svg {
-		transform: translateY(-4px) rotate(-180deg);
-	}
-	/* stylelint-enable selector-type-no-unknown */
-
 	svg {
 		position: absolute;
-		right: 210px;
-		top: 8px;
+		right: -25px;
+		top: 6px;
 		fill: currentColor;
 		height: 16px;
 		width: 16px;
 		transition: transform 250ms ease-out;
+		transform: ${open ? undefined : 'translateY(-2px) rotate(-180deg)'};
 	}
 `;
 
@@ -201,16 +154,21 @@ export const Snow = () => {
 						padding-left: 15px;
 					`}
 				>
-					<a
+					<Link
 						href="#Snow"
-						css={linkStyle(seeMoreSnowInfo)}
+						css={css`
+							color: ${neutral[100]};
+							:hover {
+								color: ${neutral[100]};
+							}
+						`}
 						onClick={showHider}
 					>
 						Why is it snowing?
-						<span css={showMoreTextStyles}>
+						<span css={showMoreTextStyles(seeMoreSnowInfo)}>
 							<SvgChevronDownSingle />
 						</span>
-					</a>
+					</Link>
 					{seeMoreSnowInfo && (
 						<p
 							css={[
