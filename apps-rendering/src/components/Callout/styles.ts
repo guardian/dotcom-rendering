@@ -5,11 +5,9 @@ import type { ArticleFormat } from '@guardian/libs';
 import {
 	body,
 	brandAlt,
-	error,
 	headline,
 	neutral,
 	remSpace,
-	success,
 	until,
 } from '@guardian/source-foundations';
 import { darkModeCss } from 'styles';
@@ -104,42 +102,6 @@ export const calloutDescription = css`
 // Callout Form Styles
 export const calloutForm = css`
 	margin: ${remSpace[2]};
-
-	.js-callout__success-message,
-	.js-callout__error-message {
-		display: none;
-	}
-
-	.js-callout--failure {
-		.js-callout__error-message {
-			display: inline-flex;
-			margin-bottom: ${remSpace[3]};
-			color: ${error[400]};
-			${darkModeCss`
-				color: ${error[500]};
-			`}
-		}
-	}
-
-	.js-callout--success {
-		.js-callout__success-message {
-			display: inline-flex;
-			color: ${neutral[7]};
-			${darkModeCss`
-				color: ${neutral[86]};
-			`}
-
-			svg {
-				color: ${success[400]};
-				${darkModeCss`
-				color: ${success[500]};
-			`}
-			}
-		}
-		.js-callout__inputs {
-			display: none !important;
-		}
-	}
 `;
 
 export const calloutSubmitButton = (
@@ -147,6 +109,7 @@ export const calloutSubmitButton = (
 ): SerializedStyles => css`
 	background: ${text.calloutPrimary(format)};
 	color: ${neutral[100]};
+	margin-top: ${remSpace[2]};
 	${darkModeCss`
 		background: ${neutral[86]};
 		color: ${neutral[7]};
@@ -196,23 +159,4 @@ export const textareaStyles = css`
 		background-color: ${neutral[7]};
 		color: ${neutral[97]};
 	`}
-`;
-
-export const fieldLabel = css`
-	.field__feedback {
-		display: none;
-	}
-	&.callout-field--failure {
-		select,
-		textarea,
-		input {
-			border: 2px solid ${error[400]};
-			${darkModeCss`
-				border: 2px solid ${error[500]};
-		`}
-		}
-		.field__feedback {
-			display: flex;
-		}
-	}
 `;

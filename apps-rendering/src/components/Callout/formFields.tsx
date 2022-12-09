@@ -1,10 +1,8 @@
 import { css } from '@emotion/react';
-import type { FormField } from '@guardian/apps-rendering-api-models/formField';
+import type { FormField as formFieldType } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
-import { error, remSpace, textSans } from '@guardian/source-foundations';
+import { remSpace, textSans } from '@guardian/source-foundations';
 import {
-	InlineError,
-	Label,
 	Option,
 	Select,
 	TextArea,
@@ -14,9 +12,8 @@ import CheckboxInput from 'components/CheckboxInput';
 import FileInput from 'components/FileInput';
 import RadioInput from 'components/RadioInput';
 import type { FC, ReactElement } from 'react';
-import { darkModeCss } from 'styles';
 import { logger } from '../../logger';
-import { fieldInput, fieldLabel, textareaStyles } from './styles';
+import { fieldInput, textareaStyles } from './styles';
 
 const infoStyles = css`
 	${textSans.small()};
@@ -48,43 +45,42 @@ export const ContactText = (): ReactElement => (
 	</div>
 );
 
-const FieldError = (): ReactElement => (
-	<InlineError
-		cssOverrides={css`
-			${textSans.small()};
-			color: ${error[400]};
-			${darkModeCss`
-				color: ${error[500]};
-			`}
-		`}
-		className="field__feedback"
-	>
-		Please complete all required fields
-	</InlineError>
-);
+type FormDataType = { [key in string]: any };
 
-export const renderField = (
-	formId: number,
-	{ type, label, description, mandatory, options, id }: FormField,
-	format: ArticleFormat,
-): ReactElement | null => {
+type FormFieldProp = {
+	formId: number;
+	formField: formFieldType;
+	formData: FormDataType;
+	setFieldInFormData: (
+		id: string,
+		data: string | string[] | undefined,
+	) => void;
+	format: ArticleFormat;
+};
+
+export const FormField: FC<FormFieldProp> = ({
+	formId,
+	formField,
+	formData,
+	setFieldInFormData,
+	format,
+}) => {
+	const { type, label, description, mandatory, options, id } = formField;
 	const name = `field_${type}_${id}`;
+	const fieldValue =
+		formField.id in formData ? (formData[formField.id] as string) : '';
 
-	const FormField: FC<{ children: ReactElement }> = ({
-		children,
-	}): ReactElement => (
-		<Label
-			id={name}
-			key={name}
-			text={label}
-			supporting={description}
-			optional={!mandatory}
-			cssOverrides={fieldLabel}
-		>
-			<FieldError />
-			{children}
-		</Label>
-	);
+	const selectOptions = options.map(({ value, label }) => {
+		return (
+			<Option key={value} value={value}>
+				{label}
+			</Option>
+		);
+	});
+	if (!fieldValue || !mandatory)
+		selectOptions.unshift(
+			<Option value="">Please select an option</Option>,
+		);
 
 	switch (type) {
 		case 'text':
@@ -92,82 +88,73 @@ export const renderField = (
 		case 'phone':
 		case 'email':
 			return (
-				<FormField>
-					<TextInput
-						name={name}
-						type={type === 'phone' ? 'tel' : type}
-						label={label}
-						hideLabel
-						optional={!mandatory}
-						cssOverrides={fieldInput}
-					/>
-				</FormField>
+				<TextInput
+					name={name}
+					type={type === 'phone' ? 'tel' : type}
+					label={label}
+					optional={!mandatory}
+					cssOverrides={fieldInput}
+					value={fieldValue}
+					onChange={(e): void =>
+						setFieldInFormData(formField.id, e.target.value)
+					}
+				/>
 			);
 		case 'textarea':
 			return (
-				<FormField>
-					<TextArea
-						name={name}
-						label={label}
-						hideLabel
-						cssOverrides={textareaStyles}
-						optional={!mandatory}
-					/>
-				</FormField>
+				<TextArea
+					name={name}
+					label={label}
+					cssOverrides={textareaStyles}
+					optional={!mandatory}
+					value={fieldValue}
+					onChange={(e): void =>
+						setFieldInFormData(formField.id, e.target.value)
+					}
+				/>
 			);
 		case 'file':
 			return (
-				<FormField>
-					<FileInput
-						name={name}
-						format={format}
-						mandatory={mandatory}
-					/>
-				</FormField>
+				<FileInput
+					formField={formField}
+					format={format}
+					setFieldInFormData={setFieldInFormData}
+				/>
 			);
 		case 'radio':
 			return (
-				<FormField>
-					<RadioInput
-						name={name}
-						mandatory={mandatory}
-						options={options}
-					/>
-				</FormField>
+				<RadioInput
+					formField={formField}
+					formData={formData}
+					setFieldInFormData={setFieldInFormData}
+				/>
 			);
 		case 'checkbox':
 			return (
-				<FormField>
-					<CheckboxInput
-						name={name}
-						label={label}
-						hideLabel
-						options={options}
-						cssOverrides={fieldInput}
-						mandatory={mandatory}
-					/>
-				</FormField>
+				<CheckboxInput
+					formField={formField}
+					formData={formData}
+					setFieldInFormData={setFieldInFormData}
+					cssOverrides={fieldInput}
+				/>
 			);
 		case 'select':
 			return (
-				<FormField>
-					<Select
-						label={label}
-						hideLabel
-						id={name}
-						cssOverrides={fieldInput}
-						key={name}
-						name={name}
-					>
-						{options.map(({ value, label }) => {
-							return (
-								<Option key={value} value={value}>
-									{label}
-								</Option>
-							);
-						})}
-					</Select>
-				</FormField>
+				<Select
+					label={label}
+					supporting={description}
+					optional={!mandatory}
+					id={name}
+					cssOverrides={fieldInput}
+					key={name}
+					name={name}
+					value={fieldValue}
+					onChange={(e): void =>
+						setFieldInFormData(formField.id, e.target.value)
+					}
+				>
+					{selectOptions}
+				</Select>
 			);
 		default:
 			logger.error(

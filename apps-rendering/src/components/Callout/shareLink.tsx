@@ -16,7 +16,7 @@ export const ShareLink: FC<{ format: ArticleFormat }> = ({ format }) => {
 					url,
 				})
 				.catch(console.error);
-		} else {
+		} else if ('clipboard' in navigator) {
 			const nav: Navigator = navigator;
 			await nav.clipboard.writeText(url);
 			setIsCopied(true);

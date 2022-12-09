@@ -1,7 +1,5 @@
 import { parse } from 'client/parser';
 
-// Changed the way we're handling dateUntil,
-// so we can probably remove the buffer from storybook webpack config
 const mockCampaign = {
 	id: '1fc53dab-1c76-4258-8194-b4b3d8399052',
 	name: 'CALLOUT: ghost flights',
@@ -37,7 +35,7 @@ const mockCampaign = {
 				label: 'If you are happy to, please upload a photo of yourself',
 				name: 'if_you_are_happy_to_please_upload_a_photo_of_yourself',
 				type: 'file',
-				mandatory: true,
+				mandatory: false,
 				options: [],
 			},
 			{
@@ -84,7 +82,7 @@ const mockCampaign = {
 				],
 			},
 			{
-				id: '121575463451',
+				id: '121575463675',
 				label: 'What colours do you like?',
 				name: 'liked_colours',
 				type: 'checkbox',
