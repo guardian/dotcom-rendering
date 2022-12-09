@@ -1,10 +1,6 @@
 import { css } from '@emotion/react';
-import {
-	neutral,
-	textSans,
-	visuallyHidden,
-} from '@guardian/source-foundations';
-import type { CampaignFieldType } from 'src/types/content';
+import { neutral, textSans } from '@guardian/source-foundations';
+import { CampaignFieldType } from '../../../types/content';
 
 const fieldLabelStyles = css`
 	${textSans.medium({ fontWeight: 'bold' })}
@@ -20,22 +16,15 @@ const optionalTextStyles = css`
 	padding-left: 5px;
 `;
 
-type Props = {
-	formField: CampaignFieldType;
-	hideLabel?: boolean;
-};
-
-export const FieldLabel = ({ formField, hideLabel }: Props) => (
-	<label
-		css={[fieldLabelStyles, hideLabel && visuallyHidden]}
-		htmlFor={formField.name}
-		hidden={formField.hideLabel}
-	>
+export const FieldLabel = ({ formField }: { formField: CampaignFieldType }) => (
+	<label css={fieldLabelStyles} htmlFor={formField.name}>
 		{formField.label}
 		{!formField.required && <span css={optionalTextStyles}>Optional</span>}
 		{!!formField.description && (
 			<div>
-				<span css={fieldDescription}>{`${formField.description}`}</span>
+				<span css={fieldDescription}>
+					{`(${formField.description})`}
+				</span>
 			</div>
 		)}
 	</label>
