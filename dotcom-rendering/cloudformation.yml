@@ -254,7 +254,7 @@ Resources:
 
               groupadd frontend
               useradd -r -m -s /usr/bin/nologin -g frontend dotcom-rendering
-              usermod -a -G dotcom-rendering aws-kinesis-agent-user
+              usermod -a -G frontend aws-kinesis-agent-user
               cd /home/dotcom-rendering
 
               aws --region eu-west-1 s3 cp s3://aws-frontend-artifacts/frontend/${Stage}/${App}/dist/${App}.zip ./
