@@ -58,10 +58,9 @@ interface Props {
 
 const DefaultStandfirst: FC<Props> = ({ item, className }) =>
 	maybeRender(item.standfirst.toOption(), (standfirst) => (
-			<div className={className}>
-				{renderStandfirstText(standfirst, getFormat(item))}
-			</div>
-		),
-	);
+		<div className={className}>
+			{renderStandfirstText(standfirst, getFormat(item))}
+		</div>
+	));
 
 export default DefaultStandfirst;

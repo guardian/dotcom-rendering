@@ -9,7 +9,7 @@ import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import { grid } from 'grid/grid';
 import { maybeRender } from 'lib';
-import { Optional } from 'optional';
+import type { Optional } from 'optional';
 import type { ReactNode } from 'react';
 import { renderStandfirstText } from 'renderer';
 import { darkModeCss } from 'styles';

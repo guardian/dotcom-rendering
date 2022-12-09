@@ -68,7 +68,9 @@ const bylineHtml = parseHtml(
 	'<a href="https://theguardian.com">Jane Smith</a> Editor of things',
 ).toOption();
 
-const captionDocFragment = parseHtml('<em>Jane Smith</em> Editor of things').toOption();
+const captionDocFragment = parseHtml(
+	'<em>Jane Smith</em> Editor of things',
+).toOption();
 
 const docFixture = (): Node => {
 	const doc = new DocumentFragment();

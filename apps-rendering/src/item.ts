@@ -322,8 +322,9 @@ const parseItemFields = (
 		),
 		display: getDisplay(content),
 		headline: content.fields?.headline ?? '',
-		standfirst: Optional.fromNullable(content.fields?.standfirst)
-			.map(context.docParser),
+		standfirst: Optional.fromNullable(content.fields?.standfirst).map(
+			context.docParser,
+		),
 		byline: content.fields?.byline ?? '',
 		bylineHtml: pipe(
 			content.fields?.bylineHtml,

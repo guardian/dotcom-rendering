@@ -18,7 +18,9 @@ const parser = new DOMParser();
 const parseHtml = (html: string): Optional<DocumentFragment> =>
 	parse(parser)(html).toOptional();
 
-const captionDocFragment = parseHtml('Fashion Statement Email image').toOption();
+const captionDocFragment = parseHtml(
+	'Fashion Statement Email image',
+).toOption();
 
 const newsletterMainMedia: Option<MainMedia> = {
 	kind: OptionKind.Some,

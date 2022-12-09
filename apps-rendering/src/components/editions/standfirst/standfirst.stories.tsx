@@ -4,7 +4,7 @@ import { neutral } from '@guardian/source-foundations';
 import { withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
 import { analysis, article, comment, media } from 'fixtures/item';
-import { Optional } from 'optional';
+import type { Optional } from 'optional';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Standfirst from '.';
