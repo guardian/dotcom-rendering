@@ -83,6 +83,7 @@ export const trails: [
 		},
 		mediaType: 'Video',
 		mediaDuration: 378,
+		showMainVideo: true,
 		dataLinkName: 'news | group-0 | card-@2',
 		showQuotedHeadline: false,
 	},
