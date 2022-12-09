@@ -855,3 +855,45 @@ export const WhenOpinionWithImageAtBottom = () => {
 		</>
 	);
 };
+
+export const WhenVideoWithPlayButton = () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Video,
+						theme: ArticlePillar.News,
+					}}
+					imagePosition="bottom"
+					mediaDuration={200}
+					mediaType="Video"
+					showMainVideo={true}
+				/>
+			</CardWrapper>
+		</>
+	);
+};
+
+export const WhenVideoWithPlayButtonAndLeftImage = () => {
+	return (
+		<>
+			<CardWrapper>
+				<Card
+					{...basicCardProps}
+					format={{
+						display: ArticleDisplay.Standard,
+						design: ArticleDesign.Video,
+						theme: ArticlePillar.News,
+					}}
+					imagePosition="left"
+					mediaDuration={200}
+					mediaType="Video"
+					showMainVideo={true}
+				/>
+			</CardWrapper>
+		</>
+	);
+};
