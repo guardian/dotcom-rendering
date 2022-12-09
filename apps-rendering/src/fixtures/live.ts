@@ -267,6 +267,7 @@ const fields = {
 	webUrl: '',
 	edition: Edition.UK,
 	promotedNewsletter: none,
+	shouldHideAdverts: false,
 };
 
 const pinnedBlock: LiveBlock = {

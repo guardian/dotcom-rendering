@@ -8,7 +8,6 @@ import { ElementKind } from 'bodyElement';
 import type { ThirdPartyEmbeds } from 'capi';
 import type { Item } from 'item';
 import { compose, pipe } from 'lib';
-import { Result } from 'result';
 
 // ----- Types ----- //
 
@@ -48,16 +47,13 @@ const extractInteractiveAssets = (elements: BodyElement[]): Assets =>
 		{ scripts: [], styles: [] },
 	);
 
-const getElements = (item: Item): Array<Result<string, BodyElement>> =>
+const getElements = (item: Item): BodyElement[] =>
 	item.design === ArticleDesign.LiveBlog ||
 	item.design === ArticleDesign.DeadBlog
 		? item.blocks.flatMap((block) => block.body)
 		: item.body;
 
-const getValidElements = (item: Item): BodyElement[] =>
-	Result.partition(getElements(item)).oks;
-
-const interactiveAssets = compose(extractInteractiveAssets, getValidElements);
+const interactiveAssets = compose(extractInteractiveAssets, getElements);
 
 const assetHashes = (assets: string[]): string =>
 	assets.map((asset) => `'sha256-${assetHash(asset)}'`).join(' ');

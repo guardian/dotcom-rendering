@@ -14,7 +14,7 @@ import { JSDOM } from 'jsdom';
 import { Content } from '@guardian/content-api-models/v1/content';
 import { articleContentWith } from 'helperTest';
 import { EmbedKind, Spotify, YouTube } from 'embed';
-import { Result } from 'result';
+import { Optional } from 'optional';
 
 const articleContent = {
 	id: '',
@@ -189,8 +189,7 @@ const f = (content: Content) =>
 	);
 
 const getFirstBody = (item: Review | Standard) =>
-	item.body[0]
-		.toOptional()
+	Optional.fromNullable(item.body[0])
 		.withDefault({
 			kind: ElementKind.Interactive,
 			url: '',
@@ -351,8 +350,7 @@ describe('interactive elements', () => {
 			},
 		};
 		const item = f(articleContentWith(interactiveElement)) as Standard;
-		const element = item.body[0]
-			.toOptional()
+		const element = Optional.fromNullable(item.body[0])
 			.withDefault({
 				kind: ElementKind.RichLink,
 				url: '',
@@ -370,8 +368,7 @@ describe('interactive elements', () => {
 			},
 		};
 		const item = f(articleContentWith(interactiveElement)) as Standard;
-		const element = item.body[0]
-			.toOptional()
+		const element = Optional.fromNullable(item.body[0])
 			.withDefault({
 				kind: ElementKind.RichLink,
 				url: '',
@@ -592,17 +589,17 @@ describe('audio elements', () => {
 			},
 		};
 		const item = f(articleContentWith(audioElement)) as Standard;
-		const embed = item.body[0]
+		const embed = Optional.fromNullable(item.body[0])
 			.flatMap<Spotify>((element) =>
 				element.kind === ElementKind.Embed &&
 				element.embed.kind === EmbedKind.Spotify
-					? Result.ok(element.embed)
-					: Result.err('Not an audio embed'),
+					? Optional.some(element.embed)
+					: Optional.none(),
 			)
 		
-		expect(embed.isOk()).toBe(true);
+		expect(embed.isSome()).toBe(true);
 		
-		if (embed.isOk()) {
+		if (embed.isSome()) {
 			expect(embed.value.src).toContain('https://open.spotify.com/embed/track/');
 			expect(embed.value.width).toBe(300);
 			expect(embed.value.height).not.toBe(380);
@@ -661,17 +658,17 @@ describe('video elements', () => {
 			},
 		};
 		const item = f(articleContentWith(videoElement)) as Standard;
-		const embed = item.body[0]
+		const embed = Optional.fromNullable(item.body[0])
 			.flatMap<YouTube>((element) =>
 				element.kind === ElementKind.Embed &&
 				element.embed.kind === EmbedKind.YouTube
-					? Result.ok(element.embed)
-					: Result.err('Not a YouTube embed'),
+					? Optional.some(element.embed)
+					: Optional.none(),
 			);
 		
-		expect(embed.isOk()).toBe(true);
+		expect(embed.isSome()).toBe(true);
 		
-		if (embed.isOk()) {
+		if (embed.isSome()) {
 			expect(embed.value.id).toBe('mockVideoId');
 			expect(embed.value.width).toBe(460);
 			expect(embed.value.height).toBe(259);

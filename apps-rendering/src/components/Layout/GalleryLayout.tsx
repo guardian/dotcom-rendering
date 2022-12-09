@@ -17,9 +17,10 @@ import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
 import { grid } from 'grid/grid';
-import type { Item } from 'item';
+import type { Gallery } from 'item';
 import { getFormat } from 'item';
 import type { FC } from 'react';
+import { render } from 'renderer';
 import { darkModeCss } from 'styles';
 
 // ----- Component ----- //
@@ -47,10 +48,10 @@ const logoStyles = css`
 `;
 
 type Props = {
-	item: Item;
+	item: Gallery;
 };
 
-const GalleryLayout: FC<Props> = ({ item, children }) => {
+const GalleryLayout: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 
 	return (
@@ -72,7 +73,7 @@ const GalleryLayout: FC<Props> = ({ item, children }) => {
 							<Logo item={item} />
 						</div>
 					</header>
-					{children}
+					{render(item.shouldHideAdverts, format, item.body)}
 					<Tags item={item} />
 				</article>
 			</main>
