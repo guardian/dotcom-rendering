@@ -28,6 +28,13 @@ const Snowflake = ({ name, radius }: { name: string; radius: number }) => {
 	);
 };
 
+const linkStyle = css`
+	color: ${neutral[100]};
+	:hover {
+		color: ${neutral[100]};
+	}
+`;
+
 const showMoreTextStyles = (open = false) => css`
 	display: block;
 	height: 100%;
@@ -101,9 +108,9 @@ export const Snow = () => {
 					// 'teleport' each snowflake to the opposite side of the canvas
 					// when it reaches a border.
 					if (updatedFlake.x <= 0) {
-						updatedFlake.x = 100;
+						updatedFlake.x = 98;
 					} else {
-						updatedFlake.x %= 100;
+						updatedFlake.x %= 98;
 					}
 					updatedFlake.y %= 200;
 
@@ -147,21 +154,22 @@ export const Snow = () => {
 
 	return (
 		<div>
-			<div css={[center]}>
+			<div css={[center, { marginBottom: '12px' }]}>
 				<div
 					css={css`
 						max-width: 400px;
-						padding-left: 15px;
+						padding-left: 20px;
+						padding-top: 4px;
 					`}
 				>
 					<Link
 						href="#Snow"
-						css={css`
-							color: ${neutral[100]};
-							:hover {
-								color: ${neutral[100]};
-							}
-						`}
+						cssOverrides={[
+							linkStyle,
+							css`
+								margin-bottom: 12px;
+							`,
+						]}
 						onClick={showHider}
 					>
 						Why is it snowing?
@@ -173,7 +181,7 @@ export const Snow = () => {
 						<p
 							css={[
 								body.medium,
-								{ color: 'white', paddingLeft: '7px' },
+								{ color: 'white', marginTop: '4px' },
 							]}
 						>
 							While this is meant to brighten your day, we're
@@ -183,12 +191,7 @@ export const Snow = () => {
 							you to give to our{' '}
 							<Link
 								href="https://www.theguardian.com/society/2022/dec/09/help-us-support-local-communities-to-tackle-cost-of-living-crisis"
-								cssOverrides={css`
-									color: ${neutral[100]};
-									:hover {
-										color: ${neutral[100]};
-									}
-								`}
+								cssOverrides={linkStyle}
 							>
 								charity appeal.
 							</Link>
