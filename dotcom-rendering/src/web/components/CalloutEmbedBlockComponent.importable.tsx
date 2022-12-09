@@ -10,7 +10,7 @@ import type {
 } from '../../types/content';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
-import { Form } from './Callout/Form';
+import { Form } from './CalloutLegacy/Form';
 
 const wrapperStyles = css`
 	margin-bottom: 26px;
