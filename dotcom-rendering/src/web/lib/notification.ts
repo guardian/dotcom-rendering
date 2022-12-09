@@ -1,13 +1,12 @@
 import type { BrazeCard } from '@guardian/braze-components';
-import { submitComponentEvent } from '../browser/ophan/ophan';
 import type { DropdownLinkType } from '../components/Dropdown';
 
 export interface Notification {
 	id: string;
 	target: string;
 	message: string;
+	ophanLabel: string;
 	logImpression?: () => void;
-	logInsert?: () => void;
 }
 
 const hasTargetAndMessage = (
@@ -15,9 +14,7 @@ const hasTargetAndMessage = (
 ): card is BrazeCard & { extras: Notification } =>
 	Boolean(card.extras.message) &&
 	Boolean(card.extras.target) &&
-	Boolean(card.extras.ophanComponentId);
-
-const NOTIFICATION_COMPONENT_TYPE = 'RETENTION_HEADER';
+	Boolean(card.extras.ophanLabel);
 
 export const mapBrazeCardsToNotifications = (
 	cards: BrazeCard[],
@@ -27,25 +24,9 @@ export const mapBrazeCardsToNotifications = (
 			id: card.id,
 			target: card.extras.target,
 			message: card.extras.message,
+			ophanLabel: card.extras.ophanLabel,
 			logImpression: () => {
 				card.logImpression();
-
-				submitComponentEvent({
-					component: {
-						componentType: NOTIFICATION_COMPONENT_TYPE,
-						id: card.extras.ophanComponentId,
-					},
-					action: 'VIEW',
-				});
-			},
-			logInsert: () => {
-				submitComponentEvent({
-					component: {
-						componentType: NOTIFICATION_COMPONENT_TYPE,
-						id: card.extras.ophanComponentId,
-					},
-					action: 'INSERT',
-				});
 			},
 		};
 	});

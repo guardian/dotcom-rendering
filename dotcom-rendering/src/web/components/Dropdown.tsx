@@ -14,12 +14,14 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
+import { submitComponentEvent } from '../browser/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { linkNotificationCount } from '../lib/linkNotificationCount';
 import type { Notification } from '../lib/notification';
 import { useIsInView } from '../lib/useIsInView';
 import { useOnce } from '../lib/useOnce';
 
+const NOTIFICATION_COMPONENT_TYPE = 'RETENTION_HEADER';
 export interface DropdownLinkType {
 	id: string;
 	url: string;
@@ -226,33 +228,9 @@ type NotificationMessageProps = {
 	notification: Notification;
 };
 const NotificationMessage = ({ notification }: NotificationMessageProps) => {
-	const [hasBeenSeen, setNode] = useIsInView({
-		debounce: true,
-	});
+	const { message } = notification;
 
-	const { message, logImpression, logInsert } = notification;
-
-	useOnce(() => {
-		logInsert?.();
-	}, []);
-
-	useEffect(() => {
-		if (hasBeenSeen) {
-			logImpression?.();
-		}
-		// I want this useEffect to fire exactly once when hasBeenSeen becomes
-		// true. Ommitting logImpression from the dependency array so I don't
-		// have to worry about whether logImpression is stable (if it isn't we'd
-		// be in danger of logging multiple impressions of the same
-		// notification)
-		// eslint-disable-next-line react-hooks/exhaustive-deps -- See above comment
-	}, [hasBeenSeen]);
-
-	return (
-		<div css={notificationTextStyles} ref={setNode}>
-			{message}
-		</div>
-	);
+	return <div css={notificationTextStyles}>{message}</div>;
 };
 
 type DropdownLinkProps = {
@@ -260,8 +238,51 @@ type DropdownLinkProps = {
 	index: number;
 };
 const DropdownLink = ({ link, index }: DropdownLinkProps) => {
+	const [hasBeenSeen, setNode] = useIsInView({
+		debounce: true,
+	});
+	const [hasSentViewEvent, setHasSentViewEvent] = useState<boolean>(false);
+
+	// The following hooks, which send INSERT and VIEW events to Ophan,
+	// intentionally only run when the link has notifications (which is why
+	// link.notifications is part of the dependency array for both). In future
+	// if we ever have notifications arriving from different sources at
+	// different times, we'll need to revisit this logic (currently they only
+	// come from Braze).
+	useEffect(() => {
+		if (hasBeenSeen && link.notifications && !hasSentViewEvent) {
+			setHasSentViewEvent(true);
+
+			// For each notification for this link, log the impression back to
+			// Braze separately
+			link.notifications.forEach((notification) => {
+				notification.logImpression?.();
+			});
+
+			submitComponentEvent({
+				component: {
+					componentType: NOTIFICATION_COMPONENT_TYPE,
+					id: link.id,
+					labels: link.notifications.map((n) => n.ophanLabel),
+				},
+				action: 'VIEW',
+			});
+		}
+	}, [hasBeenSeen, link.notifications, hasSentViewEvent, link.id]);
+
+	useOnce(() => {
+		submitComponentEvent({
+			component: {
+				componentType: NOTIFICATION_COMPONENT_TYPE,
+				id: link.id,
+				labels: link.notifications?.map((n) => n.ophanLabel),
+			},
+			action: 'INSERT',
+		});
+	}, [link.notifications, link.id]);
+
 	return (
-		<li css={liStyles} key={link.title}>
+		<li css={liStyles} key={link.title} ref={setNode}>
 			<a
 				href={link.url}
 				css={[
