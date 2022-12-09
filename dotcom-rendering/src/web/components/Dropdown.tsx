@@ -18,8 +18,8 @@ import { getZIndex } from '../lib/getZIndex';
 import { linkNotificationCount } from '../lib/linkNotificationCount';
 import type { Notification } from '../lib/notification';
 import { useIsInView } from '../lib/useIsInView';
-import { submitComponentEvent } from "../browser/ophan/ophan";
-import { OphanComponentEvent } from "@guardian/libs";
+import { submitComponentEvent } from '../browser/ophan/ophan';
+import { OphanComponentEvent } from '@guardian/libs';
 
 export interface DropdownLinkType {
 	id: string;
@@ -263,13 +263,15 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 				component: {
 					componentType: 'RETENTION_HEADER',
 					id: link.id,
-					labels: link.notifications.map(notification => notification.ophanLabel),
+					labels: link.notifications.map(
+						(notification) => notification.ophanLabel,
+					),
 				},
 				action: 'CLICK',
-			}
+			};
 		}
 		return undefined;
-	}
+	};
 
 	const clickComponentEvent = buildClickComponentEvent();
 
@@ -283,7 +285,8 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 					componentType: clickComponentEvent.component.componentType,
 					campaignCode: clickComponentEvent.component.id,
 					referrerPageviewId: window.guardian.config.ophan.pageViewId,
-					referrerUrl: window.location.origin + window.location.pathname,
+					referrerUrl:
+						window.location.origin + window.location.pathname,
 					labels: clickComponentEvent.component.labels,
 				}),
 			);
@@ -292,7 +295,7 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 		} else {
 			return link.url;
 		}
-	}
+	};
 
 	return (
 		<li css={liStyles} key={link.title}>
