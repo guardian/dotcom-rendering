@@ -7,11 +7,10 @@ import {
 } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import { headline, remSpace } from '@guardian/source-foundations';
-import { map, withDefault } from '@guardian/types';
 import type { Item } from 'item';
 import { getFormat } from 'item';
-import { pipe } from 'lib';
-import type { FC, ReactElement } from 'react';
+import { maybeRender } from 'lib';
+import type { FC } from 'react';
 import { renderStandfirstText } from 'renderer';
 import { darkModeCss } from 'styles';
 
@@ -58,14 +57,11 @@ interface Props {
 }
 
 const DefaultStandfirst: FC<Props> = ({ item, className }) =>
-	pipe(
-		item.standfirst,
-		map((standfirst) => (
+	maybeRender(item.standfirst.toOption(), (standfirst) => (
 			<div className={className}>
 				{renderStandfirstText(standfirst, getFormat(item))}
 			</div>
-		)),
-		withDefault<ReactElement | null>(null),
+		),
 	);
 
 export default DefaultStandfirst;

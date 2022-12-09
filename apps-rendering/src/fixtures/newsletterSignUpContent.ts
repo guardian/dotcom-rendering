@@ -15,13 +15,10 @@ import type { MainMedia } from 'mainMedia';
 import { Optional } from 'optional';
 
 const parser = new DOMParser();
-const parseHtml = (html: string): Option<DocumentFragment> =>
-	parse(parser)(html).either<Option<DocumentFragment>>(
-		(_err) => none,
-		(doc) => some(doc),
-	);
+const parseHtml = (html: string): Optional<DocumentFragment> =>
+	parse(parser)(html).toOptional();
 
-const captionDocFragment = parseHtml('Fashion Statement Email image');
+const captionDocFragment = parseHtml('Fashion Statement Email image').toOption();
 
 const newsletterMainMedia: Option<MainMedia> = {
 	kind: OptionKind.Some,

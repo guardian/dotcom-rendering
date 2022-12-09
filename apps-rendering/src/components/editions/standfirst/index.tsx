@@ -137,7 +137,7 @@ interface Props {
 const isEditions = true;
 
 const Standfirst: FC<Props> = ({ item, shareIcon }) => {
-	return maybeRender(item.standfirst, (standfirst) => (
+	return maybeRender(item.standfirst.toOption(), (standfirst) => (
 		<div css={getStyles(item)}>
 			<div css={textContainerStyles}>
 				{renderStandfirstText(standfirst, item, isEditions)}
