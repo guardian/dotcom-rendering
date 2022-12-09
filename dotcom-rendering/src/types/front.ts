@@ -282,7 +282,6 @@ type FECollectionConfigType = {
 export type FECollectionType = {
 	id: string;
 	displayName: string;
-	description?: string;
 	curated: FEFrontCard[];
 	backfill: FEFrontCard[];
 	treats: FEFrontCard[];
@@ -303,7 +302,6 @@ export type FECollectionType = {
 export type DCRCollectionType = {
 	id: string;
 	displayName: string;
-	description?: string;
 	collectionType: DCRContainerType;
 	containerPalette?: DCRContainerPalette;
 	grouped: DCRGroupedTrails;

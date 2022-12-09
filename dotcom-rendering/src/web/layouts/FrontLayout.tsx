@@ -379,7 +379,6 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							<Section
 								key={collection.id}
 								title={collection.displayName}
-								description={collection.description}
 								showTopBorder={index > 0}
 								padContent={false}
 								centralBorder="partial"

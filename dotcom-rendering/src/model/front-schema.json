@@ -467,9 +467,6 @@
                             "displayName": {
                                 "type": "string"
                             },
-                            "description": {
-                                "type": "string"
-                            },
                             "curated": {
                                 "type": "array",
                                 "items": {
