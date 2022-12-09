@@ -250,7 +250,12 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 	// different times, we'll need to revisit this logic (currently they only
 	// come from Braze).
 	useEffect(() => {
-		if (hasBeenSeen && link.notifications && !hasSentViewEvent) {
+		if (
+			hasBeenSeen &&
+			link.notifications &&
+			link.notifications.length > 0 &&
+			!hasSentViewEvent
+		) {
 			setHasSentViewEvent(true);
 
 			// For each notification for this link, log the impression back to
@@ -271,14 +276,18 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 	}, [hasBeenSeen, link.notifications, hasSentViewEvent, link.id]);
 
 	useOnce(() => {
-		submitComponentEvent({
-			component: {
-				componentType: NOTIFICATION_COMPONENT_TYPE,
-				id: link.id,
-				labels: link.notifications?.map((n) => n.ophanLabel),
-			},
-			action: 'INSERT',
-		});
+		// The || [] is to keep TypeScript happy. The useOnce guarantees that
+		// .notifications won't be undefined.
+		if ((link.notifications || []).length > 0) {
+			submitComponentEvent({
+				component: {
+					componentType: NOTIFICATION_COMPONENT_TYPE,
+					id: link.id,
+					labels: link.notifications?.map((n) => n.ophanLabel),
+				},
+				action: 'INSERT',
+			});
+		}
 	}, [link.notifications, link.id]);
 
 	return (
