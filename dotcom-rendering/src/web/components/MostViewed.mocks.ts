@@ -18,6 +18,7 @@ export const mockTab1: CAPITrailTabType = {
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/us-news/2019/sep/15/brett-kavanaugh-donald-trump-impeachment-supreme-court-justice',
@@ -34,6 +35,7 @@ export const mockTab1: CAPITrailTabType = {
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			ageWarning: '1 year old',
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/sport/2019/sep/15/ashes-cricket-series-drawn-england-beat-australia-fifth-test',
@@ -50,6 +52,7 @@ export const mockTab1: CAPITrailTabType = {
 			pillar: 'sport',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/uk-news/2019/sep/15/boris-johnson-bonkers-plan-for-15bn-pound-bridge-derided-by-engineers',
@@ -66,6 +69,7 @@ export const mockTab1: CAPITrailTabType = {
 			pillar: 'culture',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/politics/2019/sep/15/five-things-we-learned-from-david-cameron-memoir-boris-johnson-michael-gove-referendum',
@@ -82,6 +86,7 @@ export const mockTab1: CAPITrailTabType = {
 			pillar: 'lifestyle',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 			ageWarning: '4 months old',
 		},
 		{
@@ -99,6 +104,7 @@ export const mockTab1: CAPITrailTabType = {
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/lifeandstyle/2019/sep/15/how-six-weddings-in-one-year-made-me-love-being-single',
@@ -115,6 +121,7 @@ export const mockTab1: CAPITrailTabType = {
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/fashion/2019/sep/15/joani-johnson-model-fenty-career-began-at-65-ageing-interview',
@@ -131,6 +138,7 @@ export const mockTab1: CAPITrailTabType = {
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/fashion/2019/sep/15/victoria-beckham-announces-launch-of-own-makeup-brand',
@@ -147,6 +155,7 @@ export const mockTab1: CAPITrailTabType = {
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/commentisfree/2019/sep/15/government-boris-johnson-incredible-hulk-sam-gyimah',
@@ -163,6 +172,7 @@ export const mockTab1: CAPITrailTabType = {
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 	],
 };
@@ -185,6 +195,7 @@ export const mockTab2: CAPITrailTabType = {
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/music/2019/sep/15/aphex-twin-review-printworks-london-electronic-music',
@@ -201,6 +212,7 @@ export const mockTab2: CAPITrailTabType = {
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/music/2019/sep/13/100-best-albums-of-the-21st-century',
@@ -216,6 +228,7 @@ export const mockTab2: CAPITrailTabType = {
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/music/2019/sep/14/missy-elliott-interview-beyonce-vmas-katy-perry-misdemeanor',
@@ -232,6 +245,7 @@ export const mockTab2: CAPITrailTabType = {
 			pillar: 'culture',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/music/2019/sep/14/beatles-paul-mccartney-ringo-starr-reunite-record-john-lennon-song',
@@ -248,6 +262,7 @@ export const mockTab2: CAPITrailTabType = {
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/music/2019/sep/15/on-my-radar-gruff-rhys-interview',
@@ -263,6 +278,7 @@ export const mockTab2: CAPITrailTabType = {
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/music/2019/sep/13/sam-smith-on-being-non-binary-im-changing-my-pronouns-to-theythem',
@@ -279,6 +295,7 @@ export const mockTab2: CAPITrailTabType = {
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/music/2019/sep/15/pixies-beneath-the-eyrie-review',
@@ -295,6 +312,7 @@ export const mockTab2: CAPITrailTabType = {
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/music/2019/sep/14/emeli-sande-interview-life-on-a-plate-i-loved-spaghetti-so-much',
@@ -311,6 +329,7 @@ export const mockTab2: CAPITrailTabType = {
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 		{
 			url: 'https://www.theguardian.com/music/2019/sep/15/joyce-didonato-interview-agrippina-royal-opera-house',
@@ -327,6 +346,7 @@ export const mockTab2: CAPITrailTabType = {
 			pillar: 'news',
 			designType: 'not-applicable', // Needed for the type but never used. Will eventually be removed upstream and then here.
 			webPublicationDate: '',
+			showQuotedHeadline: false,
 		},
 	],
 };

@@ -4304,6 +4304,9 @@
                             "type": "string"
                         }
                     }
+                },
+                "showQuotedHeadline": {
+                    "type": "boolean"
                 }
             },
             "required": [

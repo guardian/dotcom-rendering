@@ -2,6 +2,7 @@ import type { ABTest } from '@guardian/ab-core';
 import { abTestTest } from './tests/ab-test-test';
 import { consentlessAds } from './tests/consentless-ads';
 import { integrateIma } from './tests/integrate-ima';
+import { liveblogDesktopOutstream } from './tests/liveblog-desktop-outstream';
 import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
@@ -21,4 +22,5 @@ export const tests: ABTest[] = [
 	consentlessAds,
 	integrateIma,
 	removePrebidA9Canada,
+	liveblogDesktopOutstream,
 ];

@@ -54,6 +54,7 @@ const trails: TrailType[] = [
 			'UK Covid live: England lockdown to be eased in stages, says PM, amid reports of nationwide mass testing',
 		shortUrl: 'https://gu.com/p/gekj6',
 		dataLinkName: 'news | group-2 | card-@1',
+		showQuotedHeadline: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/17/uk-to-begin-worlds-first-covid-human-challenge-study-within-weeks',
@@ -72,6 +73,7 @@ const trails: TrailType[] = [
 			'UK to infect up to 90 healthy volunteers with Covid in world first trial',
 		shortUrl: 'https://gu.com/p/gey5n',
 		dataLinkName: 'news | group-2 | card-@2',
+		showQuotedHeadline: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/17/scottish-government-inadequately-prepared-for-covid-audit-scotland-report',
@@ -90,6 +92,7 @@ const trails: TrailType[] = [
 			'Scottish government inadequately prepared for Covid, says watchdog',
 		shortUrl: 'https://gu.com/p/gey2h',
 		dataLinkName: 'news | group-1 | card-@3',
+		showQuotedHeadline: false,
 	},
 	{
 		url: 'https://www.theguardian.com/society/2021/feb/16/encouraging-signs-covid-vaccine-over-80s-deaths-fall-england',
@@ -108,6 +111,7 @@ const trails: TrailType[] = [
 			'‘Encouraging’ signs for Covid vaccine as over-80s deaths fall in England',
 		shortUrl: 'https://gu.com/p/g94y7',
 		dataLinkName: 'news | group-0 | card-@4',
+		showQuotedHeadline: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/16/contact-tracing-alone-has-little-impact-on-curbing-covid-spread-report-finds',
@@ -126,6 +130,7 @@ const trails: TrailType[] = [
 			'Contact tracing alone has little impact on curbing Covid spread, report finds',
 		shortUrl: 'https://gu.com/p/geeq2',
 		dataLinkName: 'news | group-0 | card-@5',
+		showQuotedHeadline: false,
 	},
 	{
 		url: 'https://www.theguardian.com/world/2021/feb/16/covid-almost-2m-more-people-asked-shield-england',
@@ -144,6 +149,7 @@ const trails: TrailType[] = [
 			'Ethnicity and poverty are Covid risk factors, new Oxford modelling tool shows',
 		shortUrl: 'https://gu.com/p/gee2t',
 		dataLinkName: 'news | group-0 | card-@6',
+		showQuotedHeadline: false,
 	},
 	{
 		url: 'https://www.theguardian.com/politics/live/2021/feb/16/uk-covid-live-coronavirus-sturgeon-return-scottish-schools-latest-updates',
@@ -162,6 +168,7 @@ const trails: TrailType[] = [
 			'UK Covid: 799 more deaths and 10,625 new cases reported; Scottish schools in phased return from Monday – as it happened',
 		shortUrl: 'https://gu.com/p/geczb',
 		dataLinkName: 'news | group-0 | card-@7',
+		showQuotedHeadline: false,
 	},
 	{
 		url: 'https://www.theguardian.com/uk-news/2021/feb/16/qcovid-how-improved-algorithm-can-identify-more-higher-risk-adults',
@@ -180,6 +187,7 @@ const trails: TrailType[] = [
 			'QCovid: how improved algorithm can identify more higher-risk adults',
 		shortUrl: 'https://gu.com/p/gefev',
 		dataLinkName: 'news | group-0 | card-@8',
+		showQuotedHeadline: false,
 	},
 ];
 

@@ -162,7 +162,7 @@ export type FEFrontCard = {
 		image?: {
 			type: string;
 			item: {
-				imgSource?: string;
+				imageSrc?: string;
 			};
 		};
 		webTitle: string;
@@ -235,6 +235,7 @@ export type DCRFrontCard = {
 	format: ArticleFormat;
 	url: string;
 	headline: string;
+	showQuotedHeadline: boolean;
 	trailText?: string;
 	starRating?: number;
 	webPublicationDate?: string;

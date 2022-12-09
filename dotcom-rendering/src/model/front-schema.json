@@ -753,7 +753,7 @@
                                                         "item": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "imgSource": {
+                                                                "imageSrc": {
                                                                     "type": "string"
                                                                 }
                                                             }
@@ -1423,7 +1423,7 @@
                                                         "item": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "imgSource": {
+                                                                "imageSrc": {
                                                                     "type": "string"
                                                                 }
                                                             }
@@ -2093,7 +2093,7 @@
                                                         "item": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "imgSource": {
+                                                                "imageSrc": {
                                                                     "type": "string"
                                                                 }
                                                             }
@@ -3045,6 +3045,9 @@
                             "type": "string"
                         }
                     }
+                },
+                "showQuotedHeadline": {
+                    "type": "boolean"
                 }
             },
             "required": [

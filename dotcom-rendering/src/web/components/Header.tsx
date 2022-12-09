@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { brand } from '@guardian/source-foundations';
-import type { EditionId } from '../lib/edition';
 import { center } from '../lib/center';
+import type { EditionId } from '../lib/edition';
 import { EditionDropdown } from './EditionDropdown.importable';
 import { HeaderSingleFrontDoor } from './HeaderSingleFrontDoor';
 import { Hide } from './Hide';
@@ -33,6 +33,7 @@ type Props = {
 	idApiUrl: string;
 	headerTopBarSwitch: boolean;
 	isInEuropeTest: boolean;
+	headerTopBarSearchCapiSwitch: boolean;
 };
 
 export const Header = ({
@@ -47,6 +48,7 @@ export const Header = ({
 	idApiUrl,
 	isInEuropeTest,
 	headerTopBarSwitch,
+	headerTopBarSearchCapiSwitch,
 }: Props) => {
 	return headerTopBarSwitch ? (
 		<HeaderSingleFrontDoor
@@ -58,6 +60,7 @@ export const Header = ({
 			remoteHeader={remoteHeader}
 			contributionsServiceUrl={contributionsServiceUrl}
 			idApiUrl={idApiUrl}
+			headerTopBarSearchCapiSwitch={headerTopBarSearchCapiSwitch}
 		/>
 	) : (
 		<div css={center}>
