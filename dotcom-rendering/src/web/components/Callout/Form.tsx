@@ -19,7 +19,6 @@ import { TextInput } from './FormFields/TextInput';
 const errorBoxStyles = css`
 	padding: 10px;
 	margin-bottom: ${space[2]}px;
-	color: ${palette.error[400]};
 	width: fit-content;
 	border: ${space[1]}px solid ${palette.error[400]};
 
@@ -29,6 +28,7 @@ const errorBoxStyles = css`
 `;
 
 const errorHeaderStyles = css`
+	color: ${palette.error[400]};
 	${textSans.medium({ fontWeight: 'bold' })};
 	display: flex;
 `;
@@ -192,12 +192,7 @@ export const Form = ({
 			}}
 		>
 			<CalloutTermsAndConditions format={format} />
-			{!!networkError && (
-				<div css={[errorBoxStyles, errorHeaderStyles]}>
-					<SvgAlertTriangle size="medium" />
-					{networkError}
-				</div>
-			)}
+
 			{Object.keys(validationErrors).length > 0 && (
 				<div css={errorBoxStyles}>
 					<div css={errorHeaderStyles}>
@@ -231,6 +226,18 @@ export const Form = ({
 				One of our journalists will be in contact before we publish your
 				information, so please do leave contact details.
 			</div>
+			{!!networkError && (
+				<div
+					css={[
+						errorHeaderStyles,
+						css`
+							margin-top: 8px;
+						`,
+					]}
+				>
+					{networkError}
+				</div>
+			)}
 			<div css={footerPaddingStyles}>
 				<Button
 					priority="primary"
