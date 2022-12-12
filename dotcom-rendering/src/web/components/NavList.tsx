@@ -1,32 +1,48 @@
 import { css } from '@emotion/react';
-import { border, from, palette, space } from '@guardian/source-foundations';
-import { DCRContainerPalette } from '../../types/front';
-import { ContainerOverrides } from '../../types/palette';
-import { TrailType } from '../../types/trails';
+import {
+	between,
+	body,
+	border,
+	from,
+	palette,
+	space,
+	until,
+} from '@guardian/source-foundations';
+import { Link } from '@guardian/source-react-components';
+import type { DCRContainerPalette } from 'src/types/front';
+import type { ContainerOverrides } from 'src/types/palette';
+import type { TrailType } from '../../types/trails';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
-import { MiniCard } from './MiniCard';
 
 type Props = {
 	trails: TrailType[];
 	containerPalette?: DCRContainerPalette;
-	showImage: boolean;
 };
 
 const columnRuleColour = (containerOverrides?: ContainerOverrides) => css`
 	column-rule: 1px solid
-		${containerOverrides?.border.container ?? border.secondary};
-`;
-
-const topBorderColour = (containerOverrides?: ContainerOverrides) => css`
-	border-top: 1px solid
-		${containerOverrides?.topBar.card ?? palette.neutral[93]};
+		${containerOverrides
+			? containerOverrides.border.container
+			: border.secondary};
 `;
 
 const ulStyles = css`
+	${until.tablet} {
+		column-count: 1;
+	}
+	${between.tablet.and.desktop} {
+		column-count: 3;
+	}
+	column-count: 4;
+
 	column-gap: 10px;
 `;
 
-const liStyles = css`
+const liStyles = (containerOverrides?: ContainerOverrides) => css`
+	border-top: 1px solid
+		${containerOverrides
+			? containerOverrides.topBar.card
+			: palette.neutral[93]};
 	padding-top: ${space[1]}px;
 	padding-bottom: ${space[3]}px;
 
@@ -36,42 +52,29 @@ const liStyles = css`
 	}
 `;
 
-const textColumns = css`
-	column-count: 1;
-	${from.tablet} {
-		column-count: 3;
-	}
-	${from.desktop} {
-		column-count: 4;
-	}
-`;
-
-const mediaColumns = css`
-	column-count: 1;
-	${from.tablet} {
-		column-count: 3;
-	}
-`;
-
-export const NavList = ({ trails, containerPalette, showImage }: Props) => {
+export const NavList = ({ trails, containerPalette }: Props) => {
 	const containerOverrides =
 		containerPalette && decideContainerOverrides(containerPalette);
 
 	return (
-		<ul
-			css={[
-				ulStyles,
-				columnRuleColour(containerOverrides),
-				showImage ? mediaColumns : textColumns,
-			]}
-		>
+		<ul css={[ulStyles, columnRuleColour(containerOverrides)]}>
 			{trails.map((trail) => (
-				<li css={[liStyles, topBorderColour(containerOverrides)]}>
-					<MiniCard
-						trail={trail}
-						showImage={showImage}
-						containerPalette={containerPalette}
-					/>
+				<li css={liStyles(containerOverrides)} key={trail.url}>
+					<Link
+						href={trail.url}
+						priority="secondary"
+						subdued={true}
+						data-link-name={trail.dataLinkName}
+						cssOverrides={css`
+							${body.medium()}
+							font-weight: bold;
+							line-height: ${space[6]}px;
+							${containerOverrides &&
+							`color: ${containerOverrides.text.cardHeadline}`}
+						`}
+					>
+						{trail.headline}
+					</Link>
 				</li>
 			))}
 		</ul>

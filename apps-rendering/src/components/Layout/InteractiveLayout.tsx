@@ -1,19 +1,20 @@
 // ----- Imports ----- //
 
-import type { ArticleFormat } from '@guardian/libs';
 import Footer from 'components/Footer';
-import type { FC, ReactNode } from 'react';
+import type { Interactive } from 'item';
+import { getFormat } from 'item';
+import type { FC } from 'react';
+import { renderWithoutStyles } from 'renderer';
 
 // ----- Component ----- //
 
 interface Props {
-	children: ReactNode[];
-	item: ArticleFormat;
+	item: Interactive;
 }
 
-const InteractiveLayout: FC<Props> = ({ children, item }) => (
+const InteractiveLayout: FC<Props> = ({ item }) => (
 	<main>
-		<article>{children}</article>
+		<article>{renderWithoutStyles(getFormat(item), item.body)}</article>
 		<Footer isCcpa={false} format={item} />
 	</main>
 );

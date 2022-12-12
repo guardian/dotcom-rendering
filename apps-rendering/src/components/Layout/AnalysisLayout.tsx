@@ -20,7 +20,7 @@ import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
 import { getFormat } from 'item';
 import type { Analysis } from 'item';
-import type { FC, ReactNode } from 'react';
+import type { FC } from 'react';
 import {
 	articleWidthStyles,
 	darkModeCss,
@@ -47,10 +47,9 @@ const BorderStyles = css`
 
 interface Props {
 	item: Analysis;
-	children: ReactNode[];
 }
 
-const AnalysisLayout: FC<Props> = ({ item, children }) => (
+const AnalysisLayout: FC<Props> = ({ item }) => (
 	<>
 		<main css={backgroundStyles(item)}>
 			<article css={BorderStyles}>
@@ -70,9 +69,12 @@ const AnalysisLayout: FC<Props> = ({ item, children }) => (
 						<Logo item={item} />
 					</section>
 				</header>
-				<ArticleBody className={[articleWidthStyles]} format={item}>
-					{children}
-				</ArticleBody>
+				<ArticleBody
+					className={[articleWidthStyles]}
+					format={item}
+					body={item.body}
+					shouldHideAdverts={item.shouldHideAdverts}
+				/>
 				<section css={articleWidthStyles}>
 					<Tags item={item} />
 				</section>
