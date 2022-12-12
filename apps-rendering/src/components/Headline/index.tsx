@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import DesignTag from 'components/DesignTag';
 import { WithAgeWarning } from 'components/WithAgeWarning';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -128,6 +129,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 					publishDate={item.publishDate}
 					format={format}
 				>
+					<DesignTag format={item} />
 					<DefaultHeadline
 						item={item}
 						styles={css(defaultStyles(item))}

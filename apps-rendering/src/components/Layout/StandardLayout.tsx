@@ -12,8 +12,8 @@ import {
 } from '@guardian/source-react-components-development-kitchen';
 import { map, withDefault } from '@guardian/types';
 import { pillarToId, themeToPillar } from 'articleFormat';
-import ArticleBody from 'components/ArticleBody';
-import DesignTag from 'components/DesignTag';
+import Body from 'components/ArticleBody';
+
 import Epic from 'components/Epic';
 import FootballScores from 'components/FootballScores';
 import Footer from 'components/Footer';
@@ -151,9 +151,6 @@ const StandardLayout: FC<Props> = ({ item }) => {
 						mainMedia={item.mainMedia}
 					/>
 					<Series item={item} />
-					{item.design !== ArticleDesign.Interview && (
-						<DesignTag format={item} />
-					)}
 
 					<Headline item={item} />
 					<div css={articleWidthStyles}>
@@ -174,7 +171,7 @@ const StandardLayout: FC<Props> = ({ item }) => {
 						</section>
 					)}
 				</header>
-				<ArticleBody
+				<Body
 					className={[articleWidthStyles]}
 					format={item}
 					body={item.body}
