@@ -13,7 +13,7 @@ import {
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { linkNotificationCount } from '../lib/linkNotificationCount';
 import type { Notification } from '../lib/notification';
@@ -275,7 +275,10 @@ type DropdownLinkProps = {
 	index: number;
 };
 const DropdownLink = ({ link, index }: DropdownLinkProps) => {
-	const ophanComponent = buildOphanComponentWithNotifications(link);
+	const ophanComponent = useMemo(
+		() => buildOphanComponentWithNotifications(link),
+		[link],
+	);
 
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
