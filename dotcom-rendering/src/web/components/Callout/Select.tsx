@@ -1,36 +1,37 @@
-import { CampaignFieldSelect } from '../../../types/content';
-import { FieldLabel } from './FieldLabel';
+import { Select as SourceSelect } from '@guardian/source-react-components';
+import type { CampaignFieldSelect } from 'src/types/content';
 
 type Props = {
+	validationErrors?: { [key in string]: string };
 	formField: CampaignFieldSelect;
 	formData: { [key in string]: any };
 	setFormData: React.Dispatch<React.SetStateAction<{ [x: string]: any }>>;
 };
 
-export const Select = ({ formField, formData, setFormData }: Props) => (
-	<>
-		<FieldLabel formField={formField} />
-		<select
-			data-testid={`form-field-${formField.id}`}
-			required={formField.required}
-			value={
-				formField.id && formField.id in formData
-					? formData[formField.id]
-					: ''
-			}
-			onChange={(e) =>
-				setFormData({
-					...formData,
-					[formField.id]: e.target.value,
-				})
-			}
-		>
-			{formField.options &&
-				formField.options.map((option, index) => (
-					<option key={index} value={option.value}>
-						{option.value}
-					</option>
-				))}
-		</select>
-	</>
+export const Select = ({
+	validationErrors,
+	formField,
+	formData,
+	setFormData,
+}: Props) => (
+	<SourceSelect
+		hideLabel={formField.hideLabel}
+		data-testid={`form-field-${formField.id}`}
+		error={validationErrors?.[formField.id]}
+		label={formField.label}
+		supporting={formField.description}
+		value={formField.id in formData ? formData[formField.id] : ''}
+		onChange={(e) =>
+			setFormData({
+				...formData,
+				[formField.id]: e.target.value,
+			})
+		}
+		optional={!formField.required}
+		children={formField.options.map((option, index) => (
+			<option key={index} value={option.value}>
+				{option.value}
+			</option>
+		))}
+	/>
 );
