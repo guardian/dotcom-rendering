@@ -21,6 +21,7 @@ describe('addNotificationsToDropdownLinks', () => {
 				id: 'example-id',
 				message: 'Some notification message',
 				target: 'account_overview',
+				ophanLabel: 'notification-label',
 			},
 		];
 
@@ -40,6 +41,7 @@ describe('addNotificationsToDropdownLinks', () => {
 						id: 'example-id',
 						message: 'Some notification message',
 						target: 'account_overview',
+						ophanLabel: 'notification-label',
 					},
 				],
 			},
@@ -66,11 +68,13 @@ describe('addNotificationsToDropdownLinks', () => {
 				id: 'example-id-1',
 				message: 'Some notification message',
 				target: 'account_overview',
+				ophanLabel: 'notification-label-1',
 			},
 			{
 				id: 'example-id-2',
 				message: 'Another notification message',
 				target: 'account_overview',
+				ophanLabel: 'notification-label-2',
 			},
 		];
 
@@ -90,11 +94,13 @@ describe('addNotificationsToDropdownLinks', () => {
 						id: 'example-id-1',
 						message: 'Some notification message',
 						target: 'account_overview',
+						ophanLabel: 'notification-label-1',
 					},
 					{
 						id: 'example-id-2',
 						message: 'Another notification message',
 						target: 'account_overview',
+						ophanLabel: 'notification-label-2',
 					},
 				],
 			},
@@ -113,6 +119,7 @@ describe('addNotificationsToDropdownLinks', () => {
 						id: 'existing',
 						message: 'Existing notification message',
 						target: 'account_overview',
+						ophanLabel: 'notification-label-1',
 					},
 				],
 			},
@@ -122,6 +129,7 @@ describe('addNotificationsToDropdownLinks', () => {
 				id: 'new',
 				message: 'New notification message',
 				target: 'account_overview',
+				ophanLabel: 'notification-label-2',
 			},
 		];
 
@@ -141,11 +149,13 @@ describe('addNotificationsToDropdownLinks', () => {
 						id: 'existing',
 						message: 'Existing notification message',
 						target: 'account_overview',
+						ophanLabel: 'notification-label-1',
 					},
 					{
 						id: 'new',
 						message: 'New notification message',
 						target: 'account_overview',
+						ophanLabel: 'notification-label-2',
 					},
 				],
 			},

@@ -56,7 +56,7 @@ import { Result } from 'result';
 
 interface Fields extends ArticleFormat {
 	headline: string;
-	standfirst: Option<DocumentFragment>;
+	standfirst: Optional<DocumentFragment>;
 	byline: string;
 	bylineHtml: Option<DocumentFragment>;
 	publishDate: Option<Date>;
@@ -322,10 +322,8 @@ const parseItemFields = (
 		),
 		display: getDisplay(content),
 		headline: content.fields?.headline ?? '',
-		standfirst: pipe(
-			content.fields?.standfirst,
-			fromNullable,
-			map(context.docParser),
+		standfirst: Optional.fromNullable(content.fields?.standfirst).map(
+			context.docParser,
 		),
 		byline: content.fields?.byline ?? '',
 		bylineHtml: pipe(
