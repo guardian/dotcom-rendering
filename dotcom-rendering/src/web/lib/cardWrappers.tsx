@@ -59,7 +59,7 @@ export const Card100Media75 = ({
 			trailText={
 				// Only show trail text if there is no supportContent
 				trail.supportingContent === undefined ||
-				trail.supportingContent.length === 3
+				trail.supportingContent.length !== 3
 					? trail.trailText
 					: undefined
 			}
