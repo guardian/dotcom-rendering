@@ -1,5 +1,5 @@
-import type { Switches } from 'src/types/config';
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
+import type { Switches } from '../../types/config';
 import type { CAPIElement } from '../../types/content';
 import type { TagType } from '../../types/tag';
 import { enhance } from '../lib/enhance';

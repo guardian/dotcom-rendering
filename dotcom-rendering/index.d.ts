@@ -452,7 +452,7 @@ interface BaseTrailType {
 	commentCount?: number;
 	starRating?: number;
 	linkText?: string;
-	branding?: import('src/types/branding').Branding;
+	branding?: import('./src/types/branding').Branding;
 	isSnap?: boolean;
 	snapData?: import('./src/types/front').DCRSnapType;
 }

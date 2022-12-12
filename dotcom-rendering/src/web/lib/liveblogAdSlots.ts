@@ -1,4 +1,4 @@
-import type { CAPIElement } from 'src/types/content';
+import type { CAPIElement } from '../../types/content';
 
 /**
  * Maximum number of inline ads to display on the page.

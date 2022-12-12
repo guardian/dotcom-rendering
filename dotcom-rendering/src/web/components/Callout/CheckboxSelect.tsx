@@ -1,5 +1,5 @@
 import { Checkbox, CheckboxGroup } from '@guardian/source-react-components';
-import type { CampaignFieldCheckbox } from 'src/types/content';
+import type { CampaignFieldCheckbox } from '../../../types/content';
 
 type Props = {
 	formField: CampaignFieldCheckbox;
