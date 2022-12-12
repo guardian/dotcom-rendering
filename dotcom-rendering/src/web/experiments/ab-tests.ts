@@ -8,7 +8,6 @@ import {
 	newsletterMerchUnitLighthouseControl,
 	newsletterMerchUnitLighthouseVariants,
 } from './tests/newsletter-merch-unit-test';
-import { removePrebidA9Canada } from './tests/remove-prebid-a9-canada';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
 import { teadsCookieless } from './tests/teads-cookieless';
@@ -23,7 +22,6 @@ export const tests: ABTest[] = [
 	newsletterMerchUnitLighthouseVariants,
 	consentlessAds,
 	integrateIma,
-	removePrebidA9Canada,
 	liveblogDesktopOutstream,
 	teadsCookieless,
 	billboardsInMerch,
