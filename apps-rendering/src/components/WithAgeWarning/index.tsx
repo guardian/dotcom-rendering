@@ -76,22 +76,34 @@ export const warningStyles = (format: ArticleFormat): SerializedStyles => {
 			return css`
 				${galleryStyle}
 			`;
-		case ArticleDesign.Interview:
+
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
 			return css`
 				${defaultWidthStyles}
 			`;
+		case ArticleDesign.Interview:
+			return css`
+				${defaultWidthStyles}
+				padding: 0 0 ${remSpace[2]} 0;
+			`;
 		case ArticleDesign.Analysis:
 		case ArticleDesign.Explainer:
 			return css`
 				${articleWidthStyles}
+				padding-bottom: ${remSpace[2]};
 			`;
 		case ArticleDesign.NewsletterSignup:
 			return css`
 				${articleWidthStyles}
 				padding: 0 0 ${remSpace[5]} 0;
 				max-width: 100%;
+			`;
+		case ArticleDesign.Letter:
+		case ArticleDesign.Obituary:
+			return css`
+				${articleWidthStyles}
+				padding-bottom: ${remSpace[2]};
 			`;
 		default:
 			if (format.display === ArticleDisplay.Immersive) {

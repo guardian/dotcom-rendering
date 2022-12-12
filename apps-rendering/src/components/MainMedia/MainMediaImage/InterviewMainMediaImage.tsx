@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { ArticleFormat } from '@guardian/libs';
-import { from } from '@guardian/source-foundations';
+import { from, remSpace } from '@guardian/source-foundations';
 import type { Image } from 'image';
 import type { FC } from 'react';
 import { wideContentWidth } from 'styles';
@@ -12,6 +12,7 @@ import DefaultMainMediaImage, {
 const styles = css`
 	position: relative;
 	margin: 0;
+	margin: 0 0 ${remSpace[1]} 0;
 	${from.wide} {
 		width: ${wideContentWidth}px;
 		margin-left: auto;

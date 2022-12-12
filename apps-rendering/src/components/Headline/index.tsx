@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import { fromNullable, OptionKind } from '@guardian/types';
 import DesignTag from 'components/DesignTag';
 import { WithAgeWarning } from 'components/WithAgeWarning';
 import type { Item } from 'item';
@@ -66,6 +67,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 					publishDate={item.publishDate}
 					format={format}
 				>
+					<DesignTag format={format} />
 					<CommentHeadline item={item} />
 				</WithAgeWarning>
 			);
@@ -92,16 +94,31 @@ const Headline: React.FC<Props> = ({ item }) => {
 					<BlogHeadline item={item} />
 				</WithAgeWarning>
 			);
-		case ArticleDesign.Interview:
+		case ArticleDesign.Interview: {
+			const designTag = <DesignTag format={format} />;
+			const interviewToneTag = fromNullable(
+				item.tags.find((tag) => tag.id === 'tone/interview'),
+			);
 			return (
 				<WithAgeWarning
 					tags={item.tags}
 					publishDate={item.publishDate}
 					format={format}
 				>
+					{interviewToneTag.kind === OptionKind.Some ? (
+						<nav>
+							<a href={interviewToneTag.value.webUrl}>
+								{designTag}
+							</a>
+						</nav>
+					) : (
+						designTag
+					)}
 					<InterviewHeadline item={item} />
 				</WithAgeWarning>
 			);
+		}
+
 		case ArticleDesign.Review:
 			return (
 				<WithAgeWarning

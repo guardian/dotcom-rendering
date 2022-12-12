@@ -1,8 +1,6 @@
 import { css } from '@emotion/react';
 import { from, headline, remSpace } from '@guardian/source-foundations';
-import DesignTag from 'components/DesignTag';
 import type { Item } from 'item';
-import { getFormat } from 'item';
 import { DefaultHeadline, defaultStyles } from './Headline.defaults';
 
 const commentStyles = css`
@@ -20,15 +18,11 @@ interface Props {
 }
 
 const CommentHeadline: React.FC<Props> = ({ item }) => {
-	const format = getFormat(item);
 	return (
-		<>
-			<DesignTag format={format} />
-			<DefaultHeadline
-				item={item}
-				styles={css(defaultStyles(item), commentStyles)}
-			/>
-		</>
+		<DefaultHeadline
+			item={item}
+			styles={css(defaultStyles(item), commentStyles)}
+		/>
 	);
 };
 
