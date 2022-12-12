@@ -238,7 +238,6 @@ const Box = ({
 	</div>
 );
 
-
 export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
@@ -282,7 +281,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	depending on whether the labs header is there or not to keep the headlines
 	appearing at a consistent height between labs and non labs immersive articles
 	*/
-	const navAndLabsHeaderHeight = isLabs ? "103px" : "48px";
+	const navAndLabsHeaderHeight = isLabs ? '103px' : '48px';
 
 	const hasMainMediaStyles = css`
 		height: calc(80vh - ${navAndLabsHeaderHeight});
@@ -340,8 +339,7 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						}}
 						nav={NAV}
 						subscribeUrl={
-							CAPIArticle.nav.readerRevenueLinks.header
-								.subscribe
+							CAPIArticle.nav.readerRevenueLinks.header.subscribe
 						}
 						editionId={CAPIArticle.editionId}
 						headerTopBarSwitch={
@@ -381,7 +379,6 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						`,
 					]}
 				>
-
 					<MainMedia
 						format={format}
 						elements={CAPIArticle.mainMediaElements}
