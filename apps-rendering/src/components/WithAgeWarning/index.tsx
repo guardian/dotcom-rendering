@@ -74,6 +74,10 @@ export const defaultWidthStyles: SerializedStyles = css`
 
 export const warningStyles = (format: ArticleFormat): SerializedStyles => {
 	switch (format.design) {
+		case ArticleDesign.Gallery:
+			return css`
+				${galleryStyle}
+			`;
 		case ArticleDesign.Interview:
 		case ArticleDesign.LiveBlog:
 		case ArticleDesign.DeadBlog:
@@ -108,6 +112,20 @@ const immersiveStyle: SerializedStyles = css`
 	${grid.between('viewport-start', 'centre-column-end')}
 	${from.mobileLandscape} {
 		${grid.between('viewport-start', 'viewport-end')}
+	}
+
+	${from.tablet} {
+		${grid.between('centre-column-start', 'viewport-end')}
+		margin-left: calc(${grid.columnGap} * -1/2);
+	}
+`;
+
+const galleryStyle: SerializedStyles = css`
+	${grid.between('viewport-start', 'centre-column-end')}
+	grid-row: 2;
+
+	${from.mobileLandscape} {
+		${grid.column.all}
 	}
 
 	${from.tablet} {
