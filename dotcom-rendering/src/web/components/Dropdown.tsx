@@ -20,7 +20,7 @@ import { linkNotificationCount } from '../lib/linkNotificationCount';
 import type { Notification } from '../lib/notification';
 import { useIsInView } from '../lib/useIsInView';
 import { submitComponentEvent } from '../browser/ophan/ophan';
-import {OphanComponent, OphanComponentEvent} from '@guardian/libs';
+import { OphanComponent, OphanComponentEvent } from '@guardian/libs';
 import { useOnce } from '../lib/useOnce';
 
 const NOTIFICATION_COMPONENT_TYPE = 'RETENTION_HEADER';
@@ -218,7 +218,9 @@ const notificationTextStyles = css`
 	${textSans.xxsmall()};
 `;
 
-const buildOphanComponent = (link: DropdownLinkType): OphanComponent | undefined => {
+const buildOphanComponent = (
+	link: DropdownLinkType,
+): OphanComponent | undefined => {
 	// Only track if it has notifications
 	if (link?.notifications && link.notifications.length > 0) {
 		return {
@@ -232,7 +234,10 @@ const buildOphanComponent = (link: DropdownLinkType): OphanComponent | undefined
 	return undefined;
 };
 
-const addTrackingToUrl = (url: string, ophanComponent: OphanComponent): string => {
+const addTrackingToUrl = (
+	url: string,
+	ophanComponent: OphanComponent,
+): string => {
 	// Use the acquisitionData query param to send tracking to the destination
 	const acquisitionData = encodeURIComponent(
 		JSON.stringify({
@@ -241,8 +246,7 @@ const addTrackingToUrl = (url: string, ophanComponent: OphanComponent): string =
 			componentType: ophanComponent.componentType,
 			campaignCode: ophanComponent.id,
 			referrerPageviewId: window.guardian.config.ophan.pageViewId,
-			referrerUrl:
-				window.location.origin + window.location.pathname,
+			referrerUrl: window.location.origin + window.location.pathname,
 			labels: ophanComponent.labels,
 		}),
 	);
@@ -306,7 +310,13 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 				action: 'VIEW',
 			});
 		}
-	}, [hasBeenSeen, ophanComponent, link.notifications, hasSentViewEvent, link.id]);
+	}, [
+		hasBeenSeen,
+		ophanComponent,
+		link.notifications,
+		hasSentViewEvent,
+		link.id,
+	]);
 
 	useOnce(() => {
 		if (ophanComponent) {
@@ -317,7 +327,9 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 		}
 	}, [ophanComponent]);
 
-	const url = ophanComponent ? addTrackingToUrl(link.url, ophanComponent) : link.url;
+	const url = ophanComponent
+		? addTrackingToUrl(link.url, ophanComponent)
+		: link.url;
 
 	return (
 		<li css={liStyles} key={link.title} ref={setNode}>
