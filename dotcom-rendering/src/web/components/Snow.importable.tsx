@@ -83,7 +83,7 @@ export const Snow = () => {
 	// without triggering a re-render on their change
 	const requestRef = useRef<number>();
 	const previousTimeRef = useRef<number>();
-	const drift = useRef(3);
+	const drift = useRef(2);
 
 	const renderLoop = (time: number) => {
 		if (previousTimeRef.current != undefined) {

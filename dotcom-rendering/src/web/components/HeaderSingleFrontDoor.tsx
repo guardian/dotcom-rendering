@@ -47,7 +47,6 @@ export const HeaderSingleFrontDoor = ({
 				headerTopBarSearchCapiSwitch={headerTopBarSearchCapiSwitch}
 			/>
 		</Island>
-
 		<div
 			css={[
 				center,
