@@ -2,22 +2,32 @@ import type { BrazeCard } from '@guardian/braze-components';
 import type { DropdownLinkType } from '../components/Dropdown';
 
 export interface Notification {
+	id: string;
 	target: string;
 	message: string;
+	ophanLabel: string;
+	logImpression?: () => void;
 }
 
 const hasTargetAndMessage = (
 	card: BrazeCard,
 ): card is BrazeCard & { extras: Notification } =>
-	Boolean(card.extras.message) && Boolean(card.extras.target);
+	Boolean(card.extras.message) &&
+	Boolean(card.extras.target) &&
+	Boolean(card.extras.ophanLabel);
 
 export const mapBrazeCardsToNotifications = (
 	cards: BrazeCard[],
 ): Notification[] => {
 	return cards.filter(hasTargetAndMessage).map((card) => {
 		return {
+			id: card.id,
 			target: card.extras.target,
 			message: card.extras.message,
+			ophanLabel: card.extras.ophanLabel,
+			logImpression: () => {
+				card.logImpression();
+			},
 		};
 	});
 };
@@ -45,9 +55,7 @@ export const addNotificationsToDropdownLinks = (
 
 	const linksWithNotifications = links.map((link) => {
 		const newNotifications = (link.notifications ?? []).concat(
-			(notificationsByTarget[link.id] ?? []).map(
-				({ message }) => message,
-			),
+			notificationsByTarget[link.id] ?? [],
 		);
 
 		if (newNotifications.length === 0) {

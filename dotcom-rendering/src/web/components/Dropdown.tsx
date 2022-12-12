@@ -14,16 +14,21 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
+import { submitComponentEvent } from '../browser/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { linkNotificationCount } from '../lib/linkNotificationCount';
+import type { Notification } from '../lib/notification';
+import { useIsInView } from '../lib/useIsInView';
+import { useOnce } from '../lib/useOnce';
 
+const NOTIFICATION_COMPONENT_TYPE = 'RETENTION_HEADER';
 export interface DropdownLinkType {
 	id: string;
 	url: string;
 	title: string;
 	isActive?: boolean;
 	dataLinkName: string;
-	notifications?: string[];
+	notifications?: Notification[];
 }
 
 interface Props {
@@ -219,6 +224,106 @@ const NotificationBadge = ({ diameter }: { diameter: number }) => {
 	);
 };
 
+type NotificationMessageProps = {
+	notification: Notification;
+};
+const NotificationMessage = ({ notification }: NotificationMessageProps) => {
+	const { message } = notification;
+
+	return <div css={notificationTextStyles}>{message}</div>;
+};
+
+type DropdownLinkProps = {
+	link: DropdownLinkType;
+	index: number;
+};
+const DropdownLink = ({ link, index }: DropdownLinkProps) => {
+	const [hasBeenSeen, setNode] = useIsInView({
+		debounce: true,
+	});
+	const [hasSentViewEvent, setHasSentViewEvent] = useState<boolean>(false);
+
+	// The following hooks, which send INSERT and VIEW events to Ophan,
+	// intentionally only run when the link has notifications (which is why
+	// link.notifications is part of the dependency array for both). In future
+	// if we ever have notifications arriving from different sources at
+	// different times, we'll need to revisit this logic (currently they only
+	// come from Braze).
+	useEffect(() => {
+		if (
+			hasBeenSeen &&
+			link.notifications &&
+			link.notifications.length > 0 &&
+			!hasSentViewEvent
+		) {
+			setHasSentViewEvent(true);
+
+			// For each notification for this link, log the impression back to
+			// Braze separately
+			link.notifications.forEach((notification) => {
+				notification.logImpression?.();
+			});
+
+			submitComponentEvent({
+				component: {
+					componentType: NOTIFICATION_COMPONENT_TYPE,
+					id: link.id,
+					labels: link.notifications.map((n) => n.ophanLabel),
+				},
+				action: 'VIEW',
+			});
+		}
+	}, [hasBeenSeen, link.notifications, hasSentViewEvent, link.id]);
+
+	useOnce(() => {
+		// The || [] is to keep TypeScript happy. The useOnce guarantees that
+		// .notifications won't be undefined.
+		if ((link.notifications || []).length > 0) {
+			submitComponentEvent({
+				component: {
+					componentType: NOTIFICATION_COMPONENT_TYPE,
+					id: link.id,
+					labels: link.notifications?.map((n) => n.ophanLabel),
+				},
+				action: 'INSERT',
+			});
+		}
+	}, [link.notifications, link.id]);
+
+	return (
+		<li css={liStyles} key={link.title} ref={setNode}>
+			<a
+				href={link.url}
+				css={[
+					linkStyles,
+					!!link.isActive && linkActive,
+					index === 0 && linkFirst,
+				]}
+				data-link-name={link.dataLinkName}
+			>
+				{link.title}
+				{link.notifications?.map((notification) => (
+					<NotificationMessage
+						notification={notification}
+						key={notification.id}
+					/>
+				))}
+			</a>
+
+			{!!link.notifications?.length && (
+				<div
+					css={css`
+						margin-top: 12px;
+						margin-right: 8px;
+					`}
+				>
+					<NotificationBadge diameter={22} />
+				</div>
+			)}
+		</li>
+	);
+};
+
 export const Dropdown = ({
 	id,
 	label,
@@ -350,43 +455,7 @@ export const Dropdown = ({
 								data-cy="dropdown-options"
 							>
 								{links.map((l, index) => (
-									<li css={liStyles} key={l.title}>
-										<a
-											href={l.url}
-											css={[
-												linkStyles,
-												!!l.isActive && linkActive,
-												index === 0 && linkFirst,
-											]}
-											data-link-name={l.dataLinkName}
-										>
-											{l.title}
-											{l.notifications?.map(
-												(notification) => (
-													<div
-														css={
-															notificationTextStyles
-														}
-													>
-														{notification}
-													</div>
-												),
-											)}
-										</a>
-
-										{!!l.notifications?.length && (
-											<div
-												css={css`
-													margin-top: 12px;
-													margin-right: 8px;
-												`}
-											>
-												<NotificationBadge
-													diameter={22}
-												/>
-											</div>
-										)}
-									</li>
+									<DropdownLink link={l} index={index} />
 								))}
 							</ul>
 						)}

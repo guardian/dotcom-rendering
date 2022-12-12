@@ -1,12 +1,13 @@
 import { ClassNames } from '@emotion/react';
-import React from 'react';
 import { NotRenderableInDCR } from '../../../lib/errors/not-renderable-in-dcr';
 import { ShowMoreButton } from '../ShowMoreButton';
 
-export const InteractiveBlockComponentAMP: React.FunctionComponent<{
+type Props = {
 	url?: string;
 	isMandatory?: boolean;
-}> = ({ url, isMandatory }) => {
+};
+
+export const InteractiveBlockComponentAMP = ({ url, isMandatory }: Props) => {
 	// If this element is mandatory, we don't know if we can render it properly, so we have to
 	// throw an error and chuck the whole page out of AMP. You're barred son.
 	if (isMandatory) {

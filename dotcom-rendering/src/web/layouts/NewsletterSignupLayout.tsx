@@ -115,7 +115,17 @@ const previewButtonWrapperStyle = css`
 const mainGraphicWrapperStyle = css`
 	border-radius: ${space[2]}px;
 	overflow: hidden;
-	margin: ${space[4]}px 0;
+	margin-bottom: ${space[4]}px;
+
+	margin-top: ${space[4]}px;
+
+	${from.desktop} {
+		margin-top: ${space[9]}px;
+	}
+
+	${from.leftCol} {
+		margin-top: ${space[2]}px;
+	}
 `;
 
 const previewCaptionStyle = css`
@@ -160,7 +170,17 @@ const shareSpanStyle = css`
 const shareDivStyle = css`
 	display: flex;
 	align-items: center;
-	margin-top: ${space[3]}px;
+	margin-top: ${space[4]}px;
+	margin-bottom: ${space[4]}px;
+`;
+
+const frequencyDivStyle = css`
+	margin-top: ${space[2]}px;
+	margin-bottom: ${space[2]}px;
+`;
+
+const regionalFocusDivStyle = css`
+	margin-bottom: ${space[2]}px;
 `;
 
 const getMainMediaCaptions = (
@@ -255,6 +275,10 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							!!CAPIArticle.config.switches.headerTopNav
 						}
 						isInEuropeTest={isInEuropeTest}
+						headerTopBarSearchCapiSwitch={
+							!!CAPIArticle.config.switches
+								.headerTopBarSearchCapiSwitch
+						}
 					/>
 				</Section>
 
@@ -370,9 +394,11 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<Column width={[1, 1, 5 / 8, 1 / 2, 1 / 2]}>
 							{showRegionalFocus && (
 								<Hide from="leftCol">
-									<NewsletterDetail
-										text={regionalFocusText}
-									/>
+									<div css={regionalFocusDivStyle}>
+										<NewsletterDetail
+											text={regionalFocusText}
+										/>
+									</div>
 								</Hide>
 							)}
 							<ArticleHeadline
@@ -402,24 +428,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									</LinkButton>
 								</div>
 							)}
-							{!!promotedNewsletter && (
-								<>
-									<SecureSignup
-										name={promotedNewsletter.name}
-										newsletterId={
-											promotedNewsletter.identityName
-										}
-										successDescription={
-											promotedNewsletter.successDescription
-										}
-										hidePrivacyMessage={true}
-									/>
 
-									<NewsletterFrequency
-										frequency={promotedNewsletter.frequency}
-									/>
-								</>
-							)}
 							<div css={shareDivStyle}>
 								<span css={shareSpanStyle}>
 									Tell your friends
@@ -437,6 +446,33 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									context="ArticleMeta"
 								/>
 							</div>
+
+							{!!promotedNewsletter && (
+								<>
+									<div css={frequencyDivStyle}>
+										<NewsletterFrequency
+											frequency={
+												promotedNewsletter.frequency
+											}
+										/>
+									</div>
+
+									<SecureSignup
+										name={promotedNewsletter.name}
+										newsletterId={
+											promotedNewsletter.identityName
+										}
+										successDescription={
+											promotedNewsletter.successDescription
+										}
+										hidePrivacyMessage={true}
+									/>
+
+									<Hide from="desktop">
+										<NewsletterPrivacyMessage />
+									</Hide>
+								</>
+							)}
 						</Column>
 
 						<Column width={[1, 1, 3 / 8, 1 / 2, 1 / 2]}>
@@ -473,9 +509,11 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</Column>
 					</Columns>
 
-					<div css={topMarginStyle()}>
-						<NewsletterPrivacyMessage />
-					</div>
+					<Hide until="desktop">
+						<div css={topMarginStyle()}>
+							<NewsletterPrivacyMessage />
+						</div>
+					</Hide>
 				</Section>
 
 				{CAPIArticle.onwards ? (

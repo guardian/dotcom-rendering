@@ -2,7 +2,9 @@ import { RelatedItemType } from '@guardian/apps-rendering-api-models/relatedItem
 import { ArticleElementRole } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import { none, some } from '@guardian/types';
+import { ImageSubtype } from 'image/image';
 import type { ResizedRelatedContent } from 'item';
+import { Optional } from 'optional';
 
 // ----- Fixture ----- //
 
@@ -20,6 +22,7 @@ const relatedContent: Option<ResizedRelatedContent> = some({
 			credit: none,
 			nativeCaption: none,
 			role: ArticleElementRole.Standard,
+			imageSubtype: Optional.some(ImageSubtype.Jpeg),
 		}),
 		some({
 			src: 'https://i.guim.co.uk/img/media/0a07335a59c78901e928275dd5288425345eb616/552_0_3012_1807/master/3012.jpg?width=500&quality=85&fit=bounds&s=8cf1c849c84eff7f4698ceb30f53d3de',
@@ -33,6 +36,7 @@ const relatedContent: Option<ResizedRelatedContent> = some({
 			credit: none,
 			nativeCaption: none,
 			role: ArticleElementRole.Standard,
+			imageSubtype: Optional.some(ImageSubtype.Jpeg),
 		}),
 		some({
 			src: 'https://i.guim.co.uk/img/media/d32dd6da3aad3a7e93f0bef8731865fad1655ce6/0_219_3788_2274/master/3788.jpg?width=500&quality=85&fit=bounds&s=6213a6cb2ada5e664b5191ecb7ee7f3b',
@@ -48,6 +52,7 @@ const relatedContent: Option<ResizedRelatedContent> = some({
 			credit: none,
 			nativeCaption: none,
 			role: ArticleElementRole.Standard,
+			imageSubtype: Optional.some(ImageSubtype.Jpeg),
 		}),
 		some({
 			src: 'https://i.guim.co.uk/img/media/2c278b1cbefa1755683ecb71c8fbfb3769300009/207_442_8162_4898/master/8162.jpg?width=500&quality=85&fit=bounds&s=82a12749eab81ae08041fe7188d44a92',
@@ -63,6 +68,7 @@ const relatedContent: Option<ResizedRelatedContent> = some({
 			credit: none,
 			nativeCaption: none,
 			role: ArticleElementRole.Standard,
+			imageSubtype: Optional.some(ImageSubtype.Jpeg),
 		}),
 	],
 	title: 'More on this story',

@@ -9,9 +9,11 @@ const imageStyles = css`
 	}
 `;
 
-export const ContributorAvatar: React.FC<{
+type Props = {
 	imageSrc: string;
 	imageAlt: string;
-}> = ({ imageSrc, imageAlt }) => {
+};
+
+export const ContributorAvatar = ({ imageSrc, imageAlt }: Props) => {
 	return <img src={imageSrc} alt={imageAlt} css={imageStyles} />;
 };

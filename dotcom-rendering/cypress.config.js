@@ -27,13 +27,6 @@ module.exports = defineConfig({
 	},
 	e2e: {
 		setupNodeEvents(on, config) {
-			on('before:browser:launch', (browser = {}, launchOptions) => {
-				// mute audio in Chrome when running headless
-				if (browser.family === 'chromium' && browser.isHeadless) {
-					launchOptions.args.push('--mute-audio');
-				}
-				return launchOptions;
-			});
 			return plugins(on, config);
 		},
 		baseUrl: 'http://localhost:9000/',

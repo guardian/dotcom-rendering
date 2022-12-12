@@ -4,14 +4,14 @@ import { AB } from '@guardian/ab-core';
 import isChromatic from 'chromatic/isChromatic';
 import MockDate from 'mockdate';
 
-import { getFontsCss } from '../../dotcom-rendering/src/lib/fonts-css';
+import { getFontsCss } from '../src/lib/fonts-css';
 
 import { resets } from '@guardian/source-foundations';
 
-import { Lazy } from '../../dotcom-rendering/src/web/components/Lazy';
-import { Picture } from '../../dotcom-rendering/src/web/components/Picture';
-import { mockRESTCalls } from '../../dotcom-rendering/src/web/lib/mockRESTCalls';
-import { setABTests } from '../../dotcom-rendering/src/web/lib/useAB';
+import { Lazy } from '../src/web/components/Lazy';
+import { Picture } from '../src/web/components/Picture';
+import { mockRESTCalls } from '../src/web/lib/mockRESTCalls';
+import { setABTests } from '../src/web/lib/useAB';
 
 // Prevent components being lazy rendered when we're taking Chromatic snapshots
 Lazy.disabled = isChromatic();
@@ -24,16 +24,15 @@ if (isChromatic()) {
 
 mockRESTCalls();
 
-setABTests({
-	api: new AB({
+setABTests(
+	new AB({
 		mvtMaxValue: 1_000_000,
 		mvtId: 1234,
 		pageIsSensitive: false,
 		abTestSwitches: {},
 		arrayOfTestObjects: [],
 	}),
-	participations: {},
-});
+);
 
 // Add base css for the site
 let css = `${getFontsCss()}${resets.resetCSS}`;
@@ -71,6 +70,13 @@ window.guardian = {
 setCookie({ name: 'bwid', value: 'mockBrowserId' });
 
 const guardianViewports = {
+	mobile: {
+		name: 'mobile',
+		styles: {
+			width: '320px',
+			height: '800px',
+		},
+	},
 	mobileMedium: {
 		name: 'mobileMedium',
 		styles: {
@@ -122,7 +128,7 @@ const guardianViewports = {
 	},
 };
 
-export const viewports = [375, 480, 660, 740, 980, 1140, 1300];
+export const viewports = [320, 375, 480, 660, 740, 980, 1140, 1300];
 
 export const parameters = {
 	viewport: {

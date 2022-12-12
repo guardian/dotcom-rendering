@@ -6,7 +6,6 @@ import {
 	neutral,
 	textSans,
 } from '@guardian/source-foundations';
-import React from 'react';
 import type { Link } from '../../lib/footer-links';
 import {
 	footerLinksNew,
@@ -137,10 +136,12 @@ const supportLink = css`
 
 const year = new Date().getFullYear();
 
-const FooterLinks: React.FC<{
+type FooterLinksProps = {
 	links: Link[][];
 	nav: NavType;
-}> = ({ links, nav }) => {
+};
+
+const FooterLinks = ({ links, nav }: FooterLinksProps) => {
 	const linkGroups = links.map((linkGroup) => {
 		const ls = linkGroup
 			.filter((l) => isOnPlatform(l, LinkPlatform.Amp))
@@ -177,7 +178,9 @@ const FooterLinks: React.FC<{
 	);
 };
 
-export const Footer: React.FC<{ nav: NavType }> = ({ nav }) => {
+type FooterProps = { nav: NavType };
+
+export const Footer = ({ nav }: FooterProps) => {
 	const { group } = useContentABTestGroup();
 	return (
 		<footer data-content-test-group={group} css={footer}>

@@ -115,7 +115,14 @@ const linksWithNotifications = [
 		url: '/billing',
 		title: 'Billing',
 		dataLinkName: 'billing',
-		notifications: ['Billing attempt failed'],
+		notifications: [
+			{
+				id: 'example-id',
+				message: 'Billing attempt failed',
+				target: 'billing',
+				ophanLabel: 'notification-label',
+			},
+		],
 	},
 ];
 

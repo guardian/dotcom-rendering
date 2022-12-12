@@ -28,20 +28,13 @@ type ElementCategoryAndIndex = {
 
 // ----- pure functions ---//
 
-function categoriseElement(
-	result: Result<string, BodyElement>,
-): ElementCategory {
-	if (!result.isOk()) {
-		// using result.isErr does not convince the compiler that result.value exists
-		return ElementCategory.Error;
-	}
-
-	switch (result.value.kind) {
+function categoriseElement(element: BodyElement): ElementCategory {
+	switch (element.kind) {
 		case ElementKind.HeadingThree:
 		case ElementKind.HeadingTwo:
 			return ElementCategory.Heading;
 		case ElementKind.Text: {
-			const { doc } = result.value;
+			const { doc } = element;
 			if (doc.textContent?.trim().length === 0) {
 				return ElementCategory.WhiteSpace;
 			}
@@ -203,7 +196,7 @@ function insertNewsletterIntoBody(
 		(insertIndex) => {
 			return Result.ok([
 				...body.slice(0, insertIndex),
-				Result.ok(newsletterSignUp),
+				newsletterSignUp,
 				...body.slice(insertIndex),
 			]);
 		},

@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { headline } from '@guardian/source-foundations';
-import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 import type { TagType } from '../../../types/tag';
 
@@ -13,22 +12,24 @@ const seriesStyle = (pillar: ArticleTheme) => css`
 	display: block;
 `;
 
-// Returns a series link if possible, and attempt to return a section link as a fallback if provided
-export const SeriesLink: React.FunctionComponent<{
+type Props = {
 	baseURL: string;
 	tags: TagType[];
 	fallbackToSection: boolean;
 	sectionLabel?: string; // required for fallback only
 	sectionUrl?: string; // required for fallback only
 	pillar: ArticleTheme;
-}> = ({
+};
+
+// Returns a series link if possible, and attempt to return a section link as a fallback if provided
+export const SeriesLink = ({
 	baseURL,
 	tags,
 	fallbackToSection,
 	sectionLabel,
 	sectionUrl,
 	pillar,
-}) => {
+}: Props) => {
 	const tag = tags.find((t) => t.type === 'Blog' || t.type === 'Series');
 
 	if (!tag && !fallbackToSection) {

@@ -534,6 +534,7 @@ export const WhenHorizontalAndOpinion = () => {
 						theme: ArticlePillar.Opinion,
 					}}
 					imagePosition="right"
+					supportingContentAlignment="horizontal"
 					supportingContent={[
 						{
 							...aBasicLink,
@@ -586,6 +587,7 @@ export const WhenNewsWithMoreThanTwoSublinks = () => {
 				{...basicCardProps}
 				imagePosition="right"
 				imageSize="large"
+				supportingContentAlignment="horizontal"
 				supportingContent={[
 					{
 						...aBasicLink,
@@ -633,6 +635,7 @@ export const WhenHorizontalOpinionWithSmallImage = () => {
 					}}
 					imagePosition="left"
 					imageSize="small"
+					supportingContentAlignment="horizontal"
 					supportingContent={[
 						{
 							...aBasicLink,
@@ -684,6 +687,7 @@ export const WhenHorizontalOpinionWithMediumImage = () => {
 					}}
 					imagePosition="left"
 					imageSize="medium"
+					supportingContentAlignment="horizontal"
 					supportingContent={[
 						{
 							...aBasicLink,
@@ -735,6 +739,7 @@ export const WhenHorizontalOpinionWithLargeImage = () => {
 					}}
 					imagePosition="left"
 					imageSize="large"
+					supportingContentAlignment="horizontal"
 					supportingContent={[
 						{
 							...aBasicLink,
@@ -786,6 +791,7 @@ export const WhenHorizontalOpinionWithJumboImage = () => {
 					}}
 					imagePosition="left"
 					imageSize="jumbo"
+					supportingContentAlignment="horizontal"
 					supportingContent={[
 						{
 							...aBasicLink,

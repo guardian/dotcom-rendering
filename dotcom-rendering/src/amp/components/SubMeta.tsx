@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { body, neutral, text, textSans } from '@guardian/source-foundations';
-import React from 'react';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../lib/pillars';
 import type { BaseLinkType } from '../../model/extract-nav';
 import CommentIcon from '../../static/icons/comment.svg';
@@ -108,7 +107,7 @@ const shareIcons = css`
 	padding-bottom: 30px;
 `;
 
-export const SubMeta: React.FC<{
+type Props = {
 	pillar: ArticleTheme;
 	sections: BaseLinkType[];
 	keywords: BaseLinkType[];
@@ -121,7 +120,9 @@ export const SubMeta: React.FC<{
 	pageID: string;
 	isCommentable: boolean;
 	guardianBaseURL: string;
-}> = ({
+};
+
+export const SubMeta = ({
 	pillar,
 	sections,
 	keywords,
@@ -129,7 +130,7 @@ export const SubMeta: React.FC<{
 	pageID,
 	isCommentable,
 	guardianBaseURL,
-}) => {
+}: Props) => {
 	const sectionListItems = sections.map((link) => (
 		<li css={itemStyle} key={link.url}>
 			<a

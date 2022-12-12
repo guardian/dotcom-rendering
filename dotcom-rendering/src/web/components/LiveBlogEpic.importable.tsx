@@ -52,7 +52,8 @@ const useCountryCode = () => {
 const useEpic = ({ url, name }: { url: string; name: string }) => {
 	// Using state here to store the Epic component that gets imported allows
 	// us to render it with React (instead of inserting it into the dom manually)
-	const [Epic, setEpic] = useState<React.FC<{ [key: string]: unknown }>>();
+	const [Epic, setEpic] =
+		useState<React.ElementType<{ [key: string]: unknown }>>();
 
 	useEffect(() => {
 		setAutomat();

@@ -29,18 +29,6 @@ Parameters:
     Type: CommaDelimitedList
     Description: (Optional) ARN of action to execute when notification alarms change state
     Default: ''
-  LatencyAlarmThreshold:
-    Type: String
-    Description: (Optional) Latency Threshold in seconds
-    Default: '0.5'
-  LatencyAlarmPeriod:
-    Type: String
-    Description: (Optional) Duration in seconds over which the latency is applied
-    Default: '60'
-  LatencyScalingEvaluationPeriods:
-    Type: String
-    Description: (Optional) Number of periods over which the latency is compared to the threshold before to scale up
-    Default: '1'
   Backend5XXAlarmThreshold:
     Type: String
     Description: (Optional) Max number of errors before the 5XX alarm is triggered
@@ -323,16 +311,16 @@ Resources:
     Condition: HasLatencyScalingAlarm
     Properties:
       AlarmDescription: !Sub |
-        Scale-Up if latency is greater than ${LatencyAlarmThreshold} seconds over ${LatencyScalingEvaluationPeriods} period(s) of ${LatencyAlarmPeriod} seconds
+        Scale-Up if latency is greater than 0.2 seconds over 1 period(s) of 60 seconds
       Dimensions:
       - Name: LoadBalancerName
         Value: !Ref InternalLoadBalancer
-      EvaluationPeriods: !Ref LatencyScalingEvaluationPeriods
+      EvaluationPeriods: '1'
       MetricName: Latency
       Namespace: AWS/ELB
-      Period: !Ref LatencyAlarmPeriod
+      Period: '60'
       Statistic: Average
-      Threshold: !Ref LatencyAlarmThreshold
+      Threshold: '0.2'
       ComparisonOperator: GreaterThanOrEqualToThreshold
       OKActions:
       - !Ref ScaleDownPolicy

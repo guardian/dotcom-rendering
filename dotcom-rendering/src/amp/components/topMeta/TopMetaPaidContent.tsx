@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { body, neutral, text, textSans } from '@guardian/source-foundations';
-import React from 'react';
 import { getAgeWarning } from '../../../lib/age-warning';
 import { getSoleContributor } from '../../../lib/byline';
 import { getSharingUrls } from '../../../lib/sharing-urls';
@@ -50,9 +49,11 @@ const paidForLogoStyle = css`
 	margin-bottom: 12px;
 `;
 
-const PaidForByLogo: React.FC<{
+type PaidForByLogoProps = {
 	branding: Branding;
-}> = ({ branding }) => {
+};
+
+const PaidForByLogo = ({ branding }: PaidForByLogoProps) => {
 	const { logo, sponsorName } = branding;
 
 	return (
@@ -75,14 +76,23 @@ const PaidForByLogo: React.FC<{
 	);
 };
 
-const Headline: React.FC<{
+type HeadlineProps = {
 	headlineText: string;
-}> = ({ headlineText }) => <h1 css={headerStyle}>{headlineText}</h1>;
+};
 
-export const TopMetaPaidContent: React.FC<{
+const Headline = ({ headlineText }: HeadlineProps) => (
+	<h1 css={headerStyle}>{headlineText}</h1>
+);
+
+type TopMetaPaidContentProps = {
 	articleData: ArticleModel;
 	pillar: ArticleTheme;
-}> = ({ articleData, pillar }) => (
+};
+
+export const TopMetaPaidContent = ({
+	articleData,
+	pillar,
+}: TopMetaPaidContentProps) => (
 	<header>
 		<PaidForBand />
 

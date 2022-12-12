@@ -29,11 +29,17 @@ const editionDropdown = css`
 	}
 `;
 
-export const EditionDropdown: React.FC<{
+type Props = {
 	editionId: EditionId;
 	dataLinkName: string;
 	isInEuropeTest: boolean;
-}> = ({ editionId, dataLinkName, isInEuropeTest }) => {
+};
+
+export const EditionDropdown = ({
+	editionId,
+	dataLinkName,
+	isInEuropeTest,
+}: Props) => {
 	const links = [
 		{
 			id: 'uk',

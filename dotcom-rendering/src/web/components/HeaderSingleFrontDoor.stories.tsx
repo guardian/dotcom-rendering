@@ -27,23 +27,8 @@ export const defaultStory = () => {
 			remoteHeader={false}
 			contributionsServiceUrl="https://contributions.guardianapis.com"
 			idApiUrl="https://idapi.theguardian.com"
+			headerTopBarSearchCapiSwitch={false}
 		/>
-
-		/*
-		<Header
-			editionId={front.editionId}
-			idUrl={front.config.idUrl}
-			mmaUrl={front.config.mmaUrl}
-			supporterCTA={
-				front.nav.readerRevenueLinks.header.supporter
-			}
-			discussionApiUrl={front.config.discussionApiUrl}
-			urls={front.nav.readerRevenueLinks.header}
-			remoteHeader={!!front.config.switches.remoteHeader}
-			contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
-			idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
-		/>
-		*/
 	);
 };
 defaultStory.story = { name: 'default' };

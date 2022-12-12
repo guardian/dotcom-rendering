@@ -306,6 +306,10 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											.headerTopNav
 									}
 									isInEuropeTest={isInEuropeTest}
+									headerTopBarSearchCapiSwitch={
+										!!CAPIArticle.config.switches
+											.headerTopBarSearchCapiSwitch
+									}
 								/>
 							</Section>
 							<Section

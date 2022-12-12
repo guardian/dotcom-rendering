@@ -1,13 +1,7 @@
 // ----- Imports ----- //
 import { Edition } from '@guardian/apps-rendering-api-models/edition';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDisplay } from '@guardian/libs';
 import { breakpoints } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
-import { none, some, withDefault } from '@guardian/types';
-import AnalysisLayout from 'components/Layout/AnalysisLayout';
-import Comment from 'components/Layout/CommentLayout';
-import Standard from 'components/Layout/StandardLayout';
+import { formatToString } from 'articleFormat';
 import {
 	analysis,
 	article,
@@ -20,6 +14,7 @@ import {
 	interview,
 	letter,
 	matchReport,
+	newsletterSignUp,
 	photoEssay,
 	printShop,
 	quiz,
@@ -27,250 +22,126 @@ import {
 	review,
 } from 'fixtures/item';
 import { deadBlog, live } from 'fixtures/live';
-import type { Item } from 'item';
 import type { ReactElement } from 'react';
-import { renderAll } from 'renderer';
-import { Result } from 'result';
+import AnalysisLayout from './AnalysisLayout';
+import CommentLayout from './CommentLayout';
 import GalleryLayout from './GalleryLayout';
 import ImmersiveLayout from './ImmersiveLayout';
 import LetterLayout from './LetterLayout';
-import Live from './LiveLayout';
-
-// ----- Functions ----- //
-
-const formatFromItem = (
-	item: Item,
-	forceDisplay: Option<ArticleDisplay>,
-): ArticleFormat => ({
-	theme: item.theme,
-	design: item.design,
-	display: withDefault(item.display)(forceDisplay),
-});
+import LiveLayout from './LiveLayout';
+import NewsletterSignUpLayout from './NewsletterSignUpLayout';
+import StandardLayout from './StandardLayout';
 
 // ----- Stories ----- //
 
-export const Article = (): React.ReactNode => {
-	return (
-		<Standard item={article}>
-			{renderAll(
-				formatFromItem(article, some(ArticleDisplay.Standard)),
-				Result.partition(article.body).oks,
-			)}
-		</Standard>
-	);
-};
-Article.story = { name: 'Article' };
+export const Standard = (): ReactElement => <StandardLayout item={article} />;
+Standard.story = { name: formatToString(article) };
 
-export const Review = (): React.ReactNode => {
-	return (
-		<Standard item={review}>
-			{renderAll(
-				formatFromItem(review, some(ArticleDisplay.Standard)),
-				Result.partition(review.body).oks,
-			)}
-		</Standard>
-	);
-};
-Review.story = { name: 'Review' };
+export const Review = (): ReactElement => <StandardLayout item={review} />;
+Review.story = { name: formatToString(review) };
 
-export const MatchReport = (): React.ReactNode => {
-	return (
-		<Standard item={matchReport}>
-			{renderAll(
-				formatFromItem(matchReport, some(ArticleDisplay.Standard)),
-				Result.partition(matchReport.body).oks,
-			)}
-		</Standard>
-	);
-};
-MatchReport.story = { name: 'Match Report' };
+export const MatchReport = (): ReactElement => (
+	<StandardLayout item={matchReport} />
+);
+MatchReport.story = { name: formatToString(matchReport) };
 
-export const PrintShop = (): React.ReactNode => {
-	return (
-		<Standard item={printShop}>
-			{renderAll(
-				formatFromItem(printShop, some(ArticleDisplay.Standard)),
-				Result.partition(printShop.body).oks,
-			)}
-		</Standard>
-	);
-};
-PrintShop.story = { name: 'PrintShop' };
+export const PrintShop = (): ReactElement => (
+	<StandardLayout item={printShop} />
+);
+PrintShop.story = { name: formatToString(printShop) };
 
-export const PhotoEssay = (): React.ReactNode => {
-	return (
-		<Standard item={photoEssay}>
-			{renderAll(
-				formatFromItem(photoEssay, some(ArticleDisplay.Standard)),
-				Result.partition(photoEssay.body).oks,
-			)}
-		</Standard>
-	);
-};
-PhotoEssay.story = { name: 'Photo Essay' };
+export const PhotoEssay = (): ReactElement => (
+	<StandardLayout item={photoEssay} />
+);
+PhotoEssay.story = { name: formatToString(photoEssay) };
 
-export const Feature = (): React.ReactNode => {
-	return (
-		<Standard item={feature}>
-			{renderAll(
-				formatFromItem(feature, some(ArticleDisplay.Standard)),
-				Result.partition(feature.body).oks,
-			)}
-		</Standard>
-	);
-};
-Feature.story = { name: 'Feature' };
+export const Feature = (): ReactElement => <StandardLayout item={feature} />;
+Feature.story = { name: formatToString(feature) };
 
-export const Interview = (): React.ReactNode => {
-	return (
-		<Standard item={interview}>
-			{renderAll(
-				formatFromItem(interview, some(ArticleDisplay.Standard)),
-				Result.partition(interview.body).oks,
-			)}
-		</Standard>
-	);
-};
-Interview.story = { name: 'Interview' };
+export const Interview = (): ReactElement => (
+	<StandardLayout item={interview} />
+);
+Interview.story = { name: formatToString(interview) };
 
-export const Quiz = (): React.ReactNode => {
-	return (
-		<Standard item={quiz}>
-			{renderAll(
-				formatFromItem(quiz, some(ArticleDisplay.Standard)),
-				Result.partition(quiz.body).oks,
-			)}
-		</Standard>
-	);
-};
-Quiz.story = { name: 'Quiz' };
+export const Quiz = (): ReactElement => <StandardLayout item={quiz} />;
+Quiz.story = { name: formatToString(quiz) };
 
-export const Recipe = (): React.ReactNode => {
-	return (
-		<Standard item={recipe}>
-			{renderAll(
-				formatFromItem(recipe, some(ArticleDisplay.Standard)),
-				Result.partition(recipe.body).oks,
-			)}
-		</Standard>
-	);
-};
-Recipe.story = { name: 'Recipe' };
+export const Recipe = (): ReactElement => <StandardLayout item={recipe} />;
+Recipe.story = { name: formatToString(recipe) };
 
-export const CommentItem = (): React.ReactNode => {
-	return (
-		<Comment item={comment}>
-			{renderAll(
-				formatFromItem(comment, some(ArticleDisplay.Standard)),
-				Result.partition(comment.body).oks,
-			)}
-		</Comment>
-	);
-};
-CommentItem.story = { name: 'Comment' };
+export const Comment = (): ReactElement => <CommentLayout item={comment} />;
+Comment.story = { name: formatToString(comment) };
 
-export const Letter = (): React.ReactNode => {
-	return (
-		<LetterLayout item={letter}>
-			{renderAll(
-				formatFromItem(letter, some(ArticleDisplay.Standard)),
-				Result.partition(letter.body).oks,
-			)}
-		</LetterLayout>
-	);
-};
-Letter.story = { name: 'Letter' };
+export const Letter = (): ReactElement => <LetterLayout item={letter} />;
+Letter.story = { name: formatToString(letter) };
 
-export const Editorial = (): React.ReactNode => {
-	return (
-		<Comment item={editorial}>
-			{renderAll(
-				formatFromItem(editorial, some(ArticleDisplay.Standard)),
-				Result.partition(editorial.body).oks,
-			)}
-		</Comment>
-	);
-};
-Editorial.story = { name: 'Editorial' };
+export const Editorial = (): ReactElement => <CommentLayout item={editorial} />;
+Editorial.story = { name: formatToString(editorial) };
 
-export const Analysis = (): React.ReactNode => {
-	return (
-		<AnalysisLayout item={analysis}>
-			{renderAll(
-				formatFromItem(analysis, some(ArticleDisplay.Standard)),
-				Result.partition(analysis.body).oks,
-			)}
-		</AnalysisLayout>
-	);
-};
-Analysis.story = { name: 'Analysis' };
+export const Analysis = (): ReactElement => <AnalysisLayout item={analysis} />;
+Analysis.story = { name: formatToString(analysis) };
 
-export const Explainer = (): React.ReactNode => {
-	return (
-		<Standard item={explainer}>
-			{renderAll(
-				formatFromItem(explainer, some(ArticleDisplay.Standard)),
-				Result.partition(explainer.body).oks,
-			)}
-		</Standard>
-	);
-};
-Explainer.story = { name: 'Explainer' };
+export const Explainer = (): ReactElement => (
+	<StandardLayout item={explainer} />
+);
+Explainer.story = { name: formatToString(explainer) };
 
 export const LiveBlog = (): ReactElement => (
-	<Live
+	<LiveLayout
 		item={{
 			...live,
-			display: ArticleDisplay.Standard,
 			edition: Edition.US,
 		}}
 	/>
 );
-LiveBlog.story = { name: 'LiveBlog ' };
+LiveBlog.story = { name: formatToString(live) };
 
 export const DeadBlog = (): ReactElement => (
-	<Live
+	<LiveLayout
 		item={{
 			...deadBlog,
-			display: ArticleDisplay.Standard,
 			edition: Edition.AU,
 		}}
 	/>
 );
-DeadBlog.story = { name: 'DeadBlog ' };
+DeadBlog.story = { name: formatToString(deadBlog) };
+
+export const NewsletterSignup = (): ReactElement => (
+	<>
+		<style>
+			{`.js-signup-form-container {
+			display:block !important;
+		}`}
+		</style>
+		<NewsletterSignUpLayout item={newsletterSignUp} />
+	</>
+);
+NewsletterSignup.story = { name: formatToString(newsletterSignUp) };
+
+export const NewsletterSignupFallback = (): ReactElement => (
+	<>
+		<style>
+			{`.js-signup-form-fallback-container {
+			display:block !important;
+		}`}
+		</style>
+		<NewsletterSignUpLayout item={newsletterSignUp} />
+	</>
+);
+NewsletterSignupFallback.story = {
+	name: `${formatToString(newsletterSignUp)} (form component not supported)`,
+};
+
+export const Gallery = (): ReactElement => <GalleryLayout item={gallery} />;
+Gallery.story = { name: formatToString(gallery) };
 
 export const Immersive = (): ReactElement => (
-	<ImmersiveLayout
-		item={{
-			...immersive,
-			edition: Edition.UK,
-		}}
-	>
-		{renderAll(
-			formatFromItem(immersive, none),
-			Result.partition(immersive.body).oks,
-		)}
-	</ImmersiveLayout>
+	<ImmersiveLayout item={immersive} />
 );
-Immersive.story = { name: 'Immersive ' };
-
-export const Gallery = (): ReactElement => (
-	<GalleryLayout
-		item={{
-			...gallery,
-			edition: Edition.UK,
-		}}
-	>
-		{renderAll(
-			formatFromItem(gallery, none),
-			Result.partition(gallery.body).oks,
-		)}
-	</GalleryLayout>
-);
-Gallery.story = { name: 'Gallery ' };
+Immersive.story = { name: formatToString(immersive) };
 
 export default {
-	title: 'AR/Layouts/Standard',
+	title: 'AR/Layout',
 	parameters: {
 		layout: 'fullscreen',
 		chromatic: {

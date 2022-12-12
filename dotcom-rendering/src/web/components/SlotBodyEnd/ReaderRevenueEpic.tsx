@@ -42,6 +42,8 @@ type EpicProps = {
 	// Also anything specified by support-dotcom-components
 };
 
+type EpicType = React.ElementType<EpicProps>;
+
 const wrapperMargins = css`
 	margin: 18px 0;
 	clear: both;
@@ -152,7 +154,7 @@ export const ReaderRevenueEpic = ({
 	hasConsentForArticleCount,
 	stage,
 }: EpicConfig) => {
-	const [Epic, setEpic] = useState<React.FC<EpicProps>>();
+	const [Epic, setEpic] = useState<EpicType>();
 
 	const openCmp = () => {
 		cmp.showPrivacyManager();
@@ -166,7 +168,7 @@ export const ReaderRevenueEpic = ({
 
 		window
 			.guardianPolyfilledImport(module.url)
-			.then((epicModule: { ContributionsEpic: React.FC<EpicProps> }) => {
+			.then((epicModule: { ContributionsEpic: EpicType }) => {
 				modulePerf.end();
 				setEpic(() => epicModule.ContributionsEpic); // useState requires functions to be wrapped
 			})
