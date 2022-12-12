@@ -1,5 +1,6 @@
 import type { ABTest } from '@guardian/ab-core';
 import { abTestTest } from './tests/ab-test-test';
+import { billboardsInMerch } from './tests/billboards-in-merch';
 import { consentlessAds } from './tests/consentless-ads';
 import { integrateIma } from './tests/integrate-ima';
 import { liveblogDesktopOutstream } from './tests/liveblog-desktop-outstream';
@@ -25,4 +26,5 @@ export const tests: ABTest[] = [
 	removePrebidA9Canada,
 	liveblogDesktopOutstream,
 	teadsCookieless,
+	billboardsInMerch,
 ];

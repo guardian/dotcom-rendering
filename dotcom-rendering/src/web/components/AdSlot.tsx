@@ -370,43 +370,61 @@ export const AdSlot = ({
 		case 'merchandising-high': {
 			return (
 				<div
-					id="dfp-ad--merchandising-high"
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						'ad-slot--merchandising-high',
-					].join(' ')}
 					css={[
-						merchandisingAdStyles,
+						css`
+							display: flex;
+							justify-content: center;
+						`,
 						adStyles,
-						fluidFullWidthAdStyles,
 					]}
-					data-link-name="ad slot merchandising-high"
-					data-name="merchandising-high"
-					aria-hidden="true"
-					data-label="false"
-				/>
+				>
+					<div
+						id="dfp-ad--merchandising-high"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--merchandising-high',
+						].join(' ')}
+						css={[
+							merchandisingAdStyles,
+							adStyles,
+							fluidFullWidthAdStyles,
+						]}
+						data-link-name="ad slot merchandising-high"
+						data-name="merchandising-high"
+						aria-hidden="true"
+					/>
+				</div>
 			);
 		}
 		case 'merchandising': {
 			return (
 				<div
-					id="dfp-ad--merchandising"
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						'ad-slot--merchandising',
-					].join(' ')}
 					css={[
-						merchandisingAdStyles,
+						css`
+							display: flex;
+							justify-content: center;
+						`,
 						adStyles,
-						fluidFullWidthAdStyles,
 					]}
-					data-link-name="ad slot merchandising"
-					data-name="merchandising"
-					aria-hidden="true"
-					data-label="false"
-				/>
+				>
+					<div
+						id="dfp-ad--merchandising"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--merchandising',
+						].join(' ')}
+						css={[
+							merchandisingAdStyles,
+							adStyles,
+							fluidFullWidthAdStyles,
+						]}
+						data-link-name="ad slot merchandising"
+						data-name="merchandising"
+						aria-hidden="true"
+					/>
+				</div>
 			);
 		}
 		case 'survey': {
