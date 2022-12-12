@@ -73,6 +73,9 @@ const expandingWrapperDarkTheme = {
 	collapseBackground: neutral[10],
 	collapseText: neutral[86],
 };
+const userFeedbackDarkTheme = {
+	textError: error[500],
+};
 
 export const darkTheme = {
 	label: labelDarkTheme,
@@ -81,6 +84,7 @@ export const darkTheme = {
 	select: selectDarkTheme,
 	radio: radioDarkTheme,
 	expander: expandingWrapperDarkTheme,
+	userFeedback: userFeedbackDarkTheme,
 };
 
 const getPrefersDark = (): boolean => {

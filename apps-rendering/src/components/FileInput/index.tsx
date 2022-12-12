@@ -3,11 +3,10 @@ import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	error as errorStyle,
-	textSans,
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { InlineError, Label } from '@guardian/source-react-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { stringifyFileBase64 } from './stringifyFileBase64';
@@ -24,17 +23,23 @@ interface FileInputProps {
 		id: string,
 		data: string | string[] | undefined,
 	) => void;
+	error?: string;
 }
 
 const FileInput = ({
 	formField,
 	format,
 	setFieldInFormData,
+	error,
 }: FileInputProps): ReactElement => {
 	const { id, name, mandatory, label, description } = formField;
 
 	const [chosenFile, setChosenFile] = useState<null | string>();
-	const [error, setError] = useState('');
+	const [fileError, setFileError] = useState(error);
+
+	useEffect(() => {
+		setFileError(error);
+	}, [error])
 
 	const getFileName = (filepath?: string): string =>
 		filepath?.split(/(\\|\/)/g).pop() ?? '';
@@ -44,14 +49,14 @@ const FileInput = ({
 	): Promise<void> => {
 		setChosenFile(event.target.value);
 		if (event.target.files?.[0]) {
-			setError('');
+			setFileError('');
 			try {
 				const stringifiedFile = await stringifyFileBase64(
 					event.target.files[0],
 				);
 				setFieldInFormData(id, stringifiedFile);
 			} catch (e) {
-				setError(
+				setFileError(
 					'Sorry there was a problem with the file you uploaded above. Check the size and type. We only accept images, pdfs and .doc or .docx files',
 				);
 			}
@@ -73,17 +78,16 @@ const FileInput = ({
 				optional={!mandatory}
 				cssOverrides={fieldLabelStyles}
 			>
-				{error && (
+				{fileError && (
 					<InlineError
 						cssOverrides={css`
-							${textSans.small()};
 							color: ${errorStyle[400]};
 							${darkModeCss`
 				color: ${errorStyle[500]};
 			`}
 						`}
 					>
-						{error}
+						{fileError}
 					</InlineError>
 				)}
 

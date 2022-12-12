@@ -9,6 +9,7 @@ import {
 	neutral,
 	remSpace,
 	until,
+	error,
 } from '@guardian/source-foundations';
 import { darkModeCss } from 'styles';
 
@@ -149,14 +150,16 @@ export const fieldInput = css`
 	margin-bottom: ${remSpace[4]};
 `;
 
-export const textareaStyles = css`
+export const textareaStyles = (hasError: boolean): SerializedStyles => css`
 	// Source textarea doesn't have theming
 	${fieldInput}
+	border:  ${hasError ? `4px solid ${error[400]}` : `2px solid${neutral[46]}`};
 
 	background-color: ${neutral[100]};
 	color: ${neutral[7]};
 	${darkModeCss`
 		background-color: ${neutral[7]};
 		color: ${neutral[97]};
+		border:  ${hasError ? `4px solid ${error[500]}` : `2px solid${neutral[46]}`};
 	`}
 `;

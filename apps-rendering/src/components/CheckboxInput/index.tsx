@@ -10,6 +10,7 @@ interface CheckboxInputProps {
 		id: string,
 		data: string | string[] | undefined,
 	) => void;
+	error?: string;
 	cssOverrides?: SerializedStyles;
 }
 
@@ -17,6 +18,7 @@ const CheckboxInput = ({
 	formField,
 	formData,
 	setFieldInFormData,
+	error,
 	cssOverrides,
 }: CheckboxInputProps): ReactElement => {
 	const { label, name, options, description, id } = formField;
@@ -27,6 +29,7 @@ const CheckboxInput = ({
 			name={name}
 			supporting={description}
 			cssOverrides={cssOverrides}
+			error={error}
 		>
 			{options.map((option) => {
 				const selectedCheckboxes = id in formData ? formData[id] : [];

@@ -14,6 +14,7 @@ import RadioInput from 'components/RadioInput';
 import type { FC, ReactElement } from 'react';
 import { logger } from '../../logger';
 import { fieldInput, textareaStyles } from './styles';
+import type { ValidationErrors } from './calloutForm';
 
 const infoStyles = css`
 	${textSans.small()};
@@ -56,6 +57,7 @@ type FormFieldProp = {
 		data: string | string[] | undefined,
 	) => void;
 	format: ArticleFormat;
+	validationErrors: ValidationErrors;
 };
 
 export const FormField: FC<FormFieldProp> = ({
@@ -64,11 +66,13 @@ export const FormField: FC<FormFieldProp> = ({
 	formData,
 	setFieldInFormData,
 	format,
+	validationErrors,
 }) => {
 	const { type, label, description, mandatory, options, id } = formField;
 	const name = `field_${type}_${id}`;
 	const fieldValue =
 		formField.id in formData ? (formData[formField.id] as string) : '';
+	const fieldError = validationErrors?.[formField.id]
 
 	const selectOptions = options.map(({ value, label }) => {
 		return (
@@ -98,6 +102,7 @@ export const FormField: FC<FormFieldProp> = ({
 					onChange={(e): void =>
 						setFieldInFormData(formField.id, e.target.value)
 					}
+					error={fieldError}
 				/>
 			);
 		case 'textarea':
@@ -105,12 +110,13 @@ export const FormField: FC<FormFieldProp> = ({
 				<TextArea
 					name={name}
 					label={label}
-					cssOverrides={textareaStyles}
+					cssOverrides={textareaStyles(!!fieldError)}
 					optional={!mandatory}
 					value={fieldValue}
 					onChange={(e): void =>
 						setFieldInFormData(formField.id, e.target.value)
 					}
+					error={fieldError}
 				/>
 			);
 		case 'file':
@@ -119,6 +125,7 @@ export const FormField: FC<FormFieldProp> = ({
 					formField={formField}
 					format={format}
 					setFieldInFormData={setFieldInFormData}
+					error={fieldError}
 				/>
 			);
 		case 'radio':
@@ -127,6 +134,7 @@ export const FormField: FC<FormFieldProp> = ({
 					formField={formField}
 					formData={formData}
 					setFieldInFormData={setFieldInFormData}
+					error={fieldError}
 				/>
 			);
 		case 'checkbox':
@@ -136,6 +144,7 @@ export const FormField: FC<FormFieldProp> = ({
 					formData={formData}
 					setFieldInFormData={setFieldInFormData}
 					cssOverrides={fieldInput}
+					error={fieldError}
 				/>
 			);
 		case 'select':
@@ -152,6 +161,7 @@ export const FormField: FC<FormFieldProp> = ({
 					onChange={(e): void =>
 						setFieldInFormData(formField.id, e.target.value)
 					}
+					error={fieldError}
 				>
 					{selectOptions}
 				</Select>

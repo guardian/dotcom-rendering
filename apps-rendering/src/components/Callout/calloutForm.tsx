@@ -20,12 +20,14 @@ export interface CalloutFormProps {
 }
 
 type FormDataType = Record<string, string | string[]>;
+export type ValidationErrors = { [key in string]: string };
 
 const CALLOUT_URL =
 	'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit';
 
 const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 	const [formData, setFormData] = useState<{ [key in string]: any }>({});
+	const [ validationErrors, setValidationErrors] = useState<ValidationErrors>({})
 	const [submissionError, setSubmissionError] = useState<string>('');
 	const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
 
@@ -38,9 +40,24 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 			[id]: data,
 		});
 
+	const validateForm = () => {
+		const errors: ValidationErrors = {};
+		fields.forEach((field: FormFieldType) => {
+			if (field.mandatory && !formData[field.id]) {
+				errors[field.id] = 'This field is required';
+				// check email and phone number, number fields are valid
+			}
+		})
+		setValidationErrors(errors);
+		return Object.keys(errors).length === 0;
+	}
+
 	const onSubmit = async (formData: FormDataType): Promise<void> => {
 		// Reset error for new submission attempt
 		setSubmissionError('');
+		const isValid = validateForm();
+		if (!isValid) return;
+
 
 		// need to add prefix `field_` to all keys in form
 		const formDataWithFieldPrefix = Object.keys(formData).reduce(
@@ -93,6 +110,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 						console.log('*** formData', formData);
 						await onSubmit(formData);
 					}}
+					noValidate
 				>
 					<ShareLink format={format} />
 					<Disclaimer />
@@ -106,6 +124,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 								formData={formData}
 								setFieldInFormData={setFieldInFormData}
 								format={format}
+								validationErrors={validationErrors}
 							/>
 						))}
 						<div>

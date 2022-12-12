@@ -7,6 +7,7 @@ interface RadioInputProps {
 	formField: FormField;
 	formData: { [key in string]: any };
 	setFieldInFormData: (id: string, data: string | undefined) => void;
+	error?: string;
 	cssOverrides?: SerializedStyles;
 }
 
@@ -14,6 +15,7 @@ const RadioInput = ({
 	formField,
 	formData,
 	setFieldInFormData,
+	error,
 	cssOverrides,
 }: RadioInputProps): ReactElement => {
 	const { name, options, id, label, description } = formField;
@@ -26,6 +28,7 @@ const RadioInput = ({
 			label={label}
 			supporting={description}
 			id={name}
+			error={error}
 		>
 			{options.map((option) => (
 				<Radio

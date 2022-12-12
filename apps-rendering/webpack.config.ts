@@ -2,7 +2,7 @@
 
 import type { ChildProcess } from 'child_process';
 import { fork } from 'child_process';
-import { createHash } from 'crypto';
+// import { createHash } from 'crypto';
 import path from 'path';
 import CleanCSS from 'clean-css';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -205,8 +205,8 @@ export const clientConfig: Configuration = {
 const assetsTemplateCss = new CleanCSS()
 	.minify(renederedItemsAssetsCss)
 	.styles.trim();
-const assetHash = (asset: string): string =>
-	createHash('sha256').update(asset).digest('base64');
+// const assetHash = (asset: string): string =>
+// 	createHash('sha256').update(asset).digest('base64');
 
 const clientConfigProduction = {
 	...clientConfig,
@@ -217,12 +217,12 @@ const clientConfigProduction = {
 		new WebpackManifestPlugin({}),
 		new HtmlWebpackPlugin({
 			meta: {
-				'Content-Security-Policy': {
-					'http-equiv': 'Content-Security-Policy',
-					content: `style-src 'sha256-${assetHash(
-						assetsTemplateCss,
-					)}';`,
-				},
+				// 'Content-Security-Policy': {
+				// 	'http-equiv': 'Content-Security-Policy',
+				// 	content: `style-src 'sha256-${assetHash(
+				// 		assetsTemplateCss,
+				// 	)}';`,
+				// },
 			},
 			filename: 'rendered-items-assets.html',
 			template: path.resolve(

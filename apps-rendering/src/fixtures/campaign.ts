@@ -35,7 +35,7 @@ const mockCampaign = {
 				label: 'If you are happy to, please upload a photo of yourself',
 				name: 'if_you_are_happy_to_please_upload_a_photo_of_yourself',
 				type: 'file',
-				mandatory: false,
+				mandatory: true,
 				options: [],
 			},
 			{
