@@ -10,6 +10,7 @@ import {
 import { removePrebidA9Canada } from './tests/remove-prebid-a9-canada';
 import { signInGateMainControl } from './tests/sign-in-gate-main-control';
 import { signInGateMainVariant } from './tests/sign-in-gate-main-variant';
+import { teadsCookieless } from './tests/teads-cookieless';
 
 // keep in sync with ab-tests in frontend
 // https://github.com/guardian/frontend/tree/main/static/src/javascripts/projects/common/modules/experiments/ab-tests.ts
@@ -23,4 +24,5 @@ export const tests: ABTest[] = [
 	integrateIma,
 	removePrebidA9Canada,
 	liveblogDesktopOutstream,
+	teadsCookieless,
 ];
