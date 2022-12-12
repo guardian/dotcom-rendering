@@ -1,17 +1,15 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import type { Tag } from '@guardian/content-api-models/v1/tag';
+import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
+import type { ArticleFormat } from '@guardian/libs';
+import { from, remSpace } from '@guardian/source-foundations';
 import { AgeWarning } from '@guardian/source-react-components-development-kitchen';
 import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
-import { isComment, isNews } from 'item';
-import { from } from '@guardian/source-foundations';
-import { articleWidthStyles, wideContentWidth } from 'styles';
-import type { ArticleFormat } from '@guardian/libs';
-import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
-import { remSpace } from '@guardian/source-foundations';
-
 import { grid } from 'grid/grid';
+import { isComment, isNews } from 'item';
+import { articleWidthStyles, wideContentWidth } from 'styles';
 
 interface WithAgeWarningProps {
 	tags: Tag[];

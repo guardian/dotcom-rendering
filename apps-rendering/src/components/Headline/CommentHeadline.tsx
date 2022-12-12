@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
 import { from, headline, remSpace } from '@guardian/source-foundations';
 import DesignTag from 'components/DesignTag';
-import { getFormat, Item } from 'item';
+import type { Item } from 'item';
+import { getFormat } from 'item';
 import { DefaultHeadline, defaultStyles } from './Headline.defaults';
 
 const commentStyles = css`

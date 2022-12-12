@@ -13,7 +13,6 @@ import {
 import { map, withDefault } from '@guardian/types';
 import { pillarToId, themeToPillar } from 'articleFormat';
 import Body from 'components/ArticleBody';
-
 import Epic from 'components/Epic';
 import FootballScores from 'components/FootballScores';
 import Footer from 'components/Footer';
