@@ -22,39 +22,6 @@ import {
  * ' ' | '_'      => text / trail / supporting content
  */
 
-/* .___________________________________.
- * |         ##########################|
- * |         ###########(^)>###########|
- * |         ###########(_)############|
- * |         ##########################|
- * |_________##########################|
- */
-export const Card100 = ({
-	cards,
-	containerPalette,
-	showAge,
-}: {
-	cards: TrailType[];
-	containerPalette?: DCRContainerPalette;
-	showAge?: boolean;
-}) => {
-	const card100 = cards.slice(0, 1);
-
-	return (
-		<UL>
-			{card100.map((trail) => (
-				<LI padSides={true}>
-					<Card100Media75
-						trail={trail}
-						containerPalette={containerPalette}
-						showAge={showAge}
-					/>
-				</LI>
-			))}
-		</UL>
-	);
-};
-
 /* ._________________._________________.
  * |#################|#################|
  * |#################|#################|
