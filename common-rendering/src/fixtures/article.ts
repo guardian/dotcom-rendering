@@ -22,6 +22,8 @@ export const getAllThemes = (format: {
 };
 
 export const getThemeNameAsString = (format: ArticleFormat): string => {
-	// @ts-expect-error -- ArticleFormat.theme is a union of ArticlePillar and ArticleSpecial, one of these lookups will return a valid name
-	return ArticlePillar[format.theme] ?? ArticleSpecial[format.theme];
+	const themeName =
+		ArticlePillar[format.theme] ?? ArticleSpecial[format.theme];
+	if (!themeName) throw new Error('Unknown theme');
+	return themeName;
 };
