@@ -5,6 +5,7 @@ import {
 	space,
 	textSans,
 } from '@guardian/source-foundations';
+import { InlineSuccess } from '@guardian/source-react-components';
 import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
 import type { CalloutBlockElementV2 } from 'src/types/content';
@@ -28,7 +29,6 @@ const ruleStyles = css`
 `;
 
 const wrapperStyles = css`
-	margin-bottom: ${space[6]}px;
 	padding-left: ${space[2]}px;
 	padding-right: ${space[2]}px;
 	background-color: ${neutral[97]};
@@ -196,9 +196,11 @@ export const CalloutBlockComponent = ({
 				</summary>
 				<CalloutShare format={format} />
 				<div css={submissionSuccessStyles}>
-					Thank you, your story has been submitted successfully. One
-					of our journalists will be in touch if we wish to take your
-					submission further.
+					<InlineSuccess>
+						Thank you, your story has been submitted successfully.
+						One of our journalists will be in touch if we wish to
+						take your submission further.
+					</InlineSuccess>
 				</div>
 			</details>
 		);

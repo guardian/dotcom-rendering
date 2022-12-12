@@ -175,7 +175,7 @@ export const Form = ({
 			onSubmit={(e) => {
 				e.preventDefault();
 				const errors: { [key in string]: string } = {};
-
+				setValidationErrors(errors);
 				formFields.forEach((field: CampaignFieldType) => {
 					if (field.required) {
 						if (formData[field.id] == undefined) {
