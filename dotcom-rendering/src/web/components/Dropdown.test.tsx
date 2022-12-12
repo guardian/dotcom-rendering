@@ -1,7 +1,8 @@
 import { fireEvent, render } from '@testing-library/react';
+import { HeaderLink } from '../../types/header';
 import { Dropdown } from './Dropdown';
 
-const links = [
+const links: [HeaderLink, HeaderLink, HeaderLink, HeaderLink] = [
 	{
 		id: 'uk',
 		url: '/preference/edition/uk',

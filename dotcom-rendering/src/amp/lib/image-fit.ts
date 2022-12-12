@@ -3,7 +3,7 @@ import type { Image, ImageSource, SrcSetItem } from '../../types/content';
 export const bestFitImage = (
 	images: ImageSource[],
 	containerWidth: number,
-): SrcSetItem => {
+): SrcSetItem | undefined => {
 	const srcSets: SrcSetItem[] = images.reduce(
 		(acc: SrcSetItem[], curr: ImageSource) => acc.concat(curr.srcSet),
 		[],

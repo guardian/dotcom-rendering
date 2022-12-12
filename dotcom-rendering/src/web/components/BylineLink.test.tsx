@@ -1,6 +1,7 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
 import { getContributorTagsForToken } from '../../lib/byline';
+import { TagType } from '../../types/tag';
 import { bylineAsTokens, BylineLink } from './BylineLink';
 
 describe('bylineAsTokens', () => {
@@ -79,7 +80,7 @@ describe('bylineAsTokens', () => {
 describe('BylineLink', () => {
 	it('should link a single tag by linking name tokens with Contributor tag titles', () => {
 		const byline = 'Eva Smith and friends';
-		const tags = [
+		const tags: [TagType] = [
 			{
 				id: 'eva-smith',
 				type: 'Contributor',
@@ -108,7 +109,7 @@ describe('BylineLink', () => {
 
 	it('should link multiple tags by linking name tokens with Contributor tag titles', () => {
 		const byline = 'Eva Smith and Duncan Campbell';
-		const tags = [
+		const tags: [TagType, TagType] = [
 			{
 				id: 'eva-smith',
 				type: 'Contributor',
@@ -142,7 +143,7 @@ describe('BylineLink', () => {
 
 	it('should not reuse a contributor tag, to successfully disambiguate identical names', () => {
 		const byline = 'Duncan Campbell and Duncan Campbell';
-		const tags = [
+		const tags: [TagType, TagType] = [
 			{
 				id: 'duncan-campbell',
 				type: 'Contributor',

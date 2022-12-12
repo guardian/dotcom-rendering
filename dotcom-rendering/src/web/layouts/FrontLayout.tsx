@@ -289,8 +289,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					const trails = collection.curated.concat(
 						collection.backfill,
 					);
+					const [trail] = trails;
+
 					// There are some containers that have zero trails. We don't want to render these
-					if (trails.length === 0) return null;
+					if (!trail) return null;
 
 					const ophanName = ophanComponentId(collection.displayName);
 					const ophanComponentLink = `container-${index} | ${ophanName}`;
@@ -308,7 +310,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									ophanComponentName={ophanName}
 									containerName={collection.collectionType}
 								>
-									<Snap snapData={trails[0].snapData} />
+									<Snap snapData={trail.snapData} />
 								</Section>
 								{decideAdSlot(
 									index,

@@ -110,7 +110,7 @@ const decideImage = (trail: FEFrontCard) => {
 
 	if (trail.display.imageHide) return undefined;
 
-	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0].url;
+	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0]?.url;
 };
 
 const enhanceTags = (tags: FETagType[]): TagType[] => {
