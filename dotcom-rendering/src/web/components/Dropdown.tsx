@@ -14,13 +14,12 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { useEffect, useState } from 'react';
-import { submitComponentEvent } from '../browser/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { linkNotificationCount } from '../lib/linkNotificationCount';
 import type { Notification } from '../lib/notification';
 import { useIsInView } from '../lib/useIsInView';
 import { submitComponentEvent } from '../browser/ophan/ophan';
-import { OphanComponent, OphanComponentEvent } from '@guardian/libs';
+import { OphanComponent } from '@guardian/libs';
 import { useOnce } from '../lib/useOnce';
 
 const NOTIFICATION_COMPONENT_TYPE = 'RETENTION_HEADER';
