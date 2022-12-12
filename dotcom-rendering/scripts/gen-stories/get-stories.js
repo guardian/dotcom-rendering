@@ -111,65 +111,47 @@ ${storyName}.story = {
 `;
 };
 
+const testLayoutFormats = [
+	{
+		display: 'Standard',
+		design: 'Standard',
+		theme: 'NewsPillar',
+	},
+];
+
 const generateLayoutStories = () => {
 	log('[scripts/gen-stories] Generating layout stories.');
 	let stories = 0;
 	let template = LAYOUT_TEMPLATE_HEADER;
 
-	for (const displayName of Object.keys(ArticleDisplay)) {
-		if (notNumber(displayName)) {
-			for (const designName of Object.keys(ArticleDesign)) {
-				if (notNumber(designName)) {
-					for (const pillarName of Object.keys(ArticlePillar)) {
-						if (notNumber(pillarName)) {
-							template += generateLayoutStory(
-								displayName,
-								designName,
-								`${pillarName}Pillar`,
-							);
-
-							stories++;
-						}
-					}
-
-					for (const specialName of Object.keys(ArticleSpecial)) {
-						if (notNumber(specialName)) {
-							template += generateLayoutStory(
-								displayName,
-								designName,
-								specialName == 'Labs'
-									? 'Labs'
-									: `${specialName}Theme`,
-							);
-							stories++;
-						}
-					}
-				}
-			}
-		}
+	for (const { display, design, theme } of testLayoutFormats) {
+		template += generateLayoutStory(display, design, theme);
+		stories++;
 	}
 
 	success(`[scripts/gen-stories] Generated ${stories} layout stories!`);
 	return template;
 };
 
+const testCardFormats = [
+	{
+		display: 'Standard',
+		design: 'Standard',
+		theme: 'NewsPillar',
+	},
+];
+
 const generateCardStories = () => {
 	log('[scripts/gen-stories] Generating card stories.');
 	let stories = 0;
 	let template = CARD_TEMPLATE_HEADER;
 
-	for (const displayName of Object.keys(ArticleDisplay)) {
-		if (notNumber(displayName)) {
-			for (const designName of Object.keys(ArticleDesign)) {
-				if (notNumber(designName)) {
-					template += generateCardStory(displayName, designName);
-					stories++;
-				}
-			}
-		}
+	for (const { display, design } of testCardFormats) {
+		template += generateCardStory(display, design);
+		stories++;
 	}
-	success(`[scripts/gen-stories] Generated ${stories} card stories!`);
 
+	success(`[scripts/gen-stories] Generated ${stories} card stories!`);
 	return template;
 };
 
