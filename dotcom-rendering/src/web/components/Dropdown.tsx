@@ -217,7 +217,7 @@ const notificationTextStyles = css`
 	${textSans.xxsmall()};
 `;
 
-const buildOphanComponent = (
+const buildOphanComponentWithNotifications = (
 	link: DropdownLinkType,
 ): OphanComponent | undefined => {
 	// Only track if it has notifications
@@ -275,7 +275,7 @@ type DropdownLinkProps = {
 	index: number;
 };
 const DropdownLink = ({ link, index }: DropdownLinkProps) => {
-	const ophanComponent = buildOphanComponent(link);
+	const ophanComponent = buildOphanComponentWithNotifications(link);
 
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
