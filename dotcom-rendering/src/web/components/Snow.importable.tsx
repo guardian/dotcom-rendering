@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import { body, neutral } from '@guardian/source-foundations';
 import { Link, SvgChevronDownSingle } from '@guardian/source-react-components';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { center } from '../lib/center';
 
 type Flake = {
 	x: number;
@@ -11,6 +10,8 @@ type Flake = {
 	velocity: number;
 	name: string;
 };
+
+type Snowflakes = { [name: string]: Flake };
 
 const Snowflake = ({ name, radius }: { name: string; radius: number }) => {
 	return (
@@ -23,6 +24,7 @@ const Snowflake = ({ name, radius }: { name: string; radius: number }) => {
 				backgroundColor: 'white',
 				borderRadius: '100%',
 				position: 'absolute',
+				overflow: 'hidden',
 			}}
 		></div>
 	);
@@ -68,8 +70,8 @@ const generateFlake = () => {
 };
 
 export const Snow = () => {
-	const [flakes, setFlakes] = useState<{ [name: string]: Flake }>(() => {
-		const initial: { [name: string]: Flake } = {};
+	const [flakes, setFlakes] = useState<Snowflakes>(() => {
+		const initial: Snowflakes = {};
 		for (let i = 0; i < 10; i++) {
 			const generatedFlake = generateFlake();
 			initial[generatedFlake.name] = generatedFlake;
@@ -81,7 +83,7 @@ export const Snow = () => {
 	// without triggering a re-render on their change
 	const requestRef = useRef<number>();
 	const previousTimeRef = useRef<number>();
-	const drift = useRef(0);
+	const drift = useRef(3);
 
 	const renderLoop = (time: number) => {
 		if (previousTimeRef.current != undefined) {
@@ -108,20 +110,26 @@ export const Snow = () => {
 					// 'teleport' each snowflake to the opposite side of the canvas
 					// when it reaches a border.
 					if (updatedFlake.x <= 0) {
-						updatedFlake.x = 98;
+						updatedFlake.x = 100;
 					} else {
-						updatedFlake.x %= 98;
+						updatedFlake.x %= 100;
 					}
 					updatedFlake.y %= 200;
 
 					previousFlakes[flakeName] = updatedFlake;
 				}
 
-				document.querySelectorAll('.snowflake').forEach((flake) => {
-					flake.style.transform = `translate3d(${
-						previousFlakes[flake.dataset.name].x
-					}vw, ${previousFlakes[flake.dataset.name].y}px, 0.0)`;
-				});
+				document
+					.querySelectorAll<HTMLElement>('.snowflake')
+					.forEach((flake) => {
+						if (flake.dataset.name) {
+							flake.style.transform = `translate3d(${
+								previousFlakes[flake.dataset.name].x
+							}vw, ${
+								previousFlakes[flake.dataset.name].y
+							}px, 0.0)`;
+						}
+					});
 
 				return previousFlakes;
 			});
@@ -153,53 +161,57 @@ export const Snow = () => {
 	}, [flakes]);
 
 	return (
-		<div>
-			<div css={[center, { marginBottom: '12px' }]}>
-				<div
-					css={css`
-						max-width: 400px;
-						padding-left: 20px;
-						padding-top: 4px;
-					`}
-				>
-					<Link
-						href="#Snow"
-						cssOverrides={[
-							linkStyle,
-							css`
-								margin-bottom: 12px;
-							`,
-						]}
-						onClick={showHider}
-					>
-						Why is it snowing?
-						<span css={showMoreTextStyles(seeMoreSnowInfo)}>
-							<SvgChevronDownSingle />
-						</span>
-					</Link>
-					{seeMoreSnowInfo && (
-						<p
-							css={[
-								body.medium,
-								{ color: 'white', marginTop: '4px' },
-							]}
-						>
-							While this is meant to brighten your day, we're
-							aware a lot of people are struggling with the cost
-							of living crisis and many families are sitting
-							freezing in the cold. We hope we can still persuade
-							you to give to our{' '}
-							<Link
-								href="https://www.theguardian.com/society/2022/dec/09/help-us-support-local-communities-to-tackle-cost-of-living-crisis"
-								cssOverrides={linkStyle}
-							>
-								charity appeal.
-							</Link>
-						</p>
-					)}
-				</div>
-			</div>
+		<div
+			css={[
+				{
+					marginBottom: '12px',
+					overflow: 'hidden',
+				},
+			]}
+		>
 			{snowflakes}
+			<div
+				css={css`
+					max-width: 400px;
+					padding-left: 20px;
+					padding-top: 4px;
+				`}
+			>
+				<Link
+					href="#Snow"
+					cssOverrides={[
+						linkStyle,
+						css`
+							margin-bottom: 12px;
+						`,
+					]}
+					onClick={showHider}
+				>
+					Why is it snowing?
+					<span css={showMoreTextStyles(seeMoreSnowInfo)}>
+						<SvgChevronDownSingle />
+					</span>
+				</Link>
+				{seeMoreSnowInfo && (
+					<p
+						css={[
+							body.medium,
+							{ color: 'white', marginTop: '4px' },
+						]}
+					>
+						While this is meant to brighten your day, we're aware a
+						lot of people are struggling with the cost of living
+						crisis and many families are sitting freezing in the
+						cold. We hope we can still persuade you to give to our{' '}
+						<Link
+							href="https://www.theguardian.com/society/2022/dec/09/help-us-support-local-communities-to-tackle-cost-of-living-crisis"
+							cssOverrides={linkStyle}
+						>
+							charity appeal.
+						</Link>
+					</p>
+				)}
+			</div>
 		</div>
 	);
 };

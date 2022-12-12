@@ -47,17 +47,18 @@ export const HeaderSingleFrontDoor = ({
 				headerTopBarSearchCapiSwitch={headerTopBarSearchCapiSwitch}
 			/>
 		</Island>
-		<Island deferUntil="hash" clientOnly={true}>
-			<Snow />
-		</Island>
+
 		<div
 			css={[
 				center,
 				css`
-					overflow: auto;
+					overflow: hidden;
 				`,
 			]}
 		>
+			<Island deferUntil="hash" clientOnly={true}>
+				<Snow />
+			</Island>
 			<Logo editionId={editionId} />
 			<Island deferUntil="idle" clientOnly={true}>
 				<SupportTheG
