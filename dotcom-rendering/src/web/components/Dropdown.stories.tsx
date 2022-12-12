@@ -120,6 +120,7 @@ const linksWithNotifications = [
 				id: 'example-id',
 				message: 'Billing attempt failed',
 				target: 'billing',
+				ophanLabel: 'notification-label',
 			},
 		],
 	},

@@ -753,7 +753,7 @@
                                                         "item": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "imageSrc": {
+                                                                "imgSource": {
                                                                     "type": "string"
                                                                 }
                                                             }
@@ -1423,7 +1423,7 @@
                                                         "item": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "imageSrc": {
+                                                                "imgSource": {
                                                                     "type": "string"
                                                                 }
                                                             }
@@ -2093,7 +2093,7 @@
                                                         "item": {
                                                             "type": "object",
                                                             "properties": {
-                                                                "imageSrc": {
+                                                                "imgSource": {
                                                                     "type": "string"
                                                                 }
                                                             }

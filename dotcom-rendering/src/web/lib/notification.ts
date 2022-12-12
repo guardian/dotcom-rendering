@@ -5,13 +5,16 @@ export interface Notification {
 	id: string;
 	target: string;
 	message: string;
+	ophanLabel: string;
 	logImpression?: () => void;
 }
 
 const hasTargetAndMessage = (
 	card: BrazeCard,
 ): card is BrazeCard & { extras: Notification } =>
-	Boolean(card.extras.message) && Boolean(card.extras.target);
+	Boolean(card.extras.message) &&
+	Boolean(card.extras.target) &&
+	Boolean(card.extras.ophanLabel);
 
 export const mapBrazeCardsToNotifications = (
 	cards: BrazeCard[],
@@ -21,6 +24,7 @@ export const mapBrazeCardsToNotifications = (
 			id: card.id,
 			target: card.extras.target,
 			message: card.extras.message,
+			ophanLabel: card.extras.ophanLabel,
 			logImpression: () => {
 				card.logImpression();
 			},
