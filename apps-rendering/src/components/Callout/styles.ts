@@ -5,11 +5,11 @@ import type { ArticleFormat } from '@guardian/libs';
 import {
 	body,
 	brandAlt,
+	error,
 	headline,
 	neutral,
 	remSpace,
 	until,
-	error,
 } from '@guardian/source-foundations';
 import { darkModeCss } from 'styles';
 
@@ -153,7 +153,9 @@ export const fieldInput = css`
 export const textareaStyles = (hasError: boolean): SerializedStyles => css`
 	// Source textarea doesn't have theming
 	${fieldInput}
-	border:  ${hasError ? `4px solid ${error[400]}` : `2px solid${neutral[46]}`};
+	border:  ${hasError
+		? `4px solid ${error[400]}`
+		: `2px solid${neutral[46]}`};
 
 	background-color: ${neutral[100]};
 	color: ${neutral[7]};

@@ -6,7 +6,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { InlineError, Label } from '@guardian/source-react-components';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import type { ReactElement } from 'react';
 import { darkModeCss } from 'styles';
 import { stringifyFileBase64 } from './stringifyFileBase64';
@@ -39,7 +39,7 @@ const FileInput = ({
 
 	useEffect(() => {
 		setFileError(error);
-	}, [error])
+	}, [error]);
 
 	const getFileName = (filepath?: string): string =>
 		filepath?.split(/(\\|\/)/g).pop() ?? '';

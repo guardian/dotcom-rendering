@@ -13,8 +13,8 @@ import FileInput from 'components/FileInput';
 import RadioInput from 'components/RadioInput';
 import type { FC, ReactElement } from 'react';
 import { logger } from '../../logger';
-import { fieldInput, textareaStyles } from './styles';
 import type { ValidationErrors } from './calloutForm';
+import { fieldInput, textareaStyles } from './styles';
 
 const infoStyles = css`
 	${textSans.small()};
@@ -72,7 +72,7 @@ export const FormField: FC<FormFieldProp> = ({
 	const name = `field_${type}_${id}`;
 	const fieldValue =
 		formField.id in formData ? (formData[formField.id] as string) : '';
-	const fieldError = validationErrors?.[formField.id]
+	const fieldError = validationErrors[formField.id];
 
 	const selectOptions = options.map(({ value, label }) => {
 		return (

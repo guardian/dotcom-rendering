@@ -27,7 +27,9 @@ const CALLOUT_URL =
 
 const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 	const [formData, setFormData] = useState<{ [key in string]: any }>({});
-	const [ validationErrors, setValidationErrors] = useState<ValidationErrors>({})
+	const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
+		{},
+	);
 	const [submissionError, setSubmissionError] = useState<string>('');
 	const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
 
@@ -40,24 +42,42 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 			[id]: data,
 		});
 
-	const validateForm = () => {
+	const validateForm = (): boolean => {
 		const errors: ValidationErrors = {};
+		let isValid = true;
 		fields.forEach((field: FormFieldType) => {
 			if (field.mandatory && !formData[field.id]) {
 				errors[field.id] = 'This field is required';
-				// check email and phone number, number fields are valid
+				isValid = false;
 			}
-		})
+			if (field.type === 'email' && formData[field.id]) {
+				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+				if (!emailRegex.test(formData[field.id])) {
+					errors[field.id] = 'Please enter a valid email address';
+					isValid = false;
+				}
+			}
+			if (
+				['number', 'phone'].includes(field.type) &&
+				formData[field.id]
+			) {
+				const numberRegex = /^[0-9]+$/;
+				if (!numberRegex.test(formData[field.id])) {
+					errors[field.id] = 'Please enter a valid number';
+					isValid = false;
+				}
+			}
+			return isValid;
+		});
 		setValidationErrors(errors);
 		return Object.keys(errors).length === 0;
-	}
+	};
 
 	const onSubmit = async (formData: FormDataType): Promise<void> => {
 		// Reset error for new submission attempt
 		setSubmissionError('');
 		const isValid = validateForm();
 		if (!isValid) return;
-
 
 		// need to add prefix `field_` to all keys in form
 		const formDataWithFieldPrefix = Object.keys(formData).reduce(
@@ -107,7 +127,6 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 					method="post"
 					onSubmit={async (e): Promise<void> => {
 						e.preventDefault();
-						console.log('*** formData', formData);
 						await onSubmit(formData);
 					}}
 					noValidate

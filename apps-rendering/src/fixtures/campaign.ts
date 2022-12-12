@@ -22,6 +22,22 @@ const mockCampaign = {
 				options: [],
 			},
 			{
+				id: '121sd5455',
+				label: 'Phone number',
+				name: 'phone',
+				type: 'phone',
+				mandatory: false,
+				options: [],
+			},
+			{
+				id: '121575575',
+				label: 'Email',
+				name: 'email',
+				type: 'email',
+				mandatory: false,
+				options: [],
+			},
+			{
 				id: '121575458',
 				label: 'Share your experiences of ghost flights during the pandemic',
 				name: 'share_your_experiences_of_ghost_flights_during_the_pandemic',

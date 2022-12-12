@@ -28,7 +28,7 @@ const Meta: FC<Props> = ({ title, cspString, isEditions = false }) => (
 			/>
 		)}
 		<meta name="description" content={title} />
-		{/* <meta httpEquiv="Content-Security-Policy" content={cspString} /> */}
+		<meta httpEquiv="Content-Security-Policy" content={cspString} />
 	</>
 );
 
