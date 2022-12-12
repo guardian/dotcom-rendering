@@ -22,6 +22,7 @@ interface Props {
 
 const Headline: React.FC<Props> = ({ item }) => {
 	const format = getFormat(item);
+	const designTag = <DesignTag format={format} />;
 
 	if (format.display === ArticleDisplay.Immersive) {
 		return (
@@ -67,7 +68,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 					publishDate={item.publishDate}
 					format={format}
 				>
-					<DesignTag format={format} />
+					{designTag}
 					<CommentHeadline item={item} />
 				</WithAgeWarning>
 			);
@@ -95,7 +96,6 @@ const Headline: React.FC<Props> = ({ item }) => {
 				</WithAgeWarning>
 			);
 		case ArticleDesign.Interview: {
-			const designTag = <DesignTag format={format} />;
 			const interviewToneTag = fromNullable(
 				item.tags.find((tag) => tag.id === 'tone/interview'),
 			);
@@ -146,7 +146,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 					publishDate={item.publishDate}
 					format={format}
 				>
-					<DesignTag format={item} />
+					{designTag}
 					<DefaultHeadline
 						item={item}
 						styles={css(defaultStyles(item))}

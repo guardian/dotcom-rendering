@@ -17,13 +17,11 @@ interface Props {
 	item: Item;
 }
 
-const CommentHeadline: React.FC<Props> = ({ item }) => {
-	return (
-		<DefaultHeadline
-			item={item}
-			styles={css(defaultStyles(item), commentStyles)}
-		/>
-	);
-};
+const CommentHeadline: React.FC<Props> = ({ item }) => (
+	<DefaultHeadline
+		item={item}
+		styles={css(defaultStyles(item), commentStyles)}
+	/>
+);
 
 export default CommentHeadline;

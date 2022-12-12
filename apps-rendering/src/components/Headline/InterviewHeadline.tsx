@@ -5,7 +5,8 @@ import {
 } from '@guardian/common-rendering/src/editorialPalette';
 import { from, headline, remSpace } from '@guardian/source-foundations';
 import HeadlineByline from 'components/HeadlineByline';
-import { getFormat, Item } from 'item';
+import type { Item } from 'item';
+import { getFormat } from 'item';
 import { darkModeCss } from 'styles';
 import { defaultStyles } from './Headline.defaults';
 
@@ -24,10 +25,6 @@ const interviewStyles = css`
 
 const InterviewHeadline: React.FC<Props> = ({ item }) => {
 	const format = getFormat(item);
-	// const interviewToneTag = fromNullable(
-	// 	item.tags.find((tag) => tag.id === 'tone/interview'),
-	// );
-	//const designTag = <DesignTag format={format} />;
 
 	return (
 		<div

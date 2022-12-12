@@ -11,7 +11,6 @@ import DefaultMainMediaImage, {
 
 const styles = css`
 	position: relative;
-	margin: 0;
 	margin: 0 0 ${remSpace[1]} 0;
 	${from.wide} {
 		width: ${wideContentWidth}px;
