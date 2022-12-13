@@ -202,7 +202,7 @@
 		"pm2": "5.0.0",
 		"preact": "^10.5.14",
 		"preact-render-to-string": "^5.1.19",
-		"prettier-eslint": "^11.0.0",
+		"prettier-eslint": "^15.0.1",
 		"pretty-bytes": "^6.0.0",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
