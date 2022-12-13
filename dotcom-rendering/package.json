@@ -142,7 +142,7 @@
 		"ajv-formats": "^2.0.2",
 		"amphtml-validator": "^1.0.34",
 		"babel-core": "^7.0.0-bridge.0",
-		"babel-jest": "^27.5.1",
+		"babel-jest": "^29.3.1",
 		"babel-loader": "^8.2.5",
 		"babel-plugin-module-resolver": "^4.1.0",
 		"babel-plugin-polyfill-corejs3": "^0.6.0",
