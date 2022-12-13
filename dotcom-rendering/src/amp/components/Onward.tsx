@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import React from 'react';
 import type { TagType } from '../../types/tag';
 import { OnwardContainer } from './OnwardContainer';
 
@@ -44,21 +43,23 @@ const sectionHasMostViewed = (sectionID: string): boolean => {
 	return allowed.has(sectionID);
 };
 
-export const Onward: React.FC<{
+type Props = {
 	pageID: string;
 	sectionID?: string;
 	hasStoryPackage: boolean;
 	hasRelated: boolean;
 	seriesTags: TagType[];
 	guardianBaseURL: string;
-}> = ({
+};
+
+export const Onward = ({
 	pageID,
 	sectionID,
 	hasStoryPackage,
 	hasRelated,
 	seriesTags,
 	guardianBaseURL,
-}) => {
+}: Props) => {
 	const ampBaseURL = 'https://amp.theguardian.com';
 
 	const container = (path: string, componentName: string) => (

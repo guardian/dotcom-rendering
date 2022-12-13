@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import type { ArticleTheme } from '@guardian/libs';
 import { ArticleSpecial } from '@guardian/libs';
 import { headline, neutral, textSans } from '@guardian/source-foundations';
-import React from 'react';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 
 const ListStyle = (iconColour: string) => css`
@@ -64,10 +63,12 @@ const labsStyle = css`
 	}
 `;
 
-export const Standfirst: React.FunctionComponent<{
+type Props = {
 	text: string;
 	pillar: ArticleTheme;
-}> = ({ text, pillar }) => {
+};
+
+export const Standfirst = ({ text, pillar }: Props) => {
 	return (
 		<div
 			data-print-layout="hide"

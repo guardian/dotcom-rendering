@@ -3,6 +3,7 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
+import { maybeRender } from '@guardian/common-rendering/src/lib';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	brandAlt,
@@ -115,10 +116,11 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 							<b>{regionalFocusText}</b>
 						</div>
 					)}
+
 					<Headline item={item} />
 					<Standfirst item={item} />
 
-					{!!newsletter && (
+					{maybeRender(item.promotedNewsletter, (newsletter) => (
 						<div css={frequencyBlockStyles}>
 							<SvgClock size="xsmall" />
 
@@ -127,21 +129,21 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 								<b> {newsletter.frequency}</b>
 							</span>
 						</div>
-					)}
+					))}
 
-					{!!newsletter && (
+					{maybeRender(item.promotedNewsletter, (newsletter) => (
 						<InPageNewsletterSignup
 							newsletter={newsletter}
 							format={getFormat(item)}
-							// show the fallback content by default until the signup feature
-							// is widely supported
-							initiallyRender={'fallback'}
 							fallbackContent={
 								<ArticleBody format={item}>
 									{children}
 								</ArticleBody>
 							}
 						/>
+					))}
+					{item.promotedNewsletter.kind === OptionKind.None && (
+						<ArticleBody format={item}>{children}</ArticleBody>
 					)}
 				</section>
 			</article>

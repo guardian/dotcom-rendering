@@ -181,8 +181,12 @@ const lineStyles = (palette: Palette) => css`
 		top: 0;
 		left: 0;
 		content: '';
-		width: 120px;
 		border-top: 1px solid ${palette.border.cardSupporting};
+
+		width: 120px;
+		${between.tablet.and.desktop} {
+			width: 100px;
+		}
 	}
 `;
 
@@ -216,6 +220,9 @@ const WithLink = ({
 	return <>{children}</>;
 };
 
+/** Matches headlines starting with short words of 1 to 3 letters followed by a space */
+const isFirstWordShort = /^(\w{1,3}) \b/;
+
 export const CardHeadline = ({
 	headlineText,
 	format,
@@ -236,6 +243,9 @@ export const CardHeadline = ({
 	const kickerColour = isDynamo
 		? palette.text.dynamoKicker
 		: palette.text.cardKicker;
+	const cleanHeadLineText = headlineText.match(isFirstWordShort)
+		? headlineText.replace(' ', ' ') // from regular to non-breaking space
+		: headlineText;
 	return (
 		<>
 			<h3
@@ -278,7 +288,7 @@ export const CardHeadline = ({
 						`}
 						className="show-underline"
 					>
-						{headlineText}
+						{cleanHeadLineText}
 					</span>
 				</WithLink>
 			</h3>

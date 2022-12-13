@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { textSans } from '@guardian/source-foundations';
-import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 
 const style = (pillar: ArticleTheme) => css`
@@ -11,10 +10,12 @@ const style = (pillar: ArticleTheme) => css`
 	}
 `;
 
-export const DisclaimerBlockComponent: React.FC<{
+type Props = {
 	html: string;
 	pillar: ArticleTheme;
-}> = ({ html, pillar }) => (
+};
+
+export const DisclaimerBlockComponent = ({ html, pillar }: Props) => (
 	<span
 		css={style(pillar)}
 		dangerouslySetInnerHTML={{

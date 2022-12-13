@@ -4,7 +4,6 @@ import {
 	textSans,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import React from 'react';
 import InfoIcon from '../../static/icons/info.svg';
 import type {
 	CAPIElement,
@@ -154,11 +153,13 @@ const asComponent = (
 	}
 };
 
-export const MainMedia: React.FC<{
+type Props = {
 	element: CAPIElement;
 	pillar: ArticleTheme;
 	adTargeting?: any;
-}> = ({ element, pillar, adTargeting }) => {
+};
+
+export const MainMedia = ({ element, pillar, adTargeting }: Props) => {
 	return (
 		<div css={expanded}>{asComponent(element, pillar, adTargeting)}</div>
 	);

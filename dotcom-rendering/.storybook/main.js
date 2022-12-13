@@ -1,5 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
+const {
+	babelExclude,
+	getLoaders,
+} = require('../scripts/webpack/webpack.config.browser');
 
 // Generate dynamic Card and Layout stories
 require('../scripts/gen-stories/gen-stories');
@@ -88,34 +92,8 @@ const webpackConfig = (config) => {
 			path.resolve(__dirname, '../'),
 			path.resolve(__dirname, '../../common-rendering'),
 		],
-		exclude: require('../scripts/webpack/webpack.config.browser')
-			.babelExclude,
-		use: [
-			{
-				loader: 'babel-loader',
-				options: {
-					presets: [
-						'@babel/preset-react',
-						[
-							'@babel/preset-env',
-							{
-								bugfixes: true,
-								targets: {
-									esmodules: true,
-								},
-							},
-						],
-					],
-				},
-			},
-			{
-				loader: 'ts-loader',
-				options: {
-					configFile: 'dotcom-rendering/tsconfig.build.json',
-					transpileOnly: true,
-				},
-			},
-		],
+		exclude: babelExclude,
+		use: getLoaders('modern'),
 	});
 
 	// modify storybook's file-loader rule to avoid conflicts with our svg

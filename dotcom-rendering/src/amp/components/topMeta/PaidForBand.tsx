@@ -6,7 +6,6 @@ import {
 	neutral,
 	textSans,
 } from '@guardian/source-foundations';
-import React from 'react';
 import { pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 import ArrowRightIcon from '../../../static/icons/arrow-right.svg';
 import LabsLogo from '../../../static/logos/the-guardian-labs.svg';
@@ -107,7 +106,7 @@ const iconStyle = css`
 	height: 20px;
 `;
 
-export const PaidForBand: React.FC = () => (
+export const PaidForBand = () => (
 	<header css={headerStyle}>
 		<div css={metaStyle}>
 			<span>Paid content</span>

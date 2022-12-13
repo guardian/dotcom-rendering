@@ -1,13 +1,18 @@
-/* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
-import type {
-	DCRContainerPalette,
-	DCRContainerType,
-	DCRGroupedTrails,
-} from '../../types/front';
+import type { DCRContainerPalette, DCRGroupedTrails } from '../../types/front';
 import type { TrailType } from '../../types/trails';
 import { LI } from '../components/Card/components/LI';
 import { UL } from '../components/Card/components/UL';
-import { FrontCard } from '../components/FrontCard';
+import {
+	Card100Media100,
+	Card100Media75,
+	Card25Media25,
+	Card33Media33,
+	Card50Media50,
+	Card50Media50Tall,
+	Card66Media66,
+	Card75Media50Left,
+	Card75Media50Right,
+} from './cardWrappers';
 
 /**
  * A place for shared slices which are used across multiple dynamic/ containers
@@ -27,12 +32,10 @@ import { FrontCard } from '../components/FrontCard';
 export const Card100 = ({
 	cards,
 	containerPalette,
-	containerType,
 	showAge,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
-	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => {
 	const card100 = cards.slice(0, 1);
@@ -41,17 +44,10 @@ export const Card100 = ({
 		<UL>
 			{card100.map((trail) => (
 				<LI padSides={true}>
-					<FrontCard
+					<Card100Media75
 						trail={trail}
 						containerPalette={containerPalette}
-						containerType={containerType}
 						showAge={showAge}
-						imagePosition="right"
-						imagePositionOnMobile="top"
-						imageSize="jumbo"
-						headlineSize="huge"
-						headlineSizeOnMobile="large"
-						trailText={trail.trailText}
 					/>
 				</LI>
 			))}
@@ -78,15 +74,16 @@ export const Card50_Card50 = ({
 	return (
 		<UL direction="row" padBottom={true}>
 			{cards50.map((trail, index) => (
-				<LI percentage="50%" padSides={true} showDivider={index !== 0}>
-					<FrontCard
+				<LI
+					percentage="50%"
+					padSides={true}
+					showDivider={index !== 0}
+					containerPalette={containerPalette}
+				>
+					<Card50Media50Tall
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						trailText={trail.trailText}
-						supportingContent={trail.supportingContent}
-						imagePositionOnMobile="top"
-						headlineSize="large"
 					/>
 				</LI>
 			))}
@@ -115,26 +112,24 @@ export const Card75_Card25 = ({
 		<UL direction="row" padBottom={true}>
 			{card75.map((trail) => (
 				<LI percentage="75%" padSides={true}>
-					<FrontCard
+					<Card75Media50Right
 						trail={trail}
-						containerPalette={containerPalette}
 						showAge={showAge}
-						trailText={trail.trailText}
-						supportingContent={trail.supportingContent}
-						imagePosition="right"
-						imageSize="large"
-						imagePositionOnMobile="top"
-						headlineSize="large"
+						containerPalette={containerPalette}
 					/>
 				</LI>
 			))}
 			{card25.map((trail) => (
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<FrontCard
+				<LI
+					percentage="25%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
+					<Card25Media25
 						trail={trail}
-						containerPalette={containerPalette}
-						supportingContent={trail.supportingContent}
 						showAge={showAge}
+						containerPalette={containerPalette}
 					/>
 				</LI>
 			))}
@@ -163,26 +158,24 @@ export const Card25_Card75 = ({
 		<UL direction="row" padBottom={true}>
 			{card25.map((trail) => (
 				<LI percentage="25%" padSides={true}>
-					<FrontCard
+					<Card25Media25
 						trail={trail}
-						supportingContent={trail.supportingContent}
-						containerPalette={containerPalette}
 						showAge={showAge}
+						containerPalette={containerPalette}
 					/>
 				</LI>
 			))}
 			{card75.map((trail) => (
-				<LI percentage="75%" padSides={true} showDivider={true}>
-					<FrontCard
+				<LI
+					percentage="75%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
+					<Card75Media50Left
 						trail={trail}
-						containerPalette={containerPalette}
 						showAge={showAge}
-						trailText={trail.trailText}
-						supportingContent={trail.supportingContent}
-						headlineSize="large"
-						imagePosition="left"
-						imageSize="large"
-						imagePositionOnMobile="top"
+						containerPalette={containerPalette}
 					/>
 				</LI>
 			))}
@@ -198,12 +191,10 @@ export const Card25_Card75 = ({
 export const Card66_Card33 = ({
 	cards,
 	containerPalette,
-	containerType,
 	showAge,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
-	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => {
 	const card66 = cards.slice(0, 1);
@@ -213,25 +204,24 @@ export const Card66_Card33 = ({
 		<UL direction="row">
 			{card66.map((trail) => (
 				<LI percentage="66.666%" padSides={true}>
-					<FrontCard
+					<Card66Media66
 						trail={trail}
 						containerPalette={containerPalette}
-						containerType={containerType}
 						showAge={showAge}
-						trailText={trail.trailText}
-						imagePositionOnMobile="top"
 					/>
 				</LI>
 			))}
 			{card33.map((trail) => (
-				<LI percentage="33.333%" padSides={true} showDivider={true}>
-					<FrontCard
+				<LI
+					percentage="33.333%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
+					<Card33Media33
 						trail={trail}
 						containerPalette={containerPalette}
-						containerType={containerType}
 						showAge={showAge}
-						trailText={trail.trailText}
-						imagePositionOnMobile="left"
 					/>
 				</LI>
 			))}
@@ -247,12 +237,10 @@ export const Card66_Card33 = ({
 export const Card50_Card25_Card25 = ({
 	cards,
 	containerPalette,
-	containerType,
 	showAge,
 }: {
 	cards: TrailType[];
 	containerPalette?: DCRContainerPalette;
-	containerType?: DCRContainerType;
 	showAge?: boolean;
 }) => {
 	const card50 = cards.slice(0, 1);
@@ -262,37 +250,25 @@ export const Card50_Card25_Card25 = ({
 		<UL direction="row" padBottom={true}>
 			{card50.map((trail) => (
 				<LI percentage="50%" padSides={true}>
-					<FrontCard
+					<Card50Media50
 						trail={trail}
 						containerPalette={containerPalette}
-						containerType={containerType}
 						showAge={showAge}
-						headlineSize="large"
-						imagePosition="top"
-						imagePositionOnMobile="top"
-						supportingContent={trail.supportingContent}
 					/>
 				</LI>
 			))}
 
 			{cards25.map((trail) => (
-				<LI percentage="25%" padSides={true} showDivider={true}>
-					<FrontCard
+				<LI
+					percentage="25%"
+					padSides={true}
+					showDivider={true}
+					containerPalette={containerPalette}
+				>
+					<Card25Media25
 						trail={trail}
 						containerPalette={containerPalette}
-						containerType={containerType}
 						showAge={showAge}
-						trailText={
-							trail?.supportingContent &&
-							trail.supportingContent.length > 0
-								? undefined
-								: trail.trailText
-						}
-						supportingContent={
-							trail.trailText
-								? undefined
-								: trail.supportingContent
-						}
 					/>
 				</LI>
 			))}
@@ -321,16 +297,10 @@ export const Card100PictureTop = ({
 		<UL padBottom={true}>
 			{card100.map((card) => (
 				<LI percentage="100%" padSides={true}>
-					<FrontCard
+					<Card100Media100
 						trail={card}
-						containerPalette={containerPalette}
 						showAge={showAge}
-						headlineSize="huge"
-						headlineSizeOnMobile="large"
-						imageUrl={card.image}
-						imagePosition={'top'}
-						imagePositionOnMobile={'top'}
-						supportingContent={card.supportingContent}
+						containerPalette={containerPalette}
 					/>
 				</LI>
 			))}
@@ -359,24 +329,10 @@ export const Card100PictureRight = ({
 		<UL padBottom={true}>
 			{card100.map((card) => (
 				<LI percentage="100%" padSides={true}>
-					<FrontCard
+					<Card100Media75
 						trail={card}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						headlineSize="huge"
-						headlineSizeOnMobile="large"
-						imageUrl={card.image}
-						imageSize={'jumbo'}
-						imagePosition={'right'}
-						imagePositionOnMobile={'top'}
-						trailText={
-							// Only show trail text if there is no supportContent
-							card.supportingContent === undefined ||
-							card.supportingContent.length === 0
-								? card.trailText
-								: undefined
-						}
-						supportingContent={card.supportingContent}
 					/>
 				</LI>
 			))}

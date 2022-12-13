@@ -18,6 +18,7 @@ describe('addNotificationsToDropdownLinks', () => {
 		];
 		const notifications = [
 			{
+				id: 'example-id',
 				message: 'Some notification message',
 				target: 'account_overview',
 			},
@@ -34,7 +35,13 @@ describe('addNotificationsToDropdownLinks', () => {
 				url: `https://example.com/account_overview`,
 				title: 'Account overview',
 				dataLinkName: 'nav2 : topbar : account overview',
-				notifications: ['Some notification message'],
+				notifications: [
+					{
+						id: 'example-id',
+						message: 'Some notification message',
+						target: 'account_overview',
+					},
+				],
 			},
 			{
 				id: 'edit_profile',
@@ -56,10 +63,12 @@ describe('addNotificationsToDropdownLinks', () => {
 		];
 		const notifications = [
 			{
+				id: 'example-id-1',
 				message: 'Some notification message',
 				target: 'account_overview',
 			},
 			{
+				id: 'example-id-2',
 				message: 'Another notification message',
 				target: 'account_overview',
 			},
@@ -77,8 +86,16 @@ describe('addNotificationsToDropdownLinks', () => {
 				title: 'Account overview',
 				dataLinkName: 'nav2 : topbar : account overview',
 				notifications: [
-					'Some notification message',
-					'Another notification message',
+					{
+						id: 'example-id-1',
+						message: 'Some notification message',
+						target: 'account_overview',
+					},
+					{
+						id: 'example-id-2',
+						message: 'Another notification message',
+						target: 'account_overview',
+					},
 				],
 			},
 		]);
@@ -91,11 +108,18 @@ describe('addNotificationsToDropdownLinks', () => {
 				url: `https://example.com/account_overview`,
 				title: 'Account overview',
 				dataLinkName: 'nav2 : topbar : account overview',
-				notifications: ['Existing notification message'],
+				notifications: [
+					{
+						id: 'existing',
+						message: 'Existing notification message',
+						target: 'account_overview',
+					},
+				],
 			},
 		];
 		const notifications = [
 			{
+				id: 'new',
 				message: 'New notification message',
 				target: 'account_overview',
 			},
@@ -113,8 +137,16 @@ describe('addNotificationsToDropdownLinks', () => {
 				title: 'Account overview',
 				dataLinkName: 'nav2 : topbar : account overview',
 				notifications: [
-					'Existing notification message',
-					'New notification message',
+					{
+						id: 'existing',
+						message: 'Existing notification message',
+						target: 'account_overview',
+					},
+					{
+						id: 'new',
+						message: 'New notification message',
+						target: 'account_overview',
+					},
 				],
 			},
 		]);

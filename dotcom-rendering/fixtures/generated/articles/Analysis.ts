@@ -1461,6 +1461,7 @@ export const Analysis: FEArticleType = {
 				headline:
 					'Micheál Martin becomes Irish taoiseach in historic coalition',
 				shortUrl: 'https://www.theguardian.com/p/e79et',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/world/2020/jun/26/irish-government-to-be-formed-after-greens-vote-yes-to-coalition',
@@ -1486,6 +1487,7 @@ export const Analysis: FEArticleType = {
 				headline:
 					'Ireland to form new government after Green party votes for coalition',
 				shortUrl: 'https://www.theguardian.com/p/e7572',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/world/2020/jun/15/fine-gael-fianna-fail-and-greens-agree-deal-to-form-irish-coalition',
@@ -1511,6 +1513,7 @@ export const Analysis: FEArticleType = {
 				headline:
 					'Fine Gael, Fianna Fáil and Greens agree deal to form Irish coalition',
 				shortUrl: 'https://www.theguardian.com/p/e49gh',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/world/2020/may/26/irish-taoiseach-leo-varadkar-denies-picnic-with-friends-was-covid-19-rule-breach',
@@ -1536,6 +1539,7 @@ export const Analysis: FEArticleType = {
 				headline:
 					'Irish taoiseach Leo Varadkar denies picnic with friends was Covid-19 rule breach',
 				shortUrl: 'https://www.theguardian.com/p/evan3',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/world/2020/apr/14/ireland-fine-gael-fianna-fail-close-forming-coalition-government',
@@ -1561,6 +1565,7 @@ export const Analysis: FEArticleType = {
 				headline:
 					'Ireland’s Fine Gael and Fianna Fáil close to forming coalition government',
 				shortUrl: 'https://www.theguardian.com/p/dk7xx',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/world/2020/feb/24/micheal-martin-faces-a-battle-of-conscience-to-form-irish-government',
@@ -1586,6 +1591,7 @@ export const Analysis: FEArticleType = {
 				headline:
 					'Micheál Martin faces a battle of conscience to form Irish government',
 				shortUrl: 'https://www.theguardian.com/p/dayh8',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/world/2020/feb/20/irish-parliament-set-for-stalemate-in-attempt-to-form-new-government',
@@ -1611,6 +1617,7 @@ export const Analysis: FEArticleType = {
 				headline:
 					'Varadkar resigns as Irish government enters stalemate',
 				shortUrl: 'https://www.theguardian.com/p/dayq6',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/world/2020/feb/17/fine-gael-fianna-fail-coalition-unthinkable-says-sinn-fein-leader-mary-lou-mcdonald',
@@ -1636,6 +1643,7 @@ export const Analysis: FEArticleType = {
 				headline:
 					'Varadkar prepares to go into opposition as deadlock continues',
 				shortUrl: 'https://www.theguardian.com/p/da75n',
+				showQuotedHeadline: false,
 			},
 			{
 				url: 'https://www.theguardian.com/commentisfree/2020/feb/16/even-as-ireland-economy-booms-sinn-fein-win-is-bitter-cry-for-equality',
@@ -1660,6 +1668,7 @@ export const Analysis: FEArticleType = {
 				headline:
 					'Ireland’s shock poll result was a vote against the success of globalisation',
 				shortUrl: 'https://www.theguardian.com/p/d9kx7',
+				showQuotedHeadline: false,
 			},
 		],
 	},

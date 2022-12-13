@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import type { TimelineEvent } from '@guardian/atoms-rendering/dist/types/types';
 import { brandAlt, neutral } from '@guardian/source-foundations';
-import React from 'react';
 import { Expandable } from '../Expandable';
 
 const eventsWrapper = css`
@@ -37,13 +36,21 @@ const headingStyle = css`
 	font-weight: bold;
 `;
 
-export const TimelineBlockComponent: React.FC<{
+type Props = {
 	id: string;
 	title: string;
 	description?: string;
 	events: TimelineEvent[];
 	pillar: ArticleTheme;
-}> = ({ id, title, description, events, pillar }) => (
+};
+
+export const TimelineBlockComponent = ({
+	id,
+	title,
+	description,
+	events,
+	pillar,
+}: Props) => (
 	<Expandable id={id} type="Timeline" title={title} pillar={pillar}>
 		{description || ''}
 		<ul css={eventsWrapper}>

@@ -9,7 +9,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { useAB } from '../lib/useAB';
 import { useApi } from '../lib/useApi';
-import { MostViewedFooter } from './MostViewedFooter';
+import { MostViewedFooter } from './MostViewedFooter.importable';
 
 interface Props {
 	sectionName?: string;

@@ -18,27 +18,39 @@ const TEST_NEWSLETTER = {
 // ----- Stories ----- //
 
 const Default: FC = () => (
-	<InPageNewsletterSignup
-		newsletter={TEST_NEWSLETTER}
-		format={{
-			design: selectDesign(ArticleDesign.NewsletterSignup),
-			display: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.News),
-		}}
-		initiallyRender={'form'}
-	/>
+	<>
+		<style>
+			{`.js-signup-form-container {
+			display:block !important;
+		}`}
+		</style>
+		<InPageNewsletterSignup
+			newsletter={TEST_NEWSLETTER}
+			format={{
+				design: selectDesign(ArticleDesign.NewsletterSignup),
+				display: ArticleDisplay.Standard,
+				theme: selectPillar(ArticlePillar.News),
+			}}
+		/>
+	</>
 );
 
 const Unsupported: FC = () => (
-	<InPageNewsletterSignup
-		newsletter={TEST_NEWSLETTER}
-		format={{
-			design: selectDesign(ArticleDesign.NewsletterSignup),
-			display: ArticleDisplay.Standard,
-			theme: selectPillar(ArticlePillar.News),
-		}}
-		initiallyRender={'fallback'}
-	/>
+	<>
+		<style>
+			{`.js-signup-form-fallback-container {
+			display:block !important;
+		}`}
+		</style>
+		<InPageNewsletterSignup
+			newsletter={TEST_NEWSLETTER}
+			format={{
+				design: selectDesign(ArticleDesign.NewsletterSignup),
+				display: ArticleDisplay.Standard,
+				theme: selectPillar(ArticlePillar.News),
+			}}
+		/>
+	</>
 );
 
 // ----- Exports ----- //

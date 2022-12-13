@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleSpecial } from '@guardian/libs';
 import { body, neutral, textSans } from '@guardian/source-foundations';
-import React from 'react';
 import sanitise from 'sanitize-html';
 import { neutralBorder, pillarPalette_DO_NOT_USE } from '../../../lib/pillars';
 
@@ -71,10 +70,12 @@ const textStyleLabs = css`
 	}
 `;
 
-export const TextBlockComponent: React.FC<{
+type Props = {
 	html: string;
 	pillar: ArticleTheme;
-}> = ({ html, pillar }) => (
+};
+
+export const TextBlockComponent = ({ html, pillar }: Props) => (
 	<span
 		css={
 			pillar === ArticleSpecial.Labs

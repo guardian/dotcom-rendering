@@ -8,6 +8,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import type { Option } from '@guardian/types';
 import { andThen, fromNullable, map, none, some } from '@guardian/types';
 import type { Image as ImageData } from 'image/image';
+import { ImageSubtype } from 'image/image';
 import { Dpr, src, srcsets } from 'image/srcsets';
 import { pipe } from 'lib';
 import { Optional } from 'optional';
@@ -48,6 +49,19 @@ const parseRole = (role: string | undefined): ArticleElementRole => {
 			return ArticleElementRole.HalfWidth;
 		default:
 			return ArticleElementRole.Standard;
+	}
+};
+
+const parseImageSubtype = (asset: Asset): Optional<ImageSubtype> => {
+	switch (asset.mimeType) {
+		case 'image/jpeg':
+			return Optional.some(ImageSubtype.Jpeg);
+		case 'image/png':
+			return Optional.some(ImageSubtype.Png);
+		case 'image/svg+xml':
+			return Optional.some(ImageSubtype.Svg);
+		default:
+			return Optional.none();
 	}
 };
 
@@ -100,6 +114,7 @@ const parseImage =
 				credit: parseCredit(data?.displayCredit, data?.credit),
 				nativeCaption: fromNullable(data?.caption),
 				role: parseRole(data?.role),
+				imageSubtype: parseImageSubtype(asset),
 			});
 		});
 	};
@@ -122,6 +137,7 @@ const parseCardImage = (
 		credit: none,
 		nativeCaption: none,
 		role: ArticleElementRole.Standard,
+		imageSubtype: Optional.none(),
 	});
 };
 
