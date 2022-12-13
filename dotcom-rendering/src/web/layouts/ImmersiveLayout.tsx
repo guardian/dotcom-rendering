@@ -40,7 +40,7 @@ import { LabsHeader } from '../components/LabsHeader.importable';
 import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
-import { Nav } from '../components/Nav/Nav';
+import { minNavHeight, Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -280,8 +280,17 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	hasMainMediaStyles are applied to, we need change the height values
 	depending on whether the labs header is there or not to keep the headlines
 	appearing at a consistent height between labs and non labs immersive articles
+	The labs header height is defined by the labs logo, which has a height of 47px and
+	3px of padding on the top and bottom, so the labs header has a total height of 55px
 	*/
-	const navAndLabsHeaderHeight = isLabs ? '103px' : '48px';
+
+	const labsHeaderHeight = 55;
+	const navHeight = parseInt(minNavHeight.styles.slice(11, -2));
+	const combinedHeight = (navHeight + labsHeaderHeight).toString();
+
+	const navAndLabsHeaderHeight = isLabs
+		? `${combinedHeight}px`
+		: `${navHeight}px`;
 
 	const hasMainMediaStyles = css`
 		height: calc(80vh - ${navAndLabsHeaderHeight});
