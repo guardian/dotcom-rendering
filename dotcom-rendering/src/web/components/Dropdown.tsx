@@ -13,12 +13,16 @@ import {
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { linkNotificationCount } from '../lib/linkNotificationCount';
 import type { Notification } from '../lib/notification';
 import { useIsInView } from '../lib/useIsInView';
+import { submitComponentEvent } from '../browser/ophan/ophan';
+import { OphanComponent } from '@guardian/libs';
+import { useOnce } from '../lib/useOnce';
 
+const NOTIFICATION_COMPONENT_TYPE = 'RETENTION_HEADER';
 export interface DropdownLinkType {
 	id: string;
 	url: string;
@@ -213,6 +217,42 @@ const notificationTextStyles = css`
 	${textSans.xxsmall()};
 `;
 
+const buildOphanComponentWithNotifications = (
+	link: DropdownLinkType,
+): OphanComponent | undefined => {
+	// Only track if it has notifications
+	if (link?.notifications && link.notifications.length > 0) {
+		return {
+			componentType: NOTIFICATION_COMPONENT_TYPE,
+			id: link.id,
+			labels: link.notifications.map(
+				(notification) => notification.ophanLabel,
+			),
+		};
+	}
+	return undefined;
+};
+
+const addTrackingToUrl = (
+	url: string,
+	ophanComponent: OphanComponent,
+): string => {
+	// Use the acquisitionData query param to send tracking to the destination
+	const acquisitionData = encodeURIComponent(
+		JSON.stringify({
+			source: 'GUARDIAN_WEB',
+			componentId: ophanComponent.id,
+			componentType: ophanComponent.componentType,
+			campaignCode: ophanComponent.id,
+			referrerPageviewId: window.guardian.config.ophan.pageViewId,
+			referrerUrl: window.location.origin + window.location.pathname,
+			labels: ophanComponent.labels,
+		}),
+	);
+	const prefix = url.includes('?') ? '&' : '?';
+	return `${url}${prefix}acquisitionData=${acquisitionData}`;
+};
+
 const NotificationBadge = ({ diameter }: { diameter: number }) => {
 	return (
 		<div css={notificationBadgeStyles(diameter)}>
@@ -225,28 +265,9 @@ type NotificationMessageProps = {
 	notification: Notification;
 };
 const NotificationMessage = ({ notification }: NotificationMessageProps) => {
-	const [hasBeenSeen, setNode] = useIsInView({
-		debounce: true,
-	});
+	const { message } = notification;
 
-	const { message, logImpression } = notification;
-	useEffect(() => {
-		if (hasBeenSeen) {
-			logImpression?.();
-		}
-		// I want this useEffect to fire exactly once when hasBeenSeen becomes
-		// true. Ommitting logImpression from the dependency array so I don't
-		// have to worry about whether logImpression is stable (if it isn't we'd
-		// be in danger of logging multiple impressions of the same
-		// notification)
-		// eslint-disable-next-line react-hooks/exhaustive-deps -- See above comment
-	}, [hasBeenSeen]);
-
-	return (
-		<div css={notificationTextStyles} ref={setNode}>
-			{message}
-		</div>
-	);
+	return <div css={notificationTextStyles}>{message}</div>;
 };
 
 type DropdownLinkProps = {
@@ -254,16 +275,82 @@ type DropdownLinkProps = {
 	index: number;
 };
 const DropdownLink = ({ link, index }: DropdownLinkProps) => {
+	const ophanComponent = useMemo(
+		() => buildOphanComponentWithNotifications(link),
+		[link],
+	);
+
+	const [hasBeenSeen, setNode] = useIsInView({
+		debounce: true,
+	});
+	const [hasSentViewEvent, setHasSentViewEvent] = useState<boolean>(false);
+
+	// The following hooks, which send INSERT and VIEW events to Ophan,
+	// intentionally only run when the link has notifications (which is why
+	// link.notifications is part of the dependency array for both). In future
+	// if we ever have notifications arriving from different sources at
+	// different times, we'll need to revisit this logic (currently they only
+	// come from Braze).
+	useEffect(() => {
+		if (
+			hasBeenSeen &&
+			ophanComponent &&
+			link.notifications &&
+			link.notifications.length > 0 &&
+			!hasSentViewEvent
+		) {
+			setHasSentViewEvent(true);
+
+			// For each notification for this link, log the impression back to
+			// Braze separately
+			link.notifications.forEach((notification) => {
+				notification.logImpression?.();
+			});
+
+			submitComponentEvent({
+				component: ophanComponent,
+				action: 'VIEW',
+			});
+		}
+	}, [
+		hasBeenSeen,
+		ophanComponent,
+		link.notifications,
+		hasSentViewEvent,
+		link.id,
+	]);
+
+	useOnce(() => {
+		if (ophanComponent) {
+			submitComponentEvent({
+				component: ophanComponent,
+				action: 'INSERT',
+			});
+		}
+	}, [ophanComponent]);
+
+	const url = ophanComponent
+		? addTrackingToUrl(link.url, ophanComponent)
+		: link.url;
+
 	return (
-		<li css={liStyles} key={link.title}>
+		<li css={liStyles} key={link.title} ref={setNode}>
 			<a
-				href={link.url}
+				href={url}
 				css={[
 					linkStyles,
 					!!link.isActive && linkActive,
 					index === 0 && linkFirst,
 				]}
 				data-link-name={link.dataLinkName}
+				onClick={() => {
+					if (ophanComponent) {
+						submitComponentEvent({
+							component: ophanComponent,
+							action: 'CLICK',
+						});
+					}
+				}}
 			>
 				{link.title}
 				{link.notifications?.map((notification) => (

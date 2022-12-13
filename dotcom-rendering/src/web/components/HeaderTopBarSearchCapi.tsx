@@ -3,25 +3,31 @@ import {
 	brand,
 	brandAlt,
 	from,
+	headline,
 	neutral,
 	textSans,
 } from '@guardian/source-foundations';
 import { useEffect, useRef, useState } from 'react';
+import ArrowRightIcon from '../../static/icons/arrow-right.svg';
 import SearchIcon from '../../static/icons/search.svg';
+import XIcon from '../../static/icons/x.svg';
 import { getZIndex } from '../lib/getZIndex';
 import { useApi } from '../lib/useApi';
 
 const searchLinkStyles = css`
+	display: flex;
+	align-items: center;
 	${textSans.medium({ fontWeight: 'bold' })};
+	line-height: 1;
+	font-size: 1rem;
+	height: fit-content;
 	color: ${neutral[100]};
 	transition: color 80ms ease-out;
 	text-decoration: none;
 	padding: 7px 0;
-	background: none;
-	border: none;
 
 	${from.tablet} {
-		padding: 7px 10px 7px 5px;
+		padding: 7px 10px 7px 6px;
 	}
 
 	:hover,
@@ -34,7 +40,7 @@ const searchLinkStyles = css`
 		float: left;
 		height: 18px;
 		width: 18px;
-		margin: 3px 4px 0 0;
+		margin: 0 4px 0 0;
 	}
 	${getZIndex('searchHeaderLink')}
 `;
@@ -67,11 +73,13 @@ export const HeaderTopBarSearchCapi = () => {
 	);
 
 	const formRef = useRef<HTMLFormElement>(null);
+	const searchContainerRef = useRef<HTMLDivElement>(null);
 
 	// Hide search if you click anywhere outside of search when it's shown
 	useEffect(() => {
 		function handleClickOutside(event: MouseEvent) {
 			if (
+				!searchContainerRef.current?.contains(event.target as Node) &&
 				!formRef.current?.contains(event.target as Node) &&
 				isSearchVisible
 			) {
@@ -109,7 +117,7 @@ export const HeaderTopBarSearchCapi = () => {
 
 	return (
 		<>
-			<div css={linkTablet}>
+			<div css={linkTablet} ref={searchContainerRef}>
 				<a
 					href="https://www.google.co.uk/advanced_search?q=site:www.theguardian.com"
 					type="button"
@@ -129,7 +137,7 @@ export const HeaderTopBarSearchCapi = () => {
 						return false;
 					}}
 				>
-					<SearchIcon />
+					{!isSearchVisible ? <SearchIcon /> : <XIcon />}
 					<>Search</>
 				</a>
 			</div>
@@ -141,7 +149,7 @@ export const HeaderTopBarSearchCapi = () => {
 						z-index: 1000;
 						right: 0;
 						width: 50%;
-						top: 40px;
+						top: 35px;
 					`}
 					onSubmit={(event) => {
 						event.preventDefault();
@@ -149,20 +157,42 @@ export const HeaderTopBarSearchCapi = () => {
 					}}
 					ref={formRef}
 				>
-					<input
-						name="q"
-						type="text"
+					<div
 						css={css`
-							border: 2px solid ${neutral[46]};
-							font-size: 1.0625rem;
-							padding: 0px 8px;
-							width: 100%;
-							line-height: 1.35;
-							height: 44px;
+							background: ${neutral[100]};
+							display: flex;
+							justify-content: space-between;
 						`}
-						ref={qRef}
-						autoComplete="off"
-					/>
+					>
+						<input
+							name="q"
+							type="text"
+							css={css`
+								border: none;
+								${textSans.small()}
+								font-size: 16px;
+								padding: 0px 8px 0px 20px;
+								width: 100%;
+								height: 44px;
+							`}
+							ref={qRef}
+							autoComplete="off"
+						/>
+						<button
+							css={css`
+								background: none;
+								border: 0;
+
+								&:hover {
+									transform: scale(1.2);
+									transition: all 0.3s ease;
+								}
+							`}
+							type="submit"
+						>
+							<ArrowRightIcon />
+						</button>
+					</div>
 					{data && data.response.results.length == 0 && (
 						<p
 							css={css`
@@ -180,24 +210,39 @@ export const HeaderTopBarSearchCapi = () => {
 					)}
 
 					{data && data.response.results.length > 0 && (
-						<ul>
-							{data.response.results.map((result) => {
+						<ul
+							css={css`
+								border: 1px solid ${neutral[46]};
+								border-top: none;
+								padding-top: 8px;
+							`}
+						>
+							{data.response.results.map((result, i) => {
 								return (
 									<li>
 										<a
 											href={result.webUrl}
 											css={css`
-												${textSans.medium()};
+												${headline.xxxsmall()};
+												text-decoration: none;
 												color: ${neutral[100]};
 												display: block;
-												padding: 1rem 25px;
+												padding-left: 20px;
 
 												:hover {
 													color: ${brandAlt[400]};
 												}
 											`}
 										>
-											{result.webTitle}
+											<div
+												css={css`
+													border-top: 1px solid
+														${neutral[46]};
+													padding: 4px 50px 16px 0;
+												`}
+											>
+												{result.webTitle}
+											</div>
 										</a>
 									</li>
 								);
