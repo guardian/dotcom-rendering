@@ -13,12 +13,13 @@ import {
 	until,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import { useEffect, useState } from 'react';
-import { submitComponentEvent } from '../browser/ophan/ophan';
+import { useEffect, useMemo, useState } from 'react';
 import { getZIndex } from '../lib/getZIndex';
 import { linkNotificationCount } from '../lib/linkNotificationCount';
 import type { Notification } from '../lib/notification';
 import { useIsInView } from '../lib/useIsInView';
+import { submitComponentEvent } from '../browser/ophan/ophan';
+import { OphanComponent } from '@guardian/libs';
 import { useOnce } from '../lib/useOnce';
 
 const NOTIFICATION_COMPONENT_TYPE = 'RETENTION_HEADER';
@@ -216,6 +217,42 @@ const notificationTextStyles = css`
 	${textSans.xxsmall()};
 `;
 
+const buildOphanComponentWithNotifications = (
+	link: DropdownLinkType,
+): OphanComponent | undefined => {
+	// Only track if it has notifications
+	if (link?.notifications && link.notifications.length > 0) {
+		return {
+			componentType: NOTIFICATION_COMPONENT_TYPE,
+			id: link.id,
+			labels: link.notifications.map(
+				(notification) => notification.ophanLabel,
+			),
+		};
+	}
+	return undefined;
+};
+
+const addTrackingToUrl = (
+	url: string,
+	ophanComponent: OphanComponent,
+): string => {
+	// Use the acquisitionData query param to send tracking to the destination
+	const acquisitionData = encodeURIComponent(
+		JSON.stringify({
+			source: 'GUARDIAN_WEB',
+			componentId: ophanComponent.id,
+			componentType: ophanComponent.componentType,
+			campaignCode: ophanComponent.id,
+			referrerPageviewId: window.guardian.config.ophan.pageViewId,
+			referrerUrl: window.location.origin + window.location.pathname,
+			labels: ophanComponent.labels,
+		}),
+	);
+	const prefix = url.includes('?') ? '&' : '?';
+	return `${url}${prefix}acquisitionData=${acquisitionData}`;
+};
+
 const NotificationBadge = ({ diameter }: { diameter: number }) => {
 	return (
 		<div css={notificationBadgeStyles(diameter)}>
@@ -238,6 +275,11 @@ type DropdownLinkProps = {
 	index: number;
 };
 const DropdownLink = ({ link, index }: DropdownLinkProps) => {
+	const ophanComponent = useMemo(
+		() => buildOphanComponentWithNotifications(link),
+		[link],
+	);
+
 	const [hasBeenSeen, setNode] = useIsInView({
 		debounce: true,
 	});
@@ -252,6 +294,7 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 	useEffect(() => {
 		if (
 			hasBeenSeen &&
+			ophanComponent &&
 			link.notifications &&
 			link.notifications.length > 0 &&
 			!hasSentViewEvent
@@ -265,41 +308,49 @@ const DropdownLink = ({ link, index }: DropdownLinkProps) => {
 			});
 
 			submitComponentEvent({
-				component: {
-					componentType: NOTIFICATION_COMPONENT_TYPE,
-					id: link.id,
-					labels: link.notifications.map((n) => n.ophanLabel),
-				},
+				component: ophanComponent,
 				action: 'VIEW',
 			});
 		}
-	}, [hasBeenSeen, link.notifications, hasSentViewEvent, link.id]);
+	}, [
+		hasBeenSeen,
+		ophanComponent,
+		link.notifications,
+		hasSentViewEvent,
+		link.id,
+	]);
 
 	useOnce(() => {
-		// The || [] is to keep TypeScript happy. The useOnce guarantees that
-		// .notifications won't be undefined.
-		if ((link.notifications || []).length > 0) {
+		if (ophanComponent) {
 			submitComponentEvent({
-				component: {
-					componentType: NOTIFICATION_COMPONENT_TYPE,
-					id: link.id,
-					labels: link.notifications?.map((n) => n.ophanLabel),
-				},
+				component: ophanComponent,
 				action: 'INSERT',
 			});
 		}
-	}, [link.notifications, link.id]);
+	}, [ophanComponent]);
+
+	const url = ophanComponent
+		? addTrackingToUrl(link.url, ophanComponent)
+		: link.url;
 
 	return (
 		<li css={liStyles} key={link.title} ref={setNode}>
 			<a
-				href={link.url}
+				href={url}
 				css={[
 					linkStyles,
 					!!link.isActive && linkActive,
 					index === 0 && linkFirst,
 				]}
 				data-link-name={link.dataLinkName}
+				onClick={() => {
+					if (ophanComponent) {
+						submitComponentEvent({
+							component: ophanComponent,
+							action: 'CLICK',
+						});
+					}
+				}}
 			>
 				{link.title}
 				{link.notifications?.map((notification) => (
