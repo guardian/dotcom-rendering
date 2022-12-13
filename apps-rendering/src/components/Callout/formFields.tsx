@@ -98,6 +98,7 @@ export const FormField: FC<FormFieldProp> = ({
 					label={label}
 					optional={!mandatory}
 					cssOverrides={fieldInput}
+					supporting={description}
 					value={fieldValue}
 					onChange={(e): void =>
 						setFieldInFormData(formField.id, e.target.value)
@@ -113,6 +114,7 @@ export const FormField: FC<FormFieldProp> = ({
 					cssOverrides={textareaStyles(!!fieldError)}
 					optional={!mandatory}
 					value={fieldValue}
+					supporting={description}
 					onChange={(e): void =>
 						setFieldInFormData(formField.id, e.target.value)
 					}
