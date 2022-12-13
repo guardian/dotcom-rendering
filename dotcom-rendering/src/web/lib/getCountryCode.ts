@@ -55,11 +55,14 @@ export const getLocaleCode = async (): Promise<CountryCode | null> => {
 			return countryCode;
 		})
 		.catch((error) => {
-			console.log(`Error getting location from libs/getLocale`);
-			window.guardian.modules.sentry.reportError(
-				error,
-				'get-country-code',
-			);
+			if (!('name' in error) || error.name !== 'SecurityError') {
+				console.log(`Error getting location from libs/getLocale`);
+				window.guardian.modules.sentry.reportError(
+					error,
+					'get-country-code',
+				);
+			}
+
 			locale = getCountryCodeSync();
 			return locale;
 		});
