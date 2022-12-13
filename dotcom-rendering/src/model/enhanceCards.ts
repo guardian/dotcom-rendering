@@ -113,6 +113,12 @@ const decideImage = (trail: FEFrontCard) => {
 	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0].url;
 };
 
+const decideKicker = (trail: FEFrontCard) => {
+	return trail.properties.isBreaking
+		? 'Breaking news'
+		: trail.header.kicker?.item?.properties.kickerText;
+};
+
 const enhanceTags = (tags: FETagType[]): TagType[] => {
 	return tags.map(({ properties }) => {
 		const {
@@ -181,7 +187,7 @@ export const enhanceCards = (
 				  ).toISOString()
 				: undefined,
 			image: decideImage(faciaCard),
-			kickerText: faciaCard.header.kicker?.item?.properties.kickerText,
+			kickerText: decideKicker(faciaCard),
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(
 						faciaCard.supportingContent,
