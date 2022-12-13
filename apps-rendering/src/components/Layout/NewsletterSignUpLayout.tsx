@@ -90,15 +90,6 @@ interface Props {
 
 const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 	const format = getFormat(item);
-	const newsletter =
-		item.promotedNewsletter.kind === OptionKind.Some
-			? item.promotedNewsletter.value
-			: undefined;
-
-	const regionalFocusText = newsletter?.regionFocus
-		? `${newsletter.regionFocus} Focused`
-		: '';
-	const showRegionalFocus = Boolean(regionalFocusText);
 
 	return (
 		<main css={backgroundStyles(format)}>
@@ -110,37 +101,41 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 					/>
 				</header>
 				<section css={contentRow}>
-					{showRegionalFocus && (
-						<div css={detailBlockStyles}>
-							<SvgNewsletter size="xsmall" />
-							<b>{regionalFocusText}</b>
-						</div>
-					)}
+					{maybeRender(item.promotedNewsletter, (newsletter) => (
+						<>
+							{newsletter.regionFocus && (
+								<div css={detailBlockStyles}>
+									<SvgNewsletter size="small" />
+									<b>{newsletter.regionFocus} Focused</b>
+								</div>
+							)}
+						</>
+					))}
 
 					<Headline item={item} />
 					<Standfirst item={item} />
 
 					{maybeRender(item.promotedNewsletter, (newsletter) => (
-						<div css={frequencyBlockStyles}>
-							<SvgClock size="xsmall" />
+						<>
+							<div css={frequencyBlockStyles}>
+								<SvgClock size="xsmall" />
 
-							<span>
-								You&apos;ll receive this newsletter
-								<b> {newsletter.frequency}</b>
-							</span>
-						</div>
-					))}
+								<span>
+									You&apos;ll receive this newsletter
+									<b> {newsletter.frequency}</b>
+								</span>
+							</div>
 
-					{maybeRender(item.promotedNewsletter, (newsletter) => (
-						<InPageNewsletterSignup
-							newsletter={newsletter}
-							format={getFormat(item)}
-							fallbackContent={
-								<ArticleBody format={item}>
-									{children}
-								</ArticleBody>
-							}
-						/>
+							<InPageNewsletterSignup
+								newsletter={newsletter}
+								format={getFormat(item)}
+								fallbackContent={
+									<ArticleBody format={item}>
+										{children}
+									</ArticleBody>
+								}
+							/>
+						</>
 					))}
 					{item.promotedNewsletter.kind === OptionKind.None && (
 						<ArticleBody format={item}>{children}</ArticleBody>
