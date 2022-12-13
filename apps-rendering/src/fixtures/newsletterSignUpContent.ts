@@ -102,7 +102,7 @@ export const partialNewsletterItem: Partial<NewsletterSignup> = {
 		frequency: 'Weekly',
 		theme: 'lifestyle',
 		successDescription: "We'll send you Fashion Statement every week",
-		regionFocus:'UK',
+		regionFocus: 'UK',
 		paused: false,
 	}),
 	branding: none,
