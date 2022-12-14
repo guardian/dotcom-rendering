@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
@@ -53,6 +54,7 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
+import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, Stuck } from './lib/stickiness';
 
@@ -276,14 +278,13 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	/**
-	We need change the height values depending on whether the labs header is there or not to
-	keep the headlines appearing at a consistent height between labs and non labs immersive
-	articles. The labs header height is defined by the labs logo, which has a height of 47px
-	and 4px of padding on the top and bottom, so the labs header has a total height of 55px.
+	We need change the height values depending on whether the labs header is there or not to keep
+	the headlines appearing at a consistent height between labs and non labs immersive articles.
 	*/
 
-	const labsHeaderHeight = 55;
-	const navHeight = parseInt(minNavHeight.styles.slice(11, -2));
+	const labsHeaderHeight = LABS_HEADER_HEIGHT;
+	const navHeightCSS: SerializedStyles = minNavHeight;
+	const navHeight = parseInt(navHeightCSS.styles.slice(11, -2));
 	const combinedHeight = (navHeight + labsHeaderHeight).toString();
 
 	const navAndLabsHeaderHeight = isLabs
