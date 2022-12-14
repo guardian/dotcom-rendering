@@ -6,6 +6,55 @@ const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 const DEV = process.env.NODE_ENV === 'development';
 const nodeVersion = process.versions.node;
 
+// temporary switch in case we need to revert quickly
+const USE_SWC = true;
+
+const babelLoader = [
+	{
+		loader: 'babel-loader',
+		options: {
+			presets: [
+				// TODO: remove @babel/preset-react once we stop using JSX in server folder
+				'@babel/preset-react',
+				[
+					'@babel/preset-env',
+					{
+						targets: {
+							node: 'current',
+						},
+					},
+				],
+			],
+			compact: true,
+		},
+	},
+	{
+		loader: 'ts-loader',
+		options: {
+			configFile: 'tsconfig.build.json',
+			transpileOnly: true,
+		},
+	},
+];
+
+const swcLoader = [
+	{
+		loader: 'swc-loader',
+		options: {
+			...swcConfig,
+			minify: DEV ? false : true,
+			env: {
+				// debug: true,
+				targets: {
+					node: nodeVersion,
+				},
+				// fix for @guardian/libs storage.ts class properties
+				include: ['transform-class-properties'],
+			},
+		},
+	},
+];
+
 /** @type {(options: { sessionId: string } ) => import('webpack').Configuration} */
 module.exports = ({ sessionId }) => ({
 	entry: {
@@ -73,21 +122,8 @@ module.exports = ({ sessionId }) => ({
 					and: [/node_modules/],
 					not: [/@guardian/, /dynamic-import-polyfill/],
 				},
-				use: {
-					loader: 'swc-loader',
-					options: {
-						...swcConfig,
-						minify: DEV ? false : true,
-						env: {
-							// debug: true,
-							targets: {
-								node: nodeVersion,
-							},
-							// fix for @guardian/libs storage.ts class properties
-							include: ['transform-class-properties'],
-						},
-					},
-				},
+				// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- temporary switch
+				use: USE_SWC ? swcLoader : babelLoader,
 			},
 			// TODO: find a way to remove
 			{
