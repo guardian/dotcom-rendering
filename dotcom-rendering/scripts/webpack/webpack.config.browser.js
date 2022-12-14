@@ -48,7 +48,6 @@ const getLoaders = (bundle) => {
 					},
 				},
 			];
-		case 'modern':
 		case 'variant':
 			return [
 				{
@@ -63,33 +62,33 @@ const getLoaders = (bundle) => {
 					},
 				},
 			];
-		// case 'modern':
-		// 	return [
-		// 		{
-		// 			loader: 'babel-loader',
-		// 			options: {
-		// 				presets: [
-		// 					'@babel/preset-react',
-		// 					[
-		// 						'@babel/preset-env',
-		// 						{
-		// 							bugfixes: true,
-		// 							targets:
-		// 								'extends @guardian/browserslist-config',
-		// 						},
-		// 					],
-		// 				],
-		// 				compact: true,
-		// 			},
-		// 		},
-		// 		{
-		// 			loader: 'ts-loader',
-		// 			options: {
-		// 				configFile: 'tsconfig.build.json',
-		// 				transpileOnly: true,
-		// 			},
-		// 		},
-		// 	];
+		case 'modern':
+			return [
+				{
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							'@babel/preset-react',
+							[
+								'@babel/preset-env',
+								{
+									bugfixes: true,
+									targets:
+										'extends @guardian/browserslist-config',
+								},
+							],
+						],
+						compact: true,
+					},
+				},
+				{
+					loader: 'ts-loader',
+					options: {
+						configFile: 'tsconfig.build.json',
+						transpileOnly: true,
+					},
+				},
+			];
 	}
 };
 
