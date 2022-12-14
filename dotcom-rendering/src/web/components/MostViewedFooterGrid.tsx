@@ -13,7 +13,7 @@ import { MostViewedFooterItem } from './MostViewedFooterItem';
 
 const thinGreySolid = `1px solid ${border.secondary}`;
 
-const hideList = css`
+const hidePanel = css`
 	display: none;
 `;
 
@@ -192,6 +192,7 @@ export const MostViewedFooterGrid = ({
 					role={renderAsTabs ? 'tabpanel' : undefined}
 					id={`tabs-popular-${i}`}
 					key={`tabs-popular-${tab.heading}`}
+					css={i !== selectedTabIndex && hidePanel}
 				>
 					<h3
 						css={css`
@@ -201,10 +202,7 @@ export const MostViewedFooterGrid = ({
 						Most viewed {tab.heading}
 					</h3>
 					<ol
-						css={[
-							gridContainer,
-							i !== selectedTabIndex && hideList,
-						]}
+						css={gridContainer}
 						data-cy={`tab-body-${i}`}
 						data-link-name={tab.heading}
 						data-testid={tab.heading}
