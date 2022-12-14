@@ -25,6 +25,15 @@ const ieFallback = css`
 	}
 `;
 
+const wrapper = css`
+	margin-top: 12px;
+	margin-bottom: 12px;
+	img {
+		object-fit: cover;
+		width: 100%;
+	}
+`;
+
 const SideBySideGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -98,16 +107,7 @@ const OneImage = ({
 	format: ArticleFormat;
 	caption?: string;
 }) => (
-	<div
-		css={css`
-			margin-top: 12px;
-			margin-bottom: 12px;
-			img {
-				object-fit: cover;
-				width: 100%;
-			}
-		`}
-	>
+	<div css={wrapper}>
 		<ImageComponent
 			format={format}
 			element={images[0]}
@@ -133,17 +133,7 @@ const TwoImage = ({
 	format: ArticleFormat;
 	caption?: string;
 }) => (
-	<div
-		css={css`
-			margin-top: 12px;
-			margin-bottom: 12px;
-
-			img {
-				object-fit: cover;
-				width: 100%;
-			}
-		`}
-	>
+	<div css={wrapper}>
 		<SideBySideGrid>
 			<GridItem area="first">
 				<ImageComponent
@@ -181,17 +171,7 @@ const ThreeImage = ({
 	format: ArticleFormat;
 	caption?: string;
 }) => (
-	<div
-		css={css`
-			margin-top: 12px;
-			margin-bottom: 12px;
-
-			img {
-				object-fit: cover;
-				width: 100%;
-			}
-		`}
-	>
+	<div css={wrapper}>
 		<OneAboveTwoGrid>
 			<GridItem area="first">
 				<ImageComponent
@@ -242,16 +222,7 @@ const FourImage = ({
 	format: ArticleFormat;
 	caption?: string;
 }) => (
-	<div
-		css={css`
-			margin-top: 12px;
-			margin-bottom: 12px;
-			img {
-				object-fit: cover;
-				width: 100%;
-			}
-		`}
-	>
+	<div css={wrapper}>
 		<GridOfFour>
 			<GridItem area="first">
 				<ImageComponent
