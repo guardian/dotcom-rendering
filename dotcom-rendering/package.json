@@ -128,6 +128,7 @@
 		"@types/react-google-recaptcha": "^2.1.5",
 		"@types/react-test-renderer": "18.0.0",
 		"@types/response-time": "^2.3.4",
+		"@types/rimraf": "^3.0.2",
 		"@types/sanitize-html": "^2.6.0",
 		"@types/twitter-for-web": "^0.0.2",
 		"@types/uuid": "^8.3.4",
