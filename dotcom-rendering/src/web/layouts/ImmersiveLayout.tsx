@@ -276,12 +276,10 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const isLabs = format.theme === ArticleSpecial.Labs;
 
 	/**
-	now that the nav bar and labs header aren't included in the div which the
-	hasMainMediaStyles are applied to, we need change the height values
-	depending on whether the labs header is there or not to keep the headlines
-	appearing at a consistent height between labs and non labs immersive articles
-	The labs header height is defined by the labs logo, which has a height of 47px and
-	3px of padding on the top and bottom, so the labs header has a total height of 55px
+	We need change the height values depending on whether the labs header is there or not to
+	keep the headlines appearing at a consistent height between labs and non labs immersive
+	articles. The labs header height is defined by the labs logo, which has a height of 47px
+	and 4px of padding on the top and bottom, so the labs header has a total height of 55px.
 	*/
 
 	const labsHeaderHeight = 55;
