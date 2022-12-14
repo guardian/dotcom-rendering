@@ -41,6 +41,7 @@ type Props = {
 	filterKeyEvents?: boolean;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
+	isInLiveblogAdSlotTest?: boolean;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -135,6 +136,7 @@ export const ArticleBody = ({
 	availableTopics,
 	selectedTopics,
 	keywordIds,
+	isInLiveblogAdSlotTest = false,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
@@ -183,6 +185,7 @@ export const ArticleBody = ({
 					availableTopics={availableTopics}
 					selectedTopics={selectedTopics}
 					keywordIds={keywordIds}
+					isInLiveblogAdSlotTest={isInLiveblogAdSlotTest}
 				/>
 			</div>
 		);
