@@ -13,10 +13,10 @@ import {
 	TopicFilterBank,
 } from '../components/TopicFilterBank.importable';
 
-type Props = {
+type CommonProps = {
 	format: ArticleFormat;
 	blocks: Block[];
-	adTargeting: AdTargeting;
+	adTargeting?: AdTargeting;
 	pinnedPost?: Block;
 	host?: string;
 	pageId: string;
@@ -31,7 +31,6 @@ type Props = {
 	tags: TagType[];
 	isPaidContent: boolean;
 	keywordIds: string;
-	contributionsServiceUrl: string;
 	onFirstPage?: boolean;
 	keyEvents?: Block[];
 	filterKeyEvents?: boolean;
@@ -39,34 +38,46 @@ type Props = {
 	selectedTopics?: Topic[];
 };
 
-export const LiveBlogRenderer = ({
-	format,
-	blocks,
-	pinnedPost,
-	adTargeting,
-	host,
-	pageId,
-	webTitle,
-	ajaxUrl,
-	switches,
-	isAdFreeUser,
-	isSensitive,
-	isLiveUpdate,
-	section,
-	shouldHideReaderRevenue,
-	tags,
-	isPaidContent,
-	keywordIds,
-	contributionsServiceUrl,
-	onFirstPage,
-	keyEvents,
-	filterKeyEvents = false,
-	availableTopics,
-	selectedTopics,
-}: Props) => {
+type AppsProps = {
+	platform: Platform.Apps;
+}
+
+type WebProps = {
+	platform: Platform.Web;
+	contributionsServiceUrl: string;
+}
+
+type Props = CommonProps & (AppsProps | WebProps);
+
+export const LiveBlogRenderer = (props: Props) => {
+	const {
+		format,
+		blocks,
+		pinnedPost,
+		adTargeting,
+		host,
+		pageId,
+		webTitle,
+		ajaxUrl,
+		switches,
+		isAdFreeUser,
+		isSensitive,
+		isLiveUpdate,
+		section,
+		shouldHideReaderRevenue,
+		tags,
+		isPaidContent,
+		keywordIds,
+		onFirstPage,
+		keyEvents,
+		filterKeyEvents = false,
+		availableTopics,
+		selectedTopics,
+		platform,
+	} = props;
 	const filtered =
 		(selectedTopics && selectedTopics.length > 0) || filterKeyEvents;
-
+	
 	return (
 		<>
 			{pinnedPost && onFirstPage && !filtered && (
@@ -151,14 +162,14 @@ export const LiveBlogRenderer = ({
 					/>
 				);
 			})}
-			{blocks.length > 4 && (
+			{blocks.length > 4 && platform === Platform.Web && (
 				<Island clientOnly={true}>
 					<LiveBlogEpic
 						section={section}
 						shouldHideReaderRevenue={shouldHideReaderRevenue}
 						tags={tags}
 						isPaidContent={isPaidContent}
-						contributionsServiceUrl={contributionsServiceUrl}
+						contributionsServiceUrl={props.contributionsServiceUrl}
 						pageId={pageId}
 						keywordIds={keywordIds}
 					/>

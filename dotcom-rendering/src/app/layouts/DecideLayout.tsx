@@ -1,16 +1,14 @@
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
-import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
 import { StandardLayout } from './StandardLayout';
 
 type Props = {
 	CAPIArticle: FEArticleType;
-	NAV: NavType;
 	format: ArticleFormat;
 };
 
-export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
+export const DecideLayout = ({ CAPIArticle, format }: Props) => {
 	switch (format.display) {
 		case ArticleDisplay.Immersive: {
 			switch (format.design) {
@@ -57,7 +55,6 @@ export const DecideLayout = ({ CAPIArticle, NAV, format }: Props) => {
 					return (
 						<StandardLayout
 							CAPIArticle={CAPIArticle}
-							NAV={NAV}
 							format={format}
 						/>
 					);

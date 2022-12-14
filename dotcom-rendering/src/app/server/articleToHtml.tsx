@@ -12,11 +12,10 @@ import {
 	generateScriptTags,
 	getScriptsFromManifest,
 } from '../../lib/assets';
-import { extractNAV } from '../../model/extract-nav';
 // import { makeWindowGuardian } from '../../model/window-guardian';
 import type { CAPIElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
-import { ArticlePage } from '../../web/components/ArticlePage';
+import { ArticlePage } from '../components/ArticlePage';
 import { decideFormat } from '../../web/lib/decideFormat';
 import { decideTheme } from '../../web/lib/decideTheme';
 import { getHttp3Url } from '../../web/lib/getHttp3Url';
@@ -37,7 +36,6 @@ const decideTitle = (article: FEArticleType): string => {
 };
 
 export const articleToHtml = ({ article }: Props): string => {
-	const NAV = extractNAV(article.nav);
 	const title = decideTitle(article);
 	const key = 'ar';
 	const cache = createCache({ key });
@@ -50,7 +48,7 @@ export const articleToHtml = ({ article }: Props): string => {
 
 	const html = renderToString(
 		<CacheProvider value={cache}>
-			<ArticlePage format={format} CAPIArticle={article} NAV={NAV} />
+			<ArticlePage format={format} CAPIArticle={article} />
 		</CacheProvider>,
 	);
 

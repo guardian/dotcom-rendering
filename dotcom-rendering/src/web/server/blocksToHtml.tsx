@@ -58,6 +58,7 @@ export const blocksToHtml = ({
 			isPaidContent={false}
 			contributionsServiceUrl=""
 			keywordIds={keywordIds}
+			platform={Platform.Web}
 		/>,
 	);
 

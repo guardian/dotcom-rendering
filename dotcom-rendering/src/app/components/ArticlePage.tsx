@@ -3,7 +3,6 @@ import { ArticleDesign } from '@guardian/libs';
 import { brandAlt, focusHalo, neutral } from '@guardian/source-foundations';
 import { StrictMode } from 'react';
 // import { filterABTestSwitches } from '../../model/enhance-switches';
-import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
 import { FetchCommentCounts } from '../../web/components/FetchCommentCounts.importable';
 import { FocusStyles } from '../../web/components/FocusStyles.importable';
@@ -14,7 +13,6 @@ import { DecideLayout } from '../layouts/DecideLayout';
 
 type Props = {
 	CAPIArticle: FEArticleType;
-	NAV: NavType;
 	format: ArticleFormat;
 };
 
@@ -27,7 +25,7 @@ type Props = {
  * @param {NAVType} props.NAV - The article JSON data
  * @param {ArticleFormat} props.format - The format model for the article
  * */
-export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
+export const ArticlePage = ({ CAPIArticle, format }: Props) => {
 	return (
 		<StrictMode>
 			<Global
@@ -66,7 +64,7 @@ export const ArticlePage = ({ CAPIArticle, NAV, format }: Props) => {
 					isDev={!!CAPIArticle.config.isDev}
 				/>
 			</Island> */}
-			<DecideLayout CAPIArticle={CAPIArticle} NAV={NAV} format={format} />
+			<DecideLayout CAPIArticle={CAPIArticle} format={format} />
 		</StrictMode>
 	);
 };

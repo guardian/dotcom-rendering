@@ -13,11 +13,11 @@ import { revealStyles } from '../lib/revealStyles';
 import { Island } from './Island';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
 
-type Props = {
+type CommonProps = {
 	format: ArticleFormat;
 	blocks: Block[];
 	pinnedPost?: Block;
-	adTargeting: AdTargeting;
+	adTargeting?: AdTargeting;
 	host?: string;
 	pageId: string;
 	webTitle: string;
@@ -28,7 +28,6 @@ type Props = {
 	shouldHideReaderRevenue: boolean;
 	tags: TagType[];
 	isPaidContent: boolean;
-	contributionsServiceUrl: string;
 	contentType: string;
 	sectionName: string;
 	keywordIds: string;
@@ -42,6 +41,17 @@ type Props = {
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
 };
+
+type AppsProps = {
+	platform: Platform.Apps;
+}
+
+type WebProps = {
+	platform: Platform.Web;
+	contributionsServiceUrl: string;
+}
+
+type Props = CommonProps & (AppsProps | WebProps);
 
 const globalH2Styles = (display: ArticleDisplay) => css`
 	h2:not([data-ignore='global-h2-styling']) {
@@ -107,35 +117,36 @@ const globalLinkStyles = (palette: Palette) => css`
 	}
 `;
 
-export const ArticleBody = ({
-	format,
-	blocks,
-	pinnedPost,
-	adTargeting,
-	host,
-	pageId,
-	webTitle,
-	ajaxUrl,
-	switches,
-	isAdFreeUser,
-	section,
-	shouldHideReaderRevenue,
-	tags,
-	isPaidContent,
-	contributionsServiceUrl,
-	contentType,
-	sectionName,
-	isPreview,
-	idUrl,
-	isSensitive,
-	isDev,
-	onFirstPage,
-	keyEvents,
-	filterKeyEvents,
-	availableTopics,
-	selectedTopics,
-	keywordIds,
-}: Props) => {
+export const ArticleBody = (props: Props) => {
+	const {
+		format,
+		blocks,
+		pinnedPost,
+		adTargeting,
+		host,
+		pageId,
+		webTitle,
+		ajaxUrl,
+		switches,
+		isAdFreeUser,
+		section,
+		shouldHideReaderRevenue,
+		tags,
+		isPaidContent,
+		contentType,
+		sectionName,
+		isPreview,
+		idUrl,
+		isSensitive,
+		isDev,
+		onFirstPage,
+		keyEvents,
+		filterKeyEvents,
+		availableTopics,
+		selectedTopics,
+		keywordIds,
+		platform,
+	} = props;
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
 
@@ -176,13 +187,13 @@ export const ArticleBody = ({
 					shouldHideReaderRevenue={shouldHideReaderRevenue}
 					tags={tags}
 					isPaidContent={isPaidContent}
-					contributionsServiceUrl={contributionsServiceUrl}
 					onFirstPage={onFirstPage}
 					keyEvents={keyEvents}
 					filterKeyEvents={filterKeyEvents}
 					availableTopics={availableTopics}
 					selectedTopics={selectedTopics}
 					keywordIds={keywordIds}
+					{...(platform === Platform.Web ? { platform, contributionsServiceUrl: props.contributionsServiceUrl } : { platform })}
 				/>
 			</div>
 		);

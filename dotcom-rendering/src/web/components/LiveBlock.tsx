@@ -11,7 +11,7 @@ type Props = {
 	block: Block;
 	pageId: string;
 	webTitle: string;
-	adTargeting: AdTargeting;
+	adTargeting?: AdTargeting;
 	host?: string;
 	ajaxUrl: string;
 	isAdFreeUser: boolean;

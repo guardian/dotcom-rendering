@@ -9,7 +9,6 @@ import {
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
-import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
 import { ArticleBody } from '../../web/components/ArticleBody';
 import { ArticleContainer } from '../../web/components/ArticleContainer';
@@ -274,11 +273,10 @@ const starWrapper = css`
 
 interface Props {
 	CAPIArticle: FEArticleType;
-	NAV: NavType;
 	format: ArticleFormat;
 }
 
-export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
+export const StandardLayout = ({ CAPIArticle, format }: Props) => {
 	const {
 		config: { isPaidContent, host },
 	} = CAPIArticle;
@@ -289,7 +287,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const isMatchReport =
 		format.design === ArticleDesign.MatchReport && !!footballMatchUrl;
 
-	const showComments = CAPIArticle.isCommentable;
+	// const showComments = CAPIArticle.isCommentable;
 
 	// const { branding } =
 	// 	CAPIArticle.commercialProperties[CAPIArticle.editionId];
@@ -428,7 +426,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<MainMedia
 									format={format}
 									elements={CAPIArticle.mainMediaElements}
-									adTargeting={adTargeting}
 									host={host}
 									pageId={CAPIArticle.pageId}
 									webTitle={CAPIArticle.webTitle}
@@ -456,7 +453,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								<ArticleMeta
-									branding={branding}
 									format={format}
 									pageId={CAPIArticle.pageId}
 									webTitle={CAPIArticle.webTitle}
@@ -496,7 +492,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									format={format}
 									blocks={CAPIArticle.blocks}
 									pinnedPost={CAPIArticle.pinnedPost}
-									adTargeting={adTargeting}
 									host={host}
 									pageId={CAPIArticle.pageId}
 									webTitle={CAPIArticle.webTitle}
