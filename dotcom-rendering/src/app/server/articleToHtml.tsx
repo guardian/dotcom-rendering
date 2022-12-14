@@ -10,6 +10,7 @@ import {
 import {
 	ASSET_ORIGIN,
 	generateScriptTags,
+	getAppScript,
 	getScriptsFromManifest,
 } from '../../lib/assets';
 // import { makeWindowGuardian } from '../../model/window-guardian';
@@ -102,37 +103,12 @@ export const articleToHtml = ({ article }: Props): string => {
 	 * Scripts will be executed in the order they appear in this array
 	 */
 	const priorityScriptTags = generateScriptTags(
-		[
-			// ...getScriptArrayFromFile('bootCmp.js'),
-			// ...getScriptArrayFromFile('ophan.js'),
-			// process.env.COMMERCIAL_BUNDLE_URL ??
-			// 	article.config.commercialBundleUrl,
-			// ...getScriptArrayFromFile('sentryLoader.js'),
-			...getScriptArrayFromFile('dynamicImport.js'),
-			pageHasNonBootInteractiveElements &&
-				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,
-			...getScriptArrayFromFile('islands.js'),
-		].map((script) =>
+		[getAppScript()].map((script) =>
 			offerHttp3 && script ? getHttp3Url(script) : script,
 		),
 	);
 
-	/**
-	 * Low priority scripts. These scripts will be requested
-	 * asynchronously after the main HTML has been parsed. Execution
-	 * order is not guaranteed. It is even possible that these execute
-	 * *before* the high priority scripts, although this is very
-	 * unlikely.
-	 */
-	const lowPriorityScriptTags = generateScriptTags(
-		[
-			...getScriptArrayFromFile('atomIframe.js'),
-			...getScriptArrayFromFile('embedIframe.js'),
-			...getScriptArrayFromFile('newsletterEmbedIframe.js'),
-			...getScriptArrayFromFile('relativeTime.js'),
-			...getScriptArrayFromFile('initDiscussion.js'),
-		].map((script) => (offerHttp3 ? getHttp3Url(script) : script)),
-	);
+	const lowPriorityScriptTags: string[] = [];
 
 	/**
 	 * We escape windowGuardian here to prevent errors when the data

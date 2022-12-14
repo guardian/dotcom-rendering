@@ -90,6 +90,15 @@ const getScripts = (
 	});
 };
 
+export const getAppScript = (): string => {
+	if (isDev) {
+		return `${ASSET_ORIGIN}assets/main.apps.js`;
+	}
+
+	const manifest = getManifest('./manifest.apps.json');
+	return `${ASSET_ORIGIN}assets/${manifest['main.js']}`;
+};
+
 /**
  * A curried function that takes an array of manifests.
  *

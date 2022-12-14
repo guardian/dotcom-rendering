@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
 const GuStatsReportPlugin = require('./plugins/gu-stats-report-plugin');
 
@@ -13,7 +14,7 @@ const generateName = (bundle) => {
 };
 
 /**
- * @param {'legacy' | 'modern' | 'variant'} bundle
+ * @param {'legacy' | 'modern' | 'variant' | 'apps'} bundle
  * @returns {string}
  */
 const getLoaders = (bundle) => {
@@ -32,6 +33,32 @@ const getLoaders = (bundle) => {
 										ie: '11',
 									},
 									modules: false,
+								},
+							],
+						],
+						compact: true,
+					},
+				},
+				{
+					loader: 'ts-loader',
+					options: {
+						configFile: 'tsconfig.build.json',
+						transpileOnly: true,
+					},
+				},
+			];
+		case 'apps':
+			return [
+				{
+					loader: 'babel-loader',
+					options: {
+						presets: [
+							'@babel/preset-react',
+							[
+								'@babel/preset-env',
+								{
+									bugfixes: true,
+									targets: ['android >= 5', 'ios >= 12'],
 								},
 							],
 						],
@@ -78,25 +105,28 @@ const getLoaders = (bundle) => {
 };
 
 /**
- * @param {{ bundle: 'legacy' | 'modern'  | 'variant', sessionId: string }} options
+ * @param {{ bundle: 'legacy' | 'modern' | 'apps' | 'variant', sessionId: string }} options
  * @returns {import('webpack').Configuration}
  */
 module.exports = ({ bundle, sessionId }) => ({
-	entry: {
-		sentryLoader: './src/web/browser/sentryLoader/init.ts',
-		bootCmp: './src/web/browser/bootCmp/init.ts',
-		ga: './src/web/browser/ga/init.ts',
-		ophan: './src/web/browser/ophan/init.ts',
-		islands: './src/web/browser/islands/init.ts',
-		dynamicImport: './src/web/browser/dynamicImport/init.ts',
-		atomIframe: './src/web/browser/atomIframe/init.ts',
-		embedIframe: './src/web/browser/embedIframe/init.ts',
-		newsletterEmbedIframe:
-			'./src/web/browser/newsletterEmbedIframe/init.ts',
-		relativeTime: './src/web/browser/relativeTime/init.ts',
-		initDiscussion: './src/web/browser/initDiscussion/init.ts',
-		debug: './src/web/browser/debug/init.ts',
-	},
+	entry:
+		bundle === 'apps'
+			? './src/app/client/init.ts'
+			: {
+					sentryLoader: './src/web/browser/sentryLoader/init.ts',
+					bootCmp: './src/web/browser/bootCmp/init.ts',
+					ga: './src/web/browser/ga/init.ts',
+					ophan: './src/web/browser/ophan/init.ts',
+					islands: './src/web/browser/islands/init.ts',
+					dynamicImport: './src/web/browser/dynamicImport/init.ts',
+					atomIframe: './src/web/browser/atomIframe/init.ts',
+					embedIframe: './src/web/browser/embedIframe/init.ts',
+					newsletterEmbedIframe:
+						'./src/web/browser/newsletterEmbedIframe/init.ts',
+					relativeTime: './src/web/browser/relativeTime/init.ts',
+					initDiscussion: './src/web/browser/initDiscussion/init.ts',
+					debug: './src/web/browser/debug/init.ts',
+			  },
 	output: {
 		filename: (data) => {
 			// We don't want to hash the debug script so it can be used in bookmarklets
@@ -110,6 +140,13 @@ module.exports = ({ bundle, sessionId }) => ({
 		new WebpackManifestPlugin({
 			fileName: `manifest.${bundle}.json`,
 		}),
+		...(bundle === 'apps'
+			? [
+					new webpack.optimize.LimitChunkCountPlugin({
+						maxChunks: 1,
+					}),
+			  ]
+			: []),
 		...(DEV
 			? [
 					new GuStatsReportPlugin({
