@@ -193,7 +193,6 @@ export const MostViewedFooterGrid = ({
 					id={`tabs-popular-${i}`}
 					key={`tabs-popular-${tab.heading}`}
 				>
-					{/*TODO: Decide whether it's h2 or h3*/}
 					<h3
 						css={css`
 							${visuallyHidden}
