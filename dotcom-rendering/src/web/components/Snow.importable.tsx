@@ -101,6 +101,10 @@ export const Snow = () => {
 				for (const flakeName in previousFlakes) {
 					const flake = flakes[flakeName];
 
+					if (!flake) {
+						continue;
+					}
+
 					const updatedFlake = { ...flake };
 					// Apply the change in x and y coordinate for each snowflake.
 					updatedFlake.x +=
@@ -122,12 +126,11 @@ export const Snow = () => {
 				document
 					.querySelectorAll<HTMLElement>('.snowflake')
 					.forEach((flake) => {
-						if (flake.dataset.name) {
-							flake.style.transform = `translate3d(${
-								previousFlakes[flake.dataset.name].x
-							}vw, ${
-								previousFlakes[flake.dataset.name].y
-							}px, 0.0)`;
+						const previousFlake =
+							flake.dataset.name &&
+							previousFlakes[flake.dataset.name];
+						if (previousFlake) {
+							flake.style.transform = `translate3d(${previousFlake.x}vw, ${previousFlake.y}px, 0.0)`;
 						}
 					});
 

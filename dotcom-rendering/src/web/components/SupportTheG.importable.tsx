@@ -211,7 +211,9 @@ const ReaderRevenueLinksRemote = ({
 						(headerModule: {
 							[key: string]: React.ElementType;
 						}) => {
-							setSupportHeader(() => headerModule[module.name]);
+							setSupportHeader(
+								() => headerModule[module.name] ?? null,
+							);
 						},
 					);
 			})

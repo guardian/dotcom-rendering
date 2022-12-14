@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { brandBackground } from '@guardian/source-foundations';
+import { HeaderLink } from '../../types/header';
 import { Dropdown } from './Dropdown';
 
 const Header = ({ children }: { children: React.ReactNode }) => (
@@ -32,7 +33,7 @@ const Nav = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
-const links = [
+const links: [HeaderLink, HeaderLink, HeaderLink, HeaderLink] = [
 	{
 		id: 'uk',
 		url: '/preference/edition/uk',

@@ -43,7 +43,7 @@ const decideImageWidths = ({
 	role: RoleType;
 	isMainMedia?: boolean;
 	format: ArticleFormat;
-}): ImageWidthType[] => {
+}): [ImageWidthType, ...ImageWidthType[]] => {
 	if (isMainMedia) {
 		switch (format.display) {
 			case ArticleDisplay.Immersive: {
@@ -179,7 +179,7 @@ const generateImageURL = ({
 	resolution: 'low' | 'high';
 }): string => {
 	const url = new URL(master);
-	const [service] = url.hostname.split('.');
+	const service = url.hostname.split('.')[0] ?? '';
 
 	const params = new URLSearchParams({
 		width: imageWidth.toString(),
@@ -229,8 +229,9 @@ type ImageSource = {
  */
 export const generateSources = (
 	master: string,
-	imageWidths: ImageWidthType[],
-): ImageSource[] =>
+	imageWidths: [ImageWidthType, ...ImageWidthType[]],
+): [ImageSource, ...ImageSource[]] =>
+	// @ts-expect-error -- We're taking a slice which nullifies the non-empty array type but it will still return a non empty array.
 	imageWidths
 		.slice()
 		.sort(descendingByBreakpoint)
@@ -276,6 +277,8 @@ export const Picture = ({
 	 * so the last one is the smallest.
 	 */
 	const [fallbackSource] = sources.slice(-1);
+
+	if (!fallbackSource) return null;
 
 	return (
 		<picture css={block}>
