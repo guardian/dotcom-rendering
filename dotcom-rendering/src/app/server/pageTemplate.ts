@@ -169,6 +169,7 @@ https://workforus.theguardian.com/careers/product-engineering/
 
                 <script>
                     window.guardian = ${/* windowGuardian */ '{}'};
+					window.guardian.polyfilled = true; // We're assuming the apps webview provides whats needed
                     window.guardian.queue = []; // Queue for functions to be fired by polyfill.io callback
                 </script>
 

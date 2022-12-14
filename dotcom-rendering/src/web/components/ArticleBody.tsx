@@ -5,6 +5,7 @@ import { between, body, headline, space } from '@guardian/source-foundations';
 import { isRecipe } from '../../model/enhance-recipes';
 import type { Switches } from '../../types/config';
 import type { Palette } from '../../types/palette';
+import { Platform } from '../../types/platform';
 import type { TagType } from '../../types/tag';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { decidePalette } from '../lib/decidePalette';
@@ -44,12 +45,12 @@ type CommonProps = {
 
 type AppsProps = {
 	platform: Platform.Apps;
-}
+};
 
 type WebProps = {
 	platform: Platform.Web;
 	contributionsServiceUrl: string;
-}
+};
 
 type Props = CommonProps & (AppsProps | WebProps);
 
@@ -193,7 +194,13 @@ export const ArticleBody = (props: Props) => {
 					availableTopics={availableTopics}
 					selectedTopics={selectedTopics}
 					keywordIds={keywordIds}
-					{...(platform === Platform.Web ? { platform, contributionsServiceUrl: props.contributionsServiceUrl } : { platform })}
+					{...(platform === Platform.Web
+						? {
+								platform,
+								contributionsServiceUrl:
+									props.contributionsServiceUrl,
+						  }
+						: { platform })}
 				/>
 			</div>
 		);

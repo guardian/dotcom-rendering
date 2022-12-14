@@ -17,6 +17,7 @@ import React from 'react';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
+import { Platform } from '../../types/platform';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -513,6 +514,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							<GridItem area="body" element="article">
 								<ArticleContainer format={format}>
 									<ArticleBody
+										platform={Platform.Web}
 										format={format}
 										blocks={CAPIArticle.blocks}
 										adTargeting={adTargeting}

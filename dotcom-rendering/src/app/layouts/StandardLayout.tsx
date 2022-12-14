@@ -10,6 +10,7 @@ import {
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { FEArticleType } from '../../types/frontend';
+import { Platform } from '../../types/platform';
 import { ArticleBody } from '../../web/components/ArticleBody';
 import { ArticleContainer } from '../../web/components/ArticleContainer';
 import { ArticleHeadline } from '../../web/components/ArticleHeadline';
@@ -489,6 +490,7 @@ export const StandardLayout = ({ CAPIArticle, format }: Props) => {
 									</div>
 								)}
 								<ArticleBody
+									platform={Platform.Apps}
 									format={format}
 									blocks={CAPIArticle.blocks}
 									pinnedPost={CAPIArticle.pinnedPost}
@@ -506,9 +508,6 @@ export const StandardLayout = ({ CAPIArticle, format }: Props) => {
 									tags={CAPIArticle.tags}
 									isPaidContent={
 										!!CAPIArticle.config.isPaidContent
-									}
-									contributionsServiceUrl={
-										contributionsServiceUrl
 									}
 									contentType={CAPIArticle.contentType}
 									sectionName={CAPIArticle.sectionName || ''}

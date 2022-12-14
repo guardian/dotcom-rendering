@@ -15,10 +15,10 @@ import {
 // import { makeWindowGuardian } from '../../model/window-guardian';
 import type { CAPIElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
-import { ArticlePage } from '../components/ArticlePage';
 import { decideFormat } from '../../web/lib/decideFormat';
 import { decideTheme } from '../../web/lib/decideTheme';
 import { getHttp3Url } from '../../web/lib/getHttp3Url';
+import { ArticlePage } from '../components/ArticlePage';
 import { pageTemplate } from './pageTemplate';
 
 interface Props {
@@ -103,11 +103,11 @@ export const articleToHtml = ({ article }: Props): string => {
 	 */
 	const priorityScriptTags = generateScriptTags(
 		[
-			...getScriptArrayFromFile('bootCmp.js'),
-			...getScriptArrayFromFile('ophan.js'),
-			process.env.COMMERCIAL_BUNDLE_URL ??
-				article.config.commercialBundleUrl,
-			...getScriptArrayFromFile('sentryLoader.js'),
+			// ...getScriptArrayFromFile('bootCmp.js'),
+			// ...getScriptArrayFromFile('ophan.js'),
+			// process.env.COMMERCIAL_BUNDLE_URL ??
+			// 	article.config.commercialBundleUrl,
+			// ...getScriptArrayFromFile('sentryLoader.js'),
 			...getScriptArrayFromFile('dynamicImport.js'),
 			pageHasNonBootInteractiveElements &&
 				`${ASSET_ORIGIN}static/frontend/js/curl-with-js-and-domReady.js`,

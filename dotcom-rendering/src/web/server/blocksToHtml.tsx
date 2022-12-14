@@ -1,5 +1,6 @@
 import { renderToString } from 'react-dom/server';
 import { buildAdTargeting } from '../../lib/ad-targeting';
+import { Platform } from '../../types/platform';
 import { decideFormat } from '../lib/decideFormat';
 import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 
@@ -40,6 +41,7 @@ export const blocksToHtml = ({
 
 	const html = renderToString(
 		<LiveBlogRenderer
+			platform={Platform.Web}
 			blocks={blocks}
 			format={format}
 			adTargeting={adTargeting}
@@ -58,7 +60,6 @@ export const blocksToHtml = ({
 			isPaidContent={false}
 			contributionsServiceUrl=""
 			keywordIds={keywordIds}
-			platform={Platform.Web}
 		/>,
 	);
 

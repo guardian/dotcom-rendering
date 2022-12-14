@@ -1,5 +1,6 @@
 import { Hide } from '@guardian/source-react-components';
 import type { Switches } from '../../types/config';
+import { Platform } from '../../types/platform';
 import type { TagType } from '../../types/tag';
 import { EnhancePinnedPost } from '../components/EnhancePinnedPost.importable';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
@@ -40,12 +41,12 @@ type CommonProps = {
 
 type AppsProps = {
 	platform: Platform.Apps;
-}
+};
 
 type WebProps = {
 	platform: Platform.Web;
 	contributionsServiceUrl: string;
-}
+};
 
 type Props = CommonProps & (AppsProps | WebProps);
 
@@ -77,7 +78,7 @@ export const LiveBlogRenderer = (props: Props) => {
 	} = props;
 	const filtered =
 		(selectedTopics && selectedTopics.length > 0) || filterKeyEvents;
-	
+
 	return (
 		<>
 			{pinnedPost && onFirstPage && !filtered && (

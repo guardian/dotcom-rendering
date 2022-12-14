@@ -20,6 +20,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
+import { Platform } from '../../types/platform';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -851,6 +852,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													/>
 												)}
 												<ArticleBody
+													platform={Platform.Web}
 													format={format}
 													blocks={CAPIArticle.blocks}
 													pinnedPost={
@@ -1008,6 +1010,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													/>
 												)}
 												<ArticleBody
+													platform={Platform.Web}
 													format={format}
 													blocks={CAPIArticle.blocks}
 													pinnedPost={
