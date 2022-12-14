@@ -199,6 +199,7 @@ export const MostViewedFooterGrid = ({
 				<section
 					role={renderAsTabs ? 'tabpanel' : undefined}
 					id={`tabs-popular-${i}`}
+					data-testid={tab.heading}
 					key={`tabs-popular-${tab.heading}`}
 					css={i !== selectedTabIndex && hidePanel}
 				>
@@ -213,7 +214,6 @@ export const MostViewedFooterGrid = ({
 						css={gridContainer}
 						data-cy={`tab-body-${i}`}
 						data-link-name={tab.heading}
-						data-testid={tab.heading}
 						data-link-context={`most-read/${sectionName}`}
 					>
 						{tab.trails.map((trail: TrailType, j: number) => (

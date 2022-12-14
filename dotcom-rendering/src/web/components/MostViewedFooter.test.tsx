@@ -10,7 +10,7 @@ jest.mock('../lib/useApi', () => ({
 	useApi: jest.fn(),
 }));
 
-const VISIBLE = 'display: grid';
+const VISIBLE = 'display: block';
 const HIDDEN = 'display: none';
 
 describe('MostViewedFooterData', () => {
