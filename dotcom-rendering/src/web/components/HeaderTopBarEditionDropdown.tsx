@@ -9,6 +9,7 @@ import { dropDownOverrides } from './HeaderTopBarMyAccount';
 interface HeaderTopBarEditionDropdownProps {
 	editionId: EditionId;
 	dataLinkName: string;
+	isInEuropeTest: boolean;
 }
 
 const editionDropdownStyles = css`
@@ -25,6 +26,7 @@ const editionDropdownStyles = css`
 export const HeaderTopBarEditionDropdown = ({
 	editionId,
 	dataLinkName,
+	isInEuropeTest,
 }: HeaderTopBarEditionDropdownProps) => {
 	const links: [HeaderLink, HeaderLink, HeaderLink, HeaderLink] = [
 		{
@@ -55,6 +57,17 @@ export const HeaderTopBarEditionDropdown = ({
 			title: 'International edition',
 			dataLinkName: 'nav3 : topbar : edition-picker: INT',
 		},
+		...(isInEuropeTest
+			? [
+					{
+						id: 'eur',
+						url: '/preference/edition/eur',
+						isActive: editionId === 'EUR',
+						title: 'Europe edition',
+						dataLinkName: 'nav3 : topbar : edition-picker: EUR',
+					},
+			  ]
+			: []),
 	];
 
 	// Find active link, default to UK
