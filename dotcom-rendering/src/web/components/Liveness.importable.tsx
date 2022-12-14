@@ -120,8 +120,10 @@ function getKey(
 			filterKeyEvents ? 'true' : 'false',
 		);
 		const [topic] = selectedTopics ?? [];
-		if (topic)
+		if (topic) {
 			url.searchParams.set('topics', `${topic.type}:${topic.value}`);
+		}
+		
 		return url.href;
 	} catch {
 		window.guardian.modules.sentry.reportError(

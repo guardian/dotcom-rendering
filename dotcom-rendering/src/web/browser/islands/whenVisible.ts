@@ -11,7 +11,7 @@ export const whenVisible = (
 ): void => {
 	if ('IntersectionObserver' in window) {
 		const io = new IntersectionObserver(([entry]) => {
-			if (!entry || !entry.isIntersecting) return;
+			if (!entry?.isIntersecting) return;
 			// Disconnect this IntersectionObserver once seen
 			io.disconnect();
 			callback();
