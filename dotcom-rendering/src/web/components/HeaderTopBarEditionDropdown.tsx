@@ -28,7 +28,13 @@ export const HeaderTopBarEditionDropdown = ({
 	dataLinkName,
 	isInEuropeTest,
 }: HeaderTopBarEditionDropdownProps) => {
-	const links: [HeaderLink, HeaderLink, HeaderLink, HeaderLink] = [
+	const links: [
+		HeaderLink,
+		HeaderLink,
+		HeaderLink,
+		HeaderLink,
+		...HeaderLink[],
+	] = [
 		{
 			id: 'uk',
 			url: '/preference/edition/uk',
