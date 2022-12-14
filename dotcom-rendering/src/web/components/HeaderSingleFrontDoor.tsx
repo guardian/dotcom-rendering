@@ -5,6 +5,7 @@ import type { EditionId } from '../lib/edition';
 import { HeaderTopBar } from './HeaderTopBar.importable';
 import { Island } from './Island';
 import { Logo } from './Logo';
+import { Snow } from './Snow.importable';
 import { SupportTheG } from './SupportTheG.importable';
 
 const headerStyles = css`
@@ -50,10 +51,13 @@ export const HeaderSingleFrontDoor = ({
 			css={[
 				center,
 				css`
-					overflow: auto;
+					overflow: hidden;
 				`,
 			]}
 		>
+			<Island deferUntil="hash" clientOnly={true}>
+				<Snow />
+			</Island>
 			<Logo editionId={editionId} />
 			<Island deferUntil="idle" clientOnly={true}>
 				<SupportTheG

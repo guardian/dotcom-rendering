@@ -53,9 +53,9 @@ const isFeature = (content: Content): boolean =>
 const isAnalysis = (content: Content): boolean =>
 	content.tags.some((tag) => tag.id === 'tone/analysis');
 
-const articleSeries = (content: Content): Option<Tag> => {
+const articleSeries = (content: Content): Optional<Tag> => {
 	const type = isLabs(content.tags) ? TagType.PAID_CONTENT : TagType.SERIES;
-	return fromNullable(tagsOfType(type)(content.tags)[0]);
+	return Optional.fromNullable(tagsOfType(type)(content.tags)[0]);
 };
 
 const articleContributors = (content: Content): Tag[] =>
