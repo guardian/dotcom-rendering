@@ -60,13 +60,15 @@ const applyArithmetic = (elements: CAPIElement[]): CAPIElement[] =>
 
 							const attrs = Object.entries(groups ?? {})
 								.map(([key, value]) => {
+									const [numerator, denominator] = value
+										.split('/')
+										.map(parseFloat);
+
 									if (
 										key === 'value' &&
-										value.includes('/')
+										numerator &&
+										denominator
 									) {
-										const [numerator, denominator] = value
-											.split('/')
-											.map(parseFloat);
 										return `data-value="${
 											numerator / denominator
 										}"`;

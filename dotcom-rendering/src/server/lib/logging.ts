@@ -68,6 +68,8 @@ const enableLog4j = {
 			backups: 5,
 			compress: true,
 			layout: { type: 'json', separator: ',' },
+			// Owner Read & Write, Group Read
+			mode: 0o640,
 		},
 	},
 	categories: {

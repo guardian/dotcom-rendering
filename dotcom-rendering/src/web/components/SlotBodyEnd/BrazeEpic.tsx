@@ -118,11 +118,14 @@ const BrazeEpicWithSatisfiedDependencies = ({
 		}
 	}, [hasBeenSeen, meta]);
 
+	const componentName = meta.dataFromBraze.componentName;
+	if (!componentName) return null;
+
 	return (
 		<div ref={setNode} css={wrapperMargins}>
 			<div ref={epicRef}>
 				<BrazeComponent
-					componentName={meta.dataFromBraze.componentName}
+					componentName={componentName}
 					brazeMessageProps={meta.dataFromBraze}
 					subscribeToNewsletter={async (newsletterId) => {
 						await fetch(`${idApiUrl}/users/me/newsletters`, {

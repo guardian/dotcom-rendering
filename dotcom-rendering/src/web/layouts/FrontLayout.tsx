@@ -210,17 +210,11 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							editionId={front.editionId}
 							idUrl={front.config.idUrl}
 							mmaUrl={front.config.mmaUrl}
-							supporterCTA={
-								front.nav.readerRevenueLinks.header.supporter
-							}
 							discussionApiUrl={front.config.discussionApiUrl}
 							urls={front.nav.readerRevenueLinks.header}
 							remoteHeader={!!front.config.switches.remoteHeader}
 							contributionsServiceUrl="https://contributions.guardianapis.com" // TODO: Pass this in
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
-							headerTopBarSwitch={
-								!!front.config.switches.headerTopNav
-							}
 							isInEuropeTest={isInEuropeTest}
 							headerTopBarSearchCapiSwitch={
 								!!front.config.switches
@@ -289,8 +283,10 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 					const trails = collection.curated.concat(
 						collection.backfill,
 					);
+					const [trail] = trails;
+
 					// There are some containers that have zero trails. We don't want to render these
-					if (trails.length === 0) return null;
+					if (!trail) return null;
 
 					const ophanName = ophanComponentId(collection.displayName);
 					const ophanComponentLink = `container-${index} | ${ophanName}`;
@@ -308,7 +304,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 									ophanComponentName={ophanName}
 									containerName={collection.collectionType}
 								>
-									<Snap snapData={trails[0].snapData} />
+									<Snap snapData={trail.snapData} />
 								</Section>
 								{decideAdSlot(
 									index,
@@ -379,6 +375,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							<Section
 								key={collection.id}
 								title={collection.displayName}
+								description={collection.description}
 								showTopBorder={index > 0}
 								padContent={false}
 								centralBorder="partial"

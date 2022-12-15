@@ -112,17 +112,15 @@ export const Treats = ({
 			`}
 		>
 			{treats.map((treat) => {
-				if (
-					treat.links[0].linkTo === '/crosswords' &&
-					treat.links[0].text
-				) {
+				const [link] = treat.links;
+				if (link?.linkTo === '/crosswords' && link.text) {
 					// Treats that link to /crosswords are special. If any
 					// treat has this exact url then an svg of a crossword
 					// is displayed above the text
 					return (
 						<>
 							<li>
-								<a href={treat.links[0].linkTo}>
+								<a href={link.linkTo}>
 									<SvgCrossword />
 								</a>
 							</li>
