@@ -166,6 +166,40 @@ export const Form = ({
 		[key in string]: string;
 	}>({});
 
+	const validateForm = (): boolean => {
+		const errors: { [key in string]: string } = {};
+		let isValid = true;
+		formFields.forEach((field: CampaignFieldType) => {
+			if (field.required && !formData[field.id]) {
+				errors[field.id] = 'This field is required';
+				isValid = false;
+			}
+			if (field.id === 'email' && formData[field.id]) {
+				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+				if (!emailRegex.test(formData[field.id] as string)) {
+					errors[field.id] = 'Please enter a valid email address';
+					isValid = false;
+				}
+			}
+			if (['number', 'phone'].includes(field.id) && formData[field.id]) {
+				const numberRegex = /^[\d ()+-]+$/;
+				if (!numberRegex.test(formData[field.id] as string)) {
+					errors[field.id] = 'Please enter a valid number';
+					isValid = false;
+				}
+				const noWhiteSpace = formData[field.id] as string;
+				if (noWhiteSpace.length < 10) {
+					errors[field.id] =
+						'Your phone number is too short. If using a landline, include your area code.';
+					isValid = false;
+				}
+			}
+			return isValid;
+		});
+		setValidationErrors(errors);
+		return Object.keys(errors).length === 0;
+	};
+
 	return (
 		<form
 			action="/formstack-campaign/submit"
@@ -174,20 +208,9 @@ export const Form = ({
 			noValidate={true}
 			onSubmit={(e) => {
 				e.preventDefault();
-				const errors: { [key in string]: string } = {};
-				setValidationErrors(errors);
-				formFields.forEach((field: CampaignFieldType) => {
-					if (field.required) {
-						if (formData[field.id] == undefined) {
-							errors[field.id] =
-								'Please complete all required fields';
-						}
-					}
-				});
-				if (Object.keys(errors).length) {
-					setValidationErrors(errors);
-					return;
-				}
+
+				const isValid = validateForm();
+				if (!isValid) return;
 				onSubmit(formData);
 			}}
 		>
