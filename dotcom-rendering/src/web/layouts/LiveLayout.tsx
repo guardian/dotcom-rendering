@@ -334,10 +334,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							editionId={CAPIArticle.editionId}
 							idUrl={CAPIArticle.config.idUrl}
 							mmaUrl={CAPIArticle.config.mmaUrl}
-							supporterCTA={
-								CAPIArticle.nav.readerRevenueLinks.header
-									.supporter
-							}
 							discussionApiUrl={
 								CAPIArticle.config.discussionApiUrl
 							}
@@ -347,9 +343,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							}
 							contributionsServiceUrl={contributionsServiceUrl}
 							idApiUrl={CAPIArticle.config.idApiUrl}
-							headerTopBarSwitch={
-								!!CAPIArticle.config.switches.headerTopNav
-							}
 							isInEuropeTest={isInEuropeTest}
 							headerTopBarSearchCapiSwitch={
 								!!CAPIArticle.config.switches
@@ -931,6 +924,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														CAPIArticle.config
 															.keywordIds
 													}
+													isInLiveblogAdSlotTest={
+														CAPIArticle.config
+															.abTests
+															.serverSideLiveblogInlineAdsVariant ===
+														'variant'
+													}
 												/>
 												{pagination.totalPages > 1 && (
 													<Pagination
@@ -1087,6 +1086,12 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 													keywordIds={
 														CAPIArticle.config
 															.keywordIds
+													}
+													isInLiveblogAdSlotTest={
+														CAPIArticle.config
+															.abTests
+															.serverSideLiveblogInlineAdsVariant ===
+														'variant'
 													}
 												/>
 												{pagination.totalPages > 1 && (

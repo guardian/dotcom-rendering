@@ -482,13 +482,13 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 
 	const getIndex = (): number => {
 		const { current } = carouselRef;
-		if (current === null) return 0;
-
 		const offsets = getItems()
 			.filter(notPresentation)
 			.map((el) => el.offsetLeft);
+		const [offset] = offsets;
+		if (current === null || offset === undefined) return 0;
 
-		const scrolled = (current.scrollLeft || 0) + offsets[0];
+		const scrolled = current.scrollLeft + offset;
 		const active = offsets.findIndex((el) => el >= scrolled);
 
 		return Math.max(0, active);
@@ -513,13 +513,14 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 
 	const prev = () => {
 		const { current } = carouselRef;
-		if (current === null) return;
-
 		const offsets = getItems()
 			.filter(notPresentation)
-			.map((el) => el.offsetLeft);
+			.map(({ offsetLeft }) => offsetLeft);
+		const [offset] = offsets;
 
-		const scrolled = (current.scrollLeft || 0) + offsets[0];
+		if (current === null || offset === undefined) return;
+
+		const scrolled = current.scrollLeft + offset;
 
 		const nextOffset = offsets
 			.reverse()
@@ -535,13 +536,14 @@ export const Carousel = ({ heading, trails, onwardsSource, format }: Props) => {
 
 	const next = () => {
 		const { current } = carouselRef;
-		if (current === null) return;
-
 		const offsets = getItems()
 			.filter(notPresentation)
-			.map((el) => el.offsetLeft);
+			.map(({ offsetLeft }) => offsetLeft);
+		const [offset] = offsets;
 
-		const scrolled = (current.scrollLeft || 0) + offsets[0];
+		if (current === null || offset === undefined) return;
+
+		const scrolled = current.scrollLeft + offset;
 		const nextOffset = offsets.find((offset) => offset > scrolled);
 
 		if (nextOffset) {

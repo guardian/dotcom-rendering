@@ -385,20 +385,22 @@ export const mockMostShared = {
 	ageWarning: '1 year old',
 };
 
+const twoTabs: [CAPITrailTabType, CAPITrailTabType] = [mockTab1, mockTab2];
 export const responseWithTwoTabs = {
-	tabs: [mockTab1, mockTab2],
+	tabs: twoTabs,
 	mostCommented: mockMostCommented,
 	mostShared: mockMostShared,
 };
 
+const oneTab: [CAPITrailTabType] = [mockTab1];
 export const responseWithOneTab = {
-	tabs: [mockTab1],
+	tabs: oneTab,
 	mostCommented: mockMostCommented,
 	mostShared: mockMostShared,
 };
 
 export const responseWithMissingImage = {
-	tabs: [mockTab1],
+	tabs: oneTab,
 	mostCommented: mockMostCommented,
 	mostShared: {
 		...mockMostShared,

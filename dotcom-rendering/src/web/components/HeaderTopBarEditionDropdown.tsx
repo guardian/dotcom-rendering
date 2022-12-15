@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { brand } from '@guardian/source-foundations';
+import { HeaderLink } from '../../types/header';
 import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
 import { Dropdown } from './Dropdown';
@@ -8,6 +9,7 @@ import { dropDownOverrides } from './HeaderTopBarMyAccount';
 interface HeaderTopBarEditionDropdownProps {
 	editionId: EditionId;
 	dataLinkName: string;
+	isInEuropeTest: boolean;
 }
 
 const editionDropdownStyles = css`
@@ -24,8 +26,15 @@ const editionDropdownStyles = css`
 export const HeaderTopBarEditionDropdown = ({
 	editionId,
 	dataLinkName,
+	isInEuropeTest,
 }: HeaderTopBarEditionDropdownProps) => {
-	const links = [
+	const links: [
+		HeaderLink,
+		HeaderLink,
+		HeaderLink,
+		HeaderLink,
+		...HeaderLink[],
+	] = [
 		{
 			id: 'uk',
 			url: '/preference/edition/uk',
@@ -54,6 +63,17 @@ export const HeaderTopBarEditionDropdown = ({
 			title: 'International edition',
 			dataLinkName: 'nav3 : topbar : edition-picker: INT',
 		},
+		...(isInEuropeTest
+			? [
+					{
+						id: 'eur',
+						url: '/preference/edition/eur',
+						isActive: editionId === 'EUR',
+						title: 'Europe edition',
+						dataLinkName: 'nav3 : topbar : edition-picker: EUR',
+					},
+			  ]
+			: []),
 	];
 
 	// Find active link, default to UK

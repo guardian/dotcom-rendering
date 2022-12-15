@@ -18,7 +18,9 @@ type Props = {
  * This method should cover all use cases with a lot more precision once
  * implemented thoroughly
  */
-const decideImageWidths = (imageSize: ImageSizeType): ImageWidthType[] => {
+const decideImageWidths = (
+	imageSize: ImageSizeType,
+): [ImageWidthType, ...ImageWidthType[]] => {
 	switch (imageSize) {
 		// @TODO missing image size option
 		// case 'tiny':
@@ -98,7 +100,7 @@ export const CardPicture = ({ master, alt, imageSize }: Props) => {
 	 * Sources are ordered in `descendingByBreakpoint` order,
 	 * so the last one is the smallest.
 	 */
-	const [{ lowResUrl: fallbackSource }] = sources.slice(-1);
+	const lowResUrl = sources[sources.length - 1]?.lowResUrl;
 
 	return (
 		<picture data-size={imageSize} css={[block, aspectRatio]}>
@@ -119,7 +121,7 @@ export const CardPicture = ({ master, alt, imageSize }: Props) => {
 				);
 			})}
 
-			<img alt={alt} src={fallbackSource} css={block} />
+			<img alt={alt} src={lowResUrl} css={block} />
 		</picture>
 	);
 };

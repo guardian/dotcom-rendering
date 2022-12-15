@@ -65,28 +65,22 @@ describe('RegionalAd', () => {
 
 		expect(ampAdElement).not.toBeNull();
 
-		const ukRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[0].getAttribute('rtc-config') || '{}',
-		);
-		const usRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[1].getAttribute('rtc-config') || '{}',
-		);
-		const auRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[2].getAttribute('rtc-config') || '{}',
-		);
-		const intRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[3].getAttribute('rtc-config') || '{}',
-		);
+		const [uk, us, au, int] = Array.from(ampAdElement)
+			.map((el) => el.getAttribute('rtc-config'))
+			.map(
+				(config) =>
+					JSON.parse(config ?? '{}') as Record<string, unknown>,
+			);
 
-		expect(ukRtcAttribute.urls).toEqual([permutiveURL]);
-		expect(usRtcAttribute.urls).toEqual([permutiveURL]);
-		expect(auRtcAttribute.urls).toEqual([permutiveURL]);
-		expect(intRtcAttribute.urls).toEqual([permutiveURL]);
+		expect(uk?.urls).toEqual([permutiveURL]);
+		expect(us?.urls).toEqual([permutiveURL]);
+		expect(au?.urls).toEqual([permutiveURL]);
+		expect(int?.urls).toEqual([permutiveURL]);
 
-		expect(ukRtcAttribute.vendors).toEqual(ukPubmaticVendorObj);
-		expect(usRtcAttribute.vendors).toEqual(usPubmaticVendorObj);
-		expect(auRtcAttribute.vendors).toEqual(auPubmaticVendorObj);
-		expect(intRtcAttribute.vendors).toEqual(intPubmaticVendorObj);
+		expect(uk?.vendors).toEqual(ukPubmaticVendorObj);
+		expect(us?.vendors).toEqual(usPubmaticVendorObj);
+		expect(au?.vendors).toEqual(auPubmaticVendorObj);
+		expect(int?.vendors).toEqual(intPubmaticVendorObj);
 	});
 
 	it('rtc-config contains just a prebid object when `usePrebid` is true and other flags are false', () => {
@@ -120,23 +114,22 @@ describe('RegionalAd', () => {
 
 		expect(ampAdElement).not.toBeNull();
 
-		const ukRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[0].getAttribute('rtc-config') || '{}',
-		);
-		const usRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[1].getAttribute('rtc-config') || '{}',
-		);
-		const auRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[2].getAttribute('rtc-config') || '{}',
-		);
-		const intRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[3].getAttribute('rtc-config') || '{}',
-		);
+		const [uk, us, au, int] = Array.from(ampAdElement)
+			.map((el) => el.getAttribute('rtc-config'))
+			.map(
+				(config) =>
+					JSON.parse(config ?? '{}') as Record<string, unknown>,
+			);
 
-		expect(ukRtcAttribute.vendors).toEqual(ukPubmaticVendorObj);
-		expect(usRtcAttribute.vendors).toEqual(usPubmaticVendorObj);
-		expect(auRtcAttribute.vendors).toEqual(auPubmaticVendorObj);
-		expect(intRtcAttribute.vendors).toEqual(intPubmaticVendorObj);
+		expect(uk?.urls).toEqual([]);
+		expect(us?.urls).toEqual([]);
+		expect(au?.urls).toEqual([]);
+		expect(int?.urls).toEqual([]);
+
+		expect(uk?.vendors).toEqual(ukPubmaticVendorObj);
+		expect(us?.vendors).toEqual(usPubmaticVendorObj);
+		expect(au?.vendors).toEqual(auPubmaticVendorObj);
+		expect(int?.vendors).toEqual(intPubmaticVendorObj);
 	});
 
 	it('rtc-config contains just the permutive URL when `usePermutive` is true and other flags are false', () => {
@@ -170,23 +163,17 @@ describe('RegionalAd', () => {
 
 		expect(ampAdElement).not.toBeNull();
 
-		const ukRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[0].getAttribute('rtc-config') || '{}',
-		);
-		const usRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[1].getAttribute('rtc-config') || '{}',
-		);
-		const auRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[2].getAttribute('rtc-config') || '{}',
-		);
-		const intRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[3].getAttribute('rtc-config') || '{}',
-		);
+		const [uk, us, au, int] = Array.from(ampAdElement)
+			.map((el) => el.getAttribute('rtc-config'))
+			.map(
+				(config) =>
+					JSON.parse(config ?? '{}') as Record<string, unknown>,
+			);
 
-		expect(ukRtcAttribute.urls).toEqual([permutiveURL]);
-		expect(usRtcAttribute.urls).toEqual([permutiveURL]);
-		expect(auRtcAttribute.urls).toEqual([permutiveURL]);
-		expect(intRtcAttribute.urls).toEqual([permutiveURL]);
+		expect(uk?.urls).toEqual([permutiveURL]);
+		expect(us?.urls).toEqual([permutiveURL]);
+		expect(au?.urls).toEqual([permutiveURL]);
+		expect(int?.urls).toEqual([permutiveURL]);
 	});
 
 	it('rtc-config contains the correct vendor config when just `useAmazon` flag is set to true', () => {
@@ -220,23 +207,17 @@ describe('RegionalAd', () => {
 
 		expect(ampAdElement).not.toBeNull();
 
-		const ukRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[0].getAttribute('rtc-config') || '{}',
-		);
-		const usRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[1].getAttribute('rtc-config') || '{}',
-		);
-		const auRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[2].getAttribute('rtc-config') || '{}',
-		);
-		const intRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[3].getAttribute('rtc-config') || '{}',
-		);
+		const [uk, us, au, int] = Array.from(ampAdElement)
+			.map((el) => el.getAttribute('rtc-config'))
+			.map(
+				(config) =>
+					JSON.parse(config ?? '{}') as Record<string, unknown>,
+			);
 
-		expect(ukRtcAttribute.vendors).toEqual(apsVendorObj);
-		expect(usRtcAttribute.vendors).toEqual(apsVendorObj);
-		expect(auRtcAttribute.vendors).toEqual(apsVendorObj);
-		expect(intRtcAttribute.vendors).toEqual(apsVendorObj);
+		expect(uk?.vendors).toEqual(apsVendorObj);
+		expect(us?.vendors).toEqual(apsVendorObj);
+		expect(au?.vendors).toEqual(apsVendorObj);
+		expect(int?.vendors).toEqual(apsVendorObj);
 	});
 
 	it('rtc-config contains no vendor config when all flags are set to false', () => {
@@ -270,22 +251,16 @@ describe('RegionalAd', () => {
 
 		expect(ampAdElement).not.toBeNull();
 
-		const ukRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[0].getAttribute('rtc-config') || '{}',
-		);
-		const usRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[1].getAttribute('rtc-config') || '{}',
-		);
-		const auRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[2].getAttribute('rtc-config') || '{}',
-		);
-		const intRtcAttribute: Record<string, unknown> = JSON.parse(
-			ampAdElement[3].getAttribute('rtc-config') || '{}',
-		);
+		const [uk, us, au, int] = Array.from(ampAdElement)
+			.map((el) => el.getAttribute('rtc-config'))
+			.map(
+				(config) =>
+					JSON.parse(config ?? '{}') as Record<string, unknown>,
+			);
 
-		expect(ukRtcAttribute.vendors).toEqual({});
-		expect(usRtcAttribute.vendors).toEqual({});
-		expect(auRtcAttribute.vendors).toEqual({});
-		expect(intRtcAttribute.vendors).toEqual({});
+		expect(uk?.vendors).toEqual({});
+		expect(us?.vendors).toEqual({});
+		expect(au?.vendors).toEqual({});
+		expect(int?.vendors).toEqual({});
 	});
 });

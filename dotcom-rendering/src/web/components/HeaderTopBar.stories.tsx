@@ -15,6 +15,7 @@ export const defaultStory = () => {
 			discussionApiUrl="discussionApiUrl"
 			idApiUrl="idApiUrl"
 			headerTopBarSearchCapiSwitch={false}
+			isInEuropeTest={false}
 		/>
 	);
 };

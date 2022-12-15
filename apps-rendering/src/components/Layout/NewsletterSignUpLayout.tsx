@@ -21,8 +21,8 @@ import RelatedContent from 'components/RelatedContent';
 import Standfirst from 'components/Standfirst';
 import { grid } from 'grid/grid';
 import { getFormat } from 'item';
-import type { Item } from 'item';
-import type { FC, ReactNode } from 'react';
+import type { NewsletterSignup } from 'item';
+import type { FC } from 'react';
 import { darkModeCss, onwardStyles } from 'styles';
 import InPageNewsletterSignup from '../InPageNewsletterSignup';
 
@@ -83,12 +83,12 @@ const detailBlockStyles = css`
 `;
 
 // ----- Component ----- //
+
 interface Props {
-	item: Item;
-	children: ReactNode[];
+	item: NewsletterSignup;
 }
 
-const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
+const NewsletterSignUpLayout: FC<Props> = ({ item }) => {
 	const format = getFormat(item);
 
 	return (
@@ -128,14 +128,20 @@ const NewsletterSignUpLayout: FC<Props> = ({ item, children }) => {
 							newsletter={newsletter}
 							format={getFormat(item)}
 							fallbackContent={
-								<ArticleBody format={item}>
-									{children}
-								</ArticleBody>
+								<ArticleBody
+									format={item}
+									body={item.body}
+									shouldHideAdverts={item.shouldHideAdverts}
+								/>
 							}
 						/>
 					))}
 					{item.promotedNewsletter.kind === OptionKind.None && (
-						<ArticleBody format={item}>{children}</ArticleBody>
+						<ArticleBody
+							format={item}
+							body={item.body}
+							shouldHideAdverts={item.shouldHideAdverts}
+						/>
 					)}
 				</section>
 			</article>

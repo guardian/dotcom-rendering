@@ -16,7 +16,7 @@ import { TopRightAdSlot } from './TopRightAdSlot.importable';
 
 type InlineProps = {
 	display?: ArticleDisplay;
-	position: 'inline' | 'mobile-front';
+	position: 'inline' | 'liveblog-inline' | 'mobile-front';
 	index: number;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
@@ -24,7 +24,7 @@ type InlineProps = {
 
 type NonInlineProps = {
 	display?: ArticleDisplay;
-	position: Omit<SlotName, 'inline' | 'mobile-front'>;
+	position: Omit<SlotName, 'inline' | 'liveblog-inline' | 'mobile-front'>;
 	index?: never;
 	shouldHideReaderRevenue?: boolean;
 	isPaidContent?: boolean;
@@ -370,43 +370,61 @@ export const AdSlot = ({
 		case 'merchandising-high': {
 			return (
 				<div
-					id="dfp-ad--merchandising-high"
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						'ad-slot--merchandising-high',
-					].join(' ')}
 					css={[
-						merchandisingAdStyles,
+						css`
+							display: flex;
+							justify-content: center;
+						`,
 						adStyles,
-						fluidFullWidthAdStyles,
 					]}
-					data-link-name="ad slot merchandising-high"
-					data-name="merchandising-high"
-					aria-hidden="true"
-					data-label="false"
-				/>
+				>
+					<div
+						id="dfp-ad--merchandising-high"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--merchandising-high',
+						].join(' ')}
+						css={[
+							merchandisingAdStyles,
+							adStyles,
+							fluidFullWidthAdStyles,
+						]}
+						data-link-name="ad slot merchandising-high"
+						data-name="merchandising-high"
+						aria-hidden="true"
+					/>
+				</div>
 			);
 		}
 		case 'merchandising': {
 			return (
 				<div
-					id="dfp-ad--merchandising"
-					className={[
-						'js-ad-slot',
-						'ad-slot',
-						'ad-slot--merchandising',
-					].join(' ')}
 					css={[
-						merchandisingAdStyles,
+						css`
+							display: flex;
+							justify-content: center;
+						`,
 						adStyles,
-						fluidFullWidthAdStyles,
 					]}
-					data-link-name="ad slot merchandising"
-					data-name="merchandising"
-					aria-hidden="true"
-					data-label="false"
-				/>
+				>
+					<div
+						id="dfp-ad--merchandising"
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							'ad-slot--merchandising',
+						].join(' ')}
+						css={[
+							merchandisingAdStyles,
+							adStyles,
+							fluidFullWidthAdStyles,
+						]}
+						data-link-name="ad slot merchandising"
+						data-name="merchandising"
+						aria-hidden="true"
+					/>
+				</div>
 			);
 		}
 		case 'survey': {
@@ -429,9 +447,7 @@ export const AdSlot = ({
 			);
 		}
 		case 'inline': {
-			// index will always be defined here but ts isn't as sure
-			// so I'm falling back to 'inline-0' to keep it happy
-			const advertId = index ? `inline${index}` : 'inline-0';
+			const advertId = `inline${index as number}`;
 			return (
 				<div
 					id={`dfp-ad--${advertId}`}
@@ -449,13 +465,39 @@ export const AdSlot = ({
 						adStyles,
 					]}
 					data-link-name={`ad slot ${advertId}`}
-					data-name={`${advertId}`}
+					data-name={advertId}
 					aria-hidden="true"
 				/>
 			);
 		}
+		case 'liveblog-inline': {
+			const advertId = `inline${index as number}`;
+			return (
+				<div className="ad-slot-container">
+					<div
+						id={`dfp-ad--${advertId}`}
+						className={[
+							'js-ad-slot',
+							'ad-slot',
+							`ad-slot--${advertId}`,
+							'ad-slot--liveblog-inline',
+							'ad-slot--rendered',
+						].join(' ')}
+						css={[
+							css`
+								position: relative;
+							`,
+							adStyles,
+						]}
+						data-link-name={`ad slot ${advertId}`}
+						data-name={advertId}
+						aria-hidden="true"
+					/>
+				</div>
+			);
+		}
 		case 'mobile-front': {
-			const advertId = index ? `inline${index}` : 'inline-0';
+			const advertId = `inline${index as number}`;
 			return (
 				<div
 					id={`dfp-ad--${advertId}--mobile`}
@@ -479,7 +521,7 @@ export const AdSlot = ({
 						adStyles,
 					]}
 					data-link-name={`ad slot ${advertId}`}
-					data-name={`${advertId}`}
+					data-name={advertId}
 					aria-hidden="true"
 				/>
 			);

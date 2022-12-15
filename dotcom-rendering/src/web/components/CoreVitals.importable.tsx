@@ -7,7 +7,6 @@ import { getCookie } from '@guardian/libs';
 import { dcrJavascriptBundle } from '../../../scripts/webpack/bundles';
 import type { ServerSideTestNames } from '../../types/config';
 import { integrateIma } from '../experiments/tests/integrate-ima';
-import { removePrebidA9Canada } from '../experiments/tests/remove-prebid-a9-canada';
 import { useAB } from '../lib/useAB';
 
 export const CoreVitals = () => {
@@ -26,7 +25,6 @@ export const CoreVitals = () => {
 	const clientSideTestsToForceMetrics: ABTest[] = [
 		/* keep array multi-line */
 		integrateIma,
-		removePrebidA9Canada,
 	];
 
 	const userInClientSideTestToForceMetrics =
