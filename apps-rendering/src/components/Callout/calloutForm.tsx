@@ -38,15 +38,15 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 		id: string,
 		data: string | string[] | undefined,
 	): void => {
-			const currentErrors = validationErrors;
-			currentErrors[id] = '';
-			setValidationErrors(currentErrors);
+		const currentErrors = validationErrors;
+		currentErrors[id] = '';
+		setValidationErrors(currentErrors);
 
-			setFormData({
-				...formData,
-				[id]: data,
-			})
-		};
+		setFormData({
+			...formData,
+			[id]: data,
+		});
+	};
 
 	const validateForm = (): boolean => {
 		const errors: ValidationErrors = {};
