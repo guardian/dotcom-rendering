@@ -155,27 +155,6 @@ const bylineAnchorDark = (format: ArticleFormat): Colour => {
 	}
 };
 
-const calloutFormAnchor = (format: ArticleFormat): Colour => {
-	switch (format.theme) {
-		case ArticlePillar.News:
-			return news[400];
-		case ArticlePillar.Lifestyle:
-			return lifestyle[400];
-		case ArticlePillar.Sport:
-			return sport[400];
-		case ArticlePillar.Culture:
-			return culture[400];
-		case ArticlePillar.Opinion:
-			return opinion[400];
-		case ArticleSpecial.Labs:
-			return labs[400];
-		case ArticleSpecial.SpecialReport:
-			return specialReport[400];
-		case ArticleSpecial.SpecialReportAlt:
-			return news[400];
-	}
-};
-
 const calloutPrimary = (format: ArticleFormat): Colour => {
 	switch (format.theme) {
 		case ArticlePillar.News:
@@ -215,10 +194,6 @@ const calloutPrimaryDark = (format: ArticleFormat): Colour => {
 		case ArticleSpecial.SpecialReportAlt:
 			return news[500];
 	}
-};
-
-const calloutSpeechBubble = (_format: ArticleFormat): Colour => {
-	return neutral[100];
 };
 
 const commentCount = (format: ArticleFormat): Colour => {
@@ -1225,8 +1200,6 @@ const text = {
 	bylineInlineDark,
 	calloutPrimary,
 	calloutPrimaryDark,
-	calloutFormAnchor,
-	calloutSpeechBubble,
 	commentCount,
 	commentCountDark,
 	commentCountWide,
