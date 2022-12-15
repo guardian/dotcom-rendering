@@ -320,6 +320,33 @@ const borderFromFormat = (format: ArticleFormat): string => {
 		: 'none';
 };
 
+const calloutDescriptionTextElement =
+	(format: ArticleFormat) =>
+	(node: Node, key: number): ReactNode => {
+		const children = Array.from(node.childNodes).map(
+			calloutDescriptionTextElement(format),
+		);
+		switch (node.nodeName) {
+			case 'P':
+				return h('p', { key }, children);
+			case 'STRONG':
+				return styledH(
+					'strong',
+					{ css: { fontWeight: 'bold' }, key },
+					children,
+				);
+			case 'A': {
+				const url = withDefault('')(getHref(node));
+				const href = url.startsWith('profile/')
+					? `https://www.theguardian.com/${url}`
+					: url;
+				return styledH('a', { key, href }, children);
+			}
+			default:
+				return textElement(format)(node, key);
+		}
+	};
+
 const standfirstTextElement =
 	(format: ArticleFormat) =>
 	(node: Node, key: number): ReactNode => {
@@ -382,6 +409,18 @@ const standfirstText = (
 		? nodes.filter(editionsStandfirstFilter)
 		: nodes;
 	return filteredNodes.map(standfirstTextElement(format));
+};
+
+const calloutDescriptionText = (
+	format: ArticleFormat,
+	doc?: DocumentFragment,
+): ReactNode[] => {
+	if (!doc) return [];
+	const nodes = Array.from(doc.childNodes);
+	const filteredNodes = nodes.filter(
+		(node) => !['A'].includes(node.nodeName),
+	);
+	return filteredNodes.map(calloutDescriptionTextElement(format));
 };
 
 const Tweet = (props: {
@@ -780,6 +819,7 @@ export {
 	renderText,
 	textElement as renderTextElement,
 	standfirstText as renderStandfirstText,
+	calloutDescriptionText as renderCalloutDescriptionText,
 	getHref,
 	transformHref,
 	plainTextElement,

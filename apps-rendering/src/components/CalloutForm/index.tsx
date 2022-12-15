@@ -22,7 +22,6 @@ import {
 	TextInput,
 } from '@guardian/source-react-components';
 import { FileInput } from '@guardian/source-react-components-development-kitchen';
-import RadioInput from 'components/RadioInput';
 import type { FC, ReactElement } from 'react';
 import { plainTextElement } from 'renderer';
 import { darkModeCss } from 'styles';
@@ -173,15 +172,6 @@ const renderField = ({
 					label={label}
 					cssOverrides={input}
 					optional={!mandatory}
-				/>
-			);
-		case 'radio':
-			return (
-				<RadioInput
-					cssOverrides={input}
-					options={options}
-					name={name}
-					label={label}
 				/>
 			);
 		default:
