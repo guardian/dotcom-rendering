@@ -13,7 +13,6 @@ import {
 export interface CalloutBlockProps {
 	formId: number;
 	heading: string;
-	name: string;
 	formFields: FormField[];
 	format: ArticleFormat;
 	description?: DocumentFragment;
