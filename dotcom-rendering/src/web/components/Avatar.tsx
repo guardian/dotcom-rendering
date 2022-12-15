@@ -4,7 +4,7 @@ import type { DCRContainerPalette } from '../../types/front';
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { getSourceImageUrl } from '../lib/getSourceImageUrl_temp_fix';
-import { generateSources } from './Picture';
+import { generateSources, getFallbackSource } from './Picture';
 
 const picture = css`
 	border-radius: 100%;
@@ -56,7 +56,7 @@ export const Avatar = ({ src, alt, format, containerPalette }: Props) => {
 	 * Sources are ordered in `descendingByBreakpoint` order,
 	 * so the last one is the smallest.
 	 */
-	const [{ lowResUrl: fallbackSource }] = sources.slice(-1);
+	const fallbackSource = getFallbackSource(sources);
 
 	return (
 		<picture
@@ -80,7 +80,7 @@ export const Avatar = ({ src, alt, format, containerPalette }: Props) => {
 				);
 			})}
 
-			<img alt={alt} src={fallbackSource} css={[block, img]} />
+			<img alt={alt} src={fallbackSource.lowResUrl} css={[block, img]} />
 		</picture>
 	);
 };
