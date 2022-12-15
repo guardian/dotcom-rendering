@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { Topic } from '@guardian/bridget/Topic';
 import { ArticleSpecial } from '@guardian/libs';
 import { space, textSans } from '@guardian/source-foundations';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { notificationsClient } from '../../app/native/nativeApi';
 import type { Palette } from '../../types/palette';
 import type { TagType } from '../../types/tag';
@@ -60,7 +60,7 @@ const buttonStyles = (palette: Palette) => css`
 	${
 		/*darkModeCss`
 	color: ${text.followDark(format)};
-`*/ ''
+	`*/ ''
 	}
 `;
 
@@ -107,7 +107,7 @@ export const FollowButton = ({
 			.catch(() => {});
 	}, [contributor]);
 
-	const onFollowingClick = () => {
+	const onFollowingClick = useCallback(() => {
 		const topic = new Topic({
 			id: contributor.id,
 			displayName: contributor.title,
@@ -125,7 +125,7 @@ export const FollowButton = ({
 				.then(() => setIsFollowing(true))
 				.catch(() => {});
 		}
-	};
+	}, [contributor, isFollowing]);
 
 	return (
 		<button

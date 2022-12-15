@@ -136,6 +136,14 @@ module.exports = ({ bundle, sessionId }) => ({
 		chunkFilename: generateName(bundle),
 		publicPath: '',
 	},
+	resolve:
+		bundle === 'apps'
+			? {
+					fallback: {
+						buffer: require.resolve('buffer/'),
+					},
+			  }
+			: undefined,
 	plugins: [
 		new WebpackManifestPlugin({
 			fileName: `manifest.${bundle}.json`,
@@ -144,6 +152,9 @@ module.exports = ({ bundle, sessionId }) => ({
 			? [
 					new webpack.optimize.LimitChunkCountPlugin({
 						maxChunks: 1,
+					}),
+					new webpack.ProvidePlugin({
+						Buffer: ['buffer', 'Buffer'],
 					}),
 			  ]
 			: []),
