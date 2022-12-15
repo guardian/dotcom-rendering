@@ -5,10 +5,7 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import {
-	getAllThemes,
-	getThemeNameAsString,
-} from '../../../../common-rendering/src/fixtures/article';
+import { getAllThemes, getThemeNameAsString } from '../lib/format';
 import { ArticleMeta } from './ArticleMeta';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
