@@ -19,7 +19,6 @@ type Props = {
 };
 
 const fontStyles = (size: SmallHeadlineSize) => {
-	// eslint-disable-next-line default-case -- because a default case here makes no sense
 	switch (size) {
 		case 'ginormous':
 		case 'huge':
@@ -80,7 +79,7 @@ export const LinkHeadline = ({
 	const palette = decidePalette(format);
 
 	return (
-		<h3 css={fontStyles(size)}>
+		<h4 css={fontStyles(size)}>
 			{!!kickerText && (
 				<Kicker
 					text={kickerText}
@@ -122,6 +121,6 @@ export const LinkHeadline = ({
 					)}
 				</>
 			)}
-		</h3>
+		</h4>
 	);
 };

@@ -53,7 +53,7 @@ export interface CAPITrailType extends BaseTrailType {
 }
 
 export interface TrailTabType {
-	heading?: string;
+	heading: string;
 	trails: TrailType[];
 }
 
