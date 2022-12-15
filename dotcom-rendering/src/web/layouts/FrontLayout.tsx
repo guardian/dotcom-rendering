@@ -217,8 +217,7 @@ export const FrontLayout = ({ front, NAV }: Props) => {
 							idApiUrl="https://idapi.theguardian.com/" // TODO: read this from somewhere as in other layouts
 							isInEuropeTest={isInEuropeTest}
 							headerTopBarSearchCapiSwitch={
-								!!front.config.switches
-									.headerTopBarSearchCapiSwitch
+								!!front.config.switches.headerTopBarSearchCapi
 							}
 						/>
 					</Section>
