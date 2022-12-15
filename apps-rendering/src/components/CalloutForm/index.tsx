@@ -21,7 +21,7 @@ import {
 	TextArea,
 	TextInput,
 } from '@guardian/source-react-components';
-import FileInput from 'components/FileInput';
+import { FileInput } from '@guardian/source-react-components-development-kitchen';
 import RadioInput from 'components/RadioInput';
 import type { FC, ReactElement } from 'react';
 import { plainTextElement } from 'renderer';
@@ -170,10 +170,9 @@ const renderField = ({
 		case 'file':
 			return (
 				<FileInput
-					cssOverrides={input}
-					required={mandatory}
-					name={name}
 					label={label}
+					cssOverrides={input}
+					optional={!mandatory}
 				/>
 			);
 		case 'radio':
