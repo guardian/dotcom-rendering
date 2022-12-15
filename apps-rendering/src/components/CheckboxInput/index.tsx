@@ -5,7 +5,7 @@ import type { ReactElement } from 'react';
 
 interface CheckboxInputProps {
 	formField: FormField;
-	formData: { [key in string]: string[] };
+	selectedCheckboxes: string[];
 	setFieldInFormData: (
 		id: string,
 		data: string | string[] | undefined,
@@ -16,7 +16,7 @@ interface CheckboxInputProps {
 
 const CheckboxInput = ({
 	formField,
-	formData,
+	selectedCheckboxes,
 	setFieldInFormData,
 	error,
 	cssOverrides,
@@ -32,8 +32,6 @@ const CheckboxInput = ({
 			error={error}
 		>
 			{options.map((option) => {
-				const selectedCheckboxes = id in formData ? formData[id] : [];
-
 				const isCheckboxChecked = !!selectedCheckboxes.find(
 					(v: string) => v === option.value,
 				);

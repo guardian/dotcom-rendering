@@ -46,7 +46,7 @@ const Callout: FC<CalloutProps> = ({
 	return (
 		<aside className="js-callout">
 			{isNonCollapsible ? (
-				<ThemeProvider theme={getTheme()}>
+				<ThemeProvider theme={getTheme(format)}>
 					<CalloutBlock
 						formId={formId}
 						heading={heading}
@@ -66,7 +66,7 @@ const Callout: FC<CalloutProps> = ({
 					</span>
 				</ThemeProvider>
 			) : (
-				<ThemeProvider theme={getTheme()}>
+				<ThemeProvider theme={getTheme(format)}>
 					<ExpandingWrapper
 						renderExtra={(): ReactElement => (
 							<DeadlineDate until={activeUntil} />

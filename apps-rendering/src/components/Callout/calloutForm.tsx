@@ -19,14 +19,15 @@ export interface CalloutFormProps {
 	disableInputs?: boolean;
 }
 
-type FormDataType = Record<string, string | string[]>;
+type SubmitDataType = Record<string, string | string[]>;
+export type FormDataType = { [key in string]: undefined | string | string[] };
 export type ValidationErrors = { [key in string]: string };
 
 const CALLOUT_URL =
 	'https://callouts.code.dev-guardianapis.com/formstack-campaign/submit';
 
 const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
-	const [formData, setFormData] = useState<{ [key in string]: any }>({});
+	const [formData, setFormData] = useState<FormDataType>({});
 	const [validationErrors, setValidationErrors] = useState<ValidationErrors>(
 		{},
 	);
@@ -36,11 +37,16 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 	const setFieldInFormData = (
 		id: string,
 		data: string | string[] | undefined,
-	): void =>
-		setFormData({
-			...formData,
-			[id]: data,
-		});
+	): void => {
+			const currentErrors = validationErrors;
+			currentErrors[id] = '';
+			setValidationErrors(currentErrors);
+
+			setFormData({
+				...formData,
+				[id]: data,
+			})
+		};
 
 	const validateForm = (): boolean => {
 		const errors: ValidationErrors = {};
@@ -52,7 +58,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 			}
 			if (field.type === 'email' && formData[field.id]) {
 				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-				if (!emailRegex.test(formData[field.id])) {
+				if (!emailRegex.test(formData[field.id] as string)) {
 					errors[field.id] = 'Please enter a valid email address';
 					isValid = false;
 				}
@@ -62,7 +68,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 				formData[field.id]
 			) {
 				const numberRegex = /^[0-9]+$/;
-				if (!numberRegex.test(formData[field.id])) {
+				if (!numberRegex.test(formData[field.id] as string)) {
 					errors[field.id] = 'Please enter a valid number';
 					isValid = false;
 				}
@@ -81,7 +87,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 
 		// need to add prefix `field_` to all keys in form
 		const formDataWithFieldPrefix = Object.keys(formData).reduce(
-			(acc, cur): FormDataType => ({
+			(acc, cur): SubmitDataType => ({
 				...acc,
 				[`field_${cur}`]: formData[cur],
 			}),

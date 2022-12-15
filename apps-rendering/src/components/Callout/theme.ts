@@ -1,4 +1,6 @@
 import type { Theme } from '@emotion/react';
+import { text } from '@guardian/common-rendering/src/editorialPalette';
+import type { ArticleFormat } from '@guardian/libs';
 import {
 	brand,
 	error,
@@ -6,10 +8,11 @@ import {
 	neutral,
 	success,
 } from '@guardian/source-foundations';
+import {
+	fileInputDarkTheme,
+	fileInputThemeDefault,
+} from '@guardian/source-react-components-development-kitchen';
 
-// This doesn't work in vanilla JS.
-// Themes for source components in dark mode
-// These could be exported from source
 const labelDarkTheme = {
 	textLabel: neutral[97],
 	textOptional: neutral[60],
@@ -85,11 +88,29 @@ export const darkTheme = {
 	radio: radioDarkTheme,
 	expander: expandingWrapperDarkTheme,
 	userFeedback: userFeedbackDarkTheme,
+	...fileInputDarkTheme,
 };
+
+type LightThemeType = {
+	fileInput: {
+		text: string;
+		supporting: string;
+		primary: string;
+		error: string;
+	};
+};
+
+export const lightThemeOverrides = (format: ArticleFormat): LightThemeType => ({
+	fileInput: {
+		...fileInputThemeDefault.fileInput,
+		primary: text.calloutPrimary(format),
+	},
+});
 
 const getPrefersDark = (): boolean => {
 	if (typeof window === 'undefined') return false;
 	return window.matchMedia('(prefers-color-scheme: dark)').matches;
 };
 
-export const getTheme = (): Theme => (getPrefersDark() ? darkTheme : {});
+export const getTheme = (format: ArticleFormat): Theme =>
+	getPrefersDark() ? darkTheme : lightThemeOverrides(format);

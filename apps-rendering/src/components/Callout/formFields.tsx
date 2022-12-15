@@ -8,12 +8,12 @@ import {
 	TextArea,
 	TextInput,
 } from '@guardian/source-react-components';
+import { FileInput } from '@guardian/source-react-components-development-kitchen';
 import CheckboxInput from 'components/CheckboxInput';
-import FileInput from 'components/FileInput';
 import RadioInput from 'components/RadioInput';
 import type { FC, ReactElement } from 'react';
 import { logger } from '../../logger';
-import type { ValidationErrors } from './calloutForm';
+import type { FormDataType, ValidationErrors } from './calloutForm';
 import { fieldInput, textareaStyles } from './styles';
 
 const infoStyles = css`
@@ -45,8 +45,6 @@ export const ContactText = (): ReactElement => (
 		information, so please do leave contact details.
 	</div>
 );
-
-type FormDataType = { [key in string]: any };
 
 type FormFieldProp = {
 	formId: number;
@@ -124,17 +122,23 @@ export const FormField: FC<FormFieldProp> = ({
 		case 'file':
 			return (
 				<FileInput
-					formField={formField}
-					format={format}
-					setFieldInFormData={setFieldInFormData}
+					label={label}
+					optional={!mandatory}
+					supporting={description}
 					error={fieldError}
+					onUpload={(file: string | undefined): void =>
+						setFieldInFormData(formField.id, file)
+					}
+					cssOverrides={fieldInput}
 				/>
 			);
 		case 'radio':
 			return (
 				<RadioInput
 					formField={formField}
-					formData={formData}
+					selected={
+						id in formData ? (formData[id] as string) : undefined
+					}
 					setFieldInFormData={setFieldInFormData}
 					error={fieldError}
 				/>
@@ -143,7 +147,9 @@ export const FormField: FC<FormFieldProp> = ({
 			return (
 				<CheckboxInput
 					formField={formField}
-					formData={formData}
+					selectedCheckboxes={
+						id in formData ? (formData[id] as string[]) : []
+					}
 					setFieldInFormData={setFieldInFormData}
 					cssOverrides={fieldInput}
 					error={fieldError}

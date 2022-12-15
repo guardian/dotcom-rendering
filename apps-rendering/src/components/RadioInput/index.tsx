@@ -5,7 +5,7 @@ import type { ReactElement } from 'react';
 
 interface RadioInputProps {
 	formField: FormField;
-	formData: { [key in string]: any };
+	selected?: string;
 	setFieldInFormData: (id: string, data: string | undefined) => void;
 	error?: string;
 	cssOverrides?: SerializedStyles;
@@ -13,7 +13,7 @@ interface RadioInputProps {
 
 const RadioInput = ({
 	formField,
-	formData,
+	selected,
 	setFieldInFormData,
 	error,
 	cssOverrides,
@@ -35,7 +35,7 @@ const RadioInput = ({
 					key={option.value}
 					value={option.value}
 					label={option.label}
-					checked={id in formData && formData[id] === option.value}
+					checked={selected === option.value}
 					onChange={(): void => setFieldInFormData(id, option.value)}
 				/>
 			))}
