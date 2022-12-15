@@ -115,7 +115,7 @@ const CalloutWithHydrationProps: FC<CalloutProps> = ({
 	return h(
 		'div',
 		{
-			hydrationprops: serverSideProps,
+			'data-hydrationprops': serverSideProps,
 			className: 'js-callout-props',
 		},
 		Callout({
