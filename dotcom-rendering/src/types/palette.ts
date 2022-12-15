@@ -8,6 +8,7 @@ export type Palette = {
 		sectionTitle: Colour;
 		seriesTitleWhenMatch: Colour;
 		byline: Colour;
+		follow: Colour;
 		twitterHandle: Colour;
 		twitterHandleBelowDesktop: Colour;
 		caption: Colour;

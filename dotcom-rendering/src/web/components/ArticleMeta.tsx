@@ -12,6 +12,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { getSoleContributor } from '../../lib/byline';
 import type { Branding as BrandingType } from '../../types/branding';
 import type { Palette } from '../../types/palette';
+import { Platform } from '../../types/platform';
 import type { TagType } from '../../types/tag';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { decidePalette } from '../lib/decidePalette';
@@ -21,11 +22,13 @@ import { CommentCount } from './CommentCount.importable';
 import { Contributor } from './Contributor';
 import { Counts } from './Counts';
 import { Dateline } from './Dateline';
+import { Follow } from './Follow.importable';
 import { Island } from './Island';
 import { ShareCount } from './ShareCount.importable';
 import { ShareIcons } from './ShareIcons';
 
 type Props = {
+	platform: Platform;
 	format: ArticleFormat;
 	pageId: string;
 	webTitle: string;
@@ -297,6 +300,7 @@ const metaNumbersExtrasLiveBlog = css`
 `;
 
 export const ArticleMeta = ({
+	platform,
 	branding,
 	format,
 	pageId,
@@ -379,6 +383,11 @@ export const ArticleMeta = ({
 								secondaryDateline={secondaryDateline}
 								format={format}
 							/>
+							{platform === Platform.Apps && (
+								<Island>
+									<Follow tags={tags} format={format} />
+								</Island>
+							)}
 						</div>
 					</>
 				</RowBelowLeftCol>

@@ -20,6 +20,7 @@ import { Border } from '../../web/components/Border';
 import { Carousel } from '../../web/components/Carousel.importable';
 import { DecideLines } from '../../web/components/DecideLines';
 import { DecideOnwards } from '../../web/components/DecideOnwards';
+import { Follow } from '../../web/components/Follow.importable';
 import { GetMatchNav } from '../../web/components/GetMatchNav.importable';
 import { GetMatchStats } from '../../web/components/GetMatchStats.importable';
 import { GetMatchTabs } from '../../web/components/GetMatchTabs.importable';
@@ -454,6 +455,7 @@ export const StandardLayout = ({ CAPIArticle, format }: Props) => {
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								<ArticleMeta
+									platform={Platform.Apps}
 									format={format}
 									pageId={CAPIArticle.pageId}
 									webTitle={CAPIArticle.webTitle}

@@ -216,6 +216,36 @@ const textByline = (format: ArticleFormat): string => {
 	}
 };
 
+const textFollow = (format: ArticleFormat): string => {
+	if (format.design === ArticleDesign.Gallery) {
+		return neutral[86];
+	}
+
+	switch (format.theme) {
+		case ArticlePillar.News:
+			switch (format.design) {
+				case ArticleDesign.Analysis:
+					return news[300];
+				default:
+					return news[400];
+			}
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[200];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
+	}
+};
+
 const textHeadlineByline = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.Analysis) {
 		switch (format.theme) {
@@ -1967,6 +1997,7 @@ export const decidePalette = (
 			seriesTitleWhenMatch: textSeriesTitleWhenMatch(format),
 			sectionTitle: textSectionTitle(format),
 			byline: textByline(format),
+			follow: textFollow(format),
 			twitterHandle: textTwitterHandle(format),
 			twitterHandleBelowDesktop: textTwitterHandleBelowDesktop(format),
 			caption: textCaption(format),
