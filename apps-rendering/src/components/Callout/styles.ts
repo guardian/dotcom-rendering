@@ -4,8 +4,8 @@ import { text } from '@guardian/common-rendering/src/editorialPalette';
 import type { ArticleFormat } from '@guardian/libs';
 import {
 	body,
+	brandAlt,
 	error,
-	fontWeights,
 	headline,
 	neutral,
 	remSpace,
@@ -16,22 +16,40 @@ import { darkModeCss } from 'styles';
 const containerPadding = remSpace[2];
 
 // Callout block styles
-export const calloutContainer = (
-	format: ArticleFormat,
-): SerializedStyles => css`
-	padding: ${containerPadding};
+export const calloutContainer = css`
 	padding-bottom: ${remSpace[12]};
 	background: ${neutral[97]};
 	color: ${neutral[7]};
-	a {
-		color: ${text.calloutPrimary(format)};
-	}
-
 	${darkModeCss`
 		background: ${neutral[20]};
 		color: ${neutral[86]};
+	`}
+`;
+
+export const calloutLinkContainer = (
+	format: ArticleFormat,
+): SerializedStyles => css`
+	a {
+		color: ${text.calloutPrimary(format)};
+	}
+	${darkModeCss`
 		a {
 			color: ${neutral[86]};
+		}
+	`}
+`;
+
+export const calloutInfo = css`
+	padding: ${containerPadding};
+`;
+
+export const highlight = css`
+	${textSans.xsmall()}
+	color: ${neutral[7]};
+	padding: 0 ${remSpace[1]};
+	background: ${brandAlt[400]};
+	${darkModeCss`
+		background: ${brandAlt[200]};
 	`}
 `;
 
@@ -53,11 +71,10 @@ export const calloutDescription = css`
 	padding: ${remSpace[3]} 0;
 `;
 
-export const calloutSubmitButton = (
+export const calloutPrimaryButton = (
 	format: ArticleFormat,
 ): SerializedStyles => css`
 	background: ${text.calloutPrimary(format)};
-	color: ${neutral[100]};
 	margin-top: ${remSpace[2]};
 	width: 100%;
 	justify-content: center;
@@ -131,28 +148,4 @@ export const info = css`
 export const termsConditions = css`
 	${textSans.medium()};
 	margin-bottom: ${remSpace[4]};
-`;
-
-export const tabContainer = css`
-	border-bottom: 1px solid ${neutral[60]};
-	margin: ${remSpace[2]} -${containerPadding};
-	box-sizing: border-box;
-	display: 'flex';
-	justify-content: 'space-between';
-	align-items: 'center';
-`;
-
-export const tab = css`
-	${textSans.medium()};
-	font-weight: ${fontWeights.bold};
-	width: 12rem;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	margin-left: ${remSpace[2]};
-	margin-bottom: -1px; // account for border of parent
-	min-height: ${remSpace[12]};
-	border: 1px solid ${neutral[60]};
-	border-bottom: 1px solid ${neutral[97]};
-	border-radius: ${remSpace[2]} ${remSpace[2]} 0px 0px;
 `;
