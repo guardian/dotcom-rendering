@@ -82,6 +82,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 					publishDate={item.publishDate}
 					format={format}
 				>
+					<Series item={item} />
 					<FeatureHeadline item={item} />
 				</WithAgeWarning>
 			);
@@ -94,6 +95,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 					publishDate={item.publishDate}
 					format={format}
 				>
+					<Series item={item} />
 					{designTag}
 					<CommentHeadline item={item} />
 				</WithAgeWarning>
@@ -136,6 +138,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 					publishDate={item.publishDate}
 					format={format}
 				>
+					<Series item={item} />
 					{interviewToneTag.kind === OptionKind.Some ? (
 						<nav>
 							<a href={interviewToneTag.value.webUrl}>
@@ -157,6 +160,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 					publishDate={item.publishDate}
 					format={format}
 				>
+					<Series item={item} />
 					<ReviewHeadline item={item} />
 				</WithAgeWarning>
 			);
@@ -197,6 +201,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 					publishDate={item.publishDate}
 					format={format}
 				>
+					<Series item={item} />
 					{designTag}
 					<DefaultHeadline
 						item={item}

@@ -92,7 +92,8 @@ export const warningStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.Explainer:
 			return css`
 				${articleWidthStyles}
-				padding-bottom: ${remSpace[2]};
+				padding-top: ${remSpace[1]};
+				padding-bottom: ${remSpace[1]};
 			`;
 		case ArticleDesign.NewsletterSignup:
 			return css`
@@ -104,12 +105,14 @@ export const warningStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.Editorial:
 			return css`
 				${articleWidthStyles}
-				padding: ${remSpace[1]} 0 ${remSpace[2]} 0;
+				padding-top: ${remSpace[2]};
+				padding-bottom: ${remSpace[1]};
 			`;
 		case ArticleDesign.Obituary:
 			return css`
 				${articleWidthStyles}
-				padding-bottom: ${remSpace[2]};
+				padding-top: ${remSpace[2]};
+				padding-bottom: ${remSpace[1]};
 			`;
 		default:
 			if (format.display === ArticleDisplay.Immersive) {

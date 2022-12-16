@@ -14,7 +14,6 @@ import Logo from 'components/Logo';
 import MainMedia from 'components/MainMedia';
 import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
-import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
@@ -58,7 +57,6 @@ const AnalysisLayout: FC<Props> = ({ item }) => (
 						format={getFormat(item)}
 						mainMedia={item.mainMedia}
 					/>
-					<Series item={item} />
 					<Headline item={item} />
 					<section css={[articleWidthStyles]}>
 						<Byline {...item} />
