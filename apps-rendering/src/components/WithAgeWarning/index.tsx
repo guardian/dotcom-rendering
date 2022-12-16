@@ -81,12 +81,12 @@ export const warningStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.DeadBlog:
 			return css`
 				${defaultWidthStyles}
-				padding: ${remSpace[1]} 0 ${remSpace[2]} 0;
+				padding: ${remSpace[2]} 0 ${remSpace[2]} 0;
 			`;
 		case ArticleDesign.Interview:
 			return css`
 				${defaultWidthStyles}
-				padding: 0 0 ${remSpace[2]} 0;
+				padding: ${remSpace[1]} 0 ${remSpace[2]} 0;
 			`;
 		case ArticleDesign.Analysis:
 		case ArticleDesign.Explainer:
@@ -97,10 +97,15 @@ export const warningStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.NewsletterSignup:
 			return css`
 				${articleWidthStyles}
-				padding: 0 0 ${remSpace[5]} 0;
-				max-width: 100%;
+				padding: 0 0 ${remSpace[2]} 0;
 			`;
 		case ArticleDesign.Letter:
+		case ArticleDesign.Comment:
+		case ArticleDesign.Editorial:
+			return css`
+				${articleWidthStyles}
+				padding: ${remSpace[1]} 0 ${remSpace[2]} 0;
+			`;
 		case ArticleDesign.Obituary:
 			return css`
 				${articleWidthStyles}

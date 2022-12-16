@@ -1,13 +1,14 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
-import { remSpace } from '@guardian/source-foundations';
-import { Hide } from '@guardian/source-react-components';
+import { brandAlt, remSpace, textSans } from '@guardian/source-foundations';
+import { Hide, SvgNewsletter } from '@guardian/source-react-components';
 import { fromNullable, OptionKind } from '@guardian/types';
 import DesignTag from 'components/DesignTag';
 import Series from 'components/Series';
 import { WithAgeWarning } from 'components/WithAgeWarning';
 import type { Item } from 'item';
 import { getFormat } from 'item';
+import { maybeRender } from 'lib';
 import BlogHeadline from './BlogHeadline';
 import CommentHeadline from './CommentHeadline';
 import FeatureHeadline from './FeatureHeadline';
@@ -25,6 +26,24 @@ interface Props {
 
 const seriesStyles = css`
 	padding-bottom: ${remSpace[1]};
+`;
+
+const detailBlockStyles = css`
+	display: flex;
+	align-items: center;
+	margin-bottom: ${remSpace[2]};
+
+	svg {
+		background-color: ${brandAlt[400]};
+		border-radius: 50%;
+		margin-right: ${remSpace[2]};
+		width: ${remSpace[6]};
+		padding: 0.125rem;
+	}
+
+	b {
+		${textSans.xsmall({ fontWeight: 'bold' })}
+	}
 `;
 
 const Headline: React.FC<Props> = ({ item }) => {
@@ -149,6 +168,26 @@ const Headline: React.FC<Props> = ({ item }) => {
 					format={format}
 				>
 					<GalleryHeadline headline={item.headline} format={format} />
+				</WithAgeWarning>
+			);
+		case ArticleDesign.NewsletterSignup:
+			return (
+				<WithAgeWarning
+					tags={item.tags}
+					publishDate={item.publishDate}
+					format={format}
+				>
+					{maybeRender(item.promotedNewsletter, (newsletter) => (
+						<div css={detailBlockStyles}>
+							<SvgNewsletter size="xsmall" />
+							<b>{newsletter.frequency}</b>
+							{/* TO DO - use regional focus, when on the MAPI type */}
+						</div>
+					))}
+					<DefaultHeadline
+						item={item}
+						styles={css(defaultStyles(item))}
+					/>
 				</WithAgeWarning>
 			);
 		default:

@@ -5,13 +5,8 @@ import { css } from '@emotion/react';
 import { background } from '@guardian/common-rendering/src/editorialPalette';
 import { maybeRender } from '@guardian/common-rendering/src/lib';
 import type { ArticleFormat } from '@guardian/libs';
-import {
-	brandAlt,
-	remSpace,
-	textSans,
-	until,
-} from '@guardian/source-foundations';
-import { SvgClock, SvgNewsletter } from '@guardian/source-react-components';
+import { remSpace, textSans, until } from '@guardian/source-foundations';
+import { SvgClock } from '@guardian/source-react-components';
 import { OptionKind } from '@guardian/types/dist/option';
 import ArticleBody from 'components/ArticleBody';
 import Footer from 'components/Footer';
@@ -61,24 +56,6 @@ const frequencyBlockStyles = css`
 		b {
 			${textSans.xsmall({ fontWeight: 'bold' })}
 		}
-	}
-`;
-
-const detailBlockStyles = css`
-	display: flex;
-	align-items: center;
-	margin-bottom: ${remSpace[2]};
-
-	svg {
-		background-color: ${brandAlt[400]};
-		border-radius: 50%;
-		margin-right: ${remSpace[2]};
-		width: ${remSpace[6]};
-		padding: 0.125rem;
-	}
-
-	b {
-		${textSans.xsmall({ fontWeight: 'bold' })}
 	}
 `;
 
