@@ -15,7 +15,6 @@ import Logo from 'components/Logo';
 import MainMedia, { ImmersiveCaption } from 'components/MainMedia';
 import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
-import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import TableOfContents from 'components/TableOfContents';
 import Tags from 'components/Tags';
@@ -96,7 +95,7 @@ const ImmersiveLayout: FC<Props> = ({ item }) => {
 				<article>
 					<header css={headerStyles(format)}>
 						<MainMedia mainMedia={item.mainMedia} format={format} />
-						<Series item={item} />
+
 						<Headline item={item} />
 						<Standfirst item={item} />
 						<ImmersiveCaption

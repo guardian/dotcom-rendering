@@ -53,10 +53,11 @@ const Headline: React.FC<Props> = ({ item }) => {
 	if (format.display === ArticleDisplay.Immersive) {
 		return (
 			<WithAgeWarning
-				tags={item.tags}
+				item={item}
 				publishDate={item.publishDate}
 				format={format}
 			>
+				<Series item={item} />
 				<ImmersiveHeadline headline={item.headline} format={format} />
 			</WithAgeWarning>
 		);
@@ -65,7 +66,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 	if (format.theme === ArticleSpecial.Labs) {
 		return (
 			<WithAgeWarning
-				tags={item.tags}
+				item={item}
 				publishDate={item.publishDate}
 				format={format}
 			>
@@ -78,7 +79,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Feature:
 			return (
 				<WithAgeWarning
-					tags={item.tags}
+					item={item}
 					publishDate={item.publishDate}
 					format={format}
 				>
@@ -91,7 +92,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Comment:
 			return (
 				<WithAgeWarning
-					tags={item.tags}
+					item={item}
 					publishDate={item.publishDate}
 					format={format}
 				>
@@ -105,7 +106,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Video:
 			return (
 				<WithAgeWarning
-					tags={item.tags}
+					item={item}
 					publishDate={item.publishDate}
 					format={format}
 				>
@@ -116,7 +117,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.DeadBlog:
 			return (
 				<WithAgeWarning
-					tags={item.tags}
+					item={item}
 					publishDate={item.publishDate}
 					format={format}
 				>
@@ -134,7 +135,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 			);
 			return (
 				<WithAgeWarning
-					tags={item.tags}
+					item={item}
 					publishDate={item.publishDate}
 					format={format}
 				>
@@ -156,7 +157,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Review:
 			return (
 				<WithAgeWarning
-					tags={item.tags}
+					item={item}
 					publishDate={item.publishDate}
 					format={format}
 				>
@@ -167,7 +168,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.Gallery:
 			return (
 				<WithAgeWarning
-					tags={item.tags}
+					item={item}
 					publishDate={item.publishDate}
 					format={format}
 				>
@@ -178,7 +179,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 		case ArticleDesign.NewsletterSignup:
 			return (
 				<WithAgeWarning
-					tags={item.tags}
+					item={item}
 					publishDate={item.publishDate}
 					format={format}
 				>
@@ -198,7 +199,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 		default:
 			return (
 				<WithAgeWarning
-					tags={item.tags}
+					item={item}
 					publishDate={item.publishDate}
 					format={format}
 				>

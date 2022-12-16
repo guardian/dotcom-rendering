@@ -8,11 +8,12 @@ import { AgeWarning } from '@guardian/source-react-components-development-kitche
 import type { Option } from '@guardian/types';
 import { OptionKind } from '@guardian/types';
 import { grid } from 'grid/grid';
+import type { Item } from 'item';
 import { isComment, isNews } from 'item';
 import { articleWidthStyles, wideContentWidth } from 'styles';
 
 interface WithAgeWarningProps {
-	tags: Tag[];
+	item: Item;
 	publishDate: Option<Date>;
 	format: ArticleFormat;
 	children: React.ReactNode;
@@ -70,11 +71,14 @@ export const defaultWidthStyles: SerializedStyles = css`
 	}
 `;
 
-export const warningStyles = (format: ArticleFormat): SerializedStyles => {
+export const warningStyles = (
+	format: ArticleFormat,
+	isSeries: boolean,
+): SerializedStyles => {
 	switch (format.design) {
 		case ArticleDesign.Gallery:
 			return css`
-				${galleryStyle}
+				${galleryStyle(isSeries)}
 			`;
 
 		case ArticleDesign.LiveBlog:
@@ -90,25 +94,20 @@ export const warningStyles = (format: ArticleFormat): SerializedStyles => {
 			`;
 		case ArticleDesign.Analysis:
 		case ArticleDesign.Explainer:
+		case ArticleDesign.Obituary:
+		case ArticleDesign.Letter:
 			return css`
 				${articleWidthStyles}
 				padding-top: ${remSpace[1]};
-				padding-bottom: ${remSpace[1]};
+				padding-bottom: ${isSeries ? remSpace[1] : remSpace[2]};
 			`;
 		case ArticleDesign.NewsletterSignup:
 			return css`
-				${articleWidthStyles}
-				padding: 0 0 ${remSpace[2]} 0;
+				${defaultWidthStyles}
+				padding-bottom: ${remSpace[2]};
 			`;
-		case ArticleDesign.Letter:
 		case ArticleDesign.Comment:
 		case ArticleDesign.Editorial:
-			return css`
-				${articleWidthStyles}
-				padding-top: ${remSpace[2]};
-				padding-bottom: ${remSpace[1]};
-			`;
-		case ArticleDesign.Obituary:
 			return css`
 				${articleWidthStyles}
 				padding-top: ${remSpace[2]};
@@ -117,17 +116,19 @@ export const warningStyles = (format: ArticleFormat): SerializedStyles => {
 		default:
 			if (format.display === ArticleDisplay.Immersive) {
 				return css`
-					${immersiveStyle}
+					${immersiveStyle(isSeries)}
 				`;
 			}
 			return css`
 				${articleWidthStyles}
+				padding-top: ${remSpace[1]};
+				padding-bottom: ${remSpace[1]};
 			`;
 	}
 };
 
-const immersiveStyle: SerializedStyles = css`
-	grid-row: 2;
+const immersiveStyle = (isSeries: boolean): SerializedStyles => css`
+	grid-row: ${isSeries ? '2 / 3' : '3 / 4'};
 	${grid.between('viewport-start', 'centre-column-end')}
 	${from.mobileLandscape} {
 		${grid.between('viewport-start', 'viewport-end')}
@@ -139,9 +140,9 @@ const immersiveStyle: SerializedStyles = css`
 	}
 `;
 
-const galleryStyle: SerializedStyles = css`
+const galleryStyle = (isSeries: boolean): SerializedStyles => css`
 	${grid.between('viewport-start', 'centre-column-end')}
-	grid-row: 2/3;
+	grid-row: ${isSeries ? '2 / 3' : '3 / 4'};
 
 	${from.mobileLandscape} {
 		${grid.column.all}
@@ -154,18 +155,18 @@ const galleryStyle: SerializedStyles = css`
 `;
 
 const WithAgeWarning: React.FC<WithAgeWarningProps> = ({
-	tags,
+	item,
 	publishDate,
 	format,
 	children,
 }: WithAgeWarningProps) => {
 	if (publishDate.kind === OptionKind.Some) {
-		const age = getAgeWarning(tags, publishDate.value);
+		const age = getAgeWarning(item.tags, publishDate.value);
 
 		if (age) {
 			return (
 				<>
-					<div css={[warningStyles(format)]}>
+					<div css={[warningStyles(format, item.series.isSome())]}>
 						<AgeWarning age={age} supportsDarkMode={true} />
 					</div>
 					{children}
