@@ -51,7 +51,9 @@ const LiveblogHeader: FC<Props> = ({ item }) => {
 			<Container element="div" css={containerStyles(format)}>
 				<Columns collapseUntil="desktop">
 					<Column span={3}>
-						<Series item={item} />
+						<Hide below="desktop">
+							<Series item={item} />
+						</Hide>
 					</Column>
 					<Column span={8}>
 						<Headline item={item} />

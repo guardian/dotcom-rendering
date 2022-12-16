@@ -81,6 +81,7 @@ export const warningStyles = (format: ArticleFormat): SerializedStyles => {
 		case ArticleDesign.DeadBlog:
 			return css`
 				${defaultWidthStyles}
+				padding: ${remSpace[1]} 0 ${remSpace[2]} 0;
 			`;
 		case ArticleDesign.Interview:
 			return css`

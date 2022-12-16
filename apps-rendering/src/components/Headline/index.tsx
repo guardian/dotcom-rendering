@@ -1,7 +1,10 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticleSpecial } from '@guardian/libs';
+import { remSpace } from '@guardian/source-foundations';
+import { Hide } from '@guardian/source-react-components';
 import { fromNullable, OptionKind } from '@guardian/types';
 import DesignTag from 'components/DesignTag';
+import Series from 'components/Series';
 import { WithAgeWarning } from 'components/WithAgeWarning';
 import type { Item } from 'item';
 import { getFormat } from 'item';
@@ -19,6 +22,10 @@ import ReviewHeadline from './ReviewHeadline';
 interface Props {
 	item: Item;
 }
+
+const seriesStyles = css`
+	padding-bottom: ${remSpace[1]};
+`;
 
 const Headline: React.FC<Props> = ({ item }) => {
 	const format = getFormat(item);
@@ -92,6 +99,11 @@ const Headline: React.FC<Props> = ({ item }) => {
 					publishDate={item.publishDate}
 					format={format}
 				>
+					<Hide from="desktop">
+						<div css={seriesStyles}>
+							<Series item={item} />
+						</div>
+					</Hide>
 					<BlogHeadline item={item} />
 				</WithAgeWarning>
 			);
