@@ -96,7 +96,7 @@ export const MostViewedFooterSecondTierItem = ({
 		headline: headlineText,
 	} = trail;
 
-	const avatarToShow = avatarUrl || image;
+	const avatarToShow = avatarUrl ?? image;
 
 	return (
 		<div css={itemStyles(showRightBorder)}>
@@ -126,8 +126,8 @@ export const MostViewedFooterSecondTierItem = ({
 							<div css={avatarContainerStyles}>
 								<div css={avatarSizeStyles}>
 									<Avatar
-										imageSrc={avatarToShow}
-										imageAlt=""
+										src={avatarToShow}
+										alt=""
 										format={format}
 									/>
 								</div>
