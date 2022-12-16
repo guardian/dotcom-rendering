@@ -13,7 +13,6 @@ import Logo from 'components/Logo';
 import MainMedia, { GalleryCaption } from 'components/MainMedia';
 import Metadata from 'components/Metadata';
 import RelatedContent from 'components/RelatedContent';
-import Series from 'components/Series';
 import Standfirst from 'components/Standfirst';
 import Tags from 'components/Tags';
 import { grid } from 'grid/grid';
@@ -60,7 +59,6 @@ const GalleryLayout: FC<Props> = ({ item }) => {
 				<article css={wrapperStyles(format)}>
 					<header css={headerStyles(format)}>
 						<MainMedia mainMedia={item.mainMedia} format={format} />
-						<Series item={item} />
 						<Headline item={item} />
 						<Standfirst item={item} />
 						<Byline bylineHtml={item.bylineHtml} {...format} />

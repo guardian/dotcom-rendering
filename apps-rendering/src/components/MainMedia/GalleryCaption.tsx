@@ -30,7 +30,7 @@ const styles = (format: ArticleFormat): SerializedStyles => css`
 		${grid.column.left}
 		padding-top: ${remSpace[9]};
 		padding-bottom: 0;
-		grid-row: 4;
+		grid-row: 10/11;
 		padding-top: ${remSpace[1]};
 	}
 

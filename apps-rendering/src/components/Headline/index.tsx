@@ -171,6 +171,7 @@ const Headline: React.FC<Props> = ({ item }) => {
 					publishDate={item.publishDate}
 					format={format}
 				>
+					<Series item={item} />
 					<GalleryHeadline headline={item.headline} format={format} />
 				</WithAgeWarning>
 			);

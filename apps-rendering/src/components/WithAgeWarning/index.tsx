@@ -141,7 +141,7 @@ const immersiveStyle: SerializedStyles = css`
 
 const galleryStyle: SerializedStyles = css`
 	${grid.between('viewport-start', 'centre-column-end')}
-	grid-row: 2;
+	grid-row: 2/3;
 
 	${from.mobileLandscape} {
 		${grid.column.all}
