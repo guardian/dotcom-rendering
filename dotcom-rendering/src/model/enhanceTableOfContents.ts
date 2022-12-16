@@ -36,7 +36,8 @@ export const enhanceTableOfContents = (
 	blocks: Block[],
 ): TableOfContentsItem[] | undefined => {
 	if (
-		format.design !== 'ExplainerDesign' ||
+		// TODO: I don't think we need this any more, but double check please
+		//format.design !== 'ExplainerDesign' ||
 		hasInteractiveContentsElement(blocks)
 	) {
 		return undefined;

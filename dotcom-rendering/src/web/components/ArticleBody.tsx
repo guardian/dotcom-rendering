@@ -11,6 +11,8 @@ import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { revealStyles } from '../lib/revealStyles';
 import { Island } from './Island';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
+import { TableOfContentsItem } from 'src/types/frontend';
+import { TableOfContents } from './TableOfContents';
 
 type Props = {
 	format: ArticleFormat;
@@ -41,6 +43,7 @@ type Props = {
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
 	isInLiveblogAdSlotTest?: boolean;
+	tableOfContents?: TableOfContentsItem[];
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -139,6 +142,7 @@ export const ArticleBody = ({
 	selectedTopics,
 	keywordIds,
 	isInLiveblogAdSlotTest = false,
+	tableOfContents,
 }: Props) => {
 	const isInteractive = format.design === ArticleDesign.Interactive;
 	const palette = decidePalette(format);
@@ -193,41 +197,51 @@ export const ArticleBody = ({
 		);
 	}
 	return (
-		<div
-			id="maincontent"
-			css={[
-				isInteractive ? null : bodyPadding,
-				globalH2Styles(format.display),
-				globalH3Styles(format.display),
-				globalOlStyles(),
-				globalStrongStyles,
-				globalLinkStyles(palette),
-			]}
-		>
-			{isRecipe(tags) && (
-				<Island deferUntil="hash" clientOnly={true}>
-					<RecipeMultiplier />
-				</Island>
+		<>
+			{tableOfContents && (
+				<div>
+					<TableOfContents
+						tableOfContents={tableOfContents}
+					></TableOfContents>
+				</div>
 			)}
-			<ArticleRenderer
-				format={format}
-				elements={blocks[0] ? blocks[0].elements : []}
-				adTargeting={adTargeting}
-				host={host}
-				pageId={pageId}
-				webTitle={webTitle}
-				ajaxUrl={ajaxUrl}
-				contentType={contentType}
-				sectionName={sectionName}
-				tags={tags}
-				isPaidContent={isPaidContent}
-				isPreview={isPreview}
-				idUrl={idUrl}
-				switches={switches}
-				isDev={isDev}
-				isAdFreeUser={isAdFreeUser}
-				isSensitive={isSensitive}
-			/>
-		</div>
+
+			<div
+				id="maincontent"
+				css={[
+					isInteractive ? null : bodyPadding,
+					globalH2Styles(format.display),
+					globalH3Styles(format.display),
+					globalOlStyles(),
+					globalStrongStyles,
+					globalLinkStyles(palette),
+				]}
+			>
+				{isRecipe(tags) && (
+					<Island deferUntil="hash" clientOnly={true}>
+						<RecipeMultiplier />
+					</Island>
+				)}
+				<ArticleRenderer
+					format={format}
+					elements={blocks[0] ? blocks[0].elements : []}
+					adTargeting={adTargeting}
+					host={host}
+					pageId={pageId}
+					webTitle={webTitle}
+					ajaxUrl={ajaxUrl}
+					contentType={contentType}
+					sectionName={sectionName}
+					tags={tags}
+					isPaidContent={isPaidContent}
+					isPreview={isPreview}
+					idUrl={idUrl}
+					switches={switches}
+					isDev={isDev}
+					isAdFreeUser={isAdFreeUser}
+					isSensitive={isSensitive}
+				/>
+			</div>
+		</>
 	);
 };

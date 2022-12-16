@@ -571,6 +571,9 @@
         },
         "canonicalUrl": {
             "type": "string"
+        },
+        "showTableOfContents": {
+            "type": "boolean"
         }
     },
     "required": [
@@ -610,6 +613,7 @@
         "shouldHideAds",
         "shouldHideReaderRevenue",
         "showBottomSocialButtons",
+        "showTableOfContents",
         "standfirst",
         "subMetaKeywordLinks",
         "subMetaSectionLinks",
