@@ -11,7 +11,7 @@ import {
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
 import type { FEArticleType } from '../../types/frontend';
 import { Platform } from '../../types/platform';
-import { ArticleBody } from '../../web/components/ArticleBody';
+import { AppsArticleBody } from '../../web/components/ArticleBody';
 import { ArticleContainer } from '../../web/components/ArticleContainer';
 import { ArticleHeadline } from '../../web/components/ArticleHeadline';
 import { ArticleMeta } from '../../web/components/ArticleMeta';
@@ -20,7 +20,6 @@ import { Border } from '../../web/components/Border';
 import { Carousel } from '../../web/components/Carousel.importable';
 import { DecideLines } from '../../web/components/DecideLines';
 import { DecideOnwards } from '../../web/components/DecideOnwards';
-import { Follow } from '../../web/components/Follow.importable';
 import { GetMatchNav } from '../../web/components/GetMatchNav.importable';
 import { GetMatchStats } from '../../web/components/GetMatchStats.importable';
 import { GetMatchTabs } from '../../web/components/GetMatchTabs.importable';
@@ -491,8 +490,7 @@ export const StandardLayout = ({ CAPIArticle, format }: Props) => {
 										></TableOfContents>
 									</div>
 								)}
-								<ArticleBody
-									platform={Platform.Apps}
+								<AppsArticleBody
 									format={format}
 									blocks={CAPIArticle.blocks}
 									pinnedPost={CAPIArticle.pinnedPost}

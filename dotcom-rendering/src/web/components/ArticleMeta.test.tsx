@@ -1,5 +1,6 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { render } from '@testing-library/react';
+import { Platform } from '../../types/platform';
 import { interactiveLegacyClasses } from '../layouts/lib/interactiveLegacyStyling';
 import { ArticleMeta } from './ArticleMeta';
 
@@ -13,6 +14,7 @@ describe('ArticleMeta', () => {
 
 		const { container } = render(
 			<ArticleMeta
+				platform={Platform.Web}
 				format={format}
 				pageId="1234"
 				webTitle="A title"
@@ -53,6 +55,7 @@ describe('ArticleMeta', () => {
 
 		const { container } = render(
 			<ArticleMeta
+				platform={Platform.Web}
 				format={format}
 				pageId="1234"
 				webTitle="A title"

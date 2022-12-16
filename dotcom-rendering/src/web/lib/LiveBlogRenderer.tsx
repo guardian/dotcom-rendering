@@ -1,4 +1,5 @@
 import { Hide } from '@guardian/source-react-components';
+import { CombinedProps } from '../../types/props';
 import type { Switches } from '../../types/config';
 import { Platform } from '../../types/platform';
 import type { TagType } from '../../types/tag';
@@ -39,18 +40,13 @@ type CommonProps = {
 	selectedTopics?: Topic[];
 };
 
-type AppsProps = {
-	platform: Platform.Apps;
-};
+type AppsProps = {};
 
 type WebProps = {
-	platform: Platform.Web;
 	contributionsServiceUrl: string;
 };
 
-type Props = CommonProps & (AppsProps | WebProps);
-
-export const LiveBlogRenderer = (props: Props) => {
+const LiveBlogRenderer = (props: CombinedProps<CommonProps, AppsProps, WebProps>) => {
 	const {
 		format,
 		blocks,
@@ -179,3 +175,9 @@ export const LiveBlogRenderer = (props: Props) => {
 		</>
 	);
 };
+
+export const WebLiveBlogRenderer = (props: CommonProps & WebProps) =>
+	<LiveBlogRenderer {...props} platform={Platform.Web} />
+
+export const AppsLiveBlogRenderer = (props: CommonProps & AppsProps) =>
+	<LiveBlogRenderer {...props} platform={Platform.Apps} />

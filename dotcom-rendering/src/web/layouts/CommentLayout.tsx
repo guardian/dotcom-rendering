@@ -15,9 +15,8 @@ import { getSoleContributor } from '../../lib/byline';
 import { parse } from '../../lib/slot-machine-flags';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
-import { Platform } from '../../types/platform';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
-import { ArticleBody } from '../components/ArticleBody';
+import { WebArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
@@ -51,6 +50,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
+import { Platform } from '../../types/platform';
 
 const StandardGrid = ({
 	children,
@@ -547,6 +547,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								<ArticleMeta
+									platform={Platform.Web}
 									branding={branding}
 									format={format}
 									pageId={CAPIArticle.pageId}
@@ -575,8 +576,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<GridItem area="body">
 							<ArticleContainer format={format}>
 								<div css={maxWidth}>
-									<ArticleBody
-										platform={Platform.Web}
+									<WebArticleBody
 										format={format}
 										blocks={CAPIArticle.blocks}
 										adTargeting={adTargeting}

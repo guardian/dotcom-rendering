@@ -5,14 +5,15 @@ import { between, body, headline, space } from '@guardian/source-foundations';
 import { isRecipe } from '../../model/enhance-recipes';
 import type { Switches } from '../../types/config';
 import type { Palette } from '../../types/palette';
-import { Platform } from '../../types/platform';
 import type { TagType } from '../../types/tag';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { decidePalette } from '../lib/decidePalette';
-import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
+import { WebLiveBlogRenderer, AppsLiveBlogRenderer } from '../lib/LiveBlogRenderer';
 import { revealStyles } from '../lib/revealStyles';
 import { Island } from './Island';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
+import { CombinedProps } from '../../types/props';
+import { Platform } from '../../types/platform';
 
 type CommonProps = {
 	format: ArticleFormat;
@@ -43,16 +44,11 @@ type CommonProps = {
 	selectedTopics?: Topic[];
 };
 
-type AppsProps = {
-	platform: Platform.Apps;
-};
+type AppsProps = {};
 
 type WebProps = {
-	platform: Platform.Web;
 	contributionsServiceUrl: string;
 };
-
-type Props = CommonProps & (AppsProps | WebProps);
 
 const globalH2Styles = (display: ArticleDisplay) => css`
 	h2:not([data-ignore='global-h2-styling']) {
@@ -118,7 +114,7 @@ const globalLinkStyles = (palette: Palette) => css`
 	}
 `;
 
-export const ArticleBody = (props: Props) => {
+const ArticleBody = (props: CombinedProps<CommonProps, AppsProps, WebProps>) => {
 	const {
 		format,
 		blocks,
@@ -171,37 +167,57 @@ export const ArticleBody = (props: Props) => {
 						revealStyles,
 				]}
 			>
-				<LiveBlogRenderer
-					format={format}
-					blocks={blocks}
-					pinnedPost={pinnedPost}
-					adTargeting={adTargeting}
-					host={host}
-					pageId={pageId}
-					webTitle={webTitle}
-					ajaxUrl={ajaxUrl}
-					switches={switches}
-					isAdFreeUser={isAdFreeUser}
-					isSensitive={isSensitive}
-					isLiveUpdate={false}
-					section={section}
-					shouldHideReaderRevenue={shouldHideReaderRevenue}
-					tags={tags}
-					isPaidContent={isPaidContent}
-					onFirstPage={onFirstPage}
-					keyEvents={keyEvents}
-					filterKeyEvents={filterKeyEvents}
-					availableTopics={availableTopics}
-					selectedTopics={selectedTopics}
-					keywordIds={keywordIds}
-					{...(platform === Platform.Web
-						? {
-								platform,
-								contributionsServiceUrl:
-									props.contributionsServiceUrl,
-						  }
-						: { platform })}
-				/>
+				{platform === Platform.Web ?
+					<WebLiveBlogRenderer
+						format={format}
+						blocks={blocks}
+						pinnedPost={pinnedPost}
+						adTargeting={adTargeting}
+						host={host}
+						pageId={pageId}
+						webTitle={webTitle}
+						ajaxUrl={ajaxUrl}
+						switches={switches}
+						isAdFreeUser={isAdFreeUser}
+						isSensitive={isSensitive}
+						isLiveUpdate={false}
+						section={section}
+						shouldHideReaderRevenue={shouldHideReaderRevenue}
+						tags={tags}
+						isPaidContent={isPaidContent}
+						onFirstPage={onFirstPage}
+						keyEvents={keyEvents}
+						filterKeyEvents={filterKeyEvents}
+						availableTopics={availableTopics}
+						selectedTopics={selectedTopics}
+						keywordIds={keywordIds}
+						contributionsServiceUrl={props.contributionsServiceUrl}
+					/> :
+					<AppsLiveBlogRenderer
+						format={format}
+						blocks={blocks}
+						pinnedPost={pinnedPost}
+						adTargeting={adTargeting}
+						host={host}
+						pageId={pageId}
+						webTitle={webTitle}
+						ajaxUrl={ajaxUrl}
+						switches={switches}
+						isAdFreeUser={isAdFreeUser}
+						isSensitive={isSensitive}
+						isLiveUpdate={false}
+						section={section}
+						shouldHideReaderRevenue={shouldHideReaderRevenue}
+						tags={tags}
+						isPaidContent={isPaidContent}
+						onFirstPage={onFirstPage}
+						keyEvents={keyEvents}
+						filterKeyEvents={filterKeyEvents}
+						availableTopics={availableTopics}
+						selectedTopics={selectedTopics}
+						keywordIds={keywordIds}
+					/>
+				}
 			</div>
 		);
 	}
@@ -244,3 +260,10 @@ export const ArticleBody = (props: Props) => {
 		</div>
 	);
 };
+
+
+export const WebArticleBody = (props: CommonProps & WebProps) =>
+	<ArticleBody {...props} platform={Platform.Web} />
+
+export const AppsArticleBody = (props: CommonProps & AppsProps) =>
+	<ArticleBody {...props} platform={Platform.Apps} />

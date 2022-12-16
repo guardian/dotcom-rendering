@@ -19,7 +19,7 @@ import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
 import { Platform } from '../../types/platform';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
-import { ArticleBody } from '../components/ArticleBody';
+import { WebArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
@@ -619,6 +619,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								<ArticleMeta
+									platform={Platform.Web}
 									branding={branding}
 									format={format}
 									pageId={CAPIArticle.pageId}
@@ -655,8 +656,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										></TableOfContents>
 									</div>
 								)}
-								<ArticleBody
-									platform={Platform.Web}
+								<WebArticleBody
 									format={format}
 									blocks={CAPIArticle.blocks}
 									pinnedPost={CAPIArticle.pinnedPost}

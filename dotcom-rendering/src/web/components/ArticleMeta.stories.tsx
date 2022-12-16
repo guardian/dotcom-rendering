@@ -5,6 +5,7 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
+import { Platform } from '../../types/platform';
 import {
 	getAllThemes,
 	getThemeNameAsString,
@@ -72,6 +73,7 @@ export const ArticleStory = () => {
 	return (
 		<Wrapper>
 			<ArticleMeta
+				platform={Platform.Web}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,
@@ -97,6 +99,7 @@ export const BrandingStory = () => {
 	return (
 		<Wrapper>
 			<ArticleMeta
+				platform={Platform.Web}
 				branding={{
 					sponsorName: 'Humanity United',
 					logo: {
@@ -141,6 +144,7 @@ export const FeatureStory = () => {
 	return (
 		<Wrapper>
 			<ArticleMeta
+				platform={Platform.Web}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
@@ -167,6 +171,7 @@ export const FeatureWithMismatchedContributor = () => {
 	return (
 		<Wrapper>
 			<ArticleMeta
+				platform={Platform.Web}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
@@ -195,6 +200,7 @@ export const FeatureStoryWithSmallBylineImage = () => {
 	return (
 		<Wrapper>
 			<ArticleMeta
+				platform={Platform.Web}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
@@ -223,6 +229,7 @@ export const SpecialReportStory = () => {
 	return (
 		<Wrapper>
 			<ArticleMeta
+				platform={Platform.Web}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
@@ -249,6 +256,7 @@ export const SpecialReportAlt = () => {
 	return (
 		<Wrapper>
 			<ArticleMeta
+				platform={Platform.Web}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
@@ -275,6 +283,7 @@ export const CommentStory = () => {
 	return (
 		<Wrapper>
 			<ArticleMeta
+				platform={Platform.Web}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Comment,
@@ -301,6 +310,7 @@ export const InterviewStory = () => {
 	return (
 		<Wrapper>
 			<ArticleMeta
+				platform={Platform.Web}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Interview,
@@ -327,6 +337,7 @@ export const ImmersiveStory = () => {
 	return (
 		<Wrapper>
 			<ArticleMeta
+				platform={Platform.Web}
 				format={{
 					display: ArticleDisplay.Immersive,
 					design: ArticleDesign.Standard,
@@ -353,6 +364,7 @@ export const TwoContributorsStory = () => {
 	return (
 		<Wrapper>
 			<ArticleMeta
+				platform={Platform.Web}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Feature,
@@ -385,6 +397,7 @@ export const DeadBlogStory = () => {
 				<Wrapper>
 					<p>{getThemeNameAsString(format)}</p>
 					<ArticleMeta
+						platform={Platform.Web}
 						format={format}
 						pageId=""
 						webTitle=""
@@ -409,6 +422,7 @@ export const Dateline = () => {
 	return (
 		<Wrapper>
 			<ArticleMeta
+				platform={Platform.Web}
 				format={{
 					display: ArticleDisplay.Standard,
 					design: ArticleDesign.Standard,

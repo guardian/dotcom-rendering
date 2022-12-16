@@ -17,9 +17,8 @@ import React from 'react';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
-import { Platform } from '../../types/platform';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
-import { ArticleBody } from '../components/ArticleBody';
+import { WebArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
@@ -56,6 +55,7 @@ import {
 	interactiveLegacyClasses,
 } from './lib/interactiveLegacyStyling';
 import { BannerWrapper, Stuck } from './lib/stickiness';
+import { Platform } from '../../types/platform';
 
 const InteractiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -482,6 +482,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							<GridItem area="meta" element="aside">
 								<div css={maxWidth}>
 									<ArticleMeta
+										platform={Platform.Web}
 										branding={branding}
 										format={format}
 										pageId={CAPIArticle.pageId}
@@ -513,8 +514,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							</GridItem>
 							<GridItem area="body" element="article">
 								<ArticleContainer format={format}>
-									<ArticleBody
-										platform={Platform.Web}
+									<WebArticleBody
 										format={format}
 										blocks={CAPIArticle.blocks}
 										adTargeting={adTargeting}

@@ -16,9 +16,8 @@ import { buildAdTargeting } from '../../lib/ad-targeting';
 import { parse } from '../../lib/slot-machine-flags';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
-import { Platform } from '../../types/platform';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
-import { ArticleBody } from '../components/ArticleBody';
+import { WebArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleMeta } from '../components/ArticleMeta';
@@ -52,6 +51,7 @@ import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
+import { Platform } from '../../types/platform';
 
 const ShowcaseGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -511,6 +511,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						<GridItem area="meta" element="aside">
 							<div css={maxWidth}>
 								<ArticleMeta
+									platform={Platform.Web}
 									branding={branding}
 									format={format}
 									pageId={CAPIArticle.pageId}
@@ -538,8 +539,7 @@ export const ShowcaseLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						</GridItem>
 						<GridItem area="body">
 							<ArticleContainer format={format}>
-								<ArticleBody
-									platform={Platform.Web}
+								<WebArticleBody
 									format={format}
 									blocks={CAPIArticle.blocks}
 									adTargeting={adTargeting}

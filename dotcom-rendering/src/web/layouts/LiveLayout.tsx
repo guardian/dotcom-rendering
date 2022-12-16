@@ -20,9 +20,8 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
-import { Platform } from '../../types/platform';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
-import { ArticleBody } from '../components/ArticleBody';
+import { WebArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { ArticleLastUpdated } from '../components/ArticleLastUpdated';
@@ -66,6 +65,7 @@ import { decideTrail } from '../lib/decideTrail';
 import { getZIndex } from '../lib/getZIndex';
 import { getCurrentPillar } from '../lib/layoutHelpers';
 import { BannerWrapper, SendToBack, Stuck } from './lib/stickiness';
+import { Platform } from '../../types/platform';
 
 const HeadlineGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -569,6 +569,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							<Hide from="desktop">
 								<div css={sidePaddingDesktop}>
 									<ArticleMeta
+										platform={Platform.Web}
 										branding={branding}
 										format={format}
 										pageId={CAPIArticle.pageId}
@@ -740,6 +741,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								<Hide until="desktop">
 									<div css={[maxWidth, sidePaddingDesktop]}>
 										<ArticleMeta
+											platform={Platform.Web}
 											branding={branding}
 											format={format}
 											pageId={CAPIArticle.pageId}
@@ -851,8 +853,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														supportsDarkMode={false}
 													/>
 												)}
-												<ArticleBody
-													platform={Platform.Web}
+												<WebArticleBody
 													format={format}
 													blocks={CAPIArticle.blocks}
 													pinnedPost={
@@ -1009,8 +1010,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														supportsDarkMode={false}
 													/>
 												)}
-												<ArticleBody
-													platform={Platform.Web}
+												<WebArticleBody
 													format={format}
 													blocks={CAPIArticle.blocks}
 													pinnedPost={
