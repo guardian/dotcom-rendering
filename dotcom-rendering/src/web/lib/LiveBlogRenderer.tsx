@@ -1,7 +1,7 @@
 import { Hide } from '@guardian/source-react-components';
-import { CombinedProps } from '../../types/props';
 import type { Switches } from '../../types/config';
 import { Platform } from '../../types/platform';
+import type { CombinedProps } from '../../types/props';
 import type { TagType } from '../../types/tag';
 import { EnhancePinnedPost } from '../components/EnhancePinnedPost.importable';
 import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.importable';
@@ -46,7 +46,9 @@ type WebProps = {
 	contributionsServiceUrl: string;
 };
 
-const LiveBlogRenderer = (props: CombinedProps<CommonProps, AppsProps, WebProps>) => {
+const LiveBlogRenderer = (
+	props: CombinedProps<CommonProps, AppsProps, WebProps>,
+) => {
 	const {
 		format,
 		blocks,
@@ -176,8 +178,10 @@ const LiveBlogRenderer = (props: CombinedProps<CommonProps, AppsProps, WebProps>
 	);
 };
 
-export const WebLiveBlogRenderer = (props: CommonProps & WebProps) =>
+export const WebLiveBlogRenderer = (props: CommonProps & WebProps) => (
 	<LiveBlogRenderer {...props} platform={Platform.Web} />
+);
 
-export const AppsLiveBlogRenderer = (props: CommonProps & AppsProps) =>
+export const AppsLiveBlogRenderer = (props: CommonProps & AppsProps) => (
 	<LiveBlogRenderer {...props} platform={Platform.Apps} />
+);
