@@ -2,7 +2,7 @@ import { renderToString } from 'react-dom/server';
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import { Platform } from '../../types/platform';
 import { decideFormat } from '../lib/decideFormat';
-import { LiveBlogRenderer } from '../lib/LiveBlogRenderer';
+import { WebLiveBlogRenderer } from '../lib/LiveBlogRenderer';
 
 /**
  * blocksToHtml is used by the /Blocks endpoint as part of keeping liveblogs live
@@ -40,8 +40,7 @@ export const blocksToHtml = ({
 	});
 
 	const html = renderToString(
-		<LiveBlogRenderer
-			platform={Platform.Web}
+		<WebLiveBlogRenderer
 			blocks={blocks}
 			format={format}
 			adTargeting={adTargeting}

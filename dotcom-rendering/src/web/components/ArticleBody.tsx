@@ -5,15 +5,18 @@ import { between, body, headline, space } from '@guardian/source-foundations';
 import { isRecipe } from '../../model/enhance-recipes';
 import type { Switches } from '../../types/config';
 import type { Palette } from '../../types/palette';
+import { Platform } from '../../types/platform';
+import type { CombinedProps } from '../../types/props';
 import type { TagType } from '../../types/tag';
 import { ArticleRenderer } from '../lib/ArticleRenderer';
 import { decidePalette } from '../lib/decidePalette';
-import { WebLiveBlogRenderer, AppsLiveBlogRenderer } from '../lib/LiveBlogRenderer';
+import {
+	AppsLiveBlogRenderer,
+	WebLiveBlogRenderer,
+} from '../lib/LiveBlogRenderer';
 import { revealStyles } from '../lib/revealStyles';
 import { Island } from './Island';
 import { RecipeMultiplier } from './RecipeMultiplier.importable';
-import { CombinedProps } from '../../types/props';
-import { Platform } from '../../types/platform';
 
 type CommonProps = {
 	format: ArticleFormat;
@@ -44,7 +47,7 @@ type CommonProps = {
 	selectedTopics?: Topic[];
 };
 
-type AppsProps = {};
+type AppsProps = void;
 
 type WebProps = {
 	contributionsServiceUrl: string;
@@ -114,7 +117,9 @@ const globalLinkStyles = (palette: Palette) => css`
 	}
 `;
 
-const ArticleBody = (props: CombinedProps<CommonProps, AppsProps, WebProps>) => {
+const ArticleBody = (
+	props: CombinedProps<CommonProps, AppsProps, WebProps>,
+) => {
 	const {
 		format,
 		blocks,
@@ -167,7 +172,7 @@ const ArticleBody = (props: CombinedProps<CommonProps, AppsProps, WebProps>) => 
 						revealStyles,
 				]}
 			>
-				{platform === Platform.Web ?
+				{platform === Platform.Web ? (
 					<WebLiveBlogRenderer
 						format={format}
 						blocks={blocks}
@@ -192,7 +197,8 @@ const ArticleBody = (props: CombinedProps<CommonProps, AppsProps, WebProps>) => 
 						selectedTopics={selectedTopics}
 						keywordIds={keywordIds}
 						contributionsServiceUrl={props.contributionsServiceUrl}
-					/> :
+					/>
+				) : (
 					<AppsLiveBlogRenderer
 						format={format}
 						blocks={blocks}
@@ -217,7 +223,7 @@ const ArticleBody = (props: CombinedProps<CommonProps, AppsProps, WebProps>) => 
 						selectedTopics={selectedTopics}
 						keywordIds={keywordIds}
 					/>
-				}
+				)}
 			</div>
 		);
 	}
@@ -261,9 +267,10 @@ const ArticleBody = (props: CombinedProps<CommonProps, AppsProps, WebProps>) => 
 	);
 };
 
-
-export const WebArticleBody = (props: CommonProps & WebProps) =>
+export const WebArticleBody = (props: CommonProps & WebProps) => (
 	<ArticleBody {...props} platform={Platform.Web} />
+);
 
-export const AppsArticleBody = (props: CommonProps & AppsProps) =>
+export const AppsArticleBody = (props: CommonProps) => (
 	<ArticleBody {...props} platform={Platform.Apps} />
+);

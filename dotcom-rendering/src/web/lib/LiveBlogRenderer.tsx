@@ -40,7 +40,7 @@ type CommonProps = {
 	selectedTopics?: Topic[];
 };
 
-type AppsProps = {};
+type AppsProps = void;
 
 type WebProps = {
 	contributionsServiceUrl: string;
@@ -182,6 +182,6 @@ export const WebLiveBlogRenderer = (props: CommonProps & WebProps) => (
 	<LiveBlogRenderer {...props} platform={Platform.Web} />
 );
 
-export const AppsLiveBlogRenderer = (props: CommonProps & AppsProps) => (
+export const AppsLiveBlogRenderer = (props: CommonProps) => (
 	<LiveBlogRenderer {...props} platform={Platform.Apps} />
 );
