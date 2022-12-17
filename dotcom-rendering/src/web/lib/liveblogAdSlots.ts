@@ -8,12 +8,22 @@ const MAX_INLINE_ADS = 8;
 /**
  * Minimum allowed space between the top of the liveblog container and the highest inline ad.
  */
-const MIN_SPACE_BEFORE_FIRST_AD = 1_000;
+const MIN_SPACE_BEFORE_FIRST_AD = 500;
 
 /**
  * Minimum allowed space between inline ads in pixels.
  */
-const MIN_SPACE_BETWEEN_ADS = 1_400;
+const MIN_SPACE_BETWEEN_ADS = 1_700;
+
+/**
+ * Estimated margin associated with an element. Sometimes this is more or less
+ */
+export const ELEMENT_MARGIN = 12;
+
+// Extra height found in every block.
+const BLOCK_HEADER = 20; // Date and time
+const BLOCK_FOOTER = 25; // Sharing links (Facebook, Twitter)
+const BLOCK_SPACING = 30; // Padding and margins
 
 type BlockElementText = {
 	lineHeight: number; // approx line height on desktop
@@ -28,49 +38,57 @@ type BlockElementHeight = {
 
 /**
  * Approximations of the size each block element type will take up on the page in pixels.
- * Predictions are made for desktop, as we prefer to use a value closer to the lower bound,
- * as we would rather display too few ads than too many. Practically, this will mean that we
- * will show the the right frequency of ads on desktop and too few on smaller devices.
+ * Predication are made for mobile viewports, as data suggests that the majority of liveblog page
+ * views are made using mobile devices.
  */
+const blockquoteElementHeightData: BlockElementHeight = {
+	type: 'model.dotcomrendering.pageElements.BlockquoteBlockElement',
+	elementHeightExcludingText: 0,
+	textHeight: {
+		lineHeight: 25.5,
+		lineLength: 40,
+	},
+};
+
 const commentElementHeightData: BlockElementHeight = {
 	type: 'model.dotcomrendering.pageElements.CommentBlockElement',
-	elementHeightExcludingText: 64,
+	elementHeightExcludingText: 74,
 	textHeight: {
-		lineHeight: 23,
-		lineLength: 70,
+		lineHeight: 18,
+		lineLength: 28,
 	},
 };
 
 const embedElementHeightData: BlockElementHeight = {
 	type: 'model.dotcomrendering.pageElements.EmbedBlockElement',
-	elementHeightExcludingText: 205,
+	elementHeightExcludingText: 251,
 };
 
 const guideAtomElementHeightData: BlockElementHeight = {
 	type: 'model.dotcomrendering.pageElements.GuideAtomBlockElement',
-	elementHeightExcludingText: 76,
+	elementHeightExcludingText: 77,
 };
 
 const imageElementHeightData: BlockElementHeight = {
 	type: 'model.dotcomrendering.pageElements.ImageBlockElement',
-	elementHeightExcludingText: 375,
+	elementHeightExcludingText: 230,
 	textHeight: {
 		lineHeight: 20,
-		lineLength: 90,
+		lineLength: 52,
 	},
 };
 
 const interactiveElementHeightData: BlockElementHeight = {
 	type: 'model.dotcomrendering.pageElements.InteractiveBlockElement',
-	elementHeightExcludingText: 400,
+	elementHeightExcludingText: 600,
 };
 
 const richLinkElementHeightData: BlockElementHeight = {
 	type: 'model.dotcomrendering.pageElements.RichLinkBlockElement',
-	elementHeightExcludingText: 70,
+	elementHeightExcludingText: 65,
 	textHeight: {
-		lineHeight: 20,
-		lineLength: 70,
+		lineHeight: 16,
+		lineLength: 52,
 	},
 };
 
@@ -79,7 +97,7 @@ const subheadingElementHeightData: BlockElementHeight = {
 	elementHeightExcludingText: 0,
 	textHeight: {
 		lineHeight: 23,
-		lineLength: 60,
+		lineLength: 40,
 	},
 };
 
@@ -90,32 +108,37 @@ const tableElementHeightData: BlockElementHeight = {
 
 const textElementHeightData: BlockElementHeight = {
 	type: 'model.dotcomrendering.pageElements.TextBlockElement',
-	elementHeightExcludingText: 25, // margin
+	elementHeightExcludingText: 0,
 	textHeight: {
-		lineHeight: 27,
-		lineLength: 70,
+		lineHeight: 25.5,
+		lineLength: 39,
 	},
 };
 
 const tweetElementHeightData: BlockElementHeight = {
 	type: 'model.dotcomrendering.pageElements.TweetBlockElement',
-	elementHeightExcludingText: 375,
+	elementHeightExcludingText: 190,
 	textHeight: {
-		lineHeight: 24,
-		lineLength: 50,
+		lineHeight: 19,
+		lineLength: 40,
 	},
+};
+
+const videoYoutubeElementHeightData: BlockElementHeight = {
+	type: 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement',
+	elementHeightExcludingText: 215,
 };
 
 const youtubeElementHeightData: BlockElementHeight = {
 	type: 'model.dotcomrendering.pageElements.YoutubeBlockElement',
-	elementHeightExcludingText: 375,
+	elementHeightExcludingText: 239,
 };
 
 const calculateElementHeight = (
 	element: BlockElementHeight,
 	elementText?: string,
 ) => {
-	let height = element.elementHeightExcludingText;
+	let height = element.elementHeightExcludingText + ELEMENT_MARGIN;
 
 	if (element.textHeight && elementText) {
 		const { lineHeight, lineLength } = element.textHeight;
@@ -125,11 +148,37 @@ const calculateElementHeight = (
 	return height;
 };
 
-const calculateElementSize = (element: CAPIElement): number => {
+export const getTextLength = (element: CAPIElement): number => {
+	switch (element._type) {
+		case 'model.dotcomrendering.pageElements.TweetBlockElement':
+			return element.html.length;
+
+		case 'model.dotcomrendering.pageElements.ImageBlockElement':
+			return element.data.caption?.length ?? 0;
+
+		case 'model.dotcomrendering.pageElements.RichLinkBlockElement':
+			return element.text.length;
+
+		case 'model.dotcomrendering.pageElements.TextBlockElement':
+		case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
+		case 'model.dotcomrendering.pageElements.SubheadingBlockElement':
+			return element.html.replace(/<[^>]+>/g, '').length;
+
+		case 'model.dotcomrendering.pageElements.CommentBlockElement':
+			return element.body.replace(/<[^>]+>/g, '').length;
+
+		default:
+			return 0;
+	}
+};
+
+export const calculateElementSize = (element: CAPIElement): number => {
 	switch (element._type) {
 		case 'model.dotcomrendering.pageElements.YoutubeBlockElement':
-		case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
 			return calculateElementHeight(youtubeElementHeightData);
+
+		case 'model.dotcomrendering.pageElements.VideoYoutubeBlockElement':
+			return calculateElementHeight(videoYoutubeElementHeightData);
 
 		case 'model.dotcomrendering.pageElements.TweetBlockElement':
 			return calculateElementHeight(tweetElementHeightData, element.html);
@@ -147,9 +196,14 @@ const calculateElementSize = (element: CAPIElement): number => {
 			);
 
 		case 'model.dotcomrendering.pageElements.TextBlockElement':
-		case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
 			return calculateElementHeight(
 				textElementHeightData,
+				element.html.replace(/<[^>]+>/g, ''),
+			);
+
+		case 'model.dotcomrendering.pageElements.BlockquoteBlockElement':
+			return calculateElementHeight(
+				blockquoteElementHeightData,
 				element.html.replace(/<[^>]+>/g, ''),
 			);
 
@@ -167,7 +221,7 @@ const calculateElementSize = (element: CAPIElement): number => {
 
 		case 'model.dotcomrendering.pageElements.TableBlockElement':
 			return (
-				calculateElementHeight(tableElementHeightData) *
+				tableElementHeightData.elementHeightExcludingText * // row height * row quantity
 				(element.html.match(/<\/tr>/g)?.length ?? 1)
 			);
 
@@ -192,10 +246,13 @@ const calculateElementSize = (element: CAPIElement): number => {
  * A block is a list of Elements that make up one liveblog update
  * An element can be a few paragraphs of text, an image, a twitter embed, etc.
  */
-const calculateBlockSize = (elements: CAPIElement[]): number =>
-	elements.reduce((total, element) => {
+const calculateBlockSize = (elements: CAPIElement[]): number => {
+	const defaultBlockHeight = BLOCK_HEADER + BLOCK_FOOTER + BLOCK_SPACING;
+
+	return elements.reduce((total, element) => {
 		return total + calculateElementSize(element);
-	}, 0);
+	}, defaultBlockHeight);
+};
 
 /**
  * Determines whether an ad should be inserted after the next content block
