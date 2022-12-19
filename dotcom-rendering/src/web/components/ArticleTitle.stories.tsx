@@ -421,7 +421,7 @@ export const ArticleDeadBlogTitle = () => {
 				display: ArticleDisplay.Standard,
 				design: ArticleDesign.DeadBlog,
 			}).map((format) => (
-				<div>
+				<div key={JSON.stringify(format)}>
 					<p>{getThemeNameAsString(format)}</p>
 					<ArticleTitle
 						{...CAPIArticle}

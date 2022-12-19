@@ -181,6 +181,7 @@ export const LiveBlockContainer = ({
 				{blockTitle ? <BlockTitle title={blockTitle} /> : null}
 				{contributors?.map((contributor) => (
 					<BlockByline
+						key={[contributor.name, contributor.imageUrl].join(',')}
 						name={contributor.name}
 						imageUrl={
 							contributor.largeImageUrl

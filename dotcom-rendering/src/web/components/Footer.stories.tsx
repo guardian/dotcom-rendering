@@ -30,6 +30,7 @@ export const Footers = () => (
 	<ul>
 		{editionList.map(({ editionId }) => (
 			<li
+				key={editionId}
 				css={css`
 					position: relative;
 					padding: ${space[6]} 0;

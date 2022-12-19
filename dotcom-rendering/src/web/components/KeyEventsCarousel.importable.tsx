@@ -133,6 +133,7 @@ export const KeyEventsCarousel = ({
 					{filteredKeyEvents.map((keyEvent, index) => {
 						return (
 							<KeyEventCard
+								key={keyEvent.id}
 								format={format}
 								filterKeyEvents={filterKeyEvents}
 								id={keyEvent.id}

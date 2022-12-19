@@ -6,7 +6,6 @@ import {
 	ShortKeyEvents,
 	SingleKeyEvent,
 } from '../../../fixtures/manual/live-blog-key-events';
-
 import { KeyEventsCarousel } from './KeyEventsCarousel.importable';
 
 const getFormat = (theme: ArticleTheme) => {

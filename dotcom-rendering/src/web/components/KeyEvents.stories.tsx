@@ -66,6 +66,7 @@ export const Default = () => (
 			display: ArticleDisplay.Standard,
 		}).map((format) => (
 			<div
+				key={JSON.stringify(format)}
 				css={css`
 					flex-grow: 1;
 				`}

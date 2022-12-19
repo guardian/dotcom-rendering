@@ -58,6 +58,7 @@ const ImageTreat = ({
 		<img src={imageUrl} alt={altText} width="130px" height="auto" />
 		{links.map((link, index) => (
 			<a
+				key={link.linkTo}
 				href={link.linkTo}
 				data-ignore="global-link-styling"
 				css={css`
@@ -123,10 +124,11 @@ export const Treats = ({
 									<SvgCrossword />
 								</a>
 							</li>
-							{treat.links.map((link) => (
+							{treat.links.map(({ linkTo, text }) => (
 								<TextTreat
-									text={link.text}
-									linkTo={link.linkTo}
+									key={linkTo}
+									text={text}
+									linkTo={linkTo}
 									borderColour={borderColour}
 								/>
 							))}
@@ -156,10 +158,11 @@ export const Treats = ({
 
 				return (
 					<>
-						{treat.links.map((link) => (
+						{treat.links.map(({ text, linkTo }) => (
 							<TextTreat
-								text={link.text}
-								linkTo={link.linkTo}
+								key={linkTo}
+								text={text}
+								linkTo={linkTo}
 								borderColour={borderColour}
 							/>
 						))}

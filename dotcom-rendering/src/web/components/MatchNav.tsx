@@ -99,6 +99,9 @@ const Scorers = ({ scorers }: { scorers: string[] }) => (
 	>
 		{scorers.map((player) => (
 			<li
+				// This is reasonably unique,
+				// unless a single player scores twice in the same minute
+				key={player}
 				css={css`
 					${textSans.small()}
 				`}

@@ -1,5 +1,6 @@
 import type { SerializedStyles } from '@emotion/react';
 import { css } from '@emotion/react';
+import type { OphanComponent } from '@guardian/libs';
 import {
 	border,
 	brandAlt,
@@ -14,12 +15,11 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import { useEffect, useMemo, useState } from 'react';
+import { submitComponentEvent } from '../browser/ophan/ophan';
 import { getZIndex } from '../lib/getZIndex';
 import { linkNotificationCount } from '../lib/linkNotificationCount';
 import type { Notification } from '../lib/notification';
 import { useIsInView } from '../lib/useIsInView';
-import { submitComponentEvent } from '../browser/ophan/ophan';
-import { OphanComponent } from '@guardian/libs';
 import { useOnce } from '../lib/useOnce';
 
 const NOTIFICATION_COMPONENT_TYPE = 'RETENTION_HEADER';
@@ -221,7 +221,7 @@ const buildOphanComponentWithNotifications = (
 	link: DropdownLinkType,
 ): OphanComponent | undefined => {
 	// Only track if it has notifications
-	if (link?.notifications && link.notifications.length > 0) {
+	if (link.notifications && link.notifications.length > 0) {
 		return {
 			componentType: NOTIFICATION_COMPONENT_TYPE,
 			id: link.id,
@@ -505,8 +505,12 @@ export const Dropdown = ({
 								css={[ulStyles, cssOverrides]}
 								data-cy="dropdown-options"
 							>
-								{links.map((l, index) => (
-									<DropdownLink link={l} index={index} />
+								{links.map((link, index) => (
+									<DropdownLink
+										key={link.id}
+										link={link}
+										index={index}
+									/>
 								))}
 							</ul>
 						)}

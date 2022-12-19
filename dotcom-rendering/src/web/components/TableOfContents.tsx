@@ -76,7 +76,7 @@ export const TableOfContents = ({ tableOfContents }: Props) => {
 
 			<ul>
 				{tableOfContents.map((item) => (
-					<li css={listItemStyles}>
+					<li key={item.id} css={listItemStyles}>
 						<a href={`#${item.id}`} css={anchorStyles}>
 							{item.title}
 						</a>

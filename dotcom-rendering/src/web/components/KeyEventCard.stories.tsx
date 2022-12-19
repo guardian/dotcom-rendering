@@ -61,6 +61,7 @@ const StandardCard = ({
 	<ul css={wrapperStyles}>
 		{events.slice(0, count).map((event: KeyEventCardType) => (
 			<KeyEventCard
+				key={event.id}
 				id={event.id}
 				blockFirstPublished={event.blockFirstPublished}
 				title={event.title}

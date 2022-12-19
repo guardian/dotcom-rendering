@@ -116,7 +116,7 @@ export const CardsWithDifferentThemes = ({
 			<CardGroup>
 				{cards.slice(0, 4).map((card) => {
 					return (
-						<CardWrapper>
+						<CardWrapper key={card.title}>
 							<Card
 								{...basicCardProps}
 								format={card.format}
@@ -136,7 +136,7 @@ export const CardsWithDifferentThemes = ({
 			<CardGroup>
 				{cards.slice(4).map((card) => {
 					return (
-						<CardWrapper>
+						<CardWrapper key={card.title}>
 							<Card
 								{...basicCardProps}
 								format={card.format}

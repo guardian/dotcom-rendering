@@ -97,6 +97,7 @@ module.exports = {
 		'react/jsx-boolean-value': [2, 'always'],
 		'react/jsx-indent-props': [2, 'tab'],
 		'react/jsx-indent': [2, 'tab'],
+		'react/jsx-key': 'error',
 		'react/jsx-no-target-blank': 'error',
 		'react/jsx-one-expression-per-line': 'off',
 		'react/no-danger': 'off', // We use `dangerouslySetInnerHTML` in several components
