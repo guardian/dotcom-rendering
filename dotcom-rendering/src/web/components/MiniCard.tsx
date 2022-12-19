@@ -1,9 +1,9 @@
 import { css } from '@emotion/react';
 import { body, breakpoints } from '@guardian/source-foundations';
 import { Link } from '@guardian/source-react-components';
-import type { DCRContainerPalette } from 'src/types/front';
-import type { TrailType } from 'src/types/trails';
+import type { DCRContainerPalette } from '../../types/front';
 import type { ContainerOverrides } from '../../types/palette';
+import type { TrailType } from '../../types/trails';
 import { decideContainerOverrides } from '../lib/decideContainerOverrides';
 import { generateSources } from './Picture';
 

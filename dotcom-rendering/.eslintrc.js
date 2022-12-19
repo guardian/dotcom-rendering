@@ -135,6 +135,18 @@ module.exports = {
 			// https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-extraneous-dependencies.md#options
 			{ packageDir: ['..', '.'] },
 		],
+		'no-restricted-imports': [
+			'error',
+			{
+				patterns: [
+					{
+						group: ['src/*'],
+						message:
+							'Paths starting with “src/” are forbidden. Please use a relative path instead',
+					},
+				],
+			},
+		],
 
 		'id-denylist': ['error', 'whitelist', 'whiteList', 'WHITELIST'],
 

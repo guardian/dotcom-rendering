@@ -1,5 +1,5 @@
 import { joinUrl } from '@guardian/libs';
-import type { Props as DiscussionProps } from 'src/web/components/Discussion';
+import type { Props as DiscussionProps } from '../../web/components/Discussion';
 import { useApi } from '../lib/useApi';
 import { Discussion } from './Discussion';
 
