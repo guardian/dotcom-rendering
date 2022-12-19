@@ -228,13 +228,7 @@ export const Form = ({
 				</div>
 			)}
 			{formFields.map((formField) => (
-				<div
-					css={formFieldWrapperStyles}
-					// we use custom-guardian to find 1st field for accessibility
-					// ideally we should useRef but need to wait for Source to
-					// support React references
-					custom-guardian="callout-form-field"
-				>
+				<div css={formFieldWrapperStyles}>
 					<FormField
 						key={formField.id}
 						format={format}

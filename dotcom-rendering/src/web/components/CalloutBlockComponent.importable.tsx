@@ -37,40 +37,12 @@ const wrapperStyles = css`
 const calloutDetailsStyles = css`
 	position: relative;
 	padding-bottom: ${space[2]}px;
-
-	/* IE does not support summary HTML elements, so we need to hide children ourself */
-	:not([open]) > *:not(summary) {
-		display: none;
-	}
 `;
 
 const summaryStyles = css`
 	padding-left: ${space[2]}px;
 	padding-right: ${space[2]}px;
 	display: block;
-	/* Removing default styles from summery tag */
-	::-webkit-details-marker {
-		display: none;
-	}
-	outline: none;
-
-	/* We don't want the summary to open when we click anything but the button, so we pointer-event: none the summary */
-	/* 176da211-05aa-4280-859b-1e3157b3f19e */
-	pointer-events: none;
-
-	/*
-        why hide visibility?
-        because we want to prevent the user for tabbing to the summery HTML element
-        without using tabIndex={-1} which would disable focus on all child DOM elements
-
-        NOTE: requires "visibility: visible;" on child elements to display and enable focus
-    */
-	visibility: hidden;
-
-	a {
-		/* but we do want to allow click on links */
-		pointer-events: all;
-	}
 `;
 
 const summaryContentWrapper = css`
@@ -112,6 +84,7 @@ export const CalloutBlockComponent = ({
 	const [networkError, setNetworkError] = useState('');
 	const [submissionSuccess, setSubmissionSuccess] = useState(false);
 	const { title, description, formFields, activeUntil } = callout;
+	const isEmbed = !callout.isNonCollapsible;
 
 	const isExpired = (date: number | undefined): boolean => {
 		if (date) {
@@ -121,14 +94,9 @@ export const CalloutBlockComponent = ({
 	};
 
 	const onSubmit = async (formData: FormDataType) => {
-		// Reset error for new submission attempt
 		setNetworkError('');
 
-		if (formData.twitterHandle) {
-			setNetworkError('Sorry we think you are a robot.');
-			return;
-		}
-		// need to add prefix `field_` to all keys in form
+		// need to add prefix `field_` to all keys in form, required by formstack
 		const formDataWithFieldPrefix = Object.keys(formData).reduce(
 			(acc, cur) => ({
 				...acc,
@@ -141,8 +109,6 @@ export const CalloutBlockComponent = ({
 			method: 'POST',
 			body: JSON.stringify({
 				formId: callout.formId,
-				// TODO: check if we need to send this
-				'twitter-handle': '',
 				...formDataWithFieldPrefix,
 			}),
 			headers: {
@@ -170,17 +136,13 @@ export const CalloutBlockComponent = ({
 			});
 	};
 
-	if (!callout.isNonCollapsible && isExpired(activeUntil)) {
+	if (isEmbed && isExpired(activeUntil)) {
 		return null;
 	}
 
 	if (submissionSuccess) {
 		return (
-			<details
-				css={[calloutDetailsStyles, wrapperStyles, ruleStyles]}
-				aria-hidden={true}
-				open={true}
-			>
+			<div css={[calloutDetailsStyles, wrapperStyles, ruleStyles]}>
 				<summary css={summaryStyles}>
 					<div css={summaryContentWrapper}>
 						<div css={titleStyles(format)}>Tell us</div>
@@ -202,43 +164,12 @@ export const CalloutBlockComponent = ({
 						take your submission further.
 					</InlineSuccess>
 				</div>
-			</details>
+			</div>
 		);
 	}
 	return (
 		<aside>
-			{callout.isNonCollapsible ? (
-				<details
-					css={[calloutDetailsStyles, wrapperStyles, ruleStyles]}
-					aria-hidden={true}
-					open={true}
-				>
-					<summary css={summaryStyles}>
-						<div css={summaryContentWrapper}>
-							<div css={titleStyles(format)}>Tell us</div>
-							<h4 css={subtitleTextHeaderStyles}>{title}</h4>
-							<CalloutDescription
-								format={format}
-								description={description}
-							/>
-						</div>
-					</summary>
-					<div css={activeUntilStyles}>
-						<Deadline until={activeUntil} />
-					</div>
-					<CalloutShare format={format} />
-					{isExpired(activeUntil) ? (
-						<CalloutExpired />
-					) : (
-						<Form
-							formFields={formFields}
-							onSubmit={onSubmit}
-							format={format}
-							networkError={networkError}
-						/>
-					)}
-				</details>
-			) : (
+			{isEmbed ? (
 				<ExpandingWrapper
 					name={`${callout.formId} form`}
 					renderExtra={() => <Deadline until={activeUntil} />}
@@ -267,6 +198,33 @@ export const CalloutBlockComponent = ({
 						/>
 					</details>
 				</ExpandingWrapper>
+			) : (
+				<div css={[calloutDetailsStyles, wrapperStyles, ruleStyles]}>
+					<summary css={summaryStyles}>
+						<div css={summaryContentWrapper}>
+							<div css={titleStyles(format)}>Tell us</div>
+							<h4 css={subtitleTextHeaderStyles}>{title}</h4>
+							<CalloutDescription
+								format={format}
+								description={description}
+							/>
+						</div>
+					</summary>
+					<div css={activeUntilStyles}>
+						<Deadline until={activeUntil} />
+					</div>
+					<CalloutShare format={format} />
+					{isExpired(activeUntil) ? (
+						<CalloutExpired />
+					) : (
+						<Form
+							formFields={formFields}
+							onSubmit={onSubmit}
+							format={format}
+							networkError={networkError}
+						/>
+					)}
+				</div>
 			)}
 		</aside>
 	);
