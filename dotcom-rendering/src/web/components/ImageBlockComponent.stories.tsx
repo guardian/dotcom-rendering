@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { Platform } from '../../types/platform';
 import { Figure } from './Figure';
 import { Flex } from './Flex';
 import { ImageBlockComponent } from './ImageBlockComponent';
@@ -61,6 +62,7 @@ export const StandardArticle = () => {
 				role="inline"
 			>
 				<ImageBlockComponent
+					platform={Platform.Web}
 					element={{ ...image, role: 'inline' }}
 					format={{
 						display: ArticleDisplay.Standard,
@@ -89,6 +91,7 @@ export const Immersive = () => {
 				role="immersive"
 			>
 				<ImageBlockComponent
+					platform={Platform.Web}
 					element={{ ...image, role: 'immersive' }}
 					format={{
 						display: ArticleDisplay.Standard,
@@ -117,6 +120,7 @@ export const Showcase = () => {
 				role="showcase"
 			>
 				<ImageBlockComponent
+					platform={Platform.Web}
 					element={{ ...image, role: 'showcase' }}
 					format={{
 						display: ArticleDisplay.Standard,
@@ -145,6 +149,7 @@ export const Thumbnail = () => {
 				role="thumbnail"
 			>
 				<ImageBlockComponent
+					platform={Platform.Web}
 					element={{ ...image, role: 'thumbnail' }}
 					format={{
 						display: ArticleDisplay.Standard,
@@ -173,6 +178,7 @@ export const Supporting = () => {
 				role="supporting"
 			>
 				<ImageBlockComponent
+					platform={Platform.Web}
 					element={{ ...image, role: 'supporting' }}
 					format={{
 						display: ArticleDisplay.Standard,
@@ -201,6 +207,7 @@ export const HideCaption = () => {
 				role="inline"
 			>
 				<ImageBlockComponent
+					platform={Platform.Web}
 					element={{ ...image, role: 'inline' }}
 					format={{
 						display: ArticleDisplay.Standard,
@@ -230,6 +237,7 @@ export const InlineTitle = () => {
 				role="inline"
 			>
 				<ImageBlockComponent
+					platform={Platform.Web}
 					element={{ ...image, role: 'inline' }}
 					format={{
 						display: ArticleDisplay.Standard,
@@ -264,6 +272,7 @@ export const InlineTitleMobile = () => {
 				role="inline"
 			>
 				<ImageBlockComponent
+					platform={Platform.Web}
 					element={{ ...image, role: 'inline' }}
 					format={{
 						display: ArticleDisplay.Standard,
@@ -298,6 +307,7 @@ export const ImmersiveTitle = () => {
 				role="immersive"
 			>
 				<ImageBlockComponent
+					platform={Platform.Web}
 					element={{ ...image, role: 'immersive' }}
 					format={{
 						display: ArticleDisplay.Standard,
@@ -328,6 +338,7 @@ export const ShowcaseTitle = () => {
 				role="showcase"
 			>
 				<ImageBlockComponent
+					platform={Platform.Web}
 					element={{ ...image, role: 'showcase' }}
 					format={{
 						display: ArticleDisplay.Standard,
@@ -382,6 +393,7 @@ export const HalfWidth = () => {
 				role="halfWidth"
 			>
 				<ImageBlockComponent
+					platform={Platform.Web}
 					element={{ ...image, role: 'halfWidth' }}
 					format={{
 						display: ArticleDisplay.Standard,
@@ -450,6 +462,7 @@ export const HalfWidthMobile = () => {
 				role="halfWidth"
 			>
 				<ImageBlockComponent
+					platform={Platform.Web}
 					element={{ ...image, role: 'halfWidth' }}
 					format={{
 						display: ArticleDisplay.Standard,
@@ -518,6 +531,7 @@ export const HalfWidthWide = () => {
 				role="halfWidth"
 			>
 				<ImageBlockComponent
+					platform={Platform.Web}
 					element={{ ...image, role: 'halfWidth' }}
 					format={{
 						display: ArticleDisplay.Standard,

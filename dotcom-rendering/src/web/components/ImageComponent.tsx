@@ -10,13 +10,17 @@ import {
 } from '@guardian/source-foundations';
 import type { Image, ImageBlockElement, RoleType } from '../../types/content';
 import type { Palette } from '../../types/palette';
+import type { Platform } from '../../types/platform';
 import { decidePalette } from '../lib/decidePalette';
+import { AppsLightbox } from './AppsLightbox.importable';
 import { Caption } from './Caption';
 import { Hide } from './Hide';
+import { Island } from './Island';
 import { Picture } from './Picture';
 import { StarRating } from './StarRating/StarRating';
 
 type Props = {
+	platform: Platform;
 	element: ImageBlockElement;
 	role: RoleType;
 	format: ArticleFormat;
@@ -214,6 +218,7 @@ const CaptionToggle = () => (
 );
 
 export const ImageComponent = ({
+	platform,
 	element,
 	format,
 	hideCaption,
@@ -319,6 +324,19 @@ export const ImageComponent = ({
 					isLazy={!isMainMedia}
 					isMainMedia={isMainMedia}
 				/>
+				<Island>
+					<AppsLightbox
+						master={image}
+						width={imageWidth}
+						height={imageHeight}
+						caption={element.data.caption}
+						credit={
+							element.displayCredit
+								? element.data.credit
+								: undefined
+						}
+					/>
+				</Island>
 				{!!title && (
 					<ImageTitle title={title} role={role} palette={palette} />
 				)}
@@ -350,6 +368,19 @@ export const ImageComponent = ({
 					isLazy={!isMainMedia}
 					isMainMedia={isMainMedia}
 				/>
+				<Island>
+					<AppsLightbox
+						master={image}
+						width={imageWidth}
+						height={imageHeight}
+						caption={element.data.caption}
+						credit={
+							element.displayCredit
+								? element.data.credit
+								: undefined
+						}
+					/>
+				</Island>
 				{typeof starRating === 'number' && (
 					<PositionStarRating rating={starRating} />
 				)}
@@ -384,6 +415,19 @@ export const ImageComponent = ({
 					isLazy={!isMainMedia}
 					isMainMedia={isMainMedia}
 				/>
+				<Island>
+					<AppsLightbox
+						master={image}
+						width={imageWidth}
+						height={imageHeight}
+						caption={element.data.caption}
+						credit={
+							element.displayCredit
+								? element.data.credit
+								: undefined
+						}
+					/>
+				</Island>
 				{isMainMedia && (
 					// Below tablet, main media images show an info toggle at the bottom right of
 					// the image which, when clicked, toggles the caption as an overlay

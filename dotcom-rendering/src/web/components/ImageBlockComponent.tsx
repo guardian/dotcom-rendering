@@ -1,7 +1,9 @@
-import { ImageBlockElement } from '../../types/content';
+import type { ImageBlockElement } from '../../types/content';
+import type { Platform } from '../../types/platform';
 import { ImageComponent } from './ImageComponent';
 
 type Props = {
+	platform: Platform;
 	format: ArticleFormat;
 	element: ImageBlockElement;
 	hideCaption?: boolean;
@@ -12,6 +14,7 @@ type Props = {
 };
 
 export const ImageBlockComponent = ({
+	platform,
 	format,
 	element,
 	hideCaption,
@@ -23,6 +26,7 @@ export const ImageBlockComponent = ({
 	const { role } = element;
 	return (
 		<ImageComponent
+			platform={platform}
 			element={element}
 			format={format}
 			hideCaption={hideCaption}

@@ -31,9 +31,9 @@ const decideTitle = (article: FEArticleType): string => {
 		decideTheme(article.format) === ArticlePillar.Opinion &&
 		article.byline
 	) {
-		return `${article.headline} | ${article.byline} | The Guardian`;
+		return `${article.headline} | ${article.byline}`;
 	}
-	return `${article.headline} | ${article.sectionLabel} | The Guardian`;
+	return `${article.headline} | ${article.sectionLabel}`;
 };
 
 export const articleToHtml = ({ article }: Props): string => {

@@ -9,6 +9,7 @@ import { ArticleDesign } from '@guardian/libs';
 import { getSharingUrls } from '../../lib/sharing-urls';
 import type { Switches } from '../../types/config';
 import type { CAPIElement, RoleType } from '../../types/content';
+import type { Platform } from '../../types/platform';
 import { AudioAtomWrapper } from '../components/AudioAtomWrapper.importable';
 import { BlockquoteBlockComponent } from '../components/BlockquoteBlockComponent';
 import { CalloutEmbedBlockComponent } from '../components/CalloutEmbedBlockComponent.importable';
@@ -67,6 +68,7 @@ import {
 import { decidePalette } from './decidePalette';
 
 type Props = {
+	platform: Platform;
 	format: ArticleFormat;
 	element: CAPIElement;
 	adTargeting?: AdTargeting;
@@ -121,6 +123,7 @@ const updateRole = (el: CAPIElement, format: ArticleFormat): CAPIElement => {
 // there is no straightforward way to tell if a React element is null by direct
 // inspection.
 export const renderElement = ({
+	platform,
 	format,
 	element,
 	adTargeting,
@@ -322,6 +325,7 @@ export const renderElement = ({
 		case 'model.dotcomrendering.pageElements.ImageBlockElement':
 			return (
 				<ImageBlockComponent
+					platform={platform}
 					format={format}
 					key={index}
 					element={element}

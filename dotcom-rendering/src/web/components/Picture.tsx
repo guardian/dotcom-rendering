@@ -17,6 +17,8 @@ type Props = {
 	width: string;
 	isMainMedia?: boolean;
 	isLazy?: boolean;
+	caption?: string;
+	credit?: string;
 };
 
 export type ImageWidthType = { breakpoint: number; width: number };
@@ -333,7 +335,6 @@ export const Picture = ({
 					</React.Fragment>
 				);
 			})}
-
 			<img
 				alt={alt}
 				src={fallbackSource.lowResUrl}

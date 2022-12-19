@@ -1,4 +1,5 @@
 import type { Switches } from 'src/types/config';
+import { Platform } from 'src/types/platform';
 import { NotRenderableInDCR } from '../../lib/errors/not-renderable-in-dcr';
 import type { CAPIElement } from '../../types/content';
 import type { TagType } from '../../types/tag';
