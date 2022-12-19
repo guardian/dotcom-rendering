@@ -10,6 +10,7 @@ import {
 	from,
 	labs,
 	neutral,
+	space,
 	until,
 } from '@guardian/source-foundations';
 import { StraightLines } from '@guardian/source-react-components-development-kitchen';
@@ -271,8 +272,7 @@ const stretchLines = css`
 `;
 
 const starWrapper = css`
-	margin-top: 18px;
-	margin-bottom: 6px;
+	margin-top: ${space[4]}px;
 	background-color: ${brandAltBackground.primary};
 	display: inline-block;
 
