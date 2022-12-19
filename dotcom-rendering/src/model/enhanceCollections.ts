@@ -19,7 +19,7 @@ export const enhanceCollections = (
 	pageId: string,
 ): DCRCollectionType[] => {
 	return collections.filter(isSupported).map((collection) => {
-		const { id, displayName, collectionType, hasMore, description } =
+		const { id, displayName, collectionType, hasMore, href, description } =
 			collection;
 		const containerPalette = decideContainerPalette(
 			collection.config.metadata?.map((meta) => meta.type),
@@ -29,6 +29,7 @@ export const enhanceCollections = (
 			displayName,
 			description,
 			collectionType,
+			href,
 			containerPalette,
 			grouped: groupCards(
 				collectionType,

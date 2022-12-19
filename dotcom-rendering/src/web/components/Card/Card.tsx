@@ -357,8 +357,8 @@ export const Card = ({
 								imagePosition={imagePosition}
 							>
 								<Avatar
-									imageSrc={image.src}
-									imageAlt={byline ?? ''}
+									src={image.src}
+									alt={byline ?? ''}
 									containerPalette={containerPalette}
 									format={format}
 								/>

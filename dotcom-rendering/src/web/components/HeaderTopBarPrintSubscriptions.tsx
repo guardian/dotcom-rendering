@@ -69,7 +69,11 @@ export const HeaderTopBarPrintSubscriptions = ({
 
 	return (
 		<div css={printSubscriptionStyles}>
-			<a href={href} css={linkStyles} data-link-name="">
+			<a
+				href={href}
+				css={linkStyles}
+				data-link-name="nav3 : topbar : printsubs"
+			>
 				<NewspaperIcon />
 				<>Print subscriptions</>
 			</a>
