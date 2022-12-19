@@ -18,6 +18,7 @@ module.exports = {
 		builder: 'webpack5',
 	},
 	stories: ['../src/**/*.stories.@(tsx)', '../stories/**/*.stories.@(tsx)'],
+	staticDirs: ['../src/static'],
 	addons: [
 		'@storybook/addon-essentials',
 		'storybook-addon-turbo-build',
