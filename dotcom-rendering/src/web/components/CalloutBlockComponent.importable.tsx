@@ -158,7 +158,7 @@ export const CalloutBlockComponent = ({
 				</summary>
 				<CalloutShare format={format} />
 				<div css={submissionSuccessStyles}>
-					<InlineSuccess>
+					<InlineSuccess aria-live="polite">
 						Thank you, your story has been submitted successfully.
 						One of our journalists will be in touch if we wish to
 						take your submission further.
@@ -168,36 +168,40 @@ export const CalloutBlockComponent = ({
 		);
 	}
 	return (
-		<aside>
+		<>
 			{isEmbed ? (
-				<ExpandingWrapper
-					name={`${callout.formId} form`}
-					renderExtra={() => <Deadline until={activeUntil} />}
-				>
-					<details
-						css={[calloutDetailsStyles, wrapperStyles]}
-						aria-hidden={true}
-						open={true}
+				<aside>
+					<ExpandingWrapper
+						name={`${callout.formId} form`}
+						renderExtra={() => <Deadline until={activeUntil} />}
 					>
-						<summary css={summaryStyles}>
-							<div css={summaryContentWrapper}>
-								<div css={titleStyles(format)}>Tell us</div>
-								<h4 css={subtitleTextHeaderStyles}>{title}</h4>
-								<CalloutDescription
-									format={format}
-									description={description}
-								/>
-							</div>
-						</summary>
-						<CalloutShare format={format} />
-						<Form
-							formFields={formFields}
-							onSubmit={onSubmit}
-							format={format}
-							networkError={networkError}
-						/>
-					</details>
-				</ExpandingWrapper>
+						<details
+							css={[calloutDetailsStyles, wrapperStyles]}
+							aria-hidden={true}
+							open={true}
+						>
+							<summary css={summaryStyles}>
+								<div css={summaryContentWrapper}>
+									<div css={titleStyles(format)}>Tell us</div>
+									<h4 css={subtitleTextHeaderStyles}>
+										{title}
+									</h4>
+									<CalloutDescription
+										format={format}
+										description={description}
+									/>
+								</div>
+							</summary>
+							<CalloutShare format={format} />
+							<Form
+								formFields={formFields}
+								onSubmit={onSubmit}
+								format={format}
+								networkError={networkError}
+							/>
+						</details>
+					</ExpandingWrapper>
+				</aside>
 			) : (
 				<div css={[calloutDetailsStyles, wrapperStyles, ruleStyles]}>
 					<summary css={summaryStyles}>
@@ -226,6 +230,6 @@ export const CalloutBlockComponent = ({
 					)}
 				</div>
 			)}
-		</aside>
+		</>
 	);
 };
