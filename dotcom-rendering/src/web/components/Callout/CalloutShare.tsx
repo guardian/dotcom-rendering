@@ -8,6 +8,7 @@ const shareCalloutStyles = css`
 	display: flex;
 	align-items: center;
 `;
+
 const shareCalloutTextStyles = css`
 	display: inline-block;
 	${textSans.xsmall()}
@@ -20,11 +21,6 @@ const shareCalloutLinkStyles = (format: ArticleFormat) =>
 		text-decoration: none;
 		font-weight: normal;
 	`;
-
-const svgStyles = css`
-	width: 45px;
-	display: inline-block;
-`;
 
 interface Props {
 	format: ArticleFormat;
@@ -47,7 +43,11 @@ export const CalloutShare = ({ format }: Props) => {
 	return (
 		<>
 			<div css={shareCalloutStyles}>
-				<div css={svgStyles}>
+				<div
+					css={css`
+						width: 45px;
+					`}
+				>
 					<SvgShareCallout />
 				</div>
 				<div css={shareCalloutTextStyles}>
