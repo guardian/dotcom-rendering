@@ -113,6 +113,10 @@ const decideImage = (trail: FEFrontCard) => {
 
 	if (trail.display.imageHide) return undefined;
 
+	if (trail.properties.isCrossword && trail.properties.maybeContentId) {
+		return `https://api.nextgen.guardianapps.co.uk/${trail.properties.maybeContentId}.svg`;
+	}
+
 	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0]?.url;
 };
 
@@ -208,6 +212,7 @@ export const enhanceCards = (
 			showByline: faciaCard.properties.showByline,
 			snapData: enhanceSnaps(faciaCard.enriched),
 			isBoosted: faciaCard.display.isBoosted,
+			isCrossword: faciaCard.properties.isCrossword,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
 			avatarUrl:
 				faciaCard.properties.maybeContent?.tags.tags &&
