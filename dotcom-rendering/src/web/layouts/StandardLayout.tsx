@@ -284,9 +284,6 @@ const starWrapper = css`
 		padding-left: 0px;
 		margin-left: -0px;
 	}
-
-	padding-left: 10px;
-	margin-left: -10px;
 `;
 
 interface Props {
