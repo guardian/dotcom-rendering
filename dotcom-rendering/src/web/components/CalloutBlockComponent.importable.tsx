@@ -10,10 +10,10 @@ import { ExpandingWrapper } from '@guardian/source-react-components-development-
 import { useState } from 'react';
 import type { CalloutBlockElementV2 } from 'src/types/content';
 import { decidePalette } from '../lib/decidePalette';
-import { Deadline } from './Callout/CalloutDeadline';
 import { CalloutDescription } from './Callout/CalloutDescription';
 import { CalloutExpired } from './Callout/CalloutExpired';
 import { CalloutShare } from './Callout/CalloutShare';
+import { Deadline } from './Callout/Deadline';
 import { Form } from './Callout/Form';
 
 const ruleStyles = css`
