@@ -1,5 +1,9 @@
 import '../webpackPublicPath';
 import { isAdBlockInUse } from '@guardian/commercial-core';
+import {
+	BUILD_VARIANT,
+	dcrJavascriptBundle,
+} from '../../../../scripts/webpack/bundles';
 import { startup } from '../startup';
 
 const init = async (): Promise<void> => {
@@ -16,7 +20,16 @@ const init = async (): Promise<void> => {
 	// Sentry 99% of the time. So instead we just do some basic math here
 	// and use that to prevent the Sentry script from ever loading.
 	const randomCentile = Math.floor(Math.random() * 100) + 1; // A number between 1 - 100
-	if (randomCentile <= 99 || sentryDisabled) {
+	// We want to log all errors for users in the bundle variant AB test
+	// Please ensure that the test sample rate is low
+	const isInBrowserVariantTest =
+		BUILD_VARIANT &&
+		window.guardian.config.tests[dcrJavascriptBundle('Variant')] ===
+			'variant';
+	const doNotLoadSentry =
+		(randomCentile <= 99 || sentryDisabled) && !isInBrowserVariantTest;
+
+	if (doNotLoadSentry) {
 		// 99% of the time we don't want to remotely log errors with Sentry and so
 		// we just console them out
 		window.guardian.modules.sentry.reportError = (error) => {
