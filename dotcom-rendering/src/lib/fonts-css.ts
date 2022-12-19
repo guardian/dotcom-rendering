@@ -247,17 +247,10 @@ const fontList: FontDisplay[] = [
 	},
 ];
 
-const assetsUrl = (path: string): string =>
+const assetsUrl = (path: string) =>
 	`https://assets.guim.co.uk/static/frontend/${path}`;
 
-const template: (_: FontDisplay) => string = ({
-	family,
-	woff2,
-	woff,
-	ttf,
-	weight,
-	style,
-}) => `
+const template = ({ family, woff2, woff, ttf, weight, style }: FontDisplay) => `
     @font-face {
         font-family: "${family}";
         src: url(${assetsUrl(woff2)}) format("woff2"),
@@ -269,7 +262,7 @@ const template: (_: FontDisplay) => string = ({
     }
 `;
 
-const getStyleString: () => string = () => {
+const getStyleString = () => {
 	return fontList.reduce(
 		(styleString, font) => `${styleString}${template(font)}`,
 		'',
