@@ -5,17 +5,22 @@ import type { ArticleFormat } from '@guardian/libs';
 import {
 	body,
 	error,
+	fontWeights,
 	headline,
 	neutral,
 	remSpace,
+	textSans,
 	until,
 } from '@guardian/source-foundations';
 import { darkModeCss } from 'styles';
 
+const containerPadding = remSpace[2];
+
 // Callout block styles
-export const calloutContainerStyles = (
+export const calloutContainer = (
 	format: ArticleFormat,
 ): SerializedStyles => css`
+	padding: ${containerPadding};
 	padding-bottom: ${remSpace[12]};
 	background: ${neutral[97]};
 	color: ${neutral[7]};
@@ -49,11 +54,6 @@ export const calloutDescription = css`
 	padding: ${remSpace[3]} 0;
 `;
 
-// Callout Form Styles
-export const calloutForm = css`
-	margin: ${remSpace[2]};
-`;
-
 export const calloutSubmitButton = (
 	format: ArticleFormat,
 ): SerializedStyles => css`
@@ -65,7 +65,7 @@ export const calloutSubmitButton = (
 		color: ${neutral[7]};
 	`}
 
-	${until.mobileLandscape} {
+	${until.tablet} {
 		width: 100%;
 		justify-content: center;
 	}
@@ -78,19 +78,30 @@ export const calloutShare = css`
 	padding-right: ${remSpace[2]};
 	padding-bottom: ${remSpace[2]};
 	color: ${neutral[7]};
-	font-family: GuardianTextSans;
+	${textSans.xsmall()}
+
 	${darkModeCss`
 		color: ${neutral[86]};
 	`}
 `;
+
 export const calloutSharelink = (
 	format: ArticleFormat,
 ): SerializedStyles => css`
-	padding: 0 ${remSpace[2]};
+	margin: 0 ${remSpace[2]};
 	font-weight: normal;
 	color: ${text.calloutPrimary(format)};
 	${darkModeCss`
 		color: ${neutral[86]};
+	`}
+`;
+
+export const supportingText = css`
+	${textSans.xsmall()};
+	color: ${neutral[46]};
+
+	${darkModeCss`
+		color: ${neutral[60]};
 	`}
 `;
 
@@ -113,4 +124,39 @@ export const textarea = (hasError: boolean): SerializedStyles => css`
 		color: ${neutral[97]};
 		border:  ${hasError ? `4px solid ${error[500]}` : `2px solid${neutral[46]}`};
 	`}
+`;
+
+// Other callout components
+export const info = css`
+	${textSans.xsmall()};
+	margin-bottom: ${remSpace[4]};
+`;
+
+export const termsConditions = css`
+	${textSans.medium()};
+	margin-bottom: ${remSpace[4]};
+`;
+
+export const tabContainer = css`
+	border-bottom: 1px solid ${neutral[60]};
+	margin: ${remSpace[2]} -${containerPadding};
+	box-sizing: border-box;
+	display: 'flex';
+	justify-content: 'space-between';
+	align-items: 'center';
+`;
+
+export const tab = css`
+	${textSans.medium()};
+	font-weight: ${fontWeights.bold};
+	width: 12rem;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: ${remSpace[2]};
+	margin-bottom: -1px; // account for border of parent
+	min-height: ${remSpace[12]};
+	border: 1px solid ${neutral[60]};
+	border-bottom: 1px solid ${neutral[97]};
+	border-radius: ${remSpace[2]} ${remSpace[2]} 0px 0px;
 `;

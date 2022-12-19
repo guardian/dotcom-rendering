@@ -5,7 +5,7 @@ import type { FC, ReactElement } from 'react';
 import { renderCalloutDescriptionText } from 'renderer';
 import CalloutForm from './calloutForm';
 import {
-	calloutContainerStyles,
+	calloutContainer,
 	calloutDescription,
 	calloutHeadingText,
 	calloutTitle,
@@ -18,7 +18,6 @@ export interface CalloutBlockProps {
 	formFields: FormField[];
 	format: ArticleFormat;
 	description?: DocumentFragment;
-	isTabbable?: boolean;
 }
 
 const CalloutBlock: FC<CalloutBlockProps> = ({
@@ -29,7 +28,7 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	format,
 	description,
 }): ReactElement => (
-	<div css={calloutContainerStyles(format)}>
+	<div css={calloutContainer(format)}>
 		<div css={calloutTitle(format)}>{heading}</div>
 		<h4 css={calloutHeadingText}>{name}</h4>
 		{description && (

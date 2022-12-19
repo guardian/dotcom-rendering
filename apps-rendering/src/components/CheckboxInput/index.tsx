@@ -29,7 +29,7 @@ const CheckboxInput = ({
 			name={name}
 			supporting={description}
 			cssOverrides={cssOverrides}
-			error={error}
+			error={error ? error : undefined}
 		>
 			{options.map((option) => {
 				const isCheckboxChecked = !!selectedCheckboxes.find(

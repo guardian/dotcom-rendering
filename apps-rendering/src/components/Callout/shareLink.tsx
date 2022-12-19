@@ -2,7 +2,7 @@ import type { ArticleFormat } from '@guardian/libs';
 import { Button, SvgShareCallout } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { FC } from 'react';
-import { calloutShare, calloutSharelink } from './styles';
+import { calloutShare, calloutSharelink, supportingText } from './styles';
 
 export const ShareLink: FC<{ format: ArticleFormat }> = ({ format }) => {
 	const [isCopied, setIsCopied] = useState(false);
@@ -38,7 +38,11 @@ export const ShareLink: FC<{ format: ArticleFormat }> = ({ format }) => {
 			>
 				Please share this callout
 			</Button>
-			{isCopied && <em> Link copied to clipboard</em>}
+			{isCopied && (
+				<span css={supportingText} role="alert">
+					Link copied to clipboard
+				</span>
+			)}
 		</span>
 	);
 };

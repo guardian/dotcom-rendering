@@ -1,7 +1,4 @@
-import { css } from '@emotion/react';
 import type { FormField as formFieldType } from '@guardian/apps-rendering-api-models/formField';
-import type { ArticleFormat } from '@guardian/libs';
-import { remSpace, textSans } from '@guardian/source-foundations';
 import {
 	Option,
 	Select,
@@ -11,40 +8,10 @@ import {
 import { FileInput } from '@guardian/source-react-components-development-kitchen';
 import CheckboxInput from 'components/CheckboxInput';
 import RadioInput from 'components/RadioInput';
-import type { FC, ReactElement } from 'react';
+import type { FC } from 'react';
 import { logger } from '../../logger';
 import type { FormDataType, ValidationErrors } from './calloutForm';
 import { fieldInput, textarea } from './styles';
-
-const infoStyles = css`
-	${textSans.small()};
-	margin-bottom: ${remSpace[4]};
-`;
-
-export const Disclaimer: FC = () => {
-	return (
-		<div css={infoStyles}>
-			You must be 18 or over to fill in this form. Only the Guardian can
-			see your contributions and one of our journalists may contact you to
-			discuss further. For more information please see our{' '}
-			<a href="https://www.theguardian.com/help/terms-of-service">
-				terms of service
-			</a>{' '}
-			and{' '}
-			<a href="https://www.theguardian.com/help/privacy-policy">
-				privacy policy
-			</a>
-			.
-		</div>
-	);
-};
-
-export const ContactText = (): ReactElement => (
-	<div css={infoStyles}>
-		One of our journalists will be in contact before we publish your
-		information, so please do leave contact details.
-	</div>
-);
 
 type FormFieldProp = {
 	formId: number;
@@ -54,7 +21,6 @@ type FormFieldProp = {
 		id: string,
 		data: string | string[] | undefined,
 	) => void;
-	format: ArticleFormat;
 	validationErrors: ValidationErrors;
 };
 
@@ -63,7 +29,6 @@ export const FormField: FC<FormFieldProp> = ({
 	formField,
 	formData,
 	setFieldInFormData,
-	format,
 	validationErrors,
 }) => {
 	const { type, label, description, mandatory, options, id } = formField;
