@@ -21,7 +21,7 @@ const shareCalloutLinkStyles = (format: ArticleFormat) =>
 		font-weight: normal;
 	`;
 
-const placeholderCircle = css`
+const svgStyles = css`
 	width: 45px;
 	display: inline-block;
 `;
@@ -47,7 +47,7 @@ export const CalloutShare = ({ format }: Props) => {
 	return (
 		<>
 			<div css={shareCalloutStyles}>
-				<div css={placeholderCircle}>
+				<div css={svgStyles}>
 					<SvgShareCallout />
 				</div>
 				<div css={shareCalloutTextStyles}>

@@ -3,10 +3,9 @@ import { palette, textSans, space } from '@guardian/source-foundations';
 import { SvgClock } from '@guardian/source-react-components';
 
 type Props = {
-	until?: number | undefined;
+	until?: number;
 };
 
-// work
 const deadlineStyles = css`
 	${textSans.xxsmall()};
 	color: ${palette.brand};
