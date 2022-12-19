@@ -356,7 +356,7 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!CAPIArticle.config.switches
-										.headerTopBarSearchCapiSwitch
+										.headerTopBarSearchCapi
 								}
 							/>
 						</Section>

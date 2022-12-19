@@ -5,10 +5,7 @@ import {
 	ArticlePillar,
 	ArticleSpecial,
 } from '@guardian/libs';
-import {
-	getAllThemes,
-	getThemeNameAsString,
-} from '../../../../common-rendering/src/fixtures/article';
+import { getAllThemes, getThemeNameAsString } from '../lib/format';
 import { ArticleMeta } from './ArticleMeta';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => (
@@ -29,9 +26,9 @@ const tagsWithLargeBylineImage = [
 		title: 'Lanre Bakare',
 		twitterHandle: 'lanre_bakare',
 		bylineImageUrl:
-			'https://i.guim.co.uk/img/uploads/2017/10/06/Lanre-Bakare,-L.png?width=300&quality=85&auto=format&fit=max&s=afa36cd9b80bea5e98f10280aea4d0e4',
+			'https://uploads.guim.co.uk/2017/10/06/Lanre-Bakare,-L.png',
 		bylineLargeImageUrl:
-			'https://i.guim.co.uk/img/uploads/2017/10/06/Lanre-Bakare,-L.png?width=300&quality=85&auto=format&fit=max&s=afa36cd9b80bea5e98f10280aea4d0e4',
+			'https://uploads.guim.co.uk/2017/10/06/Lanre-Bakare,-L.png',
 	},
 ];
 
@@ -41,7 +38,7 @@ const tagsWithSmallBylineImage = [
 		type: 'Contributor',
 		title: 'Nicola Slawson',
 		bylineImageUrl:
-			'https://i.guim.co.uk/img/uploads/2016/11/01/Nicola_Slawson.jpg?width=140&height=140&quality=85&auto=format&fit=max&s=a1490a494f98d261b6300f865cb60d79',
+			'https://uploads.guim.co.uk/2016/11/01/Nicola_Slawson.jpg',
 	},
 ];
 
@@ -52,9 +49,9 @@ const tagsWithByTwoContributors = [
 		title: 'Lanre Bakare',
 		twitterHandle: 'lanre_bakare',
 		bylineImageUrl:
-			'https://i.guim.co.uk/img/uploads/2017/10/06/Lanre-Bakare,-L.png?width=300&quality=85&auto=format&fit=max&s=afa36cd9b80bea5e98f10280aea4d0e4',
+			'https://uploads.guim.co.uk/2017/10/06/Lanre-Bakare,-L.png',
 		bylineLargeImageUrl:
-			'https://i.guim.co.uk/img/uploads/2017/10/06/Lanre-Bakare,-L.png?width=300&quality=85&auto=format&fit=max&s=afa36cd9b80bea5e98f10280aea4d0e4',
+			'https://uploads.guim.co.uk/2017/10/06/Lanre-Bakare,-L.png',
 	},
 	{
 		id: 'profile/another-author',

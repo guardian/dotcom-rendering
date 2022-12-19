@@ -1,8 +1,4 @@
 import { css } from '@emotion/react';
-// eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
-import Accordion from '@guardian/common-rendering/src/components/accordion';
-// eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
-import { Pagination } from '@guardian/common-rendering/src/components/Pagination';
 import { ArticleDesign } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
@@ -20,6 +16,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
+import { Accordion } from '../components/Accordion';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -48,6 +45,7 @@ import { MostViewedFooterData } from '../components/MostViewedFooterData.importa
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
 import { Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
+import { Pagination } from '../components/Pagination';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
 import { Standfirst } from '../components/Standfirst';
@@ -346,7 +344,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							isInEuropeTest={isInEuropeTest}
 							headerTopBarSearchCapiSwitch={
 								!!CAPIArticle.config.switches
-									.headerTopBarSearchCapiSwitch
+									.headerTopBarSearchCapi
 							}
 						/>
 					</Section>
@@ -840,7 +838,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
-														supportsDarkMode={false}
 													/>
 												)}
 												<ArticleBody
@@ -948,7 +945,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
-														supportsDarkMode={false}
 													/>
 												)}
 												<StraightLines
@@ -980,7 +976,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										</div>
 									) : (
 										<Accordion
-											supportsDarkMode={false}
 											accordionTitle="Live feed"
 											context="liveFeed"
 										>
@@ -1003,7 +998,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
-														supportsDarkMode={false}
 													/>
 												)}
 												<ArticleBody
@@ -1111,7 +1105,6 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 														newer={pagination.newer}
 														older={pagination.older}
 														format={format}
-														supportsDarkMode={false}
 													/>
 												)}
 												<StraightLines

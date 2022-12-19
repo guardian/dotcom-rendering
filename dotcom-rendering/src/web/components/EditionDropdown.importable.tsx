@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
 import { brand, from } from '@guardian/source-foundations';
-import { HeaderLink } from '../../types/header';
 import type { EditionId } from '../lib/edition';
 import { getZIndex } from '../lib/getZIndex';
+import type { DropdownLinkType } from './Dropdown';
 import { Dropdown } from './Dropdown';
 
 const editionDropdown = css`
@@ -41,7 +41,7 @@ export const EditionDropdown = ({
 	dataLinkName,
 	isInEuropeTest,
 }: Props) => {
-	const links: [HeaderLink, ...HeaderLink[]] = [
+	const links: [DropdownLinkType, ...DropdownLinkType[]] = [
 		{
 			id: 'uk',
 			url: '/preference/edition/uk',

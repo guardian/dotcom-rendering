@@ -396,7 +396,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!CAPIArticle.config.switches
-										.headerTopBarSearchCapiSwitch
+										.headerTopBarSearchCapi
 								}
 							/>
 						</Section>

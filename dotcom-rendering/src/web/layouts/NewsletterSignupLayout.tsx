@@ -270,8 +270,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 						idApiUrl={CAPIArticle.config.idApiUrl}
 						isInEuropeTest={isInEuropeTest}
 						headerTopBarSearchCapiSwitch={
-							!!CAPIArticle.config.switches
-								.headerTopBarSearchCapiSwitch
+							!!CAPIArticle.config.switches.headerTopBarSearchCapi
 						}
 					/>
 				</Section>
