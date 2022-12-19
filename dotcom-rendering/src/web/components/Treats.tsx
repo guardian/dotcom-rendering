@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import {
-	border,
 	headline,
 	neutral,
 	space,
@@ -24,8 +23,8 @@ const TextTreat = ({
 	<li
 		css={css`
 			margin-top: ${space[3]}px;
-			border-left: 1px solid ${borderColour ?? border.secondary};
-			border-top: 1px solid ${borderColour ?? border.secondary};
+			border-left: 1px solid ${borderColour ?? neutral[86]};
+			border-top: 1px solid ${borderColour ?? neutral[86]};
 			padding-top: ${space[1]}px;
 			padding-left: ${space[2]}px;
 		`}
