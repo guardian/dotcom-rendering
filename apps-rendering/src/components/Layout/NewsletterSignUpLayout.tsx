@@ -102,39 +102,44 @@ const NewsletterSignUpLayout: FC<Props> = ({ item }) => {
 				</header>
 				<section css={contentRow}>
 					{maybeRender(item.promotedNewsletter, (newsletter) => (
-						<div css={detailBlockStyles}>
-							<SvgNewsletter size="xsmall" />
-							<b>{newsletter.frequency}</b>
-							{/* TO DO - use regional focus, when on the MAPI type */}
-						</div>
+						<>
+							{newsletter.regionFocus && (
+								<div css={detailBlockStyles}>
+									<SvgNewsletter size="small" />
+									<b>{newsletter.regionFocus} Focused</b>
+								</div>
+							)}
+						</>
 					))}
 
 					<Headline item={item} />
 					<Standfirst item={item} />
 
 					{maybeRender(item.promotedNewsletter, (newsletter) => (
-						<div css={frequencyBlockStyles}>
-							<SvgClock size="xsmall" />
+						<>
+							<div css={frequencyBlockStyles}>
+								<SvgClock size="xsmall" />
 
-							<span>
-								You&apos;ll receive this newsletter
-								<b> {newsletter.frequency}</b>
-							</span>
-						</div>
-					))}
+								<span>
+									You&apos;ll receive this newsletter
+									<b> {newsletter.frequency}</b>
+								</span>
+							</div>
 
-					{maybeRender(item.promotedNewsletter, (newsletter) => (
-						<InPageNewsletterSignup
-							newsletter={newsletter}
-							format={getFormat(item)}
-							fallbackContent={
-								<ArticleBody
-									format={item}
-									body={item.body}
-									shouldHideAdverts={item.shouldHideAdverts}
-								/>
-							}
-						/>
+							<InPageNewsletterSignup
+								newsletter={newsletter}
+								format={getFormat(item)}
+								fallbackContent={
+									<ArticleBody
+										format={item}
+										body={item.body}
+										shouldHideAdverts={
+											item.shouldHideAdverts
+										}
+									/>
+								}
+							/>
+						</>
 					))}
 					{item.promotedNewsletter.kind === OptionKind.None && (
 						<ArticleBody
