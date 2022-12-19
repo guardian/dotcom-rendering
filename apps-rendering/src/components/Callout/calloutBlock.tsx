@@ -25,9 +25,9 @@ const CalloutBlock: FC<CalloutBlockProps> = ({
 	format,
 	description,
 }): ReactElement => (
-	<div css={calloutContainer(format)}>
-		<div css={calloutTitle(format)}>Tell Us</div>
-		<h4 css={calloutHeadingText}>{heading}</h4>
+	<div css={calloutContainer}>
+		<div css={calloutTitle(format)}>{heading}</div>
+		<h4 css={calloutHeadingText}>{name}</h4>
 		{description && (
 			<div css={calloutDescription}>
 				{renderCalloutDescriptionText(format, description)}

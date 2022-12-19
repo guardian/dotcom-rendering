@@ -8,15 +8,20 @@ import {
 } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { FC } from 'react';
-import { ContactText, Disclaimer, FormField } from './formFields';
+import {
+	ContactText,
+	Disclaimer,
+	PseudoTab,
+	TermsAndConditions,
+} from './calloutComponents';
+import { FormField } from './formFields';
 import { ShareLink } from './shareLink';
-import { calloutForm, calloutSubmitButton } from './styles';
+import { calloutSubmitButton } from './styles';
 
-export interface CalloutFormProps {
+interface CalloutFormProps {
 	format: ArticleFormat;
 	id: number;
 	fields: FormFieldType[];
-	disableInputs?: boolean;
 }
 
 type SubmitDataType = Record<string, string | string[]>;
@@ -121,7 +126,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 	};
 
 	return (
-		<div className="js-callout" css={calloutForm}>
+		<div className="js-callout">
 			{submissionSuccess ? (
 				<InlineSuccess>
 					Thank you, your story has been submitted successfully. One
@@ -137,46 +142,48 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 					}}
 					noValidate
 				>
+					<TermsAndConditions />
 					<ShareLink format={format} />
-					<Disclaimer />
-					<input name="formId" type="hidden" value={id} />
-					<div className="js-callout__inputs">
-						{fields.map((field, i) => (
-							<FormField
-								key={i}
-								formId={id}
-								formField={field}
-								formData={formData}
-								setFieldInFormData={setFieldInFormData}
-								format={format}
-								validationErrors={validationErrors}
-							/>
-						))}
-						<div>
-							<ContactText />
-							{submissionError && (
-								<InlineError>
-									<>
-										Something went wrong. Please try again
-										or contact{' '}
-										<Link
-											href="mailto:customer.help@theguardian.com"
-											target="_blank"
-										>
-											customer.help@theguardian.com
-										</Link>
-									</>
-								</InlineError>
-							)}
+					<>
+						<PseudoTab />
+						<div className="js-callout__inputs">
+							<Disclaimer />
+							{fields.map((field, i) => (
+								<FormField
+									key={i}
+									formId={id}
+									formField={field}
+									formData={formData}
+									setFieldInFormData={setFieldInFormData}
+									validationErrors={validationErrors}
+								/>
+							))}
+							<div>
+								<ContactText />
+								{submissionError && (
+									<InlineError>
+										<>
+											Something went wrong. Please try
+											again or contact{' '}
+											<Link
+												href="mailto:customer.help@theguardian.com"
+												target="_blank"
+											>
+												customer.help@theguardian.com
+											</Link>
+										</>
+									</InlineError>
+								)}
+							</div>
+							<Button
+								css={calloutSubmitButton(format)}
+								type="submit"
+								priority="primary"
+							>
+								Submit
+							</Button>
 						</div>
-						<Button
-							css={calloutSubmitButton(format)}
-							type="submit"
-							priority="primary"
-						>
-							Submit
-						</Button>
-					</div>
+					</>
 				</form>
 			)}
 		</div>
