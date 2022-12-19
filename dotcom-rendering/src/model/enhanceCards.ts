@@ -104,7 +104,10 @@ const decideAvatarUrl = (
 };
 
 const decideImage = (trail: FEFrontCard) => {
-	if (trail.type === 'LinkSnap') {
+	if (
+		trail.type === 'LinkSnap' ||
+		trail.properties.image?.type === 'Replace'
+	) {
 		return trail.properties.image?.item.imageSrc;
 	}
 

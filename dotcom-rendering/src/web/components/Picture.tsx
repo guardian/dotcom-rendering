@@ -179,6 +179,10 @@ const generateImageURL = ({
 	resolution: 'low' | 'high';
 }): string => {
 	const url = new URL(master);
+
+	// In CODE, we do not generate optimised replacement images
+	if (url.hostname === 's3-eu-west-1.amazonaws.com') return url.href;
+
 	const service = url.hostname.split('.')[0] ?? '';
 
 	const params = new URLSearchParams({
