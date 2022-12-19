@@ -271,8 +271,8 @@ const stretchLines = css`
 `;
 
 const starWrapper = css`
-	margin-bottom: 18px;
-	margin-top: 6px;
+	margin-top: 18px;
+	margin-bottom: 6px;
 	background-color: ${brandAltBackground.primary};
 	display: inline-block;
 
@@ -557,6 +557,8 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									}
 								/>
 							</div>
+						</GridItem>
+						<GridItem area="standfirst">
 							{CAPIArticle.starRating ||
 							CAPIArticle.starRating === 0 ? (
 								<div css={starWrapper}>
@@ -568,8 +570,6 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 							) : (
 								<></>
 							)}
-						</GridItem>
-						<GridItem area="standfirst">
 							<Standfirst
 								format={format}
 								standfirst={CAPIArticle.standfirst}
