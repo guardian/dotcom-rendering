@@ -158,7 +158,7 @@ export const CalloutBlockComponent = ({
 				</summary>
 				<CalloutShare format={format} />
 				<div css={submissionSuccessStyles}>
-					<InlineSuccess aria-live="polite">
+					<InlineSuccess>
 						Thank you, your story has been submitted successfully.
 						One of our journalists will be in touch if we wish to
 						take your submission further.
