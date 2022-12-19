@@ -27,7 +27,7 @@ const determineSize = (size: RatingSizeType) => {
 			`;
 		case 'large':
 			return css`
-				padding: 2px;
+				padding: 2px 1px 2px 2px;
 				svg {
 					width: 20px;
 					height: 20px;
