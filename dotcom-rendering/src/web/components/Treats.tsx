@@ -124,10 +124,11 @@ export const Treats = ({
 									<SvgCrossword />
 								</a>
 							</li>
-							{treat.links.map((link) => (
+							{treat.links.map(({ linkTo, text }) => (
 								<TextTreat
-									text={link.text}
-									linkTo={link.linkTo}
+									key={linkTo}
+									text={text}
+									linkTo={linkTo}
 									borderColour={borderColour}
 								/>
 							))}
@@ -157,10 +158,11 @@ export const Treats = ({
 
 				return (
 					<>
-						{treat.links.map((link) => (
+						{treat.links.map(({ text, linkTo }) => (
 							<TextTreat
-								text={link.text}
-								linkTo={link.linkTo}
+								key={linkTo}
+								text={text}
+								linkTo={linkTo}
 								borderColour={borderColour}
 							/>
 						))}
