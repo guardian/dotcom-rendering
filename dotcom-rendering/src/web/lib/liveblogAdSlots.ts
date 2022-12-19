@@ -247,6 +247,8 @@ export const calculateElementSize = (element: CAPIElement): number => {
  * An element can be a few paragraphs of text, an image, a twitter embed, etc.
  */
 const calculateBlockSize = (elements: CAPIElement[]): number => {
+	if (!elements.length) return 0;
+
 	const defaultBlockHeight = BLOCK_HEADER + BLOCK_FOOTER + BLOCK_SPACING;
 
 	return elements.reduce((total, element) => {
