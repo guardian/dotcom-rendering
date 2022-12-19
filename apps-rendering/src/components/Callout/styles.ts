@@ -6,6 +6,7 @@ import {
 	body,
 	brandAlt,
 	error,
+	fontWeights,
 	headline,
 	neutral,
 	remSpace,
