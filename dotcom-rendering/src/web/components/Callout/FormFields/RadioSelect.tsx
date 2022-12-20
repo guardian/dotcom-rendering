@@ -15,8 +15,6 @@ export const RadioSelect = ({
 	formData,
 	setFormData,
 }: FieldProp) => (
-	// work around to enforce `display: flex;` to `RadioGroup`'s fieldset tag
-	// https://github.com/guardian/source/issues/580
 	<div>
 		<FieldLabel formField={formField} />
 		<RadioGroup
