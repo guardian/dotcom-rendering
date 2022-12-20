@@ -17,6 +17,7 @@ import {
 	handleInteractive,
 	handleKeyEvents,
 } from '../web/server';
+import { handleArticle as handleAppArticle } from '../app/server';
 import { recordBaselineCloudWatchMetrics } from './lib/aws/metrics-baseline';
 import { getContentFromURLMiddleware } from './lib/get-content-from-url';
 import { logger } from './lib/logging';
@@ -53,6 +54,7 @@ export const prodServer = (): void => {
 	}
 
 	app.post('/Article', logRenderTime, handleArticle);
+	app.post('/mobile-apps/Article', logRenderTime, handleAppArticle);
 	app.post('/AMPArticle', logRenderTime, handleAMPArticle);
 	app.post('/Interactive', logRenderTime, handleInteractive);
 	app.post('/AMPInteractive', logRenderTime, handleAMPArticle);
@@ -69,6 +71,13 @@ export const prodServer = (): void => {
 		handleArticle,
 	);
 	app.use('/ArticleJson', handleArticleJson);
+
+	app.get(
+		'/mobile-apps/Article',
+		logRenderTime,
+		getContentFromURLMiddleware,
+		handleAppArticle,
+	);
 
 	app.get(
 		'/AMPArticle',
