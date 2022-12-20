@@ -109,13 +109,20 @@ export const FormField = ({
 								[formField.id]: e.target.value,
 							})
 						}
-						children={formField.options.map(({ value, label }) => {
-							return (
-								<Option key={value} value={value}>
-									{label}
-								</Option>
-							);
-						})}
+						children={[
+							{
+								value: 'default',
+								label: 'Please choose an option',
+							},
+						]
+							.concat(formField.options)
+							.map(({ value, label }) => {
+								return (
+									<Option key={value} value={value}>
+										{label}
+									</Option>
+								);
+							})}
 					/>
 				</div>
 			);

@@ -96,6 +96,11 @@ export const Form = ({
 				errors[field.id] = 'This field is required';
 				isValid = false;
 			}
+			if (field.type === 'select' && field.required) {
+				if (formData[field.id] === 'Please choose an option') {
+					errors[field.id] = 'Please select an option';
+				}
+			}
 			if (field.id === 'email' && formData[field.id]) {
 				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 				if (!emailRegex.test(formData[field.id] as string)) {
