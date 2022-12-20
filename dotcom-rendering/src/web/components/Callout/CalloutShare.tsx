@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans } from '@guardian/source-foundations';
+import { neutral, textSans } from '@guardian/source-foundations';
 import { Button, SvgShareCallout } from '@guardian/source-react-components';
 import { useState } from 'react';
 import { decidePalette } from '../../lib/decidePalette';
@@ -16,11 +16,16 @@ const shareCalloutTextStyles = css`
 
 const shareCalloutLinkStyles = (format: ArticleFormat) =>
 	css`
-		color: ${decidePalette(format).text.richLink};
-		border-bottom: 1px solid ${decidePalette(format).text.richLink};
+		color: ${decidePalette(format).text.calloutAccent};
+		border-bottom: 1px solid ${decidePalette(format).text.calloutAccent};
 		text-decoration: none;
 		font-weight: normal;
 	`;
+
+const supportingText = css`
+	${textSans.xsmall()};
+	color: ${neutral[46]};
+`;
 
 interface Props {
 	format: ArticleFormat;
@@ -61,7 +66,11 @@ export const CalloutShare = ({ format }: Props) => {
 						{' '}
 						Please share this callout.
 					</Button>
-					{isCopied && <em> Link copied to clipboard</em>}
+					{isCopied && (
+						<span css={supportingText} role="alert">
+							Link copied to clipboard
+						</span>
+					)}
 				</div>
 			</div>
 		</>
