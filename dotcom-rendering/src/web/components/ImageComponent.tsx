@@ -261,7 +261,7 @@ export const ImageComponent = ({
 		const descendingByWidth = (a: Image, b: Image) => {
 			return parseInt(b.fields.width) - parseInt(a.fields.width);
 		};
-		return images.slice().sort(descendingByWidth)[0].url;
+		return images.slice().sort(descendingByWidth)[0]?.url;
 	};
 
 	// Legacy images do not have a master so we fallback to the largest available
@@ -274,7 +274,7 @@ export const ImageComponent = ({
 		const extension = imageUrl.split('.').slice(-1)[0];
 		return extension && supportedImages.includes(extension.toLowerCase());
 	};
-	if (!isSupported(image)) {
+	if (!image || !isSupported(image)) {
 		// We should only try to render images that are supported by Fastly
 		return null;
 	}

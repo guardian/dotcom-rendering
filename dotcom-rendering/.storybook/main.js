@@ -84,6 +84,12 @@ const webpackConfig = (config) => {
 		path.resolve(__dirname, '../src/web/components/SecureSignup.tsx')
 	] = path.resolve(__dirname, '../__mocks__/SecureSignupMock.tsx');
 
+	const webpackLoaders = getLoaders('modern');
+	// https://swc.rs/docs/usage/swc-loader#with-babel-loader
+	if (webpackLoaders[0].loader.startsWith('swc')) {
+		webpackLoaders[0].options.parseMap = true;
+	}
+
 	// Support typescript in Storybook
 	// https://storybook.js.org/docs/configurations/typescript-config/
 	rules.push({
@@ -93,7 +99,7 @@ const webpackConfig = (config) => {
 			path.resolve(__dirname, '../../common-rendering'),
 		],
 		exclude: babelExclude,
-		use: getLoaders('modern'),
+		use: webpackLoaders,
 	});
 
 	// modify storybook's file-loader rule to avoid conflicts with our svg

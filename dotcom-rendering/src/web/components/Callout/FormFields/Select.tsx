@@ -1,6 +1,5 @@
 import { Select as SourceSelect } from '@guardian/source-react-components';
 import type { CampaignFieldSelect } from 'src/types/content';
-import { FieldLabel } from './FieldLabel';
 
 type Props = {
 	validationErrors?: { [key in string]: string };
@@ -15,28 +14,24 @@ export const Select = ({
 	formData,
 	setFormData,
 }: Props) => (
-	<>
-		<FieldLabel formField={formField} />
-		<SourceSelect
-			error={validationErrors?.[formField.id]}
-			label={''}
-			value={formField.id in formData ? formData[formField.id] : ''}
-			onChange={(e) =>
-				setFormData({
-					...formData,
-					[formField.id]: e.target.value,
-				})
-			}
-			optional={!formField.required}
-			children={[
-				{ label: 'default', value: 'Please choose an option ...' },
-			]
-				.concat(formField.options)
-				.map((option, index) => (
-					<option key={index} value={option.value}>
-						{option.value}
-					</option>
-				))}
-		/>
-	</>
+	<SourceSelect
+		hideLabel={formField.hideLabel}
+		data-testid={`form-field-${formField.id}`}
+		error={validationErrors?.[formField.id]}
+		label={formField.label}
+		supporting={formField.description}
+		value={formField.id in formData ? formData[formField.id] : ''}
+		onChange={(e) =>
+			setFormData({
+				...formData,
+				[formField.id]: e.target.value,
+			})
+		}
+		optional={!formField.required}
+		children={formField.options.map((option, index) => (
+			<option key={index} value={option.value}>
+				{option.value}
+			</option>
+		))}
+	/>
 );

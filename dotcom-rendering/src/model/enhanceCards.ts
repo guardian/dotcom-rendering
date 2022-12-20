@@ -104,13 +104,16 @@ const decideAvatarUrl = (
 };
 
 const decideImage = (trail: FEFrontCard) => {
-	if (trail.type === 'LinkSnap') {
+	if (
+		trail.type === 'LinkSnap' ||
+		trail.properties.image?.type === 'Replace'
+	) {
 		return trail.properties.image?.item.imageSrc;
 	}
 
 	if (trail.display.imageHide) return undefined;
 
-	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0].url;
+	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0]?.url;
 };
 
 const enhanceTags = (tags: FETagType[]): TagType[] => {

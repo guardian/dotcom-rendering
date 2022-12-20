@@ -24,9 +24,9 @@ const parseHtml = parse(parser);
 const headline =
 	'Covid live: Brazil health minister who shook hands with maskless Boris Johnson at UN tests positive';
 
-const standfirst: Option<DocumentFragment> = parseHtml(
+const standfirst: Optional<DocumentFragment> = parseHtml(
 	'<p><a href="x-gu://item/mobile.guardianapis.com/uk/items/world/live/2021/sep/22/coronavirus-live-news-brazil-health-minister-tests-positive-at-un-india-urges-uk-to-resolve-quarantine-dispute?page=with:block-614ae7e58f08b228c9498279#block-614ae7e58f08b228c9498279">Marcelo Quiroga tests positive</a> at UN general assembly in New York; <a href="x-gu://item/mobile.guardianapis.com/uk/items/world/live/2021/sep/22/coronavirus-live-news-brazil-health-minister-tests-positive-at-un-india-urges-uk-to-resolve-quarantine-dispute?page=with:block-614ad64b8f087b5c6fb4a8dc#block-614ad64b8f087b5c6fb4a8dc">Australia tourism minister says</a> on track to reopen borders ‘by Christmas’</p>\n<ul>\n <li><a href="x-gu://item/mobile.guardianapis.com/uk/items/world/2021/sep/22/calculated-risk-ardern-gambles-as-new-zealand-covid-restrictions-eased">Ardern gambles as New Zealand Covid restrictions eased</a></li>\n <li><a href="x-gu://item/mobile.guardianapis.com/uk/items/australia-news/2021/sep/22/riot-police-on-melbourne-streets-to-prevent-third-day-of-protests">Riot police on Melbourne streets to prevent third day of protests</a></li>\n <li><a href="x-gu://item/mobile.guardianapis.com/uk/items/global-development/2021/sep/21/argentina-to-lift-almost-all-covid-restrictions-as-cases-and-deaths-fall">Argentina to lift almost all Covid restrictions as cases and deaths fall</a></li>\n <li><a href="x-gu://item/mobile.guardianapis.com/uk/items/education/2021/sep/21/more-than-100000-pupils-off-school-in-england-last-week-amid-covid-surge">‘High alert’ warning as more than 100,000 pupils in England miss school</a></li>\n</ul>',
-).toOption();
+).toOptional();
 
 const bylineHtml: Option<DocumentFragment> = parseHtml(
 	'<a href="https://theguardian.com">Tom Ambrose</a> (now); <a href="https://theguardian.com">Miranda Bryant</a> and <a href="https://theguardian.com">Helen Sullivan</a> (earlier)',
@@ -233,7 +233,7 @@ const fields = {
 	publishDate: some(new Date('2021-10-17T03:24:00')),
 	contributors: [],
 	mainMedia: mainMedia,
-	series: some({
+	series: Optional.some({
 		id: 'world/series/coronavirus-live',
 		type: 2,
 		sectionId: 'world',
@@ -267,6 +267,7 @@ const fields = {
 	webUrl: '',
 	edition: Edition.UK,
 	promotedNewsletter: none,
+	shouldHideAdverts: false,
 };
 
 const pinnedBlock: LiveBlock = {

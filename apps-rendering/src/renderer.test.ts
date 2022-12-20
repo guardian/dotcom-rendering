@@ -23,10 +23,10 @@ import { EmbedTracksType } from '@guardian/content-api-models/v1/embedTracksType
 import { ArticleElementRole } from '@guardian/libs';
 import {
 	mockFormat,
-	renderEditions,
-	renderElement,
+	mockRenderEditions,
+	mockRenderElement,
 	renderTextElement,
-	renderWithoutStyles,
+	mockRenderWithoutStyles,
 	textElements,
 } from 'testsHelper';
 import { Optional } from 'optional';
@@ -218,11 +218,11 @@ const audioAtom = (): BodyElement => ({
 });
 
 const renderTextElementWithoutStyles = compose(
-	renderWithoutStyles,
+	mockRenderWithoutStyles,
 	textElements,
 );
 
-const renderCaptionElement = compose(renderElement, imageElement);
+const renderCaptionElement = compose(mockRenderElement, imageElement);
 
 const getHtml = (node: ReactNode): string =>
 	isValidElement(node) ? renderToStaticMarkup(node) : '';
@@ -284,7 +284,7 @@ describe('Transforms text nodes', () => {
 
 describe('Renders different types of elements', () => {
 	test('ElementKind.Image', () => {
-		const nodes = renderElement(imageElement());
+		const nodes = mockRenderElement(imageElement());
 		const bodyImage = nodes.flat()[0];
 		expect(getHtml(bodyImage)).toContain('img');
 		expect(getHtml(bodyImage)).toContain('figcaption');
@@ -293,27 +293,27 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.Image with thumbnail role', () => {
-		const nodes = renderElement(imageElementWithRole());
+		const nodes = mockRenderElement(imageElementWithRole());
 		const bodyImage = nodes.flat()[0];
 		expect(getHtml(bodyImage)).toContain('img');
 	});
 
 	test('ElementKind.Pullquote', () => {
-		const nodes = renderElement(pullquoteElement());
+		const nodes = mockRenderElement(pullquoteElement());
 		const pullquote = nodes.flat()[0];
 		expect(getHtml(pullquote)).toContain('quote');
 		expect(getHtml(pullquote)).not.toContain('attribution');
 	});
 
 	test('ElementKind.Pullquote with attribution', () => {
-		const nodes = renderElement(pullquoteWithAttributionElement());
+		const nodes = mockRenderElement(pullquoteWithAttributionElement());
 		const pullquote = nodes.flat()[0];
 		expect(getHtml(pullquote)).toContain('attribution');
 		expect(getHtml(pullquote)).toContain('quote');
 	});
 
 	test('ElementKind.RichLink', () => {
-		const nodes = renderElement(richLinkElement());
+		const nodes = mockRenderElement(richLinkElement());
 		const richLink = nodes.flat()[0];
 		expect(getHtml(richLink)).toContain(
 			'<h1>this links to a related article</h1>',
@@ -322,7 +322,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.Interactive', () => {
-		const nodes = renderElement(interactiveElement());
+		const nodes = mockRenderElement(interactiveElement());
 		const interactive = nodes.flat()[0];
 		expect(getHtml(interactive)).toContain('iframe');
 		expect(getHtml(interactive)).toContain('src="https://theguardian.com"');
@@ -330,13 +330,13 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.Tweet', () => {
-		const nodes = renderElement(tweetElement());
+		const nodes = mockRenderElement(tweetElement());
 		const tweet = nodes.flat()[0];
 		expect(getHtml(tweet)).toContain('twitter-tweet');
 	});
 
 	test('ElementKind.Instagram', () => {
-		const nodes = renderElement(instagramElement());
+		const nodes = mockRenderElement(instagramElement());
 		const instagram = nodes.flat()[0];
 		expect(getHtml(instagram)).toBe(
 			'<iframe src="https://www.instagram.com/p/embedId/embed" height="830" title="&lt;blockquote&gt;Instagram&lt;/blockquote&gt;"></iframe>',
@@ -344,7 +344,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.Embed', () => {
-		const nodes = renderElement(embedElement);
+		const nodes = mockRenderElement(embedElement);
 		const embed = nodes.flat()[0];
 		expect(getHtml(embed)).toContain(
 			'<iframe srcDoc="&lt;section&gt;Embed&lt;/section&gt;" title="Embed" height="322"></iframe>',
@@ -352,7 +352,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.Audio', () => {
-		const nodes = renderElement(audioElement);
+		const nodes = mockRenderElement(audioElement);
 		const audio = nodes.flat()[0];
 		expect(getHtml(audio)).toContain(
 			'src="https://www.spotify.com/" sandbox="allow-scripts" height="300" width="500" title="Audio element"',
@@ -360,7 +360,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.Video', () => {
-		const nodes = renderElement(videoElement);
+		const nodes = mockRenderElement(videoElement);
 		const video = nodes.flat()[0];
 		expect(getHtml(video)).toContain(
 			'src="https://www.youtube-nocookie.com/embed/mockYoutubeId?wmode=opaque&amp;feature=oembed" height="300" width="500" allowfullscreen="" title="Video element"',
@@ -368,7 +368,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.LiveEvent', () => {
-		const nodes = renderElement(liveEventElement());
+		const nodes = mockRenderElement(liveEventElement());
 		const liveEvent = nodes.flat()[0];
 		expect(getHtml(liveEvent)).toContain(
 			'<h1>this links to a live event</h1>',
@@ -376,7 +376,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.InteractiveAtom', () => {
-		const nodes = renderElement(atomElement());
+		const nodes = mockRenderElement(atomElement());
 		const atom = nodes.flat()[0];
 		expect(getHtml(atom)).toContain('main { background: yellow; }');
 		expect(getHtml(atom)).toContain('console.log(&#x27;init&#x27;)');
@@ -384,34 +384,34 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.ExplainerAtom', () => {
-		const nodes = renderElement(explainerElement());
+		const nodes = mockRenderElement(explainerElement());
 		const explainer = nodes.flat()[0];
 		expect(getHtml(explainer)).toContain('<main>Explainer content</main>');
 	});
 
 	test('ElementKind.GuideAtom', () => {
-		const nodes = renderElement(guideElement());
+		const nodes = mockRenderElement(guideElement());
 		const guide = nodes.flat()[0];
 		expect(getHtml(guide)).toContain('<main>Guide content</main>');
 		testHandlers(guide);
 	});
 
 	test('ElementKind.QandaAtom', () => {
-		const nodes = renderElement(qandaElement());
+		const nodes = mockRenderElement(qandaElement());
 		const qanda = nodes.flat()[0];
 		expect(getHtml(qanda)).toContain('<main>QandA content</main>');
 		testHandlers(qanda);
 	});
 
 	test('ElementKind.ProfileAtom', () => {
-		const nodes = renderElement(profileElement());
+		const nodes = mockRenderElement(profileElement());
 		const profile = nodes.flat()[0];
 		expect(getHtml(profile)).toContain('<main>Profile content</main>');
 		testHandlers(profile);
 	});
 
 	test('ElementKind.TimelineAtom', () => {
-		const nodes = renderElement(timelineElement());
+		const nodes = mockRenderElement(timelineElement());
 		const timeline = nodes.flat()[0];
 		expect(getHtml(timeline)).toContain(
 			'<p>Swedish prosecutors announce they are <a href="https://www.theguardian.com/media/2019/may/13/sweden-reopens-case-against-julian-assange">reopening an investigation into a rape allegation</a> against Julian Assange.</p><p><br></p>',
@@ -420,7 +420,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.ChartAtom', () => {
-		const nodes = renderElement(chartElement());
+		const nodes = mockRenderElement(chartElement());
 		const chart = nodes.flat()[0];
 		expect(getHtml(chart)).toContain(
 			'srcDoc="&lt;main&gt;Chart content&lt;/main&gt;"',
@@ -428,7 +428,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.KnowledgeQuizAtom', () => {
-		const nodes = renderElement(knowledgeQuizAtom());
+		const nodes = mockRenderElement(knowledgeQuizAtom());
 		const quiz = nodes.flat()[0];
 		const html = getHtml(quiz);
 		expect(html).toContain('<div class="js-quiz">');
@@ -438,7 +438,7 @@ describe('Renders different types of elements', () => {
 	});
 
 	test('ElementKind.AudioAtom', () => {
-		const nodes = renderElement(audioAtom());
+		const nodes = mockRenderElement(audioAtom());
 		const audio = nodes.flat()[0];
 		const html = getHtml(audio);
 		expect(html).toContain(
@@ -483,7 +483,7 @@ describe('Renders different types of elements', () => {
 
 describe('Renders different types of Editions elements', () => {
 	test('ElementKind.Image', () => {
-		const nodes = renderEditions(imageElement());
+		const nodes = mockRenderEditions(imageElement());
 		const bodyImage = nodes.flat()[0];
 		expect(getHtml(bodyImage)).toContain('img');
 		expect(getHtml(bodyImage)).toContain('figcaption');
@@ -492,40 +492,40 @@ describe('Renders different types of Editions elements', () => {
 	});
 
 	test('ElementKind.Image with thumbnail role', () => {
-		const nodes = renderEditions(imageElementWithRole());
+		const nodes = mockRenderEditions(imageElementWithRole());
 		const bodyImage = nodes.flat()[0];
 		expect(getHtml(bodyImage)).toContain('img');
 	});
 
 	test('ElementKind.Pullquote', () => {
-		const nodes = renderEditions(pullquoteElement());
+		const nodes = mockRenderEditions(pullquoteElement());
 		const pullquote = nodes.flat()[0];
 		expect(getHtml(pullquote)).toContain('quote');
 		expect(getHtml(pullquote)).not.toContain('attribution');
 	});
 
 	test('ElementKind.Pullquote with attribution', () => {
-		const nodes = renderEditions(pullquoteWithAttributionElement());
+		const nodes = mockRenderEditions(pullquoteWithAttributionElement());
 		const pullquote = nodes.flat()[0];
 		expect(getHtml(pullquote)).toContain('attribution');
 		expect(getHtml(pullquote)).toContain('quote');
 	});
 
 	test('ElementKind.Tweet', () => {
-		const nodes = renderEditions(tweetElement());
+		const nodes = mockRenderEditions(tweetElement());
 		const tweet = nodes.flat()[0];
 		expect(getHtml(tweet)).toContain('twitter-tweet');
 	});
 
 	test('ElementKind.Embed', () => {
-		const nodes = renderEditions(embedElement);
+		const nodes = mockRenderEditions(embedElement);
 		const embed = nodes.flat()[0];
 		// Editions shouldn't render generic embeds
 		expect(getHtml(embed)).toBeNull;
 	});
 
 	test('ElementKind.Video', () => {
-		const nodes = renderEditions(videoElement);
+		const nodes = mockRenderEditions(videoElement);
 		const video = nodes.flat()[0];
 		expect(getHtml(video)).toContain(
 			'src="https://www.youtube-nocookie.com/embed/mockYoutubeId?wmode=opaque&amp;feature=oembed" height="300" width="500" allowfullscreen="" title="Video element"',
@@ -533,7 +533,7 @@ describe('Renders different types of Editions elements', () => {
 	});
 
 	test('ElementKind.LiveEvent', () => {
-		const nodes = renderEditions(liveEventElement());
+		const nodes = mockRenderEditions(liveEventElement());
 		const liveEvent = nodes.flat()[0];
 		expect(getHtml(liveEvent)).toContain(
 			'<h1>this links to a live event</h1>',

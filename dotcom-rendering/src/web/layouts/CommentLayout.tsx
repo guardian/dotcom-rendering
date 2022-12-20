@@ -342,10 +342,6 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 								editionId={CAPIArticle.editionId}
 								idUrl={CAPIArticle.config.idUrl}
 								mmaUrl={CAPIArticle.config.mmaUrl}
-								supporterCTA={
-									CAPIArticle.nav.readerRevenueLinks.header
-										.supporter
-								}
 								discussionApiUrl={
 									CAPIArticle.config.discussionApiUrl
 								}
@@ -357,13 +353,10 @@ export const CommentLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									contributionsServiceUrl
 								}
 								idApiUrl={CAPIArticle.config.idApiUrl}
-								headerTopBarSwitch={
-									!!CAPIArticle.config.switches.headerTopNav
-								}
 								isInEuropeTest={isInEuropeTest}
 								headerTopBarSearchCapiSwitch={
 									!!CAPIArticle.config.switches
-										.headerTopBarSearchCapiSwitch
+										.headerTopBarSearchCapi
 								}
 							/>
 						</Section>

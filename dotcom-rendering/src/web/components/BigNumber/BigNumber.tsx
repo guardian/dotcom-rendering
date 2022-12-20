@@ -27,5 +27,5 @@ export const BigNumber = ({ index }: { index: number }) => {
 		<Number10 />,
 	];
 
-	return numbers[index];
+	return numbers[index] ?? null;
 };

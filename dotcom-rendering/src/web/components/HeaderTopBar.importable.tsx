@@ -19,6 +19,7 @@ interface HeaderTopBarProps {
 	discussionApiUrl: string;
 	idApiUrl: string;
 	headerTopBarSearchCapiSwitch: boolean;
+	isInEuropeTest: boolean;
 }
 
 const topBarStyles = css`
@@ -51,6 +52,7 @@ export const HeaderTopBar = ({
 	discussionApiUrl,
 	idApiUrl,
 	headerTopBarSearchCapiSwitch,
+	isInEuropeTest,
 }: HeaderTopBarProps) => {
 	const isServer = typeof window === 'undefined';
 	const isSignedIn =
@@ -84,6 +86,7 @@ export const HeaderTopBar = ({
 					<HeaderTopBarEditionDropdown
 						editionId={editionId}
 						dataLinkName={dataLinkName}
+						isInEuropeTest={isInEuropeTest}
 					/>
 				</Hide>
 			</div>

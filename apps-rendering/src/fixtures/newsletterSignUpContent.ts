@@ -9,20 +9,18 @@ import { ElementKind } from 'bodyElement';
 import { parse } from 'client/parser';
 import { EmbedKind } from 'embed';
 import { ImageSubtype } from 'image/image';
-import type { Standard } from 'item';
+import type { NewsletterSignup } from 'item';
 import { MainMediaKind } from 'mainMedia';
 import type { MainMedia } from 'mainMedia';
 import { Optional } from 'optional';
-import { Result } from 'result';
 
 const parser = new DOMParser();
-const parseHtml = (html: string): Option<DocumentFragment> =>
-	parse(parser)(html).either<Option<DocumentFragment>>(
-		(_err) => none,
-		(doc) => some(doc),
-	);
+const parseHtml = (html: string): Optional<DocumentFragment> =>
+	parse(parser)(html).toOptional();
 
-const captionDocFragment = parseHtml('Fashion Statement Email image');
+const captionDocFragment = parseHtml(
+	'Fashion Statement Email image',
+).toOption();
 
 const newsletterMainMedia: Option<MainMedia> = {
 	kind: OptionKind.Some,
@@ -64,13 +62,13 @@ const newsletterStandfirst = parseHtml(
 	`<p>Style with substance: smart fashion writing and inspiring shopping galleries from the Guardian</p>`,
 );
 const newsletterBody: Body = [
-	Result.ok({
+	{
 		kind: ElementKind.Text,
 		doc: docFixture(
 			'A weekly hit of style with substance. Smart fashion writing and inspiring shopping galleries delivered straight to your inbox. Sign up for our Friday email for the best of the week in style, brought to you with expertise, humour and irreverence.',
 		),
-	}),
-	Result.ok({
+	},
+	{
 		kind: ElementKind.Embed,
 		embed: {
 			kind: EmbedKind.EmailSignup,
@@ -81,16 +79,16 @@ const newsletterBody: Body = [
 			source: none,
 			sourceDomain: none,
 		},
-	}),
-	Result.ok({
+	},
+	{
 		kind: ElementKind.Text,
 		doc: docFixture(
 			'<strong><a href="https://www.theguardian.com/email-newsletters">Explore all our newsletters:</a></strong><a href="https://www.theguardian.com/email-newsletters"> whether you love film, football, fashion or food, we’ve got something for you</a>',
 		),
-	}),
+	},
 ];
 
-export const partialNewsletterItem: Partial<Standard> = {
+export const partialNewsletterItem: Partial<NewsletterSignup> = {
 	headline: newsletterHeadline,
 	standfirst: newsletterStandfirst,
 	mainMedia: newsletterMainMedia,
@@ -104,6 +102,8 @@ export const partialNewsletterItem: Partial<Standard> = {
 		frequency: 'Weekly',
 		theme: 'lifestyle',
 		successDescription: "We'll send you Fashion Statement every week",
+		regionFocus: 'UK',
+		paused: false,
 	}),
 	branding: none,
 };

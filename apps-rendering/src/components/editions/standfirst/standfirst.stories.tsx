@@ -1,10 +1,10 @@
 // ----- Imports ----- //
 import { ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { neutral } from '@guardian/source-foundations';
-import type { Option } from '@guardian/types';
 import { withKnobs } from '@storybook/addon-knobs';
 import { parse } from 'client/parser';
 import { analysis, article, comment, media } from 'fixtures/item';
+import type { Optional } from 'optional';
 import type { ReactElement } from 'react';
 import { selectPillar } from 'storybookHelpers';
 import Standfirst from '.';
@@ -14,9 +14,9 @@ import Standfirst from '.';
 const parser = new DOMParser();
 const parseStandfirst = parse(parser);
 
-const standfirst: Option<DocumentFragment> = parseStandfirst(
+const standfirst: Optional<DocumentFragment> = parseStandfirst(
 	'<p>The Mexican capital was founded by Aztecs on an island in a vast lake. No wonder water flows through so many of its unbuilt projects</p>',
-).toOption();
+).toOptional();
 
 // ----- Stories ----- //
 

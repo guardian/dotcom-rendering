@@ -54,9 +54,9 @@ const transform = ({
 	unit: string;
 	multiplier: number;
 }) => {
-	if (value.includes('-')) {
-		const [from, to] = value.split('-').map(parseFloat);
+	const [from, to] = value.split('-').map(parseFloat);
 
+	if (from && to) {
 		const range = `${Math.round(from * multiplier)}-${Math.round(
 			to * multiplier,
 		)}`;

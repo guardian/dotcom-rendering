@@ -21,7 +21,7 @@ import {
 import { andThen, fromNullable, map, none, some } from '@guardian/types';
 import type { Option } from '@guardian/types';
 import { getPillarFromId } from 'articleFormat';
-import type { Body } from 'bodyElement';
+import type { BodyElement } from 'bodyElement';
 import { parseElements } from 'bodyElement';
 import { getReport } from 'campaign';
 import type { Logo } from 'capi';
@@ -56,13 +56,13 @@ import { Result } from 'result';
 
 interface Fields extends ArticleFormat {
 	headline: string;
-	standfirst: Option<DocumentFragment>;
+	standfirst: Optional<DocumentFragment>;
 	byline: string;
 	bylineHtml: Option<DocumentFragment>;
 	publishDate: Option<Date>;
 	mainMedia: Option<MainMedia>;
 	contributors: Contributor[];
-	series: Option<Tag>;
+	series: Optional<Tag>;
 	commentable: boolean;
 	tags: Tag[];
 	shouldHideReaderRevenue: boolean;
@@ -74,11 +74,12 @@ interface Fields extends ArticleFormat {
 	webUrl: string;
 	edition: Edition;
 	promotedNewsletter: Option<Newsletter>;
+	shouldHideAdverts: boolean;
 }
 
 interface MatchReport extends Fields {
 	design: ArticleDesign.MatchReport;
-	body: Body;
+	body: BodyElement[];
 	football: Optional<MatchScores>;
 }
 
@@ -102,93 +103,117 @@ interface DeadBlog extends Fields {
 
 interface Review extends Fields {
 	design: ArticleDesign.Review;
-	body: Body;
+	body: BodyElement[];
 	starRating: Option<number>;
 }
 
 interface Comment extends Fields {
 	design: ArticleDesign.Comment;
-	body: Body;
+	body: BodyElement[];
 }
 
 interface Letter extends Fields {
 	design: ArticleDesign.Letter;
-	body: Body;
+	body: BodyElement[];
 }
 
 interface Editorial extends Fields {
 	design: ArticleDesign.Editorial;
-	body: Body;
+	body: BodyElement[];
 }
 
 interface Interactive extends Fields {
 	design: ArticleDesign.Interactive;
-	body: Body;
+	body: BodyElement[];
 }
 
 interface Obituary extends Fields {
 	design: ArticleDesign.Obituary;
-	body: Body;
+	body: BodyElement[];
 }
 
 interface Correction extends Fields {
 	design: ArticleDesign.Correction;
-	body: Body;
+	body: BodyElement[];
 }
 interface Interview extends Fields {
 	design: ArticleDesign.Interview;
-	body: Body;
+	body: BodyElement[];
 }
 
 interface Quiz extends Fields {
 	design: ArticleDesign.Quiz;
-	body: Body;
+	body: BodyElement[];
 }
 interface Recipe extends Fields {
 	design: ArticleDesign.Recipe;
-	body: Body;
+	body: BodyElement[];
 }
 
 interface Feature extends Fields {
 	design: ArticleDesign.Feature;
-	body: Body;
+	body: BodyElement[];
 }
 interface PhotoEssay extends Fields {
 	design: ArticleDesign.PhotoEssay;
-	body: Body;
+	body: BodyElement[];
 }
 
 interface PrintShop extends Fields {
 	design: ArticleDesign.PrintShop;
-	body: Body;
+	body: BodyElement[];
 }
 
 interface Analysis extends Fields {
 	design: ArticleDesign.Analysis;
-	body: Body;
+	body: BodyElement[];
 	outline: Outline;
 }
 
 interface Explainer extends Fields {
 	design: ArticleDesign.Explainer;
-	body: Body;
+	body: BodyElement[];
 	outline: Outline;
 }
-// Catch-all for other Designs for now. As coverage of Designs increases,
-// this will likely be split out into each ArticleDesign type.
+
+interface Gallery extends Fields {
+	design: ArticleDesign.Gallery;
+	body: BodyElement[];
+}
+
+interface Audio extends Fields {
+	design: ArticleDesign.Audio;
+	body: BodyElement[];
+}
+
+interface Video extends Fields {
+	design: ArticleDesign.Video;
+	body: BodyElement[];
+}
+
 interface Standard extends Fields {
-	design: Exclude<
-		ArticleDesign,
-		| ArticleDesign.LiveBlog
-		| ArticleDesign.DeadBlog
-		| ArticleDesign.Review
-		| ArticleDesign.Comment
-		| ArticleDesign.Letter
-		| ArticleDesign.Editorial
-		| ArticleDesign.Analysis
-		| ArticleDesign.Explainer
-	>;
-	body: Body;
+	design: ArticleDesign.Standard;
+	body: BodyElement[];
+}
+
+interface NewsletterSignup extends Fields {
+	design: ArticleDesign.NewsletterSignup;
+	body: BodyElement[];
+}
+
+interface PhotoEssay extends Fields {
+	design: ArticleDesign.PhotoEssay;
+	body: BodyElement[];
+}
+
+interface PrintShop extends Fields {
+	design: ArticleDesign.PrintShop;
+	body: BodyElement[];
+}
+
+interface FullPageInteractive extends Fields {
+	design: ArticleDesign.FullPageInteractive;
+	body: BodyElement[];
 }
 
 type Item =
@@ -205,13 +230,21 @@ type Item =
 	| Correction
 	| Interview
 	| Analysis
-	| Explainer;
+	| Explainer
+	| Gallery
+	| Audio
+	| Video
+	| Recipe
+	| Feature
+	| Quiz
+	| NewsletterSignup
+	| PhotoEssay
+	| PrintShop
+	| FullPageInteractive;
 
 // ----- Convenience Types ----- //
 
 type ItemFields = Omit<Fields, 'design'>;
-
-type ItemFieldsWithBody = ItemFields & { body: Body };
 
 // ----- Functions ----- //
 
@@ -276,7 +309,7 @@ const getBranding = ({
 		? none
 		: fromNullable(branding);
 
-const itemFields = (
+const parseItemFields = (
 	context: Context,
 	request: RenderingRequest,
 ): ItemFields => {
@@ -289,10 +322,8 @@ const itemFields = (
 		),
 		display: getDisplay(content),
 		headline: content.fields?.headline ?? '',
-		standfirst: pipe(
-			content.fields?.standfirst,
-			fromNullable,
-			map(context.docParser),
+		standfirst: Optional.fromNullable(content.fields?.standfirst).map(
+			context.docParser,
 		),
 		byline: content.fields?.byline ?? '',
 		bylineHtml: pipe(
@@ -326,30 +357,24 @@ const itemFields = (
 		webUrl: content.webUrl,
 		edition: Optional.fromNullable(request.edition).withDefault(Edition.UK),
 		promotedNewsletter: fromNullable(request.promotedNewsletter),
+		shouldHideAdverts: request.content.fields?.shouldHideAdverts ?? false,
 	};
 };
 
-const outlineFromItem = (item: ItemFieldsWithBody): Outline => {
-	const elements = Result.partition(item.body).oks;
-	return fromBodyElements(elements);
-};
-
-const itemFieldsWithBody = (
+const parseBody = (
 	context: Context,
 	request: RenderingRequest,
-): ItemFieldsWithBody => {
+): BodyElement[] => {
 	const { content } = request;
 	const body = content.blocks?.body ?? [];
 	const atoms = content.atoms;
 	const campaigns = request.campaigns ?? [];
 	const elements = [...body].shift()?.elements;
 
-	return {
-		...itemFields(context, request),
-		body: elements
-			? parseElements(context, campaigns, atoms)(elements)
-			: [],
-	};
+	return elements !== undefined
+		? Result.partition(parseElements(context, campaigns, atoms)(elements))
+				.oks
+		: [];
 };
 
 const hasSomeTag =
@@ -409,6 +434,7 @@ const fromCapiLiveBlog =
 	(
 		request: RenderingRequest,
 		blockId: Option<string>,
+		itemFields: ItemFields,
 	): LiveBlog | DeadBlog => {
 		const { content, campaigns } = request;
 		const body = content.blocks?.body ?? [];
@@ -430,7 +456,7 @@ const fromCapiLiveBlog =
 			blocks: parsedBlocks,
 			pagedBlocks,
 			totalBodyBlocks: content.blocks?.totalBodyBlocks ?? body.length,
-			...itemFields(context, request),
+			...itemFields,
 		};
 	};
 
@@ -439,13 +465,21 @@ const fromCapi =
 	(request: RenderingRequest, page: Option<string>): Item => {
 		const { content } = request;
 		const { tags, fields } = content;
+		const itemFields = parseItemFields(context, request);
+
+		if (isLive(tags)) {
+			return fromCapiLiveBlog(context)(request, page, itemFields);
+		}
+
+		const body = parseBody(context, request);
 
 		// These checks aim for parity with the CAPI Scala client:
 		// https://github.com/guardian/content-api-scala-client/blob/9e249bcef47cc048da483b3453c10dd7d2e9565d/client/src/main/scala/com.gu.contentapi.client/utils/CapiModelEnrichment.scala
 		if (isInteractive(content)) {
 			return {
 				design: ArticleDesign.Interactive,
-				...itemFieldsWithBody(context, request),
+				body,
+				...itemFields,
 			};
 			// This isn't accurate, picture pieces look different to galleries.
 			// This is to prevent accidentally breaking Editions until we have
@@ -453,94 +487,105 @@ const fromCapi =
 		} else if (isGallery(tags) || isPicture(tags)) {
 			return {
 				design: ArticleDesign.Gallery,
-				...itemFieldsWithBody(context, request),
+				body,
+				...itemFields,
 			};
 		} else if (isAudio(tags)) {
 			return {
 				design: ArticleDesign.Audio,
-				...itemFieldsWithBody(context, request),
+				body,
+				...itemFields,
 			};
 		} else if (isVideo(tags)) {
 			return {
 				design: ArticleDesign.Video,
-				...itemFieldsWithBody(context, request),
+				body,
+				...itemFields,
 			};
 		} else if (isReview(tags)) {
 			return {
 				design: ArticleDesign.Review,
 				starRating: fromNullable(fields?.starRating),
-				...itemFieldsWithBody(context, request),
+				body,
+				...itemFields,
 			};
 		} else if (isAnalysis(tags)) {
-			const item = itemFieldsWithBody(context, request);
 			return {
 				design: ArticleDesign.Analysis,
-				...item,
-				outline: outlineFromItem(item),
+				outline: fromBodyElements(body),
+				body,
+				...itemFields,
 			};
 		} else if (isExplainer(tags)) {
-			const item = itemFieldsWithBody(context, request);
 			return {
 				design: ArticleDesign.Explainer,
-				...item,
-				outline: outlineFromItem(item),
+				outline: fromBodyElements(body),
+				body,
+				...itemFields,
 			};
 		} else if (isCorrection(tags)) {
 			return {
 				design: ArticleDesign.Correction,
-				...itemFieldsWithBody(context, request),
+				body,
+				...itemFields,
 			};
 		} else if (isLetter(tags)) {
 			return {
 				design: ArticleDesign.Letter,
-				...itemFieldsWithBody(context, request),
+				body,
+				...itemFields,
 			};
 		} else if (isObituary(tags)) {
 			return {
 				design: ArticleDesign.Obituary,
-				...itemFieldsWithBody(context, request),
+				body,
+				...itemFields,
 			};
 		} else if (isGuardianView(tags)) {
 			return {
 				design: ArticleDesign.Editorial,
-				...itemFieldsWithBody(context, request),
+				body,
+				...itemFields,
 			};
 		} else if (isComment(tags)) {
-			const item = itemFieldsWithBody(context, request);
 			return {
 				design: ArticleDesign.Comment,
-				...item,
+				body,
+				...itemFields,
 				theme:
-					item.theme === ArticlePillar.News
+					itemFields.theme === ArticlePillar.News
 						? ArticlePillar.Opinion
-						: item.theme,
+						: itemFields.theme,
 			};
 		} else if (isInterview(tags)) {
 			return {
 				design: ArticleDesign.Interview,
-				...itemFieldsWithBody(context, request),
+				body,
+				...itemFields,
 			};
 		} else if (isRecipe(tags)) {
 			return {
 				design: ArticleDesign.Recipe,
-				...itemFieldsWithBody(context, request),
+				body,
+				...itemFields,
 			};
 		} else if (isFeature(tags)) {
 			return {
 				design: ArticleDesign.Feature,
-				...itemFieldsWithBody(context, request),
+				body,
+				...itemFields,
 			};
-		} else if (isLive(tags)) {
-			return fromCapiLiveBlog(context)(request, page);
 		} else if (isQuiz(tags)) {
 			return {
 				design: ArticleDesign.Quiz,
-				...itemFieldsWithBody(context, request),
+				body,
+				...itemFields,
 			};
 		} else if (isLabs(tags)) {
 			return {
 				design: ArticleDesign.Standard,
-				...itemFieldsWithBody(context, request),
+				body,
+				...itemFields,
 				theme: ArticleSpecial.Labs,
 			};
 		} else if (isMatchReport(tags)) {
@@ -549,13 +594,15 @@ const fromCapi =
 				football: Optional.fromNullable(
 					request.footballContent,
 				).flatMap(parseMatchScores),
-				...itemFieldsWithBody(context, request),
+				body,
+				...itemFields,
 			};
 		}
 
 		return {
 			design: ArticleDesign.Standard,
-			...itemFieldsWithBody(context, request),
+			body,
+			...itemFields,
 		};
 	};
 
@@ -580,6 +627,13 @@ export {
 	Feature,
 	PrintShop,
 	Explainer,
+	Gallery,
+	Audio,
+	Video,
+	Interactive,
+	NewsletterSignup,
+	Obituary,
+	Correction,
 	fromCapi,
 	fromCapiLiveBlog,
 	getFormat,
