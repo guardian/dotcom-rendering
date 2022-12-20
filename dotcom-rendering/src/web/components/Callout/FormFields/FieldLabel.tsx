@@ -4,7 +4,7 @@ import {
 	textSans,
 	visuallyHidden,
 } from '@guardian/source-foundations';
-import type { CampaignFieldType } from 'src/types/content';
+import type { CampaignFieldType } from '../../../types/content';
 
 const fieldLabelStyles = css`
 	${textSans.medium({ fontWeight: 'bold' })}

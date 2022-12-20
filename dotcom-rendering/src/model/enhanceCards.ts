@@ -113,7 +113,17 @@ const decideImage = (trail: FEFrontCard) => {
 
 	if (trail.display.imageHide) return undefined;
 
+	if (trail.properties.isCrossword && trail.properties.maybeContentId) {
+		return `https://api.nextgen.guardianapps.co.uk/${trail.properties.maybeContentId}.svg`;
+	}
+
 	return trail.properties.maybeContent?.trail.trailPicture?.allImages[0]?.url;
+};
+
+const decideKicker = (trail: FEFrontCard) => {
+	return trail.properties.isBreaking
+		? 'Breaking news'
+		: trail.header.kicker?.item?.properties.kickerText;
 };
 
 const enhanceTags = (tags: FETagType[]): TagType[] => {
@@ -184,7 +194,7 @@ export const enhanceCards = (
 				  ).toISOString()
 				: undefined,
 			image: decideImage(faciaCard),
-			kickerText: faciaCard.header.kicker?.item?.properties.kickerText,
+			kickerText: decideKicker(faciaCard),
 			supportingContent: faciaCard.supportingContent
 				? enhanceSupportingContent(
 						faciaCard.supportingContent,
@@ -202,6 +212,7 @@ export const enhanceCards = (
 			showByline: faciaCard.properties.showByline,
 			snapData: enhanceSnaps(faciaCard.enriched),
 			isBoosted: faciaCard.display.isBoosted,
+			isCrossword: faciaCard.properties.isCrossword,
 			showQuotedHeadline: faciaCard.display.showQuotedHeadline,
 			avatarUrl:
 				faciaCard.properties.maybeContent?.tags.tags &&

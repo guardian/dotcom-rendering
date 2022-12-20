@@ -307,7 +307,7 @@ type ImagePositionType = 'left' | 'top' | 'right' | 'bottom' | 'none';
 
 type ImageSizeType = 'small' | 'medium' | 'large' | 'jumbo' | 'carousel';
 
-type CardImageType = 'mainMedia' | 'avatar';
+type CardImageType = 'mainMedia' | 'avatar' | 'crossword';
 
 type SmallHeadlineSize =
 	| 'tiny'
@@ -452,7 +452,7 @@ interface BaseTrailType {
 	commentCount?: number;
 	starRating?: number;
 	linkText?: string;
-	branding?: import('src/types/branding').Branding;
+	branding?: import('./src/types/branding').Branding;
 	isSnap?: boolean;
 	snapData?: import('./src/types/front').DCRSnapType;
 }

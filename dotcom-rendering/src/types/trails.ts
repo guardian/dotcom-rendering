@@ -21,6 +21,7 @@ interface BaseTrailType {
 	linkText?: string;
 	branding?: Branding;
 	isSnap?: boolean;
+	isCrossword?: boolean;
 	snapData?: DCRSnapType;
 	showQuotedHeadline?: boolean;
 }

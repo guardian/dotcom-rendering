@@ -356,6 +356,7 @@
 				if (document.visibilityState !== 'visible') return;
 				if (!navigator?.clipboard) return;
 				if (!document.hasFocus()) return;
+				if (typeof navigator.clipboard.readText !== 'function') return;
 
 				navigator.clipboard.readText().then((text) => {
 					const guurl = [

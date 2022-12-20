@@ -1,4 +1,4 @@
-import type { CAPIElement } from 'src/types/content';
+import type { CAPIElement } from '../../types/content';
 import { calculateBlockSize, shouldDisplayAd } from './liveblogAdSlots';
 
 describe('calculateBlockSize', () => {
