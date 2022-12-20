@@ -5,8 +5,8 @@ import { decidePalette } from '../../lib/decidePalette';
 const termsAndConditionsStyles = (format: ArticleFormat) =>
 	css`
 		a {
-			color: ${decidePalette(format).text.richLink};
-			border-bottom: 1px solid ${decidePalette(format).text.richLink};
+			color: ${decidePalette(format).text.calloutAccent};
+			border-bottom: 1px solid ${decidePalette(format).text.calloutAccent};
 			text-decoration: none;
 		}
 		${textSans.small()}
