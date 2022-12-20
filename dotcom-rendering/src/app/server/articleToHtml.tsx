@@ -3,10 +3,7 @@ import { CacheProvider } from '@emotion/react';
 import createEmotionServer from '@emotion/server/create-instance';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
-import {
-	generateScriptTags,
-	getAppScript,
-} from '../../lib/assets';
+import { generateScriptTags, getAppScript } from '../../lib/assets';
 // import { makeWindowGuardian } from '../../model/window-guardian';
 import type { CAPIElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
