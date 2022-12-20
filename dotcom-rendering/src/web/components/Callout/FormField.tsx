@@ -14,10 +14,6 @@ import { FileInput } from '@guardian/source-react-components-development-kitchen
 import type { CampaignFieldType } from 'src/types/content';
 import { decidePalette } from '../../lib/decidePalette';
 
-const formFieldStyles = css`
-	margin-top: ${space[2]}px;
-`;
-
 type FormDataType = { [key in string]: any };
 
 type FormFieldProp = {
@@ -27,6 +23,10 @@ type FormFieldProp = {
 	formData: FormDataType;
 	setFormData: React.Dispatch<React.SetStateAction<FormDataType>>;
 };
+
+const formFieldStyles = css`
+	margin-top: ${space[2]}px;
+`;
 
 export const FormField = ({
 	format,
