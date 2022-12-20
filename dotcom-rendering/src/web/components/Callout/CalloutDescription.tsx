@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { textSans, space, body } from '@guardian/source-foundations';
+import { body, space } from '@guardian/source-foundations';
 import { decidePalette } from '../../lib/decidePalette';
 
 const descriptionStyles = (format: ArticleFormat) =>
@@ -9,7 +9,6 @@ const descriptionStyles = (format: ArticleFormat) =>
 			border-bottom: 1px solid ${decidePalette(format).text.richLink};
 			text-decoration: none;
 		}
-		${textSans.small()}
 		padding-bottom: ${space[4]}px;
 		${body.medium()}
 
