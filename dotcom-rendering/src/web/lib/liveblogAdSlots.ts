@@ -13,7 +13,7 @@ const MIN_SPACE_BEFORE_FIRST_AD = 500;
 /**
  * Minimum allowed space between inline ads in pixels.
  */
-const MIN_SPACE_BETWEEN_ADS = 1_700;
+const MIN_SPACE_BETWEEN_ADS = 1_800;
 
 /**
  * Estimated margin associated with an element. Sometimes this is more or less
