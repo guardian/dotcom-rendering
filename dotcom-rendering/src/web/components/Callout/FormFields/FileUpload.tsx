@@ -39,7 +39,6 @@ type Props = {
 };
 
 const customUpload = (format: ArticleFormat): SerializedStyles => css`
-	${textSans.small()};
 	color: ${decidePalette(format).text.richLink};
 	border: 1.5px solid ${decidePalette(format).text.richLink};
 	display: inline-flex;

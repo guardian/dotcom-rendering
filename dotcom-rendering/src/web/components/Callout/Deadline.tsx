@@ -8,7 +8,6 @@ type Props = {
 
 const deadlineStyles = css`
 	${textSans.xxsmall()};
-	color: ${palette.brand};
 	background-color: ${palette.brandAlt[400]};
 	right: 0;
 	display: flex;
@@ -21,10 +20,7 @@ function getDaysBetween(first: Date, second: Date): number {
 	return (second.getTime() - first.getTime()) / ONE_DAY;
 }
 
-export const getDeadlineText = (
-	date1: Date,
-	date2: Date,
-): string | undefined => {
+const getDeadlineText = (date1: Date, date2: Date): string | undefined => {
 	const maxDays = 7;
 	const daysBetween = getDaysBetween(date1, date2);
 	if (daysBetween <= 0 || daysBetween > maxDays) return;
@@ -35,8 +31,7 @@ export const getDeadlineText = (
 
 function formatOptionalDate(date: number | undefined): Date | undefined {
 	if (date === undefined) return undefined;
-	const d = new Date(date * 1000);
-	return d;
+	return new Date(date * 1000);
 }
 
 export const Deadline = ({ until }: Props) => {
