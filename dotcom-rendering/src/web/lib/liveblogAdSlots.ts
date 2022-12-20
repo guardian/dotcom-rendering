@@ -38,7 +38,7 @@ type BlockElementHeight = {
 
 /**
  * Approximations of the size each block element type will take up on the page in pixels.
- * Predication are made for mobile viewports, as data suggests that the majority of liveblog page
+ * Predictions are made for mobile viewports, as data suggests that the majority of liveblog page
  * views are made using mobile devices.
  */
 const blockquoteElementHeightData: BlockElementHeight = {
