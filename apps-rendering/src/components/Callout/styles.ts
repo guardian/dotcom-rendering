@@ -81,7 +81,6 @@ export const calloutPrimaryButton = (
 	margin-top: ${remSpace[2]};
 	width: 100%;
 	justify-content: center;
-
 	${darkModeCss`
 		background: ${neutral[86]};
 		color: ${neutral[7]};
