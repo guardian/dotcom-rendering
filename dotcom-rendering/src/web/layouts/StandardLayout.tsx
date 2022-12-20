@@ -599,6 +599,7 @@ export const StandardLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									switches={CAPIArticle.config.switches}
 									isAdFreeUser={CAPIArticle.isAdFreeUser}
 									isSensitive={CAPIArticle.config.isSensitive}
+									platform={Platform.Web}
 								/>
 							</div>
 						</GridItem>

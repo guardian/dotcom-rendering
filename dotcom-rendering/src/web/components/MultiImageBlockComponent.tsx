@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { from, space, until } from '@guardian/source-foundations';
 import type { ImageBlockElement } from '../../types/content';
+import { Platform } from '../../types/platform';
 import { Caption } from './Caption';
 import { GridItem } from './GridItem';
 import { ImageComponent } from './ImageComponent';
@@ -9,6 +10,7 @@ type Props = {
 	images: ImageBlockElement[];
 	format: ArticleFormat;
 	caption?: string;
+	platform: Platform;
 };
 
 const ieFallback = css`
@@ -93,6 +95,7 @@ export const MultiImageBlockComponent = ({
 	images,
 	format,
 	caption,
+	platform,
 }: Props) => {
 	const imageCount = images.length;
 
@@ -114,6 +117,7 @@ export const MultiImageBlockComponent = ({
 						element={images[0]}
 						hideCaption={true}
 						role={images[0].role}
+						platform={platform}
 					/>
 					{!!caption && (
 						<Caption
@@ -144,6 +148,7 @@ export const MultiImageBlockComponent = ({
 								format={format}
 								hideCaption={true}
 								role={images[0].role}
+								platform={platform}
 							/>
 						</GridItem>
 						<GridItem area="second">
@@ -152,6 +157,7 @@ export const MultiImageBlockComponent = ({
 								format={format}
 								hideCaption={true}
 								role={images[1].role}
+								platform={platform}
 							/>
 						</GridItem>
 					</SideBySideGrid>
@@ -184,6 +190,7 @@ export const MultiImageBlockComponent = ({
 								format={format}
 								hideCaption={true}
 								role={images[0].role}
+								platform={platform}
 							/>
 						</GridItem>
 						<GridItem area="second">
@@ -192,6 +199,7 @@ export const MultiImageBlockComponent = ({
 								format={format}
 								hideCaption={true}
 								role={images[1].role}
+								platform={platform}
 							/>
 						</GridItem>
 						<GridItem area="third">
@@ -200,6 +208,7 @@ export const MultiImageBlockComponent = ({
 								format={format}
 								hideCaption={true}
 								role={images[2].role}
+								platform={platform}
 							/>
 						</GridItem>
 					</OneAboveTwoGrid>
@@ -231,6 +240,7 @@ export const MultiImageBlockComponent = ({
 								format={format}
 								hideCaption={true}
 								role={images[0].role}
+								platform={platform}
 							/>
 						</GridItem>
 						<GridItem area="second">
@@ -239,6 +249,7 @@ export const MultiImageBlockComponent = ({
 								format={format}
 								hideCaption={true}
 								role={images[1].role}
+								platform={platform}
 							/>
 						</GridItem>
 						<GridItem area="third">
@@ -247,6 +258,7 @@ export const MultiImageBlockComponent = ({
 								format={format}
 								hideCaption={true}
 								role={images[2].role}
+								platform={platform}
 							/>
 						</GridItem>
 						<GridItem area="forth">
@@ -255,6 +267,7 @@ export const MultiImageBlockComponent = ({
 								format={format}
 								hideCaption={true}
 								role={images[3].role}
+								platform={platform}
 							/>
 						</GridItem>
 					</GridOfFour>

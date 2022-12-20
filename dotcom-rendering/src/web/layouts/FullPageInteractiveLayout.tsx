@@ -15,6 +15,7 @@ import type { NavType } from '../../model/extract-nav';
 import type { Switches } from '../../types/config';
 import type { CAPIElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
+import { Platform } from '../../types/platform';
 import {
 	adCollapseStyles,
 	labelStyles as adLabelStyles,
@@ -73,7 +74,6 @@ const Renderer = ({
 	const output = elements.map((element, index) => {
 		const el = renderElement({
 			format,
-
 			element,
 			adTargeting: undefined,
 			host,
@@ -85,6 +85,7 @@ const Renderer = ({
 			isAdFreeUser,
 			isSensitive,
 			switches,
+			platform: Platform.Web,
 		});
 
 		switch (element._type) {

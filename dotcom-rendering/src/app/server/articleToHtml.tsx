@@ -4,14 +4,8 @@ import createEmotionServer from '@emotion/server/create-instance';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import {
-	BUILD_VARIANT,
-	dcrJavascriptBundle,
-} from '../../../scripts/webpack/bundles';
-import {
-	ASSET_ORIGIN,
 	generateScriptTags,
 	getAppScript,
-	getScriptsFromManifest,
 } from '../../lib/assets';
 // import { makeWindowGuardian } from '../../model/window-guardian';
 import type { CAPIElement } from '../../types/content';
@@ -66,13 +60,13 @@ export const articleToHtml = ({ article }: Props): string => {
 	// See: https://github.com/guardian/dotcom-rendering/pull/5394
 	const { offerHttp3 = false } = article.config.switches;
 
-	const pageHasNonBootInteractiveElements = CAPIElements.some(
-		(element) =>
-			element._type ===
-				'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
-			element.scriptUrl !==
-				'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js', // We have rewritten this standard behaviour into Dotcom Rendering
-	);
+	// const pageHasNonBootInteractiveElements = CAPIElements.some(
+	// 	(element) =>
+	// 		element._type ===
+	// 			'model.dotcomrendering.pageElements.InteractiveBlockElement' &&
+	// 		element.scriptUrl !==
+	// 			'https://interactive.guim.co.uk/embed/iframe-wrapper/0.1/boot.js', // We have rewritten this standard behaviour into Dotcom Rendering
+	// );
 
 	const pageHasTweetElements = CAPIElements.some(
 		(element) =>
@@ -80,10 +74,10 @@ export const articleToHtml = ({ article }: Props): string => {
 			'model.dotcomrendering.pageElements.TweetBlockElement',
 	);
 
-	const shouldServeVariantBundle: boolean = [
-		BUILD_VARIANT,
-		article.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
-	].every(Boolean);
+	// const shouldServeVariantBundle: boolean = [
+	// 	BUILD_VARIANT,
+	// 	article.config.abTests[dcrJavascriptBundle('Variant')] === 'variant',
+	// ].every(Boolean);
 
 	/**
 	 * This function returns an array of files found in the manifests
@@ -91,9 +85,9 @@ export const articleToHtml = ({ article }: Props): string => {
 	 *
 	 * @see getScriptsFromManifest
 	 */
-	const getScriptArrayFromFile = getScriptsFromManifest(
-		shouldServeVariantBundle,
-	);
+	// const getScriptArrayFromFile = getScriptsFromManifest(
+	// 	shouldServeVariantBundle,
+	// );
 
 	/**
 	 * The highest priority scripts.

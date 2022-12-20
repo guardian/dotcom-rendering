@@ -24,6 +24,7 @@ import { decidePalette } from '../../lib/decidePalette';
 import { getZIndex } from '../../lib/getZIndex';
 import { getCurrentPillar } from '../../lib/layoutHelpers';
 import { Stuck } from '../lib/stickiness';
+import { Platform } from '../../../types/platform';
 
 const hasMainMediaStyles = css`
 	height: 80vh;
@@ -222,6 +223,7 @@ export const ImmersiveHeader = ({ CAPIArticle, NAV, format }: Props) => {
 						switches={CAPIArticle.config.switches}
 						isAdFreeUser={CAPIArticle.isAdFreeUser}
 						isSensitive={CAPIArticle.config.isSensitive}
+						platform={Platform.Web}
 					/>
 				</div>
 				{mainMedia && (

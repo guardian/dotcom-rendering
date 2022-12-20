@@ -1,4 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
+import { Platform } from '../../types/platform';
 import { MultiImageBlockComponent } from './MultiImageBlockComponent';
 import { fourImages } from './MultiImageBlockComponent.mocks';
 import { Section } from './Section';
@@ -23,6 +24,7 @@ export const SingleImage = () => {
 					theme: ArticlePillar.News,
 				}}
 				images={oneImage}
+				platform={Platform.Web}
 			/>
 		</Section>
 	);
@@ -42,6 +44,7 @@ export const SingleImageWithCaption = () => {
 				}}
 				images={oneImage}
 				caption="This is the caption for a single image"
+				platform={Platform.Web}
 			/>
 		</Section>
 	);
@@ -60,6 +63,7 @@ export const SideBySide = () => {
 					theme: ArticlePillar.News,
 				}}
 				images={twoImages}
+				platform={Platform.Web}
 			/>
 		</Section>
 	);
@@ -79,6 +83,7 @@ export const SideBySideWithCaption = () => {
 				}}
 				images={twoImages}
 				caption="This is the caption for side by side"
+				platform={Platform.Web}
 			/>
 		</Section>
 	);
@@ -97,6 +102,7 @@ export const OneAboveTwo = () => {
 					theme: ArticlePillar.News,
 				}}
 				images={threeImages}
+				platform={Platform.Web}
 			/>
 		</Section>
 	);
@@ -116,6 +122,7 @@ export const OneAboveTwoWithCaption = () => {
 				}}
 				images={threeImages}
 				caption="This is the caption for one above two"
+				platform={Platform.Web}
 			/>
 		</Section>
 	);
@@ -134,6 +141,7 @@ export const GridOfFour = () => {
 					theme: ArticlePillar.News,
 				}}
 				images={fourImages}
+				platform={Platform.Web}
 			/>
 		</Section>
 	);
@@ -153,6 +161,7 @@ export const GridOfFourWithCaption = () => {
 				}}
 				images={fourImages}
 				caption="This is the caption for grid of four"
+				platform={Platform.Web}
 			/>
 		</Section>
 	);

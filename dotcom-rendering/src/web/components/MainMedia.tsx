@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import { ArticleDesign, ArticleDisplay } from '@guardian/libs';
 import { until } from '@guardian/source-foundations';
+import { Platform } from '../../types/platform';
 import type { Switches } from '../../types/config';
 import type { CAPIElement } from '../../types/content';
 import { getZIndex } from '../lib/getZIndex';
@@ -81,6 +82,7 @@ type Props = {
 	isAdFreeUser: boolean;
 	isSensitive: boolean;
 	switches: Switches;
+	platform: Platform;
 };
 
 export const MainMedia = ({
@@ -96,6 +98,7 @@ export const MainMedia = ({
 	isAdFreeUser,
 	isSensitive,
 	switches,
+	platform,
 }: Props) => {
 	return (
 		<div css={[mainMedia, chooseWrapper(format)]}>
@@ -117,6 +120,7 @@ export const MainMedia = ({
 					switches={switches}
 					hideCaption={hideCaption}
 					starRating={starRating}
+					platform={platform}
 				/>
 			))}
 		</div>

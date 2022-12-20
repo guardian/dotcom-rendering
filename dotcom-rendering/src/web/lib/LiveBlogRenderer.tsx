@@ -98,6 +98,7 @@ const LiveBlogRenderer = (
 							isAdFreeUser={isAdFreeUser}
 							isSensitive={isSensitive}
 							isPinnedPost={true}
+							platform={platform}
 						/>
 					</PinnedPost>
 				</>
@@ -158,6 +159,7 @@ const LiveBlogRenderer = (
 						isSensitive={isSensitive}
 						isPinnedPost={false}
 						pinnedPostId={pinnedPost?.id}
+						platform={platform}
 					/>
 				);
 			})}

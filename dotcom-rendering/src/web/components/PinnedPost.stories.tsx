@@ -7,6 +7,7 @@ import {
 } from '@guardian/libs';
 import { breakpoints, from } from '@guardian/source-foundations';
 import { liveBlock } from '../../../fixtures/manual/liveBlock';
+import { Platform } from '../../types/platform';
 import { LiveBlock } from './LiveBlock';
 import { PinnedPost } from './PinnedPost';
 
@@ -87,6 +88,7 @@ export const Sport = () => {
 					isSensitive={false}
 					switches={{}}
 					isPinnedPost={true}
+					platform={Platform.Web}
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -136,6 +138,7 @@ export const News = () => {
 					isSensitive={false}
 					switches={{}}
 					isPinnedPost={true}
+					platform={Platform.Web}
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -185,6 +188,7 @@ export const Culture = () => {
 					isSensitive={false}
 					switches={{}}
 					isPinnedPost={true}
+					platform={Platform.Web}
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -234,6 +238,7 @@ export const Lifestyle = () => {
 					isSensitive={false}
 					switches={{}}
 					isPinnedPost={true}
+					platform={Platform.Web}
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -283,6 +288,7 @@ export const Opinion = () => {
 					isSensitive={false}
 					switches={{}}
 					isPinnedPost={true}
+					platform={Platform.Web}
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -332,6 +338,7 @@ export const SpecialReport = () => {
 					isSensitive={false}
 					switches={{}}
 					isPinnedPost={true}
+					platform={Platform.Web}
 				/>
 			</PinnedPost>
 		</Wrapper>
@@ -381,6 +388,7 @@ export const Labs = () => {
 					isSensitive={false}
 					switches={{}}
 					isPinnedPost={true}
+					platform={Platform.Web}
 				/>
 			</PinnedPost>
 		</Wrapper>

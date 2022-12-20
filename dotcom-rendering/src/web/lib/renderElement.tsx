@@ -435,6 +435,7 @@ export const renderElement = ({
 					key={index}
 					images={element.images}
 					caption={element.caption}
+					platform={platform}
 				/>
 			);
 		case 'model.dotcomrendering.pageElements.NewsletterSignupBlockElement':
@@ -777,6 +778,7 @@ export const RenderArticleElement = ({
 	isSensitive,
 	switches,
 	isPinnedPost,
+	platform,
 }: Props) => {
 	const withUpdatedRole = updateRole(element, format);
 
@@ -796,6 +798,7 @@ export const RenderArticleElement = ({
 		isSensitive,
 		switches,
 		isPinnedPost,
+		platform,
 	});
 
 	const needsFigure = !bareElements.has(element._type);

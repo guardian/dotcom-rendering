@@ -469,6 +469,7 @@ export const InteractiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 										isSensitive={
 											CAPIArticle.config.isSensitive
 										}
+										platform={Platform.Web}
 									/>
 								</div>
 							</GridItem>

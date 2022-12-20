@@ -4,6 +4,7 @@ import { breakpoints, from } from '@guardian/source-foundations';
 import { liveBlock } from '../../../fixtures/manual/liveBlock';
 import { images } from '../../../fixtures/generated/images';
 import { LiveBlock } from './LiveBlock';
+import { Platform } from '../../types/platform';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -81,6 +82,7 @@ export const VideoAsSecond = () => {
 				isSensitive={false}
 				switches={{}}
 				isPinnedPost={false}
+				platform={Platform.Web}
 			/>
 		</Wrapper>
 	);
@@ -130,6 +132,7 @@ export const Title = () => {
 				isSensitive={false}
 				switches={{}}
 				isPinnedPost={false}
+				platform={Platform.Web}
 			/>
 		</Wrapper>
 	);
@@ -200,6 +203,7 @@ export const Video = () => {
 				isSensitive={false}
 				switches={{}}
 				isPinnedPost={false}
+				platform={Platform.Web}
 			/>
 		</Wrapper>
 	);
@@ -245,6 +249,7 @@ export const RichLink = () => {
 				isSensitive={false}
 				switches={{}}
 				isPinnedPost={false}
+				platform={Platform.Web}
 			/>
 		</Wrapper>
 	);
@@ -281,6 +286,7 @@ export const FirstImage = () => {
 				isSensitive={false}
 				switches={{}}
 				isPinnedPost={false}
+				platform={Platform.Web}
 			/>
 		</Wrapper>
 	);
@@ -341,6 +347,7 @@ export const ImageRoles = () => {
 				ajaxUrl=""
 				switches={{}}
 				isPinnedPost={false}
+				platform={Platform.Web}
 				isAdFreeUser={false}
 				isSensitive={false}
 			/>
@@ -392,6 +399,7 @@ export const Thumbnail = () => {
 				ajaxUrl=""
 				switches={{}}
 				isPinnedPost={false}
+				platform={Platform.Web}
 				isAdFreeUser={false}
 				isSensitive={false}
 			/>
@@ -431,6 +439,7 @@ export const ImageAndTitle = () => {
 				isSensitive={false}
 				switches={{}}
 				isPinnedPost={false}
+				platform={Platform.Web}
 			/>
 		</Wrapper>
 	);
@@ -464,6 +473,7 @@ export const Updated = () => {
 				isSensitive={false}
 				switches={{}}
 				isPinnedPost={false}
+				platform={Platform.Web}
 			/>
 		</Wrapper>
 	);
@@ -501,6 +511,7 @@ export const Contributor = () => {
 				ajaxUrl=""
 				switches={{}}
 				isPinnedPost={false}
+				platform={Platform.Web}
 				isAdFreeUser={false}
 				isSensitive={false}
 			/>
@@ -536,6 +547,7 @@ export const NoAvatar = () => {
 				ajaxUrl=""
 				switches={{}}
 				isPinnedPost={false}
+				platform={Platform.Web}
 				isAdFreeUser={false}
 				isSensitive={false}
 			/>
@@ -574,6 +586,7 @@ export const TitleAndContributor = () => {
 				ajaxUrl=""
 				switches={{}}
 				isPinnedPost={false}
+				platform={Platform.Web}
 				isAdFreeUser={false}
 				isSensitive={false}
 			/>

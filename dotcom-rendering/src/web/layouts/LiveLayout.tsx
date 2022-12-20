@@ -727,6 +727,7 @@ export const LiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 											CAPIArticle.config.isSensitive
 										}
 										isAdFreeUser={CAPIArticle.isAdFreeUser}
+										platform={Platform.Web}
 									/>
 								</div>
 							</GridItem>

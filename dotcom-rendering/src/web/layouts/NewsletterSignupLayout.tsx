@@ -24,6 +24,7 @@ import { StraightLines } from '@guardian/source-react-components-development-kit
 import { buildAdTargeting } from '../../lib/ad-targeting';
 import type { NavType } from '../../model/extract-nav';
 import type { FEArticleType } from '../../types/frontend';
+import { Platform } from '../../types/platform';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { ArticleHeadline } from '../components/ArticleHeadline';
 import { Carousel } from '../components/Carousel.importable';
@@ -504,6 +505,7 @@ export const NewsletterSignupLayout = ({ CAPIArticle, NAV, format }: Props) => {
 									isAdFreeUser={CAPIArticle.isAdFreeUser}
 									isSensitive={CAPIArticle.config.isSensitive}
 									hideCaption={true}
+									platform={Platform.Web}
 								/>
 							</div>
 						</Column>

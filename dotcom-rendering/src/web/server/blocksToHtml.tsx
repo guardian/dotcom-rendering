@@ -1,6 +1,5 @@
 import { renderToString } from 'react-dom/server';
 import { buildAdTargeting } from '../../lib/ad-targeting';
-import { Platform } from '../../types/platform';
 import { decideFormat } from '../lib/decideFormat';
 import { WebLiveBlogRenderer } from '../lib/LiveBlogRenderer';
 

@@ -262,6 +262,7 @@ const ArticleBody = (
 				isDev={isDev}
 				isAdFreeUser={isAdFreeUser}
 				isSensitive={isSensitive}
+				platform={platform}
 			/>
 		</div>
 	);

@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 // eslint-disable-next-line import/no-extraneous-dependencies -- it’s a yarn workspace
 import LiveBlockContainer from '@guardian/common-rendering/src/components/liveBlockContainer';
+import { Platform } from '../../types/platform';
 import type { Switches } from '../../types/config';
 import { RenderArticleElement } from '../lib/renderElement';
 import { LastUpdated } from './LastUpdated';
@@ -20,6 +21,7 @@ type Props = {
 	isLiveUpdate?: boolean;
 	isPinnedPost: boolean;
 	pinnedPostId?: string;
+	platform: Platform;
 };
 
 export const LiveBlock = ({
@@ -36,6 +38,7 @@ export const LiveBlock = ({
 	isLiveUpdate,
 	isPinnedPost,
 	pinnedPostId,
+	platform,
 }: Props) => {
 	if (block.elements.length === 0) return null;
 	// Decide if the block has been updated or not
@@ -80,6 +83,7 @@ export const LiveBlock = ({
 					isSensitive={isSensitive}
 					switches={switches}
 					isPinnedPost={isPinnedPost}
+					platform={platform}
 				/>
 			))}
 			<footer

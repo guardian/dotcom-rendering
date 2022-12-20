@@ -6,6 +6,7 @@ import {
 	ArticleSpecial,
 } from '@guardian/libs';
 import { news } from '@guardian/source-foundations';
+import { Platform } from '../../types/platform';
 import { ArticleContainer } from './ArticleContainer';
 import { ArticleHeadline } from './ArticleHeadline';
 import { mainMediaElements } from './ArticleHeadline.mocks';
@@ -108,6 +109,7 @@ export const ShowcaseInterview = () => {
 						isAdFreeUser={false}
 						isSensitive={false}
 						switches={{}}
+						platform={Platform.Web}
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -152,6 +154,7 @@ export const ShowcaseInterviewNobyline = () => {
 						isAdFreeUser={false}
 						isSensitive={false}
 						switches={{}}
+						platform={Platform.Web}
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -196,6 +199,7 @@ export const Interview = () => {
 						isAdFreeUser={false}
 						isSensitive={false}
 						switches={{}}
+						platform={Platform.Web}
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -238,6 +242,7 @@ export const InterviewSpecialReport = () => {
 						isAdFreeUser={false}
 						isSensitive={false}
 						switches={{}}
+						platform={Platform.Web}
 					/>
 				</ArticleContainer>
 			</Flex>
@@ -282,6 +287,7 @@ export const InterviewNoByline = () => {
 						isAdFreeUser={false}
 						isSensitive={false}
 						switches={{}}
+						platform={Platform.Web}
 					/>
 				</ArticleContainer>
 			</Flex>

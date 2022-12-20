@@ -17,8 +17,6 @@ type Props = {
 	width: string;
 	isMainMedia?: boolean;
 	isLazy?: boolean;
-	caption?: string;
-	credit?: string;
 };
 
 export type ImageWidthType = { breakpoint: number; width: number };
