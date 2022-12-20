@@ -10,7 +10,6 @@ import {
 	neutral,
 	remSpace,
 	textSans,
-	until,
 } from '@guardian/source-foundations';
 import { darkModeCss } from 'styles';
 
@@ -60,15 +59,12 @@ export const calloutSubmitButton = (
 	background: ${text.calloutPrimary(format)};
 	color: ${neutral[100]};
 	margin-top: ${remSpace[2]};
+	width: 100%;
+	justify-content: center;
 	${darkModeCss`
 		background: ${neutral[86]};
 		color: ${neutral[7]};
 	`}
-
-	${until.tablet} {
-		width: 100%;
-		justify-content: center;
-	}
 `;
 
 // Callout Share Link Styles
