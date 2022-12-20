@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { body, space } from '@guardian/source-foundations';
+import { sanitiseHTML } from '../../../../src/model/sanitise';
 import { decidePalette } from '../../lib/decidePalette';
 
 const descriptionStyles = (format: ArticleFormat) =>
@@ -24,7 +25,9 @@ interface Props {
 
 export const CalloutDescription = ({ description, format }: Props) => (
 	<div css={descriptionStyles(format)}>
-		<div dangerouslySetInnerHTML={{ __html: description }}></div>
+		<div
+			dangerouslySetInnerHTML={{ __html: sanitiseHTML(description) }}
+		></div>
 		<div>
 			Please share your story if you are 18 or over, anonymously if you
 			wish. For more information please see our{' '}
