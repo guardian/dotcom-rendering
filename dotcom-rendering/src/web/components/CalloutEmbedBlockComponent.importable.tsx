@@ -11,6 +11,7 @@ import type {
 import type { Palette } from '../../types/palette';
 import { decidePalette } from '../lib/decidePalette';
 import { Form } from './CalloutEmbed/Form';
+
 const wrapperStyles = css`
 	margin-bottom: 26px;
 	margin-top: 16px;
