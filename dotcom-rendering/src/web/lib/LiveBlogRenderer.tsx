@@ -8,6 +8,7 @@ import { FilterKeyEventsToggle } from '../components/FilterKeyEventsToggle.impor
 import { Island } from '../components/Island';
 import { KeyEventsCarousel } from '../components/KeyEventsCarousel.importable';
 import { LiveBlock } from '../components/LiveBlock';
+import { LiveBlogBlocksAndAdverts } from '../components/LiveBlogBlocksAndAdverts';
 import { LiveBlogEpic } from '../components/LiveBlogEpic.importable';
 import { PinnedPost } from '../components/PinnedPost';
 import {
@@ -38,6 +39,7 @@ type CommonProps = {
 	filterKeyEvents?: boolean;
 	availableTopics?: Topic[];
 	selectedTopics?: Topic[];
+	isInLiveblogAdSlotTest?: boolean;
 };
 
 type AppsProps = void;
@@ -73,6 +75,7 @@ const LiveBlogRenderer = (
 		availableTopics,
 		selectedTopics,
 		platform,
+		isInLiveblogAdSlotTest,
 	} = props;
 	const filtered =
 		(selectedTopics && selectedTopics.length > 0) || filterKeyEvents;
@@ -142,27 +145,22 @@ const LiveBlogRenderer = (
 					</Hide>
 				)}
 			<div id="top-of-blog" />
-			{blocks.map((block) => {
-				return (
-					<LiveBlock
-						key={block.id}
-						format={format}
-						block={block}
-						pageId={pageId}
-						webTitle={webTitle}
-						adTargeting={adTargeting}
-						host={host}
-						ajaxUrl={ajaxUrl}
-						isLiveUpdate={isLiveUpdate}
-						switches={switches}
-						isAdFreeUser={isAdFreeUser}
-						isSensitive={isSensitive}
-						isPinnedPost={false}
-						pinnedPostId={pinnedPost?.id}
-						platform={platform}
-					/>
-				);
-			})}
+			<LiveBlogBlocksAndAdverts
+				blocks={blocks}
+				format={format}
+				pageId={pageId}
+				webTitle={webTitle}
+				adTargeting={adTargeting}
+				host={host}
+				ajaxUrl={ajaxUrl}
+				isLiveUpdate={isLiveUpdate}
+				switches={switches}
+				isAdFreeUser={isAdFreeUser}
+				isSensitive={isSensitive}
+				pinnedPost={pinnedPost}
+				isInLiveblogAdSlotTest={isInLiveblogAdSlotTest}
+				platform={platform}
+			/>
 			{blocks.length > 4 && platform === Platform.Web && (
 				<Island clientOnly={true}>
 					<LiveBlogEpic

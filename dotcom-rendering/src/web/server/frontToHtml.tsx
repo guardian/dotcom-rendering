@@ -146,6 +146,7 @@ export const frontToHtml = ({ front }: Props): string => {
 		css: extractedCss,
 		html,
 		title,
+		description: front.pressedPage.seoData.description,
 		windowGuardian,
 		gaPath,
 		keywords,

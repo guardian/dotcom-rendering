@@ -1,10 +1,13 @@
 import { css } from '@emotion/react';
+import type { SerializedStyles } from '@emotion/react';
 import { ArticleDesign, ArticleSpecial } from '@guardian/libs';
 import type { ArticleFormat } from '@guardian/libs';
 import {
+	border,
 	brandBackground,
 	brandBorder,
 	from,
+	labs,
 	neutral,
 	space,
 	until,
@@ -15,6 +18,7 @@ import { parse } from '../../lib/slot-machine-flags';
 import type { NavType } from '../../model/extract-nav';
 import type { ImageBlockElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
+import type { Palette } from '../../types/palette';
 import { AdSlot, MobileStickyContainer } from '../components/AdSlot';
 import { WebArticleBody } from '../components/ArticleBody';
 import { ArticleContainer } from '../components/ArticleContainer';
@@ -33,8 +37,11 @@ import { GuardianLabsLines } from '../components/GuardianLabsLines';
 import { HeadlineByline } from '../components/HeadlineByline';
 import { Hide } from '../components/Hide';
 import { Island } from '../components/Island';
+import { LabsHeader } from '../components/LabsHeader.importable';
+import { MainMedia } from '../components/MainMedia';
 import { MostViewedFooterData } from '../components/MostViewedFooterData.importable';
 import { MostViewedFooterLayout } from '../components/MostViewedFooterLayout';
+import { minNavHeight, Nav } from '../components/Nav/Nav';
 import { OnwardsUpper } from '../components/OnwardsUpper.importable';
 import { RightColumn } from '../components/RightColumn';
 import { Section } from '../components/Section';
@@ -47,8 +54,11 @@ import { getContributionsServiceUrl } from '../lib/contributions';
 import { decidePalette } from '../lib/decidePalette';
 import { decideTrail } from '../lib/decideTrail';
 import { ImmersiveHeader } from './headers/ImmersiveHeader';
-import { BannerWrapper } from './lib/stickiness';
 import { Platform } from '../../types/platform';
+import { getZIndex } from '../lib/getZIndex';
+import { LABS_HEADER_HEIGHT } from '../lib/labs-constants';
+import { getCurrentPillar } from '../lib/layoutHelpers';
+import { BannerWrapper, Stuck } from './lib/stickiness';
 
 const ImmersiveGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
@@ -173,6 +183,7 @@ const stretchLines = css`
 		margin-right: -10px;
 	}
 `;
+
 interface Props {
 	CAPIArticle: FEArticleType;
 	NAV: NavType;
@@ -193,6 +204,43 @@ const decideCaption = (mainMedia: ImageBlockElement): string => {
 
 	return caption.join(' ');
 };
+
+const Box = ({
+	palette,
+	children,
+}: {
+	palette: Palette;
+	children: React.ReactNode;
+}) => (
+	<div
+		css={css`
+			/*
+				This pseudo css shows a black box to the right of the headline
+				so that the black background of the inverted text stretches
+				all the way right. But only from mobileLandscape because below
+				that we want to show a gap. To work properly it needs to wrap
+				the headline so it inherits the correct height based on the length
+				of the headline text
+			*/
+			${from.mobileLandscape} {
+				position: relative;
+				:after {
+					content: '';
+					display: block;
+					position: absolute;
+					width: 50%;
+					right: 0;
+					background-color: ${palette.background.headline};
+					${getZIndex('immersiveBlackBox')}
+					top: 0;
+					bottom: 0;
+				}
+			}
+		`}
+	>
+		{children}
+	</div>
+);
 
 export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 	const {
@@ -221,20 +269,208 @@ export const ImmersiveLayout = ({ CAPIArticle, NAV, format }: Props) => {
 
 	const mainMedia = CAPIArticle.mainMediaElements[0] as ImageBlockElement;
 	const captionText = decideCaption(mainMedia);
+	const HEADLINE_OFFSET = mainMedia ? 120 : 0;
 	const { branding } =
 		CAPIArticle.commercialProperties[CAPIArticle.editionId];
 
 	const contributionsServiceUrl = getContributionsServiceUrl(CAPIArticle);
 
+	const palette = decidePalette(format);
+
 	const isLabs = format.theme === ArticleSpecial.Labs;
+
+	/**
+	We need change the height values depending on whether the labs header is there or not to keep
+	the headlines appearing at a consistent height between labs and non labs immersive articles.
+	*/
+
+	const labsHeaderHeight = LABS_HEADER_HEIGHT;
+	const navHeightCSS: SerializedStyles = minNavHeight;
+	const navHeight = parseInt(navHeightCSS.styles.slice(11, -2));
+	const combinedHeight = (navHeight + labsHeaderHeight).toString();
+
+	const navAndLabsHeaderHeight = isLabs
+		? `${combinedHeight}px`
+		: `${navHeight}px`;
+
+	const hasMainMediaStyles = css`
+		height: calc(80vh - ${navAndLabsHeaderHeight});
+		/**
+		80vh is normally enough but don't let the content shrink vertically too
+		much just in case
+		*/
+		min-height: calc(25rem - ${navAndLabsHeaderHeight});
+		${from.desktop} {
+			height: calc(100vh - ${navAndLabsHeaderHeight});
+			min-height: calc(31.25rem - ${navAndLabsHeaderHeight});
+		}
+		${from.wide} {
+			min-height: calc(50rem - ${navAndLabsHeaderHeight});
+		}
+	`;
+
+	const LeftColCaption = () => (
+		<div
+			css={css`
+				margin-top: ${HEADLINE_OFFSET}px;
+				position: absolute;
+				margin-left: 20px;
+			`}
+		>
+			<Caption
+				captionText={captionText}
+				format={format}
+				shouldLimitWidth={true}
+				isLeftCol={true}
+			/>
+		</div>
+	);
 
 	return (
 		<>
-			<ImmersiveHeader
-				CAPIArticle={CAPIArticle}
-				NAV={NAV}
-				format={format}
-			/>
+			<div
+				css={css`
+					${getZIndex('headerWrapper')}
+					order: 0;
+				`}
+			>
+				<Section
+					fullWidth={true}
+					showSideBorders={false}
+					showTopBorder={false}
+					padSides={false}
+					backgroundColour={brandBackground.primary}
+					element="nav"
+				>
+					<Nav
+						format={{
+							...format,
+							theme: getCurrentPillar(CAPIArticle),
+						}}
+						nav={NAV}
+						subscribeUrl={
+							CAPIArticle.nav.readerRevenueLinks.header.subscribe
+						}
+						editionId={CAPIArticle.editionId}
+						headerTopBarSwitch={
+							!!CAPIArticle.config.switches.headerTopNav
+						}
+					/>
+				</Section>
+			</div>
+
+			{format.theme === ArticleSpecial.Labs && (
+				<Stuck>
+					<Section
+						fullWidth={true}
+						showTopBorder={false}
+						backgroundColour={labs[400]}
+						borderColour={border.primary}
+						sectionId="labs-header"
+					>
+						<Island deferUntil="idle">
+							<LabsHeader />
+						</Island>
+					</Section>
+				</Stuck>
+			)}
+
+			<header
+				css={css`
+					background-color: ${palette.background.article};
+				`}
+			>
+				<div
+					css={[
+						mainMedia && hasMainMediaStyles,
+						css`
+							display: flex;
+							flex-direction: column;
+						`,
+					]}
+				>
+					<MainMedia
+						format={format}
+						elements={CAPIArticle.mainMediaElements}
+						adTargeting={adTargeting}
+						starRating={
+							format.design === ArticleDesign.Review &&
+							CAPIArticle.starRating
+								? CAPIArticle.starRating
+								: undefined
+						}
+						host={host}
+						hideCaption={true}
+						pageId={CAPIArticle.pageId}
+						webTitle={CAPIArticle.webTitle}
+						ajaxUrl={CAPIArticle.config.ajaxUrl}
+						switches={CAPIArticle.config.switches}
+						isAdFreeUser={CAPIArticle.isAdFreeUser}
+						isSensitive={CAPIArticle.config.isSensitive}
+						platform={Platform.Web}
+					/>
+				</div>
+				{mainMedia && (
+					<>
+						<div
+							css={css`
+								margin-top: -${HEADLINE_OFFSET}px;
+								/*
+                        This z-index is what ensures the headline title text shows above main media. For
+                        the actual headline we set the z-index deeper in ArticleHeadline itself so that
+                        the text appears above the pseudo Box element
+                    */
+								position: relative;
+								${getZIndex('articleHeadline')};
+							`}
+						>
+							<Section
+								verticalMargins={false}
+								padContent={false}
+								showTopBorder={false}
+								padSides={false}
+								showSideBorders={false}
+								leftContent={<LeftColCaption />}
+							>
+								<ArticleTitle
+									format={format}
+									tags={CAPIArticle.tags}
+									sectionLabel={CAPIArticle.sectionLabel}
+									sectionUrl={CAPIArticle.sectionUrl}
+									guardianBaseURL={
+										CAPIArticle.guardianBaseURL
+									}
+									badge={CAPIArticle.badge}
+								/>
+							</Section>
+							<Box palette={palette}>
+								<Section
+									verticalMargins={false}
+									padContent={false}
+									padSides={false}
+									showTopBorder={false}
+									showSideBorders={false}
+								>
+									<ArticleHeadline
+										format={format}
+										headlineString={CAPIArticle.headline}
+										tags={CAPIArticle.tags}
+										byline={CAPIArticle.byline}
+										webPublicationDateDeprecated={
+											CAPIArticle.webPublicationDateDeprecated
+										}
+										hasStarRating={
+											!!CAPIArticle.starRating ||
+											CAPIArticle.starRating === 0
+										}
+									/>
+								</Section>
+							</Box>
+						</div>
+					</>
+				)}
+			</header>
+
 			<main data-layout="ImmersiveLayout">
 				<Section
 					fullWidth={true}

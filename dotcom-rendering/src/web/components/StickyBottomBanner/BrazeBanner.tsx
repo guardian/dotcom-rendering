@@ -106,12 +106,15 @@ const BrazeBannerWithSatisfiedDependencies = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	const componentName = meta.dataFromBraze.componentName;
+	if (!componentName) return null;
+
 	return (
 		<div css={containerStyles}>
 			<BrazeComponent
 				logButtonClickWithBraze={meta.logButtonClickWithBraze}
 				submitComponentEvent={submitComponentEvent}
-				componentName={meta.dataFromBraze.componentName}
+				componentName={componentName}
 				brazeMessageProps={meta.dataFromBraze}
 			/>
 		</div>

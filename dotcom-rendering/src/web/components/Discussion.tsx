@@ -52,8 +52,9 @@ const commentIdFromUrl = () => {
 	const { hash } = window.location;
 	if (!hash) return;
 	if (!hash.includes('comment')) return;
-	if (!hash.split('-')[1]) return;
-	return parseInt(hash.split('-')[1], 10);
+	const [, commentId] = hash.split('-');
+	if (!commentId) return;
+	return parseInt(commentId, 10);
 };
 
 export const Discussion = ({

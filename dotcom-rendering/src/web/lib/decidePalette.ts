@@ -533,6 +533,27 @@ const textKeyEvent = (format: ArticleFormat): string => {
 	}
 };
 
+const textKeyEventFromDesktop = ({ theme }: ArticleFormat) => {
+	switch (theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
+	}
+};
+
 const textStandfirstLink = (format: ArticleFormat): string => {
 	if (format.design === ArticleDesign.LiveBlog) return WHITE;
 	if (format.design === ArticleDesign.DeadBlog) {
@@ -1556,6 +1577,27 @@ const textRichLink = (format: ArticleFormat): string => {
 	}
 };
 
+const textPagination = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
+	}
+};
+
 const hoverStandfirstLink = (format: ArticleFormat): string => {
 	return textStandfirstLink(format);
 };
@@ -1642,6 +1684,10 @@ const borderSecondary = (format: ArticleFormat) => {
 	if (format.theme === ArticleSpecial.SpecialReportAlt)
 		return transparentColour(neutral[60], 0.3);
 
+	return neutral[86];
+};
+
+const borderPagination = () => {
 	return neutral[86];
 };
 
@@ -1983,6 +2029,27 @@ const hoverSummaryEventBullet = (format: ArticleFormat): string => {
 	}
 };
 
+const hoverPagination = (format: ArticleFormat) => {
+	switch (format.theme) {
+		case ArticlePillar.News:
+			return news[400];
+		case ArticlePillar.Lifestyle:
+			return lifestyle[300];
+		case ArticlePillar.Sport:
+			return sport[300];
+		case ArticlePillar.Culture:
+			return culture[300];
+		case ArticlePillar.Opinion:
+			return opinion[300];
+		case ArticleSpecial.Labs:
+			return labs[300];
+		case ArticleSpecial.SpecialReport:
+			return specialReport[300];
+		case ArticleSpecial.SpecialReportAlt:
+			return news[400];
+	}
+};
+
 export const decidePalette = (
 	format: ArticleFormat,
 	containerPalette?: DCRContainerPalette,
@@ -2029,6 +2096,7 @@ export const decidePalette = (
 			disclaimerLink: textDisclaimerLink(format),
 			signInLink: textSignInLink(format),
 			richLink: textRichLink(format),
+			pagination: textPagination(format),
 			pullQuote: textPullQuote(format),
 			pullQuoteAttribution: textPullQuoteAttribution(format),
 			witnessIcon: textWitnessIcon(format),
@@ -2045,6 +2113,7 @@ export const decidePalette = (
 			shareCountUntilDesktop: textShareCountUntilDesktop(format),
 			cricketScoreboardLink: textCricketScoreboardLink(),
 			keyEvent: textKeyEvent(format),
+			keyEventFromDesktop: textKeyEventFromDesktop(format),
 			keyEventTime: textKeyEventTime(),
 			filterButton: textFilterButton(),
 			filterButtonHover: textFilterButtonHover(),
@@ -2124,6 +2193,7 @@ export const decidePalette = (
 			keyEvent: borderKeyEvent(),
 			filterButton: borderFilterButton(),
 			secondary: borderSecondary(format),
+			pagination: borderPagination(),
 		},
 		topBar: {
 			card: overrides?.topBar.card ?? topBarCard(format),
@@ -2134,6 +2204,7 @@ export const decidePalette = (
 			keyEventLink: hoverKeyEventLink(format),
 			keyEventBullet: hoverKeyEventBullet(),
 			summaryEventBullet: hoverSummaryEventBullet(format),
+			pagination: hoverPagination(format),
 		},
 	};
 };

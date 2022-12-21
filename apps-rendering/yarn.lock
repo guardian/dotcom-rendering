@@ -2384,10 +2384,10 @@
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
   integrity sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==
 
-"@guardian/apps-rendering-api-models@3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/apps-rendering-api-models/-/apps-rendering-api-models-3.0.0.tgz#4f48c8e1cce9f6e6c0b9e6257f2ea97aac009a27"
-  integrity sha512-12VWBwqb/qTm657gDAHIVegBhJzrIKqa32V9J8kvzI/JxIXV1qXRJ2N0db7KfSe4PhCdZNbcnlW2gsqquYxA9w==
+"@guardian/apps-rendering-api-models@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/apps-rendering-api-models/-/apps-rendering-api-models-3.1.0.tgz#2431333383c4000dcac30343c36aa59099f52f70"
+  integrity sha512-DrePdDAG/5IKzELxE0kONu3QcJZUwMdECeYJj8xLMDWKcy3Sx1ogHOUW5CUrHm2SeVIKfQNqQ97Ax7OPt9JtJQ==
   dependencies:
     "@guardian/content-api-models" "^17.4.0"
     "@guardian/content-atom-model" "^3.4.0"
@@ -2545,10 +2545,10 @@
   dependencies:
     mini-svg-data-uri "^1.3.3"
 
-"@guardian/source-react-components-development-kitchen@6.0.2":
-  version "6.0.2"
-  resolved "https://registry.npmjs.org/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-6.0.2.tgz#8db9316238774cfdc89b465f9f6550c6f3012af5"
-  integrity sha512-KEr16EjdFQaDd2u4LNp2ZXeWT6yf80QOI8ps1PgHqbNjHlvzuOwBQV5asY1EWf1+sj7mH1Lj/d1MjI5qn0jUMg==
+"@guardian/source-react-components-development-kitchen@8.1.0":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@guardian/source-react-components-development-kitchen/-/source-react-components-development-kitchen-8.1.0.tgz#9784720a9487b6b56fb20f8131c4bb313d9d1aa1"
+  integrity sha512-F6APcZQBqqujSUDo7sA3zDVGqcPT9TSqjhsHExtRU902MLL3EngaU4u9UFb3P/BQsdP6gefmUnMsCM1CsxKvOw==
 
 "@guardian/source-react-components@^9.0.0":
   version "9.1.0"

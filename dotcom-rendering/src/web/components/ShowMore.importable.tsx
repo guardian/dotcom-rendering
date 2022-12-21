@@ -12,8 +12,8 @@ import {
 	SvgPlus,
 } from '@guardian/source-react-components';
 import { useEffect, useState } from 'react';
-import type { DCRContainerPalette, FEFrontCard } from 'src/types/front';
 import { enhanceCards } from '../../model/enhanceCards';
+import type { DCRContainerPalette, FEFrontCard } from '../../types/front';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { useApi } from '../lib/useApi';
 import { useOnce } from '../lib/useOnce';
@@ -90,9 +90,11 @@ export const ShowMore = ({
 		 * There's no need to check `isOpen` here because if `isOpen` is
 		 * `false` then `filteredData` will be `undefined`.
 		 * */
-		if (filteredData?.length) {
+
+		const [card] = filteredData ?? [];
+		if (card) {
 			const maybeFirstCard = document.querySelector(
-				`#${showMoreContainerId} [data-link-name="${filteredData[0].dataLinkName}"]`,
+				`#${showMoreContainerId} [data-link-name="${card.dataLinkName}"]`,
 			);
 			if (maybeFirstCard instanceof HTMLElement) {
 				maybeFirstCard.focus();

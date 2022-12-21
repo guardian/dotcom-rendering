@@ -27,6 +27,15 @@ const ieFallback = css`
 	}
 `;
 
+const wrapper = css`
+	margin-top: 12px;
+	margin-bottom: 12px;
+	img {
+		object-fit: cover;
+		width: 100%;
+	}
+`;
+
 const SideBySideGrid = ({ children }: { children: React.ReactNode }) => (
 	<div
 		css={css`
@@ -91,196 +100,244 @@ const GridOfFour = ({ children }: { children: React.ReactNode }) => (
 	</div>
 );
 
+const OneImage = ({
+	images,
+	format,
+	caption,
+	platform,
+}: {
+	images: [ImageBlockElement];
+	format: ArticleFormat;
+	caption?: string;
+	platform: Platform;
+}) => (
+	<div css={wrapper}>
+		<ImageComponent
+			format={format}
+			element={images[0]}
+			hideCaption={true}
+			role={images[0].role}
+			platform={platform}
+		/>
+		{!!caption && (
+			<Caption
+				format={format}
+				captionText={caption}
+				shouldLimitWidth={false}
+			/>
+		)}
+	</div>
+);
+
+const TwoImage = ({
+	images,
+	format,
+	caption,
+	platform,
+}: {
+	images: [ImageBlockElement, ImageBlockElement];
+	format: ArticleFormat;
+	caption?: string;
+	platform: Platform;
+}) => (
+	<div css={wrapper}>
+		<SideBySideGrid>
+			<GridItem area="first">
+				<ImageComponent
+					element={images[0]}
+					format={format}
+					hideCaption={true}
+					role={images[0].role}
+					platform={platform}
+				/>
+			</GridItem>
+			<GridItem area="second">
+				<ImageComponent
+					element={images[1]}
+					format={format}
+					hideCaption={true}
+					role={images[1].role}
+					platform={platform}
+				/>
+			</GridItem>
+		</SideBySideGrid>
+		{!!caption && (
+			<Caption
+				captionText={caption}
+				format={format}
+				shouldLimitWidth={false}
+			/>
+		)}
+	</div>
+);
+
+const ThreeImage = ({
+	images,
+	format,
+	caption,
+	platform,
+}: {
+	images: [ImageBlockElement, ImageBlockElement, ImageBlockElement];
+	format: ArticleFormat;
+	caption?: string;
+	platform: Platform;
+}) => (
+	<div css={wrapper}>
+		<OneAboveTwoGrid>
+			<GridItem area="first">
+				<ImageComponent
+					element={images[0]}
+					format={format}
+					hideCaption={true}
+					role={images[0].role}
+					platform={platform}
+				/>
+			</GridItem>
+			<GridItem area="second">
+				<ImageComponent
+					element={images[1]}
+					format={format}
+					hideCaption={true}
+					role={images[1].role}
+					platform={platform}
+				/>
+			</GridItem>
+			<GridItem area="third">
+				<ImageComponent
+					element={images[2]}
+					format={format}
+					hideCaption={true}
+					role={images[2].role}
+					platform={platform}
+				/>
+			</GridItem>
+		</OneAboveTwoGrid>
+		{!!caption && (
+			<Caption
+				captionText={caption}
+				format={format}
+				shouldLimitWidth={false}
+			/>
+		)}
+	</div>
+);
+
+const FourImage = ({
+	images,
+	format,
+	caption,
+	platform,
+}: {
+	images: [
+		ImageBlockElement,
+		ImageBlockElement,
+		ImageBlockElement,
+		ImageBlockElement,
+	];
+	format: ArticleFormat;
+	caption?: string;
+	platform: Platform;
+}) => (
+	<div css={wrapper}>
+		<GridOfFour>
+			<GridItem area="first">
+				<ImageComponent
+					element={images[0]}
+					format={format}
+					hideCaption={true}
+					role={images[0].role}
+					platform={platform}
+				/>
+			</GridItem>
+			<GridItem area="second">
+				<ImageComponent
+					element={images[1]}
+					format={format}
+					hideCaption={true}
+					role={images[1].role}
+					platform={platform}
+				/>
+			</GridItem>
+			<GridItem area="third">
+				<ImageComponent
+					element={images[2]}
+					format={format}
+					hideCaption={true}
+					role={images[2].role}
+					platform={platform}
+				/>
+			</GridItem>
+			<GridItem area="forth">
+				<ImageComponent
+					element={images[3]}
+					format={format}
+					hideCaption={true}
+					role={images[3].role}
+					platform={platform}
+				/>
+			</GridItem>
+		</GridOfFour>
+		{!!caption && (
+			<Caption
+				captionText={caption}
+				format={format}
+				shouldLimitWidth={false}
+			/>
+		)}
+	</div>
+);
+
 export const MultiImageBlockComponent = ({
 	images,
 	format,
 	caption,
 	platform,
 }: Props) => {
-	const imageCount = images.length;
+	const [one, two, three, four] = images;
 
-	switch (imageCount) {
-		case 1:
-			return (
-				<div
-					css={css`
-						margin-top: 12px;
-						margin-bottom: 12px;
-						img {
-							object-fit: cover;
-							width: 100%;
-						}
-					`}
-				>
-					<ImageComponent
-						format={format}
-						element={images[0]}
-						hideCaption={true}
-						role={images[0].role}
-						platform={platform}
-					/>
-					{!!caption && (
-						<Caption
-							format={format}
-							captionText={caption}
-							shouldLimitWidth={false}
-						/>
-					)}
-				</div>
-			);
-		case 2:
-			return (
-				<div
-					css={css`
-						margin-top: 12px;
-						margin-bottom: 12px;
-
-						img {
-							object-fit: cover;
-							width: 100%;
-						}
-					`}
-				>
-					<SideBySideGrid>
-						<GridItem area="first">
-							<ImageComponent
-								element={images[0]}
-								format={format}
-								hideCaption={true}
-								role={images[0].role}
-								platform={platform}
-							/>
-						</GridItem>
-						<GridItem area="second">
-							<ImageComponent
-								element={images[1]}
-								format={format}
-								hideCaption={true}
-								role={images[1].role}
-								platform={platform}
-							/>
-						</GridItem>
-					</SideBySideGrid>
-					{!!caption && (
-						<Caption
-							captionText={caption}
-							format={format}
-							shouldLimitWidth={false}
-						/>
-					)}
-				</div>
-			);
-		case 3:
-			return (
-				<div
-					css={css`
-						margin-top: 12px;
-						margin-bottom: 12px;
-
-						img {
-							object-fit: cover;
-							width: 100%;
-						}
-					`}
-				>
-					<OneAboveTwoGrid>
-						<GridItem area="first">
-							<ImageComponent
-								element={images[0]}
-								format={format}
-								hideCaption={true}
-								role={images[0].role}
-								platform={platform}
-							/>
-						</GridItem>
-						<GridItem area="second">
-							<ImageComponent
-								element={images[1]}
-								format={format}
-								hideCaption={true}
-								role={images[1].role}
-								platform={platform}
-							/>
-						</GridItem>
-						<GridItem area="third">
-							<ImageComponent
-								element={images[2]}
-								format={format}
-								hideCaption={true}
-								role={images[2].role}
-								platform={platform}
-							/>
-						</GridItem>
-					</OneAboveTwoGrid>
-					{!!caption && (
-						<Caption
-							captionText={caption}
-							format={format}
-							shouldLimitWidth={false}
-						/>
-					)}
-				</div>
-			);
-		case 4:
-			return (
-				<div
-					css={css`
-						margin-top: 12px;
-						margin-bottom: 12px;
-						img {
-							object-fit: cover;
-							width: 100%;
-						}
-					`}
-				>
-					<GridOfFour>
-						<GridItem area="first">
-							<ImageComponent
-								element={images[0]}
-								format={format}
-								hideCaption={true}
-								role={images[0].role}
-								platform={platform}
-							/>
-						</GridItem>
-						<GridItem area="second">
-							<ImageComponent
-								element={images[1]}
-								format={format}
-								hideCaption={true}
-								role={images[1].role}
-								platform={platform}
-							/>
-						</GridItem>
-						<GridItem area="third">
-							<ImageComponent
-								element={images[2]}
-								format={format}
-								hideCaption={true}
-								role={images[2].role}
-								platform={platform}
-							/>
-						</GridItem>
-						<GridItem area="forth">
-							<ImageComponent
-								element={images[3]}
-								format={format}
-								hideCaption={true}
-								role={images[3].role}
-								platform={platform}
-							/>
-						</GridItem>
-					</GridOfFour>
-					{!!caption && (
-						<Caption
-							captionText={caption}
-							format={format}
-							shouldLimitWidth={false}
-						/>
-					)}
-				</div>
-			);
-		default:
-			return null;
+	if (one && two && three && four) {
+		return (
+			<FourImage
+				images={[one, two, three, four]}
+				format={format}
+				caption={caption}
+				platform={platform}
+			/>
+		);
 	}
+
+	if (one && two && three) {
+		return (
+			<ThreeImage
+				images={[one, two, three]}
+				format={format}
+				caption={caption}
+				platform={platform}
+			/>
+		);
+	}
+
+	if (one && two) {
+		return (
+			<TwoImage
+				images={[one, two]}
+				format={format}
+				caption={caption}
+				platform={platform}
+			/>
+		);
+	}
+
+	if (one) {
+		return (
+			<OneImage
+				images={[one]}
+				format={format}
+				caption={caption}
+				platform={platform}
+			/>
+		);
+	}
+
+	return null;
 };

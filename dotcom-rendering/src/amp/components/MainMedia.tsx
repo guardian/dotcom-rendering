@@ -5,11 +5,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import InfoIcon from '../../static/icons/info.svg';
-import type {
-	CAPIElement,
-	ImageBlockElement,
-	SrcSetItem,
-} from '../../types/content';
+import type { CAPIElement, ImageBlockElement } from '../../types/content';
 import { bestFitImage, heightEstimate } from '../lib/image-fit';
 import { scrsetStringFromImagesSources } from '../lib/srcset-utils';
 import { YoutubeBlockComponentAMP } from './elements/YoutubeBlockComponentAMP';
@@ -71,18 +67,14 @@ const labelStyle = css`
 
 const mainImage = (element: ImageBlockElement) => {
 	const containerWidth = 600;
-	const image: SrcSetItem = bestFitImage(
-		element.imageSources,
-		containerWidth,
-	);
-	const height: number = heightEstimate(
-		element.media.allImages[0],
-		image.width,
-	);
+	const image = bestFitImage(element.imageSources, containerWidth);
+	const [firstImage] = element.media.allImages;
 
-	if (!image) {
+	if (!image || !firstImage) {
 		return null;
 	}
+
+	const height: number = heightEstimate(firstImage, image.width);
 
 	return (
 		<figure css={figureStyle}>

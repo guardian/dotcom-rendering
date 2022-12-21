@@ -369,7 +369,7 @@ const fields = {
 	publishDate: none,
 	contributors: contributors,
 	mainMedia: mainMedia,
-	series: some({
+	series: Optional.some({
 		id: '',
 		type: 0,
 		webTitle: '',

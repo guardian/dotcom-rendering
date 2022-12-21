@@ -39,22 +39,24 @@ const fileField: CampaignFieldFile = {
 	required: false,
 };
 
+const firstRadioOption = {
+	label: 'radio 1',
+	value: 'radio 1',
+};
+
+const secondRadioOption = {
+	label: 'radio 2',
+	value: 'radio 2',
+};
+
+const thirdRadioOption = {
+	label: 'radio 3',
+	value: 'radio 3',
+};
+
 const radioField: CampaignFieldRadio = {
 	name: 'can_we_publish_your_response',
-	options: [
-		{
-			label: 'radio 1',
-			value: 'radio 1',
-		},
-		{
-			label: 'radio 2',
-			value: 'radio 2',
-		},
-		{
-			label: 'radio 3',
-			value: 'radio 3',
-		},
-	],
+	options: [firstRadioOption, secondRadioOption, thirdRadioOption],
 	hideLabel: false,
 	label: 'Can we publish your response?',
 	id: '91884878',
@@ -62,22 +64,24 @@ const radioField: CampaignFieldRadio = {
 	required: true,
 };
 
+const firstCheckboxOption = {
+	label: 'checkbox 1',
+	value: 'checkbox 1',
+};
+
+const secondCheckboxOption = {
+	label: 'checkbox 2',
+	value: 'checkbox 2',
+};
+
+const thirdCheckboxOption = {
+	label: 'checkbox 3',
+	value: 'checkbox 3',
+};
+
 const checkboxField: CampaignFieldCheckbox = {
 	name: 'can_we_publish_your_response',
-	options: [
-		{
-			label: 'checkbox 1',
-			value: 'checkbox 1',
-		},
-		{
-			label: 'checkbox 2',
-			value: 'checkbox 2',
-		},
-		{
-			label: 'checkbox 3',
-			value: 'checkbox 3',
-		},
-	],
+	options: [firstCheckboxOption, secondCheckboxOption, thirdCheckboxOption],
 	hideLabel: false,
 	label: 'Can we publish your response?',
 	id: '91884871',
@@ -172,13 +176,13 @@ describe('Callout from', () => {
 			getByTestId(`form-field-${fieldId}`);
 
 		const radioFieldComponent1 = getByFieldId(
-			radioField.options[0].value,
+			firstRadioOption.value,
 		) as HTMLInputElement;
 		fireEvent.click(radioFieldComponent1);
 		expect(radioFieldComponent1.checked).toBe(true);
 
 		const radioFieldComponent2 = getByFieldId(
-			radioField.options[1].value,
+			secondRadioOption.value,
 		) as HTMLInputElement;
 		fireEvent.click(radioFieldComponent2);
 		expect(radioFieldComponent2.checked).toBe(true);
@@ -204,13 +208,13 @@ describe('Callout from', () => {
 			getByTestId(`form-field-${fieldId}`);
 
 		const checkBoxFieldComponent1 = getByFieldId(
-			checkboxField.options[0].value,
+			firstCheckboxOption.value,
 		) as HTMLInputElement;
 		fireEvent.click(checkBoxFieldComponent1);
 		expect(checkBoxFieldComponent1.checked).toBe(true);
 
 		const checkBoxFieldComponent3 = getByFieldId(
-			checkboxField.options[2].value,
+			thirdCheckboxOption.value,
 		) as HTMLInputElement;
 		fireEvent.click(checkBoxFieldComponent3);
 		expect(checkBoxFieldComponent3.checked).toBe(true);
@@ -292,19 +296,19 @@ describe('Callout from', () => {
 			getByTestId(`form-field-${fieldId}`);
 
 		const radioFieldComponent = getByFieldId(
-			radioField.options[0].value,
+			firstRadioOption.value,
 		) as HTMLInputElement;
 		fireEvent.click(radioFieldComponent);
 		expect(radioFieldComponent.checked).toBe(true);
 
 		const checkBoxFieldComponent1 = getByFieldId(
-			checkboxField.options[0].value,
+			firstCheckboxOption.value,
 		) as HTMLInputElement;
 		fireEvent.click(checkBoxFieldComponent1);
 		expect(checkBoxFieldComponent1.checked).toBe(true);
 
 		const checkBoxFieldComponent2 = getByFieldId(
-			checkboxField.options[1].value,
+			secondCheckboxOption.value,
 		) as HTMLInputElement;
 		fireEvent.click(checkBoxFieldComponent2);
 		expect(checkBoxFieldComponent2.checked).toBe(true);

@@ -51,6 +51,7 @@ type AppsProps = void;
 
 type WebProps = {
 	contributionsServiceUrl: string;
+	isInLiveblogAdSlotTest?: boolean;
 };
 
 const globalH2Styles = (display: ArticleDisplay) => css`
@@ -197,6 +198,7 @@ const ArticleBody = (
 						selectedTopics={selectedTopics}
 						keywordIds={keywordIds}
 						contributionsServiceUrl={props.contributionsServiceUrl}
+						isInLiveblogAdSlotTest={props.isInLiveblogAdSlotTest}
 					/>
 				) : (
 					<AppsLiveBlogRenderer
