@@ -147,11 +147,11 @@ describe('shouldDisplayAd', () => {
 	});
 
 	describe('inserting further ad slots', () => {
-		it('should display ad if number of pixels without an ad is more than 1700', () => {
+		it('should display ad if number of pixels without an ad is more than 1800', () => {
 			const block = 5;
 			const totalBlocks = 10;
 			const numAdsInserted = 1;
-			const numPixelsWithoutAdvert = 1750;
+			const numPixelsWithoutAdvert = 1850;
 
 			const result = shouldDisplayAd(
 				block,
@@ -163,11 +163,11 @@ describe('shouldDisplayAd', () => {
 			expect(result).toBeTruthy();
 		});
 
-		it('should NOT display ad if number of pixels without an ad is less than 1700', () => {
+		it('should NOT display ad if number of pixels without an ad is less than 1800', () => {
 			const block = 5;
 			const totalBlocks = 10;
 			const numAdsInserted = 1;
-			const numPixelsWithoutAdvert = 1650;
+			const numPixelsWithoutAdvert = 1750;
 
 			const result = shouldDisplayAd(
 				block,
