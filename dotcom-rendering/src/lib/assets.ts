@@ -100,7 +100,11 @@ export const getAppScript = (): string => {
 	}
 
 	const manifest = getManifest('./manifest.apps.json');
-	return `${ASSET_ORIGIN}assets/${manifest['main.js']}`;
+	const mainJs = manifest['main.js'];
+	if (!mainJs) {
+		throw new Error(`main.js not in manifest`);
+	}
+	return `${ASSET_ORIGIN}assets/${mainJs}`;
 };
 
 /**
