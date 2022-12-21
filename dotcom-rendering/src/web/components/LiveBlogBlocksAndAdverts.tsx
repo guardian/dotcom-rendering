@@ -1,4 +1,4 @@
-import { Platform } from 'src/types/platform';
+import { Platform } from '../../types/platform';
 import type { Switches } from '../../types/config';
 import { calculateBlockSize, shouldDisplayAd } from '../lib/liveblogAdSlots';
 import { AdSlot } from './AdSlot';
