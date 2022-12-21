@@ -7,7 +7,7 @@ import { getHttp3Url } from '../../web/lib/getHttp3Url';
 export const pageTemplate = ({
 	css,
 	html,
-	// windowGuardian,
+	windowGuardian,
 	priorityScriptTags,
 	lowPriorityScriptTags,
 	offerHttp3,
@@ -17,7 +17,7 @@ export const pageTemplate = ({
 }: {
 	css: string;
 	html: string;
-	// windowGuardian: string;
+	windowGuardian: string;
 	priorityScriptTags: string[];
 	lowPriorityScriptTags: string[];
 	offerHttp3: boolean;
@@ -168,7 +168,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                 <meta name="robots" content="max-image-preview:large">
 
                 <script>
-                    window.guardian = ${/* windowGuardian */ '{}'};
+                    window.guardian = ${windowGuardian};
 					window.guardian.polyfilled = true; // We're assuming the apps webview provides whats needed
                     window.guardian.queue = []; // Queue for functions to be fired by polyfill.io callback
                 </script>

@@ -4,6 +4,7 @@ import createEmotionServer from '@emotion/server/create-instance';
 import { ArticleDesign, ArticlePillar } from '@guardian/libs';
 import { renderToString } from 'react-dom/server';
 import { generateScriptTags, getAppScript } from '../../lib/assets';
+import { escapeData } from '../../lib/escapeData';
 // import { makeWindowGuardian } from '../../model/window-guardian';
 import type { CAPIElement } from '../../types/content';
 import type { FEArticleType } from '../../types/frontend';
@@ -105,6 +106,13 @@ export const articleToHtml = ({ article }: Props): string => {
 	 * We escape windowGuardian here to prevent errors when the data
 	 * is placed in a script tag on the page
 	 */
+	const windowGuardian = escapeData(
+		JSON.stringify({
+			config: {
+				frontendAssetsFullURL: article.config.frontendAssetsFullURL,
+			},
+		}),
+	);
 	// const windowGuardian = escapeData(
 	// 	JSON.stringify(
 	// 		makeWindowGuardian({
@@ -168,7 +176,7 @@ window.twttr = (function(d, s, id) {
 		html,
 		title,
 		description: article.trailText,
-		// windowGuardian,
+		windowGuardian,
 		initTwitter:
 			pageHasTweetElements || format.design === ArticleDesign.LiveBlog
 				? initTwitter
