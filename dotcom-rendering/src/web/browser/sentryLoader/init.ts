@@ -41,7 +41,8 @@ const stubSentry = () => {
 
 const init = (): Promise<void> => {
 	const config = window.guardian.config;
-	const enableSentryReporting = config.switches.enableSentryReporting ?? false;
+	const enableSentryReporting =
+		config.switches.enableSentryReporting ?? false;
 	const isDev = config.isDev;
 	const isInBrowserVariantTest =
 		BUILD_VARIANT &&
