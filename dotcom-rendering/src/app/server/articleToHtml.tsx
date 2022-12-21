@@ -110,6 +110,9 @@ export const articleToHtml = ({ article }: Props): string => {
 		JSON.stringify({
 			config: {
 				frontendAssetsFullURL: article.config.frontendAssetsFullURL,
+				page: {
+					ajaxUrl: article.config.ajaxUrl,
+				},
 			},
 		}),
 	);
