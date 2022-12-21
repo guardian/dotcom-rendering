@@ -16338,10 +16338,10 @@ opener@^1.5.2:
   resolved "https://registry.yarnpkg.com/opener/-/opener-1.5.2.tgz#5d37e1f35077b9dcac4301372271afdeb2a13598"
   integrity sha512-ur5UIdyw5Y7yEj9wLzhqXiy6GZ3Mwx0yGI+5sMn2r0N0v3cKJvUmFH5yPP+WXh9e0xfyzyJX95D8l088DNFj7A==
 
-ophan-tracker-js@^1.3.29:
-  version "1.3.29"
-  resolved "https://registry.yarnpkg.com/ophan-tracker-js/-/ophan-tracker-js-1.3.29.tgz#db211a121065173ebf45c1250d57768898f49cbb"
-  integrity sha512-PQ9iKiZ5hegavEzviZbrjCBHPYFMNKpyqyi49elD0Ehlt9Aeh75Yr8IM2GoP7iMS3nmtVjhMCmYNL8xSMCh7sQ==
+ophan-tracker-js@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/ophan-tracker-js/-/ophan-tracker-js-1.4.0.tgz#6c0e8f56157f2bd1473beaa6b79b54b99f5a7b1d"
+  integrity sha512-X5JoLOYxvfvNRI0Vo8xBT0UgJdiU9snPYOGgQUTk5ZnPYgX3xGW/yt7xdePeg9yM0eCuP5SeYQTLfF4bp0GFuw==
 
 optionator@^0.8.1:
   version "0.8.3"
