@@ -23,6 +23,8 @@ const loadSentry = (): void => {
 			// Make this call blocking. We are queing errors while we wait for this code to run
 			// so we won't miss any and by waiting here we ensure we will never make calls we
 			// expect to be blocked
+			// Ad blocker detection can be expensive so it is checked here rather than in init
+			// to avoid blocking of the init flow
 			const adBlockInUse: boolean = await isAdBlockInUse();
 			if (adBlockInUse) {
 				// Ad Blockers prevent calls to Sentry from working so don't try to load the lib
