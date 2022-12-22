@@ -34,4 +34,3 @@ export const ContactText: FC = () => (
 		information, so please do leave contact details.
 	</div>
 );
-

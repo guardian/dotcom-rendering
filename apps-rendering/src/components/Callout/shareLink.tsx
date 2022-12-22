@@ -12,8 +12,9 @@ export const ShareLink: FC<{ format: ArticleFormat }> = ({ format }) => {
 		if ('share' in navigator) {
 			navigator
 				.share({
-					title: 'Share this callout',
 					url,
+					title: 'Share your experience',
+					text: 'I saw this callout on an article I was reading and thought you might like to share your story.',
 				})
 				.catch(console.error);
 		} else if ('clipboard' in navigator) {

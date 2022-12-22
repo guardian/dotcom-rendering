@@ -30,13 +30,14 @@ function Tabs({
 				{tabs.map((tab: TabProps) => {
 					return (
 						<TabControllerElement
+							key={tab.id}
 							css={tabButton}
 							role="tab"
 							id={tab.id}
 							href={tab.href}
 							aria-selected={selectedTab === tab.id}
 							aria-controls={`${tab.id}-tab`}
-							onClick={(event) => {
+							onClick={(event): void => {
 								event.preventDefault();
 								onTabChange(tab.id);
 							}}
@@ -48,6 +49,7 @@ function Tabs({
 			</div>
 			{tabs.map((tab: TabProps) => (
 				<div
+					key={`${tab.id}-tab`}
 					css={tabPanel}
 					role="tabpanel"
 					id={`${tab.id}-tab`}

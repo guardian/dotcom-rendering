@@ -1,10 +1,5 @@
 import { css } from '@emotion/react';
-import {
-	from,
-	headline,
-	neutral,
-	space,
-} from '@guardian/source-foundations';
+import { from, headline, neutral, space } from '@guardian/source-foundations';
 
 export const tabList = css`
 	display: flex;
@@ -47,7 +42,6 @@ export const tabButton = css`
 		width: 210px;
 	}
 
-
 	&[aria-selected='false'] {
 		background-color: ${neutral[86]};
 	}
@@ -67,5 +61,5 @@ export const tabButton = css`
 export const tabPanel = css`
 	position: relative;
 	padding: ${space[3]}px;
-	border-top: 1px solid  ${neutral[60]};
+	border-top: 1px solid ${neutral[60]};
 `;

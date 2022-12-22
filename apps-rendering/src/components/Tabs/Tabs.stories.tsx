@@ -8,15 +8,17 @@ const tabsContent = [
 		text: 'Cats',
 		content: (
 			<p>
-				Cat ipsum dolor sit amet, side-eyes your "jerk" other hand while being
-				petted. Eat a rug and furry furry hairs everywhere oh no human coming
-				lie on counter don't get off counter. Meow in empty rooms i vomit in the
-				bed in the middle of the night cereal boxes make for five star
-				accommodation but sit on human they not getting up ever and i'm bored
-				inside, let me out i'm lonely outside, let me in i can't make up my mind
-				whether to go in or out, guess i'll just stand partway in and partway
-				out, contemplating the universe for half an hour how dare you nudge me
-				with your foot?!?!
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam nec
+				scelerisque lacus. Nulla aliquam nisi quis sollicitudin
+				placerat. Nulla lacinia aliquet pretium. Vestibulum sit amet
+				nisl cursus, consectetur sapien nec, cursus diam. Donec ornare
+				eget eros sed sollicitudin. Fusce vitae lacinia diam. Integer eu
+				suscipit felis. Integer tellus mauris, congue sit amet nisl
+				tristique, feugiat viverra est. Praesent faucibus sagittis ante,
+				rutrum cursus augue iaculis eu. Quisque et justo eget dolor
+				pharetra consequat et ac ante. Nunc cursus molestie neque, vel
+				sollicitudin nunc lacinia vitae. Aenean eget tincidunt felis.
+				Pellentesque sagittis nisi eu mauris fermentum ultricies.
 			</p>
 		),
 	},
@@ -25,16 +27,14 @@ const tabsContent = [
 		text: 'Dogs',
 		content: (
 			<p>
-				Doggo ipsum bork borkdrive very taste wow wow very biscit vvv, heckin
-				angery woofer heck much ruin diet thicc, pupperino yapper shooberino.
-				Sub woofer he made many woofs boof puggo porgo boof sub woofer, shoob
-				borking doggo doge such treat. You are doin me a concern what a nice
-				floof shoob very taste wow, borking doggo heckin good boys and girls.
-				Big ol porgo what a nice floof h*ck I am bekom fat very good spot,
-				maximum borkdrive pupper blep. Heckin I am bekom fat thicc wow very
-				biscit most angery pupper I have ever seen, heckin good boys lotsa pats
-				snoot. Maximum borkdrive very jealous pupper he made many woofs porgo
-				pats, lotsa pats dat tungg tho.
+				Vestibulum fermentum nibh ac est venenatis facilisis. In
+				vehicula mattis mi, id eleifend metus suscipit posuere. Nulla
+				sed sem magna. Sed ante orci, convallis a facilisis sed, mollis
+				id lacus. Aenean ullamcorper pellentesque nisi sed vehicula.
+				Aenean quis auctor libero. Vestibulum aliquam in tellus id
+				varius. Donec congue consectetur sem, sit amet sagittis turpis.
+				Maecenas mattis massa augue, sit amet aliquet libero elementum
+				nec.
 			</p>
 		),
 	},
@@ -43,13 +43,15 @@ const tabsContent = [
 const tabs = (): ReactElement => {
 	const [selectedTab, setSelectedTab] = useState('cat');
 	return (
-		<div style={{"margin": "8px"}}>
+		<div style={{ margin: '8px' }}>
 			<Tabs
 				tabsLabel="Pets"
 				tabElement="button"
 				tabs={tabsContent}
 				selectedTab={selectedTab}
-				onTabChange={(tabName: string) => {setSelectedTab(tabName)}}
+				onTabChange={(tabName: string): void => {
+					setSelectedTab(tabName);
+				}}
 			/>
 		</div>
 	);
@@ -60,7 +62,4 @@ export default {
 	title: 'AR/Tabs',
 };
 
-
-export {
-	tabs,
-};
+export { tabs };

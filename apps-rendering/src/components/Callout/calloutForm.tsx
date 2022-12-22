@@ -8,12 +8,9 @@ import {
 } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { FC } from 'react';
-import {
-	ContactText,
-	Disclaimer,
-} from './calloutComponents';
+import { ContactText, Disclaimer } from './calloutComponents';
 import { FormField } from './formFields';
-import { calloutSubmitButton } from './styles';
+import { calloutPrimaryButton } from './styles';
 
 interface CalloutFormProps {
 	format: ArticleFormat;
@@ -123,7 +120,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 	};
 
 	return (
-		<div className="js-callout">
+		<div className="js-callout-form-tab">
 			{submissionSuccess ? (
 				<InlineSuccess>
 					Thank you, your story has been submitted successfully. One
@@ -156,8 +153,8 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 							{submissionError && (
 								<InlineError>
 									<>
-										Something went wrong. Please try
-										again or contact{' '}
+										Something went wrong. Please try again
+										or contact{' '}
 										<Link
 											href="mailto:customer.help@theguardian.com"
 											target="_blank"
@@ -169,7 +166,7 @@ const CalloutForm: FC<CalloutFormProps> = ({ id, fields, format }) => {
 							)}
 						</div>
 						<Button
-							css={calloutSubmitButton(format)}
+							css={calloutPrimaryButton(format)}
 							type="submit"
 							priority="primary"
 						>
