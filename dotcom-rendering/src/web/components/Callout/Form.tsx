@@ -7,7 +7,7 @@ import {
 } from '@guardian/source-foundations';
 import { Button, SvgAlertTriangle } from '@guardian/source-react-components';
 import { useState } from 'react';
-import type { CampaignFieldType } from 'src/types/content';
+import type { CampaignFieldType } from '../../../types/content';
 import { decidePalette } from '../../lib/decidePalette';
 import { CalloutTermsAndConditions } from './CalloutTermsAndConditions';
 import { FormField } from './FormField';

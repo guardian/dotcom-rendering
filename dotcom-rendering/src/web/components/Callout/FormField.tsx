@@ -11,7 +11,7 @@ import {
 	TextInput,
 } from '@guardian/source-react-components';
 import { FileInput } from '@guardian/source-react-components-development-kitchen';
-import type { CampaignFieldType } from 'src/types/content';
+import type { CampaignFieldType } from '../../../types/content';
 import { decidePalette } from '../../lib/decidePalette';
 
 type FormDataType = { [key in string]: any };
