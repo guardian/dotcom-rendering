@@ -128,7 +128,7 @@ export const FormField = ({
 						label={label}
 						hideLabel={hideLabel}
 						supporting={description}
-						error={fieldError}
+						error={fieldError ? fieldError : undefined}
 						data-testid={`form-field-${formField.id}`}
 					>
 						{formField.options.map((option, index) => {

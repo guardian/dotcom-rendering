@@ -53,6 +53,29 @@ export const calloutCampaign: CalloutBlockElementV2 = {
 			required: true,
 		},
 		{
+			name: 'what_events_did_you_attend',
+			description: 'Select as many as you like',
+			hideLabel: false,
+			label: 'What events did you attend? ',
+			id: 'events',
+			type: 'checkbox',
+			required: false,
+			options: [
+				{
+					label: '1st Dec',
+					value: '1st Dec',
+				},
+				{
+					label: '3rd Dec',
+					value: '3rd Dec',
+				},
+				{
+					label: '5th Dec',
+					value: '5th Dec',
+				},
+			],
+		},
+		{
 			name: 'upload_image_video',
 			description:
 				'File uploads not work on some mobile devices, or files may be too large.',
