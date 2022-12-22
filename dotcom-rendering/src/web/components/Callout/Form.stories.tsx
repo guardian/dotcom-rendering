@@ -10,7 +10,7 @@ const mockFormat = {
 
 export default {
 	component: Form,
-	title: 'Components/CalloutBlockComponent/Form',
+	title: 'Components/NewCalloutForm/Form',
 };
 
 export const Default = () => {
