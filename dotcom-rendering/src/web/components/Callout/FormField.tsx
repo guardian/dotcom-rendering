@@ -21,7 +21,10 @@ type FormFieldProp = {
 	format: ArticleFormat;
 	formField: CampaignFieldType;
 	formData: FormDataType;
-	setFormData: React.Dispatch<React.SetStateAction<FormDataType>>;
+	setFieldInFormData: (
+		id: string,
+		data: string | string[] | undefined,
+	) => void;
 };
 
 const formFieldStyles = css`
@@ -32,7 +35,7 @@ export const FormField = ({
 	format,
 	formField,
 	formData,
-	setFormData,
+	setFieldInFormData,
 	validationErrors,
 }: FormFieldProp) => {
 	const { type, label, hideLabel, description, required, id } = formField;
@@ -55,11 +58,8 @@ export const FormField = ({
 						value={fieldValue}
 						error={fieldError}
 						data-testid={`form-field-${formField.id}`}
-						onChange={(e) =>
-							setFormData({
-								...formData,
-								[formField.id]: e.target.value,
-							})
+						onChange={(e): void =>
+							setFieldInFormData(formField.id, e.target.value)
 						}
 					/>
 				</div>
@@ -82,10 +82,7 @@ export const FormField = ({
 							error={fieldError}
 							data-testid={`form-field-${formField.id}`}
 							onUpload={(file: string | undefined): void =>
-								setFormData({
-									...formData,
-									[formField.id]: file,
-								})
+								setFieldInFormData(formField.id, file)
 							}
 						/>
 					</ThemeProvider>
@@ -103,11 +100,8 @@ export const FormField = ({
 						value={fieldValue}
 						error={fieldError}
 						data-testid={`form-field-${formField.id}`}
-						onChange={(e) =>
-							setFormData({
-								...formData,
-								[formField.id]: e.target.value,
-							})
+						onChange={(e): void =>
+							setFieldInFormData(formField.id, e.target.value)
 						}
 						children={[
 							{
@@ -138,8 +132,6 @@ export const FormField = ({
 						data-testid={`form-field-${formField.id}`}
 					>
 						{formField.options.map((option, index) => {
-							// data related to this field is mapped to `formData` using `formField.id`
-							// We cannot assume that the data exists, so we need to check if `formField.id` key exists in `formData`
 							const selectedCheckboxesArray: string[] =
 								formData[formField.id] ?? [];
 
@@ -166,14 +158,14 @@ export const FormField = ({
 									checked={isCheckboxChecked}
 									error={fieldError ? true : false}
 									data-testid={`form-field-${formField.id}`}
-									onChange={() => {
-										setFormData({
-											...formData,
-											[formField.id]: isCheckboxChecked
+									onChange={(): void =>
+										setFieldInFormData(
+											id,
+											isCheckboxChecked
 												? filterOutCheckboxFromArray()
 												: addCheckboxToArray(),
-										});
-									}}
+										)
+									}
 								/>
 							);
 						})}
@@ -195,9 +187,6 @@ export const FormField = ({
 						}
 					>
 						{formField.options.map((option, index) => {
-							const isRadioChecked =
-								formField.id in formData &&
-								formData[formField.id] === option.value;
 							return (
 								<Radio
 									data-testid={`form-field-${option.value}`}
@@ -205,12 +194,15 @@ export const FormField = ({
 									label={option.label}
 									value={option.value}
 									name={`${formField.id}`}
-									checked={!!isRadioChecked}
-									onChange={() =>
-										setFormData({
-											...formData,
-											[formField.id]: option.value,
-										})
+									checked={
+										formField.id in formData &&
+										formData[formField.id] === option.value
+									}
+									onChange={(e): void =>
+										setFieldInFormData(
+											formField.id,
+											e.target.value,
+										)
 									}
 								/>
 							);
@@ -231,11 +223,8 @@ export const FormField = ({
 						error={fieldError}
 						data-testid={`form-field-${formField.id}`}
 						type={formField.type}
-						onChange={(e) =>
-							setFormData({
-								...formData,
-								[formField.id]: e.target.value,
-							})
+						onChange={(e): void =>
+							setFieldInFormData(formField.id, e.target.value)
 						}
 					/>
 				</div>
