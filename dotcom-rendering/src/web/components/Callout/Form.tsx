@@ -83,10 +83,24 @@ export const Form = ({
 	format,
 	networkError,
 }: FormProps) => {
-	const [formData, setFormData] = useState<{ [key in string]: any }>({});
+	const [formData, setFormData] = useState<FormDataType>({});
 	const [validationErrors, setValidationErrors] = useState<{
 		[key in string]: string;
 	}>({});
+
+	const setFieldInFormData = (
+		id: string,
+		data: string | string[] | undefined,
+	): void => {
+		const currentErrors = validationErrors;
+		currentErrors[id] = '';
+		setValidationErrors(currentErrors);
+
+		setFormData({
+			...formData,
+			[id]: data,
+		});
+	};
 
 	const validateForm = (): boolean => {
 		const errors: { [key in string]: string } = {};
@@ -98,7 +112,8 @@ export const Form = ({
 			}
 			if (field.type === 'select' && field.required) {
 				if (formData[field.id] === 'Please choose an option') {
-					errors[field.id] = 'Please select an option';
+					errors[field.id] =
+						'Please choose an option from the dropdown menu';
 				}
 			}
 			if (field.id === 'email' && formData[field.id]) {
@@ -116,8 +131,7 @@ export const Form = ({
 				}
 				const noWhiteSpace = formData[field.id] as string;
 				if (noWhiteSpace.length < 10) {
-					errors[field.id] =
-						'Your phone number is too short. If using a landline, include your area code.';
+					errors[field.id] = 'Please include your dialling/area code';
 					isValid = false;
 				}
 			}
@@ -135,7 +149,7 @@ export const Form = ({
 			noValidate={true}
 			onSubmit={(e) => {
 				e.preventDefault();
-				console.log(formData);
+				// console.log(formData);
 				const isValid = validateForm();
 				if (!isValid) return;
 				onSubmit(formData);
@@ -143,7 +157,7 @@ export const Form = ({
 		>
 			<CalloutTermsAndConditions format={format} />
 
-			{Object.keys(validationErrors).length > 0 && (
+			{Object.keys(validationErrors).length > 1 && (
 				<div css={errorBoxStyles}>
 					<div css={errorHeaderStyles}>
 						<SvgAlertTriangle size="medium" />
@@ -161,7 +175,7 @@ export const Form = ({
 						format={format}
 						formField={formField}
 						formData={formData}
-						setFormData={setFormData}
+						setFieldInFormData={setFieldInFormData}
 						validationErrors={validationErrors}
 					/>
 				</div>
