@@ -9,7 +9,7 @@ import {
 	visuallyHidden,
 } from '@guardian/source-foundations';
 import React, { useState } from 'react';
-import type { CampaignFieldType } from 'src/types/content';
+import type { CampaignFieldType } from '../../../../types/content';
 import { decidePalette } from '../../../lib/decidePalette';
 import { stringifyFileBase64 } from '../../../lib/stringifyFileBase64';
 import { FieldLabel } from './FieldLabel';
