@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { info, tab, tabContainer, termsConditions } from './styles';
+import { info, termsConditions } from './styles';
 
 export const TermsAndConditions: FC = () => (
 	<div css={termsConditions}>
@@ -35,11 +35,3 @@ export const ContactText: FC = () => (
 	</div>
 );
 
-/* This component will be replaced with functioning tabs at some point */
-/* But for now its just a styled div, as we don't have the Share tab in scope */
-
-export const PseudoTab: FC = () => (
-	<div css={tabContainer}>
-		<div css={tab}>Tell us here</div>
-	</div>
-);

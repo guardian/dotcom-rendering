@@ -13,12 +13,14 @@ export const tabList = css`
 `;
 
 export const tabButton = css`
-	background-color: ${neutral[100]};
+	background-color: ${neutral[97]};
 	${headline.xxxsmall({
 		fontWeight: 'bold',
 	})}
 	position: relative;
-	display: block;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	text-decoration: none;
 	appearance: none;
 	width: 100%;
@@ -26,7 +28,7 @@ export const tabButton = css`
 	text-align: left;
 	color: ${neutral[7]};
 	padding: ${space[2]}px ${space[3]}px;
-	border: 1px solid ${neutral[86]};
+	border: 1px solid ${neutral[60]};
 	border-bottom: none;
 	cursor: pointer;
 
@@ -47,7 +49,7 @@ export const tabButton = css`
 
 
 	&[aria-selected='false'] {
-		background-color: ${neutral[97]};
+		background-color: ${neutral[86]};
 	}
 
 	/* Pseudo-element that covers the tab panel bottom border for the active tab */
@@ -64,6 +66,6 @@ export const tabButton = css`
 `;
 export const tabPanel = css`
 	position: relative;
-	padding: ${space[2]}px;
-	border: 1px solid  ${neutral[86]};
+	padding: ${space[3]}px;
+	border-top: 1px solid  ${neutral[60]};
 `;
