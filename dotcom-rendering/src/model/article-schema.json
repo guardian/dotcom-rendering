@@ -4294,6 +4294,9 @@
                 "isSnap": {
                     "type": "boolean"
                 },
+                "isCrossword": {
+                    "type": "boolean"
+                },
                 "snapData": {
                     "type": "object",
                     "properties": {

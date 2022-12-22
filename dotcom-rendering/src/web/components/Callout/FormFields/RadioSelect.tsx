@@ -1,5 +1,5 @@
 import { Radio, RadioGroup } from '@guardian/source-react-components';
-import type { CampaignFieldRadio } from 'src/types/content';
+import type { CampaignFieldRadio } from '../../../types/content';
 import { FieldLabel } from './FieldLabel';
 
 type FieldProp = {

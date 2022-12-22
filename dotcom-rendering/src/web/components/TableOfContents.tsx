@@ -4,7 +4,7 @@ import {
 	SvgChevronDownSingle,
 	SvgChevronUpSingle,
 } from '@guardian/source-react-components';
-import type { TableOfContentsItem } from 'src/types/frontend';
+import type { TableOfContentsItem } from '../../types/frontend';
 
 interface Props {
 	tableOfContents: TableOfContentsItem[];

@@ -6,7 +6,7 @@ import type {
 	OphanComponentEvent,
 } from '@guardian/libs';
 import { log } from '@guardian/libs';
-import type { ServerSideTests } from 'src/types/config';
+import type { ServerSideTests } from '../../../types/config';
 
 export type OphanRecordFunction = (
 	event: { [key: string]: any },

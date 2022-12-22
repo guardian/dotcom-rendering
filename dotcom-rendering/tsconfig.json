@@ -1,20 +1,20 @@
 {
-  "extends": "@guardian/tsconfig/tsconfig.json",
-  "compilerOptions": {
-    "allowJs": true,
-    "baseUrl": "./",
-    "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx",
-    "jsxImportSource": "@emotion/react",
-    "lib": ["esnext", "es2015", "dom"],
-    "noEmit": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,
-    "paths": {
-      /* Aliases should also be added to the webpack, babel and jest configurations */
-      "*": ["node_modules/@types/*", "*"] // Make sure that yarn linking doesn't confuse things https://github.com/microsoft/TypeScript/issues/11916#issuecomment-257130001
-    },
-    "preserveConstEnums": true
-  },
-  "exclude": ["cypress", "./cypress.config.js"]
+	"extends": "@guardian/tsconfig/tsconfig.json",
+	"compilerOptions": {
+		"allowJs": true,
+		"baseUrl": "./",
+		"forceConsistentCasingInFileNames": true,
+		"jsx": "react-jsx",
+		"jsxImportSource": "@emotion/react",
+		"lib": ["esnext", "es2015", "dom"],
+		"noEmit": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUncheckedIndexedAccess": true,
+		"paths": {
+			/* Aliases should also be added to the webpack, babel and jest configurations */
+			"*": ["node_modules/@types/*", "*"] // Make sure that yarn linking doesn't confuse things https://github.com/microsoft/TypeScript/issues/11916#issuecomment-257130001
+		},
+		"preserveConstEnums": true
+	},
+	"exclude": ["cypress", "./cypress.config.js"]
 }

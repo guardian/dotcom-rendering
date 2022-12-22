@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { space } from '@guardian/source-foundations';
 import { TextInput as SourceTextInput } from '@guardian/source-react-components';
-import type { CampaignFieldText } from 'src/types/content';
+import type { CampaignFieldText } from '../../../types/content';
 
 const textInputStyles = css`
 	margin-top: ${space[2]}px;
