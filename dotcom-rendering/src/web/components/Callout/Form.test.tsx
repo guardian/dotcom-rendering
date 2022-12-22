@@ -1,3 +1,5 @@
+import type { ArticleFormat } from '@guardian/libs';
+import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { fireEvent, render, screen } from '@testing-library/react';
 import user from '@testing-library/user-event';
 import type {
@@ -9,6 +11,12 @@ import type {
 	CampaignFieldTextArea,
 } from '../../../types/content';
 import { Form } from './Form';
+
+const mockFormat: ArticleFormat = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.Opinion,
+};
 
 const textField: CampaignFieldText = {
 	textSize: 50,
@@ -112,7 +120,11 @@ describe('Callout from', () => {
 	it('should submit text input', () => {
 		const mockSubmit = jest.fn();
 		const { getByTestId, queryByText } = render(
-			<Form formFields={[textField]} onSubmit={mockSubmit} />,
+			<Form
+				format={mockFormat}
+				formFields={[textField]}
+				onSubmit={mockSubmit}
+			/>,
 		);
 		const getByFieldId = (fieldId: number | string) =>
 			getByTestId(`form-field-${fieldId}`);
@@ -126,9 +138,7 @@ describe('Callout from', () => {
 		});
 		expect(textFieldComponent.value).toBe(textFieldValue);
 
-		const submitButton = queryByText(
-			'Share with the Guardian',
-		) as HTMLButtonElement;
+		const submitButton = queryByText('Submit') as HTMLButtonElement;
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
@@ -141,8 +151,13 @@ describe('Callout from', () => {
 	it('should submit textarea input', () => {
 		const mockSubmit = jest.fn();
 		const { getByTestId, queryByText } = render(
-			<Form formFields={[textAreaField]} onSubmit={mockSubmit} />,
+			<Form
+				format={mockFormat}
+				formFields={[textAreaField]}
+				onSubmit={mockSubmit}
+			/>,
 		);
+
 		const getByFieldId = (fieldId: number | string) =>
 			getByTestId(`form-field-${fieldId}`);
 
@@ -155,9 +170,7 @@ describe('Callout from', () => {
 		});
 		expect(textAreaFieldComponent.value).toBe(textAreaFieldValue);
 
-		const submitButton = queryByText(
-			'Share with the Guardian',
-		) as HTMLButtonElement;
+		const submitButton = queryByText('Submit') as HTMLButtonElement;
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
@@ -170,7 +183,11 @@ describe('Callout from', () => {
 	it('should submit radio', () => {
 		const mockSubmit = jest.fn();
 		const { getByTestId, queryByText } = render(
-			<Form formFields={[radioField]} onSubmit={mockSubmit} />,
+			<Form
+				format={mockFormat}
+				formFields={[radioField]}
+				onSubmit={mockSubmit}
+			/>,
 		);
 		const getByFieldId = (fieldId: number | string) =>
 			getByTestId(`form-field-${fieldId}`);
@@ -187,9 +204,7 @@ describe('Callout from', () => {
 		fireEvent.click(radioFieldComponent2);
 		expect(radioFieldComponent2.checked).toBe(true);
 
-		const submitButton = queryByText(
-			'Share with the Guardian',
-		) as HTMLButtonElement;
+		const submitButton = queryByText('Submit') as HTMLButtonElement;
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
@@ -202,7 +217,11 @@ describe('Callout from', () => {
 	it('should submit checkbox', () => {
 		const mockSubmit = jest.fn();
 		const { getByTestId, queryByText } = render(
-			<Form formFields={[checkboxField]} onSubmit={mockSubmit} />,
+			<Form
+				format={mockFormat}
+				formFields={[checkboxField]}
+				onSubmit={mockSubmit}
+			/>,
 		);
 		const getByFieldId = (fieldId: number | string) =>
 			getByTestId(`form-field-${fieldId}`);
@@ -219,9 +238,7 @@ describe('Callout from', () => {
 		fireEvent.click(checkBoxFieldComponent3);
 		expect(checkBoxFieldComponent3.checked).toBe(true);
 
-		const submitButton = queryByText(
-			'Share with the Guardian',
-		) as HTMLButtonElement;
+		const submitButton = queryByText('Submit') as HTMLButtonElement;
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
@@ -234,7 +251,11 @@ describe('Callout from', () => {
 		const file = new File(['hello'], 'hello.png', { type: 'image/png' });
 		const mockSubmit = jest.fn();
 		const { queryByText } = render(
-			<Form formFields={[fileField]} onSubmit={mockSubmit} />,
+			<Form
+				format={mockFormat}
+				formFields={[fileField]}
+				onSubmit={mockSubmit}
+			/>,
 		);
 
 		const input = screen.getByTestId<HTMLInputElement>(
@@ -247,9 +268,7 @@ describe('Callout from', () => {
 		expect(inputFiles[0]).toStrictEqual(file);
 		expect(inputFiles).toHaveLength(1);
 
-		const submitButton = queryByText(
-			'Share with the Guardian',
-		) as HTMLButtonElement;
+		const submitButton = queryByText('Submit') as HTMLButtonElement;
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
@@ -259,7 +278,11 @@ describe('Callout from', () => {
 	it('should submit select', () => {
 		const mockSubmit = jest.fn();
 		const { getByTestId, queryByText } = render(
-			<Form formFields={[selectField]} onSubmit={mockSubmit} />,
+			<Form
+				format={mockFormat}
+				formFields={[selectField]}
+				onSubmit={mockSubmit}
+			/>,
 		);
 		const getByFieldId = (fieldId: number | string) =>
 			getByTestId(`form-field-${fieldId}`);
@@ -272,9 +295,7 @@ describe('Callout from', () => {
 			target: { value: selectText },
 		});
 
-		const submitButton = queryByText(
-			'Share with the Guardian',
-		) as HTMLButtonElement;
+		const submitButton = queryByText('Submit') as HTMLButtonElement;
 		fireEvent.click(submitButton);
 
 		expect(mockSubmit.mock.calls.length).toBe(1);
@@ -288,6 +309,7 @@ describe('Callout from', () => {
 		const mockSubmit = jest.fn();
 		const { getByTestId, queryByText } = render(
 			<Form
+				format={mockFormat}
 				formFields={[radioField, checkboxField]}
 				onSubmit={mockSubmit}
 			/>,
@@ -313,9 +335,7 @@ describe('Callout from', () => {
 		fireEvent.click(checkBoxFieldComponent2);
 		expect(checkBoxFieldComponent2.checked).toBe(true);
 
-		const submitButton = queryByText(
-			'Share with the Guardian',
-		) as HTMLButtonElement;
+		const submitButton = queryByText('Submit') as HTMLButtonElement;
 		fireEvent.click(submitButton);
 		expect(mockSubmit.mock.calls.length).toBe(1);
 		// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
