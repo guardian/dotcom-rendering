@@ -1,5 +1,5 @@
 import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
-import { calloutCampaign } from 'fixtures/manual/calloutCampaignV2';
+import { calloutCampaign } from '../../../../fixtures/manual/calloutCampaign';
 import { Form } from './Form';
 
 const mockFormat = {
@@ -10,7 +10,7 @@ const mockFormat = {
 
 export default {
 	component: Form,
-	title: 'Components/NewCalloutForm/Form',
+	title: 'Components/Callout/Form',
 };
 
 export const Default = () => {
