@@ -40,13 +40,10 @@ const stubSentry = () => {
 };
 
 const init = (): Promise<void> => {
-	const config = window.guardian.config;
-	const enableSentryReporting =
-		config.switches.enableSentryReporting ?? false;
-	const isDev = config.isDev;
+	const { switches, isDev, tests } = window.guardian.config;
+	const enableSentryReporting = !!switches.enableSentryReporting;
 	const isInBrowserVariantTest =
-		BUILD_VARIANT &&
-		config.tests[dcrJavascriptBundle('Variant')] === 'variant';
+		BUILD_VARIANT && tests[dcrJavascriptBundle('Variant')] === 'variant';
 	// Generate a number between 1 - 100
 	const randomCentile = Math.floor(Math.random() * 100) + 1;
 	const canLoadSentry = isSentryEnabled({
