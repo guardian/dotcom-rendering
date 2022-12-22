@@ -3,11 +3,11 @@ import { text, textSans } from '@guardian/source-foundations';
 import { Button, Link } from '@guardian/source-react-components';
 import { useState } from 'react';
 import type { CampaignFieldType } from '../../../types/content';
-import { FileUpload } from '../Callout/FileUpload';
-import { MultiSelect } from '../Callout/MultiSelect';
-import { Select } from '../Callout/Select';
-import { TextArea } from '../Callout/TextArea';
-import { TextInput } from '../Callout/TextInput';
+import { FileUpload } from './FormFields/FileUpload';
+import { MultiSelect } from './FormFields/MultiSelect';
+import { Select } from './FormFields/Select';
+import { TextArea } from './FormFields/TextArea';
+import { TextInput } from './FormFields/TextInput';
 
 const formStyles = css`
 	display: flex;
