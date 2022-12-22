@@ -73,15 +73,10 @@ type FormProps = {
 	onSubmit: (formData: FormDataType) => void;
 	formFields: CampaignFieldType[];
 	format: ArticleFormat;
-	networkError?: string;
+	error?: string;
 };
 
-export const Form = ({
-	onSubmit,
-	formFields,
-	format,
-	networkError,
-}: FormProps) => {
+export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 	const [formData, setFormData] = useState<FormDataType>({});
 	const [validationErrors, setValidationErrors] = useState<{
 		[key in string]: string;
@@ -181,7 +176,7 @@ export const Form = ({
 				One of our journalists will be in contact before we publish your
 				information, so please do leave contact details.
 			</div>
-			{!!networkError && (
+			{!!error && (
 				<div
 					css={[
 						errorHeaderStyles,
@@ -190,7 +185,7 @@ export const Form = ({
 						`,
 					]}
 				>
-					{networkError}
+					{error}
 				</div>
 			)}
 			<div css={footerPaddingStyles}>
