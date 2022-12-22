@@ -1,4 +1,4 @@
-import { css, ThemeProvider } from '@emotion/react';
+import { css } from '@emotion/react';
 import {
 	neutral,
 	palette,
