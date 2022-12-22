@@ -1,4 +1,3 @@
-// import {renderToString, renderToStaticMarkup} from 'react-dom/server';
 import type { FormField } from '@guardian/apps-rendering-api-models/formField';
 import type { ArticleFormat } from '@guardian/libs';
 import type { FC, ReactElement } from 'react';
@@ -23,14 +22,13 @@ export interface CalloutBlockProps {
 const CalloutBlock: FC<CalloutBlockProps> = ({
 	formId,
 	heading,
-	name,
 	formFields,
 	format,
 	description,
 }): ReactElement => (
 	<div css={calloutContainer(format)}>
-		<div css={calloutTitle(format)}>{heading}</div>
-		<h4 css={calloutHeadingText}>{name}</h4>
+		<div css={calloutTitle(format)}>Tell Us</div>
+		<h4 css={calloutHeadingText}>{heading}</h4>
 		{description && (
 			<div css={calloutDescription}>
 				{renderCalloutDescriptionText(format, description)}
