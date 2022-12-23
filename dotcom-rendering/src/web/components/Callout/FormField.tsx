@@ -11,7 +11,7 @@ import {
 	TextInput,
 } from '@guardian/source-react-components';
 import { FileInput } from '@guardian/source-react-components-development-kitchen';
-import { logger } from 'src/server/lib/logging';
+import { logger } from '../../../server/lib/logging';
 import type { CampaignFieldType } from '../../../types/content';
 import { decidePalette } from '../../lib/decidePalette';
 

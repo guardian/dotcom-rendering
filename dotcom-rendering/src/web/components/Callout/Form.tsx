@@ -5,7 +5,8 @@ import {
 	space,
 	textSans,
 } from '@guardian/source-foundations';
-import { Button, SvgAlertTriangle } from '@guardian/source-react-components';
+import { Button } from '@guardian/source-react-components';
+import { ErrorSummary } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
 import type { CampaignFieldType } from '../../../types/content';
 import { decidePalette } from '../../lib/decidePalette';
@@ -21,26 +22,11 @@ const submitButtonStyles = (format: ArticleFormat) => css`
 	}
 `;
 
-const errorBoxStyles = css`
-	padding: 10px;
-	margin-bottom: ${space[2]}px;
-	width: fit-content;
-	border: ${space[1]}px solid ${palette.error[400]};
-
-	svg {
-		fill: ${palette.error[400]};
-	}
-`;
-
-const errorHeaderStyles = css`
+const errorTextStyles = css`
 	color: ${palette.error[400]};
 	${textSans.medium({ fontWeight: 'bold' })};
 	display: flex;
-`;
-
-const errorBodyStyles = css`
-	color: black;
-	${textSans.medium()};
+	margin-top: ${space[2]}px;
 `;
 
 const formStyles = css`
@@ -149,15 +135,12 @@ export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 			}}
 		>
 			{Object.keys(validationErrors).length > 1 && (
-				<div css={errorBoxStyles}>
-					<div css={errorHeaderStyles}>
-						<SvgAlertTriangle size="medium" />
-						Some information is missing
-					</div>
-					<div css={errorBodyStyles}>
-						Please complete all required fields
-					</div>
-				</div>
+				<ErrorSummary
+					message="Some information is missing. Please complete all required fields."
+					cssOverrides={css`
+						width: fit-content;
+					`}
+				/>
 			)}
 			{formFields.map((formField) => (
 				<div css={formFieldWrapperStyles}>
@@ -175,18 +158,7 @@ export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 				One of our journalists will be in contact before we publish your
 				information, so please do leave contact details.
 			</div>
-			{!!error && (
-				<div
-					css={[
-						errorHeaderStyles,
-						css`
-							margin-top: 8px;
-						`,
-					]}
-				>
-					{error}
-				</div>
-			)}
+			{!!error && <div css={errorTextStyles}>{error}</div>}
 			<div css={footerPaddingStyles}>
 				<Button
 					priority="primary"
