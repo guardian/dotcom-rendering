@@ -143,7 +143,6 @@ export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 			noValidate={true}
 			onSubmit={(e) => {
 				e.preventDefault();
-				// console.log(formData);
 				const isValid = validateForm();
 				if (!isValid) return;
 				onSubmit(formData);
