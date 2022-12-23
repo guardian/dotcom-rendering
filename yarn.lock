@@ -2946,11 +2946,6 @@
   resolved "https://registry.yarnpkg.com/@guardian/ab-core/-/ab-core-2.0.0.tgz#d8a9408d5a66ff1f8c684ed458c99517bbee15b1"
   integrity sha512-E5p6l0l37hY0GNFaZmA5/22TlVuavzlMHR3OeweD5eDcY2gB3nGgzPK/d3M67dkbDAJkGjB4a0W84Z5N2YScvQ==
 
-"@guardian/ab-react@^2.0.1":
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/@guardian/ab-react/-/ab-react-2.0.1.tgz#f018898de584c8e70a48e69ec9e499e08f512cc5"
-  integrity sha512-iOKbIxoLwRMv2eHddxL5l9mNBy/B9QaOOJgA3VUdo/jH5cUVzbF6W8yYDGcZJTolIVhSu5GPR8fitsOoup6Vww==
-
 "@guardian/atoms-rendering@^24.0.0":
   version "24.0.0"
   resolved "https://registry.yarnpkg.com/@guardian/atoms-rendering/-/atoms-rendering-24.0.0.tgz#1c07557cfab11f27b256756fe0c566756ade1223"
@@ -2980,10 +2975,10 @@
   resolved "https://registry.yarnpkg.com/@guardian/consent-management-platform/-/consent-management-platform-11.0.0.tgz#240083bbe4e8c4c22410cfa4c867b608e7c0e92f"
   integrity sha512-j97gI5NbhVLXy1s8465lyT/w/nU3K+HewkfHIQ/NLOvzBS2mmcgB6A6sRXsKCOYRt4W8eNoTX5xgAdemFgvLAw==
 
-"@guardian/core-web-vitals@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@guardian/core-web-vitals/-/core-web-vitals-1.0.0.tgz#f5624eabbf7123f8a764c00674e640a10a80e2da"
-  integrity sha512-3WTUK6FmZpVUQGoc+hlAcuYx8yVKdYfpcP7HWkBmy1yaWV5yJ81HBxxoACwUeMrZrKLMlCMriPTC9CLhPgGGUQ==
+"@guardian/core-web-vitals@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@guardian/core-web-vitals/-/core-web-vitals-2.0.1.tgz#b04f12ff36f66db800a68b81b65eedfc86289211"
+  integrity sha512-xm5oDtRBu37KPmiT61z+E/Wz3HHifayJjVMwd/nfLxNRd1eFOVmplaeTDtygGKy4KjIwX90R5j/Sjs9apTVnLA==
 
 "@guardian/discussion-rendering@^11.0.3":
   version "11.0.3"
