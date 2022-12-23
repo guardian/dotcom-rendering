@@ -47,4 +47,4 @@ export const Opinion = () => {
 	);
 };
 
-Opinion.story = { name: 'default' };
+Opinion.story = { name: 'Opinion' };
