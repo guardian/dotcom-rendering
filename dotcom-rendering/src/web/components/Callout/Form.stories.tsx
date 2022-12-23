@@ -2,7 +2,13 @@ import { ArticleDesign, ArticleDisplay, ArticlePillar } from '@guardian/libs';
 import { calloutCampaign } from '../../../../fixtures/manual/calloutCampaign';
 import { Form } from './Form';
 
-const mockFormat = {
+const mockFormatNews = {
+	display: ArticleDisplay.Standard,
+	design: ArticleDesign.Standard,
+	theme: ArticlePillar.News,
+};
+
+const mockFormatOpinion = {
 	display: ArticleDisplay.Standard,
 	design: ArticleDesign.Standard,
 	theme: ArticlePillar.Opinion,
@@ -13,11 +19,11 @@ export default {
 	title: 'Components/Callout/Form',
 };
 
-export const Default = () => {
+export const News = () => {
 	return (
 		<>
 			<Form
-				format={mockFormat}
+				format={mockFormatNews}
 				formFields={calloutCampaign.formFields}
 				onSubmit={() => {}}
 			/>
@@ -26,4 +32,19 @@ export const Default = () => {
 	);
 };
 
-Default.story = { name: 'default' };
+News.story = { name: 'News' };
+
+export const Opinion = () => {
+	return (
+		<>
+			<Form
+				format={mockFormatOpinion}
+				formFields={calloutCampaign.formFields}
+				onSubmit={() => {}}
+			/>
+			;
+		</>
+	);
+};
+
+Opinion.story = { name: 'default' };

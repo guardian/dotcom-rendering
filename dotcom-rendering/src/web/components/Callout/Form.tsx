@@ -26,7 +26,6 @@ const errorTextStyles = css`
 	color: ${palette.error[400]};
 	${textSans.medium({ fontWeight: 'bold' })};
 	display: flex;
-	margin-top: ${space[2]}px;
 `;
 
 const formStyles = css`
@@ -50,6 +49,7 @@ const footerPaddingStyles = css`
 `;
 
 const textStyles = css`
+	margin-top: ${space[2]}px;
 	${textSans.medium()};
 `;
 
