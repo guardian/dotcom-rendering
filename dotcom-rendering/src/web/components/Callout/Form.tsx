@@ -136,7 +136,8 @@ export const Form = ({ onSubmit, formFields, format, error }: FormProps) => {
 		>
 			{Object.keys(validationErrors).length > 1 && (
 				<ErrorSummary
-					message="Some information is missing. Please complete all required fields."
+					message="Some information is missing."
+					context="Please complete all required fields."
 					cssOverrides={css`
 						width: fit-content;
 					`}
