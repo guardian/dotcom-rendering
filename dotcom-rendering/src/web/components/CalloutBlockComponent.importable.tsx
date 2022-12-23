@@ -8,11 +8,12 @@ import {
 import { InlineSuccess } from '@guardian/source-react-components';
 import { ExpandingWrapper } from '@guardian/source-react-components-development-kitchen';
 import { useState } from 'react';
-import type { CalloutBlockElementV2 } from 'src/types/content';
+import type { CalloutBlockElementV2 } from '../../types/content';
 import { decidePalette } from '../lib/decidePalette';
 import { CalloutDescription } from './Callout/CalloutDescription';
 import { CalloutExpired } from './Callout/CalloutExpired';
 import { CalloutShare } from './Callout/CalloutShare';
+import { CalloutTermsAndConditions } from './Callout/CalloutTermsAndConditions';
 import { Deadline } from './Callout/Deadline';
 import { Form } from './Callout/Form';
 
@@ -193,6 +194,7 @@ export const CalloutBlockComponent = ({
 								</div>
 							</summary>
 							<CalloutShare format={format} />
+							<CalloutTermsAndConditions format={format} />
 							<Form
 								formFields={formFields}
 								onSubmit={onSubmit}
@@ -221,12 +223,15 @@ export const CalloutBlockComponent = ({
 					{isExpired(activeUntil) ? (
 						<CalloutExpired />
 					) : (
-						<Form
-							formFields={formFields}
-							onSubmit={onSubmit}
-							format={format}
-							networkError={networkError}
-						/>
+						<>
+							<CalloutTermsAndConditions format={format} />
+							<Form
+								formFields={formFields}
+								onSubmit={onSubmit}
+								format={format}
+								networkError={networkError}
+							/>
+						</>
 					)}
 				</div>
 			)}

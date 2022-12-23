@@ -149,7 +149,6 @@ export const Form = ({
 			noValidate={true}
 			onSubmit={(e) => {
 				e.preventDefault();
-				// console.log(formData);
 				const isValid = validateForm();
 				if (!isValid) return;
 				onSubmit(formData);
