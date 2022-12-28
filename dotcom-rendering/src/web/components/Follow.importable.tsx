@@ -76,7 +76,7 @@ export const Follow = ({ tags, format }: Props) => {
 		return null;
 
 	const contributor = contributors[0];
-	if (!contributor.id.startsWith('profile/')) return null;
+	if (!contributor || !contributor.id.startsWith('profile/')) return null;
 
 	return <FollowButton contributor={contributor} format={format} />;
 };
