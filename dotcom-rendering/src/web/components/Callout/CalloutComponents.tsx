@@ -47,6 +47,7 @@ export const CalloutDescription = ({
 			<a href="https://www.theguardian.com/help/privacy-policy">
 				privacy policy
 			</a>
+			.
 		</div>
 	</div>
 );
