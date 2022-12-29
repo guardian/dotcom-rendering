@@ -1,8 +1,10 @@
- 
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette } from '../../types/front';
 import type { TrailType } from '../../types/trails';
-import { Card33Media33MobileTopSublinks, Card33Media33Sublinks } from '../lib/cardWrappers';
+import {
+	Card33Media33MobileTopSublinks,
+	Card33Media33Sublinks,
+} from '../lib/cardWrappers';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
