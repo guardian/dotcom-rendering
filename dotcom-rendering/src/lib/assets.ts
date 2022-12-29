@@ -24,8 +24,8 @@ export const decideAssetOrigin = (
 			return 'https://assets-code.guim.co.uk/';
 		default: {
 			// We shouldn't assume localhost for apps testing
-			// If requests are coming from the device emulator, they won't use localhost
-			// Assuming localhost causes asset resolution to fail
+			// The app emulator does not connect on localhost, so
+			// assuming localhost causes asset resolution to fail
 			if (isDev && !isApp) {
 				// Use absolute asset paths in development mode
 				// This is so paths are correct when treated as relative to Frontend
