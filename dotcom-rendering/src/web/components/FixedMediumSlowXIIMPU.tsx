@@ -1,7 +1,8 @@
-/* eslint-disable @typescript-eslint/naming-convention -- because underscores work here*/
+ 
 import { Hide } from '@guardian/source-react-components';
 import type { DCRContainerPalette } from '../../types/front';
 import type { TrailType } from '../../types/trails';
+import { Card33Media33MobileTopSublinks, Card33Media33Sublinks } from '../lib/cardWrappers';
 import { shouldPadWrappableRows } from '../lib/dynamicSlices';
 import { AdSlot } from './AdSlot';
 import { LI } from './Card/components/LI';
@@ -38,12 +39,10 @@ const Card33_Card33_Card33 = ({
 		<UL direction="row" padBottom={padBottom}>
 			{card33.map((trail) => (
 				<LI percentage="33.333%" padSides={true} key={trail.url}>
-					<FrontCard
+					<Card33Media33MobileTopSublinks
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						trailText={trail.trailText}
-						imagePositionOnMobile="top"
 					/>
 				</LI>
 			))}
@@ -54,12 +53,10 @@ const Card33_Card33_Card33 = ({
 					showDivider={true}
 					key={trail.url}
 				>
-					<FrontCard
+					<Card33Media33Sublinks
 						trail={trail}
 						containerPalette={containerPalette}
 						showAge={showAge}
-						trailText={trail.trailText}
-						imagePositionOnMobile="left"
 					/>
 				</LI>
 			))}

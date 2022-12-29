@@ -403,6 +403,76 @@ export const Card33Media33 = ({
 		/>
 	);
 };
+/**
+ * ┏━━━━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒┃           66%          ┊
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒┃        Remaining       ┊
+ * ┃            ┃                        ┊
+ * ┗━━━━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
+ * Card designed to take up 33% of the container, with media that takes up 33%
+ *
+ * Options:
+ *  - Medium headline (medium on mobile)
+ *  - Small image on the top (left on mobile)
+ *  - No trail text
+ *  - Up to 2 supporting content items, always aligned vertical
+ */
+export const Card33Media33Sublinks = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			imageSize="small"
+			imagePosition="top"
+			imagePositionOnMobile="left"
+			headlineSize="medium"
+			headlineSizeOnMobile="medium"
+			supportingContent={trail.supportingContent?.slice(0, 2)}
+			supportingContentAlignment="vertical"
+		/>
+	);
+};
+
+/**
+ * ┏━━━━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒┃           66%          ┊
+ * ┃▒▒▒▒▒▒▒▒▒▒▒▒┃        Remaining       ┊
+ * ┃            ┃                        ┊
+ * ┗━━━━━━━━━━━━┹┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┘
+ * Card designed to take up 33% of the container, with media that takes up 33%
+ *
+ * Options:
+ *  - Medium headline (large on mobile)
+ *  - Small image at the top, including on mobile
+ *  - Trail text
+ *  - Up to 2 supporting content items, always aligned vertical
+ */
+export const Card33Media33MobileTopSublinks = ({
+	trail,
+	showAge,
+	containerPalette,
+}: TrailProps) => {
+	return (
+		<FrontCard
+			trail={trail}
+			containerPalette={containerPalette}
+			showAge={showAge}
+			trailText={trail.trailText}
+			imageSize="small"
+			imagePosition="top"
+			imagePositionOnMobile="top"
+			headlineSize="medium"
+			headlineSizeOnMobile="large"
+			supportingContent={trail.supportingContent?.slice(0, 2)}
+			supportingContentAlignment="vertical"
+		/>
+	);
+};
 
 /**
  * ┏━━━━━━━━━━━━━━━━━━┱┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┐
