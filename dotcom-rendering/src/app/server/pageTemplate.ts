@@ -194,6 +194,7 @@ https://workforus.theguardian.com/careers/product-engineering/
                 ${priorityScriptTags.join('\n')}
                 <style class="webfont">${getFontsCss()}</style>
                 <style>${resets.resetCSS}</style>
+				<link rel="stylesheet" type="text/css" href="/fontSize.css">
 				${css}
 				<link rel="stylesheet" media="print" href="${ASSET_ORIGIN}static/frontend/css/print.css">
 			</head>
