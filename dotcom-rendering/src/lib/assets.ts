@@ -15,6 +15,7 @@ interface AssetHash {
 export const decideAssetOrigin = (
 	stage: string | undefined,
 	isDev: boolean,
+	isApp?: boolean,
 ): string => {
 	switch (stage?.toUpperCase()) {
 		case 'PROD':
@@ -22,7 +23,10 @@ export const decideAssetOrigin = (
 		case 'CODE':
 			return 'https://assets-code.guim.co.uk/';
 		default: {
-			if (isDev) {
+			// We shouldn't assume localhost for apps testing
+			// If requests are coming from the device emulator, they won't use localhost
+			// Assuming localhost causes asset resolution to fail
+			if (isDev && !isApp) {
 				// Use absolute asset paths in development mode
 				// This is so paths are correct when treated as relative to Frontend
 				return 'http://localhost:3030/';
@@ -95,8 +99,9 @@ const getScripts = (
 };
 
 export const getAppScript = (): string => {
+	const appAssetOrigin = decideAssetOrigin(process.env.GU_STAVE, isDev, true);
 	if (isDev) {
-		return `${ASSET_ORIGIN}assets/main.apps.js`;
+		return `${appAssetOrigin}assets/main.apps.js`;
 	}
 
 	const manifest = getManifest('./manifest.apps.json');
@@ -104,7 +109,7 @@ export const getAppScript = (): string => {
 	if (!mainJs) {
 		throw new Error(`main.js not in manifest`);
 	}
-	return `${ASSET_ORIGIN}assets/${mainJs}`;
+	return `${appAssetOrigin}assets/${mainJs}`;
 };
 
 /**
